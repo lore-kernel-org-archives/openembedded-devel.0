@@ -1,37 +1,33 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 39A8B73D0B
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 78B7F65CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jul 2015 01:42:31 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="98614964"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 20 Jul 2015 09:46:08 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6K1ebdQ028149;
-	Mon, 20 Jul 2015 09:40:38 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0181.006; Mon, 20 Jul 2015 09:42:24 +0800
-From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
-Thread-Topic: [oe] [meta-networking][PATCH] opensaf: Add PACKAGECONFIG for
-	openhpi
-Thread-Index: AQHQwJsYAnI+hrOcCU6AUkyoOpdBnJ3jkykw
-Date: Mon, 20 Jul 2015 01:42:24 +0000
-Message-ID: <A8FC939F80655644A89BB21CCD3741E87390F757@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <20150716185219.GD4432@mentor.com>
-	<1437101120-1624-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<20150717141526.GA3901@mentor.com>
-In-Reply-To: <20150717141526.GA3901@mentor.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.92]
-MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] opensaf: Add PACKAGECONFIG for openhpi
+	Mon, 20 Jul 2015 06:47:38 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ZH4rO-0002pc-G0 for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Jul 2015 08:47:34 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Jul 2015 08:47:34 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Jul 2015 08:47:34 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 20 Jul 2015 08:47:22 +0200
+Message-ID: <moi5hq$ahj$1@ger.gmane.org>
+References: <1437119410-3462-1-git-send-email-kai.kang@windriver.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+In-Reply-To: <1437119410-3462-1-git-send-email-kai.kang@windriver.com>
+Subject: Re: [meta-oe][PATCH] dracut: upgrade from 038 to 043
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,66 +41,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jul 2015 01:42:38 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="iso-2022-jp"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 20 Jul 2015 06:47:41 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Kai Kang schreef op 17-07-15 om 09:50:
+> Upgrade dracut from 038 to 043. Update SRC_URI by replacing git with tar 
+> ball.
+
+Why? That makes it really hard to pull in post-release fixes :(
 
 
-> -----Original Message-----
-> From: Joe MacDonald [mailto:Joe_MacDonald@mentor.com]
-> Sent: Friday, July 17, 2015 10:15 PM
-> To: Li, Xin/=1B$BM{=1B(B =1B$B6U=1B(B
-> Cc: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-networking][PATCH] opensaf: Add PACKAGECONFIG for
-> openhpi
->=20
-> Hi Li,
->=20
-> [[oe] [meta-networking][PATCH] opensaf: Add PACKAGECONFIG for openhpi] On
-> 15.07.17 (Fri 10:45) Li xin wrote:
->=20
-> > opensaf support for the HPI, So provide a PACKAGECONFIG option for
-> > openhpi
-> >
-> > Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> > ---
-> >  meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-> > b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-> > index 3d0175e..6ad8a3d 100644
-> > --- a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-> > +++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-> > @@ -36,6 +36,8 @@ USERADD_PARAM_${PN} =3D  "-r -g opensaf -d
-> > ${datadir}/opensaf/ -s ${sbindir}/nolog  SYSTEMD_SERVICE_${PN} +=3D
-> "opensafd.service plmcboot.service plmcd.service"
-> >  SYSTEMD_AUTO_ENABLE =3D "disable"
-> >
-> > +PACKAGECONFIG ??=3D "${@base_contains('DISTRO_FEATURES', 'openhpi',
-> 'openhpi', '', d)}"
->=20
-> AFAIK this won't actually add openhpi to DEPENDS properly unless you are =
-explicitly
-> defining a DISTRO_FEATURE for it.  But it will cause a bunch of stuff to =
-be rebuilt
-> since PACKAGECONFIG is getting updated and signatures will be invalidated=
-.  Not
-> a big deal, but still not quite what you're hoping to accomplish, I think=
-.
->=20
-> I was just testing a few other things on my current patch queue and have =
-a patch
-> for this already, so I'm going to drop this patch for now.
->=20
-> Just for future reference, too, @base_contains is on the way out, you sho=
-uld use
-> @bb.utils.contains instead.
+> And update bb file name at same time.
+> 
+> Signed-off-by: Kai Kang <kai.kang@windriver.com> --- 
+> .../recipes-devtools/dracut/dracut_043.bb          | 53
+> +++++++++++++++++++++ .../recipes-devtools/dracut/dracut_git.bb
+> | 55 ---------------------- 2 files changed, 53 insertions(+), 55
+> deletions(-) create mode 100644
+> meta-initramfs/recipes-devtools/dracut/dracut_043.bb delete mode 100644
+> meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+> 
+> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_043.bb
+> b/meta-initramfs/recipes-devtools/dracut/dracut_043.bb new file mode
+> 100644 index 0000000..22c6bae --- /dev/null +++
+> b/meta-initramfs/recipes-devtools/dracut/dracut_043.bb @@ -0,0 +1,53 @@ 
+> +SUMMARY = "Initramfs generator using udev" +DESCRIPTION = "Dracut is an
+> event driven initramfs infrastructure. dracut (the tool) is used to
+> create an initramfs image by copying tools and files from an installed
+> system and combining it with the dracut framework, usually found in
+> /usr/lib/dracut/modules.d." + +LICENSE = "GPLv2" +LIC_FILES_CHKSUM =
+> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" + +PE = "1" + 
+> +SRC_URI =
+> "${KERNELORG_MIRROR}/linux/utils/boot/dracut/dracut-043.tar.xz" + 
+> +SRC_URI[md5sum] = "85de75ddf00962e7bb0ae387f05794e5" +SRC_URI[sha256sum]
+> = "1484b558ed20330125aa04dcccab84da15c5689e19068285aa011f7177889cd1" + 
+> +inherit distro_features_check +REQUIRED_DISTRO_FEATURES = "systemd" + 
+> +EXTRA_OECONF = "--prefix=${prefix} \ +                --libdir=${libdir}
+> \ +                --datadir=${datadir} \ +
+> --sysconfdir=${sysconfdir} \ +                --sbindir=${sbindir} \ +
+> --disable-documentation \ +                --bindir=${bindir} \ +
+> --includedir=${includedir} \ +
+> --localstatedir=${localstatedir} \ +
+> --systemdsystemunitdir=${systemd_unitdir}/system" + +do_configure() { +
+> ./configure ${EXTRA_OECONF} +} + +do_install() { +    oe_runmake install
+> DESTDIR=${D} +} + +PACKAGES =+ "${PN}-bash-completion" + 
+> +FILES_${PN}-bash-completion = "${datadir}/bash-completion" + 
+> +FILES_${PN} += " ${libdir}/kernel \ +                ${systemd_unitdir}
+> \ +               " +CONFFILES_${PN} += "${sysconfdir}/dracut.conf" + 
+> +RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid
+> util-linux-getopt bash ldd" +RDEPENDS_${PN}-bash-completion =
+> "bash-completion" + +# This could be optimized a bit, but let's avoid
+> non-booting systems :) +RRECOMMENDS_${PN} = " \ +
+> kernel-modules \ +                     busybox \ +
+> coreutils \ +                    " diff --git
+> a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+> b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb deleted file mode
+> 100644 index 77c137c..0000000 ---
+> a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb +++ /dev/null @@
+> -1,55 +0,0 @@ -SUMMARY = "Initramfs generator using udev" -DESCRIPTION =
+> "Dracut is an event driven initramfs infrastructure. dracut (the tool) is
+> used to create an initramfs image by copying tools and files from an
+> installed system and combining it with the dracut framework, usually
+> found in /usr/lib/dracut/modules.d." - -LICENSE = "GPLv2" 
+> -LIC_FILES_CHKSUM =
+> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" - -PE = "1" -PV =
+> "038" - -# v038 tag -SRCREV = "267a109a81715c8957f14659593deb7b6255d40e" 
+> -SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git" - -S =
+> "${WORKDIR}/git" - -inherit distro_features_check 
+> -REQUIRED_DISTRO_FEATURES = "systemd" - -EXTRA_OECONF =
+> "--prefix=${prefix} \ -                --libdir=${libdir} \ -
+> --datadir=${datadir} \ -                --sysconfdir=${sysconfdir} \ -
+> --sbindir=${sbindir} \ -                --disable-documentation \ -
+> --bindir=${bindir} \ -                --includedir=${includedir} \ -
+> --localstatedir=${localstatedir} \ -
+> --systemdsystemunitdir=${systemd_unitdir}/system" - -do_configure() { -
+> ./configure ${EXTRA_OECONF} -} - -do_install() { -    oe_runmake install
+> DESTDIR=${D} -} - -PACKAGES =+ "${PN}-bash-completion" - 
+> -FILES_${PN}-bash-completion = "${datadir}/bash-completion" - 
+> -FILES_${PN} += " ${libdir}/kernel \ -                ${systemd_unitdir}
+> \ -               " -CONFFILES_${PN} += "${sysconfdir}/dracut.conf" - 
+> -RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid
+> util-linux-getopt bash ldd" -RDEPENDS_${PN}-bash-completion =
+> "bash-completion" - -# This could be optimized a bit, but let's avoid
+> non-booting systems :) -RRECOMMENDS_${PN} = " \ -
+> kernel-modules \ -                     busybox \ -
+> coreutils \ -                    "
+> 
 
-I got it. :)
-Thank you very much.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-Regards,
-Li
+iD8DBQFVrJl6MkyGM64RGpERAjOSAJ0eXwXMBI1/z6Gy3xLv/iGi5oMZXgCdGeGG
+VmSTSLZO3ncjQ0jfrdIFa98=
+=hnRL
+-----END PGP SIGNATURE-----
+
 
