@@ -1,13 +1,13 @@
 Return-Path: <prvs=63617955b=Richard.Leitner@skidata.com>
 Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id A1E3E65CBD
+	by mail.openembedded.org (Postfix) with ESMTP id 1A90265CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jul 2015 11:10:44 +0000 (UTC)
+	Mon, 20 Jul 2015 12:42:15 +0000 (UTC)
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A2CcBACa1qxV/0oKEKxchFAGw1kCgXQBAQEBAQGBC4QkAQEEbgoRCw0LCRYPCQMCAQIBRQYNBgICiC/FKwEBCCKLHi6FDRaEFQEElFKNZIQagm4WjEWDYYEJgxttgUeBBAEBAQ
-X-IPAS-Result: A2CcBACa1qxV/0oKEKxchFAGw1kCgXQBAQEBAQGBC4QkAQEEbgoRCw0LCRYPCQMCAQIBRQYNBgICiC/FKwEBCCKLHi6FDRaEFQEElFKNZIQagm4WjEWDYYEJgxttgUeBBAEBAQ
-Message-ID: <55ACD72D.6040806@skidata.com>
-Date: Mon, 20 Jul 2015 13:10:37 +0200
+X-IronPort-Anti-Spam-Result: A2CbBADJ66xV/0oKEKxchFAGw1kCgXMBAQEBAQGBC4QkAQEEMgE7GwsNCwklDwJGBg0GAgKIL8YSASuLHi6FDRaEFQEElFKNZIQagm4WkCaBCYMbbYFHgQQBAQE
+X-IPAS-Result: A2CbBADJ66xV/0oKEKxchFAGw1kCgXMBAQEBAQGBC4QkAQEEMgE7GwsNCwklDwJGBg0GAgKIL8YSASuLHi6FDRaEFQEElFKNZIQagm4WkCaBCYMbbYFHgQQBAQE
+Message-ID: <55ACECA1.10102@skidata.com>
+Date: Mon, 20 Jul 2015 14:42:09 +0200
 From: Richard Leitner <richard.leitner@skidata.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Icedove/31.7.0
@@ -31,11 +31,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jul 2015 11:10:47 -0000
+X-List-Received-Date: Mon, 20 Jul 2015 12:42:22 -0000
 Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Hello,
 
 On 07/07/2015 03:57 PM, Otavio Salvador wrote:
 > On Wed, Jun 3, 2015 at 3:58 AM, Richard Leitner
@@ -62,9 +62,18 @@ On 07/07/2015 03:57 PM, Otavio Salvador wrote:
 > it works I am fine in commiting it.
 > 
 
-Thank you for your feedback. I will test that patch today with the
-current master branches of meta-java, poky and meta-openembedded. I'll
-get back to you as soon as I have any results.
+I successfully compiled and tested openjdk with the patch on an armv7a
+cortexa9 cpu with vfpv3d16 using following layers:
+
+poky/meta{,-yocto}
+	@ master (0f8d89ce66cfffccc9911d6c61470a585173b79d)
+
+meta-java
+	@ master (4aea395deed99b2725b56d4a86fb4712fcf504d7)
+	+ my patch
+
+meta-openembedded/meta-oe
+	@ master (c12b9596afd236116b25ce26dbe0d793de9dc7ce)
 
 best regards,
 Richard L
