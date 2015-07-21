@@ -1,29 +1,29 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A68775F18
+	by mail.openembedded.org (Postfix) with ESMTP id 376B175972
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 05:50:24 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="98663916"
+	Tue, 21 Jul 2015 05:50:25 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="98663917"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
 	by heian.cn.fujitsu.com with ESMTP; 21 Jul 2015 13:54:03 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6L5mXkT026052
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6L5mYwM026055
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 13:48:33 +0800
+	Tue, 21 Jul 2015 13:48:34 +0800
 Received: from localhost.localdomain (10.167.226.26) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 21 Jul 2015 13:50:20 +0800
+	Server (TLS) id 14.3.181.6; Tue, 21 Jul 2015 13:50:21 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 Jul 2015 13:49:38 +0800
-Message-ID: <1437457780-15226-7-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Tue, 21 Jul 2015 13:49:39 +0800
+Message-ID: <1437457780-15226-8-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1437457780-15226-1-git-send-email-leimaohui@cn.fujitsu.com>
 References: <1437457780-15226-1-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH v2 6/8] sblim-sfcb: add new recipe for openlmi
+Subject: [meta-oe][PATCH v2 7/8] cim-schema-exper: add new recipe for openlmi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,331 +40,167 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Tue, 21 Jul 2015 05:50:27 -0000
 Content-Type: text/plain
 
-Sblim-sfcb is dependence of openlmi.
+- cim-schema(Experimental-MOFs) is dependence of openlmi.
+- Cim-schema_2.40.0.bb is renamed to cim-schema-final_2.40.0.bb.
 
 Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../recipes-extended/sblim-sfcb/files/sfcb.service | 11 +++
- .../sblim-sfcb-1.3.15-fix-provider-debugging.patch | 12 ++++
- .../sblim-sfcb-1.3.16-maxMsgLen.patch              | 14 ++++
- .../sblim-sfcb-1.3.16-multilib-man-cfg.patch       | 41 +++++++++++
- ...blim-sfcb-1.3.9-sfcbrepos-schema-location.patch | 42 +++++++++++
- .../sblim-sfcb-1.4.5-service.patch                 | 27 +++++++
- .../sblim-sfcb-1.4.8-default-ecdh-curve-name.patch | 26 +++++++
- .../sblim-sfcb/sblim-sfcb_1.4.8.bb                 | 82 ++++++++++++++++++++++
- 8 files changed, 255 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.15-fix-provider-debugging.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-maxMsgLen.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-multilib-man-cfg.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.5-service.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
+ .../cim-schema/cim-schema-exper_2.39.0.bb          | 26 +++++++++++++++++
+ .../cim-schema/cim-schema-final_2.40.0.bb          | 31 ++++++++++++++++++++
+ .../cim-schema/cim-schema/files/LICENSE            | 34 ++++++++++++++++++++++
+ .../cim-schema/cim-schema_2.40.0.bb                | 31 --------------------
+ 4 files changed, 91 insertions(+), 31 deletions(-)
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
+ delete mode 100644 meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service b/meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
 new file mode 100644
-index 0000000..5adf63c
+index 0000000..3b973bf
 --- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service
-@@ -0,0 +1,11 @@
-+[Unit]
-+Description=Small Footprint CIM Broker Service
-+After=syslog.target
-+
-+[Service]
-+Type=oneshot
-+ExecStart=/usr/sbin/sfcbd -d
-+RemainAfterExit=yes
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.15-fix-provider-debugging.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.15-fix-provider-debugging.patch
-new file mode 100644
-index 0000000..4fbecaa
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.15-fix-provider-debugging.patch
-@@ -0,0 +1,12 @@
-+diff -up sblim-sfcb-1.4.5/providerDrv.c.orig sblim-sfcb-1.4.5/providerDrv.c
-+--- sblim-sfcb-1.4.5/providerDrv.c.orig	2013-09-04 12:59:22.140813239 +0200
-++++ sblim-sfcb-1.4.5/providerDrv.c	2013-09-04 12:59:40.511870274 +0200
-+@@ -3585,7 +3585,7 @@ processProviderInvocationRequests(char *
-+     rc = spRecvReq(&providerSockets.receive, &parms->requestor,
-+                    (void **) &parms->req, &rl, &mqg);
-+     if (mqg.rdone) {
-+-      int             debug_break = 0;
-++      volatile int debug_break = 0;
-+       if (rc != 0) {
-+         mlogf(M_ERROR,M_SHOW, "spRecvReq returned error %d. Skipping message.\n", rc);
-+         free(parms);
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-maxMsgLen.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-maxMsgLen.patch
-new file mode 100644
-index 0000000..a0dd816
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-maxMsgLen.patch
-@@ -0,0 +1,14 @@
-+diff -up sblim-sfcb-1.3.16/sfcb.cfg.pre.in.old sblim-sfcb-1.3.16/sfcb.cfg.pre.in
-+--- sblim-sfcb-1.3.16/sfcb.cfg.pre.in.old	2012-06-13 23:21:09.000000000 +0200
-++++ sblim-sfcb-1.3.16/sfcb.cfg.pre.in	2013-06-24 15:34:38.881992781 +0200
-+@@ -113,8 +113,8 @@ provProcs:      32
-+ 
-+ ## Max message length, in bytes. This is a limit on the size of messages
-+ ## written across sockets, for instance, between providers and SFCB.
-+-## Default is 10000000
-+-maxMsgLen:      10000000
-++## Default is 100000000
-++maxMsgLen:      100000000
-+ 
-+ ## Location of the registration directory, where providerRegister can be found
-+ ## Default is @localstatedir@/lib/sfcb/registration
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-multilib-man-cfg.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-multilib-man-cfg.patch
-new file mode 100644
-index 0000000..c8cece2
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-multilib-man-cfg.patch
-@@ -0,0 +1,41 @@
-+diff -up sblim-sfcb-1.3.16/man/sfcbd.1.pre.in.orig sblim-sfcb-1.3.16/man/sfcbd.1.pre.in
-+--- sblim-sfcb-1.3.16/man/sfcbd.1.pre.in.orig	2014-02-26 14:05:32.213091734 +0100
-++++ sblim-sfcb-1.3.16/man/sfcbd.1.pre.in	2014-02-26 15:10:54.476196379 +0100
-+@@ -151,7 +151,7 @@ Default=\fI@localstatedir@/lib/sfcb/regi
-+ .TP
-+ .B providerDirs
-+ A space separated list of directories where sfcb is looking for provider
-+-libraries. Default=\fI@libdir@\ @libdir@/cmpi\fR
-++libraries. Default=\fI/usr/lib\ /usr/lib/cmpi /usr/lib64\ /usr/lib64/cmpi\fR
-+ .TP
-+ .B providerSampleInterval
-+ The interval in seconds at which the provider manager is checking for
-+@@ -275,11 +275,11 @@ SSL private key file for sfcb.
-+ SSL client certificate / trust store for sfcb.
-+ .SH LIBRARIES
-+ .TP
-+-.I @libdir@/libsfc*
-++.I /usr/lib/libsfc* /usr/lib64/libsfc*
-+ Binaries for sfcb runtime libraries.
-+ .TP
-+-.I @libdir@/cmpi/*
-+-Binaries for providers
-++.I /usr/lib/cmpi/* /usr/lib64/cmpi/*
-++Binaries for providers.
-+ .SH AUTHOR
-+ Adrian Schuur <schuur@de.ibm.com>
-+ .SH CONRIBUTORS
-+diff -up sblim-sfcb-1.3.16/sfcb.cfg.pre.in.orig sblim-sfcb-1.3.16/sfcb.cfg.pre.in
-+--- sblim-sfcb-1.3.16/sfcb.cfg.pre.in.orig	2014-02-26 15:35:43.133869718 +0100
-++++ sblim-sfcb-1.3.16/sfcb.cfg.pre.in	2014-02-26 15:38:12.794240532 +0100
-+@@ -121,8 +121,8 @@ maxMsgLen:      100000000
-+ registrationDir: @localstatedir@/lib/sfcb/registration
-+ 
-+ ## Locations to look for provider libraries. Delimit paths with a space.
-+-## Default is @libdir@/sfcb @libdir@ @libdir@/cmpi
-+-providerDirs: @libdir@/sfcb @libdir@ @libdir@/cmpi
-++## Default is /usr/lib/sfcb /usr/lib64/sfcb /usr/lib /usr/lib64 /usr/lib/cmpi /usr/lib64/cmpi
-++providerDirs: /usr/lib/sfcb /usr/lib64/sfcb /usr/lib /usr/lib64 /usr/lib/cmpi /usr/lib64/cmpi
-+ 
-+ ## Enable the root/interop namespace (affects indications)
-+ ## Default: true
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
-new file mode 100644
-index 0000000..7f95a9d
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
-@@ -0,0 +1,42 @@
-+diff -up sblim-sfcb-1.3.9/man/sfcbrepos.1.pre.in.orig sblim-sfcb-1.3.9/man/sfcbrepos.1.pre.in
-+--- sblim-sfcb-1.3.9/man/sfcbrepos.1.pre.in.orig	2009-10-13 21:54:13.000000000 +0200
-++++ sblim-sfcb-1.3.9/man/sfcbrepos.1.pre.in	2010-09-06 14:01:57.294564062 +0200
-+@@ -26,7 +26,7 @@ Supported command line options are:
-+ .TP
-+ \fB\-c\fR \fIschemadir\fR
-+ Path to obtain the CIM Schema classes.
-+-Default is \fI@datadir@/sfcb\fR
-++Default is \fI@datadir@/mof/cim-current\fR
-+ .TP
-+ \fB\-s\fR \fIstagingdir\fR
-+ Path to sfcb staging area containing class MOFs and registration files
-+@@ -58,7 +58,7 @@ Alias of \fB-b\fR
-+ Display usage information and exit.
-+ .SH FILES
-+ .TP
-+-\fI@datadir@/sfcb/CIM/CIM_Schema.mof\fR
-++\fI@datadir@/mof/cim-current/CIM_Schema.mof\fR
-+ CIM Schema
-+ .TP
-+ \fI@localstatedir@/lib/sfcb/registration/providerRegister\fR
-+diff -up sblim-sfcb-1.3.9/sfcbrepos.sh.in.orig sblim-sfcb-1.3.9/sfcbrepos.sh.in
-+--- sblim-sfcb-1.3.9/sfcbrepos.sh.in.orig	2009-12-22 01:18:29.000000000 +0100
-++++ sblim-sfcb-1.3.9/sfcbrepos.sh.in	2010-09-06 13:45:28.671491648 +0200
-+@@ -59,7 +59,7 @@ then
-+     echo -e "\t-X create repository in non-native format as specifed by argument"
-+     echo -e "\t-s specify staging directory [@localstatedir@/lib/sfcb/stage]"
-+     echo -e "\t-r specify repository directory [@localstatedir@/lib/sfcb/registration]"
-+-    echo -e "\t-c specify directory containing CIM Schema MOFs [@datadir@/sfcb/CIM]"
-++    echo -e "\t-c specify directory containing CIM Schema MOFs [@datadir@/mof/cim-current]"
-+     echo -e "\t-t create tiny class repository by omitting inheritance information"
-+     echo -e "\t-z compress repository with gzip"
-+     echo
-+@@ -99,7 +99,7 @@ fi
-+ 
-+ if [ -z "$cimschemadir" ]
-+ then
-+-    cimschemadir=${DESTDIR}@datadir@/sfcb/CIM
-++    cimschemadir=${DESTDIR}@datadir@/mof/cim-current
-+ fi
-+ 
-+ if [ -d $stagingdir ] && [ -f $stagingdir/default.reg ] &&
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.5-service.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.5-service.patch
-new file mode 100644
-index 0000000..eaccfa5
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.5-service.patch
-@@ -0,0 +1,27 @@
-+diff -up sblim-sfcb-1.4.6/Makefile.in.orig sblim-sfcb-1.4.6/Makefile.in
-+--- sblim-sfcb-1.4.6/Makefile.in.orig	2013-10-07 10:43:34.783228137 +0200
-++++ sblim-sfcb-1.4.6/Makefile.in	2013-10-07 10:44:30.178533289 +0200
-+@@ -627,7 +627,6 @@ initdir = $(sysconfdir)/init.d
-+ pamdir = $(sysconfdir)/pam.d
-+ sfcblibdir = $(libdir)/sfcb
-+ cmpilibdir = $(libdir)/cmpi
-+-systemddir = $(DESTDIR)@SYSTEMDDIR@
-+ MANFILES = man/genSslCert.1 man/getSchema.1 man/sfcbd.1 man/sfcbmof.1 \
-+ 	man/sfcbrepos.1 man/sfcbstage.1 man/sfcbunstage.1 man/sfcbuuid.1 \
-+ 	man/wbemcat.1 man/xmltest.1
-+@@ -2366,7 +2365,6 @@ unittest:
-+ 	cd test && sh check_all.sh
-+ 
-+ install-data-local:
-+-	if test -d $(systemddir); then cp $(srcdir)/sblim-sfcb.service $(systemddir); fi; 
-+ 	test -d $(DESTDIR)$(sfcbstatedir)/registration/repository || $(mkdir_p) $(DESTDIR)$(sfcbstatedir)/registration/repository
-+ 	test -d $(DESTDIR)$(sfcbstatedir)/stage/mofs/root/interop || $(mkdir_p) $(DESTDIR)$(sfcbstatedir)/stage/mofs/root/interop
-+ 	test -d $(DESTDIR)$(sfcbstatedir)/stage/regs || $(mkdir_p) $(DESTDIR)$(sfcbstatedir)/stage/regs
-+@@ -2384,7 +2382,6 @@ install-data-local:
-+ uninstall-local:
-+ 	rm -f $(DESTDIR)$(sfcbstatedir)/stage/default.reg
-+ 	rm -f $(DESTDIR)$(sfcbstatedir)/stage/mofs/root/interop/10_interop.mof
-+-	rm -f $(systemddir)/sblim-sfcb.service
-+ @INDICATIONS_TRUE@	rm -f $(DESTDIR)$(sfcbstatedir)/stage/mofs/root/interop/20_indication.mof
-+ @INDICATIONS_TRUE@	rm -f $(DESTDIR)$(sfcbstatedir)/stage/mofs/indication.mof
-+ @DOCS_TRUE@	rm -rf $(DESTDIR)$(sfcbdocdir)/html
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
-new file mode 100644
-index 0000000..3268d49
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
++++ b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
 @@ -0,0 +1,26 @@
-+diff -up sblim-sfcb-1.4.8/control.c.orig sblim-sfcb-1.4.8/control.c
-+--- sblim-sfcb-1.4.8/control.c.orig	2014-03-27 00:46:28.000000000 +0100
-++++ sblim-sfcb-1.4.8/control.c	2014-05-15 12:31:38.304169409 +0200
-+@@ -170,7 +170,7 @@ static Control init[] = {
-+   {"sslCertList", CTL_STRING, SFCB_CONFDIR "/clist.pem", {0}},
-+   {"sslCiphers", CTL_STRING, "ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH", {0}},
-+   {"sslDhParamsFilePath", CTL_STRING, NULL, {0}},
-+-  {"sslEcDhCurveName", CTL_STRING, "secp224r1", {0}},
-++  {"sslEcDhCurveName", CTL_STRING, "secp384r1", {0}},
-+   {"enableSslCipherServerPref", CTL_BOOL, NULL, {.b=0}},
-+ 
-+   {"registrationDir", CTL_STRING, SFCB_STATEDIR "/registration", {0}},
-+diff -up sblim-sfcb-1.4.8/sfcb.cfg.pre.in.orig sblim-sfcb-1.4.8/sfcb.cfg.pre.in
-+--- sblim-sfcb-1.4.8/sfcb.cfg.pre.in.orig	2014-05-15 12:31:59.188244865 +0200
-++++ sblim-sfcb-1.4.8/sfcb.cfg.pre.in	2014-05-15 12:32:45.554408412 +0200
-+@@ -293,8 +293,8 @@ sslCiphers: ALL:!ADH:!LOW:!EXP:!MD5:@STR
-+ ## environment. If this value is not set, the indicated default is in effect.
-+ ## If the value is set but the curve name is not recognized by the underlying
-+ ## openssl implementation, SFCB will abort.
-+-## Default is secp224r1
-+-#sslEcDhCurveName: secp224r1
-++## Default is secp384r1
-++#sslEcDhCurveName: secp384r1
-+ 
-+ ## When set to true, sets the SSL_OP_CIPHER_SERVER_PREFERENCE flag for the ssl
-+ ## context, to enforce server's preference instead of the client preference for
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
-new file mode 100644
-index 0000000..c1c1d4c
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
-@@ -0,0 +1,82 @@
-+SUMMARY = "Small Footprint CIM Broker"
-+DESCRIPTION = "\
-+Small Footprint CIM Broker (sfcb) is a CIM server conforming to the CIM \
-+Operations over HTTP protocol. It is robust, with low resource consumption \
-+and therefore specifically suited for embedded and resource constrained \
-+environments. sfcb supports providers written against the Common \
-+Manageability Programming Interface (CMPI)."
-+HOMEPAGE = "http://www.sblim.org"
-+SECTION = "Applications/System"
-+LICENSE = "EPL-1.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f300afd598546add034364cd0a533261"
-+DEPENDS = "curl libpam openssl sblim-sfcCommon"
++require cim-schema.inc
 +
-+SRC_URI = "http://downloads.sourceforge.net/sblim/${PN}-${PV}.tar.bz2 \
-+           file://sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch \
-+           file://sblim-sfcb-1.3.15-fix-provider-debugging.patch \
-+           file://sblim-sfcb-1.3.16-maxMsgLen.patch \
-+           file://sblim-sfcb-1.4.5-service.patch \
-+           file://sblim-sfcb-1.3.16-multilib-man-cfg.patch \
-+           file://sblim-sfcb-1.4.8-default-ecdh-curve-name.patch \
-+           file://sfcb.service"
-+           
-+SRC_URI[md5sum] = "b2e0cb26628cb31e2374959637d9268c"
-+SRC_URI[sha256sum] = "7dc0f16e2c2d3767466a09afee04e6febd611c157d66f8f0ae666be1fefbff3b"
++LICENSE = "DMTF"
 +
-+inherit autotools
-+inherit ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','', d)}
-+
-+SYSTEMD_PACKAGES = "${PN}"
-+SYSTEMD_SERVICE_${PN} = "sblim-sfcb.service"
-+SYSTEMD_AUTO_ENABLE = "enable"
-+
-+LDFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
-+
-+EXTRA_OECONF = '--enable-debug \
-+                --enable-ssl \
-+                --enable-pam \
-+                --enable-ipv6 \
-+                CFLAGS="${CFLAGS} -D_GNU_SOURCE"'
-+
-+# make all with -j option is unsafe.
-+PARALLEL_MAKE = ""
-+
-+INSANE_SKIP_${PN} = "dev-so"
-+CONFIG_SITE = "${WORKDIR}/config-site.${P}"
++SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2390/cim_schema_${PV}Experimental-MOFs.zip;subdir=${BPN}-${PV} \
++           file://LICENSE \
++          "
++SRC_URI[md5sum] = "b82b31c609c6bcc69521829409f58ccc"
++SRC_URI[sha256sum] = "ed2096ef1ea25d189a02bbc6603fed7a48297f2987f254265763a6eecb7fc870"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=eecc6f71a56ff3caf17f15bf7aeac7b4"
 +
 +do_install() {
-+    cp -f ${S}/sfcb.cfg.pre.in ${S}/sfcb.cfg
++        install -d -m 0755 ${D}${datadir}/mof/cimv${PV}/
++        install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}
++        install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
 +
-+    oe_runmake DESTDIR=${D} install
-+
-+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        install -d ${D}${systemd_unitdir}/system
-+        install -m 0644 ${WORKDIR}/sfcb.service ${D}${systemd_unitdir}/system/sblim-sfcb.service
-+    fi
-+
-+    install -d ${D}${sysconfdir}/init.d
-+    mv ${D}${sysconfdir}/init.d/sfcb ${D}${sysconfdir}/init.d/sblim-sfcb
-+    sed -i -e 's/\/var\/lock\/subsys\/sfcb/\/var\/lock\/subsys\/sblim-sfcb/g' ${D}${sysconfdir}/init.d/sblim-sfcb
-+    
-+    rm -rf ${D}${libdir}/sfcb/*.la
++        cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
++        for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
++                sed -i -e 's/\r//g' $i
++        done
++        ln -s cimv${PV} ${D}${datadir}/mof/cim-current
++        ln -s cim_schema_${PV}.mof ${D}${datadir}/mof/cim-current/CIM_Schema.mof
 +}
 +
-+pkg_postinst_${PN} () {
-+    OPTS=""
++FILES_${PN} = "${datadir}/mof/* ${datadir}/doc/*"
++FILES_${PN}-doc = ""
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+new file mode 100644
+index 0000000..ff6c29d
+--- /dev/null
++++ b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+@@ -0,0 +1,31 @@
++require cim-schema.inc
 +
-+    if [ x"$D" != "x" ]; then
-+        OPTS="--root=$D"
-+        if type systemctl >/dev/null 2>/dev/null; then
-+                systemctl $OPTS ${SYSTEMD_AUTO_ENABLE} ${SYSTEMD_SERVICE}
-+        fi
-+        exit 1
-+    fi
++LICENSE = "DMTF"
 +
-+    ${datadir}/sfcb/genSslCert.sh ${sysconfdir}/sfcb
-+    ${bindir}/sfcbrepos -f
++SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2400/cim_schema_${PV}Final-MOFs.zip \
++           file://LICENSE \
++          "
++SRC_URI[md5sum] = "a9bdf17c7374e3b5b7adeaac4842c4ad"
++SRC_URI[sha256sum] = "dbfa3064ea427acd71a4bebbc172ca2dc44b0b09a6d83b0945b9ffa988a9058a"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=eecc6f71a56ff3caf17f15bf7aeac7b4"
++
++do_unpack() {
++        unzip -q ${DL_DIR}/cim_schema_${PV}Final-MOFs.zip -d ${S}
++        cp -f ${FILE_DIRNAME}/files/LICENSE ${WORKDIR}/
 +}
 +
-+FILES_${PN} += "${libdir}/sfcb ${datadir}/sfcb"
-+FILES_${PN}-dbg += "${libdir}/sfcb/.debug"
++do_install() {
++        install -d -m 0755 ${D}${datadir}/mof/cimv${PV}/
++        install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}
++        install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
 +
-+RDEPENDS_${PN} = "perl bash"
++        cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
++        for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
++                sed -i -e 's/\r//g' $i
++        done
++        ln -s cimv${PV} ${D}${datadir}/mof/cim-current
++        ln -s cim_schema_${PV}.mof ${D}${datadir}/mof/cim-current/CIM_Schema.mof
++}
++
++FILES_${PN} = "${datadir}/mof/* ${datadir}/doc/*"
++FILES_${PN}-doc = ""
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE b/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
+new file mode 100644
+index 0000000..54a2812
+--- /dev/null
++++ b/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
+@@ -0,0 +1,34 @@
++// Copyright 1998-2008 Distributed Management Task Force, Inc. (DMTF).
++// All rights reserved.
++// DMTF is a not-for-profit association of industry members dedicated
++// to promoting enterprise and systems management and interoperability.
++// DMTF specifications and documents may be reproduced by
++// members and non-members, provided that correct attribution is given.
++// As DMTF specifications may be revised from time to time,
++// the particular version and release date should always be noted.
++// 
++// Implementation of certain elements of this standard or proposed
++// standard may be subject to third party patent rights, including
++// provisional patent rights (herein "patent rights"). DMTF makes
++// no representations to users of the standard as to the existence
++// of such rights, and is not responsible to recognize, disclose, or
++// identify any or all such third party patent right, owners or
++// claimants, nor for any incomplete or inaccurate identification or
++// disclosure of such rights, owners or claimants. DMTF shall have no
++// liability to any party, in any manner or circumstance, under any
++// legal theory whatsoever, for failure to recognize, disclose, or
++// identify any such third party patent rights, or for such party's
++// reliance on the standard or incorporation thereof in its product,
++// protocols or testing procedures. DMTF shall have no liability to
++// any party implementing such standard, whether such implementation
++// is foreseeable or not, nor to any patent owner or claimant, and shall
++// have no liability or responsibility for costs or losses incurred if
++// a standard is withdrawn or modified after publication, and shall be
++// indemnified and held harmless by any party implementing the
++// standard from any and all claims of infringement by a patent owner
++// for such implementations.
++// 
++// For information about patents held by third-parties which have
++// notified the DMTF that, in their opinion, such patent may relate to
++// or impact implementations of DMTF standards, visit
++// http://www.dmtf.org/about/policies/disclosures.php.
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
+deleted file mode 100644
+index ff6c29d..0000000
+--- a/meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
++++ /dev/null
+@@ -1,31 +0,0 @@
+-require cim-schema.inc
+-
+-LICENSE = "DMTF"
+-
+-SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2400/cim_schema_${PV}Final-MOFs.zip \
+-           file://LICENSE \
+-          "
+-SRC_URI[md5sum] = "a9bdf17c7374e3b5b7adeaac4842c4ad"
+-SRC_URI[sha256sum] = "dbfa3064ea427acd71a4bebbc172ca2dc44b0b09a6d83b0945b9ffa988a9058a"
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=eecc6f71a56ff3caf17f15bf7aeac7b4"
+-
+-do_unpack() {
+-        unzip -q ${DL_DIR}/cim_schema_${PV}Final-MOFs.zip -d ${S}
+-        cp -f ${FILE_DIRNAME}/files/LICENSE ${WORKDIR}/
+-}
+-
+-do_install() {
+-        install -d -m 0755 ${D}${datadir}/mof/cimv${PV}/
+-        install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}
+-        install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
+-
+-        cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
+-        for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
+-                sed -i -e 's/\r//g' $i
+-        done
+-        ln -s cimv${PV} ${D}${datadir}/mof/cim-current
+-        ln -s cim_schema_${PV}.mof ${D}${datadir}/mof/cim-current/CIM_Schema.mof
+-}
+-
+-FILES_${PN} = "${datadir}/mof/* ${datadir}/doc/*"
+-FILES_${PN}-doc = ""
 -- 
 1.8.4.2
 
