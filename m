@@ -1,41 +1,31 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 24DE5761A0
+Return-Path: <vm.rod25@gmail.com>
+Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
+	[209.85.223.174])
+	by mail.openembedded.org (Postfix) with ESMTP id E1CB973694
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 14:42:21 +0000 (UTC)
-Received: by pdbnt7 with SMTP id nt7so50880947pdb.0
+	Tue, 21 Jul 2015 14:57:45 +0000 (UTC)
+Received: by iehx8 with SMTP id x8so64366437ieh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 07:42:21 -0700 (PDT)
+	Tue, 21 Jul 2015 07:57:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=Y3l2ZAoVwV/oXpqo2oOhSRXgAG/WLqK/WzCMmz7O4lQ=;
-	b=iECJNrJNxieVPB+jAjh9s3/gyfGD2cpXV+Attb/Po6IbW2PFzkxhHaG9qxjLVl6+YY
-	ALpOrj9blkVvkt+Mmt9eLVnKN0XLC9FMItLLPro8ZhxqDrGanLVXYAJRCpBfhzHB3KBp
-	9WwFHr+0kfbretedNVUJiK/Lx77+MPF6HlOa0TkyZY5n8oL7TUaztmW4RS4QjivZDm+i
-	4RBVS7r5Un2c9eoMWMLUp63KK9FfYStOXYQRvyuOmoYl64VENvzFJ2MH3RnsM0+BIU6L
-	0NMil15Ac7FxKGybhIGgxjoHymguPl2LslYOHaEXXhHK1jd/tP35a+Luwuz1amiDPR6r
-	MXMQ==
-X-Received: by 10.66.66.130 with SMTP id f2mr75555111pat.120.1437489741701;
-	Tue, 21 Jul 2015 07:42:21 -0700 (PDT)
-Received: from ?IPv6:2601:202:4000:1239:7879:5e78:5a27:38d9?
-	([2601:202:4000:1239:7879:5e78:5a27:38d9])
-	by smtp.googlemail.com with ESMTPSA id
-	bx8sm28089773pab.38.2015.07.21.07.42.19
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 21 Jul 2015 07:42:20 -0700 (PDT)
-Message-ID: <55AE5A3A.5040209@gmail.com>
-Date: Tue, 21 Jul 2015 07:42:02 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=eeF1xM8V99dwKN0LQOLEUsVt0lPLV4wWnHt5iZFzIh4=;
+	b=o1JiyFxswrFbRu1TfBwH0vh3IiFrnUmlSmnNzixB3GP4qX38fEEt6p2dhoj8SofEZi
+	SV25Z/5gGPPJ99bTp4pmbDm4zVQHvCVW2SAdvL1bNLvbRtGw/4pJqiFap7OPOF+pTLM6
+	NHnHslpqqC/m7T2j0tlGPvW2YOJy6+mTKqUiuI1E1lstul8MY2eRxtrIjI5etQ3eSXo4
+	529KNY9Z+HrVCcEWE8DRhZc1d6ik2SiGnh5v6Q/Ce7FwvDL4gexgGiOuH0rP8kjTpnVq
+	uDwJtuaqkGbseDyjPUJPtBdtXAaq37YAjLBlIUllqc4JowhjNmzFsOco563DYOI2cu0t
+	MuHA==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1430733225-30477-1-git-send-email-b40290@freescale.com>
-In-Reply-To: <1430733225-30477-1-git-send-email-b40290@freescale.com>
-Subject: Re: [meta-oe][fido][PATCH] polkit: do not hardcode the libdir
+X-Received: by 10.50.30.105 with SMTP id r9mr24734072igh.11.1437490665471;
+	Tue, 21 Jul 2015 07:57:45 -0700 (PDT)
+Received: by 10.50.141.228 with HTTP; Tue, 21 Jul 2015 07:57:45 -0700 (PDT)
+Date: Tue, 21 Jul 2015 09:57:45 -0500
+Message-ID: <CAK5mtexxdYxhwvv-MB27Ur56iwAV8O3Y6ah_BPAo+R58NmNouQ@mail.gmail.com>
+From: Victor Rodriguez <vm.rod25@gmail.com>
+To: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembedded-devel@lists.openembedded.org
+Subject: Bug in Open CV receipt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,87 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jul 2015 14:42:24 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Jul 2015 14:57:47 -0000
+Content-Type: text/plain; charset=UTF-8
 
-merged to staging.
+Hi team
 
-- armin
+Few weeks ago I was having some problems with open CV receipt. In the
+begining I toght I was adding opencv tro my core-image-minimal-xfce
+just with this:
 
-On 05/04/2015 02:53 AM, b40290@freescale.com wrote:
-> From: Chunrong Guo <B40290@freescale.com>
->
->    libdir is defined as ${prefix}/lib/, but we want it to support multilib path
->
-> Signed-off-by: Chunrong Guo <B40290@freescale.com>
-> ---
->   .../polkit/0001-do-not-hardcoded-libdir.patch      | 44 ++++++++++++++++++++++
->   meta-oe/recipes-extended/polkit/polkit_0.112.bb    |  1 +
->   2 files changed, 45 insertions(+)
->   create mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
->
-> diff --git a/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch b/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
-> new file mode 100644
-> index 0000000..3ccedcd
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
-> @@ -0,0 +1,44 @@
-> +From c9e09d9b101109832b1dcb050f0c8b588e276686 Mon Sep 17 00:00:00 2001
-> +From: Zhenhua Luo <zhenhua.luo@freescale.com>
-> +Date: Mon, 4 May 2015 04:11:27 -0500
-> +Subject: [PATCH] do not hardcoded libdir
-> +
-> +Upstream-Status: Pending
-> +
-> +libdir is hardcoded to ${prefix}/lib, but we want it to support multilib
-> +
-> +Signed-off-by: Chunrong Guo <B40290@freescale.com>
-> +---
-> + polkitagent/Makefile.am   | 2 +-
-> + polkitbackend/Makefile.am | 2 +-
-> + 2 files changed, 2 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/src/polkitagent/Makefile.am b/src/polkitagent/Makefile.am
-> +index 3bc364e..7d1ac0e 100644
-> +--- a/src/polkitagent/Makefile.am
-> ++++ b/src/polkitagent/Makefile.am
-> +@@ -78,7 +78,7 @@ libpolkit_agent_1_la_LIBADD =                               		\
-> +
-> + libpolkit_agent_1_la_LDFLAGS = -export-symbols-regex '(^polkit_.*)'
-> +
-> +-libprivdir = $(prefix)/lib/polkit-1
-> ++libprivdir = $(prefix)/${base_libdir}/polkit-1
-> + libpriv_PROGRAMS = polkit-agent-helper-1
-> +
-> + polkit_agent_helper_1_SOURCES = 					\
-> +diff --git a/src/polkitbackend/Makefile.am b/src/polkitbackend/Makefile.am
-> +index 9f430d0..1f7610b 100644
-> +--- a/src/polkitbackend/Makefile.am
-> ++++ b/src/polkitbackend/Makefile.am
-> +@@ -67,7 +67,7 @@ rules_DATA = 50-default.rules
-> +
-> + # ----------------------------------------------------------------------------------------------------
-> +
-> +-libprivdir = $(prefix)/lib/polkit-1
-> ++libprivdir = $(prefix)/${base_libdir}/polkit-1
-> + libpriv_PROGRAMS = polkitd
-> +
-> + polkitd_SOURCES = 							\
-> +--
-> +2.3.3
-> +
-> diff --git a/meta-oe/recipes-extended/polkit/polkit_0.112.bb b/meta-oe/recipes-extended/polkit/polkit_0.112.bb
-> index 72b182b..f20e1a4 100644
-> --- a/meta-oe/recipes-extended/polkit/polkit_0.112.bb
-> +++ b/meta-oe/recipes-extended/polkit/polkit_0.112.bb
-> @@ -21,6 +21,7 @@ PAM_SRC_URI = "file://polkit-1_pam.patch"
->   SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
->              ${@base_contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
->              file://0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch \
-> +           file://0001-do-not-hardcoded-libdir.patch \
->   "
->
->   SRC_URI[md5sum] = "b0f2fa00a55f47c6a5d88e9b73f80127"
->
+IMAGE_INSTALL_append = " gcc gcc-dev openssh php mariadb opencv"
+
+Now after booting the image I realize that none of the libraries for
+open stack were added to my image
+
+What I had to do was the following:
+
+
+IMAGE_INSTALL_append = " libopencv-core-dev libopencv-highgui-dev
+libopencv-imgproc-dev libopencv-objdetect-dev libopencv-ml-dev
+opencv-staticdev python-opencv"
+
+Even last night when one of the opencv developers ask me for python
+opencv I had to add the last part python-opencv. That is not cool at
+all . If I add opencv in the beginning I assume we are more than cool
+with that and yocto will add all the packages . Unless I am doing
+something wrong, in taht case I am more than happy to get the
+feedback.
+
+Thanks a lot for all the help . If someone else can reproduce this bug
+I am more than happy to report it in bugzila (not sure the URL)
+
+Hope it helps to cut the time of some others
+
+Best regards
+
+Victor Rodriguez
 
