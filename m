@@ -1,42 +1,41 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
-	[209.85.192.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D8F273694
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 8807676152
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 12:52:22 +0000 (UTC)
-Received: by qgii95 with SMTP id i95so55760611qgi.2
+	Tue, 21 Jul 2015 14:41:49 +0000 (UTC)
+Received: by pabkd10 with SMTP id kd10so49418611pab.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 05:52:23 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization;
-	bh=9EjguzYtKpCW1ZG3BidIbLTzZfWxZGCbBz57n2X93tA=;
-	b=fOx+1WyoGB1E4xfatOwFmgElT1Ic3fYL0IUS/KqvEKA1pSukiwV1OexrU0KwHypXzW
-	alpTpzE5kpJe5S+rKQ0co1fzjnHkc4wDFwaLDCjjH5Gp+XK93F9hAYWBrATJwKXmIVJx
-	bfNQTHx1aqXVdXFvB7Mu6/b4vYgW2mp77zVOK4Arjcebr1cypabV0e8rQyt67lTBH/pI
-	L7Jxe8ur7NSHkE3fveSaq7fcCXvwPof5chkHS9h37ZWT+6MgnEuHGIFNa70SHvD+HZyI
-	jAJg2D4Eq3lMZej4aF5ObR2q46AECWyLJ4ZS++fNiFZSNtsrd/bLfCZRGhBjO9jKcwJ1
-	uYTw==
-X-Received: by 10.140.234.204 with SMTP id f195mr49638284qhc.40.1437483142948; 
-	Tue, 21 Jul 2015 05:52:22 -0700 (PDT)
-Received: from localhost ([179.105.243.19])
-	by smtp.gmail.com with ESMTPSA id a8sm1817602qka.0.2015.07.21.05.52.20
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 21 Jul 2015 05:52:22 -0700 (PDT)
-Received: by localhost (sSMTP sendmail emulation);
-	Tue, 21 Jul 2015 09:52:16 -0300
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 Jul 2015 09:51:56 -0300
-Message-Id: <1437483116-22509-4-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.4.6
-In-Reply-To: <1437483116-22509-1-git-send-email-otavio@ossystems.com.br>
-References: <1437483116-22509-1-git-send-email-otavio@ossystems.com.br>
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH v2 4/4] glmark2: Remove X11 exclusiveness
+	Tue, 21 Jul 2015 07:41:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=8VWFE0kVxUWGiDVFFJke3rgrQ8lmRlX9aFAb0tyCS+g=;
+	b=sg0JmSxTi8xBK+R3ee1ugt4TKkkd4KH+lFsE18bNMs8TjFrxD6oN5m8MNNm5BAsaWO
+	34S1K0B1omEcq68UhYLK87VXkQOapr23G4cUesqQVjIkNPfaeXON6FyqH6W+1kG8dd40
+	Io4RBo4tc2IztY2XIpb7M/+qu89GZhuXzmmMkDYiEP+xrO+slZ4YQ/V6D6PP+pJVFYkh
+	6scApKIG6kbI4XlXAwT8VioPqc9Sz3O7Cr3cPMSOTTfq7OHNwVaZlcpcmkWolME0pxyq
+	bjsshFp5DLCmt1NdoVjY5LGQ1kfxqlKn9nWDtwW3jYRUyMhOl0+6dml4qoiTO6LyypDP
+	uMcw==
+X-Received: by 10.66.121.163 with SMTP id ll3mr75399045pab.100.1437489709646; 
+	Tue, 21 Jul 2015 07:41:49 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1239:7879:5e78:5a27:38d9?
+	([2601:202:4000:1239:7879:5e78:5a27:38d9])
+	by smtp.googlemail.com with ESMTPSA id
+	db1sm27940676pdb.50.2015.07.21.07.41.47
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 21 Jul 2015 07:41:48 -0700 (PDT)
+Message-ID: <55AE5A26.7070209@gmail.com>
+Date: Tue, 21 Jul 2015 07:41:42 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1430300563-20254-1-git-send-email-dominic.sacre@gmx.de>
+In-Reply-To: <1430300563-20254-1-git-send-email-dominic.sacre@gmx.de>
+Subject: Re: [meta-oe][fido][PATCH] fio: add missing build dependency on zlib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,76 +49,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jul 2015 12:52:24 -0000
+X-List-Received-Date: Tue, 21 Jul 2015 14:41:51 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-The tool has support for multiple backends: X11, drm and Wayland.
+merged to staging
 
-The recipe has been rework to support them all and the PACKAGECONFIG
-made to respect the DISTRO_FEATURES available.
+- armin
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/recipes-benchmark/glmark2/glmark2_git.bb | 31 ++++++++++++++++--------
- 1 file changed, 21 insertions(+), 10 deletions(-)
-
-diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-index 57acad5..732fdc9 100644
---- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-+++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-@@ -8,10 +8,7 @@ LICENSE = "GPLv3+ & SGIv1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://COPYING.SGI;beginline=5;md5=269cdab4af6748677acce51d9aa13552"
- 
--DEPENDS = "libpng12 jpeg virtual/libx11"
--
--# depends on virtual/libx11
--REQUIRED_DISTRO_FEATURES = "x11"
-+DEPENDS = "libpng12 jpeg"
- 
- PV = "2014.03+${SRCPV}"
- 
-@@ -20,20 +17,34 @@ SRCREV = "fa71af2dfab711fac87b9504b6fc9862f44bf72a"
- 
- S = "${WORKDIR}/git"
- 
--inherit waf pkgconfig distro_features_check
-+inherit waf pkgconfig
- 
--PACKAGECONFIG ?= "gl gles2"
-+PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'x11-gl x11-gles2', '', d)} \
-+                  ${@bb.utils.contains('DISTRO_FEATURES', 'wayland opengl', 'wayland-gl wayland-gles2', '', d)} \
-+                  drm-gl drm-gles2"
- 
--PACKAGECONFIG[gl] = ",,virtual/libgl"
--PACKAGECONFIG[gles2] = ",,virtual/libgles2"
-+PACKAGECONFIG[x11-gl] = ",,virtual/libgl virtual/libx11"
-+PACKAGECONFIG[x11-gles2] = ",,virtual/libgles2 virtual/libx11"
-+PACKAGECONFIG[drm-gl] = ",,virtual/libgl libdrm"
-+PACKAGECONFIG[drm-gles2] = ",,virtual/libgles2 libdrm"
-+PACKAGECONFIG[wayland-gl] = ",,virtual/libgl wayland"
-+PACKAGECONFIG[wayland-gles2] = ",,virtual/libgles2 wayland"
- 
- python __anonymous() {
-     packageconfig = (d.getVar("PACKAGECONFIG", True) or "").split()
-     flavors = []
--    if "gles2" in packageconfig:
-+    if "x11-gles2" in packageconfig:
-         flavors.append("x11-glesv2")
--    if "gl" in packageconfig:
-+    if "x11-gl" in packageconfig:
-         flavors.append("x11-gl")
-+    if "wayland-gles2" in packageconfig:
-+        flavors.append("wayland-glesv2")
-+    if "wayland-gl" in packageconfig:
-+        flavors.append("wayland-gl")
-+    if "drm-gles2" in packageconfig:
-+        flavors.append("drm-glesv2")
-+    if "drm-gl" in packageconfig:
-+        flavors.append("drm-gl")
-     if flavors:
-         d.appendVar("EXTRA_OECONF", " --with-flavors=%s" % ",".join(flavors))
- }
--- 
-2.4.6
-
+On 04/29/2015 02:42 AM, Dominic Sacré wrote:
+> Fixes:
+> | WARNING: QA Issue: fio rdepends on zlib, but it isn't a build dependency? [build-deps]
+>
+> Signed-off-by: Dominic Sacré <dominic.sacre@gmx.de>
+> ---
+>   meta-oe/recipes-benchmark/fio/fio_2.2.6.bb | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+> index 016b1f2..13534cc 100644
+> --- a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+> +++ b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+> @@ -10,7 +10,7 @@ SECTION = "console/tests"
+>   LICENSE = "GPLv2"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+>
+> -DEPENDS = "libaio"
+> +DEPENDS = "libaio zlib"
+>
+>   # rev for v2.2.6
+>   SRCREV = "f52c9691bc8c285f3445235c69acdfd6de7f9b82"
+>
 
