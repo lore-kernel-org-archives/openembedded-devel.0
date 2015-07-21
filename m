@@ -1,29 +1,29 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 553497611E
+	by mail.openembedded.org (Postfix) with ESMTP id C5A06734B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 05:50:24 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="98663914"
+	Tue, 21 Jul 2015 05:50:23 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="98663910"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Jul 2015 13:54:02 +0800
+	by heian.cn.fujitsu.com with ESMTP; 21 Jul 2015 13:54:00 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6L5mWDb026049
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6L5mU0m026039
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 13:48:32 +0800
+	Tue, 21 Jul 2015 13:48:30 +0800
 Received: from localhost.localdomain (10.167.226.26) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 21 Jul 2015 13:50:19 +0800
+	Server (TLS) id 14.3.181.6; Tue, 21 Jul 2015 13:50:18 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 Jul 2015 13:49:37 +0800
-Message-ID: <1437457780-15226-6-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Tue, 21 Jul 2015 13:49:35 +0800
+Message-ID: <1437457780-15226-4-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1437457780-15226-1-git-send-email-leimaohui@cn.fujitsu.com>
 References: <1437457780-15226-1-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH v2 5/8] sblim-sfcCommon: add new recipe
+Subject: [meta-oe][PATCH v2 3/8] cmpi-bindings: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,48 +37,288 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jul 2015 05:50:24 -0000
+X-List-Received-Date: Tue, 21 Jul 2015 05:50:25 -0000
 Content-Type: text/plain
 
-Sblim-sfcCommon is dependence of sblim-sfcb.
+Cmpi-bindings is the dependence of openlmi.
 
 Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb       | 25 ++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
+ .../cmpi-bindings/0001-Fix-error.patch             | 26 +++++++++++++
+ .../cmpi-bindings/0001-Modify-cmakelist.patch      | 41 ++++++++++++++++++++
+ .../0001-fix-the-build-error-when-python-3.0.patch | 31 +++++++++++++++
+ .../cmpi-bindings-0.4.17-no-ruby-perl.patch        | 44 ++++++++++++++++++++++
+ .../cmpi-bindings-0.4.17-sblim-sigsegv.patch       | 22 +++++++++++
+ .../cmpi-bindings-0.9.5-python-lib-dir.patch       | 17 +++++++++
+ .../cmpi-bindings/cmpi-bindings_git.bb             | 36 ++++++++++++++++++
+ 7 files changed, 217 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Fix-error.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Modify-cmakelist.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-the-build-error-when-python-3.0.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-no-ruby-perl.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-sblim-sigsegv.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.9.5-python-lib-dir.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb b/meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Fix-error.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Fix-error.patch
 new file mode 100644
-index 0000000..0f5515a
+index 0000000..d1a303c
 --- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "Common functions for SBLIM Small Footprint CIM Broker and CIM Client Library."
-+DESCRIPTION = "\
-+This package provides a common library for functions shared between Small Footprint CIM Broker (sblim-sfcb) \
-+Small Footprint CIM Client (and sblim-sfcc)."
-+HOMEPAGE = "http://sourceforge.net/projects/sblim/"
-+LICENSE = "EPL"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f300afd598546add034364cd0a533261"
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Fix-error.patch
+@@ -0,0 +1,26 @@
++From b8e791ce93a467081fb1594b91841e2f57c634a0 Mon Sep 17 00:00:00 2001
++From: Qian Lei <qianl.fnst@cn.fujitsu.com>
++Date: Fri, 16 Jan 2015 18:37:26 +0800
++Subject: [PATCH] Fix error
++
++Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
++---
++ swig/python/CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/swig/python/CMakeLists.txt b/swig/python/CMakeLists.txt
++index 3976296..8073fc8 100644
++--- a/swig/python/CMakeLists.txt
+++++ b/swig/python/CMakeLists.txt
++@@ -27,7 +27,7 @@ SET( SWIG_INPUT "${CMAKE_CURRENT_SOURCE_DIR}/../cmpi.i" )
++ ADD_CUSTOM_COMMAND (
++    OUTPUT  ${SWIG_OUTPUT}
++    COMMAND ${CMAKE_COMMAND} -E echo_append "Creating wrapper code for Python ..."
++-   COMMAND ${SWIG_EXECUTABLE} -python -Wall -threads -features autodoc -o ${SWIG_OUTPUT} -outdir ${CMAKE_CURRENT_BINARY_DIR} -I/usr/include ${SWIG_INPUT}
+++   COMMAND ${SWIG_EXECUTABLE} -python -Wall -threads -features autodoc -o ${SWIG_OUTPUT} -outdir ${CMAKE_CURRENT_BINARY_DIR} -I$ENV{STAGING_INCDIR} ${SWIG_INPUT}
++    COMMAND ${CMAKE_COMMAND} -E echo "Done."
++    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
++    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../*.i
++-- 
++1.8.3.1
++
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Modify-cmakelist.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Modify-cmakelist.patch
+new file mode 100644
+index 0000000..92e5e56
+--- /dev/null
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Modify-cmakelist.patch
+@@ -0,0 +1,41 @@
++From 070822507befe7c1b8bb1be2d36cb12141d03b8f Mon Sep 17 00:00:00 2001
++From: Qian Lei <qianl.fnst@cn.fujitsu.com>
++Date: Tue, 6 Jan 2015 18:38:32 +0800
++Subject: [PATCH] Change the install path in cmakelist
++
++Upstream-Status: Pending
++Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
++---
++ swig/python/CMakeLists.txt | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/swig/python/CMakeLists.txt b/swig/python/CMakeLists.txt
++index 3976296..93c87c1 100644
++--- a/swig/python/CMakeLists.txt
+++++ b/swig/python/CMakeLists.txt
++@@ -56,18 +56,18 @@ TARGET_LINK_LIBRARIES( ${NAME} util )
++ 
++ INSTALL(TARGETS ${NAME} LIBRARY DESTINATION ${CMPI_LIBRARY_DIR})
++ # .py: swig generated
++-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmpi.py DESTINATION ${PYTHON_SITE_DIR} )
+++INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmpi.py DESTINATION $ENV{ENV_INSTALL_PATH} )
++ 
++ 
++ #
++ # cmpi_pywbem_bindings.py: provider implementation
++ #
++-INSTALL(FILES cmpi_pywbem_bindings.py DESTINATION ${PYTHON_SITE_DIR} )
+++INSTALL(FILES cmpi_pywbem_bindings.py DESTINATION $ENV{ENV_INSTALL_PATH} )
++ #INSTALL(FILES Py_UnixProcessProvider.py DESTINATION /usr/lib/pycim )
++ 
++-INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c \"from py_compile import compile; compile('\$ENV{DESTDIR}${PYTHON_SITE_DIR}/cmpi.py', dfile='${PYTHON_SITE_DIR}/cmpi.py')\")")
+++INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c \"from py_compile import compile; compile('\$ENV{DESTDIR}$ENV{ENV_INSTALL_PATH}/cmpi.py', dfile='\$ENV{ENV_INSTALL_PATH}/cmpi.py')\")")
++ 
++-INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c \"from py_compile import compile; compile('\$ENV{DESTDIR}${PYTHON_SITE_DIR}/cmpi_pywbem_bindings.py', dfile='${PYTHON_SITE_DIR}/cmpi_pywbem_bindings.py')\")")
+++INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c \"from py_compile import compile; compile('\$ENV{DESTDIR}$ENV{ENV_INSTALL_PATH}/cmpi_pywbem_bindings.py', dfile='$ENV{ENV_INSTALL_PATH}/cmpi_pywbem_bindings.py')\")")
++ 
++ 
++ 
++-- 
++1.8.3.1
++
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-the-build-error-when-python-3.0.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-the-build-error-when-python-3.0.patch
+new file mode 100644
+index 0000000..0d6f029
+--- /dev/null
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-the-build-error-when-python-3.0.patch
+@@ -0,0 +1,31 @@
++From 323ced03a66e6cd963d8277b66cfcc7dce740be7 Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@cn.fujitsu.com>
++Date: Fri, 17 Jul 2015 01:33:43 -0700
++Subject: [PATCH] fix Xthe build error when python>3.0
++
++Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
++---
++ src/target_python.c | 7 ++++++-
++ 1 file changed, 6 insertions(+), 1 deletion(-)
++
++diff --git a/src/target_python.c b/src/target_python.c
++index 90b43a1..2b76c9e 100644
++--- a/src/target_python.c
+++++ b/src/target_python.c
++@@ -167,7 +167,12 @@ PyGlobalInitialize(const CMPIBroker* broker, CMPIStatus* st)
++   
++   Py_SetProgramName("cmpi_swig");
++   Py_Initialize();
++-  SWIGEXPORT void SWIG_init(void);
+++#if PY_VERSION_HEX >= 0x03000000
+++SWIGEXPORT PyObject*
+++#else
+++  SWIGEXPORT void 
+++#endif
+++  SWIG_init(void);
++   SWIG_init();
++   cmpiMainPyThreadState = PyGILState_GetThisThreadState();
++   PyEval_ReleaseThread(cmpiMainPyThreadState); 
++-- 
++2.1.0
++
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-no-ruby-perl.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-no-ruby-perl.patch
+new file mode 100644
+index 0000000..a586dbd
+--- /dev/null
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-no-ruby-perl.patch
+@@ -0,0 +1,44 @@
++Port from Fedora20
++
++Upstream-Status: Pending
++Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
++
++diff -up cmpi-bindings-0.5.2/swig/CMakeLists.txt.orig cmpi-bindings-0.5.2/swig/CMakeLists.txt
++--- cmpi-bindings-0.5.2/swig/CMakeLists.txt.orig	2012-05-04 15:47:18.000000000 +0200
+++++ cmpi-bindings-0.5.2/swig/CMakeLists.txt	2012-05-07 09:59:33.639648918 +0200
++@@ -4,12 +4,12 @@
++ 
++ enable_testing()
++ 
++-FIND_PACKAGE(Ruby)
++-IF (RUBY_LIBRARY AND RUBY_INCLUDE_PATH)
++-  MESSAGE(STATUS "Building Ruby...")
++-  ADD_SUBDIRECTORY(ruby)
++-  OPTION( BUILD_RUBY_GEM "Build Ruby GEM" YES )
++-ENDIF (RUBY_LIBRARY AND RUBY_INCLUDE_PATH)
+++#FIND_PACKAGE(Ruby)
+++#IF (RUBY_LIBRARY AND RUBY_INCLUDE_PATH)
+++#  MESSAGE(STATUS "Building Ruby...")
+++#  ADD_SUBDIRECTORY(ruby)
+++#  OPTION( BUILD_RUBY_GEM "Build Ruby GEM" YES )
+++#ENDIF (RUBY_LIBRARY AND RUBY_INCLUDE_PATH)
++ 
++ FIND_PACKAGE(PythonLibs)
++ IF (PYTHON_LIBRARY)
++@@ -22,9 +22,9 @@ IF (PYTHON_LIBRARY)
++   ENDIF (PYTHON_LINK_LIBS)
++ ENDIF (PYTHON_LIBRARY)
++ 
++-FIND_PACKAGE(Perl)
++-IF (PERL_EXECUTABLE)
++-  MESSAGE(STATUS "Building Perl...")
++-  ADD_SUBDIRECTORY(perl)
++-ENDIF (PERL_EXECUTABLE)
++-    
++\ No newline at end of file
+++#FIND_PACKAGE(Perl)
+++#IF (PERL_EXECUTABLE)
+++#  MESSAGE(STATUS "Building Perl...")
+++#  ADD_SUBDIRECTORY(perl)
+++#ENDIF (PERL_EXECUTABLE)
+++    
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-sblim-sigsegv.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-sblim-sigsegv.patch
+new file mode 100644
+index 0000000..b993372
+--- /dev/null
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-sblim-sigsegv.patch
+@@ -0,0 +1,22 @@
++Port from Fedora20
++
++Upstream-Status: Pending
++Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
++
++diff -up cmpi-bindings-0.4.17/swig/python/cmpi_pywbem_bindings.py.orig cmpi-bindings-0.4.17/swig/python/cmpi_pywbem_bindings.py
++--- cmpi-bindings-0.4.17/swig/python/cmpi_pywbem_bindings.py.orig	2012-03-01 17:05:31.878367281 +0100
+++++ cmpi-bindings-0.4.17/swig/python/cmpi_pywbem_bindings.py	2012-03-01 17:06:34.718110137 +0100
++@@ -350,10 +350,10 @@ class BrokerCIMOMHandle(object):
++             allow_null_ns = False
++         else:
++             allow_null_ns = True
++-            if self.broker.name() == 'RequestHandler':
+++#            if self.broker.name() == 'RequestHandler':
++                 # Check sblim bug #2185410.
++-                if instance.path is not None:
++-                    instance.path.namespace = None
+++#                if instance.path is not None:
+++#                    instance.path.namespace = None
++         inst = self.proxy.pywbem2cmpi_inst(instance, allow_null_ns)
++         rv = self.broker.deliverIndication(self.ctx, ns, inst)
++         return rv
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.9.5-python-lib-dir.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.9.5-python-lib-dir.patch
+new file mode 100644
+index 0000000..b6a51ec
+--- /dev/null
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.9.5-python-lib-dir.patch
+@@ -0,0 +1,17 @@
++Port from Fedora20
++
++Upstream-Status: Pending
++Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
++
++diff -up cmpi-bindings-0.9.5/swig/python/CMakeLists.txt.old cmpi-bindings-0.9.5/swig/python/CMakeLists.txt
++--- cmpi-bindings-0.9.5/swig/python/CMakeLists.txt.old	2013-08-06 15:57:03.576285764 +0200
+++++ cmpi-bindings-0.9.5/swig/python/CMakeLists.txt	2013-08-06 15:57:14.891345941 +0200
++@@ -9,7 +9,7 @@ SET (BUILD_SHARED_LIBS ON)
++ 
++ FIND_PACKAGE(PythonInterp REQUIRED)
++ 
++-EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c "from sys import stdout; from distutils import sysconfig; stdout.write(sysconfig.get_python_lib())" OUTPUT_VARIABLE PYTHON_LIB_DIR)
+++EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c "from sys import stdout; from distutils import sysconfig; stdout.write(sysconfig.get_python_lib(1))" OUTPUT_VARIABLE PYTHON_LIB_DIR)
++ 
++ IF (NOT PYTHON_SITE_DIR)
++   SET (PYTHON_SITE_DIR ${PYTHON_LIB_DIR})
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
+new file mode 100644
+index 0000000..f38ff5c
+--- /dev/null
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "Adapter to write and run CMPI-type CIM providers"
++DESCRIPTION = "CMPI-compliant provider interface for various languages via SWIG"
++HOMEPAGE = "http://github.com/kkaempf/cmpi-bindings"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b19ee058d2d5f69af45da98051d91064"
 +SECTION = "Development/Libraries"
++DEPENDS = "swig-native python sblim-cmpi-devel"
 +
-+DEPENDS = "cmpi-bindings"
-+
-+SRC_URI = "http://downloads.sourceforge.net/sblim/${PN}-${PV}.tar.bz2 \
++SRC_URI = "git://github.com/kkaempf/cmpi-bindings.git;protocol=http \
++           file://cmpi-bindings-0.4.17-no-ruby-perl.patch \
++           file://cmpi-bindings-0.4.17-sblim-sigsegv.patch \
++           file://cmpi-bindings-0.9.5-python-lib-dir.patch \
++           file://0001-Modify-cmakelist.patch \
++           file://0001-Fix-error.patch \
++           file://0001-fix-the-build-error-when-python-3.0.patch \
 +          "
-+SRC_URI[md5sum] = "8aa2655d97bdea54c4750f220b40990c"
-+SRC_URI[sha256sum] = "b9b1037173d6ae0181c3bd5a316ddab5afd6a342ad0dbdc18e940fc0ad2c3297"
 +
-+inherit autotools
++SRCREV = "93b6044f53bcfa79253d7af51a9c23ddd73f8486"
++S = "${WORKDIR}/git"
 +
-+do_install() {
-+    oe_runmake DESTDIR=${D} install
++inherit cmake pythonnative
 +
-+    rm -rf ${D}${libdir}/libsfcUtil.a
-+    rm -rf ${D}${libdir}/libsfcUtil.la
++EXTRA_OECMAKE = "-DLIB='${baselib}'"
++
++do_configure_prepend() {
++    export HOST_SYS=${HOST_SYS}
++    export BUILD_SYS=${BUILD_SYS}
++    export STAGING_LIBDIR=${STAGING_LIBDIR}
++    export STAGING_INCDIR=${STAGING_INCDIR}
++    export ENV_INSTALL_PATH=${PYTHON_SITEPACKAGES_DIR}
 +}
 +
++FILES_${PN} =+"${libdir}/cmpi/libpyCmpiProvider.so ${PYTHON_SITEPACKAGES_DIR}/*"
++FILES_${PN}-dbg =+ "${libdir}/cmpi/.debug/libpyCmpiProvider.so"
++
++BBCLASSEXTEND = "native"
 -- 
 1.8.4.2
 
