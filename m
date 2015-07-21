@@ -1,29 +1,27 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A68CD75972
+	by mail.openembedded.org (Postfix) with ESMTP id 4F847734B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 05:50:22 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="98663906"
+	Tue, 21 Jul 2015 05:50:21 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="98663903"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Jul 2015 13:53:58 +0800
+	by heian.cn.fujitsu.com with ESMTP; 21 Jul 2015 13:53:57 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6L5mSAo026030
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6L5mRmk026022
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 13:48:28 +0800
+	Tue, 21 Jul 2015 13:48:27 +0800
 Received: from localhost.localdomain (10.167.226.26) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 21 Jul 2015 13:50:16 +0800
+	Server (TLS) id 14.3.181.6; Tue, 21 Jul 2015 13:50:14 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 Jul 2015 13:49:33 +0800
-Message-ID: <1437457780-15226-2-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Tue, 21 Jul 2015 13:49:32 +0800
+Message-ID: <1437457780-15226-1-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1437457780-15226-1-git-send-email-leimaohui@cn.fujitsu.com>
-References: <1437457780-15226-1-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH v2 1/8] pywbem:add new recipe
+Subject: [meta-oe][PATCH v2 0/8] add openlmi and it's depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,56 +38,83 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Tue, 21 Jul 2015 05:50:23 -0000
 Content-Type: text/plain
 
-pywbem is dependence of openlmi.
+OpenLMI  = Open Linux Management Infrastructure.
+OpenLMI is open-source project aiming to improve management of Linux systems using WBEM standards.
 
-Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
----
- meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb | 36 +++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
+Lei Maohui (8):
+  pywbem:add new recipe
+  sblim-cmpi-devel: add  new recipe
+  cmpi-bindings: add new recipe
+  konkretcmpi: add new recipe for openlmi
+  sblim-sfcCommon: add new recipe
+  sblim-sfcb: add new recipe for openlmi
+  cim-schema-exper: add new recipe for openlmi
+  openlmi: add openlmi and it's depends
+
+ .../cim-schema/cim-schema-exper_2.39.0.bb          | 26 +++++++
+ .../cim-schema/cim-schema-final_2.40.0.bb          | 31 ++++++++
+ .../cim-schema/cim-schema/files/LICENSE            | 34 +++++++++
+ .../cim-schema/cim-schema_2.40.0.bb                | 31 --------
+ .../cmpi-bindings/0001-Fix-error.patch             | 26 +++++++
+ .../cmpi-bindings/0001-Modify-cmakelist.patch      | 41 +++++++++++
+ .../0001-fix-the-build-error-when-python-3.0.patch | 31 ++++++++
+ .../cmpi-bindings-0.4.17-no-ruby-perl.patch        | 44 ++++++++++++
+ .../cmpi-bindings-0.4.17-sblim-sigsegv.patch       | 22 ++++++
+ .../cmpi-bindings-0.9.5-python-lib-dir.patch       | 17 +++++
+ .../cmpi-bindings/cmpi-bindings_git.bb             | 36 ++++++++++
+ .../konkretcmpi/konkretcmpi-native_0.9.2.bb        | 27 +++++++
+ ...-0.9.2-fix-returning-instance-from-method.patch | 38 ++++++++++
+ .../konkretcmpi/konkretcmpi_0.9.2.bb               | 32 +++++++++
+ .../openlmi/openlmi-networking_0.3.1.bb            | 29 ++++++++
+ .../openlmi/openlmi-providers/0001-fix-error.patch | 26 +++++++
+ .../openlmi/openlmi-providers_0.6.0.bb             | 54 ++++++++++++++
+ .../openlmi/openlmi-storage_0.8.1.bb               | 31 ++++++++
+ .../openlmi/openlmi-tools_0.10.5.bb                | 23 ++++++
+ meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb    | 36 ++++++++++
+ .../sblim-cmpi-devel-2.0.3-docdir.patch            | 17 +++++
+ .../sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb     | 18 +++++
+ .../sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb       | 25 +++++++
+ .../recipes-extended/sblim-sfcb/files/sfcb.service | 11 +++
+ .../sblim-sfcb-1.3.15-fix-provider-debugging.patch | 12 ++++
+ .../sblim-sfcb-1.3.16-maxMsgLen.patch              | 14 ++++
+ .../sblim-sfcb-1.3.16-multilib-man-cfg.patch       | 41 +++++++++++
+ ...blim-sfcb-1.3.9-sfcbrepos-schema-location.patch | 42 +++++++++++
+ .../sblim-sfcb-1.4.5-service.patch                 | 27 +++++++
+ .../sblim-sfcb-1.4.8-default-ecdh-curve-name.patch | 26 +++++++
+ .../sblim-sfcb/sblim-sfcb_1.4.8.bb                 | 82 ++++++++++++++++++++++
+ 31 files changed, 919 insertions(+), 31 deletions(-)
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
+ delete mode 100644 meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Fix-error.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Modify-cmakelist.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-the-build-error-when-python-3.0.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-no-ruby-perl.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-sblim-sigsegv.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.9.5-python-lib-dir.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
+ create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
+ create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-method.patch
+ create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
+ create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-networking_0.3.1.bb
+ create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-providers/0001-fix-error.patch
+ create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb
+ create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb
+ create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
  create mode 100644 meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+ create mode 100644 meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel/sblim-cmpi-devel-2.0.3-docdir.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.15-fix-provider-debugging.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-maxMsgLen.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-multilib-man-cfg.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.5-service.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
 
-diff --git a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
-new file mode 100644
-index 0000000..2f9a5bd
---- /dev/null
-+++ b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
-@@ -0,0 +1,36 @@
-+SUMMARY = "Python WBEM Client and Provider Interface"
-+DESCRIPTION = "\
-+A Python library for making CIM (Common Information Model) operations over \
-+HTTP using the WBEM CIM-XML protocol. It is based on the idea that a good \
-+WBEM client should be easy to use and not necessarily require a large amount \
-+of programming knowledge. It is suitable for a large range of tasks from \
-+simply poking around to writing web and GUI applications. \
-+\
-+WBEM, or Web Based Enterprise Management is a manageability protocol, like \
-+SNMP, standardised by the Distributed Management Task Force (DMTF) available \
-+at http://www.dmtf.org/standards/wbem. \
-+\
-+It also provides a Python provider interface, and is the fastest and easiest \
-+way to write providers on the planet."
-+HOMEPAGE = "http://pywbem.sf.net/"
-+LICENSE = "LGPLv2"
-+LIC_FILES_CHKSUM = "file://pywbem/LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
-+SECTION = "Development/Libraries"
-+DEPENDS = "python-m2crypto-native"
-+SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BPN}/${BP}/${BP}-dev.r704.zip"
-+SRC_URI[md5sum] = "84072451dcdd1aa9ee82363848faf7ad"
-+SRC_URI[sha256sum] = "898035866d3cc741bbcd62c4ac26e633ad07b7c11d89db2472b9f923f3fd3ed8"
-+
-+S = "${WORKDIR}/${BP}-dev"
-+
-+inherit setuptools python-dir
-+
-+do_install_append() {
-+    mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
-+    mv ${D}${bindir}/mof_compiler.py ${D}${bindir}/mofcomp
-+
-+    rm ${D}${libdir}/python2.7/site-packages/${BPN}/wbemcli.py*
-+    rm ${D}${libdir}/python2.7/site-packages/${BPN}/mof_compiler.py*
-+}
-+
-+BBCLASSEXTEND = "native"
 -- 
 1.8.4.2
 
