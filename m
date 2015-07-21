@@ -1,28 +1,24 @@
-Return-Path: <Kai.Kang@windriver.com>
+Return-Path: <Zhixiong.Chi@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BE74175669
+	by mail.openembedded.org (Postfix) with ESMTP id 87CA375669
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 02:49:49 +0000 (UTC)
+	Tue, 21 Jul 2015 03:13:49 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6L2nlV8010990
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 20 Jul 2015 19:49:47 -0700 (PDT)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Mon, 20 Jul 2015 19:49:47 -0700
-To: <openembedded-devel@lists.openembedded.org>, Koen Kooi
-	<koen.kooi@linaro.org>
-References: <1437119410-3462-1-git-send-email-kai.kang@windriver.com>
-	<moi5hq$ahj$1@ger.gmane.org>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <55ADB34E.7040207@windriver.com>
-Date: Tue, 21 Jul 2015 10:49:50 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.1.0
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6L3Dnb4012366
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Jul 2015 20:13:49 -0700 (PDT)
+Received: from pek-zchi-d1.corp.ad.wrs.com (128.224.162.227) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.235.1; Mon, 20 Jul 2015 20:13:49 -0700
+From: Zhixiong Chi <zhixiong.chi@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 21 Jul 2015 11:13:55 +0800
+Message-ID: <1437448435-6618-1-git-send-email-zhixiong.chi@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <moi5hq$ahj$1@ger.gmane.org>
-Subject: Re: [meta-oe][PATCH] dracut: upgrade from 038 to 043
+Subject: [meta-oe][PATCH] lvm2: fix shared object file dlopen failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,121 +32,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jul 2015 02:49:52 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 21 Jul 2015 03:13:50 -0000
+Content-Type: text/plain
 
-On 2015年07月20日 14:47, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Kai Kang schreef op 17-07-15 om 09:50:
->> Upgrade dracut from 038 to 043. Update SRC_URI by replacing git with tar
->> ball.
-> Why? That makes it really hard to pull in post-release fixes :(
+Add the variable snapshot_library into config file(lvm.conf), so it
+can link the correct shared object files with correct path.
 
-No special reason. For most packages, if it has specfic releases, we 
-often have the recipe pkg_version.bb.
-For dracut, I didn't realize the necessary to keep the _git version. For 
-the post-release fixes, I thought
-it should be take them as backport patches.
+Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
+---
+ meta-oe/recipes-support/lvm2/lvm2.inc      |  1 +
+ meta-oe/recipes-support/lvm2/lvm2/lvm.conf | 34 ++++++++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+)
 
-If this change makes hard to backport patches, I'll send V2 to keep _git 
-version.
-
---Kai
-
->
->
->> And update bb file name at same time.
->>
->> Signed-off-by: Kai Kang <kai.kang@windriver.com> ---
->> .../recipes-devtools/dracut/dracut_043.bb          | 53
->> +++++++++++++++++++++ .../recipes-devtools/dracut/dracut_git.bb
->> | 55 ---------------------- 2 files changed, 53 insertions(+), 55
->> deletions(-) create mode 100644
->> meta-initramfs/recipes-devtools/dracut/dracut_043.bb delete mode 100644
->> meta-initramfs/recipes-devtools/dracut/dracut_git.bb
->>
->> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_043.bb
->> b/meta-initramfs/recipes-devtools/dracut/dracut_043.bb new file mode
->> 100644 index 0000000..22c6bae --- /dev/null +++
->> b/meta-initramfs/recipes-devtools/dracut/dracut_043.bb @@ -0,0 +1,53 @@
->> +SUMMARY = "Initramfs generator using udev" +DESCRIPTION = "Dracut is an
->> event driven initramfs infrastructure. dracut (the tool) is used to
->> create an initramfs image by copying tools and files from an installed
->> system and combining it with the dracut framework, usually found in
->> /usr/lib/dracut/modules.d." + +LICENSE = "GPLv2" +LIC_FILES_CHKSUM =
->> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" + +PE = "1" +
->> +SRC_URI =
->> "${KERNELORG_MIRROR}/linux/utils/boot/dracut/dracut-043.tar.xz" +
->> +SRC_URI[md5sum] = "85de75ddf00962e7bb0ae387f05794e5" +SRC_URI[sha256sum]
->> = "1484b558ed20330125aa04dcccab84da15c5689e19068285aa011f7177889cd1" +
->> +inherit distro_features_check +REQUIRED_DISTRO_FEATURES = "systemd" +
->> +EXTRA_OECONF = "--prefix=${prefix} \ +                --libdir=${libdir}
->> \ +                --datadir=${datadir} \ +
->> --sysconfdir=${sysconfdir} \ +                --sbindir=${sbindir} \ +
->> --disable-documentation \ +                --bindir=${bindir} \ +
->> --includedir=${includedir} \ +
->> --localstatedir=${localstatedir} \ +
->> --systemdsystemunitdir=${systemd_unitdir}/system" + +do_configure() { +
->> ./configure ${EXTRA_OECONF} +} + +do_install() { +    oe_runmake install
->> DESTDIR=${D} +} + +PACKAGES =+ "${PN}-bash-completion" +
->> +FILES_${PN}-bash-completion = "${datadir}/bash-completion" +
->> +FILES_${PN} += " ${libdir}/kernel \ +                ${systemd_unitdir}
->> \ +               " +CONFFILES_${PN} += "${sysconfdir}/dracut.conf" +
->> +RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid
->> util-linux-getopt bash ldd" +RDEPENDS_${PN}-bash-completion =
->> "bash-completion" + +# This could be optimized a bit, but let's avoid
->> non-booting systems :) +RRECOMMENDS_${PN} = " \ +
->> kernel-modules \ +                     busybox \ +
->> coreutils \ +                    " diff --git
->> a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
->> b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb deleted file mode
->> 100644 index 77c137c..0000000 ---
->> a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb +++ /dev/null @@
->> -1,55 +0,0 @@ -SUMMARY = "Initramfs generator using udev" -DESCRIPTION =
->> "Dracut is an event driven initramfs infrastructure. dracut (the tool) is
->> used to create an initramfs image by copying tools and files from an
->> installed system and combining it with the dracut framework, usually
->> found in /usr/lib/dracut/modules.d." - -LICENSE = "GPLv2"
->> -LIC_FILES_CHKSUM =
->> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" - -PE = "1" -PV =
->> "038" - -# v038 tag -SRCREV = "267a109a81715c8957f14659593deb7b6255d40e"
->> -SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git" - -S =
->> "${WORKDIR}/git" - -inherit distro_features_check
->> -REQUIRED_DISTRO_FEATURES = "systemd" - -EXTRA_OECONF =
->> "--prefix=${prefix} \ -                --libdir=${libdir} \ -
->> --datadir=${datadir} \ -                --sysconfdir=${sysconfdir} \ -
->> --sbindir=${sbindir} \ -                --disable-documentation \ -
->> --bindir=${bindir} \ -                --includedir=${includedir} \ -
->> --localstatedir=${localstatedir} \ -
->> --systemdsystemunitdir=${systemd_unitdir}/system" - -do_configure() { -
->> ./configure ${EXTRA_OECONF} -} - -do_install() { -    oe_runmake install
->> DESTDIR=${D} -} - -PACKAGES =+ "${PN}-bash-completion" -
->> -FILES_${PN}-bash-completion = "${datadir}/bash-completion" -
->> -FILES_${PN} += " ${libdir}/kernel \ -                ${systemd_unitdir}
->> \ -               " -CONFFILES_${PN} += "${sysconfdir}/dracut.conf" -
->> -RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid
->> util-linux-getopt bash ldd" -RDEPENDS_${PN}-bash-completion =
->> "bash-completion" - -# This could be optimized a bit, but let's avoid
->> non-booting systems :) -RRECOMMENDS_${PN} = " \ -
->> kernel-modules \ -                     busybox \ -
->> coreutils \ -                    "
->>
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iD8DBQFVrJl6MkyGM64RGpERAjOSAJ0eXwXMBI1/z6Gy3xLv/iGi5oMZXgCdGeGG
-> VmSTSLZO3ncjQ0jfrdIFa98=
-> =hnRL
-> -----END PGP SIGNATURE-----
->
-
-
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 34fec99..7b21a35 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -41,6 +41,7 @@ inherit autotools pkgconfig systemd
+ do_install_append() {
+     # Install machine specific configuration file
+     install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
++    sed -i -e 's:@libdir@:${libdir}:g' ${D}${sysconfdir}/lvm/lvm.conf
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${B}/scripts/lvm2_monitoring_systemd_red_hat.service ${D}${systemd_unitdir}/system/lvm2-monitor.service
+     install -m 0644 ${B}/scripts/dm_event_systemd_red_hat.socket ${D}${systemd_unitdir}/system/dm-event.socket
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/lvm.conf b/meta-oe/recipes-support/lvm2/lvm2/lvm.conf
+index c44c6a7..9e3b5fe 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2/lvm.conf
++++ b/meta-oe/recipes-support/lvm2/lvm2/lvm.conf
+@@ -289,4 +289,38 @@ activation {
+     # dirs = [ "/etc/lvm/metadata", "/mnt/disk2/lvm/metadata2" ]
+ #}
+ 
++# Event daemon
++#
++dmeventd {
++    # mirror_library is the library used when monitoring a mirror device.
++    #
++    # "libdevmapper-event-lvm2mirror.so" attempts to recover from
++    # failures.  It removes failed devices from a volume group and
++    # reconfigures a mirror as necessary. If no mirror library is
++    # provided, mirrors are not monitored through dmeventd.
++
++    mirror_library = "@libdir@/device-mapper/libdevmapper-event-lvm2mirror.so"
++
++    # snapshot_library is the library used when monitoring a snapshot device.
++    #
++    # "libdevmapper-event-lvm2snapshot.so" monitors the filling of
++    # snapshots and emits a warning through syslog when the use of
++    # the snapshot exceeds 80%. The warning is repeated when 85%, 90% and
++    # 95% of the snapshot is filled.
++
++    snapshot_library = "@libdir@/device-mapper/libdevmapper-event-lvm2snapshot.so"
++
++    # thin_library is the library used when monitoring a thin device.
++    #
++    # "libdevmapper-event-lvm2thin.so" monitors the filling of
++    # pool and emits a warning through syslog when the use of
++    # the pool exceeds 80%. The warning is repeated when 85%, 90% and
++    # 95% of the pool is filled.
++
++    thin_library = "@libdir@/device-mapper/libdevmapper-event-lvm2thin.so"
++
++    # Full path of the dmeventd binary.
++    #
++    # executable = "@DMEVENTD_PATH@"
++}
+ 
 -- 
-Regards,
-Neil | Kai Kang
+1.9.1
 
 
