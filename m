@@ -1,38 +1,36 @@
 Return-Path: <vm.rod25@gmail.com>
-Received: from mail-ie0-f179.google.com (mail-ie0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 521B36013D
+Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
+	[209.85.213.182])
+	by mail.openembedded.org (Postfix) with ESMTP id B75FD6013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 19:51:55 +0000 (UTC)
-Received: by iebmu5 with SMTP id mu5so150678478ieb.1
+	Tue, 21 Jul 2015 20:50:26 +0000 (UTC)
+Received: by igvi1 with SMTP id i1so113017026igv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2015 12:51:55 -0700 (PDT)
+	Tue, 21 Jul 2015 13:50:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:cc:content-type;
-	bh=qzpoz3KJdMMlxw7/qI7Cdv8pTe2uuwlED+HlKwOcdTY=;
-	b=CMR+xosiMInpERMqME/zP5cHk6Jnx6wz5Qq5Mj1HoJwKG++sNurnAA9zXO3PtYQFuP
-	JSqQcesYyPneNsFeYBVWyP81ziHlsAwqW4hQBU0DYkxWfUVmD3tP8aYgx365EOzewQ+9
-	qpy8MoSJQshOQr1rfxVQUYjMfARLGsi94wHos05By68huU6JOLER/IcKwAN46BmXiIPV
-	RU1GbZAI/Ghtn/QnsTOEol7A5Bf1eJEmUNWHffeg5Cjc4yvokFa1XLtOE7vex0VjkjZY
-	l7ZnMBIlVq5uw/5y0Ps8yLHD83zdLwqe2m8FyxtfFz2gC+yt9RUtGsA1IbXVBeep5fmq
-	fppA==
+	bh=1w8lsTaxSEsCb8TnMG8mPmLL5jgQpFSx4PF32Wc0+9g=;
+	b=yEzCt5olElIvBHi6uGPBaxR/yLz1ezTKsNs6xE3N4aikSQlNfdUqaAZTP4GQUu+KjR
+	fLXNwkd8oGTcawFs8JWQJQkitpD4HDaOTW3hVu5MGTElmx/65aLVA8Q/nPyGyi9UUJc9
+	6sQvQf+XErw4+AtDw4TLYlMXyeh8rMCAP8BI1jUZNGL6gppen2Df5tq2l6fxVFranvNN
+	bQkLy9U8J/wwc01nB8LZyTyAnnbhWE0CTKGaxQs6dg0irOQlZvSSQs44ftR/L19/uQNL
+	4rwIX9W0wQEtEQ3E3pA143p5nfAkEjVetHEphUsaDWzneHtyZ0Zc9+XucMcnb1it2O4U
+	LoFg==
 MIME-Version: 1.0
-X-Received: by 10.50.111.231 with SMTP id il7mr27199788igb.23.1437508315464;
-	Tue, 21 Jul 2015 12:51:55 -0700 (PDT)
-Received: by 10.50.141.228 with HTTP; Tue, 21 Jul 2015 12:51:55 -0700 (PDT)
-In-Reply-To: <55AE8445.60302@linux.intel.com>
-References: <CAK5mtexdmYF7ivs+nwa7WZSqVb8sZCq5Euvt8oK2HimiXy7PMA@mail.gmail.com>
-	<55AE6705.5040907@mlbassoc.com>
-	<CAK5mtex-n4XrVXG18zG=ha_+R1-Z5Yh6TKLWudt1CVpXpUHokQ@mail.gmail.com>
-	<55AE8445.60302@linux.intel.com>
-Date: Tue, 21 Jul 2015 14:51:55 -0500
-Message-ID: <CAK5mtexxVJ2uZeahegoJ=+8pOztcPufUHYmXWrhwy9hMzc3tLw@mail.gmail.com>
+X-Received: by 10.107.166.72 with SMTP id p69mr54273582ioe.65.1437511826838;
+	Tue, 21 Jul 2015 13:50:26 -0700 (PDT)
+Received: by 10.50.141.228 with HTTP; Tue, 21 Jul 2015 13:50:26 -0700 (PDT)
+In-Reply-To: <55AEB069.80005@linux.intel.com>
+References: <CAK5mtexxdYxhwvv-MB27Ur56iwAV8O3Y6ah_BPAo+R58NmNouQ@mail.gmail.com>
+	<55AEB069.80005@linux.intel.com>
+Date: Tue, 21 Jul 2015 15:50:26 -0500
+Message-ID: <CAK5mtextp+RKCnc+rKyEZ0AyKu+xH7ZvVTiUnAvZTuaK2V5TBg@mail.gmail.com>
 From: Victor Rodriguez <vm.rod25@gmail.com>
 To: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
 Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
 	openembedded-devel@lists.openembedded.org
-Subject: Re: [yocto] Question about IMAGE_INSTALL_append and CORE_IMAGE_EXTRA_INSTALL
+Subject: Re: [yocto] Bug in Open CV receipt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,74 +44,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jul 2015 19:51:58 -0000
+X-List-Received-Date: Tue, 21 Jul 2015 20:50:29 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Tue, Jul 21, 2015 at 12:41 PM, Leonardo Sandoval
+On Tue, Jul 21, 2015 at 3:49 PM, Leonardo Sandoval
 <leonardo.sandoval.gonzalez@linux.intel.com> wrote:
 >
 >
+> On 07/21/2015 09:57 AM, Victor Rodriguez wrote:
+>>
+>> Hi team
+>>
+>> Few weeks ago I was having some problems with open CV receipt. In the
+>> begining I toght I was adding opencv tro my core-image-minimal-xfce
+>> just with this:
+>>
+>> IMAGE_INSTALL_append = " gcc gcc-dev openssh php mariadb opencv"
+>>
+>> Now after booting the image I realize that none of the libraries for
+>> open stack were added to my image
+>>
+>> What I had to do was the following:
+>>
+>>
+>> IMAGE_INSTALL_append = " libopencv-core-dev libopencv-highgui-dev
+>> libopencv-imgproc-dev libopencv-objdetect-dev libopencv-ml-dev
+>> opencv-staticdev python-opencv"
+>>
 >
+> A recipe can produce several packages. As I can see on opencv recipe, it can
+> produced the following ones:
 >
-> On 07/21/2015 10:45 AM, Victor Rodriguez wrote:
->>
->> On Tue, Jul 21, 2015 at 10:36 AM, Gary Thomas <gary@mlbassoc.com> wrote:
->>>
->>> On 2015-07-21 09:26, Victor Rodriguez wrote:
->>>>
->>>>
->>>> Hi team
->>>>
->>>> I have a question , according to documentation there is a difference
->>>> between
->>>>
->>>> IMAGE_INSTALL_append
->>>>
->>>> and
->>>>
->>>> CORE_IMAGE_EXTRA_INSTALL
->>>>
->>>> Specifies the list of packages to be added to the image. You should
->>>> only set this variable in the local.conf configuration file found in
->>>> the Build Directory.
->>>>
->>>> When I use the second one and try to build a core-image-minimal-xfce
->>>> bitbake does not install what I wanted in my image . I had a really
->>>> hard time few weekends ago because of this.
->>>>
->>>> I wonder If I am missing something or if this is a bug
->>>
->>>
->>>
->>> The core-image-minimal-xfce recipe does not "play nice" with
->>> the core-image class and is not respecting CORE_IMAGE_EXTRA_INSTALL.
->>>
->>> I think this should be filed as a bug (and feel free to suggest a patch)
->>>
->>> BTW, this question should really be on the OpenEmbedded development list.
->>
->>
->>
->> Thanks Gary
->>
->> I will submit the BUG , do you know the Bugzila where I should submit it ?
+> PACKAGES="opencv-staticdev opencv-dev opencv-dbg opencv-doc opencv
+> opencv-apps python-opencv"
 >
+> and dynamic ones (depending on what else you have install)
 >
-> Victor, you can file a bug at https://bugzilla.yoctoproject.org
+> PACKAGES_DYNAMIC="^opencv-locale-.* ^libopencv-.*"
+>
+> For the opencv case, it happens that the package opencv is empty, so you
+> need to append the other sub-packages it produces into your IMAGE_INSTALL
+> variable.
+>
+> So, it is not a bug, this is expected.
 >
 
-I think we have one already
+In my humble opinion this should change for OpenCV. But I would love
+to hear the feedback from others
 
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=7616
-
->>> --
->>> ------------------------------------------------------------
->>> Gary Thomas                 |  Consulting for the
->>> MLB Associates              |    Embedded world
->>> ------------------------------------------------------------
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>> Even last night when one of the opencv developers ask me for python
+>> opencv I had to add the last part python-opencv. That is not cool at
+>> all . If I add opencv in the beginning I assume we are more than cool
+>> with that and yocto will add all the packages . Unless I am doing
+>> something wrong, in taht case I am more than happy to get the
+>> feedback.
+>>
+>> Thanks a lot for all the help . If someone else can reproduce this bug
+>> I am more than happy to report it in bugzila (not sure the URL)
+>>
+>> Hope it helps to cut the time of some others
+>>
+>> Best regards
+>>
+>> Victor Rodriguez
+>>
+>
 
