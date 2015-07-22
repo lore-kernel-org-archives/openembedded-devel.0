@@ -1,23 +1,23 @@
 Return-Path: <lixin.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 97D6F75791
+	by mail.openembedded.org (Postfix) with ESMTP id 1107E7615E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jul 2015 08:46:21 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="98718560"
+	Wed, 22 Jul 2015 08:46:42 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="98718602"
 Received: from bogon (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 22 Jul 2015 16:49:55 +0800
+	by heian.cn.fujitsu.com with ESMTP; 22 Jul 2015 16:50:22 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6M8iQ4o028009
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6M8iqZE028044
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jul 2015 16:44:26 +0800
+	Wed, 22 Jul 2015 16:44:53 +0800
 Received: from localhost.localdomain (10.167.226.92) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 22 Jul 2015 16:46:14 +0800
+	Server (TLS) id 14.3.181.6; Wed, 22 Jul 2015 16:46:40 +0800
 From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 22 Jul 2015 16:45:48 +0800
-Message-ID: <1437554748-1740-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+Date: Wed, 22 Jul 2015 16:46:36 +0800
+Message-ID: <1437554796-1815-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.92]
@@ -35,7 +35,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2015 08:46:25 -0000
+X-List-Received-Date: Wed, 22 Jul 2015 08:46:44 -0000
 Content-Type: text/plain
 
 Dropped building-rquota_xdr.c-depend-on-rquota.h.patch,since 2.2.18 fixed the problem.
