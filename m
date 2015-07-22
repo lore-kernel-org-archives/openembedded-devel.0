@@ -1,42 +1,42 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f54.google.com (mail-qg0-f54.google.com
-	[209.85.192.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 42D3876167
+Received: from mail-qg0-f49.google.com (mail-qg0-f49.google.com
+	[209.85.192.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C0E775979
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jul 2015 19:47:28 +0000 (UTC)
-Received: by qgeu79 with SMTP id u79so52318378qge.1
+	Wed, 22 Jul 2015 19:47:35 +0000 (UTC)
+Received: by qgy5 with SMTP id 5so107865670qgy.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jul 2015 12:47:29 -0700 (PDT)
+	Wed, 22 Jul 2015 12:47:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:organization;
-	bh=GydoVihPUjyBbKRmxdQRmoC5IV1VdUtmtWE9+hMghSI=;
-	b=LM5P3eKm2H1feYYjj6DUynv14m1LQ3amd8c2vECH224s75y2qj4X7gO5nFnc5h9zuq
-	oL+czIvzeqcNoFXoSC0yOVMhfG0G9hp2GoNY4lslojddIUZTR+gl5Rvdx5qcNslkBXMn
-	qnBKtLFOEpsBLBKkgq3zmdo1JAvKPE5gn0Trn8yggR/rLTigCCRNvFlEwIwhVdWt6rpb
-	9nSFmTz2xJmkv7YMoyxom4dYsEHHTEum1/lU5XPe9z43mrxqYFT4WB/8wuU49l4jIdoF
-	ws8PehAxMUroa9jRMZFiWt5biHKWUzpJ+EKtJZdGLUyNuORSYTImaZFCoWGgfkFnclrt
-	G5cA==
-X-Received: by 10.55.31.40 with SMTP id f40mr6458029qkf.18.1437594448935;
-	Wed, 22 Jul 2015 12:47:28 -0700 (PDT)
+	bh=5/Bk1wjjoMN4ngbBu89h9eJuzwl1XE2Al1AHQyEUZwA=;
+	b=DFbL8kGvlKLVk4OS18I+6HJ1CsmCZtB/fFnnNmG0KTd/iOFWwXwys6VIxPQSy9ESDc
+	xBEqo2OQbg6zmLumJ8nWNtgha3Pbese09rqcBPJ/4WoToU4ThHFdOP8ATXMZjYbRMnQh
+	BsxyCuQcUgvVFqXqaCNoYwpUVfxJ6qBZ83+rWeoppe4qqqb5HCUnobwVrd2Xxh4QwvkC
+	nsxkVMzB0RW0eOI7Z/lXNmYh4eZ+xRV+LLgABCBCeH62SqgxNyRa4PFz71PKzlS7JCpx
+	XuOw8qk6iaKVJ2U7hh4zlIQoMRjmc+HMYGR0CKNX86WUnRHknqdDH/G412hG//1W8CPQ
+	Nqbg==
+X-Received: by 10.140.149.129 with SMTP id 123mr6821995qhv.56.1437594455796;
+	Wed, 22 Jul 2015 12:47:35 -0700 (PDT)
 Received: from localhost ([179.105.243.19]) by smtp.gmail.com with ESMTPSA id
-	t77sm1208968qge.42.2015.07.22.12.47.25
+	v64sm1215588qgv.28.2015.07.22.12.47.32
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 Jul 2015 12:47:27 -0700 (PDT)
+	Wed, 22 Jul 2015 12:47:34 -0700 (PDT)
 Received: by localhost (sSMTP sendmail emulation);
-	Wed, 22 Jul 2015 16:47:22 -0300
+	Wed, 22 Jul 2015 16:47:29 -0300
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 22 Jul 2015 16:47:07 -0300
-Message-Id: <1437594429-21142-2-git-send-email-otavio@ossystems.com.br>
+Date: Wed, 22 Jul 2015 16:47:08 -0300
+Message-Id: <1437594429-21142-3-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.4.6
 In-Reply-To: <1437594429-21142-1-git-send-email-otavio@ossystems.com.br>
 References: <1437594429-21142-1-git-send-email-otavio@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH v3 2/4] opencv: Add 'libv4l' PACKAGECONFIG
+Subject: [meta-oe][PATCH v3 3/4] glmark2: Convert recipe to fetch from Git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,37 +50,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2015 19:47:29 -0000
+X-List-Received-Date: Wed, 22 Jul 2015 19:47:37 -0000
 
-The i.MX SoCs need to allow the removal of libv4l support so a new
-PACKAGECONFIG option has been included.
+The development has been moved for github thus it makes sense to use
+this, instead of the tarball.
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-oe/recipes-support/opencv/opencv_2.4.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../glmark2/{glmark2_2014.03.bb => glmark2_git.bb}                | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-benchmark/glmark2/{glmark2_2014.03.bb => glmark2_git.bb} (83%)
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-index f8946f4..75441fd 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-@@ -30,7 +30,7 @@ EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}
-                  ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
- "
+diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+similarity index 83%
+rename from meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb
+rename to meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+index 708b6d2..57acad5 100644
+--- a/meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb
++++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+@@ -13,10 +13,12 @@ DEPENDS = "libpng12 jpeg virtual/libx11"
+ # depends on virtual/libx11
+ REQUIRED_DISTRO_FEATURES = "x11"
  
--PACKAGECONFIG ??= "eigen jpeg png tiff v4l \
-+PACKAGECONFIG ??= "eigen jpeg png tiff v4l libv4l \
-                    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
-                    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
- PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen,"
-@@ -40,6 +40,7 @@ PACKAGECONFIG[libav] = "-DWITH_FFMPEG=ON,-DWITH_FFMPEG=OFF,libav,"
- PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
- PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
- PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
-+PACKAGECONFIG[libv4l] = "-DWITH_LIBV4L=ON,-DWITH_LIBV4L=OFF,v4l-utils,"
- PACKAGECONFIG[jasper] = "-DWITH_JASPER=ON,-DWITH_JASPER=OFF,jasper,"
+-SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BP}.tar.gz"
++PV = "2014.03+${SRCPV}"
  
- inherit distutils-base pkgconfig cmake
+-SRC_URI[md5sum] = "739859cf57d4c8a23452c43e84f66e56"
+-SRC_URI[sha256sum] = "bded41aaf918ce062d9b81e42cc5be943e6a80bc4ff9d046983b96102c3df6b5"
++SRC_URI = "git://github.com/glmark2/glmark2.git;protocol=https"
++SRCREV = "fa71af2dfab711fac87b9504b6fc9862f44bf72a"
++
++S = "${WORKDIR}/git"
+ 
+ inherit waf pkgconfig distro_features_check
+ 
 -- 
 2.4.6
 
