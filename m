@@ -1,39 +1,42 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
-	[209.85.220.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CDC875791
+Received: from mail-qg0-f54.google.com (mail-qg0-f54.google.com
+	[209.85.192.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 42D3876167
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jul 2015 19:47:21 +0000 (UTC)
-Received: by qkdv3 with SMTP id v3so160299900qkd.3
+	Wed, 22 Jul 2015 19:47:28 +0000 (UTC)
+Received: by qgeu79 with SMTP id u79so52318378qge.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jul 2015 12:47:21 -0700 (PDT)
+	Wed, 22 Jul 2015 12:47:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=from:to:cc:subject:date:message-id:organization;
-	bh=dOnXUANI3Xsw0vNE12O8VBqDT05xyjp55wKgfWAPNBo=;
-	b=AMrUFXHMSeJg84Sd9jxFaMR3ZvuBr6CQqkUBvBuhUKf240SN4Jdv01Cr9FyO+/GJqT
-	CDNyUM/J6aKkE/NmrlXvrq+aOmpzI2POLXZQur68scc0vttdpDJDTEhyOxwJMJ3ipG0/
-	EJnvXLVhop1thwVGGAKTHsGoonZaPVugYlOrB+ES1JUMYAoVAY6GAPZph1c9D8uRyDo3
-	bemWI7C/JBS6+cJql0YSq2Ts2LO+wqb0SdfxbOznjfWJD2rL5koEygKecov6MRj8uhG3
-	VUlbOLnPJK7DrDQcRvS+68/n2Dm/B9S9LjcMBUzFByc5ZAjILlAAuW8zV/70VsfFKwYe
-	Vz5g==
-X-Received: by 10.140.39.133 with SMTP id v5mr6514902qgv.34.1437594441619;
-	Wed, 22 Jul 2015 12:47:21 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:organization;
+	bh=GydoVihPUjyBbKRmxdQRmoC5IV1VdUtmtWE9+hMghSI=;
+	b=LM5P3eKm2H1feYYjj6DUynv14m1LQ3amd8c2vECH224s75y2qj4X7gO5nFnc5h9zuq
+	oL+czIvzeqcNoFXoSC0yOVMhfG0G9hp2GoNY4lslojddIUZTR+gl5Rvdx5qcNslkBXMn
+	qnBKtLFOEpsBLBKkgq3zmdo1JAvKPE5gn0Trn8yggR/rLTigCCRNvFlEwIwhVdWt6rpb
+	9nSFmTz2xJmkv7YMoyxom4dYsEHHTEum1/lU5XPe9z43mrxqYFT4WB/8wuU49l4jIdoF
+	ws8PehAxMUroa9jRMZFiWt5biHKWUzpJ+EKtJZdGLUyNuORSYTImaZFCoWGgfkFnclrt
+	G5cA==
+X-Received: by 10.55.31.40 with SMTP id f40mr6458029qkf.18.1437594448935;
+	Wed, 22 Jul 2015 12:47:28 -0700 (PDT)
 Received: from localhost ([179.105.243.19]) by smtp.gmail.com with ESMTPSA id
-	y11sm1209200qky.42.2015.07.22.12.47.17
+	t77sm1208968qge.42.2015.07.22.12.47.25
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 Jul 2015 12:47:20 -0700 (PDT)
+	Wed, 22 Jul 2015 12:47:27 -0700 (PDT)
 Received: by localhost (sSMTP sendmail emulation);
-	Wed, 22 Jul 2015 16:47:14 -0300
+	Wed, 22 Jul 2015 16:47:22 -0300
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 22 Jul 2015 16:47:06 -0300
-Message-Id: <1437594429-21142-1-git-send-email-otavio@ossystems.com.br>
+Date: Wed, 22 Jul 2015 16:47:07 -0300
+Message-Id: <1437594429-21142-2-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.4.6
+In-Reply-To: <1437594429-21142-1-git-send-email-otavio@ossystems.com.br>
+References: <1437594429-21142-1-git-send-email-otavio@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH v3 1/4] opencv: Only enable 'libav' support if commercial license is whitelisted
+Subject: [meta-oe][PATCH v3 2/4] opencv: Add 'libv4l' PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,33 +50,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2015 19:47:23 -0000
+X-List-Received-Date: Wed, 22 Jul 2015 19:47:29 -0000
 
-The libav support requires the commercial license to be
-whitelist. This makes opencv to work in non-commercial setups without
-needing to change the PACKAGECONFIG settings manually.
+The i.MX SoCs need to allow the removal of libv4l support so a new
+PACKAGECONFIG option has been included.
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-oe/recipes-support/opencv/opencv_2.4.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/opencv/opencv_2.4.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-index 2754616..f8946f4 100644
+index f8946f4..75441fd 100644
 --- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
 +++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-@@ -30,8 +30,9 @@ EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}
+@@ -30,7 +30,7 @@ EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}
                   ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
  "
  
--PACKAGECONFIG ??= "eigen jpeg libav png tiff v4l \
--                   ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)}"
-+PACKAGECONFIG ??= "eigen jpeg png tiff v4l \
-+                   ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
-+                   ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
+-PACKAGECONFIG ??= "eigen jpeg png tiff v4l \
++PACKAGECONFIG ??= "eigen jpeg png tiff v4l libv4l \
+                    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
+                    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
  PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen,"
- PACKAGECONFIG[gtk] = "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+,"
- PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
+@@ -40,6 +40,7 @@ PACKAGECONFIG[libav] = "-DWITH_FFMPEG=ON,-DWITH_FFMPEG=OFF,libav,"
+ PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
+ PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
+ PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
++PACKAGECONFIG[libv4l] = "-DWITH_LIBV4L=ON,-DWITH_LIBV4L=OFF,v4l-utils,"
+ PACKAGECONFIG[jasper] = "-DWITH_JASPER=ON,-DWITH_JASPER=OFF,jasper,"
+ 
+ inherit distutils-base pkgconfig cmake
 -- 
 2.4.6
 
