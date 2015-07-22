@@ -1,27 +1,24 @@
-Return-Path: <clopez@igalia.com>
-X-Greylist: delayed 636 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 22 Jul 2015 17:08:38 UTC
-Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
-	by mail.openembedded.org (Postfix) with ESMTP id 212FD73D0B
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4426273D0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jul 2015 17:08:38 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AukFALPKr1VbdWOb/2dsb2JhbABbGYJ8AVNpAa0okEMPh1BMAQEBAQEBgQuPJgEIpzymTY9tgQKEFQWUV4R1hz2CCYZFkEQmY2YBC4IpPDEBAYECgUcBAQE
-X-IPAS-Result: AukFALPKr1VbdWOb/2dsb2JhbABbGYJ8AVNpAa0okEMPh1BMAQEBAQEBgQuPJgEIpzymTY9tgQKEFQWUV4R1hz2CCYZFkEQmY2YBC4IpPDEBAYECgUcBAQE
-X-IronPort-AV: E=Sophos;i="5.15,523,1432591200"; d="scan'208";a="379629812"
-Received: from fanzine.igalia.com ([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 22 Jul 2015 18:58:01 +0200
-Received: from [192.168.10.149] (helo=trinity.local.igalia.com)
-	by fanzine.igalia.com with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_128_CBC_SHA1:16) (Exim) id 1ZHxLF-0004as-DJ
+	Wed, 22 Jul 2015 18:54:11 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t6MIsBNX029071
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jul 2015 18:58:01 +0200
-From: Carlos Alberto Lopez Perez <clopez@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Jul 2015 18:58:00 +0200
-Message-Id: <1437584280-730-1-git-send-email-clopez@igalia.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-browser][PATCH] chromium: Include chromium.inc before appending to DEPENDS
+	Wed, 22 Jul 2015 11:54:11 -0700 (PDT)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Wed, 22 Jul 2015 11:54:11 -0700
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 22 Jul 2015 11:54:10 -0700
+Message-ID: <1437591250-9247-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH 1/1] ypbind-mt: add dependency but keep as broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,29 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2015 17:08:39 -0000
+X-List-Received-Date: Wed, 22 Jul 2015 18:54:12 -0000
+Content-Type: text/plain
 
-  Otherwise chromium.inc will overwrite the list of DEPENDS.
+We will need the conditional dependency on systemd.  It is
+not a good idea to use PNBLACKLIST in a recipe, and the
+version here does not suppress lib32-ypbind-mt.
+
+Signed-off-by: Joe Slater <jslater@windriver.com>
 ---
- recipes-browser/chromium/chromium_40.0.2214.91.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-support/nis/ypbind-mt_2.2.bb |    6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-index 0a73f1e..74986b5 100644
---- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
-+++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-@@ -16,9 +16,9 @@
- #    * CHROMIUM_WAYLAND_DEPENDS
- #    * CHROMIUM_WAYLAND_GYP_DEFINES
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+index 4f8bf48..359b020 100644
+--- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
++++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+@@ -15,10 +15,12 @@ of known secure NIS server (/etc/yp.conf) Binds to \
+ the server which answered as first. \
+ "
+ HOMEPAGE = "http://www.linux-nis.org/nis/ypbind-mt/index.html"
+-DEPENDS = "yp-tools"
++DEPENDS = "yp-tools ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+ PROVIDES += "ypbind"
  
-+include chromium.inc
- DESCRIPTION = "Chromium browser"
- DEPENDS += "libgnome-keyring"
--include chromium.inc
- SRC_URI = "\
-         http://gsdview.appspot.com/chromium-browser-official/${P}.tar.xz \
-         file://include.gypi \
+-PNBLACKLIST[ypbind-mt] ?= "BROKEN: Depends on broken yp-tools"
++python () {
++    raise bb.parse.SkipPackage("BROKEN: Depends on broken yp-tools")
++}
+ 
+ SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
+            file://ypbind-yocto.init \
 -- 
-2.1.4
+1.7.9.5
 
 
