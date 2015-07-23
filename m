@@ -1,25 +1,27 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8761B75972
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FA1775972
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jul 2015 08:02:58 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t6N82vUc005025
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 23 Jul 2015 01:02:57 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.235.1; Thu, 23 Jul 2015 01:02:48 -0700
-From: Kai Kang <kai.kang@windriver.com>
+	Thu, 23 Jul 2015 08:25:35 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="98765239"
+Received: from bogon (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 23 Jul 2015 16:29:14 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6N8NjXE022074
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Jul 2015 16:23:45 +0800
+Received: from localhost.localdomain (10.167.226.92) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 23 Jul 2015 16:25:33 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 23 Jul 2015 16:00:53 +0800
-Message-ID: <1437638453-11552-1-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Thu, 23 Jul 2015 16:25:27 +0800
+Message-ID: <1437639927-4635-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Originating-IP: [128.224.153.152]
-Cc: koen@dominion.thruhere.net
-Subject: [meta-oe][PATCH] efibootmgr: add recipe
+X-Originating-IP: [10.167.226.92]
+Subject: [meta-oe][PATCH] libxaw: upgrade 1.0.10 -> 1.0.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,147 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jul 2015 08:03:01 -0000
+X-List-Received-Date: Thu, 23 Jul 2015 08:25:38 -0000
 Content-Type: text/plain
 
-Add efibootmgr recipe from layer meta-linaro and upgrade from 0.5.4 to
-0.6.0. efibootmgr is a linux user-space application to modify the EFI Boot
-Manager which is useful for us to manage boot on EFI boards.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- .../efibootmgr/efibootmgr_0.6.0.bb                 | 26 ++++++++++++++++++++
- .../efibootmgr/files/docbook-fixes.patch           | 28 ++++++++++++++++++++++
- .../efibootmgr/files/ldflags.patch                 | 17 +++++++++++++
- .../files/w-keep-existing-mbr-signature.patch      | 26 ++++++++++++++++++++
- 4 files changed, 97 insertions(+)
- create mode 100644 meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
- create mode 100644 meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
- create mode 100644 meta-oe/recipes-extended/efibootmgr/files/ldflags.patch
- create mode 100644 meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
+ .../recipes-graphics/xorg-lib/{libxaw_1.0.10.bb => libxaw_1.0.13.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-lib/{libxaw_1.0.10.bb => libxaw_1.0.13.bb} (83%)
 
-diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
-new file mode 100644
-index 0000000..1870455
---- /dev/null
-+++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
-@@ -0,0 +1,26 @@
-+DESCRIPTION = "Linux user-space application to modify the EFI Boot Manager."
-+SUMMARY = "EFI Boot Manager"
-+HOMEPAGE = "http://linux.dell.com/efibootmgr/"
-+SECTION = "base"
-+
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
-+
-+DEPENDS = "pciutils zlib"
-+
-+COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
-+
-+SRC_URI = "http://linux.dell.com/efibootmgr/permalink/efibootmgr-${PV}.tar.gz \
-+    file://ldflags.patch \
-+    file://docbook-fixes.patch \
-+    file://w-keep-existing-mbr-signature.patch \
-+"
-+
-+SRC_URI[md5sum] = "9e9a31d79e579644de83a14139b66d10"
-+SRC_URI[sha256sum] = "5167488b92950e60028d1025942ce6bda04638c6fb5e110abb8c8f687844d155"
-+
-+EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/lib -I${S}/src/include'"
-+
-+do_install () {
-+    install -D -p -m0755 src/efibootmgr/efibootmgr ${D}/${sbindir}/efibootmgr
-+}
-diff --git a/meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch b/meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
-new file mode 100644
-index 0000000..f2dc83b
---- /dev/null
-+++ b/meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
-@@ -0,0 +1,28 @@
-+Upstream-Status: Pending
-+
-+Import this patch from meta-linaro.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+
-+diff --git a/src/man/man8/efibootmgr.8.docbook b/src/man/man8/efibootmgr.8.docbook
-+index aef4444..eb8f266 100644
-+--- a/src/man/man8/efibootmgr.8.docbook
-++++ b/src/man/man8/efibootmgr.8.docbook
-+@@ -302,7 +302,7 @@
-+           <title>Displaying the current settings (must be root).</title>
-+           
-+           <para>
-+-            <computeroutput>
-++            <programlisting>
-+   [root@localhost ~]# efibootmgr
-+   BootCurrent: 0004
-+   BootNext: 0003
-+@@ -313,7 +313,7 @@
-+   Boot0002* Hard Drive(Device:80)/HD(Part1,Sig00112233)   
-+   Boot0003* PXE Boot: MAC(00D0B7C15D91)               
-+   Boot0004* Linux
-+-            </computeroutput>
-++            </programlisting>
-+           </para>
-+           <para>This shows:</para>
-+           <itemizedlist>
-diff --git a/meta-oe/recipes-extended/efibootmgr/files/ldflags.patch b/meta-oe/recipes-extended/efibootmgr/files/ldflags.patch
-new file mode 100644
-index 0000000..0d5594a
---- /dev/null
-+++ b/meta-oe/recipes-extended/efibootmgr/files/ldflags.patch
-@@ -0,0 +1,17 @@
-+Upstream-Status: Pending
-+
-+Import this patch from meta-linaro.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+
-+--- efibootmgr-0.5.4.orig/Makefile
-++++ efibootmgr-0.5.4/Makefile
-+@@ -11,6 +11,8 @@
-+   CFLAGS = $(EXTRA_CFLAGS) -DEFIBOOTMGR_VERSION=\"$(RELEASE_MAJOR).$(RELEASE_MINOR).$(RELEASE_SUBLEVEL)$(RELEASE_EXTRALEVEL)\" \
-+ 	    -Wall -g -D_FILE_OFFSET_BITS=64
-+ 
-++  LDFLAGS += -lz
-++
-+   MODULES := src
-+ 
-+   BINDIR := /usr/sbin
-diff --git a/meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch b/meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
-new file mode 100644
-index 0000000..58bd135
---- /dev/null
-+++ b/meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
-@@ -0,0 +1,26 @@
-+Upstream-Status: Pending
-+
-+Import this patch from meta-linaro.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+Description: Fix -w option to leave an existing unique MBR signature intact
-+ This makes the implementation match the documentation.
-+Author: Colin Watson <cjwatson@ubuntu.com>
-+Bug-Ubuntu: https://bugs.launchpad.net/bugs/1065261
-+Forwarded: no
-+Last-Update: 2013-02-01
-+
-+Index: b/src/lib/disk.c
-+===================================================================
-+--- a/src/lib/disk.c
-++++ b/src/lib/disk.c
-+@@ -352,7 +352,7 @@
-+ 		printf("******************************************************\n\n");
-+ 		
-+ 	}
-+-	else if (opts.write_signature) {
-++	else if (!mbr->unique_mbr_signature && opts.write_signature) {
-+ 		
-+ 		/* MBR Signatures must be unique for the 
-+ 		   EFI Boot Manager
+diff --git a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.10.bb b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
+similarity index 83%
+rename from meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.10.bb
+rename to meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
+index 6963f5e..8ba5ac3 100644
+--- a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.10.bb
++++ b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1c65719d42900bb81b83e8293c20a364"
+ PE = "1"
+ PR = "r2"
+ 
+-SRC_URI[md5sum] = "f1ea52debce7a18cc26b21647a00ad8b"
+-SRC_URI[sha256sum] = "2d96bcf92638b8ec5c91d379f5ec2e7b15133adeb2ba22066d48bf3239ee1bdd"
++SRC_URI[md5sum] = "e5e06eb14a608b58746bdd1c0bd7b8e3"
++SRC_URI[sha256sum] = "8ef8067312571292ccc2bbe94c41109dcf022ea5a4ec71656a83d8cce9edb0cd"
+ 
+ do_install_append () {
+     ln -sf libXaw6.so.6 ${D}${libdir}/libXaw.so.6
 -- 
-1.9.1
+1.8.4.2
 
 
