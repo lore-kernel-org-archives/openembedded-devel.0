@@ -1,27 +1,27 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 300AC75972
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id D010673CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jul 2015 08:30:24 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6N8UOl0029002
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 23 Jul 2015 09:06:31 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="98766965"
+Received: from bogon (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 23 Jul 2015 17:10:07 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6N94ckN024432
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jul 2015 01:30:24 -0700 (PDT)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Thu, 23 Jul 2015 01:30:15 -0700
+	Thu, 23 Jul 2015 17:04:38 +0800
+Received: from localhost.localdomain (10.167.226.92) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 23 Jul 2015 17:06:26 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1437102603-25983-1-git-send-email-kai.kang@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <55B0A623.1030204@windriver.com>
-Date: Thu, 23 Jul 2015 16:30:27 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.1.0
+Date: Thu, 23 Jul 2015 17:06:20 +0800
+Message-ID: <1437642380-4751-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-In-Reply-To: <1437102603-25983-1-git-send-email-kai.kang@windriver.com>
-Subject: Re: [meta-oe][PATCH 0/4] Upgrade 4 packages
+X-Originating-IP: [10.167.226.92]
+Subject: [meta-oe][PATCH] lmsensors: upgrade 3.3.5 -> 3.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,63 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jul 2015 08:30:25 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 23 Jul 2015 09:06:35 -0000
+Content-Type: text/plain
 
-On 2015年07月17日 11:09, Kai Kang wrote:
-> Kai Kang (4):
->    crash: upgrade from 7.0.9 to 7.1.2
->    liblockfile: add patch of version 1.09-6 from debian
->    lvm2: upgrade from 2.02.97 to 2.02.125
->    multipath-tools: upgrade git rev
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+---
+ .../lm_sensors/{lmsensors_3.3.5.bb => lmsensors_3.4.0.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/lm_sensors/{lmsensors_3.3.5.bb => lmsensors_3.4.0.bb} (97%)
 
-Ping?
-
-
->
->   .../liblockfile-fix-install-so-to-man-dir.patch    | 20 +++++++
->   .../liblockfile/liblockfile_1.09.bb                |  5 ++
->   .../0001-cross_add_configure_option.patch          | 34 ------------
->   .../7001force_define_architecture.patch            | 13 -----
->   .../crash/crash-7.0.9/7003cross_ranlib.patch       | 10 ----
->   .../crash/crash-7.0.9/config-site.crash-7.0.9      |  1 -
->   .../crash/0001-cross_add_configure_option.patch    | 34 ++++++++++++
->   .../crash/7001force_define_architecture.patch      | 13 +++++
->   .../crash/crash/7003cross_ranlib.patch             | 10 ++++
->   .../crash/crash/config-site.crash-7.0.9            |  1 +
->   meta-oe/recipes-kernel/crash/crash_7.0.9.bb        | 63 ----------------------
->   meta-oe/recipes-kernel/crash/crash_7.1.2.bb        | 63 ++++++++++++++++++++++
->   meta-oe/recipes-support/lvm2/lvm2.inc              |  6 +--
->   ...ace-CPPFunction-with-rl_completion_func_t.patch | 33 ------------
->   .../lvm2/0001-snapshot-check-snapshot-exists.patch | 29 ----------
->   .../lvm2/lvm2/mlock-ignore-vectors-gate_vma.patch  | 31 -----------
->   meta-oe/recipes-support/lvm2/lvm2_2.02.125.bb      |  4 ++
->   meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb       |  6 ---
->   .../multipath-tools/files/makefile_inc.patch       | 11 ++--
->   .../multipath-tools/multipath-tools_git.bb         |  8 ++-
->   20 files changed, 164 insertions(+), 231 deletions(-)
->   create mode 100644 meta-oe/recipes-extended/liblockfile/liblockfile-1.09/liblockfile-fix-install-so-to-man-dir.patch
->   delete mode 100644 meta-oe/recipes-kernel/crash/crash-7.0.9/0001-cross_add_configure_option.patch
->   delete mode 100644 meta-oe/recipes-kernel/crash/crash-7.0.9/7001force_define_architecture.patch
->   delete mode 100644 meta-oe/recipes-kernel/crash/crash-7.0.9/7003cross_ranlib.patch
->   delete mode 100644 meta-oe/recipes-kernel/crash/crash-7.0.9/config-site.crash-7.0.9
->   create mode 100644 meta-oe/recipes-kernel/crash/crash/0001-cross_add_configure_option.patch
->   create mode 100644 meta-oe/recipes-kernel/crash/crash/7001force_define_architecture.patch
->   create mode 100644 meta-oe/recipes-kernel/crash/crash/7003cross_ranlib.patch
->   create mode 100644 meta-oe/recipes-kernel/crash/crash/config-site.crash-7.0.9
->   delete mode 100644 meta-oe/recipes-kernel/crash/crash_7.0.9.bb
->   create mode 100644 meta-oe/recipes-kernel/crash/crash_7.1.2.bb
->   delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-Replace-CPPFunction-with-rl_completion_func_t.patch
->   delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-snapshot-check-snapshot-exists.patch
->   delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/mlock-ignore-vectors-gate_vma.patch
->   create mode 100644 meta-oe/recipes-support/lvm2/lvm2_2.02.125.bb
->   delete mode 100644 meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb
->
-
-
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.5.bb b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
+similarity index 97%
+rename from meta-oe/recipes-support/lm_sensors/lmsensors_3.3.5.bb
+rename to meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
+index d2cd317..66e8923 100644
+--- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.5.bb
++++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
+@@ -12,8 +12,8 @@ SRC_URI = "http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-${PV}.tar.bz2
+            file://sensord.init \
+            file://sensord.service \
+ "
+-SRC_URI[md5sum] = "da506dedceb41822e64865f6ba34828a"
+-SRC_URI[sha256sum] = "5dae6a665e1150159a93743c4ff1943a7efe02cd9d3bb12c4805e7d7adcf4fcf"
++SRC_URI[md5sum] = "c03675ae9d43d60322110c679416901a"
++SRC_URI[sha256sum] = "e0579016081a262dd23eafe1d22b41ebde78921e73a1dcef71e05e424340061f"
+ 
+ inherit update-rc.d systemd
+ 
 -- 
-Regards,
-Neil | Kai Kang
+1.8.4.2
 
 
