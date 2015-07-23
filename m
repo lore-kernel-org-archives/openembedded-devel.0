@@ -1,38 +1,40 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
-	[209.85.220.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 4485076228
+Return-Path: <vm.rod25@gmail.com>
+Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id C683B7623E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jul 2015 16:41:55 +0000 (UTC)
-Received: by qkbm65 with SMTP id m65so122645088qkb.2
+	Thu, 23 Jul 2015 20:28:43 +0000 (UTC)
+Received: by igr7 with SMTP id 7so364703igr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jul 2015 09:41:55 -0700 (PDT)
+	Thu, 23 Jul 2015 13:28:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:from:date:to:subject:user-agent:mime-version
-	:content-type; bh=Vhp17d0Dnv3Mm4cHZJtz9bQ9ZQYnekpUID5wcRFEyWM=;
-	b=IfRibtZtdoQB7AzKmdVHvc5ybcvN0bBTti6yw4WJhuo+4/R4KhCnAMeJzvtxEJT3Wd
-	aFk9hXmx158nBtuicxtuQ4e76UnhT8hPySIM3l3IoM5IYWobxcTI+pTBuLc9GVXKVfyU
-	qVOYDLdnWkELenZVPoML/32uGVinMxjRty2liS5uc6iCn6EwqY2ikOhEjCXBCZIq6JYA
-	pdQPE7O65yQqr6MUyITcObPnb2OCTtYhMI1zaRtznZUegrj8kKD7WOtCoOnyz+my0OwB
-	OpdpxxYhq0tBqimj1k8uWBmLzXfi4YEJHGg19LT1IINeki56UEaVpxvqx9kdiZqkC1Dj
-	41pA==
-X-Received: by 10.140.145.202 with SMTP id 193mr14120999qhr.33.1437669715646; 
-	Thu, 23 Jul 2015 09:41:55 -0700 (PDT)
-Received: from localhost ([179.105.243.19])
-	by smtp.gmail.com with ESMTPSA id n14sm491179qkh.31.2015.07.23.09.41.52
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 23 Jul 2015 09:41:54 -0700 (PDT)
-Message-ID: <55b11952.8e1f370a.4d4dc.35dc@mx.google.com>
-Received: by localhost (sSMTP sendmail emulation);
-	Thu, 23 Jul 2015 13:41:49 -0300
-From: "Otavio Salvador" <otavio.salvador@gmail.com>
-Date: Thu, 23 Jul 2015 13:41:49 -0300
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-User-Agent: mail v14.8.3
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=EPKV/LtYh9mTHlcFCfilbkxD3Ys9yVDBDpReppQJq2o=;
+	b=nR78e/DfY2v7pz3XSt66vPMBq7sM3XVZQYXBP73en6vqtveMziv847Mv72ucTlhW8E
+	uZJ86Whgm6AxV5D4v1XWsKHgw/4O5z7GEb+jE2s+rLm7niw56DlrRXpsFkim77cQst2L
+	SuhfnYEhU9CYHStrzhZffoO7ZLQhgE2oXkC5qQ0lmCzypyd934yjkxFvp8yqiMAzfsFl
+	BdebxzMdVdhlC2/I/vWVt0okMODhmfdDbAEgyEGnc6LZNzSc9+aJgfn71WguCGh5dCcX
+	n4Xd3jS7KFCp85FuYSwHOYx4e+e16TzrIRahOFsAZ5XIsVQNtQzn6EBqAwh/ltyGjRpc
+	GHpQ==
 MIME-Version: 1.0
-Subject: Updates to meta-browser (master) in 2015-07-23
+X-Received: by 10.107.166.72 with SMTP id p69mr16823885ioe.65.1437683323325;
+	Thu, 23 Jul 2015 13:28:43 -0700 (PDT)
+Received: by 10.50.141.228 with HTTP; Thu, 23 Jul 2015 13:28:43 -0700 (PDT)
+In-Reply-To: <3048124.JhGOlONExd@peggleto-mobl.ger.corp.intel.com>
+References: <CAK5mtexdmYF7ivs+nwa7WZSqVb8sZCq5Euvt8oK2HimiXy7PMA@mail.gmail.com>
+	<55AE8445.60302@linux.intel.com>
+	<CAK5mtexxVJ2uZeahegoJ=+8pOztcPufUHYmXWrhwy9hMzc3tLw@mail.gmail.com>
+	<3048124.JhGOlONExd@peggleto-mobl.ger.corp.intel.com>
+Date: Thu, 23 Jul 2015 15:28:43 -0500
+Message-ID: <CAK5mtezCMOyUvN9y8ds4heV-p2AN5Ndv5F-gic3BY0TKDP3sKg@mail.gmail.com>
+From: Victor Rodriguez <vm.rod25@gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Gary Thomas <gary@mlbassoc.com>,
+	Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
+Subject: Re: [yocto] Question about IMAGE_INSTALL_append and CORE_IMAGE_EXTRA_INSTALL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,27 +48,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jul 2015 16:41:56 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Thu, 23 Jul 2015 20:28:44 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello,
+On Wed, Jul 22, 2015 at 8:50 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Tuesday 21 July 2015 14:51:55 Victor Rodriguez wrote:
+>> On Tue, Jul 21, 2015 at 12:41 PM, Leonardo Sandoval
+>>
+>> <leonardo.sandoval.gonzalez@linux.intel.com> wrote:
+>> > On 07/21/2015 10:45 AM, Victor Rodriguez wrote:
+>> >> On Tue, Jul 21, 2015 at 10:36 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+>> >>> On 2015-07-21 09:26, Victor Rodriguez wrote:
+>> >>>> Hi team
+>> >>>>
+>> >>>> I have a question , according to documentation there is a difference
+>> >>>> between
+>> >>>>
+>> >>>> IMAGE_INSTALL_append
+>> >>>>
+>> >>>> and
+>> >>>>
+>> >>>> CORE_IMAGE_EXTRA_INSTALL
+>> >>>>
+>> >>>> Specifies the list of packages to be added to the image. You should
+>> >>>> only set this variable in the local.conf configuration file found in
+>> >>>> the Build Directory.
+>> >>>>
+>> >>>> When I use the second one and try to build a core-image-minimal-xfce
+>> >>>> bitbake does not install what I wanted in my image . I had a really
+>> >>>> hard time few weekends ago because of this.
+>> >>>>
+>> >>>> I wonder If I am missing something or if this is a bug
+>> >>>
+>> >>> The core-image-minimal-xfce recipe does not "play nice" with
+>> >>> the core-image class and is not respecting CORE_IMAGE_EXTRA_INSTALL.
+>> >>>
+>> >>> I think this should be filed as a bug (and feel free to suggest a patch)
+>> >>>
+>> >>> BTW, this question should really be on the OpenEmbedded development
+>> >>> list.
+>> >>
+>> >> Thanks Gary
+>> >>
+>> >> I will submit the BUG , do you know the Bugzila where I should submit it
+>> >> ?
+>> >
+>> > Victor, you can file a bug at https://bugzilla.yoctoproject.org
+>>
+>> I think we have one already
+>>
+>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=7616
+>
+> That's not the right bug.
+>
+> If the suggestion is that core-image-minimal-xfce needs to be fixed, that's not
+> a bug we would track in the Yocto Project bugzilla (since the Yocto Project is
+> not actively involved in maintaining meta-xfce).
+>
+> Cheers,
+> Paul
 
-I pushed following updates:
+Hi Paul
 
-commit 4b27058a8275a5310161459c9bb8f4c52a77762c (HEAD -> master, origin/master, origin/HEAD)
-Author: Carlos Alberto Lopez Perez <clopez@igalia.com>
-Date:   Wed Jul 22 18:58:00 2015 +0200
+Where can I track this ?
 
-    chromium: Include chromium.inc before appending to DEPENDS
-    
-    Otherwise chromium.inc will overwrite the list of DEPENDS.
-    
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
-Regards,
-
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> --
+>
+> Paul Eggleton
+> Intel Open Source Technology Centre
 
