@@ -1,31 +1,27 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D5187616D
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D66660962
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jul 2015 09:21:33 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga102.jf.intel.com with ESMTP; 24 Jul 2015 02:21:31 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.15,537,1432623600"; d="scan'208";a="529505499"
-Received: from poconnor-mobl3.ger.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.20.237])
-	by FMSMGA003.fm.intel.com with ESMTP; 24 Jul 2015 02:21:27 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Victor Rodriguez <vm.rod25@gmail.com>
-Date: Fri, 24 Jul 2015 10:21:26 +0100
-Message-ID: <3121111.SBSyRjc1Bo@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.9 (Linux/4.0.8-200.fc21.x86_64; KDE/4.14.9; x86_64; ; )
-In-Reply-To: <CAK5mtezCMOyUvN9y8ds4heV-p2AN5Ndv5F-gic3BY0TKDP3sKg@mail.gmail.com>
-References: <CAK5mtexdmYF7ivs+nwa7WZSqVb8sZCq5Euvt8oK2HimiXy7PMA@mail.gmail.com>
-	<3048124.JhGOlONExd@peggleto-mobl.ger.corp.intel.com>
-	<CAK5mtezCMOyUvN9y8ds4heV-p2AN5Ndv5F-gic3BY0TKDP3sKg@mail.gmail.com>
+	Fri, 24 Jul 2015 09:52:57 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="98815255"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 24 Jul 2015 17:56:33 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6O9p4oO021292
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Jul 2015 17:51:04 +0800
+Received: from localhost.localdomain (10.167.226.92) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Fri, 24 Jul 2015 17:52:53 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 24 Jul 2015 17:52:46 +0800
+Message-ID: <1437731566-7363-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Gary Thomas <gary@mlbassoc.com>,
-	Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
-Subject: Re: [yocto] Question about IMAGE_INSTALL_append and CORE_IMAGE_EXTRA_INSTALL
+X-Originating-IP: [10.167.226.92]
+Subject: [meta-oe][PATCH] opensc: upgrade 0.14.0 -> 0.15.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,85 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jul 2015 09:21:36 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 24 Jul 2015 09:53:00 -0000
+Content-Type: text/plain
 
-On Thursday 23 July 2015 15:28:43 Victor Rodriguez wrote:
-> On Wed, Jul 22, 2015 at 8:50 AM, Paul Eggleton
-> <paul.eggleton@linux.intel.com> wrote:
-> > On Tuesday 21 July 2015 14:51:55 Victor Rodriguez wrote:
-> >> On Tue, Jul 21, 2015 at 12:41 PM, Leonardo Sandoval
-> >> 
-> >> <leonardo.sandoval.gonzalez@linux.intel.com> wrote:
-> >> > On 07/21/2015 10:45 AM, Victor Rodriguez wrote:
-> >> >> On Tue, Jul 21, 2015 at 10:36 AM, Gary Thomas <gary@mlbassoc.com> 
-wrote:
-> >> >>> On 2015-07-21 09:26, Victor Rodriguez wrote:
-> >> >>>> Hi team
-> >> >>>> 
-> >> >>>> I have a question , according to documentation there is a difference
-> >> >>>> between
-> >> >>>> 
-> >> >>>> IMAGE_INSTALL_append
-> >> >>>> 
-> >> >>>> and
-> >> >>>> 
-> >> >>>> CORE_IMAGE_EXTRA_INSTALL
-> >> >>>> 
-> >> >>>> Specifies the list of packages to be added to the image. You should
-> >> >>>> only set this variable in the local.conf configuration file found in
-> >> >>>> the Build Directory.
-> >> >>>> 
-> >> >>>> When I use the second one and try to build a core-image-minimal-xfce
-> >> >>>> bitbake does not install what I wanted in my image . I had a really
-> >> >>>> hard time few weekends ago because of this.
-> >> >>>> 
-> >> >>>> I wonder If I am missing something or if this is a bug
-> >> >>> 
-> >> >>> The core-image-minimal-xfce recipe does not "play nice" with
-> >> >>> the core-image class and is not respecting CORE_IMAGE_EXTRA_INSTALL.
-> >> >>> 
-> >> >>> I think this should be filed as a bug (and feel free to suggest a
-> >> >>> patch)
-> >> >>> 
-> >> >>> BTW, this question should really be on the OpenEmbedded development
-> >> >>> list.
-> >> >> 
-> >> >> Thanks Gary
-> >> >> 
-> >> >> I will submit the BUG , do you know the Bugzila where I should submit
-> >> >> it
-> >> >> ?
-> >> > 
-> >> > Victor, you can file a bug at https://bugzilla.yoctoproject.org
-> >> 
-> >> I think we have one already
-> >> 
-> >> https://bugzilla.yoctoproject.org/show_bug.cgi?id=7616
-> > 
-> > That's not the right bug.
-> > 
-> > If the suggestion is that core-image-minimal-xfce needs to be fixed,
-> > that's not a bug we would track in the Yocto Project bugzilla (since the
-> > Yocto Project is not actively involved in maintaining meta-xfce).
-> > 
-> > Cheers,
-> > Paul
-> 
-> Hi Paul
-> 
-> Where can I track this ?
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-support/opensc/{opensc_0.14.0.bb => opensc_0.15.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/opensc/{opensc_0.14.0.bb => opensc_0.15.0.bb} (89%)
 
-Layers under meta-openembedded don't have a bug tracker that I know of. 
-Honestly for something as simple as this I'd just send a patch to the 
-openembedded-devel mailing list (with [meta-xfce] in the subject).
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-support/opensc/opensc_0.14.0.bb b/meta-oe/recipes-support/opensc/opensc_0.15.0.bb
+similarity index 89%
+rename from meta-oe/recipes-support/opensc/opensc_0.14.0.bb
+rename to meta-oe/recipes-support/opensc/opensc_0.15.0.bb
+index 87ea2ad..a11b3d8 100644
+--- a/meta-oe/recipes-support/opensc/opensc_0.14.0.bb
++++ b/meta-oe/recipes-support/opensc/opensc_0.15.0.bb
+@@ -11,8 +11,8 @@ SECTION = "System Environment/Libraries"
+ 
+ SRC_URI = "${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz"
+ 
+-SRC_URI[md5sum] = "1ee31dc2e89860458fd984e0cac9795e"
+-SRC_URI[sha256sum] = "ffe8bcc704f2ab9a05c6781bc815f00eaf75cba0a1bd21e3142b9194a7bed5c9"
++SRC_URI[md5sum] = "f266024e5a9630821ffa0ac14f72e369"
++SRC_URI[sha256sum] = "8f8f8cf52e0252334e4dfdccca829b876a3de6340deb772aa0bfe0c0cc10eaf5"
+ 
+ S = "${WORKDIR}/OpenSC-${PV}"
+ DEPENDS = "openct pcsc-lite virtual/libiconv openssl"
 -- 
+1.8.4.2
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
