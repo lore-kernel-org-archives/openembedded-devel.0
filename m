@@ -1,27 +1,31 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D17A875876
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D5187616D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jul 2015 08:38:01 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t6O8c1Pb021793
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jul 2015 01:38:01 -0700 (PDT)
-Received: from [128.224.162.176] (128.224.162.176) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.235.1;
-	Fri, 24 Jul 2015 01:37:50 -0700
-Message-ID: <55B1F967.7040904@windriver.com>
-Date: Fri, 24 Jul 2015 16:37:59 +0800
-From: wenzong fan <wenzong.fan@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+	Fri, 24 Jul 2015 09:21:33 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga102.jf.intel.com with ESMTP; 24 Jul 2015 02:21:31 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.15,537,1432623600"; d="scan'208";a="529505499"
+Received: from poconnor-mobl3.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.20.237])
+	by FMSMGA003.fm.intel.com with ESMTP; 24 Jul 2015 02:21:27 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Victor Rodriguez <vm.rod25@gmail.com>
+Date: Fri, 24 Jul 2015 10:21:26 +0100
+Message-ID: <3121111.SBSyRjc1Bo@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.9 (Linux/4.0.8-200.fc21.x86_64; KDE/4.14.9; x86_64; ; )
+In-Reply-To: <CAK5mtezCMOyUvN9y8ds4heV-p2AN5Ndv5F-gic3BY0TKDP3sKg@mail.gmail.com>
+References: <CAK5mtexdmYF7ivs+nwa7WZSqVb8sZCq5Euvt8oK2HimiXy7PMA@mail.gmail.com>
+	<3048124.JhGOlONExd@peggleto-mobl.ger.corp.intel.com>
+	<CAK5mtezCMOyUvN9y8ds4heV-p2AN5Ndv5F-gic3BY0TKDP3sKg@mail.gmail.com>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1433486098-9766-1-git-send-email-wenzong.fan@windriver.com>
-In-Reply-To: <1433486098-9766-1-git-send-email-wenzong.fan@windriver.com>
-Subject: Re: [PATCH][meta-oe] mercurial-native: update from 3.0.1 to 3.4.1
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Gary Thomas <gary@mlbassoc.com>,
+	Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
+Subject: Re: [yocto] Question about IMAGE_INSTALL_append and CORE_IMAGE_EXTRA_INSTALL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,89 +39,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jul 2015 08:38:01 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 Jul 2015 09:21:36 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Ping ...
+On Thursday 23 July 2015 15:28:43 Victor Rodriguez wrote:
+> On Wed, Jul 22, 2015 at 8:50 AM, Paul Eggleton
+> <paul.eggleton@linux.intel.com> wrote:
+> > On Tuesday 21 July 2015 14:51:55 Victor Rodriguez wrote:
+> >> On Tue, Jul 21, 2015 at 12:41 PM, Leonardo Sandoval
+> >> 
+> >> <leonardo.sandoval.gonzalez@linux.intel.com> wrote:
+> >> > On 07/21/2015 10:45 AM, Victor Rodriguez wrote:
+> >> >> On Tue, Jul 21, 2015 at 10:36 AM, Gary Thomas <gary@mlbassoc.com> 
+wrote:
+> >> >>> On 2015-07-21 09:26, Victor Rodriguez wrote:
+> >> >>>> Hi team
+> >> >>>> 
+> >> >>>> I have a question , according to documentation there is a difference
+> >> >>>> between
+> >> >>>> 
+> >> >>>> IMAGE_INSTALL_append
+> >> >>>> 
+> >> >>>> and
+> >> >>>> 
+> >> >>>> CORE_IMAGE_EXTRA_INSTALL
+> >> >>>> 
+> >> >>>> Specifies the list of packages to be added to the image. You should
+> >> >>>> only set this variable in the local.conf configuration file found in
+> >> >>>> the Build Directory.
+> >> >>>> 
+> >> >>>> When I use the second one and try to build a core-image-minimal-xfce
+> >> >>>> bitbake does not install what I wanted in my image . I had a really
+> >> >>>> hard time few weekends ago because of this.
+> >> >>>> 
+> >> >>>> I wonder If I am missing something or if this is a bug
+> >> >>> 
+> >> >>> The core-image-minimal-xfce recipe does not "play nice" with
+> >> >>> the core-image class and is not respecting CORE_IMAGE_EXTRA_INSTALL.
+> >> >>> 
+> >> >>> I think this should be filed as a bug (and feel free to suggest a
+> >> >>> patch)
+> >> >>> 
+> >> >>> BTW, this question should really be on the OpenEmbedded development
+> >> >>> list.
+> >> >> 
+> >> >> Thanks Gary
+> >> >> 
+> >> >> I will submit the BUG , do you know the Bugzila where I should submit
+> >> >> it
+> >> >> ?
+> >> > 
+> >> > Victor, you can file a bug at https://bugzilla.yoctoproject.org
+> >> 
+> >> I think we have one already
+> >> 
+> >> https://bugzilla.yoctoproject.org/show_bug.cgi?id=7616
+> > 
+> > That's not the right bug.
+> > 
+> > If the suggestion is that core-image-minimal-xfce needs to be fixed,
+> > that's not a bug we would track in the Yocto Project bugzilla (since the
+> > Yocto Project is not actively involved in maintaining meta-xfce).
+> > 
+> > Cheers,
+> > Paul
+> 
+> Hi Paul
+> 
+> Where can I track this ?
 
-On 06/05/2015 02:34 PM, wenzong.fan@windriver.com wrote:
-> From: Wenzong Fan <wenzong.fan@windriver.com>
->
-> Update mercurial to fix CVE-2014-9462:
->    http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9462
->
-> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-> ---
->   .../mercurial/mercurial-native_3.0.1.bb            | 26 ----------------------
->   .../mercurial/mercurial-native_3.4.1.bb            | 26 ++++++++++++++++++++++
->   2 files changed, 26 insertions(+), 26 deletions(-)
->   delete mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
->   create mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb
->
-> diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
-> deleted file mode 100644
-> index 9a5eebe..0000000
-> --- a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
-> +++ /dev/null
-> @@ -1,26 +0,0 @@
-> -SUMMARY = "The Mercurial distributed SCM"
-> -HOMEPAGE = "http://mercurial.selenic.com/"
-> -SECTION = "console/utils"
-> -LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> -DEPENDS = "python-native"
-> -
-> -SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
-> -SRC_URI[md5sum] = "15de301a673b77f839325dba10ed4fc0"
-> -SRC_URI[sha256sum] = "36e48b59a84ef5a222d06596971e955ac8217e56b076dfb94c8ce5a0c29fd705"
-> -
-> -S = "${WORKDIR}/mercurial-${PV}"
-> -
-> -inherit native
-> -
-> -EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
-> -    BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} PREFIX=${prefix}"
-> -
-> -do_configure_append () {
-> -    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
-> -}
-> -
-> -do_install () {
-> -    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
-> -}
-> -
-> diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb
-> new file mode 100644
-> index 0000000..303a032
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb
-> @@ -0,0 +1,26 @@
-> +SUMMARY = "The Mercurial distributed SCM"
-> +HOMEPAGE = "http://mercurial.selenic.com/"
-> +SECTION = "console/utils"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> +DEPENDS = "python-native"
-> +
-> +SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
-> +SRC_URI[md5sum] = "65783a60aefb46a11296b587e9403537"
-> +SRC_URI[sha256sum] = "7a8acf7329beda38ceea29c689212574d9a6bfffe24cf565015ea0066f7cee3f"
-> +
-> +S = "${WORKDIR}/mercurial-${PV}"
-> +
-> +inherit native
-> +
-> +EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
-> +    BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} PREFIX=${prefix}"
-> +
-> +do_configure_append () {
-> +    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
-> +}
-> +
-> +do_install () {
-> +    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
-> +}
-> +
->
+Layers under meta-openembedded don't have a bug tracker that I know of. 
+Honestly for something as simple as this I'd just send a patch to the 
+openembedded-devel mailing list (with [meta-xfce] in the subject).
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
