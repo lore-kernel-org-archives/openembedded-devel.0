@@ -1,29 +1,40 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id D679F75BD3
+Return-Path: <andreas.baak@gmail.com>
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id D8707605D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jul 2015 12:26:12 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id E6A0FF8119A; Sat, 25 Jul 2015 06:26:10 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=10.0 tests=ALL_TRUSTED,BAYES_00,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 7121DF81188;
-	Sat, 25 Jul 2015 06:26:10 -0600 (MDT)
-Message-ID: <55B38068.6000706@mlbassoc.com>
-Date: Sat, 25 Jul 2015 06:26:16 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
+	Sun, 26 Jul 2015 11:05:23 +0000 (UTC)
+Received: by wicgb10 with SMTP id gb10so77030124wic.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 26 Jul 2015 04:05:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:message-id:date:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=1ymORoZ5sjLov51McESdwSu338qqWwvZ1bMskCnzno8=;
+	b=F3KBPNC3iiu0HRzGMX7NtVJaJVz+j6t5EtUF4xO4n/RsnSr+iK0ZM5pjl9bcu/Th33
+	FzQVT35GO+ITcZnHO6Za4C6k89GBQRS4S1oNHRCK2h2K4qWBiWgGRIj6muYBjkBVQR5W
+	uK5bXzJ/n2swMIbcZ/VQKABi811iQ1KCvwJJQ6vybg1Cm45zfns5E5ivinzoJl/s1NnL
+	U1lZJ7uZmGnN2LF2s++0aT66lik9IRZBaQAqBpLyPysG0Ob9xCkdQ0ynCQrcvUPyjiFc
+	0iJg4HIJPwnjUyfhA1Fm3vsveEmYxw2P29PcXQwtAnSFwlniW4TUudLPX6csf0duliG6
+	OzsQ==
+X-Received: by 10.180.182.112 with SMTP id ed16mr13690748wic.19.1437908722594; 
+	Sun, 26 Jul 2015 04:05:22 -0700 (PDT)
+Received: from [192.168.178.33]
+	(ipservice-092-211-162-020.092.211.pools.vodafone-ip.de.
+	[92.211.162.20]) by smtp.googlemail.com with ESMTPSA id
+	fz16sm7744786wic.3.2015.07.26.04.05.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 26 Jul 2015 04:05:22 -0700 (PDT)
+From: Andreas Baak <andreas.baak@gmail.com>
+X-Google-Original-From: Andreas Baak <Andreas.Baak@gmail.com>
+Message-ID: <55B4BEF1.8050901@gmail.com>
+Date: Sun, 26 Jul 2015 13:05:21 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <CAK5mtexdmYF7ivs+nwa7WZSqVb8sZCq5Euvt8oK2HimiXy7PMA@mail.gmail.com>	<55AE6705.5040907@mlbassoc.com>
-	<CAMKF1sowuLL2i+uWVBC4M0j2YY8aCCw=hhGkA_oMk8G338X6Eg@mail.gmail.com>
-In-Reply-To: <CAMKF1sowuLL2i+uWVBC4M0j2YY8aCCw=hhGkA_oMk8G338X6Eg@mail.gmail.com>
-Subject: Re: [yocto] Question about IMAGE_INSTALL_append and CORE_IMAGE_EXTRA_INSTALL
+Subject: [meta-oe][fido] Pull request: ligphoto update to v2.5.8 + new recipe for gphoto2 v2.5.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,62 +48,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jul 2015 12:26:14 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
+X-List-Received-Date: Sun, 26 Jul 2015 11:05:27 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 2015-07-24 18:37, Khem Raj wrote:
-> On Tue, Jul 21, 2015 at 8:36 AM, Gary Thomas <gary@mlbassoc.com> wrote:
->> On 2015-07-21 09:26, Victor Rodriguez wrote:
->>>
->>> Hi team
->>>
->>> I have a question , according to documentation there is a difference
->>> between
->>>
->>> IMAGE_INSTALL_append
->>>
->>> and
->>>
->>> CORE_IMAGE_EXTRA_INSTALL
->>>
->>> Specifies the list of packages to be added to the image. You should
->>> only set this variable in the local.conf configuration file found in
->>> the Build Directory.
->>>
->>> When I use the second one and try to build a core-image-minimal-xfce
->>> bitbake does not install what I wanted in my image . I had a really
->>> hard time few weekends ago because of this.
->>>
->>> I wonder If I am missing something or if this is a bug
->>
->>
->> The core-image-minimal-xfce recipe does not "play nice" with
->> the core-image class and is not respecting CORE_IMAGE_EXTRA_INSTALL.
->
->
-> its not required to.
+Hi,
 
-Maybe it's not required, but since that is the recommended way to
-add packages to an image, it probably should.  As you can see from
-the original question, the non-standard behaviour is confusing,
-certainly to new users.  It would only take a little reorganization
-to make it work as expected.
+I'm using github since one of the paches has got a size of 2.5 MB due to 
+regenerated config files.
 
->
->>
->> I think this should be filed as a bug (and feel free to suggest a patch)
->>
->
-> No. Its not OE-Core or yocto bug
->
->> BTW, this question should really be on the OpenEmbedded development list.
->
-> its valid for meta-xfce only.
+https://github.com/openembedded/meta-openembedded/pull/15
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Cheers,
+Andreas
 
