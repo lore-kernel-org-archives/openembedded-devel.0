@@ -1,29 +1,40 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 502D576298
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id D594B601F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jul 2015 09:18:56 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="98927230"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 27 Jul 2015 17:22:28 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6R9H0XV015051
+	Mon, 27 Jul 2015 12:00:05 +0000 (UTC)
+Received: by wicgb10 with SMTP id gb10so108823859wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jul 2015 17:17:00 +0800
-Received: from localhost.localdomain (10.167.226.92) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 27 Jul 2015 17:18:50 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 27 Jul 2015 17:18:39 +0800
-Message-ID: <1437988719-2641-3-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1437988719-2641-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-References: <1437988719-2641-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	Mon, 27 Jul 2015 05:00:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=OiLEOAVF+VhQQiZATQuyVm9Jnc4d/z3zAZDbi5E/GgU=;
+	b=FFCVO315THJL5rup7ZeJ+TXCg1eLwz2qorXJXfW/zPLpWNfKqOCQjTIMnYZ/OePrJi
+	qpw09gAJTo/3nrkFp/B2IxBkk+uY1S8v2jbW6aBG/WYSd+xivRLbfMELy563GUJbLHyg
+	tth4ntnJ9nAcOL26HeEFQJWiCtSwZzkGAtq01hFa7r3qoNSBd0C9oKngSC9x7DzDt1fn
+	HQzr4A8ouqhiXvHtzMF+X5JHTRFzUyRj4nYIIBQE4eau2k2OgGufRUncHpQQoq5nBmFS
+	KxlP4o/MHxM4+rLfHTDK9xAVwE6+3hgcvI2Z338tB5CsNuLYSrwaEaHGTU6JlVE0kWG6
+	yOrg==
+X-Received: by 10.194.238.193 with SMTP id vm1mr53423139wjc.57.1437998405472; 
+	Mon, 27 Jul 2015 05:00:05 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	gt10sm13265395wib.20.2015.07.27.05.00.04
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 27 Jul 2015 05:00:04 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 27 Jul 2015 14:00:09 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150727120009.GA2442@jama>
+References: <1437591250-9247-1-git-send-email-jslater@windriver.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.92]
-Subject: [meta-networking][PATCH 3/3] openvpn: upgrade 2.3.6 -> 2.3.7
+In-Reply-To: <1437591250-9247-1-git-send-email-jslater@windriver.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-networking][PATCH 1/1] ypbind-mt: add dependency but keep as broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,34 +48,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jul 2015 09:18:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 27 Jul 2015 12:00:06 -0000
+X-Groupsio-MsgNum: 56389
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="XsQoSWH+UP9D9v3l"
+Content-Disposition: inline
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- .../recipes-support/openvpn/{openvpn_2.3.6.bb => openvpn_2.3.7.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/openvpn/{openvpn_2.3.6.bb => openvpn_2.3.7.bb} (95%)
+--XsQoSWH+UP9D9v3l
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.7.bb
-similarity index 95%
-rename from meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb
-rename to meta-networking/recipes-support/openvpn/openvpn_2.3.7.bb
-index 105e369..eaca395 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.7.bb
-@@ -12,8 +12,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/openvpn-${PV}.tar.gz \
-            file://openvpn@.service \
-            file://openvpn-volatile.conf"
- 
--SRC_URI[md5sum] = "6ca03fe0fd093e0d01601abee808835c"
--SRC_URI[sha256sum] = "7baed2ff39c12e1a1a289ec0b46fcc49ff094ca58b8d8d5f29b36ac649ee5b26"
-+SRC_URI[md5sum] = "070bca95e478f88dff9ec6a221e2c3f7"
-+SRC_URI[sha256sum] = "1f02a4cd6aeb6250ca9311560875b10ce8957a3c9101a8005bd1e17e5b03146e"
- 
- SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
- SYSTEMD_AUTO_ENABLE = "disable"
--- 
-1.8.4.2
+On Wed, Jul 22, 2015 at 11:54:10AM -0700, Joe Slater wrote:
+> We will need the conditional dependency on systemd.  It is
 
+> not a good idea to use PNBLACKLIST in a recipe, and the
 
+Why?
+
+> version here does not suppress lib32-ypbind-mt.
+>=20
+> Signed-off-by: Joe Slater <jslater@windriver.com>
+> ---
+>  recipes-support/nis/ypbind-mt_2.2.bb |    6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/meta-=
+networking/recipes-support/nis/ypbind-mt_2.2.bb
+> index 4f8bf48..359b020 100644
+> --- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+> +++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+> @@ -15,10 +15,12 @@ of known secure NIS server (/etc/yp.conf) Binds to \
+>  the server which answered as first. \
+>  "
+>  HOMEPAGE =3D "http://www.linux-nis.org/nis/ypbind-mt/index.html"
+> -DEPENDS =3D "yp-tools"
+> +DEPENDS =3D "yp-tools ${@base_contains('DISTRO_FEATURES', 'systemd', 'sy=
+stemd', '', d)}"
+>  PROVIDES +=3D "ypbind"
+> =20
+> -PNBLACKLIST[ypbind-mt] ?=3D "BROKEN: Depends on broken yp-tools"
+> +python () {
+> +    raise bb.parse.SkipPackage("BROKEN: Depends on broken yp-tools")
+> +}
+> =20
+>  SRC_URI =3D "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
+>             file://ypbind-yocto.init \
+> --=20
+> 1.7.9.5
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--XsQoSWH+UP9D9v3l
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlW2HUgACgkQN1Ujt2V2gBwSoQCeK/msbR2uXenuvJc2ntlDOvfL
+ThYAniD2nN0bKB171uiOd9NOnlZnUmzM
+=XLp0
+-----END PGP SIGNATURE-----
+
+--XsQoSWH+UP9D9v3l--
