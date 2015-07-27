@@ -1,40 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id D594B601F7
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D2BC601F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jul 2015 12:00:05 +0000 (UTC)
-Received: by wicgb10 with SMTP id gb10so108823859wic.1
+	Mon, 27 Jul 2015 15:31:14 +0000 (UTC)
+Received: by pdjr16 with SMTP id r16so54758424pdj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jul 2015 05:00:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=OiLEOAVF+VhQQiZATQuyVm9Jnc4d/z3zAZDbi5E/GgU=;
-	b=FFCVO315THJL5rup7ZeJ+TXCg1eLwz2qorXJXfW/zPLpWNfKqOCQjTIMnYZ/OePrJi
-	qpw09gAJTo/3nrkFp/B2IxBkk+uY1S8v2jbW6aBG/WYSd+xivRLbfMELy563GUJbLHyg
-	tth4ntnJ9nAcOL26HeEFQJWiCtSwZzkGAtq01hFa7r3qoNSBd0C9oKngSC9x7DzDt1fn
-	HQzr4A8ouqhiXvHtzMF+X5JHTRFzUyRj4nYIIBQE4eau2k2OgGufRUncHpQQoq5nBmFS
-	KxlP4o/MHxM4+rLfHTDK9xAVwE6+3hgcvI2Z338tB5CsNuLYSrwaEaHGTU6JlVE0kWG6
-	yOrg==
-X-Received: by 10.194.238.193 with SMTP id vm1mr53423139wjc.57.1437998405472; 
-	Mon, 27 Jul 2015 05:00:05 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	gt10sm13265395wib.20.2015.07.27.05.00.04
+	Mon, 27 Jul 2015 08:31:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc:content-type;
+	bh=/02m0jPKkX5u2v5Vrq99dV4MLZZWuVcSpffU9o9JNrE=;
+	b=JfC+A3MCBCHgZLiNalM7CZmZLtqVZAnKzjsHLuKat0nWdWw08rsMwdj9wGCBYfj9Nj
+	cHoLuklvsNfKMGfgrmn/ePL9F5pNwSUXdxJIoUnKfHFaQ8RzGxDo+wqoS/eNQst1IeME
+	A6504SWdAqhUqeHSgJx2kAw07IAyQCQrMKHJHnFWhkoARbID7iNBRyzuIhcKZp84ZkAK
+	pHJ5pVSERd5cxN0QKLOuHTFyGzeJP7H83oTVhB7lUSJ1BRKqPKG7vzLBepxXpYo1HDAz
+	DotW4adj+xay3KR6eTthi9kXRvw39yV8I5pQitSpp++RyzC2FbspZKT2SebOER8K4oyY
+	VCAA==
+X-Gm-Message-State: ALoCoQmjj9vaDG2K9XQ9Zo+F3Ixnw7w3qAD5GkiZYt4AehpMc98Oh+MkbT57zK/jRobxXiTLEfCx
+X-Received: by 10.70.133.170 with SMTP id pd10mr69243262pdb.127.1438011074957; 
+	Mon, 27 Jul 2015 08:31:14 -0700 (PDT)
+Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com.
+	[209.85.192.174]) by smtp.gmail.com with ESMTPSA id
+	fv5sm30142526pdb.19.2015.07.27.08.31.12
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 27 Jul 2015 05:00:04 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 27 Jul 2015 14:00:09 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150727120009.GA2442@jama>
-References: <1437591250-9247-1-git-send-email-jslater@windriver.com>
+	Mon, 27 Jul 2015 08:31:13 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by pdbbh15 with SMTP id bh15so53828940pdb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Jul 2015 08:31:12 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1437591250-9247-1-git-send-email-jslater@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH 1/1] ypbind-mt: add dependency but keep as broken
+X-Received: by 10.70.20.196 with SMTP id p4mr69490196pde.58.1438011072270;
+	Mon, 27 Jul 2015 08:31:12 -0700 (PDT)
+Received: by 10.70.59.105 with HTTP; Mon, 27 Jul 2015 08:31:12 -0700 (PDT)
+In-Reply-To: <CY1PR0301MB0699C4D524869A626183ED30F78E0@CY1PR0301MB0699.namprd03.prod.outlook.com>
+References: <CY1PR0301MB0699C4D524869A626183ED30F78E0@CY1PR0301MB0699.namprd03.prod.outlook.com>
+Date: Mon, 27 Jul 2015 12:31:12 -0300
+Message-ID: <CAP9ODKreAXzxtCMXD0USfJicVK2be4Dci0MDJbMVos0dXEUo2Q@mail.gmail.com>
+To: Yu Zongchun <Zongchun.Yu@freescale.com>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	"akuser808@gmail.com" <akuser808@gmail.com>
+Subject: Re: Require backport two patches to fido branch of meta-openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,74 +58,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jul 2015 12:00:06 -0000
-X-Groupsio-MsgNum: 56389
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XsQoSWH+UP9D9v3l"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 27 Jul 2015 15:31:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
---XsQoSWH+UP9D9v3l
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello Martin,
 
-On Wed, Jul 22, 2015 at 11:54:10AM -0700, Joe Slater wrote:
-> We will need the conditional dependency on systemd.  It is
+On Mon, Jul 27, 2015 at 12:20 PM, Yu Zongchun <Zongchun.Yu@freescale.com> wrote:
+> Can you help to backport the following two patches to fido branch of
+> meta-openembedded?
+>
+> http://cgit.openembedded.org/meta-openembedded/commit/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb?id=addfb0b786c90333a70873bb715d84c97412b3c9
+>
+> http://cgit.openembedded.org/meta-openembedded/commit/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb?id=4a4b9d25db86111872c73daaa2116addfb3d26e1
 
-> not a good idea to use PNBLACKLIST in a recipe, and the
+Please backport the two commits above.
 
-Why?
+Thanks in advance,
 
-> version here does not suppress lib32-ypbind-mt.
->=20
-> Signed-off-by: Joe Slater <jslater@windriver.com>
-> ---
->  recipes-support/nis/ypbind-mt_2.2.bb |    6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/meta-=
-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> index 4f8bf48..359b020 100644
-> --- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> +++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> @@ -15,10 +15,12 @@ of known secure NIS server (/etc/yp.conf) Binds to \
->  the server which answered as first. \
->  "
->  HOMEPAGE =3D "http://www.linux-nis.org/nis/ypbind-mt/index.html"
-> -DEPENDS =3D "yp-tools"
-> +DEPENDS =3D "yp-tools ${@base_contains('DISTRO_FEATURES', 'systemd', 'sy=
-stemd', '', d)}"
->  PROVIDES +=3D "ypbind"
-> =20
-> -PNBLACKLIST[ypbind-mt] ?=3D "BROKEN: Depends on broken yp-tools"
-> +python () {
-> +    raise bb.parse.SkipPackage("BROKEN: Depends on broken yp-tools")
-> +}
-> =20
->  SRC_URI =3D "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
->             file://ypbind-yocto.init \
-> --=20
-> 1.7.9.5
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---XsQoSWH+UP9D9v3l
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlW2HUgACgkQN1Ujt2V2gBwSoQCeK/msbR2uXenuvJc2ntlDOvfL
-ThYAniD2nN0bKB171uiOd9NOnlZnUmzM
-=XLp0
------END PGP SIGNATURE-----
-
---XsQoSWH+UP9D9v3l--
