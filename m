@@ -1,40 +1,24 @@
-Return-Path: <andreas.baak@gmail.com>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id D8707605D2
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 80214605D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Jul 2015 11:05:23 +0000 (UTC)
-Received: by wicgb10 with SMTP id gb10so77030124wic.1
+	Mon, 27 Jul 2015 02:28:38 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t6R2SdG5013960
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Jul 2015 04:05:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:message-id:date:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=1ymORoZ5sjLov51McESdwSu338qqWwvZ1bMskCnzno8=;
-	b=F3KBPNC3iiu0HRzGMX7NtVJaJVz+j6t5EtUF4xO4n/RsnSr+iK0ZM5pjl9bcu/Th33
-	FzQVT35GO+ITcZnHO6Za4C6k89GBQRS4S1oNHRCK2h2K4qWBiWgGRIj6muYBjkBVQR5W
-	uK5bXzJ/n2swMIbcZ/VQKABi811iQ1KCvwJJQ6vybg1Cm45zfns5E5ivinzoJl/s1NnL
-	U1lZJ7uZmGnN2LF2s++0aT66lik9IRZBaQAqBpLyPysG0Ob9xCkdQ0ynCQrcvUPyjiFc
-	0iJg4HIJPwnjUyfhA1Fm3vsveEmYxw2P29PcXQwtAnSFwlniW4TUudLPX6csf0duliG6
-	OzsQ==
-X-Received: by 10.180.182.112 with SMTP id ed16mr13690748wic.19.1437908722594; 
-	Sun, 26 Jul 2015 04:05:22 -0700 (PDT)
-Received: from [192.168.178.33]
-	(ipservice-092-211-162-020.092.211.pools.vodafone-ip.de.
-	[92.211.162.20]) by smtp.googlemail.com with ESMTPSA id
-	fz16sm7744786wic.3.2015.07.26.04.05.21
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 26 Jul 2015 04:05:22 -0700 (PDT)
-From: Andreas Baak <andreas.baak@gmail.com>
-X-Google-Original-From: Andreas Baak <Andreas.Baak@gmail.com>
-Message-ID: <55B4BEF1.8050901@gmail.com>
-Date: Sun, 26 Jul 2015 13:05:21 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+	Sun, 26 Jul 2015 19:28:39 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Sun, 26 Jul 2015 19:28:24 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 27 Jul 2015 10:26:28 +0800
+Message-ID: <1437963988-8923-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][fido] Pull request: ligphoto update to v2.5.8 + new recipe for gphoto2 v2.5.8
+Subject: [PATCH][meta-networking] strongswan: upgrade to 5.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,17 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Jul 2015 11:05:27 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 27 Jul 2015 02:28:39 -0000
+Content-Type: text/plain
 
-Hi,
+From: Roy Li <rongqing.li@windriver.com>
 
-I'm using github since one of the paches has got a size of 2.5 MB due to 
-regenerated config files.
+5.3.1 fixed the CVE-2015-4620
 
-https://github.com/openembedded/meta-openembedded/pull/15
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../strongswan/{strongswan_5.3.0.bb => strongswan_5.3.1.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/strongswan/{strongswan_5.3.0.bb => strongswan_5.3.1.bb} (92%)
 
-Cheers,
-Andreas
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.3.0.bb b/meta-networking/recipes-support/strongswan/strongswan_5.3.1.bb
+similarity index 92%
+rename from meta-networking/recipes-support/strongswan/strongswan_5.3.0.bb
+rename to meta-networking/recipes-support/strongswan/strongswan_5.3.1.bb
+index d858ca2..abe9141 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.3.0.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.3.1.bb
+@@ -11,8 +11,8 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+         file://fix-funtion-parameter.patch \
+ "
+ 
+-SRC_URI[md5sum] = "c52d4228231c2025d9c320d0e9990327"
+-SRC_URI[sha256sum] = "824da31a1ff89ac2500d56705e6f9ce06fe5260f9caaeb1da35ea13a8691d284"
++SRC_URI[md5sum] = "66f258901a3d6c271da1a0c7fb3e5013"
++SRC_URI[sha256sum] = "83fa7b004e65356ff5bb755d9d0e03901d578a99e90b6328a350a4335a32f6de"
+ 
+ EXTRA_OECONF = "--enable-gmp \
+         --enable-openssl \
+-- 
+1.9.1
+
 
