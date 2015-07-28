@@ -1,34 +1,39 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 98ADF76280
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
+	[209.85.220.172])
+	by mail.openembedded.org (Postfix) with ESMTP id F3FC0763FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jul 2015 19:39:46 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6SJdkGc025580
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 28 Jul 2015 22:14:03 +0000 (UTC)
+Received: by qkdg63 with SMTP id g63so3903766qkd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jul 2015 12:39:46 -0700 (PDT)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.1.8]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0235.001;
-	Tue, 28 Jul 2015 12:39:30 -0700
-From: "Slater, Joseph" <joe.slater@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
+	Tue, 28 Jul 2015 15:14:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=P7xgObFlZUDF7CSCrnQkFMNuIR6aVRmmNNT8jpcxrlU=;
+	b=gk98W0qBELZt6Y1FE1ZmPhdO+PrVbAQCqevPWkKzymOrq2bFWMLVesLw0BscsKRFSN
+	UIJy+FaUy0PvH4FGIxRk9YPaULvlXGTzRw54qK/DGYfD8BMJ1RMEcoKSOpz8rutFbzZs
+	OqLjib8F+SH8M3kArzGqQKyzCmlg0sub5cKQwTnUHsW96OqTcTfbl0c4beyjrKfyjYch
+	41X7wndS4Z8IKHDATQ9KaaP7FDUPruh1ynrQiopQGF++UCAxV/Oyfpo5sICm2XV7MUUV
+	JHGiZiprFbmroCyNHkfdn29xZlIZIg2mQIdmZ7OScjACBshaqxPX+88wgsT3Qc4vi4+X
+	Gx/Q==
+X-Received: by 10.55.25.150 with SMTP id 22mr49141225qkz.4.1438121643525;
+	Tue, 28 Jul 2015 15:14:03 -0700 (PDT)
+Received: from localhost ([179.105.243.19]) by smtp.gmail.com with ESMTPSA id
+	b37sm12172760qge.2.2015.07.28.15.14.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 28 Jul 2015 15:14:02 -0700 (PDT)
+Received: by localhost (sSMTP sendmail emulation);
+	Tue, 28 Jul 2015 19:13:56 -0300
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-networking][PATCH 1/1] ypbind-mt: add dependency
-	but keep as broken
-Thread-Index: AQHQxK/LUTyu+Kr1YUe4f4jP1GRfq53oZr2AgAjpbGA=
-Date: Tue, 28 Jul 2015 19:39:29 +0000
-Message-ID: <007BD92917A2324FA403BCF9A464CF848235F768@ALA-MBA.corp.ad.wrs.com>
-References: <1437591250-9247-1-git-send-email-jslater@windriver.com>
-	<20150722203127.GM22729@mentor.com>
-In-Reply-To: <20150722203127.GM22729@mentor.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [147.11.216.76]
-MIME-Version: 1.0
-Subject: Re: [meta-networking][PATCH 1/1] ypbind-mt: add dependency but keep as broken
+Date: Tue, 28 Jul 2015 19:13:54 -0300
+Message-Id: <1438121635-29044-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.4.6
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 1/2] hostapd: Remove add-sysroot-to-gcc.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,83 +47,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jul 2015 19:39:48 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 28 Jul 2015 22:14:04 -0000
 
+The patch has not been available in the 2.4 version form and thus the
+recipe was unbuildable.
 
+Fix by removing the patch file, which is unused, and the reference for
+it from the recipe.
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Joe MacDonald
-> Sent: Wednesday, July 22, 2015 1:31 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-networking][PATCH 1/1] ypbind-mt: add dependency =
-but keep as
-> broken
->=20
-> [[oe] [meta-networking][PATCH 1/1] ypbind-mt: add dependency but keep as =
-broken] On
-> 15.07.22 (Wed 11:54) Joe Slater wrote:
->=20
-> > We will need the conditional dependency on systemd.  It is
-> > not a good idea to use PNBLACKLIST in a recipe, and the
->=20
-> It isn't a good idea to have a recipe that needs to be blacklisted.  :-)
->=20
-> That said, it's here and there's still an argument for supporting it, so
-> why remove PNBLACKLIST and replace it with something less obvious?
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ .../hostapd/hostapd-2.2/add-sysroot-to-gcc.patch   | 40 ----------------------
+ .../recipes-connectivity/hostapd/hostapd_2.4.bb    |  1 -
+ 2 files changed, 41 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd-2.2/add-sysroot-to-gcc.patch
 
-Blacklisting oneself is esthetically unpleasing.  But, beyond that, it does=
-n't work
-for multilib variants, and for some reason PNBLACKLIST[${PN}] does not pars=
-e.
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/add-sysroot-to-gcc.patch b/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/add-sysroot-to-gcc.patch
+deleted file mode 100644
+index d1134b9..0000000
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/add-sysroot-to-gcc.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-Upstream-Status: Pending
+-
+-We should make sure that sysroot is used by gcc instead of assuming
+-hardcoded locations for include paths
+-
+-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+----
+- src/drivers/drivers.mak | 2 +-
+- src/drivers/drivers.mk  | 2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/drivers/drivers.mak b/src/drivers/drivers.mak
+-index 7e175f4..950701f 100644
+---- a/src/drivers/drivers.mak
+-+++ b/src/drivers/drivers.mak
+-@@ -35,7 +35,7 @@ NEED_RFKILL=y
+- ifdef CONFIG_LIBNL32
+-   DRV_LIBS += -lnl-3
+-   DRV_LIBS += -lnl-genl-3
+--  DRV_CFLAGS += -DCONFIG_LIBNL20 -I/usr/include/libnl3
+-+  DRV_CFLAGS += -DCONFIG_LIBNL20 -I=/usr/include/libnl3
+- else
+-   ifdef CONFIG_LIBNL_TINY
+-     DRV_LIBS += -lnl-tiny
+-diff --git a/src/drivers/drivers.mk b/src/drivers/drivers.mk
+-index db8561a..c93e88d 100644
+---- a/src/drivers/drivers.mk
+-+++ b/src/drivers/drivers.mk
+-@@ -30,7 +30,7 @@ NEED_RFKILL=y
+- ifdef CONFIG_LIBNL32
+-   DRV_LIBS += -lnl-3
+-   DRV_LIBS += -lnl-genl-3
+--  DRV_CFLAGS += -DCONFIG_LIBNL20 -I/usr/include/libnl3
+-+  DRV_CFLAGS += -DCONFIG_LIBNL20 -I=/usr/include/libnl3
+- else
+-   ifdef CONFIG_LIBNL_TINY
+-     DRV_LIBS += -lnl-tiny
+--- 
+-2.1.2
+-
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.4.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.4.bb
+index 84b1128..36c0cd4 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.4.bb
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.4.bb
+@@ -18,7 +18,6 @@ SRC_URI = " \
+     file://defconfig \
+     file://init \
+     file://hostapd.service \
+-    file://add-sysroot-to-gcc.patch;patchdir=.. \
+ "
+ 
+ S = "${WORKDIR}/hostapd-${PV}/hostapd"
+-- 
+2.4.6
 
-Joe
-
-
->=20
-> No objection to a conditional dependency on systemd.
->=20
-> -J.
->=20
-> > version here does not suppress lib32-ypbind-mt.
-> >
-> > Signed-off-by: Joe Slater <jslater@windriver.com>
-> > ---
-> >  recipes-support/nis/ypbind-mt_2.2.bb |    6 ++++--
-> >  1 file changed, 4 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/met=
-a-
-> networking/recipes-support/nis/ypbind-mt_2.2.bb
-> > index 4f8bf48..359b020 100644
-> > --- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> > +++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> > @@ -15,10 +15,12 @@ of known secure NIS server (/etc/yp.conf) Binds to =
-\
-> >  the server which answered as first. \
-> >  "
-> >  HOMEPAGE =3D "http://www.linux-nis.org/nis/ypbind-mt/index.html"
-> > -DEPENDS =3D "yp-tools"
-> > +DEPENDS =3D "yp-tools ${@base_contains('DISTRO_FEATURES', 'systemd', '=
-systemd', '', d)}"
-> >  PROVIDES +=3D "ypbind"
-> >
-> > -PNBLACKLIST[ypbind-mt] ?=3D "BROKEN: Depends on broken yp-tools"
-> > +python () {
-> > +    raise bb.parse.SkipPackage("BROKEN: Depends on broken yp-tools")
-> > +}
-> >
-> >  SRC_URI =3D "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2=
- \
-> >             file://ypbind-yocto.init \
-> > --
-> > 1.7.9.5
-> >
-> --
-> -Joe MacDonald.
-> :wq
 
