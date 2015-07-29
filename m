@@ -1,27 +1,27 @@
 Return-Path: <lixin.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A1A8673237
+	by mail.openembedded.org (Postfix) with ESMTP id CBA23601F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jul 2015 06:14:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99016551"
+	Wed, 29 Jul 2015 06:28:35 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99017016"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 29 Jul 2015 14:18:16 +0800
+	by heian.cn.fujitsu.com with ESMTP; 29 Jul 2015 14:32:10 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6T6CpqB032468
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6T6QiMZ000772
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jul 2015 14:12:51 +0800
+	Wed, 29 Jul 2015 14:26:44 +0800
 Received: from localhost.localdomain (10.167.226.104) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 29 Jul 2015 14:14:41 +0800
+	Server (TLS) id 14.3.181.6; Wed, 29 Jul 2015 14:28:35 +0800
 From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 29 Jul 2015 10:14:38 -0400
-Message-ID: <1438179278-4084-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+Date: Wed, 29 Jul 2015 10:28:32 -0400
+Message-ID: <1438180112-4185-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.104]
-Subject: [meta-oe][PATCH] iceauth: upgrade 1.0.6 -> 1.0.7
+Subject: [meta-oe][PATCH] dracut: upgrade 38 -> 43
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,33 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jul 2015 06:14:48 -0000
+X-List-Received-Date: Wed, 29 Jul 2015 06:28:37 -0000
 Content-Type: text/plain
 
 From: zhangpanpan <zhangpp-fnst@cn.fujitsu.com>
 
 Signed-off-by: Zhang Panpan<zhangpp-fnst@cn.fujitsu.com>
 ---
- .../recipes-graphics/xorg-app/{iceauth_1.0.6.bb => iceauth_1.0.7.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{iceauth_1.0.6.bb => iceauth_1.0.7.bb} (69%)
+ meta-initramfs/recipes-devtools/dracut/dracut_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.6.bb b/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.7.bb
-similarity index 69%
-rename from meta-oe/recipes-graphics/xorg-app/iceauth_1.0.6.bb
-rename to meta-oe/recipes-graphics/xorg-app/iceauth_1.0.7.bb
-index 22007d9..f40dec8 100644
---- a/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.6.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.7.bb
-@@ -11,5 +11,6 @@ BBCLASSEXTEND = "native"
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+index 77c137c..65a5515 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+@@ -5,10 +5,10 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- DEPENDS += "libice"
+ PE = "1"
+-PV = "038"
++PV = "043"
  
--SRC_URI[md5sum] = "2527344acc60741a709f4858564c5ae6"
--SRC_URI[sha256sum] = "bd990837353b439e6f45d478a87b8dbfa3f67d72d903e7a9ed4eb8de52f2e2f4"
-+SRC_URI[md5sum] = "25dab02f8e40d5b71ce29a07dc901b8c"
-+SRC_URI[sha256sum] = "1216af2dee99b318fcf8bf9a259915273bcb37a7f1e7859af4f15d0ebf6f3f0a"
-+
+-# v038 tag
+-SRCREV = "267a109a81715c8957f14659593deb7b6255d40e"
++# v043 tag
++SRCREV = "eab03540cd695d940062af5b55c02e8829aaa526"
+ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
+ 
+ S = "${WORKDIR}/git"
 -- 
 1.8.4.2
 
