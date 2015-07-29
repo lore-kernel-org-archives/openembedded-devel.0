@@ -1,29 +1,31 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id F1ACD7632C
+Return-Path: <zboszor@pr.hu>
+Received: from mail7.pr.hu (mail7.pr.hu [87.242.0.7])
+	by mail.openembedded.org (Postfix) with ESMTP id C6688763C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jul 2015 09:54:34 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99027313"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 29 Jul 2015 17:58:09 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6T9qhH5016481
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jul 2015 17:52:43 +0800
-Received: from localhost.localdomain (10.167.226.92) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 29 Jul 2015 17:54:34 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 29 Jul 2015 17:54:11 +0800
-Message-ID: <1438163651-3294-4-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1438163651-3294-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-References: <1438163651-3294-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	Wed, 29 Jul 2015 13:26:36 +0000 (UTC)
+Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
+	by frontdoor.pr.hu with esmtps (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1ZKRL9-0006Xq-Ex
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Jul 2015 15:24:11 +0200
+Received: from [88.132.201.202] (helo=s002.sicom.com)
+	by mail.pr.hu with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1ZKRNP-0000O1-PL
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Jul 2015 15:26:33 +0200
+To: openembedded-devel@lists.openembedded.org
+From: Boszormenyi Zoltan <zboszor@pr.hu>
+X-Enigmail-Draft-Status: N1110
+Message-ID: <55B8D485.7080207@pr.hu>
+Date: Wed, 29 Jul 2015 15:26:29 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.1.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.92]
-Subject: [meta-oe][PATCH 4/4] tiptop: upgrade 2.2 -> 2.3
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 88.132.201.202 (failed)
+X-Spam-Score: 1.1 (+)
+X-Scan-Signature: 89785d021493d0bbdcf3f583b5839e9c
+X-Spam-Tracer: backend.mail.pr.hu 1.1 20150729132633Z
+Subject: Trying to resolve build-time cyclic dependency between packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,34 +39,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jul 2015 09:54:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 29 Jul 2015 13:26:39 -0000
+X-Groupsio-MsgNum: 56426
+Content-Type: multipart/mixed; boundary="------------010506090009070801060103"
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-extended/tiptop/{tiptop_2.2.bb => tiptop_2.3.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/tiptop/{tiptop_2.2.bb => tiptop_2.3.bb} (87%)
+--------------010506090009070801060103
+Content-Type: text/plain; charset=iso-8859-2
+Content-Transfer-Encoding: 8bit
 
-diff --git a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb b/meta-oe/recipes-extended/tiptop/tiptop_2.3.bb
-similarity index 87%
-rename from meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
-rename to meta-oe/recipes-extended/tiptop/tiptop_2.3.bb
-index a803e26..5a98116 100644
---- a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
-+++ b/meta-oe/recipes-extended/tiptop/tiptop_2.3.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "ncurses libxml2"
- 
- SRC_URI = "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz"
--SRC_URI[md5sum] = "74255a29acf44569db021b080ad3e3f7"
--SRC_URI[sha256sum] = "965cb99b16cb59df78363d83b62877ce8501b0aac1116a86bed8a16aa96b171d"
-+SRC_URI[md5sum] = "f1fba1e90465b0e5a3865b19133fa19d"
-+SRC_URI[sha256sum] = "3f07e958b40acaeab98e9eb1326c9f91b0be0a782c1cc2bd7a9e18d31fab18ca"
- 
- inherit autotools-brokensep
- EXTRA_OECONF = "CFLAGS="$CFLAGS -I${STAGING_INCDIR}/libxml2""
--- 
-1.8.4.2
+Hi,
+
+I have a customized Mesa 10.6.3 package recipe which depends on libva
+to be able to build its mesa-va-driver subpackage, but libva also depends
+on Mesa to support GLX.
+
+Previously, I simply created a libva-noglx package that builds libva
+with --disable-glx that Mesa depend on and the "real" libva package can
+depend on Mesa.
+
+But since I also have to produce an SDK image with all the *-dev packages,
+creating such an initial image with bitbake fails because of a conflict
+in the dependency chain: libva-dev -> mesa-dev -> libva-noglx-dev.
+
+I have come up with the attached bbclass (based on Yocto 1.6) that
+now Mesa can inherit and that patches the RDEPENDS / RRECOMMENDS
+variables according to externally set variables. The comment at
+the beginning of the file explains how to use it.
+
+This pushes the cyclic dependency to opkg which happily breaks it and
+installs both libva* and *mesa* packages properly. Creating the initial
+image via bitbake works now.
+
+Comments?
+
+Best regards,
+Zoltán Böszörményi
 
 
+--------------010506090009070801060103
+Content-Type: text/plain; charset=UTF-8;
+ name="cyclic-deps.bbclass"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="cyclic-deps.bbclass"
+
+# Resolve cyclic dependencies in final packages
+#
+# Example: Mesa vs libva cyclic dependency
+#
+# Resolving the cyclic dependency can be:
+# 1. build libva without GLX support (libva-noglx package)
+# 2. build mesa
+# 3. build libva with GLX support
+#
+# Mesa's DEPENDS contains libva-noglx
+# libva's DEPENDS contains mesa
+# The subpackages of mesa will reference libva-noglx
+#
+# This class attempts to patch the final package dependencies
+# with the following:
+# CYCLIC_DEPENDS = "pkg"
+# CYCLIC_DEPENDS_pkg = "basepkg"
+#
+# With the example of Mesa:
+# CYCLIC_DEPENDS_PKGS = "libva"
+# CYCLIC_DEPENDS_libva = "libva-noglx"
+
+python package_depchains_append () {
+    deps = d.getVar('CYCLIC_DEPENDS_PKGS', True).split()
+    packages = d.getVar('PACKAGES', True).split()
+    for pkg in packages:
+        for dep in deps:
+            depvar = 'CYCLIC_DEPENDS_' + dep
+            basedep = d.getVar(depvar, True)
+            bb.note("before cyclic dependency dep %s depvar %s basedep %s" % (dep, depvar, basedep))
+
+            rdep = 'RDEPENDS_' + pkg
+            rdepends = d.getVar(rdep, True)
+            if rdepends:
+                bb.note("before cyclic dependency fix %s = '%s'" % (rdep, rdepends))
+                d.setVar(rdep, rdepends.replace(basedep, dep))
+                bb.note("after cyclic dependency fix %s = '%s'" % (rdep, d.getVar(rdep, True)))
+
+            rrec = 'RRECOMMENDS_' + pkg
+            rrecommends = d.getVar(rrec, True)
+            if rrecommends:
+                bb.note("before cyclic dependency fix %s = '%s'" % (rrec, rrecommends))
+                d.setVar(rrec, rrecommends.replace(basedep, dep))
+                bb.note("after cyclic dependency fix %s = '%s'" % (rrec, d.getVar(rrec, True)))
+}
+
+--------------010506090009070801060103--
