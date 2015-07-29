@@ -1,26 +1,27 @@
-Return-Path: <Jianchuan.Wang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B724A73D13
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id A1A8673237
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jul 2015 02:47:06 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6T2l50J002695
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 29 Jul 2015 06:14:45 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99016551"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 29 Jul 2015 14:18:16 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6T6CpqB032468
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jul 2015 19:47:05 -0700 (PDT)
-Received: from PEK-JWANG7-D1.wrs.com (128.224.162.190) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.235.1; Tue, 28 Jul 2015 19:46:48 -0700
-From: <jianchuan.wang@windriver.com>
+	Wed, 29 Jul 2015 14:12:51 +0800
+Received: from localhost.localdomain (10.167.226.104) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 29 Jul 2015 14:14:41 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 29 Jul 2015 10:46:59 +0800
-Message-ID: <1438138019-11952-2-git-send-email-jianchuan.wang@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1438138019-11952-1-git-send-email-jianchuan.wang@windriver.com>
-References: <1438138019-11952-1-git-send-email-jianchuan.wang@windriver.com>
+Date: Wed, 29 Jul 2015 10:14:38 -0400
+Message-ID: <1438179278-4084-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH 2/2] xfsprogs: Uprev to 3.2.3 version
+X-Originating-IP: [10.167.226.104]
+Subject: [meta-oe][PATCH] iceauth: upgrade 1.0.6 -> 1.0.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,321 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jul 2015 02:47:06 -0000
+X-List-Received-Date: Wed, 29 Jul 2015 06:14:48 -0000
 Content-Type: text/plain
 
-From: Jianchuan Wang <jianchuan.wang@windriver.com>
+From: zhangpanpan <zhangpp-fnst@cn.fujitsu.com>
 
-In the v3.2.3, the libhandle.so/libhandle.a paths have changed so that
-We need not rm them in the install processing.
-
-Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
+Signed-off-by: Zhang Panpan<zhangpp-fnst@cn.fujitsu.com>
 ---
- ...nerate-crctable-which-is-moved-into-runti.patch | 170 +++++++++++++++++++++
- .../recipes-utils/xfsprogs/xfsprogs_3.1.11.bb      |  56 -------
- .../recipes-utils/xfsprogs/xfsprogs_3.2.3.bb       |  52 +++++++
- 3 files changed, 222 insertions(+), 56 deletions(-)
- create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-generate-crctable-which-is-moved-into-runti.patch
- delete mode 100644 meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb
- create mode 100644 meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.2.3.bb
+ .../recipes-graphics/xorg-app/{iceauth_1.0.6.bb => iceauth_1.0.7.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{iceauth_1.0.6.bb => iceauth_1.0.7.bb} (69%)
 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-generate-crctable-which-is-moved-into-runti.patch b/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-generate-crctable-which-is-moved-into-runti.patch
-new file mode 100644
-index 0000000..b204195
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-generate-crctable-which-is-moved-into-runti.patch
-@@ -0,0 +1,170 @@
-+From e58cb210a7c15352040a411d11a8383eac0defda Mon Sep 17 00:00:00 2001
-+From: Jianchuan Wang <jianchuan.wang@windriver.com>
-+Date: Tue, 30 Sep 2014 12:16:17 +0800
-+Subject: [PATCH] xfsprogs: generate crctable which is moved into runtime from
-+ compile
+diff --git a/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.6.bb b/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.7.bb
+similarity index 69%
+rename from meta-oe/recipes-graphics/xorg-app/iceauth_1.0.6.bb
+rename to meta-oe/recipes-graphics/xorg-app/iceauth_1.0.7.bb
+index 22007d9..f40dec8 100644
+--- a/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.6.bb
++++ b/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.7.bb
+@@ -11,5 +11,6 @@ BBCLASSEXTEND = "native"
+ 
+ DEPENDS += "libice"
+ 
+-SRC_URI[md5sum] = "2527344acc60741a709f4858564c5ae6"
+-SRC_URI[sha256sum] = "bd990837353b439e6f45d478a87b8dbfa3f67d72d903e7a9ed4eb8de52f2e2f4"
++SRC_URI[md5sum] = "25dab02f8e40d5b71ce29a07dc901b8c"
++SRC_URI[sha256sum] = "1216af2dee99b318fcf8bf9a259915273bcb37a7f1e7859af4f15d0ebf6f3f0a"
 +
-+After upgraded, There is a compile error except x86,
-+Because crc32.c need two arraies crc32table_le and crc32ctable_le from crc32table.h,
-+which are generated by gen_crc32table.c relative to different platforms.
-+For this, move the function implementation from gen_crc32table.c to crc.c
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
-+---
-+ libxfs/Makefile | 23 ++----------------
-+ libxfs/crc32.c  | 75 +++++++++++++++++++++++++++++++++++++++++++++++++++++++--
-+ 2 files changed, 75 insertions(+), 23 deletions(-)
-+
-+diff --git a/libxfs/Makefile b/libxfs/Makefile
-+index ae15a5d..7670159 100644
-+--- a/libxfs/Makefile
-++++ b/libxfs/Makefile
-+@@ -10,7 +10,7 @@ LT_CURRENT = 0
-+ LT_REVISION = 0
-+ LT_AGE = 0
-+ 
-+-HFILES = xfs.h init.h xfs_dir2_priv.h crc32defs.h crc32table.h
-++HFILES = xfs.h init.h xfs_dir2_priv.h crc32defs.h
-+ CFILES = cache.c \
-+ 	crc32.c \
-+ 	init.c kmem.c logitem.c radix-tree.c rdwr.c trans.c util.c \
-+@@ -43,7 +43,6 @@ CFILES = cache.c \
-+ CFILES += $(PKG_PLATFORM).c
-+ PCFILES = darwin.c freebsd.c irix.c linux.c
-+ LSRCFILES = $(shell echo $(PCFILES) | sed -e "s/$(PKG_PLATFORM).c//g")
-+-LSRCFILES += gen_crc32table.c
-+ 
-+ #
-+ # Tracing flags:
-+@@ -61,25 +60,7 @@ LTLIBS = $(LIBPTHREAD) $(LIBRT)
-+ # don't try linking xfs_repair with a debug libxfs.
-+ DEBUG = -DNDEBUG
-+ 
-+-LDIRT = gen_crc32table crc32table.h crc32selftest
-+-
-+-default: crc32selftest ltdepend $(LTLIBRARY)
-+-
-+-crc32table.h: gen_crc32table.c
-+-	@echo "    [CC]     gen_crc32table"
-+-	$(Q) $(CC) $(CFLAGS) -o gen_crc32table $<
-+-	@echo "    [GENERATE] $@"
-+-	$(Q) ./gen_crc32table > crc32table.h
-+-
-+-# The selftest binary will return an error if it fails. This is made a
-+-# dependency of the build process so that we refuse to build the tools on broken
-+-# systems/architectures. Hence we make sure that xfsprogs will never use a
-+-# busted CRC calculation at build time and hence avoid putting bad CRCs down on
-+-# disk.
-+-crc32selftest: gen_crc32table.c crc32table.h crc32.c
-+-	@echo "    [TEST]    CRC32"
-+-	$(Q) $(CC) $(CFLAGS) -D CRC32_SELFTEST=1 crc32.c -o $@
-+-	$(Q) ./$@
-++default: ltdepend $(LTLIBRARY)
-+ 
-+ include $(BUILDRULES)
-+ 
-+diff --git a/libxfs/crc32.c b/libxfs/crc32.c
-+index 0f847d2..be5fbc3 100644
-+--- a/libxfs/crc32.c
-++++ b/libxfs/crc32.c
-+@@ -55,8 +55,6 @@ typedef __u32	u64;
-+ # define tobe(x) (x)
-+ #endif
-+ 
-+-#include "crc32table.h"
-+-
-+ #if CRC_LE_BITS > 8 || CRC_BE_BITS > 8
-+ 
-+ /* implements slicing-by-4 or slicing-by-8 algorithm */
-+@@ -183,13 +181,86 @@ u32 __pure crc32c_le(u32 crc, unsigned char const *p, size_t len)
-+ 	return crc32_le_generic(crc, p, len, NULL, CRC32C_POLY_LE);
-+ }
-+ #else
-++
-++#include <stdio.h>
-++#include "crc32defs.h"
-++#include <inttypes.h>
-++
-++#define ENTRIES_PER_LINE 4
-++
-++#if CRC_LE_BITS > 8
-++# define LE_TABLE_ROWS (CRC_LE_BITS/8)
-++# define LE_TABLE_SIZE 256
-++#else
-++# define LE_TABLE_ROWS 1
-++# define LE_TABLE_SIZE (1 << CRC_LE_BITS)
-++#endif
-++
-++#if CRC_BE_BITS > 8
-++# define BE_TABLE_ROWS (CRC_BE_BITS/8)
-++# define BE_TABLE_SIZE 256
-++#else
-++# define BE_TABLE_ROWS 1
-++# define BE_TABLE_SIZE (1 << CRC_BE_BITS)
-++#endif
-++
-++static uint32_t crc32table_le[LE_TABLE_ROWS][256];
-++static uint32_t crc32ctable_le[LE_TABLE_ROWS][256];
-++
-++static uint32_t crc32table_le_init = 0;
-++static uint32_t crc32ctable_le_init = 0;
-++
-++/*
-++ * big endian ordered CRC not used by XFS.
-++static uint32_t crc32table_be[BE_TABLE_ROWS][256];
-++ */
-++
-++/**
-++ * crc32init_le() - allocate and initialize LE table data
-++ *
-++ * crc is the crc of the byte i; other entries are filled in based on the
-++ * fact that crctable[i^j] = crctable[i] ^ crctable[j].
-++ *
-++ */
-++static void crc32init_le_generic(const uint32_t polynomial,
-++				 uint32_t (*tab)[256])
-++{
-++	unsigned i, j;
-++	uint32_t crc = 1;
-++
-++	tab[0][0] = 0;
-++
-++	for (i = LE_TABLE_SIZE >> 1; i; i >>= 1) {
-++		crc = (crc >> 1) ^ ((crc & 1) ? polynomial : 0);
-++		for (j = 0; j < LE_TABLE_SIZE; j += 2 * i)
-++			tab[0][i + j] = crc ^ tab[0][j];
-++	}
-++	for (i = 0; i < LE_TABLE_SIZE; i++) {
-++		crc = tab[0][i];
-++		for (j = 1; j < LE_TABLE_ROWS; j++) {
-++			crc = tab[0][crc & 0xff] ^ (crc >> 8);
-++			tab[j][i] = crc;
-++		}
-++	}
-++}
-++
-+ u32 __pure crc32_le(u32 crc, unsigned char const *p, size_t len)
-+ {
-++	if (crc32table_le_init == 0) {
-++		crc32init_le_generic(CRCPOLY_LE, crc32table_le);
-++		crc32table_le_init == 1;
-++	}	
-++
-+ 	return crc32_le_generic(crc, p, len,
-+ 			(const u32 (*)[256])crc32table_le, CRCPOLY_LE);
-+ }
-+ u32 __pure crc32c_le(u32 crc, unsigned char const *p, size_t len)
-+ {
-++	if (crc32ctable_le_init == 0) {
-++		crc32init_le_generic(CRC32C_POLY_LE, crc32ctable_le);
-++		crc32ctable_le_init == 1;
-++	}
-++
-+ 	return crc32_le_generic(crc, p, len,
-+ 			(const u32 (*)[256])crc32ctable_le, CRC32C_POLY_LE);
-+ }
-+-- 
-+1.9.1
-+
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb
-deleted file mode 100644
-index fcf8f12..0000000
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb
-+++ /dev/null
-@@ -1,56 +0,0 @@
--SUMMARY = "XFS Filesystem Utilities"
--HOMEPAGE = "http://oss.sgi.com/projects/xfs"
--SECTION = "base"
--LICENSE = "GPLv2"
--LICENSE_libhandle = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
--DEPENDS = "util-linux"
--
--SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${BP}.tar.gz \
--    file://remove-install-as-user.patch \
--    file://drop-configure-check-for-aio.patch \
--"
--
--SRC_URI[md5sum] = "de9f1f45026c2f4e0776058d429ff4b6"
--SRC_URI[sha256sum] = "adf4980177b5c890c1ca86b9c0e3e4d69a3f95bfc01746844280c2393cf4d6be"
--
--inherit autotools-brokensep
--
--PACKAGES =+ "${PN}-fsck ${PN}-mkfs libhandle"
--
--RDEPENDS_${PN} = "${PN}-fsck ${PN}-mkfs"
--
--FILES_${PN}-fsck = "${base_sbindir}/fsck.xfs"
--FILES_${PN}-mkfs = "${base_sbindir}/mkfs.xfs"
--FILES_libhandle = "${base_libdir}/libhandle${SOLIBS}"
--
--EXTRA_OECONF = "--enable-gettext=no"
--do_configure () {
--    # Prevent Makefile from calling configure without arguments,
--    # when do_configure gets called for a second time.
--    rm -f include/builddefs include/platform_defs.h
--    # Recreate configure script.
--    rm -f configure
--    oe_runmake configure
--    # Configure.
--    export DEBUG="-DNDEBUG"
--    gnu-configize --force
--    oe_runconf
--}
--
--LIBTOOL = "${HOST_SYS}-libtool"
--EXTRA_OEMAKE = "'LIBTOOL=${LIBTOOL}'"
--TARGET_CC_ARCH += "${LDFLAGS}"
--PARALLEL_MAKE = ""
--
--do_install () {
--    export DIST_ROOT=${D}
--    oe_runmake install
--    # needed for xfsdump
--    oe_runmake install-dev
--    rm ${D}${base_libdir}/libhandle.a
--    rm ${D}${base_libdir}/libhandle.la
--    rm ${D}${base_libdir}/libhandle.so
--    rm ${D}${libdir}/libhandle.so
--    ln -s ../..${base_libdir}/libhandle.so.1 ${D}${libdir}/libhandle.so
--}
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.2.3.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.2.3.bb
-new file mode 100644
-index 0000000..8df7bc1
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.2.3.bb
-@@ -0,0 +1,52 @@
-+SUMMARY = "XFS Filesystem Utilities"
-+HOMEPAGE = "http://oss.sgi.com/projects/xfs"
-+SECTION = "base"
-+LICENSE = "GPLv2"
-+LICENSE_libhandle = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
-+DEPENDS = "util-linux"
-+
-+SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${BP}.tar.gz \
-+    file://xfsprogs-generate-crctable-which-is-moved-into-runti.patch \
-+    file://remove-install-as-user.patch \
-+    file://drop-configure-check-for-aio.patch \
-+"
-+
-+SRC_URI[md5sum] = "9f383e36682709e62b12c125e5d8b895"
-+SRC_URI[sha256sum] = "7a5124a880997939551b519610a2e54bd4cd0b0adfd563ce3f4de30827109ac9"
-+
-+inherit autotools-brokensep
-+
-+PACKAGES =+ "${PN}-fsck ${PN}-mkfs libhandle"
-+
-+RDEPENDS_${PN} = "${PN}-fsck ${PN}-mkfs"
-+
-+FILES_${PN}-fsck = "${base_sbindir}/fsck.xfs"
-+FILES_${PN}-mkfs = "${base_sbindir}/mkfs.xfs"
-+FILES_libhandle = "${base_libdir}/libhandle${SOLIBS}"
-+
-+EXTRA_OECONF = "--enable-gettext=no"
-+do_configure () {
-+    # Prevent Makefile from calling configure without arguments,
-+    # when do_configure gets called for a second time.
-+    rm -f include/builddefs include/platform_defs.h
-+    # Recreate configure script.
-+    rm -f configure
-+    oe_runmake configure
-+    # Configure.
-+    export DEBUG="-DNDEBUG"
-+    gnu-configize --force
-+    oe_runconf
-+}
-+
-+LIBTOOL = "${HOST_SYS}-libtool"
-+EXTRA_OEMAKE = "'LIBTOOL=${LIBTOOL}'"
-+TARGET_CC_ARCH += "${LDFLAGS}"
-+PARALLEL_MAKE = ""
-+
-+do_install () {
-+    export DIST_ROOT=${D}
-+    oe_runmake install
-+    # needed for xfsdump
-+    oe_runmake install-dev
-+}
 -- 
-1.9.1
+1.8.4.2
 
 
