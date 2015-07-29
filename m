@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C64873D13
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 5151E73D13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jul 2015 14:56:11 +0000 (UTC)
-Received: by wibud3 with SMTP id ud3so30113943wib.0
+	Wed, 29 Jul 2015 14:57:59 +0000 (UTC)
+Received: by wibud3 with SMTP id ud3so30189814wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jul 2015 07:56:11 -0700 (PDT)
+	Wed, 29 Jul 2015 07:57:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Ulv1j5xS8mhJM/4ru8gkcINm05DjQjvkn3bG/SIo9iw=;
-	b=UYatazAb5AvOFOMdqzeFKUe4M0hkqtxQydwF5TFekJLMiNS9nkW7t5e16ckIDy9pAK
-	KclFWxdgxXerUTliFXMcnpPZoTLljmky/XXWdUJerUSw0hzmGFditdKzgJAKqhbYrh5N
-	akPAzDqf675UX2JwV7BL+m52pCnQ9QGuUm+5szQLicMcufkYkkihHV2oWFSbZrrfn5IK
-	jjADaNT3LLXSVKU0yqGsSjVxShSQrShX9aNG9YXcaSGTuwEWoJklppAD2T4Dpt+f1/Kg
-	/koh/AigIrNHjd1MQA5a+m22fFHNH8zvcki0Bd2arszgawNNfM+yEUW/Aq74xGiOkuuN
-	XdYg==
-X-Received: by 10.194.60.131 with SMTP id h3mr76767682wjr.156.1438181770450;
-	Wed, 29 Jul 2015 07:56:10 -0700 (PDT)
+	bh=EUjQOJcJ8IEHviy0RuKAAf9rHn94iL41ZZmGmhH9ZPQ=;
+	b=oIdjMWEhJJYGXSwJj/yVpCYUed1fO+0zZmF+atvQpyZj1X2opWOWGNIu2r9S2N5wLL
+	clFZhd66a3u3t2QbLwTPPa8bOS5C95IuyyiSUQTpfmg65Jee9fdt635dm4kArdmT5ua+
+	ppBnw8V4d3/q4k/yWCmT4PFnOwEdIt462yDtN7yk6hAW48Ttzl4FPMz//+Z8XfG81b8j
+	AZzg5uc6d4VN3hmWKeTiP2TDvnV+ziTkUOALzNOtYDWanlJIctcZe0tGtPzkAbhgsUe/
+	asdOfCi6DpBqOarQy4FiQYHr9gayf9ge+hTs/8INRbP7tnecfZNNAYsGlvz7Rla829Zb
+	PKDg==
+X-Received: by 10.180.105.165 with SMTP id gn5mr6547321wib.20.1438181879910;
+	Wed, 29 Jul 2015 07:57:59 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id s5sm24770735wik.2.2015.07.29.07.56.08
-	for <openembedded-devel@lists.openembedded.org>
+	by smtp.gmail.com with ESMTPSA id s5sm24778714wik.2.2015.07.29.07.57.58
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 29 Jul 2015 07:56:08 -0700 (PDT)
+	Wed, 29 Jul 2015 07:57:59 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 29 Jul 2015 16:56:18 +0200
+Date: Wed, 29 Jul 2015 16:58:08 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150729145618.GA12478@jama>
-References: <1435571855-62168-1-git-send-email-leimaohui@cn.fujitsu.com>
+Message-ID: <20150729145808.GB12478@jama>
+References: <1437620893-8149-1-git-send-email-akuster808@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1435571855-62168-1-git-send-email-leimaohui@cn.fujitsu.com>
+In-Reply-To: <1437620893-8149-1-git-send-email-akuster808@gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH v2 0/9] add openlmi and it's depends
+Cc: Armin Kuster <akuster@mvista.com>
+Subject: Re: [meta-networking][PATCH] netmap: add new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,126 +47,147 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jul 2015 14:56:13 -0000
-X-Groupsio-MsgNum: 56427
+X-List-Received-Date: Wed, 29 Jul 2015 14:58:02 -0000
+X-Groupsio-MsgNum: 56428
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PEIAKu/WMn1b1Hv9"
+	protocol="application/pgp-signature"; boundary="FkmkrVfFsRoUs1wW"
 Content-Disposition: inline
 
---PEIAKu/WMn1b1Hv9
+--FkmkrVfFsRoUs1wW
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 29, 2015 at 05:57:26PM +0800, Lei Maohui wrote:
-> OpenLMI  =3D Open Linux Management Infrastructure.
-> OpenLMI is open-source project aiming to improve management of Linux syst=
-ems using WBEM standards.
+On Wed, Jul 22, 2015 at 08:08:13PM -0700, Armin Kuster wrote:
+> From: Armin Kuster <akuster@mvista.com>
+>=20
+> this adds netmap, the fast packet I/O framework
+> http://info.iet.unipi.it/~luigi/netmap/
 
-Still fails to build on jenkins, logs in:
+Fails to build on jenkins log in:
 http://errors.yoctoproject.org/Errors/Build/7660/
 
-> Lei Maohui (9):
->   openlmi: add new recipe openlmi
->   cim-schema-exper: add new recipe for openlmi
->   cmpi-bindings: add new recipe for openlmi
->   konkretcmpi:add new recipe for openlmi
->   sblim-sfcb: add new recipe for openlmi
->   sblim-sfcCommon: add new recipe
->   sblim-cmpi-devel: add new recipe
->   cim-schema_2.40.0.bb: delete
->   pywbem: add new recipe
 >=20
->  .../cim-schema/cim-schema-exper_2.39.0.bb          | 26 +++++++
->  .../cim-schema/cim-schema-final_2.40.0.bb          | 31 +++++++++
->  .../cim-schema/cim-schema/files/LICENSE            | 34 +++++++++
->  .../cim-schema/cim-schema_2.40.0.bb                | 31 ---------
->  .../cmpi-bindings/0001-Fix-error.patch             | 26 +++++++
->  .../cmpi-bindings/0001-Modify-cmakelist.patch      | 41 +++++++++++
->  .../cmpi-bindings-0.4.17-no-ruby-perl.patch        | 44 ++++++++++++
->  .../cmpi-bindings-0.4.17-sblim-sigsegv.patch       | 22 ++++++
->  .../cmpi-bindings-0.9.5-python-lib-dir.patch       | 17 +++++
->  .../cmpi-bindings/cmpi-bindings_git.bb             | 31 +++++++++
->  ...-0.9.2-fix-returning-instance-from-method.patch | 38 ++++++++++
->  .../konkretcmpi/konkretcmpi_0.9.2.bb               | 33 +++++++++
->  .../openlmi/openlmi-networking_0.3.1.bb            | 29 ++++++++
->  .../openlmi/openlmi-providers/0001-fix-error.patch | 26 +++++++
->  .../openlmi/openlmi-providers_0.6.0.bb             | 54 +++++++++++++++
->  .../openlmi/openlmi-storage_0.8.1.bb               | 31 +++++++++
->  .../openlmi/openlmi-tools_0.10.5.bb                | 23 +++++++
->  meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb    | 36 ++++++++++
->  .../sblim-cmpi-devel-2.0.3-docdir.patch            | 17 +++++
->  .../sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb     | 18 +++++
->  .../sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb       | 23 +++++++
->  .../recipes-extended/sblim-sfcb/files/sfcb.service | 11 +++
->  .../sblim-sfcb-1.3.15-fix-provider-debugging.patch | 12 ++++
->  .../sblim-sfcb-1.3.16-maxMsgLen.patch              | 14 ++++
->  .../sblim-sfcb-1.3.16-multilib-man-cfg.patch       | 41 +++++++++++
->  ...blim-sfcb-1.3.9-sfcbrepos-schema-location.patch | 42 ++++++++++++
->  .../sblim-sfcb-1.4.5-service.patch                 | 27 ++++++++
->  .../sblim-sfcb-1.4.8-default-ecdh-curve-name.patch | 26 +++++++
->  .../sblim-sfcb/sblim-sfcb_1.4.8.bb                 | 80 ++++++++++++++++=
+> Signed-off-by: Armin Kuster <akuster@mvista.com>
+> ---
+>  .../recipes-kernel/netmap/netmap-modules_git.bb    | 33 ++++++++++++++++=
 ++++++
->  29 files changed, 853 insertions(+), 31 deletions(-)
->  create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema=
--exper_2.39.0.bb
->  create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema=
--final_2.40.0.bb
->  create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema=
-/files/LICENSE
->  delete mode 100644 meta-networking/recipes-support/cim-schema/cim-schema=
-_2.40.0.bb
->  create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/=
-0001-Fix-error.patch
->  create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/=
-0001-Modify-cmakelist.patch
->  create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/=
-cmpi-bindings-0.4.17-no-ruby-perl.patch
->  create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/=
-cmpi-bindings-0.4.17-sblim-sigsegv.patch
->  create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/=
-cmpi-bindings-0.9.5-python-lib-dir.patch
->  create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_=
+>  meta-networking/recipes-kernel/netmap/netmap.inc   | 14 +++++++++
+>  .../recipes-kernel/netmap/netmap_git.bb            | 32 ++++++++++++++++=
++++++
+>  3 files changed, 79 insertions(+)
+>  create mode 100644 meta-networking/recipes-kernel/netmap/netmap-modules_=
 git.bb
->  create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konk=
-retcmpi-0.9.2-fix-returning-instance-from-method.patch
->  create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.=
-2.bb
->  create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-networking_0=
-=2E3.1.bb
->  create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-providers/00=
-01-fix-error.patch
->  create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-providers_0.=
-6.0.bb
->  create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.=
-1.bb
->  create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5=
-=2Ebb
->  create mode 100644 meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
->  create mode 100644 meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-=
-devel/sblim-cmpi-devel-2.0.3-docdir.patch
->  create mode 100644 meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-=
-devel_2.0.3.bb
->  create mode 100644 meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCom=
-mon_1.0.1.bb
->  create mode 100644 meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service
->  create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/=
-sblim-sfcb-1.3.15-fix-provider-debugging.patch
->  create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/=
-sblim-sfcb-1.3.16-maxMsgLen.patch
->  create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/=
-sblim-sfcb-1.3.16-multilib-man-cfg.patch
->  create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/=
-sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
->  create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/=
-sblim-sfcb-1.4.5-service.patch
->  create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/=
-sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
->  create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.=
-bb
+>  create mode 100644 meta-networking/recipes-kernel/netmap/netmap.inc
+>  create mode 100644 meta-networking/recipes-kernel/netmap/netmap_git.bb
 >=20
+> diff --git a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb =
+b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
+> new file mode 100644
+> index 0000000..63ca50f
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
+> @@ -0,0 +1,33 @@
+> +require netmap.inc
+> +
+> +DEPENDS =3D "virtual/kernel"
+> +do_configure[depends] +=3D "virtual/kernel:do_shared_workdir"
+> +
+> +inherit module
+> +
+> +COMPATIBLE_HOST =3D '(x86_64|i.86|powerpc|aarch64|mips|arm).*-linux'
+> +
+> +CLEANBROKEN =3D "1"
+> +
+> +export INSTALL_MOD_DIR=3D"kernel/netmap-modules"
+> +
+> +EXTRA_OECONF =3D "--kernel-dir=3D${STAGING_KERNEL_BUILDDIR} \
+> +                --kernel-sources=3D${STAGING_KERNEL_DIR} \
+> +                --install-mod-path=3D${D} \
+> +                --driver-suffix=3D"-netmap" \
+> +                "
+> +
+> +do_configure () {
+> +    cd ${S}/LINUX
+> +    ./configure ${EXTRA_OECONF}
+> +}
+> +
+> +do_compile () {
+> +    cd ${S}/LINUX
+> +    make=20
+> +}
+> +
+> +do_install () {
+> +    cd ${S}/LINUX
+> +    oe_runmake install
+> +}
+> diff --git a/meta-networking/recipes-kernel/netmap/netmap.inc b/meta-netw=
+orking/recipes-kernel/netmap/netmap.inc
+> new file mode 100644
+> index 0000000..4a101a1
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/netmap/netmap.inc
+> @@ -0,0 +1,14 @@
+> +SUMMARY =3D "netmap and VALE - very fast packet I/O from userspace (Free=
+BSD/Linux)"
+> +DESCRIPTION=3D "NETMAP is a framework for very fast packet I/O from user=
+space.  VALE is an equally fast in-kernel software switch using the netmap =
+API.  Both are implemented as a single kernel module for FreeBSD and Linux,=
+ and can deal with line rate on real or emulated 10 Gbit ports."
+> +SECTION =3D "networking"
+> +HOMEPAGE =3D "http://code.google.com/p/netmap/"
+> +LICENSE =3D "GPLv2+"
+> +
+> +LIC_FILES_CHKSUM =3D "file://README;beginline=3D13;endline=3D14;md5=3Df6=
+4f2b172fe6903ff7b6272c6edde588"
+> +
+> +SRCREV =3D "a14a35b839fe7ab6855f25f1e86e306ee7ad8123"
+> +PV =3D "master+git${SRCPV}"
+> +
+> +SRC_URI =3D "git://github.com/luigirizzo/netmap.git"
+> +
+> +S =3D "${WORKDIR}/git"
+> diff --git a/meta-networking/recipes-kernel/netmap/netmap_git.bb b/meta-n=
+etworking/recipes-kernel/netmap/netmap_git.bb
+> new file mode 100644
+> index 0000000..da80bad
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/netmap/netmap_git.bb
+> @@ -0,0 +1,32 @@
+> +require netmap.inc
+> +
+> +DEPENDS =3D "netmap-modules"
+> +
+> +EXTRA_OECONF =3D "--kernel-dir=3D${STAGING_KERNEL_BUILDDIR} \
+> +                --kernel-sources=3D${STAGING_KERNEL_DIR} \
+> +                --install-mod-path=3D${D} \
+> +                --no-drivers \
+> +                --prefix=3D${prefix} \
+> +                --destir=3D${D} \
+> +                --cc=3D'${CC}' \
+> +                --ld=3D'${LD}' \
+> +                "
+> +
+> +do_configure () {
+> +    cd ${S}/LINUX
+> +    ./configure ${EXTRA_OECONF}
+> +}
+> +
+> +do_compile () {
+> +    cd ${S}/LINUX
+> +    make  apps
+> +}
+> +
+> +do_install () {
+> +    cd ${S}/LINUX
+> +    make install-apps DESTDIR=3D${D}
+> +}
+> +
+> +FILES_${PN} +=3D "${bindir}"
+> +RDEPENDS_${PN} =3D "kernel-module-netmap"
+> +RRECOMMENDS_${PN} =3D "kernel-module-netmap"
 > --=20
-> 1.8.4.2
+> 2.3.5
 >=20
 > --=20
 > _______________________________________________
@@ -177,16 +198,16 @@ bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---PEIAKu/WMn1b1Hv9
+--FkmkrVfFsRoUs1wW
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlW46Y4ACgkQN1Ujt2V2gBxJkACfRv/4LoumoOHYJp+bhowgeytf
-fWkAn1WlBn99FGV8WuLohYzvoQHpHHAE
-=uj6/
+iEYEARECAAYFAlW46f8ACgkQN1Ujt2V2gBxtoQCgjv6aMBT5l/3wilwMH28tJ3fX
+6rsAoKTQ5SorqMCt7YcbgTSRtxVgFl29
+=W+WD
 -----END PGP SIGNATURE-----
 
---PEIAKu/WMn1b1Hv9--
+--FkmkrVfFsRoUs1wW--
