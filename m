@@ -1,41 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 0623B76248
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jul 2015 14:59:45 +0000 (UTC)
-Received: by wicmv11 with SMTP id mv11so222810831wic.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jul 2015 07:59:45 -0700 (PDT)
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id C79D876248;
+	Wed, 29 Jul 2015 15:01:41 +0000 (UTC)
+Received: by wibud3 with SMTP id ud3so30354866wib.0;
+	Wed, 29 Jul 2015 08:01:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=7KaHAE9KWnKdnjXzbJvFADAOHjDHV5RIzg0JrzwKrfE=;
-	b=pZxkgYFBXm70pOl9AgEsfB3HTgIw6liIuKmCAPG3XJjOFqVru2wILMX4Q17d73gejI
-	XeT+3KdQ8++buOv2loaReK2qJ/46rNh8C/uEG0qexbLWI8zpBmSwPKG4uH4UJeCi7iWG
-	l/pNkOhhqvXfhXrDFf37Gxu4HNb7VgKkTgLKHd1GYerFAe3VlGvcVzuldt3VfULiWkkX
-	lqj7DJ7UviwPcm5UyCB2p6kRmvL2DovCrBEHNkEAj6oNsaWI5E7wQUO4C+j247uop9ih
-	GG56okWF5c5vF34xso9tMqrtmaYZMVo/z4tMC1x3DkAZ42QJaR5pnDA/7VrIisn7eVsA
-	QKPw==
-X-Received: by 10.180.20.198 with SMTP id p6mr18640587wie.38.1438181985362;
-	Wed, 29 Jul 2015 07:59:45 -0700 (PDT)
+	bh=MsEP/r+i3WS9GeQK0+W4RJ5YdCDyQN9PY5ujttTYtJ4=;
+	b=DwW4PIvW6my39cwb5gV9vvh5fjtSS6mhmtttOC9qMMJBho0vEEpwgwOFfO2xRjV7IJ
+	5wyj1ZWmv68i5o4zb7Kzdbj1kbQipArh58vAKhP6fEbigDp7/1ibkyQGCsjSyM5JeKm2
+	5L0FxSAcSo2cKQb8iRUY18g7q9bqmUH25V2ZXH7m69Ri/TKMOrbtdNUSnWvPBeGQYiQl
+	iDm3GJeGWBSd/bUbzeOA3ijTly8ZnCz+vbqQyFenbLXbysxMzD25rftg75fMSvWzDzAm
+	7cTxc74LMF4cVlw7K2hprvnYzm1pr2TSbml0Z49voPBHOH8Lri/eMabgzZvOVv+pDGY6
+	rMHw==
+X-Received: by 10.180.77.193 with SMTP id u1mr6824869wiw.50.1438182101655;
+	Wed, 29 Jul 2015 08:01:41 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	dl10sm38981146wjb.42.2015.07.29.07.59.44
-	for <openembedded-devel@lists.openembedded.org>
+	ul1sm38982736wjc.30.2015.07.29.08.01.40
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 29 Jul 2015 07:59:44 -0700 (PDT)
+	Wed, 29 Jul 2015 08:01:40 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 29 Jul 2015 16:59:54 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150729145954.GC12478@jama>
-References: <1437470344-1669-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<1437470344-1669-3-git-send-email-lixin.fnst@cn.fujitsu.com>
+Date: Wed, 29 Jul 2015 17:01:50 +0200
+To: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Message-ID: <20150729150150.GD12478@jama>
+References: <20150720094146.26948504C1@opal.openembedded.org>
 MIME-Version: 1.0
-In-Reply-To: <1437470344-1669-3-git-send-email-lixin.fnst@cn.fujitsu.com>
+In-Reply-To: <20150720094146.26948504C1@opal.openembedded.org>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH] crda: upgrade 3.13 -> 3.18
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Ross Burton : gamin: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,226 +47,339 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jul 2015 14:59:46 -0000
-X-Groupsio-MsgNum: 56429
+X-List-Received-Date: Wed, 29 Jul 2015 15:01:44 -0000
+X-Groupsio-MsgNum: 56430
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="dkEUBIird37B8yKS"
+	protocol="application/pgp-signature"; boundary="cHMo6Wbp1wrKhbfi"
 Content-Disposition: inline
 
---dkEUBIird37B8yKS
+--cHMo6Wbp1wrKhbfi
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jul 21, 2015 at 05:19:04PM +0800, Li xin wrote:
-> Dropped backported patches(commit-id):
-> -crda-Add-DESTDIR-support-in-install-libreg-rules-in-.patch(2cabb258)
-> -crda-Fix-the-linking-order-to-avoid-compilation-erro.patch(fefefdb2)
+On Mon, Jul 20, 2015 at 09:41:46AM +0000, git@git.openembedded.org wrote:
+> Module: openembedded-core.git
+> Branch: master
+> Commit: d29595925b699827fbd3279ee5368e32e0a380f3
+> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit=
+;h=3Dd29595925b699827fbd3279ee5368e32e0a380f3
+>=20
+> Author: Ross Burton <ross.burton@intel.com>
+> Date:   Thu Jul 16 23:24:06 2015 +0100
+>=20
+> gamin: remove
+>=20
+> Gamin hasn't been required for many years now, maintenance upstream stopp=
+ed in
+> 2008 and the addition of inotify to the kernel made it redundant.
+>=20
+> Remove the recipe from oe-core, and references to it in pacakgegroup-core=
+-lsb
+> (LSB doesn't require gamin) and packagegroup-self-hosted.
+>=20
+> Signed-off-by: Ross Burton <ross.burton@intel.com>
 
-Fails to build on jenkins
-http://errors.yoctoproject.org/Errors/Build/7660/
+Someone interested in fixing tracer recipe?
+
+NOTE: Resolving any missing task queue dependencies
+ERROR: Nothing PROVIDES 'gamin' (but /home/jenkins/oe/world/shr-core/meta-o=
+penembedded/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb DEPENDS on=
+ or otherwise requires it)
 
 >=20
-> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 > ---
->  ...STDIR-support-in-install-libreg-rules-in-.patch | 35 ---------------
->  ...e-linking-order-to-avoid-compilation-erro.patch | 51 ----------------=
-------
->  .../do-not-run-ldconfig-if-destdir-is-set.patch    |  0
->  .../fix-linking-of-libraries-used-by-reglib.patch  |  0
->  .../crda/{crda_3.13.bb =3D> crda_3.18.bb}            |  6 +--
->  5 files changed, 2 insertions(+), 90 deletions(-)
->  delete mode 100644 meta-networking/recipes-connectivity/crda/crda-3.13/c=
-rda-Add-DESTDIR-support-in-install-libreg-rules-in-.patch
->  delete mode 100644 meta-networking/recipes-connectivity/crda/crda-3.13/c=
-rda-Fix-the-linking-order-to-avoid-compilation-erro.patch
->  rename meta-networking/recipes-connectivity/crda/{crda-3.13 =3D> crda}/d=
-o-not-run-ldconfig-if-destdir-is-set.patch (100%)
->  rename meta-networking/recipes-connectivity/crda/{crda-3.13 =3D> crda}/f=
-ix-linking-of-libraries-used-by-reglib.patch (100%)
->  rename meta-networking/recipes-connectivity/crda/{crda_3.13.bb =3D> crda=
-_3.18.bb} (82%)
 >=20
-> diff --git a/meta-networking/recipes-connectivity/crda/crda-3.13/crda-Add=
--DESTDIR-support-in-install-libreg-rules-in-.patch b/meta-networking/recipe=
-s-connectivity/crda/crda-3.13/crda-Add-DESTDIR-support-in-install-libreg-ru=
-les-in-.patch
+>  .../packagegroups/packagegroup-self-hosted.bb      |  1 -
+>  .../gamin-0.1.10/obsolete_automake_macros.patch    | 23 ---------
+>  .../gamin/gamin/no-abstract-sockets.patch          | 56 ----------------=
+----
+>  meta/recipes-extended/gamin/gamin/noconst.patch    | 59 ----------------=
+------
+>  meta/recipes-extended/gamin/gamin_0.1.10.bb        | 36 -------------
+>  .../packagegroups/packagegroup-core-lsb.bb         |  1 -
+>  6 files changed, 176 deletions(-)
+>=20
+> diff --git a/meta/recipes-core/packagegroups/packagegroup-self-hosted.bb =
+b/meta/recipes-core/packagegroups/packagegroup-self-hosted.bb
+> index 531f729..7d5a41a 100644
+> --- a/meta/recipes-core/packagegroups/packagegroup-self-hosted.bb
+> +++ b/meta/recipes-core/packagegroups/packagegroup-self-hosted.bb
+> @@ -118,7 +118,6 @@ RDEPENDS_packagegroup-self-hosted-extended =3D "\
+>      diffutils \
+>      elfutils \
+>      expat \
+> -    gamin \
+>      gawk \
+>      gdbm \
+>      gettext \
+> diff --git a/meta/recipes-extended/gamin/gamin-0.1.10/obsolete_automake_m=
+acros.patch b/meta/recipes-extended/gamin/gamin-0.1.10/obsolete_automake_ma=
+cros.patch
 > deleted file mode 100644
-> index 3646400..0000000
-> --- a/meta-networking/recipes-connectivity/crda/crda-3.13/crda-Add-DESTDI=
-R-support-in-install-libreg-rules-in-.patch
+> index c4300ca..0000000
+> --- a/meta/recipes-extended/gamin/gamin-0.1.10/obsolete_automake_macros.p=
+atch
 > +++ /dev/null
-> @@ -1,35 +0,0 @@
-> -From: "John W. Linville" <linville@tuxdriver.com>
-> -Date: Fri, 14 Feb 2014 13:58:44 -0500
-> -Subject: [PATCH] crda: Add DESTDIR support in install-libreg* rules in M=
-akefile
-> -Origin: https://git.kernel.org/?p=3Dlinux/kernel/git/mcgrof/crda.git/com=
-mit?id=3D2cabb2588da56735369131b709f191453c080be0
+> @@ -1,23 +0,0 @@
+> -Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=
+=3D693449]
 > -
-> -Upstream-Status: Backport
+> -Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+> -diff -Nurd gamin-0.1.10/configure.in gamin-0.1.10/configure.in
+> ---- gamin-0.1.10/configure.in	2008-11-24 17:23:06.000000000 +0200
+> -+++ gamin-0.1.10/configure.in	2013-02-08 23:11:59.656279992 +0200
+> -@@ -1,7 +1,7 @@
+> - dnl Process this file with autoconf to produce a configure script.
+> - AC_PREREQ(2.52)
+> - AC_INIT(libgamin)
+> --AM_CONFIG_HEADER(config.h)
+> -+AC_CONFIG_HEADERS(config.h)
+> - AC_CANONICAL_SYSTEM
 > -
-> -Signed-off-by: John W. Linville <linville@tuxdriver.com>
-> -Signed-off-by: Luis R. Rodriguez <mcgrof@do-not-panic.com>
-> ----
-> - Makefile | 8 ++++----
-> - 1 file changed, 4 insertions(+), 4 deletions(-)
+> - # get any external flags setting before we start playing with the CFLAG=
+S variable
+> -@@ -31,7 +31,6 @@
 > -
-> -diff --git a/Makefile b/Makefile
-> -index 0b2f0d7..1f25509 100644
-> ---- a/Makefile
-> -+++ b/Makefile
-> -@@ -120,13 +120,13 @@ $(LIBREG): regdb.h reglib.h reglib.c
-> -=20
-> - install-libreg-headers:
-> - 	$(NQ) '  INSTALL  libreg-headers'
-> --	$(Q)mkdir -p $(INCLUDE_DIR)
-> --	$(Q)cp *.h $(INCLUDE_DIR)/
-> -+	$(Q)mkdir -p $(DESTDIR)/$(INCLUDE_DIR)
-> -+	$(Q)cp *.h $(DESTDIR)/$(INCLUDE_DIR)/
-> -=20
-> - install-libreg:
-> - 	$(NQ) '  INSTALL  libreg'
-> --	$(Q)mkdir -p $(LIBDIR)
-> --	$(Q)cp $(LIBREG) $(LIBDIR)/
-> -+	$(Q)mkdir -p $(DESTDIR)/$(LIBDIR)
-> -+	$(Q)cp $(LIBREG) $(DESTDIR)/$(LIBDIR)/
-> - 	$(Q)ldconfig
-> -=20
-> - %.o: %.c regdb.h $(LIBREG)
-> diff --git a/meta-networking/recipes-connectivity/crda/crda-3.13/crda-Fix=
--the-linking-order-to-avoid-compilation-erro.patch b/meta-networking/recipe=
-s-connectivity/crda/crda-3.13/crda-Fix-the-linking-order-to-avoid-compilati=
-on-erro.patch
+> - AC_USE_SYSTEM_EXTENSIONS
+> - AC_PROG_CC
+> --AM_PROG_CC_STDC
+> - AC_HEADER_STDC
+> - AC_PROG_INSTALL
+> - AC_PROG_MAKE_SET
+> diff --git a/meta/recipes-extended/gamin/gamin/no-abstract-sockets.patch =
+b/meta/recipes-extended/gamin/gamin/no-abstract-sockets.patch
 > deleted file mode 100644
-> index 68b4b13..0000000
-> --- a/meta-networking/recipes-connectivity/crda/crda-3.13/crda-Fix-the-li=
-nking-order-to-avoid-compilation-erro.patch
+> index cddf2dc..0000000
+> --- a/meta/recipes-extended/gamin/gamin/no-abstract-sockets.patch
 > +++ /dev/null
-> @@ -1,51 +0,0 @@
-> -From: Krishna Chaitanya <chaitanya.mgit@gmail.com>
-> -Date: Mon, 16 Dec 2013 21:57:39 +0530
-> -Subject: [PATCH] crda: Fix the linking order to avoid compilation error
-> -Origin: https://git.kernel.org/?p=3Dlinux/kernel/git/mcgrof/crda.git/com=
-mit?id=3Dfefefdb2c52c8fbedbb339b4badb8226cad7e7e0
+> @@ -1,56 +0,0 @@
+> -Upstream-Status: Inappropriate [configuration]
 > -
-> -While linking the crda.o and libreg.so, first put crda.o
-> -and then -lreg. This fixed the below error:
-> -
-> -  GEN  keys-gcrypt.c
-> -  Trusted pubkeys: pubkeys/linville.key.pub.pem
-> -  CC   libreg.so
-> -  CC   crda.o
-> -  LD   crda
-> -crda.o: In function `main':
-> -crda/crda.c:196: undefined reference to `reglib_get_rd_alpha2'
-> -collect2: ld returned 1 exit status
-> -make: *** [crda] Error 1
-> -
-> -Note: This still doesn't fix the below error (will send another mail)
-> -
-> -  CHK  /usr/lib/crda/regulatory.bin
-> -Database signature verification failed.
-> -Invalid or empty regulatory file, note: a binary regulatory file should =
-be used.
-> -make: *** [verify] Error 234
-> -
-> -Upstream-Status: Backport
-> -
-> -Signed-off-by: Luis R. Rodriguez <mcgrof@do-not-panic.com>
-> -Signed-off-by: Chaitanya T K <chaitanya.mgit@gmail.com>
-> ----
-> - Makefile | 5 +++--
-> - 1 file changed, 3 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/Makefile b/Makefile
-> -index 4a351c6..0b2f0d7 100644
-> ---- a/Makefile
-> -+++ b/Makefile
-> -@@ -28,10 +28,11 @@ RUNTIME_PUBKEY_DIR?=3D/etc/wireless-regdb/pubkeys
-> - CFLAGS +=3D -O2 -fpic
-> - CFLAGS +=3D -std=3Dgnu99 -Wall -Werror -pedantic
-> - CFLAGS +=3D -Wall -g
-> --LDLIBS +=3D -lm
-> - LDLIBREG +=3D -lreg
-> -+LDLIBS +=3D $(LDLIBREG)
-> -+LDLIBS +=3D -lm
-> - LIBREG +=3D libreg.so
-> --LDFLAGS +=3D -L ./ $(LDLIBREG)
-> -+LDFLAGS +=3D -L ./
+> ---- /tmp/configure.in	2007-04-30 13:08:49.000000000 +0200
+> -+++ gamin-0.1.8/configure.in	2007-04-30 13:10:53.285251000 +0200
+> -@@ -354,51 +354,6 @@
+> -     AC_DEFINE(HAVE_CMSGCRED,1,[Have cmsgcred structure])
+> - fi
 > -=20
-> - all: all_noverify verify
+> --#### Abstract sockets
+> --
+> --AC_MSG_CHECKING(abstract socket namespace)
+> --AC_LANG_PUSH(C)
+> --AC_RUN_IFELSE([AC_LANG_PROGRAM(
+> --[[
+> --#include <sys/types.h>
+> --#include <stdlib.h>
+> --#include <string.h>
+> --#include <stdio.h>
+> --#include <sys/socket.h>
+> --#include <sys/un.h>
+> --#include <errno.h>
+> --]],
+> --[[
+> --  int listen_fd;
+> --  struct sockaddr_un addr;
+> -- =20
+> --  listen_fd =3D socket (PF_UNIX, SOCK_STREAM, 0);
+> -- =20
+> --  if (listen_fd < 0)
+> --    {
+> --      fprintf (stderr, "socket() failed: %s\n", strerror (errno));
+> --      exit (1);
+> --    }
+> --
+> --  memset (&addr, '\0', sizeof (addr));
+> --  addr.sun_family =3D AF_UNIX;
+> --  strcpy (addr.sun_path, "X/tmp/dbus-fake-socket-path-used-in-configure=
+-test");
+> --  addr.sun_path[0] =3D '\0'; /* this is what makes it abstract */
+> -- =20
+> --  if (bind (listen_fd, (struct sockaddr*) &addr, SUN_LEN (&addr)) < 0)
+> --    {
+> --       fprintf (stderr, "Abstract socket namespace bind() failed: %s\n"=
+,=20
+> --                strerror (errno));
+> --       exit (1);
+> --    }
+> --  else=20
+> --    exit (0);
+> --]])],
+> --              [have_abstract_sockets=3Dyes],
+> --              [have_abstract_sockets=3Dno])
+> --AC_LANG_POP(C)
+> --AC_MSG_RESULT($have_abstract_sockets)
+> --
+> - if test x$enable_abstract_sockets =3D xyes; then
+> -     if test x$have_abstract_sockets =3D xno; then
+> - 	AC_MSG_ERROR([Abstract sockets explicitly required, and support not de=
+tected.])
+> diff --git a/meta/recipes-extended/gamin/gamin/noconst.patch b/meta/recip=
+es-extended/gamin/gamin/noconst.patch
+> deleted file mode 100644
+> index 7b2998c..0000000
+> --- a/meta/recipes-extended/gamin/gamin/noconst.patch
+> +++ /dev/null
+> @@ -1,59 +0,0 @@
+> -G_CONST_RETURN is deprecated in glib 2.30 so remove to to avoid
+> -build failures.
+> -
+> -RP 2011/10/12
+> -
+> -Upstream-Status: Pending
+> -
+> -Index: gamin-0.1.10/server/gam_node.c
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- gamin-0.1.10.orig/server/gam_node.c	2011-10-12 15:25:45.217178314 +0=
+100
+> -+++ gamin-0.1.10/server/gam_node.c	2011-10-12 15:26:17.807178293 +0100
+> -@@ -122,7 +122,7 @@
+> -  * it has finished with the string.  If it must keep it longer, it
+> -  * should makes its own copy.  The returned string must not be freed.
+> -  */
+> --G_CONST_RETURN char *
+> -+const char *
+> - gam_node_get_path(GamNode * node)
+> - {
+> -     g_assert(node);
+> -Index: gamin-0.1.10/server/gam_node.h
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- gamin-0.1.10.orig/server/gam_node.h	2011-10-12 15:25:46.857178269 +0=
+100
+> -+++ gamin-0.1.10/server/gam_node.h	2011-10-12 15:26:28.637178297 +0100
+> -@@ -58,7 +58,7 @@
+> - void                  gam_node_set_is_dir          (GamNode         *no=
+de,
+> - 						   gboolean        is_dir);
+> - =09
+> --G_CONST_RETURN char  *gam_node_get_path            (GamNode         *no=
+de);
+> -+const char  *gam_node_get_path            (GamNode         *node);
 > -=20
-> diff --git a/meta-networking/recipes-connectivity/crda/crda-3.13/do-not-r=
-un-ldconfig-if-destdir-is-set.patch b/meta-networking/recipes-connectivity/=
-crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch
-> similarity index 100%
-> rename from meta-networking/recipes-connectivity/crda/crda-3.13/do-not-ru=
-n-ldconfig-if-destdir-is-set.patch
-> rename to meta-networking/recipes-connectivity/crda/crda/do-not-run-ldcon=
-fig-if-destdir-is-set.patch
-> diff --git a/meta-networking/recipes-connectivity/crda/crda-3.13/fix-link=
-ing-of-libraries-used-by-reglib.patch b/meta-networking/recipes-connectivit=
-y/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
-> similarity index 100%
-> rename from meta-networking/recipes-connectivity/crda/crda-3.13/fix-linki=
-ng-of-libraries-used-by-reglib.patch
-> rename to meta-networking/recipes-connectivity/crda/crda/fix-linking-of-l=
-ibraries-used-by-reglib.patch
-> diff --git a/meta-networking/recipes-connectivity/crda/crda_3.13.bb b/met=
-a-networking/recipes-connectivity/crda/crda_3.18.bb
-> similarity index 82%
-> rename from meta-networking/recipes-connectivity/crda/crda_3.13.bb
-> rename to meta-networking/recipes-connectivity/crda/crda_3.18.bb
-> index 12eefe0..931a053 100644
-> --- a/meta-networking/recipes-connectivity/crda/crda_3.13.bb
-> +++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-> @@ -9,13 +9,11 @@ DEPENDS =3D "python-m2crypto-native python-native libgc=
-rypt libnl"
-> =20
->  SRC_URI =3D "https://www.kernel.org/pub/software/network/crda/${BP}.tar.=
-xz;name=3Dcrda \
->             https://www.kernel.org/pub/software/network/wireless-regdb/wi=
-reless-regdb-2014.11.18.tar.xz;name=3Dbin \
-> -           file://crda-Fix-the-linking-order-to-avoid-compilation-erro.p=
-atch \
-> -           file://crda-Add-DESTDIR-support-in-install-libreg-rules-in-.p=
-atch \
->             file://do-not-run-ldconfig-if-destdir-is-set.patch \
->             file://fix-linking-of-libraries-used-by-reglib.patch \
->  "
-> -SRC_URI[crda.md5sum] =3D "66b1b0417c1ad19f0009a5c0c0c1aebc"
-> -SRC_URI[crda.sha256sum] =3D "2f85da7ab0170b140d6ed62596c8f268d4a7dedecf8=
-4cac7182ada979742ff59"
-> +SRC_URI[crda.md5sum] =3D "0431fef3067bf503dfb464069f06163a"
-> +SRC_URI[crda.sha256sum] =3D "43fcb9679f8b75ed87ad10944a506292def13e4afb1=
-94afa7aa921b01e8ecdbf"
-> =20
->  SRC_URI[bin.md5sum] =3D "d750c402c5510add7380edcb1d9b75b2"
->  SRC_URI[bin.sha256sum] =3D "eab6b50f30748a8b0065ba38cf3df05aac161a5861ae=
-0a6c3cfd01d38a71c9dd"
-> --=20
-> 1.8.4.2
+> - GList                *gam_node_get_subscriptions   (GamNode         *no=
+de);
+> -=20
+> -Index: gamin-0.1.10/server/gam_subscription.c
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- gamin-0.1.10.orig/server/gam_subscription.c	2011-10-12 15:25:40.4971=
+77525 +0100
+> -+++ gamin-0.1.10/server/gam_subscription.c	2011-10-12 15:26:39.867178304=
+ +0100
+> -@@ -141,7 +141,7 @@
+> -  * @param sub the GamSubscription
+> -  * @returns The path being monitored.  It should not be freed.
+> -  */
+> --G_CONST_RETURN char *
+> -+const char *
+> - gam_subscription_get_path(GamSubscription * sub)
+> - {
+> -     if (sub =3D=3D NULL)
+> -Index: gamin-0.1.10/server/gam_subscription.h
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- gamin-0.1.10.orig/server/gam_subscription.h	2011-10-12 15:25:28.5071=
+78266 +0100
+> -+++ gamin-0.1.10/server/gam_subscription.h	2011-10-12 15:25:58.817178285=
+ +0100
+> -@@ -21,7 +21,7 @@
+> -=20
+> - int                  gam_subscription_get_reqno    (GamSubscription *su=
+b);
+> -=20
+> --G_CONST_RETURN char *gam_subscription_get_path     (GamSubscription *su=
+b);
+> -+const char *gam_subscription_get_path     (GamSubscription *sub);
+> -=20
+> - GamListener         *gam_subscription_get_listener (GamSubscription *su=
+b);
+> -=20
+> diff --git a/meta/recipes-extended/gamin/gamin_0.1.10.bb b/meta/recipes-e=
+xtended/gamin/gamin_0.1.10.bb
+> deleted file mode 100644
+> index 375d265..0000000
+> --- a/meta/recipes-extended/gamin/gamin_0.1.10.bb
+> +++ /dev/null
+> @@ -1,36 +0,0 @@
+> -SUMMARY =3D "Gamin the File Alteration Monitor"
+> -DESCRIPTION =3D "Gamin is a file and directory monitoring system defined=
+ to \
+> -be a subset of the FAM (File Alteration Monitor) system."
+> -HOMEPAGE =3D "http://people.gnome.org/~veillard/gamin/"
+> -
+> -LICENSE =3D "LGPLv2+"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D412a9be54757a155d0b997b52b519=
+f62"
+> -
+> -DEPENDS =3D "glib-2.0"
+> -PROVIDES =3D "fam"
+> -PR =3D "r5"
+> -
+> -SRC_URI =3D "http://www.gnome.org/~veillard/gamin/sources/gamin-${PV}.ta=
+r.gz \
+> -           file://no-abstract-sockets.patch \
+> -           file://noconst.patch \
+> -           file://obsolete_automake_macros.patch \
+> -"
+> -
+> -SRC_URI[md5sum] =3D "b4ec549e57da470c04edd5ec2876a028"
+> -SRC_URI[sha256sum] =3D "28085f0ae8be10eab582ff186af4fb0be92cc6c62b5cc19c=
+d09b295c7c2899a1"
+> -
+> -inherit autotools pkgconfig
+> -
+> -EXTRA_OECONF =3D "--without-python"
+> -
+> -PACKAGES +=3D "lib${BPN} lib${BPN}-dev"
+> -FILES_${PN} =3D "${libexecdir}"
+> -FILES_${PN}-dbg +=3D "${libexecdir}/.debug"
+> -FILES_lib${BPN} =3D "${libdir}/lib*.so.*"
+> -FILES_lib${BPN}-dev =3D "${includedir} ${libdir}/pkgconfig ${libdir}/lib=
+*.la \
+> -                      ${libdir}/lib*.a ${libdir}/lib*.so"
+> -
+> -RDEPENDS_lib${BPN} =3D "${PN}"
+> -
+> -LEAD_SONAME =3D "libgamin-1.so"
+> -
+> diff --git a/meta/recipes-extended/packagegroups/packagegroup-core-lsb.bb=
+ b/meta/recipes-extended/packagegroups/packagegroup-core-lsb.bb
+> index 3cb2305..ce82385 100644
+> --- a/meta/recipes-extended/packagegroups/packagegroup-core-lsb.bb
+> +++ b/meta/recipes-extended/packagegroups/packagegroup-core-lsb.bb
+> @@ -55,7 +55,6 @@ RDEPENDS_packagegroup-core-lsb =3D "\
+>  RDEPENDS_packagegroup-core-sys-extended =3D "\
+>      curl \
+>      dhcp-client \
+> -    gamin \
+>      hdparm \
+>      lighttpd \
+>      libaio \
 >=20
 > --=20
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---dkEUBIird37B8yKS
+--cHMo6Wbp1wrKhbfi
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlW46mkACgkQN1Ujt2V2gBzk/wCfXZnC86BrEYOpsUZplZsigXL/
-iNIAoI/PFCfbR0V+/c34MdIitMrpxKN0
-=iOLJ
+iEYEARECAAYFAlW46t4ACgkQN1Ujt2V2gBxXlQCggFrS6DMjC9OFMUc04CnFvKr7
+jOkAn3ulal2B//3C4v8JZJE5gD6HgDJi
+=9MY3
 -----END PGP SIGNATURE-----
 
---dkEUBIird37B8yKS--
+--cHMo6Wbp1wrKhbfi--
