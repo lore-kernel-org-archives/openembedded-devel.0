@@ -1,30 +1,31 @@
 Return-Path: <Joe_MacDonald@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 971F07649E
+	by mail.openembedded.org (Postfix) with ESMTP id 5E46C60167
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jul 2015 16:58:10 +0000 (UTC)
+	Thu, 30 Jul 2015 16:59:37 +0000 (UTC)
 Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
 	by relay1.mentorg.com with esmtp 
-	id 1ZKr9l-0005We-UW from Joe_MacDonald@mentor.com ;
-	Thu, 30 Jul 2015 09:58:09 -0700
+	id 1ZKrBB-0005kY-SZ from Joe_MacDonald@mentor.com ;
+	Thu, 30 Jul 2015 09:59:37 -0700
 Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
 	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 30 Jul 2015 09:58:08 -0700
-Received: by burninator (Postfix, from userid 1000)	id 623D058162E; Thu, 30
-	Jul 2015 12:57:34 -0400 (EDT)
-Date: Thu, 30 Jul 2015 12:57:34 -0400
+	Thu, 30 Jul 2015 09:59:37 -0700
+Received: by burninator (Postfix, from userid 1000)	id AFC0058162E; Thu, 30
+	Jul 2015 12:59:02 -0400 (EDT)
+Date: Thu, 30 Jul 2015 12:59:02 -0400
 From: Joe MacDonald <Joe_MacDonald@mentor.com>
 To: <rongqing.li@windriver.com>
-Message-ID: <20150730165734.GD6457@mentor.com>
+Message-ID: <20150730165902.GE6457@mentor.com>
 References: <1438050989-15233-1-git-send-email-rongqing.li@windriver.com>
+	<1438050989-15233-2-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1438050989-15233-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1438050989-15233-2-git-send-email-rongqing.li@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-704 http://www.vim.org
 User-Agent: Mutt/1.5.23 (2014-03-12)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/2] ypbind-mt: get parameters from dhcp
+Subject: Re: [PATCH 2/2] ntp: get parameters from dhcp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,48 +39,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2015 16:58:10 -0000
-X-Groupsio-MsgNum: 56442
+X-List-Received-Date: Thu, 30 Jul 2015 16:59:37 -0000
+X-Groupsio-MsgNum: 56443
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Q0rSlbzrZN6k9QnT"
+	protocol="application/pgp-signature"; boundary="//IivP0gvsAy3Can"
 Content-Disposition: inline
 
---Q0rSlbzrZN6k9QnT
+--//IivP0gvsAy3Can
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[[oe] [PATCH 1/2] ypbind-mt: get parameters from dhcp] On 15.07.28 (Tue 10:=
-36) rongqing.li@windriver.com wrote:
+[[oe] [PATCH 2/2] ntp: get parameters from dhcp] On 15.07.28 (Tue 10:36) ro=
+ngqing.li@windriver.com wrote:
 
 > From: Li Wang <li.wang@windriver.com>
 >=20
-> adopt a script nis.sh from
-> https://git.centos.org/raw/rpms!ypbind.git/5a592e88374f067679276488430ebd=
-f51152c358/SOURCES!nis.sh
-> it is dhclient-script plugin for NIS settings.
+> the script ntp.sh is called by dhcp client,
+> it can get some parameters from dhcp.
 >=20
 > Signed-off-by: Li Wang <li.wang@windriver.com>
 > Signed-off-by: Roy Li <rongqing.li@windriver.com>
 > ---
->  .../recipes-support/nis/ypbind-mt/nis.sh           | 108 +++++++++++++++=
+>  meta-networking/recipes-support/ntp/files/ntp.sh   | 61 ++++++++++++++++=
 ++++++
->  .../recipes-support/nis/ypbind-mt_1.38.bb          |   4 +
->  .../recipes-support/nis/ypbind-mt_2.2.bb           |   4 +
->  3 files changed, 116 insertions(+)
->  create mode 100755 meta-networking/recipes-support/nis/ypbind-mt/nis.sh
+>  meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb |  5 ++
+>  2 files changed, 66 insertions(+)
+>  create mode 100755 meta-networking/recipes-support/ntp/files/ntp.sh
 >=20
-> diff --git a/meta-networking/recipes-support/nis/ypbind-mt/nis.sh b/meta-=
-networking/recipes-support/nis/ypbind-mt/nis.sh
+> diff --git a/meta-networking/recipes-support/ntp/files/ntp.sh b/meta-netw=
+orking/recipes-support/ntp/files/ntp.sh
 > new file mode 100755
-> index 0000000..a1e338c
+> index 0000000..ca53a97
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/nis/ypbind-mt/nis.sh
-> @@ -0,0 +1,108 @@
+> +++ b/meta-networking/recipes-support/ntp/files/ntp.sh
+> @@ -0,0 +1,61 @@
 > +#!/bin/sh
 > +#
-> +# nis.sh: dhclient-script plugin for NIS settings,
-> +#         place in /etc/dhcp/dhclient.d and 'chmod +x nis.sh' to enable
+> +# ntp.sh: dhclient-script plugin for NTP settings,
+> +#         place in /etc/dhcp/dhclient.d and 'chmod +x ntp.sh' to enable
 > +#
 > +# Copyright (C) 2008 Red Hat, Inc.
 > +#
@@ -97,155 +95,89 @@ networking/recipes-support/nis/ypbind-mt/nis.sh
 > +# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 > +#
 > +# Author(s): David Cantrell <dcantrell@redhat.com>
+> +#            Miroslav Lichvar <mlichvar@redhat.com>
+> +#
 > +
-> +CONF=3D/etc/yp.conf
+> +CONF=3D/etc/ntp.conf
 
-This should probably be substituted with @SYSCONFDIR@ so it's still
-functional for anyone who changes ${sysconfdir}.  Just thinking out loud
-now, but what's the systemd equivalent here?  Do we already have one?
-
-That's not a barrier to accepting this patch, either way.  I'd just like
-to see this hard-coded path be slightly less hard-coded.
+Same comment here about the hard-coded CONF location rather than having
+it reflect ${sysconfdir}.
 
 -J.
 
 > +SAVECONF=3D${SAVEDIR}/${CONF##*/}.predhclient.${interface}
 > +
-> +fix_context() {
-> +    if [ -x /sbin/restorecon ]; then
-> +        /sbin/restorecon ${1} >/dev/null 2>&1
-> +    fi
-> +}
-> +
-> +save_config_file() {
-> +    if [ ! -d ${SAVEDIR} ]; then
-> +        mkdir -p ${SAVEDIR}
-> +    fi
-> +
-> +    if [ -e ${CONF} ]; then
-> +        # cp+rm instead of mv: preserve SELinux context
-> +        # rhbz#509240
-> +        # Do not rely on restorecon.
-> +        cp -c ${CONF} ${SAVECONF}
-> +        rm ${CONF}
-> +    else
-> +        echo > ${SAVECONF}
-> +        # Try restorecon
-> +        fix_context ${SAVECONF}
-> +    fi
-> +}
-> +
-> +nis_config() {
-> +    if [ ! "${PEERNIS}" =3D "no" ]; then
-> +        if [ -n "${new_nis_domain}" ]; then
-> +            domainname "${new_nis_domain}"
-> +            save_config_file
-> +            let contents=3D0
-> +            echo '# generated by /sbin/dhclient-script' > ${CONF}
-> +            fix_context ${CONF}
-> +
-> +            if [ -n "${new_nis_servers}" ]; then
-> +                for i in ${new_nis_servers} ; do
-> +                    echo "domain ${new_nis_domain} server ${i}" >> ${CON=
-F}
-> +                    let contents=3Dcontents+1
-> +                done
-> +            else
-> +                echo "domain ${new_nis_domain} broadcast" >> ${CONF}
-> +                let contents=3Dcontents+1
+> +ntp_replace_conf() {
+> +        echo "$1" | diff -q ${CONF} - > /dev/null 2>&1
+> +        if [ $? -eq 1 ]; then
+> +            echo "$1" > ${CONF}
+> +	    if [ -x /sbin/restorecon ]; then
+> +                restorecon ${CONF} >/dev/null 2>&1
 > +            fi
-> +
-> +            if [ ${contents} -gt 0 ]; then
-> +                service ypbind condrestart >/dev/null 2>&1
-> +            fi
-> +        elif [ -n "${new_nis_servers}" ]; then
-> +            save_config_file
-> +            echo '# generated by /sbin/dhclient-script' > ${CONF}
-> +            fix_context ${CONF}
-> +            let contents=3D0
-> +
-> +            for i in ${new_nis_servers} ; do
-> +                echo "ypserver ${i}" >> ${CONF}
-> +                let contents=3Dcontents+1
-> +            done
-> +
-> +            if [ $contents -gt 0 ]; then
-> +                service ypbind condrestart >/dev/null 2>&1
-> +            fi
+> +            service ntpd restart >/dev/null 2>&1
 > +        fi
+> +}
+> +
+> +ntp_config() {
+> +    if [ ! "${PEERNTP}" =3D "no" ] && [ -n "${new_ntp_servers}" ] &&
+> +        [ -e ${CONF} ] && [ -d ${SAVEDIR} ]; then
+> +        local conf=3D$(grep -v '^server .*  # added by /sbin/dhclient-sc=
+ript$' < ${CONF})
+> +
+> +        conf=3D$(echo "$conf"
+> +            for s in ${new_ntp_servers}; do
+> +                echo "server ${s} ${NTPSERVERARGS}  # added by /sbin/dhc=
+lient-script"
+> +            done)
+> +
+> +        [ -f ${SAVECONF} ] || touch ${SAVECONF}
+> +        ntp_replace_conf "$conf"
 > +    fi
 > +}
 > +
-> +nis_restore() {
-> +    if [ ! "${PEERNIS}" =3D "no" ]; then
-> +        if [ -f ${SAVECONF} ]; then
-> +            rm -f ${CONF}
-> +            # cp+rm instead of mv: preserve SELinux context
-> +            # rhbz#509240
-> +            cp -c ${SAVECONF} ${CONF}
-> +            rm ${SAVECONF}
-> +            fix_context ${CONF} # Restorecon again to be sure.
-> +            service ypbind condrestart >/dev/null 2>&1
-> +        fi
+> +ntp_restore() {
+> +    if [ -e ${CONF} ] && [ -f ${SAVECONF} ]; then
+> +        local conf=3D$(grep -v '^server .*  # added by /sbin/dhclient-sc=
+ript$' < ${CONF})
+> +
+> +        ntp_replace_conf "$conf"
+> +        rm -f ${SAVECONF}
 > +    fi
 > +}
-> +
-> +# Local Variables:
-> +# indent-tabs-mode: nil
-> +# sh-basic-offset: 4
-> +# show-trailing-whitespace: t
-> +# End:
-> diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb b/meta=
--networking/recipes-support/nis/ypbind-mt_1.38.bb
-> index d25ef5c..5391b5b 100644
-> --- a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-> +++ b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-> @@ -28,6 +28,7 @@ PROVIDES +=3D "ypbind"
->  SRC_URI =3D "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
->             file://ypbind-yocto.init \
->             file://ypbind.service \
-> +           file://nis.sh \
+> diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb b/meta-ne=
+tworking/recipes-support/ntp/ntp_4.2.8p2.bb
+> index c54da43..b963584 100644
+> --- a/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb
+> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb
+> @@ -21,6 +21,7 @@ SRC_URI =3D "http://www.eecis.udel.edu/~ntp/ntp_spool/n=
+tp4/ntp-4.2/ntp-${PV}.tar.g
+>             file://sntp.service \
+>             file://sntp \
+>             file://ntpd.list \
+> +           file://ntp.sh \
 >  "
->  SRC_URI[md5sum] =3D "094088c0e282fa7f3b3dd6cc51d0a4e1"
->  SRC_URI[sha256sum] =3D "1930ce19f6ccfe10400f3497b31867f71690d2bcd3f5b575=
-199fa915559b7746"
-> @@ -48,6 +49,9 @@ do_install_append () {
 > =20
->      install -d ${D}${systemd_unitdir}/system
->      install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/sys=
-tem
+>  SRC_URI[md5sum] =3D "fa37049383316322d060ec9061ac23a9"
+> @@ -93,6 +94,9 @@ do_install_append() {
+> =20
+>      install -d ${D}${systemd_unitdir}/ntp-units.d
+>      install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-unit=
+s.d/60-ntpd.list
 > +
 > +    install -d ${D}/${sysconfdir}/dhcp/dhclient.d
-> +    install -m 755 ${WORKDIR}/nis.sh ${D}/${sysconfdir}/dhcp/dhclient.d/
+> +    install -m 755 ${WORKDIR}/ntp.sh ${D}/${sysconfdir}/dhcp/dhclient.d/
 >  }
 > =20
-> =20
-> diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/meta-=
-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> index 4f8bf48..6d5ab2d 100644
-> --- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> +++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> @@ -23,6 +23,7 @@ PNBLACKLIST[ypbind-mt] ?=3D "BROKEN: Depends on broken =
-yp-tools"
->  SRC_URI =3D "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
->             file://ypbind-yocto.init \
->             file://ypbind.service \
-> +           file://nis.sh \
+>  PACKAGES +=3D "ntpdate sntp ${PN}-tickadj ${PN}-utils"
+> @@ -124,6 +128,7 @@ RSUGGESTS_${PN} =3D "iana-etc"
+>  FILES_${PN} =3D "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/in=
+it.d/ntpd ${libdir} \
+>      ${NTP_USER_HOME} \
+>      ${systemd_unitdir}/ntp-units.d/60-ntpd.list \
+> +    ${sysconfdir}/dhcp/dhclient.d/ntp.sh \
 >  "
->  SRC_URI[md5sum] =3D "54e2040d8266ae7d302d081ca310c8a8"
->  SRC_URI[sha256sum] =3D "dc2f7d97c94dcab0acfdcd115cd8b464eb8c427e4bb0fe68=
-404ae7465f517cd3"
-> @@ -45,6 +46,9 @@ do_install_append () {
-> =20
->      install -d ${D}${systemd_unitdir}/system
->      install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/sys=
-tem
-> +
-> +    install -d ${D}/${sysconfdir}/dhcp/dhclient.d
-> +    install -m 755 ${WORKDIR}/nis.sh ${D}/${sysconfdir}/dhcp/dhclient.d/
->  }
-> =20
-> =20
+>  FILES_${PN}-tickadj =3D "${sbindir}/tickadj"
+>  FILES_${PN}-utils =3D "${sbindir} ${datadir}/ntp/lib"
 > --=20
 > 2.1.4
 >=20
@@ -253,20 +185,20 @@ tem
 -Joe MacDonald.
 :wq
 
---Q0rSlbzrZN6k9QnT
+--//IivP0gvsAy3Can
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iQEcBAEBAgAGBQJVuld+AAoJEEn8ffcsOfaWeToH/1O66VYoXaH/QClaQbnB2g62
-GTMDvez453IfVgo8z/p29RpKG+GjjB4e5hexqePAiCzzof5KUOkquSsJy3jQ9lz9
-YTBDYFtWDPJzcHPl/2O4zUvMUGkZApOo+oG1ErHOEaqhI6WHcfsreGXKUklpaBgl
-YaDHjDszp0LCkbjkyZ8Bi2CSdFQLlyobu6KabmUBbzqhGRKhHdJ9y/88EnTTjbbl
-6GThFo44Eq6yfDaribmIDHAD3ZbK3lTYG/uuDeBj69ZTI+vwVngCFLizLQu6qiOK
-b12pydIVAal0vcHfY84yAc23rxhCOkJCLUlS75824npibX9J+LD8RJPnkB0+6o8=
-=Afhz
+iQEcBAEBAgAGBQJVulfWAAoJEEn8ffcsOfaWOKMH/A3K4MgW2IAPQvD1LGhNHzV0
+DLcUwAXs3f1yDcbOeDF7t52sojskEpKQ+9xhv/nAjXrxfymCzZ63dZ9xhbWaDpnu
+oXTnWPTiCtK5UJvlvsLfn7tpo99boIPJrUTuGisGafFG7gH5PgZ1RZZttYOXezJ4
+8nfMJA0TyKEVmQ2+N14jqIgq6tZQcCsdQo9BYEpZ5O5MNYK+TDY6xkYyUKwBQIOn
+Bb5bTRrMdglXLIfnC5Ot9aeXK9OlqGko7JmDOf7eZZyNz6rIYCY/cYvadCgz2ShL
+jBtOBCQ7gfe3tBJPf0SDTaAR1DXOECQTtAZsPZkrrfkpxvPgL/WLzK53zTkcbA4=
+=bh+g
 -----END PGP SIGNATURE-----
 
---Q0rSlbzrZN6k9QnT--
+--//IivP0gvsAy3Can--
