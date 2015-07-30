@@ -1,35 +1,35 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 37C2A7615E
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jul 2015 04:02:37 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99061072"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 30 Jul 2015 12:06:11 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6U40jaP022223
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jul 2015 12:00:45 +0800
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
-	14.03.0181.006; Thu, 30 Jul 2015 12:02:37 +0800
-From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH v2 0/9] add openlmi and it's depends
-Thread-Index: AQHQyg7F692QgcCwV0iwmWIWbHP57Z3zSCdQ
-Date: Thu, 30 Jul 2015 04:02:35 +0000
-Message-ID: <1B56A49860EB2D45ADE3731B15C959FDB2EC56@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1435571855-62168-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<20150729145618.GA12478@jama>
-In-Reply-To: <20150729145618.GA12478@jama>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.26]
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f169.google.com (mail-ig0-f169.google.com
+	[209.85.213.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 16C9E7615E;
+	Thu, 30 Jul 2015 04:07:59 +0000 (UTC)
+Received: by igbpg9 with SMTP id pg9so3252397igb.0;
+	Wed, 29 Jul 2015 21:07:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=lpPG+ha5y8HNkCRa7xFbLMcsMdExiJMwB2cXP4roo6s=;
+	b=hAhqensj6K7lksaHar4PKvlm5xDnMxLwjcHE6717cBcPGQe2H5guc5QkZrKxOBiTfe
+	CovD36Q5Tei2YOfU0YrY3bXE/wNqknqTUfDqOLfryEx9lcSmEFG9iyBlNw62o55Wk4D4
+	6/3WFzgfzBYkqDvV2UxpxiFr9KxcuW3lq+MmRvEf6VTK0XCAc4sUccWQq9n0IagL+95l
+	NpcG+AHE1C2+jsEUql4eP6DdEug4JiYk6WZWAkW/Nn0qguWXDLFmGdoxxKOO85N9Sc74
+	0Z+F+XUqIpCZD1EnvLfLcGNjj3ScTng1YwaPQF3p8nJasJ9TpcdW68cqhhJAWpsnaEqU
+	E+Ww==
+X-Received: by 10.50.39.17 with SMTP id l17mr1531581igk.75.1438229279560; Wed,
+	29 Jul 2015 21:07:59 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH v2 0/9] add openlmi and it's depends
+Received: by 10.107.38.79 with HTTP; Wed, 29 Jul 2015 21:07:30 -0700 (PDT)
+In-Reply-To: <1B56A49860EB2D45ADE3731B15C959FDB2E4B4@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1B56A49860EB2D45ADE3731B15C959FDB2E4B4@G08CNEXMBPEKD01.g08.fujitsu.local>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 29 Jul 2015 20:07:30 -0800
+Message-ID: <CAMKF1sroAnY+C+TPg9-N24V_CLQzzfFTdz2RE+jF1x=_pwxqOA@mail.gmail.com>
+To: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
+Cc: Yocto discussion list <yocto@yoctoproject.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [yocto] [OE-core] glibc 2.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,133 +43,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2015 04:02:40 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 30 Jul 2015 04:08:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
-SGkgTWFydGluDQoNCg0KPiBTdGlsbCBmYWlscyB0byBidWlsZCBvbiBqZW5raW5zLCBsb2dzIGlu
-Og0KPiBodHRwOi8vZXJyb3JzLnlvY3RvcHJvamVjdC5vcmcvRXJyb3JzL0J1aWxkLzc2NjAvDQoN
-Cg0KSSBoYWQgcmVwcm9kdWNlZCB0aGVzZSBlcnJvcnMgb2YgY21waS1iaW5kaW5ncy4NCg0KSWYg
-YnVpbGQgd2l0aCBzd2lnIDMuMC4yIChtZXRhLW9wZW5lbWJlZGRlZCBtYXN0ZXIpLCB0aGVyZSBp
-cyBubyBwcm9ibGVtLg0KDQpCdXQgd2hlbiB0aGUgc3dpZyB1cGdyYWRlcyB0byAzLjAuNiAoc3Vi
-bWl0dGVkIGJ5IExpeGluICkgLCB0aGVzZSBlcnJvcnMgd2lsbCBoYXBwZW4uDQoNClNvLCBJIHdp
-bGwgZml4IHRoZXNlIGVycm9ycywgYW5kIHRoZW4gc3VibWl0IHBhdGNoZXMgYWdhaW4uDQoNCg0K
-Q2hlZXJzIA0KTGVpDQoNCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBv
-cGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWls
-dG86b3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24g
-QmVoYWxmIE9mIE1hcnRpbg0KPiBKYW5zYQ0KPiBTZW50OiBXZWRuZXNkYXksIEp1bHkgMjksIDIw
-MTUgMTA6NTYgUE0NCj4gVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQu
-b3JnDQo+IFN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLW9lXVtQQVRDSCB2MiAwLzldIGFkZCBvcGVu
-bG1pIGFuZCBpdCdzIGRlcGVuZHMNCj4gDQo+IE9uIE1vbiwgSnVuIDI5LCAyMDE1IGF0IDA1OjU3
-OjI2UE0gKzA4MDAsIExlaSBNYW9odWkgd3JvdGU6DQo+ID4gT3BlbkxNSSAgPSBPcGVuIExpbnV4
-IE1hbmFnZW1lbnQgSW5mcmFzdHJ1Y3R1cmUuDQo+ID4gT3BlbkxNSSBpcyBvcGVuLXNvdXJjZSBw
-cm9qZWN0IGFpbWluZyB0byBpbXByb3ZlIG1hbmFnZW1lbnQgb2YgTGludXggc3lzdGVtcw0KPiB1
-c2luZyBXQkVNIHN0YW5kYXJkcy4NCj4gDQo+IFN0aWxsIGZhaWxzIHRvIGJ1aWxkIG9uIGplbmtp
-bnMsIGxvZ3MgaW46DQo+IGh0dHA6Ly9lcnJvcnMueW9jdG9wcm9qZWN0Lm9yZy9FcnJvcnMvQnVp
-bGQvNzY2MC8NCj4gDQo+ID4gTGVpIE1hb2h1aSAoOSk6DQo+ID4gICBvcGVubG1pOiBhZGQgbmV3
-IHJlY2lwZSBvcGVubG1pDQo+ID4gICBjaW0tc2NoZW1hLWV4cGVyOiBhZGQgbmV3IHJlY2lwZSBm
-b3Igb3BlbmxtaQ0KPiA+ICAgY21waS1iaW5kaW5nczogYWRkIG5ldyByZWNpcGUgZm9yIG9wZW5s
-bWkNCj4gPiAgIGtvbmtyZXRjbXBpOmFkZCBuZXcgcmVjaXBlIGZvciBvcGVubG1pDQo+ID4gICBz
-YmxpbS1zZmNiOiBhZGQgbmV3IHJlY2lwZSBmb3Igb3BlbmxtaQ0KPiA+ICAgc2JsaW0tc2ZjQ29t
-bW9uOiBhZGQgbmV3IHJlY2lwZQ0KPiA+ICAgc2JsaW0tY21waS1kZXZlbDogYWRkIG5ldyByZWNp
-cGUNCj4gPiAgIGNpbS1zY2hlbWFfMi40MC4wLmJiOiBkZWxldGUNCj4gPiAgIHB5d2JlbTogYWRk
-IG5ldyByZWNpcGUNCj4gPg0KPiA+ICAuLi4vY2ltLXNjaGVtYS9jaW0tc2NoZW1hLWV4cGVyXzIu
-MzkuMC5iYiAgICAgICAgICB8IDI2ICsrKysrKysNCj4gPiAgLi4uL2NpbS1zY2hlbWEvY2ltLXNj
-aGVtYS1maW5hbF8yLjQwLjAuYmIgICAgICAgICAgfCAzMSArKysrKysrKysNCj4gPiAgLi4uL2Np
-bS1zY2hlbWEvY2ltLXNjaGVtYS9maWxlcy9MSUNFTlNFICAgICAgICAgICAgfCAzNCArKysrKysr
-KysNCj4gPiAgLi4uL2NpbS1zY2hlbWEvY2ltLXNjaGVtYV8yLjQwLjAuYmIgICAgICAgICAgICAg
-ICAgfCAzMSAtLS0tLS0tLS0NCj4gPiAgLi4uL2NtcGktYmluZGluZ3MvMDAwMS1GaXgtZXJyb3Iu
-cGF0Y2ggICAgICAgICAgICAgfCAyNiArKysrKysrDQo+ID4gIC4uLi9jbXBpLWJpbmRpbmdzLzAw
-MDEtTW9kaWZ5LWNtYWtlbGlzdC5wYXRjaCAgICAgIHwgNDEgKysrKysrKysrKysNCj4gPiAgLi4u
-L2NtcGktYmluZGluZ3MtMC40LjE3LW5vLXJ1YnktcGVybC5wYXRjaCAgICAgICAgfCA0NCArKysr
-KysrKysrKysNCj4gPiAgLi4uL2NtcGktYmluZGluZ3MtMC40LjE3LXNibGltLXNpZ3NlZ3YucGF0
-Y2ggICAgICAgfCAyMiArKysrKysNCj4gPiAgLi4uL2NtcGktYmluZGluZ3MtMC45LjUtcHl0aG9u
-LWxpYi1kaXIucGF0Y2ggICAgICAgfCAxNyArKysrKw0KPiA+ICAuLi4vY21waS1iaW5kaW5ncy9j
-bXBpLWJpbmRpbmdzX2dpdC5iYiAgICAgICAgICAgICB8IDMxICsrKysrKysrKw0KPiA+ICAuLi4t
-MC45LjItZml4LXJldHVybmluZy1pbnN0YW5jZS1mcm9tLW1ldGhvZC5wYXRjaCB8IDM4ICsrKysr
-KysrKysNCj4gPiAgLi4uL2tvbmtyZXRjbXBpL2tvbmtyZXRjbXBpXzAuOS4yLmJiICAgICAgICAg
-ICAgICAgfCAzMyArKysrKysrKysNCj4gPiAgLi4uL29wZW5sbWkvb3BlbmxtaS1uZXR3b3JraW5n
-XzAuMy4xLmJiICAgICAgICAgICAgfCAyOSArKysrKysrKw0KPiA+ICAuLi4vb3BlbmxtaS9vcGVu
-bG1pLXByb3ZpZGVycy8wMDAxLWZpeC1lcnJvci5wYXRjaCB8IDI2ICsrKysrKysNCj4gPiAgLi4u
-L29wZW5sbWkvb3BlbmxtaS1wcm92aWRlcnNfMC42LjAuYmIgICAgICAgICAgICAgfCA1NCArKysr
-KysrKysrKysrKysNCj4gPiAgLi4uL29wZW5sbWkvb3BlbmxtaS1zdG9yYWdlXzAuOC4xLmJiICAg
-ICAgICAgICAgICAgfCAzMSArKysrKysrKysNCj4gPiAgLi4uL29wZW5sbWkvb3BlbmxtaS10b29s
-c18wLjEwLjUuYmIgICAgICAgICAgICAgICAgfCAyMyArKysrKysrDQo+ID4gIG1ldGEtb2UvcmVj
-aXBlcy1leHRlbmRlZC9weXdiZW0vcHl3YmVtXzAuOC4wLmJiICAgIHwgMzYgKysrKysrKysrKw0K
-PiA+ICAuLi4vc2JsaW0tY21waS1kZXZlbC0yLjAuMy1kb2NkaXIucGF0Y2ggICAgICAgICAgICB8
-IDE3ICsrKysrDQo+ID4gIC4uLi9zYmxpbS1jbXBpLWRldmVsL3NibGltLWNtcGktZGV2ZWxfMi4w
-LjMuYmIgICAgIHwgMTggKysrKysNCj4gPiAgLi4uL3NibGltLXNmY0NvbW1vbi9zYmxpbS1zZmND
-b21tb25fMS4wLjEuYmIgICAgICAgfCAyMyArKysrKysrDQo+ID4gIC4uLi9yZWNpcGVzLWV4dGVu
-ZGVkL3NibGltLXNmY2IvZmlsZXMvc2ZjYi5zZXJ2aWNlIHwgMTEgKysrDQo+ID4gLi4uL3NibGlt
-LXNmY2ItMS4zLjE1LWZpeC1wcm92aWRlci1kZWJ1Z2dpbmcucGF0Y2ggfCAxMiArKysrDQo+ID4g
-IC4uLi9zYmxpbS1zZmNiLTEuMy4xNi1tYXhNc2dMZW4ucGF0Y2ggICAgICAgICAgICAgIHwgMTQg
-KysrKw0KPiA+ICAuLi4vc2JsaW0tc2ZjYi0xLjMuMTYtbXVsdGlsaWItbWFuLWNmZy5wYXRjaCAg
-ICAgICB8IDQxICsrKysrKysrKysrDQo+ID4gIC4uLmJsaW0tc2ZjYi0xLjMuOS1zZmNicmVwb3Mt
-c2NoZW1hLWxvY2F0aW9uLnBhdGNoIHwgNDIgKysrKysrKysrKysrDQo+ID4gIC4uLi9zYmxpbS1z
-ZmNiLTEuNC41LXNlcnZpY2UucGF0Y2ggICAgICAgICAgICAgICAgIHwgMjcgKysrKysrKysNCj4g
-PiAgLi4uL3NibGltLXNmY2ItMS40LjgtZGVmYXVsdC1lY2RoLWN1cnZlLW5hbWUucGF0Y2ggfCAy
-NiArKysrKysrDQo+ID4gIC4uLi9zYmxpbS1zZmNiL3NibGltLXNmY2JfMS40LjguYmIgICAgICAg
-ICAgICAgICAgIHwgODANCj4gKysrKysrKysrKysrKysrKysrKysrKw0KPiA+ICAyOSBmaWxlcyBj
-aGFuZ2VkLCA4NTMgaW5zZXJ0aW9ucygrKSwgMzEgZGVsZXRpb25zKC0pICBjcmVhdGUgbW9kZQ0K
-PiA+IDEwMDY0NA0KPiA+IG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvY2ltLXNjaGVt
-YS9jaW0tc2NoZW1hLWV4cGVyXzIuMzkuMC5iYg0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4g
-PiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2NpbS1zY2hlbWEvY2ltLXNjaGVtYS1m
-aW5hbF8yLjQwLjAuYmINCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1uZXR3b3Jr
-aW5nL3JlY2lwZXMtc3VwcG9ydC9jaW0tc2NoZW1hL2NpbS1zY2hlbWEvZmlsZXMvTElDRU5TRQ0K
-PiA+ICBkZWxldGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBw
-b3J0L2NpbS1zY2hlbWEvY2ltLXNjaGVtYV8yLjQwLjAuYmINCj4gPiAgY3JlYXRlIG1vZGUgMTAw
-NjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2NtcGktYmluZGluZ3MvY21waS1iaW5k
-aW5ncy8wMDAxLUZpeC1lcnJvci5wYQ0KPiA+IHRjaCAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4g
-bWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2NtcGktYmluZGluZ3MvY21waS1iaW5kaW5ncy8wMDAx
-LU1vZGlmeS1jbWFrZQ0KPiA+IGxpc3QucGF0Y2ggIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1l
-dGEtb2UvcmVjaXBlcy1leHRlbmRlZC9jbXBpLWJpbmRpbmdzL2NtcGktYmluZGluZ3MvY21waS1i
-aW5kaW5ncy0wLjQNCj4gPiAuMTctbm8tcnVieS1wZXJsLnBhdGNoICBjcmVhdGUgbW9kZSAxMDA2
-NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvY21waS1iaW5kaW5ncy9jbXBpLWJpbmRp
-bmdzL2NtcGktYmluZGluZ3MtMC40DQo+ID4gLjE3LXNibGltLXNpZ3NlZ3YucGF0Y2ggIGNyZWF0
-ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9jbXBpLWJpbmRpbmdz
-L2NtcGktYmluZGluZ3MvY21waS1iaW5kaW5ncy0wLjkNCj4gPiAuNS1weXRob24tbGliLWRpci5w
-YXRjaCAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2Nt
-cGktYmluZGluZ3MvY21waS1iaW5kaW5nc19naXQuYmINCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0
-DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2tvbmtyZXRjbXBpL2tvbmtyZXRjbXBpL2tv
-bmtyZXRjbXBpLTAuOS4yLWZpeA0KPiA+IC1yZXR1cm5pbmctaW5zdGFuY2UtZnJvbS1tZXRob2Qu
-cGF0Y2gNCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWV4dGVu
-ZGVkL2tvbmtyZXRjbXBpL2tvbmtyZXRjbXBpXzAuOS4yLmJiDQo+ID4gIGNyZWF0ZSBtb2RlIDEw
-MDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9vcGVubG1pL29wZW5sbWktbmV0d29y
-a2luZ18wLjMuMS5iYg0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lw
-ZXMtZXh0ZW5kZWQvb3BlbmxtaS9vcGVubG1pLXByb3ZpZGVycy8wMDAxLWZpeC1lcnJvci5wYXRj
-DQo+ID4gaCAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVk
-L29wZW5sbWkvb3BlbmxtaS1wcm92aWRlcnNfMC42LjAuYmINCj4gPiAgY3JlYXRlIG1vZGUgMTAw
-NjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL29wZW5sbWkvb3BlbmxtaS1zdG9yYWdl
-XzAuOC4xLmJiDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1l
-eHRlbmRlZC9vcGVubG1pL29wZW5sbWktdG9vbHNfMC4xMC41LmJiDQo+ID4gIGNyZWF0ZSBtb2Rl
-IDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvcHl3YmVtL3B5d2JlbV8wLjguMC5iYg0K
-PiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvc2Js
-aW0tY21waS1kZXZlbC9zYmxpbS1jbXBpLWRldmVsL3NibGltLWNtcGktDQo+ID4gZGV2ZWwtMi4w
-LjMtZG9jZGlyLnBhdGNoICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMt
-ZXh0ZW5kZWQvc2JsaW0tY21waS1kZXZlbC9zYmxpbS1jbXBpLWRldmVsXzIuMC4zLmJiDQo+ID4g
-IGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9zYmxpbS1z
-ZmNDb21tb24vc2JsaW0tc2ZjQ29tbW9uXzEuMC4xLmJiDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0
-NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9zYmxpbS1zZmNiL2ZpbGVzL3NmY2Iuc2Vy
-dmljZQ0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5k
-ZWQvc2JsaW0tc2ZjYi9zYmxpbS1zZmNiLTEuNC44L3NibGltLXNmY2ItMS4zLjE1DQo+ID4gLWZp
-eC1wcm92aWRlci1kZWJ1Z2dpbmcucGF0Y2ggIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEt
-b2UvcmVjaXBlcy1leHRlbmRlZC9zYmxpbS1zZmNiL3NibGltLXNmY2ItMS40Ljgvc2JsaW0tc2Zj
-Yi0xLjMuMTYNCj4gPiAtbWF4TXNnTGVuLnBhdGNoICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBt
-ZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvc2JsaW0tc2ZjYi9zYmxpbS1zZmNiLTEuNC44L3NibGlt
-LXNmY2ItMS4zLjE2DQo+ID4gLW11bHRpbGliLW1hbi1jZmcucGF0Y2ggIGNyZWF0ZSBtb2RlIDEw
-MDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9zYmxpbS1zZmNiL3NibGltLXNmY2It
-MS40Ljgvc2JsaW0tc2ZjYi0xLjMuOS0NCj4gPiBzZmNicmVwb3Mtc2NoZW1hLWxvY2F0aW9uLnBh
-dGNoICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvc2Js
-aW0tc2ZjYi9zYmxpbS1zZmNiLTEuNC44L3NibGltLXNmY2ItMS40LjUtDQo+ID4gc2VydmljZS5w
-YXRjaCAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3Ni
-bGltLXNmY2Ivc2JsaW0tc2ZjYi0xLjQuOC9zYmxpbS1zZmNiLTEuNC44LQ0KPiA+IGRlZmF1bHQt
-ZWNkaC1jdXJ2ZS1uYW1lLnBhdGNoICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3Jl
-Y2lwZXMtZXh0ZW5kZWQvc2JsaW0tc2ZjYi9zYmxpbS1zZmNiXzEuNC44LmJiDQo+ID4NCj4gPiAt
-LQ0KPiA+IDEuOC40LjINCj4gPg0KPiA+IC0tDQo+ID4gX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBs
-aXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBo
-dHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRl
-ZC1kZXZlbA0KPiANCj4gLS0NCj4gTWFydGluICdKYU1hJyBKYW5zYSAgICAgamFiYmVyOiBNYXJ0
-aW4uSmFuc2FAZ21haWwuY29tDQo=
+On Tue, Jul 28, 2015 at 12:48 AM, Lei, Maohui <leimaohui@cn.fujitsu.com> wrote:
+> Hi Khem,
+>
+>
+>> glibc 2.22 will release end of this month. For some time I have put
+>> together the update here
+>>
+>> http://git.openembedded.org/openembedded-core-contrib/commit/?h=kraj/m
+>> aster&id=0
+>> 2e73ea526d94f21c7ef82eb96b062eff8ebb825
+>>
+>> It works pretty well for machines I have tested it on ( arm/x86 ) but
+>> would be interested if more wider trial could be carried out and
+>> issues reported between now and release can be addressed.
+>>
+>> Please give it a try if you have spare cycles
+>
+> I tested it on powerpc(e500v2),and did a ltp test. It does work well.
+>
+
+thanks for the report
+
+
+>
+>
+> Best Regards
+> Lei Maohui
+>
+>
+>
+>
+>> -----Original Message-----
+>> From: openembedded-core-bounces@lists.openembedded.org
+>> [mailto:openembedded-core-bounces@lists.openembedded.org] On Behalf Of
+>> Khem Raj
+>> Sent: Tuesday, July 14, 2015 1:37 AM
+>> To: Patches and discussions about the oe-core layer; OpenEmbedded
+>> Devel List; Yocto discussion list
+>> Subject: [OE-core] glibc 2.22
+>>
+>> Hi All
+>>
+>> glibc 2.22 will release end of this month. For some time I have put
+>> together the update here
+>>
+>> http://git.openembedded.org/openembedded-core-contrib/commit/?h=kraj/m
+>> aster&id=0
+>> 2e73ea526d94f21c7ef82eb96b062eff8ebb825
+>>
+>> It works pretty well for machines I have tested it on ( arm/x86 ) but
+>> would be interested if more wider trial could be carried out and
+>> issues reported between now and release can be addressed.
+>>
+>> Please give it a try if you have spare cycles
+>>
+>> Thanks
+>> -Khem
+>>
+>
+> --
+> _______________________________________________
+> yocto mailing list
+> yocto@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/yocto
 
