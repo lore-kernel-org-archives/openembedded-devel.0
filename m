@@ -1,42 +1,28 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 053D776512
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C93776504
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 00:27:10 +0000 (UTC)
-Received: by pdjr16 with SMTP id r16so33134817pdj.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jul 2015 17:27:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=yxxbSVbLRruJ2dmGdGVOnDxyZH8fras98Ew72w218Lw=;
-	b=Xr2CKjDEpWBEq4KOvepKzpkEuoxbiEJXybvR77vmXxyPm3PK27bb4W4y1mOl2fOfq8
-	xqSo+HWNHc5rBKlSpa369VUtzKlMU52bwGH2sxgnulrTItz9vLLbVz+i34fKAaSasgd+
-	JEovbh5jc++ILDIy7utPAULwgUmzFo1gVMzgp8e6iAT1BifZy6gXOkLqCjc3owY3NmwO
-	I7gqQogbfz9EFvWNIUN370lNsJlsQczG6RRbhsptQlImIMDw96b3ToEEUruFjvVkVuZN
-	pFXhOoljAjXWIM6QFeoatyRyQruwdasDiUkVCnmnQqsBHzaD2s6Tj9URGepQ7Mi28KCF
-	C59w==
-X-Received: by 10.70.108.137 with SMTP id hk9mr112379762pdb.105.1438302430829; 
-	Thu, 30 Jul 2015 17:27:10 -0700 (PDT)
-Received: from ?IPv6:2601:202:4000:1239:911d:7f67:c8fa:6339?
-	([2601:202:4000:1239:911d:7f67:c8fa:6339])
-	by smtp.googlemail.com with ESMTPSA id
-	fu2sm4196059pdb.32.2015.07.30.17.27.07
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 30 Jul 2015 17:27:09 -0700 (PDT)
-Message-ID: <55BAC0CE.4030101@gmail.com>
-Date: Thu, 30 Jul 2015 17:26:54 -0700
-From: akuster808 <akuster808@gmail.com>
+	Fri, 31 Jul 2015 01:04:06 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6V146Hv013491
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 30 Jul 2015 18:04:06 -0700 (PDT)
+Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Thu, 30 Jul 2015 18:03:46 -0700
+Message-ID: <55BAC984.5@windriver.com>
+Date: Fri, 31 Jul 2015 09:04:04 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1437620893-8149-1-git-send-email-akuster808@gmail.com>
-	<20150729145808.GB12478@jama>
-In-Reply-To: <20150729145808.GB12478@jama>
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: Re: [meta-networking][PATCH] netmap: add new package
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+References: <1438050989-15233-1-git-send-email-rongqing.li@windriver.com>
+	<20150730165734.GD6457@mentor.com>
+In-Reply-To: <20150730165734.GD6457@mentor.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/2] ypbind-mt: get parameters from dhcp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,150 +36,216 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2015 00:27:11 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 31 Jul 2015 01:04:07 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
 
-Martin,
 
-
-On 07/29/2015 07:58 AM, Martin Jansa wrote:
-> On Wed, Jul 22, 2015 at 08:08:13PM -0700, Armin Kuster wrote:
->> From: Armin Kuster <akuster@mvista.com>
->>
->> this adds netmap, the fast packet I/O framework
->> http://info.iet.unipi.it/~luigi/netmap/
+On 2015年07月31日 00:57, Joe MacDonald wrote:
+> [[oe] [PATCH 1/2] ypbind-mt: get parameters from dhcp] On 15.07.28 (Tue 10:36) rongqing.li@windriver.com wrote:
 >
-> Fails to build on jenkins log in:
-> http://errors.yoctoproject.org/Errors/Build/7660/
->
-
-I have a lame typo in the configure parameter that my local build didn't 
-show. As I try this on other arch's it is barfing in other areas.
-
-I am going to traveling for the next two weeks so you can remove this or 
-black list it until I can resolve the issues. I do hate cause you more work.
-
-my apologizes,
-Armin
+>> From: Li Wang <li.wang@windriver.com>
 >>
->> Signed-off-by: Armin Kuster <akuster@mvista.com>
+>> adopt a script nis.sh from
+>> https://git.centos.org/raw/rpms!ypbind.git/5a592e88374f067679276488430ebdf51152c358/SOURCES!nis.sh
+>> it is dhclient-script plugin for NIS settings.
+>>
+>> Signed-off-by: Li Wang <li.wang@windriver.com>
+>> Signed-off-by: Roy Li <rongqing.li@windriver.com>
 >> ---
->>   .../recipes-kernel/netmap/netmap-modules_git.bb    | 33 ++++++++++++++++++++++
->>   meta-networking/recipes-kernel/netmap/netmap.inc   | 14 +++++++++
->>   .../recipes-kernel/netmap/netmap_git.bb            | 32 +++++++++++++++++++++
->>   3 files changed, 79 insertions(+)
->>   create mode 100644 meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
->>   create mode 100644 meta-networking/recipes-kernel/netmap/netmap.inc
->>   create mode 100644 meta-networking/recipes-kernel/netmap/netmap_git.bb
+>>   .../recipes-support/nis/ypbind-mt/nis.sh           | 108 +++++++++++++++++++++
+>>   .../recipes-support/nis/ypbind-mt_1.38.bb          |   4 +
+>>   .../recipes-support/nis/ypbind-mt_2.2.bb           |   4 +
+>>   3 files changed, 116 insertions(+)
+>>   create mode 100755 meta-networking/recipes-support/nis/ypbind-mt/nis.sh
 >>
->> diff --git a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
->> new file mode 100644
->> index 0000000..63ca50f
+>> diff --git a/meta-networking/recipes-support/nis/ypbind-mt/nis.sh b/meta-networking/recipes-support/nis/ypbind-mt/nis.sh
+>> new file mode 100755
+>> index 0000000..a1e338c
 >> --- /dev/null
->> +++ b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
->> @@ -0,0 +1,33 @@
->> +require netmap.inc
+>> +++ b/meta-networking/recipes-support/nis/ypbind-mt/nis.sh
+>> @@ -0,0 +1,108 @@
+>> +#!/bin/sh
+>> +#
+>> +# nis.sh: dhclient-script plugin for NIS settings,
+>> +#         place in /etc/dhcp/dhclient.d and 'chmod +x nis.sh' to enable
+>> +#
+>> +# Copyright (C) 2008 Red Hat, Inc.
+>> +#
+>> +# This program is free software; you can redistribute it and/or modify
+>> +# it under the terms of the GNU General Public License as published by
+>> +# the Free Software Foundation; either version 2 of the License, or
+>> +# (at your option) any later version.
+>> +#
+>> +# This program is distributed in the hope that it will be useful,
+>> +# but WITHOUT ANY WARRANTY; without even the implied warranty of
+>> +# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+>> +# GNU General Public License for more details.
+>> +#
+>> +# You should have received a copy of the GNU General Public License
+>> +# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+>> +#
+>> +# Author(s): David Cantrell <dcantrell@redhat.com>
 >> +
->> +DEPENDS = "virtual/kernel"
->> +do_configure[depends] += "virtual/kernel:do_shared_workdir"
+>> +CONF=/etc/yp.conf
+>
+> This should probably be substituted with @SYSCONFDIR@ so it's still
+> functional for anyone who changes ${sysconfdir}.  Just thinking out loud
+
+thanks, Joe
+
+I will change it
+
+
+> now, but what's the systemd equivalent here?  Do we already have one?
+>
+
+this script is not called by initvscript or systemd,  it is called by
+dhclient once dhclient run and  gets configuration, so it is not related
+to systemd
+
+-Roy
+
+> That's not a barrier to accepting this patch, either way.  I'd just like
+> to see this hard-coded path be slightly less hard-coded.
+>
+> -J.
+>
+>> +SAVECONF=${SAVEDIR}/${CONF##*/}.predhclient.${interface}
 >> +
->> +inherit module
->> +
->> +COMPATIBLE_HOST = '(x86_64|i.86|powerpc|aarch64|mips|arm).*-linux'
->> +
->> +CLEANBROKEN = "1"
->> +
->> +export INSTALL_MOD_DIR="kernel/netmap-modules"
->> +
->> +EXTRA_OECONF = "--kernel-dir=${STAGING_KERNEL_BUILDDIR} \
->> +                --kernel-sources=${STAGING_KERNEL_DIR} \
->> +                --install-mod-path=${D} \
->> +                --driver-suffix="-netmap" \
->> +                "
->> +
->> +do_configure () {
->> +    cd ${S}/LINUX
->> +    ./configure ${EXTRA_OECONF}
+>> +fix_context() {
+>> +    if [ -x /sbin/restorecon ]; then
+>> +        /sbin/restorecon ${1} >/dev/null 2>&1
+>> +    fi
 >> +}
 >> +
->> +do_compile () {
->> +    cd ${S}/LINUX
->> +    make
+>> +save_config_file() {
+>> +    if [ ! -d ${SAVEDIR} ]; then
+>> +        mkdir -p ${SAVEDIR}
+>> +    fi
+>> +
+>> +    if [ -e ${CONF} ]; then
+>> +        # cp+rm instead of mv: preserve SELinux context
+>> +        # rhbz#509240
+>> +        # Do not rely on restorecon.
+>> +        cp -c ${CONF} ${SAVECONF}
+>> +        rm ${CONF}
+>> +    else
+>> +        echo > ${SAVECONF}
+>> +        # Try restorecon
+>> +        fix_context ${SAVECONF}
+>> +    fi
 >> +}
 >> +
->> +do_install () {
->> +    cd ${S}/LINUX
->> +    oe_runmake install
->> +}
->> diff --git a/meta-networking/recipes-kernel/netmap/netmap.inc b/meta-networking/recipes-kernel/netmap/netmap.inc
->> new file mode 100644
->> index 0000000..4a101a1
->> --- /dev/null
->> +++ b/meta-networking/recipes-kernel/netmap/netmap.inc
->> @@ -0,0 +1,14 @@
->> +SUMMARY = "netmap and VALE - very fast packet I/O from userspace (FreeBSD/Linux)"
->> +DESCRIPTION= "NETMAP is a framework for very fast packet I/O from userspace.  VALE is an equally fast in-kernel software switch using the netmap API.  Both are implemented as a single kernel module for FreeBSD and Linux, and can deal with line rate on real or emulated 10 Gbit ports."
->> +SECTION = "networking"
->> +HOMEPAGE = "http://code.google.com/p/netmap/"
->> +LICENSE = "GPLv2+"
+>> +nis_config() {
+>> +    if [ ! "${PEERNIS}" = "no" ]; then
+>> +        if [ -n "${new_nis_domain}" ]; then
+>> +            domainname "${new_nis_domain}"
+>> +            save_config_file
+>> +            let contents=0
+>> +            echo '# generated by /sbin/dhclient-script' > ${CONF}
+>> +            fix_context ${CONF}
 >> +
->> +LIC_FILES_CHKSUM = "file://README;beginline=13;endline=14;md5=f64f2b172fe6903ff7b6272c6edde588"
+>> +            if [ -n "${new_nis_servers}" ]; then
+>> +                for i in ${new_nis_servers} ; do
+>> +                    echo "domain ${new_nis_domain} server ${i}" >> ${CONF}
+>> +                    let contents=contents+1
+>> +                done
+>> +            else
+>> +                echo "domain ${new_nis_domain} broadcast" >> ${CONF}
+>> +                let contents=contents+1
+>> +            fi
 >> +
->> +SRCREV = "a14a35b839fe7ab6855f25f1e86e306ee7ad8123"
->> +PV = "master+git${SRCPV}"
+>> +            if [ ${contents} -gt 0 ]; then
+>> +                service ypbind condrestart >/dev/null 2>&1
+>> +            fi
+>> +        elif [ -n "${new_nis_servers}" ]; then
+>> +            save_config_file
+>> +            echo '# generated by /sbin/dhclient-script' > ${CONF}
+>> +            fix_context ${CONF}
+>> +            let contents=0
 >> +
->> +SRC_URI = "git://github.com/luigirizzo/netmap.git"
+>> +            for i in ${new_nis_servers} ; do
+>> +                echo "ypserver ${i}" >> ${CONF}
+>> +                let contents=contents+1
+>> +            done
 >> +
->> +S = "${WORKDIR}/git"
->> diff --git a/meta-networking/recipes-kernel/netmap/netmap_git.bb b/meta-networking/recipes-kernel/netmap/netmap_git.bb
->> new file mode 100644
->> index 0000000..da80bad
->> --- /dev/null
->> +++ b/meta-networking/recipes-kernel/netmap/netmap_git.bb
->> @@ -0,0 +1,32 @@
->> +require netmap.inc
->> +
->> +DEPENDS = "netmap-modules"
->> +
->> +EXTRA_OECONF = "--kernel-dir=${STAGING_KERNEL_BUILDDIR} \
->> +                --kernel-sources=${STAGING_KERNEL_DIR} \
->> +                --install-mod-path=${D} \
->> +                --no-drivers \
->> +                --prefix=${prefix} \
->> +                --destir=${D} \
->> +                --cc='${CC}' \
->> +                --ld='${LD}' \
->> +                "
->> +
->> +do_configure () {
->> +    cd ${S}/LINUX
->> +    ./configure ${EXTRA_OECONF}
+>> +            if [ $contents -gt 0 ]; then
+>> +                service ypbind condrestart >/dev/null 2>&1
+>> +            fi
+>> +        fi
+>> +    fi
 >> +}
 >> +
->> +do_compile () {
->> +    cd ${S}/LINUX
->> +    make  apps
+>> +nis_restore() {
+>> +    if [ ! "${PEERNIS}" = "no" ]; then
+>> +        if [ -f ${SAVECONF} ]; then
+>> +            rm -f ${CONF}
+>> +            # cp+rm instead of mv: preserve SELinux context
+>> +            # rhbz#509240
+>> +            cp -c ${SAVECONF} ${CONF}
+>> +            rm ${SAVECONF}
+>> +            fix_context ${CONF} # Restorecon again to be sure.
+>> +            service ypbind condrestart >/dev/null 2>&1
+>> +        fi
+>> +    fi
 >> +}
 >> +
->> +do_install () {
->> +    cd ${S}/LINUX
->> +    make install-apps DESTDIR=${D}
->> +}
+>> +# Local Variables:
+>> +# indent-tabs-mode: nil
+>> +# sh-basic-offset: 4
+>> +# show-trailing-whitespace: t
+>> +# End:
+>> diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+>> index d25ef5c..5391b5b 100644
+>> --- a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+>> +++ b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+>> @@ -28,6 +28,7 @@ PROVIDES += "ypbind"
+>>   SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
+>>              file://ypbind-yocto.init \
+>>              file://ypbind.service \
+>> +           file://nis.sh \
+>>   "
+>>   SRC_URI[md5sum] = "094088c0e282fa7f3b3dd6cc51d0a4e1"
+>>   SRC_URI[sha256sum] = "1930ce19f6ccfe10400f3497b31867f71690d2bcd3f5b575199fa915559b7746"
+>> @@ -48,6 +49,9 @@ do_install_append () {
+>>
+>>       install -d ${D}${systemd_unitdir}/system
+>>       install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/system
 >> +
->> +FILES_${PN} += "${bindir}"
->> +RDEPENDS_${PN} = "kernel-module-netmap"
->> +RRECOMMENDS_${PN} = "kernel-module-netmap"
->> --
->> 2.3.5
+>> +    install -d ${D}/${sysconfdir}/dhcp/dhclient.d
+>> +    install -m 755 ${WORKDIR}/nis.sh ${D}/${sysconfdir}/dhcp/dhclient.d/
+>>   }
+>>
+>>
+>> diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+>> index 4f8bf48..6d5ab2d 100644
+>> --- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+>> +++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+>> @@ -23,6 +23,7 @@ PNBLACKLIST[ypbind-mt] ?= "BROKEN: Depends on broken yp-tools"
+>>   SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
+>>              file://ypbind-yocto.init \
+>>              file://ypbind.service \
+>> +           file://nis.sh \
+>>   "
+>>   SRC_URI[md5sum] = "54e2040d8266ae7d302d081ca310c8a8"
+>>   SRC_URI[sha256sum] = "dc2f7d97c94dcab0acfdcd115cd8b464eb8c427e4bb0fe68404ae7465f517cd3"
+>> @@ -45,6 +46,9 @@ do_install_append () {
+>>
+>>       install -d ${D}${systemd_unitdir}/system
+>>       install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/system
+>> +
+>> +    install -d ${D}/${sysconfdir}/dhcp/dhclient.d
+>> +    install -m 755 ${WORKDIR}/nis.sh ${D}/${sysconfdir}/dhcp/dhclient.d/
+>>   }
+>>
 >>
 >> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
+>> 2.1.4
+>>
+
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
