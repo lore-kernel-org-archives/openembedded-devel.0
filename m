@@ -1,27 +1,29 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 740E576497
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 11A8B76531
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 01:16:12 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6V1GCw2014681
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 31 Jul 2015 02:47:52 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99103034"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2015 10:51:24 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6V2jxxX014005
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jul 2015 18:16:12 -0700 (PDT)
-Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Thu, 30 Jul 2015 18:15:52 -0700
-Message-ID: <55BACC5A.1050808@windriver.com>
-Date: Fri, 31 Jul 2015 09:16:10 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
-MIME-Version: 1.0
+	Fri, 31 Jul 2015 10:45:59 +0800
+Received: from localhost.localdomain (10.167.226.26) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Fri, 31 Jul 2015 10:47:50 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1436234146-4895-1-git-send-email-rongqing.li@windriver.com>
-In-Reply-To: <1436234146-4895-1-git-send-email-rongqing.li@windriver.com>
-Subject: Re: [PATCH][meta-networking][v3] squid: upgrade to 3.5.5
+Date: Fri, 31 Jul 2015 10:47:37 +0800
+Message-ID: <1438310864-15716-2-git-send-email-leimaohui@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1438310864-15716-1-git-send-email-leimaohui@cn.fujitsu.com>
+References: <1438310864-15716-1-git-send-email-leimaohui@cn.fujitsu.com>
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.26]
+Subject: [meta-oe][PATCH v3 1/8] pywbem:add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,123 +37,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2015 01:16:13 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 31 Jul 2015 02:47:54 -0000
+Content-Type: text/plain
 
-Ping
+pywbem is dependence of openlmi.
 
--Roy
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+---
+ meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb | 36 +++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
 
-On 2015年07月07日 09:55, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
->
-> 1. Remove the squid-change-ksh-referen*.patch which is not needed, since
->     3.5.5 did not use ksh by default.
-> 2. Update the checksum of COPYING,since the date in it has been changed.
-> 3. Define BUILDCXXFLAGS, otherwise the target gcc options -std=c++11 will
->     add into it, and lead to building failure since host gcc maybe not
->     support "-std=c++11"
-> 4. Assume to support GNU atomic operations by default, the running check
->     on cross-compile setup does not work
-> 5. Add the dependency on libpam
->
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->   ...ge-ksh-reference-in-krb-ldap-helper-to-sh.patch | 39 ----------------------
->   .../squid/{squid_3.4.7.bb => squid_3.5.5.bb}       | 11 +++---
->   2 files changed, 6 insertions(+), 44 deletions(-)
->   delete mode 100644 meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
->   rename meta-networking/recipes-daemons/squid/{squid_3.4.7.bb => squid_3.5.5.bb} (86%)
->
-> diff --git a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch b/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
-> deleted file mode 100644
-> index 8e03860..0000000
-> --- a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
-> +++ /dev/null
-> @@ -1,39 +0,0 @@
-> -squid: change ksh reference in krb ldap helper to sh
-> -
-> -Very simple cert_tool script with no ksh specifics.
-> -Change it to use sh so a package dependency doesn't
-> -get created to ksh.
-> -
-> -Upstream-Status: Pending
-> -
-> -Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
-> -Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
-> ----
-> - helpers/external_acl/kerberos_ldap_group/cert_tool | 6 +++---
-> - 1 file changed, 3 insertions(+), 3 deletions(-)
-> -
-> -diff --git a/helpers/external_acl/kerberos_ldap_group/cert_tool b/helpers/external_acl/kerberos_ldap_group/cert_tool
-> -index 9f14959..8c4ea11 100644
-> ---- a/helpers/external_acl/kerberos_ldap_group/cert_tool
-> -+++ b/helpers/external_acl/kerberos_ldap_group/cert_tool
-> -@@ -1,4 +1,4 @@
-> --#!/bin/ksh
-> -+#!/bin/sh
-> - #
-> - #  -----------------------------------------------------------------------------
-> - #
-> -@@ -64,9 +64,9 @@ QUIT
-> - # Create database for Sun ldap and pem file for Openldap
-> - #
-> - rm ${server}_[0-9]*.pem 2>/dev/null
-> --let i=0
-> -+i=0
-> -  ls ${server}_[0-9]*.cert | while read file; do
-> -- let i=i+1
-> -+ i=`expr $i + 1`
-> -  cat  $file  >> ${server}_$i.pem
-> -  CA=`openssl x509 -noout -text -in  ${server}_$i.pem | grep -i "CA:.*true"`
-> -  if [ -n "$CA" ]; then
-> ---
-> -1.9.1
-> -
-> diff --git a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
-> similarity index 86%
-> rename from meta-networking/recipes-daemons/squid/squid_3.4.7.bb
-> rename to meta-networking/recipes-daemons/squid/squid_3.5.5.bb
-> index 7b00dfc..198319d 100644
-> --- a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb
-> +++ b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
-> @@ -16,19 +16,18 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
->              file://Set-up-for-cross-compilation.patch \
->              file://Skip-AC_RUN_IFELSE-tests.patch \
->              file://Fix-flawed-dynamic-ldb-link-test-in-configure.patch \
-> -           file://squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch \
->              file://squid-use-serial-tests-config-needed-by-ptest.patch \
->              file://run-ptest \
->              file://volatiles.03_squid \
->   "
->
->   LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
-> -                    file://COPYRIGHT;md5=2900f50789c498be8e9f1eb23b55cbe9 \
-> +                    file://errors/COPYRIGHT;md5=0fed8f1462f6fdbc62bb431bcb618f46 \
->                      "
-> -SRC_URI[md5sum] = "9951034b10f7ee0f45a95cfae61c57c2"
-> -SRC_URI[sha256sum] = "7b423f3d3495a317503ca559ea535f80445fd7c4e3c3e268cb7a8c97c61af2b6"
-> +SRC_URI[md5sum] = "6aac5c2e9cbbeabcbf2e9e49a178a931"
-> +SRC_URI[sha256sum] = "741c24a307c50f0d845d53cabb66b36d91ce9a73c8a165eae5def5e4d11e6a0d"
->
-> -DEPENDS = "libtool krb5 openldap db cyrus-sasl"
-> +DEPENDS = "libtool krb5 openldap db cyrus-sasl libpam"
->
->   inherit autotools useradd ptest
->
-> @@ -38,6 +37,8 @@ USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --she
->   PACKAGECONFIG ??= ""
->   PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
->   EXTRA_OECONF += "--with-default-user=squid"
-> +export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
-> +CACHED_CONFIGUREVARS += "squid_cv_gnu_atomics=yes"
->
->   TESTDIR = "test-suite"
->   do_compile_ptest() {
->
-
+diff --git a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+new file mode 100644
+index 0000000..2f9a5bd
+--- /dev/null
++++ b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "Python WBEM Client and Provider Interface"
++DESCRIPTION = "\
++A Python library for making CIM (Common Information Model) operations over \
++HTTP using the WBEM CIM-XML protocol. It is based on the idea that a good \
++WBEM client should be easy to use and not necessarily require a large amount \
++of programming knowledge. It is suitable for a large range of tasks from \
++simply poking around to writing web and GUI applications. \
++\
++WBEM, or Web Based Enterprise Management is a manageability protocol, like \
++SNMP, standardised by the Distributed Management Task Force (DMTF) available \
++at http://www.dmtf.org/standards/wbem. \
++\
++It also provides a Python provider interface, and is the fastest and easiest \
++way to write providers on the planet."
++HOMEPAGE = "http://pywbem.sf.net/"
++LICENSE = "LGPLv2"
++LIC_FILES_CHKSUM = "file://pywbem/LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
++SECTION = "Development/Libraries"
++DEPENDS = "python-m2crypto-native"
++SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BPN}/${BP}/${BP}-dev.r704.zip"
++SRC_URI[md5sum] = "84072451dcdd1aa9ee82363848faf7ad"
++SRC_URI[sha256sum] = "898035866d3cc741bbcd62c4ac26e633ad07b7c11d89db2472b9f923f3fd3ed8"
++
++S = "${WORKDIR}/${BP}-dev"
++
++inherit setuptools python-dir
++
++do_install_append() {
++    mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
++    mv ${D}${bindir}/mof_compiler.py ${D}${bindir}/mofcomp
++
++    rm ${D}${libdir}/python2.7/site-packages/${BPN}/wbemcli.py*
++    rm ${D}${libdir}/python2.7/site-packages/${BPN}/mof_compiler.py*
++}
++
++BBCLASSEXTEND = "native"
 -- 
-Best Reagrds,
-Roy | RongQing Li
+1.8.4.2
+
 
