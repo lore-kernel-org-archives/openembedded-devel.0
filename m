@@ -1,27 +1,27 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
+Return-Path: <lixin.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 385A875A60
+	by mail.openembedded.org (Postfix) with ESMTP id F35547648B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 03:44:19 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99105176"
+	Fri, 31 Jul 2015 03:46:26 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99105227"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2015 11:47:52 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2015 11:49:59 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6V3gR5u018022
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6V3iYAH018128
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 11:42:27 +0800
-Received: from localhost.localdomain (10.167.226.26) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 31 Jul 2015 11:44:18 +0800
-From: Lei Maohui <leimaohui@cn.fujitsu.com>
+	Fri, 31 Jul 2015 11:44:34 +0800
+Received: from localhost.localdomain (10.167.226.92) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Fri, 31 Jul 2015 11:46:26 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 31 Jul 2015 11:44:14 +0800
-Message-ID: <1438314254-16633-1-git-send-email-leimaohui@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+Date: Fri, 31 Jul 2015 11:46:13 +0800
+Message-ID: <1438314380-3834-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH] cryptsetup: upgrade 1.6.6->1.6.7
+X-Originating-IP: [10.167.226.92]
+Subject: [meta-oe][PATCH 1/8] xf86-input-void: upgrade 1.4.0 -> 1.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,33 +35,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2015 03:44:20 -0000
+X-List-Received-Date: Fri, 31 Jul 2015 03:46:27 -0000
 Content-Type: text/plain
 
-Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- .../cryptsetup/{cryptsetup_1.6.6.bb => cryptsetup_1.6.7.bb}           | 4 ++--
+ .../{xf86-input-void_1.4.0.bb => xf86-input-void_1.4.1.bb}            | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/cryptsetup/{cryptsetup_1.6.6.bb => cryptsetup_1.6.7.bb} (89%)
+ rename meta-oe/recipes-graphics/xorg-driver/{xf86-input-void_1.4.0.bb => xf86-input-void_1.4.1.bb} (58%)
 
-diff --git a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.6.bb b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.7.bb
-similarity index 89%
-rename from meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.6.bb
-rename to meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.7.bb
-index d84ad2f..939ee35 100644
---- a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.6.bb
-+++ b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.7.bb
-@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
- DEPENDS = "util-linux lvm2 popt libgcrypt"
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-input-void_1.4.0.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-input-void_1.4.1.bb
+similarity index 58%
+rename from meta-oe/recipes-graphics/xorg-driver/xf86-input-void_1.4.0.bb
+rename to meta-oe/recipes-graphics/xorg-driver/xf86-input-void_1.4.1.bb
+index fec64cb..ca0b486 100644
+--- a/meta-oe/recipes-graphics/xorg-driver/xf86-input-void_1.4.0.bb
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-input-void_1.4.1.bb
+@@ -4,5 +4,5 @@ PR = "${INC_PR}.0"
  
- SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v1.6/${BP}.tar.xz"
--SRC_URI[md5sum] = "179c0781de59838a4e39f61b2df5ea48"
--SRC_URI[sha256sum] = "2d2ce28e4e1137dd599d87884b62ef6dbf14fd7848b2a2bf7d61cf125fbd8e6f"
-+SRC_URI[md5sum] = "918406eb5d2e2f5a7348c432ea9b1473"
-+SRC_URI[sha256sum] = "c23c24c8d662032da8650c1c84985221be8bbedf4737c1540bba7e4517dfe820"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4be6a915bfbf111cd88706fc6a6f141b"
  
- inherit autotools gettext pkgconfig
- 
+-SRC_URI[md5sum] = "93821f21e807260b05431c62437a8b32"
+-SRC_URI[sha256sum] = "2ab95865252c64cc88050fa0089a74e063c357b71907bf9be7886047c4987505"
++SRC_URI[md5sum] = "5227013b52b3ca85d6b7ec8adea988d4"
++SRC_URI[sha256sum] = "f96e4f0a622821bf43a74bd419f2a18423343996c9d243c7e1430ba2d142339c"
 -- 
 1.8.4.2
 
