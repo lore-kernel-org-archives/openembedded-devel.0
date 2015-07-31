@@ -1,29 +1,29 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id EF64B76551
+	by mail.openembedded.org (Postfix) with ESMTP id DBD6F76545
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 02:47:55 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99103041"
+	Fri, 31 Jul 2015 02:47:54 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99103036"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2015 10:51:28 +0800
+	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2015 10:51:26 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6V2k32C014022
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6V2k03J014013
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 10:46:03 +0800
+	Fri, 31 Jul 2015 10:46:00 +0800
 Received: from localhost.localdomain (10.167.226.26) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 31 Jul 2015 10:47:54 +0800
+	Server (TLS) id 14.3.181.6; Fri, 31 Jul 2015 10:47:52 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 31 Jul 2015 10:47:42 +0800
-Message-ID: <1438310864-15716-7-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Fri, 31 Jul 2015 10:47:39 +0800
+Message-ID: <1438310864-15716-4-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1438310864-15716-1-git-send-email-leimaohui@cn.fujitsu.com>
 References: <1438310864-15716-1-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH v3 6/8] sblim-sfcb: add new recipe for openlmi
+Subject: [meta-oe][PATCH v3 3/8] cmpi-bindings: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,331 +40,562 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Fri, 31 Jul 2015 02:47:56 -0000
 Content-Type: text/plain
 
-Sblim-sfcb is dependence of openlmi.
+Cmpi-bindings is the dependence of openlmi.
 
 Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../recipes-extended/sblim-sfcb/files/sfcb.service | 11 +++
- .../sblim-sfcb-1.3.15-fix-provider-debugging.patch | 12 ++++
- .../sblim-sfcb-1.3.16-maxMsgLen.patch              | 14 ++++
- .../sblim-sfcb-1.3.16-multilib-man-cfg.patch       | 41 +++++++++++
- ...blim-sfcb-1.3.9-sfcbrepos-schema-location.patch | 42 +++++++++++
- .../sblim-sfcb-1.4.5-service.patch                 | 27 +++++++
- .../sblim-sfcb-1.4.8-default-ecdh-curve-name.patch | 26 +++++++
- .../sblim-sfcb/sblim-sfcb_1.4.8.bb                 | 82 ++++++++++++++++++++++
- 8 files changed, 255 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.15-fix-provider-debugging.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-maxMsgLen.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-multilib-man-cfg.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.5-service.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
+ .../cmpi-bindings/0001-Fix-error.patch             |  26 ++
+ .../cmpi-bindings/0001-Modify-cmakelist.patch      |  41 ++++
+ .../0001-fix-build-error-when-the-swig-3.0.6.patch | 268 +++++++++++++++++++++
+ .../0001-fix-the-build-error-when-python-3.0.patch |  31 +++
+ .../cmpi-bindings-0.4.17-no-ruby-perl.patch        |  44 ++++
+ .../cmpi-bindings-0.4.17-sblim-sigsegv.patch       |  22 ++
+ .../cmpi-bindings-0.9.5-python-lib-dir.patch       |  17 ++
+ .../cmpi-bindings/cmpi-bindings_git.bb             |  37 +++
+ 8 files changed, 486 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Fix-error.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Modify-cmakelist.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-build-error-when-the-swig-3.0.6.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-the-build-error-when-python-3.0.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-no-ruby-perl.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-sblim-sigsegv.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.9.5-python-lib-dir.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service b/meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Fix-error.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Fix-error.patch
 new file mode 100644
-index 0000000..5adf63c
+index 0000000..d1a303c
 --- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service
-@@ -0,0 +1,11 @@
-+[Unit]
-+Description=Small Footprint CIM Broker Service
-+After=syslog.target
-+
-+[Service]
-+Type=oneshot
-+ExecStart=/usr/sbin/sfcbd -d
-+RemainAfterExit=yes
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.15-fix-provider-debugging.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.15-fix-provider-debugging.patch
-new file mode 100644
-index 0000000..4fbecaa
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.15-fix-provider-debugging.patch
-@@ -0,0 +1,12 @@
-+diff -up sblim-sfcb-1.4.5/providerDrv.c.orig sblim-sfcb-1.4.5/providerDrv.c
-+--- sblim-sfcb-1.4.5/providerDrv.c.orig	2013-09-04 12:59:22.140813239 +0200
-++++ sblim-sfcb-1.4.5/providerDrv.c	2013-09-04 12:59:40.511870274 +0200
-+@@ -3585,7 +3585,7 @@ processProviderInvocationRequests(char *
-+     rc = spRecvReq(&providerSockets.receive, &parms->requestor,
-+                    (void **) &parms->req, &rl, &mqg);
-+     if (mqg.rdone) {
-+-      int             debug_break = 0;
-++      volatile int debug_break = 0;
-+       if (rc != 0) {
-+         mlogf(M_ERROR,M_SHOW, "spRecvReq returned error %d. Skipping message.\n", rc);
-+         free(parms);
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-maxMsgLen.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-maxMsgLen.patch
-new file mode 100644
-index 0000000..a0dd816
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-maxMsgLen.patch
-@@ -0,0 +1,14 @@
-+diff -up sblim-sfcb-1.3.16/sfcb.cfg.pre.in.old sblim-sfcb-1.3.16/sfcb.cfg.pre.in
-+--- sblim-sfcb-1.3.16/sfcb.cfg.pre.in.old	2012-06-13 23:21:09.000000000 +0200
-++++ sblim-sfcb-1.3.16/sfcb.cfg.pre.in	2013-06-24 15:34:38.881992781 +0200
-+@@ -113,8 +113,8 @@ provProcs:      32
-+ 
-+ ## Max message length, in bytes. This is a limit on the size of messages
-+ ## written across sockets, for instance, between providers and SFCB.
-+-## Default is 10000000
-+-maxMsgLen:      10000000
-++## Default is 100000000
-++maxMsgLen:      100000000
-+ 
-+ ## Location of the registration directory, where providerRegister can be found
-+ ## Default is @localstatedir@/lib/sfcb/registration
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-multilib-man-cfg.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-multilib-man-cfg.patch
-new file mode 100644
-index 0000000..c8cece2
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-multilib-man-cfg.patch
-@@ -0,0 +1,41 @@
-+diff -up sblim-sfcb-1.3.16/man/sfcbd.1.pre.in.orig sblim-sfcb-1.3.16/man/sfcbd.1.pre.in
-+--- sblim-sfcb-1.3.16/man/sfcbd.1.pre.in.orig	2014-02-26 14:05:32.213091734 +0100
-++++ sblim-sfcb-1.3.16/man/sfcbd.1.pre.in	2014-02-26 15:10:54.476196379 +0100
-+@@ -151,7 +151,7 @@ Default=\fI@localstatedir@/lib/sfcb/regi
-+ .TP
-+ .B providerDirs
-+ A space separated list of directories where sfcb is looking for provider
-+-libraries. Default=\fI@libdir@\ @libdir@/cmpi\fR
-++libraries. Default=\fI/usr/lib\ /usr/lib/cmpi /usr/lib64\ /usr/lib64/cmpi\fR
-+ .TP
-+ .B providerSampleInterval
-+ The interval in seconds at which the provider manager is checking for
-+@@ -275,11 +275,11 @@ SSL private key file for sfcb.
-+ SSL client certificate / trust store for sfcb.
-+ .SH LIBRARIES
-+ .TP
-+-.I @libdir@/libsfc*
-++.I /usr/lib/libsfc* /usr/lib64/libsfc*
-+ Binaries for sfcb runtime libraries.
-+ .TP
-+-.I @libdir@/cmpi/*
-+-Binaries for providers
-++.I /usr/lib/cmpi/* /usr/lib64/cmpi/*
-++Binaries for providers.
-+ .SH AUTHOR
-+ Adrian Schuur <schuur@de.ibm.com>
-+ .SH CONRIBUTORS
-+diff -up sblim-sfcb-1.3.16/sfcb.cfg.pre.in.orig sblim-sfcb-1.3.16/sfcb.cfg.pre.in
-+--- sblim-sfcb-1.3.16/sfcb.cfg.pre.in.orig	2014-02-26 15:35:43.133869718 +0100
-++++ sblim-sfcb-1.3.16/sfcb.cfg.pre.in	2014-02-26 15:38:12.794240532 +0100
-+@@ -121,8 +121,8 @@ maxMsgLen:      100000000
-+ registrationDir: @localstatedir@/lib/sfcb/registration
-+ 
-+ ## Locations to look for provider libraries. Delimit paths with a space.
-+-## Default is @libdir@/sfcb @libdir@ @libdir@/cmpi
-+-providerDirs: @libdir@/sfcb @libdir@ @libdir@/cmpi
-++## Default is /usr/lib/sfcb /usr/lib64/sfcb /usr/lib /usr/lib64 /usr/lib/cmpi /usr/lib64/cmpi
-++providerDirs: /usr/lib/sfcb /usr/lib64/sfcb /usr/lib /usr/lib64 /usr/lib/cmpi /usr/lib64/cmpi
-+ 
-+ ## Enable the root/interop namespace (affects indications)
-+ ## Default: true
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
-new file mode 100644
-index 0000000..7f95a9d
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
-@@ -0,0 +1,42 @@
-+diff -up sblim-sfcb-1.3.9/man/sfcbrepos.1.pre.in.orig sblim-sfcb-1.3.9/man/sfcbrepos.1.pre.in
-+--- sblim-sfcb-1.3.9/man/sfcbrepos.1.pre.in.orig	2009-10-13 21:54:13.000000000 +0200
-++++ sblim-sfcb-1.3.9/man/sfcbrepos.1.pre.in	2010-09-06 14:01:57.294564062 +0200
-+@@ -26,7 +26,7 @@ Supported command line options are:
-+ .TP
-+ \fB\-c\fR \fIschemadir\fR
-+ Path to obtain the CIM Schema classes.
-+-Default is \fI@datadir@/sfcb\fR
-++Default is \fI@datadir@/mof/cim-current\fR
-+ .TP
-+ \fB\-s\fR \fIstagingdir\fR
-+ Path to sfcb staging area containing class MOFs and registration files
-+@@ -58,7 +58,7 @@ Alias of \fB-b\fR
-+ Display usage information and exit.
-+ .SH FILES
-+ .TP
-+-\fI@datadir@/sfcb/CIM/CIM_Schema.mof\fR
-++\fI@datadir@/mof/cim-current/CIM_Schema.mof\fR
-+ CIM Schema
-+ .TP
-+ \fI@localstatedir@/lib/sfcb/registration/providerRegister\fR
-+diff -up sblim-sfcb-1.3.9/sfcbrepos.sh.in.orig sblim-sfcb-1.3.9/sfcbrepos.sh.in
-+--- sblim-sfcb-1.3.9/sfcbrepos.sh.in.orig	2009-12-22 01:18:29.000000000 +0100
-++++ sblim-sfcb-1.3.9/sfcbrepos.sh.in	2010-09-06 13:45:28.671491648 +0200
-+@@ -59,7 +59,7 @@ then
-+     echo -e "\t-X create repository in non-native format as specifed by argument"
-+     echo -e "\t-s specify staging directory [@localstatedir@/lib/sfcb/stage]"
-+     echo -e "\t-r specify repository directory [@localstatedir@/lib/sfcb/registration]"
-+-    echo -e "\t-c specify directory containing CIM Schema MOFs [@datadir@/sfcb/CIM]"
-++    echo -e "\t-c specify directory containing CIM Schema MOFs [@datadir@/mof/cim-current]"
-+     echo -e "\t-t create tiny class repository by omitting inheritance information"
-+     echo -e "\t-z compress repository with gzip"
-+     echo
-+@@ -99,7 +99,7 @@ fi
-+ 
-+ if [ -z "$cimschemadir" ]
-+ then
-+-    cimschemadir=${DESTDIR}@datadir@/sfcb/CIM
-++    cimschemadir=${DESTDIR}@datadir@/mof/cim-current
-+ fi
-+ 
-+ if [ -d $stagingdir ] && [ -f $stagingdir/default.reg ] &&
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.5-service.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.5-service.patch
-new file mode 100644
-index 0000000..eaccfa5
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.5-service.patch
-@@ -0,0 +1,27 @@
-+diff -up sblim-sfcb-1.4.6/Makefile.in.orig sblim-sfcb-1.4.6/Makefile.in
-+--- sblim-sfcb-1.4.6/Makefile.in.orig	2013-10-07 10:43:34.783228137 +0200
-++++ sblim-sfcb-1.4.6/Makefile.in	2013-10-07 10:44:30.178533289 +0200
-+@@ -627,7 +627,6 @@ initdir = $(sysconfdir)/init.d
-+ pamdir = $(sysconfdir)/pam.d
-+ sfcblibdir = $(libdir)/sfcb
-+ cmpilibdir = $(libdir)/cmpi
-+-systemddir = $(DESTDIR)@SYSTEMDDIR@
-+ MANFILES = man/genSslCert.1 man/getSchema.1 man/sfcbd.1 man/sfcbmof.1 \
-+ 	man/sfcbrepos.1 man/sfcbstage.1 man/sfcbunstage.1 man/sfcbuuid.1 \
-+ 	man/wbemcat.1 man/xmltest.1
-+@@ -2366,7 +2365,6 @@ unittest:
-+ 	cd test && sh check_all.sh
-+ 
-+ install-data-local:
-+-	if test -d $(systemddir); then cp $(srcdir)/sblim-sfcb.service $(systemddir); fi; 
-+ 	test -d $(DESTDIR)$(sfcbstatedir)/registration/repository || $(mkdir_p) $(DESTDIR)$(sfcbstatedir)/registration/repository
-+ 	test -d $(DESTDIR)$(sfcbstatedir)/stage/mofs/root/interop || $(mkdir_p) $(DESTDIR)$(sfcbstatedir)/stage/mofs/root/interop
-+ 	test -d $(DESTDIR)$(sfcbstatedir)/stage/regs || $(mkdir_p) $(DESTDIR)$(sfcbstatedir)/stage/regs
-+@@ -2384,7 +2382,6 @@ install-data-local:
-+ uninstall-local:
-+ 	rm -f $(DESTDIR)$(sfcbstatedir)/stage/default.reg
-+ 	rm -f $(DESTDIR)$(sfcbstatedir)/stage/mofs/root/interop/10_interop.mof
-+-	rm -f $(systemddir)/sblim-sfcb.service
-+ @INDICATIONS_TRUE@	rm -f $(DESTDIR)$(sfcbstatedir)/stage/mofs/root/interop/20_indication.mof
-+ @INDICATIONS_TRUE@	rm -f $(DESTDIR)$(sfcbstatedir)/stage/mofs/indication.mof
-+ @DOCS_TRUE@	rm -rf $(DESTDIR)$(sfcbdocdir)/html
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
-new file mode 100644
-index 0000000..3268d49
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Fix-error.patch
 @@ -0,0 +1,26 @@
-+diff -up sblim-sfcb-1.4.8/control.c.orig sblim-sfcb-1.4.8/control.c
-+--- sblim-sfcb-1.4.8/control.c.orig	2014-03-27 00:46:28.000000000 +0100
-++++ sblim-sfcb-1.4.8/control.c	2014-05-15 12:31:38.304169409 +0200
-+@@ -170,7 +170,7 @@ static Control init[] = {
-+   {"sslCertList", CTL_STRING, SFCB_CONFDIR "/clist.pem", {0}},
-+   {"sslCiphers", CTL_STRING, "ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH", {0}},
-+   {"sslDhParamsFilePath", CTL_STRING, NULL, {0}},
-+-  {"sslEcDhCurveName", CTL_STRING, "secp224r1", {0}},
-++  {"sslEcDhCurveName", CTL_STRING, "secp384r1", {0}},
-+   {"enableSslCipherServerPref", CTL_BOOL, NULL, {.b=0}},
-+ 
-+   {"registrationDir", CTL_STRING, SFCB_STATEDIR "/registration", {0}},
-+diff -up sblim-sfcb-1.4.8/sfcb.cfg.pre.in.orig sblim-sfcb-1.4.8/sfcb.cfg.pre.in
-+--- sblim-sfcb-1.4.8/sfcb.cfg.pre.in.orig	2014-05-15 12:31:59.188244865 +0200
-++++ sblim-sfcb-1.4.8/sfcb.cfg.pre.in	2014-05-15 12:32:45.554408412 +0200
-+@@ -293,8 +293,8 @@ sslCiphers: ALL:!ADH:!LOW:!EXP:!MD5:@STR
-+ ## environment. If this value is not set, the indicated default is in effect.
-+ ## If the value is set but the curve name is not recognized by the underlying
-+ ## openssl implementation, SFCB will abort.
-+-## Default is secp224r1
-+-#sslEcDhCurveName: secp224r1
-++## Default is secp384r1
-++#sslEcDhCurveName: secp384r1
-+ 
-+ ## When set to true, sets the SSL_OP_CIPHER_SERVER_PREFERENCE flag for the ssl
-+ ## context, to enforce server's preference instead of the client preference for
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
++From b8e791ce93a467081fb1594b91841e2f57c634a0 Mon Sep 17 00:00:00 2001
++From: Qian Lei <qianl.fnst@cn.fujitsu.com>
++Date: Fri, 16 Jan 2015 18:37:26 +0800
++Subject: [PATCH] Fix error
++
++Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
++---
++ swig/python/CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/swig/python/CMakeLists.txt b/swig/python/CMakeLists.txt
++index 3976296..8073fc8 100644
++--- a/swig/python/CMakeLists.txt
+++++ b/swig/python/CMakeLists.txt
++@@ -27,7 +27,7 @@ SET( SWIG_INPUT "${CMAKE_CURRENT_SOURCE_DIR}/../cmpi.i" )
++ ADD_CUSTOM_COMMAND (
++    OUTPUT  ${SWIG_OUTPUT}
++    COMMAND ${CMAKE_COMMAND} -E echo_append "Creating wrapper code for Python ..."
++-   COMMAND ${SWIG_EXECUTABLE} -python -Wall -threads -features autodoc -o ${SWIG_OUTPUT} -outdir ${CMAKE_CURRENT_BINARY_DIR} -I/usr/include ${SWIG_INPUT}
+++   COMMAND ${SWIG_EXECUTABLE} -python -Wall -threads -features autodoc -o ${SWIG_OUTPUT} -outdir ${CMAKE_CURRENT_BINARY_DIR} -I$ENV{STAGING_INCDIR} ${SWIG_INPUT}
++    COMMAND ${CMAKE_COMMAND} -E echo "Done."
++    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
++    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../*.i
++-- 
++1.8.3.1
++
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Modify-cmakelist.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Modify-cmakelist.patch
 new file mode 100644
-index 0000000..c1c1d4c
+index 0000000..92e5e56
 --- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
-@@ -0,0 +1,82 @@
-+SUMMARY = "Small Footprint CIM Broker"
-+DESCRIPTION = "\
-+Small Footprint CIM Broker (sfcb) is a CIM server conforming to the CIM \
-+Operations over HTTP protocol. It is robust, with low resource consumption \
-+and therefore specifically suited for embedded and resource constrained \
-+environments. sfcb supports providers written against the Common \
-+Manageability Programming Interface (CMPI)."
-+HOMEPAGE = "http://www.sblim.org"
-+SECTION = "Applications/System"
-+LICENSE = "EPL-1.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f300afd598546add034364cd0a533261"
-+DEPENDS = "curl libpam openssl sblim-sfcCommon"
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Modify-cmakelist.patch
+@@ -0,0 +1,41 @@
++From 070822507befe7c1b8bb1be2d36cb12141d03b8f Mon Sep 17 00:00:00 2001
++From: Qian Lei <qianl.fnst@cn.fujitsu.com>
++Date: Tue, 6 Jan 2015 18:38:32 +0800
++Subject: [PATCH] Change the install path in cmakelist
 +
-+SRC_URI = "http://downloads.sourceforge.net/sblim/${PN}-${PV}.tar.bz2 \
-+           file://sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch \
-+           file://sblim-sfcb-1.3.15-fix-provider-debugging.patch \
-+           file://sblim-sfcb-1.3.16-maxMsgLen.patch \
-+           file://sblim-sfcb-1.4.5-service.patch \
-+           file://sblim-sfcb-1.3.16-multilib-man-cfg.patch \
-+           file://sblim-sfcb-1.4.8-default-ecdh-curve-name.patch \
-+           file://sfcb.service"
-+           
-+SRC_URI[md5sum] = "b2e0cb26628cb31e2374959637d9268c"
-+SRC_URI[sha256sum] = "7dc0f16e2c2d3767466a09afee04e6febd611c157d66f8f0ae666be1fefbff3b"
++Upstream-Status: Pending
++Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
++---
++ swig/python/CMakeLists.txt | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
 +
-+inherit autotools
-+inherit ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','', d)}
++diff --git a/swig/python/CMakeLists.txt b/swig/python/CMakeLists.txt
++index 3976296..93c87c1 100644
++--- a/swig/python/CMakeLists.txt
+++++ b/swig/python/CMakeLists.txt
++@@ -56,18 +56,18 @@ TARGET_LINK_LIBRARIES( ${NAME} util )
++ 
++ INSTALL(TARGETS ${NAME} LIBRARY DESTINATION ${CMPI_LIBRARY_DIR})
++ # .py: swig generated
++-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmpi.py DESTINATION ${PYTHON_SITE_DIR} )
+++INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmpi.py DESTINATION $ENV{ENV_INSTALL_PATH} )
++ 
++ 
++ #
++ # cmpi_pywbem_bindings.py: provider implementation
++ #
++-INSTALL(FILES cmpi_pywbem_bindings.py DESTINATION ${PYTHON_SITE_DIR} )
+++INSTALL(FILES cmpi_pywbem_bindings.py DESTINATION $ENV{ENV_INSTALL_PATH} )
++ #INSTALL(FILES Py_UnixProcessProvider.py DESTINATION /usr/lib/pycim )
++ 
++-INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c \"from py_compile import compile; compile('\$ENV{DESTDIR}${PYTHON_SITE_DIR}/cmpi.py', dfile='${PYTHON_SITE_DIR}/cmpi.py')\")")
+++INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c \"from py_compile import compile; compile('\$ENV{DESTDIR}$ENV{ENV_INSTALL_PATH}/cmpi.py', dfile='\$ENV{ENV_INSTALL_PATH}/cmpi.py')\")")
++ 
++-INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c \"from py_compile import compile; compile('\$ENV{DESTDIR}${PYTHON_SITE_DIR}/cmpi_pywbem_bindings.py', dfile='${PYTHON_SITE_DIR}/cmpi_pywbem_bindings.py')\")")
+++INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c \"from py_compile import compile; compile('\$ENV{DESTDIR}$ENV{ENV_INSTALL_PATH}/cmpi_pywbem_bindings.py', dfile='$ENV{ENV_INSTALL_PATH}/cmpi_pywbem_bindings.py')\")")
++ 
++ 
++ 
++-- 
++1.8.3.1
 +
-+SYSTEMD_PACKAGES = "${PN}"
-+SYSTEMD_SERVICE_${PN} = "sblim-sfcb.service"
-+SYSTEMD_AUTO_ENABLE = "enable"
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-build-error-when-the-swig-3.0.6.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-build-error-when-the-swig-3.0.6.patch
+new file mode 100644
+index 0000000..18d27a1
+--- /dev/null
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-build-error-when-the-swig-3.0.6.patch
+@@ -0,0 +1,268 @@
++From 7479e3e13871a20d87f45ba4373a3a919071557a Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@cn.fujitsu.com>
++Date: Sun, 26 Jul 2015 21:39:50 +0900
++Subject: [PATCH] fix build error when the swig = 3.0.6
 +
-+LDFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
++Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
++---
++ swig/cmpi.i           |  6 +++---
++ swig/cmpi_callbacks.i |  6 +++---
++ swig/cmpi_defs.i      | 10 +++++-----
++ swig/cmpi_types.i     | 44 ++++++++++++++++++++++----------------------
++ 4 files changed, 33 insertions(+), 33 deletions(-)
 +
-+EXTRA_OECONF = '--enable-debug \
-+                --enable-ssl \
-+                --enable-pam \
-+                --enable-ipv6 \
-+                CFLAGS="${CFLAGS} -D_GNU_SOURCE"'
++diff --git a/swig/cmpi.i b/swig/cmpi.i
++index d8f9ac4..59d285b 100644
++--- a/swig/cmpi.i
+++++ b/swig/cmpi.i
++@@ -980,11 +980,11 @@ release_select_filter_exp(select_filter_exp *sfe)
++ %apply SWIGTYPE *DISOWN { CMPIInstance *instance_disown };
++ %apply SWIGTYPE *DISOWN { CMPIObjectPath *path_disown };
++ 
++-# Definitions
+++%# Definitions
++ %include "cmpi_defs.i"
++ 
++-# Data types
+++%# Data types
++ %include "cmpi_types.i"
++ 
++-# Broker callbacks
+++%# Broker callbacks
++ %include "cmpi_callbacks.i"
++diff --git a/swig/cmpi_callbacks.i b/swig/cmpi_callbacks.i
++index 4e93a9e..4bba76d 100644
++--- a/swig/cmpi_callbacks.i
+++++ b/swig/cmpi_callbacks.i
++@@ -1,6 +1,6 @@
++-# cmpi_callbacks.i
+++%# cmpi_callbacks.i
++ #
++-# swig bindings for CMPI broker callbacks
+++%# swig bindings for CMPI broker callbacks
++ #
++ 
++ %nodefault _CMPIBroker;
++@@ -445,7 +445,7 @@ typedef struct _CMPIBroker {} CMPIBroker;
++ 
++ #-----------------------------------------------------
++ #
++-# TODO: CMPIMsgFileHandle stuff
+++%# TODO: CMPIMsgFileHandle stuff
++ #
++   /*
++    * query: The select expression.
++diff --git a/swig/cmpi_defs.i b/swig/cmpi_defs.i
++index ec3e455..7dfb608 100644
++--- a/swig/cmpi_defs.i
+++++ b/swig/cmpi_defs.i
++@@ -1,6 +1,6 @@
++-# cmpi_defs.i
+++%# cmpi_defs.i
++ #
++-# swig bindings for CMPI constant definitions
+++%# swig bindings for CMPI constant definitions
++ #
++ 
++ %nodefault CMPIData;
++@@ -78,7 +78,7 @@
++ 
++ #if defined(SWIGPYTHON)
++ #
++-# Conversion from list of python strings to null terminated char** array.
+++%# Conversion from list of python strings to null terminated char** array.
++ #
++ 
++ %typemap(in) char ** 
++@@ -129,7 +129,7 @@
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIData
+++%# CMPIData
++ #
++ 
++ %extend _CMPIData {
++@@ -199,7 +199,7 @@
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIStatus
+++%# CMPIStatus
++ #
++ 
++ %extend _CMPIStatus {
++diff --git a/swig/cmpi_types.i b/swig/cmpi_types.i
++index f69ec16..062b948 100644
++--- a/swig/cmpi_types.i
+++++ b/swig/cmpi_types.i
++@@ -29,15 +29,15 @@
++ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *****************************************************************************/
++ 
++-# cmpift.i
+++%# cmpift.i
++ #
++-# swig bindings for CMPI function tables
+++%# swig bindings for CMPI function tables
++ #
++ 
++ #
++-# Prevent default con-/destructors for all types
++-# CMPI types are handled through function tables
++-# and the broker.
+++%# Prevent default con-/destructors for all types
+++%# CMPI types are handled through function tables
+++%# and the broker.
++ #
++ 
++ %nodefault _CMPIError;
++@@ -102,7 +102,7 @@ typedef struct _CMPIDateTime {} CMPIDateTime;
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIException
+++%# CMPIException
++ #
++ #-----------------------------------------------------
++ 
++@@ -177,7 +177,7 @@ typedef struct _CMPIException {} CMPIException;
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIError
+++%# CMPIError
++ #
++ 
++ /*
++@@ -372,7 +372,7 @@ typedef struct _CMPIException {} CMPIException;
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIResult
+++%# CMPIResult
++ #
++ 
++ /*
++@@ -409,7 +409,7 @@ typedef struct _CMPIException {} CMPIException;
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIObjectPath
+++%# CMPIObjectPath
++ #
++ 
++ /*
++@@ -860,7 +860,7 @@ FIXME: if clone() is exposed, release() must also
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIInstance
+++%# CMPIInstance
++ #
++ 
++ /*
++@@ -1166,7 +1166,7 @@ FIXME: if clone() is exposed, release() must also
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIArgs
+++%# CMPIArgs
++ 
++ /*
++  * CMPI Arguments
++@@ -1282,7 +1282,7 @@ FIXME: if clone() is exposed, release() must also
++ 
++ #-----------------------------------------------------
++ #
++-# CMPISelectExp
+++%# CMPISelectExp
++ 
++ /*
++  * This structure encompasses queries
++@@ -1343,7 +1343,7 @@ FIXME: if clone() is exposed, release() must also
++ 
++ #-----------------------------------------------------
++ #
++-# CMPISelectCond
+++%# CMPISelectCond
++ 
++ /*
++  * Select conditions
++@@ -1372,7 +1372,7 @@ FIXME: if clone() is exposed, release() must also
++ 
++ #-----------------------------------------------------
++ #
++-# CMPISubCond
+++%# CMPISubCond
++ 
++ /*
++  * Sub Conditions
++@@ -1384,7 +1384,7 @@ FIXME: if clone() is exposed, release() must also
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIPredicate
+++%# CMPIPredicate
++ 
++ /*
++  * Predicate
++@@ -1413,7 +1413,7 @@ FIXME: if clone() is exposed, release() must also
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIEnumeration
+++%# CMPIEnumeration
++ 
++ /*
++  * Enumeration provide a linked-list type access to multiple elements
++@@ -1474,7 +1474,7 @@ Python for compatibility */
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIArray
+++%# CMPIArray
++ 
++ /*
++  * Array of equally-typed elements
++@@ -1546,11 +1546,11 @@ Python for compatibility */
++   }
++ }
++ 
++-#BOOKMARK
+++%#BOOKMARK
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIString
+++%# CMPIString
++ 
++ /*
++  * A string
++@@ -1573,7 +1573,7 @@ Python for compatibility */
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIContext
+++%# CMPIContext
++ 
++ /*
++  * Context of the provider invocation
++@@ -1687,7 +1687,7 @@ Python for compatibility */
++ 
++ #-----------------------------------------------------
++ #
++-# CMPIDateTime
+++%# CMPIDateTime
++ 
++ /*
++  * Date and Time
++@@ -1729,4 +1729,4 @@ Python for compatibility */
++   }
++ }
++ 
++-# EOF
+++%# EOF
++-- 
++1.8.4.2
 +
-+# make all with -j option is unsafe.
-+PARALLEL_MAKE = ""
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-the-build-error-when-python-3.0.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-the-build-error-when-python-3.0.patch
+new file mode 100644
+index 0000000..0d6f029
+--- /dev/null
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-the-build-error-when-python-3.0.patch
+@@ -0,0 +1,31 @@
++From 323ced03a66e6cd963d8277b66cfcc7dce740be7 Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@cn.fujitsu.com>
++Date: Fri, 17 Jul 2015 01:33:43 -0700
++Subject: [PATCH] fix Xthe build error when python>3.0
 +
-+INSANE_SKIP_${PN} = "dev-so"
-+CONFIG_SITE = "${WORKDIR}/config-site.${P}"
++Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
++---
++ src/target_python.c | 7 ++++++-
++ 1 file changed, 6 insertions(+), 1 deletion(-)
 +
-+do_install() {
-+    cp -f ${S}/sfcb.cfg.pre.in ${S}/sfcb.cfg
++diff --git a/src/target_python.c b/src/target_python.c
++index 90b43a1..2b76c9e 100644
++--- a/src/target_python.c
+++++ b/src/target_python.c
++@@ -167,7 +167,12 @@ PyGlobalInitialize(const CMPIBroker* broker, CMPIStatus* st)
++   
++   Py_SetProgramName("cmpi_swig");
++   Py_Initialize();
++-  SWIGEXPORT void SWIG_init(void);
+++#if PY_VERSION_HEX >= 0x03000000
+++SWIGEXPORT PyObject*
+++#else
+++  SWIGEXPORT void 
+++#endif
+++  SWIG_init(void);
++   SWIG_init();
++   cmpiMainPyThreadState = PyGILState_GetThisThreadState();
++   PyEval_ReleaseThread(cmpiMainPyThreadState); 
++-- 
++2.1.0
 +
-+    oe_runmake DESTDIR=${D} install
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-no-ruby-perl.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-no-ruby-perl.patch
+new file mode 100644
+index 0000000..a586dbd
+--- /dev/null
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-no-ruby-perl.patch
+@@ -0,0 +1,44 @@
++Port from Fedora20
 +
-+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        install -d ${D}${systemd_unitdir}/system
-+        install -m 0644 ${WORKDIR}/sfcb.service ${D}${systemd_unitdir}/system/sblim-sfcb.service
-+    fi
++Upstream-Status: Pending
++Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
 +
-+    install -d ${D}${sysconfdir}/init.d
-+    mv ${D}${sysconfdir}/init.d/sfcb ${D}${sysconfdir}/init.d/sblim-sfcb
-+    sed -i -e 's/\/var\/lock\/subsys\/sfcb/\/var\/lock\/subsys\/sblim-sfcb/g' ${D}${sysconfdir}/init.d/sblim-sfcb
-+    
-+    rm -rf ${D}${libdir}/sfcb/*.la
++diff -up cmpi-bindings-0.5.2/swig/CMakeLists.txt.orig cmpi-bindings-0.5.2/swig/CMakeLists.txt
++--- cmpi-bindings-0.5.2/swig/CMakeLists.txt.orig	2012-05-04 15:47:18.000000000 +0200
+++++ cmpi-bindings-0.5.2/swig/CMakeLists.txt	2012-05-07 09:59:33.639648918 +0200
++@@ -4,12 +4,12 @@
++ 
++ enable_testing()
++ 
++-FIND_PACKAGE(Ruby)
++-IF (RUBY_LIBRARY AND RUBY_INCLUDE_PATH)
++-  MESSAGE(STATUS "Building Ruby...")
++-  ADD_SUBDIRECTORY(ruby)
++-  OPTION( BUILD_RUBY_GEM "Build Ruby GEM" YES )
++-ENDIF (RUBY_LIBRARY AND RUBY_INCLUDE_PATH)
+++#FIND_PACKAGE(Ruby)
+++#IF (RUBY_LIBRARY AND RUBY_INCLUDE_PATH)
+++#  MESSAGE(STATUS "Building Ruby...")
+++#  ADD_SUBDIRECTORY(ruby)
+++#  OPTION( BUILD_RUBY_GEM "Build Ruby GEM" YES )
+++#ENDIF (RUBY_LIBRARY AND RUBY_INCLUDE_PATH)
++ 
++ FIND_PACKAGE(PythonLibs)
++ IF (PYTHON_LIBRARY)
++@@ -22,9 +22,9 @@ IF (PYTHON_LIBRARY)
++   ENDIF (PYTHON_LINK_LIBS)
++ ENDIF (PYTHON_LIBRARY)
++ 
++-FIND_PACKAGE(Perl)
++-IF (PERL_EXECUTABLE)
++-  MESSAGE(STATUS "Building Perl...")
++-  ADD_SUBDIRECTORY(perl)
++-ENDIF (PERL_EXECUTABLE)
++-    
++\ No newline at end of file
+++#FIND_PACKAGE(Perl)
+++#IF (PERL_EXECUTABLE)
+++#  MESSAGE(STATUS "Building Perl...")
+++#  ADD_SUBDIRECTORY(perl)
+++#ENDIF (PERL_EXECUTABLE)
+++    
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-sblim-sigsegv.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-sblim-sigsegv.patch
+new file mode 100644
+index 0000000..b993372
+--- /dev/null
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-sblim-sigsegv.patch
+@@ -0,0 +1,22 @@
++Port from Fedora20
++
++Upstream-Status: Pending
++Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
++
++diff -up cmpi-bindings-0.4.17/swig/python/cmpi_pywbem_bindings.py.orig cmpi-bindings-0.4.17/swig/python/cmpi_pywbem_bindings.py
++--- cmpi-bindings-0.4.17/swig/python/cmpi_pywbem_bindings.py.orig	2012-03-01 17:05:31.878367281 +0100
+++++ cmpi-bindings-0.4.17/swig/python/cmpi_pywbem_bindings.py	2012-03-01 17:06:34.718110137 +0100
++@@ -350,10 +350,10 @@ class BrokerCIMOMHandle(object):
++             allow_null_ns = False
++         else:
++             allow_null_ns = True
++-            if self.broker.name() == 'RequestHandler':
+++#            if self.broker.name() == 'RequestHandler':
++                 # Check sblim bug #2185410.
++-                if instance.path is not None:
++-                    instance.path.namespace = None
+++#                if instance.path is not None:
+++#                    instance.path.namespace = None
++         inst = self.proxy.pywbem2cmpi_inst(instance, allow_null_ns)
++         rv = self.broker.deliverIndication(self.ctx, ns, inst)
++         return rv
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.9.5-python-lib-dir.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.9.5-python-lib-dir.patch
+new file mode 100644
+index 0000000..b6a51ec
+--- /dev/null
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.9.5-python-lib-dir.patch
+@@ -0,0 +1,17 @@
++Port from Fedora20
++
++Upstream-Status: Pending
++Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
++
++diff -up cmpi-bindings-0.9.5/swig/python/CMakeLists.txt.old cmpi-bindings-0.9.5/swig/python/CMakeLists.txt
++--- cmpi-bindings-0.9.5/swig/python/CMakeLists.txt.old	2013-08-06 15:57:03.576285764 +0200
+++++ cmpi-bindings-0.9.5/swig/python/CMakeLists.txt	2013-08-06 15:57:14.891345941 +0200
++@@ -9,7 +9,7 @@ SET (BUILD_SHARED_LIBS ON)
++ 
++ FIND_PACKAGE(PythonInterp REQUIRED)
++ 
++-EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c "from sys import stdout; from distutils import sysconfig; stdout.write(sysconfig.get_python_lib())" OUTPUT_VARIABLE PYTHON_LIB_DIR)
+++EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c "from sys import stdout; from distutils import sysconfig; stdout.write(sysconfig.get_python_lib(1))" OUTPUT_VARIABLE PYTHON_LIB_DIR)
++ 
++ IF (NOT PYTHON_SITE_DIR)
++   SET (PYTHON_SITE_DIR ${PYTHON_LIB_DIR})
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
+new file mode 100644
+index 0000000..370f35e
+--- /dev/null
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
+@@ -0,0 +1,37 @@
++SUMMARY = "Adapter to write and run CMPI-type CIM providers"
++DESCRIPTION = "CMPI-compliant provider interface for various languages via SWIG"
++HOMEPAGE = "http://github.com/kkaempf/cmpi-bindings"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b19ee058d2d5f69af45da98051d91064"
++SECTION = "Development/Libraries"
++DEPENDS = "swig-native python sblim-cmpi-devel"
++
++SRC_URI = "git://github.com/kkaempf/cmpi-bindings.git;protocol=http \
++           file://cmpi-bindings-0.4.17-no-ruby-perl.patch \
++           file://cmpi-bindings-0.4.17-sblim-sigsegv.patch \
++           file://cmpi-bindings-0.9.5-python-lib-dir.patch \
++           file://0001-Modify-cmakelist.patch \
++           file://0001-Fix-error.patch \
++           file://0001-fix-the-build-error-when-python-3.0.patch \
++           file://0001-fix-build-error-when-the-swig-3.0.6.patch \
++          "
++
++SRCREV = "93b6044f53bcfa79253d7af51a9c23ddd73f8486"
++S = "${WORKDIR}/git"
++
++inherit cmake pythonnative
++
++EXTRA_OECMAKE = "-DLIB='${baselib}'"
++
++do_configure_prepend() {
++    export HOST_SYS=${HOST_SYS}
++    export BUILD_SYS=${BUILD_SYS}
++    export STAGING_LIBDIR=${STAGING_LIBDIR}
++    export STAGING_INCDIR=${STAGING_INCDIR}
++    export ENV_INSTALL_PATH=${PYTHON_SITEPACKAGES_DIR}
 +}
 +
-+pkg_postinst_${PN} () {
-+    OPTS=""
++FILES_${PN} =+"${libdir}/cmpi/libpyCmpiProvider.so ${PYTHON_SITEPACKAGES_DIR}/*"
++FILES_${PN}-dbg =+ "${libdir}/cmpi/.debug/libpyCmpiProvider.so"
 +
-+    if [ x"$D" != "x" ]; then
-+        OPTS="--root=$D"
-+        if type systemctl >/dev/null 2>/dev/null; then
-+                systemctl $OPTS ${SYSTEMD_AUTO_ENABLE} ${SYSTEMD_SERVICE}
-+        fi
-+        exit 1
-+    fi
-+
-+    ${datadir}/sfcb/genSslCert.sh ${sysconfdir}/sfcb
-+    ${bindir}/sfcbrepos -f
-+}
-+
-+FILES_${PN} += "${libdir}/sfcb ${datadir}/sfcb"
-+FILES_${PN}-dbg += "${libdir}/sfcb/.debug"
-+
-+RDEPENDS_${PN} = "perl bash"
++BBCLASSEXTEND = "native"
 -- 
 1.8.4.2
 
