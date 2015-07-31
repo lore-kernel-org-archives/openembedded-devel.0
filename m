@@ -1,33 +1,33 @@
 Return-Path: <vinay.k.awasthi@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D489765C7
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id DF63876647
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 18:52:52 +0000 (UTC)
+	Fri, 31 Jul 2015 18:57:23 +0000 (UTC)
 Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga102.fm.intel.com with ESMTP; 31 Jul 2015 11:52:52 -0700
+	by orsmga103.jf.intel.com with ESMTP; 31 Jul 2015 11:57:23 -0700
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="5.15,586,1432623600"; 
-	d="scan'208,217";a="775397332"
+	d="scan'208,217";a="775400126"
 Received: from orsmsx103.amr.corp.intel.com ([10.22.225.130])
-	by orsmga002.jf.intel.com with ESMTP; 31 Jul 2015 11:52:51 -0700
-Received: from orsmsx159.amr.corp.intel.com (10.22.240.24) by
+	by orsmga002.jf.intel.com with ESMTP; 31 Jul 2015 11:57:22 -0700
+Received: from orsmsx151.amr.corp.intel.com (10.22.226.38) by
 	ORSMSX103.amr.corp.intel.com (10.22.225.130) with Microsoft SMTP Server
-	(TLS) id 14.3.224.2; Fri, 31 Jul 2015 11:52:51 -0700
-Received: from fmsmsx116.amr.corp.intel.com (10.18.116.20) by
-	ORSMSX159.amr.corp.intel.com (10.22.240.24) with Microsoft SMTP Server
-	(TLS) id 14.3.224.2; Fri, 31 Jul 2015 11:52:51 -0700
+	(TLS) id 14.3.224.2; Fri, 31 Jul 2015 11:57:22 -0700
+Received: from fmsmsx123.amr.corp.intel.com (10.18.125.38) by
+	ORSMSX151.amr.corp.intel.com (10.22.226.38) with Microsoft SMTP Server
+	(TLS) id 14.3.224.2; Fri, 31 Jul 2015 11:57:22 -0700
 Received: from fmsmsx108.amr.corp.intel.com ([169.254.9.7]) by
-	fmsmsx116.amr.corp.intel.com ([169.254.2.224]) with mapi id
-	14.03.0224.002; Fri, 31 Jul 2015 11:52:50 -0700
+	fmsmsx123.amr.corp.intel.com ([169.254.2.236]) with mapi id
+	14.03.0224.002; Fri, 31 Jul 2015 11:57:21 -0700
 From: "Awasthi, Vinay K" <vinay.k.awasthi@intel.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Thread-Topic: mata-java openjdk-8 recipe
-Thread-Index: AdDLwfg3Xp1w9pu/T/CMGHz5DnHV+Q==
-Date: Fri, 31 Jul 2015 18:52:50 +0000
-Message-ID: <B399646F8CA055479BEC55F6B065A04A37038BDC@FMSMSX108.amr.corp.intel.com>
+Thread-Index: AdDLwfg3Xp1w9pu/T/CMGHz5DnHV+QAAKNbQ
+Date: Fri, 31 Jul 2015 18:57:20 +0000
+Message-ID: <B399646F8CA055479BEC55F6B065A04A37038C11@FMSMSX108.amr.corp.intel.com>
 Accept-Language: en-US
-X-MS-Has-Attach: yes
+X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [10.1.200.106]
 MIME-Version: 1.0
@@ -46,737 +46,1134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2015 18:52:55 -0000
-X-Groupsio-MsgNum: 56489
+X-List-Received-Date: Fri, 31 Jul 2015 18:57:24 -0000
 Content-Language: en-US
-Content-Type: multipart/mixed;
-	boundary="_004_B399646F8CA055479BEC55F6B065A04A37038BDCFMSMSX108amrcor_"
-
---_004_B399646F8CA055479BEC55F6B065A04A37038BDCFMSMSX108amrcor_
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+
+
+Binary files current-meta-java/.git/index and meta-java/.git/index differ
+diff -rupN current-meta-java/.git/logs/HEAD meta-java/.git/logs/HEAD
+--- current-meta-java/.git/logs/HEAD  2015-07-31 10:54:23.484453867 -0700
++++ meta-java/.git/logs/HEAD     2015-07-30 16:26:20.072240322 -0700
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 66c97ae7461f4c1a13917131787bb76dc=
+34e6b6f Vinay K. Awasthi <vinay.k.awasthi@intel.com> 1438365263 -0700     c=
+lone: from http://git.yoctoproject.org/git/meta-java
++0000000000000000000000000000000000000000 66c97ae7461f4c1a13917131787bb76dc=
+34e6b6f Vinay K. Awasthi <vinay.k.awasthi@intel.com> 1438298780 -0700     c=
+lone: from http://git.yoctoproject.org/git/meta-java
+diff -rupN current-meta-java/.git/logs/refs/heads/master meta-java/.git/log=
+s/refs/heads/master
+--- current-meta-java/.git/logs/refs/heads/master 2015-07-31 10:54:23.48445=
+3867 -0700
++++ meta-java/.git/logs/refs/heads/master   2015-07-30 16:26:20.072240322 -=
+0700
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 66c97ae7461f4c1a13917131787bb76dc=
+34e6b6f Vinay K. Awasthi <vinay.k.awasthi@intel.com> 1438365263 -0700     c=
+lone: from http://git.yoctoproject.org/git/meta-java
++0000000000000000000000000000000000000000 66c97ae7461f4c1a13917131787bb76dc=
+34e6b6f Vinay K. Awasthi <vinay.k.awasthi@intel.com> 1438298780 -0700     c=
+lone: from http://git.yoctoproject.org/git/meta-java
+diff -rupN current-meta-java/.git/logs/refs/remotes/origin/HEAD meta-java/.=
+git/logs/refs/remotes/origin/HEAD
+--- current-meta-java/.git/logs/refs/remotes/origin/HEAD     2015-07-31 10:=
+54:23.484453867 -0700
++++ meta-java/.git/logs/refs/remotes/origin/HEAD 2015-07-30 16:26:20.072240=
+322 -0700
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 66c97ae7461f4c1a13917131787bb76dc=
+34e6b6f Vinay K. Awasthi <vinay.k.awasthi@intel.com> 1438365263 -0700     c=
+lone: from http://git.yoctoproject.org/git/meta-java
++0000000000000000000000000000000000000000 66c97ae7461f4c1a13917131787bb76dc=
+34e6b6f Vinay K. Awasthi <vinay.k.awasthi@intel.com> 1438298780 -0700     c=
+lone: from http://git.yoctoproject.org/git/meta-java
+diff -rupN current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-a=
+rm-ucontext.patch meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-ar=
+m-ucontext.patch
+--- current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-arm-ucon=
+text.patch 1969-12-31 16:00:00.000000000 -0800
++++ meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-arm-ucontext.pat=
+ch  2015-06-01 17:03:03.317644000 -0700
+@@ -0,0 +1,24 @@
++Index: cacao-a567bcb7f589/src/vm/jit/arm/linux/md-os.c
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++--- cacao-a567bcb7f589/src/vm/jit/arm/linux/md-os.c   2013-01-26 21:30:54.=
+206581090 +0100
+++++ cacao-a567bcb7f589/src/vm/jit/arm/linux/md-os.c   2013-01-26 21:31:34.=
+406991316 +0100
++@@ -28,19 +28,7 @@
++
++ #include <stdint.h>
++
++-#define ucontext broken_glibc_ucontext
++-#define ucontext_t broken_glibc_ucontext_t
++ #include <ucontext.h>
++-#undef ucontext
++-#undef ucontext_t
++-
++-typedef struct ucontext {
++-   unsigned long     uc_flags;
++-   struct ucontext  *uc_link;
++-   stack_t           uc_stack;
++-   struct sigcontext uc_mcontext;
++-   sigset_t          uc_sigmask;
++-} ucontext_t;
++
++ #define scontext_t struct sigcontext
++
+diff -rupN current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-l=
+ibtoolize.patch meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-libt=
+oolize.patch
+--- current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-libtooli=
+ze.patch   1969-12-31 16:00:00.000000000 -0800
++++ meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-libtoolize.patch=
+ 2015-07-31 10:43:27.768451761 -0700
+@@ -0,0 +1,12 @@
++Index: icedtea6/Makefile.am
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++--- icedtea6.orig/Makefile.am   2011-12-21 22:58:23.000000000 +0100
+++++ icedtea6/Makefile.am  2011-12-21 23:00:21.405887186 +0100
++@@ -1922,6 +1922,7 @@
++ if BUILD_CACAO
++ if !USE_SYSTEM_CACAO
++    cd cacao/cacao && \
+++   rm -f libtool && \
++    ./autogen.sh && \
++    $(ARCH_PREFIX) ./configure \
++      --host=3D$(host_alias) \
+diff -rupN current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-l=
+oadavg-makefile.patch meta-java/recipes-core/openjdk/openjdk-8-8u40b27/caca=
+o-loadavg-makefile.patch
+--- current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-loadavg-=
+makefile.patch  1969-12-31 16:00:00.000000000 -0800
++++ meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-loadavg-makefile=
+.patch     2015-07-31 10:43:27.768451761 -0700
+@@ -0,0 +1,13 @@
++Index: icedtea-2.1.4/Makefile.am
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++--- icedtea-2.1.4.orig/Makefile.am   2013-01-26 18:20:55.152561203 +0100
+++++ icedtea-2.1.4/Makefile.am   2013-01-26 18:41:07.637992206 +0100
++@@ -1994,6 +1994,8 @@
++ if BUILD_CACAO
++ if !USE_SYSTEM_CACAO
++    cd cacao/cacao && \
+++   patch -p1 -N < $(abs_top_srcdir)/patches/cacao-loadavg.patch && \
+++   patch -p1 -N < $(abs_top_srcdir)/patches/cacao-arm-ucontext.patch && \
++    rm -f libtool && \
++    ./autogen.sh && \
++    $(ARCH_PREFIX) ./configure \
+diff -rupN current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-l=
+oadavg.patch meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-loadavg=
+.patch
+--- current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-loadavg.=
+patch 1969-12-31 16:00:00.000000000 -0800
++++ meta-java/recipes-core/openjdk/openjdk-8-8u40b27/cacao-loadavg.patch   =
+2015-06-01 17:03:03.317644000 -0700
+@@ -0,0 +1,27 @@
++Index: cacao-cff92704c4e0/src/vm/os.hpp
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++--- cacao-cff92704c4e0/src/vm/os.hpp 2011-12-08 13:40:45.000000000 +0100
+++++ cacao-cff92704c4e0/src/vm/os.hpp 2011-12-20 11:42:36.985633921 +0100
++@@ -425,7 +425,21 @@
++ #if defined(HAVE_GETLOADAVG)
++    return ::getloadavg(loadavg, nelem);
++ #else
++-# error getloadavg not available
+++        FILE *LOADAVG;
+++        double avg[3] =3D { 0.0, 0.0, 0.0 };
+++        int i, res =3D -1;;
+++
+++        if ((LOADAVG =3D fopen("/proc/loadavg", "r"))) {
+++                fscanf(LOADAVG, "%lf %lf %lf", &avg[0], &avg[1], &avg[2])=
+;
+++                res =3D 0;
+++                fclose(LOADAVG);
+++        }
+++
+++        for (i =3D 0; (i < nelem) && (i < 3); i++) {
+++                loadavg[i] =3D avg[i];
+++        }
+++
+++        return res;
++ #endif
++ }
++
+diff -rupN current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/faulty-=
+nx-emulation.patch meta-java/recipes-core/openjdk/openjdk-8-8u40b27/faulty-=
+nx-emulation.patch
+--- current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/faulty-nx-emul=
+ation.patch     1969-12-31 16:00:00.000000000 -0800
++++ meta-java/recipes-core/openjdk/openjdk-8-8u40b27/faulty-nx-emulation.pa=
+tch 2015-07-23 11:47:08.206243000 -0700
+@@ -0,0 +1,12 @@
++--- hotspot/src/os/linux/vm/os_linux.cpp   2015-03-07 10:25:19.000000000 -=
+0800
+++++ hotspot/src/os/linux/vm/os_linux.cpp   2015-03-07 10:25:19.000000000 -=
+0800
+++++ a.cpp 2015-07-23 11:45:17.666243540 -0700
++@@ -4847,7 +4847,7 @@
++   Linux::capture_initial_stack(JavaThread::stack_size_at_create());
++
++ #if defined(IA32)
++-  workaround_expand_exec_shield_cs_limit();
+++//  workaround_expand_exec_shield_cs_limit();
++ #endif
++
++   Linux::libpthread_init();
+diff -rupN current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/fix-che=
+cksums.patch meta-java/recipes-core/openjdk/openjdk-8-8u40b27/fix-checksums=
+.patch
+--- current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/fix-checksums.=
+patch 1969-12-31 16:00:00.000000000 -0800
++++ meta-java/recipes-core/openjdk/openjdk-8-8u40b27/fix-checksums.patch 20=
+15-07-01 17:29:09.452204000 -0700
+@@ -0,0 +1,61 @@
++--- icedtea-2.5.4/Makefile.am   2015-04-02 10:48:12.919550836 +0200
+++++ icedtea-2.5.4/Makefile.am   2015-04-02 10:49:41.483806147 +0200
++@@ -4,19 +4,19 @@
++ BUILD_VERSION =3D b13
++ COMBINED_VERSION =3D $(JDK_UPDATE_VERSION)-$(BUILD_VERSION)
++
++-CORBA_CHANGESET =3D 3c9f523bf96e
++-JAXP_CHANGESET =3D ca26767d3375
++-JAXWS_CHANGESET =3D 9a6c90336922
++-JDK_CHANGESET =3D 1e6db4f8b0f3
++-LANGTOOLS_CHANGESET =3D 960cdffa8b3f
++-OPENJDK_CHANGESET =3D 6cf2880aab5e
++-
++-CORBA_SHA256SUM =3D 7411fe2df795981124ae2e4da0ddb7d98db0a94c9399a12876be0=
+3e7177eaa0b
++-JAXP_SHA256SUM =3D 84623e50b69710d12209fc761a49953c78f1a664ff54e022a77e35=
+e25489f2f3
++-JAXWS_SHA256SUM =3D 4bd38a8121d85c422b425177ce648afdee9da18812c91c5b74939=
+c58db33ab4b
++-JDK_SHA256SUM =3D e99b65baf66d8818e3c8fd31d71fbad4ad0ceb0b7fa4c2e0607eca3=
+a40f2ba09
++-LANGTOOLS_SHA256SUM =3D 4fd76cbdf18174128863514b4d3997cb623368697bf4f5af6=
+d079dbbcd7b378a
++-OPENJDK_SHA256SUM =3D 88c92a3cab37446352086876771733229b1602d4f79ef68629a=
+151180652e1f1
+++CORBA_CHANGESET =3D bd0186cd2419
+++JAXP_CHANGESET =3D 56f6ca79467d
+++JAXWS_CHANGESET =3D a5f2cdedb940
+++JDK_CHANGESET =3D d4453d784fb6
+++LANGTOOLS_CHANGESET =3D 83eca922346e
+++OPENJDK_CHANGESET =3D 12deacac8257
+++
+++CORBA_SHA256SUM =3D 870888241bfe3718e1de10e6de5ae70d5f7131752bb3c1657b020=
+c8fb7af6049
+++JAXP_SHA256SUM =3D 254c622fc8a572efd0a10908b4038ba3cf41775d7c09c8f576800b=
+3f608e33f7
+++JAXWS_SHA256SUM =3D c7882fa363960b511a08038130a45477fb8d5e82f3d6244248e61=
+e564f3c84a3
+++JDK_SHA256SUM =3D b02b46c4b52ca06cf0b42cd7daadc7dbee6403e83f7bc951e28d0c7=
+e6d23c3cd
+++LANGTOOLS_SHA256SUM =3D e46e8322d189dbdf631c1b2796b8ca628f2f83b2f05f0ede7=
+4bcbc118201aa16
+++OPENJDK_SHA256SUM =3D 6f54575843bf258fdbef4a23d76f3c4b0ada685b42df0f7f5da=
+2e6112113ad10
++
++ DROP_URL =3D http://icedtea.classpath.org/download/drops
++
++@@ -35,6 +35,7 @@
++ ICEDTEA_MAJOR =3D icedtea7
++ ICEDTEA_BRANCH =3D 2.5
++ ICEDTEA_PREFIX =3D $(ICEDTEA_MAJOR)-forest-$(ICEDTEA_BRANCH)
+++ICEDTEA_PREFIX =3D jdk8u
++ ICEDTEA_HG_URL =3D http://icedtea.classpath.org/hg/release/$(ICEDTEA_PREF=
+IX)
++ ICEDTEA_URL =3D $(DROP_URL)/$(ICEDTEA_MAJOR)/$(ICEDTEA_RELEASE)
++
++@@ -403,6 +403,7 @@
++ endif
++
++ ICEDTEA_BOOT_PATCHES +=3D $(DISTRIBUTION_BOOT_PATCHES)
+++ICEDTEA_BOOT_PATCHES =3D "patches/boot/no.patch"
++
++ # OpenJDK build environment.
++ if ZERO_BUILD
++
++
++--- icedtea-2.5.4/hotspot.map.in     2015-01-22 05:28:55.952757442 +0100
+++++ icedtea-2.5.4/hotspot.map.in     2015-04-07 10:41:38.713960082 +0200
++@@ -1,3 +1,3 @@
++ # version type(drop/hg) url changeset sha256sum
++-default drop http://icedtea.classpath.org/download/drops/icedtea7/@ICEDTE=
+A_RELEASE@ 6144ca9b6a72 4825f8543aa0c065530b05b0a95915a44eea153bbb696d2ffc4=
+b50a398813e34
+++default drop http://icedtea.classpath.org/download/drops/icedtea7/@ICEDTE=
+A_RELEASE@ 6824e2475e04 011dd76928809ac1240d91e2d244ab020f161c33d69e5af35cf=
+4c87084a6949d
++ aarch64 drop http://icedtea.classpath.org/download/drops/icedtea7/@ICEDTE=
+A_RELEASE@ 4d25046abb67 60da8d427f7e3659f701e54c763ea8366d8af3280c7e1067000=
+4938b2f07efef
++
+diff -rupN current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/jvm.cfg=
+ meta-java/recipes-core/openjdk/openjdk-8-8u40b27/jvm.cfg
+--- current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/jvm.cfg 1969-1=
+2-31 16:00:00.000000000 -0800
++++ meta-java/recipes-core/openjdk/openjdk-8-8u40b27/jvm.cfg     2015-05-20=
+ 15:04:01.722291000 -0700
+@@ -0,0 +1,43 @@
++# Copyright 2003 Sun Microsystems, Inc.  All Rights Reserved.
++# DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++#
++# This code is free software; you can redistribute it and/or modify it
++# under the terms of the GNU General Public License version 2 only, as
++# published by the Free Software Foundation.  Sun designates this
++# particular file as subject to the "Classpath" exception as provided
++# by Sun in the LICENSE file that accompanied this code.
++#
++# This code is distributed in the hope that it will be useful, but WITHOUT
++# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
++# version 2 for more details (a copy is included in the LICENSE file that
++# accompanied this code).
++#
++# You should have received a copy of the GNU General Public License versio=
+n
++# 2 along with this work; if not, write to the Free Software Foundation,
++# Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
++#
++# Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa Clara,
++# CA 95054 USA or visit www.sun.com if you need additional information or
++# have any questions.
++#
++#
++# List of JVMs that can be used as an option to java, javac, etc.
++# Order is important -- first in this list is the default JVM.
++# NOTE that this both this file and its format are UNSUPPORTED and
++# WILL GO AWAY in a future release.
++#
++# You may also select a JVM in an arbitrary location with the
++# "-XXaltjvm=3D<jvm_dir>" option, but that too is unsupported
++# and may not be available in a future release.
++#
++-server ERROR
++-client IGNORE
++-hotspot ERROR
++-classic WARN
++-native ERROR
++-green ERROR
++-zero ALIASED_TO -server
++-shark ERROR
++-cacao ERROR
++-jamvm ERROR
+diff -rupN current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/zero-bu=
+ild.patch meta-java/recipes-core/openjdk/openjdk-8-8u40b27/zero-build.patch
+--- current-meta-java/recipes-core/openjdk/openjdk-8-8u40b27/zero-build.pat=
+ch   1969-12-31 16:00:00.000000000 -0800
++++ meta-java/recipes-core/openjdk/openjdk-8-8u40b27/zero-build.patch     2=
+015-07-23 09:58:00.310222000 -0700
+@@ -0,0 +1,14 @@
++---  hotspot/src/share/vm/interpreter/interpreterRuntime.cpp     2015-03-0=
+7 10:25:19.000000000 -0800
+++++  hotspot/src/share/vm/interpreter/interpreterRuntime.cpp     2015-03-0=
+7 10:25:19.000000000 -0800
++@@ -407,7 +407,11 @@
++     // during deoptimization so the interpreter needs to skip it when
++     // the frame is popped.
++     thread->set_do_not_unlock_if_synchronized(true);
+++#ifdef CC_INTERP
+++    return (address) -1;
+++#else
++     return Interpreter::remove_activation_entry();
+++#endif
++   }
++
++   // Need to do this check first since when _do_not_unlock_if_synchronize=
+d
+diff -rupN current-meta-java/recipes-core/openjdk/openjdk-8_8u40b27-2.5.4.b=
+b meta-java/recipes-core/openjdk/openjdk-8_8u40b27-2.5.4.bb
+--- current-meta-java/recipes-core/openjdk/openjdk-8_8u40b27-2.5.4.bb   196=
+9-12-31 16:00:00.000000000 -0800
++++ meta-java/recipes-core/openjdk/openjdk-8_8u40b27-2.5.4.bb     2015-07-2=
+3 09:07:20.918213000 -0700
+@@ -0,0 +1,44 @@
++require openjdk-8-release-8u40b27.inc
++
++PR =3D "${INC_PR}.1"
++
++SRC_URI[iced.md5sum] =3D "646064d7a8d57c2cae0ef35a05de57c8"
++SRC_URI[iced.sha256sum] =3D "5301b9a8592af2cf8e3e7a3650e5e1fe744c6d2de7f8f=
+f78080b2eeae86a9800"
++
++CORBA_CHANGESET =3D "bd0186cd2419"
++SRC_URI[corba.md5sum] =3D "200c233a1b7c72c5c77cd7779d1d257a"
++SRC_URI[corba.sha256sum] =3D "870888241bfe3718e1de10e6de5ae70d5f7131752bb3=
+c1657b020c8fb7af6049"
++
++JAXP_CHANGESET =3D "56f6ca79467d"
++SRC_URI[jaxp.md5sum] =3D "f8b291ba2a3c1e2964bd96328e0ebcfc"
++SRC_URI[jaxp.sha256sum] =3D "254c622fc8a572efd0a10908b4038ba3cf41775d7c09c=
+8f576800b3f608e33f7"
++
++JAXWS_CHANGESET =3D "a5f2cdedb940"
++SRC_URI[jaxws.md5sum] =3D "eef146e64e8b5e11473357bb2f4f1ce2"
++SRC_URI[jaxws.sha256sum] =3D "c7882fa363960b511a08038130a45477fb8d5e82f3d6=
+244248e61e564f3c84a3"
++
++JDK_CHANGESET =3D "d4453d784fb6"
++SRC_URI[jdk.md5sum] =3D "f96a5f820b1ffc8a228d3f44f85c792f"
++SRC_URI[jdk.sha256sum] =3D "b02b46c4b52ca06cf0b42cd7daadc7dbee6403e83f7bc9=
+51e28d0c7e6d23c3cd"
++
++LANGTOOLS_CHANGESET =3D "83eca922346e"
++SRC_URI[langtools.md5sum] =3D "6e2491a30d39b34a3c007c5fc3fc073e"
++SRC_URI[langtools.sha256sum] =3D "e46e8322d189dbdf631c1b2796b8ca628f2f83b2=
+f05f0ede74bcbc118201aa16"
++
++OPENJDK_CHANGESET =3D "12deacac8257"
++SRC_URI[openjdk.md5sum] =3D "2eb4480a74fa5737ace90494c5e16c00"
++SRC_URI[openjdk.sha256sum] =3D "6f54575843bf258fdbef4a23d76f3c4b0ada685b42=
+df0f7f5da2e6112113ad10"
++
++# located in hotspot.map
++HOTSPOT_CHANGESET =3D "6824e2475e04"
++SRC_URI[hotspot.md5sum] =3D "261b1075a044f2620d04ca4a00589fd5"
++SRC_URI[hotspot.sha256sum] =3D "011dd76928809ac1240d91e2d244ab020f161c33d6=
+9e5af35cf4c87084a6949d"
++
++NASHORN_CHANGESET =3D "c2dd88e89edc"
++SRC_URI[nashorn.md5sum] =3D "134199a03c9365febebcad695273a24d"
++SRC_URI[nashorn.sha256sum] =3D "4ab1d77f7763962b85fbf60951c5e2d397badc5447=
+0b58653af3e991b728c6a9"
++
++
++INHIBIT_PACKAGE_DEBUG_SPLIT =3D "1"
++INHIBIT_PACKAGE_STRIP =3D "1"
++
+diff -rupN current-meta-java/recipes-core/openjdk/openjdk-8-common.inc meta=
+-java/recipes-core/openjdk/openjdk-8-common.inc
+--- current-meta-java/recipes-core/openjdk/openjdk-8-common.inc     1969-12=
+-31 16:00:00.000000000 -0800
++++ meta-java/recipes-core/openjdk/openjdk-8-common.inc     2015-07-31 11:3=
+7:20.272462144 -0700
+@@ -0,0 +1,550 @@
++require openjdk-common.inc
++ICEDTEA =3D "icedtea-${ICEDTEA_VERSION}"
++
++INC_PR =3D "r5"
++
++SRC_URI =3D " \
++  ${ICEDTEA_URI} \
++  ${OPENJDK_URI} \
++  ${HOTSPOT_URI} \
++  ${CORBA_URI} \
++  ${JAXP_URI} \
++  ${JAXWS_URI} \
++  ${JDK_URI} \
++  ${LANGTOOLS_URI} \
++  ${CACAO_URI} \
++  ${JAMVM_URI} \
++  ${NASHORN_URI} \
++  ${OEPATCHES} \
++  file://jvm.cfg \
++  "
++
++JDKPN =3D "openjdk-8"
++JDK_DIR =3D "java-8-openjdk"
++
++PN =3D "${JDKPN}-jre"
++PROVIDES +=3D "${JDKPN}"
++
++DEPENDS =3D " \
++           icedtea7-native zip-native ant-native \
++           zlib libxslt-native \
++       jpeg libpng giflib \
++           gtk+ glib-2.0 \
++           cups fontconfig \
++       krb5 \
++       libxt libxinerama libxrender libxtst libxi \
++       freetype alsa-lib libffi \
++          "
++
++# No package should directly depend on this (it should require
++# java2-runtime instead).
++PRIVATE_LIBS =3D "\
++    lib.so libunpack.so libverify.so libjava.so libzip.so libnpt.so \
++    libjava_crw_demo.so libhprof.so libjavanet.so libnio.so \
++    libmanagement.so libinstrument.so libjsound.so libjsoundalsa.so \
++    libj2pcsc.so libj2pkcs11.so libj2gss.so libmlib_image.so \
++    libawt.so libsplashscreen.so libfreetype.so.6 libfontmanager.so \
++    libjpeg.so liblcms.so librmi.so libjawt.so libjaas_unix.so \
++    libattach.so libjdwp.so libdt_socket.so libhpi.so libjli.so \
++    libmawt.so libjvm.so \
++    libversionCheck.so libcompiledMethodLoad.so libgctest.so \
++    libheapViewer.so libheapTracker.so libminst.so libmtrace.so \
++    libwaiters.so libhprof.so \
++       "
++
++export ALT_CUPS_HEADERS_PATH =3D "${STAGING_INCDIR}"
++export ALT_FREETYPE_HEADERS_PATH =3D "${STAGING_INCDIR}/freetype2"
++export ALT_FREETYPE_LIB_PATH =3D "${STAGING_LIBDIR}"
++export CACAO_CONFIGURE_ARGS =3D " \
++    ${@['','--enable-softfloat'][bb.data.getVar('TARGET_FPU',d,1) =3D=3D '=
+soft']}"
++
++JAVA_HOME[unexport] =3D "1"
++
++# disable shark until it is fully working again
++# WITH_ADDITIONAL_VMS ?=3D "--with-additional-vms=3Dshark,cacao,jamvm"
++
++WITH_ADDITIONAL_VMS ?=3D "--with-additional-vms=3Dcacao,jamvm"
++
++# OpenJDK supports parallel compilation but uses a plain number for this.
++# In OE we have PARALLEL_MAKE which is the actual option passed to make,
++# e.g. "-j 4".
++
++OPENJDK_PARALLEL_MAKE :=3D "${PARALLEL_MAKE}"
++PARALLEL_MAKE =3D  ""
++
++def get_jdk8_jobs(d):
++    import bb
++
++    pm =3D bb.data.getVar('OPENJDK_PARALLEL_MAKE', d, 1);
++    if not pm:
++        return "1"
++
++    pm =3D pm.split("j");
++    if (len(pm) =3D=3D 2):
++        return pm[1].strip()
++
++    # Whatever found in PARALLEL_MAKE was not suitable.
++    return "1"
++
++JDK_JOBS =3D "${@get_jdk8_jobs(d)}"
++
++EXTRA_OECONF =3D " \
++        --disable-tests \
++    --disable-hotspot-tests \
++    --disable-langtools-tests \
++    --disable-jdk-tests \
++    --disable-docs \
++    --disable-nss \
++    --disable-system-lcms \
++    --disable-bootstrap \
++        --with-rhino=3D${STAGING_DATADIR_JAVA}/rhino.jar \
++    --with-jdk-home=3D${STAGING_LIBDIR_JVM_NATIVE}/icedtea7-native \
++        --with-openjdk-src-zip=3D${WORKDIR}/${OPENJDK_FILE} \
++    --with-hotspot-src-zip=3D${WORKDIR}/${HOTSPOT_FILE} \
++    --with-corba-src-zip=3D${WORKDIR}/${CORBA_FILE} \
++    --with-jaxp-src-zip=3D${WORKDIR}/${JAXP_FILE} \
++    --with-jaxws-src-zip=3D${WORKDIR}/${JAXWS_FILE} \
++    --with-jdk-src-zip=3D${WORKDIR}/${JDK_FILE} \
++    --with-langtools-src-zip=3D${WORKDIR}/${LANGTOOLS_FILE} \
++    --with-parallel-jobs=3D${JDK_JOBS} \
++    --with-pkgversion=3D${PV} \
++       "
++
++do_configure_prepend() {
++  bbnote "Copying and resetting patches...Configure with parallel-jobs: ${=
+JDK_JOBS}"
++
++  # Automatically copy everything that starts with "icedtea" (or "cacao") =
+and ends with
++  # ".patch" into the patches directory.
++  find ${WORKDIR} -maxdepth 1 -name "icedtea*.patch" -exec cp {} ${S}/patc=
+hes \;
++  find ${WORKDIR} -maxdepth 1 -name "cacao*.patch" -exec cp {} ${S}/patche=
+s \;
++  find ${WORKDIR} -maxdepth 1 -name "zero*.patch" -exec cp {} ${S}/patches=
+ \;
++  find ${WORKDIR} -maxdepth 1 -name "faulty-nx-emulation.patch" -exec cp {=
+} ${S}/patches \;
++  # Overwrite pr2124.patch about NamedCurve.java
++  > ${S}/patches/pr2124.patch
++  # Overwrite rhino.patch about JavaScript
++  > ${S}/patches/rhino.patch
++  > ${S}/patches/boot/no.patch
++  bbnote "No need to remove snmp etc.. from openjdk-8"
++  > ${S}/fsg.sh.in
++}
++
++do_configure_append() {
++        # We are not removing any files from openjdk-8
++        bbnote "Applying remaining patches.."
++    oe_runmake patch
++}
++
++# Work around broken variable quoting in oe-stable 2009 and provide the va=
+riable
++# via the environment which then overrides the erroneous value that was wr=
+itten
++# into '${ICETDEA}/Makefile'.
++# Icedtea's makefile is not compatible to parallelization so we cannot all=
+ow
++# passing a valid ${PARALLEL_MAKE} to it. OTOH OpenJDK's makefiles are
++# parallelizable and we need ${PARALLEL_MAKE} to derive the proper value.
++# The base for this quirk is that GNU Make only considers the last "-j" op=
+tion.
++EXTRA_OEMAKE +=3D 'CC=3D"${CC}" CCC=3D"${CXX}" CPP=3D"${CPP}" CXX=3D"${CXX=
+}" CC_FOR_BUILD=3D"${BUILD_CC}"'
++
++EXTRA_OEMAKE +=3D ' \
++                OE_CFLAGS=3D"${TARGET_CFLAGS}" \
++                OE_CPPFLAGS=3D"${TARGET_CPPFLAGS}" \
++                OE_CXXFLAGS=3D"${TARGET_CXXFLAGS}" \
++                OE_LDFLAGS=3D"${TARGET_LDFLAGS}" \
++                ZIPEXE=3D"${STAGING_BINDIR_NATIVE}/zip" \
++          CROSS_COMPILE_ARCH=3D"${JDK_ARCH}" \
++          REQUIRED_ALSA_VERSION=3D"" \
++               '
++
++# Provides the target architecture to the configure script.
++export LLVM_CONFIGURE_ARCH=3D"${@get_llvm_configure_arch(d)}"
++
++OE_LAUNCHER_LDFLAGS =3D "-Wl,-rpath-link,${STAGING_LIBDIR}/llvm${WANT_LLVM=
+_RELEASE} -Wl,-rpath,${libdir}/llvm${WANT_LLVM_RELEASE}"
++
++OE_LAUNCHER_LDFLAGS_arm =3D ""
++
++EXTRA_OEMAKE +=3D 'OE_LAUNCHER_LDFLAGS=3D"${OE_LAUNCHER_LDFLAGS}"'
++
++
++OPENJDK_OECONF =3D " \
++     --openjdk-target=3D${TARGET_SYS} \
++     --prefix=3D/usr                  \
++     --exec_prefix=3D/usr             \
++     --bindir=3D/usr/bin              \
++     --sbindir=3D/usr/sbin            \
++     --libexecdir=3D/usr/libexec      \
++     --datadir=3D/usr/share           \
++     --sysconfdir=3D/etc              \
++     --sharedstatedir=3D/com          \
++     --localstatedir=3D/var           \
++     --libdir=3D/usr/lib              \
++     --includedir=3D/usr/include      \
++     --oldincludedir=3D/usr/include   \
++     --infodir=3D/usr/share/info      \
++     --mandir=3D/usr/share/man        \
++     --disable-headful              \
++     --with-sys-root=3D${STAGING_DIR_TARGET} \
++     CFLAGS=3D"--sysroot=3D${STAGING_DIR_TARGET} " \
++     CXXFLAGS=3D"--sysroot=3D${STAGING_DIR_TARGET} " \
++     LDFLAGS=3D"--sysroot=3D${STAGING_DIR_TARGET} " \
++     --with-extra-cflags=3D"--sysroot=3D${STAGING_DIR_TARGET} " \
++     --with-extra-cxxflags=3D"--sysroot=3D${STAGING_DIR_TARGET} " \
++     --with-extra-ldflags=3D"--sysroot=3D${STAGING_DIR_TARGET} " \
++     "
++
++def should_build_zero(d):
++    if (get_llvm_configure_arch(d) =3D=3D "x86"):
++        return False
++    else:
++        return True
++
++def openjdk8_configuration(d):
++    if (should_build_zero(d) =3D=3D True):
++        return "--with-jvm-variants=3Dzero LIBFFI_LIBS=3D-lffi"
++    else:
++        return "--with-jvm-variants=3Dserver"
++
++def openjdk_configuration(d):
++    if (should_build_zero(d) =3D=3D True):
++        return "LIBFFI_LIBS=3D-lffi"
++    else:
++        return ""
++
++# LIBFFI_LIBS needs to be in EXTRA_OECONF
++OPENJDK_OECONF +=3D "${@openjdk8_configuration(d)}"
++EXTRA_OECONF +=3D "${@openjdk_configuration(d)}"
++BUILD_ZERO =3D "${@should_build_zero(d)}"
++
++do_compile() {
++
++        OPENJDK8_BUILD_LOC=3D`pwd`
++    bbnote "3/3 Building final JDK @ ${OPENJDK8_BUILD_LOC}"
++        # Create dummy Defs.gmk
++        mkdir -p ${OPENJDK8_BUILD_LOC}/openjdk/jdk/make/common/
++        mkdir -p ${OPENJDK8_BUILD_LOC}/openjdk/jdk/make/common/shared/
++        > ${OPENJDK8_BUILD_LOC}/openjdk/jdk/make/common/shared/Defs.gmk
++
++        # we do not want MAKE=3Dmake
++        MAKE=3D/usr/bin/make
++        BUILD_LD=3D/usr/bin/gcc
++        ###############################################
++        # Icedtea Makefile creates openjdk directory and copies various Ja=
+va tar files etc.. and
++        # and unpacks it...
++        # This is where we need to configure OpenJDK-8
++        ###############################################
++    # Build the final Hotspot + OpenJDK
++        #
++        for F in `find ${TMPDIR}/work/${MULTIMACH_TARGET_SYS}/libffi -name=
+ sysroot-destdir`
++        do
++            #export LIBFFI_LIBS=3D"-L${F}/usr/lib/ -lffi"
++            LIBFFI_LOC=3D$F
++        done
++        for H in `find ${LIBFFI_LOC} -name include`
++        do
++            #export LIBFFI_CFLAGS=3D"-I${H}/"
++            ln -sf $H/ffi.h ${STAGING_INCDIR}/ffi.h
++            ln -sf $H/ffitarget.h ${STAGING_INCDIR}/ffitarget.h
++        done
++        env
++        bbnote "We are trying to not apply patches to icedTea Makefile.am =
+etc.."
++        if [ -e ${OPENJDK8_BUILD_LOC}/openjdk/configure ] ; then
++          cd ${OPENJDK8_BUILD_LOC}/openjdk
++          chmod +x ${OPENJDK8_BUILD_LOC}/openjdk/configure
++          bbnote "Setting up NASHORN...."
++          ln -sf ${WORKDIR}/${NASHORN_FILE} ${OPENJDK8_BUILD_LOC}/nashorn.=
+tar.bz2
++          tar xf ${OPENJDK8_BUILD_LOC}/nashorn.tar.bz2
++          if [ -e nashorn ] ; then
++              rm -rf nashorn
++          fi;
++          mv nashorn-${NASHORN_CHANGESET} nashorn
++          if [ "${BUILD_ZERO}" =3D "True" ] ; then
++              bbnote "Apply fixes to Openjdk source so that we can build Z=
+ero"
++              if patch -l -p0 --dry-run -s -t -f -F 0 < ${S}/patches/zero-=
+build.patch ;
++              then
++                  bbnote "zero-build fix..."
++                  patch -l -p0 < ${S}/patches/zero-build.patch
++              else
++                  bbnote "Already patched for zero-build"
++              fi;
++
++              if patch -l -p0 --dry-run -s -t -f -F 0 < ${S}/patches/fault=
+y-nx-emulation.patch ;
++              then
++                  bbnote "faulty-nx-emulation fix"
++                  patch -l -p0 < ${S}/patches/faulty-nx-emulation.patch
++              else
++                  bbnote "Already patched for nx-emulation"
++              fi;
++          fi;
++
++          bbnote "Configuring OpenJDK-8..."
++          ${OPENJDK8_BUILD_LOC}/openjdk/configure ${OPENJDK_OECONF}
++        fi ;
++
++        cd ${OPENJDK8_BUILD_LOC}
++
++        # check other environment variables
++        bbnote "Starting stage2"
++    oe_runmake icedtea-stage2
++        bbnote "Done with stage2"
++}
++
++do_install() {
++        # Bitbake does not like symlink in packages not containing dbg, de=
+v in name
++        # see insane.bb
++        # Fixing it...
++
++        # Here you will be at icedtea/build area...
++        # come to openjdk-8 area and copy all files.
++        cd openjdk
++        #bbnote "Always run clean before bew build"
++        #make clean
++        bbnote "Building all.."
++        make DEBUG_BINARIES=3Dtrue all
++
++        ############################################
++        # Use following to create compact profiles.
++        ############################################
++        #bbnote "Building All 3 jre compact profiles... Will copy most use=
+d compact3 as jre"
++        #oe_runmake profiles
++        # bbnote "Building All 3 JDK/JRE compact profiles... Will copy mos=
+t used compact3 as jdk/jre"
++        # oe_runmake images profiles
++
++        # Fix Permissions.
++        find ${B}/${BUILD_DIR}/ -type f -not -perm -go=3Dr -exec chmod go+=
+r {} \;
++
++        cd build
++        # Remove all debug symbol files.
++        find . -name "*.diz" -exec rm {} \;
++        cd *
++        cd jdk/bin
++        # There are NO directories here.
++        mkdir -p ${B}/${BUILD_DIR}/j2sdk-image/bin
++        cp * ${B}/${BUILD_DIR}/j2sdk-image/bin/
++        cd ../lib
++        #########################################
++        # Remve symlink for libjsig.so
++        #########################################
++
++
++        bbnote "Removing openjdk build created libjsig symlink"
++        find ${B}/${BUILD_DIR}/ -type l -name libjsig.so |
++            while read SYMLINK
++            do
++                cp --remove-destination `dirname $SYMLINK`/../libjsig.so $=
+SYMLINK
++            done
++        bbnote "Done fixing QA symlink issue"
++
++        mkdir -p ${B}/${BUILD_DIR}/j2sdk-image/lib
++        cp -R * ${B}/${BUILD_DIR}/j2sdk-image/lib
++        # Go back to jdk
++        cd ../include
++        bbnote "copying include"
++
++        # Copy includes
++        mkdir -p ${B}/${BUILD_DIR}/j2sdk-image/include
++        cp -R * ${B}/${BUILD_DIR}/j2sdk-image/include/
++        # go to build
++        cd ../..
++
++        ############################################
++        # Use following to copy compact profiles.
++        ############################################
++        #bbnote "copying compact3 profiles"
++
++        # Copy comapct3 profile as JRE
++        #cp -r images/j2re-compact3-image/bin ${B}/${BUILD_DIR}/j2sdk-imag=
+e/jre/
++        #cp -r images/j2re-compact3-image/lib ${B}/${BUILD_DIR}/j2sdk-imag=
+e/jre/
++        # Do the same for j2re-image
++        #cp -r images/j2re-compact3-image/bin ${B}/${BUILD_DIR}/j2re-image=
+/
++        #cp -r images/j2re-compact3-image/lib ${B}/${BUILD_DIR}/j2re-image=
+/
++
++        # Copy entire JRE
++        cp -r images/j2re-image ${B}/${BUILD_DIR}/
++        # Copy JRE at JDK as base setup
++        # Do the same for JDK (this has src.zip,demo, man, sample and jre =
+as well)
++        cp -r images/j2sdk-image ${B}/${BUILD_DIR}/
++
++
++        # come out of openjdk
++        cd ..
++        pwd
++        bbnote "Done with building openjdk ..."
++
++
++    install -d ${D}${libdir_jvm}
++    cp -R ${B}/${BUILD_DIR}/j2sdk-image ${D}${JDK_HOME}
++
++    chmod u+rw -R ${D}${JDK_HOME}
++
++    # Fix symlink which would point into staging in the binary package.
++    #ln -sf ${datadir_java}/rhino.jar ${D}${JDK_HOME}/jre/lib/rhino.jar
++
++    # JRE is a subset of JDK. So to save space and resemble what the BIG d=
+istros
++    # do we create symlinks from the JDK binaries to their counterparts in=
+ the
++    # JRE folder (which have to exist by that time b/c of dependencies).
++    for F in `find ${D}${JDK_HOME}/jre/bin -type f`
++    do
++          bf=3D`basename $F`
++          bbnote "replace:" $bf
++          rm ${D}${JDK_HOME}/bin/$bf
++          ln -s ${JDK_HOME}/jre/bin/$bf ${D}${JDK_HOME}/bin/$bf
++    done
++
++        install -m644 ${WORKDIR}/jvm.cfg  ${D}${JDK_HOME}/jre/lib/${JDK_AR=
+CH}/
++        # workaround for shared libarary searching
++    ln -sf ${JDK_HOME}/jre/lib/${JDK_ARCH}/server/libjvm.so ${D}${JDK_HOME=
+}/jre/lib/${JDK_ARCH}/
++}
++
++# Notes about the ideas behind packaging:
++# 1) User should install openjdk-8-jre. This is a provider of 'java2-runti=
+me'.
++# 2) This lets package mgmt install: openjdk-8-java
++# -> openjdk-8-vm-shark|openjdk-8-vm-zero|openjdk-8-vm-cacao -> openjdk-8-=
+common
++#
++# With opkg the zero VM is chosen which is good b/c that is the best known=
+ (=3D compatible)
++# runtime. Installing other runtimes side-by-side is possible. Through jvm=
+.cfg the following
++# order of precedence is enforced: zero, shark, cacao. User can chose a di=
+fferent runtime
++# by adding '-shark' or '-cacao' to the Java command (or by deinstalling a=
+n otherwise preferred
++# runtime)
++# 3) All other packages, including -jdk, are optional and not needed for n=
+ormal Java apps.
++#PACKAGES =3D " \
++#            ${JDKPN}-jre \
++#        ${JDKPN}-jre-dbg \
++#            ${JDKPN}-dbg \
++#            ${JDKPN}-demo-dbg \
++#            ${JDKPN}-demo \
++#            ${JDKPN}-source \
++#            ${JDKPN}-doc \
++#            ${JDKPN}-jdk \
++#            ${JDKPN}-java \
++#            ${JDKPN}-vm-shark \
++#            ${JDKPN}-vm-zero \
++#            ${JDKPN}-vm-cacao \
++#        ${JDKPN}-vm-jamvm \
++#            ${JDKPN}-common \
++#           "
++
++PACKAGES =3D " \
++            ${JDKPN}-jre \
++            ${JDKPN}-jdk \
++            ${JDKPN}-java \
++            ${JDKPN}-common \
++            ${JDKPN}-src \
++            ${JDKPN}-vm-server \
++            ${JDKPN}-vm-client \
++            ${JDKPN}-doc \
++            ${JDKPN}-demo \
++            ${JDKPN}-source \
++           "
++
++FILES_${JDKPN}-dbg =3D "\
++    ${JDK_HOME}/bin/.debug \
++    ${JDK_HOME}/lib/.debug \
++    ${JDK_HOME}/lib/${JDK_ARCH}/jli/.debug \
++    ${JDK_HOME}/jre/bin/.debug \
++    ${JDK_HOME}/jre/lib/.debug \
++    ${JDK_HOME}/jre/lib/${JDK_ARCH}/.debug \
++    ${JDK_HOME}/jre/lib/${JDK_ARCH}/jli/.debug \
++    ${JDK_HOME}/jre/lib/${JDK_ARCH}/native_threads/.debug \
++    ${JDK_HOME}/jre/lib/${JDK_ARCH}/server/.debug \
++    ${JDK_HOME}/jre/lib/${JDK_ARCH}/headless/.debug \
++    ${JDK_HOME}/jre/lib/${JDK_ARCH}/xawt/.debug \
++    ${JDK_HOME}/jre/lib/${JDK_ARCH}/client/.debug \
++       "
++
++FILES_${JDKPN}-demo =3D "${JDK_HOME}/demo ${JDK_HOME}/sample"
++RDEPENDS_${JDKPN}-demo =3D "java2-runtime"
++FILES_${JDKPN}-demo-dbg =3D "\
++    ${JDK_HOME}/demo/jvmti/gctest/lib/.debug \
++    ${JDK_HOME}/demo/jvmti/heapTracker/lib/.debug \
++    ${JDK_HOME}/demo/jvmti/heapViewer/lib/.debug \
++    ${JDK_HOME}/demo/jvmti/hprof/lib/.debug \
++    ${JDK_HOME}/demo/jvmti/minst/lib/.debug \
++    ${JDK_HOME}/demo/jvmti/mtrace/lib/.debug \
++    ${JDK_HOME}/demo/jvmti/versionCheck/lib/.debug \
++    ${JDK_HOME}/demo/jvmti/waiters/lib/.debug \
++    ${JDK_HOME}/demo/jvmti/compiledMethodLoad/lib/.debug \
++       "
++
++FILES_${JDKPN}-source =3D "${JDK_HOME}/src.zip"
++
++FILES_${JDKPN}-java =3D "${JDK_HOME}/jre/bin/java"
++
++FILES_${JDKPN}-vm-server =3D "${JDK_HOME}/jre/lib/${JDK_ARCH}/server/"
++
++FILES_${JDKPN}-vm-client =3D "${JDK_HOME}/jre/lib/${JDK_ARCH}/client/"
++
++FILES_${JDKPN}-vm-zero =3D "${JDK_HOME}/jre/lib/${JDK_ARCH}/server/"
++
++FILES_${JDKPN}-vm-shark =3D "${JDK_HOME}/jre/lib/${JDK_ARCH}/shark/"
++
++FILES_${JDKPN}-vm-cacao =3D "${JDK_HOME}/jre/lib/${JDK_ARCH}/cacao/"
++
++FILES_${JDKPN}-vm-jamvm =3D "${JDK_HOME}/jre/lib/${JDK_ARCH}/jamvm/"
++
++FILES_${JDKPN}-common =3D "${JDK_HOME}/jre/ASSEMBLY_EXCEPTION \
++                          ${JDK_HOME}/jre/THIRD_PARTY_README \
++                          ${JDK_HOME}/jre/LICENSE \
++                          ${JDK_HOME}/ASSEMBLY_EXCEPTION \
++                          ${JDK_HOME}/THIRD_PARTY_README \
++                          ${JDK_HOME}/LICENSE \
++                          ${JDK_HOME}/release \
++                          ${JDK_HOME}/jre/lib \
++                         "
++
++FILES_${JDKPN}-jre_append =3D " \
++    ${JDK_HOME}/jre/bin/keytool \
++        ${JDK_HOME}/jre/bin/orbd \
++    ${JDK_HOME}/jre/bin/pack200 \
++        ${JDK_HOME}/jre/bin/rmid \
++    ${JDK_HOME}/jre/bin/rmiregistry \
++        ${JDK_HOME}/jre/bin/servertool \
++    ${JDK_HOME}/jre/bin/tnameserv \
++        ${JDK_HOME}/jre/bin/unpack200 \
++    ${JDK_HOME}/jre/bin/policytool \
++        ${JDK_HOME}/jre/bin/javaws \
++        ${JDK_HOME}/jre/bin/jjs \
++       "
++
++
++RPROVIDES_${JDKPN}-vm-shark =3D "java2-vm"
++RPROVIDES_${JDKPN}-vm-zero =3D "java2-vm"
++RPROVIDES_${JDKPN}-vm-cacao =3D "java2-vm"
++RPROVIDES_${JDKPN}-vm-jamvm =3D "java2-vm"
++
++# Even though a vm is a hard dependency it is set as RRECOMMENDS so a sing=
+le vm can get uninstalled:
++# root@beaglebone:~/java# opkg remove openjdk-8-vm-shark
++# No packages removed.
++# Collected errors:
++#  * print_dependents_warning: Package openjdk-8-vm-shark is depended upon=
+ by packages:
++#  * print_dependents_warning: openjdk-8-java
++#  * print_dependents_warning: These might cease to work if package openjd=
+k-8-vm-shark is removed.
++RRECOMMENDS_${JDKPN}-java =3D "java2-vm"
++
++# For some reason shark and cacao do not automatically depends on -common.
++# So we add that manually.
++RDEPENDS_${JDKPN}-vm-shark =3D "${JDKPN}-common"
++RDEPENDS_${JDKPN}-vm-cacao =3D "${JDKPN}-common"
++RDEPENDS_${JDKPN}-vm-jamvm =3D "${JDKPN}-common"
++# With out this you may see md5 mismatches.
++RDEPENDS_${JDKPN}-common =3D "librhino-java"
++
++# There is a symlink to a .so but this one is valid.
++INSANE_SKIP_${JDKPN}-vm-shark =3D "dev-so"
++INSANE_SKIP_${JDKPN}-vm-zero =3D "dev-so"
++INSANE_SKIP_${JDKPN}-vm-cacao =3D "dev-so"
++INSANE_SKIP_${JDKPN}-vm-jamvm =3D "dev-so"
++INSANE_SKIP_${JDKPN}-common =3D "dev-so"
++
++FILES_${JDKPN}-jdk =3D " \
++                       ${JDK_HOME}/bin \
++                       ${JDK_HOME}/lib \
++                       ${JDK_HOME}/include \
++                      "
++RDEPENDS_${JDKPN}-jre =3D "${JDKPN}-java ${JDKPN}-common"
++RDEPENDS_${JDKPN}-java =3D "${JDKPN}-common"
++RPROVIDES_${JDKPN}-jre =3D "java2-runtime"
++
++RDEPENDS_${JDKPN}-jdk =3D "${JDKPN}-jre"
++
++FILES_${JDKPN}-doc =3D "${JDK_HOME}/man"
++
++require openjdk-postinst.inc
++
++ALTERNATIVE_PRIORITY =3D "50"
+diff -rupN current-meta-java/recipes-core/openjdk/openjdk-8-release-8u40b27=
+.inc meta-java/recipes-core/openjdk/openjdk-8-release-8u40b27.inc
+--- current-meta-java/recipes-core/openjdk/openjdk-8-release-8u40b27.inc   =
+  1969-12-31 16:00:00.000000000 -0800
++++ meta-java/recipes-core/openjdk/openjdk-8-release-8u40b27.inc     2015-0=
+7-23 11:56:05.938245000 -0700
+@@ -0,0 +1,74 @@
++require openjdk-8-common.inc
++
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f655=
+2"
++
++FILESPATH =3D. "${FILE_DIRNAME}/openjdk-8-8u40b27:"
++
++# Name of the directory containing the compiled output
++BUILD_DIR =3D "openjdk.build"
++BUILD_DIR_ECJ =3D "openjdk.build-ecj"
++
++ICEDTEA_URI =3D "http://icedtea.wildebeest.org/download/source/${ICEDTEA}.=
+tar.gz;name=3Diced"
++
++#ICEDTEA_PREFIX =3D "icedtea7-forest-2.5"
++ICEDTEA_PREFIX =3D "jdk8u"
++
++OPENJDK_HG_URL =3D "http://hg.openjdk.java.net/jdk8u/jdk8u"
++
++OPENJDK_FILE =3D "${OPENJDK_CHANGESET}.tar.bz2"
++OPENJDK_URI =3D "${OPENJDK_HG_URL}/archive/${OPENJDK_FILE};name=3Dopenjdk;=
+unpack=3Dfalse"
++
++HOTSPOT_FILE =3D "${HOTSPOT_CHANGESET}.tar.bz2"
++HOTSPOT_URI =3D "${OPENJDK_HG_URL}/hotspot/archive/${HOTSPOT_FILE};name=3D=
+hotspot;unpack=3Dfalse"
++
++CORBA_FILE =3D "${CORBA_CHANGESET}.tar.bz2"
++CORBA_URI =3D "${OPENJDK_HG_URL}/corba/archive/${CORBA_FILE};name=3Dcorba;=
+unpack=3Dfalse"
++
++JAXP_FILE =3D "${JAXP_CHANGESET}.tar.bz2"
++JAXP_URI =3D "${OPENJDK_HG_URL}/jaxp/archive/${JAXP_FILE};name=3Djaxp;unpa=
+ck=3Dfalse"
++
++JAXWS_FILE =3D "${JAXWS_CHANGESET}.tar.bz2"
++JAXWS_URI =3D "${OPENJDK_HG_URL}/jaxws/archive/${JAXWS_FILE};name=3Djaxws;=
+unpack=3Dfalse"
++
++JDK_FILE =3D "${JDK_CHANGESET}.tar.bz2"
++JDK_URI =3D "${OPENJDK_HG_URL}/jdk/archive/${JDK_FILE};name=3Djdk;unpack=
+=3Dfalse"
++
++LANGTOOLS_FILE =3D "${LANGTOOLS_CHANGESET}.tar.bz2"
++LANGTOOLS_URI =3D "${OPENJDK_HG_URL}/langtools/archive/${LANGTOOLS_FILE};n=
+ame=3Dlangtools;unpack=3Dfalse"
++
++CACAO_VERSION =3D "e215e36be9fc"
++CACAO_FILE =3D "${CACAO_VERSION}.tar.gz"
++CACAO_URI =3D "http://icedtea.wildebeest.org/download/drops/cacao/${CACAO_=
+FILE};name=3Dcacao;unpack=3Dfalse"
++SRC_URI[cacao.md5sum] =3D "79f95f0aea4ba04cf2f1a8632ac66d14"
++SRC_URI[cacao.sha256sum] =3D "4966514c72ee7ed108b882d9b6e65c3adf8a8f9c2dcc=
+b029f971b3c8cb4870ab"
++
++JAMVM_VERSION =3D "ec18fb9e49e62dce16c5094ef1527eed619463aa"
++JAMVM_FILE =3D "jamvm-${JAMVM_VERSION}.tar.gz"
++JAMVM_URI =3D "http://icedtea.wildebeest.org/download/drops/jamvm/${JAMVM_=
+FILE};name=3Djamvm;unpack=3Dfalse"
++SRC_URI[jamvm.md5sum] =3D "d50ae193d01a9251e10679c7a2cc6ff1"
++SRC_URI[jamvm.sha256sum] =3D "31810266666c23822942aac62a78019c2c4589e1c5ee=
+48329cbf42652d4437bc"
++
++NASHORN_FILE =3D "${NASHORN_CHANGESET}.tar.bz2"
++NASHORN_URI =3D "${OPENJDK_HG_URL}/nashorn/archive/${NASHORN_FILE};name=3D=
+nashorn;unpack=3Dfalse"
++
++# Allow overriding this separately
++OEPATCHES =3D "\
++    file://fix-checksums.patch \
++    file://build-hacks.patch \
++    file://cacao-libtoolize.patch \
++    file://cacao-loadavg-makefile.patch \
++    file://cacao-loadavg.patch;apply=3Dno \
++    file://cacao-arm-ucontext.patch;apply=3Dno \
++    file://zero-build.patch;apply=3Dno \
++    file://faulty-nx-emulation.patch;apply=3Dno \
++    "
++
++# overrride the jamvm patch for now, needs to be solved upstream
++do_unpackpost() {
++}
++
++addtask unpackpost after do_unpack before do_patch
++
++# Allow overriding this separately
++
++# Allow overriding this separately
+diff -rupN current-meta-java/recipes-images/images/java-test-image.bb meta-=
+java/recipes-images/images/java-test-image.bb
+--- current-meta-java/recipes-images/images/java-test-image.bb     2015-07-=
+31 10:54:23.504453867 -0700
++++ meta-java/recipes-images/images/java-test-image.bb 2015-07-31 10:13:38.=
+612446014 -0700
+@@ -7,6 +7,7 @@ IMAGE_LINGUAS =3D " "
+ IMAGE_INSTALL =3D "busybox modutils-initscripts initscripts opkg udev sysv=
+init netbase base-files base-passwd \
+                  ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${CORE_IMAGE_EXTRA_INSTALL}=
+ \
++                 openjdk-8-jre \
+                  openjdk-7-jre openjdk-7-vm-zero openjdk-7-vm-jamvm openjd=
+k-7-vm-cacao \
+                  openjdk-6-jre openjdk-6-vm-zero openjdk-6-vm-jamvm openjd=
+k-6-vm-cacao \
+                  strace dropbear binutils \
+
+From: Awasthi, Vinay K
+Sent: Friday, July 31, 2015 11:53 AM
+To: 'openembedded-devel@lists.openembedded.org'
+Subject: mata-java openjdk-8 recipe
 
 Here is the patch for review tested on x86 (hotspot) and ARM (zero - build =
 only)...
 Thanks,
 Vinay
 
---_004_B399646F8CA055479BEC55F6B065A04A37038BDCFMSMSX108amrcor_
-Content-Type: application/octet-stream; name="openjdk-8.patch"
-Content-Description: openjdk-8.patch
-Content-Disposition: attachment; filename="openjdk-8.patch"; size=40377;
-	creation-date="Fri, 31 Jul 2015 17:57:58 GMT";
-	modification-date="Fri, 31 Jul 2015 18:41:46 GMT"
-Content-Transfer-Encoding: base64
-
-QmluYXJ5IGZpbGVzIGN1cnJlbnQtbWV0YS1qYXZhLy5naXQvaW5kZXggYW5kIG1ldGEtamF2YS8u
-Z2l0L2luZGV4IGRpZmZlcgpkaWZmIC1ydXBOIGN1cnJlbnQtbWV0YS1qYXZhLy5naXQvbG9ncy9I
-RUFEIG1ldGEtamF2YS8uZ2l0L2xvZ3MvSEVBRAotLS0gY3VycmVudC1tZXRhLWphdmEvLmdpdC9s
-b2dzL0hFQUQJMjAxNS0wNy0zMSAxMDo1NDoyMy40ODQ0NTM4NjcgLTA3MDAKKysrIG1ldGEtamF2
-YS8uZ2l0L2xvZ3MvSEVBRAkyMDE1LTA3LTMwIDE2OjI2OjIwLjA3MjI0MDMyMiAtMDcwMApAQCAt
-MSArMSBAQAotMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCA2NmM5N2Fl
-NzQ2MWY0YzFhMTM5MTcxMzE3ODdiYjc2ZGMzNGU2YjZmIFZpbmF5IEsuIEF3YXN0aGkgPHZpbmF5
-LmsuYXdhc3RoaUBpbnRlbC5jb20+IDE0MzgzNjUyNjMgLTA3MDAJY2xvbmU6IGZyb20gaHR0cDov
-L2dpdC55b2N0b3Byb2plY3Qub3JnL2dpdC9tZXRhLWphdmEKKzAwMDAwMDAwMDAwMDAwMDAwMDAw
-MDAwMDAwMDAwMDAwMDAwMDAwMDAgNjZjOTdhZTc0NjFmNGMxYTEzOTE3MTMxNzg3YmI3NmRjMzRl
-NmI2ZiBWaW5heSBLLiBBd2FzdGhpIDx2aW5heS5rLmF3YXN0aGlAaW50ZWwuY29tPiAxNDM4Mjk4
-NzgwIC0wNzAwCWNsb25lOiBmcm9tIGh0dHA6Ly9naXQueW9jdG9wcm9qZWN0Lm9yZy9naXQvbWV0
-YS1qYXZhCmRpZmYgLXJ1cE4gY3VycmVudC1tZXRhLWphdmEvLmdpdC9sb2dzL3JlZnMvaGVhZHMv
-bWFzdGVyIG1ldGEtamF2YS8uZ2l0L2xvZ3MvcmVmcy9oZWFkcy9tYXN0ZXIKLS0tIGN1cnJlbnQt
-bWV0YS1qYXZhLy5naXQvbG9ncy9yZWZzL2hlYWRzL21hc3RlcgkyMDE1LTA3LTMxIDEwOjU0OjIz
-LjQ4NDQ1Mzg2NyAtMDcwMAorKysgbWV0YS1qYXZhLy5naXQvbG9ncy9yZWZzL2hlYWRzL21hc3Rl
-cgkyMDE1LTA3LTMwIDE2OjI2OjIwLjA3MjI0MDMyMiAtMDcwMApAQCAtMSArMSBAQAotMDAwMDAw
-MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCA2NmM5N2FlNzQ2MWY0YzFhMTM5MTcx
-MzE3ODdiYjc2ZGMzNGU2YjZmIFZpbmF5IEsuIEF3YXN0aGkgPHZpbmF5LmsuYXdhc3RoaUBpbnRl
-bC5jb20+IDE0MzgzNjUyNjMgLTA3MDAJY2xvbmU6IGZyb20gaHR0cDovL2dpdC55b2N0b3Byb2pl
-Y3Qub3JnL2dpdC9tZXRhLWphdmEKKzAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw
-MDAwMDAgNjZjOTdhZTc0NjFmNGMxYTEzOTE3MTMxNzg3YmI3NmRjMzRlNmI2ZiBWaW5heSBLLiBB
-d2FzdGhpIDx2aW5heS5rLmF3YXN0aGlAaW50ZWwuY29tPiAxNDM4Mjk4NzgwIC0wNzAwCWNsb25l
-OiBmcm9tIGh0dHA6Ly9naXQueW9jdG9wcm9qZWN0Lm9yZy9naXQvbWV0YS1qYXZhCmRpZmYgLXJ1
-cE4gY3VycmVudC1tZXRhLWphdmEvLmdpdC9sb2dzL3JlZnMvcmVtb3Rlcy9vcmlnaW4vSEVBRCBt
-ZXRhLWphdmEvLmdpdC9sb2dzL3JlZnMvcmVtb3Rlcy9vcmlnaW4vSEVBRAotLS0gY3VycmVudC1t
-ZXRhLWphdmEvLmdpdC9sb2dzL3JlZnMvcmVtb3Rlcy9vcmlnaW4vSEVBRAkyMDE1LTA3LTMxIDEw
-OjU0OjIzLjQ4NDQ1Mzg2NyAtMDcwMAorKysgbWV0YS1qYXZhLy5naXQvbG9ncy9yZWZzL3JlbW90
-ZXMvb3JpZ2luL0hFQUQJMjAxNS0wNy0zMCAxNjoyNjoyMC4wNzIyNDAzMjIgLTA3MDAKQEAgLTEg
-KzEgQEAKLTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgNjZjOTdhZTc0
-NjFmNGMxYTEzOTE3MTMxNzg3YmI3NmRjMzRlNmI2ZiBWaW5heSBLLiBBd2FzdGhpIDx2aW5heS5r
-LmF3YXN0aGlAaW50ZWwuY29tPiAxNDM4MzY1MjYzIC0wNzAwCWNsb25lOiBmcm9tIGh0dHA6Ly9n
-aXQueW9jdG9wcm9qZWN0Lm9yZy9naXQvbWV0YS1qYXZhCiswMDAwMDAwMDAwMDAwMDAwMDAwMDAw
-MDAwMDAwMDAwMDAwMDAwMDAwIDY2Yzk3YWU3NDYxZjRjMWExMzkxNzEzMTc4N2JiNzZkYzM0ZTZi
-NmYgVmluYXkgSy4gQXdhc3RoaSA8dmluYXkuay5hd2FzdGhpQGludGVsLmNvbT4gMTQzODI5ODc4
-MCAtMDcwMAljbG9uZTogZnJvbSBodHRwOi8vZ2l0LnlvY3RvcHJvamVjdC5vcmcvZ2l0L21ldGEt
-amF2YQpkaWZmIC1ydXBOIGN1cnJlbnQtbWV0YS1qYXZhL3JlY2lwZXMtY29yZS9vcGVuamRrL29w
-ZW5qZGstOC04dTQwYjI3L2NhY2FvLWFybS11Y29udGV4dC5wYXRjaCBtZXRhLWphdmEvcmVjaXBl
-cy1jb3JlL29wZW5qZGsvb3Blbmpkay04LTh1NDBiMjcvY2FjYW8tYXJtLXVjb250ZXh0LnBhdGNo
-Ci0tLSBjdXJyZW50LW1ldGEtamF2YS9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuamRrLTgtOHU0
-MGIyNy9jYWNhby1hcm0tdWNvbnRleHQucGF0Y2gJMTk2OS0xMi0zMSAxNjowMDowMC4wMDAwMDAw
-MDAgLTA4MDAKKysrIG1ldGEtamF2YS9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuamRrLTgtOHU0
-MGIyNy9jYWNhby1hcm0tdWNvbnRleHQucGF0Y2gJMjAxNS0wNi0wMSAxNzowMzowMy4zMTc2NDQw
-MDAgLTA3MDAKQEAgLTAsMCArMSwyNCBAQAorSW5kZXg6IGNhY2FvLWE1NjdiY2I3ZjU4OS9zcmMv
-dm0vaml0L2FybS9saW51eC9tZC1vcy5jCis9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CistLS0gY2FjYW8tYTU2N2JjYjdm
-NTg5L3NyYy92bS9qaXQvYXJtL2xpbnV4L21kLW9zLmMJMjAxMy0wMS0yNiAyMTozMDo1NC4yMDY1
-ODEwOTAgKzAxMDAKKysrKyBjYWNhby1hNTY3YmNiN2Y1ODkvc3JjL3ZtL2ppdC9hcm0vbGludXgv
-bWQtb3MuYwkyMDEzLTAxLTI2IDIxOjMxOjM0LjQwNjk5MTMxNiArMDEwMAorQEAgLTI4LDE5ICsy
-OCw3IEBACisgCisgI2luY2x1ZGUgPHN0ZGludC5oPgorIAorLSNkZWZpbmUgdWNvbnRleHQgYnJv
-a2VuX2dsaWJjX3Vjb250ZXh0CistI2RlZmluZSB1Y29udGV4dF90IGJyb2tlbl9nbGliY191Y29u
-dGV4dF90CisgI2luY2x1ZGUgPHVjb250ZXh0Lmg+CistI3VuZGVmIHVjb250ZXh0CistI3VuZGVm
-IHVjb250ZXh0X3QKKy0KKy10eXBlZGVmIHN0cnVjdCB1Y29udGV4dCB7CistICAgdW5zaWduZWQg
-bG9uZyAgICAgdWNfZmxhZ3M7CistICAgc3RydWN0IHVjb250ZXh0ICAqdWNfbGluazsKKy0gICBz
-dGFja190ICAgICAgICAgICB1Y19zdGFjazsKKy0gICBzdHJ1Y3Qgc2lnY29udGV4dCB1Y19tY29u
-dGV4dDsKKy0gICBzaWdzZXRfdCAgICAgICAgICB1Y19zaWdtYXNrOworLX0gdWNvbnRleHRfdDsK
-KyAKKyAjZGVmaW5lIHNjb250ZXh0X3Qgc3RydWN0IHNpZ2NvbnRleHQKKyAKZGlmZiAtcnVwTiBj
-dXJyZW50LW1ldGEtamF2YS9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuamRrLTgtOHU0MGIyNy9j
-YWNhby1saWJ0b29saXplLnBhdGNoIG1ldGEtamF2YS9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVu
-amRrLTgtOHU0MGIyNy9jYWNhby1saWJ0b29saXplLnBhdGNoCi0tLSBjdXJyZW50LW1ldGEtamF2
-YS9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuamRrLTgtOHU0MGIyNy9jYWNhby1saWJ0b29saXpl
-LnBhdGNoCTE5NjktMTItMzEgMTY6MDA6MDAuMDAwMDAwMDAwIC0wODAwCisrKyBtZXRhLWphdmEv
-cmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpkay04LTh1NDBiMjcvY2FjYW8tbGlidG9vbGl6ZS5w
-YXRjaAkyMDE1LTA3LTMxIDEwOjQzOjI3Ljc2ODQ1MTc2MSAtMDcwMApAQCAtMCwwICsxLDEyIEBA
-CitJbmRleDogaWNlZHRlYTYvTWFrZWZpbGUuYW0KKz09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KKy0tLSBpY2VkdGVhNi5v
-cmlnL01ha2VmaWxlLmFtCTIwMTEtMTItMjEgMjI6NTg6MjMuMDAwMDAwMDAwICswMTAwCisrKysg
-aWNlZHRlYTYvTWFrZWZpbGUuYW0JMjAxMS0xMi0yMSAyMzowMDoyMS40MDU4ODcxODYgKzAxMDAK
-K0BAIC0xOTIyLDYgKzE5MjIsNyBAQAorIGlmIEJVSUxEX0NBQ0FPCisgaWYgIVVTRV9TWVNURU1f
-Q0FDQU8KKyAJY2QgY2FjYW8vY2FjYW8gJiYgXAorKwlybSAtZiBsaWJ0b29sICYmIFwKKyAJLi9h
-dXRvZ2VuLnNoICYmIFwKKyAJJChBUkNIX1BSRUZJWCkgLi9jb25maWd1cmUgXAorIAkgIC0taG9z
-dD0kKGhvc3RfYWxpYXMpIFwKZGlmZiAtcnVwTiBjdXJyZW50LW1ldGEtamF2YS9yZWNpcGVzLWNv
-cmUvb3Blbmpkay9vcGVuamRrLTgtOHU0MGIyNy9jYWNhby1sb2FkYXZnLW1ha2VmaWxlLnBhdGNo
-IG1ldGEtamF2YS9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuamRrLTgtOHU0MGIyNy9jYWNhby1s
-b2FkYXZnLW1ha2VmaWxlLnBhdGNoCi0tLSBjdXJyZW50LW1ldGEtamF2YS9yZWNpcGVzLWNvcmUv
-b3Blbmpkay9vcGVuamRrLTgtOHU0MGIyNy9jYWNhby1sb2FkYXZnLW1ha2VmaWxlLnBhdGNoCTE5
-NjktMTItMzEgMTY6MDA6MDAuMDAwMDAwMDAwIC0wODAwCisrKyBtZXRhLWphdmEvcmVjaXBlcy1j
-b3JlL29wZW5qZGsvb3Blbmpkay04LTh1NDBiMjcvY2FjYW8tbG9hZGF2Zy1tYWtlZmlsZS5wYXRj
-aAkyMDE1LTA3LTMxIDEwOjQzOjI3Ljc2ODQ1MTc2MSAtMDcwMApAQCAtMCwwICsxLDEzIEBACitJ
-bmRleDogaWNlZHRlYS0yLjEuNC9NYWtlZmlsZS5hbQorPT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQorLS0tIGljZWR0ZWEt
-Mi4xLjQub3JpZy9NYWtlZmlsZS5hbQkyMDEzLTAxLTI2IDE4OjIwOjU1LjE1MjU2MTIwMyArMDEw
-MAorKysrIGljZWR0ZWEtMi4xLjQvTWFrZWZpbGUuYW0JMjAxMy0wMS0yNiAxODo0MTowNy42Mzc5
-OTIyMDYgKzAxMDAKK0BAIC0xOTk0LDYgKzE5OTQsOCBAQAorIGlmIEJVSUxEX0NBQ0FPCisgaWYg
-IVVTRV9TWVNURU1fQ0FDQU8KKyAJY2QgY2FjYW8vY2FjYW8gJiYgXAorKwlwYXRjaCAtcDEgLU4g
-PCAkKGFic190b3Bfc3JjZGlyKS9wYXRjaGVzL2NhY2FvLWxvYWRhdmcucGF0Y2ggJiYgXAorKwlw
-YXRjaCAtcDEgLU4gPCAkKGFic190b3Bfc3JjZGlyKS9wYXRjaGVzL2NhY2FvLWFybS11Y29udGV4
-dC5wYXRjaCAmJiBcCisgCXJtIC1mIGxpYnRvb2wgJiYgXAorIAkuL2F1dG9nZW4uc2ggJiYgXAor
-IAkkKEFSQ0hfUFJFRklYKSAuL2NvbmZpZ3VyZSBcCmRpZmYgLXJ1cE4gY3VycmVudC1tZXRhLWph
-dmEvcmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpkay04LTh1NDBiMjcvY2FjYW8tbG9hZGF2Zy5w
-YXRjaCBtZXRhLWphdmEvcmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpkay04LTh1NDBiMjcvY2Fj
-YW8tbG9hZGF2Zy5wYXRjaAotLS0gY3VycmVudC1tZXRhLWphdmEvcmVjaXBlcy1jb3JlL29wZW5q
-ZGsvb3Blbmpkay04LTh1NDBiMjcvY2FjYW8tbG9hZGF2Zy5wYXRjaAkxOTY5LTEyLTMxIDE2OjAw
-OjAwLjAwMDAwMDAwMCAtMDgwMAorKysgbWV0YS1qYXZhL3JlY2lwZXMtY29yZS9vcGVuamRrL29w
-ZW5qZGstOC04dTQwYjI3L2NhY2FvLWxvYWRhdmcucGF0Y2gJMjAxNS0wNi0wMSAxNzowMzowMy4z
-MTc2NDQwMDAgLTA3MDAKQEAgLTAsMCArMSwyNyBAQAorSW5kZXg6IGNhY2FvLWNmZjkyNzA0YzRl
-MC9zcmMvdm0vb3MuaHBwCis9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09CistLS0gY2FjYW8tY2ZmOTI3MDRjNGUwL3NyYy92
-bS9vcy5ocHAJMjAxMS0xMi0wOCAxMzo0MDo0NS4wMDAwMDAwMDAgKzAxMDAKKysrKyBjYWNhby1j
-ZmY5MjcwNGM0ZTAvc3JjL3ZtL29zLmhwcAkyMDExLTEyLTIwIDExOjQyOjM2Ljk4NTYzMzkyMSAr
-MDEwMAorQEAgLTQyNSw3ICs0MjUsMjEgQEAKKyAjaWYgZGVmaW5lZChIQVZFX0dFVExPQURBVkcp
-CisgCXJldHVybiA6OmdldGxvYWRhdmcobG9hZGF2ZywgbmVsZW0pOworICNlbHNlCistIyBlcnJv
-ciBnZXRsb2FkYXZnIG5vdCBhdmFpbGFibGUKKysgICAgICAgIEZJTEUgKkxPQURBVkc7CisrICAg
-ICAgICBkb3VibGUgYXZnWzNdID0geyAwLjAsIDAuMCwgMC4wIH07CisrICAgICAgICBpbnQgaSwg
-cmVzID0gLTE7OworKworKyAgICAgICAgaWYgKChMT0FEQVZHID0gZm9wZW4oIi9wcm9jL2xvYWRh
-dmciLCAiciIpKSkgeworKyAgICAgICAgICAgICAgICBmc2NhbmYoTE9BREFWRywgIiVsZiAlbGYg
-JWxmIiwgJmF2Z1swXSwgJmF2Z1sxXSwgJmF2Z1syXSk7CisrICAgICAgICAgICAgICAgIHJlcyA9
-IDA7CisrICAgICAgICAgICAgICAgIGZjbG9zZShMT0FEQVZHKTsKKysgICAgICAgIH0KKysKKysg
-ICAgICAgIGZvciAoaSA9IDA7IChpIDwgbmVsZW0pICYmIChpIDwgMyk7IGkrKykgeworKyAgICAg
-ICAgICAgICAgICBsb2FkYXZnW2ldID0gYXZnW2ldOworKyAgICAgICAgfQorKworKyAgICAgICAg
-cmV0dXJuIHJlczsKKyAjZW5kaWYKKyB9CisgCmRpZmYgLXJ1cE4gY3VycmVudC1tZXRhLWphdmEv
-cmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpkay04LTh1NDBiMjcvZmF1bHR5LW54LWVtdWxhdGlv
-bi5wYXRjaCBtZXRhLWphdmEvcmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpkay04LTh1NDBiMjcv
-ZmF1bHR5LW54LWVtdWxhdGlvbi5wYXRjaAotLS0gY3VycmVudC1tZXRhLWphdmEvcmVjaXBlcy1j
-b3JlL29wZW5qZGsvb3Blbmpkay04LTh1NDBiMjcvZmF1bHR5LW54LWVtdWxhdGlvbi5wYXRjaAkx
-OTY5LTEyLTMxIDE2OjAwOjAwLjAwMDAwMDAwMCAtMDgwMAorKysgbWV0YS1qYXZhL3JlY2lwZXMt
-Y29yZS9vcGVuamRrL29wZW5qZGstOC04dTQwYjI3L2ZhdWx0eS1ueC1lbXVsYXRpb24ucGF0Y2gJ
-MjAxNS0wNy0yMyAxMTo0NzowOC4yMDYyNDMwMDAgLTA3MDAKQEAgLTAsMCArMSwxMiBAQAorLS0t
-IGhvdHNwb3Qvc3JjL29zL2xpbnV4L3ZtL29zX2xpbnV4LmNwcAkyMDE1LTAzLTA3IDEwOjI1OjE5
-LjAwMDAwMDAwMCAtMDgwMAorKysrIGhvdHNwb3Qvc3JjL29zL2xpbnV4L3ZtL29zX2xpbnV4LmNw
-cAkyMDE1LTAzLTA3IDEwOjI1OjE5LjAwMDAwMDAwMCAtMDgwMAorKysrIGEuY3BwCTIwMTUtMDct
-MjMgMTE6NDU6MTcuNjY2MjQzNTQwIC0wNzAwCitAQCAtNDg0Nyw3ICs0ODQ3LDcgQEAKKyAgIExp
-bnV4OjpjYXB0dXJlX2luaXRpYWxfc3RhY2soSmF2YVRocmVhZDo6c3RhY2tfc2l6ZV9hdF9jcmVh
-dGUoKSk7CisgCisgI2lmIGRlZmluZWQoSUEzMikKKy0gIHdvcmthcm91bmRfZXhwYW5kX2V4ZWNf
-c2hpZWxkX2NzX2xpbWl0KCk7CisrLy8gIHdvcmthcm91bmRfZXhwYW5kX2V4ZWNfc2hpZWxkX2Nz
-X2xpbWl0KCk7CisgI2VuZGlmCisgCisgICBMaW51eDo6bGlicHRocmVhZF9pbml0KCk7CmRpZmYg
-LXJ1cE4gY3VycmVudC1tZXRhLWphdmEvcmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpkay04LTh1
-NDBiMjcvZml4LWNoZWNrc3Vtcy5wYXRjaCBtZXRhLWphdmEvcmVjaXBlcy1jb3JlL29wZW5qZGsv
-b3Blbmpkay04LTh1NDBiMjcvZml4LWNoZWNrc3Vtcy5wYXRjaAotLS0gY3VycmVudC1tZXRhLWph
-dmEvcmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpkay04LTh1NDBiMjcvZml4LWNoZWNrc3Vtcy5w
-YXRjaAkxOTY5LTEyLTMxIDE2OjAwOjAwLjAwMDAwMDAwMCAtMDgwMAorKysgbWV0YS1qYXZhL3Jl
-Y2lwZXMtY29yZS9vcGVuamRrL29wZW5qZGstOC04dTQwYjI3L2ZpeC1jaGVja3N1bXMucGF0Y2gJ
-MjAxNS0wNy0wMSAxNzoyOTowOS40NTIyMDQwMDAgLTA3MDAKQEAgLTAsMCArMSw2MSBAQAorLS0t
-IGljZWR0ZWEtMi41LjQvTWFrZWZpbGUuYW0JMjAxNS0wNC0wMiAxMDo0ODoxMi45MTk1NTA4MzYg
-KzAyMDAKKysrKyBpY2VkdGVhLTIuNS40L01ha2VmaWxlLmFtCTIwMTUtMDQtMDIgMTA6NDk6NDEu
-NDgzODA2MTQ3ICswMjAwCitAQCAtNCwxOSArNCwxOSBAQAorIEJVSUxEX1ZFUlNJT04gPSBiMTMK
-KyBDT01CSU5FRF9WRVJTSU9OID0gJChKREtfVVBEQVRFX1ZFUlNJT04pLSQoQlVJTERfVkVSU0lP
-TikKKworLUNPUkJBX0NIQU5HRVNFVCA9IDNjOWY1MjNiZjk2ZQorLUpBWFBfQ0hBTkdFU0VUID0g
-Y2EyNjc2N2QzMzc1CistSkFYV1NfQ0hBTkdFU0VUID0gOWE2YzkwMzM2OTIyCistSkRLX0NIQU5H
-RVNFVCA9IDFlNmRiNGY4YjBmMworLUxBTkdUT09MU19DSEFOR0VTRVQgPSA5NjBjZGZmYThiM2YK
-Ky1PUEVOSkRLX0NIQU5HRVNFVCA9IDZjZjI4ODBhYWI1ZQorLQorLUNPUkJBX1NIQTI1NlNVTSA9
-IDc0MTFmZTJkZjc5NTk4MTEyNGFlMmU0ZGEwZGRiN2Q5OGRiMGE5NGM5Mzk5YTEyODc2YmUwM2U3
-MTc3ZWFhMGIKKy1KQVhQX1NIQTI1NlNVTSA9IDg0NjIzZTUwYjY5NzEwZDEyMjA5ZmM3NjFhNDk5
-NTNjNzhmMWE2NjRmZjU0ZTAyMmE3N2UzNWUyNTQ4OWYyZjMKKy1KQVhXU19TSEEyNTZTVU0gPSA0
-YmQzOGE4MTIxZDg1YzQyMmI0MjUxNzdjZTY0OGFmZGVlOWRhMTg4MTJjOTFjNWI3NDkzOWM1OGRi
-MzNhYjRiCistSkRLX1NIQTI1NlNVTSA9IGU5OWI2NWJhZjY2ZDg4MThlM2M4ZmQzMWQ3MWZiYWQ0
-YWQwY2ViMGI3ZmE0YzJlMDYwN2VjYTNhNDBmMmJhMDkKKy1MQU5HVE9PTFNfU0hBMjU2U1VNID0g
-NGZkNzZjYmRmMTgxNzQxMjg4NjM1MTRiNGQzOTk3Y2I2MjMzNjg2OTdiZjRmNWFmNmQwNzlkYmJj
-ZDdiMzc4YQorLU9QRU5KREtfU0hBMjU2U1VNID0gODhjOTJhM2NhYjM3NDQ2MzUyMDg2ODc2Nzcx
-NzMzMjI5YjE2MDJkNGY3OWVmNjg2MjlhMTUxMTgwNjUyZTFmMQorK0NPUkJBX0NIQU5HRVNFVCA9
-IGJkMDE4NmNkMjQxOQorK0pBWFBfQ0hBTkdFU0VUID0gNTZmNmNhNzk0NjdkCisrSkFYV1NfQ0hB
-TkdFU0VUID0gYTVmMmNkZWRiOTQwCisrSkRLX0NIQU5HRVNFVCA9IGQ0NDUzZDc4NGZiNgorK0xB
-TkdUT09MU19DSEFOR0VTRVQgPSA4M2VjYTkyMjM0NmUKKytPUEVOSkRLX0NIQU5HRVNFVCA9IDEy
-ZGVhY2FjODI1NworKworK0NPUkJBX1NIQTI1NlNVTSA9IDg3MDg4ODI0MWJmZTM3MThlMWRlMTBl
-NmRlNWFlNzBkNWY3MTMxNzUyYmIzYzE2NTdiMDIwYzhmYjdhZjYwNDkKKytKQVhQX1NIQTI1NlNV
-TSA9IDI1NGM2MjJmYzhhNTcyZWZkMGExMDkwOGI0MDM4YmEzY2Y0MTc3NWQ3YzA5YzhmNTc2ODAw
-YjNmNjA4ZTMzZjcKKytKQVhXU19TSEEyNTZTVU0gPSBjNzg4MmZhMzYzOTYwYjUxMWEwODAzODEz
-MGE0NTQ3N2ZiOGQ1ZTgyZjNkNjI0NDI0OGU2MWU1NjRmM2M4NGEzCisrSkRLX1NIQTI1NlNVTSA9
-IGIwMmI0NmM0YjUyY2EwNmNmMGI0MmNkN2RhYWRjN2RiZWU2NDAzZTgzZjdiYzk1MWUyOGQwYzdl
-NmQyM2MzY2QKKytMQU5HVE9PTFNfU0hBMjU2U1VNID0gZTQ2ZTgzMjJkMTg5ZGJkZjYzMWMxYjI3
-OTZiOGNhNjI4ZjJmODNiMmYwNWYwZWRlNzRiY2JjMTE4MjAxYWExNgorK09QRU5KREtfU0hBMjU2
-U1VNID0gNmY1NDU3NTg0M2JmMjU4ZmRiZWY0YTIzZDc2ZjNjNGIwYWRhNjg1YjQyZGYwZjdmNWRh
-MmU2MTEyMTEzYWQxMAorCisgRFJPUF9VUkwgPSBodHRwOi8vaWNlZHRlYS5jbGFzc3BhdGgub3Jn
-L2Rvd25sb2FkL2Ryb3BzCisKK0BAIC0zNSw2ICszNSw3IEBACisgSUNFRFRFQV9NQUpPUiA9IGlj
-ZWR0ZWE3CisgSUNFRFRFQV9CUkFOQ0ggPSAyLjUKKyBJQ0VEVEVBX1BSRUZJWCA9ICQoSUNFRFRF
-QV9NQUpPUiktZm9yZXN0LSQoSUNFRFRFQV9CUkFOQ0gpCisrSUNFRFRFQV9QUkVGSVggPSBqZGs4
-dQorIElDRURURUFfSEdfVVJMID0gaHR0cDovL2ljZWR0ZWEuY2xhc3NwYXRoLm9yZy9oZy9yZWxl
-YXNlLyQoSUNFRFRFQV9QUkVGSVgpCisgSUNFRFRFQV9VUkwgPSAkKERST1BfVVJMKS8kKElDRURU
-RUFfTUFKT1IpLyQoSUNFRFRFQV9SRUxFQVNFKQorCitAQCAtNDAzLDYgKzQwMyw3IEBACisgZW5k
-aWYKKworIElDRURURUFfQk9PVF9QQVRDSEVTICs9ICQoRElTVFJJQlVUSU9OX0JPT1RfUEFUQ0hF
-UykKKytJQ0VEVEVBX0JPT1RfUEFUQ0hFUyA9ICJwYXRjaGVzL2Jvb3Qvbm8ucGF0Y2giCisKKyAj
-IE9wZW5KREsgYnVpbGQgZW52aXJvbm1lbnQuCisgaWYgWkVST19CVUlMRAorCisKKy0tLSBpY2Vk
-dGVhLTIuNS40L2hvdHNwb3QubWFwLmluCTIwMTUtMDEtMjIgMDU6Mjg6NTUuOTUyNzU3NDQyICsw
-MTAwCisrKysgaWNlZHRlYS0yLjUuNC9ob3RzcG90Lm1hcC5pbgkyMDE1LTA0LTA3IDEwOjQxOjM4
-LjcxMzk2MDA4MiArMDIwMAorQEAgLTEsMyArMSwzIEBACisgIyB2ZXJzaW9uIHR5cGUoZHJvcC9o
-ZykgdXJsIGNoYW5nZXNldCBzaGEyNTZzdW0KKy1kZWZhdWx0IGRyb3AgaHR0cDovL2ljZWR0ZWEu
-Y2xhc3NwYXRoLm9yZy9kb3dubG9hZC9kcm9wcy9pY2VkdGVhNy9ASUNFRFRFQV9SRUxFQVNFQCA2
-MTQ0Y2E5YjZhNzIgNDgyNWY4NTQzYWEwYzA2NTUzMGIwNWIwYTk1OTE1YTQ0ZWVhMTUzYmJiNjk2
-ZDJmZmM0YjUwYTM5ODgxM2UzNAorK2RlZmF1bHQgZHJvcCBodHRwOi8vaWNlZHRlYS5jbGFzc3Bh
-dGgub3JnL2Rvd25sb2FkL2Ryb3BzL2ljZWR0ZWE3L0BJQ0VEVEVBX1JFTEVBU0VAIDY4MjRlMjQ3
-NWUwNCAwMTFkZDc2OTI4ODA5YWMxMjQwZDkxZTJkMjQ0YWIwMjBmMTYxYzMzZDY5ZTVhZjM1Y2Y0
-Yzg3MDg0YTY5NDlkCisgYWFyY2g2NCBkcm9wIGh0dHA6Ly9pY2VkdGVhLmNsYXNzcGF0aC5vcmcv
-ZG93bmxvYWQvZHJvcHMvaWNlZHRlYTcvQElDRURURUFfUkVMRUFTRUAgNGQyNTA0NmFiYjY3IDYw
-ZGE4ZDQyN2Y3ZTM2NTlmNzAxZTU0Yzc2M2VhODM2NmQ4YWYzMjgwYzdlMTA2NzAwMDQ5MzhiMmYw
-N2VmZWYKKwpkaWZmIC1ydXBOIGN1cnJlbnQtbWV0YS1qYXZhL3JlY2lwZXMtY29yZS9vcGVuamRr
-L29wZW5qZGstOC04dTQwYjI3L2p2bS5jZmcgbWV0YS1qYXZhL3JlY2lwZXMtY29yZS9vcGVuamRr
-L29wZW5qZGstOC04dTQwYjI3L2p2bS5jZmcKLS0tIGN1cnJlbnQtbWV0YS1qYXZhL3JlY2lwZXMt
-Y29yZS9vcGVuamRrL29wZW5qZGstOC04dTQwYjI3L2p2bS5jZmcJMTk2OS0xMi0zMSAxNjowMDow
-MC4wMDAwMDAwMDAgLTA4MDAKKysrIG1ldGEtamF2YS9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVu
-amRrLTgtOHU0MGIyNy9qdm0uY2ZnCTIwMTUtMDUtMjAgMTU6MDQ6MDEuNzIyMjkxMDAwIC0wNzAw
-CkBAIC0wLDAgKzEsNDMgQEAKKyMgQ29weXJpZ2h0IDIwMDMgU3VuIE1pY3Jvc3lzdGVtcywgSW5j
-LiAgQWxsIFJpZ2h0cyBSZXNlcnZlZC4KKyMgRE8gTk9UIEFMVEVSIE9SIFJFTU9WRSBDT1BZUklH
-SFQgTk9USUNFUyBPUiBUSElTIEZJTEUgSEVBREVSLgorIworIyBUaGlzIGNvZGUgaXMgZnJlZSBz
-b2Z0d2FyZTsgeW91IGNhbiByZWRpc3RyaWJ1dGUgaXQgYW5kL29yIG1vZGlmeSBpdAorIyB1bmRl
-ciB0aGUgdGVybXMgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIHZlcnNpb24gMiBv
-bmx5LCBhcworIyBwdWJsaXNoZWQgYnkgdGhlIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbi4gIFN1
-biBkZXNpZ25hdGVzIHRoaXMKKyMgcGFydGljdWxhciBmaWxlIGFzIHN1YmplY3QgdG8gdGhlICJD
-bGFzc3BhdGgiIGV4Y2VwdGlvbiBhcyBwcm92aWRlZAorIyBieSBTdW4gaW4gdGhlIExJQ0VOU0Ug
-ZmlsZSB0aGF0IGFjY29tcGFuaWVkIHRoaXMgY29kZS4KKyMKKyMgVGhpcyBjb2RlIGlzIGRpc3Ry
-aWJ1dGVkIGluIHRoZSBob3BlIHRoYXQgaXQgd2lsbCBiZSB1c2VmdWwsIGJ1dCBXSVRIT1VUCisj
-IEFOWSBXQVJSQU5UWTsgd2l0aG91dCBldmVuIHRoZSBpbXBsaWVkIHdhcnJhbnR5IG9mIE1FUkNI
-QU5UQUJJTElUWSBvcgorIyBGSVRORVNTIEZPUiBBIFBBUlRJQ1VMQVIgUFVSUE9TRS4gIFNlZSB0
-aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UKKyMgdmVyc2lvbiAyIGZvciBtb3JlIGRldGFp
-bHMgKGEgY29weSBpcyBpbmNsdWRlZCBpbiB0aGUgTElDRU5TRSBmaWxlIHRoYXQKKyMgYWNjb21w
-YW5pZWQgdGhpcyBjb2RlKS4KKyMKKyMgWW91IHNob3VsZCBoYXZlIHJlY2VpdmVkIGEgY29weSBv
-ZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgdmVyc2lvbgorIyAyIGFsb25nIHdpdGgg
-dGhpcyB3b3JrOyBpZiBub3QsIHdyaXRlIHRvIHRoZSBGcmVlIFNvZnR3YXJlIEZvdW5kYXRpb24s
-CisjIEluYy4sIDUxIEZyYW5rbGluIFN0LCBGaWZ0aCBGbG9vciwgQm9zdG9uLCBNQSAwMjExMC0x
-MzAxIFVTQS4KKyMKKyMgUGxlYXNlIGNvbnRhY3QgU3VuIE1pY3Jvc3lzdGVtcywgSW5jLiwgNDE1
-MCBOZXR3b3JrIENpcmNsZSwgU2FudGEgQ2xhcmEsCisjIENBIDk1MDU0IFVTQSBvciB2aXNpdCB3
-d3cuc3VuLmNvbSBpZiB5b3UgbmVlZCBhZGRpdGlvbmFsIGluZm9ybWF0aW9uIG9yCisjIGhhdmUg
-YW55IHF1ZXN0aW9ucy4KKyMKKyMgCisjIExpc3Qgb2YgSlZNcyB0aGF0IGNhbiBiZSB1c2VkIGFz
-IGFuIG9wdGlvbiB0byBqYXZhLCBqYXZhYywgZXRjLgorIyBPcmRlciBpcyBpbXBvcnRhbnQgLS0g
-Zmlyc3QgaW4gdGhpcyBsaXN0IGlzIHRoZSBkZWZhdWx0IEpWTS4KKyMgTk9URSB0aGF0IHRoaXMg
-Ym90aCB0aGlzIGZpbGUgYW5kIGl0cyBmb3JtYXQgYXJlIFVOU1VQUE9SVEVEIGFuZAorIyBXSUxM
-IEdPIEFXQVkgaW4gYSBmdXR1cmUgcmVsZWFzZS4KKyMKKyMgWW91IG1heSBhbHNvIHNlbGVjdCBh
-IEpWTSBpbiBhbiBhcmJpdHJhcnkgbG9jYXRpb24gd2l0aCB0aGUKKyMgIi1YWGFsdGp2bT08anZt
-X2Rpcj4iIG9wdGlvbiwgYnV0IHRoYXQgdG9vIGlzIHVuc3VwcG9ydGVkCisjIGFuZCBtYXkgbm90
-IGJlIGF2YWlsYWJsZSBpbiBhIGZ1dHVyZSByZWxlYXNlLgorIworLXNlcnZlciBFUlJPUgorLWNs
-aWVudCBJR05PUkUKKy1ob3RzcG90IEVSUk9SCistY2xhc3NpYyBXQVJOCistbmF0aXZlIEVSUk9S
-CistZ3JlZW4gRVJST1IKKy16ZXJvIEFMSUFTRURfVE8gLXNlcnZlcgorLXNoYXJrIEVSUk9SCist
-Y2FjYW8gRVJST1IKKy1qYW12bSBFUlJPUgpkaWZmIC1ydXBOIGN1cnJlbnQtbWV0YS1qYXZhL3Jl
-Y2lwZXMtY29yZS9vcGVuamRrL29wZW5qZGstOC04dTQwYjI3L3plcm8tYnVpbGQucGF0Y2ggbWV0
-YS1qYXZhL3JlY2lwZXMtY29yZS9vcGVuamRrL29wZW5qZGstOC04dTQwYjI3L3plcm8tYnVpbGQu
-cGF0Y2gKLS0tIGN1cnJlbnQtbWV0YS1qYXZhL3JlY2lwZXMtY29yZS9vcGVuamRrL29wZW5qZGst
-OC04dTQwYjI3L3plcm8tYnVpbGQucGF0Y2gJMTk2OS0xMi0zMSAxNjowMDowMC4wMDAwMDAwMDAg
-LTA4MDAKKysrIG1ldGEtamF2YS9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuamRrLTgtOHU0MGIy
-Ny96ZXJvLWJ1aWxkLnBhdGNoCTIwMTUtMDctMjMgMDk6NTg6MDAuMzEwMjIyMDAwIC0wNzAwCkBA
-IC0wLDAgKzEsMTQgQEAKKy0tLSAgaG90c3BvdC9zcmMvc2hhcmUvdm0vaW50ZXJwcmV0ZXIvaW50
-ZXJwcmV0ZXJSdW50aW1lLmNwcAkyMDE1LTAzLTA3IDEwOjI1OjE5LjAwMDAwMDAwMCAtMDgwMAor
-KysrICBob3RzcG90L3NyYy9zaGFyZS92bS9pbnRlcnByZXRlci9pbnRlcnByZXRlclJ1bnRpbWUu
-Y3BwCTIwMTUtMDMtMDcgMTA6MjU6MTkuMDAwMDAwMDAwIC0wODAwCitAQCAtNDA3LDcgKzQwNywx
-MSBAQAorICAgICAvLyBkdXJpbmcgZGVvcHRpbWl6YXRpb24gc28gdGhlIGludGVycHJldGVyIG5l
-ZWRzIHRvIHNraXAgaXQgd2hlbgorICAgICAvLyB0aGUgZnJhbWUgaXMgcG9wcGVkLgorICAgICB0
-aHJlYWQtPnNldF9kb19ub3RfdW5sb2NrX2lmX3N5bmNocm9uaXplZCh0cnVlKTsKKysjaWZkZWYg
-Q0NfSU5URVJQCisrICAgIHJldHVybiAoYWRkcmVzcykgLTE7CisrI2Vsc2UKKyAgICAgcmV0dXJu
-IEludGVycHJldGVyOjpyZW1vdmVfYWN0aXZhdGlvbl9lbnRyeSgpOworKyNlbmRpZgorICAgfQor
-IAorICAgLy8gTmVlZCB0byBkbyB0aGlzIGNoZWNrIGZpcnN0IHNpbmNlIHdoZW4gX2RvX25vdF91
-bmxvY2tfaWZfc3luY2hyb25pemVkCmRpZmYgLXJ1cE4gY3VycmVudC1tZXRhLWphdmEvcmVjaXBl
-cy1jb3JlL29wZW5qZGsvb3Blbmpkay04Xzh1NDBiMjctMi41LjQuYmIgbWV0YS1qYXZhL3JlY2lw
-ZXMtY29yZS9vcGVuamRrL29wZW5qZGstOF84dTQwYjI3LTIuNS40LmJiCi0tLSBjdXJyZW50LW1l
-dGEtamF2YS9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuamRrLThfOHU0MGIyNy0yLjUuNC5iYgkx
-OTY5LTEyLTMxIDE2OjAwOjAwLjAwMDAwMDAwMCAtMDgwMAorKysgbWV0YS1qYXZhL3JlY2lwZXMt
-Y29yZS9vcGVuamRrL29wZW5qZGstOF84dTQwYjI3LTIuNS40LmJiCTIwMTUtMDctMjMgMDk6MDc6
-MjAuOTE4MjEzMDAwIC0wNzAwCkBAIC0wLDAgKzEsNDQgQEAKK3JlcXVpcmUgb3Blbmpkay04LXJl
-bGVhc2UtOHU0MGIyNy5pbmMKKworUFIgPSAiJHtJTkNfUFJ9LjEiCisKK1NSQ19VUklbaWNlZC5t
-ZDVzdW1dID0gIjY0NjA2NGQ3YThkNTdjMmNhZTBlZjM1YTA1ZGU1N2M4IgorU1JDX1VSSVtpY2Vk
-LnNoYTI1NnN1bV0gPSAiNTMwMWI5YTg1OTJhZjJjZjhlM2U3YTM2NTBlNWUxZmU3NDRjNmQyZGU3
-ZjhmZjc4MDgwYjJlZWFlODZhOTgwMCIKKworQ09SQkFfQ0hBTkdFU0VUID0gImJkMDE4NmNkMjQx
-OSIKK1NSQ19VUklbY29yYmEubWQ1c3VtXSA9ICIyMDBjMjMzYTFiN2M3MmM1Yzc3Y2Q3Nzc5ZDFk
-MjU3YSIKK1NSQ19VUklbY29yYmEuc2hhMjU2c3VtXSA9ICI4NzA4ODgyNDFiZmUzNzE4ZTFkZTEw
-ZTZkZTVhZTcwZDVmNzEzMTc1MmJiM2MxNjU3YjAyMGM4ZmI3YWY2MDQ5IgorCitKQVhQX0NIQU5H
-RVNFVCA9ICI1NmY2Y2E3OTQ2N2QiCitTUkNfVVJJW2pheHAubWQ1c3VtXSA9ICJmOGIyOTFiYTJh
-M2MxZTI5NjRiZDk2MzI4ZTBlYmNmYyIKK1NSQ19VUklbamF4cC5zaGEyNTZzdW1dID0gIjI1NGM2
-MjJmYzhhNTcyZWZkMGExMDkwOGI0MDM4YmEzY2Y0MTc3NWQ3YzA5YzhmNTc2ODAwYjNmNjA4ZTMz
-ZjciCisKK0pBWFdTX0NIQU5HRVNFVCA9ICJhNWYyY2RlZGI5NDAiCitTUkNfVVJJW2pheHdzLm1k
-NXN1bV0gPSAiZWVmMTQ2ZTY0ZThiNWUxMTQ3MzM1N2JiMmY0ZjFjZTIiCitTUkNfVVJJW2pheHdz
-LnNoYTI1NnN1bV0gPSAiYzc4ODJmYTM2Mzk2MGI1MTFhMDgwMzgxMzBhNDU0NzdmYjhkNWU4MmYz
-ZDYyNDQyNDhlNjFlNTY0ZjNjODRhMyIKKworSkRLX0NIQU5HRVNFVCA9ICJkNDQ1M2Q3ODRmYjYi
-CitTUkNfVVJJW2pkay5tZDVzdW1dID0gImY5NmE1ZjgyMGIxZmZjOGEyMjhkM2Y0NGY4NWM3OTJm
-IgorU1JDX1VSSVtqZGsuc2hhMjU2c3VtXSA9ICJiMDJiNDZjNGI1MmNhMDZjZjBiNDJjZDdkYWFk
-YzdkYmVlNjQwM2U4M2Y3YmM5NTFlMjhkMGM3ZTZkMjNjM2NkIgorCitMQU5HVE9PTFNfQ0hBTkdF
-U0VUID0gIjgzZWNhOTIyMzQ2ZSIKK1NSQ19VUklbbGFuZ3Rvb2xzLm1kNXN1bV0gPSAiNmUyNDkx
-YTMwZDM5YjM0YTNjMDA3YzVmYzNmYzA3M2UiCitTUkNfVVJJW2xhbmd0b29scy5zaGEyNTZzdW1d
-ID0gImU0NmU4MzIyZDE4OWRiZGY2MzFjMWIyNzk2YjhjYTYyOGYyZjgzYjJmMDVmMGVkZTc0YmNi
-YzExODIwMWFhMTYiCisKK09QRU5KREtfQ0hBTkdFU0VUID0gIjEyZGVhY2FjODI1NyIKK1NSQ19V
-Uklbb3Blbmpkay5tZDVzdW1dID0gIjJlYjQ0ODBhNzRmYTU3MzdhY2U5MDQ5NGM1ZTE2YzAwIgor
-U1JDX1VSSVtvcGVuamRrLnNoYTI1NnN1bV0gPSAiNmY1NDU3NTg0M2JmMjU4ZmRiZWY0YTIzZDc2
-ZjNjNGIwYWRhNjg1YjQyZGYwZjdmNWRhMmU2MTEyMTEzYWQxMCIKKworIyBsb2NhdGVkIGluIGhv
-dHNwb3QubWFwCitIT1RTUE9UX0NIQU5HRVNFVCA9ICI2ODI0ZTI0NzVlMDQiCitTUkNfVVJJW2hv
-dHNwb3QubWQ1c3VtXSA9ICIyNjFiMTA3NWEwNDRmMjYyMGQwNGNhNGEwMDU4OWZkNSIKK1NSQ19V
-UklbaG90c3BvdC5zaGEyNTZzdW1dID0gIjAxMWRkNzY5Mjg4MDlhYzEyNDBkOTFlMmQyNDRhYjAy
-MGYxNjFjMzNkNjllNWFmMzVjZjRjODcwODRhNjk0OWQiCisKK05BU0hPUk5fQ0hBTkdFU0VUID0g
-ImMyZGQ4OGU4OWVkYyIKK1NSQ19VUklbbmFzaG9ybi5tZDVzdW1dID0gIjEzNDE5OWEwM2M5MzY1
-ZmViZWJjYWQ2OTUyNzNhMjRkIgorU1JDX1VSSVtuYXNob3JuLnNoYTI1NnN1bV0gPSAiNGFiMWQ3
-N2Y3NzYzOTYyYjg1ZmJmNjA5NTFjNWUyZDM5N2JhZGM1NDQ3MGI1ODY1M2FmM2U5OTFiNzI4YzZh
-OSIKKworCitJTkhJQklUX1BBQ0tBR0VfREVCVUdfU1BMSVQgPSAiMSIKK0lOSElCSVRfUEFDS0FH
-RV9TVFJJUCA9ICIxIgorCmRpZmYgLXJ1cE4gY3VycmVudC1tZXRhLWphdmEvcmVjaXBlcy1jb3Jl
-L29wZW5qZGsvb3Blbmpkay04LWNvbW1vbi5pbmMgbWV0YS1qYXZhL3JlY2lwZXMtY29yZS9vcGVu
-amRrL29wZW5qZGstOC1jb21tb24uaW5jCi0tLSBjdXJyZW50LW1ldGEtamF2YS9yZWNpcGVzLWNv
-cmUvb3Blbmpkay9vcGVuamRrLTgtY29tbW9uLmluYwkxOTY5LTEyLTMxIDE2OjAwOjAwLjAwMDAw
-MDAwMCAtMDgwMAorKysgbWV0YS1qYXZhL3JlY2lwZXMtY29yZS9vcGVuamRrL29wZW5qZGstOC1j
-b21tb24uaW5jCTIwMTUtMDctMzEgMTE6Mzc6MjAuMjcyNDYyMTQ0IC0wNzAwCkBAIC0wLDAgKzEs
-NTUwIEBACityZXF1aXJlIG9wZW5qZGstY29tbW9uLmluYworSUNFRFRFQSA9ICJpY2VkdGVhLSR7
-SUNFRFRFQV9WRVJTSU9OfSIKKworSU5DX1BSID0gInI1IgorCitTUkNfVVJJID0gIiBcCisgICR7
-SUNFRFRFQV9VUkl9IFwKKyAgJHtPUEVOSkRLX1VSSX0gXAorICAke0hPVFNQT1RfVVJJfSBcCisg
-ICR7Q09SQkFfVVJJfSBcCisgICR7SkFYUF9VUkl9IFwKKyAgJHtKQVhXU19VUkl9IFwKKyAgJHtK
-REtfVVJJfSBcCisgICR7TEFOR1RPT0xTX1VSSX0gXAorICAke0NBQ0FPX1VSSX0gXAorICAke0pB
-TVZNX1VSSX0gXAorICAke05BU0hPUk5fVVJJfSBcCisgICR7T0VQQVRDSEVTfSBcCisgIGZpbGU6
-Ly9qdm0uY2ZnIFwKKyAgIgorCitKREtQTiA9ICJvcGVuamRrLTgiCitKREtfRElSID0gImphdmEt
-OC1vcGVuamRrIgorCitQTiA9ICIke0pES1BOfS1qcmUiCitQUk9WSURFUyArPSAiJHtKREtQTn0i
-CisKK0RFUEVORFMgPSAiIFwKKyAgICAgICAgICAgaWNlZHRlYTctbmF0aXZlIHppcC1uYXRpdmUg
-YW50LW5hdGl2ZSBcCisgICAgICAgICAgIHpsaWIgbGlieHNsdC1uYXRpdmUgXAorCSAgIGpwZWcg
-bGlicG5nIGdpZmxpYiBcCisgICAgICAgICAgIGd0aysgZ2xpYi0yLjAgXAorICAgICAgICAgICBj
-dXBzIGZvbnRjb25maWcgXAorCSAgIGtyYjUgXAorCSAgIGxpYnh0IGxpYnhpbmVyYW1hIGxpYnhy
-ZW5kZXIgbGlieHRzdCBsaWJ4aSBcCisJICAgZnJlZXR5cGUgYWxzYS1saWIgbGliZmZpIFwKKyAg
-ICAgICAgICAiCisKKyMgTm8gcGFja2FnZSBzaG91bGQgZGlyZWN0bHkgZGVwZW5kIG9uIHRoaXMg
-KGl0IHNob3VsZCByZXF1aXJlCisjIGphdmEyLXJ1bnRpbWUgaW5zdGVhZCkuCitQUklWQVRFX0xJ
-QlMgPSAiXAorCWxpYi5zbyBsaWJ1bnBhY2suc28gbGlidmVyaWZ5LnNvIGxpYmphdmEuc28gbGli
-emlwLnNvIGxpYm5wdC5zbyBcCisJbGliamF2YV9jcndfZGVtby5zbyBsaWJocHJvZi5zbyBsaWJq
-YXZhbmV0LnNvIGxpYm5pby5zbyBcCisJbGlibWFuYWdlbWVudC5zbyBsaWJpbnN0cnVtZW50LnNv
-IGxpYmpzb3VuZC5zbyBsaWJqc291bmRhbHNhLnNvIFwKKwlsaWJqMnBjc2Muc28gbGliajJwa2Nz
-MTEuc28gbGliajJnc3Muc28gbGlibWxpYl9pbWFnZS5zbyBcCisJbGliYXd0LnNvIGxpYnNwbGFz
-aHNjcmVlbi5zbyBsaWJmcmVldHlwZS5zby42IGxpYmZvbnRtYW5hZ2VyLnNvIFwKKwlsaWJqcGVn
-LnNvIGxpYmxjbXMuc28gbGlicm1pLnNvIGxpYmphd3Quc28gbGliamFhc191bml4LnNvIFwKKwls
-aWJhdHRhY2guc28gbGliamR3cC5zbyBsaWJkdF9zb2NrZXQuc28gbGliaHBpLnNvIGxpYmpsaS5z
-byBcCisJbGlibWF3dC5zbyBsaWJqdm0uc28gXAorCWxpYnZlcnNpb25DaGVjay5zbyBsaWJjb21w
-aWxlZE1ldGhvZExvYWQuc28gbGliZ2N0ZXN0LnNvIFwKKwlsaWJoZWFwVmlld2VyLnNvIGxpYmhl
-YXBUcmFja2VyLnNvIGxpYm1pbnN0LnNvIGxpYm10cmFjZS5zbyBcCisJbGlid2FpdGVycy5zbyBs
-aWJocHJvZi5zbyBcCisgICAgICAgIgorCitleHBvcnQgQUxUX0NVUFNfSEVBREVSU19QQVRIID0g
-IiR7U1RBR0lOR19JTkNESVJ9IgorZXhwb3J0IEFMVF9GUkVFVFlQRV9IRUFERVJTX1BBVEggPSAi
-JHtTVEFHSU5HX0lOQ0RJUn0vZnJlZXR5cGUyIgorZXhwb3J0IEFMVF9GUkVFVFlQRV9MSUJfUEFU
-SCA9ICIke1NUQUdJTkdfTElCRElSfSIKK2V4cG9ydCBDQUNBT19DT05GSUdVUkVfQVJHUyA9ICIg
-XAorCSR7QFsnJywnLS1lbmFibGUtc29mdGZsb2F0J11bYmIuZGF0YS5nZXRWYXIoJ1RBUkdFVF9G
-UFUnLGQsMSkgPT0gJ3NvZnQnXX0iCisKK0pBVkFfSE9NRVt1bmV4cG9ydF0gPSAiMSIKKworIyBk
-aXNhYmxlIHNoYXJrIHVudGlsIGl0IGlzIGZ1bGx5IHdvcmtpbmcgYWdhaW4KKyMgV0lUSF9BRERJ
-VElPTkFMX1ZNUyA/PSAiLS13aXRoLWFkZGl0aW9uYWwtdm1zPXNoYXJrLGNhY2FvLGphbXZtIgor
-CitXSVRIX0FERElUSU9OQUxfVk1TID89ICItLXdpdGgtYWRkaXRpb25hbC12bXM9Y2FjYW8samFt
-dm0iCisKKyMgT3BlbkpESyBzdXBwb3J0cyBwYXJhbGxlbCBjb21waWxhdGlvbiBidXQgdXNlcyBh
-IHBsYWluIG51bWJlciBmb3IgdGhpcy4KKyMgSW4gT0Ugd2UgaGF2ZSBQQVJBTExFTF9NQUtFIHdo
-aWNoIGlzIHRoZSBhY3R1YWwgb3B0aW9uIHBhc3NlZCB0byBtYWtlLAorIyBlLmcuICItaiA0Ii4K
-KworT1BFTkpES19QQVJBTExFTF9NQUtFIDo9ICIke1BBUkFMTEVMX01BS0V9IgorUEFSQUxMRUxf
-TUFLRSA9ICAiIgorCitkZWYgZ2V0X2pkazhfam9icyhkKToKKyAgICBpbXBvcnQgYmIKKworICAg
-IHBtID0gYmIuZGF0YS5nZXRWYXIoJ09QRU5KREtfUEFSQUxMRUxfTUFLRScsIGQsIDEpOworICAg
-IGlmIG5vdCBwbToKKyAgICAgICAgcmV0dXJuICIxIgorCisgICAgcG0gPSBwbS5zcGxpdCgiaiIp
-OworICAgIGlmIChsZW4ocG0pID09IDIpOgorICAgICAgICByZXR1cm4gcG1bMV0uc3RyaXAoKQor
-CisgICAgIyBXaGF0ZXZlciBmb3VuZCBpbiBQQVJBTExFTF9NQUtFIHdhcyBub3Qgc3VpdGFibGUu
-CisgICAgcmV0dXJuICIxIgorCitKREtfSk9CUyA9ICIke0BnZXRfamRrOF9qb2JzKGQpfSIKKwor
-RVhUUkFfT0VDT05GID0gIiBcCisgICAgICAgIC0tZGlzYWJsZS10ZXN0cyBcCisJLS1kaXNhYmxl
-LWhvdHNwb3QtdGVzdHMgXAorCS0tZGlzYWJsZS1sYW5ndG9vbHMtdGVzdHMgXAorCS0tZGlzYWJs
-ZS1qZGstdGVzdHMgXAorCS0tZGlzYWJsZS1kb2NzIFwKKwktLWRpc2FibGUtbnNzIFwKKwktLWRp
-c2FibGUtc3lzdGVtLWxjbXMgXAorCS0tZGlzYWJsZS1ib290c3RyYXAgXAorICAgICAgICAtLXdp
-dGgtcmhpbm89JHtTVEFHSU5HX0RBVEFESVJfSkFWQX0vcmhpbm8uamFyIFwKKwktLXdpdGgtamRr
-LWhvbWU9JHtTVEFHSU5HX0xJQkRJUl9KVk1fTkFUSVZFfS9pY2VkdGVhNy1uYXRpdmUgXAorICAg
-ICAgICAtLXdpdGgtb3Blbmpkay1zcmMtemlwPSR7V09SS0RJUn0vJHtPUEVOSkRLX0ZJTEV9IFwK
-KwktLXdpdGgtaG90c3BvdC1zcmMtemlwPSR7V09SS0RJUn0vJHtIT1RTUE9UX0ZJTEV9IFwKKwkt
-LXdpdGgtY29yYmEtc3JjLXppcD0ke1dPUktESVJ9LyR7Q09SQkFfRklMRX0gXAorCS0td2l0aC1q
-YXhwLXNyYy16aXA9JHtXT1JLRElSfS8ke0pBWFBfRklMRX0gXAorCS0td2l0aC1qYXh3cy1zcmMt
-emlwPSR7V09SS0RJUn0vJHtKQVhXU19GSUxFfSBcCisJLS13aXRoLWpkay1zcmMtemlwPSR7V09S
-S0RJUn0vJHtKREtfRklMRX0gXAorCS0td2l0aC1sYW5ndG9vbHMtc3JjLXppcD0ke1dPUktESVJ9
-LyR7TEFOR1RPT0xTX0ZJTEV9IFwKKwktLXdpdGgtcGFyYWxsZWwtam9icz0ke0pES19KT0JTfSBc
-CisJLS13aXRoLXBrZ3ZlcnNpb249JHtQVn0gXAorICAgICAgICIKKworZG9fY29uZmlndXJlX3By
-ZXBlbmQoKSB7CisgIGJibm90ZSAiQ29weWluZyBhbmQgcmVzZXR0aW5nIHBhdGNoZXMuLi5Db25m
-aWd1cmUgd2l0aCBwYXJhbGxlbC1qb2JzOiAke0pES19KT0JTfSIKKworICAjIEF1dG9tYXRpY2Fs
-bHkgY29weSBldmVyeXRoaW5nIHRoYXQgc3RhcnRzIHdpdGggImljZWR0ZWEiIChvciAiY2FjYW8i
-KSBhbmQgZW5kcyB3aXRoCisgICMgIi5wYXRjaCIgaW50byB0aGUgcGF0Y2hlcyBkaXJlY3Rvcnku
-CisgIGZpbmQgJHtXT1JLRElSfSAtbWF4ZGVwdGggMSAtbmFtZSAiaWNlZHRlYSoucGF0Y2giIC1l
-eGVjIGNwIHt9ICR7U30vcGF0Y2hlcyBcOworICBmaW5kICR7V09SS0RJUn0gLW1heGRlcHRoIDEg
-LW5hbWUgImNhY2FvKi5wYXRjaCIgLWV4ZWMgY3Age30gJHtTfS9wYXRjaGVzIFw7CisgIGZpbmQg
-JHtXT1JLRElSfSAtbWF4ZGVwdGggMSAtbmFtZSAiemVybyoucGF0Y2giIC1leGVjIGNwIHt9ICR7
-U30vcGF0Y2hlcyBcOworICBmaW5kICR7V09SS0RJUn0gLW1heGRlcHRoIDEgLW5hbWUgImZhdWx0
-eS1ueC1lbXVsYXRpb24ucGF0Y2giIC1leGVjIGNwIHt9ICR7U30vcGF0Y2hlcyBcOworICAjIE92
-ZXJ3cml0ZSBwcjIxMjQucGF0Y2ggYWJvdXQgTmFtZWRDdXJ2ZS5qYXZhCisgID4gJHtTfS9wYXRj
-aGVzL3ByMjEyNC5wYXRjaCAKKyAgIyBPdmVyd3JpdGUgcmhpbm8ucGF0Y2ggYWJvdXQgSmF2YVNj
-cmlwdAorICA+ICR7U30vcGF0Y2hlcy9yaGluby5wYXRjaCAKKyAgPiAke1N9L3BhdGNoZXMvYm9v
-dC9uby5wYXRjaAorICBiYm5vdGUgIk5vIG5lZWQgdG8gcmVtb3ZlIHNubXAgZXRjLi4gZnJvbSBv
-cGVuamRrLTgiCisgID4gJHtTfS9mc2cuc2guaW4JCit9CisKK2RvX2NvbmZpZ3VyZV9hcHBlbmQo
-KSB7CisgICAgICAgICMgV2UgYXJlIG5vdCByZW1vdmluZyBhbnkgZmlsZXMgZnJvbSBvcGVuamRr
-LTgKKyAgICAgICAgYmJub3RlICJBcHBseWluZyByZW1haW5pbmcgcGF0Y2hlcy4uIgorCW9lX3J1
-bm1ha2UgcGF0Y2gKK30KKworIyBXb3JrIGFyb3VuZCBicm9rZW4gdmFyaWFibGUgcXVvdGluZyBp
-biBvZS1zdGFibGUgMjAwOSBhbmQgcHJvdmlkZSB0aGUgdmFyaWFibGUKKyMgdmlhIHRoZSBlbnZp
-cm9ubWVudCB3aGljaCB0aGVuIG92ZXJyaWRlcyB0aGUgZXJyb25lb3VzIHZhbHVlIHRoYXQgd2Fz
-IHdyaXR0ZW4KKyMgaW50byAnJHtJQ0VUREVBfS9NYWtlZmlsZScuCisjIEljZWR0ZWEncyBtYWtl
-ZmlsZSBpcyBub3QgY29tcGF0aWJsZSB0byBwYXJhbGxlbGl6YXRpb24gc28gd2UgY2Fubm90IGFs
-bG93CisjIHBhc3NpbmcgYSB2YWxpZCAke1BBUkFMTEVMX01BS0V9IHRvIGl0LiBPVE9IIE9wZW5K
-REsncyBtYWtlZmlsZXMgYXJlCisjIHBhcmFsbGVsaXphYmxlIGFuZCB3ZSBuZWVkICR7UEFSQUxM
-RUxfTUFLRX0gdG8gZGVyaXZlIHRoZSBwcm9wZXIgdmFsdWUuCisjIFRoZSBiYXNlIGZvciB0aGlz
-IHF1aXJrIGlzIHRoYXQgR05VIE1ha2Ugb25seSBjb25zaWRlcnMgdGhlIGxhc3QgIi1qIiBvcHRp
-b24uCitFWFRSQV9PRU1BS0UgKz0gJ0NDPSIke0NDfSIgQ0NDPSIke0NYWH0iIENQUD0iJHtDUFB9
-IiBDWFg9IiR7Q1hYfSIgQ0NfRk9SX0JVSUxEPSIke0JVSUxEX0NDfSInCisKK0VYVFJBX09FTUFL
-RSArPSAnIFwKKyAgICAgICAgICAgICAgICBPRV9DRkxBR1M9IiR7VEFSR0VUX0NGTEFHU30iIFwK
-KyAgICAgICAgICAgICAgICBPRV9DUFBGTEFHUz0iJHtUQVJHRVRfQ1BQRkxBR1N9IiBcCisgICAg
-ICAgICAgICAgICAgT0VfQ1hYRkxBR1M9IiR7VEFSR0VUX0NYWEZMQUdTfSIgXAorICAgICAgICAg
-ICAgICAgIE9FX0xERkxBR1M9IiR7VEFSR0VUX0xERkxBR1N9IiBcCisgICAgICAgICAgICAgICAg
-WklQRVhFPSIke1NUQUdJTkdfQklORElSX05BVElWRX0vemlwIiBcCisJCUNST1NTX0NPTVBJTEVf
-QVJDSD0iJHtKREtfQVJDSH0iIFwKKwkJUkVRVUlSRURfQUxTQV9WRVJTSU9OPSIiIFwKKyAgICAg
-ICAgICAgICAgICcKKworIyBQcm92aWRlcyB0aGUgdGFyZ2V0IGFyY2hpdGVjdHVyZSB0byB0aGUg
-Y29uZmlndXJlIHNjcmlwdC4KK2V4cG9ydCBMTFZNX0NPTkZJR1VSRV9BUkNIPSIke0BnZXRfbGx2
-bV9jb25maWd1cmVfYXJjaChkKX0iCisKK09FX0xBVU5DSEVSX0xERkxBR1MgPSAiLVdsLC1ycGF0
-aC1saW5rLCR7U1RBR0lOR19MSUJESVJ9L2xsdm0ke1dBTlRfTExWTV9SRUxFQVNFfSAtV2wsLXJw
-YXRoLCR7bGliZGlyfS9sbHZtJHtXQU5UX0xMVk1fUkVMRUFTRX0iCisKK09FX0xBVU5DSEVSX0xE
-RkxBR1NfYXJtID0gIiIKKworRVhUUkFfT0VNQUtFICs9ICdPRV9MQVVOQ0hFUl9MREZMQUdTPSIk
-e09FX0xBVU5DSEVSX0xERkxBR1N9IicKKworCitPUEVOSkRLX09FQ09ORiA9ICIgXAorICAgICAt
-LW9wZW5qZGstdGFyZ2V0PSR7VEFSR0VUX1NZU30gXCAgICAgICAgIAorICAgICAtLXByZWZpeD0v
-dXNyICAgICAgICAgICAgICAgICAgXAorICAgICAtLWV4ZWNfcHJlZml4PS91c3IgICAgICAgICAg
-ICAgXAorICAgICAtLWJpbmRpcj0vdXNyL2JpbiAgICAgICAgICAgICAgXAorICAgICAtLXNiaW5k
-aXI9L3Vzci9zYmluICAgICAgICAgICAgXAorICAgICAtLWxpYmV4ZWNkaXI9L3Vzci9saWJleGVj
-ICAgICAgXAorICAgICAtLWRhdGFkaXI9L3Vzci9zaGFyZSAgICAgICAgICAgXAorICAgICAtLXN5
-c2NvbmZkaXI9L2V0YyAgICAgICAgICAgICAgXAorICAgICAtLXNoYXJlZHN0YXRlZGlyPS9jb20g
-ICAgICAgICAgXAorICAgICAtLWxvY2Fsc3RhdGVkaXI9L3ZhciAgICAgICAgICAgXAorICAgICAt
-LWxpYmRpcj0vdXNyL2xpYiAgICAgICAgICAgICAgXAorICAgICAtLWluY2x1ZGVkaXI9L3Vzci9p
-bmNsdWRlICAgICAgXAorICAgICAtLW9sZGluY2x1ZGVkaXI9L3Vzci9pbmNsdWRlICAgXAorICAg
-ICAtLWluZm9kaXI9L3Vzci9zaGFyZS9pbmZvICAgICAgXAorICAgICAtLW1hbmRpcj0vdXNyL3No
-YXJlL21hbiAgICAgICAgXAorICAgICAtLWRpc2FibGUtaGVhZGZ1bCAgICAgICAgICAgICAgXAor
-ICAgICAtLXdpdGgtc3lzLXJvb3Q9JHtTVEFHSU5HX0RJUl9UQVJHRVR9IFwKKyAgICAgQ0ZMQUdT
-PSItLXN5c3Jvb3Q9JHtTVEFHSU5HX0RJUl9UQVJHRVR9ICIgXAorICAgICBDWFhGTEFHUz0iLS1z
-eXNyb290PSR7U1RBR0lOR19ESVJfVEFSR0VUfSAiIFwKKyAgICAgTERGTEFHUz0iLS1zeXNyb290
-PSR7U1RBR0lOR19ESVJfVEFSR0VUfSAiIFwKKyAgICAgLS13aXRoLWV4dHJhLWNmbGFncz0iLS1z
-eXNyb290PSR7U1RBR0lOR19ESVJfVEFSR0VUfSAiIFwKKyAgICAgLS13aXRoLWV4dHJhLWN4eGZs
-YWdzPSItLXN5c3Jvb3Q9JHtTVEFHSU5HX0RJUl9UQVJHRVR9ICIgXAorICAgICAtLXdpdGgtZXh0
-cmEtbGRmbGFncz0iLS1zeXNyb290PSR7U1RBR0lOR19ESVJfVEFSR0VUfSAiIFwKKyAgICAgIgor
-CitkZWYgc2hvdWxkX2J1aWxkX3plcm8oZCk6CisgICAgaWYgKGdldF9sbHZtX2NvbmZpZ3VyZV9h
-cmNoKGQpID09ICJ4ODYiKToKKyAgICAgICAgcmV0dXJuIEZhbHNlCisgICAgZWxzZToKKyAgICAg
-ICAgcmV0dXJuIFRydWUKKworZGVmIG9wZW5qZGs4X2NvbmZpZ3VyYXRpb24oZCk6CisgICAgaWYg
-KHNob3VsZF9idWlsZF96ZXJvKGQpID09IFRydWUpOgorICAgICAgICByZXR1cm4gIi0td2l0aC1q
-dm0tdmFyaWFudHM9emVybyBMSUJGRklfTElCUz0tbGZmaSIKKyAgICBlbHNlOgorICAgICAgICBy
-ZXR1cm4gIi0td2l0aC1qdm0tdmFyaWFudHM9c2VydmVyIgorCitkZWYgb3Blbmpka19jb25maWd1
-cmF0aW9uKGQpOgorICAgIGlmIChzaG91bGRfYnVpbGRfemVybyhkKSA9PSBUcnVlKToKKyAgICAg
-ICAgcmV0dXJuICJMSUJGRklfTElCUz0tbGZmaSIKKyAgICBlbHNlOgorICAgICAgICByZXR1cm4g
-IiIKKworIyBMSUJGRklfTElCUyBuZWVkcyB0byBiZSBpbiBFWFRSQV9PRUNPTkYKK09QRU5KREtf
-T0VDT05GICs9ICIke0BvcGVuamRrOF9jb25maWd1cmF0aW9uKGQpfSIKK0VYVFJBX09FQ09ORiAr
-PSAiJHtAb3Blbmpka19jb25maWd1cmF0aW9uKGQpfSIKK0JVSUxEX1pFUk8gPSAiJHtAc2hvdWxk
-X2J1aWxkX3plcm8oZCl9IgorCitkb19jb21waWxlKCkgeworCisgICAgICAgIE9QRU5KREs4X0JV
-SUxEX0xPQz1gcHdkYAorCWJibm90ZSAiMy8zIEJ1aWxkaW5nIGZpbmFsIEpESyBAICR7T1BFTkpE
-SzhfQlVJTERfTE9DfSIKKyAgICAgICAgIyBDcmVhdGUgZHVtbXkgRGVmcy5nbWsKKyAgICAgICAg
-bWtkaXIgLXAgJHtPUEVOSkRLOF9CVUlMRF9MT0N9L29wZW5qZGsvamRrL21ha2UvY29tbW9uLwor
-ICAgICAgICBta2RpciAtcCAke09QRU5KREs4X0JVSUxEX0xPQ30vb3Blbmpkay9qZGsvbWFrZS9j
-b21tb24vc2hhcmVkLworICAgICAgICA+ICR7T1BFTkpESzhfQlVJTERfTE9DfS9vcGVuamRrL2pk
-ay9tYWtlL2NvbW1vbi9zaGFyZWQvRGVmcy5nbWsKKworICAgICAgICAjIHdlIGRvIG5vdCB3YW50
-IE1BS0U9bWFrZQorICAgICAgICBNQUtFPS91c3IvYmluL21ha2UKKyAgICAgICAgQlVJTERfTEQ9
-L3Vzci9iaW4vZ2NjCisgICAgICAgICMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
-IyMjIyMjIyMjIyMjCisgICAgICAgICMgSWNlZHRlYSBNYWtlZmlsZSBjcmVhdGVzIG9wZW5qZGsg
-ZGlyZWN0b3J5IGFuZCBjb3BpZXMgdmFyaW91cyBKYXZhIHRhciBmaWxlcyBldGMuLiBhbmQKKyAg
-ICAgICAgIyBhbmQgdW5wYWNrcyBpdC4uLgorICAgICAgICAjIFRoaXMgaXMgd2hlcmUgd2UgbmVl
-ZCB0byBjb25maWd1cmUgT3BlbkpESy04CisgICAgICAgICMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
-IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjCisJIyBCdWlsZCB0aGUgZmluYWwgSG90c3BvdCArIE9w
-ZW5KREsKKyAgICAgICAgIworICAgICAgICBmb3IgRiBpbiBgZmluZCAke1RNUERJUn0vd29yay8k
-e01VTFRJTUFDSF9UQVJHRVRfU1lTfS9saWJmZmkgLW5hbWUgc3lzcm9vdC1kZXN0ZGlyYAorICAg
-ICAgICBkbworICAgICAgICAgICAgI2V4cG9ydCBMSUJGRklfTElCUz0iLUwke0Z9L3Vzci9saWIv
-IC1sZmZpIgorICAgICAgICAgICAgTElCRkZJX0xPQz0kRgorICAgICAgICBkb25lCisgICAgICAg
-IGZvciBIIGluIGBmaW5kICR7TElCRkZJX0xPQ30gLW5hbWUgaW5jbHVkZWAKKyAgICAgICAgZG8K
-KyAgICAgICAgICAgICNleHBvcnQgTElCRkZJX0NGTEFHUz0iLUkke0h9LyIKKyAgICAgICAgICAg
-IGxuIC1zZiAkSC9mZmkuaCAke1NUQUdJTkdfSU5DRElSfS9mZmkuaCAKKyAgICAgICAgICAgIGxu
-IC1zZiAkSC9mZml0YXJnZXQuaCAke1NUQUdJTkdfSU5DRElSfS9mZml0YXJnZXQuaCAKKyAgICAg
-ICAgZG9uZQorICAgICAgICBlbnYKKyAgICAgICAgYmJub3RlICJXZSBhcmUgdHJ5aW5nIHRvIG5v
-dCBhcHBseSBwYXRjaGVzIHRvIGljZWRUZWEgTWFrZWZpbGUuYW0gZXRjLi4iCisgICAgICAgIGlm
-IFsgLWUgJHtPUEVOSkRLOF9CVUlMRF9MT0N9L29wZW5qZGsvY29uZmlndXJlIF0gOyB0aGVuCisg
-ICAgICAgICAgY2QgJHtPUEVOSkRLOF9CVUlMRF9MT0N9L29wZW5qZGsKKyAgICAgICAgICBjaG1v
-ZCAreCAke09QRU5KREs4X0JVSUxEX0xPQ30vb3Blbmpkay9jb25maWd1cmUKKyAgICAgICAgICBi
-Ym5vdGUgIlNldHRpbmcgdXAgTkFTSE9STi4uLi4iCisgICAgICAgICAgbG4gLXNmICR7V09SS0RJ
-Un0vJHtOQVNIT1JOX0ZJTEV9ICR7T1BFTkpESzhfQlVJTERfTE9DfS9uYXNob3JuLnRhci5iejIg
-CisgICAgICAgICAgdGFyIHhmICR7T1BFTkpESzhfQlVJTERfTE9DfS9uYXNob3JuLnRhci5iejIg
-CisgICAgICAgICAgaWYgWyAtZSBuYXNob3JuIF0gOyB0aGVuCisgICAgICAgICAgICAgIHJtIC1y
-ZiBuYXNob3JuCisgICAgICAgICAgZmk7CisgICAgICAgICAgbXYgbmFzaG9ybi0ke05BU0hPUk5f
-Q0hBTkdFU0VUfSBuYXNob3JuCisgICAgICAgICAgaWYgWyAiJHtCVUlMRF9aRVJPfSIgPSAiVHJ1
-ZSIgXSA7IHRoZW4KKyAgICAgICAgICAgICAgYmJub3RlICJBcHBseSBmaXhlcyB0byBPcGVuamRr
-IHNvdXJjZSBzbyB0aGF0IHdlIGNhbiBidWlsZCBaZXJvIgorICAgICAgICAgICAgICBpZiBwYXRj
-aCAtbCAtcDAgLS1kcnktcnVuIC1zIC10IC1mIC1GIDAgPCAke1N9L3BhdGNoZXMvemVyby1idWls
-ZC5wYXRjaCA7ICAKKyAgICAgICAgICAgICAgdGhlbgorICAgICAgICAgICAgICAgICAgYmJub3Rl
-ICJ6ZXJvLWJ1aWxkIGZpeC4uLiIKKyAgICAgICAgICAgICAgICAgIHBhdGNoIC1sIC1wMCA8ICR7
-U30vcGF0Y2hlcy96ZXJvLWJ1aWxkLnBhdGNoCisgICAgICAgICAgICAgIGVsc2UgCisgICAgICAg
-ICAgICAgICAgICBiYm5vdGUgIkFscmVhZHkgcGF0Y2hlZCBmb3IgemVyby1idWlsZCIKKyAgICAg
-ICAgICAgICAgZmk7CisKKyAgICAgICAgICAgICAgaWYgcGF0Y2ggLWwgLXAwIC0tZHJ5LXJ1biAt
-cyAtdCAtZiAtRiAwIDwgJHtTfS9wYXRjaGVzL2ZhdWx0eS1ueC1lbXVsYXRpb24ucGF0Y2ggOyAK
-KyAgICAgICAgICAgICAgdGhlbgorICAgICAgICAgICAgICAgICAgYmJub3RlICJmYXVsdHktbngt
-ZW11bGF0aW9uIGZpeCIKKyAgICAgICAgICAgICAgICAgIHBhdGNoIC1sIC1wMCA8ICR7U30vcGF0
-Y2hlcy9mYXVsdHktbngtZW11bGF0aW9uLnBhdGNoCisgICAgICAgICAgICAgIGVsc2UgCisgICAg
-ICAgICAgICAgICAgICBiYm5vdGUgIkFscmVhZHkgcGF0Y2hlZCBmb3IgbngtZW11bGF0aW9uIgor
-ICAgICAgICAgICAgICBmaTsKKyAgICAgICAgICBmaTsKKworICAgICAgICAgIGJibm90ZSAiQ29u
-ZmlndXJpbmcgT3BlbkpESy04Li4uIgorICAgICAgICAgICR7T1BFTkpESzhfQlVJTERfTE9DfS9v
-cGVuamRrL2NvbmZpZ3VyZSAke09QRU5KREtfT0VDT05GfSAKKyAgICAgICAgZmkgOworCisgICAg
-ICAgIGNkICR7T1BFTkpESzhfQlVJTERfTE9DfSAgICAgICAgICAgICAgICAgICAgIAorCisgICAg
-ICAgICMgY2hlY2sgb3RoZXIgZW52aXJvbm1lbnQgdmFyaWFibGVzCisgICAgICAgIGJibm90ZSAi
-U3RhcnRpbmcgc3RhZ2UyIgorCW9lX3J1bm1ha2UgaWNlZHRlYS1zdGFnZTIKKyAgICAgICAgYmJu
-b3RlICJEb25lIHdpdGggc3RhZ2UyIgorfQorCitkb19pbnN0YWxsKCkgeworICAgICAgICAjIEJp
-dGJha2UgZG9lcyBub3QgbGlrZSBzeW1saW5rIGluIHBhY2thZ2VzIG5vdCBjb250YWluaW5nIGRi
-ZywgZGV2IGluIG5hbWUKKyAgICAgICAgIyBzZWUgaW5zYW5lLmJiCisgICAgICAgICMgRml4aW5n
-IGl0Li4uCisgICAgICAgIAorICAgICAgICAjIEhlcmUgeW91IHdpbGwgYmUgYXQgaWNlZHRlYS9i
-dWlsZCBhcmVhLi4uCisgICAgICAgICMgY29tZSB0byBvcGVuamRrLTggYXJlYSBhbmQgY29weSBh
-bGwgZmlsZXMuCisgICAgICAgIGNkIG9wZW5qZGsKKyAgICAgICAgI2Jibm90ZSAiQWx3YXlzIHJ1
-biBjbGVhbiBiZWZvcmUgYmV3IGJ1aWxkIiAKKyAgICAgICAgI21ha2UgY2xlYW4KKyAgICAgICAg
-YmJub3RlICJCdWlsZGluZyBhbGwuLiIKKyAgICAgICAgbWFrZSBERUJVR19CSU5BUklFUz10cnVl
-IGFsbAorCisgICAgICAgICMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
-IyMjCisgICAgICAgICMgVXNlIGZvbGxvd2luZyB0byBjcmVhdGUgY29tcGFjdCBwcm9maWxlcy4K
-KyAgICAgICAgIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKKyAg
-ICAgICAgI2Jibm90ZSAiQnVpbGRpbmcgQWxsIDMganJlIGNvbXBhY3QgcHJvZmlsZXMuLi4gV2ls
-bCBjb3B5IG1vc3QgdXNlZCBjb21wYWN0MyBhcyBqcmUiCisgICAgICAgICNvZV9ydW5tYWtlIHBy
-b2ZpbGVzCisgICAgICAgICMgYmJub3RlICJCdWlsZGluZyBBbGwgMyBKREsvSlJFIGNvbXBhY3Qg
-cHJvZmlsZXMuLi4gV2lsbCBjb3B5IG1vc3QgdXNlZCBjb21wYWN0MyBhcyBqZGsvanJlIgorICAg
-ICAgICAjIG9lX3J1bm1ha2UgaW1hZ2VzIHByb2ZpbGVzCisKKyAgICAgICAgIyBGaXggUGVybWlz
-c2lvbnMuCisgICAgICAgIGZpbmQgJHtCfS8ke0JVSUxEX0RJUn0vIC10eXBlIGYgLW5vdCAtcGVy
-bSAtZ289ciAtZXhlYyBjaG1vZCBnbytyIHt9IFw7CisKKyAgICAgICAgY2QgYnVpbGQKKyAgICAg
-ICAgIyBSZW1vdmUgYWxsIGRlYnVnIHN5bWJvbCBmaWxlcy4KKyAgICAgICAgZmluZCAuIC1uYW1l
-ICIqLmRpeiIgLWV4ZWMgcm0ge30gXDsKKyAgICAgICAgY2QgKgorICAgICAgICBjZCBqZGsvYmlu
-CisgICAgICAgICMgVGhlcmUgYXJlIE5PIGRpcmVjdG9yaWVzIGhlcmUuCisgICAgICAgIG1rZGly
-IC1wICR7Qn0vJHtCVUlMRF9ESVJ9L2oyc2RrLWltYWdlL2JpbgorICAgICAgICBjcCAqICR7Qn0v
-JHtCVUlMRF9ESVJ9L2oyc2RrLWltYWdlL2Jpbi8KKyAgICAgICAgY2QgLi4vbGliCisgICAgICAg
-ICMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjCisgICAgICAgICMgUmVt
-dmUgc3ltbGluayBmb3IgbGlianNpZy5zbworICAgICAgICAjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
-IyMjIyMjIyMjIyMjIyMjIyMjIworICAgICAgICAKKyAgICAgICAgIAorICAgICAgICBiYm5vdGUg
-IlJlbW92aW5nIG9wZW5qZGsgYnVpbGQgY3JlYXRlZCBsaWJqc2lnIHN5bWxpbmsiCisgICAgICAg
-IGZpbmQgJHtCfS8ke0JVSUxEX0RJUn0vIC10eXBlIGwgLW5hbWUgbGlianNpZy5zbyB8CisgICAg
-ICAgICAgICB3aGlsZSByZWFkIFNZTUxJTksKKyAgICAgICAgICAgIGRvCisgICAgICAgICAgICAg
-ICAgY3AgLS1yZW1vdmUtZGVzdGluYXRpb24gYGRpcm5hbWUgJFNZTUxJTktgLy4uL2xpYmpzaWcu
-c28gJFNZTUxJTksKKyAgICAgICAgICAgIGRvbmUgCisgICAgICAgIGJibm90ZSAiRG9uZSBmaXhp
-bmcgUUEgc3ltbGluayBpc3N1ZSIKKworICAgICAgICBta2RpciAtcCAke0J9LyR7QlVJTERfRElS
-fS9qMnNkay1pbWFnZS9saWIKKyAgICAgICAgY3AgLVIgKiAke0J9LyR7QlVJTERfRElSfS9qMnNk
-ay1pbWFnZS9saWIKKyAgICAgICAgIyBHbyBiYWNrIHRvIGpkaworICAgICAgICBjZCAuLi9pbmNs
-dWRlCisgICAgICAgIGJibm90ZSAiY29weWluZyBpbmNsdWRlIgorICAgICAgICAKKyAgICAgICAg
-IyBDb3B5IGluY2x1ZGVzCisgICAgICAgIG1rZGlyIC1wICR7Qn0vJHtCVUlMRF9ESVJ9L2oyc2Rr
-LWltYWdlL2luY2x1ZGUKKyAgICAgICAgY3AgLVIgKiAke0J9LyR7QlVJTERfRElSfS9qMnNkay1p
-bWFnZS9pbmNsdWRlLworICAgICAgICAjIGdvIHRvIGJ1aWxkCisgICAgICAgIGNkIC4uLy4uCisK
-KyAgICAgICAgIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKKyAg
-ICAgICAgIyBVc2UgZm9sbG93aW5nIHRvIGNvcHkgY29tcGFjdCBwcm9maWxlcy4KKyAgICAgICAg
-IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKKyAgICAgICAgI2Ji
-bm90ZSAiY29weWluZyBjb21wYWN0MyBwcm9maWxlcyIKKworICAgICAgICAjIENvcHkgY29tYXBj
-dDMgcHJvZmlsZSBhcyBKUkUKKyAgICAgICAgI2NwIC1yIGltYWdlcy9qMnJlLWNvbXBhY3QzLWlt
-YWdlL2JpbiAke0J9LyR7QlVJTERfRElSfS9qMnNkay1pbWFnZS9qcmUvCisgICAgICAgICNjcCAt
-ciBpbWFnZXMvajJyZS1jb21wYWN0My1pbWFnZS9saWIgJHtCfS8ke0JVSUxEX0RJUn0vajJzZGst
-aW1hZ2UvanJlLworICAgICAgICAjIERvIHRoZSBzYW1lIGZvciBqMnJlLWltYWdlCisgICAgICAg
-ICNjcCAtciBpbWFnZXMvajJyZS1jb21wYWN0My1pbWFnZS9iaW4gJHtCfS8ke0JVSUxEX0RJUn0v
-ajJyZS1pbWFnZS8KKyAgICAgICAgI2NwIC1yIGltYWdlcy9qMnJlLWNvbXBhY3QzLWltYWdlL2xp
-YiAke0J9LyR7QlVJTERfRElSfS9qMnJlLWltYWdlLworCisgICAgICAgICMgQ29weSBlbnRpcmUg
-SlJFCisgICAgICAgIGNwIC1yIGltYWdlcy9qMnJlLWltYWdlICR7Qn0vJHtCVUlMRF9ESVJ9Lwor
-ICAgICAgICAjIENvcHkgSlJFIGF0IEpESyBhcyBiYXNlIHNldHVwCisgICAgICAgICMgRG8gdGhl
-IHNhbWUgZm9yIEpESyAodGhpcyBoYXMgc3JjLnppcCxkZW1vLCBtYW4sIHNhbXBsZSBhbmQganJl
-IGFzIHdlbGwpCisgICAgICAgIGNwIC1yIGltYWdlcy9qMnNkay1pbWFnZSAke0J9LyR7QlVJTERf
-RElSfS8KKworCisgICAgICAgICMgY29tZSBvdXQgb2Ygb3BlbmpkaworICAgICAgICBjZCAuLgor
-ICAgICAgICBwd2QKKyAgICAgICAgYmJub3RlICJEb25lIHdpdGggYnVpbGRpbmcgb3BlbmpkayAu
-Li4iCisgICAgICAgIAorICAgICAgICAgCisJaW5zdGFsbCAtZCAke0R9JHtsaWJkaXJfanZtfQor
-CWNwIC1SICR7Qn0vJHtCVUlMRF9ESVJ9L2oyc2RrLWltYWdlICR7RH0ke0pES19IT01FfQorCisJ
-Y2htb2QgdStydyAtUiAke0R9JHtKREtfSE9NRX0KKworCSMgRml4IHN5bWxpbmsgd2hpY2ggd291
-bGQgcG9pbnQgaW50byBzdGFnaW5nIGluIHRoZSBiaW5hcnkgcGFja2FnZS4KKwkjbG4gLXNmICR7
-ZGF0YWRpcl9qYXZhfS9yaGluby5qYXIgJHtEfSR7SkRLX0hPTUV9L2pyZS9saWIvcmhpbm8uamFy
-CisKKwkjIEpSRSBpcyBhIHN1YnNldCBvZiBKREsuIFNvIHRvIHNhdmUgc3BhY2UgYW5kIHJlc2Vt
-YmxlIHdoYXQgdGhlIEJJRyBkaXN0cm9zCisJIyBkbyB3ZSBjcmVhdGUgc3ltbGlua3MgZnJvbSB0
-aGUgSkRLIGJpbmFyaWVzIHRvIHRoZWlyIGNvdW50ZXJwYXJ0cyBpbiB0aGUKKwkjIEpSRSBmb2xk
-ZXIgKHdoaWNoIGhhdmUgdG8gZXhpc3QgYnkgdGhhdCB0aW1lIGIvYyBvZiBkZXBlbmRlbmNpZXMp
-LgorCWZvciBGIGluIGBmaW5kICR7RH0ke0pES19IT01FfS9qcmUvYmluIC10eXBlIGZgCisJZG8K
-KwkJYmY9YGJhc2VuYW1lICRGYAorCQliYm5vdGUgInJlcGxhY2U6IiAkYmYKKwkJcm0gJHtEfSR7
-SkRLX0hPTUV9L2Jpbi8kYmYKKwkJbG4gLXMgJHtKREtfSE9NRX0vanJlL2Jpbi8kYmYgJHtEfSR7
-SkRLX0hPTUV9L2Jpbi8kYmYKKwlkb25lCisKKyAgICAgICAgaW5zdGFsbCAtbTY0NCAke1dPUktE
-SVJ9L2p2bS5jZmcgICR7RH0ke0pES19IT01FfS9qcmUvbGliLyR7SkRLX0FSQ0h9LworICAgICAg
-ICAjIHdvcmthcm91bmQgZm9yIHNoYXJlZCBsaWJhcmFyeSBzZWFyY2hpbmcKKwlsbiAtc2YgJHtK
-REtfSE9NRX0vanJlL2xpYi8ke0pES19BUkNIfS9zZXJ2ZXIvbGlianZtLnNvICR7RH0ke0pES19I
-T01FfS9qcmUvbGliLyR7SkRLX0FSQ0h9LworfQorCisjIE5vdGVzIGFib3V0IHRoZSBpZGVhcyBi
-ZWhpbmQgcGFja2FnaW5nOgorIyAxKSBVc2VyIHNob3VsZCBpbnN0YWxsIG9wZW5qZGstOC1qcmUu
-IFRoaXMgaXMgYSBwcm92aWRlciBvZiAnamF2YTItcnVudGltZScuCisjIDIpIFRoaXMgbGV0cyBw
-YWNrYWdlIG1nbXQgaW5zdGFsbDogb3Blbmpkay04LWphdmEKKyMgLT4gb3Blbmpkay04LXZtLXNo
-YXJrfG9wZW5qZGstOC12bS16ZXJvfG9wZW5qZGstOC12bS1jYWNhbyAtPiBvcGVuamRrLTgtY29t
-bW9uCisjCisjIFdpdGggb3BrZyB0aGUgemVybyBWTSBpcyBjaG9zZW4gd2hpY2ggaXMgZ29vZCBi
-L2MgdGhhdCBpcyB0aGUgYmVzdCBrbm93biAoPSBjb21wYXRpYmxlKQorIyBydW50aW1lLiBJbnN0
-YWxsaW5nIG90aGVyIHJ1bnRpbWVzIHNpZGUtYnktc2lkZSBpcyBwb3NzaWJsZS4gVGhyb3VnaCBq
-dm0uY2ZnIHRoZSBmb2xsb3dpbmcKKyMgb3JkZXIgb2YgcHJlY2VkZW5jZSBpcyBlbmZvcmNlZDog
-emVybywgc2hhcmssIGNhY2FvLiBVc2VyIGNhbiBjaG9zZSBhIGRpZmZlcmVudCBydW50aW1lCisj
-IGJ5IGFkZGluZyAnLXNoYXJrJyBvciAnLWNhY2FvJyB0byB0aGUgSmF2YSBjb21tYW5kIChvciBi
-eSBkZWluc3RhbGxpbmcgYW4gb3RoZXJ3aXNlIHByZWZlcnJlZAorIyBydW50aW1lKQorIyAzKSBB
-bGwgb3RoZXIgcGFja2FnZXMsIGluY2x1ZGluZyAtamRrLCBhcmUgb3B0aW9uYWwgYW5kIG5vdCBu
-ZWVkZWQgZm9yIG5vcm1hbCBKYXZhIGFwcHMuCisjUEFDS0FHRVMgPSAiIFwKKyMgICAgICAgICAg
-ICAke0pES1BOfS1qcmUgXAorIwkgICAgICR7SkRLUE59LWpyZS1kYmcgXAorIyAgICAgICAgICAg
-ICR7SkRLUE59LWRiZyBcCisjICAgICAgICAgICAgJHtKREtQTn0tZGVtby1kYmcgXAorIyAgICAg
-ICAgICAgICR7SkRLUE59LWRlbW8gXAorIyAgICAgICAgICAgICR7SkRLUE59LXNvdXJjZSBcCisj
-ICAgICAgICAgICAgJHtKREtQTn0tZG9jIFwKKyMgICAgICAgICAgICAke0pES1BOfS1qZGsgXAor
-IyAgICAgICAgICAgICR7SkRLUE59LWphdmEgXAorIyAgICAgICAgICAgICR7SkRLUE59LXZtLXNo
-YXJrIFwKKyMgICAgICAgICAgICAke0pES1BOfS12bS16ZXJvIFwKKyMgICAgICAgICAgICAke0pE
-S1BOfS12bS1jYWNhbyBcCisjCSAgICAgJHtKREtQTn0tdm0tamFtdm0gXAorIyAgICAgICAgICAg
-ICR7SkRLUE59LWNvbW1vbiBcCisjICAgICAgICAgICAiCisKK1BBQ0tBR0VTID0gIiBcCisgICAg
-ICAgICAgICAke0pES1BOfS1qcmUgXAorICAgICAgICAgICAgJHtKREtQTn0tamRrIFwKKyAgICAg
-ICAgICAgICR7SkRLUE59LWphdmEgXAorICAgICAgICAgICAgJHtKREtQTn0tY29tbW9uIFwKKyAg
-ICAgICAgICAgICR7SkRLUE59LXNyYyBcCisgICAgICAgICAgICAke0pES1BOfS12bS1zZXJ2ZXIg
-XAorICAgICAgICAgICAgJHtKREtQTn0tdm0tY2xpZW50IFwKKyAgICAgICAgICAgICR7SkRLUE59
-LWRvYyBcCisgICAgICAgICAgICAke0pES1BOfS1kZW1vIFwKKyAgICAgICAgICAgICR7SkRLUE59
-LXNvdXJjZSBcCisgICAgICAgICAgICIKKworRklMRVNfJHtKREtQTn0tZGJnID0gIlwKKwkke0pE
-S19IT01FfS9iaW4vLmRlYnVnIFwKKwkke0pES19IT01FfS9saWIvLmRlYnVnIFwKKwkke0pES19I
-T01FfS9saWIvJHtKREtfQVJDSH0vamxpLy5kZWJ1ZyBcCisJJHtKREtfSE9NRX0vanJlL2Jpbi8u
-ZGVidWcgXAorCSR7SkRLX0hPTUV9L2pyZS9saWIvLmRlYnVnIFwKKwkke0pES19IT01FfS9qcmUv
-bGliLyR7SkRLX0FSQ0h9Ly5kZWJ1ZyBcCisJJHtKREtfSE9NRX0vanJlL2xpYi8ke0pES19BUkNI
-fS9qbGkvLmRlYnVnIFwKKwkke0pES19IT01FfS9qcmUvbGliLyR7SkRLX0FSQ0h9L25hdGl2ZV90
-aHJlYWRzLy5kZWJ1ZyBcCisJJHtKREtfSE9NRX0vanJlL2xpYi8ke0pES19BUkNIfS9zZXJ2ZXIv
-LmRlYnVnIFwKKwkke0pES19IT01FfS9qcmUvbGliLyR7SkRLX0FSQ0h9L2hlYWRsZXNzLy5kZWJ1
-ZyBcCisJJHtKREtfSE9NRX0vanJlL2xpYi8ke0pES19BUkNIfS94YXd0Ly5kZWJ1ZyBcCisJJHtK
-REtfSE9NRX0vanJlL2xpYi8ke0pES19BUkNIfS9jbGllbnQvLmRlYnVnIFwKKyAgICAgICAiCisK
-K0ZJTEVTXyR7SkRLUE59LWRlbW8gPSAiJHtKREtfSE9NRX0vZGVtbyAke0pES19IT01FfS9zYW1w
-bGUiCitSREVQRU5EU18ke0pES1BOfS1kZW1vID0gImphdmEyLXJ1bnRpbWUiCitGSUxFU18ke0pE
-S1BOfS1kZW1vLWRiZyA9ICJcCisJJHtKREtfSE9NRX0vZGVtby9qdm10aS9nY3Rlc3QvbGliLy5k
-ZWJ1ZyBcCisJJHtKREtfSE9NRX0vZGVtby9qdm10aS9oZWFwVHJhY2tlci9saWIvLmRlYnVnIFwK
-Kwkke0pES19IT01FfS9kZW1vL2p2bXRpL2hlYXBWaWV3ZXIvbGliLy5kZWJ1ZyBcCisJJHtKREtf
-SE9NRX0vZGVtby9qdm10aS9ocHJvZi9saWIvLmRlYnVnIFwKKwkke0pES19IT01FfS9kZW1vL2p2
-bXRpL21pbnN0L2xpYi8uZGVidWcgXAorCSR7SkRLX0hPTUV9L2RlbW8vanZtdGkvbXRyYWNlL2xp
-Yi8uZGVidWcgXAorCSR7SkRLX0hPTUV9L2RlbW8vanZtdGkvdmVyc2lvbkNoZWNrL2xpYi8uZGVi
-dWcgXAorCSR7SkRLX0hPTUV9L2RlbW8vanZtdGkvd2FpdGVycy9saWIvLmRlYnVnIFwKKwkke0pE
-S19IT01FfS9kZW1vL2p2bXRpL2NvbXBpbGVkTWV0aG9kTG9hZC9saWIvLmRlYnVnIFwKKyAgICAg
-ICAiCisKK0ZJTEVTXyR7SkRLUE59LXNvdXJjZSA9ICIke0pES19IT01FfS9zcmMuemlwIgorCitG
-SUxFU18ke0pES1BOfS1qYXZhID0gIiR7SkRLX0hPTUV9L2pyZS9iaW4vamF2YSIKKworRklMRVNf
-JHtKREtQTn0tdm0tc2VydmVyID0gIiR7SkRLX0hPTUV9L2pyZS9saWIvJHtKREtfQVJDSH0vc2Vy
-dmVyLyIKKworRklMRVNfJHtKREtQTn0tdm0tY2xpZW50ID0gIiR7SkRLX0hPTUV9L2pyZS9saWIv
-JHtKREtfQVJDSH0vY2xpZW50LyIKKworRklMRVNfJHtKREtQTn0tdm0temVybyA9ICIke0pES19I
-T01FfS9qcmUvbGliLyR7SkRLX0FSQ0h9L3NlcnZlci8iCisKK0ZJTEVTXyR7SkRLUE59LXZtLXNo
-YXJrID0gIiR7SkRLX0hPTUV9L2pyZS9saWIvJHtKREtfQVJDSH0vc2hhcmsvIgorCitGSUxFU18k
-e0pES1BOfS12bS1jYWNhbyA9ICIke0pES19IT01FfS9qcmUvbGliLyR7SkRLX0FSQ0h9L2NhY2Fv
-LyIKKworRklMRVNfJHtKREtQTn0tdm0tamFtdm0gPSAiJHtKREtfSE9NRX0vanJlL2xpYi8ke0pE
-S19BUkNIfS9qYW12bS8iCisKK0ZJTEVTXyR7SkRLUE59LWNvbW1vbiA9ICIke0pES19IT01FfS9q
-cmUvQVNTRU1CTFlfRVhDRVBUSU9OIFwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgJHtKREtf
-SE9NRX0vanJlL1RISVJEX1BBUlRZX1JFQURNRSBcCisgICAgICAgICAgICAgICAgICAgICAgICAg
-ICR7SkRLX0hPTUV9L2pyZS9MSUNFTlNFIFwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgJHtK
-REtfSE9NRX0vQVNTRU1CTFlfRVhDRVBUSU9OIFwKKyAgICAgICAgICAgICAgICAgICAgICAgICAg
-JHtKREtfSE9NRX0vVEhJUkRfUEFSVFlfUkVBRE1FIFwKKyAgICAgICAgICAgICAgICAgICAgICAg
-ICAgJHtKREtfSE9NRX0vTElDRU5TRSBcCisgICAgICAgICAgICAgICAgICAgICAgICAgICR7SkRL
-X0hPTUV9L3JlbGVhc2UgXAorICAgICAgICAgICAgICAgICAgICAgICAgICAke0pES19IT01FfS9q
-cmUvbGliIFwKKyAgICAgICAgICAgICAgICAgICAgICAgICAiCisKK0ZJTEVTXyR7SkRLUE59LWpy
-ZV9hcHBlbmQgPSAiIFwKKwkke0pES19IT01FfS9qcmUvYmluL2tleXRvb2wgXAorICAgICAgICAk
-e0pES19IT01FfS9qcmUvYmluL29yYmQgXAorCSR7SkRLX0hPTUV9L2pyZS9iaW4vcGFjazIwMCBc
-CisgICAgICAgICR7SkRLX0hPTUV9L2pyZS9iaW4vcm1pZCBcCisJJHtKREtfSE9NRX0vanJlL2Jp
-bi9ybWlyZWdpc3RyeSBcCisgICAgICAgICR7SkRLX0hPTUV9L2pyZS9iaW4vc2VydmVydG9vbCBc
-CisJJHtKREtfSE9NRX0vanJlL2Jpbi90bmFtZXNlcnYgXAorICAgICAgICAke0pES19IT01FfS9q
-cmUvYmluL3VucGFjazIwMCBcCisJJHtKREtfSE9NRX0vanJlL2Jpbi9wb2xpY3l0b29sIFwKKyAg
-ICAgICAgJHtKREtfSE9NRX0vanJlL2Jpbi9qYXZhd3MgXAorICAgICAgICAke0pES19IT01FfS9q
-cmUvYmluL2pqcyBcCisgICAgICAgIgorCisKK1JQUk9WSURFU18ke0pES1BOfS12bS1zaGFyayA9
-ICJqYXZhMi12bSIKK1JQUk9WSURFU18ke0pES1BOfS12bS16ZXJvID0gImphdmEyLXZtIgorUlBS
-T1ZJREVTXyR7SkRLUE59LXZtLWNhY2FvID0gImphdmEyLXZtIgorUlBST1ZJREVTXyR7SkRLUE59
-LXZtLWphbXZtID0gImphdmEyLXZtIgorCisjIEV2ZW4gdGhvdWdoIGEgdm0gaXMgYSBoYXJkIGRl
-cGVuZGVuY3kgaXQgaXMgc2V0IGFzIFJSRUNPTU1FTkRTIHNvIGEgc2luZ2xlIHZtIGNhbiBnZXQg
-dW5pbnN0YWxsZWQ6CisjIHJvb3RAYmVhZ2xlYm9uZTp+L2phdmEjIG9wa2cgcmVtb3ZlIG9wZW5q
-ZGstOC12bS1zaGFyaworIyBObyBwYWNrYWdlcyByZW1vdmVkLgorIyBDb2xsZWN0ZWQgZXJyb3Jz
-OgorIyAgKiBwcmludF9kZXBlbmRlbnRzX3dhcm5pbmc6IFBhY2thZ2Ugb3Blbmpkay04LXZtLXNo
-YXJrIGlzIGRlcGVuZGVkIHVwb24gYnkgcGFja2FnZXM6CisjICAqIHByaW50X2RlcGVuZGVudHNf
-d2FybmluZzogCW9wZW5qZGstOC1qYXZhCisjICAqIHByaW50X2RlcGVuZGVudHNfd2FybmluZzog
-VGhlc2UgbWlnaHQgY2Vhc2UgdG8gd29yayBpZiBwYWNrYWdlIG9wZW5qZGstOC12bS1zaGFyayBp
-cyByZW1vdmVkLgorUlJFQ09NTUVORFNfJHtKREtQTn0tamF2YSA9ICJqYXZhMi12bSIKKworIyBG
-b3Igc29tZSByZWFzb24gc2hhcmsgYW5kIGNhY2FvIGRvIG5vdCBhdXRvbWF0aWNhbGx5IGRlcGVu
-ZHMgb24gLWNvbW1vbi4KKyMgU28gd2UgYWRkIHRoYXQgbWFudWFsbHkuCitSREVQRU5EU18ke0pE
-S1BOfS12bS1zaGFyayA9ICIke0pES1BOfS1jb21tb24iCitSREVQRU5EU18ke0pES1BOfS12bS1j
-YWNhbyA9ICIke0pES1BOfS1jb21tb24iCitSREVQRU5EU18ke0pES1BOfS12bS1qYW12bSA9ICIk
-e0pES1BOfS1jb21tb24iCisjIFdpdGggb3V0IHRoaXMgeW91IG1heSBzZWUgbWQ1IG1pc21hdGNo
-ZXMuCitSREVQRU5EU18ke0pES1BOfS1jb21tb24gPSAibGlicmhpbm8tamF2YSIKKworIyBUaGVy
-ZSBpcyBhIHN5bWxpbmsgdG8gYSAuc28gYnV0IHRoaXMgb25lIGlzIHZhbGlkLgorSU5TQU5FX1NL
-SVBfJHtKREtQTn0tdm0tc2hhcmsgPSAiZGV2LXNvIgorSU5TQU5FX1NLSVBfJHtKREtQTn0tdm0t
-emVybyA9ICJkZXYtc28iCitJTlNBTkVfU0tJUF8ke0pES1BOfS12bS1jYWNhbyA9ICJkZXYtc28i
-CitJTlNBTkVfU0tJUF8ke0pES1BOfS12bS1qYW12bSA9ICJkZXYtc28iCitJTlNBTkVfU0tJUF8k
-e0pES1BOfS1jb21tb24gPSAiZGV2LXNvIgorCitGSUxFU18ke0pES1BOfS1qZGsgPSAiIFwKKyAg
-ICAgICAgICAgICAgICAgICAgICAgJHtKREtfSE9NRX0vYmluIFwKKyAgICAgICAgICAgICAgICAg
-ICAgICAgJHtKREtfSE9NRX0vbGliIFwKKyAgICAgICAgICAgICAgICAgICAgICAgJHtKREtfSE9N
-RX0vaW5jbHVkZSBcCisgICAgICAgICAgICAgICAgICAgICAgIgorUkRFUEVORFNfJHtKREtQTn0t
-anJlID0gIiR7SkRLUE59LWphdmEgJHtKREtQTn0tY29tbW9uIgorUkRFUEVORFNfJHtKREtQTn0t
-amF2YSA9ICIke0pES1BOfS1jb21tb24iCitSUFJPVklERVNfJHtKREtQTn0tanJlID0gImphdmEy
-LXJ1bnRpbWUiCisKK1JERVBFTkRTXyR7SkRLUE59LWpkayA9ICIke0pES1BOfS1qcmUiCisKK0ZJ
-TEVTXyR7SkRLUE59LWRvYyA9ICIke0pES19IT01FfS9tYW4iCisKK3JlcXVpcmUgb3Blbmpkay1w
-b3N0aW5zdC5pbmMKKworQUxURVJOQVRJVkVfUFJJT1JJVFkgPSAiNTAiCmRpZmYgLXJ1cE4gY3Vy
-cmVudC1tZXRhLWphdmEvcmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpkay04LXJlbGVhc2UtOHU0
-MGIyNy5pbmMgbWV0YS1qYXZhL3JlY2lwZXMtY29yZS9vcGVuamRrL29wZW5qZGstOC1yZWxlYXNl
-LTh1NDBiMjcuaW5jCi0tLSBjdXJyZW50LW1ldGEtamF2YS9yZWNpcGVzLWNvcmUvb3Blbmpkay9v
-cGVuamRrLTgtcmVsZWFzZS04dTQwYjI3LmluYwkxOTY5LTEyLTMxIDE2OjAwOjAwLjAwMDAwMDAw
-MCAtMDgwMAorKysgbWV0YS1qYXZhL3JlY2lwZXMtY29yZS9vcGVuamRrL29wZW5qZGstOC1yZWxl
-YXNlLTh1NDBiMjcuaW5jCTIwMTUtMDctMjMgMTE6NTY6MDUuOTM4MjQ1MDAwIC0wNzAwCkBAIC0w
-LDAgKzEsNzQgQEAKK3JlcXVpcmUgb3Blbmpkay04LWNvbW1vbi5pbmMKKworTElDX0ZJTEVTX0NI
-S1NVTSA9ICJmaWxlOi8vQ09QWUlORzttZDU9NTk1MzBiZGYzMzY1OWIyOWU3M2Q0YWRiOWY5ZjY1
-NTIiCisKK0ZJTEVTUEFUSCA9LiAiJHtGSUxFX0RJUk5BTUV9L29wZW5qZGstOC04dTQwYjI3OiIK
-KworIyBOYW1lIG9mIHRoZSBkaXJlY3RvcnkgY29udGFpbmluZyB0aGUgY29tcGlsZWQgb3V0cHV0
-CitCVUlMRF9ESVIgPSAib3Blbmpkay5idWlsZCIKK0JVSUxEX0RJUl9FQ0ogPSAib3Blbmpkay5i
-dWlsZC1lY2oiCisKK0lDRURURUFfVVJJID0gImh0dHA6Ly9pY2VkdGVhLndpbGRlYmVlc3Qub3Jn
-L2Rvd25sb2FkL3NvdXJjZS8ke0lDRURURUF9LnRhci5nejtuYW1lPWljZWQiCisKKyNJQ0VEVEVB
-X1BSRUZJWCA9ICJpY2VkdGVhNy1mb3Jlc3QtMi41IgorSUNFRFRFQV9QUkVGSVggPSAiamRrOHUi
-CisKK09QRU5KREtfSEdfVVJMID0gImh0dHA6Ly9oZy5vcGVuamRrLmphdmEubmV0L2pkazh1L2pk
-azh1IgorCitPUEVOSkRLX0ZJTEUgPSAiJHtPUEVOSkRLX0NIQU5HRVNFVH0udGFyLmJ6MiIKK09Q
-RU5KREtfVVJJID0gIiR7T1BFTkpES19IR19VUkx9L2FyY2hpdmUvJHtPUEVOSkRLX0ZJTEV9O25h
-bWU9b3Blbmpkazt1bnBhY2s9ZmFsc2UiCisKK0hPVFNQT1RfRklMRSA9ICIke0hPVFNQT1RfQ0hB
-TkdFU0VUfS50YXIuYnoyIgorSE9UU1BPVF9VUkkgPSAiJHtPUEVOSkRLX0hHX1VSTH0vaG90c3Bv
-dC9hcmNoaXZlLyR7SE9UU1BPVF9GSUxFfTtuYW1lPWhvdHNwb3Q7dW5wYWNrPWZhbHNlIgorCitD
-T1JCQV9GSUxFID0gIiR7Q09SQkFfQ0hBTkdFU0VUfS50YXIuYnoyIgorQ09SQkFfVVJJID0gIiR7
-T1BFTkpES19IR19VUkx9L2NvcmJhL2FyY2hpdmUvJHtDT1JCQV9GSUxFfTtuYW1lPWNvcmJhO3Vu
-cGFjaz1mYWxzZSIKKworSkFYUF9GSUxFID0gIiR7SkFYUF9DSEFOR0VTRVR9LnRhci5iejIiCitK
-QVhQX1VSSSA9ICIke09QRU5KREtfSEdfVVJMfS9qYXhwL2FyY2hpdmUvJHtKQVhQX0ZJTEV9O25h
-bWU9amF4cDt1bnBhY2s9ZmFsc2UiCisKK0pBWFdTX0ZJTEUgPSAiJHtKQVhXU19DSEFOR0VTRVR9
-LnRhci5iejIiCitKQVhXU19VUkkgPSAiJHtPUEVOSkRLX0hHX1VSTH0vamF4d3MvYXJjaGl2ZS8k
-e0pBWFdTX0ZJTEV9O25hbWU9amF4d3M7dW5wYWNrPWZhbHNlIgorCitKREtfRklMRSA9ICIke0pE
-S19DSEFOR0VTRVR9LnRhci5iejIiCitKREtfVVJJID0gIiR7T1BFTkpES19IR19VUkx9L2pkay9h
-cmNoaXZlLyR7SkRLX0ZJTEV9O25hbWU9amRrO3VucGFjaz1mYWxzZSIKKworTEFOR1RPT0xTX0ZJ
-TEUgPSAiJHtMQU5HVE9PTFNfQ0hBTkdFU0VUfS50YXIuYnoyIgorTEFOR1RPT0xTX1VSSSA9ICIk
-e09QRU5KREtfSEdfVVJMfS9sYW5ndG9vbHMvYXJjaGl2ZS8ke0xBTkdUT09MU19GSUxFfTtuYW1l
-PWxhbmd0b29sczt1bnBhY2s9ZmFsc2UiCisKK0NBQ0FPX1ZFUlNJT04gPSAiZTIxNWUzNmJlOWZj
-IgorQ0FDQU9fRklMRSA9ICIke0NBQ0FPX1ZFUlNJT059LnRhci5neiIKK0NBQ0FPX1VSSSA9ICJo
-dHRwOi8vaWNlZHRlYS53aWxkZWJlZXN0Lm9yZy9kb3dubG9hZC9kcm9wcy9jYWNhby8ke0NBQ0FP
-X0ZJTEV9O25hbWU9Y2FjYW87dW5wYWNrPWZhbHNlIgorU1JDX1VSSVtjYWNhby5tZDVzdW1dID0g
-Ijc5Zjk1ZjBhZWE0YmEwNGNmMmYxYTg2MzJhYzY2ZDE0IgorU1JDX1VSSVtjYWNhby5zaGEyNTZz
-dW1dID0gIjQ5NjY1MTRjNzJlZTdlZDEwOGI4ODJkOWI2ZTY1YzNhZGY4YThmOWMyZGNjYjAyOWY5
-NzFiM2M4Y2I0ODcwYWIiCisKK0pBTVZNX1ZFUlNJT04gPSAiZWMxOGZiOWU0OWU2MmRjZTE2YzUw
-OTRlZjE1MjdlZWQ2MTk0NjNhYSIKK0pBTVZNX0ZJTEUgPSAiamFtdm0tJHtKQU1WTV9WRVJTSU9O
-fS50YXIuZ3oiCitKQU1WTV9VUkkgPSAiaHR0cDovL2ljZWR0ZWEud2lsZGViZWVzdC5vcmcvZG93
-bmxvYWQvZHJvcHMvamFtdm0vJHtKQU1WTV9GSUxFfTtuYW1lPWphbXZtO3VucGFjaz1mYWxzZSIK
-K1NSQ19VUklbamFtdm0ubWQ1c3VtXSA9ICJkNTBhZTE5M2QwMWE5MjUxZTEwNjc5YzdhMmNjNmZm
-MSIKK1NSQ19VUklbamFtdm0uc2hhMjU2c3VtXSA9ICIzMTgxMDI2NjY2NmMyMzgyMjk0MmFhYzYy
-YTc4MDE5YzJjNDU4OWUxYzVlZTQ4MzI5Y2JmNDI2NTJkNDQzN2JjIgorCitOQVNIT1JOX0ZJTEUg
-PSAiJHtOQVNIT1JOX0NIQU5HRVNFVH0udGFyLmJ6MiIKK05BU0hPUk5fVVJJID0gIiR7T1BFTkpE
-S19IR19VUkx9L25hc2hvcm4vYXJjaGl2ZS8ke05BU0hPUk5fRklMRX07bmFtZT1uYXNob3JuO3Vu
-cGFjaz1mYWxzZSIKKworIyBBbGxvdyBvdmVycmlkaW5nIHRoaXMgc2VwYXJhdGVseQorT0VQQVRD
-SEVTID0gIlwKKwlmaWxlOi8vZml4LWNoZWNrc3Vtcy5wYXRjaCBcCisJZmlsZTovL2J1aWxkLWhh
-Y2tzLnBhdGNoIFwKKwlmaWxlOi8vY2FjYW8tbGlidG9vbGl6ZS5wYXRjaCBcCisJZmlsZTovL2Nh
-Y2FvLWxvYWRhdmctbWFrZWZpbGUucGF0Y2ggXAorCWZpbGU6Ly9jYWNhby1sb2FkYXZnLnBhdGNo
-O2FwcGx5PW5vIFwKKwlmaWxlOi8vY2FjYW8tYXJtLXVjb250ZXh0LnBhdGNoO2FwcGx5PW5vIFwK
-KwlmaWxlOi8vemVyby1idWlsZC5wYXRjaDthcHBseT1ubyBcCisJZmlsZTovL2ZhdWx0eS1ueC1l
-bXVsYXRpb24ucGF0Y2g7YXBwbHk9bm8gXAorCSIKKworIyBvdmVycnJpZGUgdGhlIGphbXZtIHBh
-dGNoIGZvciBub3csIG5lZWRzIHRvIGJlIHNvbHZlZCB1cHN0cmVhbQorZG9fdW5wYWNrcG9zdCgp
-IHsKK30KKworYWRkdGFzayB1bnBhY2twb3N0IGFmdGVyIGRvX3VucGFjayBiZWZvcmUgZG9fcGF0
-Y2gKKworIyBBbGxvdyBvdmVycmlkaW5nIHRoaXMgc2VwYXJhdGVseQorCisjIEFsbG93IG92ZXJy
-aWRpbmcgdGhpcyBzZXBhcmF0ZWx5CmRpZmYgLXJ1cE4gY3VycmVudC1tZXRhLWphdmEvcmVjaXBl
-cy1pbWFnZXMvaW1hZ2VzL2phdmEtdGVzdC1pbWFnZS5iYiBtZXRhLWphdmEvcmVjaXBlcy1pbWFn
-ZXMvaW1hZ2VzL2phdmEtdGVzdC1pbWFnZS5iYgotLS0gY3VycmVudC1tZXRhLWphdmEvcmVjaXBl
-cy1pbWFnZXMvaW1hZ2VzL2phdmEtdGVzdC1pbWFnZS5iYgkyMDE1LTA3LTMxIDEwOjU0OjIzLjUw
-NDQ1Mzg2NyAtMDcwMAorKysgbWV0YS1qYXZhL3JlY2lwZXMtaW1hZ2VzL2ltYWdlcy9qYXZhLXRl
-c3QtaW1hZ2UuYmIJMjAxNS0wNy0zMSAxMDoxMzozOC42MTI0NDYwMTQgLTA3MDAKQEAgLTcsNiAr
-Nyw3IEBAIElNQUdFX0xJTkdVQVMgPSAiICIKIAogSU1BR0VfSU5TVEFMTCA9ICJidXN5Ym94IG1v
-ZHV0aWxzLWluaXRzY3JpcHRzIGluaXRzY3JpcHRzIG9wa2cgdWRldiBzeXN2aW5pdCBuZXRiYXNl
-IGJhc2UtZmlsZXMgYmFzZS1wYXNzd2QgXAogICAgICAgICAgICAgICAgICAke1JPT1RGU19QS0dN
-QU5BR0VfQk9PVFNUUkFQfSAke0NPUkVfSU1BR0VfRVhUUkFfSU5TVEFMTH0gXAorICAgICAgICAg
-ICAgICAgICBvcGVuamRrLTgtanJlIFwKICAgICAgICAgICAgICAgICAgb3Blbmpkay03LWpyZSBv
-cGVuamRrLTctdm0temVybyBvcGVuamRrLTctdm0tamFtdm0gb3Blbmpkay03LXZtLWNhY2FvIFwK
-ICAgICAgICAgICAgICAgICAgb3Blbmpkay02LWpyZSBvcGVuamRrLTYtdm0temVybyBvcGVuamRr
-LTYtdm0tamFtdm0gb3Blbmpkay02LXZtLWNhY2FvIFwKICAgICAgICAgICAgICAgICAgc3RyYWNl
-IGRyb3BiZWFyIGJpbnV0aWxzIFwK
-
---_004_B399646F8CA055479BEC55F6B065A04A37038BDCFMSMSX108amrcor_--
