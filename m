@@ -1,36 +1,27 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-yk0-f171.google.com (mail-yk0-f171.google.com
-	[209.85.160.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 59C8C761DA
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A88D761DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 05:15:26 +0000 (UTC)
-Received: by ykdu72 with SMTP id u72so51351463ykd.2
+	Fri, 31 Jul 2015 05:37:36 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99108470"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2015 13:41:07 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6V5ZgSh023456
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jul 2015 22:15:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=24R3a7/LRivaVmQ+w23iDuHjjErxs1SbjR4RlY//cFk=;
-	b=Xul5s57i5T3ECOEp3ipGXfR09Zgo6RvuKQk1EgV8/G6XZ6S2oz6Nc7nHCH+skCw7ln
-	uvWcE8s4KdqwaTtAFJyV09PQG7WWUSbJtP/F3ILG47FyZ/ZmtBNdSaaLnBHp2mepTXG5
-	NFvq3x48om7Lh4f6fR01qTygo9u/P5levpaTZY1hJ59JJP5IOhLdhjStwzUhVhkBjAaN
-	MSvyccqNLUg31/4af3iRB4EjyHpOY9FQ6lhbTCup/7tBf0H5p8SDcmP2xDjUgKplHXQk
-	yMyzDNZyB06GOMSDRf3/3ft5oeqU11zsReeojThaufiLB9SPVJe2U+aFduPJdcSw9+Fp
-	RwNg==
-X-Received: by 10.170.203.215 with SMTP id u206mr1165956yke.116.1438319726751; 
-	Thu, 30 Jul 2015 22:15:26 -0700 (PDT)
-Received: from localhost.localdomain.localdomain
-	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
-	by smtp.gmail.com with ESMTPSA id
-	u78sm3101260ywu.13.2015.07.30.22.15.24
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 30 Jul 2015 22:15:25 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Jul 2015 22:15:00 -0700
-Message-Id: <1438319700-20558-1-git-send-email-TicoTimo@gmail.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [meta-oe][meta-perl][PATCH] libextutils-cppguess-perl: update to 0.09
+	Fri, 31 Jul 2015 13:35:42 +0800
+Received: from localhost.localdomain (10.167.226.104) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Fri, 31 Jul 2015 13:37:33 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 31 Jul 2015 09:37:22 -0400
+Message-ID: <1438349842-11951-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.104]
+Subject: [meta-oe][PATCH] mailcap: upgrade 2.1.43 -> 2.1.44
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,55 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2015 05:15:27 -0000
+X-List-Received-Date: Fri, 31 Jul 2015 05:37:38 -0000
+Content-Type: text/plain
 
-* Builds with ExtUtils::MakeMaker rather than Module::Build
-* Author change
-
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- ...ppguess-perl_0.07.bb => libextutils-cppguess-perl_0.09.bb} | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
- rename meta-perl/recipes-perl/libextutils/{libextutils-cppguess-perl_0.07.bb => libextutils-cppguess-perl_0.09.bb} (76%)
+ .../mailcap/{mailcap_2.1.43.bb => mailcap_2.1.44.bb}              | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-support/mailcap/{mailcap_2.1.43.bb => mailcap_2.1.44.bb} (83%)
 
-diff --git a/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.07.bb b/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.09.bb
-similarity index 76%
-rename from meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.07.bb
-rename to meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.09.bb
-index 47e0904..d13cb03 100644
---- a/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.07.bb
-+++ b/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.09.bb
-@@ -11,16 +11,16 @@ HOMEPAGE = "http://search.cpan.org/~smueller/ExtUtils-CppGuess/"
- LICENSE = "Artistic-1.0 | GPL-1.0+"
- LIC_FILES_CHKSUM = "file://README;beginline=81;endline=84;md5=84c0390b90ea8c6702ce659b67bed699"
+diff --git a/meta-oe/recipes-support/mailcap/mailcap_2.1.43.bb b/meta-oe/recipes-support/mailcap/mailcap_2.1.44.bb
+similarity index 83%
+rename from meta-oe/recipes-support/mailcap/mailcap_2.1.43.bb
+rename to meta-oe/recipes-support/mailcap/mailcap_2.1.44.bb
+index 95d7d11..d9f5e10 100644
+--- a/meta-oe/recipes-support/mailcap/mailcap_2.1.43.bb
++++ b/meta-oe/recipes-support/mailcap/mailcap_2.1.44.bb
+@@ -12,12 +12,12 @@ by several applications e.g. to determine MIME types for filenames."
  
--SRC_URI = "${CPAN_MIRROR}/authors/id/S/SM/SMUELLER/ExtUtils-CppGuess-${PV}.tar.gz"
--SRC_URI[md5sum] = "350dd7c661189ea770d6c9354ebbc6c2"
--SRC_URI[sha256sum] = "1cd83ee8452351219b987c79ddb25cc25ee8c396318ba36c5211a92b5c87e7a8"
-+SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETJ/ExtUtils-CppGuess-${PV}.tar.gz"
-+SRC_URI[md5sum] = "f8ada38ee4ad86a4f1e20d8525ce0c99"
-+SRC_URI[sha256sum] = "48625195a88c0f2ddc37bbd7a06346aa68ffb6948ba78da3aea47c0db2540f65"
+ SECTION = "System Environment/Base"
  
- S = "${WORKDIR}/ExtUtils-CppGuess-${PV}"
- 
--inherit cpan_build
-+inherit cpan
- 
- do_install () {
--        cpan_build_do_install
-+        cpan_do_install
+-SRC_URI = "https://git.fedorahosted.org/cgit/${PN}.git/snapshot/r2-1-43.tar.gz"
+-SRC_URI[md5sum] = "8fd185ffae710301de3bc297877a404b"
+-SRC_URI[sha256sum] = "a630892b5fe59eb9e3bef30c597de1c2b7f35243dea4b0c995fd482aa20c2d6b"
++SRC_URI = "https://git.fedorahosted.org/cgit/${PN}.git/snapshot/${PN}-r2-1-44.tar.gz"
++SRC_URI[md5sum] = "e7de2a5dfaa126d5e0a081af7d908906"
++SRC_URI[sha256sum] = "644da071f918a33e11d1f8db8334010dd325108209d302f800816f4a177ee2e6"
+ LICENSE = "PD & MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=100fcfb84512ccc03ffc7d89ac391305"
+-S = "${WORKDIR}/r2-1-43"
++S = "${WORKDIR}/${PN}-r2-1-44"
+ do_install() {
+     oe_runmake install DESTDIR=${D} sysconfdir=${sysconfdir} mandir=${mandir}
  }
- 
- RDEPENDS_${PN} = " libcapture-tiny-perl \
-@@ -32,7 +32,6 @@ RDEPENDS_${PN} = " libcapture-tiny-perl \
-                    perl-module-carp \
-                    perl-module-file-temp \
-                    perl-module-lib \
--                   perl-module-build \
- "
- 
- BBCLASSEXTEND = "native"
 -- 
-2.1.0
+1.8.4.2
 
 
