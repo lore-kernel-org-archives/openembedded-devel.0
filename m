@@ -1,26 +1,34 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C0B976502
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 7325373237
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 03:05:07 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6V357t9024217
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 31 Jul 2015 03:12:57 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99104035"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2015 11:16:29 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6V3B4Wo015838
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jul 2015 20:05:07 -0700 (PDT)
-Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Thu, 30 Jul 2015 20:04:47 -0700
-Message-ID: <55BAE5E1.8060907@windriver.com>
-Date: Fri, 31 Jul 2015 11:05:05 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
+	Fri, 31 Jul 2015 11:11:04 +0800
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
+	14.03.0181.006; Fri, 31 Jul 2015 11:12:56 +0800
+From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH 1/5] vsftpd: upgrade 3.0.2->3.0.3
+Thread-Index: AQHQyz26OSXkIcvFmU2Ig/mjoy7Xf5305kTg
+Date: Fri, 31 Jul 2015 03:12:55 +0000
+Message-ID: <1B56A49860EB2D45ADE3731B15C959FDB2F3CE@G08CNEXMBPEKD01.g08.fujitsu.local>
 References: <1438311559-15856-1-git-send-email-leimaohui@cn.fujitsu.com>
-In-Reply-To: <1438311559-15856-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<55BAE5E1.8060907@windriver.com>
+In-Reply-To: <55BAE5E1.8060907@windriver.com>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.26]
+MIME-Version: 1.0
 Subject: Re: [meta-networking][PATCH 1/5] vsftpd: upgrade 3.0.2->3.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -35,798 +43,645 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2015 03:05:07 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 31 Jul 2015 03:13:01 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-use "git format-patch -M" to find renames
-
--Roy
-
-On 2015年07月31日 10:59, Lei Maohui wrote:
-> Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
-> ---
->   .../vsftpd/vsftpd-3.0.2/makefile-destdir.patch     |  44 ---------
->   .../vsftpd/vsftpd-3.0.2/makefile-libs.patch        |  21 ----
->   .../vsftpd/vsftpd-3.0.2/makefile-strip.patch       |  17 ----
->   .../vsftpd-3.0.2/nopam-with-tcp_wrappers.patch     |  17 ----
->   .../vsftpd/vsftpd-3.0.2/nopam.patch                |  16 ---
->   .../vsftpd/vsftpd-3.0.2/vsftpd-2.1.0-filter.patch  |  77 ---------------
->   .../vsftpd-3.0.2/vsftpd-tcp_wrappers-support.patch |  25 -----
->   .../vsftpd/vsftpd-3.0.3/makefile-destdir.patch     |  44 +++++++++
->   .../vsftpd/vsftpd-3.0.3/makefile-libs.patch        |  21 ++++
->   .../vsftpd/vsftpd-3.0.3/makefile-strip.patch       |  17 ++++
->   .../vsftpd-3.0.3/nopam-with-tcp_wrappers.patch     |  17 ++++
->   .../vsftpd/vsftpd-3.0.3/nopam.patch                |  16 +++
->   .../vsftpd/vsftpd-3.0.3/vsftpd-2.1.0-filter.patch  |  77 +++++++++++++++
->   .../vsftpd-3.0.3/vsftpd-tcp_wrappers-support.patch |  25 +++++
->   .../recipes-daemons/vsftpd/vsftpd_3.0.2.bb         | 107 ---------------------
->   .../recipes-daemons/vsftpd/vsftpd_3.0.3.bb         | 107 +++++++++++++++++++++
->   16 files changed, 324 insertions(+), 324 deletions(-)
->   delete mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-destdir.patch
->   delete mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-libs.patch
->   delete mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-strip.patch
->   delete mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/nopam-with-tcp_wrappers.patch
->   delete mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/nopam.patch
->   delete mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/vsftpd-2.1.0-filter.patch
->   delete mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/vsftpd-tcp_wrappers-support.patch
->   create mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/makefile-destdir.patch
->   create mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/makefile-libs.patch
->   create mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/makefile-strip.patch
->   create mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/nopam-with-tcp_wrappers.patch
->   create mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/nopam.patch
->   create mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/vsftpd-2.1.0-filter.patch
->   create mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/vsftpd-tcp_wrappers-support.patch
->   delete mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb
->   create mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
->
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-destdir.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-destdir.patch
-> deleted file mode 100644
-> index 1980d09..0000000
-> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-destdir.patch
-> +++ /dev/null
-> @@ -1,44 +0,0 @@
-> -Use DESTDIR within install to allow installing under a prefix
-> -
-> -Upstream-Status: Pending
-> -
-> -Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> -
-> -diff --git a/Makefile b/Makefile
-> ---- a/Makefile
-> -+++ b/Makefile
-> -@@ -24,21 +24,21 @@
-> - 	$(CC) -o vsftpd $(OBJS) $(LINK) $(LIBS)
-> -
-> - install:
-> --	if [ -x /usr/local/sbin ]; then \
-> --		$(INSTALL) -m 755 vsftpd /usr/local/sbin/vsftpd; \
-> -+	if [ -x ${DESTDIR}/usr/local/sbin ]; then \
-> -+		$(INSTALL) -m 755 vsftpd ${DESTDIR}/usr/local/sbin/vsftpd; \
-> - 	else \
-> --		$(INSTALL) -m 755 vsftpd /usr/sbin/vsftpd; fi
-> --	if [ -x /usr/local/man ]; then \
-> --		$(INSTALL) -m 644 vsftpd.8 /usr/local/man/man8/vsftpd.8; \
-> --		$(INSTALL) -m 644 vsftpd.conf.5 /usr/local/man/man5/vsftpd.conf.5; \
-> --	elif [ -x /usr/share/man ]; then \
-> --		$(INSTALL) -m 644 vsftpd.8 /usr/share/man/man8/vsftpd.8; \
-> --		$(INSTALL) -m 644 vsftpd.conf.5 /usr/share/man/man5/vsftpd.conf.5; \
-> -+		$(INSTALL) -m 755 vsftpd ${DESTDIR}/usr/sbin/vsftpd; fi
-> -+	if [ -x ${DESTDIR}/usr/local/man ]; then \
-> -+		$(INSTALL) -m 644 vsftpd.8 ${DESTDIR}/usr/local/man/man8/vsftpd.8; \
-> -+		$(INSTALL) -m 644 vsftpd.conf.5 ${DESTDIR}/usr/local/man/man5/vsftpd.conf.5; \
-> -+	elif [ -x ${DESTDIR}/usr/share/man ]; then \
-> -+		$(INSTALL) -m 644 vsftpd.8 ${DESTDIR}/usr/share/man/man8/vsftpd.8; \
-> -+		$(INSTALL) -m 644 vsftpd.conf.5 ${DESTDIR}/usr/share/man/man5/vsftpd.conf.5; \
-> - 	else \
-> --		$(INSTALL) -m 644 vsftpd.8 /usr/man/man8/vsftpd.8; \
-> --		$(INSTALL) -m 644 vsftpd.conf.5 /usr/man/man5/vsftpd.conf.5; fi
-> --	if [ -x /etc/xinetd.d ]; then \
-> --		$(INSTALL) -m 644 xinetd.d/vsftpd /etc/xinetd.d/vsftpd; fi
-> -+		$(INSTALL) -m 644 vsftpd.8 ${DESTDIR}/usr/man/man8/vsftpd.8; \
-> -+		$(INSTALL) -m 644 vsftpd.conf.5 ${DESTDIR}/usr/man/man5/vsftpd.conf.5; fi
-> -+	if [ -x ${DESTDIR}/etc/xinetd.d ]; then \
-> -+		$(INSTALL) -m 644 xinetd.d/vsftpd ${DESTDIR}/etc/xinetd.d/vsftpd; fi
-> -
-> - clean:
-> - 	rm -f *.o *.swp vsftpd
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-libs.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-libs.patch
-> deleted file mode 100644
-> index 9a10f72..0000000
-> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-libs.patch
-> +++ /dev/null
-> @@ -1,21 +0,0 @@
-> -Hardcode LIBS instead of using a script to determine available libs
-> -
-> -We want to avoid this dynamic detection so we have a deterministic
-> -build.
-> -
-> -Upstream-Status: Inappropriate [config]
-> -
-> -Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> -
-> -diff --git a/Makefile b/Makefile
-> ---- a/Makefile
-> -+++ b/Makefile
-> -@@ -5,7 +5,7 @@
-> - #CFLAGS = -g
-> - CFLAGS	=	-O2 -Wall -W -Wshadow #-pedantic -Werror -Wconversion
-> -
-> --LIBS	=	`./vsf_findlibs.sh`
-> -+LIBS	=	-lssl -lcrypto -lnsl -lresolv
-> - LINK	=	-Wl,-s
-> -
-> - OBJS	=	main.o utility.o prelogin.o ftpcmdio.o postlogin.o privsock.o \
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-strip.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-strip.patch
-> deleted file mode 100644
-> index fd31600..0000000
-> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-strip.patch
-> +++ /dev/null
-> @@ -1,17 +0,0 @@
-> -Disable stripping at link time
-> -
-> -Upstream-Status: Inappropriate [config]
-> -
-> -Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> -
-> -diff --git a/Makefile b/Makefile
-> ---- a/Makefile
-> -+++ b/Makefile
-> -@@ -9,7 +9,6 @@ CFLAGS	=	-O2 -fPIE -fstack-protector --param=ssp-buffer-size=4 \
-> - 	#-pedantic -Wconversion
-> -
-> - LIBS	=	-lssl -lcrypto -lnsl -lresolv
-> --LINK	=	-Wl,-s
-> - LDFLAGS	=	-fPIE -pie -Wl,-z,relro -Wl,-z,now
-> -
-> - OBJS	=	main.o utility.o prelogin.o ftpcmdio.o postlogin.o privsock.o \
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/nopam-with-tcp_wrappers.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/nopam-with-tcp_wrappers.patch
-> deleted file mode 100644
-> index fdcf3a0..0000000
-> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/nopam-with-tcp_wrappers.patch
-> +++ /dev/null
-> @@ -1,17 +0,0 @@
-> -Disable PAM
-> -
-> -Upstream-Status: Inappropriate [config]
-> -
-> -Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-> -diff -ur vsftpd-2.0.1_org/builddefs.h vsftpd-2.0.1_patch/builddefs.h
-> ---- vsftpd-2.0.1_org/builddefs.h	2004-07-02 16:36:59.000000000 +0200
-> -+++ vsftpd-2.0.1_patch/builddefs.h	2004-07-21 09:34:49.044900488 +0200
-> -@@ -2,7 +2,7 @@
-> - #define VSF_BUILDDEFS_H
-> -
-> - #define VSF_BUILD_TCPWRAPPERS
-> --#define VSF_BUILD_PAM
-> -+#undef VSF_BUILD_PAM
-> - #undef VSF_BUILD_SSL
-> -
-> - #endif /* VSF_BUILDDEFS_H */
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/nopam.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/nopam.patch
-> deleted file mode 100644
-> index cf0d68e..0000000
-> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/nopam.patch
-> +++ /dev/null
-> @@ -1,16 +0,0 @@
-> -Disable PAM
-> -
-> -Upstream-Status: Inappropriate [config]
-> -
-> -diff -ur vsftpd-2.0.1_org/builddefs.h vsftpd-2.0.1_patch/builddefs.h
-> ---- vsftpd-2.0.1_org/builddefs.h	2004-07-02 16:36:59.000000000 +0200
-> -+++ vsftpd-2.0.1_patch/builddefs.h	2004-07-21 09:34:49.044900488 +0200
-> -@@ -2,7 +2,7 @@
-> - #define VSF_BUILDDEFS_H
-> -
-> - #undef VSF_BUILD_TCPWRAPPERS
-> --#define VSF_BUILD_PAM
-> -+#undef VSF_BUILD_PAM
-> - #undef VSF_BUILD_SSL
-> -
-> - #endif /* VSF_BUILDDEFS_H */
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/vsftpd-2.1.0-filter.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/vsftpd-2.1.0-filter.patch
-> deleted file mode 100644
-> index 32f7e82..0000000
-> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/vsftpd-2.1.0-filter.patch
-> +++ /dev/null
-> @@ -1,77 +0,0 @@
-> -Fix the CVE-2015-1419
-> -
-> -Upstream-Status: Pending
-> -
-> -Try to fix deny_file parsing to do more what is expected. Taken
-> -from fedora. CVE-2015-1419
-> -
-> -ftp://195.220.108.108/linux/fedora/linux/development/rawhide/source/SRPMS/v/vsftpd-3.0.2-13.fc22.src.rpm
-> -
-> -Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> -
-> -diff -up vsftpd-2.1.0/ls.c.filter vsftpd-2.1.0/ls.c
-> ---- vsftpd-2.1.0/ls.c.filter	2008-02-02 02:30:41.000000000 +0100
-> -+++ vsftpd-2.1.0/ls.c	2009-01-08 19:31:15.000000000 +0100
-> -@@ -239,9 +239,31 @@ vsf_filename_passes_filter(const struct
-> -   int ret = 0;
-> -   char last_token = 0;
-> -   int must_match_at_current_pos = 1;
-> -+
-> -+
-> -   str_copy(&filter_remain_str, p_filter_str);
-> --  str_copy(&name_remain_str, p_filename_str);
-> --
-> -+
-> -+  if (!str_isempty (&filter_remain_str) && !str_isempty(p_filename_str)) {
-> -+    if (str_get_char_at(p_filter_str, 0) == '/') {
-> -+      if (str_get_char_at(p_filename_str, 0) != '/') {
-> -+        str_getcwd (&name_remain_str);
-> -+
-> -+        if (str_getlen(&name_remain_str) > 1) /* cwd != root dir */
-> -+          str_append_char (&name_remain_str, '/');
-> -+
-> -+        str_append_str (&name_remain_str, p_filename_str);
-> -+      }
-> -+      else
-> -+       str_copy (&name_remain_str, p_filename_str);
-> -+    } else {
-> -+      if (str_get_char_at(p_filter_str, 0) != '{')
-> -+        str_basename (&name_remain_str, p_filename_str);
-> -+      else
-> -+        str_copy (&name_remain_str, p_filename_str);
-> -+    }
-> -+  } else
-> -+    str_copy(&name_remain_str, p_filename_str);
-> -+
-> -   while (!str_isempty(&filter_remain_str) && *iters < VSFTP_MATCHITERS_MAX)
-> -   {
-> -     static struct mystr s_match_needed_str;
-> -diff -up vsftpd-2.1.0/str.c.filter vsftpd-2.1.0/str.c
-> ---- vsftpd-2.1.0/str.c.filter	2008-12-17 06:54:16.000000000 +0100
-> -+++ vsftpd-2.1.0/str.c	2009-01-08 19:31:15.000000000 +0100
-> -@@ -680,3 +680,14 @@ str_replace_unprintable(struct mystr* p_
-> -   }
-> - }
-> -
-> -+void
-> -+str_basename (struct mystr* d_str, const struct mystr* path)
-> -+{
-> -+  static struct mystr tmp;
-> -+
-> -+  str_copy (&tmp, path);
-> -+  str_split_char_reverse(&tmp, d_str, '/');
-> -+
-> -+  if (str_isempty(d_str))
-> -+   str_copy (d_str, path);
-> -+}
-> -diff -up vsftpd-2.1.0/str.h.filter vsftpd-2.1.0/str.h
-> ---- vsftpd-2.1.0/str.h.filter	2008-12-17 06:53:23.000000000 +0100
-> -+++ vsftpd-2.1.0/str.h	2009-01-08 19:32:14.000000000 +0100
-> -@@ -100,6 +100,7 @@ void str_replace_unprintable(struct myst
-> - int str_atoi(const struct mystr* p_str);
-> - filesize_t str_a_to_filesize_t(const struct mystr* p_str);
-> - unsigned int str_octal_to_uint(const struct mystr* p_str);
-> -+void str_basename (struct mystr* d_str, const struct mystr* path);
-> -
-> - /* PURPOSE: Extract a line of text (delimited by \n or EOF) from a string
-> -  * buffer, starting at character position 'p_pos'. The extracted line will
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/vsftpd-tcp_wrappers-support.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/vsftpd-tcp_wrappers-support.patch
-> deleted file mode 100644
-> index 69745b3..0000000
-> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/vsftpd-tcp_wrappers-support.patch
-> +++ /dev/null
-> @@ -1,25 +0,0 @@
-> -Enable tcp_wrapper.
-> -
-> -Upstream-Status: Inappropriate [configuration]
-> -
-> -Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-> ----
-> - builddefs.h |    2 +-
-> - 1 files changed, 1 insertions(+), 1 deletions(-)
-> -
-> -diff --git a/builddefs.h b/builddefs.h
-> -index e908352..0106d1a 100644
-> ---- a/builddefs.h
-> -+++ b/builddefs.h
-> -@@ -1,7 +1,7 @@
-> - #ifndef VSF_BUILDDEFS_H
-> - #define VSF_BUILDDEFS_H
-> -
-> --#undef VSF_BUILD_TCPWRAPPERS
-> -+#define VSF_BUILD_TCPWRAPPERS
-> - #define VSF_BUILD_PAM
-> - #undef VSF_BUILD_SSL
-> -
-> ---
-> -1.7.1
-> -
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/makefile-destdir.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/makefile-destdir.patch
-> new file mode 100644
-> index 0000000..1980d09
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/makefile-destdir.patch
-> @@ -0,0 +1,44 @@
-> +Use DESTDIR within install to allow installing under a prefix
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> +
-> +diff --git a/Makefile b/Makefile
-> +--- a/Makefile
-> ++++ b/Makefile
-> +@@ -24,21 +24,21 @@
-> + 	$(CC) -o vsftpd $(OBJS) $(LINK) $(LIBS)
-> +
-> + install:
-> +-	if [ -x /usr/local/sbin ]; then \
-> +-		$(INSTALL) -m 755 vsftpd /usr/local/sbin/vsftpd; \
-> ++	if [ -x ${DESTDIR}/usr/local/sbin ]; then \
-> ++		$(INSTALL) -m 755 vsftpd ${DESTDIR}/usr/local/sbin/vsftpd; \
-> + 	else \
-> +-		$(INSTALL) -m 755 vsftpd /usr/sbin/vsftpd; fi
-> +-	if [ -x /usr/local/man ]; then \
-> +-		$(INSTALL) -m 644 vsftpd.8 /usr/local/man/man8/vsftpd.8; \
-> +-		$(INSTALL) -m 644 vsftpd.conf.5 /usr/local/man/man5/vsftpd.conf.5; \
-> +-	elif [ -x /usr/share/man ]; then \
-> +-		$(INSTALL) -m 644 vsftpd.8 /usr/share/man/man8/vsftpd.8; \
-> +-		$(INSTALL) -m 644 vsftpd.conf.5 /usr/share/man/man5/vsftpd.conf.5; \
-> ++		$(INSTALL) -m 755 vsftpd ${DESTDIR}/usr/sbin/vsftpd; fi
-> ++	if [ -x ${DESTDIR}/usr/local/man ]; then \
-> ++		$(INSTALL) -m 644 vsftpd.8 ${DESTDIR}/usr/local/man/man8/vsftpd.8; \
-> ++		$(INSTALL) -m 644 vsftpd.conf.5 ${DESTDIR}/usr/local/man/man5/vsftpd.conf.5; \
-> ++	elif [ -x ${DESTDIR}/usr/share/man ]; then \
-> ++		$(INSTALL) -m 644 vsftpd.8 ${DESTDIR}/usr/share/man/man8/vsftpd.8; \
-> ++		$(INSTALL) -m 644 vsftpd.conf.5 ${DESTDIR}/usr/share/man/man5/vsftpd.conf.5; \
-> + 	else \
-> +-		$(INSTALL) -m 644 vsftpd.8 /usr/man/man8/vsftpd.8; \
-> +-		$(INSTALL) -m 644 vsftpd.conf.5 /usr/man/man5/vsftpd.conf.5; fi
-> +-	if [ -x /etc/xinetd.d ]; then \
-> +-		$(INSTALL) -m 644 xinetd.d/vsftpd /etc/xinetd.d/vsftpd; fi
-> ++		$(INSTALL) -m 644 vsftpd.8 ${DESTDIR}/usr/man/man8/vsftpd.8; \
-> ++		$(INSTALL) -m 644 vsftpd.conf.5 ${DESTDIR}/usr/man/man5/vsftpd.conf.5; fi
-> ++	if [ -x ${DESTDIR}/etc/xinetd.d ]; then \
-> ++		$(INSTALL) -m 644 xinetd.d/vsftpd ${DESTDIR}/etc/xinetd.d/vsftpd; fi
-> +
-> + clean:
-> + 	rm -f *.o *.swp vsftpd
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/makefile-libs.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/makefile-libs.patch
-> new file mode 100644
-> index 0000000..9a10f72
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/makefile-libs.patch
-> @@ -0,0 +1,21 @@
-> +Hardcode LIBS instead of using a script to determine available libs
-> +
-> +We want to avoid this dynamic detection so we have a deterministic
-> +build.
-> +
-> +Upstream-Status: Inappropriate [config]
-> +
-> +Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> +
-> +diff --git a/Makefile b/Makefile
-> +--- a/Makefile
-> ++++ b/Makefile
-> +@@ -5,7 +5,7 @@
-> + #CFLAGS = -g
-> + CFLAGS	=	-O2 -Wall -W -Wshadow #-pedantic -Werror -Wconversion
-> +
-> +-LIBS	=	`./vsf_findlibs.sh`
-> ++LIBS	=	-lssl -lcrypto -lnsl -lresolv
-> + LINK	=	-Wl,-s
-> +
-> + OBJS	=	main.o utility.o prelogin.o ftpcmdio.o postlogin.o privsock.o \
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/makefile-strip.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/makefile-strip.patch
-> new file mode 100644
-> index 0000000..fd31600
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/makefile-strip.patch
-> @@ -0,0 +1,17 @@
-> +Disable stripping at link time
-> +
-> +Upstream-Status: Inappropriate [config]
-> +
-> +Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> +
-> +diff --git a/Makefile b/Makefile
-> +--- a/Makefile
-> ++++ b/Makefile
-> +@@ -9,7 +9,6 @@ CFLAGS	=	-O2 -fPIE -fstack-protector --param=ssp-buffer-size=4 \
-> + 	#-pedantic -Wconversion
-> +
-> + LIBS	=	-lssl -lcrypto -lnsl -lresolv
-> +-LINK	=	-Wl,-s
-> + LDFLAGS	=	-fPIE -pie -Wl,-z,relro -Wl,-z,now
-> +
-> + OBJS	=	main.o utility.o prelogin.o ftpcmdio.o postlogin.o privsock.o \
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/nopam-with-tcp_wrappers.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/nopam-with-tcp_wrappers.patch
-> new file mode 100644
-> index 0000000..fdcf3a0
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/nopam-with-tcp_wrappers.patch
-> @@ -0,0 +1,17 @@
-> +Disable PAM
-> +
-> +Upstream-Status: Inappropriate [config]
-> +
-> +Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-> +diff -ur vsftpd-2.0.1_org/builddefs.h vsftpd-2.0.1_patch/builddefs.h
-> +--- vsftpd-2.0.1_org/builddefs.h	2004-07-02 16:36:59.000000000 +0200
-> ++++ vsftpd-2.0.1_patch/builddefs.h	2004-07-21 09:34:49.044900488 +0200
-> +@@ -2,7 +2,7 @@
-> + #define VSF_BUILDDEFS_H
-> +
-> + #define VSF_BUILD_TCPWRAPPERS
-> +-#define VSF_BUILD_PAM
-> ++#undef VSF_BUILD_PAM
-> + #undef VSF_BUILD_SSL
-> +
-> + #endif /* VSF_BUILDDEFS_H */
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/nopam.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/nopam.patch
-> new file mode 100644
-> index 0000000..cf0d68e
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/nopam.patch
-> @@ -0,0 +1,16 @@
-> +Disable PAM
-> +
-> +Upstream-Status: Inappropriate [config]
-> +
-> +diff -ur vsftpd-2.0.1_org/builddefs.h vsftpd-2.0.1_patch/builddefs.h
-> +--- vsftpd-2.0.1_org/builddefs.h	2004-07-02 16:36:59.000000000 +0200
-> ++++ vsftpd-2.0.1_patch/builddefs.h	2004-07-21 09:34:49.044900488 +0200
-> +@@ -2,7 +2,7 @@
-> + #define VSF_BUILDDEFS_H
-> +
-> + #undef VSF_BUILD_TCPWRAPPERS
-> +-#define VSF_BUILD_PAM
-> ++#undef VSF_BUILD_PAM
-> + #undef VSF_BUILD_SSL
-> +
-> + #endif /* VSF_BUILDDEFS_H */
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/vsftpd-2.1.0-filter.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/vsftpd-2.1.0-filter.patch
-> new file mode 100644
-> index 0000000..32f7e82
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/vsftpd-2.1.0-filter.patch
-> @@ -0,0 +1,77 @@
-> +Fix the CVE-2015-1419
-> +
-> +Upstream-Status: Pending
-> +
-> +Try to fix deny_file parsing to do more what is expected. Taken
-> +from fedora. CVE-2015-1419
-> +
-> +ftp://195.220.108.108/linux/fedora/linux/development/rawhide/source/SRPMS/v/vsftpd-3.0.2-13.fc22.src.rpm
-> +
-> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> +
-> +diff -up vsftpd-2.1.0/ls.c.filter vsftpd-2.1.0/ls.c
-> +--- vsftpd-2.1.0/ls.c.filter	2008-02-02 02:30:41.000000000 +0100
-> ++++ vsftpd-2.1.0/ls.c	2009-01-08 19:31:15.000000000 +0100
-> +@@ -239,9 +239,31 @@ vsf_filename_passes_filter(const struct
-> +   int ret = 0;
-> +   char last_token = 0;
-> +   int must_match_at_current_pos = 1;
-> ++
-> ++
-> +   str_copy(&filter_remain_str, p_filter_str);
-> +-  str_copy(&name_remain_str, p_filename_str);
-> +-
-> ++
-> ++  if (!str_isempty (&filter_remain_str) && !str_isempty(p_filename_str)) {
-> ++    if (str_get_char_at(p_filter_str, 0) == '/') {
-> ++      if (str_get_char_at(p_filename_str, 0) != '/') {
-> ++        str_getcwd (&name_remain_str);
-> ++
-> ++        if (str_getlen(&name_remain_str) > 1) /* cwd != root dir */
-> ++          str_append_char (&name_remain_str, '/');
-> ++
-> ++        str_append_str (&name_remain_str, p_filename_str);
-> ++      }
-> ++      else
-> ++       str_copy (&name_remain_str, p_filename_str);
-> ++    } else {
-> ++      if (str_get_char_at(p_filter_str, 0) != '{')
-> ++        str_basename (&name_remain_str, p_filename_str);
-> ++      else
-> ++        str_copy (&name_remain_str, p_filename_str);
-> ++    }
-> ++  } else
-> ++    str_copy(&name_remain_str, p_filename_str);
-> ++
-> +   while (!str_isempty(&filter_remain_str) && *iters < VSFTP_MATCHITERS_MAX)
-> +   {
-> +     static struct mystr s_match_needed_str;
-> +diff -up vsftpd-2.1.0/str.c.filter vsftpd-2.1.0/str.c
-> +--- vsftpd-2.1.0/str.c.filter	2008-12-17 06:54:16.000000000 +0100
-> ++++ vsftpd-2.1.0/str.c	2009-01-08 19:31:15.000000000 +0100
-> +@@ -680,3 +680,14 @@ str_replace_unprintable(struct mystr* p_
-> +   }
-> + }
-> +
-> ++void
-> ++str_basename (struct mystr* d_str, const struct mystr* path)
-> ++{
-> ++  static struct mystr tmp;
-> ++
-> ++  str_copy (&tmp, path);
-> ++  str_split_char_reverse(&tmp, d_str, '/');
-> ++
-> ++  if (str_isempty(d_str))
-> ++   str_copy (d_str, path);
-> ++}
-> +diff -up vsftpd-2.1.0/str.h.filter vsftpd-2.1.0/str.h
-> +--- vsftpd-2.1.0/str.h.filter	2008-12-17 06:53:23.000000000 +0100
-> ++++ vsftpd-2.1.0/str.h	2009-01-08 19:32:14.000000000 +0100
-> +@@ -100,6 +100,7 @@ void str_replace_unprintable(struct myst
-> + int str_atoi(const struct mystr* p_str);
-> + filesize_t str_a_to_filesize_t(const struct mystr* p_str);
-> + unsigned int str_octal_to_uint(const struct mystr* p_str);
-> ++void str_basename (struct mystr* d_str, const struct mystr* path);
-> +
-> + /* PURPOSE: Extract a line of text (delimited by \n or EOF) from a string
-> +  * buffer, starting at character position 'p_pos'. The extracted line will
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/vsftpd-tcp_wrappers-support.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/vsftpd-tcp_wrappers-support.patch
-> new file mode 100644
-> index 0000000..69745b3
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/vsftpd-tcp_wrappers-support.patch
-> @@ -0,0 +1,25 @@
-> +Enable tcp_wrapper.
-> +
-> +Upstream-Status: Inappropriate [configuration]
-> +
-> +Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-> +---
-> + builddefs.h |    2 +-
-> + 1 files changed, 1 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/builddefs.h b/builddefs.h
-> +index e908352..0106d1a 100644
-> +--- a/builddefs.h
-> ++++ b/builddefs.h
-> +@@ -1,7 +1,7 @@
-> + #ifndef VSF_BUILDDEFS_H
-> + #define VSF_BUILDDEFS_H
-> +
-> +-#undef VSF_BUILD_TCPWRAPPERS
-> ++#define VSF_BUILD_TCPWRAPPERS
-> + #define VSF_BUILD_PAM
-> + #undef VSF_BUILD_SSL
-> +
-> +--
-> +1.7.1
-> +
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb
-> deleted file mode 100644
-> index 9d1c1cc..0000000
-> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb
-> +++ /dev/null
-> @@ -1,107 +0,0 @@
-> -SUMMARY = "Very Secure FTP server"
-> -HOMEPAGE = "https://security.appspot.com/vsftpd.html"
-> -SECTION = "net"
-> -LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271"
-> -
-> -DEPENDS = "libcap openssl"
-> -
-> -SRC_URI = "https://security.appspot.com/downloads/vsftpd-${PV}.tar.gz \
-> -           file://makefile-destdir.patch \
-> -           file://makefile-libs.patch \
-> -           file://makefile-strip.patch \
-> -           file://init \
-> -           file://vsftpd.conf \
-> -           file://vsftpd.user_list \
-> -           file://vsftpd.ftpusers \
-> -           file://change-secure_chroot_dir.patch \
-> -           file://volatiles.99_vsftpd \
-> -           file://vsftpd.service \
-> -           file://vsftpd-2.1.0-filter.patch \
-> -"
-> -
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271 \
-> -                        file://COPYRIGHT;md5=04251b2eb0f298dae376d92454f6f72e \
-> -                        file://LICENSE;md5=654df2042d44b8cac8a5654fc5be63eb"
-> -SRC_URI[md5sum] = "8b00c749719089401315bd3c44dddbb2"
-> -SRC_URI[sha256sum] = "be46f0e2c5528fe021fafc8dab1ecfea0c1f183063a06977f8537fcd0b195e56"
-> -
-> -
-> -PACKAGECONFIG ??= "tcp-wrappers"
-> -PACKAGECONFIG[tcp-wrappers] = ",,tcp-wrappers"
-> -SRC_URI +="${@base_contains('PACKAGECONFIG', 'tcp-wrappers', 'file://vsftpd-tcp_wrappers-support.patch', '', d)}"
-> -
-> -DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
-> -RDEPENDS_${PN} += "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-listfile', '', d)}"
-> -PAMLIB = "${@base_contains('DISTRO_FEATURES', 'pam', '-L${STAGING_BASELIBDIR} -lpam', '', d)}"
-> -NOPAM_SRC ="${@base_contains('PACKAGECONFIG', 'tcp-wrappers', 'file://nopam-with-tcp_wrappers.patch', 'file://nopam.patch', d)}"
-> -SRC_URI += "${@base_contains('DISTRO_FEATURES', 'pam', '', '${NOPAM_SRC}', d)}"
-> -
-> -inherit update-rc.d useradd systemd
-> -
-> -CONFFILES_${PN} = "${sysconfdir}/vsftpd.conf"
-> -LDFLAGS_append =" -lcrypt -lcap"
-> -
-> -do_configure() {
-> -    # Fix hardcoded /usr, /etc, /var mess.
-> -    cat tunables.c|sed s:\"/usr:\"${prefix}:g|sed s:\"/var:\"${localstatedir}:g \
-> -    |sed s:\"/etc:\"${sysconfdir}:g > tunables.c.new
-> -    mv tunables.c.new tunables.c
-> -}
-> -
-> -do_compile() {
-> -   oe_runmake "LIBS=-L${STAGING_LIBDIR} -lcrypt -lcap ${PAMLIB} -lwrap"
-> -}
-> -
-> -do_install() {
-> -    install -d ${D}${sbindir}
-> -    install -d ${D}${mandir}/man8
-> -    install -d ${D}${mandir}/man5
-> -    oe_runmake 'DESTDIR=${D}' install
-> -    install -d ${D}${sysconfdir}
-> -    install -m 600 ${WORKDIR}/vsftpd.conf ${D}${sysconfdir}/vsftpd.conf
-> -    install -d ${D}${sysconfdir}/init.d/
-> -    install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/vsftpd
-> -    install -d ${D}/${sysconfdir}/default/volatiles
-> -    install -m 644 ${WORKDIR}/volatiles.99_vsftpd ${D}/${sysconfdir}/default/volatiles/99_vsftpd
-> -
-> -    install -m 600 ${WORKDIR}/vsftpd.ftpusers ${D}${sysconfdir}/
-> -    install -m 600 ${WORKDIR}/vsftpd.user_list ${D}${sysconfdir}/
-> -    if ! test -z "${PAMLIB}" ; then
-> -        install -d ${D}${sysconfdir}/pam.d/
-> -        cp ${S}/RedHat/vsftpd.pam ${D}${sysconfdir}/pam.d/vsftpd
-> -        sed -i "s:/lib/security:${base_libdir}/security:" ${D}${sysconfdir}/pam.d/vsftpd
-> -        sed -i "s:ftpusers:vsftpd.ftpusers:" ${D}${sysconfdir}/pam.d/vsftpd
-> -    fi
-> -    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-> -        install -d ${D}${sysconfdir}/tmpfiles.d
-> -        echo "d /var/run/vsftpd/empty 0755 root root -" \
-> -        > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-> -    fi
-> -
-> -    # Install systemd unit files
-> -    install -d ${D}${systemd_unitdir}/system
-> -    install -m 0644 ${WORKDIR}/vsftpd.service ${D}${systemd_unitdir}/system
-> -    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/vsftpd.service
-> -}
-> -
-> -INITSCRIPT_PACKAGES = "${PN}"
-> -INITSCRIPT_NAME_${PN} = "vsftpd"
-> -INITSCRIPT_PARAMS_${PN} = "defaults 80"
-> -
-> -USERADD_PACKAGES = "${PN}"
-> -USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ftp --no-create-home -g ftp \
-> -                       --shell /bin/false ftp "
-> -GROUPADD_PARAM_${PN} = "-r ftp"
-> -
-> -SYSTEMD_SERVICE_${PN} = "vsftpd.service"
-> -
-> -pkg_postinst_${PN}() {
-> -    if [ -z "$D" ]; then
-> -	if type systemd-tmpfiles >/dev/null; then
-> -	    systemd-tmpfiles --create
-> -	elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
-> -	    ${sysconfdir}/init.d/populate-volatile.sh update
-> -	fi
-> -    fi
-> -}
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
-> new file mode 100644
-> index 0000000..580dabe
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
-> @@ -0,0 +1,107 @@
-> +SUMMARY = "Very Secure FTP server"
-> +HOMEPAGE = "https://security.appspot.com/vsftpd.html"
-> +SECTION = "net"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271"
-> +
-> +DEPENDS = "libcap openssl"
-> +
-> +SRC_URI = "https://security.appspot.com/downloads/vsftpd-${PV}.tar.gz \
-> +           file://makefile-destdir.patch \
-> +           file://makefile-libs.patch \
-> +           file://makefile-strip.patch \
-> +           file://init \
-> +           file://vsftpd.conf \
-> +           file://vsftpd.user_list \
-> +           file://vsftpd.ftpusers \
-> +           file://change-secure_chroot_dir.patch \
-> +           file://volatiles.99_vsftpd \
-> +           file://vsftpd.service \
-> +           file://vsftpd-2.1.0-filter.patch \
-> +"
-> +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271 \
-> +                        file://COPYRIGHT;md5=04251b2eb0f298dae376d92454f6f72e \
-> +                        file://LICENSE;md5=654df2042d44b8cac8a5654fc5be63eb"
-> +SRC_URI[md5sum] = "da119d084bd3f98664636ea05b5bb398"
-> +SRC_URI[sha256sum] = "9d4d2bf6e6e2884852ba4e69e157a2cecd68c5a7635d66a3a8cf8d898c955ef7"
-> +
-> +
-> +PACKAGECONFIG ??= "tcp-wrappers"
-> +PACKAGECONFIG[tcp-wrappers] = ",,tcp-wrappers"
-> +SRC_URI +="${@base_contains('PACKAGECONFIG', 'tcp-wrappers', 'file://vsftpd-tcp_wrappers-support.patch', '', d)}"
-> +
-> +DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
-> +RDEPENDS_${PN} += "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-listfile', '', d)}"
-> +PAMLIB = "${@base_contains('DISTRO_FEATURES', 'pam', '-L${STAGING_BASELIBDIR} -lpam', '', d)}"
-> +NOPAM_SRC ="${@base_contains('PACKAGECONFIG', 'tcp-wrappers', 'file://nopam-with-tcp_wrappers.patch', 'file://nopam.patch', d)}"
-> +SRC_URI += "${@base_contains('DISTRO_FEATURES', 'pam', '', '${NOPAM_SRC}', d)}"
-> +
-> +inherit update-rc.d useradd systemd
-> +
-> +CONFFILES_${PN} = "${sysconfdir}/vsftpd.conf"
-> +LDFLAGS_append =" -lcrypt -lcap"
-> +
-> +do_configure() {
-> +    # Fix hardcoded /usr, /etc, /var mess.
-> +    cat tunables.c|sed s:\"/usr:\"${prefix}:g|sed s:\"/var:\"${localstatedir}:g \
-> +    |sed s:\"/etc:\"${sysconfdir}:g > tunables.c.new
-> +    mv tunables.c.new tunables.c
-> +}
-> +
-> +do_compile() {
-> +   oe_runmake "LIBS=-L${STAGING_LIBDIR} -lcrypt -lcap ${PAMLIB} -lwrap"
-> +}
-> +
-> +do_install() {
-> +    install -d ${D}${sbindir}
-> +    install -d ${D}${mandir}/man8
-> +    install -d ${D}${mandir}/man5
-> +    oe_runmake 'DESTDIR=${D}' install
-> +    install -d ${D}${sysconfdir}
-> +    install -m 600 ${WORKDIR}/vsftpd.conf ${D}${sysconfdir}/vsftpd.conf
-> +    install -d ${D}${sysconfdir}/init.d/
-> +    install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/vsftpd
-> +    install -d ${D}/${sysconfdir}/default/volatiles
-> +    install -m 644 ${WORKDIR}/volatiles.99_vsftpd ${D}/${sysconfdir}/default/volatiles/99_vsftpd
-> +
-> +    install -m 600 ${WORKDIR}/vsftpd.ftpusers ${D}${sysconfdir}/
-> +    install -m 600 ${WORKDIR}/vsftpd.user_list ${D}${sysconfdir}/
-> +    if ! test -z "${PAMLIB}" ; then
-> +        install -d ${D}${sysconfdir}/pam.d/
-> +        cp ${S}/RedHat/vsftpd.pam ${D}${sysconfdir}/pam.d/vsftpd
-> +        sed -i "s:/lib/security:${base_libdir}/security:" ${D}${sysconfdir}/pam.d/vsftpd
-> +        sed -i "s:ftpusers:vsftpd.ftpusers:" ${D}${sysconfdir}/pam.d/vsftpd
-> +    fi
-> +    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-> +        install -d ${D}${sysconfdir}/tmpfiles.d
-> +        echo "d /var/run/vsftpd/empty 0755 root root -" \
-> +        > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-> +    fi
-> +
-> +    # Install systemd unit files
-> +    install -d ${D}${systemd_unitdir}/system
-> +    install -m 0644 ${WORKDIR}/vsftpd.service ${D}${systemd_unitdir}/system
-> +    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/vsftpd.service
-> +}
-> +
-> +INITSCRIPT_PACKAGES = "${PN}"
-> +INITSCRIPT_NAME_${PN} = "vsftpd"
-> +INITSCRIPT_PARAMS_${PN} = "defaults 80"
-> +
-> +USERADD_PACKAGES = "${PN}"
-> +USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ftp --no-create-home -g ftp \
-> +                       --shell /bin/false ftp "
-> +GROUPADD_PARAM_${PN} = "-r ftp"
-> +
-> +SYSTEMD_SERVICE_${PN} = "vsftpd.service"
-> +
-> +pkg_postinst_${PN}() {
-> +    if [ -z "$D" ]; then
-> +	if type systemd-tmpfiles >/dev/null; then
-> +	    systemd-tmpfiles --create
-> +	elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
-> +	    ${sysconfdir}/init.d/populate-volatile.sh update
-> +	fi
-> +    fi
-> +}
->
-
--- 
-Best Reagrds,
-Roy | RongQing Li
+SGkgUm95DQoNCg0KPiB1c2UgImdpdCBmb3JtYXQtcGF0Y2ggLU0iIHRvIGZpbmQgcmVuYW1lcw0K
+DQpPSyxUaGFua3MuDQoNCkknbGwgcmVzdWJtaXQgdGhpcyBwYXRjaCBsYXRlci4NCg0KQ2hlZXJz
+IA0KTGVpDQoNCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1i
+ZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3Bl
+bmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxm
+IE9mDQo+IFJvbmdxaW5nIExpDQo+IFNlbnQ6IEZyaWRheSwgSnVseSAzMSwgMjAxNSAxMTowNSBB
+TQ0KPiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3Vi
+amVjdDogUmU6IFtvZV0gW21ldGEtbmV0d29ya2luZ11bUEFUQ0ggMS81XSB2c2Z0cGQ6IHVwZ3Jh
+ZGUgMy4wLjItPjMuMC4zDQo+IA0KPiB1c2UgImdpdCBmb3JtYXQtcGF0Y2ggLU0iIHRvIGZpbmQg
+cmVuYW1lcw0KPiANCj4gLVJveQ0KPiANCj4gT24gMjAxNeW5tDA35pyIMzHml6UgMTA6NTksIExl
+aSBNYW9odWkgd3JvdGU6DQo+ID4gU2lnbmVkLW9mZi1ieTogTGVpIE1hb2h1aSA8bGVpbWFvaHVp
+QGNuLmZ1aml0c3UuY29tPg0KPiA+IC0tLQ0KPiA+ICAgLi4uL3ZzZnRwZC92c2Z0cGQtMy4wLjIv
+bWFrZWZpbGUtZGVzdGRpci5wYXRjaCAgICAgfCAgNDQgLS0tLS0tLS0tDQo+ID4gICAuLi4vdnNm
+dHBkL3ZzZnRwZC0zLjAuMi9tYWtlZmlsZS1saWJzLnBhdGNoICAgICAgICB8ICAyMSAtLS0tDQo+
+ID4gICAuLi4vdnNmdHBkL3ZzZnRwZC0zLjAuMi9tYWtlZmlsZS1zdHJpcC5wYXRjaCAgICAgICB8
+ICAxNyAtLS0tDQo+ID4gICAuLi4vdnNmdHBkLTMuMC4yL25vcGFtLXdpdGgtdGNwX3dyYXBwZXJz
+LnBhdGNoICAgICB8ICAxNyAtLS0tDQo+ID4gICAuLi4vdnNmdHBkL3ZzZnRwZC0zLjAuMi9ub3Bh
+bS5wYXRjaCAgICAgICAgICAgICAgICB8ICAxNiAtLS0NCj4gPiAgIC4uLi92c2Z0cGQvdnNmdHBk
+LTMuMC4yL3ZzZnRwZC0yLjEuMC1maWx0ZXIucGF0Y2ggIHwgIDc3IC0tLS0tLS0tLS0tLS0tLQ0K
+PiA+ICAgLi4uL3ZzZnRwZC0zLjAuMi92c2Z0cGQtdGNwX3dyYXBwZXJzLXN1cHBvcnQucGF0Y2gg
+fCAgMjUgLS0tLS0NCj4gPiAgIC4uLi92c2Z0cGQvdnNmdHBkLTMuMC4zL21ha2VmaWxlLWRlc3Rk
+aXIucGF0Y2ggICAgIHwgIDQ0ICsrKysrKysrKw0KPiA+ICAgLi4uL3ZzZnRwZC92c2Z0cGQtMy4w
+LjMvbWFrZWZpbGUtbGlicy5wYXRjaCAgICAgICAgfCAgMjEgKysrKw0KPiA+ICAgLi4uL3ZzZnRw
+ZC92c2Z0cGQtMy4wLjMvbWFrZWZpbGUtc3RyaXAucGF0Y2ggICAgICAgfCAgMTcgKysrKw0KPiA+
+ICAgLi4uL3ZzZnRwZC0zLjAuMy9ub3BhbS13aXRoLXRjcF93cmFwcGVycy5wYXRjaCAgICAgfCAg
+MTcgKysrKw0KPiA+ICAgLi4uL3ZzZnRwZC92c2Z0cGQtMy4wLjMvbm9wYW0ucGF0Y2ggICAgICAg
+ICAgICAgICAgfCAgMTYgKysrDQo+ID4gICAuLi4vdnNmdHBkL3ZzZnRwZC0zLjAuMy92c2Z0cGQt
+Mi4xLjAtZmlsdGVyLnBhdGNoICB8ICA3NyArKysrKysrKysrKysrKysNCj4gPiAgIC4uLi92c2Z0
+cGQtMy4wLjMvdnNmdHBkLXRjcF93cmFwcGVycy1zdXBwb3J0LnBhdGNoIHwgIDI1ICsrKysrDQo+
+ID4gICAuLi4vcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGRfMy4wLjIuYmIgICAgICAgICB8
+IDEwNyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gPiAgIC4uLi9yZWNpcGVzLWRhZW1vbnMvdnNm
+dHBkL3ZzZnRwZF8zLjAuMy5iYiAgICAgICAgIHwgMTA3DQo+ICsrKysrKysrKysrKysrKysrKysr
+Kw0KPiA+ICAgMTYgZmlsZXMgY2hhbmdlZCwgMzI0IGluc2VydGlvbnMoKyksIDMyNCBkZWxldGlv
+bnMoLSkNCj4gPiAgIGRlbGV0ZSBtb2RlIDEwMDY0NA0KPiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBl
+cy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQtMy4wLjIvbWFrZWZpbGUtZGVzdGRpci5wYXRjaA0KPiA+
+ICAgZGVsZXRlIG1vZGUgMTAwNjQ0DQo+IG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMv
+dnNmdHBkL3ZzZnRwZC0zLjAuMi9tYWtlZmlsZS1saWJzLnBhdGNoDQo+ID4gICBkZWxldGUgbW9k
+ZSAxMDA2NDQNCj4gbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBk
+LTMuMC4yL21ha2VmaWxlLXN0cmlwLnBhdGNoDQo+ID4gICBkZWxldGUgbW9kZSAxMDA2NDQNCj4g
+bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBkLTMuMC4yL25vcGFt
+LXdpdGgtdGNwX3dyYXBwZXJzLnBhdGNoDQo+ID4gICBkZWxldGUgbW9kZSAxMDA2NDQNCj4gbWV0
+YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBkLTMuMC4yL25vcGFtLnBh
+dGNoDQo+ID4gICBkZWxldGUgbW9kZSAxMDA2NDQNCj4gbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMt
+ZGFlbW9ucy92c2Z0cGQvdnNmdHBkLTMuMC4yL3ZzZnRwZC0yLjEuMC1maWx0ZXIucGF0Y2gNCj4g
+PiAgIGRlbGV0ZSBtb2RlIDEwMDY0NA0KPiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25z
+L3ZzZnRwZC92c2Z0cGQtMy4wLjIvdnNmdHBkLXRjcF93cmFwcGVycy1zdXBwb3J0LnBhDQo+IHRj
+aA0KPiA+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+IG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRh
+ZW1vbnMvdnNmdHBkL3ZzZnRwZC0zLjAuMy9tYWtlZmlsZS1kZXN0ZGlyLnBhdGNoDQo+ID4gICBj
+cmVhdGUgbW9kZSAxMDA2NDQNCj4gbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0
+cGQvdnNmdHBkLTMuMC4zL21ha2VmaWxlLWxpYnMucGF0Y2gNCj4gPiAgIGNyZWF0ZSBtb2RlIDEw
+MDY0NA0KPiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQtMy4w
+LjMvbWFrZWZpbGUtc3RyaXAucGF0Y2gNCj4gPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiBtZXRh
+LW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQtMy4wLjMvbm9wYW0td2l0
+aC10Y3Bfd3JhcHBlcnMucGF0Y2gNCj4gPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiBtZXRhLW5l
+dHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQtMy4wLjMvbm9wYW0ucGF0Y2gN
+Cj4gPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVt
+b25zL3ZzZnRwZC92c2Z0cGQtMy4wLjMvdnNmdHBkLTIuMS4wLWZpbHRlci5wYXRjaA0KPiA+ICAg
+Y3JlYXRlIG1vZGUgMTAwNjQ0DQo+IG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvdnNm
+dHBkL3ZzZnRwZC0zLjAuMy92c2Z0cGQtdGNwX3dyYXBwZXJzLXN1cHBvcnQucGENCj4gdGNoDQo+
+ID4gICBkZWxldGUgbW9kZSAxMDA2NDQgbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92
+c2Z0cGQvdnNmdHBkXzMuMC4yLmJiDQo+ID4gICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRh
+LW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGRfMy4wLjMuYmINCj4gPg0K
+PiA+IGRpZmYgLS1naXQNCj4gPiBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvdnNm
+dHBkL3ZzZnRwZC0zLjAuMi9tYWtlZmlsZS1kZXN0ZGlyDQo+ID4gLnBhdGNoDQo+ID4gYi9tZXRh
+LW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQtMy4wLjIvbWFrZWZpbGUt
+ZGVzdGRpcg0KPiA+IC5wYXRjaA0KPiA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGlu
+ZGV4IDE5ODBkMDkuLjAwMDAwMDANCj4gPiAtLS0NCj4gPiBhL21ldGEtbmV0d29ya2luZy9yZWNp
+cGVzLWRhZW1vbnMvdnNmdHBkL3ZzZnRwZC0zLjAuMi9tYWtlZmlsZS1kZXN0ZGlyDQo+ID4gLnBh
+dGNoDQo+ID4gKysrIC9kZXYvbnVsbA0KPiA+IEBAIC0xLDQ0ICswLDAgQEANCj4gPiAtVXNlIERF
+U1RESVIgd2l0aGluIGluc3RhbGwgdG8gYWxsb3cgaW5zdGFsbGluZyB1bmRlciBhIHByZWZpeA0K
+PiA+IC0NCj4gPiAtVXBzdHJlYW0tU3RhdHVzOiBQZW5kaW5nDQo+ID4gLQ0KPiA+IC1TaWduZWQt
+b2ZmLWJ5OiBQYXVsIEVnZ2xldG9uIDxwYXVsLmVnZ2xldG9uQGxpbnV4LmludGVsLmNvbT4NCj4g
+PiAtDQo+ID4gLWRpZmYgLS1naXQgYS9NYWtlZmlsZSBiL01ha2VmaWxlDQo+ID4gLS0tLSBhL01h
+a2VmaWxlDQo+ID4gLSsrKyBiL01ha2VmaWxlDQo+ID4gLUBAIC0yNCwyMSArMjQsMjEgQEANCj4g
+PiAtIAkkKENDKSAtbyB2c2Z0cGQgJChPQkpTKSAkKExJTkspICQoTElCUykNCj4gPiAtDQo+ID4g
+LSBpbnN0YWxsOg0KPiA+IC0tCWlmIFsgLXggL3Vzci9sb2NhbC9zYmluIF07IHRoZW4gXA0KPiA+
+IC0tCQkkKElOU1RBTEwpIC1tIDc1NSB2c2Z0cGQgL3Vzci9sb2NhbC9zYmluL3ZzZnRwZDsgXA0K
+PiA+IC0rCWlmIFsgLXggJHtERVNURElSfS91c3IvbG9jYWwvc2JpbiBdOyB0aGVuIFwNCj4gPiAt
+KwkJJChJTlNUQUxMKSAtbSA3NTUgdnNmdHBkICR7REVTVERJUn0vdXNyL2xvY2FsL3NiaW4vdnNm
+dHBkOyBcDQo+ID4gLSAJZWxzZSBcDQo+ID4gLS0JCSQoSU5TVEFMTCkgLW0gNzU1IHZzZnRwZCAv
+dXNyL3NiaW4vdnNmdHBkOyBmaQ0KPiA+IC0tCWlmIFsgLXggL3Vzci9sb2NhbC9tYW4gXTsgdGhl
+biBcDQo+ID4gLS0JCSQoSU5TVEFMTCkgLW0gNjQ0IHZzZnRwZC44IC91c3IvbG9jYWwvbWFuL21h
+bjgvdnNmdHBkLjg7IFwNCj4gPiAtLQkJJChJTlNUQUxMKSAtbSA2NDQgdnNmdHBkLmNvbmYuNSAv
+dXNyL2xvY2FsL21hbi9tYW41L3ZzZnRwZC5jb25mLjU7DQo+IFwNCj4gPiAtLQllbGlmIFsgLXgg
+L3Vzci9zaGFyZS9tYW4gXTsgdGhlbiBcDQo+ID4gLS0JCSQoSU5TVEFMTCkgLW0gNjQ0IHZzZnRw
+ZC44IC91c3Ivc2hhcmUvbWFuL21hbjgvdnNmdHBkLjg7IFwNCj4gPiAtLQkJJChJTlNUQUxMKSAt
+bSA2NDQgdnNmdHBkLmNvbmYuNSAvdXNyL3NoYXJlL21hbi9tYW41L3ZzZnRwZC5jb25mLjU7DQo+
+IFwNCj4gPiAtKwkJJChJTlNUQUxMKSAtbSA3NTUgdnNmdHBkICR7REVTVERJUn0vdXNyL3NiaW4v
+dnNmdHBkOyBmaQ0KPiA+IC0rCWlmIFsgLXggJHtERVNURElSfS91c3IvbG9jYWwvbWFuIF07IHRo
+ZW4gXA0KPiA+IC0rCQkkKElOU1RBTEwpIC1tIDY0NCB2c2Z0cGQuOCAke0RFU1RESVJ9L3Vzci9s
+b2NhbC9tYW4vbWFuOC92c2Z0cGQuODsNCj4gXA0KPiA+IC0rCQkkKElOU1RBTEwpIC1tIDY0NCB2
+c2Z0cGQuY29uZi41DQo+ICR7REVTVERJUn0vdXNyL2xvY2FsL21hbi9tYW41L3ZzZnRwZC5jb25m
+LjU7IFwNCj4gPiAtKwllbGlmIFsgLXggJHtERVNURElSfS91c3Ivc2hhcmUvbWFuIF07IHRoZW4g
+XA0KPiA+IC0rCQkkKElOU1RBTEwpIC1tIDY0NCB2c2Z0cGQuOA0KPiAke0RFU1RESVJ9L3Vzci9z
+aGFyZS9tYW4vbWFuOC92c2Z0cGQuODsgXA0KPiA+IC0rCQkkKElOU1RBTEwpIC1tIDY0NCB2c2Z0
+cGQuY29uZi41DQo+ID4gLSske0RFU1RESVJ9L3Vzci9zaGFyZS9tYW4vbWFuNS92c2Z0cGQuY29u
+Zi41OyBcDQo+ID4gLSAJZWxzZSBcDQo+ID4gLS0JCSQoSU5TVEFMTCkgLW0gNjQ0IHZzZnRwZC44
+IC91c3IvbWFuL21hbjgvdnNmdHBkLjg7IFwNCj4gPiAtLQkJJChJTlNUQUxMKSAtbSA2NDQgdnNm
+dHBkLmNvbmYuNSAvdXNyL21hbi9tYW41L3ZzZnRwZC5jb25mLjU7IGZpDQo+ID4gLS0JaWYgWyAt
+eCAvZXRjL3hpbmV0ZC5kIF07IHRoZW4gXA0KPiA+IC0tCQkkKElOU1RBTEwpIC1tIDY0NCB4aW5l
+dGQuZC92c2Z0cGQgL2V0Yy94aW5ldGQuZC92c2Z0cGQ7IGZpDQo+ID4gLSsJCSQoSU5TVEFMTCkg
+LW0gNjQ0IHZzZnRwZC44ICR7REVTVERJUn0vdXNyL21hbi9tYW44L3ZzZnRwZC44OyBcDQo+ID4g
+LSsJCSQoSU5TVEFMTCkgLW0gNjQ0IHZzZnRwZC5jb25mLjUNCj4gJHtERVNURElSfS91c3IvbWFu
+L21hbjUvdnNmdHBkLmNvbmYuNTsgZmkNCj4gPiAtKwlpZiBbIC14ICR7REVTVERJUn0vZXRjL3hp
+bmV0ZC5kIF07IHRoZW4gXA0KPiA+IC0rCQkkKElOU1RBTEwpIC1tIDY0NCB4aW5ldGQuZC92c2Z0
+cGQgJHtERVNURElSfS9ldGMveGluZXRkLmQvdnNmdHBkOw0KPiA+IC0rZmkNCj4gPiAtDQo+ID4g
+LSBjbGVhbjoNCj4gPiAtIAlybSAtZiAqLm8gKi5zd3AgdnNmdHBkDQo+ID4gZGlmZiAtLWdpdA0K
+PiA+IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBkLTMuMC4y
+L21ha2VmaWxlLWxpYnMucGENCj4gPiB0Y2gNCj4gPiBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVz
+LWRhZW1vbnMvdnNmdHBkL3ZzZnRwZC0zLjAuMi9tYWtlZmlsZS1saWJzLnBhDQo+ID4gdGNoDQo+
+ID4gZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggOWExMGY3Mi4uMDAwMDAwMA0K
+PiA+IC0tLQ0KPiA+IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNm
+dHBkLTMuMC4yL21ha2VmaWxlLWxpYnMucGENCj4gPiB0Y2gNCj4gPiArKysgL2Rldi9udWxsDQo+
+ID4gQEAgLTEsMjEgKzAsMCBAQA0KPiA+IC1IYXJkY29kZSBMSUJTIGluc3RlYWQgb2YgdXNpbmcg
+YSBzY3JpcHQgdG8gZGV0ZXJtaW5lIGF2YWlsYWJsZSBsaWJzDQo+ID4gLQ0KPiA+IC1XZSB3YW50
+IHRvIGF2b2lkIHRoaXMgZHluYW1pYyBkZXRlY3Rpb24gc28gd2UgaGF2ZSBhIGRldGVybWluaXN0
+aWMNCj4gPiAtYnVpbGQuDQo+ID4gLQ0KPiA+IC1VcHN0cmVhbS1TdGF0dXM6IEluYXBwcm9wcmlh
+dGUgW2NvbmZpZ10NCj4gPiAtDQo+ID4gLVNpZ25lZC1vZmYtYnk6IFBhdWwgRWdnbGV0b24gPHBh
+dWwuZWdnbGV0b25AbGludXguaW50ZWwuY29tPg0KPiA+IC0NCj4gPiAtZGlmZiAtLWdpdCBhL01h
+a2VmaWxlIGIvTWFrZWZpbGUNCj4gPiAtLS0tIGEvTWFrZWZpbGUNCj4gPiAtKysrIGIvTWFrZWZp
+bGUNCj4gPiAtQEAgLTUsNyArNSw3IEBADQo+ID4gLSAjQ0ZMQUdTID0gLWcNCj4gPiAtIENGTEFH
+Uwk9CS1PMiAtV2FsbCAtVyAtV3NoYWRvdyAjLXBlZGFudGljIC1XZXJyb3IgLVdjb252ZXJzaW9u
+DQo+ID4gLQ0KPiA+IC0tTElCUwk9CWAuL3ZzZl9maW5kbGlicy5zaGANCj4gPiAtK0xJQlMJPQkt
+bHNzbCAtbGNyeXB0byAtbG5zbCAtbHJlc29sdg0KPiA+IC0gTElOSwk9CS1XbCwtcw0KPiA+IC0N
+Cj4gPiAtIE9CSlMJPQltYWluLm8gdXRpbGl0eS5vIHByZWxvZ2luLm8gZnRwY21kaW8ubyBwb3N0
+bG9naW4ubw0KPiBwcml2c29jay5vIFwNCj4gPiBkaWZmIC0tZ2l0DQo+ID4gYS9tZXRhLW5ldHdv
+cmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQtMy4wLjIvbWFrZWZpbGUtc3RyaXAu
+cA0KPiA+IGF0Y2gNCj4gPiBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvdnNmdHBk
+L3ZzZnRwZC0zLjAuMi9tYWtlZmlsZS1zdHJpcC5wDQo+ID4gYXRjaA0KPiA+IGRlbGV0ZWQgZmls
+ZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IGZkMzE2MDAuLjAwMDAwMDANCj4gPiAtLS0NCj4gPiBh
+L21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvdnNmdHBkL3ZzZnRwZC0zLjAuMi9tYWtl
+ZmlsZS1zdHJpcC5wDQo+ID4gYXRjaA0KPiA+ICsrKyAvZGV2L251bGwNCj4gPiBAQCAtMSwxNyAr
+MCwwIEBADQo+ID4gLURpc2FibGUgc3RyaXBwaW5nIGF0IGxpbmsgdGltZQ0KPiA+IC0NCj4gPiAt
+VXBzdHJlYW0tU3RhdHVzOiBJbmFwcHJvcHJpYXRlIFtjb25maWddDQo+ID4gLQ0KPiA+IC1TaWdu
+ZWQtb2ZmLWJ5OiBQYXVsIEVnZ2xldG9uIDxwYXVsLmVnZ2xldG9uQGxpbnV4LmludGVsLmNvbT4N
+Cj4gPiAtDQo+ID4gLWRpZmYgLS1naXQgYS9NYWtlZmlsZSBiL01ha2VmaWxlDQo+ID4gLS0tLSBh
+L01ha2VmaWxlDQo+ID4gLSsrKyBiL01ha2VmaWxlDQo+ID4gLUBAIC05LDcgKzksNiBAQCBDRkxB
+R1MJPQktTzIgLWZQSUUgLWZzdGFjay1wcm90ZWN0b3INCj4gLS1wYXJhbT1zc3AtYnVmZmVyLXNp
+emU9NCBcDQo+ID4gLSAJIy1wZWRhbnRpYyAtV2NvbnZlcnNpb24NCj4gPiAtDQo+ID4gLSBMSUJT
+CT0JLWxzc2wgLWxjcnlwdG8gLWxuc2wgLWxyZXNvbHYNCj4gPiAtLUxJTksJPQktV2wsLXMNCj4g
+PiAtIExERkxBR1MJPQktZlBJRSAtcGllIC1XbCwteixyZWxybyAtV2wsLXosbm93DQo+ID4gLQ0K
+PiA+IC0gT0JKUwk9CW1haW4ubyB1dGlsaXR5Lm8gcHJlbG9naW4ubyBmdHBjbWRpby5vIHBvc3Rs
+b2dpbi5vDQo+IHByaXZzb2NrLm8gXA0KPiA+IGRpZmYgLS1naXQNCj4gPiBhL21ldGEtbmV0d29y
+a2luZy9yZWNpcGVzLWRhZW1vbnMvdnNmdHBkL3ZzZnRwZC0zLjAuMi9ub3BhbS13aXRoLXRjcF93
+DQo+ID4gcmFwcGVycy5wYXRjaA0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9u
+cy92c2Z0cGQvdnNmdHBkLTMuMC4yL25vcGFtLXdpdGgtdGNwX3cNCj4gPiByYXBwZXJzLnBhdGNo
+DQo+ID4gZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggZmRjZjNhMC4uMDAwMDAw
+MA0KPiA+IC0tLQ0KPiA+IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQv
+dnNmdHBkLTMuMC4yL25vcGFtLXdpdGgtdGNwX3cNCj4gPiByYXBwZXJzLnBhdGNoDQo+ID4gKysr
+IC9kZXYvbnVsbA0KPiA+IEBAIC0xLDE3ICswLDAgQEANCj4gPiAtRGlzYWJsZSBQQU0NCj4gPiAt
+DQo+ID4gLVVwc3RyZWFtLVN0YXR1czogSW5hcHByb3ByaWF0ZSBbY29uZmlnXQ0KPiA+IC0NCj4g
+PiAtU2lnbmVkLW9mZi1ieTogUm95LkxpIDxyb25ncWluZy5saUB3aW5kcml2ZXIuY29tPiAtZGlm
+ZiAtdXINCj4gPiB2c2Z0cGQtMi4wLjFfb3JnL2J1aWxkZGVmcy5oIHZzZnRwZC0yLjAuMV9wYXRj
+aC9idWlsZGRlZnMuaA0KPiA+IC0tLS0gdnNmdHBkLTIuMC4xX29yZy9idWlsZGRlZnMuaAkyMDA0
+LTA3LTAyIDE2OjM2OjU5LjAwMDAwMDAwMCArMDIwMA0KPiA+IC0rKysgdnNmdHBkLTIuMC4xX3Bh
+dGNoL2J1aWxkZGVmcy5oCTIwMDQtMDctMjEgMDk6MzQ6NDkuMDQ0OTAwNDg4ICswMjAwDQo+ID4g
+LUBAIC0yLDcgKzIsNyBAQA0KPiA+IC0gI2RlZmluZSBWU0ZfQlVJTERERUZTX0gNCj4gPiAtDQo+
+ID4gLSAjZGVmaW5lIFZTRl9CVUlMRF9UQ1BXUkFQUEVSUw0KPiA+IC0tI2RlZmluZSBWU0ZfQlVJ
+TERfUEFNDQo+ID4gLSsjdW5kZWYgVlNGX0JVSUxEX1BBTQ0KPiA+IC0gI3VuZGVmIFZTRl9CVUlM
+RF9TU0wNCj4gPiAtDQo+ID4gLSAjZW5kaWYgLyogVlNGX0JVSUxEREVGU19IICovDQo+ID4gZGlm
+ZiAtLWdpdA0KPiA+IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNm
+dHBkLTMuMC4yL25vcGFtLnBhdGNoDQo+ID4gYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVt
+b25zL3ZzZnRwZC92c2Z0cGQtMy4wLjIvbm9wYW0ucGF0Y2gNCj4gPiBkZWxldGVkIGZpbGUgbW9k
+ZSAxMDA2NDQNCj4gPiBpbmRleCBjZjBkNjhlLi4wMDAwMDAwDQo+ID4gLS0tIGEvbWV0YS1uZXR3
+b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBkLTMuMC4yL25vcGFtLnBhdGNoDQo+
+ID4gKysrIC9kZXYvbnVsbA0KPiA+IEBAIC0xLDE2ICswLDAgQEANCj4gPiAtRGlzYWJsZSBQQU0N
+Cj4gPiAtDQo+ID4gLVVwc3RyZWFtLVN0YXR1czogSW5hcHByb3ByaWF0ZSBbY29uZmlnXQ0KPiA+
+IC0NCj4gPiAtZGlmZiAtdXIgdnNmdHBkLTIuMC4xX29yZy9idWlsZGRlZnMuaCB2c2Z0cGQtMi4w
+LjFfcGF0Y2gvYnVpbGRkZWZzLmgNCj4gPiAtLS0tIHZzZnRwZC0yLjAuMV9vcmcvYnVpbGRkZWZz
+LmgJMjAwNC0wNy0wMiAxNjozNjo1OS4wMDAwMDAwMDAgKzAyMDANCj4gPiAtKysrIHZzZnRwZC0y
+LjAuMV9wYXRjaC9idWlsZGRlZnMuaAkyMDA0LTA3LTIxIDA5OjM0OjQ5LjA0NDkwMDQ4OCArMDIw
+MA0KPiA+IC1AQCAtMiw3ICsyLDcgQEANCj4gPiAtICNkZWZpbmUgVlNGX0JVSUxEREVGU19IDQo+
+ID4gLQ0KPiA+IC0gI3VuZGVmIFZTRl9CVUlMRF9UQ1BXUkFQUEVSUw0KPiA+IC0tI2RlZmluZSBW
+U0ZfQlVJTERfUEFNDQo+ID4gLSsjdW5kZWYgVlNGX0JVSUxEX1BBTQ0KPiA+IC0gI3VuZGVmIFZT
+Rl9CVUlMRF9TU0wNCj4gPiAtDQo+ID4gLSAjZW5kaWYgLyogVlNGX0JVSUxEREVGU19IICovDQo+
+ID4gZGlmZiAtLWdpdA0KPiA+IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0
+cGQvdnNmdHBkLTMuMC4yL3ZzZnRwZC0yLjEuMC1maWwNCj4gPiB0ZXIucGF0Y2gNCj4gPiBiL21l
+dGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvdnNmdHBkL3ZzZnRwZC0zLjAuMi92c2Z0cGQt
+Mi4xLjAtZmlsDQo+ID4gdGVyLnBhdGNoDQo+ID4gZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0DQo+
+ID4gaW5kZXggMzJmN2U4Mi4uMDAwMDAwMA0KPiA+IC0tLQ0KPiA+IGEvbWV0YS1uZXR3b3JraW5n
+L3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBkLTMuMC4yL3ZzZnRwZC0yLjEuMC1maWwNCj4g
+PiB0ZXIucGF0Y2gNCj4gPiArKysgL2Rldi9udWxsDQo+ID4gQEAgLTEsNzcgKzAsMCBAQA0KPiA+
+IC1GaXggdGhlIENWRS0yMDE1LTE0MTkNCj4gPiAtDQo+ID4gLVVwc3RyZWFtLVN0YXR1czogUGVu
+ZGluZw0KPiA+IC0NCj4gPiAtVHJ5IHRvIGZpeCBkZW55X2ZpbGUgcGFyc2luZyB0byBkbyBtb3Jl
+IHdoYXQgaXMgZXhwZWN0ZWQuIFRha2VuIC1mcm9tDQo+ID4gZmVkb3JhLiBDVkUtMjAxNS0xNDE5
+DQo+ID4gLQ0KPiA+IC1mdHA6Ly8xOTUuMjIwLjEwOC4xMDgvbGludXgvZmVkb3JhL2xpbnV4L2Rl
+dmVsb3BtZW50L3Jhd2hpZGUvc291cmNlL1MNCj4gPiBSUE1TL3YvdnNmdHBkLTMuMC4yLTEzLmZj
+MjIuc3JjLnJwbQ0KPiA+IC0NCj4gPiAtU2lnbmVkLW9mZi1ieTogUm95IExpIDxyb25ncWluZy5s
+aUB3aW5kcml2ZXIuY29tPg0KPiA+IC0NCj4gPiAtZGlmZiAtdXAgdnNmdHBkLTIuMS4wL2xzLmMu
+ZmlsdGVyIHZzZnRwZC0yLjEuMC9scy5jDQo+ID4gLS0tLSB2c2Z0cGQtMi4xLjAvbHMuYy5maWx0
+ZXIJMjAwOC0wMi0wMiAwMjozMDo0MS4wMDAwMDAwMDAgKzAxMDANCj4gPiAtKysrIHZzZnRwZC0y
+LjEuMC9scy5jCTIwMDktMDEtMDggMTk6MzE6MTUuMDAwMDAwMDAwICswMTAwDQo+ID4gLUBAIC0y
+MzksOSArMjM5LDMxIEBAIHZzZl9maWxlbmFtZV9wYXNzZXNfZmlsdGVyKGNvbnN0IHN0cnVjdA0K
+PiA+IC0gICBpbnQgcmV0ID0gMDsNCj4gPiAtICAgY2hhciBsYXN0X3Rva2VuID0gMDsNCj4gPiAt
+ICAgaW50IG11c3RfbWF0Y2hfYXRfY3VycmVudF9wb3MgPSAxOw0KPiA+IC0rDQo+ID4gLSsNCj4g
+PiAtICAgc3RyX2NvcHkoJmZpbHRlcl9yZW1haW5fc3RyLCBwX2ZpbHRlcl9zdHIpOw0KPiA+IC0t
+ICBzdHJfY29weSgmbmFtZV9yZW1haW5fc3RyLCBwX2ZpbGVuYW1lX3N0cik7DQo+ID4gLS0NCj4g
+PiAtKw0KPiA+IC0rICBpZiAoIXN0cl9pc2VtcHR5ICgmZmlsdGVyX3JlbWFpbl9zdHIpICYmICFz
+dHJfaXNlbXB0eShwX2ZpbGVuYW1lX3N0cikpIHsNCj4gPiAtKyAgICBpZiAoc3RyX2dldF9jaGFy
+X2F0KHBfZmlsdGVyX3N0ciwgMCkgPT0gJy8nKSB7DQo+ID4gLSsgICAgICBpZiAoc3RyX2dldF9j
+aGFyX2F0KHBfZmlsZW5hbWVfc3RyLCAwKSAhPSAnLycpIHsNCj4gPiAtKyAgICAgICAgc3RyX2dl
+dGN3ZCAoJm5hbWVfcmVtYWluX3N0cik7DQo+ID4gLSsNCj4gPiAtKyAgICAgICAgaWYgKHN0cl9n
+ZXRsZW4oJm5hbWVfcmVtYWluX3N0cikgPiAxKSAvKiBjd2QgIT0gcm9vdCBkaXIgKi8NCj4gPiAt
+KyAgICAgICAgICBzdHJfYXBwZW5kX2NoYXIgKCZuYW1lX3JlbWFpbl9zdHIsICcvJyk7DQo+ID4g
+LSsNCj4gPiAtKyAgICAgICAgc3RyX2FwcGVuZF9zdHIgKCZuYW1lX3JlbWFpbl9zdHIsIHBfZmls
+ZW5hbWVfc3RyKTsNCj4gPiAtKyAgICAgIH0NCj4gPiAtKyAgICAgIGVsc2UNCj4gPiAtKyAgICAg
+ICBzdHJfY29weSAoJm5hbWVfcmVtYWluX3N0ciwgcF9maWxlbmFtZV9zdHIpOw0KPiA+IC0rICAg
+IH0gZWxzZSB7DQo+ID4gLSsgICAgICBpZiAoc3RyX2dldF9jaGFyX2F0KHBfZmlsdGVyX3N0ciwg
+MCkgIT0gJ3snKQ0KPiA+IC0rICAgICAgICBzdHJfYmFzZW5hbWUgKCZuYW1lX3JlbWFpbl9zdHIs
+IHBfZmlsZW5hbWVfc3RyKTsNCj4gPiAtKyAgICAgIGVsc2UNCj4gPiAtKyAgICAgICAgc3RyX2Nv
+cHkgKCZuYW1lX3JlbWFpbl9zdHIsIHBfZmlsZW5hbWVfc3RyKTsNCj4gPiAtKyAgICB9DQo+ID4g
+LSsgIH0gZWxzZQ0KPiA+IC0rICAgIHN0cl9jb3B5KCZuYW1lX3JlbWFpbl9zdHIsIHBfZmlsZW5h
+bWVfc3RyKTsNCj4gPiAtKw0KPiA+IC0gICB3aGlsZSAoIXN0cl9pc2VtcHR5KCZmaWx0ZXJfcmVt
+YWluX3N0cikgJiYgKml0ZXJzIDwgVlNGVFBfTUFUQ0hJVEVSU19NQVgpDQo+ID4gLSAgIHsNCj4g
+PiAtICAgICBzdGF0aWMgc3RydWN0IG15c3RyIHNfbWF0Y2hfbmVlZGVkX3N0cjsNCj4gPiAtZGlm
+ZiAtdXAgdnNmdHBkLTIuMS4wL3N0ci5jLmZpbHRlciB2c2Z0cGQtMi4xLjAvc3RyLmMNCj4gPiAt
+LS0tIHZzZnRwZC0yLjEuMC9zdHIuYy5maWx0ZXIJMjAwOC0xMi0xNyAwNjo1NDoxNi4wMDAwMDAw
+MDAgKzAxMDANCj4gPiAtKysrIHZzZnRwZC0yLjEuMC9zdHIuYwkyMDA5LTAxLTA4IDE5OjMxOjE1
+LjAwMDAwMDAwMCArMDEwMA0KPiA+IC1AQCAtNjgwLDMgKzY4MCwxNCBAQCBzdHJfcmVwbGFjZV91
+bnByaW50YWJsZShzdHJ1Y3QgbXlzdHIqIHBfDQo+ID4gLSAgIH0NCj4gPiAtIH0NCj4gPiAtDQo+
+ID4gLSt2b2lkDQo+ID4gLStzdHJfYmFzZW5hbWUgKHN0cnVjdCBteXN0ciogZF9zdHIsIGNvbnN0
+IHN0cnVjdCBteXN0ciogcGF0aCkgew0KPiA+IC0rICBzdGF0aWMgc3RydWN0IG15c3RyIHRtcDsN
+Cj4gPiAtKw0KPiA+IC0rICBzdHJfY29weSAoJnRtcCwgcGF0aCk7DQo+ID4gLSsgIHN0cl9zcGxp
+dF9jaGFyX3JldmVyc2UoJnRtcCwgZF9zdHIsICcvJyk7DQo+ID4gLSsNCj4gPiAtKyAgaWYgKHN0
+cl9pc2VtcHR5KGRfc3RyKSkNCj4gPiAtKyAgIHN0cl9jb3B5IChkX3N0ciwgcGF0aCk7DQo+ID4g
+LSt9DQo+ID4gLWRpZmYgLXVwIHZzZnRwZC0yLjEuMC9zdHIuaC5maWx0ZXIgdnNmdHBkLTIuMS4w
+L3N0ci5oDQo+ID4gLS0tLSB2c2Z0cGQtMi4xLjAvc3RyLmguZmlsdGVyCTIwMDgtMTItMTcgMDY6
+NTM6MjMuMDAwMDAwMDAwICswMTAwDQo+ID4gLSsrKyB2c2Z0cGQtMi4xLjAvc3RyLmgJMjAwOS0w
+MS0wOCAxOTozMjoxNC4wMDAwMDAwMDAgKzAxMDANCj4gPiAtQEAgLTEwMCw2ICsxMDAsNyBAQCB2
+b2lkIHN0cl9yZXBsYWNlX3VucHJpbnRhYmxlKHN0cnVjdCBteXN0DQo+ID4gLSBpbnQgc3RyX2F0
+b2koY29uc3Qgc3RydWN0IG15c3RyKiBwX3N0cik7DQo+ID4gLSBmaWxlc2l6ZV90IHN0cl9hX3Rv
+X2ZpbGVzaXplX3QoY29uc3Qgc3RydWN0IG15c3RyKiBwX3N0cik7DQo+ID4gLSB1bnNpZ25lZCBp
+bnQgc3RyX29jdGFsX3RvX3VpbnQoY29uc3Qgc3RydWN0IG15c3RyKiBwX3N0cik7DQo+ID4gLSt2
+b2lkIHN0cl9iYXNlbmFtZSAoc3RydWN0IG15c3RyKiBkX3N0ciwgY29uc3Qgc3RydWN0IG15c3Ry
+KiBwYXRoKTsNCj4gPiAtDQo+ID4gLSAvKiBQVVJQT1NFOiBFeHRyYWN0IGEgbGluZSBvZiB0ZXh0
+IChkZWxpbWl0ZWQgYnkgXG4gb3IgRU9GKSBmcm9tIGENCj4gPiBzdHJpbmcNCj4gPiAtICAqIGJ1
+ZmZlciwgc3RhcnRpbmcgYXQgY2hhcmFjdGVyIHBvc2l0aW9uICdwX3BvcycuIFRoZSBleHRyYWN0
+ZWQNCj4gPiBsaW5lIHdpbGwgZGlmZiAtLWdpdA0KPiA+IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lw
+ZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBkLTMuMC4yL3ZzZnRwZC10Y3Bfd3JhcHANCj4gPiBlcnMt
+c3VwcG9ydC5wYXRjaA0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0
+cGQvdnNmdHBkLTMuMC4yL3ZzZnRwZC10Y3Bfd3JhcHANCj4gPiBlcnMtc3VwcG9ydC5wYXRjaA0K
+PiA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDY5NzQ1YjMuLjAwMDAwMDAN
+Cj4gPiAtLS0NCj4gPiBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvdnNmdHBkL3Zz
+ZnRwZC0zLjAuMi92c2Z0cGQtdGNwX3dyYXBwDQo+ID4gZXJzLXN1cHBvcnQucGF0Y2gNCj4gPiAr
+KysgL2Rldi9udWxsDQo+ID4gQEAgLTEsMjUgKzAsMCBAQA0KPiA+IC1FbmFibGUgdGNwX3dyYXBw
+ZXIuDQo+ID4gLQ0KPiA+IC1VcHN0cmVhbS1TdGF0dXM6IEluYXBwcm9wcmlhdGUgW2NvbmZpZ3Vy
+YXRpb25dDQo+ID4gLQ0KPiA+IC1TaWduZWQtb2ZmLWJ5OiBSb3kuTGkgPHJvbmdxaW5nLmxpQHdp
+bmRyaXZlci5jb20+DQo+ID4gLS0tLQ0KPiA+IC0gYnVpbGRkZWZzLmggfCAgICAyICstDQo+ID4g
+LSAxIGZpbGVzIGNoYW5nZWQsIDEgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbnMoLSkNCj4gPiAt
+DQo+ID4gLWRpZmYgLS1naXQgYS9idWlsZGRlZnMuaCBiL2J1aWxkZGVmcy5oIC1pbmRleCBlOTA4
+MzUyLi4wMTA2ZDFhIDEwMDY0NA0KPiA+IC0tLS0gYS9idWlsZGRlZnMuaA0KPiA+IC0rKysgYi9i
+dWlsZGRlZnMuaA0KPiA+IC1AQCAtMSw3ICsxLDcgQEANCj4gPiAtICNpZm5kZWYgVlNGX0JVSUxE
+REVGU19IDQo+ID4gLSAjZGVmaW5lIFZTRl9CVUlMRERFRlNfSA0KPiA+IC0NCj4gPiAtLSN1bmRl
+ZiBWU0ZfQlVJTERfVENQV1JBUFBFUlMNCj4gPiAtKyNkZWZpbmUgVlNGX0JVSUxEX1RDUFdSQVBQ
+RVJTDQo+ID4gLSAjZGVmaW5lIFZTRl9CVUlMRF9QQU0NCj4gPiAtICN1bmRlZiBWU0ZfQlVJTERf
+U1NMDQo+ID4gLQ0KPiA+IC0tLQ0KPiA+IC0xLjcuMQ0KPiA+IC0NCj4gPiBkaWZmIC0tZ2l0DQo+
+ID4gYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQtMy4wLjMv
+bWFrZWZpbGUtZGVzdGRpcg0KPiA+IC5wYXRjaA0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lw
+ZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBkLTMuMC4zL21ha2VmaWxlLWRlc3RkaXINCj4gPiAucGF0
+Y2gNCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDAwMDAwMDAuLjE5ODBkMDkN
+Cj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFl
+bW9ucy92c2Z0cGQvdnNmdHBkLTMuMC4zL21ha2VmaWxlLWRlcw0KPiA+ICsrKyB0ZGlyLnBhdGNo
+DQo+ID4gQEAgLTAsMCArMSw0NCBAQA0KPiA+ICtVc2UgREVTVERJUiB3aXRoaW4gaW5zdGFsbCB0
+byBhbGxvdyBpbnN0YWxsaW5nIHVuZGVyIGEgcHJlZml4DQo+ID4gKw0KPiA+ICtVcHN0cmVhbS1T
+dGF0dXM6IFBlbmRpbmcNCj4gPiArDQo+ID4gK1NpZ25lZC1vZmYtYnk6IFBhdWwgRWdnbGV0b24g
+PHBhdWwuZWdnbGV0b25AbGludXguaW50ZWwuY29tPg0KPiA+ICsNCj4gPiArZGlmZiAtLWdpdCBh
+L01ha2VmaWxlIGIvTWFrZWZpbGUNCj4gPiArLS0tIGEvTWFrZWZpbGUNCj4gPiArKysrIGIvTWFr
+ZWZpbGUNCj4gPiArQEAgLTI0LDIxICsyNCwyMSBAQA0KPiA+ICsgCSQoQ0MpIC1vIHZzZnRwZCAk
+KE9CSlMpICQoTElOSykgJChMSUJTKQ0KPiA+ICsNCj4gPiArIGluc3RhbGw6DQo+ID4gKy0JaWYg
+WyAteCAvdXNyL2xvY2FsL3NiaW4gXTsgdGhlbiBcDQo+ID4gKy0JCSQoSU5TVEFMTCkgLW0gNzU1
+IHZzZnRwZCAvdXNyL2xvY2FsL3NiaW4vdnNmdHBkOyBcDQo+ID4gKysJaWYgWyAteCAke0RFU1RE
+SVJ9L3Vzci9sb2NhbC9zYmluIF07IHRoZW4gXA0KPiA+ICsrCQkkKElOU1RBTEwpIC1tIDc1NSB2
+c2Z0cGQgJHtERVNURElSfS91c3IvbG9jYWwvc2Jpbi92c2Z0cGQ7IFwNCj4gPiArIAllbHNlIFwN
+Cj4gPiArLQkJJChJTlNUQUxMKSAtbSA3NTUgdnNmdHBkIC91c3Ivc2Jpbi92c2Z0cGQ7IGZpDQo+
+ID4gKy0JaWYgWyAteCAvdXNyL2xvY2FsL21hbiBdOyB0aGVuIFwNCj4gPiArLQkJJChJTlNUQUxM
+KSAtbSA2NDQgdnNmdHBkLjggL3Vzci9sb2NhbC9tYW4vbWFuOC92c2Z0cGQuODsgXA0KPiA+ICst
+CQkkKElOU1RBTEwpIC1tIDY0NCB2c2Z0cGQuY29uZi41IC91c3IvbG9jYWwvbWFuL21hbjUvdnNm
+dHBkLmNvbmYuNTsNCj4gXA0KPiA+ICstCWVsaWYgWyAteCAvdXNyL3NoYXJlL21hbiBdOyB0aGVu
+IFwNCj4gPiArLQkJJChJTlNUQUxMKSAtbSA2NDQgdnNmdHBkLjggL3Vzci9zaGFyZS9tYW4vbWFu
+OC92c2Z0cGQuODsgXA0KPiA+ICstCQkkKElOU1RBTEwpIC1tIDY0NCB2c2Z0cGQuY29uZi41IC91
+c3Ivc2hhcmUvbWFuL21hbjUvdnNmdHBkLmNvbmYuNTsNCj4gXA0KPiA+ICsrCQkkKElOU1RBTEwp
+IC1tIDc1NSB2c2Z0cGQgJHtERVNURElSfS91c3Ivc2Jpbi92c2Z0cGQ7IGZpDQo+ID4gKysJaWYg
+WyAteCAke0RFU1RESVJ9L3Vzci9sb2NhbC9tYW4gXTsgdGhlbiBcDQo+ID4gKysJCSQoSU5TVEFM
+TCkgLW0gNjQ0IHZzZnRwZC44ICR7REVTVERJUn0vdXNyL2xvY2FsL21hbi9tYW44L3ZzZnRwZC44
+Ow0KPiBcDQo+ID4gKysJCSQoSU5TVEFMTCkgLW0gNjQ0IHZzZnRwZC5jb25mLjUNCj4gJHtERVNU
+RElSfS91c3IvbG9jYWwvbWFuL21hbjUvdnNmdHBkLmNvbmYuNTsgXA0KPiA+ICsrCWVsaWYgWyAt
+eCAke0RFU1RESVJ9L3Vzci9zaGFyZS9tYW4gXTsgdGhlbiBcDQo+ID4gKysJCSQoSU5TVEFMTCkg
+LW0gNjQ0IHZzZnRwZC44DQo+ICR7REVTVERJUn0vdXNyL3NoYXJlL21hbi9tYW44L3ZzZnRwZC44
+OyBcDQo+ID4gKysJCSQoSU5TVEFMTCkgLW0gNjQ0IHZzZnRwZC5jb25mLjUNCj4gPiArKyR7REVT
+VERJUn0vdXNyL3NoYXJlL21hbi9tYW41L3ZzZnRwZC5jb25mLjU7IFwNCj4gPiArIAllbHNlIFwN
+Cj4gPiArLQkJJChJTlNUQUxMKSAtbSA2NDQgdnNmdHBkLjggL3Vzci9tYW4vbWFuOC92c2Z0cGQu
+ODsgXA0KPiA+ICstCQkkKElOU1RBTEwpIC1tIDY0NCB2c2Z0cGQuY29uZi41IC91c3IvbWFuL21h
+bjUvdnNmdHBkLmNvbmYuNTsgZmkNCj4gPiArLQlpZiBbIC14IC9ldGMveGluZXRkLmQgXTsgdGhl
+biBcDQo+ID4gKy0JCSQoSU5TVEFMTCkgLW0gNjQ0IHhpbmV0ZC5kL3ZzZnRwZCAvZXRjL3hpbmV0
+ZC5kL3ZzZnRwZDsgZmkNCj4gPiArKwkJJChJTlNUQUxMKSAtbSA2NDQgdnNmdHBkLjggJHtERVNU
+RElSfS91c3IvbWFuL21hbjgvdnNmdHBkLjg7IFwNCj4gPiArKwkJJChJTlNUQUxMKSAtbSA2NDQg
+dnNmdHBkLmNvbmYuNQ0KPiAke0RFU1RESVJ9L3Vzci9tYW4vbWFuNS92c2Z0cGQuY29uZi41OyBm
+aQ0KPiA+ICsrCWlmIFsgLXggJHtERVNURElSfS9ldGMveGluZXRkLmQgXTsgdGhlbiBcDQo+ID4g
+KysJCSQoSU5TVEFMTCkgLW0gNjQ0IHhpbmV0ZC5kL3ZzZnRwZCAke0RFU1RESVJ9L2V0Yy94aW5l
+dGQuZC92c2Z0cGQ7DQo+ID4gKytmaQ0KPiA+ICsNCj4gPiArIGNsZWFuOg0KPiA+ICsgCXJtIC1m
+ICoubyAqLnN3cCB2c2Z0cGQNCj4gPiBkaWZmIC0tZ2l0DQo+ID4gYS9tZXRhLW5ldHdvcmtpbmcv
+cmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQtMy4wLjMvbWFrZWZpbGUtbGlicy5wYQ0KPiA+
+IHRjaA0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBk
+LTMuMC4zL21ha2VmaWxlLWxpYnMucGENCj4gPiB0Y2gNCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0
+NA0KPiA+IGluZGV4IDAwMDAwMDAuLjlhMTBmNzINCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysr
+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBkLTMuMC4zL21h
+a2VmaWxlLWxpYg0KPiA+ICsrKyBzLnBhdGNoDQo+ID4gQEAgLTAsMCArMSwyMSBAQA0KPiA+ICtI
+YXJkY29kZSBMSUJTIGluc3RlYWQgb2YgdXNpbmcgYSBzY3JpcHQgdG8gZGV0ZXJtaW5lIGF2YWls
+YWJsZSBsaWJzDQo+ID4gKw0KPiA+ICtXZSB3YW50IHRvIGF2b2lkIHRoaXMgZHluYW1pYyBkZXRl
+Y3Rpb24gc28gd2UgaGF2ZSBhIGRldGVybWluaXN0aWMNCj4gPiArYnVpbGQuDQo+ID4gKw0KPiA+
+ICtVcHN0cmVhbS1TdGF0dXM6IEluYXBwcm9wcmlhdGUgW2NvbmZpZ10NCj4gPiArDQo+ID4gK1Np
+Z25lZC1vZmYtYnk6IFBhdWwgRWdnbGV0b24gPHBhdWwuZWdnbGV0b25AbGludXguaW50ZWwuY29t
+Pg0KPiA+ICsNCj4gPiArZGlmZiAtLWdpdCBhL01ha2VmaWxlIGIvTWFrZWZpbGUNCj4gPiArLS0t
+IGEvTWFrZWZpbGUNCj4gPiArKysrIGIvTWFrZWZpbGUNCj4gPiArQEAgLTUsNyArNSw3IEBADQo+
+ID4gKyAjQ0ZMQUdTID0gLWcNCj4gPiArIENGTEFHUwk9CS1PMiAtV2FsbCAtVyAtV3NoYWRvdyAj
+LXBlZGFudGljIC1XZXJyb3IgLVdjb252ZXJzaW9uDQo+ID4gKw0KPiA+ICstTElCUwk9CWAuL3Zz
+Zl9maW5kbGlicy5zaGANCj4gPiArK0xJQlMJPQktbHNzbCAtbGNyeXB0byAtbG5zbCAtbHJlc29s
+dg0KPiA+ICsgTElOSwk9CS1XbCwtcw0KPiA+ICsNCj4gPiArIE9CSlMJPQltYWluLm8gdXRpbGl0
+eS5vIHByZWxvZ2luLm8gZnRwY21kaW8ubyBwb3N0bG9naW4ubw0KPiBwcml2c29jay5vIFwNCj4g
+PiBkaWZmIC0tZ2l0DQo+ID4gYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRw
+ZC92c2Z0cGQtMy4wLjMvbWFrZWZpbGUtc3RyaXAucA0KPiA+IGF0Y2gNCj4gPiBiL21ldGEtbmV0
+d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvdnNmdHBkL3ZzZnRwZC0zLjAuMy9tYWtlZmlsZS1zdHJp
+cC5wDQo+ID4gYXRjaA0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAwMDAw
+MC4uZmQzMTYwMA0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW5ldHdvcmtpbmcv
+cmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQtMy4wLjMvbWFrZWZpbGUtc3RyDQo+ID4gKysr
+IGlwLnBhdGNoDQo+ID4gQEAgLTAsMCArMSwxNyBAQA0KPiA+ICtEaXNhYmxlIHN0cmlwcGluZyBh
+dCBsaW5rIHRpbWUNCj4gPiArDQo+ID4gK1Vwc3RyZWFtLVN0YXR1czogSW5hcHByb3ByaWF0ZSBb
+Y29uZmlnXQ0KPiA+ICsNCj4gPiArU2lnbmVkLW9mZi1ieTogUGF1bCBFZ2dsZXRvbiA8cGF1bC5l
+Z2dsZXRvbkBsaW51eC5pbnRlbC5jb20+DQo+ID4gKw0KPiA+ICtkaWZmIC0tZ2l0IGEvTWFrZWZp
+bGUgYi9NYWtlZmlsZQ0KPiA+ICstLS0gYS9NYWtlZmlsZQ0KPiA+ICsrKysgYi9NYWtlZmlsZQ0K
+PiA+ICtAQCAtOSw3ICs5LDYgQEAgQ0ZMQUdTCT0JLU8yIC1mUElFIC1mc3RhY2stcHJvdGVjdG9y
+DQo+IC0tcGFyYW09c3NwLWJ1ZmZlci1zaXplPTQgXA0KPiA+ICsgCSMtcGVkYW50aWMgLVdjb252
+ZXJzaW9uDQo+ID4gKw0KPiA+ICsgTElCUwk9CS1sc3NsIC1sY3J5cHRvIC1sbnNsIC1scmVzb2x2
+DQo+ID4gKy1MSU5LCT0JLVdsLC1zDQo+ID4gKyBMREZMQUdTCT0JLWZQSUUgLXBpZSAtV2wsLXos
+cmVscm8gLVdsLC16LG5vdw0KPiA+ICsNCj4gPiArIE9CSlMJPQltYWluLm8gdXRpbGl0eS5vIHBy
+ZWxvZ2luLm8gZnRwY21kaW8ubyBwb3N0bG9naW4ubw0KPiBwcml2c29jay5vIFwNCj4gPiBkaWZm
+IC0tZ2l0DQo+ID4gYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0
+cGQtMy4wLjMvbm9wYW0td2l0aC10Y3Bfdw0KPiA+IHJhcHBlcnMucGF0Y2gNCj4gPiBiL21ldGEt
+bmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvdnNmdHBkL3ZzZnRwZC0zLjAuMy9ub3BhbS13aXRo
+LXRjcF93DQo+ID4gcmFwcGVycy5wYXRjaA0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4g
+aW5kZXggMDAwMDAwMC4uZmRjZjNhMA0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRh
+LW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQtMy4wLjMvbm9wYW0td2l0
+aC10DQo+ID4gKysrIGNwX3dyYXBwZXJzLnBhdGNoDQo+ID4gQEAgLTAsMCArMSwxNyBAQA0KPiA+
+ICtEaXNhYmxlIFBBTQ0KPiA+ICsNCj4gPiArVXBzdHJlYW0tU3RhdHVzOiBJbmFwcHJvcHJpYXRl
+IFtjb25maWddDQo+ID4gKw0KPiA+ICtTaWduZWQtb2ZmLWJ5OiBSb3kuTGkgPHJvbmdxaW5nLmxp
+QHdpbmRyaXZlci5jb20+IGRpZmYgLXVyDQo+ID4gK3ZzZnRwZC0yLjAuMV9vcmcvYnVpbGRkZWZz
+LmggdnNmdHBkLTIuMC4xX3BhdGNoL2J1aWxkZGVmcy5oDQo+ID4gKy0tLSB2c2Z0cGQtMi4wLjFf
+b3JnL2J1aWxkZGVmcy5oCTIwMDQtMDctMDIgMTY6MzY6NTkuMDAwMDAwMDAwICswMjAwDQo+ID4g
+KysrKyB2c2Z0cGQtMi4wLjFfcGF0Y2gvYnVpbGRkZWZzLmgJMjAwNC0wNy0yMSAwOTozNDo0OS4w
+NDQ5MDA0ODggKzAyMDANCj4gPiArQEAgLTIsNyArMiw3IEBADQo+ID4gKyAjZGVmaW5lIFZTRl9C
+VUlMRERFRlNfSA0KPiA+ICsNCj4gPiArICNkZWZpbmUgVlNGX0JVSUxEX1RDUFdSQVBQRVJTDQo+
+ID4gKy0jZGVmaW5lIFZTRl9CVUlMRF9QQU0NCj4gPiArKyN1bmRlZiBWU0ZfQlVJTERfUEFNDQo+
+ID4gKyAjdW5kZWYgVlNGX0JVSUxEX1NTTA0KPiA+ICsNCj4gPiArICNlbmRpZiAvKiBWU0ZfQlVJ
+TERERUZTX0ggKi8NCj4gPiBkaWZmIC0tZ2l0DQo+ID4gYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBl
+cy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQtMy4wLjMvbm9wYW0ucGF0Y2gNCj4gPiBiL21ldGEtbmV0
+d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvdnNmdHBkL3ZzZnRwZC0zLjAuMy9ub3BhbS5wYXRjaA0K
+PiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAwMDAwMC4uY2YwZDY4ZQ0KPiA+
+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25z
+L3ZzZnRwZC92c2Z0cGQtMy4wLjMvbm9wYW0ucGF0Y2gNCj4gPiBAQCAtMCwwICsxLDE2IEBADQo+
+ID4gK0Rpc2FibGUgUEFNDQo+ID4gKw0KPiA+ICtVcHN0cmVhbS1TdGF0dXM6IEluYXBwcm9wcmlh
+dGUgW2NvbmZpZ10NCj4gPiArDQo+ID4gK2RpZmYgLXVyIHZzZnRwZC0yLjAuMV9vcmcvYnVpbGRk
+ZWZzLmggdnNmdHBkLTIuMC4xX3BhdGNoL2J1aWxkZGVmcy5oDQo+ID4gKy0tLSB2c2Z0cGQtMi4w
+LjFfb3JnL2J1aWxkZGVmcy5oCTIwMDQtMDctMDIgMTY6MzY6NTkuMDAwMDAwMDAwICswMjAwDQo+
+ID4gKysrKyB2c2Z0cGQtMi4wLjFfcGF0Y2gvYnVpbGRkZWZzLmgJMjAwNC0wNy0yMSAwOTozNDo0
+OS4wNDQ5MDA0ODggKzAyMDANCj4gPiArQEAgLTIsNyArMiw3IEBADQo+ID4gKyAjZGVmaW5lIFZT
+Rl9CVUlMRERFRlNfSA0KPiA+ICsNCj4gPiArICN1bmRlZiBWU0ZfQlVJTERfVENQV1JBUFBFUlMN
+Cj4gPiArLSNkZWZpbmUgVlNGX0JVSUxEX1BBTQ0KPiA+ICsrI3VuZGVmIFZTRl9CVUlMRF9QQU0N
+Cj4gPiArICN1bmRlZiBWU0ZfQlVJTERfU1NMDQo+ID4gKw0KPiA+ICsgI2VuZGlmIC8qIFZTRl9C
+VUlMRERFRlNfSCAqLw0KPiA+IGRpZmYgLS1naXQNCj4gPiBhL21ldGEtbmV0d29ya2luZy9yZWNp
+cGVzLWRhZW1vbnMvdnNmdHBkL3ZzZnRwZC0zLjAuMy92c2Z0cGQtMi4xLjAtZmlsDQo+ID4gdGVy
+LnBhdGNoDQo+ID4gYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0
+cGQtMy4wLjMvdnNmdHBkLTIuMS4wLWZpbA0KPiA+IHRlci5wYXRjaA0KPiA+IG5ldyBmaWxlIG1v
+ZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAwMDAwMC4uMzJmN2U4Mg0KPiA+IC0tLSAvZGV2L251bGwN
+Cj4gPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQt
+My4wLjMvdnNmdHBkLTIuMS4wDQo+ID4gKysrIC1maWx0ZXIucGF0Y2gNCj4gPiBAQCAtMCwwICsx
+LDc3IEBADQo+ID4gK0ZpeCB0aGUgQ1ZFLTIwMTUtMTQxOQ0KPiA+ICsNCj4gPiArVXBzdHJlYW0t
+U3RhdHVzOiBQZW5kaW5nDQo+ID4gKw0KPiA+ICtUcnkgdG8gZml4IGRlbnlfZmlsZSBwYXJzaW5n
+IHRvIGRvIG1vcmUgd2hhdCBpcyBleHBlY3RlZC4gVGFrZW4gZnJvbQ0KPiA+ICtmZWRvcmEuIENW
+RS0yMDE1LTE0MTkNCj4gPiArDQo+ID4gK2Z0cDovLzE5NS4yMjAuMTA4LjEwOC9saW51eC9mZWRv
+cmEvbGludXgvZGV2ZWxvcG1lbnQvcmF3aGlkZS9zb3VyY2UvUw0KPiA+ICtSUE1TL3YvdnNmdHBk
+LTMuMC4yLTEzLmZjMjIuc3JjLnJwbQ0KPiA+ICsNCj4gPiArU2lnbmVkLW9mZi1ieTogUm95IExp
+IDxyb25ncWluZy5saUB3aW5kcml2ZXIuY29tPg0KPiA+ICsNCj4gPiArZGlmZiAtdXAgdnNmdHBk
+LTIuMS4wL2xzLmMuZmlsdGVyIHZzZnRwZC0yLjEuMC9scy5jDQo+ID4gKy0tLSB2c2Z0cGQtMi4x
+LjAvbHMuYy5maWx0ZXIJMjAwOC0wMi0wMiAwMjozMDo0MS4wMDAwMDAwMDAgKzAxMDANCj4gPiAr
+KysrIHZzZnRwZC0yLjEuMC9scy5jCTIwMDktMDEtMDggMTk6MzE6MTUuMDAwMDAwMDAwICswMTAw
+DQo+ID4gK0BAIC0yMzksOSArMjM5LDMxIEBAIHZzZl9maWxlbmFtZV9wYXNzZXNfZmlsdGVyKGNv
+bnN0IHN0cnVjdA0KPiA+ICsgICBpbnQgcmV0ID0gMDsNCj4gPiArICAgY2hhciBsYXN0X3Rva2Vu
+ID0gMDsNCj4gPiArICAgaW50IG11c3RfbWF0Y2hfYXRfY3VycmVudF9wb3MgPSAxOw0KPiA+ICsr
+DQo+ID4gKysNCj4gPiArICAgc3RyX2NvcHkoJmZpbHRlcl9yZW1haW5fc3RyLCBwX2ZpbHRlcl9z
+dHIpOw0KPiA+ICstICBzdHJfY29weSgmbmFtZV9yZW1haW5fc3RyLCBwX2ZpbGVuYW1lX3N0cik7
+DQo+ID4gKy0NCj4gPiArKw0KPiA+ICsrICBpZiAoIXN0cl9pc2VtcHR5ICgmZmlsdGVyX3JlbWFp
+bl9zdHIpICYmICFzdHJfaXNlbXB0eShwX2ZpbGVuYW1lX3N0cikpIHsNCj4gPiArKyAgICBpZiAo
+c3RyX2dldF9jaGFyX2F0KHBfZmlsdGVyX3N0ciwgMCkgPT0gJy8nKSB7DQo+ID4gKysgICAgICBp
+ZiAoc3RyX2dldF9jaGFyX2F0KHBfZmlsZW5hbWVfc3RyLCAwKSAhPSAnLycpIHsNCj4gPiArKyAg
+ICAgICAgc3RyX2dldGN3ZCAoJm5hbWVfcmVtYWluX3N0cik7DQo+ID4gKysNCj4gPiArKyAgICAg
+ICAgaWYgKHN0cl9nZXRsZW4oJm5hbWVfcmVtYWluX3N0cikgPiAxKSAvKiBjd2QgIT0gcm9vdCBk
+aXIgKi8NCj4gPiArKyAgICAgICAgICBzdHJfYXBwZW5kX2NoYXIgKCZuYW1lX3JlbWFpbl9zdHIs
+ICcvJyk7DQo+ID4gKysNCj4gPiArKyAgICAgICAgc3RyX2FwcGVuZF9zdHIgKCZuYW1lX3JlbWFp
+bl9zdHIsIHBfZmlsZW5hbWVfc3RyKTsNCj4gPiArKyAgICAgIH0NCj4gPiArKyAgICAgIGVsc2UN
+Cj4gPiArKyAgICAgICBzdHJfY29weSAoJm5hbWVfcmVtYWluX3N0ciwgcF9maWxlbmFtZV9zdHIp
+Ow0KPiA+ICsrICAgIH0gZWxzZSB7DQo+ID4gKysgICAgICBpZiAoc3RyX2dldF9jaGFyX2F0KHBf
+ZmlsdGVyX3N0ciwgMCkgIT0gJ3snKQ0KPiA+ICsrICAgICAgICBzdHJfYmFzZW5hbWUgKCZuYW1l
+X3JlbWFpbl9zdHIsIHBfZmlsZW5hbWVfc3RyKTsNCj4gPiArKyAgICAgIGVsc2UNCj4gPiArKyAg
+ICAgICAgc3RyX2NvcHkgKCZuYW1lX3JlbWFpbl9zdHIsIHBfZmlsZW5hbWVfc3RyKTsNCj4gPiAr
+KyAgICB9DQo+ID4gKysgIH0gZWxzZQ0KPiA+ICsrICAgIHN0cl9jb3B5KCZuYW1lX3JlbWFpbl9z
+dHIsIHBfZmlsZW5hbWVfc3RyKTsNCj4gPiArKw0KPiA+ICsgICB3aGlsZSAoIXN0cl9pc2VtcHR5
+KCZmaWx0ZXJfcmVtYWluX3N0cikgJiYgKml0ZXJzIDwgVlNGVFBfTUFUQ0hJVEVSU19NQVgpDQo+
+ID4gKyAgIHsNCj4gPiArICAgICBzdGF0aWMgc3RydWN0IG15c3RyIHNfbWF0Y2hfbmVlZGVkX3N0
+cjsgZGlmZiAtdXANCj4gPiArdnNmdHBkLTIuMS4wL3N0ci5jLmZpbHRlciB2c2Z0cGQtMi4xLjAv
+c3RyLmMNCj4gPiArLS0tIHZzZnRwZC0yLjEuMC9zdHIuYy5maWx0ZXIJMjAwOC0xMi0xNyAwNjo1
+NDoxNi4wMDAwMDAwMDAgKzAxMDANCj4gPiArKysrIHZzZnRwZC0yLjEuMC9zdHIuYwkyMDA5LTAx
+LTA4IDE5OjMxOjE1LjAwMDAwMDAwMCArMDEwMA0KPiA+ICtAQCAtNjgwLDMgKzY4MCwxNCBAQCBz
+dHJfcmVwbGFjZV91bnByaW50YWJsZShzdHJ1Y3QgbXlzdHIqIHBfDQo+ID4gKyAgIH0NCj4gPiAr
+IH0NCj4gPiArDQo+ID4gKyt2b2lkDQo+ID4gKytzdHJfYmFzZW5hbWUgKHN0cnVjdCBteXN0ciog
+ZF9zdHIsIGNvbnN0IHN0cnVjdCBteXN0ciogcGF0aCkgew0KPiA+ICsrICBzdGF0aWMgc3RydWN0
+IG15c3RyIHRtcDsNCj4gPiArKw0KPiA+ICsrICBzdHJfY29weSAoJnRtcCwgcGF0aCk7DQo+ID4g
+KysgIHN0cl9zcGxpdF9jaGFyX3JldmVyc2UoJnRtcCwgZF9zdHIsICcvJyk7DQo+ID4gKysNCj4g
+PiArKyAgaWYgKHN0cl9pc2VtcHR5KGRfc3RyKSkNCj4gPiArKyAgIHN0cl9jb3B5IChkX3N0ciwg
+cGF0aCk7DQo+ID4gKyt9DQo+ID4gK2RpZmYgLXVwIHZzZnRwZC0yLjEuMC9zdHIuaC5maWx0ZXIg
+dnNmdHBkLTIuMS4wL3N0ci5oDQo+ID4gKy0tLSB2c2Z0cGQtMi4xLjAvc3RyLmguZmlsdGVyCTIw
+MDgtMTItMTcgMDY6NTM6MjMuMDAwMDAwMDAwICswMTAwDQo+ID4gKysrKyB2c2Z0cGQtMi4xLjAv
+c3RyLmgJMjAwOS0wMS0wOCAxOTozMjoxNC4wMDAwMDAwMDAgKzAxMDANCj4gPiArQEAgLTEwMCw2
+ICsxMDAsNyBAQCB2b2lkIHN0cl9yZXBsYWNlX3VucHJpbnRhYmxlKHN0cnVjdCBteXN0ICBpbnQN
+Cj4gPiArc3RyX2F0b2koY29uc3Qgc3RydWN0IG15c3RyKiBwX3N0cik7ICBmaWxlc2l6ZV90DQo+
+ID4gK3N0cl9hX3RvX2ZpbGVzaXplX3QoY29uc3Qgc3RydWN0IG15c3RyKiBwX3N0cik7ICB1bnNp
+Z25lZCBpbnQNCj4gPiArc3RyX29jdGFsX3RvX3VpbnQoY29uc3Qgc3RydWN0IG15c3RyKiBwX3N0
+cik7DQo+ID4gKyt2b2lkIHN0cl9iYXNlbmFtZSAoc3RydWN0IG15c3RyKiBkX3N0ciwgY29uc3Qg
+c3RydWN0IG15c3RyKiBwYXRoKTsNCj4gPiArDQo+ID4gKyAvKiBQVVJQT1NFOiBFeHRyYWN0IGEg
+bGluZSBvZiB0ZXh0IChkZWxpbWl0ZWQgYnkgXG4gb3IgRU9GKSBmcm9tIGENCj4gPiArIHN0cmlu
+Zw0KPiA+ICsgICogYnVmZmVyLCBzdGFydGluZyBhdCBjaGFyYWN0ZXIgcG9zaXRpb24gJ3BfcG9z
+Jy4gVGhlIGV4dHJhY3RlZA0KPiA+ICsgbGluZSB3aWxsDQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEv
+bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBkLTMuMC4zL3ZzZnRw
+ZC10Y3Bfd3JhcHANCj4gPiBlcnMtc3VwcG9ydC5wYXRjaA0KPiA+IGIvbWV0YS1uZXR3b3JraW5n
+L3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBkLTMuMC4zL3ZzZnRwZC10Y3Bfd3JhcHANCj4g
+PiBlcnMtc3VwcG9ydC5wYXRjaA0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXgg
+MDAwMDAwMC4uNjk3NDViMw0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW5ldHdv
+cmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRwZC92c2Z0cGQtMy4wLjMvdnNmdHBkLXRjcF93DQo+
+ID4gKysrIHJhcHBlcnMtc3VwcG9ydC5wYXRjaA0KPiA+IEBAIC0wLDAgKzEsMjUgQEANCj4gPiAr
+RW5hYmxlIHRjcF93cmFwcGVyLg0KPiA+ICsNCj4gPiArVXBzdHJlYW0tU3RhdHVzOiBJbmFwcHJv
+cHJpYXRlIFtjb25maWd1cmF0aW9uXQ0KPiA+ICsNCj4gPiArU2lnbmVkLW9mZi1ieTogUm95Lkxp
+IDxyb25ncWluZy5saUB3aW5kcml2ZXIuY29tPg0KPiA+ICstLS0NCj4gPiArIGJ1aWxkZGVmcy5o
+IHwgICAgMiArLQ0KPiA+ICsgMSBmaWxlcyBjaGFuZ2VkLCAxIGluc2VydGlvbnMoKyksIDEgZGVs
+ZXRpb25zKC0pDQo+ID4gKw0KPiA+ICtkaWZmIC0tZ2l0IGEvYnVpbGRkZWZzLmggYi9idWlsZGRl
+ZnMuaCBpbmRleCBlOTA4MzUyLi4wMTA2ZDFhIDEwMDY0NA0KPiA+ICstLS0gYS9idWlsZGRlZnMu
+aA0KPiA+ICsrKysgYi9idWlsZGRlZnMuaA0KPiA+ICtAQCAtMSw3ICsxLDcgQEANCj4gPiArICNp
+Zm5kZWYgVlNGX0JVSUxEREVGU19IDQo+ID4gKyAjZGVmaW5lIFZTRl9CVUlMRERFRlNfSA0KPiA+
+ICsNCj4gPiArLSN1bmRlZiBWU0ZfQlVJTERfVENQV1JBUFBFUlMNCj4gPiArKyNkZWZpbmUgVlNG
+X0JVSUxEX1RDUFdSQVBQRVJTDQo+ID4gKyAjZGVmaW5lIFZTRl9CVUlMRF9QQU0NCj4gPiArICN1
+bmRlZiBWU0ZfQlVJTERfU1NMDQo+ID4gKw0KPiA+ICstLQ0KPiA+ICsxLjcuMQ0KPiA+ICsNCj4g
+PiBkaWZmIC0tZ2l0IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNm
+dHBkXzMuMC4yLmJiDQo+ID4gYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL3ZzZnRw
+ZC92c2Z0cGRfMy4wLjIuYmINCj4gPiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRl
+eCA5ZDFjMWNjLi4wMDAwMDAwDQo+ID4gLS0tIGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFl
+bW9ucy92c2Z0cGQvdnNmdHBkXzMuMC4yLmJiDQo+ID4gKysrIC9kZXYvbnVsbA0KPiA+IEBAIC0x
+LDEwNyArMCwwIEBADQo+ID4gLVNVTU1BUlkgPSAiVmVyeSBTZWN1cmUgRlRQIHNlcnZlciINCj4g
+PiAtSE9NRVBBR0UgPSAiaHR0cHM6Ly9zZWN1cml0eS5hcHBzcG90LmNvbS92c2Z0cGQuaHRtbCIN
+Cj4gPiAtU0VDVElPTiA9ICJuZXQiDQo+ID4gLUxJQ0VOU0UgPSAiR1BMdjIiDQo+ID4gLUxJQ19G
+SUxFU19DSEtTVU0gPQ0KPiAiZmlsZTovL0NPUFlJTkc7bWQ1PWE2MDY3YWQ5NTBiMjgzMzY2MTNh
+ZWQ5ZGQ0N2IxMjcxIg0KPiA+IC0NCj4gPiAtREVQRU5EUyA9ICJsaWJjYXAgb3BlbnNzbCINCj4g
+PiAtDQo+ID4gLVNSQ19VUkkgPSAiaHR0cHM6Ly9zZWN1cml0eS5hcHBzcG90LmNvbS9kb3dubG9h
+ZHMvdnNmdHBkLSR7UFZ9LnRhci5neiBcDQo+ID4gLSAgICAgICAgICAgZmlsZTovL21ha2VmaWxl
+LWRlc3RkaXIucGF0Y2ggXA0KPiA+IC0gICAgICAgICAgIGZpbGU6Ly9tYWtlZmlsZS1saWJzLnBh
+dGNoIFwNCj4gPiAtICAgICAgICAgICBmaWxlOi8vbWFrZWZpbGUtc3RyaXAucGF0Y2ggXA0KPiA+
+IC0gICAgICAgICAgIGZpbGU6Ly9pbml0IFwNCj4gPiAtICAgICAgICAgICBmaWxlOi8vdnNmdHBk
+LmNvbmYgXA0KPiA+IC0gICAgICAgICAgIGZpbGU6Ly92c2Z0cGQudXNlcl9saXN0IFwNCj4gPiAt
+ICAgICAgICAgICBmaWxlOi8vdnNmdHBkLmZ0cHVzZXJzIFwNCj4gPiAtICAgICAgICAgICBmaWxl
+Oi8vY2hhbmdlLXNlY3VyZV9jaHJvb3RfZGlyLnBhdGNoIFwNCj4gPiAtICAgICAgICAgICBmaWxl
+Oi8vdm9sYXRpbGVzLjk5X3ZzZnRwZCBcDQo+ID4gLSAgICAgICAgICAgZmlsZTovL3ZzZnRwZC5z
+ZXJ2aWNlIFwNCj4gPiAtICAgICAgICAgICBmaWxlOi8vdnNmdHBkLTIuMS4wLWZpbHRlci5wYXRj
+aCBcDQo+ID4gLSINCj4gPiAtDQo+ID4gLUxJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTovL0NPUFlJ
+Tkc7bWQ1PWE2MDY3YWQ5NTBiMjgzMzY2MTNhZWQ5ZGQ0N2IxMjcxDQo+IFwNCj4gPiAtDQo+IGZp
+bGU6Ly9DT1BZUklHSFQ7bWQ1PTA0MjUxYjJlYjBmMjk4ZGFlMzc2ZDkyNDU0ZjZmNzJlIFwNCj4g
+PiAtDQo+IGZpbGU6Ly9MSUNFTlNFO21kNT02NTRkZjIwNDJkNDRiOGNhYzhhNTY1NGZjNWJlNjNl
+YiINCj4gPiAtU1JDX1VSSVttZDVzdW1dID0gIjhiMDBjNzQ5NzE5MDg5NDAxMzE1YmQzYzQ0ZGRk
+YmIyIg0KPiA+IC1TUkNfVVJJW3NoYTI1NnN1bV0gPQ0KPiAiYmU0NmYwZTJjNTUyOGZlMDIxZmFm
+YzhkYWIxZWNmZWEwYzFmMTgzMDYzYTA2OTc3Zjg1MzdmY2QwYjE5NWU1NiINCj4gPiAtDQo+ID4g
+LQ0KPiA+IC1QQUNLQUdFQ09ORklHID8/PSAidGNwLXdyYXBwZXJzIg0KPiA+IC1QQUNLQUdFQ09O
+RklHW3RjcC13cmFwcGVyc10gPSAiLCx0Y3Atd3JhcHBlcnMiDQo+ID4gLVNSQ19VUkkgKz0iJHtA
+YmFzZV9jb250YWlucygnUEFDS0FHRUNPTkZJRycsICd0Y3Atd3JhcHBlcnMnLA0KPiAnZmlsZTov
+L3ZzZnRwZC10Y3Bfd3JhcHBlcnMtc3VwcG9ydC5wYXRjaCcsICcnLCBkKX0iDQo+ID4gLQ0KPiA+
+IC1ERVBFTkRTICs9ICIke0BiYXNlX2NvbnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCAncGFtJywg
+J2xpYnBhbScsICcnLCBkKX0iDQo+ID4gLVJERVBFTkRTXyR7UE59ICs9ICIke0BiYXNlX2NvbnRh
+aW5zKCdESVNUUk9fRkVBVFVSRVMnLCAncGFtJywNCj4gJ3BhbS1wbHVnaW4tbGlzdGZpbGUnLCAn
+JywgZCl9Ig0KPiA+IC1QQU1MSUIgPSAiJHtAYmFzZV9jb250YWlucygnRElTVFJPX0ZFQVRVUkVT
+JywgJ3BhbScsDQo+ICctTCR7U1RBR0lOR19CQVNFTElCRElSfSAtbHBhbScsICcnLCBkKX0iDQo+
+ID4gLU5PUEFNX1NSQyA9IiR7QGJhc2VfY29udGFpbnMoJ1BBQ0tBR0VDT05GSUcnLCAndGNwLXdy
+YXBwZXJzJywNCj4gJ2ZpbGU6Ly9ub3BhbS13aXRoLXRjcF93cmFwcGVycy5wYXRjaCcsICdmaWxl
+Oi8vbm9wYW0ucGF0Y2gnLCBkKX0iDQo+ID4gLVNSQ19VUkkgKz0gIiR7QGJhc2VfY29udGFpbnMo
+J0RJU1RST19GRUFUVVJFUycsICdwYW0nLCAnJywgJyR7Tk9QQU1fU1JDfScsDQo+IGQpfSINCj4g
+PiAtDQo+ID4gLWluaGVyaXQgdXBkYXRlLXJjLmQgdXNlcmFkZCBzeXN0ZW1kDQo+ID4gLQ0KPiA+
+IC1DT05GRklMRVNfJHtQTn0gPSAiJHtzeXNjb25mZGlyfS92c2Z0cGQuY29uZiINCj4gPiAtTERG
+TEFHU19hcHBlbmQgPSIgLWxjcnlwdCAtbGNhcCINCj4gPiAtDQo+ID4gLWRvX2NvbmZpZ3VyZSgp
+IHsNCj4gPiAtICAgICMgRml4IGhhcmRjb2RlZCAvdXNyLCAvZXRjLCAvdmFyIG1lc3MuDQo+ID4g
+LSAgICBjYXQgdHVuYWJsZXMuY3xzZWQgczpcIi91c3I6XCIke3ByZWZpeH06Z3xzZWQgczpcIi92
+YXI6XCIke2xvY2Fsc3RhdGVkaXJ9OmcgXA0KPiA+IC0gICAgfHNlZCBzOlwiL2V0YzpcIiR7c3lz
+Y29uZmRpcn06ZyA+IHR1bmFibGVzLmMubmV3DQo+ID4gLSAgICBtdiB0dW5hYmxlcy5jLm5ldyB0
+dW5hYmxlcy5jDQo+ID4gLX0NCj4gPiAtDQo+ID4gLWRvX2NvbXBpbGUoKSB7DQo+ID4gLSAgIG9l
+X3J1bm1ha2UgIkxJQlM9LUwke1NUQUdJTkdfTElCRElSfSAtbGNyeXB0IC1sY2FwICR7UEFNTElC
+fSAtbHdyYXAiDQo+ID4gLX0NCj4gPiAtDQo+ID4gLWRvX2luc3RhbGwoKSB7DQo+ID4gLSAgICBp
+bnN0YWxsIC1kICR7RH0ke3NiaW5kaXJ9DQo+ID4gLSAgICBpbnN0YWxsIC1kICR7RH0ke21hbmRp
+cn0vbWFuOA0KPiA+IC0gICAgaW5zdGFsbCAtZCAke0R9JHttYW5kaXJ9L21hbjUNCj4gPiAtICAg
+IG9lX3J1bm1ha2UgJ0RFU1RESVI9JHtEfScgaW5zdGFsbA0KPiA+IC0gICAgaW5zdGFsbCAtZCAk
+e0R9JHtzeXNjb25mZGlyfQ0KPiA+IC0gICAgaW5zdGFsbCAtbSA2MDAgJHtXT1JLRElSfS92c2Z0
+cGQuY29uZiAke0R9JHtzeXNjb25mZGlyfS92c2Z0cGQuY29uZg0KPiA+IC0gICAgaW5zdGFsbCAt
+ZCAke0R9JHtzeXNjb25mZGlyfS9pbml0LmQvDQo+ID4gLSAgICBpbnN0YWxsIC1tIDc1NSAke1dP
+UktESVJ9L2luaXQgJHtEfSR7c3lzY29uZmRpcn0vaW5pdC5kL3ZzZnRwZA0KPiA+IC0gICAgaW5z
+dGFsbCAtZCAke0R9LyR7c3lzY29uZmRpcn0vZGVmYXVsdC92b2xhdGlsZXMNCj4gPiAtICAgIGlu
+c3RhbGwgLW0gNjQ0ICR7V09SS0RJUn0vdm9sYXRpbGVzLjk5X3ZzZnRwZA0KPiAke0R9LyR7c3lz
+Y29uZmRpcn0vZGVmYXVsdC92b2xhdGlsZXMvOTlfdnNmdHBkDQo+ID4gLQ0KPiA+IC0gICAgaW5z
+dGFsbCAtbSA2MDAgJHtXT1JLRElSfS92c2Z0cGQuZnRwdXNlcnMgJHtEfSR7c3lzY29uZmRpcn0v
+DQo+ID4gLSAgICBpbnN0YWxsIC1tIDYwMCAke1dPUktESVJ9L3ZzZnRwZC51c2VyX2xpc3QgJHtE
+fSR7c3lzY29uZmRpcn0vDQo+ID4gLSAgICBpZiAhIHRlc3QgLXogIiR7UEFNTElCfSIgOyB0aGVu
+DQo+ID4gLSAgICAgICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS9wYW0uZC8NCj4gPiAt
+ICAgICAgICBjcCAke1N9L1JlZEhhdC92c2Z0cGQucGFtICR7RH0ke3N5c2NvbmZkaXJ9L3BhbS5k
+L3ZzZnRwZA0KPiA+IC0gICAgICAgIHNlZCAtaSAiczovbGliL3NlY3VyaXR5OiR7YmFzZV9saWJk
+aXJ9L3NlY3VyaXR5OiINCj4gJHtEfSR7c3lzY29uZmRpcn0vcGFtLmQvdnNmdHBkDQo+ID4gLSAg
+ICAgICAgc2VkIC1pICJzOmZ0cHVzZXJzOnZzZnRwZC5mdHB1c2VyczoiICR7RH0ke3N5c2NvbmZk
+aXJ9L3BhbS5kL3ZzZnRwZA0KPiA+IC0gICAgZmkNCj4gPiAtICAgIGlmICR7QGJhc2VfY29udGFp
+bnMoJ0RJU1RST19GRUFUVVJFUycsICdzeXN0ZW1kJywgJ3RydWUnLCAnZmFsc2UnLCBkKX07IHRo
+ZW4NCj4gPiAtICAgICAgICBpbnN0YWxsIC1kICR7RH0ke3N5c2NvbmZkaXJ9L3RtcGZpbGVzLmQN
+Cj4gPiAtICAgICAgICBlY2hvICJkIC92YXIvcnVuL3ZzZnRwZC9lbXB0eSAwNzU1IHJvb3Qgcm9v
+dCAtIiBcDQo+ID4gLSAgICAgICAgPiAke0R9JHtzeXNjb25mZGlyfS90bXBmaWxlcy5kLyR7QlBO
+fS5jb25mDQo+ID4gLSAgICBmaQ0KPiA+IC0NCj4gPiAtICAgICMgSW5zdGFsbCBzeXN0ZW1kIHVu
+aXQgZmlsZXMNCj4gPiAtICAgIGluc3RhbGwgLWQgJHtEfSR7c3lzdGVtZF91bml0ZGlyfS9zeXN0
+ZW0NCj4gPiAtICAgIGluc3RhbGwgLW0gMDY0NCAke1dPUktESVJ9L3ZzZnRwZC5zZXJ2aWNlICR7
+RH0ke3N5c3RlbWRfdW5pdGRpcn0vc3lzdGVtDQo+ID4gLSAgICBzZWQgLWkgLWUgJ3MjQFNCSU5E
+SVJAIyR7c2JpbmRpcn0jZycNCj4gJHtEfSR7c3lzdGVtZF91bml0ZGlyfS9zeXN0ZW0vdnNmdHBk
+LnNlcnZpY2UNCj4gPiAtfQ0KPiA+IC0NCj4gPiAtSU5JVFNDUklQVF9QQUNLQUdFUyA9ICIke1BO
+fSINCj4gPiAtSU5JVFNDUklQVF9OQU1FXyR7UE59ID0gInZzZnRwZCINCj4gPiAtSU5JVFNDUklQ
+VF9QQVJBTVNfJHtQTn0gPSAiZGVmYXVsdHMgODAiDQo+ID4gLQ0KPiA+IC1VU0VSQUREX1BBQ0tB
+R0VTID0gIiR7UE59Ig0KPiA+IC1VU0VSQUREX1BBUkFNXyR7UE59ID0gIi0tc3lzdGVtIC0taG9t
+ZS1kaXIgL3Zhci9saWIvZnRwIC0tbm8tY3JlYXRlLWhvbWUgLWcgZnRwIFwNCj4gPiAtICAgICAg
+ICAgICAgICAgICAgICAgICAtLXNoZWxsIC9iaW4vZmFsc2UgZnRwICINCj4gPiAtR1JPVVBBRERf
+UEFSQU1fJHtQTn0gPSAiLXIgZnRwIg0KPiA+IC0NCj4gPiAtU1lTVEVNRF9TRVJWSUNFXyR7UE59
+ID0gInZzZnRwZC5zZXJ2aWNlIg0KPiA+IC0NCj4gPiAtcGtnX3Bvc3RpbnN0XyR7UE59KCkgew0K
+PiA+IC0gICAgaWYgWyAteiAiJEQiIF07IHRoZW4NCj4gPiAtCWlmIHR5cGUgc3lzdGVtZC10bXBm
+aWxlcyA+L2Rldi9udWxsOyB0aGVuDQo+ID4gLQkgICAgc3lzdGVtZC10bXBmaWxlcyAtLWNyZWF0
+ZQ0KPiA+IC0JZWxpZiBbIC1lICR7c3lzY29uZmRpcn0vaW5pdC5kL3BvcHVsYXRlLXZvbGF0aWxl
+LnNoIF07IHRoZW4NCj4gPiAtCSAgICAke3N5c2NvbmZkaXJ9L2luaXQuZC9wb3B1bGF0ZS12b2xh
+dGlsZS5zaCB1cGRhdGUNCj4gPiAtCWZpDQo+ID4gLSAgICBmaQ0KPiA+IC19DQo+ID4gZGlmZiAt
+LWdpdCBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvdnNmdHBkL3ZzZnRwZF8zLjAu
+My5iYg0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy92c2Z0cGQvdnNmdHBk
+XzMuMC4zLmJiDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwLi41
+ODBkYWJlDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNp
+cGVzLWRhZW1vbnMvdnNmdHBkL3ZzZnRwZF8zLjAuMy5iYg0KPiA+IEBAIC0wLDAgKzEsMTA3IEBA
+DQo+ID4gK1NVTU1BUlkgPSAiVmVyeSBTZWN1cmUgRlRQIHNlcnZlciINCj4gPiArSE9NRVBBR0Ug
+PSAiaHR0cHM6Ly9zZWN1cml0eS5hcHBzcG90LmNvbS92c2Z0cGQuaHRtbCINCj4gPiArU0VDVElP
+TiA9ICJuZXQiDQo+ID4gK0xJQ0VOU0UgPSAiR1BMdjIiDQo+ID4gK0xJQ19GSUxFU19DSEtTVU0g
+PQ0KPiAiZmlsZTovL0NPUFlJTkc7bWQ1PWE2MDY3YWQ5NTBiMjgzMzY2MTNhZWQ5ZGQ0N2IxMjcx
+Ig0KPiA+ICsNCj4gPiArREVQRU5EUyA9ICJsaWJjYXAgb3BlbnNzbCINCj4gPiArDQo+ID4gK1NS
+Q19VUkkgPSAiaHR0cHM6Ly9zZWN1cml0eS5hcHBzcG90LmNvbS9kb3dubG9hZHMvdnNmdHBkLSR7
+UFZ9LnRhci5neiBcDQo+ID4gKyAgICAgICAgICAgZmlsZTovL21ha2VmaWxlLWRlc3RkaXIucGF0
+Y2ggXA0KPiA+ICsgICAgICAgICAgIGZpbGU6Ly9tYWtlZmlsZS1saWJzLnBhdGNoIFwNCj4gPiAr
+ICAgICAgICAgICBmaWxlOi8vbWFrZWZpbGUtc3RyaXAucGF0Y2ggXA0KPiA+ICsgICAgICAgICAg
+IGZpbGU6Ly9pbml0IFwNCj4gPiArICAgICAgICAgICBmaWxlOi8vdnNmdHBkLmNvbmYgXA0KPiA+
+ICsgICAgICAgICAgIGZpbGU6Ly92c2Z0cGQudXNlcl9saXN0IFwNCj4gPiArICAgICAgICAgICBm
+aWxlOi8vdnNmdHBkLmZ0cHVzZXJzIFwNCj4gPiArICAgICAgICAgICBmaWxlOi8vY2hhbmdlLXNl
+Y3VyZV9jaHJvb3RfZGlyLnBhdGNoIFwNCj4gPiArICAgICAgICAgICBmaWxlOi8vdm9sYXRpbGVz
+Ljk5X3ZzZnRwZCBcDQo+ID4gKyAgICAgICAgICAgZmlsZTovL3ZzZnRwZC5zZXJ2aWNlIFwNCj4g
+PiArICAgICAgICAgICBmaWxlOi8vdnNmdHBkLTIuMS4wLWZpbHRlci5wYXRjaCBcICINCj4gPiAr
+DQo+ID4gK0xJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTovL0NPUFlJTkc7bWQ1PWE2MDY3YWQ5NTBi
+MjgzMzY2MTNhZWQ5ZGQ0N2IxMjcxDQo+IFwNCj4gPiArDQo+IGZpbGU6Ly9DT1BZUklHSFQ7bWQ1
+PTA0MjUxYjJlYjBmMjk4ZGFlMzc2ZDkyNDU0ZjZmNzJlIFwNCj4gPiArDQo+IGZpbGU6Ly9MSUNF
+TlNFO21kNT02NTRkZjIwNDJkNDRiOGNhYzhhNTY1NGZjNWJlNjNlYiINCj4gPiArU1JDX1VSSVtt
+ZDVzdW1dID0gImRhMTE5ZDA4NGJkM2Y5ODY2NDYzNmVhMDViNWJiMzk4Ig0KPiA+ICtTUkNfVVJJ
+W3NoYTI1NnN1bV0gPQ0KPiAiOWQ0ZDJiZjZlNmUyODg0ODUyYmE0ZTY5ZTE1N2EyY2VjZDY4YzVh
+NzYzNWQ2NmEzYThjZjhkODk4Yzk1NWVmNyINCj4gPiArDQo+ID4gKw0KPiA+ICtQQUNLQUdFQ09O
+RklHID8/PSAidGNwLXdyYXBwZXJzIg0KPiA+ICtQQUNLQUdFQ09ORklHW3RjcC13cmFwcGVyc10g
+PSAiLCx0Y3Atd3JhcHBlcnMiDQo+ID4gK1NSQ19VUkkgKz0iJHtAYmFzZV9jb250YWlucygnUEFD
+S0FHRUNPTkZJRycsICd0Y3Atd3JhcHBlcnMnLA0KPiAnZmlsZTovL3ZzZnRwZC10Y3Bfd3JhcHBl
+cnMtc3VwcG9ydC5wYXRjaCcsICcnLCBkKX0iDQo+ID4gKw0KPiA+ICtERVBFTkRTICs9ICIke0Bi
+YXNlX2NvbnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCAncGFtJywgJ2xpYnBhbScsICcnLCBkKX0i
+DQo+ID4gK1JERVBFTkRTXyR7UE59ICs9ICIke0BiYXNlX2NvbnRhaW5zKCdESVNUUk9fRkVBVFVS
+RVMnLCAncGFtJywNCj4gJ3BhbS1wbHVnaW4tbGlzdGZpbGUnLCAnJywgZCl9Ig0KPiA+ICtQQU1M
+SUIgPSAiJHtAYmFzZV9jb250YWlucygnRElTVFJPX0ZFQVRVUkVTJywgJ3BhbScsDQo+ICctTCR7
+U1RBR0lOR19CQVNFTElCRElSfSAtbHBhbScsICcnLCBkKX0iDQo+ID4gK05PUEFNX1NSQyA9IiR7
+QGJhc2VfY29udGFpbnMoJ1BBQ0tBR0VDT05GSUcnLCAndGNwLXdyYXBwZXJzJywNCj4gJ2ZpbGU6
+Ly9ub3BhbS13aXRoLXRjcF93cmFwcGVycy5wYXRjaCcsICdmaWxlOi8vbm9wYW0ucGF0Y2gnLCBk
+KX0iDQo+ID4gK1NSQ19VUkkgKz0gIiR7QGJhc2VfY29udGFpbnMoJ0RJU1RST19GRUFUVVJFUycs
+ICdwYW0nLCAnJywgJyR7Tk9QQU1fU1JDfScsDQo+IGQpfSINCj4gPiArDQo+ID4gK2luaGVyaXQg
+dXBkYXRlLXJjLmQgdXNlcmFkZCBzeXN0ZW1kDQo+ID4gKw0KPiA+ICtDT05GRklMRVNfJHtQTn0g
+PSAiJHtzeXNjb25mZGlyfS92c2Z0cGQuY29uZiINCj4gPiArTERGTEFHU19hcHBlbmQgPSIgLWxj
+cnlwdCAtbGNhcCINCj4gPiArDQo+ID4gK2RvX2NvbmZpZ3VyZSgpIHsNCj4gPiArICAgICMgRml4
+IGhhcmRjb2RlZCAvdXNyLCAvZXRjLCAvdmFyIG1lc3MuDQo+ID4gKyAgICBjYXQgdHVuYWJsZXMu
+Y3xzZWQgczpcIi91c3I6XCIke3ByZWZpeH06Z3xzZWQgczpcIi92YXI6XCIke2xvY2Fsc3RhdGVk
+aXJ9OmcgXA0KPiA+ICsgICAgfHNlZCBzOlwiL2V0YzpcIiR7c3lzY29uZmRpcn06ZyA+IHR1bmFi
+bGVzLmMubmV3DQo+ID4gKyAgICBtdiB0dW5hYmxlcy5jLm5ldyB0dW5hYmxlcy5jDQo+ID4gK30N
+Cj4gPiArDQo+ID4gK2RvX2NvbXBpbGUoKSB7DQo+ID4gKyAgIG9lX3J1bm1ha2UgIkxJQlM9LUwk
+e1NUQUdJTkdfTElCRElSfSAtbGNyeXB0IC1sY2FwICR7UEFNTElCfSAtbHdyYXAiDQo+ID4gK30N
+Cj4gPiArDQo+ID4gK2RvX2luc3RhbGwoKSB7DQo+ID4gKyAgICBpbnN0YWxsIC1kICR7RH0ke3Ni
+aW5kaXJ9DQo+ID4gKyAgICBpbnN0YWxsIC1kICR7RH0ke21hbmRpcn0vbWFuOA0KPiA+ICsgICAg
+aW5zdGFsbCAtZCAke0R9JHttYW5kaXJ9L21hbjUNCj4gPiArICAgIG9lX3J1bm1ha2UgJ0RFU1RE
+SVI9JHtEfScgaW5zdGFsbA0KPiA+ICsgICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfQ0K
+PiA+ICsgICAgaW5zdGFsbCAtbSA2MDAgJHtXT1JLRElSfS92c2Z0cGQuY29uZiAke0R9JHtzeXNj
+b25mZGlyfS92c2Z0cGQuY29uZg0KPiA+ICsgICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGly
+fS9pbml0LmQvDQo+ID4gKyAgICBpbnN0YWxsIC1tIDc1NSAke1dPUktESVJ9L2luaXQgJHtEfSR7
+c3lzY29uZmRpcn0vaW5pdC5kL3ZzZnRwZA0KPiA+ICsgICAgaW5zdGFsbCAtZCAke0R9LyR7c3lz
+Y29uZmRpcn0vZGVmYXVsdC92b2xhdGlsZXMNCj4gPiArICAgIGluc3RhbGwgLW0gNjQ0ICR7V09S
+S0RJUn0vdm9sYXRpbGVzLjk5X3ZzZnRwZA0KPiA+ICske0R9LyR7c3lzY29uZmRpcn0vZGVmYXVs
+dC92b2xhdGlsZXMvOTlfdnNmdHBkDQo+ID4gKw0KPiA+ICsgICAgaW5zdGFsbCAtbSA2MDAgJHtX
+T1JLRElSfS92c2Z0cGQuZnRwdXNlcnMgJHtEfSR7c3lzY29uZmRpcn0vDQo+ID4gKyAgICBpbnN0
+YWxsIC1tIDYwMCAke1dPUktESVJ9L3ZzZnRwZC51c2VyX2xpc3QgJHtEfSR7c3lzY29uZmRpcn0v
+DQo+ID4gKyAgICBpZiAhIHRlc3QgLXogIiR7UEFNTElCfSIgOyB0aGVuDQo+ID4gKyAgICAgICAg
+aW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS9wYW0uZC8NCj4gPiArICAgICAgICBjcCAke1N9
+L1JlZEhhdC92c2Z0cGQucGFtICR7RH0ke3N5c2NvbmZkaXJ9L3BhbS5kL3ZzZnRwZA0KPiA+ICsg
+ICAgICAgIHNlZCAtaSAiczovbGliL3NlY3VyaXR5OiR7YmFzZV9saWJkaXJ9L3NlY3VyaXR5OiIN
+Cj4gJHtEfSR7c3lzY29uZmRpcn0vcGFtLmQvdnNmdHBkDQo+ID4gKyAgICAgICAgc2VkIC1pICJz
+OmZ0cHVzZXJzOnZzZnRwZC5mdHB1c2VyczoiICR7RH0ke3N5c2NvbmZkaXJ9L3BhbS5kL3ZzZnRw
+ZA0KPiA+ICsgICAgZmkNCj4gPiArICAgIGlmICR7QGJhc2VfY29udGFpbnMoJ0RJU1RST19GRUFU
+VVJFUycsICdzeXN0ZW1kJywgJ3RydWUnLCAnZmFsc2UnLCBkKX07IHRoZW4NCj4gPiArICAgICAg
+ICBpbnN0YWxsIC1kICR7RH0ke3N5c2NvbmZkaXJ9L3RtcGZpbGVzLmQNCj4gPiArICAgICAgICBl
+Y2hvICJkIC92YXIvcnVuL3ZzZnRwZC9lbXB0eSAwNzU1IHJvb3Qgcm9vdCAtIiBcDQo+ID4gKyAg
+ICAgICAgPiAke0R9JHtzeXNjb25mZGlyfS90bXBmaWxlcy5kLyR7QlBOfS5jb25mDQo+ID4gKyAg
+ICBmaQ0KPiA+ICsNCj4gPiArICAgICMgSW5zdGFsbCBzeXN0ZW1kIHVuaXQgZmlsZXMNCj4gPiAr
+ICAgIGluc3RhbGwgLWQgJHtEfSR7c3lzdGVtZF91bml0ZGlyfS9zeXN0ZW0NCj4gPiArICAgIGlu
+c3RhbGwgLW0gMDY0NCAke1dPUktESVJ9L3ZzZnRwZC5zZXJ2aWNlICR7RH0ke3N5c3RlbWRfdW5p
+dGRpcn0vc3lzdGVtDQo+ID4gKyAgICBzZWQgLWkgLWUgJ3MjQFNCSU5ESVJAIyR7c2JpbmRpcn0j
+ZycNCj4gPiArJHtEfSR7c3lzdGVtZF91bml0ZGlyfS9zeXN0ZW0vdnNmdHBkLnNlcnZpY2UNCj4g
+PiArfQ0KPiA+ICsNCj4gPiArSU5JVFNDUklQVF9QQUNLQUdFUyA9ICIke1BOfSINCj4gPiArSU5J
+VFNDUklQVF9OQU1FXyR7UE59ID0gInZzZnRwZCINCj4gPiArSU5JVFNDUklQVF9QQVJBTVNfJHtQ
+Tn0gPSAiZGVmYXVsdHMgODAiDQo+ID4gKw0KPiA+ICtVU0VSQUREX1BBQ0tBR0VTID0gIiR7UE59
+Ig0KPiA+ICtVU0VSQUREX1BBUkFNXyR7UE59ID0gIi0tc3lzdGVtIC0taG9tZS1kaXIgL3Zhci9s
+aWIvZnRwIC0tbm8tY3JlYXRlLWhvbWUgLWcgZnRwIFwNCj4gPiArICAgICAgICAgICAgICAgICAg
+ICAgICAtLXNoZWxsIC9iaW4vZmFsc2UgZnRwICINCj4gPiArR1JPVVBBRERfUEFSQU1fJHtQTn0g
+PSAiLXIgZnRwIg0KPiA+ICsNCj4gPiArU1lTVEVNRF9TRVJWSUNFXyR7UE59ID0gInZzZnRwZC5z
+ZXJ2aWNlIg0KPiA+ICsNCj4gPiArcGtnX3Bvc3RpbnN0XyR7UE59KCkgew0KPiA+ICsgICAgaWYg
+WyAteiAiJEQiIF07IHRoZW4NCj4gPiArCWlmIHR5cGUgc3lzdGVtZC10bXBmaWxlcyA+L2Rldi9u
+dWxsOyB0aGVuDQo+ID4gKwkgICAgc3lzdGVtZC10bXBmaWxlcyAtLWNyZWF0ZQ0KPiA+ICsJZWxp
+ZiBbIC1lICR7c3lzY29uZmRpcn0vaW5pdC5kL3BvcHVsYXRlLXZvbGF0aWxlLnNoIF07IHRoZW4N
+Cj4gPiArCSAgICAke3N5c2NvbmZkaXJ9L2luaXQuZC9wb3B1bGF0ZS12b2xhdGlsZS5zaCB1cGRh
+dGUNCj4gPiArCWZpDQo+ID4gKyAgICBmaQ0KPiA+ICt9DQo+ID4NCj4gDQo+IC0tDQo+IEJlc3Qg
+UmVhZ3JkcywNCj4gUm95IHwgUm9uZ1FpbmcgTGkNCj4gLS0NCj4gX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxp
+bmcgbGlzdA0KPiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBo
+dHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRl
+ZC1kZXZlbA0K
 
