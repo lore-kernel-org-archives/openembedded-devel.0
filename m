@@ -1,27 +1,29 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 10C0F7652D
+	by mail.openembedded.org (Postfix) with ESMTP id BEFC076531
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 02:47:51 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99103031"
+	Fri, 31 Jul 2015 02:47:54 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99103035"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2015 10:51:23 +0800
+	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2015 10:51:25 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6V2jwx8014000
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6V2k0D8014010
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 10:45:58 +0800
+	Fri, 31 Jul 2015 10:46:00 +0800
 Received: from localhost.localdomain (10.167.226.26) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 31 Jul 2015 10:47:49 +0800
+	Server (TLS) id 14.3.181.6; Fri, 31 Jul 2015 10:47:51 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 31 Jul 2015 10:47:36 +0800
-Message-ID: <1438310864-15716-1-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Fri, 31 Jul 2015 10:47:38 +0800
+Message-ID: <1438310864-15716-3-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1438310864-15716-1-git-send-email-leimaohui@cn.fujitsu.com>
+References: <1438310864-15716-1-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH v3 0/8] add openlmi and it's depends
+Subject: [meta-oe][PATCH v3 2/8] sblim-cmpi-devel: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,88 +37,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2015 02:47:54 -0000
+X-List-Received-Date: Fri, 31 Jul 2015 02:47:55 -0000
 Content-Type: text/plain
 
-OpenLMI  = Open Linux Management Infrastructure.
-OpenLMI is open-source project aiming to improve management of Linux systems using WBEM standards.
+sblim-cmpi-devel is dependence of cmpi-bindings.
 
-Lei Maohui (8):
-  pywbem:add new recipe
-  sblim-cmpi-devel: add  new recipe
-  cmpi-bindings: add new recipe
-  konkretcmpi: add new recipe for openlmi
-  sblim-sfcCommon: add new recipe
-  sblim-sfcb: add new recipe for openlmi
-  cim-schema-exper: add new recipe for openlmi
-  openlmi: add openlmi and it's depends
-
- .../cim-schema/cim-schema-exper_2.39.0.bb          |  26 ++
- .../cim-schema/cim-schema-final_2.40.0.bb          |  31 +++
- .../cim-schema/cim-schema/files/LICENSE            |  34 +++
- .../cim-schema/cim-schema_2.40.0.bb                |  31 ---
- .../cmpi-bindings/0001-Fix-error.patch             |  26 ++
- .../cmpi-bindings/0001-Modify-cmakelist.patch      |  41 ++++
- .../0001-fix-build-error-when-the-swig-3.0.6.patch | 268 +++++++++++++++++++++
- .../0001-fix-the-build-error-when-python-3.0.patch |  31 +++
- .../cmpi-bindings-0.4.17-no-ruby-perl.patch        |  44 ++++
- .../cmpi-bindings-0.4.17-sblim-sigsegv.patch       |  22 ++
- .../cmpi-bindings-0.9.5-python-lib-dir.patch       |  17 ++
- .../cmpi-bindings/cmpi-bindings_git.bb             |  37 +++
- .../konkretcmpi/konkretcmpi-native_0.9.2.bb        |  27 +++
- ...-0.9.2-fix-returning-instance-from-method.patch |  38 +++
- .../konkretcmpi/konkretcmpi_0.9.2.bb               |  32 +++
- .../openlmi/openlmi-networking_0.3.1.bb            |  29 +++
- .../openlmi/openlmi-providers/0001-fix-error.patch |  26 ++
- .../openlmi/openlmi-providers_0.6.0.bb             |  54 +++++
- .../openlmi/openlmi-storage_0.8.1.bb               |  31 +++
- .../openlmi/openlmi-tools_0.10.5.bb                |  23 ++
- meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb    |  36 +++
- .../sblim-cmpi-devel-2.0.3-docdir.patch            |  17 ++
- .../sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb     |  18 ++
- .../sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb       |  25 ++
- .../recipes-extended/sblim-sfcb/files/sfcb.service |  11 +
- .../sblim-sfcb-1.3.15-fix-provider-debugging.patch |  12 +
- .../sblim-sfcb-1.3.16-maxMsgLen.patch              |  14 ++
- .../sblim-sfcb-1.3.16-multilib-man-cfg.patch       |  41 ++++
- ...blim-sfcb-1.3.9-sfcbrepos-schema-location.patch |  42 ++++
- .../sblim-sfcb-1.4.5-service.patch                 |  27 +++
- .../sblim-sfcb-1.4.8-default-ecdh-curve-name.patch |  26 ++
- .../sblim-sfcb/sblim-sfcb_1.4.8.bb                 |  82 +++++++
- 32 files changed, 1188 insertions(+), 31 deletions(-)
- create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
- create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
- create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
- delete mode 100644 meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Fix-error.patch
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Modify-cmakelist.patch
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-build-error-when-the-swig-3.0.6.patch
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-the-build-error-when-python-3.0.patch
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-no-ruby-perl.patch
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-sblim-sigsegv.patch
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.9.5-python-lib-dir.patch
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
- create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
- create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-method.patch
- create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
- create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-networking_0.3.1.bb
- create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-providers/0001-fix-error.patch
- create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb
- create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb
- create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
- create mode 100644 meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+---
+ .../sblim-cmpi-devel-2.0.3-docdir.patch                | 17 +++++++++++++++++
+ .../sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb         | 18 ++++++++++++++++++
+ 2 files changed, 35 insertions(+)
  create mode 100644 meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel/sblim-cmpi-devel-2.0.3-docdir.patch
  create mode 100644 meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb
- create mode 100644 meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.15-fix-provider-debugging.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-maxMsgLen.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-multilib-man-cfg.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.5-service.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
 
+diff --git a/meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel/sblim-cmpi-devel-2.0.3-docdir.patch b/meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel/sblim-cmpi-devel-2.0.3-docdir.patch
+new file mode 100644
+index 0000000..58940c1
+--- /dev/null
++++ b/meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel/sblim-cmpi-devel-2.0.3-docdir.patch
+@@ -0,0 +1,17 @@
++Port from Fedora20
++
++Upstream-Status: Pending
++Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
++
++diff -up sblim-cmpi-devel-2.0.3/Makefile.in.orig sblim-cmpi-devel-2.0.3/Makefile.in
++--- sblim-cmpi-devel-2.0.3/Makefile.in.orig	2012-07-31 06:11:51.000000000 +0200
+++++ sblim-cmpi-devel-2.0.3/Makefile.in	2013-08-07 18:28:09.600712807 +0200
++@@ -221,7 +221,7 @@ build_vendor = @build_vendor@
++ builddir = @builddir@
++ datadir = @datadir@
++ datarootdir = @datarootdir@
++-docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
+++docdir = $(datadir)/doc/$(PACKAGE)
++ dvidir = @dvidir@
++ exec_prefix = @exec_prefix@
++ host = @host@
+diff --git a/meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb b/meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb
+new file mode 100644
+index 0000000..0e5fc7b
+--- /dev/null
++++ b/meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "SBLIM CMPI Provider Development Support"
++DESCRIPTION = "\
++This packages provides the C and C++ CMPI header files needed by provider \
++developers and can be used standalone. If used for C++ provider development \
++it is also necessary to have tog-pegasus-devel installed."
++HOMEPAGE = "http://sblim.wiki.sourceforge.net/"
++LICENSE = "EPL-1.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=5f63d3a4e701129e869e89d7dcac8982"
++SECTION = "Development/Libraries"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/sblim/${BP}.tar.bz2 \
++           file://sblim-cmpi-devel-2.0.3-docdir.patch"
++SRC_URI[md5sum] = "b934616f88a848f17ca3cf1b9e792cbf"
++SRC_URI[sha256sum] = "1671cabff6b922b6fde897673d9fdafd56c9310f82a7eacc0547d596b9cdfea6"
++
++inherit autotools
++
++BBCLASSEXTEND = "native"
 -- 
 1.8.4.2
 
