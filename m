@@ -1,27 +1,55 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 5500476567
+Return-Path: <sledz@dresearch-fe.de>
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 8871E76504
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 07:32:27 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99112924"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2015 15:35:59 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6V7UYs2031198
+	Fri, 31 Jul 2015 10:47:24 +0000 (UTC)
+Received: by wibxm9 with SMTP id xm9so26639701wib.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2015 15:30:34 +0800
-Received: from localhost.localdomain (10.167.226.26) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 31 Jul 2015 15:32:26 +0800
-From: Lei Maohui <leimaohui@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 31 Jul 2015 15:32:25 +0800
-Message-ID: <1438327945-18711-1-git-send-email-leimaohui@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Fri, 31 Jul 2015 03:47:25 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:resent-from:resent-to:resent-date
+	:resent-message-id:resent-user-agent:to:from:subject:message-id:date
+	:user-agent:mime-version:content-type:content-transfer-encoding;
+	bh=FxuSIRgu2odmdfg4gDDKXJPMTPHG7ZzwjB8dRwTlENE=;
+	b=EYnJKUZVXdBZhpZTjdGCyR81BiXAc80vgJY7WSq59uvRQ3gKK4fp2OzlmEa5qe5CFI
+	xbD15dlV/cXmIFIvgHX6cawsK6hv6JPGubUWGNw1qP8lrxjqa+316Cgrm6khZeLFoVqK
+	Ba0lvE3rpRcaB7muJo06FjsxCeUKTXTsTWQuA2C7gMQnRb8w7TCPYUXUINXwVztFVsZI
+	LWIIzQ/7OEBPO9vzXGfhnHZKQ2d3iIqkpE12MuN0zoHXHEp8RvjhLgiRUEUJwHj3Ye60
+	GsnpomuN2NF/0jPZW//JGnMTR++Z0/a1TecAsxcCSdavjf/zSPg0qTshW+UuzYDT6qbL
+	OP+A==
+X-Gm-Message-State: ALoCoQl0+IS55p3rZDtdJleAY2GnnkTyYmJeRKA5E3joLioO55UJ9T/wYUe+ujzu3yfLxO0CaDJY
+X-Received: by 10.180.9.6 with SMTP id v6mr5688982wia.83.1438339644938;
+	Fri, 31 Jul 2015 03:47:24 -0700 (PDT)
+Received: from [172.29.23.46] (zk223.dresearch-fe.de. [217.92.177.116])
+	by smtp.googlemail.com with ESMTPSA id
+	h9sm6549577wjx.20.2015.07.31.03.47.23
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 31 Jul 2015 03:47:24 -0700 (PDT)
+Resent-From: Steffen Sledz <sledz@dresearch-fe.de>
+Resent-To: openembedded-devel
+ <openembedded-devel@lists.openembedded.org>
+Resent-Date: Fri, 31 Jul 2015 12:47:22 +0200
+Resent-Message-ID: <55BB523A.8080404@dresearch-fe.de>
+Resent-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:38.0) Gecko/20100101 Thunderbird/38.1.0
+Received: from [172.29.23.46] (zk223.dresearch-fe.de. [217.92.177.116])
+	by smtp.googlemail.com with ESMTPSA id
+	iy4sm3341065wic.24.2015.07.31.01.55.16
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 31 Jul 2015 01:55:17 -0700 (PDT)
+To: openembedded-core <openembedded-core@lists.openembedded.org>,
+	Martin Jansa <Martin.Jansa@gmail.com>, Denis Carikli <GNUtoo@no-log.org>
+From: Steffen Sledz <sledz@dresearch-fe.de>
+X-Enigmail-Draft-Status: N1110
+Message-ID: <55BB37F3.9030304@dresearch-fe.de>
+Date: Fri, 31 Jul 2015 10:55:15 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.1.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.26]
-Subject: [meta-python][PATCH] python-decorator: upgrade 3.4.0 -> 3.4.2
+Subject: outdated compat-wireless
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,40 +63,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2015 07:32:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 31 Jul 2015 10:47:25 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
----
- .../python/{python-decorator_3.4.0.bb => python-decorator_3.4.2.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-decorator_3.4.0.bb => python-decorator_3.4.2.bb} (71%)
+meta-openembedded contains a recipe for compat-wireless. According to [1] this is really outdated and replaced by a renamed project called backports[2].
 
-diff --git a/meta-python/recipes-devtools/python/python-decorator_3.4.0.bb b/meta-python/recipes-devtools/python/python-decorator_3.4.2.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python-decorator_3.4.0.bb
-rename to meta-python/recipes-devtools/python/python-decorator_3.4.2.bb
-index 4316630..7031857 100644
---- a/meta-python/recipes-devtools/python/python-decorator_3.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python-decorator_3.4.2.bb
-@@ -9,7 +9,7 @@ decorator, just because you can."
- 
- SECTION = "devel/python"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://documentation3.py;beginline=848;endline=877;md5=0b56661417fb7b841afc8892e14ba241"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=104961fab4bc3ef8d0640bb37641b473"
- 
- SRCNAME = "decorator"
- 
-@@ -18,5 +18,5 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
- 
- inherit setuptools
- 
--SRC_URI[md5sum] = "1e8756f719d746e2fc0dd28b41251356"
--SRC_URI[sha256sum] = "c20b404cbb7ee5cebd506688e0114e3cd76f5ce233805a51f36e1a7988d9d783"
-+SRC_URI[md5sum] = "9e0536870d2b83ae27d58dbf22582f4d"
-+SRC_URI[sha256sum] = "7320002ce61dea6aa24adc945d9d7831b3669553158905cdd12f5d0027b54b44"
+Has anyone tried or plans to replace compat-wireless with this?
+
+[1] <https://wireless.wiki.kernel.org/en/users/Download>
+[2] <https://backports.wiki.kernel.org>
+
 -- 
-1.8.4.2
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
