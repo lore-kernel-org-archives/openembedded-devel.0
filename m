@@ -1,28 +1,36 @@
-Return-Path: <Sean_Hudson@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BF9D765DB;
-	Sat,  1 Aug 2015 03:06:35 +0000 (UTC)
-Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
-	by relay1.mentorg.com with esmtp 
-	id 1ZLN87-0003kF-Km from Sean_Hudson@mentor.com ;
-	Fri, 31 Jul 2015 20:06:35 -0700
-Received: from [172.30.10.227] (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
-	(147.34.97.43) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Fri, 31 Jul 2015 20:06:34 -0700
-To: <openembedded-members@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, openembedded-core
-	<openembedded-core@lists.openembedded.org>, Yocto Project
-	<yocto@yoctoproject.org>
-References: <55BBEF07.1020009@balister.org>
-From: Sean Hudson <sean_hudson@mentor.com>
-Message-ID: <55BC37B9.4010302@mentor.com>
-Date: Fri, 31 Jul 2015 22:06:33 -0500
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101
-	Thunderbird/38.1.0
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B5937656C;
+	Sat,  1 Aug 2015 12:47:18 +0000 (UTC)
+Received: by padck2 with SMTP id ck2so56597158pad.0;
+	Sat, 01 Aug 2015 05:47:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=TeujuYqu5Mz/V8oDBuHxZ3CG8XddhzFiZUUX6mCkki8=;
+	b=kEfw6NUUusmtPR9AOG0KjV60MRp6+LJrcuFyIJ+Pj6PgWbWsN7wW9Ee93FZ/uIiNo0
+	c8GeZG2zAl/XawPwHLJ7slRZw45wgrDNqMqDzehU5V61wATnL5Y5Xr4En4dIni0RQ5wG
+	pGySdEZC/LISegPkKbGa1PcEyPZylPMWrUl56OpJo4A9BYHxGDzFEYJEYAFODQCBAEBp
+	EjGtn8IERnub4pKiSbhzFtV4+h3nTDxBkuAQX4HDYeFN4n1I7E7WqG2vragp27od0OvC
+	vSO11pp0zoBSP65lqsCr2X0KEl4m3QrxgYYEPySnM/PZn4L7PIBjWDjEFTji3XMkkg05
+	yOLg==
 MIME-Version: 1.0
-In-Reply-To: <55BBEF07.1020009@balister.org>
-Subject: Re: OEDEM Oct 9, after ELCE and Yocto Project Developer Day
+X-Received: by 10.69.11.129 with SMTP id ei1mr5824952pbd.167.1438433239343;
+	Sat, 01 Aug 2015 05:47:19 -0700 (PDT)
+Received: by 10.70.65.4 with HTTP; Sat, 1 Aug 2015 05:47:19 -0700 (PDT)
+In-Reply-To: <20150730180140.GN2457@jama>
+References: <20150730180140.GN2457@jama>
+Date: Sat, 1 Aug 2015 14:47:19 +0200
+Message-ID: <CALbNGRTeSPxqOvbxVBtDW6aHk7ncB2CUFDRa9WBVAy0d68S0Pw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2015-07-29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,42 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Aug 2015 03:06:37 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 01 Aug 2015 12:47:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 7/31/2015 4:56 PM, Philip Balister wrote:
-> OpenEmbedded will hold a developer meeting Oct 9 after ELCE and YP dev
-> day in Dublin.
-> 
-> This is a chance for developers and users of OpenEmbedded (The Yocto
-> Project build system) to meet and discuss important project issues.
-> Everyone is welcome to attend. We are planning on about 30 people so do
-> not worry about taking space from someone important.
-> 
-> For people that have not attended one of these, we will collect items on
-> the wiki and try to setup a rough agenda before the event. Please add
-> your thoughts.
-> 
-> If you plan to attend, add your name here:
-> 
-> http://www.openembedded.org/wiki/OEDEM
-> 
-> Also, add items you would like to discuss. It would be great if we could
-> get a good estimate so Jefro can make sure he reserves the correct
-> amount of space. So if you are even thinking of attending add your name
-> with (tentative) after it this weekend.
-> 
-> Thanks,
-> 
-> Philip
-> 
+On Thu, Jul 30, 2015 at 8:01 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> === common (12) ===
+>     * /meta-openembedded/meta-efl/recipes-efl/efl/epdf_svn.bb, do_compile
+>     * /meta-openembedded/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb, do_configure
+>     * /meta-openembedded/meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb, do_compile
+^ Had a short look into this: It is caused by update of libgphoto2.
+Hope to find time this weekend.
+>     * /meta-openembedded/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb, do_compile
+>     * /meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb, do_compile
+>     * /meta-openembedded/meta-networking/recipes-connectivity/crda/crda_3.18.bb, do_compile
+>     * /meta-openembedded/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb, do_compile
+>     * /meta-openembedded/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb, do_fetch
+^ Required patches for this are circulating in master-next. These are
+still matching while writing this.
 
-Although it says it right at the top of the page on the link that Philip
-provided, I want to highlight it on the list.  During this OEDEM, we
-will also have the OE General Assembly, per the e.V. statues.  So, don't
-forget to get your proxies in place ahead of time!
-
--- 
-Sean
+Andreas
 
