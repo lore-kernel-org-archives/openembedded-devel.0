@@ -1,36 +1,38 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-yk0-f181.google.com (mail-yk0-f181.google.com
-	[209.85.160.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 6088C74245
+Received: from mail-yk0-f177.google.com (mail-yk0-f177.google.com
+	[209.85.160.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 96178755F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Aug 2015 00:49:22 +0000 (UTC)
-Received: by ykax123 with SMTP id x123so98927127yka.1
+	Mon,  3 Aug 2015 00:49:30 +0000 (UTC)
+Received: by ykax123 with SMTP id x123so98928677yka.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Aug 2015 17:49:22 -0700 (PDT)
+	Sun, 02 Aug 2015 17:49:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=BG8zrnBwdHTm8JipXAtcEoKkjpnQ1rJ/lSVA7Am6y7E=;
-	b=ewMylJLVpZqpB5FCg3Tksn1ry/aKm1f8cOWjzv8DAhEE+C03JSkTNfutGZmqWrZrYZ
-	FflNz+j3wlzGpjNyxUmnedcMtO+/hNaz5wmbpVyErUO7mwuyigf6OVnUwtiN8v9fhz1u
-	qE9+IqnVEMSwCAQjD7ULOBCfYiNGMFxRjSjBMTx6Ddbyk+u/VOTBpXqPJ7WsXCWKJmjq
-	dIatnd+HbcvaYnElB4vhWjk3XfTKe3ykngAhpO3MAxyC2Kp4qeKvpA4Ai7PdF8UKTCgV
-	DRzd5J4KzPU5w+PWxFgRo8RQlC68AaqS+T9S7393FoCk2EYuMroty90rDJ0XY8Wh8/8i
-	6BOA==
-X-Received: by 10.13.230.142 with SMTP id p136mr16469199ywe.51.1438562962763; 
-	Sun, 02 Aug 2015 17:49:22 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=dsf+mdAwvIx5wgkfEmSAA6OEQ18PBU5FtLRKt32tPqM=;
+	b=DIGS2uU1cXIizaCwAHNWGJmppz00UFx4jN2WecmvhLNcXro57cObdgKvCzbh1ngSav
+	j5SOzU3pziVzdlIySVSXWL87TfERFkXS2SkxfcjigDIBAtMFmpZf7ab9FFAe0gN3jh3x
+	eeE0PX5GD4Zttk2qUhT/JlX7+4Us4RY/LTO3Gu7I1rLg6gjZn35DsqNkMa8RGd7+cEnZ
+	uKJdKX6X/souZ4WmVuN6de7uDfDhm5o6drQy5uH3uNeR3toGpz/fLxf9o6HLrarYpL4+
+	2ZSMjcrxjNLd5tZ5RKcDE4y0KAvhf+oMyR1XO0D0Egsoiyx1VkxZyg1cFzBFNSN5nwR9
+	Q1dQ==
+X-Received: by 10.129.98.3 with SMTP id w3mr16583717ywb.32.1438562971113;
+	Sun, 02 Aug 2015 17:49:31 -0700 (PDT)
 Received: from localhost.localdomain.localdomain
 	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
 	by smtp.gmail.com with ESMTPSA id
-	p190sm12132107ywp.56.2015.08.02.17.49.21
+	p190sm12132107ywp.56.2015.08.02.17.49.29
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 02 Aug 2015 17:49:21 -0700 (PDT)
+	Sun, 02 Aug 2015 17:49:30 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  2 Aug 2015 17:47:23 -0700
-Message-Id: <1438562844-16736-1-git-send-email-TicoTimo@gmail.com>
+Date: Sun,  2 Aug 2015 17:47:24 -0700
+Message-Id: <1438562844-16736-2-git-send-email-TicoTimo@gmail.com>
 X-Mailer: git-send-email 2.1.0
-Subject: [meta-oe][meta-multimedia][PATCH 1/2] libdvdread: update to 5.0.3
+In-Reply-To: <1438562844-16736-1-git-send-email-TicoTimo@gmail.com>
+References: <1438562844-16736-1-git-send-email-TicoTimo@gmail.com>
+Subject: [meta-oe][meta-multimedia][PATCH 2/2] vlc: update to 2.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,66 +46,450 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Aug 2015 00:49:24 -0000
+X-List-Received-Date: Mon, 03 Aug 2015 00:49:31 -0000
 
-* libdvdread > 4.9 required for vlc 2.2.1
+* add several pkg configs and libsamplerate0 dependency to vlc.inc
+* update patches 0003 and 0004
+* add patch to use tremor's libvorbisidec rather than libvorbisdec
+* add patch to fix luaL_checkint and luaL_optint (deprecated in lua 5.3)
 
 Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- .../vlc/{vlc_2.1.4.bb => vlc_2.2.1.bb}                  |  0
- .../recipes-multimedia/libdvdread/libdvdread_4.2.0.bb   | 17 -----------------
- .../recipes-multimedia/libdvdread/libdvdread_5.0.3.bb   | 13 +++++++++++++
- 3 files changed, 13 insertions(+), 17 deletions(-)
- rename meta-multimedia/recipes-multimedia/vlc/{vlc_2.1.4.bb => vlc_2.2.1.bb} (100%)
- delete mode 100644 meta-oe/recipes-multimedia/libdvdread/libdvdread_4.2.0.bb
- create mode 100644 meta-oe/recipes-multimedia/libdvdread/libdvdread_5.0.3.bb
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc     |   6 +-
+ .../vlc/vlc/0003-use-am-path-libgcrypt.patch       |  12 +-
+ .../0004-modules-gui-qt4-out-of-tree-build.patch   |  24 +-
+ .../vlc/vlc/0007-use-vorbisidec.patch              |  19 ++
+ .../vlc/vlc/0008-fix-luaL-checkint.patch           | 279 +++++++++++++++++++++
+ .../recipes-multimedia/vlc/vlc_2.2.1.bb            |   6 +-
+ 6 files changed, 325 insertions(+), 21 deletions(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
-similarity index 100%
-rename from meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb
-rename to meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
-diff --git a/meta-oe/recipes-multimedia/libdvdread/libdvdread_4.2.0.bb b/meta-oe/recipes-multimedia/libdvdread/libdvdread_4.2.0.bb
-deleted file mode 100644
-index 4895dd2..0000000
---- a/meta-oe/recipes-multimedia/libdvdread/libdvdread_4.2.0.bb
-+++ /dev/null
-@@ -1,17 +0,0 @@
--SUMMARY = "DVD access multimeda library"
--SECTION = "libs/multimedia"
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=64e753fa7d1ca31632bc383da3b57c27"
--SRC_URI = "http://dvdnav.mplayerhq.hu/releases/libdvdread-${PV}.tar.bz2"
--
--SRC_URI[md5sum] = "ab7a19d3ab1a437ae754ef477d6231a4"
--SRC_URI[sha256sum] = "0bea15da842a4b04a482b009d72dcc6d9c9524ccc1bf67e5748319ec5ada8097"
--
--inherit autotools lib_package binconfig pkgconfig
--
--CONFIGUREOPTS_remove = "--disable-silent-rules"
--
--do_configure_prepend() {
--    # For some weird reason, libdvdread only provides a `configure2' script...
--    cp ${S}/configure2 ${S}/configure
--}
-diff --git a/meta-oe/recipes-multimedia/libdvdread/libdvdread_5.0.3.bb b/meta-oe/recipes-multimedia/libdvdread/libdvdread_5.0.3.bb
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+index 0362f39..a79e63d 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+@@ -10,7 +10,7 @@ DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native gst-plugins-bad \
+    tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
+    libdvdcss libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs \
+    libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
+-   libmtp libopus orc libusb1 schroedinger taglib \
++   libmtp libopus orc libsamplerate0 libvorbis libusb1 schroedinger taglib \
+    tiff xcb-util-keysyms samba"
+ 
+ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
+@@ -36,7 +36,6 @@ EXTRA_OECONF = "\
+     --enable-dbus \
+     --without-contrib \
+     --without-kde-solid \
+-    --disable-glx \
+     --enable-realrtsp \
+     --disable-libtar \
+     ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
+@@ -54,6 +53,9 @@ PACKAGECONFIG[mkv] = "--enable-mkv,--disable-mkv,libmatroska libebml"
+ PACKAGECONFIG[postproc] = "--enable-postproc,--disable-postproc,libpostproc"
+ PACKAGECONFIG[opencv] = "--enable-opencv,--disable-opencv,opencv"
+ PACKAGECONFIG[libva] = "--enable-libva --enable-avcodec,--disable-libva --disable-avcodec,libva libav"
++PACKAGECONFIG[speex] = "--enable-speex,--disable-speex,speex"
++PACKAGECONFIG[gstreamer] = "--enable-gst-decode,--disable-gst-decode,gstreamer1.0 gstreamer1.0-plugins-base"
++PACKAGECONFIG[vpx] = "--enable-vpx,--disable-vpx, libvpx"
+ 
+ do_configure_prepend() {
+     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+index ae80745..8e881d0 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+@@ -5,11 +5,11 @@
+ 
+ Upstream status: Pending
+ 
+-Index: vlc-2.1.4/configure.ac
++Index: vlc-2.2.1/configure.ac
+ ===================================================================
+---- vlc-2.1.4.orig/configure.ac
+-+++ vlc-2.1.4/configure.ac
+-@@ -3940,25 +3940,19 @@ PKG_ENABLE_MODULES_VLC([LIBXML2], [xml],
++--- vlc-2.2.1.orig/configure.ac
+++++ vlc-2.2.1/configure.ac
++@@ -4017,25 +4017,19 @@ PKG_ENABLE_MODULES_VLC([LIBXML2], [xml],
+  dnl
+  dnl libgcrypt
+  dnl
+@@ -26,10 +26,10 @@ Index: vlc-2.1.4/configure.ac
+ -      GCRYPT_CFLAGS="`libgcrypt-config --cflags`"
+ -      GCRYPT_LIBS="`libgcrypt-config --libs`"
+ -    ], [
+--      AC_MSG_ERROR([libgcrypt not found. Install libgcrypt or use --disable-libgcrypt. Have a nice day.])
++-      AC_MSG_ERROR([libgcrypt not found. Install libgcrypt or pass --disable-libgcrypt.])
+ -    ], [`libgcrypt-config --libs`])
+ -  ], [
+--    AC_MSG_ERROR([libgcrypt version 1.1.94 or higher not found. Install libgcrypt or use --disable-libgcrypt. Have a nice day.])
++-    AC_MSG_ERROR([libgcrypt version 1.1.94 or higher not found. Install libgcrypt or pass --disable-libgcrypt.])
+ -  ], [#include <gcrypt.h>]
+ -  )
+ +      AM_PATH_LIBGCRYPT($GCRYPT_LIBVER:$GCRYPT_REQ,
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch
+index 3dadb23..53df1c6 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch
+@@ -1,17 +1,19 @@
+-* modules/gui/qt4/Modules.am not B!=S friendly
++* modules/gui/qt4/Makefile.am not B!=S friendly
+ * Simple solution to missing directories in ${B}
+ 
+ Upstream status: Pending
+ 
+-Index: vlc-2.1.4/modules/gui/qt4/Modules.am
++Signed-off-by: Tim Orling <TicoTimo@gmail.com>
++
++Index: vlc-2.2.1/modules/gui/qt4/Makefile.am
+ ===================================================================
+---- vlc-2.1.4.orig/modules/gui/qt4/Modules.am
+-+++ vlc-2.1.4/modules/gui/qt4/Modules.am
+-@@ -261,6 +261,7 @@ else
+- if HAVE_WIN32
+- 	$(moc_verbose)$(MOC) -D_WIN32 $(DEFS) -I$(top_srcdir)/include -I$(top_builddir)/include -I$(top_builddir) $(CPPFLAGS_qt4) -o $@ $<
+- else
++--- vlc-2.2.1.orig/modules/gui/qt4/Makefile.am
+++++ vlc-2.2.1/modules/gui/qt4/Makefile.am
++@@ -127,6 +127,7 @@ moc_verbose_0 = @echo "  MOC   " $@;
++ moc_verbose__0 = $(moc_verbose_0)
++ 
++ .hpp.moc.cpp:
+ +	[ -d $(dir $@) ] || mkdir -p $(dir $@)
+- 	$(moc_verbose)$(MOC) $(DEFS) -I$(top_srcdir)/include -I$(top_builddir)/include -I$(top_builddir) $(CPPFLAGS_qt4) -o $@ $<
+- endif
+- endif
++ 	$(moc_verbose)$(MOC) $(MOC_CPPFLAGS) -o $@ $<
++ 
++ # These MOC files depend on the configure settings:
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch
 new file mode 100644
-index 0000000..0506725
+index 0000000..d05cf02
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/libdvdread/libdvdread_5.0.3.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "DVD access multimeda library"
-+SECTION = "libs/multimedia"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=64e753fa7d1ca31632bc383da3b57c27"
-+SRC_URI = "http://download.videolan.org/pub/videolan/libdvdread/${PV}/libdvdread-${PV}.tar.bz2"
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch
+@@ -0,0 +1,19 @@
++* tremor provides libvorbisidec, use it instead of libvorbisdec
 +
-+SRC_URI[md5sum] = "b7b7d2a782087ed2a913263087083715"
-+SRC_URI[sha256sum] = "321cdf2dbdc83c96572bc583cd27d8c660ddb540ff16672ecb28607d018ed82b"
++Upstream-status: Pending
 +
-+inherit autotools lib_package binconfig pkgconfig
++Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 +
-+CONFIGUREOPTS_remove = "--disable-silent-rules"
++Index: vlc-2.2.1/modules/codec/Makefile.am
++===================================================================
++--- vlc-2.2.1.orig/modules/codec/Makefile.am
+++++ vlc-2.2.1/modules/codec/Makefile.am
++@@ -234,7 +234,7 @@ codec_LTLIBRARIES += $(LTLIBtheora)
++ libtremor_plugin_la_SOURCES = codec/vorbis.c
++ libtremor_plugin_la_CPPFLAGS = $(AM_CPPFLAGS) -DMODULE_NAME_IS_tremor
++ libtremor_plugin_la_LDFLAGS = $(AM_LDFLAGS) -rpath '$(codecdir)'
++-libtremor_plugin_la_LIBADD = -lvorbisdec -logg
+++libtremor_plugin_la_LIBADD = -lvorbisidec -logg
++ EXTRA_LTLIBRARIES += libtremor_plugin.la
++ codec_LTLIBRARIES += $(LTLIBtremor)
++ 
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch
+new file mode 100644
+index 0000000..145e1ab
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch
+@@ -0,0 +1,279 @@
++* luaL_checkint and luaL_optint were deprecated in lua 5.3
++* replacement functions are luaL_checkinteger and luaL_optinteger
 +
++Upstream-status: Pending
++
++Signed-off-by: Tim Orling <TicoTimo@gmail.com>
++
++Index: vlc-2.2.1/modules/lua/demux.c
++===================================================================
++--- vlc-2.2.1.orig/modules/lua/demux.c
+++++ vlc-2.2.1/modules/lua/demux.c
++@@ -52,7 +52,7 @@ struct demux_sys_t
++ static int vlclua_demux_peek( lua_State *L )
++ {
++     demux_t *p_demux = (demux_t *)vlclua_get_this( L );
++-    int n = luaL_checkint( L, 1 );
+++    int n = luaL_checkinteger( L, 1 );
++     const uint8_t *p_peek;
++ 
++     int i_peek = stream_Peek( p_demux->s, &p_peek, n );
++@@ -67,7 +67,7 @@ static int vlclua_demux_read( lua_State
++ {
++     demux_t *p_demux = (demux_t *)vlclua_get_this( L );
++     const uint8_t *p_read;
++-    int n = luaL_checkint( L, 1 );
+++    int n = luaL_checkinteger( L, 1 );
++     int i_read = stream_Peek( p_demux->s, &p_read, n );
++ 
++     if( i_read > 0 )
++Index: vlc-2.2.1/modules/lua/libs/configuration.c
++===================================================================
++--- vlc-2.2.1.orig/modules/lua/libs/configuration.c
+++++ vlc-2.2.1/modules/lua/libs/configuration.c
++@@ -84,7 +84,7 @@ static int vlclua_config_set( lua_State
++             break;
++ 
++         case VLC_VAR_INTEGER:
++-            config_PutInt( p_this, psz_name, luaL_checkint( L, 2 ) );
+++            config_PutInt( p_this, psz_name, luaL_checkinteger( L, 2 ) );
++             break;
++ 
++         case VLC_VAR_BOOL:
++Index: vlc-2.2.1/modules/lua/libs/net.c
++===================================================================
++--- vlc-2.2.1.orig/modules/lua/libs/net.c
+++++ vlc-2.2.1/modules/lua/libs/net.c
++@@ -202,7 +202,7 @@ static int vlclua_net_listen_tcp( lua_St
++ {
++     vlc_object_t *p_this = vlclua_get_this( L );
++     const char *psz_host = luaL_checkstring( L, 1 );
++-    int i_port = luaL_checkint( L, 2 );
+++    int i_port = luaL_checkinteger( L, 2 );
++     int *pi_fd = net_ListenTCP( p_this, psz_host, i_port );
++     if( pi_fd == NULL )
++         return luaL_error( L, "Cannot listen on %s:%d", psz_host, i_port );
++@@ -274,7 +274,7 @@ static int vlclua_net_connect_tcp( lua_S
++ {
++     vlc_object_t *p_this = vlclua_get_this( L );
++     const char *psz_host = luaL_checkstring( L, 1 );
++-    int i_port = luaL_checkint( L, 2 );
+++    int i_port = luaL_checkinteger( L, 2 );
++     int i_fd = net_Connect( p_this, psz_host, i_port, SOCK_STREAM, IPPROTO_TCP );
++     lua_pushinteger( L, vlclua_fd_map_safe( L, i_fd ) );
++     return 1;
++@@ -282,26 +282,26 @@ static int vlclua_net_connect_tcp( lua_S
++ 
++ static int vlclua_net_close( lua_State *L )
++ {
++-    int i_fd = luaL_checkint( L, 1 );
+++    int i_fd = luaL_checkinteger( L, 1 );
++     vlclua_fd_unmap_safe( L, i_fd );
++     return 0;
++ }
++ 
++ static int vlclua_net_send( lua_State *L )
++ {
++-    int fd = vlclua_fd_get( L, luaL_checkint( L, 1 ) );
+++    int fd = vlclua_fd_get( L, luaL_checkinteger( L, 1 ) );
++     size_t i_len;
++     const char *psz_buffer = luaL_checklstring( L, 2, &i_len );
++ 
++-    i_len = luaL_optint( L, 3, i_len );
+++    i_len = luaL_optinteger( L, 3, i_len );
++     lua_pushinteger( L, (fd != -1) ? send( fd, psz_buffer, i_len, 0 ) : -1 );
++     return 1;
++ }
++ 
++ static int vlclua_net_recv( lua_State *L )
++ {
++-    int fd = vlclua_fd_get( L, luaL_checkint( L, 1 ) );
++-    size_t i_len = luaL_optint( L, 2, 1 );
+++    int fd = vlclua_fd_get( L, luaL_checkinteger( L, 1 ) );
+++    size_t i_len = luaL_optinteger( L, 2, 1 );
++     char psz_buffer[i_len];
++ 
++     ssize_t i_ret = (fd != -1) ? recv( fd, psz_buffer, i_len, 0 ) : -1;
++@@ -382,19 +382,19 @@ static int vlclua_fd_open( lua_State *L
++ #ifndef _WIN32
++ static int vlclua_fd_write( lua_State *L )
++ {
++-    int fd = vlclua_fd_get( L, luaL_checkint( L, 1 ) );
+++    int fd = vlclua_fd_get( L, luaL_checkinteger( L, 1 ) );
++     size_t i_len;
++     const char *psz_buffer = luaL_checklstring( L, 2, &i_len );
++ 
++-    i_len = luaL_optint( L, 3, i_len );
+++    i_len = luaL_optinteger( L, 3, i_len );
++     lua_pushinteger( L, (fd != -1) ? write( fd, psz_buffer, i_len ) : -1 );
++     return 1;
++ }
++ 
++ static int vlclua_fd_read( lua_State *L )
++ {
++-    int fd = vlclua_fd_get( L, luaL_checkint( L, 1 ) );
++-    size_t i_len = luaL_optint( L, 2, 1 );
+++    int fd = vlclua_fd_get( L, luaL_checkinteger( L, 1 ) );
+++    size_t i_len = luaL_optinteger( L, 2, 1 );
++     char psz_buffer[i_len];
++ 
++     ssize_t i_ret = (fd != -1) ? read( fd, psz_buffer, i_len ) : -1;
++Index: vlc-2.2.1/modules/lua/libs/osd.c
++===================================================================
++--- vlc-2.2.1.orig/modules/lua/libs/osd.c
+++++ vlc-2.2.1/modules/lua/libs/osd.c
++@@ -67,7 +67,7 @@ static int vlclua_osd_icon( lua_State *L
++ {
++     const char *psz_icon = luaL_checkstring( L, 1 );
++     int i_icon = vlc_osd_icon_from_string( psz_icon );
++-    int i_chan = luaL_optint( L, 2, SPU_DEFAULT_CHANNEL );
+++    int i_chan = luaL_optinteger( L, 2, SPU_DEFAULT_CHANNEL );
++     if( !i_icon )
++         return luaL_error( L, "\"%s\" is not a valid osd icon.", psz_icon );
++ 
++@@ -114,9 +114,9 @@ static int vlc_osd_position_from_string(
++ static int vlclua_osd_message( lua_State *L )
++ {
++     const char *psz_message = luaL_checkstring( L, 1 );
++-    int i_chan = luaL_optint( L, 2, SPU_DEFAULT_CHANNEL );
+++    int i_chan = luaL_optinteger( L, 2, SPU_DEFAULT_CHANNEL );
++     const char *psz_position = luaL_optstring( L, 3, "top-right" );
++-    mtime_t duration = luaL_optint( L, 4, 1000000 );
+++    mtime_t duration = luaL_optinteger( L, 4, 1000000 );
++ 
++     input_thread_t *p_input = vlclua_get_input_internal( L );
++     if( p_input )
++@@ -154,10 +154,10 @@ static int vlc_osd_slider_type_from_stri
++ 
++ static int vlclua_osd_slider( lua_State *L )
++ {
++-    int i_position = luaL_checkint( L, 1 );
+++    int i_position = luaL_checkinteger( L, 1 );
++     const char *psz_type = luaL_checkstring( L, 2 );
++     int i_type = vlc_osd_slider_type_from_string( psz_type );
++-    int i_chan = luaL_optint( L, 3, SPU_DEFAULT_CHANNEL );
+++    int i_chan = luaL_optinteger( L, 3, SPU_DEFAULT_CHANNEL );
++     if( !i_type )
++         return luaL_error( L, "\"%s\" is not a valid slider type.",
++                            psz_type );
++@@ -198,7 +198,7 @@ static int vlclua_spu_channel_register(
++ 
++ static int vlclua_spu_channel_clear( lua_State *L )
++ {
++-    int i_chan = luaL_checkint( L, 1 );
+++    int i_chan = luaL_checkinteger( L, 1 );
++     input_thread_t *p_input = vlclua_get_input_internal( L );
++     if( !p_input )
++         return luaL_error( L, "Unable to find input." );
++Index: vlc-2.2.1/modules/lua/libs/playlist.c
++===================================================================
++--- vlc-2.2.1.orig/modules/lua/libs/playlist.c
+++++ vlc-2.2.1/modules/lua/libs/playlist.c
++@@ -69,7 +69,7 @@ static int vlclua_playlist_next( lua_Sta
++ 
++ static int vlclua_playlist_skip( lua_State * L )
++ {
++-    int i_skip = luaL_checkint( L, 1 );
+++    int i_skip = luaL_checkinteger( L, 1 );
++     playlist_t *p_playlist = vlclua_get_playlist_internal( L );
++     playlist_Skip( p_playlist, i_skip );
++     return 0;
++@@ -127,7 +127,7 @@ static int vlclua_playlist_random( lua_S
++ 
++ static int vlclua_playlist_gotoitem( lua_State * L )
++ {
++-    int i_id = luaL_checkint( L, 1 );
+++    int i_id = luaL_checkinteger( L, 1 );
++     playlist_t *p_playlist = vlclua_get_playlist_internal( L );
++     PL_LOCK;
++     int i_ret = playlist_Control( p_playlist, PLAYLIST_VIEWPLAY,
++@@ -139,7 +139,7 @@ static int vlclua_playlist_gotoitem( lua
++ 
++ static int vlclua_playlist_delete( lua_State * L )
++ {
++-    int i_id = luaL_checkint( L, 1 );
+++    int i_id = luaL_checkinteger( L, 1 );
++     playlist_t *p_playlist = vlclua_get_playlist_internal( L );
++     PL_LOCK;
++     playlist_item_t *p_item = playlist_ItemGetById( p_playlist, i_id );
++@@ -155,8 +155,8 @@ static int vlclua_playlist_delete( lua_S
++ 
++ static int vlclua_playlist_move( lua_State * L )
++ {
++-    int i_item = luaL_checkint( L, 1 );
++-    int i_target = luaL_checkint( L, 2 );
+++    int i_item = luaL_checkinteger( L, 1 );
+++    int i_target = luaL_checkinteger( L, 2 );
++     playlist_t *p_playlist = vlclua_get_playlist_internal( L );
++     PL_LOCK;
++     playlist_item_t *p_item = playlist_ItemGetById( p_playlist, i_item );
++Index: vlc-2.2.1/modules/lua/libs/stream.c
++===================================================================
++--- vlc-2.2.1.orig/modules/lua/libs/stream.c
+++++ vlc-2.2.1/modules/lua/libs/stream.c
++@@ -101,7 +101,7 @@ static int vlclua_stream_read( lua_State
++ {
++     int i_read;
++     stream_t **pp_stream = (stream_t **)luaL_checkudata( L, 1, "stream" );
++-    int n = luaL_checkint( L, 2 );
+++    int n = luaL_checkinteger( L, 2 );
++     uint8_t *p_read = malloc( n );
++     if( !p_read ) return vlclua_error( L );
++ 
++Index: vlc-2.2.1/modules/lua/libs/variables.c
++===================================================================
++--- vlc-2.2.1.orig/modules/lua/libs/variables.c
+++++ vlc-2.2.1/modules/lua/libs/variables.c
++@@ -103,7 +103,7 @@ static int vlclua_tovalue( lua_State *L,
++             val->b_bool = luaL_checkboolean( L, -1 );
++             break;
++         case VLC_VAR_INTEGER:
++-            val->i_int = luaL_checkint( L, -1 );
+++            val->i_int = luaL_checkinteger( L, -1 );
++             break;
++         case VLC_VAR_STRING:
++             val->psz_string = (char*)luaL_checkstring( L, -1 ); /* XXX: Beware, this only stays valid as long as (L,-1) stays in the stack */
++Index: vlc-2.2.1/modules/lua/libs/volume.c
++===================================================================
++--- vlc-2.2.1.orig/modules/lua/libs/volume.c
+++++ vlc-2.2.1/modules/lua/libs/volume.c
++@@ -48,7 +48,7 @@
++ static int vlclua_volume_set( lua_State *L )
++ {
++     playlist_t *p_this = vlclua_get_playlist_internal( L );
++-    int i_volume = luaL_checkint( L, 1 );
+++    int i_volume = luaL_checkinteger( L, 1 );
++     if( i_volume < 0 )
++         i_volume = 0;
++     int i_ret = playlist_VolumeSet( p_this, i_volume/(float)AOUT_VOLUME_DEFAULT );
++@@ -68,7 +68,7 @@ static int vlclua_volume_up( lua_State *
++     playlist_t *p_this = vlclua_get_playlist_internal( L );
++     float volume;
++ 
++-    playlist_VolumeUp( p_this, luaL_optint( L, 1, 1 ), &volume );
+++    playlist_VolumeUp( p_this, luaL_optinteger( L, 1, 1 ), &volume );
++     lua_pushnumber( L, lroundf(volume * AOUT_VOLUME_DEFAULT) );
++     return 1;
++ }
++@@ -78,7 +78,7 @@ static int vlclua_volume_down( lua_State
++     playlist_t *p_this = vlclua_get_playlist_internal( L );
++     float volume;
++ 
++-    playlist_VolumeDown( p_this, luaL_optint( L, 1, 1 ), &volume );
+++    playlist_VolumeDown( p_this, luaL_optinteger( L, 1, 1 ), &volume );
++     lua_pushnumber( L, lroundf(volume * AOUT_VOLUME_DEFAULT) );
++     return 1;
++ }
++Index: vlc-2.2.1/modules/lua/libs/win.c
++===================================================================
++--- vlc-2.2.1.orig/modules/lua/libs/win.c
+++++ vlc-2.2.1/modules/lua/libs/win.c
++@@ -123,7 +123,7 @@ static int vlclua_console_init( lua_Stat
++ 
++ static int vlclua_console_wait( lua_State *L )
++ {
++-    int i_timeout = luaL_optint( L, 1, 0 );
+++    int i_timeout = luaL_optinteger( L, 1, 0 );
++     DWORD status = WaitForSingleObject( GetConsole( L ), i_timeout );
++     lua_pushboolean( L, status == WAIT_OBJECT_0 );
++     return 1;
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+index 418f77c..ba8ca4b 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+@@ -9,7 +9,9 @@ SRC_URI += "file://0001-enable-subdir-objects.patch \
+             file://0004-modules-gui-qt4-out-of-tree-build.patch \
+             file://0005-libpostproc-header-check.patch \
+             file://0006-make-opencv-configurable.patch \
++	    file://0007-use-vorbisidec.patch \
++            file://0008-fix-luaL-checkint.patch \
+ "
+ 
+-SRC_URI[md5sum] = "7ed67d22f7425011078772bfc62ac222"
+-SRC_URI[sha256sum] = "3e566c7525478167e18cc53dc75d621e4af91eb40aabb6231e47db25d682d5d3"
++SRC_URI[md5sum] = "42273945758b521c408fabc7fd6d9946"
++SRC_URI[sha256sum] = "543d9d7e378ec0fa1ee2e7f7f5acf8c456c7d0ecc32037171523197ef3cf1fcb"
 -- 
 2.1.0
 
