@@ -1,31 +1,35 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E7AE73231
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lb0-f175.google.com (mail-lb0-f175.google.com
+	[209.85.217.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C22E73D13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Aug 2015 00:54:14 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1ZM418-0005fB-E5 from Joe_MacDonald@mentor.com ;
-	Sun, 02 Aug 2015 17:54:14 -0700
-Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
-	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Sun, 2 Aug 2015 17:54:13 -0700
-Received: by burninator (Postfix, from userid 1000)	id 77E77582BA5; Sun,  2
-	Aug 2015 20:53:38 -0400 (EDT)
-Date: Sun, 2 Aug 2015 20:53:38 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Rongqing Li <rongqing.li@windriver.com>
-Message-ID: <20150803005338.GG5208@mentor.com>
-References: <1438050989-15233-1-git-send-email-rongqing.li@windriver.com>
-	<20150730165734.GD6457@mentor.com> <55BAC984.5@windriver.com>
+	Mon,  3 Aug 2015 01:07:58 +0000 (UTC)
+Received: by lbbud7 with SMTP id ud7so66009800lbb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 02 Aug 2015 18:07:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=2pc6O+1mym6YRXfW9+sNJ8SovWEDrtrtB2flyzvjXCQ=;
+	b=TJsDeA/0BabfVeFBoHxlFsqQGiM3zjjxuydJKrQvwzmFqmasEar9rNc0P6XsdxdEtV
+	29NZsMD2ORsGEaFk38Xa9w1m7MVvo6UwgzYDleqAr5lzafoagFgmQeDrk6/vBH0FGEse
+	NdAiamUU6viADqI0Yk7IRvk/4/jncJan7j8VUPc37u1oaa1HBG5+TI7H+d4AcQu8nzFx
+	n+Lm6MsVe1p3f5PGiQZBwI4IQp4fJMCOyXukNvlG87QKkvG9+ZgldHae36Ikdp9eDU8Z
+	aHKOYIWYwdx0kYSBxW9VuX078jA2Okps1YTJIKA95c35OfNkwaQ8oSNRSUtNVi62MzTV
+	teVw==
 MIME-Version: 1.0
-In-Reply-To: <55BAC984.5@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/2] ypbind-mt: get parameters from dhcp
+X-Received: by 10.112.16.225 with SMTP id j1mr14067836lbd.118.1438564077805;
+	Sun, 02 Aug 2015 18:07:57 -0700 (PDT)
+Received: by 10.25.28.69 with HTTP; Sun, 2 Aug 2015 18:07:57 -0700 (PDT)
+In-Reply-To: <1438562844-16736-2-git-send-email-TicoTimo@gmail.com>
+References: <1438562844-16736-1-git-send-email-TicoTimo@gmail.com>
+	<1438562844-16736-2-git-send-email-TicoTimo@gmail.com>
+Date: Sun, 2 Aug 2015 18:07:57 -0700
+Message-ID: <CANx9H-DRLk5sOcmPtoGgHQRAa5y+Ef8ihbBvMAb7S7ptOaE7dQ@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][meta-multimedia][PATCH 2/2] vlc: update to 2.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,269 +43,507 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Aug 2015 00:54:15 -0000
-X-Groupsio-MsgNum: 56500
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ofZMSlrAVk9bLeVm"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 03 Aug 2015 01:08:04 -0000
+Content-Type: text/plain; charset=UTF-8
 
---ofZMSlrAVk9bLeVm
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I accidentally left libvorbis as a dependency in vlc.inc, which is not
+needed (tremor provides what was needed).
 
-[Re: [oe] [PATCH 1/2] ypbind-mt: get parameters from dhcp] On 15.07.31 (Fri=
- 09:04) Rongqing Li wrote:
+You can pull the corrected recipes from:
 
->=20
->=20
-> On 2015=E5=B9=B407=E6=9C=8831=E6=97=A5 00:57, Joe MacDonald wrote:
-> >[[oe] [PATCH 1/2] ypbind-mt: get parameters from dhcp] On 15.07.28 (Tue =
-10:36) rongqing.li@windriver.com wrote:
-> >
-> >>From: Li Wang <li.wang@windriver.com>
-> >>
-> >>adopt a script nis.sh from
-> >>https://git.centos.org/raw/rpms!ypbind.git/5a592e88374f067679276488430e=
-bdf51152c358/SOURCES!nis.sh
-> >>it is dhclient-script plugin for NIS settings.
-> >>
-> >>Signed-off-by: Li Wang <li.wang@windriver.com>
-> >>Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> >>---
-> >>  .../recipes-support/nis/ypbind-mt/nis.sh           | 108 ++++++++++++=
-+++++++++
-> >>  .../recipes-support/nis/ypbind-mt_1.38.bb          |   4 +
-> >>  .../recipes-support/nis/ypbind-mt_2.2.bb           |   4 +
-> >>  3 files changed, 116 insertions(+)
-> >>  create mode 100755 meta-networking/recipes-support/nis/ypbind-mt/nis.=
-sh
-> >>
-> >>diff --git a/meta-networking/recipes-support/nis/ypbind-mt/nis.sh b/met=
-a-networking/recipes-support/nis/ypbind-mt/nis.sh
-> >>new file mode 100755
-> >>index 0000000..a1e338c
-> >>--- /dev/null
-> >>+++ b/meta-networking/recipes-support/nis/ypbind-mt/nis.sh
-> >>@@ -0,0 +1,108 @@
-> >>+#!/bin/sh
-> >>+#
-> >>+# nis.sh: dhclient-script plugin for NIS settings,
-> >>+#         place in /etc/dhcp/dhclient.d and 'chmod +x nis.sh' to enable
-> >>+#
-> >>+# Copyright (C) 2008 Red Hat, Inc.
-> >>+#
-> >>+# This program is free software; you can redistribute it and/or modify
-> >>+# it under the terms of the GNU General Public License as published by
-> >>+# the Free Software Foundation; either version 2 of the License, or
-> >>+# (at your option) any later version.
-> >>+#
-> >>+# This program is distributed in the hope that it will be useful,
-> >>+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-> >>+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> >>+# GNU General Public License for more details.
-> >>+#
-> >>+# You should have received a copy of the GNU General Public License
-> >>+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-> >>+#
-> >>+# Author(s): David Cantrell <dcantrell@redhat.com>
-> >>+
-> >>+CONF=3D/etc/yp.conf
-> >
-> >This should probably be substituted with @SYSCONFDIR@ so it's still
-> >functional for anyone who changes ${sysconfdir}.  Just thinking out loud
->=20
-> thanks, Joe
->=20
-> I will change it
+http://git.openembedded.org/meta-openembedded-contrib/log/?h=timo/vlc-2.2.1
 
-Great, thank you.
+--Tim
 
-> >now, but what's the systemd equivalent here?  Do we already have one?
-> >
->=20
-> this script is not called by initvscript or systemd,  it is called by
-> dhclient once dhclient run and  gets configuration, so it is not related
-> to systemd
 
-Right, right, I wasn't thinking.  Thanks, so obviously no changes
-required there, just a little tweak to support different sysconfdir
-locations.
+On Sun, Aug 2, 2015 at 5:47 PM, Tim Orling <ticotimo@gmail.com> wrote:
 
-Thanks Roy.
--J.
+> * add several pkg configs and libsamplerate0 dependency to vlc.inc
+> * update patches 0003 and 0004
+> * add patch to use tremor's libvorbisidec rather than libvorbisdec
+> * add patch to fix luaL_checkint and luaL_optint (deprecated in lua 5.3)
+>
+> Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+> ---
+>  meta-multimedia/recipes-multimedia/vlc/vlc.inc     |   6 +-
+>  .../vlc/vlc/0003-use-am-path-libgcrypt.patch       |  12 +-
+>  .../0004-modules-gui-qt4-out-of-tree-build.patch   |  24 +-
+>  .../vlc/vlc/0007-use-vorbisidec.patch              |  19 ++
+>  .../vlc/vlc/0008-fix-luaL-checkint.patch           | 279
+> +++++++++++++++++++++
+>  .../recipes-multimedia/vlc/vlc_2.2.1.bb            |   6 +-
+>  6 files changed, 325 insertions(+), 21 deletions(-)
+>  create mode 100644
+> meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch
+>  create mode 100644
+> meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch
+>
+> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+> b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+> index 0362f39..a79e63d 100644
+> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+> @@ -10,7 +10,7 @@ DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native
+> gst-plugins-bad \
+>     tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
+>     libdvdcss libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs \
+>     libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
+> -   libmtp libopus orc libusb1 schroedinger taglib \
+> +   libmtp libopus orc libsamplerate0 libvorbis libusb1 schroedinger
+> taglib \
+>     tiff xcb-util-keysyms samba"
+>
+>  SRC_URI = "
+> http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
+> @@ -36,7 +36,6 @@ EXTRA_OECONF = "\
+>      --enable-dbus \
+>      --without-contrib \
+>      --without-kde-solid \
+> -    --disable-glx \
+>      --enable-realrtsp \
+>      --disable-libtar \
+>      ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
+> @@ -54,6 +53,9 @@ PACKAGECONFIG[mkv] =
+> "--enable-mkv,--disable-mkv,libmatroska libebml"
+>  PACKAGECONFIG[postproc] =
+> "--enable-postproc,--disable-postproc,libpostproc"
+>  PACKAGECONFIG[opencv] = "--enable-opencv,--disable-opencv,opencv"
+>  PACKAGECONFIG[libva] = "--enable-libva --enable-avcodec,--disable-libva
+> --disable-avcodec,libva libav"
+> +PACKAGECONFIG[speex] = "--enable-speex,--disable-speex,speex"
+> +PACKAGECONFIG[gstreamer] =
+> "--enable-gst-decode,--disable-gst-decode,gstreamer1.0
+> gstreamer1.0-plugins-base"
+> +PACKAGECONFIG[vpx] = "--enable-vpx,--disable-vpx, libvpx"
+>
+>  do_configure_prepend() {
+>      cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
+> diff --git
+> a/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+> index ae80745..8e881d0 100644
+> ---
+> a/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+> +++
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+> @@ -5,11 +5,11 @@
+>
+>  Upstream status: Pending
+>
+> -Index: vlc-2.1.4/configure.ac
+> +Index: vlc-2.2.1/configure.ac
+>  ===================================================================
+> ---- vlc-2.1.4.orig/configure.ac
+> -+++ vlc-2.1.4/configure.ac
+> -@@ -3940,25 +3940,19 @@ PKG_ENABLE_MODULES_VLC([LIBXML2], [xml],
+> +--- vlc-2.2.1.orig/configure.ac
+> ++++ vlc-2.2.1/configure.ac
+> +@@ -4017,25 +4017,19 @@ PKG_ENABLE_MODULES_VLC([LIBXML2], [xml],
+>   dnl
+>   dnl libgcrypt
+>   dnl
+> @@ -26,10 +26,10 @@ Index: vlc-2.1.4/configure.ac
+>  -      GCRYPT_CFLAGS="`libgcrypt-config --cflags`"
+>  -      GCRYPT_LIBS="`libgcrypt-config --libs`"
+>  -    ], [
+> --      AC_MSG_ERROR([libgcrypt not found. Install libgcrypt or use
+> --disable-libgcrypt. Have a nice day.])
+> +-      AC_MSG_ERROR([libgcrypt not found. Install libgcrypt or pass
+> --disable-libgcrypt.])
+>  -    ], [`libgcrypt-config --libs`])
+>  -  ], [
+> --    AC_MSG_ERROR([libgcrypt version 1.1.94 or higher not found. Install
+> libgcrypt or use --disable-libgcrypt. Have a nice day.])
+> +-    AC_MSG_ERROR([libgcrypt version 1.1.94 or higher not found. Install
+> libgcrypt or pass --disable-libgcrypt.])
+>  -  ], [#include <gcrypt.h>]
+>  -  )
+>  +      AM_PATH_LIBGCRYPT($GCRYPT_LIBVER:$GCRYPT_REQ,
+> diff --git
+> a/meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch
+> index 3dadb23..53df1c6 100644
+> ---
+> a/meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch
+> +++
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch
+> @@ -1,17 +1,19 @@
+> -* modules/gui/qt4/Modules.am not B!=S friendly
+> +* modules/gui/qt4/Makefile.am not B!=S friendly
+>  * Simple solution to missing directories in ${B}
+>
+>  Upstream status: Pending
+>
+> -Index: vlc-2.1.4/modules/gui/qt4/Modules.am
+> +Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+> +
+> +Index: vlc-2.2.1/modules/gui/qt4/Makefile.am
+>  ===================================================================
+> ---- vlc-2.1.4.orig/modules/gui/qt4/Modules.am
+> -+++ vlc-2.1.4/modules/gui/qt4/Modules.am
+> -@@ -261,6 +261,7 @@ else
+> - if HAVE_WIN32
+> -       $(moc_verbose)$(MOC) -D_WIN32 $(DEFS) -I$(top_srcdir)/include
+> -I$(top_builddir)/include -I$(top_builddir) $(CPPFLAGS_qt4) -o $@ $<
+> - else
+> +--- vlc-2.2.1.orig/modules/gui/qt4/Makefile.am
+> ++++ vlc-2.2.1/modules/gui/qt4/Makefile.am
+> +@@ -127,6 +127,7 @@ moc_verbose_0 = @echo "  MOC   " $@;
+> + moc_verbose__0 = $(moc_verbose_0)
+> +
+> + .hpp.moc.cpp:
+>  +      [ -d $(dir $@) ] || mkdir -p $(dir $@)
+> -       $(moc_verbose)$(MOC) $(DEFS) -I$(top_srcdir)/include
+> -I$(top_builddir)/include -I$(top_builddir) $(CPPFLAGS_qt4) -o $@ $<
+> - endif
+> - endif
+> +       $(moc_verbose)$(MOC) $(MOC_CPPFLAGS) -o $@ $<
+> +
+> + # These MOC files depend on the configure settings:
+> diff --git
+> a/meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch
+> new file mode 100644
+> index 0000000..d05cf02
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch
+> @@ -0,0 +1,19 @@
+> +* tremor provides libvorbisidec, use it instead of libvorbisdec
+> +
+> +Upstream-status: Pending
+> +
+> +Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+> +
+> +Index: vlc-2.2.1/modules/codec/Makefile.am
+> +===================================================================
+> +--- vlc-2.2.1.orig/modules/codec/Makefile.am
+> ++++ vlc-2.2.1/modules/codec/Makefile.am
+> +@@ -234,7 +234,7 @@ codec_LTLIBRARIES += $(LTLIBtheora)
+> + libtremor_plugin_la_SOURCES = codec/vorbis.c
+> + libtremor_plugin_la_CPPFLAGS = $(AM_CPPFLAGS) -DMODULE_NAME_IS_tremor
+> + libtremor_plugin_la_LDFLAGS = $(AM_LDFLAGS) -rpath '$(codecdir)'
+> +-libtremor_plugin_la_LIBADD = -lvorbisdec -logg
+> ++libtremor_plugin_la_LIBADD = -lvorbisidec -logg
+> + EXTRA_LTLIBRARIES += libtremor_plugin.la
+> + codec_LTLIBRARIES += $(LTLIBtremor)
+> +
+> diff --git
+> a/meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch
+> new file mode 100644
+> index 0000000..145e1ab
+> --- /dev/null
+> +++
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch
+> @@ -0,0 +1,279 @@
+> +* luaL_checkint and luaL_optint were deprecated in lua 5.3
+> +* replacement functions are luaL_checkinteger and luaL_optinteger
+> +
+> +Upstream-status: Pending
+> +
+> +Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+> +
+> +Index: vlc-2.2.1/modules/lua/demux.c
+> +===================================================================
+> +--- vlc-2.2.1.orig/modules/lua/demux.c
+> ++++ vlc-2.2.1/modules/lua/demux.c
+> +@@ -52,7 +52,7 @@ struct demux_sys_t
+> + static int vlclua_demux_peek( lua_State *L )
+> + {
+> +     demux_t *p_demux = (demux_t *)vlclua_get_this( L );
+> +-    int n = luaL_checkint( L, 1 );
+> ++    int n = luaL_checkinteger( L, 1 );
+> +     const uint8_t *p_peek;
+> +
+> +     int i_peek = stream_Peek( p_demux->s, &p_peek, n );
+> +@@ -67,7 +67,7 @@ static int vlclua_demux_read( lua_State
+> + {
+> +     demux_t *p_demux = (demux_t *)vlclua_get_this( L );
+> +     const uint8_t *p_read;
+> +-    int n = luaL_checkint( L, 1 );
+> ++    int n = luaL_checkinteger( L, 1 );
+> +     int i_read = stream_Peek( p_demux->s, &p_read, n );
+> +
+> +     if( i_read > 0 )
+> +Index: vlc-2.2.1/modules/lua/libs/configuration.c
+> +===================================================================
+> +--- vlc-2.2.1.orig/modules/lua/libs/configuration.c
+> ++++ vlc-2.2.1/modules/lua/libs/configuration.c
+> +@@ -84,7 +84,7 @@ static int vlclua_config_set( lua_State
+> +             break;
+> +
+> +         case VLC_VAR_INTEGER:
+> +-            config_PutInt( p_this, psz_name, luaL_checkint( L, 2 ) );
+> ++            config_PutInt( p_this, psz_name, luaL_checkinteger( L, 2 ) );
+> +             break;
+> +
+> +         case VLC_VAR_BOOL:
+> +Index: vlc-2.2.1/modules/lua/libs/net.c
+> +===================================================================
+> +--- vlc-2.2.1.orig/modules/lua/libs/net.c
+> ++++ vlc-2.2.1/modules/lua/libs/net.c
+> +@@ -202,7 +202,7 @@ static int vlclua_net_listen_tcp( lua_St
+> + {
+> +     vlc_object_t *p_this = vlclua_get_this( L );
+> +     const char *psz_host = luaL_checkstring( L, 1 );
+> +-    int i_port = luaL_checkint( L, 2 );
+> ++    int i_port = luaL_checkinteger( L, 2 );
+> +     int *pi_fd = net_ListenTCP( p_this, psz_host, i_port );
+> +     if( pi_fd == NULL )
+> +         return luaL_error( L, "Cannot listen on %s:%d", psz_host, i_port
+> );
+> +@@ -274,7 +274,7 @@ static int vlclua_net_connect_tcp( lua_S
+> + {
+> +     vlc_object_t *p_this = vlclua_get_this( L );
+> +     const char *psz_host = luaL_checkstring( L, 1 );
+> +-    int i_port = luaL_checkint( L, 2 );
+> ++    int i_port = luaL_checkinteger( L, 2 );
+> +     int i_fd = net_Connect( p_this, psz_host, i_port, SOCK_STREAM,
+> IPPROTO_TCP );
+> +     lua_pushinteger( L, vlclua_fd_map_safe( L, i_fd ) );
+> +     return 1;
+> +@@ -282,26 +282,26 @@ static int vlclua_net_connect_tcp( lua_S
+> +
+> + static int vlclua_net_close( lua_State *L )
+> + {
+> +-    int i_fd = luaL_checkint( L, 1 );
+> ++    int i_fd = luaL_checkinteger( L, 1 );
+> +     vlclua_fd_unmap_safe( L, i_fd );
+> +     return 0;
+> + }
+> +
+> + static int vlclua_net_send( lua_State *L )
+> + {
+> +-    int fd = vlclua_fd_get( L, luaL_checkint( L, 1 ) );
+> ++    int fd = vlclua_fd_get( L, luaL_checkinteger( L, 1 ) );
+> +     size_t i_len;
+> +     const char *psz_buffer = luaL_checklstring( L, 2, &i_len );
+> +
+> +-    i_len = luaL_optint( L, 3, i_len );
+> ++    i_len = luaL_optinteger( L, 3, i_len );
+> +     lua_pushinteger( L, (fd != -1) ? send( fd, psz_buffer, i_len, 0 ) :
+> -1 );
+> +     return 1;
+> + }
+> +
+> + static int vlclua_net_recv( lua_State *L )
+> + {
+> +-    int fd = vlclua_fd_get( L, luaL_checkint( L, 1 ) );
+> +-    size_t i_len = luaL_optint( L, 2, 1 );
+> ++    int fd = vlclua_fd_get( L, luaL_checkinteger( L, 1 ) );
+> ++    size_t i_len = luaL_optinteger( L, 2, 1 );
+> +     char psz_buffer[i_len];
+> +
+> +     ssize_t i_ret = (fd != -1) ? recv( fd, psz_buffer, i_len, 0 ) : -1;
+> +@@ -382,19 +382,19 @@ static int vlclua_fd_open( lua_State *L
+> + #ifndef _WIN32
+> + static int vlclua_fd_write( lua_State *L )
+> + {
+> +-    int fd = vlclua_fd_get( L, luaL_checkint( L, 1 ) );
+> ++    int fd = vlclua_fd_get( L, luaL_checkinteger( L, 1 ) );
+> +     size_t i_len;
+> +     const char *psz_buffer = luaL_checklstring( L, 2, &i_len );
+> +
+> +-    i_len = luaL_optint( L, 3, i_len );
+> ++    i_len = luaL_optinteger( L, 3, i_len );
+> +     lua_pushinteger( L, (fd != -1) ? write( fd, psz_buffer, i_len ) : -1
+> );
+> +     return 1;
+> + }
+> +
+> + static int vlclua_fd_read( lua_State *L )
+> + {
+> +-    int fd = vlclua_fd_get( L, luaL_checkint( L, 1 ) );
+> +-    size_t i_len = luaL_optint( L, 2, 1 );
+> ++    int fd = vlclua_fd_get( L, luaL_checkinteger( L, 1 ) );
+> ++    size_t i_len = luaL_optinteger( L, 2, 1 );
+> +     char psz_buffer[i_len];
+> +
+> +     ssize_t i_ret = (fd != -1) ? read( fd, psz_buffer, i_len ) : -1;
+> +Index: vlc-2.2.1/modules/lua/libs/osd.c
+> +===================================================================
+> +--- vlc-2.2.1.orig/modules/lua/libs/osd.c
+> ++++ vlc-2.2.1/modules/lua/libs/osd.c
+> +@@ -67,7 +67,7 @@ static int vlclua_osd_icon( lua_State *L
+> + {
+> +     const char *psz_icon = luaL_checkstring( L, 1 );
+> +     int i_icon = vlc_osd_icon_from_string( psz_icon );
+> +-    int i_chan = luaL_optint( L, 2, SPU_DEFAULT_CHANNEL );
+> ++    int i_chan = luaL_optinteger( L, 2, SPU_DEFAULT_CHANNEL );
+> +     if( !i_icon )
+> +         return luaL_error( L, "\"%s\" is not a valid osd icon.",
+> psz_icon );
+> +
+> +@@ -114,9 +114,9 @@ static int vlc_osd_position_from_string(
+> + static int vlclua_osd_message( lua_State *L )
+> + {
+> +     const char *psz_message = luaL_checkstring( L, 1 );
+> +-    int i_chan = luaL_optint( L, 2, SPU_DEFAULT_CHANNEL );
+> ++    int i_chan = luaL_optinteger( L, 2, SPU_DEFAULT_CHANNEL );
+> +     const char *psz_position = luaL_optstring( L, 3, "top-right" );
+> +-    mtime_t duration = luaL_optint( L, 4, 1000000 );
+> ++    mtime_t duration = luaL_optinteger( L, 4, 1000000 );
+> +
+> +     input_thread_t *p_input = vlclua_get_input_internal( L );
+> +     if( p_input )
+> +@@ -154,10 +154,10 @@ static int vlc_osd_slider_type_from_stri
+> +
+> + static int vlclua_osd_slider( lua_State *L )
+> + {
+> +-    int i_position = luaL_checkint( L, 1 );
+> ++    int i_position = luaL_checkinteger( L, 1 );
+> +     const char *psz_type = luaL_checkstring( L, 2 );
+> +     int i_type = vlc_osd_slider_type_from_string( psz_type );
+> +-    int i_chan = luaL_optint( L, 3, SPU_DEFAULT_CHANNEL );
+> ++    int i_chan = luaL_optinteger( L, 3, SPU_DEFAULT_CHANNEL );
+> +     if( !i_type )
+> +         return luaL_error( L, "\"%s\" is not a valid slider type.",
+> +                            psz_type );
+> +@@ -198,7 +198,7 @@ static int vlclua_spu_channel_register(
+> +
+> + static int vlclua_spu_channel_clear( lua_State *L )
+> + {
+> +-    int i_chan = luaL_checkint( L, 1 );
+> ++    int i_chan = luaL_checkinteger( L, 1 );
+> +     input_thread_t *p_input = vlclua_get_input_internal( L );
+> +     if( !p_input )
+> +         return luaL_error( L, "Unable to find input." );
+> +Index: vlc-2.2.1/modules/lua/libs/playlist.c
+> +===================================================================
+> +--- vlc-2.2.1.orig/modules/lua/libs/playlist.c
+> ++++ vlc-2.2.1/modules/lua/libs/playlist.c
+> +@@ -69,7 +69,7 @@ static int vlclua_playlist_next( lua_Sta
+> +
+> + static int vlclua_playlist_skip( lua_State * L )
+> + {
+> +-    int i_skip = luaL_checkint( L, 1 );
+> ++    int i_skip = luaL_checkinteger( L, 1 );
+> +     playlist_t *p_playlist = vlclua_get_playlist_internal( L );
+> +     playlist_Skip( p_playlist, i_skip );
+> +     return 0;
+> +@@ -127,7 +127,7 @@ static int vlclua_playlist_random( lua_S
+> +
+> + static int vlclua_playlist_gotoitem( lua_State * L )
+> + {
+> +-    int i_id = luaL_checkint( L, 1 );
+> ++    int i_id = luaL_checkinteger( L, 1 );
+> +     playlist_t *p_playlist = vlclua_get_playlist_internal( L );
+> +     PL_LOCK;
+> +     int i_ret = playlist_Control( p_playlist, PLAYLIST_VIEWPLAY,
+> +@@ -139,7 +139,7 @@ static int vlclua_playlist_gotoitem( lua
+> +
+> + static int vlclua_playlist_delete( lua_State * L )
+> + {
+> +-    int i_id = luaL_checkint( L, 1 );
+> ++    int i_id = luaL_checkinteger( L, 1 );
+> +     playlist_t *p_playlist = vlclua_get_playlist_internal( L );
+> +     PL_LOCK;
+> +     playlist_item_t *p_item = playlist_ItemGetById( p_playlist, i_id );
+> +@@ -155,8 +155,8 @@ static int vlclua_playlist_delete( lua_S
+> +
+> + static int vlclua_playlist_move( lua_State * L )
+> + {
+> +-    int i_item = luaL_checkint( L, 1 );
+> +-    int i_target = luaL_checkint( L, 2 );
+> ++    int i_item = luaL_checkinteger( L, 1 );
+> ++    int i_target = luaL_checkinteger( L, 2 );
+> +     playlist_t *p_playlist = vlclua_get_playlist_internal( L );
+> +     PL_LOCK;
+> +     playlist_item_t *p_item = playlist_ItemGetById( p_playlist, i_item );
+> +Index: vlc-2.2.1/modules/lua/libs/stream.c
+> +===================================================================
+> +--- vlc-2.2.1.orig/modules/lua/libs/stream.c
+> ++++ vlc-2.2.1/modules/lua/libs/stream.c
+> +@@ -101,7 +101,7 @@ static int vlclua_stream_read( lua_State
+> + {
+> +     int i_read;
+> +     stream_t **pp_stream = (stream_t **)luaL_checkudata( L, 1, "stream"
+> );
+> +-    int n = luaL_checkint( L, 2 );
+> ++    int n = luaL_checkinteger( L, 2 );
+> +     uint8_t *p_read = malloc( n );
+> +     if( !p_read ) return vlclua_error( L );
+> +
+> +Index: vlc-2.2.1/modules/lua/libs/variables.c
+> +===================================================================
+> +--- vlc-2.2.1.orig/modules/lua/libs/variables.c
+> ++++ vlc-2.2.1/modules/lua/libs/variables.c
+> +@@ -103,7 +103,7 @@ static int vlclua_tovalue( lua_State *L,
+> +             val->b_bool = luaL_checkboolean( L, -1 );
+> +             break;
+> +         case VLC_VAR_INTEGER:
+> +-            val->i_int = luaL_checkint( L, -1 );
+> ++            val->i_int = luaL_checkinteger( L, -1 );
+> +             break;
+> +         case VLC_VAR_STRING:
+> +             val->psz_string = (char*)luaL_checkstring( L, -1 ); /* XXX:
+> Beware, this only stays valid as long as (L,-1) stays in the stack */
+> +Index: vlc-2.2.1/modules/lua/libs/volume.c
+> +===================================================================
+> +--- vlc-2.2.1.orig/modules/lua/libs/volume.c
+> ++++ vlc-2.2.1/modules/lua/libs/volume.c
+> +@@ -48,7 +48,7 @@
+> + static int vlclua_volume_set( lua_State *L )
+> + {
+> +     playlist_t *p_this = vlclua_get_playlist_internal( L );
+> +-    int i_volume = luaL_checkint( L, 1 );
+> ++    int i_volume = luaL_checkinteger( L, 1 );
+> +     if( i_volume < 0 )
+> +         i_volume = 0;
+> +     int i_ret = playlist_VolumeSet( p_this,
+> i_volume/(float)AOUT_VOLUME_DEFAULT );
+> +@@ -68,7 +68,7 @@ static int vlclua_volume_up( lua_State *
+> +     playlist_t *p_this = vlclua_get_playlist_internal( L );
+> +     float volume;
+> +
+> +-    playlist_VolumeUp( p_this, luaL_optint( L, 1, 1 ), &volume );
+> ++    playlist_VolumeUp( p_this, luaL_optinteger( L, 1, 1 ), &volume );
+> +     lua_pushnumber( L, lroundf(volume * AOUT_VOLUME_DEFAULT) );
+> +     return 1;
+> + }
+> +@@ -78,7 +78,7 @@ static int vlclua_volume_down( lua_State
+> +     playlist_t *p_this = vlclua_get_playlist_internal( L );
+> +     float volume;
+> +
+> +-    playlist_VolumeDown( p_this, luaL_optint( L, 1, 1 ), &volume );
+> ++    playlist_VolumeDown( p_this, luaL_optinteger( L, 1, 1 ), &volume );
+> +     lua_pushnumber( L, lroundf(volume * AOUT_VOLUME_DEFAULT) );
+> +     return 1;
+> + }
+> +Index: vlc-2.2.1/modules/lua/libs/win.c
+> +===================================================================
+> +--- vlc-2.2.1.orig/modules/lua/libs/win.c
+> ++++ vlc-2.2.1/modules/lua/libs/win.c
+> +@@ -123,7 +123,7 @@ static int vlclua_console_init( lua_Stat
+> +
+> + static int vlclua_console_wait( lua_State *L )
+> + {
+> +-    int i_timeout = luaL_optint( L, 1, 0 );
+> ++    int i_timeout = luaL_optinteger( L, 1, 0 );
+> +     DWORD status = WaitForSingleObject( GetConsole( L ), i_timeout );
+> +     lua_pushboolean( L, status == WAIT_OBJECT_0 );
+> +     return 1;
+> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+> b/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+> index 418f77c..ba8ca4b 100644
+> --- a/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+> @@ -9,7 +9,9 @@ SRC_URI += "file://0001-enable-subdir-objects.patch \
+>              file://0004-modules-gui-qt4-out-of-tree-build.patch \
+>              file://0005-libpostproc-header-check.patch \
+>              file://0006-make-opencv-configurable.patch \
+> +           file://0007-use-vorbisidec.patch \
+> +            file://0008-fix-luaL-checkint.patch \
+>  "
+>
+> -SRC_URI[md5sum] = "7ed67d22f7425011078772bfc62ac222"
+> -SRC_URI[sha256sum] =
+> "3e566c7525478167e18cc53dc75d621e4af91eb40aabb6231e47db25d682d5d3"
+> +SRC_URI[md5sum] = "42273945758b521c408fabc7fd6d9946"
+> +SRC_URI[sha256sum] =
+> "543d9d7e378ec0fa1ee2e7f7f5acf8c456c7d0ecc32037171523197ef3cf1fcb"
+> --
+> 2.1.0
+>
+>
 
->=20
-> -Roy
->=20
-> >That's not a barrier to accepting this patch, either way.  I'd just like
-> >to see this hard-coded path be slightly less hard-coded.
-> >
-> >-J.
-> >
-> >>+SAVECONF=3D${SAVEDIR}/${CONF##*/}.predhclient.${interface}
-> >>+
-> >>+fix_context() {
-> >>+    if [ -x /sbin/restorecon ]; then
-> >>+        /sbin/restorecon ${1} >/dev/null 2>&1
-> >>+    fi
-> >>+}
-> >>+
-> >>+save_config_file() {
-> >>+    if [ ! -d ${SAVEDIR} ]; then
-> >>+        mkdir -p ${SAVEDIR}
-> >>+    fi
-> >>+
-> >>+    if [ -e ${CONF} ]; then
-> >>+        # cp+rm instead of mv: preserve SELinux context
-> >>+        # rhbz#509240
-> >>+        # Do not rely on restorecon.
-> >>+        cp -c ${CONF} ${SAVECONF}
-> >>+        rm ${CONF}
-> >>+    else
-> >>+        echo > ${SAVECONF}
-> >>+        # Try restorecon
-> >>+        fix_context ${SAVECONF}
-> >>+    fi
-> >>+}
-> >>+
-> >>+nis_config() {
-> >>+    if [ ! "${PEERNIS}" =3D "no" ]; then
-> >>+        if [ -n "${new_nis_domain}" ]; then
-> >>+            domainname "${new_nis_domain}"
-> >>+            save_config_file
-> >>+            let contents=3D0
-> >>+            echo '# generated by /sbin/dhclient-script' > ${CONF}
-> >>+            fix_context ${CONF}
-> >>+
-> >>+            if [ -n "${new_nis_servers}" ]; then
-> >>+                for i in ${new_nis_servers} ; do
-> >>+                    echo "domain ${new_nis_domain} server ${i}" >> ${C=
-ONF}
-> >>+                    let contents=3Dcontents+1
-> >>+                done
-> >>+            else
-> >>+                echo "domain ${new_nis_domain} broadcast" >> ${CONF}
-> >>+                let contents=3Dcontents+1
-> >>+            fi
-> >>+
-> >>+            if [ ${contents} -gt 0 ]; then
-> >>+                service ypbind condrestart >/dev/null 2>&1
-> >>+            fi
-> >>+        elif [ -n "${new_nis_servers}" ]; then
-> >>+            save_config_file
-> >>+            echo '# generated by /sbin/dhclient-script' > ${CONF}
-> >>+            fix_context ${CONF}
-> >>+            let contents=3D0
-> >>+
-> >>+            for i in ${new_nis_servers} ; do
-> >>+                echo "ypserver ${i}" >> ${CONF}
-> >>+                let contents=3Dcontents+1
-> >>+            done
-> >>+
-> >>+            if [ $contents -gt 0 ]; then
-> >>+                service ypbind condrestart >/dev/null 2>&1
-> >>+            fi
-> >>+        fi
-> >>+    fi
-> >>+}
-> >>+
-> >>+nis_restore() {
-> >>+    if [ ! "${PEERNIS}" =3D "no" ]; then
-> >>+        if [ -f ${SAVECONF} ]; then
-> >>+            rm -f ${CONF}
-> >>+            # cp+rm instead of mv: preserve SELinux context
-> >>+            # rhbz#509240
-> >>+            cp -c ${SAVECONF} ${CONF}
-> >>+            rm ${SAVECONF}
-> >>+            fix_context ${CONF} # Restorecon again to be sure.
-> >>+            service ypbind condrestart >/dev/null 2>&1
-> >>+        fi
-> >>+    fi
-> >>+}
-> >>+
-> >>+# Local Variables:
-> >>+# indent-tabs-mode: nil
-> >>+# sh-basic-offset: 4
-> >>+# show-trailing-whitespace: t
-> >>+# End:
-> >>diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb b/me=
-ta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-> >>index d25ef5c..5391b5b 100644
-> >>--- a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-> >>+++ b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-> >>@@ -28,6 +28,7 @@ PROVIDES +=3D "ypbind"
-> >>  SRC_URI =3D "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz=
-2 \
-> >>             file://ypbind-yocto.init \
-> >>             file://ypbind.service \
-> >>+           file://nis.sh \
-> >>  "
-> >>  SRC_URI[md5sum] =3D "094088c0e282fa7f3b3dd6cc51d0a4e1"
-> >>  SRC_URI[sha256sum] =3D "1930ce19f6ccfe10400f3497b31867f71690d2bcd3f5b=
-575199fa915559b7746"
-> >>@@ -48,6 +49,9 @@ do_install_append () {
-> >>
-> >>      install -d ${D}${systemd_unitdir}/system
-> >>      install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/=
-system
-> >>+
-> >>+    install -d ${D}/${sysconfdir}/dhcp/dhclient.d
-> >>+    install -m 755 ${WORKDIR}/nis.sh ${D}/${sysconfdir}/dhcp/dhclient.=
-d/
-> >>  }
-> >>
-> >>
-> >>diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/met=
-a-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> >>index 4f8bf48..6d5ab2d 100644
-> >>--- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> >>+++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> >>@@ -23,6 +23,7 @@ PNBLACKLIST[ypbind-mt] ?=3D "BROKEN: Depends on broke=
-n yp-tools"
-> >>  SRC_URI =3D "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz=
-2 \
-> >>             file://ypbind-yocto.init \
-> >>             file://ypbind.service \
-> >>+           file://nis.sh \
-> >>  "
-> >>  SRC_URI[md5sum] =3D "54e2040d8266ae7d302d081ca310c8a8"
-> >>  SRC_URI[sha256sum] =3D "dc2f7d97c94dcab0acfdcd115cd8b464eb8c427e4bb0f=
-e68404ae7465f517cd3"
-> >>@@ -45,6 +46,9 @@ do_install_append () {
-> >>
-> >>      install -d ${D}${systemd_unitdir}/system
-> >>      install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/=
-system
-> >>+
-> >>+    install -d ${D}/${sysconfdir}/dhcp/dhclient.d
-> >>+    install -m 755 ${WORKDIR}/nis.sh ${D}/${sysconfdir}/dhcp/dhclient.=
-d/
-> >>  }
-> >>
-> >>
-> >>--
-> >>2.1.4
-> >>
->=20
---=20
--Joe MacDonald.
-:wq
-
---ofZMSlrAVk9bLeVm
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJVvruPAAoJEEn8ffcsOfaWgAIIAJRh0bXwsVR/lJWbmG+rjLYE
-2CCseoKBsrpjxZ0OD4w5UuXMyWYadjISuKGT2J3loEVghP7BJ67G/qgK09iSdB4q
-er9wsFaw89r5kiWarhVU421jX1WhAez8U2SCyfc8aNfTNFCM509le+eVDItrY6tw
-SwLWeF8fsYqSnV5WoZZ+S/JWHVCWOZH6Ria5WDwRTsnMy8ln35pwhNM/d5XbtS+X
-G4czLaApncfKuAwAOp4eqJuxMJrjT3ryrZ8EH8ZiiTO7XVO/u3eWCyjDe8ROSQBs
-ObMdy+jqMPoJ8QbV+hqdDp4GRqzCs+Dz7pVw5VUqTCE7NVCMjWW8+m2wfu8+4Ms=
-=MXza
------END PGP SIGNATURE-----
-
---ofZMSlrAVk9bLeVm--
