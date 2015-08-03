@@ -1,35 +1,27 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 71DB4755F8
+	by mail.openembedded.org (Postfix) with ESMTP id 1E44473D13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Aug 2015 02:32:11 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99179255"
+	Mon,  3 Aug 2015 03:06:44 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99180669"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 03 Aug 2015 10:35:36 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 03 Aug 2015 11:10:12 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t732UCnu026351
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7334mZx030161
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 3 Aug 2015 10:30:12 +0800
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0181.006; Mon, 3 Aug 2015 10:32:05 +0800
-From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH v3 0/8] add openlmi and it's depends
-Thread-Index: AQHQy5eSuH25F9WCy02qwXx307forJ35kPQw
-Date: Mon, 3 Aug 2015 02:32:05 +0000
-Message-ID: <1B56A49860EB2D45ADE3731B15C959FDB2FC46@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1438310864-15716-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<20150731134759.GA2460@jama>
-In-Reply-To: <20150731134759.GA2460@jama>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.26]
+	Mon, 3 Aug 2015 11:04:48 +0800
+Received: from localhost.localdomain (10.167.226.26) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Mon, 3 Aug 2015 11:06:41 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 3 Aug 2015 11:06:30 +0800
+Message-ID: <1438571196-44094-1-git-send-email-leimaohui@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH v3 0/8] add openlmi and it's depends
+X-Originating-IP: [10.167.226.26]
+Subject: [meta-oe][PATCH v4 0/6] add openlmi and it's depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,139 +35,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Aug 2015 02:32:14 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 03 Aug 2015 03:06:49 -0000
+Content-Type: text/plain
 
-SGkgTWFydGluDQoNCj4gU29tZSBvZiB0aGVzZSB3ZXJlIG1lcmdlZCB0byBtYXN0ZXIgeWVzdGVy
-ZGF5LCBjYW4geW91IHBsZWFzZSByZWJhc2UgYW5kIHNlbmQgb25seQ0KPiByZW1haW5pbmcgcmVj
-aXBlcyAoYW5kIHBvc3NpYmx5IHNvbWUgZm9sbG93LXVwIHBhdGNoZXMgaWYgbmVlZGVkKT8NCg0K
-U29ycnksSSBkaWRuJ3Qgbm90aWNlIHRoYXQgc2JsaW0tY21waS1kZXZlbCBhbmQgcHl3YmVtIGhh
-dmUgYmVlbiBtZXJnZWQgaW50byBtYXN0ZXIuIEknbGwgc2VuZCByZW1haW5pbmcgcmVjaXBlcyBs
-YXRlci4NCg0KDQoNCg0KTGVpDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJv
-bTogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBb
-bWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmdd
-IE9uIEJlaGFsZiBPZiBNYXJ0aW4NCj4gSmFuc2ENCj4gU2VudDogRnJpZGF5LCBKdWx5IDMxLCAy
-MDE1IDk6NDggUE0NCj4gVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQu
-b3JnDQo+IFN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLW9lXVtQQVRDSCB2MyAwLzhdIGFkZCBvcGVu
-bG1pIGFuZCBpdCdzIGRlcGVuZHMNCj4gDQo+IE9uIEZyaSwgSnVsIDMxLCAyMDE1IGF0IDEwOjQ3
-OjM2QU0gKzA4MDAsIExlaSBNYW9odWkgd3JvdGU6DQo+ID4gT3BlbkxNSSAgPSBPcGVuIExpbnV4
-IE1hbmFnZW1lbnQgSW5mcmFzdHJ1Y3R1cmUuDQo+ID4gT3BlbkxNSSBpcyBvcGVuLXNvdXJjZSBw
-cm9qZWN0IGFpbWluZyB0byBpbXByb3ZlIG1hbmFnZW1lbnQgb2YgTGludXggc3lzdGVtcw0KPiB1
-c2luZyBXQkVNIHN0YW5kYXJkcy4NCj4gPg0KPiA+IExlaSBNYW9odWkgKDgpOg0KPiA+ICAgcHl3
-YmVtOmFkZCBuZXcgcmVjaXBlDQo+ID4gICBzYmxpbS1jbXBpLWRldmVsOiBhZGQgIG5ldyByZWNp
-cGUNCj4gPiAgIGNtcGktYmluZGluZ3M6IGFkZCBuZXcgcmVjaXBlDQo+ID4gICBrb25rcmV0Y21w
-aTogYWRkIG5ldyByZWNpcGUgZm9yIG9wZW5sbWkNCj4gPiAgIHNibGltLXNmY0NvbW1vbjogYWRk
-IG5ldyByZWNpcGUNCj4gPiAgIHNibGltLXNmY2I6IGFkZCBuZXcgcmVjaXBlIGZvciBvcGVubG1p
-DQo+ID4gICBjaW0tc2NoZW1hLWV4cGVyOiBhZGQgbmV3IHJlY2lwZSBmb3Igb3BlbmxtaQ0KPiA+
-ICAgb3BlbmxtaTogYWRkIG9wZW5sbWkgYW5kIGl0J3MgZGVwZW5kcw0KPiANCj4gU29tZSBvZiB0
-aGVzZSB3ZXJlIG1lcmdlZCB0byBtYXN0ZXIgeWVzdGVyZGF5LCBjYW4geW91IHBsZWFzZSByZWJh
-c2UgYW5kIHNlbmQgb25seQ0KPiByZW1haW5pbmcgcmVjaXBlcyAoYW5kIHBvc3NpYmx5IHNvbWUg
-Zm9sbG93LXVwIHBhdGNoZXMgaWYgbmVlZGVkKT8NCj4gDQo+ID4NCj4gPiAgLi4uL2NpbS1zY2hl
-bWEvY2ltLXNjaGVtYS1leHBlcl8yLjM5LjAuYmIgICAgICAgICAgfCAgMjYgKysNCj4gPiAgLi4u
-L2NpbS1zY2hlbWEvY2ltLXNjaGVtYS1maW5hbF8yLjQwLjAuYmIgICAgICAgICAgfCAgMzEgKysr
-DQo+ID4gIC4uLi9jaW0tc2NoZW1hL2NpbS1zY2hlbWEvZmlsZXMvTElDRU5TRSAgICAgICAgICAg
-IHwgIDM0ICsrKw0KPiA+ICAuLi4vY2ltLXNjaGVtYS9jaW0tc2NoZW1hXzIuNDAuMC5iYiAgICAg
-ICAgICAgICAgICB8ICAzMSAtLS0NCj4gPiAgLi4uL2NtcGktYmluZGluZ3MvMDAwMS1GaXgtZXJy
-b3IucGF0Y2ggICAgICAgICAgICAgfCAgMjYgKysNCj4gPiAgLi4uL2NtcGktYmluZGluZ3MvMDAw
-MS1Nb2RpZnktY21ha2VsaXN0LnBhdGNoICAgICAgfCAgNDEgKysrKw0KPiA+ICAuLi4vMDAwMS1m
-aXgtYnVpbGQtZXJyb3Itd2hlbi10aGUtc3dpZy0zLjAuNi5wYXRjaCB8IDI2OA0KPiA+ICsrKysr
-KysrKysrKysrKysrKysrKyAgLi4uLzAwMDEtZml4LXRoZS1idWlsZC1lcnJvci13aGVuLXB5dGhv
-bi0zLjAucGF0Y2ggfCAgMzENCj4gKysrDQo+ID4gIC4uLi9jbXBpLWJpbmRpbmdzLTAuNC4xNy1u
-by1ydWJ5LXBlcmwucGF0Y2ggICAgICAgIHwgIDQ0ICsrKysNCj4gPiAgLi4uL2NtcGktYmluZGlu
-Z3MtMC40LjE3LXNibGltLXNpZ3NlZ3YucGF0Y2ggICAgICAgfCAgMjIgKysNCj4gPiAgLi4uL2Nt
-cGktYmluZGluZ3MtMC45LjUtcHl0aG9uLWxpYi1kaXIucGF0Y2ggICAgICAgfCAgMTcgKysNCj4g
-PiAgLi4uL2NtcGktYmluZGluZ3MvY21waS1iaW5kaW5nc19naXQuYmIgICAgICAgICAgICAgfCAg
-MzcgKysrDQo+ID4gIC4uLi9rb25rcmV0Y21waS9rb25rcmV0Y21waS1uYXRpdmVfMC45LjIuYmIg
-ICAgICAgIHwgIDI3ICsrKw0KPiA+ICAuLi4tMC45LjItZml4LXJldHVybmluZy1pbnN0YW5jZS1m
-cm9tLW1ldGhvZC5wYXRjaCB8ICAzOCArKysNCj4gPiAgLi4uL2tvbmtyZXRjbXBpL2tvbmtyZXRj
-bXBpXzAuOS4yLmJiICAgICAgICAgICAgICAgfCAgMzIgKysrDQo+ID4gIC4uLi9vcGVubG1pL29w
-ZW5sbWktbmV0d29ya2luZ18wLjMuMS5iYiAgICAgICAgICAgIHwgIDI5ICsrKw0KPiA+ICAuLi4v
-b3BlbmxtaS9vcGVubG1pLXByb3ZpZGVycy8wMDAxLWZpeC1lcnJvci5wYXRjaCB8ICAyNiArKw0K
-PiA+ICAuLi4vb3BlbmxtaS9vcGVubG1pLXByb3ZpZGVyc18wLjYuMC5iYiAgICAgICAgICAgICB8
-ICA1NCArKysrKw0KPiA+ICAuLi4vb3BlbmxtaS9vcGVubG1pLXN0b3JhZ2VfMC44LjEuYmIgICAg
-ICAgICAgICAgICB8ICAzMSArKysNCj4gPiAgLi4uL29wZW5sbWkvb3BlbmxtaS10b29sc18wLjEw
-LjUuYmIgICAgICAgICAgICAgICAgfCAgMjMgKysNCj4gPiAgbWV0YS1vZS9yZWNpcGVzLWV4dGVu
-ZGVkL3B5d2JlbS9weXdiZW1fMC44LjAuYmIgICAgfCAgMzYgKysrDQo+ID4gIC4uLi9zYmxpbS1j
-bXBpLWRldmVsLTIuMC4zLWRvY2Rpci5wYXRjaCAgICAgICAgICAgIHwgIDE3ICsrDQo+ID4gIC4u
-Li9zYmxpbS1jbXBpLWRldmVsL3NibGltLWNtcGktZGV2ZWxfMi4wLjMuYmIgICAgIHwgIDE4ICsr
-DQo+ID4gIC4uLi9zYmxpbS1zZmNDb21tb24vc2JsaW0tc2ZjQ29tbW9uXzEuMC4xLmJiICAgICAg
-IHwgIDI1ICsrDQo+ID4gIC4uLi9yZWNpcGVzLWV4dGVuZGVkL3NibGltLXNmY2IvZmlsZXMvc2Zj
-Yi5zZXJ2aWNlIHwgIDExICsNCj4gPiAuLi4vc2JsaW0tc2ZjYi0xLjMuMTUtZml4LXByb3ZpZGVy
-LWRlYnVnZ2luZy5wYXRjaCB8ICAxMiArDQo+ID4gIC4uLi9zYmxpbS1zZmNiLTEuMy4xNi1tYXhN
-c2dMZW4ucGF0Y2ggICAgICAgICAgICAgIHwgIDE0ICsrDQo+ID4gIC4uLi9zYmxpbS1zZmNiLTEu
-My4xNi1tdWx0aWxpYi1tYW4tY2ZnLnBhdGNoICAgICAgIHwgIDQxICsrKysNCj4gPiAgLi4uYmxp
-bS1zZmNiLTEuMy45LXNmY2JyZXBvcy1zY2hlbWEtbG9jYXRpb24ucGF0Y2ggfCAgNDIgKysrKw0K
-PiA+ICAuLi4vc2JsaW0tc2ZjYi0xLjQuNS1zZXJ2aWNlLnBhdGNoICAgICAgICAgICAgICAgICB8
-ICAyNyArKysNCj4gPiAgLi4uL3NibGltLXNmY2ItMS40LjgtZGVmYXVsdC1lY2RoLWN1cnZlLW5h
-bWUucGF0Y2ggfCAgMjYgKysNCj4gPiAgLi4uL3NibGltLXNmY2Ivc2JsaW0tc2ZjYl8xLjQuOC5i
-YiAgICAgICAgICAgICAgICAgfCAgODIgKysrKysrKw0KPiA+ICAzMiBmaWxlcyBjaGFuZ2VkLCAx
-MTg4IGluc2VydGlvbnMoKyksIDMxIGRlbGV0aW9ucygtKSAgY3JlYXRlIG1vZGUNCj4gPiAxMDA2
-NDQNCj4gPiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2NpbS1zY2hlbWEvY2ltLXNj
-aGVtYS1leHBlcl8yLjM5LjAuYmINCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1u
-ZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9jaW0tc2NoZW1hL2NpbS1zY2hlbWEtZmluYWxfMi40
-MC4wLmJiDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtbmV0d29ya2luZy9yZWNp
-cGVzLXN1cHBvcnQvY2ltLXNjaGVtYS9jaW0tc2NoZW1hL2ZpbGVzL0xJQ0VOU0UNCj4gPiAgZGVs
-ZXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9jaW0t
-c2NoZW1hL2NpbS1zY2hlbWFfMi40MC4wLmJiDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+
-IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9jbXBpLWJpbmRpbmdzL2NtcGktYmluZGluZ3MvMDAw
-MS1GaXgtZXJyb3IucGENCj4gPiB0Y2ggIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2Uv
-cmVjaXBlcy1leHRlbmRlZC9jbXBpLWJpbmRpbmdzL2NtcGktYmluZGluZ3MvMDAwMS1Nb2RpZnkt
-Y21ha2UNCj4gPiBsaXN0LnBhdGNoICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3Jl
-Y2lwZXMtZXh0ZW5kZWQvY21waS1iaW5kaW5ncy9jbXBpLWJpbmRpbmdzLzAwMDEtZml4LWJ1aWxk
-LWVyDQo+ID4gcm9yLXdoZW4tdGhlLXN3aWctMy4wLjYucGF0Y2ggIGNyZWF0ZSBtb2RlIDEwMDY0
-NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9jbXBpLWJpbmRpbmdzL2NtcGktYmluZGlu
-Z3MvMDAwMS1maXgtdGhlLWJ1aWwNCj4gPiBkLWVycm9yLXdoZW4tcHl0aG9uLTMuMC5wYXRjaCAg
-Y3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2NtcGktYmlu
-ZGluZ3MvY21waS1iaW5kaW5ncy9jbXBpLWJpbmRpbmdzLTAuNA0KPiA+IC4xNy1uby1ydWJ5LXBl
-cmwucGF0Y2ggIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRl
-ZC9jbXBpLWJpbmRpbmdzL2NtcGktYmluZGluZ3MvY21waS1iaW5kaW5ncy0wLjQNCj4gPiAuMTct
-c2JsaW0tc2lnc2Vndi5wYXRjaCAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1vZS9yZWNp
-cGVzLWV4dGVuZGVkL2NtcGktYmluZGluZ3MvY21waS1iaW5kaW5ncy9jbXBpLWJpbmRpbmdzLTAu
-OQ0KPiA+IC41LXB5dGhvbi1saWItZGlyLnBhdGNoICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBt
-ZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvY21waS1iaW5kaW5ncy9jbXBpLWJpbmRpbmdzX2dpdC5i
-Yg0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQv
-a29ua3JldGNtcGkva29ua3JldGNtcGktbmF0aXZlXzAuOS4yLmJiDQo+ID4gIGNyZWF0ZSBtb2Rl
-IDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9rb25rcmV0Y21waS9rb25rcmV0
-Y21waS9rb25rcmV0Y21waS0wLjkuMi1maXgNCj4gPiAtcmV0dXJuaW5nLWluc3RhbmNlLWZyb20t
-bWV0aG9kLnBhdGNoDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBl
-cy1leHRlbmRlZC9rb25rcmV0Y21waS9rb25rcmV0Y21waV8wLjkuMi5iYg0KPiA+ICBjcmVhdGUg
-bW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvb3BlbmxtaS9vcGVubG1p
-LW5ldHdvcmtpbmdfMC4zLjEuYmINCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1v
-ZS9yZWNpcGVzLWV4dGVuZGVkL29wZW5sbWkvb3BlbmxtaS1wcm92aWRlcnMvMDAwMS1maXgtZXJy
-b3IucGF0Yw0KPiA+IGggIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1l
-eHRlbmRlZC9vcGVubG1pL29wZW5sbWktcHJvdmlkZXJzXzAuNi4wLmJiDQo+ID4gIGNyZWF0ZSBt
-b2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9vcGVubG1pL29wZW5sbWkt
-c3RvcmFnZV8wLjguMS5iYg0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3Jl
-Y2lwZXMtZXh0ZW5kZWQvb3BlbmxtaS9vcGVubG1pLXRvb2xzXzAuMTAuNS5iYg0KPiA+ICBjcmVh
-dGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3B5d2JlbS9weXdiZW1fMC44
-LjAuYmINCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWV4dGVu
-ZGVkL3NibGltLWNtcGktZGV2ZWwvc2JsaW0tY21waS1kZXZlbC9zYmxpbS1jbXBpLQ0KPiA+IGRl
-dmVsLTIuMC4zLWRvY2Rpci5wYXRjaCAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1vZS9y
-ZWNpcGVzLWV4dGVuZGVkL3NibGltLWNtcGktZGV2ZWwvc2JsaW0tY21waS1kZXZlbF8yLjAuMy5i
-Yg0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQv
-c2JsaW0tc2ZjQ29tbW9uL3NibGltLXNmY0NvbW1vbl8xLjAuMS5iYg0KPiA+ICBjcmVhdGUgbW9k
-ZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvc2JsaW0tc2ZjYi9maWxlcy9z
-ZmNiLnNlcnZpY2UNCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVz
-LWV4dGVuZGVkL3NibGltLXNmY2Ivc2JsaW0tc2ZjYi0xLjQuOC9zYmxpbS1zZmNiLTEuMy4xNQ0K
-PiA+IC1maXgtcHJvdmlkZXItZGVidWdnaW5nLnBhdGNoICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4g
-PiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvc2JsaW0tc2ZjYi9zYmxpbS1zZmNiLTEuNC44L3Ni
-bGltLXNmY2ItMS4zLjE2DQo+ID4gLW1heE1zZ0xlbi5wYXRjaCAgY3JlYXRlIG1vZGUgMTAwNjQ0
-DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3NibGltLXNmY2Ivc2JsaW0tc2ZjYi0xLjQu
-OC9zYmxpbS1zZmNiLTEuMy4xNg0KPiA+IC1tdWx0aWxpYi1tYW4tY2ZnLnBhdGNoICBjcmVhdGUg
-bW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvc2JsaW0tc2ZjYi9zYmxp
-bS1zZmNiLTEuNC44L3NibGltLXNmY2ItMS4zLjktDQo+ID4gc2ZjYnJlcG9zLXNjaGVtYS1sb2Nh
-dGlvbi5wYXRjaCAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWV4dGVu
-ZGVkL3NibGltLXNmY2Ivc2JsaW0tc2ZjYi0xLjQuOC9zYmxpbS1zZmNiLTEuNC41LQ0KPiA+IHNl
-cnZpY2UucGF0Y2ggIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRl
-bmRlZC9zYmxpbS1zZmNiL3NibGltLXNmY2ItMS40Ljgvc2JsaW0tc2ZjYi0xLjQuOC0NCj4gPiBk
-ZWZhdWx0LWVjZGgtY3VydmUtbmFtZS5wYXRjaCAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0
-YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3NibGltLXNmY2Ivc2JsaW0tc2ZjYl8xLjQuOC5iYg0KPiA+
-DQo+ID4gLS0NCj4gPiAxLjguNC4yDQo+ID4NCj4gPiAtLQ0KPiA+IF9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsIG1h
-aWxpbmcgbGlzdA0KPiA+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
-DQo+ID4gaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVu
-ZW1iZWRkZWQtZGV2ZWwNCj4gDQo+IC0tDQo+IE1hcnRpbiAnSmFNYScgSmFuc2EgICAgIGphYmJl
-cjogTWFydGluLkphbnNhQGdtYWlsLmNvbQ0K
+OpenLMI  = Open Linux Management Infrastructure.
+OpenLMI is open-source project aiming to improve management of Linux systems using WBEM standards.
+
+Lei Maohui (6):
+  cmpi-bindings: add new recipe
+  konkretcmpi: add new recipe for openlmi
+  sblim-sfcCommon: add new recipe
+  sblim-sfcb: add new recipe for openlmi
+  cim-schema-exper: add new recipe for openlmi
+  openlmi: add openlmi and it's depends
+
+ .../cim-schema/cim-schema-exper_2.39.0.bb          |  26 ++
+ ...schema_2.40.0.bb => cim-schema-final_2.40.0.bb} |   0
+ .../cim-schema/cim-schema/files/LICENSE            |  34 +++
+ .../cmpi-bindings/0001-Fix-error.patch             |  26 ++
+ .../cmpi-bindings/0001-Modify-cmakelist.patch      |  41 ++++
+ .../0001-fix-build-error-when-the-swig-3.0.6.patch | 268 +++++++++++++++++++++
+ .../0001-fix-the-build-error-when-python-3.0.patch |  31 +++
+ .../cmpi-bindings-0.4.17-no-ruby-perl.patch        |  44 ++++
+ .../cmpi-bindings-0.4.17-sblim-sigsegv.patch       |  22 ++
+ .../cmpi-bindings-0.9.5-python-lib-dir.patch       |  17 ++
+ .../cmpi-bindings/cmpi-bindings_git.bb             |  37 +++
+ .../konkretcmpi/konkretcmpi-native_0.9.2.bb        |  27 +++
+ ...-0.9.2-fix-returning-instance-from-method.patch |  38 +++
+ .../konkretcmpi/konkretcmpi_0.9.2.bb               |  32 +++
+ .../openlmi/openlmi-networking_0.3.1.bb            |  29 +++
+ .../openlmi/openlmi-providers/0001-fix-error.patch |  26 ++
+ .../openlmi/openlmi-providers_0.6.0.bb             |  54 +++++
+ .../openlmi/openlmi-storage_0.8.1.bb               |  31 +++
+ .../openlmi/openlmi-tools_0.10.5.bb                |  23 ++
+ .../sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb       |  25 ++
+ .../recipes-extended/sblim-sfcb/files/sfcb.service |  11 +
+ .../sblim-sfcb-1.3.15-fix-provider-debugging.patch |  12 +
+ .../sblim-sfcb-1.3.16-maxMsgLen.patch              |  14 ++
+ .../sblim-sfcb-1.3.16-multilib-man-cfg.patch       |  41 ++++
+ ...blim-sfcb-1.3.9-sfcbrepos-schema-location.patch |  42 ++++
+ .../sblim-sfcb-1.4.5-service.patch                 |  27 +++
+ .../sblim-sfcb-1.4.8-default-ecdh-curve-name.patch |  26 ++
+ .../sblim-sfcb/sblim-sfcb_1.4.8.bb                 |  82 +++++++
+ 28 files changed, 1086 insertions(+)
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
+ rename meta-networking/recipes-support/cim-schema/{cim-schema_2.40.0.bb => cim-schema-final_2.40.0.bb} (100%)
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Fix-error.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Modify-cmakelist.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-build-error-when-the-swig-3.0.6.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-fix-the-build-error-when-python-3.0.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-no-ruby-perl.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-sblim-sigsegv.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.9.5-python-lib-dir.patch
+ create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
+ create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
+ create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-method.patch
+ create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
+ create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-networking_0.3.1.bb
+ create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-providers/0001-fix-error.patch
+ create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb
+ create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb
+ create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.15-fix-provider-debugging.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-maxMsgLen.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-multilib-man-cfg.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.5-service.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
+
+-- 
+1.8.4.2
+
 
