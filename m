@@ -1,22 +1,27 @@
-Return-Path: <Tudor.Florea@enea.com>
-Received: from mx-3.enea.com (unknown [192.36.1.252])
-	by mail.openembedded.org (Postfix) with SMTP id 533B773D17
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Aug 2015 02:31:56 +0000 (UTC)
-Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
-	(172.21.1.208) with Microsoft SMTP Server id 14.3.224.2; Tue, 4 Aug 2015
-	04:31:49 +0200
-Received: by sestofb10.enea.se (Postfix, from userid 4200)	id C5A0D28BA20;
-	Tue,  4 Aug 2015 04:31:49 +0200 (CEST)
-From: Tudor Florea <tudor.florea@enea.com>
-To: <Openembedded-devel@lists.openembedded.org>
-Date: Tue, 4 Aug 2015 04:31:48 +0200
-Message-ID: <1438655508-30519-1-git-send-email-tudor.florea@enea.com>
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 7432073D17
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Aug 2015 02:35:09 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99225491"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 04 Aug 2015 10:38:36 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t742XD4d027871
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 4 Aug 2015 10:33:13 +0800
+Received: from localhost.localdomain (10.167.226.26) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Tue, 4 Aug 2015 10:35:06 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 4 Aug 2015 10:35:05 +0800
+Message-ID: <1438655705-55042-1-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received-SPF: None (SESTOEX08.enea.se: tudor.florea@enea.com does not
-	designate permitted sender hosts)
-Subject: [meta-networking] [PATCH] pure-ftpd: upgrade to 1.0.42
+X-Originating-IP: [10.167.226.26]
+Subject: [meta-python][PATCH] python-requests: upgrade 2.5.1 -> 2.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,137 +35,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Aug 2015 02:31:58 -0000
+X-List-Received-Date: Tue, 04 Aug 2015 02:35:12 -0000
 Content-Type: text/plain
 
-Signed-off-by: Tudor Florea <tudor.florea@enea.com>
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- ...coded-usr-local-includes-from-configure.a.patch | 23 +++++++++++-----------
- .../pure-ftpd/pure-ftpd/nostrip.patch              | 19 +++++++++---------
- .../{pure-ftpd_1.0.36.bb => pure-ftpd_1.0.42.bb}   |  6 +++---
- 3 files changed, 25 insertions(+), 23 deletions(-)
- rename meta-networking/recipes-daemons/pure-ftpd/{pure-ftpd_1.0.36.bb => pure-ftpd_1.0.42.bb} (71%)
+ .../python/{python-requests_2.5.1.bb => python-requests_2.7.0.bb}   | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-requests_2.5.1.bb => python-requests_2.7.0.bb} (58%)
 
-diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
-index 54088b0..76523fb 100644
---- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
-+++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
-@@ -1,20 +1,21 @@
--From cffca7cb7c055f82ced316ddee90bb701b85b92d Mon Sep 17 00:00:00 2001
--From: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
--Date: Tue, 10 Jan 2012 19:15:25 +0300
-+From 1bafadf2502334a3e972ff667061469316d0d2ca Mon Sep 17 00:00:00 2001
-+From: Tudor Florea <tudor.florea@enea.com>
-+Date: Tue, 4 Aug 2015 02:46:39 +0200
- Subject: [PATCH] Remove hardcoded /usr/local includes from configure.ac
+diff --git a/meta-python/recipes-devtools/python/python-requests_2.5.1.bb b/meta-python/recipes-devtools/python/python-requests_2.7.0.bb
+similarity index 58%
+rename from meta-python/recipes-devtools/python/python-requests_2.5.1.bb
+rename to meta-python/recipes-devtools/python/python-requests_2.7.0.bb
+index b719dca..cd0f99e 100644
+--- a/meta-python/recipes-devtools/python/python-requests_2.5.1.bb
++++ b/meta-python/recipes-devtools/python/python-requests_2.7.0.bb
+@@ -2,15 +2,15 @@ DESCRIPTION = "Python HTTP for Humans."
+ HOMEPAGE = "http://python-requests.org"
+ SECTION = "devel/python"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=c7869e52c8275537186de35e3cd5f9ec"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=58c7e163c9f8ee037246da101c6afd1e"
  
- Upstream-Status: Inappropriate [config]
+ PR = "r0"
+ SRCNAME = "requests"
  
- Signed-off-by: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
-+Signed-off-by: Tudor Florea <tudor.florea@enea.com>
- ---
-- configure.ac |   12 ------------
-- 1 files changed, 0 insertions(+), 12 deletions(-)
-+ configure.ac | 12 ------------
-+ 1 file changed, 12 deletions(-)
+ SRC_URI = "http://pypi.python.org/packages/source/r/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
  
- diff --git a/configure.ac b/configure.ac
--index ae00c08..9ba6d8d 100644
-+index 6c78e8c..851d45d 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -67,18 +67,6 @@ AC_ARG_VAR(PYTHON,local path to the python interpreter)
-+@@ -100,18 +100,6 @@ AC_ARG_VAR(PYTHON,local path to the python interpreter)
-  python_possible_path="/usr/bin:/usr/local/bin:/bin:/opt/python/bin:/opt/python/usr/bin:/opt/python/usr/local/bin"
-  AC_PATH_PROG(PYTHON,python,/usr/bin/env python,$python_possible_path)
-  
-@@ -30,9 +31,9 @@ index ae00c08..9ba6d8d 100644
- -  LDFLAGS="$LDFLAGS -L/usr/local/lib"
- -fi
- -
-- if uname | fgrep SunOS > /dev/null 2> /dev/null ; then
--   CPPFLAGS="$CPPFLAGS -D_XPG4_2=1"
-- fi
-+ CPPFLAGS="$CPPFLAGS -D_FORTIFY_SOURCE=2"
-+ 
-+ dnl Checks for header files
- -- 
--1.7.7.3
-+1.9.1
+-SRC_URI[md5sum] = "c270eb5551a02e8ab7a4cbb83e22af2e"
+-SRC_URI[sha256sum] = "7b7735efd3b1e2323dc9fcef060b380d05f5f18bd0f247f5e9e74a628279de66"
++SRC_URI[md5sum] = "29b173fd5fa572ec0764d1fd7b527260"
++SRC_URI[sha256sum] = "398a3db6d61899d25fd4a06c6ca12051b0ce171d705decd7ed5511517b4bb93d"
  
-diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
-index 5cbbc5f..4cb33bc 100644
---- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
-+++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
-@@ -1,6 +1,6 @@
--From 45eb89d1a6fde65caaf2d6e1a5d527f1ae7beb9c Mon Sep 17 00:00:00 2001
--From: Paul Eggleton <paul.eggleton@linux.intel.com>
--Date: Mon, 3 Dec 2012 17:12:11 +0000
-+From 0290bd6f4ceddff2c52dff833c9d31d24de7d0e1 Mon Sep 17 00:00:00 2001
-+From: Tudor Florea <tudor.florea@enea.com>
-+Date: Tue, 4 Aug 2015 03:07:01 +0200
- Subject: [PATCH] Don't mess with CFLAGS and LDFLAGS when --with-minimal is specified
- 
- We especially don't want stripping enabled.
-@@ -8,23 +8,24 @@ We especially don't want stripping enabled.
- Upstream-Status: Inappropriate [config]
- 
- Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+Signed-off-by: Tudor Florea <tudor.florea@enea.com>
- ---
-- configure.ac |    2 --
-- 1 files changed, 0 insertions(+), 2 deletions(-)
-+ configure.ac | 2 --
-+ 1 file changed, 2 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index 3d59409..6836c0e 100644
-+index 851d45d..dc410a1 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -413,8 +413,6 @@ AC_ARG_WITH(minimal,
-+@@ -423,8 +423,6 @@ AC_ARG_WITH(minimal,
-      AC_DEFINE(NO_FTP_USERS)
-      AC_DEFINE(WITHOUT_ASCII)    
-      AC_DEFINE(BORING_MODE)
---    CFLAGS="$CFLAGS -Os -fomit-frame-pointer -fgcse -falign-functions=2 -falign-jumps=2 -fno-unroll-loops "
-+-    CFLAGS="$CFLAGS -Os -fomit-frame-pointer -fno-unroll-loops "
- -    LDFLAGS="$LDFLAGS -s "
-    fi ])
-  
-  AC_ARG_WITH(paranoidmsg,
- -- 
--1.7.1
-+1.9.1
- 
-diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
-similarity index 71%
-rename from meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb
-rename to meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
-index 974e6b7..30b329a 100644
---- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb
-+++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
-@@ -3,7 +3,7 @@ SUMMARY = "FTP Server with a strong focus on software security"
- HOMEPAGE = "http://www.pureftpd.org/project/pure-ftpd"
- SECTION = "net"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://COPYING;md5=ae9e161311a5a0768c333b537a40e332"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=90352fb2bfe17f4261687a0d6e09f489"
- 
- DEPENDS = "libcap"
- 
-@@ -11,8 +11,8 @@ SRC_URI = "http://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${PV}.t
-            file://0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch \
-            file://nostrip.patch \
- "
--SRC_URI[md5sum] = "bbcb48e8aa6ec1abff9775b89f84af91"
--SRC_URI[sha256sum] = "90fb63b1a9d448076aa9f3e3c74b298965f98e03c824e9a4d241fffe8eb3a130"
-+SRC_URI[md5sum] = "4195af8f0e5ee2a798b1014071dae3a3"
-+SRC_URI[sha256sum] = "7be73a8e58b190a7054d2ae00c5e650cb9e091980420082d02ec3c3b68d8e7f9"
- 
- inherit autotools
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
  
 -- 
-1.9.1
+1.8.4.2
 
 
