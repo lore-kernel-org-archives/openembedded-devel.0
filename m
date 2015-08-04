@@ -1,27 +1,35 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id CCAC2757A4
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
+	[209.85.192.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D3D173231
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Aug 2015 07:51:27 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99237541"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 04 Aug 2015 15:54:55 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t747nWDd017691
+	Tue,  4 Aug 2015 12:12:09 +0000 (UTC)
+Received: by qged69 with SMTP id d69so4440944qge.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 4 Aug 2015 15:49:32 +0800
-Received: from localhost.localdomain (10.167.226.92) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 4 Aug 2015 15:51:25 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 4 Aug 2015 15:51:17 +0800
-Message-ID: <1438674677-4589-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.92]
-Subject: [meta-oe][PATCH] takao-fonts: upgrade 003.02.01 -> 003.03.01
+	Tue, 04 Aug 2015 05:12:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=AhUA25d8VM7cqBXsqxkT4bFlMC0OG5iHaeo8WlOgIho=;
+	b=AQLIPPDT33fxwywyrl/nr4ONH72PZwbLFR29FV5NkTzDDyJfXV2fkMREFB97lU9Hva
+	+fJG/RDVnRikXuosecF0MopixgxL+WBU5cxTWWTsWpD+Q5Qe3F7ghwwppbe65GNCcoJX
+	LaZenbGy6Jd+8zwYSAEkxv909g39iB6MhlaClygsHZQ+WO0U7t4z5pwO76jduOCTuTzL
+	/5PCET6cH4ElgWzc4Mop6kHcW4nkIkPbQjY1Mif1nCXotovOZ+KWL0JfDEGi7QhHtMsx
+	A0hzgfw5U55B5CKPeApP3qOpTzOqh22+fNSnyXTtLmzw3SgORWLMv+U8VVOKE8bq7Cb6
+	F08Q==
+X-Received: by 10.140.91.66 with SMTP id y60mr5824742qgd.90.1438690329558;
+	Tue, 04 Aug 2015 05:12:09 -0700 (PDT)
+Received: from thuvia.localdomain (pool-71-171-15-102.ronkva.east.verizon.net.
+	[71.171.15.102])
+	by smtp.gmail.com with ESMTPSA id 74sm359427qgo.13.2015.08.04.05.12.07
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 04 Aug 2015 05:12:08 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  4 Aug 2015 08:12:03 -0400
+Message-Id: <1438690323-23783-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-python][PATCH] python-pyro4: Add new recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,43 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Aug 2015 07:51:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 04 Aug 2015 12:12:10 -0000
 
-The SRC_URI has been changed.
+Pyro4 allows remote execution of objects over the network.
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+Signed-off-by: Philip Balister <philip@balister.org>
 ---
- .../{takao-fonts_003.02.01.bb => takao-fonts_003.03.01.bb}     | 10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-graphics/takao-fonts/{takao-fonts_003.02.01.bb => takao-fonts_003.03.01.bb} (65%)
+ .../python-pyro4/python-pyro4_4.39.bb                    | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.39.bb
 
-diff --git a/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.02.01.bb b/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.03.01.bb
-similarity index 65%
-rename from meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.02.01.bb
-rename to meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.03.01.bb
-index ed875fa..d99ff14 100644
---- a/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.02.01.bb
-+++ b/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.03.01.bb
-@@ -6,13 +6,11 @@ SECTION = "User Interface/X"
- 
- LICENSE = "IPA"
- LIC_FILES_CHKSUM = "file://IPA_Font_License_Agreement_v1.0.txt;md5=6cd3351ba979cf9db1fad644e8221276"
-+SRC_URI = "https://launchpad.net/${BPN}/trunk/15.03/+download/TakaoFonts_00303.01.tar.xz"
-+SRC_URI[md5sum] = "8cd3fe724faa5034a9369e98cf108d2d"
-+SRC_URI[sha256sum] = "e9871f72ac69acb3e277aebbee7ca01fbebf54800733e29fafdc46133fc3552f"
- 
--SRC_URI = "http://launchpad.net/takao-fonts/003.02/${PV}/+download/takao-fonts-ttf-${PV}.zip"
--SRC_URI[md5sum] = "ca480e5edb9f26d871bf6df6cb910306"
--SRC_URI[sha256sum] = "2f526a16c7931958f560697d494d8304949b3ce0aef246fb0c727fbbcc39089e"
--
--S = "${WORKDIR}/${BPN}-ttf-${PV}"
--
-+S = "${WORKDIR}/TakaoFonts_00303.01"
- do_install() {
-     install -m 0755 -d ${D}/${datadir}/fonts
-     install -m 0644 -p ${S}/*.ttf ${D}/${datadir}/fonts/
+diff --git a/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.39.bb b/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.39.bb
+new file mode 100644
+index 0000000..aed0c9c
+--- /dev/null
++++ b/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.39.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "Python Remote Objects"
++HOMEPAGE = "https://pypi.python.org/pypi/Pyro4/"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b48b62dd270c4691fabaa85be3236030"
++
++SRCNAME = "Pyro4"
++
++SRC_URI = "https://pypi.python.org/packages/source/P/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "75ed5cd142803b0a8d587dc8b6bb51ed"
++SRC_URI[sha256sum] = "39c6ca7f86b0f0bebfeada687a5a8b99f66470a52b0f815195ae63c683266f24"
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++inherit setuptools
 -- 
-1.8.4.2
+2.1.0
 
 
