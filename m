@@ -1,35 +1,22 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A085375C5B
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Aug 2015 02:17:44 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99224792"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 04 Aug 2015 10:21:13 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t742ForP025482;
-	Tue, 4 Aug 2015 10:15:50 +0800
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Tue, 4 Aug 2015 10:17:43 +0800
-From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
-To: Yi Zhao <yi.zhao@windriver.com>
-Thread-Topic: [oe] [meta-oe][PATCH] numactl: upgrade 2.0.9 -> 2.0.10
-Thread-Index: AQHQzczcR959Xj0X5EeUyRHLw1s+DJ37GwbQ
-Date: Tue, 4 Aug 2015 02:17:43 +0000
-Message-ID: <A8FC939F80655644A89BB21CCD3741E8011BCB2E96@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <1437723785-7137-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<55BF30F6.7070000@windriver.com>
-In-Reply-To: <55BF30F6.7070000@windriver.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.92]
+Return-Path: <Tudor.Florea@enea.com>
+Received: from mx-3.enea.com (unknown [192.36.1.252])
+	by mail.openembedded.org (Postfix) with SMTP id 533B773D17
+	for <Openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Aug 2015 02:31:56 +0000 (UTC)
+Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
+	(172.21.1.208) with Microsoft SMTP Server id 14.3.224.2; Tue, 4 Aug 2015
+	04:31:49 +0200
+Received: by sestofb10.enea.se (Postfix, from userid 4200)	id C5A0D28BA20;
+	Tue,  4 Aug 2015 04:31:49 +0200 (CEST)
+From: Tudor Florea <tudor.florea@enea.com>
+To: <Openembedded-devel@lists.openembedded.org>
+Date: Tue, 4 Aug 2015 04:31:48 +0200
+Message-ID: <1438655508-30519-1-git-send-email-tudor.florea@enea.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] numactl: upgrade 2.0.9 -> 2.0.10
+Received-SPF: None (SESTOEX08.enea.se: tudor.florea@enea.com does not
+	designate permitted sender hosts)
+Subject: [meta-networking] [PATCH] pure-ftpd: upgrade to 1.0.42
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,134 +30,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Aug 2015 02:17:47 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 04 Aug 2015 02:31:58 -0000
+Content-Type: text/plain
 
-SGksIFlpLA0KDQpUaGFuayB5b3UgdmVyeSBtdWNoIGZvciBkb2luZyB0ZXN0IGZvciBtZS4NCkkg
-Y2FuIHJlcHJvZHVjZSB0aGUgZXJyb3IuDQpQYXRjaCBWMiB3aWxsIGJlIHNlbnQuDQoNCkNoZWVy
-cywNCkxpDQo+LS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj5Gcm9tOiBZaSBaaGFvIFttYWls
-dG86eWkuemhhb0B3aW5kcml2ZXIuY29tXQ0KPlNlbnQ6IE1vbmRheSwgQXVndXN0IDAzLCAyMDE1
-IDU6MTUgUE0NCj5UbzogTGksIFhpbi/mnY4g5qyjDQo+Q2M6IG9wZW5lbWJlZGRlZC1kZXZlbEBs
-aXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+U3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2VdW1BBVENI
-XSBudW1hY3RsOiB1cGdyYWRlIDIuMC45IC0+IDIuMC4xMA0KPg0KPkhpLA0KPg0KPkkgZ290IGFu
-IGVycm9yIGZvciBkb19pbnN0YWxsX3B0ZXN0X2Jhc2U6DQo+DQo+RVJST1I6IEZ1bmN0aW9uIGZh
-aWxlZDogZG9faW5zdGFsbF9wdGVzdF9iYXNlIChsb2cgZmlsZSBpcyBsb2NhdGVkIGF0DQo+L2J1
-aWxkYXJlYTIvYnVpbGQvdG1wL3dvcmsvY29yZTItNjQtcG9reS1saW51eC9udW1hY3RsLzIuMC4x
-MC1yMC90ZW1wL2xvZy5kb19pbnMNCj50YWxsX3B0ZXN0X2Jhc2UuMjUzMzApDQo+RVJST1I6IExv
-Z2ZpbGUgb2YgZmFpbHVyZSBzdG9yZWQgaW46DQo+L2J1aWxkYXJlYTIvYnVpbGQvdG1wL3dvcmsv
-Y29yZTItNjQtcG9reS1saW51eC9udW1hY3RsLzIuMC4xMC1yMC90ZW1wL2xvZy5kb19pbnMNCj50
-YWxsX3B0ZXN0X2Jhc2UuMjUzMzANCj5Mb2cgZGF0YSBmb2xsb3dzOg0KPnwgREVCVUc6IFNJVEUg
-ZmlsZXMgWydlbmRpYW4tbGl0dGxlJywgJ2NvbW1vbi1saW51eCcsICdjb21tb24tZ2xpYmMnLA0K
-PidiaXQtNjQnLCAneDg2XzY0LWxpbnV4JywgJ2NvbW1vbiddDQo+fCBERUJVRzogRXhlY3V0aW5n
-IHNoZWxsIGZ1bmN0aW9uIGRvX2luc3RhbGxfcHRlc3RfYmFzZQ0KPnwgaW5zdGFsbDogY2Fubm90
-IHN0YXQNCj4nL2J1aWxkYXJlYTIvYnVpbGQvdG1wL3dvcmsvY29yZTItNjQtcG9reS1saW51eC9u
-dW1hY3RsLzIuMC4xMC1yMC9udW1hY3RsLTIuMC4xMA0KPi90ZXN0L2Rpc3RhbmNlJzoNCj5ObyBz
-dWNoIGZpbGUgb3IgZGlyZWN0b3J5DQo+fCBXQVJOSU5HOg0KPi9idWlsZGFyZWEyL2J1aWxkL3Rt
-cC93b3JrL2NvcmUyLTY0LXBva3ktbGludXgvbnVtYWN0bC8yLjAuMTAtcjAvdGVtcC9ydW4uZG9f
-aW4NCj5zdGFsbF9wdGVzdF9iYXNlLjI1MzMwOjENCj5leGl0IDEgZnJvbQ0KPnwgICBpbnN0YWxs
-IC1tIDA3NTUNCj4vYnVpbGRhcmVhMi9idWlsZC90bXAvd29yay9jb3JlMi02NC1wb2t5LWxpbnV4
-L251bWFjdGwvMi4wLjEwLXIwL251bWFjdGwtMi4wLjEwLw0KPnRlc3QvJGkNCj4vYnVpbGRhcmVh
-Mi9idWlsZC90bXAvd29yay9jb3JlMi02NC1wb2t5LWxpbnV4L251bWFjdGwvMi4wLjEwLXIwL2lt
-YWdlL3Vzci9saWI2NA0KPi9udW1hY3RsL3B0ZXN0L3Rlc3QNCj58IEVSUk9SOiBGdW5jdGlvbiBm
-YWlsZWQ6IGRvX2luc3RhbGxfcHRlc3RfYmFzZSAobG9nIGZpbGUgaXMgbG9jYXRlZCBhdA0KPi9i
-dWlsZGFyZWEyL2J1aWxkL3RtcC93b3JrL2NvcmUyLTY0LXBva3ktbGludXgvbnVtYWN0bC8yLjAu
-MTAtcjAvdGVtcC9sb2cuZG9faW5zDQo+dGFsbF9wdGVzdF9iYXNlLjI1MzMwKQ0KPkVSUk9SOiBU
-YXNrIDINCj4oL2J1aWxkYXJlYS9wb2t5L21ldGEtb3BlbmVtYmVkZGVkL21ldGEtb2UvcmVjaXBl
-cy1zdXBwb3J0L251bWFjdGwvbnVtYWN0bF8NCj4yLjAuMTAuYmIsDQo+ZG9faW5zdGFsbF9wdGVz
-dF9iYXNlKSBmYWlsZWQgd2l0aCBleGl0IGNvZGUgJzEnDQo+Tk9URTogVGFza3MgU3VtbWFyeTog
-QXR0ZW1wdGVkIDU1NyB0YXNrcyBvZiB3aGljaCA1MDcgZGlkbid0IG5lZWQgdG8gYmUgcmVydW4N
-Cj5hbmQgMSBmYWlsZWQuDQo+V2FpdGluZyBmb3IgMCBydW5uaW5nIHRhc2tzIHRvIGZpbmlzaDoN
-Cj4NCj4NCj5UaGFua3MsDQo+WWkNCj4NCj4NCj7lnKggMjAxNeW5tDA35pyIMjTml6UgMTU6NDMs
-IExpIHhpbiDlhpnpgZM6DQo+PiAxKSBVcGRhdGUgRml4LXRoZS10ZXN0LW91dHB1dC1mb3JtYXQu
-cGF0Y2gsc2luY2UgdGhlIGNvbnRlbnRzIGhhcyBiZWVuDQo+PiBjaGFuZ2VkLg0KPj4NCj4+IDIp
-IFVwZGF0ZSB0aGUgY2hlY2tzdW0sIGJlZ2lubGluZSBhbmQgZW5kbGluZSBvZiBMSUNFTlNFIGZp
-bGUsIGJ1dCB0aGUNCj4+IExJQ0VOU0UgaGFzIG5vdCBiZWVuIGNoYW5nZWQuDQo+Pg0KPj4gMykg
-UmVtb3ZlICJsaWJkaXI9JHtEfS8ke2xpYmRpcn0iIHRvIGF2b2lkIGJ1aWxkIFdhcm5pbmc6DQo+
-PiBRQSBJc3N1ZTogbnVtYWN0bDogRmlsZXMvZGlyZWN0b3JpZXMgd2VyZSBpbnN0YWxsZWQgYnV0
-IG5vdCBzaGlwcGVkIGluDQo+PiBhbnkgcGFja2FnZQ0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IExp
-IFhpbiA8bGl4aW4uZm5zdEBjbi5mdWppdHN1LmNvbT4NCj4+IC0tLQ0KPj4gICAuLi4vbnVtYWN0
-bC9GaXgtdGhlLXRlc3Qtb3V0cHV0LWZvcm1hdC5wYXRjaCAgICAgICB8IDQxDQo+KysrKysrKysr
-KysrLS0tLS0tLS0tLQ0KPj4gICAuLi4ve251bWFjdGxfMi4wLjkuYmIgPT4gbnVtYWN0bF8yLjAu
-MTAuYmJ9ICAgICAgICB8ICA4ICsrLS0tDQo+PiAgIDIgZmlsZXMgY2hhbmdlZCwgMjcgaW5zZXJ0
-aW9ucygrKSwgMjIgZGVsZXRpb25zKC0pDQo+PiAgIHJlbmFtZSBtZXRhLW9lL3JlY2lwZXMtc3Vw
-cG9ydC9udW1hY3RsL3tudW1hY3RsXzIuMC45LmJiID0+DQo+PiBudW1hY3RsXzIuMC4xMC5iYn0g
-KDgwJSkNCj4+DQo+PiBkaWZmIC0tZ2l0DQo+PiBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L251
-bWFjdGwvbnVtYWN0bC9GaXgtdGhlLXRlc3Qtb3V0cHV0LWZvcm1hdC5wDQo+PiBhdGNoDQo+PiBi
-L21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L251bWFjdGwvbnVtYWN0bC9GaXgtdGhlLXRlc3Qtb3V0
-cHV0LWZvcm1hdC5wDQo+PiBhdGNoDQo+PiBpbmRleCA4YzMwOWE0Li43ZDUyNTAzIDEwMDY0NA0K
-Pj4gLS0tDQo+PiBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L251bWFjdGwvbnVtYWN0bC9GaXgt
-dGhlLXRlc3Qtb3V0cHV0LWZvcm1hdC5wDQo+PiBhdGNoDQo+PiArKysgYi9tZXRhLW9lL3JlY2lw
-ZXMtc3VwcG9ydC9udW1hY3RsL251bWFjdGwvRml4LXRoZS10ZXN0LW91dHB1dC1mb3JtDQo+PiAr
-KysgYXQucGF0Y2gNCj4+IEBAIC0xLDI2ICsxLDMwIEBADQo+PiAtW1BBVENIXSBGaXggdGhlIHRl
-c3Qgb3V0cHV0IGZvcm1hdA0KPj4gK0Zyb20gNTlmZDc1MGE4NGJiZTU4NzRkZWM5MzZkMmJlZTll
-ZjExYTFiNjUwNSBNb24gU2VwIDE3IDAwOjAwOjAwDQo+PiArMjAwMQ0KPj4gK0Zyb206IExpIHhp
-biA8bGl4aW4uZm5zdEBjbi5mdWppdHN1LmNvbT4NCj4+ICtEYXRlOiBUdWUsIDIxIEp1bCAyMDE1
-IDAyOjAxOjIyICswOTAwDQo+PiArU3ViamVjdDogW1BBVENIXSBGaXggdGhlIHRlc3Qgb3V0cHV0
-IGZvcm1hdA0KPj4NCj4+ICAgVXBzdHJlYW0tU3RhdHVzOiBQZW5kaW5nDQo+Pg0KPj4gICBTaWdu
-ZWQtb2ZmLWJ5OiBSb3kgTGkgPHJvbmdxaW5nLmxpQHdpbmRyaXZlci5jb20+DQo+PiArU2lnbmVk
-LW9mZi1ieTogTGkgWGluIDxsaXhpbi5mbnN0QGNuLmZ1aml0c3UuY29tPg0KPj4gICAtLS0NCj4+
-IC0gdGVzdC9yZWdyZXNzICB8ICAgIDYgKysrLS0tDQo+PiAtIHRlc3QvcmVncmVzczIgfCAgICA5
-ICsrKystLS0tLQ0KPj4gLSAyIGZpbGVzIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKSwgOCBkZWxl
-dGlvbnMoLSkNCj4+ICsgdGVzdC9yZWdyZXNzICB8ICA2ICsrKy0tLQ0KPj4gKyB0ZXN0L3JlZ3Jl
-c3MyIHwgMTEgKysrKystLS0tLS0NCj4+ICsgMiBmaWxlcyBjaGFuZ2VkLCA4IGluc2VydGlvbnMo
-KyksIDkgZGVsZXRpb25zKC0pDQo+Pg0KPj4gICBkaWZmIC0tZ2l0IGEvdGVzdC9yZWdyZXNzIGIv
-dGVzdC9yZWdyZXNzIC1pbmRleCAwNWVmZjViLi4xMGQ3MmY3DQo+PiAxMDA3NTUNCj4+ICtpbmRl
-eCAyY2UxNzA1Li5kMDg2YTQ3IDEwMDc1NQ0KPj4gICAtLS0gYS90ZXN0L3JlZ3Jlc3MNCj4+ICAg
-KysrIGIvdGVzdC9yZWdyZXNzDQo+PiAtQEAgLTczLDYgKzczLDcgQEAgcHJvYmVfaGFyZHdhcmUo
-KQ0KPj4gK0BAIC03NCw2ICs3NCw3IEBAIHByb2JlX2hhcmR3YXJlKCkNCj4+ICAgIAlpZiBbICRu
-dW1ub2RlcyAtbHQgMiBdIDsgdGhlbg0KPj4gICAgCSAgICBlY2hvICJuZWVkIGF0IGxlYXN0IHR3
-byBub2RlcyB3aXRoIGF0IGxlYXN0ICRORUVEUEFHRVMgZWFjaCBvZiINCj4+ICAgIAkgICAgZWNo
-byAiZnJlZSBtZW1vcnkgZm9yIG1lbXBvbGljeSByZWdyZXNzaW9uIHRlc3RzIg0KPj4gICArCSAg
-ICBlY2hvICJGQUlMOiBudW1hIHJlZ3Jlc3MiDQo+PiAtIAkgICAgZXhpdCAxDQo+PiArCSAgICBl
-eGl0IDc3ICAjIFNraXAgdGVzdA0KPj4gICAgCWZpDQo+PiAgICB9DQo+PiAtQEAgLTIwNiwxMCAr
-MjA3LDkgQEAgbWFpbigpDQo+PiArQEAgLTIwNywxMCArMjA4LDkgQEAgbWFpbigpDQo+PiAgICAJ
-cm0gQSBCDQo+Pg0KPj4gICAgCWlmIFsgIiRFWElUIiA9IDAgXSA7IHRoZW4NCj4+IEBAIC0zNCwy
-NiArMzgsMjcgQEAgaW5kZXggMDVlZmY1Yi4uMTBkNzJmNyAxMDA3NTUNCj4+ICAgIH0NCj4+DQo+
-PiAgIGRpZmYgLS1naXQgYS90ZXN0L3JlZ3Jlc3MyIGIvdGVzdC9yZWdyZXNzMiAtaW5kZXggNmEy
-NTRmYS4uOWM5Nzk0Mw0KPj4gMTAwNzU1DQo+PiAraW5kZXggYWE2ZWE0MS4uNDUwYzUxMCAxMDA3
-NTUNCj4+ICAgLS0tIGEvdGVzdC9yZWdyZXNzMg0KPj4gICArKysgYi90ZXN0L3JlZ3Jlc3MyDQo+
-PiAtQEAgLTYsMTIgKzYsMTEgQEAgVkFMR1JJTkQ9JHtWQUxHUklORDotfQ0KPj4gLSBleHBvcnQg
-TERfTElCUkFSWV9QQVRIPWBwd2RgLy4uDQo+PiArQEAgLTksMTIgKzksMTEgQEAgdGVzdGRpcj1g
-ZGlybmFtZSAiJDAiYCAgZXhwb3J0DQo+PiArUEFUSD0ke2J1aWxkZGlyfTokUEFUSA0KPj4NCj4+
-ICAgIFQoKSB7DQo+PiAgIC0gICAgICAgZWNobyAiJEAiDQo+PiAgIC0gICAgICAgaWYgISAkVkFM
-R1JJTkQgIiRAIiA7ICB0aGVuDQo+PiAgIC0JICBlY2hvCSQxIEZBSUxFRCEhISENCj4+ICAgLQkg
-IGV4aXQgMQ0KPj4gLSsgICAgICAgaWYgISAkVkFMR1JJTkQgIiRAIiAyPiYxIDE+L2Rldi9udWxs
-OyAgdGhlbg0KPj4gLSsJICBlY2hvCSJGQUlMOiAkMSINCj4+IC0rICAgICAgIGVsc2UNCj4+IC0r
-CSAgZWNobyAiUEFTUzogJDEiDQo+PiAtICAgICAgICBmaQ0KPj4gKy0gICAgICAgZmkNCj4+ICAg
-LSAgICAgICBlY2hvDQo+PiArKwlpZiAhICRWQUxHUklORCAiJEAiIDI+JjEgMT4vZGV2L251bGw7
-ICB0aGVuDQo+PiArKwkgICBlY2hvICAiRkFJTDogJDEiDQo+PiArKwllbHNlDQo+PiArKwkgICBl
-Y2hvICJQQVNTOiAkMSINCj4+ICsrCWZpDQo+PiAgICB9DQo+Pg0KPj4gLSAjIHZhcmlvdXMgdGVz
-dHMNCj4+ICsgIyBzdGlsbCBicm9rZW4NCj4+ICAgLS0NCj4+IC0xLjcuMTAuNA0KPj4gKzEuOC40
-LjINCj4+DQo+PiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbnVtYWN0bC9u
-dW1hY3RsXzIuMC45LmJiDQo+PiBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L251bWFjdGwvbnVt
-YWN0bF8yLjAuMTAuYmINCj4+IHNpbWlsYXJpdHkgaW5kZXggODAlDQo+PiByZW5hbWUgZnJvbSBt
-ZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9udW1hY3RsL251bWFjdGxfMi4wLjkuYmINCj4+IHJlbmFt
-ZSB0byBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9udW1hY3RsL251bWFjdGxfMi4wLjEwLmJiDQo+
-PiBpbmRleCAyOWU1N2Q5Li4zYTEwZWJiIDEwMDY0NA0KPj4gLS0tIGEvbWV0YS1vZS9yZWNpcGVz
-LXN1cHBvcnQvbnVtYWN0bC9udW1hY3RsXzIuMC45LmJiDQo+PiArKysgYi9tZXRhLW9lL3JlY2lw
-ZXMtc3VwcG9ydC9udW1hY3RsL251bWFjdGxfMi4wLjEwLmJiDQo+PiBAQCAtOCw5ICs4LDcgQEAg
-UkRFUEVORFNfJHtQTn0gPSAicGVybCINCj4+DQo+PiAgIGluaGVyaXQgYXV0b3Rvb2xzLWJyb2tl
-bnNlcCBwdGVzdA0KPj4NCj4+IC1MSUNfRklMRVNfQ0hLU1VNID0NCj4iZmlsZTovL1JFQURNRTti
-ZWdpbmxpbmU9MTk7ZW5kbGluZT0zMjttZDU9NTY0NGNjMzg1MWNiMjQ5OWY2YzQ4ZTUyZmUxOThi
-ZA0KPjkiDQo+PiAtU1JDX1VSSVttZDVzdW1dID0gIjEzNjY4NWM4ZWFmOWQ2NTY5YzM1MWZlMWQ0
-NTNiMzBjIg0KPj4gLVNSQ19VUklbc2hhMjU2c3VtXSA9DQo+IjljYTAzM2U2YzE0YzBmMjZjMjAz
-NzliMGNmOTI5OTQyOWZkNWEzNTRhNzljM2M3ODgwZmQ0MWVmNjlmNzc1MWMiDQo+PiArTElDX0ZJ
-TEVTX0NIS1NVTSA9DQo+ImZpbGU6Ly9SRUFETUU7YmVnaW5saW5lPTE5O2VuZGxpbmU9MzI7bWQ1
-PTAwYjlmYjQ1MDRmZjJhZmNiN2ZiMmE1MTg3ODBmNDEyIg0KPj4NCj4+ICAgU1JDX1VSSSA9DQo+
-ImZ0cDovL29zcy5zZ2kuY29tL3d3dy9wcm9qZWN0cy9saWJudW1hL2Rvd25sb2FkLyR7QlBOfS0k
-e1BWfS50YXIuZ3ogXA0KPj4gICAJICAgZmlsZTovL2ZpeC1udWxsLXBvaW50ZXIucGF0Y2ggXA0K
-Pj4gQEAgLTE4LDEyICsxNiwxNCBAQCBTUkNfVVJJID0NCj4iZnRwOi8vb3NzLnNnaS5jb20vd3d3
-L3Byb2plY3RzL2xpYm51bWEvZG93bmxvYWQvJHtCUE59LSR7UFZ9LnRhci5neiBcDQo+PiAgIAkg
-ICBmaWxlOi8vTWFrZWZpbGUgXA0KPj4gICAJICAgZmlsZTovL3J1bi1wdGVzdCBcDQo+PiAgICAg
-ICAgICAgICAiDQo+PiArU1JDX1VSSVttZDVzdW1dID0gIjY4MmMzODMwNWIyNTk2OTY3ODgxZjNk
-NzdiYzNmYzljIg0KPj4gK1NSQ19VUklbc2hhMjU2c3VtXSA9DQo+ImRiZGFjOGZlNzRmMTNiMmUy
-ODY0YmJhMzUyZjE1OTdhYjFkMzM0NWM4YzQ4NWQ3ODA1ZjU4ZDY2ZjQxNGRiNjEiDQo+Pg0KPj4g
-ICAjIEFSTSBkb2VzIG5vdCBjdXJyZW50bHkgc3VwcG9ydCBOVU1BDQo+PiAgIENPTVBBVElCTEVf
-SE9TVCA9ICJeKCg/IWFybSkuKikkIg0KPj4NCj4+ICAgZG9faW5zdGFsbCgpIHsNCj4+IC0gICAg
-ICAgIG9lX3J1bm1ha2UgREVTVERJUj0ke0R9IHByZWZpeD0ke0R9L3VzciBsaWJkaXI9JHtEfS8k
-e2xpYmRpcn0gaW5zdGFsbA0KPj4gKyAgICAgICAgb2VfcnVubWFrZSBERVNURElSPSR7RH0gcHJl
-Zml4PSR7RH0vdXNyIGluc3RhbGwNCj4+ICAgCSNyZW1vdmUgdGhlIGVtcHR5IG1hbjIgZGlyZWN0
-b3J5DQo+PiAgIAlybSAtciAke0R9JHttYW5kaXJ9L21hbjINCj4+ICAgfQ0KDQo=
+Signed-off-by: Tudor Florea <tudor.florea@enea.com>
+---
+ ...coded-usr-local-includes-from-configure.a.patch | 23 +++++++++++-----------
+ .../pure-ftpd/pure-ftpd/nostrip.patch              | 19 +++++++++---------
+ .../{pure-ftpd_1.0.36.bb => pure-ftpd_1.0.42.bb}   |  6 +++---
+ 3 files changed, 25 insertions(+), 23 deletions(-)
+ rename meta-networking/recipes-daemons/pure-ftpd/{pure-ftpd_1.0.36.bb => pure-ftpd_1.0.42.bb} (71%)
+
+diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
+index 54088b0..76523fb 100644
+--- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
++++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
+@@ -1,20 +1,21 @@
+-From cffca7cb7c055f82ced316ddee90bb701b85b92d Mon Sep 17 00:00:00 2001
+-From: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
+-Date: Tue, 10 Jan 2012 19:15:25 +0300
++From 1bafadf2502334a3e972ff667061469316d0d2ca Mon Sep 17 00:00:00 2001
++From: Tudor Florea <tudor.florea@enea.com>
++Date: Tue, 4 Aug 2015 02:46:39 +0200
+ Subject: [PATCH] Remove hardcoded /usr/local includes from configure.ac
+ 
+ Upstream-Status: Inappropriate [config]
+ 
+ Signed-off-by: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
++Signed-off-by: Tudor Florea <tudor.florea@enea.com>
+ ---
+- configure.ac |   12 ------------
+- 1 files changed, 0 insertions(+), 12 deletions(-)
++ configure.ac | 12 ------------
++ 1 file changed, 12 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index ae00c08..9ba6d8d 100644
++index 6c78e8c..851d45d 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -67,18 +67,6 @@ AC_ARG_VAR(PYTHON,local path to the python interpreter)
++@@ -100,18 +100,6 @@ AC_ARG_VAR(PYTHON,local path to the python interpreter)
+  python_possible_path="/usr/bin:/usr/local/bin:/bin:/opt/python/bin:/opt/python/usr/bin:/opt/python/usr/local/bin"
+  AC_PATH_PROG(PYTHON,python,/usr/bin/env python,$python_possible_path)
+  
+@@ -30,9 +31,9 @@ index ae00c08..9ba6d8d 100644
+ -  LDFLAGS="$LDFLAGS -L/usr/local/lib"
+ -fi
+ -
+- if uname | fgrep SunOS > /dev/null 2> /dev/null ; then
+-   CPPFLAGS="$CPPFLAGS -D_XPG4_2=1"
+- fi
++ CPPFLAGS="$CPPFLAGS -D_FORTIFY_SOURCE=2"
++ 
++ dnl Checks for header files
+ -- 
+-1.7.7.3
++1.9.1
+ 
+diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
+index 5cbbc5f..4cb33bc 100644
+--- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
++++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
+@@ -1,6 +1,6 @@
+-From 45eb89d1a6fde65caaf2d6e1a5d527f1ae7beb9c Mon Sep 17 00:00:00 2001
+-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+-Date: Mon, 3 Dec 2012 17:12:11 +0000
++From 0290bd6f4ceddff2c52dff833c9d31d24de7d0e1 Mon Sep 17 00:00:00 2001
++From: Tudor Florea <tudor.florea@enea.com>
++Date: Tue, 4 Aug 2015 03:07:01 +0200
+ Subject: [PATCH] Don't mess with CFLAGS and LDFLAGS when --with-minimal is specified
+ 
+ We especially don't want stripping enabled.
+@@ -8,23 +8,24 @@ We especially don't want stripping enabled.
+ Upstream-Status: Inappropriate [config]
+ 
+ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
++Signed-off-by: Tudor Florea <tudor.florea@enea.com>
+ ---
+- configure.ac |    2 --
+- 1 files changed, 0 insertions(+), 2 deletions(-)
++ configure.ac | 2 --
++ 1 file changed, 2 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 3d59409..6836c0e 100644
++index 851d45d..dc410a1 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -413,8 +413,6 @@ AC_ARG_WITH(minimal,
++@@ -423,8 +423,6 @@ AC_ARG_WITH(minimal,
+      AC_DEFINE(NO_FTP_USERS)
+      AC_DEFINE(WITHOUT_ASCII)    
+      AC_DEFINE(BORING_MODE)
+--    CFLAGS="$CFLAGS -Os -fomit-frame-pointer -fgcse -falign-functions=2 -falign-jumps=2 -fno-unroll-loops "
++-    CFLAGS="$CFLAGS -Os -fomit-frame-pointer -fno-unroll-loops "
+ -    LDFLAGS="$LDFLAGS -s "
+    fi ])
+  
+  AC_ARG_WITH(paranoidmsg,
+ -- 
+-1.7.1
++1.9.1
+ 
+diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
+similarity index 71%
+rename from meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb
+rename to meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
+index 974e6b7..30b329a 100644
+--- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb
++++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
+@@ -3,7 +3,7 @@ SUMMARY = "FTP Server with a strong focus on software security"
+ HOMEPAGE = "http://www.pureftpd.org/project/pure-ftpd"
+ SECTION = "net"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=ae9e161311a5a0768c333b537a40e332"
++LIC_FILES_CHKSUM = "file://COPYING;md5=90352fb2bfe17f4261687a0d6e09f489"
+ 
+ DEPENDS = "libcap"
+ 
+@@ -11,8 +11,8 @@ SRC_URI = "http://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${PV}.t
+            file://0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch \
+            file://nostrip.patch \
+ "
+-SRC_URI[md5sum] = "bbcb48e8aa6ec1abff9775b89f84af91"
+-SRC_URI[sha256sum] = "90fb63b1a9d448076aa9f3e3c74b298965f98e03c824e9a4d241fffe8eb3a130"
++SRC_URI[md5sum] = "4195af8f0e5ee2a798b1014071dae3a3"
++SRC_URI[sha256sum] = "7be73a8e58b190a7054d2ae00c5e650cb9e091980420082d02ec3c3b68d8e7f9"
+ 
+ inherit autotools
+ 
+-- 
+1.9.1
+
 
