@@ -1,27 +1,27 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
+Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 92AE46E630
+	by mail.openembedded.org (Postfix) with ESMTP id DB77F6E630
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Aug 2015 01:45:04 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99273449"
+	Wed,  5 Aug 2015 02:25:50 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99275166"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Aug 2015 09:48:31 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 05 Aug 2015 10:29:16 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t751h8F1020468
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t752NqAK023220
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 5 Aug 2015 09:43:08 +0800
-Received: from localhost.localdomain (10.167.226.104) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 5 Aug 2015 09:45:02 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
+	Wed, 5 Aug 2015 10:23:52 +0800
+Received: from localhost.localdomain (10.167.226.26) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 5 Aug 2015 10:25:46 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 5 Aug 2015 09:44:10 +0800
-Message-ID: <1438739050-2494-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
+Date: Wed, 5 Aug 2015 10:25:45 +0800
+Message-ID: <1438741545-900-1-git-send-email-leimaohui@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.104]
-Subject: [meta-oe][PATCH] pcsc-lite: upgrade 1.8.6 -> 1.8.13
+X-Originating-IP: [10.167.226.26]
+Subject: [meta-python][PATCH v2] python-requests: upgrade 2.5.1->2.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,40 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Aug 2015 01:45:05 -0000
+X-List-Received-Date: Wed, 05 Aug 2015 02:25:52 -0000
 Content-Type: text/plain
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../pcsc-lite/{pcsc-lite_1.8.6.bb => pcsc-lite_1.8.13.bb}        | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-support/pcsc-lite/{pcsc-lite_1.8.6.bb => pcsc-lite_1.8.13.bb} (69%)
+ .../python/{python-requests_2.5.1.bb => python-requests_2.7.0.bb}  | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-requests_2.5.1.bb => python-requests_2.7.0.bb} (56%)
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
-similarity index 69%
-rename from meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
-rename to meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
-index c562b3d..cc72549 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
-@@ -2,14 +2,13 @@ SUMMARY = "PC/SC Lite smart card framework and applications"
- HOMEPAGE = "http://pcsclite.alioth.debian.org/"
- LICENSE = "BSD & GPLv3+"
- LICENSE_${PN}-dev = "GPLv3+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=a39d325b7d9cf2f07826a5154b16500c"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=bcfbd85230ac3c586fb294c8b627cf32"
- DEPENDS = "udev"
+diff --git a/meta-python/recipes-devtools/python/python-requests_2.5.1.bb b/meta-python/recipes-devtools/python/python-requests_2.7.0.bb
+similarity index 56%
+rename from meta-python/recipes-devtools/python/python-requests_2.5.1.bb
+rename to meta-python/recipes-devtools/python/python-requests_2.7.0.bb
+index b719dca..1564d50 100644
+--- a/meta-python/recipes-devtools/python/python-requests_2.5.1.bb
++++ b/meta-python/recipes-devtools/python/python-requests_2.7.0.bb
+@@ -2,15 +2,14 @@ DESCRIPTION = "Python HTTP for Humans."
+ HOMEPAGE = "http://python-requests.org"
+ SECTION = "devel/python"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=c7869e52c8275537186de35e3cd5f9ec"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=58c7e163c9f8ee037246da101c6afd1e"
  
--SRC_URI = "https://alioth.debian.org/frs/download.php/file/3757/pcsc-lite-${PV}.tar.bz2"
--SRC_URI[md5sum] = "3e4b777231d35ce35c15c0704f936eaa"
--SRC_URI[sha256sum] = "1e44049168d1ce55fd56c175f61206955254df0f385455f2a20ec7e8a0e6a77a"
-+SRC_URI = "https://alioth.debian.org/frs/download.php/file/4126/pcsc-lite-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "4dcd22d20a6df8810fac5480cc320b6d"
-+SRC_URI[sha256sum] = "f315047e808d63a3262c4a040f77548af2e04d1fd707e0c2759369b926fbbc3b"
+-PR = "r0"
+ SRCNAME = "requests"
  
--PR = "r3"
+ SRC_URI = "http://pypi.python.org/packages/source/r/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
  
- inherit autotools systemd pkgconfig
+-SRC_URI[md5sum] = "c270eb5551a02e8ab7a4cbb83e22af2e"
+-SRC_URI[sha256sum] = "7b7735efd3b1e2323dc9fcef060b380d05f5f18bd0f247f5e9e74a628279de66"
++SRC_URI[md5sum] = "29b173fd5fa572ec0764d1fd7b527260"
++SRC_URI[sha256sum] = "398a3db6d61899d25fd4a06c6ca12051b0ce171d705decd7ed5511517b4bb93d"
+ 
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
  
 -- 
 1.8.4.2
