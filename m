@@ -1,41 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 59EDC60017
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id A906360017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Aug 2015 17:15:24 +0000 (UTC)
-Received: by wibxm9 with SMTP id xm9so76489083wib.1
+	Wed,  5 Aug 2015 17:17:44 +0000 (UTC)
+Received: by wibxm9 with SMTP id xm9so76573001wib.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Aug 2015 10:15:22 -0700 (PDT)
+	Wed, 05 Aug 2015 10:17:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=wdr5ECKONSdwcVpdr/rpYy78WrY+fseOC8ya/ePvjbw=;
-	b=KiPnibM0LpYSrbXnxuylQQ0PZOlhoGhN7tgDP+AzA3xISzn0+R+3TaBMbwB6d3HX1d
-	fvf29xD/CaRIy/WFdTl3YXTIr26xc+WrfS5qRIyZHreGw4JCBx4bDKgRYETc+rEdCVze
-	sU5v7v5DPqRY1sFn5KPHbBmSjUXdNspkdeco9m9dAb5jzGIpSeK8gOhosP6vklWdj9c7
-	sca3xEpzOFLsWSTLnyScKTbDfdpHTJLPvb9m1q8KoNsISzZWXGWJ1ooe5boXsd8tsE08
-	4FNjOIEVetL369/HGixKr6PYcYeSiE28SJvgALS4/e6KA2kaQkMVjTYPYyddoisI87I+
-	UHdg==
-X-Received: by 10.180.39.65 with SMTP id n1mr481904wik.59.1438794922240;
-	Wed, 05 Aug 2015 10:15:22 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=C9rQrP/1v3o9InJVufN7Jyc5MVWZI/qs8ckfYY27oaw=;
+	b=fei5ZTG943dmdb5zyg3l+jmFulfrfttVRHW9yspnjfpDDtvZnRh/vj67aF/R0IcZuO
+	inXPrU74Flg04hHZxIFvctBDSdPyYEZ3yLhAIaKBkewPvlFWcUy0DArxclMhxmq8t3j0
+	GLz682Ec+WIU4jI1+DVd4ooIPVsjWQ13PFaf+2VkUyeV0aWxZEjpoE0QPRofhF1Ic65J
+	XZ5FNDUT/bmgEgzfZvG/XaPsmgJHZme6af6ncJVlRSjRFQYoMiX2q/r6f5GOAzj3n4tM
+	2+E9FyQx4S/K4qrkvnVLiYHrPQqxqkvQsoPPR6sW9gpURmDyPz1MTH+jisqvI3/trmnZ
+	3eoA==
+X-Received: by 10.180.80.138 with SMTP id r10mr643171wix.18.1438795065002;
+	Wed, 05 Aug 2015 10:17:45 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	cw8sm5021217wjb.49.2015.08.05.10.15.21
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 05 Aug 2015 10:15:21 -0700 (PDT)
+	lm5sm8541027wic.22.2015.08.05.10.17.44
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 05 Aug 2015 10:17:44 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 5 Aug 2015 19:15:38 +0200
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20150805171538.GD2452@jama>
-References: <1438787621-12632-1-git-send-email-Martin.Jansa@gmail.com>
-	<5725889.eDmdfnME8h@peggleto-mobl.ger.corp.intel.com>
-MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  5 Aug 2015 19:18:00 +0200
+Message-Id: <1438795080-2646-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.5.0
 In-Reply-To: <5725889.eDmdfnME8h@peggleto-mobl.ger.corp.intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-systemd][PATCH] dhcp: fix parsing warning
+References: <5725889.eDmdfnME8h@peggleto-mobl.ger.corp.intel.com>
+Subject: [meta-systemd][PATCHv2] dhcp: fix parsing warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,52 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Aug 2015 17:15:29 -0000
-X-Groupsio-MsgNum: 56552
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="4zI0WCX1RcnW9Hbu"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 05 Aug 2015 17:17:48 -0000
 
---4zI0WCX1RcnW9Hbu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* fixes:
+  WARNING: Variable key FILES_${PN}-client (${base_sbindir}/dhclient ${base_sbindir}/dhclient-script ${sysconfdir}/dhcp/dhclient.conf)
+    replaces original key FILES_dhcp-client ( ${systemd_unitdir}/system/dhclient.service).
 
-On Wed, Aug 05, 2015 at 04:28:00PM +0100, Paul Eggleton wrote:
-> On Wednesday 05 August 2015 17:13:41 Martin Jansa wrote:
-> > * fixes:
-> >   WARNING: Variable key FILES_-client (/dhclient /dhclient-script
-> > /dhcp/dhclient.conf) replaces original key FILES_dhcp-client (
-> > /system/dhclient.service).
->=20
-> Yuck - is that really what it's printing, i.e. all variable references bl=
-ank?
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Sorry, will fix that.. don't copy&paste bitbake error messages in
-bash...
+diff --git a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
+index 6c0fd02..7873e9f 100644
+--- a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
++++ b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
+@@ -12,9 +12,9 @@ RCONFLICTS_dhcp-server += "dhcp-server-systemd"
+ RPROVIDES_dhcp-relay += "dhcp-relay-systemd"
+ RREPLACES_dhcp-relay += "dhcp-relay-systemd"
+ RCONFLICTS_dhcp-relay += "dhcp-relay-systemd"
+-RPROVIDES_dhcp-client += "dhcp-client-systemd"
+-RREPLACES_dhcp-client += "dhcp-client-systemd"
+-RCONFLICTS_dhcp-client += "dhcp-client-systemd"
++RPROVIDES_${PN}-client += "dhcp-client-systemd"
++RREPLACES_${PN}-client += "dhcp-client-systemd"
++RCONFLICTS_${PN}-client += "dhcp-client-systemd"
+ 
+ SRC_URI += "file://dhclient.service"
+ 
+-- 
+2.5.0
 
->=20
-> Cheers,
-> Paul
->=20
-> --=20
->=20
-> Paul Eggleton
-> Intel Open Source Technology Centre
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---4zI0WCX1RcnW9Hbu
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlXCRLkACgkQN1Ujt2V2gBzs1wCePeL5Oo2CnPXXBD+uqanpfjeY
-l90AnRhSZgD3lNav/yV9Ij5RPxK5iwQA
-=yWKY
------END PGP SIGNATURE-----
-
---4zI0WCX1RcnW9Hbu--
