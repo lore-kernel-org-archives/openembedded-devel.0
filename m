@@ -1,35 +1,26 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id B4D9560017
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EF4360017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Aug 2015 15:13:27 +0000 (UTC)
-Received: by wibxm9 with SMTP id xm9so212906988wib.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Aug 2015 08:13:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=/vxeyfu8AgEKQwyQdJs3+ENX5YqTB3/EPuzefi/USsg=;
-	b=PgI2OQoT25yyhScwi+fD2iI0gCuYMnSSmmOBztb3+Au6n5taAmCh/wr2l323EV7kr9
-	qlZmSCZDTN9t/W9DjQAsI9AY4Xvse3T6BSomMepcXlyNZArAg/89vTMUNmDeH9lvDMSH
-	3Sf1A9Z7+1OwstJiq5lJdv9ealZ0nNJ4AnnySEqPYwNvphykUgM4WUi7aP3JVcLKF8sM
-	Ph9Ozk4r/2XkNOZMUkUMdsXBEaYuoPbvTOb603Y1KAHfdZnZpYJ+mUi4W5NuUp9Y1Pca
-	J7A3UepxVYBWjWW/zPkZJEYaVk3FdbeO9ZpnXlCPq9R+JqDuAf5GMr6ZbP6YDwFb3kFX
-	dn4Q==
-X-Received: by 10.180.86.100 with SMTP id o4mr11414718wiz.46.1438787606976;
-	Wed, 05 Aug 2015 08:13:26 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	gw7sm8078380wib.15.2015.08.05.08.13.25
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 05 Aug 2015 08:13:25 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Aug 2015 17:13:41 +0200
-Message-Id: <1438787621-12632-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.5.0
-Subject: [meta-systemd][PATCH] dhcp: fix parsing warning
+	Wed,  5 Aug 2015 15:28:02 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by fmsmga103.fm.intel.com with ESMTP; 05 Aug 2015 08:28:02 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.15,618,1432623600"; d="scan'208";a="536524342"
+Received: from igurvich-mobl3.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.22.90])
+	by FMSMGA003.fm.intel.com with ESMTP; 05 Aug 2015 08:28:02 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 05 Aug 2015 16:28 +0100
+Message-ID: <5725889.eDmdfnME8h@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.9 (Linux/4.0.8-200.fc21.x86_64; KDE/4.14.9; x86_64; ; )
+In-Reply-To: <1438787621-12632-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1438787621-12632-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-systemd][PATCH] dhcp: fix parsing warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +34,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Aug 2015 15:13:27 -0000
+X-List-Received-Date: Wed, 05 Aug 2015 15:28:03 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-* fixes:
-  WARNING: Variable key FILES_-client (/dhclient /dhclient-script /dhcp/dhclient.conf)
-    replaces original key FILES_dhcp-client ( /system/dhclient.service).
+On Wednesday 05 August 2015 17:13:41 Martin Jansa wrote:
+> * fixes:
+>   WARNING: Variable key FILES_-client (/dhclient /dhclient-script
+> /dhcp/dhclient.conf) replaces original key FILES_dhcp-client (
+> /system/dhclient.service).
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Yuck - is that really what it's printing, i.e. all variable references blank?
 
-diff --git a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
-index 6c0fd02..7873e9f 100644
---- a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
-+++ b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
-@@ -12,9 +12,9 @@ RCONFLICTS_dhcp-server += "dhcp-server-systemd"
- RPROVIDES_dhcp-relay += "dhcp-relay-systemd"
- RREPLACES_dhcp-relay += "dhcp-relay-systemd"
- RCONFLICTS_dhcp-relay += "dhcp-relay-systemd"
--RPROVIDES_dhcp-client += "dhcp-client-systemd"
--RREPLACES_dhcp-client += "dhcp-client-systemd"
--RCONFLICTS_dhcp-client += "dhcp-client-systemd"
-+RPROVIDES_${PN}-client += "dhcp-client-systemd"
-+RREPLACES_${PN}-client += "dhcp-client-systemd"
-+RCONFLICTS_${PN}-client += "dhcp-client-systemd"
- 
- SRC_URI += "file://dhclient.service"
- 
+Cheers,
+Paul
+
 -- 
-2.5.0
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
