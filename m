@@ -1,27 +1,36 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id AAFE7755F8
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-yk0-f179.google.com (mail-yk0-f179.google.com
+	[209.85.160.179])
+	by mail.openembedded.org (Postfix) with ESMTP id CD8956E630
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Aug 2015 03:21:46 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99277609"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Aug 2015 11:25:14 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t753JplO026974
+	Wed,  5 Aug 2015 04:29:33 +0000 (UTC)
+Received: by ykoo205 with SMTP id o205so26262227yko.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 5 Aug 2015 11:19:51 +0800
-Received: from localhost.localdomain (10.167.226.92) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 5 Aug 2015 11:21:44 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 5 Aug 2015 11:21:37 +0800
-Message-ID: <1438744897-1635-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.92]
-Subject: [meta-oe][PATCH] gradm: upgrade 3.0 -> 3.1
+	Tue, 04 Aug 2015 21:29:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=pslEu8jnOb/xRF2G/5fYAbJBJdQPSyzLGjI9Rxi9Pbg=;
+	b=nbaeLN+zkTzpraCwg2X2Ak6W9S8PPH9Yv0ofOP0dU9onhoLjutaOIefg5LPDAdCobd
+	3lQ2/n0T6R9sOlJiNlWnzo20u/DFTSUcTl5OL9eJ+sGro0LlGDDPXMq58/9LoEBJKfvG
+	1JVi34+f1GnPbdSwcY+nl21NsVca1dpsz0o/DbD/DFhrxcNjQJI1gTNwOHP/mEKXQ7/w
+	BesfE/qw++2+1Zeg6rgg7dMN3hGwe9Kk4QP7YVHhxjUu3PSH/gvc6quxpwh5+SgHMJKs
+	cPg8LAW5IxEAsRRW6ekhjrOBoynbH9LR4oQqQLJNVqSx9SNb3ULq4F/pSxsM2DnpDe9d
+	ozzg==
+X-Received: by 10.129.96.85 with SMTP id u82mr7676272ywb.35.1438748973670;
+	Tue, 04 Aug 2015 21:29:33 -0700 (PDT)
+Received: from localhost.localdomain.localdomain
+	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
+	by smtp.gmail.com with ESMTPSA id
+	b66sm1686975ywe.14.2015.08.04.21.29.31
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 04 Aug 2015 21:29:32 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  4 Aug 2015 21:29:15 -0700
+Message-Id: <1438748955-10126-1-git-send-email-TicoTimo@gmail.com>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-perl][PATCH] libcapture-tiny-perl: update to 0.30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,37 +44,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Aug 2015 03:21:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 05 Aug 2015 04:29:34 -0000
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+* drop libmodule-build-perl dependency
+* add perl-module-overloading dependency
+
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- meta-oe/recipes-support/gradm/{gradm_3.0.bb => gradm_3.1.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/gradm/{gradm_3.0.bb => gradm_3.1.bb} (89%)
+ ...capture-tiny-perl_0.24.bb => libcapture-tiny-perl_0.30.bb} | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+ rename meta-perl/recipes-perl/libcapture/{libcapture-tiny-perl_0.24.bb => libcapture-tiny-perl_0.30.bb} (78%)
 
-diff --git a/meta-oe/recipes-support/gradm/gradm_3.0.bb b/meta-oe/recipes-support/gradm/gradm_3.1.bb
-similarity index 89%
-rename from meta-oe/recipes-support/gradm/gradm_3.0.bb
-rename to meta-oe/recipes-support/gradm/gradm_3.1.bb
-index 2f1d39d..fe36fba 100644
---- a/meta-oe/recipes-support/gradm/gradm_3.0.bb
-+++ b/meta-oe/recipes-support/gradm/gradm_3.1.bb
-@@ -11,10 +11,10 @@ LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4641e94ec96f98fabc56ff9cc48be14b"
- DEPENDS = "flex-native bison-native ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+diff --git a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.24.bb b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.30.bb
+similarity index 78%
+rename from meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.24.bb
+rename to meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.30.bb
+index 0237485..3a3f843 100644
+--- a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.24.bb
++++ b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.30.bb
+@@ -13,11 +13,12 @@ HOMEPAGE = "http://search.cpan.org/~dagolden/Capture-Tiny/"
+ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=37a4918a30ace24395020e5b8c03b83f"
  
--SRC_URI = "http://grsecurity.net/stable/${BP}-201408301734.tar.gz \
-+SRC_URI = "http://grsecurity.net/stable/${BP}-201507191652.tar.gz \
-            file://0001-Makefile-remove-strip.patch"
--SRC_URI[md5sum] = "79ec912e6544c5e58753f658623763f9"
--SRC_URI[sha256sum] = "b190e5afecdf3ac5020a4e5e4b698645f1c01b20d036129dd8b609c4bd0c319c"
-+SRC_URI[md5sum] = "ecec72d3a9b6d84c00eda97957b707b6"
-+SRC_URI[sha256sum] = "2f14c357bf0459e502a4e108b76c3f6240aa484762d07bb1687796b9b9297a50"
+-SRC_URI = "http://search.cpan.org/CPAN/authors/id/D/DA/DAGOLDEN/Capture-Tiny-${PV}.tar.gz"
+-SRC_URI[md5sum] = "718e9d62c4a27a3207cf8506cb99d846"
+-SRC_URI[sha256sum] = "9bcf6f8472f8ea50401536cb070ac0c7770837d155c4d6abe212759863aae065"
++SRCNAME = "Capture-Tiny"
++SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DAGOLDEN/${SRCNAME}-${PV}.tar.gz"
++SRC_URI[md5sum] = "7b0fbdbf4199724df1e53fe0b3e2ef4c"
++SRC_URI[sha256sum] = "a3b4e55278757e77d50df0b1a79f42e6e8354b7d41db806da39bf161bee63aea"
  
- S = "${WORKDIR}/gradm"
+-S = "${WORKDIR}/Capture-Tiny-${PV}"
++S = "${WORKDIR}/${SRCNAME}-${PV}"
  
+ inherit cpan
+ 
+@@ -30,7 +31,7 @@ RDEPENDS_${PN} = " perl-module-scalar-util \
+                    perl-module-test-more \
+                    perl-module-file-temp \
+                    perl-module-lib \
+-                   perl-module-build \
++                   perl-module-overloading \
+ "
+ 
+ BBCLASSEXTEND = "native"
 -- 
-1.8.4.2
+2.1.0
 
 
