@@ -1,34 +1,27 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-lb0-f171.google.com (mail-lb0-f171.google.com
-	[209.85.217.171])
-	by mail.openembedded.org (Postfix) with ESMTP id A140660167
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 8357460167
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Aug 2015 04:51:37 +0000 (UTC)
-Received: by lbbud7 with SMTP id ud7so17705592lbb.3
+	Wed,  5 Aug 2015 05:35:37 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99281917"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 05 Aug 2015 13:39:02 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t755Xd7e001464
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Aug 2015 21:51:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Ch4P1F/gu2XKsCmf5coViu4pwU5JnTSZYb5e0irkeBs=;
-	b=BVMRk3wZsiMpuhlNl1DVTCV8ZnWnTcg7gKgkMJ57k81nhjw41JjdfbuVwvEfYHAvPN
-	AkkO5GuPIKK4TB8BCAWOKUh57DQjNHNbtvluy8qFl84VRIl/dmmyWtAdDotfAl95r2p9
-	whG/RCLS6rWEg+3XQQE4/vJMRN1Pf34qX96Hpc26eTcM1NsppsNR35O97Tw0zheKIYd0
-	1RJUH2ldinFz6ivINyIlL+fomiE3eoggnoIyN9+YYbU/Axi+15kfz3eGdfJV4RXT9Iti
-	0+fstdXsaeQ1ikNgaFIHLrukbmDJlbCiPyoJ1waxiuz5IIoEXRZyln38AS3V12uM5Z4q
-	feOw==
+	Wed, 5 Aug 2015 13:33:39 +0800
+Received: from localhost.localdomain (10.167.226.92) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 5 Aug 2015 13:35:32 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 5 Aug 2015 13:35:26 +0800
+Message-ID: <1438752926-1920-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Received: by 10.112.135.131 with SMTP id ps3mr7607839lbb.84.1438750296299;
-	Tue, 04 Aug 2015 21:51:36 -0700 (PDT)
-Received: by 10.25.15.38 with HTTP; Tue, 4 Aug 2015 21:51:36 -0700 (PDT)
-In-Reply-To: <1438741545-900-1-git-send-email-leimaohui@cn.fujitsu.com>
-References: <1438741545-900-1-git-send-email-leimaohui@cn.fujitsu.com>
-Date: Tue, 4 Aug 2015 21:51:36 -0700
-Message-ID: <CANx9H-B8xQbXPwL5TvxMx4Vv8Z-O0U64edhH2wt+Mh9D2P511Q@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH v2] python-requests: upgrade 2.5.1->2.7.0
+X-Originating-IP: [10.167.226.92]
+Subject: [meta-oe][PATCH] luajit: upgrade 2.0.3 -> 2.0.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,67 +35,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Aug 2015 04:51:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 05 Aug 2015 05:35:40 -0000
+Content-Type: text/plain
 
-.
+License COPYRIGHT year changed.
 
-On Tue, Aug 4, 2015 at 7:25 PM, Lei Maohui <leimaohui@cn.fujitsu.com> wrote:
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+---
+ .../recipes-devtools/luajit/{luajit_2.0.3.bb => luajit_2.0.4.bb}    | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/luajit/{luajit_2.0.3.bb => luajit_2.0.4.bb} (87%)
 
-> Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
-> ---
->  .../python/{python-requests_2.5.1.bb => python-requests_2.7.0.bb}  | 7
-> +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-requests_2.5.1.bb =>
-> python-requests_2.7.0.bb} (56%)
->
-> diff --git a/meta-python/recipes-devtools/python/python-requests_2.5.1.bb
-> b/meta-python/recipes-devtools/python/python-requests_2.7.0.bb
-> similarity index 56%
-> rename from meta-python/recipes-devtools/python/python-requests_2.5.1.bb
-> rename to meta-python/recipes-devtools/python/python-requests_2.7.0.bb
-> index b719dca..1564d50 100644
-> --- a/meta-python/recipes-devtools/python/python-requests_2.5.1.bb
-> +++ b/meta-python/recipes-devtools/python/python-requests_2.7.0.bb
-> @@ -2,15 +2,14 @@ DESCRIPTION = "Python HTTP for Humans."
->  HOMEPAGE = "http://python-requests.org"
->  SECTION = "devel/python"
->  LICENSE = "Apache-2.0"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=c7869e52c8275537186de35e3cd5f9ec"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=58c7e163c9f8ee037246da101c6afd1e"
->
->
-Again, since the LIC_FILES_CHKSUM has changed, it is a courtesy to indicate
-why. As the committer, it is your responsibility to make sure the same
-license still applies.
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+similarity index 87%
+rename from meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb
+rename to meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+index 925cbcf..4a15a4e 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+@@ -1,13 +1,13 @@
+ SUMMARY = "Just-In-Time Compiler for Lua"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=97b6446bbf9d55616838f821585c5978"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3992f1fbae3b8b061f9056b7fcda8cc6"
+ HOMEPAGE = "http://luajit.org"
+ 
+ SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
+            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
+ "
+-SRC_URI[md5sum] = "f14e9104be513913810cd59c8c658dc0"
+-SRC_URI[sha256sum] = "55be6cb2d101ed38acca32c5b1f99ae345904b365b642203194c585d27bebd79"
++SRC_URI[md5sum] = "dd9c38307f2223a504cbfb96e477eca0"
++SRC_URI[sha256sum] = "620fa4eb12375021bef6e4f237cbd2dd5d49e56beb414bee052c746beef1807d"
+ 
+ S = "${WORKDIR}/LuaJIT-${PV}"
+ 
+-- 
+1.8.4.2
 
-In this case the reason for the checksum change is a change in the
-copyright year. Please include a comment about that in your commit message.
-
--PR = "r0"
->  SRCNAME = "requests"
->
->  SRC_URI = "
-> http://pypi.python.org/packages/source/r/${SRCNAME}/${SRCNAME}-${PV}.tar.gz
-> "
->
-> -SRC_URI[md5sum] = "c270eb5551a02e8ab7a4cbb83e22af2e"
-> -SRC_URI[sha256sum] =
-> "7b7735efd3b1e2323dc9fcef060b380d05f5f18bd0f247f5e9e74a628279de66"
-> +SRC_URI[md5sum] = "29b173fd5fa572ec0764d1fd7b527260"
-> +SRC_URI[sha256sum] =
-> "398a3db6d61899d25fd4a06c6ca12051b0ce171d705decd7ed5511517b4bb93d"
->
->  S = "${WORKDIR}/${SRCNAME}-${PV}"
->
-> --
-> 1.8.4.2
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
