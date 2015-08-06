@@ -1,24 +1,29 @@
-Return-Path: <prvs=653f3e6c3=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 45F6C60167
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F058763F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Aug 2015 07:25:21 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApwEAIAKw1WsEApK/2dsb2JhbABbhFgGxQ4Cgg4BAQEBAQGBC4QkAQEEbgoRCw0LCRYPCQMCAQIBRQYNBgICiC/MawEBCCKLIS6FEBeEFQEEhxqGYYcGjh6EI4J1FpB6hCVtgUiBBAEBAQ
-X-IPAS-Result: ApwEAIAKw1WsEApK/2dsb2JhbABbhFgGxQ4Cgg4BAQEBAQGBC4QkAQEEbgoRCw0LCRYPCQMCAQIBRQYNBgICiC/MawEBCCKLIS6FEBeEFQEEhxqGYYcGjh6EI4J1FpB6hCVtgUiBBAEBAQ
-Message-ID: <55C30BCC.2090309@skidata.com>
-Date: Thu, 6 Aug 2015 09:25:00 +0200
-From: Richard Leitner <richard.leitner@skidata.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Icedove/31.8.0
-MIME-Version: 1.0
+	Thu,  6 Aug 2015 09:11:51 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99338263"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 06 Aug 2015 17:15:16 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7699sLt010989
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 6 Aug 2015 17:09:54 +0800
+Received: from localhost.localdomain (10.167.226.92) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 6 Aug 2015 17:11:48 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <556EA59A.8010007@skidata.com>
-	<CAP9ODKpB0A9JZbWdS80Dq2bNX1VG5e3PKTpSpCvdvCrwD4965g@mail.gmail.com>
-	<55ACECA1.10102@skidata.com>
-In-Reply-To: <55ACECA1.10102@skidata.com>
-X-Originating-IP: [172.16.60.30]
-Subject: Re: [meta-java][PATCH] openjdk-7: 75b13-2.5.4: fix xawt build
+Date: Thu, 6 Aug 2015 17:11:37 +0800
+Message-ID: <1438852297-1639-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <CAMKF1sp=e32BtfgaRPsEhrMGB-SMi7aNgyyMg1mLr801bMy=7Q@mail.gmail.com>
+References: <CAMKF1sp=e32BtfgaRPsEhrMGB-SMi7aNgyyMg1mLr801bMy=7Q@mail.gmail.com>
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.92]
+Subject: [meta-oe][PATCH v3] pcsc-lite: upgrade 1.8.6 -> 1.8.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,58 +37,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2015 07:25:24 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 06 Aug 2015 09:11:53 -0000
+Content-Type: text/plain
 
-Hello,
-any updates on this patch?
+* Remove PR
+* Modify chksum of COYING,since the explain of GPLv3+ is added,
+but the LICENSE has not been changed.
 
-best regards,
-Richard L
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+---
+ .../pcsc-lite/{pcsc-lite_1.8.6.bb => pcsc-lite_1.8.13.bb}        | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-support/pcsc-lite/{pcsc-lite_1.8.6.bb => pcsc-lite_1.8.13.bb} (69%)
 
-On 07/20/2015 02:42 PM, Richard Leitner wrote:
-> Hello,
-> 
-> On 07/07/2015 03:57 PM, Otavio Salvador wrote:
->> On Wed, Jun 3, 2015 at 3:58 AM, Richard Leitner
->> <richard.leitner@skidata.com> wrote:
->>> The icedtea-jdk-nio-use-host-cc.patch disabled the build of xawt.
->>> Therefore all awt based java application which were run on X11 failed
->>> starting the GUI with an java.awt.HeadlessException.
->>>
->>> This patch enables xawt again by adapting
->>> icedtea-jdk-nio-use-host-cc.patch.
->>>
->>> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
->>> ---
->>> This patch was only tested with yocto-1.6.3 (daisy) on an armv7a
->>> cortexa9 with vfpv3d16. Please test it on further platforms!
->>>
->>> This is my first patch to this mailinglist so hopefully I got everything
->>> right. If not please give me some feedback on what to improve for the
->>> next one ;-)
->>> ---
->>
->> Sorry for the long time to get to this patch. I would like to ask if
->> you could run a test in master so we avoid surprises. If you confirm
->> it works I am fine in commiting it.
->>
-> 
-> I successfully compiled and tested openjdk with the patch on an armv7a
-> cortexa9 cpu with vfpv3d16 using following layers:
-> 
-> poky/meta{,-yocto}
-> 	@ master (0f8d89ce66cfffccc9911d6c61470a585173b79d)
-> 
-> meta-java
-> 	@ master (4aea395deed99b2725b56d4a86fb4712fcf504d7)
-> 	+ my patch
-> 
-> meta-openembedded/meta-oe
-> 	@ master (c12b9596afd236116b25ce26dbe0d793de9dc7ce)
-> 
-> best regards,
-> Richard L
-> 
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+similarity index 69%
+rename from meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
+rename to meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+index c562b3d..cc72549 100644
+--- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+@@ -2,14 +2,13 @@ SUMMARY = "PC/SC Lite smart card framework and applications"
+ HOMEPAGE = "http://pcsclite.alioth.debian.org/"
+ LICENSE = "BSD & GPLv3+"
+ LICENSE_${PN}-dev = "GPLv3+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=a39d325b7d9cf2f07826a5154b16500c"
++LIC_FILES_CHKSUM = "file://COPYING;md5=bcfbd85230ac3c586fb294c8b627cf32"
+ DEPENDS = "udev"
+ 
+-SRC_URI = "https://alioth.debian.org/frs/download.php/file/3757/pcsc-lite-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "3e4b777231d35ce35c15c0704f936eaa"
+-SRC_URI[sha256sum] = "1e44049168d1ce55fd56c175f61206955254df0f385455f2a20ec7e8a0e6a77a"
++SRC_URI = "https://alioth.debian.org/frs/download.php/file/4126/pcsc-lite-${PV}.tar.bz2"
++SRC_URI[md5sum] = "4dcd22d20a6df8810fac5480cc320b6d"
++SRC_URI[sha256sum] = "f315047e808d63a3262c4a040f77548af2e04d1fd707e0c2759369b926fbbc3b"
+ 
+-PR = "r3"
+ 
+ inherit autotools systemd pkgconfig
+ 
+-- 
+1.8.4.2
+
 
