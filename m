@@ -1,49 +1,28 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
-	[209.85.213.176])
-	by mail.openembedded.org (Postfix) with ESMTP id C0C31734DA
+Return-Path: <Maxin.John@enea.com>
+Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
+	by mail.openembedded.org (Postfix) with SMTP id C9F96734DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Aug 2015 13:02:27 +0000 (UTC)
-Received: by iggf3 with SMTP id f3so10648185igg.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Aug 2015 06:02:27 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:content-type;
-	bh=NTtkolfhGmcTnuiLbxB6i1JeHpwWK9e2tEecfNkpZoA=;
-	b=TjWkuwmPAuPRi1ch31JzQw+wIBscVhVYC1wKjZ5sQBevj3PvWPh1ZJIwgxfZeM2Bu7
-	sIGAz38uZhmk70kj7WtASOkxV70AGCGDEnG0mZoLg8UHQ5um9Iu/W8ygu9wRzs3KX0Qx
-	Q/g1uwS1B0tI1pUagRVShaH4SMoKXto1komQYC3YRvrhwaqBKme2YhEwb65k73l8U5+c
-	X4GMNUr8VW0CCOIABORaGtSLcE3vh3Dx4eRdgp4nNQ6A7JTS6uEOblav1n0SUwWAkAei
-	X+0IzNGuIhXDHK8PtTa4PpGh8869eC5J3EkA+xF5tn60CPXtU7tS3yCizx5eYfoK7CU/
-	GGXw==
-X-Gm-Message-State: ALoCoQkFg/BpS67wbWQp8m69XzsPR1O1kmJjRFWyI16EzU7NojGDtPSDnhFpdyvnZHhkFKNyK3uP
-X-Received: by 10.50.64.212 with SMTP id q20mr3585604igs.5.1438866147343;
-	Thu, 06 Aug 2015 06:02:27 -0700 (PDT)
-Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com.
-	[209.85.213.175])
-	by smtp.gmail.com with ESMTPSA id i7sm1292135igt.18.2015.08.06.06.02.26
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Aug 2015 06:02:26 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by iggf3 with SMTP id f3so10647666igg.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Aug 2015 06:02:25 -0700 (PDT)
+	Thu,  6 Aug 2015 14:47:32 +0000 (UTC)
+Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
+	(172.21.1.208) with Microsoft SMTP Server id 14.3.224.2; Thu, 6 Aug 2015
+	16:47:30 +0200
+Received: by sestofb10.enea.se (Postfix, from userid 4454)	id 66A4528BA20;
+	Thu,  6 Aug 2015 16:47:30 +0200 (CEST)
+Date: Thu, 6 Aug 2015 16:47:30 +0200
+From: "Maxin B. John" <maxin.john@enea.com>
+To: "Awasthi, Vinay K" <vinay.k.awasthi@intel.com>
+Message-ID: <20150806144729.GA20394@sestofb10.enea.se>
+References: <B399646F8CA055479BEC55F6B065A04A3703DA8B@FMSMSX108.amr.corp.intel.com>
 MIME-Version: 1.0
-X-Received: by 10.50.61.234 with SMTP id t10mr3238867igr.19.1438866145905;
-	Thu, 06 Aug 2015 06:02:25 -0700 (PDT)
-Received: by 10.36.218.7 with HTTP; Thu, 6 Aug 2015 06:02:25 -0700 (PDT)
-In-Reply-To: <55C30BCC.2090309@skidata.com>
-References: <556EA59A.8010007@skidata.com>
-	<CAP9ODKpB0A9JZbWdS80Dq2bNX1VG5e3PKTpSpCvdvCrwD4965g@mail.gmail.com>
-	<55ACECA1.10102@skidata.com> <55C30BCC.2090309@skidata.com>
-Date: Thu, 6 Aug 2015 10:02:25 -0300
-Message-ID: <CAP9ODKrm-OgC5=_HTrPSpfNsGrab2cus7s8v1eRGa68_GLW5ZQ@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java][PATCH] openjdk-7: 75b13-2.5.4: fix xawt build
+In-Reply-To: <B399646F8CA055479BEC55F6B065A04A3703DA8B@FMSMSX108.amr.corp.intel.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Received-SPF: None (SESTOEX08.enea.se: maxin.john@enea.com does not
+	designate permitted sender hosts)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	"'otavio@ossystems.com.br'" <otavio@ossystems.com.br>,
+	"'mario@ossystems.com.br'" <mario@ossystems.com.br>
+Subject: Re: [meta-java] [Openjdk-8 enabling patch]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,18 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2015 13:02:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 06 Aug 2015 14:47:34 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On Thu, Aug 6, 2015 at 4:25 AM, Richard Leitner
-<richard.leitner@skidata.com> wrote:
-> Hello,
-> any updates on this patch?
+Hi,
 
-The patch didn't apply so I asked you to rebase. Can you rebase and send?
+On Wed, Aug 05, 2015 at 07:29:00PM +0000, Awasthi, Vinay K wrote:
+> diff --git recipes-core/openjdk/openjdk-8-8u40b27/cacao-arm-ucontext.patch
+> 
+> +        return "LIBFFI_LIBS=-lffi"
+> 
+> +    else:
+> 
+> +        return ""
+>
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Agree with Otavio and Paul here. Please re-do the patch as described
+in the README with a reasonable commit message and we will be happy to
+review it :)
+
+Best Regards,
+Maxin
 
