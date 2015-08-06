@@ -1,36 +1,39 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 95615739BE
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 3688C60167
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Aug 2015 09:38:47 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99339400"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 06 Aug 2015 17:42:14 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t769aqLt012666
+	Thu,  6 Aug 2015 10:53:17 +0000 (UTC)
+Received: by wicne3 with SMTP id ne3so17408913wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 6 Aug 2015 17:36:52 +0800
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
-	14.03.0181.006; Thu, 6 Aug 2015 17:38:47 +0800
-From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-networking][PATCH v2] geoip: upgrade 1.6.0 -> 1.6.6
-Thread-Index: AQHQz+8GKE9uKB0wgku7sJDrrPxWMZ3+sUoQ
-Date: Thu, 6 Aug 2015 09:38:46 +0000
-Message-ID: <A8FC939F80655644A89BB21CCD3741E8011BCB9246@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <20150805123908.GB2452@jama>
-	<1438824615-4091-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<CAMKF1soyQMz7YFO9-u3YGAqAJZ8+DO62of++izujH7Ae9eo+Cw@mail.gmail.com>
-In-Reply-To: <CAMKF1soyQMz7YFO9-u3YGAqAJZ8+DO62of++izujH7Ae9eo+Cw@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.92]
+	Thu, 06 Aug 2015 03:53:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=Hhcn/BjtX+8rOI+kY6O1sWvfYucsSQr6bZub9o1rSEU=;
+	b=mvWtPIYrsmvX3tTpjii2bFgMqlEz9Gv4/J/E0s+zitfTRKT3qhjr3Mi7vhJhj7BZ8e
+	fanosRoynC3J++TV5qw2CAvi84cLb1ZFvoz/n/0+VZ2PZuE4LXe+UjlfYuxcl7YTuzab
+	QNPSk8pB6vaujpv465rmCkZy5AQbafrGGhNyv/5C/l++DrjQyxyRqjMizIznBnMG0w3N
+	+dGJWbKAI9g/TYxBlIKe5llfnWclNNiCohbIaxjXWk0pDkKw3rii+K4Q6flYUGqlPew8
+	700QPzaYnZw8D9ShmdsvgO7Rf4bIFVD/bQ13GR7Lmd3aaGADVVgpwJO5eH5Rr9xaJfOF
+	j6YQ==
+X-Received: by 10.194.238.168 with SMTP id vl8mr2190271wjc.128.1438858397490; 
+	Thu, 06 Aug 2015 03:53:17 -0700 (PDT)
+Received: from localhost.localdomain
+	(ip-109-91-251-180.hsi12.unitymediagroup.de. [109.91.251.180])
+	by smtp.googlemail.com with ESMTPSA id
+	lu5sm8881944wjb.9.2015.08.06.03.53.16
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 06 Aug 2015 03:53:16 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  6 Aug 2015 12:52:08 +0200
+Message-Id: <1438858328-5247-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-Subject: Re: [meta-networking][PATCH v2] geoip: upgrade 1.6.0 -> 1.6.6
+Subject: [PATCH][meta-qt5] add libx11-locale to qtbase-plugins RRECOMMENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,58 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2015 09:38:57 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="iso-2022-jp"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 06 Aug 2015 10:53:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+fixes:
 
->-----Original Message-----
->From: openembedded-devel-bounces@lists.openembedded.org
->[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->Khem Raj
->Sent: Thursday, August 06, 2015 10:24 AM
->To: openembeded-devel
->Subject: Re: [oe] [meta-networking][PATCH v2] geoip: upgrade 1.6.0 -> 1.6.=
-6
->
->On Wed, Aug 5, 2015 at 6:30 PM, Li xin <lixin.fnst@cn.fujitsu.com> wrote:
->> *Modify SRC_URI.
->
->why do switch to git instead of tarball ?
->
->> *Modify chksum of file COPYING and LICENSE,since the context changed.
->
->why did checksums change? you need to explain that
+| Qt Warning: Could not find a location of the system's Compose files. Consider setting the QTCOMPOSE environment variable
 
-OK, Patch v3 will be sent.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ recipes-qt/qt5/qtbase_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
->
->> But the LICENSE has not been changed.
->
->in what way ?
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 33620cb..6ba7c8b 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -265,6 +265,8 @@ FILES_${PN}-fonts-qpf            = "${OE_QMAKE_PATH_LIBS}/fonts/*.qpf*"
+ FILES_${PN}-fonts                = "${OE_QMAKE_PATH_LIBS}/fonts/README \
+                                     ${OE_QMAKE_PATH_LIBS}/fonts/fontdir"
+ 
++RRECOMMENDS_${PN}-plugins += "${@base_contains('DISTRO_FEATURES', 'x11', 'libx11-locale', '', d)}"
++
+ sysroot_stage_dirs_append() {
+     # $to is 2nd parameter passed to sysroot_stage_dir, e.g. ${SYSROOT_DESTDIR} passed from sysroot_stage_all
+     rm -rf $to${OE_QMAKE_PATH_LIBS}/fonts
+-- 
+2.1.0
 
-I had checked LICENSE of geoip-1.6.0 and geoip-1.6.6 by SPDX and fossology =
-server.
-From the SPDX file, I found that LICENSE had not been changed.
-------------------------------------=20
-$ cat geoip-1.6.6.spdx
-......
-PackageLicenseDeclared: (LicenseRef-12 and GPL-2.0+ and LicenseRef-3 and Li=
-censeRef-1 and LGPL-2.1 and LicenseRef-4 and LGPL-2.1+ and LicenseRef-7 and=
- GPL-3.0+ and GPL-2.0-with-autoconf-exception and LicenseRef-8 and LicenseR=
-ef-9 and LicenseRef-10 and LicenseRef-5 and LicenseRef-2 and LicenseRef-6 a=
-nd LicenseRef-11)
-
-$ cat geoip-1.6.0.spdx
-......
-PackageLicenseDeclared: (LicenseRef-2 and GPL-2.0+ and LicenseRef-4 and Lic=
-enseRef-5 and LicenseRef-1 and LGPL-2.1 and LicenseRef-6 and LicenseRef-8 a=
-nd LGPL-2.1+ and LicenseRef-9 and GPL-3.0 and LicenseRef-10 and LicenseRef-=
-11 and LicenseRef-7 and LicenseRef-3 and GPL-2.0-with-autoconf-exception)
-------------------------------------
-
-
-Cheers,
-Li
 
