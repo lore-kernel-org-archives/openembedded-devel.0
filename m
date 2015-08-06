@@ -1,51 +1,49 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id ED93460167
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id C0C31734DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Aug 2015 10:54:57 +0000 (UTC)
-Received: by wibhh20 with SMTP id hh20so18614774wib.0
+	Thu,  6 Aug 2015 13:02:27 +0000 (UTC)
+Received: by iggf3 with SMTP id f3so10648185igg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Aug 2015 03:54:57 -0700 (PDT)
+	Thu, 06 Aug 2015 06:02:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=C4BtatqN/ROX/E9yaA9+GsOhPmQt5gX7sd0kcZ8FpXs=;
-	b=dSgB6XNlPxBE6X1Ww6JRTuds/HbMlls+c7M8eP/ELDSkUYKX41i3C/213swulcp4UA
-	W2r6lHobTKc0Scwi/Y0EEazHU2LsonoxQ7cabp4YyIZrh4ZT8hOxHfPQnu16ZGYzJ47H
-	f7DPYHjzvqPcrMtXtxsW9U8/6wVUBwUEmvW19pdWAjng+GNPDW36/S6vULzvV/NQtFuv
-	NSazxASf1X3V5qo4hTu8VJguQnfVm+VL3E4cyE6TqhiwRvWqOaIeo8YS4uGIYRZCLE8J
-	Vvq22E8iPg8H1I+oIw6N5uLJfDCsNt2T3fvIHKMOUmfXZHau6xu5y0NikieWZ/nk+UZ3
-	bJwQ==
-X-Gm-Message-State: ALoCoQm1+S9Hcej9soq96V1qnDYXcan1BAyzw94oCCMYi9H2rdAghzANYq+/Uy0ZOKfofhR+WawC
-X-Received: by 10.180.98.134 with SMTP id ei6mr4859213wib.49.1438858497619;
-	Thu, 06 Aug 2015 03:54:57 -0700 (PDT)
-Received: from [172.29.23.46] (zk223.dresearch-fe.de. [217.92.177.116])
-	by smtp.googlemail.com with ESMTPSA id
-	x6sm2673997wiy.6.2015.08.06.03.54.56
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:content-type;
+	bh=NTtkolfhGmcTnuiLbxB6i1JeHpwWK9e2tEecfNkpZoA=;
+	b=TjWkuwmPAuPRi1ch31JzQw+wIBscVhVYC1wKjZ5sQBevj3PvWPh1ZJIwgxfZeM2Bu7
+	sIGAz38uZhmk70kj7WtASOkxV70AGCGDEnG0mZoLg8UHQ5um9Iu/W8ygu9wRzs3KX0Qx
+	Q/g1uwS1B0tI1pUagRVShaH4SMoKXto1komQYC3YRvrhwaqBKme2YhEwb65k73l8U5+c
+	X4GMNUr8VW0CCOIABORaGtSLcE3vh3Dx4eRdgp4nNQ6A7JTS6uEOblav1n0SUwWAkAei
+	X+0IzNGuIhXDHK8PtTa4PpGh8869eC5J3EkA+xF5tn60CPXtU7tS3yCizx5eYfoK7CU/
+	GGXw==
+X-Gm-Message-State: ALoCoQkFg/BpS67wbWQp8m69XzsPR1O1kmJjRFWyI16EzU7NojGDtPSDnhFpdyvnZHhkFKNyK3uP
+X-Received: by 10.50.64.212 with SMTP id q20mr3585604igs.5.1438866147343;
+	Thu, 06 Aug 2015 06:02:27 -0700 (PDT)
+Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com.
+	[209.85.213.175])
+	by smtp.gmail.com with ESMTPSA id i7sm1292135igt.18.2015.08.06.06.02.26
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Aug 2015 03:54:56 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org,
-	Ash Charles <ashcharles@gmail.com>, Martin Jansa <martin.jansa@gmail.com>, 
-	danismostlikely@gmail.com
-References: <20150427105100.GB2379@jama>
-	<1432309170-5575-1-git-send-email-ashcharles@gmail.com>
-	<5567C5B1.7010901@windriver.com>
-	<CAK8F28mc2C=r4n42xFmNaxNveectuB8esrkt4M2BkSknH-mFxw@mail.gmail.com>
-	<CA+chaQe_T9zPjckAm+NZrZpdw5BO81eL-vxrAA-2kYymMRbd1w@mail.gmail.com>
-	<CAK8F28=cu6z2m3hNGkO-qkzDhyfuZwPG-Q-n+2rY95NvmwuStg@mail.gmail.com>
-	<556D3337.7020905@windriver.com>
-From: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <55C33CFF.3070200@dresearch-fe.de>
-Date: Thu, 6 Aug 2015 12:54:55 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.1.0
+	Thu, 06 Aug 2015 06:02:26 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by iggf3 with SMTP id f3so10647666igg.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Aug 2015 06:02:25 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <556D3337.7020905@windriver.com>
-Cc: bitbake-devel <bitbake-devel@lists.openembedded.org>
-Subject: Re: [bitbake-devel] [PATCH] fetch/hg: Disable checksums for archived downloads
+X-Received: by 10.50.61.234 with SMTP id t10mr3238867igr.19.1438866145905;
+	Thu, 06 Aug 2015 06:02:25 -0700 (PDT)
+Received: by 10.36.218.7 with HTTP; Thu, 6 Aug 2015 06:02:25 -0700 (PDT)
+In-Reply-To: <55C30BCC.2090309@skidata.com>
+References: <556EA59A.8010007@skidata.com>
+	<CAP9ODKpB0A9JZbWdS80Dq2bNX1VG5e3PKTpSpCvdvCrwD4965g@mail.gmail.com>
+	<55ACECA1.10102@skidata.com> <55C30BCC.2090309@skidata.com>
+Date: Thu, 6 Aug 2015 10:02:25 -0300
+Message-ID: <CAP9ODKrm-OgC5=_HTrPSpfNsGrab2cus7s8v1eRGa68_GLW5ZQ@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH] openjdk-7: 75b13-2.5.4: fix xawt build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,21 +57,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2015 10:54:58 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 06 Aug 2015 13:02:29 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 02.06.2015 06:38, Robert Yang wrote:
-> I'm working on fixing the issues now, will send patches sooner.
+On Thu, Aug 6, 2015 at 4:25 AM, Richard Leitner
+<richard.leitner@skidata.com> wrote:
+> Hello,
+> any updates on this patch?
 
-Any news on that?
+The patch didn't apply so I asked you to rebase. Can you rebase and send?
 
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
