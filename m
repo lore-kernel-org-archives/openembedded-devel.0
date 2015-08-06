@@ -1,29 +1,28 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F058763F8
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 85C8675BC9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Aug 2015 09:11:51 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99338263"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 06 Aug 2015 17:15:16 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7699sLt010989
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 6 Aug 2015 17:09:54 +0800
-Received: from localhost.localdomain (10.167.226.92) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Thu, 6 Aug 2015 17:11:48 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 6 Aug 2015 17:11:37 +0800
-Message-ID: <1438852297-1639-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <CAMKF1sp=e32BtfgaRPsEhrMGB-SMi7aNgyyMg1mLr801bMy=7Q@mail.gmail.com>
-References: <CAMKF1sp=e32BtfgaRPsEhrMGB-SMi7aNgyyMg1mLr801bMy=7Q@mail.gmail.com>
+	Thu,  6 Aug 2015 09:17:17 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga102.jf.intel.com with ESMTP; 06 Aug 2015 02:16:59 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.15,622,1432623600"; d="scan'208";a="537010121"
+Received: from ekalugin-mobl2.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.17.192])
+	by FMSMGA003.fm.intel.com with ESMTP; 06 Aug 2015 02:16:59 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org, "Awasthi,
+	Vinay K" <vinay.k.awasthi@intel.com>
+Date: Thu, 06 Aug 2015 10:16:57 +0100
+Message-ID: <1981919.1YO2FGNE6x@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.9 (Linux/4.0.8-200.fc21.x86_64; KDE/4.14.9; x86_64; ; )
+In-Reply-To: <CAP9ODKrkQ0RtcHiCf72Bmq70PKOd8pbYc2+y2W5=Y-d87Z8Kvg@mail.gmail.com>
+References: <B399646F8CA055479BEC55F6B065A04A3703DA8B@FMSMSX108.amr.corp.intel.com>
+	<CAP9ODKrkQ0RtcHiCf72Bmq70PKOd8pbYc2+y2W5=Y-d87Z8Kvg@mail.gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.92]
-Subject: [meta-oe][PATCH v3] pcsc-lite: upgrade 1.8.6 -> 1.8.13
+Cc: Otavio Salvador <otavio.salvador@ossystems.com.br>, mario@ossystems.com.br
+Subject: Re: [meta-java] [Openjdk-8 enabling patch]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,46 +36,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2015 09:11:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 06 Aug 2015 09:17:21 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-* Remove PR
-* Modify chksum of COYING,since the explain of GPLv3+ is added,
-but the LICENSE has not been changed.
+On Wednesday 05 August 2015 17:33:50 Otavio Salvador wrote:
+> On Wed, Aug 5, 2015 at 4:29 PM, Awasthi, Vinay K
+> <vinay.k.awasthi@intel.com> wrote:
+> 
+> I know you can do better; please follow the OE commit guidelines please.
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- .../pcsc-lite/{pcsc-lite_1.8.6.bb => pcsc-lite_1.8.13.bb}        | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-support/pcsc-lite/{pcsc-lite_1.8.6.bb => pcsc-lite_1.8.13.bb} (69%)
+To expand, what Otavio means is:
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
-similarity index 69%
-rename from meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
-rename to meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
-index c562b3d..cc72549 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
-@@ -2,14 +2,13 @@ SUMMARY = "PC/SC Lite smart card framework and applications"
- HOMEPAGE = "http://pcsclite.alioth.debian.org/"
- LICENSE = "BSD & GPLv3+"
- LICENSE_${PN}-dev = "GPLv3+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=a39d325b7d9cf2f07826a5154b16500c"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=bcfbd85230ac3c586fb294c8b627cf32"
- DEPENDS = "udev"
- 
--SRC_URI = "https://alioth.debian.org/frs/download.php/file/3757/pcsc-lite-${PV}.tar.bz2"
--SRC_URI[md5sum] = "3e4b777231d35ce35c15c0704f936eaa"
--SRC_URI[sha256sum] = "1e44049168d1ce55fd56c175f61206955254df0f385455f2a20ec7e8a0e6a77a"
-+SRC_URI = "https://alioth.debian.org/frs/download.php/file/4126/pcsc-lite-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "4dcd22d20a6df8810fac5480cc320b6d"
-+SRC_URI[sha256sum] = "f315047e808d63a3262c4a040f77548af2e04d1fd707e0c2759369b926fbbc3b"
- 
--PR = "r3"
- 
- inherit autotools systemd pkgconfig
- 
+  http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+
+Cheers,
+Paul
+
 -- 
-1.8.4.2
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
