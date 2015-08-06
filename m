@@ -1,37 +1,32 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f175.google.com (mail-io0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 97F1273905
+Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
+	[209.85.223.178])
+	by mail.openembedded.org (Postfix) with ESMTP id C9999734DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Aug 2015 03:31:35 +0000 (UTC)
-Received: by ioii16 with SMTP id i16so69257324ioi.0
+	Thu,  6 Aug 2015 03:40:29 +0000 (UTC)
+Received: by ioii16 with SMTP id i16so69390414ioi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Aug 2015 20:31:36 -0700 (PDT)
+	Wed, 05 Aug 2015 20:40:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=mxAK9dlEABiFhpkJ/pNMIt598IPp5ORaxIP8GsQEvK8=;
-	b=t2aPBjPGhIFF2PI8VEPljAvYtUtKQCQYDIQyThs8Uz5yHAARqzdThkIsGY2SlREvUY
-	CpWc0daDMdxdCe3ino/weZSLndpQt9wiVMlRrdK65+ovS77TLMt0vKNZ8srEEZlz7ZMP
-	iB/a8dwRwN4MPb+UxLzv4oXKh3cBJ+usFMo73cU/Ro8GL+YuRQ1d6tekvVxAHVASy16G
-	c8k88S6LemNPb94eCKeLAD2vW4mMK/lkhlMzuX+EQJ+C52xfasjWISLouMAOLpZ8hBFC
-	sRIlaN4XAI0sk5yiywgwiifLEC7vWyQueLyQYh7dA6z/HubXV6yzzKAzq/g6JNcYdRJa
-	FleQ==
-X-Received: by 10.107.34.194 with SMTP id i185mr13168916ioi.49.1438831896380; 
-	Wed, 05 Aug 2015 20:31:36 -0700 (PDT)
+	:content-type; bh=S1wUvrAerZtgcfDKAXf8Lzqm+Oq9hC6sp9cTsyUk53Q=;
+	b=Zo6n+0iVBQ2eghr9hYSajIDdDmHczL9XikGkf5ftbRH8Lqs/XWYBsgcP1eJogFVD7e
+	xVAao6IDtbRrYEhBL3XpUyy9qKwJ6bFqlycI1JkfwtyWT/FgxDaXkAT8lxOixzme0c75
+	YTEvd/auzxCAY08wFT5bWhBpD8Tt56kUh4t/undVnFBm5UoEKxEauBsuBYGvJ80jyp8T
+	9p70aFkONRfPPqBYEM6p5xXYWSaFOsNTt3v+E5d37m39C3ZVkGBbbMqzInVZ7z6gw+Pg
+	NOC6PVw9UDQ28zyzsQkL3yxnIsOSaakWRCGpoc9ZYYZBlodIBZvn9GlDZ47ipOVcDgst
+	DzFA==
+X-Received: by 10.107.34.194 with SMTP id i185mr13198755ioi.49.1438832429313; 
+	Wed, 05 Aug 2015 20:40:29 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.107.38.79 with HTTP; Wed, 5 Aug 2015 20:31:07 -0700 (PDT)
-In-Reply-To: <CAMKF1soyUm7RgKjhyCF3aLre1J9q6oEQSJ06QOi+7cnpiC5OGw@mail.gmail.com>
-References: <1429280204-27191-3-git-send-email-Martin.Jansa@gmail.com>
-	<1438628438-9452-1-git-send-email-Martin.Jansa@gmail.com>
-	<1438628438-9452-2-git-send-email-Martin.Jansa@gmail.com>
-	<CAMKF1sqPdo2ByELw+pCkVPGtYHRXVJAWEo8d3tONXtKcyJmu3g@mail.gmail.com>
-	<20150805123704.GA2452@jama>
-	<CAMKF1soyUm7RgKjhyCF3aLre1J9q6oEQSJ06QOi+7cnpiC5OGw@mail.gmail.com>
+Received: by 10.107.38.79 with HTTP; Wed, 5 Aug 2015 20:39:59 -0700 (PDT)
+In-Reply-To: <1438743456-2869-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+References: <1438743456-2869-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 5 Aug 2015 20:31:07 -0700
-Message-ID: <CAMKF1srVVT1SHf+9qh8eW=bJ+cVwde5eaX8A1ftFo_VQ2A3S-Q@mail.gmail.com>
+Date: Wed, 5 Aug 2015 20:39:59 -0700
+Message-ID: <CAMKF1sp=e32BtfgaRPsEhrMGB-SMi7aNgyyMg1mLr801bMy=7Q@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH 2/2] qt5-plugin-generic-vboxtouch: add -Wno-narrowing to fix build with gcc-5.2
+Subject: Re: [meta-oe][PATCH v2] pcsc-lite: upgrade 1.8.6 -> 1.8.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,49 +40,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2015 03:31:38 -0000
+X-List-Received-Date: Thu, 06 Aug 2015 03:40:29 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Aug 5, 2015 at 8:30 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Wed, Aug 5, 2015 at 5:37 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> On Tue, Aug 04, 2015 at 04:05:26PM -0700, Khem Raj wrote:
->>> On Mon, Aug 3, 2015 at 12:00 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
->>> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->>> > ---
->>> >  recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb | 7 +++++--
->>> >  1 file changed, 5 insertions(+), 2 deletions(-)
->>> >
->>> > diff --git a/recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb b/recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb
->>> > index 5352d15..2676bdd 100644
->>> > --- a/recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb
->>> > +++ b/recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb
->>> > @@ -9,12 +9,15 @@ LIC_FILES_CHKSUM = " \
->>> >      file://evdevmousehandler.cpp;beginline=1;endline=40;md5=9081062f6e7f74b6e62ad7ecee4a71be \
->>> >  "
->>> >
->>> > -PV = "1.0+gitr${SRCPV}"
->>> > +PV = "1.1.3+gitr${SRCPV}"
->>> >
->>> >  DEPENDS = "qtbase"
->>> >
->>> > +# Needed with gcc-5.2 https://gcc.gnu.org/bugzilla/show_bug.cgi?id=65801
->>>
->>> this comment it wrong. It should have said needed with gcc5 < 5.2
->>>
->>> > +CXXFLAGS += "-Wno-narrowing"
->>>
->>> we now have 5.2 in OE-Core and its fixed in 5.2, Can you try to remove it ?
->>
->> I wrote this change, because it was failing with gcc-5.2 (I don't
->> remember if it was failing with 5.1 as well).
+On Tue, Aug 4, 2015 at 7:57 PM, Li xin <lixin.fnst@cn.fujitsu.com> wrote:
+> * Remove PR
+> * Modify chksum of COYING,since the explanation of GPLv3+ is added, but the LICENSE has not been changed.
+
+can you add this to commit message and resend ?
+
 >
-> in that case then you are not encountering the gcc bug mentioned in
-> comment its something else.
-> because the bug mentioned there is fixed in 5.2 and also a followup
-> bug https://gcc.gnu.org/bugzilla/show_bug.cgi?id=65801
-
-I meant to type https://gcc.gnu.org/bugzilla/show_bug.cgi?id=66007
-
-> which is also fixed.
-> Can you send preprocessed source for the file in question ?
+> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> ---
+>  .../pcsc-lite/{pcsc-lite_1.8.6.bb => pcsc-lite_1.8.13.bb}        | 9 ++++-----
+>  1 file changed, 4 insertions(+), 5 deletions(-)
+>  rename meta-oe/recipes-support/pcsc-lite/{pcsc-lite_1.8.6.bb => pcsc-lite_1.8.13.bb} (69%)
+>
+> diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+> similarity index 69%
+> rename from meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
+> rename to meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+> index c562b3d..cc72549 100644
+> --- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
+> +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+> @@ -2,14 +2,13 @@ SUMMARY = "PC/SC Lite smart card framework and applications"
+>  HOMEPAGE = "http://pcsclite.alioth.debian.org/"
+>  LICENSE = "BSD & GPLv3+"
+>  LICENSE_${PN}-dev = "GPLv3+"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=a39d325b7d9cf2f07826a5154b16500c"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=bcfbd85230ac3c586fb294c8b627cf32"
+>  DEPENDS = "udev"
+>
+> -SRC_URI = "https://alioth.debian.org/frs/download.php/file/3757/pcsc-lite-${PV}.tar.bz2"
+> -SRC_URI[md5sum] = "3e4b777231d35ce35c15c0704f936eaa"
+> -SRC_URI[sha256sum] = "1e44049168d1ce55fd56c175f61206955254df0f385455f2a20ec7e8a0e6a77a"
+> +SRC_URI = "https://alioth.debian.org/frs/download.php/file/4126/pcsc-lite-${PV}.tar.bz2"
+> +SRC_URI[md5sum] = "4dcd22d20a6df8810fac5480cc320b6d"
+> +SRC_URI[sha256sum] = "f315047e808d63a3262c4a040f77548af2e04d1fd707e0c2759369b926fbbc3b"
+>
+> -PR = "r3"
+>
+>  inherit autotools systemd pkgconfig
+>
+> --
+> 1.8.4.2
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
