@@ -1,23 +1,29 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 55C2A6E630
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 60E406E630
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Aug 2015 01:17:07 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t761Gx0G003808
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 5 Aug 2015 18:16:59 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.235.1; Wed, 5 Aug 2015 18:16:59 -0700
-From: <rongqing.li@windriver.com>
+	Thu,  6 Aug 2015 01:30:30 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99319739"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 06 Aug 2015 09:33:55 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t761SW7J012575
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 6 Aug 2015 09:28:32 +0800
+Received: from localhost.localdomain (10.167.226.92) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 6 Aug 2015 09:30:26 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 6 Aug 2015 09:14:06 +0800
-Message-ID: <1438823646-28223-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Thu, 6 Aug 2015 09:30:15 +0800
+Message-ID: <1438824615-4091-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <20150805123908.GB2452@jama>
+References: <20150805123908.GB2452@jama>
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] numactl: fix the ptest building
+X-Originating-IP: [10.167.226.92]
+Subject: [meta-networking][PATCH v2] geoip: upgrade 1.6.0 -> 1.6.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,108 +37,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2015 01:17:11 -0000
+X-List-Received-Date: Thu, 06 Aug 2015 01:30:33 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+*Modify SRC_URI.
+*Modify chksum of file COPYING and LICENSE,since the context changed.
+But the LICENSE has not been changed.
 
-after upgrade, binary files are installed into test/.libs/, so
-fix the install ptest.
-redesign test Makefile rule
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- .../numactl/0001-define-run-test-target.patch      | 32 ++++++++++++++++++++++
- meta-oe/recipes-support/numactl/numactl_2.0.10.bb  | 21 ++++++++++----
- 2 files changed, 48 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-support/numactl/numactl/0001-define-run-test-target.patch
+ .../recipes-support/geoip/{geoip_1.6.0.bb => geoip_1.6.6.bb} | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
+ rename meta-networking/recipes-support/geoip/{geoip_1.6.0.bb => geoip_1.6.6.bb} (84%)
 
-diff --git a/meta-oe/recipes-support/numactl/numactl/0001-define-run-test-target.patch b/meta-oe/recipes-support/numactl/numactl/0001-define-run-test-target.patch
-new file mode 100644
-index 0000000..78ffb22
---- /dev/null
-+++ b/meta-oe/recipes-support/numactl/numactl/0001-define-run-test-target.patch
-@@ -0,0 +1,32 @@
-+rename test target as run-test
-+
-+Upstream-Statue: Pending
-+
-+test target not only compile the test files, but also run them, which is
-+not suitable for cross-compile environment, so rename it as run-test.
-+
-+and define test target to compile the test files.
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ Makefile.am | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index b6db339..de176c4 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -124,7 +124,9 @@ regress2: $(check_PROGRAMS)
-+ test_numademo: numademo
-+ 	./numademo -t -e 10M
-+ 
-+-test: all $(check_PROGRAMS) regress1 regress2 test_numademo
-++test: all $(check_PROGRAMS)
-++
-++run-test: all $(check_PROGRAMS) regress1 regress2 test_numademo
-+ 
-+ TESTS_ENVIRONMENT = builddir='$(builddir)'; export builddir;
-+ 
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-support/numactl/numactl_2.0.10.bb b/meta-oe/recipes-support/numactl/numactl_2.0.10.bb
-index 3a10ebb..8f27b15 100644
---- a/meta-oe/recipes-support/numactl/numactl_2.0.10.bb
-+++ b/meta-oe/recipes-support/numactl/numactl_2.0.10.bb
-@@ -15,6 +15,7 @@ SRC_URI = "ftp://oss.sgi.com/www/projects/libnuma/download/${BPN}-${PV}.tar.gz \
- 	   file://Fix-the-test-output-format.patch \
- 	   file://Makefile \
- 	   file://run-ptest \
-+	   file://0001-define-run-test-target.patch \
-           "
- SRC_URI[md5sum] = "682c38305b2596967881f3d77bc3fc9c"
- SRC_URI[sha256sum] = "dbdac8fe74f13b2e2864bba352f1597ab1d3345c8c485d7805f58d66f414db61"
-@@ -28,19 +29,29 @@ do_install() {
- 	rm -r ${D}${mandir}/man2
- }
+diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.0.bb b/meta-networking/recipes-support/geoip/geoip_1.6.6.bb
+similarity index 84%
+rename from meta-networking/recipes-support/geoip/geoip_1.6.0.bb
+rename to meta-networking/recipes-support/geoip/geoip_1.6.6.bb
+index f1b2aac..5037ae3 100644
+--- a/meta-networking/recipes-support/geoip/geoip_1.6.0.bb
++++ b/meta-networking/recipes-support/geoip/geoip_1.6.6.bb
+@@ -8,15 +8,13 @@ using reverse DNS lookups."
+ HOMEPAGE = "http://dev.maxmind.com/geoip/"
+ SECTION = "libdevel"
  
-+do_compile_ptest() {
-+	oe_runmake test
-+}
-+
- do_install_ptest() {
- 	#install tests binaries
--        local test_binaries="checkaffinity checktopology distance	\
--		ftok mbind_mig_pages migrate_pages move_pages mynode	\
--		nodemap pagesize prefered printcpu randmap realloc_test	\
--		regress regress2 runltp shmtest tbitmap tshared bind_range"
-+        local test_binaries="distance ftok mbind_mig_pages migrate_pages move_pages \
-+		mynode	nodemap node-parse pagesize prefered randmap realloc_test \
-+		tbitmap tshared"
+-SRC_URI = "http://www.maxmind.com/download/geoip/api/c/GeoIP-1.6.0.tar.gz;name=tarball \
++SRC_URI = "git://github.com/maxmind/geoip-api-c.git \
+            http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat \
+            http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat \
+            http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat \
+            http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat \
+ "
+-
+-SRC_URI[tarball.md5sum] = "89f4cdfdab43f1d67364cd7c85bbe8ca"
+-SRC_URI[tarball.sha256sum] = "075a0c2815cd099e9ec35c9569db716a3fefcdbb6a10dbfa1ce7c6cd48d4a635"
++SRCREV = "ed3f3e2b87fba05a8f2a5b9b1328e7d55be8bf30"
  
- 	[ ! -d ${D}/${PTEST_PATH}/test ] && mkdir -p ${D}/${PTEST_PATH}/test
- 	for i in $test_binaries; do
-+		install -m 0755 ${B}/test/.libs/$i ${D}${PTEST_PATH}/test
-+	done
-+
-+	local test_scripts="checktopology checkaffinity printcpu regress regress2 \
-+			shmtest  runltp bind_range"
-+	for i in $test_scripts; do
- 		install -m 0755 ${B}/test/$i ${D}${PTEST_PATH}/test
- 	done
-+
- 	install -m 0755 ${WORKDIR}/Makefile ${D}${PTEST_PATH}/
--	install -m 0755 ${B}/numactl ${D}${PTEST_PATH}/
-+	install -m 0755 ${B}/.libs/numactl ${D}${PTEST_PATH}/
- }
+ SRC_URI[GeoIP-dat.md5sum] = "37c84ead332dda0362a5ac7b049b72d4"
+ SRC_URI[GeoIP-dat.sha256sum] = "79ff1099e96c2dc1c2539c9a18aaa13a9afd085cae477df60d95f1644d42bc07"
+@@ -32,10 +30,10 @@ SRC_URI[GeoLiteCityv6-dat.sha256sum] = "eda67f4204ba9fa5204a53cdb629167cca9394c7
  
- RDEPENDS_${PN}-ptest = "bash"
+ LICENSE = "LGPL-2.1"
+ 
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d5d53d6b948c064f4070183180a4fa89 \
+-                    file://LICENSE;md5=f04db71812ba70aaba8b38da91984cd2 "
++LIC_FILES_CHKSUM = "file://COPYING;md5=243b725d71bb5df4a1e5920b344b86ad \
++                    file://LICENSE;md5=0388276749a542b0d611601fa7c1dcc8 "
+ 
+-S = "${WORKDIR}/GeoIP-1.6.0"
++S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
 -- 
-1.9.1
+1.8.4.2
 
 
