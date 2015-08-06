@@ -1,31 +1,33 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id AC8426E630
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-io0-f177.google.com (mail-io0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 81B8A6E630
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Aug 2015 01:46:47 +0000 (UTC)
-Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
-	by relay1.mentorg.com with esmtp 
-	id 1ZNAGc-0005p7-OQ from Joe_MacDonald@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Aug 2015 18:46:46 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
-	(147.34.97.39) with Microsoft SMTP Server id 14.3.224.2; Wed, 5 Aug 2015
-	18:46:46 -0700
-Received: by burninator (Postfix, from userid 1000)	id AD43A5875A2; Wed,  5
-	Aug 2015 21:46:10 -0400 (EDT)
-Date: Wed, 5 Aug 2015 21:46:10 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20150806014610.GB16843@mentor.com>
-References: <1438757380-15461-1-git-send-email-wenzong.fan@windriver.com>
-	<55C2B95E.3030606@windriver.com>
+	Thu,  6 Aug 2015 02:24:04 +0000 (UTC)
+Received: by iodd187 with SMTP id d187so68007178iod.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Aug 2015 19:24:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=0kKlKIKQW9ptwI4V2ZPw7+J7a7hecAkOp2HLRDb+An4=;
+	b=VXid8dCDZpkhoN4eYMjLKTfezZRePa25AV719Rw0a7kCm5l4u0NdEUi08W22zgBTsS
+	ex6q64MiAZW34DKGLZE9Od+0+Xs4wqvMA3v51Ck0BkJKOmuzr5b6bQYF2Jfe06Qt4Qwp
+	DKkaa5XuJm9nsIUNaN/eZBAi53m4Rmjr0pyShOTkCWFUEhU9k820f21TBHJv0jBcgMow
+	oFUSZ5AF/6v418VMrGcJQdaECJ+BZhxK0ElixAgUw41ejYT6eSjKNph0bm5FPCE+nxJK
+	KK/gIp8kFV9ZwtlbG8/d6fGNLBb2vtGG25JprHIdsqLvxGmDdyQcCYwf1RgIW8Abcjxb
+	k2SA==
+X-Received: by 10.107.34.194 with SMTP id i185mr12942813ioi.49.1438827844844; 
+	Wed, 05 Aug 2015 19:24:04 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <55C2B95E.3030606@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH][meta-networking] znc: provide SRCREV_FORMAT
+Received: by 10.107.38.79 with HTTP; Wed, 5 Aug 2015 19:23:35 -0700 (PDT)
+In-Reply-To: <1438824615-4091-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+References: <20150805123908.GB2452@jama>
+	<1438824615-4091-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 5 Aug 2015 19:23:35 -0700
+Message-ID: <CAMKF1soyQMz7YFO9-u3YGAqAJZ8+DO62of++izujH7Ae9eo+Cw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH v2] geoip: upgrade 1.6.0 -> 1.6.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,78 +41,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2015 01:46:53 -0000
-X-Groupsio-MsgNum: 56559
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="i9LlY+UWpKt15+FH"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 06 Aug 2015 02:24:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
---i9LlY+UWpKt15+FH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Aug 5, 2015 at 6:30 PM, Li xin <lixin.fnst@cn.fujitsu.com> wrote:
+> *Modify SRC_URI.
 
-[Re: [oe] [PATCH][meta-networking] znc: provide SRCREV_FORMAT] On 15.08.06 =
-(Thu 09:33) wenzong fan wrote:
+why do switch to git instead of tarball ?
 
-> I'd like recall this patch since it duplicates with Joe's:
+> *Modify chksum of file COPYING and LICENSE,since the context changed.
 
-I already marked it a duplicate in patchworks this morning.
+why did checksums change? you need to explain that
 
--J.
+> But the LICENSE has not been changed.
 
->=20
->   [oe] [meta-networking][PATCH 1/1] znc: add SRCREV_FORMAT variable
->=20
-> // Wenzong
->=20
-> On 08/05/2015 02:49 PM, wenzong.fan@windriver.com wrote:
-> >From: Wenzong Fan <wenzong.fan@windriver.com>
-> >
-> >Add SRCREV_FORMAT to provide a composite version number for
-> >get_srcrev() in fetch2 code. This fixes error:
-> >
-> >   * FetchError: Fetcher failure: The SRCREV_FORMAT variable \
-> >     must be set when multiple SCMs are used.
-> >
-> >Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-> >---
-> >  meta-networking/recipes-irc/znc/znc_git.bb | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> >diff --git a/meta-networking/recipes-irc/znc/znc_git.bb b/meta-networkin=
-g/recipes-irc/znc/znc_git.bb
-> >index d81c170..091db49 100644
-> >--- a/meta-networking/recipes-irc/znc/znc_git.bb
-> >+++ b/meta-networking/recipes-irc/znc/znc_git.bb
-> >@@ -13,6 +13,8 @@ SRC_URI =3D "git://github.com/znc/znc.git;name=3Dznc \
-> >  SRCREV_znc =3D "f47e8465efa4e1cd948b9caae93ac401b4355df8"
-> >  SRCREV_Csocket =3D "07b4437396122650e5b8fb3d014e820a5decf4ee"
-> >
-> >+SRCREV_FORMAT =3D "znc_Csocket"
-> >+
-> >  S =3D "${WORKDIR}/git"
-> >
-> >  inherit autotools-brokensep pkgconfig
-> >
---=20
--Joe MacDonald.
-:wq
+in what way ?
 
---i9LlY+UWpKt15+FH
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+>
+> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> ---
+>  .../recipes-support/geoip/{geoip_1.6.0.bb => geoip_1.6.6.bb} | 12 +++++-------
+>  1 file changed, 5 insertions(+), 7 deletions(-)
+>  rename meta-networking/recipes-support/geoip/{geoip_1.6.0.bb => geoip_1.6.6.bb} (84%)
+>
+> diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.0.bb b/meta-networking/recipes-support/geoip/geoip_1.6.6.bb
+> similarity index 84%
+> rename from meta-networking/recipes-support/geoip/geoip_1.6.0.bb
+> rename to meta-networking/recipes-support/geoip/geoip_1.6.6.bb
+> index f1b2aac..5037ae3 100644
+> --- a/meta-networking/recipes-support/geoip/geoip_1.6.0.bb
+> +++ b/meta-networking/recipes-support/geoip/geoip_1.6.6.bb
+> @@ -8,15 +8,13 @@ using reverse DNS lookups."
+>  HOMEPAGE = "http://dev.maxmind.com/geoip/"
+>  SECTION = "libdevel"
+>
+> -SRC_URI = "http://www.maxmind.com/download/geoip/api/c/GeoIP-1.6.0.tar.gz;name=tarball \
+> +SRC_URI = "git://github.com/maxmind/geoip-api-c.git \
+>             http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat \
+>             http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat \
+>             http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat \
+>             http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat \
+>  "
+> -
+> -SRC_URI[tarball.md5sum] = "89f4cdfdab43f1d67364cd7c85bbe8ca"
+> -SRC_URI[tarball.sha256sum] = "075a0c2815cd099e9ec35c9569db716a3fefcdbb6a10dbfa1ce7c6cd48d4a635"
+> +SRCREV = "ed3f3e2b87fba05a8f2a5b9b1328e7d55be8bf30"
+>
+>  SRC_URI[GeoIP-dat.md5sum] = "37c84ead332dda0362a5ac7b049b72d4"
+>  SRC_URI[GeoIP-dat.sha256sum] = "79ff1099e96c2dc1c2539c9a18aaa13a9afd085cae477df60d95f1644d42bc07"
+> @@ -32,10 +30,10 @@ SRC_URI[GeoLiteCityv6-dat.sha256sum] = "eda67f4204ba9fa5204a53cdb629167cca9394c7
+>
+>  LICENSE = "LGPL-2.1"
+>
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=d5d53d6b948c064f4070183180a4fa89 \
+> -                    file://LICENSE;md5=f04db71812ba70aaba8b38da91984cd2 "
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=243b725d71bb5df4a1e5920b344b86ad \
+> +                    file://LICENSE;md5=0388276749a542b0d611601fa7c1dcc8 "
+>
+> -S = "${WORKDIR}/GeoIP-1.6.0"
+> +S = "${WORKDIR}/git"
+>
+>  inherit autotools
+>
+> --
+> 1.8.4.2
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJVwrxiAAoJEEn8ffcsOfaWASIH/2Ojo3jtet78W08fURETbNvb
-7c5pIyEEbiFlaqGpEZm9tn+MNOVunIf6aycz5b4Gimg0qOB2c1bjlknYk+yiTrGl
-sEqJdBvNJ//oLl2lcH2kV3OwzEeWVV365bfWjbcNSFvU7c9NZlvuZO8orqyOkcsL
-DwIw3AsnZYocpmr8p5rTBi6vFMi99OiajLIXAxsQ6rMYIzKM058LliIHzNzLhVjl
-lM83USv4a3f3XHh5Ejbi9MP2DOkgTrzs9VYbzr5V2CuDh402MbVc0wHIA0Co9xDy
-PZ2YGqxnSz405CAz1KMs6oL+S6EwAckAHnEe0L5mKrFtP6aLalqpk1bj/nk9720=
-=t4XK
------END PGP SIGNATURE-----
-
---i9LlY+UWpKt15+FH--
