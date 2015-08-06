@@ -1,28 +1,36 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 85C8675BC9
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 95615739BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Aug 2015 09:17:17 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga102.jf.intel.com with ESMTP; 06 Aug 2015 02:16:59 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.15,622,1432623600"; d="scan'208";a="537010121"
-Received: from ekalugin-mobl2.ger.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.17.192])
-	by FMSMGA003.fm.intel.com with ESMTP; 06 Aug 2015 02:16:59 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org, "Awasthi,
-	Vinay K" <vinay.k.awasthi@intel.com>
-Date: Thu, 06 Aug 2015 10:16:57 +0100
-Message-ID: <1981919.1YO2FGNE6x@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.9 (Linux/4.0.8-200.fc21.x86_64; KDE/4.14.9; x86_64; ; )
-In-Reply-To: <CAP9ODKrkQ0RtcHiCf72Bmq70PKOd8pbYc2+y2W5=Y-d87Z8Kvg@mail.gmail.com>
-References: <B399646F8CA055479BEC55F6B065A04A3703DA8B@FMSMSX108.amr.corp.intel.com>
-	<CAP9ODKrkQ0RtcHiCf72Bmq70PKOd8pbYc2+y2W5=Y-d87Z8Kvg@mail.gmail.com>
+	Thu,  6 Aug 2015 09:38:47 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99339400"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 06 Aug 2015 17:42:14 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t769aqLt012666
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 6 Aug 2015 17:36:52 +0800
+Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
+	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
+	14.03.0181.006; Thu, 6 Aug 2015 17:38:47 +0800
+From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH v2] geoip: upgrade 1.6.0 -> 1.6.6
+Thread-Index: AQHQz+8GKE9uKB0wgku7sJDrrPxWMZ3+sUoQ
+Date: Thu, 6 Aug 2015 09:38:46 +0000
+Message-ID: <A8FC939F80655644A89BB21CCD3741E8011BCB9246@G08CNEXMBPEKD03.g08.fujitsu.local>
+References: <20150805123908.GB2452@jama>
+	<1438824615-4091-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	<CAMKF1soyQMz7YFO9-u3YGAqAJZ8+DO62of++izujH7Ae9eo+Cw@mail.gmail.com>
+In-Reply-To: <CAMKF1soyQMz7YFO9-u3YGAqAJZ8+DO62of++izujH7Ae9eo+Cw@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.92]
 MIME-Version: 1.0
-Cc: Otavio Salvador <otavio.salvador@ossystems.com.br>, mario@ossystems.com.br
-Subject: Re: [meta-java] [Openjdk-8 enabling patch]
+Subject: Re: [meta-networking][PATCH v2] geoip: upgrade 1.6.0 -> 1.6.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,25 +44,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2015 09:17:21 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 06 Aug 2015 09:38:57 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="iso-2022-jp"
+Content-Transfer-Encoding: quoted-printable
 
-On Wednesday 05 August 2015 17:33:50 Otavio Salvador wrote:
-> On Wed, Aug 5, 2015 at 4:29 PM, Awasthi, Vinay K
-> <vinay.k.awasthi@intel.com> wrote:
-> 
-> I know you can do better; please follow the OE commit guidelines please.
 
-To expand, what Otavio means is:
+>-----Original Message-----
+>From: openembedded-devel-bounces@lists.openembedded.org
+>[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+>Khem Raj
+>Sent: Thursday, August 06, 2015 10:24 AM
+>To: openembeded-devel
+>Subject: Re: [oe] [meta-networking][PATCH v2] geoip: upgrade 1.6.0 -> 1.6.=
+6
+>
+>On Wed, Aug 5, 2015 at 6:30 PM, Li xin <lixin.fnst@cn.fujitsu.com> wrote:
+>> *Modify SRC_URI.
+>
+>why do switch to git instead of tarball ?
+>
+>> *Modify chksum of file COPYING and LICENSE,since the context changed.
+>
+>why did checksums change? you need to explain that
 
-  http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+OK, Patch v3 will be sent.
+
+>
+>> But the LICENSE has not been changed.
+>
+>in what way ?
+
+I had checked LICENSE of geoip-1.6.0 and geoip-1.6.6 by SPDX and fossology =
+server.
+From the SPDX file, I found that LICENSE had not been changed.
+------------------------------------=20
+$ cat geoip-1.6.6.spdx
+......
+PackageLicenseDeclared: (LicenseRef-12 and GPL-2.0+ and LicenseRef-3 and Li=
+censeRef-1 and LGPL-2.1 and LicenseRef-4 and LGPL-2.1+ and LicenseRef-7 and=
+ GPL-3.0+ and GPL-2.0-with-autoconf-exception and LicenseRef-8 and LicenseR=
+ef-9 and LicenseRef-10 and LicenseRef-5 and LicenseRef-2 and LicenseRef-6 a=
+nd LicenseRef-11)
+
+$ cat geoip-1.6.0.spdx
+......
+PackageLicenseDeclared: (LicenseRef-2 and GPL-2.0+ and LicenseRef-4 and Lic=
+enseRef-5 and LicenseRef-1 and LGPL-2.1 and LicenseRef-6 and LicenseRef-8 a=
+nd LGPL-2.1+ and LicenseRef-9 and GPL-3.0 and LicenseRef-10 and LicenseRef-=
+11 and LicenseRef-7 and LicenseRef-3 and GPL-2.0-with-autoconf-exception)
+------------------------------------
+
 
 Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Li
 
