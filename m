@@ -1,43 +1,37 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id D696675A60
+Return-Path: <marek.belisko@gmail.com>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C7D9767A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Aug 2015 07:54:16 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id AE436D4025E
+	Fri,  7 Aug 2015 12:33:35 +0000 (UTC)
+Received: by wibhh20 with SMTP id hh20so64006760wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Aug 2015 09:54:12 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id DB559D40044
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Aug 2015 09:54:11 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from mail.itconsulting-heinold.de
-	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
-	by mail.familie-heinold.de (Postfix) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Aug 2015 09:54:11 +0200 (CEST)
-Date: Fri, 7 Aug 2015 09:54:09 +0200
-From: Henning Heinold <henning@itconsulting-heinold.de>
+	Fri, 07 Aug 2015 05:33:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=M/8MYaI/xZfnzUYbwpB57o99tngC7u+dAPKEXRIm+7I=;
+	b=mO6Hpx1mcuaaJ6KSm4zRN9vlUzNztR4CONAtawEZumOsbrYZE3sRY5GjKBoDLsAbwS
+	2OektkY9L93j1YOMPyhTkF4WGqxbdCiU42CZ+LPR+yob25l3X5kMrl+Qz2fskVG4FmSe
+	GK4Tlp3WHGc6VBb8AAMyYjEvhiUJwe0qAj6r1Xd0M/nMUn8FCxVKsGE9Ge7L/nEygYTI
+	7yGWWAKYsl2gr86FsHQtXH7jNd0iKkAV6/7wIm6Ldjn2ZBhEBKNwtxIuKJAA8cIgGqtY
+	u0EUvQUfXngOX+3M3FicULjHy7qnfiMKqOhlCY6jrm5AUDKjYz2ZUe1i792B4A+HUdi0
+	jYxw==
+X-Received: by 10.180.72.241 with SMTP id g17mr6979229wiv.81.1438950814255;
+	Fri, 07 Aug 2015 05:33:34 -0700 (PDT)
+Received: from mbuntu.sueba (81.89.61.168.vnet.sk. [81.89.61.168])
+	by smtp.gmail.com with ESMTPSA id
+	yu4sm14458656wjc.43.2015.08.07.05.33.33
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 07 Aug 2015 05:33:33 -0700 (PDT)
+From: Marek Belisko <marek.belisko@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150807075409.GD6096@mail.itconsulting-heinold.de>
-References: <556EA59A.8010007@skidata.com>
-	<CAP9ODKpB0A9JZbWdS80Dq2bNX1VG5e3PKTpSpCvdvCrwD4965g@mail.gmail.com>
-	<55ACECA1.10102@skidata.com> <55C30BCC.2090309@skidata.com>
-	<CAP9ODKrm-OgC5=_HTrPSpfNsGrab2cus7s8v1eRGa68_GLW5ZQ@mail.gmail.com>
-	<CAMKF1sozWdo2yarqU2tOZ_JXg8yRVVfjSsE712EzbNW=v5QJHQ@mail.gmail.com>
-	<55C4421A.3070706@skidata.com>
-	<20150807071912.GC6096@mail.itconsulting-heinold.de>
-	<55C46040.6080900@skidata.com>
+Date: Fri,  7 Aug 2015 14:33:16 +0200
+Message-Id: <1438950796-21610-1-git-send-email-marek.belisko@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-In-Reply-To: <55C46040.6080900@skidata.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [meta-java][PATCH] openjdk-7: 75b13-2.5.4: fix xawt build
+Cc: otavio@ossystems.com.br
+Subject: [meta-qt5][PATCH] qt5.inc: Fix packaging of qtquickcontrols
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,38 +45,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Aug 2015 07:54:19 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 07 Aug 2015 12:33:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Aug 07, 2015 at 09:37:36AM +0200, Richard Leitner wrote:
-> On 08/07/2015 09:19 AM, Henning Heinold wrote:
-> > On Fri, Aug 07, 2015 at 07:28:58AM +0200, Richard Leitner wrote:
-> >>
-> >> Ok, thanks for the input. I'll rebase and test during the weekend.
-> >> Hopefully I have v2 patch at the beginning of next week.
-> >>
-> > 
-> > If you have the time, it would be nice if you could update it to the latest 2.5.6 release.
-> > 
-> According "Andrew's Blog" 2.5.6 was the last 2.5.x release [1]:
-> 	There will be one further release of the 2.5.x series, 2.5.6,
-> 	for the July 2015 security updates, in tandem with 2.6.1, both
-> 	coming in the next few days. In October, the 2.5.x branch will
-> 	be rendered obsolete, with only the 2.6.x series being updated
-> 	for that security update. Please use the intervening period to
-> 	transition to the 2.6.x series.
-> 
-> Due to this fact I planned to update it to IcedTea 2.6.1 (2015-07-21).
-> Are there any facts against the 2.6.x release?
-> 
-> regards,
-> Richard L
-> 
-> [1]
-> http://blog.fuseyism.com/index.php/2015/07/19/icedtea-2-6-0-for-openjdk-7-released/
+Fixes following:
+ERROR: QA Issue: qtquickcontrols: Files/directories were installed but not shipped
+  /usr/lib/qt5/qml/QtQuick/Controls/Styles/Flat/.debug
+  /usr/lib/qt5/qml/QtQuick/Controls/Styles/Flat/.debug/libqtquickextrasflatplugin.so
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/qtquickextras.metainfo
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/gauge-icon.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/statusindicator-icon16.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/dial-icon.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/statusindicator-icon.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/delaybutton-icon16.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/piemenu-icon.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/piemenu-icon16.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/togglebutton-icon16.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/circulargauge-icon16.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/picture-icon.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/picture-icon16.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/togglebutton-icon.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/delaybutton-icon.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/dial-icon16.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/tumbler-icon16.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/gauge-icon16.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/circulargauge-icon.png
+  /usr/lib/qt5/qml/QtQuick/Extras/designer/images/tumbler-icon.png
+ERROR: QA run found fatal errors. Please consider fixing them.
+ERROR: Function failed: do_package_qa
 
-Not from me.
+Signed-off-by: Marek Belisko <marek.belisko@gmail.com>
+---
 
-Bye Henning
+This patch is against jansa/master as I was trying to build Qt5.5
+
+ recipes-qt/qt5/qt5.inc |    3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
+index 2fc5367..d0309ae 100644
+--- a/recipes-qt/qt5/qt5.inc
++++ b/recipes-qt/qt5/qt5.inc
+@@ -52,6 +52,7 @@ FILES_${PN}-qmlplugins-dbg = " \
+     ${OE_QMAKE_PATH_QML}/*/.debug \
+     ${OE_QMAKE_PATH_QML}/*/*/.debug \
+     ${OE_QMAKE_PATH_QML}/*/*/*/.debug \
++    ${OE_QMAKE_PATH_QML}/*/*/*/*/.debug \
+     ${OE_QMAKE_PATH_IMPORTS}/*/.debug \
+     ${OE_QMAKE_PATH_IMPORTS}/*/*/.debug \
+     ${OE_QMAKE_PATH_IMPORTS}/*/*/*/.debug \
+@@ -80,10 +81,12 @@ FILES_${PN}-qmlplugins = " \
+     ${OE_QMAKE_PATH_QML}/*/*/*.js \
+     ${OE_QMAKE_PATH_QML}/*/*/*/*${SOLIBSDEV} \
+     ${OE_QMAKE_PATH_QML}/*/*/*/qmldir \
++    ${OE_QMAKE_PATH_QML}/*/*/*/images \
+     ${OE_QMAKE_PATH_QML}/*/*/*/*.qmltypes \
+     ${OE_QMAKE_PATH_QML}/*/*/*/*.qml \
+     ${OE_QMAKE_PATH_QML}/*/*/*/*.js \
+     ${OE_QMAKE_PATH_QML}/*/*/*/*.png \
++    ${OE_QMAKE_PATH_QML}/*/*/*/*.metainfo \
+     ${OE_QMAKE_PATH_QML}/*/*/*/*/*${SOLIBSDEV} \
+     ${OE_QMAKE_PATH_QML}/*/*/*/*/qmldir \
+     ${OE_QMAKE_PATH_QML}/*/*/*/*/*.qmltypes \
+-- 
+1.7.9.5
+
 
