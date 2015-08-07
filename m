@@ -1,28 +1,26 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D2961766E5
+Return-Path: <prvs=65448b334=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id B841B76720
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Aug 2015 02:43:52 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t772hqXI016511
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 6 Aug 2015 19:43:53 -0700 (PDT)
-Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Thu, 6 Aug 2015 19:43:52 -0700
-Message-ID: <55C41B67.6030906@windriver.com>
-Date: Fri, 7 Aug 2015 10:43:51 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
+	Fri,  7 Aug 2015 05:29:20 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ApwEAE9BxFWsEApK/2dsb2JhbABbhFgGxRsCggkBAQEBAQGBC4QkAQEEeBELDQUGCRYPCQMCAQIBNw4GDQYCAogvzUQBAQEHIoshLoUQF4QVAQSHGoZlhwiOIIQjgnUWkH+CNByBVW2BSIEEAQEB
+X-IPAS-Result: ApwEAE9BxFWsEApK/2dsb2JhbABbhFgGxRsCggkBAQEBAQGBC4QkAQEEeBELDQUGCRYPCQMCAQIBNw4GDQYCAogvzUQBAQEHIoshLoUQF4QVAQSHGoZlhwiOIIQjgnUWkH+CNByBVW2BSIEEAQEB
+Message-ID: <55C4421A.3070706@skidata.com>
+Date: Fri, 7 Aug 2015 07:28:58 +0200
+From: Richard Leitner <richard.leitner@skidata.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
+	rv:31.0) Gecko/20100101 Icedove/31.8.0
 MIME-Version: 1.0
 To: <openembedded-devel@lists.openembedded.org>
-References: <1436234146-4895-1-git-send-email-rongqing.li@windriver.com>	<55BACC5A.1050808@windriver.com>
-	<20150806145603.GA12457@mentor.com>
-In-Reply-To: <20150806145603.GA12457@mentor.com>
-Subject: Re: [PATCH][meta-networking][v3] squid: upgrade to 3.5.5
+References: <556EA59A.8010007@skidata.com>
+	<CAP9ODKpB0A9JZbWdS80Dq2bNX1VG5e3PKTpSpCvdvCrwD4965g@mail.gmail.com>
+	<55ACECA1.10102@skidata.com> <55C30BCC.2090309@skidata.com>
+	<CAP9ODKrm-OgC5=_HTrPSpfNsGrab2cus7s8v1eRGa68_GLW5ZQ@mail.gmail.com>
+	<CAMKF1sozWdo2yarqU2tOZ_JXg8yRVVfjSsE712EzbNW=v5QJHQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sozWdo2yarqU2tOZ_JXg8yRVVfjSsE712EzbNW=v5QJHQ@mail.gmail.com>
+X-Originating-IP: [172.16.60.30]
+Subject: Re: [meta-java][PATCH] openjdk-7: 75b13-2.5.4: fix xawt build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,186 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Aug 2015 02:43:55 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 07 Aug 2015 05:29:24 -0000
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: 7bit
 
-
-
-On 2015年08月06日 22:56, Joe MacDonald wrote:
-> [Re: [oe] [PATCH][meta-networking][v3] squid: upgrade to 3.5.5] On 15.07.31 (Fri 09:16) Rongqing Li wrote:
->
->> Ping
->
-> Just getting to look at the queue again and this stood out for me:
->
-Hi Joe:
-
-I see several patches stayed in master-next for a long time,
-Could you consider to merge them to master?
-
-meta-oe$ git log --oneline master-next ^master ./meta-networking/
-4842138 opensaf: upgrade 4.5.0 -> 4.6.0
-fec751e vsftpd: upgrade 3.0.2->3.0.3
-6c8ab71 ypbind-mt: add dependency but keep as broken
-dbb4501 stunnel: upgrade 5.17 -> 5.21
-0531aae quagga: upgrade 0.99.23 -> 0.99.24.1
-e357ad6 netperf: fix the broken download url
-27f7240 net-snmp: fix mib representation of timeout values
-40c187b ypbind-mt: get parameters from dhcp
-8f45f1b tcpslice: fix do_install
-105f950 openvpn: upgrade 2.3.6 -> 2.3.7
-9193170 radvd: upgrade 1.14 -> 2.11
-085a82d netcf: upgrade 0.2.3 -> 0.2.8
-65f4eed strongswan: upgrade to 5.3.2
-463ab47 dovecot: upgrade 2.2.10 -> 2.2.18
-73f0f92 crda: upgrade 3.13 -> 3.18
-b9ea02a cim-schema-exper: add new recipe for openlmi
-cdd2db1 ntp: upgrade 4.2.8p2 -> 4.2.8p3
-1019565 squid: upgrade to 3.5.5
-dd56f0d inetutils: Fix deadlock in telnetd when cleanup
-23b4e6c ypbind-yocto.init: add status command
-
-
-
+On 08/07/2015 04:31 AM, Khem Raj wrote:
+> On Thu, Aug 6, 2015 at 6:02 AM, Otavio Salvador
+> <otavio.salvador@ossystems.com.br> wrote:
+>> On Thu, Aug 6, 2015 at 4:25 AM, Richard Leitner
+>> <richard.leitner@skidata.com> wrote:
+>>> Hello,
+>>> any updates on this patch?
 >>
->> -Roy
+>> The patch didn't apply so I asked you to rebase. Can you rebase and send?
 >>
->> On 2015年07月07日 09:55, rongqing.li@windriver.com wrote:
->>> From: Roy Li <rongqing.li@windriver.com>
->>>
->>> 1. Remove the squid-change-ksh-referen*.patch which is not needed, since
->>>     3.5.5 did not use ksh by default.
->>> 2. Update the checksum of COPYING,since the date in it has been changed.
->>> 3. Define BUILDCXXFLAGS, otherwise the target gcc options -std=c++11 will
->>>     add into it, and lead to building failure since host gcc maybe not
->>>     support "-std=c++11"
->>> 4. Assume to support GNU atomic operations by default, the running check
->>>     on cross-compile setup does not work
->>> 5. Add the dependency on libpam
->
-> Is PAM actually a Squid dependency now?  None of the documentation seems
-> to indicate it is mandatory.  I know the last time around it was flagged
-> as a dependency in Martin's build logs, but that's because PAM was
-> detected during the build and used, not because Squid demands it, I
-> think.  We just need explicit behaviour because the auto-detected
-> behaviour is indeterminate.
->
-> -J.
+> 
+> in addition please build for FSL ppc since that was original
+> architecture where it failed when I did this patch
+> 
 
-I check the source code, did not find the configuration option,
-seems pam is a must.
+Ok, thanks for the input. I'll rebase and test during the weekend.
+Hopefully I have v2 patch at the beginning of next week.
 
-like:
-http://www.rpmfind.net/linux/rpm2html/search.php?query=squid&submit=Search+...&system=&arch=
-http://www.rpmfind.net//linux/RPM/mageia/cauldron/i586/media/core/release/squid-3.5.7-1.mga6.i586.html
-
--Roy
-
->
->>>
->>> Signed-off-by: Roy Li <rongqing.li@windriver.com>
->>> ---
->>>   ...ge-ksh-reference-in-krb-ldap-helper-to-sh.patch | 39 ----------------------
->>>   .../squid/{squid_3.4.7.bb => squid_3.5.5.bb}       | 11 +++---
->>>   2 files changed, 6 insertions(+), 44 deletions(-)
->>>   delete mode 100644 meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
->>>   rename meta-networking/recipes-daemons/squid/{squid_3.4.7.bb => squid_3.5.5.bb} (86%)
->>>
->>> diff --git a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch b/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
->>> deleted file mode 100644
->>> index 8e03860..0000000
->>> --- a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
->>> +++ /dev/null
->>> @@ -1,39 +0,0 @@
->>> -squid: change ksh reference in krb ldap helper to sh
->>> -
->>> -Very simple cert_tool script with no ksh specifics.
->>> -Change it to use sh so a package dependency doesn't
->>> -get created to ksh.
->>> -
->>> -Upstream-Status: Pending
->>> -
->>> -Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
->>> -Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
->>> ----
->>> - helpers/external_acl/kerberos_ldap_group/cert_tool | 6 +++---
->>> - 1 file changed, 3 insertions(+), 3 deletions(-)
->>> -
->>> -diff --git a/helpers/external_acl/kerberos_ldap_group/cert_tool b/helpers/external_acl/kerberos_ldap_group/cert_tool
->>> -index 9f14959..8c4ea11 100644
->>> ---- a/helpers/external_acl/kerberos_ldap_group/cert_tool
->>> -+++ b/helpers/external_acl/kerberos_ldap_group/cert_tool
->>> -@@ -1,4 +1,4 @@
->>> --#!/bin/ksh
->>> -+#!/bin/sh
->>> - #
->>> - #  -----------------------------------------------------------------------------
->>> - #
->>> -@@ -64,9 +64,9 @@ QUIT
->>> - # Create database for Sun ldap and pem file for Openldap
->>> - #
->>> - rm ${server}_[0-9]*.pem 2>/dev/null
->>> --let i=0
->>> -+i=0
->>> -  ls ${server}_[0-9]*.cert | while read file; do
->>> -- let i=i+1
->>> -+ i=`expr $i + 1`
->>> -  cat  $file  >> ${server}_$i.pem
->>> -  CA=`openssl x509 -noout -text -in  ${server}_$i.pem | grep -i "CA:.*true"`
->>> -  if [ -n "$CA" ]; then
->>> ---
->>> -1.9.1
->>> -
->>> diff --git a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
->>> similarity index 86%
->>> rename from meta-networking/recipes-daemons/squid/squid_3.4.7.bb
->>> rename to meta-networking/recipes-daemons/squid/squid_3.5.5.bb
->>> index 7b00dfc..198319d 100644
->>> --- a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb
->>> +++ b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
->>> @@ -16,19 +16,18 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
->>>              file://Set-up-for-cross-compilation.patch \
->>>              file://Skip-AC_RUN_IFELSE-tests.patch \
->>>              file://Fix-flawed-dynamic-ldb-link-test-in-configure.patch \
->>> -           file://squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch \
->>>              file://squid-use-serial-tests-config-needed-by-ptest.patch \
->>>              file://run-ptest \
->>>              file://volatiles.03_squid \
->>>   "
->>>
->>>   LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
->>> -                    file://COPYRIGHT;md5=2900f50789c498be8e9f1eb23b55cbe9 \
->>> +                    file://errors/COPYRIGHT;md5=0fed8f1462f6fdbc62bb431bcb618f46 \
->>>                      "
->>> -SRC_URI[md5sum] = "9951034b10f7ee0f45a95cfae61c57c2"
->>> -SRC_URI[sha256sum] = "7b423f3d3495a317503ca559ea535f80445fd7c4e3c3e268cb7a8c97c61af2b6"
->>> +SRC_URI[md5sum] = "6aac5c2e9cbbeabcbf2e9e49a178a931"
->>> +SRC_URI[sha256sum] = "741c24a307c50f0d845d53cabb66b36d91ce9a73c8a165eae5def5e4d11e6a0d"
->>>
->>> -DEPENDS = "libtool krb5 openldap db cyrus-sasl"
->>> +DEPENDS = "libtool krb5 openldap db cyrus-sasl libpam"
->>>
->>>   inherit autotools useradd ptest
->>>
->>> @@ -38,6 +37,8 @@ USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --she
->>>   PACKAGECONFIG ??= ""
->>>   PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
->>>   EXTRA_OECONF += "--with-default-user=squid"
->>> +export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
->>> +CACHED_CONFIGUREVARS += "squid_cv_gnu_atomics=yes"
->>>
->>>   TESTDIR = "test-suite"
->>>   do_compile_ptest() {
->>>
->>
->> --
->> Best Reagrds,
->> Roy | RongQing Li
->>
->>
-
--- 
-Best Reagrds,
-Roy | RongQing Li
+regards,
+Richard L
 
