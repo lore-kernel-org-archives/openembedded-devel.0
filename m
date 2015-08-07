@@ -1,22 +1,27 @@
-Return-Path: <prvs=65448b334=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 8412276703
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 2E26776720
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Aug 2015 05:33:33 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApwEAHJCxFWsEApK/2dsb2JhbABbhFgGxRsCggkBAQEBAQGBC4QkAQEEeBELDQsJFg8JAwIBAgFFBg0GAgKIL805AQEBByKLT4UQF4QVAQSMVIgzjiCHGBaNG4NkhCVtAYFHgQQBAQE
-X-IPAS-Result: ApwEAHJCxFWsEApK/2dsb2JhbABbhFgGxRsCggkBAQEBAQGBC4QkAQEEeBELDQsJFg8JAwIBAgFFBg0GAgKIL805AQEBByKLT4UQF4QVAQSMVIgzjiCHGBaNG4NkhCVtAYFHgQQBAQE
-Message-ID: <55C44318.4000203@skidata.com>
-Date: Fri, 7 Aug 2015 07:33:12 +0200
-From: Richard Leitner <richard.leitner@skidata.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Icedove/31.8.0
-MIME-Version: 1.0
+	Fri,  7 Aug 2015 05:34:58 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99374628"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 07 Aug 2015 13:38:23 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t775X1mS019754
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 7 Aug 2015 13:33:01 +0800
+Received: from localhost.localdomain (10.167.226.92) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Fri, 7 Aug 2015 13:34:55 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <B399646F8CA055479BEC55F6B065A04A3703F105@FMSMSX108.amr.corp.intel.com>
-In-Reply-To: <B399646F8CA055479BEC55F6B065A04A3703F105@FMSMSX108.amr.corp.intel.com>
-X-Originating-IP: [172.16.60.30]
-Subject: Re: [meta-java] [Enabling-Openjdk-8-for-x86-hotspot-vm-and-arm-zero-vm]
+Date: Fri, 7 Aug 2015 13:34:49 +0800
+Message-ID: <1438925689-1647-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.92]
+Subject: [meta-python][PATCH] python-pip: upgrade 1.5.6 -> 7.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,21 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Aug 2015 05:33:37 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 07 Aug 2015 05:35:00 -0000
+Content-Type: text/plain
 
-Hi Vinay,
+Version numbers are now simply "X.Y" where the leading "1"
+has been dropped.
+Reference: https://github.com/pypa/pip/blob/develop/CHANGES.txt
 
-On 08/07/2015 03:31 AM, Awasthi, Vinay K wrote:
-> 
-> Signed-off-by: Vinay K Awasthi <vinay.k.awasthi@intel.com>
-> Signed-off-by: Vinay K. Awasthi <vinay.k.awasthi@intel.com>
-> ---
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+---
+ .../python/{python-pip_1.5.6.bb => python-pip_7.1.0.bb}               | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pip_1.5.6.bb => python-pip_7.1.0.bb} (76%)
 
-I just wanted to mention that you have a doubled "Signed-off-by" entry
-with your name on that patch ;-)
+diff --git a/meta-python/recipes-devtools/python/python-pip_1.5.6.bb b/meta-python/recipes-devtools/python/python-pip_7.1.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python-pip_1.5.6.bb
+rename to meta-python/recipes-devtools/python/python-pip_7.1.0.bb
+index b4ce9e5..ae02e86 100644
+--- a/meta-python/recipes-devtools/python/python-pip_1.5.6.bb
++++ b/meta-python/recipes-devtools/python/python-pip_7.1.0.bb
+@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=45665b53032c02b35e29ddab8e61fa91"
+ 
+ SRC_URI = "https://pypi.python.org/packages/source/p/pip/pip-${PV}.tar.gz"
+ 
+-SRC_URI[md5sum] = "01026f87978932060cc86c1dc527903e"
+-SRC_URI[sha256sum] = "b1a4ae66baf21b7eb05a5e4f37c50c2706fa28ea1f8780ce8efe14dcd9f1726c"
++SRC_URI[md5sum] = "d935ee9146074b1d3f26c5f0acfd120e"
++SRC_URI[sha256sum] = "d5275ba3221182a5dd1b6bcfbfc5ec277fb399dd23226d6fa018048f7e0f10f2"
+ 
+ S = "${WORKDIR}/pip-${PV}"
+ 
+-- 
+1.8.4.2
 
-regards,
-Richard L
 
