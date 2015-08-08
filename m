@@ -1,18 +1,18 @@
 Return-Path: <vinay.k.awasthi@intel.com>
 Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 25FF1767D1
+	by mail.openembedded.org (Postfix) with ESMTP id 7E751767ED
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  8 Aug 2015 00:13:57 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga101.jf.intel.com with ESMTP; 07 Aug 2015 17:13:58 -0700
+	Sat,  8 Aug 2015 02:19:04 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 07 Aug 2015 19:19:04 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.15,632,1432623600"; d="scan'208";a="764363662"
+X-IronPort-AV: E=Sophos;i="5.15,632,1432623600"; d="scan'208";a="780068840"
 Received: from vinay-h97m-d3h.sc.intel.com ([172.25.115.5])
-	by fmsmga001.fm.intel.com with ESMTP; 07 Aug 2015 17:13:54 -0700
+	by orsmga002.jf.intel.com with ESMTP; 07 Aug 2015 19:19:03 -0700
 From: "Vinay K. Awasthi" <vinay.k.awasthi@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Aug 2015 17:14:42 -0700
-Message-Id: <1438992882-1242-1-git-send-email-vinay.k.awasthi@intel.com>
+Date: Fri,  7 Aug 2015 19:20:03 -0700
+Message-Id: <1439000403-25738-1-git-send-email-vinay.k.awasthi@intel.com>
 X-Mailer: git-send-email 1.9.1
 Subject: [meta-java][PATCH] OpenJDK-8u: For x86 and arm
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -28,17 +28,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Aug 2015 00:13:59 -0000
+X-List-Received-Date: Sat, 08 Aug 2015 02:19:04 -0000
 
-OpenJDK-8 update build 40b27:
+OpenJDK-8 Update Build 40b27:
 
-This package enables Openjdk-8u for x86 and arm. Support to build compact profiles
-for Openjdk-8u is also listed as comment and can be enabled if needed.
+This package enables OpenJDK-8 update for x86 and arm in following vm configurations.
 
-x86: Hotspot vm is enabled.
-ARM: Interpreter mode (zero) is used as hotspot is not stable.
+x86: hotspot VM
+arm: interpreter mode (zero vm)
 
-Upstream-Status: Submitted [openembedded-devel@lists.openembedded.org], waiting approval
+Openjdk-8u also supports compact profiles (see http://openjdk.java.net/jeps/161 for
+more details). These compact profiles can also be built by going over the comments.
+
+oe_runmake profiles will build compact profile one two and three java runtimes (jre)
+oe_runmake images profiles will build compact profile JDKs
+
 Signed-off-by: Vinay K. Awasthi <vinay.k.awasthi@intel.com>
 ---
  .../openjdk-8u-40b27/cacao-arm-ucontext.patch      |  24 +
@@ -50,7 +54,8 @@ Signed-off-by: Vinay K. Awasthi <vinay.k.awasthi@intel.com>
  recipes-core/openjdk/openjdk-8u-40b27/jvm.cfg      |  43 ++
  .../openjdk/openjdk-8u-40b27/zero-build.patch      |  14 +
  recipes-core/openjdk/openjdk-8u_40b27-2.5.4.bb     | 620 +++++++++++++++++++++
- 9 files changed, 826 insertions(+)
+ recipes-images/images/java-test-image.bb           |   1 +
+ 10 files changed, 827 insertions(+)
  create mode 100644 recipes-core/openjdk/openjdk-8u-40b27/cacao-arm-ucontext.patch
  create mode 100644 recipes-core/openjdk/openjdk-8u-40b27/cacao-libtoolize.patch
  create mode 100644 recipes-core/openjdk/openjdk-8u-40b27/cacao-loadavg-makefile.patch
@@ -317,7 +322,7 @@ index 0000000..1c07102
 +   // Need to do this check first since when _do_not_unlock_if_synchronized
 diff --git a/recipes-core/openjdk/openjdk-8u_40b27-2.5.4.bb b/recipes-core/openjdk/openjdk-8u_40b27-2.5.4.bb
 new file mode 100644
-index 0000000..61309e3
+index 0000000..594a6b4
 --- /dev/null
 +++ b/recipes-core/openjdk/openjdk-8u_40b27-2.5.4.bb
 @@ -0,0 +1,620 @@
@@ -352,7 +357,7 @@ index 0000000..61309e3
 +	   jpeg libpng giflib \
 +           gtk+ glib-2.0 \
 +           cups fontconfig \
-+	   krb5 \
++	   rhino krb5 \
 +	   libxt libxinerama libxrender libxtst libxi \
 +	   freetype alsa-lib libffi \
 +          "
@@ -941,6 +946,18 @@ index 0000000..61309e3
 +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 +INHIBIT_PACKAGE_STRIP = "1"
 +
+diff --git a/recipes-images/images/java-test-image.bb b/recipes-images/images/java-test-image.bb
+index 22c7bdf..3c241e6 100644
+--- a/recipes-images/images/java-test-image.bb
++++ b/recipes-images/images/java-test-image.bb
+@@ -9,6 +9,7 @@ IMAGE_INSTALL = "busybox modutils-initscripts initscripts opkg udev sysvinit net
+                  ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${CORE_IMAGE_EXTRA_INSTALL} \
+                  openjdk-7-jre openjdk-7-vm-zero openjdk-7-vm-jamvm openjdk-7-vm-cacao \
+                  openjdk-6-jre openjdk-6-vm-zero openjdk-6-vm-jamvm openjdk-6-vm-cacao \
++                 openjdk-8-jre \
+                  strace dropbear binutils \
+                  classpath \
+                  classpath-common \
 -- 
 1.9.1
 
