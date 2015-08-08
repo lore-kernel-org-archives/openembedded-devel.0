@@ -1,41 +1,43 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id E5937767B7
+Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
+	[209.85.220.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 2AA89767BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  8 Aug 2015 23:15:53 +0000 (UTC)
-Received: by pdco4 with SMTP id o4so57735704pdc.3
+	Sat,  8 Aug 2015 23:28:51 +0000 (UTC)
+Received: by pacgr6 with SMTP id gr6so265276pac.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 08 Aug 2015 16:15:52 -0700 (PDT)
+	Sat, 08 Aug 2015 16:28:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=BkcXQXb4QOVGdIqqldvOP21mwouQTwJsU7+CYfsz2CI=;
-	b=umlzV9BUBJfs6Ya8Cpd/yYk1UeITfDNyYysafuSYgXtSYXwXnspM4ljw3i48LFMann
-	k3Ic+9znj+8fzxYgSG2CxpKzRbwPXcOwyM/Ww3b+RkZnYMtd6dTRGDDN75LyW6IdjszD
-	Tj1GbMPrSnG4+bcNsq/w2JGg8kdAZCI6AYfZeJKM/VC5ZKiVRUplmC0sAkbzpjnhIP1e
-	RnOOcYOi1yprqpV8UrBteh1rOBAJf6Owl0jDak3B/8nhszz4yoCGL0tzRPdHIsPBJgBf
-	6klmB+V3D11iBJthdGGyZzTFsuGx8Lf6MZ+XLi4cUZG3K575fBi5jpBy/Er/sMU/kVOs
-	6QMw==
-X-Received: by 10.70.133.233 with SMTP id pf9mr21751811pdb.131.1439075752337; 
-	Sat, 08 Aug 2015 16:15:52 -0700 (PDT)
-Received: from ?IPv6:2601:646:8601:4580:61b5:b56b:3665:2b08?
-	([2601:646:8601:4580:61b5:b56b:3665:2b08])
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=Wvlh8LSocQ6McEYFUYE+Ua2hS4bnz8tv4XHpYqpZfGI=;
+	b=jq5qxpoVFosjKFBuGl/tDQ/tG5uIjeve+/ayK2y/Omrd0cx8bI/MbVpub8VBPwUWMN
+	QJvrFbGrHjmXyEcmxk5ORaAI5c86BNgMLlaQsp08dy9FBIOoCH+qo4FxCGxoCYXf5yxz
+	VmEPxMauS7+HH0JPoGv+N4Hld/C7Vkf/FRO/CAQMrxEXe3IttbEM49myftzXlxvK/Hfo
+	VIrxJCDCpqFGhT6DO450a9626kdpGFcsMIPmYcOxroQFBjKScp9z3qTMRkVu4jfKGS18
+	5UrOTf5i/KDKVxy387KYiNRZJ3k4Sfeo+VE6BTzF/WSw7kPDy60Pfy9AI0wRyXnvUf8X
+	G9OA==
+X-Received: by 10.68.218.234 with SMTP id pj10mr29590947pbc.120.1439076531672; 
+	Sat, 08 Aug 2015 16:28:51 -0700 (PDT)
+Received: from ?IPv6:2601:646:8601:4580:4ec:fbce:7a8:43c9?
+	([2601:646:8601:4580:4ec:fbce:7a8:43c9])
 	by smtp.gmail.com with ESMTPSA id
-	fs13sm13250737pdb.29.2015.08.08.16.15.51
-	for <openembedded-devel@lists.openembedded.org>
+	fp3sm14747824pdb.24.2015.08.08.16.28.50
 	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 08 Aug 2015 16:15:51 -0700 (PDT)
+	Sat, 08 Aug 2015 16:28:51 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
 X-Pgp-Agent: GPGMail 2.5
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1435713866-2884-1-git-send-email-rongqing.li@windriver.com>
-Date: Sat, 8 Aug 2015 16:15:47 -0700
-Message-Id: <03299321-1BC0-41FF-80AD-89020E69FFFB@gmail.com>
-References: <1435713866-2884-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1434572301.2944.16.camel@Saturn.local.all>
+Date: Sat, 8 Aug 2015 16:28:46 -0700
+Message-Id: <278829B9-2B2E-46BF-BD03-F2257224CB2B@gmail.com>
+References: <CALbNGRSo5g0ndeQTmrKYppX6g6-KTB2CrnDjJCs=d84PxnpQPQ@mail.gmail.com>
+	<55818938.3090405@mlbassoc.com>
+	<1434572301.2944.16.camel@Saturn.local.all>
 To: openembedded-devel@lists.openembedded.org
 X-Mailer: Apple Mail (2.2104)
-Subject: Re: [PATCH] php: fix a building failure on aarch64
+Cc: Gary Thomas <gary@mlbassoc.com>
+Subject: Re: [meta-browser] firefox not working for me (only)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,67 +51,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Aug 2015 23:15:54 -0000
-X-Groupsio-MsgNum: 56613
+X-List-Received-Date: Sat, 08 Aug 2015 23:28:53 -0000
+X-Groupsio-MsgNum: 56614
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_735F2A43-8AFA-4557-85F2-5D46691EFEAB";
+	boundary="Apple-Mail=_0C95BC90-064C-482A-9836-36CC9B3C1F3F";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_735F2A43-8AFA-4557-85F2-5D46691EFEAB
+--Apple-Mail=_0C95BC90-064C-482A-9836-36CC9B3C1F3F
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
-	charset=utf-8
+	charset=us-ascii
 
 
-> On Jun 30, 2015, at 6:24 PM, rongqing.li@windriver.com wrote:
+> On Jun 17, 2015, at 1:18 PM, Max Krummenacher <max.oss.09@gmail.com> =
+wrote:
 >=20
-> From: Roy Li <rongqing.li@windriver.com>
+>>> * firefox fails with illeagal ARM instruction
 >=20
-> When -O0 of gcc is used to compile the macro ZEND_SIGNED_MULTIPLY_LONG
-> in Zend/zend_multiply.h, the compiling will fail with the below error:
->  : Assembler messages:
->  :3113: Error: operand 2 should be an integer register -- `mul =
-x1,[x29,200],[x29,192]'
->  :3114: Error: operand 2 should be an integer register -- `smulh =
-x0,[x29,200],[x29,192]'
+> That sounds familiar, I thought then that it was specific to our setup
+> with the binary Tegra X driver and the armv7a without neon setup, =
+that's
+> why I did not upstream my patches.
 >=20
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
-> meta-oe/recipes-devtools/php/php_5.5.26.bb | 1 +
-> 1 file changed, 1 insertion(+)
+>>> On Wed, Jun 17, 2015 at 3:32 PM, Gary Thomas <gary@mlbassoc.com> =
+wrote:
+>>>>> Hmm - I was wondering why nobody took care.
+>>>>>=20
+>>>>> All my plattforms fail:
+>>>>> * i.MX6 base
+>>>>> * gumstix
+>>>>> * raspberry Pi2
+>>>>>=20
+>>>>> I'll put this browser issue on my TODO currently I have no further
+>>>>> time to take care.
+>>>>=20
+>>>>=20
+>>>> BTW, I just tested both chromium and firefox on the i.MX6Q and RPi2
+>>>> and they worked just fine.  Built from meta-browser:0cc0419a
+>>>>=20
+>>> Thanks for information. Let's focus on firefox's illegal ARM
+>>> instruction crasher:
+>>>=20
+>>> * Last time I felt the only one facing a specific error it was =
+caused
+>>> by angstrom enabling thumb(2) for ARM (long story @meta-fsl-arm).
+>>> Gary: I assume, you don't have thumb enabled - right?
+>>> * firefox doesn't crash with "--safe-mode"
+>>=20
+>> I am not using thumb - off the shelf configurations for RaspberryPi2 =
+and
+>> BoundaryDevices nitrogen6x built with $DISTRO=3Dpoky are the ones =
+I've tested.
+>>=20
+> Actually I use Angstrom with the instruction set defaulting to ARM.
 >=20
-> diff --git a/meta-oe/recipes-devtools/php/php_5.5.26.bb =
-b/meta-oe/recipes-devtools/php/php_5.5.26.bb
-> index 8b64b2b..85fdccb 100644
-> --- a/meta-oe/recipes-devtools/php/php_5.5.26.bb
-> +++ b/meta-oe/recipes-devtools/php/php_5.5.26.bb
-> @@ -101,6 +101,7 @@ PACKAGECONFIG[imap] =3D =
-"--with-imap=3D${STAGING_DIR_HOST} \
-> export PHP_NATIVE_DIR =3D "${STAGING_BINDIR_NATIVE}"
-> export PHP_PEAR_PHP_BIN =3D "${STAGING_BINDIR_NATIVE}/php"
-> CFLAGS +=3D " -D_GNU_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED =
--I${STAGING_INCDIR}/apache2"
-> +CFLAGS_append_aarch64 =3D " -O2=E2=80=9D
+>>>=20
+>>> Looking into meta-browser I saw that firefox pins =
+ARM_INSTRUCTION_SET
+>>> =3D "arm" but firefox-l10n does not. When having some time left over
+>>> (=3Dnever) I will test with thumb disabled for firefox-l10n and
+>>> chromium.
+>>>=20
+>>> Andreas
+>=20
+> Have a look at
+> =
+http://git.toradex.com/cgit/meta-toradex.git/tree/recipes-mozilla/firefox?=
+h=3DV2.4-next
+>=20
+> alignment.patch,
+> =
+Prevent-SIGILL-crashes-on-ARMv6-builds-built-with-the-NDK_10.0esr.patch =
+.
+>=20
+> If usefull I could send a patch for meta-browser.
 
-removing -O0 if its in CFLAGS is better that way you do not force -O2 =
-always
+Please do so.
 
-CFLAGS_remove_aarch64 =3D =E2=80=9C-O0=E2=80=9D is more suitable.
-
->=20
-> EXTRA_OEMAKE =3D "INSTALL_ROOT=3D${D}"
->=20
-> --
-> 1.9.1
->=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---Apple-Mail=_735F2A43-8AFA-4557-85F2-5D46691EFEAB
+--Apple-Mail=_0C95BC90-064C-482A-9836-36CC9B3C1F3F
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -120,9 +139,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlXGjaYACgkQuwUzVZGdMxSFAwCfden+TAdQXMxucyFk51BCujrD
-EKoAnj2rAvm1VqzLty98epq6mfKHC81H
-=S1iJ
+iEYEARECAAYFAlXGkLEACgkQuwUzVZGdMxSP1QCfSwr66Hn7P3MYsVckiC36QEAb
+2rAAn2YyzMlcw2cTa3SPOu6qcsyE0Z9V
+=AU5f
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_735F2A43-8AFA-4557-85F2-5D46691EFEAB--
+--Apple-Mail=_0C95BC90-064C-482A-9836-36CC9B3C1F3F--
