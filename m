@@ -1,35 +1,37 @@
 Return-Path: <vm.rod25@gmail.com>
-Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
-	[209.85.213.176])
-	by mail.openembedded.org (Postfix) with ESMTP id BD8807685E
+Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 2212B755F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Aug 2015 15:08:20 +0000 (UTC)
-Received: by igui7 with SMTP id i7so20620841igu.1
+	Mon, 10 Aug 2015 15:12:37 +0000 (UTC)
+Received: by ioeg141 with SMTP id g141so172330704ioe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Aug 2015 08:08:21 -0700 (PDT)
+	Mon, 10 Aug 2015 08:12:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Vvwp4wxbPGFT2kbM/CPe8Gakem1WuKn4kS8ZOzOxbxg=;
-	b=YhAyjRJIvhONluZplVcMT5OABkgmjMGvxFC0zV0lvB1J2qgQLaslZ9zMFS/R9p1O2V
-	0Y0JrNeqrrM8fcFnpsM4ptkEGgJ4J887O9wCzHjIIVXfzDrHC9RIhI+3N0r2dhLaSshm
-	ZyJXzcSiByYbkCzgBnb9S53HQ454jvUWdPze0YL6Z93wamkCgHPP1XSVwcu9Ysw1B3WV
-	0yUCeRprRTSJa9UT8eT2NQ8gwxOCsy4+mxTYAO+43zEejur3IwDRC+pymYgcfeZtq+nX
-	gPkwzFLmQxNXXYASRuA6g0fVzsx/yzFVplcnuoizGzVu24GmkG544q0uB/Q9T9ZqylVu
-	kvCA==
+	:cc:content-type;
+	bh=X2GLS2tWy9H4vDz/srbVu91xp7dIkAG+AjkOM1AuXqs=;
+	b=NKRZeLZo1PUGmxwABC6MhL+yGIu+1KjJVlyZ4djBvD/n98n7QP3gMR1hQBs+8OEI/g
+	bHDItIjsWbQLR2Rt98UmH/cp9u+kZborHOfSGOx+MjgrMkebaepXOG1Y2vN3bBjU3Qlh
+	7uEmTMxvIjbMWzwaeNTf2lf1y3UDatQ3jWejvEAkew+q9nPFA8MDmYp4X96cAuhjXhyH
+	aQag7sNw3vZnhrWysVY9FZlPFqDhG4300fSsF1bHBJCgzWFaDYXHiDl1h8xMcyf0FN64
+	JvyjjdF0kqYPD4MIt8t42S7TKRTif/RUZCpZqxQywl1H72M5sZ5dsAszY2tdCXuaLiIt
+	6zLA==
 MIME-Version: 1.0
-X-Received: by 10.50.93.74 with SMTP id cs10mr6699022igb.42.1439219301016;
-	Mon, 10 Aug 2015 08:08:21 -0700 (PDT)
-Received: by 10.50.141.228 with HTTP; Mon, 10 Aug 2015 08:08:20 -0700 (PDT)
-In-Reply-To: <55B38068.6000706@mlbassoc.com>
-References: <CAK5mtexdmYF7ivs+nwa7WZSqVb8sZCq5Euvt8oK2HimiXy7PMA@mail.gmail.com>
-	<55AE6705.5040907@mlbassoc.com>
-	<CAMKF1sowuLL2i+uWVBC4M0j2YY8aCCw=hhGkA_oMk8G338X6Eg@mail.gmail.com>
-	<55B38068.6000706@mlbassoc.com>
-Date: Mon, 10 Aug 2015 10:08:20 -0500
-Message-ID: <CAK5mtey_sLZj-Smx7Wx+96K-xFyP5EQaRY3EG-haNTbqeH2VEA@mail.gmail.com>
+X-Received: by 10.107.136.146 with SMTP id s18mr21741464ioi.25.1439219558021; 
+	Mon, 10 Aug 2015 08:12:38 -0700 (PDT)
+Received: by 10.50.141.228 with HTTP; Mon, 10 Aug 2015 08:12:37 -0700 (PDT)
+In-Reply-To: <CAP9ODKp3d0tGGiVHDZmvmCiduh6xrC-bU14NteEKYpPRVOTkcw@mail.gmail.com>
+References: <CAK5mtexxdYxhwvv-MB27Ur56iwAV8O3Y6ah_BPAo+R58NmNouQ@mail.gmail.com>
+	<CAP9ODKq6U0udqPvjgs1WmHNFy693O6h5Qt+hHFwnYo5nbpH1kQ@mail.gmail.com>
+	<CAK5mtezxAk8pdCohRV8R4VCTcc4OypTd29Gf6mzK1g7F+_0OMg@mail.gmail.com>
+	<CAP9ODKp3d0tGGiVHDZmvmCiduh6xrC-bU14NteEKYpPRVOTkcw@mail.gmail.com>
+Date: Mon, 10 Aug 2015 10:12:37 -0500
+Message-ID: <CAK5mteyG+9GxQ5xo=Az0dfYLTq9hOeGjp5vYsR6=cNAs2W-t3A@mail.gmail.com>
 From: Victor Rodriguez <vm.rod25@gmail.com>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [yocto] Question about IMAGE_INSTALL_append and CORE_IMAGE_EXTRA_INSTALL
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>
+Subject: Re: [yocto] Bug in Open CV receipt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,84 +45,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2015 15:08:24 -0000
+X-List-Received-Date: Mon, 10 Aug 2015 15:12:38 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Sat, Jul 25, 2015 at 7:26 AM, Gary Thomas <gary@mlbassoc.com> wrote:
-> On 2015-07-24 18:37, Khem Raj wrote:
->>
->> On Tue, Jul 21, 2015 at 8:36 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+On Thu, Jul 23, 2015 at 11:30 AM, Otavio Salvador
+<otavio.salvador@ossystems.com.br> wrote:
+> On Thu, Jul 23, 2015 at 12:05 PM, Victor Rodriguez <vm.rod25@gmail.com> wrote:
+>> On Wed, Jul 22, 2015 at 7:35 AM, Otavio Salvador
+>> <otavio.salvador@ossystems.com.br> wrote:
+>>> On Tue, Jul 21, 2015 at 11:57 AM, Victor Rodriguez <vm.rod25@gmail.com> wrote:
+>>>> Few weeks ago I was having some problems with open CV receipt. In the
+>>>> begining I toght I was adding opencv tro my core-image-minimal-xfce
+>>>> just with this:
+>>>>
+>>>> IMAGE_INSTALL_append = " gcc gcc-dev openssh php mariadb opencv"
+>>>>
+>>>> Now after booting the image I realize that none of the libraries for
+>>>> open stack were added to my image
+>>>>
+>>>> What I had to do was the following:
+>>>>
+>>>>
+>>>> IMAGE_INSTALL_append = " libopencv-core-dev libopencv-highgui-dev
+>>>> libopencv-imgproc-dev libopencv-objdetect-dev libopencv-ml-dev
+>>>> opencv-staticdev python-opencv"
+>>>>
+>>>> Even last night when one of the opencv developers ask me for python
+>>>> opencv I had to add the last part python-opencv. That is not cool at
+>>>> all . If I add opencv in the beginning I assume we are more than cool
+>>>> with that and yocto will add all the packages . Unless I am doing
+>>>> something wrong, in taht case I am more than happy to get the
+>>>> feedback.
+>>>>
+>>>> Thanks a lot for all the help . If someone else can reproduce this bug
+>>>> I am more than happy to report it in bugzila (not sure the URL)
 >>>
->>> On 2015-07-21 09:26, Victor Rodriguez wrote:
->>>>
->>>>
->>>> Hi team
->>>>
->>>> I have a question , according to documentation there is a difference
->>>> between
->>>>
->>>> IMAGE_INSTALL_append
->>>>
->>>> and
->>>>
->>>> CORE_IMAGE_EXTRA_INSTALL
->>>>
->>>> Specifies the list of packages to be added to the image. You should
->>>> only set this variable in the local.conf configuration file found in
->>>> the Build Directory.
->>>>
->>>> When I use the second one and try to build a core-image-minimal-xfce
->>>> bitbake does not install what I wanted in my image . I had a really
->>>> hard time few weekends ago because of this.
->>>>
->>>> I wonder If I am missing something or if this is a bug
->>>
->>>
->>>
->>> The core-image-minimal-xfce recipe does not "play nice" with
->>> the core-image class and is not respecting CORE_IMAGE_EXTRA_INSTALL.
+>>> You should add the dev-pkgs and tools-sdk image features for the
+>>> image, not mangle it manually.
 >>
->>
->>
->> its not required to.
+>> I think the best solution is create a package group that will keep
+>> backward compatibility and aloud packages exist as expected
 >
+> Sorry but this does not make sense. The image recipe you described is
+> not using the framework structure for this and this is the problem you
+> should address not bloat the oe-core itself.
 >
-> Maybe it's not required, but since that is the recommended way to
-> add packages to an image, it probably should.  As you can see from
-> the original question, the non-standard behaviour is confusing,
-> certainly to new users.  It would only take a little reorganization
-> to make it work as expected.
->
+> Check core-image class for it.
 
-I really apreciate all the time you take to answer this mail
+Thanks a lot for the help and answer these mails
 
-I would like to summarize this part and came to a final conclusion
+I will create a RFC patch just for this recipe and see what happen
 
-Should I try to fix or should we leave it as it is ?
+The problem is that when I add opencv to the image nothing is added
+not even the capabilities to run a binary with this library nor the
+capability to do development
+
+I will send the patch to the open embedded and see what the community think
 
 Best regards
 
 Victor Rodriguez
 
-
->>
->>>
->>> I think this should be filed as a bug (and feel free to suggest a patch)
->>>
->>
->> No. Its not OE-Core or yocto bug
->>
->>> BTW, this question should really be on the OpenEmbedded development list.
->>
->>
->> its valid for meta-xfce only.
->
->
 > --
-> ------------------------------------------------------------
-> Gary Thomas                 |  Consulting for the
-> MLB Associates              |    Embedded world
-> ------------------------------------------------------------
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
