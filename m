@@ -1,41 +1,41 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 4730576953
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id E255A76947
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2015 07:58:10 +0000 (UTC)
-Received: by wijp15 with SMTP id p15so165106042wij.0
+	Tue, 11 Aug 2015 07:58:12 +0000 (UTC)
+Received: by wicne3 with SMTP id ne3so165550326wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2015 00:58:11 -0700 (PDT)
+	Tue, 11 Aug 2015 00:58:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=qAqLdPVhqxhsVZT7ilW2xcIy0eA5Ot79Jl9pEQ6dMsY=;
-	b=VI0a9KiEFd2/PGFcZfL4ZfLITGmA+GL6S+xXyHpcnu/3vMaHKPMP+Kl8WYbnTnHvll
-	qkATwohiFXvKXeBA4ri3c4feqDLzukaOmIE/dVEyCpKdcNefvMVi1lMbGqZvZAdjB021
-	zIApjz3XDpYLyo2WkzsllCSLP0vqacxUC+De/gSk7T9q7k7/rXyTKWVDZlSmkpMONtFv
-	WeZC+m/XN0Vx/BrzcOwm+K6rUR/nbmLQC9Pd29gojr9aGaFoauVzCAN3Q0weHy7BQzEn
-	Q6ZAiOE/ZqQ8EcTsoA45WE4Bbo/cGGj1rtAl0azrrKViacL4NooSqpfVKYdZoALy6AEZ
-	CPqA==
-X-Received: by 10.194.203.138 with SMTP id kq10mr56795172wjc.124.1439279890909;
-	Tue, 11 Aug 2015 00:58:10 -0700 (PDT)
+	bh=UHwYZpVb950mqF/jy83MUu+RB7yXXUkITvYt6zTs//s=;
+	b=S6tW2iHrdO8Hi8PQ5tFPGvsrW4F7Vwry6lGOm7Bhrak6yAj31aiES/R8tiKUrFeugC
+	UPOAM0fYChzh09fobiYGmfMgCs5uzLKt/t0XmMlw9CzA9K7jhfzDAHQ6ce1ZZLncg1Kz
+	VYwNoVgEME0t5s42XQuEJABrV6JUeIXNlW2WLGP0TRu83TD2+xknOHFbT7Agjqcf/xhe
+	pzhOVlQk2UGRwZDPuOpK5UC5X318rZ7DjRBu1aAK9ZMOQNUqPoUhtUdD+Q1hFvwOEwKM
+	FnM6zAZWmHufkywzl/psi26dx7GCjUpHN6UcfoFKpWlV8apqrGfC8n5dItjpevuAtND4
+	neKQ==
+X-Received: by 10.194.184.82 with SMTP id es18mr56881267wjc.79.1439279892042; 
+	Tue, 11 Aug 2015 00:58:12 -0700 (PDT)
 Received: from localhost.localdomain
 	(ip-109-91-251-29.hsi12.unitymediagroup.de. [109.91.251.29])
 	by smtp.googlemail.com with ESMTPSA id
-	fs8sm2124773wib.0.2015.08.11.00.58.09
+	fs8sm2124773wib.0.2015.08.11.00.58.10
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 11 Aug 2015 00:58:10 -0700 (PDT)
+	Tue, 11 Aug 2015 00:58:11 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Aug 2015 09:57:23 +0200
-Message-Id: <1439279859-1815-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 11 Aug 2015 09:57:24 +0200
+Message-Id: <1439279859-1815-3-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.1.0
 In-Reply-To: <1439279859-1815-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1439279859-1815-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 01/17] xfce4-panel: build gtk3 libraries and ship them in an extra package
+Subject: [PATCH 02/17] xfce4-pulseaudio-plugin: initial add 0.2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,53 +49,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Aug 2015 07:58:13 -0000
+X-List-Received-Date: Tue, 11 Aug 2015 07:58:14 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-xfce4-pulseaudio-plugin depends on gtk3 panel libs.
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ .../pulseaudio/xfce4-pulseaudio-plugin_0.2.3.bb            | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.3.bb
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb
-index 9ac99a8..d41f9ca 100644
---- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb
-@@ -2,13 +2,15 @@ SUMMARY = "Xfce4 Panel"
- SECTION = "x11"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=26a8bd75d8f8498bdbbe64a27791d4ee"
--DEPENDS = "libxfce4util garcon libxfce4ui xfconf exo gtk+ dbus cairo virtual/libx11 libxml2 libwnck"
-+DEPENDS = "libxfce4util garcon libxfce4ui xfconf exo gtk+ gtk+3 dbus cairo virtual/libx11 libxml2 libwnck"
- 
- inherit xfce gtk-doc
- 
- SRC_URI[md5sum] = "5a333af704e386c90ad829b6baf1a758"
- SRC_URI[sha256sum] = "30920fc2e2fc26279a82b5261a155c2cc15ab2aa1ced2275684a6ff8261b97b0"
- 
-+EXTRA_OECONF += "--enable-gtk3"
+diff --git a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.3.bb b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.3.bb
+new file mode 100644
+index 0000000..f9ad32f
+--- /dev/null
++++ b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.3.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "Pulseaudio mixer for the xfce panel"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f5eac6bb0d6ec0dc655e417781d4015f"
 +
- python populate_packages_prepend() {
-     plugin_dir = d.expand('${libdir}/xfce4/panel/plugins/')
-     plugin_name = d.expand('${PN}-plugin-%s')
-@@ -22,8 +24,14 @@ python populate_packages_prepend() {
- 
- PACKAGES_DYNAMIC += "^${PN}-plugin-.*"
- 
-+PACKAGES =+ "${PN}-gtk3"
++inherit xfce-panel-plugin distro_features_check
 +
- FILES_${PN} += "${libdir}/xfce4/panel/migrate \
-                 ${libdir}/xfce4/panel/wrapper-1.0"
- 
-+FILES_${PN}-gtk3 = " \
-+    ${libdir}/libxfce4panel-2.0${SOLIBS} \
-+    ${libdir}/xfce4/panel/wrapper-2.0 \
-+"
- FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug \
- "
++REQUIRED_DISTRO_FEATURES = "pulseaudio"
++
++DEPENDS += "pulseaudio"
++
++SRC_URI[md5sum] = "13a47ba5a72c16fb06f7e1cc89858cc7"
++SRC_URI[sha256sum] = "e82836bc8cf7d905b4e60d43dc630ba8e32dea785989700c71d4aeee9f583b33"
++
++RRECOMMENDS_${PN} = "pavucontrol"
 -- 
 2.1.0
 
