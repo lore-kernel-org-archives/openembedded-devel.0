@@ -1,36 +1,32 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-yk0-f180.google.com (mail-yk0-f180.google.com
-	[209.85.160.180])
-	by mail.openembedded.org (Postfix) with ESMTP id D0974766D3
+Return-Path: <alejandro.delcastillo@ni.com>
+X-Greylist: delayed 2284 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 11 Aug 2015 16:21:33 UTC
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id CFA6F7697E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2015 15:20:42 +0000 (UTC)
-Received: by ykaz130 with SMTP id z130so62133959yka.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2015 08:20:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=keoxRhuTUOmBBI46ikz+2FIvUKfv4Ndj3mV1em1xPR4=;
-	b=pwA3bdny5+qWyMihwKcP/9V1G62IGPYlnqH+VADdclwtbMTDHaPinkYxHuXsYi+VJo
-	2ZMVWJSIg5PDkLolNlY1O7MoPgOVyaBurilhrVxLNkMFELfck0bvONn5/hcHF0Z8VJDR
-	MhU0reIPLUzF61HU1Lo2MEITKjZvX3beZZ0GgGCRhpVDfjvGJaDsi0h7v6Sp1Je0v/S0
-	bONiODqTRBsE9bu6TtkvQnPPgZUzPQP2q/MIAmvYq2+6DigRn2qTHCWTyOqRSkrhRzeQ
-	wwsJKFxnGAZdF3LimAZw2Y693e53sUygEozf7gZG2OjcwrcuA/1/gxPeAfUbOCzX+drL
-	Ijqg==
-X-Received: by 10.13.240.6 with SMTP id z6mr8231837ywe.51.1439306442844;
-	Tue, 11 Aug 2015 08:20:42 -0700 (PDT)
-Received: from localhost.localdomain.localdomain
-	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
-	by smtp.gmail.com with ESMTPSA id
-	x22sm1855189ywd.46.2015.08.11.08.20.41
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 11 Aug 2015 08:20:42 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
+	Tue, 11 Aug 2015 16:21:33 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t7BFhTrV004585 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Aug 2015 10:43:29 -0500
+Received: from delcastillo2.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015081110432971-1331564 ;
+	Tue, 11 Aug 2015 10:43:29 -0500 
+From: Alejandro del Castillo <alejandro.delcastillo@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Aug 2015 08:20:26 -0700
-Message-Id: <1439306426-1152-1-git-send-email-TicoTimo@gmail.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [meta-perl][PATCH] libclass-method-modifiers-perl: add 2.11 recipe
+Date: Tue, 11 Aug 2015 10:43:28 -0500
+Message-Id: <1439307808-7581-1-git-send-email-alejandro.delcastillo@ni.com>
+X-Mailer: git-send-email 1.9.1
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 08/11/2015 10:43:29 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 08/11/2015 10:43:29 AM,
+	Serialize complete at 08/11/2015 10:43:29 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-08-11_07:, , signatures=0
+Subject: [meta-python][PATCH] python-pyinotify: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,49 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Aug 2015 15:20:44 -0000
+X-List-Received-Date: Tue, 11 Aug 2015 16:21:34 -0000
 
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+Python bindings for Linux inotify mechanism
+
+Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
 ---
- .../libclass-method-modifiers-perl_2.11.bb         | 28 ++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.11.bb
+ .../recipes-devtools/python/python-pyinotify_0.9.6.bb   | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
 
-diff --git a/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.11.bb b/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.11.bb
+diff --git a/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
 new file mode 100644
-index 0000000..93d6e54
+index 0000000..07e95b0
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.11.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "Class::Method::Modifiers - provides Moose-like method modifiers"
-+DESCRIPTION = "Method modifiers are a convenient feature from the CLOS \
-+(Common Lisp Object System) world."
++++ b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "Python pyinotify: Linux filesystem events monitoring"
++HOMEPAGE = "https://pypi.python.org/pypi/pyinotify"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
 +
-+SECTION = "libs"
++PR = "r0"
++SRCNAME = "pyinotify"
 +
-+HOMEPAGE = "https://github.com/moose/Class-Method-Modifiers/"
++SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 +
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=16fd0ec7b73c0e158426f753943f1058"
++SRC_URI[md5sum] = "8e580fa1ff3971f94a6f81672b76c406"
++SRC_URI[sha256sum] = "9c998a5d7606ca835065cdabc013ae6c66eb9ea76a00a1e3bc6e0cfe2b4f71f4"
 +
-+SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETHER/Class-Method-Modifiers-${PV}.tar.gz"
-+SRC_URI[md5sum] = "c6982e9e89325713d5afaff82cfe1744"
-+SRC_URI[sha256sum] = "debf979fbd9ac25cc6fe7d1cab81103c60a21f7027d2a9b4bf5cb264e313d392"
++S = "${WORKDIR}/${SRCNAME}-${PV}"
 +
-+S = "${WORKDIR}/Class-Method-Modifiers-${PV}"
-+
-+inherit cpan
-+
-+RDEPENDS_${PN} = " perl-module-b \
-+                   perl-module-base \
-+                   perl-module-carp \
-+                   perl-module-exporter \
-+                   perl-module-strict \
-+                   perl-module-warnings \
-+"
-+
-+BBCLASSEXTEND = "native"
++inherit setuptools
 -- 
-2.1.0
+1.9.1
 
 
