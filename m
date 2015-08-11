@@ -1,34 +1,36 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id D43D2767DB
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-yk0-f180.google.com (mail-yk0-f180.google.com
+	[209.85.160.180])
+	by mail.openembedded.org (Postfix) with ESMTP id D0974766D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2015 12:30:20 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ZP8h5-0004Rc-Oi for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Aug 2015 14:30:15 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2015 14:30:15 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 11 Aug 2015 15:20:42 +0000 (UTC)
+Received: by ykaz130 with SMTP id z130so62133959yka.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2015 14:30:15 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 11 Aug 2015 08:20:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=keoxRhuTUOmBBI46ikz+2FIvUKfv4Ndj3mV1em1xPR4=;
+	b=pwA3bdny5+qWyMihwKcP/9V1G62IGPYlnqH+VADdclwtbMTDHaPinkYxHuXsYi+VJo
+	2ZMVWJSIg5PDkLolNlY1O7MoPgOVyaBurilhrVxLNkMFELfck0bvONn5/hcHF0Z8VJDR
+	MhU0reIPLUzF61HU1Lo2MEITKjZvX3beZZ0GgGCRhpVDfjvGJaDsi0h7v6Sp1Je0v/S0
+	bONiODqTRBsE9bu6TtkvQnPPgZUzPQP2q/MIAmvYq2+6DigRn2qTHCWTyOqRSkrhRzeQ
+	wwsJKFxnGAZdF3LimAZw2Y693e53sUygEozf7gZG2OjcwrcuA/1/gxPeAfUbOCzX+drL
+	Ijqg==
+X-Received: by 10.13.240.6 with SMTP id z6mr8231837ywe.51.1439306442844;
+	Tue, 11 Aug 2015 08:20:42 -0700 (PDT)
+Received: from localhost.localdomain.localdomain
+	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
+	by smtp.gmail.com with ESMTPSA id
+	x22sm1855189ywd.46.2015.08.11.08.20.41
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 11 Aug 2015 08:20:42 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 11 Aug 2015 14:30:04 +0200
-Message-ID: <mqcpsd$esk$1@ger.gmane.org>
-References: <1436171379-32162-1-git-send-email-rongqing.li@windriver.com>
-	<55C986FA.9050404@windriver.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:38.0)
-	Gecko/20100101 Thunderbird/38.1.0
-In-Reply-To: <55C986FA.9050404@windriver.com>
-Subject: Re: [PATCH] ypbind-yocto.init: add status command
+Date: Tue, 11 Aug 2015 08:20:26 -0700
+Message-Id: <1439306426-1152-1-git-send-email-TicoTimo@gmail.com>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-perl][PATCH] libclass-method-modifiers-perl: add 2.11 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,59 +44,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Aug 2015 12:30:21 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 11 Aug 2015 15:20:44 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+---
+ .../libclass-method-modifiers-perl_2.11.bb         | 28 ++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.11.bb
 
-Op 11-08-15 om 07:24 schreef Rongqing Li:
-> ping
-
-While you're there, can you please fix the name of this file? Either change
-it to 'yoctoproject' or rename it to something sensible, but the current
-situation is just wrong.
-
-> 
-> -Roy
-> 
-> On 2015年07月06日 16:29, rongqing.li@windriver.com wrote:
->> From: Zhu Yanjun <yanjun.zhu@windriver.com>
->> 
->> Add the "status" command to check the status of ypbind.
->> 
->> Signed-off-by: Zhu Yanjun <yanjun.zhu@windriver.com> --- 
->> meta-networking/recipes-support/nis/files/ypbind-yocto.init | 7
->> +++++++ 1 file changed, 7 insertions(+)
->> 
->> diff --git
->> a/meta-networking/recipes-support/nis/files/ypbind-yocto.init 
->> b/meta-networking/recipes-support/nis/files/ypbind-yocto.init index
->> 5f50a53..da533a1 100644 ---
->> a/meta-networking/recipes-support/nis/files/ypbind-yocto.init +++
->> b/meta-networking/recipes-support/nis/files/ypbind-yocto.init @@ -21,6
->> +21,9 @@ #    the NIS binding information. ### END INIT INFO
->> 
->> +# Need to use status function +. /etc/init.d/functions + 
->> YPBIND_BIN=/usr/sbin/ypbind pidfile=/var/run/ypbind.pid
->> 
->> @@ -92,6 +95,10 @@ case "$1" in echo -n "Reload service ypbind" 
->> start-stop-daemon --stop --quiet --signal 1 --pidfile $pidfile ;; +
->> status) +    echo -n "Checking for ypbind: " +    status $YPBIND_BIN +
->> ;; *) echo "Usage: $0 
->> {start|stop|status|try-restart|restart|force-reload|reload|probe}" exit
->> 1
->> 
-> 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFVyerMMkyGM64RGpERAsGEAJ4wrA9wavFzQZfyIiZwLntHXnLVPACfW0Dc
-GihWGohDCHjH8dKz+cq5fLo=
-=mkrk
------END PGP SIGNATURE-----
+diff --git a/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.11.bb b/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.11.bb
+new file mode 100644
+index 0000000..93d6e54
+--- /dev/null
++++ b/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.11.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "Class::Method::Modifiers - provides Moose-like method modifiers"
++DESCRIPTION = "Method modifiers are a convenient feature from the CLOS \
++(Common Lisp Object System) world."
++
++SECTION = "libs"
++
++HOMEPAGE = "https://github.com/moose/Class-Method-Modifiers/"
++
++LICENSE = "Artistic-1.0 | GPL-1.0+"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=16fd0ec7b73c0e158426f753943f1058"
++
++SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETHER/Class-Method-Modifiers-${PV}.tar.gz"
++SRC_URI[md5sum] = "c6982e9e89325713d5afaff82cfe1744"
++SRC_URI[sha256sum] = "debf979fbd9ac25cc6fe7d1cab81103c60a21f7027d2a9b4bf5cb264e313d392"
++
++S = "${WORKDIR}/Class-Method-Modifiers-${PV}"
++
++inherit cpan
++
++RDEPENDS_${PN} = " perl-module-b \
++                   perl-module-base \
++                   perl-module-carp \
++                   perl-module-exporter \
++                   perl-module-strict \
++                   perl-module-warnings \
++"
++
++BBCLASSEXTEND = "native"
+-- 
+2.1.0
 
 
