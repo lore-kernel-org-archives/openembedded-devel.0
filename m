@@ -1,37 +1,27 @@
-Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 89E07768AB
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D7500757A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Aug 2015 15:42:52 +0000 (UTC)
-Received: by wicja10 with SMTP id ja10so42263257wic.1
+	Tue, 11 Aug 2015 03:20:05 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7B3K5Ue011924
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Aug 2015 08:42:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6SxM3ClXHiS6/yG1N2Lil2gPnq/TuZeJ1FfI0qBjBlk=;
-	b=B8SXZoApKRM4RCJGU1tZFP5/BwxciMwvXDhWw1DSQiHjkVH4QyfcCOHT3j0mU0lkAZ
-	856xX/E68r1Rz4wvw75Hqr9QLVlTy8GVwvCGeBaciZOrwbwJFLc4TrK8LgnOya93i4WI
-	eAEgoLRO+JtwYmJ8qPX8aFmQ3CO4/4rYf9fwoWFwbdxvSLD+OyXYz70miPnOaBckbkpE
-	+4ReygbbRpwcSbMUvgx2ewlXt205LBsThZsQPnjO/5bTHgCutLHTrrLsxsyd6qKHa65+
-	6Vj38ldA4QVe0f/PxjR9Vk7E4s+Qd2GL2rRkxj+g49qCjaRwAJdx/5qqCvu2hOEtV5lp
-	kbpg==
-X-Gm-Message-State: ALoCoQmwFXUAF4XLPF66RRxBZ5Y9OFyF6cegc8D0VZnVesF70ll2xeHae4ccRBAe+sExE48juKPN
-X-Received: by 10.194.191.129 with SMTP id gy1mr11902979wjc.86.1439221372710; 
-	Mon, 10 Aug 2015 08:42:52 -0700 (PDT)
-Received: from localhost ([2001:610:612:0:2ad2:44ff:fe4b:bc17])
-	by smtp.gmail.com with ESMTPSA id
-	bd9sm14369748wib.18.2015.08.10.08.42.51
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 10 Aug 2015 08:42:51 -0700 (PDT)
-From: Koen Kooi <koen.kooi@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Aug 2015 17:42:46 +0200
-Message-Id: <1439221366-7089-1-git-send-email-koen.kooi@linaro.org>
-X-Mailer: git-send-email 2.1.0
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-python][PATCH] python-pyyaml 3.10: unbreak versioning
+	Mon, 10 Aug 2015 20:20:05 -0700 (PDT)
+Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Mon, 10 Aug 2015 20:20:04 -0700
+Message-ID: <55C969E3.6@windriver.com>
+Date: Tue, 11 Aug 2015 11:20:03 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1435820534-32452-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1435820534-32452-1-git-send-email-rongqing.li@windriver.com>
+Subject: Re: [PATCH] hiawatha: fix the installation failure due to no /var/run dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,33 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2015 15:42:54 -0000
+X-List-Received-Date: Tue, 11 Aug 2015 03:20:06 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Using our own setup.py is great, but it should use the same version as the recipe, otherwise you get errors like these:
+ping
 
-pkg_resources.DistributionNotFound: The 'PyYAML==3.10' distribution was not found and is required
+-Roy
 
-Package python-pyyaml (3.10-r0.0) is installed on root and has the following files:
-[..]
-/usr/lib/python2.7/site-packages/PyYAML-3.06-py2.7.egg-info
+On 2015年07月02日 15:02, rongqing.li@windriver.com wrote:
+> From: Roy Li <rongqing.li@windriver.com>
+>
+> after cmake is upgrade to 3.2.2, the /var/run dir is not created, so
+> not need to remove it.
+>
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> ---
+>   meta-webserver/recipes-httpd/hiawatha/hiawatha_9.2.bb | 1 -
+>   1 file changed, 1 deletion(-)
+>
+> diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_9.2.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_9.2.bb
+> index b9fa5cd..31293e4 100644
+> --- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_9.2.bb
+> +++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_9.2.bb
+> @@ -53,7 +53,6 @@ do_install_append() {
+>           install -m 644 ${WORKDIR}/hiawatha.service ${D}/${systemd_unitdir}/system
+>       fi
+>
+> -    rmdir "${D}${localstatedir}/run"
+>       rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
+>   }
+>
+>
 
-Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
----
- meta-python/recipes-devtools/python/python-pyyaml/setup.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-python/recipes-devtools/python/python-pyyaml/setup.py b/meta-python/recipes-devtools/python/python-pyyaml/setup.py
-index fb64983..2ed1c94 100644
---- a/meta-python/recipes-devtools/python/python-pyyaml/setup.py
-+++ b/meta-python/recipes-devtools/python/python-pyyaml/setup.py
-@@ -1,5 +1,5 @@
- NAME = 'PyYAML'
--VERSION = '3.06'
-+VERSION = '3.10'
- DESCRIPTION = "YAML parser and emitter for Python"
- LONG_DESCRIPTION = """\
- YAML is a data serialization format designed for human readability and
 -- 
-2.1.0
-
+Best Reagrds,
+Roy | RongQing Li
 
