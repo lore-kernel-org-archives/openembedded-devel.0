@@ -1,32 +1,28 @@
-Return-Path: <alejandro.delcastillo@ni.com>
-X-Greylist: delayed 2284 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 11 Aug 2015 16:21:33 UTC
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mail.openembedded.org (Postfix) with ESMTP id CFA6F7697E
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 204B97699C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2015 16:21:33 +0000 (UTC)
-Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	t7BFhTrV004585 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2015 10:43:29 -0500
-Received: from delcastillo2.natinst.com ([130.164.14.198])
-	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2015081110432971-1331564 ;
-	Tue, 11 Aug 2015 10:43:29 -0500 
-From: Alejandro del Castillo <alejandro.delcastillo@ni.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Aug 2015 10:43:28 -0500
-Message-Id: <1439307808-7581-1-git-send-email-alejandro.delcastillo@ni.com>
-X-Mailer: git-send-email 1.9.1
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 08/11/2015 10:43:29 AM,
-	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 08/11/2015 10:43:29 AM,
-	Serialize complete at 08/11/2015 10:43:29 AM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2015-08-11_07:, , signatures=0
-Subject: [meta-python][PATCH] python-pyinotify: add recipe
+	Wed, 12 Aug 2015 01:01:34 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7C11XVq011327
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Aug 2015 18:01:34 -0700 (PDT)
+Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Tue, 11 Aug 2015 18:01:33 -0700
+Message-ID: <55CA9AEC.7010500@windriver.com>
+Date: Wed, 12 Aug 2015 09:01:32 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1436171379-32162-1-git-send-email-rongqing.li@windriver.com>	<55C986FA.9050404@windriver.com>
+	<mqcpsd$esk$1@ger.gmane.org>
+In-Reply-To: <mqcpsd$esk$1@ger.gmane.org>
+Subject: Re: [PATCH] ypbind-yocto.init: add status command
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,40 +36,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Aug 2015 16:21:34 -0000
+X-List-Received-Date: Wed, 12 Aug 2015 01:01:35 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Python bindings for Linux inotify mechanism
 
-Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
----
- .../recipes-devtools/python/python-pyinotify_0.9.6.bb   | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
-new file mode 100644
-index 0000000..07e95b0
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "Python pyinotify: Linux filesystem events monitoring"
-+HOMEPAGE = "https://pypi.python.org/pypi/pyinotify"
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
-+
-+PR = "r0"
-+SRCNAME = "pyinotify"
-+
-+SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "8e580fa1ff3971f94a6f81672b76c406"
-+SRC_URI[sha256sum] = "9c998a5d7606ca835065cdabc013ae6c66eb9ea76a00a1e3bc6e0cfe2b4f71f4"
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit setuptools
+On 2015年08月11日 20:30, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 11-08-15 om 07:24 schreef Rongqing Li:
+>> ping
+>
+> While you're there, can you please fix the name of this file? Either change
+> it to 'yoctoproject' or rename it to something sensible, but the current
+> situation is just wrong.
+
+
+Ok, thanks
+
+-Roy
+
+>
+>>
+>> -Roy
+>>
+>> On 2015年07月06日 16:29, rongqing.li@windriver.com wrote:
+>>> From: Zhu Yanjun <yanjun.zhu@windriver.com>
+>>>
+>>> Add the "status" command to check the status of ypbind.
+>>>
+>>> Signed-off-by: Zhu Yanjun <yanjun.zhu@windriver.com> ---
+>>> meta-networking/recipes-support/nis/files/ypbind-yocto.init | 7
+>>> +++++++ 1 file changed, 7 insertions(+)
+>>>
+>>> diff --git
+>>> a/meta-networking/recipes-support/nis/files/ypbind-yocto.init
+>>> b/meta-networking/recipes-support/nis/files/ypbind-yocto.init index
+>>> 5f50a53..da533a1 100644 ---
+>>> a/meta-networking/recipes-support/nis/files/ypbind-yocto.init +++
+>>> b/meta-networking/recipes-support/nis/files/ypbind-yocto.init @@ -21,6
+>>> +21,9 @@ #    the NIS binding information. ### END INIT INFO
+>>>
+>>> +# Need to use status function +. /etc/init.d/functions +
+>>> YPBIND_BIN=/usr/sbin/ypbind pidfile=/var/run/ypbind.pid
+>>>
+>>> @@ -92,6 +95,10 @@ case "$1" in echo -n "Reload service ypbind"
+>>> start-stop-daemon --stop --quiet --signal 1 --pidfile $pidfile ;; +
+>>> status) +    echo -n "Checking for ypbind: " +    status $YPBIND_BIN +
+>>> ;; *) echo "Usage: $0
+>>> {start|stop|status|try-restart|restart|force-reload|reload|probe}" exit
+>>> 1
+>>>
+>>
+>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iD8DBQFVyerMMkyGM64RGpERAsGEAJ4wrA9wavFzQZfyIiZwLntHXnLVPACfW0Dc
+> GihWGohDCHjH8dKz+cq5fLo=
+> =mkrk
+> -----END PGP SIGNATURE-----
+>
+
 -- 
-1.9.1
-
+Best Reagrds,
+Roy | RongQing Li
 
