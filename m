@@ -1,19 +1,19 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 204B97699C
+	by mail.openembedded.org (Postfix) with ESMTP id 447B5766D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2015 01:01:34 +0000 (UTC)
+	Wed, 12 Aug 2015 01:20:33 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7C11XVq011327
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7C1KYcc014413
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2015 18:01:34 -0700 (PDT)
+	Tue, 11 Aug 2015 18:20:34 -0700 (PDT)
 Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Tue, 11 Aug 2015 18:01:33 -0700
-Message-ID: <55CA9AEC.7010500@windriver.com>
-Date: Wed, 12 Aug 2015 09:01:32 +0800
+	Tue, 11 Aug 2015 18:20:33 -0700
+Message-ID: <55CA9F60.4020602@windriver.com>
+Date: Wed, 12 Aug 2015 09:20:32 +0800
 From: Rongqing Li <rongqing.li@windriver.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
@@ -36,7 +36,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2015 01:01:35 -0000
+X-List-Received-Date: Wed, 12 Aug 2015 01:20:34 -0000
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 
@@ -52,13 +52,16 @@ On 2015年08月11日 20:30, Koen Kooi wrote:
 > While you're there, can you please fix the name of this file? Either change
 > it to 'yoctoproject' or rename it to something sensible, but the current
 > situation is just wrong.
+>
 
+I will change the title of this patch, and not rename
+ypbind-yocto.init, since ypbind-yocto.init will be rename
+to ypbind when it is installed into system
 
-Ok, thanks
 
 -Roy
 
->
+
 >>
 >> -Roy
 >>
