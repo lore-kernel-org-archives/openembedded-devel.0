@@ -1,30 +1,40 @@
-Return-Path: <alejandro.delcastillo@ni.com>
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mail.openembedded.org (Postfix) with ESMTP id 839B6607A4
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
+	[209.85.192.182])
+	by mail.openembedded.org (Postfix) with ESMTP id B76B3607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2015 20:52:44 +0000 (UTC)
-Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	t7CKqivE003719 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2015 15:52:44 -0500
-Received: from delcastillo2.natinst.com ([130.164.14.198])
-	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2015081215524480-1428871 ;
-	Wed, 12 Aug 2015 15:52:44 -0500 
-From: Alejandro del Castillo <alejandro.delcastillo@ni.com>
+	Wed, 12 Aug 2015 23:23:57 +0000 (UTC)
+Received: by pdbfa8 with SMTP id fa8so12149032pdb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Aug 2015 16:23:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=0xkzRBuEIWoFsDrhrP0CnzCZK9kNeGXifJdTS+Gjv7c=;
+	b=cjYeIaxi//bgpcdOiVLfQICcsfqoBZkb7Z3QbyiU/aSchLYFVwQShtbjfRU8JKJnCj
+	gI12JSwm1DQodlsYoGuAJ55zoozqKVbaY97ZMFRt+cLTAWcuFn3jcgUCgfMAIjKlbshR
+	9D2YzlB4PsyRO/5FtrRzyu0jJit1x2v2ykyF5/84B7EvYtW2JtNZS5qZ0x8bUe4/TJer
+	m99BsTqEe71NropBl7pxAU8eLI+6bT9qMajNE5i5VGhCyjcVOMgxRB9E76yEpykJzgcc
+	1WoibxM/WOpO/vywsdIBc92c8IBX8ROgfQEVJMUiooVv71dMcTQ7dWYLOGw4zwCpb0tx
+	J2ag==
+X-Received: by 10.70.140.41 with SMTP id rd9mr40636711pdb.145.1439421837609;
+	Wed, 12 Aug 2015 16:23:57 -0700 (PDT)
+Received: from ?IPv6:2601:646:8601:4580:fc7c:c1e4:3af6:2fa1?
+	([2601:646:8601:4580:fc7c:c1e4:3af6:2fa1])
+	by smtp.gmail.com with ESMTPSA id hh3sm242643pbc.8.2015.08.12.16.23.56
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 12 Aug 2015 16:23:57 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+X-Pgp-Agent: GPGMail 2.5
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <20150812183730.GG26375@denix.org>
+Date: Wed, 12 Aug 2015 16:23:52 -0700
+Message-Id: <8F8F74A1-8AE1-492D-B42B-48F4C70C27FD@gmail.com>
+References: <20150812183730.GG26375@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Aug 2015 15:52:42 -0500
-Message-Id: <1439412762-20356-1-git-send-email-alejandro.delcastillo@ni.com>
-X-Mailer: git-send-email 1.9.1
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 08/12/2015 03:52:44 PM,
-	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 08/12/2015 03:52:44 PM,
-	Serialize complete at 08/12/2015 03:52:44 PM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2015-08-12_11:, , signatures=0
-Subject: [meta-python][PATCH v2] python-pyinotify: add recipe
+X-Mailer: Apple Mail (2.2104)
+Subject: Re: [meta-qt5] qtbase_5.4.2 do_install fails to chown fonts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,40 +48,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2015 20:52:49 -0000
+X-List-Received-Date: Wed, 12 Aug 2015 23:24:04 -0000
+X-Groupsio-MsgNum: 56675
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_A673A32E-914E-49FC-BA82-8A6E7A5E011B";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-Python bindings for Linux inotify mechanism
-
-Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
----
- .../recipes-devtools/python/python-pyinotify_0.9.6.bb   | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
-
-diff --git a/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
-new file mode 100644
-index 0000000..42956ce
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "Python pyinotify: Linux filesystem events monitoring"
-+HOMEPAGE = "https://pypi.python.org/pypi/pyinotify"
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
-+
-+RDEPENDS_${PN} += "python-threading python-io python-subprocess python-misc python-shell"
-+
-+SRCNAME = "pyinotify"
-+SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "8e580fa1ff3971f94a6f81672b76c406"
-+SRC_URI[sha256sum] = "9c998a5d7606ca835065cdabc013ae6c66eb9ea76a00a1e3bc6e0cfe2b4f71f4"
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit setuptools
--- 
-1.9.1
+--Apple-Mail=_A673A32E-914E-49FC-BA82-8A6E7A5E011B
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
 
+> On Aug 12, 2015, at 11:37 AM, Denys Dmytriyenko <denis@denix.org> =
+wrote:
+>=20
+> Hi,
+>=20
+> Has anyone seen the issue of qtbase_5.4.2 failing at the end of =
+do_install to
+> chown fonts? Here's the message:
+>=20
+> chown: cannot access =
+`[cut]/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image//usr/lib/fonts': No =
+such file or directory
+>=20
+> Here's the code that fails:
+>=20
+> =
+https://github.com/meta-qt5/meta-qt5/blob/master/recipes-qt/qt5/qtbase_git=
+.bb#L230
+>=20
+> Looking at the install location, it seems that the previous command
+>=20
+> cp -a ${S}/lib/fonts ${D}/${OE_QMAKE_PATH_LIBS}
+>=20
+> copied font files not into /usr/lib/fonts, but instead into /usr/lib =
+directly.
+> This usually happens with "cp -a" when /usr/lib destination is =
+empty...
+>=20
+> I'm thinking about submitting a patch that replaces above copy with:
+>=20
+> mkdir -p ${D}/${OE_QMAKE_PATH_LIBS}/fonts
+> cp -a ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_LIBS}/fonts
+>=20
+> Any objections, comments, suggestions?
+>=20
+
+seems sane to me.
+
+> --
+> Denys
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+--Apple-Mail=_A673A32E-914E-49FC-BA82-8A6E7A5E011B
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlXL1YsACgkQuwUzVZGdMxRxnwCfVUk5w9lg7ELQxfOkdaLon4MJ
+YvEAoIsp1Z5vTtiFfRObeKNzPz0N5lfy
+=0qYS
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_A673A32E-914E-49FC-BA82-8A6E7A5E011B--
