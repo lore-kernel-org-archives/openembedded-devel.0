@@ -1,28 +1,40 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 447B5766D5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
+	[209.85.192.182])
+	by mail.openembedded.org (Postfix) with ESMTP id CF73576894
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2015 01:20:33 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7C1KYcc014413
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 12 Aug 2015 01:39:16 +0000 (UTC)
+Received: by pdbfa8 with SMTP id fa8so1368346pdb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2015 18:20:34 -0700 (PDT)
-Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Tue, 11 Aug 2015 18:20:33 -0700
-Message-ID: <55CA9F60.4020602@windriver.com>
-Date: Wed, 12 Aug 2015 09:20:32 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1436171379-32162-1-git-send-email-rongqing.li@windriver.com>	<55C986FA.9050404@windriver.com>
-	<mqcpsd$esk$1@ger.gmane.org>
-In-Reply-To: <mqcpsd$esk$1@ger.gmane.org>
-Subject: Re: [PATCH] ypbind-yocto.init: add status command
+	Tue, 11 Aug 2015 18:39:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=3OVapPI5IVtcRDVrvxjiwkft28cZ3EdWQ+ofcR5QJHs=;
+	b=p30J+dOELSh5davp0rS08j0M7nCTn24fxo8pQ3IbUjxOTkgHIiBPP/sk7tTVWBFZIs
+	y0KOiIhzu4JX5PdUiUODIG7QWyjRovIlHdqglsbxf4531BL4flKvZEy4BwAPfFbWDGai
+	H3/75jZwYcg1ApPfNUJyySzF2tg17x4vPEfCx2ChL7I1DX6whS2LvDzkc7xWNXncfRrT
+	c+SiX/B2fMgkt5zgN31Hj2Bf4Swxsd7bdccd15yjgGUFG9qRVdfS895SCJMdD9vbx/h8
+	KibLJf7BwRI3iENp1DW7E+vKG/H856FV07/Kq/+WHOkiwMetWCWQtcqPTR9AJhc6Pglz
+	w/gA==
+X-Received: by 10.70.38.231 with SMTP id j7mr63464887pdk.146.1439343556646;
+	Tue, 11 Aug 2015 18:39:16 -0700 (PDT)
+Received: from ?IPv6:2601:646:8601:4580:157:79f9:ef5c:d3d0?
+	([2601:646:8601:4580:157:79f9:ef5c:d3d0])
+	by smtp.gmail.com with ESMTPSA id pj3sm4225280pdb.6.2015.08.11.18.39.15
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 11 Aug 2015 18:39:16 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+X-Pgp-Agent: GPGMail 2.5
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1439307808-7581-1-git-send-email-alejandro.delcastillo@ni.com>
+Date: Tue, 11 Aug 2015 18:39:14 -0700
+Message-Id: <C1999217-99AE-4AB2-83D7-8EED48D721D8@gmail.com>
+References: <1439307808-7581-1-git-send-email-alejandro.delcastillo@ni.com>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.2104)
+Subject: Re: [meta-python][PATCH] python-pyinotify: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,75 +48,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2015 01:20:34 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 12 Aug 2015 01:39:18 -0000
+X-Groupsio-MsgNum: 56651
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_053BA99B-D89D-4523-9A7B-9A8F59AB560E";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_053BA99B-D89D-4523-9A7B-9A8F59AB560E
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
 
+> On Aug 11, 2015, at 8:43 AM, Alejandro del Castillo =
+<alejandro.delcastillo@ni.com> wrote:
+>=20
+> Python bindings for Linux inotify mechanism
+>=20
+> Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
+> ---
+> .../recipes-devtools/python/python-pyinotify_0.9.6.bb   | 17 =
++++++++++++++++++
+> 1 file changed, 17 insertions(+)
+> create mode 100644 =
+meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
+>=20
+> diff --git =
+a/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb =
+b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
+> new file mode 100644
+> index 0000000..07e95b0
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
+> @@ -0,0 +1,17 @@
+> +DESCRIPTION =3D "Python pyinotify: Linux filesystem events =
+monitoring"
+> +HOMEPAGE =3D "https://pypi.python.org/pypi/pyinotify"
+> +SECTION =3D "devel/python"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D =
+"file://COPYING;md5=3Dab173cade7965b411528464589a08382"
+> +
+> +PR =3D =E2=80=9Cr0"
 
-On 2015年08月11日 20:30, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 11-08-15 om 07:24 schreef Rongqing Li:
->> ping
->
-> While you're there, can you please fix the name of this file? Either change
-> it to 'yoctoproject' or rename it to something sensible, but the current
-> situation is just wrong.
->
+drop it.
 
-I will change the title of this patch, and not rename
-ypbind-yocto.init, since ypbind-yocto.init will be rename
-to ypbind when it is installed into system
+> +SRCNAME =3D "pyinotify"
+> +
+> +SRC_URI =3D =
+"https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar=
+.gz"
+> +
+> +SRC_URI[md5sum] =3D "8e580fa1ff3971f94a6f81672b76c406"
+> +SRC_URI[sha256sum] =3D =
+"9c998a5d7606ca835065cdabc013ae6c66eb9ea76a00a1e3bc6e0cfe2b4f71f4"
+> +
+> +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
+> +
+> +inherit setuptools
+> --
+> 1.9.1
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
--Roy
+--Apple-Mail=_053BA99B-D89D-4523-9A7B-9A8F59AB560E
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
 
->>
->> -Roy
->>
->> On 2015年07月06日 16:29, rongqing.li@windriver.com wrote:
->>> From: Zhu Yanjun <yanjun.zhu@windriver.com>
->>>
->>> Add the "status" command to check the status of ypbind.
->>>
->>> Signed-off-by: Zhu Yanjun <yanjun.zhu@windriver.com> ---
->>> meta-networking/recipes-support/nis/files/ypbind-yocto.init | 7
->>> +++++++ 1 file changed, 7 insertions(+)
->>>
->>> diff --git
->>> a/meta-networking/recipes-support/nis/files/ypbind-yocto.init
->>> b/meta-networking/recipes-support/nis/files/ypbind-yocto.init index
->>> 5f50a53..da533a1 100644 ---
->>> a/meta-networking/recipes-support/nis/files/ypbind-yocto.init +++
->>> b/meta-networking/recipes-support/nis/files/ypbind-yocto.init @@ -21,6
->>> +21,9 @@ #    the NIS binding information. ### END INIT INFO
->>>
->>> +# Need to use status function +. /etc/init.d/functions +
->>> YPBIND_BIN=/usr/sbin/ypbind pidfile=/var/run/ypbind.pid
->>>
->>> @@ -92,6 +95,10 @@ case "$1" in echo -n "Reload service ypbind"
->>> start-stop-daemon --stop --quiet --signal 1 --pidfile $pidfile ;; +
->>> status) +    echo -n "Checking for ypbind: " +    status $YPBIND_BIN +
->>> ;; *) echo "Usage: $0
->>> {start|stop|status|try-restart|restart|force-reload|reload|probe}" exit
->>> 1
->>>
->>
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iD8DBQFVyerMMkyGM64RGpERAsGEAJ4wrA9wavFzQZfyIiZwLntHXnLVPACfW0Dc
-> GihWGohDCHjH8dKz+cq5fLo=
-> =mkrk
-> -----END PGP SIGNATURE-----
->
+iEYEARECAAYFAlXKo8IACgkQuwUzVZGdMxT/HwCcDazglDO2YsCsJcKOnQ3sZH0J
+6PgAn05g2T19Pw7mMLOt3/v4LbIpg2lR
+=6SMr
+-----END PGP SIGNATURE-----
 
--- 
-Best Reagrds,
-Roy | RongQing Li
-
+--Apple-Mail=_053BA99B-D89D-4523-9A7B-9A8F59AB560E--
