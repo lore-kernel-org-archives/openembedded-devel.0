@@ -1,27 +1,54 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id C15A0605F1
+Return-Path: <jbriance@cisco.com>
+X-Greylist: delayed 575 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 12 Aug 2015 12:17:06 UTC
+Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 00DA2760E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2015 11:10:55 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga102.jf.intel.com with ESMTP; 12 Aug 2015 04:10:56 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.15,660,1432623600"; d="scan'208";a="767150112"
-Received: from menright-mobl.amr.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.21.215])
-	by fmsmga001.fm.intel.com with ESMTP; 12 Aug 2015 04:10:55 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Rongqing Li <rongqing.li@windriver.com>
-Date: Wed, 12 Aug 2015 12:10:54 +0100
-Message-ID: <27160670.K3UU4rQsOm@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.9 (Linux/4.1.3-100.fc21.x86_64; KDE/4.14.9; x86_64; ; )
-In-Reply-To: <55CA9F60.4020602@windriver.com>
-References: <1436171379-32162-1-git-send-email-rongqing.li@windriver.com>
-	<mqcpsd$esk$1@ger.gmane.org> <55CA9F60.4020602@windriver.com>
+	Wed, 12 Aug 2015 12:17:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=cisco.com; i=@cisco.com; l=1270; q=dns/txt; s=iport;
+	t=1439381827; x=1440591427;
+	h=from:to:cc:subject:date:message-id:references:
+	in-reply-to:content-transfer-encoding:mime-version;
+	bh=0DpCe4VEbbQqmwt85iUGu9X367hXnVCO0CqPvpmcyIc=;
+	b=Kmx9WlyOWGgFGXGHxmk4laU1h1J0ub9t7knjdY89UzrqVg6JkMEB4A+l
+	UeIT6Ql3fbT4C5vBoXLcA+2Rz79m88AbFHLfjBRoAb5C/LOmC4d64pkBq
+	sWQla8beGRDT20uF0RclpjBE3U1fUDEK92TqKVAAQcTWgfiHg3eNEdLMX E=;
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: A0AkAwBHNstV/5ldJa1dgxtUaQa9XAmBcYV9AoFHOBQBAQEBAQEBfwuEJAEBBDo/EAIBKhQQMiUCBA4FCIgm0CcBAQEBAQEBAQEBAQEBAQEBAQEBAQEXkCsxB4MYgRQFlRMBhQOWQos3JoN9cQEBgUaBBAEBAQ
+X-IronPort-AV: E=Sophos;i="5.15,661,1432598400"; d="scan'208";a="177893213"
+Received: from rcdn-core-2.cisco.com ([173.37.93.153])
+	by alln-iport-4.cisco.com with ESMTP; 12 Aug 2015 12:07:31 +0000
+Received: from XCH-RCD-011.cisco.com (xch-rcd-011.cisco.com [173.37.102.21])
+	by rcdn-core-2.cisco.com (8.14.5/8.14.5) with ESMTP id t7CC7Vvp012375
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Aug 2015 12:07:31 GMT
+Received: from xch-rcd-011.cisco.com (173.37.102.21) by XCH-RCD-011.cisco.com
+	(173.37.102.21) with Microsoft SMTP Server (TLS) id 15.0.1104.5;
+	Wed, 12 Aug 2015 07:07:30 -0500
+Received: from xhc-aln-x13.cisco.com (173.36.12.87) by xch-rcd-011.cisco.com
+	(173.37.102.21) with Microsoft SMTP Server (TLS) id 15.0.1104.5 via
+	Frontend Transport; Wed, 12 Aug 2015 07:07:30 -0500
+Received: from xmb-aln-x12.cisco.com ([169.254.7.85]) by xhc-aln-x13.cisco.com
+	([173.36.12.87]) with mapi id 14.03.0248.002;
+	Wed, 12 Aug 2015 07:07:30 -0500
+From: "Julien Brianceau (jbriance)" <jbriance@cisco.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-browser][PATCH] chromium, cef: Set BB_NUMBER_THREADS
+	jobs for ninja
+Thread-Index: AQHQ1PZycvWF1ZzrJkadUspnKyUVJJ4IQ9iA
+Date: Wed, 12 Aug 2015 12:07:30 +0000
+Message-ID: <5940D1D9F240BA44AEF939055CF1358D05A4EEAE@xmb-aln-x12.cisco.com>
+References: <1439380788-8674-1-git-send-email-jbriance@cisco.com>
+In-Reply-To: <1439380788-8674-1-git-send-email-jbriance@cisco.com>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.60.62.116]
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] ypbind-yocto.init: add status command
+Subject: [meta-browser][PATCH] chromium, cef: Set BB_NUMBER_THREADS jobs for ninja
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,35 +62,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2015 11:10:58 -0000
+X-List-Received-Date: Wed, 12 Aug 2015 12:17:07 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
 
-Hi Roy,
+Do not let ninja choose the number of jobs to run in parallel.
 
-On Wednesday 12 August 2015 09:20:32 Rongqing Li wrote:
-> On 2015=E5=B9=B408=E6=9C=8811=E6=97=A5 20:30, Koen Kooi wrote:
-> > While you're there, can you please fix the name of this file? Eithe=
-r
-> > change it to 'yoctoproject' or rename it to something sensible, but=
- the
-> > current situation is just wrong.
->=20
-> I will change the title of this patch, and not rename
-> ypbind-yocto.init, since ypbind-yocto.init will be rename
-> to ypbind when it is installed into system
+Signed-off-by: Julien Brianceau <jbriance@cisco.com>
+---
+ recipes-browser/chromium/cef3_280796.bb           | 2 +-
+ recipes-browser/chromium/chromium_40.0.2214.91.bb | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-Yes, that's clear - it's just not the right name in the metadata either=
-. Would=20
-you mind simply renaming it to ypbind.init to be at least similar to ot=
-her=20
-recipes?
-
-Thanks,
-Paul
-
+diff --git a/recipes-browser/chromium/cef3_280796.bb b/recipes-browser/chro=
+mium/cef3_280796.bb
+index 9a9efe5..9505a64 100644
+--- a/recipes-browser/chromium/cef3_280796.bb
++++ b/recipes-browser/chromium/cef3_280796.bb
+@@ -47,5 +47,5 @@ do_qa_configure() {
+ }
+=20
+ do_compile() {
+-	ninja -C out/${CHROMIUM_BUILD_TYPE} cefsimple
++	ninja -C out/${CHROMIUM_BUILD_TYPE} -j${BB_NUMBER_THREADS} cefsimple
+ }
+diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-br=
+owser/chromium/chromium_40.0.2214.91.bb
+index 74986b5..e795e14 100644
+--- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
++++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+@@ -177,7 +177,7 @@ do_configure_append() {
+=20
+ do_compile() {
+         # build with ninja
+-        ninja -C ${S}/out/${CHROMIUM_BUILD_TYPE} chrome chrome_sandbox
++        ninja -C ${S}/out/${CHROMIUM_BUILD_TYPE} -j${BB_NUMBER_THREADS} ch=
+rome chrome_sandbox
+ }
+=20
+=20
 --=20
+1.9.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
