@@ -1,41 +1,31 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 9EAF7607A4
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 3610 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 12 Aug 2015 19:37:54 UTC
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 15041607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2015 18:33:50 +0000 (UTC)
-Received: by pacgr6 with SMTP id gr6so19743131pac.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2015 11:33:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=2a4n3DsT//Q0DfHsfmUnOnB5nDa/5y71lpsnsK0qA3k=;
-	b=Z+UYDStz9YmuPqNTJnYPAdzuDywnxEuDgNSkawk0hui+O2Dovh+cbgy1HmMbbjtvNS
-	fVbSJphbxBkydlgeMBiCwj156sfcym99DbVp5ou9feCWf5QzHjZ30eBBpKVdHjC3qwNg
-	TuBWCEqJOsJTrlTRmJLOQ5+2l8w9EIQevlekR15S0NoRaBrv3OT0qcnkqUle9Knxg0WO
-	IuI4qPl7ivMiHA2N/2U8MOAPZHFw+/SNeFFVxcSC2ihyiGAcz4RF5TuEwNvms2AdWsuP
-	EvUP2lbl0YdFQYfPzOyV8JIJqtYVZaLXmlyf9mJY3f6ouEkzqzfBL8sNILyCe6gKu3cj
-	Cheg==
-X-Received: by 10.69.27.68 with SMTP id je4mr7335196pbd.163.1439404430346;
-	Wed, 12 Aug 2015 11:33:50 -0700 (PDT)
-Received: from ?IPv6:2601:646:8601:4580:e0cb:bccb:39a5:3887?
-	([2601:646:8601:4580:e0cb:bccb:39a5:3887])
-	by smtp.gmail.com with ESMTPSA id
-	qp13sm7272941pbb.9.2015.08.12.11.33.49
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 12 Aug 2015 11:33:49 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-X-Pgp-Agent: GPGMail 2.5
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <55CB2853.3040104@exceet.de>
-Date: Wed, 12 Aug 2015 11:33:45 -0700
-Message-Id: <B8E073FD-9854-4E89-9375-F204E7E1D726@gmail.com>
-References: <55CB2853.3040104@exceet.de>
+	Wed, 12 Aug 2015 19:37:54 +0000 (UTC)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NSZ00ID3FQJCI00@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	12 Aug 2015 13:37:40 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=XYJHFtupD_QA:10 a=-9mUelKeXuEA:10
+	a=kj9zAlcOel0A:10 a=uRRa74qj2VoA:10	a=NEAV23lmAAAA:8
+	a=R9nrDnf5_HdaI5WvzX0A:9 a=CjuIK1q_8ugA:10
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id EBFA9161B75; Wed,
+	12 Aug 2015 14:37:30 -0400 (EDT)
+Date: Wed, 12 Aug 2015 14:37:30 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.2104)
-Subject: Re: [meta-qt5] qtwebengine in master fails to build
+Message-id: <20150812183730.GG26375@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: [meta-qt5] qtbase_5.4.2 do_install fails to chown fonts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,104 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2015 18:33:54 -0000
-X-Groupsio-MsgNum: 56672
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_688CC9A0-2C00-4C61-B630-4FC435B60C40";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Wed, 12 Aug 2015 19:37:57 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
---Apple-Mail=_688CC9A0-2C00-4C61-B630-4FC435B60C40
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+Hi,
 
+Has anyone seen the issue of qtbase_5.4.2 failing at the end of do_install to 
+chown fonts? Here's the message:
 
-> On Aug 12, 2015, at 4:04 AM, Schrempf Frieder =
-<frieder.schrempf@exceet.de> wrote:
->=20
-> I have the same problem on a current fido build.
-> Can anyone with some knowledge about this have a look?
-> Ridiculously it works on a clean build for me and the error only =
-occurs while rebuilding.
->=20
->=20
+chown: cannot access `[cut]/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image//usr/lib/fonts': No such file or directory
 
-there could be few things. Try to add
-CLEANBROKEN =3D =E2=80=9C1=E2=80=9D to the recipe and see if it helps
-secondly it could be a parallel make race condition
-so you might want to disable parallel make for tests.
+Here's the code that fails:
 
-> Carlos Rafael Giani, on Mon Jan 26 08:13:45 UTC 2015:
->> Hello,
->>=20
->> I tried to build qtwebengine, but there is a linker error:
->>=20
->> [6/6694] LINK genmacro
->> FAILED:
->> =
-/home/dv/misc/yocto-fsl-setup-0002/poky/build/tmp/sysroots/x86_64-linux/us=
-r/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-g++
->> -march=3Darmv7-a -mfloat-abi=3Dhard -mfpu=3Dneon -mtune=3Dcortex-a9
->> =
---sysroot=3D/home/dv/misc/yocto-fsl-setup-0002/poky/build/tmp/sysroots/cub=
-ox-i
->> -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,-z,now =
--Wl,-z,relro
->> -Wl,--fatal-warnings -pthread -Wl,-z,noexecstack -fPIC
->> -Wl,--disable-new-dtags -Wl,--gc-sections -o genmacro =
--Wl,--start-group
->> =
-obj.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/tools/=
-genmacro/genmacro.genmacro.o
->> -Wl,--end-group
->> =
-obj.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/tools/=
-genmacro/genmacro.genmacro.o:
->> file not recognized: File format not recognized
->> collect2: error: ld returned 1 exit status
->>=20
->> Looking at the ninja
->> =
-fileqtwebengine-opensource-src-5.4.0/src/core/Release/obj.host/src/3rdpart=
-y/chromium/third_party/yasm/genmacro.ninja
->> , apparently this part is causing problems:
->>=20
->> build genmacro: link $
->> =
-obj.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/tools/=
-genmacro/genmacro.genmacro.o
->>=20
->> It is linking with arm-poky-linux-gnueabi-g++ , but the object file =
-is
->> built with the host's compiler. Considering the name "genmacro", I
->> suspect this is some kind of generator tool that is supposed to be =
-run
->> as part of the build process, so therefore the linker should be the =
-host
->> one. But I have no knowledge about ninja or the webengine internals, =
-so
->> I do not know how to fix that. Any suggestions?
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+https://github.com/meta-qt5/meta-qt5/blob/master/recipes-qt/qt5/qtbase_git.bb#L230
 
+Looking at the install location, it seems that the previous command
 
---Apple-Mail=_688CC9A0-2C00-4C61-B630-4FC435B60C40
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
+cp -a ${S}/lib/fonts ${D}/${OE_QMAKE_PATH_LIBS}
 
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
+copied font files not into /usr/lib/fonts, but instead into /usr/lib directly. 
+This usually happens with "cp -a" when /usr/lib destination is empty...
 
-iEYEARECAAYFAlXLkYwACgkQuwUzVZGdMxQ92ACgkPSSh1kiyAYW7KupZ7mTSq4k
-JOsAn0dj1rIIiUYN4E+eN9hSyEVe8hQk
-=MDwe
------END PGP SIGNATURE-----
+I'm thinking about submitting a patch that replaces above copy with:
 
---Apple-Mail=_688CC9A0-2C00-4C61-B630-4FC435B60C40--
+mkdir -p ${D}/${OE_QMAKE_PATH_LIBS}/fonts
+cp -a ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_LIBS}/fonts
+
+Any objections, comments, suggestions?
+
+-- 
+Denys
+
