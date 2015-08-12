@@ -1,27 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C767766DF
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 631FA7685A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2015 07:45:45 +0000 (UTC)
+	Wed, 12 Aug 2015 07:45:48 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t7C7jjd0009825
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7C7jmNU021388
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2015 00:45:45 -0700 (PDT)
+	Wed, 12 Aug 2015 00:45:48 -0700 (PDT)
 Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.235.1;
-	Wed, 12 Aug 2015 00:45:44 -0700
+	Wed, 12 Aug 2015 00:45:48 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 12 Aug 2015 15:45:34 +0800
-Message-ID: <82869c777900cec1414f9945e9b0f9ebfbd5f408.1439365242.git.yi.zhao@windriver.com>
+Date: Wed, 12 Aug 2015 15:45:35 +0800
+Message-ID: <978ca7f4bfa02a09d864a51c25fc7a90fe3069dc.1439365242.git.yi.zhao@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1439365242.git.yi.zhao@windriver.com>
 References: <cover.1439365242.git.yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 1/3] sgpio: fix PN -> BPN for multilib
+Subject: [meta-oe][PATCH 2/3] vboxguestdrivers: upgrade 4.3.22 -> 4.3.30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,22 +40,28 @@ Content-Type: text/plain
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...rivers_4.3.22.bb => vboxguestdrivers_4.3.30.bb} |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_4.3.22.bb => vboxguestdrivers_4.3.30.bb} (93%)
 
-diff --git a/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb b/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
-index 9807a31..ed7c413 100644
---- a/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
-+++ b/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
-@@ -8,7 +8,7 @@ SRC_URI = " \
- SRC_URI[md5sum] = "a417bf68da4e9bd79a4664c11d7debd1"
- SRC_URI[sha256sum] = "9bf8c42acaa247efd9321bdb1fc2390022f0c554d77fbbd4a7363d990fc0270b"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.22.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.30.bb
+similarity index 93%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.22.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.30.bb
+index 270bdd3..fd2187b 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.22.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.30.bb
+@@ -14,8 +14,8 @@ VBOX_NAME = "VirtualBox-${PV}"
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+            file://Makefile.utils \
+ "
+-SRC_URI[md5sum] = "fc21ecc1044dc13cd6c6b601823c6df3"
+-SRC_URI[sha256sum] = "0d41e044589d3371f765a98ddc071d9cf9788289f72b7efbb5db64f5488c8eba"
++SRC_URI[md5sum] = "cc053340f88922a11ad9d4fab56557bd"
++SRC_URI[sha256sum] = "ea9569ec16cd6202ee61bcadb2506d31ac12fd343adb91565773a05eaaea9a36"
  
--S = "${WORKDIR}/${PN}"
-+S = "${WORKDIR}/${BPN}"
+ S = "${WORKDIR}/vbox_module"
  
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://LICENSE_GPL;md5=393a5ca445f6965873eca0259a17f833"
 -- 
 1.7.9.5
 
