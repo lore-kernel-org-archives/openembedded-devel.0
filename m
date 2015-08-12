@@ -1,31 +1,30 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 3610 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 12 Aug 2015 19:37:54 UTC
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 15041607A4
+Return-Path: <alejandro.delcastillo@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 839B6607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2015 19:37:54 +0000 (UTC)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NSZ00ID3FQJCI00@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	12 Aug 2015 13:37:40 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=XYJHFtupD_QA:10 a=-9mUelKeXuEA:10
-	a=kj9zAlcOel0A:10 a=uRRa74qj2VoA:10	a=NEAV23lmAAAA:8
-	a=R9nrDnf5_HdaI5WvzX0A:9 a=CjuIK1q_8ugA:10
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EBFA9161B75; Wed,
-	12 Aug 2015 14:37:30 -0400 (EDT)
-Date: Wed, 12 Aug 2015 14:37:30 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 12 Aug 2015 20:52:44 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t7CKqivE003719 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Aug 2015 15:52:44 -0500
+Received: from delcastillo2.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015081215524480-1428871 ;
+	Wed, 12 Aug 2015 15:52:44 -0500 
+From: Alejandro del Castillo <alejandro.delcastillo@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20150812183730.GG26375@denix.org>
-MIME-version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: [meta-qt5] qtbase_5.4.2 do_install fails to chown fonts
+Date: Wed, 12 Aug 2015 15:52:42 -0500
+Message-Id: <1439412762-20356-1-git-send-email-alejandro.delcastillo@ni.com>
+X-Mailer: git-send-email 1.9.1
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 08/12/2015 03:52:44 PM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 08/12/2015 03:52:44 PM,
+	Serialize complete at 08/12/2015 03:52:44 PM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-08-12_11:, , signatures=0
+Subject: [meta-python][PATCH v2] python-pyinotify: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,35 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2015 19:37:57 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 12 Aug 2015 20:52:49 -0000
 
-Hi,
+Python bindings for Linux inotify mechanism
 
-Has anyone seen the issue of qtbase_5.4.2 failing at the end of do_install to 
-chown fonts? Here's the message:
+Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
+---
+ .../recipes-devtools/python/python-pyinotify_0.9.6.bb   | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
 
-chown: cannot access `[cut]/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image//usr/lib/fonts': No such file or directory
-
-Here's the code that fails:
-
-https://github.com/meta-qt5/meta-qt5/blob/master/recipes-qt/qt5/qtbase_git.bb#L230
-
-Looking at the install location, it seems that the previous command
-
-cp -a ${S}/lib/fonts ${D}/${OE_QMAKE_PATH_LIBS}
-
-copied font files not into /usr/lib/fonts, but instead into /usr/lib directly. 
-This usually happens with "cp -a" when /usr/lib destination is empty...
-
-I'm thinking about submitting a patch that replaces above copy with:
-
-mkdir -p ${D}/${OE_QMAKE_PATH_LIBS}/fonts
-cp -a ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_LIBS}/fonts
-
-Any objections, comments, suggestions?
-
+diff --git a/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
+new file mode 100644
+index 0000000..42956ce
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "Python pyinotify: Linux filesystem events monitoring"
++HOMEPAGE = "https://pypi.python.org/pypi/pyinotify"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
++
++RDEPENDS_${PN} += "python-threading python-io python-subprocess python-misc python-shell"
++
++SRCNAME = "pyinotify"
++SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "8e580fa1ff3971f94a6f81672b76c406"
++SRC_URI[sha256sum] = "9c998a5d7606ca835065cdabc013ae6c66eb9ea76a00a1e3bc6e0cfe2b4f71f4"
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++inherit setuptools
 -- 
-Denys
+1.9.1
+
 
