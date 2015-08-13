@@ -1,29 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EF75072A78
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B283572A78
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2015 00:08:29 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7D08S5Q027770
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 12 Aug 2015 17:08:28 -0700 (PDT)
-Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Wed, 12 Aug 2015 17:08:28 -0700
-Message-ID: <55CBDFFA.6060305@windriver.com>
-Date: Thu, 13 Aug 2015 08:08:26 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
+	Thu, 13 Aug 2015 00:38:37 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t7D0cXE1020137
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Aug 2015 17:38:34 -0700 (PDT)
+Received: from LRQ.corp.ad.wrs.com (128.224.162.158) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Wed, 12 Aug 2015 17:38:33 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 13 Aug 2015 08:38:32 +0800
+Message-ID: <1439426312-26368-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <1436171379-32162-1-git-send-email-rongqing.li@windriver.com>
-	<mqcpsd$esk$1@ger.gmane.org> <55CA9F60.4020602@windriver.com>
-	<27160670.K3UU4rQsOm@peggleto-mobl.ger.corp.intel.com>
-In-Reply-To: <27160670.K3UU4rQsOm@peggleto-mobl.ger.corp.intel.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] ypbind-yocto.init: add status command
+Subject: [PATCH][meta-networking][v2] ypbind-mt: add status command for initscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,40 +32,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2015 00:08:30 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 13 Aug 2015 00:38:38 -0000
+Content-Type: text/plain
 
+From: Zhu Yanjun <yanjun.zhu@windriver.com>
 
+Add the "status" command in initscript to check the status of ypbind.
+remove ypbind-yocto.init as ypbind.init, which is the initscript, make
+its name similar to other recipes
 
-On 2015年08月12日 19:10, Paul Eggleton wrote:
-> Hi Roy,
->
-> On Wednesday 12 August 2015 09:20:32 Rongqing Li wrote:
->> On 2015年08月11日 20:30, Koen Kooi wrote:
->>> While you're there, can you please fix the name of this file? Either
->>> change it to 'yoctoproject' or rename it to something sensible, but the
->>> current situation is just wrong.
->>
->> I will change the title of this patch, and not rename
->> ypbind-yocto.init, since ypbind-yocto.init will be rename
->> to ypbind when it is installed into system
->
-> Yes, that's clear - it's just not the right name in the metadata either. Would
-> you mind simply renaming it to ypbind.init to be at least similar to other
-> recipes?
->
+Signed-off-by: Zhu Yanjun <yanjun.zhu@windriver.com>
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../recipes-support/nis/files/{ypbind-yocto.init => ypbind.init}   | 7 +++++++
+ meta-networking/recipes-support/nis/ypbind-mt_1.38.bb              | 4 ++--
+ meta-networking/recipes-support/nis/ypbind-mt_2.2.bb               | 4 ++--
+ 3 files changed, 11 insertions(+), 4 deletions(-)
+ rename meta-networking/recipes-support/nis/files/{ypbind-yocto.init => ypbind.init} (96%)
 
-
-Ok
-
--Roy
-
-> Thanks,
-> Paul
->
-
+diff --git a/meta-networking/recipes-support/nis/files/ypbind-yocto.init b/meta-networking/recipes-support/nis/files/ypbind.init
+similarity index 96%
+rename from meta-networking/recipes-support/nis/files/ypbind-yocto.init
+rename to meta-networking/recipes-support/nis/files/ypbind.init
+index 2c50d12..244dc78 100644
+--- a/meta-networking/recipes-support/nis/files/ypbind-yocto.init
++++ b/meta-networking/recipes-support/nis/files/ypbind.init
+@@ -21,6 +21,9 @@
+ #	the NIS binding information.
+ ### END INIT INFO
+ 
++# Need to use status function
++. /etc/init.d/functions
++
+ YPBIND_BIN=/usr/sbin/ypbind
+ pidfile=/var/run/ypbind.pid
+ 
+@@ -92,6 +95,10 @@ case "$1" in
+ 	echo -n "Reload service ypbind"
+ 	start-stop-daemon --stop --quiet --signal 1 --pidfile $pidfile
+ 	;;
++    status)
++	echo -n "Checking for ypbind: "
++	status $YPBIND_BIN
++	;;
+     *)
+ 	echo "Usage: $0 {start|stop|status|try-restart|restart|force-reload|reload|probe}"
+ 	exit 1
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+index d25ef5c..5702cd6 100644
+--- a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
++++ b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+@@ -26,7 +26,7 @@ DEPENDS = " \
+ PROVIDES += "ypbind"
+ 
+ SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
+-           file://ypbind-yocto.init \
++           file://ypbind.init \
+            file://ypbind.service \
+ "
+ SRC_URI[md5sum] = "094088c0e282fa7f3b3dd6cc51d0a4e1"
+@@ -44,7 +44,7 @@ do_install_append () {
+     install -d ${D}${sysconfdir}/init.d
+     install -d ${D}${sysconfdir}/rcS.d
+ 
+-    install -m 0755 ${WORKDIR}/ypbind-yocto.init ${D}${sysconfdir}/init.d/ypbind
++    install -m 0755 ${WORKDIR}/ypbind.init ${D}${sysconfdir}/init.d/ypbind
+ 
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/system
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+index 6a9262a..cee5880 100644
+--- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
++++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+@@ -21,7 +21,7 @@ PROVIDES += "ypbind"
+ PNBLACKLIST[ypbind-mt] ?= "BROKEN: Depends on broken yp-tools"
+ 
+ SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
+-           file://ypbind-yocto.init \
++           file://ypbind.init \
+            file://ypbind.service \
+ "
+ SRC_URI[md5sum] = "54e2040d8266ae7d302d081ca310c8a8"
+@@ -41,7 +41,7 @@ do_install_append () {
+     install -d ${D}${sysconfdir}/init.d
+     install -d ${D}${sysconfdir}/rcS.d
+ 
+-    install -m 0755 ${WORKDIR}/ypbind-yocto.init ${D}${sysconfdir}/init.d/ypbind
++    install -m 0755 ${WORKDIR}/ypbind.init ${D}${sysconfdir}/init.d/ypbind
+ 
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/system
 -- 
-Best Reagrds,
-Roy | RongQing Li
+2.1.4
+
 
