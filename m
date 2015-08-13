@@ -1,34 +1,29 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-la0-f49.google.com (mail-la0-f49.google.com
-	[209.85.215.49])
-	by mail.openembedded.org (Postfix) with ESMTP id E742660043
+Return-Path: <s.mueller-klieser@phytec.de>
+X-Greylist: delayed 445 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 13 Aug 2015 10:26:36 UTC
+Received: from root.phytec.de (mail.rapiddevelopmentkit.de [217.6.246.34])
+	by mail.openembedded.org (Postfix) with ESMTP id 139B573D64
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2015 04:44:03 +0000 (UTC)
-Received: by lagz9 with SMTP id z9so19824176lag.3
+	Thu, 13 Aug 2015 10:26:36 +0000 (UTC)
+Received: from idefix.phytec.de (idefix.phytec.de [172.16.0.10])
+	by root.phytec.de (Postfix) with ESMTP id 705E7A00389
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2015 21:44:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Ek+T33mShyEugr/BYCGg07Y0bQQMpZllY8d1fK9Zo+c=;
-	b=mybGePgp69YsKHVXvTFAoMcSuvdrDgV017XG3fFpeTJE9BtFezfBD6WpH2r7zmECUY
-	gCqAIYq0sPC/ZAlN7aQR4xqq0Mbf5ZTbCoiVuIffT7fwsWviAhpDXnYtNT+v95aY7l/I
-	HPVN5Hik4H+aAC6H//ZiqouVKQj3hxXEa3lNHLQaIHZlDBSFBDTwkg0VE/lILpCHWKsn
-	1vsYhzITz2YUm+xEDRwWHklIy9DfIkT0uH4E5OEP7GPSTuOBJoVxHUpnt7UiCuzkRvDn
-	Az9l6WxGLBgvmBL1Dd9NyF20Viq3bwBldVzV73JAJeK2C19NfdFvDiM+feJWod84ddog
-	b5YA==
+	Thu, 13 Aug 2015 12:21:04 +0200 (CEST)
+Received: from lws-mklieser.phytec.de ([172.16.10.21])
+	by idefix.phytec.de (IBM Domino Release 9.0.1FP2 HF590)
+	with ESMTP id 2015081312191157-140581 ;
+	Thu, 13 Aug 2015 12:19:11 +0200 
+From: =?UTF-8?q?Stefan=20M=C3=BCller-Klieser?= <s.mueller-klieser@phytec.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 13 Aug 2015 12:19:14 +0200
+Message-Id: <1439461154-22584-1-git-send-email-s.mueller-klieser@phytec.de>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Received: by 10.152.87.20 with SMTP id t20mr19897054laz.80.1439441041742;
-	Wed, 12 Aug 2015 21:44:01 -0700 (PDT)
-Received: by 10.25.15.38 with HTTP; Wed, 12 Aug 2015 21:44:01 -0700 (PDT)
-In-Reply-To: <1439412762-20356-1-git-send-email-alejandro.delcastillo@ni.com>
-References: <1439412762-20356-1-git-send-email-alejandro.delcastillo@ni.com>
-Date: Wed, 12 Aug 2015 21:44:01 -0700
-Message-ID: <CANx9H-Buaf+WfvPKaeiL_r+8VAefNwdXq4QuVQ2ruZTGGivnig@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH v2] python-pyinotify: add recipe
+X-MIMETrack: Itemize by SMTP Server on Idefix/Phytec(Release 9.0.1FP2
+	HF590|December 11, 2014) at 13.08.2015 12:19:11,
+	Serialize by Router on Idefix/Phytec(Release 9.0.1FP2 HF590|December 11,
+	2014) at 13.08.2015 12:19:11
+Subject: [meta-multimedia][PATCH] vorbis-tools: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,59 +37,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2015 04:44:04 -0000
+X-List-Received-Date: Thu, 13 Aug 2015 10:26:38 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Acked: Tim Orling <ticotimo@gmail.com>
+Vorbis tools provide command line editing and playback tools for the
+patent free audio codec. Use cases in embedded are audio tests and
+performance benchmarks.
 
-On Wed, Aug 12, 2015 at 1:52 PM, Alejandro del Castillo <
-alejandro.delcastillo@ni.com> wrote:
+Signed-off-by: Stefan M=C3=BCller-Klieser <s.mueller-klieser@phytec.de>
+---
+ .../vorbis-tools/vorbis-tools=5F1.4.0.bb             | 32 ++++++++++++++++=
+++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-=
+tools=5F1.4.0.bb
 
-> Python bindings for Linux inotify mechanism
->
-> Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
-> ---
->  .../recipes-devtools/python/python-pyinotify_0.9.6.bb   | 17
-> +++++++++++++++++
->  1 file changed, 17 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python-pyinotify_0.9.6.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
-> b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
-> new file mode 100644
-> index 0000000..42956ce
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
-> @@ -0,0 +1,17 @@
-> +DESCRIPTION = "Python pyinotify: Linux filesystem events monitoring"
-> +HOMEPAGE = "https://pypi.python.org/pypi/pyinotify"
-> +SECTION = "devel/python"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
-> +
-> +RDEPENDS_${PN} += "python-threading python-io python-subprocess
-> python-misc python-shell"
-> +
-> +SRCNAME = "pyinotify"
-> +SRC_URI = "
-> https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz
-> "
-> +
-> +SRC_URI[md5sum] = "8e580fa1ff3971f94a6f81672b76c406"
-> +SRC_URI[sha256sum] =
-> "9c998a5d7606ca835065cdabc013ae6c66eb9ea76a00a1e3bc6e0cfe2b4f71f4"
-> +
-> +S = "${WORKDIR}/${SRCNAME}-${PV}"
-> +
-> +inherit setuptools
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools=
+=5F1.4.0.bb b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools=
+=5F1.4.0.bb
+new file mode 100644
+index 0000000..de89d22
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools=5F1.4.0.=
+bb
+@@ -0,0 +1,32 @@
++SUMMARY =3D "Vorbis Tools"
++DESCRIPTION =3D "Ogg Vorbis is a high-quality lossy audio codec \
++that is free of intellectual property restrictions. vorbis-tools \
++include some command line applications to use the libraries."
++HOMEPAGE =3D "http://www.vorbis.com/"
++BUGTRACKER =3D "https://trac.xiph.org"
++SECTION =3D "multimedia"
++LICENSE =3D "GPLv2"
++LIC=5FFILES=5FCHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079b=
+ae19f"
++
++DEPENDS =3D "libogg libvorbis curl libao"
++
++SRC=5FURI =3D "http://downloads.xiph.org/releases/vorbis/${BP}.tar.gz"
++
++SRC=5FURI[md5sum] =3D "567e0fb8d321b2cd7124f8208b8b90e6"
++SRC=5FURI[sha256sum] =3D "a389395baa43f8e5a796c99daf62397e435a7e73531c9f44=
+d9084055a05d22bc"
++
++inherit autotools pkgconfig gettext
++
++RDEPENDS=5F${PN} =3D "libogg libvorbis libcurl libao"
++
++PACKAGECONFIG ??=3D "flac"
++PACKAGECONFIG[flac] =3D ",--without-flac,flac,libflac"
++PACKAGECONFIG[speex] =3D ",--without-speex,speex,speex"
++
++EXTRA=5FOECONF =3D "--with-ogg-libraries=3D${STAGING=5FLIBDIR} \
++                --with-ogg-includes=3D${STAGING=5FINCDIR} \
++                --with-vorbis-libraries=3D${STAGING=5FLIBDIR} \
++                --with-vorbis-includes=3D${STAGING=5FINCDIR} \
++                --with-curl-libraries=3D${STAGING=5FLIBDIR} \
++                --with-curl-libraries=3D${STAGING=5FLIBDIR} \
++"
+--=20
+1.9.1
+
 
