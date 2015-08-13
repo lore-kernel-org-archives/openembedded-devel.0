@@ -1,24 +1,34 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B283572A78
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-la0-f49.google.com (mail-la0-f49.google.com
+	[209.85.215.49])
+	by mail.openembedded.org (Postfix) with ESMTP id E742660043
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2015 00:38:37 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t7D0cXE1020137
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 13 Aug 2015 04:44:03 +0000 (UTC)
+Received: by lagz9 with SMTP id z9so19824176lag.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2015 17:38:34 -0700 (PDT)
-Received: from LRQ.corp.ad.wrs.com (128.224.162.158) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.235.1; Wed, 12 Aug 2015 17:38:33 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 13 Aug 2015 08:38:32 +0800
-Message-ID: <1439426312-26368-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 2.1.4
+	Wed, 12 Aug 2015 21:44:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=Ek+T33mShyEugr/BYCGg07Y0bQQMpZllY8d1fK9Zo+c=;
+	b=mybGePgp69YsKHVXvTFAoMcSuvdrDgV017XG3fFpeTJE9BtFezfBD6WpH2r7zmECUY
+	gCqAIYq0sPC/ZAlN7aQR4xqq0Mbf5ZTbCoiVuIffT7fwsWviAhpDXnYtNT+v95aY7l/I
+	HPVN5Hik4H+aAC6H//ZiqouVKQj3hxXEa3lNHLQaIHZlDBSFBDTwkg0VE/lILpCHWKsn
+	1vsYhzITz2YUm+xEDRwWHklIy9DfIkT0uH4E5OEP7GPSTuOBJoVxHUpnt7UiCuzkRvDn
+	Az9l6WxGLBgvmBL1Dd9NyF20Viq3bwBldVzV73JAJeK2C19NfdFvDiM+feJWod84ddog
+	b5YA==
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking][v2] ypbind-mt: add status command for initscript
+X-Received: by 10.152.87.20 with SMTP id t20mr19897054laz.80.1439441041742;
+	Wed, 12 Aug 2015 21:44:01 -0700 (PDT)
+Received: by 10.25.15.38 with HTTP; Wed, 12 Aug 2015 21:44:01 -0700 (PDT)
+In-Reply-To: <1439412762-20356-1-git-send-email-alejandro.delcastillo@ni.com>
+References: <1439412762-20356-1-git-send-email-alejandro.delcastillo@ni.com>
+Date: Wed, 12 Aug 2015 21:44:01 -0700
+Message-ID: <CANx9H-Buaf+WfvPKaeiL_r+8VAefNwdXq4QuVQ2ruZTGGivnig@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-python][PATCH v2] python-pyinotify: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,97 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2015 00:38:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 13 Aug 2015 04:44:04 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Zhu Yanjun <yanjun.zhu@windriver.com>
+Acked: Tim Orling <ticotimo@gmail.com>
 
-Add the "status" command in initscript to check the status of ypbind.
-remove ypbind-yocto.init as ypbind.init, which is the initscript, make
-its name similar to other recipes
+On Wed, Aug 12, 2015 at 1:52 PM, Alejandro del Castillo <
+alejandro.delcastillo@ni.com> wrote:
 
-Signed-off-by: Zhu Yanjun <yanjun.zhu@windriver.com>
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../recipes-support/nis/files/{ypbind-yocto.init => ypbind.init}   | 7 +++++++
- meta-networking/recipes-support/nis/ypbind-mt_1.38.bb              | 4 ++--
- meta-networking/recipes-support/nis/ypbind-mt_2.2.bb               | 4 ++--
- 3 files changed, 11 insertions(+), 4 deletions(-)
- rename meta-networking/recipes-support/nis/files/{ypbind-yocto.init => ypbind.init} (96%)
-
-diff --git a/meta-networking/recipes-support/nis/files/ypbind-yocto.init b/meta-networking/recipes-support/nis/files/ypbind.init
-similarity index 96%
-rename from meta-networking/recipes-support/nis/files/ypbind-yocto.init
-rename to meta-networking/recipes-support/nis/files/ypbind.init
-index 2c50d12..244dc78 100644
---- a/meta-networking/recipes-support/nis/files/ypbind-yocto.init
-+++ b/meta-networking/recipes-support/nis/files/ypbind.init
-@@ -21,6 +21,9 @@
- #	the NIS binding information.
- ### END INIT INFO
- 
-+# Need to use status function
-+. /etc/init.d/functions
-+
- YPBIND_BIN=/usr/sbin/ypbind
- pidfile=/var/run/ypbind.pid
- 
-@@ -92,6 +95,10 @@ case "$1" in
- 	echo -n "Reload service ypbind"
- 	start-stop-daemon --stop --quiet --signal 1 --pidfile $pidfile
- 	;;
-+    status)
-+	echo -n "Checking for ypbind: "
-+	status $YPBIND_BIN
-+	;;
-     *)
- 	echo "Usage: $0 {start|stop|status|try-restart|restart|force-reload|reload|probe}"
- 	exit 1
-diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-index d25ef5c..5702cd6 100644
---- a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-+++ b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-@@ -26,7 +26,7 @@ DEPENDS = " \
- PROVIDES += "ypbind"
- 
- SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
--           file://ypbind-yocto.init \
-+           file://ypbind.init \
-            file://ypbind.service \
- "
- SRC_URI[md5sum] = "094088c0e282fa7f3b3dd6cc51d0a4e1"
-@@ -44,7 +44,7 @@ do_install_append () {
-     install -d ${D}${sysconfdir}/init.d
-     install -d ${D}${sysconfdir}/rcS.d
- 
--    install -m 0755 ${WORKDIR}/ypbind-yocto.init ${D}${sysconfdir}/init.d/ypbind
-+    install -m 0755 ${WORKDIR}/ypbind.init ${D}${sysconfdir}/init.d/ypbind
- 
-     install -d ${D}${systemd_unitdir}/system
-     install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/system
-diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
-index 6a9262a..cee5880 100644
---- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
-+++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
-@@ -21,7 +21,7 @@ PROVIDES += "ypbind"
- PNBLACKLIST[ypbind-mt] ?= "BROKEN: Depends on broken yp-tools"
- 
- SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
--           file://ypbind-yocto.init \
-+           file://ypbind.init \
-            file://ypbind.service \
- "
- SRC_URI[md5sum] = "54e2040d8266ae7d302d081ca310c8a8"
-@@ -41,7 +41,7 @@ do_install_append () {
-     install -d ${D}${sysconfdir}/init.d
-     install -d ${D}${sysconfdir}/rcS.d
- 
--    install -m 0755 ${WORKDIR}/ypbind-yocto.init ${D}${sysconfdir}/init.d/ypbind
-+    install -m 0755 ${WORKDIR}/ypbind.init ${D}${sysconfdir}/init.d/ypbind
- 
-     install -d ${D}${systemd_unitdir}/system
-     install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/system
--- 
-2.1.4
-
+> Python bindings for Linux inotify mechanism
+>
+> Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
+> ---
+>  .../recipes-devtools/python/python-pyinotify_0.9.6.bb   | 17
+> +++++++++++++++++
+>  1 file changed, 17 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python-pyinotify_0.9.6.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
+> b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
+> new file mode 100644
+> index 0000000..42956ce
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
+> @@ -0,0 +1,17 @@
+> +DESCRIPTION = "Python pyinotify: Linux filesystem events monitoring"
+> +HOMEPAGE = "https://pypi.python.org/pypi/pyinotify"
+> +SECTION = "devel/python"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
+> +
+> +RDEPENDS_${PN} += "python-threading python-io python-subprocess
+> python-misc python-shell"
+> +
+> +SRCNAME = "pyinotify"
+> +SRC_URI = "
+> https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz
+> "
+> +
+> +SRC_URI[md5sum] = "8e580fa1ff3971f94a6f81672b76c406"
+> +SRC_URI[sha256sum] =
+> "9c998a5d7606ca835065cdabc013ae6c66eb9ea76a00a1e3bc6e0cfe2b4f71f4"
+> +
+> +S = "${WORKDIR}/${SRCNAME}-${PV}"
+> +
+> +inherit setuptools
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
