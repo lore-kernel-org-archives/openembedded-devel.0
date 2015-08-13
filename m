@@ -1,37 +1,36 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 8056173D64
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-yk0-f174.google.com (mail-yk0-f174.google.com
+	[209.85.160.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C93673231
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2015 10:58:00 +0000 (UTC)
-Received: by wicja10 with SMTP id ja10so146549288wic.1
+	Thu, 13 Aug 2015 15:32:20 +0000 (UTC)
+Received: by ykaz130 with SMTP id z130so44332809yka.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2015 03:58:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=eDVVQlxfX+dwwaZdMuSrwFQP5Jy+r+9GW79qlCuG+Zw=;
-	b=ZwH6FVX8ufDzgntbATCA/1jXKc3y7lgoFzI6eUXXa7PQswSEF72M4EajW6y7BqCXst
-	0U1b+UiKw31tffnQdRg5jQDOTfVbxwq4ZpNrUx3ssUtDHhYX0wrypTw2mvXoQUc4yrcB
-	R8C5ec7NESAvM0tlr2gZv301moHqGHvIFWeNJbEwRAifmlAfF0/90fjrCwFu1ctspq67
-	AbUSjHN4Vlg0NzBE2F81PmvmWhTqST1mHSRWEf2LAmj7Tn6woVxjKsQb20888gUFRkcI
-	jIwmiExLCO2WDJdIyaA90Rv9DF2RJMWV5p9kBdndQZIFkRgIDwAUjj9t8DmDZqID0d7M
-	pLDA==
-X-Gm-Message-State: ALoCoQnMGGzUHgx89SW6okImHtr5U4CcVHZNWb88oNuSe68CNKU3O1FOku0KZ2TbSsPtngE00ik3
-X-Received: by 10.180.210.200 with SMTP id mw8mr55059938wic.26.1439463480125; 
-	Thu, 13 Aug 2015 03:58:00 -0700 (PDT)
-Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
-	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
-	pe1sm2780516wic.20.2015.08.13.03.57.59
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 13 Aug 2015 03:57:59 -0700 (PDT)
-From: Ross Burton <ross.burton@intel.com>
+	Thu, 13 Aug 2015 08:32:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=0wZQ4gfWrLbFxUIKafxlPIW9YbW/rqRj+P6Vyqm2n0M=;
+	b=EFQxON21z7FljFoT2HyKFtFq4RtbPdDQU9WNjE0Uw/SXQ0Cok6okQ0nGHHnseoGCgP
+	Vbq3PNzzcBbmJ65XjusoWf5CM2F5GK4i3twyAswy3ejUblGpZhVXBBBLVete+WLaSBIB
+	+XrG9uvRHZtkze9pek/365uZEkFEPZNC0igIu8gAVfkz0LFF266MCUoItWoxYQKE9jlC
+	+hyH1/vQwhcR/Ah4WmbAeeGfE556zMQMw3RwhrrDgJ/hvAAbe4wiJWhpA7mqGmqFLLpg
+	n1w+wyDENKyLj9c72xe4QJ3NclHEGqcvHjZLFrdnBeGkqlXWIswSOGsVEbu4a2LUOfJ1
+	WNkg==
+X-Received: by 10.170.121.9 with SMTP id n9mr29148505ykb.54.1439479941032;
+	Thu, 13 Aug 2015 08:32:21 -0700 (PDT)
+Received: from localhost.localdomain.localdomain
+	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
+	by smtp.gmail.com with ESMTPSA id
+	m132sm2315913ywb.34.2015.08.13.08.32.19
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 13 Aug 2015 08:32:20 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Aug 2015 11:51:49 +0100
-Message-Id: <1439463109-7369-1-git-send-email-ross.burton@intel.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [PATCH] recipes: use class-native instead of deprecated virtclass-native.
+Date: Thu, 13 Aug 2015 08:31:57 -0700
+Message-Id: <1439479918-5557-1-git-send-email-TicoTimo@gmail.com>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-per][PATCH 1/2] libsub-exporter-progressive-perl: add 0.001011 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,204 +44,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2015 10:58:02 -0000
+X-List-Received-Date: Thu, 13 Aug 2015 15:32:22 -0000
 
-virtclass overrides are deprecated, so use class overrides instead.
-
-Signed-off-by: Ross Burton <ross.burton@intel.com>
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- meta-efl/recipes-efl/efl/azy_svn.bb                          |  2 +-
- meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb            |  8 ++++----
- meta-networking/recipes-daemons/postfix/postfix.inc          | 12 ++++++------
- .../recipes-devtools/autoconf-archive/autoconf-archive.inc   |  8 ++++----
- meta-oe/recipes-extended/libwmf/libwmf_0.2.8.4.bb            |  2 +-
- meta-oe/recipes-extended/nana/nana_2.5.bb                    |  2 +-
- meta-oe/recipes-support/daemontools/daemontools_0.76.bb      |  2 +-
- meta-oe/recipes-support/usbpath/usbpath_svn.bb               |  2 +-
- meta-python/recipes-devtools/python/python-epydoc_3.0.1.bb   |  2 +-
- meta-python/recipes-devtools/python/python-lxml_3.2.5.bb     |  2 +-
- 10 files changed, 21 insertions(+), 21 deletions(-)
+ .../libsub-exporter-progressive-perl_0.001011.bb   | 30 ++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libsub/libsub-exporter-progressive-perl_0.001011.bb
 
-diff --git a/meta-efl/recipes-efl/efl/azy_svn.bb b/meta-efl/recipes-efl/efl/azy_svn.bb
-index cb180fb..0c3c9d7 100644
---- a/meta-efl/recipes-efl/efl/azy_svn.bb
-+++ b/meta-efl/recipes-efl/efl/azy_svn.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Azy is a library meant for implementing rpc clients and servers in a simple manner."
- DEPENDS = "pkgconfig zlib openssl eina gnutls ecore libxml2 re2c-native mysql5 azy-native glib-2.0"
--DEPENDS_virtclass-native = "pkgconfig-native zlib-native openssl-native eina-native gnutls-native ecore-native libxml2-native re2c-native mysql5-native glib-2.0-native"
-+DEPENDS_class-native = "pkgconfig-native zlib-native openssl-native eina-native gnutls-native ecore-native libxml2-native re2c-native mysql5-native glib-2.0-native"
- LICENSE = "LGPLv2.1+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
-diff --git a/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb b/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb
-index 88f164f..1afcd49 100644
---- a/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb
-+++ b/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb
-@@ -17,12 +17,12 @@ SRC_URI[sha256sum] = "55c900a905482992730f575f3eef34d50bda717c197c97c08fa5a6eafd
- BBCLASSEXTEND = "native"
- 
- IDL_COMPILER_DEPENDS = "orbit2-native"
--IDL_COMPILER_DEPENDS_virtclass-native = " "
-+IDL_COMPILER_DEPENDS_class-native = " "
- DEPENDS = "libidl popt ${IDL_COMPILER_DEPENDS}"
- 
--# IDL_COMPILER_DEPENDS_virtclass-native for some reason didn't work and orbit2-native
-+# IDL_COMPILER_DEPENDS_class-native for some reason didn't work and orbit2-native
- # was still in orbit2-native DEPENDS causing circular dependency
--DEPENDS_virtclass-native = "libidl-native popt-native"
-+DEPENDS_class-native = "libidl-native popt-native"
- PARALLEL_MAKE = ""
- 
- 
-@@ -38,4 +38,4 @@ LEAD_SONAME = "libORBit-2.so"
- inherit autotools pkgconfig gtk-doc
- 
- EXTRA_OEMAKE = "IDL_COMPILER='${STAGING_BINDIR_NATIVE}/orbit-idl-2'"
--EXTRA_OEMAKE_virtclass-native = " "
-+EXTRA_OEMAKE_class-native = " "
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index 0740f0f..3e7f918 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -10,7 +10,7 @@ DEPENDS = "virtual/db libpcre openssl postfix-native \
-     ${@base_contains('DISTRO_FEATURES', 'ldap', 'openldap', '', d)} \
-     ${@base_contains('DISTRO_FEATURES', 'sasl', 'cyrus-sasl', '', d)} \
- "
--DEPENDS_virtclass-native = "virtual/db-native openssl-native libpcre-native"
-+DEPENDS_class-native = "virtual/db-native openssl-native libpcre-native"
- 
- LICENSE = "IPL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=64375f37431336ea1b1b3005fe3fa354"
-@@ -54,8 +54,8 @@ export AUXLIBS-ldap = "\
-     ${@base_contains('DISTRO_FEATURES', 'ldap', '-lldap -llber', '', d)}"
- 
- # no native openldap
--export CCARGS-ldap_virtclass-native = ""
--export AUXLIBS-ldap_virtclass-native = ""
-+export CCARGS-ldap_class-native = ""
-+export AUXLIBS-ldap_class-native = ""
- 
- # SASL support -DUSE_LDAP_SASL -DUSE_SASL_AUTH
- # current openldap didn't enable SASL
-@@ -63,8 +63,8 @@ export CCARGS-sasl  = "\
-     ${@base_contains('DISTRO_FEATURES', 'sasl', '-DUSE_SASL_AUTH -DUSE_CYRUS_SASL -I=/usr/include/sasl', '', d)}"
- export AUXLIBS-sasl = "\
-     ${@base_contains('DISTRO_FEATURES', 'sasl', '-lsasl2', '', d)}"
--export CCARGS-sasl_virtclass-native = ""
--export AUXLIBS-sasl_virtclass-native = ""
-+export CCARGS-sasl_class-native = ""
-+export AUXLIBS-sasl_class-native = ""
- 
- # PCRE, TLS support default
- export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS ${CCARGS-ldap} ${CCARGS-sasl}"
-@@ -119,7 +119,7 @@ do_compile () {
-     oe_runmake
- }
- 
--do_install_prepend_virtclass-native() {
-+do_install_prepend_class-native() {
-     export POSTCONF="bin/postconf"
- }
- 
-diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-index e8785f4..9399363 100644
---- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-+++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-@@ -3,12 +3,12 @@ HOMEPAGE = "http://www.gnu.org/software/autoconf-archive/"
- SECTION = "devel"
- 
- DEPENDS += "m4-native"
--DEPENDS_virtclass-native = "m4-native gnu-config-native"
--DEPENDS_virtclass-nativesdk = "m4-nativesdk gnu-config-nativesdk"
-+DEPENDS_class-native = "m4-native gnu-config-native"
-+DEPENDS_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
- 
- RDEPENDS_${PN} = "m4 gnu-config"
--RDEPENDS_${PN}_virtclass-native = "m4-native gnu-config-native"
--RDEPENDS_${PN}_virtclass-nativesdk = "m4-nativesdk gnu-config-nativesdk"
-+RDEPENDS_${PN}_class-native = "m4-native gnu-config-native"
-+RDEPENDS_${PN}_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
- 
- SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.bz2"
- 
-diff --git a/meta-oe/recipes-extended/libwmf/libwmf_0.2.8.4.bb b/meta-oe/recipes-extended/libwmf/libwmf_0.2.8.4.bb
-index 11e2ba1..8ad5457 100644
---- a/meta-oe/recipes-extended/libwmf/libwmf_0.2.8.4.bb
-+++ b/meta-oe/recipes-extended/libwmf/libwmf_0.2.8.4.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- PR = "r3"
- 
--DEPENDS_virtclass-native = "freetype-native libpng-native jpeg-native"
-+DEPENDS_class-native = "freetype-native libpng-native jpeg-native"
- DEPENDS = "freetype libpng jpeg expat gtk+"
- 
- BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-extended/nana/nana_2.5.bb b/meta-oe/recipes-extended/nana/nana_2.5.bb
-index e55cec8..19a90ff 100644
---- a/meta-oe/recipes-extended/nana/nana_2.5.bb
-+++ b/meta-oe/recipes-extended/nana/nana_2.5.bb
-@@ -19,7 +19,7 @@ inherit autotools-brokensep pkgconfig
- 
- EXTRA_OEMAKE = "DESTDIR=${D}"
- 
--do_configure_prepend_virtclass-nativesdk() {
-+do_configure_prepend_class-nativesdk() {
-     sed -i -e 's:@CPP@:\$\{CXX\} \$\{CXXFLAGS\} \-E:g' ${S}/src/nana.in
-     sed -i -e 's:@CC@:\$\{CC\} \$\{CFLAGS\} \-E:g' ${S}/src/nana-clg.in
-     sed -i -e 's:@CXX@::g' ${S}/src/nana-c++lg.in
-diff --git a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-index fb87ea8..161f92f 100644
---- a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-+++ b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-@@ -26,7 +26,7 @@ SRC_URI[sha256sum] = "a55535012b2be7a52dcd9eccabb9a198b13be50d0384143bd3b32b8710
- S = "${WORKDIR}/admin/${BPN}-${PV}"
- 
- DEPENDS += "daemontools-native"
--DEPENDS_virtclass-native = ""
-+DEPENDS_class-native = ""
- 
- do_compile() {
-     ./package/compile
-diff --git a/meta-oe/recipes-support/usbpath/usbpath_svn.bb b/meta-oe/recipes-support/usbpath/usbpath_svn.bb
-index c6955ed..6c9cd04 100644
---- a/meta-oe/recipes-support/usbpath/usbpath_svn.bb
-+++ b/meta-oe/recipes-support/usbpath/usbpath_svn.bb
-@@ -4,7 +4,7 @@ SECTION = "console/utils"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://usbpath.c;endline=20;md5=0aa8c7d2af9110c78a99fbf9a504dc3f"
- DEPENDS = "virtual/libusb0"
--DEPENDS_virtclass-native = "virtual/libusb0-native"
-+DEPENDS_class-native = "virtual/libusb0-native"
- 
- BBCLASSEXTEND = "native"
- 
-diff --git a/meta-python/recipes-devtools/python/python-epydoc_3.0.1.bb b/meta-python/recipes-devtools/python/python-epydoc_3.0.1.bb
-index 4ec0668..56880e5 100644
---- a/meta-python/recipes-devtools/python/python-epydoc_3.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python-epydoc_3.0.1.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=011c0d78eb6054d731c879132d7313f0"
- HOMEPAGE = "http://epydoc.sourceforge.net/" 
- SRCNAME = "epydoc" 
- DEPENDS += "python"
--DEPENDS_virtclass-native += "python-native"
-+DEPENDS_class-native += "python-native"
- 
- SRC_URI = "http://downloads.sourceforge.net/project/${SRCNAME}/${SRCNAME}/${PV}/${SRCNAME}-${PV}.tar.gz" 
- SRC_URI[md5sum] = "cdd6f6c76dd8bab5e653a343a0544294"
-diff --git a/meta-python/recipes-devtools/python/python-lxml_3.2.5.bb b/meta-python/recipes-devtools/python/python-lxml_3.2.5.bb
-index 68e3677..4eb5fe7 100644
---- a/meta-python/recipes-devtools/python/python-lxml_3.2.5.bb
-+++ b/meta-python/recipes-devtools/python/python-lxml_3.2.5.bb
-@@ -31,5 +31,5 @@ DISTUTILS_INSTALL_ARGS += " \
- BBCLASSEXTEND = "native nativesdk"
- 
- RDEPENDS_${PN} += "libxml2 libxslt python-compression"
--RDEPENDS_${PN}_virtclass-native = "libxml2-native libxslt-native"
-+RDEPENDS_${PN}_class-native = "libxml2-native libxslt-native"
- 
+diff --git a/meta-perl/recipes-perl/libsub/libsub-exporter-progressive-perl_0.001011.bb b/meta-perl/recipes-perl/libsub/libsub-exporter-progressive-perl_0.001011.bb
+new file mode 100644
+index 0000000..a2a1305
+--- /dev/null
++++ b/meta-perl/recipes-perl/libsub/libsub-exporter-progressive-perl_0.001011.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "Sub::Exporter::Progressive - Only use Sub::Exporter if you need it."
++DESCRIPTION = "\"Sub::Exporter\" is an incredibly powerful module, but with \
++that power comes great responsibility, er- as well as some runtime penalties. \
++This module is a \"Sub::Exporter\" wrapper that will let your users just use \
++\"Exporter\" if all they are doing is picking exports, but use \
++\"Sub::Exporter\" if your users try to use \"Sub::Exporter's\" more advanced \
++features, like renaming exports, if they try to use them."
++
++SECTION = "libs"
++
++HOMEPAGE = "https://metacpan.org/pod/Sub-Exporter-Progressive/"
++
++LICENSE = "Artistic-1.0 | GPL-1.0+"
++LIC_FILES_CHKSUM = "file://README;beginline=51;endline=53;md5=a171d2e9f8688a44e5f1b6dcc62029e6"
++
++DEPENDS_${PN} = " perl-module-test-more"
++
++SRC_URI = "${CPAN_MIRROR}/authors/id/F/FR/FREW/Sub-Exporter-Progressive-${PV}.tar.gz"
++SRC_URI[md5sum] = "bb50b3ba1538902b197c04818a84230a"
++SRC_URI[sha256sum] = "0618c6e69c6c0540c41e7560d51981407a6a0768f1330bef6d6ac3c6f1fa7c06"
++
++S = "${WORKDIR}/Sub-Exporter-Progressive-${PV}"
++
++inherit cpan
++
++RDEPENDS_${PN} += " perl-module-carp \
++                    perl-module-list-util \
++"
++
++BBCLASSEXTEND = "native"
 -- 
-2.1.4
+2.1.0
 
 
