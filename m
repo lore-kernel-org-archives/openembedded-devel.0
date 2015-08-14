@@ -1,36 +1,27 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-yk0-f172.google.com (mail-yk0-f172.google.com
-	[209.85.160.172])
-	by mail.openembedded.org (Postfix) with ESMTP id AE11976719
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 6FC227671F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2015 05:14:00 +0000 (UTC)
-Received: by ykfw73 with SMTP id w73so6863428ykf.3
+	Fri, 14 Aug 2015 05:56:48 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99629412"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 14 Aug 2015 14:00:06 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7E5ui8S014742
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2015 22:14:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=EgLO4+VOft3D50j2RX9J0Dj2Us7+yC25RSRNXl0OsSE=;
-	b=c4+fZDAPbBEgQeOahNSR25/8J7Q+TaMRYt2FJ1n7ClZaU2SUksC7jkf1Sh1DL9WMW9
-	hmimNVEJCdf0aFcC+MmkZHXc0klkmY6YS3+pc6CYYdfDQtGbMGaETomFr5aeHsVEp+1p
-	HTRUrhZByZH6sNHQii5L6UodYV8W4edyvwSJk4Jrk/y97e9P+IULHMnXK957Lx5maQSz
-	eIUPblnl5GJCaE/8ZElzH77ZGX2cgco76uoiLnDk5CAOg3QX4SEuI4nUiP8q5N0SjQB2
-	hTYzbh99psZxYqMKfXfJKwap8T8e1r/T0XI0cj9adg4/zINz4RL8XcXP/zxbv9yK8A/c
-	syDQ==
-X-Received: by 10.129.34.69 with SMTP id i66mr41642344ywi.104.1439529240706;
-	Thu, 13 Aug 2015 22:14:00 -0700 (PDT)
-Received: from localhost.localdomain.localdomain
-	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
-	by smtp.gmail.com with ESMTPSA id
-	y203sm4284827ywy.23.2015.08.13.22.13.59
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Aug 2015 22:13:59 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Aug 2015 22:13:47 -0700
-Message-Id: <1439529227-14759-1-git-send-email-TicoTimo@gmail.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [meta-perl][PATCH] libio-stringy-perl: add 2.111 recipe
+	Fri, 14 Aug 2015 13:56:44 +0800
+Received: from localhost.localdomain (10.167.226.26) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Fri, 14 Aug 2015 13:56:45 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 14 Aug 2015 13:56:57 +0800
+Message-ID: <1439531817-34541-1-git-send-email-leimaohui@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.26]
+Subject: [meta-oe][PATCH] dnsmasq: upgrade 2.72->2.75
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,52 +35,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2015 05:14:01 -0000
+X-List-Received-Date: Fri, 14 Aug 2015 05:56:50 -0000
+Content-Type: text/plain
 
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+-parallel-make.patch is not needed any more,so delete.
+
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../recipes-perl/libio/libio-stringy-perl_2.111.bb | 31 ++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb
+ .../dnsmasq/dnsmasq/parallel-make.patch               | 19 -------------------
+ .../recipes-support/dnsmasq/dnsmasq_2.72.bb           | 10 ----------
+ .../recipes-support/dnsmasq/dnsmasq_2.75.bb           |  9 +++++++++
+ 3 files changed, 9 insertions(+), 29 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/parallel-make.patch
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.72.bb
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb
 
-diff --git a/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb b/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/parallel-make.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/parallel-make.patch
+deleted file mode 100644
+index 6d5b722..0000000
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq/parallel-make.patch
++++ /dev/null
+@@ -1,19 +0,0 @@
+-The dnsmasq target depends on .configured and $(objs). .configured does an rm
+--f *.o. Yet the only thing telling make to build the .configured target before
+-the $(objs) target was the order of the dependencies of the dnsmasq target. We
+-can't rely on that order when doing a paralllel make build, so add an explicit
+-rule to enforce that order.
+-
+-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+-Upstream-status: Pending
+-
+---- dnsmasq-2.68.orig/Makefile
+-+++ dnsmasq-2.68/Makefile
+-@@ -139,6 +139,8 @@ bloatcheck : $(BUILDDIR)/dnsmasq_baselin
+-	@rm -f *.o
+-	@touch $@
+-
+-+$(objs): .configured
+-+
+- $(objs:.o=.c) $(hdrs):
+-	ln -s $(top)/$(SRC)/$@ .
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.72.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.72.bb
+deleted file mode 100644
+index bd59194..0000000
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.72.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require dnsmasq.inc
+-
+-SRC_URI += "\
+-    file://parallel-make.patch \
+-    file://lua.patch \
+-"
+-
+-SRC_URI[dnsmasq-2.72.md5sum] = "cf82f81cf09ad3d47612985012240483"
+-SRC_URI[dnsmasq-2.72.sha256sum] = "635f1b47417d17cf32e45cfcfd0213ac39fd09918479a25373ba9b2ce4adc05d"
+-
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb
 new file mode 100644
-index 0000000..b890a3e
+index 0000000..a11aabb
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb
-@@ -0,0 +1,31 @@
-+SUMMARY = "IO-stringy - I/O on in-core objects like strings and arrays"
-+DESCRIPTION = "This toolkit primarily provides modules for performing both \
-+traditional and object-oriented i/o on things *other* than normal \
-+filehandles; in particular, IO::Scalar, IO::ScalarArray, and IO::Lines."
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb
+@@ -0,0 +1,9 @@
++require dnsmasq.inc
 +
-+HOMEPAGE = "http://www.zeegee.com/products/IO-stringy/"
-+SECTION = "devel"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=01406e4ff2e60d88d42ef1caebdd0011"
-+
-+
-+SRC_URI = "${CPAN_MIRROR}/authors/id/D/DS/DSKOLL/IO-stringy-${PV}.tar.gz"
-+SRC_URI[md5sum] = "e91acf0a800b190d13585a47de775bdd"
-+SRC_URI[sha256sum] = "8c67fd6608c3c4e74f7324f1404a856c331dbf48d9deda6aaa8296ea41bf199d"
-+
-+S = "${WORKDIR}/IO-stringy-${PV}"
-+
-+inherit cpan
-+
-+RPROVIDES_${PN} += " libio-atomicfile-perl \
-+		     libio-innerfile-perl \
-+                     libio-lines-perl \
-+                     libio-scalar-perl \
-+                     libio-scalararray-perl \
-+                     libio-wrap-perl \
-+                     libio-wraptie-perl \
-+		     libio-wraptie-master-perl \
-+		     libio-wraptie-slave-perl \
++SRC_URI += "\
++    file://lua.patch \
 +"
 +
-+BBCLASSEXTEND = "native"
++SRC_URI[dnsmasq-2.75.md5sum] = "d99ac126d4fe910c679d88430559669b"
++SRC_URI[dnsmasq-2.75.sha256sum] = "f8252c0a0ba162c2cd45f81140c7c17cc40a5fca2b869d1a420835b74acad294"
++
 -- 
-2.1.0
+1.8.4.2
 
 
