@@ -1,29 +1,29 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id BEB0D7673C
+	by mail.openembedded.org (Postfix) with ESMTP id 261B376724
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2015 04:43:56 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99627555"
+	Fri, 14 Aug 2015 04:43:58 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99627558"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 14 Aug 2015 12:47:15 +0800
+	by heian.cn.fujitsu.com with ESMTP; 14 Aug 2015 12:47:18 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7E4hrOr012393
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7E4huGx012402
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2015 12:43:54 +0800
+	Fri, 14 Aug 2015 12:43:56 +0800
 Received: from localhost.localdomain (10.167.226.26) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 14 Aug 2015 12:43:54 +0800
+	Server (TLS) id 14.3.181.6; Fri, 14 Aug 2015 12:43:57 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 14 Aug 2015 12:43:56 +0800
-Message-ID: <1439527440-33965-3-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Fri, 14 Aug 2015 12:43:59 +0800
+Message-ID: <1439527440-33965-6-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1439527440-33965-1-git-send-email-leimaohui@cn.fujitsu.com>
 References: <1439527440-33965-1-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH v5 2/6] konkretcmpi: add new recipe for openlmi
+Subject: [meta-oe][PATCH v5 5/6] cim-schema-exper: add new recipe for openlmi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,222 +37,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2015 04:43:58 -0000
+X-List-Received-Date: Fri, 14 Aug 2015 04:44:01 -0000
 Content-Type: text/plain
 
-Konkretcmpi is dependence of openlmi.
+- Cim-schema(Experimental-MOFs) is dependence of openlmi.
+- Cim-schema_2.40.0.bb is renamed to cim-schema-final_2.40.0.bb.
 
 Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../konkretcmpi/konkretcmpi-native_0.9.2.bb        | 28 ++++++++++++++++
- ...txt-fix-lib64-can-not-be-shiped-in-64bit-.patch | 31 ++++++++++++++++++
- ...x-lib64-can-not-be-shiped-in-64bit-target.patch | 36 ++++++++++++++++++++
- ...-0.9.2-fix-returning-instance-from-method.patch | 38 ++++++++++++++++++++++
- .../konkretcmpi/konkretcmpi_0.9.2.bb               | 34 +++++++++++++++++++
- 5 files changed, 167 insertions(+)
- create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
- create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64bit-.patch
- create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-to-fix-lib64-can-not-be-shiped-in-64bit-target.patch
- create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-method.patch
- create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
+ .../cim-schema/cim-schema-exper_2.39.0.bb          | 26 +++++++++++++++++
+ ...schema_2.40.0.bb => cim-schema-final_2.40.0.bb} |  0
+ .../cim-schema/cim-schema/files/LICENSE            | 34 ++++++++++++++++++++++
+ 3 files changed, 60 insertions(+)
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
+ rename meta-networking/recipes-support/cim-schema/{cim-schema_2.40.0.bb => cim-schema-final_2.40.0.bb} (100%)
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
 
-diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
 new file mode 100644
-index 0000000..d04c103
+index 0000000..3b973bf
 --- /dev/null
-+++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "Tool for rapid CMPI providers development"
-+DESCRIPTION = "\
-+KonkretCMPI makes CMPI provider development easier by generating type-safe \
-+concrete CIM interfaces from MOF definitions and by providing default \
-+implementations for many of the provider operations."
-+HOMEPAGE = "https://github.com/rnovacek/konkretcmpi"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f673270bfc350d9ce1efc8724c6c1873"
-+DEPENDS = "cmake-native cmpi-bindings-native"
++++ b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
+@@ -0,0 +1,26 @@
++require cim-schema.inc
 +
-+SRC_URI = "https://github.com/rnovacek/${BPN}/archive/${PV}/${BP}.tar.gz \
-+           file://konkretcmpi-0.9.2-fix-returning-instance-from-method.patch \
-+           file://0001-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64bit-.patch "
++LICENSE = "DMTF"
 +
-+SRC_URI[md5sum] = "7e8ed4f47d1a9e5cbed4208920f89d64"
-+SRC_URI[sha256sum] = "2ac52fc374e46d68317194bbd6b44e0b2f934df24b201efb395d3eccf0fed634"
++SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2390/cim_schema_${PV}Experimental-MOFs.zip;subdir=${BPN}-${PV} \
++           file://LICENSE \
++          "
++SRC_URI[md5sum] = "b82b31c609c6bcc69521829409f58ccc"
++SRC_URI[sha256sum] = "ed2096ef1ea25d189a02bbc6603fed7a48297f2987f254265763a6eecb7fc870"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=eecc6f71a56ff3caf17f15bf7aeac7b4"
 +
-+inherit native cmake
-+LDFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
++do_install() {
++        install -d -m 0755 ${D}${datadir}/mof/cimv${PV}/
++        install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}
++        install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
 +
-+EXTRA_OECMAKE = "-DWITH_PYTHON=ON \
-+                 ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
-+                 ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
-+                "
-+
-+do_install_append() {
-+    rm -rf ${D}${datadir}
++        cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
++        for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
++                sed -i -e 's/\r//g' $i
++        done
++        ln -s cimv${PV} ${D}${datadir}/mof/cim-current
++        ln -s cim_schema_${PV}.mof ${D}${datadir}/mof/cim-current/CIM_Schema.mof
 +}
-diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64bit-.patch b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64bit-.patch
++
++FILES_${PN} = "${datadir}/mof/* ${datadir}/doc/*"
++FILES_${PN}-doc = ""
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+similarity index 100%
+rename from meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
+rename to meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE b/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
 new file mode 100644
-index 0000000..40a0643
+index 0000000..54a2812
 --- /dev/null
-+++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64bit-.patch
-@@ -0,0 +1,31 @@
-+From d97ac2bf2ed9c84ffd65ff10989068b202e09fdf Mon Sep 17 00:00:00 2001
-+From: Lei Maohui <leimaohui@cn.fujitsu.com>
-+Date: Mon, 3 Aug 2015 00:29:54 +0900
-+Subject: [PATCH] CMakeLists.txt: fix lib64 can not be shiped in 64bit target
-+
-+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
-+---
-+ CMakeLists.txt | 7 -------
-+ 1 file changed, 7 deletions(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index be544d1..14696e4 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -11,13 +11,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_P
-+ 
-+ find_package(CMPI)
-+ 
-+-# Set LIB_SUFFIX to 64 on 64bit architectures
-+-if(CMAKE_SIZEOF_VOID_P EQUAL 4)
-+-    set(LIB_SUFFIX "")
-+-else(CMAKE_SIZEOF_VOID_P EQUAL 4)
-+-    set(LIB_SUFFIX 64)
-+-endif(CMAKE_SIZEOF_VOID_P EQUAL 4)
-+-
-+ option(WITH_PYTHON "Build experimental Python bindings" OFF)
-+ 
-+ add_subdirectory(cmake)
-+-- 
-+1.8.4.2
-+
-diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-to-fix-lib64-can-not-be-shiped-in-64bit-target.patch b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-to-fix-lib64-can-not-be-shiped-in-64bit-target.patch
-new file mode 100644
-index 0000000..7da13ee
---- /dev/null
-+++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-to-fix-lib64-can-not-be-shiped-in-64bit-target.patch
-@@ -0,0 +1,36 @@
-+From f3c39fd2a4b5f53338b5f821788c63858bf860cf Mon Sep 17 00:00:00 2001
-+From: Lei Maohui <leimaohui@cn.fujitsu.com>
-+Date: Sun, 2 Aug 2015 22:08:43 +0900
-+Subject: [PATCH] to fix lib64 can not be shiped in 64bit target
-+
-+To fix the warning as following:
-+WARNING: QA Issue: konkretcmpi: Files/directories were installed but not shipped in any package:
-+  /usr/lib64
-+  /usr/lib64/libkonkret.so
-+  /usr/lib64/libkonkret.so.0.0.1
-+  /usr/lib64/libkonkret.so.0
-+  /usr/lib64/libkonkretmof.so.0.0.1
-+  /usr/lib64/libkonkretmof.so
-+  ...
-+
-+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
-+---
-+ cmake/modules/FindKonkretCMPI.cmake | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/cmake/modules/FindKonkretCMPI.cmake b/cmake/modules/FindKonkretCMPI.cmake
-+index b888cfd..097caed 100644
-+--- a/cmake/modules/FindKonkretCMPI.cmake
-++++ b/cmake/modules/FindKonkretCMPI.cmake
-+@@ -9,7 +9,7 @@ find_path(KONKRETCMPI_INCLUDE_DIR
-+ find_library(KONKRETCMPI_LIBRARY
-+     NAMES konkret
-+     HINTS $ENV{KONKRETCMPI_LIB_DIR}
-+-    PATH_SUFFIXES lib64 lib
-++    PATH_SUFFIXES lib lib64
-+     PATHS /usr /usr/local
-+ )
-+ 
-+-- 
-+1.8.4.2
-+
-diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-method.patch b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-method.patch
-new file mode 100644
-index 0000000..b54d091
---- /dev/null
-+++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-method.patch
-@@ -0,0 +1,38 @@
-+Port from Fedora20
-+
-+    | commit aca6c7f910ffe9930b5789969f0adfadd668bb46
-+    | Author: Michal Minar <miminar@redhat.com>
-+    | Date:   Fri Jun 20 10:50:45 2014 +0200
-+    | 
-+    |     Fix returning instance as an output argument from method
-+    |     
-+    |     Submitted By: Radek Novacek <rnovacek@redhat.com>
-+
-+Upstream-Status: Pending
-+Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
-+
-+diff --git a/src/program/main.cpp b/src/program/main.cpp
-+index 885dc12..9e7108a 100644
-+--- a/src/program/main.cpp
-++++ b/src/program/main.cpp
-+@@ -506,7 +506,11 @@ static void gen_feature_decls(
-+ 
-+             // Add sig entry [type][length][name][zero-terminator]
-+ 
-+-            KTag tag = _ktag(pd->data_type, pd->array_index, key, false, false);
-++            KTag tag;
-++            if (pd->qualifiers->has_key("EmbeddedInstance"))
-++                tag = _ktag(TOK_INSTANCE, pd->array_index, key, false, false);
-++            else
-++                tag = _ktag(pd->data_type, pd->array_index, key, false, false);
-+             pack_tag(sig, tag);
-+             pack_name(sig, pd->name);
-+             count++;
-+@@ -640,6 +644,7 @@ static void gen_param(FILE* os, MOF_Parameter* p, vector<unsigned char>& sig)
-+         const char* ktn = _ktype_name(p->data_type);
-+ 
-+         if (p->qualifiers->has_key("EmbeddedInstance")) {
-++            tag = _ktag(TOK_INSTANCE, p->array_index, false, in, out);
-+             if (p->array_index)
-+                 put(os, "    KInstanceA $0;\n", p->name, NULL);
-+             else
-diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
-new file mode 100644
-index 0000000..fc15fae
---- /dev/null
-+++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
++++ b/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
 @@ -0,0 +1,34 @@
-+SUMMARY = "Tool for rapid CMPI providers development"
-+DESCRIPTION = "\
-+KonkretCMPI makes CMPI provider development easier by generating type-safe \
-+concrete CIM interfaces from MOF definitions and by providing default \
-+implementations for many of the provider operations."
-+HOMEPAGE = "https://github.com/rnovacek/konkretcmpi"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f673270bfc350d9ce1efc8724c6c1873"
-+DEPENDS = "swig sblim-cmpi-devel python cmake-native"
-+
-+SRC_URI = "https://github.com/rnovacek/${BPN}/archive/${PV}/${BP}.tar.gz \
-+           file://konkretcmpi-0.9.2-fix-returning-instance-from-method.patch \
-+           file://0001-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64bit-.patch \
-+           "
-+
-+SRC_URI[md5sum] = "7e8ed4f47d1a9e5cbed4208920f89d64"
-+SRC_URI[sha256sum] = "2ac52fc374e46d68317194bbd6b44e0b2f934df24b201efb395d3eccf0fed634"
-+
-+inherit cmake
-+
-+EXTRA_OECMAKE = "-DWITH_PYTHON=ON \
-+                 ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
-+                 ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
-+                "
-+
-+do_install_append() {
-+    rm -rf ${D}${datadir}
-+}
-+
-+PACKAGES =+ "${PN}-python ${PN}-python-dbg"
-+
-+FILES_${PN}-python = "${libdir}/python2.7/site-packages/konkretmof.py* ${libdir}/python2.7/site-packages/_konkretmof.so"
-+FILES_${PN}-python-dbg = "${libdir}/python2.7/site-packages/.debug/*"
-+
++// Copyright 1998-2008 Distributed Management Task Force, Inc. (DMTF).
++// All rights reserved.
++// DMTF is a not-for-profit association of industry members dedicated
++// to promoting enterprise and systems management and interoperability.
++// DMTF specifications and documents may be reproduced by
++// members and non-members, provided that correct attribution is given.
++// As DMTF specifications may be revised from time to time,
++// the particular version and release date should always be noted.
++// 
++// Implementation of certain elements of this standard or proposed
++// standard may be subject to third party patent rights, including
++// provisional patent rights (herein "patent rights"). DMTF makes
++// no representations to users of the standard as to the existence
++// of such rights, and is not responsible to recognize, disclose, or
++// identify any or all such third party patent right, owners or
++// claimants, nor for any incomplete or inaccurate identification or
++// disclosure of such rights, owners or claimants. DMTF shall have no
++// liability to any party, in any manner or circumstance, under any
++// legal theory whatsoever, for failure to recognize, disclose, or
++// identify any such third party patent rights, or for such party's
++// reliance on the standard or incorporation thereof in its product,
++// protocols or testing procedures. DMTF shall have no liability to
++// any party implementing such standard, whether such implementation
++// is foreseeable or not, nor to any patent owner or claimant, and shall
++// have no liability or responsibility for costs or losses incurred if
++// a standard is withdrawn or modified after publication, and shall be
++// indemnified and held harmless by any party implementing the
++// standard from any and all claims of infringement by a patent owner
++// for such implementations.
++// 
++// For information about patents held by third-parties which have
++// notified the DMTF that, in their opinion, such patent may relate to
++// or impact implementations of DMTF standards, visit
++// http://www.dmtf.org/about/policies/disclosures.php.
 -- 
 1.8.4.2
 
