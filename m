@@ -1,20 +1,36 @@
-Return-Path: <vinay.k.awasthi@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id D5D3672A78
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-yk0-f177.google.com (mail-yk0-f177.google.com
+	[209.85.160.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 9473172A78
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2015 19:34:15 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga103.jf.intel.com with ESMTP; 14 Aug 2015 12:34:16 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.15,679,1432623600"; d="scan'208";a="748789623"
-Received: from vinay-h97m-d3h.sc.intel.com ([172.25.115.5])
-	by orsmga001.jf.intel.com with ESMTP; 14 Aug 2015 12:34:16 -0700
-From: "Vinay K. Awasthi" <vinay.k.awasthi@intel.com>
+	Fri, 14 Aug 2015 20:49:23 +0000 (UTC)
+Received: by ykfw73 with SMTP id w73so25794041ykf.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Aug 2015 13:49:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=xJwzvsuqzfCGOVtso7rNAFs3I4kCXAAhEvox/MPjFK0=;
+	b=CkvmIFYhUuMFbXFOAFgkpxK4xnHHuPENECixMNBEwBTDZ4Qg6+v4bn8m+cCLmuNnRU
+	K4cJ0TN5D1AaDSs+aby0tl8Ybo5x12XZbQSJroYhQS5ngW3Ln5Xa4kSVn5B11YadTAjL
+	oYX7dTjpCtdAiwhx4k+cH6oHt5coocKEGUzpAZU2pZTCDIaUiJR1h1JdvPhvBZSFlHUR
+	Z/2p1BAOGmLdf8KFJXzpdmAzwlEwJytyBYyYgdEY+zm7+DxhF59UruTXIpJi27wAodW/
+	j8BXgMjDOBOX2fgVyqx13CEOGn2qvrIYYh31lkiUUNrSgBULYr0+RFGvNrJyUH7GCxit
+	N/CQ==
+X-Received: by 10.170.134.214 with SMTP id a205mr35846676ykc.89.1439585364162; 
+	Fri, 14 Aug 2015 13:49:24 -0700 (PDT)
+Received: from localhost.localdomain.localdomain
+	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
+	by smtp.gmail.com with ESMTPSA id
+	p20sm6258974ywe.42.2015.08.14.13.49.22
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 14 Aug 2015 13:49:23 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Aug 2015 12:35:22 -0700
-Message-Id: <1439580922-32345-1-git-send-email-vinay.k.awasthi@intel.com>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-java][PATCH 2/2] Openjdk-8u: Added bootstrap JDK option
+Date: Fri, 14 Aug 2015 13:49:01 -0700
+Message-Id: <1439585341-3551-1-git-send-email-TicoTimo@gmail.com>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-perl][PATCH v2 ] librole-tiny-perl: add 2.000001 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,30 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2015 19:34:18 -0000
+X-List-Received-Date: Fri, 14 Aug 2015 20:49:25 -0000
 
-From: "Vinay K. Awasthi" <vinay.k.awasthi@intel.com>
+Changes since v1:
+  fix URL (Thank you, Andreas Baak)
 
-Added --with-boot-jdk option that allows icedtea7-native to be used as bootstrap jdk.
-
-Signed-off-by: Vinay K. Awasthi <vinay.k.awasthi@intel.com>
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- recipes-core/openjdk/openjdk-8u_40b27-2.5.4.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-perl/recipes-perl/librole/librole-tiny-perl_2.000001.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-core/openjdk/openjdk-8u_40b27-2.5.4.bb b/recipes-core/openjdk/openjdk-8u_40b27-2.5.4.bb
-index 594a6b4..c9af1a4 100644
---- a/recipes-core/openjdk/openjdk-8u_40b27-2.5.4.bb
-+++ b/recipes-core/openjdk/openjdk-8u_40b27-2.5.4.bb
-@@ -179,6 +179,7 @@ OPENJDK_OECONF = " \
-      --mandir=/usr/share/man        \
-      --disable-headful              \
-      --with-sys-root=${STAGING_DIR_TARGET} \
-+     --with-boot-jdk=${STAGING_LIBDIR_JVM_NATIVE}/icedtea7-native \
-      CFLAGS="--sysroot=${STAGING_DIR_TARGET} " \
-      CXXFLAGS="--sysroot=${STAGING_DIR_TARGET} " \
-      LDFLAGS="--sysroot=${STAGING_DIR_TARGET} " \
+diff --git a/meta-perl/recipes-perl/librole/librole-tiny-perl_2.000001.bb b/meta-perl/recipes-perl/librole/librole-tiny-perl_2.000001.bb
+index 9a8ec2e..48360c6 100644
+--- a/meta-perl/recipes-perl/librole/librole-tiny-perl_2.000001.bb
++++ b/meta-perl/recipes-perl/librole/librole-tiny-perl_2.000001.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "\"Role::Tiny\" is a minimalist role composition tool."
+ 
+ SECTION = "libs"
+ 
+-HOMEPAGE = "https://metacpan.org/pod/Role-Tiny"
++HOMEPAGE = "https://metacpan.org/pod/Role::Tiny"
+ 
+ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://README;beginline=172;endline=209;md5=26df7e7c20551fb1906e2286624f0b71"
 -- 
-1.9.1
+2.1.0
 
 
