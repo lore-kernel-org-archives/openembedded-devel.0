@@ -1,27 +1,24 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FC227671F
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 88D7476714
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2015 05:56:48 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99629412"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 14 Aug 2015 14:00:06 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7E5ui8S014742
+	Fri, 14 Aug 2015 06:52:15 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7E6qFN2006607
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2015 13:56:44 +0800
-Received: from localhost.localdomain (10.167.226.26) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 14 Aug 2015 13:56:45 +0800
-From: Lei Maohui <leimaohui@cn.fujitsu.com>
+	Thu, 13 Aug 2015 23:52:15 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Thu, 13 Aug 2015 23:52:15 -0700
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 14 Aug 2015 13:56:57 +0800
-Message-ID: <1439531817-34541-1-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Fri, 14 Aug 2015 14:48:10 +0800
+Message-ID: <1439534890-16193-1-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH] dnsmasq: upgrade 2.72->2.75
+Subject: [meta-oe][PATCH] mariadb: 5.5.43 -> 5.5.45
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,78 +32,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2015 05:56:50 -0000
+X-List-Received-Date: Fri, 14 Aug 2015 06:52:19 -0000
 Content-Type: text/plain
 
--parallel-make.patch is not needed any more,so delete.
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+Upgrade mariadb from 5.5.43 to 5.5.45.
+
+* update SRC_URI that the previous mirros is out of service
+* drop backported patch fix-CVE-2015-2305.patch
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../dnsmasq/dnsmasq/parallel-make.patch               | 19 -------------------
- .../recipes-support/dnsmasq/dnsmasq_2.72.bb           | 10 ----------
- .../recipes-support/dnsmasq/dnsmasq_2.75.bb           |  9 +++++++++
- 3 files changed, 9 insertions(+), 29 deletions(-)
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/parallel-make.patch
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.72.bb
- create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb
+ .../mysql/{mariadb-native_5.5.43.bb => mariadb-native_5.5.45.bb}   | 0
+ meta-oe/recipes-support/mysql/mariadb.inc                          | 7 +++----
+ .../recipes-support/mysql/{mariadb_5.5.43.bb => mariadb_5.5.45.bb} | 0
+ 3 files changed, 3 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.43.bb => mariadb-native_5.5.45.bb} (100%)
+ rename meta-oe/recipes-support/mysql/{mariadb_5.5.43.bb => mariadb_5.5.45.bb} (100%)
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/parallel-make.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/parallel-make.patch
-deleted file mode 100644
-index 6d5b722..0000000
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq/parallel-make.patch
-+++ /dev/null
-@@ -1,19 +0,0 @@
--The dnsmasq target depends on .configured and $(objs). .configured does an rm
---f *.o. Yet the only thing telling make to build the .configured target before
--the $(objs) target was the order of the dependencies of the dnsmasq target. We
--can't rely on that order when doing a paralllel make build, so add an explicit
--rule to enforce that order.
--
--Signed-off-by: Christopher Larson <chris_larson@mentor.com>
--Upstream-status: Pending
--
----- dnsmasq-2.68.orig/Makefile
--+++ dnsmasq-2.68/Makefile
--@@ -139,6 +139,8 @@ bloatcheck : $(BUILDDIR)/dnsmasq_baselin
--	@rm -f *.o
--	@touch $@
--
--+$(objs): .configured
--+
-- $(objs:.o=.c) $(hdrs):
--	ln -s $(top)/$(SRC)/$@ .
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.72.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.72.bb
-deleted file mode 100644
-index bd59194..0000000
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.72.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require dnsmasq.inc
--
--SRC_URI += "\
--    file://parallel-make.patch \
--    file://lua.patch \
--"
--
--SRC_URI[dnsmasq-2.72.md5sum] = "cf82f81cf09ad3d47612985012240483"
--SRC_URI[dnsmasq-2.72.sha256sum] = "635f1b47417d17cf32e45cfcfd0213ac39fd09918479a25373ba9b2ce4adc05d"
--
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb
-new file mode 100644
-index 0000000..a11aabb
---- /dev/null
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb
-@@ -0,0 +1,9 @@
-+require dnsmasq.inc
-+
-+SRC_URI += "\
-+    file://lua.patch \
-+"
-+
-+SRC_URI[dnsmasq-2.75.md5sum] = "d99ac126d4fe910c679d88430559669b"
-+SRC_URI[dnsmasq-2.75.sha256sum] = "f8252c0a0ba162c2cd45f81140c7c17cc40a5fca2b869d1a420835b74acad294"
-+
+diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.43.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.5.45.bb
+similarity index 100%
+rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.43.bb
+rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.45.bb
+diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
+index d2418e7..c088461 100644
+--- a/meta-oe/recipes-support/mysql/mariadb.inc
++++ b/meta-oe/recipes-support/mysql/mariadb.inc
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
++SRC_URI = "http://lon1.mirrors.digitalocean.com/mariadb/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
+            file://fix-cmake-module-path.patch \
+            file://remove-bad-path.patch \
+            file://fix-mysqlclient-r-version.patch \
+@@ -12,11 +12,10 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
+            file://mysqld.service \
+            file://configure.cmake-fix-valgrind.patch \
+            file://fix-a-building-failure.patch \
+-           file://fix-CVE-2015-2305.patch \
+           "
+ 
+-SRC_URI[md5sum] = "c8760d6b5890fc1de76c07af48092c88"
+-SRC_URI[sha256sum] = "a0709997140549154edb87c9dfab564cd4755b238251acbf42369118f9bb4d01"
++SRC_URI[md5sum] = "6ec397f717f6e2e4e9154e76de9ec9fc"
++SRC_URI[sha256sum] = "4dc3aff6941ef1068412002915d795bcf67db0eaa38a5c6f3af57474c4226fb0"
+ 
+ S = "${WORKDIR}/mariadb-${PV}"
+ 
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.43.bb b/meta-oe/recipes-support/mysql/mariadb_5.5.45.bb
+similarity index 100%
+rename from meta-oe/recipes-support/mysql/mariadb_5.5.43.bb
+rename to meta-oe/recipes-support/mysql/mariadb_5.5.45.bb
 -- 
-1.8.4.2
+1.9.1
 
 
