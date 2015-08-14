@@ -1,35 +1,36 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-yk0-f176.google.com (mail-yk0-f176.google.com
-	[209.85.160.176])
-	by mail.openembedded.org (Postfix) with ESMTP id D5BAC7670F
+Received: from mail-yk0-f172.google.com (mail-yk0-f172.google.com
+	[209.85.160.172])
+	by mail.openembedded.org (Postfix) with ESMTP id AE11976719
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2015 04:44:09 +0000 (UTC)
-Received: by ykaz130 with SMTP id z130so60009260yka.0
+	Fri, 14 Aug 2015 05:14:00 +0000 (UTC)
+Received: by ykfw73 with SMTP id w73so6863428ykf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2015 21:44:09 -0700 (PDT)
+	Thu, 13 Aug 2015 22:14:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=fczbnwXxyqAWzF9EXdiEzQh7DzObhvQ8tZtlFHU8yVA=;
-	b=p/PE5O29T0NQ+TdqHO12VrK/IUQmjyBTloT4RwRlWHFLFziSYrETIMOiPpeXD6PdKg
-	rcVGqxQ5Hage/FaEpZU70ufO+i+5KTdkcGm4B+FgM+1E36oZ2i9hhqpibN9pwzjU05Yq
-	J9iekCpc1//xtX4+siYNv6C75a25wAUHeFhYZuTSFjHzkWTBl7lDhy3VBlYpaUnlDEnq
-	p42LiILrEOzZBBGoZdEGA6iq03X4dSJfz7VC7cuoOJkCdEKdU0ueyoabdSGQXYxgmHmI
-	m4PPfF6f47JDaSr+5DLrHTNcqBg8VGrVqQZ+KkhdQ/A4OdcpSNLq7yIUiZb57vor/J5G
-	Uyzg==
-X-Received: by 10.13.239.1 with SMTP id y1mr43272126ywe.155.1439527449306;
-	Thu, 13 Aug 2015 21:44:09 -0700 (PDT)
+	bh=EgLO4+VOft3D50j2RX9J0Dj2Us7+yC25RSRNXl0OsSE=;
+	b=c4+fZDAPbBEgQeOahNSR25/8J7Q+TaMRYt2FJ1n7ClZaU2SUksC7jkf1Sh1DL9WMW9
+	hmimNVEJCdf0aFcC+MmkZHXc0klkmY6YS3+pc6CYYdfDQtGbMGaETomFr5aeHsVEp+1p
+	HTRUrhZByZH6sNHQii5L6UodYV8W4edyvwSJk4Jrk/y97e9P+IULHMnXK957Lx5maQSz
+	eIUPblnl5GJCaE/8ZElzH77ZGX2cgco76uoiLnDk5CAOg3QX4SEuI4nUiP8q5N0SjQB2
+	hTYzbh99psZxYqMKfXfJKwap8T8e1r/T0XI0cj9adg4/zINz4RL8XcXP/zxbv9yK8A/c
+	syDQ==
+X-Received: by 10.129.34.69 with SMTP id i66mr41642344ywi.104.1439529240706;
+	Thu, 13 Aug 2015 22:14:00 -0700 (PDT)
 Received: from localhost.localdomain.localdomain
 	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
-	by smtp.gmail.com with ESMTPSA id b9sm4220667ywa.38.2015.08.13.21.44.07
+	by smtp.gmail.com with ESMTPSA id
+	y203sm4284827ywy.23.2015.08.13.22.13.59
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Aug 2015 21:44:08 -0700 (PDT)
+	Thu, 13 Aug 2015 22:13:59 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Aug 2015 21:43:50 -0700
-Message-Id: <1439527430-7278-1-git-send-email-TicoTimo@gmail.com>
+Date: Thu, 13 Aug 2015 22:13:47 -0700
+Message-Id: <1439529227-14759-1-git-send-email-TicoTimo@gmail.com>
 X-Mailer: git-send-email 2.1.0
-Subject: [meta-perl][PATCH] libimport-into-perl: add 1.002004 recipe
+Subject: [meta-perl][PATCH] libio-stringy-perl: add 2.111 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,49 +44,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2015 04:44:12 -0000
+X-List-Received-Date: Fri, 14 Aug 2015 05:14:01 -0000
 
 Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- .../libimport/libimport-into-perl_1.002004.bb      | 32 ++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libimport/libimport-into-perl_1.002004.bb
+ .../recipes-perl/libio/libio-stringy-perl_2.111.bb | 31 ++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb
 
-diff --git a/meta-perl/recipes-perl/libimport/libimport-into-perl_1.002004.bb b/meta-perl/recipes-perl/libimport/libimport-into-perl_1.002004.bb
+diff --git a/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb b/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb
 new file mode 100644
-index 0000000..af08d63
+index 0000000..b890a3e
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libimport/libimport-into-perl_1.002004.bb
-@@ -0,0 +1,32 @@
-+SUMMARY = "Import::Into - import packages into other packages"
-+DESCRIPTION = "Writing exporters is a pain. Some use \"Exporter\", some use \
-+\"Sub::Exporter\", some use \"Moose::Exporter\", some use \
-+\"Exporter::Declare\"... and some things are pragmas.\
-+\
-+Exporting on someone else's behalf is harder. The exporters don't provide a \
-+consistent API for this, and pragmas need to have their import method called \
-+directly, since they effect the current unit of compilation. \
-+\
-+\"Import::Into\" provides global methods to make this painless."
++++ b/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb
+@@ -0,0 +1,31 @@
++SUMMARY = "IO-stringy - I/O on in-core objects like strings and arrays"
++DESCRIPTION = "This toolkit primarily provides modules for performing both \
++traditional and object-oriented i/o on things *other* than normal \
++filehandles; in particular, IO::Scalar, IO::ScalarArray, and IO::Lines."
 +
-+SECTION = "libs"
-+
-+HOMEPAGE = "https://metacpan.org/pod/Import-Into/"
-+
++HOMEPAGE = "http://www.zeegee.com/products/IO-stringy/"
++SECTION = "devel"
 +LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://README;beginline=209;endline=223;md5=3cf363f1e405dea6db2c6cd0ef23680c"
++LIC_FILES_CHKSUM = "file://COPYING;md5=01406e4ff2e60d88d42ef1caebdd0011"
 +
-+SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETHER/Import-Into-${PV}.tar.gz"
-+SRC_URI[md5sum] = "70f2f3b08a5b706ee382a8448c346cb1"
-+SRC_URI[sha256sum] = "decb259bc2ff015fe3dac85e4a287d4128e9b0506a0b2c5fa7244836a68b1084"
 +
-+S = "${WORKDIR}/Import-Into-${PV}"
++SRC_URI = "${CPAN_MIRROR}/authors/id/D/DS/DSKOLL/IO-stringy-${PV}.tar.gz"
++SRC_URI[md5sum] = "e91acf0a800b190d13585a47de775bdd"
++SRC_URI[sha256sum] = "8c67fd6608c3c4e74f7324f1404a856c331dbf48d9deda6aaa8296ea41bf199d"
++
++S = "${WORKDIR}/IO-stringy-${PV}"
 +
 +inherit cpan
 +
-+RDEPENDS_${PN} = " libmodule-runtime-perl \
-+                   perl-module-strict \
-+                   perl-module-warnings \
++RPROVIDES_${PN} += " libio-atomicfile-perl \
++		     libio-innerfile-perl \
++                     libio-lines-perl \
++                     libio-scalar-perl \
++                     libio-scalararray-perl \
++                     libio-wrap-perl \
++                     libio-wraptie-perl \
++		     libio-wraptie-master-perl \
++		     libio-wraptie-slave-perl \
 +"
 +
 +BBCLASSEXTEND = "native"
