@@ -1,35 +1,31 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-yk0-f171.google.com (mail-yk0-f171.google.com
-	[209.85.160.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D10372A78
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 3602 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 14 Aug 2015 04:12:13 UTC
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C678766F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2015 03:50:41 +0000 (UTC)
-Received: by ykdt205 with SMTP id t205so59346089ykd.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2015 20:50:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=BRymg7iFqXNHwmUO0VtH77VfcjKE6b97LCISmINJYSw=;
-	b=Yu3f4wXM/AD8QTdISq1ua5IENjrLLE8ynsOP+RFKFb8fm1/2t2vlgYUV3px9ra3ZZy
-	xGMNUJLbIudDQqzS6ESjndgV406jBIBrUdLA8LD3UVW+HaK3w5J9Z6pHFO7qfOs7UKD0
-	61x8k0SeCmWnM4rQNY5TeItsMESGuPhY7NUunPVsANkVjdrpEXZqDabDsr41mLbdudXV
-	UjPEYLUxSI0sjmHm2fHG9D3tyve1PHXDI9Bh74Sq9MlUfFVQnmX9kSSUVA+vjX1xbkDK
-	YxYqwP5rSBa8P9an89PeUbdobVT6e5c+HT45JkK9STK67zV3mo7yL1ZG32BUxrMItCcR
-	hWQQ==
-X-Received: by 10.129.86.5 with SMTP id k5mr16548129ywb.156.1439524241555;
-	Thu, 13 Aug 2015 20:50:41 -0700 (PDT)
-Received: from localhost.localdomain.localdomain
-	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
-	by smtp.gmail.com with ESMTPSA id h7sm4123021ywd.28.2015.08.13.20.50.39
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Aug 2015 20:50:40 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
+	Fri, 14 Aug 2015 04:12:13 +0000 (UTC)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173025.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NT10005MY7MSNN1@vms173025.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	13 Aug 2015 22:11:56 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=WpDWSorv c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=uRRa74qj2VoA:10
+	a=sozttTNsAAAA:8	a=i6fy8AC3wzAVohLWxVUA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id D3BAF161B46;	Thu,
+	13 Aug 2015 23:11:45 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Aug 2015 20:50:30 -0700
-Message-Id: <1439524230-16953-1-git-send-email-TicoTimo@gmail.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [meta-perl][PATCH] libencode-locale-perl: add 1.05 recipe
+Date: Thu, 13 Aug 2015 23:11:36 -0400
+Message-id: <1439521896-14415-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-qt5][PATCH] qtbase_git: ensure fonts go into own subdir by creating it first
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,50 +39,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2015 03:50:43 -0000
+X-List-Received-Date: Fri, 14 Aug 2015 04:12:16 -0000
 
-* Based on:
-  Paul Eggleton <paul.eggleton@linux.intel.com>
-  http://github.com/bluelightning/public_bb_recipes
+From: Denys Dmytriyenko <denys@ti.com>
 
-* which is forked from:
-  Emil Petersen <erp@movis.dk>
-  http://github.com/EmilRP/public_bb_recipes/
+Sometimes, when ${OE_QMAKE_PATH_LIBS} is empty, "cp -a" ends up copying
+font files there w/o preserving "fonts" directory, failing the following
+chown command.
 
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- .../libencode/libencode-locale-perl_1.05.bb         | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libencode/libencode-locale-perl_1.05.bb
+ recipes-qt/qt5/qtbase_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-perl/recipes-perl/libencode/libencode-locale-perl_1.05.bb b/meta-perl/recipes-perl/libencode/libencode-locale-perl_1.05.bb
-new file mode 100644
-index 0000000..748f746
---- /dev/null
-+++ b/meta-perl/recipes-perl/libencode/libencode-locale-perl_1.05.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "Encode::Locale - Determine the locale encoding"
-+AUTHOR = "Gisle Aas <gisle@activestate.com>"
-+HOMEPAGE = "https://metacpan.org/module/Encode::Locale"
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://README;md5=14e8006c2134045725fd81292a323d24"
-+
-+SRC_URI = "${CPAN_MIRROR}/authors/id/G/GA/GAAS/Encode-Locale-${PV}.tar.gz"
-+SRC_URI[md5sum] = "fcfdb8e4ee34bcf62aed429b4a23db27"
-+SRC_URI[sha256sum] = "176fa02771f542a4efb1dbc2a4c928e8f4391bf4078473bd6040d8f11adb0ec1"
-+
-+S = "${WORKDIR}/Encode-Locale-${PV}"
-+
-+inherit cpan
-+
-+RDEPENDS_${PN} += "libencode-perl \
-+                   libencode-alias-perl \
-+                   perl-module-base \
-+"
-+
-+BBCLASSEXTEND = "native"
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 33620cb..737be93 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -226,7 +226,8 @@ do_install_append() {
+     ### TODO: FIX
+     # install fonts manually if they are missing
+     if [ ! -d ${D}/${OE_QMAKE_PATH_LIBS}/fonts ]; then
+-        cp -a ${S}/lib/fonts ${D}/${OE_QMAKE_PATH_LIBS}
++        mkdir -p ${D}/${OE_QMAKE_PATH_LIBS}/fonts
++        cp -a ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_LIBS}/fonts
+         chown -R root:root ${D}/${OE_QMAKE_PATH_LIBS}/fonts
+     fi
+ 
 -- 
-2.1.0
+2.2.0
 
 
