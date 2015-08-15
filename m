@@ -1,32 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f173.google.com (mail-ig0-f173.google.com
-	[209.85.213.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 574C472A78
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-la0-f49.google.com (mail-la0-f49.google.com
+	[209.85.215.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A6BF72A78
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Aug 2015 15:40:14 +0000 (UTC)
-Received: by igfj19 with SMTP id j19so30972941igf.0
+	Sat, 15 Aug 2015 17:35:09 +0000 (UTC)
+Received: by lagz9 with SMTP id z9so58827400lag.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Aug 2015 08:40:14 -0700 (PDT)
+	Sat, 15 Aug 2015 10:35:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=h5LYRIw5LwbpTcZEHgNkvv0hNYA0cfO2ZXWz+u+lU4Y=;
-	b=DkjSTAUTsTcyFr54sOO/4h5Y5nLnh9o38tCPONf8VM5dVRi1jgNa//HOJb5kIqWSXv
-	nZn7aYZ1YRFN3dZyai/vWeuXSTWwysuOepiUSGN1lZQknyZo2O8gUF3J6xBw+r2rvIaB
-	zUOTg1r6AEBnKlyU3BNA9PuIAddq909EOBF/zisyeY9lJkwdSU+A4xDsxY9jbzVG2I/S
-	E81pNWd5X2qJClCtokb3cAjzQ5hDf3vpgVLEjtXRxMun9rcLFY+djP0IzrwiBHymrH00
-	XPaWwu5vOPfyTQwFXnq//30jPTY0ykOeOapxGl1rq6YXE35PXNxFpD+5OhIltspeEImC
-	HIjw==
-X-Received: by 10.50.30.196 with SMTP id u4mr8869295igh.11.1439653214693; Sat,
-	15 Aug 2015 08:40:14 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=Wsky8O8mgR8RIcFqNdD+Ye2WVyCgDyOaQSGuyk1qY9s=;
+	b=bQHMLw6qEphGJbyl36NgzH2yps6wkQErNmVRRB8kkb2oU3SNSpVhrn59Bndlc4PCJd
+	WZGsnGnhisC/9FoL+oc+uOoKYxutubbjPEnQZyVXr6vw0n1+RbYYCgarciHeMOLlLLXJ
+	CrZsic0pNpWM1TX1UPtTy7Lliq/6zE0SThEjrsqOHhv+RRorN4wrrh3alOmY8/OD5PDI
+	vbzCy+oDWcSMLif4S3hSWA5EDyQtzlhd7z6vX/p04vjtl0UIaG6kywJm7CoggzRhL2ZD
+	pl3QRL4KNaV0fJwhPDSOpr/4+X53hcorKsRgPOB+Ydim8GybnYsKNThwgZARgvj9jgXq
+	9jQA==
 MIME-Version: 1.0
-Received: by 10.107.38.79 with HTTP; Sat, 15 Aug 2015 08:39:45 -0700 (PDT)
-In-Reply-To: <55CEEF76.5080207@gmail.com>
-References: <55CEEF76.5080207@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 15 Aug 2015 08:39:45 -0700
-Message-ID: <CAMKF1soO00zmFxPKCOmFLV63-p-cqb_39XY=+ACsAXFYs7q65w@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Where to place a new recipe for epeg
+X-Received: by 10.152.36.102 with SMTP id p6mr48627651laj.19.1439660108236;
+	Sat, 15 Aug 2015 10:35:08 -0700 (PDT)
+Received: by 10.25.15.38 with HTTP; Sat, 15 Aug 2015 10:35:08 -0700 (PDT)
+In-Reply-To: <1439519143-5659-1-git-send-email-TicoTimo@gmail.com>
+References: <1439519143-5659-1-git-send-email-TicoTimo@gmail.com>
+Date: Sat, 15 Aug 2015 10:35:08 -0700
+Message-ID: <CANx9H-AnkMifMUNCi80n4w_D2QAHXLTZ9qzaAdZB8sfr=6D3rw@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-perl][PATCH] libencode-perl: add 2.76 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,42 +43,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Aug 2015 15:40:16 -0000
+X-List-Received-Date: Sat, 15 Aug 2015 17:35:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Sat, Aug 15, 2015 at 12:51 AM, Andreas Baak <andreas.baak@gmail.com> wrote:
-> Subject: meta-openembedded/meta-efl/recipes-efl/efl/epeg_svn.bb
->
-> Hi all,
->
-> epeg is a fast jpeg scaling tool, originally developed in the efl project
-> https://www.enlightenment.org/ . In the current version of efl, the source
-> code of epeg is not present anymore since the tool is deprecated. Its
-> functionality has become obsolete by Evas
-> (https://en.wikipedia.org/wiki/Enlightenment_Foundation_Libraries#Defunct.2Fdeprecated_EFL_components).
-> The source code of epeg is kept in a legacy repository
-> https://svn.enlightenment.org/svn/e/OLD/ . The current epeg recipe downloads
-> the sources from this legacy repository.
->
-> The code for epeg has been adopted and improved by mattes
-> (https://github.com/mattes/epeg).
-> I would like to replace the recipe efl/epeg_svn.bb by a new recipe
-> epeg_git.bb.
-> However, I am not sure if will be accepted to delete the efl/epeg_svn.bb.
-> Also, I don't know in which folder to put it.
-> meta-openembedded/meta-efl/recipes-efl/efl would not be a good option since
-> epeg does not belong to efl anymore.
+[DO NOT MERGE]
 
-you can submit a patch to replace/upgrade existing recipe, if that
-source have moved out but it still is EFL component then let it remain
-where it is, if not then move it to meta-oe/recipes-support/epeg
+This module is present in oe-core stock perl.
+This recipe is not needed.
+
+On Thu, Aug 13, 2015 at 7:25 PM, Tim Orling <ticotimo@gmail.com> wrote:
+
+> * Based on v2.52 recipe:
+>   Paul Eggleton <paul.eggleton@linux.intel.com>
+>   http://github.com/bluelightning/public_bb_recipes
 >
-> Any thoughts?
-> Cheers,
-> Andreas
+> * which is forked from:
+>   Emil Petersen <erp@movis.dk>
+>   http://github.com/EmilRP/public_bb_recipes
+>
+> Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+> ---
+>  .../recipes-perl/libencode/libencode-perl_2.76.bb  | 54
+> ++++++++++++++++++++++
+>  1 file changed, 54 insertions(+)
+>  create mode 100644 meta-perl/recipes-perl/libencode/
+> libencode-perl_2.76.bb
+>
+> diff --git a/meta-perl/recipes-perl/libencode/libencode-perl_2.76.bb
+> b/meta-perl/recipes-perl/libencode/libencode-perl_2.76.bb
+> new file mode 100644
+> index 0000000..9939962
+> --- /dev/null
+> +++ b/meta-perl/recipes-perl/libencode/libencode-perl_2.76.bb
+> @@ -0,0 +1,54 @@
+> +SUMMARY = "Encode - character encodings"
+> +DESCRIPTION = "The \"Encode\" module provides the interfaces between \
+> +Perl's strings and the rest of the system.  Perl strings are sequences \
+> +of characters."
+> +
+> +AUTHOR = "Dan Kogai <dankogai+cpan@gmail.com>"
+> +HOMEPAGE = "https://metacpan.org/release/Encode"
+> +SECTION = "lib"
+> +LICENSE = "Artistic-1.0 | GPL-1.0+"
+> +LIC_FILES_CHKSUM = "file://META.json;md5=bb6a09a95259f80fbf2855c8f9dc3e85"
+> +
+> +SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
+> +SRC_URI[md5sum] = "90ee2160d40ade6cc4c4aa1b1ff4745e"
+> +SRC_URI[sha256sum] =
+> "0fa01359d34d1d129e9bcacb0b9bb821e36e9fb5f1404cfb557dfa680368f265"
+> +
+> +S = "${WORKDIR}/Encode-${PV}"
+> +
+> +inherit cpan
+> +
+> +RDEPENDS_${PN} += " perl-module-bytes \
+> +                    perl-module-constant \
+> +                    perl-module-xsloader \
+> +"
+> +
+> +RPROVIDES_${PN} += "libencode-alias-perl \
+> +                    libencode-byte-perl \
+> +                    libencode-cjkconstants-perl \
+> +                    libencode-cn-perl \
+> +                    libencode-cn-hz-perl \
+> +                    libencode-config-perl \
+> +                    libencode-ebcdic-perl \
+> +                    libencode-encoder-perl \
+> +                    libencode-encoding-perl \
+> +                    libencode-gsm0338-perl \
+> +                    libencode-guess-perl \
+> +                    libencode-jp-perl \
+> +                    libencode-jp-h2z-perl \
+> +                    libencode-jp-jis7-perl \
+> +                    libencode-kr-perl \
+> +                    libencode-kr-2022_kr-perl \
+> +                    libencode-mime-header-perl \
+> +                    libencode-mime-name-perl \
+> +                    libencode-symbol-perl \
+> +                    libencode-tw-perl \
+> +                    libencode-unicode--perl \
+> +                    libencode-unicode-utf7-perl \
+> +                    libencoding-perl \
+> +                    libencode-internal-perl \
+> +                    libencode-mime-header-iso_2022_jp-perl \
+> +                    libencode-utf8-perl \
+> +                    libencode-utf_ebcdic-perl \
+> +                    "
+> +
+> +BBCLASSEXTEND = "native"
 > --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 2.1.0
+>
+>
 
