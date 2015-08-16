@@ -1,36 +1,36 @@
-Return-Path: <andreas.baak@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id B3A9460043
+Return-Path: <dominic.sacre@gmx.de>
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+	by mail.openembedded.org (Postfix) with ESMTP id 5BEFC65C85
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Aug 2015 20:56:09 +0000 (UTC)
-Received: by wijp15 with SMTP id p15so45993491wij.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Aug 2015 13:56:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=w6MV5GRO7uwLlYL/iCV6xo9vRBiQEexZ9SXCrNwrAvM=;
-	b=EDojF8/lIR1hUBz4Obd+EnaBb8qEaD2YHb1NrRcICDeUg6yDqBvXEwbsQh2m6X0LIo
-	L7PNHMehzFHagdqyZBT8giuslyy/lzLyAWFzNR2dXv4vS+7KkI5ZFOYuoAQGVdinSrzZ
-	oUtS+XPE3nIyrJoR5SSnzzZ+o7xFn/ZmUxq8MhvjPmcCbHhunr+ovBxmFBx9zmlsGRjp
-	xB3ZNtFvZ0ZCOI+9CBuS7wagHbptDgbUlYfZzLlvVrcxudw1FaJoyCmnn0ZF5yXHNjv3
-	v3TzHIlxYCdl7PpAsaZYzHyQr5vxMqhNoOtuO33RwNMJ58/32nAyfUbRFfIHAwnTKY12
-	Cn1g==
-X-Received: by 10.180.107.34 with SMTP id gz2mr19594143wib.77.1439672169553;
-	Sat, 15 Aug 2015 13:56:09 -0700 (PDT)
-Received: from localhost.localdomain
-	(dslb-088-064-113-036.088.064.pools.vodafone-ip.de. [88.64.113.36])
-	by smtp.gmail.com with ESMTPSA id
-	pn6sm14398168wjb.36.2015.08.15.13.56.08
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 15 Aug 2015 13:56:08 -0700 (PDT)
-From: Andreas Baak <andreas.baak@gmail.com>
+	Sun, 16 Aug 2015 00:29:33 +0000 (UTC)
+Received: from [192.168.0.201] ([37.24.103.185]) by mail.gmx.com (mrgmx001)
+	with ESMTPSA (Nemesis) id 0MA9Yv-1ZX7TR2GnR-00BNhJ for
+	<openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Aug 2015 02:29:32 +0200
+Message-ID: <55CFD8B5.4000501@gmx.de>
+Date: Sun, 16 Aug 2015 02:26:29 +0200
+From: =?UTF-8?B?RG9taW5pYyBTYWNyw6k=?= <dominic.sacre@gmx.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Aug 2015 22:55:33 +0200
-Message-Id: <1439672133-24167-1-git-send-email-andreas.baak@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Cc: Andreas Baak <andreas.baak@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH] epeg: Move tool out of efl + update to latest version
+X-Provags-ID: V03:K0:qIy400LoCBT1T2IhpifFmb68SYrqhHTLT+Dx4ztc65xCX4ZpAQh
+	U5k8+gqmDJ6Zee98ERXu2n9HuXAuUJT3sMooOVcz+HiHZpYxxY+xnqh1GveUwJRXfTl3h+i
+	ai5AJVeBp76XcavNmn5FvHfU7EuGxe33h8GhzW+zid2R6iqGI2En0c9nXmoLcJbRBfAdZla
+	RqJN+YYdUaAYDBzdJDLYw==
+X-UI-Out-Filterresults: notjunk:1;V01:K0:TjWWguHagHY=:axAqohTTASLPK3ajwBocCB
+	oqiaGmeRzxQLMtVY8Sb0PwUU018nWaiLkh9eqII20wREfela+xMKobIqOincJobCR9HfSyusO
+	8LLKU+7IcZ2Spvxx78Ppq7/8t4ALh45pd3SHu1LZNceQtdp9Xo/rMuxbsgxvA/5vGbxSgSw6Z
+	AtltZFk8FgKHos8sgiakl4dFwqNvDMS2GO0GC19+ttMoyggXrjSSResC1qZN+VvlQ64/QYx0l
+	rCCyOP6iCequbBcd7Lc6y+E+nH1oX8r3RcOxuojgOc7iumdZaHEiUtm2s1Y3rj+xDEr980Dp9
+	eZ/4/tEvI35Cu7XPoo6zmo9zdPW5t6pd+O6+sRavMwAL5ey98bcFJXDYFrR5ndCbig8pl5nAm
+	ZqN8HjTFdlR7Kk6BKqLLubnXUTRLVUoBv0K5f1wDWfHRpm5nvaKL4mvfvGi4/iEPXttUFwJ5U
+	oRMwC45fwjKzPlX93xjwBEDlPA9TScPTtP0uv4nYhH5dRRXXmWLnN+ktC/qKu1L+cYw31bnqz
+	Lz+ZqQkK2sC5qagstrNUkNsnTcD7N+MJ0DQjB8eS8TwZdzNlndCvL6WA9sdjKknClCELTUuvz
+	LUPBPDQ+8BugvgVdp5/Ui+/izQD8twtJUCJR+1ADF7H3Jwwj8dfOy9cZAsIea523JKAHZTyrE
+	YabN8nZmzL3k0mCKum0Y0SYLMa6L3eZUw/Bt1qQ8KGDZoqs8UHYybZVHfuPpqKmI1TYy7nbub
+	bzqmipspWphaXB8K5ZdC45/RzbNSK7jEK0Wxxg==
+Subject: Python 2 and Python 3 module recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,71 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Aug 2015 20:56:11 -0000
+X-List-Received-Date: Sun, 16 Aug 2015 00:29:36 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-The epeg tool was originally developed in the efl project
-and was replaced by the evas package in efl long ago. The old,
-unmaintained source code of epeg is still available from
-an efl legacy repository https://svn.enlightenment.org/svn/e/OLD/.
+Hi,
 
-Updates and improvements to epeg have been developed and collected
-in a new github repository. This patch deletes the deprecated
-package from the efl project and introduces a new recipe
-that installs the updated epeg tool.
+I'm trying to build a Python 3 application which depends on some modules
+that are already packaged in OE for Python 2, but not for Python 3.
+Since OE currently has virtually no Python 3 module recipes, this makes
+me wonder what the best approach to create these recipes would be.
 
-In the license file, one copyright line has been added which
-indicates the authors of the tool.
-Moreover, in the license text, one sentence has been removed
-which elaborated on what is meant by "making the source code
-available publicly". However, the license still remains
-an MIT style license.
+In most cases, I could just copy a Python 2 recipe, change the name from
+"python-foo" to "python3-foo", and replace "inherit distutils" with
+"inherit distutils3". However that would create a lot of duplication,
+and might turn into a maintenance nightmare.
 
-Signed-off-by: Andreas Baak <andreas.baak@gmail.com>
----
- meta-efl/recipes-efl/efl/epeg_svn.bb     | 12 ------------
- meta-oe/recipes-support/epeg/epeg_git.bb | 13 +++++++++++++
- 2 files changed, 13 insertions(+), 12 deletions(-)
- delete mode 100644 meta-efl/recipes-efl/efl/epeg_svn.bb
- create mode 100644 meta-oe/recipes-support/epeg/epeg_git.bb
+Do you have a suggestion what the right course of action would be? Move
+most of the recipes' content to .inc files that can then be included by
+both Python 2 and Python 3 recipes? Or maybe create a .bbclass that
+would build both versions from the same recipe?
+Is there any functionality already in place that would simplify this task?
 
-diff --git a/meta-efl/recipes-efl/efl/epeg_svn.bb b/meta-efl/recipes-efl/efl/epeg_svn.bb
-deleted file mode 100644
-index 1b24d91..0000000
---- a/meta-efl/recipes-efl/efl/epeg_svn.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = "Epeg is a small library for handling thumbnails"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35 \
--                    file://COPYING-PLAIN;md5=f59cacc08235a546b0c34a5422133035"
--
--DEPENDS = "jpeg"
--PV = "0.9.0+svnr${SRCPV}"
--SRCREV = "${EFL_SRCREV}"
--
--inherit efl
--SRC_URI = "${E_SVN}/OLD;module=${SRCNAME};protocol=http;scmdata=keep"
--S = "${WORKDIR}/${SRCNAME}"
-diff --git a/meta-oe/recipes-support/epeg/epeg_git.bb b/meta-oe/recipes-support/epeg/epeg_git.bb
-new file mode 100644
-index 0000000..8fe19b5
---- /dev/null
-+++ b/meta-oe/recipes-support/epeg/epeg_git.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "Epeg is a small library for handling thumbnails"
-+DESCRIPTION = "Insanely fast JPEG/ JPG thumbnail scaling with the minimum fuss and CPU overhead. It makes use of libjpeg features of being able to load an image by only decoding the DCT coefficients needed to reconstruct an image of the size desired."
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=e7732a9290ea1e4b034fdc15cf49968d \
-+                    file://COPYING-PLAIN;md5=f59cacc08235a546b0c34a5422133035"
-+DEPENDS = "jpeg libexif"
-+
-+SRC_URI = "git://github.com/mattes/epeg.git"
-+SRCREV = "d78becc558a682f1be0a78b1af90d1b4a08e5b4e"
-+S = "${WORKDIR}/git"
-+
-+inherit autotools pkgconfig
-+
--- 
-1.9.1
 
+Dominic
 
