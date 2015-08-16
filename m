@@ -1,37 +1,37 @@
 Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B639606E8
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E15C76719
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Aug 2015 19:46:35 +0000 (UTC)
-Received: by wicne3 with SMTP id ne3so56115258wic.0
+	Sun, 16 Aug 2015 19:46:34 +0000 (UTC)
+Received: by wicne3 with SMTP id ne3so56114968wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Aug 2015 12:46:36 -0700 (PDT)
+	Sun, 16 Aug 2015 12:46:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=+Ip84eUqic0bXlyyrp+kT0s/LsAuLXiT9nR6B3mKW2A=;
-	b=lxdHdMUuFr9Br5XJYG4e3IAbKbrqXBJIj2KWVcgWqM35M4ZQHKEAofBHjvMvxgMq4P
-	Ml+rKAdf87RSb/8DQ/3t8jgsZ29D8Qeltdrxf+kLdtCmAkWznP11VeppytUTbp57eCDa
-	N04fFibiykxjjsyNrmA/HaxU4PrvSdob2+E8+aPGNQWQ8M+muS4DSn783sqKPPqiwc9R
-	imdgix+SvI/BSbUcPJkJNpzT8RyOcsqheBvl+SzrrrnyIGZkmpdeS8YgABo51UOyCuTx
-	GRYL053qmz931hNfandfoqGhwZNy+Z2KG+QrjYrKIm/YeZgWZ1uzkNbZdmBM3OYsXmQ8
-	BwKw==
-X-Received: by 10.180.78.166 with SMTP id c6mr26805128wix.8.1439754396008;
-	Sun, 16 Aug 2015 12:46:36 -0700 (PDT)
+	bh=sgQofVzuZ4Y2X1IDa8yxOFPKAFLTt+Obn5KZ262MhTE=;
+	b=tIw/zxfMotDWT/2bNmS0U47dnfy2yy+dxOhPK7/uVktSSwd7atj4445R1/Q+lNKTNh
+	vlt3/G3mi58tvmFnU710G455ZhVgJMMN/pU15Wz86/VV64ldCsKrMSr2VzkLcS4GtucE
+	VAwTv7MsCcjD2N2pcV/aqL1X/N2LKmTR41xUYk1gUWfk+yf7mTT+tIQTYg9Ue1z9db9k
+	U9ETqrPmGAXvG7j8qx4OMvKmCLHcpMegG/55x5wk+5nL1bFL3ZkDnJLSjALbJkNWRFQq
+	Cm9HXC0YjZdQDBGfpw9DWJ3w7MwWZj46o02uwtQki3aZ66hUKTpmyzgFpJ+t8giQTtSB
+	DDbQ==
+X-Received: by 10.180.99.71 with SMTP id eo7mr27973657wib.25.1439754394075;
+	Sun, 16 Aug 2015 12:46:34 -0700 (PDT)
 Received: from Saturn.local.all (212-41-85-106.adsl.solnet.ch. [212.41.85.106])
 	by smtp.gmail.com with ESMTPSA id
-	p1sm18490730wjq.28.2015.08.16.12.46.35
+	p1sm18490730wjq.28.2015.08.16.12.46.33
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 16 Aug 2015 12:46:35 -0700 (PDT)
+	Sun, 16 Aug 2015 12:46:33 -0700 (PDT)
 From: Max Krummenacher <max.oss.09@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Aug 2015 21:40:17 +0200
-Message-Id: <1439754023-13290-3-git-send-email-max.oss.09@gmail.com>
+Date: Sun, 16 Aug 2015 21:40:16 +0200
+Message-Id: <1439754023-13290-2-git-send-email-max.oss.09@gmail.com>
 X-Mailer: git-send-email 1.8.4.5
 In-Reply-To: <1439754023-13290-1-git-send-email-max.oss.09@gmail.com>
 References: <1439754023-13290-1-git-send-email-max.oss.09@gmail.com>
 Cc: gary@mlbassoc.com
-Subject: [meta-browser][PATCH 2/8] firefox-l10n: Update download server
+Subject: [meta-browser][PATCH 1/8] firefox: Update download server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,22 +53,22 @@ https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Source_Code/Dow
 
 Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
 ---
- recipes-mozilla/firefox-l10n/firefox-l10n.inc | 2 +-
+ recipes-mozilla/firefox/firefox_10.0.11esr.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-mozilla/firefox-l10n/firefox-l10n.inc b/recipes-mozilla/firefox-l10n/firefox-l10n.inc
-index 7b252a2..3090ef9 100644
---- a/recipes-mozilla/firefox-l10n/firefox-l10n.inc
-+++ b/recipes-mozilla/firefox-l10n/firefox-l10n.inc
-@@ -16,7 +16,7 @@ PR = "r3"
- # Mangle place where to store the file
- DL_DIR_append = "/${PN}-${PV}"
+diff --git a/recipes-mozilla/firefox/firefox_10.0.11esr.bb b/recipes-mozilla/firefox/firefox_10.0.11esr.bb
+index f89da58..e07555b 100644
+--- a/recipes-mozilla/firefox/firefox_10.0.11esr.bb
++++ b/recipes-mozilla/firefox/firefox_10.0.11esr.bb
+@@ -7,7 +7,7 @@ DEPENDS += "alsa-lib curl startup-notification libevent cairo libnotify libvpx v
+ LICENSE = "MPLv1 | GPLv2+ | LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://toolkit/content/license.html;endline=39;md5=9cb02f27e77e702043b827c9418bfbf8"
  
--SRC_URI = "ftp://ftp.mozilla.org/pub/mozilla.org/mozilla.org/firefox/releases/${PV}/linux-i686/xpi/${LANGUAGE}.xpi"
-+SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}/linux-i686/xpi/${LANGUAGE}.xpi"
- S = "${WORKDIR}"
- 
- inherit allarch
+-SRC_URI = "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${PV}/source/firefox-${PV}.source.tar.bz2;name=archive \
++SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}/source/firefox-${PV}.source.tar.bz2;name=archive \
+            file://mozilla-${BPN}.png \
+            file://mozilla-${BPN}.desktop \
+            file://fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch \
 -- 
 1.8.4.5
 
