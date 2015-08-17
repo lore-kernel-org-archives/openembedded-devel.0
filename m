@@ -1,26 +1,48 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C6DBE767B6
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-io0-f182.google.com (mail-io0-f182.google.com
+	[209.85.223.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 75193737F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2015 09:55:01 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t7H9t1wH000273
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 17 Aug 2015 09:59:17 +0000 (UTC)
+Received: by iodv127 with SMTP id v127so129257413iod.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2015 02:55:01 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.235.1; Mon, 17 Aug 2015 02:55:00 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 17 Aug 2015 17:51:17 +0800
-Message-ID: <1439805078-23359-2-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1439805078-23359-1-git-send-email-rongqing.li@windriver.com>
-References: <1439805078-23359-1-git-send-email-rongqing.li@windriver.com>
+	Mon, 17 Aug 2015 02:59:18 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc:content-type;
+	bh=k6zbKKVsXWoxjBxcnqkIaCCtaiAcoLk0aqd31ZV2LmA=;
+	b=HkVfLYSNNSe+r9XzdPhXKZ2rH22zvpRc94wVGwS8Spoyqnpe1PtyUeHMkTELTgTKhp
+	TtTfgk+coactvq1fE4Zm27fQs7p6xDHXAMmw3wr3LOzcdtds1Ii2mYCkJaTk5So7eHfC
+	0QBwGq/MkeWJn9orPiGg50+yt3xtB2lUrkoafpVae5RpqPUVjOUAWvDH21FPianMgAyY
+	zlpSDo7XDT6lFzWkMqLqmzEdYv/D28QP6HOumGxViPoAAxrdMaW4Vp61SoiwM6sibNPX
+	GVFf+PETu7hcUABp0EZH5+riFW9QNIytOyGQUQ+v+wAj2etJU8HpGIDCz+6ERUAztPtU
+	3fhw==
+X-Gm-Message-State: ALoCoQkwu677ZF0tTzAWIQFi5W8KPptRe3QzJhBrZsm+Uv4GyW7Jy9DcYvvgG2XVNeoE0zcOAX/+
+X-Received: by 10.107.130.156 with SMTP id m28mr638865ioi.56.1439805558029;
+	Mon, 17 Aug 2015 02:59:18 -0700 (PDT)
+Received: from mail-io0-f181.google.com (mail-io0-f181.google.com.
+	[209.85.223.181]) by smtp.gmail.com with ESMTPSA id
+	c91sm12313616ioj.43.2015.08.17.02.59.17
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 17 Aug 2015 02:59:17 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by iodb91 with SMTP id b91so144694821iod.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Aug 2015 02:59:16 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH 2/3][meta-oe] liblogging: add the recipe
+X-Received: by 10.107.130.153 with SMTP id m25mr478551ioi.192.1439805556766;
+	Mon, 17 Aug 2015 02:59:16 -0700 (PDT)
+Received: by 10.36.218.7 with HTTP; Mon, 17 Aug 2015 02:59:16 -0700 (PDT)
+In-Reply-To: <CAOLEWZW_2DMvuxsaoKXxtQpg_Qy5=rVutJaOB9Lpnjqrpo6A9g@mail.gmail.com>
+References: <CAOLEWZW_2DMvuxsaoKXxtQpg_Qy5=rVutJaOB9Lpnjqrpo6A9g@mail.gmail.com>
+Date: Mon, 17 Aug 2015 06:59:16 -0300
+Message-ID: <CAP9ODKqkv6E=keu+mBSFxrPF_HXFMZL=t0Uki4Bx-rX88vXK8A@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: "meta-freescale@yoctoproject.org" <meta-freescale@yoctoproject.org>
+Subject: Re: [PATCH][meta-fsl-arm] 2.6.35 kernel build error with perl 5.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,49 +56,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2015 09:55:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 17 Aug 2015 09:59:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Roy Li <rongqing.li@windriver.com>
+Hello Stephen,
 
-rsyslog 7.6.1 needs it
+(Adding meta-freescale mailing list as it is the proper place for this
+discussion)
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../liblogging/liblogging_1.0.5.bb                 | 23 ++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-extended/liblogging/liblogging_1.0.5.bb
+On Sat, Aug 15, 2015 at 3:05 AM, Stephen Arnold
+<stephen.arnold42@gmail.com> wrote:
+> When building fsl-image-machine-test for imx28-evk with n00b defaults
+> using the fsl-community-bsp repo manifest thing, it fails on the old
+> kernel in meta-fsl-arm/recipes-kernel/linux/linux-imx_2.6.35.3.bb.
+>
+> There are a few things questionable/wrong here:
+>
+> 1) It uses the build host perl, which is why it fails here and not in
+> the upstream builder.
 
-diff --git a/meta-oe/recipes-extended/liblogging/liblogging_1.0.5.bb b/meta-oe/recipes-extended/liblogging/liblogging_1.0.5.bb
-new file mode 100644
-index 0000000..3488b19
---- /dev/null
-+++ b/meta-oe/recipes-extended/liblogging/liblogging_1.0.5.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "An easy to use logging library"
-+DESCRIPTION = " \
-+liblogging (the upstream project) is a collection of several components. \
-+Namely: stdlog, journalemu, rfc3195. \
-+The stdlog component of liblogging can be viewed as an enhanced version of \
-+the syslog(3) API. It retains the easy semantics, but makes the API more \
-+sophisticated "behind the scenes" with better support for multiple threads \
-+and flexibility for different log destinations (e.g. syslog and systemd \
-+journal)."
-+SECTION = "libs"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=63fe03535d83726f5655072502bef1bc"
-+SRC_URI = "http://download.rsyslog.com/${BPN}/${BPN}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "44b8ce2daa1bfb84c9feaf42f9925fd7"
-+SRC_URI[sha256sum] = "310dc1691279b7a669d383581fe4b0babdc7bf75c9b54a24e51e60428624890b"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF = "--disable-man-pages"
-+
-+PACKAGECONFIG ??= "${@bb.utils.contains("DISTRO_FEATURES", "systemd", "systemd", "", d)}"
-+PACKAGECONFIG[systemd] = "--enable-journal, --disable-journal, systemd"
+The master branch has remove this old version; it now uses linux-fslc
+for mx23, mx28, mx5 SoCs.
+
+> 2) The dts file for the evk machine in 4.1 mainline looks complete
+> (along with several other imx28 machines) so why does it default to
+> such an old kernel?
+
+In fido it is used but dropped in next release.
+
+I want to understand why it failed on your system as it works in the
+autobuilder. What host distro are you using?
+
+> 3) Switching to newer kernel makes gst-fsl-plugins fail with the
+> "looking for kernel headers from user space" error because it can't
+> find the old framebuffer header (mxcfb.h).  It should depend on old
+> fsl kernel only.
+
+Yes and we got this fixed dropping mx28 support from those. We now
+rely on official GStreamer for those SoCs and stopped using Freescale
+codecs (in master).
+
+> 4) The old kernel recipe should depend on perl-native.
+
+Adding perl-native dependency fixes it?
+
+> The attached patch fixes the perl error in the the old kernel build
+> and the above test image completed fine with it.  Not an "official"
+> patch per se, just useful if you're stuck...
+
+Is this needed if using perl-native?
+
 -- 
-1.9.1
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
