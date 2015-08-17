@@ -1,34 +1,20 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F37275F2A
+Return-Path: <prvs=6640da761=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 3277665CBC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2015 06:23:10 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99707089"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 17 Aug 2015 14:26:26 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7H6N5ZQ002541
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2015 14:23:05 +0800
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0181.006; Mon, 17 Aug 2015 14:23:08 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH] dmraid: add new recipe
-Thread-Index: AQHQqYtqn6CFb1uClU6KEouoqjqEdZ4QFeLA
-Date: Mon, 17 Aug 2015 06:23:07 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC011C1F8088@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <1434606393-51485-1-git-send-email-biannm@cn.fujitsu.com>
-In-Reply-To: <1434606393-51485-1-git-send-email-biannm@cn.fujitsu.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
+	Mon, 17 Aug 2015 07:33:14 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AqUEAEyN0VWsEApK/2dsb2JhbABdg29pBr9chX2BdgEBAQEBAYELhHUBLSiBFg6IOL81AY9WAQEIIpBbhDMFhyGNfIUEiTKHOYh3iC2EJW8BgUeBBAEBAQ
+X-IPAS-Result: AqUEAEyN0VWsEApK/2dsb2JhbABdg29pBr9chX2BdgEBAQEBAYELhHUBLSiBFg6IOL81AY9WAQEIIpBbhDMFhyGNfIUEiTKHOYh3iC2EJW8BgUeBBAEBAQ
+From: Richard Leitner <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 17 Aug 2015 09:32:22 +0200
+Message-ID: <1439796744-6382-1-git-send-email-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] dmraid: add new recipe
+X-Originating-IP: [172.16.60.30]
+Cc: otavio.salvador@ossystems.com.br
+Subject: [meta-java][PATCH 0/2] openjdk-7: switch to IcedTea 2.6.1, 7u85b01
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,23 +28,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2015 06:23:14 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 17 Aug 2015 07:33:15 -0000
+Content-Type: text/plain
 
-SGkgTWFydGluLA0KDQpXaGF0J3MgeW91ciBvcGluaW9uIGFib3V0IHRoaXMgcGF0Y2guDQoNCkkg
-cmViYXNlZCBteSB0cmVlLCBzbyBwbGVhc2UgY2hlcnJ5LXBpY2sgdGhlIG5ldyBvbmUgZnJvbSB0
-aGVyZS4NCmh0dHBzOi8vZ2l0aHViLmNvbS9iZW5kYWFyb24vbWV0YS1vZS1kZXYvY29tbWl0LzM0
-MDlmYmJhMGM1OWRjMmNmMmFkMWY1NWI0ZmIyNTJkMmJiYzFhNzYNCg0KVGhhbmtzDQogQmlhbg0K
-DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEJpYW4sIE5haW1lbmcNCj4g
-U2VudDogVGh1cnNkYXksIEp1bmUgMTgsIDIwMTUgMTo0NyBQTQ0KPiBUbzogb3BlbmVtYmVkZGVk
-LWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gQ2M6IEJpYW4sIE5haW1lbmcNCj4gU3Vi
-amVjdDogW21ldGEtb2VdW1BBVENIXSBkbXJhaWQ6IGFkZCBuZXcgcmVjaXBlDQo+IA0KPiBEZXZp
-Y2UtbWFwcGVyIFJBSUQgdG9vbCBhbmQgbGlicmFyeS4NCj4gSXQgaXMgcHJvdmlkZWQgYnkgbG90
-cyBvZiBkaXN0cm8gc3VjaCBhcyBSSEVMIGFuZCBVYnVudHUuDQo+IA0KPiBUaGVyZSBhcmUgc29t
-ZSB3ZWlyZCBsaW5lIGVuZGluZ3MgaW4gdGhpcyBwYXRjaCwgc28gcGxlYXNlIGNoZXJyeS1waWNr
-IGl0IGZyb20NCj4gaHR0cHM6Ly9naXRodWIuY29tL2JlbmRhYXJvbi9tZXRhLW9lLWRldi9jb21t
-aXQvYmNmN2RkMmI0NmVjNDk0OGI1ZDAzOTQ1ZDENCj4gMzkwOTMwMmNjZTk5YmMNCj4gDQo+IFNp
-Z25lZC1vZmYtYnk6IEJpYW4gTmFpbWVuZyA8Ymlhbm5tQGNuLmZ1aml0c3UuY29tPg0K
+This patch series changes the PREFERRED_VERSION to the new OpenJDK 7u85b01 and
+removes the old 7u75b13 version.
+
+Richard Leitner (2):
+  README: Update PREFERRED_VERSION to new openjdk-7 85b01-2.6.1
+  openjdk-7: remove IcedTea 2.5.4, OpenJDK 7u75b13
+
+ README                                             |   2 +-
+ .../openjdk/openjdk-7-75b13/build-hacks.patch      |  71 -----
+ .../openjdk-7-75b13/cacao-arm-ucontext.patch       |  24 --
+ .../openjdk/openjdk-7-75b13/cacao-libtoolize.patch |  12 -
+ .../openjdk-7-75b13/cacao-loadavg-makefile.patch   |  13 -
+ .../openjdk/openjdk-7-75b13/cacao-loadavg.patch    |  27 --
+ .../openjdk/openjdk-7-75b13/fix-checksums.patch    |  28 --
+ .../openjdk-7-75b13/fix_hotspot_crosscompile.patch |  52 ---
+ ...cedtea-add-usr-lib-jni-to-DEFAULT_LIBPATH.patch |  19 --
+ .../openjdk-7-75b13/icedtea-crosscompile-fix.patch | 355 ---------------------
+ .../icedtea-jdk-nio-use-host-cc.patch              |  74 -----
+ .../icedtea-jdk-rmi-crosscompile.patch             |  13 -
+ .../openjdk-7-75b13/icedtea-libnet-renaming.patch  | 236 --------------
+ ...njdk-remove-currency-data-generation-expi.patch |  25 --
+ .../openjdk-7-75b13/icedtea-remove_werror.patch    |  16 -
+ .../icedtea-shark-arm-linux-cpu-detection.patch    | 113 -------
+ .../openjdk-7-75b13/icedtea-unbreak-float.patch    |  18 --
+ ...edtea-unset-NIO_PLATFORM_CLASSES_ROOT_DIR.patch |  13 -
+ .../openjdk-7-75b13/icedtea-zero-hotspotfix.patch  |  36 ---
+ recipes-core/openjdk/openjdk-7-75b13/jvm.cfg       |  43 ---
+ .../remove-sun.misc.Perf-debug-code.patch          |  47 ---
+ recipes-core/openjdk/openjdk-7-release-75b13.inc   | 104 ------
+ recipes-core/openjdk/openjdk-7_75b13-2.5.4.bb      |  36 ---
+ 23 files changed, 1 insertion(+), 1376 deletions(-)
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/build-hacks.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/cacao-arm-ucontext.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/cacao-libtoolize.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/cacao-loadavg-makefile.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/cacao-loadavg.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/fix-checksums.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/fix_hotspot_crosscompile.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-add-usr-lib-jni-to-DEFAULT_LIBPATH.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-crosscompile-fix.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-jdk-nio-use-host-cc.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-jdk-rmi-crosscompile.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-libnet-renaming.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-openjdk-remove-currency-data-generation-expi.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-remove_werror.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-shark-arm-linux-cpu-detection.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-unbreak-float.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-unset-NIO_PLATFORM_CLASSES_ROOT_DIR.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-zero-hotspotfix.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/jvm.cfg
+ delete mode 100644 recipes-core/openjdk/openjdk-7-75b13/remove-sun.misc.Perf-debug-code.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-release-75b13.inc
+ delete mode 100644 recipes-core/openjdk/openjdk-7_75b13-2.5.4.bb
+
+-- 
+2.1.4
+
 
