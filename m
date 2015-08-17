@@ -1,42 +1,42 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D5D160088
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id AABDE60088
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2015 21:27:37 +0000 (UTC)
-Received: by wicne3 with SMTP id ne3so85170308wic.1
+	Mon, 17 Aug 2015 21:29:20 +0000 (UTC)
+Received: by pdbmi9 with SMTP id mi9so19306679pdb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2015 14:27:37 -0700 (PDT)
+	Mon, 17 Aug 2015 14:29:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=OTLcpMLaqjLFIVV2IaKAMPGls/Kewd1obiqZhfvWKqI=;
-	b=MxVjEv2aPzwFltIdNgXCwYn2UN63m2m0PaXJpffuRdc81ok6UBENJ6f5FfaRPlE/ae
-	Dz+D3IJ/2/JGUdoGVz/wOb0bnaT70k9tcmTmJ9bmR2OG7SGzKXIc1Sbg0oA3hm6o9GI7
-	7PQrOxqLkfk606710QL6TDpLbsnC726pDpD0khHzMIrV8i1LjE/huHXKP31uJhV14ko5
-	ijFX+7hKhaCIfA4gyK+yGwke2XBqBJYF1CWmaMVwy55Vj8LEF+QtUGsdvBekmxqJ+mj3
-	nUeMjsGOXkIWZoZZhrsuNBjEiFgPTu3miMXzjVSLd0xiZQXkKd71v25aqzCFS2JMYVOY
-	dlSA==
-X-Received: by 10.194.203.3 with SMTP id km3mr6329059wjc.114.1439846857718;
-	Mon, 17 Aug 2015 14:27:37 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=FeSXz1CGGQ1Q0JNKxxm+SE43QP0AvCiUjtpSyoyaTt4=;
+	b=JaPpv3Htfx65JrsIhVPx2MI6ujlOvoiLor4s6Oer8KF6nZOCmOzxoHBEdt1aGv7Tul
+	QWWudHNd9WUH7sudqbt+6WeNgMJMck6Bg0nftnrNBCutE3w9iFe/jar5GtZJqH6B7RXI
+	iDyXp7c6iB786DMFr/dqBuOlTP35Fyk1wCsCvX5gScSnVuZvVGo1nGaVUoVLq+IlqYV5
+	Y+fMMzk0rQLp3LZPg3E3mue+borBK/vIWAnEvRKr7X0VIZgYhay+hloVTDlPZHlKRNJB
+	iMx3RWWKb1sy43auDnX/dTZ6lswxZdeHYFAIlNJrWVe4GjA/oomvoLxJp2i5xKrb9RnW
+	yu9g==
+X-Received: by 10.70.43.163 with SMTP id x3mr6376121pdl.151.1439846960547;
+	Mon, 17 Aug 2015 14:29:20 -0700 (PDT)
+Received: from ?IPv6:2601:646:8601:4580:4c2b:aa36:d301:5329?
+	([2601:646:8601:4580:4c2b:aa36:d301:5329])
 	by smtp.gmail.com with ESMTPSA id
-	b13sm18398204wic.15.2015.08.17.14.27.36
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 17 Aug 2015 14:27:36 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 17 Aug 2015 23:27:42 +0200
+	ud2sm15656924pbc.57.2015.08.17.14.29.19
+	(version=TLS1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 17 Aug 2015 14:29:19 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+X-Pgp-Agent: GPGMail 2.5.1
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <55D24E83.7080508@windriver.com>
+Date: Mon, 17 Aug 2015 14:29:15 -0700
+Message-Id: <748F943A-BD6C-4678-95AE-66194317F32B@gmail.com>
+References: <1439345155-27884-1-git-send-email-kai.kang@windriver.com>
+	<55D179C1.5010402@windriver.com> <20150817150349.GD8518@mentor.com>
+	<55D24E83.7080508@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150817212742.GA2451@jama>
-References: <1437743901-28008-1-git-send-email-adraszik@digisoft.tv>
-	<20150727163405.GE307@jama>
-	<93BD997E-308F-455D-AD8D-B414EE9B4200@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <93BD997E-308F-455D-AD8D-B414EE9B4200@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] rsnapshot: make this an allarch package
+X-Mailer: Apple Mail (2.2104)
+Subject: Re: [meta-networking][PATCH] inetutils: 1.9.2 -> 1.9.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,117 +50,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2015 21:27:42 -0000
-X-Groupsio-MsgNum: 56753
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BOKacYhQ+x31HxR3"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 17 Aug 2015 21:29:22 -0000
+X-Groupsio-MsgNum: 56754
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_6CE27997-CC77-45E1-8836-428F7BF8B62B";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---BOKacYhQ+x31HxR3
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+--Apple-Mail=_6CE27997-CC77-45E1-8836-428F7BF8B62B
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
-On Sat, Aug 08, 2015 at 03:39:07PM -0700, Khem Raj wrote:
+
+> On Aug 17, 2015, at 2:13 PM, Randy MacLeod =
+<randy.macleod@windriver.com> wrote:
 >=20
-> > On Jul 27, 2015, at 9:34 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> >=20
-> > On Fri, Jul 24, 2015 at 02:18:21PM +0100, Andr=E9 Draszik wrote:
-> >> From: Andr=E9 Draszik <git@andred.net>
-> >>=20
-> >> rsnapshot is just some perl script(s), no machine specific binaries.
-> >=20
-> > NAK
-> >=20
-> > The recipe has bunch of RDEPENDS on TUNE_PKGARCH recipes so it cannot be
-> > allarch.
-> >=20
-> > Recipe by default is TUNE_PKGARCH not MACHINE_ARCH as commit message may
-> > suggest.
+> On 2015-08-17 11:03 AM, Joe MacDonald wrote:
+>> [Re: [oe] [meta-networking][PATCH] inetutils: 1.9.2 -> 1.9.4] On =
+15.08.17 (Mon 14:05) Kang Kai wrote:
+>>=20
+>>> On 2015=E5=B9=B408=E6=9C=8812=E6=97=A5 10:05, kai.kang@windriver.com =
+wrote:
+>>>> From: Kai Kang <kai.kang@windriver.com>
+>>>>=20
+>>>> Upgrade inetutils from 1.9.2 to 1.9.4.
+>>>=20
+>>> Ping?
+>>=20
+>> Since I'm seeing a lot of these lately I thought I might explain my
+>> current workflow.
 >=20
+> Thanks for the background.
 >=20
-> I understand the NAK since it has runtime dependencies on binary compiled=
- programs like rsync which are architecture dependent
-> due to different ISA and so on. However, from another perspective, its a =
-script which is invoking/executing a standard utility
-> much like its own interpreter say bash or perl whichever it needs and bas=
-h, perl etc. are natively compiled binaries. going by this logic
-> we can really not have allarch package at all. So IMO runtime dependencies
-> for script based packages should not bar it from being a allarch package.=
- Since, I can still take the same ipk and install it on arm or mips
-> and it will work as long as they provide its dependencies like rsync perl=
- etc.
+>> For build or security issues, I'm trying to stay on
+>> top of them and be as responsive as possible,
+>=20
+> okay.
+>=20
+>> but for general recipe
+>> updates, particularly ones like this where the log shows essentially
+>> nothing critical has changed, I'm holding off until at least my
+>> autobuilders get to chew on them and reassure me we're not bringing =
+in
+>> new QA (or worse) issues,
+>=20
+> I'd hope that means a day or two and not a week, right?
 
-With current sstate checksum generators accepting this will cause all
-these "allarch" recipes to be "rebuilt" (from sstate) every time you change
-MACHINE to something with different TUNE_PKGARCH.
-
-Keeping it TUNE_PKGARCH means that you'll always get exactly the same
-package from feed (not the last one "built" randomly changing when
-builder builds different MACHINEs in a loop).
+its about a week. Reason is the machines capacity/power vs. number of =
+recipes to build.
 
 >=20
-> >=20
-> >> ---
-> >> meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb | 2 +-
-> >> 1 file changed, 1 insertion(+), 1 deletion(-)
-> >>=20
-> >> diff --git a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb b/meta=
--oe/recipes-support/rsnapshot/rsnapshot_git.bb
-> >> index d680511..0593eef 100644
-> >> --- a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-> >> +++ b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-> >> @@ -29,7 +29,7 @@ SRC_URI =3D "git://github.com/DrHyde/${BPN};branch=
-=3Dmaster;protocol=3Dgit \
-> >>=20
-> >> S =3D "${WORKDIR}/git"
-> >>=20
-> >> -inherit autotools
-> >> +inherit allarch autotools
-> >>=20
-> >> # Fix rsnapshot.conf.default:
-> >> # don't inject the host path into target configs.
-> >> --
-> >> 2.1.4
-> >>=20
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >=20
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> and ideally I prefer to see a pass in one of
+>> Martin's "state of the world" builds.
 >=20
+> I assumed that the state-of-the-world builds would be for master
+> and the release branches but no:
+>   http://www.openembedded.org/wiki/Bitbake_World_Status_Setup
+>=20
+>   "It's not using "master" branches,
+>     but "jansa/master" branches in ..."
+>=20
+> They appear to happen every day:
+>   http://logs.nslu2-linux.org/buildlogs/oe/world/
+> And the stats are published once or twice a week, most of the time...
+>   http://www.openembedded.org/wiki/Bitbake_World_Status
+>=20
+> Hmmm, would newer build systems be useful:
+>   "Usually I build for 3 MACHINE qemuarm, qemux86, qemux86-64.
+>    Each MACHINE takes about 20-24hours so sometimes there is
+>    bigger delay."
+>=20
+>> I also try to give everyone on
+>> the list a reasonable amount of time to respond to anything as well, =
+but
+>> that's not a gating factor.
+>=20
+> What's a reasonable time? ~ 1-2 days?
+>=20
+> Just trying ensure that our ping time is reasonable. :)
+
+
+Wait for a week at-least.
 
 
 
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---BOKacYhQ+x31HxR3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+--Apple-Mail=_6CE27997-CC77-45E1-8836-428F7BF8B62B
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Comment: GPGTools - https://gpgtools.org
 
-iEUEARECAAYFAlXSUc0ACgkQN1Ujt2V2gBx3iACYwSecXb+3GzjRuvLlnqjuug4+
-HgCguCWo62TK2o7sraFI4NJrl1cZKHY=
-=0i4+
+iEYEARECAAYFAlXSUi8ACgkQuwUzVZGdMxSXNQCfdKw1Pp+ppkVKsqb/6xnam1L0
+8dYAn3I9oasBpBh8PfNMzElNM1ODWbdY
+=Jo2o
 -----END PGP SIGNATURE-----
 
---BOKacYhQ+x31HxR3--
+--Apple-Mail=_6CE27997-CC77-45E1-8836-428F7BF8B62B--
