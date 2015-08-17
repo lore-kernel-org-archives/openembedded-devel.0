@@ -1,31 +1,36 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 8123B606E8
+Return-Path: <jkrishnanjanappa@mvista.com>
+Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
+	[209.85.220.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 8CE0773DF0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2015 15:04:34 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1ZRM6Q-0003In-RC from Joe_MacDonald@mentor.com ;
-	Mon, 17 Aug 2015 08:13:34 -0700
-Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
-	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 17 Aug 2015 08:04:34 -0700
-Received: by burninator (Postfix, from userid 1000)	id B3025587596; Mon, 17
-	Aug 2015 11:03:49 -0400 (EDT)
-Date: Mon, 17 Aug 2015 11:03:49 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <20150817150349.GD8518@mentor.com>
-References: <1439345155-27884-1-git-send-email-kai.kang@windriver.com>
-	<55D179C1.5010402@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <55D179C1.5010402@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] inetutils: 1.9.2 -> 1.9.4
+	Mon, 17 Aug 2015 15:10:38 +0000 (UTC)
+Received: by pabyb7 with SMTP id yb7so110531310pab.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Aug 2015 08:10:38 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=oKVy/x+/qQx2O3OCNzlAkOqDXl3zTVnLcOc/rFLBKnI=;
+	b=Ijn8oijnBTfg6MeVFRq69/z8y7JVPVhfBwFkOvqlAocvl9eOdnk7eCeA7EpxyhysW0
+	lUq1HkDALTUrpCBmelS6d3Mn3uBJ//aUnZ2QGwfkcqkSssnPVDrG4kN0hTEgaMWhImVO
+	RjTgDSqRrduOJTQUETMjQ5KbcSffuN3TGGxhMXQ4i67k3eY7Fp7vReuJ92eMkgOHJST1
+	woBifWC9Y8A5NpSZNyZ3aYBibtmK2H9yd/5EJMM+loZR/rIv00g1ebvj0pVCDDL9p2Sc
+	QBp32HW15R2b+Y1L0zLiHg2zHSHrnFxphrF4xPcr8fFhfIWXl2M303IsB28QDOQZ/NZD
+	vorA==
+X-Gm-Message-State: ALoCoQlGA8BYsI6WTKxrWqqx0k3ikV6FAFCyyK3Dq4owl7WPj4l2kpFWdsKEmIxKsQutjq6dUc1p
+X-Received: by 10.68.133.68 with SMTP id pa4mr3577437pbb.71.1439824238540;
+	Mon, 17 Aug 2015 08:10:38 -0700 (PDT)
+Received: from ubuntu64.mvista.com ([111.93.218.67])
+	by smtp.gmail.com with ESMTPSA id
+	kp5sm15022374pdb.57.2015.08.17.08.10.37
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 17 Aug 2015 08:10:38 -0700 (PDT)
+From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 17 Aug 2015 20:40:21 +0530
+Message-Id: <1439824222-14425-1-git-send-email-jkrishnanjanappa@mvista.com>
+X-Mailer: git-send-email 1.8.2.3
+Subject: [meta-networking][PATCH 1/2] mime-construct: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,257 +44,383 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2015 15:04:35 -0000
-X-Groupsio-MsgNum: 56746
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="vni90+aGYgRvsTuO"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 17 Aug 2015 15:10:39 -0000
 
---vni90+aGYgRvsTuO
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+mime-construct constructs and (by default) mails MIME messages.
+It is entirely driven from the command line, it is
+designed to be used by other programs, or people who act
+like programs."
 
-[Re: [oe] [meta-networking][PATCH] inetutils: 1.9.2 -> 1.9.4] On 15.08.17 (=
-Mon 14:05) Kang Kai wrote:
+Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+---
+ .../mime-construct/files/Signal.pm                 | 132 +++++++++++++++
+ .../mime-construct/files/WaitStat.pm               | 178 +++++++++++++++++++++
+ .../mime-construct/mime-construct_1.11.bb          |  31 ++++
+ 3 files changed, 341 insertions(+)
+ create mode 100644 meta-networking/recipes-extended/mime-construct/files/Signal.pm
+ create mode 100644 meta-networking/recipes-extended/mime-construct/files/WaitStat.pm
+ create mode 100644 meta-networking/recipes-extended/mime-construct/mime-construct_1.11.bb
 
-> On 2015=E5=B9=B408=E6=9C=8812=E6=97=A5 10:05, kai.kang@windriver.com wrot=
-e:
-> >From: Kai Kang <kai.kang@windriver.com>
-> >
-> >Upgrade inetutils from 1.9.2 to 1.9.4.
->=20
-> Ping?
+diff --git a/meta-networking/recipes-extended/mime-construct/files/Signal.pm b/meta-networking/recipes-extended/mime-construct/files/Signal.pm
+new file mode 100644
+index 0000000..9280e88
+--- /dev/null
++++ b/meta-networking/recipes-extended/mime-construct/files/Signal.pm
+@@ -0,0 +1,132 @@
++# $Id: Signal.pm,v 1.4 1998-10-27 16:16:13-05 roderick Exp $
++#
++# Copyright (c) 1997 Roderick Schertler.  All rights reserved.  This
++# program is free software; you can redistribute it and/or modify it
++# under the same terms as Perl itself.
++
++package IPC::Signal;
++
++use 5.003_94;	# __PACKAGE__
++use strict;
++use vars	qw($VERSION @ISA @EXPORT_OK $AUTOLOAD %Sig_num @Sig_name);
++
++require Exporter;
++
++$VERSION	= '1.00';
++@ISA		= qw(Exporter);
++@EXPORT_OK	= qw(sig_num sig_name sig_translate_setup %Sig_num @Sig_name);
++%Sig_num	= ();
++@Sig_name	= ();
++
++sub sig_num  ($);
++sub sig_name ($);
++
++sub sig_translate_setup () {
++    return if %Sig_num && @Sig_name;
++
++    require Config;
++
++    # In 5.005 the sig_num entries are comma separated and there's a
++    # trailing 0.
++    my $num = $Config::Config{'sig_num'};
++    if ($num =~ s/,//g) {
++	$num =~ s/\s+0$//;
++    }
++
++    my @name	= split ' ', $Config::Config{'sig_name'};
++    my @num	= split ' ', $num;
++
++    @name			or die 'No signals defined';
++    @name == @num		or die 'Signal name/number mismatch';
++
++    @Sig_num{@name} = @num;
++    keys %Sig_num == @name	or die 'Duplicate signal names present';
++    for (@name) {
++	$Sig_name[$Sig_num{$_}] = $_
++	    unless defined $Sig_name[$Sig_num{$_}];
++    }
++}
++
++# This autoload routine just is just for sig_num() and sig_name().  It
++# calls sig_translate_setup() and then snaps the real function definitions
++# into place.
++
++sub AUTOLOAD {
++    if ($AUTOLOAD ne __PACKAGE__ . '::sig_num'
++	    && $AUTOLOAD ne __PACKAGE__ . '::sig_name') {
++	require Carp;
++	Carp::croak("Undefined subroutine &$AUTOLOAD called");
++    }
++    sig_translate_setup;
++    *sig_num  = sub ($) { $Sig_num{$_[0]} };
++    *sig_name = sub ($) { $Sig_name[$_[0]] };
++    goto &$AUTOLOAD;
++}
++
++1
++
++__END__
++
++=head1 NAME
++
++IPC::Signal - Utility functions dealing with signals
++
++=head1 SYNOPSIS
++
++    $number = sig_num $name;
++    $name   = sig_name $number;
++
++    sig_translate_setup;
++    $number = $Sig_num{$name};
++    $name   = $Sig_name[$number];
++
++=head1 DESCRIPTION
++
++This module contains utility functions for dealing with signals.
++
++Nothing is exported by default.
++
++=over
++
++=item B<sig_num> I<chopped-signal-name>
++
++Returns the signal number of the signal whose name (sans C<SIG>) is
++I<chopped-signal-name>, or undef if there is no such signal.
++
++This function is prototyped to take a single scalar argument.
++
++=item B<sig_name> I<signal-number>
++
++Returns the chopped signal name (like C<HUP>) of signal number
++I<signal-number>, or undef if there is no such signal.
++
++This function is prototyped to take a single scalar argument.
++
++=item B<sig_translate_setup>
++
++If you want to use the @Sig_name and %Sig_num variables directly you must
++call B<sig_translate_setup> to initialize them.  This isn't necessary if
++you only use the function interfaces sig_name() and sig_num().
++
++This function is prototyped to take no arguments.
++
++=item B<%Sig_num>
++
++A hash with chopped signal name keys (like C<HUP>) and integer signal
++number values.
++
++=item B<@Sig_name>
++
++An array mapping signal numbers to chopped signal names (like C<HUP>).
++
++=back
++
++=head1 AUTHOR
++
++Roderick Schertler <F<roderick@argon.org>>
++
++=head1 SEE ALSO
++
++perl(1).
++
++=cut
+diff --git a/meta-networking/recipes-extended/mime-construct/files/WaitStat.pm b/meta-networking/recipes-extended/mime-construct/files/WaitStat.pm
+new file mode 100644
+index 0000000..337e52a
+--- /dev/null
++++ b/meta-networking/recipes-extended/mime-construct/files/WaitStat.pm
+@@ -0,0 +1,178 @@
++# $Id: WaitStat.pm,v 1.3 1999-10-21 12:39:43-04 roderick Exp $
++#
++# Copyright (c) 1997 Roderick Schertler.  All rights reserved.  This
++# program is free software; you can redistribute it and/or modify it
++# under the same terms as Perl itself.
++
++=head1 NAME
++
++Proc::WaitStat - Interpret and act on wait() status values
++
++=head1 SYNOPSIS
++
++    $description = waitstat $?;
++    exit waitstat_reuse $?;
++    waitstat_die $?, 'program-name';
++    close_die COMMAND, 'program-name';
++
++=head1 DESCRIPTION
++
++This module contains functions for interpreting and acting on wait
++status values.
++
++Nothing is exported by default.
++
++=over
++
++=cut
++
++package Proc::WaitStat;
++
++use 5.003_98;	# piped close errno resetting
++use strict;
++use vars	qw($VERSION @ISA @EXPORT_OK);
++
++use Carp	qw(croak);
++use Exporter	  ();
++use IPC::Signal	qw(sig_name);
++use POSIX	qw(:sys_wait_h);
++
++$VERSION	= '1.00';
++@ISA		= qw(Exporter);
++@EXPORT_OK	= qw(waitstat waitstat_reuse waitstat_die close_die);
++
++=item B<waitstat> I<wait-status>
++
++Returns a string representation of wait() status value I<wait-status>.
++Values returned are like C<"0"> and C<"64"> and C<"killed (SIGHUP)">.
++
++This function is prototyped to take a single scalar argument.
++
++=cut
++
++sub waitstat ($) {
++    my $status = shift;
++
++    if (WIFEXITED $status) {
++	WEXITSTATUS $status
++    }
++    elsif (WIFSIGNALED $status) {
++	# XXX WCOREDUMP
++	'killed (SIG' . sig_name(WTERMSIG $status) . ')'
++    }
++    elsif (WIFSTOPPED $status) {
++	'stopped (SIG' . sig_name(WSTOPSIG $status) . ')'
++    }
++    # XXX WIFCONTINUED
++    else {
++	"invalid wait status $status"
++    }
++}
++
++=item B<waitstat_reuse> I<wait-status>
++
++Turn I<wait-status> into a value which can be passed to B<exit>, converted
++in the same manner the shell uses.  If I<wait-status> indicates a normal
++exit, return the exit value.  If I<wait-status> instead indicates death by
++signal, return 128 plus the signal number.
++
++This function is prototyped to take a single scalar argument.
++
++=cut
++
++sub waitstat_reuse ($) {
++    my $status = shift;
++
++    if (WIFEXITED $status) {
++	WEXITSTATUS $status
++    }
++    elsif (WIFSIGNALED $status) {
++	128 + WTERMSIG $status
++    }
++    elsif (WIFSTOPPED $status) {
++	128 + WSTOPSIG $status
++    }
++    else {
++	croak "Invalid wait status $status";
++    }
++}
++
++=item B<waitstat_die> I<wait-status> I<program-name>
++
++die() if I<wait-status> is non-zero (mentioning I<program-name> as the
++source of the error).
++
++This function is prototyped to take two scalar arguments.
++
++=cut
++
++sub waitstat_die ($$) {
++    my ($status, $program) = @_;
++    croak "Non-zero exit (" . waitstat($status) .
++	    ") from $program"
++	if $status;
++}
++
++=item B<close_die> I<filehandle> I<name>
++
++Close I<filehandle>, if that fails die() with an appropriate message
++which refers to I<name>.  This handles failed closings of both programs
++and files properly.
++
++This function is prototyped to take a filehandle (actually, a glob ref)
++and a scalar.
++
++=cut
++
++sub close_die (*$) {
++    my ($fh, $name) = @_;
++
++    unless (ref $fh || ref \$fh eq 'GLOB') {
++	require Symbol;
++	$fh = Symbol::qualify_to_ref($fh, caller);
++    }
++
++    unless (close $fh) {
++	croak "Error closing $name: ",
++		$!+0 ? "$!" : 'non-zero exit (' . waitstat($?) . ')';
++    }
++}
++
++1
++
++__END__
++
++=back
++
++=head1 EXAMPLES
++
++    close SENDMAIL;
++    exit if $? == 0;
++    log "sendmail failure: ", waitstat $?;
++    exit EX_TEMPFAIL;
++
++    $pid == waitpid $pid, 0 or croak "Failed to reap $pid: $!";
++    exit waitstat_reuse $?;
++
++    $output = `some-program -with args`;
++    waitstat_die $?, 'some-program';
++    print "Output from some-process:\n", $output;
++
++    open PROGRAM, '| post-processor' or die "Can't fork: $!";
++    while (<IN>) {
++    	print PROGRAM pre_process $_
++	    or die "Error writing to post-processor: $!";
++    }
++    # This handles both flush failures at close time and a non-zero exit
++    # from the subprocess.
++    close_die PROGRAM, 'post-processor';
++
++=head1 AUTHOR
++
++Roderick Schertler <F<roderick@argon.org>>
++
++=head1 SEE ALSO
++
++perl(1), IPC::Signal(3pm).
++
++=cut
+diff --git a/meta-networking/recipes-extended/mime-construct/mime-construct_1.11.bb b/meta-networking/recipes-extended/mime-construct/mime-construct_1.11.bb
+new file mode 100644
+index 0000000..e6dde3a
+--- /dev/null
++++ b/meta-networking/recipes-extended/mime-construct/mime-construct_1.11.bb
+@@ -0,0 +1,31 @@
++SUMMARY = "Construct and optionally mail MIME messages"
++DESCRIPTION = "Constructs and (by default) mails MIME messages. \
++               It is entirely driven from the command line, it is \
++               designed to be used by other programs, or people who act \
++               like programs."
++HOMEPAGE = "http://search.cpan.org/~rosch/mime-construct/mime-construct"
++SECTION = "mail"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://debian/copyright;md5=5e2e5da619ac8ef8c84767ccc4656e96"
++
++PR = "r0"
++
++SRC_URI = "${CPAN_MIRROR}/authors/id/R/RO/ROSCH/mime-construct-${PV}.tar.gz \
++           file://WaitStat.pm \
++           file://Signal.pm \
++          "
++SRC_URI[md5sum] = "73834ea780fbea81b89dbd9b2fb54f58"
++SRC_URI[sha256sum] = "4cd7bb61b51d41192d1498c1051aa6a4ccd75aeb09b71d2ec706a7084a4a9303"
++
++inherit cpan
++
++do_install () {
++    oe_runmake install DESTDIR="${D}"
++    install -d ${D}${libdir}/perl/vendor_perl/${@get_perl_version(d)}/Proc \
++               ${D}${libdir}/perl/vendor_perl/${@get_perl_version(d)}/IPC
++    install -m 644 ${WORKDIR}/WaitStat.pm \
++                   ${D}${libdir}/perl/vendor_perl/${@get_perl_version(d)}/Proc
++    install -m 644 ${WORKDIR}/Signal.pm \
++                   ${D}${libdir}/perl/vendor_perl/${@get_perl_version(d)}/IPC
++}
++RDEPENDS_${PN} = "postfix perl"
+-- 
+1.8.2.3
 
-Since I'm seeing a lot of these lately I thought I might explain my
-current workflow.  For build or security issues, I'm trying to stay on
-top of them and be as responsive as possible, but for general recipe
-updates, particularly ones like this where the log shows essentially
-nothing critical has changed, I'm holding off until at least my
-autobuilders get to chew on them and reassure me we're not bringing in
-new QA (or worse) issues, and ideally I prefer to see a pass in one of
-Martin's "state of the world" builds.  I also try to give everyone on
-the list a reasonable amount of time to respond to anything as well, but
-that's not a gating factor.
 
-Just FYI.
-
--J.
-
->=20
-> >
-> >* add homepage
-> >* update inetutils/version.patch
-> >
-> >Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> >---
-> >  .../inetutils/{inetutils-1.9.2 =3D> inetutils}/fix-disable-ipv6.patch =
- | 0
-> >  ...tils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch |=
- 0
-> >  .../{inetutils-1.9.2 =3D> inetutils}/inetutils-1.8-0003-wchar.patch   =
- | 0
-> >  .../inetutils-1.9-PATH_PROCNET_DEV.patch                             |=
- 0
-> >  .../inetutils/{inetutils-1.9.2 =3D> inetutils}/rexec.xinetd.inetutils =
- | 0
-> >  .../inetutils/{inetutils-1.9.2 =3D> inetutils}/rlogin.xinetd.inetutils=
- | 0
-> >  .../inetutils/{inetutils-1.9.2 =3D> inetutils}/rsh.xinetd.inetutils   =
- | 0
-> >  .../inetutils/{inetutils-1.9.2 =3D> inetutils}/telnet.xinetd.inetutils=
- | 0
-> >  .../telnetd-Fix-deadlock-on-cleanup.patch                            |=
- 0
-> >  .../inetutils/{inetutils-1.9.2 =3D> inetutils}/tftpd.xinetd.inetutils =
- | 0
-> >  .../inetutils/{inetutils-1.9.2 =3D> inetutils}/version.patch          =
- | 2 +-
-> >  .../inetutils/{inetutils_1.9.2.bb =3D> inetutils_1.9.4.bb}            =
- | 5 +++--
-> >  12 files changed, 4 insertions(+), 3 deletions(-)
-> >  rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2=
- =3D> inetutils}/fix-disable-ipv6.patch (100%)
-> >  rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2=
- =3D> inetutils}/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__G=
-LIBC__.patch (100%)
-> >  rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2=
- =3D> inetutils}/inetutils-1.8-0003-wchar.patch (100%)
-> >  rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2=
- =3D> inetutils}/inetutils-1.9-PATH_PROCNET_DEV.patch (100%)
-> >  rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2=
- =3D> inetutils}/rexec.xinetd.inetutils (100%)
-> >  rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2=
- =3D> inetutils}/rlogin.xinetd.inetutils (100%)
-> >  rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2=
- =3D> inetutils}/rsh.xinetd.inetutils (100%)
-> >  rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2=
- =3D> inetutils}/telnet.xinetd.inetutils (100%)
-> >  rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2=
- =3D> inetutils}/telnetd-Fix-deadlock-on-cleanup.patch (100%)
-> >  rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2=
- =3D> inetutils}/tftpd.xinetd.inetutils (100%)
-> >  rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2=
- =3D> inetutils}/version.patch (93%)
-> >  rename meta-networking/recipes-connectivity/inetutils/{inetutils_1.9.2=
-=2Ebb =3D> inetutils_1.9.4.bb} (97%)
-> >
-> >diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.=
-9.2/fix-disable-ipv6.patch b/meta-networking/recipes-connectivity/inetutils=
-/inetutils/fix-disable-ipv6.patch
-> >similarity index 100%
-> >rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/fix-disable-ipv6.patch
-> >rename to meta-networking/recipes-connectivity/inetutils/inetutils/fix-d=
-isable-ipv6.patch
-> >diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.=
-9.2/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch =
-b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-00=
-01-printf-parse-pull-in-features.h-for-__GLIBC__.patch
-> >similarity index 100%
-> >rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
-> >rename to meta-networking/recipes-connectivity/inetutils/inetutils/inetu=
-tils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
-> >diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.=
-9.2/inetutils-1.8-0003-wchar.patch b/meta-networking/recipes-connectivity/i=
-netutils/inetutils/inetutils-1.8-0003-wchar.patch
-> >similarity index 100%
-> >rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/inetutils-1.8-0003-wchar.patch
-> >rename to meta-networking/recipes-connectivity/inetutils/inetutils/inetu=
-tils-1.8-0003-wchar.patch
-> >diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.=
-9.2/inetutils-1.9-PATH_PROCNET_DEV.patch b/meta-networking/recipes-connecti=
-vity/inetutils/inetutils/inetutils-1.9-PATH_PROCNET_DEV.patch
-> >similarity index 100%
-> >rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/inetutils-1.9-PATH_PROCNET_DEV.patch
-> >rename to meta-networking/recipes-connectivity/inetutils/inetutils/inetu=
-tils-1.9-PATH_PROCNET_DEV.patch
-> >diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.=
-9.2/rexec.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils=
-/inetutils/rexec.xinetd.inetutils
-> >similarity index 100%
-> >rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/rexec.xinetd.inetutils
-> >rename to meta-networking/recipes-connectivity/inetutils/inetutils/rexec=
-=2Exinetd.inetutils
-> >diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.=
-9.2/rlogin.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutil=
-s/inetutils/rlogin.xinetd.inetutils
-> >similarity index 100%
-> >rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/rlogin.xinetd.inetutils
-> >rename to meta-networking/recipes-connectivity/inetutils/inetutils/rlogi=
-n.xinetd.inetutils
-> >diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.=
-9.2/rsh.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/i=
-netutils/rsh.xinetd.inetutils
-> >similarity index 100%
-> >rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/rsh.xinetd.inetutils
-> >rename to meta-networking/recipes-connectivity/inetutils/inetutils/rsh.x=
-inetd.inetutils
-> >diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.=
-9.2/telnet.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutil=
-s/inetutils/telnet.xinetd.inetutils
-> >similarity index 100%
-> >rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/telnet.xinetd.inetutils
-> >rename to meta-networking/recipes-connectivity/inetutils/inetutils/telne=
-t.xinetd.inetutils
-> >diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.=
-9.2/telnetd-Fix-deadlock-on-cleanup.patch b/meta-networking/recipes-connect=
-ivity/inetutils/inetutils/telnetd-Fix-deadlock-on-cleanup.patch
-> >similarity index 100%
-> >rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/telnetd-Fix-deadlock-on-cleanup.patch
-> >rename to meta-networking/recipes-connectivity/inetutils/inetutils/telne=
-td-Fix-deadlock-on-cleanup.patch
-> >diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.=
-9.2/tftpd.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils=
-/inetutils/tftpd.xinetd.inetutils
-> >similarity index 100%
-> >rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/tftpd.xinetd.inetutils
-> >rename to meta-networking/recipes-connectivity/inetutils/inetutils/tftpd=
-=2Exinetd.inetutils
-> >diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.=
-9.2/version.patch b/meta-networking/recipes-connectivity/inetutils/inetutil=
-s/version.patch
-> >similarity index 93%
-> >rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/version.patch
-> >rename to meta-networking/recipes-connectivity/inetutils/inetutils/versi=
-on.patch
-> >index 1caa2d3..532a0e5 100644
-> >--- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/ver=
-sion.patch
-> >+++ b/meta-networking/recipes-connectivity/inetutils/inetutils/version.p=
-atch
-> >@@ -11,7 +11,7 @@ Signed-off-by: Chunrong Guo <b40290@freescale.com>
-> >  -AC_INIT([GNU inetutils],
-> >  - m4_esyscmd([build-aux/git-version-gen .tarball-version 's/inetutils-=
-/v/;s/_/./g']),
-> >-+AC_INIT([GNU inetutils],[1.9.2],
-> >++AC_INIT([GNU inetutils],[1.9.4],
-> >    [bug-inetutils@gnu.org])
-> >   AC_CONFIG_SRCDIR([src/inetd.c])
-> >diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.=
-9.2.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-> >similarity index 97%
-> >rename from meta-networking/recipes-connectivity/inetutils/inetutils_1.9=
-=2E2.bb
-> >rename to meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4=
-=2Ebb
-> >index 6209272..cdcba83 100644
-> >--- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
-> >+++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-> >@@ -2,6 +2,7 @@ DESCRIPTION =3D "The GNU inetutils are a collection of c=
-ommon \
-> >  networking utilities and servers including ftp, ftpd, rcp, \
-> >  rexec, rlogin, rlogind, rsh, rshd, syslog, syslogd, talk, \
-> >  talkd, telnet, telnetd, tftp, tftpd, and uucpd."
-> >+HOMEPAGE =3D "http://www.gnu.org/software/inetutils"
-> >  SECTION =3D "net"
-> >  DEPENDS =3D "ncurses netbase readline"
-> >  LICENSE =3D "GPLv3"
-> >@@ -21,8 +22,8 @@ SRC_URI =3D "${GNU_MIRROR}/inetutils/inetutils-${PV}.t=
-ar.gz \
-> >             file://telnetd-Fix-deadlock-on-cleanup.patch \
-> >  "
-> >-SRC_URI[md5sum] =3D "aa1a9a132259db83e66c1f3265065ba2"
-> >-SRC_URI[sha256sum] =3D "0423ea40a160cd4630f817e247df5c08ecc625378d2bb56=
-a0509117a36a89913"
-> >+SRC_URI[md5sum] =3D "04852c26c47cc8c6b825f2b74f191f52"
-> >+SRC_URI[sha256sum] =3D "be8f75eff936b8e41b112462db51adf689715658a1b09e0=
-d6b05d11ec92cc616"
-> >  inherit autotools gettext update-alternatives texinfo
->=20
->=20
-> --=20
-> Regards,
-> Neil | Kai Kang
->=20
---=20
--Joe MacDonald.
-:wq
-
---vni90+aGYgRvsTuO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJV0ffSAAoJEEn8ffcsOfaWDCIIALY+Pd9bQtpg3mTjiDNr0p/+
-oXxfAQbHR/E8nq3uVygAOjfJf3K45iYlNsmzupRhH7ysD8XFWa82r7G2PPZkrkeU
-Fs1MGhy48wHn8AP2vYda14JMxQXTa7jz8W6FVZIQiJBz/ubP6yxBUOw21cK258a+
-v6U4kEEAkLRjauav8/UC9IWn7+Do7u7TgtSS3kTVqDwcC+7h2uG671tc5nusVOF7
-8aaJdYsD96R89S7xjNlzjqFhDwABQ86nB18Dk3MHiq1be/dlOFV/BEJOI8mO8rxI
-dBiHpuowsy7oGWlaN4mi6/U7oHy3paAnqsF3EBYEdw5n0kk02zwYDtaETMTgEWY=
-=IpCZ
------END PGP SIGNATURE-----
-
---vni90+aGYgRvsTuO--
