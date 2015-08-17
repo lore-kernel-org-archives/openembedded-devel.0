@@ -1,39 +1,35 @@
-Return-Path: <dominic.sacre@gmx.de>
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
-	by mail.openembedded.org (Postfix) with ESMTP id 1CC0260125
+Return-Path: <stephen.arnold42@gmail.com>
+Received: from mail-ob0-f179.google.com (mail-ob0-f179.google.com
+	[209.85.214.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 751FD60125
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2015 19:00:24 +0000 (UTC)
-Received: from [192.168.0.201] ([37.24.103.185]) by mail.gmx.com (mrgmx003)
-	with ESMTPSA (Nemesis) id 0LedVG-1YzTE61CVK-00qQUJ for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2015 21:00:24 +0200
-Message-ID: <55D22EAB.9050103@gmx.de>
-Date: Mon, 17 Aug 2015 20:57:47 +0200
-From: =?windows-1252?Q?Dominic_Sacr=E9?= <dominic.sacre@gmx.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
+	Mon, 17 Aug 2015 20:00:42 +0000 (UTC)
+Received: by obbhe7 with SMTP id he7so122245479obb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Aug 2015 13:00:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=do4X8nfMNX/u2Pk233M/fv2jgph0Gxt2uxv3CZz+aYo=;
+	b=SHUrbfxfvz0SEMtAKShtsT8GiKuqajcm13CjOvuVQw2A/vMoCAgfzrWbf2mbf8Vd//
+	P3nyBMUODWlILKdmrI3pusBb4z4ZlluVP097yHH4qkzNlV/OYe1UHiO8DSIDuvNjQyi8
+	VomIJGrvDzwz7E/bsfKmJSx0VPa7syaHRNzns6POg9lWmVLpMzuaw44Mg2MIhMGqhofC
+	CyiNxgGZDZRedxCgL2zqJrR2AZYywU1Bv15iZx6+ZK5XGLtG8QdPO//CGBRLFgYgrR0A
+	qWU9C6irSQs2TgfpGbU4SV901gChUeyFLy4cYkxgq3NW/g+IhB8JWUT8ng3Ri4mB3kOD
+	veHQ==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <55CFD8B5.4000501@gmx.de>
-	<CAMKF1sr0Bp6HCAA869S6tJrKa2jv2OPo5qhU9ews8SYy4aBxYQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sr0Bp6HCAA869S6tJrKa2jv2OPo5qhU9ews8SYy4aBxYQ@mail.gmail.com>
-X-Provags-ID: V03:K0:PLBIdS9KE0gxKpoIB7iB2CaPhH8MHqRr6nKL6Z5VJ2nggv5Ax7C
-	Gf/xadP+1f4oM0NJ/kaPMPg6O/XGQgQMZs6xV9rM9zc/mDKrnwxGntujENczPlGU87zPu90
-	jFMydJt2Czne9TQ3eU3sTQ0apPDlD6CrcbMI6jc9tziSUd2pX7NFFdsHJnFnfjyepq0HDSs
-	TSsh63gxSeRhi8WcfEklw==
-X-UI-Out-Filterresults: notjunk:1;V01:K0:VGnc0JBIQDE=:YDeOyr2cKZ5RTIIltpKYaJ
-	4tMuVMzbGq3iS77HsxRDJyI+jhYtl6RLE5qZvSibv43DEX5Bnjn9OdoJPJmfBcsTNCtaOwa78
-	O9v6WwZswQ2s9kTIHTnCoGZCjOXDGC9de+stqya1Aw1bBd5f6/LBLAHnauU3ofZbPgkg/Wz3c
-	EtkTKpsipoMtjuZeoA1/n73w/LF7dUopr6jk56bXmOga8Y0lyA/zzpoq5D7kTmU0CTk76BkmS
-	8839/aFUwDVfOsGXvxiaCmGlRtOzCmv3V05PvsPBcewIpAGJAKNB2WIFGhovmnFPdy2s/Ovd6
-	umKn/LTiUz88FsbJwxiNPi4+pJZS3Kf3p4VSOoPgf5rsWY/muM4/vMWGoEarCotKKxhKZVCXM
-	g1wtfxtCpeOgyqpmaCaaIgoecqRZ6P5oLUD0FKlUi2Ptwkhc1CE2ohZECe1JmyLAdipmNM+7j
-	WpUcOckFmxs3VW/ssg+aDpEk7i0lj7sFDAbRmEhJ1uJEap+pa5UfzIMuiiTRiEHnwqF6/QIgF
-	4KDek/gOLidrHKXciywim6+qY7iZBlYM3mSee2ElFeRSIKHr+Yy4z32LrpAu/vkoB5834uA4f
-	nflERfRuKTWUI3amwb9cW28ehetGwzMdGwGi0zg2OTH48cVbBrrM/SnixooGKtCvvFgORYjv9
-	1HEwkR9a/WL77siL4tpZ9quiIIRZILS0S5tzp6TmXcf30WuKFa1LILvR5BQKUFKeONgv6bq6S
-	vhc9Ah8Cmb+6ztgBo1siJl/3FuCZm1S7+zq1Fw==
-Subject: Re: Python 2 and Python 3 module recipes
+X-Received: by 10.182.108.170 with SMTP id hl10mr2580622obb.17.1439841642999; 
+	Mon, 17 Aug 2015 13:00:42 -0700 (PDT)
+Received: by 10.182.246.228 with HTTP; Mon, 17 Aug 2015 13:00:42 -0700 (PDT)
+In-Reply-To: <CAP9ODKqkv6E=keu+mBSFxrPF_HXFMZL=t0Uki4Bx-rX88vXK8A@mail.gmail.com>
+References: <CAOLEWZW_2DMvuxsaoKXxtQpg_Qy5=rVutJaOB9Lpnjqrpo6A9g@mail.gmail.com>
+	<CAP9ODKqkv6E=keu+mBSFxrPF_HXFMZL=t0Uki4Bx-rX88vXK8A@mail.gmail.com>
+Date: Mon, 17 Aug 2015 13:00:42 -0700
+Message-ID: <CAOLEWZXQjQAJy-yDDWbEuiJ6XutapsT1QPeRKYtAybbdyrOUDg@mail.gmail.com>
+From: Stephen Arnold <stephen.arnold42@gmail.com>
+To: "meta-freescale@yoctoproject.org" <meta-freescale@yoctoproject.org>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-fsl-arm] 2.6.35 kernel build error with perl 5.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,42 +43,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2015 19:00:30 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 17 Aug 2015 20:00:46 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 2015-08-16 02:40, Khem Raj wrote:
-> On Sat, Aug 15, 2015 at 5:26 PM, Dominic Sacré <dominic.sacre@gmx.de> wrote:
->> I'm trying to build a Python 3 application which depends on some modules
->> that are already packaged in OE for Python 2, but not for Python 3.
->> Since OE currently has virtually no Python 3 module recipes, this makes
->> me wonder what the best approach to create these recipes would be.
+Sorry, I guess I said that on IRC but left it out of the email...
+
+The failure is only with perl 5.22, and it doesn't matter whether it's
+perl-native or the should-not-be-used-anyway build host perl (that's
+what the patch is for).
+
+It's only a warning in prior versions of perl, so you wouldn't see it
+in either case above.
+
+Steve
+
+On Mon, Aug 17, 2015 at 2:59 AM, Otavio Salvador
+<otavio.salvador@ossystems.com.br> wrote:
+> Hello Stephen,
+>
+> (Adding meta-freescale mailing list as it is the proper place for this
+> discussion)
+>
+> On Sat, Aug 15, 2015 at 3:05 AM, Stephen Arnold
+> <stephen.arnold42@gmail.com> wrote:
+>> When building fsl-image-machine-test for imx28-evk with n00b defaults
+>> using the fsl-community-bsp repo manifest thing, it fails on the old
+>> kernel in meta-fsl-arm/recipes-kernel/linux/linux-imx_2.6.35.3.bb.
 >>
->> In most cases, I could just copy a Python 2 recipe, change the name from
->> "python-foo" to "python3-foo", and replace "inherit distutils" with
->> "inherit distutils3". However that would create a lot of duplication,
->> and might turn into a maintenance nightmare.
+>> There are a few things questionable/wrong here:
 >>
->> Do you have a suggestion what the right course of action would be? Move
->> most of the recipes' content to .inc files that can then be included by
->> both Python 2 and Python 3 recipes? Or maybe create a .bbclass that
->> would build both versions from the same recipe?
->> Is there any functionality already in place that would simplify this task?
-> 
-> bbclassextend comes to mind, but then its not a core thing, secondly
-> python2 is not going away soon so we will have to have them coexist.
-> Best is to encapsulate in .inc files and then have 1 liner recipe
-> files, that wont be as bad to maintain.
-
-Ok, .inc files are certainly the most straightforward option. It might
-get a little messy if at some point the majority of packages come in
-Python 2 and Python 3 variants, but I suppose that could take a while.
-
-Should PV be part of the .inc filename? It would make sense if things
-like SRCREV or tarball checksums are set in the .inc files, but it would
-also mean that we'd have the same version number in five different
-places (two .bb filenames, one .inc filename, two includes).
-
-
-Dominic
+>> 1) It uses the build host perl, which is why it fails here and not in
+>> the upstream builder.
+>
+> The master branch has remove this old version; it now uses linux-fslc
+> for mx23, mx28, mx5 SoCs.
+>
+>> 2) The dts file for the evk machine in 4.1 mainline looks complete
+>> (along with several other imx28 machines) so why does it default to
+>> such an old kernel?
+>
+> In fido it is used but dropped in next release.
+>
+> I want to understand why it failed on your system as it works in the
+> autobuilder. What host distro are you using?
+>
+>> 3) Switching to newer kernel makes gst-fsl-plugins fail with the
+>> "looking for kernel headers from user space" error because it can't
+>> find the old framebuffer header (mxcfb.h).  It should depend on old
+>> fsl kernel only.
+>
+> Yes and we got this fixed dropping mx28 support from those. We now
+> rely on official GStreamer for those SoCs and stopped using Freescale
+> codecs (in master).
+>
+>> 4) The old kernel recipe should depend on perl-native.
+>
+> Adding perl-native dependency fixes it?
+>
+>> The attached patch fixes the perl error in the the old kernel build
+>> and the above test image completed fine with it.  Not an "official"
+>> patch per se, just useful if you're stuck...
+>
+> Is this needed if using perl-native?
+>
+> --
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
