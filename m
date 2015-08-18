@@ -1,39 +1,38 @@
-Return-Path: <vinay.k.awasthi@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 1908E60043
+Return-Path: <jkrishnanjanappa@mvista.com>
+Received: from mail-pd0-f172.google.com (mail-pd0-f172.google.com
+	[209.85.192.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BC4260043
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2015 15:02:36 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by orsmga102.jf.intel.com with ESMTP; 18 Aug 2015 08:02:21 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.15,702,1432623600"; d="scan'208";a="627734300"
-Received: from orsmsx103.amr.corp.intel.com ([10.22.225.130])
-	by orsmga003.jf.intel.com with ESMTP; 18 Aug 2015 08:02:20 -0700
-Received: from orsmsx159.amr.corp.intel.com (10.22.240.24) by
-	ORSMSX103.amr.corp.intel.com (10.22.225.130) with Microsoft SMTP Server
-	(TLS) id 14.3.224.2; Tue, 18 Aug 2015 08:02:20 -0700
-Received: from fmsmsx101.amr.corp.intel.com (10.18.124.199) by
-	ORSMSX159.amr.corp.intel.com (10.22.240.24) with Microsoft SMTP Server
-	(TLS) id 14.3.224.2; Tue, 18 Aug 2015 08:02:19 -0700
-Received: from fmsmsx108.amr.corp.intel.com ([169.254.9.72]) by
-	fmsmsx101.amr.corp.intel.com ([169.254.1.27]) with mapi id
-	14.03.0224.002; Tue, 18 Aug 2015 08:02:19 -0700
-From: "Awasthi, Vinay K" <vinay.k.awasthi@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-java][PATCH 1/2] OpenJDK-8u: For x86 and arm
-Thread-Index: AQHQ1sgrLpTmZx4mZEqKIi09w5+GjJ4SNrOA//+pGOA=
-Date: Tue, 18 Aug 2015 15:02:19 +0000
-Message-ID: <B399646F8CA055479BEC55F6B065A04A37058290@FMSMSX108.amr.corp.intel.com>
-References: <1439580903-32301-1-git-send-email-vinay.k.awasthi@intel.com>
-	<20150818131156.GA64804@sestofb10.enea.se>
-In-Reply-To: <20150818131156.GA64804@sestofb10.enea.se>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.200.106]
+	Tue, 18 Aug 2015 16:50:09 +0000 (UTC)
+Received: by pdob1 with SMTP id b1so14574843pdo.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Aug 2015 09:50:10 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-type:content-transfer-encoding;
+	bh=8F3ECwRaDWTen8DHOVF7U4rsvzNZGUvBubOEBUfLNCU=;
+	b=hbK2THMI8zHiG8m6Z/QHzrjqF2fTAYK3FSWtuL/GKB3F0PHNUAQFNJerfzVSYEuJJJ
+	uBmIQiaX3o+W6lB2KzOSX/tP+XcxGaV9RvzXPSFo07OThtFt0qV4nGkGpjrxQ14QSBp9
+	FYiU6fM8qo32jOqokd0pqKnIp95VRS2Oq9pSzwUZFrHI9nTxQCGDTaYBe5fRd99Oh3jS
+	TAm1vwrTzNDijfSzSOWL30b3h3rHspMOgiQ1s+qtNXdWu7H2Yst6a3jefwxJWB7cHrpw
+	oJ9Zlghp+GvoImMeq9fDc5Z0eDVqPgB1cbXMXHPVTiLbaZpxiA6vUWUzax7fCFPB5wji
+	15Fw==
+X-Gm-Message-State: ALoCoQksaQthRvUcRhr4hIV3QkfvoHT70Hsp3FKWFU8ZqZbHmQvlt6oPthorfeh3A2L2BhCOv6OP
+X-Received: by 10.70.53.101 with SMTP id a5mr15246026pdp.49.1439916610051;
+	Tue, 18 Aug 2015 09:50:10 -0700 (PDT)
+Received: from ubuntu64.mvista.com ([111.93.218.67])
+	by smtp.gmail.com with ESMTPSA id
+	un2sm18797034pac.28.2015.08.18.09.50.08
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 18 Aug 2015 09:50:09 -0700 (PDT)
+From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 18 Aug 2015 22:19:53 +0530
+Message-Id: <1439916593-11597-1-git-send-email-jkrishnanjanappa@mvista.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: Re: [meta-java][PATCH 1/2] OpenJDK-8u: For x86 and arm
+Subject: [meta-oe][PATCH] pmtools: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,68 +46,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2015 15:02:39 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 18 Aug 2015 16:50:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Openjdk-8-jre is changed to openjdk-8u-jre (Openjdk-8 update)
-I will incorporate other comments and send out an updated patch.
+pmtools contains small collection of power management test and
+investigation tools,
+acpidump - dump a system’s ACPI tables to an ASCII file
+acpixtract - convert ASCII acpidump output to raw binary table
+madt -  parser for ACPI table
 
-Thanks,
-Vinay
+Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+---
+ .../recipes-devtools/pmtools/pmtools_20130209.bb   | 27 ++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/pmtools/pmtools_20130209.bb
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Maxin B. John
-Sent: Tuesday, August 18, 2015 6:12 AM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-java][PATCH 1/2] OpenJDK-8u: For x86 and arm
+diff --git a/meta-oe/recipes-devtools/pmtools/pmtools_20130209.bb b/meta-oe/recipes-devtools/pmtools/pmtools_20130209.bb
+new file mode 100644
+index 0000000..1d278fc
+--- /dev/null
++++ b/meta-oe/recipes-devtools/pmtools/pmtools_20130209.bb
+@@ -0,0 +1,27 @@
++DESCRIPTION = "This is a small collection of power management \
++               test and investigation tools"
++HOMEPAGE = "http://lesswatts.org/projects/acpi"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
++
++PR = "r0"
++
++SRC_URI = "https://github.com/anyc/${BPN}/archive/${PV}.zip"
++SRC_URI[md5sum] = "98b63903e61b1145b1b17bcfef6ac0b4"
++SRC_URI[sha256sum] = "a043a959d44d616f06dedd30e2045e8e95fed93580e2c146818b6ed3a4b6e448"
++
++COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
++
++do_configure[noexec] = "1"
++
++do_compile() {
++	oe_runmake
++}
++
++do_install() {
++	install -d ${D}${bindir} ${D}${docdir}
++	install -m 755 ${S}/acpidump/acpidump ${D}${bindir}
++	install -m 755 ${S}/acpixtract/acpixtract ${D}${bindir}
++	install -m 755 ${S}/madt/madt ${D}${bindir}
++	install -m 644 ${S}/README ${D}${docdir}
++}
+-- 
+1.9.1
 
-Hi,
-
-On Fri, Aug 14, 2015 at 12:35:03PM -0700, Vinay K. Awasthi wrote:
-> From: "Vinay K. Awasthi" <vinay.k.awasthi@intel.com>
->=20
-> OpenJDK-8 Update Build 40b27:
->=20
-> This package enables OpenJDK-8 update for x86 and arm in following vm con=
-figurations.
->=20
-> x86: hotspot VM
-> arm: interpreter mode (zero vm)
->=20
-> Openjdk-8u also supports compact profiles (see=20
-> http://openjdk.java.net/jeps/161 for more details). These compact profile=
-s can also be built by going over the comments.
->=20
-> oe_runmake profiles will build compact profile one two and three java=20
-> runtimes (jre) oe_runmake images profiles will build compact profile=20
-> JDKs
->=20
-> Signed-off-by: Vinay K. Awasthi <vinay.k.awasthi@intel.com>
-> ---
-
-#  bitbake java-test-image
-
-NOTE: Resolving any missing task queue dependencies
-ERROR: Nothing RPROVIDES 'openjdk-8-jre' (but /media/data/fb/majo/test/poky=
-/meta-java/recipes-images/images/java-test-image.bb
-RDEPENDS on or otherwise requires it)
-NOTE: Runtime target 'openjdk-8-jre' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['openjdk-8-jre']
-ERROR: Required build target 'java-test-image' has no buildable providers.
-Missing or unbuildable dependency chain was: ['java-test-image', 'openjdk-8=
--jre']
-
-Please fix this build error.
-
-Best Regards,
-Maxin
-
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
