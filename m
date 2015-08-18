@@ -1,24 +1,30 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D097F759CD
+Return-Path: <amit.k.chaudhuri@gmail.com>
+Received: from mail-oi0-f41.google.com (mail-oi0-f41.google.com
+	[209.85.218.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 731B460043
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2015 06:33:24 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7I6XPer024852
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 18 Aug 2015 08:34:44 +0000 (UTC)
+Received: by oiev193 with SMTP id v193so95472703oie.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2015 23:33:25 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.235.1; Mon, 17 Aug 2015 23:33:24 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 18 Aug 2015 14:29:39 +0800
-Message-ID: <1439879379-30452-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Tue, 18 Aug 2015 01:34:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=8XxcBvDOF+AcWZvgx5XIT1VXrgFLqkO4wRAtEvJqJ0Y=;
+	b=q7MoJJIpEu7EVrK0KhDrHth3bHvZJFHFTdS2gDrLv8oOeeK9TdzH38AUDtHCP6E6uQ
+	J5t/ayKpzpcs3NVaH+dO9aNPLnn+1uoq009t6ueqctxg5XgtLKirkPjiIKicyGkebtvZ
+	xMk2NsZbEYuDNsABOVWQ2QmX63TF47t4V6AXh1F8iI7KsW6TdyxegDrzLSRC3RSej0Nv
+	4jGGv4Lnd6dDo26rhEra2nlLjgOfyyfmyRgAKmdRbrbTVFaNlS8Z8y9lnlYpmHON3xJZ
+	2Z4i5mx5jKVzZ+RQAo07X8n1ddwUKe0pGGcjbqmXKt8z4bJlLcRjPB7gI8Y7T6oXhA3n
+	cOog==
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] gd: upgrade to 2.1.1
+X-Received: by 10.202.0.206 with SMTP id 197mr4729221oia.15.1439886884663;
+	Tue, 18 Aug 2015 01:34:44 -0700 (PDT)
+Received: by 10.76.36.2 with HTTP; Tue, 18 Aug 2015 01:34:44 -0700 (PDT)
+Date: Tue, 18 Aug 2015 09:34:44 +0100
+Message-ID: <CAH=VbNdYaP+Q7e0JduUG9i7i64hZjre3bPZLaWErhDXW1KHwTQ@mail.gmail.com>
+From: Amit Chaudhuri <amit.k.chaudhuri@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe] inconsistency between autotests and ssh support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,88 +38,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2015 06:33:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 18 Aug 2015 08:34:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Roy Li <rongqing.li@windriver.com>
+Hi,
 
-remove fix-the-subdir-objects-error.patch, a same fix has been merged
-into source code.
+I am experimenting with tools-profile and qemux86 and qemuarm. Autotest
+failures make me think there is an inconsistency in the recipes and
+possibly also somewhere in the docs.
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../gd/gd-2.1.0/fix-the-subdir-objects-error.patch | 39 ----------------------
- .../gd/{gd_2.1.0.bb => gd_2.1.1.bb}                |  5 ++-
- 2 files changed, 2 insertions(+), 42 deletions(-)
- delete mode 100644 meta-oe/recipes-support/gd/gd-2.1.0/fix-the-subdir-objects-error.patch
- rename meta-oe/recipes-support/gd/{gd_2.1.0.bb => gd_2.1.1.bb} (87%)
+I was under the impression (from docs?) that core-image-base would add ssh
+support so I switched from core-image-minimal. Whether I was looking in the
+wrong version of docs or not, the failure of the autotests makes me think there
+is a problem. Examining the ssh log listed in the test output I can see multiple
+"connection refused on port 22" messages" and there is clearly no ssh server
+in the image. The test output shows that some tests are indeed skipped because
+the system knows ssh is not present. But multiple other tests are not skipped.
 
-diff --git a/meta-oe/recipes-support/gd/gd-2.1.0/fix-the-subdir-objects-error.patch b/meta-oe/recipes-support/gd/gd-2.1.0/fix-the-subdir-objects-error.patch
-deleted file mode 100644
-index 02b1670..0000000
---- a/meta-oe/recipes-support/gd/gd-2.1.0/fix-the-subdir-objects-error.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From b1ae702a48888e2c3b0ebe0772a88b45a37b84f5 Mon Sep 17 00:00:00 2001
--From: Robert Yang <liezhi.yang@windriver.com>
--Date: Fri, 17 Jan 2014 01:58:05 -0500
--Subject: [PATCH] configure.ac: fix the subdir-objects error
--
--Fix this error:
--iautomake: warning: possible forward-incompatibility.
--automake: At least a source file is in a subdirectory, but the 'subdir-objects'
--automake: automake option hasn't been enabled.  For now, the corresponding output
--automake: object file(s) will be placed in the top-level directory.  However,
--automake: this behaviour will change in future Automake versions: they will
--automake: unconditionally cause object files to be placed in the same subdirectory
--automake: of the corresponding sources.
--automake: You are advised to start using 'subdir-objects' option throughout your
--automake: project, to avoid future incompatibilities.
--
--Upstream-Status: Pending
--
--Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-----
-- configure.ac |    2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/configure.ac b/configure.ac
--index 2f9f744..438e08b 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -45,7 +45,7 @@ AC_SUBST(GDLIB_AGE)
-- FEATURES="GD_GIF GD_GIFANIM GD_OPENPOLYGON"
-- AC_SUBST(FEATURES)
-- 
---AM_INIT_AUTOMAKE([foreign dist-bzip2 dist-xz -Wall -Werror])
--+AM_INIT_AUTOMAKE([foreign dist-bzip2 dist-xz -Wall -Werror subdir-objects])
-- AC_CONFIG_HEADERS([src/config.h:src/config.hin])
-- 
-- dnl newer automake wants this, but we still want to work with older
---- 
--1.7.10.4
--
-diff --git a/meta-oe/recipes-support/gd/gd_2.1.0.bb b/meta-oe/recipes-support/gd/gd_2.1.1.bb
-similarity index 87%
-rename from meta-oe/recipes-support/gd/gd_2.1.0.bb
-rename to meta-oe/recipes-support/gd/gd_2.1.1.bb
-index f03b9b0..0731902 100644
---- a/meta-oe/recipes-support/gd/gd_2.1.0.bb
-+++ b/meta-oe/recipes-support/gd/gd_2.1.1.bb
-@@ -13,10 +13,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c97638cafd3581eb87abd37332137669"
- DEPENDS = "freetype libpng jpeg zlib tiff libvpx"
- 
- SRC_URI = "https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${PV}.tar.bz2 \
--           file://fix-the-subdir-objects-error.patch \
- "
--SRC_URI[md5sum] = "5a1d5bab3a4a41d9f111bcceee4ad25b"
--SRC_URI[sha256sum] = "f3e1bc472bd81ee976a739436659fe752a14727a964c64530fde68531ddeee91"
-+SRC_URI[md5sum] = "d3f1a992ac9c550ebc6da89c147f89af"
-+SRC_URI[sha256sum] = "895ea9c6fcab187b0a908ae3e9e6b06423756f8a643d362349b0caab4014bd0d"
- 
- S = "${WORKDIR}/libgd-${PV}"
- 
--- 
-1.9.1
+Same experience on both qemuarm and qemux86.
 
+After greping to find ssh-server in a .bb file I switched again to
+core-image-full-cmdline and am now able to ssh in. I still get an error relating
+to something else, but ssh works fine.
+
+With fido version:
+
+meta              = "fido:6546771a502a09c63e33679be8784818be0ef93b"
+
+The main changes I have made are to local.conf where I have:
+
+MACHINE ??= "qemuarm"
+....
+EXTRA_IMAGE_FEATURES = "dbg-pkgs tools-profile tools-debug debug-tweaks"
+....
+TEST_IMAGE = "1"
+....
+#
+# Enable build history
+#
+INHERIT += "buildhistory"
+BUILDHISTORY_COMMIT = "1"
+
+
+Regards,
+
+
+Amit
 
