@@ -1,38 +1,27 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 13F9560557
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1ED2660557
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2015 03:23:47 +0000 (UTC)
-Received: by iodt126 with SMTP id t126so175217730iod.2
+	Tue, 18 Aug 2015 03:33:21 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t7I3XDTg018769
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2015 20:23:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:subject:date:message-id;
-	bh=Ha9vbizttI/2P079r6U/8UhZH/Ov1pGioGLjs72A6CQ=;
-	b=hjSmCu+r/O82yUAkugwVUoozDJQazcz5+ZIMiw3jOLnW0h9p6Ll6mCLQ3tFo+WVTmS
-	m2Bs5tGs2KUkWUJtW/ugaHn85grl3ajJz5qf6xjvkmivY5BIGqCDwQtjoY94m9QZowvu
-	BJlNIWUPE5caH7t6BS8fnR4m6shENpB1nQT+p4pfrjifkaHpBPC00NkkCiqwguhDbpxD
-	GVZaxJAGsWqawBm6o86u1ySSGM+16aGhG6bPEdeMW9dkYNzgS88X0+N8n6cibyWVyMnJ
-	9cbG3/CceKRqZ5X4w9Qsn4DFHik7+LBkn/aB8ig9vL8xQPbhqbyKgBTS4AM1IMoqZ21h
-	i2hA==
-X-Gm-Message-State: ALoCoQngdfkhdF5+P6EK8EOdEd9uuh/NoTqA0cTyxfPGA4rS3wSlpYUbYBWjhelG1LBUn52arYmE
-X-Received: by 10.107.12.163 with SMTP id 35mr4069280iom.78.1439868227858;
-	Mon, 17 Aug 2015 20:23:47 -0700 (PDT)
-Received: from mir.deserted.net ([23.233.31.74])
-	by smtp.gmail.com with ESMTPSA id
-	p79sm14372688iop.15.2015.08.17.20.23.46
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 17 Aug 2015 20:23:47 -0700 (PDT)
-Sender: Joe MacDonald <joe@deserted.net>
-From: Joe MacDonald <joe_macdonald@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Aug 2015 23:24:08 -0400
-Message-Id: <1439868248-25769-1-git-send-email-joe_macdonald@mentor.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] netcf: support multilib builds
+	Mon, 17 Aug 2015 20:33:16 -0700 (PDT)
+Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Mon, 17 Aug 2015 20:33:12 -0700
+Message-ID: <55D2A776.4020701@windriver.com>
+Date: Tue, 18 Aug 2015 11:33:10 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1439868248-25769-1-git-send-email-joe_macdonald@mentor.com>
+In-Reply-To: <1439868248-25769-1-git-send-email-joe_macdonald@mentor.com>
+Subject: Re: [meta-networking][PATCH] netcf: support multilib builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,51 +35,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2015 03:23:51 -0000
+X-List-Received-Date: Tue, 18 Aug 2015 03:33:22 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-When doing a multilib build, /usr/lib is still created but not collected
-into FILES_${PN} by default, resulting in a QA error.  Adding both
-${libdir} and ${nonarch_libdir} catches all scenarios.
 
-It also turns out that the previous do_install_append would throw an error
-in a multilib build since systemd always installs to .../lib/... but
-${libdir] would point at .../lib64/...
 
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
----
- meta-networking/recipes-support/netcf/netcf_git.bb | 14 ++++++++++++--
- 1 file changed, 12 insertions(+), 2 deletions(-)
+On 2015年08月18日 11:24, Joe MacDonald wrote:
+> When doing a multilib build, /usr/lib is still created but not collected
+> into FILES_${PN} by default, resulting in a QA error.  Adding both
+> ${libdir} and ${nonarch_libdir} catches all scenarios.
+>
+> It also turns out that the previous do_install_append would throw an error
+> in a multilib build since systemd always installs to .../lib/... but
+> ${libdir] would point at .../lib64/...
+>
+> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+> ---
+>   meta-networking/recipes-support/netcf/netcf_git.bb | 14 ++++++++++++--
+>   1 file changed, 12 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-networking/recipes-support/netcf/netcf_git.bb b/meta-networking/recipes-support/netcf/netcf_git.bb
+> index d47bb3b..8a8963e 100644
+> --- a/meta-networking/recipes-support/netcf/netcf_git.bb
+> +++ b/meta-networking/recipes-support/netcf/netcf_git.bb
+> @@ -32,12 +32,22 @@ do_configure_prepend() {
+>   do_install_append() {
+>       if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+>          install -d ${D}${systemd_unitdir}/system
+> -       mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+> -       rm -rf ${D}${libdir}/systemd/
+> +       if [ -d "${D}${libdir}/systemd/system" ]; then
+> +           mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+> +           rm -rf ${D}${libdir}/systemd/
+> +       else
+> +           mv ${D}${nonarch_libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+> +           rm -rf ${D}${nonarch_libdir}/systemd/
+> +       fi
+>       else
+>          mv ${D}${sysconfdir}/rc.d/init.d/ ${D}${sysconfdir}
+>          rm -rf ${D}${sysconfdir}/rc.d/
+>       fi
+>   }
+>
+> +FILES_${PN} += " \
+> +        ${libdir} \
+> +        ${nonarch_libdir} \
+> +        "
+> +
 
-diff --git a/meta-networking/recipes-support/netcf/netcf_git.bb b/meta-networking/recipes-support/netcf/netcf_git.bb
-index d47bb3b..8a8963e 100644
---- a/meta-networking/recipes-support/netcf/netcf_git.bb
-+++ b/meta-networking/recipes-support/netcf/netcf_git.bb
-@@ -32,12 +32,22 @@ do_configure_prepend() {
- do_install_append() {
-     if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-        install -d ${D}${systemd_unitdir}/system
--       mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
--       rm -rf ${D}${libdir}/systemd/
-+       if [ -d "${D}${libdir}/systemd/system" ]; then
-+           mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
-+           rm -rf ${D}${libdir}/systemd/
-+       else
-+           mv ${D}${nonarch_libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
-+           rm -rf ${D}${nonarch_libdir}/systemd/
-+       fi
-     else
-        mv ${D}${sysconfdir}/rc.d/init.d/ ${D}${sysconfdir}
-        rm -rf ${D}${sysconfdir}/rc.d/
-     fi
- }
- 
-+FILES_${PN} += " \
-+        ${libdir} \
-+        ${nonarch_libdir} \
-+        "
-+
- SYSTEMD_SERVICE_${PN} = "netcf-transaction.service"
+a similar fix has been submitted,
+
+【oe] [PATCH][meta-networking] netcf: align the systemd file path with 
+Makefile
+
+
+－Roy
+
+>   SYSTEMD_SERVICE_${PN} = "netcf-transaction.service"
+>
+
 -- 
-1.9.1
-
+Best Reagrds,
+Roy | RongQing Li
 
