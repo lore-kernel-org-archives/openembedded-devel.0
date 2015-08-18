@@ -1,30 +1,38 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6029C60557
+Return-Path: <joe@deserted.net>
+Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 13F9560557
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2015 01:49:33 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7I1nX2u019818
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 17 Aug 2015 18:49:34 -0700 (PDT)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Mon, 17 Aug 2015 18:49:33 -0700
-To: Joe MacDonald <Joe_MacDonald@mentor.com>, Randy MacLeod
-	<randy.macleod@windriver.com>
-References: <1439345155-27884-1-git-send-email-kai.kang@windriver.com>
-	<55D179C1.5010402@windriver.com> <20150817150349.GD8518@mentor.com>
-	<55D24E83.7080508@windriver.com> <20150818012701.GA24907@mentor.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <55D28F32.5000605@windriver.com>
-Date: Tue, 18 Aug 2015 09:49:38 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
-MIME-Version: 1.0
-In-Reply-To: <20150818012701.GA24907@mentor.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] inetutils: 1.9.2 -> 1.9.4
+	Tue, 18 Aug 2015 03:23:47 +0000 (UTC)
+Received: by iodt126 with SMTP id t126so175217730iod.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Aug 2015 20:23:48 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:from:to:subject:date:message-id;
+	bh=Ha9vbizttI/2P079r6U/8UhZH/Ov1pGioGLjs72A6CQ=;
+	b=hjSmCu+r/O82yUAkugwVUoozDJQazcz5+ZIMiw3jOLnW0h9p6Ll6mCLQ3tFo+WVTmS
+	m2Bs5tGs2KUkWUJtW/ugaHn85grl3ajJz5qf6xjvkmivY5BIGqCDwQtjoY94m9QZowvu
+	BJlNIWUPE5caH7t6BS8fnR4m6shENpB1nQT+p4pfrjifkaHpBPC00NkkCiqwguhDbpxD
+	GVZaxJAGsWqawBm6o86u1ySSGM+16aGhG6bPEdeMW9dkYNzgS88X0+N8n6cibyWVyMnJ
+	9cbG3/CceKRqZ5X4w9Qsn4DFHik7+LBkn/aB8ig9vL8xQPbhqbyKgBTS4AM1IMoqZ21h
+	i2hA==
+X-Gm-Message-State: ALoCoQngdfkhdF5+P6EK8EOdEd9uuh/NoTqA0cTyxfPGA4rS3wSlpYUbYBWjhelG1LBUn52arYmE
+X-Received: by 10.107.12.163 with SMTP id 35mr4069280iom.78.1439868227858;
+	Mon, 17 Aug 2015 20:23:47 -0700 (PDT)
+Received: from mir.deserted.net ([23.233.31.74])
+	by smtp.gmail.com with ESMTPSA id
+	p79sm14372688iop.15.2015.08.17.20.23.46
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 17 Aug 2015 20:23:47 -0700 (PDT)
+Sender: Joe MacDonald <joe@deserted.net>
+From: Joe MacDonald <joe_macdonald@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 17 Aug 2015 23:24:08 -0400
+Message-Id: <1439868248-25769-1-git-send-email-joe_macdonald@mentor.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] netcf: support multilib builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,210 +46,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2015 01:49:39 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 18 Aug 2015 03:23:51 -0000
 
-On 2015年08月18日 09:27, Joe MacDonald wrote:
-> [Re: [oe] [meta-networking][PATCH] inetutils: 1.9.2 -> 1.9.4] On 15.08.17 (Mon 17:13) Randy MacLeod wrote:
->
->> On 2015-08-17 11:03 AM, Joe MacDonald wrote:
->>> [Re: [oe] [meta-networking][PATCH] inetutils: 1.9.2 -> 1.9.4] On 15.08.17 (Mon 14:05) Kang Kai wrote:
->>>
->>>> On 2015年08月12日 10:05, kai.kang@windriver.com wrote:
->>>>> From: Kai Kang <kai.kang@windriver.com>
->>>>>
->>>>> Upgrade inetutils from 1.9.2 to 1.9.4.
->>>> Ping?
->>> Since I'm seeing a lot of these lately I thought I might explain my
->>> current workflow.
->> Thanks for the background.
->>
->>> For build or security issues, I'm trying to stay on
->>> top of them and be as responsive as possible,
->> okay.
->>
->>> but for general recipe
->>> updates, particularly ones like this where the log shows essentially
->>> nothing critical has changed, I'm holding off until at least my
->>> autobuilders get to chew on them and reassure me we're not bringing in
->>> new QA (or worse) issues,
->> I'd hope that means a day or two and not a week, right?
->>
->>> and ideally I prefer to see a pass in one of
->>> Martin's "state of the world" builds.
->> I assumed that the state-of-the-world builds would be for master
->> and the release branches but no:
->>     http://www.openembedded.org/wiki/Bitbake_World_Status_Setup
->>
->>     "It's not using "master" branches,
->>       but "jansa/master" branches in ..."
->>
->> They appear to happen every day:
->>     http://logs.nslu2-linux.org/buildlogs/oe/world/
->> And the stats are published once or twice a week, most of the time...
->>     http://www.openembedded.org/wiki/Bitbake_World_Status
->>
->> Hmmm, would newer build systems be useful:
->>     "Usually I build for 3 MACHINE qemuarm, qemux86, qemux86-64.
->>      Each MACHINE takes about 20-24hours so sometimes there is
->>      bigger delay."
->>
->>> I also try to give everyone on
->>> the list a reasonable amount of time to respond to anything as well, but
->>> that's not a gating factor.
->> What's a reasonable time? ~ 1-2 days?
->>
->> Just trying ensure that our ping time is reasonable. :)
-> A week or so.  What Khem said.
->
-> OTOH, write a commit log with words like "fixes several CVEs" and list
-> them if you want to have a good chance of a faster turnaround (see
-> Armin's package update from earlier today, that gets attention).
->
-> Similarly, "fixes a build failure for all architectures on multilib"
-> (see my patches coming out soon) will also tend to get processed faster.
-> Often the build fixes go straight into master since they resolve issues
-> with the world builds and Martin or I will merge them to un-break stuff
-> for everyone.
->
-> I don't intend to single anyone out, and I've said many times that I
-> appreciate a ping, but thought it was worth being transparent since this
-> one came in less than a week after the initial patch came out and the
-> commit log doesn't communicate any urgency.  :-)
+When doing a multilib build, /usr/lib is still created but not collected
+into FILES_${PN} by default, resulting in a QA error.  Adding both
+${libdir} and ${nonarch_libdir} catches all scenarios.
 
-Got it. Thanks for your comment.
+It also turns out that the previous do_install_append would throw an error
+in a multilib build since systemd always installs to .../lib/... but
+${libdir] would point at .../lib64/...
 
---Kai
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+---
+ meta-networking/recipes-support/netcf/netcf_git.bb | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
->
-> -J.
->
->> ../Randy
->>> Just FYI.
->>>
->>> -J.
->>>
->>>>> * add homepage
->>>>> * update inetutils/version.patch
->>>>>
->>>>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->>>>> ---
->>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/fix-disable-ipv6.patch  | 0
->>>>>   ...tils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch | 0
->>>>>   .../{inetutils-1.9.2 => inetutils}/inetutils-1.8-0003-wchar.patch    | 0
->>>>>   .../inetutils-1.9-PATH_PROCNET_DEV.patch                             | 0
->>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/rexec.xinetd.inetutils  | 0
->>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/rlogin.xinetd.inetutils | 0
->>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/rsh.xinetd.inetutils    | 0
->>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/telnet.xinetd.inetutils | 0
->>>>>   .../telnetd-Fix-deadlock-on-cleanup.patch                            | 0
->>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/tftpd.xinetd.inetutils  | 0
->>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/version.patch           | 2 +-
->>>>>   .../inetutils/{inetutils_1.9.2.bb => inetutils_1.9.4.bb}             | 5 +++--
->>>>>   12 files changed, 4 insertions(+), 3 deletions(-)
->>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/fix-disable-ipv6.patch (100%)
->>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch (100%)
->>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/inetutils-1.8-0003-wchar.patch (100%)
->>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/inetutils-1.9-PATH_PROCNET_DEV.patch (100%)
->>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/rexec.xinetd.inetutils (100%)
->>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/rlogin.xinetd.inetutils (100%)
->>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/rsh.xinetd.inetutils (100%)
->>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/telnet.xinetd.inetutils (100%)
->>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/telnetd-Fix-deadlock-on-cleanup.patch (100%)
->>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/tftpd.xinetd.inetutils (100%)
->>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/version.patch (93%)
->>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils_1.9.2.bb => inetutils_1.9.4.bb} (97%)
->>>>>
->>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/fix-disable-ipv6.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/fix-disable-ipv6.patch
->>>>> similarity index 100%
->>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/fix-disable-ipv6.patch
->>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/fix-disable-ipv6.patch
->>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
->>>>> similarity index 100%
->>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
->>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
->>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0003-wchar.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-0003-wchar.patch
->>>>> similarity index 100%
->>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0003-wchar.patch
->>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-0003-wchar.patch
->>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.9-PATH_PROCNET_DEV.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.9-PATH_PROCNET_DEV.patch
->>>>> similarity index 100%
->>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.9-PATH_PROCNET_DEV.patch
->>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.9-PATH_PROCNET_DEV.patch
->>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/rexec.xinetd.inetutils
->>>>> similarity index 100%
->>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils
->>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/rexec.xinetd.inetutils
->>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/rlogin.xinetd.inetutils
->>>>> similarity index 100%
->>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils
->>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/rlogin.xinetd.inetutils
->>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/rsh.xinetd.inetutils
->>>>> similarity index 100%
->>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils
->>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/rsh.xinetd.inetutils
->>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnet.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/telnet.xinetd.inetutils
->>>>> similarity index 100%
->>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnet.xinetd.inetutils
->>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/telnet.xinetd.inetutils
->>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnetd-Fix-deadlock-on-cleanup.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/telnetd-Fix-deadlock-on-cleanup.patch
->>>>> similarity index 100%
->>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnetd-Fix-deadlock-on-cleanup.patch
->>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/telnetd-Fix-deadlock-on-cleanup.patch
->>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/tftpd.xinetd.inetutils
->>>>> similarity index 100%
->>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils
->>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/tftpd.xinetd.inetutils
->>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/version.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/version.patch
->>>>> similarity index 93%
->>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/version.patch
->>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/version.patch
->>>>> index 1caa2d3..532a0e5 100644
->>>>> --- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/version.patch
->>>>> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils/version.patch
->>>>> @@ -11,7 +11,7 @@ Signed-off-by: Chunrong Guo <b40290@freescale.com>
->>>>>   -AC_INIT([GNU inetutils],
->>>>>   - m4_esyscmd([build-aux/git-version-gen .tarball-version 's/inetutils-/v/;s/_/./g']),
->>>>> -+AC_INIT([GNU inetutils],[1.9.2],
->>>>> ++AC_INIT([GNU inetutils],[1.9.4],
->>>>>     [bug-inetutils@gnu.org])
->>>>>    AC_CONFIG_SRCDIR([src/inetd.c])
->>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
->>>>> similarity index 97%
->>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
->>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
->>>>> index 6209272..cdcba83 100644
->>>>> --- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
->>>>> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
->>>>> @@ -2,6 +2,7 @@ DESCRIPTION = "The GNU inetutils are a collection of common \
->>>>>   networking utilities and servers including ftp, ftpd, rcp, \
->>>>>   rexec, rlogin, rlogind, rsh, rshd, syslog, syslogd, talk, \
->>>>>   talkd, telnet, telnetd, tftp, tftpd, and uucpd."
->>>>> +HOMEPAGE = "http://www.gnu.org/software/inetutils"
->>>>>   SECTION = "net"
->>>>>   DEPENDS = "ncurses netbase readline"
->>>>>   LICENSE = "GPLv3"
->>>>> @@ -21,8 +22,8 @@ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
->>>>>              file://telnetd-Fix-deadlock-on-cleanup.patch \
->>>>>   "
->>>>> -SRC_URI[md5sum] = "aa1a9a132259db83e66c1f3265065ba2"
->>>>> -SRC_URI[sha256sum] = "0423ea40a160cd4630f817e247df5c08ecc625378d2bb56a0509117a36a89913"
->>>>> +SRC_URI[md5sum] = "04852c26c47cc8c6b825f2b74f191f52"
->>>>> +SRC_URI[sha256sum] = "be8f75eff936b8e41b112462db51adf689715658a1b09e0d6b05d11ec92cc616"
->>>>>   inherit autotools gettext update-alternatives texinfo
->>>>
->>>> --
->>>> Regards,
->>>> Neil | Kai Kang
->>>>
->>>>
->>>>
->>
-
-
+diff --git a/meta-networking/recipes-support/netcf/netcf_git.bb b/meta-networking/recipes-support/netcf/netcf_git.bb
+index d47bb3b..8a8963e 100644
+--- a/meta-networking/recipes-support/netcf/netcf_git.bb
++++ b/meta-networking/recipes-support/netcf/netcf_git.bb
+@@ -32,12 +32,22 @@ do_configure_prepend() {
+ do_install_append() {
+     if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${systemd_unitdir}/system
+-       mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+-       rm -rf ${D}${libdir}/systemd/
++       if [ -d "${D}${libdir}/systemd/system" ]; then
++           mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
++           rm -rf ${D}${libdir}/systemd/
++       else
++           mv ${D}${nonarch_libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
++           rm -rf ${D}${nonarch_libdir}/systemd/
++       fi
+     else
+        mv ${D}${sysconfdir}/rc.d/init.d/ ${D}${sysconfdir}
+        rm -rf ${D}${sysconfdir}/rc.d/
+     fi
+ }
+ 
++FILES_${PN} += " \
++        ${libdir} \
++        ${nonarch_libdir} \
++        "
++
+ SYSTEMD_SERVICE_${PN} = "netcf-transaction.service"
 -- 
-Regards,
-Neil | Kai Kang
+1.9.1
 
 
