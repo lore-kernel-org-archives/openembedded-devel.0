@@ -1,27 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1ED2660557
+	by mail.openembedded.org (Postfix) with ESMTP id 8169A60043
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2015 03:33:21 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t7I3XDTg018769
+	Tue, 18 Aug 2015 06:33:08 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t7I6X8LI020129
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2015 20:33:16 -0700 (PDT)
-Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Mon, 17 Aug 2015 20:33:12 -0700
-Message-ID: <55D2A776.4020701@windriver.com>
-Date: Tue, 18 Aug 2015 11:33:10 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
-MIME-Version: 1.0
+	Mon, 17 Aug 2015 23:33:08 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Mon, 17 Aug 2015 23:33:07 -0700
+From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1439868248-25769-1-git-send-email-joe_macdonald@mentor.com>
-In-Reply-To: <1439868248-25769-1-git-send-email-joe_macdonald@mentor.com>
-Subject: Re: [meta-networking][PATCH] netcf: support multilib builds
+Date: Tue, 18 Aug 2015 14:29:22 +0800
+Message-ID: <1439879362-27029-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH][meta-oe] cryptsetup: upgrade 1.6.6 -> 1.6.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,67 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2015 03:33:22 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 18 Aug 2015 06:33:15 -0000
+Content-Type: text/plain
 
+From: Roy Li <rongqing.li@windriver.com>
 
+1.6.7 is a bugfix release.
 
-On 2015年08月18日 11:24, Joe MacDonald wrote:
-> When doing a multilib build, /usr/lib is still created but not collected
-> into FILES_${PN} by default, resulting in a QA error.  Adding both
-> ${libdir} and ${nonarch_libdir} catches all scenarios.
->
-> It also turns out that the previous do_install_append would throw an error
-> in a multilib build since systemd always installs to .../lib/... but
-> ${libdir] would point at .../lib64/...
->
-> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-> ---
->   meta-networking/recipes-support/netcf/netcf_git.bb | 14 ++++++++++++--
->   1 file changed, 12 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-networking/recipes-support/netcf/netcf_git.bb b/meta-networking/recipes-support/netcf/netcf_git.bb
-> index d47bb3b..8a8963e 100644
-> --- a/meta-networking/recipes-support/netcf/netcf_git.bb
-> +++ b/meta-networking/recipes-support/netcf/netcf_git.bb
-> @@ -32,12 +32,22 @@ do_configure_prepend() {
->   do_install_append() {
->       if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
->          install -d ${D}${systemd_unitdir}/system
-> -       mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
-> -       rm -rf ${D}${libdir}/systemd/
-> +       if [ -d "${D}${libdir}/systemd/system" ]; then
-> +           mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
-> +           rm -rf ${D}${libdir}/systemd/
-> +       else
-> +           mv ${D}${nonarch_libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
-> +           rm -rf ${D}${nonarch_libdir}/systemd/
-> +       fi
->       else
->          mv ${D}${sysconfdir}/rc.d/init.d/ ${D}${sysconfdir}
->          rm -rf ${D}${sysconfdir}/rc.d/
->       fi
->   }
->
-> +FILES_${PN} += " \
-> +        ${libdir} \
-> +        ${nonarch_libdir} \
-> +        "
-> +
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../cryptsetup/{cryptsetup_1.6.6.bb => cryptsetup_1.6.7.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/cryptsetup/{cryptsetup_1.6.6.bb => cryptsetup_1.6.7.bb} (89%)
 
-a similar fix has been submitted,
-
-【oe] [PATCH][meta-networking] netcf: align the systemd file path with 
-Makefile
-
-
-－Roy
-
->   SYSTEMD_SERVICE_${PN} = "netcf-transaction.service"
->
-
+diff --git a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.6.bb b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.7.bb
+similarity index 89%
+rename from meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.6.bb
+rename to meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.7.bb
+index d84ad2f..939ee35 100644
+--- a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.6.bb
++++ b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.7.bb
+@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
+ DEPENDS = "util-linux lvm2 popt libgcrypt"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v1.6/${BP}.tar.xz"
+-SRC_URI[md5sum] = "179c0781de59838a4e39f61b2df5ea48"
+-SRC_URI[sha256sum] = "2d2ce28e4e1137dd599d87884b62ef6dbf14fd7848b2a2bf7d61cf125fbd8e6f"
++SRC_URI[md5sum] = "918406eb5d2e2f5a7348c432ea9b1473"
++SRC_URI[sha256sum] = "c23c24c8d662032da8650c1c84985221be8bbedf4737c1540bba7e4517dfe820"
+ 
+ inherit autotools gettext pkgconfig
+ 
 -- 
-Best Reagrds,
-Roy | RongQing Li
+1.9.1
+
 
