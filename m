@@ -1,41 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 71A1860043
+Return-Path: <mario.goulart@gmail.com>
+Received: from mail-qg0-f48.google.com (mail-qg0-f48.google.com
+	[209.85.192.48])
+	by mail.openembedded.org (Postfix) with ESMTP id AB48F60043
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2015 17:24:42 +0000 (UTC)
-Received: by pawq9 with SMTP id q9so39906281paw.3
+	Tue, 18 Aug 2015 20:09:26 +0000 (UTC)
+Received: by qgeb6 with SMTP id b6so7882199qge.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2015 10:24:43 -0700 (PDT)
+	Tue, 18 Aug 2015 13:09:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=fkWl2ZJ8j840KSAVAkjfI9L2jYnSb1hqCyAN8oQ3m8A=;
-	b=KXF5D+Z/US0pIgkLDS5IBWVfBk8tPPpeUDjW9c4djFub0U/o1j84Xd7mT4aHu5t+28
-	cvvePxTiUhkK+Mr3Ffd/CJ/fiwcRtoRmyNu0ff2zs/s/l5J4yKvuNUIEOz+PZkjIB0Ut
-	wRjOMH931SsK5+IiAFjO7T1kGdeM7B7/0q4vxAIAMgNl/IyiKmhrGIw9Ai/0vBXWlyFC
-	TLCKp5cCjkEz7VpeAxIE1+koXhbUOdRVbafMOTpAb0qWsJjYLS4V9aFg2xRu76HomRWK
-	Q3ptfCsqArSEVT9W/W57cTOhbyw4cGQeMwAmY6HwLFh1n4m05aLefV2wnGc+9pTbEE8C
-	E3Xg==
-X-Received: by 10.68.113.37 with SMTP id iv5mr15528821pbb.104.1439918683021;
-	Tue, 18 Aug 2015 10:24:43 -0700 (PDT)
-Received: from ?IPv6:2601:646:8601:4580:e99e:512b:4006:2df1?
-	([2601:646:8601:4580:e99e:512b:4006:2df1])
+	h=sender:from:to:cc:subject:date:message-id:organization;
+	bh=vYzpwz1lPy8vxyvzRcuHJPvudvHWz9DJUlhW4vsQFCQ=;
+	b=nlJoIOWVC+NTjfiABE5p/gA6DEdoPihadUZDEioQHpJI+H+2jX4oKlEX2F8FhPPlSw
+	KvT3C2Lsnlob75XMNAQQ+rdO7qV3R2D3WRB1pkQN4WzWwArGP7L5UPG0w7OWnhly5dXe
+	fE+9XYywj6Cw80J9Z+KnWbpMilPL386IcKdwJpTBPdKCnWoPjptB4Z4WuMaamm4bz873
+	dcAUnUOOcahuhIcKSWZbpbGD4+zA44DPqfZNioptei7NFhJ5O+zP+RdXWMJxq6ii5/Ga
+	OwFdEYCYSjftsngIMm05cjeLiTvw/1hL317RZwIyKzzSKQ2Pr+TvV89mGSmTwUaFfxBN
+	Iq2w==
+X-Received: by 10.140.93.132 with SMTP id d4mr15796906qge.58.1439928566387;
+	Tue, 18 Aug 2015 13:09:26 -0700 (PDT)
+Received: from centrium.lab.ossystems.com.br ([177.100.224.148])
 	by smtp.gmail.com with ESMTPSA id
-	vx9sm16694041pab.21.2015.08.18.10.24.38
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 18 Aug 2015 10:24:42 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-X-Pgp-Agent: GPGMail 2.5.1
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1439916593-11597-1-git-send-email-jkrishnanjanappa@mvista.com>
-Date: Tue, 18 Aug 2015 10:24:28 -0700
-Message-Id: <868C0C7A-10F1-48D7-81EB-5429043F1295@gmail.com>
-References: <1439916593-11597-1-git-send-email-jkrishnanjanappa@mvista.com>
+	f106sm10753656qgd.30.2015.08.18.13.09.24
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 18 Aug 2015 13:09:25 -0700 (PDT)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.2104)
-Subject: Re: [meta-oe][PATCH] pmtools: add new recipe
+Date: Tue, 18 Aug 2015 17:14:29 -0300
+Message-Id: <1439928871-17797-1-git-send-email-mario@ossystems.com.br>
+X-Mailer: git-send-email 2.1.4
+Organization: O.S. Systems Software LTDA.
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-java][PATCH 1/3] Don't depend on a hardcoded compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,103 +45,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2015 17:24:45 -0000
-X-Groupsio-MsgNum: 56777
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_85317997-FBB4-452B-9AE6-FEFC0310B868";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 18 Aug 2015 20:09:26 -0000
 
---Apple-Mail=_85317997-FBB4-452B-9AE6-FEFC0310B868
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+The recipes below depended on a hardcoded native compile
+(ecj-initial-native).  Since we may use another native compiler to
+build them, we set the dependency in virtual/javac-native instead.
 
+* cacao
+* classpath-native
+* jamvm
 
-> On Aug 18, 2015, at 9:49 AM, Jagadeesh Krishnanjanappa =
-<jkrishnanjanappa@mvista.com> wrote:
->=20
-> pmtools contains small collection of power management test and
-> investigation tools,
-> acpidump - dump a system=E2=80=99s ACPI tables to an ASCII file
-> acpixtract - convert ASCII acpidump output to raw binary table
-> madt -  parser for ACPI table
->=20
-> Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
-> ---
-> .../recipes-devtools/pmtools/pmtools_20130209.bb   | 27 =
-++++++++++++++++++++++
-> 1 file changed, 27 insertions(+)
-> create mode 100644 =
-meta-oe/recipes-devtools/pmtools/pmtools_20130209.bb
->=20
-> diff --git a/meta-oe/recipes-devtools/pmtools/pmtools_20130209.bb =
-b/meta-oe/recipes-devtools/pmtools/pmtools_20130209.bb
-> new file mode 100644
-> index 0000000..1d278fc
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/pmtools/pmtools_20130209.bb
-> @@ -0,0 +1,27 @@
-> +DESCRIPTION =3D "This is a small collection of power management \
-> +               test and investigation tools"
-> +HOMEPAGE =3D "http://lesswatts.org/projects/acpi"
-> +LICENSE =3D "GPLv2+"
-> +LIC_FILES_CHKSUM =3D =
-"file://COPYING;md5=3D0636e73ff0215e8d672dc4c32c317bb3"
-> +
-> +PR =3D =E2=80=9Cr0"
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+---
+ recipes-core/cacao/cacao_1.6.1.bb               | 2 +-
+ recipes-core/classpath/classpath-native_0.99.bb | 2 +-
+ recipes-core/jamvm/jamvm.inc                    | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-punt it.
-
-> +
-> +SRC_URI =3D "https://github.com/anyc/${BPN}/archive/${PV}.zip=E2=80=9D
-
-are they consistent now ? github could regenerate archives and =
-invalidate the checksums.
-may be it would be better to use git fetcher
-
-> +SRC_URI[md5sum] =3D "98b63903e61b1145b1b17bcfef6ac0b4"
-> +SRC_URI[sha256sum] =3D =
-"a043a959d44d616f06dedd30e2045e8e95fed93580e2c146818b6ed3a4b6e448"
-> +
-> +COMPATIBLE_HOST =3D "(i.86|x86_64).*-linux"
-> +
-> +do_configure[noexec] =3D "1"
-> +
-> +do_compile() {
-> +	oe_runmake
-> +}
-> +
-> +do_install() {
-> +	install -d ${D}${bindir} ${D}${docdir}
-> +	install -m 755 ${S}/acpidump/acpidump ${D}${bindir}
-> +	install -m 755 ${S}/acpixtract/acpixtract ${D}${bindir}
-> +	install -m 755 ${S}/madt/madt ${D}${bindir}
-> +	install -m 644 ${S}/README ${D}${docdir}
-> +}
-> --
-> 1.9.1
->=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/recipes-core/cacao/cacao_1.6.1.bb b/recipes-core/cacao/cacao_1.6.1.bb
+index 65aaf93..14ff019 100644
+--- a/recipes-core/cacao/cacao_1.6.1.bb
++++ b/recipes-core/cacao/cacao_1.6.1.bb
+@@ -4,7 +4,7 @@ LICENSE  = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ SECTION  = "interpreters"
+ 
+-DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native bdwgc-native"
++DEPENDS_class-native = "zlib-native libtool-native virtual/javac-native fastjar-native classpath-native bdwgc-native"
+ PROVIDES_class-native = "virtual/java-native"
+ 
+ DEPENDS = "zlib libtool classpath virtual/javac-native bdwgc"
+diff --git a/recipes-core/classpath/classpath-native_0.99.bb b/recipes-core/classpath/classpath-native_0.99.bb
+index 02951b9..cf297d9 100644
+--- a/recipes-core/classpath/classpath-native_0.99.bb
++++ b/recipes-core/classpath/classpath-native_0.99.bb
+@@ -1,7 +1,7 @@
+ require classpath-native.inc
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=af0004801732bc4b20d90f351cf80510"
+-DEPENDS += "ecj-initial-native"
++DEPENDS += "virtual/javac-native"
+ 
+ PR = "${INC_PR}.0"
+ 
+diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
+index 5893cbc..bed1c5d 100644
+--- a/recipes-core/jamvm/jamvm.inc
++++ b/recipes-core/jamvm/jamvm.inc
+@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ 
+ DEPENDS = "zlib classpath virtual/javac-native libffi"
+-DEPENDS_virtclass-native = "zlib-native classpath-native ecj-initial-native libffi-native"
++DEPENDS_virtclass-native = "zlib-native classpath-native virtual/javac-native libffi-native"
+ 
+ RDEPENDS_${PN} = "classpath"
+ RDEPENDS_${PN}_virtclass-native = ""
+-- 
+2.1.4
 
 
---Apple-Mail=_85317997-FBB4-452B-9AE6-FEFC0310B868
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEUEARECAAYFAlXTalUACgkQuwUzVZGdMxReEQCffPaJ46W9lqXMTmtyNdoGEpCG
-QUIAmJ1m5+LWRdA2IA7TtVzAY8hA5ng=
-=h8PD
------END PGP SIGNATURE-----
-
---Apple-Mail=_85317997-FBB4-452B-9AE6-FEFC0310B868--
