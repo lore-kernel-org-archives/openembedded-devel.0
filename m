@@ -1,30 +1,40 @@
-Return-Path: <amit.k.chaudhuri@gmail.com>
-Received: from mail-oi0-f41.google.com (mail-oi0-f41.google.com
-	[209.85.218.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 731B460043
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id E870760043
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2015 08:34:44 +0000 (UTC)
-Received: by oiev193 with SMTP id v193so95472703oie.3
+	Tue, 18 Aug 2015 09:40:57 +0000 (UTC)
+Received: by wicja10 with SMTP id ja10so89963691wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2015 01:34:44 -0700 (PDT)
+	Tue, 18 Aug 2015 02:40:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=8XxcBvDOF+AcWZvgx5XIT1VXrgFLqkO4wRAtEvJqJ0Y=;
-	b=q7MoJJIpEu7EVrK0KhDrHth3bHvZJFHFTdS2gDrLv8oOeeK9TdzH38AUDtHCP6E6uQ
-	J5t/ayKpzpcs3NVaH+dO9aNPLnn+1uoq009t6ueqctxg5XgtLKirkPjiIKicyGkebtvZ
-	xMk2NsZbEYuDNsABOVWQ2QmX63TF47t4V6AXh1F8iI7KsW6TdyxegDrzLSRC3RSej0Nv
-	4jGGv4Lnd6dDo26rhEra2nlLjgOfyyfmyRgAKmdRbrbTVFaNlS8Z8y9lnlYpmHON3xJZ
-	2Z4i5mx5jKVzZ+RQAo07X8n1ddwUKe0pGGcjbqmXKt8z4bJlLcRjPB7gI8Y7T6oXhA3n
-	cOog==
-MIME-Version: 1.0
-X-Received: by 10.202.0.206 with SMTP id 197mr4729221oia.15.1439886884663;
-	Tue, 18 Aug 2015 01:34:44 -0700 (PDT)
-Received: by 10.76.36.2 with HTTP; Tue, 18 Aug 2015 01:34:44 -0700 (PDT)
-Date: Tue, 18 Aug 2015 09:34:44 +0100
-Message-ID: <CAH=VbNdYaP+Q7e0JduUG9i7i64hZjre3bPZLaWErhDXW1KHwTQ@mail.gmail.com>
-From: Amit Chaudhuri <amit.k.chaudhuri@gmail.com>
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=V6DFYiWZGNplcQ/RoQF+8+hgeXGFteGbByu1WnzKLxE=;
+	b=fkcFsBmBavuXOwwzXBbrZQUV0L4APNpZb90YeJXhkP7ULmOqWa/p0t7ksI0Ncj4j6B
+	jRohoLT3EzFlrQ5cBk+/yFEOB7Xv5TfWDKCwNITAssh4bm8eGC3kXc4RoY3ZCPq7/zLA
+	YkickSY7GYI55OoxkV1XjfKD7F4rpe74wOW7sxKZavvAfrKtwPyrEmP0E+6l/5p4ch1K
+	p2YhGE9TlVUYj8VaNVS5OIjKg8BTtDj4HRci3PpubFYB+9Hk4C8jWSwf5gU7QBbzpNDR
+	YV718C+hZn8PdkgolYj0H/9kOGBtYO7QuZK+cG/FpFLnDI90F9wq+GjYUq/ss3oka2ST
+	DqHQ==
+X-Received: by 10.194.57.19 with SMTP id e19mr12216383wjq.152.1439890857158;
+	Tue, 18 Aug 2015 02:40:57 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	by17sm20539894wib.18.2015.08.18.02.40.56
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 18 Aug 2015 02:40:56 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 18 Aug 2015 11:41:00 +0200
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe] inconsistency between autotests and ssh support
+Message-ID: <20150818094100.GH2458@jama>
+References: <1438562844-16736-1-git-send-email-TicoTimo@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1438562844-16736-1-git-send-email-TicoTimo@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][meta-multimedia][PATCH 1/2] libdvdread: update to 5.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,50 +48,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2015 08:34:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 18 Aug 2015 09:40:58 -0000
+X-Groupsio-MsgNum: 56763
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="82evfD9Ogz2JrdWZ"
+Content-Disposition: inline
 
-Hi,
+--82evfD9Ogz2JrdWZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I am experimenting with tools-profile and qemux86 and qemuarm. Autotest
-failures make me think there is an inconsistency in the recipes and
-possibly also somewhere in the docs.
+On Sun, Aug 02, 2015 at 05:47:23PM -0700, Tim Orling wrote:
+> * libdvdread > 4.9 required for vlc 2.2.1
+>=20
+> Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+> ---
+>  .../vlc/{vlc_2.1.4.bb =3D> vlc_2.2.1.bb}                  |  0
 
-I was under the impression (from docs?) that core-image-base would add ssh
-support so I switched from core-image-minimal. Whether I was looking in the
-wrong version of docs or not, the failure of the autotests makes me think there
-is a problem. Examining the ssh log listed in the test output I can see multiple
-"connection refused on port 22" messages" and there is clearly no ssh server
-in the image. The test output shows that some tests are indeed skipped because
-the system knows ssh is not present. But multiple other tests are not skipped.
+This part belongs to next patch, I've moved it before merge to master.
 
-Same experience on both qemuarm and qemux86.
+>  .../recipes-multimedia/libdvdread/libdvdread_4.2.0.bb   | 17 -----------=
+------
+>  .../recipes-multimedia/libdvdread/libdvdread_5.0.3.bb   | 13 +++++++++++=
+++
+>  3 files changed, 13 insertions(+), 17 deletions(-)
+>  rename meta-multimedia/recipes-multimedia/vlc/{vlc_2.1.4.bb =3D> vlc_2.2=
+=2E1.bb} (100%)
+>  delete mode 100644 meta-oe/recipes-multimedia/libdvdread/libdvdread_4.2.=
+0.bb
+>  create mode 100644 meta-oe/recipes-multimedia/libdvdread/libdvdread_5.0.=
+3.bb
+>=20
+> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb b/meta-m=
+ultimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+> similarity index 100%
+> rename from meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb
+> rename to meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+> diff --git a/meta-oe/recipes-multimedia/libdvdread/libdvdread_4.2.0.bb b/=
+meta-oe/recipes-multimedia/libdvdread/libdvdread_4.2.0.bb
+> deleted file mode 100644
+> index 4895dd2..0000000
+> --- a/meta-oe/recipes-multimedia/libdvdread/libdvdread_4.2.0.bb
+> +++ /dev/null
+> @@ -1,17 +0,0 @@
+> -SUMMARY =3D "DVD access multimeda library"
+> -SECTION =3D "libs/multimedia"
+> -LICENSE =3D "GPLv2+"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D64e753fa7d1ca31632bc383da3b57=
+c27"
+> -SRC_URI =3D "http://dvdnav.mplayerhq.hu/releases/libdvdread-${PV}.tar.bz=
+2"
+> -
+> -SRC_URI[md5sum] =3D "ab7a19d3ab1a437ae754ef477d6231a4"
+> -SRC_URI[sha256sum] =3D "0bea15da842a4b04a482b009d72dcc6d9c9524ccc1bf67e5=
+748319ec5ada8097"
+> -
+> -inherit autotools lib_package binconfig pkgconfig
+> -
+> -CONFIGUREOPTS_remove =3D "--disable-silent-rules"
+> -
+> -do_configure_prepend() {
+> -    # For some weird reason, libdvdread only provides a `configure2' scr=
+ipt...
+> -    cp ${S}/configure2 ${S}/configure
+> -}
+> diff --git a/meta-oe/recipes-multimedia/libdvdread/libdvdread_5.0.3.bb b/=
+meta-oe/recipes-multimedia/libdvdread/libdvdread_5.0.3.bb
+> new file mode 100644
+> index 0000000..0506725
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/libdvdread/libdvdread_5.0.3.bb
+> @@ -0,0 +1,13 @@
+> +SUMMARY =3D "DVD access multimeda library"
+> +SECTION =3D "libs/multimedia"
+> +LICENSE =3D "GPLv2+"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D64e753fa7d1ca31632bc383da3b57=
+c27"
+> +SRC_URI =3D "http://download.videolan.org/pub/videolan/libdvdread/${PV}/=
+libdvdread-${PV}.tar.bz2"
+> +
+> +SRC_URI[md5sum] =3D "b7b7d2a782087ed2a913263087083715"
+> +SRC_URI[sha256sum] =3D "321cdf2dbdc83c96572bc583cd27d8c660ddb540ff16672e=
+cb28607d018ed82b"
+> +
+> +inherit autotools lib_package binconfig pkgconfig
+> +
+> +CONFIGUREOPTS_remove =3D "--disable-silent-rules"
+> +
+> --=20
+> 2.1.0
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-After greping to find ssh-server in a .bb file I switched again to
-core-image-full-cmdline and am now able to ssh in. I still get an error relating
-to something else, but ssh works fine.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-With fido version:
+--82evfD9Ogz2JrdWZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-meta              = "fido:6546771a502a09c63e33679be8784818be0ef93b"
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
-The main changes I have made are to local.conf where I have:
+iEYEARECAAYFAlXS/asACgkQN1Ujt2V2gBwZJACcDfhVWZsd7GcyvdT5CJWe0IbF
+fPYAn1H+OtTr9CnjOQlJ2fWYvTovyzNj
+=YFpM
+-----END PGP SIGNATURE-----
 
-MACHINE ??= "qemuarm"
-....
-EXTRA_IMAGE_FEATURES = "dbg-pkgs tools-profile tools-debug debug-tweaks"
-....
-TEST_IMAGE = "1"
-....
-#
-# Enable build history
-#
-INHERIT += "buildhistory"
-BUILDHISTORY_COMMIT = "1"
-
-
-Regards,
-
-
-Amit
-
+--82evfD9Ogz2JrdWZ--
