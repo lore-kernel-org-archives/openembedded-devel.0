@@ -1,36 +1,34 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lb0-f171.google.com (mail-lb0-f171.google.com
-	[209.85.217.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 5425C75E81
+Received: from mail-lb0-f174.google.com (mail-lb0-f174.google.com
+	[209.85.217.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 8AF3676A4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2015 15:06:00 +0000 (UTC)
-Received: by lbbsx3 with SMTP id sx3so5242670lbb.0
+	Wed, 19 Aug 2015 15:15:29 +0000 (UTC)
+Received: by lbcbn3 with SMTP id bn3so5412592lbc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2015 08:06:00 -0700 (PDT)
+	Wed, 19 Aug 2015 08:15:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=GNGO4WQNordbwjHQQjmt1N9dFBFY0TJ9oiaqbPcWBFU=;
-	b=QtR/CKLuvmtHLcHVfOwcSWlGXBJ5mwCzHT/arsGlu3erKGCMFHUCH96WPJYZCvED98
-	v9rhqd+kw1FZXoZ9GY79iFAzC6vGZ3xY5Vnezy17CIuzOOKMXurjfbtvMAjmC24tF30d
-	wiVVJDDw9867LsUOaJXIaw2h9ffl6Z+x0O4ccyAIvmSnQVxiERIGFK1tUaxGcNS+oqwT
-	RYNGZ8/6Q7QG3v0VzzPbvAMWi8r14XUuji4TNo/xWEzkiAft6ikO1eGCuk7hsDIwoTUr
-	nUB3IKGeDn4T/3uO/rg4HE0kHjUhJTElPHkxShtvnlSd94FUHp4m8SYXhAR4SV9+/Qqn
-	hpuQ==
-X-Received: by 10.112.160.165 with SMTP id xl5mr2197218lbb.44.1439996760072;
-	Wed, 19 Aug 2015 08:06:00 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=cvpgZZzkW9tcC0O3iCq/nl/5fqJZD9r6XM0LxeQMcyQ=;
+	b=KsquC+/6Ofv9J96y7t1ebNpMbglIcu10+MOT7Hw9YqnftNsrVzs+NT/omHm+xj70uj
+	dB6F6qNJh/Th16Mu5w3K19gl+/Wz0KHuAw6icj1km9JFkD0+ZDfv+M236enJs+oX4EtE
+	mKYt2VVf0uKaYvAANFZFUniMJDa+cC5prYJ2UHBxfnEE2KyBfV+MdK9CTirqjZY9ndVU
+	DkuHc8ITS6+QZRJ+swQT5yu7Fyxm2oprXT5FIaElVQZaPuOGezjlhnPXnrLyGa0IQc4n
+	aIwTbO5VTCpEL10vzDxzHhAaStiJDYWJvLxDiXB6LqKSqLEz76MlnPgNCi91SQIOl9TG
+	t23Q==
+X-Received: by 10.112.130.97 with SMTP id od1mr11419919lbb.37.1439997328520;
+	Wed, 19 Aug 2015 08:15:28 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id jf8sm294039lbc.12.2015.08.19.08.05.58
+	by smtp.gmail.com with ESMTPSA id le5sm294049lab.29.2015.08.19.08.15.26
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 19 Aug 2015 08:05:59 -0700 (PDT)
+	Wed, 19 Aug 2015 08:15:27 -0700 (PDT)
 From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Aug 2015 17:05:45 +0200
-Message-Id: <1439996745-4053-2-git-send-email-ricardo.ribalda@gmail.com>
+Date: Wed, 19 Aug 2015 17:15:25 +0200
+Message-Id: <1439997325-4480-1-git-send-email-ricardo.ribalda@gmail.com>
 X-Mailer: git-send-email 2.5.0
-In-Reply-To: <1439996745-4053-1-git-send-email-ricardo.ribalda@gmail.com>
-References: <1439996745-4053-1-git-send-email-ricardo.ribalda@gmail.com>
-Subject: [meta-oe][PATCH 2/2] opencv_2.4: Remove unused INSANE_SKIP line
+Subject: [meta-oe][PATCH] opencv_2.4: Update HOMEPAGE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,26 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2015 15:06:01 -0000
+X-List-Received-Date: Wed, 19 Aug 2015 15:15:30 -0000
 
-Credits-to: Paul Eggleton <paul.eggleton@linux.intel.com>
+Old link is dead
+
+ricardo@neopili:~$ wget http://opencv.willowgarage.com/wiki/
+--2015-08-19 17:12:44--  http://opencv.willowgarage.com/wiki/
+Resolving opencv.willowgarage.com (opencv.willowgarage.com)...
+70.35.54.199
+Connecting to opencv.willowgarage.com
+(opencv.willowgarage.com)|70.35.54.199|:80... failed: Connection timed
+out.
+Retrying.
+
 Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 ---
- meta-oe/recipes-support/opencv/opencv_2.4.bb | 1 -
- 1 file changed, 1 deletion(-)
+ meta-oe/recipes-support/opencv/opencv_2.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-index ca378d7abc1e..570de3109a74 100644
+index 570de3109a74..733fe44cc53c 100644
 --- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
 +++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-@@ -84,7 +84,6 @@ FILES_${PN}-doc = "${datadir}/OpenCV/doc"
+@@ -1,5 +1,5 @@
+ SUMMARY = "Opencv : The Open Computer Vision Library"
+-HOMEPAGE = "http://opencv.willowgarage.com/wiki/"
++HOMEPAGE = "http://opencv.org/"
+ SECTION = "libs"
  
- ALLOW_EMPTY_${PN} = "1"
- 
--INSANE_SKIP_python-opencv = "True"
- SUMMARY_python-opencv = "Python bindings to opencv"
- FILES_python-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
- RDEPENDS_python-opencv = "python-core python-numpy"
+ LICENSE = "BSD-3-Clause"
 -- 
 2.5.0
 
