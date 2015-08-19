@@ -1,38 +1,34 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-la0-f45.google.com (mail-la0-f45.google.com
-	[209.85.215.45])
-	by mail.openembedded.org (Postfix) with ESMTP id C4B6B73E11
+Received: from mail-la0-f50.google.com (mail-la0-f50.google.com
+	[209.85.215.50])
+	by mail.openembedded.org (Postfix) with ESMTP id DADAB73E11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2015 15:02:11 +0000 (UTC)
-Received: by lalv9 with SMTP id v9so4856028lal.0
+	Wed, 19 Aug 2015 15:05:59 +0000 (UTC)
+Received: by lalv9 with SMTP id v9so4934364lal.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2015 08:02:10 -0700 (PDT)
+	Wed, 19 Aug 2015 08:05:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=+V0sdmyXiz/eteJWKddLsQqJsK52ZzS6CYNFO1rDVqI=;
-	b=xLGmv5PN83lWC1ZYa1rjjmTRrJN2PHBaSb8QPp3IkztGjvEV+VnWFeWEPWPs8F/7PY
-	IzmiSA86eTnUpNhwOGumxhCZ4k4D88p9aiOGG+9tADHMO8zfOEPOLa5oDATXaly8GGwb
-	o7ywi8MKu3QAfeGET2rexE6sq/Js7ZMxU6hEGCfYMZFGZB5zy8xDa2aAH1+5tj7aWU/z
-	512JEI3wPrhMrG5aoSIexFrF5FTz8+JqXS5ciDhww6TM7aJVvdA/B5YEIL0GjXpzldxN
-	og0zC7L2gi4BHLLsBKE2m/86vdxBdFd8wgfsIhTny4zAPE47Kg0gNQqGDNIPrU+88HDn
-	ltog==
-X-Received: by 10.152.42.170 with SMTP id p10mr8616626lal.39.1439996530508;
-	Wed, 19 Aug 2015 08:02:10 -0700 (PDT)
+	bh=RPDaADqT3vBWhrYvFWLkB/8JjnEuxNTIWQwIU9EcXos=;
+	b=Kdg8ohDciaMzrQiIrWNfijqLp2g6lWPhptkzU9AgONY4kfN2xqOfDBuArpIViB0WcH
+	4D+JNKxJ0xo1jAMlj77fCwSmVzdSNvmxCqg5cdEnn7rOVB+1cpxWtA40xF0YVHV7VMQh
+	cgckjIRr//zlbku7t4HydxyKjkCvrde83y1OatE7lkO2p4Vwcpz68P0953iXWSZAfdUl
+	zbNB9USEAYFNfTEowvqY+n4vSARdxfdnTHuSxYSRaRJ1XbrAdD6f6LA4IhHtrynoH1mn
+	suPaJj/zUluNESAtW4Dw8kgbyUe65kyXDf1mYScPwnZk/R1G3mbOjoXDzfUiyzDNxNAj
+	URBQ==
+X-Received: by 10.152.23.234 with SMTP id p10mr11544000laf.52.1439996758886;
+	Wed, 19 Aug 2015 08:05:58 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id ok2sm295298lbb.0.2015.08.19.08.02.08
+	by smtp.gmail.com with ESMTPSA id jf8sm294039lbc.12.2015.08.19.08.05.57
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 19 Aug 2015 08:02:08 -0700 (PDT)
+	Wed, 19 Aug 2015 08:05:57 -0700 (PDT)
 From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	Mike Looijmans <mike.looijmans@topic.nl>,
-	Martin Jansa <Martin.Jansa@gmail.com>,
-	Otavio Salvador <otavio@ossystems.com.br>, Khem Raj <raj.khem@gmail.com>,
-	Nathan Lynch <Nathan_Lynch@mentor.com>
-Date: Wed, 19 Aug 2015 17:02:06 +0200
-Message-Id: <1439996526-3303-1-git-send-email-ricardo.ribalda@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 19 Aug 2015 17:05:44 +0200
+Message-Id: <1439996745-4053-1-git-send-email-ricardo.ribalda@gmail.com>
 X-Mailer: git-send-email 2.5.0
-Subject: [meta-oe][PATCH v5] Opencv: Add OpenCV 3.0
+Subject: [meta-oe][PATCH 1/2] opencv_2.4: Update LICENSE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,158 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2015 15:02:15 -0000
+X-List-Received-Date: Wed, 19 Aug 2015 15:06:01 -0000
 
--Support for new PACKAGECONFIGS
--Merge with opencv-samples
+LICENSE file at the root of the opencv repo says:
 
-Since it is not backward compatible with 2.x and cannot be installed in
-parallel it has a DEFAULT_PREFERENCE of -1.
+License Agreement
+For Open Source Computer Vision Library
+(3-clause BSD License)
 
+Credits-to: Paul Eggleton <paul.eggleton@linux.intel.com>
 Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 ---
+ meta-oe/recipes-support/opencv/opencv_2.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-v5: Fix suggested by Paul Eggleton <paul.eggleton@linux.intel.com>
-  -Update license
-  -remove unused INSANE_SKIP line
-
- meta-oe/recipes-support/opencv/opencv_3.0.bb | 127 +++++++++++++++++++++++++++
- 1 file changed, 127 insertions(+)
- create mode 100644 meta-oe/recipes-support/opencv/opencv_3.0.bb
-
-diff --git a/meta-oe/recipes-support/opencv/opencv_3.0.bb b/meta-oe/recipes-support/opencv/opencv_3.0.bb
-new file mode 100644
-index 000000000000..479f48e410a3
---- /dev/null
-+++ b/meta-oe/recipes-support/opencv/opencv_3.0.bb
-@@ -0,0 +1,127 @@
-+SUMMARY = "Opencv : The Open Computer Vision Library"
-+HOMEPAGE = "http://opencv.org/"
-+SECTION = "libs"
-+
+diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+index 75441fd0c92c..ca378d7abc1e 100644
+--- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
++++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Opencv : The Open Computer Vision Library"
+ HOMEPAGE = "http://opencv.willowgarage.com/wiki/"
+ SECTION = "libs"
+ 
+-LICENSE = "BSD"
 +LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a6fca7a2c192932466bb14"
-+
-+ARM_INSTRUCTION_SET = "arm"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0"
-+
-+SRCREV_opencv = "424c2bddb39dae97dc4639a24eaa0e0c8fbb8e69"
-+SRCREV_contrib = "844c30e8b2f2f4b34b96a169fafe9beea3c45e87"
-+SRCREV_FORMAT = "opencv"
-+SRC_URI = "git://github.com/Itseez/opencv.git;name=opencv \
-+	   git://github.com/Itseez/opencv_contrib.git;destsuffix=contrib;name=contrib"
-+
-+PV = "3.0+git${SRCPV}"
-+
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OECMAKE = "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
-+		 -DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
-+                 -DWITH_1394=OFF \
-+                 -DCMAKE_SKIP_RPATH=ON \
-+                 ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
-+                 ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
-+                 ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
-+"
-+
-+PACKAGECONFIG ??= "eigen jpeg libav png tiff v4l gstreamer samples tbb\
-+                   ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)}"
-+PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen,"
-+PACKAGECONFIG[gtk] = "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+3,"
-+PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
-+PACKAGECONFIG[libav] = "-DWITH_FFMPEG=ON,-DWITH_FFMPEG=OFF,libav,"
-+PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
-+PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
-+PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
-+PACKAGECONFIG[jasper] = "-DWITH_JASPER=ON,-DWITH_JASPER=OFF,jasper,"
-+PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
-+PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
-+PACKAGECONFIG[opencl] = "-DWITH_OPENCL=ON,-DWITH_OPENCL=OFF,opencl-headers,"
-+PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER=ON,-DWITH_GSTREAMER=OFF,gstreamer1.0 gstreamer1.0-plugins-base,"
-+PACKAGECONFIG[oracle-java] = "-DJAVA_INCLUDE_PATH=${JAVA_HOME}/include -DJAVA_INCLUDE_PATH2=${JAVA_HOME}/include/linux -DJAVA_AWT_INCLUDE_PATH=${JAVA_HOME}/include -DJAVA_AWT_LIBRARY=${JAVA_HOME}/lib/amd64/libjawt.so -DJAVA_JVM_LIBRARY=${JAVA_HOME}/lib/amd64/server/libjvm.so,,ant-native oracle-jse-jdk oracle-jse-jdk-native,"
-+PACKAGECONFIG[samples] = "-DBUILD_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON,-DBUILD_EXAMPLES=OFF,,"
-+PACKAGECONFIG[tbb] = "-DWITH_TBB=ON,-DWITH_TBB=OFF,tbb,"
-+
-+inherit distutils-base pkgconfig cmake
-+
-+export BUILD_SYS
-+export HOST_SYS
-+export PYTHON_CSPEC="-I${STAGING_INCDIR}/${PYTHON_DIR}"
-+export PYTHON="${STAGING_BINDIR_NATIVE}/python"
-+export JAVA_HOME="${STAGING_DIR_NATIVE}/usr/bin/java"
-+export ANT_DIR="${STAGING_DIR_NATIVE}/usr/share/ant/"
-+
-+TARGET_CC_ARCH += "-I${S}/include "
-+
-+PACKAGES += "${PN}-java-dbg ${PN}-java ${PN}-samples-dbg ${PN}-samples ${PN}-apps python-opencv"
-+
-+python populate_packages_prepend () {
-+    cv_libdir = d.expand('${libdir}')
-+    cv_libdir_dbg = d.expand('${libdir}/.debug')
-+    do_split_packages(d, cv_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev', allow_links=True)
-+    do_split_packages(d, cv_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev')
-+    do_split_packages(d, cv_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev')
-+    do_split_packages(d, cv_libdir, '^lib(.*)\.so\.*', 'lib%s', 'OpenCV %s library', extra_depends='', allow_links=True)
-+
-+    pn = d.getVar('PN', 1)
-+    metapkg =  pn + '-dev'
-+    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
-+    blacklist = [ metapkg ]
-+    metapkg_rdepends = [ ]
-+    packages = d.getVar('PACKAGES', 1).split()
-+    for pkg in packages[1:]:
-+        if not pkg in blacklist and not pkg in metapkg_rdepends and pkg.endswith('-dev'):
-+            metapkg_rdepends.append(pkg)
-+    d.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends))
-+
-+    blacklist = [ metapkg ]
-+    metapkg =  pn
-+    metapkg_rdepends = [ ]
-+    for pkg in packages[1:]:
-+        if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc') :
-+            metapkg_rdepends.append(pkg)
-+    bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
-+
-+}
-+
-+PACKAGES_DYNAMIC += "^libopencv-.*"
-+
-+FILES_${PN} = ""
-+FILES_${PN}-apps = "${bindir}/* ${datadir}/OpenCV"
-+FILES_${PN}-dbg += "${libdir}/.debug"
-+FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
-+FILES_${PN}-doc = "${datadir}/OpenCV/doc"
-+FILES_${PN}-java = "${datadir}/OpenCV/java"
-+FILES_${PN}-java-dbg = "${datadir}/OpenCV/java/.debug/"
-+FILES_${PN}-samples = "${datadir}/OpenCV/samples/"
-+FILES_${PN}-samples-dbg = "${datadir}/OpenCV/samples/bin/.debug"
-+
-+INSANE_SKIP_${PN}-apps = "staticdev"
-+INSANE_SKIP_${PN}-java = "libdir"
-+INSANE_SKIP_${PN}-java-dbg = "libdir"
-+
-+ALLOW_EMPTY_${PN} = "1"
-+
-+SUMMARY_python-opencv = "Python bindings to opencv"
-+FILES_python-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
-+RDEPENDS_python-opencv = "python-core python-numpy"
-+
-+do_install_append() {
-+    cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
-+    sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
-+
-+    # Move Python files into correct library folder (for multilib build)
-+    if [ "$libdir" != "/usr/lib" ]; then
-+        mv ${D}/usr/lib/* ${D}/${libdir}/
-+        rm -rf ${D}/usr/lib
-+    fi
-+
-+    install -d ${D}${datadir}/OpenCV/samples/bin/
-+    cp -f bin/*-tutorial-* bin/*-example-* ${D}${datadir}/OpenCV/samples/bin/
-+}
+ LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a6fca7a2c192932466bb14"
+ 
+ ARM_INSTRUCTION_SET = "arm"
 -- 
 2.5.0
 
