@@ -1,37 +1,37 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 220C276A33
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-la0-f47.google.com (mail-la0-f47.google.com
+	[209.85.215.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 927D673CC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2015 03:01:15 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99788909"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 19 Aug 2015 11:04:31 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7J31BfH005331;
-	Wed, 19 Aug 2015 11:01:11 +0800
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Wed, 19 Aug 2015 11:01:14 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, Martin Jansa
-	<martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-oe][RFC][PATCH 1/3] heimdal 1.6rc2: add buildtool
-	for samba4
-Thread-Index: AQHQ2aPV+DvGJ6C/J0m/7bUQVUl9ip4SnwiQ
-Date: Wed, 19 Aug 2015 03:01:13 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC011C1F898B@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <1439110446-22189-1-git-send-email-koen@dominion.thruhere.net>
-	<20150818103519.GA13732@jama>
-	<E9FFBF34-7714-453B-BD43-0B3241486A08@dominion.thruhere.net>
-In-Reply-To: <E9FFBF34-7714-453B-BD43-0B3241486A08@dominion.thruhere.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
+	Wed, 19 Aug 2015 03:05:42 +0000 (UTC)
+Received: by laba3 with SMTP id a3so7598487lab.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Aug 2015 20:05:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=le+EtKWVN3O8rFFfxQ5yhMvWrUHAPBOdbB0OkHSvP/A=;
+	b=Qcpom4xNoQUA8qoCYkifHjywzSYD2j5s5D8V43j1dRk6h9JnlE69ivPv+4KplMGWPY
+	Qsx5D7vUBx3Bc8K043uil3e1AssE6HKqnhFk9mNRQcKa2fgxswoGuxVFTZaV5qj3hXaF
+	GegzPBB+8Ec9sHvOS+dOBzWnaFdlBU/Myk7T+pS4SUeXZ4LbNninrcrE9GWs21jdJtfo
+	LHbHqJ0XG3+zcUGKGb9xTEzBJYHmKxoh1C5HBWGlOW7TuJNwUUk4dxOQEIh4m6Bmlexe
+	sszozeEwSPxbQJhurcpbn8fLxE07KBGZ1uDa+1IB2uLHMstO2IQ4SA9Ec7ffM9Loj+RU
+	nN5A==
 MIME-Version: 1.0
-Subject: Re: [meta-oe][RFC][PATCH 1/3] heimdal 1.6rc2: add buildtool	for samba4
+X-Received: by 10.112.171.227 with SMTP id ax3mr6172991lbc.118.1439953540747; 
+	Tue, 18 Aug 2015 20:05:40 -0700 (PDT)
+Received: by 10.25.15.38 with HTTP; Tue, 18 Aug 2015 20:05:40 -0700 (PDT)
+In-Reply-To: <20150818094429.GI2458@jama>
+References: <1438562844-16736-1-git-send-email-TicoTimo@gmail.com>
+	<1438562844-16736-2-git-send-email-TicoTimo@gmail.com>
+	<CANx9H-DRLk5sOcmPtoGgHQRAa5y+Ef8ihbBvMAb7S7ptOaE7dQ@mail.gmail.com>
+	<20150818094429.GI2458@jama>
+Date: Tue, 18 Aug 2015 20:05:40 -0700
+Message-ID: <CANx9H-D_onDGKhvi08xPXXuNwzJ13dfYObE_=k+J0g2G4-R1aQ@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][meta-multimedia][PATCH 2/2] vlc: update to 2.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,120 +45,572 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2015 03:01:19 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 19 Aug 2015 03:05:43 -0000
+Content-Type: text/plain; charset=UTF-8
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mIEtvZW4NCj4g
-S29vaQ0KPiBTZW50OiBUdWVzZGF5LCBBdWd1c3QgMTgsIDIwMTUgNjo1MSBQTQ0KPiBUbzogTWFy
-dGluIEphbnNhDQo+IENjOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9y
-Zw0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1bUkZDXVtQQVRDSCAxLzNdIGhlaW1kYWwg
-MS42cmMyOiBhZGQgYnVpbGR0b29sIGZvcg0KPiBzYW1iYTQNCj4gDQo+IA0KPiA+IE9wIDE4IGF1
-Zy4gMjAxNSwgb20gMTI6MzUgaGVlZnQgTWFydGluIEphbnNhIDxtYXJ0aW4uamFuc2FAZ21haWwu
-Y29tPiBoZXQNCj4gdm9sZ2VuZGUgZ2VzY2hyZXZlbjoNCj4gPg0KPiA+IE9uIFN1biwgQXVnIDA5
-LCAyMDE1IGF0IDEwOjU0OjA0QU0gKzAyMDAsIEtvZW4gS29vaSB3cm90ZToNCj4gPj4gU2FtYmE0
-IHVzZXMgYW5zMV9jb21waWxlIGFuZCBjb21waWxlX2V0IHRvIGJ1aWxkIGl0c2VsZiwgc28gd2Ug
-bmVlZCBhDQo+ID4+IC1uYXRpdmUgdmVyc2lvbiBvZiBpdC4gSGVpbWRhbCBpcyB0aGUgZXh0ZXJu
-YWwgdXBzdHJlYW0gIHZhcmlhbnQgb2YNCj4gPj4gdGhlIHRvb2xzIHNhbWJhIGJ1bmRsZXMuDQo+
-ID4NCj4gPiBDYW4geW91IHBsZWFzZSBjb21wYXJlIHdpdGggaW1wbGVtZW50YXRpb24gZnJvbSBC
-aWFuOg0KPiA+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL3BpcGVybWFpbC9vcGVuZW1i
-ZWRkZWQtZGV2ZWwvMjAxNS1BdWd1c3QNCj4gPiAvMTAyNTcxLmh0bWwNCj4gDQo+IEJpYW5zIHZl
-cnNpb24gaGFzIHNvbWUgc2hpbnkgZmVhdHVyZXMsIGxpa2UgcWVtdSBzdXBwb3J0LCBidXQgaGFz
-IHNvbWUgb3RoZXINCj4gaXNzdWVzLCBzdHlsZSB2aW9sYXRpb25zIGJlaW5nIHRoZSBtb3N0IG9i
-dmlvdXMuDQo+IA0KDQpUaGFua3MgZm9yIHlvdXIgY29tbWVudHMsIEkgd2lsbCB0cnkgdG8gZml4
-IHRoZW0gYWZ0ZXIgeW91IHRvbGQgbWUgd2hhdCB0aGV5IGFyZS4gDQoNCj4gPiBhbmQgY29uc29s
-aWRhdGUgaW50byBvbmUgcGF0Y2hzZXRzIHdoaWNoIHdpbGwgd29yayBmb3IgYm90aD8NCj4gDQo+
-IEnigJlsbCB0YWtlIEJpYW5zIHNldCBhbmQgZml4IHVwIHRoZSBzdXBwb3J0IHJlY2lwZXMgYW5k
-IHRyeSB0byBjb25zb2xpZGF0ZSB0aGUNCj4gc2FtYmEgcmVjaXBlcy4gQWZ0ZXIgSSBnZXQgYmFj
-ayBmcm9tIHZhY2F0aW9uLCBzbyB0aGF0IHdpbGwgdGFrZSBhIGZldyB3ZWVrcy4NCj4gDQoNCkhv
-cGUgdG8gd29yayB3aXRoIHlvdSB0b2dldGhlciB0byBjb25zb2xpZGF0ZSB0aGUgc2FtYmEgcmVj
-aXBlLg0KQW5kIGVuam95IHlvdXIgdmFjYXRpb24hIF5fXg0KDQpUaGFua3MNCiBCaWFuDQoNCj4g
-cmVnYXJkcywNCj4gDQo+IEtvZW4NCj4gDQo+ID4NCj4gPiBUaGFua3MsDQo+ID4NCj4gPj4NCj4g
-Pj4gU2lnbmVkLW9mZi1ieTogS29lbiBLb29pIDxrb2VuQGRvbWluaW9uLnRocnVoZXJlLm5ldD4N
-Cj4gPj4gLS0tDQo+ID4+IC4uLmRtNS1maXgtcmFjZS1pbi1NYWtlZmlsZS13aXRoLWthZG01X2Vy
-ci5oLnBhdGNoIHwgMzQgKysrKysrKysrKysrKysrKw0KPiA+PiAuLi4vcmVjaXBlcy1jb25uZWN0
-aXZpdHkvc2FtYmEvaGVpbWRhbF8xLjZyYzIuYmIgICB8IDQ1DQo+ICsrKysrKysrKysrKysrKysr
-KysrKysNCj4gPj4gMiBmaWxlcyBjaGFuZ2VkLCA3OSBpbnNlcnRpb25zKCspDQo+ID4+IGNyZWF0
-ZSBtb2RlIDEwMDY0NA0KPiA+PiBtZXRhLW9lL3JlY2lwZXMtY29ubmVjdGl2aXR5L3NhbWJhL2hl
-aW1kYWwvMDAwMi1rYWRtNS1maXgtcmFjZS1pbi1NYWsNCj4gPj4gZWZpbGUtd2l0aC1rYWRtNV9l
-cnIuaC5wYXRjaCBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPj4gbWV0YS1vZS9yZWNpcGVzLWNvbm5l
-Y3Rpdml0eS9zYW1iYS9oZWltZGFsXzEuNnJjMi5iYg0KPiA+Pg0KPiA+PiBkaWZmIC0tZ2l0DQo+
-ID4+IGEvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS9zYW1iYS9oZWltZGFsLzAwMDIta2Fk
-bTUtZml4LXJhY2UtaW4tTQ0KPiA+PiBha2VmaWxlLXdpdGgta2FkbTVfZXJyLmgucGF0Y2gNCj4g
-Pj4gYi9tZXRhLW9lL3JlY2lwZXMtY29ubmVjdGl2aXR5L3NhbWJhL2hlaW1kYWwvMDAwMi1rYWRt
-NS1maXgtcmFjZS1pbi1NDQo+ID4+IGFrZWZpbGUtd2l0aC1rYWRtNV9lcnIuaC5wYXRjaA0KPiA+
-PiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+PiBpbmRleCAwMDAwMDAwLi5iYWI5MzNjDQo+ID4+
-IC0tLSAvZGV2L251bGwNCj4gPj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS9z
-YW1iYS9oZWltZGFsLzAwMDIta2FkbTUtZml4LXJhY2UtDQo+ID4+ICsrKyBpbi1NYWtlZmlsZS13
-aXRoLWthZG01X2Vyci5oLnBhdGNoDQo+ID4+IEBAIC0wLDAgKzEsMzQgQEANCj4gPj4gK0Zyb20g
-MThmZTdkMzAwZjEzM2MyYjllYjkzYmI0YmQ4MWU0NjQ0OTc5YTc0YiBNb24gU2VwIDE3IDAwOjAw
-OjAwDQo+ID4+ICsyMDAxDQo+ID4+ICtGcm9tOiA9P1VURi04P3E/SmFrdWI9MjA9QzQ9OENhamth
-Pz0gPGpjYWprYUByZWRoYXQuY29tPg0KPiA+PiArRGF0ZTogVHVlLCAxIEp1bCAyMDE0IDEzOjEz
-OjQzIC0wNjAwDQo+ID4+ICtTdWJqZWN0OiBbUEFUQ0hdIGthZG01OiBmaXggcmFjZSBpbiBNYWtl
-ZmlsZSB3aXRoIGthZG01X2Vyci5oDQo+ID4+ICsNCj4gPj4gK1doZW4gcnVubmluZyBtYWtlIHdp
-dGggLWo0LCBvY2Nhc2lvbmFsbHkga2FkbTUgZmFpbHMgZHVlIHRvIGENCj4gPj4gK21pc3Npbmcg
-aGVhZGVyIGZpbGUga2FkbTVfZXJyLmguIEZpeCB0aGUgcmFjZSBjb25kaXRpb24uDQo+ID4+ICsN
-Cj4gPj4gK1JlcG9ydGVkIGF0IGh0dHBzOi8vYnVnemlsbGEucmVkaGF0LmNvbS8xMTE1MTY0DQo+
-ID4+ICsNCj4gPj4gK1Jldmlld2VkLWJ5OiBLZW4gRHJleWVyIDxrdGRyZXllckBrdGRyZXllci5j
-b20+DQo+ID4+ICsNCj4gPj4gK1Vwc3RyZWFtLXN0YXR1czogQmFja3BvcnQgW3Vwc3RyZWFtIGNv
-bW1pdA0KPiA+PiArNmFmZmE0Y2NlY2VhYTEzNjlkZDg5NWY4YWNkZDdhODgzZWU2NTY3NF0NCj4g
-Pj4gKw0KPiA+PiArU2lnbmVkLW9mZi1ieTogVGhvbWFzIFBldGF6em9uaQ0KPiA+PiArPHRob21h
-cy5wZXRhenpvbmlAZnJlZS1lbGVjdHJvbnMuY29tPg0KPiA+PiArLS0tDQo+ID4+ICsgbGliL2th
-ZG01L01ha2VmaWxlLmFtIHwgMSArDQo+ID4+ICsgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9u
-KCspDQo+ID4+ICsNCj4gPj4gK2RpZmYgLS1naXQgYS9saWIva2FkbTUvTWFrZWZpbGUuYW0gYi9s
-aWIva2FkbTUvTWFrZWZpbGUuYW0gaW5kZXgNCj4gPj4gK2Y4YmUzYjEuLjFiMzk5YjEgMTAwNjQ0
-DQo+ID4+ICstLS0gYS9saWIva2FkbTUvTWFrZWZpbGUuYW0NCj4gPj4gKysrKyBiL2xpYi9rYWRt
-NS9NYWtlZmlsZS5hbQ0KPiA+PiArQEAgLTE1NSw2ICsxNTUsNyBAQCBpcHJvcC1jb21tYW5kcy5j
-IGlwcm9wLWNvbW1hbmRzLmg6IGlwcm9wLWNvbW1hbmRzLmluDQo+ID4+ICsgCSQoU0xDKSAkKHNy
-Y2RpcikvaXByb3AtY29tbWFuZHMuaW4NCj4gPj4gKw0KPiA+PiArICQobGlia2FkbTVzcnZfbGFf
-T0JKRUNUUyk6IGthZG01X2Vyci5oDQo+ID4+ICsrJChsaWJrYWRtNWNsbnRfbGFfT0JKRUNUUyk6
-IGthZG01X2Vyci5oDQo+ID4+ICsgJChpcHJvcF9sb2dfT0JKRUNUUyk6IGlwcm9wLWNvbW1hbmRz
-LmgNCj4gPj4gKw0KPiA+PiArIGNsaWVudF9nbHVlLmxvIHNlcnZlcl9nbHVlLmxvOiAkKHNyY2Rp
-cikvY29tbW9uX2dsdWUuYw0KPiA+PiArLS0NCj4gPj4gKzIuNC41DQo+ID4+ICsNCj4gPj4gZGlm
-ZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1jb25uZWN0aXZpdHkvc2FtYmEvaGVpbWRhbF8xLjZy
-YzIuYmINCj4gPj4gYi9tZXRhLW9lL3JlY2lwZXMtY29ubmVjdGl2aXR5L3NhbWJhL2hlaW1kYWxf
-MS42cmMyLmJiDQo+ID4+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4+IGluZGV4IDAwMDAwMDAu
-LjcyNDVkMTQNCj4gPj4gLS0tIC9kZXYvbnVsbA0KPiA+PiArKysgYi9tZXRhLW9lL3JlY2lwZXMt
-Y29ubmVjdGl2aXR5L3NhbWJhL2hlaW1kYWxfMS42cmMyLmJiDQo+ID4+IEBAIC0wLDAgKzEsNDUg
-QEANCj4gPj4gK1NVTU1BUlkgPSAiVGhlIEhlaW1kYWwgS2VyYmVyb3MgNSwgUEtJWCwgQ01TLCBH
-U1MtQVBJLCBTUE5FR08sIE5UTE0sDQo+IERpZ2VzdC1NRDUgYW5kLCBTQVNMIGltcGxlbWVudGF0
-aW9uLiINCj4gPj4gKw0KPiA+PiArREVQRU5EUyA9ICJlMmZzcHJvZ3MgbmN1cnNlcyINCj4gPj4g
-Kw0KPiA+PiArTElDRU5TRSA9ICJCU0QtMyINCj4gPj4gK0xJQ19GSUxFU19DSEtTVU0gPSAiZmls
-ZTovL0xJQ0VOU0U7bWQ1PWQyYzZmOGNmZTgyZDRmZGQ3NDM1NTg2NmYwYzE0ZDNmIg0KPiA+PiAr
-DQo+ID4+ICtQViA9ICIxLjUrMS42cmMyIg0KPiA+PiArDQo+ID4+ICtTUkNfVVJJID0gImh0dHA6
-Ly93d3cuaDVsLm9yZy9kaXN0L3NyYy9oZWltZGFsLTEuNnJjMi50YXIuZ3ogXA0KPiA+PiArDQo+
-IGZpbGU6Ly8wMDAyLWthZG01LWZpeC1yYWNlLWluLU1ha2VmaWxlLXdpdGgta2FkbTVfZXJyLmgu
-cGF0Y2ggXA0KPiA+PiArICAgICAgICAgICINCj4gPj4gK1MgPSAiJHtXT1JLRElSfS9oZWltZGFs
-LTEuNnJjMiINCj4gPj4gK1NSQ19VUklbbWQ1c3VtXSA9ICIxNTJjYTgyNjYwODY0YWNmN2Y3MTJh
-ZTFhNTdlNjc5NSINCj4gPj4gK1NSQ19VUklbc2hhMjU2c3VtXSA9DQo+ICI4ZmUxOWUwZjEyZmYw
-ZDBjMmYyMGE2Y2Y1NjcyN2RlYWFiZDg5ZGI5YzE5NzI4ODAyMmZiNDg5ZTEwM2I3MzBkIg0KPiA+
-PiArDQo+ID4+ICtpbmhlcml0IGF1dG90b29scyBwa2djb25maWcNCj4gPj4gKw0KPiA+PiArRVhU
-UkFfT0VDT05GID0gIiBcDQo+ID4+ICsJLS1kaXNhYmxlLXNoYXJlZCBcDQo+ID4+ICsJLS1lbmFi
-bGUtc3RhdGljIFwNCj4gPj4gKwktLXdpdGhvdXQtb3BlbmxkYXAgXA0KPiA+PiArCS0td2l0aG91
-dC1jYXBuZyBcDQo+ID4+ICsJLS13aXRob3V0LXNxbGl0ZTMgXA0KPiA+PiArCS0td2l0aG91dC1s
-aWJpbnRsIFwNCj4gPj4gKwktLXdpdGhvdXQtb3BlbnNzbCBcDQo+ID4+ICsJLS13aXRob3V0LWJl
-cmtlbGV5LWRiIFwNCj4gPj4gKwktLXdpdGhvdXQtcmVhZGxpbmUgXA0KPiA+PiArCS0td2l0aG91
-dC1saWJlZGl0IFwNCj4gPj4gKwktLXdpdGhvdXQtaGVzaW9kIFwNCj4gPj4gKwktLXdpdGhvdXQt
-eCBcDQo+ID4+ICsJLS1kaXNhYmxlLWhlaW1kYWwtZG9jdW1lbnRhdGlvbiBcDQo+ID4+ICsgICAg
-ICAgIg0KPiA+PiArDQo+ID4+ICsjIEV2ZW4gd2l0aCB0aGUgbWFrZWZpbGUgcGF0Y2ggcGFyYWxs
-ZWwgbWFrZSBmYWlscyA4IG91dCBvZiAxMCB0aW1lcw0KPiA+PiArd2l0aCAtajggUEFSQUxMRUxf
-TUFLRSA9ICIiDQo+ID4+ICsNCj4gPj4gKyMgUHV0IGJvdGggY29tcGlsZSB0b29scyB0b2dldGhl
-ciBpbiAkUEFUSCBhbmQgbGliZXhlY2RpciBpbiBvcmRlcg0KPiA+PiArdG8gYnVpbGQgc2FtYmE0
-DQo+ID4+ICtkb19pbnN0YWxsX2FwcGVuZCgpIHsNCj4gPj4gKyAgICBsbiAtc2YgJHtsaWJleGVj
-ZGlyfS9oZWltZGFsL2FzbjFfY29tcGlsZSAke0R9JHtiaW5kaXJ9Lw0KPiA+PiArICAgIGxuIC1z
-ZiAke2JpbmRpcn0vY29tcGlsZV9ldCAke0R9JHtsaWJleGVjZGlyfS9oZWltZGFsLyB9DQo+ID4+
-ICsNCj4gPj4gK0JCQ0xBU1NFWFRFTkQgPSAibmF0aXZlIg0KPiA+PiArDQo+ID4+IC0tDQo+ID4+
-IDIuMC4xDQo+ID4+DQo+ID4+IC0tDQo+ID4+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fDQo+ID4+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QN
-Cj4gPj4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPj4gaHR0
-cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQt
-ZGV2ZWwNCj4gPg0KPiA+IC0tDQo+ID4gTWFydGluICdKYU1hJyBKYW5zYSAgICAgamFiYmVyOiBN
-YXJ0aW4uSmFuc2FAZ21haWwuY29tDQo+IA0KPiAtLQ0KPiBfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBs
-aXN0DQo+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IGh0dHA6
-Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRl
-dmVsDQo=
+On Tue, Aug 18, 2015 at 2:44 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
+
+> On Sun, Aug 02, 2015 at 06:07:57PM -0700, Tim Orling wrote:
+> > I accidentally left libvorbis as a dependency in vlc.inc, which is not
+> > needed (tremor provides what was needed).
+> >
+> > You can pull the corrected recipes from:
+> >
+> >
+> http://git.openembedded.org/meta-openembedded-contrib/log/?h=timo/vlc-2.2.1
+> >
+> > --Tim
+>
+> It still fails with that libtool error:
+> http://errors.yoctoproject.org/Errors/Details/14498/
+> but I'll merge it anyway, because it doesn't make things worse than old
+> version.
+>
+> It is having a problem with the assembly files (e.g.
+vlc-2.2.1/modules/arm_neon/i422_yuyv.S )
+
+
+Anybody have any ideas? I would guess that --tag=CC would still apply, but
+I don't see any obvious support for assembly files in the libtool docs.
+
+--Tim
+
+
+> >
+> >
+> > On Sun, Aug 2, 2015 at 5:47 PM, Tim Orling <ticotimo@gmail.com> wrote:
+> >
+> > > * add several pkg configs and libsamplerate0 dependency to vlc.inc
+> > > * update patches 0003 and 0004
+> > > * add patch to use tremor's libvorbisidec rather than libvorbisdec
+> > > * add patch to fix luaL_checkint and luaL_optint (deprecated in lua
+> 5.3)
+> > >
+> > > Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+> > > ---
+> > >  meta-multimedia/recipes-multimedia/vlc/vlc.inc     |   6 +-
+> > >  .../vlc/vlc/0003-use-am-path-libgcrypt.patch       |  12 +-
+> > >  .../0004-modules-gui-qt4-out-of-tree-build.patch   |  24 +-
+> > >  .../vlc/vlc/0007-use-vorbisidec.patch              |  19 ++
+> > >  .../vlc/vlc/0008-fix-luaL-checkint.patch           | 279
+> > > +++++++++++++++++++++
+> > >  .../recipes-multimedia/vlc/vlc_2.2.1.bb            |   6 +-
+> > >  6 files changed, 325 insertions(+), 21 deletions(-)
+> > >  create mode 100644
+> > > meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch
+> > >  create mode 100644
+> > > meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch
+> > >
+> > > diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+> > > b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+> > > index 0362f39..a79e63d 100644
+> > > --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+> > > +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+> > > @@ -10,7 +10,7 @@ DEPENDS = "libfribidi libtool libgcrypt
+> libgcrypt-native
+> > > gst-plugins-bad \
+> > >     tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
+> > >     libdvdcss libdvdread lua-native lua libidn libnotify gtk+
+> gnome-vfs \
+> > >     libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
+> > > -   libmtp libopus orc libusb1 schroedinger taglib \
+> > > +   libmtp libopus orc libsamplerate0 libvorbis libusb1 schroedinger
+> > > taglib \
+> > >     tiff xcb-util-keysyms samba"
+> > >
+> > >  SRC_URI = "
+> > > http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
+> > > @@ -36,7 +36,6 @@ EXTRA_OECONF = "\
+> > >      --enable-dbus \
+> > >      --without-contrib \
+> > >      --without-kde-solid \
+> > > -    --disable-glx \
+> > >      --enable-realrtsp \
+> > >      --disable-libtar \
+> > >      ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
+> > > @@ -54,6 +53,9 @@ PACKAGECONFIG[mkv] =
+> > > "--enable-mkv,--disable-mkv,libmatroska libebml"
+> > >  PACKAGECONFIG[postproc] =
+> > > "--enable-postproc,--disable-postproc,libpostproc"
+> > >  PACKAGECONFIG[opencv] = "--enable-opencv,--disable-opencv,opencv"
+> > >  PACKAGECONFIG[libva] = "--enable-libva
+> --enable-avcodec,--disable-libva
+> > > --disable-avcodec,libva libav"
+> > > +PACKAGECONFIG[speex] = "--enable-speex,--disable-speex,speex"
+> > > +PACKAGECONFIG[gstreamer] =
+> > > "--enable-gst-decode,--disable-gst-decode,gstreamer1.0
+> > > gstreamer1.0-plugins-base"
+> > > +PACKAGECONFIG[vpx] = "--enable-vpx,--disable-vpx, libvpx"
+> > >
+> > >  do_configure_prepend() {
+> > >      cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
+> > > diff --git
+> > >
+> a/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+> > >
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+> > > index ae80745..8e881d0 100644
+> > > ---
+> > >
+> a/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+> > > +++
+> > >
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+> > > @@ -5,11 +5,11 @@
+> > >
+> > >  Upstream status: Pending
+> > >
+> > > -Index: vlc-2.1.4/configure.ac
+> > > +Index: vlc-2.2.1/configure.ac
+> > >  ===================================================================
+> > > ---- vlc-2.1.4.orig/configure.ac
+> > > -+++ vlc-2.1.4/configure.ac
+> > > -@@ -3940,25 +3940,19 @@ PKG_ENABLE_MODULES_VLC([LIBXML2], [xml],
+> > > +--- vlc-2.2.1.orig/configure.ac
+> > > ++++ vlc-2.2.1/configure.ac
+> > > +@@ -4017,25 +4017,19 @@ PKG_ENABLE_MODULES_VLC([LIBXML2], [xml],
+> > >   dnl
+> > >   dnl libgcrypt
+> > >   dnl
+> > > @@ -26,10 +26,10 @@ Index: vlc-2.1.4/configure.ac
+> > >  -      GCRYPT_CFLAGS="`libgcrypt-config --cflags`"
+> > >  -      GCRYPT_LIBS="`libgcrypt-config --libs`"
+> > >  -    ], [
+> > > --      AC_MSG_ERROR([libgcrypt not found. Install libgcrypt or use
+> > > --disable-libgcrypt. Have a nice day.])
+> > > +-      AC_MSG_ERROR([libgcrypt not found. Install libgcrypt or pass
+> > > --disable-libgcrypt.])
+> > >  -    ], [`libgcrypt-config --libs`])
+> > >  -  ], [
+> > > --    AC_MSG_ERROR([libgcrypt version 1.1.94 or higher not found.
+> Install
+> > > libgcrypt or use --disable-libgcrypt. Have a nice day.])
+> > > +-    AC_MSG_ERROR([libgcrypt version 1.1.94 or higher not found.
+> Install
+> > > libgcrypt or pass --disable-libgcrypt.])
+> > >  -  ], [#include <gcrypt.h>]
+> > >  -  )
+> > >  +      AM_PATH_LIBGCRYPT($GCRYPT_LIBVER:$GCRYPT_REQ,
+> > > diff --git
+> > >
+> a/meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch
+> > >
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch
+> > > index 3dadb23..53df1c6 100644
+> > > ---
+> > >
+> a/meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch
+> > > +++
+> > >
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch
+> > > @@ -1,17 +1,19 @@
+> > > -* modules/gui/qt4/Modules.am not B!=S friendly
+> > > +* modules/gui/qt4/Makefile.am not B!=S friendly
+> > >  * Simple solution to missing directories in ${B}
+> > >
+> > >  Upstream status: Pending
+> > >
+> > > -Index: vlc-2.1.4/modules/gui/qt4/Modules.am
+> > > +Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+> > > +
+> > > +Index: vlc-2.2.1/modules/gui/qt4/Makefile.am
+> > >  ===================================================================
+> > > ---- vlc-2.1.4.orig/modules/gui/qt4/Modules.am
+> > > -+++ vlc-2.1.4/modules/gui/qt4/Modules.am
+> > > -@@ -261,6 +261,7 @@ else
+> > > - if HAVE_WIN32
+> > > -       $(moc_verbose)$(MOC) -D_WIN32 $(DEFS) -I$(top_srcdir)/include
+> > > -I$(top_builddir)/include -I$(top_builddir) $(CPPFLAGS_qt4) -o $@ $<
+> > > - else
+> > > +--- vlc-2.2.1.orig/modules/gui/qt4/Makefile.am
+> > > ++++ vlc-2.2.1/modules/gui/qt4/Makefile.am
+> > > +@@ -127,6 +127,7 @@ moc_verbose_0 = @echo "  MOC   " $@;
+> > > + moc_verbose__0 = $(moc_verbose_0)
+> > > +
+> > > + .hpp.moc.cpp:
+> > >  +      [ -d $(dir $@) ] || mkdir -p $(dir $@)
+> > > -       $(moc_verbose)$(MOC) $(DEFS) -I$(top_srcdir)/include
+> > > -I$(top_builddir)/include -I$(top_builddir) $(CPPFLAGS_qt4) -o $@ $<
+> > > - endif
+> > > - endif
+> > > +       $(moc_verbose)$(MOC) $(MOC_CPPFLAGS) -o $@ $<
+> > > +
+> > > + # These MOC files depend on the configure settings:
+> > > diff --git
+> > > a/meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch
+> > > b/meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch
+> > > new file mode 100644
+> > > index 0000000..d05cf02
+> > > --- /dev/null
+> > > +++
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0007-use-vorbisidec.patch
+> > > @@ -0,0 +1,19 @@
+> > > +* tremor provides libvorbisidec, use it instead of libvorbisdec
+> > > +
+> > > +Upstream-status: Pending
+> > > +
+> > > +Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+> > > +
+> > > +Index: vlc-2.2.1/modules/codec/Makefile.am
+> > > +===================================================================
+> > > +--- vlc-2.2.1.orig/modules/codec/Makefile.am
+> > > ++++ vlc-2.2.1/modules/codec/Makefile.am
+> > > +@@ -234,7 +234,7 @@ codec_LTLIBRARIES += $(LTLIBtheora)
+> > > + libtremor_plugin_la_SOURCES = codec/vorbis.c
+> > > + libtremor_plugin_la_CPPFLAGS = $(AM_CPPFLAGS) -DMODULE_NAME_IS_tremor
+> > > + libtremor_plugin_la_LDFLAGS = $(AM_LDFLAGS) -rpath '$(codecdir)'
+> > > +-libtremor_plugin_la_LIBADD = -lvorbisdec -logg
+> > > ++libtremor_plugin_la_LIBADD = -lvorbisidec -logg
+> > > + EXTRA_LTLIBRARIES += libtremor_plugin.la
+> > > + codec_LTLIBRARIES += $(LTLIBtremor)
+> > > +
+> > > diff --git
+> > >
+> a/meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch
+> > >
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch
+> > > new file mode 100644
+> > > index 0000000..145e1ab
+> > > --- /dev/null
+> > > +++
+> > >
+> b/meta-multimedia/recipes-multimedia/vlc/vlc/0008-fix-luaL-checkint.patch
+> > > @@ -0,0 +1,279 @@
+> > > +* luaL_checkint and luaL_optint were deprecated in lua 5.3
+> > > +* replacement functions are luaL_checkinteger and luaL_optinteger
+> > > +
+> > > +Upstream-status: Pending
+> > > +
+> > > +Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+> > > +
+> > > +Index: vlc-2.2.1/modules/lua/demux.c
+> > > +===================================================================
+> > > +--- vlc-2.2.1.orig/modules/lua/demux.c
+> > > ++++ vlc-2.2.1/modules/lua/demux.c
+> > > +@@ -52,7 +52,7 @@ struct demux_sys_t
+> > > + static int vlclua_demux_peek( lua_State *L )
+> > > + {
+> > > +     demux_t *p_demux = (demux_t *)vlclua_get_this( L );
+> > > +-    int n = luaL_checkint( L, 1 );
+> > > ++    int n = luaL_checkinteger( L, 1 );
+> > > +     const uint8_t *p_peek;
+> > > +
+> > > +     int i_peek = stream_Peek( p_demux->s, &p_peek, n );
+> > > +@@ -67,7 +67,7 @@ static int vlclua_demux_read( lua_State
+> > > + {
+> > > +     demux_t *p_demux = (demux_t *)vlclua_get_this( L );
+> > > +     const uint8_t *p_read;
+> > > +-    int n = luaL_checkint( L, 1 );
+> > > ++    int n = luaL_checkinteger( L, 1 );
+> > > +     int i_read = stream_Peek( p_demux->s, &p_read, n );
+> > > +
+> > > +     if( i_read > 0 )
+> > > +Index: vlc-2.2.1/modules/lua/libs/configuration.c
+> > > +===================================================================
+> > > +--- vlc-2.2.1.orig/modules/lua/libs/configuration.c
+> > > ++++ vlc-2.2.1/modules/lua/libs/configuration.c
+> > > +@@ -84,7 +84,7 @@ static int vlclua_config_set( lua_State
+> > > +             break;
+> > > +
+> > > +         case VLC_VAR_INTEGER:
+> > > +-            config_PutInt( p_this, psz_name, luaL_checkint( L, 2 ) );
+> > > ++            config_PutInt( p_this, psz_name, luaL_checkinteger( L, 2
+> ) );
+> > > +             break;
+> > > +
+> > > +         case VLC_VAR_BOOL:
+> > > +Index: vlc-2.2.1/modules/lua/libs/net.c
+> > > +===================================================================
+> > > +--- vlc-2.2.1.orig/modules/lua/libs/net.c
+> > > ++++ vlc-2.2.1/modules/lua/libs/net.c
+> > > +@@ -202,7 +202,7 @@ static int vlclua_net_listen_tcp( lua_St
+> > > + {
+> > > +     vlc_object_t *p_this = vlclua_get_this( L );
+> > > +     const char *psz_host = luaL_checkstring( L, 1 );
+> > > +-    int i_port = luaL_checkint( L, 2 );
+> > > ++    int i_port = luaL_checkinteger( L, 2 );
+> > > +     int *pi_fd = net_ListenTCP( p_this, psz_host, i_port );
+> > > +     if( pi_fd == NULL )
+> > > +         return luaL_error( L, "Cannot listen on %s:%d", psz_host,
+> i_port
+> > > );
+> > > +@@ -274,7 +274,7 @@ static int vlclua_net_connect_tcp( lua_S
+> > > + {
+> > > +     vlc_object_t *p_this = vlclua_get_this( L );
+> > > +     const char *psz_host = luaL_checkstring( L, 1 );
+> > > +-    int i_port = luaL_checkint( L, 2 );
+> > > ++    int i_port = luaL_checkinteger( L, 2 );
+> > > +     int i_fd = net_Connect( p_this, psz_host, i_port, SOCK_STREAM,
+> > > IPPROTO_TCP );
+> > > +     lua_pushinteger( L, vlclua_fd_map_safe( L, i_fd ) );
+> > > +     return 1;
+> > > +@@ -282,26 +282,26 @@ static int vlclua_net_connect_tcp( lua_S
+> > > +
+> > > + static int vlclua_net_close( lua_State *L )
+> > > + {
+> > > +-    int i_fd = luaL_checkint( L, 1 );
+> > > ++    int i_fd = luaL_checkinteger( L, 1 );
+> > > +     vlclua_fd_unmap_safe( L, i_fd );
+> > > +     return 0;
+> > > + }
+> > > +
+> > > + static int vlclua_net_send( lua_State *L )
+> > > + {
+> > > +-    int fd = vlclua_fd_get( L, luaL_checkint( L, 1 ) );
+> > > ++    int fd = vlclua_fd_get( L, luaL_checkinteger( L, 1 ) );
+> > > +     size_t i_len;
+> > > +     const char *psz_buffer = luaL_checklstring( L, 2, &i_len );
+> > > +
+> > > +-    i_len = luaL_optint( L, 3, i_len );
+> > > ++    i_len = luaL_optinteger( L, 3, i_len );
+> > > +     lua_pushinteger( L, (fd != -1) ? send( fd, psz_buffer, i_len, 0
+> ) :
+> > > -1 );
+> > > +     return 1;
+> > > + }
+> > > +
+> > > + static int vlclua_net_recv( lua_State *L )
+> > > + {
+> > > +-    int fd = vlclua_fd_get( L, luaL_checkint( L, 1 ) );
+> > > +-    size_t i_len = luaL_optint( L, 2, 1 );
+> > > ++    int fd = vlclua_fd_get( L, luaL_checkinteger( L, 1 ) );
+> > > ++    size_t i_len = luaL_optinteger( L, 2, 1 );
+> > > +     char psz_buffer[i_len];
+> > > +
+> > > +     ssize_t i_ret = (fd != -1) ? recv( fd, psz_buffer, i_len, 0 ) :
+> -1;
+> > > +@@ -382,19 +382,19 @@ static int vlclua_fd_open( lua_State *L
+> > > + #ifndef _WIN32
+> > > + static int vlclua_fd_write( lua_State *L )
+> > > + {
+> > > +-    int fd = vlclua_fd_get( L, luaL_checkint( L, 1 ) );
+> > > ++    int fd = vlclua_fd_get( L, luaL_checkinteger( L, 1 ) );
+> > > +     size_t i_len;
+> > > +     const char *psz_buffer = luaL_checklstring( L, 2, &i_len );
+> > > +
+> > > +-    i_len = luaL_optint( L, 3, i_len );
+> > > ++    i_len = luaL_optinteger( L, 3, i_len );
+> > > +     lua_pushinteger( L, (fd != -1) ? write( fd, psz_buffer, i_len )
+> : -1
+> > > );
+> > > +     return 1;
+> > > + }
+> > > +
+> > > + static int vlclua_fd_read( lua_State *L )
+> > > + {
+> > > +-    int fd = vlclua_fd_get( L, luaL_checkint( L, 1 ) );
+> > > +-    size_t i_len = luaL_optint( L, 2, 1 );
+> > > ++    int fd = vlclua_fd_get( L, luaL_checkinteger( L, 1 ) );
+> > > ++    size_t i_len = luaL_optinteger( L, 2, 1 );
+> > > +     char psz_buffer[i_len];
+> > > +
+> > > +     ssize_t i_ret = (fd != -1) ? read( fd, psz_buffer, i_len ) : -1;
+> > > +Index: vlc-2.2.1/modules/lua/libs/osd.c
+> > > +===================================================================
+> > > +--- vlc-2.2.1.orig/modules/lua/libs/osd.c
+> > > ++++ vlc-2.2.1/modules/lua/libs/osd.c
+> > > +@@ -67,7 +67,7 @@ static int vlclua_osd_icon( lua_State *L
+> > > + {
+> > > +     const char *psz_icon = luaL_checkstring( L, 1 );
+> > > +     int i_icon = vlc_osd_icon_from_string( psz_icon );
+> > > +-    int i_chan = luaL_optint( L, 2, SPU_DEFAULT_CHANNEL );
+> > > ++    int i_chan = luaL_optinteger( L, 2, SPU_DEFAULT_CHANNEL );
+> > > +     if( !i_icon )
+> > > +         return luaL_error( L, "\"%s\" is not a valid osd icon.",
+> > > psz_icon );
+> > > +
+> > > +@@ -114,9 +114,9 @@ static int vlc_osd_position_from_string(
+> > > + static int vlclua_osd_message( lua_State *L )
+> > > + {
+> > > +     const char *psz_message = luaL_checkstring( L, 1 );
+> > > +-    int i_chan = luaL_optint( L, 2, SPU_DEFAULT_CHANNEL );
+> > > ++    int i_chan = luaL_optinteger( L, 2, SPU_DEFAULT_CHANNEL );
+> > > +     const char *psz_position = luaL_optstring( L, 3, "top-right" );
+> > > +-    mtime_t duration = luaL_optint( L, 4, 1000000 );
+> > > ++    mtime_t duration = luaL_optinteger( L, 4, 1000000 );
+> > > +
+> > > +     input_thread_t *p_input = vlclua_get_input_internal( L );
+> > > +     if( p_input )
+> > > +@@ -154,10 +154,10 @@ static int vlc_osd_slider_type_from_stri
+> > > +
+> > > + static int vlclua_osd_slider( lua_State *L )
+> > > + {
+> > > +-    int i_position = luaL_checkint( L, 1 );
+> > > ++    int i_position = luaL_checkinteger( L, 1 );
+> > > +     const char *psz_type = luaL_checkstring( L, 2 );
+> > > +     int i_type = vlc_osd_slider_type_from_string( psz_type );
+> > > +-    int i_chan = luaL_optint( L, 3, SPU_DEFAULT_CHANNEL );
+> > > ++    int i_chan = luaL_optinteger( L, 3, SPU_DEFAULT_CHANNEL );
+> > > +     if( !i_type )
+> > > +         return luaL_error( L, "\"%s\" is not a valid slider type.",
+> > > +                            psz_type );
+> > > +@@ -198,7 +198,7 @@ static int vlclua_spu_channel_register(
+> > > +
+> > > + static int vlclua_spu_channel_clear( lua_State *L )
+> > > + {
+> > > +-    int i_chan = luaL_checkint( L, 1 );
+> > > ++    int i_chan = luaL_checkinteger( L, 1 );
+> > > +     input_thread_t *p_input = vlclua_get_input_internal( L );
+> > > +     if( !p_input )
+> > > +         return luaL_error( L, "Unable to find input." );
+> > > +Index: vlc-2.2.1/modules/lua/libs/playlist.c
+> > > +===================================================================
+> > > +--- vlc-2.2.1.orig/modules/lua/libs/playlist.c
+> > > ++++ vlc-2.2.1/modules/lua/libs/playlist.c
+> > > +@@ -69,7 +69,7 @@ static int vlclua_playlist_next( lua_Sta
+> > > +
+> > > + static int vlclua_playlist_skip( lua_State * L )
+> > > + {
+> > > +-    int i_skip = luaL_checkint( L, 1 );
+> > > ++    int i_skip = luaL_checkinteger( L, 1 );
+> > > +     playlist_t *p_playlist = vlclua_get_playlist_internal( L );
+> > > +     playlist_Skip( p_playlist, i_skip );
+> > > +     return 0;
+> > > +@@ -127,7 +127,7 @@ static int vlclua_playlist_random( lua_S
+> > > +
+> > > + static int vlclua_playlist_gotoitem( lua_State * L )
+> > > + {
+> > > +-    int i_id = luaL_checkint( L, 1 );
+> > > ++    int i_id = luaL_checkinteger( L, 1 );
+> > > +     playlist_t *p_playlist = vlclua_get_playlist_internal( L );
+> > > +     PL_LOCK;
+> > > +     int i_ret = playlist_Control( p_playlist, PLAYLIST_VIEWPLAY,
+> > > +@@ -139,7 +139,7 @@ static int vlclua_playlist_gotoitem( lua
+> > > +
+> > > + static int vlclua_playlist_delete( lua_State * L )
+> > > + {
+> > > +-    int i_id = luaL_checkint( L, 1 );
+> > > ++    int i_id = luaL_checkinteger( L, 1 );
+> > > +     playlist_t *p_playlist = vlclua_get_playlist_internal( L );
+> > > +     PL_LOCK;
+> > > +     playlist_item_t *p_item = playlist_ItemGetById( p_playlist, i_id
+> );
+> > > +@@ -155,8 +155,8 @@ static int vlclua_playlist_delete( lua_S
+> > > +
+> > > + static int vlclua_playlist_move( lua_State * L )
+> > > + {
+> > > +-    int i_item = luaL_checkint( L, 1 );
+> > > +-    int i_target = luaL_checkint( L, 2 );
+> > > ++    int i_item = luaL_checkinteger( L, 1 );
+> > > ++    int i_target = luaL_checkinteger( L, 2 );
+> > > +     playlist_t *p_playlist = vlclua_get_playlist_internal( L );
+> > > +     PL_LOCK;
+> > > +     playlist_item_t *p_item = playlist_ItemGetById( p_playlist,
+> i_item );
+> > > +Index: vlc-2.2.1/modules/lua/libs/stream.c
+> > > +===================================================================
+> > > +--- vlc-2.2.1.orig/modules/lua/libs/stream.c
+> > > ++++ vlc-2.2.1/modules/lua/libs/stream.c
+> > > +@@ -101,7 +101,7 @@ static int vlclua_stream_read( lua_State
+> > > + {
+> > > +     int i_read;
+> > > +     stream_t **pp_stream = (stream_t **)luaL_checkudata( L, 1,
+> "stream"
+> > > );
+> > > +-    int n = luaL_checkint( L, 2 );
+> > > ++    int n = luaL_checkinteger( L, 2 );
+> > > +     uint8_t *p_read = malloc( n );
+> > > +     if( !p_read ) return vlclua_error( L );
+> > > +
+> > > +Index: vlc-2.2.1/modules/lua/libs/variables.c
+> > > +===================================================================
+> > > +--- vlc-2.2.1.orig/modules/lua/libs/variables.c
+> > > ++++ vlc-2.2.1/modules/lua/libs/variables.c
+> > > +@@ -103,7 +103,7 @@ static int vlclua_tovalue( lua_State *L,
+> > > +             val->b_bool = luaL_checkboolean( L, -1 );
+> > > +             break;
+> > > +         case VLC_VAR_INTEGER:
+> > > +-            val->i_int = luaL_checkint( L, -1 );
+> > > ++            val->i_int = luaL_checkinteger( L, -1 );
+> > > +             break;
+> > > +         case VLC_VAR_STRING:
+> > > +             val->psz_string = (char*)luaL_checkstring( L, -1 ); /*
+> XXX:
+> > > Beware, this only stays valid as long as (L,-1) stays in the stack */
+> > > +Index: vlc-2.2.1/modules/lua/libs/volume.c
+> > > +===================================================================
+> > > +--- vlc-2.2.1.orig/modules/lua/libs/volume.c
+> > > ++++ vlc-2.2.1/modules/lua/libs/volume.c
+> > > +@@ -48,7 +48,7 @@
+> > > + static int vlclua_volume_set( lua_State *L )
+> > > + {
+> > > +     playlist_t *p_this = vlclua_get_playlist_internal( L );
+> > > +-    int i_volume = luaL_checkint( L, 1 );
+> > > ++    int i_volume = luaL_checkinteger( L, 1 );
+> > > +     if( i_volume < 0 )
+> > > +         i_volume = 0;
+> > > +     int i_ret = playlist_VolumeSet( p_this,
+> > > i_volume/(float)AOUT_VOLUME_DEFAULT );
+> > > +@@ -68,7 +68,7 @@ static int vlclua_volume_up( lua_State *
+> > > +     playlist_t *p_this = vlclua_get_playlist_internal( L );
+> > > +     float volume;
+> > > +
+> > > +-    playlist_VolumeUp( p_this, luaL_optint( L, 1, 1 ), &volume );
+> > > ++    playlist_VolumeUp( p_this, luaL_optinteger( L, 1, 1 ), &volume );
+> > > +     lua_pushnumber( L, lroundf(volume * AOUT_VOLUME_DEFAULT) );
+> > > +     return 1;
+> > > + }
+> > > +@@ -78,7 +78,7 @@ static int vlclua_volume_down( lua_State
+> > > +     playlist_t *p_this = vlclua_get_playlist_internal( L );
+> > > +     float volume;
+> > > +
+> > > +-    playlist_VolumeDown( p_this, luaL_optint( L, 1, 1 ), &volume );
+> > > ++    playlist_VolumeDown( p_this, luaL_optinteger( L, 1, 1 ), &volume
+> );
+> > > +     lua_pushnumber( L, lroundf(volume * AOUT_VOLUME_DEFAULT) );
+> > > +     return 1;
+> > > + }
+> > > +Index: vlc-2.2.1/modules/lua/libs/win.c
+> > > +===================================================================
+> > > +--- vlc-2.2.1.orig/modules/lua/libs/win.c
+> > > ++++ vlc-2.2.1/modules/lua/libs/win.c
+> > > +@@ -123,7 +123,7 @@ static int vlclua_console_init( lua_Stat
+> > > +
+> > > + static int vlclua_console_wait( lua_State *L )
+> > > + {
+> > > +-    int i_timeout = luaL_optint( L, 1, 0 );
+> > > ++    int i_timeout = luaL_optinteger( L, 1, 0 );
+> > > +     DWORD status = WaitForSingleObject( GetConsole( L ), i_timeout );
+> > > +     lua_pushboolean( L, status == WAIT_OBJECT_0 );
+> > > +     return 1;
+> > > diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+> > > b/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+> > > index 418f77c..ba8ca4b 100644
+> > > --- a/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+> > > +++ b/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+> > > @@ -9,7 +9,9 @@ SRC_URI += "file://0001-enable-subdir-objects.patch \
+> > >              file://0004-modules-gui-qt4-out-of-tree-build.patch \
+> > >              file://0005-libpostproc-header-check.patch \
+> > >              file://0006-make-opencv-configurable.patch \
+> > > +           file://0007-use-vorbisidec.patch \
+> > > +            file://0008-fix-luaL-checkint.patch \
+> > >  "
+> > >
+> > > -SRC_URI[md5sum] = "7ed67d22f7425011078772bfc62ac222"
+> > > -SRC_URI[sha256sum] =
+> > > "3e566c7525478167e18cc53dc75d621e4af91eb40aabb6231e47db25d682d5d3"
+> > > +SRC_URI[md5sum] = "42273945758b521c408fabc7fd6d9946"
+> > > +SRC_URI[sha256sum] =
+> > > "543d9d7e378ec0fa1ee2e7f7f5acf8c456c7d0ecc32037171523197ef3cf1fcb"
+> > > --
+> > > 2.1.0
+> > >
+> > >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
