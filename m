@@ -1,24 +1,37 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E314608B7
+Return-Path: <jkrishnanjanappa@mvista.com>
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 2860D608B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2015 09:31:13 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7J9VECJ023948
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 19 Aug 2015 10:23:05 +0000 (UTC)
+Received: by paccq16 with SMTP id cq16so254232pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2015 02:31:14 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.235.1; Wed, 19 Aug 2015 02:31:13 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 19 Aug 2015 17:27:23 +0800
-Message-ID: <1439976443-12967-1-git-send-email-rongqing.li@windriver.com>
+	Wed, 19 Aug 2015 03:23:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-type:content-transfer-encoding;
+	bh=1H7IrvhK5ZHvp3Dq1R1EyXyPE7vZZb1o+uhIfyHvE9k=;
+	b=GGRbxutlpZHe3b8wkY4bnyKYMOX3Nh9LR4zCFdK98crGfRJLwrgBZJWIw6UpXKfPdf
+	YluQkzz5ZxGKDpsyiJcr9boAQGHFh/16hjLTV5w8yJOTcUj1FblCuFMH0YC8S7psZnzX
+	kTV6XwHElL08QkqUwJGzWB8i3h4FFWs7LKQqu3EFV+WApBvfDfSWfkbKzknrbFbuE5NE
+	nNVGZP1Txk90zDHUn3MR8xxWMAZS/z+ezV/hQyXUbMaqiohiDnT3JpgRsxYccAtKYlwV
+	CHjZY3Qsx+iGlh88gdV9a3aXFdZcAHFMQamtPVcpnUpbqaMWOlsPMV5319+wwTmQECFA
+	r2Sg==
+X-Gm-Message-State: ALoCoQkMvnjAJ2cZwd+a3pcIGCOVCLAAGC5EmbFTTgK1QVfImJGiygCFvuw/capttAnI5LRUsizl
+X-Received: by 10.66.185.165 with SMTP id fd5mr16390121pac.32.1439979785710;
+	Wed, 19 Aug 2015 03:23:05 -0700 (PDT)
+Received: from ubuntu64.mvista.com ([111.93.218.67])
+	by smtp.gmail.com with ESMTPSA id ak10sm369639pad.3.2015.08.19.03.23.03
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 19 Aug 2015 03:23:05 -0700 (PDT)
+From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 19 Aug 2015 15:52:56 +0530
+Message-Id: <1439979776-3789-1-git-send-email-jkrishnanjanappa@mvista.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] dialog: upgrade to 1.2-20150528
+Subject: [meta-oe][PATCH v2] pmtools: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,90 +45,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2015 09:31:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 19 Aug 2015 10:23:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Roy Li <rongqing.li@windriver.com>
+pmtools contains small collection of power management test and
+investigation tools,
+   acpidump - dump a system’s ACPI tables to an ASCII file
+   acpixtract - convert ASCII acpidump output to raw binary table
+   madt -  parser for ACPI table
 
-remove use-pkg-config-for-ncurses-detection.patch, the new version is
-using the pkg-config to check ncurses
-configuration assumes the cf_have_ncuconfig is unknown for cross-compile,
-but ncurses is added into DEPENDS, so change it as yes
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 ---
- ...alog_1.2-20150225.bb => dialog_1.2-20150528.bb} |  6 ++--
- .../use-pkg-config-for-ncurses-detection.patch     | 32 ----------------------
- 2 files changed, 3 insertions(+), 35 deletions(-)
- rename meta-oe/recipes-extended/dialog/{dialog_1.2-20150225.bb => dialog_1.2-20150528.bb} (78%)
- delete mode 100644 meta-oe/recipes-extended/dialog/files/use-pkg-config-for-ncurses-detection.patch
+ meta-oe/recipes-devtools/pmtools/pmtools_git.bb | 27 +++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/pmtools/pmtools_git.bb
 
-diff --git a/meta-oe/recipes-extended/dialog/dialog_1.2-20150225.bb b/meta-oe/recipes-extended/dialog/dialog_1.2-20150528.bb
-similarity index 78%
-rename from meta-oe/recipes-extended/dialog/dialog_1.2-20150225.bb
-rename to meta-oe/recipes-extended/dialog/dialog_1.2-20150528.bb
-index 88af59f..4fb938e 100644
---- a/meta-oe/recipes-extended/dialog/dialog_1.2-20150225.bb
-+++ b/meta-oe/recipes-extended/dialog/dialog_1.2-20150528.bb
-@@ -8,11 +8,10 @@ DEPENDS = "ncurses"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
- 
--SRC_URI[md5sum] = "38ef59a7daa5459119cb06777c735e4b"
--SRC_URI[sha256sum] = "6844b13a7a1fea568a8d5bb3004e1af90888cd4a5e8c2ded2c38f34fcc7397ff"
-+SRC_URI[md5sum] = "593615fb448e001e5b81420473a7354b"
-+SRC_URI[sha256sum] = "a8cd7a66bdb41e53a3145cbb0eb370c5ce7300fe0e9ad6d3e8d3b9e16ff16418"
- 
- SRC_URI = "ftp://invisible-island.net/dialog/dialog-${PV}.tgz \
--           file://use-pkg-config-for-ncurses-detection.patch \
-           "
- 
- # hardcoded here for use in dialog-static recipe
-@@ -26,5 +25,6 @@ EXTRA_OECONF = "--with-ncurses \
- do_configure() {
-     gnu-configize --force
-     sed -i 's,${cf_ncuconfig_root}6-config,${cf_ncuconfig_root}-config,g' -i configure
-+    sed -i 's,cf_have_ncuconfig=unknown,cf_have_ncuconfig=yes,g' -i configure
-     oe_runconf
- }
-diff --git a/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-ncurses-detection.patch b/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-ncurses-detection.patch
-deleted file mode 100644
-index 0a25a7f..0000000
---- a/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-ncurses-detection.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--Subject: [PATCH] use pkg-config for ncurses detection.
--
--Upstream-Status: Inappropriate [configuration]
--
--This is a workaround to make dialog be able to build after ncurses-config
--does not work, since the configure file is called directly in dialog bb
--file, and autoconf can not work, make a workaround in configure file.
--
--Signed-off-by: Roy Li <rongqing.li@windriver.com>
-----
-- configure | 5 ++---
-- 1 file changed, 2 insertions(+), 3 deletions(-)
--
--diff --git a/configure b/configure
--index 8afe3d7..a54bcc1 100755
----- a/configure
--+++ b/configure
--@@ -11567,9 +11567,8 @@ fi
-- 
-- if test "$NCURSES_CONFIG" != none ; then
-- 
---CPPFLAGS="$CPPFLAGS `$NCURSES_CONFIG --cflags`"
---
---cf_add_libs="`$NCURSES_CONFIG --libs`"
--+CPPFLAGS="$CPPFLAGS `pkg-config --short-errors --print-errors --cflags "ncurses" 2>/dev/null`"
--+cf_add_libs="`pkg-config --short-errors --print-errors --libs "ncurses" 2>/dev/null` $LIBS"
-- # Filter out duplicates - this happens with badly-designed ".pc" files...
-- for cf_add_1lib in $LIBS
-- do
---- 
--1.7.10.4
--
+diff --git a/meta-oe/recipes-devtools/pmtools/pmtools_git.bb b/meta-oe/recipes-devtools/pmtools/pmtools_git.bb
+new file mode 100644
+index 0000000..602da5e
+--- /dev/null
++++ b/meta-oe/recipes-devtools/pmtools/pmtools_git.bb
+@@ -0,0 +1,27 @@
++DESCRIPTION = "This is a small collection of power management \
++               test and investigation tools"
++HOMEPAGE = "http://lesswatts.org/projects/acpi"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
++
++PV = "20130209+git${SRCPV}"
++
++SRC_URI = "git://github.com/anyc/pmtools.git;protocol=https"
++SRCREV = "3ebe0e54c54061b4c627236cbe35d820de2e1168"
++
++COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
++
++S = "${WORKDIR}/git"
++
++do_configure[noexec] = "1"
++do_compile() {
++	oe_runmake
++}
++
++do_install() {
++	install -d ${D}${bindir} ${D}${docdir}
++	install -m 755 ${S}/acpidump/acpidump ${D}${bindir}
++	install -m 755 ${S}/acpixtract/acpixtract ${D}${bindir}
++	install -m 755 ${S}/madt/madt ${D}${bindir}
++	install -m 644 ${S}/README ${D}${docdir}
++}
 -- 
 1.9.1
 
