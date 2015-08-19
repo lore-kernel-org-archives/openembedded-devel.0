@@ -1,44 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 617D975E7E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2015 12:55:26 +0000 (UTC)
-Received: by wibhh20 with SMTP id hh20so7558019wib.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2015 05:55:26 -0700 (PDT)
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-la0-f42.google.com (mail-la0-f42.google.com
+	[209.85.215.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 21BB573E11;
+	Wed, 19 Aug 2015 14:04:57 +0000 (UTC)
+Received: by lalv9 with SMTP id v9so3720983lal.0;
+	Wed, 19 Aug 2015 07:04:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=iaI9sgVeO+rF6TgssMDREDPwXmEK7EEBIPWIeYjknaQ=;
-	b=a94y5EUYG8QvjFufxgIi+OkVBqh5EJd3SDD7+QMwYH9/w3eLB2wizbRSgCxvc8/hg5
-	41g7C9qXNKFyuGe59jWnUCUibamL3Ac1lEUNmzieCQDfYupnd12HPBS3uHHehl3N3Yhd
-	0ykjKA9ecFmFxFf19KJSj01kZ8i0a+0pCNnpKq6YSFGCHf3sTswwOrG94Z/YBOaQ5qyf
-	ZJGNfAsYlUNaW3C49qqu7jgZjpn4CgX6u8t5JltYpbypftTq2vxScjWX8rozVm8RsRDS
-	2YXCYkw7ZmopIaKPLBJvtyiXlNEa/fXYPE+UCrtsYHs1nagUYU+BiFg+h1z9PcsvSwI0
-	WwvA==
-X-Received: by 10.180.75.78 with SMTP id a14mr53644189wiw.43.1439988926897;
-	Wed, 19 Aug 2015 05:55:26 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id go5sm1517000wib.5.2015.08.19.05.55.25
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 19 Aug 2015 05:55:25 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 19 Aug 2015 14:55:40 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150819125540.GA2442@jama>
-References: <1438562844-16736-1-git-send-email-TicoTimo@gmail.com>
-	<1438562844-16736-2-git-send-email-TicoTimo@gmail.com>
-	<CANx9H-DRLk5sOcmPtoGgHQRAa5y+Ef8ihbBvMAb7S7ptOaE7dQ@mail.gmail.com>
-	<20150818094429.GI2458@jama>
-	<CANx9H-D_onDGKhvi08xPXXuNwzJ13dfYObE_=k+J0g2G4-R1aQ@mail.gmail.com>
-	<55D41EB8.5050503@videolan.org>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=mIFfwgArVl5OCerV1kWJJmk0vhfUfOPoWPaAu3odpnc=;
+	b=D26IbOjLiv1+o2/vSo+I1k7xvnJmo8dF3Rot7E6BEp4tbBV+N56OHIAid2HHIHI72p
+	mPncNZyc3cjhvZ3YqMK8yauPwZ2LmtfGTVNconEH+lRZ/j4k6jy2rQ3ZyBa8riJ0z3EK
+	2KbdDs+yFIHapmqN/sFLp2h8ut53YuJQyp93OPWwOo8KoCI349F1VVtcBN+Sx8jj7smw
+	ZpDOQvmMYivsTu2m4MyYWJ/q+Wdofvx0XQZNvWtiEcCr3o7DwMfo76KK5Rab+as6RrSe
+	3umTm+LY7+ZmVU+vTiDKfpjj4BRicYicC4rnpp1Sl3drRFcGTW/ykuY6s9yY5m6ZySfF
+	WYKQ==
+X-Received: by 10.112.156.137 with SMTP id we9mr8076837lbb.110.1439993096148; 
+	Wed, 19 Aug 2015 07:04:56 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <55D41EB8.5050503@videolan.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][meta-multimedia][PATCH 2/2] vlc: update to 2.2.1
+Received: by 10.25.22.148 with HTTP; Wed, 19 Aug 2015 07:04:36 -0700 (PDT)
+In-Reply-To: <55D48BF2.3050201@mentor.com>
+References: <1439986711-27572-1-git-send-email-ricardo.ribalda@gmail.com>
+	<55D48BF2.3050201@mentor.com>
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Date: Wed, 19 Aug 2015 16:04:36 +0200
+Message-ID: <CAPybu_35mGLnB8jHaVUH4gcvEUjH+FxDLkHi9NUSvzjL21NVSw@mail.gmail.com>
+To: Nathan Lynch <Nathan_Lynch@mentor.com>
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	Paul Eggleton <paul.eggleton@linux.intel.com>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] [PATCH] Opencv: Add OpenCV 3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,80 +44,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2015 12:55:27 -0000
-X-Groupsio-MsgNum: 56803
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="EVF5PPMfhYS0aIcm"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 19 Aug 2015 14:04:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
---EVF5PPMfhYS0aIcm
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+You are right :)
 
-On Wed, Aug 19, 2015 at 08:14:16AM +0200, Rafa=EBl Carr=E9 wrote:
-> On 08/19/2015 05:05 AM, Tim Orling wrote:
-> > On Tue, Aug 18, 2015 at 2:44 AM, Martin Jansa <martin.jansa@gmail.com>
-> > wrote:
-> >=20
-> >> On Sun, Aug 02, 2015 at 06:07:57PM -0700, Tim Orling wrote:
-> >>> I accidentally left libvorbis as a dependency in vlc.inc, which is not
-> >>> needed (tremor provides what was needed).
-> >>>
-> >>> You can pull the corrected recipes from:
-> >>>
-> >>>
-> >> http://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dtimo/vl=
-c-2.2.1
-> >>>
-> >>> --Tim
-> >>
-> >> It still fails with that libtool error:
-> >> http://errors.yoctoproject.org/Errors/Details/14498/
-> >> but I'll merge it anyway, because it doesn't make things worse than old
-> >> version.
-> >>
-> >> It is having a problem with the assembly files (e.g.
-> > vlc-2.2.1/modules/arm_neon/i422_yuyv.S )
-> >=20
-> >=20
-> > Anybody have any ideas? I would guess that --tag=3DCC would still apply=
-, but
-> > I don't see any obvious support for assembly files in the libtool docs.
-> >=20
-> > --Tim
->=20
-> This vlc.inc diff lets VLC build correctly for me:
->=20
-> -    sed -i -e s:'${top_builddir_slash}libtool':${TARGET_SYS}-libtool:g
-> ${B}/doltlibtool
-> +    sed -i -e
-> s:'${top_builddir_slash}libtool':'${top_builddir_slash}'${TARGET_SYS}-lib=
-tool:g
-> ${B}/doltlibtool
+I repack and send
 
-Can you please send this as proper patch? Then I'll include it in next
-jenkins build to verify.
+On Wed, Aug 19, 2015 at 4:00 PM, Nathan Lynch <Nathan_Lynch@mentor.com> wrote:
+> On 08/19/2015 07:18 AM, Ricardo Ribalda Delgado wrote:
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-support/opencv/opencv_3.0.bb
+>> @@ -0,0 +1,128 @@
+>> +SUMMARY = "Opencv : The Open Computer Vision Library"
+>> +HOMEPAGE = "http://opencv.willowgarage.com/wiki/"
+>
+> Is this URL outdated?  It times out for me.
+>
 
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---EVF5PPMfhYS0aIcm
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+-- 
+Ricardo Ribalda
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlXUfMsACgkQN1Ujt2V2gBwOEgCffp8PtdohbVONsUEE65HZlPZz
-u2sAnRxTzvsC0jvvF5nrFJ/qP4jzUPB+
-=+FU1
------END PGP SIGNATURE-----
-
---EVF5PPMfhYS0aIcm--
