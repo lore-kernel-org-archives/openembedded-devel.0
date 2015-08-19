@@ -1,34 +1,27 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ob0-f180.google.com (mail-ob0-f180.google.com
-	[209.85.214.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 6338973CC7
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 1383660043
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2015 00:18:22 +0000 (UTC)
-Received: by obkg7 with SMTP id g7so24386288obk.3
+	Wed, 19 Aug 2015 02:44:49 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99788109"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 19 Aug 2015 10:48:04 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7J2ij3c004080
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2015 17:18:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=fkK235oMd5uSil9Zupt7xh0aGNLXEs01AV1ezT4pKR0=;
-	b=BD81IteTmyuxpEgkEhoUJVgKl/L2uhLchcY3u7G+tg9A6fnTYcdNytcqKK3pwELJD0
-	SRNeG4wOeK8HJxKtbEQDX0my3KIidkLwSi70/JXNjPxMqzs6sV1XprJjP8fnWMBFPDCi
-	6orlMXOszf+1fk/+vUsMNxJu5de4lt0YUrC+I1uS8ECPt948UKKXECVUAwDdHiORvz2r
-	JTBz4I/mKwUF8aYKvucGcjAmA462N5nWKxGxPXVWvdNiAnRFa+TYwPk6jwNSz/+OQMQT
-	qUQLzrqi/4jILR/88f1XjY/B+DOk9BHV/l/0FJMNDu5t+fUl8pyWT5QQ++EoqOcQWUXr
-	jTdQ==
+	Wed, 19 Aug 2015 10:44:45 +0800
+Received: from localhost.localdomain (10.167.226.26) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 19 Aug 2015 10:44:47 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 19 Aug 2015 10:45:02 +0800
+Message-ID: <1439952302-22533-1-git-send-email-leimaohui@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Received: by 10.60.45.244 with SMTP id q20mr8747857oem.32.1439943502754;
-	Tue, 18 Aug 2015 17:18:22 -0700 (PDT)
-Received: by 10.202.21.132 with HTTP; Tue, 18 Aug 2015 17:18:22 -0700 (PDT)
-In-Reply-To: <cover.1438618378.git.akuster808@gmail.com>
-References: <cover.1438618378.git.akuster808@gmail.com>
-Date: Tue, 18 Aug 2015 17:18:22 -0700
-Message-ID: <CAJ86T=Xn1q_P4bGNy=jQGS=byRLYYyTXGuoJeCtLaEK3A4P1VQ@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [PATCH 00/55] For meta-oe fido-next
+X-Originating-IP: [10.167.226.26]
+Subject: [meta-networking][PATCH] ptpd: 2.3.1-rc2->2.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,202 +35,682 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2015 00:18:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 19 Aug 2015 02:44:52 -0000
+Content-Type: text/plain
 
-On Mon, Aug 3, 2015 at 9:22 AM, Armin Kuster <akuster808@gmail.com> wrote:
-> I don't recall if I sent this pull request already.
->
-> Please consider these changes for Meta-openembedded fido next
->
-> The following changes since commit c841231b9f327d2d06d19d2ba1324dd86b8361=
-7c:
->
->   netperf: fix the broken download url (2015-08-03 11:42:33 +0200)
->
-> are available in the git repository at:
->
->   git://github.com/akuster/meta-openembedded akuster/fido-next
->   https://github.com/akuster/meta-openembedded/tree/akuster/fido-next
->
-> Armin Kuster (27):
->   collectd: fix world build issue
->   libgxim: fix world build issues
->   protobuf: update update and build fix
->   serial-forward: fix fetch error
->   lirc: fix QA warnings
->   hplib: fix QA warnings
->   udisks: fix QA warnings
->   lio-utils: fix QA warnings
->   pm-qa: Fix QA warnings
->   gateone: Fix QA warnings
->   rarpd: Fix QA warnings
->   pscs-lite: Fix QA warnings
->   fbida: Fix QA warnings
->   qt-creator: Fix QA warnings
->   fio: Fix QA warnings
+Delete ptpd-add-dpaa-etsec-support.patch.The reason is the following:
+- The ptpd-add-dpaa-etsec-support.patch does not suitable for new version.
+- The upstream didn't accept this patch.
 
-There's an improved fix for this one in master:
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+---
+ .../ptpd/ptpd/ptpd-add-dpaa-etsec-support.patch    | 621 ---------------------
+ .../ptpd/{ptpd_2.3.1-rc2.bb => ptpd_2.3.1.bb}      |   7 +-
+ 2 files changed, 3 insertions(+), 625 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/ptpd/ptpd/ptpd-add-dpaa-etsec-support.patch
+ rename meta-networking/recipes-daemons/ptpd/{ptpd_2.3.1-rc2.bb => ptpd_2.3.1.bb} (86%)
 
-  http://git.openembedded.org/meta-openembedded/commit/?id=3Deb01b36cb3f2f6=
-86bc05c690b06d1e0680dda1f5
+diff --git a/meta-networking/recipes-daemons/ptpd/ptpd/ptpd-add-dpaa-etsec-support.patch b/meta-networking/recipes-daemons/ptpd/ptpd/ptpd-add-dpaa-etsec-support.patch
+deleted file mode 100644
+index abb3933..0000000
+--- a/meta-networking/recipes-daemons/ptpd/ptpd/ptpd-add-dpaa-etsec-support.patch
++++ /dev/null
+@@ -1,621 +0,0 @@
+-Add FSL QorIQ DPAA and eTSEC support
+-
+-This patch is for Freescale QorIQ DPAA and eTSEC which support 1588 hardware
+-assist module, and mainly uses SO_TIMESTAMPING API for HW timestamp and PHC
+-API.
+-
+-Signed-off-by: Lu Yangbo <yangbo.lu@freescale.com>
+-Upstream-Status: Submitted [http://sourceforge.net/p/ptpd/patches/56/]
+-
+-diff --git a/src/bmc.c b/src/bmc.c
+-index f4c74bd..925daba 100644
+---- a/src/bmc.c
+-+++ b/src/bmc.c
+-@@ -249,6 +249,7 @@ void s1(MsgHeader *header,MsgAnnounce *announce,PtpClock *ptpClock, const RunTim
+-         ptpClock->timePropertiesDS.ptpTimescale = IS_SET(header->flagField1, PTPT);
+-         ptpClock->timePropertiesDS.timeSource = announce->timeSource;
+- 
+-+#ifndef FSL_1588
+- #if defined(MOD_TAI) &&  NTP_API == 4
+- 	/*
+- 	 * update kernel TAI offset, but only if timescale is
+-@@ -261,6 +262,7 @@ void s1(MsgHeader *header,MsgAnnounce *announce,PtpClock *ptpClock, const RunTim
+- 		INFO("Set kernel UTC offset to %d\n", ptpClock->timePropertiesDS.currentUtcOffset);
+-         }
+- #endif /* MOD_TAI */
+-+#endif
+- 
+- 	/* Leap second handling */
+- 
+-@@ -280,9 +282,11 @@ void s1(MsgHeader *header,MsgAnnounce *announce,PtpClock *ptpClock, const RunTim
+- 			ptpClock->leapSecondPending = FALSE;
+- 			ptpClock->leapSecondInProgress = FALSE;
+- 			timerStop(LEAP_SECOND_PAUSE_TIMER, ptpClock->itimer);
+-+#ifndef FSL_1588
+- #ifdef HAVE_SYS_TIMEX_H
+- 			unsetTimexFlags(STA_INS | STA_DEL,TRUE);
+- #endif /* HAVE_SYS_TIMEX_H */
+-+#endif /* FSL_1588 */
+- 		}
+- 
+- 		/*
+-@@ -295,6 +299,7 @@ void s1(MsgHeader *header,MsgAnnounce *announce,PtpClock *ptpClock, const RunTim
+- 		    ((!previousLeap59 && ptpClock->timePropertiesDS.leap59) ||
+- 		    (!previousLeap61 && ptpClock->timePropertiesDS.leap61)))) {
+- #ifdef HAVE_SYS_TIMEX_H
+-+#ifndef FSL_1588
+- 			WARNING("Leap second pending! Setting kernel to %s "
+- 				"one second at midnight\n",
+- 				ptpClock->timePropertiesDS.leap61 ? "add" : "delete");
+-@@ -304,6 +309,7 @@ void s1(MsgHeader *header,MsgAnnounce *announce,PtpClock *ptpClock, const RunTim
+- 			    setTimexFlags(ptpClock->timePropertiesDS.leap61 ? STA_INS : STA_DEL,
+- 					  FALSE);
+- 		    }
+-+#endif
+- #else
+- 			WARNING("Leap second pending! No kernel leap second "
+- 				"API support - expect a clock jump at "
+-diff --git a/src/dep/net.c b/src/dep/net.c
+-index 34d23ad..9075847 100644
+---- a/src/dep/net.c
+-+++ b/src/dep/net.c
+-@@ -85,6 +85,9 @@
+- #include <linux/ethtool.h>
+- #endif /* SO_TIMESTAMPING */
+- 
+-+#if defined(FSL_1588)
+-+char fsl_1588_if_name[IFACE_NAME_LENGTH];
+-+#endif
+- /**
+-  * shutdown the IPv4 multicast for specific address
+-  *
+-@@ -461,6 +464,9 @@ testInterface(char * ifaceName, RunTimeOpts* rtOpts)
+- 	if(getInterfaceInfo(ifaceName, &info) != 1)
+- 		return FALSE;
+- 
+-+#if defined(FSL_1588)
+-+	memcpy(fsl_1588_if_name, ifaceName, IFACE_NAME_LENGTH);
+-+#endif
+- 	switch(rtOpts->transport) {
+- 
+- 	    case UDP_IPV4:
+-@@ -666,6 +672,27 @@ end:
+- }
+- #endif /* SO_TIMESTAMPING */
+- 
+-+#if defined(FSL_1588)
+-+/* select HWTSTAMP_TX_ON or HWTSTAMP_TX_OFF */
+-+void hwtstamp_tx_ctl(NetPath *netPath, Boolean enable)
+-+{
+-+	struct ifreq hwtstamp;
+-+	struct hwtstamp_config hwconfig;
+-+
+-+	memset(&hwtstamp, 0, sizeof(hwtstamp));
+-+	strncpy(hwtstamp.ifr_name, fsl_1588_if_name, sizeof(hwtstamp.ifr_name));
+-+	hwtstamp.ifr_data = (void *)&hwconfig;
+-+	memset(&hwconfig, 0, sizeof(hwconfig));
+-+	hwconfig.tx_type =
+-+		enable ?
+-+		HWTSTAMP_TX_ON : HWTSTAMP_TX_OFF;
+-+	hwconfig.rx_filter = HWTSTAMP_FILTER_PTP_V1_L4_SYNC;
+-+	if (ioctl(netPath->eventSock, SIOCSHWTSTAMP, &hwtstamp) < 0
+-+		|| ioctl(netPath->generalSock, SIOCSHWTSTAMP, &hwtstamp) < 0)
+-+			printf("error:hwtstamp_tx_ctl\n");
+-+}
+-+#endif
+-+
+- 
+- /**
+-  * Initialize timestamping of packets
+-@@ -682,10 +709,17 @@ netInitTimestamping(NetPath * netPath, RunTimeOpts * rtOpts)
+- 	Boolean result = TRUE;
+- #if defined(SO_TIMESTAMPING) && defined(SO_TIMESTAMPNS)/* Linux - current API */
+- 	DBG("netInitTimestamping: trying to use SO_TIMESTAMPING\n");
+-+#if defined(FSL_1588)
+-+	val = SOF_TIMESTAMPING_TX_HARDWARE |
+-+	    SOF_TIMESTAMPING_RX_HARDWARE |
+-+	    SOF_TIMESTAMPING_RAW_HARDWARE;
+-+#else
+- 	val = SOF_TIMESTAMPING_TX_SOFTWARE |
+- 	    SOF_TIMESTAMPING_RX_SOFTWARE |
+- 	    SOF_TIMESTAMPING_SOFTWARE;
+-+#endif
+- 
+-+#ifndef FSL_1588
+- /* unless compiled with PTPD_EXPERIMENTAL, check if we support the desired tstamp capabilities */
+- #ifndef PTPD_EXPERIMENTAL
+- #ifdef ETHTOOL_GET_TS_INFO
+-@@ -716,6 +750,7 @@ netInitTimestamping(NetPath * netPath, RunTimeOpts * rtOpts)
+- 	val = 1;
+- #endif /* ETHTOOL_GET_TS_INFO */
+- #endif /* PTPD_EXPERIMENTAL */
+-+#endif /* FSL_1588 */
+- 
+- 	if(val == 1) {
+- 	    if (setsockopt(netPath->eventSock, SOL_SOCKET, SO_TIMESTAMPNS, &val, sizeof(int)) < 0) {
+-@@ -902,6 +937,9 @@ netInit(NetPath * netPath, RunTimeOpts * rtOpts, PtpClock * ptpClock)
+- 
+- 	DBG("Listening on IP: %s\n",inet_ntoa(
+- 		((struct sockaddr_in*)&(netPath->interfaceInfo.afAddress))->sin_addr));
+-+#if defined(FSL_1588)
+-+	hwtstamp_tx_ctl(&ptpClock->netPath, FALSE);/* HWTSTAMP_TX_OFF */
+-+#endif
+- 
+- #ifdef PTPD_PCAP
+- 	if (rtOpts->pcap == TRUE) {
+-@@ -1319,7 +1357,11 @@ netRecvEvent(Octet * buf, TimeInternal * time, NetPath * netPath, int flags)
+- #if defined(SO_TIMESTAMPING) && defined(SO_TIMESTAMPNS)
+- 				if(cmsg->cmsg_type == SO_TIMESTAMPING || 
+- 				    cmsg->cmsg_type == SO_TIMESTAMPNS) {
+-+#if defined(FSL_1588)
+-+					ts = (struct timespec *)CMSG_DATA(cmsg) + 2;
+-+#else
+- 					ts = (struct timespec *)CMSG_DATA(cmsg);
+-+#endif
+- 					time->seconds = ts->tv_sec;
+- 					time->nanoseconds = ts->tv_nsec;
+- 					timestampValid = TRUE;
+-@@ -1520,6 +1562,9 @@ netSendEvent(Octet * buf, UInteger16 length, NetPath * netPath,
+- 	ssize_t ret;
+- 	struct sockaddr_in addr;
+- 
+-+#if defined(FSL_1588)
+-+	hwtstamp_tx_ctl(netPath, TRUE);/* HWTSTAMP_TX_ON */
+-+#endif
+- 	addr.sin_family = AF_INET;
+- 	addr.sin_port = htons(PTP_EVENT_PORT);
+- 
+-@@ -1559,6 +1604,9 @@ netSendEvent(Octet * buf, UInteger16 length, NetPath * netPath,
+- 				DBG("Error sending unicast event message\n");
+- 			else
+- 				netPath->sentPackets++;
+-+#if defined(FSL_1588)
+-+			usleep(100);
+-+#endif
+- #ifndef SO_TIMESTAMPING
+- 			/* 
+- 			 * Need to forcibly loop back the packet since
+-@@ -1574,10 +1622,14 @@ netSendEvent(Octet * buf, UInteger16 length, NetPath * netPath,
+- #else
+- 			if(!netPath->txTimestampFailure) {
+- 				if(!getTxTimestamp(netPath, tim)) {
+-+#if defined(FSL_1588)
+-+					printf("getTxTimestamp: get tx timestamp error\n");
+-+#else
+- 					netPath->txTimestampFailure = TRUE;
+- 					if (tim) {
+- 						clearTime(tim);
+- 					}
+-+#endif
+- 				}
+- 			}
+- 
+-@@ -1609,9 +1661,15 @@ netSendEvent(Octet * buf, UInteger16 length, NetPath * netPath,
+- 				DBG("Error sending multicast event message\n");
+- 			else
+- 				netPath->sentPackets++;
+-+#if defined(FSL_1588)
+-+			usleep(100);
+-+#endif
+- #ifdef SO_TIMESTAMPING
+- 			if(!netPath->txTimestampFailure) {
+- 				if(!getTxTimestamp(netPath, tim)) {
+-+#if defined(FSL_1588)
+-+					printf("getTxTimestamp: get tx timestamp error\n");
+-+#else
+- 					if (tim) {
+- 						clearTime(tim);
+- 					}
+-@@ -1620,6 +1678,7 @@ netSendEvent(Octet * buf, UInteger16 length, NetPath * netPath,
+- 
+- 					/* Try re-enabling MULTICAST_LOOP */
+- 					netSetMulticastLoopback(netPath, TRUE);
+-+#endif
+- 				}
+- 			}
+- #endif /* SO_TIMESTAMPING */
+-@@ -1638,6 +1697,9 @@ netSendGeneral(Octet * buf, UInteger16 length, NetPath * netPath,
+- 	ssize_t ret;
+- 	struct sockaddr_in addr;
+- 
+-+#if defined(FSL_1588)
+-+	hwtstamp_tx_ctl(netPath, TRUE);/* HWTSTAMP_TX_ON */
+-+#endif
+- 	addr.sin_family = AF_INET;
+- 	addr.sin_port = htons(PTP_GENERAL_PORT);
+- 
+-@@ -1707,6 +1769,9 @@ netSendPeerGeneral(Octet * buf, UInteger16 length, NetPath * netPath, RunTimeOpt
+- 	ssize_t ret;
+- 	struct sockaddr_in addr;
+- 
+-+#if defined(FSL_1588)
+-+	hwtstamp_tx_ctl(netPath, TRUE);/* HWTSTAMP_TX_ON */
+-+#endif
+- 	addr.sin_family = AF_INET;
+- 	addr.sin_port = htons(PTP_GENERAL_PORT);
+- 
+-@@ -1762,6 +1827,9 @@ netSendPeerEvent(Octet * buf, UInteger16 length, NetPath * netPath, RunTimeOpts
+- 	ssize_t ret;
+- 	struct sockaddr_in addr;
+- 
+-+#if defined(FSL_1588)
+-+	hwtstamp_tx_ctl(netPath, TRUE);/* HWTSTAMP_TX_ON */
+-+#endif
+- 	addr.sin_family = AF_INET;
+- 	addr.sin_port = htons(PTP_EVENT_PORT);
+- 
+-@@ -1788,6 +1856,9 @@ netSendPeerEvent(Octet * buf, UInteger16 length, NetPath * netPath, RunTimeOpts
+- 			DBG("Error sending unicast peer event message\n");
+- 		else
+- 			netPath->sentPackets++;
+-+#if defined(FSL_1588)
+-+		usleep(100);
+-+#endif
+- 
+- #ifndef SO_TIMESTAMPING
+- 		/* 
+-@@ -1804,10 +1875,14 @@ netSendPeerEvent(Octet * buf, UInteger16 length, NetPath * netPath, RunTimeOpts
+- #else
+- 		if(!netPath->txTimestampFailure) {
+- 			if(!getTxTimestamp(netPath, tim)) {
+-+#if defined(FSL_1588)
+-+				printf("getTxTimestamp: get tx timestamp error\n");
+-+#else
+- 				netPath->txTimestampFailure = TRUE;
+- 				if (tim) {
+- 					clearTime(tim);
+- 				}
+-+#endif
+- 			}
+- 		}
+- 
+-@@ -1839,9 +1914,15 @@ netSendPeerEvent(Octet * buf, UInteger16 length, NetPath * netPath, RunTimeOpts
+- 			DBG("Error sending multicast peer event message\n");
+- 		else
+- 			netPath->sentPackets++;
+-+#if defined(FSL_1588)
+-+		usleep(100);
+-+#endif
+- #ifdef SO_TIMESTAMPING
+- 		if(!netPath->txTimestampFailure) {
+- 			if(!getTxTimestamp(netPath, tim)) {
+-+#if defined(FSL_1588)
+-+				printf("getTxTimestamp: get tx timestamp error\n");
+-+#else
+- 				if (tim) {
+- 					clearTime(tim);
+- 				}
+-@@ -1850,6 +1931,7 @@ netSendPeerEvent(Octet * buf, UInteger16 length, NetPath * netPath, RunTimeOpts
+- 
+- 				/* Try re-enabling MULTICAST_LOOP */
+- 				netSetMulticastLoopback(netPath, TRUE);
+-+#endif
+- 			}
+- 		}
+- #endif /* SO_TIMESTAMPING */
+-diff --git a/src/dep/ntpengine/ntpdcontrol.c b/src/dep/ntpengine/ntpdcontrol.c
+-index d773284..e84af9e 100644
+---- a/src/dep/ntpengine/ntpdcontrol.c
+-+++ b/src/dep/ntpengine/ntpdcontrol.c
+-@@ -170,6 +170,15 @@ get_systime(
+- {
+-         double dtemp;
+- 
+-+#if defined(FSL_1588)
+-+	struct timespec tp;
+-+	clock_gettime(clkid, &tp);
+-+	tv.tv_sec = tp.tv_sec;
+-+	tv.tv_usec = tp.tv_nsec / 1000;
+-+
+-+	now->l_i = tv.tv_sec + JAN_1970;
+-+	dtemp = tv.tv_usec / 1e6;
+-+#else /* FSL_1588 */
+- #if defined(HAVE_CLOCK_GETTIME) || defined(HAVE_GETCLOCK)
+-         struct timespec ts;     /* seconds and nanoseconds */
+- 
+-@@ -195,6 +204,7 @@ get_systime(
+-         dtemp = tv.tv_usec / 1e6;
+- 
+- #endif /* HAVE_CLOCK_GETTIME || HAVE_GETCLOCK */
+-+#endif /* FSL_1588 */
+- 
+-         /*
+-          * Renormalize to seconds past 1900 and fraction.
+-diff --git a/src/dep/ptpd_dep.h b/src/dep/ptpd_dep.h
+-index 8778988..03ae642 100644
+---- a/src/dep/ptpd_dep.h
+-+++ b/src/dep/ptpd_dep.h
+-@@ -14,6 +14,7 @@
+- #define PTPD_DBGV
+- #endif
+- 
+-+#define FSL_1588 1
+-  /** \name System messages*/
+-  /**\{*/
+- 
+-@@ -280,6 +281,11 @@ UInteger16 msgPackManagementResponse(Octet * buf,MsgHeader*,MsgManagement*,PtpCl
+-  * -Init network stuff, send and receive datas*/
+-  /**\{*/
+- 
+-+#if defined(FSL_1588)
+-+extern char fsl_1588_if_name[IFACE_NAME_LENGTH];
+-+/* select HWTSTAMP_TX_ON or HWTSTAMP_TX_OFF */
+-+void hwtstamp_tx_ctl(NetPath *netPath, Boolean enable);
+-+#endif
+- Boolean testInterface(char* ifaceName, RunTimeOpts* rtOpts);
+- Boolean netInit(NetPath*,RunTimeOpts*,PtpClock*);
+- Boolean netShutdown(NetPath*);
+-@@ -357,6 +363,10 @@ void restartLogging(RunTimeOpts* rtOpts);
+- void logStatistics(RunTimeOpts *rtOpts, PtpClock *ptpClock);
+- void displayStatus(PtpClock *ptpClock, const char *prefixMessage);
+- void displayPortIdentity(PortIdentity *port, const char *prefixMessage);
+-+#if defined(FSL_1588)
+-+clockid_t get_clockid(int fd);
+-+int clock_adjtime(clockid_t id, struct timex *tx);
+-+#endif
+- Boolean nanoSleep(TimeInternal*);
+- void getTime(TimeInternal*);
+- void setTime(TimeInternal*);
+-@@ -378,12 +388,15 @@ void adjTime(Integer32);
+- void adjFreq_wrapper(RunTimeOpts * rtOpts, PtpClock * ptpClock, double adj);
+- Boolean adjFreq(double);
+- double getAdjFreq(void);
+-+#ifndef FSL_1588
+- void informClockSource(PtpClock* ptpClock);
+-+#endif
+- 
+- /* Observed drift save / recovery functions */
+- void restoreDrift(PtpClock * ptpClock, RunTimeOpts * rtOpts, Boolean quiet);
+- void saveDrift(PtpClock * ptpClock, RunTimeOpts * rtOpts, Boolean quiet);
+- 
+-+#ifndef FSL_1588
+- /* Helper function to manage ntpadjtime / adjtimex flags */
+- void setTimexFlags(int flags, Boolean quiet);
+- void unsetTimexFlags(int flags, Boolean quiet);
+-@@ -393,6 +406,7 @@ Boolean checkTimexFlags(int flags);
+- #if defined(MOD_TAI) &&  NTP_API == 4
+- void setKernelUtcOffset(int utc_offset);
+- #endif /* MOD_TAI */
+-+#endif
+- 
+- #endif /* HAVE_SYS_TIMEX_H */
+- 
+-diff --git a/src/dep/servo.c b/src/dep/servo.c
+-index 06215e6..6651a20 100644
+---- a/src/dep/servo.c
+-+++ b/src/dep/servo.c
+-@@ -1013,10 +1013,12 @@ if(rtOpts->ntpOptions.enableEngine && rtOpts->panicModeNtp) {
+- 		/* Adjust the clock first -> the PI controller runs here */
+- 		adjFreq_wrapper(rtOpts, ptpClock, runPIservo(&ptpClock->servo, ptpClock->offsetFromMaster.nanoseconds));
+- 		warn_operator_fast_slewing(rtOpts, ptpClock, ptpClock->servo.observedDrift);
+-+#ifndef FSL_1588
+- 		/* Unset STA_UNSYNC */
+- 		unsetTimexFlags(STA_UNSYNC, TRUE);
+- 		/* "Tell" the clock about maxerror, esterror etc. */
+- 		informClockSource(ptpClock);
+-+#endif /* FSL_1588 */
+- #endif /* HAVE_SYS_TIMEX_H */
+- 	}
+- 
+-diff --git a/src/dep/sys.c b/src/dep/sys.c
+-index 52b274c..8551724 100644
+---- a/src/dep/sys.c
+-+++ b/src/dep/sys.c
+-@@ -344,7 +344,14 @@ int writeMessage(FILE* destination, int priority, const char * format, va_list a
+- 		 * it also can cause problems in nested debug statements (which are solved by turning the signal
+- 		 *  handling synchronous, and not calling this function inside asycnhronous signal processing)
+- 		 */
+-+#if defined(FSL_1588)
+-+		struct timespec tp;
+-+		clock_gettime(clkid, &tp);
+-+		now.tv_sec = tp.tv_sec;
+-+		now.tv_usec = tp.tv_nsec / 1000;
+-+#else
+- 		gettimeofday(&now, 0);
+-+#endif
+- 		strftime(time_str, MAXTIMESTR, "%F %X", localtime((time_t*)&now.tv_sec));
+- 		fprintf(destination, "%s.%06d ", time_str, (int)now.tv_usec  );
+- 		fprintf(destination,PTPD_PROGNAME"[%d].%s (%-9s ",
+-@@ -1174,13 +1181,33 @@ nanoSleep(TimeInternal * t)
+- 	return TRUE;
+- }
+- 
+-+#if defined(FSL_1588)
+-+clockid_t get_clockid(int fd)
+-+{
+-+#define CLOCKFD 3
+-+#define FD_TO_CLOCKID(fd)       ((~(clockid_t) (fd) << 3) | CLOCKFD)
+-+	return FD_TO_CLOCKID(fd);
+-+}
+-+
+-+/* When glibc offers the syscall, this will go away. */
+-+#include <sys/syscall.h>
+-+int clock_adjtime(clockid_t id, struct timex *tx)
+-+{
+-+	return syscall(__NR_clock_adjtime, id, tx);
+-+}
+-+#endif
+-+
+- void
+- getTime(TimeInternal * time)
+- {
+--#if defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0)
+-+#if defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0) || defined(FSL_1588)
+- 
+- 	struct timespec tp;
+-+#if defined(FSL_1588)
+-+	if (clock_gettime(clkid, &tp) < 0) {
+-+#else
+- 	if (clock_gettime(CLOCK_REALTIME, &tp) < 0) {
+-+#endif
+- 		PERROR("clock_gettime() failed, exiting.");
+- 		exit(0);
+- 	}
+-@@ -1201,7 +1228,7 @@ void
+- setTime(TimeInternal * time)
+- {
+- 
+--#if defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0)
+-+#if defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0) || defined(FSL_1588)
+- 
+- 	struct timespec tp;
+- 	tp.tv_sec = time->seconds;
+-@@ -1215,9 +1242,13 @@ setTime(TimeInternal * time)
+- 
+- #endif /* _POSIX_TIMERS */
+- 
+--#if defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0)
+- 
+-+#if defined(_POSIX_TIMERS) && (_POSIX_TIMERS > 0) || defined(FSL_1588)
+-+#if defined(FSL_1588)
+-+	if (clock_settime(clkid, &tp) < 0) {
+-+#else
+- 	if (clock_settime(CLOCK_REALTIME, &tp) < 0) {
+-+#endif
+- 		PERROR("Could not set system time");
+- 		return;
+- 	}
+-@@ -1595,7 +1626,11 @@ adjFreq(double adj)
+- #endif /* HAVE_STRUCT_TIMEX_TICK */
+- 	DBG2("        adj is %.09f;  t freq is %d       (float: %.09f)\n", adj, t.freq,  dFreq);
+- 	
+-+#if defined(FSL_1588)
+-+	return !clock_adjtime(clkid, &t);
+-+#else
+- 	return !adjtimex(&t);
+-+#endif
+- }
+- 
+- 
+-@@ -1609,7 +1644,11 @@ getAdjFreq(void)
+- 
+- 	memset(&t, 0, sizeof(t));
+- 	t.modes = 0;
+-+#if defined(FSL_1588)
+-+	clock_adjtime(clkid, &t);
+-+#else
+- 	adjtimex(&t);
+-+#endif
+- 
+- 	dFreq = (t.freq + 0.0) / ((1<<16) / 1000.0);
+- 
+-@@ -1764,6 +1803,7 @@ saveDrift(PtpClock * ptpClock, RunTimeOpts * rtOpts, Boolean quiet)
+- 	fclose(driftFP);
+- }
+- 
+-+#ifndef FSL_1588
+- void
+- setTimexFlags(int flags, Boolean quiet)
+- {
+-@@ -1922,6 +1962,7 @@ setKernelUtcOffset(int utc_offset) {
+- 	}
+- }
+- #endif /* MOD_TAI */
+-+#endif /* FSL_1588 */
+- 
+- 
+- #else
+-diff --git a/src/protocol.c b/src/protocol.c
+-index c73728b..90554f3 100644
+---- a/src/protocol.c
+-+++ b/src/protocol.c
+-@@ -615,6 +615,7 @@ if(!rtOpts->panicModeNtp || !ptpClock->panicMode)
+- 		timerStart(STATISTICS_UPDATE_TIMER, rtOpts->statsUpdateInterval, ptpClock->itimer);
+- #endif /* PTPD_STATISTICS */
+- 
+-+#ifndef FSL_1588
+- #ifdef HAVE_SYS_TIMEX_H
+- 
+- 		/* 
+-@@ -632,6 +633,7 @@ if(!rtOpts->panicModeNtp || !ptpClock->panicMode)
+- 			unsetTimexFlags(STA_INS | STA_DEL, TRUE);
+- 		}
+- #endif /* HAVE_SYS_TIMEX_H */
+-+#endif /* FSL_1588 */
+- 		break;
+- 	default:
+- 		DBG("to unrecognized state\n");
+-@@ -934,6 +936,7 @@ doState(RunTimeOpts *rtOpts, PtpClock *ptpClock)
+-                             WARNING("Leap second event imminent - pausing "
+- 				    "clock and offset updates\n");
+-                             ptpClock->leapSecondInProgress = TRUE;
+-+#ifndef FSL_1588
+- #ifdef HAVE_SYS_TIMEX_H
+-                             if(!checkTimexFlags(ptpClock->timePropertiesDS.leap61 ? 
+- 						STA_INS : STA_DEL)) {
+-@@ -944,6 +947,7 @@ doState(RunTimeOpts *rtOpts, PtpClock *ptpClock)
+- 						  STA_INS : STA_DEL, FALSE);
+-                             }
+- #endif /* HAVE_SYS_TIMEX_H */
+-+#endif /* FSL_1588 */
+- 			    /*
+- 			     * start pause timer from now until [pause] after
+- 			     * midnight, plus an extra second if inserting
+-@@ -1290,6 +1294,9 @@ handle(RunTimeOpts *rtOpts, PtpClock *ptpClock)
+-     int ret;
+-     ssize_t length = -1;
+- 
+-+#if defined(FSL_1588)
+-+	hwtstamp_tx_ctl(&ptpClock->netPath, FALSE);/* HWTSTAMP_TX_OFF */
+-+#endif
+-     TimeInternal timeStamp = { 0, 0 };
+-     fd_set readfds;
+- 
+-@@ -1437,9 +1444,11 @@ handleAnnounce(MsgHeader *header, ssize_t length,
+- 					ptpClock->leapSecondInProgress=FALSE;
+- 					ptpClock->timePropertiesDS.leap59 = FALSE;
+- 					ptpClock->timePropertiesDS.leap61 = FALSE;
+-+#ifndef FSL_1588
+- #ifdef HAVE_SYS_TIMEX_H
+- 					unsetTimexFlags(STA_INS | STA_DEL, TRUE);
+- #endif /* HAVE_SYS_TIMEX_H */
+-+#endif /* FSL_1588 */
+- 				}
+- 			}
+- 			DBG2("___ Announce: received Announce from current Master, so reset the Announce timer\n");
+-diff --git a/src/ptpd.c b/src/ptpd.c
+-index 3fad379..471b1e9 100644
+---- a/src/ptpd.c
+-+++ b/src/ptpd.c
+-@@ -78,6 +78,21 @@ main(int argc, char **argv)
+- 	PtpClock *ptpClock;
+- 	Integer16 ret;
+- 
+-+#if defined(FSL_1588)
+-+	char device[] = "/dev/ptp0";
+-+	int fd;
+-+
+-+	fd = open(device, O_RDWR);
+-+	if (fd < 0) {
+-+		fprintf(stderr, "opening %s: %s\n", device, strerror(errno));
+-+		return -1;
+-+	}
+-+	clkid = get_clockid(fd);
+-+	if (clkid == -1) {
+-+		fprintf(stderr, "failed to read clock id\n");
+-+		return -1;
+-+	}
+-+#endif
+- 	startupInProgress = TRUE;
+- 
+- 	/* Initialize run time options with command line arguments */
+-diff --git a/src/ptpd.h b/src/ptpd.h
+-index 009f51c..6641649 100644
+---- a/src/ptpd.h
+-+++ b/src/ptpd.h
+-@@ -172,6 +172,15 @@
+- #include <linux/rtc.h>
+- #endif /* HAVE_LINUX_RTC_H */
+- 
+-+#ifdef FSL_1588
+-+#ifndef SO_TIMESTAMPING
+-+#define SO_TIMESTAMPING 37
+-+#endif
+-+#ifndef HAVE_SYS_TIMEX_H
+-+#define HAVE_SYS_TIMEX_H 1
+-+#endif
+-+clockid_t clkid;
+-+#endif
+- /** \name arith.c
+-  * -Timing management and arithmetic*/
+-  /**\{*/
+diff --git a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb
+similarity index 86%
+rename from meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb
+rename to meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb
+index c65e735..f6aaee0 100644
+--- a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb
++++ b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb
+@@ -6,7 +6,7 @@ time coordination of LAN connected computers."
+ HOMEPAGE = "http://sourceforge.net/projects/ptpd"
+ SECTION = "net"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://README;md5=2452033fe374283f29579898663b1aa8"
++LIC_FILES_CHKSUM = "file://README;md5=0733e1b3788ab2ebbc63bf33a020da1d"
+ 
+ DEPENDS = "libpcap"
+ 
+@@ -22,14 +22,13 @@ def get_sub(d):
+         return parts[0]
+ 
+ SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${@get_sub(d)}/ptpd-${PV}.tar.gz \
+-           file://ptpd-add-dpaa-etsec-support.patch \
+            file://ptpd-use-pkgconfig.patch \
+            file://ptpd.service \
+            file://ptpd.conf \
+ "
+ 
+-SRC_URI[md5sum] = "1ef2f1f2825080a865bbce0eb61246d4"
+-SRC_URI[sha256sum] = "2802aab758649bb222859dfcb62a5d282709ccb4d3f1df3f26f739cc091d0c8d"
++SRC_URI[md5sum] = "253bab7ab51d969616ea811be1f132f3"
++SRC_URI[sha256sum] = "0dbf54dd2c178bd9fe62481d2c37513ee36636d8bf137cfdad96891490cdbf93"
+ 
+ S = "${WORKDIR}/ptpd-${PV}"
+ 
+-- 
+1.8.4.2
 
->   foxtrotgps: Fix QA warnings
->   usbpath: Fix QA warnings
->   wvstreams: Fix QA warnings
->   pksc11-helper: Fix QA warnings
->   libutempter: update SRC_URI
->   gammu: Fix QA warnings
->   mosh: Fix QA warnings
->   numactl: Fix QA warnings
->   xterm: fix issue with SRC_URI
->   ckermit: update SRC_URI
->   packagekit: Fix QA warnings
->   daq: move recipe to meta-networking
->
-> Chunrong Guo (2):
->   polkit: do not hardcode the libdir
->   mozjs: fix the compile error of powerpc64
->
-> Dmitry Eremin-Solenikov (1):
->   syslog-ng: add util-linux to DEPENDS list
->
-> Dominic Sacr=C3=A9 (1):
->   fio: add missing build dependency on zlib
->
-> Haris Okanovic (1):
->   start-stop-daemon: Fix RCONFLICTS typo
->
-> Hugo Vasconcelos Saldanha (1):
->   libssh2: fix CVE-2015-1782
->
-> Josep Puigdemont (1):
->   libhugetlbfs: project moved to github
->
-> Khem Raj (2):
->   polkit-gnome: Upgrade 0.102 -> 0.105
->   gdm: Whitelist it
->
-> Robert Yang (1):
->   opensaf: RDEPENDS on python and bash
->
-> Yi Zhao (17):
->   smstools: fix PN -> BPN for multilib
->   hexedit: fix PN -> BPN for multilib
->   fbgrab: fix PN -> BPN for multilib
->   takao-fonts: fix PN -> BPN for multilib
->   xbitmaps: fix PN -> BPN for multilib
->   navit: fix PN -> BPN for multilib
->   omgps: fix PN -> BPN for multilib
->   orrery: fix PN -> BPN for multilib
->   fltk: fix PN -> BPN for multilib
->   mime-support: fix PN -> BPN for multilib
->   openct: fix PN -> BPN for multilib
->   picocom: fix PN -> BPN for multilib
->   soci: fix PN -> BPN for multilib
->   mozjs: fix PN -> BPN for multilib
->   iperf: fix ${PN}-${PV} -> ${BP} for multilib
->   synergy: fix ${PN}-${PV} -> ${BP} for multilib
->   gpsd: fix PN -> BPN for multilib
->
-> gary.robertson@linaro.org (1):
->   libhugetlbfs: x86 - don't link against host libs
->
->  meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb         |   2 -
->  .../recipes-connectivity/daq/daq_2.0.2.bb          |   0
->  ...le-run-test-program-while-cross-compiling.patch |   0
->  .../recipes-daemons/opensaf/opensaf_4.5.0.bb       |   2 +
->  meta-oe/recipes-benchmark/fio/fio_2.2.6.bb         |   5 +-
->  meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb     |   2 +-
->  ...86-avoid-host-library-search-in-cross-dev.patch |  48 +++++++++
->  .../libhugetlbfs/libhugetlbfs_git.bb               |   5 +-
->  meta-oe/recipes-connectivity/gammu/gammu_1.32.0.bb |   2 +
->  meta-oe/recipes-connectivity/lirc/lirc.inc         |   2 +-
->  meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb    |   1 +
->  meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb    |   2 +-
->  .../smstools3/smstools3_3.1.15.bb                  |   2 +-
->  .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |   1 +
->  .../packagekit/packagekit_0.5.6.bb                 |   9 +-
->  meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb        |   1 +
->  .../{protobuf_2.5.0.bb =3D> protobuf_2.6.1.bb}       |  13 ++-
->  .../recipes-extended/collectd/collectd_5.4.1.bb    |   3 +-
->  meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb |   2 +-
->  meta-oe/recipes-extended/hplip/hplip_3.12.6.bb     |   1 +
->  .../mozjs/fix-the-compile-error-of-powerpc64.patch |  18 ++++
->  meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     |   5 +-
->  .../polkit/files/gtk-doc-check.patch               |  12 +++
->  ...polkit-gnome_0.102.bb =3D> polkit-gnome_0.105.bb} |  14 +--
->  .../polkit/0001-do-not-hardcoded-libdir.patch      |  44 ++++++++
->  meta-oe/recipes-extended/polkit/polkit_0.112.bb    |   1 +
->  meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb   |   2 +
->  meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb      |   2 +-
->  meta-oe/recipes-graphics/fbida/fbida_2.10.bb       |   2 +-
->  .../takao-fonts/takao-fonts_003.02.01.bb           |   2 +-
->  meta-oe/recipes-graphics/xorg-app/xterm_303.bb     |   2 +-
->  .../xorg-data/xorg-data-common.inc                 |   2 +-
->  .../foxtrotgps/foxtrotgps_1.1.1.bb                 |   1 +
->  meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb       |   4 +-
->  meta-oe/recipes-navigation/navit/navit.inc         |  24 ++---
->  meta-oe/recipes-navigation/navit/navit_svn.bb      |   2 +-
->  meta-oe/recipes-navigation/omgps/omgps_svn.bb      |   2 +-
->  meta-oe/recipes-navigation/orrery/orrery_2.7.bb    |   2 +-
->  meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb  |   2 +
->  meta-oe/recipes-support/ckermit/ckermit_302.bb     |   4 +-
->  meta-oe/recipes-support/fltk/fltk_1.1.10.bb        |   2 +-
->  .../libssh2/libssh2-1.4.3/CVE-2015-1782.patch      | 115 +++++++++++++++=
-++++++
->  meta-oe/recipes-support/libssh2/libssh2_1.4.3.bb   |   4 +-
->  .../{libutempter_1.1.6.bb =3D> libutempter.bb}       |  11 +-
->  meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb |   3 +-
->  .../mime-support/mime-support_3.48.bb              |   4 +-
->  meta-oe/recipes-support/numactl/numactl_2.0.9.bb   |   2 +
->  meta-oe/recipes-support/openct/openct_0.6.20.bb    |   2 +-
->  .../recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb   |   1 +
->  meta-oe/recipes-support/picocom/picocom_1.7.bb     |   2 +-
->  .../pkcs11-helper/pkcs11-helper_1.11.bb            |   2 +-
->  .../serial-utils/serial-forward_git.bb             |   2 +-
->  meta-oe/recipes-support/soci/soci_3.2.2.bb         |   2 +-
->  .../start-stop-daemon_1.16.0.2.bb                  |   2 +-
->  meta-oe/recipes-support/synergy/synergy_1.3.8.bb   |   2 +-
->  meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |   3 +-
->  meta-oe/recipes-support/udisks/udisks_1.0.4.bb     |   2 +-
->  meta-oe/recipes-support/usbpath/usbpath_svn.bb     |   2 +
->  .../recipes-connectivity/gateone/gateone_git.bb    |   1 +
->  ...CAL_AMFLAGS-isnot-supported-by-autoreconf.patch |   0
->  .../recipes-extended/libgxim/libgxim_0.5.0.bb      |   0
->  61 files changed, 345 insertions(+), 69 deletions(-)
->  rename {meta-oe =3D> meta-networking}/recipes-connectivity/daq/daq_2.0.2=
-.bb (100%)
->  rename {meta-oe =3D> meta-networking}/recipes-connectivity/daq/files/dis=
-able-run-test-program-while-cross-compiling.patch (100%)
->  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0001-x86=
--avoid-host-library-search-in-cross-dev.patch
->  rename meta-oe/recipes-devtools/protobuf/{protobuf_2.5.0.bb =3D> protobu=
-f_2.6.1.bb} (56%)
->  create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/fix-the-compile-=
-error-of-powerpc64.patch
->  create mode 100644 meta-oe/recipes-extended/polkit/files/gtk-doc-check.p=
-atch
->  rename meta-oe/recipes-extended/polkit/{polkit-gnome_0.102.bb =3D> polki=
-t-gnome_0.105.bb} (62%)
->  create mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-do-not-ha=
-rdcoded-libdir.patch
->  create mode 100644 meta-oe/recipes-support/libssh2/libssh2-1.4.3/CVE-201=
-5-1782.patch
->  rename meta-oe/recipes-support/libutempter/{libutempter_1.1.6.bb =3D> li=
-butempter.bb} (79%)
->  rename {meta-oe =3D> meta-ruby}/recipes-extended/libgxim/libgxim/multi-l=
-ine-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch (100%)
->  rename {meta-oe =3D> meta-ruby}/recipes-extended/libgxim/libgxim_0.5.0.b=
-b (100%)
->
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
