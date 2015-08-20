@@ -1,26 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F3D065CBC
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 908CF73E11
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 20 Aug 2015 05:43:10 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7K5hBxA025203
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7K5h9s9006133
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2015 22:43:11 -0700 (PDT)
+	Wed, 19 Aug 2015 22:43:10 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.235.1; Wed, 19 Aug 2015 22:43:10 -0700
+	14.3.235.1; Wed, 19 Aug 2015 22:43:09 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 20 Aug 2015 13:39:15 +0800
-Message-ID: <1440049155-4314-2-git-send-email-rongqing.li@windriver.com>
+Date: Thu, 20 Aug 2015 13:39:14 +0800
+Message-ID: <1440049155-4314-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1440049155-4314-1-git-send-email-rongqing.li@windriver.com>
-References: <1440049155-4314-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2][meta-oe] zeromq: upgrade to 4.1.3
+Subject: [PATCH 1/2][meta-oe] libsodium: create recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,58 +37,43 @@ Content-Type: text/plain
 
 From: Roy Li <rongqing.li@windriver.com>
 
-4.1.3 has the dependence on libsodium,
-4.1.3 asks pkgconfig bbclass to configure,
-add a target to build ptest, since the orignial check will build and run
-which is not suitable for cross-compile, and change the ptest installation
-directories
+zeromq 4.1.3 requires libsodium
+
+Sodium is a new, easy-to-use software library for encryption, decryption,
+signatures, password hashing and more. It is a portable, cross-compilable,
+installable, packageable fork of NaCl, with a compatible API, and an extended
+API to improve usability even further. Its goal is to provide all of the core
+operations needed to build higher-level cryptographic tools. The design
+choices emphasize security, and "magic constants" have clear rationales.
+
+The same cannot be said of NIST curves, where the specific origins of certain
+constants are not described by the standards. And despite the emphasis on
+higher security, primitives are faster across-the-board than most
+implementations of the NIST standards.
 
 Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- .../zeromq/{zeromq_4.0.4.bb => zeromq_4.1.3.bb}            | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-connectivity/zeromq/{zeromq_4.0.4.bb => zeromq_4.1.3.bb} (62%)
+ meta-oe/recipes-support/libsodium/libsodium_1.0.3.bb | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libsodium/libsodium_1.0.3.bb
 
-diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.0.4.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.3.bb
-similarity index 62%
-rename from meta-oe/recipes-connectivity/zeromq/zeromq_4.0.4.bb
-rename to meta-oe/recipes-connectivity/zeromq/zeromq_4.1.3.bb
-index 80907fa..5d0e2d5 100644
---- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.0.4.bb
-+++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.3.bb
-@@ -2,12 +2,13 @@ DESCRIPTION = "ZeroMQ looks like an embeddable networking library but acts like
- HOMEPAGE = "http://www.zeromq.org"
- LICENSE = "LGPLv3+"
- LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=d5311495d952062e0e4fbba39cbf3de1"
-+DEPENDS = "libsodium"
- 
- SRC_URI = "http://download.zeromq.org/zeromq-${PV}.tar.gz \
-            file://run-ptest \
-            "
--SRC_URI[md5sum] = "f3c3defbb5ef6cc000ca65e529fdab3b"
--SRC_URI[sha256sum] = "1ef71d46e94f33e27dd5a1661ed626cd39be4d2d6967792a275040e34457d399"
-+SRC_URI[md5sum] = "d0824317348cfb44b8692e19cc73dc3a"
-+SRC_URI[sha256sum] = "61b31c830db377777e417235a24d3660a4bcc3f40d303ee58df082fcd68bf411"
- 
- S = "${WORKDIR}/zeromq-${PV}"
- 
-@@ -16,9 +17,14 @@ S = "${WORKDIR}/zeromq-${PV}"
- #CFLAGS_append += "-O0"
- #CXXFLAGS_append += "-O0"
- 
--inherit autotools ptest
-+inherit autotools ptest pkgconfig
+diff --git a/meta-oe/recipes-support/libsodium/libsodium_1.0.3.bb b/meta-oe/recipes-support/libsodium/libsodium_1.0.3.bb
+new file mode 100644
+index 0000000..d02bb9b
+--- /dev/null
++++ b/meta-oe/recipes-support/libsodium/libsodium_1.0.3.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "The Sodium crypto library"
++HOMEPAGE = "http://libsodium.org/"
++LICENSE = "ISC"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=092a09b78c3be486fac807435bf17b7a"
 +
-+do_compile_ptest () {
-+	echo 'buildtest-TESTS: $(check_PROGRAMS)' >> ${B}/Makefile
-+	oe_runmake buildtest-TESTS
-+}
- 
- do_install_ptest () {
-         install -d ${D}${PTEST_PATH}/tests
--        install -m 0755 ${B}/tests/.libs/* ${D}${PTEST_PATH}/tests
-+        install -m 0755 ${B}/.libs/test_* ${D}${PTEST_PATH}/tests
- }
++SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "b3bcc98e34d3250f55ae196822307fab"
++SRC_URI[sha256sum] = "cbcfc63cc90c05d18a20f229a62c7e7054a73731d0aa858c0517152c549b1288"
++
++inherit autotools
 -- 
 1.9.1
 
