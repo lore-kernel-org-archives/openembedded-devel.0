@@ -1,42 +1,28 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
-	[209.85.220.52])
-	by mail.openembedded.org (Postfix) with ESMTP id D3B6C73E11
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4BCCD73E11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 01:48:31 +0000 (UTC)
-Received: by padfo6 with SMTP id fo6so9514341pad.0
+	Thu, 20 Aug 2015 01:50:39 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7K1odJo024235
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2015 18:48:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=zgCS83faz6t93zY14gXJER6hBo16dPxGyx4kaKGUyKw=;
-	b=stNsSGrH9w0Y6qNY+NXB3vV3qVutX9xQyjzSnaWtlEV3uGXA8J8Lm8XfqGPwfBauS4
-	2dnCFQtAdzQSAVvTYqFfscORBfw8yswvfuktmaWe/N9WiuNl5QWChzC0rUzs85Q7ykcz
-	GRiUROqTqlLYYJRQNtzd8fUra5ydAJZ6YwTwXgOqNKv7qjKiqZFppRLeCqneCmvcwZzY
-	/5MycZka6iD0/KoY5Kyjkv20m4qwVvwaLVnmfbJyAAWQFxgeykqEtUQV6SW83Nbv83Xl
-	8nDDF5K4RN49ysj1olnUrCeUsK3v2CLvwVJG6H4g/aGSztmxGPPAFy50oXiunfLWz19t
-	uy3A==
-X-Received: by 10.68.163.5 with SMTP id ye5mr1268698pbb.120.1440035311477;
-	Wed, 19 Aug 2015 18:48:31 -0700 (PDT)
-Received: from Akusters-laptop-2.local
-	([2601:202:4000:1239:30b9:3948:d6b8:54e0])
-	by smtp.googlemail.com with ESMTPSA id
-	fg5sm2276911pdb.33.2015.08.19.18.48.29
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 19 Aug 2015 18:48:30 -0700 (PDT)
-Message-ID: <55D531EC.30607@gmail.com>
-Date: Wed, 19 Aug 2015 18:48:28 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+	Wed, 19 Aug 2015 18:50:39 -0700 (PDT)
+Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Wed, 19 Aug 2015 18:50:38 -0700
+Message-ID: <55D5326D.1080804@windriver.com>
+Date: Thu, 20 Aug 2015 09:50:37 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <cover.1438618378.git.akuster808@gmail.com>
-	<CAJ86T=Xn1q_P4bGNy=jQGS=byRLYYyTXGuoJeCtLaEK3A4P1VQ@mail.gmail.com>
-In-Reply-To: <CAJ86T=Xn1q_P4bGNy=jQGS=byRLYYyTXGuoJeCtLaEK3A4P1VQ@mail.gmail.com>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [PATCH 00/55] For meta-oe fido-next
+To: <openembedded-devel@lists.openembedded.org>
+References: <1439868248-25769-1-git-send-email-joe_macdonald@mentor.com>	<55D2A776.4020701@windriver.com>
+	<20150819190146.GA5444@deserted.net>
+In-Reply-To: <20150819190146.GA5444@deserted.net>
+Subject: Re: [meta-networking][PATCH] netcf: support multilib builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,192 +36,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2015 01:48:32 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Thu, 20 Aug 2015 01:50:41 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 8/18/15 5:18 PM, Andre McCurdy wrote:
-> On Mon, Aug 3, 2015 at 9:22 AM, Armin Kuster <akuster808@gmail.com> wrote:
->> I don't recall if I sent this pull request already.
->>
->> Please consider these changes for Meta-openembedded fido next
->>
->> The following changes since commit c841231b9f327d2d06d19d2ba1324dd86b83617c:
->>
->>   netperf: fix the broken download url (2015-08-03 11:42:33 +0200)
->>
->> are available in the git repository at:
->>
->>   git://github.com/akuster/meta-openembedded akuster/fido-next
->>   https://github.com/akuster/meta-openembedded/tree/akuster/fido-next
->>
->> Armin Kuster (27):
->>   collectd: fix world build issue
->>   libgxim: fix world build issues
->>   protobuf: update update and build fix
->>   serial-forward: fix fetch error
->>   lirc: fix QA warnings
->>   hplib: fix QA warnings
->>   udisks: fix QA warnings
->>   lio-utils: fix QA warnings
->>   pm-qa: Fix QA warnings
->>   gateone: Fix QA warnings
->>   rarpd: Fix QA warnings
->>   pscs-lite: Fix QA warnings
->>   fbida: Fix QA warnings
->>   qt-creator: Fix QA warnings
->>   fio: Fix QA warnings
-> There's an improved fix for this one in master:
->
->   http://git.openembedded.org/meta-openembedded/commit/?id=eb01b36cb3f2f686bc05c690b06d1e0680dda1f5
 
-Ah, so there is. I will add it to my list for the next round.
 
-- armin
+On 2015年08月20日 03:01, Joe MacDonald wrote:
+> [Re: [oe] [meta-networking][PATCH] netcf: support multilib builds] On 15.08.18 (Tue 11:33) Rongqing Li wrote:
 >
->>   foxtrotgps: Fix QA warnings
->>   usbpath: Fix QA warnings
->>   wvstreams: Fix QA warnings
->>   pksc11-helper: Fix QA warnings
->>   libutempter: update SRC_URI
->>   gammu: Fix QA warnings
->>   mosh: Fix QA warnings
->>   numactl: Fix QA warnings
->>   xterm: fix issue with SRC_URI
->>   ckermit: update SRC_URI
->>   packagekit: Fix QA warnings
->>   daq: move recipe to meta-networking
 >>
->> Chunrong Guo (2):
->>   polkit: do not hardcode the libdir
->>   mozjs: fix the compile error of powerpc64
 >>
->> Dmitry Eremin-Solenikov (1):
->>   syslog-ng: add util-linux to DEPENDS list
+>> On 2015年08月18日 11:24, Joe MacDonald wrote:
+>>> When doing a multilib build, /usr/lib is still created but not collected
+>>> into FILES_${PN} by default, resulting in a QA error.  Adding both
+>>> ${libdir} and ${nonarch_libdir} catches all scenarios.
+>>>
+>>> It also turns out that the previous do_install_append would throw an error
+>>> in a multilib build since systemd always installs to .../lib/... but
+>>> ${libdir] would point at .../lib64/...
+>>>
+>>> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+>>> ---
+>>>   meta-networking/recipes-support/netcf/netcf_git.bb | 14 ++++++++++++--
+>>>   1 file changed, 12 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/meta-networking/recipes-support/netcf/netcf_git.bb b/meta-networking/recipes-support/netcf/netcf_git.bb
+>>> index d47bb3b..8a8963e 100644
+>>> --- a/meta-networking/recipes-support/netcf/netcf_git.bb
+>>> +++ b/meta-networking/recipes-support/netcf/netcf_git.bb
+>>> @@ -32,12 +32,22 @@ do_configure_prepend() {
+>>>   do_install_append() {
+>>>       if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+>>>          install -d ${D}${systemd_unitdir}/system
+>>> -       mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+>>> -       rm -rf ${D}${libdir}/systemd/
+>>> +       if [ -d "${D}${libdir}/systemd/system" ]; then
+>>> +           mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+>>> +           rm -rf ${D}${libdir}/systemd/
+>>> +       else
+>>> +           mv ${D}${nonarch_libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+>>> +           rm -rf ${D}${nonarch_libdir}/systemd/
+>>> +       fi
+>>>       else
+>>>          mv ${D}${sysconfdir}/rc.d/init.d/ ${D}${sysconfdir}
+>>>          rm -rf ${D}${sysconfdir}/rc.d/
+>>>       fi
+>>>   }
+>>>
+>>> +FILES_${PN} += " \
+>>> +        ${libdir} \
+>>> +        ${nonarch_libdir} \
+>>> +        "
+>>> +
 >>
->> Dominic Sacré (1):
->>   fio: add missing build dependency on zlib
+>> a similar fix has been submitted,
 >>
->> Haris Okanovic (1):
->>   start-stop-daemon: Fix RCONFLICTS typo
+>> 【oe] [PATCH][meta-networking] netcf: align the systemd file path with
+>> Makefile
+>
+> I looked at that fix but from what I can tell it unconditionally deletes
+> the 32-bit netcf shared and static libs in a multilib configuration.
+> That squelches the QA warning, but it's probably not what we want.
+>
+
+Ok, thanks
+
+-Roy
+
+> -J.
+>
 >>
->> Hugo Vasconcelos Saldanha (1):
->>   libssh2: fix CVE-2015-1782
 >>
->> Josep Puigdemont (1):
->>   libhugetlbfs: project moved to github
+>> －Roy
 >>
->> Khem Raj (2):
->>   polkit-gnome: Upgrade 0.102 -> 0.105
->>   gdm: Whitelist it
->>
->> Robert Yang (1):
->>   opensaf: RDEPENDS on python and bash
->>
->> Yi Zhao (17):
->>   smstools: fix PN -> BPN for multilib
->>   hexedit: fix PN -> BPN for multilib
->>   fbgrab: fix PN -> BPN for multilib
->>   takao-fonts: fix PN -> BPN for multilib
->>   xbitmaps: fix PN -> BPN for multilib
->>   navit: fix PN -> BPN for multilib
->>   omgps: fix PN -> BPN for multilib
->>   orrery: fix PN -> BPN for multilib
->>   fltk: fix PN -> BPN for multilib
->>   mime-support: fix PN -> BPN for multilib
->>   openct: fix PN -> BPN for multilib
->>   picocom: fix PN -> BPN for multilib
->>   soci: fix PN -> BPN for multilib
->>   mozjs: fix PN -> BPN for multilib
->>   iperf: fix ${PN}-${PV} -> ${BP} for multilib
->>   synergy: fix ${PN}-${PV} -> ${BP} for multilib
->>   gpsd: fix PN -> BPN for multilib
->>
->> gary.robertson@linaro.org (1):
->>   libhugetlbfs: x86 - don't link against host libs
->>
->>  meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb         |   2 -
->>  .../recipes-connectivity/daq/daq_2.0.2.bb          |   0
->>  ...le-run-test-program-while-cross-compiling.patch |   0
->>  .../recipes-daemons/opensaf/opensaf_4.5.0.bb       |   2 +
->>  meta-oe/recipes-benchmark/fio/fio_2.2.6.bb         |   5 +-
->>  meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb     |   2 +-
->>  ...86-avoid-host-library-search-in-cross-dev.patch |  48 +++++++++
->>  .../libhugetlbfs/libhugetlbfs_git.bb               |   5 +-
->>  meta-oe/recipes-connectivity/gammu/gammu_1.32.0.bb |   2 +
->>  meta-oe/recipes-connectivity/lirc/lirc.inc         |   2 +-
->>  meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb    |   1 +
->>  meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb    |   2 +-
->>  .../smstools3/smstools3_3.1.15.bb                  |   2 +-
->>  .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |   1 +
->>  .../packagekit/packagekit_0.5.6.bb                 |   9 +-
->>  meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb        |   1 +
->>  .../{protobuf_2.5.0.bb => protobuf_2.6.1.bb}       |  13 ++-
->>  .../recipes-extended/collectd/collectd_5.4.1.bb    |   3 +-
->>  meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb |   2 +-
->>  meta-oe/recipes-extended/hplip/hplip_3.12.6.bb     |   1 +
->>  .../mozjs/fix-the-compile-error-of-powerpc64.patch |  18 ++++
->>  meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     |   5 +-
->>  .../polkit/files/gtk-doc-check.patch               |  12 +++
->>  ...polkit-gnome_0.102.bb => polkit-gnome_0.105.bb} |  14 +--
->>  .../polkit/0001-do-not-hardcoded-libdir.patch      |  44 ++++++++
->>  meta-oe/recipes-extended/polkit/polkit_0.112.bb    |   1 +
->>  meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb   |   2 +
->>  meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb      |   2 +-
->>  meta-oe/recipes-graphics/fbida/fbida_2.10.bb       |   2 +-
->>  .../takao-fonts/takao-fonts_003.02.01.bb           |   2 +-
->>  meta-oe/recipes-graphics/xorg-app/xterm_303.bb     |   2 +-
->>  .../xorg-data/xorg-data-common.inc                 |   2 +-
->>  .../foxtrotgps/foxtrotgps_1.1.1.bb                 |   1 +
->>  meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb       |   4 +-
->>  meta-oe/recipes-navigation/navit/navit.inc         |  24 ++---
->>  meta-oe/recipes-navigation/navit/navit_svn.bb      |   2 +-
->>  meta-oe/recipes-navigation/omgps/omgps_svn.bb      |   2 +-
->>  meta-oe/recipes-navigation/orrery/orrery_2.7.bb    |   2 +-
->>  meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb  |   2 +
->>  meta-oe/recipes-support/ckermit/ckermit_302.bb     |   4 +-
->>  meta-oe/recipes-support/fltk/fltk_1.1.10.bb        |   2 +-
->>  .../libssh2/libssh2-1.4.3/CVE-2015-1782.patch      | 115 +++++++++++++++++++++
->>  meta-oe/recipes-support/libssh2/libssh2_1.4.3.bb   |   4 +-
->>  .../{libutempter_1.1.6.bb => libutempter.bb}       |  11 +-
->>  meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb |   3 +-
->>  .../mime-support/mime-support_3.48.bb              |   4 +-
->>  meta-oe/recipes-support/numactl/numactl_2.0.9.bb   |   2 +
->>  meta-oe/recipes-support/openct/openct_0.6.20.bb    |   2 +-
->>  .../recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb   |   1 +
->>  meta-oe/recipes-support/picocom/picocom_1.7.bb     |   2 +-
->>  .../pkcs11-helper/pkcs11-helper_1.11.bb            |   2 +-
->>  .../serial-utils/serial-forward_git.bb             |   2 +-
->>  meta-oe/recipes-support/soci/soci_3.2.2.bb         |   2 +-
->>  .../start-stop-daemon_1.16.0.2.bb                  |   2 +-
->>  meta-oe/recipes-support/synergy/synergy_1.3.8.bb   |   2 +-
->>  meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |   3 +-
->>  meta-oe/recipes-support/udisks/udisks_1.0.4.bb     |   2 +-
->>  meta-oe/recipes-support/usbpath/usbpath_svn.bb     |   2 +
->>  .../recipes-connectivity/gateone/gateone_git.bb    |   1 +
->>  ...CAL_AMFLAGS-isnot-supported-by-autoreconf.patch |   0
->>  .../recipes-extended/libgxim/libgxim_0.5.0.bb      |   0
->>  61 files changed, 345 insertions(+), 69 deletions(-)
->>  rename {meta-oe => meta-networking}/recipes-connectivity/daq/daq_2.0.2.bb (100%)
->>  rename {meta-oe => meta-networking}/recipes-connectivity/daq/files/disable-run-test-program-while-cross-compiling.patch (100%)
->>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0001-x86-avoid-host-library-search-in-cross-dev.patch
->>  rename meta-oe/recipes-devtools/protobuf/{protobuf_2.5.0.bb => protobuf_2.6.1.bb} (56%)
->>  create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/fix-the-compile-error-of-powerpc64.patch
->>  create mode 100644 meta-oe/recipes-extended/polkit/files/gtk-doc-check.patch
->>  rename meta-oe/recipes-extended/polkit/{polkit-gnome_0.102.bb => polkit-gnome_0.105.bb} (62%)
->>  create mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
->>  create mode 100644 meta-oe/recipes-support/libssh2/libssh2-1.4.3/CVE-2015-1782.patch
->>  rename meta-oe/recipes-support/libutempter/{libutempter_1.1.6.bb => libutempter.bb} (79%)
->>  rename {meta-oe => meta-ruby}/recipes-extended/libgxim/libgxim/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch (100%)
->>  rename {meta-oe => meta-ruby}/recipes-extended/libgxim/libgxim_0.5.0.bb (100%)
+>>>   SYSTEMD_SERVICE_${PN} = "netcf-transaction.service"
+>>>
 >>
 >> --
->> 1.9.1
+>> Best Reagrds,
+>> Roy | RongQing Li
 >>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
