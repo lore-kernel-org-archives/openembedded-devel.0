@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 56ABB65CCD
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E38575E7D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 15:04:04 +0000 (UTC)
-Received: by wijp15 with SMTP id p15so18736665wij.0
+	Thu, 20 Aug 2015 15:04:28 +0000 (UTC)
+Received: by wicja10 with SMTP id ja10so38750432wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 08:04:04 -0700 (PDT)
+	Thu, 20 Aug 2015 08:04:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=+Y01+wF2lt8qOA586jFbX112Cxqmoh4xBhTTZHpYfZw=;
-	b=jsTedznW3lyG4TGyEQXzf8bWJyAq9nr0+RRmVdBTbsXPglwgL+c0QUFVlYFZCGV9dU
-	B7yzZ9KvKUUbc4vW0SKe53qBNq5d69CW3E31m3bci6wCTO/OaWG2/preIb28S0O8amnj
-	KYE+86qNTGSNZhd8toIX5Ms7wRIN/5vfvBKRF7oK6VjEhH87QwcBGitUQA8ZNw4G1ek6
-	hC/ghKQtyPlwR/34JIF2EvXERMZPPUeixX87xeONW0EBhzMRFkxDbbUzk07jilnb48lv
-	oQOC/mSFzhkZSizUFsRtCsw9qEeOuqs2MVlWqJuaMhNPQqiSNp/s5tssTV0/W6Yoek8d
-	o36Q==
-X-Received: by 10.194.122.132 with SMTP id ls4mr6523475wjb.130.1440083044467; 
-	Thu, 20 Aug 2015 08:04:04 -0700 (PDT)
+	bh=pDqmd+763JiTWRkI/yp7qLKbW+7DG/V6dV1jRArkCCA=;
+	b=g4g52v62wouAuKuxgSzTkYY2xxtxcFWkbUaSAFIk4rm0eUgEHsPVwNDpGEksuOJzWp
+	/eHQcJQtgMrWXW7uVa4AWf9K1Y2JsdauFSE4pGS50JaGe7Mad5cNVhNeQKMsRvFjsQs/
+	ZfTSFlfpHuFiMwAXXpeVZ+2IgQfbHbtT0tP/uoqnTOEFFmCf6t6iYUGt5aH9SAO/r9oh
+	BmIYNEvwnr3nTyAkzMF4rL3VSZfV0YXUdQDFhcw+bD+2I3CiHoJ5s62ZoTx7L0FiELzj
+	mpZ7IlxXNQa6v+/QtkyW+UTz7YFu30woTaFzq37y+jg5YeAKbWu4RsXJvmz2/1K8/y1F
+	9CyA==
+X-Received: by 10.194.179.103 with SMTP id df7mr7123095wjc.69.1440083068164;
+	Thu, 20 Aug 2015 08:04:28 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	ej5sm5945403wjd.22.2015.08.20.08.04.03
-	for <openembedded-devel@lists.openembedded.org>
+	l13sm5959304wjr.18.2015.08.20.08.04.27
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 20 Aug 2015 08:04:03 -0700 (PDT)
+	Thu, 20 Aug 2015 08:04:27 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 20 Aug 2015 17:04:31 +0200
+Date: Thu, 20 Aug 2015 17:04:55 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150820150431.GJ2446@jama>
-References: <1435559647-37696-1-git-send-email-biannm@cn.fujitsu.com>
+Message-ID: <20150820150455.GK2446@jama>
+References: <1424786397-5616-1-git-send-email-mario@ossystems.com.br>
 MIME-Version: 1.0
-In-Reply-To: <1435559647-37696-1-git-send-email-biannm@cn.fujitsu.com>
+In-Reply-To: <1424786397-5616-1-git-send-email-mario@ossystems.com.br>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] sysdig: add new recipe
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: Re: [meta-python][PATCH] python-urllib3: add recipe for version 1.10.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,77 +48,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2015 15:04:04 -0000
-X-Groupsio-MsgNum: 56838
+X-List-Received-Date: Thu, 20 Aug 2015 15:04:28 -0000
+X-Groupsio-MsgNum: 56839
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="451BZW+OUuJBCAYj"
+	protocol="application/pgp-signature"; boundary="HTLCc13+3hfAZ6SL"
 Content-Disposition: inline
 
---451BZW+OUuJBCAYj
+--HTLCc13+3hfAZ6SL
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 29, 2015 at 02:34:07PM +0800, Bian Naimeng wrote:
-> sysdig is a tool for system-level exploration and troubleshooting
->=20
-> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+On Tue, Feb 24, 2015 at 10:59:57AM -0300, Mario Domenech Goulart wrote:
+> Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
 > ---
->  meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb | 32 +++++++++++++++++=
+>  .../recipes-devtools/python/python-urllib3_1.10.1.bb    |   15 +++++++++=
 ++++++
->  1 file changed, 32 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
+>  1 file changed, 15 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python-urllib3_1.=
+10.1.bb
 >=20
-> diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb b/meta-oe/=
-recipes-extended/sysdig/sysdig_0.1.101.bb
+> diff --git a/meta-python/recipes-devtools/python/python-urllib3_1.10.1.bb=
+ b/meta-python/recipes-devtools/python/python-urllib3_1.10.1.bb
 > new file mode 100644
-> index 0000000..72a0386
+> index 0000000..89f7428
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
-> @@ -0,0 +1,32 @@
-> +SUMMARY =3D "A New System Troubleshooting Tool Built for the Way You Wor=
-k"
-> +DESCRIPTION =3D "Sysdig is open source, system-level exploration: captur=
-e \
-> +system state and activity from a running Linux instance, then save, \
-> +filter and analyze."
-> +HOMEPAGE =3D "http://www.sysdig.org/"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
+> +++ b/meta-python/recipes-devtools/python/python-urllib3_1.10.1.bb
+> @@ -0,0 +1,15 @@
+> +SUMMARY =3D "Python HTTP library with thread-safe connection pooling, fi=
+le post support, sanity friendly, and more"
+> +HOMEPAGE =3D "https://github.com/shazow/urllib3"
+> +SECTION =3D "devel/python"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D3be3707c5f24a69709682265e=
+29566fe"
 > +
-> +inherit cmake pkgconfig
-> +
-> +DEPENDS =3D "luajit zlib ncurses"
-> +RDEPENDS_${PN} =3D "bash"
-> +
-> +
-> +SRC_URI =3D "https://github.com/draios/sysdig/archive/${PV}.tar.gz"
+> +SRC_URI =3D "https://github.com/shazow/urllib3/archive/${PV}.zip"
 
 Don't use github archives, they are regenerated from time to time with=20
 different checksums and they have stupid filenames (prone to collision=20
 with other recipes).
 
+> +SRC_URI[md5sum] =3D "73935fe42b6ef51d078edbbca7c1bd55"
+> +SRC_URI[sha256sum] =3D "5fadd55b46bf826e46a482bb3d53662a8a88d8f9ea8656e3=
+51b659b8ad9bfc0f"
 > +
-> +SRC_URI[md5sum] =3D "5fe96a3a0fd98b2157a40cb29af41afc"
-> +SRC_URI[sha256sum] =3D "6995e39be565514901b5cb587689ee2efbf8359293e4e597=
-362382cccf0e9db6"
+> +S =3D "${WORKDIR}/urllib3-${PV}"
 > +
-> +DIR_ETC=3D"/etc"
-> +EXTRA_OECMAKE =3D ' -DUSE_BUNDLED_LUAJIT=3D"OFF" \
-> +                  -DUSE_BUNDLED_ZLIB=3D"OFF" \
-> +                  -DBUILD_DRIVER=3D"OFF" \
-> +                  -DUSE_BUNDLED_NCURSES=3D"OFF" \
-> +                  -DDIR_ETC=3D"${DIR_ETC}" \
-> +                '
+> +inherit setuptools
 > +
-> +FILES_${PN} +=3D " \
-> +    ${DIR_ETC}/* \
-> +    ${datadir}/zsh/* \=20
-> +    ${prefix}/src/*  \
-> +"
+> +RDEPENDS_${PN} +=3D "python-netclient"
 > --=20
-> 1.8.4.2
+> 1.7.10.4
 >=20
 > --=20
 > _______________________________________________
@@ -129,16 +110,16 @@ with other recipes).
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---451BZW+OUuJBCAYj
+--HTLCc13+3hfAZ6SL
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlXV7H4ACgkQN1Ujt2V2gBwg4gCfRY6npa8Rg2CzW07mnQiWQ1hl
-QmMAniR0jNuJ52Pxq968519aiFILzrc9
-=iYEs
+iEYEARECAAYFAlXV7JYACgkQN1Ujt2V2gBxLNwCeJ8pH9AnwILbxd9pXqbPshJlk
+8PcAnjiAKmjiWJothBP/tOt3lb7RGcKL
+=ry6W
 -----END PGP SIGNATURE-----
 
---451BZW+OUuJBCAYj--
+--HTLCc13+3hfAZ6SL--
