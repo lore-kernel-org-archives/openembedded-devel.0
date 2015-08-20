@@ -1,40 +1,40 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 5655376A4B
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id BEC80766DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 15:59:38 +0000 (UTC)
-Received: by widdq5 with SMTP id dq5so10431113wid.0
+	Thu, 20 Aug 2015 15:59:40 +0000 (UTC)
+Received: by wicja10 with SMTP id ja10so40059628wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 08:59:39 -0700 (PDT)
+	Thu, 20 Aug 2015 08:59:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=APZ8WcEXqVWmos2lFrz52M7PMEV91H5L5FhjxylCu4w=;
-	b=H4HGfFYRnMqhB6JhMCVWaOIS9Tz8zhDIxAI6u24YUTIlEozPwVqADGQGo0RDWeFBaP
-	ds1MiV2xuprZxxXLOCAg7VgwOgXhfwtIeSwVbpHvE7jxKLxyjLxqS+au81tLNomYynXP
-	jY1Q7QxAcwloclaZvZBQtsFHFXUs2BHie/mHC5HLy5m1KzweUaY1czyNb8/LtZ6RjIyk
-	gSFQlwPylwP2PBGMh8TMWD7s1UBxXCoBipUA/zhi9oAjHJmk+51JNj67h0SblHAqMAPs
-	wRWXD+LV/r03kWqBOsU1TDnSGvmzdjpYiX+pDq1z59Wx6aP2hslAMIFxwKQE2WhrVUS/
-	rK5g==
-X-Gm-Message-State: ALoCoQko/Nyum7aJYTcnjdEctfiOy5bCVrXjK6R5DGCtxOiRkwJxdeYd8XWS9USRXyCP3mY6wPY/
-X-Received: by 10.180.96.72 with SMTP id dq8mr15380266wib.17.1440086379005;
-	Thu, 20 Aug 2015 08:59:39 -0700 (PDT)
+	bh=33ykVxktLtDmoMBtp26lLio3i2uqlCyCB/romd+RFBU=;
+	b=aICvBKM/QTXv0r3V7QgMoKMDimY4csBn+W1SXSG0m7LJaDRKRcp911qTqWlLFIJ9x6
+	fPNmGpxQkRx56k20uLezjClbfoB1GZzUotyn2nW0Z9wRrexoaTLKhkfKtXnApn37c9rh
+	6RmZESBnQRWzeS8RcGaqikgJ+sZ7mdAe0oYj2OSx1hqVP0dtpQtFZuucM+4lkeY52DFC
+	pH2EMYuKAOLHgFSZtdQ2wsGdYCt5K+cRqtS5ZmD5hkFrto37V5PVqzQOqr0swLAwKwUY
+	/QqV+8OdzFJCp/12e5Z0JUxe7FMSAt21ab4m/jCCwYFmOPFIdUxCEjQqqHYyCecAFNH5
+	JeKg==
+X-Gm-Message-State: ALoCoQnwiUsbMqp15/mURQb7qvfhv3dLOJVCPy70YZd9A15VnkEANRx+22P/VZlEG5hG2MHJ+ZGu
+X-Received: by 10.180.87.71 with SMTP id v7mr65559416wiz.74.1440086380248;
+	Thu, 20 Aug 2015 08:59:40 -0700 (PDT)
 Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
 	by smtp.gmail.com with ESMTPSA id
-	fb3sm31100288wib.21.2015.08.20.08.59.37
+	l13sm6151270wjr.18.2015.08.20.08.59.39
 	(version=TLS1_2 cipher=AES128-SHA256 bits=128/128);
-	Thu, 20 Aug 2015 08:59:37 -0700 (PDT)
+	Thu, 20 Aug 2015 08:59:39 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Aug 2015 17:59:26 +0200
-Message-Id: <1440086369-3321-3-git-send-email-koen@dominion.thruhere.net>
+Date: Thu, 20 Aug 2015 17:59:27 +0200
+Message-Id: <1440086369-3321-4-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 2.0.1
 In-Reply-To: <1440086369-3321-1-git-send-email-koen@dominion.thruhere.net>
 References: <1440086369-3321-1-git-send-email-koen@dominion.thruhere.net>
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH 2/5] heimdal 1.6rc2: add buildtool for samba4
+Subject: [meta-oe][PATCH 3/5] talloc: upgrade to 2.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,115 +48,185 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2015 15:59:39 -0000
+X-List-Received-Date: Thu, 20 Aug 2015 15:59:42 -0000
 
-Samba4 uses ans1_compile and compile_et to build itself, so we need a
--native version of it. Heimdal is the external upstream  variant of the tools
-samba bundles.
+From: Bian Naimeng <biannm@cn.fujitsu.com>
 
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- ...dm5-fix-race-in-Makefile-with-kadm5_err.h.patch | 34 +++++++++++++++
- .../recipes-connectivity/samba/heimdal_1.6rc2.bb   | 49 ++++++++++++++++++++++
- 2 files changed, 83 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/samba/heimdal/0002-kadm5-fix-race-in-Makefile-with-kadm5_err.h.patch
- create mode 100644 meta-oe/recipes-connectivity/samba/heimdal_1.6rc2.bb
+ .../install-swig-interface-in-SWINGLIBDIR.patch    | 23 -----------
+ .../recipes-support/talloc/talloc/sepbuild.patch   | 27 -------------
+ meta-oe/recipes-support/talloc/talloc_2.0.1.bb     | 45 ----------------------
+ meta-oe/recipes-support/talloc/talloc_2.1.3.bb     | 43 +++++++++++++++++++++
+ 4 files changed, 43 insertions(+), 95 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
+ delete mode 100644 meta-oe/recipes-support/talloc/talloc/sepbuild.patch
+ delete mode 100644 meta-oe/recipes-support/talloc/talloc_2.0.1.bb
+ create mode 100644 meta-oe/recipes-support/talloc/talloc_2.1.3.bb
 
-diff --git a/meta-oe/recipes-connectivity/samba/heimdal/0002-kadm5-fix-race-in-Makefile-with-kadm5_err.h.patch b/meta-oe/recipes-connectivity/samba/heimdal/0002-kadm5-fix-race-in-Makefile-with-kadm5_err.h.patch
+diff --git a/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch b/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
+deleted file mode 100644
+index 635c60e..0000000
+--- a/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
++++ /dev/null
+@@ -1,23 +0,0 @@
+-Using the way swig interface is installed leads to a bad path in ${D}.
+-The interface ended up in ${D}/${STAGING_DIR_NATIVE} which is wrong. The
+-fix is to define a variable in recipe which is used in install rule by
+-talloc.
+-
+-Upstream-Status: Inappropriate [build system specific]
+-Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+-
+-Index: talloc-2.0.1/talloc.mk
+-===================================================================
+---- talloc-2.0.1.orig/talloc.mk	2009-10-11 16:42:24.000000000 +0300
+-+++ talloc-2.0.1/talloc.mk	2012-09-13 23:15:05.283539702 +0300
+-@@ -23,8 +23,8 @@
+- 	${INSTALLCMD} -m 644 talloc.pc $(DESTDIR)$(libdir)/pkgconfig
+- 	if [ -f talloc.3 ];then ${INSTALLCMD} -d $(DESTDIR)$(mandir)/man3; fi
+- 	if [ -f talloc.3 ];then ${INSTALLCMD} -m 644 talloc.3 $(DESTDIR)$(mandir)/man3; fi
+--	which swig >/dev/null 2>&1 && ${INSTALLCMD} -d $(DESTDIR)`swig -swiglib` || true
+--	which swig >/dev/null 2>&1 && ${INSTALLCMD} -m 644 talloc.i $(DESTDIR)`swig -swiglib` || true
+-+	which swig >/dev/null 2>&1 && ${INSTALLCMD} -d $(DESTDIR)/$(SWIGLIBDIR) || true
+-+	which swig >/dev/null 2>&1 && ${INSTALLCMD} -m 644 $(srcdir)/$(tallocdir)/talloc.i $(DESTDIR)/$(SWIGLIBDIR) || true
+- 
+- doc:: talloc.3 talloc.3.html
+- 
+diff --git a/meta-oe/recipes-support/talloc/talloc/sepbuild.patch b/meta-oe/recipes-support/talloc/talloc/sepbuild.patch
+deleted file mode 100644
+index 05506c3..0000000
+--- a/meta-oe/recipes-support/talloc/talloc/sepbuild.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+-Index: talloc-2.0.1/Makefile.in
+-===================================================================
+---- talloc-2.0.1.orig/Makefile.in
+-+++ talloc-2.0.1/Makefile.in
+-@@ -33,8 +33,8 @@ EXPORTSFILE = @EXPORTSFILE@
+- 
+- all:: showflags $(EXTRA_TARGETS)
+- 
+--include $(tallocdir)/rules.mk
+--include $(tallocdir)/talloc.mk
+-+include $(srcdir)/$(tallocdir)/rules.mk
+-+include $(srcdir)/$(tallocdir)/talloc.mk
+- 
+- @TALLOC_COMPAT1_MK@
+- 
+-Index: talloc-2.0.1/libtalloc.m4
+-===================================================================
+---- talloc-2.0.1.orig/libtalloc.m4
+-+++ talloc-2.0.1/libtalloc.m4
+-@@ -33,6 +33,6 @@ if test $ac_cv_sizeof_size_t -lt $ac_cv_
+- fi
+- 
+- if test x"$VERSIONSCRIPT" != "x"; then
+--    EXPORTSFILE=talloc.exports
+-+    EXPORTSFILE=$srcdir/$tallocdir/talloc.exports
+-     AC_SUBST(EXPORTSFILE)
+- fi
+diff --git a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
+deleted file mode 100644
+index 7bbfbc2..0000000
+--- a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
++++ /dev/null
+@@ -1,45 +0,0 @@
+-SUMMARY = "Hierarchical, reference counted memory pool system with destructors"
+-HOMEPAGE = "http://talloc.samba.org"
+-LICENSE = "LGPL-3.0"
+-LIC_FILES_CHKSUM = "file://NEWS;md5=5fe776b23a711c9153ee94bc87e47334"
+-
+-inherit autotools pkgconfig
+-
+-SRC_URI = "http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar.gz \
+-           file://install-swig-interface-in-SWINGLIBDIR.patch \
+-           file://sepbuild.patch \
+-"
+-SRC_URI[md5sum] = "c6e736540145ca58cb3dcb42f91cf57b"
+-SRC_URI[sha256sum] = "5b810527405f29d54f50efd78bf2c89e318f2cd8bed001f22f2a1412fd27c9b4"
+-
+-TARGET_CC_ARCH += "${LDFLAGS}"
+-
+-PR = "r2"
+-
+-EXTRA_AUTORECONF = "--exclude=autopoint --exclude=aclocal"
+-
+-DEPENDS += "swig-native"
+-
+-do_install_prepend() {
+-    # Hack the way swig interface for talloc is installed
+-    # This hack is accompanied by install-swig-interface-in-SWINGLIBDIR.patch
+-    if which swig > /dev/null; then
+-        SWIGLIBDIR="$(echo $(readlink -f $(swig -swiglib)) | \
+-            sed -e 's#^${STAGING_DIR_NATIVE}##')"
+-    fi
+-    if [ -n "$SWIGLIBDIR" ]; then
+-        export SWIGLIBDIR
+-    else
+-        echo "No swig found"
+-    fi
+-}
+-
+-do_install_append() {
+-    install -d ${D}${libdir}
+-    ln -s libtalloc.so.2.0.1 ${D}${libdir}/libtalloc.so.2.0
+-    ln -s libtalloc.so.2.0 ${D}${libdir}/libtalloc.so.2
+-    ln -s libtalloc.so.2 ${D}${libdir}/libtalloc.so
+-}
+-
+-PACKAGES += "${PN}-swig"
+-FILES_${PN}-swig += "${datadir}"
+diff --git a/meta-oe/recipes-support/talloc/talloc_2.1.3.bb b/meta-oe/recipes-support/talloc/talloc_2.1.3.bb
 new file mode 100644
-index 0000000..bab933c
+index 0000000..55285c5
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/samba/heimdal/0002-kadm5-fix-race-in-Makefile-with-kadm5_err.h.patch
-@@ -0,0 +1,34 @@
-+From 18fe7d300f133c2b9eb93bb4bd81e4644979a74b Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Jakub=20=C4=8Cajka?= <jcajka@redhat.com>
-+Date: Tue, 1 Jul 2014 13:13:43 -0600
-+Subject: [PATCH] kadm5: fix race in Makefile with kadm5_err.h
++++ b/meta-oe/recipes-support/talloc/talloc_2.1.3.bb
+@@ -0,0 +1,43 @@
++SUMMARY = "Hierarchical, reference counted memory pool system with destructors"
++HOMEPAGE = "http://talloc.samba.org"
++SECTION = "libs"
 +
-+When running make with -j4, occasionally kadm5 fails due to a missing
-+header file kadm5_err.h. Fix the race condition.
++LICENSE = "LGPL-3.0+ & GPL-3.0+"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
++                    file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
 +
-+Reported at https://bugzilla.redhat.com/1115164
++SRC_URI = "http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "3e285de2228ae67ff0a0f5cec658f627"
++SRC_URI[sha256sum] = "7aa5f75b22d4ef9c737b25515f2a2837ddc13014ff4ac6e58dd9e311f41f2cb0"
 +
-+Reviewed-by: Ken Dreyer <ktdreyer@ktdreyer.com>
++inherit waf-samba
 +
-+Upstream-status: Backport [upstream commit 6affa4cceceaa1369dd895f8acdd7a883ee65674]
++EXTRA_OECONF += "--disable-rpath \
++                 --disable-rpath-install \
++                 --bundled-libraries=NONE \
++                 --builtin-libraries=replace \
++                 --disable-silent-rules \
++                 --with-libiconv=${STAGING_DIR_HOST}${prefix} \
++                "
 +
-+Signed-off-by: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
-+---
-+ lib/kadm5/Makefile.am | 1 +
-+ 1 file changed, 1 insertion(+)
++PACKAGES += "libtalloc libtalloc-dbg libtalloc-dev pytalloc pytalloc-dbg pytalloc-dev"
 +
-+diff --git a/lib/kadm5/Makefile.am b/lib/kadm5/Makefile.am
-+index f8be3b1..1b399b1 100644
-+--- a/lib/kadm5/Makefile.am
-++++ b/lib/kadm5/Makefile.am
-+@@ -155,6 +155,7 @@ iprop-commands.c iprop-commands.h: iprop-commands.in
-+ 	$(SLC) $(srcdir)/iprop-commands.in
-+ 
-+ $(libkadm5srv_la_OBJECTS): kadm5_err.h
-++$(libkadm5clnt_la_OBJECTS): kadm5_err.h
-+ $(iprop_log_OBJECTS): iprop-commands.h
-+ 
-+ client_glue.lo server_glue.lo: $(srcdir)/common_glue.c
-+-- 
-+2.4.5
++#ALLOW_EMPTY_${PN} = "1"
++FILES_${PN} = ""
++FILES_${PN}-dev = ""
++FILES_${PN}-dbg = ""
 +
-diff --git a/meta-oe/recipes-connectivity/samba/heimdal_1.6rc2.bb b/meta-oe/recipes-connectivity/samba/heimdal_1.6rc2.bb
-new file mode 100644
-index 0000000..d6a057b
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/samba/heimdal_1.6rc2.bb
-@@ -0,0 +1,49 @@
-+SUMMARY = "The Heimdal Kerberos 5, PKIX, CMS, GSS-API, SPNEGO, NTLM, Digest-MD5 and, SASL implementation."
++FILES_libtalloc = "${libdir}/libtalloc${SOLIBS}"
++FILES_libtalloc-dbg = "/usr/src/debug/ \
++                       ${libdir}/.debug/libtalloc*"
++FILES_libtalloc-dev = "${includedir}/ \
++                       ${libdir}/libtalloc${SOLIBSDEV} \
++                       ${libdir}/pkgconfig/"
 +
-+DEPENDS = "e2fsprogs ncurses"
-+
-+LICENSE = "BSD-3"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d2c6f8cfe82d4fdd74355866f0c14d3f"
-+
-+PV = "1.5+1.6rc2"
-+
-+SRC_URI = "http://www.h5l.org/dist/src/heimdal-1.6rc2.tar.gz \
-+           file://0002-kadm5-fix-race-in-Makefile-with-kadm5_err.h.patch \
-+          "
-+S = "${WORKDIR}/heimdal-1.6rc2"
-+SRC_URI[md5sum] = "152ca82660864acf7f712ae1a57e6795"
-+SRC_URI[sha256sum] = "8fe19e0f12ff0d0c2f20a6cf56727deaabd89db9c197288022fb489e103b730d"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF = " \
-+	--disable-shared \
-+	--enable-static \
-+	--without-openldap \
-+	--without-capng \
-+	--without-sqlite3 \
-+	--without-libintl \
-+	--without-openssl \
-+	--without-berkeley-db \
-+	--without-readline \
-+	--without-libedit \
-+	--without-hesiod \
-+	--without-x \
-+	--disable-heimdal-documentation \
-+       "
-+
-+do_configure_append() {
-+    cp ${B}/*libtool ${B}/lib/libedit/libtool
-+}
-+
-+# Even with the makefile patch parallel make fails 8 out of 10 times with -j8 
-+PARALLEL_MAKE = ""
-+
-+# Put both compile tools together in $PATH and libexecdir in order to build samba4
-+do_install_append() {
-+    ln -sf ${libexecdir}/heimdal/asn1_compile ${D}${bindir}/
-+    ln -sf ${bindir}/compile_et ${D}${libexecdir}/heimdal/
-+}
-+
-+BBCLASSEXTEND = "native"
-+
++FILES_pytalloc = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
++                  ${libdir}/libpytalloc-util${SOLIBS} \
++                 "
++FILES_pytalloc-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
++                      ${libdir}/.debug/libpytalloc*"
++FILES_pytalloc-dev = "${libdir}/libpytalloc-util${SOLIBSDEV}"
++RDEPENDS_pytalloc = "python"
 -- 
 2.0.1
 
