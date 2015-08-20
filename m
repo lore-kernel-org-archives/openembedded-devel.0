@@ -1,40 +1,37 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 00FD3766DF
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id DD89976A4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 15:59:37 +0000 (UTC)
-Received: by wicne3 with SMTP id ne3so150053563wic.0
+	Thu, 20 Aug 2015 15:59:36 +0000 (UTC)
+Received: by wicja10 with SMTP id ja10so40058117wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 08:59:37 -0700 (PDT)
+	Thu, 20 Aug 2015 08:59:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=n/3DL8PlHoFOvE9Gs135xL9cuY5FUXcwlQ9nt2IFiPI=;
-	b=fUoj5+mIHY+SO/6/oihkbCv0aO9l94JslsITG4SKDeVL3R9iL0kUq/nLGAK57yKMJA
-	zVFS5OztRso9nq2gng8C+Qas7Du7sXtykRqGpklcG4eWrSX/Zc8BPJovPtjp+cc1VFfF
-	Cu3zPCp36Mvh/B+Qnfv7PvWXjJLAn1wfZoLZX9+FytyUpRdXKw4Ev6i18ECIC7EnYLa2
-	qsmBAuIHzkFSWwzLoB5cfwEGvKgwQ78DvVqAgwM9X7pmaWxHnF07IxXKQAXEMRVUoZUp
-	TqlZUBr9ONRCfUzMAcSp5VwG09To0Ip9QNFrmFU9v711KEatg/XaZZPDhuES17wthVCb
-	NLXA==
-X-Gm-Message-State: ALoCoQkCgonPyMDjKS/ACIThuPFfXZt9moyD9HhmpBDfNFgjHerO9nJ2/OvT0cyUXAl44nqOwDpN
-X-Received: by 10.180.97.41 with SMTP id dx9mr14640646wib.34.1440086377302;
-	Thu, 20 Aug 2015 08:59:37 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=PrryeSLoF1YF6wAHmigBx75EM9Z1RdnIejvM1QERuW4=;
+	b=N39bLR/Xy36PmhPZxzzj9tWAQym5CADCWMFx1UbxbzMcxzuDmKA/FcCc6TMFxmmuMm
+	nC4zXXL+cyEFEbW0aUfz3N+FnnR3ad3Y8L9ib4/TerT2i0DdoHNdW0a/dCI/BYq72Va/
+	NJLBPAwqQ591dyLwpEKJtVG4mnZgSJg1vFSHfrUZUxicpYxROKIiZP8oGOWjHLjz0pDD
+	Z1GBjpC2GqdamwQW+UcEEt7X/3TYMYYT8yNjpYqzajqXKfvOguRIwHDLI8YR4CykjJJ4
+	bAA/vMP0LNDpcpQQYJnrQQJD5/kLvv2JM8cmWlTkS34wWszSPXIKWF7E/Dftf7feTRjC
+	UGzQ==
+X-Gm-Message-State: ALoCoQlyu0Q2ozSVobEdfhkiXNWylvSA2kVj3wk2jEXa7nos7mkNtFj/gyP0uYYExCI5CF/NwEM0
+X-Received: by 10.194.78.164 with SMTP id c4mr6992903wjx.65.1440086375928;
+	Thu, 20 Aug 2015 08:59:35 -0700 (PDT)
 Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
 	by smtp.gmail.com with ESMTPSA id
-	fa8sm6714025wib.14.2015.08.20.08.59.36
+	ma4sm6123545wjb.38.2015.08.20.08.59.34
 	(version=TLS1_2 cipher=AES128-SHA256 bits=128/128);
-	Thu, 20 Aug 2015 08:59:36 -0700 (PDT)
+	Thu, 20 Aug 2015 08:59:34 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Aug 2015 17:59:25 +0200
-Message-Id: <1440086369-3321-2-git-send-email-koen@dominion.thruhere.net>
+Date: Thu, 20 Aug 2015 17:59:24 +0200
+Message-Id: <1440086369-3321-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 2.0.1
-In-Reply-To: <1440086369-3321-1-git-send-email-koen@dominion.thruhere.net>
-References: <1440086369-3321-1-git-send-email-koen@dominion.thruhere.net>
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH 1/5] waf-samba: add new class
+Subject: [meta-oe][RFC][PATCH 0/5] Samba 4.x update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,74 +47,91 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 20 Aug 2015 15:59:39 -0000
 
-From: Bian Naimeng <biannm@cn.fujitsu.com>
+Here's what I currently have. I builds samba half of the times, heimdal probably needs some patches for the com_err header issue. Feel free to take these patches and run with them, I'll be mostly AFK for the rest of the month.
 
-waf-samba is a build system used by samba related software
 
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/classes/waf-samba.bbclass | 51 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 51 insertions(+)
+Bian Naimeng (2):
+  waf-samba: add new class
+  talloc: upgrade to 2.1.3
+
+Koen Kooi (3):
+  heimdal 1.6rc2: add buildtool for samba4
+  samba: add 4.2.3
+  samba: remove 3.x
+
+ meta-oe/classes/waf-samba.bbclass                  |    51 +
+ ...dm5-fix-race-in-Makefile-with-kadm5_err.h.patch |    34 +
+ .../recipes-connectivity/samba/heimdal_1.6rc2.bb   |    49 +
+ .../bug_221618_precise-64bit-prototype.patch       |    20 -
+ ...4104_mention-kerberos-in-smbspool-manpage.patch |    34 -
+ ...m_7499-nss_wins-dont-clobber-daemons-logs.patch |    47 -
+ .../bug_601406_fix-perl-path-in-example.patch      |    15 -
+ ...04768_upstream_7826_drop-using-samba-link.patch |    21 -
+ ...ug_604768_upstream_7826_fix-WHATSNEW-link.patch |    18 -
+ ...onfigure-disable-core_pattern-cross-check.patch |    20 -
+ .../configure-disable-getaddrinfo-cross.patch      |    11 -
+ .../samba/samba-3.6.24/configure-libunwind.patch   |    82 -
+ .../samba/samba-3.6.24/documentation.patch         |   302 -
+ .../samba/samba-3.6.24/documentation2.patch        |   314 -
+ .../samba-3.6.24/dont-build-VFS-examples.patch     |    31 -
+ .../samba/samba-3.6.24/fhs-filespaths.patch        |    65 -
+ .../samba/samba-3.6.24/installswat.sh.patch        |    23 -
+ .../samba-3.6.24/libutil_drop_AI_ADDRCONFIG.patch  |    54 -
+ .../samba-3.6.24/only_export_public_symbols.patch  |    21 -
+ .../samba/samba-3.6.24/pam-examples.patch          |    17 -
+ .../samba/samba-3.6.24/shadow_copy2_backport.patch |  2101 ---
+ .../samba/samba-3.6.24/smbclient-pager.patch       |    18 -
+ .../samba/samba-3.6.24/smbtar-bashism.patch        |    19 -
+ .../samba/samba-3.6.24/smbtorture-manpage.patch    |    94 -
+ .../samba/samba-3.6.24/undefined-symbols.patch     |    24 -
+ .../samba/samba-3.6.24/usershare.patch             |    38 -
+ .../samba/samba-3.6.24/waf-as-source.patch         | 18534 -------------------
+ .../samba/samba/cross-answers.txt                  |     1 +
+ .../recipes-connectivity/samba/samba/nmb.service   |     3 +-
+ .../recipes-connectivity/samba/samba/smb.service   |     3 +-
+ .../samba/samba/winbind.service                    |     5 +-
+ meta-oe/recipes-connectivity/samba/samba_3.6.24.bb |    67 -
+ meta-oe/recipes-connectivity/samba/samba_git.bb    |   181 +
+ .../install-swig-interface-in-SWINGLIBDIR.patch    |    23 -
+ .../recipes-support/talloc/talloc/sepbuild.patch   |    27 -
+ meta-oe/recipes-support/talloc/talloc_2.0.1.bb     |    45 -
+ meta-oe/recipes-support/talloc/talloc_2.1.3.bb     |    43 +
+ 37 files changed, 363 insertions(+), 22092 deletions(-)
  create mode 100644 meta-oe/classes/waf-samba.bbclass
+ create mode 100644 meta-oe/recipes-connectivity/samba/heimdal/0002-kadm5-fix-race-in-Makefile-with-kadm5_err.h.patch
+ create mode 100644 meta-oe/recipes-connectivity/samba/heimdal_1.6rc2.bb
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_221618_precise-64bit-prototype.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_387266_upstream_4104_mention-kerberos-in-smbspool-manpage.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_598313_upstream_7499-nss_wins-dont-clobber-daemons-logs.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_601406_fix-perl-path-in-example.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_604768_upstream_7826_drop-using-samba-link.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_604768_upstream_7826_fix-WHATSNEW-link.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/configure-disable-core_pattern-cross-check.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/configure-disable-getaddrinfo-cross.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/configure-libunwind.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/documentation.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/documentation2.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/dont-build-VFS-examples.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/fhs-filespaths.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/installswat.sh.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/libutil_drop_AI_ADDRCONFIG.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/only_export_public_symbols.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/pam-examples.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/shadow_copy2_backport.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/smbclient-pager.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/smbtar-bashism.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/smbtorture-manpage.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/undefined-symbols.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/usershare.patch
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba-3.6.24/waf-as-source.patch
+ create mode 100644 meta-oe/recipes-connectivity/samba/samba/cross-answers.txt
+ delete mode 100644 meta-oe/recipes-connectivity/samba/samba_3.6.24.bb
+ create mode 100644 meta-oe/recipes-connectivity/samba/samba_git.bb
+ delete mode 100644 meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
+ delete mode 100644 meta-oe/recipes-support/talloc/talloc/sepbuild.patch
+ delete mode 100644 meta-oe/recipes-support/talloc/talloc_2.0.1.bb
+ create mode 100644 meta-oe/recipes-support/talloc/talloc_2.1.3.bb
 
-diff --git a/meta-oe/classes/waf-samba.bbclass b/meta-oe/classes/waf-samba.bbclass
-new file mode 100644
-index 0000000..b8e010a
---- /dev/null
-+++ b/meta-oe/classes/waf-samba.bbclass
-@@ -0,0 +1,51 @@
-+# waf is a build system which is used by samba related project.
-+# Obtain details from https://wiki.samba.org/index.php/Waf
-+# 
-+inherit qemu pythonnative
-+
-+DEPENDS += "qemu-native libxslt-native docbook-xsl-stylesheets-native python"
-+
-+CONFIGUREOPTS = " --prefix=${prefix} \
-+                  --bindir=${bindir} \
-+                  --sbindir=${sbindir} \
-+                  --libexecdir=${libexecdir} \
-+                  --datadir=${datadir} \
-+                  --sysconfdir=${sysconfdir} \
-+                  --sharedstatedir=${sharedstatedir} \
-+                  --localstatedir=${localstatedir} \
-+                  --libdir=${libdir} \
-+                  --includedir=${includedir} \
-+                  --oldincludedir=${oldincludedir} \
-+                  --infodir=${infodir} \
-+                  --mandir=${mandir} \
-+                "
-+
-+do_configure() {
-+    qemu_binary="${@qemu_target_binary(d)}"
-+    if [ ${qemu_binary} == "qemu-allarch" ]; then
-+        qemu_binary="qemuwrapper"
-+    fi
-+
-+    libdir_qemu="${STAGING_DIR_HOST}/${libdir}"
-+    base_libdir_qemu="${STAGING_DIR_HOST}/${base_libdir}"
-+    oldest_kernel_qemu=${OLDEST_KERNEL}
-+
-+    CROSS_EXEC="${qemu_binary} \
-+                -r ${oldest_kernel_qemu} \
-+                -L ${STAGING_DIR_HOST} \
-+                -E LD_LIBRARY_PATH=${libdir_qemu}:${base_libdir_qemu}"
-+
-+    export BUILD_SYS=${BUILD_SYS}
-+    export HOST_SYS=${HOST_SYS}
-+    export BUILD_ARCH=${BUILD_ARCH}
-+    export HOST_ARCH=${HOST_ARCH}
-+    export STAGING_LIBDIR=${STAGING_LIBDIR}
-+    export STAGING_INCDIR=${STAGING_INCDIR}
-+    export PYTHONPATH=${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR}
-+
-+    ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF} --cross-compile --cross-execute="${CROSS_EXEC}" --cross-answers=${B}/cross-answers-${TARGET_ARCH}.txt
-+}
-+
-+do_install() {
-+    oe_runmake install DESTDIR=${D}
-+}
 -- 
 2.0.1
 
