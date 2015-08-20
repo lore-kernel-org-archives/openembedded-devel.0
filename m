@@ -1,40 +1,39 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id BEC80766DF
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 1028776A4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 15:59:40 +0000 (UTC)
-Received: by wicja10 with SMTP id ja10so40059628wic.1
+	Thu, 20 Aug 2015 15:59:41 +0000 (UTC)
+Received: by wicja10 with SMTP id ja10so149391616wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 08:59:40 -0700 (PDT)
+	Thu, 20 Aug 2015 08:59:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=33ykVxktLtDmoMBtp26lLio3i2uqlCyCB/romd+RFBU=;
-	b=aICvBKM/QTXv0r3V7QgMoKMDimY4csBn+W1SXSG0m7LJaDRKRcp911qTqWlLFIJ9x6
-	fPNmGpxQkRx56k20uLezjClbfoB1GZzUotyn2nW0Z9wRrexoaTLKhkfKtXnApn37c9rh
-	6RmZESBnQRWzeS8RcGaqikgJ+sZ7mdAe0oYj2OSx1hqVP0dtpQtFZuucM+4lkeY52DFC
-	pH2EMYuKAOLHgFSZtdQ2wsGdYCt5K+cRqtS5ZmD5hkFrto37V5PVqzQOqr0swLAwKwUY
-	/QqV+8OdzFJCp/12e5Z0JUxe7FMSAt21ab4m/jCCwYFmOPFIdUxCEjQqqHYyCecAFNH5
-	JeKg==
-X-Gm-Message-State: ALoCoQnwiUsbMqp15/mURQb7qvfhv3dLOJVCPy70YZd9A15VnkEANRx+22P/VZlEG5hG2MHJ+ZGu
-X-Received: by 10.180.87.71 with SMTP id v7mr65559416wiz.74.1440086380248;
-	Thu, 20 Aug 2015 08:59:40 -0700 (PDT)
+	bh=8MVZE2nHnn+2E5IWUjtQ1mcbMXFjpDLYTDUKv8MUtPE=;
+	b=Qmkh3BanH/qcDCSRAXWrmdwx32A8p0UugypAaeiNwMiBK4vBbQpd2r4sd5PiC8kdST
+	LJprxDq/ws66VPxV01pt0lTolNRX0v4UR/UZiA2KCEiGe8cX5AietQM4iBb3WkNM1fm3
+	UqLm7hlArgNXWHru3tfctfBR2gD7B7143mHtp7kMde/uvyz5H8JUB1XOdJeW44gjPx2c
+	4FLJTww1VYMP2IdpIdgmk2qnp+ZgCw0/Oz/+6lmgZo53ukQ7WlD94h7hhkOAVQNnt5md
+	5JrEUbJ3A7FEakQG+NMHC+Zy0Ww0y+VsjT21oOG7fGVC8F97YX+cSR7fXrRa1NNZSwxb
+	JWlw==
+X-Gm-Message-State: ALoCoQlrPzBtESfYOJuDlNqBkvJ8XImdIylePUziP0ZxpekkciHkd1L7MQpgy0KYukMmbzDu1VYe
+X-Received: by 10.180.84.230 with SMTP id c6mr14733320wiz.32.1440086381787;
+	Thu, 20 Aug 2015 08:59:41 -0700 (PDT)
 Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
-	by smtp.gmail.com with ESMTPSA id
-	l13sm6151270wjr.18.2015.08.20.08.59.39
+	by smtp.gmail.com with ESMTPSA id i6sm6129170wje.33.2015.08.20.08.59.40
 	(version=TLS1_2 cipher=AES128-SHA256 bits=128/128);
-	Thu, 20 Aug 2015 08:59:39 -0700 (PDT)
+	Thu, 20 Aug 2015 08:59:40 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Aug 2015 17:59:27 +0200
-Message-Id: <1440086369-3321-4-git-send-email-koen@dominion.thruhere.net>
+Date: Thu, 20 Aug 2015 17:59:28 +0200
+Message-Id: <1440086369-3321-5-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 2.0.1
 In-Reply-To: <1440086369-3321-1-git-send-email-koen@dominion.thruhere.net>
 References: <1440086369-3321-1-git-send-email-koen@dominion.thruhere.net>
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH 3/5] talloc: upgrade to 2.1.3
+Subject: [meta-oe][PATCH 4/5] samba: add 4.2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,183 +49,278 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 20 Aug 2015 15:59:42 -0000
 
-From: Bian Naimeng <biannm@cn.fujitsu.com>
+Samba is now waf based so this recipe has been written from scratch and
+will need more review than the usual version bump.
 
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+Waf allows two methods for site files:
+
+1) Run qemu against sysroot
+2) cross-answers.txt
+3) all of the above
+
+We're going to use 3). This allows overrides as well as building for
+architectures where qemu doesn't work.
+
+Another change is that when using systemd the daemons will run in the
+foreground instead of forking.
+
+Build tested on x86_64 and armv7a with the Angstrom Distribution.
+Runtime tested on x86_64 and armv7a with the Angstrom Distribution.
+
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../install-swig-interface-in-SWINGLIBDIR.patch    | 23 -----------
- .../recipes-support/talloc/talloc/sepbuild.patch   | 27 -------------
- meta-oe/recipes-support/talloc/talloc_2.0.1.bb     | 45 ----------------------
- meta-oe/recipes-support/talloc/talloc_2.1.3.bb     | 43 +++++++++++++++++++++
- 4 files changed, 43 insertions(+), 95 deletions(-)
- delete mode 100644 meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
- delete mode 100644 meta-oe/recipes-support/talloc/talloc/sepbuild.patch
- delete mode 100644 meta-oe/recipes-support/talloc/talloc_2.0.1.bb
- create mode 100644 meta-oe/recipes-support/talloc/talloc_2.1.3.bb
+ .../samba/samba/cross-answers.txt                  |   1 +
+ .../recipes-connectivity/samba/samba/nmb.service   |   3 +-
+ .../recipes-connectivity/samba/samba/smb.service   |   3 +-
+ .../samba/samba/winbind.service                    |   5 +-
+ meta-oe/recipes-connectivity/samba/samba_git.bb    | 181 +++++++++++++++++++++
+ 5 files changed, 186 insertions(+), 7 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/samba/samba/cross-answers.txt
+ create mode 100644 meta-oe/recipes-connectivity/samba/samba_git.bb
 
-diff --git a/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch b/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
-deleted file mode 100644
-index 635c60e..0000000
---- a/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--Using the way swig interface is installed leads to a bad path in ${D}.
--The interface ended up in ${D}/${STAGING_DIR_NATIVE} which is wrong. The
--fix is to define a variable in recipe which is used in install rule by
--talloc.
--
--Upstream-Status: Inappropriate [build system specific]
--Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
--
--Index: talloc-2.0.1/talloc.mk
--===================================================================
----- talloc-2.0.1.orig/talloc.mk	2009-10-11 16:42:24.000000000 +0300
--+++ talloc-2.0.1/talloc.mk	2012-09-13 23:15:05.283539702 +0300
--@@ -23,8 +23,8 @@
-- 	${INSTALLCMD} -m 644 talloc.pc $(DESTDIR)$(libdir)/pkgconfig
-- 	if [ -f talloc.3 ];then ${INSTALLCMD} -d $(DESTDIR)$(mandir)/man3; fi
-- 	if [ -f talloc.3 ];then ${INSTALLCMD} -m 644 talloc.3 $(DESTDIR)$(mandir)/man3; fi
---	which swig >/dev/null 2>&1 && ${INSTALLCMD} -d $(DESTDIR)`swig -swiglib` || true
---	which swig >/dev/null 2>&1 && ${INSTALLCMD} -m 644 talloc.i $(DESTDIR)`swig -swiglib` || true
--+	which swig >/dev/null 2>&1 && ${INSTALLCMD} -d $(DESTDIR)/$(SWIGLIBDIR) || true
--+	which swig >/dev/null 2>&1 && ${INSTALLCMD} -m 644 $(srcdir)/$(tallocdir)/talloc.i $(DESTDIR)/$(SWIGLIBDIR) || true
-- 
-- doc:: talloc.3 talloc.3.html
-- 
-diff --git a/meta-oe/recipes-support/talloc/talloc/sepbuild.patch b/meta-oe/recipes-support/talloc/talloc/sepbuild.patch
-deleted file mode 100644
-index 05506c3..0000000
---- a/meta-oe/recipes-support/talloc/talloc/sepbuild.patch
-+++ /dev/null
-@@ -1,27 +0,0 @@
--Index: talloc-2.0.1/Makefile.in
--===================================================================
----- talloc-2.0.1.orig/Makefile.in
--+++ talloc-2.0.1/Makefile.in
--@@ -33,8 +33,8 @@ EXPORTSFILE = @EXPORTSFILE@
-- 
-- all:: showflags $(EXTRA_TARGETS)
-- 
---include $(tallocdir)/rules.mk
---include $(tallocdir)/talloc.mk
--+include $(srcdir)/$(tallocdir)/rules.mk
--+include $(srcdir)/$(tallocdir)/talloc.mk
-- 
-- @TALLOC_COMPAT1_MK@
-- 
--Index: talloc-2.0.1/libtalloc.m4
--===================================================================
----- talloc-2.0.1.orig/libtalloc.m4
--+++ talloc-2.0.1/libtalloc.m4
--@@ -33,6 +33,6 @@ if test $ac_cv_sizeof_size_t -lt $ac_cv_
-- fi
-- 
-- if test x"$VERSIONSCRIPT" != "x"; then
---    EXPORTSFILE=talloc.exports
--+    EXPORTSFILE=$srcdir/$tallocdir/talloc.exports
--     AC_SUBST(EXPORTSFILE)
-- fi
-diff --git a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-deleted file mode 100644
-index 7bbfbc2..0000000
---- a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-+++ /dev/null
-@@ -1,45 +0,0 @@
--SUMMARY = "Hierarchical, reference counted memory pool system with destructors"
--HOMEPAGE = "http://talloc.samba.org"
--LICENSE = "LGPL-3.0"
--LIC_FILES_CHKSUM = "file://NEWS;md5=5fe776b23a711c9153ee94bc87e47334"
--
--inherit autotools pkgconfig
--
--SRC_URI = "http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar.gz \
--           file://install-swig-interface-in-SWINGLIBDIR.patch \
--           file://sepbuild.patch \
--"
--SRC_URI[md5sum] = "c6e736540145ca58cb3dcb42f91cf57b"
--SRC_URI[sha256sum] = "5b810527405f29d54f50efd78bf2c89e318f2cd8bed001f22f2a1412fd27c9b4"
--
--TARGET_CC_ARCH += "${LDFLAGS}"
--
--PR = "r2"
--
--EXTRA_AUTORECONF = "--exclude=autopoint --exclude=aclocal"
--
--DEPENDS += "swig-native"
--
--do_install_prepend() {
--    # Hack the way swig interface for talloc is installed
--    # This hack is accompanied by install-swig-interface-in-SWINGLIBDIR.patch
--    if which swig > /dev/null; then
--        SWIGLIBDIR="$(echo $(readlink -f $(swig -swiglib)) | \
--            sed -e 's#^${STAGING_DIR_NATIVE}##')"
--    fi
--    if [ -n "$SWIGLIBDIR" ]; then
--        export SWIGLIBDIR
--    else
--        echo "No swig found"
--    fi
--}
--
--do_install_append() {
--    install -d ${D}${libdir}
--    ln -s libtalloc.so.2.0.1 ${D}${libdir}/libtalloc.so.2.0
--    ln -s libtalloc.so.2.0 ${D}${libdir}/libtalloc.so.2
--    ln -s libtalloc.so.2 ${D}${libdir}/libtalloc.so
--}
--
--PACKAGES += "${PN}-swig"
--FILES_${PN}-swig += "${datadir}"
-diff --git a/meta-oe/recipes-support/talloc/talloc_2.1.3.bb b/meta-oe/recipes-support/talloc/talloc_2.1.3.bb
+diff --git a/meta-oe/recipes-connectivity/samba/samba/cross-answers.txt b/meta-oe/recipes-connectivity/samba/samba/cross-answers.txt
 new file mode 100644
-index 0000000..55285c5
+index 0000000..10a2bcb
 --- /dev/null
-+++ b/meta-oe/recipes-support/talloc/talloc_2.1.3.bb
-@@ -0,0 +1,43 @@
-+SUMMARY = "Hierarchical, reference counted memory pool system with destructors"
-+HOMEPAGE = "http://talloc.samba.org"
-+SECTION = "libs"
++++ b/meta-oe/recipes-connectivity/samba/samba/cross-answers.txt
+@@ -0,0 +1 @@
++Checking uname version type: "#1 Tue Nov 1 12:34:56 UTC 2013"
+diff --git a/meta-oe/recipes-connectivity/samba/samba/nmb.service b/meta-oe/recipes-connectivity/samba/samba/nmb.service
+index 91b9975..64cefb6 100644
+--- a/meta-oe/recipes-connectivity/samba/samba/nmb.service
++++ b/meta-oe/recipes-connectivity/samba/samba/nmb.service
+@@ -3,9 +3,8 @@ Description=Samba NMB Daemon
+ After=syslog.target network.target
+ 
+ [Service]
+-Type=forking
+ PIDFile=/var/run/nmbd.pid
+-ExecStart=@SBINDIR@/nmbd
++ExecStart=@SBINDIR@/nmbd -F
+ ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
+ 
+ [Install]
+diff --git a/meta-oe/recipes-connectivity/samba/samba/smb.service b/meta-oe/recipes-connectivity/samba/samba/smb.service
+index bc0707a..685480e 100644
+--- a/meta-oe/recipes-connectivity/samba/samba/smb.service
++++ b/meta-oe/recipes-connectivity/samba/samba/smb.service
+@@ -3,10 +3,9 @@ Description=Samba SMB Daemon
+ After=syslog.target network.target nmb.service winbind.service
+ 
+ [Service]
+-Type=forking
+ PIDFile=/var/run/smbd.pid
+ LimitNOFILE=16384
+-ExecStart=@SBINDIR@/smbd
++ExecStart=@SBINDIR@/smbd -F
+ ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
+ 
+ [Install]
+diff --git a/meta-oe/recipes-connectivity/samba/samba/winbind.service b/meta-oe/recipes-connectivity/samba/samba/winbind.service
+index bff6fb8..ebcb230 100644
+--- a/meta-oe/recipes-connectivity/samba/samba/winbind.service
++++ b/meta-oe/recipes-connectivity/samba/samba/winbind.service
+@@ -1,11 +1,10 @@
+-i[Unit]
++[Unit]
+ Description=Samba Winbind Daemon
+ After=syslog.target network.target nmb.service
+ 
+ [Service]
+-Type=forking
+ PIDFile=/var/run/winbindd.pid
+-ExecStart=@SBINDIR@/winbindd
++ExecStart=@SBINDIR@/winbindd -F
+ ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
+ 
+ [Install]
+diff --git a/meta-oe/recipes-connectivity/samba/samba_git.bb b/meta-oe/recipes-connectivity/samba/samba_git.bb
+new file mode 100644
+index 0000000..9ed3bfa
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/samba/samba_git.bb
+@@ -0,0 +1,181 @@
++SUMMARY = "Samba is the standard Windows interoperability suite of programs for Linux and Unix."
++SECTION = "console/network"
 +
-+LICENSE = "LGPL-3.0+ & GPL-3.0+"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
-+                    file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
++LICENSE = "GPL-3.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 +
-+SRC_URI = "http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "3e285de2228ae67ff0a0f5cec658f627"
-+SRC_URI[sha256sum] = "7aa5f75b22d4ef9c737b25515f2a2837ddc13014ff4ac6e58dd9e311f41f2cb0"
++DEPENDS = "heimdal-native bash readline virtual/libiconv zlib popt gnutls python talloc"
++
++PV = "4.2+4.3.0rc3"
++SRCREV = "5d9f4f950e5c63d30611e77eb7bc7fcfcf985b82"
++
++SRC_URI = "git://git.samba.org/samba.git;branch=v4-3-stable \
++           file://volatiles.03_samba \
++           file://smb.conf \
++           file://init.samba \
++           file://init.winbind \
++           file://nmb.service \
++           file://smb.service \
++           file://winbind.service \
++           file://cross-answers.txt \
++          "
++
++S = "${WORKDIR}/git"
 +
 +inherit waf-samba
 +
-+EXTRA_OECONF += "--disable-rpath \
-+                 --disable-rpath-install \
-+                 --bundled-libraries=NONE \
-+                 --builtin-libraries=replace \
-+                 --disable-silent-rules \
-+                 --with-libiconv=${STAGING_DIR_HOST}${prefix} \
++inherit perlnative pythonnative update-rc.d systemd
++
++SAMBA4_IDMAP_MODULES = "idmap_ad,idmap_rid,idmap_adex,idmap_hash,idmap_tdb2"
++SAMBA4_PDB_MODULES = "pdb_tdbsam,pdb_ldap,pdb_ads,pdb_smbpasswd,pdb_wbc_sam,pdb_samba4"
++SAMBA4_AUTH_MODULES = "auth_unix,auth_wbc,auth_server,auth_netlogond,auth_script,auth_samba4"
++SAMBA4_MODULES = "${SAMBA4_IDMAP_MODULES},${SAMBA4_PDB_MODULES},${SAMBA4_AUTH_MODULES}"
++
++EXTRA_OECONF = " \
++                --disable-rpath \
++                --disable-rpath-install \
++                --enable-fhs \
++                --with-syslog \
++                --without-ldap \
++                --without-ads \
++                --with-cluster-support \
++                --with-shared-modules=${SAMBA4_MODULES} \
++                --bundled-libraries='heimdal,!asn1_compile,!compile_et,!zlib,!popt,!talloc,!pytalloc,!pytalloc-util' \
++               "
++
++PACKAGECONFIG = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
++                 ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
++                 avahi \
 +                "
 +
-+PACKAGES += "libtalloc libtalloc-dbg libtalloc-dev pytalloc pytalloc-dbg pytalloc-dev"
++PACKAGECONFIG[avahi]    = "--enable-avahi  ,--disable-avahi    ,avahi"
++PACKAGECONFIG[pam]      = "--with-pam      ,--without-pam      ,libpam"
++PACKAGECONFIG[fam]      = "--with-fam      ,--without-fam      ,gamin"
++PACKAGECONFIG[systemd]  = "--with-systemd  ,--without-systemd  ,systemd"
 +
-+#ALLOW_EMPTY_${PN} = "1"
-+FILES_${PN} = ""
-+FILES_${PN}-dev = ""
-+FILES_${PN}-dbg = ""
++PERL_VERNDORLIB = "${datadir}/perl5/vendor_perl/"
 +
-+FILES_libtalloc = "${libdir}/libtalloc${SOLIBS}"
-+FILES_libtalloc-dbg = "/usr/src/debug/ \
-+                       ${libdir}/.debug/libtalloc*"
-+FILES_libtalloc-dev = "${includedir}/ \
-+                       ${libdir}/libtalloc${SOLIBSDEV} \
-+                       ${libdir}/pkgconfig/"
++do_configure_prepend() {
++     # Merge waf site cache entries into one file
++     mkdir -p ${B}
++     if [ -e  ${WORKDIR}/cross-answers-${TARGET_ARCH}.txt ] ; then
++        sed -i '/uname machine type/d'  ${WORKDIR}/cross-answers-${TARGET_ARCH}.txt
++     fi
++     echo 'Checking uname machine type: "${TARGET_ARCH}"' >> ${WORKDIR}/cross-answers-${TARGET_ARCH}.txt
++     cat ${WORKDIR}/cross-answers.txt ${WORKDIR}/cross-answers-${TARGET_ARCH}.txt > ${B}/cross-answers.txt
++}
 +
-+FILES_pytalloc = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
-+                  ${libdir}/libpytalloc-util${SOLIBS} \
-+                 "
-+FILES_pytalloc-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
-+                      ${libdir}/.debug/libpytalloc*"
-+FILES_pytalloc-dev = "${libdir}/libpytalloc-util${SOLIBSDEV}"
-+RDEPENDS_pytalloc = "python"
++do_compile()  {
++    ${S}/buildtools/bin/waf build ${PARALLEL_MAKE}
++}
++
++do_install() {
++    ${S}/buildtools/bin/waf install --destdir=${D}
++
++    # Remove sysinit script if sysvinit is not in DISTRO_FEATURES
++        
++    install -D -m 755 ${WORKDIR}/init.samba ${D}${sysconfdir}/init.d/samba
++    install -D -m 755 ${WORKDIR}/init.winbind ${D}${sysconfdir}/init.d/winbind
++    install -D -m 644 ${WORKDIR}/smb.conf ${D}${sysconfdir}/samba/smb.conf
++    install -D -m 644 ${WORKDIR}/volatiles.03_samba ${D}${sysconfdir}/default/volatiles/volatiles.03_samba
++
++    install -d ${D}/var/log/samba
++    install -d ${D}/var/spool/samba
++
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false', 'true', d)}; then
++        rm -rf ${D}${sysconfdir}/init.d/
++    fi
++
++    install -d ${D}${systemd_unitdir}/system
++    for i in nmb smb winbind; do
++        install -m 0644 ${WORKDIR}/$i.service ${D}${systemd_unitdir}/system
++    done
++    sed -e 's,@BASE_BINDIR@,${base_bindir},g' \
++        -e 's,@SBINDIR@,${sbindir},g' \
++        -i ${D}${systemd_unitdir}/system/*.service
++
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++	install -d ${D}${sysconfdir}/tmpfiles.d
++	echo "d ${localstatedir}/log/samba 0755 root root -" \
++            > ${D}${sysconfdir}/tmpfiles.d/99-${BPN}.conf
++    fi
++}
++
++SYSTEMD_PACKAGES = "${PN} winbind"
++SYSTEMD_SERVICE_${PN} = "nmb.service smb.service"
++SYSTEMD_SERVICE_winbind = "winbind.service"
++
++INITSCRIPT_PACKAGES = "samba winbind"
++INITSCRIPT_NAME_samba = "samba"
++INITSCRIPT_NAME_winbind = "winbind"
++
++# No dependencies, goes in at level 20 (NOTE: take care with the
++# level, later levels put the shutdown later too - see the links
++# in rc6.d, the shutdown must precede network shutdown).
++INITSCRIPT_PARAMS = "defaults"
++
++CONFFILES_${PN} = "${sysconfdir}/samba/smb.conf"
++
++PACKAGES =+ "ctdb-tests-dbg ctdb-tests samba-python-dbg samba-python samba-perl libwbclient libwinbind libwinbind-dbg libnss-winbind winbind winbind-dbg libnetapi libtdb libsmbsharemodes libsmbclient libsmbclient-dev cifs cifs-doc swat"
++
++RDEPENDS_ctdb-tests += "bash"
++FILES_ctdb-tests = "${libdir}/ctdb-tests \
++                    ${datadir}/ctdb-tests"
++FILES_ctdb-tests-dbg = "${libdir}/ctdb-tests/.debug"
++
++FILES_samba-python = "${libdir}/python*"
++FILES_samba-python-dbg = "${libdir}/python*/site-packages/samba/*/.debug \
++                          ${libdir}/python*/site-packages/samba/.debug \
++                          ${libdir}/python*/site-packages/.debug \
++                         "
++
++FILES_samba-perl = "${datadir}/perl*"
++
++FILES_winbind-dbg = "${libdir}/idmap/.debug/*.so \
++                     ${libdir}/security/.debug/pam_winbind.so \
++"
++
++# For some reason the shlib code doesn't pick this up leading to: /usr/sbin/smbd: error while loading shared libraries: libnetapi.so.0: cannot open shared object file: No such file or directory
++RDEPENDS_${PN} += "libnetapi"
++
++FILES_${PN} += "${libdir}/vfs/*.so \
++                ${libdir}/charset/*.so \
++                ${libdir}/*.dat \
++                ${libdir}/auth/*.so \
++                ${libdir}/security/pam_smbpass.so \
++                ${libdir}/winbind_krb5*.so \
++                ${libdir}/mit_samba*.so \
++"
++
++FILES_${PN}-dbg += "${libdir}/vfs/.debug \
++                    ${libdir}/charset/.debug \
++                    ${libdir}/auth/.debug \
++                    ${libdir}/security/.debug \
++                    ${libdir}/samba/*/.debug \
++"
++
++FILES_libwbclient = "${libdir}/libwbclient.so.*"
++FILES_libnetapi = "${libdir}/libnetapi.so.*"
++FILES_libsmbsharemodes = "${libdir}/libsmbsharemodes.so.*"
++FILES_libtdb = "${libdir}/libtdb.so.*"
++FILES_cifs = "${base_sbindir}/mount.cifs ${base_sbindir}/umount.cifs"
++FILES_cifs-doc = "${mandir}/man8/mount.cifs.8 ${mandir}/man8/umount.cifs.8"
++FILES_libsmbclient = "${libdir}/libsmbclient.so.*"
++FILES_libsmbclient-dev = "${libdir}/libsmbclient.so ${includedir}"
++FILES_winbind = "${sbindir}/winbindd \
++                 ${bindir}/wbinfo \
++                 ${bindir}/ntlm_auth \
++                 ${sysconfdir}/init.d/winbind \
++                 ${systemd_unitdir}/system/winbind.service \
++"
++FILES_libwinbind = "${libdir}/idmap/*.so \
++                    ${libdir}/pdb \
++                    ${libdir}/gpext \
++                    ${libdir}/perfcount \
++                    ${libdir}/security/pam_winbind.so \
++"
++
++FILES_libnss-winbind = "${libdir}/libnss_*${SOLIBS} \
++                        ${libdir}/nss_info"
++
++FILES_swat       = "${sbindir}/swat ${datadir}/swat ${libdir}/*.msg"
 -- 
 2.0.1
 
