@@ -1,39 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 8FE5465CCD
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 490F365CCD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 15:03:12 +0000 (UTC)
-Received: by wijp15 with SMTP id p15so18712725wij.0
+	Thu, 20 Aug 2015 15:03:46 +0000 (UTC)
+Received: by wicja10 with SMTP id ja10so38732265wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 08:03:12 -0700 (PDT)
+	Thu, 20 Aug 2015 08:03:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=M/T6VKc5DtSVp/I0MfWYeoyOBKZoHZ3nUW0hdbPDmL4=;
-	b=qSkmrnee80f8NO8FctRLj1LJPUh1iSkJ4dBqmZDu12pCejsd/AUYDbKVKN5oc5V/2O
-	EOUBnfa9GPz3nuCpI4zJToM1FRKUE60WA13rjxy6D1are/PpRxW737tU76fkVDsc4wLK
-	fNp3PbHZfzWOwCNpqkVyAjOhh4UZtf8hoPYIwQgUo4WT/MboNYAw6N5qMjWiwjS3z24D
-	/DNrStRCi3i5h4bpmB5z0kqMmDZGBoA+0QcXJpPaitTIQp91tj9K1QCTNWVbZmht4I0M
-	9cbmt0G9sCdwVyNbCxa6jdjgNKnpfLKqXypEVfXqEgfTaY/o09lnl1Ctoo9dxI4XoI1y
-	adUA==
-X-Received: by 10.180.75.233 with SMTP id f9mr13598634wiw.21.1440082992210;
-	Thu, 20 Aug 2015 08:03:12 -0700 (PDT)
+	bh=0ZcvGWEqlPsth4C2CJhZ7WOMuACmXZX8fNrxHVoIceI=;
+	b=eE/NIIK6lAn704na9Y5bqxmFqQPp9h4v5y9AQt8yLp7vaokIQeNlajn7bR0yHaBw6d
+	1Kl+R8L9xLY3djh/GREsIis8Vx7p++mtj4k8itJ7hnEFAqE0GcEuLMw722y4R40hi2pB
+	1cLoYlVQjSC3lk8sLQ4Fh6rLIzMUvph2NfxYWB/qykmuChclI3Mnu2oEGQBVX2V1v/3I
+	Xt2GcuWqPbBX9wnAcQ2JHiDIEV2kPfX4Q8zXOWfMojyso2Ak34Gv8S3KlgtCyFEWPRTN
+	SI6xLgRzgmvjKqRaPvkVhCd5q8Ex2w5DYeRkWDXBj7D4201u00uKC56Y3iQIh9aiWAEj
+	NAwQ==
+X-Received: by 10.180.87.230 with SMTP id bb6mr13701998wib.36.1440083026722;
+	Thu, 20 Aug 2015 08:03:46 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id xs1sm5966078wjc.7.2015.08.20.08.03.11
+	by smtp.gmail.com with ESMTPSA id
+	gw7sm30960994wib.15.2015.08.20.08.03.45
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 20 Aug 2015 08:03:11 -0700 (PDT)
+	Thu, 20 Aug 2015 08:03:45 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 20 Aug 2015 17:03:39 +0200
+Date: Thu, 20 Aug 2015 17:04:13 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150820150339.GH2446@jama>
-References: <1438568853-10554-1-git-send-email-TicoTimo@gmail.com>
+Message-ID: <20150820150413.GI2446@jama>
+References: <1432588449-31413-1-git-send-email-schnitzeltony@googlemail.com>
+	<1432588449-31413-2-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <1438568853-10554-1-git-send-email-TicoTimo@gmail.com>
+In-Reply-To: <1432588449-31413-2-git-send-email-schnitzeltony@googlemail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][meta-python][PATCH] python-pyparted: update to 3.10.5
+Subject: Re: [PATCH 01/12] fontforge: add 20141126
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,81 +49,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2015 15:03:13 -0000
-X-Groupsio-MsgNum: 56836
+X-List-Received-Date: Thu, 20 Aug 2015 15:03:47 -0000
+X-Groupsio-MsgNum: 56837
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zq44+AAfm4giZpo5"
+	protocol="application/pgp-signature"; boundary="9iyR+p8Z2cn535Lj"
 Content-Disposition: inline
 
---zq44+AAfm4giZpo5
-Content-Type: text/plain; charset=us-ascii
+--9iyR+p8Z2cn535Lj
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Aug 02, 2015 at 07:27:33PM -0700, Tim Orling wrote:
-> * Upstream changed from fedorahosted to github
+On Mon, May 25, 2015 at 11:13:58PM +0200, Andreas M=FCller wrote:
+> Have this recipe in my meta-qt5-extra but would be happy to get it under =
+the
+> hood of Martin's world.
 >=20
-> Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+> It started with the native part to build kde's oxygen-fonts but maybe som=
+ebody
+> likes to have it on target.
+>=20
+> Tested native part by gazillions of builds / target part in xfce environm=
+ent.
+>=20
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
 > ---
->  .../{python-pyparted_3.9.bb =3D> python-pyparted_3.10.5.bb}   | 13 +++++=
-++------
->  1 file changed, 7 insertions(+), 6 deletions(-)
->  rename meta-python/recipes-extended/python-pyparted/{python-pyparted_3.9=
-=2Ebb =3D> python-pyparted_3.10.5.bb} (54%)
->=20
-> diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted=
-_3.9.bb b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10=
-=2E5.bb
-> similarity index 54%
-> rename from meta-python/recipes-extended/python-pyparted/python-pyparted_=
-3.9.bb
-> rename to meta-python/recipes-extended/python-pyparted/python-pyparted_3.=
-10.5.bb
-> index bfb4f6f..a89c897 100644
-> --- a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
-> +++ b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.5=
+>  .../fontforge/fontforge_20141126.bb                | 41 ++++++++++++++++=
+++++++
+>  1 file changed, 41 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge_20141126=
 =2Ebb
-> @@ -2,18 +2,19 @@ DESCRIPTION =3D "pyparted is a set of Python modules th=
-at provide Python programme
->  an interface to libparted, the GNU parted library for disk partitioning =
-and \
->  filesystem manipulation."
->  SUMMARY =3D "Python bindings for libparted"
-> -HOMEPAGE =3D "https://fedorahosted.org/pyparted/"
-> +HOMEPAGE =3D "https://github.com/rhinstaller/pyparted/"
->  LICENSE =3D "GPL-2.0+"
->  LIC_FILES_CHKSUM =3D "\
->      file://COPYING;md5=3D8ca43cbc842c2336e835926c2166c28b \
-> -    file://src/_pedmodule.c;startline=3D10;endline=3D22;md5=3D70c62bd737=
-82a03f56a0571a9f08ea46 \
-> +    file://src/_pedmodule.c;startline=3D10;endline=3D22;md5=3Debcb25dde1=
-ac9c46e986dec79b404e7e \
->  "
->  DEPENDS +=3D "parted"
-> =20
-> -SRC_URI =3D "https://fedorahosted.org/releases/p/y/pyparted/pyparted-${P=
-V}.tar.gz"
-> -SRC_URI[md5sum] =3D "f16c7ef7f5fa4a43fcb2a4654b487e39"
-> -SRC_URI[sha256sum] =3D "a56712e3d058ce3d859c158236dbbf45224018919efd3d88=
-0ea80f9e0d0bebbb"
-> -S =3D "${WORKDIR}/pyparted-${PV}"
-> +SRCNAME =3D "pyparted"
-> +SRC_URI =3D "https://github.com/rhinstaller/${SRCNAME}/archive/v${PV}.ta=
-r.gz"
+>=20
+> diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb b/m=
+eta-oe/recipes-graphics/fontforge/fontforge_20141126.bb
+> new file mode 100644
+> index 0000000..72020db
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb
+> @@ -0,0 +1,41 @@
+> +SUMMARY =3D "A font editor"
+> +HOMEPAGE =3D "http://fontforge.github.io/en-US/"
+> +LICENSE =3D "GPLv3"
+> +LIC_FILES_CHKSUM =3D " \
+> +    file://COPYING.gplv3;md5=3Dd32239bcb673463ab874e80d47fae504 \
+> +    file://LICENSE;md5=3D71d636ba7678baa1573e1b531041386e \
+> +"
+> +
+> +inherit autotools pkgconfig pythonnative
+> +
+> +DEPENDS =3D "glib-2.0 pango giflib tiff libxml2 jpeg python libtool"
+> +DEPENDS_append_class-target =3D " libxi"
+> +
+> +SRC_URI =3D "https://github.com/${BPN}/${BPN}/archive/${PV}.tar.gz"
 
 Don't use github archives, they are regenerated from time to time with=20
 different checksums and they have stupid filenames (prone to collision=20
 with other recipes).
 
-> +SRC_URI[md5sum] =3D "b303caf8e907a2541e71aa492494b5e5"
-> +SRC_URI[sha256sum] =3D "8cbaf024fbbc73cdceab2eac0937035052da48295970fe9e=
-aa84b19d8e353e19"
-> +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
-> =20
->  inherit distutils
-> =20
+can you send follow-up patch?
+
+> +SRC_URI[md5sum] =3D "0d6f5112c4e5689087339a94aceadf77"
+> +SRC_URI[sha256sum] =3D "9c90c640023463c0b2b97b87575a014fcf44f688c3763f4c=
+d136d3c267092106"
+> +
+> +EXTRA_OECONF_append_class-native =3D " with_x=3Dno --disable-python-exte=
+nsion --disable-python-scripting"
+> +
+> +do_configure_prepend() {
+> +    currdir=3D`pwd`
+> +    cd ${S}
+> +    ./bootstrap --force
+> +    cd $currdir
+> +}
+> +
+> +EXTRA_OEMAKE =3D "CFLAGS=3D'${CFLAGS} -I${B}/uthash/src'"
+> +
+> +PACKAGES =3D+ "${PN}-python-dbg ${PN}-python"
+> +
+> +FILES_${PN} +=3D " \
+> +    ${datadir}/mime \
+> +    ${datadir}/icons \
+> +"
+> +
+> +FILES_${PN}-python =3D "${PYTHON_SITEPACKAGES_DIR} ${datadir}/${PN}/pyth=
+on"
+> +FILES_${PN}-python-dbg =3D "${PYTHON_SITEPACKAGES_DIR}/.debug"
+> +RDEPENDS_${PN}-python =3D "python"
+> +
+> +# for e.g kde's oxygen-fonts
+> +BBCLASSEXTEND =3D "native"
 > --=20
-> 2.1.0
+> 1.9.3
 >=20
 > --=20
 > _______________________________________________
@@ -132,16 +150,16 @@ aa84b19d8e353e19"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---zq44+AAfm4giZpo5
+--9iyR+p8Z2cn535Lj
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlXV7EoACgkQN1Ujt2V2gBzEZACfbvKYwh8+WQpLIsst1RJOfCJX
-+dcAn14m5sl8yqMnCZAMX6x/NSlwtwo1
-=xIha
+iEYEARECAAYFAlXV7G0ACgkQN1Ujt2V2gBzpOQCfTc65tWamM8pQEr+NdXKkBA0Z
+UPwAoKrIS4csECOltINJwaL7LEJ11JDG
+=5tbL
 -----END PGP SIGNATURE-----
 
---zq44+AAfm4giZpo5--
+--9iyR+p8Z2cn535Lj--
