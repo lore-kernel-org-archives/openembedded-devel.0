@@ -1,24 +1,26 @@
 Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1955665CBC
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 887C965CBC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 20:29:01 +0000 (UTC)
+	Thu, 20 Aug 2015 20:29:02 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7KKSxWg004844
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t7KKT07a007243
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 20 Aug 2015 13:28:59 -0700 (PDT)
+	Thu, 20 Aug 2015 13:29:00 -0700 (PDT)
 Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Thu, 20 Aug 2015 13:28:59 -0700
+	Thu, 20 Aug 2015 13:29:00 -0700
 From: Mark Asselstine <mark.asselstine@windriver.com>
 To: <akuster808@gmail.com>, <Martin.Jansa@gmail.com>,
 	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 20 Aug 2015 16:28:57 -0400
-Message-ID: <1440102538-1561-1-git-send-email-mark.asselstine@windriver.com>
+Date: Thu, 20 Aug 2015 16:28:58 -0400
+Message-ID: <1440102538-1561-2-git-send-email-mark.asselstine@windriver.com>
 X-Mailer: git-send-email 2.1.4
+In-Reply-To: <1440102538-1561-1-git-send-email-mark.asselstine@windriver.com>
+References: <1440102538-1561-1-git-send-email-mark.asselstine@windriver.com>
 MIME-Version: 1.0
-Subject: [[meta-ruby][PATCH 1/2] ruby.bbclass: handle new installation directories
+Subject: [[meta-ruby][PATCH 2/2] bundler: remove broad FILES definition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,53 +37,37 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Thu, 20 Aug 2015 20:29:02 -0000
 Content-Type: text/plain
 
-It appears that newer versions of ruby produce additional directories
-which were not previously handled by the ruby bbclass, specifically
-'build_info' and 'extensions'. This is currently resulting in QA
-errors/warnings such as:
+This effectively reverts commit
+4e8853ca05f797281469ae7c7ce0c0b3ccf0d7c1 [bundler: Fix QA new Error]
 
-ERROR: QA Issue: puppet: Files/directories were installed but not shipped in any package:
-  /usr/lib64/ruby/gems/2.2.0/build_info
-  /usr/lib64/ruby/gems/2.2.0/extensions
-Please set FILES such that these items are packaged. Alternatively if they are unneeded,
-avoid installing them or delete them within do_install. [installed-vs-shipped]
+The original QA error is now handled by changes to the ruby.bbclass to
+properly handle build_info and extensions directories that Ruby 2.0.0
+now creates while installing gems.
 
-Add these to our FILES in the bbclass such that they will packaged.
-
-NOTE: several files may exist in the extensions directory such as
-gem.build_complete and mkmf.log that we can most likely remove during
-do_install. Since ruby installs these by default they have been left
-in case their existence is used as some type of stampfile or similar.
+This revert isn't specifically required but by removing this broad
+definition of FILES the hope is that other ruby recipes won't copy
+this behavior which can actually lead to other QA errors/warnings,
+depending on what gets installed in the build_info and extensions
+directories.
 
 Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
 ---
- meta-ruby/classes/ruby.bbclass | 6 ++++++
- 1 file changed, 6 insertions(+)
+ meta-ruby/recipes-devtools/ruby/bundler_git.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-ruby/classes/ruby.bbclass b/meta-ruby/classes/ruby.bbclass
-index 9c4fcf9..ef844f2 100644
---- a/meta-ruby/classes/ruby.bbclass
-+++ b/meta-ruby/classes/ruby.bbclass
-@@ -111,6 +111,10 @@ FILES_${PN}-dbg += " \
-         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems/*/*/*/.debug \
-         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems/*/*/*/*/.debug \
-         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems/*/*/*/*/*/.debug \
-+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions/*/*/.debug \
-+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions/*/*/*/.debug \
-+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions/*/*/*/*/.debug \
-+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions/*/*/*/*/*/.debug \
-         "
+diff --git a/meta-ruby/recipes-devtools/ruby/bundler_git.bb b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+index 7d79544..31e72e5 100644
+--- a/meta-ruby/recipes-devtools/ruby/bundler_git.bb
++++ b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+@@ -26,8 +26,6 @@ SRC_URI = " \
  
- FILES_${PN} += " \
-@@ -118,6 +122,8 @@ FILES_${PN} += " \
-         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/cache \
-         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/bin \
-         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/specifications \
-+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/build_info \
-+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions \
-         "
+ inherit ruby
  
- FILES_${PN}-doc += " \
+-FILES_${PN} += "${libdir}/ruby/gems"
+-
+ RDEPENDS_${PN} = "git"
+ 
+ BBCLASSEXTEND = "native"
 -- 
 2.1.4
 
