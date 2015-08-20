@@ -1,29 +1,24 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id DFE7E73E11
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A25B665CBC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 08:26:03 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t7K8Q3Va025352
+	Thu, 20 Aug 2015 08:33:29 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7K8XTmB026426
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 01:26:03 -0700 (PDT)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Thu, 20 Aug 2015 01:26:02 -0700
+	Thu, 20 Aug 2015 01:33:30 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Thu, 20 Aug 2015 01:33:29 -0700
+From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1439345155-27884-1-git-send-email-kai.kang@windriver.com>
-	<20150819195731.GB5444@deserted.net>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <55D58F20.2060006@windriver.com>
-Date: Thu, 20 Aug 2015 16:26:08 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+Date: Thu, 20 Aug 2015 16:29:35 +0800
+Message-ID: <1440059375-24661-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <20150819195731.GB5444@deserted.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-networking][PATCH] inetutils: 1.9.2 -> 1.9.4
+Subject: [PATCH][meta-oe] php: create recipe for 5.6.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,168 +32,660 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2015 08:26:09 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 20 Aug 2015 08:33:31 -0000
+Content-Type: text/plain
 
-On 2015年08月20日 03:57, Joe MacDonald wrote:
-> [[oe] [meta-networking][PATCH] inetutils: 1.9.2 -> 1.9.4] On 15.08.12 (Wed 10:05) kai.kang@windriver.com wrote:
->
->> From: Kai Kang <kai.kang@windriver.com>
->>
->> Upgrade inetutils from 1.9.2 to 1.9.4.
-> You don't appear to be working against the meta-openembedded tree on
-> this, I got a merge conflict on:
->
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnetd-Fix-deadlock-on-cleanup.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/telnetd-Fix-deadlock-on-cleanup.patch
->> similarity index 100%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnetd-Fix-deadlock-on-cleanup.patch
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils/telnetd-Fix-deadlock-on-cleanup.patch
-> Which, after a bit of head-scratching, suggests your tree has this patch
-> merged:
->
-> http://patchwork.openembedded.org/patch/96727/
->
-> but, based on this discussion (also recorded in patchwork):
->
-> http://comments.gmane.org/gmane.comp.handhelds.openembedded/69654
->
-> we rejected it.
->
-> Anyway, I've resolved it and am merging the result.  Please try to
-> ensure you're working on the current up-stream tree, though.
+From: Roy Li <rongqing.li@windriver.com>
 
-I worked on branch master-next of meta-networking. It has commit which 
-adds telnetd-Fix-deadlock-on-cleanup.patch.
-So should I work based on branch master rather than master-next?
+The difference between 5.6.x and 5.5.x is in http://php.net/migration56
+Most improvements in PHP 5.6.x have no impact on existing code.
+There are a few incompatibilities and new features that should be
+considered, and code should be tested before switching PHP versions
+in production environments.
 
---Kai
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../change-AC_TRY_RUN-to-AC_TRY_LINK.patch         |  56 +++++
+ meta-oe/recipes-devtools/php/php.inc               | 271 ++++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_5.5.26.bb         | 273 +--------------------
+ meta-oe/recipes-devtools/php/php_5.6.12.bb         |   5 +
+ 4 files changed, 333 insertions(+), 272 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/php/php-5.6.12/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+ create mode 100644 meta-oe/recipes-devtools/php/php.inc
+ create mode 100644 meta-oe/recipes-devtools/php/php_5.6.12.bb
 
->
-> -J.
->
->> * add homepage
->> * update inetutils/version.patch
->>
->> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> ---
->>   .../inetutils/{inetutils-1.9.2 => inetutils}/fix-disable-ipv6.patch  | 0
->>   ...tils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch | 0
->>   .../{inetutils-1.9.2 => inetutils}/inetutils-1.8-0003-wchar.patch    | 0
->>   .../inetutils-1.9-PATH_PROCNET_DEV.patch                             | 0
->>   .../inetutils/{inetutils-1.9.2 => inetutils}/rexec.xinetd.inetutils  | 0
->>   .../inetutils/{inetutils-1.9.2 => inetutils}/rlogin.xinetd.inetutils | 0
->>   .../inetutils/{inetutils-1.9.2 => inetutils}/rsh.xinetd.inetutils    | 0
->>   .../inetutils/{inetutils-1.9.2 => inetutils}/telnet.xinetd.inetutils | 0
->>   .../telnetd-Fix-deadlock-on-cleanup.patch                            | 0
->>   .../inetutils/{inetutils-1.9.2 => inetutils}/tftpd.xinetd.inetutils  | 0
->>   .../inetutils/{inetutils-1.9.2 => inetutils}/version.patch           | 2 +-
->>   .../inetutils/{inetutils_1.9.2.bb => inetutils_1.9.4.bb}             | 5 +++--
->>   12 files changed, 4 insertions(+), 3 deletions(-)
->>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/fix-disable-ipv6.patch (100%)
->>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch (100%)
->>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/inetutils-1.8-0003-wchar.patch (100%)
->>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/inetutils-1.9-PATH_PROCNET_DEV.patch (100%)
->>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/rexec.xinetd.inetutils (100%)
->>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/rlogin.xinetd.inetutils (100%)
->>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/rsh.xinetd.inetutils (100%)
->>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/telnet.xinetd.inetutils (100%)
->>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/telnetd-Fix-deadlock-on-cleanup.patch (100%)
->>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/tftpd.xinetd.inetutils (100%)
->>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/version.patch (93%)
->>   rename meta-networking/recipes-connectivity/inetutils/{inetutils_1.9.2.bb => inetutils_1.9.4.bb} (97%)
->>
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/fix-disable-ipv6.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/fix-disable-ipv6.patch
->> similarity index 100%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/fix-disable-ipv6.patch
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils/fix-disable-ipv6.patch
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
->> similarity index 100%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0003-wchar.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-0003-wchar.patch
->> similarity index 100%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0003-wchar.patch
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-0003-wchar.patch
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.9-PATH_PROCNET_DEV.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.9-PATH_PROCNET_DEV.patch
->> similarity index 100%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.9-PATH_PROCNET_DEV.patch
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.9-PATH_PROCNET_DEV.patch
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/rexec.xinetd.inetutils
->> similarity index 100%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils/rexec.xinetd.inetutils
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/rlogin.xinetd.inetutils
->> similarity index 100%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils/rlogin.xinetd.inetutils
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/rsh.xinetd.inetutils
->> similarity index 100%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils/rsh.xinetd.inetutils
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnet.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/telnet.xinetd.inetutils
->> similarity index 100%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnet.xinetd.inetutils
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils/telnet.xinetd.inetutils
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnetd-Fix-deadlock-on-cleanup.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/telnetd-Fix-deadlock-on-cleanup.patch
->> similarity index 100%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnetd-Fix-deadlock-on-cleanup.patch
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils/telnetd-Fix-deadlock-on-cleanup.patch
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/tftpd.xinetd.inetutils
->> similarity index 100%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils/tftpd.xinetd.inetutils
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/version.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/version.patch
->> similarity index 93%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/version.patch
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils/version.patch
->> index 1caa2d3..532a0e5 100644
->> --- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/version.patch
->> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils/version.patch
->> @@ -11,7 +11,7 @@ Signed-off-by: Chunrong Guo <b40290@freescale.com>
->>    
->>   -AC_INIT([GNU inetutils],
->>   - m4_esyscmd([build-aux/git-version-gen .tarball-version 's/inetutils-/v/;s/_/./g']),
->> -+AC_INIT([GNU inetutils],[1.9.2],
->> ++AC_INIT([GNU inetutils],[1.9.4],
->>     [bug-inetutils@gnu.org])
->>    
->>    AC_CONFIG_SRCDIR([src/inetd.c])
->> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
->> similarity index 97%
->> rename from meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
->> rename to meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
->> index 6209272..cdcba83 100644
->> --- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
->> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
->> @@ -2,6 +2,7 @@ DESCRIPTION = "The GNU inetutils are a collection of common \
->>   networking utilities and servers including ftp, ftpd, rcp, \
->>   rexec, rlogin, rlogind, rsh, rshd, syslog, syslogd, talk, \
->>   talkd, telnet, telnetd, tftp, tftpd, and uucpd."
->> +HOMEPAGE = "http://www.gnu.org/software/inetutils"
->>   SECTION = "net"
->>   DEPENDS = "ncurses netbase readline"
->>   LICENSE = "GPLv3"
->> @@ -21,8 +22,8 @@ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
->>              file://telnetd-Fix-deadlock-on-cleanup.patch \
->>   "
->>   
->> -SRC_URI[md5sum] = "aa1a9a132259db83e66c1f3265065ba2"
->> -SRC_URI[sha256sum] = "0423ea40a160cd4630f817e247df5c08ecc625378d2bb56a0509117a36a89913"
->> +SRC_URI[md5sum] = "04852c26c47cc8c6b825f2b74f191f52"
->> +SRC_URI[sha256sum] = "be8f75eff936b8e41b112462db51adf689715658a1b09e0d6b05d11ec92cc616"
->>   
->>   inherit autotools gettext update-alternatives texinfo
->>   
->> -- 
->> 1.9.1
->>
->>
->>
-
-
+diff --git a/meta-oe/recipes-devtools/php/php-5.6.12/change-AC_TRY_RUN-to-AC_TRY_LINK.patch b/meta-oe/recipes-devtools/php/php-5.6.12/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+new file mode 100644
+index 0000000..39c334f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php-5.6.12/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+@@ -0,0 +1,56 @@
++[PATCH] config.m4: change AC_TRY_RUN to AC_TRY_LINK
++
++Upstream-Status: Pending
++
++AC_TRY_RUN is not suitable for cross-compile
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++---
++ ext/fileinfo/config.m4 | 31 ++++++-------------------------
++ 1 file changed, 6 insertions(+), 25 deletions(-)
++
++diff --git a/ext/fileinfo/config.m4 b/ext/fileinfo/config.m4
++index 7e98d62..8a8ea0e 100644
++--- a/ext/fileinfo/config.m4
+++++ b/ext/fileinfo/config.m4
++@@ -14,31 +14,12 @@ if test "$PHP_FILEINFO" != "no"; then
++     libmagic/readcdf.c libmagic/softmagic.c"
++ 
++   AC_MSG_CHECKING([for strcasestr])
++-  AC_TRY_RUN([
++-#include <string.h>
++-#include <strings.h>
++-#include <stdlib.h>
++-
++-int main(void)
++-{
++-        char *s0, *s1, *ret;
++-
++-        s0 = (char *) malloc(42);
++-        s1 = (char *) malloc(8);
++-
++-        memset(s0, 'X', 42);
++-        s0[24] = 'Y';
++-        s0[26] = 'Z';
++-        s0[41] = '\0';
++-        memset(s1, 'x', 8);
++-        s1[0] = 'y';
++-        s1[2] = 'Z';
++-        s1[7] = '\0';
++-
++-        ret = strcasestr(s0, s1);
++-
++-        return !(NULL != ret);
++-}
+++  AC_TRY_COMPILE([
+++     #include <string.h>
+++     #include <strings.h>
+++     #include <stdlib.h>
+++  ],[
+++     strcasestr(NULL, NULL);
++   ],[
++     dnl using the platform implementation
++     AC_MSG_RESULT(yes)
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+new file mode 100644
+index 0000000..67d2362
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -0,0 +1,271 @@
++SUMMARY = "A server-side, HTML-embedded scripting language"
++HOMEPAGE = "http://www.php.net"
++SECTION = "console/network"
++
++LICENSE = "PHP-3.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
++
++BBCLASSEXTEND = "native"
++DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native \
++           openssl libmcrypt"
++DEPENDS_class-native = "zlib-native libxml2-native"
++
++SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
++           file://acinclude-xml2-config.patch \
++           file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
++           file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
++          "
++
++SRC_URI_append_class-target += " \
++            file://iconv.patch \
++            file://imap-fix-autofoo.patch \
++            file://pear-makefile.patch \
++            file://phar-makefile.patch \
++            file://php_exec_native.patch \
++            file://php-fpm.conf \
++            file://php-fpm-apache.conf \
++            file://configure.patch \
++            file://pthread-check-threads-m4.patch \
++            file://70_mod_php5.conf \
++            file://php-fpm.service \
++          "
++S = "${WORKDIR}/php-${PV}"
++
++inherit autotools pkgconfig pythonnative gettext
++
++# phpize is not scanned for absolute paths by default (but php-config is).
++#
++SSTATE_SCAN_FILES += "phpize"
++SSTATE_SCAN_FILES += "build-defs.h"
++
++PHP_LIBDIR = "${libdir}/php5"
++
++# Common EXTRA_OECONF
++COMMON_EXTRA_OECONF = "--enable-sockets \
++                       --enable-pcntl \
++                       --enable-shared \
++                       --disable-opcache \
++                       --disable-rpath \
++                       --with-pic \
++                       --libdir=${PHP_LIBDIR} \
++"
++EXTRA_OECONF = "--enable-mbstring \
++                --enable-wddx \
++                --enable-fpm \
++                --enable-zip \
++                --with-libdir=${baselib} \
++                --with-gettext=${STAGING_LIBDIR}/.. \
++                --with-zlib=${STAGING_LIBDIR}/.. \
++                --with-iconv=${STAGING_LIBDIR}/.. \
++                --with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
++                --with-bz2=${STAGING_DIR_TARGET}${exec_prefix} \
++                --with-config-file-path=${sysconfdir}/php/apache2-php5 \
++                ${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'ac_cv_c_bigendian_php=no', 'ac_cv_c_bigendian_php=yes', d)} \
++                ${@bb.utils.contains('PACKAGECONFIG', 'pam', '', 'ac_cv_lib_pam_pam_start=no', d)} \
++                ${COMMON_EXTRA_OECONF} \
++"
++EXTRA_OECONF_class-native = " \
++                --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
++                --without-iconv \
++                ${COMMON_EXTRA_OECONF} \
++"
++
++PACKAGECONFIG ??= "mysql sqlite3 imap \
++                   ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
++PACKAGECONFIG_class-native = ""
++
++PACKAGECONFIG[mysql] = "--with-mysql=${STAGING_DIR_TARGET}${prefix} \
++                        --with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
++                        --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
++                        ,--without-mysql --without-mysqli --without-pdo-mysql \
++                        ,mysql5"
++
++PACKAGECONFIG[sqlite3] = "--with-sqlite3=${STAGING_LIBDIR}/.. \
++                          --with-pdo-sqlite=${STAGING_LIBDIR}/.. \
++                          , \
++                          ,sqlite3"
++PACKAGECONFIG[pgsql] = "--with-pgsql=${STAGING_DIR_TARGET}${exec_prefix},--without-pgsql,postgresql"
++PACKAGECONFIG[soap] = "--enable-libxml --enable-soap, --disable-soap, libxml2"
++PACKAGECONFIG[apache2] = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs,,apache2-native apache2"
++PACKAGECONFIG[pam] = ",,libpam"
++PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
++                       --with-imap-ssl=${STAGING_DIR_HOST} \
++                       ,--without-imap --without-imap-ssl \
++                       ,uw-imap"
++
++
++export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
++export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
++CFLAGS += " -D_GNU_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
++CFLAGS_append_aarch64 = " -O2"
++
++EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
++
++acpaths = ""
++
++do_configure_prepend () {
++    rm -f ${S}/build/libtool.m4 ${S}/ltmain.sh ${S}/aclocal.m4
++    find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
++}
++
++do_configure_append() {
++    # No, libtool, we really don't want rpath set...
++    sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' ${HOST_SYS}-libtool
++    sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${HOST_SYS}-libtool
++}
++
++do_install_append_class-native() {
++    rm -rf ${D}/${PHP_LIBDIR}/php/.registry
++    rm -rf ${D}/${PHP_LIBDIR}/php/.channels
++    rm -rf ${D}/${PHP_LIBDIR}/php/.[a-z]*
++}
++
++do_install_prepend() {
++    cat aclocal-copy/libtool.m4 aclocal-copy/lt~obsolete.m4 aclocal-copy/ltoptions.m4 \
++        aclocal-copy/ltsugar.m4 aclocal-copy/ltversion.m4 > ${S}/build/libtool.m4
++}
++
++do_install_prepend_class-target() {
++    if ${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'true', 'false', d)}; then
++        # Install dummy config file so apxs doesn't fail
++        install -d ${D}${sysconfdir}/apache2
++        printf "\nLoadModule dummy_module modules/mod_dummy.so\n" > ${D}${sysconfdir}/apache2/httpd.conf
++    fi
++}
++
++# fixme
++do_install_append_class-target() {
++    install -d ${D}/${sysconfdir}/
++    if [ -d ${D}/${STAGING_DIR_NATIVE}/${sysconfdir} ];then
++         mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
++    fi
++    rm -rf ${D}/${TMPDIR}
++    rm -rf ${D}/.registry
++    rm -rf ${D}/.channels
++    rm -rf ${D}/.[a-z]*
++    rm -rf ${D}/var
++    rm -f  ${D}/${sysconfdir}/php-fpm.conf.default
++    sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}/${sysconfdir}/pear.conf
++    install -m 0644 ${WORKDIR}/php-fpm.conf ${D}/${sysconfdir}/php-fpm.conf
++    install -d ${D}/${sysconfdir}/apache2/conf.d
++    install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
++    install -d ${D}${sysconfdir}/init.d
++    sed -i 's:=/usr/sbin:=${sbindir}:g' ${B}/sapi/fpm/init.d.php-fpm
++    sed -i 's:=/etc:=${sysconfdir}:g' ${B}/sapi/fpm/init.d.php-fpm
++    sed -i 's:=/var:=${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
++    install -m 0755 ${B}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
++    install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
++
++    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};then
++        install -d ${D}${systemd_unitdir}/system
++        install -m 0644 ${WORKDIR}/php-fpm.service ${D}${systemd_unitdir}/system/
++        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
++            -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
++            ${D}${systemd_unitdir}/system/php-fpm.service
++    fi
++
++    TMP=`dirname ${D}/${TMPDIR}`
++    while test ${TMP} != ${D}; do
++        rmdir ${TMP}
++        TMP=`dirname ${TMP}`;
++    done
++
++    if ${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'true', 'false', d)}; then
++        install -d ${D}${libdir}/apache2/modules
++        install -d ${D}${sysconfdir}/apache2/modules.d
++        install -d ${D}${sysconfdir}/php/apache2-php5
++        install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
++        install -m 644  ${WORKDIR}/70_mod_php5.conf ${D}${sysconfdir}/apache2/modules.d
++        sed -i s,lib/,${libdir}/, ${D}${sysconfdir}/apache2/modules.d/70_mod_php5.conf
++        cat ${S}/php.ini-production | \
++            sed -e 's,extension_dir = \"\./\",extension_dir = \"/usr/lib/extensions\",' \
++            > ${D}${sysconfdir}/php/apache2-php5/php.ini
++        rm -f ${D}${sysconfdir}/apache2/httpd.conf*
++    fi
++}
++
++SYSROOT_PREPROCESS_FUNCS += "php_sysroot_preprocess"
++
++php_sysroot_preprocess () {
++    install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
++    install -m 755 ${D}${bindir}/phpize ${SYSROOT_DESTDIR}${bindir_crossscripts}/
++    install -m 755 ${D}${bindir}/php-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
++
++    sed -i 's!eval echo /!eval echo ${STAGING_DIR_HOST}/!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/phpize
++    sed -i 's!^include_dir=.*!include_dir=${STAGING_INCDIR}/php!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/php-config
++}
++
++MODPHP_PACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', '${PN}-modphp', '', d)}"
++
++PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-phar ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
++
++RDEPENDS_${PN}-pear = "${PN}"
++RDEPENDS_${PN}-phar = "${PN}-cli"
++RDEPENDS_${PN}-cli = "${PN}"
++RDEPENDS_${PN}-modphp = "${PN} apache2"
++RDEPENDS_${PN}-dev = "${PN}"
++
++INITSCRIPT_PACKAGES = "${PN}-fpm"
++inherit update-rc.d
++
++FILES_${PN}-dbg =+ "${bindir}/.debug \
++                    ${libdir}/apache2/modules/.debug"
++FILES_${PN}-doc += "${PHP_LIBDIR}/php/doc"
++FILES_${PN}-cli = "${bindir}/php"
++FILES_${PN}-phar = "${bindir}/phar*"
++FILES_${PN}-cgi = "${bindir}/php-cgi"
++FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service"
++FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
++CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
++CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
++INITSCRIPT_NAME_${PN}-fpm = "php-fpm"
++INITSCRIPT_PARAMS_${PN}-fpm = "defaults 60"
++FILES_${PN}-pear = "${bindir}/pear* ${bindir}/pecl ${PHP_LIBDIR}/php/PEAR \
++                ${PHP_LIBDIR}/php/PEAR*.php ${PHP_LIBDIR}/php/System.php \
++                ${PHP_LIBDIR}/php/peclcmd.php ${PHP_LIBDIR}/php/pearcmd.php \
++                ${PHP_LIBDIR}/php/.channels ${PHP_LIBDIR}/php/.channels/.alias \
++                ${PHP_LIBDIR}/php/.registry ${PHP_LIBDIR}/php/Archive/Tar.php \
++                ${PHP_LIBDIR}/php/Console/Getopt.php ${PHP_LIBDIR}/php/OS/Guess.php \
++                ${PHP_LIBDIR}/php/data/PEAR \
++                ${sysconfdir}/pear.conf"
++FILES_${PN}-dev = "${includedir}/php ${PHP_LIBDIR}/build ${bindir}/phpize \
++                ${bindir}/php-config ${PHP_LIBDIR}/php/.depdb \
++                ${PHP_LIBDIR}/php/.depdblock ${PHP_LIBDIR}/php/.filemap \
++                ${PHP_LIBDIR}/php/.lock ${PHP_LIBDIR}/php/test"
++FILES_${PN} = "${PHP_LIBDIR}/php"
++FILES_${PN} += "${bindir}"
++
++SUMMARY_${PN}-modphp = "PHP module for the Apache HTTP server"
++FILES_${PN}-modphp = "${libdir}/apache2 ${sysconfdir}"
++
++MODPHP_OLDPACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'modphp', '', d)}"
++RPROVIDES_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
++RREPLACES_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
++RCONFLICTS_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
++
++do_install_append_class-native() {
++    create_wrapper ${D}${bindir}/php \
++        PHP_PEAR_SYSCONF_DIR=${sysconfdir}/
++}
++
++SSTATEPOSTINSTFUNCS_append_class-native = " php_sstate_postinst "
++
++php_sstate_postinst() {
++    if [ "${BB_CURRENTTASK}" = "populate_sysroot_setscene" ]
++    then
++        head -n1 ${sysconfdir}/pear.conf > ${sysconfdir}/pear.tmp.conf
++        for p in `tail -n1  ${sysconfdir}/pear.conf | sed -s 's/;/ /g'`; do
++            echo $p | awk -F: 'BEGIN {OFS = ":"; ORS = ";"}{if(NF==3){print $1, length($3)-2*match($3, /^"/), $3} else {print $0}}';
++        done >> ${sysconfdir}/pear.tmp.conf
++        mv -f ${sysconfdir}/pear.tmp.conf ${sysconfdir}/pear.conf
++    fi
++}
++
++# Fails to build with thumb-1 (qemuarm)
++# | {standard input}: Assembler messages:
++# | {standard input}:3719: Error: selected processor does not support Thumb mode `smull r0,r2,r9,r3'
++# | {standard input}:3720: Error: unshifted register required -- `sub r2,r2,r0,asr#31'
++# | {standard input}:3796: Error: selected processor does not support Thumb mode `smull r0,r2,r3,r3'
++# | {standard input}:3797: Error: unshifted register required -- `sub r2,r2,r0,asr#31'
++# | make: *** [ext/standard/math.lo] Error 1
++ARM_INSTRUCTION_SET = "arm"
+diff --git a/meta-oe/recipes-devtools/php/php_5.5.26.bb b/meta-oe/recipes-devtools/php/php_5.5.26.bb
+index 85fdccb..deaf145 100644
+--- a/meta-oe/recipes-devtools/php/php_5.5.26.bb
++++ b/meta-oe/recipes-devtools/php/php_5.5.26.bb
+@@ -1,275 +1,4 @@
+-SUMMARY = "A server-side, HTML-embedded scripting language"
+-HOMEPAGE = "http://www.php.net"
+-SECTION = "console/network"
+-
+-LICENSE = "PHP-3.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
+-
+-BBCLASSEXTEND = "native"
+-DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native \
+-           openssl libmcrypt"
+-DEPENDS_class-native = "zlib-native libxml2-native"
+-
+-SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
+-           file://acinclude-xml2-config.patch \
+-           file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
+-           file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
+-          "
+-
+-SRC_URI_append_class-target += " \
+-            file://iconv.patch \
+-            file://imap-fix-autofoo.patch \
+-            file://pear-makefile.patch \
+-            file://phar-makefile.patch \
+-            file://php_exec_native.patch \
+-            file://php-fpm.conf \
+-            file://php-fpm-apache.conf \
+-            file://configure.patch \
+-            file://pthread-check-threads-m4.patch \
+-            file://70_mod_php5.conf \
+-            file://php-fpm.service \
+-          "
++require php.inc
+ 
+ SRC_URI[md5sum] = "383a4b35327809afd2822e1e5efc8ee1"
+ SRC_URI[sha256sum] = "816afffdb03ff4c542bc172a2f77f9c69b817df82d60cce05c1b4f578c2c926e"
+-
+-S = "${WORKDIR}/php-${PV}"
+-
+-inherit autotools pkgconfig pythonnative gettext
+-
+-# phpize is not scanned for absolute paths by default (but php-config is).
+-#
+-SSTATE_SCAN_FILES += "phpize"
+-SSTATE_SCAN_FILES += "build-defs.h"
+-
+-PHP_LIBDIR = "${libdir}/php5"
+-
+-# Common EXTRA_OECONF
+-COMMON_EXTRA_OECONF = "--enable-sockets \
+-                       --enable-pcntl \
+-                       --enable-shared \
+-                       --disable-opcache \
+-                       --disable-rpath \
+-                       --with-pic \
+-                       --libdir=${PHP_LIBDIR} \
+-"
+-EXTRA_OECONF = "--enable-mbstring \
+-                --enable-wddx \
+-                --enable-fpm \
+-                --enable-zip \
+-                --with-libdir=${baselib} \
+-                --with-gettext=${STAGING_LIBDIR}/.. \
+-                --with-zlib=${STAGING_LIBDIR}/.. \
+-                --with-iconv=${STAGING_LIBDIR}/.. \
+-                --with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
+-                --with-bz2=${STAGING_DIR_TARGET}${exec_prefix} \
+-                --with-config-file-path=${sysconfdir}/php/apache2-php5 \
+-                ${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'ac_cv_c_bigendian_php=no', 'ac_cv_c_bigendian_php=yes', d)} \
+-                ${@bb.utils.contains('PACKAGECONFIG', 'pam', '', 'ac_cv_lib_pam_pam_start=no', d)} \
+-                ${COMMON_EXTRA_OECONF} \
+-"
+-EXTRA_OECONF_class-native = " \
+-                --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
+-                --without-iconv \
+-                ${COMMON_EXTRA_OECONF} \
+-"
+-
+-PACKAGECONFIG ??= "mysql sqlite3 imap \
+-                   ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+-PACKAGECONFIG_class-native = ""
+-
+-PACKAGECONFIG[mysql] = "--with-mysql=${STAGING_DIR_TARGET}${prefix} \
+-                        --with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
+-                        --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
+-                        ,--without-mysql --without-mysqli --without-pdo-mysql \
+-                        ,mysql5"
+-
+-PACKAGECONFIG[sqlite3] = "--with-sqlite3=${STAGING_LIBDIR}/.. \
+-                          --with-pdo-sqlite=${STAGING_LIBDIR}/.. \
+-                          , \
+-                          ,sqlite3"
+-PACKAGECONFIG[pgsql] = "--with-pgsql=${STAGING_DIR_TARGET}${exec_prefix},--without-pgsql,postgresql"
+-PACKAGECONFIG[soap] = "--enable-libxml --enable-soap, --disable-soap, libxml2"
+-PACKAGECONFIG[apache2] = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs,,apache2-native apache2"
+-PACKAGECONFIG[pam] = ",,libpam"
+-PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
+-                       --with-imap-ssl=${STAGING_DIR_HOST} \
+-                       ,--without-imap --without-imap-ssl \
+-                       ,uw-imap"
+-
+-
+-export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
+-export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
+-CFLAGS += " -D_GNU_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
+-CFLAGS_append_aarch64 = " -O2"
+-
+-EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
+-
+-acpaths = ""
+-
+-do_configure_prepend () {
+-    rm -f ${S}/build/libtool.m4 ${S}/ltmain.sh ${S}/aclocal.m4
+-    find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
+-}
+-
+-do_configure_append() {
+-    # No, libtool, we really don't want rpath set...
+-    sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' ${HOST_SYS}-libtool
+-    sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${HOST_SYS}-libtool
+-}
+-
+-do_install_append_class-native() {
+-    rm -rf ${D}/${PHP_LIBDIR}/php/.registry
+-    rm -rf ${D}/${PHP_LIBDIR}/php/.channels
+-    rm -rf ${D}/${PHP_LIBDIR}/php/.[a-z]*
+-}
+-
+-do_install_prepend() {
+-    cat aclocal-copy/libtool.m4 aclocal-copy/lt~obsolete.m4 aclocal-copy/ltoptions.m4 \
+-        aclocal-copy/ltsugar.m4 aclocal-copy/ltversion.m4 > ${S}/build/libtool.m4
+-}
+-
+-do_install_prepend_class-target() {
+-    if ${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'true', 'false', d)}; then
+-        # Install dummy config file so apxs doesn't fail
+-        install -d ${D}${sysconfdir}/apache2
+-        printf "\nLoadModule dummy_module modules/mod_dummy.so\n" > ${D}${sysconfdir}/apache2/httpd.conf
+-    fi
+-}
+-
+-# fixme
+-do_install_append_class-target() {
+-    install -d ${D}/${sysconfdir}/
+-    if [ -d ${D}/${STAGING_DIR_NATIVE}/${sysconfdir} ];then
+-         mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
+-    fi
+-    rm -rf ${D}/${TMPDIR}
+-    rm -rf ${D}/.registry
+-    rm -rf ${D}/.channels
+-    rm -rf ${D}/.[a-z]*
+-    rm -rf ${D}/var
+-    rm -f  ${D}/${sysconfdir}/php-fpm.conf.default
+-    sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}/${sysconfdir}/pear.conf
+-    install -m 0644 ${WORKDIR}/php-fpm.conf ${D}/${sysconfdir}/php-fpm.conf
+-    install -d ${D}/${sysconfdir}/apache2/conf.d
+-    install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
+-    install -d ${D}${sysconfdir}/init.d
+-    sed -i 's:=/usr/sbin:=${sbindir}:g' ${B}/sapi/fpm/init.d.php-fpm
+-    sed -i 's:=/etc:=${sysconfdir}:g' ${B}/sapi/fpm/init.d.php-fpm
+-    sed -i 's:=/var:=${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
+-    install -m 0755 ${B}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
+-    install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
+-
+-    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};then
+-        install -d ${D}${systemd_unitdir}/system
+-        install -m 0644 ${WORKDIR}/php-fpm.service ${D}${systemd_unitdir}/system/
+-        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+-            -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
+-            ${D}${systemd_unitdir}/system/php-fpm.service
+-    fi
+-
+-    TMP=`dirname ${D}/${TMPDIR}`
+-    while test ${TMP} != ${D}; do
+-        rmdir ${TMP}
+-        TMP=`dirname ${TMP}`;
+-    done
+-
+-    if ${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'true', 'false', d)}; then
+-        install -d ${D}${libdir}/apache2/modules
+-        install -d ${D}${sysconfdir}/apache2/modules.d
+-        install -d ${D}${sysconfdir}/php/apache2-php5
+-        install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
+-        install -m 644  ${WORKDIR}/70_mod_php5.conf ${D}${sysconfdir}/apache2/modules.d
+-        sed -i s,lib/,${libdir}/, ${D}${sysconfdir}/apache2/modules.d/70_mod_php5.conf
+-        cat ${S}/php.ini-production | \
+-            sed -e 's,extension_dir = \"\./\",extension_dir = \"/usr/lib/extensions\",' \
+-            > ${D}${sysconfdir}/php/apache2-php5/php.ini
+-        rm -f ${D}${sysconfdir}/apache2/httpd.conf*
+-    fi
+-}
+-
+-SYSROOT_PREPROCESS_FUNCS += "php_sysroot_preprocess"
+-
+-php_sysroot_preprocess () {
+-    install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+-    install -m 755 ${D}${bindir}/phpize ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+-    install -m 755 ${D}${bindir}/php-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+-
+-    sed -i 's!eval echo /!eval echo ${STAGING_DIR_HOST}/!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/phpize
+-    sed -i 's!^include_dir=.*!include_dir=${STAGING_INCDIR}/php!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/php-config
+-}
+-
+-MODPHP_PACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', '${PN}-modphp', '', d)}"
+-
+-PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-phar ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
+-
+-RDEPENDS_${PN}-pear = "${PN}"
+-RDEPENDS_${PN}-phar = "${PN}-cli"
+-RDEPENDS_${PN}-cli = "${PN}"
+-RDEPENDS_${PN}-modphp = "${PN} apache2"
+-RDEPENDS_${PN}-dev = "${PN}"
+-
+-INITSCRIPT_PACKAGES = "${PN}-fpm"
+-inherit update-rc.d
+-
+-FILES_${PN}-dbg =+ "${bindir}/.debug \
+-                    ${libdir}/apache2/modules/.debug"
+-FILES_${PN}-doc += "${PHP_LIBDIR}/php/doc"
+-FILES_${PN}-cli = "${bindir}/php"
+-FILES_${PN}-phar = "${bindir}/phar*"
+-FILES_${PN}-cgi = "${bindir}/php-cgi"
+-FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service"
+-FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+-CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
+-CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+-INITSCRIPT_NAME_${PN}-fpm = "php-fpm"
+-INITSCRIPT_PARAMS_${PN}-fpm = "defaults 60"
+-FILES_${PN}-pear = "${bindir}/pear* ${bindir}/pecl ${PHP_LIBDIR}/php/PEAR \
+-                ${PHP_LIBDIR}/php/PEAR*.php ${PHP_LIBDIR}/php/System.php \
+-                ${PHP_LIBDIR}/php/peclcmd.php ${PHP_LIBDIR}/php/pearcmd.php \
+-                ${PHP_LIBDIR}/php/.channels ${PHP_LIBDIR}/php/.channels/.alias \
+-                ${PHP_LIBDIR}/php/.registry ${PHP_LIBDIR}/php/Archive/Tar.php \
+-                ${PHP_LIBDIR}/php/Console/Getopt.php ${PHP_LIBDIR}/php/OS/Guess.php \
+-                ${PHP_LIBDIR}/php/data/PEAR \
+-                ${sysconfdir}/pear.conf"
+-FILES_${PN}-dev = "${includedir}/php ${PHP_LIBDIR}/build ${bindir}/phpize \
+-                ${bindir}/php-config ${PHP_LIBDIR}/php/.depdb \
+-                ${PHP_LIBDIR}/php/.depdblock ${PHP_LIBDIR}/php/.filemap \
+-                ${PHP_LIBDIR}/php/.lock ${PHP_LIBDIR}/php/test"
+-FILES_${PN} = "${PHP_LIBDIR}/php"
+-FILES_${PN} += "${bindir}"
+-
+-SUMMARY_${PN}-modphp = "PHP module for the Apache HTTP server"
+-FILES_${PN}-modphp = "${libdir}/apache2 ${sysconfdir}"
+-
+-MODPHP_OLDPACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'modphp', '', d)}"
+-RPROVIDES_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
+-RREPLACES_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
+-RCONFLICTS_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
+-
+-do_install_append_class-native() {
+-    create_wrapper ${D}${bindir}/php \
+-        PHP_PEAR_SYSCONF_DIR=${sysconfdir}/
+-}
+-
+-SSTATEPOSTINSTFUNCS_append_class-native = " php_sstate_postinst "
+-
+-php_sstate_postinst() {
+-    if [ "${BB_CURRENTTASK}" = "populate_sysroot_setscene" ]
+-    then
+-        head -n1 ${sysconfdir}/pear.conf > ${sysconfdir}/pear.tmp.conf
+-        for p in `tail -n1  ${sysconfdir}/pear.conf | sed -s 's/;/ /g'`; do
+-            echo $p | awk -F: 'BEGIN {OFS = ":"; ORS = ";"}{if(NF==3){print $1, length($3)-2*match($3, /^"/), $3} else {print $0}}';
+-        done >> ${sysconfdir}/pear.tmp.conf
+-        mv -f ${sysconfdir}/pear.tmp.conf ${sysconfdir}/pear.conf
+-    fi
+-}
+-
+-# Fails to build with thumb-1 (qemuarm)
+-# | {standard input}: Assembler messages:
+-# | {standard input}:3719: Error: selected processor does not support Thumb mode `smull r0,r2,r9,r3'
+-# | {standard input}:3720: Error: unshifted register required -- `sub r2,r2,r0,asr#31'
+-# | {standard input}:3796: Error: selected processor does not support Thumb mode `smull r0,r2,r3,r3'
+-# | {standard input}:3797: Error: unshifted register required -- `sub r2,r2,r0,asr#31'
+-# | make: *** [ext/standard/math.lo] Error 1
+-ARM_INSTRUCTION_SET = "arm"
+diff --git a/meta-oe/recipes-devtools/php/php_5.6.12.bb b/meta-oe/recipes-devtools/php/php_5.6.12.bb
+new file mode 100644
+index 0000000..ba78c32
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php_5.6.12.bb
+@@ -0,0 +1,5 @@
++require php.inc
++
++SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch"
++SRC_URI[md5sum] = "4578dee9d979114610a444bee263ed9b"
++SRC_URI[sha256sum] = "6f27104272af7b2a996f85e4100fac627630fbdaf39d7bd263f16cf529c8853a"
 -- 
-Regards,
-Neil | Kai Kang
+1.9.1
 
 
