@@ -1,41 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 490F365CCD
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 56ABB65CCD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 15:03:46 +0000 (UTC)
-Received: by wicja10 with SMTP id ja10so38732265wic.1
+	Thu, 20 Aug 2015 15:04:04 +0000 (UTC)
+Received: by wijp15 with SMTP id p15so18736665wij.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 08:03:46 -0700 (PDT)
+	Thu, 20 Aug 2015 08:04:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=0ZcvGWEqlPsth4C2CJhZ7WOMuACmXZX8fNrxHVoIceI=;
-	b=eE/NIIK6lAn704na9Y5bqxmFqQPp9h4v5y9AQt8yLp7vaokIQeNlajn7bR0yHaBw6d
-	1Kl+R8L9xLY3djh/GREsIis8Vx7p++mtj4k8itJ7hnEFAqE0GcEuLMw722y4R40hi2pB
-	1cLoYlVQjSC3lk8sLQ4Fh6rLIzMUvph2NfxYWB/qykmuChclI3Mnu2oEGQBVX2V1v/3I
-	Xt2GcuWqPbBX9wnAcQ2JHiDIEV2kPfX4Q8zXOWfMojyso2Ak34Gv8S3KlgtCyFEWPRTN
-	SI6xLgRzgmvjKqRaPvkVhCd5q8Ex2w5DYeRkWDXBj7D4201u00uKC56Y3iQIh9aiWAEj
-	NAwQ==
-X-Received: by 10.180.87.230 with SMTP id bb6mr13701998wib.36.1440083026722;
-	Thu, 20 Aug 2015 08:03:46 -0700 (PDT)
+	bh=+Y01+wF2lt8qOA586jFbX112Cxqmoh4xBhTTZHpYfZw=;
+	b=jsTedznW3lyG4TGyEQXzf8bWJyAq9nr0+RRmVdBTbsXPglwgL+c0QUFVlYFZCGV9dU
+	B7yzZ9KvKUUbc4vW0SKe53qBNq5d69CW3E31m3bci6wCTO/OaWG2/preIb28S0O8amnj
+	KYE+86qNTGSNZhd8toIX5Ms7wRIN/5vfvBKRF7oK6VjEhH87QwcBGitUQA8ZNw4G1ek6
+	hC/ghKQtyPlwR/34JIF2EvXERMZPPUeixX87xeONW0EBhzMRFkxDbbUzk07jilnb48lv
+	oQOC/mSFzhkZSizUFsRtCsw9qEeOuqs2MVlWqJuaMhNPQqiSNp/s5tssTV0/W6Yoek8d
+	o36Q==
+X-Received: by 10.194.122.132 with SMTP id ls4mr6523475wjb.130.1440083044467; 
+	Thu, 20 Aug 2015 08:04:04 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	gw7sm30960994wib.15.2015.08.20.08.03.45
+	ej5sm5945403wjd.22.2015.08.20.08.04.03
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 20 Aug 2015 08:03:45 -0700 (PDT)
+	Thu, 20 Aug 2015 08:04:03 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 20 Aug 2015 17:04:13 +0200
+Date: Thu, 20 Aug 2015 17:04:31 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150820150413.GI2446@jama>
-References: <1432588449-31413-1-git-send-email-schnitzeltony@googlemail.com>
-	<1432588449-31413-2-git-send-email-schnitzeltony@googlemail.com>
+Message-ID: <20150820150431.GJ2446@jama>
+References: <1435559647-37696-1-git-send-email-biannm@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <1432588449-31413-2-git-send-email-schnitzeltony@googlemail.com>
+In-Reply-To: <1435559647-37696-1-git-send-email-biannm@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH 01/12] fontforge: add 20141126
+Subject: Re: [meta-oe][PATCH] sysdig: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,97 +48,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2015 15:03:47 -0000
-X-Groupsio-MsgNum: 56837
+X-List-Received-Date: Thu, 20 Aug 2015 15:04:04 -0000
+X-Groupsio-MsgNum: 56838
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="9iyR+p8Z2cn535Lj"
+	protocol="application/pgp-signature"; boundary="451BZW+OUuJBCAYj"
 Content-Disposition: inline
 
---9iyR+p8Z2cn535Lj
-Content-Type: text/plain; charset=iso-8859-1
+--451BZW+OUuJBCAYj
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 25, 2015 at 11:13:58PM +0200, Andreas M=FCller wrote:
-> Have this recipe in my meta-qt5-extra but would be happy to get it under =
-the
-> hood of Martin's world.
+On Mon, Jun 29, 2015 at 02:34:07PM +0800, Bian Naimeng wrote:
+> sysdig is a tool for system-level exploration and troubleshooting
 >=20
-> It started with the native part to build kde's oxygen-fonts but maybe som=
-ebody
-> likes to have it on target.
->=20
-> Tested native part by gazillions of builds / target part in xfce environm=
-ent.
->=20
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 > ---
->  .../fontforge/fontforge_20141126.bb                | 41 ++++++++++++++++=
+>  meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb | 32 +++++++++++++++++=
 ++++++
->  1 file changed, 41 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge_20141126=
-=2Ebb
+>  1 file changed, 32 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
 >=20
-> diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb b/m=
-eta-oe/recipes-graphics/fontforge/fontforge_20141126.bb
+> diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb b/meta-oe/=
+recipes-extended/sysdig/sysdig_0.1.101.bb
 > new file mode 100644
-> index 0000000..72020db
+> index 0000000..72a0386
 > --- /dev/null
-> +++ b/meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb
-> @@ -0,0 +1,41 @@
-> +SUMMARY =3D "A font editor"
-> +HOMEPAGE =3D "http://fontforge.github.io/en-US/"
-> +LICENSE =3D "GPLv3"
-> +LIC_FILES_CHKSUM =3D " \
-> +    file://COPYING.gplv3;md5=3Dd32239bcb673463ab874e80d47fae504 \
-> +    file://LICENSE;md5=3D71d636ba7678baa1573e1b531041386e \
-> +"
+> +++ b/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
+> @@ -0,0 +1,32 @@
+> +SUMMARY =3D "A New System Troubleshooting Tool Built for the Way You Wor=
+k"
+> +DESCRIPTION =3D "Sysdig is open source, system-level exploration: captur=
+e \
+> +system state and activity from a running Linux instance, then save, \
+> +filter and analyze."
+> +HOMEPAGE =3D "http://www.sysdig.org/"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
+263"
 > +
-> +inherit autotools pkgconfig pythonnative
+> +inherit cmake pkgconfig
 > +
-> +DEPENDS =3D "glib-2.0 pango giflib tiff libxml2 jpeg python libtool"
-> +DEPENDS_append_class-target =3D " libxi"
+> +DEPENDS =3D "luajit zlib ncurses"
+> +RDEPENDS_${PN} =3D "bash"
 > +
-> +SRC_URI =3D "https://github.com/${BPN}/${BPN}/archive/${PV}.tar.gz"
+> +
+> +SRC_URI =3D "https://github.com/draios/sysdig/archive/${PV}.tar.gz"
 
 Don't use github archives, they are regenerated from time to time with=20
 different checksums and they have stupid filenames (prone to collision=20
 with other recipes).
 
-can you send follow-up patch?
-
-> +SRC_URI[md5sum] =3D "0d6f5112c4e5689087339a94aceadf77"
-> +SRC_URI[sha256sum] =3D "9c90c640023463c0b2b97b87575a014fcf44f688c3763f4c=
-d136d3c267092106"
 > +
-> +EXTRA_OECONF_append_class-native =3D " with_x=3Dno --disable-python-exte=
-nsion --disable-python-scripting"
+> +SRC_URI[md5sum] =3D "5fe96a3a0fd98b2157a40cb29af41afc"
+> +SRC_URI[sha256sum] =3D "6995e39be565514901b5cb587689ee2efbf8359293e4e597=
+362382cccf0e9db6"
 > +
-> +do_configure_prepend() {
-> +    currdir=3D`pwd`
-> +    cd ${S}
-> +    ./bootstrap --force
-> +    cd $currdir
-> +}
-> +
-> +EXTRA_OEMAKE =3D "CFLAGS=3D'${CFLAGS} -I${B}/uthash/src'"
-> +
-> +PACKAGES =3D+ "${PN}-python-dbg ${PN}-python"
+> +DIR_ETC=3D"/etc"
+> +EXTRA_OECMAKE =3D ' -DUSE_BUNDLED_LUAJIT=3D"OFF" \
+> +                  -DUSE_BUNDLED_ZLIB=3D"OFF" \
+> +                  -DBUILD_DRIVER=3D"OFF" \
+> +                  -DUSE_BUNDLED_NCURSES=3D"OFF" \
+> +                  -DDIR_ETC=3D"${DIR_ETC}" \
+> +                '
 > +
 > +FILES_${PN} +=3D " \
-> +    ${datadir}/mime \
-> +    ${datadir}/icons \
+> +    ${DIR_ETC}/* \
+> +    ${datadir}/zsh/* \=20
+> +    ${prefix}/src/*  \
 > +"
-> +
-> +FILES_${PN}-python =3D "${PYTHON_SITEPACKAGES_DIR} ${datadir}/${PN}/pyth=
-on"
-> +FILES_${PN}-python-dbg =3D "${PYTHON_SITEPACKAGES_DIR}/.debug"
-> +RDEPENDS_${PN}-python =3D "python"
-> +
-> +# for e.g kde's oxygen-fonts
-> +BBCLASSEXTEND =3D "native"
 > --=20
-> 1.9.3
+> 1.8.4.2
 >=20
 > --=20
 > _______________________________________________
@@ -150,16 +129,16 @@ on"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---9iyR+p8Z2cn535Lj
+--451BZW+OUuJBCAYj
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlXV7G0ACgkQN1Ujt2V2gBzpOQCfTc65tWamM8pQEr+NdXKkBA0Z
-UPwAoKrIS4csECOltINJwaL7LEJ11JDG
-=5tbL
+iEYEARECAAYFAlXV7H4ACgkQN1Ujt2V2gBwg4gCfRY6npa8Rg2CzW07mnQiWQ1hl
+QmMAniR0jNuJ52Pxq968519aiFILzrc9
+=iYEs
 -----END PGP SIGNATURE-----
 
---9iyR+p8Z2cn535Lj--
+--451BZW+OUuJBCAYj--
