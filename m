@@ -1,35 +1,27 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
+Return-Path: <biannm@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 2CA6960557
+	by mail.openembedded.org (Postfix) with ESMTP id 5FD7E60557
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 08:34:52 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99883430"
+	Fri, 21 Aug 2015 08:41:05 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99883678"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Aug 2015 16:38:04 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 21 Aug 2015 16:44:19 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7L8Yj1b028695;
-	Fri, 21 Aug 2015 16:34:45 +0800
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Fri, 21 Aug 2015 16:34:49 +0800
-From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
-To: Yi Zhao <yi.zhao@windriver.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe]  [meta-oe][PATCH] uim: 1.3.1->1.8.6
-Thread-Index: AQHQ2+q0RjcqK5YDeECcMjxBtylWNp4WIEAQ
-Date: Fri, 21 Aug 2015 08:34:48 +0000
-Message-ID: <1B56A49860EB2D45ADE3731B15C959FDA8E43D2C@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1440144060-46643-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<55D6E003.7040201@windriver.com>
-In-Reply-To: <55D6E003.7040201@windriver.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.26]
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7L8f0S2029033
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Aug 2015 16:41:01 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Fri, 21 Aug 2015 16:41:04 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sat, 22 Aug 2015 00:40:16 +0800
+Message-ID: <1440175216-21907-1-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] uim: 1.3.1->1.8.6
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-oe][PATCH] sysdig: 0.1.101 -> 0.1.102
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,154 +35,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2015 08:34:58 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 21 Aug 2015 08:41:09 -0000
+Content-Type: text/plain
 
-SGkgemhhbw0KDQoNCj4gSSBoYWQgYSBwYXRjaCBmb3IgQ09ORklHVVJFT1BUUyBpbiB1aW1fMS4z
-LjEuYmIgYnV0IGhhZG4ndCBtZXJnZWQgaW50byBtYXN0ZXIuDQo+IFdoZW4gZW5hYmxlIG11bHRp
-bGliLCB0aGUgQ09ORklHVVJFT1BUUyBpc24ndCBleHBhbmRlZCBjb3JyZWN0bHkuDQo+IA0KPiBQ
-bGVhc2Ugc2VlIHNpbWlsYXIgaXNzdWU6DQo+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3Jn
-L3BpcGVybWFpbC9vcGVuZW1iZWRkZWQtY29yZS8yMDEzLU5vdmVtYmVyLzA4NjUxMC4NCj4gaHRt
-bA0KPiANCj4gUGxlYXNlIHVzZSBfcmVtb3ZlIHRvIGRyb3AgdGhlIHNpbGVudCBydWxlOg0KPiAt
-Q09ORklHVVJFT1BUU19jbGFzcy10YXJnZXQgOj0gIiR7QGQuZ2V0VmFyKCdDT05GSUdVUkVPUFRT
-JywNCj4gVHJ1ZSkucmVwbGFjZSgnLS1kaXNhYmxlLXNpbGVudC1ydWxlcycsICcgJyl9Ig0KPiAr
-Q09ORklHVVJFT1BUU19yZW1vdmVfY2xhc3MtdGFyZ2V0ID0gIi0tZGlzYWJsZS1zaWxlbnQtcnVs
-ZXMiDQo+DQoNClRoYW5rIHlvdS4gSSdsbCBtb2RpZmllZCBteSBwYXRjaC4NCg0KQ2hlZXJzDQpM
-ZWkNCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBZaSBaaGFvIFttYWls
-dG86eWkuemhhb0B3aW5kcml2ZXIuY29tXQ0KPiBTZW50OiBGcmlkYXksIEF1Z3VzdCAyMSwgMjAx
-NSA0OjI0IFBNDQo+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9y
-ZzsgTGVpLCBNYW9odWkv6Zu3IOiMguaFpw0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1b
-UEFUQ0hdIHVpbTogMS4zLjEtPjEuOC42DQo+IA0KPiBIaQ0KPiANCj4g5ZyoIDIwMTXlubQwOOac
-iDIx5pelIDE2OjAxLCBMZWkgTWFvaHVpIOWGmemBkzoNCj4gPiAtIGRlbHRlIDAwMDEtZml4LWJ1
-Zy1hYm91dC1zdGRsaWIucGF0Y2ggdGhhdCBub3QgYmUgbmVlZGVkLg0KPiA+IC0gbW9kaWZpZWQg
-bGljZW5zZQ0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogTGVpIE1hb2h1aSA8bGVpbWFvaHVpQGNu
-LmZ1aml0c3UuY29tPg0KPiA+IC0tLQ0KPiA+ICAgLi4uL3VpbS91aW0vMDAwMS1maXgtYnVnLWFi
-b3V0LXN0ZGxpYi5wYXRjaCAgICAgICAgfCA0MCAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+ID4g
-ICAuLi4vdWltL3VpbS8wMDAxLWZpeC1idWctZm9yLWNyb3NzLWNvbXBpbGUucGF0Y2ggICB8IDM4
-ICsrKysrKysrKystLS0tLS0tLS0tDQo+ID4gICAuLi4vdWltL3t1aW1fMS4zLjEuYmIgPT4gdWlt
-XzEuOC42LmJifSAgICAgICAgICAgICB8IDE5ICsrKysrKy0tLS0NCj4gPiAgIDMgZmlsZXMgY2hh
-bmdlZCwgMzIgaW5zZXJ0aW9ucygrKSwgNjUgZGVsZXRpb25zKC0pDQo+ID4gICBkZWxldGUgbW9k
-ZSAxMDA2NDQNCj4gbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvdWltL3VpbS8wMDAxLWZpeC1idWct
-YWJvdXQtc3RkbGliLnBhdGNoDQo+ID4gICByZW5hbWUgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQv
-dWltL3t1aW1fMS4zLjEuYmIgPT4gdWltXzEuOC42LmJifQ0KPiA+ICg4OSUpDQo+ID4NCj4gPiBk
-aWZmIC0tZ2l0DQo+ID4gYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC91aW0vdWltLzAwMDEtZml4
-LWJ1Zy1hYm91dC1zdGRsaWIucGF0Y2gNCj4gPiBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3Vp
-bS91aW0vMDAwMS1maXgtYnVnLWFib3V0LXN0ZGxpYi5wYXRjaA0KPiA+IGRlbGV0ZWQgZmlsZSBt
-b2RlIDEwMDY0NA0KPiA+IGluZGV4IDllNjM2ODMuLjAwMDAwMDANCj4gPiAtLS0gYS9tZXRhLW9l
-L3JlY2lwZXMtc3VwcG9ydC91aW0vdWltLzAwMDEtZml4LWJ1Zy1hYm91dC1zdGRsaWIucGF0Y2gN
-Cj4gPiArKysgL2Rldi9udWxsDQo+ID4gQEAgLTEsNDAgKzAsMCBAQA0KPiA+IC1Gcm9tIGUwZTNm
-ODJiZDI5MThmZGNjNzIyOTE4YzEwOGJjMzM2NDdhNDgwNWYgTW9uIFNlcCAxNyAwMDowMDowMA0K
-PiA+IDIwMDENCj4gPiAtRnJvbTogTGVpbWFvaHVpIDxsZWltYW9odWlAY24uZnVqaXRzdS5jb20+
-DQo+ID4gLURhdGU6IEZyaSwgMjUgT2N0IDIwMTMgMTg6MzE6MjIgKzA5MDANCj4gPiAtU3ViamVj
-dDogW1BBVENIXSBmaXggYnVnIGFib3V0IHN0ZGxpYg0KPiA+IC0NCj4gPiAtU2lnbmVkLW9mZi1i
-eTogbGVpbWFvaHVpIDxsZWltYW9odWlAY24uZnVqaXRzdS5jb20+DQo+ID4gLS0tLQ0KPiA+IC0g
-eGltL2xvY2FsZS5jcHAgICAgfCAgICAzICsrLQ0KPiA+IC0geGltL3hpbXNlcnZlci5jcHAgfCAg
-ICAxICsNCj4gPiAtIDIgZmlsZXMgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9u
-cygtKQ0KPiA+IC0NCj4gPiAtZGlmZiAtLWdpdCBhL3hpbS9sb2NhbGUuY3BwIGIveGltL2xvY2Fs
-ZS5jcHAgLWluZGV4IDM4MGU5NDUuLmVkZmFmMDMNCj4gPiAxMDA2NDQNCj4gPiAtLS0tIGEveGlt
-L2xvY2FsZS5jcHANCj4gPiAtKysrIGIveGltL2xvY2FsZS5jcHANCj4gPiAtQEAgLTM1LDcgKzM1
-LDggQEANCj4gPiAtICNpZmRlZiBIQVZFX0NPTkZJR19IDQo+ID4gLSAjIGluY2x1ZGUgPGNvbmZp
-Zy5oPg0KPiA+IC0gI2VuZGlmDQo+ID4gLS0NCj4gPiAtKyNpbmNsdWRlIDxzdHJpbmcuaD4NCj4g
-PiAtKyNpbmNsdWRlIDxzdGRsaWIuaD4NCj4gPiAtICNpbmNsdWRlIDxzdGRpby5oPg0KPiA+IC0g
-I2luY2x1ZGUgPGxvY2FsZS5oPg0KPiA+IC0gI2luY2x1ZGUgPGljb252Lmg+DQo+ID4gLWRpZmYg
-LS1naXQgYS94aW0veGltc2VydmVyLmNwcCBiL3hpbS94aW1zZXJ2ZXIuY3BwIC1pbmRleA0KPiA+
-IDI0NWM1ZjguLmNkZTk5MTggMTAwNjQ0DQo+ID4gLS0tLSBhL3hpbS94aW1zZXJ2ZXIuY3BwDQo+
-ID4gLSsrKyBiL3hpbS94aW1zZXJ2ZXIuY3BwDQo+ID4gLUBAIC0zNCw2ICszNCw3IEBADQo+ID4g
-LSAjIGluY2x1ZGUgPGNvbmZpZy5oPg0KPiA+IC0gI2VuZGlmDQo+ID4gLQ0KPiA+IC0rI2luY2x1
-ZGUgPHN0ZGxpYi5oPg0KPiA+IC0gI2luY2x1ZGUgPHN0ZGlvLmg+DQo+ID4gLSAjaW5jbHVkZSA8
-Y3R5cGUuaD4NCj4gPiAtICNpbmNsdWRlIDxsb2NhbGUuaD4NCj4gPiAtLS0NCj4gPiAtMS43LjEN
-Cj4gPiAtDQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvdWlt
-L3VpbS8wMDAxLWZpeC1idWctZm9yLWNyb3NzLWNvbXBpbGUucGF0Y2gNCj4gPiBiL21ldGEtb2Uv
-cmVjaXBlcy1zdXBwb3J0L3VpbS91aW0vMDAwMS1maXgtYnVnLWZvci1jcm9zcy1jb21waWxlLnBh
-dGNoDQo+ID4gaW5kZXggNjEzOTJjOS4uZGY4MmIwNyAxMDA2NDQNCj4gPiAtLS0NCj4gPiBhL21l
-dGEtb2UvcmVjaXBlcy1zdXBwb3J0L3VpbS91aW0vMDAwMS1maXgtYnVnLWZvci1jcm9zcy1jb21w
-aWxlLnBhdGNoDQo+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvdWltL3VpbS8wMDAx
-LWZpeC1idWctZm9yLWNyb3NzLWNvbXBpbGUucA0KPiA+ICsrKyBhdGNoDQo+ID4gQEAgLTEsMjgg
-KzEsMjggQEANCj4gPiAtRnJvbSAyZTg3YzM5YWUzYTAwYjgyMzFlZTIxYTU0YzQ3MzYxYzFiZjUw
-MmY3IE1vbiBTZXAgMTcgMDA6MDA6MDANCj4gPiAyMDAxDQo+ID4gLUZyb206IExlaW1hb2h1aSA8
-bGVpbWFvaHVpQGNuLmZ1aml0c3UuY29tPg0KPiA+IC1EYXRlOiBGcmksIDI1IE9jdCAyMDEzIDE4
-OjIzOjEyICswOTAwDQo+ID4gK0Zyb20gMjkxODE5NmJhNzgyZGZhNDQwMWJkY2E5MTdhZDRkZTE5
-MTA1MDVlMCBNb24gU2VwIDE3IDAwOjAwOjAwDQo+ID4gKzIwMDENCj4gPiArRnJvbTogTGVpIE1h
-b2h1aSA8bGVpbWFvaHVpQGNuLmZ1aml0c3UuY29tPg0KPiA+ICtEYXRlOiBGcmksIDIxIEF1ZyAy
-MDE1IDE1OjU4OjQyICswOTAwDQo+ID4gICBTdWJqZWN0OiBbUEFUQ0hdIGZpeCBidWcgZm9yIGNy
-b3NzIGNvbXBpbGUNCj4gPg0KPiA+IC1TaWduZWQtb2ZmLWJ5OiBsZWltYW9odWkgPGxlaW1hb2h1
-aUBjbi5mdWppdHN1LmNvbT4NCj4gPiArU2lnbmVkLW9mZi1ieTogTGVpIE1hb2h1aSA8bGVpbWFv
-aHVpQGNuLmZ1aml0c3UuY29tPg0KPiA+ICAgLS0tDQo+ID4gLSBjb25maWd1cmUuYWMgfCAgICA0
-ICsrLS0NCj4gPiAtIDEgZmlsZXMgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9u
-cygtKQ0KPiA+ICsgY29uZmlndXJlLmFjIHwgNCArKy0tDQo+ID4gKyAxIGZpbGUgY2hhbmdlZCwg
-MiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPiA+DQo+ID4gICBkaWZmIC0tZ2l0IGEv
-Y29uZmlndXJlLmFjIGIvY29uZmlndXJlLmFjIC1pbmRleCAzYjY0NTkzLi41NzM5NWQ0DQo+ID4g
-MTAwNjQ0DQo+ID4gK2luZGV4IDliZTg3OWMuLjkyNDliZmQgMTAwNjQ0DQo+ID4gICAtLS0gYS9j
-b25maWd1cmUuYWMNCj4gPiAgICsrKyBiL2NvbmZpZ3VyZS5hYw0KPiA+IC1AQCAtNjAxLDggKzYw
-MSw4IEBAIEFDX0hFTFBfU1RSSU5HKFstLXdpdGgtbGliZWRpdFs9RElSXSwgRW5hYmxlDQo+ID4g
-bGliZWRpdCBzdXBwb3J0DQo+ID4gLSAgaWYgdGVzdCAieCR1c2VfbGliZWRpdCIgIT0gInhubyI7
-IHRoZW4NCj4gPiAtICAgICAgc2F2ZWRfQ1BQRkxBR1M9JENQUEZMQUdTDQo+ID4gLSAgICAgIHNh
-dmVkX0xERkxBR1M9JExERkxBR1MNCj4gPiAtLSAgICAgQ1BQRkxBR1M9IiR7Q1BQRkxBR1N9IC1J
-JGxpYmVkaXRfcGF0aC9pbmNsdWRlIg0KPiA+IC0tICAgICBMREZMQUdTPSIke0xERkxBR1N9IC1M
-JGxpYmVkaXRfcGF0aC9saWIiDQo+ID4gLSsgICAgIENQUEZMQUdTPSIke0NQUEZMQUdTfSAiDQo+
-ID4gLSsgICAgIExERkxBR1M9IiR7TERGTEFHU30gIg0KPiA+IC0gICAgICBBQ19DSEVDS19MSUIo
-ZWRpdCwgZWxfaW5pdCwNCj4gPiAtICAgICAgCQlbDQo+ID4gLSAJCSAgIExJQkVESVRfTElCUz0i
-LWxlZGl0IC1sY3Vyc2VzIC1sJGxpYmVkaXRfcGF0aC9saWIiDQo+ID4gK0BAIC0xMjA4LDggKzEy
-MDgsOCBAQCBBQ19IRUxQX1NUUklORyhbLS13aXRoLWxpYmVkaXRbPURJUl0sIEVuYWJsZQ0KPiA+
-ICtsaWJlZGl0IHN1cHBvcnQgIGlmIHRlc3QgIngkdXNlX2xpYmVkaXQiICE9ICJ4bm8iOyB0aGVu
-DQo+ID4gKyAgICAgc2F2ZWRfQ1BQRkxBR1M9JENQUEZMQUdTDQo+ID4gKyAgICAgc2F2ZWRfTERG
-TEFHUz0kTERGTEFHUw0KPiA+ICstICAgIENQUEZMQUdTPSIke0NQUEZMQUdTfSAtSSRsaWJlZGl0
-X3BhdGgvaW5jbHVkZSINCj4gPiArLSAgICBMREZMQUdTPSIke0xERkxBR1N9IC1MJGxpYmVkaXRf
-cGF0aC9saWIiDQo+ID4gKysgICAgQ1BQRkxBR1M9IiR7Q1BQRkxBR1N9ICINCj4gPiArKyAgICBM
-REZMQUdTPSIke0xERkxBR1N9ICINCj4gPiArICAgICBBQ19DSEVDS19MSUIoY3Vyc2VzLCB0Z2V0
-ZW50LCBMSUJFRElUX0xJQlM9Ii1sY3Vyc2VzIiwNCj4gPiArICAgICAgICAgW0FDX0NIRUNLX0xJ
-QihuY3Vyc2VzLCB0Z2V0ZW50LCBMSUJFRElUX0xJQlM9Ii1sbmN1cnNlcyIsDQo+ID4gKyAgICAg
-ICAgICAgICBBQ19NU0dfV0FSTigibGliZWRpdCBuZWVkcyBsaWJjdXJzZXMgb3IgbGlibmN1cnNl
-cy4NCj4gPiArIGRpc2FibGVkLi4uIikNCj4gPiAgIC0tDQo+ID4gLTEuNy4xDQo+ID4gKzEuOC40
-LjINCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC91aW0vdWlt
-XzEuMy4xLmJiDQo+ID4gYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC91aW0vdWltXzEuOC42LmJi
-DQo+ID4gc2ltaWxhcml0eSBpbmRleCA4OSUNCj4gPiByZW5hbWUgZnJvbSBtZXRhLW9lL3JlY2lw
-ZXMtc3VwcG9ydC91aW0vdWltXzEuMy4xLmJiDQo+ID4gcmVuYW1lIHRvIG1ldGEtb2UvcmVjaXBl
-cy1zdXBwb3J0L3VpbS91aW1fMS44LjYuYmINCj4gPiBpbmRleCAwMTY1N2RmLi4yNGYxNGE1IDEw
-MDY0NA0KPiA+IC0tLSBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3VpbS91aW1fMS4zLjEuYmIN
-Cj4gPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC91aW0vdWltXzEuOC42LmJiDQo+ID4g
-QEAgLTEsMTcgKzEsMTggQEANCj4gPiAgIERFU0NSSVBUSU9OID0gIkEgbXVsdGlsaW5ndWFsIHVz
-ZXIgaW5wdXQgbWV0aG9kIGxpYnJhcnkiDQo+ID4gICBIT01FUEFHRSA9ICJodHRwOi8vdWltLmZy
-ZWVkZXNrdG9wLm9yZy8iDQo+ID4gLUxJQ0VOU0UgPSAiQlNEIg0KPiA+ICtMSUNFTlNFID0gIkJT
-RC0zLUNsYXVzZSAmIExHUEx2MisiDQo+ID4gICBTRUNUSU9OID0gImlucHV0bWV0aG9kcyINCj4g
-Pg0KPiA+ICAgU1JDX1VSSSA9ICJodHRwOi8vdWltLmdvb2dsZWNvZGUuY29tL2ZpbGVzL3VpbS0k
-e1BWfS50YXIuYnoyIFwNCj4gPiAtICAgICAgICAgICBmaWxlOi8vMDAwMS1maXgtYnVnLWFib3V0
-LXN0ZGxpYi5wYXRjaCAiDQo+ID4gKyAgICAgICAgICAgIg0KPiA+DQo+ID4gICBTUkNfVVJJX2Fw
-cGVuZF9jbGFzcy10YXJnZXQgPSAiZmlsZTovL3VpbS1tb2R1bGUtbWFuYWdlci5wYXRjaCBcDQo+
-ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmaWxlOi8vMDAwMS1maXgtYnVnLWZv
-ci1jcm9zcy1jb21waWxlLnBhdGNoIg0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgZmlsZTovLzAwMDEtZml4LWJ1Zy1mb3ItY3Jvc3MtY29tcGlsZS5wYXRjaCBcDQo+ID4gKyAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiDQo+ID4NCj4gPiAtTElDX0ZJTEVTX0NIS1NV
-TSA9ICJmaWxlOi8vQ09QWUlORzttZDU9OWMzNzJlZmJlY2E1OGNlMjIwMTdhMjljMWViZjhiZjAi
-DQo+ID4gLVNSQ19VUklbbWQ1c3VtXSA9ICIyODMyZTIzZDQ3NzhiYmFjYmZhNGI0OWJmNjQyZDY2
-NyINCj4gPiAtU1JDX1VSSVtzaGEyNTZzdW1dID0NCj4gImVkMmNmYTE1MDE4YTRmZDI1NTdlODc1
-ZjY2ZmNiM2YwYjlkYWJlMTJmYTA3MDBhYTJmMTFjY2E2OWMyY2IyNTYiDQo+ID4gK0xJQ19GSUxF
-U19DSEtTVU0gPSAiZmlsZTovL0NPUFlJTkc7bWQ1PTMyNDYzZmQyOWFhMzAzZmIyMzYwZmFlZWFl
-MTcyNTZiIg0KPiA+ICtTUkNfVVJJW21kNXN1bV0gPSAiZWNlYTRjNTk3YmFiMWZkNGJhOThlYTg0
-ZWRjZWNlNTkiDQo+ID4gK1NSQ19VUklbc2hhMjU2c3VtXSA9DQo+ICI3YjFlYTgwM2M3M2YzNDc4
-OTE3MTY2ZjA0ZjY3Y2NlNmU0NWFkN2VhNWFiNmRmOTliOTQ4YzE3ZWIxY2IyMzVmIg0KPiA+DQo+
-ID4gICBERVBFTkRTID0gImFudGh5IGZvbnRjb25maWcgbGlieGZ0IGxpYnh0IGdsaWItMi4wIG5j
-dXJzZXMgaW50bHRvb2wiDQo+ID4gICBERVBFTkRTX2NsYXNzLXRhcmdldCArPSAiZ3RrKyB1aW0t
-bmF0aXZlIHRha2FvLWZvbnRzIg0KPiA+IEBAIC0zMyw2ICszNCwxMiBAQCBFWFRSQV9PRUNPTkYg
-Kz0gIi0tZGlzYWJsZS1lbWFjcyBcDQo+ID4NCj4gPiAgIENPTkZJR1VSRU9QVFNfY2xhc3MtdGFy
-Z2V0IDo9ICIke0BkLmdldFZhcignQ09ORklHVVJFT1BUUycsDQo+IFRydWUpLnJlcGxhY2UoJy0t
-ZGlzYWJsZS1zaWxlbnQtcnVsZXMnLCAnICcpfSINCj4gDQo+IEkgaGFkIGEgcGF0Y2ggZm9yIENP
-TkZJR1VSRU9QVFMgaW4gdWltXzEuMy4xLmJiIGJ1dCBoYWRuJ3QgbWVyZ2VkIGludG8gbWFzdGVy
-Lg0KPiBXaGVuIGVuYWJsZSBtdWx0aWxpYiwgdGhlIENPTkZJR1VSRU9QVFMgaXNuJ3QgZXhwYW5k
-ZWQgY29ycmVjdGx5Lg0KPiANCj4gUGxlYXNlIHNlZSBzaW1pbGFyIGlzc3VlOg0KPiBodHRwOi8v
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZy9waXBlcm1haWwvb3BlbmVtYmVkZGVkLWNvcmUvMjAxMy1O
-b3ZlbWJlci8wODY1MTAuDQo+IGh0bWwNCj4gDQo+IFBsZWFzZSB1c2UgX3JlbW92ZSB0byBkcm9w
-IHRoZSBzaWxlbnQgcnVsZToNCj4gLUNPTkZJR1VSRU9QVFNfY2xhc3MtdGFyZ2V0IDo9ICIke0Bk
-LmdldFZhcignQ09ORklHVVJFT1BUUycsDQo+IFRydWUpLnJlcGxhY2UoJy0tZGlzYWJsZS1zaWxl
-bnQtcnVsZXMnLCAnICcpfSINCj4gK0NPTkZJR1VSRU9QVFNfcmVtb3ZlX2NsYXNzLXRhcmdldCA9
-ICItLWRpc2FibGUtc2lsZW50LXJ1bGVzIg0KPiANCj4gVGhhbmtzLA0KPiBZaQ0KPiANCj4gPg0K
-PiA+ICsNCj4gPiArI0JlY2F1c2UgbTQgZmlsZSdzIGZpbmQgbWF4ZGVwdGg9Miwgc28gY29weSB0
-aGUgbTQgZmlsZXMgb2YgdGhlIGRlZXAgZGVwdGguDQo+ID4gK2RvX2NvbmZpZ3VyZV9wcmVwZW5k
-ICgpIHsNCj4gPiArICAgIGNwICR7U30vc2lnc2NoZW1lL200LyogJHtTfS9tNC8NCj4gPiArfQ0K
-PiA+ICsNCj4gPiAgIFBBQ0tBR0VTICs9ICJ1aW0teGltIHVpbS11dGlscyB1aW0tc2trIHVpbS1n
-dGsyLjAgdWltLWZlcCB1aW0tY29tbW9uDQo+IHVpbS1hbnRoeSBsaWJ1aW0wIGxpYnVpbS1kZXYi
-DQo+ID4NCj4gPiAgIEZJTEVTX2xpYnVpbTAgPSAiJHtsaWJkaXJ9L3VpbS9wbHVnaW4vbGlidWlt
-LWN1c3RvbS1lbmFibGVyLiogXA0KDQo=
+upgrade sysdig to 0.1.102, and using GIT source instead of archive.
+
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+---
+ .../01-donot-set-default-value-to-va_list.patch    | 22 --------------
+ meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb  | 34 ----------------------
+ meta-oe/recipes-extended/sysdig/sysdig_git.bb      | 32 ++++++++++++++++++++
+ 3 files changed, 32 insertions(+), 56 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch
+ delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
+ create mode 100644 meta-oe/recipes-extended/sysdig/sysdig_git.bb
+
+diff --git a/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch b/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch
+deleted file mode 100644
+index 9cb6378..0000000
+--- a/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch
++++ /dev/null
+@@ -1,22 +0,0 @@
+-fix build error as following.
+-
+-  sysdig-0.1.101/userspace/libsinsp/ctext.h:376:50: error: could not convert '0' from 'int' to 'va_list {aka __va_list}'
+-  |    int8_t vprintf(const char*format, va_list ap = 0);
+-  |                                                   ^
+-  | make[2]: *** [userspace/libsinsp/CMakeFiles/sinsp.dir/ctext.cpp.o] Error 1
+-
+-
+-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+-
+-diff -Nurp sysdig-0.1.101.orig/userspace/libsinsp/ctext.h sysdig-0.1.101/userspace/libsinsp/ctext.h
+---- sysdig-0.1.101.orig/userspace/libsinsp/ctext.h	2015-06-04 02:58:51.000000000 +0800
+-+++ sysdig-0.1.101/userspace/libsinsp/ctext.h	2015-07-02 09:18:14.154627357 +0800
+-@@ -373,7 +373,7 @@ class ctext
+- 		// application to this library seamlessly.
+- 		//
+- 		int8_t printf(const char*format, ...);
+--		int8_t vprintf(const char*format, va_list ap = 0);
+-+		int8_t vprintf(const char*format, va_list ap);
+- 
+- 		//
+- 		// nprintf is identical to the printf above EXCEPT for
+diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb b/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
+deleted file mode 100644
+index 789fd47..0000000
+--- a/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
++++ /dev/null
+@@ -1,34 +0,0 @@
+-SUMMARY = "A New System Troubleshooting Tool Built for the Way You Work"
+-DESCRIPTION = "Sysdig is open source, system-level exploration: capture \
+-system state and activity from a running Linux instance, then save, \
+-filter and analyze."
+-HOMEPAGE = "http://www.sysdig.org/"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-
+-inherit cmake pkgconfig
+-
+-DEPENDS = "luajit zlib ncurses"
+-RDEPENDS_${PN} = "bash"
+-
+-
+-SRC_URI = "https://github.com/draios/sysdig/archive/${PV}.tar.gz \
+-           file://01-donot-set-default-value-to-va_list.patch \
+-          "
+-
+-SRC_URI[md5sum] = "5fe96a3a0fd98b2157a40cb29af41afc"
+-SRC_URI[sha256sum] = "6995e39be565514901b5cb587689ee2efbf8359293e4e597362382cccf0e9db6"
+-
+-DIR_ETC="/etc"
+-EXTRA_OECMAKE = ' -DUSE_BUNDLED_LUAJIT="OFF" \
+-                  -DUSE_BUNDLED_ZLIB="OFF" \
+-                  -DBUILD_DRIVER="OFF" \
+-                  -DUSE_BUNDLED_NCURSES="OFF" \
+-                  -DDIR_ETC="${DIR_ETC}" \
+-                '
+-
+-FILES_${PN} += " \
+-    ${DIR_ETC}/* \
+-    ${datadir}/zsh/* \ 
+-    ${prefix}/src/*  \
+-"
+diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
+new file mode 100644
+index 0000000..62aa433
+--- /dev/null
++++ b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
+@@ -0,0 +1,32 @@
++SUMMARY = "A New System Troubleshooting Tool Built for the Way You Work"
++DESCRIPTION = "Sysdig is open source, system-level exploration: capture \
++system state and activity from a running Linux instance, then save, \
++filter and analyze."
++HOMEPAGE = "http://www.sysdig.org/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++inherit cmake pkgconfig
++
++DEPENDS = "luajit zlib ncurses"
++RDEPENDS_${PN} = "bash"
++
++SRC_URI = "git://github.com/draios/sysdig.git;branch=master"
++SRCREV = "b7394e29ced4f1a991af03c0381a5828abcbab7a"
++PV = "0.1.102+git${SRCPV}"
++
++S = "${WORKDIR}/git"
++
++DIR_ETC="/etc"
++EXTRA_OECMAKE = ' -DUSE_BUNDLED_LUAJIT="OFF" \
++                  -DUSE_BUNDLED_ZLIB="OFF" \
++                  -DBUILD_DRIVER="OFF" \
++                  -DUSE_BUNDLED_NCURSES="OFF" \
++                  -DDIR_ETC="${DIR_ETC}" \
++                '
++
++FILES_${PN} += " \
++    ${DIR_ETC}/* \
++    ${datadir}/zsh/* \ 
++    ${prefix}/src/*  \
++"
+-- 
+1.8.4.2
+
 
