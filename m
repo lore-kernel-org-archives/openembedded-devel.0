@@ -1,27 +1,27 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C09160557
+	by mail.openembedded.org (Postfix) with ESMTP id 0C4F560557
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 09:22:14 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99885175"
+	Fri, 21 Aug 2015 09:59:40 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99886554"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Aug 2015 17:25:26 +0800
+	by heian.cn.fujitsu.com with ESMTP; 21 Aug 2015 18:02:53 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7L9M7BG031416
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7L9xZrV000850
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 17:22:07 +0800
+	Fri, 21 Aug 2015 17:59:35 +0800
 Received: from localhost.localdomain (10.167.226.26) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 21 Aug 2015 17:22:11 +0800
+	Server (TLS) id 14.3.181.6; Fri, 21 Aug 2015 17:59:39 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 21 Aug 2015 17:22:30 +0800
-Message-ID: <1440148950-47294-1-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Fri, 21 Aug 2015 17:59:58 +0800
+Message-ID: <1440151198-47613-1-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH v2] uim: 1.3.1->1.8.6
+Subject: [meta-oe][PATCH] openwsman: modified SRC_URI to git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,166 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2015 09:22:21 -0000
+X-List-Received-Date: Fri, 21 Aug 2015 09:59:41 -0000
 Content-Type: text/plain
 
-- delte 0001-fix-bug-about-stdlib.patch that not be needed.
-- modified license
+not use github archives anymore, they are regenerated from time to time with different checksums.
 
 Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../uim/uim/0001-fix-bug-about-stdlib.patch        | 40 ----------------------
- .../uim/uim/0001-fix-bug-for-cross-compile.patch   | 38 ++++++++++----------
- .../uim/{uim_1.3.1.bb => uim_1.8.6.bb}             | 21 ++++++++----
- 3 files changed, 33 insertions(+), 66 deletions(-)
- delete mode 100644 meta-oe/recipes-support/uim/uim/0001-fix-bug-about-stdlib.patch
- rename meta-oe/recipes-support/uim/{uim_1.3.1.bb => uim_1.8.6.bb} (88%)
+ meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/uim/uim/0001-fix-bug-about-stdlib.patch b/meta-oe/recipes-support/uim/uim/0001-fix-bug-about-stdlib.patch
-deleted file mode 100644
-index 9e63683..0000000
---- a/meta-oe/recipes-support/uim/uim/0001-fix-bug-about-stdlib.patch
-+++ /dev/null
-@@ -1,40 +0,0 @@
--From e0e3f82bd2918fdcc722918c108bc33647a4805f Mon Sep 17 00:00:00 2001
--From: Leimaohui <leimaohui@cn.fujitsu.com>
--Date: Fri, 25 Oct 2013 18:31:22 +0900
--Subject: [PATCH] fix bug about stdlib
--
--Signed-off-by: leimaohui <leimaohui@cn.fujitsu.com>
-----
-- xim/locale.cpp    |    3 ++-
-- xim/ximserver.cpp |    1 +
-- 2 files changed, 3 insertions(+), 1 deletions(-)
--
--diff --git a/xim/locale.cpp b/xim/locale.cpp
--index 380e945..edfaf03 100644
----- a/xim/locale.cpp
--+++ b/xim/locale.cpp
--@@ -35,7 +35,8 @@
-- #ifdef HAVE_CONFIG_H
-- # include <config.h>
-- #endif
---
--+#include <string.h>
--+#include <stdlib.h>
-- #include <stdio.h>
-- #include <locale.h>
-- #include <iconv.h>
--diff --git a/xim/ximserver.cpp b/xim/ximserver.cpp
--index 245c5f8..cde9918 100644
----- a/xim/ximserver.cpp
--+++ b/xim/ximserver.cpp
--@@ -34,6 +34,7 @@
-- # include <config.h>
-- #endif
-- 
--+#include <stdlib.h>
-- #include <stdio.h>
-- #include <ctype.h>
-- #include <locale.h>
---- 
--1.7.1
--
-diff --git a/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch b/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch
-index 61392c9..df82b07 100644
---- a/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch
-+++ b/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch
-@@ -1,28 +1,28 @@
--From 2e87c39ae3a00b8231ee21a54c47361c1bf502f7 Mon Sep 17 00:00:00 2001
--From: Leimaohui <leimaohui@cn.fujitsu.com>
--Date: Fri, 25 Oct 2013 18:23:12 +0900
-+From 2918196ba782dfa4401bdca917ad4de1910505e0 Mon Sep 17 00:00:00 2001
-+From: Lei Maohui <leimaohui@cn.fujitsu.com>
-+Date: Fri, 21 Aug 2015 15:58:42 +0900
- Subject: [PATCH] fix bug for cross compile
+diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb
+index 67cd618..0c6543d 100644
+--- a/meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb
++++ b/meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb
+@@ -12,12 +12,14 @@ SECTION = "Applications/System"
  
--Signed-off-by: leimaohui <leimaohui@cn.fujitsu.com>
-+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
- ---
-- configure.ac |    4 ++--
-- 1 files changed, 2 insertions(+), 2 deletions(-)
-+ configure.ac | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ DEPENDS = "curl libxml2 openssl libpam"
  
- diff --git a/configure.ac b/configure.ac
--index 3b64593..57395d4 100644
-+index 9be879c..9249bfd 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -601,8 +601,8 @@ AC_HELP_STRING([--with-libedit[=DIR], Enable libedit support
--  if test "x$use_libedit" != "xno"; then
--      saved_CPPFLAGS=$CPPFLAGS
--      saved_LDFLAGS=$LDFLAGS
---     CPPFLAGS="${CPPFLAGS} -I$libedit_path/include"
---     LDFLAGS="${LDFLAGS} -L$libedit_path/lib"
--+     CPPFLAGS="${CPPFLAGS} "
--+     LDFLAGS="${LDFLAGS} "
--      AC_CHECK_LIB(edit, el_init,	
--      		[
-- 		   LIBEDIT_LIBS="-ledit -lcurses -l$libedit_path/lib"
-+@@ -1208,8 +1208,8 @@ AC_HELP_STRING([--with-libedit[=DIR], Enable libedit support
-+ if test "x$use_libedit" != "xno"; then
-+     saved_CPPFLAGS=$CPPFLAGS
-+     saved_LDFLAGS=$LDFLAGS
-+-    CPPFLAGS="${CPPFLAGS} -I$libedit_path/include"
-+-    LDFLAGS="${LDFLAGS} -L$libedit_path/lib"
-++    CPPFLAGS="${CPPFLAGS} "
-++    LDFLAGS="${LDFLAGS} "
-+     AC_CHECK_LIB(curses, tgetent, LIBEDIT_LIBS="-lcurses",
-+         [AC_CHECK_LIB(ncurses, tgetent, LIBEDIT_LIBS="-lncurses",
-+             AC_MSG_WARN("libedit needs libcurses or libncurses. disabled...")
- -- 
--1.7.1
-+1.8.4.2
- 
-diff --git a/meta-oe/recipes-support/uim/uim_1.3.1.bb b/meta-oe/recipes-support/uim/uim_1.8.6.bb
-similarity index 88%
-rename from meta-oe/recipes-support/uim/uim_1.3.1.bb
-rename to meta-oe/recipes-support/uim/uim_1.8.6.bb
-index 01657df..8e5f7dd 100644
---- a/meta-oe/recipes-support/uim/uim_1.3.1.bb
-+++ b/meta-oe/recipes-support/uim/uim_1.8.6.bb
-@@ -1,17 +1,18 @@
- DESCRIPTION = "A multilingual user input method library"
- HOMEPAGE = "http://uim.freedesktop.org/"
--LICENSE = "BSD"
-+LICENSE = "BSD-3-Clause & LGPLv2+"
- SECTION = "inputmethods"
- 
- SRC_URI = "http://uim.googlecode.com/files/uim-${PV}.tar.bz2 \
--           file://0001-fix-bug-about-stdlib.patch "
-+           "
- 
- SRC_URI_append_class-target = "file://uim-module-manager.patch \
--                               file://0001-fix-bug-for-cross-compile.patch"
-+                               file://0001-fix-bug-for-cross-compile.patch \
-+                               "
- 
--LIC_FILES_CHKSUM = "file://COPYING;md5=9c372efbeca58ce22017a29c1ebf8bf0"
--SRC_URI[md5sum] = "2832e23d4778bbacbfa4b49bf642d667"
--SRC_URI[sha256sum] = "ed2cfa15018a4fd2557e875f66fcb3f0b9dabe12fa0700aa2f11cca69c2cb256"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=32463fd29aa303fb2360faeeae17256b"
-+SRC_URI[md5sum] = "ecea4c597bab1fd4ba98ea84edcece59"
-+SRC_URI[sha256sum] = "7b1ea803c73f3478917166f04f67cce6e45ad7ea5ab6df99b948c17eb1cb235f"
- 
- DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool"
- DEPENDS_class-target += "gtk+ uim-native takao-fonts"
-@@ -31,7 +32,13 @@ EXTRA_OECONF += "--disable-emacs \
-                  --without-mana \
-                  --without-eb"
- 
--CONFIGUREOPTS_class-target := "${@d.getVar('CONFIGUREOPTS', True).replace('--disable-silent-rules', ' ')}"
-+CONFIGUREOPTS_remove_class-target = "--disable-silent-rules"
+-SRC_URI = "https://github.com/Openwsman/openwsman/archive/v${PV}.tar.gz \
++SRCREV = "f523bf1390c7ea23946bb9159978a4d7c198f1ba"
++PV = "2.6.0"
 +
-+
-+#Because m4 file's find maxdepth=2, so copy the m4 files of the deep depth.
-+do_configure_prepend () {
-+    cp ${S}/sigscheme/m4/* ${S}/m4/
-+}
++SRC_URI = "git://github.com/Openwsman/openwsman.git \
+            file://libssl-is-required-if-eventint-supported.patch \
+            file://openwsmand.service"
  
- PACKAGES += "uim-xim uim-utils uim-skk uim-gtk2.0 uim-fep uim-common uim-anthy libuim0 libuim-dev"
+-SRC_URI[md5sum] = "824834a86040b98b03f3fc0f7f62e853"
+-SRC_URI[sha256sum] = "449b4972dc7700918f8f674047f0a1a9c19eeee3f4ce82f47890dddfa56e823f"
++S = "${WORKDIR}/git"
  
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d4f53d4c6cf73b9d43186ce3be6dd0ba"
 -- 
 1.8.4.2
 
