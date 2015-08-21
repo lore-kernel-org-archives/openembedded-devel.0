@@ -1,32 +1,33 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
-	[209.85.213.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 905F475794
+Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
+	[209.85.223.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 984C760557
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 15:42:29 +0000 (UTC)
-Received: by igui7 with SMTP id i7so16813041igu.0
+	Fri, 21 Aug 2015 15:58:36 +0000 (UTC)
+Received: by iods203 with SMTP id s203so86429726iod.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 08:42:29 -0700 (PDT)
+	Fri, 21 Aug 2015 08:58:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=sT4QuburWw/DXHqiCWApgeQPcI3IyWsDjVTI9N+bVds=;
-	b=mWiJA/KBjqlaD0YJHEEGvIE1AZXwV9bQYL0V8ayb/AJOMxRWBykaFtXEMNG9MU4NtD
-	5565TUfNFoXWetv4PclPpcd91KgyYV1Xq3TFl1DOdeQodT2lET0Zlz1gMxn24ATcb4cr
-	BoJWkuPDTsPws3u9oRLETpGrwRvHNtpnvBf78zUgsI6SSTuaBTkpxmfoUUSHw/llbSZh
-	HW591WdBJD8Mz2P6frGdkKH9gpBjrsrNY2JQwo6ikc8xNeyUVkCJ8bOaMpdCBHs4BI8u
-	wEOZRfL4CebWdq5PO180MiQjuJc2e17DR/w1fsbNCQXHbTBnae3tQCRtWS4R9569xRaK
-	qAag==
-X-Received: by 10.50.30.226 with SMTP id v2mr3428478igh.11.1440171749490; Fri,
-	21 Aug 2015 08:42:29 -0700 (PDT)
+	:content-type; bh=rOn5Z59vCdJ4yBbhjcbR8Klhj7Z9M85NaEy3/tvp9XM=;
+	b=cH+f9rgvqjzOMxpTIH+hnUHH9T8Whl1EImXYljYjKYNdwI+9fCQTiear+vspnPoIub
+	rKUvLA9fnEOCfZ1/Bz+Mr3b7ssKKKvQhXEMexBxTMKOUrYWpGvP+7L3ErLgAjsALgHsS
+	ewn3Hc7f8oH1o07R3AYO7GO7U6OFQQJKR7eJBtveJuW+Gr/7ihigar8m+HN46kU6H4w2
+	cjr7QrriIdAk8R2IroW5ionmN085LlIXCp6+iU+zkYdlFeHraRFwGjEECz9xMin1BRjv
+	lt791aZ6db+aRjApkiBs8EStQiZMs+VONMWK1SAs3AA40FEGkGa2Kx5ub5fmT0xTJI5g
+	LnqQ==
+X-Received: by 10.107.35.195 with SMTP id j186mr4645958ioj.49.1440172716063;
+	Fri, 21 Aug 2015 08:58:36 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.107.38.79 with HTTP; Fri, 21 Aug 2015 08:42:00 -0700 (PDT)
-In-Reply-To: <1440175216-21907-1-git-send-email-biannm@cn.fujitsu.com>
-References: <1440175216-21907-1-git-send-email-biannm@cn.fujitsu.com>
+Received: by 10.107.38.79 with HTTP; Fri, 21 Aug 2015 08:58:06 -0700 (PDT)
+In-Reply-To: <1440146235-9630-4-git-send-email-kai.kang@windriver.com>
+References: <1440146235-9630-1-git-send-email-kai.kang@windriver.com>
+	<1440146235-9630-4-git-send-email-kai.kang@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 21 Aug 2015 08:42:00 -0700
-Message-ID: <CAMKF1spvKJaV0_+JngPLnZWesZ2ELipZ3c=UdOY1v-Nu2yLkBg@mail.gmail.com>
+Date: Fri, 21 Aug 2015 08:58:06 -0700
+Message-ID: <CAMKF1spMv6s=vAa24C8q8qc6HPN-OPyjmCOW399ASHK=OLNhMQ@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] sysdig: 0.1.101 -> 0.1.102
+Subject: Re: [meta-oe][PATCH 3/4] ltrace: 7.2 -> 7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,133 +41,141 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2015 15:42:31 -0000
+X-List-Received-Date: Fri, 21 Aug 2015 15:58:39 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Fri, Aug 21, 2015 at 9:40 AM, Bian Naimeng <biannm@cn.fujitsu.com> wrote:
-> upgrade sysdig to 0.1.102, and using GIT source instead of archive.
+On Fri, Aug 21, 2015 at 1:37 AM,  <kai.kang@windriver.com> wrote:
+> From: Kai Kang <kai.kang@windriver.com>
 >
-> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> Upgrade ltrace from 7.2 to 7.3.
+>
+> * update SRC_URI and SRCREV
+> * drop backport patch 0001-In-Linux-backend-initialize-linkmap-struct.patch
+> * fix error when compile with gcc 5.2
+>
+> Signed-off-by: Kai Kang <kai.kang@windriver.com>
 > ---
->  .../01-donot-set-default-value-to-va_list.patch    | 22 --------------
->  meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb  | 34 ----------------------
->  meta-oe/recipes-extended/sysdig/sysdig_git.bb      | 32 ++++++++++++++++++++
->  3 files changed, 32 insertions(+), 56 deletions(-)
->  delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch
->  delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
->  create mode 100644 meta-oe/recipes-extended/sysdig/sysdig_git.bb
+>  ...n-Linux-backend-initialize-linkmap-struct.patch | 31 ------------------
+>  ...-ltrace-fix-gcc-5-logical-not-parentheses.patch | 37 ++++++++++++++++++++++
+>  meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |  8 ++---
+>  3 files changed, 41 insertions(+), 35 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
+>  create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
 >
-> diff --git a/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch b/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch
+> diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
 > deleted file mode 100644
-> index 9cb6378..0000000
-> --- a/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch
+> index 13609c1..0000000
+> --- a/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
 > +++ /dev/null
-
-why is this patch dropped ?
-
-> @@ -1,22 +0,0 @@
-> -fix build error as following.
+> @@ -1,31 +0,0 @@
+> -From efd12cfb10ccd2c612838c0e22069554ce60637c Mon Sep 17 00:00:00 2001
+> -From: Petr Machata <pmachata@redhat.com>
+> -Date: Wed, 2 Jan 2013 16:01:43 +0100
+> -Subject: [PATCH] In Linux backend, initialize linkmap struct
 > -
-> -  sysdig-0.1.101/userspace/libsinsp/ctext.h:376:50: error: could not convert '0' from 'int' to 'va_list {aka __va_list}'
-> -  |    int8_t vprintf(const char*format, va_list ap = 0);
-> -  |                                                   ^
-> -  | make[2]: *** [userspace/libsinsp/CMakeFiles/sinsp.dir/ctext.cpp.o] Error 1
+> -GCC 4.7.2 -m32 -Os gives the following (spurious) warning:
+> -proc.c: In function 'crawl_linkmap':
+> -proc.c:544:25: error: 'rlm.l_addr' may be used uninitialized in this
 > -
+> -Upstream-Status: Backport
+> -Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ----
+> - sysdeps/linux-gnu/proc.c | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
 > -
-> -Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> -diff --git a/sysdeps/linux-gnu/proc.c b/sysdeps/linux-gnu/proc.c
+> -index 6e01d28..d69c985 100644
+> ---- a/sysdeps/linux-gnu/proc.c
+> -+++ b/sysdeps/linux-gnu/proc.c
+> -@@ -484,7 +484,7 @@ crawl_linkmap(struct process *proc, struct lt_r_debug_64 *dbg)
+> -       arch_addr_t addr = (arch_addr_t)(uintptr_t)dbg->r_map;
 > -
-> -diff -Nurp sysdig-0.1.101.orig/userspace/libsinsp/ctext.h sysdig-0.1.101/userspace/libsinsp/ctext.h
-> ---- sysdig-0.1.101.orig/userspace/libsinsp/ctext.h     2015-06-04 02:58:51.000000000 +0800
-> -+++ sysdig-0.1.101/userspace/libsinsp/ctext.h  2015-07-02 09:18:14.154627357 +0800
-> -@@ -373,7 +373,7 @@ class ctext
-> -               // application to this library seamlessly.
-> -               //
-> -               int8_t printf(const char*format, ...);
-> --              int8_t vprintf(const char*format, va_list ap = 0);
-> -+              int8_t vprintf(const char*format, va_list ap);
+> -       while (addr != 0) {
+> --              struct lt_link_map_64 rlm;
+> -+              struct lt_link_map_64 rlm = {};
+> -               if (lm_fetcher(proc)(proc, addr, &rlm) < 0) {
+> -                       debug(2, "Unable to read link map");
+> -                       return;
+> ---
+> -2.3.5
 > -
-> -               //
-> -               // nprintf is identical to the printf above EXCEPT for
-> diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb b/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
-> deleted file mode 100644
-> index 789fd47..0000000
-> --- a/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
-> +++ /dev/null
-> @@ -1,34 +0,0 @@
-> -SUMMARY = "A New System Troubleshooting Tool Built for the Way You Work"
-> -DESCRIPTION = "Sysdig is open source, system-level exploration: capture \
-> -system state and activity from a running Linux instance, then save, \
-> -filter and analyze."
-> -HOMEPAGE = "http://www.sysdig.org/"
-> -LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> -
-> -inherit cmake pkgconfig
-> -
-> -DEPENDS = "luajit zlib ncurses"
-> -RDEPENDS_${PN} = "bash"
-> -
-> -
-> -SRC_URI = "https://github.com/draios/sysdig/archive/${PV}.tar.gz \
-> -           file://01-donot-set-default-value-to-va_list.patch \
-> -          "
-> -
-> -SRC_URI[md5sum] = "5fe96a3a0fd98b2157a40cb29af41afc"
-> -SRC_URI[sha256sum] = "6995e39be565514901b5cb587689ee2efbf8359293e4e597362382cccf0e9db6"
-> -
-> -DIR_ETC="/etc"
-> -EXTRA_OECMAKE = ' -DUSE_BUNDLED_LUAJIT="OFF" \
-> -                  -DUSE_BUNDLED_ZLIB="OFF" \
-> -                  -DBUILD_DRIVER="OFF" \
-> -                  -DUSE_BUNDLED_NCURSES="OFF" \
-> -                  -DDIR_ETC="${DIR_ETC}" \
-> -                '
-> -
-> -FILES_${PN} += " \
-> -    ${DIR_ETC}/* \
-> -    ${datadir}/zsh/* \
-> -    ${prefix}/src/*  \
-> -"
-> diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
+> diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
 > new file mode 100644
-> index 0000000..62aa433
+> index 0000000..ecfba0d
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-> @@ -0,0 +1,32 @@
-> +SUMMARY = "A New System Troubleshooting Tool Built for the Way You Work"
-> +DESCRIPTION = "Sysdig is open source, system-level exploration: capture \
-> +system state and activity from a running Linux instance, then save, \
-> +filter and analyze."
-> +HOMEPAGE = "http://www.sysdig.org/"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> +++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
+> @@ -0,0 +1,37 @@
+> +From 92bf386a18c9b49a9c44612b8ff7277c898de6cc Mon Sep 17 00:00:00 2001
+> +From: Kai Kang <kai.kang@windriver.com>
+> +Date: Fri, 21 Aug 2015 16:07:52 +0800
+> +Subject: [PATCH] ltrace: fix gcc 5 logical not parentheses
 > +
-> +inherit cmake pkgconfig
+> +Upstream-Status: Pending
 > +
-> +DEPENDS = "luajit zlib ncurses"
-> +RDEPENDS_${PN} = "bash"
+> +Build ltrace with gcc 5.2, it fails with:
 > +
-> +SRC_URI = "git://github.com/draios/sysdig.git;branch=master"
-> +SRCREV = "b7394e29ced4f1a991af03c0381a5828abcbab7a"
-> +PV = "0.1.102+git${SRCPV}"
+> +error: logical not is only applied to the left hand side of comparison
+> +[-Werror=logical-not-parentheses]
+> +   if (!need_data(data, offset, SIZE / 8) < 0)  \
+> +                                             ^
 > +
-> +S = "${WORKDIR}/git"
+> +Fix it.
 > +
-> +DIR_ETC="/etc"
-> +EXTRA_OECMAKE = ' -DUSE_BUNDLED_LUAJIT="OFF" \
-> +                  -DUSE_BUNDLED_ZLIB="OFF" \
-> +                  -DBUILD_DRIVER="OFF" \
-> +                  -DUSE_BUNDLED_NCURSES="OFF" \
-> +                  -DDIR_ETC="${DIR_ETC}" \
-> +                '
+> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> +---
+> + ltrace-elf.c | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
 > +
-> +FILES_${PN} += " \
-> +    ${DIR_ETC}/* \
-> +    ${datadir}/zsh/* \
-> +    ${prefix}/src/*  \
-> +"
+> +diff --git a/ltrace-elf.c b/ltrace-elf.c
+> +index c571d2a..fe66f25 100644
+> +--- a/ltrace-elf.c
+> ++++ b/ltrace-elf.c
+> +@@ -218,7 +218,7 @@ need_data(Elf_Data *data, GElf_Xword offset, GElf_Xword size)
+> +       int                                                             \
+> +       NAME(Elf_Data *data, GElf_Xword offset, uint##SIZE##_t *retp)   \
+> +       {                                                               \
+> +-              if (!need_data(data, offset, SIZE / 8) < 0)             \
+> ++              if (need_data(data, offset, SIZE / 8) >= 0)             \
+
+While this might shut up the compiler, the fix seems end up with
+incorrect behavior to me. if you look at the function need_data()
+it returns 0 on success and < 0 on failure and you want to return -1
+when the function fails not when it passes, as this patch now would be
+doing.
+so a simple fix it to test if (need_data(data, offset, SIZE / 8) < 0)
+
+> +                       return -1;                                      \
+> +                                                                       \
+> +               if (data->d_buf == NULL) /* NODATA section */ {         \
+> +--
+> +1.9.1
+> +
+> diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+> index f9f1684..d8d037e 100644
+> --- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+> +++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+> @@ -10,15 +10,15 @@ LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
+>
+>  PE = "1"
+> -PV = "7.2+git${SRCPV}"
+> -SRCREV = "f44b28421979cec88d6d6a778fc27a8cd514f508"
+> +PV = "7.3+git${SRCPV}"
+> +SRCREV = "37ecc41b58be3dbdd79592a76e331b5b371e4f81"
+>
+>  DEPENDS = "elfutils"
+>  RDEPENDS_${PN} = "elfutils"
+> -SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git \
+> +SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=ltrace-0.7 \
+>             file://ltrace-0.7.2-unused-typedef.patch \
+>             file://configure-allow-to-disable-selinux-support.patch \
+> -           file://0001-In-Linux-backend-initialize-linkmap-struct.patch \
+> +           file://0001-ltrace-fix-gcc-5-logical-not-parentheses.patch \
+>            "
+>  S = "${WORKDIR}/git"
+>
 > --
-> 1.8.4.2
+> 1.9.1
 >
 > --
 > _______________________________________________
