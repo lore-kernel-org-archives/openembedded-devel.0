@@ -1,27 +1,24 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FD7E60557
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C80176AC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 08:41:05 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99883678"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Aug 2015 16:44:19 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7L8f0S2029033
+	Fri, 21 Aug 2015 08:41:18 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t7L8fJ6I012984
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 16:41:01 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 21 Aug 2015 16:41:04 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
+	Fri, 21 Aug 2015 01:41:19 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Fri, 21 Aug 2015 01:41:18 -0700
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 22 Aug 2015 00:40:16 +0800
-Message-ID: <1440175216-21907-1-git-send-email-biannm@cn.fujitsu.com>
+Date: Fri, 21 Aug 2015 16:37:11 +0800
+Message-ID: <1440146235-9630-1-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-oe][PATCH] sysdig: 0.1.101 -> 0.1.102
+Subject: [PATCH 0/4] Upgrade packages and fix failure of atftp with gcc 5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,128 +32,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2015 08:41:09 -0000
+X-List-Received-Date: Fri, 21 Aug 2015 08:41:19 -0000
 Content-Type: text/plain
 
-upgrade sysdig to 0.1.102, and using GIT source instead of archive.
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
----
- .../01-donot-set-default-value-to-va_list.patch    | 22 --------------
- meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb  | 34 ----------------------
- meta-oe/recipes-extended/sysdig/sysdig_git.bb      | 32 ++++++++++++++++++++
- 3 files changed, 32 insertions(+), 56 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch
- delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
- create mode 100644 meta-oe/recipes-extended/sysdig/sysdig_git.bb
 
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch b/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch
-deleted file mode 100644
-index 9cb6378..0000000
---- a/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch
-+++ /dev/null
-@@ -1,22 +0,0 @@
--fix build error as following.
--
--  sysdig-0.1.101/userspace/libsinsp/ctext.h:376:50: error: could not convert '0' from 'int' to 'va_list {aka __va_list}'
--  |    int8_t vprintf(const char*format, va_list ap = 0);
--  |                                                   ^
--  | make[2]: *** [userspace/libsinsp/CMakeFiles/sinsp.dir/ctext.cpp.o] Error 1
--
--
--Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
--
--diff -Nurp sysdig-0.1.101.orig/userspace/libsinsp/ctext.h sysdig-0.1.101/userspace/libsinsp/ctext.h
----- sysdig-0.1.101.orig/userspace/libsinsp/ctext.h	2015-06-04 02:58:51.000000000 +0800
--+++ sysdig-0.1.101/userspace/libsinsp/ctext.h	2015-07-02 09:18:14.154627357 +0800
--@@ -373,7 +373,7 @@ class ctext
-- 		// application to this library seamlessly.
-- 		//
-- 		int8_t printf(const char*format, ...);
---		int8_t vprintf(const char*format, va_list ap = 0);
--+		int8_t vprintf(const char*format, va_list ap);
-- 
-- 		//
-- 		// nprintf is identical to the printf above EXCEPT for
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb b/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
-deleted file mode 100644
-index 789fd47..0000000
---- a/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
-+++ /dev/null
-@@ -1,34 +0,0 @@
--SUMMARY = "A New System Troubleshooting Tool Built for the Way You Work"
--DESCRIPTION = "Sysdig is open source, system-level exploration: capture \
--system state and activity from a running Linux instance, then save, \
--filter and analyze."
--HOMEPAGE = "http://www.sysdig.org/"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--
--inherit cmake pkgconfig
--
--DEPENDS = "luajit zlib ncurses"
--RDEPENDS_${PN} = "bash"
--
--
--SRC_URI = "https://github.com/draios/sysdig/archive/${PV}.tar.gz \
--           file://01-donot-set-default-value-to-va_list.patch \
--          "
--
--SRC_URI[md5sum] = "5fe96a3a0fd98b2157a40cb29af41afc"
--SRC_URI[sha256sum] = "6995e39be565514901b5cb587689ee2efbf8359293e4e597362382cccf0e9db6"
--
--DIR_ETC="/etc"
--EXTRA_OECMAKE = ' -DUSE_BUNDLED_LUAJIT="OFF" \
--                  -DUSE_BUNDLED_ZLIB="OFF" \
--                  -DBUILD_DRIVER="OFF" \
--                  -DUSE_BUNDLED_NCURSES="OFF" \
--                  -DDIR_ETC="${DIR_ETC}" \
--                '
--
--FILES_${PN} += " \
--    ${DIR_ETC}/* \
--    ${datadir}/zsh/* \ 
--    ${prefix}/src/*  \
--"
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-new file mode 100644
-index 0000000..62aa433
---- /dev/null
-+++ b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-@@ -0,0 +1,32 @@
-+SUMMARY = "A New System Troubleshooting Tool Built for the Way You Work"
-+DESCRIPTION = "Sysdig is open source, system-level exploration: capture \
-+system state and activity from a running Linux instance, then save, \
-+filter and analyze."
-+HOMEPAGE = "http://www.sysdig.org/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+inherit cmake pkgconfig
-+
-+DEPENDS = "luajit zlib ncurses"
-+RDEPENDS_${PN} = "bash"
-+
-+SRC_URI = "git://github.com/draios/sysdig.git;branch=master"
-+SRCREV = "b7394e29ced4f1a991af03c0381a5828abcbab7a"
-+PV = "0.1.102+git${SRCPV}"
-+
-+S = "${WORKDIR}/git"
-+
-+DIR_ETC="/etc"
-+EXTRA_OECMAKE = ' -DUSE_BUNDLED_LUAJIT="OFF" \
-+                  -DUSE_BUNDLED_ZLIB="OFF" \
-+                  -DBUILD_DRIVER="OFF" \
-+                  -DUSE_BUNDLED_NCURSES="OFF" \
-+                  -DDIR_ETC="${DIR_ETC}" \
-+                '
-+
-+FILES_${PN} += " \
-+    ${DIR_ETC}/* \
-+    ${datadir}/zsh/* \ 
-+    ${prefix}/src/*  \
-+"
+Kai Kang (4):
+  autofs: 5.1.0 -> 5.1.1
+  atftp: build with gcc 5.2
+  ltrace: 7.2 -> 7.3
+  libvpx: 1.3.0 -> 1.4.0
+
+ meta-networking/recipes-daemons/atftp/atftp_git.bb |   2 +
+ ...emd-allow-with-systemd-to-take-a-path-arg.patch |  47 --------
+ .../autofs/autofs-5.1.0/Makefile.rules-cross.patch |  23 ----
+ .../autofs-5.1.0/add-the-needed-stdarg.h.patch     |  24 -----
+ .../autofs-5.0.7-do-not-check-for-modprobe.patch   |  75 -------------
+ .../autofs-5.1.0/autofs-5.0.7-fix-lib-deps.patch   |  28 -----
+ ...7-include-linux-nfs.h-directly-in-rpc_sub.patch |  32 ------
+ .../autofs-5.1.0/autofs-additional-distros.patch   |  12 ---
+ .../autofs/autofs-5.1.0/cross.patch                |  44 --------
+ ...x-the-YACC-rule-to-fix-a-building-failure.patch |  62 -----------
+ .../autofs/autofs-5.1.0/fix_disable_ldap.patch     |  42 --------
+ .../autofs/autofs-5.1.0/force-STRIP-to-emtpy.patch |  25 -----
+ .../autofs-5.1.0/libtirpc-name-clash-backout.patch |  28 -----
+ .../autofs/autofs-5.1.0/libtirpc.patch             |  26 -----
+ .../autofs/autofs-5.1.0/no-bash.patch              |  20 ----
+ .../autofs/autofs-5.1.0/remove-bashism.patch       | 120 ---------------------
+ ...-pkg-config-to-detect-libxml-2.0-and-krb5.patch |  39 -------
+ ...emd-allow-with-systemd-to-take-a-path-arg.patch |  47 ++++++++
+ .../autofs/autofs/Makefile.rules-cross.patch       |  23 ++++
+ .../autofs/autofs/add-the-needed-stdarg.h.patch    |  24 +++++
+ .../autofs-5.0.7-do-not-check-for-modprobe.patch   |  75 +++++++++++++
+ .../autofs/autofs/autofs-5.0.7-fix-lib-deps.patch  |  28 +++++
+ ...7-include-linux-nfs.h-directly-in-rpc_sub.patch |  32 ++++++
+ .../autofs/autofs/autofs-additional-distros.patch  |  12 +++
+ .../recipes-daemons/autofs/autofs/cross.patch      |  44 ++++++++
+ ...x-the-YACC-rule-to-fix-a-building-failure.patch |  62 +++++++++++
+ .../autofs/autofs/fix_disable_ldap.patch           |  42 ++++++++
+ .../autofs/autofs/force-STRIP-to-emtpy.patch       |  25 +++++
+ .../autofs/libtirpc-name-clash-backout.patch       |  28 +++++
+ .../recipes-daemons/autofs/autofs/libtirpc.patch   |  26 +++++
+ .../recipes-daemons/autofs/autofs/no-bash.patch    |  20 ++++
+ .../autofs/autofs/remove-bashism.patch             | 120 +++++++++++++++++++++
+ ...-pkg-config-to-detect-libxml-2.0-and-krb5.patch |  39 +++++++
+ .../recipes-daemons/autofs/autofs_5.1.0.bb         |  72 -------------
+ .../recipes-daemons/autofs/autofs_5.1.1.bb         |  72 +++++++++++++
+ ...n-Linux-backend-initialize-linkmap-struct.patch |  31 ------
+ ...-ltrace-fix-gcc-5-logical-not-parentheses.patch |  37 +++++++
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |   8 +-
+ .../0001-configure.sh-quote-local-variables.patch  |  40 -------
+ .../libvpx-configure-support-blank-prefix.patch    |  42 ++++----
+ meta-oe/recipes-multimedia/webm/libvpx_1.3.0.bb    |  55 ----------
+ meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb    |  53 +++++++++
+ 42 files changed, 836 insertions(+), 870 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/Makefile.rules-cross.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/add-the-needed-stdarg.h.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-do-not-check-for-modprobe.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-fix-lib-deps.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-additional-distros.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/cross.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/fix-the-YACC-rule-to-fix-a-building-failure.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/fix_disable_ldap.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/force-STRIP-to-emtpy.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/libtirpc-name-clash-backout.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/libtirpc.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/no-bash.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/remove-bashism.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.1.0/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/Makefile.rules-cross.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/add-the-needed-stdarg.h.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-do-not-check-for-modprobe.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-fix-lib-deps.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/autofs-additional-distros.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/cross.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/fix-the-YACC-rule-to-fix-a-building-failure.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/fix_disable_ldap.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/force-STRIP-to-emtpy.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/libtirpc-name-clash-backout.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/libtirpc.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/no-bash.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/remove-bashism.patch
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs_5.1.1.bb
+ delete mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
+ create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
+ delete mode 100644 meta-oe/recipes-multimedia/webm/libvpx/0001-configure.sh-quote-local-variables.patch
+ delete mode 100644 meta-oe/recipes-multimedia/webm/libvpx_1.3.0.bb
+ create mode 100644 meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb
+
 -- 
-1.8.4.2
+1.9.1
 
 
