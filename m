@@ -1,33 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
-	[209.85.223.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 984C760557
+Return-Path: <dean@ripperd.com>
+X-Greylist: delayed 491 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 21 Aug 2015 16:04:07 UTC
+Received: from resqmta-ch2-09v.sys.comcast.net
+	(resqmta-ch2-09v.sys.comcast.net [69.252.207.41])
+	by mail.openembedded.org (Postfix) with ESMTP id C025E60557
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 15:58:36 +0000 (UTC)
-Received: by iods203 with SMTP id s203so86429726iod.0
+	Fri, 21 Aug 2015 16:04:07 +0000 (UTC)
+Received: from resomta-ch2-12v.sys.comcast.net ([69.252.207.108])
+	by resqmta-ch2-09v.sys.comcast.net with comcast
+	id 7TuP1r0012LrikM01Tvxpc; Fri, 21 Aug 2015 15:55:57 +0000
+Received: from mail.ripperd.com ([73.37.153.32])
+	by resomta-ch2-12v.sys.comcast.net with comcast
+	id 7Tvw1r00H0iBykR01TvwP7; Fri, 21 Aug 2015 15:55:57 +0000
+Received: by mail.ripperd.com (Postfix, from userid 65534)
+	id 5787C663BA; Fri, 21 Aug 2015 10:55:56 -0500 (CDT)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on apollo.ripperd.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED
+	autolearn=disabled version=3.4.0
+Received: from [10.0.1.6] (unknown [10.0.1.6])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.ripperd.com (Postfix) with ESMTPSA id 5D6C1663B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 08:58:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=rOn5Z59vCdJ4yBbhjcbR8Klhj7Z9M85NaEy3/tvp9XM=;
-	b=cH+f9rgvqjzOMxpTIH+hnUHH9T8Whl1EImXYljYjKYNdwI+9fCQTiear+vspnPoIub
-	rKUvLA9fnEOCfZ1/Bz+Mr3b7ssKKKvQhXEMexBxTMKOUrYWpGvP+7L3ErLgAjsALgHsS
-	ewn3Hc7f8oH1o07R3AYO7GO7U6OFQQJKR7eJBtveJuW+Gr/7ihigar8m+HN46kU6H4w2
-	cjr7QrriIdAk8R2IroW5ionmN085LlIXCp6+iU+zkYdlFeHraRFwGjEECz9xMin1BRjv
-	lt791aZ6db+aRjApkiBs8EStQiZMs+VONMWK1SAs3AA40FEGkGa2Kx5ub5fmT0xTJI5g
-	LnqQ==
-X-Received: by 10.107.35.195 with SMTP id j186mr4645958ioj.49.1440172716063;
-	Fri, 21 Aug 2015 08:58:36 -0700 (PDT)
+	Fri, 21 Aug 2015 10:55:55 -0500 (CDT)
+To: openembedded-devel@lists.openembedded.org
+From: Dean <dean@ripperd.com>
+Message-ID: <55D74A0B.9000004@ripperd.com>
+Date: Fri, 21 Aug 2015 10:55:55 -0500
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-Received: by 10.107.38.79 with HTTP; Fri, 21 Aug 2015 08:58:06 -0700 (PDT)
-In-Reply-To: <1440146235-9630-4-git-send-email-kai.kang@windriver.com>
-References: <1440146235-9630-1-git-send-email-kai.kang@windriver.com>
-	<1440146235-9630-4-git-send-email-kai.kang@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 21 Aug 2015 08:58:06 -0700
-Message-ID: <CAMKF1spMv6s=vAa24C8q8qc6HPN-OPyjmCOW399ASHK=OLNhMQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/4] ltrace: 7.2 -> 7.3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=comcast.net;
+	s=q20140121; t=1440172557;
+	bh=kTi9KNoENP5WefRRbVZ+kNDTJMH4yvbWCOvSe5+93OU=;
+	h=Received:Received:Received:Received:To:From:Subject:Message-ID:
+	Date:MIME-Version:Content-Type;
+	b=h5adpAGOuuvSU3IWNrcwGbD4n+9VZbKHfCPRQrmYWaLj+bL8oiS/I5Epit9qpyZga
+	vazPbFij5qy8wEQOuyC4dgbNqFuvDT8m3/3IMfGbjHiJMglgZ70qckKalCItv9gawd
+	PsjHE9TwIvW8+A+0sqtCV8LW3W8NrH4T43lKbeBIZU+6lIwxlI0IZnEToozcbbJXqm
+	XO/vu4nPZ4WorRbg+KpOR1Ej79y38d6NQIyed1837eaRxEKcOlQaDrO/qZeojEpj4V
+	aOhqUYOsAORWw4XUGuoXHgLrty+nkB2ssP+lfcpchR7SbavlrR4c3MSZpn6MgdVWzu
+	A5AE8y3bj1tNg==
+Subject: Openjdk 8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,145 +56,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2015 15:58:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 21 Aug 2015 16:04:08 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Aug 21, 2015 at 1:37 AM,  <kai.kang@windriver.com> wrote:
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Upgrade ltrace from 7.2 to 7.3.
->
-> * update SRC_URI and SRCREV
-> * drop backport patch 0001-In-Linux-backend-initialize-linkmap-struct.patch
-> * fix error when compile with gcc 5.2
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  ...n-Linux-backend-initialize-linkmap-struct.patch | 31 ------------------
->  ...-ltrace-fix-gcc-5-logical-not-parentheses.patch | 37 ++++++++++++++++++++++
->  meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |  8 ++---
->  3 files changed, 41 insertions(+), 35 deletions(-)
->  delete mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
->  create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
->
-> diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
-> deleted file mode 100644
-> index 13609c1..0000000
-> --- a/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
-> +++ /dev/null
-> @@ -1,31 +0,0 @@
-> -From efd12cfb10ccd2c612838c0e22069554ce60637c Mon Sep 17 00:00:00 2001
-> -From: Petr Machata <pmachata@redhat.com>
-> -Date: Wed, 2 Jan 2013 16:01:43 +0100
-> -Subject: [PATCH] In Linux backend, initialize linkmap struct
-> -
-> -GCC 4.7.2 -m32 -Os gives the following (spurious) warning:
-> -proc.c: In function 'crawl_linkmap':
-> -proc.c:544:25: error: 'rlm.l_addr' may be used uninitialized in this
-> -
-> -Upstream-Status: Backport
-> -Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ----
-> - sysdeps/linux-gnu/proc.c | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/sysdeps/linux-gnu/proc.c b/sysdeps/linux-gnu/proc.c
-> -index 6e01d28..d69c985 100644
-> ---- a/sysdeps/linux-gnu/proc.c
-> -+++ b/sysdeps/linux-gnu/proc.c
-> -@@ -484,7 +484,7 @@ crawl_linkmap(struct process *proc, struct lt_r_debug_64 *dbg)
-> -       arch_addr_t addr = (arch_addr_t)(uintptr_t)dbg->r_map;
-> -
-> -       while (addr != 0) {
-> --              struct lt_link_map_64 rlm;
-> -+              struct lt_link_map_64 rlm = {};
-> -               if (lm_fetcher(proc)(proc, addr, &rlm) < 0) {
-> -                       debug(2, "Unable to read link map");
-> -                       return;
-> ---
-> -2.3.5
-> -
-> diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
-> new file mode 100644
-> index 0000000..ecfba0d
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
-> @@ -0,0 +1,37 @@
-> +From 92bf386a18c9b49a9c44612b8ff7277c898de6cc Mon Sep 17 00:00:00 2001
-> +From: Kai Kang <kai.kang@windriver.com>
-> +Date: Fri, 21 Aug 2015 16:07:52 +0800
-> +Subject: [PATCH] ltrace: fix gcc 5 logical not parentheses
-> +
-> +Upstream-Status: Pending
-> +
-> +Build ltrace with gcc 5.2, it fails with:
-> +
-> +error: logical not is only applied to the left hand side of comparison
-> +[-Werror=logical-not-parentheses]
-> +   if (!need_data(data, offset, SIZE / 8) < 0)  \
-> +                                             ^
-> +
-> +Fix it.
-> +
-> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> +---
-> + ltrace-elf.c | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/ltrace-elf.c b/ltrace-elf.c
-> +index c571d2a..fe66f25 100644
-> +--- a/ltrace-elf.c
-> ++++ b/ltrace-elf.c
-> +@@ -218,7 +218,7 @@ need_data(Elf_Data *data, GElf_Xword offset, GElf_Xword size)
-> +       int                                                             \
-> +       NAME(Elf_Data *data, GElf_Xword offset, uint##SIZE##_t *retp)   \
-> +       {                                                               \
-> +-              if (!need_data(data, offset, SIZE / 8) < 0)             \
-> ++              if (need_data(data, offset, SIZE / 8) >= 0)             \
+Does anyone have a recipe for OpenJDK 8 JRE yet? I don't see any out 
+there other than the one in the meta-aarch64 linaro layer which I don't 
+think will probably work for building to arm or x86_64. I am currently 
+using OpenJDK 7 from meta-java but plan to use Java 8 features soon.
 
-While this might shut up the compiler, the fix seems end up with
-incorrect behavior to me. if you look at the function need_data()
-it returns 0 on success and < 0 on failure and you want to return -1
-when the function fails not when it passes, as this patch now would be
-doing.
-so a simple fix it to test if (need_data(data, offset, SIZE / 8) < 0)
 
-> +                       return -1;                                      \
-> +                                                                       \
-> +               if (data->d_buf == NULL) /* NODATA section */ {         \
-> +--
-> +1.9.1
-> +
-> diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-> index f9f1684..d8d037e 100644
-> --- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-> +++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-> @@ -10,15 +10,15 @@ LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
->
->  PE = "1"
-> -PV = "7.2+git${SRCPV}"
-> -SRCREV = "f44b28421979cec88d6d6a778fc27a8cd514f508"
-> +PV = "7.3+git${SRCPV}"
-> +SRCREV = "37ecc41b58be3dbdd79592a76e331b5b371e4f81"
->
->  DEPENDS = "elfutils"
->  RDEPENDS_${PN} = "elfutils"
-> -SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git \
-> +SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=ltrace-0.7 \
->             file://ltrace-0.7.2-unused-typedef.patch \
->             file://configure-allow-to-disable-selinux-support.patch \
-> -           file://0001-In-Linux-backend-initialize-linkmap-struct.patch \
-> +           file://0001-ltrace-fix-gcc-5-logical-not-parentheses.patch \
->            "
->  S = "${WORKDIR}/git"
->
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Thanks,
+Dean
 
