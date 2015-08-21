@@ -1,37 +1,36 @@
 Return-Path: <jkrishnanjanappa@mvista.com>
-Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id E527660557
+Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
+	[209.85.220.53])
+	by mail.openembedded.org (Postfix) with ESMTP id D6D99763F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 16:24:43 +0000 (UTC)
-Received: by iodt126 with SMTP id t126so87427651iod.2
+	Fri, 21 Aug 2015 17:08:37 +0000 (UTC)
+Received: by padfo6 with SMTP id fo6so11087130pad.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 09:24:43 -0700 (PDT)
+	Fri, 21 Aug 2015 10:08:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=DDM3+9Ilv/cdD7rxCeg2PL19rZPehoUrXih3b4zNq0I=;
-	b=XNeUUd07T18XG2A8FAHU6OstjoSWiTNmQVuwG2qojxMFo7LvXDpzL0f7cgEQdG6Weq
-	bhY0wejdvMHNYlj/tXy23CDZGDewfYgOUp7CDpUyY0IfJV+M8p7so6h+rg8IvLe2imwD
-	xp70NEqlOFf1DeYhPowX5E2EozzM6BUCeHbbh/aDxTZ3BWWk1zxNXdDI+GwP2x0lWMK1
-	etdS5rc73wMIsTVwC04ZoWNWNS9Lp15Xxy2Y8aC571wXnQ8vufPCFQcuqGinigjbutaU
-	ui7/Zwu7dxHysHYzUZSKto77lBfOHOrDw7FD2QoxzPLsrj0C5zeAmE+WvLufqemhKNMM
-	++SA==
-X-Gm-Message-State: ALoCoQkMzdjzJK+/vzWr/EEIQsOZcAR4fTckP1jagwiFXDBzWsWxe3Zt5Dx3TgFIw5G2MPTdZw3w
-MIME-Version: 1.0
-X-Received: by 10.107.150.145 with SMTP id y139mr7400244iod.128.1440174282899; 
-	Fri, 21 Aug 2015 09:24:42 -0700 (PDT)
-Received: by 10.79.13.8 with HTTP; Fri, 21 Aug 2015 09:24:42 -0700 (PDT)
-In-Reply-To: <20150820164827.GL2446@jama>
-References: <1440088125-1120-1-git-send-email-jkrishnanjanappa@mvista.com>
-	<20150820164827.GL2446@jama>
-Date: Fri, 21 Aug 2015 21:54:42 +0530
-Message-ID: <CAD3vsf4xaZHq3n6ZPvNUnNUmDvcB8tNNByMsN+M7gyNx3F88AQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=jKZQ+qwuJL07rwCeOwhMnsowu86dO4Jc2mr5GWDWSPA=;
+	b=iaipiOU9hpXpQfQV2hJPfyCk0YvcNOqZMrKd6rXAAz7c34amAm4L7wuX493z1B9WDe
+	a91TE219XoggOruZRuGsZvinOp4m8s9NzJMHLmhdVMI0wyuVr/rnszhM9CvHZimoXe06
+	3d8aI7z7WD0vweXEDZ1Cwn5/cIrOePqF32knWChsFFzNTtjf3zsi52vdFb9aQqaNz8lS
+	yET/zeulSCNlgQBNy67uZDGd8QnAnkxvp1M0zWiqoprlFbad1CbsUTxAimb8j4hVYcSr
+	gjEgt/cGZwNifBUf4i4PFCJCYhhuq8dJV3clZBJPS2LaSbz10j6k9oxeQYu08QhKttCs
+	uGPw==
+X-Gm-Message-State: ALoCoQkNA+nPmpbIC3AVWOqymt/e1XVblo8T83DvR1jd/3cZKjB8aXSrc58mI//TztWpaE4Njmi+
+X-Received: by 10.68.117.11 with SMTP id ka11mr19269872pbb.77.1440176917385;
+	Fri, 21 Aug 2015 10:08:37 -0700 (PDT)
+Received: from ubuntu64.mvista.com ([111.93.218.67])
+	by smtp.gmail.com with ESMTPSA id
+	ft7sm8436144pdb.58.2015.08.21.10.08.35
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 21 Aug 2015 10:08:36 -0700 (PDT)
 From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-filesystems][PATCH] xfsdump: add new recipe
+Date: Fri, 21 Aug 2015 22:38:26 +0530
+Message-Id: <1440176907-30839-1-git-send-email-jkrishnanjanappa@mvista.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-filesystems][PATCH v2] dmapi: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,18 +44,317 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2015 16:24:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 21 Aug 2015 17:08:38 -0000
 
->
->
-> Why don't you use autotools-brokensep?
->
-> The same does apply to dmapi recipe.
->
-> Ok, inherit autools and B = "${S}" can be replaced by
-inherit autotools-brokensep. Will send patch v2.
+The Data Management API (DMAPI/XDSM) allows implementation
+of hierarchical storage management software with no kernel
+modifications as well as high-performance dump programs
+without requiring "raw" access to the disk and knowledge
+of filesystem structures.This interface is implemented by
+the libdm library.
 
-Thanks,
-Jagadeesh
+Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+---
+ .../recipes-utils/dmapi/dmapi_2.2.12.bb            |  31 ++++
+ .../files/dmapi_aarch64_configure_support.patch    |  37 ++++
+ .../dmapi/files/remove-install-as-user.patch       | 205 +++++++++++++++++++++
+ 3 files changed, 273 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/dmapi/dmapi_2.2.12.bb
+ create mode 100644 meta-filesystems/recipes-utils/dmapi/files/dmapi_aarch64_configure_support.patch
+ create mode 100644 meta-filesystems/recipes-utils/dmapi/files/remove-install-as-user.patch
+
+diff --git a/meta-filesystems/recipes-utils/dmapi/dmapi_2.2.12.bb b/meta-filesystems/recipes-utils/dmapi/dmapi_2.2.12.bb
+new file mode 100644
+index 0000000..4ff95f9
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/dmapi/dmapi_2.2.12.bb
+@@ -0,0 +1,31 @@
++SUMMARY = "Library functions to get attribute bits"
++DESCRIPTION = "The Data Management API (DMAPI/XDSM) allows implementation \
++               of hierarchical storage management software with no kernel \
++               modifications as well as high-performance dump programs \
++               without requiring "raw" access to the disk and knowledge \
++               of filesystem structures.This interface is implemented by \
++               the libdm library."
++
++HOMEPAGE = "http://oss.sgi.com/projects/xfs"
++SECTION = "base"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://doc/COPYING;md5=1678edfe8de9be9564d23761ae2fa794"
++DEPENDS = "xfsprogs"
++
++SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/dmapi-${PV}.tar.gz \
++	   file://remove-install-as-user.patch \
++           file://dmapi_aarch64_configure_support.patch \
++          "
++SRC_URI[md5sum] = "cd825d4e141c16011367e0a0dd98c9c5"
++SRC_URI[sha256sum] = "b18e34f47374f6adf7c164993c26df36986a009b86aa004ef9444102653aea69"
++
++inherit autotools-brokensep
++
++PARALLEL_MAKE = ""
++EXTRA_OEMAKE += "LIBTOOL="${HOST_SYS}-libtool --tag=CC" V=1"
++
++do_install () {
++    export DIST_ROOT=${D}
++    install -d ${D}${libdir}
++    oe_runmake install install-dev PKG_DEVLIB_DIR=${libdir}
++}
+diff --git a/meta-filesystems/recipes-utils/dmapi/files/dmapi_aarch64_configure_support.patch b/meta-filesystems/recipes-utils/dmapi/files/dmapi_aarch64_configure_support.patch
+new file mode 100644
+index 0000000..98753b7
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/dmapi/files/dmapi_aarch64_configure_support.patch
+@@ -0,0 +1,37 @@
++Add config support to cross compile dmapi for 
++aarch64 architecture
++
++Upstream-Status: Pending
++
++Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
++
++--- dmapi-2.2.12_org/config.sub	2012-12-12 23:03:05.000000000 +0530
+++++ dmapi-2.2.12/config.sub	2014-03-24 16:49:56.771993523 +0530
++@@ -246,6 +246,7 @@ case $basic_machine in
++ 	| alpha64 | alpha64ev[4-8] | alpha64ev56 | alpha64ev6[78] | alpha64pca5[67] \
++ 	| am33_2.0 \
++ 	| arc | arm | arm[bl]e | arme[lb] | armv[2345] | armv[345][lb] | avr | avr32 \
+++	| aarch64 | aarch64be \
++ 	| bfin \
++ 	| c4x | clipper \
++ 	| d10v | d30v | dlx | dsp16xx \
++@@ -326,6 +327,7 @@ case $basic_machine in
++ 	| alpha64-* | alpha64ev[4-8]-* | alpha64ev56-* | alpha64ev6[78]-* \
++ 	| alphapca5[67]-* | alpha64pca5[67]-* | arc-* \
++ 	| arm-*  | armbe-* | armle-* | armeb-* | armv*-* \
+++	| aarch64-* | aarch64be-* \
++ 	| avr-* | avr32-* \
++ 	| bfin-* | bs2000-* \
++ 	| c[123]* | c30-* | [cjt]90-* | c4x-* | c54x-* | c55x-* | c6x-* \
++--- dmapi-2.2.12_org/config.guess	2012-12-12 23:03:05.000000000 +0530
+++++ dmapi-2.2.12/config.guess	2014-03-24 16:49:56.771993523 +0530
++@@ -864,6 +864,9 @@ EOF
++ 	    echo ${UNAME_MACHINE}-unknown-linux-gnueabi
++ 	fi
++ 	exit ;;
+++    aarch64*:Linux:*:*)
+++	echo ${UNAME_MACHINE}-unknown-linux-gnu
+++	exit;;
++     avr32*:Linux:*:*)
++ 	echo ${UNAME_MACHINE}-unknown-linux-gnu
++ 	exit ;;
+diff --git a/meta-filesystems/recipes-utils/dmapi/files/remove-install-as-user.patch b/meta-filesystems/recipes-utils/dmapi/files/remove-install-as-user.patch
+new file mode 100644
+index 0000000..e761db3
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/dmapi/files/remove-install-as-user.patch
+@@ -0,0 +1,205 @@
++remove install as user
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ include/buildmacros |  2 +-
++ include/install-sh  | 95 ++++++++---------------------------------------------
++ 2 files changed, 14 insertions(+), 83 deletions(-)
++
++diff --git a/include/buildmacros b/include/buildmacros
++index 7a01880..0840d55 100644
++--- a/include/buildmacros
+++++ b/include/buildmacros
++@@ -30,7 +30,7 @@ OBJECTS = $(ASFILES:.s=.o) \
++ 	  $(LFILES:.l=.o) \
++ 	  $(YFILES:%.y=%.tab.o)
++ 
++-INSTALL	= $(TOPDIR)/install-sh -o $(PKG_USER) -g $(PKG_GROUP)
+++INSTALL	= $(TOPDIR)/install-sh
++ 
++ IMAGES_DIR = $(TOPDIR)/all-images
++ DIST_DIR = $(TOPDIR)/dist
++diff --git a/include/install-sh b/include/install-sh
++index c952a71..b9d66f7 100755
++--- a/include/install-sh
+++++ b/include/install-sh
++@@ -24,11 +24,11 @@
++ #       set           set      |    yes        yes
++ #
++ _usage() {
++-    echo "Usage: $prog [-o owner] [-g group] [-m mode] -d directory"
++-    echo "or     $prog [-D] [-o owner] [-g group] [-m mode] file directory/file"
++-    echo "or     $prog [-o owner] [-g group] [-m mode] file [file ...] directory"
+++    echo "Usage: $prog [-m mode] -d directory"
+++    echo "or     $prog [-m mode] file directory/file"
+++    echo "or     $prog [-m mode] file [file ...] directory"
++     echo "or     $prog -S file target  (creates \"target\" symlink)"
++-    echo "or     $prog -T lt_arg [-o owner] [-g group] [-m mode] libtool.lai directory"
+++    echo "or     $prog -T lt_arg [-m mode] libtool.lai directory"
++     echo ""
++     echo "The \$DIST_MANIFEST and \$DIST_ROOT environment variables affect the"
++     echo "behaviour of this command - see comments in the script."
++@@ -38,32 +38,6 @@ _usage() {
++     exit 1
++ }
++ 
++-_chown ()
++-{
++-    _st=255
++-    if [ $# -eq 3 ] ; then
++-	chown $1:$2 $3
++-	_st=$?
++-	if [ $_st -ne 0 ] ; then
++-	    if [ $REAL_UID != '0' ] ; then
++-		if [ ! -f $DIST_ROOT/.chown.quiet ] ; then
++-		    echo '==============================================='
++-		    echo Ownership of files under ${DIST_ROOT:-/}
++-		    echo cannot be changed
++-		    echo '==============================================='
++-		    if [ -n "$DIST_ROOT" ] ; then
++-			touch $DIST_ROOT/.chown.quiet
++-		    fi
++-		fi
++-	       _st=0
++-	    fi     
++-	fi
++-    fi
++-
++-    return $_st
++-}
++-
++-
++ _manifest ()
++ { 
++     echo $* | sed -e 's/\/\//\//g' >>${DIST_MANIFEST:-/dev/null}
++@@ -77,9 +51,6 @@ Sflag=false
++ Tflag=false
++ DIRMODE=755
++ FILEMODE=644
++-OWNER=`id -u`
++-GROUP=`id -g`
++-REAL_UID=$OWNER
++ 
++ # default is to install and don't append manifest
++ INSTALL=true
++@@ -94,24 +65,16 @@ MANIFEST=:
++ 
++ if $INSTALL
++ then
++-    CP=cp; LN=ln; MKDIR=mkdir; CHMOD=chmod; CHOWN=_chown
+++    CP=cp; LN=ln; MKDIR=mkdir; CHMOD=chmod;
++ else
++-    CP=true; LN=true; MKDIR=true; CHMOD=true; CHOWN=true
+++    CP=true; LN=true; MKDIR=true; CHMOD=true;
++ fi
++ 
++-[ -n "$DIST_ROOT" -a $REAL_UID -ne 0 ] && CHOWN=true
++-
++-while getopts "Dcm:d:S:o:g:T:" c $*
+++while getopts "Dcm:d:S:T:" c $*
++ do
++    case $c in
++    c)
++ 	;;
++-   g)
++-	GROUP=$OPTARG
++-	;;
++-   o)
++-	OWNER=$OPTARG
++-	;;
++    m)
++ 	DIRMODE=`expr $OPTARG`
++ 	FILEMODE=$DIRMODE
++@@ -146,18 +109,7 @@ then
++     # first usage
++     #
++     $MKDIR -p $dir 
++-    status=$?
++-    if [ $status -eq 0 ]
++-    then
++-	$CHMOD $DIRMODE $dir
++-	status=$?
++-    fi
++-    if [ $status -eq 0 ]
++-    then
++-	$CHOWN $OWNER $GROUP $dir
++-	status=$?
++-    fi
++-    $MANIFEST d $DIRMODE $OWNER $GROUP ${dir#$DIST_ROOT}
+++    $MANIFEST d $DIRMODE ${dir#$DIST_ROOT}
++ elif $Sflag
++ then
++     #
++@@ -203,7 +155,7 @@ then
++ 			install_name=$target/$solib
++ 			$CP $solib $install_name
++ 			status=$?
++-			$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$solib ${install_name#$DIST_ROOT}
+++			$MANIFEST f $FILEMODE $HERE/$solib ${install_name#$DIST_ROOT}
++ 			break
++ 		fi
++ 	done
++@@ -254,7 +206,7 @@ then
++ 	install_name=$target/$old_library
++ 	$CP $old_library $install_name
++ 	status=$?
++-	$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$old_library ${install_name#$DIST_ROOT}
+++	$MANIFEST f $FILEMODE $HERE/$old_library ${install_name#$DIST_ROOT}
++ 	;;
++     *)
++ 	echo "$prog: -T $lt_install invalid"
++@@ -267,7 +219,6 @@ then
++ 	if [ $status -eq 0 ]
++ 	then
++ 		$CHMOD $FILEMODE $install_name
++-		$CHOWN $OWNER $GROUP $install_name
++ 	fi
++ 	;;
++     esac
++@@ -292,23 +243,10 @@ else
++ 	then 
++ 	    if [ -f $dir/$f ]
++ 	    then
++-		$CHMOD $FILEMODE $dir/$f
++-		status=$?
++-		if [ $status -eq 0 ]
++-		then
++-		    $CHOWN $OWNER $GROUP $dir/$f
++-		    status=$?
++-		fi
++-		$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$f ${dir#$DIST_ROOT}/$f
+++		$MANIFEST f $FILEMODE $HERE/$f ${dir#$DIST_ROOT}/$f
++ 	    else
++ 		$CHMOD $FILEMODE $dir
++-		status=$?
++-		if [ $status -eq 0 ]
++-		then
++-		    $CHOWN $OWNER $GROUP $dir
++-		    status=$?
++-		fi
++-		$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$dir ${dir#$DIST_ROOT}
+++		$MANIFEST f $FILEMODE $HERE/$dir ${dir#$DIST_ROOT}
++ 	    fi
++ 	fi
++     else
++@@ -334,14 +272,7 @@ else
++ 	    status=$?
++ 	    if [ $status -eq 0 ]
++ 	    then
++-		$CHMOD $FILEMODE $dir/$f
++-		status=$?
++-		if [ $status -eq 0 ]
++-		then
++-		    $CHOWN $OWNER $GROUP $dir/$f
++-		    status=$?
++-		fi
++-		$MANIFEST f $FILEMODE $OWNER $GROUP $HERE/$f ${dir#$DIST_ROOT}/$f
+++		$MANIFEST f $FILEMODE $HERE/$f ${dir#$DIST_ROOT}/$f
++ 	    fi
++ 	    [ $status -ne 0 ] && break
++ 	done
++-- 
++1.8.1.2
++
+-- 
+1.9.1
+
 
