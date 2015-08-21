@@ -1,27 +1,34 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CCB6060557
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CA6960557
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 08:23:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t7L8NYTQ011289
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 21 Aug 2015 01:23:34 -0700 (PDT)
-Received: from [128.224.163.137] (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.235.1;
-	Fri, 21 Aug 2015 01:23:34 -0700
-Message-ID: <55D6E003.7040201@windriver.com>
-Date: Fri, 21 Aug 2015 16:23:31 +0800
-From: Yi Zhao <yi.zhao@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, "Lei, Maohui"
-	<leimaohui@cn.fujitsu.com>
+	Fri, 21 Aug 2015 08:34:52 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99883430"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 21 Aug 2015 16:38:04 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7L8Yj1b028695;
+	Fri, 21 Aug 2015 16:34:45 +0800
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0181.006; Fri, 21 Aug 2015 16:34:49 +0800
+From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
+To: Yi Zhao <yi.zhao@windriver.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe]  [meta-oe][PATCH] uim: 1.3.1->1.8.6
+Thread-Index: AQHQ2+q0RjcqK5YDeECcMjxBtylWNp4WIEAQ
+Date: Fri, 21 Aug 2015 08:34:48 +0000
+Message-ID: <1B56A49860EB2D45ADE3731B15C959FDA8E43D2C@G08CNEXMBPEKD01.g08.fujitsu.local>
 References: <1440144060-46643-1-git-send-email-leimaohui@cn.fujitsu.com>
-In-Reply-To: <1440144060-46643-1-git-send-email-leimaohui@cn.fujitsu.com>
-X-Originating-IP: [128.224.163.137]
+	<55D6E003.7040201@windriver.com>
+In-Reply-To: <55D6E003.7040201@windriver.com>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.26]
+MIME-Version: 1.0
 Subject: Re: [meta-oe][PATCH] uim: 1.3.1->1.8.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -36,183 +43,154 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2015 08:23:52 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 21 Aug 2015 08:34:58 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi
-
-在 2015年08月21日 16:01, Lei Maohui 写道:
-> - delte 0001-fix-bug-about-stdlib.patch that not be needed.
-> - modified license
->
-> Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
-> ---
->   .../uim/uim/0001-fix-bug-about-stdlib.patch        | 40 ----------------------
->   .../uim/uim/0001-fix-bug-for-cross-compile.patch   | 38 ++++++++++----------
->   .../uim/{uim_1.3.1.bb => uim_1.8.6.bb}             | 19 ++++++----
->   3 files changed, 32 insertions(+), 65 deletions(-)
->   delete mode 100644 meta-oe/recipes-support/uim/uim/0001-fix-bug-about-stdlib.patch
->   rename meta-oe/recipes-support/uim/{uim_1.3.1.bb => uim_1.8.6.bb} (89%)
->
-> diff --git a/meta-oe/recipes-support/uim/uim/0001-fix-bug-about-stdlib.patch b/meta-oe/recipes-support/uim/uim/0001-fix-bug-about-stdlib.patch
-> deleted file mode 100644
-> index 9e63683..0000000
-> --- a/meta-oe/recipes-support/uim/uim/0001-fix-bug-about-stdlib.patch
-> +++ /dev/null
-> @@ -1,40 +0,0 @@
-> -From e0e3f82bd2918fdcc722918c108bc33647a4805f Mon Sep 17 00:00:00 2001
-> -From: Leimaohui <leimaohui@cn.fujitsu.com>
-> -Date: Fri, 25 Oct 2013 18:31:22 +0900
-> -Subject: [PATCH] fix bug about stdlib
-> -
-> -Signed-off-by: leimaohui <leimaohui@cn.fujitsu.com>
-> ----
-> - xim/locale.cpp    |    3 ++-
-> - xim/ximserver.cpp |    1 +
-> - 2 files changed, 3 insertions(+), 1 deletions(-)
-> -
-> -diff --git a/xim/locale.cpp b/xim/locale.cpp
-> -index 380e945..edfaf03 100644
-> ---- a/xim/locale.cpp
-> -+++ b/xim/locale.cpp
-> -@@ -35,7 +35,8 @@
-> - #ifdef HAVE_CONFIG_H
-> - # include <config.h>
-> - #endif
-> --
-> -+#include <string.h>
-> -+#include <stdlib.h>
-> - #include <stdio.h>
-> - #include <locale.h>
-> - #include <iconv.h>
-> -diff --git a/xim/ximserver.cpp b/xim/ximserver.cpp
-> -index 245c5f8..cde9918 100644
-> ---- a/xim/ximserver.cpp
-> -+++ b/xim/ximserver.cpp
-> -@@ -34,6 +34,7 @@
-> - # include <config.h>
-> - #endif
-> -
-> -+#include <stdlib.h>
-> - #include <stdio.h>
-> - #include <ctype.h>
-> - #include <locale.h>
-> ---
-> -1.7.1
-> -
-> diff --git a/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch b/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch
-> index 61392c9..df82b07 100644
-> --- a/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch
-> +++ b/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch
-> @@ -1,28 +1,28 @@
-> -From 2e87c39ae3a00b8231ee21a54c47361c1bf502f7 Mon Sep 17 00:00:00 2001
-> -From: Leimaohui <leimaohui@cn.fujitsu.com>
-> -Date: Fri, 25 Oct 2013 18:23:12 +0900
-> +From 2918196ba782dfa4401bdca917ad4de1910505e0 Mon Sep 17 00:00:00 2001
-> +From: Lei Maohui <leimaohui@cn.fujitsu.com>
-> +Date: Fri, 21 Aug 2015 15:58:42 +0900
->   Subject: [PATCH] fix bug for cross compile
->   
-> -Signed-off-by: leimaohui <leimaohui@cn.fujitsu.com>
-> +Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
->   ---
-> - configure.ac |    4 ++--
-> - 1 files changed, 2 insertions(+), 2 deletions(-)
-> + configure.ac | 4 ++--
-> + 1 file changed, 2 insertions(+), 2 deletions(-)
->   
->   diff --git a/configure.ac b/configure.ac
-> -index 3b64593..57395d4 100644
-> +index 9be879c..9249bfd 100644
->   --- a/configure.ac
->   +++ b/configure.ac
-> -@@ -601,8 +601,8 @@ AC_HELP_STRING([--with-libedit[=DIR], Enable libedit support
-> -  if test "x$use_libedit" != "xno"; then
-> -      saved_CPPFLAGS=$CPPFLAGS
-> -      saved_LDFLAGS=$LDFLAGS
-> --     CPPFLAGS="${CPPFLAGS} -I$libedit_path/include"
-> --     LDFLAGS="${LDFLAGS} -L$libedit_path/lib"
-> -+     CPPFLAGS="${CPPFLAGS} "
-> -+     LDFLAGS="${LDFLAGS} "
-> -      AC_CHECK_LIB(edit, el_init,	
-> -      		[
-> - 		   LIBEDIT_LIBS="-ledit -lcurses -l$libedit_path/lib"
-> +@@ -1208,8 +1208,8 @@ AC_HELP_STRING([--with-libedit[=DIR], Enable libedit support
-> + if test "x$use_libedit" != "xno"; then
-> +     saved_CPPFLAGS=$CPPFLAGS
-> +     saved_LDFLAGS=$LDFLAGS
-> +-    CPPFLAGS="${CPPFLAGS} -I$libedit_path/include"
-> +-    LDFLAGS="${LDFLAGS} -L$libedit_path/lib"
-> ++    CPPFLAGS="${CPPFLAGS} "
-> ++    LDFLAGS="${LDFLAGS} "
-> +     AC_CHECK_LIB(curses, tgetent, LIBEDIT_LIBS="-lcurses",
-> +         [AC_CHECK_LIB(ncurses, tgetent, LIBEDIT_LIBS="-lncurses",
-> +             AC_MSG_WARN("libedit needs libcurses or libncurses. disabled...")
->   --
-> -1.7.1
-> +1.8.4.2
->   
-> diff --git a/meta-oe/recipes-support/uim/uim_1.3.1.bb b/meta-oe/recipes-support/uim/uim_1.8.6.bb
-> similarity index 89%
-> rename from meta-oe/recipes-support/uim/uim_1.3.1.bb
-> rename to meta-oe/recipes-support/uim/uim_1.8.6.bb
-> index 01657df..24f14a5 100644
-> --- a/meta-oe/recipes-support/uim/uim_1.3.1.bb
-> +++ b/meta-oe/recipes-support/uim/uim_1.8.6.bb
-> @@ -1,17 +1,18 @@
->   DESCRIPTION = "A multilingual user input method library"
->   HOMEPAGE = "http://uim.freedesktop.org/"
-> -LICENSE = "BSD"
-> +LICENSE = "BSD-3-Clause & LGPLv2+"
->   SECTION = "inputmethods"
->   
->   SRC_URI = "http://uim.googlecode.com/files/uim-${PV}.tar.bz2 \
-> -           file://0001-fix-bug-about-stdlib.patch "
-> +           "
->   
->   SRC_URI_append_class-target = "file://uim-module-manager.patch \
-> -                               file://0001-fix-bug-for-cross-compile.patch"
-> +                               file://0001-fix-bug-for-cross-compile.patch \
-> +                               "
->   
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=9c372efbeca58ce22017a29c1ebf8bf0"
-> -SRC_URI[md5sum] = "2832e23d4778bbacbfa4b49bf642d667"
-> -SRC_URI[sha256sum] = "ed2cfa15018a4fd2557e875f66fcb3f0b9dabe12fa0700aa2f11cca69c2cb256"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=32463fd29aa303fb2360faeeae17256b"
-> +SRC_URI[md5sum] = "ecea4c597bab1fd4ba98ea84edcece59"
-> +SRC_URI[sha256sum] = "7b1ea803c73f3478917166f04f67cce6e45ad7ea5ab6df99b948c17eb1cb235f"
->   
->   DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool"
->   DEPENDS_class-target += "gtk+ uim-native takao-fonts"
-> @@ -33,6 +34,12 @@ EXTRA_OECONF += "--disable-emacs \
->   
->   CONFIGUREOPTS_class-target := "${@d.getVar('CONFIGUREOPTS', True).replace('--disable-silent-rules', ' ')}"
-
-I had a patch for CONFIGUREOPTS in uim_1.3.1.bb but hadn't merged into 
-master.
-When enable multilib, the CONFIGUREOPTS isn't expanded correctly.
-
-Please see similar issue:
-http://lists.openembedded.org/pipermail/openembedded-core/2013-November/086510.html
-
-Please use _remove to drop the silent rule:
--CONFIGUREOPTS_class-target := "${@d.getVar('CONFIGUREOPTS', 
-True).replace('--disable-silent-rules', ' ')}"
-+CONFIGUREOPTS_remove_class-target = "--disable-silent-rules"
-
-Thanks,
-Yi
-
->   
-> +
-> +#Because m4 file's find maxdepth=2, so copy the m4 files of the deep depth.
-> +do_configure_prepend () {
-> +    cp ${S}/sigscheme/m4/* ${S}/m4/
-> +}
-> +
->   PACKAGES += "uim-xim uim-utils uim-skk uim-gtk2.0 uim-fep uim-common uim-anthy libuim0 libuim-dev"
->   
->   FILES_libuim0 = "${libdir}/uim/plugin/libuim-custom-enabler.* \
-
+SGkgemhhbw0KDQoNCj4gSSBoYWQgYSBwYXRjaCBmb3IgQ09ORklHVVJFT1BUUyBpbiB1aW1fMS4z
+LjEuYmIgYnV0IGhhZG4ndCBtZXJnZWQgaW50byBtYXN0ZXIuDQo+IFdoZW4gZW5hYmxlIG11bHRp
+bGliLCB0aGUgQ09ORklHVVJFT1BUUyBpc24ndCBleHBhbmRlZCBjb3JyZWN0bHkuDQo+IA0KPiBQ
+bGVhc2Ugc2VlIHNpbWlsYXIgaXNzdWU6DQo+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3Jn
+L3BpcGVybWFpbC9vcGVuZW1iZWRkZWQtY29yZS8yMDEzLU5vdmVtYmVyLzA4NjUxMC4NCj4gaHRt
+bA0KPiANCj4gUGxlYXNlIHVzZSBfcmVtb3ZlIHRvIGRyb3AgdGhlIHNpbGVudCBydWxlOg0KPiAt
+Q09ORklHVVJFT1BUU19jbGFzcy10YXJnZXQgOj0gIiR7QGQuZ2V0VmFyKCdDT05GSUdVUkVPUFRT
+JywNCj4gVHJ1ZSkucmVwbGFjZSgnLS1kaXNhYmxlLXNpbGVudC1ydWxlcycsICcgJyl9Ig0KPiAr
+Q09ORklHVVJFT1BUU19yZW1vdmVfY2xhc3MtdGFyZ2V0ID0gIi0tZGlzYWJsZS1zaWxlbnQtcnVs
+ZXMiDQo+DQoNClRoYW5rIHlvdS4gSSdsbCBtb2RpZmllZCBteSBwYXRjaC4NCg0KQ2hlZXJzDQpM
+ZWkNCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBZaSBaaGFvIFttYWls
+dG86eWkuemhhb0B3aW5kcml2ZXIuY29tXQ0KPiBTZW50OiBGcmlkYXksIEF1Z3VzdCAyMSwgMjAx
+NSA0OjI0IFBNDQo+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9y
+ZzsgTGVpLCBNYW9odWkv6Zu3IOiMguaFpw0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1b
+UEFUQ0hdIHVpbTogMS4zLjEtPjEuOC42DQo+IA0KPiBIaQ0KPiANCj4g5ZyoIDIwMTXlubQwOOac
+iDIx5pelIDE2OjAxLCBMZWkgTWFvaHVpIOWGmemBkzoNCj4gPiAtIGRlbHRlIDAwMDEtZml4LWJ1
+Zy1hYm91dC1zdGRsaWIucGF0Y2ggdGhhdCBub3QgYmUgbmVlZGVkLg0KPiA+IC0gbW9kaWZpZWQg
+bGljZW5zZQ0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogTGVpIE1hb2h1aSA8bGVpbWFvaHVpQGNu
+LmZ1aml0c3UuY29tPg0KPiA+IC0tLQ0KPiA+ICAgLi4uL3VpbS91aW0vMDAwMS1maXgtYnVnLWFi
+b3V0LXN0ZGxpYi5wYXRjaCAgICAgICAgfCA0MCAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+ID4g
+ICAuLi4vdWltL3VpbS8wMDAxLWZpeC1idWctZm9yLWNyb3NzLWNvbXBpbGUucGF0Y2ggICB8IDM4
+ICsrKysrKysrKystLS0tLS0tLS0tDQo+ID4gICAuLi4vdWltL3t1aW1fMS4zLjEuYmIgPT4gdWlt
+XzEuOC42LmJifSAgICAgICAgICAgICB8IDE5ICsrKysrKy0tLS0NCj4gPiAgIDMgZmlsZXMgY2hh
+bmdlZCwgMzIgaW5zZXJ0aW9ucygrKSwgNjUgZGVsZXRpb25zKC0pDQo+ID4gICBkZWxldGUgbW9k
+ZSAxMDA2NDQNCj4gbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvdWltL3VpbS8wMDAxLWZpeC1idWct
+YWJvdXQtc3RkbGliLnBhdGNoDQo+ID4gICByZW5hbWUgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQv
+dWltL3t1aW1fMS4zLjEuYmIgPT4gdWltXzEuOC42LmJifQ0KPiA+ICg4OSUpDQo+ID4NCj4gPiBk
+aWZmIC0tZ2l0DQo+ID4gYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC91aW0vdWltLzAwMDEtZml4
+LWJ1Zy1hYm91dC1zdGRsaWIucGF0Y2gNCj4gPiBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3Vp
+bS91aW0vMDAwMS1maXgtYnVnLWFib3V0LXN0ZGxpYi5wYXRjaA0KPiA+IGRlbGV0ZWQgZmlsZSBt
+b2RlIDEwMDY0NA0KPiA+IGluZGV4IDllNjM2ODMuLjAwMDAwMDANCj4gPiAtLS0gYS9tZXRhLW9l
+L3JlY2lwZXMtc3VwcG9ydC91aW0vdWltLzAwMDEtZml4LWJ1Zy1hYm91dC1zdGRsaWIucGF0Y2gN
+Cj4gPiArKysgL2Rldi9udWxsDQo+ID4gQEAgLTEsNDAgKzAsMCBAQA0KPiA+IC1Gcm9tIGUwZTNm
+ODJiZDI5MThmZGNjNzIyOTE4YzEwOGJjMzM2NDdhNDgwNWYgTW9uIFNlcCAxNyAwMDowMDowMA0K
+PiA+IDIwMDENCj4gPiAtRnJvbTogTGVpbWFvaHVpIDxsZWltYW9odWlAY24uZnVqaXRzdS5jb20+
+DQo+ID4gLURhdGU6IEZyaSwgMjUgT2N0IDIwMTMgMTg6MzE6MjIgKzA5MDANCj4gPiAtU3ViamVj
+dDogW1BBVENIXSBmaXggYnVnIGFib3V0IHN0ZGxpYg0KPiA+IC0NCj4gPiAtU2lnbmVkLW9mZi1i
+eTogbGVpbWFvaHVpIDxsZWltYW9odWlAY24uZnVqaXRzdS5jb20+DQo+ID4gLS0tLQ0KPiA+IC0g
+eGltL2xvY2FsZS5jcHAgICAgfCAgICAzICsrLQ0KPiA+IC0geGltL3hpbXNlcnZlci5jcHAgfCAg
+ICAxICsNCj4gPiAtIDIgZmlsZXMgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9u
+cygtKQ0KPiA+IC0NCj4gPiAtZGlmZiAtLWdpdCBhL3hpbS9sb2NhbGUuY3BwIGIveGltL2xvY2Fs
+ZS5jcHAgLWluZGV4IDM4MGU5NDUuLmVkZmFmMDMNCj4gPiAxMDA2NDQNCj4gPiAtLS0tIGEveGlt
+L2xvY2FsZS5jcHANCj4gPiAtKysrIGIveGltL2xvY2FsZS5jcHANCj4gPiAtQEAgLTM1LDcgKzM1
+LDggQEANCj4gPiAtICNpZmRlZiBIQVZFX0NPTkZJR19IDQo+ID4gLSAjIGluY2x1ZGUgPGNvbmZp
+Zy5oPg0KPiA+IC0gI2VuZGlmDQo+ID4gLS0NCj4gPiAtKyNpbmNsdWRlIDxzdHJpbmcuaD4NCj4g
+PiAtKyNpbmNsdWRlIDxzdGRsaWIuaD4NCj4gPiAtICNpbmNsdWRlIDxzdGRpby5oPg0KPiA+IC0g
+I2luY2x1ZGUgPGxvY2FsZS5oPg0KPiA+IC0gI2luY2x1ZGUgPGljb252Lmg+DQo+ID4gLWRpZmYg
+LS1naXQgYS94aW0veGltc2VydmVyLmNwcCBiL3hpbS94aW1zZXJ2ZXIuY3BwIC1pbmRleA0KPiA+
+IDI0NWM1ZjguLmNkZTk5MTggMTAwNjQ0DQo+ID4gLS0tLSBhL3hpbS94aW1zZXJ2ZXIuY3BwDQo+
+ID4gLSsrKyBiL3hpbS94aW1zZXJ2ZXIuY3BwDQo+ID4gLUBAIC0zNCw2ICszNCw3IEBADQo+ID4g
+LSAjIGluY2x1ZGUgPGNvbmZpZy5oPg0KPiA+IC0gI2VuZGlmDQo+ID4gLQ0KPiA+IC0rI2luY2x1
+ZGUgPHN0ZGxpYi5oPg0KPiA+IC0gI2luY2x1ZGUgPHN0ZGlvLmg+DQo+ID4gLSAjaW5jbHVkZSA8
+Y3R5cGUuaD4NCj4gPiAtICNpbmNsdWRlIDxsb2NhbGUuaD4NCj4gPiAtLS0NCj4gPiAtMS43LjEN
+Cj4gPiAtDQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvdWlt
+L3VpbS8wMDAxLWZpeC1idWctZm9yLWNyb3NzLWNvbXBpbGUucGF0Y2gNCj4gPiBiL21ldGEtb2Uv
+cmVjaXBlcy1zdXBwb3J0L3VpbS91aW0vMDAwMS1maXgtYnVnLWZvci1jcm9zcy1jb21waWxlLnBh
+dGNoDQo+ID4gaW5kZXggNjEzOTJjOS4uZGY4MmIwNyAxMDA2NDQNCj4gPiAtLS0NCj4gPiBhL21l
+dGEtb2UvcmVjaXBlcy1zdXBwb3J0L3VpbS91aW0vMDAwMS1maXgtYnVnLWZvci1jcm9zcy1jb21w
+aWxlLnBhdGNoDQo+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvdWltL3VpbS8wMDAx
+LWZpeC1idWctZm9yLWNyb3NzLWNvbXBpbGUucA0KPiA+ICsrKyBhdGNoDQo+ID4gQEAgLTEsMjgg
+KzEsMjggQEANCj4gPiAtRnJvbSAyZTg3YzM5YWUzYTAwYjgyMzFlZTIxYTU0YzQ3MzYxYzFiZjUw
+MmY3IE1vbiBTZXAgMTcgMDA6MDA6MDANCj4gPiAyMDAxDQo+ID4gLUZyb206IExlaW1hb2h1aSA8
+bGVpbWFvaHVpQGNuLmZ1aml0c3UuY29tPg0KPiA+IC1EYXRlOiBGcmksIDI1IE9jdCAyMDEzIDE4
+OjIzOjEyICswOTAwDQo+ID4gK0Zyb20gMjkxODE5NmJhNzgyZGZhNDQwMWJkY2E5MTdhZDRkZTE5
+MTA1MDVlMCBNb24gU2VwIDE3IDAwOjAwOjAwDQo+ID4gKzIwMDENCj4gPiArRnJvbTogTGVpIE1h
+b2h1aSA8bGVpbWFvaHVpQGNuLmZ1aml0c3UuY29tPg0KPiA+ICtEYXRlOiBGcmksIDIxIEF1ZyAy
+MDE1IDE1OjU4OjQyICswOTAwDQo+ID4gICBTdWJqZWN0OiBbUEFUQ0hdIGZpeCBidWcgZm9yIGNy
+b3NzIGNvbXBpbGUNCj4gPg0KPiA+IC1TaWduZWQtb2ZmLWJ5OiBsZWltYW9odWkgPGxlaW1hb2h1
+aUBjbi5mdWppdHN1LmNvbT4NCj4gPiArU2lnbmVkLW9mZi1ieTogTGVpIE1hb2h1aSA8bGVpbWFv
+aHVpQGNuLmZ1aml0c3UuY29tPg0KPiA+ICAgLS0tDQo+ID4gLSBjb25maWd1cmUuYWMgfCAgICA0
+ICsrLS0NCj4gPiAtIDEgZmlsZXMgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9u
+cygtKQ0KPiA+ICsgY29uZmlndXJlLmFjIHwgNCArKy0tDQo+ID4gKyAxIGZpbGUgY2hhbmdlZCwg
+MiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPiA+DQo+ID4gICBkaWZmIC0tZ2l0IGEv
+Y29uZmlndXJlLmFjIGIvY29uZmlndXJlLmFjIC1pbmRleCAzYjY0NTkzLi41NzM5NWQ0DQo+ID4g
+MTAwNjQ0DQo+ID4gK2luZGV4IDliZTg3OWMuLjkyNDliZmQgMTAwNjQ0DQo+ID4gICAtLS0gYS9j
+b25maWd1cmUuYWMNCj4gPiAgICsrKyBiL2NvbmZpZ3VyZS5hYw0KPiA+IC1AQCAtNjAxLDggKzYw
+MSw4IEBAIEFDX0hFTFBfU1RSSU5HKFstLXdpdGgtbGliZWRpdFs9RElSXSwgRW5hYmxlDQo+ID4g
+bGliZWRpdCBzdXBwb3J0DQo+ID4gLSAgaWYgdGVzdCAieCR1c2VfbGliZWRpdCIgIT0gInhubyI7
+IHRoZW4NCj4gPiAtICAgICAgc2F2ZWRfQ1BQRkxBR1M9JENQUEZMQUdTDQo+ID4gLSAgICAgIHNh
+dmVkX0xERkxBR1M9JExERkxBR1MNCj4gPiAtLSAgICAgQ1BQRkxBR1M9IiR7Q1BQRkxBR1N9IC1J
+JGxpYmVkaXRfcGF0aC9pbmNsdWRlIg0KPiA+IC0tICAgICBMREZMQUdTPSIke0xERkxBR1N9IC1M
+JGxpYmVkaXRfcGF0aC9saWIiDQo+ID4gLSsgICAgIENQUEZMQUdTPSIke0NQUEZMQUdTfSAiDQo+
+ID4gLSsgICAgIExERkxBR1M9IiR7TERGTEFHU30gIg0KPiA+IC0gICAgICBBQ19DSEVDS19MSUIo
+ZWRpdCwgZWxfaW5pdCwNCj4gPiAtICAgICAgCQlbDQo+ID4gLSAJCSAgIExJQkVESVRfTElCUz0i
+LWxlZGl0IC1sY3Vyc2VzIC1sJGxpYmVkaXRfcGF0aC9saWIiDQo+ID4gK0BAIC0xMjA4LDggKzEy
+MDgsOCBAQCBBQ19IRUxQX1NUUklORyhbLS13aXRoLWxpYmVkaXRbPURJUl0sIEVuYWJsZQ0KPiA+
+ICtsaWJlZGl0IHN1cHBvcnQgIGlmIHRlc3QgIngkdXNlX2xpYmVkaXQiICE9ICJ4bm8iOyB0aGVu
+DQo+ID4gKyAgICAgc2F2ZWRfQ1BQRkxBR1M9JENQUEZMQUdTDQo+ID4gKyAgICAgc2F2ZWRfTERG
+TEFHUz0kTERGTEFHUw0KPiA+ICstICAgIENQUEZMQUdTPSIke0NQUEZMQUdTfSAtSSRsaWJlZGl0
+X3BhdGgvaW5jbHVkZSINCj4gPiArLSAgICBMREZMQUdTPSIke0xERkxBR1N9IC1MJGxpYmVkaXRf
+cGF0aC9saWIiDQo+ID4gKysgICAgQ1BQRkxBR1M9IiR7Q1BQRkxBR1N9ICINCj4gPiArKyAgICBM
+REZMQUdTPSIke0xERkxBR1N9ICINCj4gPiArICAgICBBQ19DSEVDS19MSUIoY3Vyc2VzLCB0Z2V0
+ZW50LCBMSUJFRElUX0xJQlM9Ii1sY3Vyc2VzIiwNCj4gPiArICAgICAgICAgW0FDX0NIRUNLX0xJ
+QihuY3Vyc2VzLCB0Z2V0ZW50LCBMSUJFRElUX0xJQlM9Ii1sbmN1cnNlcyIsDQo+ID4gKyAgICAg
+ICAgICAgICBBQ19NU0dfV0FSTigibGliZWRpdCBuZWVkcyBsaWJjdXJzZXMgb3IgbGlibmN1cnNl
+cy4NCj4gPiArIGRpc2FibGVkLi4uIikNCj4gPiAgIC0tDQo+ID4gLTEuNy4xDQo+ID4gKzEuOC40
+LjINCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC91aW0vdWlt
+XzEuMy4xLmJiDQo+ID4gYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC91aW0vdWltXzEuOC42LmJi
+DQo+ID4gc2ltaWxhcml0eSBpbmRleCA4OSUNCj4gPiByZW5hbWUgZnJvbSBtZXRhLW9lL3JlY2lw
+ZXMtc3VwcG9ydC91aW0vdWltXzEuMy4xLmJiDQo+ID4gcmVuYW1lIHRvIG1ldGEtb2UvcmVjaXBl
+cy1zdXBwb3J0L3VpbS91aW1fMS44LjYuYmINCj4gPiBpbmRleCAwMTY1N2RmLi4yNGYxNGE1IDEw
+MDY0NA0KPiA+IC0tLSBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3VpbS91aW1fMS4zLjEuYmIN
+Cj4gPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC91aW0vdWltXzEuOC42LmJiDQo+ID4g
+QEAgLTEsMTcgKzEsMTggQEANCj4gPiAgIERFU0NSSVBUSU9OID0gIkEgbXVsdGlsaW5ndWFsIHVz
+ZXIgaW5wdXQgbWV0aG9kIGxpYnJhcnkiDQo+ID4gICBIT01FUEFHRSA9ICJodHRwOi8vdWltLmZy
+ZWVkZXNrdG9wLm9yZy8iDQo+ID4gLUxJQ0VOU0UgPSAiQlNEIg0KPiA+ICtMSUNFTlNFID0gIkJT
+RC0zLUNsYXVzZSAmIExHUEx2MisiDQo+ID4gICBTRUNUSU9OID0gImlucHV0bWV0aG9kcyINCj4g
+Pg0KPiA+ICAgU1JDX1VSSSA9ICJodHRwOi8vdWltLmdvb2dsZWNvZGUuY29tL2ZpbGVzL3VpbS0k
+e1BWfS50YXIuYnoyIFwNCj4gPiAtICAgICAgICAgICBmaWxlOi8vMDAwMS1maXgtYnVnLWFib3V0
+LXN0ZGxpYi5wYXRjaCAiDQo+ID4gKyAgICAgICAgICAgIg0KPiA+DQo+ID4gICBTUkNfVVJJX2Fw
+cGVuZF9jbGFzcy10YXJnZXQgPSAiZmlsZTovL3VpbS1tb2R1bGUtbWFuYWdlci5wYXRjaCBcDQo+
+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmaWxlOi8vMDAwMS1maXgtYnVnLWZv
+ci1jcm9zcy1jb21waWxlLnBhdGNoIg0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgZmlsZTovLzAwMDEtZml4LWJ1Zy1mb3ItY3Jvc3MtY29tcGlsZS5wYXRjaCBcDQo+ID4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiDQo+ID4NCj4gPiAtTElDX0ZJTEVTX0NIS1NV
+TSA9ICJmaWxlOi8vQ09QWUlORzttZDU9OWMzNzJlZmJlY2E1OGNlMjIwMTdhMjljMWViZjhiZjAi
+DQo+ID4gLVNSQ19VUklbbWQ1c3VtXSA9ICIyODMyZTIzZDQ3NzhiYmFjYmZhNGI0OWJmNjQyZDY2
+NyINCj4gPiAtU1JDX1VSSVtzaGEyNTZzdW1dID0NCj4gImVkMmNmYTE1MDE4YTRmZDI1NTdlODc1
+ZjY2ZmNiM2YwYjlkYWJlMTJmYTA3MDBhYTJmMTFjY2E2OWMyY2IyNTYiDQo+ID4gK0xJQ19GSUxF
+U19DSEtTVU0gPSAiZmlsZTovL0NPUFlJTkc7bWQ1PTMyNDYzZmQyOWFhMzAzZmIyMzYwZmFlZWFl
+MTcyNTZiIg0KPiA+ICtTUkNfVVJJW21kNXN1bV0gPSAiZWNlYTRjNTk3YmFiMWZkNGJhOThlYTg0
+ZWRjZWNlNTkiDQo+ID4gK1NSQ19VUklbc2hhMjU2c3VtXSA9DQo+ICI3YjFlYTgwM2M3M2YzNDc4
+OTE3MTY2ZjA0ZjY3Y2NlNmU0NWFkN2VhNWFiNmRmOTliOTQ4YzE3ZWIxY2IyMzVmIg0KPiA+DQo+
+ID4gICBERVBFTkRTID0gImFudGh5IGZvbnRjb25maWcgbGlieGZ0IGxpYnh0IGdsaWItMi4wIG5j
+dXJzZXMgaW50bHRvb2wiDQo+ID4gICBERVBFTkRTX2NsYXNzLXRhcmdldCArPSAiZ3RrKyB1aW0t
+bmF0aXZlIHRha2FvLWZvbnRzIg0KPiA+IEBAIC0zMyw2ICszNCwxMiBAQCBFWFRSQV9PRUNPTkYg
+Kz0gIi0tZGlzYWJsZS1lbWFjcyBcDQo+ID4NCj4gPiAgIENPTkZJR1VSRU9QVFNfY2xhc3MtdGFy
+Z2V0IDo9ICIke0BkLmdldFZhcignQ09ORklHVVJFT1BUUycsDQo+IFRydWUpLnJlcGxhY2UoJy0t
+ZGlzYWJsZS1zaWxlbnQtcnVsZXMnLCAnICcpfSINCj4gDQo+IEkgaGFkIGEgcGF0Y2ggZm9yIENP
+TkZJR1VSRU9QVFMgaW4gdWltXzEuMy4xLmJiIGJ1dCBoYWRuJ3QgbWVyZ2VkIGludG8gbWFzdGVy
+Lg0KPiBXaGVuIGVuYWJsZSBtdWx0aWxpYiwgdGhlIENPTkZJR1VSRU9QVFMgaXNuJ3QgZXhwYW5k
+ZWQgY29ycmVjdGx5Lg0KPiANCj4gUGxlYXNlIHNlZSBzaW1pbGFyIGlzc3VlOg0KPiBodHRwOi8v
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZy9waXBlcm1haWwvb3BlbmVtYmVkZGVkLWNvcmUvMjAxMy1O
+b3ZlbWJlci8wODY1MTAuDQo+IGh0bWwNCj4gDQo+IFBsZWFzZSB1c2UgX3JlbW92ZSB0byBkcm9w
+IHRoZSBzaWxlbnQgcnVsZToNCj4gLUNPTkZJR1VSRU9QVFNfY2xhc3MtdGFyZ2V0IDo9ICIke0Bk
+LmdldFZhcignQ09ORklHVVJFT1BUUycsDQo+IFRydWUpLnJlcGxhY2UoJy0tZGlzYWJsZS1zaWxl
+bnQtcnVsZXMnLCAnICcpfSINCj4gK0NPTkZJR1VSRU9QVFNfcmVtb3ZlX2NsYXNzLXRhcmdldCA9
+ICItLWRpc2FibGUtc2lsZW50LXJ1bGVzIg0KPiANCj4gVGhhbmtzLA0KPiBZaQ0KPiANCj4gPg0K
+PiA+ICsNCj4gPiArI0JlY2F1c2UgbTQgZmlsZSdzIGZpbmQgbWF4ZGVwdGg9Miwgc28gY29weSB0
+aGUgbTQgZmlsZXMgb2YgdGhlIGRlZXAgZGVwdGguDQo+ID4gK2RvX2NvbmZpZ3VyZV9wcmVwZW5k
+ICgpIHsNCj4gPiArICAgIGNwICR7U30vc2lnc2NoZW1lL200LyogJHtTfS9tNC8NCj4gPiArfQ0K
+PiA+ICsNCj4gPiAgIFBBQ0tBR0VTICs9ICJ1aW0teGltIHVpbS11dGlscyB1aW0tc2trIHVpbS1n
+dGsyLjAgdWltLWZlcCB1aW0tY29tbW9uDQo+IHVpbS1hbnRoeSBsaWJ1aW0wIGxpYnVpbS1kZXYi
+DQo+ID4NCj4gPiAgIEZJTEVTX2xpYnVpbTAgPSAiJHtsaWJkaXJ9L3VpbS9wbHVnaW4vbGlidWlt
+LWN1c3RvbS1lbmFibGVyLiogXA0KDQo=
 
