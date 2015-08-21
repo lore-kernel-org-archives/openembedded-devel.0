@@ -1,45 +1,40 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
-	[209.85.213.175])
-	by mail.openembedded.org (Postfix) with ESMTP id A135B608B7
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
+	[209.85.220.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 07D3173CF2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 23:22:43 +0000 (UTC)
-Received: by igfj19 with SMTP id j19so6109428igf.0
+	Fri, 21 Aug 2015 00:43:12 +0000 (UTC)
+Received: by pacdd16 with SMTP id dd16so30999439pac.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 16:22:43 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:date:message-id:subject:to:cc
-	:content-type;
-	bh=yHt4vvblzfLbKeGAi/cNqUNc966QGNTD0CshqkQvb0E=;
-	b=jBVFl4Zlxap5SdMGY8sy6F5haFCqFoVapnUr3B8YdY0T4mmCbyNJ63Ov46367JuWWX
-	740tfflcZpqGqk/n2llVzd4whVLamT+2WEjd5MqexFqFmKwmsj9OfNLZDs5W5O57Vn6y
-	33bHTL3STxkfCef2mxvIiUnOuktpPeDOLmK2qAH1U+El5QoBQuKQLpUJr15LHVGOvyzf
-	mzwUL0r8/XW+XNH2WBhrrh3EBc6GtRsBo8vInzLNUGxCKaW1yjMvEp8ghu6dEkavrrxJ
-	qUQHvoxXwzGUvxNXGxOslTIPvEFEigr1xZxNh01KFk/slW7fRXy3+cVPvmjeF/Xt21Dr
-	8FEA==
-X-Gm-Message-State: ALoCoQm0bfGQK3EMmHLtmwCpGGwn3oT9cA+5w95WH5wwSY7WT2rGUv4FTB2pHGScCRmI1H1EANsW
-X-Received: by 10.50.88.41 with SMTP id bd9mr778292igb.4.1440112963361;
-	Thu, 20 Aug 2015 16:22:43 -0700 (PDT)
-Received: from mail-io0-f169.google.com (mail-io0-f169.google.com.
-	[209.85.223.169])
-	by smtp.gmail.com with ESMTPSA id lp3sm329399igb.12.2015.08.20.16.22.41
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 20 Aug 2015 16:22:41 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by iodv127 with SMTP id v127so63929666iod.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 16:22:41 -0700 (PDT)
+	Thu, 20 Aug 2015 17:43:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=pRyGp1jDrYR/7rK0W6Pq/YXBh/GITiC2oUEEK6jENvY=;
+	b=QyrqB1E4cf5OEsWfBQAHAYWiLwcgZNDYAjnjipKpJoMzkzoP39wuG1gyygOV+o93Tz
+	KQPzfzTriqYBmjpyhtn6LoGP0XyyjYfu0aRaN4CtvbqWOxwDDSE3hcWPjBWnk8ppDaj/
+	EeoHB/VZrfMNMzGx0Gq3H6q/QJAV4aJ4obsKqcWwblrqX40PSAL+QGdypRO/4HLt8nqj
+	eiy7vBD2PQU3HWG214pVIPRfIOU7oMPVgrAS8DjXjtixWIUPTsweufdjmhwTWMruh7DK
+	rcnGSVnTx5CJPZOLwfjfzrrfeFvFmFdXX3c/X0gJc+PpZcxpKEyajLIg69wriVX5kBSF
+	Gihg==
+X-Received: by 10.66.222.161 with SMTP id qn1mr11985097pac.66.1440117792851;
+	Thu, 20 Aug 2015 17:43:12 -0700 (PDT)
+Received: from [10.43.100.29] (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
+	by smtp.googlemail.com with ESMTPSA id
+	im2sm5630378pbc.34.2015.08.20.17.43.11
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 20 Aug 2015 17:43:11 -0700 (PDT)
+Message-ID: <55D6741E.7050106@gmail.com>
+Date: Thu, 20 Aug 2015 17:43:10 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
-X-Received: by 10.107.130.153 with SMTP id m25mr4821306ioi.192.1440112961457; 
-	Thu, 20 Aug 2015 16:22:41 -0700 (PDT)
-Received: by 10.36.218.7 with HTTP; Thu, 20 Aug 2015 16:22:41 -0700 (PDT)
-Date: Thu, 20 Aug 2015 20:22:41 -0300
-Message-ID: <CAP9ODKrP8H-mSZf0k0sJLKRRgLS=sDk4Vwv1Jx+qH5e3PZ-=mw@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Backport for Fido
+To: Otavio Salvador <otavio.salvador@ossystems.com.br>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <CAP9ODKrP8H-mSZf0k0sJLKRRgLS=sDk4Vwv1Jx+qH5e3PZ-=mw@mail.gmail.com>
+In-Reply-To: <CAP9ODKrP8H-mSZf0k0sJLKRRgLS=sDk4Vwv1Jx+qH5e3PZ-=mw@mail.gmail.com>
+Subject: Re: Backport for Fido
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,17 +48,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2015 23:22:43 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 21 Aug 2015 00:43:13 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello Martin,
 
-Please backport 6ea7ac016987832e51b0721ce5a52dd4e2f3d0a4 for fido, of meta-oe.
 
-Thanks in advance,
+On 08/20/2015 04:22 PM, Otavio Salvador wrote:
+> Hello Martin,
+>
+> Please backport 6ea7ac016987832e51b0721ce5a52dd4e2f3d0a4 for fido, of meta-oe.
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Acked-by: Armin Kuster <akuster808@gmail.com>
+
+>
+> Thanks in advance,
+>
 
