@@ -1,27 +1,33 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id ABD3F60557
+Return-Path: <fan.xin@jp.fujitsu.com>
+X-Greylist: delayed 620 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 21 Aug 2015 07:00:07 UTC
+Received: from mgwkm01.jp.fujitsu.com (mgwkm01.jp.fujitsu.com [202.219.69.168])
+	by mail.openembedded.org (Postfix) with ESMTP id D995A60557
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 06:47:22 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t7L6lNB2027105
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 21 Aug 2015 07:00:07 +0000 (UTC)
+Received: from kw-mxq.gw.nic.fujitsu.com (unknown [192.168.231.130]) by
+	mgwkm01.jp.fujitsu.com with smtp
+	id 2184_2e8f_a379ecf1_e30c_4419_affa_1ce83ad71ebb;
+	Fri, 21 Aug 2015 15:49:45 +0900
+Received: from m3050.s.css.fujitsu.com (msm.b.css.fujitsu.com [10.134.21.208])
+	by kw-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id C535BAC0481
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 23:47:23 -0700 (PDT)
-Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.235.1;
-	Thu, 20 Aug 2015 23:47:22 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 21 Aug 2015 14:46:49 +0800
-Message-ID: <bc377e4f94cbbb2765ebf0c308dabb9740e20702.1440139197.git.yi.zhao@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1440139197.git.yi.zhao@windriver.com>
-References: <cover.1440139197.git.yi.zhao@windriver.com>
+	Fri, 21 Aug 2015 15:49:43 +0900 (JST)
+Received: from omame (omame.fct.css.fujitsu.com [10.24.14.171])
+	by m3050.s.css.fujitsu.com (Postfix) with ESMTP id 9C9CCAA;
+	Fri, 21 Aug 2015 15:49:43 +0900 (JST)
+Received: from [10.24.19.99] (fan1.utsfd.cs.fujitsu.co.jp [10.24.19.99])
+	by omame (Postfix) with ESMTPSA id 85DEE1E0088;
+	Fri, 21 Aug 2015 15:49:43 +0900 (JST)
+Message-ID: <55D6CA34.7020400@jp.fujitsu.com>
+Date: Fri, 21 Aug 2015 15:50:28 +0900
+From: Fan Xin <fan.xin@jp.fujitsu.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
 MIME-Version: 1.0
-X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 8/8] libconnman-qt: fix the hardcoded libdir
+To: openembedded-devel@lists.openembedded.org
+X-TM-AS-MML: disable
+Subject: [PATCH] hostapd: Fix bugs from CVE-2015-4141 to CVE-2015-4146
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,37 +41,538 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2015 06:47:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 21 Aug 2015 07:00:12 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Fix QA issue when enable multilib:
-ERROR: QA Issue: libconnman-qte: Files/directories were installed but not shipped in any package:
-  /usr/lib
-  /usr/lib/libconnman-qtopia.prl
-  /usr/lib/libconnman-qtopia.so.1.0
-  /usr/lib/libconnman-qtopia.so.1.0.50
-  /usr/lib/libconnman-qtopia.so
-  [snip]
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install. [installed-vs-shipped]
+hostapd: Fix bugs from CVE-2015-4141 to CVE-2015-4146
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+These patches are originally from:
+  http://w1.fi/security/2015-2/
+  http://w1.fi/security/2015-3/
+  http://w1.fi/security/2015-4/
+
+The relationships between CVE number and patch file are as follows:
+
+CVE-2015-4141
+  0001-WPS-Fix-HTTP-chunked-transfer-encoding-parser.patch
+
+CVE-2015-4142
+  0001-AP-WMM-Fix-integer-underflow-in-WMM-Action-frame-par.patch
+
+CVE-2015-4143
+  0001-EAP-pwd-peer-Fix-payload-length-validation-for-Commi.patch
+  0002-EAP-pwd-server-Fix-payload-length-validation-for-Com.patch
+
+CVE-2015-4144
+CVE-2015-4145
+  0003-EAP-pwd-peer-Fix-Total-Length-parsing-for-fragment-r.patch
+  0004-EAP-pwd-server-Fix-Total-Length-parsing-for-fragment.patch
+
+CVE-2015-4146
+  0005-EAP-pwd-peer-Fix-asymmetric-fragmentation-behavior.patch
 ---
- meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc |    1 +
- 1 file changed, 1 insertion(+)
+  ...integer-underflow-in-WMM-Action-frame-par.patch | 45 +++++++++++++
+  ...r-Fix-payload-length-validation-for-Commi.patch | 77 
+++++++++++++++++++++++
+  ...Fix-HTTP-chunked-transfer-encoding-parser.patch | 53 +++++++++++++++
+  ...ver-Fix-payload-length-validation-for-Com.patch | 70 
+++++++++++++++++++++
+  ...r-Fix-Total-Length-parsing-for-fragment-r.patch | 56 ++++++++++++++++
+  ...ver-Fix-Total-Length-parsing-for-fragment.patch | 54 +++++++++++++++
+  ...eer-Fix-asymmetric-fragmentation-behavior.patch | 36 ++++++++++
+  7 files changed, 391 insertions(+)
+  create mode 100644 
+meta/recipes-connectivity/hostapd/hostapd/0001-AP-WMM-Fix-integer-underflow-in-WMM-Action-frame-par.patch
+  create mode 100644 
+meta/recipes-connectivity/hostapd/hostapd/0001-EAP-pwd-peer-Fix-payload-length-validation-for-Commi.patch
+  create mode 100644 
+meta/recipes-connectivity/hostapd/hostapd/0001-WPS-Fix-HTTP-chunked-transfer-encoding-parser.patch
+  create mode 100644 
+meta/recipes-connectivity/hostapd/hostapd/0002-EAP-pwd-server-Fix-payload-length-validation-for-Com.patch
+  create mode 100644 
+meta/recipes-connectivity/hostapd/hostapd/0003-EAP-pwd-peer-Fix-Total-Length-parsing-for-fragment-r.patch
+  create mode 100644 
+meta/recipes-connectivity/hostapd/hostapd/0004-EAP-pwd-server-Fix-Total-Length-parsing-for-fragment.patch
+  create mode 100644 
+meta/recipes-connectivity/hostapd/hostapd/0005-EAP-pwd-peer-Fix-asymmetric-fragmentation-behavior.patch
 
-diff --git a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
-index 3f91be2..859c854 100644
---- a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
-+++ b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
-@@ -17,6 +17,7 @@ EXTRA_QMAKEVARS_PRE += "CONFIG+=notests TARGET_SUFFIX=${QT_DIR_NAME}"
- do_configure_prepend() {
-     # Hack *.pro variables
-     find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${QT_IMPORTS_DIR},g' '{}' ';'
-+    find ${S} -iname '*.pro' -exec sed -i -e 's,$$INSTALL_ROOT$$PREFIX/lib,$$INSTALL_ROOT$$PREFIX/${baselib},g' '{}' ';'
- }
- do_install() {
-     oe_runmake install INSTALL_ROOT=${D}
+diff --git 
+a/meta/recipes-connectivity/hostapd/hostapd/0001-AP-WMM-Fix-integer-underflow-in-WMM-Action-frame-par.patch 
+b/meta/recipes-connectivity/hostapd/hostapd/0001-AP-WMM-Fix-integer-underflow-in-WMM-Action-frame-par.patch
+new file mode 100644
+index 0000000..882674f
+--- /dev/null
++++ 
+b/meta/recipes-connectivity/hostapd/hostapd/0001-AP-WMM-Fix-integer-underflow-in-WMM-Action-frame-par.patch
+@@ -0,0 +1,45 @@
++Upstream-Status: Backport
++
++Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
++
++From ef566a4d4f74022e1fdb0a2addfe81e6de9f4aae Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <j@w1.fi>
++Date: Wed, 29 Apr 2015 02:21:53 +0300
++Subject: [PATCH] AP WMM: Fix integer underflow in WMM Action frame parser
++
++The length of the WMM Action frame was not properly validated and the
++length of the information elements (int left) could end up being
++negative. This would result in reading significantly past the stack
++buffer while parsing the IEs in ieee802_11_parse_elems() and while doing
++so, resulting in segmentation fault.
++
++This can result in an invalid frame being used for a denial of service
++attack (hostapd process killed) against an AP with a driver that uses
++hostapd for management frame processing (e.g., all mac80211-based
++drivers).
++
++Thanks to Kostya Kortchinsky of Google security team for discovering and
++reporting this issue.
++
++Signed-off-by: Jouni Malinen <j@w1.fi>
++---
++ src/ap/wmm.c | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/src/ap/wmm.c b/src/ap/wmm.c
++index 6d4177c..314e244 100644
++--- a/src/ap/wmm.c
+++++ b/src/ap/wmm.c
++@@ -274,6 +274,9 @@ void hostapd_wmm_action(struct hostapd_data *hapd,
++         return;
++     }
++
+++    if (left < 0)
+++        return; /* not a valid WMM Action frame */
+++
++     /* extract the tspec info element */
++     if (ieee802_11_parse_elems(pos, left, &elems, 1) == ParseFailed) {
++         hostapd_logger(hapd, mgmt->sa, HOSTAPD_MODULE_IEEE80211,
++--
++1.9.1
++
+diff --git 
+a/meta/recipes-connectivity/hostapd/hostapd/0001-EAP-pwd-peer-Fix-payload-length-validation-for-Commi.patch 
+b/meta/recipes-connectivity/hostapd/hostapd/0001-EAP-pwd-peer-Fix-payload-length-validation-for-Commi.patch
+new file mode 100644
+index 0000000..a2bafc8
+--- /dev/null
++++ 
+b/meta/recipes-connectivity/hostapd/hostapd/0001-EAP-pwd-peer-Fix-payload-length-validation-for-Commi.patch
+@@ -0,0 +1,77 @@
++Upstream-Status: Backport
++
++Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
++
++From dd2f043c9c43d156494e33d7ce22db96e6ef42c7 Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <j@w1.fi>
++Date: Fri, 1 May 2015 16:37:45 +0300
++Subject: [PATCH 1/5] EAP-pwd peer: Fix payload length validation for Commit
++ and Confirm
++
++The length of the received Commit and Confirm message payloads was not
++checked before reading them. This could result in a buffer read
++overflow when processing an invalid message.
++
++Fix this by verifying that the payload is of expected length before
++processing it. In addition, enforce correct state transition sequence to
++make sure there is no unexpected behavior if receiving a Commit/Confirm
++message before the previous exchanges have been completed.
++
++Thanks to Kostya Kortchinsky of Google security team for discovering and
++reporting this issue.
++
++Signed-off-by: Jouni Malinen <j@w1.fi>
++---
++ src/eap_peer/eap_pwd.c | 29 +++++++++++++++++++++++++++++
++ 1 file changed, 29 insertions(+)
++
++diff --git a/src/eap_peer/eap_pwd.c b/src/eap_peer/eap_pwd.c
++index f2b0926..a629437 100644
++--- a/src/eap_peer/eap_pwd.c
+++++ b/src/eap_peer/eap_pwd.c
++@@ -355,6 +355,23 @@ eap_pwd_perform_commit_exchange(struct eap_sm *sm, 
+struct eap_pwd_data *data,
++     BIGNUM *mask = NULL, *x = NULL, *y = NULL, *cofactor = NULL;
++     u16 offset;
++     u8 *ptr, *scalar = NULL, *element = NULL;
+++    size_t prime_len, order_len;
+++
+++    if (data->state != PWD_Commit_Req) {
+++        ret->ignore = TRUE;
+++        goto fin;
+++    }
+++
+++    prime_len = BN_num_bytes(data->grp->prime);
+++    order_len = BN_num_bytes(data->grp->order);
+++
+++    if (payload_len != 2 * prime_len + order_len) {
+++        wpa_printf(MSG_INFO,
+++               "EAP-pwd: Unexpected Commit payload length %u (expected 
+%u)",
+++               (unsigned int) payload_len,
+++               (unsigned int) (2 * prime_len + order_len));
+++        goto fin;
+++    }
++
++     if (((data->private_value = BN_new()) == NULL) ||
++         ((data->my_element = EC_POINT_new(data->grp->group)) == NULL) ||
++@@ -554,6 +571,18 @@ eap_pwd_perform_confirm_exchange(struct eap_sm 
+*sm, struct eap_pwd_data *data,
++     u8 conf[SHA256_MAC_LEN], *cruft = NULL, *ptr;
++     int offset;
++
+++    if (data->state != PWD_Confirm_Req) {
+++        ret->ignore = TRUE;
+++        goto fin;
+++    }
+++
+++    if (payload_len != SHA256_MAC_LEN) {
+++        wpa_printf(MSG_INFO,
+++               "EAP-pwd: Unexpected Confirm payload length %u 
+(expected %u)",
+++               (unsigned int) payload_len, SHA256_MAC_LEN);
+++        goto fin;
+++    }
+++
++     /*
++      * first build up the ciphersuite which is group | random_function |
++      *    prf
++--
++1.9.1
++
+diff --git 
+a/meta/recipes-connectivity/hostapd/hostapd/0001-WPS-Fix-HTTP-chunked-transfer-encoding-parser.patch 
+b/meta/recipes-connectivity/hostapd/hostapd/0001-WPS-Fix-HTTP-chunked-transfer-encoding-parser.patch
+new file mode 100644
+index 0000000..2568ea1
+--- /dev/null
++++ 
+b/meta/recipes-connectivity/hostapd/hostapd/0001-WPS-Fix-HTTP-chunked-transfer-encoding-parser.patch
+@@ -0,0 +1,53 @@
++Upstream-Status: Backport
++
++Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
++
++From 5acd23f4581da58683f3cf5e36cb71bbe4070bd7 Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <j@w1.fi>
++Date: Tue, 28 Apr 2015 17:08:33 +0300
++Subject: [PATCH] WPS: Fix HTTP chunked transfer encoding parser
++
++strtoul() return value may end up overflowing the int h->chunk_size and
++resulting in a negative value to be stored as the chunk_size. This could
++result in the following memcpy operation using a very large length
++argument which would result in a buffer overflow and segmentation fault.
++
++This could have been used to cause a denial service by any device that
++has been authorized for network access (either wireless or wired). This
++would affect both the WPS UPnP functionality in a WPS AP (hostapd with
++upnp_iface parameter set in the configuration) and WPS ER
++(wpa_supplicant with WPS_ER_START control interface command used).
++
++Validate the parsed chunk length value to avoid this. In addition to
++rejecting negative values, we can also reject chunk size that would be
++larger than the maximum configured body length.
++
++Thanks to Kostya Kortchinsky of Google security team for discovering and
++reporting this issue.
++
++Signed-off-by: Jouni Malinen <j@w1.fi>
++---
++ src/wps/httpread.c | 7 +++++++
++ 1 file changed, 7 insertions(+)
++
++diff --git a/src/wps/httpread.c b/src/wps/httpread.c
++index 2f08f37..d2855e3 100644
++--- a/src/wps/httpread.c
+++++ b/src/wps/httpread.c
++@@ -533,6 +533,13 @@ static void httpread_read_handler(int sd, void 
+*eloop_ctx, void *sock_ctx)
++                     if (!isxdigit(*cbp))
++                         goto bad;
++                     h->chunk_size = strtoul(cbp, NULL, 16);
+++                    if (h->chunk_size < 0 ||
+++                        h->chunk_size > h->max_bytes) {
+++                        wpa_printf(MSG_DEBUG,
+++                               "httpread: Invalid chunk size %d",
+++                               h->chunk_size);
+++                        goto bad;
+++                    }
++                     /* throw away chunk header
++                      * so we have only real data
++                      */
++--
++1.9.1
++
+diff --git 
+a/meta/recipes-connectivity/hostapd/hostapd/0002-EAP-pwd-server-Fix-payload-length-validation-for-Com.patch 
+b/meta/recipes-connectivity/hostapd/hostapd/0002-EAP-pwd-server-Fix-payload-length-validation-for-Com.patch
+new file mode 100644
+index 0000000..c477c2f
+--- /dev/null
++++ 
+b/meta/recipes-connectivity/hostapd/hostapd/0002-EAP-pwd-server-Fix-payload-length-validation-for-Com.patch
+@@ -0,0 +1,70 @@
++Upstream-Status: Backport
++
++Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
++
++From e28a58be26184c2a23f80b410e0997ef1bd5d578 Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <j@w1.fi>
++Date: Fri, 1 May 2015 16:40:44 +0300
++Subject: [PATCH 2/5] EAP-pwd server: Fix payload length validation for 
+Commit
++ and Confirm
++
++The length of the received Commit and Confirm message payloads was not
++checked before reading them. This could result in a buffer read
++overflow when processing an invalid message.
++
++Fix this by verifying that the payload is of expected length before
++processing it. In addition, enforce correct state transition sequence to
++make sure there is no unexpected behavior if receiving a Commit/Confirm
++message before the previous exchanges have been completed.
++
++Thanks to Kostya Kortchinsky of Google security team for discovering and
++reporting this issue.
++
++Signed-off-by: Jouni Malinen <j@w1.fi>
++---
++ src/eap_server/eap_server_pwd.c | 19 +++++++++++++++++++
++ 1 file changed, 19 insertions(+)
++
++diff --git a/src/eap_server/eap_server_pwd.c 
+b/src/eap_server/eap_server_pwd.c
++index 66bd5d2..3189105 100644
++--- a/src/eap_server/eap_server_pwd.c
+++++ b/src/eap_server/eap_server_pwd.c
++@@ -656,9 +656,21 @@ eap_pwd_process_commit_resp(struct eap_sm *sm, 
+struct eap_pwd_data *data,
++     BIGNUM *x = NULL, *y = NULL, *cofactor = NULL;
++     EC_POINT *K = NULL, *point = NULL;
++     int res = 0;
+++    size_t prime_len, order_len;
++
++     wpa_printf(MSG_DEBUG, "EAP-pwd: Received commit response");
++
+++    prime_len = BN_num_bytes(data->grp->prime);
+++    order_len = BN_num_bytes(data->grp->order);
+++
+++    if (payload_len != 2 * prime_len + order_len) {
+++        wpa_printf(MSG_INFO,
+++               "EAP-pwd: Unexpected Commit payload length %u (expected 
+%u)",
+++               (unsigned int) payload_len,
+++               (unsigned int) (2 * prime_len + order_len));
+++        goto fin;
+++    }
+++
++     if (((data->peer_scalar = BN_new()) == NULL) ||
++         ((data->k = BN_new()) == NULL) ||
++         ((cofactor = BN_new()) == NULL) ||
++@@ -774,6 +786,13 @@ eap_pwd_process_confirm_resp(struct eap_sm *sm, 
+struct eap_pwd_data *data,
++     u8 conf[SHA256_MAC_LEN], *cruft = NULL, *ptr;
++     int offset;
++
+++    if (payload_len != SHA256_MAC_LEN) {
+++        wpa_printf(MSG_INFO,
+++               "EAP-pwd: Unexpected Confirm payload length %u 
+(expected %u)",
+++               (unsigned int) payload_len, SHA256_MAC_LEN);
+++        goto fin;
+++    }
+++
++     /* build up the ciphersuite: group | random_function | prf */
++     grp = htons(data->group_num);
++     ptr = (u8 *) &cs;
++--
++1.9.1
++
+diff --git 
+a/meta/recipes-connectivity/hostapd/hostapd/0003-EAP-pwd-peer-Fix-Total-Length-parsing-for-fragment-r.patch 
+b/meta/recipes-connectivity/hostapd/hostapd/0003-EAP-pwd-peer-Fix-Total-Length-parsing-for-fragment-r.patch
+new file mode 100644
+index 0000000..e46ce43
+--- /dev/null
++++ 
+b/meta/recipes-connectivity/hostapd/hostapd/0003-EAP-pwd-peer-Fix-Total-Length-parsing-for-fragment-r.patch
+@@ -0,0 +1,56 @@
++Upstream-Status: Backport
++
++Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
++
++From 477c74395acd0123340457ba6f15ab345d42016e Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <j@w1.fi>
++Date: Sat, 2 May 2015 19:23:04 +0300
++Subject: [PATCH 3/5] EAP-pwd peer: Fix Total-Length parsing for fragment
++ reassembly
++
++The remaining number of bytes in the message could be smaller than the
++Total-Length field size, so the length needs to be explicitly checked
++prior to reading the field and decrementing the len variable. This could
++have resulted in the remaining length becoming negative and interpreted
++as a huge positive integer.
++
++In addition, check that there is no already started fragment in progress
++before allocating a new buffer for reassembling fragments. This avoid a
++potential memory leak when processing invalid message.
++
++Signed-off-by: Jouni Malinen <j@w1.fi>
++---
++ src/eap_peer/eap_pwd.c | 12 ++++++++++++
++ 1 file changed, 12 insertions(+)
++
++diff --git a/src/eap_peer/eap_pwd.c b/src/eap_peer/eap_pwd.c
++index a629437..1d2079b 100644
++--- a/src/eap_peer/eap_pwd.c
+++++ b/src/eap_peer/eap_pwd.c
++@@ -866,11 +866,23 @@ eap_pwd_process(struct eap_sm *sm, void *priv, 
+struct eap_method_ret *ret,
++      * if it's the first fragment there'll be a length field
++      */
++     if (EAP_PWD_GET_LENGTH_BIT(lm_exch)) {
+++        if (len < 2) {
+++            wpa_printf(MSG_DEBUG,
+++                   "EAP-pwd: Frame too short to contain Total-Length 
+field");
+++            ret->ignore = TRUE;
+++            return NULL;
+++        }
++         tot_len = WPA_GET_BE16(pos);
++         wpa_printf(MSG_DEBUG, "EAP-pwd: Incoming fragments whose "
++                "total length = %d", tot_len);
++         if (tot_len > 15000)
++             return NULL;
+++        if (data->inbuf) {
+++            wpa_printf(MSG_DEBUG,
+++                   "EAP-pwd: Unexpected new fragment start when 
+previous fragment is still in use");
+++            ret->ignore = TRUE;
+++            return NULL;
+++        }
++         data->inbuf = wpabuf_alloc(tot_len);
++         if (data->inbuf == NULL) {
++             wpa_printf(MSG_INFO, "Out of memory to buffer "
++--
++1.9.1
++
+diff --git 
+a/meta/recipes-connectivity/hostapd/hostapd/0004-EAP-pwd-server-Fix-Total-Length-parsing-for-fragment.patch 
+b/meta/recipes-connectivity/hostapd/hostapd/0004-EAP-pwd-server-Fix-Total-Length-parsing-for-fragment.patch
+new file mode 100644
+index 0000000..a4c02b4
+--- /dev/null
++++ 
+b/meta/recipes-connectivity/hostapd/hostapd/0004-EAP-pwd-server-Fix-Total-Length-parsing-for-fragment.patch
+@@ -0,0 +1,54 @@
++Upstream-Status: Backport
++
++Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
++
++From 3035cc2894e08319b905bd6561e8bddc8c2db9fa Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <j@w1.fi>
++Date: Sat, 2 May 2015 19:26:06 +0300
++Subject: [PATCH 4/5] EAP-pwd server: Fix Total-Length parsing for fragment
++ reassembly
++
++The remaining number of bytes in the message could be smaller than the
++Total-Length field size, so the length needs to be explicitly checked
++prior to reading the field and decrementing the len variable. This could
++have resulted in the remaining length becoming negative and interpreted
++as a huge positive integer.
++
++In addition, check that there is no already started fragment in progress
++before allocating a new buffer for reassembling fragments. This avoid a
++potential memory leak when processing invalid message.
++
++Signed-off-by: Jouni Malinen <j@w1.fi>
++---
++ src/eap_server/eap_server_pwd.c | 10 ++++++++++
++ 1 file changed, 10 insertions(+)
++
++diff --git a/src/eap_server/eap_server_pwd.c 
+b/src/eap_server/eap_server_pwd.c
++index 3189105..2bfc3c2 100644
++--- a/src/eap_server/eap_server_pwd.c
+++++ b/src/eap_server/eap_server_pwd.c
++@@ -942,11 +942,21 @@ static void eap_pwd_process(struct eap_sm *sm, 
+void *priv,
++      * the first fragment has a total length
++      */
++     if (EAP_PWD_GET_LENGTH_BIT(lm_exch)) {
+++        if (len < 2) {
+++            wpa_printf(MSG_DEBUG,
+++                   "EAP-pwd: Frame too short to contain Total-Length 
+field");
+++            return;
+++        }
++         tot_len = WPA_GET_BE16(pos);
++         wpa_printf(MSG_DEBUG, "EAP-pwd: Incoming fragments, total "
++                "length = %d", tot_len);
++         if (tot_len > 15000)
++             return;
+++        if (data->inbuf) {
+++            wpa_printf(MSG_DEBUG,
+++                   "EAP-pwd: Unexpected new fragment start when 
+previous fragment is still in use");
+++            return;
+++        }
++         data->inbuf = wpabuf_alloc(tot_len);
++         if (data->inbuf == NULL) {
++             wpa_printf(MSG_INFO, "EAP-pwd: Out of memory to "
++--
++1.9.1
++
+diff --git 
+a/meta/recipes-connectivity/hostapd/hostapd/0005-EAP-pwd-peer-Fix-asymmetric-fragmentation-behavior.patch 
+b/meta/recipes-connectivity/hostapd/hostapd/0005-EAP-pwd-peer-Fix-asymmetric-fragmentation-behavior.patch
+new file mode 100644
+index 0000000..4073600
+--- /dev/null
++++ 
+b/meta/recipes-connectivity/hostapd/hostapd/0005-EAP-pwd-peer-Fix-asymmetric-fragmentation-behavior.patch
+@@ -0,0 +1,36 @@
++Upstream-Status: Backport
++
++Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
++
++From 28a069a545b06b99eb55ad53f63f2c99e65a98f6 Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <j@w1.fi>
++Date: Sat, 2 May 2015 19:26:28 +0300
++Subject: [PATCH 5/5] EAP-pwd peer: Fix asymmetric fragmentation behavior
++
++The L (Length) and M (More) flags needs to be cleared before deciding
++whether the locally generated response requires fragmentation. This
++fixes an issue where these flags from the server could have been invalid
++for the following message. In some cases, this could have resulted in
++triggering the wpabuf security check that would terminate the process
++due to invalid buffer allocation.
++
++Signed-off-by: Jouni Malinen <j@w1.fi>
++---
++ src/eap_peer/eap_pwd.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/eap_peer/eap_pwd.c b/src/eap_peer/eap_pwd.c
++index 1d2079b..e58b13a 100644
++--- a/src/eap_peer/eap_pwd.c
+++++ b/src/eap_peer/eap_pwd.c
++@@ -968,6 +968,7 @@ eap_pwd_process(struct eap_sm *sm, void *priv, 
+struct eap_method_ret *ret,
++     /*
++      * we have output! Do we need to fragment it?
++      */
+++    lm_exch = EAP_PWD_GET_EXCHANGE(lm_exch);
++     len = wpabuf_len(data->outbuf);
++     if ((len + EAP_PWD_HDR_SIZE) > data->mtu) {
++         resp = eap_msg_alloc(EAP_VENDOR_IETF, EAP_TYPE_PWD, data->mtu,
++--
++1.9.1
++
 -- 
-1.7.9.5
+1.8.4.2
+
+-- 
 
 
