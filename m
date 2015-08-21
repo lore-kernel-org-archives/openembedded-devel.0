@@ -1,26 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E1F976AD8
+	by mail.openembedded.org (Postfix) with ESMTP id 3E10776AC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 08:41:22 +0000 (UTC)
+	Fri, 21 Aug 2015 08:41:20 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7L8fNFG008847
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7L8fKTL008844
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 01:41:23 -0700 (PDT)
+	Fri, 21 Aug 2015 01:41:20 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.235.1; Fri, 21 Aug 2015 01:41:22 -0700
+	14.3.235.1; Fri, 21 Aug 2015 01:41:19 -0700
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 21 Aug 2015 16:37:14 +0800
-Message-ID: <1440146235-9630-4-git-send-email-kai.kang@windriver.com>
+Date: Fri, 21 Aug 2015 16:37:12 +0800
+Message-ID: <1440146235-9630-2-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1440146235-9630-1-git-send-email-kai.kang@windriver.com>
 References: <1440146235-9630-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/4] ltrace: 7.2 -> 7.3
+Subject: [meta-networking][PATCH 1/4] autofs: 5.1.0 -> 5.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,124 +39,125 @@ Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Upgrade ltrace from 7.2 to 7.3.
-
-* update SRC_URI and SRCREV
-* drop backport patch 0001-In-Linux-backend-initialize-linkmap-struct.patch
-* fix error when compile with gcc 5.2
-
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- ...n-Linux-backend-initialize-linkmap-struct.patch | 31 ------------------
- ...-ltrace-fix-gcc-5-logical-not-parentheses.patch | 37 ++++++++++++++++++++++
- meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |  8 ++---
- 3 files changed, 41 insertions(+), 35 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
- create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
+ .../0001-systemd-allow-with-systemd-to-take-a-path-arg.patch          | 0
+ .../autofs/{autofs-5.1.0 => autofs}/Makefile.rules-cross.patch        | 0
+ .../autofs/{autofs-5.1.0 => autofs}/add-the-needed-stdarg.h.patch     | 0
+ .../autofs-5.0.7-do-not-check-for-modprobe.patch                      | 0
+ .../autofs/{autofs-5.1.0 => autofs}/autofs-5.0.7-fix-lib-deps.patch   | 0
+ .../autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch        | 0
+ .../autofs/{autofs-5.1.0 => autofs}/autofs-additional-distros.patch   | 0
+ .../recipes-daemons/autofs/{autofs-5.1.0 => autofs}/cross.patch       | 0
+ .../fix-the-YACC-rule-to-fix-a-building-failure.patch                 | 0
+ .../autofs/{autofs-5.1.0 => autofs}/fix_disable_ldap.patch            | 0
+ .../autofs/{autofs-5.1.0 => autofs}/force-STRIP-to-emtpy.patch        | 0
+ .../autofs/{autofs-5.1.0 => autofs}/libtirpc-name-clash-backout.patch | 0
+ .../recipes-daemons/autofs/{autofs-5.1.0 => autofs}/libtirpc.patch    | 0
+ .../recipes-daemons/autofs/{autofs-5.1.0 => autofs}/no-bash.patch     | 0
+ .../autofs/{autofs-5.1.0 => autofs}/remove-bashism.patch              | 0
+ .../using-pkg-config-to-detect-libxml-2.0-and-krb5.patch              | 0
+ .../recipes-daemons/autofs/{autofs_5.1.0.bb => autofs_5.1.1.bb}       | 4 ++--
+ 17 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/Makefile.rules-cross.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/add-the-needed-stdarg.h.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/autofs-5.0.7-do-not-check-for-modprobe.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/autofs-5.0.7-fix-lib-deps.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/autofs-additional-distros.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/cross.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/fix-the-YACC-rule-to-fix-a-building-failure.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/fix_disable_ldap.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/force-STRIP-to-emtpy.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/libtirpc-name-clash-backout.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/libtirpc.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/no-bash.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/remove-bashism.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs_5.1.0.bb => autofs_5.1.1.bb} (93%)
 
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
-deleted file mode 100644
-index 13609c1..0000000
---- a/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From efd12cfb10ccd2c612838c0e22069554ce60637c Mon Sep 17 00:00:00 2001
--From: Petr Machata <pmachata@redhat.com>
--Date: Wed, 2 Jan 2013 16:01:43 +0100
--Subject: [PATCH] In Linux backend, initialize linkmap struct
--
--GCC 4.7.2 -m32 -Os gives the following (spurious) warning:
--proc.c: In function 'crawl_linkmap':
--proc.c:544:25: error: 'rlm.l_addr' may be used uninitialized in this
--
--Upstream-Status: Backport
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-----
-- sysdeps/linux-gnu/proc.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/sysdeps/linux-gnu/proc.c b/sysdeps/linux-gnu/proc.c
--index 6e01d28..d69c985 100644
----- a/sysdeps/linux-gnu/proc.c
--+++ b/sysdeps/linux-gnu/proc.c
--@@ -484,7 +484,7 @@ crawl_linkmap(struct process *proc, struct lt_r_debug_64 *dbg)
-- 	arch_addr_t addr = (arch_addr_t)(uintptr_t)dbg->r_map;
-- 
-- 	while (addr != 0) {
---		struct lt_link_map_64 rlm;
--+		struct lt_link_map_64 rlm = {};
-- 		if (lm_fetcher(proc)(proc, addr, &rlm) < 0) {
-- 			debug(2, "Unable to read link map");
-- 			return;
---- 
--2.3.5
--
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
-new file mode 100644
-index 0000000..ecfba0d
---- /dev/null
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
-@@ -0,0 +1,37 @@
-+From 92bf386a18c9b49a9c44612b8ff7277c898de6cc Mon Sep 17 00:00:00 2001
-+From: Kai Kang <kai.kang@windriver.com>
-+Date: Fri, 21 Aug 2015 16:07:52 +0800
-+Subject: [PATCH] ltrace: fix gcc 5 logical not parentheses
-+
-+Upstream-Status: Pending
-+
-+Build ltrace with gcc 5.2, it fails with:
-+
-+error: logical not is only applied to the left hand side of comparison
-+[-Werror=logical-not-parentheses]
-+   if (!need_data(data, offset, SIZE / 8) < 0)  \
-+                                             ^
-+
-+Fix it.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ ltrace-elf.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/ltrace-elf.c b/ltrace-elf.c
-+index c571d2a..fe66f25 100644
-+--- a/ltrace-elf.c
-++++ b/ltrace-elf.c
-+@@ -218,7 +218,7 @@ need_data(Elf_Data *data, GElf_Xword offset, GElf_Xword size)
-+ 	int								\
-+ 	NAME(Elf_Data *data, GElf_Xword offset, uint##SIZE##_t *retp)	\
-+ 	{								\
-+-		if (!need_data(data, offset, SIZE / 8) < 0)		\
-++		if (need_data(data, offset, SIZE / 8) >= 0)		\
-+ 			return -1;					\
-+ 									\
-+ 		if (data->d_buf == NULL) /* NODATA section */ {		\
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-index f9f1684..d8d037e 100644
---- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-@@ -10,15 +10,15 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch b/meta-networking/recipes-daemons/autofs/autofs/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/Makefile.rules-cross.patch b/meta-networking/recipes-daemons/autofs/autofs/Makefile.rules-cross.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/Makefile.rules-cross.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/Makefile.rules-cross.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/add-the-needed-stdarg.h.patch b/meta-networking/recipes-daemons/autofs/autofs/add-the-needed-stdarg.h.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/add-the-needed-stdarg.h.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/add-the-needed-stdarg.h.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-do-not-check-for-modprobe.patch b/meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-do-not-check-for-modprobe.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-do-not-check-for-modprobe.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-do-not-check-for-modprobe.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-fix-lib-deps.patch b/meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-fix-lib-deps.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-fix-lib-deps.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-fix-lib-deps.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch b/meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-additional-distros.patch b/meta-networking/recipes-daemons/autofs/autofs/autofs-additional-distros.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-additional-distros.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/autofs-additional-distros.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/cross.patch b/meta-networking/recipes-daemons/autofs/autofs/cross.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/cross.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/cross.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/fix-the-YACC-rule-to-fix-a-building-failure.patch b/meta-networking/recipes-daemons/autofs/autofs/fix-the-YACC-rule-to-fix-a-building-failure.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/fix-the-YACC-rule-to-fix-a-building-failure.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/fix-the-YACC-rule-to-fix-a-building-failure.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/fix_disable_ldap.patch b/meta-networking/recipes-daemons/autofs/autofs/fix_disable_ldap.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/fix_disable_ldap.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/fix_disable_ldap.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/force-STRIP-to-emtpy.patch b/meta-networking/recipes-daemons/autofs/autofs/force-STRIP-to-emtpy.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/force-STRIP-to-emtpy.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/force-STRIP-to-emtpy.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/libtirpc-name-clash-backout.patch b/meta-networking/recipes-daemons/autofs/autofs/libtirpc-name-clash-backout.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/libtirpc-name-clash-backout.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/libtirpc-name-clash-backout.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/libtirpc.patch b/meta-networking/recipes-daemons/autofs/autofs/libtirpc.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/libtirpc.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/libtirpc.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/no-bash.patch b/meta-networking/recipes-daemons/autofs/autofs/no-bash.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/no-bash.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/no-bash.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/remove-bashism.patch b/meta-networking/recipes-daemons/autofs/autofs/remove-bashism.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/remove-bashism.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/remove-bashism.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch b/meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
+similarity index 100%
+rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
+rename to meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
+diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.1.bb
+similarity index 93%
+rename from meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
+rename to meta-networking/recipes-daemons/autofs/autofs_5.1.1.bb
+index fbfe4b3..0f4c247 100644
+--- a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
++++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.1.bb
+@@ -23,8 +23,8 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
+            file://fix-the-YACC-rule-to-fix-a-building-failure.patch \
+ "
  
- PE = "1"
--PV = "7.2+git${SRCPV}"
--SRCREV = "f44b28421979cec88d6d6a778fc27a8cd514f508"
-+PV = "7.3+git${SRCPV}"
-+SRCREV = "37ecc41b58be3dbdd79592a76e331b5b371e4f81"
+-SRC_URI[md5sum] = "b7724a9a55923f3c06933a8dfd1e79d3"
+-SRC_URI[sha256sum] = "794a28d178d2b21a2380ee71cbdb3b15b4be47c06f3de255b8c5c4351f046b26"
++SRC_URI[md5sum] = "e143df66b614b8cdb1ff533735f8e12d"
++SRC_URI[sha256sum] = "795419383b120d15699ab3b89ea0f3d029f6fb28405a83982d305c4b7b61130f"
  
- DEPENDS = "elfutils"
- RDEPENDS_${PN} = "elfutils"
--SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git \
-+SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=ltrace-0.7 \
-            file://ltrace-0.7.2-unused-typedef.patch \
-            file://configure-allow-to-disable-selinux-support.patch \
--           file://0001-In-Linux-backend-initialize-linkmap-struct.patch \
-+           file://0001-ltrace-fix-gcc-5-logical-not-parentheses.patch \
-           "
- S = "${WORKDIR}/git"
+ inherit update-rc.d pkgconfig
  
 -- 
 1.9.1
