@@ -1,40 +1,34 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 235E073CF2
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 600BD73CF2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2015 01:42:13 +0000 (UTC)
-Received: by wicja10 with SMTP id ja10so4006180wic.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2015 18:42:13 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:content-type:mime-version:subject:from
-	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
-	:to; bh=WdWMPng7qcNHMuTs+pBP01bLqEjbOKgDzBwjQkCXXas=;
-	b=FskPIz4oGFThPTI5HyspJEy1vgWlAimHeGEq75yxaNyL63XeklHe73FwjgisxBfMZr
-	3QGm0jX2BbZcY/OYiYh7XVT4c7/IL4dXf6LhDq6xOasUWaSso1Fqznh+9Wm3fwIxoT6Z
-	OW0qyjVe1g+z733g/dfKoqiaOErwn0CBheQbcEFel6XiEigLQ+JFLLOURINaE84mXhVs
-	SxnNPNSxoZcxOJ6hcykwhpq83UCbgdKaVvcXSWPw6svIXW3nJEEfE//LfdlONwXXOcT9
-	9l/DwHfZVZHsbaFGJME9z81akFcEQOVBr2gKrbdA2HyBh85Zn02AZznsWqq82R3wDWmT
-	fRuw==
-X-Gm-Message-State: ALoCoQklNs0UIarR0GyOCCx4e1ePLvo1F9opu+2wOovJHr/IW2seQfX0+gB1R5J+F3v6B6HyWLuM
-X-Received: by 10.180.79.132 with SMTP id j4mr1436572wix.87.1440121333676;
-	Thu, 20 Aug 2015 18:42:13 -0700 (PDT)
-Received: from [192.168.1.8] (90-145-86-162.bbserv.nl. [90.145.86.162])
-	by smtp.gmail.com with ESMTPSA id i1sm7818371wjq.42.2015.08.20.18.42.12
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 20 Aug 2015 18:42:12 -0700 (PDT)
-Mime-Version: 1.0 (1.0)
-From: Koen Kooi <koen@dominion.thruhere.net>
-X-Mailer: iPhone Mail (13A4325c)
-In-Reply-To: <30DC4EDFD798C94083F3E083754532CC011C1F94CC@G08CNEXMBPEKD03.g08.fujitsu.local>
-Date: Fri, 21 Aug 2015 03:42:12 +0200
-Message-Id: <E7B82DA7-F22E-48D9-A3A5-A21E22DF54FE@dominion.thruhere.net>
+	Fri, 21 Aug 2015 02:26:36 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99869262"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 21 Aug 2015 10:29:49 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7L2QU0d005525;
+	Fri, 21 Aug 2015 10:26:31 +0800
+Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0181.006; Fri, 21 Aug 2015 10:26:34 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Thread-Topic: [meta-oe][PATCH 1/5] waf-samba: add new class
+Thread-Index: AQHQ22E5ErdPZgiuqkeA0G+SrwUi554VoqPw//+FsQCAAI4zEA==
+Date: Fri, 21 Aug 2015 02:26:33 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CC011C1F957A@G08CNEXMBPEKD03.g08.fujitsu.local>
 References: <1440086369-3321-1-git-send-email-koen@dominion.thruhere.net>
 	<1440086369-3321-2-git-send-email-koen@dominion.thruhere.net>
 	<30DC4EDFD798C94083F3E083754532CC011C1F94CC@G08CNEXMBPEKD03.g08.fujitsu.local>
-To: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+	<E7B82DA7-F22E-48D9-A3A5-A21E22DF54FE@dominion.thruhere.net>
+In-Reply-To: <E7B82DA7-F22E-48D9-A3A5-A21E22DF54FE@dominion.thruhere.net>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
+MIME-Version: 1.0
 Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH 1/5] waf-samba: add new class
@@ -51,117 +45,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2015 01:42:17 -0000
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 21 Aug 2015 02:26:43 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-
-
-Op 21 aug. 2015 om 03:11 heeft Bian, Naimeng <biannm@cn.fujitsu.com> het vol=
-gende geschreven:
-
->> -----Original Message-----
->> From: Koen Kooi [mailto:koen@dominion.thruhere.net]
->> Sent: Thursday, August 20, 2015 11:59 PM
->> To: openembedded-devel@lists.openembedded.org
->> Cc: Bian, Naimeng; Koen Kooi
->> Subject: [meta-oe][PATCH 1/5] waf-samba: add new class
->>=20
->> From: Bian Naimeng <biannm@cn.fujitsu.com>
->>=20
->> waf-samba is a build system used by samba related software
->>=20
->> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->> ---
->> meta-oe/classes/waf-samba.bbclass | 51
->> +++++++++++++++++++++++++++++++++++++++
->> 1 file changed, 51 insertions(+)
->> create mode 100644 meta-oe/classes/waf-samba.bbclass
->>=20
->> diff --git a/meta-oe/classes/waf-samba.bbclass
->> b/meta-oe/classes/waf-samba.bbclass
->> new file mode 100644
->> index 0000000..b8e010a
->> --- /dev/null
->> +++ b/meta-oe/classes/waf-samba.bbclass
->> @@ -0,0 +1,51 @@
->> +# waf is a build system which is used by samba related project.
->> +# Obtain details from https://wiki.samba.org/index.php/Waf
->> +#
->> +inherit qemu pythonnative
->> +
->> +DEPENDS +=3D "qemu-native libxslt-native docbook-xsl-stylesheets-native
->> python"
->> +
->> +CONFIGUREOPTS =3D " --prefix=3D${prefix} =C2=A5
->> +                  --bindir=3D${bindir} =C2=A5
->> +                  --sbindir=3D${sbindir} =C2=A5
->> +                  --libexecdir=3D${libexecdir} =C2=A5
->> +                  --datadir=3D${datadir} =C2=A5
->> +                  --sysconfdir=3D${sysconfdir} =C2=A5
->> +                  --sharedstatedir=3D${sharedstatedir} =C2=A5
->> +                  --localstatedir=3D${localstatedir} =C2=A5
->> +                  --libdir=3D${libdir} =C2=A5
->> +                  --includedir=3D${includedir} =C2=A5
->> +                  --oldincludedir=3D${oldincludedir} =C2=A5
->> +                  --infodir=3D${infodir} =C2=A5
->> +                  --mandir=3D${mandir} =C2=A5
->> +                "
->> +
->> +do_configure() {
->> +    qemu_binary=3D"${@qemu_target_binary(d)}"
->> +    if [ ${qemu_binary} =3D=3D "qemu-allarch" ]; then
->> +        qemu_binary=3D"qemuwrapper"
->> +    fi
->> +
->> +    libdir_qemu=3D"${STAGING_DIR_HOST}/${libdir}"
->> +    base_libdir_qemu=3D"${STAGING_DIR_HOST}/${base_libdir}"
->> +    oldest_kernel_qemu=3D${OLDEST_KERNEL}
->> +
->> +    CROSS_EXEC=3D"${qemu_binary} =C2=A5
->> +                -r ${oldest_kernel_qemu} =C2=A5
->> +                -L ${STAGING_DIR_HOST} =C2=A5
->> +                -E LD_LIBRARY_PATH=3D${libdir_qemu}:${base_libdir_qemu}"=
-
->> +
->> +    export BUILD_SYS=3D${BUILD_SYS}
->> +    export HOST_SYS=3D${HOST_SYS}
->> +    export BUILD_ARCH=3D${BUILD_ARCH}
->> +    export HOST_ARCH=3D${HOST_ARCH}
->> +    export STAGING_LIBDIR=3D${STAGING_LIBDIR}
->> +    export STAGING_INCDIR=3D${STAGING_INCDIR}
->> +    export PYTHONPATH=3D${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR}
->> +
->> +    ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF} --cross-compile
->> --cross-execute=3D"${CROSS_EXEC}"
->> --cross-answers=3D${B}/cross-answers-${TARGET_ARCH}.txt
->=20
-> Thanks for your update.
->=20
-> Would you tell me why both --cross-execute and --cross-answer are required=
-.
-
-that's the new hybrid mode, it will generate crossanswers files using qemu. I=
- also have platforms without qemu support=20
-
-
-> If the --cross-answers is not be required, IMO, we do not need support it.=
-
-> Because it will be not an easy job to maintain cross-answers-${TARGET_ARCH=
-}.txt for
-> each waf-samba.bbclass based recipe.
->=20
-> Thanks
-> Bian
->=20
->> +}
->> +
->> +do_install() {
->> +    oe_runmake install DESTDIR=3D${D}
->> +}
->> --
->> 2.0.1
->=20
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBLb2VuIEtvb2kgW21haWx0bzpr
+b2VuQGRvbWluaW9uLnRocnVoZXJlLm5ldF0NCj4gU2VudDogRnJpZGF5LCBBdWd1c3QgMjEsIDIw
+MTUgOTo0MiBBTQ0KPiBUbzogQmlhbiwgTmFpbWVuZw0KPiBDYzogb3BlbmVtYmVkZGVkLWRldmVs
+QGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFttZXRhLW9lXVtQQVRDSCAx
+LzVdIHdhZi1zYW1iYTogYWRkIG5ldyBjbGFzcw0KPiANCj4gT3AgMjEgYXVnLiAyMDE1IG9tIDAz
+OjExIGhlZWZ0IEJpYW4sIE5haW1lbmcgPGJpYW5ubUBjbi5mdWppdHN1LmNvbT4gaGV0DQo+IHZv
+bGdlbmRlIGdlc2NocmV2ZW46DQo+IA0KPiA+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0K
+PiA+PiBGcm9tOiBLb2VuIEtvb2kgW21haWx0bzprb2VuQGRvbWluaW9uLnRocnVoZXJlLm5ldF0N
+Cj4gPj4gU2VudDogVGh1cnNkYXksIEF1Z3VzdCAyMCwgMjAxNSAxMTo1OSBQTQ0KPiA+PiBUbzog
+b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPj4gQ2M6IEJpYW4s
+IE5haW1lbmc7IEtvZW4gS29vaQ0KPiA+PiBTdWJqZWN0OiBbbWV0YS1vZV1bUEFUQ0ggMS81XSB3
+YWYtc2FtYmE6IGFkZCBuZXcgY2xhc3MNCj4gPj4NCj4gPj4gRnJvbTogQmlhbiBOYWltZW5nIDxi
+aWFubm1AY24uZnVqaXRzdS5jb20+DQo+ID4+DQo+ID4+IHdhZi1zYW1iYSBpcyBhIGJ1aWxkIHN5
+c3RlbSB1c2VkIGJ5IHNhbWJhIHJlbGF0ZWQgc29mdHdhcmUNCj4gPj4NCj4gPj4gU2lnbmVkLW9m
+Zi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRzdS5jb20+DQo+ID4+IFNpZ25lZC1v
+ZmYtYnk6IEtvZW4gS29vaSA8a29lbkBkb21pbmlvbi50aHJ1aGVyZS5uZXQ+DQo+ID4+IC0tLQ0K
+PiA+PiBtZXRhLW9lL2NsYXNzZXMvd2FmLXNhbWJhLmJiY2xhc3MgfCA1MQ0KPiA+PiArKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysNCj4gPj4gMSBmaWxlIGNoYW5nZWQsIDUx
+IGluc2VydGlvbnMoKykNCj4gPj4gY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvY2xhc3Nlcy93
+YWYtc2FtYmEuYmJjbGFzcw0KPiA+Pg0KPiA+PiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9jbGFzc2Vz
+L3dhZi1zYW1iYS5iYmNsYXNzDQo+ID4+IGIvbWV0YS1vZS9jbGFzc2VzL3dhZi1zYW1iYS5iYmNs
+YXNzDQo+ID4+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4+IGluZGV4IDAwMDAwMDAuLmI4ZTAx
+MGENCj4gPj4gLS0tIC9kZXYvbnVsbA0KPiA+PiArKysgYi9tZXRhLW9lL2NsYXNzZXMvd2FmLXNh
+bWJhLmJiY2xhc3MNCj4gPj4gQEAgLTAsMCArMSw1MSBAQA0KPiA+PiArIyB3YWYgaXMgYSBidWls
+ZCBzeXN0ZW0gd2hpY2ggaXMgdXNlZCBieSBzYW1iYSByZWxhdGVkIHByb2plY3QuDQo+ID4+ICsj
+IE9idGFpbiBkZXRhaWxzIGZyb20gaHR0cHM6Ly93aWtpLnNhbWJhLm9yZy9pbmRleC5waHAvV2Fm
+DQo+ID4+ICsjDQo+ID4+ICtpbmhlcml0IHFlbXUgcHl0aG9ubmF0aXZlDQo+ID4+ICsNCj4gPj4g
+K0RFUEVORFMgKz0gInFlbXUtbmF0aXZlIGxpYnhzbHQtbmF0aXZlDQo+ID4+ICtkb2Nib29rLXhz
+bC1zdHlsZXNoZWV0cy1uYXRpdmUNCj4gPj4gcHl0aG9uIg0KPiA+PiArDQo+ID4+ICtDT05GSUdV
+UkVPUFRTID0gIiAtLXByZWZpeD0ke3ByZWZpeH0gwqUNCj4gPj4gKyAgICAgICAgICAgICAgICAg
+IC0tYmluZGlyPSR7YmluZGlyfSDCpQ0KPiA+PiArICAgICAgICAgICAgICAgICAgLS1zYmluZGly
+PSR7c2JpbmRpcn0gwqUNCj4gPj4gKyAgICAgICAgICAgICAgICAgIC0tbGliZXhlY2Rpcj0ke2xp
+YmV4ZWNkaXJ9IMKlDQo+ID4+ICsgICAgICAgICAgICAgICAgICAtLWRhdGFkaXI9JHtkYXRhZGly
+fSDCpQ0KPiA+PiArICAgICAgICAgICAgICAgICAgLS1zeXNjb25mZGlyPSR7c3lzY29uZmRpcn0g
+wqUNCj4gPj4gKyAgICAgICAgICAgICAgICAgIC0tc2hhcmVkc3RhdGVkaXI9JHtzaGFyZWRzdGF0
+ZWRpcn0gwqUNCj4gPj4gKyAgICAgICAgICAgICAgICAgIC0tbG9jYWxzdGF0ZWRpcj0ke2xvY2Fs
+c3RhdGVkaXJ9IMKlDQo+ID4+ICsgICAgICAgICAgICAgICAgICAtLWxpYmRpcj0ke2xpYmRpcn0g
+wqUNCj4gPj4gKyAgICAgICAgICAgICAgICAgIC0taW5jbHVkZWRpcj0ke2luY2x1ZGVkaXJ9IMKl
+DQo+ID4+ICsgICAgICAgICAgICAgICAgICAtLW9sZGluY2x1ZGVkaXI9JHtvbGRpbmNsdWRlZGly
+fSDCpQ0KPiA+PiArICAgICAgICAgICAgICAgICAgLS1pbmZvZGlyPSR7aW5mb2Rpcn0gwqUNCj4g
+Pj4gKyAgICAgICAgICAgICAgICAgIC0tbWFuZGlyPSR7bWFuZGlyfSDCpQ0KPiA+PiArICAgICAg
+ICAgICAgICAgICINCj4gPj4gKw0KPiA+PiArZG9fY29uZmlndXJlKCkgew0KPiA+PiArICAgIHFl
+bXVfYmluYXJ5PSIke0BxZW11X3RhcmdldF9iaW5hcnkoZCl9Ig0KPiA+PiArICAgIGlmIFsgJHtx
+ZW11X2JpbmFyeX0gPT0gInFlbXUtYWxsYXJjaCIgXTsgdGhlbg0KPiA+PiArICAgICAgICBxZW11
+X2JpbmFyeT0icWVtdXdyYXBwZXIiDQo+ID4+ICsgICAgZmkNCj4gPj4gKw0KPiA+PiArICAgIGxp
+YmRpcl9xZW11PSIke1NUQUdJTkdfRElSX0hPU1R9LyR7bGliZGlyfSINCj4gPj4gKyAgICBiYXNl
+X2xpYmRpcl9xZW11PSIke1NUQUdJTkdfRElSX0hPU1R9LyR7YmFzZV9saWJkaXJ9Ig0KPiA+PiAr
+ICAgIG9sZGVzdF9rZXJuZWxfcWVtdT0ke09MREVTVF9LRVJORUx9DQo+ID4+ICsNCj4gPj4gKyAg
+ICBDUk9TU19FWEVDPSIke3FlbXVfYmluYXJ5fSDCpQ0KPiA+PiArICAgICAgICAgICAgICAgIC1y
+ICR7b2xkZXN0X2tlcm5lbF9xZW11fSDCpQ0KPiA+PiArICAgICAgICAgICAgICAgIC1MICR7U1RB
+R0lOR19ESVJfSE9TVH0gwqUNCj4gPj4gKyAgICAgICAgICAgICAgICAtRSBMRF9MSUJSQVJZX1BB
+VEg9JHtsaWJkaXJfcWVtdX06JHtiYXNlX2xpYmRpcl9xZW11fSINCj4gPj4gKw0KPiA+PiArICAg
+IGV4cG9ydCBCVUlMRF9TWVM9JHtCVUlMRF9TWVN9DQo+ID4+ICsgICAgZXhwb3J0IEhPU1RfU1lT
+PSR7SE9TVF9TWVN9DQo+ID4+ICsgICAgZXhwb3J0IEJVSUxEX0FSQ0g9JHtCVUlMRF9BUkNIfQ0K
+PiA+PiArICAgIGV4cG9ydCBIT1NUX0FSQ0g9JHtIT1NUX0FSQ0h9DQo+ID4+ICsgICAgZXhwb3J0
+IFNUQUdJTkdfTElCRElSPSR7U1RBR0lOR19MSUJESVJ9DQo+ID4+ICsgICAgZXhwb3J0IFNUQUdJ
+TkdfSU5DRElSPSR7U1RBR0lOR19JTkNESVJ9DQo+ID4+ICsgICAgZXhwb3J0IFBZVEhPTlBBVEg9
+JHtTVEFHSU5HX0RJUl9IT1NUfSR7UFlUSE9OX1NJVEVQQUNLQUdFU19ESVJ9DQo+ID4+ICsNCj4g
+Pj4gKyAgICAuL2NvbmZpZ3VyZSAke0NPTkZJR1VSRU9QVFN9ICR7RVhUUkFfT0VDT05GfSAtLWNy
+b3NzLWNvbXBpbGUNCj4gPj4gLS1jcm9zcy1leGVjdXRlPSIke0NST1NTX0VYRUN9Ig0KPiA+PiAt
+LWNyb3NzLWFuc3dlcnM9JHtCfS9jcm9zcy1hbnN3ZXJzLSR7VEFSR0VUX0FSQ0h9LnR4dA0KPiA+
+DQo+ID4gVGhhbmtzIGZvciB5b3VyIHVwZGF0ZS4NCj4gPg0KPiA+IFdvdWxkIHlvdSB0ZWxsIG1l
+IHdoeSBib3RoIC0tY3Jvc3MtZXhlY3V0ZSBhbmQgLS1jcm9zcy1hbnN3ZXIgYXJlIHJlcXVpcmVk
+Lg0KPiANCj4gdGhhdCdzIHRoZSBuZXcgaHlicmlkIG1vZGUsIGl0IHdpbGwgZ2VuZXJhdGUgY3Jv
+c3NhbnN3ZXJzIGZpbGVzIHVzaW5nIHFlbXUuDQo+IEkgYWxzbyBoYXZlIHBsYXRmb3JtcyB3aXRo
+b3V0IHFlbXUgc3VwcG9ydA0KPiANCg0KRG9lcyBpdCBtZWFuIGNyb3NzYW5zd2VycyBmaWxlIGNh
+biBiZSBnZW5lcmF0ZWQgYXV0b21hdGljYWxseSBieSBxZW11IHdoaWxlIGRvaW5nIGNvbmZpZ3Vy
+ZS4NCklmIHNvLCBpdCdzIGdvb2QgdG8gbWUuDQoNClRoYW5rcw0KIEJpYW4NCg0KPiANCj4gPiBJ
+ZiB0aGUgLS1jcm9zcy1hbnN3ZXJzIGlzIG5vdCBiZSByZXF1aXJlZCwgSU1PLCB3ZSBkbyBub3Qg
+bmVlZCBzdXBwb3J0IGl0Lg0KPiA+IEJlY2F1c2UgaXQgd2lsbCBiZSBub3QgYW4gZWFzeSBqb2Ig
+dG8gbWFpbnRhaW4NCj4gPiBjcm9zcy1hbnN3ZXJzLSR7VEFSR0VUX0FSQ0h9LnR4dCBmb3IgZWFj
+aCB3YWYtc2FtYmEuYmJjbGFzcyBiYXNlZCByZWNpcGUuDQo+ID4NCj4gPiBUaGFua3MNCj4gPiBC
+aWFuDQo+ID4NCj4gPj4gK30NCj4gPj4gKw0KPiA+PiArZG9faW5zdGFsbCgpIHsNCj4gPj4gKyAg
+ICBvZV9ydW5tYWtlIGluc3RhbGwgREVTVERJUj0ke0R9DQo+ID4+ICt9DQo+ID4+IC0tDQo+ID4+
+IDIuMC4xDQo+ID4NCg==
 
