@@ -1,34 +1,35 @@
-Return-Path: <andreas.baak@gmail.com>
-Received: from mail-la0-f49.google.com (mail-la0-f49.google.com
-	[209.85.215.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CCC573DF0;
-	Sat, 22 Aug 2015 05:46:17 +0000 (UTC)
-Received: by lahi9 with SMTP id i9so51763075lah.2;
-	Fri, 21 Aug 2015 22:46:16 -0700 (PDT)
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by mail.openembedded.org (Postfix) with ESMTP id A61F376ABD
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Aug 2015 09:34:28 +0000 (UTC)
+Received: by pawq9 with SMTP id q9so69122065paw.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Aug 2015 02:34:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=8CEu2TgCjeN8TLSwF3NR7bKGRWrjjPeLJnDfSuVkBwg=;
-	b=zwMXKPanOZcozOejYauWc6nekWnFsGf2e6eB1da5b9Qmn2I6hxHGrMUAL+rfV5KtWN
-	YPvl/SgreUHOLtGt1rMgdG001T4rnQzek0r5U+27K47kdb9ojHasiqJVzEPwbj8wwm+3
-	iE2wKcn840Ypdshcrd2k+jTPqi0u4CqcDVYTpheuGKn1MgG8bnuMAfKShAzdqUaE/WHo
-	r1+iW+XcHg19RvK2Z+MjWS+NEukosS6fLXr1icA1/CZnW1/aQSbQ8nbotGS1T5wuUIeh
-	wyW43x3d+cA/Tq6Z9WnDXsQnO2yV6tFTeVzU5RnTWVan3hW5O+fe7XdQmcSumPz1ENfh
-	UY8Q==
-MIME-Version: 1.0
-X-Received: by 10.112.198.35 with SMTP id iz3mr9801224lbc.99.1440222375851;
-	Fri, 21 Aug 2015 22:46:15 -0700 (PDT)
-Received: by 10.25.170.9 with HTTP; Fri, 21 Aug 2015 22:46:15 -0700 (PDT)
-Received: by 10.25.170.9 with HTTP; Fri, 21 Aug 2015 22:46:15 -0700 (PDT)
-In-Reply-To: <CAFeBWL6xGuzEcOR5B1sfEgZR=i-T=EZ-b-TKPT9DGZpCmDPy4g@mail.gmail.com>
-References: <CAFeBWL6xGuzEcOR5B1sfEgZR=i-T=EZ-b-TKPT9DGZpCmDPy4g@mail.gmail.com>
-Date: Sat, 22 Aug 2015 07:46:15 +0200
-Message-ID: <CABsPrv4XbrYsRARTBk_xunenuqw8ozi8nF4u-VkJ5ANWVtdVCA@mail.gmail.com>
-From: Andreas Baak <andreas.baak@gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=+P95EFYsXlPmTXXbOZoE8ynG3wuc578SrB0HbJ6b0a0=;
+	b=TwJ3w7UNZ0/wjNLu4tU4oUkt47/e5t6LNvWOD+mSr+ckEariuXWew8gKor+0Yqh4yV
+	PWoHyC81oOQAxrk2gHWPQXIDp2NWc5dgc3A+6kCdLFEfh5k17HsgI54I+2fJQs7mPHIB
+	iksWVpveQdsSEUekfvZi0/HIbTuY+wWkoyWczcIO0RtcFd3VfoB+i6poN6zZ4DcZg/rm
+	hGrt6u/becq+lo2YyqLfb93RH8cdBcS9+evoycunkHz9/OBzsSmZfSrzVGcglrogNYr3
+	3YACt0dd47czz+CKhSVWpCW5t1RQSa+xz9hIZGAvxLcJyRGlCxVmfu+c4GssPcUTcpiM
+	RBFA==
+X-Received: by 10.66.185.72 with SMTP id fa8mr26502247pac.44.1440236069407;
+	Sat, 22 Aug 2015 02:34:29 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id
+	ob4sm10473325pbb.40.2015.08.22.02.34.27
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 22 Aug 2015 02:34:28 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: Extensible SDK install errors
+Date: Sat, 22 Aug 2015 19:34:40 +1000
+Message-Id: <1440236080-12661-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 2.5.0
+Subject: [meta-qt5][PATCH] qtbase: add PACKAGECONFIG for libproxy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,75 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Aug 2015 05:46:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 22 Aug 2015 09:34:30 -0000
 
-Do you have superuser rights? Usually, you cannot write in /opt without.
-Try to install the SDK with sudo or enter your home directory as target
-when you are asked.
-Regards,
-Andreas
-Am 22.08.2015 00:07 schrieb "Adam Lee" <adam.yh.lee@gmail.com>:
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ recipes-qt/qt5/qtbase_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-> Hello, I built the Extensible SDK on Fido (bitbake core-image-minimal -c
-> populate_sdk_ext).
->
-> During the installation I get this permission error:
->
-> $ ./poky-glibc-x86_64-core-image-minimal-armv5e-toolchain-ext-1.8.sh
-> > Enter target directory for SDK (default: /opt/poky/1.8):
-> > You are about to install the SDK to "/opt/poky/1.8". Proceed[Y/n]?
-> > Extracting SDK...done
-> > Setting it up...
-> > Extracting buildtools...
-> > ./poky-glibc-x86_64-core-image-minimal-armv5e-toolchain-ext-1.8.sh: lin=
-e
-> > 148: /opt/poky/1.8/environment-setup-armv5e-poky-linux-gnueabi:
-> Permission
-> > denied
-> > ./poky-glibc-x86_64-core-image-minimal-armv5e-toolchain-ext-1.8.sh: lin=
-e
-> > 151: /opt/poky/1.8/environment-setup-armv5e-poky-linux-gnueabi:
-> Permission
-> > denied
-> > ./poky-glibc-x86_64-core-image-minimal-armv5e-toolchain-ext-1.8.sh: lin=
-e
-> > 155: /opt/poky/1.8/environment-setup-armv5e-poky-linux-gnueabi:
-> Permission
-> > denied
-> > mv: cannot move =E2=80=98x86_64-nativesdk-libc.tar.bz2=E2=80=99 to
-> > =E2=80=98/opt/poky/1.8/layers/poky/x86_64-nativesdk-libc.tar.bz2=E2=80=
-=99: Permission
-> denied
-> > Preparing build system...
-> > sh: 1: cannot create preparing_build_system.log: Permission denied
-> > SDK preparation failed: see /opt/poky/1.8/preparing_build_system.log
->
->
->  It looks like `/opt/poky/1.8/layers/poky` directory belongs to the root
-> user:
->
-> $ ls -l /opt/poky/1.8/layers/
-> > total 36
-> > drwxrwxr-x 9 root root 4096 Jun 16 10:25 meta-gnome
-> > drwxrwxr-x 9 root root 4096 Jun 15 10:44 meta-multimedia
-> > drwxrwxr-x 11 root root 4096 Jun 15 10:44 meta-networking
-> > drwxrwxr-x 20 root root 4096 Jun 15 10:44 meta-oe
-> > drwxrwxr-x 7 root root 4096 Jun 15 10:44 meta-python
-> > drwxrwxr-x 5 root root 4096 Jun 15 10:44 meta-ruby
-> > drwxrwxr-x 5 root root 4096 Jun 15 10:44 meta-systemd
-> > drwxrwxr-x 11 root root 4096 Jun 15 10:44 meta-xfce
-> > drwxrwxr-x 13 root root 4096 Aug 21 14:46 poky
->
->
->  I may have missed something obvious. Has anyone seen this?
->
-> Thanks!
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index f472c98..ae63150 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -129,6 +129,7 @@ PACKAGECONFIG[alsa] = "-alsa,-no-alsa,alsa-lib"
+ PACKAGECONFIG[pulseaudio] = "-pulseaudio,-no-pulseaudio,pulseaudio"
+ PACKAGECONFIG[nis] = "-nis,-no-nis"
+ PACKAGECONFIG[widgets] = "-widgets,-no-widgets"
++PACKAGECONFIG[libproxy] = "-libproxy,-no-libproxy,libproxy"
+ 
+ QT_CONFIG_FLAGS += " \
+     -shared \
+-- 
+2.5.0
+
 
