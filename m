@@ -1,35 +1,29 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D06E73CF2
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A73176AC1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Aug 2015 13:55:52 +0000 (UTC)
-Received: by pdrh1 with SMTP id h1so44047533pdr.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Aug 2015 06:55:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=v+VFV0ZWNamkhZhxWVzLg3psHGXPYFchBvTuI4iQCsA=;
-	b=qq/OXFIXE7g1wPNAIe1FKOTTXq/EEEYeim0cylhFaB7IrTAxpz6uPBXIi258tY72z1
-	HE+Ewn5FK+SjB7o2f2dy6nwU2gtRKqxm/lKEeZSf/cg12+S+XqF5syf4H9wnFGyUNM3I
-	gvugIkYPEXFxyp3UTTpuxqIEeYjcz3Va53lWfHhw4mptrrkI7S0YaiQ5jYuc/M0cridE
-	ygBNWPJrRJlz2KOR539YqABsRo4enb2DJCvVfPKeGVFmNRj12zeT1WEjtvjzkQ1szet5
-	FFWlU1Oe94TPkrxnt6W0AOW3yND/CbM1Tlp1B03VO5dTqZCCck+7T6h/Rpiffj1Te5qm
-	FjeA==
-X-Received: by 10.70.42.133 with SMTP id o5mr3154633pdl.169.1440338152343;
-	Sun, 23 Aug 2015 06:55:52 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by smtp.gmail.com with ESMTPSA id
-	tz1sm14045316pbc.50.2015.08.23.06.55.51
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 23 Aug 2015 06:55:51 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Aug 2015 23:55:58 +1000
-Message-Id: <1440338158-11936-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 2.5.0
-Subject: [meta-qt5][PATCH] populate_sdk_qt5.bbclass: set paths correctly in qt.conf
+	Mon, 24 Aug 2015 01:39:01 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7O1d180029147
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 23 Aug 2015 18:39:01 -0700 (PDT)
+Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Sun, 23 Aug 2015 18:39:00 -0700
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+References: <1439345155-27884-1-git-send-email-kai.kang@windriver.com>
+	<20150819195731.GB5444@deserted.net> <55D58F20.2060006@windriver.com>
+	<20150821140734.GB8498@mentor.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <55DA75BA.6040507@windriver.com>
+Date: Mon, 24 Aug 2015 09:39:06 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
+MIME-Version: 1.0
+In-Reply-To: <20150821140734.GB8498@mentor.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] inetutils: 1.9.2 -> 1.9.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,61 +37,186 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Aug 2015 13:55:55 -0000
+X-List-Received-Date: Mon, 24 Aug 2015 01:39:05 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Set paths correctly in qt.conf so that $$[QT_SYSROOT] and
-$$[QT_INSTALL_PREFIX] can be used from qmake.
+On 2015年08月21日 22:07, Joe MacDonald wrote:
+> [Re: [oe] [meta-networking][PATCH] inetutils: 1.9.2 -> 1.9.4] On 15.08.20 (Thu 16:26) Kang Kai wrote:
+>
+>> On 2015年08月20日 03:57, Joe MacDonald wrote:
+>>> [[oe] [meta-networking][PATCH] inetutils: 1.9.2 -> 1.9.4] On 15.08.12 (Wed 10:05) kai.kang@windriver.com wrote:
+>>>
+>>>> From: Kai Kang <kai.kang@windriver.com>
+>>>>
+>>>> Upgrade inetutils from 1.9.2 to 1.9.4.
+>>> You don't appear to be working against the meta-openembedded tree on
+>>> this, I got a merge conflict on:
+>>>
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnetd-Fix-deadlock-on-cleanup.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/telnetd-Fix-deadlock-on-cleanup.patch
+>>>> similarity index 100%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnetd-Fix-deadlock-on-cleanup.patch
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/telnetd-Fix-deadlock-on-cleanup.patch
+>>> Which, after a bit of head-scratching, suggests your tree has this patch
+>>> merged:
+>>>
+>>> http://patchwork.openembedded.org/patch/96727/
+>>>
+>>> but, based on this discussion (also recorded in patchwork):
+>>>
+>>> http://comments.gmane.org/gmane.comp.handhelds.openembedded/69654
+>>>
+>>> we rejected it.
+>>>
+>>> Anyway, I've resolved it and am merging the result.  Please try to
+>>> ensure you're working on the current up-stream tree, though.
+>> I worked on branch master-next of meta-networking. It has commit which adds
+>> telnetd-Fix-deadlock-on-cleanup.patch.
+>> So should I work based on branch master rather than master-next?
+> That would be my recommendation, yeah.  The next time master-next gets
+> updated the patch will likely be dropped.  My understanding is that
+> master-next isn't intended to be fast-forward, so working on top of it
+> can lead to surprises.
+>
+> That said, I try to always cherry pick my commits out of master-next
+> once I know they've been vetted there first.
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- classes/populate_sdk_qt5.bbclass | 31 ++++++++++++++++---------------
- 1 file changed, 16 insertions(+), 15 deletions(-)
+Hi Joe,
 
-diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.bbclass
-index 79df489..149a448 100644
---- a/classes/populate_sdk_qt5.bbclass
-+++ b/classes/populate_sdk_qt5.bbclass
-@@ -15,23 +15,24 @@ create_sdk_files_prepend () {
-     qtconf=${SDK_OUTPUT}/${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf
-     touch $qtconf
-     echo '[Paths]' >> $qtconf
--    echo 'Prefix = ${SDKTARGETSYSROOT}' >> $qtconf
--    echo 'Headers = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_HEADERS}' >> $qtconf
--    echo 'Libraries = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_LIBS}' >> $qtconf
--    echo 'ArchData = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_ARCHDATA}' >> $qtconf
--    echo 'Data = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_DATA}' >> $qtconf
--    echo 'Binaries = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_BINS}' >> $qtconf
--    echo 'LibraryExecutables = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_LIBEXECS}' >> $qtconf
--    echo 'Plugins = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_PLUGINS}' >> $qtconf
--    echo 'Imports = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_IMPORTS}' >> $qtconf
--    echo 'Qml2Imports = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QML}' >> $qtconf
--    echo 'Translations = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_TRANSLATIONS}' >> $qtconf
--    echo 'Documentation = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_DOCS}' >> $qtconf
--    echo 'Settings = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_SETTINGS}' >> $qtconf
--    echo 'Examples = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_EXAMPLES}' >> $qtconf
--    echo 'Tests = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_TESTS}' >> $qtconf
-+    echo 'Prefix = ${OE_QMAKE_PATH_PREFIX}' >> $qtconf
-+    echo 'Headers = ${OE_QMAKE_PATH_QT_HEADERS}' >> $qtconf
-+    echo 'Libraries = ${OE_QMAKE_PATH_LIBS}' >> $qtconf
-+    echo 'ArchData = ${OE_QMAKE_PATH_QT_ARCHDATA}' >> $qtconf
-+    echo 'Data = ${OE_QMAKE_PATH_QT_DATA}' >> $qtconf
-+    echo 'Binaries = ${OE_QMAKE_PATH_QT_BINS}' >> $qtconf
-+    echo 'LibraryExecutables = ${OE_QMAKE_PATH_LIBEXECS}' >> $qtconf
-+    echo 'Plugins = ${OE_QMAKE_PATH_PLUGINS}' >> $qtconf
-+    echo 'Imports = ${OE_QMAKE_PATH_IMPORTS}' >> $qtconf
-+    echo 'Qml2Imports = ${OE_QMAKE_PATH_QML}' >> $qtconf
-+    echo 'Translations = ${OE_QMAKE_PATH_QT_TRANSLATIONS}' >> $qtconf
-+    echo 'Documentation = ${OE_QMAKE_PATH_QT_DOCS}' >> $qtconf
-+    echo 'Settings = ${OE_QMAKE_PATH_QT_SETTINGS}' >> $qtconf
-+    echo 'Examples = ${OE_QMAKE_PATH_QT_EXAMPLES}' >> $qtconf
-+    echo 'Tests = ${OE_QMAKE_PATH_QT_TESTS}' >> $qtconf
-     echo 'HostPrefix = ${SDKPATHNATIVE}' >> $qtconf
-     echo 'HostBinaries = ${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}' >> $qtconf
-+    echo 'Sysroot = ${SDKTARGETSYSROOT}' >> $qtconf
- }
- 
- FEATURE_PACKAGES_qtcreator-debug = "packagegroup-qt5-qtcreator-debug"
+Thanks. I'll still work on master-next and do the cherry-pick of branch 
+master to verify the commit(s).
+
+--Kai
+
+>
+> -J.
+>
+>> --Kai
+>>
+>>> -J.
+>>>
+>>>> * add homepage
+>>>> * update inetutils/version.patch
+>>>>
+>>>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>>>> ---
+>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/fix-disable-ipv6.patch  | 0
+>>>>   ...tils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch | 0
+>>>>   .../{inetutils-1.9.2 => inetutils}/inetutils-1.8-0003-wchar.patch    | 0
+>>>>   .../inetutils-1.9-PATH_PROCNET_DEV.patch                             | 0
+>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/rexec.xinetd.inetutils  | 0
+>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/rlogin.xinetd.inetutils | 0
+>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/rsh.xinetd.inetutils    | 0
+>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/telnet.xinetd.inetutils | 0
+>>>>   .../telnetd-Fix-deadlock-on-cleanup.patch                            | 0
+>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/tftpd.xinetd.inetutils  | 0
+>>>>   .../inetutils/{inetutils-1.9.2 => inetutils}/version.patch           | 2 +-
+>>>>   .../inetutils/{inetutils_1.9.2.bb => inetutils_1.9.4.bb}             | 5 +++--
+>>>>   12 files changed, 4 insertions(+), 3 deletions(-)
+>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/fix-disable-ipv6.patch (100%)
+>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch (100%)
+>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/inetutils-1.8-0003-wchar.patch (100%)
+>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/inetutils-1.9-PATH_PROCNET_DEV.patch (100%)
+>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/rexec.xinetd.inetutils (100%)
+>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/rlogin.xinetd.inetutils (100%)
+>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/rsh.xinetd.inetutils (100%)
+>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/telnet.xinetd.inetutils (100%)
+>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/telnetd-Fix-deadlock-on-cleanup.patch (100%)
+>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/tftpd.xinetd.inetutils (100%)
+>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.2 => inetutils}/version.patch (93%)
+>>>>   rename meta-networking/recipes-connectivity/inetutils/{inetutils_1.9.2.bb => inetutils_1.9.4.bb} (97%)
+>>>>
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/fix-disable-ipv6.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/fix-disable-ipv6.patch
+>>>> similarity index 100%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/fix-disable-ipv6.patch
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/fix-disable-ipv6.patch
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
+>>>> similarity index 100%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0003-wchar.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-0003-wchar.patch
+>>>> similarity index 100%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0003-wchar.patch
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.8-0003-wchar.patch
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.9-PATH_PROCNET_DEV.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.9-PATH_PROCNET_DEV.patch
+>>>> similarity index 100%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.9-PATH_PROCNET_DEV.patch
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-1.9-PATH_PROCNET_DEV.patch
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/rexec.xinetd.inetutils
+>>>> similarity index 100%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/rexec.xinetd.inetutils
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/rlogin.xinetd.inetutils
+>>>> similarity index 100%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/rlogin.xinetd.inetutils
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/rsh.xinetd.inetutils
+>>>> similarity index 100%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/rsh.xinetd.inetutils
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnet.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/telnet.xinetd.inetutils
+>>>> similarity index 100%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnet.xinetd.inetutils
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/telnet.xinetd.inetutils
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnetd-Fix-deadlock-on-cleanup.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/telnetd-Fix-deadlock-on-cleanup.patch
+>>>> similarity index 100%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnetd-Fix-deadlock-on-cleanup.patch
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/telnetd-Fix-deadlock-on-cleanup.patch
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils/tftpd.xinetd.inetutils
+>>>> similarity index 100%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/tftpd.xinetd.inetutils
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/version.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/version.patch
+>>>> similarity index 93%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/version.patch
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils/version.patch
+>>>> index 1caa2d3..532a0e5 100644
+>>>> --- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/version.patch
+>>>> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils/version.patch
+>>>> @@ -11,7 +11,7 @@ Signed-off-by: Chunrong Guo <b40290@freescale.com>
+>>>>   -AC_INIT([GNU inetutils],
+>>>>   - m4_esyscmd([build-aux/git-version-gen .tarball-version 's/inetutils-/v/;s/_/./g']),
+>>>> -+AC_INIT([GNU inetutils],[1.9.2],
+>>>> ++AC_INIT([GNU inetutils],[1.9.4],
+>>>>     [bug-inetutils@gnu.org])
+>>>>    AC_CONFIG_SRCDIR([src/inetd.c])
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+>>>> similarity index 97%
+>>>> rename from meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
+>>>> rename to meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+>>>> index 6209272..cdcba83 100644
+>>>> --- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
+>>>> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+>>>> @@ -2,6 +2,7 @@ DESCRIPTION = "The GNU inetutils are a collection of common \
+>>>>   networking utilities and servers including ftp, ftpd, rcp, \
+>>>>   rexec, rlogin, rlogind, rsh, rshd, syslog, syslogd, talk, \
+>>>>   talkd, telnet, telnetd, tftp, tftpd, and uucpd."
+>>>> +HOMEPAGE = "http://www.gnu.org/software/inetutils"
+>>>>   SECTION = "net"
+>>>>   DEPENDS = "ncurses netbase readline"
+>>>>   LICENSE = "GPLv3"
+>>>> @@ -21,8 +22,8 @@ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
+>>>>              file://telnetd-Fix-deadlock-on-cleanup.patch \
+>>>>   "
+>>>> -SRC_URI[md5sum] = "aa1a9a132259db83e66c1f3265065ba2"
+>>>> -SRC_URI[sha256sum] = "0423ea40a160cd4630f817e247df5c08ecc625378d2bb56a0509117a36a89913"
+>>>> +SRC_URI[md5sum] = "04852c26c47cc8c6b825f2b74f191f52"
+>>>> +SRC_URI[sha256sum] = "be8f75eff936b8e41b112462db51adf689715658a1b09e0d6b05d11ec92cc616"
+>>>>   inherit autotools gettext update-alternatives texinfo
+>>>> -- 
+>>>> 1.9.1
+>>>>
+>>>>
+>>>>
+>>
+>> -- 
+>> Regards,
+>> Neil | Kai Kang
+>>
+
+
 -- 
-2.5.0
+Regards,
+Neil | Kai Kang
 
 
