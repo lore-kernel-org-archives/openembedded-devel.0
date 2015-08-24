@@ -1,26 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EF0396AC1E
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 081B176B69
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 15:36:14 +0000 (UTC)
+	Mon, 24 Aug 2015 15:36:15 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t7OFaDig028182
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7OFaFNt006933
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 24 Aug 2015 08:36:13 -0700 (PDT)
+	Mon, 24 Aug 2015 08:36:15 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.235.1; Mon, 24 Aug 2015 08:36:13 -0700
+	14.3.235.1; Mon, 24 Aug 2015 08:36:14 -0700
 From: <kai.kang@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Mon, 24 Aug 2015 23:31:52 +0800
-Message-ID: <1440430315-10963-2-git-send-email-kai.kang@windriver.com>
+Date: Mon, 24 Aug 2015 23:31:53 +0800
+Message-ID: <1440430315-10963-3-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1440430315-10963-1-git-send-email-kai.kang@windriver.com>
 References: <1440430315-10963-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 1/4] autofs: 5.1.0 -> 5.1.1
+Subject: [PATCH 2/4] libvpx: 1.3.0 -> 1.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,131 +34,153 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 15:36:15 -0000
+X-List-Received-Date: Mon, 24 Aug 2015 15:36:16 -0000
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
+* update SRC_URI
+* remove re-definition of S
+* drop backport patch 0001-configure.sh-quote-local-variables.patch
+* update context of libvpx-configure-support-blank-prefix.patch
+
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../0001-systemd-allow-with-systemd-to-take-a-path-arg.patch          | 0
- .../autofs/{autofs-5.1.0 => autofs}/Makefile.rules-cross.patch        | 0
- .../autofs/{autofs-5.1.0 => autofs}/add-the-needed-stdarg.h.patch     | 0
- .../autofs-5.0.7-do-not-check-for-modprobe.patch                      | 0
- .../autofs/{autofs-5.1.0 => autofs}/autofs-5.0.7-fix-lib-deps.patch   | 0
- .../autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch        | 0
- .../autofs/{autofs-5.1.0 => autofs}/autofs-additional-distros.patch   | 0
- .../recipes-daemons/autofs/{autofs-5.1.0 => autofs}/cross.patch       | 0
- .../fix-the-YACC-rule-to-fix-a-building-failure.patch                 | 0
- .../autofs/{autofs-5.1.0 => autofs}/fix_disable_ldap.patch            | 0
- .../autofs/{autofs-5.1.0 => autofs}/force-STRIP-to-emtpy.patch        | 0
- .../autofs/{autofs-5.1.0 => autofs}/libtirpc-name-clash-backout.patch | 0
- .../recipes-daemons/autofs/{autofs-5.1.0 => autofs}/libtirpc.patch    | 0
- .../recipes-daemons/autofs/{autofs-5.1.0 => autofs}/no-bash.patch     | 0
- .../autofs/{autofs-5.1.0 => autofs}/remove-bashism.patch              | 0
- .../using-pkg-config-to-detect-libxml-2.0-and-krb5.patch              | 0
- .../recipes-daemons/autofs/{autofs_5.1.0.bb => autofs_5.1.1.bb}       | 4 ++--
- 17 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/Makefile.rules-cross.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/add-the-needed-stdarg.h.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/autofs-5.0.7-do-not-check-for-modprobe.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/autofs-5.0.7-fix-lib-deps.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/autofs-additional-distros.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/cross.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/fix-the-YACC-rule-to-fix-a-building-failure.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/fix_disable_ldap.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/force-STRIP-to-emtpy.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/libtirpc-name-clash-backout.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/libtirpc.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/no-bash.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/remove-bashism.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch (100%)
- rename meta-networking/recipes-daemons/autofs/{autofs_5.1.0.bb => autofs_5.1.1.bb} (93%)
+ .../0001-configure.sh-quote-local-variables.patch  | 40 ---------------------
+ .../libvpx-configure-support-blank-prefix.patch    | 42 +++++++++++-----------
+ .../webm/{libvpx_1.3.0.bb => libvpx_1.4.0.bb}      | 10 +++---
+ 3 files changed, 25 insertions(+), 67 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/webm/libvpx/0001-configure.sh-quote-local-variables.patch
+ rename meta-oe/recipes-multimedia/webm/{libvpx_1.3.0.bb => libvpx_1.4.0.bb} (79%)
 
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch b/meta-networking/recipes-daemons/autofs/autofs/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/Makefile.rules-cross.patch b/meta-networking/recipes-daemons/autofs/autofs/Makefile.rules-cross.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/Makefile.rules-cross.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/Makefile.rules-cross.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/add-the-needed-stdarg.h.patch b/meta-networking/recipes-daemons/autofs/autofs/add-the-needed-stdarg.h.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/add-the-needed-stdarg.h.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/add-the-needed-stdarg.h.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-do-not-check-for-modprobe.patch b/meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-do-not-check-for-modprobe.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-do-not-check-for-modprobe.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-do-not-check-for-modprobe.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-fix-lib-deps.patch b/meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-fix-lib-deps.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-fix-lib-deps.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-fix-lib-deps.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch b/meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-additional-distros.patch b/meta-networking/recipes-daemons/autofs/autofs/autofs-additional-distros.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/autofs-additional-distros.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/autofs-additional-distros.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/cross.patch b/meta-networking/recipes-daemons/autofs/autofs/cross.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/cross.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/cross.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/fix-the-YACC-rule-to-fix-a-building-failure.patch b/meta-networking/recipes-daemons/autofs/autofs/fix-the-YACC-rule-to-fix-a-building-failure.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/fix-the-YACC-rule-to-fix-a-building-failure.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/fix-the-YACC-rule-to-fix-a-building-failure.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/fix_disable_ldap.patch b/meta-networking/recipes-daemons/autofs/autofs/fix_disable_ldap.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/fix_disable_ldap.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/fix_disable_ldap.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/force-STRIP-to-emtpy.patch b/meta-networking/recipes-daemons/autofs/autofs/force-STRIP-to-emtpy.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/force-STRIP-to-emtpy.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/force-STRIP-to-emtpy.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/libtirpc-name-clash-backout.patch b/meta-networking/recipes-daemons/autofs/autofs/libtirpc-name-clash-backout.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/libtirpc-name-clash-backout.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/libtirpc-name-clash-backout.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/libtirpc.patch b/meta-networking/recipes-daemons/autofs/autofs/libtirpc.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/libtirpc.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/libtirpc.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/no-bash.patch b/meta-networking/recipes-daemons/autofs/autofs/no-bash.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/no-bash.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/no-bash.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/remove-bashism.patch b/meta-networking/recipes-daemons/autofs/autofs/remove-bashism.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/remove-bashism.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/remove-bashism.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.1.0/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch b/meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/autofs/autofs-5.1.0/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
-rename to meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
-diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.1.bb
-similarity index 93%
-rename from meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
-rename to meta-networking/recipes-daemons/autofs/autofs_5.1.1.bb
-index fbfe4b3..0f4c247 100644
---- a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
-+++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.1.bb
-@@ -23,8 +23,8 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
-            file://fix-the-YACC-rule-to-fix-a-building-failure.patch \
- "
+diff --git a/meta-oe/recipes-multimedia/webm/libvpx/0001-configure.sh-quote-local-variables.patch b/meta-oe/recipes-multimedia/webm/libvpx/0001-configure.sh-quote-local-variables.patch
+deleted file mode 100644
+index bf94b2d..0000000
+--- a/meta-oe/recipes-multimedia/webm/libvpx/0001-configure.sh-quote-local-variables.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From f45fe1668401d72c2937a52385b492216715c0f9 Mon Sep 17 00:00:00 2001
+-From: James Zern <jzern@google.com>
+-Date: Thu, 6 Mar 2014 15:58:37 -0800
+-Subject: [PATCH] configure.sh: quote local variables
+-
+-fixes issue #711
+-
+-specifying a multiword CC, e.g., CC='gcc -m32', would cause the failure
+-under dash
+-
+-reported in
+-https://bugs.gentoo.org/show_bug.cgi?id=498136
+-
+-patch by floppymaster at gmail dot com
+-
+-Upstream-Status: Backport [f45fe1668401d72c2937a52385b492216715c0f9]
+-
+-Change-Id: I2ba246f765646161538622739961ec0f6c2d8c2d
+----
+- build/make/configure.sh | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/build/make/configure.sh b/build/make/configure.sh
+-index 449d1b9..43f8e77 100755
+---- a/build/make/configure.sh
+-+++ b/build/make/configure.sh
+-@@ -405,8 +405,8 @@ true
+- }
+- 
+- write_common_target_config_mk() {
+--    local CC=${CC}
+--    local CXX=${CXX}
+-+    local CC="${CC}"
+-+    local CXX="${CXX}"
+-     enabled ccache && CC="ccache ${CC}"
+-     enabled ccache && CXX="ccache ${CXX}"
+-     print_webm_license $1 "##" ""
+--- 
+-1.8.3.2
+-
+diff --git a/meta-oe/recipes-multimedia/webm/libvpx/libvpx-configure-support-blank-prefix.patch b/meta-oe/recipes-multimedia/webm/libvpx/libvpx-configure-support-blank-prefix.patch
+index 1bf863d..c7a6e51 100644
+--- a/meta-oe/recipes-multimedia/webm/libvpx/libvpx-configure-support-blank-prefix.patch
++++ b/meta-oe/recipes-multimedia/webm/libvpx/libvpx-configure-support-blank-prefix.patch
+@@ -13,31 +13,31 @@ Fix configure to accept "--prefix=" (a blank prefix).
+          ;;
+          --libdir=*)
+          libdir="${optval}"
+-@@ -471,13 +473,23 @@
+- 
++@@ -587,13 +587,23 @@ process_cmdline() {
++ }
+  
+  post_process_common_cmdline() {
+--    prefix="${prefix:-/usr/local}"
+-+    if [ "$prefixset" != "1" ]
+-+    then
+-+        prefix=/usr/local
+-+    fi
++-  prefix="${prefix:-/usr/local}"
+++  if [ "$prefixset" != "1" ]
+++  then
+++      prefix=/usr/local
+++  fi
+ +
+-+    # Strip trailing slash
+-     prefix="${prefix%/}"
+++  # Strip trailing slash
++   prefix="${prefix%/}"
+ +
+-     libdir="${libdir:-${prefix}/lib}"
+-     libdir="${libdir%/}"
+--    if [ "${libdir#${prefix}}" = "${libdir}" ]; then
+--        die "Libdir ${libdir} must be a subdirectory of ${prefix}"
+--    fi
++   libdir="${libdir:-${prefix}/lib}"
++   libdir="${libdir%/}"
++-  if [ "${libdir#${prefix}}" = "${libdir}" ]; then
++-    die "Libdir ${libdir} must be a subdirectory of ${prefix}"
++-  fi
+ +
+-+    case "$libdir" in
+-+        "${prefix}/"*) ;;
+-+        *)
+-+            die "Libdir ${libdir} must be a subdirectory of ${prefix}"
+-+            ;;
+-+    esac
+++  case "$libdir" in
+++      "${prefix}/"*) ;;
+++      *)
+++          die "Libdir ${libdir} must be a subdirectory of ${prefix}"
+++          ;;
+++  esac
+  }
+  
+- 
++ post_process_cmdline() {
+diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.3.0.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb
+similarity index 79%
+rename from meta-oe/recipes-multimedia/webm/libvpx_1.3.0.bb
+rename to meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb
+index eb19a57..4d9d2fd 100644
+--- a/meta-oe/recipes-multimedia/webm/libvpx_1.3.0.bb
++++ b/meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb
+@@ -7,13 +7,11 @@ LICENSE = "BSD"
  
--SRC_URI[md5sum] = "b7724a9a55923f3c06933a8dfd1e79d3"
--SRC_URI[sha256sum] = "794a28d178d2b21a2380ee71cbdb3b15b4be47c06f3de255b8c5c4351f046b26"
-+SRC_URI[md5sum] = "e143df66b614b8cdb1ff533735f8e12d"
-+SRC_URI[sha256sum] = "795419383b120d15699ab3b89ea0f3d029f6fb28405a83982d305c4b7b61130f"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
  
- inherit update-rc.d pkgconfig
+-SRC_URI += "http://webm.googlecode.com/files/libvpx-v${PV}.tar.bz2 \
++SRC_URI += "http://storage.googleapis.com/downloads.webmproject.org/releases/webm/${BP}.tar.bz2 \
+             file://libvpx-configure-support-blank-prefix.patch \
+-            file://0001-configure.sh-quote-local-variables.patch"
+-SRC_URI[md5sum] = "14783a148872f2d08629ff7c694eb31f"
+-SRC_URI[sha256sum] = "d3dcc8d84af51c6c382b214397c62402e37a799e8ebcda6f4217aef0010451a9"
+-
+-S = "${WORKDIR}/libvpx-v${PV}"
++           "
++SRC_URI[md5sum] = "63b1d7f59636a42eeeee9225cc14e7de"
++SRC_URI[sha256sum] = "f582d9b2d60a592a4a3d8c32965ca2d2167e9ade38c6c30bac8801ff66a118e4"
  
+ # ffmpeg links with this and fails 
+ # sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.text+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@GLIBC_2.4'
 -- 
 1.9.1
 
