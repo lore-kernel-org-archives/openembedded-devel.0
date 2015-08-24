@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E6CB6AC1E
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id D535776B8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 12:41:57 +0000 (UTC)
-Received: by wicne3 with SMTP id ne3so71024320wic.0
+	Mon, 24 Aug 2015 12:42:16 +0000 (UTC)
+Received: by wicja10 with SMTP id ja10so71103601wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 05:41:57 -0700 (PDT)
+	Mon, 24 Aug 2015 05:42:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=BOuK+A4iEKbFhpBMo0M63HbcYBoHDzdKSE+0tOSie2U=;
-	b=Cy8rIhtVO7nug3tk40sr6SaOWl4eV4ybAcdlY7DTUM6/TzchYwsyoc5W+G8OLY0gTo
-	RfTFMqd5rQ0B05j83D6EHu8wi+Uo9V6QKFFt7am5mEzh9tdSGsX5NzRNU51gxaoTBxc4
-	iIg5k5MVJzS4Ha9+8XSmBhXQA6EfLcVzHCACElFMbxlEprh/quIF3X6Yqd8h0v/Fg3XP
-	n1eC7ewy+1AYQkLinfwMpuTYSWnl+IjIu0MFjuulGMY6gKLi2vuzrriRnEDDf3JD27EP
-	5tyxAAsoWlGmJZK0g8TT+2StDTBHc+BozzKOKp0tmOE7+4WwCsfaEI3jr8ycNPr6PVTh
-	m8OQ==
-X-Received: by 10.194.178.1 with SMTP id cu1mr40162753wjc.59.1440420117154;
-	Mon, 24 Aug 2015 05:41:57 -0700 (PDT)
+	bh=yd4ffE2A5h9L+xsPdmtPhC+hOLIJC2OuTjm9Aq5nD6k=;
+	b=XCKp5XX1WV0SUz0AcS07Vn4K3S6/F3l+L+N7PuEPW/ZS9o9WDmIfzpN4lRflntyB77
+	MhVqfLsW7A6Z4UP5MlzAKBW/jNlAA4waJvKHcO3ybd8Q3XbIQXEOtItsdsNP2LfW6TKI
+	rYydAxtzQN9YSrczSYi+JHXPvS7K8+TKzf/oryU7a3Z96AaSQY3KTYpz87bUZeBcYN9z
+	Q75vgLGrfgY9J+y4l3JVEfEhwkhiYOUAG4JJITiGMNufmgwpSSzFZBrsm6M8br3b7Osz
+	5xqdFq09qFjXeAaSRekv4XRQx2NLjy73JDLmsLr96OsCO946FN0LYp5uzqfZArg0RvHy
+	KvuA==
+X-Received: by 10.180.85.233 with SMTP id k9mr29865366wiz.53.1440420136175;
+	Mon, 24 Aug 2015 05:42:16 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	k4sm16024905wix.19.2015.08.24.05.41.55
+	v9sm23018209wjq.41.2015.08.24.05.42.13
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Aug 2015 05:41:56 -0700 (PDT)
+	Mon, 24 Aug 2015 05:42:15 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 24 Aug 2015 14:42:00 +0200
+Date: Mon, 24 Aug 2015 14:42:18 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150824124200.GC2446@jama>
-References: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
+Message-ID: <20150824124218.GD2446@jama>
+References: <1440391979-3469-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
+In-Reply-To: <1440391979-3469-1-git-send-email-raj.khem@gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-qt5][PATCH 00/11] upstreaming Qt for Device Creation changes
+Subject: Re: [meta-qt5][PATCH 1/3] qtbase: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,109 +48,179 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 12:41:58 -0000
-X-Groupsio-MsgNum: 56944
+X-List-Received-Date: Mon, 24 Aug 2015 12:42:17 -0000
+X-Groupsio-MsgNum: 56945
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="2JFBq9zoW8cOFH7v"
+	protocol="application/pgp-signature"; boundary="1sNVjLsmu1MXqwQ/"
 Content-Disposition: inline
 
---2JFBq9zoW8cOFH7v
+--1sNVjLsmu1MXqwQ/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 24, 2015 at 12:13:19PM +0300, Samuli Piippo wrote:
-> As part of Qt for Device Creation [1], we are starting to use meta-qt5 la=
-yer
-> when creating images for our supported devices. We have done number of ch=
-anges
-> to the layer when intergrating it with our internal layer. We would now l=
-ike
-> to upstream those changes.
+On Sun, Aug 23, 2015 at 09:52:57PM -0700, Khem Raj wrote:
+> This patch is a backport from upstream qt5 fixes building with clang
+> from meta-clang
 
-I've just merged upgrade to 5.5 can you please rebase your changes and
+I've just merged upgrade to 5.5 can you please rebase your changes and=20
 re-submit?
 
 Thanks
 
 >=20
-> [1] https://www.qt.io/qt-for-device-creation
->=20
-> The following changes since commit d2c05c81e8230358dca80cf9df67e49f9f672a=
-29:
->=20
->   libconnman-qt5: update to 1.0.91 (2015-07-31 16:23:35 +0200)
->=20
-> are available in the git repository at:
->=20
->   git://github.com/sapiippo/meta-qt5 master
->   https://github.com/sapiippo/meta-qt5/tree/master
->=20
-> Samuli Piippo (11):
->   qt5: make populate_sdk_qt5 reusable
->   qt5: improve Qt module package handling
->   qt5: improve support for native and nativesdk modules
->   qt5: add host paths to qt.conf
->   qt5: disable debian auto renaming
->   qt5: make qt5.inc reusable qt5-module.bbclass
->   qttools: use one recipe for all compilations
->   qtbase: remove dependency to sqlite
->   qtbase: PACKAGECONFIGs for libproxy and libinput
->   qtlocation: use correct dependencies
->   qtwebengine: fix problem with recursive qmake call
->=20
->  classes/populate_sdk_qt5.bbclass                   | 11 +---
->  classes/qmake5.bbclass                             |  8 +++
->  classes/qmake5_base.bbclass                        | 11 ++++
->  .../qt5/qt5.inc =3D> classes/qt5-module.bbclass      | 38 +++++++++++-
->  recipes-qt/examples/cinematicexperience_1.0.bb     |  2 +-
->  recipes-qt/examples/qt5everywheredemo_1.0.bb       |  2 +-
->  recipes-qt/examples/qt5nmapcarousedemo_1.0.bb      |  2 +-
->  recipes-qt/examples/qt5nmapper_1.0.bb              |  2 +-
->  recipes-qt/examples/qtsmarthome_1.0.bb             |  2 +-
->  recipes-qt/examples/quitbattery_1.0.0.bb           |  2 +-
->  recipes-qt/examples/quitindicators_1.0.1.bb        |  2 +-
->  recipes-qt/libconnman-qt/libconnman-qt5_git.bb     |  2 +-
->  recipes-qt/meta/meta-toolchain-qt5.bb              |  4 ++
->  recipes-qt/qt5/nativesdk-qttools_git.bb            | 45 --------------
->  recipes-qt/qt5/qt3d_git.bb                         |  2 +-
->  recipes-qt/qt5/qtbase_git.bb                       |  6 +-
->  recipes-qt/qt5/qtconnectivity_git.bb               |  2 +-
->  recipes-qt/qt5/qtdeclarative_git.bb                |  4 +-
->  recipes-qt/qt5/qtenginio_git.bb                    |  2 +-
->  recipes-qt/qt5/qtgraphicaleffects_git.bb           |  2 +-
->  recipes-qt/qt5/qtimageformats_git.bb               |  2 +-
->  recipes-qt/qt5/qtlocation_git.bb                   |  5 +-
->  recipes-qt/qt5/qtmultimedia_git.bb                 |  2 +-
->  recipes-qt/qt5/qtquick1_git.bb                     |  2 +-
->  recipes-qt/qt5/qtquickcontrols_git.bb              |  2 +-
->  recipes-qt/qt5/qtscript_git.bb                     |  2 +-
->  recipes-qt/qt5/qtsensors_git.bb                    |  2 +-
->  recipes-qt/qt5/qtserialport_git.bb                 |  2 +-
->  recipes-qt/qt5/qtsvg_git.bb                        |  2 +-
->  recipes-qt/qt5/qtsystems_git.bb                    |  2 +-
->  recipes-qt/qt5/qttools-native_git.bb               | 26 --------
->  recipes-qt/qt5/qttools_git.bb                      | 11 +++-
->  recipes-qt/qt5/qttranslations_git.bb               |  2 +-
->  recipes-qt/qt5/qtwayland_git.bb                    |  2 +-
->  recipes-qt/qt5/qtwebchannel_git.bb                 |  2 +-
->  .../0005-Generate-usable-qmake_extras.gypi.patch   | 71 ++++++++++++++++=
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  recipes-qt/qt5/qtbase-native_git.bb                |  1 +
+>  .../qt5/qtbase/0015-Fix-build-with-clang-3.7.patch | 71 ++++++++++++++++=
 ++++++
->  recipes-qt/qt5/qtwebengine_git.bb                  |  3 +-
->  recipes-qt/qt5/qtwebkit-examples_git.bb            |  2 +-
->  recipes-qt/qt5/qtwebkit_git.bb                     |  2 +-
->  recipes-qt/qt5/qtwebsockets_git.bb                 |  2 +-
->  recipes-qt/qt5/qtx11extras_git.bb                  |  2 +-
->  recipes-qt/qt5/qtxmlpatterns_git.bb                |  4 +-
->  42 files changed, 183 insertions(+), 120 deletions(-)
->  rename recipes-qt/qt5/qt5.inc =3D> classes/qt5-module.bbclass (86%)
->  delete mode 100644 recipes-qt/qt5/nativesdk-qttools_git.bb
->  delete mode 100644 recipes-qt/qt5/qttools-native_git.bb
->  create mode 100644 recipes-qt/qt5/qtwebengine/0005-Generate-usable-qmake=
-_extras.gypi.patch
+>  recipes-qt/qt5/qtbase_git.bb                       |  7 ++-
+>  3 files changed, 76 insertions(+), 3 deletions(-)
+>  create mode 100644 recipes-qt/qt5/qtbase/0015-Fix-build-with-clang-3.7.p=
+atch
 >=20
+> diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-=
+native_git.bb
+> index f84f38e..034a314 100644
+> --- a/recipes-qt/qt5/qtbase-native_git.bb
+> +++ b/recipes-qt/qt5/qtbase-native_git.bb
+> @@ -27,6 +27,7 @@ SRC_URI +=3D "\
+>      file://0008-eglfs-fix-egl-error-for-platforms-only-supporting-on.pat=
+ch \
+>      file://0009-QOpenGLPaintDevice-sub-area-support.patch \
+>      file://0010-Make-Qt5GuiConfigExtras.cmake-find-gl-es-include-dir.pat=
+ch \
+> +    file://0015-Fix-build-with-clang-3.7.patch \
+>  "
+> =20
+>  # common for qtbase-native and nativesdk-qtbase
+> diff --git a/recipes-qt/qt5/qtbase/0015-Fix-build-with-clang-3.7.patch b/=
+recipes-qt/qt5/qtbase/0015-Fix-build-with-clang-3.7.patch
+> new file mode 100644
+> index 0000000..181d63c
+> --- /dev/null
+> +++ b/recipes-qt/qt5/qtbase/0015-Fix-build-with-clang-3.7.patch
+> @@ -0,0 +1,71 @@
+> +This is backport of https://codereview.qt-project.org/#/c/121545/
+> +
+> +From 6a6acc496728ce96198d27f9ddd44c2367758d42 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Sun, 23 Aug 2015 15:19:41 -0700
+> +Subject: [PATCH] Fix build with clang 3.7
+> +
+> +Nullable is a language extension in clang 3.7 (indicating whether or
+> +not a pointer can be null).
+> +http://clang.llvm.org/docs/AttributeReference.html#nullable
+> +Using it as a class name breaks building with this compiler
+> +
+> +/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vf=
+p-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src=
+/tools/qlalr/lalr.cpp:241:1: error: declaration of anonymous
+> +      struct must be a definition
+> +struct _Nullable: public std::unary_function<Name, bool>
+> +^
+> +/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vf=
+p-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src=
+/tools/qlalr/lalr.cpp:241:56: error: expected unqualified-id
+> +struct _Nullable: public std::unary_function<Name, bool>
+> +                                                       ^
+> +/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vf=
+p-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src=
+/tools/qlalr/lalr.cpp:303:98: error: expected expression
+> +          NameList::iterator nn =3D std::find_if (rule->rhs.begin (), ru=
+le->rhs.end (), std::not1 (_Nullable (this)));
+> +                                                                        =
+                         ^
+> +/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vf=
+p-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src=
+/tools/qlalr/lalr.cpp:638:107: error: expected expression
+> +                  NameList::iterator first_not_nullable =3D std::find_if=
+ (dot, rule->rhs.end (), std::not1 (_Nullable (this)));
+> +                                                                        =
+                                  ^
+> +4 errors generated.
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + src/tools/qlalr/lalr.cpp | 8 ++++----
+> + 1 file changed, 4 insertions(+), 4 deletions(-)
+> +
+> +diff --git a/src/tools/qlalr/lalr.cpp b/src/tools/qlalr/lalr.cpp
+> +index be1df7d..55ef056 100644
+> +--- a/src/tools/qlalr/lalr.cpp
+> ++++ b/src/tools/qlalr/lalr.cpp
+> +@@ -238,11 +238,11 @@ void Grammar::buildExtendedGrammar ()
+> +   non_terminals.insert (accept_symbol);
+> + }
+> +=20
+> +-struct _Nullable: public std::unary_function<Name, bool>
+> ++struct Nullable: public std::unary_function<Name, bool>
+> + {
+> +   Automaton *_M_automaton;
+> +=20
+> +-  _Nullable (Automaton *aut):
+> ++  Nullable (Automaton *aut):
+> +     _M_automaton (aut) {}
+> +=20
+> +   bool operator () (Name name) const
+> +@@ -300,7 +300,7 @@ void Automaton::buildNullables ()
+> +=20
+> +       for (RulePointer rule =3D _M_grammar->rules.begin (); rule !=3D _=
+M_grammar->rules.end (); ++rule)
+> +         {
+> +-          NameList::iterator nn =3D std::find_if (rule->rhs.begin (), r=
+ule->rhs.end (), std::not1 (_Nullable (this)));
+> ++          NameList::iterator nn =3D std::find_if (rule->rhs.begin (), r=
+ule->rhs.end (), std::not1 (Nullable (this)));
+> +=20
+> +           if (nn =3D=3D rule->rhs.end ())
+> +             changed |=3D nullables.insert (rule->lhs).second;
+> +@@ -635,7 +635,7 @@ void Automaton::buildIncludesDigraph ()
+> +                   if (! _M_grammar->isNonTerminal (*A))
+> +                     continue;
+> +=20
+> +-                  NameList::iterator first_not_nullable =3D std::find_i=
+f (dot, rule->rhs.end (), std::not1 (_Nullable (this)));
+> ++                  NameList::iterator first_not_nullable =3D std::find_i=
+f (dot, rule->rhs.end (), std::not1 (Nullable (this)));
+> +                   if (first_not_nullable !=3D rule->rhs.end ())
+> +                     continue;
+> +=20
+> +--=20
+> +2.1.4
+> +
+> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+> index 33620cb..6814dbe 100644
+> --- a/recipes-qt/qt5/qtbase_git.bb
+> +++ b/recipes-qt/qt5/qtbase_git.bb
+> @@ -22,8 +22,9 @@ SRC_URI +=3D "\
+>      file://0009-QOpenGLPaintDevice-sub-area-support.patch \
+>      file://0010-Make-Qt5GuiConfigExtras.cmake-find-gl-es-include-dir.pat=
+ch \
+>      file://0014-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.pat=
+ch \
+> +    file://0015-Fix-build-with-clang-3.7.patch \
+>  "
+> -=20
+> +
+>  # specific for qtbase
+>  SRC_URI +=3D "\
+>      file://0011-qmake-don-t-build-it-in-configure-but-allow-to-build.pat=
+ch \
+> @@ -199,9 +200,9 @@ do_configure() {
+>          -hostbindir ${OE_QMAKE_PATH_HOST_BINS} \
+>          -hostdatadir ${OE_QMAKE_PATH_HOST_DATA} \
+>          -external-hostbindir ${OE_QMAKE_PATH_EXTERNAL_HOST_BINS} \
+> +        ${QT_CONFIG_FLAGS} \
+>          -platform ${OE_QMAKESPEC} \
+> -        -xplatform linux-oe-g++ \
+> -        ${QT_CONFIG_FLAGS}
+> +        -xplatform linux-oe-g++
+> =20
+>      qmake5_base_do_configure
+>  }
 > --=20
-> 1.9.1
+> 2.1.4
 >=20
 > --=20
 > _______________________________________________
@@ -161,16 +231,16 @@ _extras.gypi.patch
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---2JFBq9zoW8cOFH7v
+--1sNVjLsmu1MXqwQ/
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlXbERcACgkQN1Ujt2V2gBzs9gCcCjYpiv9sotFADCdjRtMp5mkB
-LvEAnR8TptBgBfF1tgy3v/yoRtN7HuBN
-=+bEz
+iEYEARECAAYFAlXbESkACgkQN1Ujt2V2gBxkewCgmwkBUqo1jzDG5V0s7aOtt9aF
+ABEAnA6jPVsVQ+Es1J1gSkmCk2LhQqvL
+=WM8d
 -----END PGP SIGNATURE-----
 
---2JFBq9zoW8cOFH7v--
+--1sNVjLsmu1MXqwQ/--
