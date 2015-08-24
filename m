@@ -1,35 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 62B4F6AC1E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
+	[209.85.213.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F7176AC1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 17:23:06 +0000 (UTC)
-Received: by widdq5 with SMTP id dq5so56889683wid.1
+	Mon, 24 Aug 2015 17:44:10 +0000 (UTC)
+Received: by igbjg10 with SMTP id jg10so67398527igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 10:23:07 -0700 (PDT)
+	Mon, 24 Aug 2015 10:44:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=eGCg6RjuEnrQ5tSlQ6YXtCt6LpA9njwxhg2la+nmvCE=;
-	b=MuuT2NUpSlcXFBRa0H/BNOhV8L5s34u5c9saQVCyNIE3lfrFvtVPzoeIyrrNBjWdt7
-	/LxV+7e9rscBdnO2tmvJGcyCsMx6NS/+OmT/n7kPVb+R2um+OU7mOZN4hSZnYlhQKd5O
-	W0V1EeVNMiMYHjvTAdqbFywbLfQYqhDli8F1sZQ3MIhJX+DUsDT9jWQuVlLFXz8uECLF
-	TB4IEH1lHFk8HDwZe713k/+EsjNA3MgnGpQ64Feegj3lKr0Pk3cDJS2Q9XpLCAiHolQa
-	quXxgoglt7t/RlAHoSb7sR9U7ml41QW3HRVzwWy5xaFZBPL8SbAc8S+Y0C7d7UoMHeR7
-	FDDA==
-X-Received: by 10.180.76.232 with SMTP id n8mr32245021wiw.72.1440436987014;
-	Mon, 24 Aug 2015 10:23:07 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	ir5sm24120258wjb.23.2015.08.24.10.23.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Aug 2015 10:23:06 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	bh=4AM6fTSApo5QAOvXEwS1bQ7AXucAZJSjBtUe8AfN+iw=;
+	b=FSEb2g2sgQv1eW+ghY3470tqvrZv0mXzOUl4wZBSzzfea2gRDviTKdoVh2t4M6U4HW
+	eUM6isMqwic8hJ+kDusjg04L133TEnYSnGQbhRI9nCGzxu+OPvCSfwmQZikacJlvOKxQ
+	UIAl7WoH94YX3c7dTxznoiYh4SYLXNyUbPgE/HtlFfN/PnjM4N70xvnBByAr4lIgiywv
+	vM5+V2gUix1A7w/lBuiQ89Of3J2eccnCit70CaS8KxbYLOWKuLUmeuzHMcS7j9LZ7cFY
+	Ofxrs1w1cAWlxhZ1Ok6Mh9GKbrrX5r5j4m4anqcCpUypNdTqDzPEZ3EcGyX8hVA+ApUI
+	ghZg==
+X-Received: by 10.50.32.97 with SMTP id h1mr15403601igi.29.1440438250381;
+	Mon, 24 Aug 2015 10:44:10 -0700 (PDT)
+Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
+	[96.119.89.79]) by smtp.gmail.com with ESMTPSA id
+	ht6sm9289129igb.11.2015.08.24.10.44.09
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 24 Aug 2015 10:44:09 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Aug 2015 19:23:06 +0200
-Message-Id: <1440436986-30016-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.5.0
-Subject: [meta-networking][PATCH] tcpdump: add PACKAGECONFIG for smi
+Date: Mon, 24 Aug 2015 10:43:56 -0700
+Message-Id: <1440438239-19765-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-qt5][PATCH V2 1/4] qtbase: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,40 +42,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 17:23:11 -0000
+X-List-Received-Date: Mon, 24 Aug 2015 17:44:13 -0000
 
-* libsmi is autodetected in configure, but in most cases disabled because of
-  cross-compilation so keep it explicitly disabled
-* resolves following difference in builds with and without libsmi built
-  before tcpdump:
-  4.7.4-r0-with/temp/log.do_configure:checking smi.h usability... yes
-  4.7.4-r0-with/temp/log.do_configure:checking smi.h presence... yes
-  4.7.4-r0-with/temp/log.do_configure:checking for smi.h... yes
-  4.7.4-r0-with/temp/log.do_configure:checking for smiInit in -lsmi... yes
-  4.7.4-r0-with/temp/log.do_configure:checking whether to enable libsmi... not when cross-compiling
+This patch is a backport from upstream qt5 fixes building with clang
+from meta-clang
 
-  4.7.4-r0-without/temp/log.do_configure:checking smi.h usability... no
-  4.7.4-r0-without/temp/log.do_configure:checking smi.h presence... no
-  4.7.4-r0-without/temp/log.do_configure:checking for smi.h... no
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb | 1 +
- 1 file changed, 1 insertion(+)
+ recipes-qt/qt5/qtbase-native_git.bb                |  1 +
+ .../qt5/qtbase/0015-Fix-build-with-clang-3.7.patch | 71 ++++++++++++++++++++++
+ recipes-qt/qt5/qtbase_git.bb                       |  1 +
+ 3 files changed, 73 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtbase/0015-Fix-build-with-clang-3.7.patch
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
-index b0b8e9d..0ffe589 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
-@@ -22,6 +22,7 @@ CACHED_CONFIGUREVARS = "ac_cv_linux_vers=${ac_cv_linux_vers=2}"
- PACKAGECONFIG ??= "openssl ipv6"
- PACKAGECONFIG[openssl] = "--with-crypto=yes, --without-openssl --without-crypto, openssl"
- PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
-+PACKAGECONFIG[smi] = "--with-smi, --without-smi,libsmi"
+diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
+index ebd7280..1d09a19 100644
+--- a/recipes-qt/qt5/qtbase-native_git.bb
++++ b/recipes-qt/qt5/qtbase-native_git.bb
+@@ -24,6 +24,7 @@ SRC_URI += "\
+     file://0005-qeglplatformintegration-Undefine-CursorShape-from-X..patch \
+     file://0006-configure-bump-path-length-from-256-to-512-character.patch \
+     file://0008-QOpenGLPaintDevice-sub-area-support.patch \
++    file://0015-Fix-build-with-clang-3.7.patch \
+ "
  
- EXTRA_AUTORECONF += " -I m4"
+ # common for qtbase-native and nativesdk-qtbase
+diff --git a/recipes-qt/qt5/qtbase/0015-Fix-build-with-clang-3.7.patch b/recipes-qt/qt5/qtbase/0015-Fix-build-with-clang-3.7.patch
+new file mode 100644
+index 0000000..181d63c
+--- /dev/null
++++ b/recipes-qt/qt5/qtbase/0015-Fix-build-with-clang-3.7.patch
+@@ -0,0 +1,71 @@
++This is backport of https://codereview.qt-project.org/#/c/121545/
++
++From 6a6acc496728ce96198d27f9ddd44c2367758d42 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 23 Aug 2015 15:19:41 -0700
++Subject: [PATCH] Fix build with clang 3.7
++
++Nullable is a language extension in clang 3.7 (indicating whether or
++not a pointer can be null).
++http://clang.llvm.org/docs/AttributeReference.html#nullable
++Using it as a class name breaks building with this compiler
++
++/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src/tools/qlalr/lalr.cpp:241:1: error: declaration of anonymous
++      struct must be a definition
++struct _Nullable: public std::unary_function<Name, bool>
++^
++/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src/tools/qlalr/lalr.cpp:241:56: error: expected unqualified-id
++struct _Nullable: public std::unary_function<Name, bool>
++                                                       ^
++/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src/tools/qlalr/lalr.cpp:303:98: error: expected expression
++          NameList::iterator nn = std::find_if (rule->rhs.begin (), rule->rhs.end (), std::not1 (_Nullable (this)));
++                                                                                                 ^
++/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src/tools/qlalr/lalr.cpp:638:107: error: expected expression
++                  NameList::iterator first_not_nullable = std::find_if (dot, rule->rhs.end (), std::not1 (_Nullable (this)));
++                                                                                                          ^
++4 errors generated.
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/tools/qlalr/lalr.cpp | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/src/tools/qlalr/lalr.cpp b/src/tools/qlalr/lalr.cpp
++index be1df7d..55ef056 100644
++--- a/src/tools/qlalr/lalr.cpp
+++++ b/src/tools/qlalr/lalr.cpp
++@@ -238,11 +238,11 @@ void Grammar::buildExtendedGrammar ()
++   non_terminals.insert (accept_symbol);
++ }
++ 
++-struct _Nullable: public std::unary_function<Name, bool>
+++struct Nullable: public std::unary_function<Name, bool>
++ {
++   Automaton *_M_automaton;
++ 
++-  _Nullable (Automaton *aut):
+++  Nullable (Automaton *aut):
++     _M_automaton (aut) {}
++ 
++   bool operator () (Name name) const
++@@ -300,7 +300,7 @@ void Automaton::buildNullables ()
++ 
++       for (RulePointer rule = _M_grammar->rules.begin (); rule != _M_grammar->rules.end (); ++rule)
++         {
++-          NameList::iterator nn = std::find_if (rule->rhs.begin (), rule->rhs.end (), std::not1 (_Nullable (this)));
+++          NameList::iterator nn = std::find_if (rule->rhs.begin (), rule->rhs.end (), std::not1 (Nullable (this)));
++ 
++           if (nn == rule->rhs.end ())
++             changed |= nullables.insert (rule->lhs).second;
++@@ -635,7 +635,7 @@ void Automaton::buildIncludesDigraph ()
++                   if (! _M_grammar->isNonTerminal (*A))
++                     continue;
++ 
++-                  NameList::iterator first_not_nullable = std::find_if (dot, rule->rhs.end (), std::not1 (_Nullable (this)));
+++                  NameList::iterator first_not_nullable = std::find_if (dot, rule->rhs.end (), std::not1 (Nullable (this)));
++                   if (first_not_nullable != rule->rhs.end ())
++                     continue;
++ 
++-- 
++2.1.4
++
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index f472c98..5603fb2 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -18,6 +18,7 @@ SRC_URI += "\
+     file://0005-qeglplatformintegration-Undefine-CursorShape-from-X..patch \
+     file://0006-configure-bump-path-length-from-256-to-512-character.patch \
+     file://0008-QOpenGLPaintDevice-sub-area-support.patch \
++    file://0015-Fix-build-with-clang-3.7.patch \
+ "
  
+ # specific for target qtbase
 -- 
-2.5.0
+2.1.4
 
 
