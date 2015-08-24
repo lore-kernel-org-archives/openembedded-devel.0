@@ -1,18 +1,18 @@
 Return-Path: <samuli.piippo@theqtcompany.com>
 Received: from emea01-db3-obe.outbound.protection.outlook.com
-	(mail-db3on0146.outbound.protection.outlook.com [157.55.234.146])
-	by mail.openembedded.org (Postfix) with ESMTP id A033B76AE6
+	(mail-db3on0114.outbound.protection.outlook.com [157.55.234.114])
+	by mail.openembedded.org (Postfix) with ESMTP id B727E76A8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 09:28:52 +0000 (UTC)
+	Mon, 24 Aug 2015 09:29:13 +0000 (UTC)
 Authentication-Results: spf=none (sender IP is )
 	smtp.mailfrom=samuli.piippo@theqtcompany.com; 
 Received: from piippo.it.local (91.217.248.11) by
 	DB5PR02MB1174.eurprd02.prod.outlook.com (10.162.163.20) with Microsoft
-	SMTP Server (TLS) id 15.1.243.23; Mon, 24 Aug 2015 09:13:54 +0000
+	SMTP Server (TLS) id 15.1.243.23; Mon, 24 Aug 2015 09:13:49 +0000
 From: Samuli Piippo <samuli.piippo@theqtcompany.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 24 Aug 2015 12:13:55 +0300
-Message-ID: <1983fc6d109300f6f7951cd63e7550dae0f66a97.1440407387.git.samuli.piippo@theqtcompany.com>
+Date: Mon, 24 Aug 2015 12:13:48 +0300
+Message-ID: <f36449097b046a2dd326eeaea20cf91249ab2805.1440407387.git.samuli.piippo@theqtcompany.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
 References: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
@@ -21,14 +21,14 @@ X-Originating-IP: [91.217.248.11]
 X-ClientProxiedBy: AM3PR01CA040.eurprd01.prod.exchangelabs.com (10.141.191.30)
 	To DB5PR02MB1174.eurprd02.prod.outlook.com (25.162.163.20)
 X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1174;
-	2:S7BAqjZPqsTKc+oS4MMe/bHOT+zviL2p9Z/EECAzd25l7/hoXHEdHlaLqY6ayDNi7Q9AX5hyUmkynDi/EXW4p/7U1U8WppE2fuQes08CyjYk9nNiiB29l41Qn2roIiS8iB5Jgoex54f7voJnlHR5DzhWtFuVVugKyyE9hxV8Cp0=;
-	3:PeouSmiAV1/K2zZoeIbt12EFs0faXMJVg+vUItT3RyC+W+P6U5cJzhYQK/+6eGMOZvE4Kj+mrABcNgTZbq47arKyPkVaJgIqGnctzJZ04h1SY9bSRnmRPaGUUSbWixAO5vR7RVOIqLK3EQBwPgh2rw==;
-	25:wteL7WCFSVRj8yNAYERxn6m9lVMU1dct6oLERoMjlGzAe4wHCoYFDiGkYx6b6Y7asUV3cVRQ/Z8XJhp/X77L4ourKKsqNDHah79/2ZBx8S3s+UCWJrfb+mMhq05273iCr3gQiiD3AFwbMBzSDCDEwqErEHXwKlTQdPNBZr1zCYA5zD0Njb6j8PeHcqZhyI9m9jsndlbfqoxYwlhf5PVyu8pI4Jh5+L6SY8nToPhpeQySksg3iTBH/HcL/yApl36tIEQgAmpZanW3f/PmidcWQg==
+	2:AGI8BQdvOp0VgJmCo40T7olkTpop+rYeebOlPmCFh7mWVy7+NFyDPJ0JogaV7eU/DfKnzSjPRfr92xyUTaaUfsfwXkzzH46ajSvlNrC9KTGtE9mgc4yjjLFh7QwZcPkH/d9pEONBP9okX1GI6b1ObRQh4yebnAefJAz1HLBzXqY=;
+	3:31Yh1oaHKNzYfvhPeYAuK5SoGc6lDHocJnzzESjBVGZLH+3kelNjAm2BkJ2f6cjZWkJJYtVqMjv1Uy67caxMesHv7XiN/rgu8qN9MFC9PPbN+LQElg8MyKh2NQ3cXheXRIhKNXDhdTbRrTM/OmyqIA==;
+	25:9A+/amkGp+f/6usvQX8/RIMrgNOe+Dkf+1+k/lFmYfoK2bubt3sUrTjjPKqwIT+t0B57jYuQGAzaBEgHYEGU25jChaiHP130GCORuBuoRSk9s4wgRXrVt35e8XYsRhWNXUI0U/Dv+ykGSrtPI/b/TJOqdkXFB8SwSmWPwdez35PpUN9RGuUJiE6Xg66OxE7UULlC6NQiL1zTbM9p4otrLaR6G61vNicFd5ID/PCVwsxHAk0MB8hm1arRBONRud9VApMVz2Xss9bsX13mRbm7zQ==
 X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DB5PR02MB1174;
 X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1174;
-	20:tEfaGn4exVJ8z8Jl6pGjYCLywiPrZ/Zc0jO1z7qjKawTJVQRlWnRMUqCj6LDmMygvgQ6DYIXBCF8AJSuNSi9AnbMUTwIZHEWcCS46X6XyHOgb2Bik8LO3E6jOyVBUeddqnIf8K7D8eR1Nhc00IhTgQPpQdMVee1aXzgf+QqXTxetMZ4+LCF7X+HXOJ9n3KwPCSslYAJG3lgj2hKJwC7kNlJ3r5uP5Zd//a6mxkiYlV8PnRjdP9HBzUuv2VFUc2KkyvwUVPP9Av3SQxcQtPL5/GKn+2im2nsoEFDtzcG9kuKB1OZdqcsnwHi0KP2t3UZE9jCAc79Uj8tmrNqJXSlafdeCSir7aLX+kWyL4dU+iyFju7NvJ2UY1SV4lXQYIP3WpkFuiF0E+XbB4VJrFMbjd6Yz6+cP9zIGAu2Q7bIXPl0wvXjQ2UX6mqUZOD7s9w/waj3kmhD2W7vuqmJGfxTmV6zHlnn/KeJvwk8Xsc40EPYGo9lfv5REkMqz43fO2TNO;
-	4:A9PGQNkfr5gDuIGKW9uVhf/qmzfC+Qs4sY2btMOeHZ3loU8qQNaDCVqx6PPZV81lm47p07SZjxM5NqKVsZ1YFzyVMGHc3jWx3JseoqKXu/QuuoofAaWidHVoqRZYIBldo2Erbh1xtQkV+aj1EP34h0QfImD5fcNJt4PdHU7cbaqs2kulkeHRDbsnKy1QqciKa+8nrjXVhu4TS5eKhpHAl6hzQ94VGiFYcTcFziG4WLoVQ4zafdbV3T9DY4ZOP5o4CzC9lS37AnQdHcF7Ud3uylxes+aAVCYcixWNgLc/D7RqAGqQAkX9fXMYSWKlC0+s
-X-Microsoft-Antispam-PRVS: <DB5PR02MB1174540649713C05EF081E0590620@DB5PR02MB1174.eurprd02.prod.outlook.com>
+	20:ghyjk9jSiTYfTgQicL0EvbZ/lCHgHHJl48sYNinKy4LqlLe9Y4jqIA6ZyyeoIWqw9dtcMR3l/GmFC5dudEXBvehF02rCLcgiqx6D5e0Ugew7s7whTIqC8ET3/JIgS2RitppJPlGqWkVVzE0bRUsOIMrbLXjYbCLM9qRF+KkypqFJ/B9SD5wXg5l00zww1V1O4vxJikeFtvA+eGG3AaPxw7UWcUdbgJfOA57l5HtxsTVXCm+YQlkisoT64bG3Crut8VZUVtAHXbD30gil74aG/TsuMzPdOmDV0AIO+xGwwgZwBscmg5ZlKxePBPaLJ1r+GBqH3DmfoZ7u+/qAfJl3XijvUSvrlMo7zfXHT4YryR9SDx/YdKQA/XGt78Eksjt4JF5XbJM/82ldSpT9h/rZ8NhTmvFHiYCwbrS3iFyMMJ7HdjXYB8Av7uVEqiDRQCBabPiEyD0PfJKgRbbd6d8TewI4kjmqpI7JDXjv1uZGirGhyHEI6eGVLnYPQ87zIXy+;
+	4:LSHqnvtmcfT0Uf2/OGjoEZidWaJrLZVsw9H6CdpEoBwB0xBQWe0anpFstswErcKOOFdUc2ZAy6nToUFe06eXPbwmlbBL88ZL3A0SYNY4iOg8KExaB4XyF1+94BNdp8PrHQx1Robfi6LsRcN/W4g+S2OBy2V+cN5RFBCyVkrFho217GsPdByrpHIrEfIrybDjU5fl6q/gyEBJEtQvhQ/Iw4sbEu3UD6Kzbrrjg58GDix9wZ9KQMplmz8snzEd1eGX0lIsFJmKxT8/Az0OggTKB+2RKotMRX+p/8E97Qv1z6TF7tN0x2gV93D4BWTpexgj
+X-Microsoft-Antispam-PRVS: <DB5PR02MB1174958BAF818BCF7F5B267290620@DB5PR02MB1174.eurprd02.prod.outlook.com>
 X-Exchange-Antispam-Report-Test: UriScan:;
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
 	RULEID:(601004)(8121501046)(5005006)(3002001);
@@ -37,44 +37,44 @@ X-Forefront-PRVS: 06780E24F8
 X-Forefront-Antispam-Report: SFV:NSPM;
 	SFS:(10019020)(6009001)(199003)(189002)(64706001)(46102003)(5004730100002)(40100003)(47776003)(66066001)(5007970100001)(106356001)(50466002)(2351001)(105586002)(122386002)(229853001)(48376002)(101416001)(77156002)(92566002)(97736004)(62966003)(450100001)(118296001)(5001860100001)(77096005)(50226001)(110136002)(5001960100002)(107886002)(4001540100001)(68736005)(36756003)(19580405001)(81156007)(189998001)(5001920100001)(33646002)(19580395003)(5001830100001)(42186005)(5003940100001)(87976001)(2950100001)(86362001)(76176999)(50986999)(7099028)(4001430100001);
 	DIR:OUT; SFP:1102; SCL:1; SRVR:DB5PR02MB1174; H:piippo.it.local;
-	FPR:; SPF:None; PTR:InfoNoRecords; A:1; MX:1; LANG:; 
+	FPR:; SPF:None; PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
 Received-SPF: None (protection.outlook.com: theqtcompany.com does not
 	designate permitted sender hosts)
 X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DB5PR02MB1174;
-	23:/TiTABLea2+DwU72VY3TPn0G4p5VoqLF5JKD7qZ/Z?=
-	=?us-ascii?Q?rMYYj3RRwBdXbhaod8mgmhe020drWsu2IyFZXwl2eJUEGkrNIt4isV9r7OlG?=
-	=?us-ascii?Q?MIJfsAIA7itC/l0q/5rkL+fZFwMKKMA/QcglWfVRHZX7X6mKfEVnDSLOX51k?=
-	=?us-ascii?Q?CozVtDw7L+alrAHCBnVC011DmH067mlrufYfl1c0kqZkHUjO5IErURgmsAof?=
-	=?us-ascii?Q?2gvbH1TRGlUTRy88I1XWPu6V4SHIk7Z4lRki/GROBoRYJ3zimb8/yRtJZpfi?=
-	=?us-ascii?Q?pK1sAvfSe7lf7k1Lj0ioDwRwCPAodjXcSxgCU+FQtYIlLkF7aDS6BT633qIV?=
-	=?us-ascii?Q?pH+J5un18r/KQYS4LUD4MjNdoRDQv48sUeKlfHL3wr4aG8A764eMTKqCUAD9?=
-	=?us-ascii?Q?H6a7pWXxlm954xaUgltWBxkWl1usrgtrGwdbqfoMop4CIo/l7c7qwupq8rP+?=
-	=?us-ascii?Q?6PPs3LjKrXWp6lfJ3g9Tjtlp4btytwt9alTv08CDNmhcqplMyw1pqELYgMVm?=
-	=?us-ascii?Q?aw/zEqVBbf6HnYpFRQwat4TbzfRn/cQZ6N/NK9kTV5l61eVoWnSb2BRDP6JV?=
-	=?us-ascii?Q?MQ0LlVm3FCdVfqtBBe1Vt9d3Py53GtxXpBDoqO1EENC7KORxAmjNvWFhG/LS?=
-	=?us-ascii?Q?C52dnPWKbMcgX8x54Cfh8GaDQVrtOwQ8GBY8E/HjyKMGukIKZwQqp0Ut2cm+?=
-	=?us-ascii?Q?PkTq8L1tWvwd+k7UsFKTgH1kCnt/+5IW0XGR0EVcUJpDe9MC/KoHaAEirhWh?=
-	=?us-ascii?Q?hpmXQNgKkXFqKDdiiMURkAQNDwENjZwCZ3AVu4INRKjVlnHmBDSLiu/ivRmi?=
-	=?us-ascii?Q?u2uCW5JPlhYo+t+hZqdK9T0fxQtgTO4DwbFbjytpQfxX1CXI/3w89sXpEnA9?=
-	=?us-ascii?Q?+JttVY69/WCc5UX/LefPAPDgrZp3R7oN3QBQ8E4wwJDjDLSCupwDCpp8S16Y?=
-	=?us-ascii?Q?tYpNtjM6DseBzZDHb+rBTV82PjCsh9bMvtly+EJID0mkaX4quC6CBjV9rGap?=
-	=?us-ascii?Q?1VJVPiWuJouX0RFctfRMZGkwXagNPASN4WCxNQ6HV1jtXoZShZ2aYGg4Kvb5?=
-	=?us-ascii?Q?w9jlahiVIpzOLML3FqkH58z5gnAlb+RcKUvBxu1XQq3dBZkpOCqeNKS6YgHE?=
-	=?us-ascii?Q?B3yhTOEVbcHMwN87VnAL3oC4r/qF8Xv5DVrCleTH2mfBnXJEy9XM5j1GyX+f?=
-	=?us-ascii?Q?yrffSA3Gg7NFvzXwoulDRxg6K/eyziY+ppSTM7IFBsg+H6suz7YjNa231wsi?=
-	=?us-ascii?Q?UdS125sXE5btQfgysETAO1xuogUImByik9ZOjANYCenAnBWKRrpTEv0SAT2I?=
-	=?us-ascii?Q?ShOC72K4bS52YFmyjfK3sE=3D?=
+	23:sHbBspo+eQv5kWzD2iKkWzLzzB2v70nCHyzGCF6p5?=
+	=?us-ascii?Q?oAhwjPKqDv5Bu5OC0E6Ie8ZvrY+6MjulfQxFbYSJrozqxc3OAnB7D7b4OWWE?=
+	=?us-ascii?Q?hrqqWiwi4wkvu5TPx5UhKSfcNEtKucYy9+Mr4vDQyURz2Moz44UNJ+vvqUMZ?=
+	=?us-ascii?Q?utywKhz0dnN3rBqLyG+xGy66gUst2F506f8g33ruMCzErlxtj1spFhUIlyxZ?=
+	=?us-ascii?Q?n1bBjk4IlIM02sl+faWBL1CSI9Lkx8GCYqpcbjUnPCXwkgECZTRLNzxigoJ+?=
+	=?us-ascii?Q?vrGhuIfmxEMG+WKkV8ejL+jZKaOJu6b8o+5osm2zn882kSHtTkZW4D8ebZ28?=
+	=?us-ascii?Q?kxyb7mTNg/3Y6XG3CxKW4CU2HsUNR1qkxi6Vchgvrc4OshlDPZ0i/7GmMdH2?=
+	=?us-ascii?Q?WXDRryVDWgs6LLmfU2kGl+ZwBbPNfAZQQ0BwMNtRqA+ncEAI1E6P1PY4MFas?=
+	=?us-ascii?Q?75cimwsMpvc7DcPsmOrb8ZxYe3upkp/syUv7bC9+jtKm1B73DptrkjvM1bgN?=
+	=?us-ascii?Q?1/QCdMWbH95e1hbfGVfII7cr92u/We5wD0RFn3NlGCsMW8nRrX05vTYcYMhc?=
+	=?us-ascii?Q?Gzs7bPtPVJ27lnfKWTRLoOa6yOabVnOOfGZsDAExrE28jyBUeeGg0eSrEMbj?=
+	=?us-ascii?Q?+ujxYPAzI5xZuy5wdrQZ001Z62CJ5ad/KwNKE0JYFchF8g0v9uKHtm7dI0fc?=
+	=?us-ascii?Q?vH7N/TKTeIaT1fQonxqlPJhDS/3RvUeo44NZdaraGQnvkDtaN2olbsbMqCGO?=
+	=?us-ascii?Q?BQg36pAz2yEO6nJucgzJtm0gyvw1GLBeiDAoANrozNhttdXv7VJdZcjnVc2j?=
+	=?us-ascii?Q?5n4bmO1+W4ZdLuAj+Z1ClAt/zab4R38N/O1cT6BGaZxKXz4GzbLMlBsL+Tjk?=
+	=?us-ascii?Q?JZ1E0uY4DnbF9+i+ZyN8EbDPczxBcmGWOgJu6LuF3fLE+ZbzDIJSAG4JzBp3?=
+	=?us-ascii?Q?iMd8ws6+VWsSvCZ+aOzpb59jqhCgKdwMFeyUElnBzVRN9dlB1heAtFCUn/0y?=
+	=?us-ascii?Q?9C9x9TNVJbIUFOMOcDq8ioqz+A4FGmZRq5hTAvNr1aRCTl3tt2RXp9KIJHpt?=
+	=?us-ascii?Q?vEmVB9mWW3YtvkYkhl7V7rhrWjKsZVsOwItq5CEyBlL1qkCPk5I5t6F2CQAg?=
+	=?us-ascii?Q?a2xm6C9XOGDoPJHKYTjX8kHSyz2qcTJaKa9XavJdTKZgP6VPUuPbsnjh5Jyv?=
+	=?us-ascii?Q?7O94gD+xY5Ur3LNKOtWnBT8oy8+vheeHH/D2gh/efc8A/WaH7o57ToK8nCRg?=
+	=?us-ascii?Q?HlfPL0tdLEUJyqkVDsD+5UQ6w3qehlVIQmzkLq15VoNcTl2kQ4n0hXDxf/Qt?=
+	=?us-ascii?Q?SO14tJ49OW4LScwCAl7ec0=3D?=
 X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1174;
-	5:XNnkckxi2/p9Bng0ONJL8wli+rmVZVomKrFTKwxmvTjGq+6xIazqagIYE7Vk7qFaezIwEP2RalSaHI/27czBC+J1y+AJqTOWC8edhXy+ctzk/ZGmj9aMZHBc6Rnh4t7vsch5QcVOBC3uLU6yQvX8Jw==;
-	24:hxjGNEo6aS0TUWeOIWA/afYS4/wBZIc/2w4E0KNLoptc8WKdsOP9vdhhpJ57iFFfX+sE5xuf5Uh59ivIc+O84v0zEfhToLO5RTqSKqrHPw4=;
-	20:uiMXx0RiXyXc03pv0376AX9G4B+CstVrstymBm2sKZPlPiUji7F2T/mPUlH7S90HbatvXzfvJcqm38a0R/K1eQ==
+	5:q1+t/lP5mM1OGiCbAotseYY4w6lUbBXXSqZvDLJt9quX9yHeLSvMt/8CD6Nk7Zq1H1BsTnl+0Iq4cc32FE3Vg1lVljSzNum0w4ZqnNCiAw3noRPogdeGXdOkxo1NzfI7idkhePJ8pB+lb+49NTnKog==;
+	24:ecx/XLj9T+sfZ1uBIou02uDGVkdnFi0usnbalehHubk+FIpaNpTGkVxg9RHAMjnE8M7NjkdlmVfZG0XFvc3GaEN/jtPZ2PPYmRUy9KJp/Xc=;
+	20:cnJEKCsbxoZjmUg3UbLQR9dJSdZyBoXnNEGHHg6A3qTD9BhizoATfrjcZfWVtu7SUpvNaYCBX05JEObP0BBjug==
 SpamDiagnosticOutput: 1:23
 SpamDiagnosticMetadata: NSPM
 X-OriginatorOrg: theqtcompany.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2015 09:13:54.6000 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2015 09:13:49.7408 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR02MB1174
-Subject: [meta-qt5][PATCH 09/11] qtbase: PACKAGECONFIGs for libproxy and libinput
+Subject: [meta-qt5][PATCH 02/11] qt5: improve Qt module package handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -88,27 +88,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 09:28:54 -0000
+X-List-Received-Date: Mon, 24 Aug 2015 09:29:14 -0000
 Content-Type: text/plain
+
+Make it simpler to add Qt modules to image and toolchain, without need
+to specify each subpackage separately. All Qt modules should provide
+the ${PN} package, so create it even if empty. Make the ${PN} package
+also recommend all subpackages that are normally required at run time,
+namely plugins. Do the same for ${PN}-dev and ${PN}-dbg packages.
 
 Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
 ---
- recipes-qt/qt5/qtbase_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ recipes-qt/qt5/qt5.inc | 21 +++++++++++++++++++--
+ 1 file changed, 19 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 972027b..dcda92f 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -133,6 +133,8 @@ PACKAGECONFIG[alsa] = "-alsa,-no-alsa,alsa-lib"
- PACKAGECONFIG[pulseaudio] = "-pulseaudio,-no-pulseaudio,pulseaudio"
- PACKAGECONFIG[nis] = "-nis,-no-nis"
- PACKAGECONFIG[widgets] = "-widgets,-no-widgets"
-+PACKAGECONFIG[libproxy] = "-libproxy,-no-libproxy,libproxy"
-+PACKAGECONFIG[libinput] = "-libinput,-no-libinput,libinput"
+diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
+index 2fc5367..8caaad3 100644
+--- a/recipes-qt/qt5/qt5.inc
++++ b/recipes-qt/qt5/qt5.inc
+@@ -47,6 +47,24 @@ INSANE_SKIP_${PN}-examples-dev += "libdir"
  
- QT_CONFIG_FLAGS += " \
-     -shared \
+ PACKAGES =. "${PN}-qmlplugins-dbg ${PN}-tools-dbg ${PN}-plugins-dbg ${PN}-qmlplugins ${PN}-tools ${PN}-plugins ${PN}-mkspecs ${PN}-examples-dev ${PN}-examples-staticdev ${PN}-examples-dbg ${PN}-examples "
+ 
++ALLOW_EMPTY_${PN} = "1"
++ALLOW_EMPTY_${PN}-dbg = "1"
++
++RRECOMMENDS_${PN} = " \
++    ${PN}-plugins \
++    ${PN}-qmlplugins \
++    "
++
++RRECOMMENDS_${PN}-dev = " \
++    ${PN} \
++    ${PN}-mkspecs \
++    "
++
++RRECOMMENDS_${PN}-dbg = " \
++    ${PN}-plugins-dbg \
++    ${PN}-qmlplugins-dbg \
++    "
++
+ # extra -dbg packages
+ FILES_${PN}-qmlplugins-dbg = " \
+     ${OE_QMAKE_PATH_QML}/*/.debug \
+@@ -135,8 +153,7 @@ FILES_${PN}-staticdev += " \
+     ${OE_QMAKE_PATH_LIBS}/*.a \
+ "
+ FILES_${PN}-examples = " \
+-    ${OE_QMAKE_PATH_EXAMPLES}/README \
+-    ${OE_QMAKE_PATH_EXAMPLES}/*/* \
++    ${OE_QMAKE_PATH_EXAMPLES}/* \
+ "
+ FILES_${PN}-examples-dev = " \
+     ${OE_QMAKE_PATH_EXAMPLES}/*${SOLIBSDEV} \
 -- 
 1.9.1
 
