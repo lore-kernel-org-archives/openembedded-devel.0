@@ -1,36 +1,36 @@
 Return-Path: <dominic.sacre@gmx.de>
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
-	by mail.openembedded.org (Postfix) with ESMTP id 6806D76BF5
+	by mail.openembedded.org (Postfix) with ESMTP id 652A376BE4
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 24 Aug 2015 15:28:29 +0000 (UTC)
 Received: from dastp.fritz.box ([79.250.183.143]) by mail.gmx.com (mrgmx001)
-	with ESMTPSA (Nemesis) id 0MGj8j-1ZXyHN3jEn-00DVOv;
+	with ESMTPSA (Nemesis) id 0MFtf4-1ZYnl42qlK-00EsJO;
 	Mon, 24 Aug 2015 17:28:28 +0200
 From: =?UTF-8?q?Dominic=20Sacr=C3=A9?= <dominic.sacre@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Aug 2015 17:27:54 +0200
-Message-Id: <1440430077-551-6-git-send-email-dominic.sacre@gmx.de>
+Date: Mon, 24 Aug 2015 17:27:53 +0200
+Message-Id: <1440430077-551-5-git-send-email-dominic.sacre@gmx.de>
 X-Mailer: git-send-email 2.5.0
 In-Reply-To: <1440430077-551-1-git-send-email-dominic.sacre@gmx.de>
 References: <1440430077-551-1-git-send-email-dominic.sacre@gmx.de>
 MIME-Version: 1.0
-X-Provags-ID: V03:K0:eyw1N/5Loij4k6UTMXAxFTK13jXb+V43F18uJal8owHM1gus7h/
-	BCnTqdhAxSksrppRLPpgH9yMF+zHKbyVgFzB9w6L6jWLah3WVZnn4DfEToKSlB9amItJtvq
-	11GAp8SM7xKe47MZf57W0wUUtRRb2TErMYAfgZsrKrfJqEh2OSz7dRD4rsHNqcoVJWmgHdT
-	pxYNYU4oVl3+JrW6Bd2yw==
-X-UI-Out-Filterresults: notjunk:1;V01:K0:wnpMjtsCcyA=:qtJwCh7sgcSm8MNy3wjOwW
-	EwldtBtAysBQ1L3k92N2BelewkA8M9Kb+pQKQGNcdCAN8ro4ZiprFg1bXl8R/ImRsPmOvRxQ6
-	LNf7amOy8dN+K3c2N0Vank+Ga+Rof5/Ng0K01M/Bc98PEDFas/86ojIX9/x/8lQxe+dxP016q
-	wI6qGx60iigD8V8HPzzaMwykitSfy92tZ2PlnEitjEgWAAg9MkmtgSkGgoUrsLo9/iTot4Lk1
-	HajC72Ahyx6VmibO1ayanqO1lYpGPVGRqzQd3dxmTwi0QvzebFyO56EUs9t82Txl2FQGEYbE6
-	0PSPA1nVj+v82do5nrTV84lp/pbpuirYGtaeymVkPcli7zXejuNkZZ7yJSrxoAqdgpVDk9IYH
-	pUedKfttfnoYqRi8dxhTZGRuYCeOczV6O4APQDY9Uq9u1HUltJHIEBdYvS9IyO4spVlBioxKD
-	aj/rBv1cm0mhqQ2nyGNWs5wx6Qych+ZVUk8VP3+4mCJLlQwFrIRofjB7OZYorDUF2wgeCS5HM
-	4SQh9zazyFYl+FVRVKGdfvjYIqpMPnO8v2LW4a1BheiGO+aeGSg2lRhQwRMySgPKhkJHJ/o9o
-	sf50jT2NgRzJMJajQPWplIa0qrOrGmujJJ4/lCR9nZzv59EEQvOpx0wlmGgegn8TMumlzTUVq
-	5qjM+OZYVl6elKnoOecMoEclJeTFaXc8w+Ka1t/07YncFDs9ucxL/jtz5cubq2GuT08yaG46e
-	ujoqil7/dYAeLcJvHiCb1S60LgqtKelOlhmN+Q==
-Subject: [meta-python][PATCH 5/8] python3-cython: Add new recipe
+X-Provags-ID: V03:K0:y5w5mYxlrkbxoV55rCKXCFxNYi8c6iIdu2wSEjKzTjWK4hGKxmR
+	AMQF0ixZGkYhGf67ZXQEYnt1IMJzZm1IsC87xmb2500UK2uOmWJ+oMsQnZr453RGcQxS942
+	sMP05QN7sQE4UwHVaMGV4G6ouh4KOZTCOTwoz2wNgLxhza6EUO0VgHqjbKomV8l7EICZ7F/
+	ef2W0/dn/p/c0TnEljJoQ==
+X-UI-Out-Filterresults: notjunk:1;V01:K0:uTMX3eyELV4=:9KHubfFJ1ecYJegnjgoxAo
+	Fkn0HrodJ4R6FyVJ3lHw7griZgPACdnwA2WmWT7KjneVuP+7SKmDOMk5HKIcJRc+9Ymx/TN1w
+	w0zpNFDjXezESXXQosmEJNVmDBDwukV7IUjT+2VudFTF0n5VnJi9WTzri7Va9VFxDi6uVOOkG
+	mUW9jbSCU7E6/EzjufyrI93Gw/fbaUAyGRas4hVvXmZ+rwGWTQrD4Sbreb+yEX8iUKMH5aUjW
+	DCQEHFkuxrJJTTLnREMEQVtU++KemMEcStEoDLAWYm+79w5RtrBsptI0TpmldflyR9HxiTg2I
+	hstH8rOJ2OGkPDdOR/+jJhxgBEYzHjdiCAbPm9FP9zX9Y5sJ7HcHAboU3Ilvw1o6/PnJk/ezo
+	q+0ahskkYLFjFCVTOjv9yUfsuPE0fPuoQIgJRsrDa9BxPZ25qHgdS2WxfxhmOaJ0TueCul4XU
+	LYQqaPPwsYo44olxzTBkSBADstl6e+VqplC7Cygjs4McudBEJ2RZ9Y0wS2Ja45ViqpOlZLiR1
+	7wjNT1rf+kUg30daCrbY13ImC1t1pyQ4QOz7j0Pt3lA+0AXdqWBw0S5Bej2zny1/gc3Fm6ccf
+	b0sjT9IVhkLI+FZYhsaZ7VtqteTZ0Q0PNObRfurDV8cGk+2YO1hejMk98mRRXW+8hySb7ewRS
+	302IJUPSlgjl+xx+XJV+NZBFC8GmrL0DgCG7pmKTx0jbQHRnaSDVL6otS2yNYP2rgL8V81wg0
+	CWbGqaHLN4L6u3hel5AMvuLAenE3v8Z9rzWE7w==
+Subject: [meta-python][PATCH 4/8] python3-lxml: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,100 +48,102 @@ X-List-Received-Date: Mon, 24 Aug 2015 15:28:30 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Use a common .inc file for the python-cython and python3-cython recipes.
-Add suffix '3' to scripts in ${bindir} to avoid conflict between the two
-packages.
+Use a common .inc file for the python-lxml and python3-lxml recipes.
 
 Signed-off-by: Dominic Sacré <dominic.sacre@gmx.de>
 ---
- .../recipes-devtools/python/python-cython.inc       | 21 +++++++++++++++++++++
- .../recipes-devtools/python/python-cython_0.23.1.bb | 20 +-------------------
- .../python/python3-cython_0.23.1.bb                 | 18 ++++++++++++++++++
- 3 files changed, 40 insertions(+), 19 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-cython.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-cython_0.23.1.bb
+ .../recipes-devtools/python/python-lxml.inc        | 31 ++++++++++++++++++++
+ .../recipes-devtools/python/python-lxml_3.4.4.bb   | 34 +---------------------
+ .../recipes-devtools/python/python3-lxml_3.4.4.bb  |  2 ++
+ 3 files changed, 34 insertions(+), 33 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-lxml.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-lxml_3.4.4.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
+diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
 new file mode 100644
-index 0000000..6c8b084
+index 0000000..9d1bfbc
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-cython.inc
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "Cython is a language specially designed for writing Python extension modules. \
-+It's designed to bridge the gap between the nice, high-level, easy-to-use world of Python \
-+and the messy, low-level world of C."
-+SECTION = "devel/python"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
-+SRCNAME = "Cython"
-+BBCLASSEXTEND = "native"
++++ b/meta-python/recipes-devtools/python/python-lxml.inc
+@@ -0,0 +1,31 @@
++SUMMARY = "Python XML bindings for libxml2 and libxslt"
++DESCRIPTION = "Powerful and Pythonic XML processing library combining \
++libxml2/libxslt with the ElementTree API."
++HOMEPAGE = "http://codespeak.net/lxml"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b"
++SRCNAME = "lxml"
 +
-+SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz"
++DEPENDS = "libxml2 libxslt"
++
++SRC_URI = "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "a9a65972afc173ec7a39c585f4eea69c"
++SRC_URI[sha256sum] = "b3d362bac471172747cda3513238f115cbd6c5f8b8e6319bf6a97a7892724099"
++
 +S = "${WORKDIR}/${SRCNAME}-${PV}"
 +
-+SRC_URI[md5sum] = "db3c5b365e1c3f71c7cd90e96473a3ab"
-+SRC_URI[sha256sum] = "bdfd12d6a2a2e34b9a1bbc1af5a772cabdeedc3851703d249a52dcda8378018a"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-netserver \
-+    ${PYTHON_PN}-subprocess \
-+    ${PYTHON_PN}-shell \
++DISTUTILS_BUILD_ARGS += " \
++                     --with-xslt-config='${STAGING_BINDIR_NATIVE}/pkg-config libxslt' \
++                     --with-xml2-config='${STAGING_BINDIR_CROSS}/pkg-config libxml2' \
 +"
-+RDEPENDS_${PN}_class-native = ""
-diff --git a/meta-python/recipes-devtools/python/python-cython_0.23.1.bb b/meta-python/recipes-devtools/python/python-cython_0.23.1.bb
-index a0babc8..6be0b1e 100644
---- a/meta-python/recipes-devtools/python/python-cython_0.23.1.bb
-+++ b/meta-python/recipes-devtools/python/python-cython_0.23.1.bb
-@@ -1,24 +1,6 @@
--DESCRIPTION = "Cython is a language specially designed for writing Python extension modules. \
--It's designed to bridge the gap between the nice, high-level, easy-to-use world of Python \
--and the messy, low-level world of C."
--SECTION = "devel/python"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
--SRCNAME = "Cython"
--BBCLASSEXTEND = "native"
++
++DISTUTILS_INSTALL_ARGS += " \
++                     --with-xslt-config='${STAGING_BINDIR_NATIVE}/pkg-config libxslt' \
++                     --with-xml2-config='${STAGING_BINDIR_CROSS}/pkg-config libxml2' \
++"
++
++BBCLASSEXTEND = "native nativesdk"
++
++RDEPENDS_${PN} += "libxml2 libxslt ${PYTHON_PN}-compression"
++RDEPENDS_${PN}_class-native = "libxml2-native libxslt-native"
+diff --git a/meta-python/recipes-devtools/python/python-lxml_3.4.4.bb b/meta-python/recipes-devtools/python/python-lxml_3.4.4.bb
+index 4fab4f3..81ccb12 100644
+--- a/meta-python/recipes-devtools/python/python-lxml_3.4.4.bb
++++ b/meta-python/recipes-devtools/python/python-lxml_3.4.4.bb
+@@ -1,34 +1,2 @@
+-SUMMARY = "Python XML bindings for libxml2 and libxslt"
+-DESCRIPTION = "Powerful and Pythonic XML processing library combining \
+-libxml2/libxslt with the ElementTree API."
+-HOMEPAGE = "http://codespeak.net/lxml"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b"
+-SRCNAME = "lxml"
 -
--SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz"
+-DEPENDS = "libxml2 libxslt"
+-
+-SRC_URI = "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "a9a65972afc173ec7a39c585f4eea69c"
+-SRC_URI[sha256sum] = "b3d362bac471172747cda3513238f115cbd6c5f8b8e6319bf6a97a7892724099"
+-
 -S = "${WORKDIR}/${SRCNAME}-${PV}"
 -
--SRC_URI[md5sum] = "db3c5b365e1c3f71c7cd90e96473a3ab"
--SRC_URI[sha256sum] = "bdfd12d6a2a2e34b9a1bbc1af5a772cabdeedc3851703d249a52dcda8378018a"
--
  inherit setuptools
-+require python-cython.inc
- 
- RDEPENDS_${PN} += "\
-     python-distribute \
--    python-netserver \
--    python-subprocess \
--    python-shell \
- "
--RDEPENDS_${PN}_class-native = ""
-diff --git a/meta-python/recipes-devtools/python/python3-cython_0.23.1.bb b/meta-python/recipes-devtools/python/python3-cython_0.23.1.bb
+-
+-DISTUTILS_BUILD_ARGS += " \
+-                     --with-xslt-config='${STAGING_BINDIR_NATIVE}/pkg-config libxslt' \
+-                     --with-xml2-config='${STAGING_BINDIR_CROSS}/pkg-config libxml2' \
+-"
+-
+-DISTUTILS_INSTALL_ARGS += " \
+-                     --with-xslt-config='${STAGING_BINDIR_NATIVE}/pkg-config libxslt' \
+-                     --with-xml2-config='${STAGING_BINDIR_CROSS}/pkg-config libxml2' \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+-
+-RDEPENDS_${PN} += "libxml2 libxslt python-compression"
+-RDEPENDS_${PN}_class-native = "libxml2-native libxslt-native"
+-
++require python-lxml.inc
+diff --git a/meta-python/recipes-devtools/python/python3-lxml_3.4.4.bb b/meta-python/recipes-devtools/python/python3-lxml_3.4.4.bb
 new file mode 100644
-index 0000000..2ce6bdb
+index 0000000..ff4bc7f
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-cython_0.23.1.bb
-@@ -0,0 +1,18 @@
++++ b/meta-python/recipes-devtools/python/python3-lxml_3.4.4.bb
+@@ -0,0 +1,2 @@
 +inherit setuptools3
-+require python-cython.inc
-+
-+RDEPENDS_${PN} += "\
-+    python3-setuptools \
-+"
-+
-+# running build_ext a second time during install fails, because Python
-+# would then attempt to import cythonized modules built for the target
-+# architecture.
-+DISTUTILS_INSTALL_ARGS += "--skip-build"
-+
-+do_install_append() {
-+    # rename scripts that would conflict with the Python 2 build of Cython
-+    mv ${D}${bindir}/cython ${D}${bindir}/cython3
-+    mv ${D}${bindir}/cythonize ${D}${bindir}/cythonize3
-+    mv ${D}${bindir}/cygdb ${D}${bindir}/cygdb3
-+}
++require python-lxml.inc
 -- 
 2.5.0
 
