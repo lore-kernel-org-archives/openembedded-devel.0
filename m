@@ -1,29 +1,36 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 551AD73F8C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
+	[209.85.213.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 7897172B1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 02:24:53 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t7O2OrNN010316
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 23 Aug 2015 19:24:53 -0700 (PDT)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Sun, 23 Aug 2015 19:24:52 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <1440146235-9630-1-git-send-email-kai.kang@windriver.com>
-	<1440146235-9630-3-git-send-email-kai.kang@windriver.com>
-	<CAMKF1srhV4VSLeNXahHGytoyH+=BbtW-gn0iyO6Nvzh_YMzDKQ@mail.gmail.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <55DA807A.3010107@windriver.com>
-Date: Mon, 24 Aug 2015 10:24:58 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
-MIME-Version: 1.0
-In-Reply-To: <CAMKF1srhV4VSLeNXahHGytoyH+=BbtW-gn0iyO6Nvzh_YMzDKQ@mail.gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH 2/4] atftp: build with gcc 5.2
+	Mon, 24 Aug 2015 04:53:06 +0000 (UTC)
+Received: by igui7 with SMTP id i7so53053997igu.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 23 Aug 2015 21:53:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=ds7dtBIprahK0vbBkf2r7l+sBTz2fgNOL8L4Niv9zEs=;
+	b=Cwk57Othj1o+SCf52FCZVRXEvGreXx3dozmJnjY6TO8bWG8Ne+v1L+1bPO1nWfr0j+
+	mF/NEG/zzzP1U6qC/6iOeSsFBrufQU2g+SRE0Uyjs/D0FnH0KiTjU5jhy9NXeSGl+6Rh
+	8BUHAKQcOCuJCMd5KpxY1gHv+y1sQ7mIqa92ZY4iS+XdPme9eQd2AUn2wjH9tT+Iwhsg
+	SfiB65bQFFSMu1D/ypCcEycfN60p1jqC/dVAdYqRDlH0BPwVx/3pR5CenYd2qMSWHywu
+	Q2qk8mhyVn1sV4JQ0rmUIlOjIFGD2NdELrpagDzxknBtF1mMjX9UZPM1ShmdAWqpsqh3
+	YbEg==
+X-Received: by 10.50.43.169 with SMTP id x9mr7605825igl.12.1440391987109;
+	Sun, 23 Aug 2015 21:53:07 -0700 (PDT)
+Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
+	[96.119.89.79])
+	by smtp.gmail.com with ESMTPSA id a1sm8172496iga.4.2015.08.23.21.53.06
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 23 Aug 2015 21:53:06 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 23 Aug 2015 21:52:58 -0700
+Message-Id: <1440391979-3469-2-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.4
+In-Reply-To: <1440391979-3469-1-git-send-email-raj.khem@gmail.com>
+References: <1440391979-3469-1-git-send-email-raj.khem@gmail.com>
+Subject: [meta-qt5][PATCH 2/3] qt3d: Fix assimp build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,66 +44,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 02:24:56 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 24 Aug 2015 04:53:07 -0000
 
-On 2015年08月22日 00:08, Khem Raj wrote:
-> On Fri, Aug 21, 2015 at 1:37 AM,  <kai.kang@windriver.com> wrote:
->> From: Kai Kang <kai.kang@windriver.com>
->>
->> atftp fails to build with gcc 5.2:
->>
->> tftp_def.h:54:14: warning: inline function 'Strncpy' declared but never defined
->>
->> GCC 5 defaults to -std=gnu11 instead of -std=gnu89. The semantics of
->> inline function changes. Pass '-std=gnu89' to gcc to compile atftp.
->>
->> Ref:
->> https://gcc.gnu.org/gcc-5/porting_to.html
->>
->> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> ---
->>   meta-networking/recipes-daemons/atftp/atftp_git.bb | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/meta-networking/recipes-daemons/atftp/atftp_git.bb b/meta-networking/recipes-daemons/atftp/atftp_git.bb
->> index b53f637..0ece58f 100644
->> --- a/meta-networking/recipes-daemons/atftp/atftp_git.bb
->> +++ b/meta-networking/recipes-daemons/atftp/atftp_git.bb
->> @@ -32,6 +32,8 @@ USERADD_PACKAGES = "${PN}d"
->>   USERADD_PARAM_${PN}d = "--system --no-create-home --shell /bin/false \
->>                           --user-group nobody"
->>
->> +EXTRA_OEMAKE = "CFLAGS='${CFLAGS} -std=gnu89'"
-> this is a woraround and will work, however if you are at and fix it
-> once for all that will be desirable. eg. this file you could move the
-> definition of
-> inline function into the relevant .h file and make it a static inline
+These issues wont happen with qt3d master since assimp seems to have dropped
+the offending code, but for the release we use in meta-qt5 as of now we
+will need it.
 
-Hi Raj,
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...001-Fix-narrowing-errors-found-with-clang.patch | 72 ++++++++++++++++++++++
+ recipes-qt/qt5/qt3d_git.bb                         |  2 +
+ 2 files changed, 74 insertions(+)
+ create mode 100644 recipes-qt/qt5/qt3d/0001-Fix-narrowing-errors-found-with-clang.patch
 
-Thanks. I'll try it.
-
---Kai
-
->
->> +
->>   do_install_append() {
->>       install -d ${D}${sysconfdir}/init.d
->>       install -m 0755 ${WORKDIR}/atftpd.init ${D}${sysconfdir}/init.d/atftpd
->> --
->> 1.9.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
+diff --git a/recipes-qt/qt5/qt3d/0001-Fix-narrowing-errors-found-with-clang.patch b/recipes-qt/qt5/qt3d/0001-Fix-narrowing-errors-found-with-clang.patch
+new file mode 100644
+index 0000000..afe7d32
+--- /dev/null
++++ b/recipes-qt/qt5/qt3d/0001-Fix-narrowing-errors-found-with-clang.patch
+@@ -0,0 +1,72 @@
++From 538f94f658b181c95c4e98be1429f798be1b437f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 23 Aug 2015 15:50:38 -0700
++Subject: [PATCH] Fix narrowing errors found with clang
++
++clang errors out with
++
++non-constant-expression cannot be narrowed from type 'int8_t' (aka
++'signed char') to 'char' in initializer list
++
++adjust the types to fix the error
++
++string contructor expects char* and not unsigned char* so adjust the
++call
++
++Another issue is seen in constructor using bool instead of a pointer
++
++error: cannot initialize a
++      member subobject of type 'Assimp::DXFImporter::LayerInfo *' with
++      an rvalue of type 'bool'
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ 3rdparty/assimp/code/BlenderDNA.cpp | 6 +++---
++ 3rdparty/assimp/code/DXFLoader.cpp  | 2 +-
++ 2 files changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/3rdparty/assimp/code/BlenderDNA.cpp b/3rdparty/assimp/code/BlenderDNA.cpp
++index 75ef61f..fb6d1de 100644
++--- a/3rdparty/assimp/code/BlenderDNA.cpp
+++++ b/3rdparty/assimp/code/BlenderDNA.cpp
++@@ -55,7 +55,7 @@ using namespace Assimp::Formatter;
++ 
++ #define for_each BOOST_FOREACH
++ bool match4(StreamReaderAny& stream, const char* string) {
++-    char tmp[] = {
+++    int8_t tmp[] = {
++         (stream).GetI1(),
++         (stream).GetI1(),
++         (stream).GetI1(),
++@@ -343,13 +343,13 @@ void SectionParser :: Next()
++ {
++     stream.SetCurrentPos(current.start + current.size);
++ 
++-    const char tmp[] = {
+++    const int8_t tmp[] = {
++         stream.GetI1(),
++         stream.GetI1(),
++         stream.GetI1(),
++         stream.GetI1()
++     };
++-    current.id = std::string(tmp,tmp[3]?4:tmp[2]?3:tmp[1]?2:1);
+++    current.id = std::string((char*)tmp,tmp[3]?4:tmp[2]?3:tmp[1]?2:1);
++ 
++     current.size = stream.GetI4();
++     current.address.val = ptr64 ? stream.GetU8() : stream.GetU4();
++diff --git a/3rdparty/assimp/code/DXFLoader.cpp b/3rdparty/assimp/code/DXFLoader.cpp
++index e372d60..159e1a9 100644
++--- a/3rdparty/assimp/code/DXFLoader.cpp
+++++ b/3rdparty/assimp/code/DXFLoader.cpp
++@@ -84,7 +84,7 @@ aiColor4D g_clrInvalid = aiColor4D(get_qnan(),0.f,0.f,1.f);
++ 
++ // ------------------------------------------------------------------------------------------------
++ // Constructor to be privately used by Importer
++-DXFImporter::DXFImporter() : buffer(0), groupCode(0), bRepeat(false), mDefaultLayer(false)
+++DXFImporter::DXFImporter() : buffer(0), groupCode(0), bRepeat(false), mDefaultLayer(NULL)
++ {
++     memset(cursor,0,sizeof(cursor));
++ }
++-- 
++2.1.4
++
+diff --git a/recipes-qt/qt5/qt3d_git.bb b/recipes-qt/qt5/qt3d_git.bb
+index 62f17e1..752d896 100644
+--- a/recipes-qt/qt5/qt3d_git.bb
++++ b/recipes-qt/qt5/qt3d_git.bb
+@@ -21,3 +21,5 @@ QT_MODULE_BRANCH = "dev"
+ 
+ # last tag before this SRCREV is 5.0.0-beta1, but version says 5.3.0 already
+ SRCREV = "8a9723d7420829a2ba0141a9f7d8dc8cd11d8331"
++
++SRC_URI += "file://0001-Fix-narrowing-errors-found-with-clang.patch"
 -- 
-Regards,
-Neil | Kai Kang
+2.1.4
 
 
