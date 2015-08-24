@@ -1,36 +1,36 @@
 Return-Path: <dominic.sacre@gmx.de>
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 9165276B7C
+	by mail.openembedded.org (Postfix) with ESMTP id D5B1376BA5
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 24 Aug 2015 15:28:28 +0000 (UTC)
 Received: from dastp.fritz.box ([79.250.183.143]) by mail.gmx.com (mrgmx001)
-	with ESMTPSA (Nemesis) id 0MOf5S-1ZQ2Je0DzS-0066t0;
+	with ESMTPSA (Nemesis) id 0MGj8j-1ZXyHN1zHd-00DVOv;
 	Mon, 24 Aug 2015 17:28:28 +0200
 From: =?UTF-8?q?Dominic=20Sacr=C3=A9?= <dominic.sacre@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Aug 2015 17:27:50 +0200
-Message-Id: <1440430077-551-2-git-send-email-dominic.sacre@gmx.de>
+Date: Mon, 24 Aug 2015 17:27:52 +0200
+Message-Id: <1440430077-551-4-git-send-email-dominic.sacre@gmx.de>
 X-Mailer: git-send-email 2.5.0
 In-Reply-To: <1440430077-551-1-git-send-email-dominic.sacre@gmx.de>
 References: <1440430077-551-1-git-send-email-dominic.sacre@gmx.de>
 MIME-Version: 1.0
-X-Provags-ID: V03:K0:j2bO67KVbyZ2bkDAlpvHcirBp68ksW2h7AuIjGa0iZaJPEMMg9/
-	WxVR62FC5SREAt2ksPHWfFA9Dkb4tEMA1VmsoY6+GMqPg712xezYPwNdQgdiSJVS2GLCTcn
-	CVBWfYlQwKvRQAR1mj5WFqv9ew2bW/FNMATsz1yd3xBz0bLstkV3llFKFohHT9rBN0pPwfR
-	o8uCjFvgbW0LyvX6GbwQA==
-X-UI-Out-Filterresults: notjunk:1;V01:K0:irzpbVcMOuw=:C1OvP8izMBFpRHoDtT3iQT
-	qY+ZbYWgrKUeac/9V44Dh7W6g01gz7c70brx2mIDl1Mxrgb2SzzuMFRB72nJTW5huz8kCOAmD
-	JhmRgLOs7QXxJ/2YKs3aQNEmm8q0+XIgczGyuLnvHl6E5IJpkl3TUttVeIf+VVSYYChHnZ5Rw
-	TKwkiPDdah+hxv48Xvbh+0E8nTtQBJDDg+Hwa/PFMg3Xk8P5gm6PrWfGSUXUaPo27LEDPocq9
-	uR3W1Cr3z27CFMX7EM6SiwkWo3/rmKxXRNGjPt0HR2NBnMVfMh/BZoMAZJ2p5FCZ8dRVV7V8X
-	qF7RBaYA3eGd34X4N24eLAtVxdeuBIjS2J+9uKOq2T3JDWNY8Ry0/s4vJEUt7AQ0D/pgAFhJz
-	dRmVbC79QPs+KYInv6tMByeEEwPF7mgP5mDYJOx0IbQm2enCSMtNzLZBfmozPeBFxs5SPEhOh
-	oYS2ByTkb2a3TGPeEBmkLOhw2Vjt8UIJBN+qCFY4JZ9ffQnp9AT4UXeKUNs3xzyOjKHe76fWk
-	lnUJI1y3OF6kWR21Ng31C/V+/j0KI0Nx1zb5nphq9X8hXQBHbPosE6//SBI9V3JlHLwkN2agY
-	SK/HNOmr4dmFi9W8SCC8lQBoZzh5nBoeRaVCmg52F1NWeRbd1bXnekAX6xlrm7B/bmMMCEV+r
-	U2mgU5vL12qZzqQqg9B4AUmlTL/9I+W3Jv2Z8jO/kAeEAtX/XcXOCHG/xFvZU5g43D5X3wbFv
-	iQRWAGcHNS7rahkV0AL6Ymy776xusXvRM8Ei0w==
-Subject: [meta-python][PATCH 1/8] python-cython: Upgrade 0.20.2 -> 0.23.1
+X-Provags-ID: V03:K0:Gl9GMA+aw0pkKIo8FBDrlxqtmUgb1IVteIoTkYGXfDOx36wuPn5
+	sxdswl1+XabkMFiRLCx5eB/Uqzd09k1gasUzhqOZLpfCmGK1D0YhnvBZEjZpvcD/BhHWkkO
+	6tbc3+7HJtIaz+54WdeXMTQ8PIqRP1uGWkwLEt9pebOsHiWf315qHMIwIpvj6mRNrNyqtIE
+	2aZvcdpuI4BMlwvyGhjgQ==
+X-UI-Out-Filterresults: notjunk:1;V01:K0:lYtmDadD6pc=:uFKEkvCLLFp4cK5Ui4TYc2
+	+gCrtBcwr1LhTFZM0RmKArS06osteYHUGIzPGxPse2gwYN0AIUfRiMPe+N/wh+ehuvwFcD4bM
+	91icmV+OBMOT9dO2lm2M2HVYFhgM2UxXEAb+ntcRxK+dgPll+e9D9ba2Nqt8O4ut0P/EbSfyP
+	Kcxf8JqdpmOwyAeVrA2YImhTJMVick4GF6i7mgmg+ljZcSnV3lhKpXReUK8yERtGo6y3VIhCI
+	7UWdQdDPZOQfaI7QfD/looTV9VhCT7iLzPFtY6RYjeIQ4JJKKAgVE8QAhlp/sI8J1bDfE4Zjb
+	37/VURhLz/fkEAWttnWhX1/WQZl47QcfZhWmzFZRst5fc65x0q1NbyZMb3QCSqtnol19RBYUU
+	m33oKy0C5HkRI/3v536KehWIuN8IFUOYKIqKFFvEvUPdPgXOkiWZ/XCnymmvRzDLpS+Zj61Yi
+	dCj7Svp8SicR9R6usC2O7Hb4CHAp0LbvE/tZd9GtMOMQheUuiU88hfD4VTTybhpfQgWiaw4KV
+	LmKFRkXEa6XcB9eJac0bDMlpPQeJWq8NhuU8rI+TYs+l5XrYvAUel+gxzLSge8RevZc8QCfm8
+	VUsZXbJULrRAOhShcpyNUuauoBypiy36XL7INNgjM5n8HaVBaBkZcWBbg+Tvu7EA2IzovncrA
+	D3Q2opWyV4haVmvYcfDWCoEI0kqRd+haX0P48O96nknxpY6KlMd+RhQ/8IvbeRlpEpHdWgD7r
+	KdV4Yc1FmIHuz5Mem8Hyfub8p19nnbWsu4SyLw==
+Subject: [meta-python][PATCH 3/8] python-pyserial: Upgrade 2.4 -> 2.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,30 +48,40 @@ X-List-Received-Date: Mon, 24 Aug 2015 15:28:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+The md5 checksum of LICENSE.txt changed due to updated copyright dates.
+
 Signed-off-by: Dominic Sacré <dominic.sacre@gmx.de>
 ---
- .../python/{python-cython_0.20.2.bb => python-cython_0.23.1.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cython_0.20.2.bb => python-cython_0.23.1.bb} (82%)
+ .../python/{python-pyserial_2.4.bb => python-pyserial_2.7.bb}      | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyserial_2.4.bb => python-pyserial_2.7.bb} (62%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cython_0.20.2.bb b/meta-python/recipes-devtools/python/python-cython_0.23.1.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python-cython_0.20.2.bb
-rename to meta-python/recipes-devtools/python/python-cython_0.23.1.bb
-index 3966e0b..a0babc8 100644
---- a/meta-python/recipes-devtools/python/python-cython_0.20.2.bb
-+++ b/meta-python/recipes-devtools/python/python-cython_0.23.1.bb
-@@ -10,8 +10,8 @@ BBCLASSEXTEND = "native"
- SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz"
+diff --git a/meta-python/recipes-devtools/python/python-pyserial_2.4.bb b/meta-python/recipes-devtools/python/python-pyserial_2.7.bb
+similarity index 62%
+rename from meta-python/recipes-devtools/python/python-pyserial_2.4.bb
+rename to meta-python/recipes-devtools/python/python-pyserial_2.7.bb
+index 2263b2c..276db34 100644
+--- a/meta-python/recipes-devtools/python/python-pyserial_2.4.bb
++++ b/meta-python/recipes-devtools/python/python-pyserial_2.7.bb
+@@ -1,9 +1,8 @@
+ SUMMARY = "Serial Port Support for Python"
+ SECTION = "devel/python"
+ LICENSE = "PSF"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7424386ffe323e815ee62ee9ad591dd8"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c557c64905dac5b725980b9505bf8d7b"
+ SRCNAME = "pyserial"
+-PR = "ml4"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
  S = "${WORKDIR}/${SRCNAME}-${PV}"
+@@ -18,5 +17,5 @@ RDEPENDS_${PN} = "\
+     python-stringold \
+ "
  
--SRC_URI[md5sum] = "7fc13e1c665bdf7cea19ad08906af91f"
--SRC_URI[sha256sum] = "ed13b606a2aeb5bd6c235f8ed6c9988c99d01a033d0d21d56137c13d5c7be63f"
-+SRC_URI[md5sum] = "db3c5b365e1c3f71c7cd90e96473a3ab"
-+SRC_URI[sha256sum] = "bdfd12d6a2a2e34b9a1bbc1af5a772cabdeedc3851703d249a52dcda8378018a"
- 
- inherit setuptools
- 
+-SRC_URI[md5sum] = "eec19df59fd75ba5a136992897f8e468"
+-SRC_URI[sha256sum] = "6b6a9e3d2fd5978c92c843e0109918a4bcac481eecae316254481c0e0f7e73c8"
++SRC_URI[md5sum] = "794506184df83ef2290de0d18803dd11"
++SRC_URI[sha256sum] = "3542ec0838793e61d6224e27ff05e8ce4ba5a5c5cc4ec5c6a3e8d49247985477"
 -- 
 2.5.0
 
