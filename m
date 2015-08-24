@@ -1,34 +1,36 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EBAC6AC1E
+Received: from mail-io0-f175.google.com (mail-io0-f175.google.com
+	[209.85.223.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A2F272B1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 21:57:46 +0000 (UTC)
-Received: by iodt126 with SMTP id t126so165946302iod.2
+	Mon, 24 Aug 2015 21:57:47 +0000 (UTC)
+Received: by iodb91 with SMTP id b91so164872837iod.1
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 24 Aug 2015 14:57:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=IRPGoJvnxXD0wKOsUTfvAb/AP7lkG3QDerZHFuvu4lk=;
-	b=i++dmvc2vqznXCqwOVPQd651HOxefPuKBxn/qdB5rmEdppJ2fAfc1RVGgXvBHA2c8r
-	PKkcUR7w5ZRrSctXa5BBIJ10s84ZgzHBvzxCgF9iqXwYLCfFDq7W1g7N7SkDMjEvDDV2
-	XymWDiGbqankjgs1mbFHk53JyHfIMykTsSxgqPTB8xtRbQwh6PYJglH8MacRMQIa/8YY
-	tYg3xKzWsAretPEC8DevB1OpY9HLRzqI1t/MRtthipJ9mVbbupoq8IcjdZqugi5mDobG
-	zHozkbLW0QCGOnwoZQ2jOXpiueeQQtmdVrWEL33Bib0T8OPKj23M5ogzNvUeLqR2EE7i
-	7Mpw==
-X-Received: by 10.107.153.200 with SMTP id b191mr19854408ioe.185.1440453466969;
-	Mon, 24 Aug 2015 14:57:46 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=s4GtS6d/lw8iIKON0orSGw5zKG5fnOHIVsgzYNrq+is=;
+	b=wEz8cQtHWIr971bqCsSZOCi8mI2gMs7QjofMkla+SbqlEIZ/GuSGo3UJw4Q0O5poQM
+	HdsS5qgix49dqvSx9bBi+0oTvc78KUHJlWFUrN9YLUkX5HLqNl+m7qAXOPHPiDfRQ65C
+	p/lcNQcnAQes+rsvsoVMWIm1Kblba2Ul7U6X+mCoirgms6t+sZ5ZAjGlKlF4BVx3ly1Q
+	r+vgCZskmMLIj6hqphKMUsQn/zlez0g0ZhOqdsrOMuF8FQGWdsoPoFkgvkyLOjod1xi1
+	uSxLiq3sNlPzVVN4bgn5CO7Rt/Cf2U0LBl9fR0YIPDzdEEgh1iKS/MEs/45lxloxNalv
+	VkSQ==
+X-Received: by 10.107.136.148 with SMTP id s20mr19358409ioi.135.1440453467604; 
+	Mon, 24 Aug 2015 14:57:47 -0700 (PDT)
 Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
 	[96.119.89.79]) by smtp.gmail.com with ESMTPSA id
-	w26sm1446845ioi.26.2015.08.24.14.57.45
+	w26sm1446845ioi.26.2015.08.24.14.57.46
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 24 Aug 2015 14:57:46 -0700 (PDT)
+	Mon, 24 Aug 2015 14:57:47 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Aug 2015 14:57:39 -0700
-Message-Id: <1440453460-12824-1-git-send-email-raj.khem@gmail.com>
+Date: Mon, 24 Aug 2015 14:57:40 -0700
+Message-Id: <1440453460-12824-2-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.1.4
-Subject: [meta-qt5][PATCH 1/2] qtbase: Package the 3rd party libs if built
+In-Reply-To: <1440453460-12824-1-git-send-email-raj.khem@gmail.com>
+References: <1440453460-12824-1-git-send-email-raj.khem@gmail.com>
+Subject: [meta-qt5][PATCH 2/2] qtbase: add libinput to depends when wayland is enabled in distro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,39 +46,27 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 24 Aug 2015 21:57:48 -0000
 
-Third-party libs e.g. libqtfreetype when built is not packaged and hence
-goes missing in sysroot, then rest of qt components like qtwayland gets
-its configuration from qtbase to enable it but then does not find the
-internal version of libqtfreetype.a which is what qtbase directs it to
-use and as a result it starts throwing linking errors e.g.
+Fixes warnings like
 
-x86_64-angstrom-linux-ld.gold: error: cannot find -lqtfreetype
-
-This patch installs the needed libs into dev packages
-
-Remove a trailing whitespace as well while at it.
+WARNING: QA Issue: qtbase-plugins rdepends on libinput, but it isn't a build dependency? [build-deps]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-qt/qt5/qtbase_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-qt/qt5/qtbase_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 5603fb2..7d2d5ec 100644
+index 7d2d5ec..4e419a9 100644
 --- a/recipes-qt/qt5/qtbase_git.bb
 +++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -227,9 +227,9 @@ do_install_append() {
-         cp -a ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_LIBS}/fonts
-         chown -R root:root ${D}/${OE_QMAKE_PATH_LIBS}/fonts
-     fi
--
-+    cp -a ${B}/lib/libqt* ${D}${libdir}
-     # Remove example.pro file as it is useless
--    rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro	
-+    rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro
+@@ -28,6 +28,7 @@ SRC_URI += "\
+ "
  
-     # Remove macx-ios-clang directory because /usr/lib/qt5/mkspecs/macx-ios-clang/rename_main.sh:#!/bin/bash
-     # triggers QA Issue: qtbase-mkspecs requires /bin/bash, but no providers in its RDEPENDS [file-rdeps]
+ DEPENDS += "qtbase-native"
++DEPENDS += "${@base_contains('DISTRO_FEATURES', 'wayland', 'libinput', '', d)}"
+ 
+ # LGPL-3.0 is used only in src/plugins/platforms/android/extract.cpp
+ 
 -- 
 2.1.4
 
