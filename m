@@ -1,36 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
-	[209.85.223.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 7879076B69
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C80F76B7C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 17:44:11 +0000 (UTC)
-Received: by iodt126 with SMTP id t126so157964142iod.2
+	Mon, 24 Aug 2015 20:13:25 +0000 (UTC)
+Received: by wijp15 with SMTP id p15so88397807wij.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 10:44:12 -0700 (PDT)
+	Mon, 24 Aug 2015 13:13:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=6ES7toZwSFSCf7BPu4QV0G/Ql5xUZ1l8jFIfw7Ek9L4=;
-	b=hSJrwcH1ct/+k40+ks+oJnb1SJWihcqS/wQk9Z8ogHY/maliQmn0jS/h7ttkzWW7FK
-	3PickuRUoci4MO2J22sQ3TQd9XP0MagwP54/oBOXY9n8gHGJZ04W8pWIQm/6oCu69eKW
-	c7x2uiXqLkr/7NdbvKb0V5CRTlCTodnew+am/WwFGXzPZkoSSFDNdTd7GulwBA/vSHQX
-	+NJbSzx+3QagYjicJtyP8DqLQJTAOtTEboqseSeEnN/YfmjGAko9uYF1NiG3/7gvqkUa
-	hJsCZuMumXS7gdeB3BMOe7H0gAXTaHuLMNA3UZuAK4G61sKKg0qI6Lz5/c5osqC6wzJU
-	EN8g==
-X-Received: by 10.107.131.20 with SMTP id f20mr20005004iod.100.1440438252307; 
-	Mon, 24 Aug 2015 10:44:12 -0700 (PDT)
-Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
-	[96.119.89.79]) by smtp.gmail.com with ESMTPSA id
-	ht6sm9289129igb.11.2015.08.24.10.44.11
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 24 Aug 2015 10:44:11 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Aug 2015 10:43:59 -0700
-Message-Id: <1440438239-19765-4-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.1.4
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=YBxlXQRU9ZR172PenFlvL3n6pB2iQkL+u94XRpyg9Eo=;
+	b=o9S7mgNJCMsGgYmiudLRVd+iJ5nGROb9YQ6qnyxDslfoU0LAxmngCo6u09nBZ9c1N7
+	EXErVAGxp0RZN9r2QgmPt0+JMWEZvblDSpCX0rbvif7aaeEYV4Hys7WH8XO37YjkAR+2
+	A4UrLyeBMCfZjXdE60vh8yX9CgR5y+OTnucO5KF6LnrjkVaaNodngF+nsjEZ7u+uFX7F
+	w/LPbYk3yPlX/1JPY5S8vN7wmhxFP0md0eljdGFSIaYXRU7es8FgCqXSeg5QPJdp2H0k
+	fyh3trRqGwIZJkaGLMISf3kTkMPjARqhiHd6VTnF4zlXuLLxKrwzgn3tERZRWz6Ua/1U
+	bCoQ==
+MIME-Version: 1.0
+X-Received: by 10.194.172.130 with SMTP id bc2mr46323488wjc.85.1440447205699; 
+	Mon, 24 Aug 2015 13:13:25 -0700 (PDT)
+Received: by 10.28.64.196 with HTTP; Mon, 24 Aug 2015 13:13:25 -0700 (PDT)
 In-Reply-To: <1440438239-19765-1-git-send-email-raj.khem@gmail.com>
 References: <1440438239-19765-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-qt5][PATCH V2 4/4] recipes, conf: Direct QT_GIT to use github mirrors
+Date: Mon, 24 Aug 2015 22:13:25 +0200
+Message-ID: <CA+chaQe97q6R9sXY0Fcc5sC1fF6AdkNqf+GS8qDwYyiyO=862g@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-qt5][PATCH V2 1/4] qtbase: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,78 +41,153 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 17:44:13 -0000
+X-List-Received-Date: Mon, 24 Aug 2015 20:13:27 -0000
+Content-Type: text/plain; charset=UTF-8
 
-This helps in load balancing code.qt.io may be overloaded
-and bails out occasionally when doing fresh clones
+Is it needed for nativesdk-qtbase as well?
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/layer.conf                              | 4 ++--
- recipes-qt/examples/qt5everywheredemo_1.0.bb | 2 +-
- recipes-qt/qt5/qt5-git.inc                   | 2 +-
- recipes-qt/qt5/qtwebengine_git.bb            | 2 +-
- 4 files changed, 5 insertions(+), 5 deletions(-)
+On Mon, Aug 24, 2015 at 7:43 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 92558b3..f83bd96 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -5,7 +5,7 @@
- # Therefore if you want a given layer to be considered high priority
- # for the .inc and .conf etc. then consider it adding at the beginning
- # of BBPATH. For bblayers bitbake will use BBFILES_PRIORITY to resolve
--# the recipe contention so the order of directories in BBFILES does 
-+# the recipe contention so the order of directories in BBFILES does
- # not matter.
- 
- # We have a conf and classes directory, append to BBPATH
-@@ -27,4 +27,4 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
- 
- IMAGE_FEATURES[validitems] += "qtcreator-debug"
- 
--QT_GIT ?= "git://code.qt.io"
-+QT_GIT ?= "git://github.com/qtproject"
-diff --git a/recipes-qt/examples/qt5everywheredemo_1.0.bb b/recipes-qt/examples/qt5everywheredemo_1.0.bb
-index 0546b00..057aaaa 100644
---- a/recipes-qt/examples/qt5everywheredemo_1.0.bb
-+++ b/recipes-qt/examples/qt5everywheredemo_1.0.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://main.cpp;md5=1187cb795a0f96bce64e63dd1a67dc2b"
- DEPENDS = "qtdeclarative qtgraphicaleffects"
- 
- SRCREV = "c17fe9e0ec0882ac4c4dc1168095f569acab5d09"
--SRC_URI = "${QT_GIT}/qt-labs/qt5-everywhere-demo.git"
-+SRC_URI = "${QT_GIT}/qt-labs-qt5-everywhere-demo"
- 
- S = "${WORKDIR}/git/QtDemo"
- 
-diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
-index ea37b55..b73ce4f 100644
---- a/recipes-qt/qt5/qt5-git.inc
-+++ b/recipes-qt/qt5/qt5-git.inc
-@@ -5,7 +5,7 @@ QT_MODULE_BRANCH ?= "5.5"
- 
- # each module needs to define valid SRCREV
- SRC_URI = " \
--    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
-+    ${QT_GIT}/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
- "
- 
- S = "${WORKDIR}/git"
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index 2933bf7..27873b7 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -75,7 +75,7 @@ RDEPENDS_${PN}-examples += " \
- QT_MODULE_BRANCH_CHROMIUM = "40.0.2214-based"
- 
- SRC_URI += " \
--    ${QT_GIT}/qt/qtwebengine-chromium.git;name=chromium;branch=${QT_MODULE_BRANCH_CHROMIUM};destsuffix=git/src/3rdparty \
-+    ${QT_GIT}/qtwebengine-chromium.git;name=chromium;branch=${QT_MODULE_BRANCH_CHROMIUM};destsuffix=git/src/3rdparty \
-     file://0001-functions.prf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch \
-     file://0002-functions.prf-Make-sure-we-only-use-the-file-name-to.patch \
-     file://0003-functions.prf-allow-build-for-linux-oe-g-platform.patch \
--- 
-2.1.4
-
+> This patch is a backport from upstream qt5 fixes building with clang
+> from meta-clang
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  recipes-qt/qt5/qtbase-native_git.bb                |  1 +
+>  .../qt5/qtbase/0015-Fix-build-with-clang-3.7.patch | 71
+> ++++++++++++++++++++++
+>  recipes-qt/qt5/qtbase_git.bb                       |  1 +
+>  3 files changed, 73 insertions(+)
+>  create mode 100644
+> recipes-qt/qt5/qtbase/0015-Fix-build-with-clang-3.7.patch
+>
+> diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/
+> qtbase-native_git.bb
+> index ebd7280..1d09a19 100644
+> --- a/recipes-qt/qt5/qtbase-native_git.bb
+> +++ b/recipes-qt/qt5/qtbase-native_git.bb
+> @@ -24,6 +24,7 @@ SRC_URI += "\
+>
+>  file://0005-qeglplatformintegration-Undefine-CursorShape-from-X..patch \
+>
+>  file://0006-configure-bump-path-length-from-256-to-512-character.patch \
+>      file://0008-QOpenGLPaintDevice-sub-area-support.patch \
+> +    file://0015-Fix-build-with-clang-3.7.patch \
+>  "
+>
+>  # common for qtbase-native and nativesdk-qtbase
+> diff --git a/recipes-qt/qt5/qtbase/0015-Fix-build-with-clang-3.7.patch
+> b/recipes-qt/qt5/qtbase/0015-Fix-build-with-clang-3.7.patch
+> new file mode 100644
+> index 0000000..181d63c
+> --- /dev/null
+> +++ b/recipes-qt/qt5/qtbase/0015-Fix-build-with-clang-3.7.patch
+> @@ -0,0 +1,71 @@
+> +This is backport of https://codereview.qt-project.org/#/c/121545/
+> +
+> +From 6a6acc496728ce96198d27f9ddd44c2367758d42 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Sun, 23 Aug 2015 15:19:41 -0700
+> +Subject: [PATCH] Fix build with clang 3.7
+> +
+> +Nullable is a language extension in clang 3.7 (indicating whether or
+> +not a pointer can be null).
+> +http://clang.llvm.org/docs/AttributeReference.html#nullable
+> +Using it as a class name breaks building with this compiler
+> +
+> +/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src/tools/qlalr/lalr.cpp:241:1:
+> error: declaration of anonymous
+> +      struct must be a definition
+> +struct _Nullable: public std::unary_function<Name, bool>
+> +^
+> +/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src/tools/qlalr/lalr.cpp:241:56:
+> error: expected unqualified-id
+> +struct _Nullable: public std::unary_function<Name, bool>
+> +                                                       ^
+> +/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src/tools/qlalr/lalr.cpp:303:98:
+> error: expected expression
+> +          NameList::iterator nn = std::find_if (rule->rhs.begin (),
+> rule->rhs.end (), std::not1 (_Nullable (this)));
+> +
+>                        ^
+> +/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src/tools/qlalr/lalr.cpp:638:107:
+> error: expected expression
+> +                  NameList::iterator first_not_nullable = std::find_if
+> (dot, rule->rhs.end (), std::not1 (_Nullable (this)));
+> +
+>                                 ^
+> +4 errors generated.
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + src/tools/qlalr/lalr.cpp | 8 ++++----
+> + 1 file changed, 4 insertions(+), 4 deletions(-)
+> +
+> +diff --git a/src/tools/qlalr/lalr.cpp b/src/tools/qlalr/lalr.cpp
+> +index be1df7d..55ef056 100644
+> +--- a/src/tools/qlalr/lalr.cpp
+> ++++ b/src/tools/qlalr/lalr.cpp
+> +@@ -238,11 +238,11 @@ void Grammar::buildExtendedGrammar ()
+> +   non_terminals.insert (accept_symbol);
+> + }
+> +
+> +-struct _Nullable: public std::unary_function<Name, bool>
+> ++struct Nullable: public std::unary_function<Name, bool>
+> + {
+> +   Automaton *_M_automaton;
+> +
+> +-  _Nullable (Automaton *aut):
+> ++  Nullable (Automaton *aut):
+> +     _M_automaton (aut) {}
+> +
+> +   bool operator () (Name name) const
+> +@@ -300,7 +300,7 @@ void Automaton::buildNullables ()
+> +
+> +       for (RulePointer rule = _M_grammar->rules.begin (); rule !=
+> _M_grammar->rules.end (); ++rule)
+> +         {
+> +-          NameList::iterator nn = std::find_if (rule->rhs.begin (),
+> rule->rhs.end (), std::not1 (_Nullable (this)));
+> ++          NameList::iterator nn = std::find_if (rule->rhs.begin (),
+> rule->rhs.end (), std::not1 (Nullable (this)));
+> +
+> +           if (nn == rule->rhs.end ())
+> +             changed |= nullables.insert (rule->lhs).second;
+> +@@ -635,7 +635,7 @@ void Automaton::buildIncludesDigraph ()
+> +                   if (! _M_grammar->isNonTerminal (*A))
+> +                     continue;
+> +
+> +-                  NameList::iterator first_not_nullable = std::find_if
+> (dot, rule->rhs.end (), std::not1 (_Nullable (this)));
+> ++                  NameList::iterator first_not_nullable = std::find_if
+> (dot, rule->rhs.end (), std::not1 (Nullable (this)));
+> +                   if (first_not_nullable != rule->rhs.end ())
+> +                     continue;
+> +
+> +--
+> +2.1.4
+> +
+> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+> index f472c98..5603fb2 100644
+> --- a/recipes-qt/qt5/qtbase_git.bb
+> +++ b/recipes-qt/qt5/qtbase_git.bb
+> @@ -18,6 +18,7 @@ SRC_URI += "\
+>
+>  file://0005-qeglplatformintegration-Undefine-CursorShape-from-X..patch \
+>
+>  file://0006-configure-bump-path-length-from-256-to-512-character.patch \
+>      file://0008-QOpenGLPaintDevice-sub-area-support.patch \
+> +    file://0015-Fix-build-with-clang-3.7.patch \
+>  "
+>
+>  # specific for target qtbase
+> --
+> 2.1.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
