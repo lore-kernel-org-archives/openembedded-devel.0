@@ -1,36 +1,24 @@
-Return-Path: <dominic.sacre@gmx.de>
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
-	by mail.openembedded.org (Postfix) with ESMTP id 291B276BEA
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 053E46AC1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 15:28:29 +0000 (UTC)
-Received: from dastp.fritz.box ([79.250.183.143]) by mail.gmx.com (mrgmx001)
-	with ESMTPSA (Nemesis) id 0LsUDg-1YjrdN2VlQ-0120eK;
-	Mon, 24 Aug 2015 17:28:29 +0200
-From: =?UTF-8?q?Dominic=20Sacr=C3=A9?= <dominic.sacre@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Aug 2015 17:27:57 +0200
-Message-Id: <1440430077-551-9-git-send-email-dominic.sacre@gmx.de>
-X-Mailer: git-send-email 2.5.0
-In-Reply-To: <1440430077-551-1-git-send-email-dominic.sacre@gmx.de>
-References: <1440430077-551-1-git-send-email-dominic.sacre@gmx.de>
+	Mon, 24 Aug 2015 15:36:13 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7OFaCeM006930
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 24 Aug 2015 08:36:12 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Mon, 24 Aug 2015 08:36:11 -0700
+From: <kai.kang@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Mon, 24 Aug 2015 23:31:51 +0800
+Message-ID: <1440430315-10963-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Provags-ID: V03:K0:gMhqNUEcCs0h69ofPfNZbGvn3eoWWbeLbbxdpFvWsWpNndTqDOc
-	qkc1M/IRWfvmG+ufJyWduosxs+wpdu3HBO0c8JfmzScVfaN7EoEXMM/7Sef0fx+y++8E96i
-	pTnfjuKaYdCJh2Uv/mgDLlY3V/W+lc62pUjiKEBCtfKWvxcmQ+WyzTbTRhhpAWvpCNj88cT
-	h17YwV57fRxdplGnmkByQ==
-X-UI-Out-Filterresults: notjunk:1;V01:K0:btddhcp0eE0=:LvwQpgbCBSYYZRF6nM50Bb
-	Dt/lHo5+giLXjTFijBFqXAwNG1NICpWgLuwjdWfJwg20QTdsmkpElSFlN8qkjcAlu5UFPubhu
-	7TjrC5L+5vGNU7JN9OE8xtVfevGBnm4rwCjljhd46i1rZB2rcUSiaFl9O7Z67IX0ggdG+V34W
-	YFhrY47qzCxYgSU7kq9FTikeNBJucE1BPR7uDB93THnvafjdV1yAwRr2YaoblJWbDomSAChpX
-	81aySCjmIFrV2KLgs61TnAQETTxKdSbf2q09iNBEb6evI2uYRFlzHm49vULq+GigwsyfVke9O
-	g7q9wjUwEpbDay6vVgukgYdoC/Q6wnAncKPeGKbU/A6DRcOYRilsUveGdQ/GSxdyfMoWD3vwU
-	DMrMmY6QQUzNjWiEm+pi8Sm0teyhvpPlYp8gBvodskmoZ7hbcHGE51FMW9FWtwP1apWytQK8b
-	eh7hOEU7TKhI1QsJYvwKLkGcXyud6dDj2zdflys9GCuRYdf0IoABwaG8yB8GTIbj2ZZPc06Fd
-	ZybtrgFn8tTqAzfKwWZZSUqkzoVBm5q2hOfHsTSGGPVz+55DuR27yIwZcw1gfqmNQ3rGa2wXZ
-	C6wsaXtPdvB2tsLT5ge8aCsjLSdx4HZMklm/6ngqSp99mvz9OrNX5uHXtkieE6HWyyAuBSFR3
-	owpIciS4KH5HFR6TdKZG4qW35hq2gIaKneaatUIo0Gp6KgnB4+Rlxp0n4Id/TajNK8OgVmOFc
-	O1m4MQHnv9IfCA2y5NSjrxzjOaA9p0A1+eV2rw==
-Subject: [meta-python][PATCH 8/8] python3-pyinotify: Add new recipe
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 0/4] V2: Upgrade packages and fix failure of atftp with gcc 5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,75 +32,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 15:28:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 24 Aug 2015 15:36:14 -0000
+Content-Type: text/plain
 
-Use a common .inc file for the python-pyinotify and python3-pyinotify
-recipes.
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Dominic Sacré <dominic.sacre@gmx.de>
----
- .../recipes-devtools/python/python-pyinotify.inc        | 15 +++++++++++++++
- .../recipes-devtools/python/python-pyinotify_0.9.6.bb   | 17 +----------------
- .../recipes-devtools/python/python3-pyinotify_0.9.6.bb  |  2 ++
- 3 files changed, 18 insertions(+), 16 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-pyinotify.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb
+V2:
+* ltrace: update patch to work with gcc 5.2
+* atftp: just update commmit message, no patch update. The reason is in mail I replied in V1 series.
 
-diff --git a/meta-python/recipes-devtools/python/python-pyinotify.inc b/meta-python/recipes-devtools/python/python-pyinotify.inc
-new file mode 100644
-index 0000000..285fe33
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyinotify.inc
-@@ -0,0 +1,15 @@
-+DESCRIPTION = "Python pyinotify: Linux filesystem events monitoring"
-+HOMEPAGE = "https://pypi.python.org/pypi/pyinotify"
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
-+
-+RDEPENDS_${PN} += "python-threading python-io python-subprocess python-misc python-shell"
-+
-+SRCNAME = "pyinotify"
-+SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "8e580fa1ff3971f94a6f81672b76c406"
-+SRC_URI[sha256sum] = "9c998a5d7606ca835065cdabc013ae6c66eb9ea76a00a1e3bc6e0cfe2b4f71f4"
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-diff --git a/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
-index 42956ce..d1f84c3 100644
---- a/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
-+++ b/meta-python/recipes-devtools/python/python-pyinotify_0.9.6.bb
-@@ -1,17 +1,2 @@
--DESCRIPTION = "Python pyinotify: Linux filesystem events monitoring"
--HOMEPAGE = "https://pypi.python.org/pypi/pyinotify"
--SECTION = "devel/python"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
--
--RDEPENDS_${PN} += "python-threading python-io python-subprocess python-misc python-shell"
--
--SRCNAME = "pyinotify"
--SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
--SRC_URI[md5sum] = "8e580fa1ff3971f94a6f81672b76c406"
--SRC_URI[sha256sum] = "9c998a5d7606ca835065cdabc013ae6c66eb9ea76a00a1e3bc6e0cfe2b4f71f4"
--
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
- inherit setuptools
-+require python-pyinotify.inc
-diff --git a/meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb b/meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb
-new file mode 100644
-index 0000000..b3bab98
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-pyinotify.inc
+
+Kai Kang (4):
+  autofs: 5.1.0 -> 5.1.1
+  libvpx: 1.3.0 -> 1.4.0
+  ltrace: 7.2 -> 7.3
+  atftp: build with gcc 5.2
+
+ meta-networking/recipes-daemons/atftp/atftp_git.bb |  2 ++
+ ...emd-allow-with-systemd-to-take-a-path-arg.patch |  0
+ .../Makefile.rules-cross.patch                     |  0
+ .../add-the-needed-stdarg.h.patch                  |  0
+ .../autofs-5.0.7-do-not-check-for-modprobe.patch   |  0
+ .../autofs-5.0.7-fix-lib-deps.patch                |  0
+ ...7-include-linux-nfs.h-directly-in-rpc_sub.patch |  0
+ .../autofs-additional-distros.patch                |  0
+ .../autofs/{autofs-5.1.0 => autofs}/cross.patch    |  0
+ ...x-the-YACC-rule-to-fix-a-building-failure.patch |  0
+ .../fix_disable_ldap.patch                         |  0
+ .../force-STRIP-to-emtpy.patch                     |  0
+ .../libtirpc-name-clash-backout.patch              |  0
+ .../autofs/{autofs-5.1.0 => autofs}/libtirpc.patch |  0
+ .../autofs/{autofs-5.1.0 => autofs}/no-bash.patch  |  0
+ .../{autofs-5.1.0 => autofs}/remove-bashism.patch  |  0
+ ...-pkg-config-to-detect-libxml-2.0-and-krb5.patch |  0
+ .../autofs/{autofs_5.1.0.bb => autofs_5.1.1.bb}    |  4 +--
+ ...n-Linux-backend-initialize-linkmap-struct.patch | 31 ----------------
+ ...-ltrace-fix-gcc-5-logical-not-parentheses.patch | 38 ++++++++++++++++++++
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |  8 ++---
+ .../0001-configure.sh-quote-local-variables.patch  | 40 ---------------------
+ .../libvpx-configure-support-blank-prefix.patch    | 42 +++++++++++-----------
+ .../webm/{libvpx_1.3.0.bb => libvpx_1.4.0.bb}      | 10 +++---
+ 24 files changed, 71 insertions(+), 104 deletions(-)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/Makefile.rules-cross.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/add-the-needed-stdarg.h.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/autofs-5.0.7-do-not-check-for-modprobe.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/autofs-5.0.7-fix-lib-deps.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/autofs-additional-distros.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/cross.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/fix-the-YACC-rule-to-fix-a-building-failure.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/fix_disable_ldap.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/force-STRIP-to-emtpy.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/libtirpc-name-clash-backout.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/libtirpc.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/no-bash.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/remove-bashism.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs-5.1.0 => autofs}/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch (100%)
+ rename meta-networking/recipes-daemons/autofs/{autofs_5.1.0.bb => autofs_5.1.1.bb} (93%)
+ delete mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
+ create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
+ delete mode 100644 meta-oe/recipes-multimedia/webm/libvpx/0001-configure.sh-quote-local-variables.patch
+ rename meta-oe/recipes-multimedia/webm/{libvpx_1.3.0.bb => libvpx_1.4.0.bb} (79%)
+
 -- 
-2.5.0
+1.9.1
 
 
