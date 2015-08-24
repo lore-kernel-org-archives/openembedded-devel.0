@@ -1,18 +1,18 @@
 Return-Path: <samuli.piippo@theqtcompany.com>
 Received: from emea01-db3-obe.outbound.protection.outlook.com
 	(mail-db3on0101.outbound.protection.outlook.com [157.55.234.101])
-	by mail.openembedded.org (Postfix) with ESMTP id 02B6676A0A
+	by mail.openembedded.org (Postfix) with ESMTP id C25DA76A0A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 09:28:42 +0000 (UTC)
+	Mon, 24 Aug 2015 09:28:43 +0000 (UTC)
 Authentication-Results: spf=none (sender IP is )
 	smtp.mailfrom=samuli.piippo@theqtcompany.com; 
 Received: from piippo.it.local (91.217.248.11) by
 	DB5PR02MB1174.eurprd02.prod.outlook.com (10.162.163.20) with Microsoft
-	SMTP Server (TLS) id 15.1.243.23; Mon, 24 Aug 2015 09:13:56 +0000
+	SMTP Server (TLS) id 15.1.243.23; Mon, 24 Aug 2015 09:13:53 +0000
 From: Samuli Piippo <samuli.piippo@theqtcompany.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 24 Aug 2015 12:13:57 +0300
-Message-ID: <017bae8c6b5f47376a7b02d85211c463a8e4d97b.1440407387.git.samuli.piippo@theqtcompany.com>
+Date: Mon, 24 Aug 2015 12:13:53 +0300
+Message-ID: <805439ad0b3909810c1eb60a9d9b568062e160d4.1440407387.git.samuli.piippo@theqtcompany.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
 References: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
@@ -21,60 +21,61 @@ X-Originating-IP: [91.217.248.11]
 X-ClientProxiedBy: AM3PR01CA040.eurprd01.prod.exchangelabs.com (10.141.191.30)
 	To DB5PR02MB1174.eurprd02.prod.outlook.com (25.162.163.20)
 X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1174;
-	2:aHINtqHDO6S+owK+vipQdgz/DJ4qWpIfwiE0PZfSAjfmt0hpiXQfOIZFXbwt47TW9jNqo2Fn4/Ng4Cwon6RaOBsm8Fsqv1a74/qrZ1kIiC2/KONABQ1eSGWfRAbaKiA8xxtbnOuq5AFdycp6rNugOQMl+q8Z/b7cKeYBpJleLnU=;
-	3:Kl0p1QhwUac2kXWLmtbAxvEFqiv+F7jH4dAJPLULrho+5cpinr14g/ZmcAZSq19IoOl2LdUx8vBoJkTA8JGr5uRS1upt23NbtzJRx+piw66Xo5C5XIywVrphjXn26sD7HcW5R0f6ugLZnWyTiI/v/A==;
-	25:vWFIU0XWZgHk68NxNWvGegZ+WFLdJ6g4xH2eBi/OH+DP3Gt9YLkxgX5UKTE0x12BieHD3Sutb6HLCXdL8fm1h3zNWErPulSp4kaybGZnEYAFQH4BpOlx/DUgLOKgdHPd3AtVGWBY1pVGDb+fwg4liJqyz5CXonBaT4dGu5lM8kJhxbnTFPw8TAOj46fn/e9+XBg6J8kw8G07TFi/irZd8edI6RjGWgz8hELkBDx5X+Ea63FMvOGSWH1eAhY3Kg8F
+	2:Zn408IB1BceKnL76GVfgXBIjCOgXo9H6zGL533SoMBKK+K3xVF8BJzrEp7UWfGOMyvLcXZIWQXcS90VNZXCvI2QLchHNKjQeZD2urjLG9970NLmYv1yvNDwEVelD+w/NUOoqjSb0HG4pPbBB5ZfMRH8RWVZnfyWnmKUi6ysWUHY=;
+	3:RsUuKa2sB1f0HcAFu7Uw1xf4UOpSQ2cNrwTXH5uGtVV5XXQQ2Eg0nCj3ApI2gm8hqx38vmly90S7D98lITtbqN6jU5z7Ar0ZoTH5Vita58OcYx6yZu67slIUhRUYeM06slnXozY9Pa0UMeLoj5rYXg==;
+	25:lWGhlQiSNtyv+tw+Irhp2u/EnSUWzUN5n3li+W1LBSn9SyekkKBl4n98Xin54mxnUu6X0palp6ybZw+VTKPfe59qrn/gx8bxbLi4bWCw5jxpaIe0HY331H2BcVGzrGRrn9B6ZgLlhKTWXi15YYwo/pu0Vzw/jjNFjyQFlqgtDi8X/ijeY5WixidsgVlaIqtsWTrz7FLMIPKreUxS99ySeak3Mn2NiA5VGPGcPOIinsIoJnnYwkz0Xd5WJ4wFM6TwWH23yTsbQdkPkpzqS0QD2Q==
 X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DB5PR02MB1174;
 X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1174;
-	20:8oEttrSFmeH3qSiU40YxzDnZ/Oiz7EQDFGV736Ihc6QPokjle2ldRbI5EOOZ7obftTl9ZbiHrLW/THTBdPY4TIFwJB42ymMtSO/WJTqOYeYsCzddtXGNhizk3Gk0+TGFFpJbUuSfiX4wWvPqDYmXIZhdfVH/tgfLxFAr7sQEd5swqUt6rDx9UoqnUu49U82kP8bzHr1aci3+LG2BHMODU6cfGUEUrdg9I4FO4dxUHG6pmoP/tB0jyr+KJOKWpTc5c1aRYYMATC8G/8I28/eUNr8MleuFo8Nvjfbw1BPn2U+Tx6GZQksmq/WOGsY1t87miCgPukbj1DSGN63rKZACmooCnPoRSanowHtEGgx/cfBHMOdjNmLDuDQqk2BT2LZ7vK66oAm+v48l4YdzUUQJS+Fljxk2iiQ1ACUbar8tGvE6xSpzX7vAQeAltOLAVXtk/Wkf0eEsEdde+45S6HnwJj3nZWrHaWsX23y344MS1xxgSBAGOAoeV7wk3nu95t9b;
-	4:lg6CFWmFNUPPizm397Nr54Y51zctfKa22tXIMW8we2V3evahus1HpNVnMcpaWo5UfyRvwk+Ce1j4DPr3gL2XaCzwnM/n0AC215QD3Wk8dxlrBr9Ky9fYWr4XL8IQ0An7J23/MsRHMyqZft8qaDxjMZp4CD4+6DjClyX7INheMMX13O4xSsKKq4R+iOc4woNz8v1CIcqiF09f1kacwW97KY47z0xIJ4ghON6awPEZqRJepkij9AXN3oNldcrbWn9BZp0d3SG5i6uNr6Km22/RYK9p+y4EHO5ghAduNTsnqjxM/LrClcV+nWdo2aJXLzIc
-X-Microsoft-Antispam-PRVS: <DB5PR02MB117428D35F4308A4E2EC114890620@DB5PR02MB1174.eurprd02.prod.outlook.com>
+	20:wkBGKpuYH16IapDVn6V32PXWfFM0D5nMiPFbOXVtuZJyDaUJMsVOGITL1H7TUf7PT9XPiNYemazjYEqlkGEbaYE9HZcTngvR8HutmPpU0HSt3LNVOum/Oe31toE7ForYG6bArQDanuRcB4oDt2uTHv5/AnHBkT7bATEhO00X5IITfiScnzJd4V6lfTsjUjuVvOxymj7ZUwQR8/JW4L4fITKe7fK7s0Pmau+A1vgR3QFQWtS9lhWfPX0wWRg4a/qVh/jGICJIMBZz/0Lf9MMeyISLIGAgxPaU4NxKZgcDxlv6PjFlzzbnSy/Ua9AqArm3EiZ8Jt5QKE9uZ+r5cnwWMHuHqxEwd4a6NVfX+g0okwgQAXuEFLHuCs5NXdC5JjdMgVNQeVqupEkzhWhzifL1AlhK4/GagWskNZ0GLPXOfZpsZly62sPQrjww65G15Z17P9cJM3PZGivEmcRK9L78jYVG6x4QjkoSTsQh1LH8hmmmMiF/CgT95OxmbroxZoLw;
+	4:EbTbY2u3Vjasc3RojhRdfOR4wPSUBX/I8YlT1vDrmjnVvYDJxsELP5PuntPVbweImEnck38j8aMEsE3dX0NRT2MghA8xcFsIccZwCFYctA2OlXcu1TkTKsdj2AJDv+qcmZPuz3B1K6Qybp4C12DXW1Ri2KMZ2j/gRCQNCM/cXo6Db76BDn25EE56Zn3oh7S1p2P9e4M6YyTraiSFGwnDw6nRqD6DftE+WnNRnBBFBbCBsMsy/o3BDp9/fnMrZnCWdvX1bD+WIfAOGuJ1nZV/cYcuEGIesAdBn02ZmhYjQ9rk2bJDV9DlVYQOO6djSm6P
+X-Microsoft-Antispam-PRVS: <DB5PR02MB11746AF64735D17C001A417F90620@DB5PR02MB1174.eurprd02.prod.outlook.com>
 X-Exchange-Antispam-Report-Test: UriScan:;
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
 	RULEID:(601004)(8121501046)(5005006)(3002001);
 	SRVR:DB5PR02MB1174; BCL:0; PCL:0; RULEID:; SRVR:DB5PR02MB1174; 
 X-Forefront-PRVS: 06780E24F8
 X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10019020)(6009001)(199003)(189002)(64706001)(46102003)(5004730100002)(40100003)(47776003)(66066001)(5007970100001)(106356001)(50466002)(2351001)(105586002)(122386002)(229853001)(48376002)(101416001)(77156002)(92566002)(97736004)(62966003)(450100001)(118296001)(5001860100001)(77096005)(50226001)(110136002)(5001960100002)(107886002)(4001540100001)(68736005)(36756003)(19580405001)(81156007)(189998001)(5001920100001)(33646002)(19580395003)(5001830100001)(42186005)(5003940100001)(87976001)(2950100001)(86362001)(76176999)(50986999)(7099028)(4001430100001);
+	SFS:(10019020)(6009001)(199003)(189002)(64706001)(46102003)(5004730100002)(40100003)(47776003)(66066001)(5007970100001)(106356001)(50466002)(2351001)(105586002)(122386002)(229853001)(48376002)(101416001)(77156002)(92566002)(97736004)(62966003)(450100001)(118296001)(5001860100001)(77096005)(50226001)(110136002)(5001960100002)(107886002)(4001540100001)(68736005)(36756003)(19580405001)(81156007)(189998001)(5001920100001)(33646002)(19580395003)(575784001)(5001830100001)(42186005)(5003940100001)(87976001)(2950100001)(86362001)(76176999)(50986999)(7099028)(4001430100001)(19627235001);
 	DIR:OUT; SFP:1102; SCL:1; SRVR:DB5PR02MB1174; H:piippo.it.local;
 	FPR:; SPF:None; PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
 Received-SPF: None (protection.outlook.com: theqtcompany.com does not
 	designate permitted sender hosts)
 X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DB5PR02MB1174;
-	23:tFut5g8dKz6ckzclTg/tPDGsM0JCNqjYrLppDSRvs?=
-	=?us-ascii?Q?euWfC5DOABGJq9rbN73lJWHUdvqpHsOB1+ewxsxf0wctwVIQg0GT5+ryN/sL?=
-	=?us-ascii?Q?irjhZaqHeeNe+j/K0y02KhWVvwP8e4WiRKL2ugFxA5z1xKFfubFmsHf2BpK1?=
-	=?us-ascii?Q?5Rphjitl9kM5zVbDwfyxVAoLotzG8qZ8vkiggnWrVm7Cf7o/sYsylSOp4z1O?=
-	=?us-ascii?Q?BDjJR0To7BVCv8X510jOHuDeGIY5nbvnQHPV6kjev32yX6cUvVCIrbovc3h0?=
-	=?us-ascii?Q?5AEJA4mykmiDQeZNJj5zUOWZ3GJ6uaL5qbPvtXAOtORUZ+xAum7ETg55QufZ?=
-	=?us-ascii?Q?455deUWdN3ADzPry8ayckbpNZfGUwf6jMaJJ8O563dsrSe4ijNVEUbCyqtmf?=
-	=?us-ascii?Q?MFxkb982rCYujE4MafpyOKmdxocMx4U7SVO3gHisc31UD21m0IgEQ2EH19ES?=
-	=?us-ascii?Q?boAXZutPeDevszxIb+B+Nlhqw9EZHH4mkV40DkawInnHnetLnZlo7x277Eya?=
-	=?us-ascii?Q?wfoB2uN8NHpi64Dr981s6Sa1EFq4QhAnMP7SaU9nDcO31lXG2ekvbaQfUd2F?=
-	=?us-ascii?Q?uFJZl2DsL+CSkrOMrDT2ernAJDy7XbumlyCw5ZqALJ5h4BBVixJrt6DwYYTI?=
-	=?us-ascii?Q?aG0ti8Bq0/IOa/IemjWMMe3HRui4kdvaGDiZtUjndt3XkFi3Bkl/UjW4BIFs?=
-	=?us-ascii?Q?aJpGLDNdlRbGgdF9zp0A0OMJdTHfsCncA6biCSjmq1UPz6/Z1ywBmrBJ6O3T?=
-	=?us-ascii?Q?UOPSjuUblVqguc8AuxRRTeknj+3oyT+HIeIkN3DFBFKRlF6DEy/NJqfDvvJK?=
-	=?us-ascii?Q?v5LFI5G2KZH5XjuvasBA1PZAzSNY/AvFA+xjcAwcIaboR2YdtlZyGBwbhEWz?=
-	=?us-ascii?Q?W0ESOZ1LE56Q+tz/ZLoI0Z9jpLF1o5pcg65taLD5iylVT8au9W/f4sqwW2dw?=
-	=?us-ascii?Q?6X5ArMJPgEOc26zGOCBw6sxPZeRUbKbTdoZtWVizM/GegD3f+CqBEUIS+tbl?=
-	=?us-ascii?Q?eRDkiQFUH0RmKtP52aMOPSG9hq9h1vpw2zni3bftmDLPT0g9DZiu/zSSyhj7?=
-	=?us-ascii?Q?cmlXPg78wqmkjy9R5rRH0kHQ4+Jj2Zx1OzsY6/lwM35MyMDdtNyL41LVicCi?=
-	=?us-ascii?Q?/rdnpKtwfSAm8mz3oVUgCgj267/FIYdebb3Ln7+2+f5NbcthV5WMGp+rZQoR?=
-	=?us-ascii?Q?vUuUazzhBhfg3uefOBXLckixRXY8SidAjTfkO5+XZpcSHpXOvqNFe3hgtLZB?=
-	=?us-ascii?Q?4qSvpH6PxsgCUHsdjGBW/3dsaFtrUy5zFOE2FUH4aBzL0QKKXPGUWznC2yNg?=
-	=?us-ascii?Q?8UTBA5MzQPPNNOXLAyYaD0=3D?=
+	23:CLKxe9yKyHO2sp5lnyUcV9zaYr/ZEKfhkKoERmv2u?=
+	=?us-ascii?Q?Oiu0zjVp4ECd56i5euF/8R7RB7NdbqIibVeug1OEzMotcx37315R3Du/UbxL?=
+	=?us-ascii?Q?NLCBIvU7pEy2nLTwwjmGXYd5Z/6BExT+BfsnOTqqjw+g2OAWMMQX1ErD18Ii?=
+	=?us-ascii?Q?z8hwtjw5SM7UmlpCPEMVitR1KWAp3dK2w3ayhROBHkgp0LkSt9EcoC2vTDcr?=
+	=?us-ascii?Q?9ooRIKomzAsgyfNBOeDT3nlk+jEn4H18QrKMqeWg1VbsET7bbjkbkKIHEa8W?=
+	=?us-ascii?Q?ay4rputtoWV6qfdKaSjN5LeaMTAgkX3pSpM9059+FKp7HARLxtx+zm7TR9j7?=
+	=?us-ascii?Q?iG/cqImswa31yBkc8eb3lBjAX6RibKa+387nK6lXBBmoDedXxh93GZIyY8vg?=
+	=?us-ascii?Q?lJOPPXCHNSffdTQYUP08qXxpfd4361djn33EyW/tTj5yiK1ICTZRVD2Jxg1p?=
+	=?us-ascii?Q?48NAW7lS9IPRoWy6yGY+DlAk7vf35Gg2gaz9m4t4fJzos53n1PGXqujkMu47?=
+	=?us-ascii?Q?+CN+0QBgoZ3YxXnimZyngDJrMAFORlzc3WtZzTLbK8B5mZT+LHlb4Zb6y8fc?=
+	=?us-ascii?Q?MpGBzljQFcNCJNmL73YcC5jnAyWJPfqNM3RW+U4WaDxR1nTWC/Aw/w3ta8gs?=
+	=?us-ascii?Q?uZ34uKAF3tAb/Yi0p2lmE6tG21eZRML4BLMeKZsi/gjZ0l8Z8YUqzkQjOO2N?=
+	=?us-ascii?Q?Ba8l+vOlKpClUWIShhmaWgylQLSgnMA5UazCNcQzxn8sc+yiFYdgZ5xx+7qM?=
+	=?us-ascii?Q?rzpy7yuGHPVmklC4cpofotAmDv/tOzGoJ7KgZYd4+GuV0oYJ2F6OtmsYEM2W?=
+	=?us-ascii?Q?1sv54g4hFC3tFRPDv8TKiHnwo6FMssb4qoaHYhGQLu33SyG5v2/B+qlshunp?=
+	=?us-ascii?Q?U8v2221436xiMUkGp1XkDzJUFScLZVVMIRt6pQNRR/ujlrL+29p+7a3qzbqq?=
+	=?us-ascii?Q?GrfwKgly28X8KFCeGp+pTd/2Q4QzSarlRuTu/fa6R9XaeUea4foNNGhvHvTH?=
+	=?us-ascii?Q?giISgyW9UMMn6W5p4Z1FfhElj/8lWFw5eCvIxs1m4HXUo7+thWsLZ+WK7d6n?=
+	=?us-ascii?Q?UOSv1SoQ43sVnXDQQas2tmvyMnBasBTpbuT3GsaAL5Y65ruiXR608jNn65ft?=
+	=?us-ascii?Q?65xtBl1NOSyTFxQBkTwmWGoCtkTxbbbamo1gGEmjGi8eWJSDKxkHdcb/NY/R?=
+	=?us-ascii?Q?1jRl3UOIQRdOQyTDy30nkMaeLNDGwlsSlqFP4mQeCHzrJFgMLqXt6Q/9Ew8d?=
+	=?us-ascii?Q?vK87wVny1Tq6e2mDMZHgUG/JYXX9zrhQxLxD2p8VtYgAzYX0T7l6I/gx5pVO?=
+	=?us-ascii?Q?YVKTXGVt+OfjXl9vrqYRva44Vm1ZqQ70IRRzHzaPKp8Z/Kzm3VgE6d6WYZU4?=
+	=?us-ascii?Q?U9zklu9aaaxFnH7HA7k4kMAjTI=3D?=
 X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1174;
-	5:+5gZNFIIKWT+O8X5o3d8EJx/RNKTnDkxruytTABEzckvp+WdBEiuxdrYzdWvlTl/roUVqGPy0gBF1TLh7d17eVVmN8tK/W+vvwF9JOpQkwkpaZdPnizFxTmfYvLytBMRq/TZaxJQZmz2ZNVIyiQG0g==;
-	24:+MOyJ0452NiQ4Dm0/Q3e7lV4vgdsOSng8Rx+CN9hdLt+xaQk+wcjkB0fS/smVIHxiiilz7Cvlhtm6/iwo5Bnj9b1yBkIbfagHaGP1fUPoiA=;
-	20:sT4/3g7/9sWfEQJ7ofaHImNp7UWHYLoK7/kvs4xzdfQ46sfXxo208kpoub8LhQ4l1SJV1WEGK7OhmQReOiHrTg==
+	5:8+2okFv2ttipooJJiwblwZjeFs9YdgyC2P0+tzNphTbIjtleDlO1Nz05uHHXWsW50wWES6tQU8xiaQYGtO+cvxtLlc6b+kedL3rzLmj4IXuyvN/VEVyIuMEIs8pAJusg6m3io4BGFFRkMhn0Zd3qvA==;
+	24:GlZjaHbL6RdcjK6p0fXDu46jy/s1qOnJJ8fWBtGYFfi1XXwIWGKJ+5t5DjspS6X6ZypMRnSOshHfqvBcxxCkkzshQvFRjRQ2r5NLyu5Y1BM=;
+	20:nOvDybeGQ/JvaKz+RYWC/H4LKO2pQoh33Z2MGH7PI5q8aMifiKaCnYVk+NNm3RdJ53871DstBZIXAH4ZC+Rdew==
 SpamDiagnosticOutput: 1:23
 SpamDiagnosticMetadata: NSPM
 X-OriginatorOrg: theqtcompany.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2015 09:13:56.1470 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2015 09:13:53.1000 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR02MB1174
-Subject: [meta-qt5][PATCH 11/11] qtwebengine: fix problem with recursive qmake call
+Subject: [meta-qt5][PATCH 07/11] qttools: use one recipe for all compilations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -88,109 +89,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 09:28:43 -0000
+X-List-Received-Date: Mon, 24 Aug 2015 09:28:44 -0000
 Content-Type: text/plain
 
-On RaspberryPi, the EGL include paths were not included in the generated
-ninja build files, because the pro files were run in wrong order. Fix the
-order, but remove compiler overrides, as they would break the build again.
+Instead of separate recipes for target, native and nativesdk, use
+one recipe with BBCLASSEXTEND in place.
 
 Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
 ---
- .../0005-Generate-usable-qmake_extras.gypi.patch   | 71 ++++++++++++++++++++++
- recipes-qt/qt5/qtwebengine_git.bb                  |  1 +
- 2 files changed, 72 insertions(+)
- create mode 100644 recipes-qt/qt5/qtwebengine/0005-Generate-usable-qmake_extras.gypi.patch
+ recipes-qt/qt5/nativesdk-qttools_git.bb | 45 ---------------------------------
+ recipes-qt/qt5/qttools-native_git.bb    | 26 -------------------
+ recipes-qt/qt5/qttools_git.bb           |  9 ++++++-
+ 3 files changed, 8 insertions(+), 72 deletions(-)
+ delete mode 100644 recipes-qt/qt5/nativesdk-qttools_git.bb
+ delete mode 100644 recipes-qt/qt5/qttools-native_git.bb
 
-diff --git a/recipes-qt/qt5/qtwebengine/0005-Generate-usable-qmake_extras.gypi.patch b/recipes-qt/qt5/qtwebengine/0005-Generate-usable-qmake_extras.gypi.patch
-new file mode 100644
-index 0000000..89f56e0
---- /dev/null
-+++ b/recipes-qt/qt5/qtwebengine/0005-Generate-usable-qmake_extras.gypi.patch
-@@ -0,0 +1,71 @@
-+From 9d2fafdd9a15adf51d8383bdd545d73e76ad0428 Mon Sep 17 00:00:00 2001
-+From: Samuli Piippo <samuli.piippo@theqtcompany.com>
-+Date: Mon, 11 May 2015 13:47:06 +0300
-+Subject: [PATCH] Generate usable qmake_extras.gypi
-+
-+Running qmake recursively does not take .depends into account, so
-+the SUBDIRS need to be in correct order so that qmake_extras.gypi
-+is used for the ninja files. Do no try to write compiler tools as
-+it will break the build.
-+
-+Task-number: QTBUG-45706
-+Upstream-Status: Pending
-+---
-+ src/core/core.pro                 | 7 ++++---
-+ src/core/gyp_configure_host.pro   | 3 ---
-+ src/core/gyp_configure_target.pro | 3 ---
-+ 3 files changed, 4 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/core/core.pro b/src/core/core.pro
-+index cf00f39..747b711 100644
-+--- a/src/core/core.pro
-++++ b/src/core/core.pro
-+@@ -12,9 +12,7 @@ gyp_run.depends = core_gyp_generator
-+ core_module.file = core_module.pro
-+ core_module.depends = gyp_run
-+ 
-+-SUBDIRS += core_gyp_generator \
-+-           gyp_run \
-+-           core_module
-++SUBDIRS += core_gyp_generator
-+ 
-+ !win32 {
-+     # gyp_configure_host.pro and gyp_configure_target.pro are phony pro files that
-+@@ -28,3 +26,6 @@ SUBDIRS += core_gyp_generator \
-+     gyp_run.depends += gyp_configure_host gyp_configure_target
-+     SUBDIRS += gyp_configure_host gyp_configure_target
-+ }
-++
-++SUBDIRS += gyp_run \
-++           core_module
-+diff --git a/src/core/gyp_configure_host.pro b/src/core/gyp_configure_host.pro
-+index 3eb6738..d6820c4 100644
-+--- a/src/core/gyp_configure_host.pro
-++++ b/src/core/gyp_configure_host.pro
-+@@ -6,9 +6,6 @@ option(host_build)
-+ 
-+ GYPI_CONTENTS = "{" \
-+                 "  'make_global_settings': [" \
-+-                "    ['CC.host', '$$which($$QMAKE_CC)']," \
-+-                "    ['CXX.host', '$$which($$QMAKE_CXX)']," \
-+-                "    ['LD.host', '$$which($$QMAKE_LINK)'],"
-+ 
-+ GYPI_FILE = $$absolute_path('qmake_extras.gypi')
-+ !build_pass {
-+diff --git a/src/core/gyp_configure_target.pro b/src/core/gyp_configure_target.pro
-+index 4d52044..f02bfa0 100644
-+--- a/src/core/gyp_configure_target.pro
-++++ b/src/core/gyp_configure_target.pro
-+@@ -3,9 +3,6 @@ TEMPLATE = aux
-+ 
-+ TOOLCHAIN_INCLUDES = $${QMAKE_INCDIR_EGL} $${INCLUDEPATH} $${QMAKE_INCDIR}
-+ 
-+-GYPI_CONTENTS += "    ['CC', '$$which($$QMAKE_CC)']," \
-+-                 "    ['CXX', '$$which($$QMAKE_CXX)']," \
-+-                 "    ['LD', '$$which($$QMAKE_LINK)'],"
-+ GYPI_CONTENTS += "  ]," \
-+                  "  'target_defaults': {" \
-+                  "    'target_conditions': [" \
-+-- 
-+1.9.1
-+
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index 3bd75af..659fb56 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -80,6 +80,7 @@ SRC_URI += " \
-     file://0002-functions.prf-Make-sure-we-only-use-the-file-name-to.patch \
-     file://0003-functions.prf-allow-build-for-linux-oe-g-platform.patch \
-     file://0001-chromium-base.gypi-include-atomicops_internals_x86_g.patch \
-+    file://0005-Generate-usable-qmake_extras.gypi.patch \
+diff --git a/recipes-qt/qt5/nativesdk-qttools_git.bb b/recipes-qt/qt5/nativesdk-qttools_git.bb
+deleted file mode 100644
+index 73e5d22..0000000
+--- a/recipes-qt/qt5/nativesdk-qttools_git.bb
++++ /dev/null
+@@ -1,45 +0,0 @@
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+-LIC_FILES_CHKSUM = " \
+-    file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
+-    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
+-    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
+-    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
+-"
+-
+-QT_MODULE = "qttools"
+-
+-DEPENDS = "nativesdk-qtbase qtbase-native"
+-
+-require nativesdk-qt5.inc
+-require qt5-git.inc
+-
+-# it's already included with newer oe-core, but include it here for dylan
+-FILESEXTRAPATHS =. "${FILE_DIRNAME}/qttools:"
+-
+-SRC_URI += "file://0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch"
+-
+-PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+-
+-FILES_${PN}-dbg = " \
+-    ${OE_QMAKE_PATH_BINS}/.debug \
+-"
+-
+-FILES_${PN} = " \
+-    ${OE_QMAKE_PATH_BINS}/* \
+-"
+-
+-do_configure() {
+-    ${OE_QMAKE_QMAKE} ${OE_QMAKE_DEBUG_OUTPUT} -r ${S} CONFIG+=linguistonly
+-}
+-
+-do_install() {
+-    # Fix install paths for all
+-    find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_HOST},(INSTALL_ROOT),g"
+-
+-    oe_runmake install INSTALL_ROOT=${D}
+-
+-    # remove things unused in nativesdk
+-    rm -rf ${D}${libdir}
+-}
+-
+-SRCREV = "a6ed9b418d1b4464f088b378e5bdb96ec420db6c"
+diff --git a/recipes-qt/qt5/qttools-native_git.bb b/recipes-qt/qt5/qttools-native_git.bb
+deleted file mode 100644
+index 13e1b79..0000000
+--- a/recipes-qt/qt5/qttools-native_git.bb
++++ /dev/null
+@@ -1,26 +0,0 @@
+-DEPENDS = "qtbase-native"
+-
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+-LIC_FILES_CHKSUM = " \
+-    file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
+-    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
+-    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
+-    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
+-"
+-
+-QT_MODULE = "qttools"
+-
+-require qt5-native.inc
+-require qt5-git.inc
+-
+-SRC_URI += "file://0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch"
+-
+-do_configure() {
+-    ${OE_QMAKE_QMAKE} ${OE_QMAKE_DEBUG_OUTPUT} -r ${S} CONFIG+=linguistonly
+-}
+-
+-do_install() {
+-    oe_runmake install INSTALL_ROOT=${D}
+-}
+-
+-SRCREV = "a6ed9b418d1b4464f088b378e5bdb96ec420db6c"
+diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/qttools_git.bb
+index e27d6ef..51690ac 100644
+--- a/recipes-qt/qt5/qttools_git.bb
++++ b/recipes-qt/qt5/qttools_git.bb
+@@ -9,9 +9,11 @@ LIC_FILES_CHKSUM = " \
+     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
  "
- SRCREV_qtwebengine = "55a7fc7651136510032166ff24eb5e7e49635145"
- SRCREV_chromium = "140893bef70011645c686f5fabe45018dd2e392a"
+ 
+-DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
++DEPENDS += "qtbase"
++DEPENDS_class-target = "qtdeclarative qtxmlpatterns"
+ 
+ SRC_URI += " \
++    file://0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch \
+     file://0002-assistant-help-fix-linking-of-dependent-libraries.patch \
+     file://0003-add-noqtwebkit-configuration.patch \
+ "
+@@ -24,4 +26,9 @@ PACKAGECONFIG[qtwebkit] = ",,qtwebkit"
+ 
+ EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'qtwebkit', '', 'CONFIG+=noqtwebkit', d)}"
+ 
++EXTRA_QMAKEVARS_PRE_class-native += "CONFIG+=linguistonly"
++EXTRA_QMAKEVARS_PRE_class-nativesdk += "CONFIG+=linguistonly"
++
+ SRCREV = "a6ed9b418d1b4464f088b378e5bdb96ec420db6c"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 1.9.1
 
