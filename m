@@ -1,30 +1,82 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 040596AC1E
+Return-Path: <samuli.piippo@theqtcompany.com>
+X-Greylist: delayed 882 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 24 Aug 2015 09:28:23 UTC
+Received: from emea01-db3-obe.outbound.protection.outlook.com
+	(mail-db3on0137.outbound.protection.outlook.com [157.55.234.137])
+	by mail.openembedded.org (Postfix) with ESMTP id D84DD6AC1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 08:53:49 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7O8rmLv001373
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 24 Aug 2015 01:53:49 -0700 (PDT)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Mon, 24 Aug 2015 01:53:48 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <1440146235-9630-1-git-send-email-kai.kang@windriver.com>
-	<1440146235-9630-3-git-send-email-kai.kang@windriver.com>
-	<CAMKF1srhV4VSLeNXahHGytoyH+=BbtW-gn0iyO6Nvzh_YMzDKQ@mail.gmail.com>
-	<55DA807A.3010107@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <55DADBA2.8060205@windriver.com>
-Date: Mon, 24 Aug 2015 16:53:54 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+	Mon, 24 Aug 2015 09:28:23 +0000 (UTC)
+Authentication-Results: spf=none (sender IP is )
+	smtp.mailfrom=samuli.piippo@theqtcompany.com; 
+Received: from piippo.it.local (91.217.248.11) by
+	DB5PR02MB1174.eurprd02.prod.outlook.com (10.162.163.20) with Microsoft
+	SMTP Server (TLS) id 15.1.243.23; Mon, 24 Aug 2015 09:13:53 +0000
+From: Samuli Piippo <samuli.piippo@theqtcompany.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 24 Aug 2015 12:13:54 +0300
+Message-ID: <f76b55e7bbc98c12e5574c5c88a5619bdf188af8.1440407387.git.samuli.piippo@theqtcompany.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
+References: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
 MIME-Version: 1.0
-In-Reply-To: <55DA807A.3010107@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH 2/4] atftp: build with gcc 5.2
+X-Originating-IP: [91.217.248.11]
+X-ClientProxiedBy: AM3PR01CA040.eurprd01.prod.exchangelabs.com (10.141.191.30)
+	To DB5PR02MB1174.eurprd02.prod.outlook.com (25.162.163.20)
+X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1174;
+	2:8exGvg5qrJsecb3wwkpF7Krs6mokQdzO5Welh8Pjltc8Mk9FVjLPzkMNGJNTw7nyi5PijW06hbw1HBMcC/u84TnD7lUnQDjskdE88/CX+5BFQ2OtVZMZFMxAIrOGxWtT21r6tKMutHquaWpds0PVMzPOCa6V8g9MBFNI0XjrGGY=;
+	3:bFjLzqrWOAHAldUDJB8erjvmbb/LjJ0GUvDO1gKyAoqdk2oQYKWyqRVJcY55GNfnd1f2q8n8cmRkDh1i6q7GP28mulobHZk4q/2LTa2paTeSR/DlhOQN5BTTM4Z7QKvtP/NqktmrrkyUJEG+B2rk0w==;
+	25:ECAtrWp6lAfOXcv3ogmQJbtHJP3wll0b+q6HVD/9sFU7mJKymfgkJ8CnXkPj0oI+jXKmTRcpg8AVwSoVA7gv+Pnh80pzlmeHEFBKClhS2VFszAQwJ7POs42nwkTBxY3JWkfYUHU1+nhsFol2mlDKlr6Oy+yEMPQR0JD3/wJDa8uYl/9cYFVguHEcuS1NNMj0fdi8auJUlmsWPiSTlZplHbjtwyI+h1EU/5LZxsD/N6pxNz3Q50jaMcu2DRuy8khiHbd5L74RoEcFb/Zw9PhGTw==
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DB5PR02MB1174;
+X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1174;
+	20:L3pKriq5fEJFMYkiGXfs4mEaqGlL6EzSVBOT2MWk0VN8t0s/w43xhDWRItijcwTs0DuU6BaDsAZOrnj7ejGDlY0XRdPuJ0R3Tiw9dPly3ZuVxBcZJHF/DfGPI6zAHKXyplYqugCVOXcMmSxQTEwA42MTKW2K7RdHmZXxk/etL0Y+rpSOa36988M8hEZhiI7hI65Yspn/rFolUx2zfe73kqKAilzAFt+tGcb3tUEKgM5hLAYJmRk46Xy0HKWTNCZa8VxC/K9mMsggSzTqQJDPNYk78qFLHh/FlL5bXr1b5EGsSDaFkOcNv2GmbnTEfj7afZ/9pS7lwthDTom2BTlozDE4a6ZzGA2VrGcUdEzDxfBZMEUUT0OLVEc77pd3M8oszZ0Fbw6wkpx3+sIl7+o4dnMEWCj591wr4mWbLefKjgK7QB7Dpaky1002p1eXsTjiCb46G6AcLjbqnB4Aem0/1uxHGj/FJHQ3KS4Im3OreTR1PwGYISZ32A55Ypgm0atN;
+	4:yM56NSR2B+geY0vgqh3PFYxvZHisKAsDt+aoVkCZXeuAtHQ/sbOx43SqHXZFI5LmtCbVnAlz+t76xJU04WnDUzsNfE6Qz4LbMujQ5iJ2hWTlsB+ZR0p0xsguS2+z5Br+TKiKZ1JIWRzQJnWpX+5S7Vb1SuJDe4YvHGOWH9kG5QuBbCyn6TbASzPBigxEshClFEmPl26cae21a0qfFjpCztxp0eYBEpwM5xYFgjJLCRsps4OVthCMUDYRSNUQkPeKuWJBsVBFBP9aVCzMdc4BLh3Ke3Y5318GupMSjOlOZVdTUY45hpFLigYjEUJ5coAV
+X-Microsoft-Antispam-PRVS: <DB5PR02MB1174538A686591428AE2391F90620@DB5PR02MB1174.eurprd02.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(601004)(8121501046)(5005006)(3002001);
+	SRVR:DB5PR02MB1174; BCL:0; PCL:0; RULEID:; SRVR:DB5PR02MB1174; 
+X-Forefront-PRVS: 06780E24F8
+X-Forefront-Antispam-Report: SFV:NSPM;
+	SFS:(10019020)(6009001)(199003)(189002)(64706001)(46102003)(5004730100002)(40100003)(47776003)(66066001)(5007970100001)(106356001)(50466002)(2351001)(105586002)(122386002)(229853001)(48376002)(101416001)(77156002)(92566002)(97736004)(62966003)(450100001)(118296001)(5001860100001)(77096005)(50226001)(110136002)(5001960100002)(107886002)(4001540100001)(68736005)(36756003)(19580405001)(81156007)(189998001)(5001920100001)(33646002)(19580395003)(5001830100001)(42186005)(5003940100001)(87976001)(2950100001)(86362001)(76176999)(50986999)(7099028)(4001430100001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:DB5PR02MB1174; H:piippo.it.local;
+	FPR:; SPF:None; PTR:InfoNoRecords; A:1; MX:1; LANG:; 
+Received-SPF: None (protection.outlook.com: theqtcompany.com does not
+	designate permitted sender hosts)
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DB5PR02MB1174;
+	23:EIyZgFryFKg0ghMks5Dq7pmKuKCfbH4zQfw/bxrpF?=
+	=?us-ascii?Q?c8vilSQ/gZBb60lp5SraCqwOziJyMOl1aclAXuLguMLu3Vb3krzFG4GCBnBQ?=
+	=?us-ascii?Q?3/Yg/ypMxlp0JAaQSzE7tc/scLU/X3Kiflc/5cJK035gRNSHGbJisrHOhiYl?=
+	=?us-ascii?Q?JKR1tyb9tSjPzv4Ik+8o9jn6F7Y1nTQo4BY5gVhf/+NRLmE7thI/hbOM3n6m?=
+	=?us-ascii?Q?jSWBBUJnv3Ivg5fttfbSXZaqYOs0bYLE6E4gP2KqrrrSZsG5Ylp2Oytzp7wB?=
+	=?us-ascii?Q?1dRcXCeIxeYiu4Vkg36aHbytnt2ZFwZ+bF5ekjeYzGWtSr9bSBYojiGYtD82?=
+	=?us-ascii?Q?nEs6PedxU4LFdmKpdH+Zgr/N9+sM0B46fbciygOmdzy36OQTJBDk0eD6zj+G?=
+	=?us-ascii?Q?x8a4vAIc1+EzsJQCMHgLzIcLjwFPYkFfvNTP+Z46NVADTzVUe1mWJO1uJBpl?=
+	=?us-ascii?Q?LFS7E7dMjQ+V4cqSykizMxjsiklfVFAS3588QOVMGx+iHk07et0+xCQQX67b?=
+	=?us-ascii?Q?sGSRWkdfRYv0PQlZTf/49ZXYf5BT0EtbEq31rzz0WigIJV1/pvwzkIqVYh5G?=
+	=?us-ascii?Q?7KxICCMwID4ASNY8vIBeGQqmAgFKLQi6TnMxBV6XP+k6PGkTcRuC7uNyDUEe?=
+	=?us-ascii?Q?l1MLWSbAi2iUl7iNuzwt10Qh/a9chQwOXXKKYp44upY5TXW6zKDOa3hpfa0S?=
+	=?us-ascii?Q?CiXDcXaWPcSpSWpmL2aipw8KCiFqUk4bDBNPEJHZjTMtu8Zyq49xkz7SS/RN?=
+	=?us-ascii?Q?4UjV3vw43n/LR99x4yQceXjL3O2nbFTBcOiOMTlpe7JF3gRDDdTUOgeFCdE/?=
+	=?us-ascii?Q?KhUqf+PI/ADMjKWvTsFP+ZuZoJArj/Nxs+mgCmd6AfjsZPT7S1tLKsZ3Ub1q?=
+	=?us-ascii?Q?qyU+5IeRf+OIy3FNP11Tlwp5uuNrRCNOXsi5UIkO1A3+9JfKZ+m9oVdtm7oj?=
+	=?us-ascii?Q?ko0ULIJwExELocxY4SdXFB61Uibyk4g8HTpUCt7iL5fPSRtYecV2EyIewpEi?=
+	=?us-ascii?Q?uGgtISn/wllaYtgArFFtZFW4jY8mU1PQ9wBSwiKUJzMg3dQdIPKabDzUfp90?=
+	=?us-ascii?Q?hhNAVjR8cYaDEVBwHF1DwDdjO9ZtNW+3NNb8iialzMom5Luw9iDqNkbFfI6q?=
+	=?us-ascii?Q?2NuV4d21jLQCrrlgyFs+4JvZjb+89LPW5ekCzSLZX6tydIImDa/vngz6Rwra?=
+	=?us-ascii?Q?T0qbqNQZNXNeIXx4v/RUmqBbstWaiyXtHT8qJSBm51A39njsTApX80AG9rH/?=
+	=?us-ascii?Q?2MLx4wdKd8YjkFWQHk465RU4ywi2pB6psPFeeeolNnvueloxoxSqamvsW044?=
+	=?us-ascii?Q?nvO+srEIUxZL7TsGaAGyvE=3D?=
+X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1174;
+	5:JD/BjqTQwNfp2rhjVj3XFPsbTMapqPoDz6su49etDU98jIwG9vu5KPE1RzDhktnvD09y1B5KJbvCtrRe7B4Mk+fou7OhiskIhAsqlqR7MEcWGVdrMS9+t9Ae2Ll6iOI3FYm3eDlusM4+HdM53m3R6g==;
+	24:DFMITjR5i/E10LmOKgcC9u9dtiF/0eb4ETILLcCGExanl8LpwelaHZSUQ0wR19pOnHPyPWoVmZkjvnKclWbXNGYc79UI0U0aIRd4rxy4p5A=;
+	20:EL/R/adb9zVYq2216b75cUJ8Kyr/6si2XW2Mb+Nh2once7uSycC9ek+TJ/8YaHXJ7UVTPfBy+dWAenFP2M/1vQ==
+SpamDiagnosticOutput: 1:23
+SpamDiagnosticMetadata: NSPM
+X-OriginatorOrg: theqtcompany.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2015 09:13:53.8969 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR02MB1174
+Subject: [meta-qt5][PATCH 08/11] qtbase: remove dependency to sqlite
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,126 +90,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 08:53:50 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 24 Aug 2015 09:28:27 -0000
+Content-Type: text/plain
 
-On 2015年08月24日 10:24, Kang Kai wrote:
-> On 2015年08月22日 00:08, Khem Raj wrote:
->> On Fri, Aug 21, 2015 at 1:37 AM, <kai.kang@windriver.com> wrote:
->>> From: Kai Kang <kai.kang@windriver.com>
->>>
->>> atftp fails to build with gcc 5.2:
->>>
->>> tftp_def.h:54:14: warning: inline function 'Strncpy' declared but 
->>> never defined
->>>
->>> GCC 5 defaults to -std=gnu11 instead of -std=gnu89. The semantics of
->>> inline function changes. Pass '-std=gnu89' to gcc to compile atftp.
->>>
->>> Ref:
->>> https://gcc.gnu.org/gcc-5/porting_to.html
->>>
->>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->>> ---
->>>   meta-networking/recipes-daemons/atftp/atftp_git.bb | 2 ++
->>>   1 file changed, 2 insertions(+)
->>>
->>> diff --git a/meta-networking/recipes-daemons/atftp/atftp_git.bb 
->>> b/meta-networking/recipes-daemons/atftp/atftp_git.bb
->>> index b53f637..0ece58f 100644
->>> --- a/meta-networking/recipes-daemons/atftp/atftp_git.bb
->>> +++ b/meta-networking/recipes-daemons/atftp/atftp_git.bb
->>> @@ -32,6 +32,8 @@ USERADD_PACKAGES = "${PN}d"
->>>   USERADD_PARAM_${PN}d = "--system --no-create-home --shell 
->>> /bin/false \
->>>                           --user-group nobody"
->>>
->>> +EXTRA_OEMAKE = "CFLAGS='${CFLAGS} -std=gnu89'"
->> this is a woraround and will work, however if you are at and fix it
->> once for all that will be desirable. eg. this file you could move the
->> definition of
->> inline function into the relevant .h file and make it a static inline
->
-> Hi Raj,
->
-> Thanks. I'll try it.
+Qt defaults to bundled version of sqlite, so there is no need
+to have dependency to sqlite3.
 
-I tried to move the definition to relevant .h file but it didn't work. 
-It complained when did link:
+Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
+---
+ recipes-qt/qt5/qtbase_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-options.o: In function `opt_options_to_string':
-/buildarea3/kkang/poky-20141111/builds/x86-64-with-meta-oe/tmp/work/core2-64-poky-linux/atftp/0.7.1+gitAU
-TOINC+be3291a18c-r3/git/options.c:345: undefined reference to `Strncpy'
-options.o:/buildarea3/kkang/poky-20141111/builds/x86-64-with-meta-oe/tmp/work/core2-64-poky-linux/atftp/0
-.7.1+gitAUTOINC+be3291a18c-r3/git/options.c:347: more undefined 
-references to `Strncpy' follow
-collect2: error: ld returned 1 exit status
-
-And it has other issues about inline functions that I didn't mention in 
-the commit message:
-
-git/argz.c:44:8: error: redefinition of 'argz_next'
-
-That's because more complex definitions:
-
-In argz.h:
-======================================
-extern char *argz_next (__const char *__restrict __argz, size_t __argz_len,
-                         __const char *__restrict __entry) __THROW;
-
-
-#ifdef __USE_EXTERN_INLINES
-extern inline char *
-argz_next (__const char *__argz, size_t __argz_len,
-            __const char *__entry)
-{
-   return __argz_next (__argz, __argz_len, __entry);
-}
-#endif /* Use extern inlines.  */
-======================================
-
-In argz.c:
-======================================
-char * argz_next (const char *argz, size_t argz_len, const char *entry)
-{
-...
-}
-======================================
-
-It seems gcc 5 doesn't support redefinition, right?
-
-Compare to Debian, it fixed this issue by pass "-std=gnu89" to compiler too.
-
-Ref:
-https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=777783#12
-
-Thanks,
-Kai
-
->
-> --Kai
->
->>
->>> +
->>>   do_install_append() {
->>>       install -d ${D}${sysconfdir}/init.d
->>>       install -m 0755 ${WORKDIR}/atftpd.init 
->>> ${D}${sysconfdir}/init.d/atftpd
->>> -- 
->>> 1.9.1
->>>
->>> -- 
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
-
-
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 92faf29..972027b 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -101,7 +101,7 @@ PACKAGECONFIG[sql-oci] = "-sql-oci,-no-sql-oci"
+ PACKAGECONFIG[sql-tds] = "-sql-tds,-no-sql-tds"
+ PACKAGECONFIG[sql-db2] = "-sql-db2,-no-sql-db2"
+ PACKAGECONFIG[sql-sqlite2] = "-sql-sqlite2,-no-sql-sqlite2,sqlite"
+-PACKAGECONFIG[sql-sqlite] = "-sql-sqlite,-no-sql-sqlite,sqlite3"
++PACKAGECONFIG[sql-sqlite] = "-sql-sqlite,-no-sql-sqlite,"
+ PACKAGECONFIG[xcursor] = "-xcursor,-no-xcursor,libxcursor"
+ PACKAGECONFIG[xinerama] = "-xinerama,-no-xinerama,libxinerama"
+ PACKAGECONFIG[xinput] = "-xinput,-no-xinput"
 -- 
-Regards,
-Neil | Kai Kang
+1.9.1
 
 
