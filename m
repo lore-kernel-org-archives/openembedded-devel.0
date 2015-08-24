@@ -1,26 +1,39 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id ED97A76B69
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id EC1836AC1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 15:36:17 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t7OFaGTi028208
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 24 Aug 2015 08:36:16 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.235.1; Mon, 24 Aug 2015 08:36:16 -0700
-From: <kai.kang@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Mon, 24 Aug 2015 23:31:54 +0800
-Message-ID: <1440430315-10963-4-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1440430315-10963-1-git-send-email-kai.kang@windriver.com>
-References: <1440430315-10963-1-git-send-email-kai.kang@windriver.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/4] ltrace: 7.2 -> 7.3
+	Mon, 24 Aug 2015 16:48:35 +0000 (UTC)
+Received: by wicja10 with SMTP id ja10so77700982wic.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Aug 2015 09:48:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:date:cc
+	:content-transfer-encoding:message-id:to;
+	bh=JBI4YsJx8z9VIdQ30I7101HOXGnK28E1dacDuFH024c=;
+	b=PZDv/rsM4RFJ5vBJy3f+RdHK3Cb38eSfY6244pxy1pcbzrgBV+Y4b21w1/NKwHPFRD
+	aKsFLyXJNr5bgAAwNyr1dYny72P4twI1N2rbLN2L65/Rl67K6b+aps7TKck2F7+z5lmN
+	FWjFGBopSfHV1+38IPbttUt4jNTXtRxlvx+DkzUyxeXXrK0c1UVT30wFjQjteBF1lZLM
+	CP5KC9R9o77kCIGAHBhSxIjis1nJfEWIZbfAw6txJ9Fba8uh9nu/1rozltnJ5n1tcppE
+	I0oWB3BFK90JG1J2V37H9lNKKYtA7mDyrUR0y1Eo0/QhyKG14Bjn4Mo26D5TeXm7jj4I
+	CM8Q==
+X-Received: by 10.180.99.193 with SMTP id es1mr31963178wib.29.1440434915155;
+	Mon, 24 Aug 2015 09:48:35 -0700 (PDT)
+Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
+	by smtp.gmail.com with ESMTPSA id
+	vl1sm24035692wjc.0.2015.08.24.09.48.34
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 24 Aug 2015 09:48:34 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+From: Jens Rehsack <rehsack@gmail.com>
+Date: Mon, 24 Aug 2015 18:48:33 +0200
+Message-Id: <1A315F32-74AE-4B3B-A5B7-65A33C5A6BC7@gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.2104)
+Cc: Tobias Theophile <Tobias.Theophile@rademacher.de>,
+	Otavio Salvador <otavio@ossystems.com.br>,
+	Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: meta-java - recent commits break foreign (MY!) builds ...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,132 +47,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 15:36:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 24 Aug 2015 16:48:37 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-From: Kai Kang <kai.kang@windriver.com>
+Hi,
 
-Upgrade ltrace from 7.2 to 7.3.
+recent commits (24b98ac3, 15ed9662) on meta-java broke my build, so I =
+reverted them for my fork and decided to report:
 
-* update SRC_URI and SRCREV
-* drop backport patch 0001-In-Linux-backend-initialize-linkmap-struct.patch
-* fix error when compile with gcc 5.2
+15ed9662
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- ...n-Linux-backend-initialize-linkmap-struct.patch | 31 ------------------
- ...-ltrace-fix-gcc-5-logical-not-parentheses.patch | 38 ++++++++++++++++++++++
- meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |  8 ++---
- 3 files changed, 42 insertions(+), 35 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
- create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
+This one is easy - and very likely similar easy to fix for patch author:
 
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
-deleted file mode 100644
-index 13609c1..0000000
---- a/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From efd12cfb10ccd2c612838c0e22069554ce60637c Mon Sep 17 00:00:00 2001
--From: Petr Machata <pmachata@redhat.com>
--Date: Wed, 2 Jan 2013 16:01:43 +0100
--Subject: [PATCH] In Linux backend, initialize linkmap struct
--
--GCC 4.7.2 -m32 -Os gives the following (spurious) warning:
--proc.c: In function 'crawl_linkmap':
--proc.c:544:25: error: 'rlm.l_addr' may be used uninitialized in this
--
--Upstream-Status: Backport
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-----
-- sysdeps/linux-gnu/proc.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/sysdeps/linux-gnu/proc.c b/sysdeps/linux-gnu/proc.c
--index 6e01d28..d69c985 100644
----- a/sysdeps/linux-gnu/proc.c
--+++ b/sysdeps/linux-gnu/proc.c
--@@ -484,7 +484,7 @@ crawl_linkmap(struct process *proc, struct lt_r_debug_64 *dbg)
-- 	arch_addr_t addr = (arch_addr_t)(uintptr_t)dbg->r_map;
-- 
-- 	while (addr != 0) {
---		struct lt_link_map_64 rlm;
--+		struct lt_link_map_64 rlm = {};
-- 		if (lm_fetcher(proc)(proc, addr, &rlm) < 0) {
-- 			debug(2, "Unable to read link map");
-- 			return;
---- 
--2.3.5
--
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
-new file mode 100644
-index 0000000..681c43d
---- /dev/null
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
-@@ -0,0 +1,38 @@
-+From 876fe5680d77800426f8c4c5680a235732d722e6 Mon Sep 17 00:00:00 2001
-+From: Kai Kang <kai.kang@windriver.com>
-+Date: Mon, 24 Aug 2015 17:37:54 +0800
-+Subject: [PATCH] ltrace: fix gcc 5 logical not parentheses
-+
-+Upstream-Status: Pending
-+
-+Build ltrace with gcc 5.2, it fails with:
-+
-+error: logical not is only applied to the left hand side of comparison
-+[-Werror=logical-not-parentheses]
-+   if (!need_data(data, offset, SIZE / 8) < 0)  \
-+                                             ^
-+
-+Function need_data just return 0 on success and -1 if fail. So it is ok
-+to just test if (need_data(data, offset, SIZE / 8) < 0).
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ ltrace-elf.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/ltrace-elf.c b/ltrace-elf.c
-+index c571d2a..7fe830f 100644
-+--- a/ltrace-elf.c
-++++ b/ltrace-elf.c
-+@@ -218,7 +218,7 @@ need_data(Elf_Data *data, GElf_Xword offset, GElf_Xword size)
-+ 	int								\
-+ 	NAME(Elf_Data *data, GElf_Xword offset, uint##SIZE##_t *retp)	\
-+ 	{								\
-+-		if (!need_data(data, offset, SIZE / 8) < 0)		\
-++		if (need_data(data, offset, SIZE / 8) < 0)		\
-+ 			return -1;					\
-+ 									\
-+ 		if (data->d_buf == NULL) /* NODATA section */ {		\
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-index f9f1684..d8d037e 100644
---- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-@@ -10,15 +10,15 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
- 
- PE = "1"
--PV = "7.2+git${SRCPV}"
--SRCREV = "f44b28421979cec88d6d6a778fc27a8cd514f508"
-+PV = "7.3+git${SRCPV}"
-+SRCREV = "37ecc41b58be3dbdd79592a76e331b5b371e4f81"
- 
- DEPENDS = "elfutils"
- RDEPENDS_${PN} = "elfutils"
--SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git \
-+SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=ltrace-0.7 \
-            file://ltrace-0.7.2-unused-typedef.patch \
-            file://configure-allow-to-disable-selinux-support.patch \
--           file://0001-In-Linux-backend-initialize-linkmap-struct.patch \
-+           file://0001-ltrace-fix-gcc-5-logical-not-parentheses.patch \
-           "
- S = "${WORKDIR}/git"
- 
--- 
-1.9.1
+The layer-readme tells users:
+
+Usage instructions
+------------------
+
+You should define at least the following variables in a distro include =
+file or local.conf
+
+PREFERRED_PROVIDER_virtual/java-initial-native =3D =
+"cacao-initial-native"
+
+PREFERRED_PROVIDER_virtual/java-native =3D "jamvm-native"
+PREFERRED_PROVIDER_virtual/javac-native =3D "ecj-bootstrap-native"
+
+With 15ed9662, jamvm requires ecj-bootstrap-native and =
+ecj-bootstrap-native requires virtual/java-native which shall be =
+jamvm-native.
+Since I trust in you have a running version, there is very likely a way =
+out by a nice and proper PREFERRED_PROVIDER_* setup making 15ed9662 =
+succeed.=20
+
+24b98ac3
+
+This is more complicated. I announced that in a small round already - =
+and without this
+commit I would hold back until I finished openjdk-8 cross-compiling and =
+running on our
+i.MX6 box with Framebuffer-XBMC and Java-Service for Smart-Home control.
+
+See https://github.com/rehsack/meta-java/commits/master for an =
+icedtea7-native and an
+openjdk-8-native without any alsa or x11 dependency, compiling smoothly =
+alongside a
+gpu-viv-bin-mx6q (with a tiny patch removing hidden x11 dependency).
+
+There is no serious need for x11 the dependency chain down from =
+icedtea7-native.
+
+Maybe the requirement as added was intended for target packages only, =
+but hit accidentally
+some native packages either.
+
+Cheers
+--=20
+Jens Rehsack - rehsack@gmail.com
 
 
