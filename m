@@ -1,29 +1,29 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 6816976A8E
+	by mail.openembedded.org (Postfix) with ESMTP id 86DED6AC1E
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 24 Aug 2015 10:07:04 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99953295"
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99953296"
 Received: from bogon (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 24 Aug 2015 18:10:14 +0800
+	by heian.cn.fujitsu.com with ESMTP; 24 Aug 2015 18:10:15 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7OA6vJG007303
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7OA6w3h007306
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 18:06:57 +0800
+	Mon, 24 Aug 2015 18:06:58 +0800
 Received: from localhost.localdomain (10.167.226.26) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 24 Aug 2015 18:07:02 +0800
+	Server (TLS) id 14.3.181.6; Mon, 24 Aug 2015 18:07:03 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 24 Aug 2015 18:07:18 +0800
-Message-ID: <1440410841-15017-4-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Mon, 24 Aug 2015 18:07:19 +0800
+Message-ID: <1440410841-15017-5-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1440410841-15017-1-git-send-email-leimaohui@cn.fujitsu.com>
 References: <1440410841-15017-1-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH v6 3/6] sblim-sfcCommon: add new recipe
+Subject: [meta-oe][PATCH v6 4/6] cim-schema-exper: add new recipe for openlmi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,45 +40,109 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Mon, 24 Aug 2015 10:07:04 -0000
 Content-Type: text/plain
 
-Sblim-sfcCommon is dependence of sblim-sfcb.
+- Cim-schema-exper(Experimental-MOFs) is dependence of openlmi.
+- Cim-schema_2.40.0.bb is renamed to cim-schema-final_2.40.0.bb.
 
 Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb       | 25 ++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
+ .../cim-schema/cim-schema-exper_2.39.0.bb          | 28 ++++++++++++++++++
+ ...schema_2.40.0.bb => cim-schema-final_2.40.0.bb} |  2 ++
+ .../cim-schema/cim-schema/files/LICENSE            | 34 ++++++++++++++++++++++
+ 3 files changed, 64 insertions(+)
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
+ rename meta-networking/recipes-support/cim-schema/{cim-schema_2.40.0.bb => cim-schema-final_2.40.0.bb} (96%)
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb b/meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
 new file mode 100644
-index 0000000..0f5515a
+index 0000000..62e50df
 --- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "Common functions for SBLIM Small Footprint CIM Broker and CIM Client Library."
-+DESCRIPTION = "\
-+This package provides a common library for functions shared between Small Footprint CIM Broker (sblim-sfcb) \
-+Small Footprint CIM Client (and sblim-sfcc)."
-+HOMEPAGE = "http://sourceforge.net/projects/sblim/"
-+LICENSE = "EPL"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f300afd598546add034364cd0a533261"
-+SECTION = "Development/Libraries"
++++ b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
+@@ -0,0 +1,28 @@
++require cim-schema.inc
 +
-+DEPENDS = "cmpi-bindings"
++LICENSE = "DMTF"
 +
-+SRC_URI = "http://downloads.sourceforge.net/sblim/${PN}-${PV}.tar.bz2 \
++RCONFLICTS_${PN} = "cim-schema-final"
++
++SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2390/cim_schema_${PV}Experimental-MOFs.zip;subdir=${BPN}-${PV} \
++           file://LICENSE \
 +          "
-+SRC_URI[md5sum] = "8aa2655d97bdea54c4750f220b40990c"
-+SRC_URI[sha256sum] = "b9b1037173d6ae0181c3bd5a316ddab5afd6a342ad0dbdc18e940fc0ad2c3297"
-+
-+inherit autotools
++SRC_URI[md5sum] = "b82b31c609c6bcc69521829409f58ccc"
++SRC_URI[sha256sum] = "ed2096ef1ea25d189a02bbc6603fed7a48297f2987f254265763a6eecb7fc870"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=eecc6f71a56ff3caf17f15bf7aeac7b4"
 +
 +do_install() {
-+    oe_runmake DESTDIR=${D} install
++        install -d -m 0755 ${D}${datadir}/mof/cimv${PV}/
++        install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}
++        install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
 +
-+    rm -rf ${D}${libdir}/libsfcUtil.a
-+    rm -rf ${D}${libdir}/libsfcUtil.la
++        cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
++        for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
++                sed -i -e 's/\r//g' $i
++        done
++        ln -s cimv${PV} ${D}${datadir}/mof/cim-current
++        ln -s cim_schema_${PV}.mof ${D}${datadir}/mof/cim-current/CIM_Schema.mof
 +}
 +
++FILES_${PN} = "${datadir}/mof/* ${datadir}/doc/*"
++FILES_${PN}-doc = ""
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+similarity index 96%
+rename from meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
+rename to meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+index ff6c29d..1694f31 100644
+--- a/meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
++++ b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+@@ -2,6 +2,8 @@ require cim-schema.inc
+ 
+ LICENSE = "DMTF"
+ 
++RCONFLICTS_${PN} = "cim-schema-exper"
++
+ SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2400/cim_schema_${PV}Final-MOFs.zip \
+            file://LICENSE \
+           "
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE b/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
+new file mode 100644
+index 0000000..54a2812
+--- /dev/null
++++ b/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
+@@ -0,0 +1,34 @@
++// Copyright 1998-2008 Distributed Management Task Force, Inc. (DMTF).
++// All rights reserved.
++// DMTF is a not-for-profit association of industry members dedicated
++// to promoting enterprise and systems management and interoperability.
++// DMTF specifications and documents may be reproduced by
++// members and non-members, provided that correct attribution is given.
++// As DMTF specifications may be revised from time to time,
++// the particular version and release date should always be noted.
++// 
++// Implementation of certain elements of this standard or proposed
++// standard may be subject to third party patent rights, including
++// provisional patent rights (herein "patent rights"). DMTF makes
++// no representations to users of the standard as to the existence
++// of such rights, and is not responsible to recognize, disclose, or
++// identify any or all such third party patent right, owners or
++// claimants, nor for any incomplete or inaccurate identification or
++// disclosure of such rights, owners or claimants. DMTF shall have no
++// liability to any party, in any manner or circumstance, under any
++// legal theory whatsoever, for failure to recognize, disclose, or
++// identify any such third party patent rights, or for such party's
++// reliance on the standard or incorporation thereof in its product,
++// protocols or testing procedures. DMTF shall have no liability to
++// any party implementing such standard, whether such implementation
++// is foreseeable or not, nor to any patent owner or claimant, and shall
++// have no liability or responsibility for costs or losses incurred if
++// a standard is withdrawn or modified after publication, and shall be
++// indemnified and held harmless by any party implementing the
++// standard from any and all claims of infringement by a patent owner
++// for such implementations.
++// 
++// For information about patents held by third-parties which have
++// notified the DMTF that, in their opinion, such patent may relate to
++// or impact implementations of DMTF standards, visit
++// http://www.dmtf.org/about/policies/disclosures.php.
 -- 
 1.8.4.2
 
