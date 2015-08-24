@@ -1,18 +1,18 @@
 Return-Path: <samuli.piippo@theqtcompany.com>
 Received: from emea01-db3-obe.outbound.protection.outlook.com
-	(mail-db3on0116.outbound.protection.outlook.com [157.55.234.116])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D6A27694D
+	(mail-db3on0121.outbound.protection.outlook.com [157.55.234.121])
+	by mail.openembedded.org (Postfix) with ESMTP id AF5E275F44
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 09:28:27 +0000 (UTC)
+	Mon, 24 Aug 2015 09:28:38 +0000 (UTC)
 Authentication-Results: spf=none (sender IP is )
 	smtp.mailfrom=samuli.piippo@theqtcompany.com; 
 Received: from piippo.it.local (91.217.248.11) by
 	DB5PR02MB1174.eurprd02.prod.outlook.com (10.162.163.20) with Microsoft
-	SMTP Server (TLS) id 15.1.243.23; Mon, 24 Aug 2015 09:13:52 +0000
+	SMTP Server (TLS) id 15.1.243.23; Mon, 24 Aug 2015 09:13:49 +0000
 From: Samuli Piippo <samuli.piippo@theqtcompany.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 24 Aug 2015 12:13:52 +0300
-Message-ID: <37e08b9cbf4bc8c2194e2274c1ada3f5ead965fa.1440407387.git.samuli.piippo@theqtcompany.com>
+Date: Mon, 24 Aug 2015 12:13:47 +0300
+Message-ID: <87e12c0fdfbb037aa1ccf67baf80ebac7ee28c4c.1440407387.git.samuli.piippo@theqtcompany.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
 References: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
@@ -21,61 +21,60 @@ X-Originating-IP: [91.217.248.11]
 X-ClientProxiedBy: AM3PR01CA040.eurprd01.prod.exchangelabs.com (10.141.191.30)
 	To DB5PR02MB1174.eurprd02.prod.outlook.com (25.162.163.20)
 X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1174;
-	2:hpbo0iMISTLjRY7+/1o9wAkPtxrdAc9g+ZrCl9+2N0FlVwR9DsHAnAwsuvMGQx4Ibe6yyX71vbu3RzQp4LeSZzc1eO6h3BnDhQluMePiuZenk5rAgQsaYSCKBbWKcm7AiyTehzI9ozNkv5zEV324QjKdKtm9e3VyESfgAz/TZa8=;
-	3:j0haERTcKTq4+DbeMsfvFogncTfUAqgUCjephEG3YEIzGgwfBXcY/HhjUUueDwq8ia7kTVLAe4OvUdPA1ZdGKnd3FZ5RxNtg0ZRlAorm4RgbZ8QijBIIVK4m+EecA/Kc34DaTgHFF9j/TLtshhULJw==;
-	25:b85jwCpUHj7w2mzEg+aQ640Nv5MWXa4xYzSGobmr4vYv01zwxkz59rP6Fat80+bSk00JOcxCQRBm8x+Ykwz7jtAvEUPXXLHxZ92x3nsA7tD5wt0iyIvgLNuy27abgPIAXHwjiWOX8SzwgeVrNR7FJYiFGKPd9cJB+1b7IYdzjMTra1Y0w5Y7svK9zG7YBLms7H/z0zeIz5+s0J0KKEPvCh/HC0U9q1DKFu+Zqci86MzbDkXSy/YXaCUApeTcOB3aU27gVoBGvngCTlrQCvbreg==
+	2:wBTxfQSCeNeMaFQINvIGYEzu6x2ndJwfZ0KVTFCOqkdA7YGka19OiAVV0GL8Sj/xY/Yn6AlbMFYxPCw2Yh0cNsTfnJnFa58tgSYbDIkfBPFUSI1m76LHsLjbwAttWMSouj/yU8lOBwzZ0nU4pUA2UEv6I31FenAlmWwrgVGR7no=;
+	3:LZJaFoQMkNU/j8qHRBm/9jcIFzWLCBY5DG7joqQaFoSLKPklVG9YZu7Jsx0tpfkrEIJR1F21ugqw2GXhRaXoTEKSD3pMm6QMkk4ysgOaNO5YIVDUac3LnYLGEVFCtlOdnNZFy+5M8U2Vg3Iut73GEg==;
+	25:/uhu9gnrwy0XsISMXwzjrg4inspq8yfZabiPavfiZMJNXbjMzHMeTKEsf0wzyX2G025Myb80MLNycF5JOfzf8NWYtk0EnY2HGiiQTZIEHw9v4HHEbC+XKTmFwHqBKC2CGWN6h0UbftELxyC1OyD+91nS2NaOZ5TtIJUsWydwjeqJ1wXv1v0lmnVdHTiolWsPKs32cv0+1eECVhQ3tbhTFIc3/RQOcsnD4debfTjV8qkC3rdsv2i+DKy3MNWpYyoFfTMcfVhzlt7/lbd2/cOzmg==
 X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DB5PR02MB1174;
 X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1174;
-	20:7BMCOZuTnE2OYWThaDjUvzr1cbAU/vEn8IBpUr76LY7Vo1cqrJ5X/RK6KDej4aGXIL0/NKanJb47tRPaqVRD9MkmyTiOZI9IIGDXSz/Tl49XOwE55DfOiwmRICJrtTPwJIGM73yiM+xWOASLjJPDs0POfTJalHpk+5UWPf4VNZJLSPgnjCF5ugigrNvKdDLdK6ZudWAepE6m9T2lpZ3pexQgz3cOO97GW09EgSrU8IRCE0hR+JM393cjaQNGovWu606lPX3E/uW0ZpqSEeLfDlFkFzt/D3FNtpLpDevAQrIf4xPrpDhsLpoybwd74y0uXuDkl6QPs2DuuIF8OIcor/OlzueZaeRHwtq7L32N1bdzCUrt2AkrJz2Ku0fvlbJe6mupBWdKJ7yPKB4FiaYi7wUHHB1FJ36/Au3VWddh+ws/v/Jcky2b7FZvuxTzAWQeOq0KgBPyFn3uVMiN/m7JW/yr0Dlam8EnvJVLlMiCiJbOsoP73gUZj6zX9yIaikYl;
-	4:xVfBf0hZEQXfHYLRQtQTn4KjW3XNJdbGdW1sraQMsPJXvmgyi1wsATGW7vr76gPrwzHg2V7j9eimv+y3qYQyuRnNJcxqAjGO7/PvdbkIlDUMp0pLTsqfGzDdj+fsSuNtFUVNHtPh3dmtVQuMwTC9aD9RnSRCB1IwkIOJNCm3TMcushT31epmkngam0hKhevcdOXWPIAMdxrnJ3M6ZEXADa/ENucTGpVR9RAHhDo2FOBkDorQNwwxWAvFbqrbSNvivrwSA6Cqrr5qCvN/DD95VdAn2gaLwcCjkpglS+INF8tRPreRPkLf38hllhtzXEa9
-X-Microsoft-Antispam-PRVS: <DB5PR02MB1174DD29E62C423E6337FFB690620@DB5PR02MB1174.eurprd02.prod.outlook.com>
+	20:bhrn8J39ttdN+9rdDmKDVBEU7sic6XXMwUnCGfzNf5JkQ0mDZzcw6Qo2gNLeKIAI55CWj0MIwb0q7RGF3OwV3b/qaTgNyfRcdKmKS9DVWnVtX+PF/G2qNZK/8d7womNBjKE6CKvAigQOtJmsudOTYUlGKMn7SGG75xGHJnyKqxMSJrZcywUBSM9V822Ky95q8i+7HjRwFsT4uPDn5fbtCPahp3B/RKckyC8cXPXyiVSnDVxE6vjv0LZ5NYxmdhpTsbLf0vs7fLK7c7Q6AwDr92ByJxiVjpwAuPUGUozDCJAXJMfvxLG3X47bbl/6B/ydn7ZNhRiI8Z+5syK0W3WgpGNlzyZ9uCPQ+bcjjiXDXNLvvj4tgEcxW5KaK+rWgs45Er7dvCW6MWU+jqMwijNsRaFMjV4CMx1Y4ZBjzyaKOa7675x8wqWJ3sCQ2liG3BjrKyeNTTSI0P0s9EiA/tSQ6vMqbV+BAHJbMfDhK/Prnl8wcEpGewfT92HVD4ayssPw;
+	4:HRLGl6ZsVAOM4P+B0t7IZgB7Tqae4B73Igc167xCzx9F5vj3sfXz81yh9zv64U1j0zKJEi3PltZYu4eoMaaxSECjfXIosmP9WfMij2CScu+0rR6SeVomS0Mz1/plcI8XhWAM4zZNFiOxmpgMjrByrvmfCZuoAwFwuUWM13hCKNVIRgjHrBjcmwQQ3N5m6BmfbM9JteF1QlvW7HJPOQ/NUc/THMieD9EASri16CWAxotAixHXVrGCXvcXH76nLOLCemVYPiAMHx/0NkWHVLKAoXBBwJl6wJRnbyTfcgNitl1FoteilrXP/BnsEfKH7b3c
+X-Microsoft-Antispam-PRVS: <DB5PR02MB1174FA11BFD855E8329C49AA90620@DB5PR02MB1174.eurprd02.prod.outlook.com>
 X-Exchange-Antispam-Report-Test: UriScan:;
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
 	RULEID:(601004)(8121501046)(5005006)(3002001);
 	SRVR:DB5PR02MB1174; BCL:0; PCL:0; RULEID:; SRVR:DB5PR02MB1174; 
 X-Forefront-PRVS: 06780E24F8
 X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10019020)(6009001)(199003)(189002)(64706001)(46102003)(5004730100002)(40100003)(47776003)(66066001)(5007970100001)(106356001)(50466002)(2351001)(105586002)(122386002)(229853001)(48376002)(101416001)(77156002)(92566002)(97736004)(62966003)(450100001)(118296001)(5001860100001)(77096005)(50226001)(110136002)(5001960100002)(107886002)(4001540100001)(68736005)(36756003)(19580405001)(81156007)(189998001)(5001920100001)(33646002)(19580395003)(575784001)(5001830100001)(42186005)(5003940100001)(87976001)(2950100001)(86362001)(76176999)(50986999)(15975445007)(7099028)(4001430100001)(19627235001);
+	SFS:(10019020)(6009001)(199003)(189002)(64706001)(46102003)(5004730100002)(40100003)(47776003)(66066001)(5007970100001)(106356001)(50466002)(2351001)(105586002)(122386002)(229853001)(48376002)(101416001)(77156002)(92566002)(97736004)(62966003)(450100001)(118296001)(5001860100001)(77096005)(50226001)(110136002)(5001960100002)(107886002)(4001540100001)(68736005)(36756003)(19580405001)(81156007)(189998001)(5001920100001)(33646002)(19580395003)(5001830100001)(42186005)(5003940100001)(87976001)(2950100001)(86362001)(76176999)(50986999)(7099028)(4001430100001);
 	DIR:OUT; SFP:1102; SCL:1; SRVR:DB5PR02MB1174; H:piippo.it.local;
-	FPR:; SPF:None; PTR:InfoNoRecords; A:1; MX:1; LANG:; 
+	FPR:; SPF:None; PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
 Received-SPF: None (protection.outlook.com: theqtcompany.com does not
 	designate permitted sender hosts)
 X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DB5PR02MB1174;
-	23:MBiHSh37JdO9LgO/du8KpEgpmfFS3GW3Ju35WCzMg?=
-	=?us-ascii?Q?WD+HOjGVj9Qg8D7m9XBlGFwqRKsuDbtXr80tRSBTBa4t+BC9iyQrXB1ef5S7?=
-	=?us-ascii?Q?zdYzn0Hgmp4LUzCk8fi7TzlVnN6LhN47Modx8Kpp/q9+z8DKM3LDA5rA+psW?=
-	=?us-ascii?Q?q+srlOcHlIHW/910Kzt9cAu9OK6CYurqTcG1S1415xrX1eZ3KTqEQRi8Yq1f?=
-	=?us-ascii?Q?rwj9ZEMIBcRcCDJUIwGUqsYl3fjsu71CA9esrL5fGELYLv8GqLCtzW4xJQ6i?=
-	=?us-ascii?Q?1K875qK5gQ2t2P0T0u9Zo2f1QpJi3suXbjHaX1CZlnWmmRJxC/1zmQAovuWx?=
-	=?us-ascii?Q?m4/5yf17S8V0AOBIgZoGscJTn8gv3EzktJWaTmjsdB4Jg1iReCcwYxNCbC1Z?=
-	=?us-ascii?Q?ChRtcPzlCUClSRvbvQitAKkLDSoQTqb9g8tzSrvde4CxJScED5CuVdMFhQTe?=
-	=?us-ascii?Q?t89f/2kjFcbqUGESbKAbBrfSC5d+qEAFGyNNUcwO9cGTozocWU0UZWxGLSNB?=
-	=?us-ascii?Q?LV66aevNRiPRRBu34GoSq6srXAjPvgY1PSkYh9veUtYWEHW3qr4WN1AEBkZl?=
-	=?us-ascii?Q?BNiGHgwuf2JE4Uliv09SGRpDS5cDVAl3RHjjRZD9B162yqEq0uM672FedO8/?=
-	=?us-ascii?Q?dL+0jpdZQnSSaSiez6rWwodngQLV64AmDEPihNY3lkFnz7Y09CDQm+B8ffqt?=
-	=?us-ascii?Q?5PuEXhgsZuaeOAmtarJMYjnAW+I4EMph69CO1hbEmZZsrCDAx+QrldmfeZ0m?=
-	=?us-ascii?Q?44y8coXvvE3sckmCDtMPNYVPSVgd9yYCRtff7AnPN1dqTu/i3806K8W+b8Ue?=
-	=?us-ascii?Q?GeLVMmGQ0nqcUKIxoQS5GC+hScCuVTZ3l8//y3Mr+NRWaoMtVqef0TKlX+3C?=
-	=?us-ascii?Q?/hELC0dyDYuTpdA4MWYT9uGGEKuFka0qNxz8SUFNnEZjJcxr5Y2YJvAumZV6?=
-	=?us-ascii?Q?D3Mb3JB2nmHmAY6y6oOYDmHmxmbsxjBPTNemaapkexq9xpa33A2yzoYVyAEf?=
-	=?us-ascii?Q?5k8nnuqZ2VTkYjhEmAWVCl69kAoc2mqsCLjtLyaHHgZgwDL1epozi6wEHG8v?=
-	=?us-ascii?Q?lT2IlNbXkEnb0gu6pWGFCMTk//wPUIEZ6uEXrDxQPtpE8hWASLd2Gfi8SLZo?=
-	=?us-ascii?Q?ZJIbv5ZY5hIcZl3kEiiJlmePRe2ePkgO0qSaPczMg+OnGQWknjJ7MstNJy11?=
-	=?us-ascii?Q?gYcnPrOqgn0XDFBgv72Voyg4Oz2M4tql1Zv8k+XYa3mEi0VsyazgyqQ/csUk?=
-	=?us-ascii?Q?feRtU/qmRj7Is8L+OUlALaQlTTsI3eHGG7ubHXtsCjOUvwgOm1MzoiL6AlJi?=
-	=?us-ascii?Q?ZggRGZQ9zM89nbfAHGpKxoNKnqKjx9xeUrymeABo6ieszh43LKbTD5P3imJL?=
-	=?us-ascii?Q?5t/3OJPYIdwrFTDqGmBTDMu9PRYkh4klW6Xq6RvM7pFxBpt?=
+	23:G+o8/iqglOmyENcyMA8iLEPL6umzx1SoaPmn1gwYv?=
+	=?us-ascii?Q?5Y6kzNBRLtz/9FmXppbWCA/LA3CoucpE5JLx+3FWAC6PBzjieyKM05I9yE5d?=
+	=?us-ascii?Q?IF7AQ15lqMhEbjgmj8vWOY9q2DNh1I+p98kiABptL1gqQ89d1hfWMRRiOq87?=
+	=?us-ascii?Q?s/Fa6IqHxSDkntROKMGSIODffe+pqn34bHEUOJWb12HqS/kDM/ntDmJtRR0M?=
+	=?us-ascii?Q?lCQnBhEgC7RKK35sZpfCUmLnH96TqoKV5/OMaLzIb9QQYeQo69pL9xmFZ5Y2?=
+	=?us-ascii?Q?1La5s5V/4vfPwRx23hhXARYWPR15sUtQ0n6C67cxrWN7/EZ7iwk4pV9zQEDQ?=
+	=?us-ascii?Q?l+AcDV4ggFfcyxatz65mpoV85eBgTfx8rzlVAwVVwlyqWPpstit549PQtBuo?=
+	=?us-ascii?Q?v9YjiTbUVwGWEjQ7LKTI2LhTJ908icnGa1+0idHlmuGAT/Doh4GxCZfW6qq0?=
+	=?us-ascii?Q?1+OlXqDPRpT68SZUX8M0UWUDQmtyA05Qj2S3DY3TnzNK/33o2kx1SAcuVb43?=
+	=?us-ascii?Q?eh+5RJHwUKwlIP6vbxd0hIuXM/mGxKhlLkvSTePtMzg2zWcox05pljIsVAKv?=
+	=?us-ascii?Q?VMgECmMU57883s23JIg/JsveB1u55GKHpi2RVfSbJ6AAMMzP5miEuwZzCJLb?=
+	=?us-ascii?Q?c3mvRac+Ig0I0rLYk3ZUCwevBXdVXeTk0LuVMwu4FukRU6uLHD9rtbKKf00i?=
+	=?us-ascii?Q?XSufEpAA0MyckkL4RJL7bwtR9/ZF90NtQurtlOR1jSAv9tObZ8IOOFv3YTXy?=
+	=?us-ascii?Q?lx/7CwSIS1iD5Mi4DNWhB/t/4RUsi+3Vlmshp31yqZZyWuKDbE/27YLesj9G?=
+	=?us-ascii?Q?ldpqOefPD+iGPgDZfsIJ7v4GOQ4ZL4PIv7MW4vdR9nOI02jTwxaUle0Tz7p2?=
+	=?us-ascii?Q?E/yLrakAsAqFUVXfXpsIFoxuVu2LYKJELEt+csa28QFYmBK3spNJJgyNerSZ?=
+	=?us-ascii?Q?w7F6OY/KDmkdHuOuKHtUv4PT7KQFijtZMZZq3c11PtUL7dF8XSMy70d1qI0T?=
+	=?us-ascii?Q?98nZpso57BzaPp9w0fZ3ZrximPsSZUUgz2lt6opoXFx15am+3AuQi3qDiuOp?=
+	=?us-ascii?Q?UFZl15uXe97+kVO3QGPDOqt+WPp1GcHmBk0K7t5T0AVV3PBU9vKERnWLQtN4?=
+	=?us-ascii?Q?waQGFZL6/dK22nmPAFp+L3rlBffJELeL0yHlh1hBqRODaPCg0KewtqPa/e61?=
+	=?us-ascii?Q?0p4Aw6eXhu/ulb63v6oN238Rm42WENI8DpekQ+Uu5yrja/akEtKOriJ98oh7?=
+	=?us-ascii?Q?gYryOwavrbovmFFF2qWE7l6hnRA6QqGuNeH+Hi1eZMvEnBcI/x2ziin99qBi?=
+	=?us-ascii?Q?qRSyfMJSjeIa+LCSiPgywE=3D?=
 X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1174;
-	5:SWmP0trjzzTGa8oOjTLVIUIxHJyt212OJM2Xuw6/MJ7zx89MfFdb+/GICjfkpFdYfc5+TFuOd8o1+pTVdP3arLSNaIHKfoK039yg8DVC19PIMpsxrlsgdvYc/dS8+iUni9d9W+siXyQ/o5bIBPSJcQ==;
-	24:ntvpPUOTH4h4GZRwoGeWa0UQQKWZcq09A9POx4CJ9CQdbLs0nPJiE4WkDSAwd6SW6+ShRzqJLytURKdug6XitpaceRjD6n8o4L2T3e+Bqdo=;
-	20:v2KWEcdKMa4Xhr/UnoX0N2dBKEoFpib4f8KC4Pj8+q0vzC5tLdV5LinduXG4n6qp9kDl1AdVen1fYKjcon4+6w==
+	5:W9shRpMtWYZkkNF7Z3V29JQ2QTsLddj5uqBarz6v4uVH2zBNtXpzzN4SSejOwPmpW9zFAC5ONYR/boA9aljUVZ0Ncm59MekUHbl7y1iBFOFYNIFdfuNYraksf/wTbC8GMaVpui3xki+cCsyn7nL5Hw==;
+	24:IHORQdLWlmZYXutpZ3ZA/NByv/gVYo7N8DzJmU2JpRYOC99NKFM3IDmebSPyBNXib2Xvwt5SNBY2Rvdxx3jOzGqlnt2HYqMBHA9aaEFN1Ao=;
+	20:kd/AbLJ1tKAHvicG4s0w8gG7/9D9ffR1MOFw9DY5kT0xOlvnpQ5ybPHDMnMSQ3YaoBggEI04YDf1PQO50sW9DQ==
 SpamDiagnosticOutput: 1:23
 SpamDiagnosticMetadata: NSPM
 X-OriginatorOrg: theqtcompany.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2015 09:13:52.4750 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2015 09:13:49.0218 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR02MB1174
-Subject: [meta-qt5][PATCH 06/11] qt5: make qt5.inc reusable qt5-module.bbclass
+Subject: [meta-qt5][PATCH 01/11] qt5: make populate_sdk_qt5 reusable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -89,420 +88,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 09:28:31 -0000
+X-List-Received-Date: Mon, 24 Aug 2015 09:28:39 -0000
 Content-Type: text/plain
 
-qt5.inc has common parts that can be used to build any Qt5 module.
-Make it a bbclass so that it is easily usable from other meta layers.
+Move task definitions from populate_sdk_qt5.bbclass to the toolchain recipe,
+so that populate_sdk_qt5 can be reused in different toolchain meta recipes.
 
 Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
 ---
- recipes-qt/qt5/qt5.inc => classes/qt5-module.bbclass | 0
- recipes-qt/examples/cinematicexperience_1.0.bb       | 2 +-
- recipes-qt/examples/qt5everywheredemo_1.0.bb         | 2 +-
- recipes-qt/examples/qt5nmapcarousedemo_1.0.bb        | 2 +-
- recipes-qt/examples/qt5nmapper_1.0.bb                | 2 +-
- recipes-qt/examples/qtsmarthome_1.0.bb               | 2 +-
- recipes-qt/examples/quitbattery_1.0.0.bb             | 2 +-
- recipes-qt/examples/quitindicators_1.0.1.bb          | 2 +-
- recipes-qt/libconnman-qt/libconnman-qt5_git.bb       | 2 +-
- recipes-qt/qt5/qt3d_git.bb                           | 2 +-
- recipes-qt/qt5/qtbase_git.bb                         | 2 +-
- recipes-qt/qt5/qtconnectivity_git.bb                 | 2 +-
- recipes-qt/qt5/qtdeclarative_git.bb                  | 2 +-
- recipes-qt/qt5/qtenginio_git.bb                      | 2 +-
- recipes-qt/qt5/qtgraphicaleffects_git.bb             | 2 +-
- recipes-qt/qt5/qtimageformats_git.bb                 | 2 +-
- recipes-qt/qt5/qtlocation_git.bb                     | 2 +-
- recipes-qt/qt5/qtmultimedia_git.bb                   | 2 +-
- recipes-qt/qt5/qtquick1_git.bb                       | 2 +-
- recipes-qt/qt5/qtquickcontrols_git.bb                | 2 +-
- recipes-qt/qt5/qtscript_git.bb                       | 2 +-
- recipes-qt/qt5/qtsensors_git.bb                      | 2 +-
- recipes-qt/qt5/qtserialport_git.bb                   | 2 +-
- recipes-qt/qt5/qtsvg_git.bb                          | 2 +-
- recipes-qt/qt5/qtsystems_git.bb                      | 2 +-
- recipes-qt/qt5/qttools_git.bb                        | 2 +-
- recipes-qt/qt5/qttranslations_git.bb                 | 2 +-
- recipes-qt/qt5/qtwayland_git.bb                      | 2 +-
- recipes-qt/qt5/qtwebchannel_git.bb                   | 2 +-
- recipes-qt/qt5/qtwebengine_git.bb                    | 2 +-
- recipes-qt/qt5/qtwebkit-examples_git.bb              | 2 +-
- recipes-qt/qt5/qtwebkit_git.bb                       | 2 +-
- recipes-qt/qt5/qtwebsockets_git.bb                   | 2 +-
- recipes-qt/qt5/qtx11extras_git.bb                    | 2 +-
- recipes-qt/qt5/qtxmlpatterns_git.bb                  | 2 +-
- 35 files changed, 34 insertions(+), 34 deletions(-)
- rename recipes-qt/qt5/qt5.inc => classes/qt5-module.bbclass (100%)
+ classes/populate_sdk_qt5.bbclass      | 5 -----
+ recipes-qt/meta/meta-toolchain-qt5.bb | 4 ++++
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-qt/qt5/qt5.inc b/classes/qt5-module.bbclass
-similarity index 100%
-rename from recipes-qt/qt5/qt5.inc
-rename to classes/qt5-module.bbclass
-diff --git a/recipes-qt/examples/cinematicexperience_1.0.bb b/recipes-qt/examples/cinematicexperience_1.0.bb
-index 116127f..b1eee73 100644
---- a/recipes-qt/examples/cinematicexperience_1.0.bb
-+++ b/recipes-qt/examples/cinematicexperience_1.0.bb
-@@ -21,7 +21,7 @@ S = "${WORKDIR}/Qt5_CinematicExperience_rpi_${PV}/"
- DEPENDS = "qtdeclarative qtgraphicaleffects"
- RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
+diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.bbclass
+index 79df489..d29ec36 100644
+--- a/classes/populate_sdk_qt5.bbclass
++++ b/classes/populate_sdk_qt5.bbclass
+@@ -1,8 +1,5 @@
+ # Copyright (C) 2014 O.S. Systems Software LTDA.
  
--require recipes-qt/qt5/qt5.inc
-+inherit qt5-module
+-TOOLCHAIN_HOST_TASK += "nativesdk-packagegroup-qt5-toolchain-host"
+-TOOLCHAIN_TARGET_TASK += "packagegroup-qt5-toolchain-target"
+-
+ # This allow reuse of Qt paths
+ inherit qmake5_paths
  
- do_install() {
-     install -d ${D}${datadir}/${P}
-diff --git a/recipes-qt/examples/qt5everywheredemo_1.0.bb b/recipes-qt/examples/qt5everywheredemo_1.0.bb
-index 0546b00..b906741 100644
---- a/recipes-qt/examples/qt5everywheredemo_1.0.bb
-+++ b/recipes-qt/examples/qt5everywheredemo_1.0.bb
-@@ -11,7 +11,7 @@ SRC_URI = "${QT_GIT}/qt-labs/qt5-everywhere-demo.git"
+@@ -33,5 +30,3 @@ create_sdk_files_prepend () {
+     echo 'HostPrefix = ${SDKPATHNATIVE}' >> $qtconf
+     echo 'HostBinaries = ${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}' >> $qtconf
+ }
+-
+-FEATURE_PACKAGES_qtcreator-debug = "packagegroup-qt5-qtcreator-debug"
+diff --git a/recipes-qt/meta/meta-toolchain-qt5.bb b/recipes-qt/meta/meta-toolchain-qt5.bb
+index 8991176..11b7962 100644
+--- a/recipes-qt/meta/meta-toolchain-qt5.bb
++++ b/recipes-qt/meta/meta-toolchain-qt5.bb
+@@ -5,3 +5,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
+                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
  
- S = "${WORKDIR}/git/QtDemo"
- 
--require recipes-qt/qt5/qt5.inc
-+inherit qt5-module
- 
- do_install() {
-     install -d ${D}${datadir}/${P}
-diff --git a/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb b/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb
-index 7edf727..67525ca 100644
---- a/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb
-+++ b/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb
-@@ -12,7 +12,7 @@ SRC_URI[sha256sum] = "445da212074a10a432f4508d125814212bbe7a967bfa47b015b92dfac6
- 
- S = "${WORKDIR}/Qt5_NMap_CarouselDemo_1.0"
- 
--require recipes-qt/qt5/qt5.inc
-+inherit qt5-module
- 
- do_install() {
-     install -d ${D}${datadir}/${P}
-diff --git a/recipes-qt/examples/qt5nmapper_1.0.bb b/recipes-qt/examples/qt5nmapper_1.0.bb
-index 77cb067..cc61b18 100644
---- a/recipes-qt/examples/qt5nmapper_1.0.bb
-+++ b/recipes-qt/examples/qt5nmapper_1.0.bb
-@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "607fbf4c448f00d3c563f9ef8a582bcb6e8fe550e80b56bf8d9127a417
- 
- S = "${WORKDIR}/Qt5_NMapper_1.0"
- 
--require recipes-qt/qt5/qt5.inc
-+inherit qt5-module
- 
- do_install() {
-     install -d ${D}${datadir}/${P}
-diff --git a/recipes-qt/examples/qtsmarthome_1.0.bb b/recipes-qt/examples/qtsmarthome_1.0.bb
-index 944c4dc..3af01f4 100644
---- a/recipes-qt/examples/qtsmarthome_1.0.bb
-+++ b/recipes-qt/examples/qtsmarthome_1.0.bb
-@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "fceaa813c33e462bad6c0383eaef81a6f6e586c15d1fa73898173b517f
- 
- S = "${WORKDIR}/smarthome_src"
- 
--require recipes-qt/qt5/qt5.inc
-+inherit qt5-module
- 
- do_install() {
-     install -d ${D}${datadir}/${P}
-diff --git a/recipes-qt/examples/quitbattery_1.0.0.bb b/recipes-qt/examples/quitbattery_1.0.0.bb
-index ea218d7..a8fb77d 100644
---- a/recipes-qt/examples/quitbattery_1.0.0.bb
-+++ b/recipes-qt/examples/quitbattery_1.0.0.bb
-@@ -12,7 +12,7 @@ SRC_URI[sha256sum] = "38dcb7630553c397f9d8a53c6411b1a6237956ed8dd4859e01487b1dd8
- 
- S = "${WORKDIR}/QUItBattery_1.0.0"
- 
--require recipes-qt/qt5/qt5.inc
-+inherit qt5-module
- 
- do_install() {
-     install -d ${D}${datadir}/${P}
-diff --git a/recipes-qt/examples/quitindicators_1.0.1.bb b/recipes-qt/examples/quitindicators_1.0.1.bb
-index 19a861a..0377350 100644
---- a/recipes-qt/examples/quitindicators_1.0.1.bb
-+++ b/recipes-qt/examples/quitindicators_1.0.1.bb
-@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "db84112adbde9b6f28c129e8fb37a6912f4bc34bed18e57f570fb78ea0
- 
- S = "${WORKDIR}/QUItIndicators_1.0.1"
- 
--require recipes-qt/qt5/qt5.inc
-+inherit qt5-module
- 
- do_install() {
-     install -d ${D}${datadir}/${P}
-diff --git a/recipes-qt/libconnman-qt/libconnman-qt5_git.bb b/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
-index f79dc0c..fcd7cbf 100644
---- a/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
-+++ b/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
-@@ -1,4 +1,4 @@
--require recipes-qt/qt5/qt5.inc
-+inherit qt5-module
- 
- SUMMARY = "Qt Library for ConnMan"
- HOMEPAGE = "https://github.com/nemomobile/libconnman-qt"
-diff --git a/recipes-qt/qt5/qt3d_git.bb b/recipes-qt/qt5/qt3d_git.bb
-index 62f17e1..e658690 100644
---- a/recipes-qt/qt5/qt3d_git.bb
-+++ b/recipes-qt/qt5/qt3d_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "GFDL-1.3 & LGPL-2.1 & DIGIA-TPLA-2.4 | GPL-3.0"
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 33620cb..92faf29 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconnectivity_git.bb
-index c758d04..688d844 100644
---- a/recipes-qt/qt5/qtconnectivity_git.bb
-+++ b/recipes-qt/qt5/qtconnectivity_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
-diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/qtdeclarative_git.bb
-index d186705..273891b 100644
---- a/recipes-qt/qt5/qtdeclarative_git.bb
-+++ b/recipes-qt/qt5/qtdeclarative_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # There are no LGPLv3-only licensed files in this component.
-diff --git a/recipes-qt/qt5/qtenginio_git.bb b/recipes-qt/qt5/qtenginio_git.bb
-index a0aff8f..2edc931 100644
---- a/recipes-qt/qt5/qtenginio_git.bb
-+++ b/recipes-qt/qt5/qtenginio_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-diff --git a/recipes-qt/qt5/qtgraphicaleffects_git.bb b/recipes-qt/qt5/qtgraphicaleffects_git.bb
-index 9da5c94..0641f80 100644
---- a/recipes-qt/qt5/qtgraphicaleffects_git.bb
-+++ b/recipes-qt/qt5/qtgraphicaleffects_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # There are no LGPLv3-only licensed files in this component.
-diff --git a/recipes-qt/qt5/qtimageformats_git.bb b/recipes-qt/qt5/qtimageformats_git.bb
-index 31d4fb0..17784c0 100644
---- a/recipes-qt/qt5/qtimageformats_git.bb
-+++ b/recipes-qt/qt5/qtimageformats_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
-diff --git a/recipes-qt/qt5/qtlocation_git.bb b/recipes-qt/qt5/qtlocation_git.bb
-index 12416bb..0264b93 100644
---- a/recipes-qt/qt5/qtlocation_git.bb
-+++ b/recipes-qt/qt5/qtlocation_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
-diff --git a/recipes-qt/qt5/qtmultimedia_git.bb b/recipes-qt/qt5/qtmultimedia_git.bb
-index bab9bee..abaa28f 100644
---- a/recipes-qt/qt5/qtmultimedia_git.bb
-+++ b/recipes-qt/qt5/qtmultimedia_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # There are no LGPLv3-only licensed files in this component.
-diff --git a/recipes-qt/qt5/qtquick1_git.bb b/recipes-qt/qt5/qtquick1_git.bb
-index 928963b..994d0bc 100644
---- a/recipes-qt/qt5/qtquick1_git.bb
-+++ b/recipes-qt/qt5/qtquick1_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # There are no LGPLv3-only licensed files in this component.
-diff --git a/recipes-qt/qt5/qtquickcontrols_git.bb b/recipes-qt/qt5/qtquickcontrols_git.bb
-index af11119..769c191 100644
---- a/recipes-qt/qt5/qtquickcontrols_git.bb
-+++ b/recipes-qt/qt5/qtquickcontrols_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
-diff --git a/recipes-qt/qt5/qtscript_git.bb b/recipes-qt/qt5/qtscript_git.bb
-index 5751e20..6c1c20c 100644
---- a/recipes-qt/qt5/qtscript_git.bb
-+++ b/recipes-qt/qt5/qtscript_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # There are no LGPLv3-only licensed files in this component.
-diff --git a/recipes-qt/qt5/qtsensors_git.bb b/recipes-qt/qt5/qtsensors_git.bb
-index ec33355..ee1f579 100644
---- a/recipes-qt/qt5/qtsensors_git.bb
-+++ b/recipes-qt/qt5/qtsensors_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # There are no LGPLv3-only licensed files in this component.
-diff --git a/recipes-qt/qt5/qtserialport_git.bb b/recipes-qt/qt5/qtserialport_git.bb
-index c59eef6..19748c2 100644
---- a/recipes-qt/qt5/qtserialport_git.bb
-+++ b/recipes-qt/qt5/qtserialport_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # text of LGPL_EXCEPTION.txt and LICENSE.FDL is slightly different than what
-diff --git a/recipes-qt/qt5/qtsvg_git.bb b/recipes-qt/qt5/qtsvg_git.bb
-index 1dce8c6..6350b38 100644
---- a/recipes-qt/qt5/qtsvg_git.bb
-+++ b/recipes-qt/qt5/qtsvg_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # There are no LGPLv3-only licensed files in this component.
-diff --git a/recipes-qt/qt5/qtsystems_git.bb b/recipes-qt/qt5/qtsystems_git.bb
-index edc0360..6bde2af 100644
---- a/recipes-qt/qt5/qtsystems_git.bb
-+++ b/recipes-qt/qt5/qtsystems_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "GFDL-1.3 & LGPL-2.1 | GPL-3.0"
-diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/qttools_git.bb
-index a4f63c7..e27d6ef 100644
---- a/recipes-qt/qt5/qttools_git.bb
-+++ b/recipes-qt/qt5/qttools_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-diff --git a/recipes-qt/qt5/qttranslations_git.bb b/recipes-qt/qt5/qttranslations_git.bb
-index 9341453..75130b7 100644
---- a/recipes-qt/qt5/qttranslations_git.bb
-+++ b/recipes-qt/qt5/qttranslations_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "(LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-index 0be7afe..83cdbf4 100644
---- a/recipes-qt/qt5/qtwayland_git.bb
-+++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # There are no LGPLv3-only licensed files in this component.
-diff --git a/recipes-qt/qt5/qtwebchannel_git.bb b/recipes-qt/qt5/qtwebchannel_git.bb
-index 8433652..ce5f2fe 100644
---- a/recipes-qt/qt5/qtwebchannel_git.bb
-+++ b/recipes-qt/qt5/qtwebchannel_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # There are no LGPLv3-only licensed files in this component.
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index 4b89ddd..3bd75af 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -25,7 +25,7 @@ inherit gettext
- inherit pythonnative
- inherit perlnative
- 
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # To avoid trouble start with not separated build directory
-diff --git a/recipes-qt/qt5/qtwebkit-examples_git.bb b/recipes-qt/qt5/qtwebkit-examples_git.bb
-index 5fd6436..f98dd63 100644
---- a/recipes-qt/qt5/qtwebkit-examples_git.bb
-+++ b/recipes-qt/qt5/qtwebkit-examples_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # There are no LGPLv3-only licensed files in this component.
-diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
-index db1a098..674d8ed 100644
---- a/recipes-qt/qt5/qtwebkit_git.bb
-+++ b/recipes-qt/qt5/qtwebkit_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "BSD & LGPLv2+ | GPL-2.0"
-diff --git a/recipes-qt/qt5/qtwebsockets_git.bb b/recipes-qt/qt5/qtwebsockets_git.bb
-index 85e9156..bd77d52 100644
---- a/recipes-qt/qt5/qtwebsockets_git.bb
-+++ b/recipes-qt/qt5/qtwebsockets_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "GFDL-1.3 & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-diff --git a/recipes-qt/qt5/qtx11extras_git.bb b/recipes-qt/qt5/qtx11extras_git.bb
-index 6f60f2b..6428711 100644
---- a/recipes-qt/qt5/qtx11extras_git.bb
-+++ b/recipes-qt/qt5/qtx11extras_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
-diff --git a/recipes-qt/qt5/qtxmlpatterns_git.bb b/recipes-qt/qt5/qtxmlpatterns_git.bb
-index da2255a..98bab6e 100644
---- a/recipes-qt/qt5/qtxmlpatterns_git.bb
-+++ b/recipes-qt/qt5/qtxmlpatterns_git.bb
-@@ -1,4 +1,4 @@
--require qt5.inc
-+inherit qt5-module
- require qt5-git.inc
- 
- # There are no LGPLv3-only licensed files in this component.
+ inherit populate_sdk populate_sdk_qt5
++
++TOOLCHAIN_HOST_TASK += "nativesdk-packagegroup-qt5-toolchain-host"
++TOOLCHAIN_TARGET_TASK += "packagegroup-qt5-toolchain-target"
++FEATURE_PACKAGES_qtcreator-debug = "packagegroup-qt5-qtcreator-debug"
 -- 
 1.9.1
 
