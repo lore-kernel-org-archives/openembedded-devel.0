@@ -1,41 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F03276A33
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AD6B6AC1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 12:46:26 +0000 (UTC)
-Received: by widdq5 with SMTP id dq5so49112972wid.1
+	Mon, 24 Aug 2015 13:38:15 +0000 (UTC)
+Received: by wicne3 with SMTP id ne3so72615047wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 05:46:26 -0700 (PDT)
+	Mon, 24 Aug 2015 06:38:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=7jcrqCL7xBv54rnQLgiCTsqbg1zG6hPSzY/VAh9+9+8=;
-	b=eGw6dO9b0XyJy+vfaC8yRjaj6JbtYILyJnpkJRPq8oFBlb1hAFQswHKaSZ9WLyXgPy
-	IXO3wVF65tYluh7sD7h0sYMzGQts5ZqX0teJXLHwiJJmROkaSazuYioHxUXUX8Atmwot
-	+fqhGBjNw2mJi9uDqpynSsa0lIlTJxFWJHV9fxuwNSv5RJGaSUI2tst/B1jRviYPuDAF
-	Wj5NVOl+M65FtBVhjX4eltFDS8uGAX2nCBJScSeiLS2cqMPIkXdpiwd3hIT2xsVuOALb
-	44bsMB7LFEDzkTRfk2GFLGRQfJYiMkcfs6/YfA2eww/Dw4nbOJkcrJSSV81mQmf+O9JD
-	Q/vA==
-X-Received: by 10.180.23.66 with SMTP id k2mr29081335wif.85.1440420386819;
-	Mon, 24 Aug 2015 05:46:26 -0700 (PDT)
+	bh=VVn/60n403dpTyrYPF8z8koMqmIQVYHU4keRKnKUu88=;
+	b=mHlhikV5WPCbL5Tsi699KgWaHXnwywpa/W7DvrldfLIiDdL+v0rhcMX8aqSzmxG8vH
+	OYGpT/hoXzjejw+PSidO4/4AFH3JX4FCu82A2dQePlXVkX+W8yjVaeAuqSeMuyM7gBBu
+	wPVxdyE1JfDPKyCeWLDuzKRROLaePCdTYNFMhxU37vtt7DEp+g1UXPG80+k7lCeRfgaw
+	izeTngixquIGBae18nY1zaQNFHecdxbFLwJHG0jnBJr8PwjRWzh6VjqvCUle+eGUx8oX
+	9m08cUVkLLad2gxkluuAPrh7P/IFxJhZKOTVDrEavlN/QD5FG+PK0RLML5T51mJxHavF
+	TLJg==
+X-Received: by 10.180.96.230 with SMTP id dv6mr29777716wib.23.1440423495635;
+	Mon, 24 Aug 2015 06:38:15 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	fn8sm16077602wib.2.2015.08.24.05.46.23
+	lq9sm23272862wjb.35.2015.08.24.06.38.06
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Aug 2015 05:46:25 -0700 (PDT)
+	Mon, 24 Aug 2015 06:38:06 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 24 Aug 2015 14:46:28 +0200
+Date: Mon, 24 Aug 2015 15:38:11 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150824124628.GF2446@jama>
-References: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
-	<805439ad0b3909810c1eb60a9d9b568062e160d4.1440407387.git.samuli.piippo@theqtcompany.com>
+Message-ID: <20150824133811.GG2446@jama>
+References: <1440410841-15017-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<1440410841-15017-3-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <805439ad0b3909810c1eb60a9d9b568062e160d4.1440407387.git.samuli.piippo@theqtcompany.com>
+In-Reply-To: <1440410841-15017-3-git-send-email-leimaohui@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-qt5][PATCH 07/11] qttools: use one recipe for all compilations
+Subject: Re: [meta-oe][PATCH v6 2/6] konkretcmpi: add new recipe for openlmi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,157 +49,283 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2015 12:46:27 -0000
-X-Groupsio-MsgNum: 56947
+X-List-Received-Date: Mon, 24 Aug 2015 13:38:20 -0000
+X-Groupsio-MsgNum: 56948
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="oPmsXEqKQNHCSXW7"
+	protocol="application/pgp-signature"; boundary="I3tAPq1Rm2pUxvsp"
 Content-Disposition: inline
 
---oPmsXEqKQNHCSXW7
+--I3tAPq1Rm2pUxvsp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 24, 2015 at 12:13:53PM +0300, Samuli Piippo wrote:
-> Instead of separate recipes for target, native and nativesdk, use
-> one recipe with BBCLASSEXTEND in place.
+On Mon, Aug 24, 2015 at 06:07:17PM +0800, Lei Maohui wrote:
+> Konkretcmpi is dependence of openlmi.
 >=20
-> Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
+> Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 > ---
->  recipes-qt/qt5/nativesdk-qttools_git.bb | 45 ---------------------------=
-------
->  recipes-qt/qt5/qttools-native_git.bb    | 26 -------------------
->  recipes-qt/qt5/qttools_git.bb           |  9 ++++++-
->  3 files changed, 8 insertions(+), 72 deletions(-)
->  delete mode 100644 recipes-qt/qt5/nativesdk-qttools_git.bb
->  delete mode 100644 recipes-qt/qt5/qttools-native_git.bb
+>  .../konkretcmpi/konkretcmpi-native_0.9.2.bb        | 28 ++++++++++++++++
+>  ...txt-fix-lib64-can-not-be-shiped-in-64bit-.patch | 31 ++++++++++++++++=
+++
+>  ...x-lib64-can-not-be-shiped-in-64bit-target.patch | 36 ++++++++++++++++=
+++++
+>  ...-0.9.2-fix-returning-instance-from-method.patch | 38 ++++++++++++++++=
+++++++
+>  .../konkretcmpi/konkretcmpi_0.9.2.bb               | 34 ++++++++++++++++=
++++
+>  5 files changed, 167 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi-nati=
+ve_0.9.2.bb
+>  create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001=
+-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64bit-.patch
+>  create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001=
+-to-fix-lib64-can-not-be-shiped-in-64bit-target.patch
+>  create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konk=
+retcmpi-0.9.2-fix-returning-instance-from-method.patch
+>  create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.=
+2.bb
 >=20
-> diff --git a/recipes-qt/qt5/nativesdk-qttools_git.bb b/recipes-qt/qt5/nat=
-ivesdk-qttools_git.bb
-> deleted file mode 100644
-> index 73e5d22..0000000
-> --- a/recipes-qt/qt5/nativesdk-qttools_git.bb
-> +++ /dev/null
-> @@ -1,45 +0,0 @@
-> -LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | =
-LGPL-3.0)"
-> -LIC_FILES_CHKSUM =3D " \
-> -    file://LICENSE.LGPLv21;md5=3Dd87ae0d200af76dca730d911474cbe5b \
-> -    file://LICENSE.LGPLv3;md5=3Dffcfac38a32c9ebdb8ff768fa1702478 \
-> -    file://LGPL_EXCEPTION.txt;md5=3D0145c4d1b6f96a661c2c139dfb268fb6 \
-> -    file://LICENSE.FDL;md5=3D6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
-> -"
-> -
-> -QT_MODULE =3D "qttools"
-> -
-> -DEPENDS =3D "nativesdk-qtbase qtbase-native"
-> -
-> -require nativesdk-qt5.inc
-> -require qt5-git.inc
-> -
-> -# it's already included with newer oe-core, but include it here for dylan
-> -FILESEXTRAPATHS =3D. "${FILE_DIRNAME}/qttools:"
-> -
-> -SRC_URI +=3D "file://0001-Allow-to-build-only-lrelease-lupdate-lconvert.=
-patch"
-> -
-> -PACKAGE_DEBUG_SPLIT_STYLE =3D "debug-without-src"
-> -
-> -FILES_${PN}-dbg =3D " \
-> -    ${OE_QMAKE_PATH_BINS}/.debug \
-> -"
-> -
-> -FILES_${PN} =3D " \
-> -    ${OE_QMAKE_PATH_BINS}/* \
-> -"
-> -
-> -do_configure() {
-> -    ${OE_QMAKE_QMAKE} ${OE_QMAKE_DEBUG_OUTPUT} -r ${S} CONFIG+=3Dlinguis=
-tonly
-> -}
-> -
-> -do_install() {
-> -    # Fix install paths for all
-> -    find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR=
-_HOST},(INSTALL_ROOT),g"
-> -
-> -    oe_runmake install INSTALL_ROOT=3D${D}
-> -
-> -    # remove things unused in nativesdk
-> -    rm -rf ${D}${libdir}
-> -}
-> -
-> -SRCREV =3D "a6ed9b418d1b4464f088b378e5bdb96ec420db6c"
-> diff --git a/recipes-qt/qt5/qttools-native_git.bb b/recipes-qt/qt5/qttool=
-s-native_git.bb
-> deleted file mode 100644
-> index 13e1b79..0000000
-> --- a/recipes-qt/qt5/qttools-native_git.bb
-> +++ /dev/null
-> @@ -1,26 +0,0 @@
-> -DEPENDS =3D "qtbase-native"
-> -
-> -LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | =
-LGPL-3.0)"
-> -LIC_FILES_CHKSUM =3D " \
-> -    file://LICENSE.LGPLv21;md5=3Dd87ae0d200af76dca730d911474cbe5b \
-> -    file://LICENSE.LGPLv3;md5=3Dffcfac38a32c9ebdb8ff768fa1702478 \
-> -    file://LGPL_EXCEPTION.txt;md5=3D0145c4d1b6f96a661c2c139dfb268fb6 \
-> -    file://LICENSE.FDL;md5=3D6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
-> -"
-> -
-> -QT_MODULE =3D "qttools"
-> -
-> -require qt5-native.inc
-> -require qt5-git.inc
-> -
-> -SRC_URI +=3D "file://0001-Allow-to-build-only-lrelease-lupdate-lconvert.=
-patch"
-> -
-> -do_configure() {
-> -    ${OE_QMAKE_QMAKE} ${OE_QMAKE_DEBUG_OUTPUT} -r ${S} CONFIG+=3Dlinguis=
-tonly
-> -}
-> -
-> -do_install() {
-> -    oe_runmake install INSTALL_ROOT=3D${D}
-> -}
-> -
-> -SRCREV =3D "a6ed9b418d1b4464f088b378e5bdb96ec420db6c"
-> diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/qttools_git.bb
-> index e27d6ef..51690ac 100644
-> --- a/recipes-qt/qt5/qttools_git.bb
-> +++ b/recipes-qt/qt5/qttools_git.bb
-> @@ -9,9 +9,11 @@ LIC_FILES_CHKSUM =3D " \
->      file://LICENSE.FDL;md5=3D6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
->  "
-> =20
-> -DEPENDS +=3D "qtbase qtdeclarative qtxmlpatterns"
-> +DEPENDS +=3D "qtbase"
-> +DEPENDS_class-target =3D "qtdeclarative qtxmlpatterns"
-> =20
->  SRC_URI +=3D " \
-> +    file://0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch \
->      file://0002-assistant-help-fix-linking-of-dependent-libraries.patch \
->      file://0003-add-noqtwebkit-configuration.patch \
->  "
-> @@ -24,4 +26,9 @@ PACKAGECONFIG[qtwebkit] =3D ",,qtwebkit"
-> =20
->  EXTRA_QMAKEVARS_PRE +=3D "${@base_contains('PACKAGECONFIG', 'qtwebkit', =
-'', 'CONFIG+=3Dnoqtwebkit', d)}"
-> =20
-> +EXTRA_QMAKEVARS_PRE_class-native +=3D "CONFIG+=3Dlinguistonly"
-> +EXTRA_QMAKEVARS_PRE_class-nativesdk +=3D "CONFIG+=3Dlinguistonly"
-
-Use PACKAGECONFIG to restrict native and nativesdk builds to
-linguistonly.
-
+> diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.=
+2.bb b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
+> new file mode 100644
+> index 0000000..d04c103
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
+> @@ -0,0 +1,28 @@
+> +SUMMARY =3D "Tool for rapid CMPI providers development"
+> +DESCRIPTION =3D "\
+> +KonkretCMPI makes CMPI provider development easier by generating type-sa=
+fe \
+> +concrete CIM interfaces from MOF definitions and by providing default \
+> +implementations for many of the provider operations."
+> +HOMEPAGE =3D "https://github.com/rnovacek/konkretcmpi"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df673270bfc350d9ce1efc8724c6c1=
+873"
+> +DEPENDS =3D "cmake-native cmpi-bindings-native"
 > +
->  SRCREV =3D "a6ed9b418d1b4464f088b378e5bdb96ec420db6c"
+> +SRC_URI =3D "https://github.com/rnovacek/${BPN}/archive/${PV}/${BP}.tar.=
+gz \
+
+Don't use github archives
+
+> +           file://konkretcmpi-0.9.2-fix-returning-instance-from-method.p=
+atch \
+> +           file://0001-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64b=
+it-.patch "
 > +
-> +BBCLASSEXTEND =3D "native nativesdk"
+> +SRC_URI[md5sum] =3D "7e8ed4f47d1a9e5cbed4208920f89d64"
+> +SRC_URI[sha256sum] =3D "2ac52fc374e46d68317194bbd6b44e0b2f934df24b201efb=
+395d3eccf0fed634"
+> +
+> +inherit native cmake
+> +LDFLAGS_append =3D "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', ' =
+-fuse-ld=3Dbfd ', '', d)}"
+> +
+> +EXTRA_OECMAKE =3D "-DWITH_PYTHON=3DON \
+> +                 ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFF=
+IX=3D64", "", d)} \
+> +                 ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFF=
+IX=3D32", "", d)} \
+> +                "
+> +
+> +do_install_append() {
+> +    rm -rf ${D}${datadir}
+> +}
+> diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-CMakeL=
+ists.txt-fix-lib64-can-not-be-shiped-in-64bit-.patch b/meta-oe/recipes-exte=
+nded/konkretcmpi/konkretcmpi/0001-CMakeLists.txt-fix-lib64-can-not-be-shipe=
+d-in-64bit-.patch
+> new file mode 100644
+> index 0000000..40a0643
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-CMakeLists.tx=
+t-fix-lib64-can-not-be-shiped-in-64bit-.patch
+> @@ -0,0 +1,31 @@
+> +From d97ac2bf2ed9c84ffd65ff10989068b202e09fdf Mon Sep 17 00:00:00 2001
+> +From: Lei Maohui <leimaohui@cn.fujitsu.com>
+> +Date: Mon, 3 Aug 2015 00:29:54 +0900
+> +Subject: [PATCH] CMakeLists.txt: fix lib64 can not be shiped in 64bit ta=
+rget
+> +
+> +Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+> +---
+> + CMakeLists.txt | 7 -------
+> + 1 file changed, 7 deletions(-)
+> +
+> +diff --git a/CMakeLists.txt b/CMakeLists.txt
+> +index be544d1..14696e4 100644
+> +--- a/CMakeLists.txt
+> ++++ b/CMakeLists.txt
+> +@@ -11,13 +11,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cma=
+ke/modules ${CMAKE_MODULE_P
+> +=20
+> + find_package(CMPI)
+> +=20
+> +-# Set LIB_SUFFIX to 64 on 64bit architectures
+> +-if(CMAKE_SIZEOF_VOID_P EQUAL 4)
+> +-    set(LIB_SUFFIX "")
+> +-else(CMAKE_SIZEOF_VOID_P EQUAL 4)
+> +-    set(LIB_SUFFIX 64)
+> +-endif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+> +-
+> + option(WITH_PYTHON "Build experimental Python bindings" OFF)
+> +=20
+> + add_subdirectory(cmake)
+> +--=20
+> +1.8.4.2
+> +
+> diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-to-fix=
+-lib64-can-not-be-shiped-in-64bit-target.patch b/meta-oe/recipes-extended/k=
+onkretcmpi/konkretcmpi/0001-to-fix-lib64-can-not-be-shiped-in-64bit-target.=
+patch
+> new file mode 100644
+> index 0000000..7da13ee
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-to-fix-lib64-=
+can-not-be-shiped-in-64bit-target.patch
+> @@ -0,0 +1,36 @@
+> +From f3c39fd2a4b5f53338b5f821788c63858bf860cf Mon Sep 17 00:00:00 2001
+> +From: Lei Maohui <leimaohui@cn.fujitsu.com>
+> +Date: Sun, 2 Aug 2015 22:08:43 +0900
+> +Subject: [PATCH] to fix lib64 can not be shiped in 64bit target
+> +
+> +To fix the warning as following:
+> +WARNING: QA Issue: konkretcmpi: Files/directories were installed but not=
+ shipped in any package:
+> +  /usr/lib64
+> +  /usr/lib64/libkonkret.so
+> +  /usr/lib64/libkonkret.so.0.0.1
+> +  /usr/lib64/libkonkret.so.0
+> +  /usr/lib64/libkonkretmof.so.0.0.1
+> +  /usr/lib64/libkonkretmof.so
+> +  ...
+> +
+> +Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+> +---
+> + cmake/modules/FindKonkretCMPI.cmake | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/cmake/modules/FindKonkretCMPI.cmake b/cmake/modules/FindKon=
+kretCMPI.cmake
+> +index b888cfd..097caed 100644
+> +--- a/cmake/modules/FindKonkretCMPI.cmake
+> ++++ b/cmake/modules/FindKonkretCMPI.cmake
+> +@@ -9,7 +9,7 @@ find_path(KONKRETCMPI_INCLUDE_DIR
+> + find_library(KONKRETCMPI_LIBRARY
+> +     NAMES konkret
+> +     HINTS $ENV{KONKRETCMPI_LIB_DIR}
+> +-    PATH_SUFFIXES lib64 lib
+> ++    PATH_SUFFIXES lib lib64
+> +     PATHS /usr /usr/local
+> + )
+> +=20
+> +--=20
+> +1.8.4.2
+> +
+> diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi=
+-0.9.2-fix-returning-instance-from-method.patch b/meta-oe/recipes-extended/=
+konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-metho=
+d.patch
+> new file mode 100644
+> index 0000000..b54d091
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-=
+fix-returning-instance-from-method.patch
+> @@ -0,0 +1,38 @@
+> +Port from Fedora20
+> +
+> +    | commit aca6c7f910ffe9930b5789969f0adfadd668bb46
+> +    | Author: Michal Minar <miminar@redhat.com>
+> +    | Date:   Fri Jun 20 10:50:45 2014 +0200
+> +    |=20
+> +    |     Fix returning instance as an output argument from method
+> +    |    =20
+> +    |     Submitted By: Radek Novacek <rnovacek@redhat.com>
+> +
+> +Upstream-Status: Pending
+> +Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> +
+> +diff --git a/src/program/main.cpp b/src/program/main.cpp
+> +index 885dc12..9e7108a 100644
+> +--- a/src/program/main.cpp
+> ++++ b/src/program/main.cpp
+> +@@ -506,7 +506,11 @@ static void gen_feature_decls(
+> +=20
+> +             // Add sig entry [type][length][name][zero-terminator]
+> +=20
+> +-            KTag tag =3D _ktag(pd->data_type, pd->array_index, key, fal=
+se, false);
+> ++            KTag tag;
+> ++            if (pd->qualifiers->has_key("EmbeddedInstance"))
+> ++                tag =3D _ktag(TOK_INSTANCE, pd->array_index, key, false=
+, false);
+> ++            else
+> ++                tag =3D _ktag(pd->data_type, pd->array_index, key, fals=
+e, false);
+> +             pack_tag(sig, tag);
+> +             pack_name(sig, pd->name);
+> +             count++;
+> +@@ -640,6 +644,7 @@ static void gen_param(FILE* os, MOF_Parameter* p, ve=
+ctor<unsigned char>& sig)
+> +         const char* ktn =3D _ktype_name(p->data_type);
+> +=20
+> +         if (p->qualifiers->has_key("EmbeddedInstance")) {
+> ++            tag =3D _ktag(TOK_INSTANCE, p->array_index, false, in, out);
+> +             if (p->array_index)
+> +                 put(os, "    KInstanceA $0;\n", p->name, NULL);
+> +             else
+> diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb b/=
+meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
+> new file mode 100644
+> index 0000000..5d016e7
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
+> @@ -0,0 +1,34 @@
+> +SUMMARY =3D "Tool for rapid CMPI providers development"
+> +DESCRIPTION =3D "\
+> +KonkretCMPI makes CMPI provider development easier by generating type-sa=
+fe \
+> +concrete CIM interfaces from MOF definitions and by providing default \
+> +implementations for many of the provider operations."
+> +HOMEPAGE =3D "https://github.com/rnovacek/konkretcmpi"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df673270bfc350d9ce1efc8724c6c1=
+873"
+> +DEPENDS =3D "swig sblim-cmpi-devel python cmake-native"
+> +
+> +SRC_URI =3D "git://github.com/rnovacek/konkretcmpi.git \
+> +           file://konkretcmpi-0.9.2-fix-returning-instance-from-method.p=
+atch \
+> +           file://0001-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64b=
+it-.patch \
+> +           "
+> +
+> +SRCREV =3D "460e6421c16a8216d29ccd1b7490f814dab8b769"
+> +S =3D "${WORKDIR}/git"
+> +
+> +inherit cmake
+> +
+> +EXTRA_OECMAKE =3D "-DWITH_PYTHON=3DON \
+> +                 ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFF=
+IX=3D64", "", d)} \
+> +                 ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFF=
+IX=3D32", "", d)} \
+> +                "
+> +
+> +do_install_append() {
+> +    rm -rf ${D}${datadir}
+> +}
+> +
+> +PACKAGES =3D+ "${PN}-python ${PN}-python-dbg"
+> +
+> +FILES_${PN}-python =3D "${libdir}/python2.7/site-packages/konkretmof.py*=
+ ${libdir}/python2.7/site-packages/_konkretmof.so"
+> +FILES_${PN}-python-dbg =3D "${libdir}/python2.7/site-packages/.debug/*"
+> +
 > --=20
-> 1.9.1
+> 1.8.4.2
 >=20
 > --=20
 > _______________________________________________
@@ -210,16 +336,16 @@ linguistonly.
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---oPmsXEqKQNHCSXW7
+--I3tAPq1Rm2pUxvsp
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlXbEiMACgkQN1Ujt2V2gBw6SgCgnmhCGs2Ux8Hr4iZEcx/LLOSM
-riQAoLHeWzC008XjTXtVJI+XQVVbq995
-=G6HT
+iEYEARECAAYFAlXbHkMACgkQN1Ujt2V2gBxUNACfQ04zZxSlDYyaPjxG9G3GPxoL
+w8EAn327ZZJleod9I4JK1+288NL08y7R
+=aZqR
 -----END PGP SIGNATURE-----
 
---oPmsXEqKQNHCSXW7--
+--I3tAPq1Rm2pUxvsp--
