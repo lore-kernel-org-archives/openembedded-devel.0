@@ -1,7 +1,7 @@
 Return-Path: <samuli.piippo@theqtcompany.com>
 Received: from emea01-db3-obe.outbound.protection.outlook.com
 	(mail-db3on0104.outbound.protection.outlook.com [157.55.234.104])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B4A576CBE
+	by mail.openembedded.org (Postfix) with ESMTP id AC1E176CBE
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 25 Aug 2015 11:43:45 +0000 (UTC)
 Authentication-Results: spf=none (sender IP is )
@@ -11,8 +11,8 @@ Received: from piippo.it.local (91.217.248.11) by
 	SMTP Server (TLS) id 15.1.243.23; Tue, 25 Aug 2015 11:43:43 +0000
 From: Samuli Piippo <samuli.piippo@theqtcompany.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 25 Aug 2015 14:43:44 +0300
-Message-ID: <ba0ae7c766dfb10b924e6281e546f3828e315eef.1440502860.git.samuli.piippo@theqtcompany.com>
+Date: Tue, 25 Aug 2015 14:43:45 +0300
+Message-ID: <adfabef1014d271e9ea61356e0d4f3756052ccf9.1440502860.git.samuli.piippo@theqtcompany.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1440502860.git.samuli.piippo@theqtcompany.com>
 References: <cover.1440502860.git.samuli.piippo@theqtcompany.com>
@@ -21,60 +21,61 @@ X-Originating-IP: [91.217.248.11]
 X-ClientProxiedBy: AM3PR08CA0009.eurprd08.prod.outlook.com (25.160.207.147) To
 	AM3PR02MB1172.eurprd02.prod.outlook.com (25.163.183.150)
 X-Microsoft-Exchange-Diagnostics: 1; AM3PR02MB1172;
-	2:LD6YG+fNR832dMERLWngCjxEbCOA2nP5ndMEMSV8VXBrocFYFiLJt0xjGyyFXp1MksQ/qKgv6k7L2eBU9RkVGUrsac3b7Yssx4KSWQbiko44ZVYNFaf5YmQXjQNCkH5x/B2DBcHs+QoRmnHcW00EJUHqZgf3iFAcL0xTIlHLqGQ=;
-	3:o3anjTyNqA4Il8b4Hwh2oy/3MEvK6qXg5MPV2hAaNuO3eLV9C4sdIzD5SEQG6HcebE8Ne8vQiI6CLZzP4bOSbWusjTcHVg6pwe4jYOscKgU97KccMq/IJkxoSn3yEnTqxS5u8i8OdJT8994G80Rkyw==;
-	25:qPbSbR6VcQHaqtmc8kwb9gZ3dqpNpIJvXx2JCtOfmShJLuRDT/Vx+xEguEbJVcsimbrR4+S/1Oa3K7UlErMwUd7iSR6qeOtIpJoms2FI8SNZezKPNEpJiEulK6atSOfclrhghhbUa2M16eJqYRhUcwyAeHNAwn5dYY4HjxvXRv25dLegjOPg/k7JuL/Uwj/n4JsXrz6D4kjxO8/R2m+IVq+GW7MJBhmZHcO5xiEYA3/kwWdLkIl9Q9WXM0BFPYD0zLhXS/gUeyVbTnhKI2Pw9w==
+	2:rTxU1KzRRUBkP7cQOMiy7/yvR7G7bsDoi63UaELGMV/YHgPiOlLYcLSVNNQT31aAku7FVhbgil0n9FO9BU6r0DGqUB2gJbHCIohobnLpDiWTPG9/2gd77fBcxl8BJkMtyJsFVtr50FZsOBgLmKY3EPQwFnMj/SfuHilkLjdHic8=;
+	3:uClgDW6pOGHjTgsyGIZbqNoBxR0QnAEqs9cWMSWfp8zDFNbZD9M0fgoRJWaHR4H6oADaed+sLL8dbfUBcjM8ZgopyB05rzMOn7wsnmn2W5s0Qnlud6nfnb1AfdEDM++N/6zwdrbgbevEaotu23YXPQ==;
+	25:E8s86vouroa2v2BG34EN7iNK1bXmJDJv4DpQCneb5G8uf6jZcFUh1fmMJeKRNeq1wqX4P92ZSlRZAkDIV5oDYvPhaocRTDyMbJMl7riuIVCEWuSVHUdxNVOmFklr4wBLDlndqR+QYCVoNTxg9/iTIlJCkzyWDNLY46jJdnadZ+7Yip6nOjWtZcGN5IG72IwvTENuvJjnVARmprHpnbqijBBOuz4INFSJYZrSOfhukE+rwU7llWRe5JF+kKVZbIVPqvSDq6GT7hVrjqPei9QoDg==
 X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:AM3PR02MB1172;
 X-Microsoft-Exchange-Diagnostics: 1; AM3PR02MB1172;
-	20:QLtIWhxwJiKPoXBILuM+cZEKQKoRJhDeiXb3nASvjNwE06DH/JKaipfRBEafOZJur+/um7WuUI3vrjgelM2IfgkU+OEdJltkwSZ5t+TREnDCVTBNmm6I7RNo52EtvYttNC7EKfPX7KJJOS1ezgASLrXR+l9t1DLhDSpcsc3kX/Dtmy9qwgKHUkS+bEYOUPlGoTfJL5Y2s3/ycUCvd9nYR7Otuj5fMTCvOmmJmVwuSBOV19pewxfh2BP4voNjve4jht7ZxR7xobrF3ubFgU0AY1jtg9js8B4soQIQ5vX9fqOHZHBIlyj194K2BuV16IXQG11yXYwcnXWFixO5eHqEa9r8va0k2AkMovxJVC8lzoxsengBD7T/bSBWEIpeEw0k43f2jTlvnGgzmmA3nF+3Byend4RdGKxF3RVv5AeK5SUhLRHad2xHv2MjZIolY5CmWRwKKLO7fVJs6cR4R9+MfGVgpG1ObjMu3sseD4zUgk8rKKZFYWNoaDp4aERUr9kR;
-	4:hs60iTWJjN9Qe0IfUVjXRjef9KQ/r/zBnPuNXPloGk6tiRMmK8puHGlz4fEyRxpVifYHERMwKoWyaif3l3t7TblKxkpaWgIco9M3pkyCES8Mk8D5NJm/N+hfENmT7BjHUtlpL9c11UEajOC9W7nhPXzSO0hDV8OSJ/UGCg9KKQvKR6aXQvH1REUxReZByWVQS/IUajaBXAomlwhq2qmWGG5XW1xmVOC5KS7psYh8mWMZFKQEgC0iyYGXHypMNnv0mEluB7q8cK76NOHnyW36TO1WitWILd2NLb4TNStIQvesnUMePosSvbMeC1zJIci4
-X-Microsoft-Antispam-PRVS: <AM3PR02MB11723B3955191DBE6B21BACC90610@AM3PR02MB1172.eurprd02.prod.outlook.com>
+	20:JQrwUyJ6nbr6m9lrzVhVysDJI8UsRiuhG2Ek1bdZRx4DyRnzpsO4uAlLMUBssoRrBtj0DKr9k0m15T/nro5i8Kb4JwLnO3T4EaMzAiiV6bccz8buKuZYvyWG1siYA2ktjvkf5P1MVzn29xxh++MJ8+6VbhIjZuQYy+PmzSL+4gY8zTu2cHn5Tea5Z6uns769VEJTFrPcH2LEWL/faTjnJXhrvq2nT3ha3UJyWn3X+jxOcpbvD8EN1XGhe3CvIYHnVf7OndAEzwYznLfg8e5PvVF16wprpm8KaTTjrPdk+INd0URZviv4E5YgKt2YY4RYFcPU9OVKzga9aF2iypHL9AkdopmrUKuqxF5DlLtNGLMyghF7vCx23iFg0USH+qV9mKqRvg6mVHFcn4+YUy3Wd0AVt9jpWhU9BYTUz/tU0IgwVMXn1u7hTnAr8vKmtL+lKgJXdCNZ8xAbiyevNHtoPdJYDhbMKaAsDls9jHPkOWw2P9YWRWsrcnAJmqnfJ6zr;
+	4:eSfXm8WPbMzidUaO5/C8CE7OpIK/sMwJvhl91mySwVRRZwHmGb439Cte1PqiczYQw6eVaz17c+BYlHauTMeB0YisVPz75baa+47PmA5OlDwz6N8b39Fl0GGSPoP9rbZINThI8BgJtSQ3c4JMYrYOZOEu6p9T8q6p/C7HvCZE5fSxMZ7/7viQKiusWCSq7/LUP3hgkjttybYn6BwllTJ5Sb1PeN0FrWT3sEh9RZKQytDOHsOAqsJ21/obRX8FrExVCz8lsWtW6XVzq8j3/XvSEw0YkXtagEzrGhvWL54eZ1OD3t0aBBd5KZ6flc9ijigs
+X-Microsoft-Antispam-PRVS: <AM3PR02MB117257B4D67EC85E40A0F08990610@AM3PR02MB1172.eurprd02.prod.outlook.com>
 X-Exchange-Antispam-Report-Test: UriScan:;
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
 	RULEID:(601004)(5005006)(8121501046)(3002001);
 	SRVR:AM3PR02MB1172; BCL:0; PCL:0; RULEID:; SRVR:AM3PR02MB1172; 
 X-Forefront-PRVS: 06793E740F
 X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10019020)(6009001)(199003)(189002)(122386002)(46102003)(5001830100001)(2950100001)(66066001)(92566002)(77156002)(50466002)(450100001)(229853001)(97736004)(36756003)(42186005)(77096005)(5004730100002)(33646002)(64706001)(48376002)(86362001)(40100003)(81156007)(118296001)(106356001)(5001920100001)(101416001)(5001860100001)(50226001)(105586002)(4001540100001)(62966003)(2351001)(19580405001)(87976001)(107886002)(68736005)(189998001)(50986999)(19580395003)(47776003)(5001960100002)(5007970100001)(110136002)(76176999)(5003940100001)(7099028)(4001430100001);
+	SFS:(10019020)(6009001)(199003)(189002)(122386002)(575784001)(46102003)(5001830100001)(2950100001)(66066001)(92566002)(77156002)(50466002)(450100001)(229853001)(97736004)(36756003)(42186005)(77096005)(5004730100002)(33646002)(64706001)(48376002)(86362001)(40100003)(81156007)(118296001)(106356001)(5001920100001)(101416001)(5001860100001)(50226001)(105586002)(4001540100001)(62966003)(2351001)(19580405001)(87976001)(107886002)(68736005)(189998001)(50986999)(19580395003)(47776003)(5001960100002)(5007970100001)(110136002)(76176999)(5003940100001)(7099028)(4001430100001);
 	DIR:OUT; SFP:1102; SCL:1; SRVR:AM3PR02MB1172; H:piippo.it.local;
 	FPR:; SPF:None; PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
 Received-SPF: None (protection.outlook.com: theqtcompany.com does not
 	designate permitted sender hosts)
 X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; AM3PR02MB1172;
-	23:kn/YfpiQ1J7DMzyPDSTe0b8j6qWtQKB05CVW8Sepb?=
-	=?us-ascii?Q?FMdiF1rzB9owhFOjIl9cne2MBNiXElIAQTYfF6Vet7xDpW1PsUzV+Nw3XHQQ?=
-	=?us-ascii?Q?BZMu1mXHY+eM7cCF2stgvt2ATqr2bmig2n67n8ywOB2rA4gLk/xX0aj4UzhY?=
-	=?us-ascii?Q?SDC660EEl5BcWF4/+pSfuzmNKWdlyMCXjjH72WDLMZCi3XLo3KDbVr/BN0y0?=
-	=?us-ascii?Q?0celT3DOwWTpKx/6tOtuBkjFQCyGkgANTCW2LXJLm7reqxUdHIZoioyhFojy?=
-	=?us-ascii?Q?IYOkQKYod5gDcPbBhVRKlmEN3Al4sxEBm9GpJ7fmCydqzgpUAd8m6AQ6h5XN?=
-	=?us-ascii?Q?tAYBkh0Zgtumhksh8j+75Z7Vs6oVBiW51eiLZZExxSYBQqYoTktg+3KBWsPA?=
-	=?us-ascii?Q?sWN2q+ntwUGEeBiNj7qRwQ84d8Zzg0OFEIsFBxE9ZukyFk0y2Ufo4fFiGN4o?=
-	=?us-ascii?Q?/psY1Q/udsw230Gi1Kfa/nVmgvz/TWgiq0HfUnXsKcD/X8lWN18PMb6XvWxF?=
-	=?us-ascii?Q?HI73g339jK/ravpnIb1Tu87NuD6QG7/YYLMGvQxW+UXBOdSnY9ajh13UjoWy?=
-	=?us-ascii?Q?QFVhfJMQ3HuuabNLUsie1ybMsZ+uhvKhFMFNTlYoIiVEOOOqCwVN2a6hWDos?=
-	=?us-ascii?Q?jPtI4RCkFpVRpCUrEL7cqGDZBPWfLrydZqigucnyHcOMWJhMJK9LMX709xxl?=
-	=?us-ascii?Q?jDJlnHiT05sbNTh+wu+Pj40sYrJawkWHSj9XEeOq77iMTfw7qcBYIGH5LT8w?=
-	=?us-ascii?Q?Cwr08HifwQy8HdE5NqUsjtKd0I+fm8FRa1revTVZKzzeY5H3YkAFaURk/afe?=
-	=?us-ascii?Q?qS1D4rfYxWFFP4jOfBn7IawFUaEccX+B61seWYpVi3G7cDpJY480MQh7wD+w?=
-	=?us-ascii?Q?AFhr1Q4z2uIhojm32d8+eborDJzYF4kUx5Aksiiwi85hFz31S/Cb7JapGwOw?=
-	=?us-ascii?Q?jDiIozCwr6bZ8RktkeV4sYvLm6klvzKf9c0kdIIIzOaFvH+yPCAGpWEi4Il4?=
-	=?us-ascii?Q?CNiobfqmfufHz2KDd3cx4dcQy2lXBiDF/yndf3/xdcHOxiPaVy6NZG5oQA6k?=
-	=?us-ascii?Q?dPk5mF/xRfYmdLqYU/086WDjamEoZUv1hRQVQ3BRW/LBHCNN3ApzOg7bw/4I?=
-	=?us-ascii?Q?jv4zBPmYinww1D14EqSOvkVc23ZDb0ItHGZJlgbQ+JtVc0NEltMJVbnlp05M?=
-	=?us-ascii?Q?Kl1egtixYR73WSK45/dtwartPSEG6ABIWJ7Ft+ax+Kbv51+8G8ptNCtDFKjj?=
-	=?us-ascii?Q?4ysqdfywLqz92lhX+Asl0Q080qx5LU2RzPVSAGZNkjPakSA7wBnrCnmOciq+?=
-	=?us-ascii?Q?8js4qXb7ibMylC5jBXMQsM=3D?=
+	23:hj48Jepx0LOJfy+duux8f8ZaliLKOnMTEVsTi8svP?=
+	=?us-ascii?Q?Cc9N2ArUii6kN9gR1RNW4ef2lsT4lxyZ74UZyPJygPzDCyZOIU5sd7WMAQVe?=
+	=?us-ascii?Q?6wa4btDQP7znOS8Y2imFP52agvGjciFZzSnl12KWNnR8YCygqUnHAL8Tmmj2?=
+	=?us-ascii?Q?KJcicVbCj39Tx5fU7wmDsE7dFGrkGDmRFC25m6ycwCN3No1y/VOuCSBlvbAK?=
+	=?us-ascii?Q?7NTT6MOU2LFEv5eqToTKVqUs2vJAd2GbfFFH4NzoR/53KRP9P82NQroXAJcH?=
+	=?us-ascii?Q?Vz0CpgvnoTlU2gfaKhVhIOXcg3LrGPBB7fgXSmzIdk7ZvtEa7ifPVIB0a4Rx?=
+	=?us-ascii?Q?Qieqnkj1zr63BYqWhhDDIf83evyWPoAd8S3xfs0E1ptW5gcbHnlqdEAObE16?=
+	=?us-ascii?Q?KkOyaDpN6bJeq7sVZJHUIPF9clzXTLq8kw+osnsBCc4KTcQ1FQ7/Xby+XgeW?=
+	=?us-ascii?Q?VruJnY9gsy0dhn3BtE3VdGIYQAIJtUEDR2Lh7NGOFDpmvFRxqYm5KJIERG9Z?=
+	=?us-ascii?Q?qwOnudbtGvaqgbnQNI9AGTINnCbAJTIV1yqxGbO6B06ucjGCLsjqirJNDlnO?=
+	=?us-ascii?Q?0o86EXRk4iLPuQgvPVMmFVLNNx1wI2ADZm53XybA/mAWof5fq9nIsk5Y7Xr8?=
+	=?us-ascii?Q?8DiAXUbdQIFdIjtUnE+UQKMPPASWJFpTrXCMd9R7F0O8CkdHOkhWyOVakwwL?=
+	=?us-ascii?Q?VABEJvM+KMNVmaOzDfg6ADBeB9Kcwo7ryzK/77kevsWpYhRqY7d3wH4TKxvI?=
+	=?us-ascii?Q?l2Cxruk4ZRNsoFv+BFh3qIwRW2/CF8VfcqXmT6MeaiJHhyLuQ2WE+Z3Td643?=
+	=?us-ascii?Q?2TyCH/vkKtBq0FAM1qBM1RB9SKyx9/dnFYxNyZKegrnIH1oK7JV5rxBprO2I?=
+	=?us-ascii?Q?8qpJxqzWPP9JpQO5EcpMbcnjqeuhS0+LaYyNDyVJbsPYYQUR/fNq3XLd6rqt?=
+	=?us-ascii?Q?UDoIu7FIk4HjRDpSfBhrcvJlNdH39ONd9uABDevnMEI2ZfFwyCdw+gPpYsSt?=
+	=?us-ascii?Q?90+yFBOHwVaP+OpikonADRak0Bip3td3obEg408cYwlM9Og2jgRQrj23SkTV?=
+	=?us-ascii?Q?NQAeffy9eO304EFl5nPSzAIC1uaNDFNDzPCict0oqIW9L3PaEBkvOGR3Mujk?=
+	=?us-ascii?Q?yYpUheKgNPc41oOISmwHBDrbMZJiYoALdq1hJ9hngNoMV281pR3TtYxV83S6?=
+	=?us-ascii?Q?AElgFacvCfYr/sPO7Lrt0qTJq1X++RntygLKGAD3qvfqUf+R7QtYMKl7o9tx?=
+	=?us-ascii?Q?494L577mGb0OnieyQDHmwoA9Q7PcfWubHH65AKHo5v/kSY3QFtVC2ue2sQD/?=
+	=?us-ascii?Q?AjFaWNx3DLfDirYPwZNjrqTTUtBAJCCqxBJrGG6BxyuFpeN5DbcqipeWXkJU?=
+	=?us-ascii?Q?NMh3Q=3D=3D?=
 X-Microsoft-Exchange-Diagnostics: 1; AM3PR02MB1172;
-	5:KjhKxj6qOlUqr2s2aW+kYNfYQZHUQqd3fsk5iO/N+dVKquVk2+ZBDWWLD3YZdD/0hFY+ZSn0Ue5R68ku6yYvGp9OUHQEqUfuQj5ns0S7cQEUMCRkBKpY4yCSVes4vzitb8ZqxMy/iWL+6IzI5VuEvA==;
-	24:dijsQY6kqsGSoCrvUaopvS8WK6xLFEtPzWMTO1fBH0FkhG4RUaI1J+W6p1qEFkKVt5cAX9y6ibdKT8xj36wga/l7ibrKWS6yMjtnVZXAuQE=;
-	20:CQFwLUG/Cxok90Lb3lyv5mfRxA1jAkc8wf64beUBRqcM3p2esquApujPIHXCKxdlVjsOUf9TRq28Bf5rjq6K/Q==
+	5:EuFDnmMHSPB98vn/I5q2KQNvtcclW5UkVQ+eQyi4pYzyZ/sXeHbzW39jmWQU5gaQe6IkwqCveZF81X8HbYvZpCPAju/ik2I+4kQ9DYJHWtnkVRPijoUpbU46T72DjskcFiTKWhkE1vGP/7Jb1uDG6A==;
+	24:jgie6bBx0nuxIQIxMU7wrI40sWUjNe/9IdJCEa7Z0yZzc5IQjUu/j1mwXz2PmEKSAJ/xlErkb3PHB/7NXeowOhXG41cJm7yQOYCVk/D75JQ=;
+	20:FiDssgnQvxcxXzy0nG816+0KTQFJB0GzAlkD3nGbqns4OhgzZWNu5uiocnhJY7AB44s+2o+gUZSz/hOR9ZUv5w==
 SpamDiagnosticOutput: 1:23
 SpamDiagnosticMetadata: NSPM
 X-OriginatorOrg: theqtcompany.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2015 11:43:43.3892 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2015 11:43:43.9517 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM3PR02MB1172
-Subject: [meta-qt5][PATCH v2 02/11] qt5: improve Qt module package handling
+Subject: [meta-qt5][PATCH v2 03/11] qt5: improve support for native and nativesdk modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -88,59 +89,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2015 11:43:45 -0000
+X-List-Received-Date: Tue, 25 Aug 2015 11:43:46 -0000
 Content-Type: text/plain
 
-Make it simpler to add Qt modules to image and toolchain, without need
-to specify each subpackage separately. All Qt modules should provide
-the ${PN} package, so create it even if empty. Make the ${PN} package
-also recommend all subpackages that are normally required at run time,
-namely plugins. Do the same for ${PN}-dev and ${PN}-dbg packages.
+Change qmake.bbclass to support building native and nativesdk packages,
+so that qmake or qt5-module can be inherited and BBCLASSEXTEND used to
+create native and nativesdk packages.
+
+qtxmlpatterns and qtdeclarative native and nativesdk modules are required
+for Qt Quick Compiler.
 
 Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
 ---
- recipes-qt/qt5/qt5.inc | 21 +++++++++++++++++++--
- 1 file changed, 19 insertions(+), 2 deletions(-)
+ classes/qmake5.bbclass              |  8 ++++++++
+ classes/qmake5_base.bbclass         | 11 +++++++++++
+ recipes-qt/qt5/qt5.inc              |  2 +-
+ recipes-qt/qt5/qtdeclarative_git.bb |  2 ++
+ recipes-qt/qt5/qtxmlpatterns_git.bb |  2 ++
+ 5 files changed, 24 insertions(+), 1 deletion(-)
 
+diff --git a/classes/qmake5.bbclass b/classes/qmake5.bbclass
+index b056ea7..2b43f2e 100644
+--- a/classes/qmake5.bbclass
++++ b/classes/qmake5.bbclass
+@@ -13,3 +13,11 @@ do_configure() {
+ do_install() {
+     qmake5_base_do_install
+ }
++
++do_install_class-native() {
++    qmake5_base_native_do_install
++}
++
++do_install_class-nativesdk() {
++    qmake5_base_nativesdk_do_install
++}
+diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+index 44575c4..ffb3103 100644
+--- a/classes/qmake5_base.bbclass
++++ b/classes/qmake5_base.bbclass
+@@ -166,6 +166,17 @@ qmake5_base_do_configure () {
+     ${OE_QMAKE_QMAKE} -makefile -o Makefile ${OE_QMAKE_DEBUG_OUTPUT} ${OE_QMAKE_RECURSIVE} $QMAKE_VARSUBST_PRE $AFTER $PROFILES $QMAKE_VARSUBST_POST || die "Error calling $CMD"
+ }
+ 
++qmake5_base_native_do_install() {
++    oe_runmake install INSTALL_ROOT=${D}
++}
++
++qmake5_base_nativesdk_do_install() {
++    # Fix install paths for all
++    find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_HOST},(INSTALL_ROOT),g"
++
++    oe_runmake install INSTALL_ROOT=${D}
++}
++
+ qmake5_base_do_install() {
+     # Fix install paths for all
+     find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_TARGET},(INSTALL_ROOT),g"
 diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
-index d0309ae..ef849bf 100644
+index ef849bf..4c58ad6 100644
 --- a/recipes-qt/qt5/qt5.inc
 +++ b/recipes-qt/qt5/qt5.inc
-@@ -47,6 +47,24 @@ INSANE_SKIP_${PN}-examples-dev += "libdir"
+@@ -50,7 +50,7 @@ PACKAGES =. "${PN}-qmlplugins-dbg ${PN}-tools-dbg ${PN}-plugins-dbg ${PN}-qmlplu
+ ALLOW_EMPTY_${PN} = "1"
+ ALLOW_EMPTY_${PN}-dbg = "1"
  
- PACKAGES =. "${PN}-qmlplugins-dbg ${PN}-tools-dbg ${PN}-plugins-dbg ${PN}-qmlplugins ${PN}-tools ${PN}-plugins ${PN}-mkspecs ${PN}-examples-dev ${PN}-examples-staticdev ${PN}-examples-dbg ${PN}-examples "
+-RRECOMMENDS_${PN} = " \
++RRECOMMENDS_${PN}_class-target = " \
+     ${PN}-plugins \
+     ${PN}-qmlplugins \
+     "
+diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/qtdeclarative_git.bb
+index 421c482..f9689e6 100644
+--- a/recipes-qt/qt5/qtdeclarative_git.bb
++++ b/recipes-qt/qt5/qtdeclarative_git.bb
+@@ -33,3 +33,5 @@ do_configure_prepend() {
+ EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'qtxmlpatterns', 'CONFIG+=OE_QTXMLPATTERNS_ENABLED', '', d)}"
  
-+ALLOW_EMPTY_${PN} = "1"
-+ALLOW_EMPTY_${PN}-dbg = "1"
+ SRCREV = "cc0df64bb0e1dea2fe37950816095802f527a241"
 +
-+RRECOMMENDS_${PN} = " \
-+    ${PN}-plugins \
-+    ${PN}-qmlplugins \
-+    "
++BBCLASSEXTEND =+ "native nativesdk"
+diff --git a/recipes-qt/qt5/qtxmlpatterns_git.bb b/recipes-qt/qt5/qtxmlpatterns_git.bb
+index cb6bf9d..3c273db 100644
+--- a/recipes-qt/qt5/qtxmlpatterns_git.bb
++++ b/recipes-qt/qt5/qtxmlpatterns_git.bb
+@@ -13,3 +13,5 @@ LIC_FILES_CHKSUM = " \
+ DEPENDS += "qtbase"
+ 
+ SRCREV = "ae6504efc85adf754d60a02f81413e5949282d78"
 +
-+RRECOMMENDS_${PN}-dev = " \
-+    ${PN} \
-+    ${PN}-mkspecs \
-+    "
-+
-+RRECOMMENDS_${PN}-dbg = " \
-+    ${PN}-plugins-dbg \
-+    ${PN}-qmlplugins-dbg \
-+    "
-+
- # extra -dbg packages
- FILES_${PN}-qmlplugins-dbg = " \
-     ${OE_QMAKE_PATH_QML}/*/.debug \
-@@ -138,8 +156,7 @@ FILES_${PN}-staticdev += " \
-     ${OE_QMAKE_PATH_LIBS}/*.a \
- "
- FILES_${PN}-examples = " \
--    ${OE_QMAKE_PATH_EXAMPLES}/README \
--    ${OE_QMAKE_PATH_EXAMPLES}/*/* \
-+    ${OE_QMAKE_PATH_EXAMPLES}/* \
- "
- FILES_${PN}-examples-dev = " \
-     ${OE_QMAKE_PATH_EXAMPLES}/*${SOLIBSDEV} \
++BBCLASSEXTEND =+ "native nativesdk"
 -- 
 1.9.1
 
