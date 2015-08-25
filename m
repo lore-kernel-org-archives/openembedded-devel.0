@@ -1,30 +1,32 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id A94AF73DF0
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 3615 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 25 Aug 2015 15:39:02 UTC
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 4788F73DF0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 13:45:56 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1ZUEXz-0004Df-29 from Joe_MacDonald@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Aug 2015 06:45:55 -0700
-Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
-	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 25 Aug 2015 06:45:54 -0700
-Received: by burninator (Postfix, from userid 1000)	id 846B558347A; Tue, 25
-	Aug 2015 09:45:01 -0400 (EDT)
-Date: Tue, 25 Aug 2015 09:45:01 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20150825134501.GB7593@mentor.com>
-References: <1440436986-30016-1-git-send-email-Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1440436986-30016-1-git-send-email-Martin.Jansa@gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH] tcpdump: add PACKAGECONFIG for smi
+	Tue, 25 Aug 2015 15:39:02 +0000 (UTC)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NTN00BGZ7BYFE50@vms173021.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	25 Aug 2015 09:38:23 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=uRRa74qj2VoA:10
+	a=sozttTNsAAAA:8	a=CLFTUwVk9syMudFOQgEA:9 a=Bb0hTPAH1TY5xhbP:21
+	a=9MjZQO4zWxXRR3kK:21
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 99FF8161BAB;	Tue,
+	25 Aug 2015 10:38:22 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 25 Aug 2015 10:38:13 -0400
+Message-id: <1440513493-23072-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-qt5][PATCH] qtbase: update patch that increases configured path length for nativesdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,79 +40,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2015 13:46:00 -0000
-X-Groupsio-MsgNum: 57020
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RASg3xLB4tUQ4RcS"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 25 Aug 2015 15:39:07 -0000
 
---RASg3xLB4tUQ4RcS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Denys Dmytriyenko <denys@ti.com>
 
-Acked-by: Joe MacDonald <Joe_MacDonald@mentor.com>
+With 5.5, the array of paths got split into at least 3 separate variables,
+but only one of them was increased. Similarly, increase the other 2.
 
-[[oe] [meta-networking][PATCH] tcpdump: add PACKAGECONFIG for smi] On 15.08=
-=2E24 (Mon 19:23) Martin Jansa wrote:
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ ...ump-path-length-from-256-to-512-character.patch | 27 ++++++++++++++--------
+ 1 file changed, 17 insertions(+), 10 deletions(-)
 
-> * libsmi is autodetected in configure, but in most cases disabled because=
- of
->   cross-compilation so keep it explicitly disabled
-> * resolves following difference in builds with and without libsmi built
->   before tcpdump:
->   4.7.4-r0-with/temp/log.do_configure:checking smi.h usability... yes
->   4.7.4-r0-with/temp/log.do_configure:checking smi.h presence... yes
->   4.7.4-r0-with/temp/log.do_configure:checking for smi.h... yes
->   4.7.4-r0-with/temp/log.do_configure:checking for smiInit in -lsmi... yes
->   4.7.4-r0-with/temp/log.do_configure:checking whether to enable libsmi..=
-=2E not when cross-compiling
->=20
->   4.7.4-r0-without/temp/log.do_configure:checking smi.h usability... no
->   4.7.4-r0-without/temp/log.do_configure:checking smi.h presence... no
->   4.7.4-r0-without/temp/log.do_configure:checking for smi.h... no
->=20
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb b/m=
-eta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
-> index b0b8e9d..0ffe589 100644
-> --- a/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
-> +++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
-> @@ -22,6 +22,7 @@ CACHED_CONFIGUREVARS =3D "ac_cv_linux_vers=3D${ac_cv_li=
-nux_vers=3D2}"
->  PACKAGECONFIG ??=3D "openssl ipv6"
->  PACKAGECONFIG[openssl] =3D "--with-crypto=3Dyes, --without-openssl --wit=
-hout-crypto, openssl"
->  PACKAGECONFIG[ipv6] =3D "--enable-ipv6, --disable-ipv6,"
-> +PACKAGECONFIG[smi] =3D "--with-smi, --without-smi,libsmi"
-> =20
->  EXTRA_AUTORECONF +=3D " -I m4"
-> =20
-> --=20
-> 2.5.0
->=20
---=20
--Joe MacDonald.
-:wq
+diff --git a/recipes-qt/qt5/qtbase/0006-configure-bump-path-length-from-256-to-512-character.patch b/recipes-qt/qt5/qtbase/0006-configure-bump-path-length-from-256-to-512-character.patch
+index 91b1353..8f95480 100644
+--- a/recipes-qt/qt5/qtbase/0006-configure-bump-path-length-from-256-to-512-character.patch
++++ b/recipes-qt/qt5/qtbase/0006-configure-bump-path-length-from-256-to-512-character.patch
+@@ -1,29 +1,36 @@
+-From fc3819b1f69278e9d66095d1faf33ae0e5a70eb6 Mon Sep 17 00:00:00 2001
++From fe6405c5a628c168e42138ac82ba70bb8c909d0b Mon Sep 17 00:00:00 2001
+ From: Denys Dmytriyenko <denys@ti.com>
+-Date: Mon, 11 Nov 2013 20:27:30 -0500
+-Subject: [PATCH 06/10] configure: bump path length from 256 to 512 characters
++Date: Tue, 25 Aug 2015 10:05:15 -0400
++Subject: [PATCH] configure: bump path length from 256 to 512 characters
+ 
+ Increase the path length that gets hardcoded into generated config.cpp file
+ from 256 to 512 characters, as nativesdk path can be quite long.
+ 
++Also update length of EXT_PREFIX and HOST_PREFIX now.
++
+ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+ ---
+- configure | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
++ configure | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
+ 
+ diff --git a/configure b/configure
+-index 548dd0d..b8f1fb9 100755
++index 22867a7..fe18487 100755
+ --- a/configure
+ +++ b/configure
+-@@ -3850,7 +3850,7 @@ static const char qt_configure_licensed_products_str [256 + 12] = "qt_lcnsprod=$
++@@ -3851,10 +3851,10 @@ static const char qt_configure_licensed_products_str [256 + 12] = "qt_lcnsprod=$
+  static const char qt_configure_installation          [12+11]    = "qt_instdate=2012-12-20";
+  
+  /* Installation Info */
+ -static const char qt_configure_prefix_path_str       [256 + 12] = "qt_prfxpath=$QT_INSTALL_PREFIX";
+ +static const char qt_configure_prefix_path_str       [512 + 12] = "qt_prfxpath=$QT_INSTALL_PREFIX";
+  #ifdef QT_BUILD_QMAKE
+- static const char qt_configure_ext_prefix_path_str   [256 + 12] = "qt_epfxpath=$QT_EXT_PREFIX";
+- static const char qt_configure_host_prefix_path_str  [256 + 12] = "qt_hpfxpath=$QT_HOST_PREFIX";
++-static const char qt_configure_ext_prefix_path_str   [256 + 12] = "qt_epfxpath=$QT_EXT_PREFIX";
++-static const char qt_configure_host_prefix_path_str  [256 + 12] = "qt_hpfxpath=$QT_HOST_PREFIX";
+++static const char qt_configure_ext_prefix_path_str   [512 + 12] = "qt_epfxpath=$QT_EXT_PREFIX";
+++static const char qt_configure_host_prefix_path_str  [512 + 12] = "qt_hpfxpath=$QT_HOST_PREFIX";
++ #endif
++ 
++ static const short qt_configure_str_offsets[] = {
+ -- 
+-2.5.0
++2.2.0
+ 
+-- 
+2.2.0
 
---RASg3xLB4tUQ4RcS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJV3HFdAAoJEEn8ffcsOfaW9xkIALZWyhZfPOh2rHid5RKLrm62
-YWx/+mToZK45pUIuFt65BYQYAPq6bnzAmY3GsDVg+jYplY469Kk+nh9TGqJ5b1mZ
-3WZur86Xb67esMi40E+n9M181ApsnaEvwDjBUBovW4flEBfuvAPomkVf9DglXtlx
-VNxIMw59PWqydCcRoV/YNsItGVb+9Hz3oXLUyFZuP+nTjqsV59LlIsJyxpkRFgZA
-BGiS4qMItRVjhCqhUFv7Z1+mXWKSsVsM1C/TB9pCUK0gr4dtFR8xo+PPM4hIiGEQ
-Yfm4VF/w/e5hUHLZfqWwNVUJcn+IGoR0i+K/kS6Hdp6rOviixMRQksA/H7Um3JY=
-=mIt0
------END PGP SIGNATURE-----
-
---RASg3xLB4tUQ4RcS--
