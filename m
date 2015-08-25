@@ -1,36 +1,44 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 5ECCB76ABD
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by mail.openembedded.org (Postfix) with ESMTP id D120872B1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 01:12:14 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99974986"
-Received: from bogon (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Aug 2015 09:15:25 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7P1C88X028558
+	Tue, 25 Aug 2015 01:20:59 +0000 (UTC)
+Received: by pacti10 with SMTP id ti10so36505088pac.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 09:12:08 +0800
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0181.006; Tue, 25 Aug 2015 09:12:13 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] sysdig: 0.1.101 -> 0.1.102
-Thread-Index: AQHQ2+0dnJ4thW4x10iZ6LL/Y1oP/J4WEd8AgAXS7WD//4AQgIAAiS3A
-Date: Tue, 25 Aug 2015 01:12:13 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC011C1FA3B4@G08CNEXMBPEKD03.g08.fujitsu.local>
+	Mon, 24 Aug 2015 18:20:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=aN/LWnfrga3zNrAxFvFesQBt+hoa0sp6/m0MLcMMtos=;
+	b=ai9MJTAw6TkxgwnPCF7h4CmeIB2D4vLpHPpnK5JmiQFXELmApWBWOwXisOurD+d4AI
+	Ovy9gIPWlNw30uCLYH4O7zgcCy5dyge0eWQB/mOc4wt2cIHb+ES25eOI3MYGPmcPTkXt
+	njn1R4bzuJZvdngIAu0/kvQrdnX5PuwiC7Yk+D3G7K3wmDHbOG7AZxHg43OgMOXX6D0C
+	KCVo87YcQkiUtJ4fppIk7QX0LdZYXf3ty2aPFSRLIRjTZct5fT+p6X38tPE58I3O612s
+	pmYUdHPBU0QEMvpsSIUIOiGNpp98/gwLqsV9SHd1hXCUDZds/ayMby/zYLm4yiiwTMOt
+	IBvQ==
+X-Received: by 10.66.97.102 with SMTP id dz6mr52083999pab.29.1440465659511;
+	Mon, 24 Aug 2015 18:20:59 -0700 (PDT)
+Received: from ?IPv6:2601:646:8601:4580:4ded:b62b:f72d:209d?
+	([2601:646:8601:4580:4ded:b62b:f72d:209d])
+	by smtp.gmail.com with ESMTPSA id
+	gw3sm18777388pbc.46.2015.08.24.18.20.58
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 24 Aug 2015 18:20:58 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+X-Pgp-Agent: GPGMail 2.5.1
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <30DC4EDFD798C94083F3E083754532CC011C1FA3B4@G08CNEXMBPEKD03.g08.fujitsu.local>
+Date: Mon, 24 Aug 2015 18:20:56 -0700
+Message-Id: <45BEE936-90D2-413F-811F-ADE72F6D3AC4@gmail.com>
 References: <1440175216-21907-1-git-send-email-biannm@cn.fujitsu.com>
 	<CAMKF1spvKJaV0_+JngPLnZWesZ2ELipZ3c=UdOY1v-Nu2yLkBg@mail.gmail.com>
 	<30DC4EDFD798C94083F3E083754532CC011C1FA335@G08CNEXMBPEKD03.g08.fujitsu.local>
 	<F8BECE17-36E1-41F1-8B14-2E0EB99D7BDB@gmail.com>
-In-Reply-To: <F8BECE17-36E1-41F1-8B14-2E0EB99D7BDB@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
-MIME-Version: 1.0
+	<30DC4EDFD798C94083F3E083754532CC011C1FA3B4@G08CNEXMBPEKD03.g08.fujitsu.local>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.2104)
 Subject: Re: [meta-oe][PATCH] sysdig: 0.1.101 -> 0.1.102
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -45,53 +53,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2015 01:12:20 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 25 Aug 2015 01:21:02 -0000
+X-Groupsio-MsgNum: 56978
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_C98A4D9D-0D2E-452F-8501-2531071E6796";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBbbWFpbHRvOm9wZW5lbWJlZGRl
-ZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZiBLaGVt
-DQo+IFJhag0KPiBTZW50OiBUdWVzZGF5LCBBdWd1c3QgMjUsIDIwMTUgOTowMCBBTQ0KPiBUbzog
-b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6
-IFtvZV0gW21ldGEtb2VdW1BBVENIXSBzeXNkaWc6IDAuMS4xMDEgLT4gMC4xLjEwMg0KPiANCj4g
-DQo+ID4gT24gQXVnIDI0LCAyMDE1LCBhdCA1OjQ0IFBNLCBCaWFuLCBOYWltZW5nIDxiaWFubm1A
-Y24uZnVqaXRzdS5jb20+IHdyb3RlOg0KPiA+DQo+ID4NCj4gPg0KPiA+PiAtLS0tLU9yaWdpbmFs
-IE1lc3NhZ2UtLS0tLQ0KPiA+PiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0
-cy5vcGVuZW1iZWRkZWQub3JnDQo+ID4+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRldmVsLWJvdW5j
-ZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmDQo+ID4+IE9mIEtoZW0gUmFqDQo+
-ID4+IFNlbnQ6IEZyaWRheSwgQXVndXN0IDIxLCAyMDE1IDExOjQyIFBNDQo+ID4+IFRvOiBvcGVu
-ZW1iZWRlZC1kZXZlbA0KPiA+PiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1bUEFUQ0hdIHN5
-c2RpZzogMC4xLjEwMSAtPiAwLjEuMTAyDQo+ID4+DQo+ID4+IE9uIEZyaSwgQXVnIDIxLCAyMDE1
-IGF0IDk6NDAgQU0sIEJpYW4gTmFpbWVuZyA8Ymlhbm5tQGNuLmZ1aml0c3UuY29tPiB3cm90ZToN
-Cj4gPj4+IHVwZ3JhZGUgc3lzZGlnIHRvIDAuMS4xMDIsIGFuZCB1c2luZyBHSVQgc291cmNlIGlu
-c3RlYWQgb2YgYXJjaGl2ZS4NCj4gPj4+DQo+ID4+PiBTaWduZWQtb2ZmLWJ5OiBCaWFuIE5haW1l
-bmcgPGJpYW5ubUBjbi5mdWppdHN1LmNvbT4NCj4gPj4+IC0tLQ0KPiA+Pj4gLi4uLzAxLWRvbm90
-LXNldC1kZWZhdWx0LXZhbHVlLXRvLXZhX2xpc3QucGF0Y2ggICAgfCAyMiAtLS0tLS0tLS0tLS0t
-LQ0KPiA+Pj4gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3N5c2RpZy9zeXNkaWdfMC4xLjEwMS5i
-YiAgfCAzNA0KPiA+PiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+ID4+PiBtZXRhLW9lL3JlY2lw
-ZXMtZXh0ZW5kZWQvc3lzZGlnL3N5c2RpZ19naXQuYmIgICAgICB8IDMyDQo+ID4+ICsrKysrKysr
-KysrKysrKysrKysrDQo+ID4+PiAzIGZpbGVzIGNoYW5nZWQsIDMyIGluc2VydGlvbnMoKyksIDU2
-IGRlbGV0aW9ucygtKSAgZGVsZXRlIG1vZGUNCj4gPj4+IDEwMDY0NA0KPiA+Pj4gbWV0YS1vZS9y
-ZWNpcGVzLWV4dGVuZGVkL3N5c2RpZy9zeXNkaWcvMDEtZG9ub3Qtc2V0LWRlZmF1bHQtdmFsdWUt
-dG8NCj4gPj4+IC12DQo+ID4+PiBhX2xpc3QucGF0Y2ggIGRlbGV0ZSBtb2RlIDEwMDY0NA0KPiA+
-Pj4gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3N5c2RpZy9zeXNkaWdfMC4xLjEwMS5iYg0KPiA+
-Pj4gY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9zeXNkaWcvc3lz
-ZGlnX2dpdC5iYg0KPiA+Pj4NCj4gPj4+IGRpZmYgLS1naXQNCj4gPj4+IGEvbWV0YS1vZS9yZWNp
-cGVzLWV4dGVuZGVkL3N5c2RpZy9zeXNkaWcvMDEtZG9ub3Qtc2V0LWRlZmF1bHQtdmFsdWUtDQo+
-ID4+PiB0bw0KPiA+Pj4gLXZhX2xpc3QucGF0Y2gNCj4gPj4+IGIvbWV0YS1vZS9yZWNpcGVzLWV4
-dGVuZGVkL3N5c2RpZy9zeXNkaWcvMDEtZG9ub3Qtc2V0LWRlZmF1bHQtdmFsdWUtDQo+ID4+PiB0
-bw0KPiA+Pj4gLXZhX2xpc3QucGF0Y2gNCj4gPj4+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0K
-PiA+Pj4gaW5kZXggOWNiNjM3OC4uMDAwMDAwMA0KPiA+Pj4gLS0tDQo+ID4+PiBhL21ldGEtb2Uv
-cmVjaXBlcy1leHRlbmRlZC9zeXNkaWcvc3lzZGlnLzAxLWRvbm90LXNldC1kZWZhdWx0LXZhbHVl
-LQ0KPiA+Pj4gdG8NCj4gPj4+IC12YV9saXN0LnBhdGNoDQo+ID4+PiArKysgL2Rldi9udWxsDQo+
-ID4+DQo+ID4+IHdoeSBpcyB0aGlzIHBhdGNoIGRyb3BwZWQgPw0KPiA+Pg0KPiA+DQo+ID4gVGhh
-bmtzIGZvciB5b3VyIHJldmlldy4NCj4gPg0KPiA+IEJlY2F1c2UgdGhpcyBidWcgaGFkIGJlZW4g
-Zml4ZWQgYXQgdXBzdHJlYW0gYmVmb3JlIDAuMS4xMDIgcmVsZWFzZWQuDQo+ID4gT2J0YWluIGRl
-dGFpbCBmcm9tIGhlcmUNCj4gPiBodHRwczovL2dpdGh1Yi5jb20vZHJhaW9zL3N5c2RpZy9jb21t
-aXQvM2NmNGRiMDgzMTRiODU1OTQwNTE5OGZiOTk4ZWFiDQo+ID4gNDIxZmVjNGI3ZA0KPiA+DQo+
-IA0KPiBPSyBpdCB3b3VsZCBiZSBuaWNlIHRvIGhhdmUgdGhpcyBraW5kIG9mIGluZm9ybWF0aW9u
-IGluIGNvbW1pdCBtZXNzYWdlDQo+IA0KDQpJIGdvdCBpdCwgd2lsbCBiZSBub3RlZCBhdCBuZXh0
-IHRpbWUuDQoNClRoYW5rcw0KIEJpYW4NCg==
+--Apple-Mail=_C98A4D9D-0D2E-452F-8501-2531071E6796
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
+
+> On Aug 24, 2015, at 6:12 PM, Bian, Naimeng <biannm@cn.fujitsu.com> =
+wrote:
+>=20
+> I got it, will be noted at next time.
+
+You can git commit =E2=80=94amend this message and send a V2 as well if =
+this has not yet been applied.
+
+--Apple-Mail=_C98A4D9D-0D2E-452F-8501-2531071E6796
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlXbwvwACgkQuwUzVZGdMxTN6gCcDqKk6tz/5flrMynlbrfmIJYo
+/QQAnRklQTeoYuuNDblT/2QgWZVuVDMR
+=QGI9
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_C98A4D9D-0D2E-452F-8501-2531071E6796--
