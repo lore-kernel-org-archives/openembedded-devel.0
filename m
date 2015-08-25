@@ -1,38 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
 Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
 	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 92A1076C04
+	by mail.openembedded.org (Postfix) with ESMTP id 5E79B76ABD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 05:41:02 +0000 (UTC)
-Received: by widdq5 with SMTP id dq5so3854099wid.0
+	Tue, 25 Aug 2015 05:41:07 +0000 (UTC)
+Received: by widdq5 with SMTP id dq5so3967718wid.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 22:41:01 -0700 (PDT)
+	Mon, 24 Aug 2015 22:41:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=sHfNgOrLCkGh6vT0ThjludXPmsJu8tkTdVyJDdon9iA=;
-	b=RhQNSOnx2/UXu4J5Vblz755QAlgfqpUaQApAk452YbNv0hC3Y8ZAVWj5ersjmlKN/a
-	pWVJTDF6mXKHQdrwVT47ZqThF7ndUdWLvJBwdwGgUqRiLqk7IK2gmykQoravqU77Q8dj
-	qfNHQdWjbiosXHL1UxAdCKi4Hm9pd89JCGDfN/8sSOLsHz5Jfv3rSKC/c93QUhu0d7tT
-	NdYJsnmEtMxOfJqak9bUpYSzwu7PpTtGqGArVj4pti1hBRjw20uKh/ZedJ4qczE0GKVm
-	MYSTUhBdX3ws/Ipqib7IxCKmXa0gQuvPFkZ01GzNCP5fJFkKpkogQZRDjU77tiJfzotx
-	4RfA==
-X-Received: by 10.180.105.36 with SMTP id gj4mr1623111wib.64.1440481261733;
-	Mon, 24 Aug 2015 22:41:01 -0700 (PDT)
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=BZ5FWlhvCuQueo4mWnBBEuCTeMCNRuhgga+cw372Rno=;
+	b=ww0AqLERbl7AODxYA67f2T25wvGuP0HayV48pl/q9KDj1ryySQAz6mbdAOF5nmhdrV
+	cm0ym6Foqc8Fj+KPjf5UGWY6Np2oa/pRKNemtlRdVxZVGyL5l3mDTSSQyyFsEE+dJfRe
+	mj3hPEOirztlet6OZWwhcHmh8KbTisDDjyW6X1d1MMl1SFbbz8ujRZeFYHtfxBJ/HcUa
+	Lfe9sHn7AjKDLIzc2fql6lsSXr9b+GXtbs46QE/xJd7Fuc6AuIjoJqZOLlLuK731KoqT
+	gIu8snKKemtRBdxmPeeAyL+75VGqm5KR6PflUXA3E2Xl0l3np9XPhgMBOXH0P6tsS5gQ
+	cv7Q==
+X-Received: by 10.180.38.34 with SMTP id d2mr1574142wik.48.1440481267490;
+	Mon, 24 Aug 2015 22:41:07 -0700 (PDT)
 Received: from localhost.localdomain (p4FDF0EB5.dip0.t-ipconnect.de.
 	[79.223.14.181]) by smtp.googlemail.com with ESMTPSA id
-	y13sm26267680wjq.26.2015.08.24.22.41.00
+	y13sm26267680wjq.26.2015.08.24.22.41.06
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Aug 2015 22:41:01 -0700 (PDT)
+	Mon, 24 Aug 2015 22:41:07 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Aug 2015 07:40:45 +0200
-Message-Id: <1440481251-22440-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 25 Aug 2015 07:40:51 +0200
+Message-Id: <1440481251-22440-7-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.1.0
+In-Reply-To: <1440481251-22440-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1440481251-22440-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 0/6] updates and fixes
+Subject: [PATCH 6/6] geany: update to 1.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,38 +52,39 @@ X-List-Received-Date: Tue, 25 Aug 2015 05:41:07 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The following changes since commit 985fca448f2593f5e5aeba07656eb8f2dad60183:
-
-  dhcp: fix parsing warning (2015-08-24 14:06:58 +0200)
-
-are available in the git repository at:
-
-  git://github.com/schnitzeltony/meta-openembedded.git patches
-
-for you to fetch changes up to 51f82c6b48e98a18de0cd9252d4197664f3fb3cd:
-
-  geany: update to 1.25 (2015-08-25 07:30:30 +0200)
-
-----------------------------------------------------------------
-Andreas Müller (6):
-      gtk-xfce-engine: create and pack gtk3 themes by default
-      xfce-dusk-gtk3: initial add 1.3
-      packagegroup-xfce-extended: add xfce-dusk-gtk3
-      poppler: update to 0.35.0
-      xfce4-whiskermenu-plugin: update to latest git
-      geany: update to 1.25
-
- meta-oe/recipes-devtools/geany/{geany_1.24.1.bb => geany_1.25.bb}                                                  |  8 ++++----
- meta-oe/recipes-support/poppler/{poppler_0.33.0.bb => poppler_0.35.0.bb}                                           |  4 ++--
- meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb                                                         | 19 +++++++++++++++++++
- meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_1.5.0.bb => xfce4-whiskermenu-plugin_git.bb} | 10 +++++++---
- meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb                                                    |  4 ++--
- meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb                                                 |  2 ++
- 6 files changed, 36 insertions(+), 11 deletions(-)
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-devtools/geany/{geany_1.24.1.bb => geany_1.25.bb} | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
  rename meta-oe/recipes-devtools/geany/{geany_1.24.1.bb => geany_1.25.bb} (58%)
- rename meta-oe/recipes-support/poppler/{poppler_0.33.0.bb => poppler_0.35.0.bb} (91%)
- create mode 100644 meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
- rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_1.5.0.bb => xfce4-whiskermenu-plugin_git.bb} (54%)
+
+diff --git a/meta-oe/recipes-devtools/geany/geany_1.24.1.bb b/meta-oe/recipes-devtools/geany/geany_1.25.bb
+similarity index 58%
+rename from meta-oe/recipes-devtools/geany/geany_1.24.1.bb
+rename to meta-oe/recipes-devtools/geany/geany_1.25.bb
+index f765e2c..59c424c 100644
+--- a/meta-oe/recipes-devtools/geany/geany_1.24.1.bb
++++ b/meta-oe/recipes-devtools/geany/geany_1.25.bb
+@@ -2,15 +2,15 @@ SUMMARY = "A fast and lightweight IDE"
+ HOMEPAGE = "http://www.geany.org/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=bd7b2c994af21d318bd2cd3b3f80c2d5"
+-DEPENDS = "gtk+"
++DEPENDS = "gtk+ python-docutils-native"
+ 
+-inherit autotools pkgconfig perlnative
++inherit autotools pkgconfig perlnative pythonnative
+ 
+ SRC_URI = " \
+     http://download.geany.org/${BP}.tar.bz2 \
+     file://0001-configure.ac-remove-additional-c-test.patch \
+ "
+-SRC_URI[md5sum] = "d225104cef3973164d70116d46239606"
+-SRC_URI[sha256sum] = "7fb505d9b01fe6874890525f837644a6a38c23a372bb068c65ef3673108a8c33"
++SRC_URI[md5sum] = "888bd82d62759ac47a4a398fb27c8471"
++SRC_URI[sha256sum] = "8ee41da28cead8c94d433e616d7ababa81727c63e9196ca6758ade3af14a49ef"
+ 
+ FILES_${PN} += "${datadir}/icons"
 -- 
 2.1.0
 
