@@ -1,54 +1,39 @@
-Return-Path: <jbriance@cisco.com>
-X-Greylist: delayed 597 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 25 Aug 2015 07:48:00 UTC
-Received: from rcdn-iport-8.cisco.com (rcdn-iport-8.cisco.com [173.37.86.79])
-	by mail.openembedded.org (Postfix) with ESMTP id C12B473E11
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
+	[209.85.192.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 9172973E11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 07:48:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=@cisco.com; l=808; q=dns/txt; s=iport;
-	t=1440488881; x=1441698481;
-	h=from:to:cc:subject:date:message-id:references:
-	in-reply-to:content-transfer-encoding:mime-version;
-	bh=aaaOL7Bcn6j4K7SQMSIygOx9A+aObr2GT6w8ChFE6ck=;
-	b=EY85mKmG/Z+6qo5kaxK6JEzBxP4uztSAuzh9OX/SBd0uTlnR1cCdVj5E
-	bh8OmYDxfrRXvknLYpMSjkKD6X/xmFBnJYIVr8X/LeHfvyEs+CoKKlJLs
-	0u6i8Q4k+hFeV0qkCZilPC58Ada4SAE4ECnd++32AQ5zpKlEvkJXTC4Im w=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A0CbAgB7GtxV/4QNJK1dgxtUaQaqW5MfAQmBc4V/AoEvOBQBAQEBAQEBfwuEJAEBBDo/EAIBKhQQMiUCBA4FCIgmxzwBAQEBAQEBAQEBAQEBAQEBAQEBAQEXj3w0MQeDGIEUAQSVNAGFBaI7JoIPG4FUcYEFQ4EEAQEB
-X-IronPort-AV: E=Sophos;i="5.15,744,1432598400"; d="scan'208";a="21403651"
-Received: from alln-core-10.cisco.com ([173.36.13.132])
-	by rcdn-iport-8.cisco.com with ESMTP; 25 Aug 2015 07:38:03 +0000
-Received: from XCH-RCD-008.cisco.com (xch-rcd-008.cisco.com [173.37.102.18])
-	by alln-core-10.cisco.com (8.14.5/8.14.5) with ESMTP id t7P7c3Ku025976
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	Tue, 25 Aug 2015 08:03:10 +0000 (UTC)
+Received: by pdrh1 with SMTP id h1so64952192pdr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 07:38:03 GMT
-Received: from xch-rcd-008.cisco.com (173.37.102.18) by XCH-RCD-008.cisco.com
-	(173.37.102.18) with Microsoft SMTP Server (TLS) id 15.0.1104.5;
-	Tue, 25 Aug 2015 02:38:03 -0500
-Received: from xhc-aln-x11.cisco.com (173.36.12.85) by xch-rcd-008.cisco.com
-	(173.37.102.18) with Microsoft SMTP Server (TLS) id 15.0.1104.5 via
-	Frontend Transport; Tue, 25 Aug 2015 02:38:03 -0500
-Received: from xmb-aln-x12.cisco.com ([169.254.7.226]) by
-	xhc-aln-x11.cisco.com ([173.36.12.85]) with mapi id 14.03.0248.002;
-	Tue, 25 Aug 2015 02:38:02 -0500
-From: "Julien Brianceau (jbriance)" <jbriance@cisco.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-qt5][PATCH] qtquickcontrols: Remove LGPL-2.1 from
-	LICENSE list
-Thread-Index: AQHQ3wiq+Oe2w2ML0UKOTp1SRKvX054cU21A
-Date: Tue, 25 Aug 2015 07:38:02 +0000
-Message-ID: <5940D1D9F240BA44AEF939055CF1358D05A5064F@xmb-aln-x12.cisco.com>
-References: <1440488138-5440-1-git-send-email-jbriance@cisco.com>
-In-Reply-To: <1440488138-5440-1-git-send-email-jbriance@cisco.com>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.60.62.125]
-MIME-Version: 1.0
-Subject: [meta-qt5][PATCH] qtquickcontrols: Remove LGPL-2.1 from LICENSE list
+	Tue, 25 Aug 2015 01:03:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:content-type:subject:date:message-id:to:mime-version;
+	bh=BH5gPGhafmRMsQb7pXdHarQhpTpIXAmO7Vo30IBNt3Q=;
+	b=PAqeFiqrtxgBuEosKVTJiLAB9jPQUbgsIodbAfYM+AV9alzVqtV7cwGNPVgAiwnzRV
+	VtnEXLAyxfs9iPuqaMqAkTDhqzsI07uI4zKa59orW0QjCvD4xwaBffGTYK9HVWGKzOlb
+	md63bhPgPddWrq1JE5z1XYn8poVAj4xB5mK7djfwDdqJwvzpmE8wYGabdJHVtWKBlv/t
+	jtLYJWVD2wbd0UMbY1K1MWWgTQ9Cxneq9nfsD3GFzwPcLVvFyuGv0o5RGqEAulnbiwxh
+	J1GhV+HgVQyW8V6D7lho1XtASYNADCaJc0Vs/70OTKlfwmhTU2gTUuDAJKhOlhoHbVgg
+	Df+w==
+X-Received: by 10.70.47.129 with SMTP id d1mr54701966pdn.6.1440489790952;
+	Tue, 25 Aug 2015 01:03:10 -0700 (PDT)
+Received: from ?IPv6:2601:646:8601:4580:4ded:b62b:f72d:209d?
+	([2601:646:8601:4580:4ded:b62b:f72d:209d])
+	by smtp.gmail.com with ESMTPSA id
+	w6sm19993707pdn.46.2015.08.25.01.03.09
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 25 Aug 2015 01:03:09 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Pgp-Agent: GPGMail 2.5.1
+Date: Tue, 25 Aug 2015 01:03:07 -0700
+Message-Id: <9150AC0D-F129-4100-A3CD-D954AB76E732@gmail.com>
+To: llvmlinux@lists.linuxfoundation.org,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Yocto discussion list <yocto@yoctoproject.org>
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+X-Mailer: Apple Mail (2.2104)
+Subject: Clang cross compiler with OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,34 +47,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2015 07:48:01 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 25 Aug 2015 08:03:11 -0000
+X-Groupsio-MsgNum: 57002
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_6B533996-C9E9-41F5-B5AD-05A88B45CF85";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_6B533996-C9E9-41F5-B5AD-05A88B45CF85
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-* LGPLv21 has been removed since 5.5 release
+Hi all
 
-Signed-off-by: Julien Brianceau <jbriance@cisco.com>
----
- recipes-qt/qt5/qtquickcontrols_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+We have put together clang as system cross compiler support into =
+OpenEmbedded, here is a writeup on how to use it
+in your setups.
 
-diff --git a/recipes-qt/qt5/qtquickcontrols_git.bb b/recipes-qt/qt5/qtquick=
-controls_git.bb
-index 51db1ae..823923e 100644
---- a/recipes-qt/qt5/qtquickcontrols_git.bb
-+++ b/recipes-qt/qt5/qtquickcontrols_git.bb
-@@ -1,7 +1,7 @@
- require qt5.inc
- require qt5-git.inc
-=20
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0) | GPL-2.0"
-+LICENSE =3D "GFDL-1.3 & BSD & LGPL-3.0 | GPL-2.0"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-     file://LICENSE.FDL;md5=3D6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
---=20
-1.9.5
+http://himvis.com/using-clang-with-openembeddedyocto-project/
+
+At present, it is able to compile a lot of packages already and =
+core-image-minimal when build mixed with clang and gcc
+boots fine on qemux86 and rpi2, I have not tested ppc and mips images =
+yet but build wise a lot of packages can be build for ppc/mips too.
+
+Interested ? then please come on board and help porting the packages to =
+work with clang
+
+if you find issues or have questions please feel free to send them my =
+way
+
+Thanks
+-Khem
 
 
+--Apple-Mail=_6B533996-C9E9-41F5-B5AD-05A88B45CF85
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEUEARECAAYFAlXcIT8ACgkQuwUzVZGdMxT/mQCeNa3vJgUHmfzWprig7JcpTibg
+urEAmJaVFOrvic3HUp8UWT9USvpBZG4=
+=9QGb
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_6B533996-C9E9-41F5-B5AD-05A88B45CF85--
