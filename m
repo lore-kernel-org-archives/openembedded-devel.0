@@ -1,18 +1,18 @@
 Return-Path: <samuli.piippo@theqtcompany.com>
 Received: from emea01-db3-obe.outbound.protection.outlook.com
 	(mail-db3on0104.outbound.protection.outlook.com [157.55.234.104])
-	by mail.openembedded.org (Postfix) with ESMTP id 5488F76CBE
+	by mail.openembedded.org (Postfix) with ESMTP id D532176CBE
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 25 Aug 2015 11:43:48 +0000 (UTC)
 Authentication-Results: spf=none (sender IP is )
 	smtp.mailfrom=samuli.piippo@theqtcompany.com; 
 Received: from piippo.it.local (91.217.248.11) by
 	AM3PR02MB1172.eurprd02.prod.outlook.com (10.163.183.150) with Microsoft
-	SMTP Server (TLS) id 15.1.243.23; Tue, 25 Aug 2015 11:43:46 +0000
+	SMTP Server (TLS) id 15.1.243.23; Tue, 25 Aug 2015 11:43:47 +0000
 From: Samuli Piippo <samuli.piippo@theqtcompany.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 25 Aug 2015 14:43:50 +0300
-Message-ID: <a3f9a448b2d41d4f6e0b27a3365e72d7891995ce.1440502860.git.samuli.piippo@theqtcompany.com>
+Date: Tue, 25 Aug 2015 14:43:51 +0300
+Message-ID: <27a18e7c4c9289e1603dce0706a1cd01858ba4fc.1440502860.git.samuli.piippo@theqtcompany.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1440502860.git.samuli.piippo@theqtcompany.com>
 References: <cover.1440502860.git.samuli.piippo@theqtcompany.com>
@@ -21,14 +21,14 @@ X-Originating-IP: [91.217.248.11]
 X-ClientProxiedBy: AM3PR08CA0009.eurprd08.prod.outlook.com (25.160.207.147) To
 	AM3PR02MB1172.eurprd02.prod.outlook.com (25.163.183.150)
 X-Microsoft-Exchange-Diagnostics: 1; AM3PR02MB1172;
-	2:g8Olnyujy6hZIT6AAmt8O7WqsIfSpIQSAghTCOtMf7UbuXf17vQbCiMTLwX3xrPd1o5XBO6Hq1GS+YnrhcdrCCUFXjPVB5pG2+9STQUVkQip/VnX3NHHnmERoEfuwWIU8On//6H6Rt48HSKNuTe9Cubr5oOrcC+zTa+d3IY4cOI=;
-	3:ingsBUalpA+bYyxHsHpj4SOcj3D2J5pf+UK23tsX6aZ6PMXO1G7K7kpMsrnpF7BJHKbdcIZkq8/GbTV2uXfPm9fXrOQ8FIYrBOooAbAc1SOacTMcCO1RsSBULkujg27BK0LCp/wMGTrkzE7eAUkiFQ==;
-	25:G8nGpjK56j6QX5DJoNEuCHGezTgVfb50npCkTGewUvidWy6q47uV24juGtaOsLtD8UQ0EEpDBR26QKb8muDtBywiK7rVTnPWwlDULowz1ZDFjpit7fFTRQUJWYUJTCf+JkF+xQE8XLxkG+fe8GaLg9dWZFU+QTeNBII5xlhfyotBvb22AZue/tLK4b+/U1TxfZ3juQILc7o8/LkZUe9Uuzqk/vCpSdnR5/Sp2IPE71RFjTS47fOtekqbnEGJvlh37dyQLQ5eTUajwJxGeC5l6Q==
+	2:czO2c0Yj0S2t9Jj8X+Y2kq9AzQ40XCRPvIZ1zQ+uLOTPi9CIxdZ1cuirW/Xnkyl77tvPpLUzrJ7uhxJkI+QY1jr/15OJ7Csbea0iYYPQssDMJnKkYM7mBDdNgcG52yYp+RfMS4IHR0qSus/szyWJ784awdatEjxiAQfEcFO0ALw=;
+	3:0fnII/xgs27f6XU9d7Mg3/2iSXusnYyXwLZZIZlOL1dGwHPHHgoaPYpC6kn6tfqU9qub0GI7/aqZRlJM/ZjPIHHOD/taPXR2wDnCj6ieCgx0LmlkMlPEDFPaqt3Jg/aVrJ3A6Rpu6QAXGphGbskBKg==;
+	25:wdB5oGpUpmtsTt2Yt8hRQSdyZMvj9HuCP9OWyj4mRtY8c5bN+nbXvDXFx9nHTChmeKFyLzv0bs3BJzKcPYQV2meKe4TqyvxO/g5EgHfwsJoigeZzgQ63irXmxfWEtYvN7Oq2k6Z0BHa12K5tU8Hncb1j0Xyn+vl9duutO6y568Dy2LxL/f711IBYZIXyDHUNx2U5OBRhGS0364lvZXYyjlrqBdXZfXR+R9GHGXDFxOZrLPVIehqou0AdsSrCx6+jz/4aA0ZDgRpNW0z9TCZOMg==
 X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:AM3PR02MB1172;
 X-Microsoft-Exchange-Diagnostics: 1; AM3PR02MB1172;
-	20:REiRv2FlnNN9yx+pQHNERtPf+if4g4ITRpS5UrFdVqmKqdAECKNr6yLYBb96o0gHZttbnQazuEWjzyiBpYUuXB4/ps1gITmKqXTx1wW6iiCFHHV0YjKkVD0TqQx2BN804+m74ep6TFx3UzW7C+FrvalazCLJT3nrXDbMY3WWFDNNX8t0ivj+257rypmaYJ5dK+b1og8GwPIQIP3N0TYvZjwjVWtPpyvNbr7XaoKd4/Wgmg4aJSPymerBwhVhiMBR7vrWoKNJG8MvyWytiw3UbmRhfYA4huZJoyEuqcXkgdObjW4rzyeZYa+7cIfPGAnn4J7Fk5R+ZKeNrp3Py9jZMpDzkEzemSEAYRiUa802nuFoUr7lHy8utejE57ZlpwT/PA+4M/biUEjMlHEQta0cHSp5IaquWCMjndHT/eoHFjIevJyrcGVWV4Lg6qRDq5+fbYY28v4vQNxo1nTN8G8UkiuGgwLV5Rd8AFiE15+/3E7d+782iubRjxWoWKbUaKe2;
-	4:oa+nfJg2FbZUwD6ma6MH0JtzNdFK87cSdc0xoAmuElspnOysMoXHeM5bJm+Rpqmu9CNM1nRlGzt3XTxmntWLhNkdHunjPFMBtnjRPcrKhour+/OPdW10xuxT6SRhDNnd2PCY7nYx9PUMT14XOLxBnnVhJ1FFzY9eT7gQfJDJZsQ9O42RKJW4lcq2jb1uOTPBLwGuJLox4T6gS8PEgEpklbQSSDPAvw+vbR+X0rTqIXGOs5UJD6gbipYpXe3kB7vj+FJCvmVDySZPbh9E/OJnklQqqr4ZdB7kGlJytlHpHY0HNJrA+nrHalhYKyTR/RZX
-X-Microsoft-Antispam-PRVS: <AM3PR02MB1172FC1074CD98DBB85F814A90610@AM3PR02MB1172.eurprd02.prod.outlook.com>
+	20:UFv/jreynV+zHDb9sGJbNc6Ag0CwJ47s0+lfJeaFhin3CiUDRNhyKGNZj03N4v0URsS+Wlthh58czkQndH9Iozi98+gSQX2vfi6QeiqjnK7LVtgSEeftxtlb3BSLvujqUlu5nFXSrCf397JrH4j8gIHbPz1+rIblxtV0gqlV7GjGAb98gSiBW0w5C9ALFA6b6iMGEh60uF99rZ+lHS5+JJVFSaqG1mtadqXmO1CBIG6h9SY/KfZlp8iuO/80vJAnCyrxsE2pUAUJD/4r0w9Re76lDiBGIDGei5Do9USLsvofzpW9BnR9CGzGS6X2hI19Z4Ma0XOur+0nQRq9gBK0V0UTuE87S3KKR1aR4SWZkzFSjTOvnds0TcsfQzgPEEC68pfStfcFnLFbTxmvECJds5n/VJljhDPASmvSLSkGCyRqGNhDwJeeOgnu+6S2NZ6X/G9cz2FJ3/mZlSY4ObJTrBQSZxFW/Hatzv2Q8Y7rpsRDtWhzKMaec9ntvZIEvHbA;
+	4:093A5CJrAPI75hD8eKCdcKrsDDwmb3LqRWFAn91y4rJ6xR0ZBkUYvAt2+yhF4lUW3jQ2b1e+dxeupn4gPq00wD6erDTffVZMunUCjkyGJnbQzk8ScmCPG91prfSTTc/yVpte3Y126Y7lZj4T5VKV3efLxOLaeMXgW7A9t0V81c4OrAtX0lzcbotMT6y4ezjXm4anGqGCvtwfYenUY7GXAWan1sDwFloR6IGt9bm4rASIYL+2NJd0D+LJx2NU4+lkOplj3a7TV7Pf4MnGUA45w76Y+EzGK7wqY5shoCwkAtD6c4p9bU2jvvBLY/cij73p
+X-Microsoft-Antispam-PRVS: <AM3PR02MB1172F521FFCB450384C556B090610@AM3PR02MB1172.eurprd02.prod.outlook.com>
 X-Exchange-Antispam-Report-Test: UriScan:;
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
 	RULEID:(601004)(5005006)(8121501046)(3002001);
@@ -41,40 +41,40 @@ X-Forefront-Antispam-Report: SFV:NSPM;
 Received-SPF: None (protection.outlook.com: theqtcompany.com does not
 	designate permitted sender hosts)
 X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; AM3PR02MB1172;
-	23:nB08iK0+S79ERmjcBHIc0oiEEXVXqnR4VF9dXMC+w?=
-	=?us-ascii?Q?CI9pX91ydmjhZRD3GACbtE/stCetNXLTZUC8z0W8pgONSggAtwXVaQGZuxHi?=
-	=?us-ascii?Q?NCaXwGWrz5D63mkGMK/gBLWHhNG/l2SC4kfYaWx/lp7WtBl30sQykI/vYgo1?=
-	=?us-ascii?Q?UMcD9Lw700z38mcdxFPQ1g0mxx3ulk/MEkkmC2kJy5a0Eyai8wlnSgWWryTH?=
-	=?us-ascii?Q?r3prTuqeGSqf6XfWYIwRmGf0tBzsoUXpyeU8gYBrYuk2TedBXVqadKgOaJxt?=
-	=?us-ascii?Q?ua/3KM+ZjkXOCEvl14wIZNe0b2QKYPsbmfHR2C8pDy62H17B+3VwtIvMdzm+?=
-	=?us-ascii?Q?DleoX4jeEMQ91zZvTTfHrIlRgIAQfrKRueI0sJqnxo75yoLerHtiDPjcCDI/?=
-	=?us-ascii?Q?6Qt8IoGIjY70YqrMBbbnsseyZoW3nAYwFb6FEr5KeeB+Sa8y+ERjEy0PgdWh?=
-	=?us-ascii?Q?SY3zdPNuXdvGQmq70ZmrNc0eh9NgHJ6GRoIOB9+GP3ZhNqso+KjrufDDFXyJ?=
-	=?us-ascii?Q?oyxHVsockEp4oLUXOBgrTrVX8YxKP4nS3r41AhGIvnLjSCP0+m5jXYyjFOAL?=
-	=?us-ascii?Q?HoeNtQSoZjwV0e33FcZPhxWUQE0+Cdxc+dy3a9cLr7biG6O0e3eAY+P+q82/?=
-	=?us-ascii?Q?SXpUTrLJ06BoQfpUYYCXYKbGi1f9sD5wV0+YxqQlKFNhbionv9z7bGvs93Oc?=
-	=?us-ascii?Q?nfVbBPuggVIquwTgowa4l1FMaQykjLFwFX0u27FUs7NYbi265GeLPwSCh8CP?=
-	=?us-ascii?Q?r9zRBSWHFLoqsm4itl4xoAaGHh69Qe67FGxt9i2sh4ip2yM98zOScUA9eDxs?=
-	=?us-ascii?Q?BrDqeIvkC2G4BJc+8utXzZ/NtsEyEGCRBXEs8Zrg6UmkbWDsAGUsaktGxBaR?=
-	=?us-ascii?Q?LLCmsas1cXmB9KKPzd1535cu/qt9RN4P0QnLJlDPMLn/F1YWNHfixk28qgEE?=
-	=?us-ascii?Q?+Etd0+QVZN9XFwcoYr9b753FiF7LScQ6KBCMVzDlZzID67L0nGE1WJ7/Vfbi?=
-	=?us-ascii?Q?Ve6nNPQ7x0qscHGJ778AWCsDWBFctY2pJ1iW15bYY5mLY0EHMO+NYqwdZ93e?=
-	=?us-ascii?Q?Tud32TrJlVoTbT9yGW7ns+VzFU0iPGwb6EIAwkQb48VHLpFQjxHU7FuGzgtR?=
-	=?us-ascii?Q?MEaNXAe+SO3LEBFDRWoQlMt7Wtw4x6ntvNAwu0Olxc8yQPHKuc8ylUGDfV+n?=
-	=?us-ascii?Q?x8SnUi3ohd+dM5kuO9cBpMwPM2bt3Qx5knhIbTM3zfs4fnNiAK0tCoL82CDY?=
-	=?us-ascii?Q?eNswceZHVZNo1FJQ+UW7LblDqVomkTns3CPjhtlPmr0Zw7lDFbjHs7ANnb5G?=
-	=?us-ascii?Q?BpxBLuoZTZDk4N+458J3nU=3D?=
+	23:hfH8Pg7vCkrJpY0aQZWVI2gDQgwkVejDT8GHh8H3W?=
+	=?us-ascii?Q?GxsGJfToe/QGEf5VSlChf68Q2NJvEkJZJ/oXDXQvPZSRfurTFxiT8bbW4rJm?=
+	=?us-ascii?Q?eCcy8IxyzEVPsCC9DO0gN/gN/gIEVeJdehBzk2+3sYd3DaikyE1ACLCQOmvy?=
+	=?us-ascii?Q?U30wNWVVN/EkBLtpQFtzUHqrr5JpCZABvKwa1oBC0xgzwZOpi27yLztYgIv1?=
+	=?us-ascii?Q?0B+nBwKNgBAfRNig7fPgVyBiTILcuh3oHTncKHIQEJJT+5+1IvaZGrwOcfIs?=
+	=?us-ascii?Q?dmtOFhLrWZ0ZNyg0eIE5xoJ9c2pFMc1UHId9TvAwPNdjpah+Z+RnVv6kz846?=
+	=?us-ascii?Q?o/9KnsWa9S8WXWUMJhN4V7HC7yWlihGZkozBzzG2qP9uUS9mfoSrjDKGumsX?=
+	=?us-ascii?Q?VBXx3ZMzG6ndVRuOiI9ir4M30HRVPdXyo2LTHGDNe31ks496sppIMXO02MiR?=
+	=?us-ascii?Q?oOOLcNXyo3ovOGDNLw/UsxwflaUO8c74RBTmRaFSEUAAJD8DpTaXTKe+WNGw?=
+	=?us-ascii?Q?EqGvSv9N9R4BpaUKq1Nw64Gs2nnK6iVo/p8qoxU6VOo6RUAdB9DuWRDmSFaL?=
+	=?us-ascii?Q?G6fyofuoJ89CAGgeB7O6gRC6HnuugEYF20iv2CPc4jjepYeiqy42w8osc0X9?=
+	=?us-ascii?Q?/DeozsBHVTnzjVFp/iJLmXJFEwbjiKIHyBgydHjMfOSQkqPBhauy6AHXw3Vl?=
+	=?us-ascii?Q?Dn3BMQxdV1ssME2wNID3naJ6T5yZQpoIApyePtyyKFIg946wW3XioFOYPhe9?=
+	=?us-ascii?Q?M0c9LeyokU6QqJHKr7rJWTbMTi3Fp6+Rw3sUO4hn3R7oggoyP9jU5t1LNYO9?=
+	=?us-ascii?Q?cGXaBHkrOTzR1RIOgGM8CoW5vn+fm2ptGl1KhS30rCgKSbcZTRvmFO97RwhB?=
+	=?us-ascii?Q?wsISu+hpqAEC6KtCDj44KCgp+6QdXp8t1x7BPZ5IRIcwXH7YQU1KL7AU7tX8?=
+	=?us-ascii?Q?L1+TtJrRnqGPWxPkPZVp7AIFfzv3kSZzJrZ/IKpesNGRKsUN0M6fUZDM4GQc?=
+	=?us-ascii?Q?D70RAFlqd5tTp3Ic0SFqEoShtRMfYacvQ9ydCxrV2TW5qGcQsr8GDwthOh6B?=
+	=?us-ascii?Q?sLwjzvdplRdKRDUgp/3d2lvSpwLMV491oyyviRO0e1KzkZuakHT1GdbL3uxL?=
+	=?us-ascii?Q?GSSYXoig9ghueWi85gPJGHqiaRRqhGeVo8404Ye5l8o1rTI3OhOdX0j56bXq?=
+	=?us-ascii?Q?R4YN74UcoCJmB7RuTCOe1302Di/sAT7OUkn0EuUkAcnVB9APKSQR3xgg2cJO?=
+	=?us-ascii?Q?9axPja0wMDRZG3SARHZ74iGVQJw9EGWEpMW+NcnAARh6qKYP76D5Ilh5xGAa?=
+	=?us-ascii?Q?jIxXLflgQ6bxriHY9Crf1A=3D?=
 X-Microsoft-Exchange-Diagnostics: 1; AM3PR02MB1172;
-	5:kIPvl2rZI7g6U2YmpFp471a64DuDe7ZgC8w83xGr1UuVe8cUVilidv2SamMAwMBlznP/6HXfZtCm9mpZxwL/aRtiQrUVUJblL7Gg45pvanYcMa+oPzHdhMCA2z91hkNSM7RxI1kh/37duMh5duk9Rg==;
-	24:am/LJ1yIZPBaD1CW6xdmQCHV0sHNd6/l4ZLgbj0y1naWgmE0P/ykOHcPDpqpbOHtEfmtd+Vkzy0khMQByZOS+uGFE08yMT+38XZdqViogT8=;
-	20:MI5hBXRQawDY1baQBuVhvmM3zQjREH6zS4SPYfvjdNpnumMEwuBe/OLDM9ia29LSy1qDGOUTxWF0Ila5ge8hLg==
+	5:XuKjs8fCUOrXB0Wf+6l07iujZPAycfeMfwfaq65HhldgcUnseBoXTFprTazaYaaLlZcH6es5UQ6mRHnDewhoKGKxvgtm6iRy9tZNHcVpZz4+UYMy+I4xc5ejIYTwNKulthuADaCMV5G1JTRdbqCkZA==;
+	24:OSBUIxjX9KYi0pxE3Vn2TdBTaMN+MznTv2lV1q7mTxcuDdKYwJcPNA0YlIALHylo1rvd1X06KG+SaWat1m9vW+FWb98g57b41SJCyHG4wmM=;
+	20:yrGLcYakhdhoPed43vn3mgrATduRdQN4dyQ9EkHobmlvsFdz4JRgNwctSx+aGcubpPm+lTsWgYdtllNRpLC8IQ==
 SpamDiagnosticOutput: 1:23
 SpamDiagnosticMetadata: NSPM
 X-OriginatorOrg: theqtcompany.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2015 11:43:46.9205 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2015 11:43:47.3424 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM3PR02MB1172
-Subject: [meta-qt5][PATCH v2 08/11] qtbase: remove dependency to sqlite
+Subject: [meta-qt5][PATCH v2 09/11] qtbase: PACKAGECONFIGs for libproxy and libinput
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -88,30 +88,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2015 11:43:48 -0000
+X-List-Received-Date: Tue, 25 Aug 2015 11:43:49 -0000
 Content-Type: text/plain
-
-Qt defaults to bundled version of sqlite, so there is no need
-to have dependency to sqlite3.
 
 Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
 ---
- recipes-qt/qt5/qtbase_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-qt/qt5/qtbase_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index cf77a44..be37c92 100644
+index be37c92..982be8e 100644
 --- a/recipes-qt/qt5/qtbase_git.bb
 +++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -97,7 +97,7 @@ PACKAGECONFIG[sql-oci] = "-sql-oci,-no-sql-oci"
- PACKAGECONFIG[sql-tds] = "-sql-tds,-no-sql-tds"
- PACKAGECONFIG[sql-db2] = "-sql-db2,-no-sql-db2"
- PACKAGECONFIG[sql-sqlite2] = "-sql-sqlite2,-no-sql-sqlite2,sqlite"
--PACKAGECONFIG[sql-sqlite] = "-sql-sqlite,-no-sql-sqlite,sqlite3"
-+PACKAGECONFIG[sql-sqlite] = "-sql-sqlite,-no-sql-sqlite,"
- PACKAGECONFIG[xcursor] = "-xcursor,-no-xcursor,libxcursor"
- PACKAGECONFIG[xinerama] = "-xinerama,-no-xinerama,libxinerama"
- PACKAGECONFIG[xinput] = "-xinput,-no-xinput"
+@@ -129,6 +129,8 @@ PACKAGECONFIG[alsa] = "-alsa,-no-alsa,alsa-lib"
+ PACKAGECONFIG[pulseaudio] = "-pulseaudio,-no-pulseaudio,pulseaudio"
+ PACKAGECONFIG[nis] = "-nis,-no-nis"
+ PACKAGECONFIG[widgets] = "-widgets,-no-widgets"
++PACKAGECONFIG[libproxy] = "-libproxy,-no-libproxy,libproxy"
++PACKAGECONFIG[libinput] = "-libinput,-no-libinput,libinput"
+ 
+ QT_CONFIG_FLAGS += " \
+     -shared \
 -- 
 1.9.1
 
