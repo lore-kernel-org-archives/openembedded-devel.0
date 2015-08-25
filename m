@@ -1,40 +1,25 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id E35D876BF5
+Return-Path: <prvs=672648817=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 8363173E11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 05:41:06 +0000 (UTC)
-Received: by wicne3 with SMTP id ne3so3844573wic.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2015 22:41:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=M7CycUqeMsxfcoVqig/OvPasVOsXPKTR1mVKqLbNTx4=;
-	b=A3dDFCEWMg/zv+cK6HggJn0f/1eeuntsyLANSbq6rlgXmTx/4CxuqOLY80any+L0Z9
-	8QMH+NHl/A58EriHSF+i0wHxuIAZtkST1FLclHwa1T1Pfsk9XGHZqgFhPXSPlA5iRAY9
-	E/N5yoMAzn+CMdFNCBxcdY7OSFQHo/mNWntbOSrqDfb13sWmIgCR8S8MWAgWOC5JZ/+s
-	Zabe6uf8SK9FZhMp2jvD4XWXSdfFSrEtVqLJwdPAeKQhcmrKBdjAocyP5PnZH74J5ObN
-	zabEhJJpqF8dlMjsHNqvfo8cs3N12YlT5zxFS347qyhoHXH3gtGGse77M68sSdVRwzdb
-	3rPQ==
-X-Received: by 10.180.97.41 with SMTP id dx9mr1662253wib.34.1440481266562;
-	Mon, 24 Aug 2015 22:41:06 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF0EB5.dip0.t-ipconnect.de.
-	[79.223.14.181]) by smtp.googlemail.com with ESMTPSA id
-	y13sm26267680wjq.26.2015.08.24.22.41.05
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Aug 2015 22:41:05 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Aug 2015 07:40:50 +0200
-Message-Id: <1440481251-22440-6-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1440481251-22440-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1440481251-22440-1-git-send-email-schnitzeltony@googlemail.com>
+	Tue, 25 Aug 2015 06:30:02 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ApwEACQK3FWsEApK/2dsb2JhbABdhF7DHoJYAoF6AQEBAQEBgQuEJAEBBHgBEAsNCwkWDwkDAgECAUUGDQEHAogvx0ABAQEBAQEBAwEBAQEei1eFCgcXhBUBBJU0jjyEMIJ5F5FFhCaCN4EEAQEB
+X-IPAS-Result: ApwEACQK3FWsEApK/2dsb2JhbABdhF7DHoJYAoF6AQEBAQEBgQuEJAEBBHgBEAsNCwkWDwkDAgECAUUGDQEHAogvx0ABAQEBAQEBAwEBAQEei1eFCgcXhBUBBJU0jjyEMIJ5F5FFhCaCN4EEAQEB
+Message-ID: <55DC0B49.6040706@skidata.com>
+Date: Tue, 25 Aug 2015 08:29:29 +0200
+From: Richard Leitner <richard.leitner@skidata.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Icedove/31.8.0
 MIME-Version: 1.0
-Subject: [PATCH 5/6] xfce4-whiskermenu-plugin: update to latest git
+To: <openembedded-devel@lists.openembedded.org>
+References: <1439928871-17797-1-git-send-email-mario@ossystems.com.br>
+	<CAD0=qkLXGaNYJ6X_sUXk3EEbi0EvoN1z0ufGvwB8V41Bo4ETyQ@mail.gmail.com>
+	<55D580DA.7080004@skidata.com>
+In-Reply-To: <55D580DA.7080004@skidata.com>
+X-Originating-IP: [172.16.60.30]
+Cc: otavio@ossystems.com.br, mario@ossystems.com.br
+Subject: Re: [meta-java][PATCH 1/3] Don't depend on a hardcoded compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,44 +33,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2015 05:41:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 25 Aug 2015 06:30:03 -0000
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: 7bit
 
-Upstream patch [1] fixes not only mentionend corner bug but makes menu working
-with touch devices. First I tried to backport but this seemed more effort than
-expected. As soon as another release is out a patch will be send to update.
+BUMP
 
-[1] https://bugzilla.xfce.org/show_bug.cgi?id=11908
+Can someone revert or fix that patch please?
+We have this problem since nearly a week now...
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- ...kermenu-plugin_1.5.0.bb => xfce4-whiskermenu-plugin_git.bb} | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_1.5.0.bb => xfce4-whiskermenu-plugin_git.bb} (54%)
-
-diff --git a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_1.5.0.bb b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_git.bb
-similarity index 54%
-rename from meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_1.5.0.bb
-rename to meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_git.bb
-index f7b0616..6af38de 100644
---- a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_1.5.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_git.bb
-@@ -5,6 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- inherit xfce-panel-plugin cmake
- 
--SRC_URI = "http://gottcode.org/${BPN}/${BPN}-${PV}-src.tar.bz2"
--SRC_URI[md5sum] = "32fcbf16931038c10b1b7a7ccc392132"
--SRC_URI[sha256sum] = "da82bdbc899a9935b560323aac9037d44f37fb110509b80ec293196722671851"
-+SRC_URI = " \
-+    git://git.xfce.org/panel-plugins/xfce4-whiskermenu-plugin \
-+"
-+
-+SRCREV = "2d3c03eacd78051d2ef8ee3b6a4e2bff4753680e"
-+PV = "1.5.0+gitr${SRCPV}"
-+S = "${WORKDIR}/git"
--- 
-2.1.0
-
+regards,
+Richard L
+On 08/20/2015 09:25 AM, Richard Leitner wrote:
+> Hi,
+> 
+> On 08/19/2015 01:53 PM, Sven Ebenfeld wrote:
+>> This patch creates a circular dependency for me:
+>>
+>> ERROR: Unbuildable tasks were found.
+>> These are usually caused by circular dependencies and any circular
+>> dependency chains found will be printed below. Increase the debug
+>> level to see a list of unbuildable tasks.
+>>
+> 
+> Same problem for me!
+> 
+> My settings are:
+> PREFERRED_PROVIDER_virtual/java-initial-native = "cacao-initial-native"
+> PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
+> PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
+> PREFERRED_VERSION_openjdk-7-jre = "85b01-2.6.1"
+> PREFERRED_VERSION_icedtea7-native = "2.1.3"
+> PREFERRED_PROVIDER_openjdk-7-jre = "openjdk-7-jre"
+> 
+> If I revert the "Don't depend on a hardcoded compiler" patch the build
+> starts successfully!
+> 
+> regards,
+> Richard L
+> 
 
