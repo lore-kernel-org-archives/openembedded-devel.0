@@ -1,34 +1,42 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 29FB9734B8
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f173.google.com (mail-pd0-f173.google.com
+	[209.85.192.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 766C9734B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 00:45:08 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="99973865"
-Received: from bogon (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Aug 2015 08:48:14 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t7P0itLv026541
+	Tue, 25 Aug 2015 01:00:21 +0000 (UTC)
+Received: by pdob1 with SMTP id b1so59535430pdo.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 08:44:55 +0800
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0181.006; Tue, 25 Aug 2015 08:45:00 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] sysdig: 0.1.101 -> 0.1.102
-Thread-Index: AQHQ2+0dnJ4thW4x10iZ6LL/Y1oP/J4WEd8AgAXS7WA=
-Date: Tue, 25 Aug 2015 00:44:59 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC011C1FA335@G08CNEXMBPEKD03.g08.fujitsu.local>
+	Mon, 24 Aug 2015 18:00:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=j7PqvDxHv0w++9XwTV0Gsex/RDKyhpbrZzV01Ek1tIw=;
+	b=bK2tkxGZnDAMUYMifg6p2ACQ8Mvl7xRq2UWwcNZVf8+X+7CqUj6XbU2MdSlo2BVAvQ
+	S+GMMYHE1t6n1ZJDNtJgXfY1/M9MLr9C9JHjxc49QadVJt2R/0hmm8Ch8JIp9KUE7yiA
+	yuPwLziJ/A7kS5+ma3p/KX7Aad7Kg9fHUdWWVXxZ6zo6lgfgkMLuIegurw0D7B6ZShEh
+	hSbyC9KKqyk0gh2ugYCoX02zAzFcJ0nK5TJ38CTvdaV4BSjrt0Px89d35DV/0ZezHlmx
+	b5v0x/2iXmaRgajF8ym3NkuX/RgEo23rZgWMcpGtsnpHuBN0kKODiGz1TKdkMUVHhT6+
+	y3ow==
+X-Received: by 10.70.100.199 with SMTP id fa7mr51476602pdb.94.1440464422120;
+	Mon, 24 Aug 2015 18:00:22 -0700 (PDT)
+Received: from ?IPv6:2601:646:8601:4580:4ded:b62b:f72d:209d?
+	([2601:646:8601:4580:4ded:b62b:f72d:209d])
+	by smtp.gmail.com with ESMTPSA id
+	z16sm18763543pbt.3.2015.08.24.18.00.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 24 Aug 2015 18:00:21 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+X-Pgp-Agent: GPGMail 2.5.1
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <30DC4EDFD798C94083F3E083754532CC011C1FA335@G08CNEXMBPEKD03.g08.fujitsu.local>
+Date: Mon, 24 Aug 2015 18:00:19 -0700
+Message-Id: <F8BECE17-36E1-41F1-8B14-2E0EB99D7BDB@gmail.com>
 References: <1440175216-21907-1-git-send-email-biannm@cn.fujitsu.com>
 	<CAMKF1spvKJaV0_+JngPLnZWesZ2ELipZ3c=UdOY1v-Nu2yLkBg@mail.gmail.com>
-In-Reply-To: <CAMKF1spvKJaV0_+JngPLnZWesZ2ELipZ3c=UdOY1v-Nu2yLkBg@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
-MIME-Version: 1.0
+	<30DC4EDFD798C94083F3E083754532CC011C1FA335@G08CNEXMBPEKD03.g08.fujitsu.local>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.2104)
 Subject: Re: [meta-oe][PATCH] sysdig: 0.1.101 -> 0.1.102
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -43,122 +51,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2015 00:45:14 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 25 Aug 2015 01:00:22 -0000
+X-Groupsio-MsgNum: 56975
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_8F70641D-314D-4D27-8231-2896CB0ACC26";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBbbWFpbHRvOm9wZW5lbWJlZGRl
-ZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZiBLaGVt
-DQo+IFJhag0KPiBTZW50OiBGcmlkYXksIEF1Z3VzdCAyMSwgMjAxNSAxMTo0MiBQTQ0KPiBUbzog
-b3BlbmVtYmVkZWQtZGV2ZWwNCj4gU3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2VdW1BBVENIXSBz
-eXNkaWc6IDAuMS4xMDEgLT4gMC4xLjEwMg0KPiANCj4gT24gRnJpLCBBdWcgMjEsIDIwMTUgYXQg
-OTo0MCBBTSwgQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRzdS5jb20+IHdyb3RlOg0KPiA+
-IHVwZ3JhZGUgc3lzZGlnIHRvIDAuMS4xMDIsIGFuZCB1c2luZyBHSVQgc291cmNlIGluc3RlYWQg
-b2YgYXJjaGl2ZS4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IEJpYW4gTmFpbWVuZyA8Ymlhbm5t
-QGNuLmZ1aml0c3UuY29tPg0KPiA+IC0tLQ0KPiA+ICAuLi4vMDEtZG9ub3Qtc2V0LWRlZmF1bHQt
-dmFsdWUtdG8tdmFfbGlzdC5wYXRjaCAgICB8IDIyIC0tLS0tLS0tLS0tLS0tDQo+ID4gIG1ldGEt
-b2UvcmVjaXBlcy1leHRlbmRlZC9zeXNkaWcvc3lzZGlnXzAuMS4xMDEuYmIgIHwgMzQNCj4gLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiA+ICBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvc3lzZGln
-L3N5c2RpZ19naXQuYmIgICAgICB8IDMyDQo+ICsrKysrKysrKysrKysrKysrKysrDQo+ID4gIDMg
-ZmlsZXMgY2hhbmdlZCwgMzIgaW5zZXJ0aW9ucygrKSwgNTYgZGVsZXRpb25zKC0pICBkZWxldGUg
-bW9kZQ0KPiA+IDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9zeXNkaWcvc3lz
-ZGlnLzAxLWRvbm90LXNldC1kZWZhdWx0LXZhbHVlLXRvLXYNCj4gPiBhX2xpc3QucGF0Y2ggIGRl
-bGV0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9zeXNkaWcvc3lz
-ZGlnXzAuMS4xMDEuYmINCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1l
-eHRlbmRlZC9zeXNkaWcvc3lzZGlnX2dpdC5iYg0KPiA+DQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEv
-bWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3N5c2RpZy9zeXNkaWcvMDEtZG9ub3Qtc2V0LWRlZmF1
-bHQtdmFsdWUtdG8NCj4gPiAtdmFfbGlzdC5wYXRjaA0KPiA+IGIvbWV0YS1vZS9yZWNpcGVzLWV4
-dGVuZGVkL3N5c2RpZy9zeXNkaWcvMDEtZG9ub3Qtc2V0LWRlZmF1bHQtdmFsdWUtdG8NCj4gPiAt
-dmFfbGlzdC5wYXRjaA0KPiA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDlj
-YjYzNzguLjAwMDAwMDANCj4gPiAtLS0NCj4gPiBhL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9z
-eXNkaWcvc3lzZGlnLzAxLWRvbm90LXNldC1kZWZhdWx0LXZhbHVlLXRvDQo+ID4gLXZhX2xpc3Qu
-cGF0Y2gNCj4gPiArKysgL2Rldi9udWxsDQo+IA0KPiB3aHkgaXMgdGhpcyBwYXRjaCBkcm9wcGVk
-ID8NCj4gDQoNClRoYW5rcyBmb3IgeW91ciByZXZpZXcuDQoNCkJlY2F1c2UgdGhpcyBidWcgaGFk
-IGJlZW4gZml4ZWQgYXQgdXBzdHJlYW0gYmVmb3JlIDAuMS4xMDIgcmVsZWFzZWQuDQpPYnRhaW4g
-ZGV0YWlsIGZyb20gaGVyZSANCmh0dHBzOi8vZ2l0aHViLmNvbS9kcmFpb3Mvc3lzZGlnL2NvbW1p
-dC8zY2Y0ZGIwODMxNGI4NTU5NDA1MTk4ZmI5OThlYWI0MjFmZWM0YjdkDQoNClRoYW5rcw0KIEJp
-YW4NCg0KPiA+IEBAIC0xLDIyICswLDAgQEANCj4gPiAtZml4IGJ1aWxkIGVycm9yIGFzIGZvbGxv
-d2luZy4NCj4gPiAtDQo+ID4gLSAgc3lzZGlnLTAuMS4xMDEvdXNlcnNwYWNlL2xpYnNpbnNwL2N0
-ZXh0Lmg6Mzc2OjUwOiBlcnJvcjogY291bGQgbm90DQo+IGNvbnZlcnQgJzAnIGZyb20gJ2ludCcg
-dG8gJ3ZhX2xpc3Qge2FrYSBfX3ZhX2xpc3R9Jw0KPiA+IC0gIHwgICAgaW50OF90IHZwcmludGYo
-Y29uc3QgY2hhcipmb3JtYXQsIHZhX2xpc3QgYXAgPSAwKTsNCj4gPiAtICB8ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXg0KPiA+IC0gIHwgbWFrZVsy
-XTogKioqDQo+ID4gW3VzZXJzcGFjZS9saWJzaW5zcC9DTWFrZUZpbGVzL3NpbnNwLmRpci9jdGV4
-dC5jcHAub10gRXJyb3IgMQ0KPiA+IC0NCj4gPiAtDQo+ID4gLVNpZ25lZC1vZmYtYnk6IEJpYW4g
-TmFpbWVuZyA8Ymlhbm5tQGNuLmZ1aml0c3UuY29tPg0KPiA+IC0NCj4gPiAtZGlmZiAtTnVycCBz
-eXNkaWctMC4xLjEwMS5vcmlnL3VzZXJzcGFjZS9saWJzaW5zcC9jdGV4dC5oDQo+IHN5c2RpZy0w
-LjEuMTAxL3VzZXJzcGFjZS9saWJzaW5zcC9jdGV4dC5oDQo+ID4gLS0tLSBzeXNkaWctMC4xLjEw
-MS5vcmlnL3VzZXJzcGFjZS9saWJzaW5zcC9jdGV4dC5oICAgICAyMDE1LTA2LTA0DQo+IDAyOjU4
-OjUxLjAwMDAwMDAwMCArMDgwMA0KPiA+IC0rKysgc3lzZGlnLTAuMS4xMDEvdXNlcnNwYWNlL2xp
-YnNpbnNwL2N0ZXh0LmggIDIwMTUtMDctMDINCj4gPiAtKysrIDA5OjE4OjE0LjE1NDYyNzM1NyAr
-MDgwMA0KPiA+IC1AQCAtMzczLDcgKzM3Myw3IEBAIGNsYXNzIGN0ZXh0DQo+ID4gLSAgICAgICAg
-ICAgICAgIC8vIGFwcGxpY2F0aW9uIHRvIHRoaXMgbGlicmFyeSBzZWFtbGVzc2x5Lg0KPiA+IC0g
-ICAgICAgICAgICAgICAvLw0KPiA+IC0gICAgICAgICAgICAgICBpbnQ4X3QgcHJpbnRmKGNvbnN0
-IGNoYXIqZm9ybWF0LCAuLi4pOw0KPiA+IC0tICAgICAgICAgICAgICBpbnQ4X3QgdnByaW50Zihj
-b25zdCBjaGFyKmZvcm1hdCwgdmFfbGlzdCBhcCA9IDApOw0KPiA+IC0rICAgICAgICAgICAgICBp
-bnQ4X3QgdnByaW50Zihjb25zdCBjaGFyKmZvcm1hdCwgdmFfbGlzdCBhcCk7DQo+ID4gLQ0KPiA+
-IC0gICAgICAgICAgICAgICAvLw0KPiA+IC0gICAgICAgICAgICAgICAvLyBucHJpbnRmIGlzIGlk
-ZW50aWNhbCB0byB0aGUgcHJpbnRmIGFib3ZlIEVYQ0VQVCBmb3INCj4gPiBkaWZmIC0tZ2l0IGEv
-bWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3N5c2RpZy9zeXNkaWdfMC4xLjEwMS5iYg0KPiA+IGIv
-bWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3N5c2RpZy9zeXNkaWdfMC4xLjEwMS5iYg0KPiA+IGRl
-bGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDc4OWZkNDcuLjAwMDAwMDANCj4gPiAt
-LS0gYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvc3lzZGlnL3N5c2RpZ18wLjEuMTAxLmJiDQo+
-ID4gKysrIC9kZXYvbnVsbA0KPiA+IEBAIC0xLDM0ICswLDAgQEANCj4gPiAtU1VNTUFSWSA9ICJB
-IE5ldyBTeXN0ZW0gVHJvdWJsZXNob290aW5nIFRvb2wgQnVpbHQgZm9yIHRoZSBXYXkgWW91IFdv
-cmsiDQo+ID4gLURFU0NSSVBUSU9OID0gIlN5c2RpZyBpcyBvcGVuIHNvdXJjZSwgc3lzdGVtLWxl
-dmVsIGV4cGxvcmF0aW9uOg0KPiA+IGNhcHR1cmUgXCAtc3lzdGVtIHN0YXRlIGFuZCBhY3Rpdml0
-eSBmcm9tIGEgcnVubmluZyBMaW51eCBpbnN0YW5jZSwNCj4gPiB0aGVuIHNhdmUsIFwgLWZpbHRl
-ciBhbmQgYW5hbHl6ZS4iDQo+ID4gLUhPTUVQQUdFID0gImh0dHA6Ly93d3cuc3lzZGlnLm9yZy8i
-DQo+ID4gLUxJQ0VOU0UgPSAiR1BMdjIiDQo+ID4gLUxJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTov
-L0NPUFlJTkc7bWQ1PWIyMzRlZTRkNjlmNWZjZTQ0ODZhODBmZGFmNGE0MjYzIg0KPiA+IC0NCj4g
-PiAtaW5oZXJpdCBjbWFrZSBwa2djb25maWcNCj4gPiAtDQo+ID4gLURFUEVORFMgPSAibHVhaml0
-IHpsaWIgbmN1cnNlcyINCj4gPiAtUkRFUEVORFNfJHtQTn0gPSAiYmFzaCINCj4gPiAtDQo+ID4g
-LQ0KPiA+IC1TUkNfVVJJID0gImh0dHBzOi8vZ2l0aHViLmNvbS9kcmFpb3Mvc3lzZGlnL2FyY2hp
-dmUvJHtQVn0udGFyLmd6IFwNCj4gPiAtICAgICAgICAgICBmaWxlOi8vMDEtZG9ub3Qtc2V0LWRl
-ZmF1bHQtdmFsdWUtdG8tdmFfbGlzdC5wYXRjaCBcDQo+ID4gLSAgICAgICAgICAiDQo+ID4gLQ0K
-PiA+IC1TUkNfVVJJW21kNXN1bV0gPSAiNWZlOTZhM2EwZmQ5OGIyMTU3YTQwY2IyOWFmNDFhZmMi
-DQo+ID4gLVNSQ19VUklbc2hhMjU2c3VtXSA9DQo+ICI2OTk1ZTM5YmU1NjU1MTQ5MDFiNWNiNTg3
-Njg5ZWUyZWZiZjgzNTkyOTNlNGU1OTczNjIzODJjY2NmMGU5ZGI2Ig0KPiA+IC0NCj4gPiAtRElS
-X0VUQz0iL2V0YyINCj4gPiAtRVhUUkFfT0VDTUFLRSA9ICcgLURVU0VfQlVORExFRF9MVUFKSVQ9
-Ik9GRiIgXA0KPiA+IC0gICAgICAgICAgICAgICAgICAtRFVTRV9CVU5ETEVEX1pMSUI9Ik9GRiIg
-XA0KPiA+IC0gICAgICAgICAgICAgICAgICAtREJVSUxEX0RSSVZFUj0iT0ZGIiBcDQo+ID4gLSAg
-ICAgICAgICAgICAgICAgIC1EVVNFX0JVTkRMRURfTkNVUlNFUz0iT0ZGIiBcDQo+ID4gLSAgICAg
-ICAgICAgICAgICAgIC1ERElSX0VUQz0iJHtESVJfRVRDfSIgXA0KPiA+IC0gICAgICAgICAgICAg
-ICAgJw0KPiA+IC0NCj4gPiAtRklMRVNfJHtQTn0gKz0gIiBcDQo+ID4gLSAgICAke0RJUl9FVEN9
-LyogXA0KPiA+IC0gICAgJHtkYXRhZGlyfS96c2gvKiBcDQo+ID4gLSAgICAke3ByZWZpeH0vc3Jj
-LyogIFwNCj4gPiAtIg0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQv
-c3lzZGlnL3N5c2RpZ19naXQuYmINCj4gPiBiL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9zeXNk
-aWcvc3lzZGlnX2dpdC5iYg0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAw
-MDAwMC4uNjJhYTQzMw0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW9lL3JlY2lw
-ZXMtZXh0ZW5kZWQvc3lzZGlnL3N5c2RpZ19naXQuYmINCj4gPiBAQCAtMCwwICsxLDMyIEBADQo+
-ID4gK1NVTU1BUlkgPSAiQSBOZXcgU3lzdGVtIFRyb3VibGVzaG9vdGluZyBUb29sIEJ1aWx0IGZv
-ciB0aGUgV2F5IFlvdSBXb3JrIg0KPiA+ICtERVNDUklQVElPTiA9ICJTeXNkaWcgaXMgb3BlbiBz
-b3VyY2UsIHN5c3RlbS1sZXZlbCBleHBsb3JhdGlvbjoNCj4gPiArY2FwdHVyZSBcIHN5c3RlbSBz
-dGF0ZSBhbmQgYWN0aXZpdHkgZnJvbSBhIHJ1bm5pbmcgTGludXggaW5zdGFuY2UsDQo+ID4gK3Ro
-ZW4gc2F2ZSwgXCBmaWx0ZXIgYW5kIGFuYWx5emUuIg0KPiA+ICtIT01FUEFHRSA9ICJodHRwOi8v
-d3d3LnN5c2RpZy5vcmcvIg0KPiA+ICtMSUNFTlNFID0gIkdQTHYyIg0KPiA+ICtMSUNfRklMRVNf
-Q0hLU1VNID0gImZpbGU6Ly9DT1BZSU5HO21kNT1iMjM0ZWU0ZDY5ZjVmY2U0NDg2YTgwZmRhZjRh
-NDI2MyINCj4gPiArDQo+ID4gK2luaGVyaXQgY21ha2UgcGtnY29uZmlnDQo+ID4gKw0KPiA+ICtE
-RVBFTkRTID0gImx1YWppdCB6bGliIG5jdXJzZXMiDQo+ID4gK1JERVBFTkRTXyR7UE59ID0gImJh
-c2giDQo+ID4gKw0KPiA+ICtTUkNfVVJJID0gImdpdDovL2dpdGh1Yi5jb20vZHJhaW9zL3N5c2Rp
-Zy5naXQ7YnJhbmNoPW1hc3RlciINCj4gPiArU1JDUkVWID0gImI3Mzk0ZTI5Y2VkNGYxYTk5MWFm
-MDNjMDM4MWE1ODI4YWJjYmFiN2EiDQo+ID4gK1BWID0gIjAuMS4xMDIrZ2l0JHtTUkNQVn0iDQo+
-ID4gKw0KPiA+ICtTID0gIiR7V09SS0RJUn0vZ2l0Ig0KPiA+ICsNCj4gPiArRElSX0VUQz0iL2V0
-YyINCj4gPiArRVhUUkFfT0VDTUFLRSA9ICcgLURVU0VfQlVORExFRF9MVUFKSVQ9Ik9GRiIgXA0K
-PiA+ICsgICAgICAgICAgICAgICAgICAtRFVTRV9CVU5ETEVEX1pMSUI9Ik9GRiIgXA0KPiA+ICsg
-ICAgICAgICAgICAgICAgICAtREJVSUxEX0RSSVZFUj0iT0ZGIiBcDQo+ID4gKyAgICAgICAgICAg
-ICAgICAgIC1EVVNFX0JVTkRMRURfTkNVUlNFUz0iT0ZGIiBcDQo+ID4gKyAgICAgICAgICAgICAg
-ICAgIC1ERElSX0VUQz0iJHtESVJfRVRDfSIgXA0KPiA+ICsgICAgICAgICAgICAgICAgJw0KPiA+
-ICsNCj4gPiArRklMRVNfJHtQTn0gKz0gIiBcDQo+ID4gKyAgICAke0RJUl9FVEN9LyogXA0KPiA+
-ICsgICAgJHtkYXRhZGlyfS96c2gvKiBcDQo+ID4gKyAgICAke3ByZWZpeH0vc3JjLyogIFwNCj4g
-PiArIg0KPiA+IC0tDQo+ID4gMS44LjQuMg0KPiA+DQo+ID4gLS0NCj4gPiBfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiA+IE9wZW5lbWJlZGRlZC1kZXZl
-bCBtYWlsaW5nIGxpc3QNCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZw0KPiA+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8v
-b3BlbmVtYmVkZGVkLWRldmVsDQo+IC0tDQo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fDQo+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4g
-T3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gaHR0cDovL2xpc3Rz
-Lm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCg==
+--Apple-Mail=_8F70641D-314D-4D27-8231-2896CB0ACC26
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
+
+> On Aug 24, 2015, at 5:44 PM, Bian, Naimeng <biannm@cn.fujitsu.com> =
+wrote:
+>=20
+>=20
+>=20
+>> -----Original Message-----
+>> From: openembedded-devel-bounces@lists.openembedded.org
+>> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf =
+Of Khem
+>> Raj
+>> Sent: Friday, August 21, 2015 11:42 PM
+>> To: openembeded-devel
+>> Subject: Re: [oe] [meta-oe][PATCH] sysdig: 0.1.101 -> 0.1.102
+>>=20
+>> On Fri, Aug 21, 2015 at 9:40 AM, Bian Naimeng <biannm@cn.fujitsu.com> =
+wrote:
+>>> upgrade sysdig to 0.1.102, and using GIT source instead of archive.
+>>>=20
+>>> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+>>> ---
+>>> .../01-donot-set-default-value-to-va_list.patch    | 22 =
+--------------
+>>> meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb  | 34
+>> ----------------------
+>>> meta-oe/recipes-extended/sysdig/sysdig_git.bb      | 32
+>> ++++++++++++++++++++
+>>> 3 files changed, 32 insertions(+), 56 deletions(-)  delete mode
+>>> 100644
+>>> =
+meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-v
+>>> a_list.patch  delete mode 100644
+>>> meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
+>>> create mode 100644 meta-oe/recipes-extended/sysdig/sysdig_git.bb
+>>>=20
+>>> diff --git
+>>> =
+a/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to
+>>> -va_list.patch
+>>> =
+b/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to
+>>> -va_list.patch
+>>> deleted file mode 100644
+>>> index 9cb6378..0000000
+>>> ---
+>>> =
+a/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to
+>>> -va_list.patch
+>>> +++ /dev/null
+>>=20
+>> why is this patch dropped ?
+>>=20
+>=20
+> Thanks for your review.
+>=20
+> Because this bug had been fixed at upstream before 0.1.102 released.
+> Obtain detail from here
+> =
+https://github.com/draios/sysdig/commit/3cf4db08314b8559405198fb998eab421f=
+ec4b7d
+>=20
+
+OK it would be nice to have this kind of information in commit message
+
+
+
+--Apple-Mail=_8F70641D-314D-4D27-8231-2896CB0ACC26
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlXbvicACgkQuwUzVZGdMxQgUgCgh1Dp1k8YbMj2zfvmTdakFxbU
+8NEAoI94ynRo/muq2kEou9dy0YnLebFt
+=sT83
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_8F70641D-314D-4D27-8231-2896CB0ACC26--
