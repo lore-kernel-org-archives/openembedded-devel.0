@@ -1,36 +1,77 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F63F75E80
+Return-Path: <samuli.piippo@theqtcompany.com>
+Received: from emea01-am1-obe.outbound.protection.outlook.com
+	(mail-am1on0132.outbound.protection.outlook.com [157.56.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B72F73DF0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 10:01:30 +0000 (UTC)
-Received: by wicja10 with SMTP id ja10so9797408wic.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 03:01:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=m3j/BfC82hvPXo7wBGSFfLxcV8iFsNh/TLL6TmtRjT8=;
-	b=H6sPgWszWecBwBc8ueKzGT19Dnj7A6maRGO7/fY//NJmMx5bKiO1st1Zearf+fF9O2
-	IzoFi0hOJdRAVWBmbM5yKCYwln1E7LP5Gu56+vD8wWHbe0P8smFoH8404wXn00OPaotN
-	zgvU/bk5rNre0j64QijT7aEawrotts7bU3w6J3VIJg22gNJJgQY6jL8OUsy1MUcpEDpU
-	tdPwy6hfJQJFcB0iU5lTgQekYTBDyCy/ICoxojtzGwqC/vIUDKfHSu9APmVC4W3m6jjx
-	VqjuhnaKVzNPk25R90b0WQCghVmZ/nHY+OXyQGL7SCTdT7beGgE9VWy/emSmhVV21xv3
-	T//w==
-X-Received: by 10.180.211.239 with SMTP id nf15mr3457626wic.13.1440496890794; 
-	Tue, 25 Aug 2015 03:01:30 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id r8sm1821305wik.16.2015.08.25.03.01.30
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 25 Aug 2015 03:01:30 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Aug 2015 12:01:33 +0200
-Message-Id: <1440496893-4190-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.5.0
-In-Reply-To: <CA+chaQeiPNcWQ+DHByrdnYAG6tj0eW+r_zwfBVms5H_ZX6mHSw@mail.gmail.com>
-References: <CA+chaQeiPNcWQ+DHByrdnYAG6tj0eW+r_zwfBVms5H_ZX6mHSw@mail.gmail.com>
-Subject: [meta-qt5][PATCHv3] qtbase: Fix build with clang
+	Tue, 25 Aug 2015 11:43:36 +0000 (UTC)
+Authentication-Results: spf=none (sender IP is )
+	smtp.mailfrom=samuli.piippo@theqtcompany.com; 
+Received: from piippo.it.local (91.217.248.11) by
+	VI1PR02MB1182.eurprd02.prod.outlook.com (10.163.164.22) with Microsoft
+	SMTP Server (TLS) id 15.1.243.23; Tue, 25 Aug 2015 11:43:33 +0000
+From: Samuli Piippo <samuli.piippo@theqtcompany.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 25 Aug 2015 14:43:39 +0300
+Message-ID: <cover.1440502860.git.samuli.piippo@theqtcompany.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-Originating-IP: [91.217.248.11]
+X-ClientProxiedBy: HE1PR06CA0060.eurprd06.prod.outlook.com (25.164.28.156) To
+	VI1PR02MB1182.eurprd02.prod.outlook.com (25.163.164.22)
+X-Microsoft-Exchange-Diagnostics: 1; VI1PR02MB1182;
+	2:5KLYx7eTdS7J/MDj3LsPYdypFEwrUTSJrbizgnsJX1beOCSA/ADGsOeHvbFFIw2nUb1Ln7bnLYllcw8n7r4tVjBTz8Qq2qsX6M5eFDEPe4TNxSlLU7OYiUvXbwMHuoZ2gR9W2SDpY64guFVDW8Nh8MuTjb6Vxqlz1tdz2fnLzQg=;
+	3:/ymk1QVPpE9FTs2YIarWbWXk/ES8ccHpLV7M6qA+UPNn70nknQ5I3tiV1rstwKiIwUKFy0L3ylmvV26eHwGdvSXuL0LP2MnIdMCJYbDDnFejrGuT9B/qbNHBJDt1TJQu+LBT7AvbU1vIrU7z5gXtug==;
+	25:X7Rj2ofLKgSeu474m+phzDOxy35/jY2qgGfqUynOSo8ZIuPEjmbJaKcuEaHyHgZ18s0eSISJ8bVtnUbuLHSfmDZ37uqjzmj1ZKgG+ElDaJvXJVrKC+DVgR2pXUDLZXPNSY/8Bn+xwlVBfok0spTItt/WC/8U9zwNnkIN25NxXHdKkvUKyv4vFK3jgt1W20xZ460RDsl1vCLDp73ogQMG5f1MTAvghuyKJ2rjh+6YXk585Kfvgj+uOREqRQf1hv8Q4YUy57MsXdaeytrctup6EQ==
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:VI1PR02MB1182;
+X-Microsoft-Exchange-Diagnostics: 1; VI1PR02MB1182;
+	20:oV0m8kKzFAxSYSPDW07OdpPb5GtI3Lsuez8NzTaUavRMMsObMDe5YrutKZLok3hPHhJO8pLsODFeqsbCKu3m/aU1uZfW9AAa3v+CSnjfeNmv0QOz+2s7Z79XVQG9nr3s6WhFZA6RXm+2cCnPUBJIuX3Uu8lvKvLXPxL8htKporpJpahcCtuFNhcB4tin/yArI1bYI0C5MKceRVJ11ydIuczC1dyAUfjytnB12X6Vts/aQ4OPOrekFgwt09IBPk0sXrjvtASrGZpdPM1m/4CDr6CcIFXkaEYFyDN3CM39ioSspqXuiHEqXWV8jQSPNs3OzgvtOrWaua4THmsAYbkmks6Oz6Z6280oPd+GHTCZZqac4eiv6GmTpEPz1Alptd/T73qh5I2RJ9B2TaIIZmVrWkQz9itmT135FpbSLxXkYK+J3/t4QUPRcJo29QmMY7xa2p0EdNB+6HtAUVOFW6JVFzLiFSxKwkeUTz5i9KzArqKh8cBQFR7c7vfKLTpyfTde;
+	4:MH4NEuyWsgueQOUJFmxOQvp34ADCmc1JCGSlHlPu+doO/aX6rQJbnhyGsXLgaN7Yv4JxnurgwdlImvl3yV3KBAqNbKgudhRMc+TEU1v3EuSvi+HRE+IUEhT8rdPxI2wlnMWJpfAe2QyfGAKR+RFfLa4qyi4qYInNtuhYEzCV7rlw93lDXMaz7XB1jkFZ/8xIxrWpEkoAaVU8HZggmFkLF+RBFuRU6qod3CgHs3T5b8VW1rBYKrawMW9+ASp3XG7+dI2m4wQ+uNs/okSA76rHGDx6aHeb52E8yLenwrgLNexftkRBhQTlZ/2xxtQHRE5m
+X-Microsoft-Antispam-PRVS: <VI1PR02MB11825289F375C4D2E4B04C7290610@VI1PR02MB1182.eurprd02.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(601004)(8121501046)(5005006)(3002001);
+	SRVR:VI1PR02MB1182; BCL:0; PCL:0; RULEID:; SRVR:VI1PR02MB1182; 
+X-Forefront-PRVS: 06793E740F
+X-Forefront-Antispam-Report: SFV:NSPM;
+	SFS:(10019020)(6009001)(199003)(189002)(377424004)(66066001)(42186005)(50986999)(97736004)(5007970100001)(5004730100002)(5001860100001)(47776003)(5001830100001)(64706001)(4001540100001)(46102003)(81156007)(106356001)(33646002)(19580395003)(36756003)(2351001)(87976001)(122386002)(110136002)(50466002)(40100003)(189998001)(50226001)(450100001)(229853001)(105586002)(77156002)(5001960100002)(62966003)(15975445007)(107886002)(101416001)(5003940100001)(5001920100001)(86362001)(77096005)(48376002)(92566002)(68736005)(7099028)(4001430100001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:VI1PR02MB1182; H:piippo.it.local;
+	FPR:; SPF:None; PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
+Received-SPF: None (protection.outlook.com: theqtcompany.com does not
+	designate permitted sender hosts)
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; VI1PR02MB1182;
+	23:oeQBGDpoedvNwCwI1k8Y/7XkQgfr+WV9T6Eo8HNO3?=
+	=?us-ascii?Q?rzVktswJItKyLQzYzFFFNW3xB0ud/8zXH4t700e+IEYyFH3G2Qbxs/3haKdx?=
+	=?us-ascii?Q?5n5gn0zZ5BK/deaGr/2rBnF8NKxEFyaqqwAL89HwL8+y0eqCDbPMLqt2eMaf?=
+	=?us-ascii?Q?HbHQiR2o83mqMKCSew7o4KgglVf20MpEVSeVclszgw2YrHmu0IAXlvd7xdHz?=
+	=?us-ascii?Q?p85oVijOLlegcS8RGmge7Kxte5VrHEs7+Pql2XhQ/OtZp1yfnXmNwUJDT4IZ?=
+	=?us-ascii?Q?pj6z7v2gUuL3DUFNaxeqvx/uKSDQoL3TmwqbvZPkfW8oBwxsbWqmQrISnfvO?=
+	=?us-ascii?Q?3dchS46jMWgsk7/EeIM2IOdI5UY7B/MkwOGxDP8wHN7qEC60Flt8y2nAmv/N?=
+	=?us-ascii?Q?BE2W2Kq34+kcXcGQ94uDjGN/qz0cwoi+5lo5wvMlkPmzQqnT9acBRecqcbgH?=
+	=?us-ascii?Q?R4bjF+rNkUeg6NkO1sjdaipWbdnzs3jxKaEcEnw7tr51l9+ViNpI0fe7Q9cd?=
+	=?us-ascii?Q?V30+Qs38IE64+OzpWL30VkleblLb7/I8khX/XQEltwqgldKHOKVC/wXUfzxE?=
+	=?us-ascii?Q?HyGJZWyXKArIQI88sp6p1T5MrcDDrhnq5jSXqsiZ3KMDWs+FMSL9nYGv/BKW?=
+	=?us-ascii?Q?+6N2498Gr2MnsaDHjds4XjkLnQIIH0WeeQS5bx3e4FkL5RtrOWwHQ8CB+c3k?=
+	=?us-ascii?Q?39tpnsFKJ/rHZVWBCUK++Xe5Z2Q/Jw6BfNmYYahDwnx9BzqphpjgHWpEL2YM?=
+	=?us-ascii?Q?sH+kdfY3k4vIoU+GisQb5H8E2qBKshNuKt0gJa0lJfC2MFc8gN63zywxlPoQ?=
+	=?us-ascii?Q?q8I9h8qs6MOjb9ehnQ8DiVF0zbzaYVjIYbzoKIEasSXydFMub04bL2xA85UF?=
+	=?us-ascii?Q?oxMmcEnoa9XgB0JLydqh7GWiuWfWmhJljlVc6rB9JqV8yxovT3Uw6b7Mhws1?=
+	=?us-ascii?Q?ClFLt3PTxeUw8XBxeZd0fA2ogrCvHQhoEno94x+qes0hX/w0zvfjgAMrTv/g?=
+	=?us-ascii?Q?/kA4cpQSo696xO4vyWoXiDScRjWIe4ApqtVpmLe/09tP3PBHDwhXcOTSAZPm?=
+	=?us-ascii?Q?hNGJt8S18NSCS6qDTY/QF9fGQZPYovMxKXMgv1aFIuTKo/p1JETyIwx7jv8D?=
+	=?us-ascii?Q?M17KHMOdupdQEanrmO+ok44o7OEJy06uDL2N7elcoh5DZzfab9xXi/6427RR?=
+	=?us-ascii?Q?+ksdPEJyfHrAXAl5w4DGDIsUMjYglNlbyj7+EfY8+LdTes0oLSaBOefNu2GL?=
+	=?us-ascii?Q?5TubJvTeNq2tHPUzZ6sseVjk8Y/n0Na6XccFb2R?=
+X-Microsoft-Exchange-Diagnostics: 1; VI1PR02MB1182;
+	5:UUmO+3/3eZgJpUeTGIN9hWuv31Y/tyNWRTbmsmO2lLfl4YI2Pq9aSgWgMI+pV3kH9F9/1d6Y7yeY22ryJogVCX9n9wyKOEQbvaSlblIN5G4CA9eSfqJdCQVVdxIA0+j6yp7k7x03sgtQuE9pSsN+3g==;
+	24:zc7X29J+dHHb2p/B13v5zOf5azJiDz6DMfZfDWOWeLHOifgsFOv7JUQ4onEcQbcZ+zcLjG6jKDjQz1uKUrvwaDfE8uaF5M46UqGfMGX1ga0=;
+	20:gxOtbxY7gmT4dptaFXKFvNy15QHMs17qzEGE+95DlvA6n0GXt8sHN0Ahic896ABPLv+5u++AKm0Jda9zUG427w==
+SpamDiagnosticOutput: 1:23
+SpamDiagnosticMetadata: NSPM
+X-OriginatorOrg: theqtcompany.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2015 11:43:33.7780 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR02MB1182
+Subject: [meta-qt5][PATCH v2 00/11] upstreaming Qt for Device Creation changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,846 +85,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2015 10:01:33 -0000
+X-List-Received-Date: Tue, 25 Aug 2015 11:43:39 -0000
+Content-Type: text/plain
 
-From: Khem Raj <raj.khem@gmail.com>
+As part of Qt for Device Creation [1], we are starting to use meta-qt5 layer
+when creating images for our supported devices. We have done number of changes
+to the layer when intergrating it with our internal layer. We would now like
+to upstream those changes.
 
-This patch is a backport from upstream qt5 fixes building with clang
-from meta-clang
+v2: rebased, modified qttools patch
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-qt/qt5/nativesdk-qtbase_git.bb             |   7 +-
- recipes-qt/qt5/qtbase-native_git.bb                |   5 +-
- recipes-qt/qt5/qtbase/0008-Always-build-uic.patch  |  31 -----
- .../qt5/qtbase/0008-Fix-build-with-clang-3.7.patch |  72 +++++++++++
- ...-build-it-in-configure-but-allow-to-build.patch |  68 -----------
- ...external-hostbindir-option-for-native-sdk.patch | 134 ---------------------
- recipes-qt/qt5/qtbase/0009-Always-build-uic.patch  |  31 +++++
- ...Invert-conditional-for-defining-QT_SOCKLE.patch |  36 ------
- ...-build-it-in-configure-but-allow-to-build.patch |  68 +++++++++++
- ...external-hostbindir-option-for-native-sdk.patch | 134 +++++++++++++++++++++
- ...reserve-built-qmake-and-swap-with-native-.patch |  30 -----
- ...Invert-conditional-for-defining-QT_SOCKLE.patch |  36 ++++++
- ...reserve-built-qmake-and-swap-with-native-.patch |  30 +++++
- recipes-qt/qt5/qtbase_git.bb                       |   5 +-
- 14 files changed, 381 insertions(+), 306 deletions(-)
- delete mode 100644 recipes-qt/qt5/qtbase/0008-Always-build-uic.patch
- create mode 100644 recipes-qt/qt5/qtbase/0008-Fix-build-with-clang-3.7.patch
- delete mode 100644 recipes-qt/qt5/qtbase/0008-qmake-don-t-build-it-in-configure-but-allow-to-build.patch
- delete mode 100644 recipes-qt/qt5/qtbase/0009-Add-external-hostbindir-option-for-native-sdk.patch
- create mode 100644 recipes-qt/qt5/qtbase/0009-Always-build-uic.patch
- delete mode 100644 recipes-qt/qt5/qtbase/0009-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch
- create mode 100644 recipes-qt/qt5/qtbase/0009-qmake-don-t-build-it-in-configure-but-allow-to-build.patch
- create mode 100644 recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-native-sdk.patch
- delete mode 100644 recipes-qt/qt5/qtbase/0010-configure-preserve-built-qmake-and-swap-with-native-.patch
- create mode 100644 recipes-qt/qt5/qtbase/0010-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch
- create mode 100644 recipes-qt/qt5/qtbase/0011-configure-preserve-built-qmake-and-swap-with-native-.patch
+[1] https://www.qt.io/qt-for-device-creation
 
-diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-index 28e6d09..320cad6 100644
---- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-+++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-@@ -28,17 +28,18 @@ SRC_URI += "\
-     file://0005-qeglplatformintegration-Undefine-CursorShape-from-X..patch \
-     file://0006-configure-bump-path-length-from-256-to-512-character.patch \
-     file://0007-QOpenGLPaintDevice-sub-area-support.patch \
-+    file://0008-Fix-build-with-clang-3.7.patch \
- "
- 
- # common for qtbase-native and nativesdk-qtbase
- SRC_URI += " \
--    file://0008-Always-build-uic.patch \
--    file://0009-Add-external-hostbindir-option-for-native-sdk.patch \
-+    file://0009-Always-build-uic.patch \
-+    file://0010-Add-external-hostbindir-option-for-native-sdk.patch \
- "
- 
- # specific for nativesdk-qtbase
- SRC_URI += " \
--    file://0010-configure-preserve-built-qmake-and-swap-with-native-.patch \
-+    file://0011-configure-preserve-built-qmake-and-swap-with-native-.patch \
- "
- 
- # CMake's toolchain configuration of nativesdk-qtbase
-diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
-index e449b01..ac68f2b 100644
---- a/recipes-qt/qt5/qtbase-native_git.bb
-+++ b/recipes-qt/qt5/qtbase-native_git.bb
-@@ -24,12 +24,13 @@ SRC_URI += "\
-     file://0005-qeglplatformintegration-Undefine-CursorShape-from-X..patch \
-     file://0006-configure-bump-path-length-from-256-to-512-character.patch \
-     file://0007-QOpenGLPaintDevice-sub-area-support.patch \
-+    file://0008-Fix-build-with-clang-3.7.patch \
- "
- 
- # common for qtbase-native and nativesdk-qtbase
- SRC_URI += " \
--    file://0008-Always-build-uic.patch \
--    file://0009-Add-external-hostbindir-option-for-native-sdk.patch \
-+    file://0009-Always-build-uic.patch \
-+    file://0010-Add-external-hostbindir-option-for-native-sdk.patch \
- "
- 
- CLEANBROKEN = "1"
-diff --git a/recipes-qt/qt5/qtbase/0008-Always-build-uic.patch b/recipes-qt/qt5/qtbase/0008-Always-build-uic.patch
-deleted file mode 100644
-index 11e1bcb..0000000
---- a/recipes-qt/qt5/qtbase/0008-Always-build-uic.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From 7159760b75cc338faee3e95d26d3aea377473681 Mon Sep 17 00:00:00 2001
--From: Martin Jansa <Martin.Jansa@gmail.com>
--Date: Sat, 16 Nov 2013 00:32:30 +0100
--Subject: [PATCH 08/10] Always build uic
--
--Even if we are not building gui or widgets. This tool is needed later
--as a native tool when compiling the target.
--
--Change-Id: I257668ac28c22b192e7ec7736e6c23fa3be6bab6
--Signed-off-by: Mikko Levonmaa <mikko.levonmaa@palm.com>
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-----
-- src/src.pro | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/src.pro b/src/src.pro
--index b4d62aa..5e19215 100644
----- a/src/src.pro
--+++ b/src/src.pro
--@@ -182,7 +182,7 @@ contains(QT_CONFIG, concurrent):SUBDIRS += src_concurrent
--         }
--     }
-- }
---SUBDIRS += src_plugins src_tools_qdoc
--+SUBDIRS += src_plugins src_tools_qdoc src_tools_uic
-- 
-- nacl: SUBDIRS -= src_network src_testlib
-- 
---- 
--2.5.0
--
-diff --git a/recipes-qt/qt5/qtbase/0008-Fix-build-with-clang-3.7.patch b/recipes-qt/qt5/qtbase/0008-Fix-build-with-clang-3.7.patch
-new file mode 100644
-index 0000000..6583e80
---- /dev/null
-+++ b/recipes-qt/qt5/qtbase/0008-Fix-build-with-clang-3.7.patch
-@@ -0,0 +1,72 @@
-+From 63111eaec5cb758d99d68a4e9ec827b79121544b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 23 Aug 2015 15:19:41 -0700
-+Subject: [PATCH 08/10] Fix build with clang 3.7
-+
-+Nullable is a language extension in clang 3.7 (indicating whether or
-+not a pointer can be null).
-+http://clang.llvm.org/docs/AttributeReference.html#nullable
-+Using it as a class name breaks building with this compiler
-+
-+Upstream-Status: Backport
-+This is backport of https://codereview.qt-project.org/#/c/121545/
-+
-+/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src/tools/qlalr/lalr.cpp:241:1: error: declaration of anonymous
-+      struct must be a definition
-+struct _Nullable: public std::unary_function<Name, bool>
-+^
-+/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src/tools/qlalr/lalr.cpp:241:56: error: expected unqualified-id
-+struct _Nullable: public std::unary_function<Name, bool>
-+                                                       ^
-+/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src/tools/qlalr/lalr.cpp:303:98: error: expected expression
-+          NameList::iterator nn = std::find_if (rule->rhs.begin (), rule->rhs.end (), std::not1 (_Nullable (this)));
-+                                                                                                 ^
-+/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/git/src/tools/qlalr/lalr.cpp:638:107: error: expected expression
-+                  NameList::iterator first_not_nullable = std::find_if (dot, rule->rhs.end (), std::not1 (_Nullable (this)));
-+                                                                                                          ^
-+4 errors generated.
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/tools/qlalr/lalr.cpp | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/tools/qlalr/lalr.cpp b/src/tools/qlalr/lalr.cpp
-+index 3d0d5de..3d780cd 100644
-+--- a/src/tools/qlalr/lalr.cpp
-++++ b/src/tools/qlalr/lalr.cpp
-+@@ -238,11 +238,11 @@ void Grammar::buildExtendedGrammar ()
-+   non_terminals.insert (accept_symbol);
-+ }
-+ 
-+-struct _Nullable: public std::unary_function<Name, bool>
-++struct Nullable: public std::unary_function<Name, bool>
-+ {
-+   Automaton *_M_automaton;
-+ 
-+-  _Nullable (Automaton *aut):
-++  Nullable (Automaton *aut):
-+     _M_automaton (aut) {}
-+ 
-+   bool operator () (Name name) const
-+@@ -300,7 +300,7 @@ void Automaton::buildNullables ()
-+ 
-+       for (RulePointer rule = _M_grammar->rules.begin (); rule != _M_grammar->rules.end (); ++rule)
-+         {
-+-          NameList::iterator nn = std::find_if (rule->rhs.begin (), rule->rhs.end (), std::not1 (_Nullable (this)));
-++          NameList::iterator nn = std::find_if (rule->rhs.begin (), rule->rhs.end (), std::not1 (Nullable (this)));
-+ 
-+           if (nn == rule->rhs.end ())
-+             changed |= nullables.insert (rule->lhs).second;
-+@@ -635,7 +635,7 @@ void Automaton::buildIncludesDigraph ()
-+                   if (! _M_grammar->isNonTerminal (*A))
-+                     continue;
-+ 
-+-                  NameList::iterator first_not_nullable = std::find_if (dot, rule->rhs.end (), std::not1 (_Nullable (this)));
-++                  NameList::iterator first_not_nullable = std::find_if (dot, rule->rhs.end (), std::not1 (Nullable (this)));
-+                   if (first_not_nullable != rule->rhs.end ())
-+                     continue;
-+ 
-+-- 
-+2.5.0
-+
-diff --git a/recipes-qt/qt5/qtbase/0008-qmake-don-t-build-it-in-configure-but-allow-to-build.patch b/recipes-qt/qt5/qtbase/0008-qmake-don-t-build-it-in-configure-but-allow-to-build.patch
-deleted file mode 100644
-index ef8fcb2..0000000
---- a/recipes-qt/qt5/qtbase/0008-qmake-don-t-build-it-in-configure-but-allow-to-build.patch
-+++ /dev/null
-@@ -1,68 +0,0 @@
--From 890df28110c254022682b38f78bbbea1d62b8081 Mon Sep 17 00:00:00 2001
--From: Michael Krelin <hacker@klever.net>
--Date: Mon, 29 Oct 2012 20:07:49 -0700
--Subject: [PATCH 8/9] qmake: don't build it in configure, but allow to build it
-- separately
--
--* it is already built in qtbase-native, so we don't need it in configure
--* allow building a separate qmake for the target
--
--Upstream-Status: Inappropriate [configuration]
--  OE specific for native/target builds
--
--Signed-off-by: Yu Ke <ke.yu@intel.com>
--Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
--Signed-off-by: Mikko Levonmaa <mikko.levonmaa@gmail.com>
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-- configure       | 2 +-
-- qmake/qmake.pri | 3 ++-
-- qmake/qmake.pro | 2 ++
-- 3 files changed, 5 insertions(+), 2 deletions(-)
-----
-- configure       | 2 +-
-- qmake/qmake.pri | 3 ++-
-- qmake/qmake.pro | 1 +
-- 3 files changed, 4 insertions(+), 2 deletions(-)
--
--diff --git a/configure b/configure
--index b8f1fb9..c72b8ee 100755
----- a/configure
--+++ b/configure
--@@ -3929,7 +3929,7 @@ setBootstrapEvalVariable()
-- 
-- 
-- # build qmake
---if true; then ###[ '!' -f "$outpath/bin/qmake" ];
--+if false; then ###[ '!' -f "$outpath/bin/qmake" ];
--     echo "Creating qmake..."
-- 
--     mkdir -p "$outpath/qmake" || exit
--diff --git a/qmake/qmake.pri b/qmake/qmake.pri
--index 782151d..4b314a8 100644
----- a/qmake/qmake.pri
--+++ b/qmake/qmake.pri
--@@ -80,7 +80,8 @@ bootstrap { #Qt code
--         qjsonparser.cpp \
--         qjsonarray.cpp \
--         qjsonobject.cpp \
---        qjsonvalue.cpp
--+        qjsonvalue.cpp \
--+        qdebug.cpp
-- 
--    HEADERS+= \
--         qbitarray.h \
--diff --git a/qmake/qmake.pro b/qmake/qmake.pro
--index 89d6ea5..0ff4a96 100644
----- a/qmake/qmake.pro
--+++ b/qmake/qmake.pro
--@@ -8,6 +8,7 @@ CONFIG -= qt
-- DEFINES += \
--     QT_BUILD_QMAKE \
--     PROEVALUATOR_FULL
--+TARGET = qmake
-- 
-- VPATH += \
--     ../src/corelib/global \
---- 
--2.5.0
--
-diff --git a/recipes-qt/qt5/qtbase/0009-Add-external-hostbindir-option-for-native-sdk.patch b/recipes-qt/qt5/qtbase/0009-Add-external-hostbindir-option-for-native-sdk.patch
-deleted file mode 100644
-index 59b6728..0000000
---- a/recipes-qt/qt5/qtbase/0009-Add-external-hostbindir-option-for-native-sdk.patch
-+++ /dev/null
-@@ -1,134 +0,0 @@
--From a48e2ad5bef673e9d345d5d6de94e5bbda53fa2b Mon Sep 17 00:00:00 2001
--From: Martin Jansa <Martin.Jansa@gmail.com>
--Date: Sat, 6 Apr 2013 13:15:07 +0200
--Subject: [PATCH 09/10] Add -external-hostbindir option for native(sdk)
--
--* when cross-compiling it's sometimes useful to use existing tools from machine
--  (or in OpenEmbedded built with separate native recipe) when building for target
--
--* this way we can skip bootstraping tools we already have
--
--* qt_functions: temporary remove isEmpty check
--* now we assume that every build will provide QT_EXTERNAL_HOST_BINS value
--* isEmpty works correctly only with qmake variables (e.g. $$FOO -
--  isEmpty(FOO)), but doesn't work with system properties like $$[FOO].
--
--* cmake: Use OE_QMAKE_PATH_EXTERNAL_HOST_BINS to determine path to host binaries
--
--Upstream-Status: Pending
--  is a lot better for upstreaming (and it was already sort of approved by
--  Oswald) but in 5.2.0 I've noticed that he added something similar for
--  android builds
--
--Change-Id: I4f6e634bf0b2cb96065ee5c38b9cd8a224c3bd37
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
--Signed-off-by: Simon Busch <morphis@gravedo.de>
--Signed-off-by: Jonathan Liu <net147@gmail.com>
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
--
--Conflicts:
--        tools/configure/configureapp.cpp
-----
-- configure                           |  1 +
-- qmake/property.cpp                  |  1 +
-- src/corelib/global/qlibraryinfo.cpp |  3 ++-
-- src/corelib/global/qlibraryinfo.h   |  1 +
-- tools/configure/configureapp.cpp    | 11 +++++++++++
-- 5 files changed, 16 insertions(+), 1 deletion(-)
--
--diff --git a/configure b/configure
--index b8f1fb9..1d2157f 100755
----- a/configure
--+++ b/configure
--@@ -3833,6 +3833,7 @@ addConfStr "$CFG_SYSROOT"
-- addConfStr "$QT_REL_HOST_BINS"
-- addConfStr "$QT_REL_HOST_LIBS"
-- addConfStr "$QT_REL_HOST_DATA"
--+addConfStr "$QT_EXTERNAL_HOST_BINS"
-- addConfStr "$shortxspec"
-- addConfStr "$shortspec"
-- 
--diff --git a/qmake/property.cpp b/qmake/property.cpp
--index 817ae95..c69539f 100644
----- a/qmake/property.cpp
--+++ b/qmake/property.cpp
--@@ -68,6 +68,7 @@ static const struct {
--     { "QT_HOST_DATA", QLibraryInfo::HostDataPath, true },
--     { "QT_HOST_BINS", QLibraryInfo::HostBinariesPath, true },
--     { "QT_HOST_LIBS", QLibraryInfo::HostLibrariesPath, true },
--+    { "QT_EXTERNAL_HOST_BINS", QLibraryInfo::ExternalHostBinariesPath, true },
--     { "QMAKE_SPEC", QLibraryInfo::HostSpecPath, true },
--     { "QMAKE_XSPEC", QLibraryInfo::TargetSpecPath, true },
-- };
--diff --git a/src/corelib/global/qlibraryinfo.cpp b/src/corelib/global/qlibraryinfo.cpp
--index f663c88..675bd4c 100644
----- a/src/corelib/global/qlibraryinfo.cpp
--+++ b/src/corelib/global/qlibraryinfo.cpp
--@@ -373,7 +373,7 @@ QLibraryInfo::isDebugBuild()
--  */
-- 
-- static const struct {
---    char key[19], value[13];
--+    char key[21], value[13];
-- } qtConfEntries[] = {
--     { "Prefix", "." },
--     { "Documentation", "doc" }, // should be ${Data}/doc
--@@ -398,6 +398,7 @@ static const struct {
--     { "HostBinaries", "bin" },
--     { "HostLibraries", "lib" },
--     { "HostData", "." },
--+    { "ExternalHostBinaries", "" },
--     { "TargetSpec", "" },
--     { "HostSpec", "" },
--     { "HostPrefix", "" },
--diff --git a/src/corelib/global/qlibraryinfo.h b/src/corelib/global/qlibraryinfo.h
--index 1ad7637..5a8b127 100644
----- a/src/corelib/global/qlibraryinfo.h
--+++ b/src/corelib/global/qlibraryinfo.h
--@@ -81,6 +81,7 @@ public:
--         HostBinariesPath,
--         HostLibrariesPath,
--         HostDataPath,
--+        ExternalHostBinariesPath,
--         TargetSpecPath,
--         HostSpecPath,
--         HostPrefixPath,
--diff --git a/tools/configure/configureapp.cpp b/tools/configure/configureapp.cpp
--index 3bf0546..53bf146 100644
----- a/tools/configure/configureapp.cpp
--+++ b/tools/configure/configureapp.cpp
--@@ -1217,6 +1217,13 @@ void Configure::parseCmdLine()
--             dictionary[ "QT_EXT_PREFIX" ] = configCmdLine.at(i);
--         }
-- 
--+        else if (configCmdLine.at(i) == "-external-hostbindir") {
--+            ++i;
--+            if (i == argCount)
--+                break;
--+            dictionary[ "QT_EXTERNAL_HOST_BINS" ] = configCmdLine.at(i);
--+        }
--+
--         else if (configCmdLine.at(i) == "-make-tool") {
--             ++i;
--             if (i == argCount)
--@@ -4101,6 +4108,9 @@ void Configure::generateQConfigCpp()
-- 
--     if (dictionary["QT_REL_HOST_DATA"].isEmpty())
--         dictionary["QT_REL_HOST_DATA"] = haveHpx ? "." : dictionary["QT_REL_INSTALL_ARCHDATA"];
--+    
--+    if (dictionary["QT_EXTERNAL_HOST_BINS"].isEmpty())
--+        dictionary["QT_EXTERNAL_HOST_BINS"] = haveHpx ? "bin" : dictionary["QT_REL_INSTALL_BINS"];
-- 
--     confStringOff = 0;
--     addConfStr(0, dictionary["QT_REL_INSTALL_DOCS"]);
--@@ -4120,6 +4130,7 @@ void Configure::generateQConfigCpp()
--     addConfStr(1, dictionary["QT_REL_HOST_BINS"]);
--     addConfStr(1, dictionary["QT_REL_HOST_LIBS"]);
--     addConfStr(1, dictionary["QT_REL_HOST_DATA"]);
--+    addConfStr(1, dictionary["QT_EXTERNAL_HOST_BINS"]);
--     addConfStr(1, targSpec);
--     addConfStr(1, hostSpec);
-- 
---- 
--2.5.0
--
-diff --git a/recipes-qt/qt5/qtbase/0009-Always-build-uic.patch b/recipes-qt/qt5/qtbase/0009-Always-build-uic.patch
-new file mode 100644
-index 0000000..59266f4
---- /dev/null
-+++ b/recipes-qt/qt5/qtbase/0009-Always-build-uic.patch
-@@ -0,0 +1,31 @@
-+From c6a58549ef110a31960fca80f6d3dcdcf4d9176a Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Sat, 16 Nov 2013 00:32:30 +0100
-+Subject: [PATCH 09/11] Always build uic
-+
-+Even if we are not building gui or widgets. This tool is needed later
-+as a native tool when compiling the target.
-+
-+Change-Id: I257668ac28c22b192e7ec7736e6c23fa3be6bab6
-+Signed-off-by: Mikko Levonmaa <mikko.levonmaa@palm.com>
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ src/src.pro | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/src.pro b/src/src.pro
-+index b4d62aa..5e19215 100644
-+--- a/src/src.pro
-++++ b/src/src.pro
-+@@ -182,7 +182,7 @@ contains(QT_CONFIG, concurrent):SUBDIRS += src_concurrent
-+         }
-+     }
-+ }
-+-SUBDIRS += src_plugins src_tools_qdoc
-++SUBDIRS += src_plugins src_tools_qdoc src_tools_uic
-+ 
-+ nacl: SUBDIRS -= src_network src_testlib
-+ 
-+-- 
-+2.5.0
-+
-diff --git a/recipes-qt/qt5/qtbase/0009-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch b/recipes-qt/qt5/qtbase/0009-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch
-deleted file mode 100644
-index 3be238b..0000000
---- a/recipes-qt/qt5/qtbase/0009-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From 168bf7753c648e7599ab9967501e74373037f5e9 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 8 Jun 2015 13:59:25 -0700
--Subject: [PATCH 9/9] linux-oe-g++: Invert conditional for defining
-- QT_SOCKLEN_T
--
--This helps to make sure that QT_SOCKLEN_T is defined to be 'int'
--only when its glibc < 2 and not also for the libraries which may define
--it as per standards but are not glibc, e.g. musl
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- mkspecs/linux-oe-g++/qplatformdefs.h | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/mkspecs/linux-oe-g++/qplatformdefs.h b/mkspecs/linux-oe-g++/qplatformdefs.h
--index dd12003..8623651 100644
----- a/mkspecs/linux-oe-g++/qplatformdefs.h
--+++ b/mkspecs/linux-oe-g++/qplatformdefs.h
--@@ -86,10 +86,10 @@
-- 
-- #undef QT_SOCKLEN_T
-- 
---#if defined(__GLIBC__) && (__GLIBC__ >= 2)
---#define QT_SOCKLEN_T            socklen_t
---#else
--+#if defined(__GLIBC__) && (__GLIBC__ < 2)
-- #define QT_SOCKLEN_T            int
--+#else
--+#define QT_SOCKLEN_T            socklen_t
-- #endif
-- 
-- #if defined(_XOPEN_SOURCE) && (_XOPEN_SOURCE >= 500)
---- 
--2.5.0
--
-diff --git a/recipes-qt/qt5/qtbase/0009-qmake-don-t-build-it-in-configure-but-allow-to-build.patch b/recipes-qt/qt5/qtbase/0009-qmake-don-t-build-it-in-configure-but-allow-to-build.patch
-new file mode 100644
-index 0000000..8521327
---- /dev/null
-+++ b/recipes-qt/qt5/qtbase/0009-qmake-don-t-build-it-in-configure-but-allow-to-build.patch
-@@ -0,0 +1,68 @@
-+From 744fc89cd56387cac613534adc538900ed133b25 Mon Sep 17 00:00:00 2001
-+From: Michael Krelin <hacker@klever.net>
-+Date: Mon, 29 Oct 2012 20:07:49 -0700
-+Subject: [PATCH 09/10] qmake: don't build it in configure, but allow to build
-+ it separately
-+
-+* it is already built in qtbase-native, so we don't need it in configure
-+* allow building a separate qmake for the target
-+
-+Upstream-Status: Inappropriate [configuration]
-+  OE specific for native/target builds
-+
-+Signed-off-by: Yu Ke <ke.yu@intel.com>
-+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+Signed-off-by: Mikko Levonmaa <mikko.levonmaa@gmail.com>
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+ configure       | 2 +-
-+ qmake/qmake.pri | 3 ++-
-+ qmake/qmake.pro | 2 ++
-+ 3 files changed, 5 insertions(+), 2 deletions(-)
-+---
-+ configure       | 2 +-
-+ qmake/qmake.pri | 3 ++-
-+ qmake/qmake.pro | 1 +
-+ 3 files changed, 4 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure b/configure
-+index b8f1fb9..c72b8ee 100755
-+--- a/configure
-++++ b/configure
-+@@ -3929,7 +3929,7 @@ setBootstrapEvalVariable()
-+ 
-+ 
-+ # build qmake
-+-if true; then ###[ '!' -f "$outpath/bin/qmake" ];
-++if false; then ###[ '!' -f "$outpath/bin/qmake" ];
-+     echo "Creating qmake..."
-+ 
-+     mkdir -p "$outpath/qmake" || exit
-+diff --git a/qmake/qmake.pri b/qmake/qmake.pri
-+index 782151d..4b314a8 100644
-+--- a/qmake/qmake.pri
-++++ b/qmake/qmake.pri
-+@@ -80,7 +80,8 @@ bootstrap { #Qt code
-+         qjsonparser.cpp \
-+         qjsonarray.cpp \
-+         qjsonobject.cpp \
-+-        qjsonvalue.cpp
-++        qjsonvalue.cpp \
-++        qdebug.cpp
-+ 
-+    HEADERS+= \
-+         qbitarray.h \
-+diff --git a/qmake/qmake.pro b/qmake/qmake.pro
-+index 89d6ea5..0ff4a96 100644
-+--- a/qmake/qmake.pro
-++++ b/qmake/qmake.pro
-+@@ -8,6 +8,7 @@ CONFIG -= qt
-+ DEFINES += \
-+     QT_BUILD_QMAKE \
-+     PROEVALUATOR_FULL
-++TARGET = qmake
-+ 
-+ VPATH += \
-+     ../src/corelib/global \
-+-- 
-+2.5.0
-+
-diff --git a/recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-native-sdk.patch b/recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-native-sdk.patch
-new file mode 100644
-index 0000000..4e770ee
---- /dev/null
-+++ b/recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-native-sdk.patch
-@@ -0,0 +1,134 @@
-+From b0ab57e1f0781b73830514ddc498f38da0886d15 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Sat, 6 Apr 2013 13:15:07 +0200
-+Subject: [PATCH 10/11] Add -external-hostbindir option for native(sdk)
-+
-+* when cross-compiling it's sometimes useful to use existing tools from machine
-+  (or in OpenEmbedded built with separate native recipe) when building for target
-+
-+* this way we can skip bootstraping tools we already have
-+
-+* qt_functions: temporary remove isEmpty check
-+* now we assume that every build will provide QT_EXTERNAL_HOST_BINS value
-+* isEmpty works correctly only with qmake variables (e.g. $$FOO -
-+  isEmpty(FOO)), but doesn't work with system properties like $$[FOO].
-+
-+* cmake: Use OE_QMAKE_PATH_EXTERNAL_HOST_BINS to determine path to host binaries
-+
-+Upstream-Status: Pending
-+  is a lot better for upstreaming (and it was already sort of approved by
-+  Oswald) but in 5.2.0 I've noticed that he added something similar for
-+  android builds
-+
-+Change-Id: I4f6e634bf0b2cb96065ee5c38b9cd8a224c3bd37
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+Signed-off-by: Simon Busch <morphis@gravedo.de>
-+Signed-off-by: Jonathan Liu <net147@gmail.com>
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+
-+Conflicts:
-+        tools/configure/configureapp.cpp
-+---
-+ configure                           |  1 +
-+ qmake/property.cpp                  |  1 +
-+ src/corelib/global/qlibraryinfo.cpp |  3 ++-
-+ src/corelib/global/qlibraryinfo.h   |  1 +
-+ tools/configure/configureapp.cpp    | 11 +++++++++++
-+ 5 files changed, 16 insertions(+), 1 deletion(-)
-+
-+diff --git a/configure b/configure
-+index b8f1fb9..1d2157f 100755
-+--- a/configure
-++++ b/configure
-+@@ -3833,6 +3833,7 @@ addConfStr "$CFG_SYSROOT"
-+ addConfStr "$QT_REL_HOST_BINS"
-+ addConfStr "$QT_REL_HOST_LIBS"
-+ addConfStr "$QT_REL_HOST_DATA"
-++addConfStr "$QT_EXTERNAL_HOST_BINS"
-+ addConfStr "$shortxspec"
-+ addConfStr "$shortspec"
-+ 
-+diff --git a/qmake/property.cpp b/qmake/property.cpp
-+index 817ae95..c69539f 100644
-+--- a/qmake/property.cpp
-++++ b/qmake/property.cpp
-+@@ -68,6 +68,7 @@ static const struct {
-+     { "QT_HOST_DATA", QLibraryInfo::HostDataPath, true },
-+     { "QT_HOST_BINS", QLibraryInfo::HostBinariesPath, true },
-+     { "QT_HOST_LIBS", QLibraryInfo::HostLibrariesPath, true },
-++    { "QT_EXTERNAL_HOST_BINS", QLibraryInfo::ExternalHostBinariesPath, true },
-+     { "QMAKE_SPEC", QLibraryInfo::HostSpecPath, true },
-+     { "QMAKE_XSPEC", QLibraryInfo::TargetSpecPath, true },
-+ };
-+diff --git a/src/corelib/global/qlibraryinfo.cpp b/src/corelib/global/qlibraryinfo.cpp
-+index f663c88..675bd4c 100644
-+--- a/src/corelib/global/qlibraryinfo.cpp
-++++ b/src/corelib/global/qlibraryinfo.cpp
-+@@ -373,7 +373,7 @@ QLibraryInfo::isDebugBuild()
-+  */
-+ 
-+ static const struct {
-+-    char key[19], value[13];
-++    char key[21], value[13];
-+ } qtConfEntries[] = {
-+     { "Prefix", "." },
-+     { "Documentation", "doc" }, // should be ${Data}/doc
-+@@ -398,6 +398,7 @@ static const struct {
-+     { "HostBinaries", "bin" },
-+     { "HostLibraries", "lib" },
-+     { "HostData", "." },
-++    { "ExternalHostBinaries", "" },
-+     { "TargetSpec", "" },
-+     { "HostSpec", "" },
-+     { "HostPrefix", "" },
-+diff --git a/src/corelib/global/qlibraryinfo.h b/src/corelib/global/qlibraryinfo.h
-+index 1ad7637..5a8b127 100644
-+--- a/src/corelib/global/qlibraryinfo.h
-++++ b/src/corelib/global/qlibraryinfo.h
-+@@ -81,6 +81,7 @@ public:
-+         HostBinariesPath,
-+         HostLibrariesPath,
-+         HostDataPath,
-++        ExternalHostBinariesPath,
-+         TargetSpecPath,
-+         HostSpecPath,
-+         HostPrefixPath,
-+diff --git a/tools/configure/configureapp.cpp b/tools/configure/configureapp.cpp
-+index 3bf0546..53bf146 100644
-+--- a/tools/configure/configureapp.cpp
-++++ b/tools/configure/configureapp.cpp
-+@@ -1217,6 +1217,13 @@ void Configure::parseCmdLine()
-+             dictionary[ "QT_EXT_PREFIX" ] = configCmdLine.at(i);
-+         }
-+ 
-++        else if (configCmdLine.at(i) == "-external-hostbindir") {
-++            ++i;
-++            if (i == argCount)
-++                break;
-++            dictionary[ "QT_EXTERNAL_HOST_BINS" ] = configCmdLine.at(i);
-++        }
-++
-+         else if (configCmdLine.at(i) == "-make-tool") {
-+             ++i;
-+             if (i == argCount)
-+@@ -4101,6 +4108,9 @@ void Configure::generateQConfigCpp()
-+ 
-+     if (dictionary["QT_REL_HOST_DATA"].isEmpty())
-+         dictionary["QT_REL_HOST_DATA"] = haveHpx ? "." : dictionary["QT_REL_INSTALL_ARCHDATA"];
-++    
-++    if (dictionary["QT_EXTERNAL_HOST_BINS"].isEmpty())
-++        dictionary["QT_EXTERNAL_HOST_BINS"] = haveHpx ? "bin" : dictionary["QT_REL_INSTALL_BINS"];
-+ 
-+     confStringOff = 0;
-+     addConfStr(0, dictionary["QT_REL_INSTALL_DOCS"]);
-+@@ -4120,6 +4130,7 @@ void Configure::generateQConfigCpp()
-+     addConfStr(1, dictionary["QT_REL_HOST_BINS"]);
-+     addConfStr(1, dictionary["QT_REL_HOST_LIBS"]);
-+     addConfStr(1, dictionary["QT_REL_HOST_DATA"]);
-++    addConfStr(1, dictionary["QT_EXTERNAL_HOST_BINS"]);
-+     addConfStr(1, targSpec);
-+     addConfStr(1, hostSpec);
-+ 
-+-- 
-+2.5.0
-+
-diff --git a/recipes-qt/qt5/qtbase/0010-configure-preserve-built-qmake-and-swap-with-native-.patch b/recipes-qt/qt5/qtbase/0010-configure-preserve-built-qmake-and-swap-with-native-.patch
-deleted file mode 100644
-index 109c7d1..0000000
---- a/recipes-qt/qt5/qtbase/0010-configure-preserve-built-qmake-and-swap-with-native-.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From ee09941be5f00409029497b65358f8b8d3db91de Mon Sep 17 00:00:00 2001
--From: Denys Dmytriyenko <denys@ti.com>
--Date: Mon, 11 Nov 2013 20:22:34 -0500
--Subject: [PATCH 10/10] configure: preserve built qmake and swap with native
-- one
--
--Let configure script build the real qmake, but right after it's built, swap
--it with a native qmake for further internal use, preserving the real one.
--
--Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-----
-- configure | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/configure b/configure
--index 1d2157f..bea14af 100755
----- a/configure
--+++ b/configure
--@@ -4099,6 +4099,8 @@ if true; then ###[ '!' -f "$outpath/bin/qmake" ];
--         echo "Done."
--     fi
-- fi # Build qmake
--+mv "$outpath/bin/qmake" "$outpath/bin/qmake-real"
--+mv "$outpath/bin/qmake-native" "$outpath/bin/qmake"
-- 
-- echo "Running configuration tests..."
-- 
---- 
--2.5.0
--
-diff --git a/recipes-qt/qt5/qtbase/0010-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch b/recipes-qt/qt5/qtbase/0010-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch
-new file mode 100644
-index 0000000..0069a17
---- /dev/null
-+++ b/recipes-qt/qt5/qtbase/0010-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch
-@@ -0,0 +1,36 @@
-+From bae2c6afb951d1352845ca257fdc2389f3fe851e Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 8 Jun 2015 13:59:25 -0700
-+Subject: [PATCH 10/10] linux-oe-g++: Invert conditional for defining
-+ QT_SOCKLEN_T
-+
-+This helps to make sure that QT_SOCKLEN_T is defined to be 'int'
-+only when its glibc < 2 and not also for the libraries which may define
-+it as per standards but are not glibc, e.g. musl
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ mkspecs/linux-oe-g++/qplatformdefs.h | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/mkspecs/linux-oe-g++/qplatformdefs.h b/mkspecs/linux-oe-g++/qplatformdefs.h
-+index dd12003..8623651 100644
-+--- a/mkspecs/linux-oe-g++/qplatformdefs.h
-++++ b/mkspecs/linux-oe-g++/qplatformdefs.h
-+@@ -86,10 +86,10 @@
-+ 
-+ #undef QT_SOCKLEN_T
-+ 
-+-#if defined(__GLIBC__) && (__GLIBC__ >= 2)
-+-#define QT_SOCKLEN_T            socklen_t
-+-#else
-++#if defined(__GLIBC__) && (__GLIBC__ < 2)
-+ #define QT_SOCKLEN_T            int
-++#else
-++#define QT_SOCKLEN_T            socklen_t
-+ #endif
-+ 
-+ #if defined(_XOPEN_SOURCE) && (_XOPEN_SOURCE >= 500)
-+-- 
-+2.5.0
-+
-diff --git a/recipes-qt/qt5/qtbase/0011-configure-preserve-built-qmake-and-swap-with-native-.patch b/recipes-qt/qt5/qtbase/0011-configure-preserve-built-qmake-and-swap-with-native-.patch
-new file mode 100644
-index 0000000..1bfe825
---- /dev/null
-+++ b/recipes-qt/qt5/qtbase/0011-configure-preserve-built-qmake-and-swap-with-native-.patch
-@@ -0,0 +1,30 @@
-+From cef1ac9fa399ad5c57480de26a1ef441414f125c Mon Sep 17 00:00:00 2001
-+From: Denys Dmytriyenko <denys@ti.com>
-+Date: Mon, 11 Nov 2013 20:22:34 -0500
-+Subject: [PATCH 11/11] configure: preserve built qmake and swap with native
-+ one
-+
-+Let configure script build the real qmake, but right after it's built, swap
-+it with a native qmake for further internal use, preserving the real one.
-+
-+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-+---
-+ configure | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/configure b/configure
-+index 1d2157f..bea14af 100755
-+--- a/configure
-++++ b/configure
-+@@ -4099,6 +4099,8 @@ if true; then ###[ '!' -f "$outpath/bin/qmake" ];
-+         echo "Done."
-+     fi
-+ fi # Build qmake
-++mv "$outpath/bin/qmake" "$outpath/bin/qmake-real"
-++mv "$outpath/bin/qmake-native" "$outpath/bin/qmake"
-+ 
-+ echo "Running configuration tests..."
-+ 
-+-- 
-+2.5.0
-+
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index e1d208d..0d3f685 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -18,12 +18,13 @@ SRC_URI += "\
-     file://0005-qeglplatformintegration-Undefine-CursorShape-from-X..patch \
-     file://0006-configure-bump-path-length-from-256-to-512-character.patch \
-     file://0007-QOpenGLPaintDevice-sub-area-support.patch \
-+    file://0008-Fix-build-with-clang-3.7.patch \
- "
- 
- # specific for target qtbase
- SRC_URI += "\
--    file://0008-qmake-don-t-build-it-in-configure-but-allow-to-build.patch \
--    file://0009-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch \
-+    file://0009-qmake-don-t-build-it-in-configure-but-allow-to-build.patch \
-+    file://0010-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch \
- "
- 
- DEPENDS += "qtbase-native"
+The following changes since commit 40b7a93a3c6cf05136c606824c1cea848b75bcb6:
+
+  qtquick1: allow to disable qtwebkit support (2015-08-24 15:35:52 +0200)
+
+are available in the git repository at:
+
+  git://github.com/sapiippo/meta-qt5 master
+  https://github.com/sapiippo/meta-qt5/tree/master
+
+Samuli Piippo (11):
+  qt5: make populate_sdk_qt5 reusable
+  qt5: improve Qt module package handling
+  qt5: improve support for native and nativesdk modules
+  qt5: add host paths to qt.conf
+  qt5: disable debian auto renaming
+  qt5: make qt5.inc reusable qt5-module.bbclass
+  qttools: use one recipe for all compilations
+  qtbase: remove dependency to sqlite
+  qtbase: PACKAGECONFIGs for libproxy and libinput
+  qtlocation: use correct dependencies
+  qtwebengine: fix problem with recursive qmake call
+
+ classes/populate_sdk_qt5.bbclass                   | 11 +---
+ classes/qmake5.bbclass                             |  8 +++
+ classes/qmake5_base.bbclass                        | 11 ++++
+ .../qt5/qt5.inc => classes/qt5-module.bbclass      | 38 +++++++++++-
+ recipes-qt/examples/cinematicexperience_1.0.bb     |  2 +-
+ recipes-qt/examples/qt5everywheredemo_1.0.bb       |  2 +-
+ recipes-qt/examples/qt5nmapcarousedemo_1.0.bb      |  2 +-
+ recipes-qt/examples/qt5nmapper_1.0.bb              |  2 +-
+ recipes-qt/examples/qtsmarthome_1.0.bb             |  2 +-
+ recipes-qt/examples/quitbattery_1.0.0.bb           |  2 +-
+ recipes-qt/examples/quitindicators_1.0.1.bb        |  2 +-
+ recipes-qt/libconnman-qt/libconnman-qt5_git.bb     |  2 +-
+ recipes-qt/meta/meta-toolchain-qt5.bb              |  4 ++
+ recipes-qt/qt5/nativesdk-qttools_git.bb            | 42 -------------
+ recipes-qt/qt5/qt3d_git.bb                         |  2 +-
+ recipes-qt/qt5/qtbase_git.bb                       |  6 +-
+ recipes-qt/qt5/qtconnectivity_git.bb               |  2 +-
+ recipes-qt/qt5/qtdeclarative_git.bb                |  4 +-
+ recipes-qt/qt5/qtenginio_git.bb                    |  2 +-
+ recipes-qt/qt5/qtgraphicaleffects_git.bb           |  2 +-
+ recipes-qt/qt5/qtimageformats_git.bb               |  2 +-
+ recipes-qt/qt5/qtlocation_git.bb                   |  5 +-
+ recipes-qt/qt5/qtmultimedia_git.bb                 |  2 +-
+ recipes-qt/qt5/qtquick1_git.bb                     |  2 +-
+ recipes-qt/qt5/qtquickcontrols_git.bb              |  2 +-
+ recipes-qt/qt5/qtscript_git.bb                     |  2 +-
+ recipes-qt/qt5/qtsensors_git.bb                    |  2 +-
+ recipes-qt/qt5/qtserialport_git.bb                 |  2 +-
+ recipes-qt/qt5/qtsvg_git.bb                        |  2 +-
+ recipes-qt/qt5/qtsystems_git.bb                    |  2 +-
+ recipes-qt/qt5/qttools-native_git.bb               | 24 --------
+ recipes-qt/qt5/qttools_git.bb                      | 11 +++-
+ recipes-qt/qt5/qttranslations_git.bb               |  2 +-
+ recipes-qt/qt5/qtwayland_git.bb                    |  2 +-
+ recipes-qt/qt5/qtwebchannel_git.bb                 |  2 +-
+ .../0005-Generate-usable-qmake_extras.gypi.patch   | 71 ++++++++++++++++++++++
+ recipes-qt/qt5/qtwebengine_git.bb                  |  3 +-
+ recipes-qt/qt5/qtwebkit-examples_git.bb            |  2 +-
+ recipes-qt/qt5/qtwebkit_git.bb                     |  2 +-
+ recipes-qt/qt5/qtwebsockets_git.bb                 |  2 +-
+ recipes-qt/qt5/qtx11extras_git.bb                  |  2 +-
+ recipes-qt/qt5/qtxmlpatterns_git.bb                |  4 +-
+ 42 files changed, 183 insertions(+), 115 deletions(-)
+ rename recipes-qt/qt5/qt5.inc => classes/qt5-module.bbclass (86%)
+ delete mode 100644 recipes-qt/qt5/nativesdk-qttools_git.bb
+ delete mode 100644 recipes-qt/qt5/qttools-native_git.bb
+ create mode 100644 recipes-qt/qt5/qtwebengine/0005-Generate-usable-qmake_extras.gypi.patch
+
 -- 
-2.5.0
+1.9.1
 
 
