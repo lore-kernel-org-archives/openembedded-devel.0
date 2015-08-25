@@ -1,42 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C0CB65CBC
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id C210465CBC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 23:10:14 +0000 (UTC)
-Received: by pabzx8 with SMTP id zx8so47760504pab.1
+	Tue, 25 Aug 2015 23:13:31 +0000 (UTC)
+Received: by pacdd16 with SMTP id dd16so138471803pac.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 16:10:15 -0700 (PDT)
+	Tue, 25 Aug 2015 16:13:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=1L99cy3TFnPgFIfqLfdQHB8KR1Fl1wbkofazHyciG3Q=;
-	b=gso+w8kThn7sdmVRDvvL/puVXGNhLsnsUIMkJgIHipQSvc84nwXwJ50eCjW9L3vp0A
-	t7PxIBOZzPBPAQY0EQcPEIdg4MiXHj/C7NKMHL9S6SAg4ytAS/BriEnor2lnBHKZdojm
-	e73Fb1zyjffwkGMgA7SzyI+RnyyC2p7MG021LbcbbKhZDeE9rwsdkSzEY9VVaFR1TJts
-	cltx7k9GCOGpywsbVlK3qGyIGhTcBZzi2i8QUdlj5x59Y3NsFqBt2/jwR7Ur4ua7cVuf
-	5bUopzWrdC4l6v/xzhScl9gDbt1/6YiQBxt3JTJcg17AIMb5d18qikvu+nkR6SHIWlpL
-	Kr0w==
-X-Received: by 10.66.90.166 with SMTP id bx6mr60496987pab.133.1440544214860;
-	Tue, 25 Aug 2015 16:10:14 -0700 (PDT)
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=iPf7XmoL6Hd3Vh5Nr+v4ICHC3jyw0imNfzcEWuMUJZ0=;
+	b=AyL9Z6ptcY5OEWm+1JtY8zqJKSn4vgepWY2V5GJiTKskhg0zJ0IOVCyIUAgcZDbtg+
+	/pRo81+A9lnMle6by1IIaKKl7PGEc9P4HROZF67shZvflDl3qo59IlD6jo3vILifxVUa
+	uGD5B+X8GgFDivJhWLg4liWW9jFBb1dvYVqOSrCxiJH6w7W2tLjbgriRcuMn9vNimtvt
+	+Fh0VK66Q+D0o1/2/ysMQUg2y8oXX661LsKxO6YNoxftQ1y+o7Hr5tzKKwmHD6xBMoNK
+	WzEsmSh3BOv7g8TdNPaaY6LuMKlFzf+iBaACVEZaSLVwKtTikvtdEX3jfQT5Kbkttpkk
+	4Kqw==
+X-Received: by 10.68.95.225 with SMTP id dn1mr61183279pbb.128.1440544411388;
+	Tue, 25 Aug 2015 16:13:31 -0700 (PDT)
 Received: from ?IPv6:2601:646:8601:4580:316a:3272:24e7:4679?
 	([2601:646:8601:4580:316a:3272:24e7:4679])
 	by smtp.gmail.com with ESMTPSA id
-	ye2sm20971973pab.31.2015.08.25.16.10.13
-	(version=TLS1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 25 Aug 2015 16:10:14 -0700 (PDT)
+	n9sm19717714pdi.88.2015.08.25.16.13.30
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 25 Aug 2015 16:13:30 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
 X-Pgp-Agent: GPGMail 2.5.1
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1439928871-17797-2-git-send-email-mario@ossystems.com.br>
-Date: Tue, 25 Aug 2015 16:10:08 -0700
-Message-Id: <992F06D0-90FC-4648-B271-545B0DA26248@gmail.com>
+In-Reply-To: <55DC0F56.6040204@skidata.com>
+Date: Tue, 25 Aug 2015 16:13:29 -0700
+Message-Id: <E257CA19-37BF-4819-AD56-1D82D3DAAEB5@gmail.com>
 References: <1439928871-17797-1-git-send-email-mario@ossystems.com.br>
-	<1439928871-17797-2-git-send-email-mario@ossystems.com.br>
+	<CAD0=qkLXGaNYJ6X_sUXk3EEbi0EvoN1z0ufGvwB8V41Bo4ETyQ@mail.gmail.com>
+	<55D580DA.7080004@skidata.com>
+	<FA6D4712-DD99-40AC-8393-136CDA3CDDD8@gmail.com>
+	<55DC0F56.6040204@skidata.com>
 To: openembedded-devel@lists.openembedded.org
 X-Mailer: Apple Mail (2.2104)
-Cc: Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: Re: [meta-java][PATCH 2/3] Avoid parse time errors due to dependency on x11, for distros without x11
+Subject: Re: [meta-java][PATCH 1/3] Don't depend on a hardcoded compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,127 +53,186 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2015 23:10:21 -0000
-X-Groupsio-MsgNum: 57022
+X-List-Received-Date: Tue, 25 Aug 2015 23:13:34 -0000
+X-Groupsio-MsgNum: 57023
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_CEFEB365-7D8D-4B3A-BC6B-7BCA70FD2DE8";
+	boundary="Apple-Mail=_32CF12B9-8460-4FF3-831F-E88415F6FED5";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_CEFEB365-7D8D-4B3A-BC6B-7BCA70FD2DE8
+--Apple-Mail=_32CF12B9-8460-4FF3-831F-E88415F6FED5
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
-	charset=utf-8
+	charset=windows-1252
 
+Otavio/Henning
 
-> On Aug 18, 2015, at 1:14 PM, Mario Domenech Goulart =
-<mario@ossystems.com.br> wrote:
->=20
-> BitBake raises some errors when processing recipes that depend on x11
-> for distros that don't have x11 in DISTRO_FEATURES. To work around
-> that issue, REQUIRED_DISTRO_FEATURES =3D "x11" (from
-> distro_features_check.bbclass) has been set for the following recipes:
->=20
-> * cacao
-> * classpath
-> * jamvm
-> * openjdk-6-release
-> * openjdk-7-release
->=20
-> That makes BitBake skip those recipes during the cache generation
-> (they'd still be parsed, but ignored).
+Please revert this commit. Its causing more pains than the problem it =
+solves
 
-This will also cause native versions of java to now check for x11, thats =
-a wrong assumption. Please fix it asap.
-meta-java is currently regressing on two recent commits including this =
-one.
+Thanks
+-Khem
 
-so, I would propose to revert this commit if we can=E2=80=99t fix it in =
-short period of time.
+> On Aug 24, 2015, at 11:46 PM, Richard Leitner =
+<richard.leitner@skidata.com> wrote:
+>=20
+>=20
+> On 08/25/2015 08:38 AM, Khem Raj wrote:
+>>=20
+>>> On Aug 20, 2015, at 12:25 AM, Richard Leitner =
+<richard.leitner@skidata.com> wrote:
+>>>=20
+>>> Hi,
+>>>=20
+>>> On 08/19/2015 01:53 PM, Sven Ebenfeld wrote:
+>>>> This patch creates a circular dependency for me:
+>>>>=20
+>>>> ERROR: Unbuildable tasks were found.
+>>>> These are usually caused by circular dependencies and any circular
+>>>> dependency chains found will be printed below. Increase the debug
+>>>> level to see a list of unbuildable tasks.
+>>>>=20
+>>>=20
+>>> Same problem for me!
+>>>=20
+>>> My settings are:
+>>> PREFERRED_PROVIDER_virtual/java-initial-native =3D =
+"cacao-initial-native"
+>>> PREFERRED_PROVIDER_virtual/java-native =3D "jamvm-native"
+>>> PREFERRED_PROVIDER_virtual/javac-native =3D "ecj-bootstrap-native=94
+>>=20
+>> can you change this to
+>>=20
+>> PREFERRED_PROVIDER_virtual/javac-native =3D "ecj-initial-native"
+>>=20
+>> and retry ?
+>=20
+> Same problem:
+>=20
+> NOTE: Preparing runqueue
+> ERROR: Unbuildable tasks were found.
+> These are usually caused by circular dependencies and any circular
+> dependency chains found will be printed below. Increase the debug =
+level
+> to see a list of unbuildable tasks.
+>=20
+> Identifying dependency loops (this may take a short while)...
+>=20
+> ERROR:
+> Dependency loop #1 found:
+>  Task 674
+> (/opt/yocto/poky/meta-java/recipes-core/ecj/ecj-bootstrap-native.bb,
+> do_install) (dependent Tasks ['ecj-bootstrap-native.bb, do_compile'])
+>  Task 675
+> (/opt/yocto/poky/meta-java/recipes-core/ecj/ecj-bootstrap-native.bb,
+> do_populate_sysroot) (dependent Tasks ['ecj-bootstrap-native.bb,
+> do_install'])
+>  Task 684
+> =
+(virtual:native:/opt/yocto/poky/meta-java/recipes-core/jamvm/jamvm_git.bb,=
 
+> do_configure) (dependent Tasks ['gnu-config, do_populate_sysroot',
+> 'autoconf, do_populate_sysroot', 'zlib, do_populate_sysroot', 'libffi,
+> do_populate_sysroot', 'jamvm, do_patch', 'automake,
+> do_populate_sysroot', 'libtool-native, do_populate_sysroot',
+> 'classpath-native, do_populate_sysroot', 'ecj-bootstrap-native.bb,
+> do_populate_sysroot', 'pkgconfig, do_populate_sysroot'])
+>  Task 685
+> =
+(virtual:native:/opt/yocto/poky/meta-java/recipes-core/jamvm/jamvm_git.bb,=
 
+> do_compile) (dependent Tasks ['jamvm, do_configure'])
+>  Task 681
+> =
+(virtual:native:/opt/yocto/poky/meta-java/recipes-core/jamvm/jamvm_git.bb,=
 
->=20
-> Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
-> ---
-> recipes-core/cacao/cacao_1.6.1.bb       | 4 +++-
-> recipes-core/classpath/classpath.inc    | 4 +++-
-> recipes-core/jamvm/jamvm.inc            | 4 +++-
-> recipes-core/openjdk/openjdk-common.inc | 4 +++-
-> 4 files changed, 12 insertions(+), 4 deletions(-)
->=20
-> diff --git a/recipes-core/cacao/cacao_1.6.1.bb =
-b/recipes-core/cacao/cacao_1.6.1.bb
-> index 14ff019..d52f339 100644
-> --- a/recipes-core/cacao/cacao_1.6.1.bb
-> +++ b/recipes-core/cacao/cacao_1.6.1.bb
-> @@ -15,7 +15,9 @@ SRC_URI =3D =
-"http://www.complang.tuwien.ac.at/cacaojvm/download/cacao-${PV}/cacao-
-> SRC_URI[md5sum] =3D "2c18478404afd1cffdd15ad1e9d85a57"
-> SRC_URI[sha256sum] =3D =
-"eecc8bd1b528a028f43d9d1d0c06b97855bbf1d40e03826d911ebbc0b6971e12"
->=20
-> -inherit java autotools-brokensep update-alternatives pkgconfig
-> +inherit java autotools-brokensep update-alternatives pkgconfig =
-distro_features_check
-> +
-> +REQUIRED_DISTRO_FEATURES =3D "x11"
->=20
-> EXTRA_OECONF_class-native =3D "\
->     --enable-debug \
-> diff --git a/recipes-core/classpath/classpath.inc =
-b/recipes-core/classpath/classpath.inc
-> index 1bdfd78..0f760fe 100644
-> --- a/recipes-core/classpath/classpath.inc
-> +++ b/recipes-core/classpath/classpath.inc
-> @@ -7,7 +7,9 @@ LICENSE =3D "Classpath"
->=20
-> PBN =3D "classpath"
->=20
-> -inherit autotools java gettext
-> +inherit autotools java gettext distro_features_check
-> +
-> +REQUIRED_DISTRO_FEATURES =3D "x11"
->=20
-> DEPENDS =3D "virtual/javac-native fastjar-native zip-native gmp =
-antlr-native gtk+ gconf libxtst file"
->=20
-> diff --git a/recipes-core/jamvm/jamvm.inc =
-b/recipes-core/jamvm/jamvm.inc
-> index bed1c5d..9d9fef6 100644
-> --- a/recipes-core/jamvm/jamvm.inc
-> +++ b/recipes-core/jamvm/jamvm.inc
-> @@ -21,7 +21,9 @@ SRC_URI =3D =
-"${SOURCEFORGE_MIRROR}/jamvm/jamvm-${PV}.tar.gz \
->           "
+> do_install) (dependent Tasks ['jamvm, do_compile'])
+>  Task 682
+> =
+(virtual:native:/opt/yocto/poky/meta-java/recipes-core/jamvm/jamvm_git.bb,=
+
+> do_populate_sysroot) (dependent Tasks ['jamvm, do_install'])
+>  Task 677
+> (/opt/yocto/poky/meta-java/recipes-core/ecj/ecj-bootstrap-native.bb,
+> do_configure) (dependent Tasks ['ecj-bootstrap-native.bb, do_patch',
+> 'jamvm, do_populate_sysroot', 'libecj-bootstrap-native,
+> do_populate_sysroot'])
+>  Task 678
+> (/opt/yocto/poky/meta-java/recipes-core/ecj/ecj-bootstrap-native.bb,
+> do_compile) (dependent Tasks ['ecj-bootstrap-native.bb, =
+do_configure'])
 >=20
 >=20
-> -inherit java autotools update-alternatives pkgconfig
-> +inherit java autotools update-alternatives pkgconfig =
-distro_features_check
-> +
-> +REQUIRED_DISTRO_FEATURES =3D "x11"
 >=20
-> # This uses 32 bit arm, so force the instruction set to arm, not thumb
-> ARM_INSTRUCTION_SET =3D "arm"
-> diff --git a/recipes-core/openjdk/openjdk-common.inc =
-b/recipes-core/openjdk/openjdk-common.inc
-> index dc26522..e3e597a 100644
-> --- a/recipes-core/openjdk/openjdk-common.inc
-> +++ b/recipes-core/openjdk/openjdk-common.inc
-> @@ -17,7 +17,9 @@ DEPENDS_append_libc-uclibc =3D " virtual/libiconv "
-> # because structure sizes and/or alignment may differ.
-> DEPENDS_append =3D " qemu-native "
+> Dependency loop #2 found:
+>  Task 674
+> (/opt/yocto/poky/meta-java/recipes-core/ecj/ecj-bootstrap-native.bb,
+> do_install) (dependent Tasks ['ecj-bootstrap-native.bb, do_compile'])
+>  Task 675
+> (/opt/yocto/poky/meta-java/recipes-core/ecj/ecj-bootstrap-native.bb,
+> do_populate_sysroot) (dependent Tasks ['ecj-bootstrap-native.bb,
+> do_install'])
+>  Task 691
+> =
+(/opt/yocto/poky/meta-java/recipes-core/classpath/classpath-native_0.99.bb=
+,
+> do_configure) (dependent Tasks ['zip, do_populate_sysroot', =
+'gnu-config,
+> do_populate_sysroot', 'autoconf, do_populate_sysroot',
+> 'ecj-bootstrap-native.bb, do_populate_sysroot', 'automake,
+> do_populate_sysroot', 'classpath-native, do_patch', 'libtool-native,
+> do_populate_sysroot', 'fastjar, do_populate_sysroot',
+> 'gettext-minimal-native, do_populate_sysroot'])
+>  Task 692
+> =
+(/opt/yocto/poky/meta-java/recipes-core/classpath/classpath-native_0.99.bb=
+,
+> do_compile) (dependent Tasks ['classpath-native, do_configure'])
+>  Task 688
+> =
+(/opt/yocto/poky/meta-java/recipes-core/classpath/classpath-native_0.99.bb=
+,
+> do_install) (dependent Tasks ['classpath-native, do_compile'])
+>  Task 689
+> =
+(/opt/yocto/poky/meta-java/recipes-core/classpath/classpath-native_0.99.bb=
+,
+> do_populate_sysroot) (dependent Tasks ['classpath-native, =
+do_install'])
+>  Task 684
+> =
+(virtual:native:/opt/yocto/poky/meta-java/recipes-core/jamvm/jamvm_git.bb,=
+
+> do_configure) (dependent Tasks ['gnu-config, do_populate_sysroot',
+> 'autoconf, do_populate_sysroot', 'zlib, do_populate_sysroot', 'libffi,
+> do_populate_sysroot', 'jamvm, do_patch', 'automake,
+> do_populate_sysroot', 'libtool-native, do_populate_sysroot',
+> 'classpath-native, do_populate_sysroot', 'ecj-bootstrap-native.bb,
+> do_populate_sysroot', 'pkgconfig, do_populate_sysroot'])
+>  Task 685
+> =
+(virtual:native:/opt/yocto/poky/meta-java/recipes-core/jamvm/jamvm_git.bb,=
+
+> do_compile) (dependent Tasks ['jamvm, do_configure'])
+>  Task 681
+> =
+(virtual:native:/opt/yocto/poky/meta-java/recipes-core/jamvm/jamvm_git.bb,=
+
+> do_install) (dependent Tasks ['jamvm, do_compile'])
+>  Task 682
+> =
+(virtual:native:/opt/yocto/poky/meta-java/recipes-core/jamvm/jamvm_git.bb,=
+
+> do_populate_sysroot) (dependent Tasks ['jamvm, do_install'])
+>  Task 677
+> (/opt/yocto/poky/meta-java/recipes-core/ecj/ecj-bootstrap-native.bb,
+> do_configure) (dependent Tasks ['ecj-bootstrap-native.bb, do_patch',
+> 'jamvm, do_populate_sysroot', 'libecj-bootstrap-native,
+> do_populate_sysroot'])
+>  Task 678
+> (/opt/yocto/poky/meta-java/recipes-core/ecj/ecj-bootstrap-native.bb,
+> do_compile) (dependent Tasks ['ecj-bootstrap-native.bb, =
+do_configure'])
 >=20
-> -inherit java autotools gettext qemu pkgconfig
-> +inherit java autotools gettext qemu pkgconfig distro_features_check
-> +
-> +REQUIRED_DISTRO_FEATURES =3D "x11"
->=20
-> # OpenJDK uses slightly different names for certain arches. We need to =
-know
-> #	this to create some files which are expected by the build.
-> --
-> 2.1.4
 >=20
 > --
 > _______________________________________________
@@ -179,7 +241,7 @@ know
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
---Apple-Mail=_CEFEB365-7D8D-4B3A-BC6B-7BCA70FD2DE8
+--Apple-Mail=_32CF12B9-8460-4FF3-831F-E88415F6FED5
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -190,9 +252,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlXc9dQACgkQuwUzVZGdMxSySACfZadGosD8LC7Zge2uAipu3S8g
-8T4Ani/qniOEZKGqwyoZ03tJ9DkA61+b
-=rwjM
+iEYEARECAAYFAlXc9pkACgkQuwUzVZGdMxR6bQCghgsMdMnW2akNLSASZskR7GQ/
+82gAoIocec93LIxdM5TnrDz6ScInFKNQ
+=mqtC
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_CEFEB365-7D8D-4B3A-BC6B-7BCA70FD2DE8--
+--Apple-Mail=_32CF12B9-8460-4FF3-831F-E88415F6FED5--
