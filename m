@@ -1,36 +1,41 @@
 Return-Path: <mario.goulart@gmail.com>
-Received: from mail-qg0-f46.google.com (mail-qg0-f46.google.com
-	[209.85.192.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 45F9D734B8
+Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 8952C734B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2015 19:34:46 +0000 (UTC)
-Received: by qgeg42 with SMTP id g42so133557865qge.1
+	Wed, 26 Aug 2015 19:35:46 +0000 (UTC)
+Received: by iodt126 with SMTP id t126so31993607iod.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2015 12:34:46 -0700 (PDT)
+	Wed, 26 Aug 2015 12:35:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:organization;
-	bh=2VxJURmLuQ5KkxpvjbOtTh2314P3OpEdaIrYAZBetvY=;
-	b=kaPyF0tnoWHO1WRnKU75Bt9tmJ+0JjlB0bddZJtCG0pJTfFxZtiu3jos7sLOHuF7eN
-	yIJbExVhL6wW50oOqXjftwchpiUsZlWQdgCfDkcAftQgcbisfmUfPz9YpVrz36gW8Rh4
-	/gu3kVY5mrO78dKElJ6fUYki/jGzjCPE9SUpiluzaln2VeYSAdM6DRZ166aV8c6wFUok
-	MStJNY+Al30FErPvDGWEqgWK4VN6JQesorHXV/f2QVtxUWFbaGZuQ/aQ9Xm+NIVg9zMr
-	kZk8Ztswl8MO7nJSCJqqFM1MHJ6dlPLcjF6u0RBvP3BqGvp1fj/k49yDC10IfWBXtucG
-	r7dg==
-X-Received: by 10.140.231.208 with SMTP id b199mr137759qhc.87.1440617685907;
-	Wed, 26 Aug 2015 12:34:45 -0700 (PDT)
-Received: from mario.lab.ossystems.com.br ([187.23.145.102])
-	by smtp.gmail.com with ESMTPSA id 65sm17046616qgo.1.2015.08.26.12.34.44
+	h=sender:from:to:subject:references:date:in-reply-to:message-id
+	:user-agent:mime-version:content-type;
+	bh=kYbdyqKG1v5TiFNfhFZrYLVSZw9ojVkHWPSTP1gPjKY=;
+	b=vhcObYwqq3UdRrCAks8bQuv7kuNPUYm+HMt+875Y6txFPICNPdAxoFgq+iODIVwaVW
+	jnPHbmdSlW5LVa9WBal1lJXrm1twN/u91UGQ7nNemxEh0gl0QK6fVROUhT+KMHjMpPh9
+	chA9D6CQHUyfG6+pBsr1DtbuscSeBOugGC42J9QaEjwXLKV1hXpdhsJrJ45/+MstD4GA
+	sV6ma0JunEcd7M3XU40ps2/w4Slz6R2RYmU64l4/hEdpKQBbmOewsheC/RmDyFtaRuhl
+	m4ghVqQxlMUDnTj9ozkYodjkSMQXMKbPvKu5G1pRMctMPiFp7yWMuhY0G8thPkFIciRU
+	vHpg==
+X-Received: by 10.107.37.142 with SMTP id l136mr6234299iol.126.1440617746261; 
+	Wed, 26 Aug 2015 12:35:46 -0700 (PDT)
+Received: from email.parenteses.org.gmail.com (email.parenteses.org.
+	[198.199.72.94])
+	by smtp.gmail.com with ESMTPSA id k64sm50503iod.3.2015.08.26.12.35.45
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Aug 2015 12:34:45 -0700 (PDT)
+	Wed, 26 Aug 2015 12:35:45 -0700 (PDT)
 Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
 From: Mario Domenech Goulart <mario@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Aug 2015 16:34:32 -0300
-Message-Id: <1440617672-7518-1-git-send-email-mario@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
-Organization: O.S. Systems Software LTDA.
-Cc: Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: [meta-oe][PATCH] mariadb: fix tarball fetch URL
+References: <1440617672-7518-1-git-send-email-mario@ossystems.com.br>
+Date: Wed, 26 Aug 2015 19:35:44 +0000
+In-Reply-To: <1440617672-7518-1-git-send-email-mario@ossystems.com.br> (Mario
+	Domenech Goulart's message of "Wed, 26 Aug 2015 16:34:32 -0300")
+Message-ID: <87a8tdkflb.fsf@email.parenteses.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.4 (gnu/linux)
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH] mariadb: fix tarball fetch URL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,30 +49,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2015 19:34:49 -0000
+X-List-Received-Date: Wed, 26 Aug 2015 19:35:48 -0000
+Content-Type: text/plain
 
-http://mirror.stshosting.co.uk/mariadb responds with a 404 error, so
-use http://archive.mariadb.org instead.
+On Wed, 26 Aug 2015 16:34:32 -0300 Mario Domenech Goulart <mario@ossystems.com.br> wrote:
 
-Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
----
- meta-oe/recipes-support/mysql/mariadb.inc |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> http://mirror.stshosting.co.uk/mariadb responds with a 404 error, so
+> use http://archive.mariadb.org instead.
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-index d2418e7..4e2a64c 100644
---- a/meta-oe/recipes-support/mysql/mariadb.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb.inc
-@@ -4,7 +4,7 @@ SECTION = "libs"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
-+SRC_URI = "http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
-            file://fix-cmake-module-path.patch \
-            file://remove-bad-path.patch \
-            file://fix-mysqlclient-r-version.patch \
+Please, also backport this patch to fido.
+
+>
+> Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+> ---
+>  meta-oe/recipes-support/mysql/mariadb.inc |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
+> index d2418e7..4e2a64c 100644
+> --- a/meta-oe/recipes-support/mysql/mariadb.inc
+> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
+> @@ -4,7 +4,7 @@ SECTION = "libs"
+>  LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+>  
+> -SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
+> +SRC_URI = "http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
+>             file://fix-cmake-module-path.patch \
+>             file://remove-bad-path.patch \
+>             file://fix-mysqlclient-r-version.patch \
+
+Best wishes.
+Mario
 -- 
-1.7.10.4
-
+http://www.ossystems.com.br
 
