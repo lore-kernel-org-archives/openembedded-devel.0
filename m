@@ -1,41 +1,35 @@
-Return-Path: <mario.goulart@gmail.com>
-Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 8952C734B8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2015 19:35:46 +0000 (UTC)
-Received: by iodt126 with SMTP id t126so31993607iod.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2015 12:35:46 -0700 (PDT)
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lb0-f173.google.com (mail-lb0-f173.google.com
+	[209.85.217.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 159F5734B8;
+	Wed, 26 Aug 2015 22:24:07 +0000 (UTC)
+Received: by lbbsx3 with SMTP id sx3so833343lbb.0;
+	Wed, 26 Aug 2015 15:24:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:references:date:in-reply-to:message-id
-	:user-agent:mime-version:content-type;
-	bh=kYbdyqKG1v5TiFNfhFZrYLVSZw9ojVkHWPSTP1gPjKY=;
-	b=vhcObYwqq3UdRrCAks8bQuv7kuNPUYm+HMt+875Y6txFPICNPdAxoFgq+iODIVwaVW
-	jnPHbmdSlW5LVa9WBal1lJXrm1twN/u91UGQ7nNemxEh0gl0QK6fVROUhT+KMHjMpPh9
-	chA9D6CQHUyfG6+pBsr1DtbuscSeBOugGC42J9QaEjwXLKV1hXpdhsJrJ45/+MstD4GA
-	sV6ma0JunEcd7M3XU40ps2/w4Slz6R2RYmU64l4/hEdpKQBbmOewsheC/RmDyFtaRuhl
-	m4ghVqQxlMUDnTj9ozkYodjkSMQXMKbPvKu5G1pRMctMPiFp7yWMuhY0G8thPkFIciRU
-	vHpg==
-X-Received: by 10.107.37.142 with SMTP id l136mr6234299iol.126.1440617746261; 
-	Wed, 26 Aug 2015 12:35:46 -0700 (PDT)
-Received: from email.parenteses.org.gmail.com (email.parenteses.org.
-	[198.199.72.94])
-	by smtp.gmail.com with ESMTPSA id k64sm50503iod.3.2015.08.26.12.35.45
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Aug 2015 12:35:45 -0700 (PDT)
-Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
-From: Mario Domenech Goulart <mario@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-References: <1440617672-7518-1-git-send-email-mario@ossystems.com.br>
-Date: Wed, 26 Aug 2015 19:35:44 +0000
-In-Reply-To: <1440617672-7518-1-git-send-email-mario@ossystems.com.br> (Mario
-	Domenech Goulart's message of "Wed, 26 Aug 2015 16:34:32 -0300")
-Message-ID: <87a8tdkflb.fsf@email.parenteses.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.4 (gnu/linux)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=+XO6hccmfX3YO4uCg6EhDmA9I77ZoN3uyu22tK6vXfk=;
+	b=xjTw1KcslCAWcIpbFzv03NT2DQiloRXBngT0mIE5JHi7Bq0FBNDDWmthX4SqvzgRD3
+	5HYslF5qcXtyNMun89SC4RFTix1VvBrHcyY3Im74eKlC6UwoTIMBTL1Se1/z+y7Vt1Hm
+	8VwZLAyq3yxXc4zoZ3Z526UZQ+dXxhSeiqrO47/vRzXhDd0uSEpLY0xmwWDYmVSv/3+k
+	2ke9bBmhI6eT8LX2HuFgwTq5NWYkP8cpJxm4yOogzE7oJmBPFReGFVd5v8Fc+ZWZwUKv
+	2cFNs9Ar+K7DFHu4++2EVHAFLKcY7jndC3Q8XRvbEbN8TiTTaBadJR0pUwn1gIq20d2Q
+	GFZg==
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] mariadb: fix tarball fetch URL
+X-Received: by 10.112.52.2 with SMTP id p2mr955051lbo.8.1440627846487; Wed, 26
+	Aug 2015 15:24:06 -0700 (PDT)
+Received: by 10.25.89.74 with HTTP; Wed, 26 Aug 2015 15:24:06 -0700 (PDT)
+In-Reply-To: <20150826135604.GA2449@jama>
+References: <20150826135604.GA2449@jama>
+Date: Wed, 26 Aug 2015 15:24:06 -0700
+Message-ID: <CANx9H-BF76n0yD2xisT1R3TDHgUfC019Y=pKyvFKWZO=DFn4Vg@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: State of bitbake world, Failed tasks 2015-08-24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,38 +43,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2015 19:35:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 26 Aug 2015 22:24:09 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, 26 Aug 2015 16:34:32 -0300 Mario Domenech Goulart <mario@ossystems.com.br> wrote:
+On Wed, Aug 26, 2015 at 6:56 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
-> http://mirror.stshosting.co.uk/mariadb responds with a 404 error, so
-> use http://archive.mariadb.org instead.
-
-Please, also backport this patch to fido.
-
+> Time for even more PNBLACKLISTs..
 >
-> Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
-> ---
->  meta-oe/recipes-support/mysql/mariadb.inc |    2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-> index d2418e7..4e2a64c 100644
-> --- a/meta-oe/recipes-support/mysql/mariadb.inc
-> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
-> @@ -4,7 +4,7 @@ SECTION = "libs"
->  LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
->  
-> -SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
-> +SRC_URI = "http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
->             file://fix-cmake-module-path.patch \
->             file://remove-bad-path.patch \
->             file://fix-mysqlclient-r-version.patch \
+<snip>
 
-Best wishes.
-Mario
--- 
-http://www.ossystems.com.br
+> == Failed tasks 2015-08-24 ==
+>
+> INFO: jenkins-job.sh-1.3.1 Complete log available at
+> http://logs.nslu2-linux.org/buildlogs/oe/world/log.report.20150825_231149.log
+>
+> === common (7) ===
+>     * /meta-openembedded/meta-efl/recipes-efl/efl/epdf_svn.bb, do_compile
+>     * /meta-openembedded/meta-multimedia/recipes-mkv/mkvtoolnix/
+> mkvtoolnix_git.bb, do_compile
+>     * /meta-openembedded/meta-multimedia/recipes-multimedia/vlc/
+> vlc_2.2.1.bb, do_compile
+>
+I am working on a patch for this. This one is difficult for me to replicate.
+
+
+>     * /meta-openembedded/meta-oe/recipes-support/libdbi/
+> libdbi-drivers_0.8.3-1.bb, do_compile
+>     * /meta-openembedded/meta-python/recipes-devtools/python/
+> python-pyopenssl_0.15.1.bb, do_populate_sysroot
+>     * /meta-openembedded/meta-xfce/recipes-art/rodent-icon-theme/
+> rodent-icon-theme_5.0.bb, do_populate_sysroot
+>     * /meta-webos-ports/meta-luneui/recipes-luneui/luna-next/luna-next.bb,
+> do_compile
+>
+> === common-x86 (6) ===
+>     * /meta-openembedded/meta-efl/recipes-efl/webkit/webkit-efl_1.11.0.bb,
+> do_compile
+>     * /meta-openembedded/meta-networking/recipes-connectivity/inetutils/
+> inetutils_1.9.4.bb, do_fetch
+>     * /meta-openembedded/meta-networking/recipes-kernel/netmap/
+> netmap-modules_git.bb, do_compile
+>     * /meta-openembedded/meta-oe/recipes-support/gd/gd_2.1.1.bb,
+> do_compile
+>     * /meta-qt5/recipes-qt/qt5/qtwebengine_git.bb, do_compile
+>     * /meta-qt5/recipes-qt/qt5/qtwebkit_git.bb, do_compile
+>
+> === qemuarm (2) ===
+>     * /meta-openembedded/meta-networking/recipes-connectivity/inetutils/
+> inetutils_1.9.4.bb, do_patch
+>     * /meta-openembedded/meta-python/recipes-extended/python-pyparted/
+> python-pyparted_3.10.5.bb, do_compile
+>
+> I have a patch for this (and raised an issue upstream
+https://github.com/rhinstaller/pyparted/pull/15 ). It is an indirect cause
+of the parted_1.8.6 recipe. python-pyparted_3.10.5 requires libparted >=
+2.3 (so the 3.% in core will work). The '1.8.6' string is not being cast
+properly by float().
+
+
+> === qemux86 (1) ===
+>     * /meta-openembedded/meta-oe/recipes-graphics/xorg-driver/
+> xf86-video-geode_2.11.16.bb, do_compile
+>
+> === qemux86_64 (2) ===
+>     * /meta-browser/recipes-browser/chromium/cef3_280796.bb, do_configure
+>     * /meta-openembedded/meta-oe/recipes-extended/collectd/
+> collectd_5.5.0.bb, do_compile
+>
+> === Number of failed tasks (38) ===
+> {| class=wikitable
+> |-
+> || qemuarm      || 9     ||
+> http://logs.nslu2-linux.org/buildlogs/oe/world//log.world.20150824_114047.log//
+> || http://errors.yoctoproject.org:80/Errors/Build/8163/
+> |-
+> || qemux86      || 14    ||
+> http://logs.nslu2-linux.org/buildlogs/oe/world//log.world.20150824_134017.log//
+> ||
+> |-
+> || qemux86_64   || 15    ||
+> http://logs.nslu2-linux.org/buildlogs/oe/world//log.world.20150824_225042.log//
+> ||
+> |
+>
+<snip>
+
+--Tim
 
