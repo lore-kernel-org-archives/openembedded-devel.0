@@ -1,34 +1,24 @@
-Return-Path: <adam.yh.lee@gmail.com>
-Received: from mail-yk0-f175.google.com (mail-yk0-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 25A0F736B6;
-	Wed, 26 Aug 2015 01:11:17 +0000 (UTC)
-Received: by ykdt205 with SMTP id t205so172670241ykd.1;
-	Tue, 25 Aug 2015 18:11:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=Z4pU/LCsJA2/Xug3JZOXhIZ1DMEI4WzpkLULHv0HcZg=;
-	b=w04nc/NQqzJjJf0HgmMGEeIzGhA/Y1zufpO4ptONTa+J3sHiE+9jaZZlhHlit0+R9t
-	iyRsNE5XPBouWT2LCg3ahINURMitI6/t7XpMR+izJUp3soh9XcR2BSCLGpemTOxDNEhO
-	KUC8Ec9nY2e/q+2F3nnSDbBWLXeDSUrOeSZ1sPHRS1ijsgQHJLMTR2JvCXENPfWavKxq
-	RpnZqICTYKDV8KRGIwCE/+Moj/8Fn76JsDI37abwYh8yyt935/kMkE+rF6baFO9//jlJ
-	fbgqGZR0eDdDPQ2G/X+ZwJQXpnhd5+Lcb7t/ed0WtNDGTUlCk3Zx/Fqje3WiSosdni8B
-	iWPg==
-X-Received: by 10.129.111.11 with SMTP id k11mr41165195ywc.114.1440551477711; 
-	Tue, 25 Aug 2015 18:11:17 -0700 (PDT)
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 3586271633
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Aug 2015 01:29:49 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t7Q1Tmc2021365
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Aug 2015 18:29:48 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.235.1; Tue, 25 Aug 2015 18:29:48 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 26 Aug 2015 09:25:24 +0800
+Message-ID: <1440552325-29335-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-References: <CAFeBWL6xGuzEcOR5B1sfEgZR=i-T=EZ-b-TKPT9DGZpCmDPy4g@mail.gmail.com>
-	<5607133.YNgYITpZsc@peggleto-mobl.ger.corp.intel.com>
-In-Reply-To: <5607133.YNgYITpZsc@peggleto-mobl.ger.corp.intel.com>
-From: Adam Lee <adam.yh.lee@gmail.com>
-Date: Wed, 26 Aug 2015 01:11:08 +0000
-Message-ID: <CAFeBWL4as4_aeTWOZox+V=NB_s7LriLof-sYNc04PB6vjDRBnw@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: Extensible SDK install errors
+Subject: [PATCH 1/2] libhugetlbfs: avoid search host library path for cross compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,96 +32,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2015 01:11:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 26 Aug 2015 01:29:51 -0000
+Content-Type: text/plain
 
-Thanks for your comments. I was not running the installer as root.
-I tried again and specified the install path in my home directory.
-This time it seems to have gone further, but still failed with this:
+From: Kai Kang <kai.kang@windriver.com>
 
-"error: Can't install packagegroup-core-boot-1.0-r17.0@qemuarm: no package
-provides systemd"
+There was a patch fixing the same issue:
+libhugetlbfs-avoid-search-host-library-path-for-cros.patch
 
-Perhaps I need to disable systemd from distro features?
+but missed the elf_i386.xB*, this patch fixes for it.
 
-I will also check my user's permission to solve the permission error.
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ ...s-elf_i386-avoid-search-host-library-path.patch | 40 ++++++++++++++++++++++
+ .../libhugetlbfs/libhugetlbfs_git.bb               |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-elf_i386-avoid-search-host-library-path.patch
 
-On Mon, Aug 24, 2015 at 4:11 AM Paul Eggleton <paul.eggleton@linux.intel.co=
-m>
-wrote:
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-elf_i386-avoid-search-host-library-path.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-elf_i386-avoid-search-host-library-path.patch
+new file mode 100644
+index 0000000..1566488
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-elf_i386-avoid-search-host-library-path.patch
+@@ -0,0 +1,40 @@
++From 889e52753d30179ba4ac940023cb4ed561436ab8 Mon Sep 17 00:00:00 2001
++From: Jackie Huang <jackie.huang@windriver.com>
++Date: Tue, 4 Nov 2014 00:49:11 -0800
++Subject: [PATCH] libhugetlbfs/elf_i386: avoid search host library path for cross compilation
++
++Upstream-Status: Inappropriate [cross compile specific]
++
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++---
++ ldscripts/elf_i386.xB   |    1 -
++ ldscripts/elf_i386.xBDT |    1 -
++ 2 files changed, 2 deletions(-)
++
++diff --git a/ldscripts/elf_i386.xB b/ldscripts/elf_i386.xB
++index 43fe51c..eae0fa8 100644
++--- a/ldscripts/elf_i386.xB
+++++ b/ldscripts/elf_i386.xB
++@@ -3,7 +3,6 @@ OUTPUT_FORMAT("elf32-i386", "elf32-i386",
++ 	      "elf32-i386")
++ OUTPUT_ARCH(i386)
++ ENTRY(_start)
++-SEARCH_DIR("/usr/i486-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");
++ INPUT(-lhugetlbfs);
++ /* Do we need any of these for elf?
++    __DYNAMIC = 0;    */
++diff --git a/ldscripts/elf_i386.xBDT b/ldscripts/elf_i386.xBDT
++index d72aebe..3bac1b1 100644
++--- a/ldscripts/elf_i386.xBDT
+++++ b/ldscripts/elf_i386.xBDT
++@@ -3,7 +3,6 @@ OUTPUT_FORMAT("elf32-i386", "elf32-i386",
++ 	      "elf32-i386")
++ OUTPUT_ARCH(i386)
++ ENTRY(_start)
++-SEARCH_DIR("/usr/i486-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");
++ INPUT(-lhugetlbfs);
++ /* Do we need any of these for elf?
++    __DYNAMIC = 0;    */
++--
++1.7.9.5
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+index a2d3922..ae5e46a 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+@@ -17,6 +17,7 @@ SRC_URI = " \
+     file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
+     file://tests-Makefile-install-static-4G-edge-testcases.patch \
+     file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
++    file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
+-- 
+1.9.1
 
-> Hi Adam,
->
-> On Friday 21 August 2015 15:06:25 Adam Lee wrote:
-> > Hello, I built the Extensible SDK on Fido (bitbake core-image-minimal -=
-c
-> > populate_sdk_ext).
-> >
-> > During the installation I get this permission error:
-> >
-> > $ ./poky-glibc-x86_64-core-image-minimal-armv5e-toolchain-ext-1.8.sh
-> >
-> > > Enter target directory for SDK (default: /opt/poky/1.8):
-> > > You are about to install the SDK to "/opt/poky/1.8". Proceed[Y/n]?
-> > > Extracting SDK...done
-> > > Setting it up...
-> > > Extracting buildtools...
-> > > ./poky-glibc-x86_64-core-image-minimal-armv5e-toolchain-ext-1.8.sh:
-> line
-> > > 148: /opt/poky/1.8/environment-setup-armv5e-poky-linux-gnueabi:
-> Permission
-> > > denied
-> > > ./poky-glibc-x86_64-core-image-minimal-armv5e-toolchain-ext-1.8.sh:
-> line
-> > > 151: /opt/poky/1.8/environment-setup-armv5e-poky-linux-gnueabi:
-> Permission
-> > > denied
-> > > ./poky-glibc-x86_64-core-image-minimal-armv5e-toolchain-ext-1.8.sh:
-> line
-> > > 155: /opt/poky/1.8/environment-setup-armv5e-poky-linux-gnueabi:
-> Permission
-> > > denied
-> > > mv: cannot move =E2=80=98x86_64-nativesdk-libc.tar.bz2=E2=80=99 to
-> > > =E2=80=98/opt/poky/1.8/layers/poky/x86_64-nativesdk-libc.tar.bz2=E2=
-=80=99: Permission
-> > > denied Preparing build system...
-> > > sh: 1: cannot create preparing_build_system.log: Permission denied
-> > > SDK preparation failed: see /opt/poky/1.8/preparing_build_system.log
-> >
-> >  It looks like `/opt/poky/1.8/layers/poky` directory belongs to the roo=
-t
-> > user:
-> >
-> > $ ls -l /opt/poky/1.8/layers/
-> >
-> > > total 36
-> > > drwxrwxr-x 9 root root 4096 Jun 16 10:25 meta-gnome
-> > > drwxrwxr-x 9 root root 4096 Jun 15 10:44 meta-multimedia
-> > > drwxrwxr-x 11 root root 4096 Jun 15 10:44 meta-networking
-> > > drwxrwxr-x 20 root root 4096 Jun 15 10:44 meta-oe
-> > > drwxrwxr-x 7 root root 4096 Jun 15 10:44 meta-python
-> > > drwxrwxr-x 5 root root 4096 Jun 15 10:44 meta-ruby
-> > > drwxrwxr-x 5 root root 4096 Jun 15 10:44 meta-systemd
-> > > drwxrwxr-x 11 root root 4096 Jun 15 10:44 meta-xfce
-> > > drwxrwxr-x 13 root root 4096 Aug 21 14:46 poky
-> >
-> >  I may have missed something obvious. Has anyone seen this?
->
-> Basically you shouldn't be installing the extensible SDK as root. We ough=
-t
-> to
-> be telling you about this up front and we should have a more reasonable
-> default path - these are open bugs and patches are in review on the list
-> to fix
-> them.
->
-> Cheers,
-> Paul
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
->
 
