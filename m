@@ -1,51 +1,36 @@
-Return-Path: <jbriance@cisco.com>
-Received: from rcdn-iport-9.cisco.com (rcdn-iport-9.cisco.com [173.37.86.80])
-	by mail.openembedded.org (Postfix) with ESMTP id CA6FC76D6C
+Return-Path: <jkrishnanjanappa@mvista.com>
+Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
+	[209.85.220.41])
+	by mail.openembedded.org (Postfix) with ESMTP id C3D7D76DEB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2015 17:01:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=@cisco.com; l=17097; q=dns/txt;
-	s=iport; t=1440608472; x=1441818072;
-	h=from:to:cc:subject:date:message-id:references:
-	in-reply-to:content-transfer-encoding:mime-version;
-	bh=MJ2OOukeFcuizorqzHB5iQihjgrQJHSFHrRhPUJ02VQ=;
-	b=ZQwBe5F9ENCJZ42e6TiO4m0ebMT9pRfHRWD0FhuuL7WWUIt/zvYm/CyY
-	lpfOS3QE3pAX9aR146aPoNQopb5ndaVNkeBj6D6SOAZmG6Zti7cpe1sxC
-	+M5nROH2OF7tR1jfTOdOdAH+M6BU5uaXcyM2aPZ/COBOljuGwYAuDV9Fy E=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A0CjAgCW8N1V/5RdJa1dgxtUaQaqP5MoAQmBdIV/AoE8OBQBAQEBAQEBfwuEJAEBBDo/EAIBKhQQMiUCBA4FCIgmyQoBAQEBAQEBAQEBAQEBAQEBAQEBAQEXkDQxB4MYgRQFlTkBhQWJNpBgiDQmghAbgVRxgUiBBQEBAQ
-X-IronPort-AV: E=Sophos;i="5.17,417,1437436800"; d="scan'208";a="21821024"
-Received: from rcdn-core-12.cisco.com ([173.37.93.148])
-	by rcdn-iport-9.cisco.com with ESMTP; 26 Aug 2015 17:01:10 +0000
-Received: from XCH-RCD-015.cisco.com (xch-rcd-015.cisco.com [173.37.102.25])
-	by rcdn-core-12.cisco.com (8.14.5/8.14.5) with ESMTP id t7QH1AcQ016903
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	Wed, 26 Aug 2015 17:44:36 +0000 (UTC)
+Received: by pabzx8 with SMTP id zx8so76811682pab.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2015 17:01:10 GMT
-Received: from xch-rcd-015.cisco.com (173.37.102.25) by XCH-RCD-015.cisco.com
-	(173.37.102.25) with Microsoft SMTP Server (TLS) id 15.0.1104.5;
-	Wed, 26 Aug 2015 12:01:09 -0500
-Received: from xhc-rcd-x15.cisco.com (173.37.183.89) by xch-rcd-015.cisco.com
-	(173.37.102.25) with Microsoft SMTP Server (TLS) id 15.0.1104.5 via
-	Frontend Transport; Wed, 26 Aug 2015 12:01:09 -0500
-Received: from xmb-aln-x12.cisco.com ([169.254.7.226]) by
-	xhc-rcd-x15.cisco.com ([173.37.183.89]) with mapi id 14.03.0248.002;
-	Wed, 26 Aug 2015 12:01:09 -0500
-From: "Julien Brianceau (jbriance)" <jbriance@cisco.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-qt5][PATCH] qt5: Update LGPL-Exception in LICENSE list
-Thread-Index: AQHQ4CCWHmE94LxhpkCFIZZuh+f4zJ4egTeA
-Date: Wed, 26 Aug 2015 17:01:08 +0000
-Message-ID: <5940D1D9F240BA44AEF939055CF1358D05A51A50@xmb-aln-x12.cisco.com>
-References: <1440608366-22790-1-git-send-email-jbriance@cisco.com>
-In-Reply-To: <1440608366-22790-1-git-send-email-jbriance@cisco.com>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.60.62.125]
-MIME-Version: 1.0
-Subject: [meta-qt5][PATCH] qt5: Update LGPL-Exception in LICENSE list
+	Wed, 26 Aug 2015 10:44:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=IDNEEsQTmR7RrXeAKawkL//+UXLW8qfYod1a5qSAiyc=;
+	b=ZS+0/PGEdHM0XU557SzzBJUq5oCTNv9T6pn/MM3Yc+I19hPChMz7TkAQMQedqWdlB+
+	lJSFJNGCNj0KbmMW8Vv/dh+YAim5UVTV0O/KK4lhVli8QL59T9vX7OdCerZYkoaUdQgT
+	CKPQ0kKmI50hKDjJM63+yTX88DLBAglxONwaK62KyW51OzTgJWvivwycnuxq6aIX7r9r
+	kBnbL4Oj7BPOJmQSLtXZcvITSsGZmKXJ3M7isQP8kuP48eNFEYT2m5aK+wJJPq8s4YkH
+	LUzA3dZ03GKI2FEM/UkSoW9kpZFkRyNAQ0iOy5pQtZzLX0kG26wYObt1Igi+diq9CCF2
+	ob1A==
+X-Gm-Message-State: ALoCoQn2KQh92EnnoVKM8/D0Ki9gvYFjoanbkyX35IIJuZ/L7i2BXJh0UqVSUyeNwb0J+y9fyyDS
+X-Received: by 10.68.111.3 with SMTP id ie3mr72391725pbb.63.1440611076632;
+	Wed, 26 Aug 2015 10:44:36 -0700 (PDT)
+Received: from ubuntu64.mvista.com ([111.93.218.67])
+	by smtp.gmail.com with ESMTPSA id
+	j1sm12740979pde.48.2015.08.26.10.44.34
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 26 Aug 2015 10:44:36 -0700 (PDT)
+From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 26 Aug 2015 23:14:29 +0530
+Message-Id: <1440611069-20869-1-git-send-email-jkrishnanjanappa@mvista.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] iscsitarget: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,412 +44,370 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2015 17:01:12 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 26 Aug 2015 17:44:37 -0000
 
-* Since 5.5, Qt modules (except qtimageformats) have moved from "Digia"
-  to "The Qt Company" in their LGPL_Exception file
-* qtwebkit-examples doesn't include a LGPL Exception file, so remove
-  it from LICENSE list
+iSCSI Enterprise Target is aimed to develop an
+open source iSCSI target with professional features,
+that works well in enterprise environment under real
+workload, and is scalable and versatile enough to meet the
+challenge of future storage needs and developments.
 
-Signed-off-by: Julien Brianceau <jbriance@cisco.com>
+Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 ---
- recipes-qt/qt5/nativesdk-qtbase_git.bb   | 2 +-
- recipes-qt/qt5/qtbase-native_git.bb      | 2 +-
- recipes-qt/qt5/qtbase_git.bb             | 2 +-
- recipes-qt/qt5/qtconnectivity_git.bb     | 2 +-
- recipes-qt/qt5/qtdeclarative_git.bb      | 2 +-
- recipes-qt/qt5/qtenginio_git.bb          | 2 +-
- recipes-qt/qt5/qtgraphicaleffects_git.bb | 2 +-
- recipes-qt/qt5/qtlocation_git.bb         | 2 +-
- recipes-qt/qt5/qtmultimedia_git.bb       | 2 +-
- recipes-qt/qt5/qtquick1_git.bb           | 4 ++--
- recipes-qt/qt5/qtscript_git.bb           | 4 ++--
- recipes-qt/qt5/qtsensors_git.bb          | 2 +-
- recipes-qt/qt5/qtserialport_git.bb       | 2 +-
- recipes-qt/qt5/qtsvg_git.bb              | 2 +-
- recipes-qt/qt5/qttools_git.bb            | 2 +-
- recipes-qt/qt5/qttranslations_git.bb     | 2 +-
- recipes-qt/qt5/qtwayland-native_git.bb   | 2 +-
- recipes-qt/qt5/qtwayland_git.bb          | 2 +-
- recipes-qt/qt5/qtwebchannel_git.bb       | 2 +-
- recipes-qt/qt5/qtwebkit-examples_git.bb  | 2 +-
- recipes-qt/qt5/qtwebsockets_git.bb       | 2 +-
- recipes-qt/qt5/qtx11extras_git.bb        | 2 +-
- recipes-qt/qt5/qtxmlpatterns_git.bb      | 2 +-
- 23 files changed, 25 insertions(+), 25 deletions(-)
+ ...rors-observed-with-linux-3.19-and-greater.patch | 198 +++++++++++++++++++++
+ ...use-kernel-makefile-to-get-kernel-version.patch |  67 +++++++
+ .../iscsitarget/iscsitarget_1.4.20.3+svn502.bb     |  62 +++++++
+ 3 files changed, 327 insertions(+)
+ create mode 100644 meta-networking/recipes-extended/iscsitarget/files/fix-errors-observed-with-linux-3.19-and-greater.patch
+ create mode 100644 meta-networking/recipes-extended/iscsitarget/files/use-kernel-makefile-to-get-kernel-version.patch
+ create mode 100644 meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
 
-diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/native=
-sdk-qtbase_git.bb
-index 320cad6..9fe4554 100644
---- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-+++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-@@ -3,7 +3,7 @@ DEPENDS =3D "nativesdk-zlib nativesdk-dbus qtbase-native"
- SECTION =3D "libs"
- HOMEPAGE =3D "http://qt-project.org"
-=20
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-na=
-tive_git.bb
-index ac68f2b..3efcb55 100644
---- a/recipes-qt/qt5/qtbase-native_git.bb
-+++ b/recipes-qt/qt5/qtbase-native_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION =3D "Native version of Qt/[X11|Mac|Embedded]"
- DEPENDS =3D "zlib-native dbus-native"
- SECTION =3D "libs"
- HOMEPAGE =3D "http://qt-project.org"
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 729c795..44579c6 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -1,7 +1,7 @@
- require qt5.inc
- require qt5-git.inc
-=20
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconnec=
-tivity_git.bb
-index 0cb724e..4781be1 100644
---- a/recipes-qt/qt5/qtconnectivity_git.bb
-+++ b/recipes-qt/qt5/qtconnectivity_git.bb
-@@ -1,7 +1,7 @@
- require qt5.inc
- require qt5-git.inc
-=20
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0) | GPL-2.0"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0) | GPL-2.0"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/qtdeclara=
-tive_git.bb
-index f9689e6..15d176b 100644
---- a/recipes-qt/qt5/qtdeclarative_git.bb
-+++ b/recipes-qt/qt5/qtdeclarative_git.bb
-@@ -2,7 +2,7 @@ require qt5.inc
- require qt5-git.inc
-=20
- # There are no LGPLv3-only licensed files in this component.
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtenginio_git.bb b/recipes-qt/qt5/qtenginio_git=
-.bb
-index f80e42e..0e2a0ce 100644
---- a/recipes-qt/qt5/qtenginio_git.bb
-+++ b/recipes-qt/qt5/qtenginio_git.bb
-@@ -1,7 +1,7 @@
- require qt5.inc
- require qt5-git.inc
-=20
--LICENSE =3D "BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-+LICENSE =3D "BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL=
--3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtgraphicaleffects_git.bb b/recipes-qt/qt5/qtgr=
-aphicaleffects_git.bb
-index 64c9a10..ef14672 100644
---- a/recipes-qt/qt5/qtgraphicaleffects_git.bb
-+++ b/recipes-qt/qt5/qtgraphicaleffects_git.bb
-@@ -3,7 +3,7 @@ require qt5-git.inc
-=20
- # There are no LGPLv3-only licensed files in this component.
- # There are no GPLv2 licensed files in this component.
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtlocation_git.bb b/recipes-qt/qt5/qtlocation_g=
-it.bb
-index b67a956..191dfcf 100644
---- a/recipes-qt/qt5/qtlocation_git.bb
-+++ b/recipes-qt/qt5/qtlocation_git.bb
-@@ -1,7 +1,7 @@
- require qt5.inc
- require qt5-git.inc
-=20
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0) | GPL-2.0"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0) | GPL-2.0"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtmultimedia_git.bb b/recipes-qt/qt5/qtmultimed=
-ia_git.bb
-index 5c05145..f190b9f 100644
---- a/recipes-qt/qt5/qtmultimedia_git.bb
-+++ b/recipes-qt/qt5/qtmultimedia_git.bb
-@@ -2,7 +2,7 @@ require qt5.inc
- require qt5-git.inc
-=20
- # There are no LGPLv3-only licensed files in this component.
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtquick1_git.bb b/recipes-qt/qt5/qtquick1_git.b=
-b
-index 1dcba1e..905fcd9 100644
---- a/recipes-qt/qt5/qtquick1_git.bb
-+++ b/recipes-qt/qt5/qtquick1_git.bb
-@@ -3,8 +3,8 @@ require qt5-git.inc
-=20
- # There are no LGPLv3-only licensed files in this component.
- # There are no GPLv2 licensed files in this component.
--# Note that some files are LGPL-2.1 only without Digia-Qt-LGPL-Exception-1=
-.1.
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+# Note that some files are LGPL-2.1 only without The-Qt-Company-Qt-LGPL-Ex=
-ception-1.1.
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtscript_git.bb b/recipes-qt/qt5/qtscript_git.b=
-b
-index a54deb8..0a04d15 100644
---- a/recipes-qt/qt5/qtscript_git.bb
-+++ b/recipes-qt/qt5/qtscript_git.bb
-@@ -2,8 +2,8 @@ require qt5.inc
- require qt5-git.inc
-=20
- # There are no LGPLv3-only licensed files in this component.
--# Note that some files are LGPL-2.1 only without Digia-Qt-LGPL-Exception-1=
-.1.
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+# Note that some files are LGPL-2.1 only without The-Qt-Company-Qt-LGPL-Ex=
-ception-1.1.
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtsensors_git.bb b/recipes-qt/qt5/qtsensors_git=
-.bb
-index 02688a6..5a01ce0 100644
---- a/recipes-qt/qt5/qtsensors_git.bb
-+++ b/recipes-qt/qt5/qtsensors_git.bb
-@@ -3,7 +3,7 @@ require qt5-git.inc
-=20
- # There are no LGPLv3-only licensed files in this component.
- # There are no GPLv2 licensed files in this component.
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtserialport_git.bb b/recipes-qt/qt5/qtserialpo=
-rt_git.bb
-index 5f41974..0f8ec30 100644
---- a/recipes-qt/qt5/qtserialport_git.bb
-+++ b/recipes-qt/qt5/qtserialport_git.bb
-@@ -3,7 +3,7 @@ require qt5-git.inc
-=20
- # text of LGPL_EXCEPTION.txt and LICENSE.FDL is slightly different than wh=
-at
- # other qt* components use :/
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtsvg_git.bb b/recipes-qt/qt5/qtsvg_git.bb
-index 6350e97..5fb84ca 100644
---- a/recipes-qt/qt5/qtsvg_git.bb
-+++ b/recipes-qt/qt5/qtsvg_git.bb
-@@ -2,7 +2,7 @@ require qt5.inc
- require qt5-git.inc
-=20
- # There are no LGPLv3-only licensed files in this component.
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/qttools_git.bb
-index 59f51bd..1c3c9ce 100644
---- a/recipes-qt/qt5/qttools_git.bb
-+++ b/recipes-qt/qt5/qttools_git.bb
-@@ -1,7 +1,7 @@
- require qt5.inc
- require qt5-git.inc
-=20
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qttranslations_git.bb b/recipes-qt/qt5/qttransl=
-ations_git.bb
-index 10ec1aa..d5fda1a 100644
---- a/recipes-qt/qt5/qttranslations_git.bb
-+++ b/recipes-qt/qt5/qttranslations_git.bb
-@@ -1,7 +1,7 @@
- require qt5.inc
- require qt5-git.inc
-=20
--LICENSE =3D "(LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-+LICENSE =3D "(LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtwayland-native_git.bb b/recipes-qt/qt5/qtwayl=
-and-native_git.bb
-index 330473e..1a93284 100644
---- a/recipes-qt/qt5/qtwayland-native_git.bb
-+++ b/recipes-qt/qt5/qtwayland-native_git.bb
-@@ -2,7 +2,7 @@ require qt5-native.inc
- require qt5-git.inc
-=20
- # There are no LGPLv3-only licensed files in this component.
--LICENSE =3D "BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-+LICENSE =3D "BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL=
--3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git=
-.bb
-index 361b54a..7484a87 100644
---- a/recipes-qt/qt5/qtwayland_git.bb
-+++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -2,7 +2,7 @@ require qt5.inc
- require qt5-git.inc
-=20
- # There are no LGPLv3-only licensed files in this component.
--LICENSE =3D "BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-+LICENSE =3D "BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL=
--3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtwebchannel_git.bb b/recipes-qt/qt5/qtwebchann=
-el_git.bb
-index 236eb47..923ada8 100644
---- a/recipes-qt/qt5/qtwebchannel_git.bb
-+++ b/recipes-qt/qt5/qtwebchannel_git.bb
-@@ -3,7 +3,7 @@ require qt5-git.inc
-=20
- # There are no LGPLv3-only licensed files in this component.
- # There are no GPLv2 licensed files in this component.
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtwebkit-examples_git.bb b/recipes-qt/qt5/qtweb=
-kit-examples_git.bb
-index 62e9612..20202d5 100644
---- a/recipes-qt/qt5/qtwebkit-examples_git.bb
-+++ b/recipes-qt/qt5/qtwebkit-examples_git.bb
-@@ -3,7 +3,7 @@ require qt5-git.inc
-=20
- # There are no LGPLv3-only licensed files in this component.
- # There are no GPLv2 licensed files in this component.
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.GPLv2;md5=3D05832301944453ec79e40ba3c3cfceec \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-diff --git a/recipes-qt/qt5/qtwebsockets_git.bb b/recipes-qt/qt5/qtwebsocke=
-ts_git.bb
-index b1e2951..73f95a3 100644
---- a/recipes-qt/qt5/qtwebsockets_git.bb
-+++ b/recipes-qt/qt5/qtwebsockets_git.bb
-@@ -1,7 +1,7 @@
- require qt5.inc
- require qt5-git.inc
-=20
--LICENSE =3D "GFDL-1.3 & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0=
-)"
-+LICENSE =3D "GFDL-1.3 & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 |=
- LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtx11extras_git.bb b/recipes-qt/qt5/qtx11extras=
-_git.bb
-index e73feb7..70480df 100644
---- a/recipes-qt/qt5/qtx11extras_git.bb
-+++ b/recipes-qt/qt5/qtx11extras_git.bb
-@@ -1,7 +1,7 @@
- require qt5.inc
- require qt5-git.inc
-=20
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0) | GPL-2.0"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0) | GPL-2.0"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
-diff --git a/recipes-qt/qt5/qtxmlpatterns_git.bb b/recipes-qt/qt5/qtxmlpatt=
-erns_git.bb
-index 3c273db..f6a0c41 100644
---- a/recipes-qt/qt5/qtxmlpatterns_git.bb
-+++ b/recipes-qt/qt5/qtxmlpatterns_git.bb
-@@ -2,7 +2,7 @@ require qt5.inc
- require qt5-git.inc
-=20
- # There are no LGPLv3-only licensed files in this component.
--LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LG=
-PL-3.0)"
-+LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception=
--1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM =3D " \
-     file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
-     file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
---=20
-1.9.5
+diff --git a/meta-networking/recipes-extended/iscsitarget/files/fix-errors-observed-with-linux-3.19-and-greater.patch b/meta-networking/recipes-extended/iscsitarget/files/fix-errors-observed-with-linux-3.19-and-greater.patch
+new file mode 100644
+index 0000000..6878ca2
+--- /dev/null
++++ b/meta-networking/recipes-extended/iscsitarget/files/fix-errors-observed-with-linux-3.19-and-greater.patch
+@@ -0,0 +1,198 @@
++Fix build errors with linux kernel v3.19 and above
++
++Below errors came up while building iscsitarget for 
++qemux86-64 (and others) because,
++1. 'struct user_msghdr' is being used for userland-side msghdr instead
++of 'struct msghdr', which is used for kernel-side msghdr in linux v3.19
++and above.
++
++error snippet:
++-- snip --
++| /CGE7_SHDD/project_yocto_1.8/poky/build/tmp/work/qemux86_64-poky-linux/iscsitarget/1.4.20.3+svn502-r0/iscsitarget-1.4.20.3+svn502/kernel/iscsi.c: In function 'cmnd_skip_pdu':
++| /CGE7_SHDD/project_yocto_1.8/poky/build/tmp/work/qemux86_64-poky-linux/iscsitarget/1.4.20.3+svn502-r0/iscsitarget-1.4.20.3+svn502/kernel/iscsi.c:492:16: error: 'struct msghdr' has no member named 'msg_iov'
++|   conn->read_msg.msg_iov = conn->read_iov;
++-- CUT --
++
++Reference:
++https://github.com/torvalds/linux/commit/666547ff591cebdedc4679bf6b1b3f3383a8dea3
++
++2. 'SERVICE_ACTION_IN' has been renamed to SERVICE_ACTION_IN_16 in linux v3.19
++and above.
++
++error snippet:
++-- snip --
++| /CGE7_SHDD/project_yocto_1.8/poky/build/tmp/work/qemux86_64-poky-linux/iscsitarget/1.4.20.3+svn502-r0/iscsitarget-1.4.20.3+svn502/kernel/iscsi.c: In function 'scsi_cmnd_start':
++| /CGE7_SHDD/project_yocto_1.8/poky/build/tmp/work/qemux86_64-poky-linux/iscsitarget/1.4.20.3+svn502-r0/iscsitarget-1.4.20.3+svn502/kernel/iscsi.c:989:7: error: 'SERVICE_ACTION_IN' undeclared (first use in this function)
++|   case SERVICE_ACTION_IN:
++-- CUT --
++
++Reference:
++https://github.com/torvalds/linux/commit/eb846d9f147455e4e5e1863bfb5e31974bb69b7c
++
++3. In linux v3.19 and above, f_dentry member has been removed from 
++'struct file' structure.
++
++error snippet:
++-- snip --
++| /CGE7_SHDD/project_yocto_1.8/poky/build/tmp/work/qemux86_64-poky-linux/iscsitarget/1.4.20.3+svn502-r0/iscsitarget-1.4.20.3+svn502/kernel/conn.c: In function 'iet_socket_bind':
++| /CGE7_SHDD/project_yocto_1.8/poky/build/tmp/work/qemux86_64-poky-linux/iscsitarget/1.4.20.3+svn502-r0/iscsitarget-1.4.20.3+svn502/kernel/conn.c:130:34: error: 'struct file' has no member named 'f_dentry'
++|   conn->sock = SOCKET_I(conn->file->f_dentry->d_inode);
++-- CUT --
++
++new helper function file_inode(file) should be used instead.
++
++References:
++1. https://github.com/torvalds/linux/commit/78d28e651f97866d608d9b41f8ad291e65d47dd5
++2. https://github.com/torvalds/linux/commit/496ad9aa8ef448058e36ca7a787c61f2e63f0f54
++
++Upstream-Status: Pending
++
++Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
++
++--- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c	2015-08-24 16:13:26.481924679 +0530
+++++ iscsitarget-1.4.20.3+svn502/kernel/conn.c	2015-08-24 17:27:06.897653698 +0530
++@@ -127,7 +127,11 @@ static void iet_socket_bind(struct iscsi
++ 
++ 	dprintk(D_GENERIC, "%llu\n", (unsigned long long) session->sid);
++ 
+++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
+++	conn->sock = SOCKET_I(file_inode(conn->file));
+++#else
++ 	conn->sock = SOCKET_I(conn->file->f_dentry->d_inode);
+++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
++ 	conn->sock->sk->sk_user_data = conn;
++ 
++ 	write_lock_bh(&conn->sock->sk->sk_callback_lock);
++--- iscsitarget-1.4.20.3+svn502_org/kernel/file-io.c	2015-08-24 16:13:26.481924679 +0530
+++++ iscsitarget-1.4.20.3+svn502/kernel/file-io.c	2015-08-24 17:30:54.390131100 +0530
++@@ -69,7 +69,11 @@ static int fileio_make_request(struct ie
++ static int fileio_sync(struct iet_volume *lu, struct tio *tio)
++ {
++ 	struct fileio_data *p = lu->private;
+++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
+++	struct inode *inode = file_inode(p->filp);
+++#else
++ 	struct inode *inode = p->filp->f_dentry->d_inode;
+++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
++ 	struct address_space *mapping = inode->i_mapping;
++ 	loff_t ppos, count;
++ 	int res;
++@@ -213,7 +217,11 @@ static int fileio_attach(struct iet_volu
++ 		eprintk("%d\n", err);
++ 		goto out;
++ 	}
+++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
+++	inode = file_inode(p->filp);
+++#else
++ 	inode = p->filp->f_dentry->d_inode;
+++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
++ 
++ 	if (S_ISREG(inode->i_mode))
++ 		;
++--- iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.c	2015-08-24 16:13:26.481924679 +0530
+++++ iscsitarget-1.4.20.3+svn502/kernel/iscsi.c	2015-08-24 17:33:50.950490156 +0530
++@@ -986,7 +986,11 @@ static void scsi_cmnd_start(struct iscsi
++ 		set_cmnd_lunit(req);
++ 
++ 	switch (req_hdr->scb[0]) {
+++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
+++	case SERVICE_ACTION_IN_16:
+++#else
++ 	case SERVICE_ACTION_IN:
+++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
++ 		if ((req_hdr->scb[1] & 0x1f) != 0x10)
++ 			goto error;
++ 	case INQUIRY:
++--- iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h	2015-08-24 16:13:26.481924679 +0530
+++++ iscsitarget-1.4.20.3+svn502/kernel/iscsi.h	2015-08-24 17:35:31.354690051 +0530
++@@ -257,7 +257,11 @@ struct iscsi_conn {
++ 	struct timer_list nop_timer;
++ 
++ 	struct iscsi_cmnd *read_cmnd;
+++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
+++	struct user_msghdr read_msg;
+++#else
++ 	struct msghdr read_msg;
+++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
++ 	struct iovec read_iov[ISCSI_CONN_IOV_MAX];
++ 	u32 read_size;
++ 	u32 read_overflow;
++--- iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c	2015-08-24 16:13:26.481924679 +0530
+++++ iscsitarget-1.4.20.3+svn502/kernel/nthread.c	2015-08-24 17:41:56.187428925 +0530
++@@ -80,8 +80,11 @@ static int is_data_available(struct iscs
++ 	set_fs(oldfs);
++ 	return (res >= 0) ? avail : res;
++ }
++-
+++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
+++static void forward_iov(struct user_msghdr *msg, int len)
+++#else
++ static void forward_iov(struct msghdr *msg, int len)
+++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
++ {
++ 	while (msg->msg_iov->iov_len <= len) {
++ 		len -= msg->msg_iov->iov_len;
++@@ -96,7 +99,11 @@ static void forward_iov(struct msghdr *m
++ static int do_recv(struct iscsi_conn *conn, int state)
++ {
++ 	mm_segment_t oldfs;
+++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
+++	struct user_msghdr msg;
+++#else
++ 	struct msghdr msg;
+++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
++ 	struct iovec iov[ISCSI_CONN_IOV_MAX];
++ 	int i, len, res;
++ 
++@@ -461,7 +468,11 @@ static void exit_tx(struct iscsi_conn *c
++ static int tx_ddigest(struct iscsi_cmnd *cmnd, int state)
++ {
++ 	int res, rest = cmnd->conn->write_size;
+++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
+++	struct user_msghdr msg = {.msg_flags = MSG_NOSIGNAL | MSG_DONTWAIT};
+++#else
++ 	struct msghdr msg = {.msg_flags = MSG_NOSIGNAL | MSG_DONTWAIT};
+++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
++ 	struct kvec iov;
++ 
++ 	iov.iov_base = (char *) (&cmnd->ddigest) + (sizeof(u32) - rest);
++--- iscsitarget-1.4.20.3+svn502_org/kernel/target_disk.c	2015-08-24 16:13:26.481924679 +0530
+++++ iscsitarget-1.4.20.3+svn502/kernel/target_disk.c	2015-08-24 17:43:42.167625159 +0530
++@@ -606,7 +606,11 @@ static int disk_execute_cmnd(struct iscs
++ 	case REQUEST_SENSE:
++ 		send_data_rsp(cmnd, build_request_sense_response);
++ 		break;
+++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
+++	case SERVICE_ACTION_IN_16:
+++#else
++ 	case SERVICE_ACTION_IN:
+++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */	
++ 		send_data_rsp(cmnd, build_service_action_in_response);
++ 		break;
++ 	case READ_6:
++--- iscsitarget-1.4.20.3+svn502_org/kernel/volume.c	2015-08-24 16:13:26.477924674 +0530
+++++ iscsitarget-1.4.20.3+svn502/kernel/volume.c	2015-08-24 18:28:15.697074780 +0530
++@@ -398,7 +398,11 @@ int is_volume_reserved(struct iet_volume
++ 		case READ_CAPACITY:
++ 			/* allowed commands when reserved */
++ 			break;
+++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)			
+++		case SERVICE_ACTION_IN_16:
+++#else
++ 		case SERVICE_ACTION_IN:
+++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
++ 			if ((scb[1] & 0x1F) == 0x10)
++ 				break;
++ 			/* fall through */
++@@ -465,7 +469,11 @@ int is_volume_reserved(struct iet_volume
++ 		if (excl_access_ro && !registered)
++ 			err = -EBUSY;
++ 		break;
+++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
+++	case SERVICE_ACTION_IN_16:
+++#else
++ 	case SERVICE_ACTION_IN:
+++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
++ 		if ((scb[1] & 0x1F) == 0x10)
++ 			break;
++ 		/* fall through */
+diff --git a/meta-networking/recipes-extended/iscsitarget/files/use-kernel-makefile-to-get-kernel-version.patch b/meta-networking/recipes-extended/iscsitarget/files/use-kernel-makefile-to-get-kernel-version.patch
+new file mode 100644
+index 0000000..95bd047
+--- /dev/null
++++ b/meta-networking/recipes-extended/iscsitarget/files/use-kernel-makefile-to-get-kernel-version.patch
+@@ -0,0 +1,67 @@
++Get linux kernel version from Makefile of kernel source
++
++We get below messages while building iscsitarget,
++
++-- snip --
++x86_64-poky-linux-gcc: error:
++/CGE7_SHDD/project_yocto_1.8/poky/build/tmp/work-shared/qemux86-64/kernel-source/include/linux/version.h:
++No such file or directory
++x86_64-poky-linux-gcc: fatal error: no input files
++compilation terminated.
++/bin/sh: line 0: [: too many arguments
++/bin/sh: line 0: [: too many arguments
++/bin/sh: line 0: [: too many arguments
++/bin/sh: line 0: [: too many arguments
++/bin/sh: line 0: [: too many arguments
++/bin/sh: line 0: [: too many arguments
++/bin/sh: line 0: [: too many arguments
++/bin/sh: line 0: [: too many arguments
++/bin/sh: line 0: [: too many arguments
++/bin/sh: line 0: [: too many arguments
++/bin/sh: line 0: [: too many arguments
++/bin/sh: line 0: [: too many arguments
++-- CUT --
++
++These messages are due to absence of include/linux/version.h file in 
++kernel source directory and failed to compute linux kernel version.
++So, use kernel source Makefile ( i.e $(KSRC)/Makefile) to find out 
++actual kernel version.
++
++Upstream-Status: Pending
++
++Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
++
++--- iscsitarget-1.4.20.3+svn499_org/Makefile	2014-01-27 00:00:45.000000000 +0530
+++++ iscsitarget-1.4.20.3+svn499/Makefile	2015-07-23 10:44:47.013600285 +0530
++@@ -18,27 +18,11 @@ ifeq ($(KSRC),)
++ endif
++ 
++ 
++-ifneq ($(wildcard $(KSRC)/include/generated/utsrelease.h),)
++-	VERSION_FILE := $(KSRC)/include/generated/utsrelease.h
++-else
++-  ifneq ($(wildcard $(KSRC)/include/linux/utsrelease.h),)
++-	  VERSION_FILE := $(KSRC)/include/linux/utsrelease.h
++-  else
++-	  VERSION_FILE := $(KSRC)/include/linux/version.h
++-  endif
++-endif
++-
++-KVER := $(shell $(CC) $(CFLAGS) $(LDFLAGS) -E -dM $(VERSION_FILE) | \
++-	grep UTS_RELEASE | awk '{ print $$3 }' | sed 's/\"//g')
++-
++ KMOD := /lib/modules/$(KVER)/extra
++-
++-KMAJ := $(shell echo $(KVER) | \
++-	sed -e 's/^\([0-9][0-9]*\)\.[0-9][0-9]*\.[0-9][0-9]*.*/\1/')
++-KMIN := $(shell echo $(KVER) | \
++-	sed -e 's/^[0-9][0-9]*\.\([0-9][0-9]*\)\.[0-9][0-9]*.*/\1/')
++-KREV := $(shell echo $(KVER) | \
++-	sed -e 's/^[0-9][0-9]*\.[0-9][0-9]*\.\([0-9][0-9]*\).*/\1/')
+++KMAJ := $(shell cat $(KSRC)/Makefile | grep ^VERSION | gawk -F " " '{ print $$NF }')
+++KMIN := $(shell cat $(KSRC)/Makefile | grep ^PATCHLEVEL | gawk -F " " '{ print $$NF }')
+++KREV := $(shell cat $(KSRC)/Makefile | grep ^SUBLEVEL | gawk -F " " '{ print $$NF }')
+++KVER := ${KMAJ}.${KMIN}.${KREV}
++ 
++ kver_eq = $(shell [ $(KMAJ) -eq $(1) -a $(KMIN) -eq $(2) -a $(KREV) -eq $(3) ] && \
++ 	echo 1 || echo 0)
+diff --git a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
+new file mode 100644
+index 0000000..c96810b
+--- /dev/null
++++ b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
+@@ -0,0 +1,62 @@
++DESCRIPTION = "iSCSI Enterprise Target is aimed to develop an \
++               open source iSCSI target with professional features, \
++               that works well in enterprise environment under real \
++               workload, and is scalable and versatile enough to meet the \
++               challenge of future storage needs and developments."
++HOMEPAGE = "http://iscsitarget.sourceforge.net/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=6e233eda45c807aa29aeaa6d94bc48a2"
++DEPENDS = "openssl virtual/kernel"
++
++SRC_URI = "http://ftp.heanet.ie/mirrors/ubuntu/pool/universe/i/${BPN}/${BPN}_${PV}.orig.tar.gz \
++           file://use-kernel-makefile-to-get-kernel-version.patch \
++           file://fix-errors-observed-with-linux-3.19-and-greater.patch \
++	  "
++SRC_URI[md5sum] = "ef9bc823bbabd3c772208c00d5f2d089"
++SRC_URI[sha256sum] = "d3196ccb78a43266dce28587bfe30d8ab4db7566d7bce96057dfbb84100babb5"
++
++inherit module-base
++
++# Add make_scripts task to create kernel scripts
++addtask make_scripts after do_patch before do_compile
++
++do_configure[noexec] = "1"
++
++# make_scripts requires kernel source directory to create
++# kernel scripts
++do_make_scripts[depends] += "virtual/kernel:do_shared_workdir"
++
++# Make sure we don't have race condition against "make scripts"
++do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
++
++do_compile() {
++    oe_runmake KSRC=${STAGING_KERNEL_DIR} CFLAGS='${CFLAGS}' LDFLAGS='' \
++    CC="${CC}" V=1
++}
++
++do_install() {
++    # Module
++    install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/iscsi
++    install -m 0644 kernel/iscsi_trgt.ko \
++    ${D}/lib/modules/${KERNEL_VERSION}/kernel/iscsi/iscsi_trgt.ko
++    
++    # Userspace utilities
++    install -d ${D}${sbindir}
++    install -m 0755 usr/ietd ${D}${sbindir}/ietd
++    install -m 0755 usr/ietadm ${D}${sbindir}/ietadm
++    
++    # Config files, init scripts
++    mkdir -p ${D}${sysconfdir}/iet
++    install -m 0644 etc/ietd.conf ${D}/${sysconfdir}/iet/ietd.conf
++    install -m 0644 etc/initiators.allow ${D}${sysconfdir}/iet/initiators.allow
++    install -m 0644 etc/targets.allow ${D}${sysconfdir}/iet/targets.allow
++    mkdir -p ${D}${sysconfdir}/init.d
++    install -m 0755 etc/initd/initd ${D}${sysconfdir}/init.d/iscsi-target
++    install -m 0644 etc/initiators.deny ${D}${sysconfdir}/iet/initiators.deny
++}
++
++FILES_${PN} += "${sbindir} \
++                /lib \
++                ${sysconfdir}"
++
++RRECOMMENDS_${PN} = "kernel-module-crc32c kernel-module-libcrc32c"
+-- 
+1.8.2.3
 
 
