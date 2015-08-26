@@ -1,38 +1,36 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id F116276DA9
+Return-Path: <mario.goulart@gmail.com>
+Received: from mail-qg0-f46.google.com (mail-qg0-f46.google.com
+	[209.85.192.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 45F9D734B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2015 18:01:28 +0000 (UTC)
-Received: by igbjg10 with SMTP id jg10so47074497igb.0
+	Wed, 26 Aug 2015 19:34:46 +0000 (UTC)
+Received: by qgeg42 with SMTP id g42so133557865qge.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2015 11:01:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=kvHcun1zZwO3AicIRvhKcjqHAXWiPUzNmDBqU2ZA18o=;
-	b=dsa1lbqPjqDcy9LiTfDRvBzKj7T16Ec7oijo7J5aQjDfGb76zburcUJb+FyZkncsWh
-	KVFk3TCjCD4nlGETXZinC6HIFLI7iVNgv2qVKEToscluXRGVM2oGye4ZsqO5O8RXdrLq
-	YA9d24z2FxwDmKveblex5fR6S276MzcaNtKNFYOdk5pZJddmyT7mDgttquLzhfwFpUsz
-	/tELTkcjcd7aqW+HSZZVY3jYgnHbDqHeaXp8Q6aNP9KyhO0tCShMj2gbCal7maRnpGoc
-	RSGm4PXeeDvmWWvU1o3R8na8W6i33esYLfTml+zkFNUNKZx327cKquR7RuZoaeKJtsWB
-	GgMQ==
-MIME-Version: 1.0
-X-Received: by 10.50.92.106 with SMTP id cl10mr12035693igb.64.1440612088990;
-	Wed, 26 Aug 2015 11:01:28 -0700 (PDT)
-Received: by 10.36.98.5 with HTTP; Wed, 26 Aug 2015 11:01:28 -0700 (PDT)
-In-Reply-To: <55DD9BFE.6050807@linux.intel.com>
-References: <1440583622-11664-1-git-send-email-alexander.kanavin@linux.intel.com>
-	<1440585604.1644.17.camel@iki.fi>
-	<55DD9BFE.6050807@linux.intel.com>
-Date: Wed, 26 Aug 2015 20:01:28 +0200
-Message-ID: <CALbNGRR_j3f-KzA4iPQsdGsYe_VcqZYhhGBZ-8+FiHHRuwiDbA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Cc: Tanu Kaskinen <tanuk@iki.fi>
-Subject: Re: [PATCH 1/3] libnotify3: remove the recipe
+	Wed, 26 Aug 2015 12:34:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:organization;
+	bh=2VxJURmLuQ5KkxpvjbOtTh2314P3OpEdaIrYAZBetvY=;
+	b=kaPyF0tnoWHO1WRnKU75Bt9tmJ+0JjlB0bddZJtCG0pJTfFxZtiu3jos7sLOHuF7eN
+	yIJbExVhL6wW50oOqXjftwchpiUsZlWQdgCfDkcAftQgcbisfmUfPz9YpVrz36gW8Rh4
+	/gu3kVY5mrO78dKElJ6fUYki/jGzjCPE9SUpiluzaln2VeYSAdM6DRZ166aV8c6wFUok
+	MStJNY+Al30FErPvDGWEqgWK4VN6JQesorHXV/f2QVtxUWFbaGZuQ/aQ9Xm+NIVg9zMr
+	kZk8Ztswl8MO7nJSCJqqFM1MHJ6dlPLcjF6u0RBvP3BqGvp1fj/k49yDC10IfWBXtucG
+	r7dg==
+X-Received: by 10.140.231.208 with SMTP id b199mr137759qhc.87.1440617685907;
+	Wed, 26 Aug 2015 12:34:45 -0700 (PDT)
+Received: from mario.lab.ossystems.com.br ([187.23.145.102])
+	by smtp.gmail.com with ESMTPSA id 65sm17046616qgo.1.2015.08.26.12.34.44
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 26 Aug 2015 12:34:45 -0700 (PDT)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 26 Aug 2015 16:34:32 -0300
+Message-Id: <1440617672-7518-1-git-send-email-mario@ossystems.com.br>
+X-Mailer: git-send-email 1.7.10.4
+Organization: O.S. Systems Software LTDA.
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-oe][PATCH] mariadb: fix tarball fetch URL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,33 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2015 18:01:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 26 Aug 2015 19:34:49 -0000
 
-On Wed, Aug 26, 2015 at 12:59 PM, Alexander Kanavin
-<alexander.kanavin@linux.intel.com> wrote:
-> On 08/26/2015 01:40 PM, Tanu Kaskinen wrote:
->>>
->>>   # needs libnotify3 which conflicts with libnotify, mixing them in build
->>> breaks couple of packages
->>
->>
->>
->> This last comment seems to be out of date after this patch.
->
->
-> Actually, this whole thing can be removed:
->
-> # needs libnotify3 which conflicts with libnotify, mixing them in build
-> breaks couple of packages
-> EXCLUDE_FROM_WORLD = "1"
->
-> Whoever applies this patch, please amend it accordingly.
->
->
-> Alex
-I think it's not that easy. We need an libnotify append here with some
-RREPLACES / RPOVIDES for libnotify3. Right?
+http://mirror.stshosting.co.uk/mariadb responds with a 404 error, so
+use http://archive.mariadb.org instead.
 
-Andreas
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+---
+ meta-oe/recipes-support/mysql/mariadb.inc |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
+index d2418e7..4e2a64c 100644
+--- a/meta-oe/recipes-support/mysql/mariadb.inc
++++ b/meta-oe/recipes-support/mysql/mariadb.inc
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
++SRC_URI = "http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
+            file://fix-cmake-module-path.patch \
+            file://remove-bad-path.patch \
+            file://fix-mysqlclient-r-version.patch \
+-- 
+1.7.10.4
+
 
