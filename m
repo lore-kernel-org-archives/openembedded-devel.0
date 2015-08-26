@@ -1,26 +1,27 @@
 Return-Path: <Kai.Kang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 60E73736B6
+	by mail.openembedded.org (Postfix) with ESMTP id 7155871633
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2015 01:29:49 +0000 (UTC)
+	Wed, 26 Aug 2015 01:31:50 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7Q1ToHh025245
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7Q1VoKt025257
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2015 18:29:50 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.235.1; Tue, 25 Aug 2015 18:29:49 -0700
-From: <kai.kang@windriver.com>
+	Tue, 25 Aug 2015 18:31:50 -0700 (PDT)
+Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Tue, 25 Aug 2015 18:31:49 -0700
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 26 Aug 2015 09:25:25 +0800
-Message-ID: <1440552325-29335-2-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1440552325-29335-1-git-send-email-kai.kang@windriver.com>
 References: <1440552325-29335-1-git-send-email-kai.kang@windriver.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <55DD170C.2020409@windriver.com>
+Date: Wed, 26 Aug 2015 09:31:56 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-Subject: [PATCH 2/2] libhugetlbfs: avoid using keyword restrict as var name
+In-Reply-To: <1440552325-29335-1-git-send-email-kai.kang@windriver.com>
+Subject: Re: [PATCH 1/2] libhugetlbfs: avoid search host library path for cross compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,80 +35,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2015 01:29:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 26 Aug 2015 01:31:53 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Kai Kang <kai.kang@windriver.com>
+Forgot to add layer info. They are for layer meta-oe.
 
-When compile with gcc 5.x, libhugetlbfs fails with:
+--Kai
 
-| hugeutils.c: In function '__lh_hugetlbfs_setup_env':
-| hugeutils.c:304:40: error: expected identifier or '(' before restrict'
-|    char *p, *tok, *exe, buf[MAX_EXE+1], restrict[MAX_EXE];
-|                                         ^
 
-Rename variable to avoid using keyword restrict as variable name to fix it.
+On 2015年08月26日 09:25, kai.kang@windriver.com wrote:
+> From: Kai Kang <kai.kang@windriver.com>
+>
+> There was a patch fixing the same issue:
+> libhugetlbfs-avoid-search-host-library-path-for-cros.patch
+>
+> but missed the elf_i386.xB*, this patch fixes for it.
+>
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> ---
+>   ...s-elf_i386-avoid-search-host-library-path.patch | 40 ++++++++++++++++++++++
+>   .../libhugetlbfs/libhugetlbfs_git.bb               |  1 +
+>   2 files changed, 41 insertions(+)
+>   create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-elf_i386-avoid-search-host-library-path.patch
+>
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-elf_i386-avoid-search-host-library-path.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-elf_i386-avoid-search-host-library-path.patch
+> new file mode 100644
+> index 0000000..1566488
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-elf_i386-avoid-search-host-library-path.patch
+> @@ -0,0 +1,40 @@
+> +From 889e52753d30179ba4ac940023cb4ed561436ab8 Mon Sep 17 00:00:00 2001
+> +From: Jackie Huang <jackie.huang@windriver.com>
+> +Date: Tue, 4 Nov 2014 00:49:11 -0800
+> +Subject: [PATCH] libhugetlbfs/elf_i386: avoid search host library path for cross compilation
+> +
+> +Upstream-Status: Inappropriate [cross compile specific]
+> +
+> +Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> +---
+> + ldscripts/elf_i386.xB   |    1 -
+> + ldscripts/elf_i386.xBDT |    1 -
+> + 2 files changed, 2 deletions(-)
+> +
+> +diff --git a/ldscripts/elf_i386.xB b/ldscripts/elf_i386.xB
+> +index 43fe51c..eae0fa8 100644
+> +--- a/ldscripts/elf_i386.xB
+> ++++ b/ldscripts/elf_i386.xB
+> +@@ -3,7 +3,6 @@ OUTPUT_FORMAT("elf32-i386", "elf32-i386",
+> + 	      "elf32-i386")
+> + OUTPUT_ARCH(i386)
+> + ENTRY(_start)
+> +-SEARCH_DIR("/usr/i486-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");
+> + INPUT(-lhugetlbfs);
+> + /* Do we need any of these for elf?
+> +    __DYNAMIC = 0;    */
+> +diff --git a/ldscripts/elf_i386.xBDT b/ldscripts/elf_i386.xBDT
+> +index d72aebe..3bac1b1 100644
+> +--- a/ldscripts/elf_i386.xBDT
+> ++++ b/ldscripts/elf_i386.xBDT
+> +@@ -3,7 +3,6 @@ OUTPUT_FORMAT("elf32-i386", "elf32-i386",
+> + 	      "elf32-i386")
+> + OUTPUT_ARCH(i386)
+> + ENTRY(_start)
+> +-SEARCH_DIR("/usr/i486-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");
+> + INPUT(-lhugetlbfs);
+> + /* Do we need any of these for elf?
+> +    __DYNAMIC = 0;    */
+> +--
+> +1.7.9.5
+> +
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> index a2d3922..ae5e46a 100644
+> --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> @@ -17,6 +17,7 @@ SRC_URI = " \
+>       file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
+>       file://tests-Makefile-install-static-4G-edge-testcases.patch \
+>       file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
+> +    file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
+>   "
+>   
+>   S = "${WORKDIR}/git"
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- ...ugetlbfs-avoid-using-restrict-as-var-name.patch | 34 ++++++++++++++++++++++
- .../libhugetlbfs/libhugetlbfs_git.bb               |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-using-restrict-as-var-name.patch
 
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-using-restrict-as-var-name.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-using-restrict-as-var-name.patch
-new file mode 100644
-index 0000000..b77cfe1
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-using-restrict-as-var-name.patch
-@@ -0,0 +1,34 @@
-+Avoid using keyword restrict as variable name which causes error with gcc 5.x:
-+
-+| hugeutils.c: In function '__lh_hugetlbfs_setup_env':
-+| hugeutils.c:304:40: error: expected identifier or '(' before 'restrict'
-+|    char *p, *tok, *exe, buf[MAX_EXE+1], restrict[MAX_EXE];
-+|                                         ^
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+diff --git a/hugeutils.c b/hugeutils.c
-+index 53a7fbd..b9d7001 100644
-+--- a/hugeutils.c
-++++ b/hugeutils.c
-+@@ -301,14 +301,14 @@ void hugetlbfs_setup_env()
-+ 
-+ 	env = getenv("HUGETLB_RESTRICT_EXE");
-+ 	if (env) {
-+-		char *p, *tok, *exe, buf[MAX_EXE+1], restrict[MAX_EXE];
-++		char *p, *tok, *exe, buf[MAX_EXE+1], restricted[MAX_EXE];
-+ 		int found = 0;
-+ 
-+ 		exe = get_exe_name(buf, sizeof buf);
-+ 		DEBUG("Found HUGETLB_RESTRICT_EXE, this exe is \"%s\"\n", exe);
-+-		strncpy(restrict, env, sizeof restrict);
-+-		restrict[sizeof(restrict)-1] = 0;
-+-		for (p = restrict; (tok = strtok(p, ":")) != NULL; p = NULL) {
-++		strncpy(restricted, env, sizeof restricted);
-++		restricted[sizeof(restricted)-1] = 0;
-++		for (p = restricted; (tok = strtok(p, ":")) != NULL; p = NULL) {
-+ 			DEBUG("  ...check exe match for \"%s\"\n",  tok);
-+ 			if (strcmp(tok, exe) == 0) {
-+ 				found = 1;
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index ae5e46a..b7cc416 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -18,6 +18,7 @@ SRC_URI = " \
-     file://tests-Makefile-install-static-4G-edge-testcases.patch \
-     file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
-     file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
-+    file://libhugetlbfs-avoid-using-restrict-as-var-name.patch \
- "
- 
- S = "${WORKDIR}/git"
 -- 
-1.9.1
+Regards,
+Neil | Kai Kang
 
 
