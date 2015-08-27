@@ -1,24 +1,41 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0997376DE7
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-io0-f182.google.com (mail-io0-f182.google.com
+	[209.85.223.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 496C960043
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 09:34:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t7R9Yo4D010395
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 27 Aug 2015 10:49:27 +0000 (UTC)
+Received: by iodv127 with SMTP id v127so52057594iod.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 02:34:51 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.235.1; Thu, 27 Aug 2015 02:34:50 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Aug 2015 17:30:22 +0800
-Message-ID: <1440667822-23807-1-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Thu, 27 Aug 2015 03:49:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=H9MjFFchyR4WQQ0rjw6z8Bc5fD+lBrqfAnC2wiroB9U=;
+	b=RQpOFgBSNWdvpDPNUpc9LaHuikrrnUqJm6zYqlmW3R0PdWtnD7ddXu9vyYdlvo6Nj5
+	/sTf/kKTEudcznrppLtovV2OEquJLVyP0Z4443yHiOUGe4JQiT8TDjuGnf0Mvq6B3DG5
+	JzqQK/+l8ya6wvcWWOqusbc0wit94/AqLNm060/tP7xk/YhyjvmsEyyXWSUtSocCBHvc
+	nX43spnczsBsRzIFv2kf2gOlQjIgfeUea/IMj02FRowuRJwUhsH5gl9rI/AeodjpeAQC
+	liMLUsxBGFeKJ9VpCR6Zsf8iCVmoYrNusT28zhhIpUPyI2cnjouXIEO547jm4qSLR0M1
+	eHnA==
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] efibootmgr: fix build error with gcc 5.2
+X-Received: by 10.107.150.68 with SMTP id y65mr9932585iod.133.1440672567823;
+	Thu, 27 Aug 2015 03:49:27 -0700 (PDT)
+Received: by 10.36.98.5 with HTTP; Thu, 27 Aug 2015 03:49:27 -0700 (PDT)
+In-Reply-To: <1721551.0sTJOXpHQ2@peggleto-mobl.ger.corp.intel.com>
+References: <1440583622-11664-1-git-send-email-alexander.kanavin@linux.intel.com>
+	<55DD9BFE.6050807@linux.intel.com>
+	<CALbNGRR_j3f-KzA4iPQsdGsYe_VcqZYhhGBZ-8+FiHHRuwiDbA@mail.gmail.com>
+	<1721551.0sTJOXpHQ2@peggleto-mobl.ger.corp.intel.com>
+Date: Thu, 27 Aug 2015 12:49:27 +0200
+Message-ID: <CALbNGRTyXco+x4NrbQkNSV6F+aA42r_8ZycgfBKPYuQcxyn6Kw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: Tanu Kaskinen <tanuk@iki.fi>,
+	Alexander Kanavin <alexander.kanavin@intel.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/3] libnotify3: remove the recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,47 +49,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2015 09:34:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Aug 2015 10:49:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Kai Kang <kai.kang@windriver.com>
+On Thu, Aug 27, 2015 at 10:23 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Wednesday 26 August 2015 20:01:28 Andreas M=C3=BCller wrote:
+>> On Wed, Aug 26, 2015 at 12:59 PM, Alexander Kanavin
+>>
+>> <alexander.kanavin@linux.intel.com> wrote:
+>> > On 08/26/2015 01:40 PM, Tanu Kaskinen wrote:
+>> >>>   # needs libnotify3 which conflicts with libnotify, mixing them in
+>> >>>   build
+>> >>>
+>> >>> breaks couple of packages
+>> >>
+>> >> This last comment seems to be out of date after this patch.
+>> >
+>> > Actually, this whole thing can be removed:
+>> >
+>> > # needs libnotify3 which conflicts with libnotify, mixing them in buil=
+d
+>> > breaks couple of packages
+>> > EXCLUDE_FROM_WORLD =3D "1"
+>> >
+>> > Whoever applies this patch, please amend it accordingly.
+>> >
+>> >
+>> > Alex
+>>
+>> I think it's not that easy. We need an libnotify append here with some
+>> RREPLACES / RPOVIDES for libnotify3. Right?
+>
+> I was wondering about that myself. Really those RREPLACES + RPROVIDES +
+> RCONFLICTS need to go into the recipe in OE-Core though.
+>
+> Cheers,
+> Paul
+>
+Sorry to insist: I think it should be appended here: Users without
+meta-gnome in their layers have never seen libnotify3.
 
-It fails to build efibootmgr with gcc 5.2:
-
-src/lib/disk.o: In function `disk_get_scsi_pci':
-src/lib/disk.c:154: undefined reference to `get_scsi_pci'
-src/lib/efi.o: In function `make_edd30_device_path':
-src/lib/efi.c:474: undefined reference to `get_scsi_idlun'
-collect2: error: ld returned 1 exit status
-
-Because functions get_scsi_pci and get_scsi_idlun are declared as
-inline. It has different semantics for inilne function between gcc 4
-and gcc 5.
-
-Pass flag '-fgnu89-inline' to gcc to fix the errors.
-
-Ref:
-https://gcc.gnu.org/gcc-5/porting_to.html
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
-index 1870455..501ff2a 100644
---- a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
-+++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
-@@ -19,7 +19,7 @@ SRC_URI = "http://linux.dell.com/efibootmgr/permalink/efibootmgr-${PV}.tar.gz \
- SRC_URI[md5sum] = "9e9a31d79e579644de83a14139b66d10"
- SRC_URI[sha256sum] = "5167488b92950e60028d1025942ce6bda04638c6fb5e110abb8c8f687844d155"
- 
--EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/lib -I${S}/src/include'"
-+EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/lib -I${S}/src/include -fgnu89-inline'"
- 
- do_install () {
-     install -D -p -m0755 src/efibootmgr/efibootmgr ${D}/${sbindir}/efibootmgr
--- 
-1.9.1
-
+Andreas
 
