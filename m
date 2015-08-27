@@ -1,111 +1,124 @@
 Return-Path: <soren.brinkmann@xilinx.com>
-X-Greylist: delayed 904 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 27 Aug 2015 22:05:16 UTC
-Received: from na01-by2-obe.outbound.protection.outlook.com
-	(mail-by2on0075.outbound.protection.outlook.com [207.46.100.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B90960043
+X-Greylist: delayed 928 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 27 Aug 2015 22:06:03 UTC
+Received: from na01-bn1-obe.outbound.protection.outlook.com
+	(mail-bn1on0063.outbound.protection.outlook.com [157.56.110.63])
+	by mail.openembedded.org (Postfix) with ESMTP id CF36060043
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 22:05:16 +0000 (UTC)
-Received: from BN1AFFO11FD010.protection.gbl (10.58.52.34) by
-	BN1AFFO11HUB015.protection.gbl (10.58.52.125) with Microsoft SMTP
-	Server (TLS) id 15.1.256.10; Thu, 27 Aug 2015 21:50:33 +0000
-Authentication-Results: spf=pass (sender IP is 149.199.60.100)
-	smtp.mailfrom=xilinx.com; gmail.com; dkim=none (message not signed)
-	header.d=none;gmail.com; dmarc=bestguesspass action=none
-	header.from=xilinx.com;
+	Thu, 27 Aug 2015 22:06:03 +0000 (UTC)
+Received: from BN1AFFO11FD016.protection.gbl (10.58.52.32) by
+	BN1AFFO11HUB013.protection.gbl (10.58.52.123) with Microsoft SMTP
+	Server (TLS) id 15.1.256.10; Thu, 27 Aug 2015 21:50:09 +0000
+Authentication-Results: spf=pass (sender IP is 149.199.60.83)
+	smtp.mailfrom=xilinx.com; lists.openembedded.org; dkim=none (message not
+	signed) header.d=none; lists.openembedded.org;
+	dmarc=bestguesspass action=none header.from=xilinx.com;
 Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
-	149.199.60.100 as permitted sender) receiver=protection.outlook.com;
-	client-ip=149.199.60.100; helo=xsj-pvapsmtpgw02;
-Received: from xsj-pvapsmtpgw02 (149.199.60.100) by
-	BN1AFFO11FD010.mail.protection.outlook.com (10.58.52.70) with Microsoft
+	149.199.60.83 as permitted sender) receiver=protection.outlook.com;
+	client-ip=149.199.60.83; helo=xsj-pvapsmtpgw01;
+Received: from xsj-pvapsmtpgw01 (149.199.60.83) by
+	BN1AFFO11FD016.mail.protection.outlook.com (10.58.52.76) with Microsoft
 	SMTP Server (TLS) id 15.1.256.10 via Frontend Transport;
-	Thu, 27 Aug 2015 21:50:32 +0000
-Received: from unknown-38-66.xilinx.com ([149.199.38.66]:37298
-	helo=xsj-pvapsmtp01) by xsj-pvapsmtpgw02 with esmtp (Exim 4.63)
-	(envelope-from <soren.brinkmann@xilinx.com>)
-	id 1ZV544-0006BX-2E; Thu, 27 Aug 2015 14:50:32 -0700
-Received: from [127.0.0.1] (helo=localhost)
-	by xsj-pvapsmtp01 with smtp (Exim 4.63)
-	(envelope-from <soren.brinkmann@xilinx.com>)
-	id 1ZV543-0001oh-RQ; Thu, 27 Aug 2015 14:50:31 -0700
-Received: from xsj-pvapsmtp01 (mailman.xilinx.com [149.199.38.66])
+	Thu, 27 Aug 2015 21:50:08 +0000
+Received: from unknown-38-66.xilinx.com ([149.199.38.66] helo=xsj-pvapsmtp01)
+	by xsj-pvapsmtpgw01 with esmtp (Exim 4.63)
+	(envelope-from <soren.brinkmann@xilinx.com>) id 1ZV53f-0000aa-W7
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Aug 2015 14:50:08 -0700
+Received: from [127.0.0.1] (helo=xsj-smtp-dlp2.xlnx.xilinx.com)
+	by xsj-pvapsmtp01 with esmtp (Exim 4.63)
+	(envelope-from <soren.brinkmann@xilinx.com>) id 1ZV53f-0001gT-Nd
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Aug 2015 14:50:07 -0700
+Received: from xsj-pvapsmtp01 (xsj-smtp.xilinx.com [149.199.38.66])
 	by xsj-smtp-dlp2.xlnx.xilinx.com (8.13.8/8.13.1) with ESMTP id
-	t7RLo0cZ016801; Thu, 27 Aug 2015 14:50:00 -0700
+	t7RLnffK016695 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Aug 2015 14:49:42 -0700
 Received: from [172.19.74.49] (helo=localhost)
 	by xsj-pvapsmtp01 with esmtp (Exim 4.63)
-	(envelope-from <soren.brinkmann@xilinx.com>)
-	id 1ZV53x-0001n5-8a; Thu, 27 Aug 2015 14:50:25 -0700
-From: Soren Brinkmann <soren.brinkmann@xilinx.com>
+	(envelope-from <soren.brinkmann@xilinx.com>) id 1ZV53e-0001f8-IU
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Aug 2015 14:50:06 -0700
+Date: Thu, 27 Aug 2015 14:50:06 -0700
+From: =?utf-8?B?U8O2cmVu?= Brinkmann <soren.brinkmann@xilinx.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Aug 2015 14:50:14 -0700
-Message-ID: <1440712214-30967-1-git-send-email-soren.brinkmann@xilinx.com>
-X-Mailer: git-send-email 2.5.0.3.g52d66ab
+Message-ID: <20150827215006.GM32210@xsjsorenbubuntu>
+References: <1440470514-26608-1-git-send-email-soren.brinkmann@xilinx.com>
+	<20150825093136.GA2459@jama>
+MIME-Version: 1.0
+In-Reply-To: <20150825093136.GA2459@jama>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 X-RCIS-Action: ALLOW
 X-TM-AS-Product-Ver: IMSS-7.1.0.1224-8.0.0.1202-21774.005
 X-TM-AS-User-Approved-Sender: Yes;Yes
 X-EOPAttributedMessage: 0
-X-Microsoft-Exchange-Diagnostics: 1; BN1AFFO11FD010;
-	1:H/9Ywd+ahtggGnLirIW5s5Laq1wVFMGyX5KtrvOc6QG2x9jPqfohI249kDKzhvGMQ8ywRMKp+9gdH+DYkGjhTq31JguPoJGmJkxIJANJ+jurNfxh+5ACbEKku9X3g0C1WeWa/k1lLNWtjugILoVc2oF8YdIP+BCkDPXBwW1XKg3ERoSGKXsqonUEPuUydNOyTfjHTQsTjsLWTVlf1Eu5z6Gi93jYNUqFB8AizeBa+FLkvSlIL1RstPBoqNFQxfkycSFMvYXtB218va4XLfp/5wrxhSaBE9qSsssnhzpMRn9pKEOJaKQSuHoDjshPjc/PmgH2dGPb01Z5/0IwydeCoVinLImnhLvOZ//Fxm0XI1oHdXRVrpWOYWRcDCCMZSCDcFspyQ6gjm7snPZftwtaNQ==
-X-Forefront-Antispam-Report: CIP:149.199.60.100; CTRY:US; IPV:NLI; EFV:NLI;
+X-Microsoft-Exchange-Diagnostics: 1; BN1AFFO11FD016;
+	1:3aeqOBzcFqddvq6fqcQHTcsfZ7mZ94KhV0lyI23Ei5HvTWybhKDvgt++nMSBob2jECCmQek07jVxJhNyeE4CyxHWNoVFXZYqNc5BCHVP0zKY7ZQMMFeDS3U8OjNXvoGbg3vtVGSHLSTDFmOo3JXMAhdiLphF8d6d3H5RgjoE9OLQ+jSuEk+e+ovuQvbyX0qlrp17vqR3Da8MrmpDJL/+qzPLXHTe0L/ORof/QZ17suC0ixNad/pqGUihqozb1liAkiSQxkiKJZTa7h9a7SaUoHIbRhJdAcJA3G9fXuCcw0RzroiF/6N2YGboBdXx/cSfWF3R+qjMLlQolqWYeM3rrA==
+X-Forefront-Antispam-Report: CIP:149.199.60.83; CTRY:US; IPV:NLI; EFV:NLI;
 	SFV:NSPM;
-	SFS:(10009020)(6009001)(2980300002)(438002)(3050300001)(189002)(199003)(64706001)(2351001)(5003940100001)(229853001)(46102003)(92566002)(33646002)(50986999)(19580395003)(19580405001)(76506005)(4001540100001)(81156007)(50466002)(6806004)(48376002)(36386004)(63266004)(106466001)(86362001)(5001920100001)(5001960100002)(107886002)(110136002)(50226001)(36756003)(5001830100001)(5007970100001)(57986006)(87936001)(189998001)(15975445007)(77156002)(47776003)(77096005)(5001860100001)(62966003)(107986001)(5001870100001)(4001430100001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BN1AFFO11HUB015;
-	H:xsj-pvapsmtpgw02; FPR:; SPF:Pass;
-	PTR:unknown-60-100.xilinx.com,xapps1.xilinx.com; MX:1; A:1;
-	LANG:en; 
-MIME-Version: 1.0
-X-Microsoft-Exchange-Diagnostics: 1; BN1AFFO11HUB015;
-	2:G43ce31SNBeELL2HLbXGbkMXsFn4/ulebHt/TctMLbyMpr9SH9jtQk+Cb5quButg31yRzBp7TJE8Ku3Pft76hGN28B8mNoKbjzaD1Ml9sCC9Z8UMvIS0Q5N8pBYA9qIJxcfeao33B3SiXNDY+SK3+twllqjm87/3/1rWLvCUB/0=;
-	3:NHv2kXEXwAQhkYJ7x3FFR1XbB1iaBKIQhz4NKpdXUbvbBRjgvxg0aBsDNN1CtDUdYVBWpQvh+8cOlxtvKGQ0n1c7y3FINDBao2msEalQ1R0bvyrs50H5mABVWCUZnDwLY8vZ7O0XN7CZqmz7SieCq4K8w9s/BEGQNBdCcEMFPiQIcJfsk7vhTzJA+yuuVC6YhN9bPTC0L+cOIzv69OFngfGy5chzC2PpFhGIgk3k6ZREKVpdF9PkYt4sxCg87Q+JPdvoqbv3389cTKL5x8hbpw==;
-	25:ovC0/kemKVqkQzJLPhp+0X0uvU9ibUoz554xQHLepfZt556aMMIwKrq+tt2DWzpYusM76g3YCHG5PV+DR5bqKSpiwMJo4v2K7n066bTjfIATDOBeAqm9swgb118iztdTqEu25KLOef7XC0orRUq3YQoKiQf6Va88WiFvlCcYlbzTRB7A4iWqaZ+lc8yvqdXpH9E5/9jEJu+tTZSEbmRCkRsmp9uiBvaiu5PGtmE+zCN/pAQVsnd5IOnWxXczm8SAw8RXVqsA57aPiL93qP96Xg==
+	SFS:(10009020)(6009001)(2980300002)(438002)(3050300001)(377424004)(164054003)(24454002)(189002)(199003)(5007970100001)(4001540100001)(4001350100001)(107886002)(5001960100002)(189998001)(23676002)(110136002)(81156007)(5001860100001)(5001830100001)(64706001)(47776003)(33716001)(76176999)(54356999)(50986999)(46102003)(2351001)(106466001)(57986006)(85202003)(86362001)(76506005)(50466002)(85182001)(33656002)(83506001)(63266004)(77156002)(77096005)(15975445007)(92566002)(450100001)(2950100001)(19580405001)(6806004)(87936001)(62966003)(19580395003)(107986001);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BN1AFFO11HUB013;
+	H:xsj-pvapsmtpgw01; FPR:; SPF:Pass; PTR:unknown-60-83.xilinx.com;
+	MX:1; A:1; LANG:en; 
+X-Microsoft-Exchange-Diagnostics: 1; BN1AFFO11HUB013;
+	2:09IMr3tvWAqad002P2u01um8uLxwcdZpQZ9Woa9dKvNQavfMeyGGFTAqf1N04x88hAxvtmM/JDNk5xIszhNnMwarIEzOIllMmrgnuHEyB/CsCI1yiYFlV0NyorKu54zFIueBtuxLFPbSdSv7hpseZQTFCdvFz/U+eEHPhWMAhTU=;
+	3:9fm9cu4M3HkFBcxO87Lu+Wc5/gkUyE208b3tym4zHRn62EGiN4wN/VAPGmA+8BWpIyEx89K5aTWjTUT6fMXkXjuGfhFeAeW5IVIRiNKF3dHRLm5zQYkmEqSHTJKuXdCAXcDV+lsNl5fTHa/jOIJ/P+z9kbfUnyM5SbhMA0ob1ppdRz7YXiV5UwvoZofAiK0VzrTz+XIOR70+wY+v5lsShB/rgQsKsbMQOSurnAou8CKgOteWIemWzEQfSiRfpqz8Nf0o26pYRATU5h8ldRqD6Q==;
+	25:1iVFw8MLf3lJgsLAwp8huk9IusGu2JB/TFgVtSY3MfVf77lzFc1pmBFwqc1Nhb1yoQXNmxmGydXvEl7/NeFUILAI1YAilORDEwIp+J5i5z+jcT666ULPY7HmETyTdHvaDAQtlHm2CxJl+I3x9kFthg2RGVXjwaUTVGuz55G8/ZYN2bRDTT+45OnZp1gzdcip4VAFiYZHrOF+1MPJf8oYznXWN3riPzg/+yQDvVYQYaSsByHzztrm5TtLe8mtLBbgUXmZl+5x/G99zi24ygivMg==
 X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0; RULEID:(8251501001);
-	SRVR:BN1AFFO11HUB015; 
-X-Microsoft-Exchange-Diagnostics: 1; BN1AFFO11HUB015;
-	20:eCs2swT+ywfhs4NsDbEaevyBPJY/ZcG3+Jh8SgLxMgRclDQXYTRRyqAjC3DggB5E+8joDORMXLQH26IF61H4RR0P40rSOnNTajHaJEz16G1m17EQtYSdAJ3jndtIZ2Jm/SXd98VrpyZQ8DM0rmxqRgLe6MNzpyBS51ZKEvREibc62bN2igb/Pq8QBq4VYRvuPRTHdBr9d9SvwaaJOJ6TnKBzthB+QDXAjV+IIutxZ96F2YOvuqIzYk9UaGGf2U7oPDXR8e89+18alDjhPgkwhiLQg2yEiGidpWmCvaEcR54HiCRLkQ2OTb9DhANUsO42FajiElBu21Byf69MZ8+LbKb4FZf9vAI3odsNoaU15dqJR11Gvnt1H7TgS7YJXwfXKUdpPlbdXGkGrdDvr4rB8dCMcWOgnmWJFOSpZ1pRC6g487dZFNXCoH0pXeChnsurMielXtdNMRdcfuJQXoeiSjDQj39tvK9LijfCimpzkOmatVZa94PYJoZCGei586hV;
-	4:+JLrm+MxOgVYt+Asz4DkUSPm1WsJn5GScHXuEsI/0tfyFDBxezF99D3m9+IqYKk8DrHV0NIcvYARwhKxn1g4f2rOu+PaqjWiDAzynWWohie0wKA0RcsNBLH90MPDrHbuUS1Bd4hA/ZBt2rxVSnkRqfUgDLzir3qQhoM3AHZrc5Ot90P6kFqF8cz94Ov2WhHmUKYoYcMjW5oQlD/Ckpu+d4BoDfHEHUtEsa8J5zDRvaQDZpmiGH+7WfVou5+eJfUMWSWWFkOyoBCGv5Uv1WA22bQvPgcL6Zzjbv8slB5cBUlnVer9tn1ngavC0uvG7wue
-X-Microsoft-Antispam-PRVS: <BN1AFFO11HUB01569BEE67A1752ADB924128C6F0@BN1AFFO11HUB015.protection.gbl>
+	SRVR:BN1AFFO11HUB013; 
+X-Microsoft-Exchange-Diagnostics: 1; BN1AFFO11HUB013;
+	20:/CJjE6AX84ocYqhhkNSG9bqMVj4MpvZpnEiSYobeBCT97zJOK+yoL1q1JahpGxcqzJKWu7KOcK5ZqYeOxOQ/7Qii0KWYNcoGrwtGJPc7tYJK2GYTT+x25kDuSeL1WQnTbiSfRGPfgJYC441y4zFhUj0AcMLF02H3b7hp2NMCJuHaaTf2i9uV+jXZEtx+Os+XBzkJ+if8CPBoR0JlCKNLA2nPOox8BRq+3uBiiGQPyJDU2j7S8S7dyr5esjRZqn70I7ln8C+uazmlPuJ5LtcdNH9MsFDxTvD6rtCRKs+xqFrJBlEiHlWujaVNRYEOMYBoAmmSzKYNeI/51rwRhPHlVK159Bk18Lm9Nei8GPVIuw9xKFnILXZCEr3d/SaD4kYBGtmG0o8LRZGWrQRLQiAB76gwizl0mhSEoHTgm/hrcIf5sWpKPxC5X4Pq+w/Tjwp9td6FcvZWNSsN0L60zVJVRmUUFZxKrKX72d3jgIt+u1wiqhfGzp0TbEB9hC6H/sft;
+	4:cDxynbvx56ucYJrr8KAExGc9JKt2iNJx17bIWhzSwtqChZa+x4Hwcrfcpfgc/go4k9df4E5CWAoNAXHEKYGzP7cuEvqS7TI4ow/zLybXF9IZFhNIj0uXzPg6k12xIdrkrrYjK9MFHS6BKbSYRD9VQD+AWLPGPU9YU89Le1I/z/MvTcRCXAFcwyBJ5sP84FXtPSpjZwW/HaAiAa1RDXEVEvZ2aSPSg9r8T6OtW61s/mnxDBvF0M2+P2X+MKQRoXBCb6XJC+RiOVRiPcwCXB77VII2UVj67zAMUUQjvroJ3ALarauTp5DYVY1FORyEndhH
+X-Microsoft-Antispam-PRVS: <BN1AFFO11HUB013CB4547A7017335CDDDA98C6F0@BN1AFFO11HUB013.protection.gbl>
 X-Exchange-Antispam-Report-Test: UriScan:;
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(601004)(5005006)(8121501046)(3002001);
-	SRVR:BN1AFFO11HUB015; BCL:0; PCL:0; RULEID:;
-	SRVR:BN1AFFO11HUB015; 
+	RULEID:(601004)(8121501046)(5005006)(3002001);
+	SRVR:BN1AFFO11HUB013; BCL:0; PCL:0; RULEID:;
+	SRVR:BN1AFFO11HUB013; 
 X-Forefront-PRVS: 06818431B9
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; BN1AFFO11HUB015;
-	23:deZgIHL1iGxPUt85L6yYP74/CYCO5KOnTkUgtCC?=
-	=?us-ascii?Q?c99q4ktxtb0vBM+a5DUh/JTH/QDqndsK9ffAToj0jmGe8TcsegOIEoST1oRp?=
-	=?us-ascii?Q?6HsuFtAxbLZnbtxPEB1Qu61EU72ZeyTQMVQXeom7enxaXyE4gZjhQfJVsLtk?=
-	=?us-ascii?Q?q1VNQ3gPvMuB6eJzU9sVmgCd+GkvRatgzhRgEAiPuGRjAgyG0cJK6BtYC6dr?=
-	=?us-ascii?Q?XAqOcC+bhV5PmDLy4QdjYJWqYud5I9QULg+QOlBpV4IzVE+D0GvZIVMZn6Yt?=
-	=?us-ascii?Q?6Dy0lA9bippNf+zlonja4n7YhIiiRzinpUBF9B6nQ6ZR/khSFcYu+VY8B1LG?=
-	=?us-ascii?Q?/yhO4yTrJdwCHT7VEJI9pzIUlAeOib0E8kHLlHgtEfaZkVUO9dmN/zryc8PQ?=
-	=?us-ascii?Q?dkf63HVhG0QkrrY2xMbnUDe3ipvbg2ofw4K62IqX1bKARFFkCrrYG+2xB0pI?=
-	=?us-ascii?Q?/d1NLp+VtKMx3ygsSLnVllUqXZzXtl6rLIHO4XjtoUYeK8kgGKSxKnbZ4HcS?=
-	=?us-ascii?Q?yO3tXm/weO/O+3gAQWaY3eDdphcCPlZz8m9xaYYV/kSUWEj+i7/Innm3il1d?=
-	=?us-ascii?Q?N1tK7s4AytAzoe7eXx97IizvGOf1C08fVuE+v6wMkCkYlcA6GGVHNegOUeAG?=
-	=?us-ascii?Q?lIMiq0O06vUfnoZDyFxHZ7g8myA1JgIvsBrxEsVxDvarRGiwFxM1jzEwTF5U?=
-	=?us-ascii?Q?mZQwD1sXnpIKABIADupkgl4o1nJJqm/V5HeeY7PxS1NmnalIY+j/KA0SlTCw?=
-	=?us-ascii?Q?cKps12GOifW8UiEpA8+YExrePJLq0DFm2kgazGDYRuJMskhX4kqmHDL4hWAg?=
-	=?us-ascii?Q?La7J9iUFSfRlEX/Qsi1Hqk9ez7ruUCWQOIT8MkusaRRQ9bzQRHK78ZGTBa/T?=
-	=?us-ascii?Q?yv30WkJweHU1eJue6fGRuuaoMoH2QPGeqkpQRGrIJ9fTelbUlepTjHej8T8K?=
-	=?us-ascii?Q?SoW9Lpp31/m2GINiFWEgCqFAjaPgswE6TKSV3UXDiAL5CnQh4wcS8pUDejG3?=
-	=?us-ascii?Q?T3Jp4d3nKkfdIIbQcj824tHqGqZ+0q8yWgNQNJXTtRu7WRCOKn2PYkgwfxMR?=
-	=?us-ascii?Q?ovRLZ2tNAY/29/crZpFErpnkxBs2KmzFPgOn8AG7nbTt/aGj6+lYMnh/hsVi?=
-	=?us-ascii?Q?25GMmypXeQe5E4ebdDfD7SHeKpztdIzQl4y4gnaFzVrKXOvkPdtc1c0++QD9?=
-	=?us-ascii?Q?wQSOM1pCc90OZ5Oz5r6pmoZ9xYM3fncNZCXw6vmxs2VvNzWSsI1bgtgIIwvc?=
-	=?us-ascii?Q?T4ez/O/3Gg42dVX3SAgw=3D?=
-X-Microsoft-Exchange-Diagnostics: 1; BN1AFFO11HUB015;
-	5:0s5MzD9fbmh49r3b0ZaYOgqKi41d6aWXtuU57vIjocxPUIzuS0QprtdGrB0WjxXf6fbXn4m1b2Y8B8I3L4MeWHbDhaAY4ey9YoLey2aPlS0S/9cnYhNyx3rU0JhYR3tVlP9e0pqXs4GcPN1Hw9sXAQ==;
-	24:UtnjyIyc5uW4roB59sC0zUDRFT4VnEPRaq6YVRZupwCyoDk0dmdosYC4IFZGnL5Xm1T8bz/Aetu1lAigv6rwfhgP/8HX9ty+qQqYj1jNUzg=
+X-Microsoft-Exchange-Diagnostics: =?utf-8?B?MTtCTjFBRkZPMTFIVUIwMTM7MjM6cGxQcU5BYWpQRkFmaWYxYytUaE5KMzha?=
+	=?utf-8?B?S0ZVZnJ4VlpyeHJobVB2eHE0NlVNdjJjME1ld0xneHIwRFJnYjhDVXlFUjFC?=
+	=?utf-8?B?K0Y1NmEzRVUvWHk5WDZqb1pIZG9pN2JPRHl2THlKeVBSTEdPS0ZmVUxyWkpX?=
+	=?utf-8?B?bWFsZFhaaW9ldHU0MzlrZ1RETFN0MFl3QTg0cGlwL1hzdTRRV3VHN2t4Qnli?=
+	=?utf-8?B?bDZEVy83VFBQZ3JxSmZUc0JBTUdtKzBhYWlMWjJlVlBRYjJQZHJ5YWlEUDFv?=
+	=?utf-8?B?a1QxckczUmlNajdNYjU1dG5UWjI1dElGOXhJMnFSL2ZSc1pOZ2lFSzRJRGhy?=
+	=?utf-8?B?bjhnSVIyc0VubjE2SUM5ejg1dWYzU1UrUExoYWJvRUJ0RGxTbytMbEljU3kv?=
+	=?utf-8?B?UmZMa1d1dXlZUGt5Z3R0UE1Yd0JvUDZLcFZ5NzNTUktJTE1EMm5FYUUwMzdX?=
+	=?utf-8?B?SSs3QlBkanpWZnorMWVxNTFwUjkzcTl0VWNhZXJHbVN5N2VCcUtKdTdWK2R1?=
+	=?utf-8?B?Z20yZFFBUFRJS3dTSDZEa3JSZ0R2Y0QwN0ROSWRsNFVHelhCZmhaeDRMbUIy?=
+	=?utf-8?B?QjZFeVJqWXA1K1prUi9CVFJXbExtK3VSVkFMQnpGeVQzK2pSdmNXL1hrRVFj?=
+	=?utf-8?B?SlB4bDZtUVhmamZKUkZIYkxaQUswTjlLN0czeVY4YlJzVy9iM3NJNjNKNzN5?=
+	=?utf-8?B?SmJmRFVmYWozL0VUQXc5NUlhUzR2dk1GNndnYUMvSjhNQ0U4VTFTQ3dLa2NG?=
+	=?utf-8?B?QmNpQU5NQmQremVkdHlScUhtQXZFM21Pd3lZYmRnRGZlZ1ZZemZBV0NsSkR5?=
+	=?utf-8?B?bkplWXlWRkNiWXhRUFVYdUUwWmlPWjhXWWFHWFNqWTZodEJaVENHU3MzSEZC?=
+	=?utf-8?B?UEFHM3cyS2V1bWx4dzJLUy9DK083cGNQWmM2c1FMUEZodUZRcUR3clVjeEpN?=
+	=?utf-8?B?NlpoUERyK3RoUDJGWlZzems0bEhZY3BIeXluUEEvS1RCeTNwZi9vZENFRjVh?=
+	=?utf-8?B?Y0syZkVBZVhqalhvTzA1eC9QOW9ic0YyRURHU3pZendpZTYrMG9scVF5MW1J?=
+	=?utf-8?B?NUNWbnFwTERZRDlrdEQ4Zkh3ZDVjRnpUclB4ampuUGMwc0dzWldhenBQZGxR?=
+	=?utf-8?B?c0hScUdaOVhkdmlXQVpiL1JDMUUzRWRyeEROSGgzUEFBVktLOVJwRDgwSG1F?=
+	=?utf-8?B?NVdodnlrTGdVSDM0QVN3NkZGU2h6VG1rWlZlYnNUU3BiOEVTK0RzcCsrMHJT?=
+	=?utf-8?B?UU1GMnZjZVk2YWo5NDliVGp2RG9pbzA2YTZKN09NMTFBcVFWMWVUenpUUHlV?=
+	=?utf-8?B?MStyTGlkNGsxYy8yUDY3aytwOGtOajVwVlA3a3NLR05qMU5Oem4vTTVEZCtN?=
+	=?utf-8?B?THZSMWdtcDhxY1R5YVE0ZnpXZ0lySGxzTm5iRmUvd21WbGNiNlFrVVMyTXI3?=
+	=?utf-8?B?MTRoOGNYMTQvNk8rbUdpZGRSOFNCNFRkNGpSSTc4UXF3Z1FtQmExMlVvN3h1?=
+	=?utf-8?B?N0hXSDRsMTVBTlNQdjltOC9IZElIOWtnclRVL2dyRlZPd0lhNEl3bkM3ZDhG?=
+	=?utf-8?B?b1ZSREJad0srRHZQWENibVNkMVQzZ281bElIZTBCb2JWUTZtSTQ2ek5YVUNP?=
+	=?utf-8?B?Z1NwWUp0UmFJdFlVV2ZYeTNTNDdzcjZjYnJiK1BsSHp0YU1wc2RYdVBJakdO?=
+	=?utf-8?B?eXM4dklQbi90TFhHSkNuUWxrUVNHSVN0c2tqNGVqOG95dEhPUnFuaFdvdEVM?=
+	=?utf-8?Q?RN2wVr5VX674Y4aIQFzhJdkGdH3zNVQL4EOq54s=3D?=
+X-Microsoft-Exchange-Diagnostics: 1; BN1AFFO11HUB013;
+	5:hz0QQn9Pp673IBdlnhfEIBN6M6umUMC77oPCTRuYmhkqWDVIXRFxu8D4WUlRxgFkDs4QuP9PZbXzug5VGMvebQUVauouLzB3+a08h8b6BTUM9Yhld/ZHT6b+h4yrkHwLBVFhqhDt44sURY9mSrxlSA==;
+	24:E5MHFUGcs69bgWPCQ5cRi+hlaqHRiCZMepdvZUqs8GIzWKraCxyzXoJgtVQd3gaEoFrmOZmvs34w990XaScBFKCZjibCuceOc+5eaBjV9tM=
 SpamDiagnosticOutput: 1:23
 SpamDiagnosticMetadata: NSPM
 X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2015 21:50:32.9645 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2015 21:50:08.9023 (UTC)
 X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;
-	Ip=[149.199.60.100]; Helo=[xsj-pvapsmtpgw02]
+	Ip=[149.199.60.83]; Helo=[xsj-pvapsmtpgw01]
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN1AFFO11HUB015
-Subject: [meta-oe][PATCH v2] Add analyze-suspend
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN1AFFO11HUB013
+Subject: Re: [meta-oe][PATCH RFC] Add analyze-boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -119,55 +132,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2015 22:05:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Aug 2015 22:06:05 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Soren Brinkmann <soren.brinkmann@xilinx.com>
----
-v2:
- - replace 'boot'->'suspend' in commit message
- - document kernel dependencies in recipe
- - pin git commit
----
- .../analyze-suspend/analyze-suspend_git.bb         | 28 ++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
+Hi Martin,
 
-diff --git a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
-new file mode 100644
-index 000000000000..6932e9fadfc4
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "Analyze Suspend"
-+HOMEPAGE = "https://01.org/suspendresume"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
-+
-+# Apart from the listed RDEPENDS, analyze-suspend depends on some features
-+# provided by the kernel. These options are:
-+#   - CONFIG_PM_DEBUG=y
-+#   - CONFIG_PM_SLEEP_DEBUG=y
-+#   - CONFIG_FTRACE=y
-+#   - CONFIG_FUNCTION_TRACER=y
-+#   - CONFIG_FUNCTION_GRAPH_TRACER=y
-+
-+RDEPENDS_${PN} += "python-core python-datetime python-stringold"
-+
-+SRCREV = "bce3cbec43bc2ce7a8c79b210314dd9d9ac1010b"
-+SRC_URI = "git://github.com/01org/suspendresume.git;protocol=https"
-+S = "${WORKDIR}/git"
-+
-+do_install() {
-+	install -d -m 0755 ${D}${bindir}
-+	install -m 0755 analyze_suspend.py ${D}${bindir}
-+
-+	install -d -m 0755 ${D}${docdir}/analyze-suspend
-+	install -m 0755 README ${D}${docdir}/analyze-suspend
-+}
-+
-+BBCLASSEXTEND = "native"
--- 
-2.5.0.3.g52d66ab
+On Tue, 2015-08-25 at 11:31AM +0200, Martin Jansa wrote:
+> On Mon, Aug 24, 2015 at 07:41:54PM -0700, Soren Brinkmann wrote:
+> > Signed-off-by: Soren Brinkmann <soren.brinkmann@xilinx.com>
+> > ---
+> > Hi,
+> > 
+> > I saw a demo of the analyze_suspend.py script recently and thought it to be a
+> > nice little utility. Hence, I'd love to have it easily added in my OE flow and
+> > was looking for an appropriate place. I hope, to have found an OK location
+> > with meta-oe/recipes-benchmark?
+> 
+> Seems OK to me.
+> 
+> > Apart from the location, the tool does depend a couple of kernel configuration
+> > option. Could anybody provide some resources/guidance on what the best way for
+> > specifying those would be?
+> 
+> Just document them in the recipe.
 
+OK. That's easy.
+
+> 
+> > 
+> > 	Thanks,
+> > 	Sören
+> > 
+> >  .../analyze-suspend/analyze-suspend_git.bb           | 20 ++++++++++++++++++++
+> >  1 file changed, 20 insertions(+)
+> >  create mode 100644 meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
+> > 
+> > diff --git a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
+> > new file mode 100644
+> > index 000000000000..8ec3076ba186
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
+> > @@ -0,0 +1,20 @@
+> > +SUMMARY = "Analyze Suspend"
+> > +HOMEPAGE = "https://01.org/suspendresume"
+> > +LICENSE = "GPLv2"
+> > +LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
+> > +
+> > +RDEPENDS_${PN} += "python-core python-datetime python-stringold"
+> > +
+> > +SRCREV = "${AUTOREV}"
+> 
+> NAK, use known-to-work revision.
+
+OK. I just pin it to the latest available.
+
+A v2 is on its way.
+
+	Thanks,
+	Sören
 
