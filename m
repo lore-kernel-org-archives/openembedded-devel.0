@@ -1,31 +1,47 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C724E60043
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 81FC660043
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 11:00:27 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga103.jf.intel.com with ESMTP; 27 Aug 2015 04:00:28 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,422,1437462000"; d="scan'208";a="776660254"
-Received: from djcarton-mobl2.ger.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.20.50])
-	by fmsmga001.fm.intel.com with ESMTP; 27 Aug 2015 04:00:26 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Andreas =?ISO-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 27 Aug 2015 12:00:24 +0100
-Message-ID: <1590775.fS6PaZhfq4@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.9 (Linux/4.1.5-100.fc21.x86_64; KDE/4.14.9; x86_64; ; )
-In-Reply-To: <CALbNGRTyXco+x4NrbQkNSV6F+aA42r_8ZycgfBKPYuQcxyn6Kw@mail.gmail.com>
-References: <1440583622-11664-1-git-send-email-alexander.kanavin@linux.intel.com>
-	<1721551.0sTJOXpHQ2@peggleto-mobl.ger.corp.intel.com>
-	<CALbNGRTyXco+x4NrbQkNSV6F+aA42r_8ZycgfBKPYuQcxyn6Kw@mail.gmail.com>
+	Thu, 27 Aug 2015 12:46:10 +0000 (UTC)
+Received: by wicne3 with SMTP id ne3so73807529wic.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Aug 2015 05:46:10 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:content-type;
+	bh=U4uSF/4Y8uCk6WAtkhU7C55qSluL0Tu2DCQEWPvr0BI=;
+	b=D6S7X4w+CA+3uECn6P0ZiYlbI+QP9iuEYbR0l3x7uZ3J6Bef6KYS9hMLfNAReWFWXT
+	TPpVDlOWZBw4WjE0B1fDcwdGOdAh1C8nQv0Os2chTVTOKHgwe067wU59c5Ps0v2AmdM0
+	O1PdBVHcvXb3PccAFU3kiPZd72Q0MAp2mGQMIHoZ33yydgvwxNDb7kZgZ9JNo4gdeoKe
+	WH+jv6rrv7s4++QMFfoZwdnyciHD2ZfxZt2m4tBF1kuo0PdGqHUtGVhWb+yFhG/kuFwk
+	+nBsOB1r1lG1hRVjHrSOz0CLI8pGT92U+yFdcDUGvxTU6Y44seVPtP9XhJkb/KPTJ1X2
+	EdUA==
+X-Gm-Message-State: ALoCoQm8y4EpJiHEA93Tu5wXDktTF8uRe3oA2CXUtllVjPGXAZRCDQMLQOHwHH22x5UTCD/9avte
+X-Received: by 10.180.80.200 with SMTP id t8mr18579140wix.18.1440679570677;
+	Thu, 27 Aug 2015 05:46:10 -0700 (PDT)
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com.
+	[209.85.212.181])
+	by smtp.gmail.com with ESMTPSA id fn8sm3488205wib.2.2015.08.27.05.46.09
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 27 Aug 2015 05:46:09 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by wicne3 with SMTP id ne3so73807110wic.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Aug 2015 05:46:09 -0700 (PDT)
 MIME-Version: 1.0
-Cc: Tanu Kaskinen <tanuk@iki.fi>,
-	Alexander Kanavin <alexander.kanavin@intel.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/3] libnotify3: remove the recipe
+X-Received: by 10.194.120.198 with SMTP id le6mr4689012wjb.133.1440679569778; 
+	Thu, 27 Aug 2015 05:46:09 -0700 (PDT)
+Received: by 10.28.135.72 with HTTP; Thu, 27 Aug 2015 05:46:09 -0700 (PDT)
+In-Reply-To: <1440633769-19691-1-git-send-email-raj.khem@gmail.com>
+References: <1440633769-19691-1-git-send-email-raj.khem@gmail.com>
+Date: Thu, 27 Aug 2015 09:46:09 -0300
+Message-ID: <CAP9ODKoUaLm8yUiS1idtr+Neyth_oBufdME1XSJGdR2S7XbdzA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] layer.conf: define LAYERDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,80 +55,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2015 11:00:29 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Thu, 27 Aug 2015 12:46:11 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thursday 27 August 2015 12:49:27 Andreas M=FCller wrote:
-> On Thu, Aug 27, 2015 at 10:23 AM, Paul Eggleton
->=20
-> <paul.eggleton@linux.intel.com> wrote:
-> > On Wednesday 26 August 2015 20:01:28 Andreas M=FCller wrote:
-> >> On Wed, Aug 26, 2015 at 12:59 PM, Alexander Kanavin
-> >>=20
-> >> <alexander.kanavin@linux.intel.com> wrote:
-> >> > On 08/26/2015 01:40 PM, Tanu Kaskinen wrote:
-> >> >>>   # needs libnotify3 which conflicts with libnotify, mixing th=
-em in
-> >> >>>   build
-> >> >>>=20
-> >> >>> breaks couple of packages
-> >> >>=20
-> >> >> This last comment seems to be out of date after this patch.
-> >> >=20
-> >> > Actually, this whole thing can be removed:
-> >> >=20
-> >> > # needs libnotify3 which conflicts with libnotify, mixing them i=
-n build
-> >> > breaks couple of packages
-> >> > EXCLUDE_FROM_WORLD =3D "1"
-> >> >=20
-> >> > Whoever applies this patch, please amend it accordingly.
-> >> >=20
-> >> >=20
-> >> > Alex
-> >>=20
-> >> I think it's not that easy. We need an libnotify append here with =
-some
-> >> RREPLACES / RPOVIDES for libnotify3. Right?
-> >=20
-> > I was wondering about that myself. Really those RREPLACES + RPROVID=
-ES +
-> > RCONFLICTS need to go into the recipe in OE-Core though.
->=20
-> Sorry to insist: I think it should be appended here: Users without
-> meta-gnome in their layers have never seen libnotify3.
+On Wed, Aug 26, 2015 at 9:02 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> qtwebkit needs ruby-native which comes from meta-ruby
+> this patch adds initial set of layer dependencies there may be more
+> that can be added but its a start
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-Does it matter? Adding these alone to the core recipe won't have any ef=
-fect if=20
-you've never seen it before; and we do have precedents for this kind of=
- thing.
+This is only when someone uses QtWebkit; a lot of people does not use
+it so it is not a real dependency.
 
-In general I strongly believe that "software-only" layers such as the o=
-nes in=20
-meta-openembedded should not have any bbappends (with the possible exce=
-ption=20
-of toolchain-layer, assuming that's even still used) - the reason being=
-, you=20
-should be able to add any of those layers to your configuration and hav=
-e=20
-confidence that you won't experience any unexpected effects in your bui=
-ld.=20
-Adding RPROVIDES/RREPLACES/RCONFLICTS isn't exactly going to break the =
-world,=20
-I agree, but at the very least it will trigger repackaging of libnotify=
- if it=20
-has already been built, which will also trigger repackaging of any othe=
-r=20
-dependent recipes; you might not expect that to happen just by adding t=
-he=20
-layer to your bblayers.conf. That's what I'd like to avoid.
+We could make it dependent on the collection availability?
 
-Cheers,
-Paul
-
---=20
-
-Paul Eggleton
-Intel Open Source Technology Centre
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
