@@ -1,38 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id EF34D73E11
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 5690576E01
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 14:53:47 +0000 (UTC)
-Received: by widdq5 with SMTP id dq5so80644679wid.1
+	Thu, 27 Aug 2015 14:53:50 +0000 (UTC)
+Received: by wicgk12 with SMTP id gk12so11293057wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 07:53:47 -0700 (PDT)
+	Thu, 27 Aug 2015 07:53:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=cDU2OGxF0EWBy1NS1tgrWgNPE/Hm53g0njj0EM6lItE=;
-	b=b0gdDEJo8spq5NgMj+v3NvonjyyueupxPHyBXoThQLUGz0P2bEfkON1mjXWFsx6OhP
-	rzDPbWC+R2RW9As1N7SBiJMlSoIwEMr8LqT5+ovUivSkDNHNeBP+gJ6yECx/4zhK/37+
-	F4Vjv0J2LrcAA6Xct5sj248szkRsHgXLJizavyV4DvgDS4cUGamUzisEgBkJdIEI9stS
-	2kzyMXAGEn3p7BS/df41l2GURFXNh7siAliOpp44izXzC+W5QZo0GO6rfb8/QIbHPzVz
-	ulUnhvlXxK65NszDeKwNh6Y3+m7ExqooSSc4Rq1iR3EjAOECY2/BmT27NwyKgif4EXi9
-	jmWQ==
-X-Received: by 10.180.75.48 with SMTP id z16mr19975811wiv.2.1440687227339;
-	Thu, 27 Aug 2015 07:53:47 -0700 (PDT)
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=Xyh+OAH7gEml2mXjteNG2PNk1V625yYii+Ahm2Ergnc=;
+	b=EK9LYRYuy1OaaRIVnSxz45K1X2OPGVsuBPj26bJLQwHnTNk/6g4N8TNG/RYayIJBvY
+	G6WkwX406k99f5Bfnf4sumxJdGlM7uuMfi412/PLLo4pmYnGDv6S/JFpgCteIMfxQjAO
+	9YlXLhxxy9qdaB0IK2ZyWQW6S30bexcOiLshqSfwzGHWZBuzCECZTuRVMDgJivmU2K3t
+	QSk7cj7nLALiOLFQuq31ueXu8pQBn87f18I43KxjsapRGyUl0QiDUNz5x5niOWRE/9ht
+	CJTyRLZjI0bXyqW6tomPWwlVJHxLizi3ejEVlSlO+UpEUpmm2S/GALdoxJ/lbjIxRLcy
+	WX2A==
+X-Received: by 10.194.108.232 with SMTP id hn8mr5358374wjb.154.1440687230170; 
+	Thu, 27 Aug 2015 07:53:50 -0700 (PDT)
 Received: from localhost.localdomain ([5.147.14.94])
 	by smtp.googlemail.com with ESMTPSA id
-	p5sm12973681wiy.17.2015.08.27.07.53.46
+	p5sm12973681wiy.17.2015.08.27.07.53.49
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 27 Aug 2015 07:53:46 -0700 (PDT)
+	Thu, 27 Aug 2015 07:53:49 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Aug 2015 16:53:12 +0200
-Message-Id: <1440687197-26742-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 27 Aug 2015 16:53:15 +0200
+Message-Id: <1440687197-26742-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.1.0
+In-Reply-To: <1440687197-26742-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1440687197-26742-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 0/5] updates and fixes again
+Subject: [PATCH 3/5] rodent-icon-theme: add RPROVIDES/RREPLACE/RCONFLICTS for xfce4-icon-theme
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,47 +48,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2015 14:53:50 -0000
+X-List-Received-Date: Thu, 27 Aug 2015 14:53:51 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Note: xfce4-icon-theme patch is OK I've checked meanwhile
+rodent-icon-theme is successor of xfce4-icon-theme
 
-The following changes since commit 985fca448f2593f5e5aeba07656eb8f2dad60183:
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-xfce/recipes-art/rodent-icon-theme/rodent-icon-theme_5.0.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-  dhcp: fix parsing warning (2015-08-24 14:06:58 +0200)
-
-are available in the git repository at:
-
-  git://github.com/schnitzeltony/meta-openembedded.git patches1
-
-for you to fetch changes up to 8402dae17d7b30c74fccc666acd13a2b3598292c:
-
-  gnome-disk-utility: fix build for libnotify 0.7.x (2015-08-27 16:44:42 +0200)
-
-----------------------------------------------------------------
-Andreas Müller (4):
-      fontforge: update to 20150824
-      rodent-icon-theme: add RPROVIDES/RREPLACE/RCONFLICTS for xfce4-icon-theme
-      xfce4-notifyd: fix build for libnotify 0.7.x
-      gnome-disk-utility: fix build for libnotify 0.7.x
-
-Martin Jansa (1):
-      xfce4-icon-theme: remove
-
- meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0002-Require-libnotify-0.6.1.patch   |  49 +++++++++++++++++++++++
- meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb                            |   1 +
- meta-oe/recipes-graphics/fontforge/{fontforge_20141126.bb => fontforge_20150824.bb}                 |  11 +++---
- meta-xfce/recipes-apps/xfce4-notifyd/files/0001-Restore-libnotify-version-7.0.0-compatibility.patch | 152 ------------------------------------------------------------------------
- meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.2.4.bb                                         |   1 -
- meta-xfce/recipes-art/rodent-icon-theme/rodent-icon-theme_5.0.bb                                    |   5 +++
- meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb                                    |  14 -------
- 7 files changed, 61 insertions(+), 172 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0002-Require-libnotify-0.6.1.patch
- rename meta-oe/recipes-graphics/fontforge/{fontforge_20141126.bb => fontforge_20150824.bb} (77%)
- delete mode 100644 meta-xfce/recipes-apps/xfce4-notifyd/files/0001-Restore-libnotify-version-7.0.0-compatibility.patch
- delete mode 100644 meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
-
+diff --git a/meta-xfce/recipes-art/rodent-icon-theme/rodent-icon-theme_5.0.bb b/meta-xfce/recipes-art/rodent-icon-theme/rodent-icon-theme_5.0.bb
+index 130e032..40ba340 100644
+--- a/meta-xfce/recipes-art/rodent-icon-theme/rodent-icon-theme_5.0.bb
++++ b/meta-xfce/recipes-art/rodent-icon-theme/rodent-icon-theme_5.0.bb
+@@ -9,3 +9,8 @@ SRC_URI[md5sum] = "4b097d344a160d6497c6498985c8df15"
+ SRC_URI[sha256sum] = "6ed00d16faa1f55b3bb7b13862de1d7f5cfd978b93e42487ded21595d0dbe208"
+ 
+ FILES_${PN} += "${datadir}/icons"
++
++RREPLACES_${PN} += "xfce4-icon-theme"
++RPROVIDES_${PN} += "xfce4-icon-theme"
++RCONFLICTS_${PN} += "xfce4-icon-theme"
++
 -- 
 2.1.0
 
