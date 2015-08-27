@@ -1,37 +1,24 @@
-Return-Path: <obi@opendreambox.org>
-X-Greylist: delayed 394 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 27 Aug 2015 08:48:20 UTC
-Received: from mail.dream-property.net (mail.dream-property.net
-	[82.149.226.172])
-	by mail.openembedded.org (Postfix) with ESMTP id CBDD576D72
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A8BEF76DB0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 08:48:20 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 89AC43159E4D
+	Thu, 27 Aug 2015 08:59:16 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t7R8xGB4018632
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 10:41:45 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id t8MnbUeZLWu9
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 10:41:43 +0200 (CEST)
-Received: from [172.22.22.61] (55d47af0.access.ecotel.net [85.212.122.240])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 99BF23159DFA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 10:41:43 +0200 (CEST)
-Message-ID: <55DECD46.2020602@opendreambox.org>
-Date: Thu, 27 Aug 2015 10:41:42 +0200
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
+	Thu, 27 Aug 2015 01:59:16 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Thu, 27 Aug 2015 01:59:16 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 27 Aug 2015 16:54:46 +0800
+Message-ID: <1440665686-19364-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1440650132-10281-1-git-send-email-TicoTimo@gmail.com>
-In-Reply-To: <1440650132-10281-1-git-send-email-TicoTimo@gmail.com>
-Subject: Re: [meta-multimedia][PATCH] vlc: fix for libtool error
+Subject: [PATCH][meta-oe] lcms: upgrade 2.6->2.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,35 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2015 08:48:21 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 27 Aug 2015 08:59:19 -0000
+Content-Type: text/plain
 
-Hallo Tim,
+From: Roy Li <rongqing.li@windriver.com>
 
-On 27.08.2015 06:35, Tim Orling wrote:
-> Patch recommended by:
->   Rafaël Carré funman@videolan.org
-> 
-> Signed-off-by: Tim Orling <TicoTimo@gmail.com>
-> ---
->  meta-multimedia/recipes-multimedia/vlc/vlc.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-> index bf7ce0c..c4548c7 100644
-> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-> @@ -63,7 +63,7 @@ do_configure_prepend() {
->  
->  do_configure_append() {
->      sed -i -e s:'$(MOC) $(DEFS) $(CPPFLAGS)':'$(MOC) $(DEFS)'\ -I${B}/include\ -DSYS_LINUX:g ${B}/modules/gui/qt4/Makefile
-> -    sed -i -e s:'${top_builddir_slash}libtool':${TARGET_SYS}-libtool:g ${B}/doltlibtool
-> +    sed -i -e s:'${top_builddir_slash}libtool':'${top_buildir_slash}'${TARGET_SYS}-libtool:g ${B}/doltlibtool
-                                                              ^
-this looks like a typo (missing d).
+2.7 is a maintenance release
 
-Regards,
-Andreas
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ meta-oe/recipes-support/lcms/{lcms_2.6.bb => lcms_2.7.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/lcms/{lcms_2.6.bb => lcms_2.7.bb} (70%)
+
+diff --git a/meta-oe/recipes-support/lcms/lcms_2.6.bb b/meta-oe/recipes-support/lcms/lcms_2.7.bb
+similarity index 70%
+rename from meta-oe/recipes-support/lcms/lcms_2.6.bb
+rename to meta-oe/recipes-support/lcms/lcms_2.7.bb
+index ad727df..12ccb20 100644
+--- a/meta-oe/recipes-support/lcms/lcms_2.6.bb
++++ b/meta-oe/recipes-support/lcms/lcms_2.7.bb
+@@ -3,8 +3,8 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6c786c3b7a4afbd3c990f1b81261d516"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/lcms/lcms2-${PV}.tar.gz"
+-SRC_URI[md5sum] = "f4c08d38ceade4a664ebff7228910a33"
+-SRC_URI[sha256sum] = "5172528839647c54c3da211837225e221be93e4733f5b5e9f57668f7107e14b1"
++SRC_URI[md5sum] = "06c1626f625424a811fb4b5eb070839d"
++SRC_URI[sha256sum] = "4524234ae7de185e6b6da5d31d6875085b2198bc63b1211f7dde6e2d197d6a53"
+ 
+ DEPENDS = "tiff"
+ 
+-- 
+1.9.1
 
 
