@@ -1,43 +1,40 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 93D1E60043
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 8628260043
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 14:41:12 +0000 (UTC)
-Received: by widdq5 with SMTP id dq5so47367711wid.0
+	Thu, 27 Aug 2015 14:53:48 +0000 (UTC)
+Received: by wicgk12 with SMTP id gk12so11936040wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 07:41:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=eagq8eLYqpzueOtI5ENIejmpWSccc5gXDLsrLfag8Q8=;
-	b=jSuCLX+a8e0uGyfp3JWSOqk1LmGwOm9iD8vg5ntqqL5HSRZJ154kjrgi1RCOOEyCR5
-	blXNQMqoU+j/NPV1DQ3flLjDqLtAWLGOV2UEHeDf8+xM+gscVpqGyKCp1X0vzYWTYbcx
-	pCej41z7NmMKCyatI7UXVyQBJg827hrzy8Q1pXYJA6lPrxq0A9D1Fmpayh465HjM0agP
-	KQQ4DU0tNOag4dOFlWv/ut6jBD9kK+L6dFYs+XC13mQolpqSCCqQ8BTisEAd2/Lv7kAZ
-	yYIexjTmwPf8ZM9YMdpK1qEl8TMIZM0p7iT690x+oO9Dlb1fXgpB+o38bu29U9oqqzpB
-	MTww==
-X-Received: by 10.194.109.97 with SMTP id hr1mr5724607wjb.38.1440686472152;
-	Thu, 27 Aug 2015 07:41:12 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	op6sm12908800wic.12.2015.08.27.07.41.11
+	Thu, 27 Aug 2015 07:53:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=rzlPsi4vx2+a/5UMStLzDFMmJcxwZVrD0dfSTTmwLIA=;
+	b=EI0DffSK/9fIT1pe5qFdcNdJhG1h+vU5bxiB2HjvBf4CDA6cpyZP7/RkL7eiGLHExk
+	GqoC8TJ97FlZG9NpGkjztzYacSkX1UaCwUwYUo6tmVal7whr2uwpRCwQaHjTBj2v7FVC
+	xXrwEIzGFsF2J+MrLbl44fdbO6ZlFP0QvcbMX4qIp68nc3sgpi4oxdtBYXknR70fvCOU
+	DzTy9wy+bLZ6LLITeUd9IXs+bz5FsbieeKKWdoiFv/wg/rUD6FhOKncuwj2137o9eGOd
+	JTpsGZWp8InGWX7xYz3X+MnkMx7xbJfTkBjJ5Zil0QHufV0qa+yJk9eWyJE4Y1LItv8P
+	UtfA==
+X-Received: by 10.181.13.204 with SMTP id fa12mr20428873wid.24.1440687228157; 
+	Thu, 27 Aug 2015 07:53:48 -0700 (PDT)
+Received: from localhost.localdomain ([5.147.14.94])
+	by smtp.googlemail.com with ESMTPSA id
+	p5sm12973681wiy.17.2015.08.27.07.53.47
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 27 Aug 2015 07:41:11 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 27 Aug 2015 16:41:27 +0200
+	Thu, 27 Aug 2015 07:53:47 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150827144127.GB2443@jama>
-References: <1440633769-19691-1-git-send-email-raj.khem@gmail.com>
-	<CAP9ODKoUaLm8yUiS1idtr+Neyth_oBufdME1XSJGdR2S7XbdzA@mail.gmail.com>
-	<CAMKF1srdDoCk8_bbLVEYjWgUEF_MyfY5KcRor2QoLiN7FJoJ4g@mail.gmail.com>
-	<20150827142008.GQ26375@denix.org>
+Date: Thu, 27 Aug 2015 16:53:13 +0200
+Message-Id: <1440687197-26742-2-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.1.0
+In-Reply-To: <1440687197-26742-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1440687197-26742-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <20150827142008.GQ26375@denix.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-qt5][PATCH] layer.conf: define LAYERDEPENDS
+Subject: [PATCH 1/5] fontforge: update to 20150824
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,61 +48,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2015 14:41:14 -0000
-X-Groupsio-MsgNum: 57072
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="lEGEL1/lMxI0MVQ2"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 27 Aug 2015 14:53:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---lEGEL1/lMxI0MVQ2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* LICENSE was rewrittem stating out more clearly that huge parts were initially
+  licensed under BSD clause 3 - so add that licence.
+* Follow suggestion not to use github release tarballs [1] and use git as
+  source.
 
-On Thu, Aug 27, 2015 at 10:20:08AM -0400, Denys Dmytriyenko wrote:
-> On Thu, Aug 27, 2015 at 06:30:13AM -0700, Khem Raj wrote:
-> > On Thu, Aug 27, 2015 at 5:46 AM, Otavio Salvador
-> > <otavio.salvador@ossystems.com.br> wrote:
-> > > On Wed, Aug 26, 2015 at 9:02 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> > >> qtwebkit needs ruby-native which comes from meta-ruby
-> > >> this patch adds initial set of layer dependencies there may be more
-> > >> that can be added but its a start
-> > >>
-> > >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > >
-> > > This is only when someone uses QtWebkit; a lot of people does not use
-> > > it so it is not a real dependency.
-> > >
-> >=20
-> > then it should be part of BBMASK which is default so if someone wants
-> > it then user gets a clear message and knows what to fix
-> >=20
-> > > We could make it dependent on the collection availability?
-> >=20
-> > yes that could be how do u propose to do so
->=20
-> Chris Larson shared this code for such purpose:
->=20
-> https://github.com/MentorEmbedded/meta-mentor/blob/master/meta-mel/conf/l=
-ayer.conf#L5-L11
+[1] http://lists.openembedded.org/pipermail/openembedded-devel/2015-August/102843.html
 
-There are plans to merge ruby in oe-core (because of newer webkit-gtk),
-so I wouldn't worry too much about BBMASKing qtwebkit if meta-ruby is
-not available.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../{fontforge_20141126.bb => fontforge_20150824.bb}          | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-graphics/fontforge/{fontforge_20141126.bb => fontforge_20150824.bb} (77%)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
+similarity index 77%
+rename from meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb
+rename to meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
+index a2d6cc6..eb58d8f 100644
+--- a/meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb
++++ b/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
+@@ -1,9 +1,9 @@
+ SUMMARY = "A font editor"
+ HOMEPAGE = "http://fontforge.github.io/en-US/"
+-LICENSE = "GPLv3"
++LICENSE = "BSD-3-Clause & GPLv3"
+ LIC_FILES_CHKSUM = " \
+     file://COPYING.gplv3;md5=d32239bcb673463ab874e80d47fae504 \
+-    file://LICENSE;md5=71d636ba7678baa1573e1b531041386e \
++    file://LICENSE;md5=3f922b42ed0033fa0fd4cd3268f6429c \
+ "
+ 
+ inherit autotools pkgconfig pythonnative distro_features_check
+@@ -12,9 +12,10 @@ DEPENDS = "glib-2.0 pango giflib tiff libxml2 jpeg python libtool"
+ DEPENDS_append_class-target = " libxi"
+ REQUIRED_DISTRO_FEATURES_append_class-target = " x11"
+ 
+-SRC_URI = "https://github.com/${BPN}/${BPN}/archive/${PV}.tar.gz"
+-SRC_URI[md5sum] = "0d6f5112c4e5689087339a94aceadf77"
+-SRC_URI[sha256sum] = "9c90c640023463c0b2b97b87575a014fcf44f688c3763f4cd136d3c267092106"
++SRC_URI = "git://github.com/${BPN}/${BPN}.git"
++# tag 20150824
++SRCREV = "07d5ccff2704f8a56f1b3cc6695a4e31f85f88e6"
++S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF_append_class-native = " with_x=no --disable-python-extension --disable-python-scripting"
+ 
+-- 
+2.1.0
 
---lEGEL1/lMxI0MVQ2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlXfIZYACgkQN1Ujt2V2gBxqKQCfYUZE/jwAHV+FZJsBKmv4dCAm
-AjcAmgISK7OqvdkkX9J6qMFhP0QnjZip
-=8M+b
------END PGP SIGNATURE-----
-
---lEGEL1/lMxI0MVQ2--
