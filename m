@@ -1,32 +1,33 @@
 Return-Path: <denis@denix.org>
 Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
 	[206.46.173.19])
-	by mail.openembedded.org (Postfix) with ESMTP id D274560043
+	by mail.openembedded.org (Postfix) with ESMTP id 9F75073E11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 14:15:45 +0000 (UTC)
+	Thu, 27 Aug 2015 14:20:09 +0000 (UTC)
 Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
 	16 2014))
-	with ESMTPSA id <0NTQ000XZVLMQL70@vms173019.mailsrvcs.net> for
+	with ESMTPSA id <0NTQ00NIOVTK0Q90@vms173019.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Thu,
-	27 Aug 2015 09:15:32 -0500 (CDT)
+	27 Aug 2015 09:20:08 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
 	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=XYJHFtupD_QA:10 a=-9mUelKeXuEA:10
-	a=kj9zAlcOel0A:10 a=uRRa74qj2VoA:10	a=pGLkceISAAAA:8 a=Q4-j1AaZAAAA:8
-	a=VylFAymO2vud7gMRCmYA:9	a=0bXxn9q0MV6snEgNplNhOjQmxlI=:19
-	a=CjuIK1q_8ugA:10
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 53F0E161BB4; Thu,
-	27 Aug 2015 10:15:22 -0400 (EDT)
-Date: Thu, 27 Aug 2015 10:15:22 -0400
+	a=kj9zAlcOel0A:10 a=uRRa74qj2VoA:10	a=alK4_DS-AAAA:8 a=pGLkceISAAAA:8
+	a=NEAV23lmAAAA:8 a=aEQYKJY4uoATvAp4la4A:9	a=CjuIK1q_8ugA:10
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 43F90161BB4; Thu,
+	27 Aug 2015 10:20:08 -0400 (EDT)
+Date: Thu, 27 Aug 2015 10:20:08 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20150827141522.GP26375@denix.org>
-References: <1440332209-8802-1-git-send-email-net147@gmail.com>
+Message-id: <20150827142008.GQ26375@denix.org>
+References: <1440633769-19691-1-git-send-email-raj.khem@gmail.com>
+	<CAP9ODKoUaLm8yUiS1idtr+Neyth_oBufdME1XSJGdR2S7XbdzA@mail.gmail.com>
+	<CAMKF1srdDoCk8_bbLVEYjWgUEF_MyfY5KcRor2QoLiN7FJoJ4g@mail.gmail.com>
 MIME-version: 1.0
-In-reply-to: <1440332209-8802-1-git-send-email-net147@gmail.com>
+In-reply-to: <CAMKF1srdDoCk8_bbLVEYjWgUEF_MyfY5KcRor2QoLiN7FJoJ4g@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [meta-qt5][PATCH] qtbase: replace host paths with qmake built-in properties in qconfig.pri
+Subject: Re: [meta-qt5][PATCH] layer.conf: define LAYERDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,56 +41,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2015 14:15:45 -0000
+X-List-Received-Date: Thu, 27 Aug 2015 14:20:12 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-This seems to cause a build issue in qtwebkit and qtwebengine as well.
+On Thu, Aug 27, 2015 at 06:30:13AM -0700, Khem Raj wrote:
+> On Thu, Aug 27, 2015 at 5:46 AM, Otavio Salvador
+> <otavio.salvador@ossystems.com.br> wrote:
+> > On Wed, Aug 26, 2015 at 9:02 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> >> qtwebkit needs ruby-native which comes from meta-ruby
+> >> this patch adds initial set of layer dependencies there may be more
+> >> that can be added but its a start
+> >>
+> >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >
+> > This is only when someone uses QtWebkit; a lot of people does not use
+> > it so it is not a real dependency.
+> >
+> 
+> then it should be part of BBMASK which is default so if someone wants
+> it then user gets a clear message and knows what to fix
+> 
+> > We could make it dependent on the collection availability?
+> 
+> yes that could be how do u propose to do so
 
-It manifests in not being able to find glib.h or gio/gio.h headers.
+Chris Larson shared this code for such purpose:
 
-Khem, Martin and I are still discussing this on IRC, but I propose to revert 
-this commit until it's tested better for all modules.
+https://github.com/MentorEmbedded/meta-mentor/blob/master/meta-mel/conf/layer.conf#L5-L11
 
 -- 
 Denys
-
-
-On Sun, Aug 23, 2015 at 10:16:49PM +1000, Jonathan Liu wrote:
-> This avoids qconfig.pri in the Qt SDK incorrectly including paths from
-> the build host that may not exist on the SDK host. As the paths are
-> now correct, qmake can correctly detect system include paths and use
-> -isystem instead of -I for Qt's include directories which allows the
-> suppression of warnings from library headers when building Qt
-> applications.
-> 
-> Signed-off-by: Jonathan Liu <net147@gmail.com>
-> ---
->  recipes-qt/qt5/qtbase_git.bb | 5 +++++
->  1 file changed, 5 insertions(+)
-> 
-> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-> index ae63150..324a115 100644
-> --- a/recipes-qt/qt5/qtbase_git.bb
-> +++ b/recipes-qt/qt5/qtbase_git.bb
-> @@ -234,6 +234,11 @@ do_install_append() {
->      # Remove macx-ios-clang directory because /usr/lib/qt5/mkspecs/macx-ios-clang/rename_main.sh:#!/bin/bash
->      # triggers QA Issue: qtbase-mkspecs requires /bin/bash, but no providers in its RDEPENDS [file-rdeps]
->      rm -rf ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/macx-ios-clang
-> +
-> +    # Replace host paths with qmake built-in properties
-> +    sed -i -e 's| ${STAGING_DIR_NATIVE}| $$[QT_HOST_PREFIX]|g' \
-> +        -e 's| ${STAGING_DIR_HOST}| $$[QT_INSTALL_PREFIX]|g' \
-> +        ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/qconfig.pri
->  }
->  
->  PACKAGES =. " \
-> -- 
-> 2.5.0
-> 
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
