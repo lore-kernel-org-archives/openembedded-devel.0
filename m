@@ -1,34 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
-	[209.85.220.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D06F73217
+Return-Path: <Paul.Gortmaker@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E870873217
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2015 23:53:43 +0000 (UTC)
-Received: by pabzx8 with SMTP id zx8so3661747pab.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2015 16:53:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=WQsKd1Kz+ZWno4C9XuJtsO7tUTpSRBISACAeI+84MEw=;
-	b=whk/h6siDIwT2q0GnmVVd+JrnVdciN6o8/5BBHQ4l6TIyfq8q2rGBcLLSq45iKr9UD
-	53RRKK12VDPEHEu6c39nIQXP99Ax4rkzUWQCQm/gOq6dC6jcKrLBwFNRizI55NUksc9G
-	KLuTV7u+r12RMtGG6Iur3OT7PA6wwwt9g3Ss2lyRHUcPvhQhPsYZjS14r94b7RfroqM9
-	TQltK00nuukODLj+iwOINGrqyi7GXpfa6lUegRX9KaDE8MJatddIiJ/nDfESx9WKfC2n
-	55nZt0uHkjl0VhbwuwG3IhNnfvwtQneoU1A9i9NZNVAvM7syD0dn8JI7dlyeTq6exwS5
-	7Hbg==
-X-Received: by 10.66.241.130 with SMTP id wi2mr1996696pac.130.1440633224167;
-	Wed, 26 Aug 2015 16:53:44 -0700 (PDT)
-Received: from haswell.localdomain ([2601:646:8601:4580:baca:3aff:fe80:aa8f])
-	by smtp.gmail.com with ESMTPSA id
-	kr1sm182428pbc.93.2015.08.26.16.53.42
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 26 Aug 2015 16:53:43 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Aug 2015 17:02:49 -0700
-Message-Id: <1440633769-19691-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.5.0
-Subject: [meta-qt5][PATCH] layer.conf: define LAYERDEPENDS
+	Thu, 27 Aug 2015 00:55:17 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t7R0tFv7022019
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 26 Aug 2015 17:55:15 -0700 (PDT)
+Received: from co-op.corp.ad.wrs.com (128.224.56.221) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.235.1; Wed, 26 Aug 2015 17:55:14 -0700
+From: Paul Gortmaker <paul.gortmaker@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 26 Aug 2015 20:55:10 -0400
+Message-ID: <1440636910-25925-1-git-send-email-paul.gortmaker@windriver.com>
+X-Mailer: git-send-email 2.4.4
+MIME-Version: 1.0
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: [PATCH] gnome: revector some older versions of pkgs back to bz2 compression
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,40 +32,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2015 23:53:45 -0000
+X-List-Received-Date: Thu, 27 Aug 2015 00:55:18 -0000
+Content-Type: text/plain
 
-qtwebkit needs ruby-native which comes from meta-ruby
-this patch adds initial set of layer dependencies there may be more
-that can be added but its a start
+In commit 429985c1f6e50baec6ba03f35f323a4e8c7f72dd and/or
+OE-Core rev: 0f9ea90dde8f63aace19531e066580e41bf3d7cc
+("classes/gnomebase: change tarball compression to xz")
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+the default changed, and some pkgs were kept back on bz2 where
+the xz did not exist.  However it seems some were missed, and
+I found the fetcher gets 404s on the ones in this commit.
+
+Cc: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Cc: Ross Burton <ross.burton@intel.com>
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
 ---
- conf/layer.conf | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 92558b3..20d26ad 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -5,7 +5,7 @@
- # Therefore if you want a given layer to be considered high priority
- # for the .inc and .conf etc. then consider it adding at the beginning
- # of BBPATH. For bblayers bitbake will use BBFILES_PRIORITY to resolve
--# the recipe contention so the order of directories in BBFILES does 
-+# the recipe contention so the order of directories in BBFILES does
- # not matter.
+[Apologies if you've seen this 2x -- Ross kindly pointed out that I should
+ have sent it to openembedded-devel and not to openembedded-core list.]
+
+ meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb | 1 +
+ meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb           | 1 +
+ meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb        | 1 +
+ 3 files changed, 3 insertions(+)
+
+diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+index 2c526c8edefd..4f95066ec51e 100644
+--- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+@@ -10,6 +10,7 @@ PR = "r4"
+ inherit gnomebase gtk-icon-cache
+ SRC_URI[archive.md5sum] = "f0366c8baebca0404d190b2d78f3582d"
+ SRC_URI[archive.sha256sum] = "03e461b6bda7f773f8018d25fa3213d3073d4dc83a76e6b39d962652f4de6a98"
++GNOME_COMPRESS_TYPE="bz2"
  
- # We have a conf and classes directory, append to BBPATH
-@@ -23,6 +23,8 @@ BBFILE_PATTERN_qt5-layer := "^${LAYERDIR}/"
+ SRC_URI += "\
+     file://disable-scrollkeeper.patch \
+diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+index 860851d98379..1bbfb17d9f05 100644
+--- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+@@ -24,6 +24,7 @@ EXTRA_OECONF = "${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam --with-
  
- BBFILE_PRIORITY_qt5-layer = "7"
+ SRC_URI[archive.md5sum] = "9a8aa74e03361676f29d6e73155786fc"
+ SRC_URI[archive.sha256sum] = "31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"
++GNOME_COMPRESS_TYPE="bz2"
  
-+LAYERDEPENDS_qt5-layer = "core ruby-layer"
-+
- LICENSE_PATH += "${LAYERDIR}/licenses"
+ FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr \
+                 ${base_libdir}/security/*${SOLIBSDEV} \
+diff --git a/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
+index 43379bdca2e5..e24188232774 100644
+--- a/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
+@@ -17,3 +17,4 @@ DEPENDS = "dbus libgcrypt glib-2.0 intltool-native"
  
- IMAGE_FEATURES[validitems] += "qtcreator-debug"
+ SRC_URI[archive.md5sum] = "c42b2ca66204835d901d3dbfc1fa5ae6"
+ SRC_URI[archive.sha256sum] = "56388c0d81ddfdb57d30e4963c83ecc1c18498aab99395420e0fff69929a0f0c"
++GNOME_COMPRESS_TYPE="bz2"
 -- 
-2.5.0
+2.4.4
 
 
