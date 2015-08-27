@@ -1,47 +1,50 @@
 Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 81FC660043
+Received: from mail-lb0-f170.google.com (mail-lb0-f170.google.com
+	[209.85.217.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 4606560043
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 12:46:10 +0000 (UTC)
-Received: by wicne3 with SMTP id ne3so73807529wic.0
+	Thu, 27 Aug 2015 13:19:51 +0000 (UTC)
+Received: by lbbsx3 with SMTP id sx3so11222244lbb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 05:46:10 -0700 (PDT)
+	Thu, 27 Aug 2015 06:19:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:content-type;
-	bh=U4uSF/4Y8uCk6WAtkhU7C55qSluL0Tu2DCQEWPvr0BI=;
-	b=D6S7X4w+CA+3uECn6P0ZiYlbI+QP9iuEYbR0l3x7uZ3J6Bef6KYS9hMLfNAReWFWXT
-	TPpVDlOWZBw4WjE0B1fDcwdGOdAh1C8nQv0Os2chTVTOKHgwe067wU59c5Ps0v2AmdM0
-	O1PdBVHcvXb3PccAFU3kiPZd72Q0MAp2mGQMIHoZ33yydgvwxNDb7kZgZ9JNo4gdeoKe
-	WH+jv6rrv7s4++QMFfoZwdnyciHD2ZfxZt2m4tBF1kuo0PdGqHUtGVhWb+yFhG/kuFwk
-	+nBsOB1r1lG1hRVjHrSOz0CLI8pGT92U+yFdcDUGvxTU6Y44seVPtP9XhJkb/KPTJ1X2
-	EdUA==
-X-Gm-Message-State: ALoCoQm8y4EpJiHEA93Tu5wXDktTF8uRe3oA2CXUtllVjPGXAZRCDQMLQOHwHH22x5UTCD/9avte
-X-Received: by 10.180.80.200 with SMTP id t8mr18579140wix.18.1440679570677;
-	Thu, 27 Aug 2015 05:46:10 -0700 (PDT)
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com.
-	[209.85.212.181])
-	by smtp.gmail.com with ESMTPSA id fn8sm3488205wib.2.2015.08.27.05.46.09
+	:message-id:subject:to:cc:content-type:content-transfer-encoding;
+	bh=ekInXTjbO7zOytXHDo4FE5Zr6h9u77T5trtRvul5Rdg=;
+	b=Wlg9pXGoQu+sh6VawoPLGe7jFetNs2HeZEqM0tCA622vzMBHVjukbkWHGEyVc3As/o
+	iAohbKQMZ92BZa8tK21ZUvFxQLhrU2CYOo+RX0VzANS1Mm4Qh5Qr4f6EighWGeEs0BpI
+	jGU+6+pT+H64Bx969OvnM1tJb5+Z3OhV5NwzIScYne/eKSLXl3SiMIcbHyOlT0/SQN95
+	pjeEBv5y6QfGaqaUOmHaw6YYvYcvWzXbywKnFSKETTG3zU8jaafZ1d7iDPNxWwSyGxsf
+	ewN8pPSYyuzI4onpvgennUY8OxMnSjZfBj5oR6upYDmahSi44qKMCvoVK9HZbHaVIA3r
+	59Gw==
+X-Gm-Message-State: ALoCoQkzGC7mIl4IRN4QaItnUWn5+E9qbwwOQlgiqsSOEWD5BrsZdxF6zIlXNwrmzSPojR2dKATJ
+X-Received: by 10.112.92.101 with SMTP id cl5mr2112945lbb.67.1440681591102;
+	Thu, 27 Aug 2015 06:19:51 -0700 (PDT)
+Received: from mail-lb0-f182.google.com (mail-lb0-f182.google.com.
+	[209.85.217.182])
+	by smtp.gmail.com with ESMTPSA id db9sm583361lad.11.2015.08.27.06.19.49
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 27 Aug 2015 05:46:09 -0700 (PDT)
+	Thu, 27 Aug 2015 06:19:49 -0700 (PDT)
 From: Otavio Salvador <otavio.salvador@ossystems.com.br>
 X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by wicne3 with SMTP id ne3so73807110wic.0
+Received: by lbbpu9 with SMTP id pu9so11183911lbb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 05:46:09 -0700 (PDT)
+	Thu, 27 Aug 2015 06:19:49 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.194.120.198 with SMTP id le6mr4689012wjb.133.1440679569778; 
-	Thu, 27 Aug 2015 05:46:09 -0700 (PDT)
-Received: by 10.28.135.72 with HTTP; Thu, 27 Aug 2015 05:46:09 -0700 (PDT)
-In-Reply-To: <1440633769-19691-1-git-send-email-raj.khem@gmail.com>
-References: <1440633769-19691-1-git-send-email-raj.khem@gmail.com>
-Date: Thu, 27 Aug 2015 09:46:09 -0300
-Message-ID: <CAP9ODKoUaLm8yUiS1idtr+Neyth_oBufdME1XSJGdR2S7XbdzA@mail.gmail.com>
+X-Received: by 10.112.160.165 with SMTP id xl5mr2522320lbb.44.1440681589845;
+	Thu, 27 Aug 2015 06:19:49 -0700 (PDT)
+Received: by 10.112.211.132 with HTTP; Thu, 27 Aug 2015 06:19:49 -0700 (PDT)
+In-Reply-To: <992F06D0-90FC-4648-B271-545B0DA26248@gmail.com>
+References: <1439928871-17797-1-git-send-email-mario@ossystems.com.br>
+	<1439928871-17797-2-git-send-email-mario@ossystems.com.br>
+	<992F06D0-90FC-4648-B271-545B0DA26248@gmail.com>
+Date: Thu, 27 Aug 2015 10:19:49 -0300
+Message-ID: <CAP9ODKqcheB=Q2Sab8UNSJHVzYMqWeie-+VB4noayLr1MVc8-g@mail.gmail.com>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] layer.conf: define LAYERDEPENDS
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: Re: [meta-java][PATCH 2/3] Avoid parse time errors due to dependency on x11, for distros without x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,22 +58,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2015 12:46:11 -0000
+X-List-Received-Date: Thu, 27 Aug 2015 13:19:52 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 26, 2015 at 9:02 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> qtwebkit needs ruby-native which comes from meta-ruby
-> this patch adds initial set of layer dependencies there may be more
-> that can be added but its a start
+On Tue, Aug 25, 2015 at 8:10 PM, Khem Raj <raj.khem@gmail.com> wrote:
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> On Aug 18, 2015, at 1:14 PM, Mario Domenech Goulart <mario@ossystems.com=
+.br> wrote:
+>>
+>> BitBake raises some errors when processing recipes that depend on x11
+>> for distros that don't have x11 in DISTRO_FEATURES. To work around
+>> that issue, REQUIRED_DISTRO_FEATURES =3D "x11" (from
+>> distro_features_check.bbclass) has been set for the following recipes:
+>>
+>> * cacao
+>> * classpath
+>> * jamvm
+>> * openjdk-6-release
+>> * openjdk-7-release
+>>
+>> That makes BitBake skip those recipes during the cache generation
+>> (they'd still be parsed, but ignored).
+>
+> This will also cause native versions of java to now check for x11, thats =
+a wrong assumption. Please fix it asap.
+> meta-java is currently regressing on two recent commits including this on=
+e.
+>
+> so, I would propose to revert this commit if we can=E2=80=99t fix it in s=
+hort period of time.
 
-This is only when someone uses QtWebkit; a lot of people does not use
-it so it is not a real dependency.
+This does not seem to be the culprit and I didn't revert it; I did the
+other one.
 
-We could make it dependent on the collection availability?
-
--- 
+--=20
 Otavio Salvador                             O.S. Systems
 http://www.ossystems.com.br        http://code.ossystems.com.br
 Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
