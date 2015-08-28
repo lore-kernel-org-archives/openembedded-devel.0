@@ -1,40 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 1480060043
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 1ECBF60043
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Aug 2015 08:03:20 +0000 (UTC)
-Received: by wicne3 with SMTP id ne3so12838173wic.0
+	Fri, 28 Aug 2015 08:46:04 +0000 (UTC)
+Received: by padfo6 with SMTP id fo6so17349075pad.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Aug 2015 01:03:20 -0700 (PDT)
+	Fri, 28 Aug 2015 01:46:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=oUvwyYSU1V+wK3eqW6TC4tP1bGxJBTzt4f8arPE+nrQ=;
-	b=AiCuaBIXRUunMDTMpIlE+t4Ka11RrIwqvlIT7iSE8wUykd2Ez6eBg94G+ipRvXqi2s
-	DFTEn+xjA07O3Mm+7/kM3sOCVVd5LwDBMBO/gFkiDshAyzQOS2T8H1TFQEcsnuYZ2zY1
-	kNy5ymO4wf4dTcVqQpVXa9BT8+byMs+jFMFZtZgouz1Q50kVyAeLImCmqfyHnk3L8FyK
-	UHiDZZi5jlQAFDi1/n3SwdeVhO4tPnUOm171JKxAakYzrfVmriQ696VH/ryczDy8kRpA
-	7vYrcpOKl7CjHDywMd0dFJ5WkWIMVyjkB3zSd/Lef1Y429gXapmcersSTt2B3/BviU/2
-	esqQ==
-X-Received: by 10.194.113.101 with SMTP id ix5mr10283891wjb.66.1440749000154; 
-	Fri, 28 Aug 2015 01:03:20 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id r6sm2522179wiy.13.2015.08.28.01.03.19
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 28 Aug 2015 01:03:19 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 28 Aug 2015 10:03:40 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150828080340.GB11673@jama>
-References: <1440712214-30967-1-git-send-email-soren.brinkmann@xilinx.com>
-	<CAMKF1spGXzAVzKMfc=nvV8ARV6tndHY15g7rj=-HR2z3SMUtNg@mail.gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=XBMt7GwaZqqZDwTEbj1gDF8The2AmdKBzQoIM8P6V6k=;
+	b=oofrRx0myVN5gwF+jR6P1SfemeUEVbVS3J7Nq2Zqr4vq0ZeQGRpAoGCU9vtffRA4i1
+	561MNSL19LLfpehZKQ+GySwhny/O9Imy/qmW6wkOvdrcSVF8RC5UM2ncIjTDetqTGq8X
+	yT2xdTm58YpMqedGD1UZy4CfcnmlGnPQUhcVcZmp0FIa1GHLnAo3G4/GI7lMhDbuXAM6
+	m6QQLbnWqEwSibm0i7wvBLL1STtbVxQ9cX1jclZIiQSXkFRnidWFDwq7Ydmn2MURZUWj
+	s2c4N4u9+VUfUbPf6JNS58lbiv9Zg08xXNbz876M4xgjaX19xfOAZkyZRUv4US498nOM
+	tkKw==
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spGXzAVzKMfc=nvV8ARV6tndHY15g7rj=-HR2z3SMUtNg@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH v2] Add analyze-suspend
+X-Received: by 10.66.159.197 with SMTP id xe5mr14190570pab.32.1440751564634;
+	Fri, 28 Aug 2015 01:46:04 -0700 (PDT)
+Received: by 10.66.80.131 with HTTP; Fri, 28 Aug 2015 01:46:04 -0700 (PDT)
+In-Reply-To: <D4C07404-5127-46A0-867F-D21F90BBFDA7@gmail.com>
+References: <1440332209-8802-1-git-send-email-net147@gmail.com>
+	<20150827141522.GP26375@denix.org>
+	<D4C07404-5127-46A0-867F-D21F90BBFDA7@gmail.com>
+Date: Fri, 28 Aug 2015 18:46:04 +1000
+Message-ID: <CANwerB1W1iqe72aV2Y4CvytbrE15JnM8ktWgoBTDWhB7w0CgXA@mail.gmail.com>
+From: Jonathan Liu <net147@gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qtbase: replace host paths with qmake built-in properties in qconfig.pri
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,114 +42,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Aug 2015 08:03:21 -0000
-X-Groupsio-MsgNum: 57105
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Pd0ReVV5GZGQvF3a"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 28 Aug 2015 08:46:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
---Pd0ReVV5GZGQvF3a
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Khem,
 
-On Thu, Aug 27, 2015 at 08:44:05PM -0700, Khem Raj wrote:
-> On Thu, Aug 27, 2015 at 2:50 PM, Soren Brinkmann
-> <soren.brinkmann@xilinx.com> wrote:
-> > Signed-off-by: Soren Brinkmann <soren.brinkmann@xilinx.com>
-> > ---
-> > v2:
-> >  - replace 'boot'->'suspend' in commit message
-> >  - document kernel dependencies in recipe
-> >  - pin git commit
-> > ---
-> >  .../analyze-suspend/analyze-suspend_git.bb         | 28 ++++++++++++++=
-++++++++
-> >  1 file changed, 28 insertions(+)
-> >  create mode 100644 meta-oe/recipes-benchmark/analyze-suspend/analyze-s=
-uspend_git.bb
-> >
-> > diff --git a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_=
-git.bb b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
-> > new file mode 100644
-> > index 000000000000..6932e9fadfc4
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
-> > @@ -0,0 +1,28 @@
-> > +SUMMARY =3D "Analyze Suspend"
->=20
-> If you add  DESCRIPTION with more details it could help folks trying to u=
-se this
->=20
-> and please define PV =3D "3.2+gitr${SRCPV}"
->=20
-> > +HOMEPAGE =3D "https://01.org/suspendresume"
-> > +LICENSE =3D "GPLv2"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D12f884d2ae1ff87c09e5b7ccc2c=
-4ca7e"
-> > +
-> > +# Apart from the listed RDEPENDS, analyze-suspend depends on some feat=
-ures
-> > +# provided by the kernel. These options are:
-> > +#   - CONFIG_PM_DEBUG=3Dy
-> > +#   - CONFIG_PM_SLEEP_DEBUG=3Dy
-> > +#   - CONFIG_FTRACE=3Dy
-> > +#   - CONFIG_FUNCTION_TRACER=3Dy
-> > +#   - CONFIG_FUNCTION_GRAPH_TRACER=3Dy
-> > +
-> > +RDEPENDS_${PN} +=3D "python-core python-datetime python-stringold"
-> > +
-> > +SRCREV =3D "bce3cbec43bc2ce7a8c79b210314dd9d9ac1010b"
-> > +SRC_URI =3D "git://github.com/01org/suspendresume.git;protocol=3Dhttps"
-> > +S =3D "${WORKDIR}/git"
-> > +
-> > +do_install() {
-> > +       install -d -m 0755 ${D}${bindir}
-> > +       install -m 0755 analyze_suspend.py ${D}${bindir}
->=20
-> both these could be squashed into
->=20
-> install -Dm 0755 analyze_suspend.py ${D}${bindir}/analyze_suspend.py
->=20
-> > +
-> > +       install -d -m 0755 ${D}${docdir}/analyze-suspend
-> > +       install -m 0755 README ${D}${docdir}/analyze-suspend
->=20
-> same as above
+On 28 August 2015 at 15:57, Khem Raj <raj.khem@gmail.com> wrote:
+> Denys
+>
+> I have posted an incremental fix, here
+> https://github.com/meta-qt5/meta-qt5/commit/a0a5002ed4bfcce50d6462897c4701246061581a
+>
+> Jonathan
+>
+> Can you see if it still fixes the usecase that you originally were trying to fix ?
 
-and README file shouldn't be executable, use 0644
+Your patch misses some host paths that aren't in
+${STAGING_DIR_HOST}/usr (referred to as ${STAGING_EXECPREFIXDIR} in
+your patch):
+${STAGING_DIR_HOST}/lib
+${STAGING_DIR_HOST}
 
->=20
-> > +}
-> > +
-> > +BBCLASSEXTEND =3D "native"
-> > --
-> > 2.5.0.3.g52d66ab
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+You can change the following in your patch:
+-e 's| ${STAGING_EXECPREFIXDIR}| $$[QT_INSTALL_PREFIX]|g' \
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+To:
+-e 's| ${STAGING_DIR_HOST}| $$[QT_SYSROOT]|g' \
 
---Pd0ReVV5GZGQvF3a
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+So that it covers the host paths missed by sed.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Regards,
+Jonathan
 
-iEYEARECAAYFAlXgFdsACgkQN1Ujt2V2gBxpYACfYCdv0P0W5uUF8FJcDFF8q45G
-9GMAnRwdqqUHMB4w68kYkLrTKYK6b2FG
-=Xaml
------END PGP SIGNATURE-----
+>
+>> On Aug 27, 2015, at 7:15 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+>>
+>> This seems to cause a build issue in qtwebkit and qtwebengine as well.
+>>
+>> It manifests in not being able to find glib.h or gio/gio.h headers.
+>>
+>> Khem, Martin and I are still discussing this on IRC, but I propose to revert
+>> this commit until it's tested better for all modules.
+>>
+>> --
+>> Denys
+>>
+>>
+>> On Sun, Aug 23, 2015 at 10:16:49PM +1000, Jonathan Liu wrote:
+>>> This avoids qconfig.pri in the Qt SDK incorrectly including paths from
+>>> the build host that may not exist on the SDK host. As the paths are
+>>> now correct, qmake can correctly detect system include paths and use
+>>> -isystem instead of -I for Qt's include directories which allows the
+>>> suppression of warnings from library headers when building Qt
+>>> applications.
+>>>
+>>> Signed-off-by: Jonathan Liu <net147@gmail.com>
+>>> ---
+>>> recipes-qt/qt5/qtbase_git.bb | 5 +++++
+>>> 1 file changed, 5 insertions(+)
+>>>
+>>> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+>>> index ae63150..324a115 100644
+>>> --- a/recipes-qt/qt5/qtbase_git.bb
+>>> +++ b/recipes-qt/qt5/qtbase_git.bb
+>>> @@ -234,6 +234,11 @@ do_install_append() {
+>>>     # Remove macx-ios-clang directory because /usr/lib/qt5/mkspecs/macx-ios-clang/rename_main.sh:#!/bin/bash
+>>>     # triggers QA Issue: qtbase-mkspecs requires /bin/bash, but no providers in its RDEPENDS [file-rdeps]
+>>>     rm -rf ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/macx-ios-clang
+>>> +
+>>> +    # Replace host paths with qmake built-in properties
+>>> +    sed -i -e 's| ${STAGING_DIR_NATIVE}| $$[QT_HOST_PREFIX]|g' \
+>>> +        -e 's| ${STAGING_DIR_HOST}| $$[QT_INSTALL_PREFIX]|g' \
+>>> +        ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/qconfig.pri
+>>> }
+>>>
+>>> PACKAGES =. " \
+>>> --
+>>> 2.5.0
+>>>
+>>> --
 
---Pd0ReVV5GZGQvF3a--
