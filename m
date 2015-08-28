@@ -1,32 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f169.google.com (mail-io0-f169.google.com
-	[209.85.223.169])
-	by mail.openembedded.org (Postfix) with ESMTP id AAF5271633
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-yk0-f172.google.com (mail-yk0-f172.google.com
+	[209.85.160.172])
+	by mail.openembedded.org (Postfix) with ESMTP id C474671633
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Aug 2015 03:44:34 +0000 (UTC)
-Received: by iods203 with SMTP id s203so80141631iod.0
+	Fri, 28 Aug 2015 03:45:40 +0000 (UTC)
+Received: by ykfw73 with SMTP id w73so41992421ykf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 20:44:34 -0700 (PDT)
+	Thu, 27 Aug 2015 20:45:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=mTC6cPta//EduIodtmcLSi31ED6LCxMUW/AnIStVX2Q=;
-	b=iMdEUIjxSxU+g3N4nICj7bMCQZG6h+pQhJem287i3azruHdpkQf+zvaZiR/lfZGbWx
-	uHfM9YAwY6dbC3v/9Rzd1btQ8x7pOmYMgXt/q7uPs13SSlcmPsESQghS627iRQS3TJsh
-	ng/Ut9VmTYdCygmGAMDCnfGfzClHaPXtNai4RwOOpt0cXiZXG+Nk6NPswA9R3g2NNNHF
-	xBkC8Olh7TiTPvSypWlKZ/DfVdZ7uqgfcBJICARgM/Kjk99WNHHovYkV4v7ZzvHiRcoe
-	TmSG+TFRQkgaK+HbS65F4N1j8Ui7Bm542+l/LLzakCD6s1DCI4qDCv/YERIHjDi5WRjG
-	bPMA==
-X-Received: by 10.107.14.84 with SMTP id 81mr14385270ioo.195.1440733474602;
-	Thu, 27 Aug 2015 20:44:34 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.3.135 with HTTP; Thu, 27 Aug 2015 20:44:05 -0700 (PDT)
-In-Reply-To: <1440712214-30967-1-git-send-email-soren.brinkmann@xilinx.com>
-References: <1440712214-30967-1-git-send-email-soren.brinkmann@xilinx.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 27 Aug 2015 20:44:05 -0700
-Message-ID: <CAMKF1spGXzAVzKMfc=nvV8ARV6tndHY15g7rj=-HR2z3SMUtNg@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] Add analyze-suspend
+	h=from:to:cc:subject:date:message-id;
+	bh=NJtpOdAN2EF2VNLYEFhW9jXkDACL68IPiKuoERuUwKk=;
+	b=gftU+19pwgQAnmENwTEDMBfc+/O/8SG5YNg18EbHoQyn6dqTUOW8Q/+JnTtixUE/yk
+	nKLXbkiv+mFja3ewoJxDXJPFBnPvNR9TwS5fEtGgAo/n+iyY4gPez2bNeJTnGmap9xqN
+	QSjPK8Lz6IcxUZTqWuCNLA+zYDmgs/JDXrZJ/TYoHzpWCsXdRZx6kwBhrKtbPVgo9lzl
+	vVlDegw5iMnuGsvCc7JukxjTxTr3Au3qrdTo+FYfJZSL/PEhf+3MpXERbj5O3NZYSSUi
+	31ZpwkVdAw98TLpPCQ17tPqbtwfny4HqIdybzUI4PhznzId/621ZXp+MYcoB7ZhKuXHd
+	97Aw==
+X-Received: by 10.129.41.70 with SMTP id p67mr6184804ywp.131.1440733541102;
+	Thu, 27 Aug 2015 20:45:41 -0700 (PDT)
+Received: from localhost.localdomain.localdomain
+	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
+	by smtp.gmail.com with ESMTPSA id
+	a124sm4058595ywe.39.2015.08.27.20.45.38
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 27 Aug 2015 20:45:39 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Aug 2015 20:45:10 -0700
+Message-Id: <1440733510-26131-1-git-send-email-TicoTimo@gmail.com>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-python][PATCH v3] python-pyparted: update to 3.10.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,75 +44,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Aug 2015 03:44:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 28 Aug 2015 03:45:45 -0000
 
-On Thu, Aug 27, 2015 at 2:50 PM, Soren Brinkmann
-<soren.brinkmann@xilinx.com> wrote:
-> Signed-off-by: Soren Brinkmann <soren.brinkmann@xilinx.com>
-> ---
-> v2:
->  - replace 'boot'->'suspend' in commit message
->  - document kernel dependencies in recipe
->  - pin git commit
-> ---
->  .../analyze-suspend/analyze-suspend_git.bb         | 28 ++++++++++++++++++++++
->  1 file changed, 28 insertions(+)
->  create mode 100644 meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
->
-> diff --git a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
-> new file mode 100644
-> index 000000000000..6932e9fadfc4
-> --- /dev/null
-> +++ b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
-> @@ -0,0 +1,28 @@
-> +SUMMARY = "Analyze Suspend"
+* add patch to fix float cast error when version is x.y.z form
+* add minimal parted version (>= 2.3) to RDEPENDS
 
-If you add  DESCRIPTION with more details it could help folks trying to use this
+NOTE:
+  If your tree defaults to an earlier parted version (e.g. 1.8.6),
+  you will need to add PREFERRED_VERSION_parted = "3.%" to local.conf
+  or you will see a do_compile error (complaining about required
+  libparted version).
 
-and please define PV = "3.2+gitr${SRCPV}"
+---
+Changes since v1:
+  * use git tag rather than discouraged github archives
 
-> +HOMEPAGE = "https://01.org/suspendresume"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
-> +
-> +# Apart from the listed RDEPENDS, analyze-suspend depends on some features
-> +# provided by the kernel. These options are:
-> +#   - CONFIG_PM_DEBUG=y
-> +#   - CONFIG_PM_SLEEP_DEBUG=y
-> +#   - CONFIG_FTRACE=y
-> +#   - CONFIG_FUNCTION_TRACER=y
-> +#   - CONFIG_FUNCTION_GRAPH_TRACER=y
-> +
-> +RDEPENDS_${PN} += "python-core python-datetime python-stringold"
-> +
-> +SRCREV = "bce3cbec43bc2ce7a8c79b210314dd9d9ac1010b"
-> +SRC_URI = "git://github.com/01org/suspendresume.git;protocol=https"
-> +S = "${WORKDIR}/git"
-> +
-> +do_install() {
-> +       install -d -m 0755 ${D}${bindir}
-> +       install -m 0755 analyze_suspend.py ${D}${bindir}
+ .../0001-fix-version-float-check.patch             | 26 +++++++++++++++++++++
+ .../python-pyparted/python-pyparted_3.10.5.bb      | 27 ++++++++++++++++++++++
+ .../python-pyparted/python-pyparted_3.9.bb         | 23 ------------------
+ 3 files changed, 53 insertions(+), 23 deletions(-)
+ create mode 100644 meta-python/recipes-extended/python-pyparted/python-pyparted/0001-fix-version-float-check.patch
+ create mode 100644 meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.5.bb
+ delete mode 100644 meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
 
-both these could be squashed into
+diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted/0001-fix-version-float-check.patch b/meta-python/recipes-extended/python-pyparted/python-pyparted/0001-fix-version-float-check.patch
+new file mode 100644
+index 0000000..db3ab9f
+--- /dev/null
++++ b/meta-python/recipes-extended/python-pyparted/python-pyparted/0001-fix-version-float-check.patch
+@@ -0,0 +1,26 @@
++check_mod_version breaks if module version is of x.y.z form
++use a regex to help cast x.y.z version to a float
++
++Upstream-Status: Pending
++
++Index: git/setup.py
++===================================================================
++--- git.orig/setup.py
+++++ git/setup.py
++@@ -25,6 +25,7 @@ import glob
++ import os
++ import platform
++ import sys
+++import re
++ from distutils.ccompiler import new_compiler
++ from distutils.errors import CompileError
++ from distutils.errors import LinkError
++@@ -51,6 +52,8 @@ def pkgconfig(*packages, **kwargs):
++ 
++ def check_mod_version(module, version):
++     modversion = subprocess.check_output(["pkg-config", "--modversion", module])
+++    match = re.search('([0-9]+\.[0-9]+)', modversion)
+++    modversion = match.group(0)
++     if not float(modversion) >= float(version):
++         sys.stderr.write("*** Minimum required %s version: %s, found: %s\n" % (module, version, modversion,))
++         sys.exit(1)
+diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.5.bb b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.5.bb
+new file mode 100644
+index 0000000..d5b8f9a
+--- /dev/null
++++ b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.5.bb
+@@ -0,0 +1,27 @@
++DESCRIPTION = "pyparted is a set of Python modules that provide Python programmers \
++an interface to libparted, the GNU parted library for disk partitioning and \
++filesystem manipulation."
++SUMMARY = "Python bindings for libparted"
++HOMEPAGE = "https://github.com/rhinstaller/pyparted"
++LICENSE = "GPL-2.0+"
++LIC_FILES_CHKSUM = "\
++    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
++    file://src/_pedmodule.c;startline=10;endline=22;md5=ebcb25dde1ac9c46e986dec79b404e7e \
++"
++DEPENDS += "parted python-re"
++
++PV = "3.10.5+git${SRCPV}"
++
++# upstream only publishes releases in github archives which are discouraged
++SRCREV = "75bba5a5c8b65b21979d69421f661f7708304191"
++SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https \
++           file://0001-fix-version-float-check.patch \
++"
++S = "${WORKDIR}/git"
++
++inherit distutils
++
++RDEPENDS_${PN} += "python-stringold python-codecs python-math parted (>= 2.3)"
++RDEPENDS_${PN}_class-native = ""
++
++BBCLASSEXTEND += "native"
+diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
+deleted file mode 100644
+index bfb4f6f..0000000
+--- a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-DESCRIPTION = "pyparted is a set of Python modules that provide Python programmers \
+-an interface to libparted, the GNU parted library for disk partitioning and \
+-filesystem manipulation."
+-SUMMARY = "Python bindings for libparted"
+-HOMEPAGE = "https://fedorahosted.org/pyparted/"
+-LICENSE = "GPL-2.0+"
+-LIC_FILES_CHKSUM = "\
+-    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
+-    file://src/_pedmodule.c;startline=10;endline=22;md5=70c62bd73782a03f56a0571a9f08ea46 \
+-"
+-DEPENDS += "parted"
+-
+-SRC_URI = "https://fedorahosted.org/releases/p/y/pyparted/pyparted-${PV}.tar.gz"
+-SRC_URI[md5sum] = "f16c7ef7f5fa4a43fcb2a4654b487e39"
+-SRC_URI[sha256sum] = "a56712e3d058ce3d859c158236dbbf45224018919efd3d880ea80f9e0d0bebbb"
+-S = "${WORKDIR}/pyparted-${PV}"
+-
+-inherit distutils
+-
+-RDEPENDS_${PN} += "python-stringold python-codecs python-math"
+-RDEPENDS_${PN}_class-native = ""
+-
+-BBCLASSEXTEND += "native"
+-- 
+2.1.0
 
-install -Dm 0755 analyze_suspend.py ${D}${bindir}/analyze_suspend.py
-
-> +
-> +       install -d -m 0755 ${D}${docdir}/analyze-suspend
-> +       install -m 0755 README ${D}${docdir}/analyze-suspend
-
-same as above
-
-> +}
-> +
-> +BBCLASSEXTEND = "native"
-> --
-> 2.5.0.3.g52d66ab
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
