@@ -1,40 +1,41 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
-	[209.85.220.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 05B5B75794
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id E6F5575794
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Aug 2015 06:34:46 +0000 (UTC)
-Received: by padfo6 with SMTP id fo6so13553153pad.0
+	Fri, 28 Aug 2015 06:51:46 +0000 (UTC)
+Received: by padfo6 with SMTP id fo6so14046816pad.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 23:34:47 -0700 (PDT)
+	Thu, 27 Aug 2015 23:51:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
 	:references:to;
-	bh=CLn1Ib37EbDrPJ4GyfLUtxCofLR4KJiOREHHXDcCgxE=;
-	b=U4o+NquwJFaPDC0E4ryS4SSwfTipdBE4mqXl4LqdjCG28I2HLQGSUIQVh/QIRAxjkP
-	HCq+P4Se81cJqKSrbVtUcmh8StTPj7X5ITpkL8ohOgIJpkP6nxPWC9YwxXZvuhBCTwb/
-	BEwXv67WZi0ogNSCNGvlB513uiakhSppy7SWB+ux9Xg7M9ZZ4mfer1A/ddzUxEo+SEjZ
-	DsCyQtq0fTC6YpQiLpWkQB46DXm3q6LwXydXMP3JYo0Lx6KBKPFO3fpMq+IYf/nc50br
-	VrrXUZvGL/HIOzB6ULS+OM9Tc/mWOCPjCuus85G+BuAPAHcoKfFkD0CVmHvMDP9Qmdda
-	xSjQ==
-X-Received: by 10.68.96.197 with SMTP id du5mr13170591pbb.32.1440743687043;
-	Thu, 27 Aug 2015 23:34:47 -0700 (PDT)
+	bh=1NyjN5YOaTOIVfgSUnbX9qLuzO0KFYGQfv2ZJjZ9B9M=;
+	b=xDq6j1/s0KlNn9tgZrtKDviVhZGfUdvyOkJN8aXNhPjZ+0jtZLtH9NDf9U4mvGlF25
+	73WanPCfEdP7A+nmBIGyrof45F/CRTsIBc8002sxzET49uGqYtKXCduIFaMIdlJLKux9
+	GhHrndNWZKWZzw3lcPzUPCFxaQhq2WkliZGayBqwpxV1DuKRpEA+f7IuaORDCxIPSQVH
+	p7DSFqqQZ06+u1Jv5YlUi9ny1Tp7Po6ggmeHydUYhXlkPz7YWOkv+Cet3BKDoy8jyVJT
+	JKyCKWpvp09loFB9HbP5Z2NY44Dq7Q64mTr61kXo7i2Rh02bmpVJHDTw+tNlW/eM7Ewl
+	QdSA==
+X-Received: by 10.68.68.198 with SMTP id y6mr13226173pbt.30.1440744706460;
+	Thu, 27 Aug 2015 23:51:46 -0700 (PDT)
 Received: from ?IPv6:2601:646:8601:4580:e943:4351:71e0:b332?
 	([2601:646:8601:4580:e943:4351:71e0:b332])
-	by smtp.gmail.com with ESMTPSA id v2sm4503842pda.34.2015.08.27.23.34.46
+	by smtp.gmail.com with ESMTPSA id
+	uk6sm4586310pac.27.2015.08.27.23.51.45
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 27 Aug 2015 23:34:46 -0700 (PDT)
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 27 Aug 2015 23:51:45 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
 X-Pgp-Agent: GPGMail 2.5.1
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1440667573-1822-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-Date: Thu, 27 Aug 2015 23:34:45 -0700
-Message-Id: <EEE9503B-655A-414F-9BCB-F2A97DAA7B06@gmail.com>
-References: <1440667573-1822-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+In-Reply-To: <1440584445-1731-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+Date: Thu, 27 Aug 2015 23:51:44 -0700
+Message-Id: <B7D0F32E-EE42-4C5C-8AEF-85D1FA5165EB@gmail.com>
+References: <1440584445-1731-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 X-Mailer: Apple Mail (2.2104)
-Subject: Re: [meta-oe][PATCH] networkmanager: disable service by default and WARNING Fix
+Subject: Re: [meta-networking][PATCH] postfix: Add Linux 4.0 Support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,68 +49,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Aug 2015 06:34:47 -0000
-X-Groupsio-MsgNum: 57098
+X-List-Received-Date: Fri, 28 Aug 2015 06:51:49 -0000
+X-Groupsio-MsgNum: 57099
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_45EE538B-0962-4E81-A6F4-1696D1F62102";
+	boundary="Apple-Mail=_A9CE605A-CC08-448C-AF4C-2593876E18B5";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_45EE538B-0962-4E81-A6F4-1696D1F62102
+--Apple-Mail=_A9CE605A-CC08-448C-AF4C-2593876E18B5
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
-	charset=utf-8
+	charset=us-ascii
 
 
-> On Aug 27, 2015, at 2:26 AM, Li xin <lixin.fnst@cn.fujitsu.com> wrote:
+> On Aug 26, 2015, at 3:20 AM, Li xin <lixin.fnst@cn.fujitsu.com> wrote:
 >=20
-> * Disable NetworkManager.service by default,otherwise,the
->  Root file system using the method of NFS mount can't boot =
-successfully.
->  Also it is disabled on Fedora.
->=20
-> * WARNING Fix:
->  WARNING: QA Issue: networkmanager: Files/directories were installed =
-but not shipped in any package:
->  /run
->  /run/NetworkManager
->  Please set FILES such that these items are packaged. Alternatively if =
-they are unneeded,
->  avoid installing them or delete them within do_install. =
-[installed-vs-shipped]
+> Modify makedefs.patch to make it compilable on 4.0 kernel.
+
+
+can you instead update the recipe to 3.0.2 ?
 >=20
 > Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 > ---
-> meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.4.bb | =
-2 ++
-> 1 file changed, 2 insertions(+)
+> .../recipes-daemons/postfix/files/makedefs.patch          | 15 =
+++++++++++-----
+> 1 file changed, 10 insertions(+), 5 deletions(-)
 >=20
 > diff --git =
-a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.4.bb =
-b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.4.bb
-> index 62debe9..4e2ca28 100644
-> --- =
-a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.4.bb
-> +++ =
-b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.4.bb
-> @@ -58,6 +58,7 @@ FILES_${PN} +=3D " \
->     ${datadir}/dbus-1 \
->     ${base_libdir}/udev/* \
->     ${systemd_unitdir}/system \
-> +    /run \
-
-/run is generated at runtime so this won=E2=80=99t be right thing to do. =
-You should remove this packaging instead you should
-ensure that this file which is put into /run is generated as part of =
-runtime tmp files service.
-
-> "
+a/meta-networking/recipes-daemons/postfix/files/makedefs.patch =
+b/meta-networking/recipes-daemons/postfix/files/makedefs.patch
+> index 98d5f7e..c537441 100644
+> --- a/meta-networking/recipes-daemons/postfix/files/makedefs.patch
+> +++ b/meta-networking/recipes-daemons/postfix/files/makedefs.patch
+> @@ -1,4 +1,4 @@
+> -=46rom 4f49e2ce420fb3c17415937530493158ef312733 Mon Sep 17 00:00:00 =
+2001
+> +=46rom 44cb626e218bf68647994e94b598d5f45d473411 Mon Sep 17 00:00:00 =
+2001
+> From: Li xin <lixin.fnst@cn.fujitsu.com>
+> Date: Fri, 19 Jun 2015 16:45:54 +0900
+> Subject: [PATCH] 1)remove RANLIB, SYSLIBS, AR and get them from env.
+> @@ -14,11 +14,11 @@ Upstreamstatus: Inappropriate [embedded specific]
 >=20
-> RRECOMMENDS_${PN} +=3D "iptables dnsmasq"
-> @@ -84,3 +85,4 @@ FILES_${PN}-tests =3D " \
-> FILES_${PN}-bash-completion =3D "${datadir}/bash-completion"
+> Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
+> ---
+> - makedefs | 27 +++++++++++----------------
+> - 1 file changed, 11 insertions(+), 16 deletions(-)
+> + makedefs | 29 ++++++++++++-----------------
+> + 1 file changed, 12 insertions(+), 17 deletions(-)
 >=20
-> SYSTEMD_SERVICE_${PN} =3D "NetworkManager.service"
-> +SYSTEMD_AUTO_ENABLE =3D "disable"
+> diff --git a/makedefs b/makedefs
+> -index 8b84e47..893fb0d 100644
+> +index 8b84e47..5c12206 100644
+> --- a/makedefs
+> +++ b/makedefs
+> @@ -170,9 +170,6 @@ echo "# pie=3D$pie"
+> @@ -80,7 +80,12 @@ index 8b84e47..893fb0d 100644
+>  			   rm -f makedefs.test makedefs.test.[co]
+>  		       fi;;
+>  		esac
+> -@@ -504,12 +499,12 @@ EOF
+> +@@ -500,16 +495,16 @@ EOF
+> + 		: ${SHLIB_ENV=3D"LD_LIBRARY_PATH=3D`pwd`/lib"}
+> + 		: ${PLUGIN_LD=3D"${CC-gcc} -shared"}
+> + 		;;
+> +-    Linux.3*)	SYSTYPE=3DLINUX3
+> ++    Linux.3*|Linux.4*) SYSTYPE=3DLINUX3
+
+this should be LINUX4 for Linux-4.x
+
+>  		case "$CCARGS" in
+>  		 *-DNO_DB*) ;;
+>  		 *-DHAS_DB*) ;;
 > --
 > 1.8.4.2
 >=20
@@ -120,7 +130,7 @@ runtime tmp files service.
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
---Apple-Mail=_45EE538B-0962-4E81-A6F4-1696D1F62102
+--Apple-Mail=_A9CE605A-CC08-448C-AF4C-2593876E18B5
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -131,9 +141,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlXgAQUACgkQuwUzVZGdMxS4kACeObo9iN4w7PJo789dRMk1ANmG
-yeAAniOsDISVoAHIyOHBgRon7NESP6LO
-=1iiE
+iEYEARECAAYFAlXgBQAACgkQuwUzVZGdMxTBWACeNL3Hw/C6yyGrUhsSnzRGtz0v
+IV8AnRRJ7L3DuVSNs3A0Rfe7fMK4cWuf
+=nbtc
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_45EE538B-0962-4E81-A6F4-1696D1F62102--
+--Apple-Mail=_A9CE605A-CC08-448C-AF4C-2593876E18B5--
