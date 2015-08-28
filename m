@@ -1,46 +1,41 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
-	[209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 8676460043
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 5ADE375794
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Aug 2015 06:11:04 +0000 (UTC)
-Received: by pacgr6 with SMTP id gr6so14785642pac.3
+	Fri, 28 Aug 2015 06:30:44 +0000 (UTC)
+Received: by padfo6 with SMTP id fo6so13433552pad.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2015 23:11:05 -0700 (PDT)
+	Thu, 27 Aug 2015 23:30:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=z9mX6AWDiCQZ/UEu85PFtPtSVB+R7gc/phrAsZ/gZpE=;
-	b=rohiPPIHq1JVvR1+fWHaU3NpcOwo9mUrVKj6yHIY7XKUpGEROmLIWGmHAN6dex8diz
-	P2AP3/HH/PzLXZXO7rmDepTYQRtxFNbxNf+G9EZPRAeU4ihawgRnIO3IHTSgvLo9wpDp
-	Ko/7eVhzlqqSaKVulwDP6urpdEPsQpSEUlQ5ADDcxt9v3lXbHTWCqmvst05Y9hL1Rpxy
-	tPy81VswSpj3lDcC5JwEU9zGlTsSn+MVjZmXd1etTCMIhd9n0s4SrZX0uar77a5b1yCz
-	b9Bc7/i5QmkEADhFPFpej+8Y5MVa5Ic5tLxN+fsYfBkywzjcbs3isihCAW7r7XIaHUcA
-	MJ2A==
-X-Received: by 10.66.190.99 with SMTP id gp3mr12288758pac.113.1440742265067;
-	Thu, 27 Aug 2015 23:11:05 -0700 (PDT)
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=mjwgLGCENfodMsc/h6nG9oZK53fsC0QI6HzPT/SqCWE=;
+	b=v76/zPxzBWw7PzXy539ec2IMzgWOKX9uJrrAUSIqS5U++ttBPs52y9UUDkTflR+ADM
+	X76mWjBaSCpZL/eqB1TlLD9QJpz2EandB1jCbgIIoI1IHdYuKAE0aLBezqdhxbaOkzwv
+	H2T+v9zXnWD+LRLg2KA/URoh7wB9JephedRrpdE1IJANf8nfz/8JgeQ3MbVXMaHzIiPY
+	hPxCeRPG81Emjia5JwyYchiS9dgasol79c4paWTXUIVy69ko4ykm2HwVRuwjfVVXsjF3
+	e4bqVLmtG3cYX249KWWUyeArzNBKQAcktLY7VsYS2UJdiKkuqWWQm5iKqvELx482Qcgn
+	vhMA==
+X-Received: by 10.68.250.228 with SMTP id zf4mr12653622pbc.90.1440743444842;
+	Thu, 27 Aug 2015 23:30:44 -0700 (PDT)
 Received: from ?IPv6:2601:646:8601:4580:e943:4351:71e0:b332?
 	([2601:646:8601:4580:e943:4351:71e0:b332])
-	by smtp.gmail.com with ESMTPSA id y5sm1689570pdc.4.2015.08.27.23.11.03
+	by smtp.gmail.com with ESMTPSA id
+	cr4sm4508648pac.10.2015.08.27.23.30.43
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 27 Aug 2015 23:11:04 -0700 (PDT)
+	Thu, 27 Aug 2015 23:30:43 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
 X-Pgp-Agent: GPGMail 2.5.1
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CALbNGRTyXco+x4NrbQkNSV6F+aA42r_8ZycgfBKPYuQcxyn6Kw@mail.gmail.com>
-Date: Thu, 27 Aug 2015 23:11:02 -0700
-Message-Id: <913B6413-8869-4669-B9E0-EB8B80A45B09@gmail.com>
-References: <1440583622-11664-1-git-send-email-alexander.kanavin@linux.intel.com>
-	<55DD9BFE.6050807@linux.intel.com>
-	<CALbNGRR_j3f-KzA4iPQsdGsYe_VcqZYhhGBZ-8+FiHHRuwiDbA@mail.gmail.com>
-	<1721551.0sTJOXpHQ2@peggleto-mobl.ger.corp.intel.com>
-	<CALbNGRTyXco+x4NrbQkNSV6F+aA42r_8ZycgfBKPYuQcxyn6Kw@mail.gmail.com>
+In-Reply-To: <1440667822-23807-1-git-send-email-kai.kang@windriver.com>
+Date: Thu, 27 Aug 2015 23:30:38 -0700
+Message-Id: <7ABBBA32-C72C-49A1-8B3E-2E8C17A5DB07@gmail.com>
+References: <1440667822-23807-1-git-send-email-kai.kang@windriver.com>
 To: openembedded-devel@lists.openembedded.org
 X-Mailer: Apple Mail (2.2104)
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	Alexander Kanavin <alexander.kanavin@intel.com>,
-	Tanu Kaskinen <tanuk@iki.fi>
-Subject: Re: [PATCH 1/3] libnotify3: remove the recipe
+Subject: Re: [meta-oe][PATCH] efibootmgr: fix build error with gcc 5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,67 +49,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Aug 2015 06:11:05 -0000
-X-Groupsio-MsgNum: 57096
+X-List-Received-Date: Fri, 28 Aug 2015 06:30:47 -0000
+X-Groupsio-MsgNum: 57097
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_DF96042B-9FE2-4C89-85F0-BB10E48AA8FB";
+	boundary="Apple-Mail=_27E86101-047E-4A73-A8CA-27AEB53F5664";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_DF96042B-9FE2-4C89-85F0-BB10E48AA8FB
+--Apple-Mail=_27E86101-047E-4A73-A8CA-27AEB53F5664
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
-	charset=utf-8
+	charset=us-ascii
 
 
-> On Aug 27, 2015, at 3:49 AM, Andreas M=C3=BCller =
-<schnitzeltony@googlemail.com> wrote:
+> On Aug 27, 2015, at 2:30 AM, kai.kang@windriver.com wrote:
 >=20
-> On Thu, Aug 27, 2015 at 10:23 AM, Paul Eggleton
-> <paul.eggleton@linux.intel.com> wrote:
->> On Wednesday 26 August 2015 20:01:28 Andreas M=C3=BCller wrote:
->>> On Wed, Aug 26, 2015 at 12:59 PM, Alexander Kanavin
->>>=20
->>> <alexander.kanavin@linux.intel.com> wrote:
->>>> On 08/26/2015 01:40 PM, Tanu Kaskinen wrote:
->>>>>>  # needs libnotify3 which conflicts with libnotify, mixing them =
-in
->>>>>>  build
->>>>>>=20
->>>>>> breaks couple of packages
->>>>>=20
->>>>> This last comment seems to be out of date after this patch.
->>>>=20
->>>> Actually, this whole thing can be removed:
->>>>=20
->>>> # needs libnotify3 which conflicts with libnotify, mixing them in =
-build
->>>> breaks couple of packages
->>>> EXCLUDE_FROM_WORLD =3D "1"
->>>>=20
->>>> Whoever applies this patch, please amend it accordingly.
->>>>=20
->>>>=20
->>>> Alex
->>>=20
->>> I think it's not that easy. We need an libnotify append here with =
-some
->>> RREPLACES / RPOVIDES for libnotify3. Right?
->>=20
->> I was wondering about that myself. Really those RREPLACES + RPROVIDES =
-+
->> RCONFLICTS need to go into the recipe in OE-Core though.
->>=20
->> Cheers,
->> Paul
->>=20
-> Sorry to insist: I think it should be appended here: Users without
-> meta-gnome in their layers have never seen libnotify3.
-
-while thats right. Lets put it into recipe in OE-Core, just avoid a =
-bbappend here.
-
+> From: Kai Kang <kai.kang@windriver.com>
 >=20
-> Andreas
+> It fails to build efibootmgr with gcc 5.2:
+>=20
+> src/lib/disk.o: In function `disk_get_scsi_pci':
+> src/lib/disk.c:154: undefined reference to `get_scsi_pci'
+> src/lib/efi.o: In function `make_edd30_device_path':
+> src/lib/efi.c:474: undefined reference to `get_scsi_idlun'
+> collect2: error: ld returned 1 exit status
+>=20
+> Because functions get_scsi_pci and get_scsi_idlun are declared as
+> inline. It has different semantics for inilne function between gcc 4
+> and gcc 5.
+>=20
+> Pass flag '-fgnu89-inline' to gcc to fix the errors.
+>=20
+> Ref:
+> https://gcc.gnu.org/gcc-5/porting_to.html
+>=20
+> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> ---
+> meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb | 2 +-
+
+can you update it to 0.12+ see https://github.com/rhinstaller/efibootmgr =
+not sure if it will work for arm, you should let original
+authors from Linaro know.
+
+secondly if you take a closer look then it might be possible to move the =
+function definitions into .h file and make them  static inline
+
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb =
+b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
+> index 1870455..501ff2a 100644
+> --- a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
+> +++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
+> @@ -19,7 +19,7 @@ SRC_URI =3D =
+"http://linux.dell.com/efibootmgr/permalink/efibootmgr-${PV}.tar.gz \
+> SRC_URI[md5sum] =3D "9e9a31d79e579644de83a14139b66d10"
+> SRC_URI[sha256sum] =3D =
+"5167488b92950e60028d1025942ce6bda04638c6fb5e110abb8c8f687844d155"
+>=20
+> -EXTRA_OEMAKE =3D "'CC=3D${CC}' 'CFLAGS=3D${CFLAGS} -I${S}/src/lib =
+-I${S}/src/include'"
+> +EXTRA_OEMAKE =3D "'CC=3D${CC}' 'CFLAGS=3D${CFLAGS} -I${S}/src/lib =
+-I${S}/src/include -fgnu89-inline'"
+>=20
+> do_install () {
+>     install -D -p -m0755 src/efibootmgr/efibootmgr =
+${D}/${sbindir}/efibootmgr
+> --
+> 1.9.1
+>=20
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -122,7 +124,7 @@ bbappend here.
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
---Apple-Mail=_DF96042B-9FE2-4C89-85F0-BB10E48AA8FB
+--Apple-Mail=_27E86101-047E-4A73-A8CA-27AEB53F5664
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -133,9 +135,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlXf+3YACgkQuwUzVZGdMxQtOwCgjw/C2b8XMcWZNLiiy5U9lK5q
-vJ0AnR1BMMm5lU4PyBkq3nRkDPzbSAGo
-=ZIJT
+iEYEARECAAYFAlXgABIACgkQuwUzVZGdMxSF1QCcC7sCOLgpMEamKwrn+V0ksSbs
+ljQAnRBHpT4zFq/yRXhlguxACr0aDDZu
+=grPN
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_DF96042B-9FE2-4C89-85F0-BB10E48AA8FB--
+--Apple-Mail=_27E86101-047E-4A73-A8CA-27AEB53F5664--
