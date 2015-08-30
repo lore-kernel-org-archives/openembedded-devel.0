@@ -1,40 +1,41 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D1F876E5F
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
+	[209.85.220.52])
+	by mail.openembedded.org (Postfix) with ESMTP id C86447422C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Aug 2015 10:34:17 +0000 (UTC)
-Received: by wicfv10 with SMTP id fv10so39300732wic.1
+	Sun, 30 Aug 2015 12:30:19 +0000 (UTC)
+Received: by pacdd16 with SMTP id dd16so109406722pac.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Aug 2015 03:34:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=+SO+yxx44cgFSdIKATxVoeUy40BMn0U4G86/sZHOPNc=;
-	b=0GcWtah1oFS68EojfgoqHztB71FMqmYFhBpp7Wort4icX5h28mHX3tsIAQZxRxN7vc
-	voQGJGUfijqQQfhWiK/tPG8BA95khV1EVuUXS36ZiZH8DV3SWvd8MvQWDKWfoE8xLEha
-	u+wCcgRwm5b/Eo8s3i2fAOlhIfdg2PB3bJiFVEEx1+0N6yZUcn1nibVK5FF/np8C23wD
-	Zy4pMpUdW5tYgjufIiW9Kg5w4w9s50XmnfB47m83Rg+05oa/P59yRWPoYyELCehyE3kH
-	xKlK8pqu1s76gqLTQ8EsQXdl0u9lKE3oxDGJQqZXHDOujL/xZ2lBHuccAGDGIkn7dDMQ
-	DMVw==
-X-Received: by 10.194.203.3 with SMTP id km3mr20047274wjc.114.1440930857372;
-	Sun, 30 Aug 2015 03:34:17 -0700 (PDT)
-Received: from localhost.localdomain (p54AA5C5E.dip0.t-ipconnect.de.
-	[84.170.92.94]) by smtp.googlemail.com with ESMTPSA id
-	h9sm16778522wjx.20.2015.08.30.03.34.16
+	Sun, 30 Aug 2015 05:30:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=zCGjXRS2oCWTFg389myDMl9yFqvrsjB9pcN3J3ZMgE0=;
+	b=Axsb/wv3Exm86YymiwImpuCIYEUkEUnthW3VEX2sizOuIPcY97IfqvSvMTLON+mKSR
+	Dz2+2uV/WpbirzqpQ216j15Pw5MRWW4cMk28IXgB485lcOlUAVgxypNW6v+dpUsfKq+d
+	u08TxxyzCqK9fhhG25z1jJw3X7ZEjQfC7SPQNDUuZMwZ1U4A1bi/Y7vnwi9RgEBI/OfG
+	Wr9hy70njC6hJG+frTlVsryrCc8/7VCWx/vGYELF0PNgt3K+RaocwAo7Yuq8ksB4WCWq
+	d5bopcj9XT5mApCkBT91z0aMx57d+5EQjTjoq2NGauBt3WVL/4Mm3ONbPEb9Ixaf5uhT
+	Q1yA==
+X-Received: by 10.68.197.231 with SMTP id ix7mr29779042pbc.85.1440937819383;
+	Sun, 30 Aug 2015 05:30:19 -0700 (PDT)
+Received: from [192.168.0.2] (60-242-179-244.static.tpgi.com.au.
+	[60.242.179.244]) by smtp.gmail.com with ESMTPSA id
+	ld8sm11181218pbc.61.2015.08.30.05.30.17
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 30 Aug 2015 03:34:16 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 30 Aug 2015 05:30:18 -0700 (PDT)
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 30 Aug 2015 12:34:00 +0200
-Message-Id: <1440930840-3459-7-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1440930840-3459-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1440930840-3459-1-git-send-email-schnitzeltony@googlemail.com>
+References: <cover.1440502860.git.samuli.piippo@theqtcompany.com>
+	<63bae5e8f510c228002db87998ad031708fc69dd.1440502860.git.samuli.piippo@theqtcompany.com>
+From: Jonathan Liu <net147@gmail.com>
+Message-ID: <55E2F755.5030003@gmail.com>
+Date: Sun, 30 Aug 2015 22:30:13 +1000
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-Subject: [PATCHv2 6/6] gnome-bluetooth: fix build with libnotofy >= 0.7.0
+In-Reply-To: <63bae5e8f510c228002db87998ad031708fc69dd.1440502860.git.samuli.piippo@theqtcompany.com>
+Subject: Re: [meta-qt5][PATCH v2 04/11] qt5: add host paths to qt.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,83 +49,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Aug 2015 10:34:19 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 30 Aug 2015 12:30:20 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../0003-Fix-build-with-libnotify-0.7.0.patch      | 47 ++++++++++++++++++++++
- .../gnome-bluetooth/gnome-bluetooth_2.32.0.bb      |  1 +
- 2 files changed, 48 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0003-Fix-build-with-libnotify-0.7.0.patch
+On 25/08/2015 9:43 PM, Samuli Piippo wrote:
+> Add missing HostData and HostLibraries paths to qt.conf for qmake.
+> Using the target sysroot for the HostData, allows us to remove the
+> symbolic link for the mkspecs.
+>
+> Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
+> ---
+>   classes/populate_sdk_qt5.bbclass | 6 ++----
+>   1 file changed, 2 insertions(+), 4 deletions(-)
+>
+> diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.bbclass
+> index d29ec36..3f33b23 100644
+> --- a/classes/populate_sdk_qt5.bbclass
+> +++ b/classes/populate_sdk_qt5.bbclass
+> @@ -4,10 +4,6 @@
+>   inherit qmake5_paths
+>   
+>   create_sdk_files_prepend () {
+> -    # make a symbolic link to mkspecs for compatibility with QTCreator
+> -    (cd ${SDK_OUTPUT}/${SDKPATHNATIVE}; \
+> -         ln -sf ${SDKTARGETSYSROOT}${libdir}/${QT_DIR_NAME}/mkspecs mkspecs;)
+> -
+>       # Generate a qt.conf file to be deployed with the SDK
+>       qtconf=${SDK_OUTPUT}/${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf
+>       touch $qtconf
+> @@ -28,5 +24,7 @@ create_sdk_files_prepend () {
+>       echo 'Examples = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_EXAMPLES}' >> $qtconf
+>       echo 'Tests = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_TESTS}' >> $qtconf
+>       echo 'HostPrefix = ${SDKPATHNATIVE}' >> $qtconf
+> +    echo 'HostData = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_ARCHDATA}' >> $qtconf
+>       echo 'HostBinaries = ${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}' >> $qtconf
+> +    echo 'HostLibraries = ${SDKPATHNATIVE}${OE_QMAKE_PATH_LIBS}' >> $qtconf
+>   }
+This works but is it logically correct to use a directory that contains 
+binaries compiled for the target as the host data directory...?
+The mkspecs are architecture independent but the plugins are target 
+specific.
 
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0003-Fix-build-with-libnotify-0.7.0.patch b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0003-Fix-build-with-libnotify-0.7.0.patch
-new file mode 100644
-index 0000000..118ef93
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0003-Fix-build-with-libnotify-0.7.0.patch
-@@ -0,0 +1,47 @@
-+From 08a5b66d709781c0c596108278979a11b26331d5 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Sun, 30 Aug 2015 12:14:53 +0200
-+Subject: [PATCH] Fix build with libnotify >= 0.7.0
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Upstream-Status: Backport [1]
-+
-+[1] https://github.com/GNOME/gnome-bluetooth/commit/9f256799cc6b8367b2466f35b82f1d07076a950e
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ applet/notify.c | 2 +-
-+ configure.ac    | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/applet/notify.c b/applet/notify.c
-+index d2a4f51..cb01dfc 100644
-+--- a/applet/notify.c
-++++ b/applet/notify.c
-+@@ -71,7 +71,7 @@ void show_notification(const gchar *summary, const gchar *message,
-+ 		notify_notification_close(notify, NULL);
-+ 	}
-+ 
-+-	notify = notify_notification_new(summary, message, icon_name, NULL);
-++	notify = notify_notification_new(summary, message, icon_name);
-+ 
-+ 	notify_notification_set_timeout(notify, timeout);
-+ 
-+diff --git a/configure.ac b/configure.ac
-+index 8bbce4e..98ec86e 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -71,7 +71,7 @@ AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
-+ GTK_REQUIRED=2.19.1
-+ GLIB_REQUIRED=2.25.7
-+ DBUS_GLIB_REQUIRED=0.74
-+-NOTIFY_REQUIRED=0.4.3
-++NOTIFY_REQUIRED=0.7.0
-+ NAUTILUS_SENDTO_REQUIRED=2.31.7
-+ 
-+ dnl Requires for the properties window
-+-- 
-+2.1.0
-+
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-index 9edceb5..5d2a364 100644
---- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-@@ -15,6 +15,7 @@ inherit gnomebase gtk-icon-cache
- SRC_URI += " \
-     file://0001-bluetooth-input-Fix-compile-errors.patch \
-     file://0002-bluetooth-client-use-valid-interface-names.patch \
-+    file://0003-Fix-build-with-libnotify-0.7.0.patch \
- "
- SRC_URI[archive.md5sum] = "f129686fe46c4c98eb70a0cc85d59cae"
- SRC_URI[archive.sha256sum] = "57b1f06c96a1b85e1c19ff919d708cc38e95edae658881ed99968c325839a973"
--- 
-2.1.0
-
+Regards,
+Jonathan
 
