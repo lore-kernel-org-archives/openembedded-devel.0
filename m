@@ -1,38 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
 Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
 	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 076B176DE9
+	by mail.openembedded.org (Postfix) with ESMTP id 062EF761C6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Aug 2015 10:34:13 +0000 (UTC)
-Received: by wicne3 with SMTP id ne3so50741600wic.0
+	Sun, 30 Aug 2015 10:34:14 +0000 (UTC)
+Received: by wicpl12 with SMTP id pl12so5601607wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Aug 2015 03:34:13 -0700 (PDT)
+	Sun, 30 Aug 2015 03:34:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=zUaDICz6y9ZsWyDlg7ai4DJdtV58n/RQRIcXzX2v+QQ=;
-	b=NL1rEir2Qb9seuQY/81IxfxUiBa1QHZlo4KqrigtVq5s0xmA9quRAZAhPwNOIfH+8U
-	+W+j8x8R3cDM3hSrI7U+kpLGZzNtiUE1ezvkKD4PsmkRssOL6eLFwuN+OuAodorxjFee
-	U2FfGriMFKcK7eDkl2Rw9VrUij8URSoOW+0/Oywghz+Rf68T8LxEobnpQrSA/yrZTMwY
-	gJTFxNe1NHFpZIRTo1ncf1Ca6RQVGE0dLewak+vPTv/2Okk26lzZs83TI6lvSUDYQ/98
-	hQou2YEB95sKsN1B7tgp/vLcXI4VnsLtwTPkH1xWQUhQE96iA39kOMHhIaV/YRB6s1EB
-	4q3Q==
-X-Received: by 10.194.117.199 with SMTP id kg7mr19985421wjb.49.1440930853515; 
-	Sun, 30 Aug 2015 03:34:13 -0700 (PDT)
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=Xyh+OAH7gEml2mXjteNG2PNk1V625yYii+Ahm2Ergnc=;
+	b=Bg9UMq+mSn5rCrlSdAT24DXwDjfWaixqKhuIByXhVGsO6QsLFwav4O/0ItUZefvrkp
+	hqHVW9cT9BD3XlsoRiG2srdCMvw44nhNBgUW6agzcoY38cgdRpkPs/45kaDkNFrNB5W4
+	w9iylrl9gew7t1F80+SMoEzoLIH3ymgWakUsHuj2uyhRK6jiIr9myDxjN766r9LCFbzv
+	GpnkF4F4atS8gC7FjE6K4t99JkdS0yv4GGD9EDdVUz/R9fEukYdujwpakbrw5axcXMYu
+	QK7eTEjYtSPBdu+EgJTX0Lbp+wXVKjqF2WpFC4T16SjF6mLHlYPJJjEkkMiTchNV9z63
+	t92g==
+X-Received: by 10.180.82.162 with SMTP id j2mr14750706wiy.10.1440930854442;
+	Sun, 30 Aug 2015 03:34:14 -0700 (PDT)
 Received: from localhost.localdomain (p54AA5C5E.dip0.t-ipconnect.de.
 	[84.170.92.94]) by smtp.googlemail.com with ESMTPSA id
-	h9sm16778522wjx.20.2015.08.30.03.34.12
+	h9sm16778522wjx.20.2015.08.30.03.34.13
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 30 Aug 2015 03:34:12 -0700 (PDT)
+	Sun, 30 Aug 2015 03:34:13 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 30 Aug 2015 12:33:56 +0200
-Message-Id: <1440930840-3459-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 30 Aug 2015 12:33:57 +0200
+Message-Id: <1440930840-3459-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.1.0
 In-Reply-To: <1440930840-3459-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1440930840-3459-1-git-send-email-schnitzeltony@googlemail.com>
-Subject: [PATCHv2 2/6] xfce4-icon-theme: remove
+MIME-Version: 1.0
+Subject: [PATCHv2 3/6] rodent-icon-theme: add RPROVIDES/RREPLACE/RCONFLICTS for xfce4-icon-theme
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,37 +49,29 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 30 Aug 2015 10:34:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Martin Jansa <martin.jansa@gmail.com>
+rodent-icon-theme is successor of xfce4-icon-theme
 
-* replaced by rodent-icon-theme
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb | 14 --------------
- 1 file changed, 14 deletions(-)
- delete mode 100644 meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
+ meta-xfce/recipes-art/rodent-icon-theme/rodent-icon-theme_5.0.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb b/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
-deleted file mode 100644
-index 1e4b06b..0000000
---- a/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--SUMMARY = "xfce4 icon theme rodent"
--SECTION = "x11/wm"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--
--DEPENDS = "intltool-native xfce4-dev-tools-native"
--
--inherit xfce
--
--SRC_URI = "http://archive.xfce.org/src/art/${BPN}/${@'${PV}'[0:3]}/${BP}.tar.bz2"
--SRC_URI[md5sum] = "73ce2977b84f634a6a6c5d9c27e336db"
--SRC_URI[sha256sum] = "d4786692d56b8a563f66a5f260f1f13ade11e86c78cbcb25a9f9a5fc47cf66fa"
--
--FILES_${PN} += "${datadir}/xfce4/mime"
+diff --git a/meta-xfce/recipes-art/rodent-icon-theme/rodent-icon-theme_5.0.bb b/meta-xfce/recipes-art/rodent-icon-theme/rodent-icon-theme_5.0.bb
+index 130e032..40ba340 100644
+--- a/meta-xfce/recipes-art/rodent-icon-theme/rodent-icon-theme_5.0.bb
++++ b/meta-xfce/recipes-art/rodent-icon-theme/rodent-icon-theme_5.0.bb
+@@ -9,3 +9,8 @@ SRC_URI[md5sum] = "4b097d344a160d6497c6498985c8df15"
+ SRC_URI[sha256sum] = "6ed00d16faa1f55b3bb7b13862de1d7f5cfd978b93e42487ded21595d0dbe208"
+ 
+ FILES_${PN} += "${datadir}/icons"
++
++RREPLACES_${PN} += "xfce4-icon-theme"
++RPROVIDES_${PN} += "xfce4-icon-theme"
++RCONFLICTS_${PN} += "xfce4-icon-theme"
++
 -- 
 2.1.0
 
