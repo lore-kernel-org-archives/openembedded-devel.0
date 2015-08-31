@@ -1,52 +1,35 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 04B6376EE2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2015 13:06:30 +0000 (UTC)
-Received: by wicpl12 with SMTP id pl12so33058154wic.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2015 06:06:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc:content-type;
-	bh=sv/Zkzp7RnGeduM8t0sEdkqBz8E+NxEI1QGYGhxIpRQ=;
-	b=duo3TSANfkdteNPnB+Qc87UVPk/JhdnpkWfZvgQr6LuA5cZHAmbDYQVSTbdcj268zK
-	dKepMk5p/JzdTn+d6fyuLaMgo0avUhEGkFNM5dx0ewBVLKGysQQeDvY/STkl2VUtyP2L
-	nZ6v+5B06Usyue3eq1sA7kZwCpUXvI1bU4hsQk+mSUj35Vr8ZRRWPXuxcCntdq/UYycm
-	qpNmm2wGzWdmU5u6KPTW+iwH0BLa20GOzkeYpkjZFmjtbRrS4RxWgMjmqXMq3hncXeCW
-	k5wriTuTMDI4Rxk+ZhN+N2MzjI7bW97LHuaiB32VkBxn7vOjF2bQJeuKBZpq8ZEtBQSm
-	B/og==
-X-Gm-Message-State: ALoCoQnAYn3oCSAiXqFSmpKLMnqITG9mPytshnoIlI8pTUpj9uaZWuUGucMoWHcFcvenpI+qRecX
-X-Received: by 10.194.176.201 with SMTP id ck9mr27060017wjc.108.1441026387479; 
-	Mon, 31 Aug 2015 06:06:27 -0700 (PDT)
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com.
-	[209.85.212.179]) by smtp.gmail.com with ESMTPSA id
-	ev2sm17970293wib.21.2015.08.31.06.06.26
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 31 Aug 2015 06:06:26 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by wicfv10 with SMTP id fv10so69463373wic.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2015 06:06:26 -0700 (PDT)
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
+	[209.85.213.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 5CF8674197;
+	Mon, 31 Aug 2015 13:32:42 +0000 (UTC)
+Received: by igboj15 with SMTP id oj15so26175973igb.1;
+	Mon, 31 Aug 2015 06:32:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=rbAlKAGCTqOTjNNbco22Iiw31X9G7MRBDRUnFaFY1iQ=;
+	b=BQ2BcLrNglgzkxNkN4gEkL27jNJB3r6fzsTmu1ejcGEiQpjNl7jPQwxiebRwnNOua9
+	vvW6/NHcHx3B5YdZlcmUBY3UlW0xMOTpheVkZ07LdI3GsQTBaC4Yf7NJ2WOkyeTJSFux
+	BDUaO4ZLTzoNSTDRbcbPTOqg6QFK/CX+ELGfIUF28zlOYKjkpqOsz/1RFAw3btoX1CFY
+	0/ClfPSi3jGvTvW3w0+CoLXFB7DSNNyOi0BrxSqanlbncqbLM8FGAPwAt89ePmxHt6rf
+	AINxvk5xjA0YuPwSybfv7u/GTINDoiZt8IxOW4ItUAwLV2okF0vM+nkx07KVI0aW2hDE
+	13Sw==
 MIME-Version: 1.0
-X-Received: by 10.180.92.225 with SMTP id cp1mr20214065wib.2.1441026386259;
-	Mon, 31 Aug 2015 06:06:26 -0700 (PDT)
-Received: by 10.28.135.72 with HTTP; Mon, 31 Aug 2015 06:06:26 -0700 (PDT)
-In-Reply-To: <55E4035F.6040608@skidata.com>
-References: <1A315F32-74AE-4B3B-A5B7-65A33C5A6BC7@gmail.com>
-	<CAP9ODKrwYHeeUdcLCLm6Bsw26V4ypZA-kNDYoX=fA4bx_MYQ0Q@mail.gmail.com>
-	<55E006B4.50103@skidata.com>
-	<CAP9ODKrJz7h9XpTrJZ-k+3nu-W=eFCb4W=91WH_JivZopb6fCg@mail.gmail.com>
-	<55E4035F.6040608@skidata.com>
-Date: Mon, 31 Aug 2015 10:06:26 -0300
-Message-ID: <CAP9ODKpz46jb4rEHTu1377uHZVpXUrnndOWHY0DWERQ0F30NEg@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: meta-java - recent commits break foreign (MY!) builds ...
+X-Received: by 10.50.142.33 with SMTP id rt1mr7235126igb.52.1441027962581;
+	Mon, 31 Aug 2015 06:32:42 -0700 (PDT)
+Received: by 10.36.98.5 with HTTP; Mon, 31 Aug 2015 06:32:42 -0700 (PDT)
+In-Reply-To: <20150831125632.GA2465@jama>
+References: <20150831125632.GA2465@jama>
+Date: Mon, 31 Aug 2015 15:32:42 +0200
+Message-ID: <CALbNGRTScmFfjhAU+PY3Y5ZKdpk0vK9f67Kdq+7BYvPdnVv-Fg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: State of bitbake world, Failed tasks 2015-08-30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,45 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2015 13:06:32 -0000
+X-List-Received-Date: Mon, 31 Aug 2015 13:32:45 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Aug 31, 2015 at 4:33 AM, Richard Leitner
-<richard.leitner@skidata.com> wrote:
-> On 08/28/2015 04:11 PM, Otavio Salvador wrote:
->> On Fri, Aug 28, 2015 at 3:59 AM, Richard Leitner
->> <richard.leitner@skidata.com> wrote:
->>> I think we should keep (and UPDATE!) openjdk 6 & 7 as long as they get
->>> support from RedHat and therefore IcedTea. There may be users relying on
->>> the old java version for their long-term-supported products (so do we)!
->>>
->>> IMHO we should start with openjdk 6: remove the old versions and add the
->>> latest (1.13.8)!
->>>
->>> What do you think? Any comments?
->>
->> If you are willing to work on that, I have no problem.
+On Mon, Aug 31, 2015 at 2:56 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
 >
-> As I mentioned, I will update openjdk-7 as long as I need it. If it's
-> okay for you I will send patches for these updates to the ml. From a
-> current point of view it looks like I will provide updates until end of
-> 2016 at least.
-
-Yes; fine with me.
-
->> The point is Java is complex and we have few people working on this so
->> I prefer one well maintained version than 3 oddly ones.
+> == Failed tasks 2015-08-30 ==
 >
-> I understand that. But currently I have no need for openjdk-8. Therefore
-> my focus is on keeping openjdk-7 up to date.
+> INFO: jenkins-job.sh-1.3.1 Complete log available at http://logs.nslu2-linux.org/buildlogs/oe/world/log.report.20150830_101221.log
+>
+> === common (16) ===
+>     * /meta-openembedded/meta-efl/recipes-efl/efl/epdf_svn.bb, do_compile
+>     * /meta-openembedded/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb, do_fetch
+>     * /meta-openembedded/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb, do_compile
+^ patch sent
+>     * /meta-openembedded/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb, do_compile
+^ patch sent
+>     * /meta-openembedded/meta-gnome/recipes-gnome/gnome-power-manager/gnome-power-manager_2.32.0.bb, do_compile
+>     * /meta-openembedded/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb, do_compile
+>     * /meta-openembedded/meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb, do_fetch
+^ how did this return to world?
+>     * /meta-openembedded/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb, do_compile
+>     * /meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb, do_compile
+>     * /meta-openembedded/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb, do_patch
+>     * /meta-openembedded/meta-oe/recipes-support/gd/gd_2.1.1.bb, do_compile
+>     * /meta-openembedded/meta-oe/recipes-support/libdbi/libdbi-drivers_0.8.3-1.bb, do_compile
+>     * /meta-openembedded/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb, do_populate_sysroot
+>     * /meta-openembedded/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.2.4.bb, do_compile
+^ patch sent
+>     * /meta-openembedded/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb, do_populate_sysroot
+^ patch sent
+>     * /meta-webos-ports/meta-luneui/recipes-luneui/luna-next/luna-next.bb, do_compile
+>
 
-Sure.
+Regards
 
-Specially if your app works with OpenJDK 8 I see no much benefit in
-keep using the old version. Do you see it differently?
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Andreas
 
