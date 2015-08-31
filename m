@@ -1,35 +1,28 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
-	[209.85.213.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 5CF8674197;
-	Mon, 31 Aug 2015 13:32:42 +0000 (UTC)
-Received: by igboj15 with SMTP id oj15so26175973igb.1;
-	Mon, 31 Aug 2015 06:32:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=rbAlKAGCTqOTjNNbco22Iiw31X9G7MRBDRUnFaFY1iQ=;
-	b=BQ2BcLrNglgzkxNkN4gEkL27jNJB3r6fzsTmu1ejcGEiQpjNl7jPQwxiebRwnNOua9
-	vvW6/NHcHx3B5YdZlcmUBY3UlW0xMOTpheVkZ07LdI3GsQTBaC4Yf7NJ2WOkyeTJSFux
-	BDUaO4ZLTzoNSTDRbcbPTOqg6QFK/CX+ELGfIUF28zlOYKjkpqOsz/1RFAw3btoX1CFY
-	0/ClfPSi3jGvTvW3w0+CoLXFB7DSNNyOi0BrxSqanlbncqbLM8FGAPwAt89ePmxHt6rf
-	AINxvk5xjA0YuPwSybfv7u/GTINDoiZt8IxOW4ItUAwLV2okF0vM+nkx07KVI0aW2hDE
-	13Sw==
+Return-Path: <prvs=678e712cc=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id E7B3776F2D
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Aug 2015 13:39:45 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AqkHAIRY5FWsEApK/2dsb2JhbABehFgGxhwCgW8BAQEBAQGBC0EFg14BAQQyAUUBEAsNCwkWDwkDAgECAUUGDQEFAgKIL8RYAQEBAQEFAQEBAR6GcIR7hQsHF4QVAQSVQY4+hy4XjW+DbIQnb4FIgQUBAQE
+X-IPAS-Result: AqkHAIRY5FWsEApK/2dsb2JhbABehFgGxhwCgW8BAQEBAQGBC0EFg14BAQQyAUUBEAsNCwkWDwkDAgECAUUGDQEFAgKIL8RYAQEBAQEFAQEBAR6GcIR7hQsHF4QVAQSVQY4+hy4XjW+DbIQnb4FIgQUBAQE
+Message-ID: <55E458FD.9060009@skidata.com>
+Date: Mon, 31 Aug 2015 15:39:09 +0200
+From: Richard Leitner <richard.leitner@skidata.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Icedove/31.8.0
 MIME-Version: 1.0
-X-Received: by 10.50.142.33 with SMTP id rt1mr7235126igb.52.1441027962581;
-	Mon, 31 Aug 2015 06:32:42 -0700 (PDT)
-Received: by 10.36.98.5 with HTTP; Mon, 31 Aug 2015 06:32:42 -0700 (PDT)
-In-Reply-To: <20150831125632.GA2465@jama>
-References: <20150831125632.GA2465@jama>
-Date: Mon, 31 Aug 2015 15:32:42 +0200
-Message-ID: <CALbNGRTScmFfjhAU+PY3Y5ZKdpk0vK9f67Kdq+7BYvPdnVv-Fg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: State of bitbake world, Failed tasks 2015-08-30
+To: <openembedded-devel@lists.openembedded.org>
+References: <1A315F32-74AE-4B3B-A5B7-65A33C5A6BC7@gmail.com>
+	<CAP9ODKrwYHeeUdcLCLm6Bsw26V4ypZA-kNDYoX=fA4bx_MYQ0Q@mail.gmail.com>
+	<55E006B4.50103@skidata.com>
+	<CAP9ODKrJz7h9XpTrJZ-k+3nu-W=eFCb4W=91WH_JivZopb6fCg@mail.gmail.com>
+	<55E4035F.6040608@skidata.com>
+	<CAP9ODKpz46jb4rEHTu1377uHZVpXUrnndOWHY0DWERQ0F30NEg@mail.gmail.com>
+In-Reply-To: <CAP9ODKpz46jb4rEHTu1377uHZVpXUrnndOWHY0DWERQ0F30NEg@mail.gmail.com>
+X-Originating-IP: [172.16.60.30]
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: meta-java - recent commits break foreign (MY!) builds ...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,40 +36,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2015 13:32:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 31 Aug 2015 13:39:46 -0000
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: 8bit
 
-On Mon, Aug 31, 2015 at 2:56 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> == Failed tasks 2015-08-30 ==
->
-> INFO: jenkins-job.sh-1.3.1 Complete log available at http://logs.nslu2-linux.org/buildlogs/oe/world/log.report.20150830_101221.log
->
-> === common (16) ===
->     * /meta-openembedded/meta-efl/recipes-efl/efl/epdf_svn.bb, do_compile
->     * /meta-openembedded/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb, do_fetch
->     * /meta-openembedded/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb, do_compile
-^ patch sent
->     * /meta-openembedded/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb, do_compile
-^ patch sent
->     * /meta-openembedded/meta-gnome/recipes-gnome/gnome-power-manager/gnome-power-manager_2.32.0.bb, do_compile
->     * /meta-openembedded/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb, do_compile
->     * /meta-openembedded/meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb, do_fetch
-^ how did this return to world?
->     * /meta-openembedded/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb, do_compile
->     * /meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb, do_compile
->     * /meta-openembedded/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb, do_patch
->     * /meta-openembedded/meta-oe/recipes-support/gd/gd_2.1.1.bb, do_compile
->     * /meta-openembedded/meta-oe/recipes-support/libdbi/libdbi-drivers_0.8.3-1.bb, do_compile
->     * /meta-openembedded/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb, do_populate_sysroot
->     * /meta-openembedded/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.2.4.bb, do_compile
-^ patch sent
->     * /meta-openembedded/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb, do_populate_sysroot
-^ patch sent
->     * /meta-webos-ports/meta-luneui/recipes-luneui/luna-next/luna-next.bb, do_compile
->
+On 08/31/2015 03:06 PM, Otavio Salvador wrote:
+> On Mon, Aug 31, 2015 at 4:33 AM, Richard Leitner
+> <richard.leitner@skidata.com> wrote:
+>>> The point is Java is complex and we have few people working on this so
+>>> I prefer one well maintained version than 3 oddly ones.
+>>
+>> I understand that. But currently I have no need for openjdk-8. Therefore
+>> my focus is on keeping openjdk-7 up to date.
+> 
+> Sure.
+> 
+> Specially if your app works with OpenJDK 8 I see no much benefit in
+> keep using the old version. Do you see it differently?
+> 
 
-Regards
-
-Andreas
+If we have verified that everything is working as expected with
+openjdk-8 we will for sure think of updating to it. But as we have a
+quite big application stack and long QA/testing phases this may take
+some time.
+Therefore we will stay (as far as I can currently tell) at least for
+another year with openjdk-7.
 
