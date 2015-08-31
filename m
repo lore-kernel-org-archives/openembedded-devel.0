@@ -1,28 +1,27 @@
-Return-Path: <prvs=678e712cc=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id E7B3776F2D
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 51F9A76DE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2015 13:39:45 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AqkHAIRY5FWsEApK/2dsb2JhbABehFgGxhwCgW8BAQEBAQGBC0EFg14BAQQyAUUBEAsNCwkWDwkDAgECAUUGDQEFAgKIL8RYAQEBAQEFAQEBAR6GcIR7hQsHF4QVAQSVQY4+hy4XjW+DbIQnb4FIgQUBAQE
-X-IPAS-Result: AqkHAIRY5FWsEApK/2dsb2JhbABehFgGxhwCgW8BAQEBAQGBC0EFg14BAQQyAUUBEAsNCwkWDwkDAgECAUUGDQEFAgKIL8RYAQEBAQEFAQEBAR6GcIR7hQsHF4QVAQSVQY4+hy4XjW+DbIQnb4FIgQUBAQE
-Message-ID: <55E458FD.9060009@skidata.com>
-Date: Mon, 31 Aug 2015 15:39:09 +0200
-From: Richard Leitner <richard.leitner@skidata.com>
+	Mon, 31 Aug 2015 13:46:26 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga101.jf.intel.com with ESMTP; 31 Aug 2015 06:46:26 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.17,441,1437462000"; d="scan'208";a="552214965"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.143])
+	([10.237.68.143])
+	by FMSMGA003.fm.intel.com with ESMTP; 31 Aug 2015 06:46:26 -0700
+Message-ID: <55E45B14.2080908@linux.intel.com>
+Date: Mon, 31 Aug 2015 16:48:04 +0300
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Icedove/31.8.0
+	rv:31.0) Gecko/20100101 Icedove/31.7.0
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1A315F32-74AE-4B3B-A5B7-65A33C5A6BC7@gmail.com>
-	<CAP9ODKrwYHeeUdcLCLm6Bsw26V4ypZA-kNDYoX=fA4bx_MYQ0Q@mail.gmail.com>
-	<55E006B4.50103@skidata.com>
-	<CAP9ODKrJz7h9XpTrJZ-k+3nu-W=eFCb4W=91WH_JivZopb6fCg@mail.gmail.com>
-	<55E4035F.6040608@skidata.com>
-	<CAP9ODKpz46jb4rEHTu1377uHZVpXUrnndOWHY0DWERQ0F30NEg@mail.gmail.com>
-In-Reply-To: <CAP9ODKpz46jb4rEHTu1377uHZVpXUrnndOWHY0DWERQ0F30NEg@mail.gmail.com>
-X-Originating-IP: [172.16.60.30]
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: meta-java - recent commits break foreign (MY!) builds ...
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <20150831125632.GA2465@jama>
+	<CALbNGRTScmFfjhAU+PY3Y5ZKdpk0vK9f67Kdq+7BYvPdnVv-Fg@mail.gmail.com>
+In-Reply-To: <CALbNGRTScmFfjhAU+PY3Y5ZKdpk0vK9f67Kdq+7BYvPdnVv-Fg@mail.gmail.com>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2015-08-30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,29 +35,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2015 13:39:46 -0000
-Content-Type: text/plain; charset="windows-1252"
+X-List-Received-Date: Mon, 31 Aug 2015 13:46:27 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 08/31/2015 03:06 PM, Otavio Salvador wrote:
-> On Mon, Aug 31, 2015 at 4:33 AM, Richard Leitner
-> <richard.leitner@skidata.com> wrote:
->>> The point is Java is complex and we have few people working on this so
->>> I prefer one well maintained version than 3 oddly ones.
->>
->> I understand that. But currently I have no need for openjdk-8. Therefore
->> my focus is on keeping openjdk-7 up to date.
-> 
-> Sure.
-> 
-> Specially if your app works with OpenJDK 8 I see no much benefit in
-> keep using the old version. Do you see it differently?
-> 
+On 08/31/2015 04:32 PM, Andreas Müller wrote:
+>>      * /meta-openembedded/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb, do_fetch
 
-If we have verified that everything is working as expected with
-openjdk-8 we will for sure think of updating to it. But as we have a
-quite big application stack and long QA/testing phases this may take
-some time.
-Therefore we will stay (as far as I can currently tell) at least for
-another year with openjdk-7.
+This recipe will be removed when the new epiphany shows up in oe-core.
+
+>>      * /meta-openembedded/meta-gnome/recipes-gnome/gnome-power-manager/gnome-power-manager_2.32.0.bb, do_compile
+>>      * /meta-openembedded/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb, do_compile
+
+These are probably due to removal of libnotify 0.6.0.
+
+>>      * /meta-openembedded/meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb, do_fetch
+> ^ how did this return to world?
+
+It was previously excluded because it was not compatible with libnotify 
+0.6.0. Now that it's gone, there is no reason to exclude it from world.
+
+The fetch failure is because I somehow overlooked the recipe when fixing 
+the default tarball compression in gnome recipes. It needs a checksum 
+update.
+
+
+Alex
 
