@@ -1,27 +1,20 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 51F9A76DE5
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 5471D76D28
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2015 13:46:26 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga101.jf.intel.com with ESMTP; 31 Aug 2015 06:46:26 -0700
+	Mon, 31 Aug 2015 13:53:39 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga103.jf.intel.com with ESMTP; 31 Aug 2015 06:53:40 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,441,1437462000"; d="scan'208";a="552214965"
-Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.143])
-	([10.237.68.143])
-	by FMSMGA003.fm.intel.com with ESMTP; 31 Aug 2015 06:46:26 -0700
-Message-ID: <55E45B14.2080908@linux.intel.com>
-Date: Mon, 31 Aug 2015 16:48:04 +0300
+X-IronPort-AV: E=Sophos;i="5.17,441,1437462000"; d="scan'208";a="794618409"
+Received: from kanavin-desktop.fi.intel.com ([10.237.68.143])
+	by orsmga002.jf.intel.com with ESMTP; 31 Aug 2015 06:53:38 -0700
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Icedove/31.7.0
-MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <20150831125632.GA2465@jama>
-	<CALbNGRTScmFfjhAU+PY3Y5ZKdpk0vK9f67Kdq+7BYvPdnVv-Fg@mail.gmail.com>
-In-Reply-To: <CALbNGRTScmFfjhAU+PY3Y5ZKdpk0vK9f67Kdq+7BYvPdnVv-Fg@mail.gmail.com>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2015-08-30
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 31 Aug 2015 16:55:14 +0300
+Message-Id: <1441029314-30207-1-git-send-email-alexander.kanavin@linux.intel.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [PATCH] nautilus3: update the checksums to match the .xz compressed tarball
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,30 +28,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2015 13:46:27 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 31 Aug 2015 13:53:42 -0000
 
-On 08/31/2015 04:32 PM, Andreas Müller wrote:
->>      * /meta-openembedded/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb, do_fetch
+Previously the default was .bz2
 
-This recipe will be removed when the new epiphany shows up in oe-core.
+Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+---
+ meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
->>      * /meta-openembedded/meta-gnome/recipes-gnome/gnome-power-manager/gnome-power-manager_2.32.0.bb, do_compile
->>      * /meta-openembedded/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb, do_compile
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb b/meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb
+index 586d1d9..a1b3b7b 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb
+@@ -20,8 +20,8 @@ BPN = "nautilus"
+ inherit gnome
+ 
+ SRC_URI += "file://no-try-run-strftime.diff"
+-SRC_URI[archive.md5sum] = "ecd100ed94431363fa68b217351649c0"
+-SRC_URI[archive.sha256sum] = "584e97d3eb093ee16a779809b679150a636bcd4a3767fb604993013b523d2df1"
++SRC_URI[archive.md5sum] = "12314328b59aa1dfd83619f718b81bd5"
++SRC_URI[archive.sha256sum] = "c482d6e7babcc238304cf55586cdf7e2b2806025214a143ed355f0d89b33b154"
+ 
+ EXTRA_OECONF = " --disable-gtk-doc  --disable-update-mimedb --enable-nst-extension"
+ export SYSROOT = "${STAGING_DIR_HOST}"
+-- 
+2.1.4
 
-These are probably due to removal of libnotify 0.6.0.
-
->>      * /meta-openembedded/meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb, do_fetch
-> ^ how did this return to world?
-
-It was previously excluded because it was not compatible with libnotify 
-0.6.0. Now that it's gone, there is no reason to exclude it from world.
-
-The fetch failure is because I somehow overlooked the recipe when fixing 
-the default tarball compression in gnome recipes. It needs a checksum 
-update.
-
-
-Alex
 
