@@ -1,37 +1,41 @@
 Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qk0-f180.google.com (mail-qk0-f180.google.com
-	[209.85.220.180])
-	by mail.openembedded.org (Postfix) with ESMTP id B24A676ED5
+Received: from mail-qk0-f179.google.com (mail-qk0-f179.google.com
+	[209.85.220.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 233C376F58
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2015 19:08:38 +0000 (UTC)
-Received: by qkbp67 with SMTP id p67so12052070qkb.3
+	Mon, 31 Aug 2015 19:08:40 +0000 (UTC)
+Received: by qkbp67 with SMTP id p67so12053797qkb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2015 12:08:38 -0700 (PDT)
+	Mon, 31 Aug 2015 12:08:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:organization;
 	bh=WGL1Xzg7pbPMPVSIggm3IT+G/JjW4zLkJ2agS69NWzY=;
-	b=FXcL2XoFJoMyXAbxESp1RoNSpMT0aBQCuR+b5gw2kb8yvyCHbhpJImvbtM+KpHTudh
-	Y30YAwvfBZGEvuZ+NVsw9wdjPmJZuBYmjdhdg2uFbSAfCCClxD1IgKkMQXNab9S2VKrO
-	hnhsNERWA1PD/ht7I6PodDQop3RoJsZudlNw9lJUdDdAcV1lxBlXjuGVRYlkpCqMuLwe
-	n8f8l1Ik5rtZgUY5ABcKQ4RwwfgY0yqApXdm743TWL0JTrxUmcKsoF/qeyU5Jc0h4Yhg
-	4yXvkX65zxo8haMmOV9G1CfINfhHvqSmFFdPLyMs3DZ9bl2la3XrvbwG9zx6kFWhopnV
-	UB4Q==
-X-Gm-Message-State: ALoCoQnj8wclL7OZlBqwKlPEu+qewCiGNUWW9TvHkGf/h8QPwqwkdTJ8pdCDB8WKCjY7QpCbPYUm
-X-Received: by 10.13.229.197 with SMTP id o188mr23513246ywe.30.1441048118289; 
-	Mon, 31 Aug 2015 12:08:38 -0700 (PDT)
+	b=flTagtENNt0ec5oev58f/uMd7uq6/jaBOKt/4dMspuFFRDop1JWZaHekaBJGAPMieH
+	DNGMcesY+pvzRJqTdSBve8G3pComQ3vAnNPJN4a20K/hdIifrdE2edk4kFHvpTEAcHBh
+	igB/WFzJADRtVHAbFLsJ8eTpuNeeudc1wB1Gm3soq55vKZiXIEhjmkBoGFsNCHtLZSuj
+	BZmNkhymEdoRDpvQSIFKQV6/CmISlChSPbCD7WIC0+eFstnc9zn6I2/c19JR22+9QNae
+	Ef078Op7rd7V+rLna0Bv3dieRd8WlfX4WXfCksAQf4H0TYW47jxbIBbT1DMcb830Z2mg
+	4bRA==
+X-Gm-Message-State: ALoCoQk03khbVDu78pZ4AeApsYyiZokLKfuZUEF6+kHwGneDXShW/egN3MbmLwiqUWA4Qj1pDuUV
+X-Received: by 10.129.99.6 with SMTP id x6mr22329355ywb.66.1441048120032;
+	Mon, 31 Aug 2015 12:08:40 -0700 (PDT)
 Received: from localhost.localdomain ([177.220.212.62])
 	by smtp.gmail.com with ESMTPSA id
-	x2sm15040031ywe.32.2015.08.31.12.08.36
+	x2sm15040031ywe.32.2015.08.31.12.08.38
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 31 Aug 2015 12:08:37 -0700 (PDT)
+	Mon, 31 Aug 2015 12:08:39 -0700 (PDT)
 From: Fabio Berton <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Aug 2015 16:08:24 -0300
-Message-Id: <1441048105-6440-1-git-send-email-fabio.berton@ossystems.com.br>
+Date: Mon, 31 Aug 2015 16:08:25 -0300
+Message-Id: <1441048105-6440-2-git-send-email-fabio.berton@ossystems.com.br>
 X-Mailer: git-send-email 2.1.4
+In-Reply-To: <1441048105-6440-1-git-send-email-fabio.berton@ossystems.com.br>
+References: <1441048105-6440-1-git-send-email-fabio.berton@ossystems.com.br>
+Organization: O.S. Systems Software LTDA.
 Cc: Fabio Berton <fabio.berton@ossystems.com.br>
-Subject: [meta-python][PATCH] python-pyroute2: Add recipe
+Subject: [meta-oe][PATCH] python-pyroute2: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,7 +49,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2015 19:08:39 -0000
+X-List-Received-Date: Mon, 31 Aug 2015 19:08:42 -0000
 
 Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
