@@ -1,40 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AB1476B7C
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Sep 2015 18:58:04 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so22491767wic.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Sep 2015 11:58:04 -0700 (PDT)
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 2872B76F8A;
+	Tue,  1 Sep 2015 19:01:19 +0000 (UTC)
+Received: by wicge5 with SMTP id ge5so17321261wic.0;
+	Tue, 01 Sep 2015 12:01:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=X6opPeYLAJ9TifPHUu+f1DSHceYg9rI0g8VsPD+jTrs=;
-	b=WF2sTq596K0j1yG5Dzqj0W7Bpmpq+ogQWyNHn/69Hbsc0oXqfwiwocYrxloWm0spO4
-	QoRLPyCOI/zxlKdvS8vN3Q9waj91K9qo5jjJ5VkGzjeZkFpCtGX0r5uU2/IynkxxZpGY
-	UcjS2b6c59jyKQkA6sPZh7uK026S6ysUHwzY/0sB5/l23Sg0uaywFWxBrOOvt6A9XOMc
-	EoAooXKLsMu9IV+EMc7U8OuQL9dqjSe47Jo5F7tO9IbQETqLrjfXgrkCtUCYLd4eZiEq
-	2t6Wsmxrh4apJ99bvmD6p9fWrze7jsnylmrKMZS39QiH3GXSQBfnFOHlBFNux92TL78e
-	HAtA==
-X-Received: by 10.180.72.6 with SMTP id z6mr4993902wiu.57.1441133884016;
-	Tue, 01 Sep 2015 11:58:04 -0700 (PDT)
+	bh=psnFcJV2Y7hbd/WHQeze9OivX981jwnUcU04LrvKn20=;
+	b=FPGpfsCqrsQX7SrYY1dZOd9P5PTsREBZifFzdIS9kDYYo7NYHtIbwmQgFlR5a4iND9
+	4sy+KNMvF57jXVp3z1wrvip1436u31xtFPUqLKeDLMAD8bD7oKj09Kpq5ONEtWi+aw/+
+	4CFkewADqKbPLb3ofuBNv5mxSqjNiqft1EezN99mEqcC7PsRC+FF2fzH+HT6VZIfJ6ku
+	qpaEC7ZgLWoYBk1sBzgK6iwcouyNov3UYyyDFQ33MKfdeLu4ijUNC06lU8Wp4D1UEl3d
+	lcRY+vf9cN8rsU1CMCkL28MA6z7oSfTFTXvUqDkkyGYdHnFiqMpNgqH8r7xmajydtjGO
+	Y1jA==
+X-Received: by 10.180.92.225 with SMTP id cp1mr5254298wib.2.1441134079197;
+	Tue, 01 Sep 2015 12:01:19 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	sd14sm10390571wjb.36.2015.09.01.11.58.02
-	for <openembedded-devel@lists.openembedded.org>
+	by smtp.gmail.com with ESMTPSA id f7sm4086981wij.17.2015.09.01.12.01.18
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Sep 2015 11:58:02 -0700 (PDT)
+	Tue, 01 Sep 2015 12:01:18 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 1 Sep 2015 20:58:18 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150901185818.GB2458@jama>
-References: <1440148950-47294-1-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Tue, 1 Sep 2015 21:01:34 +0200
+To: openembedded-devel@lists.openembedded.org,
+	leimaohui <leimaohui@cn.fujitsu.com>
+Message-ID: <20150901190134.GC2458@jama>
+References: <20150831171216.A2C2D50518@opal.openembedded.org>
 MIME-Version: 1.0
-In-Reply-To: <1440148950-47294-1-git-send-email-leimaohui@cn.fujitsu.com>
+In-Reply-To: <20150831171216.A2C2D50518@opal.openembedded.org>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH v2] uim: 1.3.1->1.8.6
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] leimaohui : sblim-sfcCommon: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,224 +46,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2015 18:58:05 -0000
-X-Groupsio-MsgNum: 57163
+X-List-Received-Date: Tue, 01 Sep 2015 19:01:20 -0000
+X-Groupsio-MsgNum: 57164
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="GID0FwUMdk1T2AWN"
+	protocol="application/pgp-signature"; boundary="+nBD6E3TurpgldQp"
 Content-Disposition: inline
 
---GID0FwUMdk1T2AWN
+--+nBD6E3TurpgldQp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 21, 2015 at 05:22:30PM +0800, Lei Maohui wrote:
-> - delte 0001-fix-bug-about-stdlib.patch that not be needed.
-> - modified license
-
-It's showing new QA issue now:
-
-uim-1.8.6: uim: Files/directories were installed but not shipped in any
-package:
-  /usr/lib/gtk-3.0/3.0.0/immodules/im-uim.so
-  /usr/lib/gtk-3.0/3.0.0/immodules/im-uim.la
-
+On Mon, Aug 31, 2015 at 05:12:16PM +0000, git@git.openembedded.org wrote:
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: 3aa61fb9512449477546320ec46cebf7e39daed0
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3D3aa61fb9512449477546320ec46cebf7e39daed0
+>=20
+> Author: leimaohui <leimaohui@cn.fujitsu.com>
+> Date:   Tue Aug 25 13:19:53 2015 +0800
+>=20
+> sblim-sfcCommon: add new recipe
+>=20
+> Sblim-sfcCommon is dependence of sblim-sfcb.
 >=20
 > Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
-> ---
->  .../uim/uim/0001-fix-bug-about-stdlib.patch        | 40 ----------------=
-------
->  .../uim/uim/0001-fix-bug-for-cross-compile.patch   | 38 ++++++++++------=
-----
->  .../uim/{uim_1.3.1.bb =3D> uim_1.8.6.bb}             | 21 ++++++++----
->  3 files changed, 33 insertions(+), 66 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/uim/uim/0001-fix-bug-about-st=
-dlib.patch
->  rename meta-oe/recipes-support/uim/{uim_1.3.1.bb =3D> uim_1.8.6.bb} (88%)
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+I've already merged this, but can you please rename it to lowercase
+sfccommon in follow-up patch? It's showing QA warnings:
+
+sblim-sfcCommon-1.0.1: sblim-sfcCommon-dev doesn't match the [a-z0-9.+-]+ r=
+egex
+ [pkgname]
+sblim-sfcCommon-1.0.1: sblim-sfcCommon-staticdev doesn't match the [a-z0-9.=
++-]+ regex
+ [pkgname]
+sblim-sfcCommon-1.0.1: sblim-sfcCommon doesn't match the [a-z0-9.+-]+ regex
+ [pkgname]
+sblim-sfcCommon-1.0.1: sblim-sfcCommon-doc doesn't match the [a-z0-9.+-]+ r=
+egex
+ [pkgname]
+sblim-sfcCommon-1.0.1: sblim-sfcCommon-dbg doesn't match the [a-z0-9.+-]+ r=
+egex
+ [pkgname]
+sblim-sfcCommon-1.0.1: sblim-sfcCommon-locale doesn't match the [a-z0-9.+-]=
++ regex
+ [pkgname]
+
+Also please set your git config to show full name ("Lei Maohui <leimaohui@c=
+n.fujitsu.com>" instead of "leimaohui <leimaohui@cn.fujitsu.com>")
+
 >=20
-> diff --git a/meta-oe/recipes-support/uim/uim/0001-fix-bug-about-stdlib.pa=
-tch b/meta-oe/recipes-support/uim/uim/0001-fix-bug-about-stdlib.patch
-> deleted file mode 100644
-> index 9e63683..0000000
-> --- a/meta-oe/recipes-support/uim/uim/0001-fix-bug-about-stdlib.patch
-> +++ /dev/null
-> @@ -1,40 +0,0 @@
-> -From e0e3f82bd2918fdcc722918c108bc33647a4805f Mon Sep 17 00:00:00 2001
-> -From: Leimaohui <leimaohui@cn.fujitsu.com>
-> -Date: Fri, 25 Oct 2013 18:31:22 +0900
-> -Subject: [PATCH] fix bug about stdlib
-> -
-> -Signed-off-by: leimaohui <leimaohui@cn.fujitsu.com>
-> ----
-> - xim/locale.cpp    |    3 ++-
-> - xim/ximserver.cpp |    1 +
-> - 2 files changed, 3 insertions(+), 1 deletions(-)
-> -
-> -diff --git a/xim/locale.cpp b/xim/locale.cpp
-> -index 380e945..edfaf03 100644
-> ---- a/xim/locale.cpp
-> -+++ b/xim/locale.cpp
-> -@@ -35,7 +35,8 @@
-> - #ifdef HAVE_CONFIG_H
-> - # include <config.h>
-> - #endif
-> --
-> -+#include <string.h>
-> -+#include <stdlib.h>
-> - #include <stdio.h>
-> - #include <locale.h>
-> - #include <iconv.h>
-> -diff --git a/xim/ximserver.cpp b/xim/ximserver.cpp
-> -index 245c5f8..cde9918 100644
-> ---- a/xim/ximserver.cpp
-> -+++ b/xim/ximserver.cpp
-> -@@ -34,6 +34,7 @@
-> - # include <config.h>
-> - #endif
-> -=20
-> -+#include <stdlib.h>
-> - #include <stdio.h>
-> - #include <ctype.h>
-> - #include <locale.h>
-> ---=20
-> -1.7.1
-> -
-> diff --git a/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compi=
-le.patch b/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.p=
-atch
-> index 61392c9..df82b07 100644
-> --- a/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch
-> +++ b/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch
-> @@ -1,28 +1,28 @@
-> -From 2e87c39ae3a00b8231ee21a54c47361c1bf502f7 Mon Sep 17 00:00:00 2001
-> -From: Leimaohui <leimaohui@cn.fujitsu.com>
-> -Date: Fri, 25 Oct 2013 18:23:12 +0900
-> +From 2918196ba782dfa4401bdca917ad4de1910505e0 Mon Sep 17 00:00:00 2001
-> +From: Lei Maohui <leimaohui@cn.fujitsu.com>
-> +Date: Fri, 21 Aug 2015 15:58:42 +0900
->  Subject: [PATCH] fix bug for cross compile
-> =20
-> -Signed-off-by: leimaohui <leimaohui@cn.fujitsu.com>
-> +Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
->  ---
-> - configure.ac |    4 ++--
-> - 1 files changed, 2 insertions(+), 2 deletions(-)
-> + configure.ac | 4 ++--
-> + 1 file changed, 2 insertions(+), 2 deletions(-)
-> =20
->  diff --git a/configure.ac b/configure.ac
-> -index 3b64593..57395d4 100644
-> +index 9be879c..9249bfd 100644
->  --- a/configure.ac
->  +++ b/configure.ac
-> -@@ -601,8 +601,8 @@ AC_HELP_STRING([--with-libedit[=3DDIR], Enable libed=
-it support
-> -  if test "x$use_libedit" !=3D "xno"; then
-> -      saved_CPPFLAGS=3D$CPPFLAGS
-> -      saved_LDFLAGS=3D$LDFLAGS
-> --     CPPFLAGS=3D"${CPPFLAGS} -I$libedit_path/include"
-> --     LDFLAGS=3D"${LDFLAGS} -L$libedit_path/lib"
-> -+     CPPFLAGS=3D"${CPPFLAGS} "
-> -+     LDFLAGS=3D"${LDFLAGS} "
-> -      AC_CHECK_LIB(edit, el_init,=09
-> -      		[
-> - 		   LIBEDIT_LIBS=3D"-ledit -lcurses -l$libedit_path/lib"
-> +@@ -1208,8 +1208,8 @@ AC_HELP_STRING([--with-libedit[=3DDIR], Enable lib=
-edit support
-> + if test "x$use_libedit" !=3D "xno"; then
-> +     saved_CPPFLAGS=3D$CPPFLAGS
-> +     saved_LDFLAGS=3D$LDFLAGS
-> +-    CPPFLAGS=3D"${CPPFLAGS} -I$libedit_path/include"
-> +-    LDFLAGS=3D"${LDFLAGS} -L$libedit_path/lib"
-> ++    CPPFLAGS=3D"${CPPFLAGS} "
-> ++    LDFLAGS=3D"${LDFLAGS} "
-> +     AC_CHECK_LIB(curses, tgetent, LIBEDIT_LIBS=3D"-lcurses",
-> +         [AC_CHECK_LIB(ncurses, tgetent, LIBEDIT_LIBS=3D"-lncurses",
-> +             AC_MSG_WARN("libedit needs libcurses or libncurses. disable=
-d...")
->  --=20
-> -1.7.1
-> +1.8.4.2
-> =20
-> diff --git a/meta-oe/recipes-support/uim/uim_1.3.1.bb b/meta-oe/recipes-s=
-upport/uim/uim_1.8.6.bb
-> similarity index 88%
-> rename from meta-oe/recipes-support/uim/uim_1.3.1.bb
-> rename to meta-oe/recipes-support/uim/uim_1.8.6.bb
-> index 01657df..8e5f7dd 100644
-> --- a/meta-oe/recipes-support/uim/uim_1.3.1.bb
-> +++ b/meta-oe/recipes-support/uim/uim_1.8.6.bb
-> @@ -1,17 +1,18 @@
->  DESCRIPTION =3D "A multilingual user input method library"
->  HOMEPAGE =3D "http://uim.freedesktop.org/"
-> -LICENSE =3D "BSD"
-> +LICENSE =3D "BSD-3-Clause & LGPLv2+"
->  SECTION =3D "inputmethods"
-> =20
->  SRC_URI =3D "http://uim.googlecode.com/files/uim-${PV}.tar.bz2 \
-> -           file://0001-fix-bug-about-stdlib.patch "
-> +           "
-> =20
->  SRC_URI_append_class-target =3D "file://uim-module-manager.patch \
-> -                               file://0001-fix-bug-for-cross-compile.pat=
-ch"
-> +                               file://0001-fix-bug-for-cross-compile.pat=
-ch \
-> +                               "
-> =20
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9c372efbeca58ce22017a29c1ebf8=
-bf0"
-> -SRC_URI[md5sum] =3D "2832e23d4778bbacbfa4b49bf642d667"
-> -SRC_URI[sha256sum] =3D "ed2cfa15018a4fd2557e875f66fcb3f0b9dabe12fa0700aa=
-2f11cca69c2cb256"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D32463fd29aa303fb2360faeeae172=
-56b"
-> +SRC_URI[md5sum] =3D "ecea4c597bab1fd4ba98ea84edcece59"
-> +SRC_URI[sha256sum] =3D "7b1ea803c73f3478917166f04f67cce6e45ad7ea5ab6df99=
-b948c17eb1cb235f"
-> =20
->  DEPENDS =3D "anthy fontconfig libxft libxt glib-2.0 ncurses intltool"
->  DEPENDS_class-target +=3D "gtk+ uim-native takao-fonts"
-> @@ -31,7 +32,13 @@ EXTRA_OECONF +=3D "--disable-emacs \
->                   --without-mana \
->                   --without-eb"
-> =20
-> -CONFIGUREOPTS_class-target :=3D "${@d.getVar('CONFIGUREOPTS', True).repl=
-ace('--disable-silent-rules', ' ')}"
-> +CONFIGUREOPTS_remove_class-target =3D "--disable-silent-rules"
+> ---
+>=20
+>  .../sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb       | 25 ++++++++++++++++=
+++++++
+>  1 file changed, 25 insertions(+)
+>=20
+> diff --git a/meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0=
+=2E1.bb b/meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
+> new file mode 100644
+> index 0000000..0f5515a
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
+> @@ -0,0 +1,25 @@
+> +SUMMARY =3D "Common functions for SBLIM Small Footprint CIM Broker and C=
+IM Client Library."
+> +DESCRIPTION =3D "\
+> +This package provides a common library for functions shared between Smal=
+l Footprint CIM Broker (sblim-sfcb) \
+> +Small Footprint CIM Client (and sblim-sfcc)."
+> +HOMEPAGE =3D "http://sourceforge.net/projects/sblim/"
+> +LICENSE =3D "EPL"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df300afd598546add034364cd0a533=
+261"
+> +SECTION =3D "Development/Libraries"
 > +
+> +DEPENDS =3D "cmpi-bindings"
 > +
-> +#Because m4 file's find maxdepth=3D2, so copy the m4 files of the deep d=
-epth.
-> +do_configure_prepend () {
-> +    cp ${S}/sigscheme/m4/* ${S}/m4/
+> +SRC_URI =3D "http://downloads.sourceforge.net/sblim/${PN}-${PV}.tar.bz2 \
+> +          "
+> +SRC_URI[md5sum] =3D "8aa2655d97bdea54c4750f220b40990c"
+> +SRC_URI[sha256sum] =3D "b9b1037173d6ae0181c3bd5a316ddab5afd6a342ad0dbdc1=
+8e940fc0ad2c3297"
+> +
+> +inherit autotools
+> +
+> +do_install() {
+> +    oe_runmake DESTDIR=3D${D} install
+> +
+> +    rm -rf ${D}${libdir}/libsfcUtil.a
+> +    rm -rf ${D}${libdir}/libsfcUtil.la
 > +}
-> =20
->  PACKAGES +=3D "uim-xim uim-utils uim-skk uim-gtk2.0 uim-fep uim-common u=
-im-anthy libuim0 libuim-dev"
-> =20
-> --=20
-> 1.8.4.2
+> +
 >=20
 > --=20
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---GID0FwUMdk1T2AWN
+--+nBD6E3TurpgldQp
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlXl9UkACgkQN1Ujt2V2gBxVDACfaqsKsdX8XyhPvZf8Tsnetre8
-Cg4AnAt/zydiUWRF9dIZPjRNSjv39XEC
-=tWtb
+iEYEARECAAYFAlXl9g0ACgkQN1Ujt2V2gBxdBgCgsJB+/wpeD4U4OvLTiDxs3e/S
+ymMAnRhrPb50hC7N6TXhI8X6MYZ+KLUs
+=Yw0J
 -----END PGP SIGNATURE-----
 
---GID0FwUMdk1T2AWN--
+--+nBD6E3TurpgldQp--
