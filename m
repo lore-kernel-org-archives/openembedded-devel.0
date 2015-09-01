@@ -1,24 +1,29 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EC01375E80
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id 5999176F33
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Sep 2015 09:05:20 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t8195K11019172
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 1 Sep 2015 02:05:20 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.235.1; Tue, 1 Sep 2015 02:05:19 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 1 Sep 2015 17:00:33 +0800
-Message-ID: <1441098033-26923-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Tue,  1 Sep 2015 11:21:18 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga103.fm.intel.com with ESMTP; 01 Sep 2015 04:21:19 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.17,448,1437462000"; d="scan'208";a="780236907"
+Received: from linux.intel.com ([10.23.219.25])
+	by fmsmga001.fm.intel.com with ESMTP; 01 Sep 2015 04:21:19 -0700
+Received: by linux.intel.com (Postfix, from userid 48)
+	id 781956A4087; Tue,  1 Sep 2015 04:20:28 -0700 (PDT)
+Received: from 10.252.32.34 (SquirrelMail authenticated user alexander.kanavin)
+	by linux.intel.com with HTTP; Tue, 1 Sep 2015 14:20:28 +0300 (EEST)
+Message-ID: <50735.10.252.32.34.1441106428.squirrel@linux.intel.com>
+In-Reply-To: <1441043247-5310-1-git-send-email-alejandro.delcastillo@ni.com>
+References: <1441043247-5310-1-git-send-email-alejandro.delcastillo@ni.com>
+Date: Tue, 1 Sep 2015 14:20:28 +0300 (EEST)
+From: alexander.kanavin@linux.intel.com
+To: openembedded-devel@lists.openembedded.org
+User-Agent: SquirrelMail/1.4.8-5.el4.centos.8
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] collectd: fix a floating dependence on libvirt
+X-Priority: 3 (Normal)
+Importance: Normal
+Subject: Re: [PATCH] opkg: upgrade to v0.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,87 +37,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2015 09:05:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 01 Sep 2015 11:21:19 -0000
+Content-Type: text/plain;charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
 
-From: Roy Li <rongqing.li@windriver.com>
+> Changes required:
+> - Rename opkg-cl to opkg
+> - Add libarchive dependency
+> - Drop backport patches
+> - Drop obsolete directory options
+> - Add patch to handle empty index files
+>
+> Based on initial work by Paul Barker.
+>
+> Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
+> CC: Paul Barker <paul@paulbarker.me.uk>
 
-Even though the PACKAGECONFIG of libvirt is used to fix the floating
-dependence, but enable-libvirt/disable-libvirt become useless after
-collectd upgrade, and libvirt is checked unconditionally, and lead to
-a floating dependence on libvirt.
 
-check if libvirt is available only when a user wants to use libvirt
-to fix this issue
+Before you submit to the correct ML, also the opkg version (and PR) in
+adt-installer_1.0.bb should be updated.
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../0001-conditionally-check-libvirt.patch         | 39 ++++++++++++++++++++++
- .../recipes-extended/collectd/collectd_5.5.0.bb    |  4 ++-
- 2 files changed, 42 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/collectd/collectd/0001-conditionally-check-libvirt.patch
-
-diff --git a/meta-oe/recipes-extended/collectd/collectd/0001-conditionally-check-libvirt.patch b/meta-oe/recipes-extended/collectd/collectd/0001-conditionally-check-libvirt.patch
-new file mode 100644
-index 0000000..d0a5804
---- /dev/null
-+++ b/meta-oe/recipes-extended/collectd/collectd/0001-conditionally-check-libvirt.patch
-@@ -0,0 +1,39 @@
-+[PATCH] conditionally check libvirt
-+
-+Upstream-Statue: Pending
-+
-+check if libvirt is available only when a user wants to use libvirt
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ configure.ac | 14 ++++++++------
-+ 1 file changed, 8 insertions(+), 6 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 923498e..7206095 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -4778,12 +4778,14 @@ then
-+ 		with_libxml2="no (pkg-config doesn't know libxml-2.0)"
-+ 	fi
-+ 
-+-	$PKG_CONFIG --exists libvirt 2>/dev/null
-+-	if test "$?" = "0"
-+-	then
-+-		with_libvirt="yes"
-+-	else
-+-		with_libvirt="no (pkg-config doesn't know libvirt)"
-++	if test "x$enable_libvirt" = "xyes"; then
-++		$PKG_CONFIG --exists libvirt 2>/dev/null
-++		if test "$?" = "0"
-++		then
-++			with_libvirt="yes"
-++		else
-++			with_libvirt="no (pkg-config doesn't know libvirt)"
-++		fi
-+ 	fi
-+ fi
-+ if test "x$with_libxml2" = "xyes"
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb b/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-index feda26b..fd3b1ab 100644
---- a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-@@ -10,7 +10,9 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
-            file://collectd-version.patch \
-            file://0001-redefine-the-dependence.patch  \
-            file://collectd.init \
--           file://collectd.service"
-+           file://collectd.service \
-+           file://0001-conditionally-check-libvirt.patch \
-+"
- SRC_URI[md5sum] = "c39305ef5514b44238b0d31f77e29e6a"
- SRC_URI[sha256sum] = "847684cf5c10de1dc34145078af3fcf6e0d168ba98c14f1343b1062a4b569e88"
- 
--- 
-1.9.1
-
+Alex
 
