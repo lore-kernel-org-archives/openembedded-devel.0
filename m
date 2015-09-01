@@ -1,24 +1,33 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FA1F76F8C
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B17676A51
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Sep 2015 07:59:59 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t81800G8009774
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  1 Sep 2015 08:37:39 +0000 (UTC)
+Received: by wiclp12 with SMTP id lp12so22271942wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 1 Sep 2015 01:00:00 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.235.1; Tue, 1 Sep 2015 00:59:59 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 1 Sep 2015 15:55:13 +0800
-Message-ID: <1441094113-19351-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Tue, 01 Sep 2015 01:37:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=wF7v5X0Q+4fn54TjgwdhNnVmF3qdjx83eHuU/B3LVfQ=;
+	b=D01i58VWMCxhRIxNS3MZtigQjro8TvE/dyskmHf6lP9eweLiHlBIIxzmccSNfOWq7f
+	pbfKvCFFLKec7tXPqIvT0azX9u9YGmkZxTWX6SZOFDjaPqbVrVpwfXxS/mclurdNDxSd
+	SFlSGl2V1rZ3gMAA4B14JO8lJDEhbN1uehWeKJJjCZNwKM9X59y3ODcvfUZZhUbmenfJ
+	4JgOLUgksxHSlqQTNrrAv4ULzOOEVT+onSMYd9jw+TYj4alUjpomHvpPo0bWVmrOyAVe
+	858zVJOd/T/+VwB5DlekfNHn+8dWWpuDELrWIgpL3FhbQ8vHWFIVgXmyw+6/KTYSmC5v
+	zJiA==
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] lvm2: enable lvmetad
+X-Received: by 10.194.94.165 with SMTP id dd5mr9447775wjb.40.1441096658462;
+	Tue, 01 Sep 2015 01:37:38 -0700 (PDT)
+Received: by 10.28.64.196 with HTTP; Tue, 1 Sep 2015 01:37:38 -0700 (PDT)
+In-Reply-To: <BLU436-SMTP163EC5681882060DBD6E64ED66F0@phx.gbl>
+References: <BLU436-SMTP163EC5681882060DBD6E64ED66F0@phx.gbl>
+Date: Tue, 1 Sep 2015 10:37:38 +0200
+Message-ID: <CA+chaQfq8YcM-RXp-Z47qcbYDsi7jYUB-RYkpnG-QrwTuuiNAg@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-networking][PATCH] wolfssl: update version from 3.4.0 to 3.6.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,57 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2015 08:00:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 01 Sep 2015 08:37:42 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Roy Li <rongqing.li@windriver.com>
+You forgot to update the SRC_URI checksum.
 
-the systemd unit file of lvm2-monitor requires lvm2-lvmetad.socket which
-asks to enable lvmetad, lvmetad is a metadata caching daemon for LVM. so
-this fixed the below error:
-  # systemctl start lvm2-monitor
-  Failed to start lvm2-monitor.service: Unit lvm2-lvmetad.socket failed to load: No such file or directory.
-  #
+Please test it before sending.
 
-replace the installation of system unit file by make install_systemd_units
+On Thu, Aug 27, 2015 at 6:21 PM, LC Mac <lchristina26@hotmail.com> wrote:
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- meta-oe/recipes-support/lvm2/lvm2.inc | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index 099164c..2b2d8ed 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -24,6 +24,7 @@ EXTRA_OECONF = "--with-user= \
-                 --enable-udev_rules \
-                 --enable-pkgconfig \
-                 --enable-dmeventd \
-+                --enable-lvmetad \
-                 --with-udev-prefix= \
-                 --with-usrlibdir=${libdir} \
- "
-@@ -38,14 +39,13 @@ do_install_append() {
-     # Install machine specific configuration file
-     install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
-     sed -i -e 's:@libdir@:${libdir}:g' ${D}${sysconfdir}/lvm/lvm.conf
--    install -d ${D}${systemd_unitdir}/system
--    install -m 0644 ${B}/scripts/lvm2_monitoring_systemd_red_hat.service ${D}${systemd_unitdir}/system/lvm2-monitor.service
--    install -m 0644 ${B}/scripts/dm_event_systemd_red_hat.socket ${D}${systemd_unitdir}/system/dm-event.socket
--    install -m 0644 ${B}/scripts/dm_event_systemd_red_hat.service ${D}${systemd_unitdir}/system/dm-event.service
-+    oe_runmake 'DESTDIR=${D}' install install_systemd_units
-+    sed -i -e 's:/usr/bin/true:${base_bindir}/true:g' ${D}${systemd_unitdir}/system/blk-availability.service
- }
- 
- SYSTEMD_PACKAGES = "${PN}"
--SYSTEMD_SERVICE_${PN} = "lvm2-monitor.service dm-event.socket dm-event.service"
-+SYSTEMD_SERVICE_${PN} = "lvm2-monitor.service dm-event.socket dm-event.service lvm2-lvmetad.socket \
-+                         lvm2-pvscan@.service blk-availability.service"
- SYSTEMD_AUTO_ENABLE = "disable"
- 
- TARGET_CC_ARCH += "${LDFLAGS}"
--- 
-1.9.1
-
+> Updates include:
+> SSLv3 disabled by default
+> removed support for static cipher suites with PSK, RSA, ECDH
+>
+> Signed-off-by: lchristina26 <leah@wolfssl.com>
+> ---
+>  .../recipes-connectivity/wolfssl/{wolfssl_3.4.0.bb => wolfssl_3.6.6.bb}
+>  | 0
+>  1 file changed, 0 insertions(+), 0 deletions(-)
+>  rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_3.4.0.bb =>
+> wolfssl_3.6.6.bb} (100%)
+>
+> diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb
+> b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.6.6.bb
+> similarity index 100%
+> rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb
+> rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_3.6.6.bb
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
