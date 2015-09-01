@@ -1,52 +1,27 @@
-Return-Path: <anders@chargestorm.se>
-Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 945FF74197
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D931074197
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Sep 2015 06:36:58 +0000 (UTC)
-Received: by lbvd4 with SMTP id d4so36799363lbv.3
+	Tue,  1 Sep 2015 07:40:13 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t817eD3g028116
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2015 23:36:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
-	:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:organization:user-agent;
-	bh=402dkEYjUNj8DwzAIc8vHNCJlo0LvWwfs1nl1SR8t5w=;
-	b=b0g79WuiCRGiXzF80TolqcJ1EfGyWdAz+xXL0EPhpDaOTMW5MA0WJ1TCqjVcTXz9n2
-	nfCW256ABePj63LaCgYdS6eaCjVbJw0SmJxrfqA9RSLBhIipglm2AgxJluCkaoS1Nx9a
-	KuVJ88KvXk9ap2qnMY2tmAwk3taC/Prl2v4s1tEdi9DLaufOfKONxhFYTTK4lLM9TF3f
-	cXwBBEipHwdvMDuIgga3yELPVQisC+IMsSinuPCjQb4BaL2ydpY4HjgV2GziLaVemsLJ
-	3UxKc380LiARE0MHucnMKZWYuCSpOk61LDKHQrEIWeihcweJsb/iLC4XgU4YsJLb4Am6
-	iK3A==
-X-Gm-Message-State: ALoCoQmwLAk08V7Mv0CTOpKj+1HV/gBvLWtzCUHMuamuR1CZIo/Cdu3Zwm4uTa1s6Dw3w/WvyVsP
-X-Received: by 10.152.219.172 with SMTP id pp12mr12157608lac.17.1441089416643; 
-	Mon, 31 Aug 2015 23:36:56 -0700 (PDT)
-Received: from ad.chargestorm.se (h83-209-191-235.dynamic.se.alltele.net.
-	[83.209.191.235])
-	by smtp.gmail.com with ESMTPSA id g1sm4533805lam.30.2015.08.31.23.36.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 31 Aug 2015 23:36:55 -0700 (PDT)
-Date: Tue, 1 Sep 2015 08:36:53 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150901063653.GA29931@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1436147494-44348-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<20150831175844.GD2465@jama>
-	<CAJ86T=VFZXxLnoMQ7_xv3SZiqYrwwmKmTwss+0o+T=wk3ywi_Q@mail.gmail.com>
-	<CALbNGRQ_gWV_j01cwQCnCem7MNY_=tD55MJ8hsW_dLwfcFVByA@mail.gmail.com>
-	<CAJ86T=Wxf6PN+csum6CeyiC_keZtzG69VSQ8YFsA_x2kQh5zcw@mail.gmail.com>
+	Tue, 1 Sep 2015 00:40:13 -0700 (PDT)
+Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Tue, 1 Sep 2015 00:40:12 -0700
+Message-ID: <55E5565B.5050308@windriver.com>
+Date: Tue, 1 Sep 2015 15:40:11 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
 MIME-Version: 1.0
-In-Reply-To: <CAJ86T=Wxf6PN+csum6CeyiC_keZtzG69VSQ8YFsA_x2kQh5zcw@mail.gmail.com>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] parted_1.8.6.bb: add parted that not GPLv3
+To: <openembedded-devel@lists.openembedded.org>
+References: <1436234146-4895-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1436234146-4895-1-git-send-email-rongqing.li@windriver.com>
+Subject: Re: [PATCH][meta-networking][v3] squid: upgrade to 3.5.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,73 +35,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2015 06:37:00 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 01 Sep 2015 07:40:14 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-* Andre McCurdy <armccurdy@gmail.com> [150831 22:03]:
+ping
 
-> On Mon, Aug 31, 2015 at 12:38 PM, Andreas M=FCller
-> <schnitzeltony@googlemail.com> wrote:
-> > On Mon, Aug 31, 2015 at 9:11 PM, Andre McCurdy <armccurdy@gmail.com> wr=
-ote:
-> >> On Mon, Aug 31, 2015 at 10:58 AM, Martin Jansa <martin.jansa@gmail.com=
-> wrote:
-> >>> I cannot take this to meta-oe, because as soon as it's added there it
-> >>> will be used by all DISTROs even those who don't mind having GPLv3
-> >>> version.
+-Roy
 
-> >>> Everybody would need to define PREFERRED_VERSION, because
-> >>> DEFAULT_PREFERENCE is useless across different layers :/
-> >>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D2964
+On 2015年07月07日 09:55, rongqing.li@windriver.com wrote:
+> From: Roy Li <rongqing.li@windriver.com>
+>
+> 1. Remove the squid-change-ksh-referen*.patch which is not needed, since
+>     3.5.5 did not use ksh by default.
+> 2. Update the checksum of COPYING,since the date in it has been changed.
+> 3. Define BUILDCXXFLAGS, otherwise the target gcc options -std=c++11 will
+>     add into it, and lead to building failure since host gcc maybe not
+>     support "-std=c++11"
+> 4. Assume to support GNU atomic operations by default, the running check
+>     on cross-compile setup does not work
+> 5. Add the dependency on libpam
+>
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> ---
+>   ...ge-ksh-reference-in-krb-ldap-helper-to-sh.patch | 39 ----------------------
+>   .../squid/{squid_3.4.7.bb => squid_3.5.5.bb}       | 11 +++---
+>   2 files changed, 6 insertions(+), 44 deletions(-)
+>   delete mode 100644 meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
+>   rename meta-networking/recipes-daemons/squid/{squid_3.4.7.bb => squid_3.5.5.bb} (86%)
+>
+> diff --git a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch b/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
+> deleted file mode 100644
+> index 8e03860..0000000
+> --- a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
+> +++ /dev/null
+> @@ -1,39 +0,0 @@
+> -squid: change ksh reference in krb ldap helper to sh
+> -
+> -Very simple cert_tool script with no ksh specifics.
+> -Change it to use sh so a package dependency doesn't
+> -get created to ksh.
+> -
+> -Upstream-Status: Pending
+> -
+> -Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
+> -Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+> ----
+> - helpers/external_acl/kerberos_ldap_group/cert_tool | 6 +++---
+> - 1 file changed, 3 insertions(+), 3 deletions(-)
+> -
+> -diff --git a/helpers/external_acl/kerberos_ldap_group/cert_tool b/helpers/external_acl/kerberos_ldap_group/cert_tool
+> -index 9f14959..8c4ea11 100644
+> ---- a/helpers/external_acl/kerberos_ldap_group/cert_tool
+> -+++ b/helpers/external_acl/kerberos_ldap_group/cert_tool
+> -@@ -1,4 +1,4 @@
+> --#!/bin/ksh
+> -+#!/bin/sh
+> - #
+> - #  -----------------------------------------------------------------------------
+> - #
+> -@@ -64,9 +64,9 @@ QUIT
+> - # Create database for Sun ldap and pem file for Openldap
+> - #
+> - rm ${server}_[0-9]*.pem 2>/dev/null
+> --let i=0
+> -+i=0
+> -  ls ${server}_[0-9]*.cert | while read file; do
+> -- let i=i+1
+> -+ i=`expr $i + 1`
+> -  cat  $file  >> ${server}_$i.pem
+> -  CA=`openssl x509 -noout -text -in  ${server}_$i.pem | grep -i "CA:.*true"`
+> -  if [ -n "$CA" ]; then
+> ---
+> -1.9.1
+> -
+> diff --git a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+> similarity index 86%
+> rename from meta-networking/recipes-daemons/squid/squid_3.4.7.bb
+> rename to meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+> index 7b00dfc..198319d 100644
+> --- a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb
+> +++ b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+> @@ -16,19 +16,18 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
+>              file://Set-up-for-cross-compilation.patch \
+>              file://Skip-AC_RUN_IFELSE-tests.patch \
+>              file://Fix-flawed-dynamic-ldb-link-test-in-configure.patch \
+> -           file://squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch \
+>              file://squid-use-serial-tests-config-needed-by-ptest.patch \
+>              file://run-ptest \
+>              file://volatiles.03_squid \
+>   "
+>
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
+> -                    file://COPYRIGHT;md5=2900f50789c498be8e9f1eb23b55cbe9 \
+> +                    file://errors/COPYRIGHT;md5=0fed8f1462f6fdbc62bb431bcb618f46 \
+>                      "
+> -SRC_URI[md5sum] = "9951034b10f7ee0f45a95cfae61c57c2"
+> -SRC_URI[sha256sum] = "7b423f3d3495a317503ca559ea535f80445fd7c4e3c3e268cb7a8c97c61af2b6"
+> +SRC_URI[md5sum] = "6aac5c2e9cbbeabcbf2e9e49a178a931"
+> +SRC_URI[sha256sum] = "741c24a307c50f0d845d53cabb66b36d91ce9a73c8a165eae5def5e4d11e6a0d"
+>
+> -DEPENDS = "libtool krb5 openldap db cyrus-sasl"
+> +DEPENDS = "libtool krb5 openldap db cyrus-sasl libpam"
+>
+>   inherit autotools useradd ptest
+>
+> @@ -38,6 +37,8 @@ USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --she
+>   PACKAGECONFIG ??= ""
+>   PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
+>   EXTRA_OECONF += "--with-default-user=squid"
+> +export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
+> +CACHED_CONFIGUREVARS += "squid_cv_gnu_atomics=yes"
+>
+>   TESTDIR = "test-suite"
+>   do_compile_ptest() {
+>
 
-> >>> So this either has to be introduced in oe-core or in completely separ=
-ate
-> >>> layer which would be included only by those who cannot use GPLv3.
-
-I think that the correct way to handle those recipes (that isn't core
-enough to be kept in oe-core) is to create a new layer, maybe meta-gplv2
-or meta-nongplv3; dependig on how explicit the naming should be. This
-layer could very well be put in meta-openembedded (the meta layer, not
-meta-oe).
-
-> >> Third option would be to reduce the priority of meta-oe to be lower
-> >> than oe-core.
-
-> >> That seems logical regardless of any GPLv3 discussion - since meta-oe
-> >> "fills in the gaps" in oe-core, if something _is_ present in oe-core
-> >> then it probably should be the default version.
-
-> > This scares me: to get a recipe in with old version not supporting
-> > modern file systems you want to change meta-oe's layer priority
-> > risiking unknown issues. I wonder how far the GPLv3 avoidance hype
-> > takes us...
-
-> No, if you read the various threads, my preference is to have the
-> GPLv2 parted recipe in oe-core. That option has been shot down though
-> and the general consensus seems to be that the older version of parted
-> is too buggy to be included anywhere in OE. That topic seems to be
-> closed.
-
-> Trying to understand why meta-oe needs a higher priority than oe-core
-> is a separate topic. If the priorities were changed it would allow
-> older (and newer) versions of oe-core recipes to safely live in
-> meta-oe. That would help non-GPLv3 versions of GPLv3 packages, but it
-> might be useful in other cases too.
-
-Well, changing the priority might have effects on peoples current
-builds; most likely effects that you don't anticipate during an upgrade.
-
-And at least periodically, meta-oe has modified how recipes from oe-core
-has been built. Thus, the need for a higher priority of meta-oe as
-compared to oe-core. (I know that I've had to undo such changes in my
-own layers in older releases).
-
-Cheers,
-Anders
-
---=20
-Anders Darander
-ChargeStorm AB / eStorm AB
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
