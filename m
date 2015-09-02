@@ -1,40 +1,77 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-oi0-f41.google.com (mail-oi0-f41.google.com
-	[209.85.218.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 418587700B
+Return-Path: <samuli.piippo@theqtcompany.com>
+Received: from emea01-am1-obe.outbound.protection.outlook.com
+	(mail-am1on0136.outbound.protection.outlook.com [157.56.112.136])
+	by mail.openembedded.org (Postfix) with ESMTP id 14B1676FDE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Sep 2015 00:07:12 +0000 (UTC)
-Received: by oibi136 with SMTP id i136so9725490oib.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Sep 2015 17:07:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=oC3F2u4kFqjgzInjYeOhhPnKnjje6aflWq2PwHQslLc=;
-	b=bnTXQKmHs+BRyOwNP+T/cNRuYhgYo2GCHMBPWQ8Gmk027gGatpZt4TzG0/b21PORZu
-	jA9IfiYR0J8qeBDDAQ2nduvJojoRFNoh6UI9QYcj3WkEC1KHkXFtsGnHE3tc9LoNQl7f
-	3kPqRanlvhtJIU6zcfo7C7a0GBRC9LlXyZA7urqMozvyP3GzZitYW6PrSvzeXkVrCa3y
-	KzbWDU11/MaEbLP/rv84J6Mv+6zbgb5mq2J5uDgtdU10567narqgr+L/T/K8ZT6Hr8NZ
-	NClInZ1R5Rmo7Aib+SAPVkT9S7fabqK+3V02ZuAzbCOkOCxSEChyCzThSVN6F6Q2vjG8
-	sDkQ==
+	Wed,  2 Sep 2015 09:29:16 +0000 (UTC)
+Authentication-Results: spf=none (sender IP is )
+	smtp.mailfrom=samuli.piippo@theqtcompany.com; 
+Received: from piippo.it.local (91.217.248.11) by
+	DB5PR02MB1175.eurprd02.prod.outlook.com (10.162.163.21) with Microsoft
+	SMTP Server (TLS) id 15.1.256.15; Wed, 2 Sep 2015 09:29:14 +0000
+From: Samuli Piippo <samuli.piippo@theqtcompany.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 2 Sep 2015 12:28:55 +0300
+Message-ID: <1441186136-13539-1-git-send-email-samuli.piippo@theqtcompany.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Received: by 10.202.198.131 with SMTP id w125mr7560056oif.10.1441152431906; 
-	Tue, 01 Sep 2015 17:07:11 -0700 (PDT)
-Received: by 10.202.6.72 with HTTP; Tue, 1 Sep 2015 17:07:11 -0700 (PDT)
-In-Reply-To: <20150901220720.GG2458@jama>
-References: <1436147494-44348-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<20150831175844.GD2465@jama>
-	<CAJ86T=VFZXxLnoMQ7_xv3SZiqYrwwmKmTwss+0o+T=wk3ywi_Q@mail.gmail.com>
-	<CALbNGRQ_gWV_j01cwQCnCem7MNY_=tD55MJ8hsW_dLwfcFVByA@mail.gmail.com>
-	<CAJ86T=Wxf6PN+csum6CeyiC_keZtzG69VSQ8YFsA_x2kQh5zcw@mail.gmail.com>
-	<20150901063653.GA29931@ad.chargestorm.se>
-	<CAJ86T=XmrpVAhz5nr-+KJbc+Fcn3=sS6Y5xVTAi1Dbd+NTvK4Q@mail.gmail.com>
-	<20150901220720.GG2458@jama>
-Date: Tue, 1 Sep 2015 17:07:11 -0700
-Message-ID: <CAJ86T=W4ohCWdFMiUDuR0VV-KuL28Dy-ZJ9-nMRBuCJUuVeu6g@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] parted_1.8.6.bb: add parted that not GPLv3
+X-Originating-IP: [91.217.248.11]
+X-ClientProxiedBy: AM2PR03CA0025.eurprd03.prod.outlook.com (25.160.207.35) To
+	DB5PR02MB1175.eurprd02.prod.outlook.com (25.162.163.21)
+X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1175;
+	2:g7+tld4/c/GloA+ZV9bepwwLhjym0gDzXBu3nZh8kOG5hEd5QZWpAgtZlAJY9TLzY8dfoYhG6NDcZJjTeJgqG2ycRbOu8HymGmU/0UAA3Ud73Cj00zZcclsPhZHGdOP43nlkj4w+0wae/P+ItSoNeD+2748eg6fsX5IFOAL9u30=;
+	3:b7gZSYUP1z/TobsEsebE0q59BrobSAR/NQSNy4tvJMr0A07Wtq9dImqucFLu/RqJf/5VipbFM/LweQDzNp46oUgx13iAewL9SCvkAowAK2l5BY3tWbzdnVGs/tnDCw2NRvUZoVIbuMAOoe+izExxlA==;
+	25:vawv8057rarW8eCl3nLOmnOKtkgPl/7QcGIVnz5m+IozqNMXLDu9/YfqwQtB0nx3hYjF8V4IikiD9x7Jn9JelcsIw89X+ZOJK5UUGX2rRej3nnE9qPOw4ohROx0OTTSoE/5V+IIn4EWjcZMvr6FTe+8Ui/jJObDTR7cXe90kNeJ4YrzYwRfIyGhimVj1jKzjUcgdK9oBj5zDnaUT27EiZo8uyBlqIEtuKCYlB+U90aq2Q5AWHUF9pfLvwDnzzLfAtxaYk/24pkum3j7SdpPPBA==
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DB5PR02MB1175;
+X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1175;
+	20:gGdgv7VF1kjvayU82PBO0GfKnzKCkRjByUYhCkKQ+nfz4EUei5wsMI4lyoYUW/FIY5rsyCZRACXIM1so2GnfPb6YxMciBuR1+rtMrJv5ji7vRpvVaYlWmuIS8DW9xY+mWyHw2hF+ArRNakL41P3j7MevkdnMvoe9yyCVyqT5wb99u86r0yhwepZBp2GuUm8VN5guEJ32Kr26DrdH4ImsLpXe3Z+FPFgRLIx2c9r7sk0SQYRYY6HMcwaBtll/rCArZLnr9nnMsby4YxfmJrl22pBc0yIePofoeP5KbeWe/b25bJP1dTwad+BI1INUT7y6omjutI0eOdoc5LA6jIf/YNOLLW29k8SABuyYP5vfRzY/6QQEMo6Kc22N/7GqZ4EXvaKQADn2zUioW+NRXUPluMp2Gm8hJuR7YFcso4Azmd6zkTxyjRzK0cyDg1Zr/HxseZGULm9SQv3PM8g41TXzklrshyHQKUN1H4OCqYsmJ1PMn33fksjEN6g4/3eUfxhz;
+	4:Os78gwzbWpTcmMWVEkNbuLaKgezDpN1G7pY3x6ZcdXbLW4U1ataVZO8fggKbFYXC91RJJPgbWFYYtbqps2Ezqp9rfQPCtIPdPyeTPu4BvPJKuYX964KL1Qs9LR0gk9kbcAHskxwmqxpKwBDWDxV1RqL/sx90BB0eT/Pp0QA5sKaiGUEEFFWNd+VsbUOV0ySn8Etty2q+p/7f8wZ4Nwr0XHMlxHwocWTW433+YKaC1P6vRIOXAKGuBAninbS0mioAS+xJM0nk7lh/FygqPfUa96W4eBLh9tjM1oiIj61I9+V18h8Qz6PWwXFZbR9IJwjV
+X-Microsoft-Antispam-PRVS: <DB5PR02MB117520EB612B0F92F0B8F7DF90690@DB5PR02MB1175.eurprd02.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(601004)(8121501046)(5005006)(3002001);
+	SRVR:DB5PR02MB1175; BCL:0; PCL:0; RULEID:; SRVR:DB5PR02MB1175; 
+X-Forefront-PRVS: 0687389FB0
+X-Forefront-Antispam-Report: SFV:NSPM;
+	SFS:(10019020)(6009001)(199003)(189002)(50226001)(86362001)(48376002)(47776003)(5003940100001)(97736004)(19580395003)(5001960100002)(19580405001)(189998001)(50466002)(105586002)(229853001)(450100001)(46102003)(106356001)(64706001)(92566002)(77156002)(4001540100001)(66066001)(5001920100001)(33646002)(101416001)(68736005)(81156007)(50986999)(77096005)(110136002)(107886002)(5001830100001)(5001860100001)(122386002)(42186005)(87976001)(2351001)(62966003)(40100003)(5004730100002)(36756003)(5007970100001)(7099028)(4001430100001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:DB5PR02MB1175; H:piippo.it.local;
+	FPR:; SPF:None; PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
+Received-SPF: None (protection.outlook.com: theqtcompany.com does not
+	designate permitted sender hosts)
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DB5PR02MB1175;
+	23:JTwspXFzWWDPi34La0KCyBEJkkRQaY75tsXrzKrb5?=
+	=?us-ascii?Q?JkUMX7RMRUIFnztZZAhpRdi4RyyKYwz/xtE97f/hR8+GS+D7oTxJJ1/t0cb9?=
+	=?us-ascii?Q?70Z7WO3D2vC2VKYXSM4MccddpAhOkqpW6JiZYLFaq0aDrNZsg5f8Jw9YU+ki?=
+	=?us-ascii?Q?Vic0T2e5LAyCocn0d6o9Hop3uVUCyk13p0CXBVWDKQMBtm+2aHzD1Vb+EQs1?=
+	=?us-ascii?Q?o2TQ8CuNWWUgGYO4ePRC9C5FaYjzBSQF35KvoZ2NbTfNPCi3fSxKGs1aLvqI?=
+	=?us-ascii?Q?kl0IXna3xAc+KAgLkfXgaJe1W7Bv+DwTwQnT7uumIoKs0/BlA3f+aL/5iPUf?=
+	=?us-ascii?Q?BaYcwebOivFTYRbl5L/Eq7D70S+g33DBI+ocQ0iZK1z6JvMZr+0rWQfAMfXB?=
+	=?us-ascii?Q?w8tixF/Ryx6sNLDc/DWuafkHTQrWYdFJZQxTn1Zlf68MCUKjVcxKNvz1rBO+?=
+	=?us-ascii?Q?HBvh+Ej4N3/yXFHnbSpbNhtsWF/VBInW/qVhuLJIw9RAWXw1ANrtGOLx1s/j?=
+	=?us-ascii?Q?bV/l9Ki7ZdeHnAlq+2Ex4V/youEK9QpOOClIALDGd/jEGw6VNVxsaG+tygAK?=
+	=?us-ascii?Q?U9DVNSZzSRbnHZrfdz/A3TvZc0188EWnOYfsQPfb5ioP4XHaPa+b1/fgqHRF?=
+	=?us-ascii?Q?9l5EVgbmGpg6UhGy+NowGjF7ajQstE8lf0++FzKnBx13KOnavINLHng4ZLw7?=
+	=?us-ascii?Q?75W7/EcdeUIaX0/V7ix2pn3sAz9XczBaPTbcvQdkiXh3gRWVXR9YRq7fko+/?=
+	=?us-ascii?Q?kvzZh7C866p01Kj1CSfsj7icmuunoffa5sB7LZx44CZdqQYzBwegthMe2NJD?=
+	=?us-ascii?Q?jLmDSbbAs7p8QzMrB5VbWl9Gl424NhHhiW02Zdj3d8DVyEntWL6FreTcHKR4?=
+	=?us-ascii?Q?nk538IpZM350umTiwDyotTQZXm/BI7A+YOVxpcoNJCbqqktosvhICYTYi+sB?=
+	=?us-ascii?Q?KlFVWhr7fjyKVfI5EDtmcZsFgIQYB7m+jVK90yA9ImFfiw/ptw1iG4NlRhGE?=
+	=?us-ascii?Q?5OCrLfXZoH6KABdTZl5PQYgjCrEj4XtiSfMVZMcBxBgPyNAjrt7X3hQgo+Yl?=
+	=?us-ascii?Q?09OApXcBPjkC9kLSA7U12Zj+ED7qCn3rkmRJPrOhIWG3bUxLWfQ24Tti7g22?=
+	=?us-ascii?Q?8ppVg+Wc3CDllSDJhrZ+Aldy6HBcdv4yLqn3hKErc00KR8tj+Fdqzlf3WN3x?=
+	=?us-ascii?Q?aYXqEYal11Cz0ixtNt/8zswdR4Hfv7gfrP6NXx7H64vUD+qdtKHLvHjlDeTv?=
+	=?us-ascii?Q?926Q211MUJ38x/6DJs=3D?=
+X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1175;
+	5:NT6EqiNzQiB+mpFCLK/bACc7Tj/88bh/gp/ZOnKphDVTyom9KEdAK9477Kl3QtNhnl1tBiIXS7L3T+VoDPUzWRiAm4lkdtlat4SH4YaIqjwBIYYoSOz61Zv6hm/fg5XMkRs2bATRAp4mfMnHmdBcMA==;
+	24:34S3M/Ur+V1Fpm1OyX0H8m8/S5aQgEy3lLZu6TFUjnYEX6UvVkGOpDxS8IBTY8Wsec35ogjHu2IjX9Malt0/N80Yk1+P6Prr2PrUii4DLDg=;
+	20:+2yFbEc07eWJ/zvO3kAbJKqHm+YsB8cU++qu9Zsojek6/D5XwITHZvAXBv59Tmty7WfwbaW74ihk/fZeD9nUzg==
+SpamDiagnosticOutput: 1:23
+SpamDiagnosticMetadata: NSPM
+X-OriginatorOrg: theqtcompany.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2015 09:29:14.4637 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR02MB1175
+Subject: [meta-qt5][PATCH 1/2] qt5: make populate_sdk_qt5 reusable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,146 +85,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Sep 2015 00:07:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 02 Sep 2015 09:29:22 -0000
+Content-Type: text/plain
 
-On Tue, Sep 1, 2015 at 3:07 PM, Martin Jansa <martin.jansa@gmail.com> wrote=
-:
-> On Tue, Sep 01, 2015 at 02:57:29PM -0700, Andre McCurdy wrote:
->> On Mon, Aug 31, 2015 at 11:36 PM, Anders Darander <anders@chargestorm.se=
-> wrote:
->> > * Andre McCurdy <armccurdy@gmail.com> [150831 22:03]:
->> >
->> >> On Mon, Aug 31, 2015 at 12:38 PM, Andreas M=C3=BCller
->> >> <schnitzeltony@googlemail.com> wrote:
->> >> > On Mon, Aug 31, 2015 at 9:11 PM, Andre McCurdy <armccurdy@gmail.com=
-> wrote:
->> >> >> On Mon, Aug 31, 2015 at 10:58 AM, Martin Jansa <martin.jansa@gmail=
-.com> wrote:
->> >> >>> I cannot take this to meta-oe, because as soon as it's added ther=
-e it
->> >> >>> will be used by all DISTROs even those who don't mind having GPLv=
-3
->> >> >>> version.
->> >
->> >> >>> Everybody would need to define PREFERRED_VERSION, because
->> >> >>> DEFAULT_PREFERENCE is useless across different layers :/
->> >> >>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D2964
->> >
->> >> >>> So this either has to be introduced in oe-core or in completely s=
-eparate
->> >> >>> layer which would be included only by those who cannot use GPLv3.
->> >
->> > I think that the correct way to handle those recipes (that isn't core
->> > enough to be kept in oe-core) is to create a new layer, maybe meta-gpl=
-v2
->> > or meta-nongplv3; dependig on how explicit the naming should be. This
->> > layer could very well be put in meta-openembedded (the meta layer, not
->> > meta-oe).
->> >
->> >> >> Third option would be to reduce the priority of meta-oe to be lowe=
-r
->> >> >> than oe-core.
->> >
->> >> >> That seems logical regardless of any GPLv3 discussion - since meta=
--oe
->> >> >> "fills in the gaps" in oe-core, if something _is_ present in oe-co=
-re
->> >> >> then it probably should be the default version.
->> >
->> >> > This scares me: to get a recipe in with old version not supporting
->> >> > modern file systems you want to change meta-oe's layer priority
->> >> > risiking unknown issues. I wonder how far the GPLv3 avoidance hype
->> >> > takes us...
->> >
->> >> No, if you read the various threads, my preference is to have the
->> >> GPLv2 parted recipe in oe-core. That option has been shot down though
->> >> and the general consensus seems to be that the older version of parte=
-d
->> >> is too buggy to be included anywhere in OE. That topic seems to be
->> >> closed.
->> >
->> >> Trying to understand why meta-oe needs a higher priority than oe-core
->> >> is a separate topic. If the priorities were changed it would allow
->> >> older (and newer) versions of oe-core recipes to safely live in
->> >> meta-oe. That would help non-GPLv3 versions of GPLv3 packages, but it
->> >> might be useful in other cases too.
->> >
->> > Well, changing the priority might have effects on peoples current
->> > builds; most likely effects that you don't anticipate during an upgrad=
-e.
->> >
->> > And at least periodically, meta-oe has modified how recipes from oe-co=
-re
->> > has been built. Thus, the need for a higher priority of meta-oe as
->> > compared to oe-core. (I know that I've had to undo such changes in my
->> > own layers in older releases).
->>
->> Maybe just a personal preference, but I think completely replacing a
->> recipe is a hackish approach best reserved for private layers. Giving
->> meta-oe a higher priority wouldn't be needed if the oe-core recipes
->> were modified via a .bbappend or by getting the meta-oe tweaks merged
->> into oe-core. I don't know the history though. Maybe there are reasons
->> why this hasn't been possible.
->>
->> According to bitbake-layers, the current list of oe-core recipes which
->> are over-ridden by meta-oe is quite short though:
->>
->> iso-codes:
->>   meta-oe              1.4
->>   meta                 3.58
->> libcap-ng:
->>   meta-oe              0.7.7
->>   meta                 0.7.7
->> nativesdk-swig:
->>   meta-oe              3.0.6
->>   meta                 3.0.6
->> xserver-nodm-init:
->>   meta-oe              2.0
->>   meta                 1.0
->>
->> The first 3 are transient (the oe-core versions were recently added
->> and the meta-oe versions can be removed). Having meta-oe over-ride
->> oe-core isn't necessary or helpful for these recipes.
->
-> Yes, that's why I'm asking people migrating recipes to oe-core to send
-> removal patch to meta-oe (while verifying that what they migrated wasn't
-> modified in meta-oe after they created their copy) - some people do it
-> some don't.
+Split the populate_sdk_qt5 bbclass into two parts, where the generation
+of qt.conf is moved to a new base bbclass. It is reusable in toolchain
+meta recipes that use different tasks than meta-toolchain-qt5.
 
-Yes. If a recipe gets merged into oe-core and updated and the meta-oe
-removal patch is slow to be sent out then, due to the layer priority,
-it's the meta-oe users who suffer. That transition phase uncertainty
-would go away if meta-oe were a lower priority than oe-core.
+Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
+---
+ classes/populate_sdk_qt5.bbclass      | 34 ++--------------------------------
+ classes/populate_sdk_qt5_base.bbclass | 31 +++++++++++++++++++++++++++++++
+ 2 files changed, 33 insertions(+), 32 deletions(-)
+ create mode 100644 classes/populate_sdk_qt5_base.bbclass
 
->> I'm not sure what's going on with xserver-nodm-init. Both versions are
->> being updated independently but it looks like they could be unified
->> with minor changes.
->
-> Not minor changes, there is long ticket in bugzilla mostly related to
-> x11-common xserver-common, which result in this xserver-nodm-init
-> difference.
+diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.bbclass
+index 149a448..bbf137d 100644
+--- a/classes/populate_sdk_qt5.bbclass
++++ b/classes/populate_sdk_qt5.bbclass
+@@ -1,38 +1,8 @@
+ # Copyright (C) 2014 O.S. Systems Software LTDA.
+ 
++inherit populate_sdk_qt5_base
++
+ TOOLCHAIN_HOST_TASK += "nativesdk-packagegroup-qt5-toolchain-host"
+ TOOLCHAIN_TARGET_TASK += "packagegroup-qt5-toolchain-target"
+ 
+-# This allow reuse of Qt paths
+-inherit qmake5_paths
+-
+-create_sdk_files_prepend () {
+-    # make a symbolic link to mkspecs for compatibility with QTCreator
+-    (cd ${SDK_OUTPUT}/${SDKPATHNATIVE}; \
+-         ln -sf ${SDKTARGETSYSROOT}${libdir}/${QT_DIR_NAME}/mkspecs mkspecs;)
+-
+-    # Generate a qt.conf file to be deployed with the SDK
+-    qtconf=${SDK_OUTPUT}/${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf
+-    touch $qtconf
+-    echo '[Paths]' >> $qtconf
+-    echo 'Prefix = ${OE_QMAKE_PATH_PREFIX}' >> $qtconf
+-    echo 'Headers = ${OE_QMAKE_PATH_QT_HEADERS}' >> $qtconf
+-    echo 'Libraries = ${OE_QMAKE_PATH_LIBS}' >> $qtconf
+-    echo 'ArchData = ${OE_QMAKE_PATH_QT_ARCHDATA}' >> $qtconf
+-    echo 'Data = ${OE_QMAKE_PATH_QT_DATA}' >> $qtconf
+-    echo 'Binaries = ${OE_QMAKE_PATH_QT_BINS}' >> $qtconf
+-    echo 'LibraryExecutables = ${OE_QMAKE_PATH_LIBEXECS}' >> $qtconf
+-    echo 'Plugins = ${OE_QMAKE_PATH_PLUGINS}' >> $qtconf
+-    echo 'Imports = ${OE_QMAKE_PATH_IMPORTS}' >> $qtconf
+-    echo 'Qml2Imports = ${OE_QMAKE_PATH_QML}' >> $qtconf
+-    echo 'Translations = ${OE_QMAKE_PATH_QT_TRANSLATIONS}' >> $qtconf
+-    echo 'Documentation = ${OE_QMAKE_PATH_QT_DOCS}' >> $qtconf
+-    echo 'Settings = ${OE_QMAKE_PATH_QT_SETTINGS}' >> $qtconf
+-    echo 'Examples = ${OE_QMAKE_PATH_QT_EXAMPLES}' >> $qtconf
+-    echo 'Tests = ${OE_QMAKE_PATH_QT_TESTS}' >> $qtconf
+-    echo 'HostPrefix = ${SDKPATHNATIVE}' >> $qtconf
+-    echo 'HostBinaries = ${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}' >> $qtconf
+-    echo 'Sysroot = ${SDKTARGETSYSROOT}' >> $qtconf
+-}
+-
+ FEATURE_PACKAGES_qtcreator-debug = "packagegroup-qt5-qtcreator-debug"
+diff --git a/classes/populate_sdk_qt5_base.bbclass b/classes/populate_sdk_qt5_base.bbclass
+new file mode 100644
+index 0000000..4a1eed3
+--- /dev/null
++++ b/classes/populate_sdk_qt5_base.bbclass
+@@ -0,0 +1,31 @@
++# This allow reuse of Qt paths
++inherit qmake5_paths
++
++create_sdk_files_prepend () {
++    # make a symbolic link to mkspecs for compatibility with QTCreator
++    (cd ${SDK_OUTPUT}/${SDKPATHNATIVE}; \
++         ln -sf ${SDKTARGETSYSROOT}${libdir}/${QT_DIR_NAME}/mkspecs mkspecs;)
++
++    # Generate a qt.conf file to be deployed with the SDK
++    qtconf=${SDK_OUTPUT}/${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf
++    touch $qtconf
++    echo '[Paths]' >> $qtconf
++    echo 'Prefix = ${OE_QMAKE_PATH_PREFIX}' >> $qtconf
++    echo 'Headers = ${OE_QMAKE_PATH_QT_HEADERS}' >> $qtconf
++    echo 'Libraries = ${OE_QMAKE_PATH_LIBS}' >> $qtconf
++    echo 'ArchData = ${OE_QMAKE_PATH_QT_ARCHDATA}' >> $qtconf
++    echo 'Data = ${OE_QMAKE_PATH_QT_DATA}' >> $qtconf
++    echo 'Binaries = ${OE_QMAKE_PATH_QT_BINS}' >> $qtconf
++    echo 'LibraryExecutables = ${OE_QMAKE_PATH_LIBEXECS}' >> $qtconf
++    echo 'Plugins = ${OE_QMAKE_PATH_PLUGINS}' >> $qtconf
++    echo 'Imports = ${OE_QMAKE_PATH_IMPORTS}' >> $qtconf
++    echo 'Qml2Imports = ${OE_QMAKE_PATH_QML}' >> $qtconf
++    echo 'Translations = ${OE_QMAKE_PATH_QT_TRANSLATIONS}' >> $qtconf
++    echo 'Documentation = ${OE_QMAKE_PATH_QT_DOCS}' >> $qtconf
++    echo 'Settings = ${OE_QMAKE_PATH_QT_SETTINGS}' >> $qtconf
++    echo 'Examples = ${OE_QMAKE_PATH_QT_EXAMPLES}' >> $qtconf
++    echo 'Tests = ${OE_QMAKE_PATH_QT_TESTS}' >> $qtconf
++    echo 'HostPrefix = ${SDKPATHNATIVE}' >> $qtconf
++    echo 'HostBinaries = ${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}' >> $qtconf
++    echo 'Sysroot = ${SDKTARGETSYSROOT}' >> $qtconf
++}
+-- 
+1.9.1
 
-I found this. Is that the one you mean?
-
-  https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D5546
-
-Anyway, I don't use X11 and I don't know the history here so I'm
-probably over-simplifying. My comment was only based on the fact that
-xserver-nodm-init is a ~70 line script and the x11-common -vs-
-xserver-common differences could be handled via a conditional test in
-the script. Not ideal but perhaps better than maintaining two
-independent forks of xserver-nodm-init.
-
-
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
