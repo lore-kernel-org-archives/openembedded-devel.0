@@ -1,48 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
-	[209.85.220.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 87E4A76FDE
+Return-Path: <kergoth@gmail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 99C1B7701C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Sep 2015 00:00:10 +0000 (UTC)
-Received: by padhy1 with SMTP id hy1so11504276pad.1
+	Wed,  2 Sep 2015 00:04:23 +0000 (UTC)
+Received: by padhy1 with SMTP id hy1so11617807pad.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Sep 2015 17:00:11 -0700 (PDT)
+	Tue, 01 Sep 2015 17:04:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=agdSkWJZp9JJfVpIonFZklLiOdWpLa+WCVTG7L+b6tM=;
-	b=adXtJ0aiLueLXWTgsstodz4LrvtAwI7xkGDp3cg6muFNLrYMQOZ2vOCu9d/DfZn3O/
-	5t5IIgRNsgrsHlJneQJcjYnzVmauOPjMYZdv31Y3sBbCWfW7zGopk5RFTjLWL5WYQ/+s
-	DoUn+9908MSDbWSgh9hiMdfp1dCJF0ku19FaZO+doAbq0RsRf6ebYZTFeF/hS1jPjeFy
-	F8FXojJF5kJx7X+sxq4roolUb+gSVdd1MmhhkN0t3L6XBujyfj3WTOWc9SCErZbFOuWE
-	u7yhR+PEF5TY7IzvmSTdCcNtzNzcvzHcnuAc+b4Lu8UzBKpd078hcqGyhWiyg7Fp5j1v
-	i9Wg==
-X-Received: by 10.68.190.227 with SMTP id gt3mr47220944pbc.102.1441152011477; 
-	Tue, 01 Sep 2015 17:00:11 -0700 (PDT)
-Received: from ?IPv6:2601:646:8601:4580:49fd:b69d:583d:d543?
-	([2601:646:8601:4580:49fd:b69d:583d:d543])
+	h=from:to:cc:subject:date:message-id;
+	bh=WNYAH0dmcNIfNBFaIxvSKwrvMaQB40jYon+/61UApL8=;
+	b=M/ALQ18Q0XXZF4Eg/Ol4cQGQQ9PN+Mo42cy0wO6zuY4lABJQh1PjeCOChz3pEVJj7f
+	AAdxjhFMa7jay4JRZAfOc9mAXG4HVf31qglD+TfjxnC0ZcmU1D21FXqOkd9IquBADcuS
+	Z7RFHmo/2TLxM/hYGYnX8GXTBeLIXsv/XVhttyNrpCgYf7UMyLCOqBgIsFlv2b8CVotv
+	dSzIxe9fMx3WQEOfmsUFHfM443HnqgZ2zx1ip3Fi+tNEJ9T2S47VJ8iIclp+xOqoD4dv
+	jXPyu6aUZUnPOO8K6PIPDKaJs4RUcteqft/pGOmpPnbuSbpIonYa+t/J5MJvBYssmyKO
+	EchQ==
+X-Received: by 10.67.30.232 with SMTP id kh8mr51612452pad.36.1441152263344;
+	Tue, 01 Sep 2015 17:04:23 -0700 (PDT)
+Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
 	by smtp.gmail.com with ESMTPSA id
-	bh5sm11753184pbc.5.2015.09.01.17.00.09
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 01 Sep 2015 17:00:10 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-X-Pgp-Agent: GPGMail 2.5.1
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20150901220720.GG2458@jama>
-Date: Tue, 1 Sep 2015 17:00:08 -0700
-Message-Id: <95980240-0D69-4BF7-93B5-3E4BA34D2D1F@gmail.com>
-References: <1436147494-44348-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<20150831175844.GD2465@jama>
-	<CAJ86T=VFZXxLnoMQ7_xv3SZiqYrwwmKmTwss+0o+T=wk3ywi_Q@mail.gmail.com>
-	<CALbNGRQ_gWV_j01cwQCnCem7MNY_=tD55MJ8hsW_dLwfcFVByA@mail.gmail.com>
-	<CAJ86T=Wxf6PN+csum6CeyiC_keZtzG69VSQ8YFsA_x2kQh5zcw@mail.gmail.com>
-	<20150901063653.GA29931@ad.chargestorm.se>
-	<CAJ86T=XmrpVAhz5nr-+KJbc+Fcn3=sS6Y5xVTAi1Dbd+NTvK4Q@mail.gmail.com>
-	<20150901220720.GG2458@jama>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.2104)
-Subject: Re: [meta-oe][PATCH] parted_1.8.6.bb: add parted that not GPLv3
+	sr4sm19569486pab.26.2015.09.01.17.04.22
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 01 Sep 2015 17:04:22 -0700 (PDT)
+From: Christopher Larson <kergoth@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  1 Sep 2015 17:04:20 -0700
+Message-Id: <1441152260-9733-1-git-send-email-kergoth@gmail.com>
+X-Mailer: git-send-email 2.2.1
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-oe][PATCH] iw: remove, this is now in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,85 +43,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Sep 2015 00:00:14 -0000
-X-Groupsio-MsgNum: 57167
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_34BF78A8-97A5-4488-866E-936A70AB8E47";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Wed, 02 Sep 2015 00:04:23 -0000
 
---Apple-Mail=_34BF78A8-97A5-4488-866E-936A70AB8E47
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=windows-1252
+From: Christopher Larson <chris_larson@mentor.com>
+
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+---
+ ....sh-don-t-use-git-describe-for-versioning.patch | 43 ----------------------
+ meta-oe/recipes-connectivity/iw/iw_4.1.bb          | 23 ------------
+ 2 files changed, 66 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch
+ delete mode 100644 meta-oe/recipes-connectivity/iw/iw_4.1.bb
+
+diff --git a/meta-oe/recipes-connectivity/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch b/meta-oe/recipes-connectivity/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch
+deleted file mode 100644
+index e64dd0a..0000000
+--- a/meta-oe/recipes-connectivity/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch
++++ /dev/null
+@@ -1,43 +0,0 @@
+-From 5310abba864cfe3a8b65af130729447604190b29 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Tue, 29 Nov 2011 17:03:27 +0100
+-Subject: [PATCH] iw: version.sh: don't use git describe for versioning
+-
+-It will detect top-level git repositories like the Angstrom setup-scripts and break.
+-
+-Upstream-Status: Unknown
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- version.sh | 16 +---------------
+- 1 file changed, 1 insertion(+), 15 deletions(-)
+-
+-diff --git a/version.sh b/version.sh
+-index 11d124b..5d423c4 100755
+---- a/version.sh
+-+++ b/version.sh
+-@@ -3,21 +3,7 @@
+- VERSION="3.15"
+- OUT="$1"
+- 
+--if [ -d .git ] && head=`git rev-parse --verify HEAD 2>/dev/null`; then
+--	git update-index --refresh --unmerged > /dev/null
+--	descr=$(git describe)
+--
+--	# on git builds check that the version number above
+--	# is correct...
+--	[ "${descr%%-*}" = "v$VERSION" ] || exit 2
+--
+--	v="${descr#v}"
+--	if git diff-index --name-only HEAD | read dummy ; then
+--		v="$v"-dirty
+--	fi
+--else
+--	v="$VERSION"
+--fi
+-+v="$VERSION"
+- 
+- echo '#include "iw.h"' > "$OUT"
+- echo "const char iw_version[] = \"$v\";" >> "$OUT"
+--- 
+-1.7.7.3
+diff --git a/meta-oe/recipes-connectivity/iw/iw_4.1.bb b/meta-oe/recipes-connectivity/iw/iw_4.1.bb
+deleted file mode 100644
+index e1e7c12..0000000
+--- a/meta-oe/recipes-connectivity/iw/iw_4.1.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-SUMMARY = "nl80211 based CLI configuration utility for wireless devices"
+-DESCRIPTION = "iw is a new nl80211 based CLI configuration utility for \
+-wireless devices. It supports almost all new drivers that have been added \
+-to the kernel recently. "
+-HOMEPAGE = "http://wireless.kernel.org/en/users/Documentation/iw"
+-SECTION = "base"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
+-
+-DEPENDS = "libnl pkgconfig"
+-
+-SRC_URI = "http://www.kernel.org/pub/software/network/iw/${BP}.tar.gz \
+-           file://0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch \
+-"
+-
+-SRC_URI[md5sum] = "68c282285c71c956069957e9ca10a6a7"
+-SRC_URI[sha256sum] = "14bfc627b37f7f607e4ffa63a70ded15fa2ea85177f703cb17d7fe36f9c8f33d"
+-
+-EXTRA_OEMAKE = ""
+-
+-do_install() {
+-    oe_runmake DESTDIR=${D} install
+-}
+-- 
+2.2.1
 
 
-
-> On Sep 1, 2015, at 3:07 PM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
->=20
->>=20
->> According to bitbake-layers, the current list of oe-core recipes =
-which
->> are over-ridden by meta-oe is quite short though:
->>=20
->> iso-codes:
->>  meta-oe              1.4
->>  meta                 3.58
->> libcap-ng:
->>  meta-oe              0.7.7
->>  meta                 0.7.7
->> nativesdk-swig:
->>  meta-oe              3.0.6
->>  meta                 3.0.6
->> xserver-nodm-init:
->>  meta-oe              2.0
->>  meta                 1.0
->>=20
->> The first 3 are transient (the oe-core versions were recently added
->> and the meta-oe versions can be removed). Having meta-oe over-ride
->> oe-core isn't necessary or helpful for these recipes.
->=20
-> Yes, that's why I'm asking people migrating recipes to oe-core to send
-> removal patch to meta-oe (while verifying that what they migrated =
-wasn't
-> modified in meta-oe after they created their copy) - some people do it
-> some don=92t.
-
-I think such migration to other layer patches should be held from new =
-target layer until the removal patches are
-also available on the mailing list. So this activity can be done =
-synchronously. Layer maintainers should take note
-of such changes and advise the developers to do the needed. Please reply =
-with comments to such patches on mailing lists
-to raise the awareness.
-
->=20
->> I'm not sure what's going on with xserver-nodm-init. Both versions =
-are
->> being updated independently but it looks like they could be unified
->> with minor changes.
->=20
-> Not minor changes, there is long ticket in bugzilla mostly related to
-> x11-common xserver-common, which result in this xserver-nodm-init
-> difference.
->=20
-> Regards,
-
-
---Apple-Mail=_34BF78A8-97A5-4488-866E-936A70AB8E47
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlXmPAgACgkQuwUzVZGdMxQHGgCeLs+NpqDFYMGsWJVj3SMWjoaH
-tcAAn2AHul4QtUz7l8Z1PRzSBhhiNWsk
-=YU3x
------END PGP SIGNATURE-----
-
---Apple-Mail=_34BF78A8-97A5-4488-866E-936A70AB8E47--
