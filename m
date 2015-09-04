@@ -1,34 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 02B5177038
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D01177045
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Sep 2015 17:29:09 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so24946468wic.1
+	Fri,  4 Sep 2015 17:42:29 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so25207557wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Sep 2015 10:29:09 -0700 (PDT)
+	Fri, 04 Sep 2015 10:42:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=+xPHfAyV2ZAP97OAVPwXq7IjOHzMnC+bCZNqYtA1X3Q=;
-	b=C9RHPXny1nT4w8idw9v4q0IyTp0wHzkr+9f49Itnllho7PlfjkMt1DBWT5yUgpfUYl
-	t4UtOHo5ZhBTqHoP4X3MtyNrUF45X5btkSSegU9EoqRadtjQBl/MsTiER+c+MmHoFUUY
-	rdLK0LnQEqd4kTzJDNAxI2VIb83+E+oDBpdAd6bUkI0Ea5T+MBxImKQAxtLTWhkRllbI
-	udpsXRdFOSKKl8BQdEcZWae4MnuYyk3bpTzg8hjNwubAOvfipa4aAbMXhN88JdXTNyA9
-	Qhn0RPrTZm7ofE+n5ql48gAqXABJxDX26YwZr2Z1AEvRbfsBLHv+kBEJJHYy8iDnmBmz
-	jgvQ==
-X-Received: by 10.180.87.71 with SMTP id v7mr9359992wiz.74.1441387749453;
-	Fri, 04 Sep 2015 10:29:09 -0700 (PDT)
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=h5eaPb+gmwLAZT03BoiAHuiYnYSUikr31C/u6/WJApA=;
+	b=huMHjN60THhOuGKSb6TxZqwo/u1dOcbaoF7ZYybh2xtLJVnHqX+YJAkEIhIOhZrZ2p
+	weWJU5IaZI2YLA1y9jrc+ZWNPzBCVqwUWnPOe2A0TROTD18n05Is7oSvv1Z8fVQTBEaf
+	dR0R5LQYJK8pcapXaPAz1E1UQsWP4R4ELrHy99FWhEKfnujT3cy2eMqKeeRD9usu5L9M
+	koWDCvFkBd+nx2aXQd7Zf+h33Mh+NnGzfWeK/wL1G9HrIye5ndNJgNl51ys21KjCGYNE
+	H1OYfWahqGMwUxfJXWX0jGZoPXIfTYIIa6KtAdCdAD6FCwhR6zEg8f8rw4ktGrKf85o5
+	zryQ==
+X-Received: by 10.194.187.79 with SMTP id fq15mr9454387wjc.142.1441388549351; 
+	Fri, 04 Sep 2015 10:42:29 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id v6sm5252111wjf.13.2015.09.04.10.29.08
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 04 Sep 2015 10:29:08 -0700 (PDT)
+	by smtp.gmail.com with ESMTPSA id i7sm5404491wib.15.2015.09.04.10.42.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 04 Sep 2015 10:42:28 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Sep 2015 19:29:39 +0200
-Message-Id: <1441387779-17558-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.5.0
-Subject: [meta-qt5][PATCH] qtwebengine: fix build with newer glibc-2.22
+Date: Fri, 4 Sep 2015 19:43:01 +0200
+To: Steffen Sledz <sledz@zone42.org>
+Message-ID: <20150904174301.GD2457@jama>
+References: <55E9C13C.9070308@zone42.org>
+MIME-Version: 1.0
+In-Reply-To: <55E9C13C.9070308@zone42.org>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-qt5] install problem for qtbase
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,82 +48,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2015 17:29:13 -0000
+X-List-Received-Date: Fri, 04 Sep 2015 17:42:32 -0000
+X-Groupsio-MsgNum: 57203
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="llIrKcgUOe3dCx0c"
+Content-Disposition: inline
 
-* netdb.h staged by glibc-2.22 recipe defines struct addrinfo inside
-  __USE_XOPEN2K unlike other versions which are using __USE_POSIX
-* fixes:
-  | ../../../src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c: In function 'bio_ip_and_port_to_socket_and_addr':
-  | ../../../src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c:40:19: error: storage size of 'hint' isn't known
-  |    struct addrinfo hint, *result, *cur;
-  |                    ^
-  | ../../../src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c:58:36: error: dereferencing pointer to incomplete type
-  |    for (cur = result; cur; cur = cur->ai_next) {
-  |                                     ^
+--llIrKcgUOe3dCx0c
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- ...ird_party-boringssl-Demand-for-newer-POSI.patch | 37 ++++++++++++++++++++++
- recipes-qt/qt5/qtwebengine_git.bb                  |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 recipes-qt/qt5/qtwebengine/0002-chromium-third_party-boringssl-Demand-for-newer-POSI.patch
+On Fri, Sep 04, 2015 at 06:05:16PM +0200, Steffen Sledz wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> We've a big problem building qtbase (from fido branch) for two machines w=
+ith the same SoC in one workspace.
+>=20
+> It seems that the do_install of the run for the second machine (which fai=
+ls) destroys the image subdirectory totally. :(
 
-diff --git a/recipes-qt/qt5/qtwebengine/0002-chromium-third_party-boringssl-Demand-for-newer-POSI.patch b/recipes-qt/qt5/qtwebengine/0002-chromium-third_party-boringssl-Demand-for-newer-POSI.patch
-new file mode 100644
-index 0000000..4e09f6e
---- /dev/null
-+++ b/recipes-qt/qt5/qtwebengine/0002-chromium-third_party-boringssl-Demand-for-newer-POSI.patch
-@@ -0,0 +1,37 @@
-+From 75e9a963561a73ef2a449d7915cd8b41285ac862 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 27 Jun 2015 13:29:52 -0700
-+Subject: [PATCH] chromium/third_party/boringssl: Demand for newer POSIX macro
-+
-+Reason for change: Define _POSIX_C_SOURCE such that it demands correct
-+posix interfaces, netdb.h declares interfaces such as
-+getaddrinfo if __USE_POSIX, i.e. POSIX.1:1990 or later.
-+However, these interfaces were new in the 2001 edition of POSIX
-+therefore ask for Extension from POSIX.1:2001 since we use addrinfo
-+structure here.
-+
-+Change-Id: Icb1c92745d1a0ca958108ae80c270c630628729e
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Reviewed-on: https://boringssl-review.googlesource.com/5253
-+Reviewed-by: Adam Langley <agl@google.com>
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c b/src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c
-+index ba65a1a..66c3976 100644
-+--- a/src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c
-++++ b/src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c
-+@@ -12,7 +12,7 @@
-+  * OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
-+  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. */
-+ 
-+-#define _POSIX_SOURCE
-++#define _POSIX_C_SOURCE 200112L
-+ 
-+ #include <openssl/bio.h>
-+ #include <openssl/err.h>
-+-- 
-+2.5.0
-+
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index 6685e53..09a49db 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -81,6 +81,7 @@ SRC_URI += " \
-     file://0003-functions.prf-allow-build-for-linux-oe-g-platform.patch \
-     file://0004-Generate-usable-qmake_extras.gypi.patch \
-     file://0001-chromium-base.gypi-include-atomicops_internals_x86_g.patch \
-+    file://0002-chromium-third_party-boringssl-Demand-for-newer-POSI.patch \
- "
- SRCREV_qtwebengine = "c6573119006014ff7bc0efb2da16ea35d302a1ec"
- SRCREV_chromium = "41a1a031cd69e187a9608359ffe56652dcaaa6c5"
--- 
-2.5.0
+the image subdirectory is only temporary and removed before do_install
+starts
 
+permanent files are always installed in MACHINE sysroot (or as packages
+in deploy directory)
 
+use bitbake-diffsigs to find out why do_install is re-executed for your
+secondmachine after it was finished for firstmachine.
+
+> Here's what we see after a clean build:
+>=20
+> - -----------------------------------------------------------------------=
+--------------
+> MACHINE=3Dfirstmachine bitbake qtbase
+>=20
+> # tree -d -L 3 tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux=
+-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/
+> tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase=
+/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/
+> =E2=94=94=E2=94=80=E2=94=80 usr
+>     =E2=94=9C=E2=94=80=E2=94=80 bin
+>     =E2=94=82   =E2=94=94=E2=94=80=E2=94=80 qt5
+>     =E2=94=9C=E2=94=80=E2=94=80 include
+>     =E2=94=82   =E2=94=94=E2=94=80=E2=94=80 qt5
+>     =E2=94=9C=E2=94=80=E2=94=80 lib
+>     =E2=94=82   =E2=94=9C=E2=94=80=E2=94=80 cmake
+>     =E2=94=82   =E2=94=9C=E2=94=80=E2=94=80 fonts
+>     =E2=94=82   =E2=94=9C=E2=94=80=E2=94=80 pkgconfig
+>     =E2=94=82   =E2=94=94=E2=94=80=E2=94=80 qt5
+>     =E2=94=94=E2=94=80=E2=94=80 share
+>         =E2=94=9C=E2=94=80=E2=94=80 doc
+>         =E2=94=94=E2=94=80=E2=94=80 qt5
+>=20
+> 13 directories
+> # tree -d -L 3 tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC=
++2cb17c1fb9-r0/image/
+> tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/=
+image/
+> =E2=94=94=E2=94=80=E2=94=80 home
+>     =E2=94=94=E2=94=80=E2=94=80 sledz
+>         =E2=94=94=E2=94=80=E2=94=80 work
+>=20
+> 3 directories
+>=20
+> - -----------------------------------------------------------------------=
+--------------
+> MACHINE=3Dsecondmachine bitbake qtbase
+>=20
+> # tree -d -L 3 tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux=
+-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/
+> tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase=
+/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/
+> =E2=94=9C=E2=94=80=E2=94=80 home
+> =E2=94=82   =E2=94=94=E2=94=80=E2=94=80 sledz
+> =E2=94=82       =E2=94=94=E2=94=80=E2=94=80 work
+> =E2=94=94=E2=94=80=E2=94=80 usr
+>     =E2=94=9C=E2=94=80=E2=94=80 bin
+>     =E2=94=82   =E2=94=94=E2=94=80=E2=94=80 qt5
+>     =E2=94=94=E2=94=80=E2=94=80 lib
+>=20
+> 7 directories
+> # tree -d -L 3 tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC=
++2cb17c1fb9-r0/image/
+> tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/=
+image/
+> =E2=94=94=E2=94=80=E2=94=80 home
+>     =E2=94=94=E2=94=80=E2=94=80 sledz
+>         =E2=94=94=E2=94=80=E2=94=80 work
+>=20
+> 3 directories
+>=20
+> - -----------------------------------------------------------------------=
+--------------
+>=20
+> Additionally after the second run some files are in the wrong subdirector=
+ies, e.g. the font files are located in image/usr/lib/ instead of image/usr=
+/lib/fonts.
+>=20
+> - --=20
+> DResearch Fahrzeugelektronik GmbH
+> Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+> Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+> Fax: +49 30 515932-299
+> Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
+> Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+> Ust.-IDNr. DE273952058
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v2
+>=20
+> iQIcBAEBAgAGBQJV6cE7AAoJEBIsfIC8WuIYUfoP/RwcE6mnRiCaMfH5DjXvGcQw
+> y4YpdLAukbew3cSVGZaUGykD8IKalMPcpaEvibMVXwRWRCognYmW6lgLhhMnURH1
+> fFWn7w++9o1HR+pFMP3nVf7ql+Y3FnYZfX2hJ1nJLOXvW7ZvsyzmhS6T8qJ/1mYw
+> UrUqNSiGq9fW4hVDMbGiaDAaq40tzAkncIx7I0lw3tw2Dzfy0CThU3nXH9dwkrLX
+> 94bNub5QLjz+DHwYQjOCYtbsIpormVg5iK7NqlBf68TrNvqZ8nfOaiQTYedoHwGj
+> K8O4QZM0gfWKQrA8SC7VMhytYeyDKD/BoZJAFu7VoKI8/931IS2pgBzikTI4qsOL
+> LJYNN5eGE1UjosP5pUiAWyJL3+Fw8VdCwMFBD2C2c71ZJC2mbCLNqBOq9b9QG3UP
+> xIDDaScDXLnHb1oBly1afzAuA9GgJONExP8HWUwMBqGKN/QRkhacLFC+Co7f7HOS
+> B/QLSwUI4f5cFSYL6XA88jOBJ15Cni2Q9M+DCxiVTNF25KyzTO9bfXYoT7r/dtLx
+> u2hocNVibWVNK02P3nJEx3bb8CgiWNSsFW5O95jHm5ns3I59ffLhuutmkst3YWC4
+> hwid/pkC5TkPJ56Gs19T7aD471cPnuiV2Hu31UvcNbw0GBn3YmW/CTkN7PgYpvr+
+> PncY5IhX69dkKpcokBDR
+> =3DJUCc
+> -----END PGP SIGNATURE-----
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--llIrKcgUOe3dCx0c
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlXp2CQACgkQN1Ujt2V2gBwglQCgtflXgK0AdkbMfS54ODFZU141
+cQcAmgLq0rJIgMmaRXwz0BhiG4+Vwu3i
+=Unok
+-----END PGP SIGNATURE-----
+
+--llIrKcgUOe3dCx0c--
