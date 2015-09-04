@@ -1,45 +1,34 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 3ECEF74242
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 02B5177038
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Sep 2015 16:14:57 +0000 (UTC)
-Received: by wicge5 with SMTP id ge5so22632946wic.0
+	Fri,  4 Sep 2015 17:29:09 +0000 (UTC)
+Received: by wiclk2 with SMTP id lk2so24946468wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Sep 2015 09:14:57 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:references:to:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=DNJ7Od/8FAOYeM7TyVh+T9aYHi993r8BWYosdApPL+o=;
-	b=F4D3i2q0gJLHQRaV6iweDSZtq0stEEMGGxCuDZUH0y0YdV0JlIC/Epv3dN3tH5GztA
-	NDZlhNj433sq/2TYxYOq4Kx/us/+OaE2z6pxwdvCuo6Zvq6xSLwfEeRpKp2ndL9TQJZN
-	LXlfutmEGIalDxQdL47HHnfK877URrFEHvFbRdlpo0y6E5CVKCTrPKxx/nS+HaK2gkwx
-	lH1NnLBkrXZeC7fQRiZ6kczl3F8VkeX+DiGcPdxXEqhm4tfbJEsgHMuxtv5GoLcZZWDH
-	2w5y0coKJb5owgp7J811J8DrDtNixD5MmhM8djQiZ0wrp/HS7zsfoc7v6T572lkKvkmC
-	5QHg==
-X-Gm-Message-State: ALoCoQlsD3xeJv9qX+bU2YP/eF3J4+nVrVemnVz5AA6bRuGwCRQCY0zqJNvxOY4nIigt4a116+86
-X-Received: by 10.194.82.37 with SMTP id f5mr9406697wjy.36.1441383297400;
-	Fri, 04 Sep 2015 09:14:57 -0700 (PDT)
-Received: from ?IPv6:2001:bf0:c080:401::2? (wiki.deck1.zone42.org.
-	[2001:bf0:c080:401::2])
-	by smtp.gmail.com with ESMTPSA id p20sm5209256wie.5.2015.09.04.09.14.56
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 04 Sep 2015 09:14:56 -0700 (PDT)
-References: <55E9C13C.9070308@zone42.org>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Martin Jansa <martin.jansa@gmail.com>,
-	Otavio Salvador <otavio@ossystems.com.br>
-From: Steffen Sledz <sledz@dresearch-fe.de>
-X-Forwarded-Message-Id: <55E9C13C.9070308@zone42.org>
-Message-ID: <55E9C37F.4010509@dresearch-fe.de>
-Date: Fri, 4 Sep 2015 18:14:55 +0200
-User-Agent: Mozilla/5.0 (X11; Linux i686; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
-MIME-Version: 1.0
-In-Reply-To: <55E9C13C.9070308@zone42.org>
-Subject: [meta-qt5] install problem for qtbase
+	Fri, 04 Sep 2015 10:29:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=+xPHfAyV2ZAP97OAVPwXq7IjOHzMnC+bCZNqYtA1X3Q=;
+	b=C9RHPXny1nT4w8idw9v4q0IyTp0wHzkr+9f49Itnllho7PlfjkMt1DBWT5yUgpfUYl
+	t4UtOHo5ZhBTqHoP4X3MtyNrUF45X5btkSSegU9EoqRadtjQBl/MsTiER+c+MmHoFUUY
+	rdLK0LnQEqd4kTzJDNAxI2VIb83+E+oDBpdAd6bUkI0Ea5T+MBxImKQAxtLTWhkRllbI
+	udpsXRdFOSKKl8BQdEcZWae4MnuYyk3bpTzg8hjNwubAOvfipa4aAbMXhN88JdXTNyA9
+	Qhn0RPrTZm7ofE+n5ql48gAqXABJxDX26YwZr2Z1AEvRbfsBLHv+kBEJJHYy8iDnmBmz
+	jgvQ==
+X-Received: by 10.180.87.71 with SMTP id v7mr9359992wiz.74.1441387749453;
+	Fri, 04 Sep 2015 10:29:09 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id v6sm5252111wjf.13.2015.09.04.10.29.08
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 04 Sep 2015 10:29:08 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  4 Sep 2015 19:29:39 +0200
+Message-Id: <1441387779-17558-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.5.0
+Subject: [meta-qt5][PATCH] qtwebengine: fix build with newer glibc-2.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,76 +42,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2015 16:14:58 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 04 Sep 2015 17:29:13 -0000
 
-We've a big problem building qtbase (from fido branch) for two machines with the same SoC in one workspace.
+* netdb.h staged by glibc-2.22 recipe defines struct addrinfo inside
+  __USE_XOPEN2K unlike other versions which are using __USE_POSIX
+* fixes:
+  | ../../../src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c: In function 'bio_ip_and_port_to_socket_and_addr':
+  | ../../../src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c:40:19: error: storage size of 'hint' isn't known
+  |    struct addrinfo hint, *result, *cur;
+  |                    ^
+  | ../../../src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c:58:36: error: dereferencing pointer to incomplete type
+  |    for (cur = result; cur; cur = cur->ai_next) {
+  |                                     ^
 
-It seems that the do_install of the run for the second machine (which fails) destroys the image subdirectory totally. :(
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...ird_party-boringssl-Demand-for-newer-POSI.patch | 37 ++++++++++++++++++++++
+ recipes-qt/qt5/qtwebengine_git.bb                  |  1 +
+ 2 files changed, 38 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtwebengine/0002-chromium-third_party-boringssl-Demand-for-newer-POSI.patch
 
-Here's what we see after a clean build:
-
--------------------------------------------------------------------------------------
-MACHINE=firstmachine bitbake qtbase
-
-# tree -d -L 3 tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/
-tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/
-└── usr
-    ├── bin
-    │   └── qt5
-    ├── include
-    │   └── qt5
-    ├── lib
-    │   ├── cmake
-    │   ├── fonts
-    │   ├── pkgconfig
-    │   └── qt5
-    └── share
-        ├── doc
-        └── qt5
-
-13 directories
-# tree -d -L 3 tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/
-tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/
-└── home
-    └── sledz
-        └── work
-
-3 directories
-
--------------------------------------------------------------------------------------
-MACHINE=secondmachine bitbake qtbase
-
-# tree -d -L 3 tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/
-tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/
-├── home
-│   └── sledz
-│       └── work
-└── usr
-    ├── bin
-    │   └── qt5
-    └── lib
-
-7 directories
-# tree -d -L 3 tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/
-tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/
-└── home
-    └── sledz
-        └── work
-
-3 directories
-
--------------------------------------------------------------------------------------
-
-Additionally after the second run some files are in the wrong subdirectories, e.g. the font files are located in image/usr/lib/ instead of image/usr/lib/fonts.
-
+diff --git a/recipes-qt/qt5/qtwebengine/0002-chromium-third_party-boringssl-Demand-for-newer-POSI.patch b/recipes-qt/qt5/qtwebengine/0002-chromium-third_party-boringssl-Demand-for-newer-POSI.patch
+new file mode 100644
+index 0000000..4e09f6e
+--- /dev/null
++++ b/recipes-qt/qt5/qtwebengine/0002-chromium-third_party-boringssl-Demand-for-newer-POSI.patch
+@@ -0,0 +1,37 @@
++From 75e9a963561a73ef2a449d7915cd8b41285ac862 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 27 Jun 2015 13:29:52 -0700
++Subject: [PATCH] chromium/third_party/boringssl: Demand for newer POSIX macro
++
++Reason for change: Define _POSIX_C_SOURCE such that it demands correct
++posix interfaces, netdb.h declares interfaces such as
++getaddrinfo if __USE_POSIX, i.e. POSIX.1:1990 or later.
++However, these interfaces were new in the 2001 edition of POSIX
++therefore ask for Extension from POSIX.1:2001 since we use addrinfo
++structure here.
++
++Change-Id: Icb1c92745d1a0ca958108ae80c270c630628729e
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Reviewed-on: https://boringssl-review.googlesource.com/5253
++Reviewed-by: Adam Langley <agl@google.com>
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c b/src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c
++index ba65a1a..66c3976 100644
++--- a/src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c
+++++ b/src/3rdparty/chromium/third_party/boringssl/src/crypto/bio/socket_helper.c
++@@ -12,7 +12,7 @@
++  * OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
++  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. */
++ 
++-#define _POSIX_SOURCE
+++#define _POSIX_C_SOURCE 200112L
++ 
++ #include <openssl/bio.h>
++ #include <openssl/err.h>
++-- 
++2.5.0
++
+diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
+index 6685e53..09a49db 100644
+--- a/recipes-qt/qt5/qtwebengine_git.bb
++++ b/recipes-qt/qt5/qtwebengine_git.bb
+@@ -81,6 +81,7 @@ SRC_URI += " \
+     file://0003-functions.prf-allow-build-for-linux-oe-g-platform.patch \
+     file://0004-Generate-usable-qmake_extras.gypi.patch \
+     file://0001-chromium-base.gypi-include-atomicops_internals_x86_g.patch \
++    file://0002-chromium-third_party-boringssl-Demand-for-newer-POSI.patch \
+ "
+ SRCREV_qtwebengine = "c6573119006014ff7bc0efb2da16ea35d302a1ec"
+ SRCREV_chromium = "41a1a031cd69e187a9608359ffe56652dcaaa6c5"
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+2.5.0
+
 
