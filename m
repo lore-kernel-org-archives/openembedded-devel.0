@@ -1,46 +1,43 @@
 Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id B43D577038
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 4DBE37706B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Sep 2015 06:44:45 +0000 (UTC)
-Received: by wicge5 with SMTP id ge5so35699254wic.0
+	Sat,  5 Sep 2015 06:49:39 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so36291333wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Sep 2015 23:44:45 -0700 (PDT)
+	Fri, 04 Sep 2015 23:49:39 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-type
 	:content-transfer-encoding;
-	bh=SfWlP8cMJ+YMHtUen15iS4fNtqRtSNzdrIfmud+c8Ig=;
-	b=SF11yEV76hp/JS6vrWg01nx156t9A4BUxRUBmmxgWP5lg86ohfrHAB/nz3wODWhW/x
-	kA+FiNnTOeyqRlpk7TyIZBMe5eXsFknOU2HrnLV7mu4f49vJHwZ3Zu0gueyhOawRwxGP
-	I+tjt4IbTUGvh7bcE8XFcmKUUGn6FOEgHf6njq8lUqqM9hJ073KysxBdbUf2hpsOwVYH
-	gJV7x/NqDZi6c1jlgKc0SYjJdW0NfGs8GsCdZvBs/T11ErANb1d/Yrz2OmjWaCRdGqI2
-	YT0FHsUv76mejD81Lar+zs8eN/1DsC9T9YrM4sp3/XjMqlSytuxf50o3djctqWSdNQYY
-	UQBg==
-X-Gm-Message-State: ALoCoQkMS/uCJZomP4lGErYU8soMMOIqMZa336rMHcKxtQUas5IpetfhTuyO8t8QHKdz4gCmueI3
-X-Received: by 10.180.216.108 with SMTP id op12mr14357930wic.43.1441435485327; 
-	Fri, 04 Sep 2015 23:44:45 -0700 (PDT)
+	bh=F+XPya38IkFYWC2WkQ895/Wyozs3kJm7mwuRS76FG5Y=;
+	b=Oiwa5RTpma/4mo1jdceAAdrPKSet1IRHUNGtPtIgbsNbLr4I22I2I3C0Q0NC2IGdD0
+	2h62R83c/uhAYdJqaLsuqehr9+yvPJqEOaJHI97TGLPhgeIKNRRVG1Tx9Gr8yBxFx6nx
+	7bFqUlCG88R3YmvgV+lfqU+NDAGZjSX6qeEwISkU+JRYfULw1eeAm7aYu8A1CdV1x2tM
+	qSjcOMWcBdYA/47tyRi2XupE9HjnkB9vnTWQGcL3CpuRu0lc6x45j1IlawwMXGEkCsBi
+	QSaQpjgtDVLapS1U6NohhIKFWAUSHQ13Cciuf0j3AC/K5ddkZMJdJqjrS2HTYJKyr2XM
+	hbGQ==
+X-Gm-Message-State: ALoCoQle3cwKZ3UoLs+v419vbsXSNCWwoYB/cI9M84miT8AyYL42zKBn5ziQMnZBg30DIt/CxRGW
+X-Received: by 10.180.39.145 with SMTP id p17mr14983862wik.70.1441435779732;
+	Fri, 04 Sep 2015 23:49:39 -0700 (PDT)
 Received: from ?IPv6:2001:bf0:c080:401::2? (wiki.deck1.zone42.org.
 	[2001:bf0:c080:401::2]) by smtp.gmail.com with ESMTPSA id
-	cj1sm8505203wib.14.2015.09.04.23.44.44
+	cj1sm8525391wib.14.2015.09.04.23.49.38
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 04 Sep 2015 23:44:44 -0700 (PDT)
-To: Nicolas Dechesne <nicolas.dechesne@linaro.org>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <55E949A4.9050805@dresearch-fe.de>
-	<CAP71Wjzcr_ByLfCnAgQ3t2MYv+D88iTL5_VJ4Cdn23iAnyHfhg@mail.gmail.com>
+	Fri, 04 Sep 2015 23:49:39 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <55E9C13C.9070308@zone42.org> <20150904174301.GD2457@jama>
 From: Steffen Sledz <sledz@dresearch-fe.de>
-X-Enigmail-Draft-Status: N1110
-Message-ID: <55EA8F5B.408@dresearch-fe.de>
-Date: Sat, 5 Sep 2015 08:44:43 +0200
+Message-ID: <55EA9081.2040608@dresearch-fe.de>
+Date: Sat, 5 Sep 2015 08:49:37 +0200
 User-Agent: Mozilla/5.0 (X11; Linux i686; rv:38.0) Gecko/20100101
 	Thunderbird/38.2.0
 MIME-Version: 1.0
-In-Reply-To: <CAP71Wjzcr_ByLfCnAgQ3t2MYv+D88iTL5_VJ4Cdn23iAnyHfhg@mail.gmail.com>
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] "sub" machine types?
+In-Reply-To: <20150904174301.GD2457@jama>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-qt5] install problem for qtbase
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,30 +51,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Sep 2015 06:44:46 -0000
+X-List-Received-Date: Sat, 05 Sep 2015 06:49:40 -0000
 Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 8bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Am 04.09.2015 um 09:45 schrieb Nicolas Dechesne:
-> On Fri, Sep 4, 2015 at 9:35 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
->> We have some products which differ in bootloaders (u-boot) and kernel device trees only. They use the same kernel and root filesystem.
->> 
->> Does OE have concepts for this? Or any suggestions to realize this without building for many machines?
+Am 04.09.2015 um 19:43 schrieb Martin Jansa:
+> On Fri, Sep 04, 2015 at 06:05:16PM +0200, Steffen Sledz wrote: We've a big problem building qtbase (from fido branch) for two machines with the same SoC in one workspace.
 > 
-> most BSP layers use SOC_FAMILY, see [1] for this type of things, such that you can create 'SOC' specific packages that are reused across multiple (OE) machines. That sounds like that would help in your situation.
+> It seems that the do_install of the run for the second machine (which fails) destroys the image subdirectory totally. :(
 > 
-> [1] http://www.yoctoproject.org/docs/1.8/ref-manual/ref-manual.html#var-SOC_FAMILY
+>> the image subdirectory is only temporary and removed before do_install starts
+> 
+>> permanent files are always installed in MACHINE sysroot (or as packages in deploy directory)
 
-I'm not really sure if this is what we need. You suggest to use different MACHINEs of one SOC_FAMILY, Right?
+That's clear but why does the image subdir contains the
 
-But if I bitbake the root filesystem for each MACHINE an *own* image is created. And not *one* usable for all of them.
+ ??? home
+ ?   ??? sledz
+ ?       ??? work
 
-What we wish is one image containing one kernel and device tree files for each product.
+subtree after the second run? And why are the font files (and may be other) in a wrong location?
 
-In addition a u-boot image for each product so that we can use a boot setup running different u-boot images starting the same kernel and root filesystem with different parameters (e.g. for the device trees).
+>> use bitbake-diffsigs to find out why do_install is re-executed for your secondmachine after it was finished for firstmachine.
+
+OK, i wil try this. Can you give a brief instruction how to do this in detail?
+
+> Here's what we see after a clean build:
+> 
+> ------------------------------------------------------------------------------------- MACHINE=firstmachine bitbake qtbase
+> 
+> # tree -d -L 3 tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ ??? usr ??? bin ?   ??? qt5 ??? include ?   ??? qt5 ??? lib ?   ??? cmake ?   ??? fonts ?   ??? pkgconfig ?   ??? qt5 ??? share ??? doc ??? qt5
+> 
+> 13 directories # tree -d -L 3 tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ ??? home ??? sledz ??? work
+> 
+> 3 directories
+> 
+> ------------------------------------------------------------------------------------- MACHINE=secondmachine bitbake qtbase
+> 
+> # tree -d -L 3 tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ ??? home ?   ??? sledz ?       ??? work ??? usr ??? bin ?   ??? qt5 ??? lib
+> 
+> 7 directories # tree -d -L 3 tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ ??? home ??? sledz ??? work
+> 
+> 3 directories
+> 
+> -------------------------------------------------------------------------------------
+> 
+> Additionally after the second run some files are in the wrong subdirectories, e.g. the font files are located in image/usr/lib/ instead of image/usr/lib/fonts.
 
 - -- 
 DResearch Fahrzeugelektronik GmbH
@@ -90,18 +112,18 @@ Ust.-IDNr. DE273952058
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iQIcBAEBAgAGBQJV6o9aAAoJEIz5slJ1krPhF9UP/0cp0JrohbZOeRen1ksJfGIr
-J3kGKKEqBlw4s+0ugsPIMSp3pR2La/7/IgGV938H5mc6+88CobTpQU25TaE31ukq
-hgfoG/SHuZCucp1TpTahANkt+d8OmrDOTDLYTzEmWD47VGRp64PiMzlQBKIg27Bo
-NUdG3cFoUzPrS6tu24LR/EiM+ve2+ItZ8/pEXY0RiCYD/vhehP8qq2Yunow5cvyj
-xvy1kxbJYCYvjXQF52z9L+R68vvZVzXFF7VrTeT00DJlj99KP5R97vvbIyHzFsHK
-1YJfmRkkSx5d41QGegM9GHJGaGOKxHQekh/V5PgwfgQKBxgXq/5slWAvIzH7l6Fq
-udkqX9goeeEmkztiUhK1VbEQr8wd5SyRI/9wfEJD8AuJPiV460JZrC2lhh/dOxnf
-sEOGzgNMe/lddcGty6ns5Jn9ztJhnaYNtYK1NFdY/aGUPASgcXCCcPxUNW00KEsp
-yCwmVEUE37vIGJltqJ2XfUCPhIZ4eiuPZOkzYHo4s+CtArKHiWlzWWREXSrNREql
-92FDTuOCkBuYDrmiRMbIuHRxO7gguE2ZS8YPCSRbGsE/VwwUhlMAtRddnGr5QA1G
-FL1qnW+28wrqwHZlVfzFzO+qUnAo7/LqfnF525ABObdlF6sk4/b9r2MeTEoPwLkx
-qd2HFZDh4HBu2h4t6E1s
-=m/r6
+iQIcBAEBAgAGBQJV6pCBAAoJEIz5slJ1krPhBEQQAL86xHoNH63omdOPI/03x8nt
+wLhwKoZVI3mnrvsrOmQD7n4TDMHNh8FNDehFgJC9yO5BgphcFPrrnoVFvqYHSsu4
++8Z16UMoWd/hvvyntl1Ua4qaJo8SBtu/Dzr3+bIBF8Fh70UVu562LCGZGusopR0T
+AMLDipZ9RDYeV3hgsufk3x2NCz55vc8/vobzdgGj5jp0rPEVw+dWq2jrc4PT7xxV
+F80/XNykVD+nZ8L5X/J9Iwfb1oARInbyqa9ENugncmqkcAQrLpBhueIxCJwYtYLz
+9vMR2zpvGlYw8kswWdom74FVDGyQz7xSQj02cbeLHSzRFIcaSgE6xypo0sJ47prm
+S1PRQGvdd0LP1aP9BZdGToirTFM3QkMDAXzNPnPwjliM/de9vpC/Pen3kt75hwHn
+jt3kfW+wpjE31yrViIOGXwbohw6iMEUepfUojK8XjM7+OpEKNmbwDrE1ZuKJDoqq
+gjotuf+rRb89338O9FqzHioM9798Ihg0nVLEnmEXblGqkBCQSf6T391Q1PBdayoP
++hMqk3yb4Bee0UClj0HP/uy3oHTO8rtdmcw1eHLQen/zJbuTbvcYmPLqxI8oOcdt
+eaQzMqBMMX+f0jhVTg4TXKZNatR0eQpToZeALcRo3qNuDTfN4M3p68gxlThd0dzs
+ujlqdS9/2vGQ7Q7U2cvE
+=88HE
 -----END PGP SIGNATURE-----
 
