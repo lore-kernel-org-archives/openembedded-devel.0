@@ -1,43 +1,23 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DBE37706B
+Return-Path: <mike.looijmans@topic.nl>
+X-Greylist: delayed 547 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 05 Sep 2015 09:10:07 UTC
+Received: from smtp02.mail.online.nl (smtp02.mail.online.nl [194.134.25.72])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D52177049
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Sep 2015 06:49:39 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so36291333wic.0
+	Sat,  5 Sep 2015 09:10:07 +0000 (UTC)
+Received: from [192.168.1.5] (s55969068.adsl.online.nl [85.150.144.104])
+	by smtp02.mail.online.nl (Postfix) with ESMTP id 868DD1A00C6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Sep 2015 23:49:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=F+XPya38IkFYWC2WkQ895/Wyozs3kJm7mwuRS76FG5Y=;
-	b=Oiwa5RTpma/4mo1jdceAAdrPKSet1IRHUNGtPtIgbsNbLr4I22I2I3C0Q0NC2IGdD0
-	2h62R83c/uhAYdJqaLsuqehr9+yvPJqEOaJHI97TGLPhgeIKNRRVG1Tx9Gr8yBxFx6nx
-	7bFqUlCG88R3YmvgV+lfqU+NDAGZjSX6qeEwISkU+JRYfULw1eeAm7aYu8A1CdV1x2tM
-	qSjcOMWcBdYA/47tyRi2XupE9HjnkB9vnTWQGcL3CpuRu0lc6x45j1IlawwMXGEkCsBi
-	QSaQpjgtDVLapS1U6NohhIKFWAUSHQ13Cciuf0j3AC/K5ddkZMJdJqjrS2HTYJKyr2XM
-	hbGQ==
-X-Gm-Message-State: ALoCoQle3cwKZ3UoLs+v419vbsXSNCWwoYB/cI9M84miT8AyYL42zKBn5ziQMnZBg30DIt/CxRGW
-X-Received: by 10.180.39.145 with SMTP id p17mr14983862wik.70.1441435779732;
-	Fri, 04 Sep 2015 23:49:39 -0700 (PDT)
-Received: from ?IPv6:2001:bf0:c080:401::2? (wiki.deck1.zone42.org.
-	[2001:bf0:c080:401::2]) by smtp.gmail.com with ESMTPSA id
-	cj1sm8525391wib.14.2015.09.04.23.49.38
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 04 Sep 2015 23:49:39 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org
-References: <55E9C13C.9070308@zone42.org> <20150904174301.GD2457@jama>
-From: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <55EA9081.2040608@dresearch-fe.de>
-Date: Sat, 5 Sep 2015 08:49:37 +0200
-User-Agent: Mozilla/5.0 (X11; Linux i686; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+	Sat,  5 Sep 2015 11:00:58 +0200 (CEST)
+Message-ID: <55EAAF4A.10109@topic.nl>
+Date: Sat, 05 Sep 2015 11:00:58 +0200
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Organization: Topic
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
 MIME-Version: 1.0
-In-Reply-To: <20150904174301.GD2457@jama>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-qt5] install problem for qtbase
+To: openembedded-devel@lists.openembedded.org
+Subject: python-pyopenssl fails during install phase
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,79 +31,226 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Sep 2015 06:49:40 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 05 Sep 2015 09:10:09 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+With today's OE and meta-oe master branches, I get the following 
+mysterious error while building:
 
-Am 04.09.2015 um 19:43 schrieb Martin Jansa:
-> On Fri, Sep 04, 2015 at 06:05:16PM +0200, Steffen Sledz wrote: We've a big problem building qtbase (from fido branch) for two machines with the same SoC in one workspace.
-> 
-> It seems that the do_install of the run for the second machine (which fails) destroys the image subdirectory totally. :(
-> 
->> the image subdirectory is only temporary and removed before do_install starts
-> 
->> permanent files are always installed in MACHINE sysroot (or as packages in deploy directory)
+(I replaced my topdir with 'TOPDIR' in the log to protect my privacy)
 
-That's clear but why does the image subdir contains the
+DEBUG: Executing shell function do_install
+running install
+running bdist_egg
+running egg_info
+writing requirements to pyOpenSSL.egg-info/requires.txt
+writing pyOpenSSL.egg-info/PKG-INFO
+writing top-level names to pyOpenSSL.egg-info/top_level.txt
+writing dependency_links to pyOpenSSL.egg-info/dependency_links.txt
+reading manifest file 'pyOpenSSL.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+warning: no files found matching 'OpenSSL/RATIONALE'
+warning: no previously-included files found matching 'leakcheck'
+warning: no previously-included files matching '*.py' found under 
+directory 'leakcheck'
+warning: no previously-included files matching '*.pem' found under 
+directory 'leakcheck'
+warning: no previously-included files matching '*.pyc' found anywhere in 
+distribution
+no previously-included directories found matching 'doc/_build'
+writing manifest file 'pyOpenSSL.egg-info/SOURCES.txt'
+installing library code to build/bdist.linux-x86_64/egg
+running install_lib
+running build_py
+creating build/bdist.linux-x86_64/egg
+creating build/bdist.linux-x86_64/egg/OpenSSL
+copying build/lib/OpenSSL/_util.py -> build/bdist.linux-x86_64/egg/OpenSSL
+copying build/lib/OpenSSL/crypto.py -> build/bdist.linux-x86_64/egg/OpenSSL
+copying build/lib/OpenSSL/__init__.py -> 
+build/bdist.linux-x86_64/egg/OpenSSL
+copying build/lib/OpenSSL/rand.py -> build/bdist.linux-x86_64/egg/OpenSSL
+copying build/lib/OpenSSL/tsafe.py -> build/bdist.linux-x86_64/egg/OpenSSL
+copying build/lib/OpenSSL/SSL.py -> build/bdist.linux-x86_64/egg/OpenSSL
+creating build/bdist.linux-x86_64/egg/OpenSSL/test
+copying build/lib/OpenSSL/test/test_rand.py -> 
+build/bdist.linux-x86_64/egg/OpenSSL/test
+copying build/lib/OpenSSL/test/util.py -> 
+build/bdist.linux-x86_64/egg/OpenSSL/test
+copying build/lib/OpenSSL/test/test_tsafe.py -> 
+build/bdist.linux-x86_64/egg/OpenSSL/test
+copying build/lib/OpenSSL/test/__init__.py -> 
+build/bdist.linux-x86_64/egg/OpenSSL/test
+copying build/lib/OpenSSL/test/test_crypto.py -> 
+build/bdist.linux-x86_64/egg/OpenSSL/test
+copying build/lib/OpenSSL/test/test_ssl.py -> 
+build/bdist.linux-x86_64/egg/OpenSSL/test
+copying build/lib/OpenSSL/test/test_util.py -> 
+build/bdist.linux-x86_64/egg/OpenSSL/test
+copying build/lib/OpenSSL/version.py -> build/bdist.linux-x86_64/egg/OpenSSL
+writing byte-compilation script '/tmp/tmpYEe1_A.py'
+/TOPDIR/build/tmp/sysroots/x86_64-linux/usr/bin/python-native/python 
+/tmp/tmpYEe1_A.py
+removing /tmp/tmpYEe1_A.py
+creating build/bdist.linux-x86_64/egg/EGG-INFO
+copying pyOpenSSL.egg-info/PKG-INFO -> build/bdist.linux-x86_64/egg/EGG-INFO
+copying pyOpenSSL.egg-info/SOURCES.txt -> 
+build/bdist.linux-x86_64/egg/EGG-INFO
+copying pyOpenSSL.egg-info/dependency_links.txt -> 
+build/bdist.linux-x86_64/egg/EGG-INFO
+copying pyOpenSSL.egg-info/requires.txt -> 
+build/bdist.linux-x86_64/egg/EGG-INFO
+copying pyOpenSSL.egg-info/top_level.txt -> 
+build/bdist.linux-x86_64/egg/EGG-INFO
+zip_safe flag not set; analyzing archive contents...
+creating 'dist/pyOpenSSL-0.15.1-py2.7.egg' and adding 
+'build/bdist.linux-x86_64/egg' to it
+removing 'build/bdist.linux-x86_64/egg' (and everything under it)
+Creating 
+/TOPDIR/build/tmp/work/mips32el-oe-linux/python-pyopenssl/1_0.15.1-r0/image/usr/lib/python2.7/site-packages/site.py
+Processing pyOpenSSL-0.15.1-py2.7.egg
+Copying pyOpenSSL-0.15.1-py2.7.egg to 
+/TOPDIR/build/tmp/work/mips32el-oe-linux/python-pyopenssl/1_0.15.1-r0/image/usr/lib/python2.7/site-packages
+Adding pyOpenSSL 0.15.1 to easy-install.pth file
 
- ??? home
- ?   ??? sledz
- ?       ??? work
+Installed 
+/TOPDIR/build/tmp/work/mips32el-oe-linux/python-pyopenssl/1_0.15.1-r0/image/usr/lib/python2.7/site-packages/pyOpenSSL-0.15.1-py2.7.egg
+Processing dependencies for pyOpenSSL==0.15.1
+Searching for six>=1.5.2
+Reading https://pypi.python.org/simple/six/
+Best match: six 1.9.0
+Downloading 
+https://pypi.python.org/packages/source/s/six/six-1.9.0.tar.gz#md5=476881ef4012262dfc8adc645ee786c4
+Processing six-1.9.0.tar.gz
+Writing /tmp/easy_install-ZTQGDn/six-1.9.0/setup.cfg
+Running six-1.9.0/setup.py -q bdist_egg --dist-dir 
+/tmp/easy_install-ZTQGDn/six-1.9.0/egg-dist-tmp-sL3RtM
+no previously-included directories found matching 'documentation/_build'
+zip_safe flag not set; analyzing archive contents...
+six: module references __path__
+creating 
+/TOPDIR/build/tmp/work/mips32el-oe-linux/python-pyopenssl/1_0.15.1-r0/image/usr/lib/python2.7/site-packages/six-1.9.0-py2.7.egg
+Extracting six-1.9.0-py2.7.egg to 
+/TOPDIR/build/tmp/work/mips32el-oe-linux/python-pyopenssl/1_0.15.1-r0/image/usr/lib/python2.7/site-packages
+Adding six 1.9.0 to easy-install.pth file
 
-subtree after the second run? And why are the font files (and may be other) in a wrong location?
+Installed 
+/TOPDIR/build/tmp/work/mips32el-oe-linux/python-pyopenssl/1_0.15.1-r0/image/usr/lib/python2.7/site-packages/six-1.9.0-py2.7.egg
+Searching for cryptography>=0.7
+Reading https://pypi.python.org/simple/cryptography/
+Best match: cryptography 1.0
+Downloading 
+https://pypi.python.org/packages/source/c/cryptography/cryptography-1.0.tar.gz#md5=3f2608eb94dcc6e616c3cc2e182181b0
+Processing cryptography-1.0.tar.gz
+Writing /tmp/easy_install-4LpLp5/cryptography-1.0/setup.cfg
+Running cryptography-1.0/setup.py -q bdist_egg --dist-dir 
+/tmp/easy_install-4LpLp5/cryptography-1.0/egg-dist-tmp-gn1Pcd
 
->> use bitbake-diffsigs to find out why do_install is re-executed for your secondmachine after it was finished for firstmachine.
+Installed 
+/tmp/easy_install-4LpLp5/cryptography-1.0/.eggs/cffi-1.2.1-py2.7-linux-x86_64.egg
+Traceback (most recent call last):
+   File "setup.py", line 78, in <module>
+     test_suite="OpenSSL")
+   File 
+"/TOPDIR/build/tmp/sysroots/x86_64-linux/usr/lib/python2.7/distutils/core.py", 
+line 151, in setup
+     dist.run_commands()
+   File 
+"/TOPDIR/build/tmp/sysroots/x86_64-linux/usr/lib/python2.7/distutils/dist.py", 
+line 953, in run_commands
+     self.run_command(cmd)
+   File 
+"/TOPDIR/build/tmp/sysroots/x86_64-linux/usr/lib/python2.7/distutils/dist.py", 
+line 972, in run_command
+     cmd_obj.run()
+   File "build/bdist.linux-x86_64/egg/setuptools/command/install.py", 
+line 67, in run
+   File "build/bdist.linux-x86_64/egg/setuptools/command/install.py", 
+line 117, in do_egg_install
+   File 
+"build/bdist.linux-x86_64/egg/setuptools/command/easy_install.py", line 
+380, in run
+   File 
+"build/bdist.linux-x86_64/egg/setuptools/command/easy_install.py", line 
+610, in easy_install
+   File 
+"build/bdist.linux-x86_64/egg/setuptools/command/easy_install.py", line 
+661, in install_item
+   File 
+"build/bdist.linux-x86_64/egg/setuptools/command/easy_install.py", line 
+709, in process_distribution
+   File "build/bdist.linux-x86_64/egg/pkg_resources/__init__.py", line 
+836, in resolve
+   File "build/bdist.linux-x86_64/egg/pkg_resources/__init__.py", line 
+1081, in best_match
+   File "build/bdist.linux-x86_64/egg/pkg_resources/__init__.py", line 
+1093, in obtain
+   File 
+"build/bdist.linux-x86_64/egg/setuptools/command/easy_install.py", line 
+629, in easy_install
+   File 
+"build/bdist.linux-x86_64/egg/setuptools/command/easy_install.py", line 
+659, in install_item
+   File 
+"build/bdist.linux-x86_64/egg/setuptools/command/easy_install.py", line 
+842, in install_eggs
+   File 
+"build/bdist.linux-x86_64/egg/setuptools/command/easy_install.py", line 
+1070, in build_and_install
+   File 
+"build/bdist.linux-x86_64/egg/setuptools/command/easy_install.py", line 
+1056, in run_setup
+   File "build/bdist.linux-x86_64/egg/setuptools/sandbox.py", line 240, 
+in run_setup
+   File 
+"/TOPDIR/build/tmp/sysroots/x86_64-linux/usr/lib/python2.7/contextlib.py", 
+line 35, in __exit__
+     self.gen.throw(type, value, traceback)
+   File "build/bdist.linux-x86_64/egg/setuptools/sandbox.py", line 193, 
+in setup_context
+   File 
+"/TOPDIR/build/tmp/sysroots/x86_64-linux/usr/lib/python2.7/contextlib.py", 
+line 35, in __exit__
+     self.gen.throw(type, value, traceback)
+   File "build/bdist.linux-x86_64/egg/setuptools/sandbox.py", line 164, 
+in save_modules
+   File "build/bdist.linux-x86_64/egg/setuptools/sandbox.py", line 139, 
+in resume
+   File "build/bdist.linux-x86_64/egg/setuptools/sandbox.py", line 152, 
+in save_modules
+   File "build/bdist.linux-x86_64/egg/setuptools/sandbox.py", line 193, 
+in setup_context
+   File "build/bdist.linux-x86_64/egg/setuptools/sandbox.py", line 237, 
+in run_setup
+   File "build/bdist.linux-x86_64/egg/setuptools/sandbox.py", line 267, 
+in run
+   File "build/bdist.linux-x86_64/egg/setuptools/sandbox.py", line 236, 
+in runner
+   File "build/bdist.linux-x86_64/egg/setuptools/sandbox.py", line 46, 
+in _execfile
+   File "/tmp/easy_install-4LpLp5/cryptography-1.0/setup.py", line 307, 
+in <module>
 
-OK, i wil try this. Can you give a brief instruction how to do this in detail?
+   File 
+"/TOPDIR/build/tmp/sysroots/x86_64-linux/usr/lib/python2.7/distutils/core.py", 
+line 111, in setup
+     _setup_distribution = dist = klass(attrs)
+   File "build/bdist.linux-x86_64/egg/setuptools/dist.py", line 272, in 
+__init__
+   File 
+"/TOPDIR/build/tmp/sysroots/x86_64-linux/usr/lib/python2.7/distutils/dist.py", 
+line 287, in __init__
+     self.finalize_options()
+   File "build/bdist.linux-x86_64/egg/setuptools/dist.py", line 327, in 
+finalize_options
+   File "build/bdist.linux-x86_64/egg/pkg_resources/__init__.py", line 
+2355, in load
+   File "build/bdist.linux-x86_64/egg/pkg_resources/__init__.py", line 
+2361, in resolve
+ImportError: No module named setuptools_ext
+WARNING: exit code 1 from a shell command.
+ERROR: python setup.py install execution failed.
 
-> Here's what we see after a clean build:
-> 
-> ------------------------------------------------------------------------------------- MACHINE=firstmachine bitbake qtbase
-> 
-> # tree -d -L 3 tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ ??? usr ??? bin ?   ??? qt5 ??? include ?   ??? qt5 ??? lib ?   ??? cmake ?   ??? fonts ?   ??? pkgconfig ?   ??? qt5 ??? share ??? doc ??? qt5
-> 
-> 13 directories # tree -d -L 3 tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ ??? home ??? sledz ??? work
-> 
-> 3 directories
-> 
-> ------------------------------------------------------------------------------------- MACHINE=secondmachine bitbake qtbase
-> 
-> # tree -d -L 3 tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ tmp-glibc/work/cortexa9t2hf-vfp-neon-mx6qdl-angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ ??? home ?   ??? sledz ?       ??? work ??? usr ??? bin ?   ??? qt5 ??? lib
-> 
-> 7 directories # tree -d -L 3 tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ tmp-glibc/work/x86_64-linux/qtbase-native/5.4.2+gitAUTOINC+2cb17c1fb9-r0/image/ ??? home ??? sledz ??? work
-> 
-> 3 directories
-> 
-> -------------------------------------------------------------------------------------
-> 
-> Additionally after the second run some files are in the wrong subdirectories, e.g. the font files are located in image/usr/lib/ instead of image/usr/lib/fonts.
-
-- -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iQIcBAEBAgAGBQJV6pCBAAoJEIz5slJ1krPhBEQQAL86xHoNH63omdOPI/03x8nt
-wLhwKoZVI3mnrvsrOmQD7n4TDMHNh8FNDehFgJC9yO5BgphcFPrrnoVFvqYHSsu4
-+8Z16UMoWd/hvvyntl1Ua4qaJo8SBtu/Dzr3+bIBF8Fh70UVu562LCGZGusopR0T
-AMLDipZ9RDYeV3hgsufk3x2NCz55vc8/vobzdgGj5jp0rPEVw+dWq2jrc4PT7xxV
-F80/XNykVD+nZ8L5X/J9Iwfb1oARInbyqa9ENugncmqkcAQrLpBhueIxCJwYtYLz
-9vMR2zpvGlYw8kswWdom74FVDGyQz7xSQj02cbeLHSzRFIcaSgE6xypo0sJ47prm
-S1PRQGvdd0LP1aP9BZdGToirTFM3QkMDAXzNPnPwjliM/de9vpC/Pen3kt75hwHn
-jt3kfW+wpjE31yrViIOGXwbohw6iMEUepfUojK8XjM7+OpEKNmbwDrE1ZuKJDoqq
-gjotuf+rRb89338O9FqzHioM9798Ihg0nVLEnmEXblGqkBCQSf6T391Q1PBdayoP
-+hMqk3yb4Bee0UClj0HP/uy3oHTO8rtdmcw1eHLQen/zJbuTbvcYmPLqxI8oOcdt
-eaQzMqBMMX+f0jhVTg4TXKZNatR0eQpToZeALcRo3qNuDTfN4M3p68gxlThd0dzs
-ujlqdS9/2vGQ7Q7U2cvE
-=88HE
------END PGP SIGNATURE-----
+-- 
+Mike Looijmans
 
