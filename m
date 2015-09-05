@@ -1,20 +1,34 @@
-Return-Path: <alejandro.joya.cruz@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id EF16877045
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
+	[209.85.213.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AE067704D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Sep 2015 20:30:34 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga102.fm.intel.com with ESMTP; 04 Sep 2015 13:26:20 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,470,1437462000"; d="scan'208";a="638750836"
-Received: from afjoyacr-mobl2.zpn.intel.com ([10.219.17.204])
-	by orsmga003.jf.intel.com with ESMTP; 04 Sep 2015 13:26:21 -0700
-From: Alejandro Joya <alejandro.joya.cruz@intel.com>
+	Sat,  5 Sep 2015 00:28:54 +0000 (UTC)
+Received: by igbkq10 with SMTP id kq10so27795177igb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Sep 2015 17:28:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=oYBYfeoQk51icSCFlXtj6IpMeQvF3rfJ5jtIWBS5hTQ=;
+	b=j1fE3VveAj+Xv4Sy1Mbefzl41OCWlDN7/E/VsBePewMmg5xDuStRyaeXAH5X0Tm5QI
+	egRLKP3ExYAgvY8q5qcAUkGbe4Q0/yS3hEo2zRXZTErA0x127iy/SrJtXRtSrJZaJCUk
+	5R0IYp2qH/unS9B6gfQRgyKhlKzzf1+NV0sEZxqA1DnCwdhWot/89ZGvEoSLvaxywmt0
+	laHKg+49hdEpaowT2GCA1hj/xPpQw4XrQk0xPPrIVNmxyye8m7QNBqC8Wm0x2tDy9nIN
+	AEWZypF4x50cpc/6yt1d+NK9omcaOFY1uGDe4VNWsbOWNmuBc+4ZThz5pe6lfBkcIcRQ
+	/h9g==
+X-Received: by 10.50.83.104 with SMTP id p8mr12080170igy.90.1441412934826;
+	Fri, 04 Sep 2015 17:28:54 -0700 (PDT)
+Received: from localhost.localdomain (s206-116-3-180.bc.hsia.telus.net.
+	[206.116.3.180]) by smtp.gmail.com with ESMTPSA id
+	c64sm2541968ioc.13.2015.09.04.17.28.53
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 04 Sep 2015 17:28:54 -0700 (PDT)
+From: Adam YH Lee <adam.yh.lee@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Sep 2015 15:26:13 -0500
-Message-Id: <1441398373-21244-1-git-send-email-alejandro.joya.cruz@intel.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [meta-oe][PATCH]] toybox: upgrade to 0.6.0
+Date: Fri,  4 Sep 2015 17:28:29 -0700
+Message-Id: <1441412911-29933-1-git-send-email-adam.yh.lee@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-qt5 0/2] WIP Improve Qt5 flattened directory structure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,41 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2015 20:30:37 -0000
+X-List-Received-Date: Sat, 05 Sep 2015 00:28:56 -0000
 
-Change SRC_URI since patch is not longer need it.
-Update the checksum for package.
+This is a WIP patch set for addressing improper directory parsing involving
+QT_DIR_NAME[1]. When QT_DIR_NAME is set empty, Bitbake QA complains loudly for
+double slash ("//").
 
-Signed-off-by: Alejandro Joya <alejandro.joya.cruz@intel.com>
----
- meta-oe/recipes-core/toybox/{toybox_0.5.2.bb => toybox_0.6.0.bb} | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-core/toybox/{toybox_0.5.2.bb => toybox_0.6.0.bb} (90%)
+Unfortunately I am still seeing errors during runtime:
 
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.5.2.bb b/meta-oe/recipes-core/toybox/toybox_0.6.0.bb
-similarity index 90%
-rename from meta-oe/recipes-core/toybox/toybox_0.5.2.bb
-rename to meta-oe/recipes-core/toybox/toybox_0.6.0.bb
-index bcd6a72..da03200 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.5.2.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_0.6.0.bb
-@@ -1,10 +1,11 @@
- SUMMARY = "Toybox combines common utilities together into a single executable."
- HOMEPAGE = "http://www.landley.net/toybox/"
- 
--SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
--    file://0001-Match-paths-with-busybox.patch"
--SRC_URI[md5sum] = "b5d1242767c411b69dcd717da1c218b2"
--SRC_URI[sha256sum] = "dec7f6433ee0e130f224fc63760b347ad0572280c4de32f1aaefbee813a79a00"
-+SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "7f4a6c89e56c48e3350e611f5b36c2cf"
-+SRC_URI[sha256sum] = "b6e2694d19ac08f1c3416d5b2a02a31d445db2ed98dec89761430cdff2c9710d"
-+
- 
- LICENSE = "BSD-0-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
+   ~/qt5-test# qmake -project
+   Could not find qmake configuration file linux-g++.
+   Cannot find feature default_pre.prf
+   Cannot find feature default_post.prf
+
+   ~/qt5-test# find / -name default_pre.prf
+   /usr/lib/mkspecs/features/default_pre.prf
+   /usr/lib/mkspecs/features/win32/default_pre.prf
+   /usr/lib/mkspecs/features/mac/default_pre.prf
+
+I will continue looking for a complete fix as time allows.
+Feel free to comment in the meantime.
+
+[1] http://comments.gmane.org/gmane.comp.handhelds.openembedded.core/68544
+
+Adam YH Lee (2):
+  Remove double slash when QT_DIR_NAME is empty
+  Use `mkdir -p` when creating `/usr/bin`
+
+ classes/populate_sdk_qt5.bbclass              |  2 +-
+ classes/qmake5_base.bbclass                   |  6 ++---
+ classes/qmake5_paths.bbclass                  | 34 +++++++++++++--------------
+ recipes-qt/maliit/maliit-framework-qt5_git.bb |  4 ++--
+ recipes-qt/qt5/nativesdk-qtbase_git.bb        |  8 +++----
+ recipes-qt/qt5/qt5-creator_3.3.1.bb           | 20 ++++++++--------
+ recipes-qt/qt5/qtbase_git.bb                  |  6 ++---
+ recipes-qt/qt5/qttools_git.bb                 |  4 ++--
+ 8 files changed, 42 insertions(+), 42 deletions(-)
+
 -- 
-2.1.0
+2.1.4
 
 
