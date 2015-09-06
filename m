@@ -1,21 +1,29 @@
-Return-Path: <mike.looijmans@topic.nl>
-Received: from smtp04.mail.online.nl (smtp04.mail.online.nl [194.134.25.74])
-	by mail.openembedded.org (Postfix) with ESMTP id 3795877030
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C3EC76F50
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Sep 2015 12:39:14 +0000 (UTC)
-Received: from [192.168.1.5] (s55969068.adsl.online.nl [85.150.144.104])
-	by smtp04.mail.online.nl (Postfix) with ESMTP id 02D2F2800D9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Sep 2015 14:39:14 +0200 (CEST)
-Message-ID: <55EAE272.5010904@topic.nl>
-Date: Sat, 05 Sep 2015 14:39:14 +0200
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: Topic
+	Sun,  6 Sep 2015 01:52:18 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t861qIaJ021998
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sat, 5 Sep 2015 18:52:18 -0700 (PDT)
+Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Sat, 5 Sep 2015 18:52:17 -0700
+Message-ID: <55EB9C50.3030509@windriver.com>
+Date: Sun, 6 Sep 2015 09:52:16 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: "krb" fails to build, suspect GCC bug
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+References: <1436234146-4895-1-git-send-email-rongqing.li@windriver.com>
+	<55E5565B.5050308@windriver.com>
+	<20150901133153.GA21369@mentor.com>
+In-Reply-To: <20150901133153.GA21369@mentor.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH][meta-networking][v3] squid: upgrade to 3.5.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,50 +37,168 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Sep 2015 12:39:16 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-I got this weird build failure from the "krb" package:
-
-| make[3]: Entering directory 
-'/TOPDIR/build/tmp/work/mips32el-oe-linux/krb5/1.13.2-r0/krb5-1.13.2/src/lib/krb5/ccache'
-| mipsel-oe-linux-gcc  -mel -mabi=32 -mhard-float -march=mips32 
---sysroot=/TOPDIR/build/tmp/sysroots/formuler1 -fPIC -DSHARED 
--DHAVE_CONFIG_H  -I../../../include -I../../../include -I./ccapi -I. -I. 
-  -DKRB5_DEPRECATED=1 -DKRB5_PRIVATE  -Os -pipe -g 
--feliminate-unused-debug-types -DDESTRUCTOR_ATTR_WORKS=1 
--I/TOPDIR/build/tmp/sysroots/formuler1/usr/include/et -Wall -Wcast-align 
--Wshadow -Wmissing-prototypes -Wno-format-zero-length -Woverflow 
--Wstrict-overflow -Wmissing-format-attribute -Wmissing-prototypes 
--Wreturn-type -Wmissing-braces -Wparentheses -Wswitch -Wunused-function 
--Wunused-label -Wunused-variable -Wunused-value -Wunknown-pragmas 
--Wsign-compare -Werror=uninitialized -Werror=pointer-arith 
--Werror=declaration-after-statement 
--Werror-implicit-function-declaration -pthread -c cc_file.c -o 
-cc_file.so.o && mv -f cc_file.so.o cc_file.so
-| cc_file.c: In function 'fcc_next_cred':
-| cc_file.c:368:9: error: 'maxsize' may be used uninitialized in this 
-function [-Werror=maybe-uninitialized]
-|      ret = load_data(context, id, maxsize, buf);
-|          ^
-| cc_file.c:1091:12: note: 'maxsize' was declared here
-|      size_t maxsize;
-|             ^
-| cc1: some warnings being treated as errors
-
-Looking at the source, this doesn't make any sense at all. The 
-declaration of the variable isn't even in the same method body. And the 
-line it complains about is about the fifth time it passes that variable 
-to another method.
-
-And working around it by initializing maxsize=0 just makes the compiler 
-choke on a similar situation elsewhere:
-| packet.c:50:67: error: 'id' may be used uninitialized in this function
+X-List-Received-Date: Sun, 06 Sep 2015 01:52:23 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
 
-I suspect the problem here is GCC and not the krb code. Anyone seen this?
+
+On 2015年09月01日 21:31, Joe MacDonald wrote:
+> [Re: [oe] [PATCH][meta-networking][v3] squid: upgrade to 3.5.5] On 15.09.01 (Tue 15:40) Rongqing Li wrote:
+>
+>> ping
+>
+> I marked this patch rejected in patchworks after asking about the PAM
+> dependency, I encourage everyone to check the state of any patch there
+> as that's my primary workflow now since I know that's also the
+> management system Martin uses and I want to make the coordination as
+> easy as possible.
+>
+> I initially missed your follow up because it was after the unrelated
+> comment about a queue of patches that'd recently been merged.
+>
+> Your response was that there was no configuration option to disable PAM
+> after you looked at the code.  I had a quick look through and the issue
+> is more complicated than that.  There absolutely is a way to turn off
+> building the PAM module (see --enable-auth-basic) but that will only
+> address one of a large number of potential QA issues, now that I look at
+> it.  The default will also depend on LDAP, NIS, SASL, RADIUS and so on.
+>
+> I think the correct solution for this would be to have each of the
+> helpers optionally enabled based on what your image contains
+> (PKGCONFIG/DISTRO_FEATURES maybe) but for now it's probably okay to
+> remove the dependency and re-submit something like below without change
+> #5.  Please also have another look at the error from the world builds to
+> see if we need to either blacklist Squid or if there's a 'insane'
+> workaround that'll squelch the error until we get it cleaned up
+> properly.
+>
+
+
+I will try
+
+> Then on the upgrade to 3.5.7 (the current stable) we'll want to do
+> something cleaner.
+>
+OK, I will upgrade it to 3.5.7
+
+-R
+
+> -J.
+>
+>>
+>> -Roy
+>>
+>> On 2015年07月07日 09:55, rongqing.li@windriver.com wrote:
+>>> From: Roy Li <rongqing.li@windriver.com>
+>>>
+>>> 1. Remove the squid-change-ksh-referen*.patch which is not needed, since
+>>>     3.5.5 did not use ksh by default.
+>>> 2. Update the checksum of COPYING,since the date in it has been changed.
+>>> 3. Define BUILDCXXFLAGS, otherwise the target gcc options -std=c++11 will
+>>>     add into it, and lead to building failure since host gcc maybe not
+>>>     support "-std=c++11"
+>>> 4. Assume to support GNU atomic operations by default, the running check
+>>>     on cross-compile setup does not work
+>>> 5. Add the dependency on libpam
+>>>
+>>> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+>>> ---
+>>>   ...ge-ksh-reference-in-krb-ldap-helper-to-sh.patch | 39 ----------------------
+>>>   .../squid/{squid_3.4.7.bb => squid_3.5.5.bb}       | 11 +++---
+>>>   2 files changed, 6 insertions(+), 44 deletions(-)
+>>>   delete mode 100644 meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
+>>>   rename meta-networking/recipes-daemons/squid/{squid_3.4.7.bb => squid_3.5.5.bb} (86%)
+>>>
+>>> diff --git a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch b/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
+>>> deleted file mode 100644
+>>> index 8e03860..0000000
+>>> --- a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
+>>> +++ /dev/null
+>>> @@ -1,39 +0,0 @@
+>>> -squid: change ksh reference in krb ldap helper to sh
+>>> -
+>>> -Very simple cert_tool script with no ksh specifics.
+>>> -Change it to use sh so a package dependency doesn't
+>>> -get created to ksh.
+>>> -
+>>> -Upstream-Status: Pending
+>>> -
+>>> -Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
+>>> -Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+>>> ----
+>>> - helpers/external_acl/kerberos_ldap_group/cert_tool | 6 +++---
+>>> - 1 file changed, 3 insertions(+), 3 deletions(-)
+>>> -
+>>> -diff --git a/helpers/external_acl/kerberos_ldap_group/cert_tool b/helpers/external_acl/kerberos_ldap_group/cert_tool
+>>> -index 9f14959..8c4ea11 100644
+>>> ---- a/helpers/external_acl/kerberos_ldap_group/cert_tool
+>>> -+++ b/helpers/external_acl/kerberos_ldap_group/cert_tool
+>>> -@@ -1,4 +1,4 @@
+>>> --#!/bin/ksh
+>>> -+#!/bin/sh
+>>> - #
+>>> - #  -----------------------------------------------------------------------------
+>>> - #
+>>> -@@ -64,9 +64,9 @@ QUIT
+>>> - # Create database for Sun ldap and pem file for Openldap
+>>> - #
+>>> - rm ${server}_[0-9]*.pem 2>/dev/null
+>>> --let i=0
+>>> -+i=0
+>>> -  ls ${server}_[0-9]*.cert | while read file; do
+>>> -- let i=i+1
+>>> -+ i=`expr $i + 1`
+>>> -  cat  $file  >> ${server}_$i.pem
+>>> -  CA=`openssl x509 -noout -text -in  ${server}_$i.pem | grep -i "CA:.*true"`
+>>> -  if [ -n "$CA" ]; then
+>>> ---
+>>> -1.9.1
+>>> -
+>>> diff --git a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+>>> similarity index 86%
+>>> rename from meta-networking/recipes-daemons/squid/squid_3.4.7.bb
+>>> rename to meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+>>> index 7b00dfc..198319d 100644
+>>> --- a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb
+>>> +++ b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+>>> @@ -16,19 +16,18 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
+>>>              file://Set-up-for-cross-compilation.patch \
+>>>              file://Skip-AC_RUN_IFELSE-tests.patch \
+>>>              file://Fix-flawed-dynamic-ldb-link-test-in-configure.patch \
+>>> -           file://squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch \
+>>>              file://squid-use-serial-tests-config-needed-by-ptest.patch \
+>>>              file://run-ptest \
+>>>              file://volatiles.03_squid \
+>>>   "
+>>>
+>>>   LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
+>>> -                    file://COPYRIGHT;md5=2900f50789c498be8e9f1eb23b55cbe9 \
+>>> +                    file://errors/COPYRIGHT;md5=0fed8f1462f6fdbc62bb431bcb618f46 \
+>>>                      "
+>>> -SRC_URI[md5sum] = "9951034b10f7ee0f45a95cfae61c57c2"
+>>> -SRC_URI[sha256sum] = "7b423f3d3495a317503ca559ea535f80445fd7c4e3c3e268cb7a8c97c61af2b6"
+>>> +SRC_URI[md5sum] = "6aac5c2e9cbbeabcbf2e9e49a178a931"
+>>> +SRC_URI[sha256sum] = "741c24a307c50f0d845d53cabb66b36d91ce9a73c8a165eae5def5e4d11e6a0d"
+>>>
+>>> -DEPENDS = "libtool krb5 openldap db cyrus-sasl"
+>>> +DEPENDS = "libtool krb5 openldap db cyrus-sasl libpam"
+>>>
+>>>   inherit autotools useradd ptest
+>>>
+>>> @@ -38,6 +37,8 @@ USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --she
+>>>   PACKAGECONFIG ??= ""
+>>>   PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
+>>>   EXTRA_OECONF += "--with-default-user=squid"
+>>> +export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
+>>> +CACHED_CONFIGUREVARS += "squid_cv_gnu_atomics=yes"
+>>>
+>>>   TESTDIR = "test-suite"
+>>>   do_compile_ptest() {
+>>>
+>>
 
 -- 
-Mike Looijmans
+Best Reagrds,
+Roy | RongQing Li
 
