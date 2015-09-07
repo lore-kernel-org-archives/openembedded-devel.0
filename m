@@ -1,55 +1,25 @@
-Return-Path: <mike.looijmans@topicproducts.com>
-X-Greylist: delayed 11285 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 07 Sep 2015 12:22:20 UTC
-Received: from mx12-05.smtp.antispamcloud.com (mx12-05.smtp.antispamcloud.com
-	[46.165.232.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 238C560017
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id DB06D60017
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Sep 2015 12:22:20 +0000 (UTC)
-Received: from 100-208.ftth.onsbrabantnet.nl ([88.159.208.100]
-	helo=TOP-EX01.TOPIC.LOCAL)
-	by mx12.antispamcloud.com with esmtps (TLSv1:AES128-SHA:128)
-	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
-	id 1ZYsUy-00025X-WF for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Sep 2015 11:14:14 +0200
-Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
-	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Mon, 7 Sep 2015 11:13:27 +0200
-Message-ID: <55ED5556.2020904@topic.nl>
-Date: Mon, 7 Sep 2015 11:13:58 +0200
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: TOPIC
+	Mon,  7 Sep 2015 12:31:51 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by fmsmga101.fm.intel.com with ESMTP; 07 Sep 2015 05:31:23 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.17,485,1437462000"; d="scan'208";a="764057109"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
+	([10.237.68.161])
+	by orsmga001.jf.intel.com with ESMTP; 07 Sep 2015 05:31:23 -0700
+Message-ID: <55ED8405.6050709@linux.intel.com>
+Date: Mon, 07 Sep 2015 15:33:09 +0300
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
+	rv:31.0) Gecko/20100101 Icedove/31.7.0
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-X-Originating-IP: [192.168.80.121]
-X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
-X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
-X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
-	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
-	4XktS92Fqq3Qa0exZrGdvwCI1FSC+XchGESnvFybL+SfEhkHT722YSfEE2oK51ooCsIS+vWYhbEy
-	K2f7GgNc9aUV1oY4fX3W5eOCNA39IMF/tWq0Xia4BSmFvzyHGTjedCBNA121Y38SeyRMCs3XcWpW
-	rY6lCH8L7CDV11D5JM7Xk65yci5j+xTRr7HgZJNWyY7q5BA/5iDO7tJWc5LW0A0HkzG7uPVDzc3F
-	/UDJomVIDsS/itDc6L24kzSY8UBJuULIpDl323znR+D07qSzNrGWwyxYQNxlGlctos9lj2eb1EIT
-	aM/sZt80S+wHyfpIUb1+kQ3sB5+pcGh69v1UE7Q9WvntXa9VPL9K4cA+8t3Xj/LzZ5s/OJg1L2as
-	ZxEp4Bv7TWEUoKzFQfrYUeyRYVR0payg4cttk4bRt/Zdg8CBO1Snvm6qXHQp7O9kdV80mZTaHp0a
-	hWtMDpo3C39MbYOEJdE462Jlg4EydpQqASJFC/49WOPBr5nlEUI4xFStEsRuY3aE5aSb6OOXuaqW
-	u1fDVz0geMmPEfDrUHDxZLEzWz/H7disenK3OVCk7hHP+qX+PCU7V0fBbBTVPJg=
-X-Report-Abuse-To: spam@mx99.antispamcloud.com
-X-Filter-Fingerprint: IFrWXGses7OKB5S5G8/dJUb3OPwsHaH0Fvg5oXltHd/JUWjZ8+qhjyB23tbDuyLOYL8Ff78gYsez
-	4Rl08xudmXi4esCQ0R1MchVjt7wblGlvhFgW0MjUMRkF5sMCDfftTXNFDzN17hnrWeZYOJvLq0Ic
-	WjZ+XcEjj/7Pkld0zkmvziDInX9WdMov2kn2yXjdwv61T+KDYyYtREgszdyFwv8IxCB3p/oCKvxr
-	eyISh3JGb7OS5oVgiO+kDxZrVPLz3MmEGC2PrUKqLq5WmHK+Nw==
-X-Originating-IP: 88.159.208.100
-X-Spampanel-Domain: topic.nl
-X-Spampanel-Username: 88.159.208.100
-Authentication-Results: antispamcloud.com;
-	auth=pass smtp.auth=88.159.208.100@topic.nl
-X-Spampanel-Outgoing-Class: unsure
-X-Spampanel-Outgoing-Evidence: Combined (0.26)
-X-Recommended-Action: accept
-Subject: Where is libunique?
+To: openembedded-devel@lists.openembedded.org
+References: <55ED5556.2020904@topic.nl>
+In-Reply-To: <55ED5556.2020904@topic.nl>
+Subject: Re: Where is libunique?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,45 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Sep 2015 12:22:22 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 07 Sep 2015 12:31:53 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-=EF=BB=BFCurrent meta-openembedded master fails to build with errors like t=
-his:
+On 09/07/2015 12:13 PM, Mike Looijmans wrote:
+> Current meta-openembedded master fails to build with errors like this:
+>
+> ERROR: Nothing PROVIDES 'libunique' (but
+> .../meta-oe/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+> DEPENDS on or otherwise requires it).
+>
+> Searching for 'unique' in meta-openembedded and openembedded-core
+> reveiled nothing that would provide it, there's no recipe with 'unique'
+> in its name, nor any recipe that mentions the word 'unique' provides it,
+> even though I found various recipes that DEPEND on it.
+>
+> Where is libunique?
 
-ERROR: Nothing PROVIDES 'libunique' (but=20
-.../meta-oe/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_=
-2.32.0.bb=20
-DEPENDS on or otherwise requires it).
+You should check not just the current state of master branches of 
+various layers, but also their commit history.
 
-Searching for 'unique' in meta-openembedded and openembedded-core reveiled=
-=20
-nothing that would provide it, there's no recipe with 'unique' in its name,=
-=20
-nor any recipe that mentions the word 'unique' provides it, even though I=20
-found various recipes that DEPEND on it.
+libunique was just removed from oe-core and a patch was sent to add it 
+to meta-oe. There is no way to keep the removal/addition perfectly in 
+sync because the two layers are kept in separate repos and have 
+different maintainers.
 
-Where is libunique?
-
-
-Kind regards,
-
-Mike Looijmans
-System Expert
-
-TOPIC Embedded Products
-Eindhovenseweg 32-C, NL-5683 KH Best
-Postbus 440, NL-5680 AK Best
-Telefoon: +31 (0) 499 33 69 79
-Telefax: +31 (0) 499 33 69 70
-E-mail: mike.looijmans@topicproducts.com
-Website: www.topicproducts.com
-
-Please consider the environment before printing this e-mail
-
-
-
-
+Regards,
+Alex
 
 
