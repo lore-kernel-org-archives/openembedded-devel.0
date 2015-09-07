@@ -1,27 +1,26 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E148E65C8A
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C0474736B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Sep 2015 03:20:37 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t873Kbrp028331
+	Mon,  7 Sep 2015 07:00:14 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t8770FJr013937
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 6 Sep 2015 20:20:37 -0700 (PDT)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Sun, 6 Sep 2015 20:20:36 -0700
+	Mon, 7 Sep 2015 00:00:15 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Mon, 7 Sep 2015 00:00:14 -0700
+From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1440060202-17953-1-git-send-email-kai.kang@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <55ED028C.9000008@windriver.com>
-Date: Mon, 7 Sep 2015 11:20:44 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+Date: Mon, 7 Sep 2015 14:55:01 +0800
+Message-ID: <1441608901-27606-2-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1441608901-27606-1-git-send-email-rongqing.li@windriver.com>
+References: <1441608901-27606-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1440060202-17953-1-git-send-email-kai.kang@windriver.com>
-Subject: Re: [PATCH] inetutils: add package config pam
+Subject: [meta-networking][PATCH 2/2] conntrack-tools: upgrade to 1.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,103 +34,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Sep 2015 03:20:38 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 07 Sep 2015 07:00:16 -0000
+Content-Type: text/plain
 
-On 2015年08月20日 16:43, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Add package config pam for inetutils. And only check pam_appl.h when pam
-> is enabled.
+From: Roy Li <rongqing.li@windriver.com>
 
-Ping.
+1. upgrade to 1.4.2
+2. backport a patch to fix CVE-2015-6496:
+   http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-6496
 
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ ...ack-tools_1.4.0.bb => conntrack-tools_1.4.2.bb} |  5 +-
+ ...build-fix-crash-when-optional-kernel-modu.patch | 85 ++++++++++++++++++++++
+ 2 files changed, 88 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-filter/conntrack-tools/{conntrack-tools_1.4.0.bb => conntrack-tools_1.4.2.bb} (87%)
+ create mode 100644 meta-networking/recipes-filter/conntrack-tools/files/0001-conntrackd-build-fix-crash-when-optional-kernel-modu.patch
 
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->   ...ls-only-check-pam_appl.h-when-pam-enabled.patch | 40 ++++++++++++++++++++++
->   .../inetutils/inetutils_1.9.4.bb                   |  6 +++-
->   2 files changed, 45 insertions(+), 1 deletion(-)
->   create mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-only-check-pam_appl.h-when-pam-enabled.patch
->
-> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-only-check-pam_appl.h-when-pam-enabled.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-only-check-pam_appl.h-when-pam-enabled.patch
-> new file mode 100644
-> index 0000000..ff3abd8
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-only-check-pam_appl.h-when-pam-enabled.patch
-> @@ -0,0 +1,40 @@
-> +Only check security/pam_appl.h which is provided by package libpam when pam is
-> +enabled.
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> +---
-> +diff --git a/configure.ac b/configure.ac
-> +index b35e672..e78a751 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -195,6 +195,19 @@ fi
-> +
-> + # See if we have libpam.a.  Investigate PAM versus Linux-PAM.
-> + if test "$with_pam" = yes ; then
-> ++  AC_CHECK_HEADERS([security/pam_appl.h], [], [], [
-> ++#include <sys/types.h>
-> ++#ifdef HAVE_NETINET_IN_SYSTM_H
-> ++# include <netinet/in_systm.h>
-> ++#endif
-> ++#include <netinet/in.h>
-> ++#ifdef HAVE_NETINET_IP_H
-> ++# include <netinet/ip.h>
-> ++#endif
-> ++#ifdef HAVE_SYS_PARAM_H
-> ++# include <sys/param.h>
-> ++#endif
-> ++])
-> +   AC_CHECK_LIB(dl, dlopen, LIBDL=-ldl)
-> +   AC_CHECK_LIB(pam, pam_authenticate, LIBPAM=-lpam)
-> +   if test "$ac_cv_lib_pam_pam_authenticate" = yes ; then
-> +@@ -587,7 +600,7 @@ AC_HEADER_DIRENT
-> + AC_CHECK_HEADERS([arpa/nameser.h errno.h fcntl.h features.h \
-> + 		  glob.h memory.h netinet/ether.h netinet/in_systm.h \
-> + 		  netinet/ip.h netinet/ip_icmp.h netinet/ip_var.h \
-> +-		  security/pam_appl.h shadow.h \
-> ++		  shadow.h \
-> + 		  stdarg.h stdlib.h string.h stropts.h sys/tty.h \
-> + 		  sys/utsname.h sys/ptyvar.h sys/msgbuf.h sys/filio.h \
-> + 		  sys/ioctl_compat.h sys/cdefs.h sys/stream.h sys/mkdev.h \
-> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-> index db07cd6..adfc940 100644
-> --- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-> @@ -19,6 +19,7 @@ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
->              file://telnet.xinetd.inetutils \
->              file://tftpd.xinetd.inetutils \
->              file://inetutils-1.9-PATH_PROCNET_DEV.patch \
-> +           file://inetutils-only-check-pam_appl.h-when-pam-enabled.patch \
->   "
->   
->   SRC_URI[md5sum] = "04852c26c47cc8c6b825f2b74f191f52"
-> @@ -29,9 +30,12 @@ inherit autotools gettext update-alternatives texinfo
->   SRC_URI += "${@base_contains('DISTRO_FEATURES', 'ipv6', '', 'file://fix-disable-ipv6.patch', d)}"
->   noipv6="${@base_contains('DISTRO_FEATURES', 'ipv6', '', '--disable-ipv6 gl_cv_socket_ipv6=no', d)}"
->   
-> -PACKAGECONFIG ??= "ftp uucpd"
-> +PACKAGECONFIG ??= "ftp uucpd \
-> +                   ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
-> +                  "
->   PACKAGECONFIG[ftp] = "--enable-ftp,--disable-ftp,readline"
->   PACKAGECONFIG[uucpd] = "--enable-uucpd,--disable-uucpd,readline"
-> +PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam"
->   
->   EXTRA_OECONF = "--with-ncurses-include-dir=${STAGING_INCDIR} \
->           ${noipv6} \
-
-
+diff --git a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.0.bb b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.2.bb
+similarity index 87%
+rename from meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.0.bb
+rename to meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.2.bb
+index 57fe21c..7b11d20 100644
+--- a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.0.bb
++++ b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.2.bb
+@@ -9,9 +9,10 @@ SRC_URI = " \
+     http://www.netfilter.org/projects/conntrack-tools/files/conntrack-tools-${PV}.tar.bz2;name=tar \
+     file://conntrack-failover \
+     file://init \
++    file://0001-conntrackd-build-fix-crash-when-optional-kernel-modu.patch \
+ "
+-SRC_URI[tar.md5sum] = "ee737c774e01349f75e935228a2d851b"
+-SRC_URI[tar.sha256sum] = "036b032a5c4d180aad686df21399d74506b9b3d3000794eb13ac313482e24896"
++SRC_URI[tar.md5sum] = "b1f9d006e7bf000a77395ff7cd3fac16"
++SRC_URI[tar.sha256sum] = "e5c423dc077f9ca8767eaa6cf40446943905711c6a8fe27f9cc1977d4d6aa11e"
+ 
+ inherit autotools-brokensep update-rc.d pkgconfig
+ 
+diff --git a/meta-networking/recipes-filter/conntrack-tools/files/0001-conntrackd-build-fix-crash-when-optional-kernel-modu.patch b/meta-networking/recipes-filter/conntrack-tools/files/0001-conntrackd-build-fix-crash-when-optional-kernel-modu.patch
+new file mode 100644
+index 0000000..49c7772
+--- /dev/null
++++ b/meta-networking/recipes-filter/conntrack-tools/files/0001-conntrackd-build-fix-crash-when-optional-kernel-modu.patch
+@@ -0,0 +1,85 @@
++From c392c159605956c7bd4a264ab4490e2b2704c0cd Mon Sep 17 00:00:00 2001
++From: Pablo Neira Ayuso <pablo@netfilter.org>
++Date: Fri, 13 Jun 2014 12:53:17 +0200
++Subject: [PATCH] conntrackd: build: fix crash when optional kernel modules are
++ not loaded
++
++Upstream-Status: Backport 
++
++Fix a possible crash if conntrackd sees DCCP, SCTP and ICMPv6 traffic
++and the corresponding kernel modules that track this traffic are not
++available.
++
++Fixes: http://bugzilla.netfilter.org/show_bug.cgi?id=910
++Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
++---
++ src/build.c | 22 +++++++++++++---------
++ 1 file changed, 13 insertions(+), 9 deletions(-)
++
++diff --git a/src/build.c b/src/build.c
++index 5799b51..9ba8b57 100644
++--- a/src/build.c
+++++ b/src/build.c
++@@ -105,14 +105,14 @@ static enum nf_conntrack_attr nat_type[] =
++ 	  ATTR_ORIG_NAT_SEQ_OFFSET_AFTER, ATTR_REPL_NAT_SEQ_CORRECTION_POS,
++ 	  ATTR_REPL_NAT_SEQ_OFFSET_BEFORE, ATTR_REPL_NAT_SEQ_OFFSET_AFTER };
++ 
+++/* ICMP, UDP and TCP are always loaded with nf_conntrack_ipv4 */
++ static void build_l4proto_tcp(const struct nf_conntrack *ct, struct nethdr *n)
++ {
++-	ct_build_group(ct, ATTR_GRP_ORIG_PORT, n, NTA_PORT,
++-		      sizeof(struct nfct_attr_grp_port));
++-
++ 	if (!nfct_attr_is_set(ct, ATTR_TCP_STATE))
++ 		return;
++ 
+++	ct_build_group(ct, ATTR_GRP_ORIG_PORT, n, NTA_PORT,
+++		      sizeof(struct nfct_attr_grp_port));
++ 	ct_build_u8(ct, ATTR_TCP_STATE, n, NTA_TCP_STATE);
++ 	if (CONFIG(sync).tcp_window_tracking) {
++ 		ct_build_u8(ct, ATTR_TCP_WSCALE_ORIG, n, NTA_TCP_WSCALE_ORIG);
++@@ -122,12 +122,12 @@ static void build_l4proto_tcp(const struct nf_conntrack *ct, struct nethdr *n)
++ 
++ static void build_l4proto_sctp(const struct nf_conntrack *ct, struct nethdr *n)
++ {
++-	ct_build_group(ct, ATTR_GRP_ORIG_PORT, n, NTA_PORT,
++-		      sizeof(struct nfct_attr_grp_port));
++-
+++	/* SCTP is optional, make sure nf_conntrack_sctp is loaded */
++ 	if (!nfct_attr_is_set(ct, ATTR_SCTP_STATE))
++ 		return;
++ 
+++	ct_build_group(ct, ATTR_GRP_ORIG_PORT, n, NTA_PORT,
+++		      sizeof(struct nfct_attr_grp_port));
++ 	ct_build_u8(ct, ATTR_SCTP_STATE, n, NTA_SCTP_STATE);
++ 	ct_build_u32(ct, ATTR_SCTP_VTAG_ORIG, n, NTA_SCTP_VTAG_ORIG);
++ 	ct_build_u32(ct, ATTR_SCTP_VTAG_REPL, n, NTA_SCTP_VTAG_REPL);
++@@ -135,18 +135,22 @@ static void build_l4proto_sctp(const struct nf_conntrack *ct, struct nethdr *n)
++ 
++ static void build_l4proto_dccp(const struct nf_conntrack *ct, struct nethdr *n)
++ {
++-	ct_build_group(ct, ATTR_GRP_ORIG_PORT, n, NTA_PORT,
++-		      sizeof(struct nfct_attr_grp_port));
++-
+++	/* DCCP is optional, make sure nf_conntrack_dccp is loaded */
++ 	if (!nfct_attr_is_set(ct, ATTR_DCCP_STATE))
++ 		return;
++ 
+++	ct_build_group(ct, ATTR_GRP_ORIG_PORT, n, NTA_PORT,
+++		      sizeof(struct nfct_attr_grp_port));
++ 	ct_build_u8(ct, ATTR_DCCP_STATE, n, NTA_DCCP_STATE);
++ 	ct_build_u8(ct, ATTR_DCCP_ROLE, n, NTA_DCCP_ROLE);
++ }
++ 
++ static void build_l4proto_icmp(const struct nf_conntrack *ct, struct nethdr *n)
++ {
+++	/* This is also used by ICMPv6 and nf_conntrack_ipv6 is optional */
+++	if (!nfct_attr_is_set(ct, ATTR_ICMP_TYPE))
+++		return;
+++
++ 	ct_build_u8(ct, ATTR_ICMP_TYPE, n, NTA_ICMP_TYPE);
++ 	ct_build_u8(ct, ATTR_ICMP_CODE, n, NTA_ICMP_CODE);
++ 	ct_build_u16(ct, ATTR_ICMP_ID, n, NTA_ICMP_ID);
++-- 
++1.9.1
++
 -- 
-Regards,
-Neil | Kai Kang
+1.9.1
 
 
