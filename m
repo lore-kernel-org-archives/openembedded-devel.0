@@ -1,24 +1,44 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BCED736B6
+Return-Path: <sledz@dresearch-fe.de>
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id B00B0762A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Sep 2015 07:00:13 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8770DoD029182
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  7 Sep 2015 07:09:51 +0000 (UTC)
+Received: by wiclk2 with SMTP id lk2so77636693wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 7 Sep 2015 00:00:13 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.235.1; Mon, 7 Sep 2015 00:00:13 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 7 Sep 2015 14:55:00 +0800
-Message-ID: <1441608901-27606-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Mon, 07 Sep 2015 00:09:51 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=Xxq+bpDbKOy0cag9vUtSsnZuiv4DnFhX+OCqBIdH2Fw=;
+	b=KsfCj5tcw352L8XmL3i2SWevaThfhWqLAjqqNR/UQCWtrN2TEYAx+Bv8EPWVXITUOI
+	OPkV49hXQzErmCcCDaJnBCjs28/p1Q2EVLHQ0TF+cWzDtuccm0MA2rhxjr5d7W+G5UGa
+	xaJ1Ee8SisPB/3lju13ZAQ0se7UmabJL52YU/NzXvDkH/YIGgjFgGhiYWq8THbqNmepS
+	KMGX7S+F7rvN7kWKC7dywscjYxop+NUO2bz2n3EN6FzQiris6WN7gh5EmnfVOmo9tyVZ
+	GcQGxidWGONy0HEoB6gTfmnsx71S3nsZ19en6mXaIHfy/mI+BGIg1Yl5twVi82rvAypJ
+	j4/w==
+X-Gm-Message-State: ALoCoQlNmO8ojT1DTYd7JoJH/qljGKaYbCikngXic7QvWZqieIFC7+RPYyX+Tdqq1ta8zxQHkflW
+X-Received: by 10.194.85.163 with SMTP id i3mr32750724wjz.75.1441609791214;
+	Mon, 07 Sep 2015 00:09:51 -0700 (PDT)
+Received: from [172.29.23.46] (zk223.dresearch-fe.de. [217.92.177.116])
+	by smtp.googlemail.com with ESMTPSA id
+	n15sm11214084wjr.14.2015.09.07.00.09.50
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 07 Sep 2015 00:09:50 -0700 (PDT)
+To: Mike Looijmans <mike.looijmans@topic.nl>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <55E949A4.9050805@dresearch-fe.de> <55EAD217.3010806@topic.nl>
+From: Steffen Sledz <sledz@dresearch-fe.de>
+Message-ID: <55ED383E.6070005@dresearch-fe.de>
+Date: Mon, 7 Sep 2015 09:09:50 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/2] libnetfilter-conntrack: upgrade to 1.0.4
+In-Reply-To: <55EAD217.3010806@topic.nl>
+Subject: Re: [OE-core] "sub" machine types?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,36 +52,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Sep 2015 07:00:16 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 07 Sep 2015 07:09:52 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-From: Roy Li <rongqing.li@windriver.com>
+On 05.09.2015 13:29, Mike Looijmans wrote:
+> ... and I think the u-boot recipe recently learned to have multiple targets, so you can build multiple bootloaders for a single machine too.
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- ...ibnetfilter-conntrack_1.0.2.bb => libnetfilter-conntrack_1.0.4.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-filter/libnetfilter/{libnetfilter-conntrack_1.0.2.bb => libnetfilter-conntrack_1.0.4.bb} (80%)
+That sounds great. Can someone give a pointer to some documentation or examples for that?
 
-diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.2.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
-similarity index 80%
-rename from meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.2.bb
-rename to meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
-index df4030c..c1df1cb 100644
---- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.2.bb
-+++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- DEPENDS = "libnfnetlink libmnl"
- 
- SRC_URI = "http://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2;name=tar"
--SRC_URI[tar.md5sum] = "447114b5d61bb9a9617ead3217c3d3ff"
--SRC_URI[tar.sha256sum] = "a0bd747dd58ae1513586b43c7125b41e6325f97eb95ac63d53cf5aeb33254d12"
-+SRC_URI[tar.md5sum] = "18cf80c4b339a3285e78822dbd4f08d7"
-+SRC_URI[tar.sha256sum] = "d9ec4a3caf49417f2b0a2d8d44249133e8c3ec78c757b7eb8c273f1cb6929c7d"
- 
- S = "${WORKDIR}/libnetfilter_conntrack-${PV}"
- 
 -- 
-1.9.1
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
