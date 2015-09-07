@@ -1,21 +1,35 @@
-Return-Path: <milo-software@users.sourceforge.net>
-X-Greylist: delayed 366 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sun, 06 Sep 2015 14:48:21 UTC
-Received: from smtp05.mail.online.nl (smtp05.mail.online.nl [194.134.25.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 332B276EBF
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
+	[209.85.220.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 22D06762A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  6 Sep 2015 14:48:21 +0000 (UTC)
-Received: from localhost.localdomain (s55969068.adsl.online.nl
-	[85.150.144.104])
-	by smtp05.mail.online.nl (Postfix) with ESMTP id 0621A20005D;
-	Sun,  6 Sep 2015 16:42:11 +0200 (CEST)
-From: Mike Looijmans <milo-software@users.sourceforge.net>
+	Mon,  7 Sep 2015 03:01:05 +0000 (UTC)
+Received: by pacej10 with SMTP id ej10so820013pac.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 06 Sep 2015 20:01:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=I4VvzswM6hpTLbENq5KTh9QLhxSq+HOPloc2pTnY+fc=;
+	b=uSu25KySJ5PVyPKSQL/vWW52ARMeMrAIeu795H3JCdfsCSSLG0DeHCXiLXcNdkBeH6
+	9RLZht1CBb0BoZiAGo3G3kqeWHiibau2KyAQwlBtbWPi+IWGLw/B7gWKwRuIpLQ98/6V
+	E9oIdKfOpnZGxFVJYVR3sObUQfJvBtpal7r9TCX6EQJurzw25BfCHB+y7svvZ8ZNDzyi
+	ZVvKi7FJfjxpj4LYCL8nJyLdFSzlZ6Z/wKmeYvTYmdTcimUgKZ+ZIU+nAVXnV+62WWr1
+	1qkt1rNM+ZwMhWB6ZuMU0rOO4zUnmaj1sXUMlpz5XPoGv9PRaXcqQUEUoMp83y3dd9Kv
+	i0AQ==
+X-Received: by 10.68.166.196 with SMTP id zi4mr39987294pbb.83.1441594865692;
+	Sun, 06 Sep 2015 20:01:05 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id
+	un2sm10053651pac.28.2015.09.06.20.01.03
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 06 Sep 2015 20:01:03 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  6 Sep 2015 16:42:09 +0200
-Message-Id: <1441550529-8357-1-git-send-email-milo-software@users.sourceforge.net>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <55EAAF4A.10109@topic.nl>
-Subject: [PATCH][meta-python] python-pyopenssl: Inherit setuptools to fix failing install
+Date: Mon,  7 Sep 2015 13:01:43 +1000
+Message-Id: <1441594903-6021-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 2.5.0
+Subject: [meta-qt5][PATCH] libconnman-qt5: update to 1.0.92
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,35 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Sep 2015 14:48:22 -0000
+X-List-Received-Date: Mon, 07 Sep 2015 03:01:09 -0000
 
-From: Mike Looijmans <mike.looijmans@topic.nl>
-
-Fixes the following error during install phase:
-
- ImportError: No module named setuptools_ext
- ERROR: python setup.py install execution failed.
-
-Reported-by: athoik@openpli.org
-Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-qt/libconnman-qt/libconnman-qt5_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb b/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb
-index 694da27..7f93012 100644
---- a/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb
-+++ b/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb
-@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "f0a26070d6db0881de8bcc7846934b7c3c930d8f9c79d45883ee48984b
+diff --git a/recipes-qt/libconnman-qt/libconnman-qt5_git.bb b/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
+index f79dc0c..8724e67 100644
+--- a/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
++++ b/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
+@@ -5,9 +5,9 @@ HOMEPAGE = "https://github.com/nemomobile/libconnman-qt"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
+ DEPENDS += "qtbase qtdeclarative"
+-PV = "1.0.91+git${SRCPV}"
++PV = "1.0.92+git${SRCPV}"
  
- S = "${WORKDIR}/${SRCNAME}-${PV}"
+-SRCREV = "f9ce5eaa124fc5a1a554540c94331301bb2b1b49"
++SRCREV = "2591cd6013936478d9edaf75f1a45482851af0f2"
+ SRC_URI = "git://github.com/nemomobile/libconnman-qt.git"
  
--inherit distutils
-+inherit setuptools
- 
- PACKAGES =+ "${PN}-tests"
- FILES_${PN}-tests = "${libdir}/${PYTHON_DIR}/site-packages/OpenSSL/test"
+ S = "${WORKDIR}/git"
 -- 
-2.1.0
+2.5.0
 
 
