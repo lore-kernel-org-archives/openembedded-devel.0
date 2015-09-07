@@ -1,45 +1,55 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id C0D2A7669F
+Return-Path: <mike.looijmans@topicproducts.com>
+X-Greylist: delayed 11285 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 07 Sep 2015 12:22:20 UTC
+Received: from mx12-05.smtp.antispamcloud.com (mx12-05.smtp.antispamcloud.com
+	[46.165.232.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 238C560017
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Sep 2015 12:08:26 +0000 (UTC)
-Received: by wicge5 with SMTP id ge5so81725989wic.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Sep 2015 05:08:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=ikd5U/J8DluGwVRDvFb+FMQbEuLztPrLy/QHT0KkntU=;
-	b=JbiDz1IWuk6iwmdwjFw3y3ST7A9MxS4py7D7cCCmUN64hBEXzLbXfSAWhqHyNFRhjI
-	+Fs62QeSBoCor162Dod+DQT1RBnNZTfMjsTQycj+kxwv8jyCMM1DQKfD5zWWKZib3IhO
-	mOU6GVshM218t/j0VkMaMRwgZddN1bkG91qkwaI3BRNryXiPCzruFh0uVibwAmXFAwDx
-	9GM4U9T0TDP06eoW+MeLcfEXsYr932f/fQMWsriLH/uud9rKCmr1VEi53NvaJKDuLn87
-	tDrSi7uEFTiSCPP7r6W9OZPLV92p8uX4YtDoP11fzdC8R8TCma8X0oechT7JgIWRCep0
-	+jgA==
-X-Gm-Message-State: ALoCoQkds/YDudQ7+s8R1Zsdp1GpFJ40WoHpuItKEBWvR7tZehVHMdq4qjqYLPrJN5NB75CPjWNZ
-X-Received: by 10.180.105.196 with SMTP id go4mr30346169wib.36.1441627706304; 
-	Mon, 07 Sep 2015 05:08:26 -0700 (PDT)
-Received: from [172.29.23.46] (zk223.dresearch-fe.de. [217.92.177.116])
-	by smtp.googlemail.com with ESMTPSA id
-	wo2sm19738525wjb.2.2015.09.07.05.08.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 07 Sep 2015 05:08:25 -0700 (PDT)
-To: Mike Looijmans <mike.looijmans@topic.nl>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>, pb@pbcl.net
-References: <55E949A4.9050805@dresearch-fe.de> <55EAD217.3010806@topic.nl>
-	<55ED383E.6070005@dresearch-fe.de>
-From: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <55ED7E38.8050201@dresearch-fe.de>
-Date: Mon, 7 Sep 2015 14:08:24 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+	Mon,  7 Sep 2015 12:22:20 +0000 (UTC)
+Received: from 100-208.ftth.onsbrabantnet.nl ([88.159.208.100]
+	helo=TOP-EX01.TOPIC.LOCAL)
+	by mx12.antispamcloud.com with esmtps (TLSv1:AES128-SHA:128)
+	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
+	id 1ZYsUy-00025X-WF for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Sep 2015 11:14:14 +0200
+Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
+	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.224.2;
+	Mon, 7 Sep 2015 11:13:27 +0200
+Message-ID: <55ED5556.2020904@topic.nl>
+Date: Mon, 7 Sep 2015 11:13:58 +0200
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Organization: TOPIC
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
 MIME-Version: 1.0
-In-Reply-To: <55ED383E.6070005@dresearch-fe.de>
-Subject: Re: [OE-core] "sub" machine types?
+To: <openembedded-devel@lists.openembedded.org>
+X-Originating-IP: [192.168.80.121]
+X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
+X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
+X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
+	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
+	4XktS92Fqq3Qa0exZrGdvwCI1FSC+XchGESnvFybL+SfEhkHT722YSfEE2oK51ooCsIS+vWYhbEy
+	K2f7GgNc9aUV1oY4fX3W5eOCNA39IMF/tWq0Xia4BSmFvzyHGTjedCBNA121Y38SeyRMCs3XcWpW
+	rY6lCH8L7CDV11D5JM7Xk65yci5j+xTRr7HgZJNWyY7q5BA/5iDO7tJWc5LW0A0HkzG7uPVDzc3F
+	/UDJomVIDsS/itDc6L24kzSY8UBJuULIpDl323znR+D07qSzNrGWwyxYQNxlGlctos9lj2eb1EIT
+	aM/sZt80S+wHyfpIUb1+kQ3sB5+pcGh69v1UE7Q9WvntXa9VPL9K4cA+8t3Xj/LzZ5s/OJg1L2as
+	ZxEp4Bv7TWEUoKzFQfrYUeyRYVR0payg4cttk4bRt/Zdg8CBO1Snvm6qXHQp7O9kdV80mZTaHp0a
+	hWtMDpo3C39MbYOEJdE462Jlg4EydpQqASJFC/49WOPBr5nlEUI4xFStEsRuY3aE5aSb6OOXuaqW
+	u1fDVz0geMmPEfDrUHDxZLEzWz/H7disenK3OVCk7hHP+qX+PCU7V0fBbBTVPJg=
+X-Report-Abuse-To: spam@mx99.antispamcloud.com
+X-Filter-Fingerprint: IFrWXGses7OKB5S5G8/dJUb3OPwsHaH0Fvg5oXltHd/JUWjZ8+qhjyB23tbDuyLOYL8Ff78gYsez
+	4Rl08xudmXi4esCQ0R1MchVjt7wblGlvhFgW0MjUMRkF5sMCDfftTXNFDzN17hnrWeZYOJvLq0Ic
+	WjZ+XcEjj/7Pkld0zkmvziDInX9WdMov2kn2yXjdwv61T+KDYyYtREgszdyFwv8IxCB3p/oCKvxr
+	eyISh3JGb7OS5oVgiO+kDxZrVPLz3MmEGC2PrUKqLq5WmHK+Nw==
+X-Originating-IP: 88.159.208.100
+X-Spampanel-Domain: topic.nl
+X-Spampanel-Username: 88.159.208.100
+Authentication-Results: antispamcloud.com;
+	auth=pass smtp.auth=88.159.208.100@topic.nl
+X-Spampanel-Outgoing-Class: unsure
+X-Spampanel-Outgoing-Evidence: Combined (0.26)
+X-Recommended-Action: accept
+Subject: Where is libunique?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,29 +63,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Sep 2015 12:08:27 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 07 Sep 2015 12:22:22 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On 07.09.2015 09:09, Steffen Sledz wrote:
-> On 05.09.2015 13:29, Mike Looijmans wrote:
->> ... and I think the u-boot recipe recently learned to have multiple targets, so you can build multiple bootloaders for a single machine too.
-> 
-> That sounds great. Can someone give a pointer to some documentation or examples for that?
+=EF=BB=BFCurrent meta-openembedded master fails to build with errors like t=
+his:
 
-Is it correct to just replace the UBOOT_MACHINE item in the machine config with something like this?
+ERROR: Nothing PROVIDES 'libunique' (but=20
+.../meta-oe/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_=
+2.32.0.bb=20
+DEPENDS on or otherwise requires it).
 
-UBOOT_CONFIG ??= "sub1 sub2 sub3"
-UBOOT_CONFIG[sub1] = "mymachine_sub1_config"
-UBOOT_CONFIG[sub2] = "mymachine_sub2_config"
-UBOOT_CONFIG[sub3] = "mymachine_sub3_config"
+Searching for 'unique' in meta-openembedded and openembedded-core reveiled=
+=20
+nothing that would provide it, there's no recipe with 'unique' in its name,=
+=20
+nor any recipe that mentions the word 'unique' provides it, even though I=20
+found various recipes that DEPEND on it.
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Where is libunique?
+
+
+Kind regards,
+
+Mike Looijmans
+System Expert
+
+TOPIC Embedded Products
+Eindhovenseweg 32-C, NL-5683 KH Best
+Postbus 440, NL-5680 AK Best
+Telefoon: +31 (0) 499 33 69 79
+Telefax: +31 (0) 499 33 69 70
+E-mail: mike.looijmans@topicproducts.com
+Website: www.topicproducts.com
+
+Please consider the environment before printing this e-mail
+
+
+
+
+
 
