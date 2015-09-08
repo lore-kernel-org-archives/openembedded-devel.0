@@ -1,24 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EC3565C8A
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 48A6B76AC5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Sep 2015 09:37:09 +0000 (UTC)
+	Tue,  8 Sep 2015 09:37:10 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t889b8Lh021434
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t889bAd1008838
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 8 Sep 2015 02:37:09 -0700 (PDT)
+	Tue, 8 Sep 2015 02:37:10 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.235.1; Tue, 8 Sep 2015 02:37:07 -0700
+	14.3.235.1; Tue, 8 Sep 2015 02:37:10 -0700
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 8 Sep 2015 17:31:46 +0800
-Message-ID: <1441704708-22940-1-git-send-email-kai.kang@windriver.com>
+Date: Tue, 8 Sep 2015 17:31:47 +0800
+Message-ID: <1441704708-22940-2-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1441704708-22940-1-git-send-email-kai.kang@windriver.com>
+References: <1441704708-22940-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 0/2] Upgrade efivar and efibootmgr
+Subject: [PATCH 1/2] efivar: 0.7 -> 0.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,20 +39,38 @@ Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
+Upgrade efivar from 0.7 to 0.21.
 
-Kai Kang (2):
-  efivar: 0.7 -> 0.21
-  efibootmgr: 0.6.0 -> 0.12
+* update HOMEPAGE
 
- .../{efibootmgr_0.6.0.bb => efibootmgr_0.12.bb}    | 21 ++++++++--------
- .../efibootmgr/files/docbook-fixes.patch           | 28 ----------------------
- .../files/w-keep-existing-mbr-signature.patch      | 26 --------------------
- meta-oe/recipes-extended/efivar/efivar_git.bb      |  8 +++----
- 4 files changed, 15 insertions(+), 68 deletions(-)
- rename meta-oe/recipes-extended/efibootmgr/{efibootmgr_0.6.0.bb => efibootmgr_0.12.bb} (39%)
- delete mode 100644 meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
- delete mode 100644 meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-oe/recipes-extended/efivar/efivar_git.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
+diff --git a/meta-oe/recipes-extended/efivar/efivar_git.bb b/meta-oe/recipes-extended/efivar/efivar_git.bb
+index 18446a0..bf2e6d2 100644
+--- a/meta-oe/recipes-extended/efivar/efivar_git.bb
++++ b/meta-oe/recipes-extended/efivar/efivar_git.bb
+@@ -1,14 +1,14 @@
+ SUMMARY = "Tools to manipulate UEFI variables"
+ DESCRIPTION = "efivar provides a simple command line interface to the UEFI variable facility"
+-HOMEPAGE = "https://github.com/vathpela/efivar"
++HOMEPAGE = "https://github.com/rhinstaller/efivar"
+ 
+ LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
++LIC_FILES_CHKSUM = "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
+ 
+ DEPENDS = "popt"
+ 
+-SRCREV = "c9e1f24a81b5374408bca5616402276e47171cf7"
+-PV = "0.7+git${SRCPV}"
++SRCREV = "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
++PV = "0.21+git${SRCPV}"
+ SRC_URI = "git://github.com/vathpela/efivar.git"
+ 
+ S = "${WORKDIR}/git"
 -- 
 1.9.1
 
