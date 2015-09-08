@@ -1,40 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f195.google.com (mail-wi0-f195.google.com
-	[209.85.212.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 624FE65C8A
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 5CABF7422C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Sep 2015 15:43:41 +0000 (UTC)
-Received: by wiku15 with SMTP id u15so22815742wik.1
+	Tue,  8 Sep 2015 15:43:42 +0000 (UTC)
+Received: by wiclk2 with SMTP id lk2so125431730wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Sep 2015 08:43:41 -0700 (PDT)
+	Tue, 08 Sep 2015 08:43:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=Gn+BaIRekyl+v/zkBSw+fv7jnQBOa7/Rhm27B2gC3tQ=;
-	b=a5FR+9XlxkIznS1A35Z+6+TO+JndxVBJxau4z+ugyJEFTVNxcie99TjFF5V7fev1xO
-	TARqOu3dyp48X3FFeQCe3kfi+Ry150Nvob2nhsFDH0x2f7e4+aBtWOBTPsHa9FhqGINb
-	wmMbKZtSxPRVv67enXLnW/v82bd18MDPV6zMCX1TOe9XpDS6MHbadPos9A/kQvXnV9xT
-	nFfbG7B3sM07lrk2vhUzMqHCjSbPyqDQnVxc5p9q4c2p1zQl0FYFcAPs+d3z3o3srPaU
-	7I0qbO0UzkTujK8QrIfM40ZoJq0gzuuqD1E8dJbG8CQSiJ4iSA3hEsi5Lzb9ZyjoBURP
-	WvXw==
-X-Received: by 10.180.8.101 with SMTP id q5mr48039798wia.10.1441727021019;
-	Tue, 08 Sep 2015 08:43:41 -0700 (PDT)
+	bh=WrOa9hobLuqrrsoBO1CPCnCgNnVRlG0Ke0yamJ1282Q=;
+	b=sTO2f1m9YTMU7h7zIPNleyMHZR5z+D1puaY1O3mnO8EleCgjMk0P9d9yOkFZG1BLKh
+	j99u7y5uwpau7OX4VfZS4qcApCwkLUV3LGBPL7wMiYPykVJdL/68ipvcOY2wKJ/TcO7X
+	E9UvhBa55UqPutBauvKsk0KIFKlfy/vEE4wO7qRWW52B4CTumyqP3BQvSc8JBW8/T6kW
+	wI6FPRmsoAY21sw8YyErLpWmMMESOgwgYPssk4ZWLRnqJ804jcrI5KTXj0o7yCvIPrO/
+	uUc+SPcvACVK+wE2yn1OeNwZc/JsWDizxCgyc3z5pHHgINw5MB0mihveFD5BZ/3aYPIb
+	1GyQ==
+X-Received: by 10.180.182.7 with SMTP id ea7mr47100318wic.58.1441727022412;
+	Tue, 08 Sep 2015 08:43:42 -0700 (PDT)
 Received: from localhost.localdomain ([5.147.14.94])
 	by smtp.googlemail.com with ESMTPSA id
-	lu5sm5496240wjb.9.2015.09.08.08.43.40
+	lu5sm5496240wjb.9.2015.09.08.08.43.41
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 08 Sep 2015 08:43:40 -0700 (PDT)
+	Tue, 08 Sep 2015 08:43:41 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Sep 2015 17:42:53 +0200
-Message-Id: <1441726980-32656-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue,  8 Sep 2015 17:42:55 +0200
+Message-Id: <1441726980-32656-5-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.1.0
 In-Reply-To: <1441726980-32656-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1441726980-32656-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/9] parole: initial add 0.8.0
+Subject: [PATCH 4/9] evolution-data-server: fix locale installation path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,97 +48,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Sep 2015 15:43:41 -0000
+X-List-Received-Date: Tue, 08 Sep 2015 15:43:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+fixes:
+
+WARNING: QA Issue: evolution-data-server: Files/directories were installed but not shipped in any package:
+  /usr/locale
+  /usr/locale/xh
+  /usr/locale/hu
+  /usr/locale/nn
+  /usr/locale/fi
+...
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../parole/files/parole-0.8.0-appdata.patch        | 30 ++++++++++++++++++
- .../recipes-multimedia/parole/parole_0.8.0.bb      | 37 ++++++++++++++++++++++
- 2 files changed, 67 insertions(+)
- create mode 100644 meta-xfce/recipes-multimedia/parole/files/parole-0.8.0-appdata.patch
- create mode 100644 meta-xfce/recipes-multimedia/parole/parole_0.8.0.bb
+ ...6-configure.ac-do-not-overwrite-localedir.patch | 34 ++++++++++++++++++++++
+ .../recipes-gnome/eds/evolution-data-server_git.bb |  1 +
+ 2 files changed, 35 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/0006-configure.ac-do-not-overwrite-localedir.patch
 
-diff --git a/meta-xfce/recipes-multimedia/parole/files/parole-0.8.0-appdata.patch b/meta-xfce/recipes-multimedia/parole/files/parole-0.8.0-appdata.patch
+diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/0006-configure.ac-do-not-overwrite-localedir.patch b/meta-gnome/recipes-gnome/eds/evolution-data-server/0006-configure.ac-do-not-overwrite-localedir.patch
 new file mode 100644
-index 0000000..e076924
+index 0000000..741e5e9
 --- /dev/null
-+++ b/meta-xfce/recipes-multimedia/parole/files/parole-0.8.0-appdata.patch
-@@ -0,0 +1,30 @@
-+Upstream-Status: submitted [1]
-+Taken-From: [2]
++++ b/meta-gnome/recipes-gnome/eds/evolution-data-server/0006-configure.ac-do-not-overwrite-localedir.patch
+@@ -0,0 +1,34 @@
++From 3feaea8e84b3ad8dc2d551e42224f3b4a9413e7d Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Thu, 3 Sep 2015 11:14:24 +0200
++Subject: [PATCH] configure.ac: do not overwrite localedir
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+[1] https://bugzilla.xfce.org/show_bug.cgi?id=11653
-+[2] http://pkgs.fedoraproject.org/cgit/parole.git/tree/parole-0.8.0-appdata.patch
++Upstream-Status: Backport [1]
 +
-+diff -Nur parole-0.8.0.orig/data/appdata/parole.appdata.xml.in parole-0.8.0/data/appdata/parole.appdata.xml.in
-+--- parole-0.8.0.orig/data/appdata/parole.appdata.xml.in	2015-02-28 07:23:54.000000000 -0700
-++++ parole-0.8.0/data/appdata/parole.appdata.xml.in	2015-03-07 08:25:01.940009844 -0700
-+@@ -41,7 +41,7 @@
-+   </provides>
++[1] https://git.gnome.org/browse/evolution-data-server/tree/configure.ac#n298
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ configure.ac | 3 ---
++ 1 file changed, 3 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index f1d4ce8..cee847f 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -257,9 +257,6 @@ GETTEXT_PACKAGE=evolution-data-server-$BASE_VERSION
++ AC_SUBST(GETTEXT_PACKAGE)
++ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettext])
 + 
-+   <releases>
-+-    <release version="0.7.0" timestamp="">
-++    <release version="0.7.0" timestamp="1396146123">
-+       <description>
-+         <_p>This unstable development release adds the new clutter backend and cleans up
-+         deprecated Gtk3 symbols. It also adds a "go to position" feature and several bugs
-+diff -Nur parole-0.8.0.orig/po/es.po parole-0.8.0/po/es.po
-+--- parole-0.8.0.orig/po/es.po	2015-02-28 07:23:54.000000000 -0700
-++++ parole-0.8.0/po/es.po	2015-03-07 08:25:17.447726837 -0700
-+@@ -514,7 +514,7 @@
-+ "This unstable development release adds the new clutter backend and cleans up"
-+ " deprecated Gtk3 symbols. It also adds a \"go to position\" feature and "
-+ "several bugs have been addressed."
-+-msgstr "Esta versión de desarrollo añade un nuevo motor de <i>clutter</i> y elimina símbolos GTK3 obsoletos. Además añade la funcionalidad «Ir a la posición» y corrige un sinnúmero de errores."
-++msgstr "Esta versión de desarrollo añade un nuevo motor de clutter y elimina símbolos GTK3 obsoletos. Además añade la funcionalidad «Ir a la posición» y corrige un sinnúmero de errores."
-+ 
-+ #: ../data/appdata/parole.appdata.xml.in.h:4
-+ msgid "This release fixes a problem with detecting DVD drive locations."
-diff --git a/meta-xfce/recipes-multimedia/parole/parole_0.8.0.bb b/meta-xfce/recipes-multimedia/parole/parole_0.8.0.bb
-new file mode 100644
-index 0000000..28bedaf
---- /dev/null
-+++ b/meta-xfce/recipes-multimedia/parole/parole_0.8.0.bb
-@@ -0,0 +1,37 @@
-+DESCRIPTION = "Parole is a modern simple media player based on the GStreamer framework"
-+HOMEPAGE = "http://goodies.xfce.org/projects/applications/parole"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
++-localedir='$(prefix)/$(DATADIRNAME)/locale'
++-AC_SUBST(localedir)
++-
++ dnl ******************************
++ dnl Initialize libtool
++ dnl ******************************
++-- 
++2.1.0
 +
-+inherit xfce-app gtk-doc mime
-+
-+DEPENDS = " \
-+    glib-2.0 \
-+    dbus-glib \
-+    gtk+3 \
-+    \
-+    xfce4-dev-tools-native \
-+    libxfce4util \
-+    libxfce4ui \
-+    xfconf \
-+    \
-+    gstreamer1.0-plugins-base \
-+    taglib \
-+"
-+
-+SRC_URI[md5sum] = "fffdc23d2aa22271f01410a9e27c3404"
-+SRC_URI[sha256sum] = "2d966aeb426de81d992829e33b3f66185b19fd031a1891968b3a40d6d50239cc"
-+SRC_URI += "file://parole-0.8.0-appdata.patch"
-+
-+RDEPENDS_${PN} += "gstreamer1.0-plugins-good"
-+
-+PACKAGECONFIG ??= "notify"
-+PACKAGECONFIG[clutter] = "--enable-clutter, --disable-clutter, clutter"
-+PACKAGECONFIG[notify] = "--enable-notify-plugin, --disable-notify-plugin, libnotify"
-+
-+FILES_${PN} += " \
-+    ${datadir}/appdata \
-+    ${libdir}/parole-0/*.so \
-+"
-+FILES_${PN}-dbg += "${libdir}/parole-0/.debug"
-+FILES_${PN}-dev += "${libdir}/parole-0/*.la"
+diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb b/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
+index 7c935a3..426076f 100644
+--- a/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
++++ b/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
+@@ -22,6 +22,7 @@ SRC_URI = " \
+     file://0003-Disable-Werror-for-automake.patch \
+     file://0004-configure-Fix-libical-pkg-config-trying-to-use-host-.patch \
+     file://0005-soup-adapt-to-new-libxml2-API-from-2.9.0.patch \
++    file://0006-configure.ac-do-not-overwrite-localedir.patch \
+     file://iconv-detect.h \
+ "
+ 
 -- 
 2.1.0
 
