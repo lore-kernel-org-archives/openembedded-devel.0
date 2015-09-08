@@ -1,24 +1,38 @@
-Return-Path: <mike.looijmans@topic.nl>
-Received: from smtp05.mail.online.nl (smtp05.mail.online.nl [194.134.25.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F12676104
+Return-Path: <eduardo@monkey.io>
+Received: from mail-yk0-f182.google.com (mail-yk0-f182.google.com
+	[209.85.160.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 921D065CBF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Sep 2015 17:25:37 +0000 (UTC)
-Received: from [192.168.1.5] (s55969068.adsl.online.nl [85.150.144.104])
-	by smtp05.mail.online.nl (Postfix) with ESMTP id B3F8220009B
+	Tue,  8 Sep 2015 00:17:19 +0000 (UTC)
+Received: by ykcf206 with SMTP id f206so95854373ykc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Sep 2015 19:25:36 +0200 (CEST)
-Message-ID: <55EDC890.2060408@topic.nl>
-Date: Mon, 07 Sep 2015 19:25:36 +0200
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: Topic
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
+	Mon, 07 Sep 2015 17:17:19 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=KZqEp7W8f/UaW8Ei6RDNu08CQSBKiOu56x40HBRFFEg=;
+	b=U5Iz5fnRxmGya9W348v+2BjiYzK7b69xsdT+zFeGbyvnxVS5uEI8yE1ekRj1/dul50
+	alCfCMd7/bQtvlONshS897jlaod//yqwoIMqeM5UYsPoNoX1+KlnJ+LIPBvqHE+wzBdL
+	FBk7K4zf6axyIhj4iU2idGHDFpaJYQ4Mn5OGD8+pTtqi+NSV0xUwjItmV5HzhQ9b4h3a
+	361ekS+/8fcDw8c4lrlSExekBuxTWePZKkjNb0eR+269ChUWPHfWkYoPbvde2RNiR+Qk
+	7VMQP9834bRYN7vRP2AlBqLYYyBweYh53WV/i67e6+q8k4aTtGp4ThPjS0dYNLXiI//p
+	YlAg==
+X-Gm-Message-State: ALoCoQnoszeto4KOO2nW6zViZTMdgymCZpBDc3Sr8c0CSBbMfLVW/Qvp/UiOGryElOfws7ggP5pV
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <55ED5556.2020904@topic.nl> <55ED8405.6050709@linux.intel.com>
-	<20150907150906.GA2457@jama>
-In-Reply-To: <20150907150906.GA2457@jama>
-Subject: Re: Where is libunique?
+X-Received: by 10.13.223.141 with SMTP id i135mr5292179ywe.30.1441671439246;
+	Mon, 07 Sep 2015 17:17:19 -0700 (PDT)
+Received: by 10.13.226.207 with HTTP; Mon, 7 Sep 2015 17:17:19 -0700 (PDT)
+In-Reply-To: <55CEE8FE.6070907@balister.org>
+References: <55CEE8FE.6070907@balister.org>
+Date: Mon, 7 Sep 2015 18:17:19 -0600
+Message-ID: <CAEaCVQh3w_b0u_ZrzbBJDrxCKdtVGusg9pHU2L7wEh-qFOb5PQ@mail.gmail.com>
+From: Eduardo Silva <eduardo@monkey.io>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: OpenEmbeddded Developer meeting Oct 9 after ELCE in Dublin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,49 +46,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Sep 2015 17:25:41 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 08 Sep 2015 00:17:19 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 07-09-15 17:09, Martin Jansa wrote:
-> On Mon, Sep 07, 2015 at 03:33:09PM +0300, Alexander Kanavin wrote:
->> On 09/07/2015 12:13 PM, Mike Looijmans wrote:
->>> Current meta-openembedded master fails to build with errors like this:
->>>
->>> ERROR: Nothing PROVIDES 'libunique' (but
->>> .../meta-oe/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
->>> DEPENDS on or otherwise requires it).
->>>
->>> Searching for 'unique' in meta-openembedded and openembedded-core
->>> reveiled nothing that would provide it, there's no recipe with 'unique'
->>> in its name, nor any recipe that mentions the word 'unique' provides it,
->>> even though I found various recipes that DEPEND on it.
->>>
->>> Where is libunique?
->>
->> You should check not just the current state of master branches of
->> various layers, but also their commit history.
+Hi,
 
-Oh sure, make it my fault.
-FYI, I did look in the log, and I didn't find anything about libunique 
-in the meta-openembedded repo. It somehow never occured to me to go look 
-for it in other repos too.
+would you please confirm the date ?, Linux Foundation page says is October
+8 (this email Oct 9):
 
->> libunique was just removed from oe-core and a patch was sent to add it
->> to meta-oe. There is no way to keep the removal/addition perfectly in
->> sync because the two layers are kept in separate repos and have
->> different maintainers.
+http://events.linuxfoundation.org/events/embedded-linux-conference-europe/extend-the-experience/co-located-events
+
+best
+
+note:
+
+
+On Sat, Aug 15, 2015 at 1:23 AM, Philip Balister <philip@balister.org>
+wrote:
+
+> Just a reminder about the meeting in Dublin after ELCE and the Yocto
+> Project developer day. Everyone, even if you are not sure you are a
+> developer, is welcome. The goal of the meeting is to work out future
+> directions for OpenEmbedded so input from users and developers is welcome.
 >
-> This case can be prevented by adding it to meta-oe before it's removed
-> from oe-core (just like when someone is migrating recipes from meta-oe
-> to oe-core, they are first added to oe-core and then removed from
-> meta-oe).
+> http://openembedded.org/wiki/OEDEM_2015
+>
+> Please add your name to the attendee list, even if tentative so we can
+> plan accordingly.
+>
+> Thanks,
+>
+> Philip
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
-I was going to suggest that too.
-
-Maybe this would make a good entry for the maintainers handbook?
 
 
 -- 
-Mike Looijmans
+Eduardo Silva
+Monkey Software
 
