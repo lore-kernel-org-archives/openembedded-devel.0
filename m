@@ -1,35 +1,37 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 376F165C8A
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Sep 2015 21:32:50 +0000 (UTC)
-Received: by padhk3 with SMTP id hk3so49778437pad.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Sep 2015 14:32:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=eg9/8ZCYYGFM1WsHkKJ7/dQydtc+yfTGjCqFT2ecKq8=;
-	b=TlSwUZn4pXbaKWAUbtxiQoP77hR/ETnSjC/AGXF1bS+7XOSLMZpCZi0Bi19WW0nhIz
-	Ts09SDwXsmGVPLvatgOfF0grSBK5i1v42QNiac1qLAeT8LYZ0qStTOom9APUZHuukf/g
-	7nM0sMRtlHXZrptoccQLRH8QqPofqorljJs5T9rIalm5sOu5E3+U5d+gbbIgKD6HsUrr
-	2WqJh3lAnsvPABoZdsiJT4rHa72xse97riGe0eV77gjMmQvuOJzTuKVRQBMk2KhT8mgh
-	m3Y/qwnh2tlUyreUETJZopUWLOKYyOzeWwzEiuFGSA+rDLjIV1fF9K4j/MNOH357TY4D
-	3Opw==
-X-Received: by 10.68.69.17 with SMTP id a17mr62774139pbu.10.1441747970947;
-	Tue, 08 Sep 2015 14:32:50 -0700 (PDT)
-Received: from Pahoa2.mvista.com (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
-	by smtp.gmail.com with ESMTPSA id k2sm4507431pdr.84.2015.09.08.14.32.49
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 08 Sep 2015 14:32:49 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	joe_macdonald@mentor.com
-Date: Tue,  8 Sep 2015 14:32:48 -0700
-Message-Id: <1441747968-13989-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: [meta-networking][PATCH][V3] netmap: fix multiple build issues.
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
+	[209.85.213.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A340762A2;
+	Tue,  8 Sep 2015 21:39:20 +0000 (UTC)
+Received: by igxx6 with SMTP id x6so369134igx.1;
+	Tue, 08 Sep 2015 14:39:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=AHzPQ+dIzyL+SCNu6zJK3WlWAWfny+VnsRWpsnMd/2g=;
+	b=r8CROp50EHGS/ujadGdTvGcTUDLp2J3xUMH44IA1rLEFzmCSITdsb55/Z6PAIHFEMe
+	bm+3/YLRbSb4qUBS95I02ok2quB3C2UQEfs3DS2+neaKQjSkZ06PWsFPW2hT1gQjyBJc
+	Eci/SHxueK3wpw1NBtsZtv7D/ImZvsQokEbOuERekPARFdQvl9HhqysSSVuH7Eg93AXz
+	dP9OEyRWgr8ok81aFIK1o+Wr9XiFeDt2pZlfuC/eqnQBylTBVvZdXFIyUtrAw3s0DivW
+	ffOPvvGDeawD+Pr6IkkMdVAx0uqI1IssYq5yLbVxNM+nezvYSYldXJXnSCbPV/aDJxxy
+	o2BQ==
+MIME-Version: 1.0
+X-Received: by 10.50.119.70 with SMTP id ks6mr31370184igb.78.1441748360656;
+	Tue, 08 Sep 2015 14:39:20 -0700 (PDT)
+Received: by 10.36.98.5 with HTTP; Tue, 8 Sep 2015 14:39:20 -0700 (PDT)
+In-Reply-To: <20150908170942.GE2381@jama>
+References: <20150908155801.GD2381@jama>
+	<20150908170942.GE2381@jama>
+Date: Tue, 8 Sep 2015 23:39:20 +0200
+Message-ID: <CALbNGRQYuQrGc_3Bf0y5CVXHHb3uFDVaLgPcfeAKYCau7X1u2g@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, wrong PACKAGE_ARCHs 2015-09-08
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,200 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Sep 2015 21:32:52 -0000
+X-List-Received-Date: Tue, 08 Sep 2015 21:39:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Armin Kuster <akuster@mvista.com>
+On Tue, Sep 8, 2015 at 7:09 PM, Martin Jansa <martin.jansa@gmail.com> wrote=
+:
+> ERROR: polkit-group-rule-datetime different signature for task do_configu=
+re.sigdata between qemux86copy and qemuarm
+> runtaskdeps changed from ['polkitpolkit-group-rule-datetime.bb.do_patch',=
+ 'polkitpolkit_0.113.bb.do_populate_sysroot', 'shadowshadow_4.2.1.bb.do_pop=
+ulate_sysroot:virtual:native'] to ['polkitpolkit-group-rule-datetime.bb.do_=
+patch', 'polkitpolkit_0.113.bb.do_populate_sysroot', 'shadowshadow_4.2.1.bb=
+.do_populate_sysroot:virtual:native']
+> /home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extende=
+d/polkit/polkit_0.113.bb.do_populate_sysroot with hash 284d6bbd28ea723c466e=
+0c5c88a09a50
+I missed many of these - because I am not up to date on oe-core (did
+not want to loose midori for my images) - will change that soon. For
+this type of error: is it correct that it is caused by allarch recipes
+depending on machine/architecture specific recipes?
 
-updated to latest version to get kernel 4.1 support
-
-update makefile patch
-fixed printf type issue
-Fixed manual config options
-Readme checksum changed, don't know why. must got it wrong to begin with.
-
-V2: Fix "Upstream-Status" typos
-
-Signed-off-by: Armin Kuster <akuster@mvista.com>
----
- ...1-testmmap-fix-compile-issue-with-gcc-5.x.patch | 33 +++++++++++++++++++++
- .../netmap/files/makefile_fixup.patch              | 34 +++++++++++++++++-----
- .../recipes-kernel/netmap/netmap-modules_git.bb    |  8 ++++-
- meta-networking/recipes-kernel/netmap/netmap.inc   |  4 +--
- .../recipes-kernel/netmap/netmap_git.bb            |  1 +
- 5 files changed, 69 insertions(+), 11 deletions(-)
- create mode 100644 meta-networking/recipes-kernel/netmap/files/0001-testmmap-fix-compile-issue-with-gcc-5.x.patch
-
-diff --git a/meta-networking/recipes-kernel/netmap/files/0001-testmmap-fix-compile-issue-with-gcc-5.x.patch b/meta-networking/recipes-kernel/netmap/files/0001-testmmap-fix-compile-issue-with-gcc-5.x.patch
-new file mode 100644
-index 0000000..ea36b1c
---- /dev/null
-+++ b/meta-networking/recipes-kernel/netmap/files/0001-testmmap-fix-compile-issue-with-gcc-5.x.patch
-@@ -0,0 +1,33 @@
-+Upstream-Status: Pending
-+
-+From c81bf54d6eb870286662a11d3b4a994717c47696 Mon Sep 17 00:00:00 2001
-+From: Armin Kuster <akuster808@gmail.com>
-+Date: Tue, 8 Sep 2015 05:36:27 -0700
-+Subject: [PATCH] testmmap: fix compile issue with gcc 5.x
-+
-+this fixes:
-+examples/testmmap.c:540:10: error: format '%ld' expects argument of type 'long int', but argument 3 has type 'ssize_t {aka const int}' [-Werror=format=]
-+|    printf("ring_ofs[%d] %ld\n", i, nifp->ring_ofs[i]);
-+|           ^
-+
-+Signed-off-by: Armin Kuster <akuster808@gmail.com>
-+---
-+ examples/testmmap.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/examples/testmmap.c b/examples/testmmap.c
-+index d7f6acc..934489a 100644
-+--- a/examples/testmmap.c
-++++ b/examples/testmmap.c
-+@@ -537,7 +537,7 @@ do_if()
-+ 	for (i = 0; i < 5; i++)
-+ 		printf("spare1[%d]  %u\n", i, nifp->ni_spare1[i]);
-+ 	for (i = 0; i < (nifp->ni_tx_rings + nifp->ni_rx_rings + 2); i++)
-+-		printf("ring_ofs[%d] %ld\n", i, nifp->ring_ofs[i]);
-++		printf("ring_ofs[%d] %zd\n", i, nifp->ring_ofs[i]);
-+ }
-+ 
-+ struct netmap_ring *
-+-- 
-+2.3.5
-+
-diff --git a/meta-networking/recipes-kernel/netmap/files/makefile_fixup.patch b/meta-networking/recipes-kernel/netmap/files/makefile_fixup.patch
-index e838653..b050bf0 100644
---- a/meta-networking/recipes-kernel/netmap/files/makefile_fixup.patch
-+++ b/meta-networking/recipes-kernel/netmap/files/makefile_fixup.patch
-@@ -10,24 +10,24 @@ Index: LINUX/netmap.mak.in
- ===================================================================
- --- a/LINUX/netmap.mak.in
- +++ b/LINUX/netmap.mak.in
--@@ -12,10 +12,8 @@ SRCDIR:=@SRCDIR@
-+@@ -12,10 +12,9 @@ SRCDIR:=@SRCDIR@
-  # The following commands are needed to build the modules as out-of-tree,
-  # in fact the kernel sources path must be specified.
-  
- -PWD ?= $(CURDIR)
---
-+ 
-  # Additional compile flags (e.g. header location)
- -EXTRA_CFLAGS := -I$(PWD) -I$(SRCDIR) -I$(SRCDIR)/../sys -I$(SRCDIR)/../sys/dev -DCONFIG_NETMAP
- +EXTRA_CFLAGS := -I$(SRCDIR) -I$(SRCDIR)/../sys -I$(SRCDIR)/../sys/dev -DCONFIG_NETMAP
-  EXTRA_CFLAGS += -Wno-unused-but-set-variable
-- EXTRA_CFLAGS += $(foreach s,$(SUBSYS),-DCONFIG_NETMAP_$(shell echo $s|tr a-z A-Z))
-+ EXTRA_CFLAGS += $(foreach s,$(SUBSYS),-DCONFIG_NETMAP_$(shell echo $s|tr a-z- A-Z_))
-  
- Index: LINUX/configure
- ===================================================================
- --- a/LINUX/configure
- +++ b/LINUX/configure
--@@ -311,34 +311,6 @@ reset_tests() {
-- 	NEXTTEST=1
-+@@ -349,52 +349,6 @@ reset_tests() {
-+ 	EOF
-  }
-  
- -# run_tests: run all accumulated tests and exec the pertinent
-@@ -48,28 +48,46 @@ Index: LINUX/configure
- -		cat >> $TMPDIR/Makefile <<-EOF
- -			get-$d:
- -			$t	[ -z "\$($d-src)" ] || cp -Rp \$($d-src) \$(if \$($d-dst),\$($d-dst),.)
-+-			$t	touch get-$d
- -		EOF
- -	done
- -	echo endif >> $TMPDIR/Makefile
-+-	{
-+-		cat <<-EOF
-+-##############################################################################
-+-## BEGIN RUNNING TESTS: $(date)
-+-##############################################################################
-+-## Makefile:
-+-		EOF
-+-		cat $TMPDIR/Makefile
-+-		cat <<-EOF
-+-##############################################################################
-+-		EOF
-+-	} >> config.log
- -	(
- -		cd $TMPDIR
- -		make -k -j $(grep -c processor /proc/cpuinfo)
- -	) >> config.log
- -	eval "$TESTPOSTPROC"
-+-	cat >> config.log <<-EOF
-+-##############################################################################
-+-## END RUNNING TESTS: $(date)
-+-##############################################################################
-+-	EOF
- -}
- -
-  configh=netmap_linux_config.h
-  # succes/failure actions are expected to write some macros
-  # in netma_linux_config.h. The following functions can be
--@@ -555,7 +527,6 @@ configuration. Please check 'config.log'
-- 
-+@@ -619,7 +573,6 @@ configuration. Please check 'config.log'
-  reset_tests
-+ rm -f drivers.mak
-  add_test true broken_buildsystem < /dev/null
- -run_tests
-  
-  drvname2config() {
-  	local name=$1
--@@ -1087,7 +1058,6 @@ cat > $configh <<-EOF
-+@@ -1280,7 +1233,6 @@ cat > $configh <<-EOF
-  EOF
-  
-  # the TESTPOSTPROC script will add macros to $configh
-diff --git a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-index 00d334f..bb0db9d 100644
---- a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-+++ b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-@@ -36,7 +36,13 @@ do_configure_append () {
- #define NETMAP_LINUX_HAVE_TX_SKB_SHARING
- #define NETMAP_LINUX_HAVE_UNLOCKED_IOCTL
- #define NETMAP_LINUX_HAVE_PERNET_OPS_ID
--#define NETMAP_LINUX_TIMER_RTYPE static enum hrtimer_restart
-+#define NETMAP_LINUX_VIRTIO_FUNCTIONS
-+#define NETMAP_LINUX_VIRTIO_FREE_PAGES
-+#define NETMAP_LINUX_VIRTIO_GET_VRSIZE
-+#define NETMAP_LINUX_TIMER_RTYPE enum hrtimer_restart
-+#define NETMAP_LINUX_VIRTIO_MULTI_QUEUE
-+#define NETMAP_LINUX_HAVE_E1000E_EXT_RXDESC
-+#define NETMAP_LINUX_HAVE_E1000E_DOWN2
- EOF
- }
- 
-diff --git a/meta-networking/recipes-kernel/netmap/netmap.inc b/meta-networking/recipes-kernel/netmap/netmap.inc
-index 9083c69..ab33e76 100644
---- a/meta-networking/recipes-kernel/netmap/netmap.inc
-+++ b/meta-networking/recipes-kernel/netmap/netmap.inc
-@@ -4,9 +4,9 @@ SECTION = "networking"
- HOMEPAGE = "http://code.google.com/p/netmap/"
- LICENSE = "GPLv2+"
- 
--LIC_FILES_CHKSUM = "file://README;beginline=13;endline=14;md5=f64f2b172fe6903ff7b6272c6edde588"
-+LIC_FILES_CHKSUM = "file://README;beginline=13;endline=14;md5=56ae0b9c7ba0476ab9098de94c2714d6"
- 
--SRCREV = "a14a35b839fe7ab6855f25f1e86e306ee7ad8123"
-+SRCREV = "da9e19e69b84e4f6f8ae125f8d01b42a4abade6a"
- PV = "master+git${SRCPV}"
- 
- SRC_URI = "git://github.com/luigirizzo/netmap.git"
-diff --git a/meta-networking/recipes-kernel/netmap/netmap_git.bb b/meta-networking/recipes-kernel/netmap/netmap_git.bb
-index 0ee19d4..f15a626 100644
---- a/meta-networking/recipes-kernel/netmap/netmap_git.bb
-+++ b/meta-networking/recipes-kernel/netmap/netmap_git.bb
-@@ -11,6 +11,7 @@ EXTRA_OECONF = "--kernel-dir=${STAGING_KERNEL_BUILDDIR} \
-                 --cc='${CC}' \
-                 --ld='${LD}' \
-                 "
-+SRC_URI += "file://0001-testmmap-fix-compile-issue-with-gcc-5.x.patch"
- 
- do_fetch[depends] += "netmap-modules:do_fetch"
- 
--- 
-2.3.5
-
+Andreas
 
