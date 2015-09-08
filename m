@@ -1,40 +1,35 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 9956B65C8A
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Sep 2015 15:43:46 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so125229521wic.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Sep 2015 08:43:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=SQuwGhf0wG7Yl1cO9nEfy1yAULcoyhO3hr5AbUcV4mQ=;
-	b=GZX0UOpmNwZCOiFAPH7gGY9kuryUt3qqY8nGLZFzUof+cV7HTpOpQDrqQdbrxoqCV8
-	NZgSEQr41DE7ce5DmIP6p9C92oLzv/4kAtmCcuoYh7tIMpQM/igqbeDzYHNCW/5r3PRk
-	lt317KlTOhbODGqZaJlFnm4weoRuP+VSAMm3lMulZ/ZkUxv31rkd/m8SHb4CiOlMNJup
-	X6r6iP6wawi3Xsmu4pyyESzZM20z0fOpvE3xFtW8/+ANnlcPtw+Cl0Lo7JdHV3KU98Rd
-	bPD8F6kleDdPlmJU2CokvcpZTi2oRRhQSXXx6doj2EqtvmEVI+0a8MYD5kUV+gg4NiWW
-	MOZg==
-X-Received: by 10.180.11.176 with SMTP id r16mr45604368wib.87.1441727026475;
-	Tue, 08 Sep 2015 08:43:46 -0700 (PDT)
-Received: from localhost.localdomain ([5.147.14.94])
-	by smtp.googlemail.com with ESMTPSA id
-	lu5sm5496240wjb.9.2015.09.08.08.43.45
-	for <openembedded-devel@lists.openembedded.org>
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A448763F8;
+	Tue,  8 Sep 2015 15:57:14 +0000 (UTC)
+Received: by wicge5 with SMTP id ge5so122434249wic.0;
+	Tue, 08 Sep 2015 08:57:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=SzgmG01G3KYS6U4f1TzKfuuNHnFSA89+k88+fr9Ed5s=;
+	b=kiqUA3g0UGyJ6OZ/wmAvHHsA9tnMb2jUwcENVepPsNoc0Yqs8geBcZgc9NpE1Boq42
+	h1RjSu0nIO+LzvnJzn+hPEeql8vsiJNK8WfdLiviAmKjEWbcBPrFMG1Oys3OtORB6UUM
+	HdSCvDFra2aqzWwgt75c7JdI28yuBfTLw/WfVMow5xrBdnyVHQNOvujAjpTDOUkfyEbG
+	2WzuFbl85ghqJFTFOd61lsLw7c8Cp6n3RyZzzdQk3gOvi34aRUqJ3MnC7mgcfLdGizuO
+	L54c9IcnG3SscHsp1ZEpUmRpnPcBYQv1xVIDUQ1OjHXQVe0MTrvqiemuhbw76JpGu4Tg
+	Xeng==
+X-Received: by 10.194.82.37 with SMTP id f5mr51767907wjy.36.1441727834551;
+	Tue, 08 Sep 2015 08:57:14 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id l9sm6480412wiy.10.2015.09.08.08.57.13
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 08 Sep 2015 08:43:45 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Sep 2015 17:43:00 +0200
-Message-Id: <1441726980-32656-10-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1441726980-32656-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1441726980-32656-1-git-send-email-schnitzeltony@googlemail.com>
+	Tue, 08 Sep 2015 08:57:13 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 8 Sep 2015 17:58:01 +0200
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20150908155801.GD2381@jama>
 MIME-Version: 1.0
-Subject: [PATCH 9/9] libgtop: update to 2.30.0
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: State of bitbake world, wrong PACKAGE_ARCHs 2015-09-08
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,35 +43,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Sep 2015 15:43:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 08 Sep 2015 15:57:16 -0000
+X-Groupsio-MsgNum: 57264
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="AkbCVLjbJ9qUtAXD"
+Content-Disposition: inline
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../recipes-gnome/libgtop/{libgtop_2.28.2.bb => libgtop_2.30.0.bb}   | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-gnome/recipes-gnome/libgtop/{libgtop_2.28.2.bb => libgtop_2.30.0.bb} (52%)
+--AkbCVLjbJ9qUtAXD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-diff --git a/meta-gnome/recipes-gnome/libgtop/libgtop_2.28.2.bb b/meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb
-similarity index 52%
-rename from meta-gnome/recipes-gnome/libgtop/libgtop_2.28.2.bb
-rename to meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb
-index 2816e00..51c51d4 100644
---- a/meta-gnome/recipes-gnome/libgtop/libgtop_2.28.2.bb
-+++ b/meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb
-@@ -3,8 +3,7 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://copyright.txt;md5=dbc839bf158d19a20e661db14db7a58c"
- 
- inherit gnomebase lib_package gtk-doc
--SRC_URI[archive.md5sum] = "ed44d736efd97d062b77621de6aff439"
--SRC_URI[archive.sha256sum] = "49958d7da1f76b257bfd0d557d8ed2b218a5ab0d31b59fed1c32ddf2a1529f5d"
--GNOME_COMPRESS_TYPE="bz2"
-+SRC_URI[archive.md5sum] = "ee29a9ef60659ebf4b075ac281f71cb2"
-+SRC_URI[archive.sha256sum] = "463bcbe5737b1b93f3345ee34abf601e8eb864f507c49ff1921c2737abafc1e5"
- 
- DEPENDS = "glib-2.0 intltool-native libxau"
--- 
-2.1.0
+On Fri, Aug 01, 2014 at 03:46:13PM +0200, Martin Jansa wrote:
+> ERROR: 63 issues were found in these recipes: android-tools dracut
+> font-alias initramfs-framework initscripts ipsec-tools linux-firmware
+> lmsensors oprofile oprofileui oprofileui-server
+> polkit-group-rule-datetime polkit-group-rule-network ppp-dialin
+> qt-demo-init resolvconf run-postinsts shr-theme-neo sysvinit
+> terminus-font tipcutils ttf-arphic-uming ttf-dejavu ttf-droid
+> ttf-gentium ttf-hunkyfonts ttf-inconsolata ttf-liberation ttf-mplus
+> ttf-sazanami ttf-ubuntu-font-family ttf-wqy-zenhei usbinit vpnc
+> weston-init xfce4-session xl2tpd xserver-common xserver-nodm-init
+> xuser-account
 
+ERROR: 154 issues were found in these recipes: android-tools
+cmake-modules-webos-native cpushareholder-stub cryptodev-tests dracut
+initscripts ipsec-tools libauthen-sasl-perl libdigest-hmac-perl
+libio-socket-ssl-perl libpbnjson librolegen linux-atm lmsensors
+lttng-tools luna-next luna-prefs luna-service2 luna-sysmgr-common
+luna-sysmgr-ipc luna-sysmgr-ipc-messages luna-webkit-api netmap nyx-lib
+openlmi-networking openlmi-providers openlmi-storage oprofile oprofileui
+oprofileui-server packagegroup-efl-sdk phpmyadmin pmloglib
+pmloglib-private polkit-group-rule-datetime polkit-group-rule-network
+qt5-creator qtquick1 qtwebkit qtwebkit-examples rdx-utils-stub
+serviceinstaller shr-theme-neo terminus-font tipcutils ttf-arphic-uming
+ttf-dejavu ttf-droid ttf-gentium ttf-hunkyfonts ttf-inconsolata
+ttf-liberation ttf-mplus ttf-sazanami ttf-tlwg ttf-ubuntu-font-family
+ttf-wqy-zenhei xfce4-session xl2tpd xserver-common xserver-nodm-init
+zabbix
 
+Some of these are caused by cmake-modules-webos-native so I'll fix this
+one first and then resend hopefully nicer-looking report.
+
+Complete logs:
+http://logs.nslu2-linux.org/buildlogs/oe/world/log.signatures.20150908_150743.log/
+
+--AkbCVLjbJ9qUtAXD
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlXvBYcACgkQN1Ujt2V2gBzB0wCgiwzJGMeDqHs6dHX9Mq+BRebE
+HmkAn2xnfVF34gaAplPuv7Ui3i4E9cYg
+=2iVp
+-----END PGP SIGNATURE-----
+
+--AkbCVLjbJ9qUtAXD--
