@@ -1,40 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id C52F765CBF
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 97A1E65C8A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Sep 2015 15:09:56 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so124044756wic.1
+	Tue,  8 Sep 2015 15:43:39 +0000 (UTC)
+Received: by wicge5 with SMTP id ge5so121942721wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Sep 2015 08:09:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=QS5xbUnatUcdnrG6YmKOC0pYu8aUUIBMDRREZnPwWQ0=;
-	b=uSVQ7AI0BKNfr5AVAmrK/hz7GFGnzaFAiJHtxV/PE3x9YRFmabXTBaLw63htVV2iFM
-	zph/uvDP68VCUsdOzZVXzzCIOuMBs+28Dp1hERtDsKqDetBuT/AuWAxjpUGP4cpNJdoi
-	KwE+vLlQ69cyTPqO3tOfzafIUlru8hau0smMq3dah6nTlBHArfuvOyrd9vW85fvHc82m
-	iBGKk3ijUaXebjP5OMQA7r5HUcpDkwGzBh9Q212KejK6uAvuaMZ2MmUUb8XAIQvsLnUG
-	f/m3JC41CnwtjIlKM8aVSb1lXOmv4sjm5VO0+HNKerYjyel+hS1qHD0u1ap3qZLuR8LY
-	wWVw==
-X-Received: by 10.194.90.209 with SMTP id by17mr47606873wjb.138.1441724994317; 
-	Tue, 08 Sep 2015 08:09:54 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	nb10sm5348572wic.11.2015.09.08.08.09.52
+	Tue, 08 Sep 2015 08:43:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=2uyegPCebIfKXTEW3P2U6rl+ess3fgJPeD/q4bS7yoQ=;
+	b=yf/buSjCGUnp06y1Lm96WXmKPtwEnj5RwwXn0sv4RUV9Of4unjyD9F4apAp+Cnc6aG
+	hDdFJwZ39EJZ6WcEWrkjEd6A0yRPxnhmXZIddYikABNCOEEBt0qxtyzOSHnEYzYICWec
+	4lYFCLsVvTrq7DEopzVcDXQsZegPytpQUew0gjP40jU6OwqwczwN8tsFFfNDfEoMjtQQ
+	ExhuzsGlcBAul4Yhbf4NLhsIuR1rwgMZ5HozDQO3X4jFensTnSuSPIA2gVcSOK5W5Wuw
+	Jz4bndKZPGHoccVGYi07bpy/ERSIT8Y3UcNFJZ8zFpIGcFcmu7G+8piXJA6UBpvuwveV
+	aSuQ==
+X-Received: by 10.180.96.230 with SMTP id dv6mr46917303wib.23.1441727019241;
+	Tue, 08 Sep 2015 08:43:39 -0700 (PDT)
+Received: from localhost.localdomain ([5.147.14.94])
+	by smtp.googlemail.com with ESMTPSA id
+	lu5sm5496240wjb.9.2015.09.08.08.43.38
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 08 Sep 2015 08:09:53 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 8 Sep 2015 17:10:40 +0200
+	Tue, 08 Sep 2015 08:43:38 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150908151040.GC2381@jama>
-References: <1441521234-19902-1-git-send-email-rongqing.li@windriver.com>
+Date: Tue,  8 Sep 2015 17:42:51 +0200
+Message-Id: <1441726980-32656-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-In-Reply-To: <1441521234-19902-1-git-send-email-rongqing.li@windriver.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-oe][PATCH] collectd: fix a floating dependence on openldap
+Subject: [PATCH 0/9] next series of fixes/updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,72 +46,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Sep 2015 15:09:58 -0000
-X-Groupsio-MsgNum: 57253
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ghzN8eJ9Qlbqn3iT"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 08 Sep 2015 15:43:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---ghzN8eJ9Qlbqn3iT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit d36e2d1066f50036080f978583a58fe79ecfac54:
 
-On Sun, Sep 06, 2015 at 02:33:54PM +0800, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
->=20
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->  meta-oe/recipes-extended/collectd/collectd_5.5.0.bb | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb b/meta-o=
-e/recipes-extended/collectd/collectd_5.5.0.bb
-> index fd3b1ab..55d7b38 100644
-> --- a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-> +++ b/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-> @@ -45,6 +45,7 @@ PACKAGECONFIG[libvirt] =3D "--enable-libvirt,--disable-=
-libvirt,libvirt"
->  PACKAGECONFIG[libesmtp] =3D "--with-libesmtp,--without-libesmtp,libesmtp"
->  PACKAGECONFIG[libmnl] =3D "--with-libmnl,--without-libmnl,libmnl"
->  PACKAGECONFIG[libatasmart] =3D "--with-libatasmart,--without-libatasmart=
-,libatasmart"
-> +PACKAGECONFIG[ldap] =3D "--enable-openldap --with-libldap,--disable-open=
-ldap --without-libldap, openldap"
+  libunique: add a recipe from oe-core (2015-09-08 16:30:24 +0200)
 
-With this patch applied I've still seen:
-collectd-5.5.0: collectd rdepends on openldap, but it isn't a build depende=
-ncy? [build-deps]
+are available in the git repository at:
 
-so I haven't merged it from master-next, but lets see if it's shown in
-next build (maybe qemuarm was executed before I've included this in
-master-next).
+  git://github.com/schnitzeltony/meta-openembedded.git patches
 
-> =20
->  EXTRA_OECONF =3D " \
->                  ${FPLAYOUT} \
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+for you to fetch changes up to a879e4b3c1b8fefef6d9614efffcb7021e868a22:
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+  libgtop: update to 2.30.0 (2015-09-08 17:35:03 +0200)
 
---ghzN8eJ9Qlbqn3iT
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+----------------------------------------------------------------
+Andreas Müller (9):
+      xfce4-equake-plugin: update to 1.3.8
+      parole: initial add 0.8.0
+      packagegroup-xfce-multimedia: add parole
+      evolution-data-server: fix locale installation path
+      openbox: update to 3.6.1
+      openbox: add libcroco, librsvg and gdk-pixbuf to DEPENDS
+      meta-xfce/README: mention meta-gnome in layers required
+      gnome-settings-daemon: fix build for libnotify > 0.7.x
+      libgtop: update to 2.30.0
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+ meta-gnome/recipes-gnome/eds/evolution-data-server/0006-configure.ac-do-not-overwrite-localedir.patch | 34 ++++++++++++++++++++++++++++++
+ meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb                                             |  1 +
+ meta-gnome/recipes-gnome/gnome-settings-daemon/files/0001-Require-libnotify-0.6.0.patch               | 81 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb                        |  5 ++++-
+ meta-gnome/recipes-gnome/libgtop/{libgtop_2.28.2.bb => libgtop_2.30.0.bb}                             |  5 ++---
+ meta-oe/recipes-graphics/openbox/{openbox_3.5.0.bb => openbox_3.6.1.bb}                               | 13 ++++++------
+ meta-xfce/README                                                                                      |  2 +-
+ meta-xfce/recipes-multimedia/packagegroups/packagegroup-xfce-multimedia.bb                            |  1 +
+ meta-xfce/recipes-multimedia/parole/files/parole-0.8.0-appdata.patch                                  | 30 ++++++++++++++++++++++++++
+ meta-xfce/recipes-multimedia/parole/parole_0.8.0.bb                                                   | 37 ++++++++++++++++++++++++++++++++
+ meta-xfce/recipes-panel-plugins/equake/{xfce4-equake-plugin_1.3.7.bb => xfce4-equake-plugin_1.3.8.bb} |  4 ++--
+ 11 files changed, 200 insertions(+), 13 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/0006-configure.ac-do-not-overwrite-localedir.patch
+ create mode 100644 meta-gnome/recipes-gnome/gnome-settings-daemon/files/0001-Require-libnotify-0.6.0.patch
+ rename meta-gnome/recipes-gnome/libgtop/{libgtop_2.28.2.bb => libgtop_2.30.0.bb} (52%)
+ rename meta-oe/recipes-graphics/openbox/{openbox_3.5.0.bb => openbox_3.6.1.bb} (84%)
+ create mode 100644 meta-xfce/recipes-multimedia/parole/files/parole-0.8.0-appdata.patch
+ create mode 100644 meta-xfce/recipes-multimedia/parole/parole_0.8.0.bb
+ rename meta-xfce/recipes-panel-plugins/equake/{xfce4-equake-plugin_1.3.7.bb => xfce4-equake-plugin_1.3.8.bb} (74%)
 
-iEYEARECAAYFAlXu+nAACgkQN1Ujt2V2gByrwACggTWYUqkQOWJHuO7q/3Vck9yT
-vaUAn3HIFiBc7sTXJ2KBjIs7GKgSFmxM
-=qhe0
------END PGP SIGNATURE-----
+-- 
+2.1.0
 
---ghzN8eJ9Qlbqn3iT--
+
