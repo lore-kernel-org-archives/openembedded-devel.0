@@ -1,34 +1,39 @@
-Return-Path: <alejandro.joya.cruz@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id BF80873232
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 2861D6E26B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 15:34:26 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 10 Sep 2015 08:33:56 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,505,1437462000"; d="scan'208";a="766345327"
-Received: from orsmsx102.amr.corp.intel.com ([10.22.225.129])
-	by orsmga001.jf.intel.com with ESMTP; 10 Sep 2015 08:33:54 -0700
-Received: from FMSMSX109.amr.corp.intel.com (10.18.116.9) by
-	ORSMSX102.amr.corp.intel.com (10.22.225.129) with Microsoft SMTP Server
-	(TLS) id 14.3.224.2; Thu, 10 Sep 2015 08:33:52 -0700
-Received: from fmsmsx106.amr.corp.intel.com ([169.254.5.207]) by
-	FMSMSX109.amr.corp.intel.com ([169.254.15.192]) with mapi id
-	14.03.0224.002; Thu, 10 Sep 2015 08:33:52 -0700
-From: "Joya Cruz, Alejandro" <alejandro.joya.cruz@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe][meta-oe][PATCH]] toybox: upgrade to 0.6.0
-Thread-Index: AQHQ50/55gu+Cf2fakGHqwrzXGZPAZ42YuUA
-Date: Thu, 10 Sep 2015 15:33:52 +0000
-Message-ID: <1441899228.12956.8.camel@intel.com>
+	Thu, 10 Sep 2015 15:43:48 +0000 (UTC)
+Received: by wicgb1 with SMTP id gb1so30216723wic.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Sep 2015 08:43:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=bPiurlb7YaUFwWKMYxwG3qpbpJ7OoTK6s/qDqjP9xRc=;
+	b=qLjPhHHif2ZlHmmi4DYi89K/JcxUBdj3GKaAZzlzwHyNo11N5S3J7LGJN+Q+fw1v5+
+	Uz7METs6KR75zdcN+9FW1nbK76iQSiDEWJpazkg5wJFe9QY/TfFZwnTQvJ/UuEsmOTnR
+	apQ0i/qYDuUZ0a5vrnOx2tofVpCzJh6xeUhu+UdEMO9X/DA6+Z3BxRogytsMkisU7Ykk
+	OaJPPzCg5vMRYsNZYu4yQ4gO6oz2m0S6HQpJCTQqkUlQJ3dr/MAoMHrGvbX+nbpSY3jw
+	uElADeW0irP4Eox30PCRM864dDl/Xcivm2UzXczCOIPTpkVgb583ZTDqLAUSQ4NyVXGD
+	8BaA==
+X-Received: by 10.194.9.42 with SMTP id w10mr68567893wja.146.1441899828479;
+	Thu, 10 Sep 2015 08:43:48 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id r4sm9932299wia.19.2015.09.10.08.43.47
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 10 Sep 2015 08:43:47 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 10 Sep 2015 17:44:47 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150910154447.GC2387@jama>
 References: <1441398373-21244-1-git-send-email-alejandro.joya.cruz@intel.com>
-In-Reply-To: <1441398373-21244-1-git-send-email-alejandro.joya.cruz@intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.219.128.56]
+	<1441899228.12956.8.camel@intel.com>
 MIME-Version: 1.0
+In-Reply-To: <1441899228.12956.8.camel@intel.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 Subject: Re: [meta-oe][PATCH]] toybox: upgrade to 0.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -43,39 +48,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2015 15:34:32 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <EE4E1C43E8AD584A8E7C786E721741BC@intel.com>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 10 Sep 2015 15:43:50 -0000
+X-Groupsio-MsgNum: 57294
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="V88s5gaDVPzZ0KCq"
+Content-Disposition: inline
 
-U29tZSBmZWVkYmFjayBvbiB0aGlzLg0KDQpPbiB2aWUsIDIwMTUtMDktMDQgYXQgMjA6MjYgKzAw
-MDAsIEpveWEgQ3J1eiwgQWxlamFuZHJvIHdyb3RlOg0KPiBDaGFuZ2UgU1JDX1VSSSBzaW5jZSBw
-YXRjaCBpcyBub3QgbG9uZ2VyIG5lZWQgaXQuDQo+IFVwZGF0ZSB0aGUgY2hlY2tzdW0gZm9yIHBh
-Y2thZ2UuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBBbGVqYW5kcm8gSm95YSA8YWxlamFuZHJvLmpv
-eWEuY3J1ekBpbnRlbC5jb20+DQo+IC0tLQ0KPiAgbWV0YS1vZS9yZWNpcGVzLWNvcmUvdG95Ym94
-L3t0b3lib3hfMC41LjIuYmIgPT4gdG95Ym94XzAuNi4wLmJifSB8IDkgKysrKystLS0tDQo+ICAx
-IGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQ0KPiAgcmVuYW1l
-IG1ldGEtb2UvcmVjaXBlcy1jb3JlL3RveWJveC97dG95Ym94XzAuNS4yLmJiID0+IHRveWJveF8w
-LjYuMC5iYn0gKDkwJSkNCj4gDQo+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtY29yZS90
-b3lib3gvdG95Ym94XzAuNS4yLmJiIGIvbWV0YS1vZS9yZWNpcGVzLWNvcmUvdG95Ym94L3RveWJv
-eF8wLjYuMC5iYg0KPiBzaW1pbGFyaXR5IGluZGV4IDkwJQ0KPiByZW5hbWUgZnJvbSBtZXRhLW9l
-L3JlY2lwZXMtY29yZS90b3lib3gvdG95Ym94XzAuNS4yLmJiDQo+IHJlbmFtZSB0byBtZXRhLW9l
-L3JlY2lwZXMtY29yZS90b3lib3gvdG95Ym94XzAuNi4wLmJiDQo+IGluZGV4IGJjZDZhNzIuLmRh
-MDMyMDAgMTAwNjQ0DQo+IC0tLSBhL21ldGEtb2UvcmVjaXBlcy1jb3JlL3RveWJveC90b3lib3hf
-MC41LjIuYmINCj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLWNvcmUvdG95Ym94L3RveWJveF8wLjYu
-MC5iYg0KPiBAQCAtMSwxMCArMSwxMSBAQA0KPiAgU1VNTUFSWSA9ICJUb3lib3ggY29tYmluZXMg
-Y29tbW9uIHV0aWxpdGllcyB0b2dldGhlciBpbnRvIGEgc2luZ2xlIGV4ZWN1dGFibGUuIg0KPiAg
-SE9NRVBBR0UgPSAiaHR0cDovL3d3dy5sYW5kbGV5Lm5ldC90b3lib3gvIg0KPiAgDQo+IC1TUkNf
-VVJJID0gImh0dHA6Ly93d3cubGFuZGxleS5uZXQvdG95Ym94L2Rvd25sb2Fkcy8ke0JQTn0tJHtQ
-Vn0udGFyLmd6IFwNCj4gLSAgICBmaWxlOi8vMDAwMS1NYXRjaC1wYXRocy13aXRoLWJ1c3lib3gu
-cGF0Y2giDQo+IC1TUkNfVVJJW21kNXN1bV0gPSAiYjVkMTI0Mjc2N2M0MTFiNjlkY2Q3MTdkYTFj
-MjE4YjIiDQo+IC1TUkNfVVJJW3NoYTI1NnN1bV0gPSAiZGVjN2Y2NDMzZWUwZTEzMGYyMjRmYzYz
-NzYwYjM0N2FkMDU3MjI4MGM0ZGUzMmYxYWFlZmJlZTgxM2E3OWEwMCINCj4gK1NSQ19VUkkgPSAi
-aHR0cDovL3d3dy5sYW5kbGV5Lm5ldC90b3lib3gvZG93bmxvYWRzLyR7QlBOfS0ke1BWfS50YXIu
-Z3oiDQo+ICsNCj4gK1NSQ19VUklbbWQ1c3VtXSA9ICI3ZjRhNmM4OWU1NmM0OGUzMzUwZTYxMWY1
-YjM2YzJjZiINCj4gK1NSQ19VUklbc2hhMjU2c3VtXSA9ICJiNmUyNjk0ZDE5YWMwOGYxYzM0MTZk
-NWIyYTAyYTMxZDQ0NWRiMmVkOThkZWM4OTc2MTQzMGNkZmYyYzk3MTBkIg0KPiArDQo+ICANCj4g
-IExJQ0VOU0UgPSAiQlNELTAtQ2xhdXNlIg0KPiAgTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8v
-TElDRU5TRTttZDU9ZjBiOGIzZGQ2NDMxYmNhYTI0NWRhMGEwOGJkMGQ1MTEiDQoNCg==
+--V88s5gaDVPzZ0KCq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, Sep 10, 2015 at 03:33:52PM +0000, Joya Cruz, Alejandro wrote:
+> Some feedback on this.
+
+Sigh!
+
+commit 7ad835c9f84acb34f6d29a3352f24812ef295b63
+Author:     Alejandro Joya <alejandro.joya.cruz@intel.com>
+AuthorDate: Fri Sep 4 15:26:13 2015 -0500
+Commit:     Martin Jansa <Martin.Jansa@gmail.com>
+CommitDate: Tue Sep 8 16:21:38 2015 +0200
+
+    toybox: upgrade to 0.6.0
+
+http://patchwork.openembedded.org/project/oe/list/?state=3D*&q=3Dtoybox&arc=
+hive=3Dboth
+allows you to find:
+http://patchwork.openembedded.org/patch/102625/
+which says:
+State	Accepted, archived
+
+If you really want some feedback, then learn to use --subject-prefix
+parameter, you have extra ']' in commit message and I had to remove it
+manually when cherry-picking to master-next.
+
+Regards,
+
+> On vie, 2015-09-04 at 20:26 +0000, Joya Cruz, Alejandro wrote:
+> > Change SRC_URI since patch is not longer need it.
+> > Update the checksum for package.
+> >=20
+> > Signed-off-by: Alejandro Joya <alejandro.joya.cruz@intel.com>
+> > ---
+> >  meta-oe/recipes-core/toybox/{toybox_0.5.2.bb =3D> toybox_0.6.0.bb} | 9=
+ +++++----
+> >  1 file changed, 5 insertions(+), 4 deletions(-)
+> >  rename meta-oe/recipes-core/toybox/{toybox_0.5.2.bb =3D> toybox_0.6.0.=
+bb} (90%)
+> >=20
+> > diff --git a/meta-oe/recipes-core/toybox/toybox_0.5.2.bb b/meta-oe/reci=
+pes-core/toybox/toybox_0.6.0.bb
+> > similarity index 90%
+> > rename from meta-oe/recipes-core/toybox/toybox_0.5.2.bb
+> > rename to meta-oe/recipes-core/toybox/toybox_0.6.0.bb
+> > index bcd6a72..da03200 100644
+> > --- a/meta-oe/recipes-core/toybox/toybox_0.5.2.bb
+> > +++ b/meta-oe/recipes-core/toybox/toybox_0.6.0.bb
+> > @@ -1,10 +1,11 @@
+> >  SUMMARY =3D "Toybox combines common utilities together into a single e=
+xecutable."
+> >  HOMEPAGE =3D "http://www.landley.net/toybox/"
+> > =20
+> > -SRC_URI =3D "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.=
+gz \
+> > -    file://0001-Match-paths-with-busybox.patch"
+> > -SRC_URI[md5sum] =3D "b5d1242767c411b69dcd717da1c218b2"
+> > -SRC_URI[sha256sum] =3D "dec7f6433ee0e130f224fc63760b347ad0572280c4de32=
+f1aaefbee813a79a00"
+> > +SRC_URI =3D "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.=
+gz"
+> > +
+> > +SRC_URI[md5sum] =3D "7f4a6c89e56c48e3350e611f5b36c2cf"
+> > +SRC_URI[sha256sum] =3D "b6e2694d19ac08f1c3416d5b2a02a31d445db2ed98dec8=
+9761430cdff2c9710d"
+> > +
+> > =20
+> >  LICENSE =3D "BSD-0-Clause"
+> >  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df0b8b3dd6431bcaa245da0a08bd=
+0d511"
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--V88s5gaDVPzZ0KCq
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlXxpW0ACgkQN1Ujt2V2gBwmjQCffBMnJ1ABgKNN+VtC9Oxuh2VD
+L6sAnRB/EOA5usvrSjATiWTeIS5Z2anp
+=CLQf
+-----END PGP SIGNATURE-----
+
+--V88s5gaDVPzZ0KCq--
