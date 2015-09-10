@@ -1,26 +1,26 @@
 Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AB5EA76AC7
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 71D1C7669F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 07:26:07 +0000 (UTC)
+	Thu, 10 Sep 2015 07:26:08 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t8A7Q7Nv027299
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8A7Q8pb004169
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 00:26:07 -0700 (PDT)
+	Thu, 10 Sep 2015 00:26:09 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.235.1;
-	Thu, 10 Sep 2015 00:26:07 -0700
+	Thu, 10 Sep 2015 00:26:08 -0700
 From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 10 Sep 2015 03:26:03 -0400
-Message-ID: <d3f90d1e80c9db274e5d021e5e7973e6fb22a7e6.1441869690.git.wenzong.fan@windriver.com>
+Date: Thu, 10 Sep 2015 03:26:04 -0400
+Message-ID: <fa7345f26d642b6013016c6ac359290d225564ab.1441869690.git.wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1441869690.git.wenzong.fan@windriver.com>
 References: <cover.1441869690.git.wenzong.fan@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2][meta-initramfs] dracut: RDEPEND on systemd optionally
+Subject: [PATCH 2/2][meta-initramfs] dracut: install modules to /usr/lib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,57 +34,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2015 07:26:07 -0000
+X-List-Received-Date: Thu, 10 Sep 2015 07:26:08 -0000
 Content-Type: text/plain
 
-From: Robert Yang <liezhi.yang@windriver.com>
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-Use PACKAGECONFIG to depend on systemd optionally.
+The dracut modules will be installed to /usr/lib64 while building 64bit
+targets with multilib enabled, this causes runtime errors:
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+  dracut: Cannot find /usr/lib/dracut/dracut-functions.sh.
+  dracut: Are you running from a git checkout?
+  dracut: Try passing -l as an argument to /usr/bin/dracut
+
+The dracut modules, 50-dracut.install and 51-dracut-rescue.install must
+be installed to /usr/lib as Fedora 20 does.
+
 Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 ---
- meta-initramfs/recipes-devtools/dracut/dracut_git.bb | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ meta-initramfs/recipes-devtools/dracut/dracut_git.bb | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-index b7d88fd..3a72251 100644
+index 3a72251..8c02a4f 100644
 --- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
 +++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-@@ -13,9 +13,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
- 
+@@ -14,7 +14,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
  S = "${WORKDIR}/git"
  
--inherit distro_features_check
--REQUIRED_DISTRO_FEATURES = "systemd"
--
  EXTRA_OECONF = "--prefix=${prefix} \
-                 --libdir=${libdir} \
+-                --libdir=${libdir} \
++                --libdir=${prefix}/lib \
                  --datadir=${datadir} \
-@@ -25,7 +22,7 @@ EXTRA_OECONF = "--prefix=${prefix} \
-                 --bindir=${bindir} \
-                 --includedir=${includedir} \
+                 --sysconfdir=${sysconfdir} \
+                 --sbindir=${sbindir} \
+@@ -24,6 +24,8 @@ EXTRA_OECONF = "--prefix=${prefix} \
                  --localstatedir=${localstatedir} \
--                --systemdsystemunitdir=${systemd_unitdir}/system"
-+               "
+                "
  
++EXTRA_OEMAKE += 'libdir=${prefix}/lib'
++
  do_configure() {
      ./configure ${EXTRA_OECONF}
-@@ -44,9 +41,13 @@ FILES_${PN} += " ${libdir}/kernel \
+ }
+@@ -36,9 +38,12 @@ PACKAGES =+ "${PN}-bash-completion"
+ 
+ FILES_${PN}-bash-completion = "${datadir}/bash-completion"
+ 
+-FILES_${PN} += " ${libdir}/kernel \
++FILES_${PN} += "${prefix}/lib/kernel \
++                ${prefix}/lib/dracut \
+                 ${systemd_unitdir} \
                 "
++FILES_${PN}-dbg += "${prefix}/lib/dracut/.debug"
++
  CONFFILES_${PN} += "${sysconfdir}/dracut.conf"
  
--RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid util-linux-getopt bash ldd"
-+RDEPENDS_${PN} = "findutils cpio util-linux-blkid util-linux-getopt bash ldd"
- RDEPENDS_${PN}-bash-completion = "bash-completion"
- 
-+# RDEPEND on systemd optionally
-+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
-+PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,,,systemd"
-+
- # This could be optimized a bit, but let's avoid non-booting systems :)
- RRECOMMENDS_${PN} = " \
-                      kernel-modules \
+ RDEPENDS_${PN} = "findutils cpio util-linux-blkid util-linux-getopt bash ldd"
 -- 
 1.9.1
 
