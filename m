@@ -1,26 +1,34 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 71D1C7669F
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id D3F136E26B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 07:26:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8A7Q8pb004169
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 10 Sep 2015 10:36:34 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ZZzDU-0005eO-Af for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Sep 2015 12:36:32 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Sep 2015 12:36:32 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 00:26:09 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.235.1;
-	Thu, 10 Sep 2015 00:26:08 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 10 Sep 2015 03:26:04 -0400
-Message-ID: <fa7345f26d642b6013016c6ac359290d225564ab.1441869690.git.wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <cover.1441869690.git.wenzong.fan@windriver.com>
+	Thu, 10 Sep 2015 12:36:32 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 10 Sep 2015 12:36:12 +0200
+Message-ID: <msrmes$se8$1@ger.gmane.org>
 References: <cover.1441869690.git.wenzong.fan@windriver.com>
-MIME-Version: 1.0
-Subject: [PATCH 2/2][meta-initramfs] dracut: install modules to /usr/lib
+	<d3f90d1e80c9db274e5d021e5e7973e6fb22a7e6.1441869690.git.wenzong.fan@windriver.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:38.0)
+	Gecko/20100101 Thunderbird/38.1.0
+In-Reply-To: <d3f90d1e80c9db274e5d021e5e7973e6fb22a7e6.1441869690.git.wenzong.fan@windriver.com>
+Subject: Re: [PATCH 1/2][meta-initramfs] dracut: RDEPEND on systemd optionally
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,63 +42,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2015 07:26:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 10 Sep 2015 10:36:40 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-The dracut modules will be installed to /usr/lib64 while building 64bit
-targets with multilib enabled, this causes runtime errors:
+Op 10-09-15 om 09:26 schreef wenzong.fan@windriver.com:
+> From: Robert Yang <liezhi.yang@windriver.com>
+> 
+> Use PACKAGECONFIG to depend on systemd optionally.
+> 
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com> Signed-off-by:
+> Wenzong Fan <wenzong.fan@windriver.com> --- 
+> meta-initramfs/recipes-devtools/dracut/dracut_git.bb | 11 ++++++----- 1
+> file changed, 6 insertions(+), 5 deletions(-)
+> 
+> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+> b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb index
+> b7d88fd..3a72251 100644 ---
+> a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb +++
+> b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb @@ -13,9 +13,6 @@
+> SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
+> 
+> S = "${WORKDIR}/git"
+> 
+> -inherit distro_features_check -REQUIRED_DISTRO_FEATURES = "systemd" - 
+> EXTRA_OECONF = "--prefix=${prefix} \ --libdir=${libdir} \ 
+> --datadir=${datadir} \ @@ -25,7 +22,7 @@ EXTRA_OECONF =
+> "--prefix=${prefix} \ --bindir=${bindir} \ --includedir=${includedir} \ 
+> --localstatedir=${localstatedir} \ -
+> --systemdsystemunitdir=${systemd_unitdir}/system" +               "
+> 
+> do_configure() { ./configure ${EXTRA_OECONF} @@ -44,9 +41,13 @@
+> FILES_${PN} += " ${libdir}/kernel \ " CONFFILES_${PN} +=
+> "${sysconfdir}/dracut.conf"
+> 
+> -RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid
+> util-linux-getopt bash ldd" +RDEPENDS_${PN} = "findutils cpio
+> util-linux-blkid util-linux-getopt bash ldd" 
+> RDEPENDS_${PN}-bash-completion = "bash-completion"
+> 
+> +# RDEPEND on systemd optionally +PACKAGECONFIG ??=
+> "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}" 
+> +PACKAGECONFIG[systemd] =
+> "--with-systemdsystemunitdir=${systemd_unitdir}/system/,,,systemd"
 
-  dracut: Cannot find /usr/lib/dracut/dracut-functions.sh.
-  dracut: Are you running from a git checkout?
-  dracut: Try passing -l as an argument to /usr/bin/dracut
+Since packageconfig deals with do_configure, it needs to go next to
+EXTRA_OECONF, not next to R*
 
-The dracut modules, 50-dracut.install and 51-dracut-rescue.install must
-be installed to /usr/lib as Fedora 20 does.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- meta-initramfs/recipes-devtools/dracut/dracut_git.bb | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
-
-diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-index 3a72251..8c02a4f 100644
---- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-+++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-@@ -14,7 +14,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
- S = "${WORKDIR}/git"
- 
- EXTRA_OECONF = "--prefix=${prefix} \
--                --libdir=${libdir} \
-+                --libdir=${prefix}/lib \
-                 --datadir=${datadir} \
-                 --sysconfdir=${sysconfdir} \
-                 --sbindir=${sbindir} \
-@@ -24,6 +24,8 @@ EXTRA_OECONF = "--prefix=${prefix} \
-                 --localstatedir=${localstatedir} \
-                "
- 
-+EXTRA_OEMAKE += 'libdir=${prefix}/lib'
-+
- do_configure() {
-     ./configure ${EXTRA_OECONF}
- }
-@@ -36,9 +38,12 @@ PACKAGES =+ "${PN}-bash-completion"
- 
- FILES_${PN}-bash-completion = "${datadir}/bash-completion"
- 
--FILES_${PN} += " ${libdir}/kernel \
-+FILES_${PN} += "${prefix}/lib/kernel \
-+                ${prefix}/lib/dracut \
-                 ${systemd_unitdir} \
-                "
-+FILES_${PN}-dbg += "${prefix}/lib/dracut/.debug"
-+
- CONFFILES_${PN} += "${sysconfdir}/dracut.conf"
- 
- RDEPENDS_${PN} = "findutils cpio util-linux-blkid util-linux-getopt bash ldd"
--- 
-1.9.1
+iD8DBQFV8V0cMkyGM64RGpERAioKAJ0eFaToEpbhH9mu4J8r02DP9KM1NgCgtHTx
+ESYXBkXqAe55sypT5UjiyiE=
+=Ueoe
+-----END PGP SIGNATURE-----
 
 
