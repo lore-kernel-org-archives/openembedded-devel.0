@@ -1,35 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F3C3736B6
+Return-Path: <alejandro.joya.cruz@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id BF80873232
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 12:50:48 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so21901920wic.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 05:50:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=HVdTzTfSzn7HwMExo+WctFTbzT7llwN3uC9qSDM7PwY=;
-	b=inxKJDDu/BodmLarIOktGX+pRx66cAvMZZyg+w/9DA9Q5dHMVSXCDtK01+JY57/iWj
-	jeTyde1WOExpf9BdyV4ujQwuyOFfqrrNMjtEPzKCYidWdFhz90OQMj0UKkgRhGZxg1Iq
-	n3BoP9Rleb73lVBQWCy/Mol7d0909iEcuwr4OSFUg4SwNRvlmU0VgL8EXK9P1JXcIJG1
-	Ykri8/CvTsSvpsXLdFrpc/AsrDCDNkzfzcTpwRdZThJufA1qVal/IB+yDJCmd1OTb4Ow
-	TSOttSqBBbDdXJwWiwqVBMaLw+Uj2QJoHjku1xj4GUDcRP4VGeOKwaMYUFjqhPrydzah
-	nHvA==
-X-Received: by 10.180.90.107 with SMTP id bv11mr6203382wib.69.1441889448734;
-	Thu, 10 Sep 2015 05:50:48 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	wj4sm2070369wjb.10.2015.09.10.05.50.48
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 10 Sep 2015 05:50:48 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Sep 2015 14:51:45 +0200
-Message-Id: <1441889505-17454-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.5.1
-Subject: [meta-oe][PATCH] gpsd: Fix build with gcc-5.2
+	Thu, 10 Sep 2015 15:34:26 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 10 Sep 2015 08:33:56 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.17,505,1437462000"; d="scan'208";a="766345327"
+Received: from orsmsx102.amr.corp.intel.com ([10.22.225.129])
+	by orsmga001.jf.intel.com with ESMTP; 10 Sep 2015 08:33:54 -0700
+Received: from FMSMSX109.amr.corp.intel.com (10.18.116.9) by
+	ORSMSX102.amr.corp.intel.com (10.22.225.129) with Microsoft SMTP Server
+	(TLS) id 14.3.224.2; Thu, 10 Sep 2015 08:33:52 -0700
+Received: from fmsmsx106.amr.corp.intel.com ([169.254.5.207]) by
+	FMSMSX109.amr.corp.intel.com ([169.254.15.192]) with mapi id
+	14.03.0224.002; Thu, 10 Sep 2015 08:33:52 -0700
+From: "Joya Cruz, Alejandro" <alejandro.joya.cruz@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe][meta-oe][PATCH]] toybox: upgrade to 0.6.0
+Thread-Index: AQHQ50/55gu+Cf2fakGHqwrzXGZPAZ42YuUA
+Date: Thu, 10 Sep 2015 15:33:52 +0000
+Message-ID: <1441899228.12956.8.camel@intel.com>
+References: <1441398373-21244-1-git-send-email-alejandro.joya.cruz@intel.com>
+In-Reply-To: <1441398373-21244-1-git-send-email-alejandro.joya.cruz@intel.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.219.128.56]
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH]] toybox: upgrade to 0.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,77 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2015 12:50:53 -0000
+X-List-Received-Date: Thu, 10 Sep 2015 15:34:32 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <EE4E1C43E8AD584A8E7C786E721741BC@intel.com>
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../0001-Include-stdatomic.h-only-in-C-mode.patch  | 43 ++++++++++++++++++++++
- meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb       |  1 +
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-Include-stdatomic.h-only-in-C-mode.patch
-
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-Include-stdatomic.h-only-in-C-mode.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-Include-stdatomic.h-only-in-C-mode.patch
-new file mode 100644
-index 0000000..bc9167e
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-Include-stdatomic.h-only-in-C-mode.patch
-@@ -0,0 +1,43 @@
-+From 79f6d9133378325d70a92e66f7352c1becefbb88 Mon Sep 17 00:00:00 2001
-+From: Gleb Smirnoff <glebius@FreeBSD.org>
-+Date: Sat, 16 May 2015 02:47:28 +0300
-+Subject: [PATCH] Include <stdatomic.h> only in C mode.
-+
-+Upstream-Status: Backport from 3.15
-+
-+Without this build with gcc-5.2 fails with:
-+| arm-oe-linux-gnueabi-g++ -march=armv4t -mthumb -mthumb-interwork -mtune=arm920t --sysroot=/OE/build/shr-core/tmp-glibc/sysroots/om-gta02 -o clock_gettime-qt.os -c -O2 -pipe -g -feliminate-unused-debug-types --sysroot=/OE/build/shr-core/tmp-glibc/sysroots/om-gta02 -Wextra -Wall -Wno-uninitialized -Wno-missing-field-initializers -Wcast-align -Wmissing-declarations -Wpointer-arith -Wreturn-type -pthread -Wmissing-declarations -g -O0 -pthread -fPIC -DUSE_QT -DQT_SHARED -I/OE/build/shr-core/tmp-glibc/sysroots/om-gta02/usr/include/dbus-1.0 -I/OE/build/shr-core/tmp-glibc/sysroots/om-gta02/usr/lib/dbus-1.0/include -I/OE/build/shr-core/tmp-glibc/sysroots/om-gta02/usr/include/qt4/QtNetwork -I/OE/build/shr-core/tmp-glibc/sysroots/om-gta02/usr/include/qt4 -I/OE/build/shr-core/tmp-glibc/sysroots/om-gta02/usr/include/qt4/QtCore clock_gettime.c
-+| In file included from compiler.h:50:0,
-+|                  from clock_gettime.c:10:
-+| /OE/build/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/lib/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/5.2.0/include/stdatomic.h:40:9: error: '_Atomic' does not name a type
-+|  typedef _Atomic _Bool atomic_bool;
-+|          ^
-+....
-+
-+More info:
-+https://gcc.gnu.org/bugzilla/show_bug.cgi?id=60932
-+
-+Signed-off-by: Gary E. Miller <gem@rellim.com>
-+---
-+ compiler.h | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/compiler.h b/compiler.h
-+index 837c935..03430c0 100644
-+--- a/compiler.h
-++++ b/compiler.h
-+@@ -66,9 +66,9 @@
-+     } while (0)
-+ 
-+ #ifdef HAVE_STDATOMIC_H
-+-#ifndef __COVERITY__	/* Coverity is confused by a GNU typedef */
-++#if !defined(__COVERITY__) && !defined(__cplusplus)
-+ #include <stdatomic.h>
-+-#endif /* __COVERITY__ */
-++#endif /* __COVERITY__ || __cplusplus */
-+ #endif /* HAVE_STDATOMIC_H */
-+ 
-+ #ifdef HAVE_OSATOMIC_H
-+-- 
-+2.5.1
-+
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-index 272bba8..dae39c2 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-@@ -15,6 +15,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-     file://0001-Check-for-__STDC_NO_ATOMICS__-before-using-stdatomic.patch \
-     file://0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.patch \
-     file://0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch \
-+    file://0001-Include-stdatomic.h-only-in-C-mode.patch \
-     file://gpsd-default \
-     file://gpsd \
-     file://60-gpsd.rules \
--- 
-2.5.1
-
+U29tZSBmZWVkYmFjayBvbiB0aGlzLg0KDQpPbiB2aWUsIDIwMTUtMDktMDQgYXQgMjA6MjYgKzAw
+MDAsIEpveWEgQ3J1eiwgQWxlamFuZHJvIHdyb3RlOg0KPiBDaGFuZ2UgU1JDX1VSSSBzaW5jZSBw
+YXRjaCBpcyBub3QgbG9uZ2VyIG5lZWQgaXQuDQo+IFVwZGF0ZSB0aGUgY2hlY2tzdW0gZm9yIHBh
+Y2thZ2UuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBBbGVqYW5kcm8gSm95YSA8YWxlamFuZHJvLmpv
+eWEuY3J1ekBpbnRlbC5jb20+DQo+IC0tLQ0KPiAgbWV0YS1vZS9yZWNpcGVzLWNvcmUvdG95Ym94
+L3t0b3lib3hfMC41LjIuYmIgPT4gdG95Ym94XzAuNi4wLmJifSB8IDkgKysrKystLS0tDQo+ICAx
+IGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQ0KPiAgcmVuYW1l
+IG1ldGEtb2UvcmVjaXBlcy1jb3JlL3RveWJveC97dG95Ym94XzAuNS4yLmJiID0+IHRveWJveF8w
+LjYuMC5iYn0gKDkwJSkNCj4gDQo+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtY29yZS90
+b3lib3gvdG95Ym94XzAuNS4yLmJiIGIvbWV0YS1vZS9yZWNpcGVzLWNvcmUvdG95Ym94L3RveWJv
+eF8wLjYuMC5iYg0KPiBzaW1pbGFyaXR5IGluZGV4IDkwJQ0KPiByZW5hbWUgZnJvbSBtZXRhLW9l
+L3JlY2lwZXMtY29yZS90b3lib3gvdG95Ym94XzAuNS4yLmJiDQo+IHJlbmFtZSB0byBtZXRhLW9l
+L3JlY2lwZXMtY29yZS90b3lib3gvdG95Ym94XzAuNi4wLmJiDQo+IGluZGV4IGJjZDZhNzIuLmRh
+MDMyMDAgMTAwNjQ0DQo+IC0tLSBhL21ldGEtb2UvcmVjaXBlcy1jb3JlL3RveWJveC90b3lib3hf
+MC41LjIuYmINCj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLWNvcmUvdG95Ym94L3RveWJveF8wLjYu
+MC5iYg0KPiBAQCAtMSwxMCArMSwxMSBAQA0KPiAgU1VNTUFSWSA9ICJUb3lib3ggY29tYmluZXMg
+Y29tbW9uIHV0aWxpdGllcyB0b2dldGhlciBpbnRvIGEgc2luZ2xlIGV4ZWN1dGFibGUuIg0KPiAg
+SE9NRVBBR0UgPSAiaHR0cDovL3d3dy5sYW5kbGV5Lm5ldC90b3lib3gvIg0KPiAgDQo+IC1TUkNf
+VVJJID0gImh0dHA6Ly93d3cubGFuZGxleS5uZXQvdG95Ym94L2Rvd25sb2Fkcy8ke0JQTn0tJHtQ
+Vn0udGFyLmd6IFwNCj4gLSAgICBmaWxlOi8vMDAwMS1NYXRjaC1wYXRocy13aXRoLWJ1c3lib3gu
+cGF0Y2giDQo+IC1TUkNfVVJJW21kNXN1bV0gPSAiYjVkMTI0Mjc2N2M0MTFiNjlkY2Q3MTdkYTFj
+MjE4YjIiDQo+IC1TUkNfVVJJW3NoYTI1NnN1bV0gPSAiZGVjN2Y2NDMzZWUwZTEzMGYyMjRmYzYz
+NzYwYjM0N2FkMDU3MjI4MGM0ZGUzMmYxYWFlZmJlZTgxM2E3OWEwMCINCj4gK1NSQ19VUkkgPSAi
+aHR0cDovL3d3dy5sYW5kbGV5Lm5ldC90b3lib3gvZG93bmxvYWRzLyR7QlBOfS0ke1BWfS50YXIu
+Z3oiDQo+ICsNCj4gK1NSQ19VUklbbWQ1c3VtXSA9ICI3ZjRhNmM4OWU1NmM0OGUzMzUwZTYxMWY1
+YjM2YzJjZiINCj4gK1NSQ19VUklbc2hhMjU2c3VtXSA9ICJiNmUyNjk0ZDE5YWMwOGYxYzM0MTZk
+NWIyYTAyYTMxZDQ0NWRiMmVkOThkZWM4OTc2MTQzMGNkZmYyYzk3MTBkIg0KPiArDQo+ICANCj4g
+IExJQ0VOU0UgPSAiQlNELTAtQ2xhdXNlIg0KPiAgTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8v
+TElDRU5TRTttZDU9ZjBiOGIzZGQ2NDMxYmNhYTI0NWRhMGEwOGJkMGQ1MTEiDQoNCg==
 
