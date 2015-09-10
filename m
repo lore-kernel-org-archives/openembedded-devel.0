@@ -1,40 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 2861D6E26B
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-yk0-f171.google.com (mail-yk0-f171.google.com
+	[209.85.160.171])
+	by mail.openembedded.org (Postfix) with ESMTP id AC93D6E26B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 15:43:48 +0000 (UTC)
-Received: by wicgb1 with SMTP id gb1so30216723wic.1
+	Thu, 10 Sep 2015 18:01:17 +0000 (UTC)
+Received: by ykdu9 with SMTP id u9so66822962ykd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 08:43:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=bPiurlb7YaUFwWKMYxwG3qpbpJ7OoTK6s/qDqjP9xRc=;
-	b=qLjPhHHif2ZlHmmi4DYi89K/JcxUBdj3GKaAZzlzwHyNo11N5S3J7LGJN+Q+fw1v5+
-	Uz7METs6KR75zdcN+9FW1nbK76iQSiDEWJpazkg5wJFe9QY/TfFZwnTQvJ/UuEsmOTnR
-	apQ0i/qYDuUZ0a5vrnOx2tofVpCzJh6xeUhu+UdEMO9X/DA6+Z3BxRogytsMkisU7Ykk
-	OaJPPzCg5vMRYsNZYu4yQ4gO6oz2m0S6HQpJCTQqkUlQJ3dr/MAoMHrGvbX+nbpSY3jw
-	uElADeW0irP4Eox30PCRM864dDl/Xcivm2UzXczCOIPTpkVgb583ZTDqLAUSQ4NyVXGD
-	8BaA==
-X-Received: by 10.194.9.42 with SMTP id w10mr68567893wja.146.1441899828479;
-	Thu, 10 Sep 2015 08:43:48 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id r4sm9932299wia.19.2015.09.10.08.43.47
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 10 Sep 2015 08:43:47 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 10 Sep 2015 17:44:47 +0200
+	Thu, 10 Sep 2015 11:01:18 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=amTOrS2s1xcrYyaR65NZ8AfD55CCI8mmiqZVu+BsdbA=;
+	b=jEDD4476dpfdlgC6by5c64I0w7fLH9NyH0EMwoSbPsUq+P3nqmmDU7Kd1awkYGuEft
+	JBR/4cLcXHdkzaOcmw+sqeneEHryumwV2ftlJpfNw0YYsO4zZ33Cxof4AGnSAKXThI7o
+	BLCk9zZZ85qsC+WfFVJ9V8lkpo7qhn/+/iSKuXVGr+PwmsRaqfvKP/ScF4yMNK6cMb7Y
+	pV2P3pOxvsMDA5tJ/Z95G7fjjJ54/rLanl7/NPVqPiRWIbzlpYyqQGSzASlFOy3p1AOU
+	IA0N7dnFy8okjRmhBDfvLYs4+8cBQK7KOHCwssSUl6Xd3cJ0tHFrXw57rAikMdFYqaIK
+	ke6A==
+X-Gm-Message-State: ALoCoQmaURlnjGcDH2+14pJ8u3wIzLTQzMKyRRm3DZGA9JUHyrnL22sjpPpZTQ7vwm8GgihVkJAz
+X-Received: by 10.13.230.6 with SMTP id p6mr48368940ywe.86.1441908077934;
+	Thu, 10 Sep 2015 11:01:17 -0700 (PDT)
+Received: from localhost.localdomain ([201.22.227.56])
+	by smtp.gmail.com with ESMTPSA id
+	d136sm10089400ywb.53.2015.09.10.11.01.16
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 10 Sep 2015 11:01:17 -0700 (PDT)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150910154447.GC2387@jama>
-References: <1441398373-21244-1-git-send-email-alejandro.joya.cruz@intel.com>
-	<1441899228.12956.8.camel@intel.com>
-MIME-Version: 1.0
-In-Reply-To: <1441899228.12956.8.camel@intel.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-oe][PATCH]] toybox: upgrade to 0.6.0
+Date: Thu, 10 Sep 2015 15:01:02 -0300
+Message-Id: <1441908063-29340-1-git-send-email-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.1.4
+Cc: Fabio Berton <fabio.berton@ossystems.com.br>
+Subject: [meta-python][PATCH v2 1/2] python-pyzmq: Add python-multiprocessing in RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,105 +45,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2015 15:43:50 -0000
-X-Groupsio-MsgNum: 57294
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="V88s5gaDVPzZ0KCq"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Sep 2015 18:01:19 -0000
 
---V88s5gaDVPzZ0KCq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fix the following runtime error:
 
-On Thu, Sep 10, 2015 at 03:33:52PM +0000, Joya Cruz, Alejandro wrote:
-> Some feedback on this.
+>>> import zmq
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+File "/usr/lib/python2.7/site-packages/zmq/__init__.py", line 53, in
+<module>
+from zmq import devices
+File "/usr/lib/python2.7/site-packages/zmq/devices/__init__.py", line 7,
+in <module>
+from zmq.devices import basedevice, proxydevice, monitoredqueue,
+monitoredqueuedevice
+File "/usr/lib/python2.7/site-packages/zmq/devices/basedevice.py", line
+9, in <module>
+from multiprocessing import Process
+ImportError: No module named multiprocessing
 
-Sigh!
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+---
+ meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-commit 7ad835c9f84acb34f6d29a3352f24812ef295b63
-Author:     Alejandro Joya <alejandro.joya.cruz@intel.com>
-AuthorDate: Fri Sep 4 15:26:13 2015 -0500
-Commit:     Martin Jansa <Martin.Jansa@gmail.com>
-CommitDate: Tue Sep 8 16:21:38 2015 +0200
+diff --git a/meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb b/meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb
+index 0d822f5..949b7e1 100644
+--- a/meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb
++++ b/meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb
+@@ -15,6 +15,8 @@ S = "${WORKDIR}/pyzmq-${PV}"
+ 
+ inherit setuptools pkgconfig
+ 
++RDEPENDS_${PN} += "python-multiprocessing"
++
+ FILES_${PN}-dbg =+ "${PYTHON_SITEPACKAGES_DIR}/zmq/backend/cython/.debug"
+ 
+ do_compile_prepend() {
+-- 
+2.1.4
 
-    toybox: upgrade to 0.6.0
 
-http://patchwork.openembedded.org/project/oe/list/?state=3D*&q=3Dtoybox&arc=
-hive=3Dboth
-allows you to find:
-http://patchwork.openembedded.org/patch/102625/
-which says:
-State	Accepted, archived
-
-If you really want some feedback, then learn to use --subject-prefix
-parameter, you have extra ']' in commit message and I had to remove it
-manually when cherry-picking to master-next.
-
-Regards,
-
-> On vie, 2015-09-04 at 20:26 +0000, Joya Cruz, Alejandro wrote:
-> > Change SRC_URI since patch is not longer need it.
-> > Update the checksum for package.
-> >=20
-> > Signed-off-by: Alejandro Joya <alejandro.joya.cruz@intel.com>
-> > ---
-> >  meta-oe/recipes-core/toybox/{toybox_0.5.2.bb =3D> toybox_0.6.0.bb} | 9=
- +++++----
-> >  1 file changed, 5 insertions(+), 4 deletions(-)
-> >  rename meta-oe/recipes-core/toybox/{toybox_0.5.2.bb =3D> toybox_0.6.0.=
-bb} (90%)
-> >=20
-> > diff --git a/meta-oe/recipes-core/toybox/toybox_0.5.2.bb b/meta-oe/reci=
-pes-core/toybox/toybox_0.6.0.bb
-> > similarity index 90%
-> > rename from meta-oe/recipes-core/toybox/toybox_0.5.2.bb
-> > rename to meta-oe/recipes-core/toybox/toybox_0.6.0.bb
-> > index bcd6a72..da03200 100644
-> > --- a/meta-oe/recipes-core/toybox/toybox_0.5.2.bb
-> > +++ b/meta-oe/recipes-core/toybox/toybox_0.6.0.bb
-> > @@ -1,10 +1,11 @@
-> >  SUMMARY =3D "Toybox combines common utilities together into a single e=
-xecutable."
-> >  HOMEPAGE =3D "http://www.landley.net/toybox/"
-> > =20
-> > -SRC_URI =3D "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.=
-gz \
-> > -    file://0001-Match-paths-with-busybox.patch"
-> > -SRC_URI[md5sum] =3D "b5d1242767c411b69dcd717da1c218b2"
-> > -SRC_URI[sha256sum] =3D "dec7f6433ee0e130f224fc63760b347ad0572280c4de32=
-f1aaefbee813a79a00"
-> > +SRC_URI =3D "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.=
-gz"
-> > +
-> > +SRC_URI[md5sum] =3D "7f4a6c89e56c48e3350e611f5b36c2cf"
-> > +SRC_URI[sha256sum] =3D "b6e2694d19ac08f1c3416d5b2a02a31d445db2ed98dec8=
-9761430cdff2c9710d"
-> > +
-> > =20
-> >  LICENSE =3D "BSD-0-Clause"
-> >  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df0b8b3dd6431bcaa245da0a08bd=
-0d511"
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---V88s5gaDVPzZ0KCq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlXxpW0ACgkQN1Ujt2V2gBwmjQCffBMnJ1ABgKNN+VtC9Oxuh2VD
-L6sAnRB/EOA5usvrSjATiWTeIS5Z2anp
-=CLQf
------END PGP SIGNATURE-----
-
---V88s5gaDVPzZ0KCq--
