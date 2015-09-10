@@ -1,24 +1,24 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EE396762A2
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D7D2473243
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 07:15:04 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t8A7F4Vq024145
+	Thu, 10 Sep 2015 07:26:06 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8A7Q6vF004166
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 00:15:04 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.235.1; Thu, 10 Sep 2015 00:15:04 -0700
-From: <rongqing.li@windriver.com>
+	Thu, 10 Sep 2015 00:26:06 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.235.1;
+	Thu, 10 Sep 2015 00:26:06 -0700
+From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 10 Sep 2015 15:09:38 +0800
-Message-ID: <1441868978-19693-1-git-send-email-rongqing.li@windriver.com>
+Date: Thu, 10 Sep 2015 03:26:02 -0400
+Message-ID: <cover.1441869690.git.wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mysql-python: upgrade to 1.2.5
+Subject: [PATCH 0/2][meta-initramfs] dracut: RDEPEND on systemd optionally & install modules to /usr/lib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,66 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2015 07:15:07 -0000
+X-List-Received-Date: Thu, 10 Sep 2015 07:26:07 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-remove the remove-distribute.patch, v1.2.5 has a similar fix
+* Get dracut RDEPEND on systemd optionally;
+* install modules to /usr/lib for fixing runtime issues.
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../mysql/mysql-python/remove-distribute.patch          | 17 -----------------
- .../{mysql-python_1.2.4.bb => mysql-python_1.2.5.bb}    |  8 +++-----
- 2 files changed, 3 insertions(+), 22 deletions(-)
- delete mode 100644 meta-oe/recipes-support/mysql/mysql-python/remove-distribute.patch
- rename meta-oe/recipes-support/mysql/{mysql-python_1.2.4.bb => mysql-python_1.2.5.bb} (64%)
+The following changes since commit d36e2d1066f50036080f978583a58fe79ecfac54:
 
-diff --git a/meta-oe/recipes-support/mysql/mysql-python/remove-distribute.patch b/meta-oe/recipes-support/mysql/mysql-python/remove-distribute.patch
-deleted file mode 100644
-index 0ce750d..0000000
---- a/meta-oe/recipes-support/mysql/mysql-python/remove-distribute.patch
-+++ /dev/null
-@@ -1,17 +0,0 @@
--Upstream-Status: Innapropriate
--
--Index: MySQL-python-1.2.4/setup.py
--===================================================================
----- MySQL-python-1.2.4.orig/setup.py
--+++ MySQL-python-1.2.4/setup.py
--@@ -3,8 +3,8 @@
-- import os
-- import sys
-- 
---from distribute_setup import use_setuptools
---use_setuptools()
--+#from distribute_setup import use_setuptools
--+#use_setuptools()
-- from setuptools import setup, Extension
-- 
-- if not hasattr(sys, "hexversion") or sys.hexversion < 0x02040000:
-diff --git a/meta-oe/recipes-support/mysql/mysql-python_1.2.4.bb b/meta-oe/recipes-support/mysql/mysql-python_1.2.5.bb
-similarity index 64%
-rename from meta-oe/recipes-support/mysql/mysql-python_1.2.4.bb
-rename to meta-oe/recipes-support/mysql/mysql-python_1.2.5.bb
-index 6fc974e..ac0df4f 100644
---- a/meta-oe/recipes-support/mysql/mysql-python_1.2.4.bb
-+++ b/meta-oe/recipes-support/mysql/mysql-python_1.2.5.bb
-@@ -8,11 +8,9 @@ DEPENDS = "mysql5"
- 
- SRCNAME = "MySQL-python"
- 
--SRC_URI = "https://pypi.python.org/packages/source/M/${SRCNAME}/${SRCNAME}-${PV}.zip \
--           file://remove-distribute.patch"
--
--SRC_URI[md5sum] = "ddf2386daf10a97af115ffad2ed4a9a0"
--SRC_URI[sha256sum] = "e405f9d6be33923d428acaa4db4f4470427f1d15ea0d2d82a933449ace26bbd9"
-+SRC_URI = "https://pypi.python.org/packages/source/M/${SRCNAME}/${SRCNAME}-${PV}.zip"
-+SRC_URI[md5sum] = "654f75b302db6ed8dc5a898c625e030c"
-+SRC_URI[sha256sum] = "811040b647e5d5686f84db415efd697e6250008b112b6909ba77ac059e140c74"
- 
- S = "${WORKDIR}/${SRCNAME}-${PV}"
- 
+  libunique: add a recipe from oe-core (2015-09-08 16:30:24 +0200)
+
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib wenzong/dracut
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=wenzong/dracut
+
+Robert Yang (1):
+  dracut: RDEPEND on systemd optionally
+
+Wenzong Fan (1):
+  dracut: install modules to /usr/lib
+
+ meta-initramfs/recipes-devtools/dracut/dracut_git.bb | 20 +++++++++++++-------
+ 1 file changed, 13 insertions(+), 7 deletions(-)
+
 -- 
 1.9.1
 
