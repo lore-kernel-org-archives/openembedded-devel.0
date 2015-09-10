@@ -1,27 +1,35 @@
-Return-Path: <Noor_Ahsan@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 52D2E73243
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F3C3736B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 11:31:04 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1Za04G-00075w-Nl from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Sep 2015 04:31:04 -0700
-Received: from gemini.alm.mentorg.com (147.34.91.1) by
-	SVR-ORW-FEM-06.mgc.mentorg.com (147.34.97.120) with Microsoft SMTP
-	Server (TLS) id 14.3.224.2; Thu, 10 Sep 2015 04:31:04 -0700
-Received: from pkl-ahsann-ubuntu.pkl.mentorg.com
-	(pkl-ahsann-ubuntu.pkl.mentorg.com [137.202.157.70])	by
-	gemini.alm.mentorg.com (8.14.4/8.14.4) with ESMTP id t8ABV1KB010846;
-	Thu, 10 Sep 2015 06:31:03 -0500
-From: "Noor, Ahsan" <noor_ahsan@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 10 Sep 2015 16:30:48 +0500
-Message-ID: <1441884648-4113-1-git-send-email-noor_ahsan@mentor.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH] qtbase: Fix qeglplatformscreen.c compilation issue due refinition on None.
+	Thu, 10 Sep 2015 12:50:48 +0000 (UTC)
+Received: by wiclk2 with SMTP id lk2so21901920wic.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Sep 2015 05:50:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=HVdTzTfSzn7HwMExo+WctFTbzT7llwN3uC9qSDM7PwY=;
+	b=inxKJDDu/BodmLarIOktGX+pRx66cAvMZZyg+w/9DA9Q5dHMVSXCDtK01+JY57/iWj
+	jeTyde1WOExpf9BdyV4ujQwuyOFfqrrNMjtEPzKCYidWdFhz90OQMj0UKkgRhGZxg1Iq
+	n3BoP9Rleb73lVBQWCy/Mol7d0909iEcuwr4OSFUg4SwNRvlmU0VgL8EXK9P1JXcIJG1
+	Ykri8/CvTsSvpsXLdFrpc/AsrDCDNkzfzcTpwRdZThJufA1qVal/IB+yDJCmd1OTb4Ow
+	TSOttSqBBbDdXJwWiwqVBMaLw+Uj2QJoHjku1xj4GUDcRP4VGeOKwaMYUFjqhPrydzah
+	nHvA==
+X-Received: by 10.180.90.107 with SMTP id bv11mr6203382wib.69.1441889448734;
+	Thu, 10 Sep 2015 05:50:48 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	wj4sm2070369wjb.10.2015.09.10.05.50.48
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 10 Sep 2015 05:50:48 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Sep 2015 14:51:45 +0200
+Message-Id: <1441889505-17454-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.5.1
+Subject: [meta-oe][PATCH] gpsd: Fix build with gcc-5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,85 +43,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2015 11:31:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 10 Sep 2015 12:50:53 -0000
 
-From: Noor <noor_ahsan@mentor.com>
-
-* In Qt5.5 qeglplatformscreen.c includes qurl.h and X.h (via eglvivante.h). X.h
-  define None to 0L but qurl.h set None to 0 in enum. Due to this do_compile task
-  fails saying "qurl.h:131:9: error: expected identifier before numeric constant".
-  This patch undefine None in qurl.h if it is define earlier.
-
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../qtbase/fix_multiple_definition_of_None.patch   |   41 ++++++++++++++++++++
- qt5-layer/recipes-qt/qt5/qtbase_%.bbappend         |    4 +-
- 2 files changed, 44 insertions(+), 1 deletion(-)
+ .../0001-Include-stdatomic.h-only-in-C-mode.patch  | 43 ++++++++++++++++++++++
+ meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb       |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-Include-stdatomic.h-only-in-C-mode.patch
 
-diff --git a/qt5-layer/recipes-qt/qt5/qtbase/fix_multiple_definition_of_None.patch b/qt5-layer/recipes-qt/qt5/qtbase/fix_multiple_definition_of_None.patch
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-Include-stdatomic.h-only-in-C-mode.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-Include-stdatomic.h-only-in-C-mode.patch
 new file mode 100644
-index 0000000..f5b2abf
+index 0000000..bc9167e
 --- /dev/null
-+++ b/qt5-layer/recipes-qt/qt5/qtbase/fix_multiple_definition_of_None.patch
-@@ -0,0 +1,41 @@
-+Workaround qeglplatformscreen.c failure in Qt5.5 due to inclusion of qurl.h and X.h. X.h define None to 0L and qurl.h set None to 0 in enum. Due to this following error occur. Undef None in qurl.h if it is defined.
++++ b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-Include-stdatomic.h-only-in-C-mode.patch
+@@ -0,0 +1,43 @@
++From 79f6d9133378325d70a92e66f7352c1becefbb88 Mon Sep 17 00:00:00 2001
++From: Gleb Smirnoff <glebius@FreeBSD.org>
++Date: Sat, 16 May 2015 02:47:28 +0300
++Subject: [PATCH] Include <stdatomic.h> only in C mode.
 +
-+In file included from /home/noor/SB/release_2015.12/build/tmp/sysroots/imx6qsabresd/usr/include/X11/Xlib.h:44:0,
-+                 from /home/noor/SB/release_2015.12/build/tmp/sysroots/imx6qsabresd/usr/include/EGL/eglvivante.h:244,
-+                 from /home/noor/SB/release_2015.12/build/tmp/sysroots/imx6qsabresd/usr/include/EGL/eglplatform.h:38,
-+                 from /home/noor/SB/release_2015.12/build/tmp/sysroots/imx6qsabresd/usr/include/EGL/egl.h:39,
-+                 from /home/noor/SB/release_2015.12/build/tmp/work/cortexa9hf-vfp-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.5.0+gitAUTOINC+2fde9f59ee-r0/git/src/platformsupport/eglconvenience/qeglplatformscreen_p.h:52,
-+                 from /home/noor/SB/release_2015.12/build/tmp/work/cortexa9hf-vfp-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.5.0+gitAUTOINC+2fde9f59ee-r0/git/src/platformsupport/eglconvenience/qeglplatformscreen.cpp:34:
-+../../include/QtCore/../../../git/src/corelib/io/qurl.h:131:9: error: expected identifier before numeric constant
-+         None = 0x0,
-+         ^
-+../../include/QtCore/../../../git/src/corelib/io/qurl.h:131:9: error: expected '}' before numeric constant
-+../../include/QtCore/../../../git/src/corelib/io/qurl.h:131:9: error: expected unqualified-id before numeric constant
-+In file included from ../../include/QtCore/qurl.h:1:0,
-+                 from ../../include/QtGui/../../../git/src/gui/kernel/qevent.h:48,
-+                 from ../../include/QtGui/qevent.h:1,
-+                 from ../../include/QtGui/QTouchEvent:1,
-+                 from ../../include/QtGui/5.5.0/QtGui/qpa/../../../../../../git/src/gui/kernel/qwindowsysteminterface.h:53,
-+                 from ../../include/QtGui/5.5.0/QtGui/qpa/qwindowsysteminterface.h:1,
-+                 from /home/noor/SB/release_2015.12/build/tmp/work/cortexa9hf-vfp-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.5.0+gitAUTOINC+2fde9f59ee-r0/git/src/platformsupport/eglconvenience/qeglplatformscreen.cpp:37:
-+../../include/QtCore/../../../git/src/corelib/io/qurl.h:163:26: error: 'UrlFormattingOption' was not declared in this scope
-+     typedef QUrlTwoFlags<UrlFormattingOption, ComponentFormattingOption> FormattingOptions;
++Upstream-Status: Backport from 3.15
++
++Without this build with gcc-5.2 fails with:
++| arm-oe-linux-gnueabi-g++ -march=armv4t -mthumb -mthumb-interwork -mtune=arm920t --sysroot=/OE/build/shr-core/tmp-glibc/sysroots/om-gta02 -o clock_gettime-qt.os -c -O2 -pipe -g -feliminate-unused-debug-types --sysroot=/OE/build/shr-core/tmp-glibc/sysroots/om-gta02 -Wextra -Wall -Wno-uninitialized -Wno-missing-field-initializers -Wcast-align -Wmissing-declarations -Wpointer-arith -Wreturn-type -pthread -Wmissing-declarations -g -O0 -pthread -fPIC -DUSE_QT -DQT_SHARED -I/OE/build/shr-core/tmp-glibc/sysroots/om-gta02/usr/include/dbus-1.0 -I/OE/build/shr-core/tmp-glibc/sysroots/om-gta02/usr/lib/dbus-1.0/include -I/OE/build/shr-core/tmp-glibc/sysroots/om-gta02/usr/include/qt4/QtNetwork -I/OE/build/shr-core/tmp-glibc/sysroots/om-gta02/usr/include/qt4 -I/OE/build/shr-core/tmp-glibc/sysroots/om-gta02/usr/include/qt4/QtCore clock_gettime.c
++| In file included from compiler.h:50:0,
++|                  from clock_gettime.c:10:
++| /OE/build/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/lib/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/5.2.0/include/stdatomic.h:40:9: error: '_Atomic' does not name a type
++|  typedef _Atomic _Bool atomic_bool;
++|          ^
 +....
 +
++More info:
++https://gcc.gnu.org/bugzilla/show_bug.cgi?id=60932
 +
-+Upstream-Status: Inappropriate [workaround]
++Signed-off-by: Gary E. Miller <gem@rellim.com>
++---
++ compiler.h | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/corelib/io/qurl.h b/src/corelib/io/qurl.h
-+index e6c570d..06de3af 100644
-+--- a/src/corelib/io/qurl.h
-++++ b/src/corelib/io/qurl.h
-+@@ -128,6 +128,9 @@ public:
++diff --git a/compiler.h b/compiler.h
++index 837c935..03430c0 100644
++--- a/compiler.h
+++++ b/compiler.h
++@@ -66,9 +66,9 @@
++     } while (0)
 + 
-+     // encoding / toString values
-+     enum UrlFormattingOption {
-++#ifdef None
-++#undef None
-++#endif
-+         None = 0x0,
-+         RemoveScheme = 0x1,
-+         RemovePassword = 0x2,
-diff --git a/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend b/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend
-index e0979bf..4ad4c5c 100644
---- a/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend
-+++ b/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend
-@@ -2,7 +2,9 @@
- 
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
- 
--SRC_URI += "file://Force_egl_visual_ID_33.patch"
-+SRC_URI += "file://Force_egl_visual_ID_33.patch \
-+            file://fix_multiple_definition_of_None.patch \
-+"
- 
- HAS_X11 = "${@base_contains('DISTRO_FEATURES', 'x11', 1, 0, d)}"
- 
++ #ifdef HAVE_STDATOMIC_H
++-#ifndef __COVERITY__	/* Coverity is confused by a GNU typedef */
+++#if !defined(__COVERITY__) && !defined(__cplusplus)
++ #include <stdatomic.h>
++-#endif /* __COVERITY__ */
+++#endif /* __COVERITY__ || __cplusplus */
++ #endif /* HAVE_STDATOMIC_H */
++ 
++ #ifdef HAVE_OSATOMIC_H
++-- 
++2.5.1
++
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+index 272bba8..dae39c2 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+@@ -15,6 +15,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+     file://0001-Check-for-__STDC_NO_ATOMICS__-before-using-stdatomic.patch \
+     file://0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.patch \
+     file://0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch \
++    file://0001-Include-stdatomic.h-only-in-C-mode.patch \
+     file://gpsd-default \
+     file://gpsd \
+     file://60-gpsd.rules \
 -- 
-1.7.9.5
+2.5.1
 
 
