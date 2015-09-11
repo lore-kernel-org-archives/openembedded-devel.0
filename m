@@ -1,35 +1,37 @@
 Return-Path: <gizero@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 4433660053
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 39AD973D27
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Sep 2015 13:41:20 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so64721301wic.1
+	Fri, 11 Sep 2015 13:41:21 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so58779411wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Sep 2015 06:41:20 -0700 (PDT)
+	Fri, 11 Sep 2015 06:41:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=mt4m4EHTw7QTsDNq5PjWDPyLK+wFkkKEfhazRQ0nPv4=;
-	b=YDir+7wAYYsKk5cxeXq8r2mjAAzSg6vuIjIkWkLh92IIlgqW9/NFVQky1ceLxme/bB
-	Rg5fGydD1CDEXtNekFkYK/hBIUnbKZpUjv0YKPs+x4NyqweW5CeBN+hKMWNCRU04NKrq
-	PqbX4KmuCgXgXNDTskyiXGf/j+IEgr7LG5DR8BqOXzFAWdlM2+KpZMGIRzlgh8ZYZeWV
-	wM8DC8cDeqOL0nHxzjOzbFZnE8cUNwz1tAI8xgbehowpwnK6z3IibDtU9m4A0uk4nEPe
-	d6Q4vwnLnXvkjkgpnE68v+dNXPTuddHBwLc0aMC+G5S28Z0p5IWv9Nc2I+QTWsT1Tg9l
-	LBwQ==
-X-Received: by 10.180.23.193 with SMTP id o1mr4600330wif.71.1441978880473;
-	Fri, 11 Sep 2015 06:41:20 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=OLW+HZHq40rO2Ir2qac3W6RA7/qw7v4GlBqQlfTloak=;
+	b=QQgIX/3JWbb1J/f2gRqxNCS4aLslLRRErsDZf5Pi5LHFdQsVKN+mNK3atLT6SqBQ3w
+	2JLQ8diIINASUJyvpYdxHkwogNORHcVCfoiY9se6lUb414hNd56pCbYl822lScjmz6mp
+	XZxpX0DIGHO32ly7MlL+SbterDtZ0kUl48rbmdKI9I+QGXXpZiZqbc7z98vIeU+d+q8E
+	2+41F+16QldRJ9qEG9+5fiwHi72kWvMkyzg83TYS0pWEM3bpCCmXpvQYqEq143mclD1s
+	2009gdaazOGVaDIRikvIRLqkeI42tmeqRgKn/Ga+nzg36ioFmRqjYM42sJNC2JtJBiIj
+	uIag==
+X-Received: by 10.180.75.176 with SMTP id d16mr4781287wiw.75.1441978881667;
+	Fri, 11 Sep 2015 06:41:21 -0700 (PDT)
 Received: from gizero-desktop.tw.it
 	(host168-65-static.12-87-b.business.telecomitalia.it. [87.12.65.168])
 	by smtp.gmail.com with ESMTPSA id
-	nb10sm621368wic.11.2015.09.11.06.41.19
+	nb10sm621368wic.11.2015.09.11.06.41.20
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 11 Sep 2015 06:41:19 -0700 (PDT)
+	Fri, 11 Sep 2015 06:41:20 -0700 (PDT)
 From: Andrea Galbusera <gizero@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Sep 2015 15:41:04 +0200
-Message-Id: <1441978867-24237-1-git-send-email-gizero@gmail.com>
+Date: Fri, 11 Sep 2015 15:41:05 +0200
+Message-Id: <1441978867-24237-2-git-send-email-gizero@gmail.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH 0/3] redis: improve conf file install and stylize
+In-Reply-To: <1441978867-24237-1-git-send-email-gizero@gmail.com>
+References: <1441978867-24237-1-git-send-email-gizero@gmail.com>
+Subject: [meta-oe][PATCH 1/3] redis: fix configuration file permissions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,21 +47,26 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 11 Sep 2015 13:41:22 -0000
 
-This set fixes file permissions used to install the default configuration
-file. It also mark it as configuration file for packaging by adding to
-CONFFILES. Some recipe restyling was also applied.
+use 0644 instead of 0755 to install configuration file
 
-Feel free to squash individual patches if more appropriate or just let me
-know and I will respin.
+Signed-off-by: Andrea Galbusera <gizero@gmail.com>
+---
+ meta-oe/recipes-extended/redis/redis_3.0.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Andrea Galbusera (3):
-  redis: fix configuration file permissions
-  redis: add redis.conf to CONFFILES
-  redis: stylize
-
- meta-oe/recipes-extended/redis/redis_3.0.2.bb | 23 ++++++++++-------------
- 1 file changed, 10 insertions(+), 13 deletions(-)
-
+diff --git a/meta-oe/recipes-extended/redis/redis_3.0.2.bb b/meta-oe/recipes-extended/redis/redis_3.0.2.bb
+index e439431..4aea90a 100644
+--- a/meta-oe/recipes-extended/redis/redis_3.0.2.bb
++++ b/meta-oe/recipes-extended/redis/redis_3.0.2.bb
+@@ -27,7 +27,7 @@ do_install() {
+     oe_runmake install
+ 
+     install -d ${D}/${sysconfdir}/redis
+-    install -m 0755 ${WORKDIR}/redis.conf ${D}/${sysconfdir}/redis/redis.conf
++    install -m 0644 ${WORKDIR}/redis.conf ${D}/${sysconfdir}/redis/redis.conf
+ 
+     install -d ${D}/${sysconfdir}/init.d 
+     install -m 0755 ${WORKDIR}/init-redis-server ${D}/${sysconfdir}/init.d/redis-server
 -- 
 1.9.1
 
