@@ -1,20 +1,35 @@
-Return-Path: <josep.puigdemont@enea.com>
-Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by mail.openembedded.org (Postfix) with SMTP id 409DC736B6
+Return-Path: <gizero@gmail.com>
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 4433660053
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Sep 2015 13:18:04 +0000 (UTC)
-Received: from sestofb11.enea.se (172.21.3.146) by smtp.enea.com
-	(172.21.1.208) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 11 Sep 2015 15:18:00 +0200
-From: Josep Puigdemont <josep.puigdemont@enea.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 11 Sep 2015 15:18:00 +0200
-Message-ID: <1441977480-44314-1-git-send-email-josep.puigdemont@enea.com>
+	Fri, 11 Sep 2015 13:41:20 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so64721301wic.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Sep 2015 06:41:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=mt4m4EHTw7QTsDNq5PjWDPyLK+wFkkKEfhazRQ0nPv4=;
+	b=YDir+7wAYYsKk5cxeXq8r2mjAAzSg6vuIjIkWkLh92IIlgqW9/NFVQky1ceLxme/bB
+	Rg5fGydD1CDEXtNekFkYK/hBIUnbKZpUjv0YKPs+x4NyqweW5CeBN+hKMWNCRU04NKrq
+	PqbX4KmuCgXgXNDTskyiXGf/j+IEgr7LG5DR8BqOXzFAWdlM2+KpZMGIRzlgh8ZYZeWV
+	wM8DC8cDeqOL0nHxzjOzbFZnE8cUNwz1tAI8xgbehowpwnK6z3IibDtU9m4A0uk4nEPe
+	d6Q4vwnLnXvkjkgpnE68v+dNXPTuddHBwLc0aMC+G5S28Z0p5IWv9Nc2I+QTWsT1Tg9l
+	LBwQ==
+X-Received: by 10.180.23.193 with SMTP id o1mr4600330wif.71.1441978880473;
+	Fri, 11 Sep 2015 06:41:20 -0700 (PDT)
+Received: from gizero-desktop.tw.it
+	(host168-65-static.12-87-b.business.telecomitalia.it. [87.12.65.168])
+	by smtp.gmail.com with ESMTPSA id
+	nb10sm621368wic.11.2015.09.11.06.41.19
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 11 Sep 2015 06:41:19 -0700 (PDT)
+From: Andrea Galbusera <gizero@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 11 Sep 2015 15:41:04 +0200
+Message-Id: <1441978867-24237-1-git-send-email-gizero@gmail.com>
 X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Received-SPF: None (SESTOEX08.enea.se: josep.puigdemont@enea.com does not
-	designate permitted sender hosts)
-Subject: [meta-oe][fido][PATCH] vim: add checksum
+Subject: [meta-oe][PATCH 0/3] redis: improve conf file install and stylize
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,33 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Sep 2015 13:18:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 11 Sep 2015 13:41:22 -0000
 
-This fixes this build issue:
-ERROR: No checksum specified for .../downloads/vim_vim.googlecode.com_.hg._v7-4-481.tar.gz, please add at least one to the recipe:
-SRC_URI[md5sum] = "797c8c3023a810bb8c11ea0a0d185855"
-SRC_URI[sha256sum] = "359d5e3d8981c5047364a3fe5cf7c0928b796570f7cf74aa3ed01593942fd064"
-ERROR: Function failed: Fetcher failure for URL: 'http://downloads.yoctoproject.org/mirror/sources/vim_vim.googlecode.com_.hg._v7-4-481.tar.gz;protocol=https;module=vim'. Missing SRC_URI checksum
+This set fixes file permissions used to install the default configuration
+file. It also mark it as configuration file for packaging by adding to
+CONFFILES. Some recipe restyling was also applied.
 
-Signed-off-by: Josep Puigdemont <josep.puigdemont@enea.com>
----
- meta-oe/recipes-support/vim/vim_7.4.481.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Feel free to squash individual patches if more appropriate or just let me
+know and I will respin.
 
-diff --git a/meta-oe/recipes-support/vim/vim_7.4.481.bb b/meta-oe/recipes-support/vim/vim_7.4.481.bb
-index afdea84..2c8e4c6 100644
---- a/meta-oe/recipes-support/vim/vim_7.4.481.bb
-+++ b/meta-oe/recipes-support/vim/vim_7.4.481.bb
-@@ -11,6 +11,8 @@ SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
-            file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
- "
- SRCREV = "v7-4-481"
-+SRC_URI[md5sum] = "797c8c3023a810bb8c11ea0a0d185855"
-+SRC_URI[sha256sum] = "359d5e3d8981c5047364a3fe5cf7c0928b796570f7cf74aa3ed01593942fd064"
- 
- S = "${WORKDIR}/vim/src"
- 
+Andrea Galbusera (3):
+  redis: fix configuration file permissions
+  redis: add redis.conf to CONFFILES
+  redis: stylize
+
+ meta-oe/recipes-extended/redis/redis_3.0.2.bb | 23 ++++++++++-------------
+ 1 file changed, 10 insertions(+), 13 deletions(-)
+
 -- 
 1.9.1
 
