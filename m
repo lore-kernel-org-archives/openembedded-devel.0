@@ -1,35 +1,31 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-io0-f170.google.com (mail-io0-f170.google.com
-	[209.85.223.170])
-	by mail.openembedded.org (Postfix) with ESMTP id D25C973CBD
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C52676420
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Sep 2015 07:34:03 +0000 (UTC)
-Received: by ioiz6 with SMTP id z6so88542469ioi.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Sep 2015 00:34:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=KY6YCa874FWdBSpFc33skwEzh15U9Q9jGpteqih71Yg=;
-	b=q+W+9Nf9QJzPr9mS8O9HOy8PafIu2pevAHLDvU7ZzKKoTMrV+gQ24XkViNwFJkiDmb
-	qR23CFiqFrDN4sDKuGARj1gFLOZ+hZIPLPLjul/SA/cwMZJ5QjhkR76gWV9JC8d39561
-	avtUyW9drI+v9T/crk8MFQmOHGW283YVETCiJNl5G9V/aRIGcrMYRiu/EnLXzBwodalb
-	ZKiEraHVZFZ7wFkyZGiNpYHr//jGhTZsmOhouOYZq+vD4tBKdxH4rbTUicckRT08T90E
-	BJRfjhbWisg18XmKFqflnDzz03Kw3F/il7wTuoLlp8rq+g0jejVPFEMwQT6WOA7DaiDv
-	vSng==
-MIME-Version: 1.0
-X-Received: by 10.107.10.79 with SMTP id u76mr1196222ioi.99.1441956843659;
-	Fri, 11 Sep 2015 00:34:03 -0700 (PDT)
-Received: by 10.36.98.5 with HTTP; Fri, 11 Sep 2015 00:34:03 -0700 (PDT)
-In-Reply-To: <1441956129-8191-1-git-send-email-jackie.huang@windriver.com>
-References: <1441956129-8191-1-git-send-email-jackie.huang@windriver.com>
-Date: Fri, 11 Sep 2015 09:34:03 +0200
-Message-ID: <CALbNGRSDKb=ax=pQpRKDH4k+gEPFESoSsEvWpZNjoM7M7Gxwug@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH] libxfce4ui: add RDEPENDS on PN for PN-gtk2 and PN-gtk3
+	Fri, 11 Sep 2015 07:55:56 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t8B7tuCv010653; Fri, 11 Sep 2015 08:55:56 +0100
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id 9IgpM_vVpbbl; Fri, 11 Sep 2015 08:55:56 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t8B7thOU010644
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Fri, 11 Sep 2015 08:55:55 +0100
+Message-ID: <1441958143.24871.377.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 11 Sep 2015 08:55:43 +0100
+In-Reply-To: <CAP9ODKrt7jhFtN6JWFqqbSnJxyX4kAc77CkigOCChkV4gz=-Cw@mail.gmail.com>
+References: <1440724441-692-1-git-send-email-vinay.k.awasthi@intel.com>
+	<55E009D2.6010106@skidata.com>
+	<CAP9ODKrt7jhFtN6JWFqqbSnJxyX4kAc77CkigOCChkV4gz=-Cw@mail.gmail.com>
+X-Mailer: Evolution 3.12.11-0ubuntu3 
+Mime-Version: 1.0
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-java][PATCH] OpenJDK-8: For x86 and ARM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +39,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Sep 2015 07:34:06 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 11 Sep 2015 07:56:00 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Fri, Sep 11, 2015 at 9:22 AM,  <jackie.huang@windriver.com> wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
->
-> gtk libs was separated into PN-gtk after commit:
-> d4e5b33 libxfce4ui: build gtk3 libs and pack gtk2/gtk3 libs in separate p=
-ackages
->
-> but config files such as xfce4-keyboard-shortcuts.xml
-> is in PN, it works without this, but there no any keyboard
-> shortcut, add the RDEPENDS so that the libs and config
-> files will be both installed.
->
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.12.1.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.12.1.bb b/met=
-a-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.12.1.bb
-> index 26d21c1..723c20d 100644
-> --- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.12.1.bb
-> +++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.12.1.bb
-> @@ -28,3 +28,6 @@ FILES_${PN}-dev +=3D "${libdir}/glade3/modules/*.la \
->  PACKAGES +=3D "${PN}-glade"
->  FILES_${PN}-glade =3D "${libdir}/glade3 \
->                       ${datadir}/glade3"
-> +
-> +RDEPENDS_${PN}-gtk2 =3D "${PN}"
-> +RDEPENDS_${PN}-gtk3 =3D "${PN}"
-> --
-> 1.9.1
->
-Acked-By: Andreas M=C3=BCller <schnitzeltony@goolglemail.com>
+On Fri, 2015-08-28 at 14:29 -0300, Otavio Salvador wrote:
+> On Fri, Aug 28, 2015 at 4:12 AM, Richard Leitner
+> <richard.leitner@skidata.com> wrote:
+> > On 08/28/2015 03:14 AM, Vinay K. Awasthi wrote:
+> >> Rebased it again with latest change-set and tested it on oe-core master with latest mate-openembedded.
+> >>
+> >> There is no change in recipe.
+> >>
+> >> This enables OpenJDK-8 jre/jdk for x86 and ARM.
+> >>
+> >> This recipe is tested for arm (zero VM) and x86 (hotspot vm).
+> >>
+> >> To build just use bitbake openjdk-8.
+> >
+> > I successfully compiled and tested it for/on an ARMv7 Cortex A9 CPU:
+> > # /usr/lib/jvm/java-8-openjdk/jre/bin/java -version
+> > openjdk version "1.8.0-internal"
+> > OpenJDK Runtime Environment (build 1.8.0-internal-leri_2015_08_28_08_47-b00)
+> > OpenJDK Zero VM (build 25.60-b23, interpreted mode)
+> >
+> > Also X11/awt/swing works fine! Only problem for me is that ZeroVM is
+> > running in "interpreted mode". Therefore my programs are running really
+> > slow.
+> >
+> > Was the "mixed mode" available/working in your tests?
+> >
+> > IMHO a working JIT (=> mixed-mode) is a must-have for merging this patch
+> > upstream. What do you think Otavio?
+> 
+> Yes, I agree. There are other people working in OpenJDK 8 here[1] (at
+> ml) it seems so maybe we could share some ideas on how to fix it.
+
+I'm hearing there is a little frustration about moving forward with
+this. I'd like to suggest that a staged approach might be better in this
+case, for example if OpenJDK-8 is working on IA, how about adding it
+with:
+
+# mixed-mode isn't working on ARM yet
+COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
+
+With a large change like this, I think its perhaps ok to take a staged
+approach, as long as its clear what is/isn't expected to work?
+If/as/when the ARM people have time to make it work there, patches can
+be sent to change that? This way it unblocks people and doesn't hold
+keen contributors back.
+
+Cheers,
+
+Richard
+
+
 
