@@ -1,40 +1,36 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-yk0-f169.google.com (mail-yk0-f169.google.com
-	[209.85.160.169])
-	by mail.openembedded.org (Postfix) with ESMTP id B8C8A6E26B
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-yk0-f180.google.com (mail-yk0-f180.google.com
+	[209.85.160.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 9493373D27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 18:01:19 +0000 (UTC)
-Received: by ykdu9 with SMTP id u9so66823951ykd.2
+	Fri, 11 Sep 2015 04:54:29 +0000 (UTC)
+Received: by ykdg206 with SMTP id g206so80272819ykd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2015 11:01:19 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=pKSEZWhaPebF4VOhFTmLPaed7rS5+ZDCkxG6Ib9XUx4=;
-	b=N7v9eKTqQs0VWFASyU2mQ81VS0MJbTOtQ0A8jTs48azKbidmi8bUPFd0hV+ZKAQ7YL
-	LR3T6dp9SGzdtfgFTk5OmnLDFCFg59Ft+Nrt24MGdMMebmWE6+Aehx9Ei6gae8l7cjfP
-	IKjYotavE+6UKaPNII3YPzl/3EjKj5VTG/tUDOPjXkSrjQ3uqA1PeJ80gXxos9BEcO2P
-	MBe/7V96J+AOCsUeubqMDi6cvmuncOIpbAx8o0W10a0U3vIVazuFWyH2R1EWZNRGUIvo
-	gPj4b+qpgMhxmq+KjWOAR24pXMmv6vDy+zLkLjltLWirzMrlnzelL2GXpsFUiza3hqj0
-	f1yA==
-X-Gm-Message-State: ALoCoQkvOjproIahSKRpSExo2ZvgrehCMLCEZJwbJ+ECcYxDDVfUB/cSydU+miHeQTRgQdXUwLk9
-X-Received: by 10.13.217.129 with SMTP id b123mr47929034ywe.127.1441908079686; 
-	Thu, 10 Sep 2015 11:01:19 -0700 (PDT)
-Received: from localhost.localdomain ([201.22.227.56])
+	Thu, 10 Sep 2015 21:54:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=CfUCUt8zKusXdwjnmEdma85Rh48ZTGdspNgEMvNzIo8=;
+	b=LQ2+zhfWgMBi8soZLKRxujgoan8PFJ97aCVL5r5VAHgzLKtEO4bo+aYHz5s8dlIPYX
+	HL71aef4PZyFYtgGClddiPk9hiYoqsIslpzrB2THKTtuytTRaSzuSTiMdeD7n0aDpJth
+	TrOHQBilf3GJw+heKQL8szIEkVp6O34gb4y8CjkeQAmbrywaRMvCNg/gCrWufNFKRz3o
+	FCMAiUftwKMkY9x3XJelUms7mUEo3puxhPVDL+9UXEqeJbajIG3mczXAZ+gMEY9OzTJl
+	I/eT8fBoXKSi9zbRtYgzzH+LaIwEyUqJ17pURCvoL6GUObLpngZAhiVV1V0wPlVCEsla
+	+ToA==
+X-Received: by 10.170.147.2 with SMTP id o2mr51714632ykc.2.1441947269356;
+	Thu, 10 Sep 2015 21:54:29 -0700 (PDT)
+Received: from localhost.localdomain.localdomain
+	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
 	by smtp.gmail.com with ESMTPSA id
-	d136sm10089400ywb.53.2015.09.10.11.01.18
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 10 Sep 2015 11:01:19 -0700 (PDT)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
+	u79sm11709546ywf.21.2015.09.10.21.54.27
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 10 Sep 2015 21:54:28 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Sep 2015 15:01:03 -0300
-Message-Id: <1441908063-29340-2-git-send-email-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1441908063-29340-1-git-send-email-fabio.berton@ossystems.com.br>
-References: <1441908063-29340-1-git-send-email-fabio.berton@ossystems.com.br>
-Cc: Fabio Berton <fabio.berton@ossystems.com.br>
-Subject: [meta-python][PATCH v2 2/2] python-cffi: Upgrade to version 1.2.1
+Date: Thu, 10 Sep 2015 21:54:09 -0700
+Message-Id: <1441947249-18500-1-git-send-email-TicoTimo@gmail.com>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-multimedia][PATCH] vlc: add PACKAGECONFIG for qt4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,33 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2015 18:01:19 -0000
+X-List-Received-Date: Fri, 11 Sep 2015 04:54:29 -0000
 
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- .../python/{python-cffi_0.9.2.bb => python-cffi_1.2.1.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cffi_0.9.2.bb => python-cffi_1.2.1.bb} (62%)
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-cffi_0.9.2.bb b/meta-python/recipes-devtools/python/python-cffi_1.2.1.bb
-similarity index 62%
-rename from meta-python/recipes-devtools/python/python-cffi_0.9.2.bb
-rename to meta-python/recipes-devtools/python/python-cffi_1.2.1.bb
-index 90d8099..0d0958c 100644
---- a/meta-python/recipes-devtools/python/python-cffi_0.9.2.bb
-+++ b/meta-python/recipes-devtools/python/python-cffi_1.2.1.bb
-@@ -3,8 +3,8 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
- DEPENDS = "libffi python-pycparser"
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+index bf7ce0c..592b9e5 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+@@ -6,7 +6,7 @@ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
--SRC_URI[md5sum] = "b1bf4625ae07a8a932f2f1a2eb200c54"
--SRC_URI[sha256sum] = "1988ce7ff9c64ecd5077776175e90fd8f0a8c827cb241a23647175ce08126bb2"
-+SRC_URI[md5sum] = "faca1e420e80433db409bb1bdd0a3f45"
-+SRC_URI[sha256sum] = "eab571deb0a152e2f53c404c08a94870a131526896cad08cd43bf86ce3771e3d"
+ DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native gst-plugins-bad \
+-   virtual/libsdl libsdl-image qt4-x11-free dbus dbus-glib libxml2 gnutls \
++   virtual/libsdl libsdl-image dbus dbus-glib libxml2 gnutls \
+    tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
+    libdvdcss libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs \
+    libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
+@@ -56,6 +56,7 @@ PACKAGECONFIG[libva] = "--enable-libva --enable-avcodec,--disable-libva --disabl
+ PACKAGECONFIG[speex] = "--enable-speex,--disable-speex,speex"
+ PACKAGECONFIG[gstreamer] = "--enable-gst-decode,--disable-gst-decode,gstreamer1.0 gstreamer1.0-plugins-base"
+ PACKAGECONFIG[vpx] = "--enable-vpx,--disable-vpx, libvpx"
++PACKAGECONFIG[qt4] = "--enable-qt,--disable-qt, qt4-x11-free"
  
- inherit pypi
- 
+ do_configure_prepend() {
+     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
 -- 
-2.1.4
+2.1.0
 
 
