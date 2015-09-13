@@ -1,36 +1,18 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-yk0-f181.google.com (mail-yk0-f181.google.com
-	[209.85.160.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 70252762B4
+Return-Path: <mike.looijmans@topic.nl>
+Received: from smtp02.mail.online.nl (smtp02.mail.online.nl [194.134.25.72])
+	by mail.openembedded.org (Postfix) with ESMTP id C62BC60053
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Sep 2015 19:10:34 +0000 (UTC)
-Received: by ykdg206 with SMTP id g206so120622505ykd.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Sep 2015 12:10:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=8LHjXa/oYY11I56DIll0hHzVwTkfw9g0n5Z5YPlBAMU=;
-	b=eSiOLb33Y3/82ZgWkp5t4TUpmAau8Av1qWOqucRc/OEgSnfMBZHbmeyOK24S+dB1xA
-	sgH5KOxFAJb2HSEMl62dozgfA0LhWijOARMjVTdVfCvUkW7KDTCpScR4hCsviB2D/8uC
-	I2H/LDK8+a7XiG8iHMTkwvoe/DIdaUZDOarExd0cVlky5LiLC7frCEd2Yq/BU/JsCLMy
-	dnHi6Za376f1PACKNsq54aYlmDiDqkSzuKEurFFOZafmUJCMtGMcmwj0mpaKf3vYTY97
-	OUWvhZnZVy5rKq0cKmdEl+PVhc8zoUkAIlAswjjPsiQV+0Vbc5kvsDNZkdyDRIxlXLTf
-	wo7A==
-X-Received: by 10.129.0.65 with SMTP id 62mr5460627ywa.14.1442085034198;
-	Sat, 12 Sep 2015 12:10:34 -0700 (PDT)
-Received: from localhost.localdomain.localdomain
-	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
-	by smtp.gmail.com with ESMTPSA id
-	d14sm4055094ywd.50.2015.09.12.12.10.32
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 12 Sep 2015 12:10:33 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
+	Sun, 13 Sep 2015 19:02:07 +0000 (UTC)
+Received: from localhost.localdomain (s55969068.adsl.online.nl
+	[85.150.144.104])
+	by smtp02.mail.online.nl (Postfix) with ESMTP id B6E0A1A001B;
+	Sun, 13 Sep 2015 21:02:04 +0200 (CEST)
+From: Mike Looijmans <mike.looijmans@topic.nl>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 12 Sep 2015 12:09:39 -0700
-Message-Id: <1442084979-24769-1-git-send-email-TicoTimo@gmail.com>
+Date: Sun, 13 Sep 2015 21:01:53 +0200
+Message-Id: <1442170913-2404-1-git-send-email-mike.looijmans@topic.nl>
 X-Mailer: git-send-email 2.1.0
-Subject: [meta-python][PATCH] python-lxml: fix pkg-config for libxml2 and libxslt
+Subject: [PATCH][meta-oe] python-pyopenssl: Add missing RDEPENDS on "six" and "cryptography"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,41 +26,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Sep 2015 19:10:37 -0000
+X-List-Received-Date: Sun, 13 Sep 2015 19:02:11 -0000
 
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+Fixes the following errors when doing "import OpenSSL":
+
+    File "/usr/lib/python2.7/site-packages/OpenSSL/_util.py", line 6, in <module>
+      from cryptography.hazmat.bindings.openssl.binding import Binding
+  ImportError: No module named cryptography.hazmat.bindings.openssl.binding
+    File "/usr/lib/python2.7/site-packages/OpenSSL/rand.py", line 9, in <module>
+      from six import integer_types as _integer_types
+  ImportError: No module named six
+
+Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
 ---
- meta-python/recipes-devtools/python/python-lxml.inc | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+ meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
-index 9d1bfbc..8ca8f41 100644
---- a/meta-python/recipes-devtools/python/python-lxml.inc
-+++ b/meta-python/recipes-devtools/python/python-lxml.inc
-@@ -16,15 +16,19 @@ SRC_URI[sha256sum] = "b3d362bac471172747cda3513238f115cbd6c5f8b8e6319bf6a97a7892
- S = "${WORKDIR}/${SRCNAME}-${PV}"
+diff --git a/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb b/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb
+index 7f93012..d80e666 100644
+--- a/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb
++++ b/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb
+@@ -21,5 +21,5 @@ inherit setuptools
+ PACKAGES =+ "${PN}-tests"
+ FILES_${PN}-tests = "${libdir}/${PYTHON_DIR}/site-packages/OpenSSL/test"
  
- DISTUTILS_BUILD_ARGS += " \
--                     --with-xslt-config='${STAGING_BINDIR_NATIVE}/pkg-config libxslt' \
--                     --with-xml2-config='${STAGING_BINDIR_CROSS}/pkg-config libxml2' \
-+                     --with-xslt-config='pkg-config libxslt' \
-+                     --with-xml2-config='pkg-config libxml-2.0' \
- "
- 
- DISTUTILS_INSTALL_ARGS += " \
--                     --with-xslt-config='${STAGING_BINDIR_NATIVE}/pkg-config libxslt' \
--                     --with-xml2-config='${STAGING_BINDIR_CROSS}/pkg-config libxml2' \
-+                     --with-xslt-config='pkg-config libxslt' \
-+                     --with-xml2-config='pkg-config libxml-2.0' \
- "
- 
-+do_configure_prepend() {
-+    sed -i -e 's/--version/--modversion/' ${B}/setupinfo.py
-+}
-+
- BBCLASSEXTEND = "native nativesdk"
- 
- RDEPENDS_${PN} += "libxml2 libxslt ${PYTHON_PN}-compression"
+-RDEPENDS_${PN} = "python-threading"
++RDEPENDS_${PN} = "python-threading python-six python-cryptography"
+ RDEPENDS_${PN}-tests = "${PN}"
 -- 
 2.1.0
 
