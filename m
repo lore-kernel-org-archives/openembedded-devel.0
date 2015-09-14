@@ -1,22 +1,22 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 2693D769A7
+	by mail.openembedded.org (Postfix) with ESMTP id 00AC6769A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Sep 2015 12:25:09 +0000 (UTC)
+	Mon, 14 Sep 2015 12:25:10 +0000 (UTC)
 Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga102.fm.intel.com with ESMTP; 14 Sep 2015 05:25:10 -0700
+	by fmsmga102.fm.intel.com with ESMTP; 14 Sep 2015 05:25:12 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,527,1437462000"; d="scan'208";a="644443686"
+X-IronPort-AV: E=Sophos;i="5.17,527,1437462000"; d="scan'208";a="644443696"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga003.jf.intel.com with ESMTP; 14 Sep 2015 05:25:09 -0700
+	by orsmga003.jf.intel.com with ESMTP; 14 Sep 2015 05:25:10 -0700
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Sep 2015 15:26:45 +0300
-Message-Id: <1442233610-32279-6-git-send-email-alexander.kanavin@linux.intel.com>
+Date: Mon, 14 Sep 2015 15:26:46 +0300
+Message-Id: <1442233610-32279-7-git-send-email-alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.1.4
 In-Reply-To: <1442233610-32279-1-git-send-email-alexander.kanavin@linux.intel.com>
 References: <1442233610-32279-1-git-send-email-alexander.kanavin@linux.intel.com>
-Subject: [PATCH 6/9] libwebp: remove the recipe due to its move to oe-core
+Subject: [PATCH 7/9] libsecret: remove the recipe due to its move to oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,67 +30,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Sep 2015 12:25:09 -0000
+X-List-Received-Date: Mon, 14 Sep 2015 12:25:11 -0000
 
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- meta-oe/recipes-multimedia/webp/libwebp_0.4.0.bb | 47 ------------------------
- 1 file changed, 47 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/webp/libwebp_0.4.0.bb
+ .../recipes-gnome/libsecret/libsecret_0.18.bb      | 23 ----------------------
+ 1 file changed, 23 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/libsecret/libsecret_0.18.bb
 
-diff --git a/meta-oe/recipes-multimedia/webp/libwebp_0.4.0.bb b/meta-oe/recipes-multimedia/webp/libwebp_0.4.0.bb
+diff --git a/meta-gnome/recipes-gnome/libsecret/libsecret_0.18.bb b/meta-gnome/recipes-gnome/libsecret/libsecret_0.18.bb
 deleted file mode 100644
-index 7663b3b..0000000
---- a/meta-oe/recipes-multimedia/webp/libwebp_0.4.0.bb
+index f610d44..0000000
+--- a/meta-gnome/recipes-gnome/libsecret/libsecret_0.18.bb
 +++ /dev/null
-@@ -1,47 +0,0 @@
--SUMMARY = "WebP is an image format designed for the Web"
--DESCRIPTION = "WebP is a method of lossy and lossless compression that can be \
--               used on a large variety of photographic, translucent and \
--               graphical images found on the web. The degree of lossy \
--               compression is adjustable so a user can choose the trade-off \
--               between file size and image quality. WebP typically achieves \
--               an average of 30% more compression than JPEG and JPEG 2000, \
--               without loss of image quality."
--HOMEPAGE = "https://developers.google.com/speed/webp/"
--SECTION = "libs"
+@@ -1,23 +0,0 @@
+-SUMMARY = "libsecret is a library for storing and retrieving passwords and other secrets"
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=23c2a5e0106b99d75238986559bb5fc6"
 -
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://PATENTS;md5=7ec8a34de2073ea13ea2991006246d20"
+-inherit gnomebase gtk-doc
 -
--DEPENDS = "giflib"
+-DEPENDS = "glib-2.0 libgcrypt"
 -
--SRC_URI = "https://webp.googlecode.com/files/${BP}.tar.gz"
--SRC_URI[md5sum] = "c8dd1d26eb9566833aba269b86d97e68"
--SRC_URI[sha256sum] = "31913577e96386556855b41d210736449445fe96cfbe9289014e9b8afa944d69"
+-GNOME_COMPRESS_TYPE = "xz"
 -
--EXTRA_OECONF = " \
--    --disable-experimental \
--    --disable-wic \
--    --enable-libwebpmux \
--    --enable-libwebpdemux \
--    --enable-threading \
--"
+-EXTRA_OECONF += "--disable-manpages"
 -
--inherit autotools lib_package
+-SRC_URI[archive.md5sum] = "279d723cd005e80d1d304f74a3488acc"
+-SRC_URI[archive.sha256sum] = "0c73aa762dbd1e38ba7b03de350e23ce818cb810b0784375e95ef61e004b02e3"
 -
--PACKAGECONFIG ??= ""
--
--# libwebpdecoder is a subset of libwebp, don't build it unless requested
--PACKAGECONFIG[decoder] = "--enable-libwebpdecoder,--disable-libwebpdecoder"
--
--# Apply for examples programs: cwebp and dwebp
--PACKAGECONFIG[jpeg] = ",ac_cv_header_jpeglib_h=no,jpeg"
--PACKAGECONFIG[png] = ",ac_cv_header_png_h=no,libpng"
--PACKAGECONFIG[tiff] = ",ac_cv_header_tiffio_h=no,tiff"
--
--# Apply only for example program vwebp
--PACKAGECONFIG[gl] = ",,mesa-glut"
--
--PACKAGES =+ "${PN}-gif2webp"
--
--DESCRIPTION_${PN}-gif2webp = "Simple tool to convert animated GIFs to WebP"
--FILES_${PN}-gif2webp = "${bindir}/gif2webp"
+-# Fails to build with thumb-1 (qemuarm)
+-# | {standard input}: Assembler messages:
+-# | {standard input}:686: Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r12,r12,ror#3'
+-# | {standard input}:686: Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r12,r12,ror#13'
+-# | {standard input}:687: Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r12,r12,ror#29'
+-# | {standard input}:687: Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r12,r12,ror#19'
+-# | {standard input}:688: Error: lo register required -- `orr r10,r10,r10'
+-ARM_INSTRUCTION_SET = "arm"
 -- 
 2.1.4
 
