@@ -1,24 +1,40 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B4EAE762B7
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id EE9BE73CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Sep 2015 09:29:16 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8E9TGJB012129
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 14 Sep 2015 10:07:38 +0000 (UTC)
+Received: by wiclk2 with SMTP id lk2so125968411wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Sep 2015 02:29:16 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.235.1; Mon, 14 Sep 2015 02:29:15 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 Sep 2015 17:23:32 +0800
-Message-ID: <1442222612-27281-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Mon, 14 Sep 2015 03:07:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=knfQ6T8L/gVe16vSyX8EXT4vmrFzH5nSZsf2gCUgm2g=;
+	b=jLMXLZzQVRT7GFTrAzfmDOukAXqyK07DnmQ/86zsQK9qnol3MOHLLqon86NnCmliAn
+	bcTms7UpQ14wZekAodZqD/t0gI2HW15KS81Zyd0hOW6GT376DopaskhJuGuEA7bPksTs
+	8xEc8Re/yjR2N2ITr2soktz0paG6vFYd57ET7phTfwQtso4He7Kdr9kO1IWxFV+Fl40x
+	3TciYTwJZOjFHYkMRtt+tE5VZUpnlaTNoCWK9wRcXTgM8fzbIjW9kgerhhsRDhsr/BGb
+	unlYii3+7HA76Y9tSZd3otrxc8aNvanM9ASRXJJuR3ARLrrZSv3EKm5fUveVhhp8LVcc
+	+gnw==
+X-Received: by 10.194.81.137 with SMTP id a9mr28165253wjy.155.1442225258728;
+	Mon, 14 Sep 2015 03:07:38 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	y15sm13515851wib.7.2015.09.14.03.07.37
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 14 Sep 2015 03:07:37 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 14 Sep 2015 12:07:42 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150914100742.GA2380@jama>
+References: <1442216248-8695-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] lldap: fix the building failure when gcc5 is used or DEBUG_BUILD is 1
+In-Reply-To: <1442216248-8695-1-git-send-email-rongqing.li@windriver.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [PATCH][meta-networking] net-snmp: make it be able to be compiled by gcc5 with "-O0"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,155 +48,189 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Sep 2015 09:29:18 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 14 Sep 2015 10:07:40 -0000
+X-Groupsio-MsgNum: 57326
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="9amGYk9869ThD9tj"
+Content-Disposition: inline
 
-From: Roy Li <rongqing.li@windriver.com>
+--9amGYk9869ThD9tj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-1. fix the building failure when host is gcc5
-2. fix the building failure when DEBUG_BUILD is 1 by removal of -Werror
-   Remove -Werror, since it is suitable to develop only; otherwise when
-   gcc adds -O0 option to compile codes, the error will be generated
-   since the warning:
-     //#  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+On Mon, Sep 14, 2015 at 03:37:28PM +0800, rongqing.li@windriver.com wrote:
+> From: Roy Li <rongqing.li@windriver.com>
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- ...-functions-work-with-both-gnu11-and-gnu89.patch | 99 ++++++++++++++++++++++
- .../recipes-daemons/lldpad/lldpad_0.9.46.bb        |  8 +-
- 2 files changed, 106 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-daemons/lldpad/lldpad/0001-get-inline-functions-work-with-both-gnu11-and-gnu89.patch
+Upgrade to 5.7.2 was merged few days ago:
 
-diff --git a/meta-networking/recipes-daemons/lldpad/lldpad/0001-get-inline-functions-work-with-both-gnu11-and-gnu89.patch b/meta-networking/recipes-daemons/lldpad/lldpad/0001-get-inline-functions-work-with-both-gnu11-and-gnu89.patch
-new file mode 100644
-index 0000000..9ff7c0f
---- /dev/null
-+++ b/meta-networking/recipes-daemons/lldpad/lldpad/0001-get-inline-functions-work-with-both-gnu11-and-gnu89.patch
-@@ -0,0 +1,99 @@
-+From 67399dcc2575c0e9c64fc77354f9653127cddf64 Mon Sep 17 00:00:00 2001
-+From: Roy Li <rongqing.li@windriver.com>
-+Date: Mon, 14 Sep 2015 17:07:26 +0800
-+Subject: [PATCH] get inline functions work with both gnu11 and gnu89
-+
-+Upstream-status: Pending
-+
-+After gcc upgraded to gcc5, and if the codes are compiled without optimization(-O0),
-+and the below error will happen:
-+
-+./include/lldp_8021qaz.h:237:12: error: inline function 'ieee8021qaz_clif_cmd' declared but never defined [-Werror]
-+ inline int ieee8021qaz_clif_cmd(void *data, struct sockaddr_un *from,
-+            ^
-+./include/lldp_8021qaz.h:222:13: error: inline function 'set_prio_map' declared but never defined [-Werror]
-+ inline void set_prio_map(u32 *prio_map, u8 prio, int tc);
-+             ^
-+./include/lldp_8021qaz.h:221:12: error: inline function 'get_prio_map' declared but never defined [-Werror]
-+ inline int get_prio_map(u32 prio_map, int tc);
-+
-+gcc5 defaults to -std=gnu11 instead of -std=gnu89, and it requires that exactly one C
-+source file has the callable copy of the inline function. Consider the following
-+program:
-+
-+  inline int
-+  foo (void)
-+  {
-+    return 42;
-+  }
-+
-+  int
-+  main (void)
-+  {
-+    return foo ();
-+  }
-+
-+The program above will not link with the C99 inline semantics, because no out-of-line
-+function foo is generated. To fix this, either mark the function foo as static, or
-+add the following declaration:
-+  static inline int foo (void);
-+
-+more information refer to: https://gcc.gnu.org/gcc-5/porting_to.html;
-+
-+but the use of "extern inline" will lead to the compilation issue if gcc is not
-+gcc5, so replace inline with "static inline"
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ include/lldp_8021qaz.h | 5 -----
-+ lldp_8021qaz.c         | 4 ++--
-+ 2 files changed, 2 insertions(+), 7 deletions(-)
-+
-+diff --git a/include/lldp_8021qaz.h b/include/lldp_8021qaz.h
-+index 55353b8..d321625 100644
-+--- a/include/lldp_8021qaz.h
-++++ b/include/lldp_8021qaz.h
-+@@ -218,8 +218,6 @@ int ieee8021qaz_mod_app(struct app_tlv_head *head, int peer,
-+ 			u8 prio, u8 sel, u16 proto, u32 ops);
-+ int ieee8021qaz_app_sethw(char *ifname, struct app_tlv_head *head);
-+ 
-+-inline int get_prio_map(u32 prio_map, int tc);
-+-inline void set_prio_map(u32 *prio_map, u8 prio, int tc);
-+ 
-+ struct ieee8021qaz_tlvs *ieee8021qaz_data(const char *);
-+ 
-+@@ -234,9 +232,6 @@ int ieee8021qaz_rchange(struct port *port, struct lldp_agent *,
-+ void ieee8021qaz_ifup(char *ifname, struct lldp_agent *);
-+ void ieee8021qaz_ifdown(char *ifname, struct lldp_agent *);
-+ u8 ieee8021qaz_mibDeleteObject(struct port *port, struct lldp_agent *);
-+-inline int ieee8021qaz_clif_cmd(void *data, struct sockaddr_un *from,
-+-				socklen_t fromlen, char *ibuf, int ilen,
-+-				char *rbuf);
-+ int ieee8021qaz_check_operstate(void);
-+ int get_dcbx_hw(const char *ifname, __u8 *dcbx);
-+ 
-+diff --git a/lldp_8021qaz.c b/lldp_8021qaz.c
-+index 094676d..f154317 100644
-+--- a/lldp_8021qaz.c
-++++ b/lldp_8021qaz.c
-+@@ -396,7 +396,7 @@ static int read_cfg_file(char *ifname, struct lldp_agent *agent,
-+ 	return 0;
-+ }
-+ 
-+-inline int get_prio_map(u32 prio_map, int prio)
-++static inline int get_prio_map(u32 prio_map, int prio)
-+ {
-+ 	if (prio > 7)
-+ 		return 0;
-+@@ -404,7 +404,7 @@ inline int get_prio_map(u32 prio_map, int prio)
-+ 	return (prio_map >> (4 * (7-prio))) & 0xF;
-+ }
-+ 
-+-inline void set_prio_map(u32 *prio_map, u8 prio, int tc)
-++static inline void set_prio_map(u32 *prio_map, u8 prio, int tc)
-+ {
-+ 	u32 mask = ~(0xffffffff & (0xF << (4 * (7-prio))));
-+ 	*prio_map &= mask;
-+-- 
-+1.9.1
-+
-diff --git a/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb b/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb
-index 8c44a3e..0c8c5d8 100644
---- a/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb
-+++ b/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb
-@@ -8,12 +8,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8c2bc283e65df398ced5f5b747e78162"
- DEPENDS = "libconfig libnl"
- SRCREV = "48a5f38778b18d6659a672ccb4640f25c6720827"
- 
--SRC_URI = "git://github.com/jrfastab/lldpad.git;protocol=http"
-+SRC_URI = "git://github.com/jrfastab/lldpad.git;protocol=http \
-+           file://0001-get-inline-functions-work-with-both-gnu11-and-gnu89.patch \
-+"
- 
- S = "${WORKDIR}/git"
- 
- inherit autotools-brokensep pkgconfig systemd
- 
-+do_configure_prepend() {
-+    sed -i "s:-Werror::g" ${S}/Makefile.am
-+}
-+
- do_install_append () {
-     install -m 0755 -d ${D}${systemd_unitdir}
-     mv ${D}${prefix}${systemd_unitdir}/* ${D}${systemd_unitdir}/
--- 
-1.9.1
+t 858d7a83cbad77eb6d0b2edadcf2269a3c85e234
+Author:     Li xin <lixin.fnst@cn.fujitsu.com>
+AuthorDate: Fri Aug 21 18:08:04 2015 +0800
+Commit:     Joe MacDonald <joe_macdonald@mentor.com>
+CommitDate: Fri Sep 11 11:52:15 2015 -0400
 
+    net-snmp: upgrade 5.7.2.1 -> 5.7.3
 
+Check if this is still needed and next time please always rebase the patche=
+s before sending them.
+
+>=20
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> ---
+>  ...-functions-work-with-both-gnu11-and-gnu89.patch | 85 ++++++++++++++++=
+++++++
+>  .../recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb |  1 +
+>  2 files changed, 86 insertions(+)
+>  create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0=
+001-get-inline-functions-work-with-both-gnu11-and-gnu89.patch
+>=20
+> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-get=
+-inline-functions-work-with-both-gnu11-and-gnu89.patch b/meta-networking/re=
+cipes-protocols/net-snmp/net-snmp/0001-get-inline-functions-work-with-both-=
+gnu11-and-gnu89.patch
+> new file mode 100644
+> index 0000000..2d7ba57
+> --- /dev/null
+> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-get-inline=
+-functions-work-with-both-gnu11-and-gnu89.patch
+> @@ -0,0 +1,85 @@
+> +From 6f319d981ee190c7e858a4b0382617c469cfa77a Mon Sep 17 00:00:00 2001
+> +From: Roy Li <rongqing.li@windriver.com>
+> +Date: Mon, 14 Sep 2015 13:52:12 +0800
+> +Subject: [PATCH] get inline functions work with both gnu11 and gnu89
+> +
+> +Upstream-status: Pending
+> +
+> +After gcc upgraded to gcc5, and if the codes are compiled without optimi=
+zation(-O0),
+> +and the below error will happen:
+> +
+> +./.libs/libnetsnmpagent.so: undefined reference to `netsnmp_subtree_chan=
+ge_prev'
+> +./.libs/libnetsnmpagent.so: undefined reference to `netsnmp_table_datase=
+t_delete_data'
+> +./.libs/libnetsnmpagent.so: undefined reference to `netsnmp_subtree_chan=
+ge_next'
+> +collect2: error: ld returned 1 exit status
+> +
+> +gcc5 defaults to -std=3Dgnu11 instead of -std=3Dgnu89, and it requires t=
+hat exactly one C
+> +source file has the callable copy of the inline function. Consider the f=
+ollowing
+> +program:
+> +
+> +  inline int
+> +  foo (void)
+> +  {
+> +    return 42;
+> +  }
+> +
+> +  int
+> +  main (void)
+> +  {
+> +    return foo ();
+> +  }
+> +
+> +The program above will not link with the C99 inline semantics, because n=
+o out-of-line
+> +function foo is generated. To fix this, either mark the function foo as =
+static, or
+> +add the following declaration:
+> +  static inline int foo (void);
+> +
+> +more information refer to: https://gcc.gnu.org/gcc-5/porting_to.html;
+> +
+> +but the use of "extern inline" will lead to the compilation issue if gcc=
+ is not
+> +gcc5, so replace inline with "static inline"
+> +
+> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> +---
+> + agent/agent_registry.c        | 4 ++--
+> + agent/helpers/table_dataset.c | 2 +-
+> + 2 files changed, 3 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/agent/agent_registry.c b/agent/agent_registry.c
+> +index 1e2482a..3f0aa12 100644
+> +--- a/agent/agent_registry.c
+> ++++ b/agent/agent_registry.c
+> +@@ -528,7 +528,7 @@ netsnmp_subtree_deepcopy(netsnmp_subtree *a)
+> + /** @private
+> +  *  Replaces next subtree pointer in given subtree.
+> +  */
+> +-NETSNMP_INLINE void
+> ++NETSNMP_STATIC_INLINE void
+> + netsnmp_subtree_change_next(netsnmp_subtree *ptr, netsnmp_subtree *then=
+ext)
+> + {
+> +     ptr->next =3D thenext;
+> +@@ -543,7 +543,7 @@ netsnmp_subtree_change_next(netsnmp_subtree *ptr, ne=
+tsnmp_subtree *thenext)
+> + /** @private
+> +  *  Replaces previous subtree pointer in given subtree.
+> +  */
+> +-NETSNMP_INLINE void
+> ++NETSNMP_STATIC_INLINE void
+> + netsnmp_subtree_change_prev(netsnmp_subtree *ptr, netsnmp_subtree *thep=
+rev)
+> + {
+> +     ptr->prev =3D theprev;
+> +diff --git a/agent/helpers/table_dataset.c b/agent/helpers/table_dataset=
+=2Ec
+> +index 0949a8a..d993993 100644
+> +--- a/agent/helpers/table_dataset.c
+> ++++ b/agent/helpers/table_dataset.c
+> +@@ -107,7 +107,7 @@ netsnmp_init_table_dataset(void) {
+> + /** deletes a single dataset table data.
+> +  *  returns the (possibly still good) next pointer of the deleted data =
+object.
+> +  */
+> +-NETSNMP_INLINE netsnmp_table_data_set_storage *
+> ++NETSNMP_STATIC_INLINE netsnmp_table_data_set_storage *
+> + netsnmp_table_dataset_delete_data(netsnmp_table_data_set_storage *data)
+> + {
+> +     netsnmp_table_data_set_storage *nextPtr =3D NULL;
+> +--=20
+> +1.9.1
+> +
+> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.=
+bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
+> index 464473e..f3fa3ba 100644
+> --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
+> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
+> @@ -23,6 +23,7 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${=
+PV}.zip \
+>          file://0001-Fix-CVE-2014-2285.patch \
+>          file://dont-return-incompletely-parsed-varbinds.patch \
+>          file://net-snmp-5.7.2-fix-mib-timeout-values.patch \
+> +        file://0001-get-inline-functions-work-with-both-gnu11-and-gnu89.=
+patch \
+>  "
+> =20
+>  SRC_URI[md5sum] =3D "a2c83518648b0f2a5d378625e45c0e18"
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--9amGYk9869ThD9tj
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlX2nG0ACgkQN1Ujt2V2gByZxACdFCREZoYYGfILLZ5cF4SLnpTl
+R08AnRsvbSijhP4Z+gr1OtuOcN/zYWVk
+=3h0S
+-----END PGP SIGNATURE-----
+
+--9amGYk9869ThD9tj--
