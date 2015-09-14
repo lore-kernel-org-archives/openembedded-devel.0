@@ -1,31 +1,31 @@
 Return-Path: <Joe_MacDonald@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 96AD373CBD
+	by mail.openembedded.org (Postfix) with ESMTP id EA96C73CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Sep 2015 14:00:17 +0000 (UTC)
+	Mon, 14 Sep 2015 14:02:17 +0000 (UTC)
 Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
 	by relay1.mentorg.com with esmtp 
-	id 1ZbUIr-0000G4-L8 from Joe_MacDonald@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Sep 2015 07:00:17 -0700
+	id 1ZbUKo-0000u5-8g from Joe_MacDonald@mentor.com ;
+	Mon, 14 Sep 2015 07:02:18 -0700
 Received: from burninator (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
 	(147.34.97.41) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 14 Sep 2015 07:00:16 -0700
-Received: by burninator (Postfix, from userid 1000)	id CB3E65828AD; Mon, 14
-	Sep 2015 09:59:09 -0400 (EDT)
-Date: Mon, 14 Sep 2015 09:59:09 -0400
+	Mon, 14 Sep 2015 07:02:17 -0700
+Received: by burninator (Postfix, from userid 1000)	id 330465828AD; Mon, 14
+	Sep 2015 10:01:11 -0400 (EDT)
+Date: Mon, 14 Sep 2015 10:01:11 -0400
 From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20150914135909.GA8691@mentor.com>
-References: <1440060202-17953-1-git-send-email-kai.kang@windriver.com>
-	<55ED028C.9000008@windriver.com> <55F63F27.9000109@windriver.com>
+To: Rongqing Li <rongqing.li@windriver.com>
+Message-ID: <20150914140110.GB8691@mentor.com>
+References: <1441697402-6805-1-git-send-email-rongqing.li@windriver.com>
+	<55F623FB.7050805@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <55F63F27.9000109@windriver.com>
+In-Reply-To: <55F623FB.7050805@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-704 http://www.vim.org
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH] inetutils: add package config pam
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] ypbind-mt: add status command for initscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,157 +39,176 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Sep 2015 14:00:19 -0000
-X-Groupsio-MsgNum: 57340
+X-List-Received-Date: Mon, 14 Sep 2015 14:02:18 -0000
+X-Groupsio-MsgNum: 57341
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="oyUTqETQ0mS9luUI"
+	protocol="application/pgp-signature"; boundary="9zSXsLTf0vkW971A"
 Content-Disposition: inline
 
---oyUTqETQ0mS9luUI
+--9zSXsLTf0vkW971A
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] [PATCH] inetutils: add package config pam] On 15.09.14 (Mon 11:29=
-) Kang Kai wrote:
+[Re: [oe] [PATCH] ypbind-mt: add status command for initscript] On 15.09.14=
+ (Mon 09:33) Rongqing Li wrote:
 
-> On 2015=E5=B9=B409=E6=9C=8807=E6=97=A5 11:20, Kang Kai wrote:
-> >On 2015=E5=B9=B408=E6=9C=8820=E6=97=A5 16:43, kai.kang@windriver.com wro=
-te:
-> >>From: Kai Kang <kai.kang@windriver.com>
-> >>
-> >>Add package config pam for inetutils. And only check pam_appl.h when pam
-> >>is enabled.
-> >
-> >Ping.
+> ping;
 >=20
-> Any comment on this patch? Thanks.
+> it should be for meta-networking
 
-Other than it got missed from my processing queue because it didn't have
-meta-networking in the subject?  Nope.  :-)
+It should be a moot point now anyway:
 
-Someone else mentioned it to me on IRC on Friday so I've now found it
-and it'll get merged today I expect unless something scary shakes out of
-it.
+commit d3eaede791c121147f1b99db01facd2080019993
+Author:     Zhu Yanjun <yanjun.zhu@windriver.com>
+AuthorDate: Thu Aug 13 08:38:32 2015 +0800
+Commit:     Joe MacDonald <joe_macdonald@mentor.com>
+CommitDate: Fri Sep 11 10:27:37 2015 -0400
+
+    ypbind-mt: add status command for initscript
+   =20
+    Add the "status" command in initscript to check the status of ypbind.
+    remove ypbind-yocto.init as ypbind.init, which is the initscript, make
+    its name similar to other recipes
+   =20
+    Signed-off-by: Zhu Yanjun <yanjun.zhu@windriver.com>
+    Signed-off-by: Roy Li <rongqing.li@windriver.com>
+    Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 
 -J.
 
 >=20
+>=20
+> -Roy
+>=20
+> On 2015=E5=B9=B409=E6=9C=8808=E6=97=A5 15:30, rongqing.li@windriver.com w=
+rote:
+> >From: Zhu Yanjun <yanjun.zhu@windriver.com>
 > >
+> >Add the "status" command in initscript to check the status of ypbind.
+> >remove ypbind-yocto.init as ypbind.init, which is the initscript, make
+> >its name similar to other recipes
 > >
-> >>
-> >>Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> >>---
-> >>  ...ls-only-check-pam_appl.h-when-pam-enabled.patch | 40
-> >>++++++++++++++++++++++
-> >>  .../inetutils/inetutils_1.9.4.bb                   |  6 +++-
-> >>  2 files changed, 45 insertions(+), 1 deletion(-)
-> >>  create mode 100644 meta-networking/recipes-connectivity/inetutils/ine=
-tutils/inetutils-only-check-pam_appl.h-when-pam-enabled.patch
-> >>
-> >>diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils/i=
-netutils-only-check-pam_appl.h-when-pam-enabled.patch b/meta-networking/rec=
-ipes-connectivity/inetutils/inetutils/inetutils-only-check-pam_appl.h-when-=
-pam-enabled.patch
-> >>
-> >>new file mode 100644
-> >>index 0000000..ff3abd8
-> >>--- /dev/null
-> >>+++ b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutil=
-s-only-check-pam_appl.h-when-pam-enabled.patch
-> >>@@ -0,0 +1,40 @@
-> >>+Only check security/pam_appl.h which is provided by package libpam when
-> >>pam is
-> >>+enabled.
-> >>+
-> >>+Upstream-Status: Pending
-> >>+
-> >>+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> >>+---
-> >>+diff --git a/configure.ac b/configure.ac
-> >>+index b35e672..e78a751 100644
-> >>+--- a/configure.ac
-> >>++++ b/configure.ac
-> >>+@@ -195,6 +195,19 @@ fi
-> >>+
-> >>+ # See if we have libpam.a.  Investigate PAM versus Linux-PAM.
-> >>+ if test "$with_pam" =3D yes ; then
-> >>++  AC_CHECK_HEADERS([security/pam_appl.h], [], [], [
-> >>++#include <sys/types.h>
-> >>++#ifdef HAVE_NETINET_IN_SYSTM_H
-> >>++# include <netinet/in_systm.h>
-> >>++#endif
-> >>++#include <netinet/in.h>
-> >>++#ifdef HAVE_NETINET_IP_H
-> >>++# include <netinet/ip.h>
-> >>++#endif
-> >>++#ifdef HAVE_SYS_PARAM_H
-> >>++# include <sys/param.h>
-> >>++#endif
-> >>++])
-> >>+   AC_CHECK_LIB(dl, dlopen, LIBDL=3D-ldl)
-> >>+   AC_CHECK_LIB(pam, pam_authenticate, LIBPAM=3D-lpam)
-> >>+   if test "$ac_cv_lib_pam_pam_authenticate" =3D yes ; then
-> >>+@@ -587,7 +600,7 @@ AC_HEADER_DIRENT
-> >>+ AC_CHECK_HEADERS([arpa/nameser.h errno.h fcntl.h features.h \
-> >>+           glob.h memory.h netinet/ether.h netinet/in_systm.h \
-> >>+           netinet/ip.h netinet/ip_icmp.h netinet/ip_var.h \
-> >>+-          security/pam_appl.h shadow.h \
-> >>++          shadow.h \
-> >>+           stdarg.h stdlib.h string.h stropts.h sys/tty.h \
-> >>+           sys/utsname.h sys/ptyvar.h sys/msgbuf.h sys/filio.h \
-> >>+           sys/ioctl_compat.h sys/cdefs.h sys/stream.h sys/mkdev.h \
-> >>diff --git
-> >>a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-> >>b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-> >>index db07cd6..adfc940 100644
-> >>--- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-> >>+++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-> >>@@ -19,6 +19,7 @@ SRC_URI =3D
-> >>"${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
-> >>             file://telnet.xinetd.inetutils \
-> >>             file://tftpd.xinetd.inetutils \
-> >>             file://inetutils-1.9-PATH_PROCNET_DEV.patch \
-> >>+ file://inetutils-only-check-pam_appl.h-when-pam-enabled.patch \
-> >>  "
-> >>    SRC_URI[md5sum] =3D "04852c26c47cc8c6b825f2b74f191f52"
-> >>@@ -29,9 +30,12 @@ inherit autotools gettext update-alternatives texinfo
-> >>  SRC_URI +=3D "${@base_contains('DISTRO_FEATURES', 'ipv6', '',
-> >>'file://fix-disable-ipv6.patch', d)}"
-> >>  noipv6=3D"${@base_contains('DISTRO_FEATURES', 'ipv6', '',
-> >>'--disable-ipv6 gl_cv_socket_ipv6=3Dno', d)}"
-> >>  -PACKAGECONFIG ??=3D "ftp uucpd"
-> >>+PACKAGECONFIG ??=3D "ftp uucpd \
-> >>+                   ${@bb.utils.contains('DISTRO_FEATURES', 'pam',
-> >>'pam', '', d)} \
-> >>+                  "
-> >>  PACKAGECONFIG[ftp] =3D "--enable-ftp,--disable-ftp,readline"
-> >>  PACKAGECONFIG[uucpd] =3D "--enable-uucpd,--disable-uucpd,readline"
-> >>+PACKAGECONFIG[pam] =3D "--with-pam,--without-pam,libpam"
-> >>    EXTRA_OECONF =3D "--with-ncurses-include-dir=3D${STAGING_INCDIR} \
-> >>          ${noipv6} \
+> >Signed-off-by: Zhu Yanjun <yanjun.zhu@windriver.com>
+> >Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> >---
+> >  .../recipes-support/nis/files/{ypbind-yocto.init =3D> ypbind.init}   |=
+ 7 +++++++
+> >  meta-networking/recipes-support/nis/ypbind-mt_1.38.bb              | 4=
+ ++--
+> >  meta-networking/recipes-support/nis/ypbind-mt_2.2.bb               | 4=
+ ++--
+> >  3 files changed, 11 insertions(+), 4 deletions(-)
+> >  rename meta-networking/recipes-support/nis/files/{ypbind-yocto.init =
+=3D> ypbind.init} (96%)
 > >
+> >diff --git a/meta-networking/recipes-support/nis/files/ypbind-yocto.init=
+ b/meta-networking/recipes-support/nis/files/ypbind.init
+> >similarity index 96%
+> >rename from meta-networking/recipes-support/nis/files/ypbind-yocto.init
+> >rename to meta-networking/recipes-support/nis/files/ypbind.init
+> >index 2c50d12..244dc78 100644
+> >--- a/meta-networking/recipes-support/nis/files/ypbind-yocto.init
+> >+++ b/meta-networking/recipes-support/nis/files/ypbind.init
+> >@@ -21,6 +21,9 @@
+> >  #	the NIS binding information.
+> >  ### END INIT INFO
+> >
+> >+# Need to use status function
+> >+. /etc/init.d/functions
+> >+
+> >  YPBIND_BIN=3D/usr/sbin/ypbind
+> >  pidfile=3D/var/run/ypbind.pid
+> >
+> >@@ -92,6 +95,10 @@ case "$1" in
+> >  	echo -n "Reload service ypbind"
+> >  	start-stop-daemon --stop --quiet --signal 1 --pidfile $pidfile
+> >  	;;
+> >+    status)
+> >+	echo -n "Checking for ypbind: "
+> >+	status $YPBIND_BIN
+> >+	;;
+> >      *)
+> >  	echo "Usage: $0 {start|stop|status|try-restart|restart|force-reload|r=
+eload|probe}"
+> >  	exit 1
+> >diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb b/met=
+a-networking/recipes-support/nis/ypbind-mt_1.38.bb
+> >index d25ef5c..5702cd6 100644
+> >--- a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+> >+++ b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+> >@@ -26,7 +26,7 @@ DEPENDS =3D " \
+> >  PROVIDES +=3D "ypbind"
+> >
+> >  SRC_URI =3D "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2=
+ \
+> >-           file://ypbind-yocto.init \
+> >+           file://ypbind.init \
+> >             file://ypbind.service \
+> >  "
+> >  SRC_URI[md5sum] =3D "094088c0e282fa7f3b3dd6cc51d0a4e1"
+> >@@ -44,7 +44,7 @@ do_install_append () {
+> >      install -d ${D}${sysconfdir}/init.d
+> >      install -d ${D}${sysconfdir}/rcS.d
+> >
+> >-    install -m 0755 ${WORKDIR}/ypbind-yocto.init ${D}${sysconfdir}/init=
+=2Ed/ypbind
+> >+    install -m 0755 ${WORKDIR}/ypbind.init ${D}${sysconfdir}/init.d/ypb=
+ind
+> >
+> >      install -d ${D}${systemd_unitdir}/system
+> >      install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/s=
+ystem
+> >diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/meta=
+-networking/recipes-support/nis/ypbind-mt_2.2.bb
+> >index 6a9262a..cee5880 100644
+> >--- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+> >+++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+> >@@ -21,7 +21,7 @@ PROVIDES +=3D "ypbind"
+> >  PNBLACKLIST[ypbind-mt] ?=3D "BROKEN: Depends on broken yp-tools"
+> >
+> >  SRC_URI =3D "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2=
+ \
+> >-           file://ypbind-yocto.init \
+> >+           file://ypbind.init \
+> >             file://ypbind.service \
+> >  "
+> >  SRC_URI[md5sum] =3D "54e2040d8266ae7d302d081ca310c8a8"
+> >@@ -41,7 +41,7 @@ do_install_append () {
+> >      install -d ${D}${sysconfdir}/init.d
+> >      install -d ${D}${sysconfdir}/rcS.d
+> >
+> >-    install -m 0755 ${WORKDIR}/ypbind-yocto.init ${D}${sysconfdir}/init=
+=2Ed/ypbind
+> >+    install -m 0755 ${WORKDIR}/ypbind.init ${D}${sysconfdir}/init.d/ypb=
+ind
+> >
+> >      install -d ${D}${systemd_unitdir}/system
+> >      install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/s=
+ystem
 > >
 >=20
->=20
+> --=20
+> Best Reagrds,
+> Roy | RongQing Li
 --=20
 -Joe MacDonald.
 :wq
 
---oyUTqETQ0mS9luUI
+--9zSXsLTf0vkW971A
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iQEcBAEBAgAGBQJV9tKpAAoJEEn8ffcsOfaWdAkH/RZnWmA37H3gXdyaEV5R/MSw
-F8c6nwLjSQ+o7usvNbVaLX4K/9ONWkbVcaWmj6eF2sPEETZVr1r0QbXeHORXVgsB
-hsCdTwaRVyHRqkxCDZAlYLc6Sr3nXfD35bTcY9Ph+77+yWr2KkbgBx0p2AMrvAYy
-0JEhYiyVkLiGwJ6dTTKshCoRazvXl2hnAr/0eUrF50hpCURYVXmLG4hQgqW/cnBi
-ekdwJT7MAGTzqvz8luE3FWOKFXneS+buJ+4apvq8Mbh3nDAMlkDWjVpIwFCf3Ldy
-x6uaAiDYecHBa2lw7j1forOHvRnNCLOjhyW/RuKLh6ucxXILWnVdQ90xvO81pqk=
-=99p8
+iQEcBAEBAgAGBQJV9tMmAAoJEEn8ffcsOfaW6SMH/2hxhMfRGMrXsiR73h3qu7m2
+C57/1ICIy7KPHoYAZ661G1/hetQqA+OktiPs7anX9x57dvmGm5NHL2AjzQ9FUHaS
+EfBDOezsW6KnW2AYnzJiH4k9f2BIxnEq1NL0i7bGT6dEmCyWjpc1YHftyvhjoFXD
+gmJ0ybo41OJYSv2m6xelT2SYoqtxKs3wdBrTG8M3J/ReJkdlRJQK3N9SCu+um0bG
+GWO0eameVnxd+vPkTO00nF/bviZ+cZcxse2MxOpRKF8dG5H3tEVd/ZNI0kAysQEe
+DqhGAwZRB2ov2YJZbycifxOHho9pDN38JPY7HQ/aXI+nF4JzUOXjyHT1ponAQZM=
+=a7gS
 -----END PGP SIGNATURE-----
 
---oyUTqETQ0mS9luUI--
+--9zSXsLTf0vkW971A--
