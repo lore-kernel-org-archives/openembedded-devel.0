@@ -1,40 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 4391373710
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2E9C06E630
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Sep 2015 19:31:16 +0000 (UTC)
-Received: by wicge5 with SMTP id ge5so117418606wic.0
+	Mon, 14 Sep 2015 01:33:49 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8E1XnDb009677
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Sep 2015 12:31:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=fOcJvzg7VygDqffAvLHGIvo66HXmYLZjyqJH7RfdOKQ=;
-	b=tjg6D0e38N4vu4NjViQoHSuLpVxL0OVmfAJEqzoHBtDfBjpwAxm3DPIFssRLdQldCD
-	APBx2MrchGU2RqrG/5VTbB1PvvmAjkMp8UAQbgU5AJTraIT/B6D54SmfYvxf9ST+rg2F
-	VIzx+ibE3WYeKsIjH9e6z8mdWBwVeQeEKJn1KGnwmEof+eluWV9LAhuRQtDT8biWPiXN
-	0b405ZSC01V2Mygcj67vW1ty1wc12FD8ZiDJ4NGhoqkgRpcU19Qqkuhvi8L9O0Ae2Ogm
-	EZyg/Yg/hsJwQ7W/QaLpmTE/91oFBOCZ5xiUIkFfZr0m/LpM2bFIcx8CWgbtxRIn5Tn5
-	uY3A==
-X-Received: by 10.194.47.161 with SMTP id e1mr21797454wjn.1.1442172676756;
-	Sun, 13 Sep 2015 12:31:16 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	c7sm11649898wjb.19.2015.09.13.12.31.16
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 13 Sep 2015 12:31:16 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sun, 13 Sep 2015 21:32:19 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150913193219.GB19136@jama>
-References: <1441977480-44314-1-git-send-email-josep.puigdemont@enea.com>
+	Sun, 13 Sep 2015 18:33:49 -0700 (PDT)
+Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Sun, 13 Sep 2015 18:33:49 -0700
+Message-ID: <55F623FB.7050805@windriver.com>
+Date: Mon, 14 Sep 2015 09:33:47 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
 MIME-Version: 1.0
-In-Reply-To: <1441977480-44314-1-git-send-email-josep.puigdemont@enea.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-oe][fido][PATCH] vim: add checksum
+To: <openembedded-devel@lists.openembedded.org>
+References: <1441697402-6805-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1441697402-6805-1-git-send-email-rongqing.li@windriver.com>
+Subject: Re: [PATCH] ypbind-mt: add status command for initscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,75 +35,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Sep 2015 19:31:23 -0000
-X-Groupsio-MsgNum: 57320
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="LKTjZJSUETSlgu2t"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 14 Sep 2015 01:33:51 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
---LKTjZJSUETSlgu2t
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+ping;
 
-On Fri, Sep 11, 2015 at 03:18:00PM +0200, Josep Puigdemont wrote:
-> This fixes this build issue:
-> ERROR: No checksum specified for .../downloads/vim_vim.googlecode.com_.hg=
-=2E_v7-4-481.tar.gz, please add at least one to the recipe:
-> SRC_URI[md5sum] =3D "797c8c3023a810bb8c11ea0a0d185855"
-> SRC_URI[sha256sum] =3D "359d5e3d8981c5047364a3fe5cf7c0928b796570f7cf74aa3=
-ed01593942fd064"
-> ERROR: Function failed: Fetcher failure for URL: 'http://downloads.yoctop=
-roject.org/mirror/sources/vim_vim.googlecode.com_.hg._v7-4-481.tar.gz;proto=
-col=3Dhttps;module=3Dvim'. Missing SRC_URI checksum
+it should be for meta-networking
 
-NAK, you need to update your bitbake (the version you're using has a bug
-in hg fetcher).
 
-> Signed-off-by: Josep Puigdemont <josep.puigdemont@enea.com>
+-Roy
+
+On 2015年09月08日 15:30, rongqing.li@windriver.com wrote:
+> From: Zhu Yanjun <yanjun.zhu@windriver.com>
+>
+> Add the "status" command in initscript to check the status of ypbind.
+> remove ypbind-yocto.init as ypbind.init, which is the initscript, make
+> its name similar to other recipes
+>
+> Signed-off-by: Zhu Yanjun <yanjun.zhu@windriver.com>
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
 > ---
->  meta-oe/recipes-support/vim/vim_7.4.481.bb | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-support/vim/vim_7.4.481.bb b/meta-oe/recipes=
--support/vim/vim_7.4.481.bb
-> index afdea84..2c8e4c6 100644
-> --- a/meta-oe/recipes-support/vim/vim_7.4.481.bb
-> +++ b/meta-oe/recipes-support/vim/vim_7.4.481.bb
-> @@ -11,6 +11,8 @@ SRC_URI =3D "hg://vim.googlecode.com/hg/;protocol=3Dhtt=
-ps;module=3Dvim \
->             file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=
-=3D.. \
->  "
->  SRCREV =3D "v7-4-481"
-> +SRC_URI[md5sum] =3D "797c8c3023a810bb8c11ea0a0d185855"
-> +SRC_URI[sha256sum] =3D "359d5e3d8981c5047364a3fe5cf7c0928b796570f7cf74aa=
-3ed01593942fd064"
-> =20
->  S =3D "${WORKDIR}/vim/src"
-> =20
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>   .../recipes-support/nis/files/{ypbind-yocto.init => ypbind.init}   | 7 +++++++
+>   meta-networking/recipes-support/nis/ypbind-mt_1.38.bb              | 4 ++--
+>   meta-networking/recipes-support/nis/ypbind-mt_2.2.bb               | 4 ++--
+>   3 files changed, 11 insertions(+), 4 deletions(-)
+>   rename meta-networking/recipes-support/nis/files/{ypbind-yocto.init => ypbind.init} (96%)
+>
+> diff --git a/meta-networking/recipes-support/nis/files/ypbind-yocto.init b/meta-networking/recipes-support/nis/files/ypbind.init
+> similarity index 96%
+> rename from meta-networking/recipes-support/nis/files/ypbind-yocto.init
+> rename to meta-networking/recipes-support/nis/files/ypbind.init
+> index 2c50d12..244dc78 100644
+> --- a/meta-networking/recipes-support/nis/files/ypbind-yocto.init
+> +++ b/meta-networking/recipes-support/nis/files/ypbind.init
+> @@ -21,6 +21,9 @@
+>   #	the NIS binding information.
+>   ### END INIT INFO
+>
+> +# Need to use status function
+> +. /etc/init.d/functions
+> +
+>   YPBIND_BIN=/usr/sbin/ypbind
+>   pidfile=/var/run/ypbind.pid
+>
+> @@ -92,6 +95,10 @@ case "$1" in
+>   	echo -n "Reload service ypbind"
+>   	start-stop-daemon --stop --quiet --signal 1 --pidfile $pidfile
+>   	;;
+> +    status)
+> +	echo -n "Checking for ypbind: "
+> +	status $YPBIND_BIN
+> +	;;
+>       *)
+>   	echo "Usage: $0 {start|stop|status|try-restart|restart|force-reload|reload|probe}"
+>   	exit 1
+> diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+> index d25ef5c..5702cd6 100644
+> --- a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+> +++ b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+> @@ -26,7 +26,7 @@ DEPENDS = " \
+>   PROVIDES += "ypbind"
+>
+>   SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
+> -           file://ypbind-yocto.init \
+> +           file://ypbind.init \
+>              file://ypbind.service \
+>   "
+>   SRC_URI[md5sum] = "094088c0e282fa7f3b3dd6cc51d0a4e1"
+> @@ -44,7 +44,7 @@ do_install_append () {
+>       install -d ${D}${sysconfdir}/init.d
+>       install -d ${D}${sysconfdir}/rcS.d
+>
+> -    install -m 0755 ${WORKDIR}/ypbind-yocto.init ${D}${sysconfdir}/init.d/ypbind
+> +    install -m 0755 ${WORKDIR}/ypbind.init ${D}${sysconfdir}/init.d/ypbind
+>
+>       install -d ${D}${systemd_unitdir}/system
+>       install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/system
+> diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+> index 6a9262a..cee5880 100644
+> --- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+> +++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+> @@ -21,7 +21,7 @@ PROVIDES += "ypbind"
+>   PNBLACKLIST[ypbind-mt] ?= "BROKEN: Depends on broken yp-tools"
+>
+>   SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
+> -           file://ypbind-yocto.init \
+> +           file://ypbind.init \
+>              file://ypbind.service \
+>   "
+>   SRC_URI[md5sum] = "54e2040d8266ae7d302d081ca310c8a8"
+> @@ -41,7 +41,7 @@ do_install_append () {
+>       install -d ${D}${sysconfdir}/init.d
+>       install -d ${D}${sysconfdir}/rcS.d
+>
+> -    install -m 0755 ${WORKDIR}/ypbind-yocto.init ${D}${sysconfdir}/init.d/ypbind
+> +    install -m 0755 ${WORKDIR}/ypbind.init ${D}${sysconfdir}/init.d/ypbind
+>
+>       install -d ${D}${systemd_unitdir}/system
+>       install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/system
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
---LKTjZJSUETSlgu2t
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlX1z0EACgkQN1Ujt2V2gBwfVQCePdmBKe2kJPifugrW32kGRbJb
-a34AoJsadsb0RYwDHRV8kY9cfJfDLyMH
-=vCyP
------END PGP SIGNATURE-----
-
---LKTjZJSUETSlgu2t--
