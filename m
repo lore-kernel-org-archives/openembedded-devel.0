@@ -1,32 +1,30 @@
-Return-Path: <Noor_Ahsan@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 859286E630
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6FE2D6E630
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 06:51:29 +0000 (UTC)
-Received: from nat-ies.mentorg.com ([192.94.31.2]
-	helo=SVR-IES-FEM-01.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1Zbk5Q-0003ka-M4 from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Sep 2015 23:51:29 -0700
-Received: from EU-MBX-01.mgc.mentorg.com ([169.254.1.194]) by
-	SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) with mapi id
-	14.03.0224.002; Tue, 15 Sep 2015 07:51:27 +0100
-From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH][meta-qt5] qtbase: fix build for PACKAGECONFIG gles2
-Thread-Index: AQHQ7V0vBFfBlDnbcEu4zs5oeVj4yp49KvWQ
-Date: Tue, 15 Sep 2015 06:51:26 +0000
-Message-ID: <365E1805BC95084CBE82381A0B86999401095D768C@EU-MBX-01.mgc.mentorg.com>
-References: <1442057863-19627-1-git-send-email-schnitzeltony@googlemail.com>
-In-Reply-To: <1442057863-19627-1-git-send-email-schnitzeltony@googlemail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.202.0.76]
+	Tue, 15 Sep 2015 08:35:12 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8F8ZBk7025850
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 15 Sep 2015 01:35:11 -0700 (PDT)
+Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Tue, 15 Sep 2015 01:35:11 -0700
+To: <openembedded-devel@lists.openembedded.org>, Joe MacDonald
+	<Joe_MacDonald@mentor.com>
+References: <1440060202-17953-1-git-send-email-kai.kang@windriver.com>
+	<55ED028C.9000008@windriver.com> <55F63F27.9000109@windriver.com>
+	<20150914135909.GA8691@mentor.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <55F7D847.5080803@windriver.com>
+Date: Tue, 15 Sep 2015 16:35:19 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-Subject: Re: [PATCH][meta-qt5] qtbase: fix build for PACKAGECONFIG gles2
+In-Reply-To: <20150914135909.GA8691@mentor.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH] inetutils: add package config pam
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,105 +38,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Sep 2015 06:51:30 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 15 Sep 2015 08:35:17 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Tm9vciwNCg0KSSBhbSBrZWVuIHRvIGtub3cgdGhhdCBob3cgdGhpcyBwYXRjaCBkb2VzIG5vdCBp
-bmNsdWRlIFguaCB3aGVyZSBOb25lIHdhcyBiZWluZyBkZWZpbmVkIHRvIDAgZWFybGllci4NCg0K
-Tm9vcg0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogb3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyBbbWFpbHRvOm9wZW5lbWJlZGRlZC1k
-ZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZiBBbmRyZWFz
-IE3DvGxsZXINClNlbnQ6IFNhdHVyZGF5LCBTZXB0ZW1iZXIgMTIsIDIwMTUgNDozOCBQTQ0KVG86
-IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQpTdWJqZWN0OiBbb2Vd
-IFtQQVRDSF1bbWV0YS1xdDVdIHF0YmFzZTogZml4IGJ1aWxkIGZvciBQQUNLQUdFQ09ORklHIGds
-ZXMyDQoNCmZpeGVzOg0KDQp8IEluIGZpbGUgaW5jbHVkZWQgZnJvbSAvaG9tZS9zdXBlcmFuZHkv
-dG1wL29lLWNvcmUtZ2xpYmMvc3lzcm9vdHMvdmFyc29taW14NnEvdXNyL2luY2x1ZGUvWDExL1hs
-aWIuaDo0NDowLA0KfCAgICAgICAgICAgICAgICAgIGZyb20gL2hvbWUvc3VwZXJhbmR5L3RtcC9v
-ZS1jb3JlLWdsaWJjL3N5c3Jvb3RzL3ZhcnNvbWlteDZxL3Vzci9pbmNsdWRlL0VHTC9lZ2x2aXZh
-bnRlLmg6MjQ0LA0KfCAgICAgICAgICAgICAgICAgIGZyb20gL2hvbWUvc3VwZXJhbmR5L3RtcC9v
-ZS1jb3JlLWdsaWJjL3N5c3Jvb3RzL3ZhcnNvbWlteDZxL3Vzci9pbmNsdWRlL0VHTC9lZ2xwbGF0
-Zm9ybS5oOjM4LA0KfCAgICAgICAgICAgICAgICAgIGZyb20gL2hvbWUvc3VwZXJhbmR5L3RtcC9v
-ZS1jb3JlLWdsaWJjL3N5c3Jvb3RzL3ZhcnNvbWlteDZxL3Vzci9pbmNsdWRlL0VHTC9lZ2wuaDoz
-OSwNCnwgICAgICAgICAgICAgICAgICBmcm9tIC9ob21lL3N1cGVyYW5keS90bXAvb2UtY29yZS1n
-bGliYy93b3JrL2NvcnRleGE5dDJoZi12ZnAtbmVvbi1teDZxZGwtYW5nc3Ryb20tbGludXgtZ251
-ZWFiaS9xdGJhc2UvNS41LjArZ2l0QVVUT0lOQysyZmRlOWY1OWVlLXIwL2dpdC9zcmMvcGxhdGZv
-cm1zdXBwb3J0L2VnbGNvbnZlbmllbmNlL3FlZ2xwbGF0Zm9ybXNjcmVlbl9wLmg6NTIsDQp8ICAg
-ICAgICAgICAgICAgICAgZnJvbSAvaG9tZS9zdXBlcmFuZHkvdG1wL29lLWNvcmUtZ2xpYmMvd29y
-ay9jb3J0ZXhhOXQyaGYtdmZwLW5lb24tbXg2cWRsLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmkvcXRi
-YXNlLzUuNS4wK2dpdEFVVE9JTkMrMmZkZTlmNTllZS1yMC9naXQvc3JjL3BsYXRmb3Jtc3VwcG9y
-dC9lZ2xjb252ZW5pZW5jZS9xZWdscGxhdGZvcm1zY3JlZW4uY3BwOjM0Og0KfCAuLi8uLi9pbmNs
-dWRlL1F0Q29yZS8uLi8uLi8uLi9naXQvc3JjL2NvcmVsaWIvaW8vcXVybC5oOjEzMTo5OiBlcnJv
-cjogZXhwZWN0ZWQgaWRlbnRpZmllciBiZWZvcmUgbnVtZXJpYyBjb25zdGFudA0KfCAgICAgICAg
-ICBOb25lID0gMHgwLA0KfCAgICAgICAgICBeDQoNClNpZ25lZC1vZmYtYnk6IEFuZHJlYXMgTcO8
-bGxlciA8c2Nobml0emVsdG9ueUBnb29nbGVtYWlsLmNvbT4NCi0tLQ0KIC4uLm1zY3JlZW4uY3Bw
-LXJlb3JkZXItaGVhZGVycy10by1maXgtYnVpbGQtLnBhdGNoIHwgNDkgKysrKysrKysrKysrKysr
-KysrKysrKw0KIHJlY2lwZXMtcXQvcXQ1L3F0YmFzZV9naXQuYmIgICAgICAgICAgICAgICAgICAg
-ICAgIHwgIDEgKw0KIDIgZmlsZXMgY2hhbmdlZCwgNTAgaW5zZXJ0aW9ucygrKQ0KIGNyZWF0ZSBt
-b2RlIDEwMDY0NCByZWNpcGVzLXF0L3F0NS9xdGJhc2UvMDAxMi1xZWdscGxhdGZvcm1zY3JlZW4u
-Y3BwLXJlb3JkZXItaGVhZGVycy10by1maXgtYnVpbGQtLnBhdGNoDQoNCmRpZmYgLS1naXQgYS9y
-ZWNpcGVzLXF0L3F0NS9xdGJhc2UvMDAxMi1xZWdscGxhdGZvcm1zY3JlZW4uY3BwLXJlb3JkZXIt
-aGVhZGVycy10by1maXgtYnVpbGQtLnBhdGNoIGIvcmVjaXBlcy1xdC9xdDUvcXRiYXNlLzAwMTIt
-cWVnbHBsYXRmb3Jtc2NyZWVuLmNwcC1yZW9yZGVyLWhlYWRlcnMtdG8tZml4LWJ1aWxkLS5wYXRj
-aA0KbmV3IGZpbGUgbW9kZSAxMDA2NDQNCmluZGV4IDAwMDAwMDAuLmExYTg3OTENCi0tLSAvZGV2
-L251bGwNCisrKyBiL3JlY2lwZXMtcXQvcXQ1L3F0YmFzZS8wMDEyLXFlZ2xwbGF0Zm9ybXNjcmVl
-bi5jcHAtcmVvcmRlci1oZWFkZXJzLQ0KKysrIHRvLWZpeC1idWlsZC0ucGF0Y2gNCkBAIC0wLDAg
-KzEsNDkgQEANCitGcm9tIGY4ODczYjViYTBmYTQyY2MwZDJhYWRmZDZjNWE0NDliMzc3OTk2MDkg
-TW9uIFNlcCAxNyAwMDowMDowMCAyMDAxDQorRnJvbTogPT9VVEYtOD9xP0FuZHJlYXM9MjBNPUMz
-PUJDbGxlcj89IDxzY2huaXR6ZWx0b255QGdvb2dsZW1haWwuY29tPg0KK0RhdGU6IFNhdCwgMTIg
-U2VwIDIwMTUgMTI6NTg6NDYgKzAyMDANCitTdWJqZWN0OiBbUEFUQ0hdIHFlZ2xwbGF0Zm9ybXNj
-cmVlbi5jcHA6IHJlb3JkZXIgaGVhZGVycyB0byBmaXggYnVpbGQgDQord2l0aCBlZ2wgIGVuYWJs
-ZWQNCitNSU1FLVZlcnNpb246IDEuMA0KK0NvbnRlbnQtVHlwZTogdGV4dC9wbGFpbjsgY2hhcnNl
-dD1VVEYtOA0KK0NvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IDhiaXQNCisNCitmaXhlczoNCitJ
-biBmaWxlIGluY2x1ZGVkIGZyb20gL2hvbWUvc3VwZXJhbmR5L3RtcC9vZS1jb3JlLWdsaWJjL3N5
-c3Jvb3RzL3ZhcnNvbWlteDZxL3Vzci9pbmNsdWRlL1gxMS9YbGliLmg6NDQ6MCwNCisgICAgICAg
-ICAgICAgICAgIGZyb20gL2hvbWUvc3VwZXJhbmR5L3RtcC9vZS1jb3JlLWdsaWJjL3N5c3Jvb3Rz
-L3ZhcnNvbWlteDZxL3Vzci9pbmNsdWRlL0VHTC9lZ2x2aXZhbnRlLmg6MjQ0LA0KKyAgICAgICAg
-ICAgICAgICAgZnJvbSAvaG9tZS9zdXBlcmFuZHkvdG1wL29lLWNvcmUtZ2xpYmMvc3lzcm9vdHMv
-dmFyc29taW14NnEvdXNyL2luY2x1ZGUvRUdML2VnbHBsYXRmb3JtLmg6MzgsDQorICAgICAgICAg
-ICAgICAgICBmcm9tIC9ob21lL3N1cGVyYW5keS90bXAvb2UtY29yZS1nbGliYy9zeXNyb290cy92
-YXJzb21pbXg2cS91c3IvaW5jbHVkZS9FR0wvZWdsLmg6MzksDQorICAgICAgICAgICAgICAgICBm
-cm9tIC9ob21lL3N1cGVyYW5keS90bXAvb2UtY29yZS1nbGliYy93b3JrL2NvcnRleGE5dDJoZi12
-ZnAtbmVvbi1teDZxZGwtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9xdGJhc2UvNS41LjArZ2l0QVVU
-T0lOQysyZmRlOWY1OWVlLXIwL2dpdC9zcmMvcGxhdGZvcm1zdXBwb3J0L2VnbGNvbnZlbmllbmNl
-L3FlZ2xwbGF0Zm9ybXNjcmVlbl9wLmg6NTIsDQorICAgICAgICAgICAgICAgICBmcm9tIC9ob21l
-L3N1cGVyYW5keS90bXAvb2UtY29yZS1nbGliYy93b3JrL2NvcnRleGE5dDJoZi12ZnAtbmVvbi1t
-eDZxZGwtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9xdGJhc2UvNS41LjArZ2l0QVVUT0lOQysyZmRl
-OWY1OWVlLXIwL2dpdC9zcmMvcGxhdGZvcm1zdXBwb3J0L2VnbGNvbnZlbmllbmNlL3FlZ2xwbGF0
-Zm9ybXNjcmVlbi5jcHA6MzQ6DQorLi4vLi4vaW5jbHVkZS9RdENvcmUvLi4vLi4vLi4vZ2l0L3Ny
-Yy9jb3JlbGliL2lvL3F1cmwuaDoxMzE6OTogZXJyb3I6IGV4cGVjdGVkIGlkZW50aWZpZXIgYmVm
-b3JlIG51bWVyaWMgY29uc3RhbnQNCisgICAgICAgICBOb25lID0gMHgwLA0KKyAgICAgICAgIF4N
-CisNCitUaGlzIHBhdGNoIGhhcyBhIHZlcnkgbGltaXRlZCBsaWZldGltZTogSW4gYnJhbmNoIGRl
-diBhbmQgNS42IHRoZSBwYXRjaGVkIGZpbGUgaXMgZ29uZS4gVGhlcmVmb3JlOg0KKw0KK1Vwc3Ry
-ZWFtLVN0YXR1czogUGVuZGluZw0KKw0KK1NpZ25lZC1vZmYtYnk6IEFuZHJlYXMgTcO8bGxlciA8
-c2Nobml0emVsdG9ueUBnb29nbGVtYWlsLmNvbT4NCistLS0NCisgc3JjL3BsYXRmb3Jtc3VwcG9y
-dC9lZ2xjb252ZW5pZW5jZS9xZWdscGxhdGZvcm1zY3JlZW4uY3BwIHwgNCArKy0tDQorIDEgZmls
-ZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pDQorDQorZGlmZiAtLWdp
-dCBhL3NyYy9wbGF0Zm9ybXN1cHBvcnQvZWdsY29udmVuaWVuY2UvcWVnbHBsYXRmb3Jtc2NyZWVu
-LmNwcCANCitiL3NyYy9wbGF0Zm9ybXN1cHBvcnQvZWdsY29udmVuaWVuY2UvcWVnbHBsYXRmb3Jt
-c2NyZWVuLmNwcA0KK2luZGV4IDYxZjhjZGQuLmNlZWM3OTcgMTAwNjQ0DQorLS0tIGEvc3JjL3Bs
-YXRmb3Jtc3VwcG9ydC9lZ2xjb252ZW5pZW5jZS9xZWdscGxhdGZvcm1zY3JlZW4uY3BwDQorKysr
-IGIvc3JjL3BsYXRmb3Jtc3VwcG9ydC9lZ2xjb252ZW5pZW5jZS9xZWdscGxhdGZvcm1zY3JlZW4u
-Y3BwDQorQEAgLTMxLDEwICszMSwxMCBAQA0KKyAqKg0KKyANCisqKioqKioqKioqKioqKioqKioq
-KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKg0KKyoq
-KioqLw0KKyANCistI2luY2x1ZGUgInFlZ2xwbGF0Zm9ybXNjcmVlbl9wLmgiDQorLSNpbmNsdWRl
-ICJxZWdscGxhdGZvcm13aW5kb3dfcC5oIg0KKyAjaW5jbHVkZSA8UXRHdWkvcXdpbmRvdy5oPg0K
-KyAjaW5jbHVkZSA8cXBhL3F3aW5kb3dzeXN0ZW1pbnRlcmZhY2UuaD4NCisrI2luY2x1ZGUgInFl
-Z2xwbGF0Zm9ybXNjcmVlbl9wLmgiDQorKyNpbmNsdWRlICJxZWdscGxhdGZvcm13aW5kb3dfcC5o
-Ig0KKyAjaW5jbHVkZSA8UXRQbGF0Zm9ybVN1cHBvcnQvcHJpdmF0ZS9xb3BlbmdsY29tcG9zaXRv
-cl9wLmg+DQorIA0KKyBRVF9CRUdJTl9OQU1FU1BBQ0UNCistLQ0KKzIuMS4wDQorDQpkaWZmIC0t
-Z2l0IGEvcmVjaXBlcy1xdC9xdDUvcXRiYXNlX2dpdC5iYiBiL3JlY2lwZXMtcXQvcXQ1L3F0YmFz
-ZV9naXQuYmIgaW5kZXggZjQyODdjYy4uNGEwNzNjNSAxMDA2NDQNCi0tLSBhL3JlY2lwZXMtcXQv
-cXQ1L3F0YmFzZV9naXQuYmINCisrKyBiL3JlY2lwZXMtcXQvcXQ1L3F0YmFzZV9naXQuYmINCkBA
-IC0yNSw2ICsyNSw3IEBAIFNSQ19VUkkgKz0gIlwNCiBTUkNfVVJJICs9ICJcDQogICAgIGZpbGU6
-Ly8wMDA5LXFtYWtlLWRvbi10LWJ1aWxkLWl0LWluLWNvbmZpZ3VyZS1idXQtYWxsb3ctdG8tYnVp
-bGQucGF0Y2ggXA0KICAgICBmaWxlOi8vMDAxMC1saW51eC1vZS1nLUludmVydC1jb25kaXRpb25h
-bC1mb3ItZGVmaW5pbmctUVRfU09DS0xFLnBhdGNoIFwNCisgICAgDQorIGZpbGU6Ly8wMDEyLXFl
-Z2xwbGF0Zm9ybXNjcmVlbi5jcHAtcmVvcmRlci1oZWFkZXJzLXRvLWZpeC1idWlsZC0ucGF0Y2gg
-DQorIFwNCiAiDQogDQogREVQRU5EUyArPSAicXRiYXNlLW5hdGl2ZSINCi0tDQoyLjEuMA0KDQot
-LQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCk9wZW5l
-bWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCk9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVu
-ZW1iZWRkZWQub3JnDQpodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL29wZW5lbWJlZGRlZC1kZXZlbA0K
+On 2015年09月14日 21:59, Joe MacDonald wrote:
+> [Re: [oe] [PATCH] inetutils: add package config pam] On 15.09.14 (Mon 11:29) Kang Kai wrote:
+>
+>> On 2015年09月07日 11:20, Kang Kai wrote:
+>>> On 2015年08月20日 16:43, kai.kang@windriver.com wrote:
+>>>> From: Kai Kang <kai.kang@windriver.com>
+>>>>
+>>>> Add package config pam for inetutils. And only check pam_appl.h when pam
+>>>> is enabled.
+>>> Ping.
+>> Any comment on this patch? Thanks.
+> Other than it got missed from my processing queue because it didn't have
+> meta-networking in the subject?  Nope.  :-)
+
+Sorry about that. Will be more careful next time.
+
+Thanks.
+Kai
+
+
+>
+> Someone else mentioned it to me on IRC on Friday so I've now found it
+> and it'll get merged today I expect unless something scary shakes out of
+> it.
+>
+> -J.
+>
+>>>
+>>>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>>>> ---
+>>>>   ...ls-only-check-pam_appl.h-when-pam-enabled.patch | 40
+>>>> ++++++++++++++++++++++
+>>>>   .../inetutils/inetutils_1.9.4.bb                   |  6 +++-
+>>>>   2 files changed, 45 insertions(+), 1 deletion(-)
+>>>>   create mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-only-check-pam_appl.h-when-pam-enabled.patch
+>>>>
+>>>> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-only-check-pam_appl.h-when-pam-enabled.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-only-check-pam_appl.h-when-pam-enabled.patch
+>>>>
+>>>> new file mode 100644
+>>>> index 0000000..ff3abd8
+>>>> --- /dev/null
+>>>> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils/inetutils-only-check-pam_appl.h-when-pam-enabled.patch
+>>>> @@ -0,0 +1,40 @@
+>>>> +Only check security/pam_appl.h which is provided by package libpam when
+>>>> pam is
+>>>> +enabled.
+>>>> +
+>>>> +Upstream-Status: Pending
+>>>> +
+>>>> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>>>> +---
+>>>> +diff --git a/configure.ac b/configure.ac
+>>>> +index b35e672..e78a751 100644
+>>>> +--- a/configure.ac
+>>>> ++++ b/configure.ac
+>>>> +@@ -195,6 +195,19 @@ fi
+>>>> +
+>>>> + # See if we have libpam.a.  Investigate PAM versus Linux-PAM.
+>>>> + if test "$with_pam" = yes ; then
+>>>> ++  AC_CHECK_HEADERS([security/pam_appl.h], [], [], [
+>>>> ++#include <sys/types.h>
+>>>> ++#ifdef HAVE_NETINET_IN_SYSTM_H
+>>>> ++# include <netinet/in_systm.h>
+>>>> ++#endif
+>>>> ++#include <netinet/in.h>
+>>>> ++#ifdef HAVE_NETINET_IP_H
+>>>> ++# include <netinet/ip.h>
+>>>> ++#endif
+>>>> ++#ifdef HAVE_SYS_PARAM_H
+>>>> ++# include <sys/param.h>
+>>>> ++#endif
+>>>> ++])
+>>>> +   AC_CHECK_LIB(dl, dlopen, LIBDL=-ldl)
+>>>> +   AC_CHECK_LIB(pam, pam_authenticate, LIBPAM=-lpam)
+>>>> +   if test "$ac_cv_lib_pam_pam_authenticate" = yes ; then
+>>>> +@@ -587,7 +600,7 @@ AC_HEADER_DIRENT
+>>>> + AC_CHECK_HEADERS([arpa/nameser.h errno.h fcntl.h features.h \
+>>>> +           glob.h memory.h netinet/ether.h netinet/in_systm.h \
+>>>> +           netinet/ip.h netinet/ip_icmp.h netinet/ip_var.h \
+>>>> +-          security/pam_appl.h shadow.h \
+>>>> ++          shadow.h \
+>>>> +           stdarg.h stdlib.h string.h stropts.h sys/tty.h \
+>>>> +           sys/utsname.h sys/ptyvar.h sys/msgbuf.h sys/filio.h \
+>>>> +           sys/ioctl_compat.h sys/cdefs.h sys/stream.h sys/mkdev.h \
+>>>> diff --git
+>>>> a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+>>>> b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+>>>> index db07cd6..adfc940 100644
+>>>> --- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+>>>> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+>>>> @@ -19,6 +19,7 @@ SRC_URI =
+>>>> "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
+>>>>              file://telnet.xinetd.inetutils \
+>>>>              file://tftpd.xinetd.inetutils \
+>>>>              file://inetutils-1.9-PATH_PROCNET_DEV.patch \
+>>>> + file://inetutils-only-check-pam_appl.h-when-pam-enabled.patch \
+>>>>   "
+>>>>     SRC_URI[md5sum] = "04852c26c47cc8c6b825f2b74f191f52"
+>>>> @@ -29,9 +30,12 @@ inherit autotools gettext update-alternatives texinfo
+>>>>   SRC_URI += "${@base_contains('DISTRO_FEATURES', 'ipv6', '',
+>>>> 'file://fix-disable-ipv6.patch', d)}"
+>>>>   noipv6="${@base_contains('DISTRO_FEATURES', 'ipv6', '',
+>>>> '--disable-ipv6 gl_cv_socket_ipv6=no', d)}"
+>>>>   -PACKAGECONFIG ??= "ftp uucpd"
+>>>> +PACKAGECONFIG ??= "ftp uucpd \
+>>>> +                   ${@bb.utils.contains('DISTRO_FEATURES', 'pam',
+>>>> 'pam', '', d)} \
+>>>> +                  "
+>>>>   PACKAGECONFIG[ftp] = "--enable-ftp,--disable-ftp,readline"
+>>>>   PACKAGECONFIG[uucpd] = "--enable-uucpd,--disable-uucpd,readline"
+>>>> +PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam"
+>>>>     EXTRA_OECONF = "--with-ncurses-include-dir=${STAGING_INCDIR} \
+>>>>           ${noipv6} \
+>>>
+>>
+>>
+>>
+
+
+-- 
+Regards,
+Neil | Kai Kang
+
 
