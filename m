@@ -1,32 +1,26 @@
-Return-Path: <mike.looijmans@topic.nl>
-Received: from atl4mhob11.myregisteredsite.com
-	(atl4mhob11.myregisteredsite.com [209.17.115.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A7FF75F3A
+Return-Path: <clopez@igalia.com>
+X-Greylist: delayed 614 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 15 Sep 2015 13:00:18 UTC
+Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
+	by mail.openembedded.org (Postfix) with ESMTP id 4305D73D13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 12:34:49 +0000 (UTC)
-Received: from mailpod.hostingplatform.com ([10.30.71.207])
-	by atl4mhob11.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
-	t8FCYmY4027915 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 08:34:48 -0400
-Received: (qmail 3033 invoked by uid 0); 15 Sep 2015 12:34:48 -0000
-X-TCPREMOTEIP: 88.159.208.100
-X-Authenticated-UID: mike@milosoftware.com
-Received: from unknown (HELO ?192.168.80.121?)
-	(mike@milosoftware.com@88.159.208.100)
-	by 0 with ESMTPA; 15 Sep 2015 12:34:47 -0000
+	Tue, 15 Sep 2015 13:00:18 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: A2AOAgDLEvhV/5tjdVteGQEBgwgBU2mtW49xAQ2BaguHQTgUAQEBAQEBAYEKjyYBpVakRoZziiiEFQWVXIUQh3OIfZIGHwEBQoFKAQuCLTwzAQGKKAEBAQ
+X-IPAS-Result: A2AOAgDLEvhV/5tjdVteGQEBgwgBU2mtW49xAQ2BaguHQTgUAQEBAQEBAYEKjyYBpVakRoZziiiEFQWVXIUQh3OIfZIGHwEBQoFKAQuCLTwzAQGKKAEBAQ
+X-IronPort-AV: E=Sophos;i="5.17,535,1437429600"; d="scan'208";a="22813605"
+Received: from fanzine.igalia.com ([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 15 Sep 2015 14:50:04 +0200
+Received: from [192.168.10.149] (helo=trinity.local.igalia.com)
+	by fanzine.igalia.com with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_128_CBC_SHA1:16) (Exim)
+	id 1ZbpgR-0000Fk-Gp; Tue, 15 Sep 2015 14:50:03 +0200
+From: Carlos Alberto Lopez Perez <clopez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-References: <55F7EF3A.7020403@topic.nl>
-	<CAJTo0LZQhC+QjAcNxxUuQpUkfWgXc-rVDohQe-sb8Ch1d57R2g@mail.gmail.com>
-	<CAJTo0LZVtrC-93qCesHSpet689+3vQN=Wc0+N46_H8g4qkFb7A@mail.gmail.com>
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: TOPIC
-Message-ID: <55F81066.5030903@topic.nl>
-Date: Tue, 15 Sep 2015 14:34:46 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
-MIME-Version: 1.0
-In-Reply-To: <CAJTo0LZVtrC-93qCesHSpet689+3vQN=Wc0+N46_H8g4qkFb7A@mail.gmail.com>
-Subject: Re: gnome-icon-theme?
+Date: Tue, 15 Sep 2015 14:49:59 +0200
+Message-Id: <1442321402-22469-1-git-send-email-clopez@igalia.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-browser][PATCH 0/3] chromium: make the build type configurable.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,22 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Sep 2015 12:34:50 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 15 Sep 2015 13:00:19 -0000
 
-On 15-09-15 13:14, Burton, Ross wrote:
-> On 15 September 2015 at 12:13, Burton, Ross <ross.burton@intel.com> wrote:
->
->> Yeah this was just removed from oe-core but the addition to meta-oe hasn't
->> happened.  I can send a patch now if there isn't one on the list.
->>
->
-> Hm, alternatively,  we make adwaita-icon-theme provide gnome-icon-theme, as
-> they're broadly compatible anyway.  Any thoughts?
+ This serie of patches adds 2 new variables that allow a more fine
+ control of the Chromium build without needing to modify the recipe.
+ (This can be configured in conf/local.conf)
 
-In that case, you might as well replace the dependencies in the other recipes 
-to adwaita-icon-theme directly I guess.
+ CHROMIUM_BUILD_TYPE = ['Release', 'Debug']
+ CHROMIUM_ENABLE_WAYLAND = ['0', '1']
 
 
+Carlos Alberto Lopez Perez (3):
+  chromium: Allow to build in Debug mode.
+  chromium: Clean the definitions of some ozone-wayland variables.
+  chromium: Rework the evaluation of the Wayland feature.
+
+ recipes-browser/chromium/chromium.inc              |  4 +-
+ .../fix-build-error-with-GCC-in-Debug-mode.patch   | 32 +++++++++++
+ recipes-browser/chromium/chromium_40.0.2214.91.bb  | 63 +++++++++++++---------
+ 3 files changed, 74 insertions(+), 25 deletions(-)
+ create mode 100644 recipes-browser/chromium/chromium/chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch
+
+-- 
+2.1.4
 
