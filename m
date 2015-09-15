@@ -1,39 +1,48 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f43.google.com (mail-qg0-f43.google.com
-	[209.85.192.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D5F76E630
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-io0-f173.google.com (mail-io0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 5F2576E630
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 21:53:43 +0000 (UTC)
-Received: by qgev79 with SMTP id v79so155795341qge.0
+	Tue, 15 Sep 2015 22:05:58 +0000 (UTC)
+Received: by ioii196 with SMTP id i196so213723701ioi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 14:53:43 -0700 (PDT)
+	Tue, 15 Sep 2015 15:05:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=from:to:cc:subject:date:message-id:organization;
-	bh=RZ0XX3xGvMZoCrOb4g4AFzIjP8oQSsseiI4VL5UyOnM=;
-	b=hMIid97ZLkqA6TDZjx2jphON8XAfXnwNOT8fnUQvsMUox1w9Do1eQmwaPbwsUBDJ8/
-	DrE5nmXXKF2dIXKkhOGtKEgXrUrcju2Rg2LNU9iCobtKCkrXECd29IZJn27T2cgqjoCV
-	x7gGiWLw1kqkY2RkOh8NGkpiU0ayYohS//308K8tgnLgatxJcrinBqUkL4o7NQJS423N
-	QVhJ4hdCHfb3HvYTZIROF+bS3tSR6VQTZHvrdxnrtQoXpKbqDlazjCeIyoCOB0HP0Pxz
-	teFHhyMnQ9zEKhTRg6MmbG6gJGwadvy/y38vwgiqdltT+b//gVlJOJr27XBeNwLMiCIh
-	Bkgw==
-X-Received: by 10.140.201.79 with SMTP id w76mr37760626qha.82.1442354023750;
-	Tue, 15 Sep 2015 14:53:43 -0700 (PDT)
-Received: from localhost ([177.194.193.199])
-	by smtp.gmail.com with ESMTPSA id 68sm8707689qhc.49.2015.09.15.14.53.40
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc:content-type;
+	bh=z6g6EOsEUo4AhwlQ7OPP2AwAAKwm9kuEDyl0GoK7R9E=;
+	b=PH6Tx2PONzntRE+/hjD2VH7Wa5RNTyMsiUnIeZJPn1V5tzEKOdtvz9qkDFvzDUtAVg
+	aLtiZYbxwf1QoelaiZ/l2FZzQfT6i67NNRowgPbCnil81z4zwA5Csr/mHGvu6QDyovHM
+	FzhTXJytbSmiLZ9yDxnYtDSNADLf708qo0bdPyNwW+0HLK/nKL7iJxF5oE7By9q0U/lJ
+	tPhWESy9Ek5ubx6qMpB7W0GMZtusP7X6tPTOLg81bjEcfymWiSNKMn8gru2tpa2Zrg3P
+	fVMguwD7Hmw8LbWORFynRzLtATA3w+auf6lFaBiHkwMTyoOthZALkUlV1UvCdwAfwjOX
+	rlQg==
+X-Gm-Message-State: ALoCoQkrETjTJcOLTdjNmn/RHuj4WXFYxYoZfNjNUcoO4dVtXMs5MIBaGOTi2KhJbpD3JWcaGlAS
+X-Received: by 10.107.136.87 with SMTP id k84mr37341735iod.26.1442354758425;
+	Tue, 15 Sep 2015 15:05:58 -0700 (PDT)
+Received: from mail-io0-f174.google.com (mail-io0-f174.google.com.
+	[209.85.223.174])
+	by smtp.gmail.com with ESMTPSA id kb10sm547841igb.4.2015.09.15.15.05.57
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 15 Sep 2015 14:53:42 -0700 (PDT)
-Received: by localhost (sSMTP sendmail emulation);
-	Tue, 15 Sep 2015 18:53:37 -0300
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 15 Sep 2015 18:53:34 -0300
-Message-Id: <1442354014-13593-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.5.2
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH] tiobench: Fix build using GCC 5.2
+	Tue, 15 Sep 2015 15:05:57 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by iofh134 with SMTP id h134so213699996iof.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Sep 2015 15:05:57 -0700 (PDT)
+MIME-Version: 1.0
+X-Received: by 10.107.160.194 with SMTP id j185mr36228403ioe.37.1442354757284; 
+	Tue, 15 Sep 2015 15:05:57 -0700 (PDT)
+Received: by 10.36.218.7 with HTTP; Tue, 15 Sep 2015 15:05:57 -0700 (PDT)
+In-Reply-To: <1442352220-16868-1-git-send-email-fabio.berton@ossystems.com.br>
+References: <1442352220-16868-1-git-send-email-fabio.berton@ossystems.com.br>
+Date: Tue, 15 Sep 2015 19:05:57 -0300
+Message-ID: <CAP9ODKr+10wOu0UvLjc7HmO5V1sZMx2FZC9qogb9W+uRrJaofw@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Fabio Berton <fabio.berton@ossystems.com.br>
+Subject: Re: [meta-networking][PATCH v2] lldpd: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,66 +56,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Sep 2015 21:53:45 -0000
+X-List-Received-Date: Tue, 15 Sep 2015 22:05:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Drop 'inline' of crc32 function to fix build using GCC 5.2
+Hello Fabio,
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- ...-of-crc32-function-to-fix-build-using-GCC.patch | 30 ++++++++++++++++++++++
- .../recipes-benchmark/tiobench/tiobench_0.3.3.bb   |  1 +
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/0001-Drop-inline-of-crc32-function-to-fix-build-using-GCC.patch
+On Tue, Sep 15, 2015 at 6:23 PM, Fabio Berton
+<fabio.berton@ossystems.com.br> wrote:
+> lldpd is a 802.1AB implementation, a L2 network discovery protocol.
+> It also supports CDP, EDP and various other protocols.
+>
+> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 
-diff --git a/meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/0001-Drop-inline-of-crc32-function-to-fix-build-using-GCC.patch b/meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/0001-Drop-inline-of-crc32-function-to-fix-build-using-GCC.patch
-new file mode 100644
-index 0000000..5aebb95
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/0001-Drop-inline-of-crc32-function-to-fix-build-using-GCC.patch
-@@ -0,0 +1,30 @@
-+From 5429ab90eb33eb243fa7b9cd247e0490d72b9da5 Mon Sep 17 00:00:00 2001
-+From: Otavio Salvador <otavio@ossystems.com.br>
-+Date: Wed, 9 Sep 2015 15:04:45 +0000
-+Subject: [PATCH] Drop 'inline' of crc32 function to fix build using GCC 5.2
-+Organization: O.S. Systems Software LTDA.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-+---
-+ crc32.h |   1 -
-+ crc32.o | Bin 748 -> 2056 bytes
-+ 2 files changed, 1 deletion(-)
-+
-+diff --git a/crc32.h b/crc32.h
-+index 62b3433..8fc62b6 100644
-+--- a/crc32.h
-++++ b/crc32.h
-+@@ -18,7 +18,6 @@
-+ #ifndef CRC32_H
-+ #define CRC32_H
-+ 
-+-inline 
-+ unsigned long crc32( const void* const buffer, 
-+ 		      unsigned long length, 
-+ 		      unsigned long crc);
-+
-+-- 
-+2.1.4
-+
-diff --git a/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb b/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb
-index 3267de2..35af35f 100644
---- a/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb
-+++ b/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb
-@@ -9,6 +9,7 @@ SRC_URI = "\
-     http://sourceforge.net/projects/tiobench/files/tiobench/${PV}/${BP}.tar.gz \
-     file://tiobench-makefile.patch \
-     file://avoid-glibc-clashes.patch \
-+    file://0001-Drop-inline-of-crc32-function-to-fix-build-using-GCC.patch \
- "
- SRC_URI[md5sum] = "bf485bf820e693c79e6bd2a38702a128"
- SRC_URI[sha256sum] = "8ad011059a35ac70cdb5e3d3999ceee44a8e8e9078926844b0685b7ea9db2bcc"
+Sorry for not raising this before but there is an error...
+
+...
+> +PACKAGES =+ "${PN}-bash-completion ${PN}-zsh-completion"
+> +
+> +FILES_${PN} += "${datadir}/zsh ${libdir}/sysusers.d"
+
+${datadir}/zsh should be moved to the zsh-completion package.
+
+> +RDEPENDS_${PN} += "os-release"
+> +
+> +FILES_${PN}-bash-completion += "${sysconfdir}/bash_completion.d/"
+> +RDEPENDS_${PN}-bash-completion += "bash"
+> +
+> +FILES_${PN}-zsh-completion += "${datadir}/zsh/vendor-completions/"
+> +# FIXME: zsh is broken in meta-oe so this cannot be enabled for now
+> +#RDEPENDS_${PN}-zsh-completion += "zsh"
+
+Wait until tomorrow to see if Joe has any other feedback before
+preparing the v3.
+
 -- 
-2.5.2
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
