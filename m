@@ -1,26 +1,43 @@
-Return-Path: <clopez@igalia.com>
-Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
-	by mail.openembedded.org (Postfix) with ESMTP id 4BBFB73D13
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 762C276FB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 13:00:23 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A2AWBQDLEvhV/5tjdVteGQEBAYMHIzFpqgaTVIFSHQqFeQKBQjkTAQEBAQEBAYEKhCQBAQSBCVFXGQmIKQEIyWgBK4ZzihGCLgxBgTEFlVyFEIdzgUxGg22CfpIGIwM9ghIbFoFAPDMBAYooAQEB
-X-IPAS-Result: A2AWBQDLEvhV/5tjdVteGQEBAYMHIzFpqgaTVIFSHQqFeQKBQjkTAQEBAQEBAYEKhCQBAQSBCVFXGQmIKQEIyWgBK4ZzihGCLgxBgTEFlVyFEIdzgUxGg22CfpIGIwM9ghIbFoFAPDMBAYooAQEB
-X-IronPort-AV: E=Sophos;i="5.17,535,1437429600"; d="scan'208";a="22813610"
-Received: from fanzine.igalia.com ([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 15 Sep 2015 14:50:04 +0200
-Received: from [192.168.10.149] (helo=trinity.local.igalia.com)
-	by fanzine.igalia.com with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_128_CBC_SHA1:16) (Exim)
-	id 1ZbpgR-0000Fk-SE; Tue, 15 Sep 2015 14:50:03 +0200
-From: Carlos Alberto Lopez Perez <clopez@igalia.com>
+	Tue, 15 Sep 2015 13:08:26 +0000 (UTC)
+Received: by wiclk2 with SMTP id lk2so27971872wic.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Sep 2015 06:08:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=9MugLWOtGMD22DL9zZuxk2RmRzAYk4N0wosjeJrmnDo=;
+	b=TAV/wwtjCwvpks8hx5jD6zkyWIOLoFPnt9lxMvm5MzQhbRJA6f1ZJjAecOY4ibAFEM
+	QXur2uImbIqB6i3QSsAK6MUXvSGefMeSzKR5eDSdJ9gcw2XRryhv1L3N9AygpHZPcwkP
+	D3RaGgv31IQ63nT0HR1XOwPDfFFpEpWLxOQCgRxj5EBMV7w3ljQVu9o+d6lIt57Ro97o
+	4DdhhlFVGvLUxV4EllyKxmxo+KZeh3egMxHSKXwRpzJLU6GScwVj5gRkjWBOI8eqCW9J
+	8ICMAypVPgWwBXlUZa4KGryuq2L9UfI19AzjoHzvjPAr2i4SNqcSRfB2+gcszvEnu6gu
+	Cguw==
+X-Received: by 10.194.95.136 with SMTP id dk8mr39278359wjb.60.1442322506104;
+	Tue, 15 Sep 2015 06:08:26 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	pb4sm13392531wjb.8.2015.09.15.06.08.25
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 15 Sep 2015 06:08:25 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 15 Sep 2015 15:08:29 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Sep 2015 14:50:02 +0200
-Message-Id: <1442321402-22469-4-git-send-email-clopez@igalia.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1442321402-22469-1-git-send-email-clopez@igalia.com>
-References: <1442321402-22469-1-git-send-email-clopez@igalia.com>
-Subject: [meta-browser][PATCH 3/3] chromium: Rework the evaluation of the Wayland feature.
+Message-ID: <20150915130829.GA2379@jama>
+References: <55F7EF3A.7020403@topic.nl>
+	<CAJTo0LZQhC+QjAcNxxUuQpUkfWgXc-rVDohQe-sb8Ch1d57R2g@mail.gmail.com>
+	<CAJTo0LZVtrC-93qCesHSpet689+3vQN=Wc0+N46_H8g4qkFb7A@mail.gmail.com>
+	<CAHiDW_H0Nu_T_PVzE+9q0OaD6s+MRFTvRHNJw4ZNaXPD9kVfwA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAHiDW_H0Nu_T_PVzE+9q0OaD6s+MRFTvRHNJw4ZNaXPD9kVfwA@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: gnome-icon-theme?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,108 +51,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Sep 2015 13:00:24 -0000
+X-List-Received-Date: Tue, 15 Sep 2015 13:08:26 -0000
+X-Groupsio-MsgNum: 57363
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Qxx1br4bt0+wmkIi"
+Content-Disposition: inline
 
-  * Remove the ENABLE_X11 variable and rename ENABLE_WAYLAND to
-    CHROMIUM_ENABLE_WAYLAND. Make the old ENABLE_X11 be just
-    "not CHROMIUM_ENABLE_WAYLAND".
+--Qxx1br4bt0+wmkIi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-  * Allow configuring this in the local.conf file.
+On Tue, Sep 15, 2015 at 03:26:01PM +0300, Jussi Kukkonen wrote:
+> On 15 September 2015 at 14:14, Burton, Ross <ross.burton@intel.com> wrote:
+> >
+> > On 15 September 2015 at 12:13, Burton, Ross <ross.burton@intel.com> wro=
+te:
+> >
+> > > Yeah this was just removed from oe-core but the addition to meta-oe
+> hasn't
+> > > happened.  I can send a patch now if there isn't one on the list.
+> > >
+> >
+> > Hm, alternatively,  we make adwaita-icon-theme provide gnome-icon-theme,
+> as
+> > they're broadly compatible anyway.  Any thoughts?
+>=20
+> gnome-icon-theme has effectively been abandonware since adwaita become the
+> actual gnome icon theme so I'd suggest not adding it if adwaita works as
+> alternative (which I believe it does).
+>=20
+> I've been pushing off building an image with the remaining gnome-icon-the=
+me
+> users (using adwaita) to check that things seem to work. I'll do that now
+> and send changes to those recipes if they're fine.
+>=20
+> I guess we could still make adwaita-icon-theme provide gnome-icon-theme b=
+ut
+> is there a meaningful benefit after I fix meta-oe recipes?
 
-  * Add a couple of sanity checks and two notes that will
-    let the user be sure if the ozone-wayland patches will
-    be applied or not. This will be checked before running
-    the do_fetch step of Chromium. That way we avoid printing
-    any warning or doing any check when parsing the recipe.
-    So we only warn or abort when Chromium is actually going
-    to be built.
+Adding RREPLACES,RCONFLICTS,RPROVIDES combo in adwaita recipe allows
+on-device upgrades to uninstall gnome-icon-theme and replace it
+completely with adwaita-icon-theme
 
-Signed-off-by: Carlos Alberto Lopez Perez <clopez@igalia.com>
----
- recipes-browser/chromium/chromium_40.0.2214.91.bb | 45 ++++++++++++++++-------
- 1 file changed, 32 insertions(+), 13 deletions(-)
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-index 195246d..44f8593 100644
---- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
-+++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-@@ -56,22 +56,41 @@ SRC_URI = "\
- #                        See http://www.chromium.org/developers/design-documents/impl-side-painting for more.
- #                        Off by default.
- 
--# conditionally add ozone-wayland and its patches to the Chromium sources
--
--ENABLE_X11 = "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
--# only enable Wayland if X11 isn't already enabled
--ENABLE_WAYLAND = "${@base_contains('DISTRO_FEATURES', 'x11', '0', \
-+# Conditionally add ozone-wayland and its patches to the Chromium sources
-+# You can override this by setting CHROMIUM_ENABLE_WAYLAND=1 or CHROMIUM_ENABLE_WAYLAND=0 in local.conf
-+CHROMIUM_ENABLE_WAYLAND ??= "${@base_contains('DISTRO_FEATURES', 'x11', '0', \
-                      base_contains('DISTRO_FEATURES', 'wayland', '1', \
-                      '0', d),d)}"
-+# Some sanity checks.
-+python do_check_variables() {
-+    CHROMIUM_BUILD_TYPE = d.getVar('CHROMIUM_BUILD_TYPE', True)
-+    CHROMIUM_ENABLE_WAYLAND = d.getVar('CHROMIUM_ENABLE_WAYLAND', True)
-+    DISTRO_FEATURES = d.getVar("DISTRO_FEATURES", True).split()
-+    if CHROMIUM_BUILD_TYPE not in ['Release', 'Debug']:
-+        bb.fatal("Wrong value for CHROMIUM_BUILD_TYPE. Please set it either to \'Release\' or to \'Debug\'")
-+    if CHROMIUM_ENABLE_WAYLAND not in ['0', '1']:
-+        bb.fatal("Wrong value for CHROMIUM_ENABLE_WAYLAND. Please set it to \'1\' to enable the feature or to \'0\' to disable it")
-+    if ( (CHROMIUM_ENABLE_WAYLAND == '1') and ('wayland' not in DISTRO_FEATURES) ):
-+        bb.warn("You have selected to build Chromium with Wayland support, but you have not enabled wayland in DISTRO_FEATURES")
-+    if ( (CHROMIUM_ENABLE_WAYLAND != '1') and ('x11' not in DISTRO_FEATURES) ):
-+        bb.warn("You have selected to build Chromium without Wayland support, but you have not enabled x11 in DISTRO_FEATURES")
-+    # Print both on log.do_checkvariables and on the console the configuration that is selected.
-+    # This useful both for throubleshooting and for checking how the build is finally configured.
-+    if (CHROMIUM_ENABLE_WAYLAND == '1'):
-+        bb.plain("INFO: Chromium has been configured with Wayland support (ozone-wayland). Build type is \'%s\'" %CHROMIUM_BUILD_TYPE)
-+    else:
-+        bb.plain("INFO: Chromium has been configured without Wayland support. Build type is \'%s\'" %CHROMIUM_BUILD_TYPE)
-+}
-+addtask check_variables before do_fetch
- 
- OZONE_WAYLAND_GIT_DESTSUFFIX = "ozone-wayland-git"
- OZONE_WAYLAND_GIT_BRANCH = "Milestone-ThanksGiving"
- OZONE_WAYLAND_GIT_SRCREV = "5d7baa9bc3b8c88e9b7e476e3d6bc8cd44a887fe"
--SRC_URI += "${@base_conditional('ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV}', '', d)}"
-+SRC_URI += "${@base_conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV}', '', d)}"
- OZONE_WAYLAND_PATCH_FILE_GLOB = "*.patch"
- 
--do_unpack[postfuncs] += "${@base_conditional('ENABLE_WAYLAND', '1', 'copy_ozone_wayland_files', '', d)}"
--do_patch[prefuncs] += "${@base_conditional('ENABLE_WAYLAND', '1', 'add_ozone_wayland_patches', '', d)}"
-+do_unpack[postfuncs] += "${@base_conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'copy_ozone_wayland_files', '', d)}"
-+do_patch[prefuncs] += "${@base_conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'add_ozone_wayland_patches', '', d)}"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=537e0b52077bf0a616d0a0c8a79bc9d5"
- SRC_URI += "\
-@@ -101,7 +120,7 @@ OZONE_WAYLAND_PATCH_FILE_GLOB = "00*.patch"
- # Component build is broken in ozone-wayland for Chromium 40,
- # and is not planned to work again before version 41
- python() {
--    if (d.getVar('ENABLE_X11', True) != '1') and (d.getVar('ENABLE_WAYLAND', True) == '1'):
-+    if (d.getVar('CHROMIUM_ENABLE_WAYLAND', True) == '1'):
-         if bb.utils.contains('PACKAGECONFIG', 'component-build', True, False, d):
-             bb.fatal("Chromium 40 Wayland version cannot be built in component-mode")
- }
-@@ -157,12 +176,12 @@ CHROMIUM_WAYLAND_DEPENDS = "wayland libxkbcommon"
- CHROMIUM_WAYLAND_GYP_DEFINES = "use_ash=1 use_aura=1 chromeos=0 use_ozone=1"
- 
- python() {
--    if d.getVar('ENABLE_X11', True) == '1':
--        d.appendVar('DEPENDS', ' %s ' % d.getVar('CHROMIUM_X11_DEPENDS', True))
--        d.appendVar('GYP_DEFINES', ' %s ' % d.getVar('CHROMIUM_X11_GYP_DEFINES', True))
--    if d.getVar('ENABLE_WAYLAND', True) == '1':
-+    if d.getVar('CHROMIUM_ENABLE_WAYLAND', True) == '1':
-         d.appendVar('DEPENDS', ' %s ' % d.getVar('CHROMIUM_WAYLAND_DEPENDS', True))
-         d.appendVar('GYP_DEFINES', ' %s ' % d.getVar('CHROMIUM_WAYLAND_GYP_DEFINES', True))
-+    else:
-+        d.appendVar('DEPENDS', ' %s ' % d.getVar('CHROMIUM_X11_DEPENDS', True))
-+        d.appendVar('GYP_DEFINES', ' %s ' % d.getVar('CHROMIUM_X11_GYP_DEFINES', True))
- }
- 
- do_configure_append() {
--- 
-2.1.4
+--Qxx1br4bt0+wmkIi
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
+iEYEARECAAYFAlX4GEwACgkQN1Ujt2V2gBxeLwCdH0IFK966aySKIBb8mJyn2mlv
+yT4An1+rBFAaL7jHuVCgjtPREnCxX3oZ
+=VbfG
+-----END PGP SIGNATURE-----
+
+--Qxx1br4bt0+wmkIi--
