@@ -1,35 +1,36 @@
-Return-Path: <mike.looijmans@topic.nl>
-X-Greylist: delayed 417 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 15 Sep 2015 10:20:13 UTC
-Received: from atl4mhfb03.myregisteredsite.com
-	(atl4mhfb03.myregisteredsite.com [209.17.115.61])
-	by mail.openembedded.org (Postfix) with ESMTP id AE52C6E630
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qg0-f49.google.com (mail-qg0-f49.google.com
+	[209.85.192.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 22BCE73D13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 10:20:13 +0000 (UTC)
-Received: from atl4mhob17.myregisteredsite.com
-	(atl4mhob17.myregisteredsite.com [209.17.115.110])
-	by atl4mhfb03.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
-	t8FADI3U029425 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 06:13:18 -0400
-Received: from mailpod.hostingplatform.com ([10.30.71.203])
-	by atl4mhob17.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
-	t8FADFaD032424 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 06:13:15 -0400
-Received: (qmail 3958 invoked by uid 0); 15 Sep 2015 10:13:15 -0000
-X-TCPREMOTEIP: 88.159.208.100
-X-Authenticated-UID: mike@milosoftware.com
-Received: from unknown (HELO ?192.168.80.121?)
-	(mike@milosoftware.com@88.159.208.100)
-	by 0 with ESMTPA; 15 Sep 2015 10:13:15 -0000
-To: openembedded-devel@lists.openembedded.org
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: TOPIC
-Message-ID: <55F7EF3A.7020403@topic.nl>
-Date: Tue, 15 Sep 2015 12:13:14 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+	Tue, 15 Sep 2015 11:14:10 +0000 (UTC)
+Received: by qgev79 with SMTP id v79so138771312qge.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Sep 2015 04:14:10 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=icKt6eX+Rg2hXY359Gw9gbdb5ltrukDYmmcI3MOi2vw=;
+	b=eIKHhICbwQP/72uWO2L/Sn4EPW779r1CzTAsudeQta2kVy83PZTre3AR0q/+3TlPEm
+	q95kAJcE6HOylpHvtGPDFOnTNYCJfPYPy1uiKVoZFjVryvnnnX6S04+LaUZ5lMdVHoZC
+	GVVAvJ+VXj9sLjKXf/a8gCSxE+DgaNlF3IpYMD1sc67eF21RY+++IllrhcRNRryPLy8a
+	/rAug/EFDKn0RwEh4Gfm1om9Hf8/LBcywJU10DXtSAdqd7jsJUtaHr2LVSKdyhlyNbPy
+	x0PnfIR6wF7rEXZnJkLVofT/NVfVxISqkA5EdngZv+R13g84BW8vghXj4NJlylrIqrUv
+	gurg==
+X-Gm-Message-State: ALoCoQltv2UwSsvdsu+HsYxZqLev8R09BLTKTLqVlYgWKTqZgErzO8MlwwmCzZ7tCAyofzdlIpYa
+X-Received: by 10.140.93.53 with SMTP id c50mr30208036qge.59.1442315650285;
+	Tue, 15 Sep 2015 04:14:10 -0700 (PDT)
 MIME-Version: 1.0
-Subject: gnome-icon-theme?
+Received: by 10.140.94.86 with HTTP; Tue, 15 Sep 2015 04:13:50 -0700 (PDT)
+In-Reply-To: <55F7EF3A.7020403@topic.nl>
+References: <55F7EF3A.7020403@topic.nl>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 15 Sep 2015 12:13:50 +0100
+Message-ID: <CAJTo0LZQhC+QjAcNxxUuQpUkfWgXc-rVDohQe-sb8Ch1d57R2g@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: gnome-icon-theme?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,24 +44,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Sep 2015 10:20:14 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 15 Sep 2015 11:14:11 -0000
+Content-Type: text/plain; charset=UTF-8
 
-With current master I get errors like this:
+On 15 September 2015 at 11:13, Mike Looijmans <mike.looijmans@topic.nl>
+wrote:
 
-ERROR: Nothing PROVIDES 'gnome-icon-theme' (but 
-.../meta-oe/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb DEPENDS on or 
-otherwise requires it). Close matches:
-   rodent-icon-theme
-   gnome-themes
-   sato-icon-theme
-ERROR: Required build target 'evince' has no buildable providers.
-Missing or unbuildable dependency chain was: ['evince', 'gnome-icon-theme']
+> With current master I get errors like this:
+>
+> ERROR: Nothing PROVIDES 'gnome-icon-theme' (but
+> .../meta-oe/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb DEPENDS on
+> or otherwise requires it). Close matches:
+>   rodent-icon-theme
+>   gnome-themes
+>   sato-icon-theme
+> ERROR: Required build target 'evince' has no buildable providers.
+> Missing or unbuildable dependency chain was: ['evince', 'gnome-icon-theme']
+>
 
-And similar for quite a few other recipes. Surprisingly, I cannot find any 
-recipe that provides it in meta-oe.
+Yeah this was just removed from oe-core but the addition to meta-oe hasn't
+happened.  I can send a patch now if there isn't one on the list.
 
-Was it moved to another layer maybe? I can't find any mention of 
-gnome-icon-theme for the past few months in the log either.
+Ross
 
