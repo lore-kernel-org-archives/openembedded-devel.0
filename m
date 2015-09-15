@@ -1,34 +1,32 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f182.google.com (mail-io0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id CF2E275CF1
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 470EA6E630
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 17:01:22 +0000 (UTC)
-Received: by iofb144 with SMTP id b144so206533269iof.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 10:01:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=OyFEla1GtIheaWLw7DkJ9xKjIvNganJfN2g2YoEqe6Y=;
-	b=Qhr5poxKTv9Fpe3pjXfdmKTuLCW3ULiHKmGEs9wcQfxTCpmbGxBHHHu5viBbpE5tz+
-	pyDkZZohF3p7UlJiYoxdgh84CHb2vSOeNnvy3kFBLTH8wwOuUbWDwNIJePwD3zzG+TCF
-	iucahz+HkW0vG1pFsF5VmIQA319HGuz2OfwsZS//icTAyDOEDI2iMTJCRb/JyQVgnlch
-	o0rzRLfx0JRHqJ2QRc9O7nNvqVkGKbne4bCawVYCJVQGt8Fa6TGgO2B0ush4qfygq4xt
-	j2i/eHD5vtuuifalcvcNAsTM7FwzNDpw5WlM5n3LgeJzEPaDsDGwfMz4qmqVEZqv2gK/
-	MqBQ==
-X-Received: by 10.107.137.106 with SMTP id l103mr30113977iod.112.1442336482375;
-	Tue, 15 Sep 2015 10:01:22 -0700 (PDT)
+	Tue, 15 Sep 2015 17:25:38 +0000 (UTC)
+Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
+	by relay1.mentorg.com with esmtp 
+	id 1Zbtz8-0003mg-JB from Joe_MacDonald@mentor.com ;
+	Tue, 15 Sep 2015 10:25:38 -0700
+Received: from burninator (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 15 Sep 2015 10:25:38 -0700
+Received: by burninator (Postfix, from userid 1000)	id C4FFE5803A2; Tue, 15
+	Sep 2015 13:24:29 -0400 (EDT)
+Date: Tue, 15 Sep 2015 13:24:29 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20150915172429.GJ8885@mentor.com>
+References: <1441863496-7668-1-git-send-email-kai.kang@windriver.com>
+	<20150914193728.GA8885@mentor.com> <55F7DC58.1050001@windriver.com>
+	<CAMKF1sqP6OZbL+8-HrqMjV7FWz0+RPOSad8fO_+c7AgzvaCnuQ@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.107.142.130 with HTTP; Tue, 15 Sep 2015 10:00:52 -0700 (PDT)
-In-Reply-To: <55F8333A.9000007@gmail.com>
-References: <1442321402-22469-1-git-send-email-clopez@igalia.com>
-	<1442321402-22469-2-git-send-email-clopez@igalia.com>
-	<55F8333A.9000007@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 15 Sep 2015 10:00:52 -0700
-Message-ID: <CAMKF1srGtU9VS9FHTRsKACHXwJSmTQGVjg25ORom7w=_GM=QWw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser][PATCH 1/3] chromium: Allow to build in Debug mode.
+In-Reply-To: <CAMKF1sqP6OZbL+8-HrqMjV7FWz0+RPOSad8fO_+c7AgzvaCnuQ@mail.gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] iftop: 1.0pre2 -> 1.0pre4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,28 +40,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Sep 2015 17:01:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 15 Sep 2015 17:25:41 -0000
+X-Groupsio-MsgNum: 57374
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="LG0Ll82vYr46+VA1"
+Content-Disposition: inline
 
-On Tue, Sep 15, 2015 at 8:03 AM, Trevor Woerner <twoerner@gmail.com> wrote:
-> On 09/15/15 08:50, Carlos Alberto Lopez Perez wrote:
->>   * Add also a patch that workarounds a build error when building
->>     in Debug mode and using GCC. This patch has no effect when
->>     building in Release mode because is guarded within ifdef(debug)
->>     blocks.
->>
->> Signed-off-by: Carlos Alberto Lopez Perez <clopez@igalia.com>
->> ---
->>  recipes-browser/chromium/chromium.inc              |  4 ++-
->>  .../fix-build-error-with-GCC-in-Debug-mode.patch   | 32 ++++++++++++++++++++++
->>  recipes-browser/chromium/chromium_40.0.2214.91.bb  |  1 +
->>  3 files changed, 36 insertions(+), 1 deletion(-)
->>  create mode 100644 recipes-browser/chromium/chromium/chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch
->
-> Does the above patch need an upstream-status tag?
+--LG0Ll82vYr46+VA1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Its not must for meta-broweser, but its good since it adds
-information. We do not have any automatic tracking of patch status
-so if one mentions url for source of patch or any information on where
-patch's status can be asserted at later times is good.
+[Re: [oe] [meta-networking][PATCH] iftop: 1.0pre2 -> 1.0pre4] On 15.09.15 (=
+Tue 09:52) Khem Raj wrote:
 
+> On Tue, Sep 15, 2015 at 1:52 AM, Kang Kai <Kai.Kang@windriver.com> wrote:
+> > Got it.
+> >
+> > For for iftop, it just update licensing text.
+> >
+> > ----------------------------
+> > revision 1.3
+> > date: 2014/01/01 14:50:05;  author: pdw;  state: Exp;  lines: +7 -8
+> > Update to licensing text.  Patch by Robert Scheck <robert@fedoraproject=
+=2Eorg>
+> > ----------------------------
+> >
+>=20
+> what was updated in essence is important here not logs
+
+Yeah, I had hoped that would've come through in either the earlier link
+or my referencing it here.  I inspected the change myself and the
+changes are limited to replacing 'library' with 'lesser' and the street
+address of the FSF in the GPL text, which isn't surprising, but that's
+really the information that should have been communicated in the commit
+log itself.
+
+--=20
+-Joe MacDonald.
+:wq
+
+--LG0Ll82vYr46+VA1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJV+FRNAAoJEEn8ffcsOfaWHUwH/Axgd32xnLwTU7a+rvTc2lzL
+vN64fndaidZLG+4PjWzWSvtxNMMRGTE/9cD+ltowxDqz2y4tO5ekg6arAFYGvAwP
+Eat4LeST6uyzKDJhDz/t1P9+9ewUKS1EGYu9YoqYFGwTc8eB5NwzHYrVOhmGi8Ru
+YK7Age0Jek4h4QoKwn+rzd/8fh/gZgbibgcHegpRv0smgRz6y/leZwhQ18GvWOzn
+rz+JNPiEnl1n7j75u9+1+IwqDYUE+lN51femZa8E7w/3P1Xhe5O5anLrKhJNTTl6
+GcS+gSgQ1jAbAfbyBALda0d06qaqkaOSpXVkcLLnOWa/fiYVGQxjg/f+bP3Gv0Y=
+=4Zym
+-----END PGP SIGNATURE-----
+
+--LG0Ll82vYr46+VA1--
