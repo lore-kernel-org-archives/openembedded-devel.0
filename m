@@ -1,22 +1,35 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A6B772A78
+Return-Path: <mike.looijmans@topic.nl>
+X-Greylist: delayed 417 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 15 Sep 2015 10:20:13 UTC
+Received: from atl4mhfb03.myregisteredsite.com
+	(atl4mhfb03.myregisteredsite.com [209.17.115.61])
+	by mail.openembedded.org (Postfix) with ESMTP id AE52C6E630
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 09:07:31 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga102.fm.intel.com with ESMTP; 15 Sep 2015 02:07:32 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,534,1437462000"; d="scan'208";a="769284501"
-Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga001.jf.intel.com with ESMTP; 15 Sep 2015 02:07:31 -0700
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+	Tue, 15 Sep 2015 10:20:13 +0000 (UTC)
+Received: from atl4mhob17.myregisteredsite.com
+	(atl4mhob17.myregisteredsite.com [209.17.115.110])
+	by atl4mhfb03.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
+	t8FADI3U029425 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Sep 2015 06:13:18 -0400
+Received: from mailpod.hostingplatform.com ([10.30.71.203])
+	by atl4mhob17.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
+	t8FADFaD032424 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Sep 2015 06:13:15 -0400
+Received: (qmail 3958 invoked by uid 0); 15 Sep 2015 10:13:15 -0000
+X-TCPREMOTEIP: 88.159.208.100
+X-Authenticated-UID: mike@milosoftware.com
+Received: from unknown (HELO ?192.168.80.121?)
+	(mike@milosoftware.com@88.159.208.100)
+	by 0 with ESMTPA; 15 Sep 2015 10:13:15 -0000
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Sep 2015 12:09:20 +0300
-Message-Id: <1442308160-4744-2-git-send-email-alexander.kanavin@linux.intel.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1442308160-4744-1-git-send-email-alexander.kanavin@linux.intel.com>
-References: <1442308160-4744-1-git-send-email-alexander.kanavin@linux.intel.com>
-Subject: [PATCH 2/2] gimp: disable webkit dependency in the recipe
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Organization: TOPIC
+Message-ID: <55F7EF3A.7020403@topic.nl>
+Date: Tue, 15 Sep 2015 12:13:14 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
+MIME-Version: 1.0
+Subject: gnome-icon-theme?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,39 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Sep 2015 09:07:31 -0000
+X-List-Received-Date: Tue, 15 Sep 2015 10:20:14 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-gimp (optionally) depends on a very old version of webkit-gtk (1.6.x)
-for browsing help, and oe-core no longer provides that version.
+With current master I get errors like this:
 
-Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
----
- meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ERROR: Nothing PROVIDES 'gnome-icon-theme' (but 
+.../meta-oe/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb DEPENDS on or 
+otherwise requires it). Close matches:
+   rodent-icon-theme
+   gnome-themes
+   sato-icon-theme
+ERROR: Required build target 'evince' has no buildable providers.
+Missing or unbuildable dependency chain was: ['evince', 'gnome-icon-theme']
 
-diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-index 7d52cf1..efeb575 100644
---- a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-+++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-@@ -9,9 +9,6 @@ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', d)}"
- 
- inherit gnome gtk-doc
- 
--PACKAGECONFIG ??= ""
--PACKAGECONFIG[helpbrowser] = "--with-webkit, --without-webkit, webkit-gtk"
--
- SRC_URI = " \
-     http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
-     file://0001-configure-ac-do-not-check-for-freetype-config.patch \
-@@ -20,6 +17,7 @@ SRC_URI[md5sum] = "233c948203383fa078434cc3f8f925cb"
- SRC_URI[sha256sum] = "d82a958641c9c752d68e35f65840925c08e314cea90222ad845892a40e05b22d"
- 
- EXTRA_OECONF = "--disable-python \
-+                --without-webkit \
-                 --without-wmf"
- 
- do_configure_append() {
--- 
-2.1.4
+And similar for quite a few other recipes. Surprisingly, I cannot find any 
+recipe that provides it in meta-oe.
 
+Was it moved to another layer maybe? I can't find any mention of 
+gnome-icon-theme for the past few months in the log either.
 
