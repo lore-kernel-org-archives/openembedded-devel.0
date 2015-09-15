@@ -1,20 +1,22 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B7086E630
+	by mail.openembedded.org (Postfix) with ESMTP id 9A6B772A78
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 09:07:28 +0000 (UTC)
+	Tue, 15 Sep 2015 09:07:31 +0000 (UTC)
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga102.fm.intel.com with ESMTP; 15 Sep 2015 02:07:28 -0700
+	by fmsmga102.fm.intel.com with ESMTP; 15 Sep 2015 02:07:32 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,534,1437462000"; d="scan'208";a="769284478"
+X-IronPort-AV: E=Sophos;i="5.17,534,1437462000"; d="scan'208";a="769284501"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga001.jf.intel.com with ESMTP; 15 Sep 2015 02:07:27 -0700
+	by orsmga001.jf.intel.com with ESMTP; 15 Sep 2015 02:07:31 -0700
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Sep 2015 12:09:19 +0300
-Message-Id: <1442308160-4744-1-git-send-email-alexander.kanavin@linux.intel.com>
+Date: Tue, 15 Sep 2015 12:09:20 +0300
+Message-Id: <1442308160-4744-2-git-send-email-alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.1.4
-Subject: [PATCH 1/2] epiphany: remove the recipe due to its move to oe-core
+In-Reply-To: <1442308160-4744-1-git-send-email-alexander.kanavin@linux.intel.com>
+References: <1442308160-4744-1-git-send-email-alexander.kanavin@linux.intel.com>
+Subject: [PATCH 2/2] gimp: disable webkit dependency in the recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,41 +30,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Sep 2015 09:07:29 -0000
+X-List-Received-Date: Tue, 15 Sep 2015 09:07:31 -0000
+
+gimp (optionally) depends on a very old version of webkit-gtk (1.6.x)
+for browsing help, and oe-core no longer provides that version.
 
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- .../recipes-gnome/epiphany/epiphany_2.30.6.bb       | 21 ---------------------
- 1 file changed, 21 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
+ meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb b/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
-deleted file mode 100644
-index 9e1a0dc..0000000
---- a/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
-+++ /dev/null
-@@ -1,21 +0,0 @@
--SUMMARY = "GNOME default webbrowser"
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
+index 7d52cf1..efeb575 100644
+--- a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
++++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
+@@ -9,9 +9,6 @@ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', d)}"
+ 
+ inherit gnome gtk-doc
+ 
+-PACKAGECONFIG ??= ""
+-PACKAGECONFIG[helpbrowser] = "--with-webkit, --without-webkit, webkit-gtk"
 -
--DEPENDS = "gnome-doc-utils libsoup-2.4 webkit-gtk gtk+ gconf iso-codes startup-notification ca-certificates libgnome-keyring avahi libnotify"
--
--inherit gnome
--SRC_URI[archive.md5sum] = "0c566b3ffd428d2135e3c8cb65352d64"
--SRC_URI[archive.sha256sum] = "278a5c00ce07e6a3ea440d289de22dbec3ebec4ded4ff3b4c48b580f469c2dcc"
--
--EXTRA_OECONF += " --disable-nss --with-distributor-name=${DISTRO} --without-ca-file"
--
--do_configure_prepend() {
--    touch ${S}/gnome-doc-utils.make
--    sed -i -e s:help::g ${S}/Makefile.am
--}
--
--FILES_${PN} += "${datadir}/icons ${datadir}/dbus-1"
--RDEPENDS_${PN} = "iso-codes"
--RRECOMMENDS_${PN} = "ca-certificates"
--
+ SRC_URI = " \
+     http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
+     file://0001-configure-ac-do-not-check-for-freetype-config.patch \
+@@ -20,6 +17,7 @@ SRC_URI[md5sum] = "233c948203383fa078434cc3f8f925cb"
+ SRC_URI[sha256sum] = "d82a958641c9c752d68e35f65840925c08e314cea90222ad845892a40e05b22d"
+ 
+ EXTRA_OECONF = "--disable-python \
++                --without-webkit \
+                 --without-wmf"
+ 
+ do_configure_append() {
 -- 
 2.1.4
 
