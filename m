@@ -1,36 +1,34 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 18A5676D84
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id A957E60053
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2015 08:09:54 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="100773696"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 16 Sep 2015 16:12:41 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t8G89YvM026989;
-	Wed, 16 Sep 2015 16:09:34 +0800
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Wed, 16 Sep 2015 16:09:49 +0800
-From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
-Thread-Topic: [oe] [meta-oe][PATCH] dnsmasq: upgrade 2.72->2.75
-Thread-Index: AQHQ1lYAh+m2lEvFj0WPtOf5jBVRnZ49BVxQgABL2oCAAa9toA==
-Date: Wed, 16 Sep 2015 08:09:48 +0000
-Message-ID: <1B56A49860EB2D45ADE3731B15C959FDA8E4CE84@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1439531817-34541-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<1B56A49860EB2D45ADE3731B15C959FDA8E4C8F5@G08CNEXMBPEKD01.g08.fujitsu.local>
-	<20150915142249.GH8885@mentor.com>
-In-Reply-To: <20150915142249.GH8885@mentor.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.100]
+	Wed, 16 Sep 2015 13:40:02 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
+	by relay1.mentorg.com with esmtp 
+	id 1ZcCwM-0003HM-HK from Joe_MacDonald@mentor.com ;
+	Wed, 16 Sep 2015 06:40:02 -0700
+Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
+	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 16 Sep 2015 06:40:02 -0700
+Received: by burninator (Postfix, from userid 1000)	id 91D8C58781C; Wed, 16
+	Sep 2015 09:38:53 -0400 (EDT)
+Date: Wed, 16 Sep 2015 09:38:53 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20150916133853.GC10507@mentor.com>
+References: <1441863496-7668-1-git-send-email-kai.kang@windriver.com>
+	<20150914193728.GA8885@mentor.com> <55F7DC58.1050001@windriver.com>
+	<CAMKF1sqP6OZbL+8-HrqMjV7FWz0+RPOSad8fO_+c7AgzvaCnuQ@mail.gmail.com>
+	<20150915172429.GJ8885@mentor.com>
+	<46D89522-87AA-48C1-9B6C-5408B26BA3BB@gmail.com>
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] dnsmasq: upgrade 2.72->2.75
+In-Reply-To: <46D89522-87AA-48C1-9B6C-5408B26BA3BB@gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: Martin Jansa <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] iftop: 1.0pre2 -> 1.0pre4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,92 +42,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Sep 2015 08:09:56 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 16 Sep 2015 13:40:08 -0000
+X-Groupsio-MsgNum: 57389
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="vEao7xgI/oilGqZ+"
+Content-Disposition: inline
 
-SGkgSm9lDQoNCg0KPiBQcm9iYWJseSB0aGUgc2FtZSByZWFzb24gYXMgd2h5IEthaSdzIGluZXR1
-dGlscyBwYXRjaCBsaW5nZXJlZCBvbiBmb3Igc28gbG9uZy4gIEFueXRoaW5nDQo+IGZvciBtZXRh
-LW5ldHdvcmtpbmcgd2l0aG91dCBhIG1ldGEtbmV0d29ya2luZyB0YWcgaW4gdGhlIHN1YmplY3Qg
-bGluZSBoYXMgYW4gZWxldmF0ZWQgcmlzaw0KPiBvZiBiZWluZyBvdmVybG9va2VkLiAgDQoNCk9o
-LCBzb3JyeSwgSSdsbCBiZSBjYXJlZnVsIG5leHQgdGltZS4NCg0KgXJTb3JyeSBhYm91dCB0aGF0
-LCBpdCdzIGJlZW4gbWVyZ2VkIG5vdy4NCg0KVGhhbmtzLg0KDQoNCg0KbGVpDQoNCg0KPiAtLS0t
-LU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBKb2UgTWFjRG9uYWxkIFttYWlsdG86Sm9l
-X01hY0RvbmFsZEBtZW50b3IuY29tXQ0KPiBTZW50OiBUdWVzZGF5LCBTZXB0ZW1iZXIgMTUsIDIw
-MTUgMTA6MjMgUE0NCj4gVG86IExlaSwgTWFvaHVpIA0KPiBDYzogb3BlbmVtYmVkZGVkLWRldmVs
-QGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2VdW1BB
-VENIXSBkbnNtYXNxOiB1cGdyYWRlIDIuNzItPjIuNzUNCj4gDQo+IEhpIExlaSwNCj4gDQo+IFtS
-ZTogW29lXSBbbWV0YS1vZV1bUEFUQ0hdIGRuc21hc3E6IHVwZ3JhZGUgMi43Mi0+Mi43NV0gT24g
-MTUuMDkuMTUgKFR1ZSAwMTo1OCkgTGVpLA0KPiBNYW9odWkgd3JvdGU6DQo+IA0KPiA+IEhpDQo+
-ID4NCj4gPiBFeGN1c2UgbWUuIFRoaXMgcGF0Y2ggaGFzIGJlZW4gaW4gbWFzdGVyLW5leHQgZm9y
-IGEgbG9uZyB0aW1lLiBXaHkgbm90DQo+ID4gYmVlbiBtZXJnZWQgaW50byBtYXN0ZXI/DQo+IA0K
-PiBQcm9iYWJseSB0aGUgc2FtZSByZWFzb24gYXMgd2h5IEthaSdzIGluZXR1dGlscyBwYXRjaCBs
-aW5nZXJlZCBvbiBmb3Igc28gbG9uZy4gIEFueXRoaW5nDQo+IGZvciBtZXRhLW5ldHdvcmtpbmcg
-d2l0aG91dCBhIG1ldGEtbmV0d29ya2luZyB0YWcgaW4gdGhlIHN1YmplY3QgbGluZSBoYXMgYW4g
-ZWxldmF0ZWQgcmlzaw0KPiBvZiBiZWluZyBvdmVybG9va2VkLiAgU29ycnkgYWJvdXQgdGhhdCwg
-aXQncyBiZWVuIG1lcmdlZCBub3cuDQo+IA0KPiAtSi4NCj4gDQo+ID4NCj4gPg0KPiA+IENoZWVy
-cw0KPiA+IExlaQ0KPiA+DQo+ID4NCj4gPg0KPiA+ID4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0t
-LS0NCj4gPiA+IEZyb206IExlaSwgTWFvaHVpDQo+ID4gPiBTZW50OiBGcmlkYXksIEF1Z3VzdCAx
-NCwgMjAxNSAxOjU3IFBNDQo+ID4gPiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmcNCj4gPiA+IENjOiBMZWksIE1hb2h1aQ0KPiA+ID4gU3ViamVjdDogW29lXSBb
-bWV0YS1vZV1bUEFUQ0hdIGRuc21hc3E6IHVwZ3JhZGUgMi43Mi0+Mi43NQ0KPiA+ID4NCj4gPiA+
-IC1wYXJhbGxlbC1tYWtlLnBhdGNoIGlzIG5vdCBuZWVkZWQgYW55IG1vcmUsc28gZGVsZXRlLg0K
-PiA+ID4NCj4gPiA+IFNpZ25lZC1vZmYtYnk6IExlaSBNYW9odWkgPGxlaW1hb2h1aUBjbi5mdWpp
-dHN1LmNvbT4NCj4gPiA+IC0tLQ0KPiA+ID4gIC4uLi9kbnNtYXNxL2Ruc21hc3EvcGFyYWxsZWwt
-bWFrZS5wYXRjaCAgICAgICAgICAgICAgIHwgMTkgLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiA+ID4g
-IC4uLi9yZWNpcGVzLXN1cHBvcnQvZG5zbWFzcS9kbnNtYXNxXzIuNzIuYmIgICAgICAgICAgIHwg
-MTAgLS0tLS0tLS0tLQ0KPiA+ID4gIC4uLi9yZWNpcGVzLXN1cHBvcnQvZG5zbWFzcS9kbnNtYXNx
-XzIuNzUuYmIgICAgICAgICAgIHwgIDkgKysrKysrKysrDQo+ID4gPiAgMyBmaWxlcyBjaGFuZ2Vk
-LCA5IGluc2VydGlvbnMoKyksIDI5IGRlbGV0aW9ucygtKSAgZGVsZXRlIG1vZGUNCj4gPiA+IDEw
-MDY0NA0KPiA+ID4gbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9kbnNtYXNxL2Ruc21h
-c3EvcGFyYWxsZWwtbWFrZS5wYXRjaA0KPiA+ID4gIGRlbGV0ZSBtb2RlIDEwMDY0NA0KPiA+ID4g
-bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9kbnNtYXNxL2Ruc21hc3FfMi43Mi5iYg0K
-PiA+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+ID4gbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMt
-c3VwcG9ydC9kbnNtYXNxL2Ruc21hc3FfMi43NS5iYg0KPiA+ID4NCj4gPiA+IGRpZmYgLS1naXQN
-Cj4gPiA+IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9kbnNtYXNxL2Ruc21hc3Ev
-cGFyYWxsZWwtbWFrZS5wYXRjDQo+ID4gPiBoDQo+ID4gPiBiL21ldGEtbmV0d29ya2luZy9yZWNp
-cGVzLXN1cHBvcnQvZG5zbWFzcS9kbnNtYXNxL3BhcmFsbGVsLW1ha2UucGF0Yw0KPiA+ID4gaA0K
-PiA+ID4gZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gPiBpbmRleCA2ZDViNzIyLi4wMDAw
-MDAwDQo+ID4gPiAtLS0NCj4gPiA+IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9k
-bnNtYXNxL2Ruc21hc3EvcGFyYWxsZWwtbWFrZS5wYXRjDQo+ID4gPiBoDQo+ID4gPiArKysgL2Rl
-di9udWxsDQo+ID4gPiBAQCAtMSwxOSArMCwwIEBADQo+ID4gPiAtVGhlIGRuc21hc3EgdGFyZ2V0
-IGRlcGVuZHMgb24gLmNvbmZpZ3VyZWQgYW5kICQob2JqcykuIC5jb25maWd1cmVkIGRvZXMgYW4g
-cm0gLS1mDQo+ICouby4NCj4gPiA+IFlldCB0aGUgb25seSB0aGluZyB0ZWxsaW5nIG1ha2UgdG8g
-YnVpbGQgdGhlIC5jb25maWd1cmVkIHRhcmdldA0KPiA+ID4gYmVmb3JlIC10aGUgJChvYmpzKSB0
-YXJnZXQgd2FzIHRoZSBvcmRlciBvZiB0aGUgZGVwZW5kZW5jaWVzIG9mIHRoZQ0KPiA+ID4gZG5z
-bWFzcSB0YXJnZXQuIFdlIC1jYW4ndCByZWx5IG9uIHRoYXQgb3JkZXIgd2hlbiBkb2luZyBhIHBh
-cmFsbGxlbCBtYWtlIGJ1aWxkLCBzbyBhZGQNCj4gYW4gZXhwbGljaXQgLXJ1bGUgdG8gZW5mb3Jj
-ZSB0aGF0IG9yZGVyLg0KPiA+ID4gLQ0KPiA+ID4gLVNpZ25lZC1vZmYtYnk6IENocmlzdG9waGVy
-IExhcnNvbiA8Y2hyaXNfbGFyc29uQG1lbnRvci5jb20+DQo+ID4gPiAtVXBzdHJlYW0tc3RhdHVz
-OiBQZW5kaW5nDQo+ID4gPiAtDQo+ID4gPiAtLS0tIGRuc21hc3EtMi42OC5vcmlnL01ha2VmaWxl
-DQo+ID4gPiAtKysrIGRuc21hc3EtMi42OC9NYWtlZmlsZQ0KPiA+ID4gLUBAIC0xMzksNiArMTM5
-LDggQEAgYmxvYXRjaGVjayA6ICQoQlVJTERESVIpL2Ruc21hc3FfYmFzZWxpbg0KPiA+ID4gLQlA
-cm0gLWYgKi5vDQo+ID4gPiAtCUB0b3VjaCAkQA0KPiA+ID4gLQ0KPiA+ID4gLSskKG9ianMpOiAu
-Y29uZmlndXJlZA0KPiA+ID4gLSsNCj4gPiA+IC0gJChvYmpzOi5vPS5jKSAkKGhkcnMpOg0KPiA+
-ID4gLQlsbiAtcyAkKHRvcCkvJChTUkMpLyRAIC4NCj4gPiA+IGRpZmYgLS1naXQgYS9tZXRhLW5l
-dHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2Ruc21hc3EvZG5zbWFzcV8yLjcyLmJiDQo+ID4gPiBi
-L21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvZG5zbWFzcS9kbnNtYXNxXzIuNzIuYmIN
-Cj4gPiA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPiA+ID4gaW5kZXggYmQ1OTE5NC4uMDAw
-MDAwMA0KPiA+ID4gLS0tIGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9kbnNtYXNx
-L2Ruc21hc3FfMi43Mi5iYg0KPiA+ID4gKysrIC9kZXYvbnVsbA0KPiA+ID4gQEAgLTEsMTAgKzAs
-MCBAQA0KPiA+ID4gLXJlcXVpcmUgZG5zbWFzcS5pbmMNCj4gPiA+IC0NCj4gPiA+IC1TUkNfVVJJ
-ICs9ICJcDQo+ID4gPiAtICAgIGZpbGU6Ly9wYXJhbGxlbC1tYWtlLnBhdGNoIFwNCj4gPiA+IC0g
-ICAgZmlsZTovL2x1YS5wYXRjaCBcDQo+ID4gPiAtIg0KPiA+ID4gLQ0KPiA+ID4gLVNSQ19VUklb
-ZG5zbWFzcS0yLjcyLm1kNXN1bV0gPSAiY2Y4MmY4MWNmMDlhZDNkNDc2MTI5ODUwMTIyNDA0ODMi
-DQo+ID4gPiAtU1JDX1VSSVtkbnNtYXNxLTIuNzIuc2hhMjU2c3VtXSA9DQo+ID4gPiAiNjM1ZjFi
-NDc0MTdkMTdjZjMyZTQ1Y2ZjZmQwMjEzYWMzOWZkMDk5MTg0NzlhMjUzNzNiYTliMmNlNGFkYzA1
-ZCINCj4gPiA+IC0NCj4gPiA+IGRpZmYgLS1naXQgYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1z
-dXBwb3J0L2Ruc21hc3EvZG5zbWFzcV8yLjc1LmJiDQo+ID4gPiBiL21ldGEtbmV0d29ya2luZy9y
-ZWNpcGVzLXN1cHBvcnQvZG5zbWFzcS9kbnNtYXNxXzIuNzUuYmINCj4gPiA+IG5ldyBmaWxlIG1v
-ZGUgMTAwNjQ0DQo+ID4gPiBpbmRleCAwMDAwMDAwLi5hMTFhYWJiDQo+ID4gPiAtLS0gL2Rldi9u
-dWxsDQo+ID4gPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2Ruc21hc3Ev
-ZG5zbWFzcV8yLjc1LmJiDQo+ID4gPiBAQCAtMCwwICsxLDkgQEANCj4gPiA+ICtyZXF1aXJlIGRu
-c21hc3EuaW5jDQo+ID4gPiArDQo+ID4gPiArU1JDX1VSSSArPSAiXA0KPiA+ID4gKyAgICBmaWxl
-Oi8vbHVhLnBhdGNoIFwNCj4gPiA+ICsiDQo+ID4gPiArDQo+ID4gPiArU1JDX1VSSVtkbnNtYXNx
-LTIuNzUubWQ1c3VtXSA9ICJkOTlhYzEyNmQ0ZmU5MTBjNjc5ZDg4NDMwNTU5NjY5YiINCj4gPiA+
-ICtTUkNfVVJJW2Ruc21hc3EtMi43NS5zaGEyNTZzdW1dID0NCj4gPiA+ICJmODI1MmMwYTBiYTE2
-MmMyY2Q0NWY4MTE0MGM3YzE3Y2M0MGE1ZmNhMmI4NjlkMWE0MjA4MzViNzRhY2FkMjk0Ig0KPiA+
-ID4gKw0KPiA+ID4gLS0NCj4gPiA+IDEuOC40LjINCj4gPg0KPiAtLQ0KPiAtSm9lIE1hY0RvbmFs
-ZC4NCj4gOndxDQo=
+--vEao7xgI/oilGqZ+
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+[Re: [oe] [meta-networking][PATCH] iftop: 1.0pre2 -> 1.0pre4] On 15.09.15 (=
+Tue 13:17) Khem Raj wrote:
+
+>=20
+> > On Sep 15, 2015, at 10:24 AM, Joe MacDonald <Joe_MacDonald@mentor.com> =
+wrote:
+> >=20
+> > [Re: [oe] [meta-networking][PATCH] iftop: 1.0pre2 -> 1.0pre4] On 15.09.=
+15 (Tue 09:52) Khem Raj wrote:
+> >=20
+> >> On Tue, Sep 15, 2015 at 1:52 AM, Kang Kai <Kai.Kang@windriver.com> wro=
+te:
+> >>> Got it.
+> >>>=20
+> >>> For for iftop, it just update licensing text.
+> >>>=20
+> >>> ----------------------------
+> >>> revision 1.3
+> >>> date: 2014/01/01 14:50:05;  author: pdw;  state: Exp;  lines: +7 -8
+> >>> Update to licensing text.  Patch by Robert Scheck <robert@fedoraproje=
+ct.org>
+> >>> ----------------------------
+> >>>=20
+> >>=20
+> >> what was updated in essence is important here not logs
+> >=20
+> > Yeah, I had hoped that would've come through in either the earlier link
+> > or my referencing it here.  I inspected the change myself and the
+> > changes are limited to replacing 'library' with 'lesser' and the street
+> > address of the FSF in the GPL text, which isn't surprising, but that's
+> > really the information that should have been communicated in the commit
+> > log itself.
+>=20
+> =E2=80=98library' GPL ( LGPL ) and =E2=80=98Lesser' GPL ( LGPL ) are they=
+ same ? I think we need to find more
+
+I don't remember exactly when it happened but I know it was a general
+shift in the FSF to change the language for LGPL to mean "lesser" rather
+than "library" in the early 2000s.  The thinking at the time was that
+"library" implied the license would only apply to shared libraries due
+to the wording, when really the intent was to be more BSD-ish.
+
+In this case, though, the question isn't relevant because the change to
+the license is actually the GPLv2 one which contains a reference to LGPL
+by name (formerly library but now lesser).  The current text in Kai's
+update is the text that comes from the FSF website when you look at the
+GPLv2 license.  The package and the license is GPLv2, though, not LGPL,
+so the semantics of that change don't matter.
+
+In general I agree that Kai's commit log (and subsequent follow-up)
+aren't sufficient at all, but I was feeling bad about all of the
+back-and-forth with Wind River's China office lately and thought I'd go
+the extra distance to do his research for him and merge the patch if
+possible.
+
+-J.
+
+>=20
+> >=20
+> > --=20
+> > -Joe MacDonald.
+> > :wq
+>=20
+
+--=20
+-Joe MacDonald.
+:wq
+
+--vEao7xgI/oilGqZ+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJV+XDnAAoJEEn8ffcsOfaWaSoIAMhV5N+B33tVwQguYVOjqted
+WgAQSNNVBMw7vdt5TIzD7+qlyzdpgYbHUZtYvnPCqVTvJ7SQCHv4wrYOV7fVw1wT
+oNAl1CiolwpyGQE675HvMN/E/xPviCQ9TONfXfmkUBH9QooZ4RPc0HrAMUhl/h8E
+juPoKDGAnGw9XMuy+RWV4ueaGTEtGeZZb55MZUuLZ0Q8dIoH1+QtWBiXdxT7rikN
+6y0kZh1VPfbXQfrfzgtBW+nKOAxlG9ryhNoT2sXRVYwW5sfmUp/w5yLjUQmKIz6+
+J5om+l56QZsMQG/UnuqVZ57alPOXa5vuQTBlwIP5JfJL2SxgQQliswrsmUp+9ck=
+=uQzy
+-----END PGP SIGNATURE-----
+
+--vEao7xgI/oilGqZ+--
