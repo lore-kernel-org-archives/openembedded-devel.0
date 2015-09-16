@@ -1,40 +1,34 @@
-Return-Path: <clopez@igalia.com>
-Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
-	by mail.openembedded.org (Postfix) with ESMTP id 15F1C60053
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id B90C572A78
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2015 14:08:37 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A2D5BABcd/lV/5tjdVtdGQEBAYMHgT2FSrdiDodyAoE9OBQBAQEBAQEBgQpBA4NgAQEEeBELGAkWDwkDAgECAUUTBgICiC4ByioBAQgCIIZzhH2FFBeEFQEElV6CSYFdiF6bER8BQ4JDgUA8M4MXhxMBAQE
-X-IPAS-Result: A2D5BABcd/lV/5tjdVtdGQEBAYMHgT2FSrdiDodyAoE9OBQBAQEBAQEBgQpBA4NgAQEEeBELGAkWDwkDAgECAUUTBgICiC4ByioBAQgCIIZzhH2FFBeEFQEElV6CSYFdiF6bER8BQ4JDgUA8M4MXhxMBAQE
-X-IronPort-AV: E=Sophos;i="5.17,539,1437429600"; 
-	d="asc'?scan'208";a="23568561"
-Received: from fanzine.igalia.com ([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 16 Sep 2015 16:08:37 +0200
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1ZcDO1-00065d-4b
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2015 16:08:37 +0200
-Received: from fanzine.local.igalia.com ([192.168.10.13] helo=[10.76.0.26])
-	by mail.igalia.com with esmtps 
-	(Cipher TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16) (Exim)
-	id 1ZcDO0-0007qA-Sz for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2015 16:08:36 +0200
-To: openembedded-devel@lists.openembedded.org
-references: <1442321402-22469-1-git-send-email-clopez@igalia.com>
-	<1442321402-22469-4-git-send-email-clopez@igalia.com>
-	<CAMKF1sqRmW0WYzAyusDEW47onz-h9W0tZ-sYWyqp28=u3fbzgQ@mail.gmail.com>
-From: Carlos Alberto Lopez Perez <clopez@igalia.com>
-openpgp: id=B5D2B50BC48EC7F1EE90D9AB965089CE6B95F882;
-	url=http://key.neutrino.es
-organization: Igalia S.L.
-message-id: <55F977E4.3030202@igalia.com>
-Date: Wed, 16 Sep 2015 16:08:36 +0200
-user-agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:38.0) Gecko/20100101 Icedove/38.0
-mime-version: 1.0
-in-reply-to: <CAMKF1sqRmW0WYzAyusDEW47onz-h9W0tZ-sYWyqp28=u3fbzgQ@mail.gmail.com>
-Subject: Re: [meta-browser][PATCH 3/3] chromium: Rework the evaluation of the Wayland feature.
+	Wed, 16 Sep 2015 14:15:13 +0000 (UTC)
+Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
+	by relay1.mentorg.com with esmtp 
+	id 1ZcDUP-0004eU-De from Joe_MacDonald@mentor.com ;
+	Wed, 16 Sep 2015 07:15:13 -0700
+Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
+	(147.34.97.39) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 16 Sep 2015 07:15:12 -0700
+Received: by burninator (Postfix, from userid 1000)	id 78FD358781C; Wed, 16
+	Sep 2015 10:14:04 -0400 (EDT)
+Date: Wed, 16 Sep 2015 10:14:04 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Otavio Salvador <otavio.salvador@ossystems.com.br>
+Message-ID: <20150916141404.GC7147@mentor.com>
+References: <1442339663-15101-1-git-send-email-fabio@bertux.com>
+	<20150915180454.GB10507@mentor.com>
+	<CAP9ODKou_0-g3pN6Kh4b9wT+3W5ZeJLP614FduLnxp456n4dvA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAP9ODKou_0-g3pN6Kh4b9wT+3W5ZeJLP614FduLnxp456n4dvA@mail.gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: Fabio Berton <fabio.berton@ossystems.com.br>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Qian Lei <qianl.fnst@cn.fujitsu.com>
+Subject: Re: [meta-networking][PATCH] lldpd: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,51 +42,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Sep 2015 14:08:38 -0000
-X-Groupsio-MsgNum: 57391
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature";
-	boundary="KFVgwp670tIod9fvCLLH4MbUD7QWrsKOH"
+X-List-Received-Date: Wed, 16 Sep 2015 14:15:13 -0000
+X-Groupsio-MsgNum: 57392
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="kVXhAStRUZ/+rrGn"
+Content-Disposition: inline
 
---KFVgwp670tIod9fvCLLH4MbUD7QWrsKOH
-Content-Type: text/plain; charset=windows-1252
+--kVXhAStRUZ/+rrGn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On 15/09/15 18:56, Khem Raj wrote:
-> On Tue, Sep 15, 2015 at 5:50 AM, Carlos Alberto Lopez Perez
-> <clopez@igalia.com> wrote:
->> +    CHROMIUM_BUILD_TYPE =3D d.getVar('CHROMIUM_BUILD_TYPE', True)
+Hi Otavio,
+
+I see there's a new version to look at but this is the thread where the
+discussion is happening that I want to continue, so here we go.  :-)
+
+[Re: [oe] [meta-networking][PATCH] lldpd: Add recipe] On 15.09.15 (Tue 17:3=
+3) Otavio Salvador wrote:
+
+> Hello Joe,
 >=20
-> Lets default to one if its not set by user and set a bb.note about
-> what is chosen may be Release as default is good.
+> On Tue, Sep 15, 2015 at 3:04 PM, Joe MacDonald <Joe_MacDonald@mentor.com>=
+ wrote:
+> > [[oe] [meta-networking][PATCH] lldpd: Add recipe] On 15.09.15 (Tue 14:5=
+4) Fabio Berton wrote:
+> >
+> >> From: Fabio Berton <fabio.berton@ossystems.com.br>
+> >>
+> >> lldpd is a 802.1AB implementation, a L2 network discovery protocol.
+> >> It also supports CDP, EDP and various other protocols.
+> >
+> > I haven't looked at this in great detail yet, but it appears like it
+> > would provide the same functionality as lldpad, already in
+> > meta-networking:
+> >
+> > commit 6781f9b5dc60bbd39727aeaa74c13dd31eb73838
+> > Author: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> > Date:   Thu Dec 11 17:36:20 2014 +0800
+> >
+> >     lldpad: Add new recipe
+> >
+> >     LLDPAD contains the Linux user space daemon and configuration tool =
+for
+> >     Intel LLDP Agent with Enhanced Ethernet support for the Data Center.
+> >
+> >     Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> >     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> >
+> > I've no objection to carrying two different implementations,
+> > particularly if one is more complete than the other or if one is more
+> > actively developed, but I do have a couple of requests for you given
+> > that you're the second one on the scene.
 >=20
+> It seems the lldpd is way more actively maintained. We have a customer
+> using this in an environment with some thousands of network devices
+> with great success and we wished to upstream the recipe and avoid
+> maintaining a closed recipe for no reason.
 
-It already defaults to Release. The first patch in the series does that
-in chromium.inc
+I'm good with that.  Coming from a carrier background I know that
+frequent updates does not necessarily mean more stable, but actively
+developed with real-world users is convincing enough for me to merge
+this.
 
+> >    - Can you update your recipe (and the other, if necessary) to provide
+> >      an appropriate PROVIDES / CONFLICTS variable?
+>=20
+> I am not sure we should. Being two alternatives nothing blocks someone
+> to install both.
 
---KFVgwp670tIod9fvCLLH4MbUD7QWrsKOH
+I thought about that, but the question in my mind is does it make sense
+to install both?  If they both tried to start up at boot via
+initscripts/systemd, would they conflict with each other or do they
+manage that gracefully?  I really don't know.
+
+> To be honest, maybe this one could replace the old one for
+> meta-network future users, if Qian Lei agrees.
+
+I'd really like that, if it turns out lldpad is a reasonable subset of
+lldpd functionality.
+
+Either way I'll take a look at the latest patch set and if there's
+anything specific in there I have to comment on, I will, otherwise we'll
+give everyone else on the list a bit of time to respond and then make a
+call about the specifics of merging this.
+
+--=20
+-Joe MacDonald.
+:wq
+
+--kVXhAStRUZ/+rrGn
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-Comment: You can fetch my GnuPG key from http://key.neutrino.es
+Version: GnuPG v1
 
-iQIcBAEBCgAGBQJV+XfkAAoJEJZQic5rlfiC8dsP/jcJ2GefPhJhWUEt921lm6eO
-XeUIHQ+X1aLeEDZ9Mdglg9oKiHDZSv6MZ1WY0Tt9s9PSIR/pzt5ObZIAxu6yRMnA
-RiKFwbVJ5Ph96M7ha42jro/fhh3vBM3BVnaLz0qEVSe4J2kOA6bVMdCGFSJ0jwhO
-+8A7gCRuCj7lBWY2KRGQ7YZBVSFCh7ngP5XENmOmPUSAxk6U2ZxyvoLwVbwSBdji
-PbvJBx7R/+g7ia4S2EaR910cZa3UpEsBpeJDto28KCvpwQ0Qs49Tv/+p93cnEhr8
-t/935iIPzYsygmRbc2MlKJy6CGWIEyMPqwv4SZBDI5sb9GJXPHui5yEadyo/lQGr
-6iNchc7ClXRnlri+tbkbtPBaXDl51Qir5cSOpj+3l73iwZqBN1DgzdfB5Em9vfUu
-L8KweP229pmJr48V2zmrInFLeB49cKhGBgqzuVbLYp3PuiSlLPottAQ7r4HO+bHr
-CjBThBBdsmSYJNoBIZuVqZ/jY6w7pj4/Ha8miGM4POttnFGbpmOHspxU3iTexiFF
-B/mMRBMGfVrxuDyyhZ6O2xNUqeaMUx8l0IOX6YkC4d1LGiaW6ZHQ8DqEyNjgtsMZ
-FtjKqKdCY3DckADpVYLlShNxA4PHvpKmqZS1weDU+b5ZBUUGMDL5VFTL1S1LjORN
-UPAD0/DHskKuqgwbLB21
-=pr1z
+iQEcBAEBAgAGBQJV+XksAAoJEEn8ffcsOfaWGLEIANIl22qJOT/uru1pwHjRw8Ph
+n6vYmoKWxSN3Dwk2LmzdWRhKrBuZm0kOOqDOGke1ChBd2m6SBceA2hbWBh5GazHC
+1AQCfMw40qzPhSD4vNLybeQoFpbMungqjOHy+tW2pFoC/48gLK6fIP7UWftBYkTw
+q07Ffc3M2XS3Tapdq8baJidBV4MixBzsh1ONYVHlcKeTCA0cRhLdGCP/Dr1ymdyf
+dlAqZ/sK+7lgpLBe+Yu/0H9/VOdElORKNO0w0uXWBf2YocngLW0sasmDY9HBiGzx
+zhDaw3aM8mAwOf7o3MOvzZdon+NK6S5v2C4fdiEfZsW571jsyK4qCzYt7s/TcwQ=
+=Z9NZ
 -----END PGP SIGNATURE-----
 
---KFVgwp670tIod9fvCLLH4MbUD7QWrsKOH--
+--kVXhAStRUZ/+rrGn--
