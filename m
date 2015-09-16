@@ -1,36 +1,35 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
-	[209.85.213.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 96C567404E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-io0-f177.google.com (mail-io0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 482A4756C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2015 16:11:27 +0000 (UTC)
-Received: by igbkq10 with SMTP id kq10so38238894igb.0
+	Wed, 16 Sep 2015 20:15:06 +0000 (UTC)
+Received: by iofh134 with SMTP id h134so636048iof.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2015 09:11:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=0uqOEfUjXQbczhKUzuf1eMOfmGXUm5eZRDtdxoPfcXU=;
-	b=jeCkXd7S6AZVYN/882p8NYTRS8lmooegG/aKRxMhw5GBMoWiSDq5GW8eFSICVe5rtm
-	qJaMwVoVVnGYm8pMoFodk1fTniNBY73EtAWYqnr/4Kc/mCK17GuFmO40rNpOeYFALZ8E
-	v3Lopwb9MfY3A92PHl7z1YKyhy4DuKmNPnJF102dFRncUg+C1V2puiwAZuRBKGflt8To
-	TrWQl3A6BV1pnfqyRGAda6/tdqjMUFhZlz1mYwe5USLcbZ0YmO0V5jLAfw9pmaaj+qnh
-	krq9AA5Fz4K45MQb1e1optplV+BOIWo2Wr+ArNHTpaD42OmRfJ8EWEybsONhkcWb+01u
-	OnAw==
+	Wed, 16 Sep 2015 13:15:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=lQWy+e8SJShy8tQ6DiC4+KDticQzAhviK7uSDOwNbPA=;
+	b=dh13jeEMpKdMDc7symUb7z7t0IHLrnnZFh5z7B0KwRpzrAw5c6wwc3zmXk4Q7oA38U
+	3TWOdIRrSfXeDPZ6kdhILP8WCCZdSHKcbAYugEwWS7u4mg+SMRkmtFw1bUazf+yRhej9
+	L4FuJJAgoxwRXw7smq+aw7lsYjLP3QVOsnH6TqpV/2gn0+fpZ2SSj1YQViIUOoVd5e+s
+	sPM644lVjEa8Ual0R6er59ALIzzyEtMtNp1yyL1G9MgDHg734rjkJbRh0fpx9Nm/El4j
+	czAK4f2coGk1X1QcaG7/2emt4l0KwlqUWpC7tSxaBCFlLqgKpAvAVFQml+yQ7Mnw0pPk
+	467Q==
+X-Received: by 10.107.34.149 with SMTP id i143mr54975ioi.195.1442434507157;
+	Wed, 16 Sep 2015 13:15:07 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.50.111.113 with SMTP id ih17mr4656406igb.64.1442419887317;
-	Wed, 16 Sep 2015 09:11:27 -0700 (PDT)
-Received: by 10.36.98.5 with HTTP; Wed, 16 Sep 2015 09:11:27 -0700 (PDT)
-In-Reply-To: <1442414158-15694-6-git-send-email-jussi.kukkonen@intel.com>
-References: <1442414158-15694-1-git-send-email-jussi.kukkonen@intel.com>
-	<1442414158-15694-6-git-send-email-jussi.kukkonen@intel.com>
-Date: Wed, 16 Sep 2015 18:11:27 +0200
-Message-ID: <CALbNGRQ2MfqSAjC7usaQ+c6HAPJi0q-48j0eWc+=gtfxADHAsQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 5/5] xfce4-settings: recommend adwaita, not gnome-icon-theme
+Received: by 10.107.142.130 with HTTP; Wed, 16 Sep 2015 13:14:37 -0700 (PDT)
+In-Reply-To: <55F977E4.3030202@igalia.com>
+References: <1442321402-22469-1-git-send-email-clopez@igalia.com>
+	<1442321402-22469-4-git-send-email-clopez@igalia.com>
+	<CAMKF1sqRmW0WYzAyusDEW47onz-h9W0tZ-sYWyqp28=u3fbzgQ@mail.gmail.com>
+	<55F977E4.3030202@igalia.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 16 Sep 2015 13:14:37 -0700
+Message-ID: <CAMKF1spB0fDhZfDcvoDwUMYow9hJq-OknnksHbV=kMyzokEQog@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH 3/3] chromium: Rework the evaluation of the Wayland feature.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,47 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Sep 2015 16:11:29 -0000
+X-List-Received-Date: Wed, 16 Sep 2015 20:15:07 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 16, 2015 at 4:35 PM, Jussi Kukkonen
-<jussi.kukkonen@intel.com> wrote:
-> RRECOMMEND adwaita-icon-theme instead of gnome-icon-theme (as latter
-> is removed from oe-core).
+On Wed, Sep 16, 2015 at 7:08 AM, Carlos Alberto Lopez Perez
+<clopez@igalia.com> wrote:
+> On 15/09/15 18:56, Khem Raj wrote:
+>> On Tue, Sep 15, 2015 at 5:50 AM, Carlos Alberto Lopez Perez
+>> <clopez@igalia.com> wrote:
+>>> +    CHROMIUM_BUILD_TYPE = d.getVar('CHROMIUM_BUILD_TYPE', True)
+>>
+>> Lets default to one if its not set by user and set a bb.note about
+>> what is chosen may be Release as default is good.
+>>
 >
-> Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
-> ---
->  meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> It already defaults to Release. The first patch in the series does that
+> in chromium.inc
 >
-> diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb =
-b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
-> index 25fa292..1a7fcb5 100644
-> --- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
-> +++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
-> @@ -30,6 +30,6 @@ FILES_${PN} +=3D " \
->      ${datadir}/xfce4 \
->  "
+
+OK I did not see it first time.
+
 >
-> -RRECOMMENDS_${PN} +=3D "gnome-icon-theme"
-> +RRECOMMENDS_${PN} +=3D "adwaita-icon-theme"
->  RRECOMMENDS_${PN} +=3D "${@base_contains('DISTRO_FEATURES','alsa','libca=
-nberra-alsa','',d)}"
->  RRECOMMENDS_${PN} +=3D "${@base_contains('DISTRO_FEATURES','pulseaudio',=
-'libcanberra-pulse','',d)}"
 > --
-> 2.1.4
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
-Just a note on this one for early testers: It will cause missing icons
-because xfce-settings expects gnome icons by default. So for early
-testers be prepared.
-
-I will send a follow up on this one because I am the one to blame: My
-last commit on xfce4-settings hid the patch setting gnome icons as
-default.
-
-So:
-
-Acked-By: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
 
