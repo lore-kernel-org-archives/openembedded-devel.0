@@ -1,24 +1,24 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A5E0360053
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 10DCB60053
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2015 05:35:23 +0000 (UTC)
+	Wed, 16 Sep 2015 05:55:51 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8G5ZNPu008028
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t8G5toWW019334
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Sep 2015 22:35:23 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.235.1;
-	Tue, 15 Sep 2015 22:35:22 -0700
-From: <wenzong.fan@windriver.com>
+	Tue, 15 Sep 2015 22:55:51 -0700 (PDT)
+Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.235.1; Tue, 15 Sep 2015 22:55:50 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 16 Sep 2015 01:35:21 -0400
-Message-ID: <1442381721-59673-1-git-send-email-wenzong.fan@windriver.com>
+Date: Wed, 16 Sep 2015 13:56:00 +0800
+Message-ID: <1442382960-16294-1-git-send-email-jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] rsyslog: fix ptest
+Subject: [PATCH] xfce4-pulseaudio-plugin: add packageconfig for libnotify
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,83 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Sep 2015 05:35:25 -0000
+X-List-Received-Date: Wed, 16 Sep 2015 05:55:54 -0000
 Content-Type: text/plain
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+From: Jackie Huang <jackie.huang@windriver.com>
 
-After rsyslog updated to 7.6.1, ptest fails to build & run since the
-serial-tests config patch was dropped:
+Add PACKAGECONFIG for libnotify and disable it by default
+to avoid the QA issue:
 
- - rsyslog-use-serial-tests-config-needed-by-ptest.patch
+WARNING: QA Issue: xfce4-pulseaudio-plugin rdepends on libnotify, but it isn't a build dependency? [build-deps]
 
-This patch involved serial test harness:
-
- + AM_INIT_AUTOMAKE([serial-tests])
-
-Which is deprecated in favour of parallel test harness. Automake
-generated a parallel test harness by default. It features automatic
-collection of the test scripts output in .log files ...
-
-More details please refer to:
-
- http://www.gnu.org/software/automake/manual/html_node/Parallel-Test-Harness.html
-
-To enable the ptest with new changes, we should:
-
-* add target 'buildtest-TESTS' for building test components;
-* fix 'top_srcdir' and install required script 'test-driver';
-* run testcases with target 'check-TESTS'.
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest | 2 +-
- meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb  | 8 ++++++--
- 2 files changed, 7 insertions(+), 3 deletions(-)
+ .../recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.3.bb  | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest b/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest
-index 38a1d1b..3770a75 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest
-@@ -1,3 +1,3 @@
- #!/bin/sh
- #
--make -C tests -k runtest-TESTS
-+make -C tests -k check-TESTS
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb
-index 15b0f29..b7a8140 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb
-@@ -70,7 +70,7 @@ PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,valgrind,"
+diff --git a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.3.bb b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.3.bb
+index f9ad32f..9a95cde 100644
+--- a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.3.bb
++++ b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.3.bb
+@@ -11,4 +11,7 @@ DEPENDS += "pulseaudio"
+ SRC_URI[md5sum] = "13a47ba5a72c16fb06f7e1cc89858cc7"
+ SRC_URI[sha256sum] = "e82836bc8cf7d905b4e60d43dc630ba8e32dea785989700c71d4aeee9f583b33"
  
- TESTDIR = "tests"
- do_compile_ptest() {
--    sed -i 's/\(^buildtest-TESTS: \)/\1 $(check_PROGRAMS) /' ${TESTDIR}/Makefile
-+    echo 'buildtest-TESTS: $(check_PROGRAMS)' >> ${TESTDIR}/Makefile
-     oe_runmake -C ${TESTDIR} buildtest-TESTS
- }
- 
-@@ -82,8 +82,9 @@ do_install_ptest() {
-     # do NOT need to rebuild Makefile itself
-     sed -i 's/^Makefile:.*$/Makefile:/' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
- 
--    # fix the srcdir
-+    # fix the srcdir, top_srcdir
-     sed -i 's,^\(srcdir = \).*,\1${PTEST_PATH}/tests,' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
-+    sed -i 's,^\(top_srcdir = \).*,\1${PTEST_PATH}/tests,' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
- 
-     # valgrind is not compatible with arm and mips,
-     # so remove related test cases if there is no valgrind.
-@@ -91,6 +92,9 @@ do_install_ptest() {
-         sed -i '/udp-msgreduc-/d' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
-     fi
- 
-+    # install test-driver
-+    install -m 644 ${S}/test-driver ${D}${PTEST_PATH}/${TESTDIR}
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[libnotify] = "--enable-libnotify,--disable-libnotify,libnotify"
 +
-     # install necessary links
-     install -d ${D}${PTEST_PATH}/tools
-     ln -sf ${sbindir}/rsyslogd ${D}${PTEST_PATH}/tools/rsyslogd
+ RRECOMMENDS_${PN} = "pavucontrol"
 -- 
 1.9.1
 
