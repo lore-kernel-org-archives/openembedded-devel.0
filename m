@@ -1,35 +1,41 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id A630773D27
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 649B376FDE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Sep 2015 05:58:06 +0000 (UTC)
-Received: by padhk3 with SMTP id hk3so10662989pad.3
+	Thu, 17 Sep 2015 06:54:32 +0000 (UTC)
+Received: by wiclk2 with SMTP id lk2so10138194wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2015 22:58:06 -0700 (PDT)
+	Wed, 16 Sep 2015 23:54:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=8AFa4sT4No/cztcPYuxp/YgasOIJOrQtY6IlBT8DbMo=;
-	b=tB2FuCMokkkcbdGyKiQ2uYSQoJnNZPNKxLwrYWPZDMUeyOzqKqZj1sIqY39do1oARN
-	FFd6cNAa3DpYVNRMQ3cxd14GofyFAy4/cNl9p5Qbr6kUz3t7369ep8HXH0pF1IiO67Fj
-	Z+h0h1hvReNTYW5I0jfcxcUBG2xg0gGeSpNczMa5nIbpqkoWIH7vNen58XcET3hdeF7i
-	ZbPmgbKaTjuW6ZmEeCHuyv31CWrY2IGi0OiUMQSzgc4vBv5KeLoxl8McTuE55E/48So1
-	j188HC4ZEeyihKk5QhgZ/NS8QwjLsoKoI5j22QV75Kuf7dzDRZonLD+s3vL+5pkgXemV
-	Fs9w==
-X-Received: by 10.68.114.34 with SMTP id jd2mr69529187pbb.94.1442469486504;
-	Wed, 16 Sep 2015 22:58:06 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=IP8NGEgXzadS+MGx3c42jUwR5T425sYXIjhvcfYXJeI=;
+	b=DDWYPGFTpvWg4yG5ExmsIt9xHSsTOTiiRUZ4ZK8AtKBi0Elj7JP9HBYzuUjxnPFWvp
+	e7wxojupOdsVNV9fdYrbL6Jj8QQAgCBtg7WRCyZ1YOGnDxyFLCQuIq8IRkEtgstJSHn/
+	JGRCuVFQZgrgM+K4jH1aWPjbgeeFhgJC9QfnQ2tockA0lzXiMjAlx+d/NHL9o4Ely82D
+	c6IIKdzkb7c81MeG68aJBNrcENlg37E7ZCm8+IQO53plhk/bIrksHzteKJ6g0+FUXBfV
+	X/Em4D15ksjLxArk51q/wUVibwh3d7RotlHC6/6WyCV4Z1icYNGWaFer5i2bvNQf3KzG
+	WQ0A==
+X-Received: by 10.180.75.243 with SMTP id f19mr26718961wiw.52.1442472873059;
+	Wed, 16 Sep 2015 23:54:33 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	j16sm1497921pbq.23.2015.09.16.22.58.04
+	az6sm8334537wib.12.2015.09.16.23.54.31
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 16 Sep 2015 22:58:04 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
+	Wed, 16 Sep 2015 23:54:31 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 17 Sep 2015 08:54:42 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Sep 2015 15:58:51 +1000
-Message-Id: <1442469531-30074-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 2.5.0
-Subject: [meta-oe][PATCH] libftdi: update to 1.2
+Message-ID: <20150917065442.GA2388@jama>
+References: <1442450491-14912-1-git-send-email-schnitzeltony@googlemail.com>
+	<1442450491-14912-2-git-send-email-schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+In-Reply-To: <1442450491-14912-2-git-send-email-schnitzeltony@googlemail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [PATCH 01/19] gvfs: remove invalid PACKAGECONFIG[cdda]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,33 +49,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2015 05:58:07 -0000
+X-List-Received-Date: Thu, 17 Sep 2015 06:54:33 -0000
+X-Groupsio-MsgNum: 57426
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="0OAP2g/MAC+5xKAE"
+Content-Disposition: inline
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- meta-oe/recipes-support/libftdi/{libftdi_1.1.bb => libftdi_1.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libftdi/{libftdi_1.1.bb => libftdi_1.2.bb} (85%)
+--0OAP2g/MAC+5xKAE
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.1.bb b/meta-oe/recipes-support/libftdi/libftdi_1.2.bb
-similarity index 85%
-rename from meta-oe/recipes-support/libftdi/libftdi_1.1.bb
-rename to meta-oe/recipes-support/libftdi/libftdi_1.2.bb
-index 44e040c..eb4d86c 100644
---- a/meta-oe/recipes-support/libftdi/libftdi_1.1.bb
-+++ b/meta-oe/recipes-support/libftdi/libftdi_1.2.bb
-@@ -14,8 +14,8 @@ DEPENDS = "libusb1"
- 
- SRC_URI = "http://www.intra2net.com/en/developer/${BPN}/download/${BPN}1-${PV}.tar.bz2"
- 
--SRC_URI[md5sum] = "b79a6356978aa8e69f8eecc3a720ff79"
--SRC_URI[sha256sum] = "c0b1af1a13e2c6682a1d8041e5b164a1e0d90267cd378bb51e059bd62f821e21"
-+SRC_URI[md5sum] = "89dff802d89c4c0d55d8b4665fd52d0b"
-+SRC_URI[sha256sum] = "a6ea795c829219015eb372b03008351cee3fb39f684bff3bf8a4620b558488d6"
- 
- S = "${WORKDIR}/${BPN}1-${PV}"
- 
--- 
-2.5.0
+On Thu, Sep 17, 2015 at 02:41:13AM +0200, Andreas M=FCller wrote:
+> Enabling cdda requires libcdio-paranoia not libcdio. libcdio-paranoia is =
+not
+> found in layer list so disable cdda.
 
+It wouldn't be the first case where PACKAGECONFIG requires dependency
+which cannot be satisfied, would you mind adding libcdio-paranoia to
+PACKAGECONFIG for cdda and keeping it by default disabled?
 
+Maybe with comment saying that for cdda you need to create/find
+libcdio-paranoia recipe.
+
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb b/meta-gnome/re=
+cipes-gnome/gvfs/gvfs_1.10.1.bb
+> index 7ed1bb5..2404fac 100644
+> --- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb
+> +++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb
+> @@ -1,13 +1,13 @@
+>  require gvfs.inc
+> =20
+>  DEPENDS =3D "libsoup-2.4 gnome-keyring glib-2.0 avahi gconf intltool-nat=
+ive"
+> -# optional: obexftp libcdio libimobiledevice=20
+> +# optional: obexftp libcdio-paranoia libimobiledevice
+> =20
+>  PR =3D "${INC_PR}.0"
+> =20
+>  # in case of gnome-disk-utility was alresdy built: avoid double files
+>  # afc is enabled when it detects libimobiledevice
+> -EXTRA_OECONF +=3D "--disable-gdu --disable-afc"
+> +EXTRA_OECONF +=3D "--disable-gdu --disable-afc --disable-cdda"
+> =20
+>  PACKAGES =3D+ "gvfsd-ftp gvfsd-sftp gvfsd-trash"
+> =20
+> @@ -31,4 +31,3 @@ PACKAGECONFIG[samba] =3D "--enable-samba --with-samba-i=
+ncludes=3D${STAGING_INCDIR} \
+>  PACKAGECONFIG[fuse] =3D "--enable-fuse, --disable-fuse, fuse"
+>  PACKAGECONFIG[archive] =3D "--enable-archive, --disable-archive, libarch=
+ive"
+>  PACKAGECONFIG[obexftp] =3D "--enable-obexftp, --disable-obexftp, bluez4 =
+expat"
+> -PACKAGECONFIG[cdda] =3D "--enable-cdda, --disable-cdda, libcdio"
+> --=20
+> 2.1.0
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--0OAP2g/MAC+5xKAE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlX6Y7EACgkQN1Ujt2V2gBzabwCeKxLD0Z/X9tJHtJKpvRT7NgpX
+WkkAn0ILOxs0lN5CWMVTtTpU4SBjuHbl
+=Gtb3
+-----END PGP SIGNATURE-----
+
+--0OAP2g/MAC+5xKAE--
