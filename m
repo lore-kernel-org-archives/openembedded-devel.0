@@ -1,40 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F9E776DF8
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 7838576DF8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Sep 2015 00:41:46 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so2925737wic.0
+	Thu, 17 Sep 2015 00:41:47 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so2877702wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2015 17:41:46 -0700 (PDT)
+	Wed, 16 Sep 2015 17:41:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=hZRhduxn8nXSjsP11sk9KGk6ZhtB9Gb+6R/3Zc8I2As=;
-	b=rBbXrk5deVhNQnNrHiNp5HxE0N3fTynSwqyBmeZv12oAvrdmI6rmwaxn280+N41kAN
-	B/1jvbEaItmZQEb1qFe9KAwGC1yidRb+6fJKxl3icpFWticwSbqZtA58KlUhbdMiglIe
-	3StNArUOlM6DAICujVglzLkkrJNrMhy451WHWd4lzdByNXqa9D6wc+97MRfGsaz+lPbQ
-	vkPo5HlN8t5Ma+nszFd41FnLZvMqDqd4h9vMysYUOfOEyH+9U6p7Coj7szf8o+oN1r3m
-	COITIDz5K9zCto6ykCP1lf0XeQsQoWDNP6shGfvjY8PbrojaT0MHgVWwl/SbFpJJfjA+
-	lufg==
-X-Received: by 10.180.12.195 with SMTP id a3mr23725458wic.71.1442450506113;
-	Wed, 16 Sep 2015 17:41:46 -0700 (PDT)
+	bh=o47jFMYWcoRAjU+bc3aplmTleYzClq0bTuC0wgUWN2M=;
+	b=nMlasjsU7s6PqwhzqkWYH9SjLvQ5DzVfH3FePXBiKH9ZYVguobJhrFQ15qVgwJJrTc
+	I4uJ/rwnybCDYLDs/gxgrZCJOaBJrRFNcvUpMeUdTOx/L5w11bQtAAMLbJ4p/cFGk+Y7
+	fg8CjEC9Grs3XVeeAGH4N3RBrIln9yXMS0OwCHcX38sGzg6GnL5J4DRcmyC6d+z39uN5
+	lmuvrsBhXSI7/9JIiIUAvyl9j6LWYK7aqGkc+6J0b2uSpkwHpKv+lzKnTcK7svIsJfGf
+	Gu7WKFcbsxASUczkEw+GRRLPGNppOHoJKIPN3ZgCNCxZPoqaqxchV6WXlYxSmcIDgg5D
+	dm1A==
+X-Received: by 10.180.89.41 with SMTP id bl9mr23859771wib.85.1442450507063;
+	Wed, 16 Sep 2015 17:41:47 -0700 (PDT)
 Received: from localhost.localdomain (p4FDF0F55.dip0.t-ipconnect.de.
 	[79.223.15.85]) by smtp.googlemail.com with ESMTPSA id
-	sd14sm393216wjb.36.2015.09.16.17.41.45
+	sd14sm393216wjb.36.2015.09.16.17.41.46
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 16 Sep 2015 17:41:45 -0700 (PDT)
+	Wed, 16 Sep 2015 17:41:46 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Sep 2015 02:41:16 +0200
-Message-Id: <1442450491-14912-5-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 17 Sep 2015 02:41:17 +0200
+Message-Id: <1442450491-14912-6-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.1.0
 In-Reply-To: <1442450491-14912-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1442450491-14912-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 04/19] libburn: initial add 1.4.0
+Subject: [PATCH 05/19] cdrkit: initial add 1.1.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,27 +54,95 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-multimedia/libburn/libburn_1.4.0.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/libburn/libburn_1.4.0.bb
+ meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb | 18 ++++++++
+ ...te-a-run-test-to-determine-order-of-bitfi.patch | 53 ++++++++++++++++++++++
+ 2 files changed, 71 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
+ create mode 100644 meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch
 
-diff --git a/meta-oe/recipes-multimedia/libburn/libburn_1.4.0.bb b/meta-oe/recipes-multimedia/libburn/libburn_1.4.0.bb
+diff --git a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
 new file mode 100644
-index 0000000..91fe693
+index 0000000..310a7b9
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/libburn/libburn_1.4.0.bb
-@@ -0,0 +1,11 @@
-+SUMMARY = "Library for reading, mastering and writing optical discs"
-+HOMEPAGE = "http://libburnia-project.org/"
++++ b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "CD/DVD command line tools"
++HOMEPAGE = "http://cdrkit.org/"
 +
 +LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b30d3b2750b668133fc17b401e1b98f8"
 +
-+SRC_URI = "http://files.libburnia-project.org/releases/${BPN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "82ff94bb04e78eac9b12c7546f005d6f"
-+SRC_URI[sha256sum] = "6c975abae4ae1f80e47fc5d1e235f85157f73e954c84627a5ef85d8b1b95ae94"
++# While writing download from cdrkit.org was broken so get sources from debian
++SRC_URI = " \
++    ${DEBIAN_MIRROR}/main/c/${BPN}/${BPN}_${PV}.orig.tar.gz \
++    file://0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch \
++"
++SRC_URI[md5sum] = "efe08e2f3ca478486037b053acd512e9"
++SRC_URI[sha256sum] = "d1c030756ecc182defee9fe885638c1785d35a2c2a297b4604c0e0dcc78e47da"
 +
-+inherit autotools pkgconfig
++inherit cmake
++
++DEPENDS = "libcap file"
++RDEPENDS_${PN} = "perl"
+diff --git a/meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch b/meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch
+new file mode 100644
+index 0000000..c9725cb
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch
+@@ -0,0 +1,53 @@
++From a702cd1bb5eba5a05d1098862b5b863a3f6dd558 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Thu, 10 Sep 2015 09:39:13 +0200
++Subject: [PATCH] do not create a run test to determine order of bitfields
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++taken from [1]
++
++Upstream-Status: Inappropriate [cross compile specific]
++
++[1] http://cgit.openembedded.org/openembedded/tree/recipes/cdrkit/cdrkit/xconfig.patch
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ include/CMakeLists.txt | 2 --
++ include/xconfig.h.in   | 6 +++++-
++ 2 files changed, 5 insertions(+), 3 deletions(-)
++
++diff --git a/include/CMakeLists.txt b/include/CMakeLists.txt
++index 99a69fd..e5ba8a7 100644
++--- a/include/CMakeLists.txt
+++++ b/include/CMakeLists.txt
++@@ -35,8 +35,6 @@ endif(VA_LIST_IS_ARRAY)
++ INCLUDE(TestBigEndian)
++ TEST_BIG_ENDIAN(WORDS_BIGENDIAN)
++ 
++-TRY_RUN(BITFIELDS_HTOL TEST_DUMMY ${CMAKE_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/test_BITFIELDS_HTOL.c)
++-
++ INCLUDE(CheckIncludeFiles)
++ 
++ #SET(CMAKE_REQUIRED_INCLUDES "/usr/include;/usr/local/include")
++diff --git a/include/xconfig.h.in b/include/xconfig.h.in
++index c130600..476c00b 100644
++--- a/include/xconfig.h.in
+++++ b/include/xconfig.h.in
++@@ -233,7 +233,11 @@
++ /* If using network byte order             */
++ #cmakedefine WORDS_BIGENDIAN
++ /* If high bits come first in structures   */
++-#cmakedefine BITFIELDS_HTOL
+++#ifdef WORDS_BIGENDIAN
+++#define BITFIELDS_HTOL
+++#else
+++#define BITFIELDS_LTOH
+++#endif
++ #define	HAVE_C_BIGENDIAN	/* Flag that WORDS_BIGENDIAN test was done */
++ #define	HAVE_C_BITFIELDS	/* Flag that BITFIELDS_HTOL test was done  */
++ 
++-- 
++2.1.0
++
 -- 
 2.1.0
 
