@@ -1,40 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 7838576DF8
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id AE29076FDE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Sep 2015 00:41:47 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so2877702wic.1
+	Thu, 17 Sep 2015 00:41:45 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so2877157wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2015 17:41:47 -0700 (PDT)
+	Wed, 16 Sep 2015 17:41:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=o47jFMYWcoRAjU+bc3aplmTleYzClq0bTuC0wgUWN2M=;
-	b=nMlasjsU7s6PqwhzqkWYH9SjLvQ5DzVfH3FePXBiKH9ZYVguobJhrFQ15qVgwJJrTc
-	I4uJ/rwnybCDYLDs/gxgrZCJOaBJrRFNcvUpMeUdTOx/L5w11bQtAAMLbJ4p/cFGk+Y7
-	fg8CjEC9Grs3XVeeAGH4N3RBrIln9yXMS0OwCHcX38sGzg6GnL5J4DRcmyC6d+z39uN5
-	lmuvrsBhXSI7/9JIiIUAvyl9j6LWYK7aqGkc+6J0b2uSpkwHpKv+lzKnTcK7svIsJfGf
-	Gu7WKFcbsxASUczkEw+GRRLPGNppOHoJKIPN3ZgCNCxZPoqaqxchV6WXlYxSmcIDgg5D
-	dm1A==
-X-Received: by 10.180.89.41 with SMTP id bl9mr23859771wib.85.1442450507063;
-	Wed, 16 Sep 2015 17:41:47 -0700 (PDT)
+	bh=DjGvXvpYFmaPn3xBnsor8xxXBTE9CwI5WYuBSk8/7iQ=;
+	b=WUzUnm/nYQSDaihL8Fv65yrQ2D0vOAIOJ/Hi4/XME/T4T0bmyJ3U5aqewl7Ii/WVUS
+	oA962NU788akQEbLPGC7J4Sp76ix0SDEnKhCDb6OL8RZx9t525i+YuA9UQ9EN8+GxAxM
+	dAlGg6RjmXGiq+eBWpK+tHI1sTsPrgwXV04QnAj7/jn9Jt4WwDrqNAnlqiFytAgQ/6bC
+	5cuKfbjd6fZlkDHMmj8bToD03cHgx0jJOvwIe8MU06jzdMBuXky3V9i0GGPUU8RNnp6Q
+	9KmgUxx77cxlpCphCUeZt/S/rICvdaOhRFf3SLPiniQsPO7AV9YeQQKjFoM3pucr+EWm
+	G+0A==
+X-Received: by 10.194.108.4 with SMTP id hg4mr28136663wjb.45.1442450505202;
+	Wed, 16 Sep 2015 17:41:45 -0700 (PDT)
 Received: from localhost.localdomain (p4FDF0F55.dip0.t-ipconnect.de.
 	[79.223.15.85]) by smtp.googlemail.com with ESMTPSA id
-	sd14sm393216wjb.36.2015.09.16.17.41.46
+	sd14sm393216wjb.36.2015.09.16.17.41.44
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 16 Sep 2015 17:41:46 -0700 (PDT)
+	Wed, 16 Sep 2015 17:41:44 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Sep 2015 02:41:17 +0200
-Message-Id: <1442450491-14912-6-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 17 Sep 2015 02:41:15 +0200
+Message-Id: <1442450491-14912-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.1.0
 In-Reply-To: <1442450491-14912-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1442450491-14912-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 05/19] cdrkit: initial add 1.1.11
+Subject: [PATCH 03/19] libcdio: update to 0.93
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,97 +52,44 @@ X-List-Received-Date: Thu, 17 Sep 2015 00:41:47 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Build test for recipes depending on libcdio:
+
+* gst-plugins-ugly_0.10.19.bb with PACAKGECONFIG += "cdio"
+* gstreamer1.0-plugins-ugly with PACAKGECONFIG += "cdio"
+* mpd
+
+xbmc was not tested it is blacklisted for a while
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb | 18 ++++++++
- ...te-a-run-test-to-determine-order-of-bitfi.patch | 53 ++++++++++++++++++++++
- 2 files changed, 71 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
- create mode 100644 meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch
+ .../libcdio/{libcdio_0.82.bb => libcdio_0.93.bb}                   | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-multimedia/libcdio/{libcdio_0.82.bb => libcdio_0.93.bb} (71%)
 
-diff --git a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-new file mode 100644
-index 0000000..310a7b9
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "CD/DVD command line tools"
-+HOMEPAGE = "http://cdrkit.org/"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b30d3b2750b668133fc17b401e1b98f8"
-+
-+# While writing download from cdrkit.org was broken so get sources from debian
-+SRC_URI = " \
-+    ${DEBIAN_MIRROR}/main/c/${BPN}/${BPN}_${PV}.orig.tar.gz \
-+    file://0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch \
-+"
-+SRC_URI[md5sum] = "efe08e2f3ca478486037b053acd512e9"
-+SRC_URI[sha256sum] = "d1c030756ecc182defee9fe885638c1785d35a2c2a297b4604c0e0dcc78e47da"
-+
-+inherit cmake
-+
-+DEPENDS = "libcap file"
-+RDEPENDS_${PN} = "perl"
-diff --git a/meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch b/meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch
-new file mode 100644
-index 0000000..c9725cb
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch
-@@ -0,0 +1,53 @@
-+From a702cd1bb5eba5a05d1098862b5b863a3f6dd558 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Thu, 10 Sep 2015 09:39:13 +0200
-+Subject: [PATCH] do not create a run test to determine order of bitfields
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+taken from [1]
-+
-+Upstream-Status: Inappropriate [cross compile specific]
-+
-+[1] http://cgit.openembedded.org/openembedded/tree/recipes/cdrkit/cdrkit/xconfig.patch
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ include/CMakeLists.txt | 2 --
-+ include/xconfig.h.in   | 6 +++++-
-+ 2 files changed, 5 insertions(+), 3 deletions(-)
-+
-+diff --git a/include/CMakeLists.txt b/include/CMakeLists.txt
-+index 99a69fd..e5ba8a7 100644
-+--- a/include/CMakeLists.txt
-++++ b/include/CMakeLists.txt
-+@@ -35,8 +35,6 @@ endif(VA_LIST_IS_ARRAY)
-+ INCLUDE(TestBigEndian)
-+ TEST_BIG_ENDIAN(WORDS_BIGENDIAN)
-+ 
-+-TRY_RUN(BITFIELDS_HTOL TEST_DUMMY ${CMAKE_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/test_BITFIELDS_HTOL.c)
-+-
-+ INCLUDE(CheckIncludeFiles)
-+ 
-+ #SET(CMAKE_REQUIRED_INCLUDES "/usr/include;/usr/local/include")
-+diff --git a/include/xconfig.h.in b/include/xconfig.h.in
-+index c130600..476c00b 100644
-+--- a/include/xconfig.h.in
-++++ b/include/xconfig.h.in
-+@@ -233,7 +233,11 @@
-+ /* If using network byte order             */
-+ #cmakedefine WORDS_BIGENDIAN
-+ /* If high bits come first in structures   */
-+-#cmakedefine BITFIELDS_HTOL
-++#ifdef WORDS_BIGENDIAN
-++#define BITFIELDS_HTOL
-++#else
-++#define BITFIELDS_LTOH
-++#endif
-+ #define	HAVE_C_BIGENDIAN	/* Flag that WORDS_BIGENDIAN test was done */
-+ #define	HAVE_C_BITFIELDS	/* Flag that BITFIELDS_HTOL test was done  */
-+ 
-+-- 
-+2.1.0
-+
+diff --git a/meta-oe/recipes-multimedia/libcdio/libcdio_0.82.bb b/meta-oe/recipes-multimedia/libcdio/libcdio_0.93.bb
+similarity index 71%
+rename from meta-oe/recipes-multimedia/libcdio/libcdio_0.82.bb
+rename to meta-oe/recipes-multimedia/libcdio/libcdio_0.93.bb
+index 8cf393d..f21f914 100644
+--- a/meta-oe/recipes-multimedia/libcdio/libcdio_0.82.bb
++++ b/meta-oe/recipes-multimedia/libcdio/libcdio_0.93.bb
+@@ -8,14 +8,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ DEPENDS = "ncurses"
+ 
+ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz"
+-SRC_URI[md5sum] = "1c29b18e01ab2b966162bc727bf3c360"
+-SRC_URI[sha256sum] = "1acb3de8e0927906ade7a34c5853173d3068b87b02dfba80d0bf11e47f0b5d39"
++SRC_URI[md5sum] = "d154476feaac5a7b5f180e83eaf3d689"
++SRC_URI[sha256sum] = "4972cd22fd8d0e8bff922d35c7a645be0db0ab0e7b3dfaecc9cd8272429d6975"
+ 
+ inherit autotools pkgconfig
+ 
+-EXTRA_OECONF = "ac_cv_member_struct_tm_tm_gmtoff=no --disable-rpath"
+-DEBUG_OPTIMIZATION_thumb = "-Os -fno-omit-frame-pointer -g"
+-
+ PACKAGES += "${PN}-utils"
+ 
+ FILES_${PN} = "${libdir}/${PN}${SOLIB}"
 -- 
 2.1.0
 
