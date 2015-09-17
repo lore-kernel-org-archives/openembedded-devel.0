@@ -1,40 +1,34 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 559CD76FEA
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 2750076E70
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Sep 2015 00:41:59 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so2881529wic.1
+	Thu, 17 Sep 2015 02:54:25 +0000 (UTC)
+Received: by pacex6 with SMTP id ex6so6611507pac.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2015 17:42:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=9sy//udRJFJgQ48dS5+ioiIHqbZavFJlUypBC8ly38g=;
-	b=OqyqWgaw9vmT+1O36uBLG/+3TKzhMhINN/fbh+gZ35yckEKouY341vCdhAvazZoBlY
-	OBt2GmQm7AWJIhNxIT76KCqCTvDYhZTrz+xCoA9raHwLpUxkWkG3yPlgO5Pd4SQC+RwA
-	V3f0dKMTH05BP+2tLHpf7q8WFNA/xBDuVAtdDwJ9YIjZvkubK7BLEfPpBrPhc/58QRyp
-	cBcyMI68IH6nE166v46fKYTKSMYrpl47d48G64uTkVP8OJvNXlDj6X843UBWjjJivh5J
-	UjHWB33E29FeCI8hAQnMb/q+gZCGj5JfDmB5f+IkU0gzkzA0nb+PZa0D0GhVOcaquxBQ
-	wgmg==
-X-Received: by 10.180.88.164 with SMTP id bh4mr1941963wib.18.1442450520039;
-	Wed, 16 Sep 2015 17:42:00 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF0F55.dip0.t-ipconnect.de.
-	[79.223.15.85]) by smtp.googlemail.com with ESMTPSA id
-	sd14sm393216wjb.36.2015.09.16.17.41.59
-	for <openembedded-devel@lists.openembedded.org>
+	Wed, 16 Sep 2015 19:54:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=CaIaH3vxiymZtzjhgMkJ7sKq46oV+TgJLyozs1zlF5Q=;
+	b=u/wNwvSJcYtW/4hlpfSc/AsBb+H1SfkjrOLOR9B9lhWA0TPJS5qXttc42JOgf04DVj
+	7sJNNrr8lmMfISdkTlC5DUwf63E8qyzue53GaxMwMDbEqBfLwFNzhDPsO65crVKpkxCk
+	pgiCB8RbJmD7uPB1IX7FwS2KabAYNMhd7/8bZjlFLHpNNylxhZ2mdztqgAlGGwJrx9Fc
+	KisSQJIoUU0P6ZUxpkdGe2dfmJvXG4QaWeNiPChKW3mNxci9wjFkuucMyRbowHuAGdgC
+	DhKjaVVGftwAswn52kV3unEcmP+pz6nH1fz9bEqwTrey8Jw52W94w9K0us890UfY/TW+
+	Onrg==
+X-Received: by 10.69.19.202 with SMTP id gw10mr10323492pbd.60.1442458465523;
+	Wed, 16 Sep 2015 19:54:25 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id bz4sm786495pbd.6.2015.09.16.19.54.24
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 16 Sep 2015 17:41:59 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Wed, 16 Sep 2015 19:54:24 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Sep 2015 02:41:31 +0200
-Message-Id: <1442450491-14912-20-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1442450491-14912-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1442450491-14912-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [PATCH 19/19] xfce4-settings: make Adwaita default icon theme
+Date: Thu, 17 Sep 2015 12:55:16 +1000
+Message-Id: <1442458516-8989-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 2.5.0
+Subject: [meta-qt5][PATCH] libconnman-qt5: update to 1.0.97
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,29 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2015 00:42:00 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 17 Sep 2015 02:54:26 -0000
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- .../xfce4-settings/files/0001-xsettings.xml-Set-default-themes.patch    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-qt/libconnman-qt/libconnman-qt5_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.xml-Set-default-themes.patch b/meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.xml-Set-default-themes.patch
-index 8498d42..67df05a 100644
---- a/meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.xml-Set-default-themes.patch
-+++ b/meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.xml-Set-default-themes.patch
-@@ -24,7 +24,7 @@ index 65ba1ee..9efb3cd 100644
- -    <property name="ThemeName" type="empty"/>
- -    <property name="IconThemeName" type="empty"/>
- +    <property name="ThemeName" type="string" value="Xfce"/>
--+    <property name="IconThemeName" type="string" value="gnome"/>
-++    <property name="IconThemeName" type="string" value="Adwaita"/>
-      <property name="DoubleClickTime" type="int" value="400"/>
-      <property name="DoubleClickDistance" type="int" value="5"/>
-      <property name="DndDragThreshold" type="int" value="8"/>
+diff --git a/recipes-qt/libconnman-qt/libconnman-qt5_git.bb b/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
+index 8724e67..229003d 100644
+--- a/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
++++ b/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
+@@ -5,9 +5,9 @@ HOMEPAGE = "https://github.com/nemomobile/libconnman-qt"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
+ DEPENDS += "qtbase qtdeclarative"
+-PV = "1.0.92+git${SRCPV}"
++PV = "1.0.97+git${SRCPV}"
+ 
+-SRCREV = "2591cd6013936478d9edaf75f1a45482851af0f2"
++SRCREV = "4cca434935fa4d70d6841a2c20717eecb0beafa8"
+ SRC_URI = "git://github.com/nemomobile/libconnman-qt.git"
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.1.0
+2.5.0
 
 
