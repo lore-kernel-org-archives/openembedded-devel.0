@@ -1,38 +1,38 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
-	[209.85.213.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 6CCF876DF8;
-	Wed, 16 Sep 2015 21:19:18 +0000 (UTC)
-Received: by igbkq10 with SMTP id kq10so43135706igb.0;
-	Wed, 16 Sep 2015 14:19:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=wjupv6rly1My0gBZK6mt8hKi85RlH/ykbYLRtTAwCv0=;
-	b=VWaHWbnEFSV/bjwENMd3tKQ7dElB6hI9/aJDSgF7J2Aoju95HMzZKtpegJ2rIoFRF8
-	wbXpjfIcmdzkZ9EzNCqIZEH23siuOjdxSs2tB6j1RpV+QbJ0ZD8fqnKK/7zPvqa2J4I8
-	IkgpEvv9lPXOc0o4AHBAD7X3x3j79c35aYgQcRc3byeAWVECQyRDLPIwNwUlzTPON8Aa
-	VLUXTqWjKEXRv072H3P9g6H+J2ubIUQ4n2ONRZ1cq9DdSJxG/8/QXVRiOji/KKpTZso+
-	nahEDo0ovpTn/NfTUdhPV0T0YQLgM97beIA3w+XXiY+tP44HeIRlMdURGCKDy2n/wlTk
-	9tjQ==
-X-Received: by 10.50.85.20 with SMTP id d20mr445861igz.77.1442438359368; Wed,
-	16 Sep 2015 14:19:19 -0700 (PDT)
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id AFC2476DF8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Sep 2015 00:41:42 +0000 (UTC)
+Received: by wicge5 with SMTP id ge5so97096241wic.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Sep 2015 17:41:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=+Eiy+XFIUv8E/7T1obeCOjTMjh2s+MzIf34pv0Y4Pqc=;
+	b=YZNkLH5aURPyERvftAHUukDi38gp8MsgI2uT87ET+mQKtE7sZXEFFkeMFw8oRpPft8
+	U6Vsq/YwMy11rCJfA17phik/ydnMSKQm9HSMwXsheF0BOUjoZEYXHX6a9+iEfr8yNOUi
+	mRJAc27L+j2pZ4TleDkvFI+V4knbBsD4tnnjWdpSHUV2aFwowbx2MokxL6aZJ0MgK1KL
+	YKedkC++xVNA1SI3BYMFPuMVuwvkQ6/N0gt/lL/URifpUtouYuR7jZNsoF3y9nNI0QT+
+	EkU3Fg7YBT5HyU5RWjC720WI1C3y3Oi8cyuskLPfBUP+CLcs1605LgaYHOqoDPdE6kk7
+	k7vQ==
+X-Received: by 10.194.47.161 with SMTP id e1mr61127276wjn.1.1442450502186;
+	Wed, 16 Sep 2015 17:41:42 -0700 (PDT)
+Received: from localhost.localdomain (p4FDF0F55.dip0.t-ipconnect.de.
+	[79.223.15.85]) by smtp.googlemail.com with ESMTPSA id
+	sd14sm393216wjb.36.2015.09.16.17.41.41
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 16 Sep 2015 17:41:41 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 17 Sep 2015 02:41:12 +0200
+Message-Id: <1442450491-14912-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-Received: by 10.107.142.130 with HTTP; Wed, 16 Sep 2015 14:18:50 -0700 (PDT)
-In-Reply-To: <CALbNGRR=LAdpubkJGdfx=mx5FGiVW=YDTObwRN8JLAnSfiPc=g@mail.gmail.com>
-References: <cover.1441929533.git.raj.khem@gmail.com>
-	<e4c70967dd05d254bd59bd4f8a49836c3d499bfb.1441929533.git.raj.khem@gmail.com>
-	<80e3806f09d6c399ccd4ccdf5f83997386ec85bc.1441929533.git.raj.khem@gmail.com>
-	<CALbNGRR=LAdpubkJGdfx=mx5FGiVW=YDTObwRN8JLAnSfiPc=g@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 16 Sep 2015 14:18:50 -0700
-Message-ID: <CAMKF1so4a85NDgwLOL1RYHyXQTQcAdHJ9FM7yhaJbrnpTzdx0g@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [PATCH V2 2/3] systemd: Upgrade 219 -> 225
+Subject: [PATCH 00/19] news, updates and fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,16 +46,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Sep 2015 21:19:19 -0000
+X-List-Received-Date: Thu, 17 Sep 2015 00:41:43 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Wed, Sep 16, 2015 at 2:17 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> Is anybody preparing patches for gudev (many packets in meta-oe require i=
-t)?
->
-> If not I can do so. Is the home for libgudev oe-core or better meta-oe?
+Currently my error logs are so poluted and I have so many patches that I might
+have missed something.
 
-meta-oe is better for now. I am not working on it.
+I did not take care yet for gazillions of 'host-user-contaminated' warnings.
+Most of them are caused by dbg-packages and in the current situation I don't
+care for correct user settings of source code files I don't install often.
+
+Please note that this series needs some patches not yet applied in master and
+found in this branch:
+
+gupnp-tools: Upgrade 0.8.1 -> 0.8.10
+gimp: disable webkit dependency in the recipe
+evince: Remove pkg-config check for specific icon theme
+gnome-system-monitor: Remove pkg-config check for specific icon theme
+gnome-themes: Depend on adwaita, not gnome-icon-theme
+xfce4-settings: recommend adwaita, not gnome-icon-theme
+
+The following changes since commit b1a92d10d8bdf453746151ea9f0c14dce96d5f95:
+
+  xfce4-settings: recommend adwaita, not gnome-icon-theme (2015-09-17 01:17:13 +0200)
+
+are available in the git repository at:
+
+  git://github.com/schnitzeltony/meta-openembedded.git desperate-fixes
+
+for you to fetch changes up to 63fd6384b37f3e4a3d2d8e1e348060f2657321b4:
+
+  xfce4-settings: make Adwaita default icon theme (2015-09-17 02:19:07 +0200)
+
+----------------------------------------------------------------
+Andreas Müller (19):
+      gvfs: remove invalid PACKAGECONFIG[cdda]
+      gst-plugins-ugly: prepare for update of libcdio
+      libcdio: update to 0.93
+      libburn: initial add 1.4.0
+      cdrkit: initial add 1.1.11
+      libgudev: initial add 230
+      udisks2: add libgudev to DEPENDS
+      udisks: replace udev by libgudev in DEPENDS
+      udisks: update to 1.05 and fix build with latest glibc-version
+      upower replace udev by libgudev in DEPENDS
+      libmbim: replace udev by libgudev in DEPENDS
+      thunar-volman: replace udev by libgudev in DEPENDS
+      xfce4-power-manager: make upower a build dependency
+      gimp: fix compile in latest environment
+      gimp: add libgudev to DEPENDS
+      polkit-group-rule.inc: remove allarch
+      xfce4-settings: remove libnotify from DEPENDS - it is in PACKAGECONFIG
+      xfce4-settings: get 0001-xsettings.xml-Set-default-themes.patch back
+      xfce4-settings: make Adwaita default icon theme
+
+ meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb                                                                      |   5 +-
+ .../gstreamer-0.10/gst-plugins-ugly/0001-cdio-compensate-for-libcdio-s-recent-cd-text-api-cha.patch               | 193 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-ugly_0.10.19.bb                                     |   1 +
+ meta-oe/recipes-connectivity/libmbim/libmbim_1.12.2.bb                                                            |   2 +-
+ meta-oe/recipes-extended/polkit/polkit-group-rule.inc                                                             |   2 +-
+ meta-oe/recipes-gnome/libgudev/libgudev_230.bb                                                                    |  11 ++++
+ meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb                                                                      |   4 +-
+ meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb                                                                |  18 ++++++
+ meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch           |  53 ++++++++++++++++
+ meta-oe/recipes-multimedia/libburn/libburn_1.4.0.bb                                                               |  11 ++++
+ meta-oe/recipes-multimedia/libcdio/{libcdio_0.82.bb => libcdio_0.93.bb}                                           |   7 +--
+ meta-oe/recipes-support/udisks/udisks/0001-fix-build-with-newer-glibc-versions.patch                              |  29 +++++++++
+ meta-oe/recipes-support/udisks/udisks/add-systemd-support.patch                                                   | 112 ----------------------------------
+ meta-oe/recipes-support/udisks/udisks/udisks-1.0.5-fix-service-file.patch                                         |  33 ++++++++++
+ meta-oe/recipes-support/udisks/udisks2_2.1.5.bb                                                                   |   3 +-
+ meta-oe/recipes-support/udisks/{udisks_1.0.4.bb => udisks_1.0.5.bb}                                               |  22 +++----
+ meta-oe/recipes-support/upower/upower_0.9.14.bb                                                                   |   2 +-
+ meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.8.1.bb                                                       |   2 +-
+ meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.4.bb                                           |   4 +-
+ meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.xml-Set-default-themes.patch                           |  33 ++++++++++
+ meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb                                                       |   9 ++-
+ 21 files changed, 413 insertions(+), 143 deletions(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-ugly/0001-cdio-compensate-for-libcdio-s-recent-cd-text-api-cha.patch
+ create mode 100644 meta-oe/recipes-gnome/libgudev/libgudev_230.bb
+ create mode 100644 meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
+ create mode 100644 meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch
+ create mode 100644 meta-oe/recipes-multimedia/libburn/libburn_1.4.0.bb
+ rename meta-oe/recipes-multimedia/libcdio/{libcdio_0.82.bb => libcdio_0.93.bb} (71%)
+ create mode 100644 meta-oe/recipes-support/udisks/udisks/0001-fix-build-with-newer-glibc-versions.patch
+ delete mode 100644 meta-oe/recipes-support/udisks/udisks/add-systemd-support.patch
+ create mode 100644 meta-oe/recipes-support/udisks/udisks/udisks-1.0.5-fix-service-file.patch
+ rename meta-oe/recipes-support/udisks/{udisks_1.0.4.bb => udisks_1.0.5.bb} (60%)
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.xml-Set-default-themes.patch
+
+-- 
+2.1.0
+
 
