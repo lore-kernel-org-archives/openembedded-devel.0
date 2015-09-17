@@ -1,40 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E6C7766A3
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id C475576FDE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Sep 2015 00:41:53 +0000 (UTC)
-Received: by wicgb1 with SMTP id gb1so96409442wic.1
+	Thu, 17 Sep 2015 00:41:54 +0000 (UTC)
+Received: by wicge5 with SMTP id ge5so97099730wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2015 17:41:53 -0700 (PDT)
+	Wed, 16 Sep 2015 17:41:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=o9n9iA9mFfyL6RUs+LN1eHDzCu3VLvSncFqURukMCcc=;
-	b=BnDa1UXitljlQLy9Ew6jPUlNt6+Pg5fWKqojVYaqtISEo3m79hN/nJBqNy1fLaPy7X
-	KJfDB8PiXWL/Z1t+d0NaR6sTN/VCdzgYBZxbLggr1GqPGzLpUtlCLs5rwT3jDvxYqKDA
-	pXfV5+So/jBA8FX3tCRj9zEKxGs9PBhe9I/b6C3Q3/nqJZqPmuJ+DXuR7AxQ6BgSc5d3
-	GwaKL0jlVYHezF15Nbel0x1AhGuw0XFrJAX2mejoP8m3sWoKaGyL5tqE7M9HSpDm47ng
-	tT9TcuLfST78zBD9EiKEbeW9KpUx5oFjJSHP6bVFySTHd4M8fUcvdFxzTsHuc/T54gIB
-	cKJw==
-X-Received: by 10.194.92.68 with SMTP id ck4mr28839908wjb.141.1442450513458;
-	Wed, 16 Sep 2015 17:41:53 -0700 (PDT)
+	bh=MenC/Fm7QiQeWbiqYmJMB0E6MsmgpOcN4k8aAbludE8=;
+	b=ZkjONTu2kUIxksJJomll4HEvcGj41KzvBouFjq4UT8CTEqw1tsBpNXYUND35itF8Gm
+	vMUn+UIy+AJgKKGC7yKz6Td/1rJlOD8qeFEhCKizEs2ucE/8e24GhKKpOKbZtBAPRr3x
+	3O7ssiEM9zVrOtMGI+wEbH2NXd3k7vCW45HIpPRdx/RwaNs2oDqoq8Y+GtpTmpoYMzW1
+	oBsYvuMc3E5tRpi4FjBmfBv3KMF2WU4iqczb8FhZRDxuXZUpXRMUiJYoZM7IhLFQgTpV
+	R1v6MSIIUh23goIrIgxXJ1YI1q/3ZmDYIEKc2l+9g8DA/AXiLTQ9I4qXfhtQI5s3/nul
+	RQVA==
+X-Received: by 10.194.59.236 with SMTP id c12mr4538854wjr.23.1442450514288;
+	Wed, 16 Sep 2015 17:41:54 -0700 (PDT)
 Received: from localhost.localdomain (p4FDF0F55.dip0.t-ipconnect.de.
 	[79.223.15.85]) by smtp.googlemail.com with ESMTPSA id
-	sd14sm393216wjb.36.2015.09.16.17.41.52
+	sd14sm393216wjb.36.2015.09.16.17.41.53
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 16 Sep 2015 17:41:52 -0700 (PDT)
+	Wed, 16 Sep 2015 17:41:53 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Sep 2015 02:41:24 +0200
-Message-Id: <1442450491-14912-13-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 17 Sep 2015 02:41:25 +0200
+Message-Id: <1442450491-14912-14-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.1.0
 In-Reply-To: <1442450491-14912-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1442450491-14912-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 12/19] thunar-volman: replace udev by libgudev in DEPENDS
+Subject: [PATCH 13/19] xfce4-power-manager: make upower a build dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,33 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2015 00:41:53 -0000
+X-List-Received-Date: Thu, 17 Sep 2015 00:41:55 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-fixes:
-| checking for gudev-1.0 >= 145... not found
-| *** The required package gudev-1.0 was not found on your system.
-| *** Please install gudev-1.0 (atleast version 145) or adjust
+This one came up when upower failed:
+
+| *** The required package upower-glib was not found on your system.
+| *** Please install upower-glib (atleast version 0.9.7) or adjust
+| *** the PKG_CONFIG_PATH environment variable if you
+| *** installed the package in a nonstandard prefix so that
+| *** pkg-config is able to find it.
+
+xfce4-power-manager links against upower so we can expect shlibs causing upower
+being added to RDEPENDS.
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.8.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.4.bb     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.8.1.bb b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.8.1.bb
-index 6e63bef..08e6f5b 100644
---- a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.8.1.bb
-+++ b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.8.1.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Automatic management of removable drives and media for thunar"
- SECTION = "x11"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--DEPENDS = "exo glib-2.0 gtk+ libxfce4ui libxfce4util xfconf libnotify udev"
-+DEPENDS = "exo glib-2.0 gtk+ libxfce4ui libxfce4util xfconf libnotify libgudev"
- 
+diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.4.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.4.bb
+index 623b2ed..4a9accf 100644
+--- a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.4.bb
++++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.4.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  inherit xfce
  
+ DEPENDS = "gtk+ glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
+-           libxrandr virtual/libx11 libxext xfce4-panel"
++           libxrandr virtual/libx11 libxext xfce4-panel upower"
+ 
+ SRC_URI[md5sum] = "e7d00548e58bf19229e727818184c1e0"
+ SRC_URI[sha256sum] = "c50ec8aa7e7848c57c0f856dceb8132eb5f37585f0ac1627459ab8c882c73b07"
+@@ -34,7 +34,7 @@ FILES_xfce4-powermanager-plugin = " \
+ "
+ 
+ RDEPENDS_xfce4-powermanager-plugin = "${PN}"
+-RDEPENDS_${PN} = "networkmanager udisks upower ${@base_contains('DISTRO_FEATURES','systemd','','consolekit',d)}"
++RDEPENDS_${PN} = "networkmanager udisks ${@base_contains('DISTRO_FEATURES','systemd','','consolekit',d)}"
+ 
+ # xfce4-brightness-plugin was replaced by xfce4-powermanager-plugin
+ RPROVIDES_xfce4-powermanager-plugin += "xfce4-brightness-plugin"
 -- 
 2.1.0
 
