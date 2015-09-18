@@ -1,37 +1,19 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 4BEBD77041
+Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
+X-Greylist: delayed 481 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 18 Sep 2015 14:33:50 UTC
+Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
+	by mail.openembedded.org (Postfix) with ESMTP id C2E1E7423D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Sep 2015 13:14:33 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so30572887wic.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Sep 2015 06:14:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=UCiLT5X22rqb8hLigPGsAci/0j35Z/CVSpdXoex+sHk=;
-	b=qwgRHiqd5FJw06MCJOXgIj5B7z+FcEzIIbEn46KMHcRjtbJP/Zxh7mFswJbVgcDsrn
-	mudWv99Q8DHAovAf6/uNLZ4x7myTJe55kmlvZWxnofnfwiKlKWSYX/RzatmwSUkR9JXW
-	h/mT30yJJTVQ0Yfi+JiQ4DeBWWXaH4o/e5Kn0e8naXrYgWoSbyyHC+IRI0Wk16p0M6b+
-	izYfoSVYoJ8cIrb6k3UIWRYMGDtH+c05z60unBKGrX2IMqXdbckQ90tfQLlVufb9ZXKn
-	XKwRNsZYnsgdPrDjidy9bvZDskCH9ElaR3DcQLdzJoCtIMTZZOdDGmwITBQhW8J2eK/I
-	MPCA==
-X-Received: by 10.194.234.40 with SMTP id ub8mr6889864wjc.95.1442582073396;
-	Fri, 18 Sep 2015 06:14:33 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	x7sm15553543wia.10.2015.09.18.06.14.30
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 18 Sep 2015 06:14:32 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Fri, 18 Sep 2015 14:33:50 +0000 (UTC)
+Received: from hulk.bmw-carit.intra (hulk.bmw-carit.intra [192.168.101.92])
+	by linuxmail.bmw-carit.de (Postfix) with ESMTP id 017074036D;
+	Fri, 18 Sep 2015 16:19:46 +0200 (CEST)
+From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Sep 2015 15:14:49 +0200
-Message-Id: <1442582089-12197-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.5.1
-In-Reply-To: <20150918124547.GC11095@jama>
-References: <20150918124547.GC11095@jama>
-Subject: [PATCH][meta-gnome] gnome-themes: drop localedir override from configure to fix locale installation
+Date: Fri, 18 Sep 2015 16:25:46 +0200
+Message-Id: <1442586346-12457-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+X-Mailer: git-send-email 1.9.3
+Subject: [PATCH] opencv: backport commit to compile with ppc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,59 +27,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Sep 2015 13:14:33 -0000
+X-List-Received-Date: Fri, 18 Sep 2015 14:33:51 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+During the testing of the meta-ros layer, I discovered that opencv
+does not cross-compile for the ppc architecture. The error is
+reported in the meta-ros issue tracker #355 [1]. To address this
+error,  this commit applies a patch that is already provided upstream
+in the opencv version 3.0.
+
+[1] https://github.com/bmwcarit/meta-ros/issues/355
+
+Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
 ---
- .../gnome-themes/drop-localedir-override.patch     | 22 ++++++++++++++++++++++
- .../recipes-gnome/themes/gnome-themes_2.32.1.bb    |  4 +++-
- 2 files changed, 25 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/themes/gnome-themes/drop-localedir-override.patch
+ ...ector-instead-of-vector-as-suggests-Eigen.patch | 49 ++++++++++++++++++++++
+ meta-oe/recipes-support/opencv/opencv_2.4.bb       |  3 +-
+ 2 files changed, 51 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Use-__vector-instead-of-vector-as-suggests-Eigen.patch
 
-diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes/drop-localedir-override.patch b/meta-gnome/recipes-gnome/themes/gnome-themes/drop-localedir-override.patch
+diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Use-__vector-instead-of-vector-as-suggests-Eigen.patch b/meta-oe/recipes-support/opencv/opencv/0001-Use-__vector-instead-of-vector-as-suggests-Eigen.patch
 new file mode 100644
-index 0000000..e37482b
+index 0000000..7f809bc
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/themes/gnome-themes/drop-localedir-override.patch
-@@ -0,0 +1,22 @@
-+Causes locale file to be installed in /usr/locale instead of /usr/share/locale
++++ b/meta-oe/recipes-support/opencv/opencv/0001-Use-__vector-instead-of-vector-as-suggests-Eigen.patch
+@@ -0,0 +1,49 @@
++From 711f07a34ceb504e8f75e978692201efa58268ca Mon Sep 17 00:00:00 2001
++From: Dinar Valeev <dvaleev@suse.com>
++Date: Thu, 16 Jan 2014 21:53:49 +0100
++Subject: [PATCH] Use __vector instead of vector as suggests Eigen
 +
-+Apply the same fix as in evolution-data-server:
-+https://git.gnome.org/browse/evolution-data-server/commit/configure.ac?id=ec46c763e9342f604b7228c660623d271dfeb101
++This fixes build on PowerPC where Eigen unsets vector, bool and pixel
 +
-+Upstream-Status: Pending
++Signed-off-by: Dinar Valeev <dvaleev@suse.com>
 +
-+diff -uNr gnome-themes-2.32.1.orig/configure.in gnome-themes-2.32.1/configure.in
-+--- gnome-themes-2.32.1.orig/configure.in	2015-09-18 15:01:25.152055729 +0200
-++++ gnome-themes-2.32.1/configure.in	2015-09-18 15:09:03.312072156 +0200
-+@@ -19,11 +19,6 @@
-+ 
-+ AM_GLIB_GNU_GETTEXT
-+ 
-+-# AM_GLIB_GNU_GETTEXT above subst. $DATADIRNAME
-+-# this is the directory where the *.{mo,gmo} files are installed
-+-localedir='${prefix}/${DATADIRNAME}/locale'
-+-AC_SUBST(localedir)
-+-
-+ # Workaround to make aclocal get the right flags
-+ AC_SUBST(ACLOCAL_AMFLAGS, "\${ACLOCAL_FLAGS}")
-+ 
-diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-index 2da92b6..e9e1b50 100644
---- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-@@ -25,7 +25,9 @@ FILES_gnome-theme-mist = "${datadir}/themes/Mist ${datadir}/icons/Mist"
++This patch is already part of OpenCV v3.0. The patch can be obtained
++from:
++
++  https://github.com/Itseez/opencv/commit/711f07a34ceb504e8f75e978692201efa58268ca.patch
++
++Upstream-Status: Backport [commit 711f07a34c, part of version 3.0]
++
++Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
++---
++ 3rdparty/include/opencl/1.2/CL/cl_platform.h | 14 +++++++-------
++ 1 file changed, 7 insertions(+), 7 deletions(-)
++
++diff --git a/3rdparty/include/opencl/1.2/CL/cl_platform.h b/3rdparty/include/opencl/1.2/CL/cl_platform.h
++index e94949a..42c35d5 100644
++--- a/3rdparty/include/opencl/1.2/CL/cl_platform.h
+++++ b/3rdparty/include/opencl/1.2/CL/cl_platform.h
++@@ -332,13 +332,13 @@ typedef unsigned int cl_GLenum;
++ /* Define basic vector types */
++ #if defined( __VEC__ )
++    #include <altivec.h>   /* may be omitted depending on compiler. AltiVec spec provides no way to detect whether the header is required. */
++-   typedef vector unsigned char     __cl_uchar16;
++-   typedef vector signed char       __cl_char16;
++-   typedef vector unsigned short    __cl_ushort8;
++-   typedef vector signed short      __cl_short8;
++-   typedef vector unsigned int      __cl_uint4;
++-   typedef vector signed int        __cl_int4;
++-   typedef vector float             __cl_float4;
+++   typedef __vector unsigned char     __cl_uchar16;
+++   typedef __vector signed char       __cl_char16;
+++   typedef __vector unsigned short    __cl_ushort8;
+++   typedef __vector signed short      __cl_short8;
+++   typedef __vector unsigned int      __cl_uint4;
+++   typedef __vector signed int        __cl_int4;
+++   typedef __vector float             __cl_float4;
++    #define  __CL_UCHAR16__  1
++    #define  __CL_CHAR16__   1
++    #define  __CL_USHORT8__  1
++-- 
++1.9.3
++
+diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+index 733fe44..3b10b55 100644
+--- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
++++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+@@ -10,7 +10,8 @@ ARM_INSTRUCTION_SET = "arm"
+ DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0"
  
- FILES_${PN} += "${datadir}/themes ${datadir}/icons"
+ SRCREV = "2c9547e3147779001811d01936aed38f560929fc"
+-SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4"
++SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4 \
++  file://0001-Use-__vector-instead-of-vector-as-suggests-Eigen.patch"
  
--SRC_URI += "file://iconpath-option.patch" 
-+SRC_URI += "file://iconpath-option.patch \
-+    file://drop-localedir-override.patch \
-+" 
- SRC_URI[archive.md5sum] = "41db9e3cb25d35af2675c599e67944d1"
- SRC_URI[archive.sha256sum] = "8601ee24c2e096593221cbd6ebdb6686042225a03c02a01c0d67c163f9febd1a"
- GNOME_COMPRESS_TYPE="bz2"
+ PV = "2.4.11+git${SRCPV}"
+ 
 -- 
-2.5.1
+1.9.3
 
 
