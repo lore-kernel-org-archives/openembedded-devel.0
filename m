@@ -1,40 +1,25 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 343BD7423D;
-	Fri, 18 Sep 2015 09:02:36 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so55499801wic.0;
-	Fri, 18 Sep 2015 02:02:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=YRSIy86Lk4ISrFTBW23/Vlf9uXWN0ARba9E5EM8yCgg=;
-	b=G8cQDhYXWU8EWDRvjzFm7OPVfAOTfAaY1GumG8Ibf4IK663ArDm5KR0AzjZRw84f1T
-	H0lWboMt/n4TVX4M58Mp0dUkX+nXo3GCjAKkwTfsZtYKiJQ3yIUhd/uCANOZxX/cBx72
-	SfDseYaJZ6RfEpIhYGcgGFyaTlw8Vz2kxevKbgqzhPtuqOZKWQLengMF8OfKg7S0Lpri
-	qfswjC1tVTosCOKZIuYPgpvDFAUCoHhhE1PaeWVIrHnx17EuGLe0feBM4cAPYt5Baj/1
-	ytUoWDCG5XKZ/r7mI6cYafJt5Oc6h1XKP0PxaAxqjC3veSD7Kdw5AFktX0aUbXPURibU
-	Ozsg==
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E592576BD7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Sep 2015 09:11:01 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t8I9B1gk023289
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Sep 2015 02:11:01 -0700 (PDT)
+Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.235.1;
+	Fri, 18 Sep 2015 02:11:01 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 18 Sep 2015 17:10:55 +0800
+Message-ID: <cover.1442567286.git.yi.zhao@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Received: by 10.180.8.200 with SMTP id t8mr15067894wia.34.1442566955972;
-	Fri, 18 Sep 2015 02:02:35 -0700 (PDT)
-Received: by 10.28.59.138 with HTTP; Fri, 18 Sep 2015 02:02:35 -0700 (PDT)
-In-Reply-To: <2142960116.32810.1442562398390.JavaMail.zimbra@neratec.com>
-References: <cover.1441929533.git.raj.khem@gmail.com>
-	<e4c70967dd05d254bd59bd4f8a49836c3d499bfb.1441929533.git.raj.khem@gmail.com>
-	<80e3806f09d6c399ccd4ccdf5f83997386ec85bc.1441929533.git.raj.khem@gmail.com>
-	<CALbNGRR=LAdpubkJGdfx=mx5FGiVW=YDTObwRN8JLAnSfiPc=g@mail.gmail.com>
-	<CAMKF1so4a85NDgwLOL1RYHyXQTQcAdHJ9FM7yhaJbrnpTzdx0g@mail.gmail.com>
-	<2142960116.32810.1442562398390.JavaMail.zimbra@neratec.com>
-Date: Fri, 18 Sep 2015 11:02:35 +0200
-Message-ID: <CA+chaQfdK4irH2DvnX-c=4pPHv2VXg3Y81mm6RuP845aJy_8yw@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Adrian Freihofer <adrian.freihofer@neratec.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] [PATCH V2 2/3] systemd: Upgrade 219 -> 225
+X-Originating-IP: [128.224.163.137]
+Subject: [meta-oe][PATCH 0/3] 3 fixes for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,52 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Sep 2015 09:02:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Sep 2015 09:11:05 -0000
+Content-Type: text/plain
 
-Hi Adrian,
 
-we're not accepting github's pull requests, see README.
+The following changes since commit 1692d5c3020434404fc1ee6911a60b88287a5efb:
 
-Andreas already send many fixes for gudev, please check master-next if
-something is missing from your changes and resend to ML.
+  netmap: add new package (2015-09-15 10:49:30 -0400)
 
-On Fri, Sep 18, 2015 at 9:46 AM, Adrian Freihofer <
-adrian.freihofer@neratec.com> wrote:
+are available in the git repository at:
 
-> Hi Andreas
->
-> Here is a first patchset ready for pulling...
-> https://github.com/openembedded/meta-openembedded/pull/16
->
-> ------------------------------
-> *Von: *"Khem Raj" <raj.khem@gmail.com>
-> *An: *"Andreas M=C3=BCller" <schnitzeltony@googlemail.com>
-> *CC: *openembedded-devel@lists.openembedded.org, "Patches and discussions
-> about the oe-core layer" <openembedded-core@lists.openembedded.org>
-> *Gesendet: *Mittwoch, 16. September 2015 23:18:50
-> *Betreff: *Re: [OE-core] [PATCH V2 2/3] systemd: Upgrade 219 -> 225
->
-> On Wed, Sep 16, 2015 at 2:17 PM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
-> > Is anybody preparing patches for gudev (many packets in meta-oe require
-> it)?
-> >
-> > If not I can do so. Is the home for libgudev oe-core or better meta-oe?
->
-> meta-oe is better for now. I am not working on it.
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
->
+  git://git.openembedded.org/meta-openembedded-contrib yzhao/multilib-fixes
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=yzhao/multilib-fixes
+
+Yi Zhao (3):
+  sblim-sfcCommon: fix ${PN}-${PV} -> ${BP} for multilib
+  sblim-sfcb: fix ${PN}-${PV} -> ${BP} for multilib
+  mailcap: fix PN -> BPN for multilib
+
+ .../sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb       |    2 +-
+ .../sblim-sfcb/sblim-sfcb_1.4.8.bb                 |    2 +-
+ meta-oe/recipes-support/mailcap/mailcap_2.1.44.bb  |    4 ++--
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+-- 
+1.7.9.5
+
 
