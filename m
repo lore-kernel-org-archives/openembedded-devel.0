@@ -1,36 +1,23 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 70E8777003
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 301BF76D84
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Sep 2015 20:21:11 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so5819846wic.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Sep 2015 13:21:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=zGn1EvgVXd4PPI+lUusdjy/KK7fsw7mk7M7BU7Hk4Os=;
-	b=rQf9sLITTWie7hl33ae4N4G+zpOsfV2RIjAKHWIAnXvSYJ4tmyoSlkZAND/dDbiisA
-	ANLBSsMal6n2i5HqfUNABCUj3fy/wgyeqs5M7KlHvu7U0nlBUrVU2CeY21ee2gxZzeM5
-	D5hdfHGjZ2RSIzHc623NyQf2vLcbN2UZ5ect5uc4sKdzUqUM8EpnYz1JuUiW9qDqwVnY
-	WPtTFoYdzIDi7owgIYwkjJRjTlA/9kz/+ogf+zwyfh8lVU4Fk3m0G9Od58QyD2H9/PCL
-	M6ATQBTU2F7h9GVW1YTLdQO7su+zVaZzUpv7ULGL9LPyN0EQHzWQNzftCUHcU/8u/EQ4
-	uzzA==
+	Fri, 18 Sep 2015 05:51:25 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8I5pPjG003773
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 17 Sep 2015 22:51:25 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.235.1; Thu, 17 Sep 2015 22:51:24 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
+Date: Fri, 18 Sep 2015 13:41:06 +0800
+Message-ID: <1442554866-20498-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Received: by 10.180.37.76 with SMTP id w12mr11714665wij.0.1442521271722;
-	Thu, 17 Sep 2015 13:21:11 -0700 (PDT)
-Received: by 10.28.59.138 with HTTP; Thu, 17 Sep 2015 13:21:11 -0700 (PDT)
-In-Reply-To: <CALbNGRQFrAp858jfOe33wspTGbpc+GJ65UTvR1f=SOGMSm82Ug@mail.gmail.com>
-References: <CALbNGRQFrAp858jfOe33wspTGbpc+GJ65UTvR1f=SOGMSm82Ug@mail.gmail.com>
-Date: Thu, 17 Sep 2015 22:21:11 +0200
-Message-ID: <CA+chaQczwhoF1ah1N7Fp+4+JYoMjHJRxnk8hhMm74jKMQY1N-A@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: gnome-icon-theme in master-next
+Subject: [meta-networking][PATCH] inetutils: fix rcp to work with large file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,33 +31,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2015 20:21:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Sep 2015 05:51:28 -0000
+Content-Type: text/plain
 
-True, I've seen the patch with R* combo om adwaita recipe, so we should be
-able to drop this, I just forgot when rebasing master-next today.
+This issue occurs When we copy file by rcp command between target and host,
+if the file > 2GB, it will fail.
+The cause is that it used incorrect data type on file size in sink() of rcp.
 
-On Thu, Sep 17, 2015 at 10:07 PM, Andreas M=C3=BCller <
-schnitzeltony@googlemail.com> wrote:
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ .../0001-rcp-fix-to-work-with-large-files.patch    | 31 ++++++++++++++++++++++
+ .../inetutils/inetutils_1.9.4.bb                   |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils/0001-rcp-fix-to-work-with-large-files.patch
 
-> Hi,
->
-> looked through meta-oe master-next a bit to see what patches are to
-> expect. I found:
->
-> commit b5aae54f9ad4aaff228fed64f8b5d992f451b2cd
-> Author: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-> Date:   Tue Sep 8 11:24:19 2015 +0300
->
->     gnome-icon-theme: add a recipe from oe-core
->
->     Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
->     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->
-> If I remember correct this should not land in master. We try hard to
-> replace it by Adwaita - right?
->
-> Andreas
->
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils/0001-rcp-fix-to-work-with-large-files.patch b/meta-networking/recipes-connectivity/inetutils/inetutils/0001-rcp-fix-to-work-with-large-files.patch
+new file mode 100644
+index 0000000..d4764f5
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils/0001-rcp-fix-to-work-with-large-files.patch
+@@ -0,0 +1,31 @@
++Upstream-Status: Pending
++
++Subject: rcp: fix to work with large files
++
++When we copy file by rcp command, if the file > 2GB, it will fail.
++The cause is that it used incorrect data type on file size in sink() of rcp.
++
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++---
++ src/rcp.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/rcp.c b/src/rcp.c
++index 21f55b6..bafa35f 100644
++--- a/src/rcp.c
+++++ b/src/rcp.c
++@@ -876,9 +876,9 @@ sink (int argc, char *argv[])
++   enum
++   { YES, NO, DISPLAYED } wrerr;
++   BUF *bp;
++-  off_t i, j;
+++  off_t i, j, size;
++   int amt, count, exists, first, mask, mode, ofd, omode;
++-  int setimes, size, targisdir, wrerrno;
+++  int setimes, targisdir, wrerrno;
++   char ch, *cp, *np, *targ, *vect[1], buf[BUFSIZ];
++   const char *why;
++ 
++-- 
++1.9.1
++
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+index adfc940..50aedd3 100644
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+@@ -20,6 +20,7 @@ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
+            file://tftpd.xinetd.inetutils \
+            file://inetutils-1.9-PATH_PROCNET_DEV.patch \
+            file://inetutils-only-check-pam_appl.h-when-pam-enabled.patch \
++           file://0001-rcp-fix-to-work-with-large-files.patch \
+ "
+ 
+ SRC_URI[md5sum] = "04852c26c47cc8c6b825f2b74f191f52"
+-- 
+1.9.1
+
 
