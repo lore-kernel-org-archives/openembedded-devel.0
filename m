@@ -1,27 +1,24 @@
-Return-Path: <Yi.Zhao@windriver.com>
+Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 674D372A78
+	by mail.openembedded.org (Postfix) with ESMTP id 2ACF37701F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Sep 2015 09:11:11 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8I9BBMf005232
+	Fri, 18 Sep 2015 09:13:10 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8I9DBcV005244
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Sep 2015 02:11:11 -0700 (PDT)
-Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.235.1;
-	Fri, 18 Sep 2015 02:11:11 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Fri, 18 Sep 2015 02:13:11 -0700 (PDT)
+Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Fri, 18 Sep 2015 02:13:09 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 Sep 2015 17:10:58 +0800
-Message-ID: <35518fddf968a91efd0117f7cbfeb49437fe71d6.1442567286.git.yi.zhao@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1442567286.git.yi.zhao@windriver.com>
-References: <cover.1442567286.git.yi.zhao@windriver.com>
+Date: Fri, 18 Sep 2015 17:13:19 +0800
+Message-ID: <1442567599-2297-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 3/3] mailcap: fix PN -> BPN for multilib
+Subject: [meta-oe][PATCH] waf-samba.bbclass: remove bashism
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,34 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Sep 2015 09:11:11 -0000
+X-List-Received-Date: Fri, 18 Sep 2015 09:13:11 -0000
 Content-Type: text/plain
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- meta-oe/recipes-support/mailcap/mailcap_2.1.44.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+From: Jackie Huang <jackie.huang@windriver.com>
 
-diff --git a/meta-oe/recipes-support/mailcap/mailcap_2.1.44.bb b/meta-oe/recipes-support/mailcap/mailcap_2.1.44.bb
-index d9f5e10..4b9ddb2 100644
---- a/meta-oe/recipes-support/mailcap/mailcap_2.1.44.bb
-+++ b/meta-oe/recipes-support/mailcap/mailcap_2.1.44.bb
-@@ -12,12 +12,12 @@ by several applications e.g. to determine MIME types for filenames."
+use '=' instead of '==' so this works with dash as /bin/sh
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-oe/classes/waf-samba.bbclass | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/classes/waf-samba.bbclass b/meta-oe/classes/waf-samba.bbclass
+index 23c5556..241aa69 100644
+--- a/meta-oe/classes/waf-samba.bbclass
++++ b/meta-oe/classes/waf-samba.bbclass
+@@ -22,7 +22,7 @@ CONFIGUREOPTS = " --prefix=${prefix} \
  
- SECTION = "System Environment/Base"
+ do_configure() {
+     qemu_binary="${@qemu_target_binary(d)}"
+-    if [ ${qemu_binary} == "qemu-allarch" ]; then
++    if [ "${qemu_binary}" = "qemu-allarch" ]; then
+         qemu_binary="qemuwrapper"
+     fi
  
--SRC_URI = "https://git.fedorahosted.org/cgit/${PN}.git/snapshot/${PN}-r2-1-44.tar.gz"
-+SRC_URI = "https://git.fedorahosted.org/cgit/${BPN}.git/snapshot/${BPN}-r2-1-44.tar.gz"
- SRC_URI[md5sum] = "e7de2a5dfaa126d5e0a081af7d908906"
- SRC_URI[sha256sum] = "644da071f918a33e11d1f8db8334010dd325108209d302f800816f4a177ee2e6"
- LICENSE = "PD & MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=100fcfb84512ccc03ffc7d89ac391305"
--S = "${WORKDIR}/${PN}-r2-1-44"
-+S = "${WORKDIR}/${BPN}-r2-1-44"
- do_install() {
-     oe_runmake install DESTDIR=${D} sysconfdir=${sysconfdir} mandir=${mandir}
- }
 -- 
-1.7.9.5
+1.9.1
 
 
