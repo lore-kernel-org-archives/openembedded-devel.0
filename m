@@ -1,45 +1,32 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ig0-f173.google.com (mail-ig0-f173.google.com
-	[209.85.213.173])
-	by mail.openembedded.org (Postfix) with ESMTP id EC05873243
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
+	[209.85.213.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 575E673243
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Sep 2015 18:46:35 +0000 (UTC)
-Received: by igbni9 with SMTP id ni9so23555907igb.0
+	Fri, 18 Sep 2015 19:34:44 +0000 (UTC)
+Received: by igbkq10 with SMTP id kq10so25233082igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Sep 2015 11:46:35 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:date:message-id:subject:to
-	:content-type;
-	bh=pmCYTLB7SpdVynD3aigP12mUesopZ0es9BUgqRrWvbM=;
-	b=h53Iq/FIANAW/b+eco4dIGfPWgdFvMANctSsPvunJalVwqGt5f9pSvnjqi31Ec21dK
-	aiTybTyBYr8qq2PsHX28N6hN7jPVVYMTsdejexy25l9fb7A+IfqKsLSzjvtNm6uegSbH
-	OzOlkjhrog9UfgsZ3oSFXEb+eMczWEbIf4BwmbVObKOG7tPmSEJIMNLnKNkG8HVXMMkt
-	Cl4HpoSWfWrTmMkC2497UsXy2oi6QNVEyXyOmJ4csoNPTgdsG/tu+A/CFzbhfd/fYS6F
-	WvVbgqxh9FvWKqNGwEcm1oKGHRw27g/DLuDaURpvWQy4+Z7nf4dw+q6sqRmbN5dk303b
-	DEkA==
-X-Gm-Message-State: ALoCoQmDMWyOeHByIxtuwUkGsaLL34jKlp0SCVkgNbXJhD+qLQK4bfKf6pTg5+n791vUCj0j9H5C
-X-Received: by 10.50.138.72 with SMTP id qo8mr35955985igb.46.1442601994693;
-	Fri, 18 Sep 2015 11:46:34 -0700 (PDT)
-Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com.
-	[209.85.213.180])
-	by smtp.gmail.com with ESMTPSA id u99sm4263266ioi.0.2015.09.18.11.46.33
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 18 Sep 2015 11:46:33 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by igcrk20 with SMTP id rk20so24339438igc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Sep 2015 11:46:33 -0700 (PDT)
+	Fri, 18 Sep 2015 12:34:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=yey3OV3haFRf5nMCvdIFbevTCYJtFgbPrud9QdL5rh8=;
+	b=lGbQ6AJq2cTr642Odz4+O7MmrVfTW8GOdCReiJYLzSKLvKYzgcdTwQRI0z59GlN6zD
+	FYeYfPIUh2gx1tVuEVWaljAWd+wBmciuEh2I1RI+uuh47nEfrJDyJ8yojuXAozkvWrTG
+	f6B/joZ6NRzY/zQKcAcDodUJneLx3auoPVj+htKOTtVJYTZL6jpM/LA4jAjTUEf3phUK
+	pOIgq1jXd4mxRN9hrahAb7I6KdYeqPjiZo8ygIlkgVInew8PsddtIUeRDfbMxc2UKnl7
+	qar6oEVQxpTWId6/y2QDEqIKZ2XpvHhc9bLbWeAxCwY8skj1bJQfDJjC8MeHyVcJ+Nn7
+	lKwQ==
+X-Received: by 10.50.85.20 with SMTP id d20mr16779708igz.77.1442604885047;
+	Fri, 18 Sep 2015 12:34:45 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.50.80.83 with SMTP id p19mr640887igx.5.1442601993034; Fri,
-	18 Sep 2015 11:46:33 -0700 (PDT)
-Received: by 10.36.218.7 with HTTP; Fri, 18 Sep 2015 11:46:30 -0700 (PDT)
-Date: Fri, 18 Sep 2015 15:46:30 -0300
-Message-ID: <CAP9ODKpEcL3=T-1Uvcty3z1x6+6JzTq-ww0wY+wAxNKTwC0Q7A@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Use of ConnMan to manage 3G connection
+Received: by 10.107.142.130 with HTTP; Fri, 18 Sep 2015 12:34:15 -0700 (PDT)
+In-Reply-To: <1442586346-12457-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+References: <1442586346-12457-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 18 Sep 2015 12:34:15 -0700
+Message-ID: <CAMKF1srZd2htZv2VOiBgmo-=zrt4tecVL5UZqO0heJM_y-+fog@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] opencv: backport commit to compile with ppc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,19 +40,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Sep 2015 18:46:36 -0000
+X-List-Received-Date: Fri, 18 Sep 2015 19:34:46 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hello,
+On Fri, Sep 18, 2015 at 7:25 AM, Lukas Bulwahn
+<lukas.bulwahn@oss.bmw-carit.de> wrote:
+> During the testing of the meta-ros layer, I discovered that opencv
+> does not cross-compile for the ppc architecture. The error is
+> reported in the meta-ros issue tracker #355 [1]. To address this
+> error,  this commit applies a patch that is already provided upstream
+> in the opencv version 3.0.
+>
+> [1] https://github.com/bmwcarit/meta-ros/issues/355
+>
 
-We are working in a project which we would like to use ConnMan to
-manage the 3G connect. So far we had a hard time to get proper
-examples of this working.
+this is ok
 
-Does someone knows if it is indeed supported by ConnMan?
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+> ---
+>  ...ector-instead-of-vector-as-suggests-Eigen.patch | 49 ++++++++++++++++++++++
+>  meta-oe/recipes-support/opencv/opencv_2.4.bb       |  3 +-
+>  2 files changed, 51 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Use-__vector-instead-of-vector-as-suggests-Eigen.patch
+>
+> diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Use-__vector-instead-of-vector-as-suggests-Eigen.patch b/meta-oe/recipes-support/opencv/opencv/0001-Use-__vector-instead-of-vector-as-suggests-Eigen.patch
+> new file mode 100644
+> index 0000000..7f809bc
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/opencv/opencv/0001-Use-__vector-instead-of-vector-as-suggests-Eigen.patch
+> @@ -0,0 +1,49 @@
+> +From 711f07a34ceb504e8f75e978692201efa58268ca Mon Sep 17 00:00:00 2001
+> +From: Dinar Valeev <dvaleev@suse.com>
+> +Date: Thu, 16 Jan 2014 21:53:49 +0100
+> +Subject: [PATCH] Use __vector instead of vector as suggests Eigen
+> +
+> +This fixes build on PowerPC where Eigen unsets vector, bool and pixel
+> +
+> +Signed-off-by: Dinar Valeev <dvaleev@suse.com>
+> +
+> +This patch is already part of OpenCV v3.0. The patch can be obtained
+> +from:
+> +
+> +  https://github.com/Itseez/opencv/commit/711f07a34ceb504e8f75e978692201efa58268ca.patch
+> +
+> +Upstream-Status: Backport [commit 711f07a34c, part of version 3.0]
+> +
+> +Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+> +---
+> + 3rdparty/include/opencl/1.2/CL/cl_platform.h | 14 +++++++-------
+> + 1 file changed, 7 insertions(+), 7 deletions(-)
+> +
+> +diff --git a/3rdparty/include/opencl/1.2/CL/cl_platform.h b/3rdparty/include/opencl/1.2/CL/cl_platform.h
+> +index e94949a..42c35d5 100644
+> +--- a/3rdparty/include/opencl/1.2/CL/cl_platform.h
+> ++++ b/3rdparty/include/opencl/1.2/CL/cl_platform.h
+> +@@ -332,13 +332,13 @@ typedef unsigned int cl_GLenum;
+> + /* Define basic vector types */
+> + #if defined( __VEC__ )
+> +    #include <altivec.h>   /* may be omitted depending on compiler. AltiVec spec provides no way to detect whether the header is required. */
+> +-   typedef vector unsigned char     __cl_uchar16;
+> +-   typedef vector signed char       __cl_char16;
+> +-   typedef vector unsigned short    __cl_ushort8;
+> +-   typedef vector signed short      __cl_short8;
+> +-   typedef vector unsigned int      __cl_uint4;
+> +-   typedef vector signed int        __cl_int4;
+> +-   typedef vector float             __cl_float4;
+> ++   typedef __vector unsigned char     __cl_uchar16;
+> ++   typedef __vector signed char       __cl_char16;
+> ++   typedef __vector unsigned short    __cl_ushort8;
+> ++   typedef __vector signed short      __cl_short8;
+> ++   typedef __vector unsigned int      __cl_uint4;
+> ++   typedef __vector signed int        __cl_int4;
+> ++   typedef __vector float             __cl_float4;
+> +    #define  __CL_UCHAR16__  1
+> +    #define  __CL_CHAR16__   1
+> +    #define  __CL_USHORT8__  1
+> +--
+> +1.9.3
+> +
+> diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+> index 733fe44..3b10b55 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+> @@ -10,7 +10,8 @@ ARM_INSTRUCTION_SET = "arm"
+>  DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0"
+>
+>  SRCREV = "2c9547e3147779001811d01936aed38f560929fc"
+> -SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4"
+> +SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4 \
+> +  file://0001-Use-__vector-instead-of-vector-as-suggests-Eigen.patch"
+>
+>  PV = "2.4.11+git${SRCPV}"
+>
+> --
+> 1.9.3
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
