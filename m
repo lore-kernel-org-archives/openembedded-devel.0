@@ -1,24 +1,42 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A75C377024
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Sep 2015 09:20:32 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t8I9KWxt024387
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Sep 2015 02:20:32 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.235.1; Fri, 18 Sep 2015 02:20:32 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 Sep 2015 17:14:30 +0800
-Message-ID: <1442567670-16066-1-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 06A1377028;
+	Fri, 18 Sep 2015 11:01:41 +0000 (UTC)
+Received: by ioii196 with SMTP id i196so52350990ioi.3;
+	Fri, 18 Sep 2015 04:01:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=xeA69o/308J+5KN1WMkfmYW7KgERrwHBnk7EDmuv40k=;
+	b=g0sgHwHnSxHjPNWIFho5cyD4I8NdbOtuH7BwuYuZtcwlNQvGvN3XxW7Usgm+3yfmJF
+	EkON+6G1XuRh14AA2A7zxLtbkFgSlsgtWmIKneLXZ10V06PURtq3Sc2XmZfZVSXW1yau
+	MgSDdr5rTwe1bVzoCWXPuWzTloMP74e2oBbuNVwhDSxLhiQ7lIOw6kaBo/OlMT3k8EKU
+	5d85sAM43ZxlpwDHr6bBkrW/H1LFNMzEoISRuwDjHV8b+p1m1cfWC+NOImKCLkxG/ICU
+	Q/PONsOwIoJg+VtFvVHpN/yMi1S0ZsoXqn8F/sw9r6HMFs46HNKayb7b9zpjB5qSYWR1
+	jKIQ==
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] xl2tpd: 1.3.0 -> 1.3.6
+X-Received: by 10.107.10.79 with SMTP id u76mr12475963ioi.99.1442574101534;
+	Fri, 18 Sep 2015 04:01:41 -0700 (PDT)
+Received: by 10.36.98.5 with HTTP; Fri, 18 Sep 2015 04:01:41 -0700 (PDT)
+In-Reply-To: <1795284996.34316.1442572421706.JavaMail.zimbra@neratec.com>
+References: <cover.1441929533.git.raj.khem@gmail.com>
+	<e4c70967dd05d254bd59bd4f8a49836c3d499bfb.1441929533.git.raj.khem@gmail.com>
+	<80e3806f09d6c399ccd4ccdf5f83997386ec85bc.1441929533.git.raj.khem@gmail.com>
+	<CALbNGRR=LAdpubkJGdfx=mx5FGiVW=YDTObwRN8JLAnSfiPc=g@mail.gmail.com>
+	<CAMKF1so4a85NDgwLOL1RYHyXQTQcAdHJ9FM7yhaJbrnpTzdx0g@mail.gmail.com>
+	<2142960116.32810.1442562398390.JavaMail.zimbra@neratec.com>
+	<CA+chaQfdK4irH2DvnX-c=4pPHv2VXg3Y81mm6RuP845aJy_8yw@mail.gmail.com>
+	<1795284996.34316.1442572421706.JavaMail.zimbra@neratec.com>
+Date: Fri, 18 Sep 2015 13:01:41 +0200
+Message-ID: <CALbNGRTE-utmwM4nGF8YBrLPCtXLS1tKE=V=2EGB_e7vR3sO1Q@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Adrian Freihofer <adrian.freihofer@neratec.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [PATCH V2 2/3] systemd: Upgrade 219 -> 225
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,185 +50,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Sep 2015 09:20:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 18 Sep 2015 11:01:43 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Kai Kang <kai.kang@windriver.com>
+On Fri, Sep 18, 2015 at 12:33 PM, Adrian Freihofer
+<adrian.freihofer@neratec.com> wrote:
+> Hi Martin, hi Andreas
+>
+> You are right, my patches are almost obsolete. Just some details might be
+> worth to be noticed:
+>
+> libgudev might be improved by adding:
+> RCONFLICTS_${PN} = "systemd (<= 220)"
+>
+> NetworkManager and ModemManager depend on udev instead of libgudev as well.
+>
+Hi Adrian,
 
-Upgrade xl2tpd v1.3.0-46-gdf7e30e to 1.3.6.
+Checked the configure.ac of NetworkManager and ModemManager: You are
+right - guess I missed the rdepends warnings due to bloated log. For
+RCONFLICTS I have no strong opinion. I think it is correct but am not
+sure if it is really necessary. On the other hands no harm is expected
+- so why not? other opinions?
 
-* drop PR
-* add patch to fix build failure with gcc 5.x
+Can you please send patches with improvements based on master-next?
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../recipes-protocols/xl2tpd/xl2tpd.inc            |   2 -
- .../fix-inline-functions-errors-with-gcc-5.x.patch | 116 +++++++++++++++++++++
- .../recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb       |   5 +
- .../recipes-protocols/xl2tpd/xl2tpd_git.bb         |   5 -
- 4 files changed, 121 insertions(+), 7 deletions(-)
- create mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd/fix-inline-functions-errors-with-gcc-5.x.patch
- create mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb
- delete mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
-
-diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc b/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
-index 1a72fd1..03a1a0b 100644
---- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
-+++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
-@@ -6,8 +6,6 @@ DEPENDS = "ppp virtual/kernel"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
--INC_PR = "r0"
--
- SRC_URI = "git://github.com/xelerance/xl2tpd.git"
- 
- S = "${WORKDIR}/git"
-diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd/fix-inline-functions-errors-with-gcc-5.x.patch b/meta-networking/recipes-protocols/xl2tpd/xl2tpd/fix-inline-functions-errors-with-gcc-5.x.patch
-new file mode 100644
-index 0000000..dc78f02
---- /dev/null
-+++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd/fix-inline-functions-errors-with-gcc-5.x.patch
-@@ -0,0 +1,116 @@
-+Upstream-Status: Pending
-+
-+GCC 5.x defaults to -std=gnu11 instead of -std=gnu89. The semantics for
-+inline functions changes which causes build failures such as:
-+
-+| misc.h:68:20: warning: inline function 'swaps' declared but never defined
-+|  extern inline void swaps (void *, int);
-+|                      ^
-+
-+and
-+
-+| control.c:1717: undefined reference to `check_control'
-+
-+Fix them by:
-+1 drop 'inline' attribute for function swap()
-+2 replace 'inline' with 'static inline' for other functions
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ control.c | 8 ++++----
-+ misc.c    | 2 +-
-+ misc.h    | 2 +-
-+ network.c | 4 ++--
-+ 4 files changed, 8 insertions(+), 8 deletions(-)
-+
-+diff --git a/control.c b/control.c
-+index 134a7bf..0ef505b 100644
-+--- a/control.c
-++++ b/control.c
-+@@ -1139,7 +1139,7 @@ int control_finish (struct tunnel *t, struct call *c)
-+     return 0;
-+ }
-+ 
-+-inline int check_control (const struct buffer *buf, struct tunnel *t,
-++static inline int check_control (const struct buffer *buf, struct tunnel *t,
-+                           struct call *c)
-+ {
-+     /*
-+@@ -1275,7 +1275,7 @@ inline int check_control (const struct buffer *buf, struct tunnel *t,
-+     return 0;
-+ }
-+ 
-+-inline int check_payload (struct buffer *buf, struct tunnel *t,
-++static inline int check_payload (struct buffer *buf, struct tunnel *t,
-+                           struct call *c)
-+ {
-+     /*
-+@@ -1381,7 +1381,7 @@ inline int check_payload (struct buffer *buf, struct tunnel *t,
-+ #endif
-+     return 0;
-+ }
-+-inline int expand_payload (struct buffer *buf, struct tunnel *t,
-++static inline int expand_payload (struct buffer *buf, struct tunnel *t,
-+                            struct call *c)
-+ {
-+     /*
-+@@ -1561,7 +1561,7 @@ void send_zlb (void *data)
-+     toss (buf);
-+ }
-+ 
-+-inline int write_packet (struct buffer *buf, struct tunnel *t, struct call *c,
-++static inline int write_packet (struct buffer *buf, struct tunnel *t, struct call *c,
-+                          int convert)
-+ {
-+     /*
-+diff --git a/misc.c b/misc.c
-+index 3092401..af90dbf 100644
-+--- a/misc.c
-++++ b/misc.c
-+@@ -170,7 +170,7 @@ void do_packet_dump (struct buffer *buf)
-+     printf ("}\n");
-+ }
-+ 
-+-inline void swaps (void *buf_v, int len)
-++void swaps (void *buf_v, int len)
-+ {
-+ #ifdef __alpha
-+     /* Reverse byte order alpha is little endian so lest save a step.
-+diff --git a/misc.h b/misc.h
-+index aafdc62..caab7a1 100644
-+--- a/misc.h
-++++ b/misc.h
-+@@ -65,7 +65,7 @@ extern void l2tp_log (int level, const char *fmt, ...);
-+ extern struct buffer *new_buf (int);
-+ extern void udppush_handler (int);
-+ extern int addfcs (struct buffer *buf);
-+-extern inline void swaps (void *, int);
-++extern void swaps (void *, int);
-+ extern void do_packet_dump (struct buffer *);
-+ extern void status (const char *fmt, ...);
-+ extern void status_handler (int signal);
-+diff --git a/network.c b/network.c
-+index 5e5b8b2..b019c2c 100644
-+--- a/network.c
-++++ b/network.c
-+@@ -135,7 +135,7 @@ int init_network (void)
-+     return 0;
-+ }
-+ 
-+-inline void extract (void *buf, int *tunnel, int *call)
-++static inline void extract (void *buf, int *tunnel, int *call)
-+ {
-+     /*
-+      * Extract the tunnel and call #'s, and fix the order of the 
-+@@ -155,7 +155,7 @@ inline void extract (void *buf, int *tunnel, int *call)
-+     }
-+ }
-+ 
-+-inline void fix_hdr (void *buf)
-++static inline void fix_hdr (void *buf)
-+ {
-+     /*
-+      * Fix the byte order of the header
-+-- 
-+1.9.1
-+
-diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb
-new file mode 100644
-index 0000000..aac11b7
---- /dev/null
-+++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb
-@@ -0,0 +1,5 @@
-+require xl2tpd.inc
-+
-+SRCREV = "5619e1771048e74b729804e8602f409af0f3faea"
-+
-+SRC_URI += "file://fix-inline-functions-errors-with-gcc-5.x.patch"
-diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
-deleted file mode 100644
-index bd084aa..0000000
---- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--require xl2tpd.inc
--PR = "${INC_PR}.0"
--
--SRCREV = "df7e30eb199fc5710faa83866381aea18b66e60c"
--
--- 
-1.9.1
-
+Andreas
 
