@@ -1,35 +1,37 @@
 Return-Path: <andrei.kholodnyi@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 2111965D00
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 4FF9C73D17
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 19 Sep 2015 18:34:48 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so65485039wic.1
+Received: by wicgb1 with SMTP id gb1so68022531wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Sep 2015 11:34:48 -0700 (PDT)
+	Sat, 19 Sep 2015 11:34:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
+	h=from:to:subject:date:message-id:in-reply-to:references;
 	bh=O2ylFeLRpYwD5OZxQSo+TpFXEUQmod8o4ZRiJteSO78=;
-	b=wKXiTNCC77DHg0hgVrN8Zf0vWlTkL25knuzhL09SAXDXJVj2aPW7TvJUv8tflbl4t+
-	6FVI3IYKmFtbDoD54mHExyBEUiTHrzv+yCX8BEEtnmfgDYDeqYJg57zk0rEYC5xvQ50Y
-	+IrOg57KJZP0+9tlHRQf4Qb0KSdiDqlwD+TdPfEQddCfQ3xD/uUlx64W9Srasoy2xu+D
-	j286zgaV0HiSjthYO0IpFXKvKLtmKYMtKb71IcRLbCY+mhXnjp7OZvQI8prfIrZ35kba
-	z9h5FLkjMNplAoIatt7O4FmjGzjuYBmG4ZCRh8w/47PiJvBi4wDru5Kq1C1KJEzsVKBv
-	4gJQ==
-X-Received: by 10.180.205.206 with SMTP id li14mr4162969wic.76.1442687688006; 
+	b=NXS4ZLNJYZYfTUBnmeDMCXFwWU7kIkhJxVYPXr3r/rIr9GABn2XLuO43GLUI0mubPm
+	N7qfBDl04Ea5gbZN55MieivTGjVah2duX3qxax/B586g86f1j3nxP5d5fEgJXYSjvwqt
+	SfQm0F9L1GMBB/GIteEByVmDTIrP4yafHhHP4G533c08KYjOqdLvsHOZQpCYrQa2Vpm9
+	spDJ0HUhbjKxtkdG9rgW3lYUsjyFT5JRHPusGuPlGJH+80RcApILkWj3ls4woGmhPvIH
+	n7eZUkUz5zsCsUPILJvEg9MtBs/KCglWctyoM/5ZM5pux5FcGdgO02Con/DksZaNYAKo
+	p9oQ==
+X-Received: by 10.180.186.195 with SMTP id fm3mr4950246wic.1.1442687688977;
 	Sat, 19 Sep 2015 11:34:48 -0700 (PDT)
 Received: from razilix.corp.ad.wrs.com ([128.224.251.2])
 	by smtp.googlemail.com with ESMTPSA id
-	d1sm4532170wiz.0.2015.09.19.11.34.47
+	d1sm4532170wiz.0.2015.09.19.11.34.48
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 19 Sep 2015 11:34:47 -0700 (PDT)
+	Sat, 19 Sep 2015 11:34:48 -0700 (PDT)
 From: Andrei Kholodnyi <andrei.kholodnyi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Sep 2015 20:30:35 +0200
-Message-Id: <1442687436-29326-1-git-send-email-andrei.kholodnyi@gmail.com>
+Date: Sat, 19 Sep 2015 20:30:36 +0200
+Message-Id: <1442687436-29326-2-git-send-email-andrei.kholodnyi@gmail.com>
 X-Mailer: git-send-email 2.1.4
-Subject: [PATCH 1/1] add --with-systemdsystemunitdir in configuration
+In-Reply-To: <1442687436-29326-1-git-send-email-andrei.kholodnyi@gmail.com>
+References: <1442687436-29326-1-git-send-email-andrei.kholodnyi@gmail.com>
+Subject: [meta-oe][PATCH] add --with-systemdsystemunitdir in configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
