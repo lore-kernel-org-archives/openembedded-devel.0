@@ -1,35 +1,37 @@
 Return-Path: <andrei.kholodnyi@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 4027476417
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DDEF7680E
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 19 Sep 2015 19:46:59 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so100313145wic.1
+Received: by wicgb1 with SMTP id gb1so69108228wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Sep 2015 12:46:59 -0700 (PDT)
+	Sat, 19 Sep 2015 12:47:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
+	h=from:to:subject:date:message-id:in-reply-to:references;
 	bh=Enq+bM++m0aXm6b1VrJkCJg6Feevro0QspkNO93DB8g=;
-	b=IINHzVnILjuAmOi1FnxLYM17nEj+OxUD027vxtE4x1yAfV9ST5yzYSRT94P6j3srQW
-	klh0U66YEv5y+2VQAfMosw88Q/yeJOfRIdFxHbB7b0VNFsM0geMx+kpNGWE/YQ/iRskC
-	5CHMnkd0zg907KVvfn2Shb0skZRz8VACfe3UxHo88SL/TNX6Mw4mcA+XIxbx0SPHMTV/
-	oCwLCw2COcC+Ng3PM4+qIuSd10dUqRT95R7FQBXXWyDpP5eBxF70oR+/THrHvLsajdk6
-	ZKAHVwPseeX4tcAP/bkHvX7tcib3DbGqMFdnOvZJVzUrKvNxcfJS3YM6sGfKQBD+R08W
-	xL2A==
-X-Received: by 10.180.100.37 with SMTP id ev5mr4742024wib.15.1442692019384;
+	b=pSLw2pRK0VnYsy25nXduPMsHR2ChkyuaAM9J1+dUHn7BQtBre6SqE0tW8ojcRGCiv/
+	zUx9ObPnLGrqvPHz9IGLBnQY4AbR+odE0EQiKNNpszfKKxU3EREb15vK2YP6zWuaqOWC
+	pUKmRcy8MWw+tfdy5Ae+zIV4Y4N2zjPcaIOXOGPH/pinEc+aHxtScI0JeMumxCMObtyw
+	fBkEwOUvvEfLZLkZi2piYKZxVtvfhm8zybrVVpLbmwMTDk6OqQlmwcOmGJBWvinx0Sja
+	Ya3mCVCGJxrV/xzm1a3cKm6mBTewCXUqJ28lg6Sx6gM+v3AErFXTaHPi6cpHoR8sDqN7
+	EK3w==
+X-Received: by 10.180.188.101 with SMTP id fz5mr5298240wic.3.1442692019986;
 	Sat, 19 Sep 2015 12:46:59 -0700 (PDT)
 Received: from razilix.corp.ad.wrs.com ([128.224.251.2])
 	by smtp.googlemail.com with ESMTPSA id
-	gl4sm15452617wjb.29.2015.09.19.12.46.58
+	gl4sm15452617wjb.29.2015.09.19.12.46.59
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 19 Sep 2015 12:46:58 -0700 (PDT)
+	Sat, 19 Sep 2015 12:46:59 -0700 (PDT)
 From: Andrei Kholodnyi <andrei.kholodnyi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Sep 2015 21:42:47 +0200
-Message-Id: <1442691768-30079-1-git-send-email-andrei.kholodnyi@gmail.com>
+Date: Sat, 19 Sep 2015 21:42:48 +0200
+Message-Id: <1442691768-30079-2-git-send-email-andrei.kholodnyi@gmail.com>
 X-Mailer: git-send-email 2.1.4
-Subject: [PATCH 1/1] lvm2: add --with-systemdsystemunitdir in configuration Otherwise sed command for blk-availability.service may fail. It will look for the service file in a wrong location
+In-Reply-To: <1442691768-30079-1-git-send-email-andrei.kholodnyi@gmail.com>
+References: <1442691768-30079-1-git-send-email-andrei.kholodnyi@gmail.com>
+Subject: [meta-oe][PATCH] lvm2: add --with-systemdsystemunitdir in configuration Otherwise sed command for blk-availability.service may fail. It will look for the service file in a wrong location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
