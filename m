@@ -1,37 +1,32 @@
-Return-Path: <andrei.kholodnyi@gmail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DDEF7680E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-io0-f176.google.com (mail-io0-f176.google.com
+	[209.85.223.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D5D07680B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Sep 2015 19:46:59 +0000 (UTC)
-Received: by wicgb1 with SMTP id gb1so69108228wic.1
+	Sat, 19 Sep 2015 20:03:27 +0000 (UTC)
+Received: by ioiz6 with SMTP id z6so86657109ioi.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Sep 2015 12:47:00 -0700 (PDT)
+	Sat, 19 Sep 2015 13:03:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=Enq+bM++m0aXm6b1VrJkCJg6Feevro0QspkNO93DB8g=;
-	b=pSLw2pRK0VnYsy25nXduPMsHR2ChkyuaAM9J1+dUHn7BQtBre6SqE0tW8ojcRGCiv/
-	zUx9ObPnLGrqvPHz9IGLBnQY4AbR+odE0EQiKNNpszfKKxU3EREb15vK2YP6zWuaqOWC
-	pUKmRcy8MWw+tfdy5Ae+zIV4Y4N2zjPcaIOXOGPH/pinEc+aHxtScI0JeMumxCMObtyw
-	fBkEwOUvvEfLZLkZi2piYKZxVtvfhm8zybrVVpLbmwMTDk6OqQlmwcOmGJBWvinx0Sja
-	Ya3mCVCGJxrV/xzm1a3cKm6mBTewCXUqJ28lg6Sx6gM+v3AErFXTaHPi6cpHoR8sDqN7
-	EK3w==
-X-Received: by 10.180.188.101 with SMTP id fz5mr5298240wic.3.1442692019986;
-	Sat, 19 Sep 2015 12:46:59 -0700 (PDT)
-Received: from razilix.corp.ad.wrs.com ([128.224.251.2])
-	by smtp.googlemail.com with ESMTPSA id
-	gl4sm15452617wjb.29.2015.09.19.12.46.59
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 19 Sep 2015 12:46:59 -0700 (PDT)
-From: Andrei Kholodnyi <andrei.kholodnyi@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Sep 2015 21:42:48 +0200
-Message-Id: <1442691768-30079-2-git-send-email-andrei.kholodnyi@gmail.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1442691768-30079-1-git-send-email-andrei.kholodnyi@gmail.com>
-References: <1442691768-30079-1-git-send-email-andrei.kholodnyi@gmail.com>
-Subject: [meta-oe][PATCH] lvm2: add --with-systemdsystemunitdir in configuration Otherwise sed command for blk-availability.service may fail. It will look for the service file in a wrong location
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=pmPceVCXJj1xl3kyXu1IiwEblNxL1R5AdbloTDaJpag=;
+	b=pP2lxdxyyUX1hkyu8bT1MYFp3SI1IJKyeDSSnELtbv7qLZNN0xx4wlL5ZvE3yf7TjC
+	rEsoBmCEZmWpYkCDRpIUVeOnNZk+jESjWWCFrJz+9ai/+pHKvj247Xs2J+kf+U09MtEx
+	bs5VlJpNDdFSc+YkLJfsR7gzBIU0kHiwbyuhvn2M+mb/RdJ64HdwrbRGTuAK2sqjbQIj
+	3f++QRmjiEYiQ4/mrrmyP5GeYfVSlYe4Y+XYEd2NL3KmM8UoW73MPMAQ8vUumOnEk48J
+	XgNtX4KEa1lDp8KwgRqKCu/TMDY7GC2oC7RsR8bb32Mv/2aDxXIA1Sa7JchD4uGt83Fk
+	KxWA==
+X-Received: by 10.107.34.149 with SMTP id i143mr22259254ioi.195.1442693007570; 
+	Sat, 19 Sep 2015 13:03:27 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.142.130 with HTTP; Sat, 19 Sep 2015 13:02:58 -0700 (PDT)
+In-Reply-To: <1442651315-18493-1-git-send-email-manuel.bachmann@iot.bzh>
+References: <1442651315-18493-1-git-send-email-manuel.bachmann@iot.bzh>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 19 Sep 2015 13:02:58 -0700
+Message-ID: <CAMKF1so0dDq2Wxq25q+hRms8rUKc24RaZH6aZbVV1H75GqC+tg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] wayland-fits: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,25 +40,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Sep 2015 19:47:01 -0000
+X-List-Received-Date: Sat, 19 Sep 2015 20:03:32 -0000
+Content-Type: text/plain; charset=UTF-8
 
----
- meta-oe/recipes-support/lvm2/lvm2.inc | 1 +
- 1 file changed, 1 insertion(+)
+On Sat, Sep 19, 2015 at 1:28 AM, Manuel Bachmann
+<manuel.bachmann@iot.bzh> wrote:
+> wayland-fits is a functional integration test suite
+> for Wayland and Weston.
+>
+> Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
+> ---
+>  .../recipes-graphics/wayland/wayland-fits_git.bb   | 30 ++++++++++++++++++++++
+>  1 file changed, 30 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/wayland/wayland-fits_git.bb
+>
+> diff --git a/meta-oe/recipes-graphics/wayland/wayland-fits_git.bb b/meta-oe/recipes-graphics/wayland/wayland-fits_git.bb
+> new file mode 100644
+> index 0000000..550e171
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/wayland/wayland-fits_git.bb
+> @@ -0,0 +1,30 @@
+> +SUMMARY = "Wayland-fits, the Wayland Functional Integration Test Suite"
+> +DESCRIPTION = "Wayland-fits is a fully automated functional integration \
+> +test suite. Its main purpose is to test the functionality and integration of \
+> +client-side (i.e. toolkit) and server-side (compositor) implementations of \
+> +the Wayland protocol."
+> +HOMEPAGE = "https://github.com/01org/wayland-fits"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=f8d34cadaf891753c0f00c6cd48f08f5 \
+> +                    file://src/extensions/weston/weston-wfits.cpp;endline=21;md5=848c81e55cf3a30a9f6ed75f0dba7a97"
+> +
+> +SRC_URI = "git://github.com/01org/wayland-fits.git"
+> +SRCREV = "f30dfa9fceb438d3687c5215093fffc21a7852fc"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit autotools pkgconfig
+> +
+> +DEPENDS = "libcheck boost wayland weston"
+> +RDEPENDS_${PN} = "weston"
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index 2b2d8ed..8114d5f 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -27,6 +27,7 @@ EXTRA_OECONF = "--with-user= \
-                 --enable-lvmetad \
-                 --with-udev-prefix= \
-                 --with-usrlibdir=${libdir} \
-+                --with-systemdsystemunitdir=${systemd_unitdir}/system \
- "
- 
- PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
--- 
-2.1.4
+may be better to use += here
 
+> +
+> +EXTRA_OECONF = "--enable-shared --disable-static \
+> +                --disable-efl-tests --disable-gtk-tests \
+> +                --with-boost-libdir=${STAGING_LIBDIR}"
+
+We do have EFL and GTK support in OE, would it make sense to turn it
+into some sort of PACKAGECONFIG ?
+
+> +
+> +do_install_append() {
+> +       rm -f ${D}/${libdir}/weston/*.la
+> +}
+> +
+> +FILES_${PN} = "${bindir}/wfits ${libdir}/weston/*.so"
+> +FILES_${PN}-dbg = "${bindir}/.debug ${libdir}/weston/.debug ${prefix}/src"
+
+this could be += as well.
+
+> --
+> 1.8.3.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
