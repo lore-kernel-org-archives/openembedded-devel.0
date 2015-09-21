@@ -1,34 +1,35 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
-	[209.85.213.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 77D3F757AC
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 26F75756C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Sep 2015 09:20:30 +0000 (UTC)
-Received: by igbkq10 with SMTP id kq10so74070798igb.0
+	Mon, 21 Sep 2015 09:25:26 +0000 (UTC)
+Received: by wiclk2 with SMTP id lk2so136963246wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Sep 2015 02:20:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=ZwV3S3ZpqVJOGda0b2JCfwUsPp0E3aqE/kDIEnN1jHw=;
-	b=xgNzujSTRE4WeCplUnNR3gv+rRK+P87BmZHMhfbTAMEfuCBwwIuKAifdxMhCdoe2br
-	ABKQogGxBfXTlnyuZhPgSuIjQLjOmfjqvoY/ab0wZQRP52di1UhDIUf8Syv6X6DUqh72
-	GIMwY4GYOo4m/mDW6nTcknZqT4hIdOMxiOqGvAPEnYFA5hoAJxuuWuK+NUbxs/9mAG/M
-	c/On09YNdSeDVJahT6fSO2/BqZtq6D233rR2prRbBNuXOzNdwRGLFOlDW9ht9zyYQ/lq
-	EouZCQs2GaQfibB3r9hue2LTFFER1drRfVlMTcGuhsLn9fc3c54tp0+7nNjXT0wzKZVG
-	oR7A==
-MIME-Version: 1.0
-X-Received: by 10.50.111.113 with SMTP id ih17mr8786881igb.64.1442827231125;
-	Mon, 21 Sep 2015 02:20:31 -0700 (PDT)
-Received: by 10.36.98.5 with HTTP; Mon, 21 Sep 2015 02:20:31 -0700 (PDT)
-In-Reply-To: <1442825317-27595-1-git-send-email-jackie.huang@windriver.com>
-References: <1442825317-27595-1-git-send-email-jackie.huang@windriver.com>
-Date: Mon, 21 Sep 2015 11:20:31 +0200
-Message-ID: <CALbNGRQwLPUN6Bs=heHtS6W+k978ztKdG_WqTZdH+SNwr080fw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, jackie.huang@windriver.com
-Subject: Re: [meta-xfce][PATCH] xfce4-screenshooter: ensure output directory is created
+	Mon, 21 Sep 2015 02:25:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=UeOxzUCUS1ezkZhpgcLNQFdtORbAvWoIvJpIdRvTasU=;
+	b=YTf2ylOVHzCGDyYYX/O3nezl7JwkdaB1yerFGRksQ+9BEd8whiqGrSx2Dw+SGzwlun
+	riLa8QomZjwFJmns/UWCwrdYxdb4lvYkfxcMHDdklG9XtRy/bkVUgXsDKrvERQBG0Yf0
+	wj0FOLgBLYOH5JcidiobL8GFisPsg9KRX0hADuHxCxiDccU/35wZoqJrzQt8GGZ1LBKj
+	PBJnBO5GFXdgA8DWXcd7Rx+FBbpRSv/sapb7XaQnluC8t+RWuh3OTcQ+w/vKssIcSC8h
+	IAV4HG0dAineBp6EIJjeLvU+eYTSA/4Kljb9Gl63taqiRvlC07HNClkQq6rjT3dzJxdO
+	7F7w==
+X-Received: by 10.194.171.3 with SMTP id aq3mr22106435wjc.54.1442827526047;
+	Mon, 21 Sep 2015 02:25:26 -0700 (PDT)
+Received: from chl500346.neratec.local (mail.neratec.com. [46.140.151.2])
+	by smtp.gmail.com with ESMTPSA id
+	c2sm12455009wiy.11.2015.09.21.02.25.25
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 21 Sep 2015 02:25:25 -0700 (PDT)
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 21 Sep 2015 11:25:18 +0200
+Message-Id: <1442827518-10891-1-git-send-email-adrian.freihofer@gmail.com>
+X-Mailer: git-send-email 2.4.3
+Cc: fabio.berton@ossystems.com.br
+Subject: [PATCH] pyroute2: update to 0.3.14, fix depends, fix license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,22 +43,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Sep 2015 09:20:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Sep 2015 09:25:27 -0000
 
-On Mon, Sep 21, 2015 at 10:48 AM,  <jackie.huang@windriver.com> wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
->
-> When build with B != S, the output directory for desktop
-> file doesn't exist so it will fail if it's not created
-> before generating the file:
-> /bin/sh: line 1: src/xfce4-screenshooter.desktop.in: No such file or directory
->
-> Add "$(MKDIR_P) $(dir $@)" to the rule to fix this.
->
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
-Thanks for taking care!
+---
+ .../python/python-pyroute2_0.3.12.bb               | 14 -------------
+ .../python/python-pyroute2_0.3.14.bb               | 24 ++++++++++++++++++++++
+ 2 files changed, 24 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pyroute2_0.3.12.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-pyroute2_0.3.14.bb
 
-Andreas
+diff --git a/meta-python/recipes-devtools/python/python-pyroute2_0.3.12.bb b/meta-python/recipes-devtools/python/python-pyroute2_0.3.12.bb
+deleted file mode 100644
+index d809d97..0000000
+--- a/meta-python/recipes-devtools/python/python-pyroute2_0.3.12.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-DESCRIPTION = "A pure Python netlink and Linux network configuration library"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=270323035ef766597dabd91747c36e3d"
+-
+-SRC_URI[md5sum] = "5d83ec82acb54ab88c98f0d25d13308b"
+-SRC_URI[sha256sum] = "c0e1637a75e099104f14d9e03fd5a698dfcc923a22fbfac4a19bd7e94d1fcaa5"
+-
+-SRC_URI += "file://import-simplejson-as-json.patch"
+-
+-inherit pypi
+-
+-RDEPENDS_${PN} = "python-distutils \
+-                  python-simplejson \
+-                  "
+diff --git a/meta-python/recipes-devtools/python/python-pyroute2_0.3.14.bb b/meta-python/recipes-devtools/python/python-pyroute2_0.3.14.bb
+new file mode 100644
+index 0000000..3fc5142
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyroute2_0.3.14.bb
+@@ -0,0 +1,24 @@
++DESCRIPTION = "A pure Python netlink and Linux network configuration library"
++LICENSE = "GPLv2 & Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++                    file://LICENSE.Apache.v2;md5=3b83ef96387f14655fc854ddc3c6bd57"
++
++SRC_URI[md5sum] = "1e7e771702056e61cf522cccc39ea09e"
++SRC_URI[sha256sum] = "aed742a7dbe55eb7f02dbb26719f554b9e92198c4b3c7ac501ad03bbb6421962"
++
++SRC_URI += "file://import-simplejson-as-json.patch"
++
++inherit pypi
++
++RDEPENDS_${PN} += "\
++  python-distutils \
++  python-simplejson \
++  python-multiprocessing \
++  python-io python-pprint \
++  python-pickle \
++  python-logging \
++  python-threading \
++  python-textutils \
++  python-subprocess \
++  python-netclient \
++"
+-- 
+2.4.3
+
 
