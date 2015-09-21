@@ -1,24 +1,33 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BF6473243
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A05173243
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Sep 2015 08:48:27 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t8L8mQhZ020089
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 21 Sep 2015 08:59:44 +0000 (UTC)
+Received: by wiclk2 with SMTP id lk2so135981706wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Sep 2015 01:48:27 -0700 (PDT)
-Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.235.1; Mon, 21 Sep 2015 01:48:26 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 21 Sep 2015 16:48:37 +0800
-Message-ID: <1442825317-27595-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [meta-xfce][PATCH] xfce4-screenshooter: ensure output directory is created
+	Mon, 21 Sep 2015 01:59:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=STR/wrxX356xE++F+4pytrwfS6FyAeLb4sSEjCYsNPQ=;
+	b=aYlza8x1WFSU2UeLX0R++3hI57FheMaHrDzHltEHeoMeFD9OKYTK6Objp+7cUayMhw
+	6HD4N0eCn2ujitQKD6tVBTSx3BGcJmVZIpqynd1JQdCcPZ7hTDF5P2l8Oq1J9eXTgNFQ
+	5ymA0ZVJYno7DJn62psxtlV99W7jcIUl4uw3i5pPHbAxnzPWNtNUt14E+8pWaIRcdjWx
+	LM0+2+wq2fcr/frPrPm6uu3HffvJU6reMmeT+zM2jYwyByvER/81dJVsseywRhi3tLlV
+	7mvt3zjDsfLATuCBhzIZyOxXCunpas1wzChcUU95A8kdstZVyDbV1v2n22gZy99j5LY6
+	3mVg==
+X-Received: by 10.180.89.41 with SMTP id bl9mr11838571wib.85.1442825984577;
+	Mon, 21 Sep 2015 01:59:44 -0700 (PDT)
+Received: from chl500346.neratec.local (mail.neratec.com. [46.140.151.2])
+	by smtp.gmail.com with ESMTPSA id m4sm22970274wje.5.2015.09.21.01.59.43
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 21 Sep 2015 01:59:44 -0700 (PDT)
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 21 Sep 2015 10:59:32 +0200
+Message-Id: <1442825975-8950-1-git-send-email-adrian.freihofer@gmail.com>
+X-Mailer: git-send-email 2.4.3
+Subject: [PATCH 0/3] libgudev fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,74 +41,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Sep 2015 08:48:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 21 Sep 2015 08:59:45 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Exclude usage of libgudev with older systemd versions providing libgudev as
+well.
+Fix networkmanager and modemmanager to use libgudev instead of udev.
 
-When build with B != S, the output directory for desktop
-file doesn't exist so it will fail if it's not created
-before generating the file:
-/bin/sh: line 1: src/xfce4-screenshooter.desktop.in: No such file or directory
+Adrian Freihofer (3):
+  libgudev: exclude use with systemd <=220
+  networkmanager: depend on libgudev not on udev
+  modemmanager: depend on libgudev not on udev
 
-Add "$(MKDIR_P) $(dir $@)" to the rule to fix this.
+ meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb     | 2 +-
+ meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.4.bb | 2 +-
+ meta-oe/recipes-gnome/libgudev/libgudev_230.bb                      | 2 ++
+ 3 files changed, 4 insertions(+), 2 deletions(-)
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- ...m-create-ouput-directory-for-desktop-file.patch | 29 ++++++++++++++++++++++
- .../xfce4-screenshooter_1.8.2.bb                   |  2 ++
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-xfce/recipes-apps/xfce4-screenshooter/files/0001-Makefile.am-create-ouput-directory-for-desktop-file.patch
-
-diff --git a/meta-xfce/recipes-apps/xfce4-screenshooter/files/0001-Makefile.am-create-ouput-directory-for-desktop-file.patch b/meta-xfce/recipes-apps/xfce4-screenshooter/files/0001-Makefile.am-create-ouput-directory-for-desktop-file.patch
-new file mode 100644
-index 0000000..62bffef
---- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce4-screenshooter/files/0001-Makefile.am-create-ouput-directory-for-desktop-file.patch
-@@ -0,0 +1,29 @@
-+From c85bf7cc5c1e1780d215f6fe233e3ed4597c72ed Mon Sep 17 00:00:00 2001
-+From: Jackie Huang <jackie.huang@windriver.com>
-+Date: Mon, 21 Sep 2015 06:54:28 +0000
-+Subject: [PATCH] Makefile.am: create ouput directory for desktop file
-+
-+Upstream-Status: Submitted [1]
-+
-+[1]: http://bug-attachment.xfce.org/attachment.cgi?id=6460
-+
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+---
-+ Makefile.am | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index a22fc20..2ef0e54 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -122,6 +122,7 @@ app_desktop_DATA = $(app_desktop_in_files:.desktop.in=.desktop)
-+ 
-+ src/xfce4-screenshooter.desktop.in: src/xfce4-screenshooter.desktop.in.in
-+ 	$(AM_V_GEN) ( \
-++		$(MKDIR_P) $(dir $@); \
-+ 		sed -e "s^@PLUGIN_PATH@^$(libexecdir)/applications^" \
-+ 			$< > $@ \
-+ 	)
-+-- 
-+2.0.1
-+
-diff --git a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.8.2.bb b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.8.2.bb
-index ae19492..de2bc61 100644
---- a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.8.2.bb
-+++ b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.8.2.bb
-@@ -7,6 +7,8 @@ DEPENDS = "xfce4-panel libxfce4util libxfce4ui gdk-pixbuf gtk+ glib-2.0 libsoup-
- 
- inherit xfce-app
- 
-+SRC_URI += "file://0001-Makefile.am-create-ouput-directory-for-desktop-file.patch"
-+
- SRC_URI[md5sum] = "3a32ecc5566453a58f6a4ddd70649444"
- SRC_URI[sha256sum] = "9dce2ddfaa87f703e870e29bae13f3fc82a1b3f06b44f8386640e45a135f5f69"
- 
 -- 
-1.9.1
+2.4.3
 
 
