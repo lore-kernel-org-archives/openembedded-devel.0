@@ -1,35 +1,36 @@
-Return-Path: <adrian.freihofer@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 26F75756C5
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F71860125
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Sep 2015 09:25:26 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so136963246wic.0
+	Mon, 21 Sep 2015 09:54:30 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so137528167wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Sep 2015 02:25:26 -0700 (PDT)
+	Mon, 21 Sep 2015 02:54:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=UeOxzUCUS1ezkZhpgcLNQFdtORbAvWoIvJpIdRvTasU=;
-	b=YTf2ylOVHzCGDyYYX/O3nezl7JwkdaB1yerFGRksQ+9BEd8whiqGrSx2Dw+SGzwlun
-	riLa8QomZjwFJmns/UWCwrdYxdb4lvYkfxcMHDdklG9XtRy/bkVUgXsDKrvERQBG0Yf0
-	wj0FOLgBLYOH5JcidiobL8GFisPsg9KRX0hADuHxCxiDccU/35wZoqJrzQt8GGZ1LBKj
-	PBJnBO5GFXdgA8DWXcd7Rx+FBbpRSv/sapb7XaQnluC8t+RWuh3OTcQ+w/vKssIcSC8h
-	IAV4HG0dAineBp6EIJjeLvU+eYTSA/4Kljb9Gl63taqiRvlC07HNClkQq6rjT3dzJxdO
-	7F7w==
-X-Received: by 10.194.171.3 with SMTP id aq3mr22106435wjc.54.1442827526047;
-	Mon, 21 Sep 2015 02:25:26 -0700 (PDT)
-Received: from chl500346.neratec.local (mail.neratec.com. [46.140.151.2])
+	bh=9jQTK4oxyxBYrBvoJznnH4sCpIJDLfPWDiCPUdHwiYs=;
+	b=xlQy4bdAZ7EbfHs6laXVkB9xPD1vkl6XWeAbazEj1I1Pt9ud1ydi+NOM0pChZefL6m
+	BnyqjzV05mLDCVBupweZAlYnFhgsGoPPWwY7j8NzQtpu+Rueye+6z/2eC0mP//EZsDjw
+	UDByeIzCvQewYpjHr7nYpra+CZzy3sZ5lZtJ+qgIMPz2Xabtr7g7iqVtCMeLjTMz6MU5
+	Gs3Hj1jTpKMpKqsDY7keCCAQB/98EALEEHY1AAsJTzMudzVQAPIHGXP8lQlMID2CHqS8
+	lRLPg06Xtzm16CVsRL5JHAwLIdpn8z+uqdBiLnUIXrbfSAFGTelcA4JGosbNr4msij0m
+	2mSQ==
+X-Received: by 10.180.35.163 with SMTP id i3mr11653431wij.80.1442829270561;
+	Mon, 21 Sep 2015 02:54:30 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	c2sm12455009wiy.11.2015.09.21.02.25.25
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 21 Sep 2015 02:25:25 -0700 (PDT)
-From: Adrian Freihofer <adrian.freihofer@gmail.com>
+	cm6sm12558279wib.22.2015.09.21.02.54.29
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 21 Sep 2015 02:54:29 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Sep 2015 11:25:18 +0200
-Message-Id: <1442827518-10891-1-git-send-email-adrian.freihofer@gmail.com>
-X-Mailer: git-send-email 2.4.3
-Cc: fabio.berton@ossystems.com.br
-Subject: [PATCH] pyroute2: update to 0.3.14, fix depends, fix license
+Date: Mon, 21 Sep 2015 11:54:34 +0200
+Message-Id: <1442829274-9427-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.5.1
+Cc: Christophe Chapuis <chris.chapuis@gmail.com>
+Subject: [PATCH][meta-qt5] maliit-framework-qt5: bump to latest commit for getting Qt 5.5 compatibility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,66 +44,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Sep 2015 09:25:27 -0000
+X-List-Received-Date: Mon, 21 Sep 2015 09:54:32 -0000
 
+From: Christophe Chapuis <chris.chapuis@gmail.com>
+
+Signed-off-by: Christophe Chapuis <chris.chapuis@gmail.com>
 ---
- .../python/python-pyroute2_0.3.12.bb               | 14 -------------
- .../python/python-pyroute2_0.3.14.bb               | 24 ++++++++++++++++++++++
- 2 files changed, 24 insertions(+), 14 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pyroute2_0.3.12.bb
- create mode 100644 meta-python/recipes-devtools/python/python-pyroute2_0.3.14.bb
+ .../maliit/maliit-framework-qt5/qt5.3-fix.patch    | 43 ----------------------
+ recipes-qt/maliit/maliit-framework-qt5_git.bb      |  3 +-
+ 2 files changed, 1 insertion(+), 45 deletions(-)
+ delete mode 100644 recipes-qt/maliit/maliit-framework-qt5/qt5.3-fix.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-pyroute2_0.3.12.bb b/meta-python/recipes-devtools/python/python-pyroute2_0.3.12.bb
+diff --git a/recipes-qt/maliit/maliit-framework-qt5/qt5.3-fix.patch b/recipes-qt/maliit/maliit-framework-qt5/qt5.3-fix.patch
 deleted file mode 100644
-index d809d97..0000000
---- a/meta-python/recipes-devtools/python/python-pyroute2_0.3.12.bb
+index 4f8890f..0000000
+--- a/recipes-qt/maliit/maliit-framework-qt5/qt5.3-fix.patch
 +++ /dev/null
-@@ -1,14 +0,0 @@
--DESCRIPTION = "A pure Python netlink and Linux network configuration library"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=270323035ef766597dabd91747c36e3d"
+@@ -1,43 +0,0 @@
+-Fix compatibility with qt-5.3
 -
--SRC_URI[md5sum] = "5d83ec82acb54ab88c98f0d25d13308b"
--SRC_URI[sha256sum] = "c0e1637a75e099104f14d9e03fd5a698dfcc923a22fbfac4a19bd7e94d1fcaa5"
+-https://bugs.launchpad.net/ubuntu/+source/maliit-framework/+bug/1323962
 -
--SRC_URI += "file://import-simplejson-as-json.patch"
+-Upstream-Status: Pending
 -
--inherit pypi
--
--RDEPENDS_${PN} = "python-distutils \
--                  python-simplejson \
--                  "
-diff --git a/meta-python/recipes-devtools/python/python-pyroute2_0.3.14.bb b/meta-python/recipes-devtools/python/python-pyroute2_0.3.14.bb
-new file mode 100644
-index 0000000..3fc5142
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyroute2_0.3.14.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "A pure Python netlink and Linux network configuration library"
-+LICENSE = "GPLv2 & Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-+                    file://LICENSE.Apache.v2;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+
-+SRC_URI[md5sum] = "1e7e771702056e61cf522cccc39ea09e"
-+SRC_URI[sha256sum] = "aed742a7dbe55eb7f02dbb26719f554b9e92198c4b3c7ac501ad03bbb6421962"
-+
-+SRC_URI += "file://import-simplejson-as-json.patch"
-+
-+inherit pypi
-+
-+RDEPENDS_${PN} += "\
-+  python-distutils \
-+  python-simplejson \
-+  python-multiprocessing \
-+  python-io python-pprint \
-+  python-pickle \
-+  python-logging \
-+  python-threading \
-+  python-textutils \
-+  python-subprocess \
-+  python-netclient \
-+"
+-diff --git a/src/maliit/plugins/updateevent.cpp b/src/maliit/plugins/updateevent.cpp
+-index 06a5228..85b7166 100644
+---- a/src/maliit/plugins/updateevent.cpp
+-+++ b/src/maliit/plugins/updateevent.cpp
+-@@ -38,7 +38,7 @@ bool MImUpdateEventPrivate::isFlagSet(Qt::InputMethodHint hint,
+-     bool result = false;
+- 
+-     if (update.contains(Maliit::Internal::inputMethodHints)) {
+--        const Qt::InputMethodHints hints(static_cast<Qt::InputMethodHints>(
+-+        const Qt::InputMethodHints hints(static_cast<int>(
+-                                              update.value(Maliit::Internal::inputMethodHints).toLongLong()));
+- 
+-         result = (hints & hint);
+-@@ -89,8 +89,8 @@ QStringList MImUpdateEvent::propertiesChanged() const
+- Qt::InputMethodHints MImUpdateEvent::hints(bool *changed) const
+- {
+-     Q_D(const MImUpdateEvent);
+--    return static_cast<Qt::InputMethodHints>(
+--        d->extractProperty(Maliit::Internal::inputMethodHints, changed).toLongLong());
+-+    return Qt::InputMethodHints(static_cast<int>(
+-+        d->extractProperty(Maliit::Internal::inputMethodHints, changed).toLongLong()));
+- }
+- 
+- bool MImUpdateEvent::westernNumericInputEnforced(bool *changed) const
+-diff --git a/src/mimpluginmanager.cpp b/src/mimpluginmanager.cpp
+-index 02788a4..3c5c99a 100644
+---- a/src/mimpluginmanager.cpp
+-+++ b/src/mimpluginmanager.cpp
+-@@ -1493,7 +1493,7 @@ void MIMPluginManager::handleWidgetStateChanged(unsigned int clientId,
+-         }
+-     }
+- 
+--    const Qt::InputMethodHints lastHints = static_cast<Qt::InputMethodHints>(newState.value(Maliit::Internal::inputMethodHints).toLongLong());
+-+    const Qt::InputMethodHints lastHints(static_cast<int>(newState.value(Maliit::Internal::inputMethodHints).toLongLong()));
+-     MImUpdateEvent ev(newState, changedProperties, lastHints);
+- 
+-     // general notification last
+diff --git a/recipes-qt/maliit/maliit-framework-qt5_git.bb b/recipes-qt/maliit/maliit-framework-qt5_git.bb
+index 83da8ca..975892d 100644
+--- a/recipes-qt/maliit/maliit-framework-qt5_git.bb
++++ b/recipes-qt/maliit/maliit-framework-qt5_git.bb
+@@ -9,10 +9,9 @@ inherit qmake5
+ SRC_URI = "git://github.com/maliit/framework.git;branch=master \
+     file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
+     file://maliit-server.desktop \
+-    file://qt5.3-fix.patch \
+ "
+ 
+-SRCREV = "17fdf8699c53ddfb2c15df8e11d46804e782fec5"
++SRCREV = "60b1b10de14f932420313c547ab801daf522d539"
+ PV = "0.99.0+git${SRCPV}"
+ 
+ 
 -- 
-2.4.3
+2.5.1
 
 
