@@ -1,34 +1,30 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 3AC7E608B7
+Return-Path: <haris.okanovic@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id E6395608B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 22:29:31 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so89301697wic.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 15:29:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=z2Vow5ajmvo4faFGAZwDpZlYBP7fZniQ3lCkJBfIZ6Q=;
-	b=Dszx4X6fSQvq4SCJ46efca3XADl9WWiJ8wtKaymVeYZSHG6V0+bYFBzqa7l/J/oOHm
-	kBN2Kp0lR0AvR9ZBnX7NfO/V5Re94/Ir+qA0ViJCZX59u5s7eAZheVmWtYA03Rby7k9H
-	hG/Bm0HnRK8XnjmHxJ1O0GqqfEXKrIqLvtQwHWFE9MqoS6msoHHT/qHSJWa0Wq1/b7yN
-	TKRfTNpwD+eGRLpLJkG9zF79x7CcDSreXpCNs7BU7IVBluLBGCYVbTWlXJcHmTzXila/
-	804p2kIlOZ5E+shhATTAKSrStfrmcJ9kBcbCG4klT9pYRoLjFbbJ91/KmgJ9PB9i2cjr
-	Zx9g==
-X-Received: by 10.194.174.201 with SMTP id bu9mr44655348wjc.73.1443047371691; 
-	Wed, 23 Sep 2015 15:29:31 -0700 (PDT)
-Received: from T520.homenet.telecomitalia.it
-	(host227-255-dynamic.0-87-r.retail.telecomitalia.it. [87.0.255.227])
-	by smtp.gmail.com with ESMTPSA id p20sm2495786wie.5.2015.09.23.15.29.30
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 23 Sep 2015 15:29:31 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Wed, 23 Sep 2015 22:35:12 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t8NMZCw2007051 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Sep 2015 17:35:12 -0500
+Received: from harisdt.amer.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015092317351222-278253 ;
+	Wed, 23 Sep 2015 17:35:12 -0500 
+From: Haris Okanovic <haris.okanovic@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Sep 2015 00:29:28 +0200
-Message-Id: <1443047368-11176-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-initramfs][PATCH] kexecboot_0.6: fix build with gcc 5
+Date: Wed, 23 Sep 2015 17:34:55 -0500
+Message-Id: <1443047695-22567-1-git-send-email-haris.okanovic@ni.com>
+X-Mailer: git-send-email 2.4.5
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 09/23/2015 05:35:12 PM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 09/23/2015 05:35:12 PM,
+	Serialize complete at 09/23/2015 05:35:12 PM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-09-24_01:, , signatures=0
+Subject: [meta-oe] [PATCH] inotify-tools: Add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,78 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Sep 2015 22:29:34 -0000
+X-List-Received-Date: Wed, 23 Sep 2015 22:35:13 -0000
 
-Resolving the issue:
+Add inotify-tools package, a C library and a set of command-line
+programs for Linux providing a simple interface to inotify kernel
+subsystem.
 
-rgb.h:55:1: warning: inline function 'rgba2comp' declared but never defined
-|  rgba2comp(kx_rgba rgba, kx_ccomp *red, kx_ccomp *green,
-|  ^
+https://github.com/rvoicilas/inotify-tools/wiki
+http://lwn.net/Articles/104343/
 
-Fix C99 inline semantic as documented here:
-https://gcc.gnu.org/gcc-5/porting_to.html
+Testing: Built and installed IPK onto an x64 system (OE Fido).
+inotifywatch and inotifywait successfully detected changes to
+a test file.
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
 ---
- .../files/0005-rgb.h-fix-build-with-gcc5.patch     | 34 ++++++++++++++++++++++
- .../recipes-bsp/kexecboot/kexecboot_0.6.bb         |  2 ++
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-initramfs/recipes-bsp/kexecboot/files/0005-rgb.h-fix-build-with-gcc5.patch
+ meta-oe/recipes-support/inotify-tools/inotify-tools_3.14.bb | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 meta-oe/recipes-support/inotify-tools/inotify-tools_3.14.bb
 
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/files/0005-rgb.h-fix-build-with-gcc5.patch b/meta-initramfs/recipes-bsp/kexecboot/files/0005-rgb.h-fix-build-with-gcc5.patch
+diff --git a/meta-oe/recipes-support/inotify-tools/inotify-tools_3.14.bb b/meta-oe/recipes-support/inotify-tools/inotify-tools_3.14.bb
 new file mode 100644
-index 0000000..e451435
+index 0000000..75183ba
 --- /dev/null
-+++ b/meta-initramfs/recipes-bsp/kexecboot/files/0005-rgb.h-fix-build-with-gcc5.patch
-@@ -0,0 +1,34 @@
-+From b2c4fc69868a4831ec798ad98f5e7fce200cf0e3 Mon Sep 17 00:00:00 2001
-+From: Andrea Adami <andrea.adami@gmail.com>
-+Date: Thu, 24 Sep 2015 00:02:48 +0200
-+Subject: [PATCH] rgb.h: fix build with gcc 5 (C99 inline semantic)
++++ b/meta-oe/recipes-support/inotify-tools/inotify-tools_3.14.bb
+@@ -0,0 +1,9 @@
++SUMMARY = "inotify command line utilities"
++SECTION = "console/utils"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ac6c26e52aea428ee7f56dc2c56424c6"
 +
-+Building with gcc 5.2 we trigger the following error:
++SRC_URI = "http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-${PV}.tar.gz"
++SRC_URI[sha256sum] = "222bcca8893d7bf8a1ce207fb39ceead5233b5015623d099392e95197676c92f"
 +
-+rgb.h:55:1: warning: inline function 'rgba2comp' declared but never defined
-+|  rgba2comp(kx_rgba rgba, kx_ccomp *red, kx_ccomp *green,
-+|  ^
-+
-+https://gcc.gnu.org/gcc-5/porting_to.html
-+
-+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-+---
-+ rgb.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/rgb.h b/rgb.h
-+index 0ba987a..4f64622 100644
-+--- a/rgb.h
-++++ b/rgb.h
-+@@ -51,7 +51,7 @@ typedef struct {
-+ } kx_named_color;
-+ 
-+ /* Convert RGBA uint32 to red/green/blue/alpha components */
-+-inline void
-++extern inline void
-+ rgba2comp(kx_rgba rgba, kx_ccomp *red, kx_ccomp *green,
-+ 		kx_ccomp *blue, kx_ccomp *alpha);
-+ 
-+-- 
-+1.9.1
-+
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
-index 9061c27..3397c29 100644
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
-+++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
-@@ -47,6 +47,8 @@ SRC_URI += "\
-             file://0002-kexecboot-fix-configure-warnings.patch \
-             file://0003-kexecboot-do-not-hardcode-MOUNTPOINT.patch \
-             file://0004-kexecboot.c-workaround-for-absolute-kernel-and-initr.patch \
-+            \
-+            file://0005-rgb.h-fix-build-with-gcc5.patch \
-             "
- 
- inherit autotools
++inherit autotools-brokensep
 -- 
-1.9.1
+2.4.5
 
 
