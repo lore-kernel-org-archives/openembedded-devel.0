@@ -1,20 +1,20 @@
 Return-Path: <dv@pseudoterminal.org>
 Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 1234E7701A
+	by mail.openembedded.org (Postfix) with ESMTP id 11F6976FDE
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 23 Sep 2015 14:02:06 +0000 (UTC)
 Received: from localhost.localdomain (chello062178118086.5.14.vie.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id A1D6038798
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 67CE83879B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 15:56:03 +0200 (CEST)
+	Wed, 23 Sep 2015 15:56:04 +0200 (CEST)
 From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Sep 2015 15:56:04 +0200
-Message-Id: <1443016567-15788-2-git-send-email-dv@pseudoterminal.org>
+Date: Wed, 23 Sep 2015 15:56:07 +0200
+Message-Id: <1443016567-15788-5-git-send-email-dv@pseudoterminal.org>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1443016567-15788-1-git-send-email-dv@pseudoterminal.org>
 References: <1443016567-15788-1-git-send-email-dv@pseudoterminal.org>
-Subject: [meta-multimedia][PATCH 2/5] aalib: add new recipe
+Subject: [meta-multimedia][PATCH 5/5] opencore-amr: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,30 +32,27 @@ X-List-Received-Date: Wed, 23 Sep 2015 14:02:08 -0000
 
 Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---
- meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb
+ .../recipes-multimedia/opencore-amr/opencore-amr_0.1.3.bb   | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr_0.1.3.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb b/meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb
+diff --git a/meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr_0.1.3.bb b/meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr_0.1.3.bb
 new file mode 100644
-index 0000000..06c4e5e
+index 0000000..ab5813e
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "AAlib is an portable library for rendering graphics as ASCII art."
-+HOMEPAGE = "http://aa-project.sourceforge.net/aalib/"
++++ b/meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr_0.1.3.bb
+@@ -0,0 +1,13 @@
++DESCRIPTION = "OpenCORE Adaptive Multi Rate (AMR) speech codec library implementation"
++HOMEPAGE = "http://sourceforge.net/projects/opencore-amr/"
 +SECTION = "libs"
 +
-+DEPENDS = "ncurses"
++LICENSE = "Apache-2.0"
++LICENSE_FLAGS = "commercial"
++LIC_FILES_CHKSUM = "file://COPYING;md5=dd2c2486aca02190153cf399e508c7e7"
 +
-+LICENSE = "LGPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=55ca817ccb7d5b5b66355690e9abc605"
-+
-+S = "${WORKDIR}/aalib-1.4.0"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/aa-project/aalib-${PV}.tar.gz"
-+SRC_URI[md5sum] = "d5aa8e9eae07b7441298b5c30490f6a6"
-+SRC_URI[sha256sum] = "0b214b98850f559e0a9ef7282de2ff336b094e1aacedefff3ffa50f07711db58"
++SRC_URI = "${SOURCEFORGE_MIRROR}/opencore-amr/${BP}.tar.gz"
++SRC_URI[md5sum] = "09d2c5dfb43a9f6e9fec8b1ae678e725"
++SRC_URI[sha256sum] = "106bf811c1f36444d7671d8fd2589f8b2e0cca58a2c764da62ffc4a070595385"
 +
 +inherit autotools
 -- 
