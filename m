@@ -1,39 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 70F0076DF8
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id DC05576FE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 14:06:35 +0000 (UTC)
-Received: by wicgb1 with SMTP id gb1so207512412wic.1
+	Wed, 23 Sep 2015 14:08:20 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so71039298wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 07:06:35 -0700 (PDT)
+	Wed, 23 Sep 2015 07:08:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=aR5dFQYASBF0rgW35DOrRTYMIUEN4aac68eml8PjnsE=;
-	b=M/PKF4ErxrFO8PgYHdz2QAiGX5W/M2hoEsS1hOXq2pWO28FZnWw4NNxs7yEKQOnNeu
-	pjj3ql3k5KZ05JEPor6bv5HqCjcnfGfhNeVz01C2Wxs6JnyRok/smZW486295/Drc9hP
-	axOSCa13PdZlkSOtQ3xyV0RCc3A72NXMp3EmMdRjgeo8mR8m9qVIajMNz0ILmgTs4DHX
-	zr961RKpQgI4vwIQj5oOiFNddsHd8vKJ8dGPmmdyhw0jd7N/IsWQI1jUGpa+TZeRJM0A
-	ZnVn8JgjmOxFlNy18SWNe7OIITffAdwjCd6KgWX1d1Pz9fjWE1+QIPt8XXp8NE0LTOTF
-	+lUQ==
-X-Received: by 10.194.95.103 with SMTP id dj7mr36331835wjb.118.1443017195636; 
-	Wed, 23 Sep 2015 07:06:35 -0700 (PDT)
+	bh=oA+AXrBeV9iNqPSFcCXt+/NYBbV+Tfzao3ts1ax4cpA=;
+	b=yvoMylrYk7EvxjCN5KfNmsYRpkD3svZ1bYLl5BicWV+PEbqAmHvvomv/DTt/oO6n+w
+	pxlOakTUCD1loYx1fjIh/kTbqdCK8UK0vkFKs3jkG+4NrhAjKWV6vQwiNzF63vt3y07U
+	XYZSjH3IkI9cfBnptwTbqex4QTCmlnbrMdovajL8Ma9OkIVu84aE5qvs1O36QZbgO5XY
+	s5odhhm+XAjRYGgyAoJAMhtSSk2w2NPGiUhxUKCZrF9AScAlxT7iLcuurmtlTgHTMwGq
+	CoQFof0JSJirK2XGjFt2CM1QumHUpmlx2ES2X54IoeJa7l3t6hn0lPM1ZMp4fO+YWr37
+	D8jQ==
+X-Received: by 10.194.203.99 with SMTP id kp3mr35188158wjc.157.1443017300574; 
+	Wed, 23 Sep 2015 07:08:20 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id pk7sm7489279wjb.2.2015.09.23.07.06.34
+	by smtp.gmail.com with ESMTPSA id
+	gl4sm7454212wjb.29.2015.09.23.07.08.19
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Sep 2015 07:06:34 -0700 (PDT)
+	Wed, 23 Sep 2015 07:08:19 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 23 Sep 2015 16:06:45 +0200
+Date: Wed, 23 Sep 2015 16:08:29 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150923140645.GD2384@jama>
-References: <1441301956-12792-1-git-send-email-koen@dominion.thruhere.net>
+Message-ID: <20150923140829.GE2384@jama>
+References: <1441704708-22940-1-git-send-email-kai.kang@windriver.com>
+	<1441704708-22940-2-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1441301956-12792-1-git-send-email-koen@dominion.thruhere.net>
+In-Reply-To: <1441704708-22940-2-git-send-email-kai.kang@windriver.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-networking][PATCH] sshguard 1.6.1+git: add recipe
+Subject: Re: [PATCH 1/2] efivar: 0.7 -> 0.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,207 +49,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Sep 2015 14:06:38 -0000
-X-Groupsio-MsgNum: 57516
+X-List-Received-Date: Wed, 23 Sep 2015 14:08:21 -0000
+X-Groupsio-MsgNum: 57517
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="2iBwrppp/7QCDedR"
+	protocol="application/pgp-signature"; boundary="lteA1dqeVaWQ9QQl"
 Content-Disposition: inline
 
---2iBwrppp/7QCDedR
+--lteA1dqeVaWQ9QQl
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 03, 2015 at 07:39:16PM +0200, Koen Kooi wrote:
-> SSHguard protects hosts from brute-force attacks against SSH and other
-> services.
+On Tue, Sep 08, 2015 at 05:31:47PM +0800, kai.kang@windriver.com wrote:
+> From: Kai Kang <kai.kang@windriver.com>
 >=20
-> This recipe uses iptables as blocker backend and journald as log backend.
+> Upgrade efivar from 0.7 to 0.21.
 >=20
-> When it's working it will look like this in syslog:
->=20
-> Sep 03 19:35:29 soekris sshguard[27044]: Started with danger threshold=3D=
-40 ; minimum block=3D420 seconds
-> Sep 03 19:35:29 soekris sshguard[27044]: Blocking 24.234.171.90:4 for >63=
-0secs: 40 danger in 4 attacks over 0 seconds (all: 40d in 1 abuses over 0s).
-> Sep 03 19:35:29 soekris sshguard[27044]: Blocking 61.182.15.194:4 for >63=
-0secs: 40 danger in 4 attacks over 0 seconds (all: 40d in 1 abuses over 0s).
-> Sep 03 19:35:29 soekris sshguard[27044]: Blocking 115.58.38.53:4 for >630=
-secs: 40 danger in 4 attacks over 0 seconds (all: 40d in 1 abuses over 0s).
->=20
-> And the iptable rules:
+> * update HOMEPAGE
 
-Fails to build in world:
-http://errors.yoctoproject.org/Errors/Details/18430/
-
-Probably needs something like:
--#define _POSIX_SOURCE
-+#define _POSIX_C_SOURCE 200112L
-as other recipes failing with similar error.
+Fails to build in world http://errors.yoctoproject.org/Errors/Details/18426/
 
 >=20
-> root@soekris:~# iptables -L sshguard --line-numbers
-> Chain sshguard (1 references)
-> num  target     prot opt source               destination
-> 1    DROP       all  --  hn.kd.ny.adsl        anywhere
-> 2    DROP       all  --  61.182.15.194        anywhere
-> 3    DROP       all  --  wsip-24-234-171-90.lv.lv.cox.net  anywhere
->=20
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> Signed-off-by: Kai Kang <kai.kang@windriver.com>
 > ---
->  .../recipes-support/sshguard/sshguard/firewall     | 48 ++++++++++++++++=
-++++++
->  .../sshguard/sshguard/sshguard-journalctl          |  2 +
->  .../sshguard/sshguard/sshguard.service             | 12 ++++++
->  .../recipes-support/sshguard/sshguard_git.bb       | 38 +++++++++++++++++
->  4 files changed, 100 insertions(+)
->  create mode 100644 meta-networking/recipes-support/sshguard/sshguard/fir=
-ewall
->  create mode 100644 meta-networking/recipes-support/sshguard/sshguard/ssh=
-guard-journalctl
->  create mode 100644 meta-networking/recipes-support/sshguard/sshguard/ssh=
-guard.service
->  create mode 100644 meta-networking/recipes-support/sshguard/sshguard_git=
-=2Ebb
+>  meta-oe/recipes-extended/efivar/efivar_git.bb | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 >=20
-> diff --git a/meta-networking/recipes-support/sshguard/sshguard/firewall b=
-/meta-networking/recipes-support/sshguard/sshguard/firewall
-> new file mode 100644
-> index 0000000..b683368
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/sshguard/sshguard/firewall
-> @@ -0,0 +1,48 @@
-> +#!/bin/sh
-> +
-> +#
-> +# Function that enables firewall
-> +#
-> +do_enable_firewall()
-> +{
-> +	# creating sshguard chain
-> +	iptables -N sshguard 2> /dev/null
-> +	ip6tables -N sshguard 2> /dev/null
-> +	# block traffic from abusers
-> +	iptables -I INPUT -j sshguard 2> /dev/null
-> +	ip6tables -I INPUT -j sshguard 2> /dev/null
-> +}
-> +#
-> +# Function that disables firewall
-> +#
-> +do_disable_firewall()
-> +{
-> +	# flushes list of abusers
-> +	iptables -F sshguard 2> /dev/null
-> +	ip6tables -F sshguard 2> /dev/null
-> +	# removes sshguard firewall rules
-> +	iptables -D INPUT -j sshguard 2> /dev/null
-> +	ip6tables -D INPUT -j sshguard 2> /dev/null
-> +	# removing sshguard chain
-> +	iptables -X sshguard 2> /dev/null
-> +	ip6tables -X sshguard 2> /dev/null
-> +}
-> +
-> +case "$1" in
-> +    enable)
-> +	do_enable_firewall
-> +	;;
-> +    disable)
-> +	do_disable_firewall
-> +	;;
-> +    restart)
-> +	do_disable_firewall
-> +	do_enable_firewall
-> +	;;
-> +    *)
-> +	exit 1
-> +	;;
-> +esac
-> +=09
-> +exit 0
-> +
-> diff --git a/meta-networking/recipes-support/sshguard/sshguard/sshguard-j=
-ournalctl b/meta-networking/recipes-support/sshguard/sshguard/sshguard-jour=
-nalctl
-> new file mode 100644
-> index 0000000..e7c615b
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/sshguard/sshguard/sshguard-journalc=
-tl
-> @@ -0,0 +1,2 @@
-> +#!/bin/sh
-> +/bin/journalctl -fb -t sshd -n100 | /usr/sbin/sshguard -l- "$@"
-> diff --git a/meta-networking/recipes-support/sshguard/sshguard/sshguard.s=
-ervice b/meta-networking/recipes-support/sshguard/sshguard/sshguard.service
-> new file mode 100644
-> index 0000000..e2590fa
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/sshguard/sshguard/sshguard.service
-> @@ -0,0 +1,12 @@
-> +[Unit]
-> +Description=3DSSHGuard
-> +After=3Dnetwork.service
-> +
-> +[Service]
-> +PIDFile=3D/run/sshguard.pid
-> +ExecStartPre=3D/usr/lib/sshguard/firewall enable
-> +ExecStopPost=3D/usr/lib/sshguard/firewall disable
-> +ExecStart=3D/usr/lib/sshguard/sshguard-journalctl -i /run/sshguard.pid
-> +
-> +[Install]
-> +WantedBy=3Dmulti-user.target
-> diff --git a/meta-networking/recipes-support/sshguard/sshguard_git.bb b/m=
-eta-networking/recipes-support/sshguard/sshguard_git.bb
-> new file mode 100644
-> index 0000000..04435e8
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/sshguard/sshguard_git.bb
-> @@ -0,0 +1,38 @@
-> +SUMMARY =3D "SSHguard protects hosts from brute-force attacks against SS=
-H and other services."
-> +
-> +LICENSE =3D "ISC"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D47a33fc98cd20713882c4d822a57b=
-f4d"
-> +
-> +PV =3D "1.6.1+git${SRCPV}"
-> +
-> +SRCREV =3D "019a0406811a536faf3f90cdd7a0a538ee24d789"
-> +SRC_URI =3D "git://bitbucket.org/sshguard/sshguard.git;protocol=3Dhttps;=
-branch=3D1.6 \
-> +           file://firewall \
-> +           file://sshguard.service \
-> +           file://sshguard-journalctl \
-> +          "
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +DEPENDS =3D "flex-native"
-> +
-> +inherit autotools-brokensep systemd
-> +
-> +EXTRA_OECONF +=3D " --with-firewall=3Diptables \
-> +                  --with-iptables=3D${sbindir}/iptables \
-> +                "
-> +
-> +do_install_append() {
-> +    install -d ${D}${libdir}/sshguard
-> +    install -m 0755 ${WORKDIR}/firewall ${D}${libdir}/sshguard
-> +    install -m 0755 ${WORKDIR}/sshguard-journalctl ${D}${libdir}/sshguard
-> +
-> +    sed -i -e s:/bin:${base_bindir}:g -e s:/usr/sbin:${sbindir}:g ${D}${=
-libdir}/sshguard/sshguard-journalctl
-> +
-> +    install -d ${D}${systemd_unitdir}/system
-> +    install -m 0644 ${WORKDIR}/sshguard.service ${D}${systemd_unitdir}/s=
-ystem
-> +    sed -i -e s:/usr/lib:${libdir}:g ${D}${systemd_unitdir}/system/sshgu=
-ard.service=20
-> +}
-> +
-> +FILES_${PN} +=3D "${systemd_unitdir}"
-> +RDEPENDS_${PN} +=3D "iptables"
+> diff --git a/meta-oe/recipes-extended/efivar/efivar_git.bb b/meta-oe/reci=
+pes-extended/efivar/efivar_git.bb
+> index 18446a0..bf2e6d2 100644
+> --- a/meta-oe/recipes-extended/efivar/efivar_git.bb
+> +++ b/meta-oe/recipes-extended/efivar/efivar_git.bb
+> @@ -1,14 +1,14 @@
+>  SUMMARY =3D "Tools to manipulate UEFI variables"
+>  DESCRIPTION =3D "efivar provides a simple command line interface to the =
+UEFI variable facility"
+> -HOMEPAGE =3D "https://github.com/vathpela/efivar"
+> +HOMEPAGE =3D "https://github.com/rhinstaller/efivar"
+> =20
+>  LICENSE =3D "LGPLv2.1"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da6f89e2100d9b6cdffcea4f398e37=
+343"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6626bb1e20189cfa95f2c508ba286=
+393"
+> =20
+>  DEPENDS =3D "popt"
+> =20
+> -SRCREV =3D "c9e1f24a81b5374408bca5616402276e47171cf7"
+> -PV =3D "0.7+git${SRCPV}"
+> +SRCREV =3D "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
+> +PV =3D "0.21+git${SRCPV}"
+>  SRC_URI =3D "git://github.com/vathpela/efivar.git"
+> =20
+>  S =3D "${WORKDIR}/git"
 > --=20
-> 2.0.1
+> 1.9.1
 >=20
 > --=20
 > _______________________________________________
@@ -258,16 +114,16 @@ ard.service=20
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---2iBwrppp/7QCDedR
+--lteA1dqeVaWQ9QQl
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlYCsfQACgkQN1Ujt2V2gBynkQCfWrR5GwSeSn1SsUdYOPWEYjx9
-DpMAn1gvHVJfBT5aQmrV2xpQhu8w5i93
-=hFoF
+iEYEARECAAYFAlYCsl0ACgkQN1Ujt2V2gBxgeACfY++Lyz2Eui/GTIBwWXxUqqtW
+SnIAnjyBU1Pr2blYS8rrHRc3leD5Z91l
+=0Prx
 -----END PGP SIGNATURE-----
 
---2iBwrppp/7QCDedR--
+--lteA1dqeVaWQ9QQl--
