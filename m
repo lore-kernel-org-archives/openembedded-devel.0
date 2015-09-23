@@ -1,39 +1,20 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id E7C08766F3
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 1234E7701A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 13:47:20 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so240225944wic.0
+	Wed, 23 Sep 2015 14:02:06 +0000 (UTC)
+Received: from localhost.localdomain (chello062178118086.5.14.vie.surfer.at
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id A1D6038798
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 06:47:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=2EvLTtPB6bSe6Ax/gSuGBQrrs/xpqqvKOh7jvR4PGPc=;
-	b=hF8N2vH9YhVbe2FzGB06o2uEqOuRKdZlpymb9uIES+yN8MxUHhQi+Yuk9y6gesNvGQ
-	Di3WFS/2C3jAyiWaG0cTY4M1IPxZBo6kKPhnin1q8QRW3gHykAFP1KsClGWB54i1co+E
-	/FkTj5RDxBKKMnOmP00vdjEYSfeMklMk9GPC8VdUYTnHvl4PZZASUi9Ov/Yk5DivbnkS
-	TInXznM/hMamw6+8fu9CeCgEZMIh9XC5F5VTGlVbAkTOOlDRhJDG8ylPgFow8Qq378E5
-	Kx7u45NrlTYQZoGmotWcWPKUf0ikRQBCs4Hc2m4iFxFHm0QiRLhcqjSH9eaIrkALHsz3
-	2shg==
-X-Received: by 10.194.5.135 with SMTP id s7mr30461813wjs.153.1443016040795;
-	Wed, 23 Sep 2015 06:47:20 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id go2sm468587wib.20.2015.09.23.06.47.19
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Sep 2015 06:47:19 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 23 Sep 2015 15:47:30 +0200
+	Wed, 23 Sep 2015 15:56:03 +0200 (CEST)
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150923134730.GC2384@jama>
-References: <1442999044-30163-1-git-send-email-kai.kang@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1442999044-30163-1-git-send-email-kai.kang@windriver.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-oe][PATCH] p11-kit: remove from meta-oe
+Date: Wed, 23 Sep 2015 15:56:04 +0200
+Message-Id: <1443016567-15788-2-git-send-email-dv@pseudoterminal.org>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1443016567-15788-1-git-send-email-dv@pseudoterminal.org>
+References: <1443016567-15788-1-git-send-email-dv@pseudoterminal.org>
+Subject: [meta-multimedia][PATCH 2/5] aalib: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,87 +28,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Sep 2015 13:47:24 -0000
-X-Groupsio-MsgNum: 57510
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WfZ7S8PLGjBY9Voh"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 23 Sep 2015 14:02:08 -0000
 
---WfZ7S8PLGjBY9Voh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+---
+ meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb
 
-On Wed, Sep 23, 2015 at 05:04:04PM +0800, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
->=20
-> Remove p11-kit from meta-oe that there is a newer version in oe-core.
+diff --git a/meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb b/meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb
+new file mode 100644
+index 0000000..06c4e5e
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "AAlib is an portable library for rendering graphics as ASCII art."
++HOMEPAGE = "http://aa-project.sourceforge.net/aalib/"
++SECTION = "libs"
++
++DEPENDS = "ncurses"
++
++LICENSE = "LGPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=55ca817ccb7d5b5b66355690e9abc605"
++
++S = "${WORKDIR}/aalib-1.4.0"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/aa-project/aalib-${PV}.tar.gz"
++SRC_URI[md5sum] = "d5aa8e9eae07b7441298b5c30490f6a6"
++SRC_URI[sha256sum] = "0b214b98850f559e0a9ef7282de2ff336b094e1aacedefff3ffa50f07711db58"
++
++inherit autotools
+-- 
+1.9.1
 
-Duplicates:
-commit ad2932486ddf37b28fade4f4fd12c0c3fdb6df7a
-Author: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Date:   Mon Sep 14 15:26:44 2015 +0300
 
-    p11-kit: remove the recipe due to its move to oe-core
-
-which was already in master-next and now is in master.
-
->=20
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb | 18 ------------------
->  1 file changed, 18 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb
->=20
-> diff --git a/meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb b/meta-oe/=
-recipes-support/p11-kit/p11-kit_0.19.1.bb
-> deleted file mode 100644
-> index e0ebe7d..0000000
-> --- a/meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb
-> +++ /dev/null
-> @@ -1,18 +0,0 @@
-> -SUMMARY =3D "Provides a way to load and enumerate PKCS#11 modules"
-> -LICENSE =3D "BSD"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D02933887f609807fbb57aa4237d14=
-a50"
-> -
-> -inherit autotools gettext pkgconfig
-> -
-> -DEPENDS =3D "libtasn1 libffi"
-> -
-> -SRC_URI =3D "http://p11-glue.freedesktop.org/releases/${BP}.tar.gz"
-> -SRC_URI[md5sum] =3D "d96046ab6ac00d005342caf416ed76ab"
-> -SRC_URI[sha256sum] =3D "94fbed372c11d0a404762aad966e54eb4f44c1d5b871a1b7=
-9a1a3b4cf36ed256"
-> -
-> -FILES_${PN}-dev +=3D " \
-> -    ${libdir}/p11-kit-proxy.so \
-> -    ${libdir}/pkcs11/p11-kit-trust.so \
-> -"
-> -FILES_${PN}-dev +=3D "${libdir}/pkcs11/*.la"
-> -FILES_${PN}-dbg +=3D "${libdir}/pkcs11/.debug"
-> --=20
-> 2.4.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---WfZ7S8PLGjBY9Voh
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlYCrXEACgkQN1Ujt2V2gBy53gCffyieOe+XHwUu6WylO4xsUbZK
-q5EAoJn6YNs77tIhvCaIIlH+n3yjqW7L
-=EFFo
------END PGP SIGNATURE-----
-
---WfZ7S8PLGjBY9Voh--
