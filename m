@@ -1,36 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 998A47404E
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
+	[209.85.213.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D3DB756C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 15:46:26 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so245930015wic.0
+	Wed, 23 Sep 2015 19:12:47 +0000 (UTC)
+Received: by igbkq10 with SMTP id kq10so125648623igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 08:46:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=XFn+8YUPXetn/WBiQye0K+QiHi99vnp6A9EJ7+rRXAA=;
-	b=DQql+NlitqWn05nxNkY/W1AS8yBGPHjPsuzplhR0Y9v7N7+7M1epF9wota26FYpA6F
-	UZ5L6/iWWlKT36Hz/+k2CaIxNeHiJ94WW37QPHooSKhtVm78Q/zUDgElLtqHRAu9p710
-	jsfFFSaRUEFFi8nDS5PcjLOdten4/mlTRtNpBTIACLMF9AKuIk4hSbhohhmk902eB6IB
-	2EUosb5YiqYlCfv2kzKVrU+D3ZMklTQQg+YABAJNSSqR/AsM+euBCBjpf6/PvZ3Vq6Ue
-	/9RDh1qAz1ijb2YDMe7wmkh0sL2x3YZT9M1Jj2QJWgdBDz83FiE3PVFH1R4J3e1qn9wl
-	lYCA==
-X-Received: by 10.180.88.198 with SMTP id bi6mr5005589wib.75.1443023186186;
-	Wed, 23 Sep 2015 08:46:26 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id l1sm7886878wjx.13.2015.09.23.08.46.24
+	Wed, 23 Sep 2015 12:12:47 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc:content-type;
+	bh=VYrVkUUgcdfENs9BVU2gqeF9rUKSUvH237XTvT6Vtno=;
+	b=WhVD8GC3+ScL1BJU4rU+6BRQGFykJr4c1zBTFG9/Q/EGd0VnY+Rx8VeqMc2lI9yR3N
+	2BtFAdm9FkSYMo9uVKzHbtnO9QzVwPjkUR4b8OGSK6mzOCSXfZRPdqbP6N1J0/yfFra7
+	6ORpqlp+GDsP+RVNK8zsUKVo3Qub1jKakgqXMfKYK1WXD3GvA9J067cTHJLbfyQ0UNrx
+	eBClS2L0RXOYF5zteM8xjC1A7tGAwc8iZui/fyvAJOHVym9u18IJWzCzMeFc1qixzi9u
+	O4qt7078bZLjum6LZWTJCZNykksUhYUvYh2GSry9Pl7F97Zm0fmQFcdkHW2NZ1clm6an
+	VzGg==
+X-Gm-Message-State: ALoCoQkDnUDBEfk6hnl08wTW554q6pT9MLdnIsZv8RVVrnC7Ewml0m8ol7Re8P2S6g5gJzPDWw+L
+X-Received: by 10.50.142.69 with SMTP id ru5mr24112794igb.1.1443035567305;
+	Wed, 23 Sep 2015 12:12:47 -0700 (PDT)
+Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com.
+	[209.85.213.181]) by smtp.gmail.com with ESMTPSA id
+	s14sm4083451ioe.12.2015.09.23.12.12.45
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Sep 2015 08:46:25 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Sep 2015 17:46:34 +0200
-Message-Id: <1443023194-22810-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.5.3
-In-Reply-To: <20150901190134.GC2458@jama>
-References: <20150901190134.GC2458@jama>
-Subject: [PATCH][meta-oe] sblim-sfcCommon: rename to sblim-sfc-common
+	Wed, 23 Sep 2015 12:12:46 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by igbni9 with SMTP id ni9so34230938igb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Sep 2015 12:12:45 -0700 (PDT)
+MIME-Version: 1.0
+X-Received: by 10.50.93.42 with SMTP id cr10mr24135263igb.19.1443035565558;
+	Wed, 23 Sep 2015 12:12:45 -0700 (PDT)
+Received: by 10.36.218.7 with HTTP; Wed, 23 Sep 2015 12:12:45 -0700 (PDT)
+In-Reply-To: <1442827518-10891-1-git-send-email-adrian.freihofer@gmail.com>
+References: <1442827518-10891-1-git-send-email-adrian.freihofer@gmail.com>
+Date: Wed, 23 Sep 2015 16:12:45 -0300
+Message-ID: <CAP9ODKoKg_ZAbbh+MZLO5GKesD_9MWQ+7NABVJVeDF6G8PRfOw@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Fabio Berton <fabio.berton@ossystems.com.br>
+Subject: Re: [PATCH] pyroute2: update to 0.3.14, fix depends, fix license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,54 +56,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Sep 2015 15:46:28 -0000
+X-List-Received-Date: Wed, 23 Sep 2015 19:12:48 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* to resolve QA warnings:
-  sblim-sfcCommon-1.0.1: sblim-sfcCommon-dev doesn't match the [a-z0-9.+-]+ regex [pkgname]
-  sblim-sfcCommon-1.0.1: sblim-sfcCommon-staticdev doesn't match the [a-z0-9.+-]+ regex [pkgname]
-  sblim-sfcCommon-1.0.1: sblim-sfcCommon doesn't match the [a-z0-9.+-]+ regex [pkgname]
-  sblim-sfcCommon-1.0.1: sblim-sfcCommon-doc doesn't match the [a-z0-9.+-]+ regex [pkgname]
-  sblim-sfcCommon-1.0.1: sblim-sfcCommon-dbg doesn't match the [a-z0-9.+-]+ regex [pkgname]
-  sblim-sfcCommon-1.0.1: sblim-sfcCommon-locale doesn't match the [a-z0-9.+-]+ regex [pkgname]
+On Mon, Sep 21, 2015 at 6:25 AM, Adrian Freihofer
+<adrian.freihofer@gmail.com> wrote:
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../sblim-sfc-common_1.0.1.bb}                                         | 3 +--
- meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb                | 2 +-
- 2 files changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-extended/{sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb => sblim-sfc-common/sblim-sfc-common_1.0.1.bb} (90%)
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb b/meta-oe/recipes-extended/sblim-sfc-common/sblim-sfc-common_1.0.1.bb
-similarity index 90%
-rename from meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
-rename to meta-oe/recipes-extended/sblim-sfc-common/sblim-sfc-common_1.0.1.bb
-index ebd2199..37694a8 100644
---- a/meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
-+++ b/meta-oe/recipes-extended/sblim-sfc-common/sblim-sfc-common_1.0.1.bb
-@@ -9,8 +9,7 @@ SECTION = "Development/Libraries"
- 
- DEPENDS = "cmpi-bindings"
- 
--SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
--          "
-+SRC_URI = "http://downloads.sourceforge.net/sblim/sblim-sfcCommon-${PV}.tar.bz2"
- SRC_URI[md5sum] = "8aa2655d97bdea54c4750f220b40990c"
- SRC_URI[sha256sum] = "b9b1037173d6ae0181c3bd5a316ddab5afd6a342ad0dbdc18e940fc0ad2c3297"
- 
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
-index dc5e4d0..81f47ba 100644
---- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
-@@ -9,7 +9,7 @@ HOMEPAGE = "http://www.sblim.org"
- SECTION = "Applications/System"
- LICENSE = "EPL-1.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f300afd598546add034364cd0a533261"
--DEPENDS = "curl libpam openssl sblim-sfcCommon"
-+DEPENDS = "curl libpam openssl sblim-sfc-common"
- 
- SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
-            file://sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch \
 -- 
-2.5.3
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
