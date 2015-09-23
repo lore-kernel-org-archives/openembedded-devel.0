@@ -1,32 +1,24 @@
-Return-Path: <erkka.kaaria@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 934E073CBD
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 55A5A7404E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 08:37:42 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 23 Sep 2015 01:37:42 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,577,1437462000"; 
-	d="scan'208,217";a="811043863"
-Received: from irsmsx152.ger.corp.intel.com ([163.33.192.66])
-	by fmsmga002.fm.intel.com with ESMTP; 23 Sep 2015 01:37:42 -0700
-Received: from irsmsx103.ger.corp.intel.com ([169.254.3.168]) by
-	IRSMSX152.ger.corp.intel.com ([169.254.6.126]) with mapi id
-	14.03.0248.002; Wed, 23 Sep 2015 09:37:41 +0100
-From: "Kaaria, Erkka" <erkka.kaaria@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-java] Commit duplication
-Thread-Index: AdD12vC/dgxUVv4cQVGMR5W1ZsgkFA==
-Date: Wed, 23 Sep 2015 08:37:40 +0000
-Message-ID: <17C19527BD855F428F22685986FD58BEA01C37@IRSMSX103.ger.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [163.33.239.181]
+	Wed, 23 Sep 2015 09:04:07 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8N948Xk017414
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Sep 2015 02:04:08 -0700 (PDT)
+Received: from pek-kkang-d1.wrs.com (128.224.162.231) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Wed, 23 Sep 2015 02:04:07 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 23 Sep 2015 17:04:04 +0800
+Message-ID: <1442999044-30163-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.4.1
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-java] Commit duplication
+Subject: [meta-oe][PATCH] p11-kit: remove from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,32 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Sep 2015 08:37:48 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 23 Sep 2015 09:04:09 -0000
+Content-Type: text/plain
 
-Hi,
+From: Kai Kang <kai.kang@windriver.com>
 
-There seem to have been a bad merge commit made December 17 2014 (http://gi=
-t.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?id=3D12a0b10b35b1829eec1=
-1ea653af53d127a8b6fd1). This commit introduced duplicate commits into the g=
-it history (for example, http://git.yoctoproject.org/cgit/cgit.cgi/meta-jav=
-a/commit/?id=3D8042dd1f8e3ccee2ddb31e792e3f88c6e2583847 and http://git.yoct=
-oproject.org/cgit/cgit.cgi/meta-java/commit/?id=3D7b66b4940804b72150b33248b=
-16b582ae6a48751). These duplications are causing issues with certain tools.
+Remove p11-kit from meta-oe that there is a newer version in oe-core.
 
----------------------------------------------------------------------
-Intel Finland Oy
-Registered Address: PL 281, 00181 Helsinki =
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb | 18 ------------------
+ 1 file changed, 18 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb
 
-Business Identity Code: 0357606 - 4 =
+diff --git a/meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb b/meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb
+deleted file mode 100644
+index e0ebe7d..0000000
+--- a/meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-SUMMARY = "Provides a way to load and enumerate PKCS#11 modules"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=02933887f609807fbb57aa4237d14a50"
+-
+-inherit autotools gettext pkgconfig
+-
+-DEPENDS = "libtasn1 libffi"
+-
+-SRC_URI = "http://p11-glue.freedesktop.org/releases/${BP}.tar.gz"
+-SRC_URI[md5sum] = "d96046ab6ac00d005342caf416ed76ab"
+-SRC_URI[sha256sum] = "94fbed372c11d0a404762aad966e54eb4f44c1d5b871a1b79a1a3b4cf36ed256"
+-
+-FILES_${PN}-dev += " \
+-    ${libdir}/p11-kit-proxy.so \
+-    ${libdir}/pkcs11/p11-kit-trust.so \
+-"
+-FILES_${PN}-dev += "${libdir}/pkcs11/*.la"
+-FILES_${PN}-dbg += "${libdir}/pkcs11/.debug"
+-- 
+2.4.1
 
-Domiciled in Helsinki =
-
-
-This e-mail and any attachments may contain confidential material for
-the sole use of the intended recipient(s). Any review or distribution
-by others is strictly prohibited. If you are not the intended
-recipient, please contact the sender and delete all copies.
 
