@@ -1,41 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id AB23D76FE2
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 05C0B756C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 14:09:47 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so240371233wic.1
+	Wed, 23 Sep 2015 14:16:56 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so240704719wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 07:09:48 -0700 (PDT)
+	Wed, 23 Sep 2015 07:16:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=nER4hFPM6NwzE0bt0lRUwfWPaxo3aqc9uoGaZXdcPTw=;
-	b=YOj8puzsjWoSFwvu90CFWfmx03deRYOA5HkZeL8jhHpghVdopRV5Ti6ejBmNeJexo0
-	cuwvJiV6isSMdtTr/oqOsoIk4UrOm8uIO5SYtPyy84rN45vFBJbc05wcZaOH+mdSAAMJ
-	CS9Y1LE/knCcfYtj4E464vsnyJec2R80HQ2lA/JR+il1NJ2NPdOkiKbty2ncA2w/C0/8
-	RX9bpqAtUg+1gtb3+HzpxGvgYNMctO4KWJVzPDxBp2G6NsCIgG3HIGmI5hJtpUq2wSUE
-	AvDqqs1xx9AhCqF2yX6Bxf/15O9qZ7I36wQ1N/j58fcnisBZ4XIQColPL4eBCxfKAgDO
-	PtkA==
-X-Received: by 10.180.37.232 with SMTP id b8mr4539319wik.46.1443017388070;
-	Wed, 23 Sep 2015 07:09:48 -0700 (PDT)
+	bh=hlH5lMfOuvu6aSuortQNZfyXQuAmgrXrCbv5fhPn+eM=;
+	b=aUYmtlkWItET0sK6bbktpJGkv/+XBo9/dcD8EQjSFQ3PuLvxZOfgAskSbXyzM3kPf6
+	w2BfNGGv3UyTASiU4/K6BqClq7Jpm9UKtxlkwJNjCRVT8C+TZu57ehXqTeeaCMS3REt7
+	7oVGSVrqhQ4F3jwYrYQVilb4DXRu0y9fZ/t715fqy19v49wvFVrtfuRgNI6sJBJXiH42
+	+PXIrVX+2PbS8gWyMmqPnW+WpIoiq0WrGclBX5dxKwd8O9DnJvkZqBt7dx/CWLQBPD9c
+	7tPxtuuBsI7OsnB3d/zK/8Fd2G8BeJBg6xPXNDR98RliEQNxuQvUqwYQLdvzVHGeg8LU
+	pvEg==
+X-Received: by 10.180.23.71 with SMTP id k7mr4230316wif.11.1443017816074;
+	Wed, 23 Sep 2015 07:16:56 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	cx3sm7459548wjc.27.2015.09.23.07.09.46
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Sep 2015 07:09:46 -0700 (PDT)
+	xw2sm7519753wjc.12.2015.09.23.07.16.55
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 23 Sep 2015 07:16:55 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 23 Sep 2015 16:09:57 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150923140957.GG2384@jama>
-References: <1442450491-14912-1-git-send-email-schnitzeltony@googlemail.com>
-	<1442450491-14912-6-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed, 23 Sep 2015 16:17:05 +0200
+To: Adrian Freihofer <adrian.freihofer@gmail.com>
+Message-ID: <20150923141705.GH2384@jama>
+References: <1442825975-8950-1-git-send-email-adrian.freihofer@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1442450491-14912-6-git-send-email-schnitzeltony@googlemail.com>
+In-Reply-To: <1442825975-8950-1-git-send-email-adrian.freihofer@gmail.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH 05/19] cdrkit: initial add 1.1.11
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 0/3] libgudev fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,150 +48,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Sep 2015 14:09:48 -0000
-X-Groupsio-MsgNum: 57519
+X-List-Received-Date: Wed, 23 Sep 2015 14:16:58 -0000
+X-Groupsio-MsgNum: 57520
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="oOB74oR0WcNeq9Zb"
+	protocol="application/pgp-signature"; boundary="qM81t570OJUP5TU/"
 Content-Disposition: inline
 
---oOB74oR0WcNeq9Zb
-Content-Type: text/plain; charset=iso-8859-1
+--qM81t570OJUP5TU/
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 17, 2015 at 02:41:17AM +0200, Andreas M=FCller wrote:
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> ---
->  meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb | 18 ++++++++
->  ...te-a-run-test-to-determine-order-of-bitfi.patch | 53 ++++++++++++++++=
-++++++
->  2 files changed, 71 insertions(+)
->  create mode 100644 meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
->  create mode 100644 meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-c=
-reate-a-run-test-to-determine-order-of-bitfi.patch
+On Mon, Sep 21, 2015 at 10:59:32AM +0200, Adrian Freihofer wrote:
+> Exclude usage of libgudev with older systemd versions providing libgudev =
+as
+> well.
+> Fix networkmanager and modemmanager to use libgudev instead of udev.
 
-I've skipped this one, please add PACKAGECONFIG/dependency on bzip2:
+There are more libgudev dependencies according to QA log from last world
+build:
 
-cdrkit-1.1.11: cdrkit rdepends on libbz2, but it isn't a build
-dependency? [build-deps]
+gstreamer1.0-plugins-bad-1.4.5: gstreamer1.0-plugins-bad-uvch264 rdepends o=
+n libgudev, but it isn't a build dependency? [build-deps]
+gstreamer1.0-plugins-good-1.4.5: gstreamer1.0-plugins-good-video4linux2 rde=
+pends on libgudev, but it isn't a build dependency? [build-deps]
+gst-plugins-good-0.10.31: gst-plugins-good-video4linux2 rdepends on libgude=
+v, but it isn't a build dependency? [build-deps]
+clutter-gst-3.0-3.0.8: clutter-gst-3.0 rdepends on libgudev, but it isn't a=
+ build dependency? [build-deps]
+gammu-1.32.0: gammu rdepends on libgudev, but it isn't a build dependency? =
+[build-deps]
+devicekit-power-014: devicekit-power rdepends on libgudev, but it isn't a b=
+uild dependency? [build-deps]
+network-manager-applet-1.0.4: network-manager-applet rdepends on libgudev, =
+but it isn't a build dependency? [build-deps]
+cheese-2.30.1: cheese rdepends on libgudev, but it isn't a build dependency=
+? [build-deps]
 
+are you interested in fixing some of these? Maybe some will be fixed transi=
+tively from networkmanager
+
+Thanks!
+
+Regards,
 >=20
-> diff --git a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb b/meta-oe=
-/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-> new file mode 100644
-> index 0000000..310a7b9
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-> @@ -0,0 +1,18 @@
-> +SUMMARY =3D "CD/DVD command line tools"
-> +HOMEPAGE =3D "http://cdrkit.org/"
-> +
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db30d3b2750b668133fc17b401e1b9=
-8f8"
-> +
-> +# While writing download from cdrkit.org was broken so get sources from =
-debian
-> +SRC_URI =3D " \
-> +    ${DEBIAN_MIRROR}/main/c/${BPN}/${BPN}_${PV}.orig.tar.gz \
-> +    file://0001-do-not-create-a-run-test-to-determine-order-of-bitfi.pat=
-ch \
-> +"
-> +SRC_URI[md5sum] =3D "efe08e2f3ca478486037b053acd512e9"
-> +SRC_URI[sha256sum] =3D "d1c030756ecc182defee9fe885638c1785d35a2c2a297b46=
-04c0e0dcc78e47da"
-> +
-> +inherit cmake
-> +
-> +DEPENDS =3D "libcap file"
-> +RDEPENDS_${PN} =3D "perl"
-> diff --git a/meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-create-a=
--run-test-to-determine-order-of-bitfi.patch b/meta-oe/recipes-multimedia/cd=
-rkit/files/0001-do-not-create-a-run-test-to-determine-order-of-bitfi.patch
-> new file mode 100644
-> index 0000000..c9725cb
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/cdrkit/files/0001-do-not-create-a-run-te=
-st-to-determine-order-of-bitfi.patch
-> @@ -0,0 +1,53 @@
-> +From a702cd1bb5eba5a05d1098862b5b863a3f6dd558 Mon Sep 17 00:00:00 2001
-> +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlem=
-ail.com>
-> +Date: Thu, 10 Sep 2015 09:39:13 +0200
-> +Subject: [PATCH] do not create a run test to determine order of bitfields
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +taken from [1]
-> +
-> +Upstream-Status: Inappropriate [cross compile specific]
-> +
-> +[1] http://cgit.openembedded.org/openembedded/tree/recipes/cdrkit/cdrkit=
-/xconfig.patch
-> +
-> +Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> +---
-> + include/CMakeLists.txt | 2 --
-> + include/xconfig.h.in   | 6 +++++-
-> + 2 files changed, 5 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/include/CMakeLists.txt b/include/CMakeLists.txt
-> +index 99a69fd..e5ba8a7 100644
-> +--- a/include/CMakeLists.txt
-> ++++ b/include/CMakeLists.txt
-> +@@ -35,8 +35,6 @@ endif(VA_LIST_IS_ARRAY)
-> + INCLUDE(TestBigEndian)
-> + TEST_BIG_ENDIAN(WORDS_BIGENDIAN)
-> +=20
-> +-TRY_RUN(BITFIELDS_HTOL TEST_DUMMY ${CMAKE_BINARY_DIR} ${CMAKE_CURRENT_S=
-OURCE_DIR}/test_BITFIELDS_HTOL.c)
-> +-
-> + INCLUDE(CheckIncludeFiles)
-> +=20
-> + #SET(CMAKE_REQUIRED_INCLUDES "/usr/include;/usr/local/include")
-> +diff --git a/include/xconfig.h.in b/include/xconfig.h.in
-> +index c130600..476c00b 100644
-> +--- a/include/xconfig.h.in
-> ++++ b/include/xconfig.h.in
-> +@@ -233,7 +233,11 @@
-> + /* If using network byte order             */
-> + #cmakedefine WORDS_BIGENDIAN
-> + /* If high bits come first in structures   */
-> +-#cmakedefine BITFIELDS_HTOL
-> ++#ifdef WORDS_BIGENDIAN
-> ++#define BITFIELDS_HTOL
-> ++#else
-> ++#define BITFIELDS_LTOH
-> ++#endif
-> + #define	HAVE_C_BIGENDIAN	/* Flag that WORDS_BIGENDIAN test was done */
-> + #define	HAVE_C_BITFIELDS	/* Flag that BITFIELDS_HTOL test was done  */
-> +=20
-> +--=20
-> +2.1.0
-> +
-> --=20
-> 2.1.0
+> Adrian Freihofer (3):
+>   libgudev: exclude use with systemd <=3D220
+>   networkmanager: depend on libgudev not on udev
+>   modemmanager: depend on libgudev not on udev
+>=20
+>  meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb     | 2 =
++-
+>  meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.4.bb | 2 =
++-
+>  meta-oe/recipes-gnome/libgudev/libgudev_230.bb                      | 2 =
+++
+>  3 files changed, 4 insertions(+), 2 deletions(-)
 >=20
 > --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 2.4.3
+>=20
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---oOB74oR0WcNeq9Zb
+--qM81t570OJUP5TU/
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlYCsrQACgkQN1Ujt2V2gByB8wCfYvPDvWEEwm6NT+Mm0bnBz0zr
-PBQAoJ9ouwZpX3S/Lu5UQZPLqNvb6jTi
-=6yej
+iEYEARECAAYFAlYCtGAACgkQN1Ujt2V2gBzNowCgulD3ca7FOhi/50JCo3pHgcP5
+23UAnRI05FTQii19eqqSEMf0r21y1LGG
+=bH8k
 -----END PGP SIGNATURE-----
 
---oOB74oR0WcNeq9Zb--
+--qM81t570OJUP5TU/--
