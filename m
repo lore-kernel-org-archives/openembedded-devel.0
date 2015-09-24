@@ -1,32 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
-	[209.85.223.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 34B927404E
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Sep 2015 04:56:21 +0000 (UTC)
-Received: by iofh134 with SMTP id h134so65184323iof.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 21:56:21 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id CC6177404E;
+	Thu, 24 Sep 2015 05:54:30 +0000 (UTC)
+Received: by wicgb1 with SMTP id gb1so234443736wic.1;
+	Wed, 23 Sep 2015 22:54:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=X2Qio3uIK8iIJbqel3EsnZehrcglfFKMkXdfIwg7g48=;
-	b=udjaGQuSSnCqTUMqe+9h26D6z6B/CEnrJYQyakkejJktU4zlbKmp/iYJ+wDMcKTaRn
-	+4+VSLUrLsop1kQqhTYSBQokCbVziTYEckRCzOea2wbWGxeXl7KF5t6LAAzM7aASOW7g
-	cm7BcprI4m7gBmNsDQUgDNBEKV0oqMAl1F1MKUqw0mSogBPM6AOysOXAtNTuUWY6YC/O
-	3ZPp34vbvJ1Voybqb75wYPGlTYuqZZ3852fQkpqgxmDuZJYlzLQeLYVD8JuIOkiJHQJu
-	5nGj25TPA0Vps9Mq54/afTHvKtQTD2WbXHGhd8Dt9/OFoz0sCi2WyWUnwac9bLJ3m55n
-	5+tw==
-X-Received: by 10.107.137.106 with SMTP id l103mr41056312iod.112.1443070581444;
-	Wed, 23 Sep 2015 21:56:21 -0700 (PDT)
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=DX4SfVqiu3MMuAH8XuuZ1QoJI/xxqzt8RoqQlk20LK4=;
+	b=iufxCYKeSms3SWhT3uk6guR2pmuJa6+OL5tNlvJFiOVhQed4Ws5D5EsMp/I0be4+lq
+	CLIp5w6fIA8MRVdA5YC18Fl58SytXgjVoXrviyrRa/bodBL5s7sFvhkxUdBxuUL+K9h4
+	4GzkkjLz7A8U6j70OdxjOLFfzGSojc833fe8wp6VzLzLNET3or+6izckzUb8em/brt1f
+	qVH3aZlKPIdc0kRDm2j5f0teCjPNTR3gp0clh4c6Eaixmn+ayYaV/K1RZqRk5AyuL1n1
+	Rt7soiVCX24CCz/iSG41EuS4R3JSWW6Hm7rnXz+KrhucbKp4ZonypOmQ36249sI58dT1
+	Ekmw==
+X-Received: by 10.194.174.201 with SMTP id bu9mr46567190wjc.73.1443074070553; 
+	Wed, 23 Sep 2015 22:54:30 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id fu5sm1500859wic.0.2015.09.23.22.54.29
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 23 Sep 2015 22:54:29 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 24 Sep 2015 07:54:44 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150924055444.GA2404@jama>
+References: <20150923211259.12BA050583@opal.openembedded.org>
 MIME-Version: 1.0
-Received: by 10.107.142.130 with HTTP; Wed, 23 Sep 2015 21:55:51 -0700 (PDT)
-In-Reply-To: <1443047368-11176-1-git-send-email-andrea.adami@gmail.com>
-References: <1443047368-11176-1-git-send-email-andrea.adami@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 23 Sep 2015 21:55:51 -0700
-Message-ID: <CAMKF1srf0TeAhf_f0uNLOvr_Cyet9b5em-iiYrXygWPg+w6z4g@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-initramfs][PATCH] kexecboot_0.6: fix build with gcc 5
+In-Reply-To: <20150923211259.12BA050583@opal.openembedded.org>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Robert Yang : insane.bbclass: make package_qa_clean_path return a relative path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,12 +45,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Sep 2015 04:56:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 24 Sep 2015 05:54:33 -0000
+X-Groupsio-MsgNum: 57532
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="bp/iNruPH9dso1Pn"
+Content-Disposition: inline
 
-On Wed, Sep 23, 2015 at 3:29 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
-> +-inline void
-> ++extern inline void
+--bp/iNruPH9dso1Pn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-would it be better to make it static inline ?
+On Wed, Sep 23, 2015 at 09:12:59PM +0000, git@git.openembedded.org wrote:
+> Module: openembedded-core.git
+> Branch: master-next
+> Commit: 67a1e4b087a39db04370685616d5b439b0f2b505
+> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit=
+;h=3D67a1e4b087a39db04370685616d5b439b0f2b505
+>=20
+> Author: Robert Yang <liezhi.yang@windriver.com>
+> Date:   Tue Sep 15 19:28:48 2015 -0700
+>=20
+> insane.bbclass: make package_qa_clean_path return a relative path
+>=20
+> Make package_qa_clean_path() return something like "work/path/to/file"
+> rather than "/work/path/to/file", the relative path is a little clear.
+>=20
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+>=20
+> ---
+>=20
+>  meta/classes/insane.bbclass | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta/classes/insane.bbclass b/meta/classes/insane.bbclass
+> index 72120f5..05e31a7 100644
+> --- a/meta/classes/insane.bbclass
+> +++ b/meta/classes/insane.bbclass
+> @@ -167,7 +167,7 @@ def package_qa_get_machine_dict():
+> =20
+>  def package_qa_clean_path(path,d):
+>      """ Remove the common prefix from the path. In this case it is the T=
+MPDIR"""
+> -    return path.replace(d.getVar('TMPDIR',True),"")
+> +    return path.replace(d.getVar("TMPDIR", True) + "/", "")
 
+Isn't path[len(d.getVar("TMPDIR", True))+1:] a bit faster and safer in
+cases where the TMPDIR path is included multiple times?
+
+Or is this function meant to be used also for path which doesn't start
+with TMPDIR? Then I agree it should stay replace, but maybe with
+maxreplace parameter set to 1.
+
+Same problem with "absolute" path is other QA check I was recently
+changing (and I've kept leading / after seeing it somewhere else :)).
+
+Regards,
+
+> =20
+>  def package_qa_write_error(type, error, d):
+>      logfile =3D d.getVar('QA_LOGFILE', True)
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--bp/iNruPH9dso1Pn
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlYDkCQACgkQN1Ujt2V2gBzjrACgj1CjmITEWs26JTY4B5XQF4kj
++M8AoKMhjBZHzD8Bhe0n35d96XSxGni9
+=P3o+
+-----END PGP SIGNATURE-----
+
+--bp/iNruPH9dso1Pn--
