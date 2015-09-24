@@ -1,40 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 32B4B76FDE
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 731B976FF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Sep 2015 06:18:05 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so98400320wic.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 23:18:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=GjrcDwZDAZY64s4MhWLbUiqIbnn3K94Mf/oMXXjy2d4=;
-	b=qIPQ7Red18ON2nFkrh3U6gzp/Og/36QBbZ8SdZXK0VlZlnFuPtH+JIs2J/yYqPZC9C
-	39pLiJznCQjYeKUAOAWBWMNjg+ITLY+sO0iZbvbWA9xdeYK/TwIqec8kxdafnjVAPvHc
-	jZNaeAEpSpTZwf9CQNJFqZyB8mbfO/4aKVQIqPsZ0chqG1W8CroRqFiv5QLTj0HBvBVU
-	8gGIY6cS40EopXx3BhnZPPFjTJGewqK746hdZxRQTP6eeSIZLI0WBKVNXvwFPq4J4ZWh
-	T8AsYCdjBnJuE3mu5YJiNm3BrbFVzSQUvKJ1chL1GC+1WiezsseO8qj+U5rjtx1lra2/
-	l9dg==
-X-Received: by 10.194.117.164 with SMTP id kf4mr40103597wjb.9.1443075485751;
-	Wed, 23 Sep 2015 23:18:05 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	ex17sm3775347wid.23.2015.09.23.23.18.04
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Sep 2015 23:18:04 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 24 Sep 2015 08:18:20 +0200
-To: Daniel Ache <daniel.k.ache@gmail.com>
-Message-ID: <20150924061820.GC2404@jama>
-References: <CAP8S4ik4+rWgJL-4RFj8c-bfW6XohBr+QokXFj6k52SYGMHuHQ@mail.gmail.com>
+	Thu, 24 Sep 2015 06:56:05 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t8O6u4Fa005625
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 23 Sep 2015 23:56:04 -0700 (PDT)
+Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.69]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0235.001;
+	Wed, 23 Sep 2015 23:56:04 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH 1/5] waf-samba: add new class
+Thread-Index: AQHQ3miAxhogSGTEkUqu3rR8fvYcjJ5LbFdA
+Date: Thu, 24 Sep 2015 06:56:03 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010BCD0DA0@ALA-MBB.corp.ad.wrs.com>
+References: <1440086369-3321-1-git-send-email-koen@dominion.thruhere.net>
+	<1440086369-3321-2-git-send-email-koen@dominion.thruhere.net>
+	<30DC4EDFD798C94083F3E083754532CC011C1F94CC@G08CNEXMBPEKD03.g08.fujitsu.local>
+	<20150824122848.GB2446@jama>
+In-Reply-To: <20150824122848.GB2446@jama>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.147]
 MIME-Version: 1.0
-In-Reply-To: <CAP8S4ik4+rWgJL-4RFj8c-bfW6XohBr+QokXFj6k52SYGMHuHQ@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: meta-qt5 bluetooth not working within qtconnectivity
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH 1/5] waf-samba: add new class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,137 +43,173 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Sep 2015 06:18:06 -0000
-X-Groupsio-MsgNum: 57533
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="oJ71EGRlYNjSvfq7"
-Content-Disposition: inline
-
---oJ71EGRlYNjSvfq7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 24 Sep 2015 06:56:06 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 24, 2015 at 08:05:58AM +0200, Daniel Ache wrote:
-> Dear Martin,
 
-Hi,
 
-please use ML openembedded-devel@lists.openembedded.org for generic
-questions like this.
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
+> Sent: Monday, August 24, 2015 8:29 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Koen Kooi
+> Subject: Re: [oe] [meta-oe][PATCH 1/5] waf-samba: add new class
+>=20
+> On Fri, Aug 21, 2015 at 01:11:03AM +0000, Bian, Naimeng wrote:
+> > > -----Original Message-----
+> > > From: Koen Kooi [mailto:koen@dominion.thruhere.net]
+> > > Sent: Thursday, August 20, 2015 11:59 PM
+> > > To: openembedded-devel@lists.openembedded.org
+> > > Cc: Bian, Naimeng; Koen Kooi
+> > > Subject: [meta-oe][PATCH 1/5] waf-samba: add new class
+> > >
+> > > From: Bian Naimeng <biannm@cn.fujitsu.com>
+>=20
+> I've merged Bian's implementation, because it was passing jenkins builds =
+now, can one of you please
+> send rebased version of these patches?
+
+Any new progress for this? talloc do_configure  fails with current implemen=
+tation:
+
+| Checking for program gcc or cc           : ['powerpc-wrs-linux-gcc', '-m3=
+2', '-mhard-float', '-mcpu=3D7400', '--sysroot=3D/buildarea/raid0/jhuang0/b=
+uilds/d_samba_150914/p_ppc_150923/bitbake_build/tmp/sysroots/qemuppc']
+| Checking for program ar                  : powerpc-wrs-linux-ar
+| Checking for program ranlib              : powerpc-wrs-linux-ranlib
+| Checking for gcc                         : ok
+| Checking for program git                 : /buildarea/raid0/jhuang0/build=
+s/d_samba_150914/p_ppc_150923/bitbake_build/buildtools/sysroots/x86_64-wrli=
+nuxsdk-linux/usr/bin/git
+| Check for -MD                            : yes
+| Checking for program gdb                 : /buildarea/raid0/jhuang0/build=
+s/d_samba_150914/p_ppc_150923/scripts/gdb
+| Checking build system                    : Linux pek-lpggp1 3.13.0-61-gen=
+eric #100-Ubuntu SMP Wed Jul 29 11:21:34 UTC 2015 x86_64 x86_64 x86_64 GNU/=
+Linux
+| Checking for header sys/utsname.h        : yes
+| Checking uname sysname type              : not found
+| Checking uname machine type              : not found
+| Checking uname release type              : not found
+| Checking uname version type              : not found
+| Checking for header stdio.h              : yes
+| Checking simple C program                : /buildarea/raid0/jhuang0/build=
+s/d_samba_150914/p_ppc_150923/bitbake_build/tmp/work/ppc7400-wrs-linux/tall=
+oc/2.1.1-r0/talloc-2.1.1/lib/replace/../../buildtools/wafsamba/wscript:296:=
+ error: the configuration failed (see '/buildarea/raid0/jhuang0/builds/d_sa=
+mba_150914/p_ppc_150923/bitbake_build/tmp/work/ppc7400-wrs-linux/talloc/2.1=
+.1-r0/talloc-2.1.1/bin/config.log')
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_configure (log file is located at /buildarea/r=
+aid0/jhuang0/builds/d_samba_150914/p_ppc_150923/bitbake_build/tmp/work/ppc7=
+400-wrs-linux/talloc/2.1.1-r0/temp/do_configure/log.do_configure.79871)
+NOTE: recipe talloc-2.1.1-r0: task do_configure: Failed
+
+Thanks,
+Jackie
 
 >=20
-> We are not so used to Yocto, so we had to patch meta-qt5 (
-> qtconnectivity_git.bb and qtsystems_git.bb) to compile bluetooth. bluez4 =
-is
-> a used package within our recipe but bluetooth is not included without th=
-is
-> patch :-(
+> > >
+> > > waf-samba is a build system used by samba related software
+> > >
+> > > Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> > > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> > > ---
+> > >  meta-oe/classes/waf-samba.bbclass | 51
+> > > +++++++++++++++++++++++++++++++++++++++
+> > >  1 file changed, 51 insertions(+)
+> > >  create mode 100644 meta-oe/classes/waf-samba.bbclass
+> > >
+> > > diff --git a/meta-oe/classes/waf-samba.bbclass
+> > > b/meta-oe/classes/waf-samba.bbclass
+> > > new file mode 100644
+> > > index 0000000..b8e010a
+> > > --- /dev/null
+> > > +++ b/meta-oe/classes/waf-samba.bbclass
+> > > @@ -0,0 +1,51 @@
+> > > +# waf is a build system which is used by samba related project.
+> > > +# Obtain details from https://wiki.samba.org/index.php/Waf
+> > > +#
+> > > +inherit qemu pythonnative
+> > > +
+> > > +DEPENDS +=3D "qemu-native libxslt-native
+> > > +docbook-xsl-stylesheets-native
+> > > python"
+> > > +
+> > > +CONFIGUREOPTS =3D " --prefix=3D${prefix} \
+> > > +                  --bindir=3D${bindir} \
+> > > +                  --sbindir=3D${sbindir} \
+> > > +                  --libexecdir=3D${libexecdir} \
+> > > +                  --datadir=3D${datadir} \
+> > > +                  --sysconfdir=3D${sysconfdir} \
+> > > +                  --sharedstatedir=3D${sharedstatedir} \
+> > > +                  --localstatedir=3D${localstatedir} \
+> > > +                  --libdir=3D${libdir} \
+> > > +                  --includedir=3D${includedir} \
+> > > +                  --oldincludedir=3D${oldincludedir} \
+> > > +                  --infodir=3D${infodir} \
+> > > +                  --mandir=3D${mandir} \
+> > > +                "
+> > > +
+> > > +do_configure() {
+> > > +    qemu_binary=3D"${@qemu_target_binary(d)}"
+> > > +    if [ ${qemu_binary} =3D=3D "qemu-allarch" ]; then
+> > > +        qemu_binary=3D"qemuwrapper"
+> > > +    fi
+> > > +
+> > > +    libdir_qemu=3D"${STAGING_DIR_HOST}/${libdir}"
+> > > +    base_libdir_qemu=3D"${STAGING_DIR_HOST}/${base_libdir}"
+> > > +    oldest_kernel_qemu=3D${OLDEST_KERNEL}
+> > > +
+> > > +    CROSS_EXEC=3D"${qemu_binary} \
+> > > +                -r ${oldest_kernel_qemu} \
+> > > +                -L ${STAGING_DIR_HOST} \
+> > > +                -E LD_LIBRARY_PATH=3D${libdir_qemu}:${base_libdir_qe=
+mu}"
+> > > +
+> > > +    export BUILD_SYS=3D${BUILD_SYS}
+> > > +    export HOST_SYS=3D${HOST_SYS}
+> > > +    export BUILD_ARCH=3D${BUILD_ARCH}
+> > > +    export HOST_ARCH=3D${HOST_ARCH}
+> > > +    export STAGING_LIBDIR=3D${STAGING_LIBDIR}
+> > > +    export STAGING_INCDIR=3D${STAGING_INCDIR}
+> > > +    export PYTHONPATH=3D${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR=
+}
+> > > +
+> > > +    ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF} --cross-compile
+> > > --cross-execute=3D"${CROSS_EXEC}"
+> > > --cross-answers=3D${B}/cross-answers-${TARGET_ARCH}.txt
+> >
+> > Thanks for your update.
+> >
+> > Would you tell me why both --cross-execute and --cross-answer are requi=
+red.
+> > If the --cross-answers is not be required, IMO, we do not need support =
+it.
+> > Because it will be not an easy job to maintain
+> > cross-answers-${TARGET_ARCH}.txt for each waf-samba.bbclass based recip=
+e.
+> >
+> > Thanks
+> >  Bian
+> >
+> > > +}
+> > > +
+> > > +do_install() {
+> > > +    oe_runmake install DESTDIR=3D${D} }
+> > > --
+> > > 2.0.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >=20
-> Is "OE_BLUEZ_ENABLED" needed somehow? Or is this historical stuff?
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Yes, it's still needed, but don't set it directly add "bluez4" to
-PACKAGECONFIG variable in your DISTRO config.
-
-> How can I change our recipes to compile with bluetooth and without patchi=
-ng
-> meta-qt5?
-
-Use .bbappend or PACKAGECONFIG_append_pn-qtconnectivity.
-
-Did you test it with bluez5 or only with bluez4? I didn't check if 5.5
-version supports both now.
-
-Regards,
-
-> Attached out patch file, so you can see what we did.
->=20
-> greetings from Germany
-> Daniel
-
-> From eb16df8826aeca2eab878695e8d2645a191e717c Mon Sep 17 00:00:00 2001
-> From: Daniel Ache <d.ache@oculus.de>
-> Date: Wed, 23 Sep 2015 16:23:25 +0200
-> Subject: [PATCH 1/1] =3D?UTF-8?q?OE=3D5FBLUEZ=3D5FENABLED=3D20entfernt.=
-=3D20Da=3D20wir?=3D
->  =3D?UTF-8?q?=3D20(Christian=3D20Wa=3DC3=3D9Fmuth=3D20und=3D20ich)=3D20es=
-=3D20nicht=3D20gescha?=3D
->  =3D?UTF-8?q?fft=3D20haben,=3D20QtConnectivity=3D20so=3D20mit=3D20bluez=
-=3D20support=3D20zu?=3D
->  =3D?UTF-8?q?=3D20erstellen.=3D20Vermutlich=3D20ist=3D20OE=3D5FBLUEZ=3D5F=
-ENABLED=3D20eh=3D20?=3D
->  =3D?UTF-8?q?ein=3D20Relikt=3D20aus=3D20vergangenen=3D20Tagen=3D20und=3D2=
-0so=3D20nicht=3D20m?=3D
->  =3D?UTF-8?q?ehr=3D20n=3DC3=3DB6tig.?=3D
-> MIME-Version: 1.0
-> Content-Type: text/plain; charset=3DUTF-8
-> Content-Transfer-Encoding: 8bit
->=20
-> ---
->  recipes-qt/qt5/qtconnectivity_git.bb | 8 --------
->  recipes-qt/qt5/qtsystems_git.bb      | 9 ---------
->  2 files changed, 17 deletions(-)
->=20
-> diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconn=
-ectivity_git.bb
-> index 4781be1..c6e56ed 100644
-> --- a/recipes-qt/qt5/qtconnectivity_git.bb
-> +++ b/recipes-qt/qt5/qtconnectivity_git.bb
-> @@ -12,13 +12,5 @@ LIC_FILES_CHKSUM =3D " \
-> =20
->  DEPENDS +=3D "qtbase qtdeclarative"
-> =20
-> -PACKAGECONFIG ??=3D ""
-> -PACKAGECONFIG[bluez4] =3D "OE_BLUEZ_ENABLED,,bluez4"
-> -
-> -do_configure_prepend() {
-> -    export QMAKE_CACHE_EVAL=3D"CONFIG+=3D${EXTRA_OECONF}"
-> -    # disable bluez test if it isn't enabled by PACKAGECONFIG
-> -    sed -i 's/^qtCompileTest(bluez)/OE_BLUEZ_ENABLED:qtCompileTest(bluez=
-)/g' ${S}/qtconnectivity.pro
-> -}
-> =20
->  SRCREV =3D "e4a5dc7dbe62c32032e5e683ac1fdb57663a14b3"
-> diff --git a/recipes-qt/qt5/qtsystems_git.bb b/recipes-qt/qt5/qtsystems_g=
-it.bb
-> index 781cd38..47ec34d 100644
-> --- a/recipes-qt/qt5/qtsystems_git.bb
-> +++ b/recipes-qt/qt5/qtsystems_git.bb
-> @@ -11,15 +11,6 @@ LIC_FILES_CHKSUM =3D " \
-> =20
->  DEPENDS +=3D "qtbase qtdeclarative udev gconf"
-> =20
-> -PACKAGECONFIG ??=3D ""
-> -PACKAGECONFIG[bluez4] =3D "OE_BLUEZ_ENABLED,,bluez4"
-> -
-> -do_configure_prepend() {
-> -    export QMAKE_CACHE_EVAL=3D"CONFIG+=3D${EXTRA_OECONF}"
-> -    # disable bluez test if it isn't enabled by PACKAGECONFIG
-> -    sed -i 's/^    qtCompileTest(bluez)/    OE_BLUEZ_ENABLED:qtCompileTe=
-st(bluez)/g' ${S}/qtsystems.pro
-> -}
-> -
->  do_install_append() {
->      # Remove example.pro file as it is useless
->      rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro=09
-> --=20
-> 1.9.1
->=20
-
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---oJ71EGRlYNjSvfq7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlYDlasACgkQN1Ujt2V2gBxpWACfQ39S+3/GAc+7vMBjN/b3NDkZ
-S6gAoI/nDcl7gHGlp+iWI0DcaXDLtEZs
-=l14N
------END PGP SIGNATURE-----
-
---oJ71EGRlYNjSvfq7--
