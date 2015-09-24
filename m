@@ -1,30 +1,29 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 334F47404E
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 15870756C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Sep 2015 01:58:13 +0000 (UTC)
+	Thu, 24 Sep 2015 02:01:27 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t8O1wDQs012730
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8O21NLV027816
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 18:58:13 -0700 (PDT)
+	Wed, 23 Sep 2015 19:01:23 -0700 (PDT)
 Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Wed, 23 Sep 2015 18:58:12 -0700
+	Wed, 23 Sep 2015 19:01:23 -0700
 To: <openembedded-devel@lists.openembedded.org>
-References: <1441704708-22940-1-git-send-email-kai.kang@windriver.com>
-	<1441704708-22940-2-git-send-email-kai.kang@windriver.com>
-	<20150923140829.GE2384@jama>
+References: <1442999044-30163-1-git-send-email-kai.kang@windriver.com>
+	<20150923134730.GC2384@jama>
 From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <560358BE.5080207@windriver.com>
-Date: Thu, 24 Sep 2015 09:58:22 +0800
+Message-ID: <5603597D.1050903@windriver.com>
+Date: Thu, 24 Sep 2015 10:01:33 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
 	Thunderbird/38.2.0
 MIME-Version: 1.0
-In-Reply-To: <20150923140829.GE2384@jama>
+In-Reply-To: <20150923134730.GC2384@jama>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH 1/2] efivar: 0.7 -> 0.21
+Subject: Re: [meta-oe][PATCH] p11-kit: remove from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,54 +37,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Sep 2015 01:58:15 -0000
+X-List-Received-Date: Thu, 24 Sep 2015 02:01:34 -0000
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 2015年09月23日 22:08, Martin Jansa wrote:
-> On Tue, Sep 08, 2015 at 05:31:47PM +0800, kai.kang@windriver.com wrote:
+On 2015年09月23日 21:47, Martin Jansa wrote:
+> On Wed, Sep 23, 2015 at 05:04:04PM +0800, kai.kang@windriver.com wrote:
 >> From: Kai Kang <kai.kang@windriver.com>
 >>
->> Upgrade efivar from 0.7 to 0.21.
->>
->> * update HOMEPAGE
-> Fails to build in world http://errors.yoctoproject.org/Errors/Details/18426/
+>> Remove p11-kit from meta-oe that there is a newer version in oe-core.
+> Duplicates:
+> commit ad2932486ddf37b28fade4f4fd12c0c3fdb6df7a
+> Author: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+> Date:   Mon Sep 14 15:26:44 2015 +0300
+>
+>      p11-kit: remove the recipe due to its move to oe-core
+>
+> which was already in master-next and now is in master.
 
-I'll check it. Thanks.
+Got it. Thanks
 
 --Kai
 
 >
 >> Signed-off-by: Kai Kang <kai.kang@windriver.com>
 >> ---
->>   meta-oe/recipes-extended/efivar/efivar_git.bb | 8 ++++----
->>   1 file changed, 4 insertions(+), 4 deletions(-)
+>>   meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb | 18 ------------------
+>>   1 file changed, 18 deletions(-)
+>>   delete mode 100644 meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb
 >>
->> diff --git a/meta-oe/recipes-extended/efivar/efivar_git.bb b/meta-oe/recipes-extended/efivar/efivar_git.bb
->> index 18446a0..bf2e6d2 100644
->> --- a/meta-oe/recipes-extended/efivar/efivar_git.bb
->> +++ b/meta-oe/recipes-extended/efivar/efivar_git.bb
->> @@ -1,14 +1,14 @@
->>   SUMMARY = "Tools to manipulate UEFI variables"
->>   DESCRIPTION = "efivar provides a simple command line interface to the UEFI variable facility"
->> -HOMEPAGE = "https://github.com/vathpela/efivar"
->> +HOMEPAGE = "https://github.com/rhinstaller/efivar"
->>   
->>   LICENSE = "LGPLv2.1"
->> -LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
->>   
->>   DEPENDS = "popt"
->>   
->> -SRCREV = "c9e1f24a81b5374408bca5616402276e47171cf7"
->> -PV = "0.7+git${SRCPV}"
->> +SRCREV = "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
->> +PV = "0.21+git${SRCPV}"
->>   SRC_URI = "git://github.com/vathpela/efivar.git"
->>   
->>   S = "${WORKDIR}/git"
+>> diff --git a/meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb b/meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb
+>> deleted file mode 100644
+>> index e0ebe7d..0000000
+>> --- a/meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb
+>> +++ /dev/null
+>> @@ -1,18 +0,0 @@
+>> -SUMMARY = "Provides a way to load and enumerate PKCS#11 modules"
+>> -LICENSE = "BSD"
+>> -LIC_FILES_CHKSUM = "file://COPYING;md5=02933887f609807fbb57aa4237d14a50"
+>> -
+>> -inherit autotools gettext pkgconfig
+>> -
+>> -DEPENDS = "libtasn1 libffi"
+>> -
+>> -SRC_URI = "http://p11-glue.freedesktop.org/releases/${BP}.tar.gz"
+>> -SRC_URI[md5sum] = "d96046ab6ac00d005342caf416ed76ab"
+>> -SRC_URI[sha256sum] = "94fbed372c11d0a404762aad966e54eb4f44c1d5b871a1b79a1a3b4cf36ed256"
+>> -
+>> -FILES_${PN}-dev += " \
+>> -    ${libdir}/p11-kit-proxy.so \
+>> -    ${libdir}/pkcs11/p11-kit-trust.so \
+>> -"
+>> -FILES_${PN}-dev += "${libdir}/pkcs11/*.la"
+>> -FILES_${PN}-dbg += "${libdir}/pkcs11/.debug"
 >> -- 
->> 1.9.1
+>> 2.4.1
 >>
 >> -- 
 >> _______________________________________________
