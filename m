@@ -1,24 +1,32 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 422E7756C5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
+	[209.85.223.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 34B927404E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Sep 2015 03:12:32 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8O3CWTB028185
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 24 Sep 2015 04:56:21 +0000 (UTC)
+Received: by iofh134 with SMTP id h134so65184323iof.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 20:12:32 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.235.1;
-	Wed, 23 Sep 2015 20:12:32 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 23 Sep 2015 23:12:31 -0400
-Message-ID: <1443064351-27254-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Wed, 23 Sep 2015 21:56:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=X2Qio3uIK8iIJbqel3EsnZehrcglfFKMkXdfIwg7g48=;
+	b=udjaGQuSSnCqTUMqe+9h26D6z6B/CEnrJYQyakkejJktU4zlbKmp/iYJ+wDMcKTaRn
+	+4+VSLUrLsop1kQqhTYSBQokCbVziTYEckRCzOea2wbWGxeXl7KF5t6LAAzM7aASOW7g
+	cm7BcprI4m7gBmNsDQUgDNBEKV0oqMAl1F1MKUqw0mSogBPM6AOysOXAtNTuUWY6YC/O
+	3ZPp34vbvJ1Voybqb75wYPGlTYuqZZ3852fQkpqgxmDuZJYlzLQeLYVD8JuIOkiJHQJu
+	5nGj25TPA0Vps9Mq54/afTHvKtQTD2WbXHGhd8Dt9/OFoz0sCi2WyWUnwac9bLJ3m55n
+	5+tw==
+X-Received: by 10.107.137.106 with SMTP id l103mr41056312iod.112.1443070581444;
+	Wed, 23 Sep 2015 21:56:21 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] squid: disable atomic operations for powerpc/mips
+Received: by 10.107.142.130 with HTTP; Wed, 23 Sep 2015 21:55:51 -0700 (PDT)
+In-Reply-To: <1443047368-11176-1-git-send-email-andrea.adami@gmail.com>
+References: <1443047368-11176-1-git-send-email-andrea.adami@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 23 Sep 2015 21:55:51 -0700
+Message-ID: <CAMKF1srf0TeAhf_f0uNLOvr_Cyet9b5em-iiYrXygWPg+w6z4g@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-initramfs][PATCH] kexecboot_0.6: fix build with gcc 5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,55 +40,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Sep 2015 03:12:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 24 Sep 2015 04:56:22 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+On Wed, Sep 23, 2015 at 3:29 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
+> +-inline void
+> ++extern inline void
 
-Don't enable GNU atomic operations for all targets, it fails on
-powerpc and mips:
-
-  AtomicWord.h: undefined reference to `__sync_fetch_and_add_8'
-  collect2: error: ld returned 1 exit status
-
-Refer to https://gcc.gnu.org/bugzilla/show_bug.cgi?id=56300:
-
-  There is no hardware support for 8 bytes atomic operations on
-  32-bit MIPS targets.
-
-The 32-bit PowerPC fails as well.
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- meta-networking/recipes-daemons/squid/squid_3.5.7.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
-index 5d058dc..5b27d46 100644
---- a/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
-@@ -34,8 +34,11 @@ inherit autotools useradd ptest
- USERADD_PACKAGES = "${PN}"
- USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --shell /bin/false --user-group squid"
- 
--PACKAGECONFIG ??= ""
-+PACKAGECONFIG ??= "${@base_contains('TARGET_ARCH', 'powerpc', 'noatomics', '', d)} \
-+                   ${@base_contains('TARGET_ARCH', 'mips', 'noatomics', '', d)} \
-+                  "
- PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
-+PACKAGECONFIG[noatomics] = "squid_cv_gnu_atomics=no,squid_cv_gnu_atomics=yes,,"
- 
- BASIC_AUTH = "DB SASL LDAP NIS"
- DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
-@@ -43,7 +46,6 @@ BASIC_AUTH += "${@base_contains('DISTRO_FEATURES', 'pam', 'PAM', '', d)}"
- 
- EXTRA_OECONF += "--with-default-user=squid --enable-auth-basic='${BASIC_AUTH}'"
- export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
--CACHED_CONFIGUREVARS += "squid_cv_gnu_atomics=yes"
- 
- TESTDIR = "test-suite"
- do_compile_ptest() {
--- 
-1.9.1
-
+would it be better to make it static inline ?
 
