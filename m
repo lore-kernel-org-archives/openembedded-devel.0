@@ -1,29 +1,24 @@
-Return-Path: <Kai.Kang@windriver.com>
+Return-Path: <Wenzong.Fan@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 15870756C5
+	by mail.openembedded.org (Postfix) with ESMTP id 422E7756C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Sep 2015 02:01:27 +0000 (UTC)
+	Thu, 24 Sep 2015 03:12:32 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8O21NLV027816
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8O3CWTB028185
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 19:01:23 -0700 (PDT)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
-	Wed, 23 Sep 2015 19:01:23 -0700
+	Wed, 23 Sep 2015 20:12:32 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.235.1;
+	Wed, 23 Sep 2015 20:12:32 -0700
+From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1442999044-30163-1-git-send-email-kai.kang@windriver.com>
-	<20150923134730.GC2384@jama>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <5603597D.1050903@windriver.com>
-Date: Thu, 24 Sep 2015 10:01:33 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+Date: Wed, 23 Sep 2015 23:12:31 -0400
+Message-ID: <1443064351-27254-1-git-send-email-wenzong.fan@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <20150923134730.GC2384@jama>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] p11-kit: remove from meta-oe
+Subject: [PATCH][meta-networking] squid: disable atomic operations for powerpc/mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,73 +32,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Sep 2015 02:01:34 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 24 Sep 2015 03:12:40 -0000
+Content-Type: text/plain
 
-On 2015年09月23日 21:47, Martin Jansa wrote:
-> On Wed, Sep 23, 2015 at 05:04:04PM +0800, kai.kang@windriver.com wrote:
->> From: Kai Kang <kai.kang@windriver.com>
->>
->> Remove p11-kit from meta-oe that there is a newer version in oe-core.
-> Duplicates:
-> commit ad2932486ddf37b28fade4f4fd12c0c3fdb6df7a
-> Author: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-> Date:   Mon Sep 14 15:26:44 2015 +0300
->
->      p11-kit: remove the recipe due to its move to oe-core
->
-> which was already in master-next and now is in master.
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-Got it. Thanks
+Don't enable GNU atomic operations for all targets, it fails on
+powerpc and mips:
 
---Kai
+  AtomicWord.h: undefined reference to `__sync_fetch_and_add_8'
+  collect2: error: ld returned 1 exit status
 
->
->> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> ---
->>   meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb | 18 ------------------
->>   1 file changed, 18 deletions(-)
->>   delete mode 100644 meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb
->>
->> diff --git a/meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb b/meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb
->> deleted file mode 100644
->> index e0ebe7d..0000000
->> --- a/meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb
->> +++ /dev/null
->> @@ -1,18 +0,0 @@
->> -SUMMARY = "Provides a way to load and enumerate PKCS#11 modules"
->> -LICENSE = "BSD"
->> -LIC_FILES_CHKSUM = "file://COPYING;md5=02933887f609807fbb57aa4237d14a50"
->> -
->> -inherit autotools gettext pkgconfig
->> -
->> -DEPENDS = "libtasn1 libffi"
->> -
->> -SRC_URI = "http://p11-glue.freedesktop.org/releases/${BP}.tar.gz"
->> -SRC_URI[md5sum] = "d96046ab6ac00d005342caf416ed76ab"
->> -SRC_URI[sha256sum] = "94fbed372c11d0a404762aad966e54eb4f44c1d5b871a1b79a1a3b4cf36ed256"
->> -
->> -FILES_${PN}-dev += " \
->> -    ${libdir}/p11-kit-proxy.so \
->> -    ${libdir}/pkcs11/p11-kit-trust.so \
->> -"
->> -FILES_${PN}-dev += "${libdir}/pkcs11/*.la"
->> -FILES_${PN}-dbg += "${libdir}/pkcs11/.debug"
->> -- 
->> 2.4.1
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+Refer to https://gcc.gnu.org/bugzilla/show_bug.cgi?id=56300:
 
+  There is no hardware support for 8 bytes atomic operations on
+  32-bit MIPS targets.
 
+The 32-bit PowerPC fails as well.
+
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+---
+ meta-networking/recipes-daemons/squid/squid_3.5.7.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
+index 5d058dc..5b27d46 100644
+--- a/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
++++ b/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
+@@ -34,8 +34,11 @@ inherit autotools useradd ptest
+ USERADD_PACKAGES = "${PN}"
+ USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --shell /bin/false --user-group squid"
+ 
+-PACKAGECONFIG ??= ""
++PACKAGECONFIG ??= "${@base_contains('TARGET_ARCH', 'powerpc', 'noatomics', '', d)} \
++                   ${@base_contains('TARGET_ARCH', 'mips', 'noatomics', '', d)} \
++                  "
+ PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
++PACKAGECONFIG[noatomics] = "squid_cv_gnu_atomics=no,squid_cv_gnu_atomics=yes,,"
+ 
+ BASIC_AUTH = "DB SASL LDAP NIS"
+ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+@@ -43,7 +46,6 @@ BASIC_AUTH += "${@base_contains('DISTRO_FEATURES', 'pam', 'PAM', '', d)}"
+ 
+ EXTRA_OECONF += "--with-default-user=squid --enable-auth-basic='${BASIC_AUTH}'"
+ export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
+-CACHED_CONFIGUREVARS += "squid_cv_gnu_atomics=yes"
+ 
+ TESTDIR = "test-suite"
+ do_compile_ptest() {
 -- 
-Regards,
-Neil | Kai Kang
+1.9.1
 
 
