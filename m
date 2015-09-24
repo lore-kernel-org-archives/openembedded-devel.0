@@ -1,20 +1,35 @@
-Return-Path: <reinette.chatre@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 2EFE7734DA
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id D927F7669F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Sep 2015 22:00:33 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga103.fm.intel.com with ESMTP; 24 Sep 2015 15:00:33 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,583,1437462000"; d="scan'208";a="796759184"
-Received: from rchatre-builder.jf.intel.com ([10.54.39.14])
-	by fmsmga001.fm.intel.com with ESMTP; 24 Sep 2015 15:00:33 -0700
-From: Reinette Chatre <reinette.chatre@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Sep 2015 15:03:01 -0700
-Message-Id: <afe681777baf3d8d15de8c4540617a03e2fa9f50.1443131652.git.reinette.chatre@intel.com>
-X-Mailer: git-send-email 2.4.3
-Subject: [meta-oe][PATCH] polkit: fix relocation of polkit binaries
+	Thu, 24 Sep 2015 23:22:37 +0000 (UTC)
+Received: by iofb144 with SMTP id b144so94245029iof.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Sep 2015 16:22:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=ssFngw7q2NXBuyA/miETzqDvIMqBsXwEW+zr0OoDvmc=;
+	b=Zsmv1yHC92ntFnt6gcv6ZjPbYViABT4Z+RPmYrDuqFIfyuXp5sLUOiinTKrHhFY22U
+	4/CB27LsSmf4wm9mZIJxk/oT8A8wz0KqbFKzGFxpHbR8p/ZiuarKx2e3EE6FqDV8K0VJ
+	GDPfIbVjHBTrbgE+ZSRu/99N9PBTCy1aIOp9nNDtk9OXDR2XwL4X+44HyEcvHkIb7fZq
+	e8wEK87jEkfE9G96JMNUkC0I2W4sB2K16137FLbs17j2CGnVeXIWA4CLB+jYGz8Hr040
+	0Ss1lhUotdWjxojIHGnuCywh254GZ9WYI9zJVorgmZZ8rLM9nprKBOxtm/BFjUdhmHx5
+	3DZA==
+MIME-Version: 1.0
+X-Received: by 10.107.14.140 with SMTP id 134mr3207404ioo.148.1443136957467;
+	Thu, 24 Sep 2015 16:22:37 -0700 (PDT)
+Received: by 10.36.98.5 with HTTP; Thu, 24 Sep 2015 16:22:37 -0700 (PDT)
+In-Reply-To: <CALbNGRTopGO_K0BqpLaq27EeKhaC63QiE7Yo079PqOP5tQrSXA@mail.gmail.com>
+References: <5603FD45.5030308@topic.nl>
+	<CALbNGRTopGO_K0BqpLaq27EeKhaC63QiE7Yo079PqOP5tQrSXA@mail.gmail.com>
+Date: Fri, 25 Sep 2015 01:22:37 +0200
+Message-ID: <CALbNGRR9eL001Y7UByvKuoeQuOr=93OHX_WxjD2NHO5WKNmg-w@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: "libgudev" fails to build with current master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,131 +43,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Sep 2015 22:00:37 -0000
+X-List-Received-Date: Thu, 24 Sep 2015 23:22:38 -0000
+X-Groupsio-MsgNum: 57542
+Content-Type: multipart/mixed; boundary=001a113fef80b74a5f0520868187
 
-Polkit is currently broken in images built with multilib and systemd.
-This is because the patch, 0001-do-not-hardcoded-libdir.patch, applied on
-top of the polkit source code modifies where the polkitd binary is
-installed, but it does not modify the polkit.service file to start the
-binary from its new location.
+--001a113fef80b74a5f0520868187
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-At first it seemed reasonable to modify the systemd service file to
-search for the binary in the correct place. This change, as well as what
-the patch (0001-do-not-hardcoded-libdir.patch) already does was proposed to
-the polkit maintainers at https://bugs.freedesktop.org/show_bug.cgi?id=92094
+On Thu, Sep 24, 2015 at 6:45 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> On Thu, Sep 24, 2015 at 3:40 PM, Mike Looijmans <mike.looijmans@topic.nl>=
+ wrote:
+>> | checking for LIBUDEV... no
+>> | configure: error: Package requirements (libudev >=3D 199) were not met=
+:
+>> |
+>> | Requested 'libudev >=3D 199' but version of libudev is 182
+>> |
+>> ...
+>>
+>> ERROR: Task 5548
+>> (/.../meta-oe/meta-oe/recipes-gnome/libgudev/libgudev_230.bb, do_configu=
+re)
+>> failed with exit code '1'
+>>
+> Which init system are you using - I guess not systemd
+>
+Let's assume it is not systemd. Could you try attached  0001.. for
+oe-core and 0002.. foe meta-oe and give feedback. I tested these for
+systemd distro without new issues.
 
-During the discussion with the polkit maintainers it became apparent that the
-change to support multilib polkit should not be done with a patch to
-the polkit source code, but instead a change to the polkit recipe.
+Andreas
 
-Polkit correctly installs libraries when multilib is in use without any
-changes to its source code. What is being changed by
-0001-do-not-hardcoded-libdir.patch is not where the polkit libraries are
-installed but where the binaries are installed.
+--001a113fef80b74a5f0520868187
+Content-Type: text/x-patch; charset=UTF-8; name="0001-udev-add-PROVIDES-libgudev.patch"
+Content-Disposition: attachment; 
+	filename="0001-udev-add-PROVIDES-libgudev.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_ieyud8ne0
 
-Installing binaries in /usr/lib when baselib is lib64 is acceptable (see
-http://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch04s06.html ).
+RnJvbSAzODRjNzYzZjY2ZDVmNDliOTY3MjUzZThlNWQyNzI4MjI1NTJhNTI0IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiA9P1VURi04P3E/QW5kcmVhcz0yME09QzM9QkNsbGVyPz0gPHNj
+aG5pdHplbHRvbnlAZ29vZ2xlbWFpbC5jb20+CkRhdGU6IEZyaSwgMjUgU2VwIDIwMTUgMDE6MDQ6
+MzEgKzAyMDAKU3ViamVjdDogW1BBVENIXSB1ZGV2OiBhZGQgUFJPVklERVMgPSAibGliZ3VkZXYi
+Ck1JTUUtVmVyc2lvbjogMS4wCkNvbnRlbnQtVHlwZTogdGV4dC9wbGFpbjsgY2hhcnNldD1VVEYt
+OApDb250ZW50LVRyYW5zZmVyLUVuY29kaW5nOiA4Yml0CgpXaXRoIHRoZSBsYXN0IHVwZGF0ZSBv
+ZiBzeXN0ZW1kIGxpYmd1ZGV2IHdhcyBzcGxpdHRlZCBvdXQgb2Ygc3lzdGVtZC4gVG8gbWFrZQpw
+YWNrYWdlcyBkZXBlbmRpbmcgb24gbGliZ3VkZXYgaGFwcHksIGEgcmVjaXBlIGJ1aWxkaW5nIGxp
+Ymd1ZGV2IHdhcyBjcmVhdGVkIGluCm1ldGEtb2UgYW5kIHRoZSBkZXBlbmRlbmNpZXMgd2VyZSBt
+b2RpZmllZCBmcm9tIHVkZXYgdG8gbGliZ3VkZXYuCgpUaGlzIHdvcmtzIGZpbmUgZm9yIGRpc3Ry
+b3MgdXNpbmcgc3lzdGVtZCBhcyBpbml0IHN5c3RlbSwgYnV0IGRpc3Ryb3Mgbm90IHVzaW5nCmJ1
+aWxkIHVkZXYgd2hpY2ggcHJvdmlkZXMgbGliZ3VkZXYuCgpTaWduZWQtb2ZmLWJ5OiBBbmRyZWFz
+IE3DvGxsZXIgPHNjaG5pdHplbHRvbnlAZ29vZ2xlbWFpbC5jb20+Ci0tLQogbWV0YS9yZWNpcGVz
+LWNvcmUvdWRldi91ZGV2LmluYyB8IDIgKysKIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMo
+KykKCmRpZmYgLS1naXQgYS9tZXRhL3JlY2lwZXMtY29yZS91ZGV2L3VkZXYuaW5jIGIvbWV0YS9y
+ZWNpcGVzLWNvcmUvdWRldi91ZGV2LmluYwppbmRleCBhMDBkYWQ1Li5jMzc4YWUzIDEwMDY0NAot
+LS0gYS9tZXRhL3JlY2lwZXMtY29yZS91ZGV2L3VkZXYuaW5jCisrKyBiL21ldGEvcmVjaXBlcy1j
+b3JlL3VkZXYvdWRldi5pbmMKQEAgLTE1LDYgKzE1LDggQEAgTERGTEFHUyArPSAiLWxydCIKIERF
+UEVORFMgPSAiZ2xpYi0yLjAgbGlidXNiIHVzYnV0aWxzIHBjaXV0aWxzIGdsaWItMi4wLW5hdGl2
+ZSBncGVyZi1uYXRpdmUgbGlieHNsdC1uYXRpdmUgdXRpbC1saW51eCIKIFJQUk9WSURFU18ke1BO
+fSA9ICJob3RwbHVnIgogCitQUk9WSURFUyA9ICJsaWJndWRldiIKKwogU1JDX1VSSSA9ICIke0tF
+Uk5FTE9SR19NSVJST1J9L2xpbnV4L3V0aWxzL2tlcm5lbC9ob3RwbHVnL3VkZXYtJHtQVn0udGFy
+Lmd6IFwKICAgICAgICAgICAgZmlsZTovLzAwMDEtRml4aW5nLWtleWJvYXJkX2ZvcmNlX3JlbGVh
+c2Uuc2gtc2hlbGwtc2NyaXB0LXBhdGgucGF0Y2ggXAogICAgICAgICAgICBmaWxlOi8vYXZvaWQt
+bW91c2UtYXV0b3N1c3BlbmQucGF0Y2ggXAotLSAKMi4xLjAKCg==
 
-So, instead of patching polkit to install its binaries under the same
-library directory as its libraries we maintain the design of the polkit
-installer to install the binaries in /usr/lib. This is the same as what is
-done in distros like Fedora that supports multilib.
+--001a113fef80b74a5f0520868187
+Content-Type: text/x-patch; charset=UTF-8; 
+	name="0002-libgudev-skip-recipe-for-distros-not-using-systemd-a.patch"
+Content-Disposition: attachment; 
+	filename="0002-libgudev-skip-recipe-for-distros-not-using-systemd-a.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_ieyudhqd1
 
-With this patch the polkit package, when built with multilib, installs
-files into /usr/lib* as follows:
-polkit/usr/lib64/libpolkit-agent-1.so.0
-polkit/usr/lib64/libpolkit-gobject-1.so.0
-polkit/usr/lib64/libpolkit-gobject-1.so.0.0.0
-polkit/usr/lib64/libpolkit-agent-1.so.0.0.0
-polkit/usr/lib
-polkit/usr/lib/polkit-1
-polkit/usr/lib/polkit-1/polkitd
-polkit/usr/lib/polkit-1/polkit-agent-helper-1
+RnJvbSBlODMyMzVhNzc3ODgwYzM0M2ZjZTlmMjg2ZjUwNjc4YjIzNzYyMGRkIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiA9P1VURi04P3E/QW5kcmVhcz0yME09QzM9QkNsbGVyPz0gPHNj
+aG5pdHplbHRvbnlAZ29vZ2xlbWFpbC5jb20+CkRhdGU6IEZyaSwgMjUgU2VwIDIwMTUgMDE6MTc6
+MDEgKzAyMDAKU3ViamVjdDogW1BBVENIXSBsaWJndWRldjogc2tpcCByZWNpcGUgZm9yIGRpc3Ry
+b3Mgbm90IHVzaW5nIHN5c3RlbWQgYXMgaW5pdApNSU1FLVZlcnNpb246IDEuMApDb250ZW50LVR5
+cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9VVRGLTgKQ29udGVudC1UcmFuc2Zlci1FbmNvZGluZzog
+OGJpdAoKZm9yIHRob3NlIHN5c3RlbXMgdWRldiBwcm92aWRlcyBsaWJndWRldgoKU2lnbmVkLW9m
+Zi1ieTogQW5kcmVhcyBNw7xsbGVyIDxzY2huaXR6ZWx0b255QGdvb2dsZW1haWwuY29tPgotLS0K
+IG1ldGEtb2UvcmVjaXBlcy1nbm9tZS9saWJndWRldi9saWJndWRldl8yMzAuYmIgfCA2ICsrKysr
+KwogMSBmaWxlIGNoYW5nZWQsIDYgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL21ldGEtb2Uv
+cmVjaXBlcy1nbm9tZS9saWJndWRldi9saWJndWRldl8yMzAuYmIgYi9tZXRhLW9lL3JlY2lwZXMt
+Z25vbWUvbGliZ3VkZXYvbGliZ3VkZXZfMjMwLmJiCmluZGV4IDM5ZmMxYzQuLjllNDU3ZDIgMTAw
+NjQ0Ci0tLSBhL21ldGEtb2UvcmVjaXBlcy1nbm9tZS9saWJndWRldi9saWJndWRldl8yMzAuYmIK
+KysrIGIvbWV0YS1vZS9yZWNpcGVzLWdub21lL2xpYmd1ZGV2L2xpYmd1ZGV2XzIzMC5iYgpAQCAt
+MTEsMyArMTEsOSBAQCBMSUNFTlNFID0gIkxHUEx2Mi4xIgogTElDX0ZJTEVTX0NIS1NVTSA9ICJm
+aWxlOi8vQ09QWUlORzttZDU9NGZiZDY1MzgwY2RkMjU1OTUxMDc5MDA4YjM2NDUxNmMiCiAKIGlu
+aGVyaXQgZ25vbWViYXNlCisKKyMgaW4gbm9uIHN5c3RlbWQgZGlzdHJvcyB1ZGV2IGJ1aWxkcyBs
+aWJndWRldgorcHl0aG9uICgpIHsKKyAgICBpZiBub3QgYmIudXRpbHMuY29udGFpbnMgKCdESVNU
+Uk9fRkVBVFVSRVMnLCAnc3lzdGVtZCcsIFRydWUsIEZhbHNlLCBkKToKKyAgICAgICAgcmFpc2Ug
+YmIucGFyc2UuU2tpcFBhY2thZ2UoIidzeXN0ZW1kJyBub3QgaW4gRElTVFJPX0ZFQVRVUkVTIikK
+K30KLS0gCjIuMS4wCgo=
 
-Signed-off-by: Reinette Chatre <reinette.chatre@intel.com>
----
- .../polkit/0001-do-not-hardcoded-libdir.patch      | 44 ----------------------
- meta-oe/recipes-extended/polkit/polkit_0.113.bb    |  5 ++-
- 2 files changed, 3 insertions(+), 46 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
-
-diff --git a/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch b/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
-deleted file mode 100644
-index e605e30..0000000
---- a/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--From c9e09d9b101109832b1dcb050f0c8b588e276686 Mon Sep 17 00:00:00 2001
--From: Zhenhua Luo <zhenhua.luo@freescale.com>
--Date: Mon, 4 May 2015 04:11:27 -0500
--Subject: [PATCH] do not hardcoded libdir
--
--Upstream-Status: Pending
--
--libdir is hardcoded to ${prefix}/lib, but we want it to support multilib
--
--Signed-off-by: Chunrong Guo <B40290@freescale.com>
-----
-- polkitagent/Makefile.am   | 2 +-
-- polkitbackend/Makefile.am | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/src/polkitagent/Makefile.am b/src/polkitagent/Makefile.am
--index 3bc364e..7d1ac0e 100644
----- a/src/polkitagent/Makefile.am
--+++ b/src/polkitagent/Makefile.am
--@@ -78,7 +78,7 @@ libpolkit_agent_1_la_LIBADD =                               		\
-- 
-- libpolkit_agent_1_la_LDFLAGS = -export-symbols-regex '(^polkit_.*)'
-- 
---libprivdir = $(prefix)/lib/polkit-1
--+libprivdir = $(libdir)/polkit-1
-- libpriv_PROGRAMS = polkit-agent-helper-1
-- 
-- polkit_agent_helper_1_SOURCES = 					\
--diff --git a/src/polkitbackend/Makefile.am b/src/polkitbackend/Makefile.am
--index 9f430d0..1f7610b 100644
----- a/src/polkitbackend/Makefile.am
--+++ b/src/polkitbackend/Makefile.am
--@@ -67,7 +67,7 @@ rules_DATA = 50-default.rules
-- 
-- # ----------------------------------------------------------------------------------------------------
-- 
---libprivdir = $(prefix)/lib/polkit-1
--+libprivdir = $(libdir)/polkit-1
-- libpriv_PROGRAMS = polkitd
-- 
-- polkitd_SOURCES = 							\
---- 
--2.3.3
--
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.113.bb b/meta-oe/recipes-extended/polkit/polkit_0.113.bb
-index 29e8896..b85122e 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.113.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.113.bb
-@@ -20,7 +20,6 @@ PACKAGECONFIG[consolekit] = ",,,consolekit"
- PAM_SRC_URI = "file://polkit-1_pam.patch"
- SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
-            ${@base_contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
--           file://0001-do-not-hardcoded-libdir.patch \
- "
- SRC_URI[md5sum] = "4b77776c9e4f897dcfe03b2c34198edf"
- SRC_URI[sha256sum] = "e1c095093c654951f78f8618d427faf91cf62abdefed98de40ff65eca6413c81"
-@@ -31,10 +30,12 @@ PACKAGES =+ "${PN}-examples"
- 
- FILES_${PN} += " \
-     ${libdir}/${BPN}-1 \
-+    ${nonarch_libdir}/${BPN}-1 \
-     ${datadir}/dbus-1 \
-     ${datadir}/${BPN}-1 \
- "
--FILES_${PN}-dbg += "${libdir}/${BPN}-1/.debug"
-+FILES_${PN}-dbg += "${libdir}/${BPN}-1/.debug \
-+                    ${nonarch_libdir}/${BPN}-1/.debug"
- 
- FILES_${PN}-examples = "${bindir}/*example*"
- 
--- 
-2.4.3
-
-
+--001a113fef80b74a5f0520868187--
