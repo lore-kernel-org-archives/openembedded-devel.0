@@ -1,30 +1,30 @@
-Return-Path: <haris.okanovic@ni.com>
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mail.openembedded.org (Postfix) with ESMTP id E6395608B7
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 334F47404E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 22:35:12 +0000 (UTC)
-Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
-	[130.164.19.134])
-	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	t8NMZCw2007051 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2015 17:35:12 -0500
-Received: from harisdt.amer.corp.natinst.com ([130.164.14.198])
-	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2015092317351222-278253 ;
-	Wed, 23 Sep 2015 17:35:12 -0500 
-From: Haris Okanovic <haris.okanovic@ni.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Sep 2015 17:34:55 -0500
-Message-Id: <1443047695-22567-1-git-send-email-haris.okanovic@ni.com>
-X-Mailer: git-send-email 2.4.5
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 09/23/2015 05:35:12 PM,
-	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 09/23/2015 05:35:12 PM,
-	Serialize complete at 09/23/2015 05:35:12 PM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2015-09-24_01:, , signatures=0
-Subject: [meta-oe] [PATCH] inotify-tools: Add
+	Thu, 24 Sep 2015 01:58:13 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t8O1wDQs012730
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Sep 2015 18:58:13 -0700 (PDT)
+Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Wed, 23 Sep 2015 18:58:12 -0700
+To: <openembedded-devel@lists.openembedded.org>
+References: <1441704708-22940-1-git-send-email-kai.kang@windriver.com>
+	<1441704708-22940-2-git-send-email-kai.kang@windriver.com>
+	<20150923140829.GE2384@jama>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <560358BE.5080207@windriver.com>
+Date: Thu, 24 Sep 2015 09:58:22 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
+MIME-Version: 1.0
+In-Reply-To: <20150923140829.GE2384@jama>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH 1/2] efivar: 0.7 -> 0.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,41 +38,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Sep 2015 22:35:13 -0000
+X-List-Received-Date: Thu, 24 Sep 2015 01:58:15 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Add inotify-tools package, a C library and a set of command-line
-programs for Linux providing a simple interface to inotify kernel
-subsystem.
+On 2015年09月23日 22:08, Martin Jansa wrote:
+> On Tue, Sep 08, 2015 at 05:31:47PM +0800, kai.kang@windriver.com wrote:
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> Upgrade efivar from 0.7 to 0.21.
+>>
+>> * update HOMEPAGE
+> Fails to build in world http://errors.yoctoproject.org/Errors/Details/18426/
 
-https://github.com/rvoicilas/inotify-tools/wiki
-http://lwn.net/Articles/104343/
+I'll check it. Thanks.
 
-Testing: Built and installed IPK onto an x64 system (OE Fido).
-inotifywatch and inotifywait successfully detected changes to
-a test file.
+--Kai
 
-Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
----
- meta-oe/recipes-support/inotify-tools/inotify-tools_3.14.bb | 9 +++++++++
- 1 file changed, 9 insertions(+)
- create mode 100644 meta-oe/recipes-support/inotify-tools/inotify-tools_3.14.bb
+>
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ---
+>>   meta-oe/recipes-extended/efivar/efivar_git.bb | 8 ++++----
+>>   1 file changed, 4 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-extended/efivar/efivar_git.bb b/meta-oe/recipes-extended/efivar/efivar_git.bb
+>> index 18446a0..bf2e6d2 100644
+>> --- a/meta-oe/recipes-extended/efivar/efivar_git.bb
+>> +++ b/meta-oe/recipes-extended/efivar/efivar_git.bb
+>> @@ -1,14 +1,14 @@
+>>   SUMMARY = "Tools to manipulate UEFI variables"
+>>   DESCRIPTION = "efivar provides a simple command line interface to the UEFI variable facility"
+>> -HOMEPAGE = "https://github.com/vathpela/efivar"
+>> +HOMEPAGE = "https://github.com/rhinstaller/efivar"
+>>   
+>>   LICENSE = "LGPLv2.1"
+>> -LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
+>>   
+>>   DEPENDS = "popt"
+>>   
+>> -SRCREV = "c9e1f24a81b5374408bca5616402276e47171cf7"
+>> -PV = "0.7+git${SRCPV}"
+>> +SRCREV = "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
+>> +PV = "0.21+git${SRCPV}"
+>>   SRC_URI = "git://github.com/vathpela/efivar.git"
+>>   
+>>   S = "${WORKDIR}/git"
+>> -- 
+>> 1.9.1
+>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
-diff --git a/meta-oe/recipes-support/inotify-tools/inotify-tools_3.14.bb b/meta-oe/recipes-support/inotify-tools/inotify-tools_3.14.bb
-new file mode 100644
-index 0000000..75183ba
---- /dev/null
-+++ b/meta-oe/recipes-support/inotify-tools/inotify-tools_3.14.bb
-@@ -0,0 +1,9 @@
-+SUMMARY = "inotify command line utilities"
-+SECTION = "console/utils"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ac6c26e52aea428ee7f56dc2c56424c6"
-+
-+SRC_URI = "http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-${PV}.tar.gz"
-+SRC_URI[sha256sum] = "222bcca8893d7bf8a1ce207fb39ceead5233b5015623d099392e95197676c92f"
-+
-+inherit autotools-brokensep
+
 -- 
-2.4.5
+Regards,
+Neil | Kai Kang
 
 
