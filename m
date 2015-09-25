@@ -1,40 +1,58 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F15277000
+Return-Path: <mike.looijmans@topicproducts.com>
+X-Greylist: delayed 1003 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 25 Sep 2015 06:28:57 UTC
+Received: from mx6-14.smtp.antispamcloud.com (mx6-14.smtp.antispamcloud.com
+	[95.211.2.226])
+	by mail.openembedded.org (Postfix) with ESMTP id 0ABBD76FF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Sep 2015 06:27:46 +0000 (UTC)
-Received: by wicge5 with SMTP id ge5so6370523wic.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Sep 2015 23:27:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=b/Unq5yA3QQ8tMui3DSJ6cPvJzV9hWENykefCSzJTec=;
-	b=NMZcF2IYtFx9n5xUGl83oGdyW6x46rloZtvIe+yqOkU13mbx9oBnR2KhWpSJGwMp2r
-	OQag7Qcfdv7S2nFSjIwbqSYgErXRVnuVVgyRxT8isZ1FmUkPMkRktMAuo8WgQxTZOnXe
-	vHGOuBi++1X6sSNxUnGDUZiQUwj3Rioj6HAndoIzozEml2AV0VfdnKB/Ub73Nkak75br
-	MFbXLdyFJeJIbYvOjsccKDfGXRtr1yJWKFPG/qYYZhdnnr51TU7gl2uPjtY+E8lFeDKM
-	57VYWiONuzleIhybFUcqfasOQ5ZxsIQT7FCiwlEAR3ZlweENey9P3jjOUcrAUbpesP/Y
-	ZsvQ==
-X-Received: by 10.180.211.47 with SMTP id mz15mr1211681wic.93.1443162466143;
-	Thu, 24 Sep 2015 23:27:46 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id t7sm1612822wia.9.2015.09.24.23.27.45
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 24 Sep 2015 23:27:45 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 25 Sep 2015 08:28:06 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150925062806.GC2397@jama>
+	Fri, 25 Sep 2015 06:28:57 +0000 (UTC)
+Received: from 100-208.ftth.onsbrabantnet.nl ([88.159.208.100]
+	helo=TOP-EX01.TOPIC.LOCAL)
+	by mx6.antispamcloud.com with esmtps (TLSv1:AES128-SHA:128)
+	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
+	id 1ZfMEk-0000SW-8r for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Sep 2015 08:12:11 +0200
+Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
+	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.224.2;
+	Fri, 25 Sep 2015 08:11:16 +0200
+To: <openembedded-devel@lists.openembedded.org>
 References: <5603FD45.5030308@topic.nl>
 	<CALbNGRTopGO_K0BqpLaq27EeKhaC63QiE7Yo079PqOP5tQrSXA@mail.gmail.com>
-	<5604D920.4030401@topic.nl>
+	<CALbNGRR9eL001Y7UByvKuoeQuOr=93OHX_WxjD2NHO5WKNmg-w@mail.gmail.com>
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Organization: TOPIC
+Message-ID: <5604E5AE.1060400@topic.nl>
+Date: Fri, 25 Sep 2015 08:11:58 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-In-Reply-To: <5604D920.4030401@topic.nl>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+In-Reply-To: <CALbNGRR9eL001Y7UByvKuoeQuOr=93OHX_WxjD2NHO5WKNmg-w@mail.gmail.com>
+X-Originating-IP: [192.168.80.121]
+X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
+X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
+X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
+	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
+	4XktS92Fqq3Qa0exZrGdvwCI1FSC+XchGESnvFybJH20M/iVnwSD2kUWe7/TJmP9nrK+H6uvYJRX
+	84wSAbRc9aUV1oY4fX3W5eOCNA39IMF/tWq0Xia4BSmFvzyHGTjedCBNA121Y38SeyRMCs3XcWpW
+	rY6lCH8L7CDV11D5JM7Xk65yci5j+xTRr7HgZJNWyY7q5BA/5iDO7tJWc5LW0A0HkzG7uPVDzc3F
+	/UDJomVIDsS/itDc6L24kzSY8UBJuULIpDl323znR+D07qSzNrGWwyxYQNxlGlctos9lj2eb1EIT
+	aM/sZt80S+wHyfpIUb1+kQ3sB5+pcGh69v1UE7Q9WvntXa9VPL9K4cA+8t3Xj/LzZ5s/OJg1L2as
+	ZxEp4Bv7TWEUoKzFQfrYUeyRYVR0payg4cttk4bRt/Zdg8CBO1Snvm6qXHQp7O9kdfgKq5/ukPRo
+	6r9EQdnU18VWPxtvTWQlG7LubmSVPcFB6J1fhOzjF0b4LXcjJZ5loqO8n5Tkj3jzX/sRnep+cTmW
+	u1fDVz0geMmPEfDrUHDxZLEzWz/H7disenK3OVCk7hHP+qX+PCU7V0fBbBTVPJg=
+X-Report-Abuse-To: spam@mx99.antispamcloud.com
+X-Filter-Fingerprint: IFrWXGses7OKB5S5G8/dJXhXyDRoOQM5J3kcUr0HrMvJUWjZ8+qhjyB23tbDuyLOYL8Ff78gYsez
+	4Rl08xudmXi4esCQ0R1MchVjt7wblGlvhFgW0MjUMRkF5sMCDfftTXNFDzN17hnrWeZYOJvLq0Ic
+	WjZ+XcEjj/7Pkld0zkmvziDInX9WdMov2kn2yXjdwv61T+KDYyYtREgszdyFwv8IxCB3p/oCKvxr
+	eyISh3JGb7OS5oVgiO+kDxZrVPLz3MmEGC2PrUKqLq5WmHK+Nw==
+X-Originating-IP: 88.159.208.100
+X-Spampanel-Domain: topic.nl
+X-Spampanel-Username: 88.159.208.100
+Authentication-Results: antispamcloud.com;
+	auth=pass smtp.auth=88.159.208.100@topic.nl
+X-Spampanel-Outgoing-Class: ham
+X-Spampanel-Outgoing-Evidence: Combined (0.00)
+X-Recommended-Action: accept
 Subject: Re: "libgudev" fails to build with current master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -49,96 +67,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Sep 2015 06:27:46 -0000
-X-Groupsio-MsgNum: 57546
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="IpbVkmxF4tDyP/Kb"
-Content-Disposition: inline
-
---IpbVkmxF4tDyP/Kb
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Fri, 25 Sep 2015 06:28:58 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 25, 2015 at 07:18:24AM +0200, Mike Looijmans wrote:
-> =EF=BB=BFOn 24-09-15 18:45, Andreas M=C3=BCller wrote:
-> > On Thu, Sep 24, 2015 at 3:40 PM, Mike Looijmans <mike.looijmans@topic.n=
-l> wrote:
-> >> | checking for LIBUDEV... no
-> >> | configure: error: Package requirements (libudev >=3D 199) were not m=
-et:
-> >> |
-> >> | Requested 'libudev >=3D 199' but version of libudev is 182
-> >> |
-> >> ...
-> >>
-> >> ERROR: Task 5548
-> >> (/.../meta-oe/meta-oe/recipes-gnome/libgudev/libgudev_230.bb, do_confi=
-gure)
-> >> failed with exit code '1'
-> >>
-> >>
-> > Which init system are you using - I guess not systemd
->=20
-> sysvinit (busybox).
->=20
-> I don't even use udev. But some packages think they depend on udev compon=
-ents,=20
-> so it's virtually impossible to not have udev being built.
->=20
->=20
-> I wonder how the init system would affect compilation of a package though.
+=EF=BB=BFOn 25-09-15 01:22, Andreas M=C3=BCller wrote:
+> On Thu, Sep 24, 2015 at 6:45 PM, Andreas M=C3=BCller
+> <schnitzeltony@googlemail.com> wrote:
+>> On Thu, Sep 24, 2015 at 3:40 PM, Mike Looijmans <mike.looijmans@topic.nl=
+> wrote:
+>>> | checking for LIBUDEV... no
+>>> | configure: error: Package requirements (libudev >=3D 199) were not me=
+t:
+>>> |
+>>> | Requested 'libudev >=3D 199' but version of libudev is 182
+>>> |
+>>> ...
+>>>
+>>> ERROR: Task 5548
+>>> (/.../meta-oe/meta-oe/recipes-gnome/libgudev/libgudev_230.bb, do_config=
+ure)
+>>> failed with exit code '1'
+>>>
+>> Which init system are you using - I guess not systemd
+>>
+> Let's assume it is not systemd. Could you try attached  0001.. for
+> oe-core and 0002.. foe meta-oe and give feedback. I tested these for
+> systemd distro without new issues.
 
-When you use systemd, you get newer udev version from systemd recipe.
+Applied both patches, and the errors went away. Have yet to test if it=20
+actually produces a working image as there are still a few more issues I ne=
+ed=20
+to look into.
 
-Standalone udev recipe (used together with other init systems) is older ver=
-sion
-(which includes libgudev), and apparently not good enough for building late=
-st
-standalone libgudev.
+M.
 
->=20
-> M.
->=20
->=20
-> Kind regards,
->=20
-> Mike Looijmans
-> System Expert
->=20
-> TOPIC Embedded Products
-> Eindhovenseweg 32-C, NL-5683 KH Best
-> Postbus 440, NL-5680 AK Best
-> Telefoon: +31 (0) 499 33 69 79
-> Telefax: +31 (0) 499 33 69 70
-> E-mail: mike.looijmans@topicproducts.com
-> Website: www.topicproducts.com
->=20
-> Please consider the environment before printing this e-mail
->=20
->=20
->=20
->=20
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Kind regards,
 
---IpbVkmxF4tDyP/Kb
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Mike Looijmans
+System Expert
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+TOPIC Embedded Products
+Eindhovenseweg 32-C, NL-5683 KH Best
+Postbus 440, NL-5680 AK Best
+Telefoon: +31 (0) 499 33 69 79
+Telefax: +31 (0) 499 33 69 70
+E-mail: mike.looijmans@topicproducts.com
+Website: www.topicproducts.com
 
-iEYEARECAAYFAlYE6XUACgkQN1Ujt2V2gByPhwCfYY3aEjZOP/Tg74qKzo5skua6
-MmMAn2ObTQbA631EnFnIINwPBTt/8MIj
-=I6gB
------END PGP SIGNATURE-----
+Please consider the environment before printing this e-mail
 
---IpbVkmxF4tDyP/Kb--
+
+
+
+
+
