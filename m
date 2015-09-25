@@ -1,33 +1,61 @@
-Return-Path: <yugeraj.ramajayam@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A49876FC9
+Return-Path: <zhenhua.luo@freescale.com>
+X-Greylist: delayed 1971 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 25 Sep 2015 10:36:17 UTC
+Received: from na01-bl2-obe.outbound.protection.outlook.com
+	(mail-bl2on0135.outbound.protection.outlook.com [65.55.169.135])
+	by mail.openembedded.org (Postfix) with ESMTP id 5650376FF2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Sep 2015 09:25:24 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by orsmga102.jf.intel.com with ESMTP; 25 Sep 2015 02:25:23 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,586,1437462000"; 
-	d="scan'208,217";a="812705033"
-Received: from kmsmsx153.gar.corp.intel.com ([172.21.73.88])
-	by fmsmga002.fm.intel.com with ESMTP; 25 Sep 2015 02:25:20 -0700
-Received: from pgsmsx101.gar.corp.intel.com ([169.254.1.172]) by
-	KMSMSX153.gar.corp.intel.com ([169.254.5.192]) with mapi id
-	14.03.0248.002; Fri, 25 Sep 2015 17:25:19 +0800
-From: "Ramajayam, Yugeraj" <yugeraj.ramajayam@intel.com>
+	Fri, 25 Sep 2015 10:36:17 +0000 (UTC)
+Received: from BN3PR03MB1367.namprd03.prod.outlook.com (10.163.34.153) by
+	BN3PR03MB1367.namprd03.prod.outlook.com (10.163.34.153) with Microsoft
+	SMTP Server (TLS) id 15.1.274.16; Fri, 25 Sep 2015 10:03:25 +0000
+Received: from BN3PR03MB1367.namprd03.prod.outlook.com ([10.163.34.153]) by
+	BN3PR03MB1367.namprd03.prod.outlook.com ([10.163.34.153]) with mapi id
+	15.01.0274.009; Fri, 25 Sep 2015 10:03:25 +0000
+From: Luo Zhenhua <zhenhua.luo@freescale.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-java] openjdk: openjdk.tar.bz2 download time out due to
-	sha256sum mismatch.
-Thread-Index: AdD3c9wnx4yvlXkqSBK6sRsk2GSHJw==
-Date: Fri, 25 Sep 2015 09:25:18 +0000
-Message-ID: <D4F319EC2C6BBA46B2FB63E54D8E81C3C03392@PGSMSX101.gar.corp.intel.com>
+Thread-Topic: [oe] [meta-oe][PATCH] lvm2: make sure services files are
+	installed in systemd_unitdir folder
+Thread-Index: AQHQ9SqtFF0CLcL4oEG4xX5m8yRyt55IclcAgASWGXA=
+Date: Fri, 25 Sep 2015 10:03:25 +0000
+Message-ID: <BN3PR03MB1367BD89BEE9B39B9515287EE4420@BN3PR03MB1367.namprd03.prod.outlook.com>
+References: <1442921963-19530-1-git-send-email-zhenhua.luo@freescale.com>
+	<CAEGpDuYv+=n3HZFDSh2drU4EBH7pt_O2WkvvCftqA45ASzWTpA@mail.gmail.com>
+In-Reply-To: <CAEGpDuYv+=n3HZFDSh2drU4EBH7pt_O2WkvvCftqA45ASzWTpA@mail.gmail.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [172.30.20.206]
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=zhenhua.luo@freescale.com; 
+x-originating-ip: [199.59.225.131]
+x-microsoft-exchange-diagnostics: 1; BN3PR03MB1367;
+	5:8qu7e9jQ39VXF5p4DFTzEdDiG6TL2wVIVv/Rc2KA/1mKgDDNVM8aNWZhutfXPXwQJysEe+FEztK2gfMXPiLyw6XM9WuBtiO0rw7DJUMjfk0mtzsfZUsixZVJi7/lRpREgem6PXptZFfYXUvY0kMOeg==;
+	24:9POf4FPIv8EBkHSKvfX8/yL656EycAWb/nEBTNsPn1VIt/2cQivC7tAMclhyydHacg//Y79vypRMrKr6lgviUmjwpxBd09kV+3evUEikv3U=;
+	20:0fxULQGMxk9AVLKGVTjrlKRBp9LvuEviZKLxYwYJpkKE5H+9Y86WZpo6m4CS8KJWm/SEQ+TLuLGBERvuiGxYsA==
+x-microsoft-antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:BN3PR03MB1367;
+x-microsoft-antispam-prvs: <BN3PR03MB1367C16979C6CFBEACFF328FE4420@BN3PR03MB1367.namprd03.prod.outlook.com>
+x-exchange-antispam-report-test: UriScan:;
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(601004)(2401047)(8121501046)(5005006)(520078)(3002001);
+	SRVR:BN3PR03MB1367; BCL:0; PCL:0; RULEID:; SRVR:BN3PR03MB1367; 
+x-forefront-prvs: 07106EF9B9
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(6009001)(189002)(377424004)(164054003)(199003)(13464003)(377454003)(76576001)(5001960100002)(2950100001)(97736004)(81156007)(189998001)(5001860100001)(10400500002)(5007970100001)(86362001)(16601075003)(4001540100001)(40100003)(122556002)(19580405001)(5004730100002)(5003600100002)(19580395003)(5001830100001)(92566002)(106116001)(74316001)(2501003)(46102003)(101416001)(587094005)(105586002)(5001920100001)(64706001)(2351001)(102836002)(11100500001)(66066001)(87936001)(107886002)(99286002)(2900100001)(76176999)(1720100001)(50986999)(77156002)(106356001)(54356999)(5002640100001)(33656002)(68736005)(450100001)(62966003)(110136002)(77096005)(15975445007);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BN3PR03MB1367;
+	H:BN3PR03MB1367.namprd03.prod.outlook.com; FPR:; SPF:None;
+	PTR:InfoNoRecords; MX:1; A:1; LANG:en; 
+received-spf: None (protection.outlook.com: freescale.com does not designate
+	permitted sender hosts)
+spamdiagnosticoutput: 1:23
+spamdiagnosticmetadata: NSPM
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-java] openjdk: openjdk.tar.bz2 download time out due to sha256sum mismatch.
+X-OriginatorOrg: freescale.com
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Sep 2015 10:03:25.5783 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN3PR03MB1367
+Subject: Re: [meta-oe][PATCH] lvm2: make sure services files are installed in systemd_unitdir folder
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,92 +69,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Sep 2015 09:25:28 -0000
+X-List-Received-Date: Fri, 25 Sep 2015 10:36:18 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Hi all,
-
-I am trying to include java support for valleyisland-64 bsp.
-
-I have followed all the Usage Instructions as mentioned in the meta-java Ab=
-out page.
-I have also created a ./meta-netcontiki/recipes-sato/images/core-image-sato=
--%.bbappend with the following content in it:
-
-IMAGE_INSTALL +=3D "native-border-router libcoap"
-IMAGE_INSTALL +=3D "radvd"
+Thanks, v2 is out.=20
 
 
-IMAGE_INSTALL =3D "busybox modutils-initscripts initscripts opkg udev sysvi=
-nit netbase base-files base-passwd \
-                 ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${CORE_IMAGE_EXTRA_INSTALL} =
-\
-                openjdk-7-jre openjdk-7-vm-zero openjdk-7-vm-jamvm openjdk-=
-7-vm-cacao \
-                openjdk-6-jre openjdk-6-vm-zero openjdk-6-vm-jamvm openjdk-=
-6-vm-cacao \
-                strace dropbear binutils \
-                classpath \
-                classpath-common \
-                classpath-examples \
-                classpath-tools \
-                jamvm \
-                cacao \
-                "
+Best Regards,
 
-When I execute $ bitbake core-image-sato , I am having following error due =
-to openjdk.tar.bz2 time out issue.
-When I try to wget manually, the tar ball was downloaded fine and the md5su=
-m and sha256sum matches accordingly.
-The error message appears as below :
+Zhenhua
 
-ln -sf /home/ilab/dev/build/poky/build/tmp/work/corei7-64-poky-linux/openjd=
-k-7-jre/85b01-2.6.1-r6.1/39b2c4354d0a.tar.bz2 openjdk.tar.bz2
-
-if ! echo "0168a0174ee47407139ee32458c4d2a298ba4f44260343b209250156e4da463f=
-  openjdk.tar.bz2" \
-          | /usr/bin/sha256sum --check ; \
-        then \
-          if test "xyes" =3D "xyes"; then \
-            if [ -e openjdk.tar.bz2 ] ; then \
-              mv openjdk.tar.bz2 openjdk.tar.bz2.old ; \
-            fi ; \
-            /usr/bin/wget http://icedtea.classpath.org/download/drops/icedt=
-ea7/2.6.1/openjdk.tar.bz2; \
-            if ! echo "0168a0174ee47407139ee32458c4d2a298ba4f44260343b20925=
-0156e4da463f  openjdk.tar.bz2" \
-              | /usr/bin/sha256sum --check ; then \
-              echo "ERROR: Bad download of OpenJDK root zip"; false; \
-            fi; \
-          else \
-            echo "ERROR: No up-to-date OpenJDK root zip available"; exit -1=
-; \
-          fi ; \
-        fi ;
-
-openjdk.tar.bz2: FAILED
-/usr/bin/sha256sum: WARNING: 1 computed checksum did NOT match
-
---2015-09-25 17:00:34--  http://icedtea.classpath.org/download/drops/icedte=
-a7/2.6.1/openjdk.tar.bz2
-
-Resolving icedtea.classpath.org (icedtea.classpath.org)...
-208.78.240.231
-
-Connecting to icedtea.classpath.org (icedtea.classpath.org)|208.78.240.231|=
-:80...
-failed: Connection timed out.
-
-Retrying.
-
-The retrying process goes on and on.
-
-Am I missing any settings or configurations? Please guide me.
-Thanks in advance.
-
-Regards,
-RAJ
-
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
+> Of Pau Espin Pedrol
+> Sent: Tuesday, September 22, 2015 8:01 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH] lvm2: make sure services files are ins=
+talled
+> in systemd_unitdir folder
+>=20
+> Hi,
+>=20
+> Same stuff I have been proposing in other patches lately: How about using
+> "systemd_system_unitdir" instead of "systemd_unitdir/system" ? You can fi=
+nd
+> it in bitbake.conf
+>=20
+> Pau Espin Pedrol
+> mail/jabber: pespin.shar@gmail.com
+> http://blog.espeweb.net
+>=20
+> 2015-09-22 13:39 GMT+02:00 Zhenhua Luo <zhenhua.luo@freescale.com>:
+>=20
+> > Make sure the services files are installed in
+> > ${D}/${systemd_unitdir}/system, fixed the following build error:
+> > | sed: can't read
+> > .../lvm2/2.02.125-r0/image/lib/systemd/system/blk-availability.service
+> > : No such file or directory
+> > |   sed -i -e 's:/usr/bin/true:/bin/true:g'
+> > .../lvm2/2.02.125-r0/image/lib/systemd/system/blk-availability.service
+> >
+> > Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
+> > ---
+> >  meta-oe/recipes-support/lvm2/lvm2.inc | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc
+> > b/meta-oe/recipes-support/lvm2/lvm2.inc
+> > index 2b2d8ed..1968ac9 100644
+> > --- a/meta-oe/recipes-support/lvm2/lvm2.inc
+> > +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+> > @@ -39,7 +39,7 @@ do_install_append() {
+> >      # Install machine specific configuration file
+> >      install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
+> >      sed -i -e 's:@libdir@:${libdir}:g' ${D}${sysconfdir}/lvm/lvm.conf
+> > -    oe_runmake 'DESTDIR=3D${D}' install install_systemd_units
+> > +    oe_runmake 'DESTDIR=3D${D}'
+> > systemd_unit_dir=3D${D}/${systemd_unitdir}/system install
+> > install_systemd_units
+> >      sed -i -e 's:/usr/bin/true:${base_bindir}/true:g'
+> > ${D}${systemd_unitdir}/system/blk-availability.service
+> >  }
+> >
+> > --
+> > 2.4.3
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
