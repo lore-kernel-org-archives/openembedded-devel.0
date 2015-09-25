@@ -1,57 +1,37 @@
-Return-Path: <mike.looijmans@topicproducts.com>
-Received: from mx12-14.smtp.antispamcloud.com (mx12-14.smtp.antispamcloud.com
-	[46.165.232.184])
-	by mail.openembedded.org (Postfix) with ESMTP id 827CD76FF5
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
+	[209.85.223.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 567CA76E04
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Sep 2015 06:32:48 +0000 (UTC)
-Received: from 100-208.ftth.onsbrabantnet.nl ([88.159.208.100]
-	helo=TOP-EX01.TOPIC.LOCAL)
-	by mx12.antispamcloud.com with esmtps (TLSv1:AES128-SHA:128)
-	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
-	id 1ZfMYl-00060K-Np for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Sep 2015 08:32:48 +0200
-Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
-	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Fri, 25 Sep 2015 08:31:59 +0200
-To: <openembedded-devel@lists.openembedded.org>
+	Fri, 25 Sep 2015 06:33:08 +0000 (UTC)
+Received: by iofb144 with SMTP id b144so9105799iof.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Sep 2015 23:33:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=yC8ZnRb145GBQ6iPQGs+/Ws31hswlPFYoCyr6WAFpkA=;
+	b=pp7j0dIjeS3CV6BoDl5iABp+FYHz2uWvaOy2uPA2X6wq/CpI/DdBVb07jV/z3dSjge
+	J/PgKuvA7tzu1oVjO85NU3DGDidCp9lpbWYou9lpx6FB4rGs9ls2TvEjvwh7Dhx64sk3
+	0iUfCXmPssdU4FsMNWfRg6fgGzUB2GmJlfd5Cqgwi12SL9WsS+C4E3sVhuc7ShIqlEMf
+	Yva0FapQVtJDrah9LOuNu0a2RyM73AMDr2i1VxUtE24O4kdXJQO9Fx2Lm5AMjHGGep9b
+	CMg6Oc/FHUhnU24tg094Gldik+ViJghIIosPbGJRnGSFUr3+FzyUyC9bYbMeXWcqp0HF
+	iARQ==
+MIME-Version: 1.0
+X-Received: by 10.107.10.79 with SMTP id u76mr4298554ioi.99.1443162788803;
+	Thu, 24 Sep 2015 23:33:08 -0700 (PDT)
+Received: by 10.36.98.5 with HTTP; Thu, 24 Sep 2015 23:33:08 -0700 (PDT)
+In-Reply-To: <20150925062547.GB2397@jama>
 References: <5603FD45.5030308@topic.nl>
 	<CALbNGRTopGO_K0BqpLaq27EeKhaC63QiE7Yo079PqOP5tQrSXA@mail.gmail.com>
 	<CALbNGRR9eL001Y7UByvKuoeQuOr=93OHX_WxjD2NHO5WKNmg-w@mail.gmail.com>
-	<5604E5AE.1060400@topic.nl>
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: TOPIC
-Message-ID: <5604EA89.608@topic.nl>
-Date: Fri, 25 Sep 2015 08:32:41 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
-MIME-Version: 1.0
-In-Reply-To: <5604E5AE.1060400@topic.nl>
-X-Originating-IP: [192.168.80.121]
-X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
-X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
-X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
-	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
-	4XktS92Fqq3Qa0exZrGdvwCI1FSC+XchGESnvFybJH20M/iVnwSD2kUWe7/TJixjzfucPj3nCfnJ
-	QE0is5Zc9aUV1oY4fX3W5eOCNA39IMF/tWq0Xia4BSmFvzyHGTjedCBNA121Y38SeyRMCs3XcWpW
-	rY6lCH8L7CDV11D5JM7Xk65yci5j+xTRr7HgZJNWyY7q5BA/5iDO7tJWc5LW0A0HkzG7uPVDzc3F
-	/UDJomVIDsS/itDc6L24kzSY8UBJuULIpDl323znR+D07qSzNrGWwyxYQNxlGlctos9lj2eb1EIT
-	aM/sZt80S+wHyfpIUb1+kQ3sB5+pcGh69v1UE7Q9WvntXa9VPL9K4cA+8t3Xj/LzZ5s/OJg1L2as
-	ZxEp4Bv7TWEUoKzFQfrYUeyRYVR0payg4cttk4bRt/Zdg8CBO1Snvm6qXHQp7O9kdV80mZTaHp0a
-	hWtMDpo3C39MbYOEJdE462Jlg4EydpQqASJFC/49WOPBr5nlEUI4xFStEsRuY3aE5aSb6OOXuaqW
-	u1fDVz0geMmPEfDrUHDxZLEzWz/H7disenK3OVCk7hHP+qX+PCU7V0fBbBTVPJg=
-X-Report-Abuse-To: spam@mx99.antispamcloud.com
-X-Filter-Fingerprint: IFrWXGses7OKB5S5G8/dJUb3OPwsHaH0Fvg5oXltHd/JUWjZ8+qhjyB23tbDuyLOYL8Ff78gYsez
-	4Rl08xudmXi4esCQ0R1MchVjt7wblGlvhFgW0MjUMRkF5sMCDfftTXNFDzN17hnrWeZYOJvLq0Ic
-	WjZ+XcEjj/7Pkld0zkmvziDInX9WdMov2kn2yXjdwv61T+KDYyYtREgszdyFwv8IxCB3p/oCKvxr
-	eyISh3JGb7OS5oVgiO+kDxZrVPLz3MmEGC2PrUKqLq5WmHK+Nw==
-X-Originating-IP: 88.159.208.100
-X-Spampanel-Domain: topic.nl
-X-Spampanel-Username: 88.159.208.100
-Authentication-Results: antispamcloud.com;
-	auth=pass smtp.auth=88.159.208.100@topic.nl
-X-Spampanel-Outgoing-Class: ham
-X-Spampanel-Outgoing-Evidence: Combined (0.00)
-X-Recommended-Action: accept
+	<20150925062547.GB2397@jama>
+Date: Fri, 25 Sep 2015 06:33:08 +0000
+Message-ID: <CALbNGRRvFMPepavZyd_oOKuy8iUr06FwN8MXLPzX-9st6TcYxA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 Subject: Re: "libgudev" fails to build with current master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -66,63 +46,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Sep 2015 06:32:50 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Fri, 25 Sep 2015 06:33:09 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-=EF=BB=BFOn 25-09-15 08:11, Mike Looijmans wrote:
-> On 25-09-15 01:22, Andreas M=C3=BCller wrote:
+On Fri, Sep 25, 2015 at 6:25 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Fri, Sep 25, 2015 at 01:22:37AM +0200, Andreas M=C3=BCller wrote:
 >> On Thu, Sep 24, 2015 at 6:45 PM, Andreas M=C3=BCller
 >> <schnitzeltony@googlemail.com> wrote:
->>> On Thu, Sep 24, 2015 at 3:40 PM, Mike Looijmans <mike.looijmans@topic.n=
-l>
->>> wrote:
->>>> | checking for LIBUDEV... no
->>>> | configure: error: Package requirements (libudev >=3D 199) were not m=
-et:
->>>> |
->>>> | Requested 'libudev >=3D 199' but version of libudev is 182
->>>> |
->>>> ...
->>>>
->>>> ERROR: Task 5548
->>>> (/.../meta-oe/meta-oe/recipes-gnome/libgudev/libgudev_230.bb, do_confi=
-gure)
->>>> failed with exit code '1'
->>>>
->>> Which init system are you using - I guess not systemd
->>>
+>> > On Thu, Sep 24, 2015 at 3:40 PM, Mike Looijmans <mike.looijmans@topic.=
+nl> wrote:
+>> >> | checking for LIBUDEV... no
+>> >> | configure: error: Package requirements (libudev >=3D 199) were not =
+met:
+>> >> |
+>> >> | Requested 'libudev >=3D 199' but version of libudev is 182
+>> >> |
+>> >> ...
+>> >>
+>> >> ERROR: Task 5548
+>> >> (/.../meta-oe/meta-oe/recipes-gnome/libgudev/libgudev_230.bb, do_conf=
+igure)
+>> >> failed with exit code '1'
+>> >>
+>> > Which init system are you using - I guess not systemd
+>> >
 >> Let's assume it is not systemd. Could you try attached  0001.. for
 >> oe-core and 0002.. foe meta-oe and give feedback. I tested these for
 >> systemd distro without new issues.
+>>
+>> Andreas
 >
-> Applied both patches, and the errors went away. Have yet to test if it
-> actually produces a working image as there are still a few more issues I =
-need
-> to look into.
+>> From 384c763f66d5f49b967253e8e5d272822552a524 Mon Sep 17 00:00:00 2001
+>> From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlem=
+ail.com>
+>> Date: Fri, 25 Sep 2015 01:04:31 +0200
+>> Subject: [PATCH] udev: add PROVIDES =3D "libgudev"
+>> MIME-Version: 1.0
+>> Content-Type: text/plain; charset=3DUTF-8
+>> Content-Transfer-Encoding: 8bit
+>>
+>> With the last update of systemd libgudev was splitted out of systemd. To=
+ make
+>> packages depending on libgudev happy, a recipe building libgudev was cre=
+ated in
+>> meta-oe and the dependencies were modified from udev to libgudev.
+>>
+>> This works fine for distros using systemd as init system, but distros no=
+t using
+>> build udev which provides libgudev.
+>>
+>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>> ---
+>>  meta/recipes-core/udev/udev.inc | 2 ++
+>>  1 file changed, 2 insertions(+)
+>>
+>> diff --git a/meta/recipes-core/udev/udev.inc b/meta/recipes-core/udev/ud=
+ev.inc
+>> index a00dad5..c378ae3 100644
+>> --- a/meta/recipes-core/udev/udev.inc
+>> +++ b/meta/recipes-core/udev/udev.inc
+>> @@ -15,6 +15,8 @@ LDFLAGS +=3D "-lrt"
+>>  DEPENDS =3D "glib-2.0 libusb usbutils pciutils glib-2.0-native gperf-na=
+tive libxslt-native util-linux"
+>>  RPROVIDES_${PN} =3D "hotplug"
+>>
+>> +PROVIDES =3D "libgudev"
+>> +
+>>  SRC_URI =3D "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}.=
+tar.gz \
+>>             file://0001-Fixing-keyboard_force_release.sh-shell-script-pa=
+th.patch \
+>>             file://avoid-mouse-autosuspend.patch \
+>> --
+>> 2.1.0
+>>
+>
+>> From e83235a777880c343fce9f286f50678b237620dd Mon Sep 17 00:00:00 2001
+>> From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlem=
+ail.com>
+>> Date: Fri, 25 Sep 2015 01:17:01 +0200
+>> Subject: [PATCH] libgudev: skip recipe for distros not using systemd as =
+init
+>> MIME-Version: 1.0
+>> Content-Type: text/plain; charset=3DUTF-8
+>> Content-Transfer-Encoding: 8bit
+>>
+>> for those systems udev provides libgudev
+>>
+>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>> ---
+>>  meta-oe/recipes-gnome/libgudev/libgudev_230.bb | 6 ++++++
+>>  1 file changed, 6 insertions(+)
+>>
+>> diff --git a/meta-oe/recipes-gnome/libgudev/libgudev_230.bb b/meta-oe/re=
+cipes-gnome/libgudev/libgudev_230.bb
+>> index 39fc1c4..9e457d2 100644
+>> --- a/meta-oe/recipes-gnome/libgudev/libgudev_230.bb
+>> +++ b/meta-oe/recipes-gnome/libgudev/libgudev_230.bb
+>> @@ -11,3 +11,9 @@ LICENSE =3D "LGPLv2.1"
+>>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b364=
+516c"
+>>
+>>  inherit gnomebase
+>> +
+>> +# in non systemd distros udev builds libgudev
+>> +python () {
+>> +    if not bb.utils.contains ('DISTRO_FEATURES', 'systemd', True, False=
+, d):
+>> +        raise bb.parse.SkipPackage("'systemd' not in DISTRO_FEATURES")
+>> +}
+>
+> Cannot we use REQUIRED_DISTRO_FEATURES + inherit distro_features_check
+> for this one?
+>
+For some reason I thought REQUIRED_DISTRO_FEATURES would cause an
+error message - but thinking over this is not true. So yes:
+REQUIRED_DISTRO_FEATURES seems the better solution.
 
-Just finished building, image runs okay on the board.
-
-M.
-
-
-Kind regards,
-
-Mike Looijmans
-System Expert
-
-TOPIC Embedded Products
-Eindhovenseweg 32-C, NL-5683 KH Best
-Postbus 440, NL-5680 AK Best
-Telefoon: +31 (0) 499 33 69 79
-Telefax: +31 (0) 499 33 69 70
-E-mail: mike.looijmans@topicproducts.com
-Website: www.topicproducts.com
-
-Please consider the environment before printing this e-mail
-
-
-
-
-
+Andreas
 
