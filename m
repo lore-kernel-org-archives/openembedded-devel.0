@@ -1,57 +1,33 @@
-Return-Path: <mike.looijmans@topicproducts.com>
-Received: from mx12-14.smtp.antispamcloud.com (mx12-14.smtp.antispamcloud.com
-	[46.165.232.184])
-	by mail.openembedded.org (Postfix) with ESMTP id D20B17700A
+Return-Path: <yugeraj.ramajayam@intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A49876FC9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Sep 2015 06:36:03 +0000 (UTC)
-Received: from 100-208.ftth.onsbrabantnet.nl ([88.159.208.100]
-	helo=TOP-EX01.TOPIC.LOCAL)
-	by mx12.antispamcloud.com with esmtps (TLSv1:AES128-SHA:128)
-	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
-	id 1ZfMbw-0000Q0-G6 for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Sep 2015 08:36:03 +0200
-Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
-	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Fri, 25 Sep 2015 08:35:17 +0200
-To: <openembedded-devel@lists.openembedded.org>
-References: <5603FD45.5030308@topic.nl>
-	<CALbNGRTopGO_K0BqpLaq27EeKhaC63QiE7Yo079PqOP5tQrSXA@mail.gmail.com>
-	<5604D920.4030401@topic.nl> <20150925062806.GC2397@jama>
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: TOPIC
-Message-ID: <5604EB4F.2020905@topic.nl>
-Date: Fri, 25 Sep 2015 08:35:59 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+	Fri, 25 Sep 2015 09:25:24 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga102.jf.intel.com with ESMTP; 25 Sep 2015 02:25:23 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.17,586,1437462000"; 
+	d="scan'208,217";a="812705033"
+Received: from kmsmsx153.gar.corp.intel.com ([172.21.73.88])
+	by fmsmga002.fm.intel.com with ESMTP; 25 Sep 2015 02:25:20 -0700
+Received: from pgsmsx101.gar.corp.intel.com ([169.254.1.172]) by
+	KMSMSX153.gar.corp.intel.com ([169.254.5.192]) with mapi id
+	14.03.0248.002; Fri, 25 Sep 2015 17:25:19 +0800
+From: "Ramajayam, Yugeraj" <yugeraj.ramajayam@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-java] openjdk: openjdk.tar.bz2 download time out due to
+	sha256sum mismatch.
+Thread-Index: AdD3c9wnx4yvlXkqSBK6sRsk2GSHJw==
+Date: Fri, 25 Sep 2015 09:25:18 +0000
+Message-ID: <D4F319EC2C6BBA46B2FB63E54D8E81C3C03392@PGSMSX101.gar.corp.intel.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.30.20.206]
 MIME-Version: 1.0
-In-Reply-To: <20150925062806.GC2397@jama>
-X-Originating-IP: [192.168.80.121]
-X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
-X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
-X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
-	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
-	4XktS92Fqq3Qa0exZrGdvwCI1FSC+XchGESnvFybJH20M/iVnwSD2kUWe7/TJmxL7emtnj9/gQQY
-	JGNUP7xc9aUV1oY4fX3W5eOCNA39IMF/tWq0Xia4BSmFvzyHGTjedCBNA121Y38SeyRMCs3XcWpW
-	rY6lCH8L7CDV11D5JM7Xk65yci5j+xTRr7HgZJNWyY7q5BA/5iDO7tJWc5LW0A0HkzG7uPVDzc3F
-	/UDJomVIDsS/itDc6L24kzSY8UBJuULIpDl323znR+D07qSzNrGWwyxYQNxlGlctos9lj2eb1EIT
-	aM/sZt80S+wHyfpIUb1+kQ3sB5+pcGh69v1UE7Q9WvntXa9VPL9K4cA+8t3Xj/LzZ5s/OJg1L2as
-	ZxEp4Bv7TWEUoKzFQfrYUeyRYVR0payg4cttk4bRt/Zdg8CBO1Snvm6qXHQp7O9kdV80mZTaHp0a
-	hWtMDpo3C39MbYOEJdE462Jlg4EydpQqASJFC/49WOPBr5nlEUI4xFStEsRuY3aE5aSb6OOXuaqW
-	u1fDVz0geMmPEfDrUHDxZLEzWz/H7disenK3OVCk7hHP+qX+PCU7V0fBbBTVPJg=
-X-Report-Abuse-To: spam@mx99.antispamcloud.com
-X-Filter-Fingerprint: IFrWXGses7OKB5S5G8/dJUb3OPwsHaH0Fvg5oXltHd/JUWjZ8+qhjyB23tbDuyLOYL8Ff78gYsez
-	4Rl08xudmXi4esCQ0R1MchVjt7wblGlvhFgW0MjUMRkF5sMCDfftTXNFDzN17hnrWeZYOJvLq0Ic
-	WjZ+XcEjj/7Pkld0zkmvziDInX9WdMov2kn2yXjdwv61T+KDYyYtREgszdyFwv8IxCB3p/oCKvxr
-	eyISh3JGb7OS5oVgiO+kDxZrVPLz3MmEGC2PrUKqLq5WmHK+Nw==
-X-Originating-IP: 88.159.208.100
-X-Spampanel-Domain: topic.nl
-X-Spampanel-Username: 88.159.208.100
-Authentication-Results: antispamcloud.com;
-	auth=pass smtp.auth=88.159.208.100@topic.nl
-X-Spampanel-Outgoing-Class: ham
-X-Spampanel-Outgoing-Evidence: Combined (0.00)
-X-Recommended-Action: accept
-Subject: Re: "libgudev" fails to build with current master
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-java] openjdk: openjdk.tar.bz2 download time out due to sha256sum mismatch.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,77 +41,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Sep 2015 06:36:06 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+X-List-Received-Date: Fri, 25 Sep 2015 09:25:28 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-=EF=BB=BFOn 25-09-15 08:28, Martin Jansa wrote:
-> On Fri, Sep 25, 2015 at 07:18:24AM +0200, Mike Looijmans wrote:
->> =EF=BB=BFOn 24-09-15 18:45, Andreas M=C3=BCller wrote:
->>> On Thu, Sep 24, 2015 at 3:40 PM, Mike Looijmans <mike.looijmans@topic.n=
-l> wrote:
->>>> | checking for LIBUDEV... no
->>>> | configure: error: Package requirements (libudev >=3D 199) were not m=
-et:
->>>> |
->>>> | Requested 'libudev >=3D 199' but version of libudev is 182
->>>> |
->>>> ...
->>>>
->>>> ERROR: Task 5548
->>>> (/.../meta-oe/meta-oe/recipes-gnome/libgudev/libgudev_230.bb, do_confi=
-gure)
->>>> failed with exit code '1'
->>>>
->>>>
->>> Which init system are you using - I guess not systemd
->>
->> sysvinit (busybox).
->>
->> I don't even use udev. But some packages think they depend on udev compo=
-nents,
->> so it's virtually impossible to not have udev being built.
->>
->>
->> I wonder how the init system would affect compilation of a package thoug=
-h.
->
-> When you use systemd, you get newer udev version from systemd recipe.
->
-> Standalone udev recipe (used together with other init systems) is older v=
-ersion
-> (which includes libgudev), and apparently not good enough for building la=
-test
-> standalone libgudev.
+Hi all,
 
-Basic problem is that I really don't want to have any udev at all in my ima=
-ge,=20
-I use mdev for hotplug and other device stuff.
+I am trying to include java support for valleyisland-64 bsp.
 
-Systemd made things way more complex, since it provides udev, so I can't ju=
-st=20
-check on "udev" being the hotplug provider in recipes.
+I have followed all the Usage Instructions as mentioned in the meta-java Ab=
+out page.
+I have also created a ./meta-netcontiki/recipes-sato/images/core-image-sato=
+-%.bbappend with the following content in it:
+
+IMAGE_INSTALL +=3D "native-border-router libcoap"
+IMAGE_INSTALL +=3D "radvd"
 
 
+IMAGE_INSTALL =3D "busybox modutils-initscripts initscripts opkg udev sysvi=
+nit netbase base-files base-passwd \
+                 ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${CORE_IMAGE_EXTRA_INSTALL} =
+\
+                openjdk-7-jre openjdk-7-vm-zero openjdk-7-vm-jamvm openjdk-=
+7-vm-cacao \
+                openjdk-6-jre openjdk-6-vm-zero openjdk-6-vm-jamvm openjdk-=
+6-vm-cacao \
+                strace dropbear binutils \
+                classpath \
+                classpath-common \
+                classpath-examples \
+                classpath-tools \
+                jamvm \
+                cacao \
+                "
 
+When I execute $ bitbake core-image-sato , I am having following error due =
+to openjdk.tar.bz2 time out issue.
+When I try to wget manually, the tar ball was downloaded fine and the md5su=
+m and sha256sum matches accordingly.
+The error message appears as below :
 
-Kind regards,
+ln -sf /home/ilab/dev/build/poky/build/tmp/work/corei7-64-poky-linux/openjd=
+k-7-jre/85b01-2.6.1-r6.1/39b2c4354d0a.tar.bz2 openjdk.tar.bz2
 
-Mike Looijmans
-System Expert
+if ! echo "0168a0174ee47407139ee32458c4d2a298ba4f44260343b209250156e4da463f=
+  openjdk.tar.bz2" \
+          | /usr/bin/sha256sum --check ; \
+        then \
+          if test "xyes" =3D "xyes"; then \
+            if [ -e openjdk.tar.bz2 ] ; then \
+              mv openjdk.tar.bz2 openjdk.tar.bz2.old ; \
+            fi ; \
+            /usr/bin/wget http://icedtea.classpath.org/download/drops/icedt=
+ea7/2.6.1/openjdk.tar.bz2; \
+            if ! echo "0168a0174ee47407139ee32458c4d2a298ba4f44260343b20925=
+0156e4da463f  openjdk.tar.bz2" \
+              | /usr/bin/sha256sum --check ; then \
+              echo "ERROR: Bad download of OpenJDK root zip"; false; \
+            fi; \
+          else \
+            echo "ERROR: No up-to-date OpenJDK root zip available"; exit -1=
+; \
+          fi ; \
+        fi ;
 
-TOPIC Embedded Products
-Eindhovenseweg 32-C, NL-5683 KH Best
-Postbus 440, NL-5680 AK Best
-Telefoon: +31 (0) 499 33 69 79
-Telefax: +31 (0) 499 33 69 70
-E-mail: mike.looijmans@topicproducts.com
-Website: www.topicproducts.com
+openjdk.tar.bz2: FAILED
+/usr/bin/sha256sum: WARNING: 1 computed checksum did NOT match
 
-Please consider the environment before printing this e-mail
+--2015-09-25 17:00:34--  http://icedtea.classpath.org/download/drops/icedte=
+a7/2.6.1/openjdk.tar.bz2
 
+Resolving icedtea.classpath.org (icedtea.classpath.org)...
+208.78.240.231
 
+Connecting to icedtea.classpath.org (icedtea.classpath.org)|208.78.240.231|=
+:80...
+failed: Connection timed out.
 
+Retrying.
 
+The retrying process goes on and on.
+
+Am I missing any settings or configurations? Please guide me.
+Thanks in advance.
+
+Regards,
+RAJ
 
 
