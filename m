@@ -1,34 +1,56 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f172.google.com (mail-io0-f172.google.com
-	[209.85.223.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C2C7757AC
+Return-Path: <mike.looijmans@topicproducts.com>
+Received: from mx12-14.smtp.antispamcloud.com (mx12-14.smtp.antispamcloud.com
+	[46.165.232.184])
+	by mail.openembedded.org (Postfix) with ESMTP id CBACC73BB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Sep 2015 04:39:21 +0000 (UTC)
-Received: by iofh134 with SMTP id h134so99319007iof.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Sep 2015 21:39:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=iz7+mFjcm4BsM1h88BCEBZl4OAFX3ZzMaKhYcg8cCNQ=;
-	b=whgFePGxihrUa5A3xtaNCFBEPPvg7d8bunvBF/+zFh53iLFdKzLZGub53FlWiFlCgY
-	zPtUUTg+tjM4Hqixn8ai9mr8+CoJn4xvklzr0x05NbbFjmpsNKXWOXQtoNXm92tw4B9U
-	W+WWeHfUzIbQz3bHTwDpqqdRo5j0s87gS2TFGFlIZzOdUiC1s2sUskko5hqW8hxhex3R
-	wn9g7eN8Tcb5yAGXXD+FmF4SVoO42/XgQNBM5JaeXUGXRJAnn27yjt4F+DD82n0q6eFG
-	54TuUlCcxmrH3/RcZcuYGcf1pyPs3Wqic3ek3nEyafRk6KUXh9sLu98tAeQWq54msNYa
-	/sDw==
-X-Received: by 10.107.4.131 with SMTP id 125mr4015274ioe.49.1443155961556;
-	Thu, 24 Sep 2015 21:39:21 -0700 (PDT)
+	Fri, 25 Sep 2015 05:18:30 +0000 (UTC)
+Received: from 100-208.ftth.onsbrabantnet.nl ([88.159.208.100]
+	helo=TOP-EX01.TOPIC.LOCAL)
+	by mx12.antispamcloud.com with esmtps (TLSv1:AES128-SHA:128)
+	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
+	id 1ZfLOq-0008F2-TJ for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Sep 2015 07:18:28 +0200
+Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
+	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.224.2;
+	Fri, 25 Sep 2015 07:17:42 +0200
+To: <openembedded-devel@lists.openembedded.org>
+References: <5603FD45.5030308@topic.nl>
+	<CALbNGRTopGO_K0BqpLaq27EeKhaC63QiE7Yo079PqOP5tQrSXA@mail.gmail.com>
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Organization: TOPIC
+Message-ID: <5604D920.4030401@topic.nl>
+Date: Fri, 25 Sep 2015 07:18:24 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-Received: by 10.107.142.130 with HTTP; Thu, 24 Sep 2015 21:38:52 -0700 (PDT)
-In-Reply-To: <CAAQYJAuUpnCC8zapvzs7DM5t+v6xNDjz0TrKgJ5rSZWRsxsbHw@mail.gmail.com>
-References: <1443047368-11176-1-git-send-email-andrea.adami@gmail.com>
-	<CAMKF1srf0TeAhf_f0uNLOvr_Cyet9b5em-iiYrXygWPg+w6z4g@mail.gmail.com>
-	<CAAQYJAuUpnCC8zapvzs7DM5t+v6xNDjz0TrKgJ5rSZWRsxsbHw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 24 Sep 2015 21:38:52 -0700
-Message-ID: <CAMKF1srQw2z-bbeVbs8UY4K_zVuZaQPPPvBwJON8Z-BPkFN2yQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-initramfs][PATCH] kexecboot_0.6: fix build with gcc 5
+In-Reply-To: <CALbNGRTopGO_K0BqpLaq27EeKhaC63QiE7Yo079PqOP5tQrSXA@mail.gmail.com>
+X-Originating-IP: [192.168.80.121]
+X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
+X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
+X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
+	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
+	4XktS92Fqq3Qa0exZrGdvwCI1FSC+XchGESnvFybJH20M/iVnwSD2kUWe7/TJq07i/V1Zol1Jwdc
+	KN7WS+xc9aUV1oY4fX3W5eOCNA39IMF/tWq0Xia4BSmFvzyHGTjedCBNA121Y38SeyRMCs3XcWpW
+	rY6lCH8L7CDV11D5JM7Xk65yci5j+xTRr7HgZJNWyY7q5BA/5iDO7tJWc5LW0A0HkzG7uPVDzc3F
+	/UDJomVIDsS/itDc6L24kzSY8UBJuULIpDl323znR+D07qSzNrGWwyxYQNxlGlctos9lj2eb1EIT
+	aM/sZt80S+wHyfpIUb1+kQ3sB5+pcGh69v1UE7Q9WvntXa9VPL9K4cA+8t3Xj/LzZ5s/OJg1L2as
+	ZxEp4Bv7TWEUoKzFQfrYUeyRYVR0payg4cttk4bRt/Zdg8CBO1Snvm6qXHQp7O9kdV80mZTaHp0a
+	hWtMDpo3C39MbYOEJdE462Jlg4EydpQqASJFC/49WOPBr5nlEUI4xFStEsRuY3aE5aSb6OOXuaqW
+	u1fDVz0geMmPEfDrUHDxZLEzWz/H7disenK3OVCk7hHP+qX+PCU7V0fBbBTVPJg=
+X-Report-Abuse-To: spam@mx99.antispamcloud.com
+X-Filter-Fingerprint: IFrWXGses7OKB5S5G8/dJUb3OPwsHaH0Fvg5oXltHd/JUWjZ8+qhjyB23tbDuyLOYL8Ff78gYsez
+	4Rl08xudmXi4esCQ0R1MchVjt7wblGlvhFgW0MjUMRkF5sMCDfftTXNFDzN17hnrWeZYOJvLq0Ic
+	WjZ+XcEjj/7Pkld0zkmvziDInX9WdMov2kn2yXjdwv61T+KDYyYtREgszdyFwv8IxCB3p/oCKvxr
+	eyISh3JGb7OS5oVgiO+kDxZrVPLz3MmEGC2PrUKqLq5WmHK+Nw==
+X-Originating-IP: 88.159.208.100
+X-Spampanel-Domain: topic.nl
+X-Spampanel-Username: 88.159.208.100
+Authentication-Results: antispamcloud.com;
+	auth=pass smtp.auth=88.159.208.100@topic.nl
+X-Spampanel-Outgoing-Class: ham
+X-Spampanel-Outgoing-Evidence: Combined (0.00)
+X-Recommended-Action: accept
+Subject: Re: "libgudev" fails to build with current master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,60 +64,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Sep 2015 04:39:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 25 Sep 2015 05:18:31 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 24, 2015 at 2:11 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
-> On Thu, Sep 24, 2015 at 6:55 AM, Khem Raj <raj.khem@gmail.com> wrote:
->
->> On Wed, Sep 23, 2015 at 3:29 PM, Andrea Adami <andrea.adami@gmail.com>
->> wrote:
->> > +-inline void
->> > ++extern inline void
+=EF=BB=BFOn 24-09-15 18:45, Andreas M=C3=BCller wrote:
+> On Thu, Sep 24, 2015 at 3:40 PM, Mike Looijmans <mike.looijmans@topic.nl>=
+ wrote:
+>> | checking for LIBUDEV... no
+>> | configure: error: Package requirements (libudev >=3D 199) were not met=
+:
+>> |
+>> | Requested 'libudev >=3D 199' but version of libudev is 182
+>> |
+>> ...
 >>
->> would it be better to make it static inline ?
+>> ERROR: Task 5548
+>> (/.../meta-oe/meta-oe/recipes-gnome/libgudev/libgudev_230.bb, do_configu=
+re)
+>> failed with exit code '1'
 >>
->
-> Apparently not...
+>>
+> Which init system are you using - I guess not systemd
 
-well I meant to move the defintion of this function to header and not
-just modify the declaration.
+sysvinit (busybox).
 
->
-> rgba2comp is used in rgb.c and fb.c.
-> Making it static inline leads to the following error:
->
-> | In file included from
-> /tmp/build/tmp-glibc/work/poodle-oe-linux-gnueabi/kexecboot/0.6-r0/kexecboot-0.6/fb.h:39:0,
-> |                  from
-> /tmp/build/tmp-glibc/work/poodle-oe-linux-gnueabi/kexecboot/0.6-r0/kexecboot-0.6/gui.h:25,
-> |                  from
-> /tmp/build/tmp-glibc/work/poodle-oe-linux-gnueabi/kexecboot/0.6-r0/kexecboot-0.6/kexecboot.c:43:
-> |
-> /tmp/build/tmp-glibc/work/poodle-oe-linux-gnueabi/kexecboot/0.6-r0/kexecboot-0.6/rgb.h:55:1:
-> warning: 'rgba2comp' declared 'static' but never defined [-Wunused-function]
-> |  rgba2comp(kx_rgba rgba, kx_ccomp *red, kx_ccomp *green,
-> |  ^
-> | arm-oe-linux-gnueabi-gcc  -march=armv5e -marm  -mthumb-interwork
-> --sysroot=/tmp/build/tmp-glibc/sysroots/poodle -Wall -O2 -pipe -g
-> -feliminate-unused-debug-types  -Wl,-O1 -Wl,--hash-style=gnu
-> -Wl,--as-needed -o kexecboot util.o cfgparser.o devicescan.o evdevs.o fb.o
-> gui.o menu.o xpm.o rgb.o tui.o kexecboot.o fstype/fstype.o machine/zaurus.o
-> | fb.o: In function `compose_color':
-> |
-> /tmp/build/tmp-glibc/work/poodle-oe-linux-gnueabi/kexecboot/0.6-r0/kexecboot-0.6/fb.c:34:
-> undefined reference to `rgba2comp'
-> | collect2: error: ld returned 1 exit status
->
-> BTW, I didn't test that patch compiling with gcc 4 yet. It is just meant as
-> a fix for gcc 5 w/out  touching much code.
-> Thanks for your review, suggestions are appreciated!
->
-> Cheers
-> Andrea
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+I don't even use udev. But some packages think they depend on udev componen=
+ts,=20
+so it's virtually impossible to not have udev being built.
+
+
+I wonder how the init system would affect compilation of a package though.
+
+M.
+
+
+Kind regards,
+
+Mike Looijmans
+System Expert
+
+TOPIC Embedded Products
+Eindhovenseweg 32-C, NL-5683 KH Best
+Postbus 440, NL-5680 AK Best
+Telefoon: +31 (0) 499 33 69 79
+Telefax: +31 (0) 499 33 69 70
+E-mail: mike.looijmans@topicproducts.com
+Website: www.topicproducts.com
+
+Please consider the environment before printing this e-mail
+
+
+
+
+
 
