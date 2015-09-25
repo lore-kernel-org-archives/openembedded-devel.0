@@ -1,55 +1,41 @@
-Return-Path: <mike.looijmans@topicproducts.com>
-Received: from mx12-14.smtp.antispamcloud.com (mx12-14.smtp.antispamcloud.com
-	[46.165.232.184])
-	by mail.openembedded.org (Postfix) with ESMTP id CBACC73BB8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f195.google.com (mail-wi0-f195.google.com
+	[209.85.212.195])
+	by mail.openembedded.org (Postfix) with ESMTP id C131276DEB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Sep 2015 05:18:30 +0000 (UTC)
-Received: from 100-208.ftth.onsbrabantnet.nl ([88.159.208.100]
-	helo=TOP-EX01.TOPIC.LOCAL)
-	by mx12.antispamcloud.com with esmtps (TLSv1:AES128-SHA:128)
-	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
-	id 1ZfLOq-0008F2-TJ for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Sep 2015 07:18:28 +0200
-Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
-	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Fri, 25 Sep 2015 07:17:42 +0200
-To: <openembedded-devel@lists.openembedded.org>
+	Fri, 25 Sep 2015 06:25:27 +0000 (UTC)
+Received: by wicuu12 with SMTP id uu12so1095824wic.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Sep 2015 23:25:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=NqE3UiXWZqv7Y+ty0+QsmJgViycC+DZZtON/WFKEsT0=;
+	b=hiPWOiEfrkxkMfEE2glfTtF2q3/a9hFyh+R1YffJuRGJELSBunXh8x1KXxCrtjQ/EI
+	N74PYjKN1jkpzNtVCSNkSHg70bmLJ0+4IEx1Z5rj10rguIR+Zl9JQX6wymNfSO+KBF0W
+	dXSqrexoMDYR1AEQWc7qW9rc9GYaOoXthkq7ieoOEiGpkvGGJnEIANUm9hv0nY20l91E
+	Vc+xQTpE3dK4JuH0tQH/ifP/UduScYIC6/n0UsG5J6bS4ZDAeZFqoz8GWyXQ85Lg+Bl9
+	KzR4txH1syaxYNW5otmo00/OOTgIfGcrUU3pvH1AbeogoWmRlFvTvLScqIy1So38o4Pr
+	b8pA==
+X-Received: by 10.180.87.198 with SMTP id ba6mr1338173wib.39.1443162327079;
+	Thu, 24 Sep 2015 23:25:27 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	ub7sm1590670wib.17.2015.09.24.23.25.25
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 24 Sep 2015 23:25:26 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 25 Sep 2015 08:25:47 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150925062547.GB2397@jama>
 References: <5603FD45.5030308@topic.nl>
 	<CALbNGRTopGO_K0BqpLaq27EeKhaC63QiE7Yo079PqOP5tQrSXA@mail.gmail.com>
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: TOPIC
-Message-ID: <5604D920.4030401@topic.nl>
-Date: Fri, 25 Sep 2015 07:18:24 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+	<CALbNGRR9eL001Y7UByvKuoeQuOr=93OHX_WxjD2NHO5WKNmg-w@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRTopGO_K0BqpLaq27EeKhaC63QiE7Yo079PqOP5tQrSXA@mail.gmail.com>
-X-Originating-IP: [192.168.80.121]
-X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
-X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
-X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
-	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
-	4XktS92Fqq3Qa0exZrGdvwCI1FSC+XchGESnvFybJH20M/iVnwSD2kUWe7/TJq07i/V1Zol1Jwdc
-	KN7WS+xc9aUV1oY4fX3W5eOCNA39IMF/tWq0Xia4BSmFvzyHGTjedCBNA121Y38SeyRMCs3XcWpW
-	rY6lCH8L7CDV11D5JM7Xk65yci5j+xTRr7HgZJNWyY7q5BA/5iDO7tJWc5LW0A0HkzG7uPVDzc3F
-	/UDJomVIDsS/itDc6L24kzSY8UBJuULIpDl323znR+D07qSzNrGWwyxYQNxlGlctos9lj2eb1EIT
-	aM/sZt80S+wHyfpIUb1+kQ3sB5+pcGh69v1UE7Q9WvntXa9VPL9K4cA+8t3Xj/LzZ5s/OJg1L2as
-	ZxEp4Bv7TWEUoKzFQfrYUeyRYVR0payg4cttk4bRt/Zdg8CBO1Snvm6qXHQp7O9kdV80mZTaHp0a
-	hWtMDpo3C39MbYOEJdE462Jlg4EydpQqASJFC/49WOPBr5nlEUI4xFStEsRuY3aE5aSb6OOXuaqW
-	u1fDVz0geMmPEfDrUHDxZLEzWz/H7disenK3OVCk7hHP+qX+PCU7V0fBbBTVPJg=
-X-Report-Abuse-To: spam@mx99.antispamcloud.com
-X-Filter-Fingerprint: IFrWXGses7OKB5S5G8/dJUb3OPwsHaH0Fvg5oXltHd/JUWjZ8+qhjyB23tbDuyLOYL8Ff78gYsez
-	4Rl08xudmXi4esCQ0R1MchVjt7wblGlvhFgW0MjUMRkF5sMCDfftTXNFDzN17hnrWeZYOJvLq0Ic
-	WjZ+XcEjj/7Pkld0zkmvziDInX9WdMov2kn2yXjdwv61T+KDYyYtREgszdyFwv8IxCB3p/oCKvxr
-	eyISh3JGb7OS5oVgiO+kDxZrVPLz3MmEGC2PrUKqLq5WmHK+Nw==
-X-Originating-IP: 88.159.208.100
-X-Spampanel-Domain: topic.nl
-X-Spampanel-Username: 88.159.208.100
-Authentication-Results: antispamcloud.com;
-	auth=pass smtp.auth=88.159.208.100@topic.nl
-X-Spampanel-Outgoing-Class: ham
-X-Spampanel-Outgoing-Evidence: Combined (0.00)
-X-Recommended-Action: accept
+In-Reply-To: <CALbNGRR9eL001Y7UByvKuoeQuOr=93OHX_WxjD2NHO5WKNmg-w@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 Subject: Re: "libgudev" fails to build with current master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -64,58 +50,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Sep 2015 05:18:31 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Fri, 25 Sep 2015 06:25:28 -0000
+X-Groupsio-MsgNum: 57545
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="QKdGvSO+nmPlgiQ/"
+Content-Disposition: inline
+
+--QKdGvSO+nmPlgiQ/
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-=EF=BB=BFOn 24-09-15 18:45, Andreas M=C3=BCller wrote:
-> On Thu, Sep 24, 2015 at 3:40 PM, Mike Looijmans <mike.looijmans@topic.nl>=
- wrote:
->> | checking for LIBUDEV... no
->> | configure: error: Package requirements (libudev >=3D 199) were not met=
-:
->> |
->> | Requested 'libudev >=3D 199' but version of libudev is 182
->> |
->> ...
->>
->> ERROR: Task 5548
->> (/.../meta-oe/meta-oe/recipes-gnome/libgudev/libgudev_230.bb, do_configu=
-re)
->> failed with exit code '1'
->>
->>
-> Which init system are you using - I guess not systemd
+On Fri, Sep 25, 2015 at 01:22:37AM +0200, Andreas M=FCller wrote:
+> On Thu, Sep 24, 2015 at 6:45 PM, Andreas M=FCller
+> <schnitzeltony@googlemail.com> wrote:
+> > On Thu, Sep 24, 2015 at 3:40 PM, Mike Looijmans <mike.looijmans@topic.n=
+l> wrote:
+> >> | checking for LIBUDEV... no
+> >> | configure: error: Package requirements (libudev >=3D 199) were not m=
+et:
+> >> |
+> >> | Requested 'libudev >=3D 199' but version of libudev is 182
+> >> |
+> >> ...
+> >>
+> >> ERROR: Task 5548
+> >> (/.../meta-oe/meta-oe/recipes-gnome/libgudev/libgudev_230.bb, do_confi=
+gure)
+> >> failed with exit code '1'
+> >>
+> > Which init system are you using - I guess not systemd
+> >
+> Let's assume it is not systemd. Could you try attached  0001.. for
+> oe-core and 0002.. foe meta-oe and give feedback. I tested these for
+> systemd distro without new issues.
+>=20
+> Andreas
 
-sysvinit (busybox).
+> From 384c763f66d5f49b967253e8e5d272822552a524 Mon Sep 17 00:00:00 2001
+> From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlema=
+il.com>
+> Date: Fri, 25 Sep 2015 01:04:31 +0200
+> Subject: [PATCH] udev: add PROVIDES =3D "libgudev"
+> MIME-Version: 1.0
+> Content-Type: text/plain; charset=3DUTF-8
+> Content-Transfer-Encoding: 8bit
+>=20
+> With the last update of systemd libgudev was splitted out of systemd. To =
+make
+> packages depending on libgudev happy, a recipe building libgudev was crea=
+ted in
+> meta-oe and the dependencies were modified from udev to libgudev.
+>=20
+> This works fine for distros using systemd as init system, but distros not=
+ using
+> build udev which provides libgudev.
+>=20
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  meta/recipes-core/udev/udev.inc | 2 ++
+>  1 file changed, 2 insertions(+)
+>=20
+> diff --git a/meta/recipes-core/udev/udev.inc b/meta/recipes-core/udev/ude=
+v.inc
+> index a00dad5..c378ae3 100644
+> --- a/meta/recipes-core/udev/udev.inc
+> +++ b/meta/recipes-core/udev/udev.inc
+> @@ -15,6 +15,8 @@ LDFLAGS +=3D "-lrt"
+>  DEPENDS =3D "glib-2.0 libusb usbutils pciutils glib-2.0-native gperf-nat=
+ive libxslt-native util-linux"
+>  RPROVIDES_${PN} =3D "hotplug"
+> =20
+> +PROVIDES =3D "libgudev"
+> +
+>  SRC_URI =3D "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}.t=
+ar.gz \
+>             file://0001-Fixing-keyboard_force_release.sh-shell-script-pat=
+h.patch \
+>             file://avoid-mouse-autosuspend.patch \
+> --=20
+> 2.1.0
+>=20
 
-I don't even use udev. But some packages think they depend on udev componen=
-ts,=20
-so it's virtually impossible to not have udev being built.
+> From e83235a777880c343fce9f286f50678b237620dd Mon Sep 17 00:00:00 2001
+> From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlema=
+il.com>
+> Date: Fri, 25 Sep 2015 01:17:01 +0200
+> Subject: [PATCH] libgudev: skip recipe for distros not using systemd as i=
+nit
+> MIME-Version: 1.0
+> Content-Type: text/plain; charset=3DUTF-8
+> Content-Transfer-Encoding: 8bit
+>=20
+> for those systems udev provides libgudev
+>=20
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-oe/recipes-gnome/libgudev/libgudev_230.bb | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>=20
+> diff --git a/meta-oe/recipes-gnome/libgudev/libgudev_230.bb b/meta-oe/rec=
+ipes-gnome/libgudev/libgudev_230.bb
+> index 39fc1c4..9e457d2 100644
+> --- a/meta-oe/recipes-gnome/libgudev/libgudev_230.bb
+> +++ b/meta-oe/recipes-gnome/libgudev/libgudev_230.bb
+> @@ -11,3 +11,9 @@ LICENSE =3D "LGPLv2.1"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
+> =20
+>  inherit gnomebase
+> +
+> +# in non systemd distros udev builds libgudev
+> +python () {
+> +    if not bb.utils.contains ('DISTRO_FEATURES', 'systemd', True, False,=
+ d):
+> +        raise bb.parse.SkipPackage("'systemd' not in DISTRO_FEATURES")
+> +}
 
+Cannot we use REQUIRED_DISTRO_FEATURES + inherit distro_features_check
+for this one?
 
-I wonder how the init system would affect compilation of a package though.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-M.
+--QKdGvSO+nmPlgiQ/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
-Kind regards,
+iEYEARECAAYFAlYE6OoACgkQN1Ujt2V2gBx76wCgluhUboaGpYFQmj3ynP+IqalZ
+qvAAniAqoUwMlWnpimKMh3fbmQ9Yj7Pb
+=z6+o
+-----END PGP SIGNATURE-----
 
-Mike Looijmans
-System Expert
-
-TOPIC Embedded Products
-Eindhovenseweg 32-C, NL-5683 KH Best
-Postbus 440, NL-5680 AK Best
-Telefoon: +31 (0) 499 33 69 79
-Telefax: +31 (0) 499 33 69 70
-E-mail: mike.looijmans@topicproducts.com
-Website: www.topicproducts.com
-
-Please consider the environment before printing this e-mail
-
-
-
-
-
-
+--QKdGvSO+nmPlgiQ/--
