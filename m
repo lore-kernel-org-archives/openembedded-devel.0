@@ -1,24 +1,36 @@
-Return-Path: <prvs=7077f78b2=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AED477025
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 94C0E77025
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Sep 2015 11:40:05 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Ap8EAPB3ClasEApK/2dsb2JhbABdg3hpBr9nhXcCgh0BAQEBAQGBAAuEJAEBAQMBMgFFARALDQsJFg8JAwIBAgFFBg0BBwKIIg0Iy0QBAQEBAQEEAQEBAQEdhnOEfYRCSweELAEEhzKGf4QTgzCFFolMRoZwF4phg1iDb4J0ARsWgUBvAQEBAYgWgQUBAQE
-X-IPAS-Result: Ap8EAPB3ClasEApK/2dsb2JhbABdg3hpBr9nhXcCgh0BAQEBAQGBAAuEJAEBAQMBMgFFARALDQsJFg8JAwIBAgFFBg0BBwKIIg0Iy0QBAQEBAQEEAQEBAQEdhnOEfYRCSweELAEEhzKGf4QTgzCFFolMRoZwF4phg1iDb4J0ARsWgUBvAQEBAYgWgQUBAQE
-Message-ID: <560A7883.5010200@skidata.com>
-Date: Tue, 29 Sep 2015 13:39:47 +0200
-From: Richard Leitner <richard.leitner@skidata.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Icedove/31.8.0
+	Tue, 29 Sep 2015 11:50:52 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t8TBoqFr003926 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Sep 2015 06:50:52 -0500
+Received: from [10.113.0.102] ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015092906505233-705685 ;
+	Tue, 29 Sep 2015 06:50:52 -0500 
+To: openembedded-devel@lists.openembedded.org
+References: <1443440681-5009-1-git-send-email-adrian.ratiu@ni.com>
+	<1443521722-15792-1-git-send-email-adrian.ratiu@ni.com>
+	<20150929112225.GA2400@jama>
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Message-ID: <560A7B1B.8030605@ni.com>
+Date: Tue, 29 Sep 2015 14:50:51 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <D4F319EC2C6BBA46B2FB63E54D8E81C3C03392@PGSMSX101.gar.corp.intel.com>
-In-Reply-To: <D4F319EC2C6BBA46B2FB63E54D8E81C3C03392@PGSMSX101.gar.corp.intel.com>
-X-Originating-IP: [172.16.60.30]
-Cc: "Ramajayam, Yugeraj" <yugeraj.ramajayam@intel.com>
-Subject: Re: [meta-java] openjdk: openjdk.tar.bz2 download time out due to sha256sum mismatch.
+In-Reply-To: <20150929112225.GA2400@jama>
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 09/29/2015 06:50:52 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 09/29/2015 06:50:52 AM,
+	Serialize complete at 09/29/2015 06:50:52 AM
+X-Proofpoint-Virus-Version: vendor=nai engine=5600 definitions=5800
+	signatures=585085
+Subject: Re: [meta-oe][PATCH v2] vim: provide the xxd tool (package vim-xxd)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,83 +44,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Sep 2015 11:40:07 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 29 Sep 2015 11:50:55 -0000
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=windows-1252; format=flowed
 
-On 09/25/2015 11:25 AM, Ramajayam, Yugeraj wrote:
-> Hi all,
-> 
-> I am trying to include java support for valleyisland-64 bsp.
-> 
-> I have followed all the Usage Instructions as mentioned in the meta-java
-> About page.
-> 
-Your configuration looks fine!
+On 29.09.2015 14:22, Martin Jansa wrote:
+> On Tue, Sep 29, 2015 at 01:15:22PM +0300, Ioan-Adrian Ratiu wrote:
+>> Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+>> ---
+>>   meta-oe/recipes-support/vim/vim_7.4.481.bb | 3 ++-
+>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-support/vim/vim_7.4.481.bb b/meta-oe/recipes-support/vim/vim_7.4.481.bb
+>> index 2ece53b..44e6571 100644
+>> --- a/meta-oe/recipes-support/vim/vim_7.4.481.bb
+>> +++ b/meta-oe/recipes-support/vim/vim_7.4.481.bb
+>> @@ -76,11 +76,12 @@ do_install() {
+>>
+>>   PARALLEL_MAKEINST = ""
+>>
+>> -PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc"
+>> +PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-xxd"
+>>   FILES_${PN}-syntax = "${datadir}/${BPN}/${VIMDIR}/syntax"
+>>   FILES_${PN}-help = "${datadir}/${BPN}/${VIMDIR}/doc"
+>>   FILES_${PN}-tutor = "${datadir}/${BPN}/${VIMDIR}/tutor ${bindir}/${BPN}tutor"
+>>   FILES_${PN}-vimrc = "${datadir}/${BPN}/vimrc"
+>> +FILES_${PN}-xxd = "${bindir}/xxd"
+>
+> So it was already included in some other package (probably main vim
+> package)?
 
-> 
-> When I execute $ bitbake core-image-sato , I am having following error
-> due to openjdk.tar.bz2 time out issue.
-> 
-> When I try to wget manually, the tar ball was downloaded fine and the
-> md5sum and sha256sum matches accordingly.
-> 
-> The error message appears as below :
-...
-> 
-> *openjdk.tar.bz2: FAILED*
-> */usr/bin/sha256sum: WARNING: 1 computed checksum did NOT match*
-> * *
-> *--2015-09-25 17:00:34-- 
-> http://icedtea.classpath.org/download/drops/icedtea7/2.6.1/openjdk.tar.bz2*
-> * *
-> *Resolving icedtea.classpath.org (icedtea.classpath.org)...*
-> *208.78.240.231*
-> * *
-> *Connecting to icedtea.classpath.org
-> (icedtea.classpath.org)|208.78.240.231|:80...*
-> *failed: Connection timed out.*
-> * *
-> *Retrying.*
+Yes, it is as you say, included in the main package.
+If you think it's a good idea to leave it there, then we can simply 
+ignore these patches.
 
-IMHO it looks like the wget falls into a timeout. How long does the
-"manual" wget download take?
-
-You could try to increase the wget timeout in
-bitbake/lib/bb/fetch2/wget.py and meta/conf/bitbake.conf to for example
-100sec:
-
-diff --git a/bitbake/lib/bb/fetch2/wget.py b/bitbake/lib/bb/fetch2/wget.py
---- a/bitbake/lib/bb/fetch2/wget.py
-+++ b/bitbake/lib/bb/fetch2/wget.py
-@@ -58,7 +58,7 @@ class Wget(FetchMethod):
-
-         ud.localfile = data.expand(urllib.unquote(ud.basename), d)
-
--        self.basecmd = d.getVar("FETCHCMD_wget", True) or "/usr/bin/env
-wget -t 2 -T 30 -nv --passive-ftp --no-check-certificate"
-+        self.basecmd = d.getVar("FETCHCMD_wget", True) or "/usr/bin/env
-wget -t 2 -T 100 -nv --passive-ftp --no-check-certificate"
-
-     def _runwget(self, ud, d, command, quiet):
-
-diff --git a/meta/conf/bitbake.conf b/meta/conf/bitbake.conf
---- a/meta/conf/bitbake.conf
-+++ b/meta/conf/bitbake.conf
-@@ -575,7 +575,7 @@ XORG_MIRROR = "http://xorg.freedesktop.org/releases"
-
- FETCHCMD_svn = "/usr/bin/env svn --non-interactive --trust-server-cert"
- FETCHCMD_cvs = "/usr/bin/env cvs"
--FETCHCMD_wget = "/usr/bin/env wget -t 2 -T 30 -nv --passive-ftp
---no-check-certificate"
-+FETCHCMD_wget = "/usr/bin/env wget -t 2 -T 100 -nv --passive-ftp
---no-check-certificate"
- FETCHCMD_bzr = "/usr/bin/env bzr"
- FETCHCMD_hg = "/usr/bin/env hg"
-
-
-hope that helps!
-
-best regards,
-Richard L
 
