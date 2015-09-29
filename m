@@ -1,42 +1,34 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
-	[209.85.220.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 196B877035
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 6ACC977002
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Sep 2015 17:05:12 +0000 (UTC)
-Received: by padhy16 with SMTP id hy16so11320488pad.1
+	Tue, 29 Sep 2015 19:09:56 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so165053427wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Sep 2015 10:05:12 -0700 (PDT)
+	Tue, 29 Sep 2015 12:09:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=xppltLFdgWFjlt7+Ac833h64PlJucOez4GE8KuMDrO4=;
-	b=GsE5x0bRNXG6GOunD0UQYngVJrKkGInrBTsrhWz8CZzrYgCx8tJTXH/CAPpUNCHmuH
-	Gn/h6qAyoRQgnCbhmhUe7OLJF9twru9K7Ej9OIpfFhU0quqGydgy095Og08SR3TWEaLS
-	4/iBq2Ns70kWyF5/FSPuY9J+zq1p1wGASwLNgicN5FR+yGPXjrjhvKo8QNvRgytW0/cQ
-	8imTp4RWedILIJ3fBjht6bgjKh3iinl1x1+tPT+s/xLCxa15b9QWwW5NxC2ZA9hq1nVD
-	GHM6vmcWFMVH1xgHQ6ipYwVrPVIjOj0HVUT8GEZWMbDlD46nYvtKtYRF+vhJKt/8kL12
-	kgVQ==
-X-Received: by 10.66.66.167 with SMTP id g7mr20422283pat.152.1443546312847;
-	Tue, 29 Sep 2015 10:05:12 -0700 (PDT)
-Received: from ?IPv6:2601:646:8601:4580:f90b:6fa0:21f7:85bc?
-	([2601:646:8601:4580:f90b:6fa0:21f7:85bc])
-	by smtp.gmail.com with ESMTPSA id
-	uc1sm21292943pab.20.2015.09.29.10.05.12
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 29 Sep 2015 10:05:12 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.0 \(3094\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <560AA9BF.10703@streamunlimited.com>
-Date: Tue, 29 Sep 2015 10:05:11 -0700
-Message-Id: <3D222848-8306-43E1-BD45-3D106F04AD70@gmail.com>
-References: <560AA635.30407@streamunlimited.com>
-	<560AA9BF.10703@streamunlimited.com>
-To: Martin Jansa <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.3094)
-Subject: Re: Cmake + qt4 = linker error
+	h=from:to:cc:subject:date:message-id;
+	bh=cUsoANSFV0rj3eM6oMTeaXCbq0mZLpDJZXCxrPCUZEA=;
+	b=q6HP3dUxFFeGY/lmCSwGsQyo3Yty0MQ5e5Sjcm7kdNrQ1xprFlBDAZRg7vSi71IpcX
+	dA+aaz6/9eY/F6PCmm0J3c6zDh/NiUb0GP4N3C0oqDpHwdLjMbX+En1fWRTzxdsz7NoT
+	mNbUOmjG+8oFf18rUsX7GI7ge1x9LkrlkR4ABpba18IXQAOpxPSGHIu/50s7dDZUJ2Xz
+	4krc3km/I3q6T1P3nIujQDCbhLlIMsluyVuPnpZun7f+5bUq7h6uk4tBKIU7H/433cWN
+	z6IEsSBgdJDApbCHGPU0HCesx5Z9ei2JMyK147UCU6DzjEj04VOZPcq47fDjurs+mZjS
+	x7qA==
+X-Received: by 10.180.90.107 with SMTP id bv11mr28764736wib.69.1443553796912; 
+	Tue, 29 Sep 2015 12:09:56 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id x7sm25377237wia.5.2015.09.29.12.09.56
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 29 Sep 2015 12:09:56 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 29 Sep 2015 21:10:33 +0200
+Message-Id: <1443553833-30600-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.6.0
+Subject: [PATCH][meta-qt5] qtwebengine: enable cmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,77 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Sep 2015 17:05:16 -0000
-X-Groupsio-MsgNum: 57571
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_E3CFF4F2-1FAD-49B3-A499-13B591BADEF7";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 29 Sep 2015 19:09:59 -0000
 
---Apple-Mail=_E3CFF4F2-1FAD-49B3-A499-13B591BADEF7
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+* it works fine in 5.5 version
 
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-qt/qt5/qtwebengine_git.bb | 3 ---
+ 1 file changed, 3 deletions(-)
 
-> On Sep 29, 2015, at 8:09 AM, Radek Dost=C3=A1l =
-<radek.dostal@streamunlimited.com> wrote:
->=20
-> Hi,
->=20
-> I have a very simple (hello world style) program which uses cmake for
-> compilation and depends on qt4. I am trying to put together bitbake
-> recipe for this program. See attached.
->=20
-> When compiling it fail with following error:
-> /tmp/oe-work/sysroots/x86_64-linux/usr/lib/libQtCore.so: file not
-> recognized: File format not recognized
->=20
-> I suspect it is looking for libraries in native sysroot due to =
-following message in log.do_configure: "Found Qt4:
-> /tmp/oe-work/sysroots/x86_64-linux/usr/bin/qmake2 (found version =
-"4.8.5")"
->=20
-> Obviously it can only find qmake2 binary in the native sysroot and not
-> in the target sysroot as it does not make any sense to build qmake2 =
-for
-> target.
->=20
-> I checked meta-openembedded and openembedded-core and could not find =
-any  example I could use for inspiration.
->=20
-> 1) Is there something I am missing?
->=20
-> 2) Is this a known problem?
-
-may be you should inherit qt4e in your recipe as well
-
->=20
-> Thanks,
-> Radek
->=20
->=20
->=20
-> <nsdktoolbox.bb><CMakeLists.txt>--
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
+index 40dca0c..7127c8f 100644
+--- a/recipes-qt/qt5/qtwebengine_git.bb
++++ b/recipes-qt/qt5/qtwebengine_git.bb
+@@ -35,9 +35,6 @@ require qt5-git.inc
+ SEPB = "${S}"
+ B = "${SEPB}"
+ 
+-# Project ERROR: Missing CMake tests. Either create tests in tests/auto/cmake, or disable cmake config file creation with CONFIG-=create_cmake.
+-EXTRA_QMAKEVARS_POST += "CONFIG-=create_cmake"
+-
+ export NINJA_PATH="${STAGING_BINDIR_NATIVE}/ninja"
+ 
+ do_configure() {
+-- 
+2.6.0
 
 
---Apple-Mail=_E3CFF4F2-1FAD-49B3-A499-13B591BADEF7
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlYKxMcACgkQuwUzVZGdMxRB0QCeKz5om2VSIyGua/iTPu44H/TH
-llIAn0BGzF/ctGpzk5ACxQGKHrb2JhDS
-=cOmt
------END PGP SIGNATURE-----
-
---Apple-Mail=_E3CFF4F2-1FAD-49B3-A499-13B591BADEF7--
