@@ -1,26 +1,35 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id F16FD76FDE
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 13D657680C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Sep 2015 07:11:44 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8T7Biuu019285
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 29 Sep 2015 00:11:44 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.235.1; Tue, 29 Sep 2015 00:11:44 -0700
-From: <kai.kang@windriver.com>
-To: <martin.jansa@gmail.com>
-Date: Tue, 29 Sep 2015 15:04:50 +0800
-Message-ID: <1443510290-26782-3-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.6.0.rc2.10.gf4d9753
-In-Reply-To: <1443510290-26782-1-git-send-email-kai.kang@windriver.com>
-References: <1443510290-26782-1-git-send-email-kai.kang@windriver.com>
+	Tue, 29 Sep 2015 10:03:44 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t8TA3joR024903 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Sep 2015 05:03:45 -0500
+Received: from [10.113.0.102] ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015092905034514-698992 ;
+	Tue, 29 Sep 2015 05:03:45 -0500 
+To: openembedded-devel@lists.openembedded.org
+References: <1443440681-5009-1-git-send-email-adrian.ratiu@ni.com>
+	<1E25FC86-FE6A-4FE0-850F-620603B9FC3D@gmail.com>
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Message-ID: <560A61FF.2070004@ni.com>
+Date: Tue, 29 Sep 2015 13:03:43 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 2/2] efibootmgr: 0.6.0 -> 0.12
+In-Reply-To: <1E25FC86-FE6A-4FE0-850F-620603B9FC3D@gmail.com>
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 09/29/2015 05:03:45 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 09/29/2015 05:03:45 AM,
+	Serialize complete at 09/29/2015 05:03:45 AM
+X-Proofpoint-Virus-Version: vendor=nai engine=5600 definitions=5800
+	signatures=585085
+Subject: Re: [meta-oe][PATCH] vim: Compile and provide xxd in package vim-xxd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,162 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Sep 2015 07:11:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 29 Sep 2015 10:03:47 -0000
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=windows-1252; format=flowed
 
-From: Kai Kang <kai.kang@windriver.com>
+On 28.09.2015 19:07, Khem Raj wrote:
+>
+>> On Sep 28, 2015, at 4:44 AM, Ioan-Adrian Ratiu <adrian.ratiu@ni.com> wrote:
+>>
+>> Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+>> ---
+>> meta-oe/recipes-support/vim/vim_7.4.481.bb | 10 +++++++++-
+>> 1 file changed, 9 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-support/vim/vim_7.4.481.bb b/meta-oe/recipes-support/vim/vim_7.4.481.bb
+>> index 2ece53b..fcd036b 100644
+>> --- a/meta-oe/recipes-support/vim/vim_7.4.481.bb
+>> +++ b/meta-oe/recipes-support/vim/vim_7.4.481.bb
+>> @@ -59,6 +59,11 @@ EXTRA_OECONF = " \
+>>      STRIP=/bin/true \
+>> "
+>>
+>> +do_compile_append() {
+>> +    cd "${S}/xxd"
+>> +    make
+>
+> why not oe_runmake ?
 
-Upgrade efibootmgr from 0.6.0 to 0.12.
+I did some more research and indeed oe_runmake should be used and the 
+default oe_runmake call already compiles xxd when calling the top level 
+Makefile so there's no need for do_compile_append altogether.
 
-* update HOMEPAGE
-* drop useless patches
-* add dependency efivar
-* update CFLAGS to fix print wrong version issue
+The same goes for the install append.
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../recipes-extended/efibootmgr/efibootmgr_0.12.bb | 27 +++++++++++++++++++++
- .../efibootmgr/efibootmgr_0.6.0.bb                 | 26 --------------------
- .../efibootmgr/files/docbook-fixes.patch           | 28 ----------------------
- .../files/w-keep-existing-mbr-signature.patch      | 26 --------------------
- 4 files changed, 27 insertions(+), 80 deletions(-)
- create mode 100644 meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
- delete mode 100644 meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
- delete mode 100644 meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
- delete mode 100644 meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
+The only thing needed to be done is simply package xxd. I'll rewrite and 
+resubmit.
 
-diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-new file mode 100644
-index 0000000..03aaf13
---- /dev/null
-+++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "Linux user-space application to modify the EFI Boot Manager."
-+SUMMARY = "EFI Boot Manager"
-+HOMEPAGE = "https://github.com/rhinstaller/efibootmgr"
-+SECTION = "base"
-+
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
-+
-+DEPENDS = "pciutils zlib efivar"
-+
-+COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
-+
-+SRC_URI = "https://github.com/rhinstaller/efibootmgr/releases/download/${BP}/${BP}.tar.bz2 \
-+           file://ldflags.patch \
-+          "
-+
-+SRC_URI[md5sum] = "6647f5cd807bc8484135ba74fcbcc39a"
-+SRC_URI[sha256sum] = "a66f5850677e86255d93cb1cead04c3c48a823a2b864c579321f2a07f00256e6"
-+
-+EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/include `pkg-config --cflags efivar` \
-+                 -DEFIBOOTMGR_VERSION=\"$(RELEASE_MAJOR).$(RELEASE_MINOR)\" '"
-+
-+do_install () {
-+    install -D -p -m0755 src/efibootmgr/efibootmgr ${D}/${sbindir}/efibootmgr
-+}
-+
-+inherit pkgconfig
-diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
-deleted file mode 100644
-index 501ff2a..0000000
---- a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--DESCRIPTION = "Linux user-space application to modify the EFI Boot Manager."
--SUMMARY = "EFI Boot Manager"
--HOMEPAGE = "http://linux.dell.com/efibootmgr/"
--SECTION = "base"
--
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
--
--DEPENDS = "pciutils zlib"
--
--COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
--
--SRC_URI = "http://linux.dell.com/efibootmgr/permalink/efibootmgr-${PV}.tar.gz \
--    file://ldflags.patch \
--    file://docbook-fixes.patch \
--    file://w-keep-existing-mbr-signature.patch \
--"
--
--SRC_URI[md5sum] = "9e9a31d79e579644de83a14139b66d10"
--SRC_URI[sha256sum] = "5167488b92950e60028d1025942ce6bda04638c6fb5e110abb8c8f687844d155"
--
--EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/lib -I${S}/src/include -fgnu89-inline'"
--
--do_install () {
--    install -D -p -m0755 src/efibootmgr/efibootmgr ${D}/${sbindir}/efibootmgr
--}
-diff --git a/meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch b/meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
-deleted file mode 100644
-index f2dc83b..0000000
---- a/meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--Upstream-Status: Pending
--
--Import this patch from meta-linaro.
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
--
--diff --git a/src/man/man8/efibootmgr.8.docbook b/src/man/man8/efibootmgr.8.docbook
--index aef4444..eb8f266 100644
----- a/src/man/man8/efibootmgr.8.docbook
--+++ b/src/man/man8/efibootmgr.8.docbook
--@@ -302,7 +302,7 @@
--           <title>Displaying the current settings (must be root).</title>
--           
--           <para>
---            <computeroutput>
--+            <programlisting>
--   [root@localhost ~]# efibootmgr
--   BootCurrent: 0004
--   BootNext: 0003
--@@ -313,7 +313,7 @@
--   Boot0002* Hard Drive(Device:80)/HD(Part1,Sig00112233)   
--   Boot0003* PXE Boot: MAC(00D0B7C15D91)               
--   Boot0004* Linux
---            </computeroutput>
--+            </programlisting>
--           </para>
--           <para>This shows:</para>
--           <itemizedlist>
-diff --git a/meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch b/meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
-deleted file mode 100644
-index 58bd135..0000000
---- a/meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--Upstream-Status: Pending
--
--Import this patch from meta-linaro.
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
-----
--Description: Fix -w option to leave an existing unique MBR signature intact
-- This makes the implementation match the documentation.
--Author: Colin Watson <cjwatson@ubuntu.com>
--Bug-Ubuntu: https://bugs.launchpad.net/bugs/1065261
--Forwarded: no
--Last-Update: 2013-02-01
--
--Index: b/src/lib/disk.c
--===================================================================
----- a/src/lib/disk.c
--+++ b/src/lib/disk.c
--@@ -352,7 +352,7 @@
-- 		printf("******************************************************\n\n");
-- 		
-- 	}
---	else if (opts.write_signature) {
--+	else if (!mbr->unique_mbr_signature && opts.write_signature) {
-- 		
-- 		/* MBR Signatures must be unique for the 
-- 		   EFI Boot Manager
--- 
-2.6.0.rc2.10.gf4d9753
-
+Thank you,
+Adrian
 
