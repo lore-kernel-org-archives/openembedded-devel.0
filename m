@@ -1,24 +1,30 @@
-Return-Path: <jason.wessel@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C8C8276AC4
+Return-Path: <alejandro.delcastillo@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id D253076FED
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Sep 2015 20:15:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8TKFhSt028416
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Sep 2015 13:15:43 -0700 (PDT)
-Received: from ord-lpggp3.wrs.com (128.224.149.46) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.235.1;
-	Tue, 29 Sep 2015 13:15:43 -0700
-From: Jason Wessel <jason.wessel@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 29 Sep 2015 15:14:08 -0500
-Message-ID: <1443557648-14567-1-git-send-email-jason.wessel@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] tsocks: Add tsocks to meta-network/recipes-protocols
+	Tue, 29 Sep 2015 23:22:03 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t8TNM4Eg026749 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Sep 2015 18:22:04 -0500
+Received: from delcastillo2.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015092918220403-752698 ;
+	Tue, 29 Sep 2015 18:22:04 -0500 
+From: Alejandro del Castillo <alejandro.delcastillo@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 29 Sep 2015 18:22:02 -0500
+Message-Id: <1443568922-16315-1-git-send-email-alejandro.delcastillo@ni.com>
+X-Mailer: git-send-email 1.9.1
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 09/29/2015 06:22:04 PM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 09/29/2015 06:22:04 PM,
+	Serialize complete at 09/29/2015 06:22:04 PM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-09-29_14:, , signatures=0
+Subject: [meta-oe][PATCH 1/1] tornado: upgrade to 4.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,62 +38,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Sep 2015 20:15:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 29 Sep 2015 23:22:08 -0000
 
-The tsocks program is frequently used to easily wrap any generic
-program such as telnet, ssh, wget or any other tcp socket program
-using an LD_PRELOAD library.  One might use an ssh tunnel and wget for
-example.
-
-Example of tunnel via ssh to remote url:
-
-ssh -N -D 1080 $REMOTE_HOST_TUNNEL_ENDPOINT &
-
-cat<<EOF>tsocks.conf
-server_port = 1080
-server = 127.0.0.1
-EOF
-
-TSOCKS_CONF_FILE=$PWD/tsocks.conf tsocks curl $REMOTE_URL
-
-Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
+Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
 ---
- .../recipes-protocols/tsocks/tsocks_1.8beta5.bb    |   24 ++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
+ .../python/python-tornado_4.0.2.bb                 | 34 ----------------------
+ .../python/python-tornado_4.2.1.bb                 | 34 ++++++++++++++++++++++
+ 2 files changed, 34 insertions(+), 34 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-tornado_4.0.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-tornado_4.2.1.bb
 
-diff --git a/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb b/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
+diff --git a/meta-python/recipes-devtools/python/python-tornado_4.0.2.bb b/meta-python/recipes-devtools/python/python-tornado_4.0.2.bb
+deleted file mode 100644
+index f1b8141..0000000
+--- a/meta-python/recipes-devtools/python/python-tornado_4.0.2.bb
++++ /dev/null
+@@ -1,34 +0,0 @@
+-SUMMARY  = "Tornado is an open source version of the scalable, non-blocking web server and tools that power FriendFeed."
+-DESCRIPTION = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed. \
+-By using non-blocking network I/O, Tornado can scale to tens of thousands of open connections, making it ideal for long \
+-polling, WebSockets, and other applications that require a long-lived connection to each user."
+-HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
+-
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5208df23820f490f691712a654be256d"
+-
+-SRCNAME = "tornado"
+-
+-SRC_URI = " \
+-    https://pypi.python.org/packages/source/t/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
+-"
+-SRC_URI[md5sum] = "985c0e704b765c33a6193d49d1935588"
+-SRC_URI[sha256sum] = "900c5124ebdb6598ca8e8a0c5888f41a5f14117952d5515258e3d20222b21bfa"
+-
+-inherit setuptools
+-
+-RDEPENDS_${PN} += "python-compression python-numbers python-email python-subprocess \
+-                   python-pkgutil python-html python-json python-backports-ssl python-certifi"
+-
+-RDEPENDS_${PN}-test += "${PN} python-unittest"
+-
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
+-
+-PACKAGES =+ "\
+-    ${PN}-test \
+-"
+-
+-FILES_${PN}-test = " \
+-    ${libdir}/${PYTHON_DIR}/site-packages/${SRCNAME}/test \
+-    ${libdir}/${PYTHON_DIR}/site-packages/${SRCNAME}/testing.py* \
+-"
+diff --git a/meta-python/recipes-devtools/python/python-tornado_4.2.1.bb b/meta-python/recipes-devtools/python/python-tornado_4.2.1.bb
 new file mode 100644
-index 0000000..5ad3c05
+index 0000000..4580b34
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "Libraries and wrapper for using a SOCKS proxy"
-+DESCRIPTION = "The role of tsocks is to allow non SOCKS aware \
-+applications (e.g telnet, ssh, ftp etc) to use SOCKS without any \
-+modification. It does this by intercepting the calls that applications \
-+make to establish network connections and negotating them through a \
-+SOCKS server as necessary."
-+HOMEPAGE = "http://sourceforge.net/projects/tsocks/"
-+SECTION = "net"
-+LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760"
++++ b/meta-python/recipes-devtools/python/python-tornado_4.2.1.bb
+@@ -0,0 +1,34 @@
++SUMMARY  = "Tornado is an open source version of the scalable, non-blocking web server and tools that power FriendFeed."
++DESCRIPTION = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed. \
++By using non-blocking network I/O, Tornado can scale to tens of thousands of open connections, making it ideal for long \
++polling, WebSockets, and other applications that require a long-lived connection to each user."
++HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
 +
-+SRC_URI = "http://downloads.sourceforge.net/tsocks/tsocks-${PV}.tar.gz"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=c7dc99d243c4004087229f84f6b46828"
 +
-+SRC_URI[md5sum] = "51caefd77e5d440d0bbd6443db4fc0f8"
-+SRC_URI[sha256sum] = "849d7ef5af80d03e76cc05ed9fb8fa2bcc2b724b51ebfd1b6be11c7863f5b347"
++SRCNAME = "tornado"
 +
-+inherit autotools
++SRC_URI = " \
++    https://pypi.python.org/packages/source/t/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
++"
++SRC_URI[md5sum] = "d523204389cfb70121bb69709f551b20"
++SRC_URI[sha256sum] = "a16fcdc4f76b184cb82f4f9eaeeacef6113b524b26a2cb331222e4a7fa6f2969"
 +
-+S = "${WORKDIR}/tsocks-1.8"
-+B = "${S}"
++inherit setuptools
 +
-+FILES_${PN} = "${libdir}/* ${bindir}/tsocks"
-+FILES_${PN}-dev = ""
-+INSANE_SKIP_${PN} = "dev-so"
++RDEPENDS_${PN} += "python-compression python-numbers python-email python-subprocess \
++                   python-pkgutil python-html python-json python-backports-ssl python-certifi"
++
++RDEPENDS_${PN}-test += "${PN} python-unittest"
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++PACKAGES =+ "\
++    ${PN}-test \
++"
++
++FILES_${PN}-test = " \
++    ${libdir}/${PYTHON_DIR}/site-packages/${SRCNAME}/test \
++    ${libdir}/${PYTHON_DIR}/site-packages/${SRCNAME}/testing.py* \
++"
 -- 
-1.7.9.5
+1.9.1
 
 
