@@ -1,28 +1,32 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id B93C97701C
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 4351673CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Sep 2015 11:05:36 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 30 Sep 2015 04:05:36 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,611,1437462000"; d="scan'208";a="816126306"
-Received: from mhanley-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.22.120])
-	by fmsmga002.fm.intel.com with ESMTP; 30 Sep 2015 04:05:34 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 30 Sep 2015 12:05:32 +0100
-Message-ID: <3684850.Dr1EhiOegx@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.9 (Linux/4.1.6-100.fc21.x86_64; KDE/4.14.9; x86_64; ; )
-In-Reply-To: <CAMKF1spL0-FpdJVNrPjDQNfrGzHztqUqCjeHR2YBtRbvBSH=Ag@mail.gmail.com>
-References: <1443601616-25650-1-git-send-email-ulf@emagii.com>
-	<1443601616-25650-2-git-send-email-ulf@emagii.com>
-	<CAMKF1spL0-FpdJVNrPjDQNfrGzHztqUqCjeHR2YBtRbvBSH=Ag@mail.gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org, Ulf Samuelsson <ulf@emagii.com>
-Subject: Re: [PATCH] Use GFDL-1.1 instead of GFDLv1.1
+	Wed, 30 Sep 2015 11:24:07 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t8UBO1Er027263 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Sep 2015 06:24:07 -0500
+Received: from adi-pc-linux.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015093006154571-789743 ;
+	Wed, 30 Sep 2015 06:15:45 -0500 
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 30 Sep 2015 14:15:44 +0300
+Message-Id: <1443611744-32468-1-git-send-email-adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.1.4
+In-Reply-To: <1443602914-22199-1-git-send-email-adrian.ratiu@ni.com>
+References: <1443602914-22199-1-git-send-email-adrian.ratiu@ni.com>
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 09/30/2015 06:15:45 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 09/30/2015 06:24:07 AM,
+	Serialize complete at 09/30/2015 06:24:07 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-09-30_08:, , signatures=0
+Subject: [meta-oe][PATCH V2] meta-oe: recipes-devtools: add libubox recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,25 +40,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Sep 2015 11:05:36 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 30 Sep 2015 11:24:08 -0000
 
-On Wednesday 30 September 2015 03:10:56 Khem Raj wrote:
-> On Wed, Sep 30, 2015 at 1:26 AM, Ulf Samuelsson <ulf@emagii.com> wrote:
-> > -LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
-> > +LICENSE = "GPLv2 & LGPLv2 & GFDL-1.1"
-> 
-> IIRC both are correct
+libubox contains C utility functions used by OpenWrt projects
 
-I don't think we have an SPDXLICENSEMAP entry for this though, so it won't be 
-being mapped (unlike GPLv2 -> GPL-2.0).
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+---
+ meta-oe/recipes-devtools/libubox/libubox_git.bb | 32 +++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/libubox/libubox_git.bb
 
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-devtools/libubox/libubox_git.bb b/meta-oe/recipes-devtools/libubox/libubox_git.bb
+new file mode 100644
+index 0000000..4be3ac1
+--- /dev/null
++++ b/meta-oe/recipes-devtools/libubox/libubox_git.bb
+@@ -0,0 +1,32 @@
++DESCRIPTION = "C utility functions for OpenWrt"
++SECTION = "libs"
++LICENSE = "libubox-custom-license"
++LIC_FILES_CHKSUM = "\
++    file://avl.c;endline=39;md5=00810155fed3d604816ec5814523d60a \
++    file://avl-cmp.c;endline=15;md5=1603e6094b432a5f3f320877a06f41b5 \
++    file://base64.c;endline=61;md5=51fdff010d45b0086ac0a6e035693dc0 \
++    file://blobmsg.c;endline=15;md5=7ed64c1570e8c9b46c4fc6fbd16c489e \
++    file://list.h;endline=28;md5=2d5f5475fbd0f08741354c5a99c2e983 \
++    file://md5.h;endline=39;md5=048bf9f68963c207a0c2b3a94c9d2aaa \
++    file://md5.c;endline=51;md5=0a448eea0bcbc89e3c7e6608f2d119a0 \
++    file://usock.h;endline=18;md5=f0dfdc8de858e66d66d74036611bba14 \
++"
++
++PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-staticdev"
++
++DEPENDS = "json-c"
++
++SRC_URI = "git://git.openwrt.org/project/libubox.git"
++
++SRCREV = "136a5196266d03d537f822c4e67d2fde2ed59505"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++EXTRA_OECMAKE = "-DBUILD_EXAMPLES=OFF -DBUILD_LUA=OFF"
++
++FILES_${PN} += "\
++    ${libdir}/libubox.so \
++    ${libdir}/libblobmsg_json.so \
++"
 -- 
+2.1.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
