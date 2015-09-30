@@ -1,26 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A621576DE1
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A01876536
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Sep 2015 06:28:12 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8U6SCHg002289
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 29 Sep 2015 23:28:12 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.235.1; Tue, 29 Sep 2015 23:28:12 -0700
-From: <kai.kang@windriver.com>
-To: <martin.jansa@gmail.com>
-Date: Wed, 30 Sep 2015 14:21:13 +0800
-Message-ID: <1443594073-23679-3-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.6.0.rc2.10.gf4d9753
-In-Reply-To: <1443594073-23679-1-git-send-email-kai.kang@windriver.com>
-References: <1443594073-23679-1-git-send-email-kai.kang@windriver.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 2/2] efibootmgr: 0.6.0 -> 0.12
+	Wed, 30 Sep 2015 07:20:06 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t8U7K1Rt020187 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Sep 2015 02:20:01 -0500
+Received: from adi-pc-linux.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015093002200151-777281 ;
+	Wed, 30 Sep 2015 02:20:01 -0500 
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 30 Sep 2015 10:20:00 +0300
+Message-Id: <1443597600-29477-1-git-send-email-adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.1.4
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 09/30/2015 02:20:01 AM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 09/30/2015 02:20:01 AM,
+	Serialize complete at 09/30/2015 02:20:01 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-09-30_02:, , signatures=0
+Subject: [meta-oe][PATCH] meta-oe: recipes-graphics: add libvncserver recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,140 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Sep 2015 06:28:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 30 Sep 2015 07:20:07 -0000
 
-From: Kai Kang <kai.kang@windriver.com>
-
-Upgrade efibootmgr from 0.6.0 to 0.12.
-
-* update HOMEPAGE
-* drop useless patches
-* add dependency efivar
-* update CFLAGS to fix print wrong version issue
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 ---
- .../{efibootmgr_0.6.0.bb => efibootmgr_0.12.bb}    | 21 ++++++++--------
- .../efibootmgr/files/docbook-fixes.patch           | 28 ----------------------
- .../files/w-keep-existing-mbr-signature.patch      | 26 --------------------
- 3 files changed, 11 insertions(+), 64 deletions(-)
- rename meta-oe/recipes-extended/efibootmgr/{efibootmgr_0.6.0.bb => efibootmgr_0.12.bb} (39%)
- delete mode 100644 meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
- delete mode 100644 meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
+ .../libvncserver/libvncserver_0.9.10.bb              | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
 
-diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-similarity index 39%
-rename from meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
-rename to meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-index 501ff2a..03aaf13 100644
---- a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
-+++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-@@ -1,26 +1,27 @@
- DESCRIPTION = "Linux user-space application to modify the EFI Boot Manager."
- SUMMARY = "EFI Boot Manager"
--HOMEPAGE = "http://linux.dell.com/efibootmgr/"
-+HOMEPAGE = "https://github.com/rhinstaller/efibootmgr"
- SECTION = "base"
- 
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
--DEPENDS = "pciutils zlib"
-+DEPENDS = "pciutils zlib efivar"
- 
- COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
- 
--SRC_URI = "http://linux.dell.com/efibootmgr/permalink/efibootmgr-${PV}.tar.gz \
--    file://ldflags.patch \
--    file://docbook-fixes.patch \
--    file://w-keep-existing-mbr-signature.patch \
--"
-+SRC_URI = "https://github.com/rhinstaller/efibootmgr/releases/download/${BP}/${BP}.tar.bz2 \
-+           file://ldflags.patch \
-+          "
- 
--SRC_URI[md5sum] = "9e9a31d79e579644de83a14139b66d10"
--SRC_URI[sha256sum] = "5167488b92950e60028d1025942ce6bda04638c6fb5e110abb8c8f687844d155"
-+SRC_URI[md5sum] = "6647f5cd807bc8484135ba74fcbcc39a"
-+SRC_URI[sha256sum] = "a66f5850677e86255d93cb1cead04c3c48a823a2b864c579321f2a07f00256e6"
- 
--EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/lib -I${S}/src/include -fgnu89-inline'"
-+EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/include `pkg-config --cflags efivar` \
-+                 -DEFIBOOTMGR_VERSION=\"$(RELEASE_MAJOR).$(RELEASE_MINOR)\" '"
- 
- do_install () {
-     install -D -p -m0755 src/efibootmgr/efibootmgr ${D}/${sbindir}/efibootmgr
- }
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
+new file mode 100644
+index 0000000..841506a
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "library for easy implementation of a RDP/VNC server"
++HOMEPAGE = "https://libvnc.github.io"
++SECTION = "libs"
++PRIORITY = "optional"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
 +
-+inherit pkgconfig
-diff --git a/meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch b/meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
-deleted file mode 100644
-index f2dc83b..0000000
---- a/meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--Upstream-Status: Pending
--
--Import this patch from meta-linaro.
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
--
--diff --git a/src/man/man8/efibootmgr.8.docbook b/src/man/man8/efibootmgr.8.docbook
--index aef4444..eb8f266 100644
----- a/src/man/man8/efibootmgr.8.docbook
--+++ b/src/man/man8/efibootmgr.8.docbook
--@@ -302,7 +302,7 @@
--           <title>Displaying the current settings (must be root).</title>
--           
--           <para>
---            <computeroutput>
--+            <programlisting>
--   [root@localhost ~]# efibootmgr
--   BootCurrent: 0004
--   BootNext: 0003
--@@ -313,7 +313,7 @@
--   Boot0002* Hard Drive(Device:80)/HD(Part1,Sig00112233)   
--   Boot0003* PXE Boot: MAC(00D0B7C15D91)               
--   Boot0004* Linux
---            </computeroutput>
--+            </programlisting>
--           </para>
--           <para>This shows:</para>
--           <itemizedlist>
-diff --git a/meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch b/meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
-deleted file mode 100644
-index 58bd135..0000000
---- a/meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--Upstream-Status: Pending
--
--Import this patch from meta-linaro.
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
-----
--Description: Fix -w option to leave an existing unique MBR signature intact
-- This makes the implementation match the documentation.
--Author: Colin Watson <cjwatson@ubuntu.com>
--Bug-Ubuntu: https://bugs.launchpad.net/bugs/1065261
--Forwarded: no
--Last-Update: 2013-02-01
--
--Index: b/src/lib/disk.c
--===================================================================
----- a/src/lib/disk.c
--+++ b/src/lib/disk.c
--@@ -352,7 +352,7 @@
-- 		printf("******************************************************\n\n");
-- 		
-- 	}
---	else if (opts.write_signature) {
--+	else if (!mbr->unique_mbr_signature && opts.write_signature) {
-- 		
-- 		/* MBR Signatures must be unique for the 
-- 		   EFI Boot Manager
++DEPENDS += "zlib jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
++RDEPENDS_${PN} += "libpng gtk+ libgcrypt"
++
++inherit autotools pkgconfig
++
++SRC_URI  = "https://github.com/LibVNC/libvncserver/archive/LibVNCServer-0.9.10.tar.gz"
++
++SRC_URI[md5sum] = "e1b888fae717b06896f8aec100163d27"
++SRC_URI[sha256sum] = "ed10819a5bfbf269969f97f075939cc38273cc1b6d28bccfb0999fba489411f7"
++
++S = "${WORKDIR}/${PN}-LibVNCServer-${PV}"
++
++EXTRA_OEMAKE_append=" SUBDIRS='libvncserver' "
 -- 
-2.6.0.rc2.10.gf4d9753
+2.1.4
 
 
