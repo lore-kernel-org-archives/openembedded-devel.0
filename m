@@ -1,24 +1,27 @@
-Return-Path: <Wenzong.Fan@windriver.com>
+Return-Path: <Kai.Kang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D5EAE60125
+	by mail.openembedded.org (Postfix) with ESMTP id C80EA76DE1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Sep 2015 05:49:05 +0000 (UTC)
+	Wed, 30 Sep 2015 06:14:40 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8U5n5XT002068
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t8U6EeXu002204
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Sep 2015 22:49:05 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.235.1;
-	Tue, 29 Sep 2015 22:49:04 -0700
-From: <wenzong.fan@windriver.com>
+	Tue, 29 Sep 2015 23:14:40 -0700 (PDT)
+Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.235.1;
+	Tue, 29 Sep 2015 23:14:39 -0700
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 30 Sep 2015 01:49:03 -0400
-Message-ID: <1443592143-14166-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.9.1
+References: <1443510290-26782-1-git-send-email-kai.kang@windriver.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <560B7DDA.8090803@windriver.com>
+Date: Wed, 30 Sep 2015 14:14:50 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-Subject: [PATCH][meta-webserver] apache2: cleanup buildpaths for target stuffs
+In-Reply-To: <1443510290-26782-1-git-send-email-kai.kang@windriver.com>
+Subject: Re: [meta-oe][PATCH 0/2] V2: Upgrade efivar and efibootmgr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,47 +35,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Sep 2015 05:49:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 30 Sep 2015 06:14:41 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+On 2015年09月29日 15:04, kai.kang@windriver.com wrote:
+> From: Kai Kang <kai.kang@windriver.com>
+>
+> Hi Martin,
+>
+> V2 only affects efivar commit:
+> * update git repo - the previous repo uri is a clone of the official repo
+> * add efivar-native package to provide command makeguids for efivar to avoid cross compile issue
 
-Those buildpaths were generated from configure substitutions, they are
-required for cross-compiling, but obviously they should be cleaned up
-from target stuffs.
+Forgot add option '-M' for 'git format-patch', will resend it.
 
-Cleanup buildpaths from config_vars.mk and config.nice:
+--Kai
 
-* remove ${STAGING_DIR_HOST} from CC, CFLAGS ...
-* set APU_INCLUDEDIR, APU_CONFIG as empty
-* remove buildpath from configure line
+>
+> Kai Kang (2):
+>    efivar: 0.7 -> 0.21
+>    efibootmgr: 0.6.0 -> 0.12
+>
+>   .../recipes-extended/efibootmgr/efibootmgr_0.12.bb | 27 +++++++++++++++++++
+>   .../efibootmgr/efibootmgr_0.6.0.bb                 | 26 ------------------
+>   .../efibootmgr/files/docbook-fixes.patch           | 28 -------------------
+>   .../files/w-keep-existing-mbr-signature.patch      | 26 ------------------
+>   .../efivar/0001-efivar-fix-for-cross-compile.patch | 31 ++++++++++++++++++++++
+>   meta-oe/recipes-extended/efivar/efivar_0.21.bb     | 28 +++++++++++++++++++
+>   meta-oe/recipes-extended/efivar/efivar_git.bb      | 18 -------------
+>   7 files changed, 86 insertions(+), 98 deletions(-)
+>   create mode 100644 meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+>   delete mode 100644 meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
+>   delete mode 100644 meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
+>   delete mode 100644 meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
+>   create mode 100644 meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
+>   create mode 100644 meta-oe/recipes-extended/efivar/efivar_0.21.bb
+>   delete mode 100644 meta-oe/recipes-extended/efivar/efivar_git.bb
+>
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb | 9 +++++++++
- 1 file changed, 9 insertions(+)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
-index a44babd..af5c72a 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
-@@ -97,6 +97,15 @@ do_install_append() {
-     sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/apache2.service
- }
- 
-+do_install_append_class-target() {
-+    sed -i -e 's,${STAGING_DIR_HOST},,g' \
-+           -e 's,APU_INCLUDEDIR = .*,APU_INCLUDEDIR = ,g' \
-+           -e 's,APU_CONFIG = .*,APU_CONFIG = ,g' ${D}${datadir}/apache2/build/config_vars.mk
-+
-+    sed -i -e 's,${STAGING_DIR_HOST},,g' \
-+           -e 's,".*/configure","configure",g' ${D}${datadir}/apache2/build/config.nice
-+}
-+
- SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
- 
- apache_sysroot_preprocess () {
 -- 
-1.9.1
+Regards,
+Neil | Kai Kang
 
 
