@@ -1,35 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
-	[209.85.213.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 734E377000
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B2A876FDE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Sep 2015 10:11:25 +0000 (UTC)
-Received: by igcrk20 with SMTP id rk20so98157341igc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Sep 2015 03:11:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=QSPlMD3No5V043fOcC3UBGXfQ+8ensUtXTRyOYs937E=;
-	b=nzs++pGq/mTE3tgklslw6vXlGsVYvjRFfdW7hE8z1F1A2MUzHCl+sz3DObbIstNtam
-	4TNES6HO6BlmhOfYTDU72WA6jVRLcyV3K2/4jns6r/DHXoMhRTlAdrATcEwwCWy6keey
-	6ReujeGRQqkuEpEsV5l/AwETmzV+Y4AXF1HWgf0mC7K86Udis6Tu6ubkzTQsiGph1nBB
-	wHXGQABFYPT7MNslwo/ChUlms0tOZ8fs7HEvuSxBtqyf3D/XFSgTfCE1huC5zxoXV2sY
-	y3H6zkx1zHpGEG14bZQdFHg2zJTu4hjr+HJWMBs+Izmw9/ezOsFTl+SjrbE0Xw8YvM9V
-	GVLA==
-X-Received: by 10.50.117.100 with SMTP id kd4mr3143661igb.75.1443607886053;
-	Wed, 30 Sep 2015 03:11:26 -0700 (PDT)
+	Wed, 30 Sep 2015 11:01:52 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t8UB1q0W031646 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Sep 2015 06:01:52 -0500
+Received: from [10.113.0.102] ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015093006015265-788882 ;
+	Wed, 30 Sep 2015 06:01:52 -0500 
+To: openembedded-devel@lists.openembedded.org
+References: <1443605598-1445-1-git-send-email-adrian.ratiu@ni.com>
+	<CA+chaQdHyhFqLDALSJ+90PEM0Z5a0fKn5vk4jApoJ_jWnW-WdA@mail.gmail.com>
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Message-ID: <560BC11F.2040405@ni.com>
+Date: Wed, 30 Sep 2015 14:01:51 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-Received: by 10.107.142.130 with HTTP; Wed, 30 Sep 2015 03:10:56 -0700 (PDT)
-In-Reply-To: <1443601616-25650-2-git-send-email-ulf@emagii.com>
-References: <1443601616-25650-1-git-send-email-ulf@emagii.com>
-	<1443601616-25650-2-git-send-email-ulf@emagii.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 30 Sep 2015 03:10:56 -0700
-Message-ID: <CAMKF1spL0-FpdJVNrPjDQNfrGzHztqUqCjeHR2YBtRbvBSH=Ag@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Ulf Samuelsson <ulf@emagii.com>
-Subject: Re: [PATCH] Use GFDL-1.1 instead of GFDLv1.1
+In-Reply-To: <CA+chaQdHyhFqLDALSJ+90PEM0Z5a0fKn5vk4jApoJ_jWnW-WdA@mail.gmail.com>
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 09/30/2015 06:01:52 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 09/30/2015 06:01:52 AM,
+	Serialize complete at 09/30/2015 06:01:52 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-09-30_08:, , signatures=0
+Subject: Re: [meta-oe][PATCH] meta-oe: recipes-connectivity: add relayd recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,12 +43,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Sep 2015 10:11:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 30 Sep 2015 11:01:53 -0000
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=windows-1252; format=flowed
 
-On Wed, Sep 30, 2015 at 1:26 AM, Ulf Samuelsson <ulf@emagii.com> wrote:
-> -LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
-> +LICENSE = "GPLv2 & LGPLv2 & GFDL-1.1"
+On 30.09.2015 12:38, Martin Jansa wrote:
+> Why not meta-networking? Don't use INSANE_SKIP, this should be fixed, drop
+> PR, is RDEPENDS really needed? Drop protocol and branch from the SRC_URI
+> (default values).
 
-IIRC both are correct
+Thank you for the feedback. I'll apply these changes and resubmit.
+I'll also modify the libubox patch with these suggestions.
 
