@@ -1,35 +1,35 @@
-Return-Path: <ulf@emagii.com>
-Received: from mxf3.bahnhof.se (mxf3.bahnhof.se [213.80.101.27])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FFC877072
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F86C73D26
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Oct 2015 07:55:29 +0000 (UTC)
-Received: from localhost (mxf3.local [127.0.0.1])
-	by mxf3-reinject (Postfix) with ESMTP id 5221A65108F;
-	Thu,  1 Oct 2015 09:55:29 +0200 (CEST)
-X-Virus-Scanned: by amavisd-new using ClamAV at bahnhof.se (MXF1)
-X-Spam-Score: 0.306
-X-Spam-Level: 
-X-Spam-Status: No, score=0.306 tagged_above=-99 required=5
-	tests=[DNS_FROM_AHBL_RHSBL=0.306]
-Received: from mxf3.bahnhof.se ([127.0.0.1])
-	by localhost (mxf3.bahnhof.se [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id l2Oruceeywxb; Thu,  1 Oct 2015 09:55:22 +0200 (CEST)
-Received: from smtp-auth2.bahnhof.se (smtp-auth.bahnhof.se [213.136.33.6])
-	by mxf3.bahnhof.se (Postfix) with ESMTP id 790CA65108A;
-	Thu,  1 Oct 2015 09:55:22 +0200 (CEST)
-Received: from Thranduil.bahnhof.se (h-169-62.a454.priv.bahnhof.se
-	[37.123.169.62]) (Authenticated sender: mb782575)
-	by smtp-auth2.bahnhof.se (Postfix) with ESMTPA id 59DF028440;
-	Thu,  1 Oct 2015 09:55:22 +0200 (CEST)
-From: Ulf Samuelsson <ulf@emagii.com>
+	Thu,  1 Oct 2015 09:18:47 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t919IkZm019912 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 1 Oct 2015 04:18:46 -0500
+Received: from [10.113.0.102] ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015100104184521-875894 ;
+	Thu, 1 Oct 2015 04:18:45 -0500 
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Oct 2015 09:55:11 +0200
-Message-Id: <1443686111-17209-2-git-send-email-ulf@emagii.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1443686111-17209-1-git-send-email-ulf@emagii.com>
-References: <1443686111-17209-1-git-send-email-ulf@emagii.com>
-Cc: Ulf Samuelsson <ulf@emagii.com>
-Subject: [PATCH] Use GFDL-1.1 instead of GFDLv1.1
+References: <1443602914-22199-1-git-send-email-adrian.ratiu@ni.com>
+	<1443611744-32468-1-git-send-email-adrian.ratiu@ni.com>
+	<394DAAF7-103E-46D8-8495-F4209BE5857C@gmail.com>
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Message-ID: <560CFA68.2030208@ni.com>
+Date: Thu, 1 Oct 2015 12:18:32 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
+MIME-Version: 1.0
+In-Reply-To: <394DAAF7-103E-46D8-8495-F4209BE5857C@gmail.com>
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 10/01/2015 04:18:46 AM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 10/01/2015 04:18:46 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-10-01_04:, , signatures=0
+Subject: Re: [meta-oe][PATCH V2] meta-oe: recipes-devtools: add libubox recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,37 +43,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Oct 2015 07:55:29 -0000
+X-List-Received-Date: Thu, 01 Oct 2015 09:18:48 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
----
- meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb | 2 +-
- meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+On 30.09.2015 18:24, Khem Raj wrote:
+>
+>> On Sep 30, 2015, at 4:15 AM, Ioan-Adrian Ratiu <adrian.ratiu@ni.com> wro=
+te:
+>>
+>> libubox contains C utility functions used by OpenWrt projects
+>>
+>> Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+>> ---
+>> meta-oe/recipes-devtools/libubox/libubox=5Fgit.bb | 32 +++++++++++++++++=
+++++++++
+>> 1 file changed, 32 insertions(+)
+>> create mode 100644 meta-oe/recipes-devtools/libubox/libubox=5Fgit.bb
+>>
+>> diff --git a/meta-oe/recipes-devtools/libubox/libubox=5Fgit.bb b/meta-oe=
+/recipes-devtools/libubox/libubox=5Fgit.bb
+>> new file mode 100644
+>> index 0000000..4be3ac1
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-devtools/libubox/libubox=5Fgit.bb
+>> @@ -0,0 +1,32 @@
+>> +DESCRIPTION =3D "C utility functions for OpenWrt"
+>> +SECTION =3D "libs"
+>> +LICENSE =3D "libubox-custom-license=94
+>
+> where is the license file ?
+>
 
-diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb
-index 972a4d4..fbcf76f 100644
---- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME panel"
--LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
-+LICENSE = "GPLv2 & LGPLv2 & GFDL-1.1"
- 
- BPN = "gnome-panel"
- PR = "r1"
-diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-index 4957a99..30c42c9 100644
---- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME panel"
--LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
-+LICENSE = "GPLv2 & LGPLv2 & GFDL-1.1"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://COPYING-DOCS;md5=c9211dab3ae61e580f48432020784324 \
--- 
-1.9.1
+There is no global license file, only the license headers specified per=20
+files, of which I tried to list all the unique ones in the=20
+LIC=5FFILES=5FCHKSUM. I'm still at a loss what to put in the LICENSE=20
+variable. Any suggestions?
+
+>> +LIC=5FFILES=5FCHKSUM =3D "\
+>> +    file://avl.c;endline=3D39;md5=3D00810155fed3d604816ec5814523d60a \
+>> +    file://avl-cmp.c;endline=3D15;md5=3D1603e6094b432a5f3f320877a06f41b=
+5 \
+>> +    file://base64.c;endline=3D61;md5=3D51fdff010d45b0086ac0a6e035693dc0=
+ \
+>> +    file://blobmsg.c;endline=3D15;md5=3D7ed64c1570e8c9b46c4fc6fbd16c489=
+e \
+>> +    file://list.h;endline=3D28;md5=3D2d5f5475fbd0f08741354c5a99c2e983 \
+>> +    file://md5.h;endline=3D39;md5=3D048bf9f68963c207a0c2b3a94c9d2aaa \
+>> +    file://md5.c;endline=3D51;md5=3D0a448eea0bcbc89e3c7e6608f2d119a0 \
+>> +    file://usock.h;endline=3D18;md5=3Df0dfdc8de858e66d66d74036611bba14 \
+>> +"
+>> +
+>> +PACKAGES =3D "${PN} ${PN}-dbg ${PN}-dev ${PN}-staticdev=94
+>
+> why override default PACKAGES ?
+>
+
+This is related with the issue below, please see my explanation there.
+
+>> +
+>> +DEPENDS =3D "json-c"
+>> +
+>> +SRC=5FURI =3D "git://git.openwrt.org/project/libubox.git"
+>> +
+>> +SRCREV =3D "136a5196266d03d537f822c4e67d2fde2ed59505"
+>> +
+>> +S =3D "${WORKDIR}/git"
+>> +
+>> +inherit cmake
+>> +
+>> +EXTRA=5FOECMAKE =3D "-DBUILD=5FEXAMPLES=3DOFF -DBUILD=5FLUA=3DOFF"
+>> +
+>> +FILES=5F${PN} +=3D "\
+>> +    ${libdir}/libubox.so \
+>> +    ${libdir}/libblobmsg=5Fjson.so \
+>
+> can they be versioned ?
+>
+
+My initial problem in patch v1 was that I was getting this dev-deps=20
+error (I used INSANE=5FSKIP to suppress it):
+
+ERROR: QA Issue: libubox rdepends on libubox-dev [dev-deps]
+ERROR: QA run found fatal errors. Please consider fixing them.
+ERROR: Function failed: do=5Fpackage=5Fqa
+
+Martin J. told me to fix the issue properly for these recipes.
+
+Now, in v2, I've made it go away by reordering ${PN} in front of=20
+${PN}-dev in PACKAGES and explicitly adding these files to FILES=5F${PN}.=20
+If I use the default PACKAGES variable, or do not add the libraries to=20
+FILES=5F${PN}, that error reappears.
+
+I don't have a level of knowledge-depth of the OE packaging mechanism to=20
+fully understand what is happening here and I couldn't find more info in=20
+the docs... So any help on this is very much appreciated :)
+
 
 
