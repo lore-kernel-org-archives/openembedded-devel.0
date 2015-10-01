@@ -1,37 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 36DD2770B5
+Return-Path: <h4nn35.work@gmail.com>
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by mail.openembedded.org (Postfix) with ESMTP id A1B3F770AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Oct 2015 15:29:44 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so39005807wic.1
+	Thu,  1 Oct 2015 18:02:40 +0000 (UTC)
+Received: by wiclk2 with SMTP id lk2so2196876wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Oct 2015 08:29:44 -0700 (PDT)
+	Thu, 01 Oct 2015 11:02:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=MjGBWLaUwbn67yrLpiHCwK6lU3QHcNTOCQrbADIMt4c=;
-	b=obYg21ynTWvyzihrTkXWfFmQ6H1tz0X9B4BKG+eUqh1wa76RyB0nU4mvXufvTAds+0
-	wGNkZ0nkN45ZXIkrUDklSOi5V4s4mnVyDDQf5TwnH9kVmz+b6CSvA6EN0AWC1Q15OILK
-	jfc+ZLSHW6IIPfMRuaaieA3yKVNbZ2SkoR4x/3qcQTDUlNsNoqtbB5a77cX2QU6abkQr
-	L2i/9+hC+rzFu29GDW6+EWSCGSzptP4WGJX/77HkGGlw93ovX0dbY8VOtFyLoL3jjiy2
-	oKbxIP7fbeNjMmLxTTyMr4c9gBbDYsh4qPRhrgUBjvslFy33a3LIBJt4AsyL6wPpXJX7
-	+dPw==
-X-Received: by 10.180.35.199 with SMTP id k7mr4350931wij.13.1443713384795;
-	Thu, 01 Oct 2015 08:29:44 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id jc9sm3737746wic.6.2015.10.01.08.29.43
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 01 Oct 2015 08:29:44 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=f4qtnbjlOK8xZdVoD2MSKsNaC6Yoaguz+cMd+3GMG5Y=;
+	b=SoLJWfS5EUGX563rzh7N5ujnNh6/xmxBFT9GYcm2Sy3wIynDuclfU0lmIDWHk8jfJ6
+	T8h7T28svBJ34YTMv7F12aG33kB2d2SFzUR+Xgv9VaW2PzxGVRrd/4nDVT6twyo/gF+P
+	mycDcK2d3m9bbJoDLUYSQmF9C0WlrcrUZuhgIChMWC8KCPtC/oQSUz+D/83vBfeDB5fJ
+	LlkCmpCylk4nAVFN69tGabJts8vyfKX02IpDqczVsSEqsM5JBtJo2/jYh38GlmHf56J5
+	MeRkkeyQ2S0NV+yquQuG2pYP9rSfitG7cB9KpROd3M1UrScX1zcUS60HuNbo8NuniMz2
+	kYVQ==
+X-Received: by 10.194.52.106 with SMTP id s10mr11352718wjo.35.1443722560051;
+	Thu, 01 Oct 2015 11:02:40 -0700 (PDT)
+Received: from lenovobook.localdomain
+	(ipbcc29dfc.dynamic.kabel-deutschland.de. [188.194.157.252])
+	by smtp.googlemail.com with ESMTPSA id
+	gc19sm4335648wic.19.2015.10.01.11.02.38
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 01 Oct 2015 11:02:39 -0700 (PDT)
+From: Johannes Pointner <h4nn35.work@gmail.com>
+X-Google-Original-From: Johannes Pointner <johannes.pointner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Oct 2015 17:30:27 +0200
-Message-Id: <1443713428-8635-9-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu,  1 Oct 2015 20:02:38 +0200
+Message-Id: <1443722558-8165-1-git-send-email-johannes.pointner@gmail.com>
 X-Mailer: git-send-email 2.6.0
-In-Reply-To: <1443713428-8635-1-git-send-email-Martin.Jansa@gmail.com>
-References: <20150918115458.GA11095@jama>
-	<1443713428-8635-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-oe 09/10] gdal: blacklist, fails to build with gcc-5
+Subject: [[PATCH v2][meta-qt5]] maliit-framework-qt5: fixed paths and enabled qt5-inputcontext
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,26 +44,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Oct 2015 15:29:48 -0000
+X-List-Received-Date: Thu, 01 Oct 2015 18:02:41 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+*Fixes paths for qt5 using qmake5_paths variables and enables qt5-inputcontext.
+
+Changes in v2:
+- inherit qmake5_paths and use variables from there as Martin suggested
+
+Signed-off-by: Johannes Pointner <johannes.pointner@gmail.com>
 ---
- meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ recipes-qt/maliit/maliit-framework-qt5_git.bb | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb b/meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb
-index b181b3e..012806a 100644
---- a/meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb
-+++ b/meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb
-@@ -107,3 +107,8 @@ do_configure_prepend () {
- }
+diff --git a/recipes-qt/maliit/maliit-framework-qt5_git.bb b/recipes-qt/maliit/maliit-framework-qt5_git.bb
+index 975892d..62a7209 100644
+--- a/recipes-qt/maliit/maliit-framework-qt5_git.bb
++++ b/recipes-qt/maliit/maliit-framework-qt5_git.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://wiki.maliit.org/Main_Page"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=5c917f6ce94ceb8d8d5e16e2fca5b9ad"
  
- FILES_${PN} += "${libdir}/gdalplugins"
-+
-+# | gdalserver.c:124:21: error: storage size of 'sHints' isn't known
-+# |      struct addrinfo sHints;
-+# |                      ^
-+PNBLACKLIST[gdal] ?= "BROKEN: fails to build with gcc-5"
+-inherit qmake5
++inherit qmake5 qmake5_paths
+ 
+ SRC_URI = "git://github.com/maliit/framework.git;branch=master \
+     file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
+@@ -20,9 +20,6 @@ GTKIMMODULES_PACKAGES = "${PN}-gtk"
+ 
+ DEPENDS = "qtdeclarative"
+ 
+-# FIXME: Do we need something like this with qt5?
+-#RDEPENDS_${PN} = "qt4-plugin-inputmethod-imsw-multi libqtsvg4"
+-
+ RRECOMMENDS_${PN} = "maliit-plugins-qt5"
+ 
+ FILES_${PN} += "\
+@@ -30,24 +27,26 @@ FILES_${PN} += "\
+     ${bindir} \
+     ${datadir}/applications/maliit-server.desktop \
+     ${datadir}/dbus-1 \
++    ${OE_QMAKE_PATH_PLUGINS}/platforminputcontexts \
+ "
+ 
+ FILES_${PN}-dbg += "\
+     ${libdir}/maliit-framework-tests \
++    ${OE_QMAKE_PATH_PLUGINS}/platforminputcontexts/.debug \
+ "
+ 
+ FILES_${PN}-dev += "\
+     ${includedir}/maliit \
+     ${libdir}/pkgconfig \
+-    ${libdir}/qt5/mkspecs \
++    ${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs \
+ "
+ 
+ EXTRA_QMAKEVARS_PRE = "\
+-    PREFIX=${prefix} \
+-    LIBDIR=${libdir} \
+-    DATADIR=${datadir} \
+-    QT_IM_PLUGIN_PATH=${libdir}/qt4/plugins/inputmethods \
+-    MALIIT_INSTALL_PRF=${QMAKE_MKSPEC_PATH}/mkspecs/features \
++    PREFIX=${OE_QMAKE_PATH_PREFIX} \
++    LIBDIR=${OE_QMAKE_PATH_LIBS} \
++    DATADIR=${OE_QMAKE_PATH_DATA} \
++    QT_INSTALL_PLUGINS=${OE_QMAKE_PATH_PLUGINS} \
++    MALIIT_INSTALL_PRF=${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/features \
+     SCHEMADIR=${sysconfdir}/gconf/schemas \
+     CONFIG+=disable-gconf \
+     CONFIG+=disable-gtk-cache-update \
+@@ -56,14 +55,15 @@ EXTRA_QMAKEVARS_PRE = "\
+     CONFIG+=nodoc \
+     CONFIG+=noxcb \
+     CONFIG+=enable-dbus-activation \
++    CONFIG+=qt5-inputcontext \
+ "
+ 
+ EXTRA_OEMAKE += "INSTALL_ROOT=${D}"
+ 
+ do_install_append() {
+     #Fix absolute paths
+-    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${libdir}${QT_DIR_NAME}/mkspecs/features/maliit-framework.prf
+-    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${libdir}${QT_DIR_NAME}/mkspecs/features/maliit-plugins.prf
++    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/features/maliit-framework.prf
++    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/features/maliit-plugins.prf
+ 
+     install -d ${D}${datadir}/applications
+     install -m 644 ${WORKDIR}/maliit-server.desktop ${D}${datadir}/applications
 -- 
 2.6.0
 
