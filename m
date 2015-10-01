@@ -1,35 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BC62770A0
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B9187709E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Oct 2015 13:17:02 +0000 (UTC)
-Received: by igbkq10 with SMTP id kq10so17782988igb.0
+	Thu,  1 Oct 2015 14:02:12 +0000 (UTC)
+Received: by wiclk2 with SMTP id lk2so35108197wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Oct 2015 06:17:03 -0700 (PDT)
+	Thu, 01 Oct 2015 07:02:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=yVbx9Sa6J3aUnrVmafVFx7m2A4nvywt4j7eSr7idTiQ=;
-	b=FV6AdiSyIzkV+iFcPFnP36EZxGwXkCPPTondxVoRvY6ipqmjue8jgWRp5y3fyov8/W
-	wyujBwU6kLSdcwYQCUiCFE2SGmD6fO3m/GqqgDPzK1LUM5aJtOFh1vZs8cdXA8jFz/uN
-	W5TP1oKD+RXhFQLmKH+C29+97nx0kRxWwSgUjz3JxcLORVdYqNslx3FxXJ7cnvi7qC3w
-	8G7AeTXitr8XUyq3W+jPpbj4kMt7F02kcEnhLXx+6G6aX/Q3H9kTqdV7jzBUcHsQ4COI
-	JTOsUEmRZvtyWLjKOK4CXoTHJMi2PISVhy23jt1/a2uSZV+wlDl8tAw7tgCdIiw3rtH+
-	KOfw==
-X-Received: by 10.50.20.67 with SMTP id l3mr2975676ige.75.1443705422926; Thu,
-	01 Oct 2015 06:17:02 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.142.130 with HTTP; Thu, 1 Oct 2015 06:16:33 -0700 (PDT)
-In-Reply-To: <560CFA68.2030208@ni.com>
-References: <1443602914-22199-1-git-send-email-adrian.ratiu@ni.com>
-	<1443611744-32468-1-git-send-email-adrian.ratiu@ni.com>
-	<394DAAF7-103E-46D8-8495-F4209BE5857C@gmail.com>
-	<560CFA68.2030208@ni.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 1 Oct 2015 06:16:33 -0700
-Message-ID: <CAMKF1srp+P6xMdDDiDPAMAUJE7=2p_CvmPq4uuAZCi=iCcBj-g@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH V2] meta-oe: recipes-devtools: add libubox recipe
+	h=from:to:cc:subject:date:message-id;
+	bh=OTn1cSCPnI+h1gkZuH/L6edXw8FqxdG7pG7zhSPEGTM=;
+	b=u1L9HoZvKKoXoQCFy5pmvvDL6xf12m4q7A4ADoIMi3aotOGvQIb8PRwOFz3prgL//a
+	Y3yjzWGGcxxecaB4bCTNt304xB20b0h11VsoJE8VadqUIJMYUd9m7oqgG5Zjx+RVKANo
+	fFBtNYwdlL89Ngi1/dBaw+JYyo3MBTmVajk8KzJOF0DUE9zyxZisAKwtM09RWjLk4DYF
+	HikIMNnUawKJupORPS6l+ebFO42+bnWdLSWNC+0QcQCO5rcOmMidsYu9qernzTfBQEZR
+	irN6dqO469zz1qeTdsRfKnieuyLbIx2U4rY7+4h9LW7ie/RF1rhZW3QWGAiRkLMuzy0R
+	gahg==
+X-Received: by 10.180.188.169 with SMTP id gb9mr3328511wic.44.1443708132634;
+	Thu, 01 Oct 2015 07:02:12 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	kb9sm6285107wjb.49.2015.10.01.07.02.10
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 01 Oct 2015 07:02:11 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  1 Oct 2015 16:03:08 +0200
+Message-Id: <1443708188-9180-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.6.0
+Subject: [PATCH][master][fido][dizzy][meta-oe] llvm.inc: fix PACKAGES_DYNAMIC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,34 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Oct 2015 13:17:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 01 Oct 2015 14:02:13 -0000
 
-On Thu, Oct 1, 2015 at 2:18 AM, Ioan-Adrian Ratiu <adrian.ratiu@ni.com> wrote:
->> can they be versioned ?
->>
->
-> My initial problem in patch v1 was that I was getting this dev-deps error (I
-> used INSANE_SKIP to suppress it):
->
-> ERROR: QA Issue: libubox rdepends on libubox-dev [dev-deps]
-> ERROR: QA run found fatal errors. Please consider fixing them.
-> ERROR: Function failed: do_package_qa
->
-> Martin J. told me to fix the issue properly for these recipes.
->
-> Now, in v2, I've made it go away by reordering ${PN} in front of ${PN}-dev
-> in PACKAGES and explicitly adding these files to FILES_${PN}. If I use the
-> default PACKAGES variable, or do not add the libraries to FILES_${PN}, that
-> error reappears.
->
-> I don't have a level of knowledge-depth of the OE packaging mechanism to
-> fully understand what is happening here and I couldn't find more info in the
-> docs... So any help on this is very much appreciated :)
+* all dynamically created packages start with libllvm${LLVM_RELEASE}-
+  libllvm${LLVM_RELEASE}-%s-dbg
+  libllvm${LLVM_RELEASE}-%s
+  libllvm${LLVM_RELEASE}-%s-staticdev
 
-if you were to change the package such that the libraries were using
-versioning scheme libfoo.so.X,Y.Z
-all your issues will be solved. Since the default packagers would get
-invoked with right inputs. Second option is to redefine SOLIBSDEV = ""
-and SOLIBS = ".so"
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-core/llvm/llvm.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-core/llvm/llvm.inc
+index 0597be1..04c87aa 100644
+--- a/meta-oe/recipes-core/llvm/llvm.inc
++++ b/meta-oe/recipes-core/llvm/llvm.inc
+@@ -132,7 +132,7 @@ FILES_${PN}-dev = "${bindir}/${LLVM_DIR} \
+                    ${libdir}/${LLVM_DIR}/LLVMHello.so \
+ "
+ 
+-PACKAGES_DYNAMIC = "^libllvm-.*$"
++PACKAGES_DYNAMIC = "^libllvm${LLVM_RELEASE}-.*$"
+ 
+ INSANE_SKIP_${MLPREFIX}libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE} += "dev-so"
+ 
+-- 
+2.6.0
+
 
