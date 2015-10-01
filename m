@@ -1,35 +1,23 @@
-Return-Path: <adrian.ratiu@ni.com>
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F86C73D26
+Return-Path: <maxin.john@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 72F8A77000
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Oct 2015 09:18:47 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	t919IkZm019912 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 1 Oct 2015 04:18:46 -0500
-Received: from [10.113.0.102] ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2015100104184521-875894 ;
-	Thu, 1 Oct 2015 04:18:45 -0500 
+	Thu,  1 Oct 2015 10:56:24 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by fmsmga101.fm.intel.com with ESMTP; 01 Oct 2015 03:56:10 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.17,616,1437462000"; d="scan'208";a="781748806"
+Received: from mbabyjoh-mobl.fi.intel.com ([10.237.72.71])
+	by orsmga001.jf.intel.com with ESMTP; 01 Oct 2015 03:56:09 -0700
+Date: Thu, 1 Oct 2015 09:09:57 +0300
+From: "Maxin B. John" <maxin.john@intel.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1443602914-22199-1-git-send-email-adrian.ratiu@ni.com>
-	<1443611744-32468-1-git-send-email-adrian.ratiu@ni.com>
-	<394DAAF7-103E-46D8-8495-F4209BE5857C@gmail.com>
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-Message-ID: <560CFA68.2030208@ni.com>
-Date: Thu, 1 Oct 2015 12:18:32 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+Message-ID: <20151001060957.GA12230@mbabyjoh-mobl.fi.intel.com>
+References: <17C19527BD855F428F22685986FD58BEA01C37@IRSMSX103.ger.corp.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <394DAAF7-103E-46D8-8495-F4209BE5857C@gmail.com>
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 10/01/2015 04:18:46 AM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 10/01/2015 04:18:46 AM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2015-10-01_04:, , signatures=0
-Subject: Re: [meta-oe][PATCH V2] meta-oe: recipes-devtools: add libubox recipe
+In-Reply-To: <17C19527BD855F428F22685986FD58BEA01C37@IRSMSX103.ger.corp.intel.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-java] Commit duplication
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,101 +31,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Oct 2015 09:18:48 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 01 Oct 2015 10:56:29 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 30.09.2015 18:24, Khem Raj wrote:
->
->> On Sep 30, 2015, at 4:15 AM, Ioan-Adrian Ratiu <adrian.ratiu@ni.com> wro=
-te:
->>
->> libubox contains C utility functions used by OpenWrt projects
->>
->> Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
->> ---
->> meta-oe/recipes-devtools/libubox/libubox=5Fgit.bb | 32 +++++++++++++++++=
-++++++++
->> 1 file changed, 32 insertions(+)
->> create mode 100644 meta-oe/recipes-devtools/libubox/libubox=5Fgit.bb
->>
->> diff --git a/meta-oe/recipes-devtools/libubox/libubox=5Fgit.bb b/meta-oe=
-/recipes-devtools/libubox/libubox=5Fgit.bb
->> new file mode 100644
->> index 0000000..4be3ac1
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/libubox/libubox=5Fgit.bb
->> @@ -0,0 +1,32 @@
->> +DESCRIPTION =3D "C utility functions for OpenWrt"
->> +SECTION =3D "libs"
->> +LICENSE =3D "libubox-custom-license=94
->
-> where is the license file ?
+Hi Erkka,
+
+On Wed, Sep 23, 2015 at 08:37:40AM +0000, Kaaria, Erkka wrote:
+> Hi,
+> 
+> There seem to have been a bad merge commit made December 17 2014 (http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?id=12a0b10b35b1829eec11ea653af53d127a8b6fd1). This commit introduced duplicate commits into the git history (for example, http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?id=8042dd1f8e3ccee2ddb31e792e3f88c6e2583847 and http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?id=7b66b4940804b72150b33248b16b582ae6a48751). These duplications are causing issues with certain tools.
 >
 
-There is no global license file, only the license headers specified per=20
-files, of which I tried to list all the unique ones in the=20
-LIC=5FFILES=5FCHKSUM. I'm still at a loss what to put in the LICENSE=20
-variable. Any suggestions?
+Yes, those commits looks really weird. However, fixing those commits 
+to make it work with tools like "combo-layer" might require some git 
+related work and a "force push".
 
->> +LIC=5FFILES=5FCHKSUM =3D "\
->> +    file://avl.c;endline=3D39;md5=3D00810155fed3d604816ec5814523d60a \
->> +    file://avl-cmp.c;endline=3D15;md5=3D1603e6094b432a5f3f320877a06f41b=
-5 \
->> +    file://base64.c;endline=3D61;md5=3D51fdff010d45b0086ac0a6e035693dc0=
- \
->> +    file://blobmsg.c;endline=3D15;md5=3D7ed64c1570e8c9b46c4fc6fbd16c489=
-e \
->> +    file://list.h;endline=3D28;md5=3D2d5f5475fbd0f08741354c5a99c2e983 \
->> +    file://md5.h;endline=3D39;md5=3D048bf9f68963c207a0c2b3a94c9d2aaa \
->> +    file://md5.c;endline=3D51;md5=3D0a448eea0bcbc89e3c7e6608f2d119a0 \
->> +    file://usock.h;endline=3D18;md5=3Df0dfdc8de858e66d66d74036611bba14 \
->> +"
->> +
->> +PACKAGES =3D "${PN} ${PN}-dbg ${PN}-dev ${PN}-staticdev=94
->
-> why override default PACKAGES ?
->
+Would that be acceptable for all to do a force push on the upstream 
+repository ?
 
-This is related with the issue below, please see my explanation there.
-
->> +
->> +DEPENDS =3D "json-c"
->> +
->> +SRC=5FURI =3D "git://git.openwrt.org/project/libubox.git"
->> +
->> +SRCREV =3D "136a5196266d03d537f822c4e67d2fde2ed59505"
->> +
->> +S =3D "${WORKDIR}/git"
->> +
->> +inherit cmake
->> +
->> +EXTRA=5FOECMAKE =3D "-DBUILD=5FEXAMPLES=3DOFF -DBUILD=5FLUA=3DOFF"
->> +
->> +FILES=5F${PN} +=3D "\
->> +    ${libdir}/libubox.so \
->> +    ${libdir}/libblobmsg=5Fjson.so \
->
-> can they be versioned ?
->
-
-My initial problem in patch v1 was that I was getting this dev-deps=20
-error (I used INSANE=5FSKIP to suppress it):
-
-ERROR: QA Issue: libubox rdepends on libubox-dev [dev-deps]
-ERROR: QA run found fatal errors. Please consider fixing them.
-ERROR: Function failed: do=5Fpackage=5Fqa
-
-Martin J. told me to fix the issue properly for these recipes.
-
-Now, in v2, I've made it go away by reordering ${PN} in front of=20
-${PN}-dev in PACKAGES and explicitly adding these files to FILES=5F${PN}.=20
-If I use the default PACKAGES variable, or do not add the libraries to=20
-FILES=5F${PN}, that error reappears.
-
-I don't have a level of knowledge-depth of the OE packaging mechanism to=20
-fully understand what is happening here and I couldn't find more info in=20
-the docs... So any help on this is very much appreciated :)
-
-
+Best Regards,
+Maxin
 
