@@ -1,34 +1,20 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f173.google.com (mail-ig0-f173.google.com
-	[209.85.213.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 9900A77012
+Return-Path: <sjl@dent.vctlabs.com>
+Received: from dent.vctlabs.com (dent.vctlabs.com [68.183.110.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 2EEC0770C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Oct 2015 02:29:37 +0000 (UTC)
-Received: by igbkq10 with SMTP id kq10so8490271igb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Oct 2015 19:29:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=xpHrGtJBTQii0Tkcm2g19E01hQh1IoXjM3hm/tVf6Vw=;
-	b=dEuWEKVa+6X3VfdTf4RHP33aEXIsw27LrcqC9pVlqkgjcmTwQAVnX0tBIwGhi6YcBL
-	BQ//v/X/vLoroN805ldYWHTfnQ1iCWaXm3XGOQoyX7KM6nODu3qCX9V8C4I2F02E2cMg
-	ZeysTgYhNHTOhjRmbkHr/25HB3rCvJvnlKFDHuby5tlyhnygFc3ar3PkxO1geEQIBLkq
-	TUXFD4CidzYJ2G5azg+juCfZ2VhxFtpcNyzkG/LjB9HqM3ASsNVlfte2Pq41aDLcTYRO
-	C8iq7/Bpd43DzTByNBiB7Z2Sdz+PGWRwMK4ZNcF8JcLZRvEjo3SB4PzmMoI9ibgkTtwZ
-	hT9g==
-X-Received: by 10.50.55.3 with SMTP id n3mr2063838igp.11.1443752977811; Thu,
-	01 Oct 2015 19:29:37 -0700 (PDT)
+	Fri,  2 Oct 2015 04:25:31 +0000 (UTC)
+Received: by dent.vctlabs.com (Postfix, from userid 1000)
+	id 0B482C0650; Thu,  1 Oct 2015 21:49:48 -0700 (PDT)
+Date: Thu, 1 Oct 2015 21:49:48 -0700
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151002044948.GG23865@dent.vctlabs.com>
+References: <20150718003812.GA18468@dent.vctlabs.com>
+	<20151001150645.GC2403@jama>
 MIME-Version: 1.0
-Received: by 10.107.142.130 with HTTP; Thu, 1 Oct 2015 19:29:08 -0700 (PDT)
-In-Reply-To: <1443713428-8635-9-git-send-email-Martin.Jansa@gmail.com>
-References: <20150918115458.GA11095@jama>
-	<1443713428-8635-1-git-send-email-Martin.Jansa@gmail.com>
-	<1443713428-8635-9-git-send-email-Martin.Jansa@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 1 Oct 2015 19:29:08 -0700
-Message-ID: <CAMKF1sq+tAffSxRenJAX=ecV_F3Vww01Lp80sn+3Wo11ivkvPw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe 09/10] gdal: blacklist, fails to build with gcc-5
+In-Reply-To: <20151001150645.GC2403@jama>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][meta-filesystems][PATCH 1/2] libimobiledevice: remove runtime configure check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,41 +28,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Oct 2015 02:29:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 02 Oct 2015 04:25:36 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, Oct 1, 2015 at 8:30 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb | 5 +++++
->  1 file changed, 5 insertions(+)
->
-> diff --git a/meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb b/meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb
-> index b181b3e..012806a 100644
-> --- a/meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb
-> +++ b/meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb
-> @@ -107,3 +107,8 @@ do_configure_prepend () {
->  }
->
->  FILES_${PN} += "${libdir}/gdalplugins"
-> +
-> +# | gdalserver.c:124:21: error: storage size of 'sHints' isn't known
-> +# |      struct addrinfo sHints;
+On Thu, Oct 01, 2015 at 05:06:45PM +0200, Martin Jansa wrote:
+> On Fri, Jul 17, 2015 at 05:38:12PM -0700, S. Lockwood-Childs wrote:
+> > configure.ac had a runtime check for large file support that got run
+> > on 64-bit architectures, and all runtime checks must go away to be
+> > cross-compile safe.
+> > 
+> > Luckily that runtime check was extraneous, so just remove it;
+> > standard AC_SYS_LARGEFILE macro should be sufficient for figuring out
+> > proper settings to get large file support.
+> > 
+> > Also un-blacklist libimobiledevice, since this problem was the
+> > reason for the blacklist.
+> 
+> There is another issue, probably triggered by switch to gcc-5, are you
+> willing to fix it?
+> 
+> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/libimobiledevice/1.1.4-r0/libimobiledevice-1.1.4/src/afc.c:258: error: undefined reference to 'debug_buffer'
+> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/libimobiledevice/1.1.4-r0/libimobiledevice-1.1.4/src/afc.c:273: error: undefined reference to 'debug_buffer'
+> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/libimobiledevice/1.1.4-r0/libimobiledevice-1.1.4/src/afc.c:247: error: undefined reference to 'debug_buffer'
+> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/libimobiledevice/1.1.4-r0/libimobiledevice-1.1.4/src/afc.c:258: error: undefined reference to 'debug_buffer'
+> | collect2: error: ld returned 1 exit status
+> | make[2]: *** [libimobiledevice.la] Error 1
+> | make[2]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/libimobiledevice/1.1.4-r0/build/src'
+> | make[1]: *** [all-recursive] Error 1
+> | make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/libimobiledevice/1.1.4-r0/build'
+> | make: *** [all] Error 2
+> 
+> otherwise I'll blacklist it again in few days (it was reported in couple world builds already).
 
-this really is due to glibc 2.21 you need the same fix that I did for boringssl
-> +# |                      ^
-> +PNBLACKLIST[gdal] ?= "BROKEN: fails to build with gcc-5"
-
-
-> --
-
-
-
-> 2.6.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Yes, I can take a look this weekend. Thanks for the heads up.
 
