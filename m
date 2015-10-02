@@ -1,36 +1,33 @@
-Return-Path: <h4nn35.work@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id A1B3F770AE
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
+	[209.85.213.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D452770B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Oct 2015 18:02:40 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so2196876wic.0
+	Fri,  2 Oct 2015 02:20:15 +0000 (UTC)
+Received: by igbni9 with SMTP id ni9so8021748igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Oct 2015 11:02:40 -0700 (PDT)
+	Thu, 01 Oct 2015 19:20:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=f4qtnbjlOK8xZdVoD2MSKsNaC6Yoaguz+cMd+3GMG5Y=;
-	b=SoLJWfS5EUGX563rzh7N5ujnNh6/xmxBFT9GYcm2Sy3wIynDuclfU0lmIDWHk8jfJ6
-	T8h7T28svBJ34YTMv7F12aG33kB2d2SFzUR+Xgv9VaW2PzxGVRrd/4nDVT6twyo/gF+P
-	mycDcK2d3m9bbJoDLUYSQmF9C0WlrcrUZuhgIChMWC8KCPtC/oQSUz+D/83vBfeDB5fJ
-	LlkCmpCylk4nAVFN69tGabJts8vyfKX02IpDqczVsSEqsM5JBtJo2/jYh38GlmHf56J5
-	MeRkkeyQ2S0NV+yquQuG2pYP9rSfitG7cB9KpROd3M1UrScX1zcUS60HuNbo8NuniMz2
-	kYVQ==
-X-Received: by 10.194.52.106 with SMTP id s10mr11352718wjo.35.1443722560051;
-	Thu, 01 Oct 2015 11:02:40 -0700 (PDT)
-Received: from lenovobook.localdomain
-	(ipbcc29dfc.dynamic.kabel-deutschland.de. [188.194.157.252])
-	by smtp.googlemail.com with ESMTPSA id
-	gc19sm4335648wic.19.2015.10.01.11.02.38
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 01 Oct 2015 11:02:39 -0700 (PDT)
-From: Johannes Pointner <h4nn35.work@gmail.com>
-X-Google-Original-From: Johannes Pointner <johannes.pointner@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Oct 2015 20:02:38 +0200
-Message-Id: <1443722558-8165-1-git-send-email-johannes.pointner@gmail.com>
-X-Mailer: git-send-email 2.6.0
-Subject: [[PATCH v2][meta-qt5]] maliit-framework-qt5: fixed paths and enabled qt5-inputcontext
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=Oql9TwAh8vITH7eG2BmVcmyUhOutkzdb2+0puNfRBiE=;
+	b=LNowCLIJ+JICImIaqaMlflbIBdBRL9DJ241/LrhHMuDYQBbwRlXMBKtwY2IP8tFMe6
+	n7kGQanb3W/TYaXsMdER/FHtcNh9TWRQ/zMpXk04wv5CC6uvvoeLOCNtATFh5w7Ao9Xr
+	cRudluYUCJR6Atz1NrpcrlGVpseCTZ6z4kRl5FZe/rtH7M98f4uf+yPnSv0scXXzLosn
+	ExgELWM0u0iqDMQ4+O6OdaHj4n4wNVcUy1BEVo0o1Rg10AeFaVK3ann5y0v4XYy3bCpE
+	MPI0c4CQFmlXBw49FGvTV40z8KcDGCMZXB9XuUFyF/HqB73PdPe1B0f4Z0VlDBj3m6El
+	YKVA==
+X-Received: by 10.50.20.67 with SMTP id l3mr1769366ige.75.1443752416024; Thu,
+	01 Oct 2015 19:20:16 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.142.130 with HTTP; Thu, 1 Oct 2015 19:19:46 -0700 (PDT)
+In-Reply-To: <1443713401-8584-1-git-send-email-Martin.Jansa@gmail.com>
+References: <20150918115458.GA11095@jama>
+	<1443713401-8584-1-git-send-email-Martin.Jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 1 Oct 2015 19:19:46 -0700
+Message-ID: <CAMKF1srLz3tEoFTzuNNy8w3PBV9jcMfHS=eQN-eopi1KU6WW3A@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe 1/4] mkvtoolnix: Blacklist, fails to build with gcc-5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,93 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Oct 2015 18:02:41 -0000
+X-List-Received-Date: Fri, 02 Oct 2015 02:20:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-*Fixes paths for qt5 using qmake5_paths variables and enables qt5-inputcontext.
+On Thu, Oct 1, 2015 at 8:29 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>
+> diff --git a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> index dd613b3..d647cec 100644
+> --- a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> +++ b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> @@ -39,3 +39,9 @@ do_compile() {
+>  do_install() {
+>      ${S}/drake install DESTDIR=${D}
+>  }
+> +
+> +# | In file included from src/common/utf8_codecvt_facet.cpp:22:0:
+> +# | src/common/../../lib/boost/utf8_codecvt_facet/utf8_codecvt_facet.cpp:174:5: error: 'int mtx::utf8_codecvt_facet::do_length' is not a static data member of 'struct mtx::utf8_codecvt_facet'
+> +# |      BOOST_CODECVT_DO_LENGTH_CONST std::mbstate_t &,
+> +# |      ^
+> +PNBLACKLIST[mkvtoolnix] ?= "BROKEN: Failx to build with gcc-5"
+> --
 
-Changes in v2:
-- inherit qmake5_paths and use variables from there as Martin suggested
 
-Signed-off-by: Johannes Pointner <johannes.pointner@gmail.com>
----
- recipes-qt/maliit/maliit-framework-qt5_git.bb | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
+Does this patch help
+https://github.com/mbunkus/mkvtoolnix/commit/df0df0f83b2dceb390945c9393621f1c11c466d0
 
-diff --git a/recipes-qt/maliit/maliit-framework-qt5_git.bb b/recipes-qt/maliit/maliit-framework-qt5_git.bb
-index 975892d..62a7209 100644
---- a/recipes-qt/maliit/maliit-framework-qt5_git.bb
-+++ b/recipes-qt/maliit/maliit-framework-qt5_git.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://wiki.maliit.org/Main_Page"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=5c917f6ce94ceb8d8d5e16e2fca5b9ad"
- 
--inherit qmake5
-+inherit qmake5 qmake5_paths
- 
- SRC_URI = "git://github.com/maliit/framework.git;branch=master \
-     file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
-@@ -20,9 +20,6 @@ GTKIMMODULES_PACKAGES = "${PN}-gtk"
- 
- DEPENDS = "qtdeclarative"
- 
--# FIXME: Do we need something like this with qt5?
--#RDEPENDS_${PN} = "qt4-plugin-inputmethod-imsw-multi libqtsvg4"
--
- RRECOMMENDS_${PN} = "maliit-plugins-qt5"
- 
- FILES_${PN} += "\
-@@ -30,24 +27,26 @@ FILES_${PN} += "\
-     ${bindir} \
-     ${datadir}/applications/maliit-server.desktop \
-     ${datadir}/dbus-1 \
-+    ${OE_QMAKE_PATH_PLUGINS}/platforminputcontexts \
- "
- 
- FILES_${PN}-dbg += "\
-     ${libdir}/maliit-framework-tests \
-+    ${OE_QMAKE_PATH_PLUGINS}/platforminputcontexts/.debug \
- "
- 
- FILES_${PN}-dev += "\
-     ${includedir}/maliit \
-     ${libdir}/pkgconfig \
--    ${libdir}/qt5/mkspecs \
-+    ${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs \
- "
- 
- EXTRA_QMAKEVARS_PRE = "\
--    PREFIX=${prefix} \
--    LIBDIR=${libdir} \
--    DATADIR=${datadir} \
--    QT_IM_PLUGIN_PATH=${libdir}/qt4/plugins/inputmethods \
--    MALIIT_INSTALL_PRF=${QMAKE_MKSPEC_PATH}/mkspecs/features \
-+    PREFIX=${OE_QMAKE_PATH_PREFIX} \
-+    LIBDIR=${OE_QMAKE_PATH_LIBS} \
-+    DATADIR=${OE_QMAKE_PATH_DATA} \
-+    QT_INSTALL_PLUGINS=${OE_QMAKE_PATH_PLUGINS} \
-+    MALIIT_INSTALL_PRF=${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/features \
-     SCHEMADIR=${sysconfdir}/gconf/schemas \
-     CONFIG+=disable-gconf \
-     CONFIG+=disable-gtk-cache-update \
-@@ -56,14 +55,15 @@ EXTRA_QMAKEVARS_PRE = "\
-     CONFIG+=nodoc \
-     CONFIG+=noxcb \
-     CONFIG+=enable-dbus-activation \
-+    CONFIG+=qt5-inputcontext \
- "
- 
- EXTRA_OEMAKE += "INSTALL_ROOT=${D}"
- 
- do_install_append() {
-     #Fix absolute paths
--    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${libdir}${QT_DIR_NAME}/mkspecs/features/maliit-framework.prf
--    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${libdir}${QT_DIR_NAME}/mkspecs/features/maliit-plugins.prf
-+    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/features/maliit-framework.prf
-+    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/features/maliit-plugins.prf
- 
-     install -d ${D}${datadir}/applications
-     install -m 644 ${WORKDIR}/maliit-server.desktop ${D}${datadir}/applications
--- 
-2.6.0
 
+> 2.6.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
