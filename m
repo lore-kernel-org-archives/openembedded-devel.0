@@ -1,44 +1,47 @@
 Return-Path: <mbc@koumoul.net>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E10B77083
+Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id E7B4C77083
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Oct 2015 20:31:31 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so73164917wic.0
+	Sat,  3 Oct 2015 20:32:41 +0000 (UTC)
+Received: by ioii196 with SMTP id i196so151462532ioi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Oct 2015 13:31:32 -0700 (PDT)
+	Sat, 03 Oct 2015 13:32:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=c5p3cWjMwLmJzNNFtc2TSotrdRz/o83VgBEhxMp8JeY=;
-	b=jrPIopgSrJ34g1D+4MXezD68H1gJmVISnuGXzWzv2NZgMJFaUzdV/DjjK+us9UQjXe
-	ZSa1Cle+jV7Zg8mzGICkry5H6NdpMY0ckwkXLcvY16z7AqpvIItnf1bdYKfa5/4WJZS5
-	enopzl6psFsxDthGucltpfW/5hppwluNn9iXc=
+	h=mime-version:reply-to:sender:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=1gHwfXIufHQ/8fygOekKaXxxxA5ZgI49O1ByQ6V4aRw=;
+	b=PjXhz6pWwZiGAIvwRHDBSwRMoKPXojkaFqwk/f+ye5LUcG+ntd25WnBRHWAVX7Jzic
+	4pDlqvLnPqjB8XbhZXvIf1OeybqkFe2vsxXUTxjE/tqwJKTo+r8TEka9yo1/ZqXYIy3a
+	GajaxlTlUXlDC7d8n5LHU8idyTBvc98BxNx7g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=c5p3cWjMwLmJzNNFtc2TSotrdRz/o83VgBEhxMp8JeY=;
-	b=Hh+EnEHdsj9BTJhbImIbI1F5CtwgJju2EyUNuTQtir3eORdeHFfTdPgmGpnpXB7wUH
-	KKd15Tr11wS8X1LT3Ee58kUVZC9svhQSRRtIpjhrPPMBRdgC7j8QsUlOXMWnYGFvdy4t
-	JgSmG1vbZZCAwlmiLYdBl1cvnxW4/BeEn4vBYSIiOO3fMb0/nX8m/DCL0NEF2HN8beIO
-	qNW/u2lvzRbtRZyWx+TesifrB/oIECoIq9rUh89bFK8S/AvHQTlc2JRfQEi4PJlQw4Ju
-	9IBJckKi1CQIVDj0FAM28PPM/mpR8J24cY9xt2XzK85J2N90P5QRWy1kKoiBGzWliQ8I
-	wpBw==
-X-Gm-Message-State: ALoCoQnqyNsPpoeH5sB/ZQ44pNJ83NYaX8ZK/bZ+QWkuhlPfXUp83Jzknj8VVUrFQiP1GvgH49Cg
-X-Received: by 10.180.8.132 with SMTP id r4mr4198015wia.70.1443904292047;
-	Sat, 03 Oct 2015 13:31:32 -0700 (PDT)
-Received: from localhost.localdomain
-	(ARennes-655-1-187-70.w2-13.abo.wanadoo.fr. [2.13.130.70])
-	by smtp.gmail.com with ESMTPSA id
-	gl4sm18074603wjb.29.2015.10.03.13.31.31
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 03 Oct 2015 13:31:31 -0700 (PDT)
-Sender: "Manuel Bachmann [ IoT.bzh ]" <mbc@koumoul.net>
+	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=1gHwfXIufHQ/8fygOekKaXxxxA5ZgI49O1ByQ6V4aRw=;
+	b=c/arOsajDb3dd68GjG5v3cwwp94CGURMCUwf1eOs9neeLrXS1BJjTjdu1TbC9DWlPc
+	hUjS+FkfSRRcDmP5tpWu1dQqBZkJ7UOyfweeelb9OKNNY10QpeYcNP3lZXFLJe9/zMx9
+	U5LlHxz2dFAtQNmaus+7dZ/ajCMM1pUKvOHVQ7V/qd02zA5nkCyGYERpZc6uQytCH8Dv
+	f8FSybE//m/X+6aO/Uxgxc303ua1zQ9jQ76WkfOBwYo6qzX9KL5va3EEae6EpeF/V81b
+	IUgwFpwMRRVWszyvvhwZBfGJkOy/nBGJ5yaqhgSH7aGjsQWNnxb8AnqsbDjjQaYlDi2F
+	akeA==
+X-Gm-Message-State: ALoCoQnoW47amJNldGwcfpzczwECpnRcmDKb9eYJvblQxT95UcU3WY0Yq6qeY0z3Ay91HFXXeAy/
+MIME-Version: 1.0
+X-Received: by 10.107.138.231 with SMTP id c100mr20693229ioj.87.1443904361709; 
+	Sat, 03 Oct 2015 13:32:41 -0700 (PDT)
+Sender: mbc@koumoul.net
+Received: by 10.79.111.6 with HTTP; Sat, 3 Oct 2015 13:32:41 -0700 (PDT)
+X-Originating-IP: [2.13.130.70]
+In-Reply-To: <CA+chaQeWM15GkaVGGWsn_XYHVfBAV_f4DmzPkA7DZGnHvC7A-A@mail.gmail.com>
+References: <1443890451-20749-1-git-send-email-manuel.bachmann@iot.bzh>
+	<CA+chaQeWM15GkaVGGWsn_XYHVfBAV_f4DmzPkA7DZGnHvC7A-A@mail.gmail.com>
+Date: Sat, 3 Oct 2015 22:32:41 +0200
+X-Google-Sender-Auth: _jHfOsUXN8kxRUS_IkT8Y5Hy5fo
+Message-ID: <CANTDXNecZ0BeQjMLPoQyK47zXeCKs=5RU_pb7mvOY_OQBdejzw@mail.gmail.com>
 From: Manuel Bachmann <manuel.bachmann@iot.bzh>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  3 Oct 2015 22:36:02 +0200
-Message-Id: <1443904562-21819-1-git-send-email-manuel.bachmann@iot.bzh>
-X-Mailer: git-send-email 1.8.3.1
-Subject: [PATCH 3/3][meta-multimedia] rygel: Add recipe
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH][meta-multimedia] mkvtoolnix: fix Boost 1.58 build, update to 7.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,65 +55,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Oct 2015 20:31:34 -0000
+X-List-Received-Date: Sat, 03 Oct 2015 20:32:42 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Rygel is a UPnP Audio-Video media server, that allows to
-share media files to other devices. It can also become a
-MediaRenderer controlled by UPnP or DLNA Controllers.
+Thanks Martin, will do and send a v2.
 
-Rygel makes use of the GStreamer library to recognize and
-index media files. UPnp clients will then be able to browse
-through them with the aid of metadata (artist, date...).
+Regards,
 
-(we do not propose to build without GStreamer support,
-because then if cannot parse any actual media file, and
-this is pointless)
+*Manuel Bachmann, Graphics Engineer www.iot.bzh <http://iot.bzh> *
 
-Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
----
- meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb     | 32 ++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
- create mode 100644 meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
 
-diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
-new file mode 100644
-index 0000000..e118901
---- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
-@@ -0,0 +1,32 @@
-+SUMMARY = "A UPnP AV media server and renderer"
-+DESCRIPTION = "Rygel is a home media solution (UPnP AV MediaServer) that \
-+allow you to easily share audio, video and pictures to other devices. \
-+Additionally, media player software may use Rygel to become a MediaRenderer \
-+that may be controlled remotely by a UPnP or DLNA Controller."
-+
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-+                    file://src/rygel/rygel-main.vala;endline=25;md5=a4cce4d389da1c1638fe68d07ae9d811"
-+
-+DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 libmediaart-2.0"
-+RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback"
-+
-+GNOME_COMPRESS_TYPE = "xz"
-+SRC_URI[archive.md5sum] = "f182d54913a528bb5b4fb2f291aca0fc"
-+SRC_URI[archive.sha256sum] = "390740609e34399b886ddb9a8f7eca25055ad72048dfdd869edf02999b1e1d8f"
-+
-+inherit gnomebase
-+
-+EXTRA_OECONF = "--disable-introspection --disable-tracker-plugin --with-media-engine=gstreamer"
-+
-+PACKAGECONFIG ?= "gtk+3"
-+PACKAGECONFIG[gtk+3] = ",--without-ui,gtk+3"
-+
-+do_install_append() {
-+       rm -f ${D}/${libdir}/rygel-2.6/engines/*.la
-+       rm -f ${D}/${libdir}/rygel-2.6/plugins/*.la
-+       rm -rf ${D}/${datadir}/vala
-+}
-+
-+FILES_${PN} += "${libdir}/rygel-2.6 ${datadir}/dbus-1 ${datadir}/icons"
-+FILES_${PN}-dbg += "${libdir}/rygel-2.6/engines/.debug ${libdir}/rygel-2.6/plugins/.debug"
--- 
-1.8.3.1
+2015-10-03 22:00 GMT+02:00 Martin Jansa <martin.jansa@gmail.com>:
 
+> List all submodules in SRC_URI, we shouldn't bypass bitbake fetcher in
+> do_configure.
+>
+> On Sat, Oct 3, 2015 at 6:40 PM, Manuel Bachmann <manuel.bachmann@iot.bzh>
+> wrote:
+>
+> > mkvtoolnix does not compile with newest Boost 1.58, mostly
+> > due to the following bugs :
+> > https://github.com/mbunkus/mkvtoolnix/issues/1172
+> > https://github.com/mbunkus/mkvtoolnix/issues/1176
+> >
+> > Update to the version immediately subsequent to their
+> > fixes, and adapt configure steps accordingly.
+> >
+> > Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
+> > ---
+> >  meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb | 8 +++++---
+> >  1 file changed, 5 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> > b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> > index dd613b3..223b4ed 100644
+> > --- a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> > +++ b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> > @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM =
+> > "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> >
+> >  DEPENDS = "curl boost expat zlib libebml libmatroska libogg libvorbis
+> > bzip2 lzo file ruby-native"
+> >
+> > -PV = "7.1.0+git${SRCPV}"
+> > -SRCREV = "0c89ff941bfdd9f3378312f293a84f13cf3e2a96"
+> > +PV = "7.9.0+git${SRCPV}"
+> > +SRCREV = "1a8b23b1e82ed180a5aaeb43537f2426be252985"
+> >  SRC_URI = "git://github.com/mbunkus/mkvtoolnix.git"
+> >
+> >  S = "${WORKDIR}/git"
+> > @@ -28,7 +28,9 @@ EXTRA_OECONF = " --with-boost-libdir=${STAGING_LIBDIR}
+> \
+> >
+> >  # remove some hardcoded searchpaths
+> >  do_configure_prepend() {
+> > -    sed -i -e s:/usr/local/lib:${STAGING_LIBDIR}:g -e
+> > s:/usr/local/include:${STAGING_INCDIR}:g ${S}/ac/ebml.m4
+> > +    sed -i -e s:/usr/local/lib:${STAGING_LIBDIR}:g -e
+> > s:/usr/local/include:${STAGING_INCDIR}:g ${S}/ac/qt5.m4
+> > +    git submodule init
+> > +    git submodule update
+> >  }
+> >
+> >  # Yeah, no makefile
+> > --
+> > 1.8.3.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
