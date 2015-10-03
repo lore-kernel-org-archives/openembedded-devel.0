@@ -1,36 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
-	[209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 3982777097
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 3BE5277043
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Oct 2015 19:55:32 +0000 (UTC)
-Received: by pacfv12 with SMTP id fv12so139717213pac.2
+	Sat,  3 Oct 2015 20:00:50 +0000 (UTC)
+Received: by wicgb1 with SMTP id gb1so72018613wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Oct 2015 12:55:32 -0700 (PDT)
+	Sat, 03 Oct 2015 13:00:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=JiHfWQ6oMCr3H/kHEGgeTuYoBW4XCmuaIGGKBxz8+YI=;
-	b=boeVE6CDY9OpN6bh1Z475QOfM+dWNs/lw0i+iHLjcrHtkUWslh/V+BypBEuWthYevt
-	o93C2fgRilkiv3DLj1jDZAtQufF2/4+DxV0ksY5dNDdnSU5gtH14uGPIuQqTMAH//CNd
-	Hh+frOzCFFuimlCyNgux9dKprIPjItFYARzsTuyiw23LGfaYmkeK1Hbhh5w08gP7ZWkh
-	B3M5N/xFOsQLhzbQs7GV1+kHpcSeGZdL10n/N82YeoU0JrsNihP38kXSo3o5OYWCysUu
-	0KMi2Bv7WM5JO3KV5S+ESoWZx2GbMCSiDAR2+xWzf30Bd/5/6wHdnjzz7La4e8OchZ/W
-	vZyw==
-X-Received: by 10.68.206.40 with SMTP id ll8mr28952894pbc.62.1443902132730;
-	Sat, 03 Oct 2015 12:55:32 -0700 (PDT)
-Received: from imac.hsd1.ca.comcast.net (c-24-130-225-169.hsd1.ca.comcast.net.
-	[24.130.225.169]) by smtp.gmail.com with ESMTPSA id
-	tp6sm18820319pbc.81.2015.10.03.12.55.31
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 03 Oct 2015 12:55:32 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  3 Oct 2015 12:55:25 -0700
-Message-Id: <1443902125-30247-2-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.6.0
-In-Reply-To: <1443902125-30247-1-git-send-email-raj.khem@gmail.com>
-References: <1443902125-30247-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 2/2] libnetfilter: Avoid using VLAs
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=+2JvDLb4SOMmSHUjCtOwG+4IRvJgVnj9NJS7Rd69EiY=;
+	b=WElk42EmzNO1LMiVEGYgYEHTqu4RMu+pmBU58CXsX4SqRYo8cGZEJVZJNAB3EbRylQ
+	kVJkFvxRc8+ichdmLBBWEmd3OSxtSPEww1T09aYKHOEUMhTxVBEOOoKsPNtq6bN5Pbri
+	0GkI4l58rpUQnzBCv+1cOConBjxto+6FPC4OReztLPaRpdkHjNYXLxTBCMAzxBZCOOrp
+	YE4X/14syQzVyDv/oGOKZz4iNjmkMMb+noHA2r52/RAbU7W7dlPX6X34/IXSPtBNE1M8
+	I5qAY8/PrXUk173stcGy0QPOUUPGy6bntxMJDBxg4IWTZ3wNvaJx1q7kvjbok5z8QPvZ
+	MgUg==
+MIME-Version: 1.0
+X-Received: by 10.194.62.112 with SMTP id x16mr22063665wjr.20.1443902450107;
+	Sat, 03 Oct 2015 13:00:50 -0700 (PDT)
+Received: by 10.194.159.102 with HTTP; Sat, 3 Oct 2015 13:00:50 -0700 (PDT)
+In-Reply-To: <1443890451-20749-1-git-send-email-manuel.bachmann@iot.bzh>
+References: <1443890451-20749-1-git-send-email-manuel.bachmann@iot.bzh>
+Date: Sat, 3 Oct 2015 22:00:50 +0200
+Message-ID: <CA+chaQeWM15GkaVGGWsn_XYHVfBAV_f4DmzPkA7DZGnHvC7A-A@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH][meta-multimedia] mkvtoolnix: fix Boost 1.58 build, update to 7.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,132 +41,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Oct 2015 19:55:33 -0000
+X-List-Received-Date: Sat, 03 Oct 2015 20:00:53 -0000
+Content-Type: text/plain; charset=UTF-8
 
-VLAs in non POD data types like structures and unions
-are not a standard feature of C language and gcc has specific
-implementation which other compilers dont have specifically clang, and
-they refuse to implement it since its non standard.
+List all submodules in SRC_URI, we shouldn't bypass bitbake fetcher in
+do_configure.
 
-Change-Id: I6ae24adb455bf262fe9406a1c8e3b3a4a0cf77d4
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../libnetfilter/files/replace-VLAs-in-union.patch | 89 ++++++++++++++++++++++
- .../libnetfilter/libnetfilter-conntrack_1.0.4.bb   |  4 +-
- 2 files changed, 92 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch
+On Sat, Oct 3, 2015 at 6:40 PM, Manuel Bachmann <manuel.bachmann@iot.bzh>
+wrote:
 
-diff --git a/meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch b/meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch
-new file mode 100644
-index 0000000..16e4af4
---- /dev/null
-+++ b/meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch
-@@ -0,0 +1,89 @@
-+VLAs in structs and unions (non-PODs) is unsupported in non-gcc compilers
-+therefore convert it to not use VLAs instead use fixed arrays
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Upstream-Status: Pending
-+Index: libnetfilter_conntrack-1.0.4/src/conntrack/api.c
-+===================================================================
-+--- libnetfilter_conntrack-1.0.4.orig/src/conntrack/api.c
-++++ libnetfilter_conntrack-1.0.4/src/conntrack/api.c
-+@@ -954,16 +954,15 @@ int nfct_query(struct nfct_handle *h,
-+ 	       const enum nf_conntrack_query qt,
-+ 	       const void *data)
-+ {
-+-	size_t size = 4096;	/* enough for now */
-+ 	union {
-+-		char buffer[size];
-++		char buffer[4096];
-+ 		struct nfnlhdr req;
-+ 	} u;
-+ 
-+ 	assert(h != NULL);
-+ 	assert(data != NULL);
-+ 
-+-	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, size) == -1)
-++	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, 4096) == -1)
-+ 		return -1;
-+ 
-+ 	return nfnl_query(h->nfnlh, &u.req.nlh);
-+@@ -986,16 +985,15 @@ int nfct_send(struct nfct_handle *h,
-+ 	      const enum nf_conntrack_query qt,
-+ 	      const void *data)
-+ {
-+-	size_t size = 4096;	/* enough for now */
-+ 	union {
-+-		char buffer[size];
-++		char buffer[4096];
-+ 		struct nfnlhdr req;
-+ 	} u;
-+ 
-+ 	assert(h != NULL);
-+ 	assert(data != NULL);
-+ 
-+-	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, size) == -1)
-++	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, 4096) == -1)
-+ 		return -1;
-+ 
-+ 	return nfnl_send(h->nfnlh, &u.req.nlh);
-+Index: libnetfilter_conntrack-1.0.4/src/expect/api.c
-+===================================================================
-+--- libnetfilter_conntrack-1.0.4.orig/src/expect/api.c
-++++ libnetfilter_conntrack-1.0.4/src/expect/api.c
-+@@ -669,16 +669,15 @@ int nfexp_query(struct nfct_handle *h,
-+ 	        const enum nf_conntrack_query qt,
-+ 	        const void *data)
-+ {
-+-	size_t size = 4096;	/* enough for now */
-+ 	union {
-+-		char buffer[size];
-++		char buffer[4096];
-+ 		struct nfnlhdr req;
-+ 	} u;
-+ 
-+ 	assert(h != NULL);
-+ 	assert(data != NULL);
-+ 
-+-	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, size) == -1)
-++	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, 4096) == -1)
-+ 		return -1;
-+ 
-+ 	return nfnl_query(h->nfnlh, &u.req.nlh);
-+@@ -701,16 +700,15 @@ int nfexp_send(struct nfct_handle *h,
-+ 	       const enum nf_conntrack_query qt,
-+ 	       const void *data)
-+ {
-+-	size_t size = 4096;	/* enough for now */
-+ 	union {
-+-		char buffer[size];
-++		char buffer[4096];
-+ 		struct nfnlhdr req;
-+ 	} u;
-+ 
-+ 	assert(h != NULL);
-+ 	assert(data != NULL);
-+ 
-+-	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, size) == -1)
-++	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, 4096) == -1)
-+ 		return -1;
-+ 
-+ 	return nfnl_send(h->nfnlh, &u.req.nlh);
-diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
-index c1df1cb..ecbc86b 100644
---- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
-+++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
-@@ -6,7 +6,9 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- DEPENDS = "libnfnetlink libmnl"
- 
--SRC_URI = "http://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2;name=tar"
-+SRC_URI = "http://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2;name=tar \
-+           file://replace-VLAs-in-union.patch \
-+"
- SRC_URI[tar.md5sum] = "18cf80c4b339a3285e78822dbd4f08d7"
- SRC_URI[tar.sha256sum] = "d9ec4a3caf49417f2b0a2d8d44249133e8c3ec78c757b7eb8c273f1cb6929c7d"
- 
--- 
-2.6.0
-
+> mkvtoolnix does not compile with newest Boost 1.58, mostly
+> due to the following bugs :
+> https://github.com/mbunkus/mkvtoolnix/issues/1172
+> https://github.com/mbunkus/mkvtoolnix/issues/1176
+>
+> Update to the version immediately subsequent to their
+> fixes, and adapt configure steps accordingly.
+>
+> Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
+> ---
+>  meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> index dd613b3..223b4ed 100644
+> --- a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> +++ b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM =
+> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>
+>  DEPENDS = "curl boost expat zlib libebml libmatroska libogg libvorbis
+> bzip2 lzo file ruby-native"
+>
+> -PV = "7.1.0+git${SRCPV}"
+> -SRCREV = "0c89ff941bfdd9f3378312f293a84f13cf3e2a96"
+> +PV = "7.9.0+git${SRCPV}"
+> +SRCREV = "1a8b23b1e82ed180a5aaeb43537f2426be252985"
+>  SRC_URI = "git://github.com/mbunkus/mkvtoolnix.git"
+>
+>  S = "${WORKDIR}/git"
+> @@ -28,7 +28,9 @@ EXTRA_OECONF = " --with-boost-libdir=${STAGING_LIBDIR} \
+>
+>  # remove some hardcoded searchpaths
+>  do_configure_prepend() {
+> -    sed -i -e s:/usr/local/lib:${STAGING_LIBDIR}:g -e
+> s:/usr/local/include:${STAGING_INCDIR}:g ${S}/ac/ebml.m4
+> +    sed -i -e s:/usr/local/lib:${STAGING_LIBDIR}:g -e
+> s:/usr/local/include:${STAGING_INCDIR}:g ${S}/ac/qt5.m4
+> +    git submodule init
+> +    git submodule update
+>  }
+>
+>  # Yeah, no makefile
+> --
+> 1.8.3.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
