@@ -1,33 +1,43 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BE5277043
+Return-Path: <mbc@koumoul.net>
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 755807707C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Oct 2015 20:00:50 +0000 (UTC)
-Received: by wicgb1 with SMTP id gb1so72018613wic.1
+	Sat,  3 Oct 2015 20:30:43 +0000 (UTC)
+Received: by wicge5 with SMTP id ge5so73061237wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Oct 2015 13:00:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=+2JvDLb4SOMmSHUjCtOwG+4IRvJgVnj9NJS7Rd69EiY=;
-	b=WElk42EmzNO1LMiVEGYgYEHTqu4RMu+pmBU58CXsX4SqRYo8cGZEJVZJNAB3EbRylQ
-	kVJkFvxRc8+ichdmLBBWEmd3OSxtSPEww1T09aYKHOEUMhTxVBEOOoKsPNtq6bN5Pbri
-	0GkI4l58rpUQnzBCv+1cOConBjxto+6FPC4OReztLPaRpdkHjNYXLxTBCMAzxBZCOOrp
-	YE4X/14syQzVyDv/oGOKZz4iNjmkMMb+noHA2r52/RAbU7W7dlPX6X34/IXSPtBNE1M8
-	I5qAY8/PrXUk173stcGy0QPOUUPGy6bntxMJDBxg4IWTZ3wNvaJx1q7kvjbok5z8QPvZ
-	MgUg==
-MIME-Version: 1.0
-X-Received: by 10.194.62.112 with SMTP id x16mr22063665wjr.20.1443902450107;
-	Sat, 03 Oct 2015 13:00:50 -0700 (PDT)
-Received: by 10.194.159.102 with HTTP; Sat, 3 Oct 2015 13:00:50 -0700 (PDT)
-In-Reply-To: <1443890451-20749-1-git-send-email-manuel.bachmann@iot.bzh>
-References: <1443890451-20749-1-git-send-email-manuel.bachmann@iot.bzh>
-Date: Sat, 3 Oct 2015 22:00:50 +0200
-Message-ID: <CA+chaQeWM15GkaVGGWsn_XYHVfBAV_f4DmzPkA7DZGnHvC7A-A@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH][meta-multimedia] mkvtoolnix: fix Boost 1.58 build, update to 7.9.0
+	Sat, 03 Oct 2015 13:30:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=Tldz06K5v+1SichMXFoC8GpkFq4C5oyN6RvVURXmdMY=;
+	b=QdkGtO6nh+YxusB/3FjukzIhjb2sv0gPno4LnHVD5Y9tIWxRThvxSqI+KrORb0bdSj
+	hgp0qqRIPlR01F9+1NoyzZ6y5yN4zCKis9VgzN26JfSibprQddoeQ0jPcigDtsLCFOvZ
+	tQG1wlxlGh9tWAFhkkz0BlvYq1NJXPYX2URP8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=Tldz06K5v+1SichMXFoC8GpkFq4C5oyN6RvVURXmdMY=;
+	b=PHnwWAlhI7M/42QK0sjtEOp09HuLEOEDiKmQxgMJjq6gDoomDpc0e5ptwkEle0+h/a
+	xK8JSBWU4ZdZqqhlhXkshr97Cbr0xTAI/RgKkk0EaPu3B3r4PuukABrnmB9zhSE7yRpc
+	RHKGerX9cIJL1qTGR2rA/vbuAntCPbFv+o9N7UeXqFAL6PoXmxWWNT5KmAsT7YSFfO8r
+	JRHbtTu8MYFOMOcbxj4VWMgHWcTvRyk3/CydcBJk7tx7Pz/XyHHoELF4ILU3ogvScNhv
+	UKeKj1TuTPgbU10X1c/UXwLdWiJZ6NNR6EIX0NV0El8loPAAyebEXzrmY07E4chZBWiq
+	5eWA==
+X-Gm-Message-State: ALoCoQmOKkc3B2HiNvd9yB+ICED+3Ksl4JgC5WfxBkna6qeOu+9yVRxgj4tGGqPKrollxgo/VaY8
+X-Received: by 10.180.10.197 with SMTP id k5mr3579971wib.22.1443904243498;
+	Sat, 03 Oct 2015 13:30:43 -0700 (PDT)
+Received: from localhost.localdomain
+	(ARennes-655-1-187-70.w2-13.abo.wanadoo.fr. [2.13.130.70])
+	by smtp.gmail.com with ESMTPSA id o10sm5799799wia.4.2015.10.03.13.30.42
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 03 Oct 2015 13:30:42 -0700 (PDT)
+Sender: "Manuel Bachmann [ IoT.bzh ]" <mbc@koumoul.net>
+From: Manuel Bachmann <manuel.bachmann@iot.bzh>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  3 Oct 2015 22:35:10 +0200
+Message-Id: <1443904510-21743-1-git-send-email-manuel.bachmann@iot.bzh>
+X-Mailer: git-send-email 1.8.3.1
+Subject: [PATCH 1/3][meta-multimedia] libmediaart-2.0: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,66 +51,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Oct 2015 20:00:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 03 Oct 2015 20:30:46 -0000
 
-List all submodules in SRC_URI, we shouldn't bypass bitbake fetcher in
-do_configure.
+libmediaart 1.9.0 is a new version of the libmediaart
+library, API-incompatible with the older 0.x one.
 
-On Sat, Oct 3, 2015 at 6:40 PM, Manuel Bachmann <manuel.bachmann@iot.bzh>
-wrote:
+libmediaart-2.0 is needed to build Rygel, but as the 1.0
+version is still needed, let us build them both if required.
 
-> mkvtoolnix does not compile with newest Boost 1.58, mostly
-> due to the following bugs :
-> https://github.com/mbunkus/mkvtoolnix/issues/1172
-> https://github.com/mbunkus/mkvtoolnix/issues/1176
->
-> Update to the version immediately subsequent to their
-> fixes, and adapt configure steps accordingly.
->
-> Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
-> ---
->  meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
->
-> diff --git a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
-> b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
-> index dd613b3..223b4ed 100644
-> --- a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
-> +++ b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
-> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM =
-> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->
->  DEPENDS = "curl boost expat zlib libebml libmatroska libogg libvorbis
-> bzip2 lzo file ruby-native"
->
-> -PV = "7.1.0+git${SRCPV}"
-> -SRCREV = "0c89ff941bfdd9f3378312f293a84f13cf3e2a96"
-> +PV = "7.9.0+git${SRCPV}"
-> +SRCREV = "1a8b23b1e82ed180a5aaeb43537f2426be252985"
->  SRC_URI = "git://github.com/mbunkus/mkvtoolnix.git"
->
->  S = "${WORKDIR}/git"
-> @@ -28,7 +28,9 @@ EXTRA_OECONF = " --with-boost-libdir=${STAGING_LIBDIR} \
->
->  # remove some hardcoded searchpaths
->  do_configure_prepend() {
-> -    sed -i -e s:/usr/local/lib:${STAGING_LIBDIR}:g -e
-> s:/usr/local/include:${STAGING_INCDIR}:g ${S}/ac/ebml.m4
-> +    sed -i -e s:/usr/local/lib:${STAGING_LIBDIR}:g -e
-> s:/usr/local/include:${STAGING_INCDIR}:g ${S}/ac/qt5.m4
-> +    git submodule init
-> +    git submodule update
->  }
->
->  # Yeah, no makefile
-> --
-> 1.8.3.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
+---
+ meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.0.bb |  7 +++++++
+ meta-multimedia/recipes-support/libmediaart/libmediaart.inc          | 14 ++++++++++++++
+ meta-multimedia/recipes-support/libmediaart/libmediaart_0.7.0.bb     | 14 +-------------
+ 3 files changed, 22 insertions(+), 13 deletions(-)
+ create mode 100644 meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.0.bb
+ create mode 100644 meta-multimedia/recipes-support/libmediaart/libmediaart.inc
+
+diff --git a/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.0.bb b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.0.bb
+new file mode 100644
+index 0000000..44f135a
+--- /dev/null
++++ b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.0.bb
+@@ -0,0 +1,7 @@
++require libmediaart.inc
++
++SRC_URI = "${GNOME_MIRROR}/libmediaart/1.9/libmediaart-${PV}.tar.xz"
++SRC_URI[md5sum] = "0b65d64398d2f3dff89534c9dfffab4f"
++SRC_URI[sha256sum] = "94668adb29d4dc3115b0fd105942ebd5ca6f5f9dbb2afa8a191a73a747dd506f"
++
++S = "${WORKDIR}/libmediaart-${PV}"
+diff --git a/meta-multimedia/recipes-support/libmediaart/libmediaart.inc b/meta-multimedia/recipes-support/libmediaart/libmediaart.inc
+new file mode 100644
+index 0000000..a117e9b
+--- /dev/null
++++ b/meta-multimedia/recipes-support/libmediaart/libmediaart.inc
+@@ -0,0 +1,14 @@
++SUMMARY = "Library tasked with managing, extracting and handling media art caches"
++
++LICENSE = "LGPLv2+ & GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c \
++                    file://libmediaart/extract.c;endline=18;md5=dff2b6328ab067b5baadc135f9876c36 \
++                    file://tests/mediaarttest.c;endline=18;md5=067106eaa1f7a9d918759a096667f18e"
++
++DEPENDS = "glib-2.0 gdk-pixbuf"
++
++GNOME_COMPRESS_TYPE = "xz"
++
++inherit gnomebase gtk-doc
++
++EXTRA_OECONF = "--disable-introspection --disable-qt --enable-gdkpixbuf"
+diff --git a/meta-multimedia/recipes-support/libmediaart/libmediaart_0.7.0.bb b/meta-multimedia/recipes-support/libmediaart/libmediaart_0.7.0.bb
+index ed7f079..eb45974 100644
+--- a/meta-multimedia/recipes-support/libmediaart/libmediaart_0.7.0.bb
++++ b/meta-multimedia/recipes-support/libmediaart/libmediaart_0.7.0.bb
+@@ -1,16 +1,4 @@
+-SUMMARY = "Library tasked with managing, extracting and handling media art caches"
++require libmediaart.inc
+ 
+-LICENSE = "LGPLv2+ & GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c \
+-                    file://libmediaart/extract.c;endline=18;md5=dff2b6328ab067b5baadc135f9876c36 \
+-                    file://tests/mediaarttest.c;endline=18;md5=067106eaa1f7a9d918759a096667f18e"
+-
+-DEPENDS = "glib-2.0 gdk-pixbuf"
+-
+-GNOME_COMPRESS_TYPE = "xz"
+ SRC_URI[archive.md5sum] = "1a44933d4cd0064e3c76d8d0ddacddc9"
+ SRC_URI[archive.sha256sum] = "3a9dffcad862aed7c0921579b93080d694b8a66f3676bfee8037867f653a1cd3"
+-
+-inherit gnomebase gtk-doc
+-
+-EXTRA_OECONF = "--disable-introspection --disable-qt --enable-gdkpixbuf"
+-- 
+1.8.3.1
+
 
