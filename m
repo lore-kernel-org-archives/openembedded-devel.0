@@ -1,36 +1,34 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
-	[209.85.213.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 32F82760F4
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C4C477084
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Oct 2015 18:37:27 +0000 (UTC)
-Received: by igbkq10 with SMTP id kq10so37341308igb.0
+	Sat,  3 Oct 2015 19:55:31 +0000 (UTC)
+Received: by pacex6 with SMTP id ex6so137149772pac.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Oct 2015 11:37:27 -0700 (PDT)
+	Sat, 03 Oct 2015 12:55:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=1vKEaVwf6tgRb+6lVTeSKXAPzKUNutVDvNFaBISfjJM=;
-	b=VG69jLBP2XSEG/ZKxSAL56DhZC1ugN05cqbRESsSjB06WmIUwVcMV64ikSbXf+Pkdc
-	vdkmMbJUeBTKSV4jTFp+6+1tXXzpp+6VlLRr0jdPPmhQ3Efhq8r+fHy8DdpzwQRXqIdZ
-	IFiGfEFDXzdZq92xVEMYNTc/4njRSEeoDV6SLC+LTMLZyR7J7bHiMeI6NPFPRHH7TN8a
-	pg1G7xMP0bk9zsOwJbRWVCcjpjt+yjwj2TzU4QdL0EJcvcpyIXXJJGo03D3ZgtgqjXjo
-	JY9W6RTBwckVCS522gmDYNtuSPK6ZB8bxTad2dTJz5RS/AEvI6f39GPXPSABVreZG4zq
-	AuIQ==
-X-Received: by 10.50.43.170 with SMTP id x10mr3025476igl.68.1443897447352;
-	Sat, 03 Oct 2015 11:37:27 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.100.71 with HTTP; Sat, 3 Oct 2015 11:37:08 -0700 (PDT)
-In-Reply-To: <1443897005-23957-1-git-send-email-andrei.kholodnyi@gmail.com>
-References: <1443897005-23957-1-git-send-email-andrei.kholodnyi@gmail.com>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Sat, 3 Oct 2015 11:37:08 -0700
-X-Google-Sender-Auth: ACiwC1360hEW7bHZZz9iDA-T1Gw
-Message-ID: <CABcZAN=kqUjdKUqvziBkTa=yhVUFvOw-oGL6LQdzgMeUNGqLyw@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] talloc: remove default packages from the packages list since empty
+	h=from:to:cc:subject:date:message-id;
+	bh=Nz0J0bPs0WH7lUpU9u0Z2glt4wiH8eCn+XvHEPUvSbA=;
+	b=hgZrG2akKs5hGsVJR/T276OOKJQfe2MRdhgmPPaMe71Ieyue1rGX1xsSyV4spEBrOF
+	4AqPjuJ5Ls2pqYPmRh+FKyUTLnXefaREgllFONXaFEzta10h9QQLNrup1NuoByBFVcen
+	5ymPeEiN3bSyAjDobiOALmLv4B0az0ab1AIgna1PgyIEt50M0KkFUv+am+D4jCFKDx1B
+	E639RyNOjmTmVwXz561KwGgTuXOosPWjs2iB0yjAti6Osp2anENhpfg6BlNb+j/khphj
+	4eE1TbSARQLC8o3iukV2ikc7kMUupufLNIKzShT4CPsZ4FgQTaofKI6zS1b9Icpd01WW
+	zhVA==
+X-Received: by 10.68.110.165 with SMTP id ib5mr28658251pbb.58.1443902131800;
+	Sat, 03 Oct 2015 12:55:31 -0700 (PDT)
+Received: from imac.hsd1.ca.comcast.net (c-24-130-225-169.hsd1.ca.comcast.net.
+	[24.130.225.169]) by smtp.gmail.com with ESMTPSA id
+	tp6sm18820319pbc.81.2015.10.03.12.55.30
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 03 Oct 2015 12:55:30 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  3 Oct 2015 12:55:24 -0700
+Message-Id: <1443902125-30247-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.6.0
+Subject: [meta-networking][PATCH 1/2] net-snmp: Fix build with gcc5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,50 +42,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Oct 2015 18:37:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 03 Oct 2015 19:55:33 -0000
 
-On Sat, Oct 3, 2015 at 11:30 AM, Andrei Kholodnyi <
-andrei.kholodnyi@gmail.com> wrote:
+Fix errors seen with gcc5
 
-> populate_sdk fails with following message:
-> error: talloc-dev-2.1.1-r0 requires talloc = 2.1.1-r0
->
-> these packages are empty,remove them from the package list
-> ---
->  meta-oe/recipes-support/talloc/talloc_2.1.1.bb | 5 +----
->  1 file changed, 1 insertion(+), 4 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
-> b/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
-> index 89c390f..0c98bb6 100644
-> --- a/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
-> +++ b/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
-> @@ -20,12 +20,9 @@ EXTRA_OECONF += "--disable-rpath \
->                   --with-libiconv=${STAGING_DIR_HOST}${prefix}\
->                  "
->
-> -PACKAGES += "libtalloc libtalloc-dbg libtalloc-dev pytalloc pytalloc-dbg
-> pytalloc-dev"
-> +PACKAGES = "libtalloc libtalloc-dbg libtalloc-dev pytalloc pytalloc-dbg
-> pytalloc-dev"
->
->  #ALLOW_EMPTY_${PN} = "1"
-> -FILES_${PN} = ""
-> -FILES_${PN}-dev = ""
-> -FILES_${PN}-dbg = ""
->
+Change-Id: I9c4361f3a9c25342f5c740263f551c162dce8faf
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...tools.c-Don-t-check-for-return-from-EVP_M.patch | 33 ++++++++++++++++++++++
+ .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb   |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch
 
-Question, why does this use libtalloc as the package names rather than the
-default of talloc? In the common case of the debian bbclass inherited,
-they'll get renamed based on the library soname anyway. Also, overriding
-the PACKAGES list isn't ideal, since it means future changes to the default
-value of PACKAGES will not be picked up here. Also, this packaging is worse
-than default, as it doesn't have the -staticdev package.
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch
+new file mode 100644
+index 0000000..af242fa
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch
+@@ -0,0 +1,33 @@
++From d3027a227bc0f603a5b650d01f97ee1dec515be5 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 18 Sep 2015 00:28:45 -0400
++Subject: [PATCH] snmplib/keytools.c: Don't check for return from
++ EVP_MD_CTX_init()
++
++EVP_MD_CTX_init() API returns void, it fixes errors with new compilers
++
++snmplib/keytools.c: In function 'generate_Ku': error: invalid use of void expression
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++Upstream-Status: Submitted [https://sourceforge.net/p/net-snmp/patches/1317/]
++ snmplib/keytools.c | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/snmplib/keytools.c b/snmplib/keytools.c
++index 0ccb3a6..880fc14 100644
++--- a/snmplib/keytools.c
+++++ b/snmplib/keytools.c
++@@ -153,8 +153,7 @@ generate_Ku(const oid * hashtype, u_int hashtype_len,
++     ctx = EVP_MD_CTX_create();
++ #else
++     ctx = malloc(sizeof(*ctx));
++-    if (!EVP_MD_CTX_init(ctx))
++-        return SNMPERR_GENERR;
+++    EVP_MD_CTX_init(ctx);
++ #endif
++ #ifndef NETSNMP_DISABLE_MD5
++     if (ISTRANSFORM(hashtype, HMACMD5Auth)) {
++-- 
++2.5.2
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+index 431a633..b32d842 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+@@ -20,6 +20,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
+         file://run-ptest \
+         file://dont-return-incompletely-parsed-varbinds.patch \
+         file://0001-config_os_headers-Error-Fix.patch \
++        file://0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch \
+ "
+ SRC_URI[md5sum] = "9f682bd70c717efdd9f15b686d07baee"
+ SRC_URI[sha256sum] = "e8dfc79b6539b71a6ff335746ce63d2da2239062ad41872fff4354cafed07a3e"
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+2.6.0
+
 
