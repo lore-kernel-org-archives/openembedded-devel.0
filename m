@@ -1,46 +1,40 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id CC8BF770C2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B33277097
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Oct 2015 17:15:12 +0000 (UTC)
-Received: by wicgb1 with SMTP id gb1so42090415wic.1
+	Sat,  3 Oct 2015 11:01:35 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so63002176wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Oct 2015 10:15:12 -0700 (PDT)
+	Sat, 03 Oct 2015 04:01:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=l7f3QsODKgxRXHCzUg1O2bdysrkeEykbLCBgo7gNK8g=;
-	b=H1R6sn/c9IX5/uIxpIJcUPWvsNxC2UKu48y0KQsCzDlz1/pBr7a3RFKpPccv9S5jab
-	vNQAKSW0EYtPWp+Xdmk7iKhJtg/W/mtFk8oKSUMx2cIE9lmGQ+OsT3l0hdsQAG2RCuBh
-	q80/3S0zRP/Bv5pnS+gO7psYhzedcftlq8owcbGbEnYg7tl7i+zzGNH3N/x5JdmnXBjN
-	lCu+S+He9hmIOQWSGXJKId5c/wKt7IPulQ7KV+XVSYGMVdi5DA/YmZlRjUxtRlw6Eo1Z
-	as8KXYV6GbVa7g5lWcjkErmCZzId+Fw9KczL2/oJfioQ7jfMELwPK1RgHccDA1MIjTUo
-	QIWw==
-X-Received: by 10.180.37.199 with SMTP id a7mr71778wik.2.1443806112422;
-	Fri, 02 Oct 2015 10:15:12 -0700 (PDT)
-Received: from ernie.muppets.liwing.de (p578b540c.dip0.t-ipconnect.de.
-	[87.139.84.12])
-	by smtp.gmail.com with ESMTPSA id h8sm9339227wib.21.2015.10.02.10.15.11
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 02 Oct 2015 10:15:11 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-From: Jens Rehsack <rehsack@gmail.com>
-In-Reply-To: <CAP9ODKo3wQZqorptjghXrjzTo3jkZj8zPn3-6BbvCvmWM2XuBw@mail.gmail.com>
-Date: Fri, 2 Oct 2015 19:15:10 +0200
-Message-Id: <4D9824F2-501A-4743-950D-DF67E59A4947@gmail.com>
-References: <1440032144-18482-1-git-send-email-vinay.k.awasthi@intel.com>
-	<B399646F8CA055479BEC55F6B065A04A370ABB95@FMSMSX108.amr.corp.intel.com>
-	<CAP9ODKrVXpZ-ZhZ=1SjAdqtrOpD=XO1DJaruGef4OyhT-uDd1w@mail.gmail.com>
-	<B399646F8CA055479BEC55F6B065A04A370ABF6A@FMSMSX108.amr.corp.intel.com>
-	<D8A82570-8C75-4DA8-B884-13747427A3D4@gmail.com>
-	<CAP9ODKo3wQZqorptjghXrjzTo3jkZj8zPn3-6BbvCvmWM2XuBw@mail.gmail.com>
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=fwRJ99oFGLijuhbrnCHHO1u/b17rvYBs5HwPunv1B5k=;
+	b=Eg3zijSqf3xu71dJfejwx/wld5LPKgmPNbYMgU1JCREt183mobHtxmUnCGmRjTEZ6d
+	uzqNFEr6k+F0A6bYPjIUxm6xc3b63xAl4p+rDJS3w9KTJNuC55DQsPdC4CCJnHXXuFR/
+	nhRfi/m6Dc7hybDxb/rsk3I/t9F5H5okvRHGDqBEuWw1jAHVWH3/2IsoqPt2ScmuNflY
+	FZGUapXwmhil3tNSPY+njdc4nQcADG3gZkHWM4vn0zNbGVCo7kz1OgmGS4N6X59QwTGS
+	cY2WsXaWu0CK+XotuzvW3KLMuoy/w5XvxT5et20crKuQNGeJ5VN+4e8s+iGDjY7zzclg
+	cEbA==
+X-Received: by 10.194.77.77 with SMTP id q13mr23960743wjw.79.1443870094778;
+	Sat, 03 Oct 2015 04:01:34 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	nf15sm3598530wic.22.2015.10.03.04.01.33
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 03 Oct 2015 04:01:33 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 3 Oct 2015 13:02:44 +0200
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.2104)
-Cc: Richard Purdie <richard.purdie@linuxfoundation.org>,
-	Otavio Salvador <otavio@ossystems.com.br>,
-	"mario@ossystems.com.br" <mario@ossystems.com.br>
-Subject: Re: [meta-java][PATCH] OpenJDK-8: For x86 and ARM
+Message-ID: <20151003110244.GB2381@jama>
+References: <1443686111-17209-1-git-send-email-ulf@emagii.com>
+MIME-Version: 1.0
+In-Reply-To: <1443686111-17209-1-git-send-email-ulf@emagii.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: Ulf Samuelsson <ulf@emagii.com>
+Subject: Re: [meta-gnome][dizzy][PATCH] gnome-panel*: Use GFDL-1.1 instead of GFDLv1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,45 +48,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Oct 2015 17:15:15 -0000
+X-List-Received-Date: Sat, 03 Oct 2015 11:01:39 -0000
+X-Groupsio-MsgNum: 57657
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="4jXrM3lyYWu4nBt5"
+Content-Disposition: inline
+
+--4jXrM3lyYWu4nBt5
 Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-
-> Am 02.10.2015 um 18:42 schrieb Otavio Salvador =
-<otavio.salvador@ossystems.com.br>:
+On Thu, Oct 01, 2015 at 09:55:10AM +0200, Ulf Samuelsson wrote:
+> Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
+> ---
+>  meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb | 2 +-
+>  meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 >=20
-> On Fri, Oct 2, 2015 at 12:50 PM, Jens Rehsack <rehsack@gmail.com> =
-wrote:
->>> Am 01.10.2015 um 00:58 schrieb Awasthi, Vinay K =
-<vinay.k.awasthi@intel.com>:
->>> I do see configure here .. =
-/home/vinay/YOCTO/NEW_META_JAVA/build/tmp/work/x86_64-linux/openjdk-8-nati=
-ve/72b00-r0/jdk8u-d0afaafe3790/configure but for some reason build just =
-bails out..
->>=20
->> I told you in private mail yesterday evening, you have to apply =
-https://github.com/rehsack/poky/commit/9aa003359f9d804544ba68fa812dd65915c=
-4901b in poky before running openjdk's autoconf procedure. It's because =
-of poky unlink's all "configure" files and expects running autoreconf =
-brings the fine ones back.
->> OpenJDK has a weird perspective regarding "fine ones" ^^
+> diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb b=
+/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb
+> index 972a4d4..fbcf76f 100644
+> --- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb
+> +++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb
+> @@ -1,5 +1,5 @@
+>  SUMMARY =3D "GNOME panel"
+> -LICENSE =3D "GPLv2 & LGPLv2 & GFDLv1.1"
+> +LICENSE =3D "GPLv2 & LGPLv2 & GFDL-1.1"
+> =20
+>  BPN =3D "gnome-panel"
+>  PR =3D "r1"
+
+First part applied manually in master.
+
+> diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb b=
+/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
+> index 4957a99..30c42c9 100644
+> --- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
+> +++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
+> @@ -1,5 +1,5 @@
+>  SUMMARY =3D "GNOME panel"
+> -LICENSE =3D "GPLv2 & LGPLv2 & GFDLv1.1"
+> +LICENSE =3D "GPLv2 & LGPLv2 & GFDL-1.1"
+
+This part was already resolved in master in:
+commit c8d0ebf7f00b6e53fdda973723eaeded3874f8d5
+Author: Khem Raj <raj.khem@gmail.com>
+Date:   Mon Jun 8 09:08:25 2015 -0700
+
+    gnome-panel: Fix build with gcc-5
+
+> =20
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
+263 \
+>                      file://COPYING-DOCS;md5=3Dc9211dab3ae61e580f48432020=
+784324 \
+> --=20
+> 1.9.1
 >=20
-> I agree the OE-Core change should be included indeed but I also think
-> we could work on a temporary solution using a do_configure so it could
-> be used with Fido, as well.
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-How about =
-https://github.com/rehsack/poky/commit/e1421f802ead7ed46c675c0639a5eee9ef7=
-fdd5a :)
-With a bit fine-tuning (CONFIGURE_SCRIPT vs. AUTOTOOLS_SCRIPT_PATH) - =
-easy going ;)
-
-I did OpenJDK-8 on Fido and rebased to master as recommended by Otavio =
-for submiting patches.
-
-Cheers
 --=20
-Jens Rehsack - rehsack@gmail.com
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--4jXrM3lyYWu4nBt5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlYPtdMACgkQN1Ujt2V2gBwtxQCfZQHoI9HPWdF4nLh46oGPXpoZ
+QOIAn07HvilhDbD7thsI+YC1CUSa1xF+
+=ExlC
+-----END PGP SIGNATURE-----
+
+--4jXrM3lyYWu4nBt5--
