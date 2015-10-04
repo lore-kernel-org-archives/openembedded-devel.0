@@ -1,34 +1,17 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
-	[209.85.223.174])
-	by mail.openembedded.org (Postfix) with ESMTP id C83D3770F6
+Return-Path: <sjl@dent.vctlabs.com>
+Received: from dent.vctlabs.com (dent.vctlabs.com [68.183.110.161])
+	by mail.openembedded.org (Postfix) with ESMTP id F3DC7770EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Oct 2015 22:55:50 +0000 (UTC)
-Received: by ioii196 with SMTP id i196so152906954ioi.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Oct 2015 15:55:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=Nj1SwtkOg8f/4ZTWlI4HzYVVRSE319FaISPkHB6UGBQ=;
-	b=yvU4TFnmE0cexvtIqWk7o8x099djQwwHQDgT/R8W+2x0tiJvwKd4K+WCBscKNfUape
-	KfCCWtQbCFhzpYI02bI/hFYLkwslYulFqBoQBc/gz8tSIMf0kzMeAXE0IsAFZnhC8ztF
-	++1tVnq84lB9qPVNDdYuUJ/jiRFo2TiKbeLNsqjlfe7yXUx9mLFibmHesmm/ivnBqqW0
-	ONZbGw6xvnEv2+pe4bCNTXkdhzO78dSgFtuZvxDTfLpRRQyr4dBg/034KXkbYXWaU+g6
-	h28S90MaG5ydapIm2X5SBSnEUjz5mlQRpvnlG9YqnBqzkZQCqhz2SGeHuUGbQ/eWQIua
-	A0gw==
-X-Received: by 10.107.34.149 with SMTP id i143mr25879476ioi.195.1443912950230; 
-	Sat, 03 Oct 2015 15:55:50 -0700 (PDT)
+	Sun,  4 Oct 2015 00:57:05 +0000 (UTC)
+Received: by dent.vctlabs.com (Postfix, from userid 1000)
+	id 5376BC0780; Sat,  3 Oct 2015 18:13:11 -0700 (PDT)
+Date: Sat, 3 Oct 2015 18:13:11 -0700
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151004011311.GG3552@dent.vctlabs.com>
 MIME-Version: 1.0
-Received: by 10.107.142.130 with HTTP; Sat, 3 Oct 2015 15:55:20 -0700 (PDT)
-In-Reply-To: <1443911675.32723.0.camel@gnu.org>
-References: <1443902125-30247-1-git-send-email-raj.khem@gmail.com>
-	<1443902125-30247-2-git-send-email-raj.khem@gmail.com>
-	<1443911675.32723.0.camel@gnu.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 3 Oct 2015 15:55:20 -0700
-Message-ID: <CAMKF1sqRPnuOBgnW7_gCn_ry7iLAg2OYF4FKJh0iBN=ndCqnDw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 2/2] libnetfilter: Avoid using VLAs
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: [meta-oe][PATCH] libimobiledevice: fix gcc 5 link failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,39 +25,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Oct 2015 22:55:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 04 Oct 2015 00:57:07 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sat, Oct 3, 2015 at 3:34 PM, Phil Blundell <philb@gnu.org> wrote:
-> On Sat, 2015-10-03 at 12:55 -0700, Khem Raj wrote:
->> VLAs in non POD data types like structures and unions
->> are not a standard feature of C language and gcc has specific
->> implementation which other compilers dont have specifically clang, and
->> they refuse to implement it since its non standard.
->
-> The reference to "POD" here is a bit confusing.  By the generally
-> accepted meaning of the term, structs and unions would in fact be POD
-> just like any other C type.  But you seem to be using the term here to
-> mean something along the lines of "non-aggregate type", which isn't a
-> usage I've previously encountered.
->
-> This is particularly confusing in this context because there is a
-> different clang limitation which applies to VLAs where the
-> variable-length element is not POD, irrespective of whether it is inside
-> an aggregate or not, and someone reading your comment might be misled
-> into thinking that this was the issue here.
+Drop 'inline' from some functions that had 'inline' keyword without
+a definition at that point (they were defined in a different file).
 
-Yes, infact I should have said composite data types instead of non-POD
-data types. I will send a v2 which should
-clear this confusion.
+Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
+---
+ .../files/inline-without-definition.patch          | 31 ++++++++++++++++++++++
+ .../libimobiledevice/libimobiledevice_1.1.4.bb     |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/libimobiledevice/files/inline-without-definition.patch
 
-> p.
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-connectivity/libimobiledevice/files/inline-without-definition.patch b/meta-oe/recipes-connectivity/libimobiledevice/files/inline-without-definition.patch
+new file mode 100644
+index 0000000..eec60e8
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libimobiledevice/files/inline-without-definition.patch
+@@ -0,0 +1,31 @@
++Fix link error with gcc 5 toolchains
++
++ afc.c:258: error: undefined reference to 'debug_buffer'
++ collect2: error: ld returned 1 exit status
++
++debug.h header was declaring things inline without providing a definition.
++Files that included this header then failed to link against the corresponding
++external symbol in debug.c, because the linker took the 'inline' keyword
++seriously rather than ignoring it.
++
++--- libimobiledevice-1.1.4/src/debug.h.orig	2015-10-03 16:24:08.758740386 -0700
+++++ libimobiledevice-1.1.4/src/debug.h	2015-10-03 16:24:22.706740355 -0700
++@@ -44,14 +44,14 @@
++ #define debug_plist(a)
++ #endif
++ 
++-LIBIMOBILEDEVICE_INTERNAL inline void debug_info_real(const char *func,
+++LIBIMOBILEDEVICE_INTERNAL void debug_info_real(const char *func,
++ 											const char *file,
++ 											int	line,
++ 											const char *format, ...);
++ 
++-LIBIMOBILEDEVICE_INTERNAL inline void debug_buffer(const char *data, const int length);
++-LIBIMOBILEDEVICE_INTERNAL inline void debug_buffer_to_file(const char *file, const char *data, const int length);
++-LIBIMOBILEDEVICE_INTERNAL inline void debug_plist_real(const char *func,
+++LIBIMOBILEDEVICE_INTERNAL void debug_buffer(const char *data, const int length);
+++LIBIMOBILEDEVICE_INTERNAL void debug_buffer_to_file(const char *file, const char *data, const int length);
+++LIBIMOBILEDEVICE_INTERNAL void debug_plist_real(const char *func,
++ 											const char *file,
++ 											int	line,
++ 											plist_t plist);
+diff --git a/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb b/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb
+index 06260f7..32aca96 100644
+--- a/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb
++++ b/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb
+@@ -12,6 +12,7 @@ DEPENDS = "libplist usbmuxd libtasn1 gnutls libgcrypt"
+ SRC_URI = " \
+     http://www.libimobiledevice.org/downloads/libimobiledevice-${PV}.tar.bz2 \
+     file://configure-fix-largefile.patch \
++    file://inline-without-definition.patch \
+ "
+ 
+ SRC_URI[md5sum] = "3f28cbc6a2e30d34685049c0abde5183"
+-- 
+1.9.1
+
 
