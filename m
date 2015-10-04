@@ -1,17 +1,33 @@
-Return-Path: <sjl@dent.vctlabs.com>
-Received: from dent.vctlabs.com (dent.vctlabs.com [68.183.110.161])
-	by mail.openembedded.org (Postfix) with ESMTP id F3DC7770EC
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 8351F77065
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Oct 2015 00:57:05 +0000 (UTC)
-Received: by dent.vctlabs.com (Postfix, from userid 1000)
-	id 5376BC0780; Sat,  3 Oct 2015 18:13:11 -0700 (PDT)
-Date: Sat, 3 Oct 2015 18:13:11 -0700
-From: "S. Lockwood-Childs" <sjl@vctlabs.com>
+	Sun,  4 Oct 2015 06:37:30 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ZicvE-0005uA-MA for openembedded-devel@lists.openembedded.org;
+	Sun, 04 Oct 2015 08:37:24 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 04 Oct 2015 08:37:24 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 04 Oct 2015 08:37:24 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151004011311.GG3552@dent.vctlabs.com>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [meta-oe][PATCH] libimobiledevice: fix gcc 5 link failure
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 4 Oct 2015 08:37:11 +0200
+Message-ID: <muqhen$di2$1@ger.gmane.org>
+References: <1443907359-22569-1-git-send-email-manuel.bachmann@iot.bzh>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:38.0)
+	Gecko/20100101 Thunderbird/38.1.0
+In-Reply-To: <1443907359-22569-1-git-send-email-manuel.bachmann@iot.bzh>
+Subject: Re: [PATCH v3][meta-multimedia] mkvtoolnix: fix Boost 1.58 build, update to 7.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,70 +41,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Oct 2015 00:57:07 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 04 Oct 2015 06:37:32 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Drop 'inline' from some functions that had 'inline' keyword without
-a definition at that point (they were defined in a different file).
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
----
- .../files/inline-without-definition.patch          | 31 ++++++++++++++++++++++
- .../libimobiledevice/libimobiledevice_1.1.4.bb     |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/libimobiledevice/files/inline-without-definition.patch
+Op 03-10-15 om 23:22 schreef Manuel Bachmann:
+> mkvtoolnix does not compile with newest Boost 1.58, mostly due to the
+> following bugs : https://github.com/mbunkus/mkvtoolnix/issues/1172 
+> https://github.com/mbunkus/mkvtoolnix/issues/1176
+> 
+> Update to the version immediately subsequent to their fixes, and adapt
+> configure steps accordingly.
+> 
+> Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh> --- 
+> meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb | 15
+> +++++++++++---- 1 file changed, 11 insertions(+), 4 deletions(-)
+> 
+> diff --git a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb index
+> dd613b3..da10153 100644 ---
+> a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb +++
+> b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb @@ -6,9 +6,16
+> @@ LIC_FILES_CHKSUM =
+> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> 
+> DEPENDS = "curl boost expat zlib libebml libmatroska libogg libvorbis
+> bzip2 lzo file ruby-native"
+> 
+> -PV = "7.1.0+git${SRCPV}" -SRCREV =
+> "0c89ff941bfdd9f3378312f293a84f13cf3e2a96" -SRC_URI =
+> "git://github.com/mbunkus/mkvtoolnix.git" +PV = "7.9.0+git${SRCPV}" 
+> +SRCREV_mkvtoolnix = "1a8b23b1e82ed180a5aaeb43537f2426be252985" 
+> +SRCREV_libebml = "04b34b0dbded40e0cec93cafa6a4f4c8e90c3206" 
+> +SRCREV_libmatroska = "db5d627b5bf48516c9e0b540254c0d36595760c3" 
+> +SRCREV_FORMAT = "mkvtoolnix" +SRC_URI = " \ +
+> git://github.com/mbunkus/mkvtoolnix.git;name=mkvtoolnix \ +
+> git://github.com/Matroska-Org/libebml.git;name=libebml;destsuffix=git/lib/li
+bebml
+> \ +
+> git://github.com/Matroska-Org/libmatroska.git;name=libmatroska;destsuffix=gi
+t/lib/libmatroska
+> \ +          "
 
-diff --git a/meta-oe/recipes-connectivity/libimobiledevice/files/inline-without-definition.patch b/meta-oe/recipes-connectivity/libimobiledevice/files/inline-without-definition.patch
-new file mode 100644
-index 0000000..eec60e8
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/libimobiledevice/files/inline-without-definition.patch
-@@ -0,0 +1,31 @@
-+Fix link error with gcc 5 toolchains
-+
-+ afc.c:258: error: undefined reference to 'debug_buffer'
-+ collect2: error: ld returned 1 exit status
-+
-+debug.h header was declaring things inline without providing a definition.
-+Files that included this header then failed to link against the corresponding
-+external symbol in debug.c, because the linker took the 'inline' keyword
-+seriously rather than ignoring it.
-+
-+--- libimobiledevice-1.1.4/src/debug.h.orig	2015-10-03 16:24:08.758740386 -0700
-++++ libimobiledevice-1.1.4/src/debug.h	2015-10-03 16:24:22.706740355 -0700
-+@@ -44,14 +44,14 @@
-+ #define debug_plist(a)
-+ #endif
-+ 
-+-LIBIMOBILEDEVICE_INTERNAL inline void debug_info_real(const char *func,
-++LIBIMOBILEDEVICE_INTERNAL void debug_info_real(const char *func,
-+ 											const char *file,
-+ 											int	line,
-+ 											const char *format, ...);
-+ 
-+-LIBIMOBILEDEVICE_INTERNAL inline void debug_buffer(const char *data, const int length);
-+-LIBIMOBILEDEVICE_INTERNAL inline void debug_buffer_to_file(const char *file, const char *data, const int length);
-+-LIBIMOBILEDEVICE_INTERNAL inline void debug_plist_real(const char *func,
-++LIBIMOBILEDEVICE_INTERNAL void debug_buffer(const char *data, const int length);
-++LIBIMOBILEDEVICE_INTERNAL void debug_buffer_to_file(const char *file, const char *data, const int length);
-++LIBIMOBILEDEVICE_INTERNAL void debug_plist_real(const char *func,
-+ 											const char *file,
-+ 											int	line,
-+ 											plist_t plist);
-diff --git a/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb b/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb
-index 06260f7..32aca96 100644
---- a/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb
-+++ b/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb
-@@ -12,6 +12,7 @@ DEPENDS = "libplist usbmuxd libtasn1 gnutls libgcrypt"
- SRC_URI = " \
-     http://www.libimobiledevice.org/downloads/libimobiledevice-${PV}.tar.bz2 \
-     file://configure-fix-largefile.patch \
-+    file://inline-without-definition.patch \
- "
- 
- SRC_URI[md5sum] = "3f28cbc6a2e30d34685049c0abde5183"
--- 
-1.9.1
+Wouldn't:
+
+SRCREV = "1a8b23b1e82ed180a5aaeb43537f2426be252985"
+SRC_URI = "gitsm://github.com/mbunkus/mkvtoolnix.git;name=mkvtoolnix"
+
+Be much easier to maintain?
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFWEMkXMkyGM64RGpERAn7oAJsF+fflyuIAfXQ0VRUWDfucw7od7gCgquGN
+MKNt3Fd8j7MicGjLPZsoyIA=
+=ipI0
+-----END PGP SIGNATURE-----
 
 
