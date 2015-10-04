@@ -1,43 +1,47 @@
 Return-Path: <mbc@koumoul.net>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D711757AC
+Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
+	[209.85.213.178])
+	by mail.openembedded.org (Postfix) with ESMTP id CE7FD77065
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Oct 2015 09:09:16 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so82517656wic.0
+	Sun,  4 Oct 2015 10:16:51 +0000 (UTC)
+Received: by igbni9 with SMTP id ni9so41025285igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Oct 2015 02:09:16 -0700 (PDT)
+	Sun, 04 Oct 2015 03:16:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=jksYNtAhJ7ALSFqQlJdIhzmDely8ybEOoPL7ZLhGIAs=;
-	b=CSNfFdA/KweZPhRU49kgPEAgdln5RKGKMb/VGR5inVIFP9WZobYHDCKpFnxd4sFp4W
-	b3qD+1tTtuAVJ5j6715XYMg1MgbxFp5qsfzCVvufPbL64Vf/iuI4TpAd+Nig+FLAlr7S
-	gxKA1sOkdRPrezeUiAu8/afojxuU4fhmHjE5k=
+	h=mime-version:reply-to:sender:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=Yaf7QPeC1H1JKmJAV/1We/Q9FsT/4BKdUz95auLBm34=;
+	b=A4+Vvt66oZrXCGDiJjvAf3AtCj0bwtK2ia7jgbtesenm/P9n0Luy9pBKqNNh68CXy4
+	GQB3sY4nrlQZoI6wa9SOfJNIHQtsO8zH9XvDx6946U9mmqnW6kJ7hgP+E2439wfVG0NO
+	/VdYXw4ACSSDV2fhBTggzH77JJ/nAAgBafdOw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=jksYNtAhJ7ALSFqQlJdIhzmDely8ybEOoPL7ZLhGIAs=;
-	b=E1wXM2d5ZMEyaqjna1KcXksfE5pVy0MTLoFy/8bZxLkFwFwxW/c5ZWweiD9CkCKxWd
-	QmitlrNk9+JWyMR0HktYzpVIZa0o30gFdZLd8wZJm0I90+YhXAKknSBPDX1xWNpJRfUb
-	+AyvZtsBNaNhJezyKvTWKFWvqQuFc8trHe62Ibyv9rymZLB6MZ9E0zqj9tmHqF+UgRb2
-	JrS7GH8Kh1GozWuHqcJyuHOzH7OLdwrsKKLJ95c+FDLUT+qlMcAG8EwloGViz9LOxXM3
-	DULVB5Qs/4dmT1hGyj87lJ4LjZs48i1jRz+6G025OnNYGw39mFZBDs9+ujSXH7uFPj9D
-	56Pw==
-X-Gm-Message-State: ALoCoQnuSSi3hcbGqPsvj5Y1QfufWwCEwxMtVQttpjSQXOGubtHlSHo3Ue4RCtOLd8Wh3+p3G19/
-X-Received: by 10.180.106.4 with SMTP id gq4mr6265372wib.53.1443949756544;
-	Sun, 04 Oct 2015 02:09:16 -0700 (PDT)
-Received: from localhost.localdomain
-	(ARennes-655-1-187-70.w2-13.abo.wanadoo.fr. [2.13.130.70])
-	by smtp.gmail.com with ESMTPSA id jf3sm8293899wic.8.2015.10.04.02.09.15
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 04 Oct 2015 02:09:15 -0700 (PDT)
-Sender: "Manuel Bachmann [ IoT.bzh ]" <mbc@koumoul.net>
+	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=Yaf7QPeC1H1JKmJAV/1We/Q9FsT/4BKdUz95auLBm34=;
+	b=FV1AJ4V4VfPoyOXFcdmh4swMsWHdMdnJt9yZ+pbZ/D+Sj4VVBDm9T+Q7x62obMj2os
+	GqCE5Vhx22RDc0VoHmxphlsskMf9MzJk4BCOQL0BTipkwjXY8jdK5Q/+inRfTaoqR8Jo
+	KIoKN4AP9M95tCZMBhbaKVe8upqaJqBrkFg/pnqGX/iTKtYl2seGiPpWbVzBt91WZuF6
+	r1Q+BeJtFNjxKzOGeRPc6hbUIPCKog8dvo4PHHRi1hm6n5XrrD3T8HdYhh1pBI95o9ev
+	edm8K8U2tKS7cgtx6frGlVCxTnaGxM20ef7ZNSHTYDe5Wux3FAzsdcrPkjHOQnPuEcC6
+	S0sQ==
+X-Gm-Message-State: ALoCoQl/Vcq07Bk2iTbOoeb6m1rbLho6OAaE0kRnFlL/qYxWZzy9S+8MMRi08de0s04cuW2RnmV9
+MIME-Version: 1.0
+X-Received: by 10.50.78.138 with SMTP id b10mr4554306igx.67.1443953811448;
+	Sun, 04 Oct 2015 03:16:51 -0700 (PDT)
+Sender: mbc@koumoul.net
+Received: by 10.79.111.6 with HTTP; Sun, 4 Oct 2015 03:16:51 -0700 (PDT)
+X-Originating-IP: [2.13.130.70]
+In-Reply-To: <muqhen$di2$1@ger.gmane.org>
+References: <1443907359-22569-1-git-send-email-manuel.bachmann@iot.bzh>
+	<muqhen$di2$1@ger.gmane.org>
+Date: Sun, 4 Oct 2015 12:16:51 +0200
+X-Google-Sender-Auth: 4_c3RAtJG2WsGJ8BxFEsJQUKUko
+Message-ID: <CANTDXNe_e8ia1ZsXdrOCqBrLAvnE-kGrzKKygxkaP+3gdC+Bjw@mail.gmail.com>
 From: Manuel Bachmann <manuel.bachmann@iot.bzh>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  4 Oct 2015 11:13:42 +0200
-Message-Id: <1443950022-18541-1-git-send-email-manuel.bachmann@iot.bzh>
-X-Mailer: git-send-email 1.8.3.1
-Subject: [PATCH][meta-oe] freerdp: get out of "nonworking", fix build, improve
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH v3][meta-multimedia] mkvtoolnix: fix Boost 1.58 build, update to 7.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,261 +55,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Oct 2015 09:09:20 -0000
+X-List-Received-Date: Sun, 04 Oct 2015 10:16:56 -0000
+Content-Type: text/plain; charset=UTF-8
 
-We make the "freerdp" recipe active again, fix the build
-by pulling a more recent version (the "stable" branches are
-buggy and useless), and fix ARM runtime with -fPIC.
+Hi Koen,
 
-We can then :
-- make X11 non-mandatory ;
-- add support for Wayland ("wlfreerdp" client) ;
-- add support for DirectFB ("dfreerdp" client) ;
-- add support for GStreamer 1.0 ;
-- make "heavy" features such as pulseaudio, cups...
-non-mandatory.
+Thanks for the hint, I didn't know you could do that ! There are very few
+examples, though, and I always get a "cannot stat <repo>.git/modules" when
+I try to use it. Still trying...
 
-We really want to install the "winpr-makecert" tool to have
-TLS, but CMake does not position its RPATH cleanly, so let
-us have a custom patch for that until it gets sorted out.
+Anyways, as the master git repo doesn't specify hashes in its .gitmodules
+(you always fetch the latest rev), I guess it's the same as ${AUTOREV}, but
+cleaner/shorter ? And then the "always refreshes and consumes bandwidth"
+problem Martin mentioned would still apply ; having SRCREVs is better and
+more stable in this case IMHO.
 
-Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
----
- meta-oe/recipes-support/freerdp/freerdp.inc        | 73 ++++++++++++++++++++++
- .../winpr-makecert-Build-with-install-RPATH.patch  | 31 +++++++++
- meta-oe/recipes-support/freerdp/freerdp_git.bb     | 21 +++++++
- .../recipes-support/nonworking/freerdp/freerdp.inc | 51 ---------------
- .../nonworking/freerdp/freerdp_git.bb              | 16 -----
- 5 files changed, 125 insertions(+), 67 deletions(-)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp.inc
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp/winpr-makecert-Build-with-install-RPATH.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp_git.bb
- delete mode 100644 meta-oe/recipes-support/nonworking/freerdp/freerdp.inc
- delete mode 100644 meta-oe/recipes-support/nonworking/freerdp/freerdp_git.bb
+Regards,
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp.inc b/meta-oe/recipes-support/freerdp/freerdp.inc
-new file mode 100644
-index 0000000..af93e83
---- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp.inc
-@@ -0,0 +1,73 @@
-+# Copyright (C) 2010-2012 O.S. Systems Software Ltda. All Rights Reserved
-+# Released under the MIT license
-+
-+DESCRIPTION = "FreeRDP RDP client & server library"
-+HOMEPAGE = "http://www.freerdp.com"
-+DEPENDS = "openssl alsa-lib pcsc-lite"
-+SECTION = "net"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+
-+inherit pkgconfig cmake
-+
-+EXTRA_OECMAKE += "-DWITH_ALSA=ON \
-+                  -DWITH_PCSC=ON \
-+                  -DWITH_FFMPEG=OFF \
-+                  -DWITH_CUNIT=OFF \
-+                 "
-+
-+PACKAGECONFIG ??= "  \
-+                ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}\
-+                ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}\
-+                ${@bb.utils.contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}\
-+                ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}\
-+                ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)}\
-+                gstreamer cups \
-+                "
-+
-+X11_DEPS = "virtual/libx11 libxinerama libxext libxcursor libxv libxi libxrender libxfixes libxdamage libxrandr libxkbfile"
-+PACKAGECONFIG[x11] = "-DWITH_X11=ON -DWITH_XINERAMA=ON -DWITH_XEXT=ON -DWITH_XCURSOR=ON -DWITH_XV=ON -DWITH_XI=ON -DWITH_XRENDER=ON -DWITH_XFIXES=ON -DWITH_XDAMAGE=ON -DWITH_XRANDR=ON -DWITH_XKBFILE=ON,-DWITH_X11=OFF,${X11_DEPS}"
-+PACKAGECONFIG[wayland] = "-DWITH_WAYLAND=ON,-DWITH_WAYLAND=OFF,wayland"
-+PACKAGECONFIG[directfb] = "-DWITH_DIRECTFB=ON,-DWITH_DIRECTFB=OFF,directfb"
-+PACKAGECONFIG[pam] = "-DWITH_PAM=ON,-DWITH_PAM=OFF,libpam"
-+PACKAGECONFIG[pulseaudio] = "-DWITH_PULSEAUDIO=ON,-DWITH_PULSEAUDIO=OFF,pulseaudio"
-+PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER_1_0=ON,-DWITH_GSTREAMER_1_0=OFF,gstreamer1.0 gstreamer1.0-plugins-base"
-+PACKAGECONFIG[cups] = "-DWITH_CUPS=ON,-DWITH_CUPS=OFF,cups"
-+
-+PACKAGES =+ "libfreerdp"
-+
-+LEAD_SONAME = "libfreerdp.so"
-+FILES_libfreerdp = "${libdir}/lib*${SOLIBS}"
-+
-+PACKAGES_DYNAMIC += "^libfreerdp-plugin-.*"
-+
-+# we will need winpr-makecert to generate TLS certificates
-+do_install_append () {
-+    install -m755 winpr/tools/makecert/cli/winpr-makecert ${D}${bindir}
-+    rm -rf ${D}/${libdir}/cmake
-+    rm -rf ${D}/${libdir}/freerdp
-+}
-+
-+python populate_packages_prepend () {
-+    freerdp_root = d.expand('${libdir}/freerdp')
-+
-+    do_split_packages(d, freerdp_root, '^(audin_.*)\.so$',
-+        output_pattern='libfreerdp-plugin-%s',
-+        description='FreeRDP plugin %s',
-+        prepend=True, extra_depends='libfreerdp-plugin-audin')
-+
-+    do_split_packages(d, freerdp_root, '^(rdpsnd_.*)\.so$',
-+        output_pattern='libfreerdp-plugin-%s',
-+        description='FreeRDP plugin %s',
-+        prepend=True, extra_depends='libfreerdp-plugin-rdpsnd')
-+
-+    do_split_packages(d, freerdp_root, '^(tsmf_.*)\.so$',
-+        output_pattern='libfreerdp-plugin-%s',
-+        description='FreeRDP plugin %s',
-+        prepend=True, extra_depends='libfreerdp-plugin-tsmf')
-+
-+    do_split_packages(d, freerdp_root, '^([^-]*)\.so$',
-+        output_pattern='libfreerdp-plugin-%s',
-+        description='FreeRDP plugin %s',
-+        prepend=True, extra_depends='')
-+}
-diff --git a/meta-oe/recipes-support/freerdp/freerdp/winpr-makecert-Build-with-install-RPATH.patch b/meta-oe/recipes-support/freerdp/freerdp/winpr-makecert-Build-with-install-RPATH.patch
-new file mode 100644
-index 0000000..d279d6d
---- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp/winpr-makecert-Build-with-install-RPATH.patch
-@@ -0,0 +1,31 @@
-+From 253eafc8c8da83fc2b1a99a9e43824efc6105c7a Mon Sep 17 00:00:00 2001
-+From: Manuel Bachmann <manuel.bachmann@iot.bzh>
-+Date: Sun, 4 Oct 2015 10:44:49 +0200
-+Subject: [PATCH] winpr-makecert: Build with install RPATH
-+
-+As we are installing "winpr-makecert" manually, we do want
-+to refer to the library in DESTDIR, not the one resting in
-+the build tree.
-+
-+Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
-+---
-+ winpr/tools/makecert/cli/CMakeLists.txt | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/winpr/tools/makecert/cli/CMakeLists.txt b/winpr/tools/makecert/cli/CMakeLists.txt
-+index 17954c4..90c446b 100644
-+--- a/winpr/tools/makecert/cli/CMakeLists.txt
-++++ b/winpr/tools/makecert/cli/CMakeLists.txt
-+@@ -45,5 +45,9 @@ set(${MODULE_PREFIX}_LIBS winpr-makecert-tool)
-+ 
-+ target_link_libraries(${MODULE_NAME} ${${MODULE_PREFIX}_LIBS})
-+ 
-++set_target_properties(${MODULE_NAME} PROPERTIES 
-++	BUILD_WITH_INSTALL_RPATH 1)
-++
-+ set_property(TARGET ${MODULE_NAME} PROPERTY FOLDER "WinPR/Tools")
-+ 
-++
-+-- 
-+1.8.3.1
-+
-diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb b/meta-oe/recipes-support/freerdp/freerdp_git.bb
-new file mode 100644
-index 0000000..f9cb9a6
---- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
-@@ -0,0 +1,21 @@
-+# Copyright (C) 2010-2012, O.S. Systems Software Ltda.
-+# Released under the MIT license
-+
-+include freerdp.inc
-+
-+inherit gitpkgv
-+
-+PV = "1.2.5+gitr${SRCPV}"
-+PKGV = "${GITPKGVTAG}"
-+
-+EXTRA_OECMAKE += "-DBUILD_STATIC_LIBS=OFF \
-+                  -DCMAKE_POSITION_INDEPENDANT_CODE=ON \
-+                  -DWITH_MANPAGES=OFF \
-+                 "
-+
-+SRCREV = "62da9d28c674814c81c245c1c7882eb0da7be76b"
-+SRC_URI = "git://github.com/FreeRDP/FreeRDP.git \
-+           file://winpr-makecert-Build-with-install-RPATH.patch \
-+          "
-+
-+S = "${WORKDIR}/git"
-diff --git a/meta-oe/recipes-support/nonworking/freerdp/freerdp.inc b/meta-oe/recipes-support/nonworking/freerdp/freerdp.inc
-deleted file mode 100644
-index 34dac4b..0000000
---- a/meta-oe/recipes-support/nonworking/freerdp/freerdp.inc
-+++ /dev/null
-@@ -1,51 +0,0 @@
--# Copyright (C) 2010-2012 O.S. Systems Software Ltda. All Rights Reserved
--# Released under the MIT license
--
--DESCRIPTION = "FreeRDP RDP client"
--HOMEPAGE = "http://www.freerdp.com"
--DEPENDS = "virtual/libx11 openssl libxcursor libxv cups alsa-lib pulseaudio pcsc-lite libxkbfile libxinerama"
--SECTION = "x11/network"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
--
--inherit pkgconfig cmake
--
--EXTRA_OECMAKE += "-DWITH_PULSEAUDIO=ON \
--                  -DWITH_PCSC=ON \
--                  -DWITH_CUPS=ON \
--                  -DWITH_FFMPEG=OFF \
--                  -DWITH_CUNIT=OFF \
--                  -DWITH_X11=ON \
--                  -DWITH_XKBFILE=ON \
--                  -DWITH_XINERAMA=ON"
--
--PACKAGES =+ "libfreerdp"
--
--LEAD_SONAME = "libfreerdp.so"
--FILES_libfreerdp = "${libdir}/lib*${SOLIBS}"
--
--PACKAGES_DYNAMIC += "^libfreerdp-plugin-.*"
--
--python populate_packages_prepend () {
--    freerdp_root = d.expand('${libdir}/freerdp')
--
--    do_split_packages(d, freerdp_root, '^(audin_.*)\.so$',
--        output_pattern='libfreerdp-plugin-%s',
--        description='FreeRDP plugin %s',
--        prepend=True, extra_depends='libfreerdp-plugin-audin')
--
--    do_split_packages(d, freerdp_root, '^(rdpsnd_.*)\.so$',
--        output_pattern='libfreerdp-plugin-%s',
--        description='FreeRDP plugin %s',
--        prepend=True, extra_depends='libfreerdp-plugin-rdpsnd')
--
--    do_split_packages(d, freerdp_root, '^(tsmf_.*)\.so$',
--        output_pattern='libfreerdp-plugin-%s',
--        description='FreeRDP plugin %s',
--        prepend=True, extra_depends='libfreerdp-plugin-tsmf')
--
--    do_split_packages(d, freerdp_root, '^([^-]*)\.so$',
--        output_pattern='libfreerdp-plugin-%s',
--        description='FreeRDP plugin %s',
--        prepend=True, extra_depends='')
--}
-diff --git a/meta-oe/recipes-support/nonworking/freerdp/freerdp_git.bb b/meta-oe/recipes-support/nonworking/freerdp/freerdp_git.bb
-deleted file mode 100644
-index 0e9bf06..0000000
---- a/meta-oe/recipes-support/nonworking/freerdp/freerdp_git.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--# Copyright (C) 2010-2012, O.S. Systems Software Ltda.
--# Released under the MIT license
--
--include freerdp.inc
--
--inherit gitpkgv
--
--PV = "1.0.2+gitr${SRCPV}"
--PKGV = "${GITPKGVTAG}"
--
--EXTRA_OECMAKE += "-DWITH_MANPAGES=OFF"
--
--SRCREV = "f311acaffb9190567e2b478a98d7cbfaf2709f6b"
--SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-1.0"
--
--S = "${WORKDIR}/git"
--- 
-1.8.3.1
+*Manuel Bachmann, Graphics Engineer www.iot.bzh <http://iot.bzh> *
 
+
+2015-10-04 8:37 GMT+02:00 Koen Kooi <koen@dominion.thruhere.net>:
+
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 03-10-15 om 23:22 schreef Manuel Bachmann:
+> > mkvtoolnix does not compile with newest Boost 1.58, mostly due to the
+> > following bugs : https://github.com/mbunkus/mkvtoolnix/issues/1172
+> > https://github.com/mbunkus/mkvtoolnix/issues/1176
+> >
+> > Update to the version immediately subsequent to their fixes, and adapt
+> > configure steps accordingly.
+> >
+> > Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh> ---
+> > meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb | 15
+> > +++++++++++---- 1 file changed, 11 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> > b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb index
+> > dd613b3..da10153 100644 ---
+> > a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb +++
+> > b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb @@ -6,9 +6,16
+> > @@ LIC_FILES_CHKSUM =
+> > "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> >
+> > DEPENDS = "curl boost expat zlib libebml libmatroska libogg libvorbis
+> > bzip2 lzo file ruby-native"
+> >
+> > -PV = "7.1.0+git${SRCPV}" -SRCREV =
+> > "0c89ff941bfdd9f3378312f293a84f13cf3e2a96" -SRC_URI =
+> > "git://github.com/mbunkus/mkvtoolnix.git" +PV = "7.9.0+git${SRCPV}"
+> > +SRCREV_mkvtoolnix = "1a8b23b1e82ed180a5aaeb43537f2426be252985"
+> > +SRCREV_libebml = "04b34b0dbded40e0cec93cafa6a4f4c8e90c3206"
+> > +SRCREV_libmatroska = "db5d627b5bf48516c9e0b540254c0d36595760c3"
+> > +SRCREV_FORMAT = "mkvtoolnix" +SRC_URI = " \ +
+> > git://github.com/mbunkus/mkvtoolnix.git;name=mkvtoolnix \ +
+> > git://
+> github.com/Matroska-Org/libebml.git;name=libebml;destsuffix=git/lib/li
+> bebml
+> > \ +
+> > git://
+> github.com/Matroska-Org/libmatroska.git;name=libmatroska;destsuffix=gi
+> t/lib/libmatroska
+> > \ +          "
+>
+> Wouldn't:
+>
+> SRCREV = "1a8b23b1e82ed180a5aaeb43537f2426be252985"
+> SRC_URI = "gitsm://github.com/mbunkus/mkvtoolnix.git;name=mkvtoolnix"
+>
+> Be much easier to maintain?
+>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iD8DBQFWEMkXMkyGM64RGpERAn7oAJsF+fflyuIAfXQ0VRUWDfucw7od7gCgquGN
+> MKNt3Fd8j7MicGjLPZsoyIA=
+> =ipI0
+> -----END PGP SIGNATURE-----
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
