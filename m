@@ -1,37 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 9253F75A52
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 0DBA5755FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Oct 2015 22:30:44 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so3276029wic.0
+	Tue,  6 Oct 2015 22:30:46 +0000 (UTC)
+Received: by wicge5 with SMTP id ge5so187492279wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Oct 2015 15:30:44 -0700 (PDT)
+	Tue, 06 Oct 2015 15:30:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=IWD/EV1ar4gzXrfGTH8a8i8CocsUttF3GKdntoBBrIA=;
-	b=TPGUHAwpfhLeW2XyQmmRAtpyKlnGdrT/xOzfmogXzEobYQ7IMYhFFU1OgqYrriKW3q
-	UTyVEBXBxffC+gvl5aZBwpOCuThO7UIrk3v9hDYCRoeVnzRN9fuX0TNWcEyWodzCT8gq
-	ijP769afEoBUa8l2U+qcCtpIn06opsyCj+5NBNFPHdEXMxrW33lv9Ub2U0VKu8EsjCQP
-	5GkSuK+X73UHsbYUGDkfQedlvVYHBbfXK6YosZcGx9zG4/rP3spZTC4gXEJp+Y3GTKZg
-	N7DrRU4freu826UkR6unBw3iATinCL/uPb4C4SsZ2F90EIZM3fBivsncVtflG2sALQxv
-	hujg==
-X-Received: by 10.180.24.102 with SMTP id t6mr20663999wif.83.1444170644007;
-	Tue, 06 Oct 2015 15:30:44 -0700 (PDT)
+	bh=ggFLZCgZn5sOiIRIwaiaKltUYnlW8duOkYC1vro0mbk=;
+	b=Z8dp9ZxPcpN2C3AP9b/Kc9sN239m37epsKB9RNsJ9dJLMuRJyIx/EetPCgaZ8PaXQs
+	ANxmDXKXaDb3O2263ztB7mIvwullFvQw/Rkp2+nOWLOt0Wx/SGDz6QKaDrupIA4usV/X
+	b0Qwh2snrP55Ql+rM4lcwjh7t4Rvkry2RHhnhQ4RAbsKnQF/F7k8lYsUZnyy1PN/nwX8
+	tSl/w+BJcxdJG7eyeMGdZq4LTO/HgMvCSi9wVsNNsD7YRjsxzkVRwJawQ86IL9+vPEgp
+	I+Ao5XgOWyOJRS5QcQghe78gfYZH6A5HsiGd977N6oVuL4dfn30KzczyV3cw00A37i41
+	tlzg==
+X-Received: by 10.180.211.39 with SMTP id mz7mr20325932wic.65.1444170646151;
+	Tue, 06 Oct 2015 15:30:46 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	go2sm21553102wib.20.2015.10.06.15.30.43
+	h6sm21569211wiy.14.2015.10.06.15.30.45
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 06 Oct 2015 15:30:43 -0700 (PDT)
+	Tue, 06 Oct 2015 15:30:45 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Oct 2015 00:30:40 +0200
-Message-Id: <1444170642-23088-6-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed,  7 Oct 2015 00:30:42 +0200
+Message-Id: <1444170642-23088-8-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.6.0
 In-Reply-To: <1444170642-23088-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1444170642-23088-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-oe 6/8] Revert "rage, emprint, news: Move to nonworking"
+Subject: [PATCH][meta-oe 8/8] Revert "freerdp: move to nonworking"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,144 +45,187 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Oct 2015 22:30:45 -0000
+X-List-Received-Date: Tue, 06 Oct 2015 22:30:46 -0000
 
 * use PNBLACKLIST instead
 
-This reverts commit 1ead1a9196e0003652bc99d0d5739ab59c221209.
+This reverts commit 353b2ceff20c8fcf4d58e048cab8b88f1fdccf9e.
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/e17/emprint_svn.bb            | 14 ++++++++++++++
- meta-efl/recipes-efl/e17/news_svn.bb               | 14 ++++++++++++++
- meta-efl/recipes-efl/e17/nonworking/emprint_svn.bb | 12 ------------
- meta-efl/recipes-efl/e17/nonworking/news_svn.bb    | 12 ------------
- meta-efl/recipes-efl/e17/nonworking/rage_svn.bb    | 13 -------------
- meta-efl/recipes-efl/e17/rage_svn.bb               | 15 +++++++++++++++
- 6 files changed, 43 insertions(+), 37 deletions(-)
- create mode 100644 meta-efl/recipes-efl/e17/emprint_svn.bb
- create mode 100644 meta-efl/recipes-efl/e17/news_svn.bb
- delete mode 100644 meta-efl/recipes-efl/e17/nonworking/emprint_svn.bb
- delete mode 100644 meta-efl/recipes-efl/e17/nonworking/news_svn.bb
- delete mode 100644 meta-efl/recipes-efl/e17/nonworking/rage_svn.bb
- create mode 100644 meta-efl/recipes-efl/e17/rage_svn.bb
+ meta-oe/recipes-support/freerdp/freerdp.inc        | 51 ++++++++++++++++++++++
+ meta-oe/recipes-support/freerdp/freerdp_git.bb     | 21 +++++++++
+ .../recipes-support/nonworking/freerdp/freerdp.inc | 51 ----------------------
+ .../nonworking/freerdp/freerdp_git.bb              | 16 -------
+ 4 files changed, 72 insertions(+), 67 deletions(-)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp.inc
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp_git.bb
+ delete mode 100644 meta-oe/recipes-support/nonworking/freerdp/freerdp.inc
+ delete mode 100644 meta-oe/recipes-support/nonworking/freerdp/freerdp_git.bb
 
-diff --git a/meta-efl/recipes-efl/e17/emprint_svn.bb b/meta-efl/recipes-efl/e17/emprint_svn.bb
+diff --git a/meta-oe/recipes-support/freerdp/freerdp.inc b/meta-oe/recipes-support/freerdp/freerdp.inc
 new file mode 100644
-index 0000000..e4c9816
+index 0000000..34dac4b
 --- /dev/null
-+++ b/meta-efl/recipes-efl/e17/emprint_svn.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "Emprint is a utility for taking screenshots of the entire screen, a specific window, or a specific region."
-+LICENSE = "MIT & BSD"
-+DEPENDS = "imlib2 virtual/libx11 ecore evas edje eina"
-+PV = "0.0.1+svnr${SRCPV}"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
-+SRCREV = "${EFL_SRCREV}"
++++ b/meta-oe/recipes-support/freerdp/freerdp.inc
+@@ -0,0 +1,51 @@
++# Copyright (C) 2010-2012 O.S. Systems Software Ltda. All Rights Reserved
++# Released under the MIT license
 +
-+inherit e
-+SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
-+S = "${WORKDIR}/${SRCNAME}"
++DESCRIPTION = "FreeRDP RDP client"
++HOMEPAGE = "http://www.freerdp.com"
++DEPENDS = "virtual/libx11 openssl libxcursor libxv cups alsa-lib pulseaudio pcsc-lite libxkbfile libxinerama"
++SECTION = "x11/network"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 +
-+FILES_${PN}-dbg += "${libdir}/${PN}/modules/.debug"
++inherit pkgconfig cmake
 +
-+PNBLACKLIST[emprint] ?= "if you want to use these modules with E18, then you need to update it to git recipe fetching newer sources from http://git.enlightenment.org/apps/emprint.git/"
-diff --git a/meta-efl/recipes-efl/e17/news_svn.bb b/meta-efl/recipes-efl/e17/news_svn.bb
-new file mode 100644
-index 0000000..f08cab6
---- /dev/null
-+++ b/meta-efl/recipes-efl/e17/news_svn.bb
-@@ -0,0 +1,14 @@
-+LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++EXTRA_OECMAKE += "-DWITH_PULSEAUDIO=ON \
++                  -DWITH_PCSC=ON \
++                  -DWITH_CUPS=ON \
++                  -DWITH_FFMPEG=OFF \
++                  -DWITH_CUNIT=OFF \
++                  -DWITH_X11=ON \
++                  -DWITH_XKBFILE=ON \
++                  -DWITH_XINERAMA=ON"
 +
-+PV = "0.1.0+svnr${SRCPV}"
-+PR = "${INC_PR}.0"
++PACKAGES =+ "libfreerdp"
 +
-+require e-module.inc
++LEAD_SONAME = "libfreerdp.so"
++FILES_libfreerdp = "${libdir}/lib*${SOLIBS}"
 +
-+do_configure_prepend() {
-+    sed -i -e /po/d configure.ac 
-+    sed -i -e s:\ po::g Makefile.am
++PACKAGES_DYNAMIC += "^libfreerdp-plugin-.*"
++
++python populate_packages_prepend () {
++    freerdp_root = d.expand('${libdir}/freerdp')
++
++    do_split_packages(d, freerdp_root, '^(audin_.*)\.so$',
++        output_pattern='libfreerdp-plugin-%s',
++        description='FreeRDP plugin %s',
++        prepend=True, extra_depends='libfreerdp-plugin-audin')
++
++    do_split_packages(d, freerdp_root, '^(rdpsnd_.*)\.so$',
++        output_pattern='libfreerdp-plugin-%s',
++        description='FreeRDP plugin %s',
++        prepend=True, extra_depends='libfreerdp-plugin-rdpsnd')
++
++    do_split_packages(d, freerdp_root, '^(tsmf_.*)\.so$',
++        output_pattern='libfreerdp-plugin-%s',
++        description='FreeRDP plugin %s',
++        prepend=True, extra_depends='libfreerdp-plugin-tsmf')
++
++    do_split_packages(d, freerdp_root, '^([^-]*)\.so$',
++        output_pattern='libfreerdp-plugin-%s',
++        description='FreeRDP plugin %s',
++        prepend=True, extra_depends='')
 +}
-+
-+PNBLACKLIST[news] ?= "if you want to use these modules with E18, then you need to update it to git recipe fetching newer sources from http://git.enlightenment.org/enlightenment/modules/news.git/"
-diff --git a/meta-efl/recipes-efl/e17/nonworking/emprint_svn.bb b/meta-efl/recipes-efl/e17/nonworking/emprint_svn.bb
-deleted file mode 100644
-index 6c2abdc..0000000
---- a/meta-efl/recipes-efl/e17/nonworking/emprint_svn.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--DESCRIPTION = "Emprint is a utility for taking screenshots of the entire screen, a specific window, or a specific region."
--LICENSE = "MIT & BSD"
--DEPENDS = "imlib2 virtual/libx11 ecore evas edje eina"
--PV = "0.0.1+svnr${SRCPV}"
--LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
--SRCREV = "${EFL_SRCREV}"
--
--inherit e
--SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
--S = "${WORKDIR}/${SRCNAME}"
--
--FILES_${PN}-dbg += "${libdir}/${PN}/modules/.debug"
-diff --git a/meta-efl/recipes-efl/e17/nonworking/news_svn.bb b/meta-efl/recipes-efl/e17/nonworking/news_svn.bb
-deleted file mode 100644
-index 9b89d80..0000000
---- a/meta-efl/recipes-efl/e17/nonworking/news_svn.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--LICENSE = "GPL-2.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--
--PV = "0.1.0+svnr${SRCPV}"
--PR = "${INC_PR}.0"
--
--require e-module.inc
--
--do_configure_prepend() {
--    sed -i -e /po/d configure.ac 
--    sed -i -e s:\ po::g Makefile.am
--}
-diff --git a/meta-efl/recipes-efl/e17/nonworking/rage_svn.bb b/meta-efl/recipes-efl/e17/nonworking/rage_svn.bb
-deleted file mode 100644
-index da51ae6..0000000
---- a/meta-efl/recipes-efl/e17/nonworking/rage_svn.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--SUMMARY = "Rage is a media center application based on EFL"
--AUTHOR = "Carsten 'The Rasterman' Haitzler"
--HOMEPAGE = "http://www.rasterman.com"
--LICENSE = "MIT & BSD"
--LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
--DEPENDS = "emotion evas ecore edje"
--SECTION = "x11/multimedia"
--PV = "0.3.0.042+svnr${SRCPV}"
--SRCREV = "${EFL_SRCREV}"
--
--inherit e
--SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
--S = "${WORKDIR}/${SRCNAME}"
-diff --git a/meta-efl/recipes-efl/e17/rage_svn.bb b/meta-efl/recipes-efl/e17/rage_svn.bb
+diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb b/meta-oe/recipes-support/freerdp/freerdp_git.bb
 new file mode 100644
-index 0000000..a65aa9e
+index 0000000..fd7f74c
 --- /dev/null
-+++ b/meta-efl/recipes-efl/e17/rage_svn.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Rage is a media center application based on EFL"
-+AUTHOR = "Carsten 'The Rasterman' Haitzler"
-+HOMEPAGE = "http://www.rasterman.com"
-+LICENSE = "MIT & BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
-+DEPENDS = "emotion evas ecore edje"
-+SECTION = "x11/multimedia"
-+PV = "0.3.0.042+svnr${SRCPV}"
-+SRCREV = "${EFL_SRCREV}"
++++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
+@@ -0,0 +1,21 @@
++# Copyright (C) 2010-2012, O.S. Systems Software Ltda.
++# Released under the MIT license
 +
-+inherit e
-+SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
-+S = "${WORKDIR}/${SRCNAME}"
++include freerdp.inc
 +
-+PNBLACKLIST[rage] ?= "if you want to use these modules with E18, then you need to update it to git recipe fetching newer sources from  http://git.enlightenment.org/apps/rage.git/"
++inherit gitpkgv
++
++PV = "1.0.2+gitr${SRCPV}"
++PKGV = "${GITPKGVTAG}"
++
++EXTRA_OECMAKE += "-DWITH_MANPAGES=OFF"
++
++SRCREV = "f311acaffb9190567e2b478a98d7cbfaf2709f6b"
++SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-1.0"
++
++S = "${WORKDIR}/git"
++
++PNBLACKLIST[freerdp] ?= "Installs into double prefix, causing all files installed in /usr/usr and empty packages"
++# freerdp-1.0.2+gitrAUTOINC+f311acaffb: freerdp: Files/directories were installed but not shipped
++#       /usr/usr
++#       ....
+diff --git a/meta-oe/recipes-support/nonworking/freerdp/freerdp.inc b/meta-oe/recipes-support/nonworking/freerdp/freerdp.inc
+deleted file mode 100644
+index 34dac4b..0000000
+--- a/meta-oe/recipes-support/nonworking/freerdp/freerdp.inc
++++ /dev/null
+@@ -1,51 +0,0 @@
+-# Copyright (C) 2010-2012 O.S. Systems Software Ltda. All Rights Reserved
+-# Released under the MIT license
+-
+-DESCRIPTION = "FreeRDP RDP client"
+-HOMEPAGE = "http://www.freerdp.com"
+-DEPENDS = "virtual/libx11 openssl libxcursor libxv cups alsa-lib pulseaudio pcsc-lite libxkbfile libxinerama"
+-SECTION = "x11/network"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+-
+-inherit pkgconfig cmake
+-
+-EXTRA_OECMAKE += "-DWITH_PULSEAUDIO=ON \
+-                  -DWITH_PCSC=ON \
+-                  -DWITH_CUPS=ON \
+-                  -DWITH_FFMPEG=OFF \
+-                  -DWITH_CUNIT=OFF \
+-                  -DWITH_X11=ON \
+-                  -DWITH_XKBFILE=ON \
+-                  -DWITH_XINERAMA=ON"
+-
+-PACKAGES =+ "libfreerdp"
+-
+-LEAD_SONAME = "libfreerdp.so"
+-FILES_libfreerdp = "${libdir}/lib*${SOLIBS}"
+-
+-PACKAGES_DYNAMIC += "^libfreerdp-plugin-.*"
+-
+-python populate_packages_prepend () {
+-    freerdp_root = d.expand('${libdir}/freerdp')
+-
+-    do_split_packages(d, freerdp_root, '^(audin_.*)\.so$',
+-        output_pattern='libfreerdp-plugin-%s',
+-        description='FreeRDP plugin %s',
+-        prepend=True, extra_depends='libfreerdp-plugin-audin')
+-
+-    do_split_packages(d, freerdp_root, '^(rdpsnd_.*)\.so$',
+-        output_pattern='libfreerdp-plugin-%s',
+-        description='FreeRDP plugin %s',
+-        prepend=True, extra_depends='libfreerdp-plugin-rdpsnd')
+-
+-    do_split_packages(d, freerdp_root, '^(tsmf_.*)\.so$',
+-        output_pattern='libfreerdp-plugin-%s',
+-        description='FreeRDP plugin %s',
+-        prepend=True, extra_depends='libfreerdp-plugin-tsmf')
+-
+-    do_split_packages(d, freerdp_root, '^([^-]*)\.so$',
+-        output_pattern='libfreerdp-plugin-%s',
+-        description='FreeRDP plugin %s',
+-        prepend=True, extra_depends='')
+-}
+diff --git a/meta-oe/recipes-support/nonworking/freerdp/freerdp_git.bb b/meta-oe/recipes-support/nonworking/freerdp/freerdp_git.bb
+deleted file mode 100644
+index 0e9bf06..0000000
+--- a/meta-oe/recipes-support/nonworking/freerdp/freerdp_git.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-# Copyright (C) 2010-2012, O.S. Systems Software Ltda.
+-# Released under the MIT license
+-
+-include freerdp.inc
+-
+-inherit gitpkgv
+-
+-PV = "1.0.2+gitr${SRCPV}"
+-PKGV = "${GITPKGVTAG}"
+-
+-EXTRA_OECMAKE += "-DWITH_MANPAGES=OFF"
+-
+-SRCREV = "f311acaffb9190567e2b478a98d7cbfaf2709f6b"
+-SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-1.0"
+-
+-S = "${WORKDIR}/git"
 -- 
 2.6.0
 
