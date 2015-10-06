@@ -1,35 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id C13DC600B3
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id F13EA600B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Oct 2015 22:30:38 +0000 (UTC)
-Received: by wicgb1 with SMTP id gb1so185892011wic.1
+	Tue,  6 Oct 2015 22:30:39 +0000 (UTC)
+Received: by wiclk2 with SMTP id lk2so3240255wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Oct 2015 15:30:38 -0700 (PDT)
+	Tue, 06 Oct 2015 15:30:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=wn73dU/zrfOxo9jWf6uuet4wcOmPVte4f/kBJXGlGe4=;
-	b=ZYHiwdeN/PfEl/L+UWXoyhBsjlj2ei05eqzsX6YP/Vli9j7jIVBbeTaHXnwgOyUZCc
-	ZvI/Zb/3Hq3KGprL/02O/CRZqfEx+QoHbsWc+Clrn0jjAi3bylDDndN1IcR+z/nwJUis
-	ahq6uHkUiNh1vn4IwUHyK2daKs/yAE10ShCM9F9ul3wrfjfM/oqgnKs5K0+hyeeU5Gbg
-	/RMg3VAlQY3J8EPE+AXSjyXOuZU+t3CQoU1PNsWfigpwgU3s6XEyGdpUHNwM6Jb3LgWj
-	7Y0cN7NywRkTtUMsoN601FCqzZS1ErZ2okvwovFMvZhMs6g2gQvCHaWdMwNUDvnY/snp
-	njhQ==
-X-Received: by 10.194.58.177 with SMTP id s17mr46584167wjq.102.1444170638437; 
-	Tue, 06 Oct 2015 15:30:38 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=S5ItgkC/7EOMdK0BMzwppxVASsX2O5GD/J3x8wrI3mc=;
+	b=gTX/nis+z8/K5IRgDrWS965Gvx4zRkd2RmGFX01bZAa04sALypQ7PBVKyF+NjzBGvC
+	30B8wNjxS2jbxOpv7bJ96UeCuF/TlW57jcwoB0O2eNU8uOpDjL2v3Te9aCUJ+AY1DhCA
+	kjfa0Dm2zpPQSXFIaBzLqKRaBR3Dfw+B+CUMt0QB865yi2x/YKc/DYCXA80crgOCzMBi
+	pKtfLPsr3it8dHHqttI0yCKnoatPkBsLGYpRgVWLhrqk8gYsbhmDZyxGpSNJ++SW6aaR
+	EAwt3IIUy0pGhcSr1K3EoHJdihdv5HPP+5ovNCfbrTKSzAWa/VrDehRq/9U+Q/M/wGMx
+	dNzQ==
+X-Received: by 10.194.121.1 with SMTP id lg1mr11260179wjb.111.1444170639529;
+	Tue, 06 Oct 2015 15:30:39 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	jt3sm31977747wjc.12.2015.10.06.15.30.37
+	f17sm35096271wjn.38.2015.10.06.15.30.38
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 06 Oct 2015 15:30:37 -0700 (PDT)
+	Tue, 06 Oct 2015 15:30:38 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Oct 2015 00:30:35 +0200
-Message-Id: <1444170642-23088-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed,  7 Oct 2015 00:30:36 +0200
+Message-Id: <1444170642-23088-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.6.0
-Subject: [PATCH][meta-oe 1/8] Revert "gst123: move to nonworking directory"
+In-Reply-To: <1444170642-23088-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1444170642-23088-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [PATCH][meta-oe 2/8] Revert "qcanobserver: Move to nonworking"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,200 +45,483 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Oct 2015 22:30:39 -0000
+X-List-Received-Date: Tue, 06 Oct 2015 22:30:40 -0000
 
 * Use PNBLACKLIST instead
 
-This reverts commit b6643c81bdee1165cdd5f301570c4e6fe58a18d3.
+This reverts commit 8040a4c38bd00e45d50b539affde03deddecd38c.
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../gstreamer/files/display.patch                  | 60 ++++++++++++++++++++++
- .../recipes-multimedia/gstreamer/gst123_0.3.1.bb   | 17 ++++++
- .../nonworking/gstreamer/files/display.patch       | 60 ----------------------
- .../nonworking/gstreamer/gst123_0.3.1.bb           | 15 ------
- 4 files changed, 77 insertions(+), 75 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/gstreamer/files/display.patch
- create mode 100644 meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
- delete mode 100644 meta-multimedia/recipes-multimedia/nonworking/gstreamer/files/display.patch
- delete mode 100644 meta-multimedia/recipes-multimedia/nonworking/gstreamer/gst123_0.3.1.bb
+ .../qcanobserver/qcanobserver-socketcan_svn.bb     | 30 ---------------
+ ...erinterface.cpp-add-sys-socket.h-as-inclu.patch | 41 ---------------------
+ .../0002-qconsole-writethread-gcc-4.5-fixes.patch  | 40 --------------------
+ .../qcanobserver/qcanobserver/candemo.xml          | 40 --------------------
+ .../nonworking/qcanobserver/qcanobserver_svn.bb    | 41 ---------------------
+ .../qcanobserver/qcanobserver-socketcan_svn.bb     | 31 ++++++++++++++++
+ ...erinterface.cpp-add-sys-socket.h-as-inclu.patch | 41 +++++++++++++++++++++
+ .../0002-qconsole-writethread-gcc-4.5-fixes.patch  | 40 ++++++++++++++++++++
+ .../qcanobserver/qcanobserver/candemo.xml          | 40 ++++++++++++++++++++
+ .../recipes-qt/qcanobserver/qcanobserver_svn.bb    | 43 ++++++++++++++++++++++
+ 10 files changed, 195 insertions(+), 192 deletions(-)
+ delete mode 100644 meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver-socketcan_svn.bb
+ delete mode 100644 meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch
+ delete mode 100644 meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch
+ delete mode 100755 meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/candemo.xml
+ delete mode 100644 meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver_svn.bb
+ create mode 100644 meta-oe/recipes-qt/qcanobserver/qcanobserver-socketcan_svn.bb
+ create mode 100644 meta-oe/recipes-qt/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch
+ create mode 100644 meta-oe/recipes-qt/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch
+ create mode 100755 meta-oe/recipes-qt/qcanobserver/qcanobserver/candemo.xml
+ create mode 100644 meta-oe/recipes-qt/qcanobserver/qcanobserver_svn.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer/files/display.patch b/meta-multimedia/recipes-multimedia/gstreamer/files/display.patch
-new file mode 100644
-index 0000000..61b0e6c
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gstreamer/files/display.patch
-@@ -0,0 +1,60 @@
-+Upstream-Status: Backport
-+Signed-off-by: Ross Burton <ross.burton@intel.com>
-+
-+From 3e46d2e501da68d929bb5f26900a292a5fc04a1f Mon Sep 17 00:00:00 2001
-+From: Stefan Westerfeld <stefan@space.twc.de>
-+Date: Mon, 23 Apr 2012 03:10:22 +0200
-+Subject: [PATCH] Fix time display updates (broken by introduction of quiet
-+ mode).
-+
-+---
-+ src/gst123.cc |    1 +
-+ src/msg.cc    |    7 +++++++
-+ src/msg.h     |    1 +
-+ 3 files changed, 9 insertions(+)
-+
-+diff --git a/src/gst123.cc b/src/gst123.cc
-+index 20e91e5..ce5876d 100644
-+--- a/src/gst123.cc
-++++ b/src/gst123.cc
-+@@ -640,6 +640,7 @@ cb_print_position (gpointer *data)
-+       else
-+         blanks += "         ";
-+       Msg::print ("%s%s\r", status.c_str(), blanks.c_str());
-++      Msg::flush();
-+     }
-+ 
-+   /* call me again */
-+diff --git a/src/msg.cc b/src/msg.cc
-+index 547cd90..33cada2 100644
-+--- a/src/msg.cc
-++++ b/src/msg.cc
-+@@ -41,6 +41,13 @@ print (const char *format, ...)
-+     }
-+ }
-+ 
-++void
-++flush()
-++{
-++  if (!Options::the().quiet)
-++    fflush (stdout);
-++}
-++
-+ }
-+ 
-+ }
-+diff --git a/src/msg.h b/src/msg.h
-+index e0ced24..5bebac0 100644
-+--- a/src/msg.h
-++++ b/src/msg.h
-+@@ -27,6 +27,7 @@ namespace Msg
-+ {
-+ 
-+ void print (const char *format, ...);
-++void flush();
-+ 
-+ }
-+ 
-+-- 
-+1.7.9.5
-+
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb b/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
-new file mode 100644
-index 0000000..47f1d9f
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "Flexible CLI player in the spirit of mpg123, based on GStreamer"
-+HOMEPAGE = "http://space.twc.de/~stefan/gst123.php"
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-+                    file://src/gst123.cc;beginline=1;endline=19;md5=05d2f5d54b985b986c26af931d2084f8"
-+
-+DEPENDS = "libx11 gstreamer gst-plugins-base gtk+ ncurses"
-+
-+SRC_URI = "http://space.twc.de/~stefan/gst123/${BPN}-${PV}.tar.bz2 \
-+           file://display.patch"
-+
-+SRC_URI[md5sum] = "1e77767c9d6fecee5641f95804f160fe"
-+SRC_URI[sha256sum] = "89d1de025eca0466c125dcd6a11b64341bdf98ee4c03c3e5a12321d77cb8b0ce"
-+
-+inherit autotools
-+
-+PNBLACKLIST[gst123] ?= "gst123 is still "sometimes" using wrong sysroot"
-diff --git a/meta-multimedia/recipes-multimedia/nonworking/gstreamer/files/display.patch b/meta-multimedia/recipes-multimedia/nonworking/gstreamer/files/display.patch
+diff --git a/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver-socketcan_svn.bb b/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver-socketcan_svn.bb
 deleted file mode 100644
-index 61b0e6c..0000000
---- a/meta-multimedia/recipes-multimedia/nonworking/gstreamer/files/display.patch
+index 9852b0c..0000000
+--- a/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver-socketcan_svn.bb
 +++ /dev/null
-@@ -1,60 +0,0 @@
--Upstream-Status: Backport
--Signed-off-by: Ross Burton <ross.burton@intel.com>
+@@ -1,30 +0,0 @@
+-SUMMARY = "The Linux CAN Sniffer - SocketCAN driver"
 -
--From 3e46d2e501da68d929bb5f26900a292a5fc04a1f Mon Sep 17 00:00:00 2001
--From: Stefan Westerfeld <stefan@space.twc.de>
--Date: Mon, 23 Apr 2012 03:10:22 +0200
--Subject: [PATCH] Fix time display updates (broken by introduction of quiet
-- mode).
+-LICENSE = "GPLv3+"
+-LIC_FILES_CHKSUM = "file://../../../modeltest/LICENSE.GPL;md5=34337af480a8c452bfafe22a78fa20cb"
 -
+-inherit qt4x11
+-
+-DEPENDS += "qwt libsocketcan"
+-
+-PV = "0.5+svnr${SRCPV}"
+-SRCREV = "48"
+-SRC_URI = "svn://qcanobserver.svn.sourceforge.net/svnroot;module=qcanobserver;protocol=https"
+-
+-S = "${WORKDIR}/qcanobserver/DeviceLib/linux/SocketCAN"
+-
+-CXXFLAGS += " -DPF_CAN=29  -DAF_CAN=PF_CAN"
+-
+-do_configure_prepend() {
+-    sed -i s:/usr/include/qwt5/:${STAGING_INCDIR}:g *.pro
+-}
+-
+-do_install() {
+-    install -d ${D}${datadir}/qcanobserver/lib
+-
+-    install -m 0755 ${S}/lib* ${D}${datadir}/qcanobserver/lib/
+-}
+-
+-FILES_${PN} += "${datadir}/qcanobserver/lib"
+-FILES_${PN}-dbg += "${datadir}/qcanobserver/lib/.debug"
+-
+diff --git a/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch b/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch
+deleted file mode 100644
+index 1b3da3b..0000000
+--- a/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From ebb464e3dfa2d59d65c3aa8ee652cb7607481f61 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Thu, 10 Nov 2011 19:38:27 +0100
+-Subject: [PATCH] messagebufferinterface.cpp: move sys/socket.h include
+-
+-This prevents the following error during cross-compiling:
+-
+-| In file included from messagebufferinterface.cpp:30:
+-| /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/linux/can.h:81: error: 'sa_family_t' does not name a type
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ----
-- src/gst123.cc |    1 +
-- src/msg.cc    |    7 +++++++
-- src/msg.h     |    1 +
-- 3 files changed, 9 insertions(+)
+- messagebufferinterface.cpp |    7 ++++---
+- 1 files changed, 4 insertions(+), 3 deletions(-)
 -
--diff --git a/src/gst123.cc b/src/gst123.cc
--index 20e91e5..ce5876d 100644
----- a/src/gst123.cc
--+++ b/src/gst123.cc
--@@ -640,6 +640,7 @@ cb_print_position (gpointer *data)
--       else
--         blanks += "         ";
--       Msg::print ("%s%s\r", status.c_str(), blanks.c_str());
--+      Msg::flush();
--     }
+-diff --git a/messagebufferinterface.cpp b/messagebufferinterface.cpp
+-index 116564c..3e9a535 100644
+---- a/messagebufferinterface.cpp
+-+++ b/messagebufferinterface.cpp
+-@@ -25,14 +25,15 @@
+- #include <sys/time.h>
+- #include <QFile>
 - 
--   /* call me again */
--diff --git a/src/msg.cc b/src/msg.cc
--index 547cd90..33cada2 100644
----- a/src/msg.cc
--+++ b/src/msg.cc
--@@ -41,6 +41,13 @@ print (const char *format, ...)
--     }
-- }
-- 
--+void
--+flush()
--+{
--+  if (!Options::the().quiet)
--+    fflush (stdout);
--+}
+-+#include <sys/types.h>
+-+#include <sys/socket.h>
+-+#include <sys/stat.h>
 -+
-- }
+- //#include <linux/can.h>
+- //#include <linux/can/raw.h>
+- #include <syscall.h>
 - 
-- }
--diff --git a/src/msg.h b/src/msg.h
--index e0ced24..5bebac0 100644
----- a/src/msg.h
--+++ b/src/msg.h
--@@ -27,6 +27,7 @@ namespace Msg
-- {
-- 
-- void print (const char *format, ...);
--+void flush();
-- 
-- }
+- #include "configdialog.h"
+--#include <sys/types.h>
+--#include <sys/socket.h>
+--#include <sys/stat.h>
+- #include <linux/can.h>
+- #include <linux/can/raw.h>
 - 
 --- 
--1.7.9.5
+-1.7.2.5
 -
-diff --git a/meta-multimedia/recipes-multimedia/nonworking/gstreamer/gst123_0.3.1.bb b/meta-multimedia/recipes-multimedia/nonworking/gstreamer/gst123_0.3.1.bb
+diff --git a/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch b/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch
 deleted file mode 100644
-index 6c495b2..0000000
---- a/meta-multimedia/recipes-multimedia/nonworking/gstreamer/gst123_0.3.1.bb
+index 4561923..0000000
+--- a/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch
 +++ /dev/null
-@@ -1,15 +0,0 @@
--SUMMARY = "Flexible CLI player in the spirit of mpg123, based on GStreamer"
--HOMEPAGE = "http://space.twc.de/~stefan/gst123.php"
--LICENSE = "LGPLv2.1+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
--                    file://src/gst123.cc;beginline=1;endline=19;md5=05d2f5d54b985b986c26af931d2084f8"
+@@ -1,40 +0,0 @@
+-From 3b3cb5212b5dbf182beed171045e5d179b2e9000 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Fri, 11 Nov 2011 09:32:14 +0100
+-Subject: [PATCH 2/2] qconsole, writethread: gcc 4.5 fixes
 -
--DEPENDS = "libx11 gstreamer gst-plugins-base gtk+ ncurses"
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- qconsole.cpp    |    2 +-
+- writethread.cpp |    2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
 -
--SRC_URI = "http://space.twc.de/~stefan/gst123/${BPN}-${PV}.tar.bz2 \
--           file://display.patch"
+-diff --git a/qconsole.cpp b/qconsole.cpp
+-index ea86957..b5a4687 100644
+---- a/qconsole.cpp
+-+++ b/qconsole.cpp
+-@@ -22,7 +22,7 @@ QConsole::QConsole()
+- 
+- {
+-     this->setReadOnly(true);
+--    QTextEdit::QTextEdit(NULL);
+-+    QTextEdit(NULL);
+- }
+- 
+- 
+-diff --git a/writethread.cpp b/writethread.cpp
+-index ef7bc13..ff19560 100755
+---- a/writethread.cpp
+-+++ b/writethread.cpp
+-@@ -69,7 +69,7 @@ void WriteThread::setDev(void *ConfData, QString InterfaceLib, bool shareDevLib)
+-     if(!handle)
+-     {
+-         QString *ErrStr = new QString(" ");
+--        ErrStr->sprintf("%s %s","Could not load Device Mapper: ", InterfaceLib);
+-+        ErrStr->sprintf("%s %s","Could not load Device Mapper: ", (char*)InterfaceLib.constData());
+-         ErrorDialog *ed = new ErrorDialog;
+-         ed->SetErrorMessage(*ErrStr);
+-         delete ErrStr;
+--- 
+-1.7.2.5
 -
--SRC_URI[md5sum] = "1e77767c9d6fecee5641f95804f160fe"
--SRC_URI[sha256sum] = "89d1de025eca0466c125dcd6a11b64341bdf98ee4c03c3e5a12321d77cb8b0ce"
+diff --git a/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/candemo.xml b/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/candemo.xml
+deleted file mode 100755
+index 304713f..0000000
+--- a/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/candemo.xml
++++ /dev/null
+@@ -1,40 +0,0 @@
+-<?xml version="1.0" encoding="ISO-8859-1"?>
 -
--inherit autotools
+-<Database Name="EW-demo">
+-    <ID Id="180">
+-	<Item0>
+-	    <interpret Multiplier="0.010986328125" Name="MotorPos" Offset="-180" Datamask="00120000">
+-	    </interpret>
+-	</Item0>
+-	</ID>
+-	    <ID Id="280">
+-	<Item0>
+-	    <interpret Multiplier="1.0" Name="Fanstatus" Offset="0" Datamask="10000000">
+-	    </interpret>
+-	</Item0>
+-	</ID>
+-	    <ID Id="380">
+-	<Item0>
+-	    <interpret Multiplier="0.00390625" Name="temp1" Offset="0" Datamask="00120000">
+-	    </interpret>
+-	</Item0>
+-	</ID>
+-	    <ID Id="480">
+-	<Item0>
+-	    <interpret Multiplier="1.0" Name="fanstatus" Offset="0" Datamask="10000000">
+-	    </interpret>
+-	</Item0>
+-	</ID>
+-	<ID Id="580">
+-	<Item0>
+-	    <interpret Multiplier="1.0" Name="lampstatus" Offset="0" Datamask="10000000">
+-	    </interpret>
+-	</Item0>
+-	</ID>
+-	<ID Id="680">
+-	<Item0>
+-	<interpret Multiplier="0.00390625" Name="Lightsensor" Offset="0" Datamask="00120000">
+-	</interpret>
+-	</Item0>
+-	</ID>
+-</Database>
+diff --git a/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver_svn.bb b/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver_svn.bb
+deleted file mode 100644
+index 4b566f7..0000000
+--- a/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver_svn.bb
++++ /dev/null
+@@ -1,41 +0,0 @@
+-SUMMARY = "The Linux CAN Sniffer"
+-
+-LICENSE = "GPLv3+"
+-LIC_FILES_CHKSUM = "file://modeltest/LICENSE.GPL;md5=34337af480a8c452bfafe22a78fa20cb"
+-
+-inherit qt4x11
+-
+-DEPENDS += "qwt"
+-
+-PV = "0.5+svnr${SRCPV}"
+-SRCREV = "48"
+-SRC_URI = "svn://qcanobserver.svn.sourceforge.net/svnroot;module=qcanobserver;protocol=https \
+-           file://0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch \
+-           file://0002-qconsole-writethread-gcc-4.5-fixes.patch  \
+-           file://candemo.xml"
+-
+-S = "${WORKDIR}/qcanobserver/"
+-
+-CXXFLAGS += " -DPF_CAN=29  -DAF_CAN=PF_CAN"
+-
+-do_configure_prepend() {
+-    sed -i -e s:/usr/include/qwt5/:${STAGING_INCDIR}:g -e 's:-L/usr/lib/:-L${STAGING_DIR_TARGET}/lib -ldl:g' *.pro
+-}
+-
+-do_configure_append() {
+-    sed -i -e s:-L/usr/lib::g Makefile
+-}
+-
+-do_install() {
+-    install -d ${D}${datadir}/qcanobserver
+-    install -d ${D}${datadir}/qcanobserver/cfg
+-    install -d ${D}${datadir}/qcanobserver/lib
+-    install -d ${D}${datadir}/qcanobserver/db
+-
+-    install -m 0755 ${S}/QCanObserver ${D}${datadir}/qcanobserver
+-
+-    install -m 0644 ${WORKDIR}/candemo.xml ${D}${datadir}/qcanobserver/db
+-    install -m 0644 ${S}/db/*.xml ${D}${datadir}/qcanobserver/db
+-}
+-
+-FILES_${PN}-dbg += "${datadir}/qcanobserver/.debug"
+diff --git a/meta-oe/recipes-qt/qcanobserver/qcanobserver-socketcan_svn.bb b/meta-oe/recipes-qt/qcanobserver/qcanobserver-socketcan_svn.bb
+new file mode 100644
+index 0000000..19ea1ea
+--- /dev/null
++++ b/meta-oe/recipes-qt/qcanobserver/qcanobserver-socketcan_svn.bb
+@@ -0,0 +1,31 @@
++SUMMARY = "The Linux CAN Sniffer - SocketCAN driver"
++
++LICENSE = "GPLv3+"
++LIC_FILES_CHKSUM = "file://../../../modeltest/LICENSE.GPL;md5=34337af480a8c452bfafe22a78fa20cb"
++
++inherit qt4x11
++
++DEPENDS += "qwt libsocketcan"
++
++PV = "0.5+svnr${SRCPV}"
++SRCREV = "48"
++SRC_URI = "svn://qcanobserver.svn.sourceforge.net/svnroot;module=qcanobserver;protocol=https"
++
++S = "${WORKDIR}/qcanobserver/DeviceLib/linux/SocketCAN"
++
++CXXFLAGS += " -DPF_CAN=29  -DAF_CAN=PF_CAN"
++
++do_configure_prepend() {
++    sed -i s:/usr/include/qwt5/:${STAGING_INCDIR}:g *.pro
++}
++
++do_install() {
++    install -d ${D}${datadir}/qcanobserver/lib
++
++    install -m 0755 ${S}/lib* ${D}${datadir}/qcanobserver/lib/
++}
++
++FILES_${PN} += "${datadir}/qcanobserver/lib"
++FILES_${PN}-dbg += "${datadir}/qcanobserver/lib/.debug"
++
++PNBLACKLIST[qcanobserver-socketcan] ?= "depends on qwt-5 APIs"
+diff --git a/meta-oe/recipes-qt/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch b/meta-oe/recipes-qt/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch
+new file mode 100644
+index 0000000..1b3da3b
+--- /dev/null
++++ b/meta-oe/recipes-qt/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch
+@@ -0,0 +1,41 @@
++From ebb464e3dfa2d59d65c3aa8ee652cb7607481f61 Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Thu, 10 Nov 2011 19:38:27 +0100
++Subject: [PATCH] messagebufferinterface.cpp: move sys/socket.h include
++
++This prevents the following error during cross-compiling:
++
++| In file included from messagebufferinterface.cpp:30:
++| /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/linux/can.h:81: error: 'sa_family_t' does not name a type
++
++Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
++---
++ messagebufferinterface.cpp |    7 ++++---
++ 1 files changed, 4 insertions(+), 3 deletions(-)
++
++diff --git a/messagebufferinterface.cpp b/messagebufferinterface.cpp
++index 116564c..3e9a535 100644
++--- a/messagebufferinterface.cpp
+++++ b/messagebufferinterface.cpp
++@@ -25,14 +25,15 @@
++ #include <sys/time.h>
++ #include <QFile>
++ 
+++#include <sys/types.h>
+++#include <sys/socket.h>
+++#include <sys/stat.h>
+++
++ //#include <linux/can.h>
++ //#include <linux/can/raw.h>
++ #include <syscall.h>
++ 
++ #include "configdialog.h"
++-#include <sys/types.h>
++-#include <sys/socket.h>
++-#include <sys/stat.h>
++ #include <linux/can.h>
++ #include <linux/can/raw.h>
++ 
++-- 
++1.7.2.5
++
+diff --git a/meta-oe/recipes-qt/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch b/meta-oe/recipes-qt/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch
+new file mode 100644
+index 0000000..4561923
+--- /dev/null
++++ b/meta-oe/recipes-qt/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch
+@@ -0,0 +1,40 @@
++From 3b3cb5212b5dbf182beed171045e5d179b2e9000 Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Fri, 11 Nov 2011 09:32:14 +0100
++Subject: [PATCH 2/2] qconsole, writethread: gcc 4.5 fixes
++
++Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
++---
++ qconsole.cpp    |    2 +-
++ writethread.cpp |    2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/qconsole.cpp b/qconsole.cpp
++index ea86957..b5a4687 100644
++--- a/qconsole.cpp
+++++ b/qconsole.cpp
++@@ -22,7 +22,7 @@ QConsole::QConsole()
++ 
++ {
++     this->setReadOnly(true);
++-    QTextEdit::QTextEdit(NULL);
+++    QTextEdit(NULL);
++ }
++ 
++ 
++diff --git a/writethread.cpp b/writethread.cpp
++index ef7bc13..ff19560 100755
++--- a/writethread.cpp
+++++ b/writethread.cpp
++@@ -69,7 +69,7 @@ void WriteThread::setDev(void *ConfData, QString InterfaceLib, bool shareDevLib)
++     if(!handle)
++     {
++         QString *ErrStr = new QString(" ");
++-        ErrStr->sprintf("%s %s","Could not load Device Mapper: ", InterfaceLib);
+++        ErrStr->sprintf("%s %s","Could not load Device Mapper: ", (char*)InterfaceLib.constData());
++         ErrorDialog *ed = new ErrorDialog;
++         ed->SetErrorMessage(*ErrStr);
++         delete ErrStr;
++-- 
++1.7.2.5
++
+diff --git a/meta-oe/recipes-qt/qcanobserver/qcanobserver/candemo.xml b/meta-oe/recipes-qt/qcanobserver/qcanobserver/candemo.xml
+new file mode 100755
+index 0000000..304713f
+--- /dev/null
++++ b/meta-oe/recipes-qt/qcanobserver/qcanobserver/candemo.xml
+@@ -0,0 +1,40 @@
++<?xml version="1.0" encoding="ISO-8859-1"?>
++
++<Database Name="EW-demo">
++    <ID Id="180">
++	<Item0>
++	    <interpret Multiplier="0.010986328125" Name="MotorPos" Offset="-180" Datamask="00120000">
++	    </interpret>
++	</Item0>
++	</ID>
++	    <ID Id="280">
++	<Item0>
++	    <interpret Multiplier="1.0" Name="Fanstatus" Offset="0" Datamask="10000000">
++	    </interpret>
++	</Item0>
++	</ID>
++	    <ID Id="380">
++	<Item0>
++	    <interpret Multiplier="0.00390625" Name="temp1" Offset="0" Datamask="00120000">
++	    </interpret>
++	</Item0>
++	</ID>
++	    <ID Id="480">
++	<Item0>
++	    <interpret Multiplier="1.0" Name="fanstatus" Offset="0" Datamask="10000000">
++	    </interpret>
++	</Item0>
++	</ID>
++	<ID Id="580">
++	<Item0>
++	    <interpret Multiplier="1.0" Name="lampstatus" Offset="0" Datamask="10000000">
++	    </interpret>
++	</Item0>
++	</ID>
++	<ID Id="680">
++	<Item0>
++	<interpret Multiplier="0.00390625" Name="Lightsensor" Offset="0" Datamask="00120000">
++	</interpret>
++	</Item0>
++	</ID>
++</Database>
+diff --git a/meta-oe/recipes-qt/qcanobserver/qcanobserver_svn.bb b/meta-oe/recipes-qt/qcanobserver/qcanobserver_svn.bb
+new file mode 100644
+index 0000000..54e7fc1
+--- /dev/null
++++ b/meta-oe/recipes-qt/qcanobserver/qcanobserver_svn.bb
+@@ -0,0 +1,43 @@
++SUMMARY = "The Linux CAN Sniffer"
++
++LICENSE = "GPLv3+"
++LIC_FILES_CHKSUM = "file://modeltest/LICENSE.GPL;md5=34337af480a8c452bfafe22a78fa20cb"
++
++inherit qt4x11
++
++DEPENDS += "qwt"
++
++PV = "0.5+svnr${SRCPV}"
++SRCREV = "48"
++SRC_URI = "svn://qcanobserver.svn.sourceforge.net/svnroot;module=qcanobserver;protocol=https \
++           file://0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch \
++           file://0002-qconsole-writethread-gcc-4.5-fixes.patch  \
++           file://candemo.xml"
++
++S = "${WORKDIR}/qcanobserver/"
++
++CXXFLAGS += " -DPF_CAN=29  -DAF_CAN=PF_CAN"
++
++do_configure_prepend() {
++    sed -i -e s:/usr/include/qwt5/:${STAGING_INCDIR}:g -e 's:-L/usr/lib/:-L${STAGING_DIR_TARGET}/lib -ldl:g' *.pro
++}
++
++do_configure_append() {
++    sed -i -e s:-L/usr/lib::g Makefile
++}
++
++do_install() {
++    install -d ${D}${datadir}/qcanobserver
++    install -d ${D}${datadir}/qcanobserver/cfg
++    install -d ${D}${datadir}/qcanobserver/lib
++    install -d ${D}${datadir}/qcanobserver/db
++
++    install -m 0755 ${S}/QCanObserver ${D}${datadir}/qcanobserver
++
++    install -m 0644 ${WORKDIR}/candemo.xml ${D}${datadir}/qcanobserver/db
++    install -m 0644 ${S}/db/*.xml ${D}${datadir}/qcanobserver/db
++}
++
++FILES_${PN}-dbg += "${datadir}/qcanobserver/.debug"
++
++PNBLACKLIST[qcanobserver] ?= "depends on qwt-5 APIs"
 -- 
 2.6.0
 
