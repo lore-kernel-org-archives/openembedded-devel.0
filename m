@@ -1,30 +1,40 @@
-Return-Path: <adrian.ratiu@ni.com>
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 07AAF734B8
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D0257680D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Oct 2015 10:58:41 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	t96Awgmq026390 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 6 Oct 2015 05:58:42 -0500
-Received: from adi-pc-linux.natinst.com ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2015100605584173-1246795 ;
-	Tue, 6 Oct 2015 05:58:41 -0500 
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+	Tue,  6 Oct 2015 11:42:00 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so154543263wic.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 Oct 2015 04:41:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to;
+	bh=VRK8Tkmivr9QcQQlxIpmWU5tnou2gPQdl85olyUSGVs=;
+	b=GSisz6vWo7QpAbLmU6agkqnswNUtjwLiM88mwyh8OFM0XiwABYze6Xw6gVhXJuE3Jh
+	cajhAS/eEuyYZTinyogoKAHjIxa9vSmwdAbZUXLLHB7UmFhofSlOBrTXdfBEr/oEY4H9
+	4VmfKETUbuwDeM0NMc6gDl+caOVPl9JX9Nd4qOta2mbg5LCec3Iaa1pUc7NYRJyJG2Op
+	OW+wkKbZrO+L/CgX2Ry8egRkIGT0ziZV8O7CrvTUrrKQbnDF7RSwaLfMHuctIuZh4qFe
+	LA/5rTJoqOT+E7WmOiVOJBsryJYtcMnMTGhKzsVv4v/TeObM0wD1tKNh6jMie7bR6Res
+	gQyA==
+X-Received: by 10.180.198.48 with SMTP id iz16mr18107911wic.63.1444131719638; 
+	Tue, 06 Oct 2015 04:41:59 -0700 (PDT)
+Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
+	by smtp.gmail.com with ESMTPSA id
+	pb4sm32127507wjb.8.2015.10.06.04.41.58
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 06 Oct 2015 04:41:59 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+From: Jens Rehsack <rehsack@gmail.com>
+In-Reply-To: <CABcZAN=kqUjdKUqvziBkTa=yhVUFvOw-oGL6LQdzgMeUNGqLyw@mail.gmail.com>
+Date: Tue, 6 Oct 2015 13:41:57 +0200
+Message-Id: <3E673099-DB5C-4269-92FC-019C985A63F6@gmail.com>
+References: <1443897005-23957-1-git-send-email-andrei.kholodnyi@gmail.com>
+	<CABcZAN=kqUjdKUqvziBkTa=yhVUFvOw-oGL6LQdzgMeUNGqLyw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 6 Oct 2015 13:58:40 +0300
-Message-Id: <1444129120-5101-1-git-send-email-adrian.ratiu@ni.com>
-X-Mailer: git-send-email 2.1.4
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 10/06/2015 05:58:41 AM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 10/06/2015 05:58:41 AM,
-	Serialize complete at 10/06/2015 05:58:41 AM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2015-10-06_07:, , signatures=0
-Subject: [meta-security][PATCH] clamav: Update source mirror
+X-Mailer: Apple Mail (2.2104)
+Subject: Re: [meta-oe][PATCH] talloc: remove default packages from the packages list since empty
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,30 +48,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Oct 2015 10:58:43 -0000
+X-List-Received-Date: Tue, 06 Oct 2015 11:42:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-The source archive was deleted from the debian mirror; get it from
-launchpad for now
 
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
----
- recipes-security/clamav/clamav_0.98.5.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Am 03.10.2015 um 20:37 schrieb Christopher Larson =
+<clarson@kergoth.com>:
+>=20
+> On Sat, Oct 3, 2015 at 11:30 AM, Andrei Kholodnyi <
+> andrei.kholodnyi@gmail.com> wrote:
+>=20
+>> populate_sdk fails with following message:
+>> error: talloc-dev-2.1.1-r0 requires talloc =3D 2.1.1-r0
+>>=20
+>> these packages are empty,remove them from the package list
+>> ---
+>> meta-oe/recipes-support/talloc/talloc_2.1.1.bb | 5 +----
+>> 1 file changed, 1 insertion(+), 4 deletions(-)
+>>=20
+>> diff --git a/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
+>> b/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
+>> index 89c390f..0c98bb6 100644
+>> --- a/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
+>> +++ b/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
+>> @@ -20,12 +20,9 @@ EXTRA_OECONF +=3D "--disable-rpath \
+>>                  --with-libiconv=3D${STAGING_DIR_HOST}${prefix}\
+>>                 "
+>>=20
+>> -PACKAGES +=3D "libtalloc libtalloc-dbg libtalloc-dev pytalloc =
+pytalloc-dbg
+>> pytalloc-dev"
+>> +PACKAGES =3D "libtalloc libtalloc-dbg libtalloc-dev pytalloc =
+pytalloc-dbg
+>> pytalloc-dev"
+>>=20
+>> #ALLOW_EMPTY_${PN} =3D "1"
+>> -FILES_${PN} =3D ""
+>> -FILES_${PN}-dev =3D ""
+>> -FILES_${PN}-dbg =3D ""
+>>=20
+>=20
+> Question, why does this use libtalloc as the package names rather than =
+the
+> default of talloc? In the common case of the debian bbclass inherited,
+> they'll get renamed based on the library soname anyway. Also, =
+overriding
+> the PACKAGES list isn't ideal, since it means future changes to the =
+default
+> value of PACKAGES will not be picked up here. Also, this packaging is =
+worse
+> than default, as it doesn't have the -staticdev package.
 
-diff --git a/recipes-security/clamav/clamav_0.98.5.bb b/recipes-security/clamav/clamav_0.98.5.bb
-index 08604a7..8820461 100644
---- a/recipes-security/clamav/clamav_0.98.5.bb
-+++ b/recipes-security/clamav/clamav_0.98.5.bb
-@@ -7,7 +7,7 @@ DEPENDS = "libtool db openssl zlib ncurses bzip2 libmspack"
- 
- LIC_FILES_CHKSUM = "file://COPYING.LGPL;beginline=2;endline=3;md5=4b89c05acc71195e9a06edfa2fa7d092"
- 
--SRC_URI = "${DEBIAN_MIRROR}/main/c/${BPN}/${BPN}_${PV}+dfsg.orig.tar.xz;name=archive \
-+SRC_URI = "https://launchpad.net/debian/+archive/primary/+files/clamav_0.98.5%2Bdfsg.orig.tar.xz;name=archive \
-     file://0001-Change-paths-in-sample-conf-file-to-match-Debian.patch \
-     file://0002-Add-an-additional-n-after-the-number-in-the-pidfile.patch \
-     file://0003-unit_tests-increment-test-timeout-from-40secs-to-5mi.patch \
--- 
-2.1.4
+In current situation you have to touch every recipe depending on
+talloc - not only in poky and meta-oe, also in any 3rd party layer.
+
+I agree to the rename, but at a better time (e.g. when jethro has been =
+settled).
+
+Cheers
+--=20
+Jens Rehsack - rehsack@gmail.com
 
 
