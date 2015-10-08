@@ -1,23 +1,23 @@
 Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5646365CBC
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BEC3674242
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Oct 2015 05:11:59 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t985BwSd014718
+	Thu,  8 Oct 2015 05:14:28 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t985ESck001772
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 7 Oct 2015 22:11:59 -0700 (PDT)
+	Wed, 7 Oct 2015 22:14:28 -0700 (PDT)
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 7 Oct 2015 22:11:58 -0700
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 7 Oct 2015 22:14:28 -0700
 From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
-Date: Thu, 8 Oct 2015 13:00:19 +0800
-Message-ID: <1444280419-32624-1-git-send-email-Qi.Chen@windriver.com>
+Date: Thu, 8 Oct 2015 13:02:49 +0800
+Message-ID: <1444280569-4385-1-git-send-email-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] netmap-modules: fix compilation failure
+Subject: [meta-networking][PATCH] netmap-modules: fix compilation failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2015 05:12:00 -0000
+X-List-Received-Date: Thu, 08 Oct 2015 05:14:28 -0000
 Content-Type: text/plain
 
 If CONFIG_IXGBE is enabled in kernel. This package fails to build with
