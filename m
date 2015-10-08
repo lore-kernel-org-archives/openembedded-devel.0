@@ -1,43 +1,44 @@
 Return-Path: <mbc@koumoul.net>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 487BC60125
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 5272A60125
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Oct 2015 08:36:59 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so14453428wic.1
+	Thu,  8 Oct 2015 08:38:20 +0000 (UTC)
+Received: by wicfx3 with SMTP id fx3so14456858wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Oct 2015 01:36:59 -0700 (PDT)
+	Thu, 08 Oct 2015 01:38:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
 	h=sender:from:to:cc:subject:date:message-id;
 	bh=F+ZIYxwms2BJ75Y+uGrQAOpAy7Vm4Ecn+UlEwyzt2sg=;
-	b=aDS4ntjvG8aZeN3y682A6C7xdwnGlDz/A+r7yBOCkhSVKGG14jb47H9lrHcjeqJO05
-	AY/LfxXX0FhPaRSjlbm3dVSCgoG9NcRzIMhdpOLf5JAX65+Dq5FXl2t7ZSxpfwyRal51
-	rtOIKSSwCiqnahvyg/cijcPsQToVjMtH7Ab5E=
+	b=Dh4RIzNyYRdk5kwroYUFZ8Wh4lOG6pFBLCoU0NlCrrNEc0JdVZepdwBVKiaSihEDAM
+	I7Pz2nWRUVMVfEJkZake/FM071GzoTh4NGgekrpZ1z4RfA6RVbN621z65dCqHoYjDxGG
+	5nM1AQ3BJKfyGq+elz5naACB+ps6Byk80RpKs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
 	bh=F+ZIYxwms2BJ75Y+uGrQAOpAy7Vm4Ecn+UlEwyzt2sg=;
-	b=XaW0Rwq0m3pqKqOQu9S8MFWDTJtDgXV0Lsz+Uy26BS5tbH4J0J7mSvyuI7BxwwA9NW
-	5mCNsxIs9K6y//ixOKSOLArkDHDReqjlNIIgu42yEV/MZqlbBHu1x4Pv4MmXtmJBRJdl
-	lZ1NQ+VsjkApK85R363ew/Cr2iRI0P2I3PnH0dMcvPxUTuzigZodFYec7dsDTJ/Sw6HK
-	2rBiKARBvgsmDGnvd3obM2SUJMS8tniJBjFu9Rg3htOPoCQXXNUBiSxxBJqX4ZYL8Cfv
-	SVxsF8++Qc0y1A0yHBXY+sTog+xiwKn7n16yOF9wOHgIO883Th9YipNAKxkSHACf6tY7
-	j0bQ==
-X-Gm-Message-State: ALoCoQmSemx/Rr2JPtk2OZInMXdeHaKsSfSUddX/ZDayjgXUHG91QEiWAtiKcyDtLTcmGxtY9xK4
-X-Received: by 10.194.52.106 with SMTP id s10mr5973501wjo.35.1444293419754;
-	Thu, 08 Oct 2015 01:36:59 -0700 (PDT)
+	b=kQfxwldE2hVmCGV+KtZAZDRUZTgXZhrgzPJe4c+60I91ayQdlAlz/Ub9ghTwChKlPM
+	YXfC0JHgaXqbHxPBEoMFizRGFuxpjGLlxDN5xhYSq1aM5pXuf+rcE3Ps3VMRFqKSwz+m
+	PyZv5Ovqf9CaRV5drwE1UwYRZRd6Vjop+6eD+uY3YSKkFsPjFiG1+Se1irDEC2svRCPC
+	94jJk1glGiaA853IxvhM6c5Uc1t+Ns11WXNsLeCBGe7msTXHFFZuF392pOjs9uxvBBS6
+	lsv20Q7seRIGGGzvHm1IbJe2r+W8h9IAGgynNmBC+kY3+oXdhqTgDCIMKsVY1h9A5dYn
+	BV3w==
+X-Gm-Message-State: ALoCoQlMQw5W9ao06gm23hklOLojBZ7oHKczaLprlTp6zw28f33xNtCboklzGhMSbRDI69oM8aoj
+X-Received: by 10.194.90.47 with SMTP id bt15mr6893812wjb.18.1444293500068;
+	Thu, 08 Oct 2015 01:38:20 -0700 (PDT)
 Received: from localhost.localdomain
 	(ARennes-655-1-187-70.w2-13.abo.wanadoo.fr. [2.13.130.70])
-	by smtp.gmail.com with ESMTPSA id x7sm6214276wia.10.2015.10.08.01.36.59
+	by smtp.gmail.com with ESMTPSA id
+	gd10sm10948811wjb.47.2015.10.08.01.38.19
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Oct 2015 01:36:59 -0700 (PDT)
+	Thu, 08 Oct 2015 01:38:19 -0700 (PDT)
 Sender: "Manuel Bachmann [ IoT.bzh ]" <mbc@koumoul.net>
 From: Manuel Bachmann <manuel.bachmann@iot.bzh>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Oct 2015 10:40:35 +0200
-Message-Id: <1444293635-5630-1-git-send-email-manuel.bachmann@iot.bzh>
+Date: Thu,  8 Oct 2015 10:41:53 +0200
+Message-Id: <1444293713-5683-1-git-send-email-manuel.bachmann@iot.bzh>
 X-Mailer: git-send-email 1.8.3.1
-Subject: [PATCH v3][meta-oe] freerdp: get out of "nonworking", fix build, improve
+Subject: [PATCH v3][meta-oe] freerdp: get out of PNBLACKLIST, fix build, improve
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,7 +52,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2015 08:37:00 -0000
+X-List-Received-Date: Thu, 08 Oct 2015 08:38:21 -0000
 
 We make the "freerdp" recipe active again, fix the build
 by pulling a more recent version (the "stable" branches are
