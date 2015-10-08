@@ -1,42 +1,34 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
-	[209.85.220.52])
-	by mail.openembedded.org (Postfix) with ESMTP id B317F65CBC
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by mail.openembedded.org (Postfix) with ESMTP id BB49F60125
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Oct 2015 01:36:41 +0000 (UTC)
-Received: by pablk4 with SMTP id lk4so37524684pab.3
+	Thu,  8 Oct 2015 01:56:36 +0000 (UTC)
+Received: by pacex6 with SMTP id ex6so38141699pac.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Oct 2015 18:36:41 -0700 (PDT)
+	Wed, 07 Oct 2015 18:56:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=F66mzts8fQjpl7+xbVc0/Ymgc0ndk3cjHod/7jgWAvM=;
-	b=bjnxab4V2mZG234RNgB8Gd+lvUNKWaQZtNc+NnF2heHNlf9vJxCKpjKAfObvCqUIje
-	GKhQBER1hB5QESF09K3JrsLch4Ux6dfLHPzk4FjodryF1h5IH7tjEfyVoC0vIRu2demn
-	ysu5KXosz0aEa1S6eZw5/91d6Zerweui6Cm89adJs37EHvNcns11d/pCyh/DE2eFHKif
-	fcrKtkKF8zxnB9dVXlRCjRpI1Ebslu+gbOKbq5aT7U5mDFBGfYg00zSqyy3SWd5sFbEy
-	w9xwB1W8WereaChcjcM/0cBnm/cEiBrcQ5LDEoRsPaOyQzmxkoEmFZYYCu/CVJhfCCss
-	V1EA==
-X-Received: by 10.66.65.228 with SMTP id a4mr4756304pat.19.1444268201699;
-	Wed, 07 Oct 2015 18:36:41 -0700 (PDT)
-Received: from [192.168.0.4] (c-76-103-142-85.hsd1.ca.comcast.net.
-	[76.103.142.85]) by smtp.gmail.com with ESMTPSA id
-	ja4sm41862774pbb.19.2015.10.07.18.36.40
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 07 Oct 2015 18:36:41 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.0 \(3095\))
-X-Pgp-Agent: GPGMail 2.6b2
+	h=from:to:cc:subject:date:message-id;
+	bh=H6z5hH/ucEVEUo2e2rqF58SKmNcIkarFZTfc5FuY00A=;
+	b=zSxjgI8/KelrCjvBZAfOHSZGbkawTIO3gF5/B3kiah98T/54cV4cJR2X6Qf4GaaBr+
+	DKryXhLzJG9FazhJoTkrssd3qFwNK4bydV57PnafM6zbt44UIoBa9tlSF0Q/9cOi82pW
+	QY3kmvv4q9bA36BIo6jkYiIZJe1i1HUPnrwaaeecR+TQmzHREO9oSDn1iWAjKZL+Ssee
+	H0dTuigjkodxUCbuSnM8vsS8HTFdZ8Cv8SRjM1PeX23P/4YMgRaNNHy64O8qInXjZUzK
+	3rzJNWyKvGDiDE9ChUlYr7Mgt4Cjf194vcFJtaYHBZgReAbNCFN7vmdobJCJ73QdZAF9
+	EarA==
+X-Received: by 10.66.241.40 with SMTP id wf8mr4875574pac.157.1444269396443;
+	Wed, 07 Oct 2015 18:56:36 -0700 (PDT)
+Received: from imac.hsd1.ca.comcast.net (c-24-130-225-169.hsd1.ca.comcast.net.
+	[24.130.225.169])
+	by smtp.gmail.com with ESMTPSA id rz7sm6381659pbc.7.2015.10.07.18.56.35
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 07 Oct 2015 18:56:35 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20151006222919.GC2383@jama>
-Date: Wed, 7 Oct 2015 18:36:41 -0700
-Message-Id: <33DC3C44-62D2-4C8E-A7FE-FCCB11A83AFA@gmail.com>
-References: <1443950022-18541-1-git-send-email-manuel.bachmann@iot.bzh>
-	<CAP9ODKo0weXR60NYM_SUMDd-jZTxTVyq4ki90V5PDoBNdVihdg@mail.gmail.com>
-	<20151006222919.GC2383@jama>
-To: Martin Jansa <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.3095)
-Subject: Re: [PATCH][meta-oe] freerdp: get out of "nonworking", fix build, improve
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  7 Oct 2015 18:56:31 -0700
+Message-Id: <1444269391-3505-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.6.1
+Subject: [meta-networking][PATCH V2 2/2] libnetfilter: Avoid using VLAs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,96 +42,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2015 01:36:41 -0000
-X-Groupsio-MsgNum: 57707
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_3CB81519-D332-4F98-B18A-40A95F3396C1";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Thu, 08 Oct 2015 01:56:37 -0000
 
---Apple-Mail=_3CB81519-D332-4F98-B18A-40A95F3396C1
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+VLAs in composite data types like structures and unions
+are not a standard feature of C language,  gcc has specific
+implementations for but other compilers dont have that done specifically clang, and
+the community refuses to implement it since its non standard.
+
+Change-Id: I6ae24adb455bf262fe9406a1c8e3b3a4a0cf77d4
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../libnetfilter/files/replace-VLAs-in-union.patch | 89 ++++++++++++++++++++++
+ .../libnetfilter/libnetfilter-conntrack_1.0.4.bb   |  4 +-
+ 2 files changed, 92 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch
+
+diff --git a/meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch b/meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch
+new file mode 100644
+index 0000000..16e4af4
+--- /dev/null
++++ b/meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch
+@@ -0,0 +1,89 @@
++VLAs in structs and unions (non-PODs) is unsupported in non-gcc compilers
++therefore convert it to not use VLAs instead use fixed arrays
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Pending
++Index: libnetfilter_conntrack-1.0.4/src/conntrack/api.c
++===================================================================
++--- libnetfilter_conntrack-1.0.4.orig/src/conntrack/api.c
+++++ libnetfilter_conntrack-1.0.4/src/conntrack/api.c
++@@ -954,16 +954,15 @@ int nfct_query(struct nfct_handle *h,
++ 	       const enum nf_conntrack_query qt,
++ 	       const void *data)
++ {
++-	size_t size = 4096;	/* enough for now */
++ 	union {
++-		char buffer[size];
+++		char buffer[4096];
++ 		struct nfnlhdr req;
++ 	} u;
++ 
++ 	assert(h != NULL);
++ 	assert(data != NULL);
++ 
++-	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, size) == -1)
+++	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, 4096) == -1)
++ 		return -1;
++ 
++ 	return nfnl_query(h->nfnlh, &u.req.nlh);
++@@ -986,16 +985,15 @@ int nfct_send(struct nfct_handle *h,
++ 	      const enum nf_conntrack_query qt,
++ 	      const void *data)
++ {
++-	size_t size = 4096;	/* enough for now */
++ 	union {
++-		char buffer[size];
+++		char buffer[4096];
++ 		struct nfnlhdr req;
++ 	} u;
++ 
++ 	assert(h != NULL);
++ 	assert(data != NULL);
++ 
++-	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, size) == -1)
+++	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, 4096) == -1)
++ 		return -1;
++ 
++ 	return nfnl_send(h->nfnlh, &u.req.nlh);
++Index: libnetfilter_conntrack-1.0.4/src/expect/api.c
++===================================================================
++--- libnetfilter_conntrack-1.0.4.orig/src/expect/api.c
+++++ libnetfilter_conntrack-1.0.4/src/expect/api.c
++@@ -669,16 +669,15 @@ int nfexp_query(struct nfct_handle *h,
++ 	        const enum nf_conntrack_query qt,
++ 	        const void *data)
++ {
++-	size_t size = 4096;	/* enough for now */
++ 	union {
++-		char buffer[size];
+++		char buffer[4096];
++ 		struct nfnlhdr req;
++ 	} u;
++ 
++ 	assert(h != NULL);
++ 	assert(data != NULL);
++ 
++-	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, size) == -1)
+++	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, 4096) == -1)
++ 		return -1;
++ 
++ 	return nfnl_query(h->nfnlh, &u.req.nlh);
++@@ -701,16 +700,15 @@ int nfexp_send(struct nfct_handle *h,
++ 	       const enum nf_conntrack_query qt,
++ 	       const void *data)
++ {
++-	size_t size = 4096;	/* enough for now */
++ 	union {
++-		char buffer[size];
+++		char buffer[4096];
++ 		struct nfnlhdr req;
++ 	} u;
++ 
++ 	assert(h != NULL);
++ 	assert(data != NULL);
++ 
++-	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, size) == -1)
+++	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, 4096) == -1)
++ 		return -1;
++ 
++ 	return nfnl_send(h->nfnlh, &u.req.nlh);
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
+index c1df1cb..ecbc86b 100644
+--- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
+@@ -6,7 +6,9 @@ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ DEPENDS = "libnfnetlink libmnl"
+ 
+-SRC_URI = "http://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2;name=tar"
++SRC_URI = "http://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2;name=tar \
++           file://replace-VLAs-in-union.patch \
++"
+ SRC_URI[tar.md5sum] = "18cf80c4b339a3285e78822dbd4f08d7"
+ SRC_URI[tar.sha256sum] = "d9ec4a3caf49417f2b0a2d8d44249133e8c3ec78c757b7eb8c273f1cb6929c7d"
+ 
+-- 
+2.6.1
 
 
-> On Oct 6, 2015, at 3:29 PM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
->=20
-> On Tue, Oct 06, 2015 at 06:58:25PM -0300, Otavio Salvador wrote:
->> On Sun, Oct 4, 2015 at 6:13 AM, Manuel Bachmann =
-<manuel.bachmann@iot.bzh> wrote:
->>> We make the "freerdp" recipe active again, fix the build
->>> by pulling a more recent version (the "stable" branches are
->>> buggy and useless), and fix ARM runtime with -fPIC.
->>>=20
->>> We can then :
->>> - make X11 non-mandatory ;
->>> - add support for Wayland ("wlfreerdp" client) ;
->>> - add support for DirectFB ("dfreerdp" client) ;
->>> - add support for GStreamer 1.0 ;
->>> - make "heavy" features such as pulseaudio, cups...
->>> non-mandatory.
->>>=20
->>> We really want to install the "winpr-makecert" tool to have
->>> TLS, but CMake does not position its RPATH cleanly, so let
->>> us have a custom patch for that until it gets sorted out.
->>>=20
->>> Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
->>=20
->> I fully agree with the changes and those are very welcome. However, =
-it
->> would be good if you could move from nonworking in one patch and do
->> the changes here in another patch.
->=20
-> I wanted to get rid of all nonworking directories, I'm sending patch
-> series which reverts the recipe moves and replaces it with =
-PNBLACKLIST.
-
-PNBLACKLIST still causes parsing overhead. I would suggest to move it to =
-a layer under meta-openembedded
-like meta-trash or some such, if someone gets it to work move it back to =
-the appropriate layer.
-
->=20
->> Do you mind to rework it?
->=20
-> Please rebase it on top of current master-next which already has such
-> reverts.
->=20
->>=20
->> --
->> Otavio Salvador                             O.S. Systems
->> http://www.ossystems.com.br        http://code.ossystems.com.br
->> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---Apple-Mail=_3CB81519-D332-4F98-B18A-40A95F3396C1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlYVyKkACgkQuwUzVZGdMxSuRACcDklVYNcxpGNsYXfAOiPdhyWJ
-vkYAoJP76ThFlXXa0XGU/stIorbo5ftG
-=M/4Z
------END PGP SIGNATURE-----
-
---Apple-Mail=_3CB81519-D332-4F98-B18A-40A95F3396C1--
