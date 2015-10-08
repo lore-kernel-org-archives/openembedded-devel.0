@@ -1,23 +1,24 @@
-Return-Path: <Qi.Chen@windriver.com>
+Return-Path: <Wenzong.Fan@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BEC3674242
+	by mail.openembedded.org (Postfix) with ESMTP id 8641873CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Oct 2015 05:14:28 +0000 (UTC)
+	Thu,  8 Oct 2015 05:31:38 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t985ESck001772
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 7 Oct 2015 22:14:28 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 7 Oct 2015 22:14:28 -0700
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
-Date: Thu, 8 Oct 2015 13:02:49 +0800
-Message-ID: <1444280569-4385-1-git-send-email-Qi.Chen@windriver.com>
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t985VdmB003312
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 7 Oct 2015 22:31:39 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
+	Wed, 7 Oct 2015 22:31:38 -0700
+From: <wenzong.fan@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 8 Oct 2015 01:31:35 -0400
+Message-ID: <cover.1444282133.git.wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] netmap-modules: fix compilation failure
+Subject: [PATCH 0/2][meta-oe] remove packages: libcap-ng, swig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,42 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2015 05:14:28 -0000
+X-List-Received-Date: Thu, 08 Oct 2015 05:31:41 -0000
 Content-Type: text/plain
 
-If CONFIG_IXGBE is enabled in kernel. This package fails to build with
-error messages like below.
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-|  #error "unsupported ixgbe driver version"
-|   ^
+They have been moved to oe-core.
 
-.......
+The following changes since commit f4533380c8a5c1d229f692222ee0c2ef9d187ef8:
 
-error: request for member 'count' in something not a structure or union
-|   na.num_rx_desc = NM_IXGBE_RX_RING(adapter, 0)->count;
-|                                                ^
-| cc1: some warnings being treated as errors
+  dracut: install modules to /usr/lib (2015-09-23 16:10:57 +0200)
 
-Fix this problem by disabling igxbe driver in netmap-modules.
+are available in the git repository at:
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- meta-networking/recipes-kernel/netmap/netmap-modules_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+  git://git.pokylinux.org/poky-contrib wenzong/libcap-1
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=wenzong/libcap-1
 
-diff --git a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-index f9ac9cc..c1c319d 100644
---- a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-+++ b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-@@ -15,6 +15,8 @@ EXTRA_OECONF = "--kernel-dir=${STAGING_KERNEL_BUILDDIR} \
-                 --driver-suffix="-netmap" \
-                 "
- 
-+EXTRA_OECONF += "--no-drivers=ixgbe"
-+
- LDFLAGS := "${@'${LDFLAGS}'.replace('-Wl,-O1', '')}"
- LDFLAGS := "${@'${LDFLAGS}'.replace('-Wl,--as-needed', '')}"
- 
+Wenzong Fan (2):
+  swig: remove package
+  libcap-ng: remove package
+
+ meta-oe/recipes-devtools/swig/swig.inc             | 63 --------------------
+ ...lf-exe-for-swig-swiglib-on-non-Win32-plat.patch | 69 ----------------------
+ ...nfigure-use-pkg-config-for-pcre-detection.patch | 64 --------------------
+ meta-oe/recipes-devtools/swig/swig_3.0.6.bb        |  8 ---
+ .../libcap-ng/libcap-ng/python.patch               | 58 ------------------
+ .../recipes-support/libcap-ng/libcap-ng_0.7.7.bb   | 39 ------------
+ 6 files changed, 301 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/swig/swig.inc
+ delete mode 100644 meta-oe/recipes-devtools/swig/swig/0001-Use-proc-self-exe-for-swig-swiglib-on-non-Win32-plat.patch
+ delete mode 100644 meta-oe/recipes-devtools/swig/swig/0001-configure-use-pkg-config-for-pcre-detection.patch
+ delete mode 100644 meta-oe/recipes-devtools/swig/swig_3.0.6.bb
+ delete mode 100644 meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
+ delete mode 100644 meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.7.bb
+
 -- 
 1.9.1
 
