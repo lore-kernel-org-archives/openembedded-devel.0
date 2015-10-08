@@ -1,40 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id DC18960125
+Return-Path: <mbc@koumoul.net>
+Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
+	[209.85.223.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 0918760125
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Oct 2015 10:12:01 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so20927880wic.1
+	Thu,  8 Oct 2015 10:14:57 +0000 (UTC)
+Received: by ioiz6 with SMTP id z6so52299337ioi.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Oct 2015 03:12:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Dt6HesSh31iyc0dkX3SxiEVpoIAd+kRNI0odDjjcjtE=;
-	b=Mle7UnWStwsnbnZmWpQj1Hvyv3p8cdLOMk3c10qe5ypQirff1UV2R0FewfBcvvsG4k
-	ypqJiXLXJ5bgk7oCI+YwzcHrFnoIbtLxOq0C4n7WvBq0tIiEsAdpciXDEb2YGXhKUHbq
-	Ejmc0riEdep3on8Q5hW5SWbsxwzm4l9mqGiX9ANxhGivL4fwcr9EkSmr494B1lSCXn4T
-	UWtI3RSjNTQatCPfRBaT4zgF85M6h/NQzyB6a/zZ+i0ySIZkzvJhrLsWkzE7DyWOOTJ0
-	JI8xYkZU6xLiro2rBsWFI9H7q+WhcCFftNhlT4DuU6IXkd4G4XBCIStp7nVTxJJ9cww+
-	VwmQ==
-X-Received: by 10.194.9.97 with SMTP id y1mr7944745wja.84.1444299121401;
-	Thu, 08 Oct 2015 03:12:01 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	bu19sm45122478wjb.45.2015.10.08.03.12.00
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Oct 2015 03:12:00 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 8 Oct 2015 12:12:12 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151008101212.GG2385@jama>
-References: <1443646235-9298-1-git-send-email-jkv@unixcluster.dk>
+	Thu, 08 Oct 2015 03:14:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
+	h=mime-version:reply-to:sender:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=F//Lfz62kwQPJXjpcjbOyWA+zwnMyfd1Eb46ndLJ6Is=;
+	b=H0b4y/MOnXF8xX55fWJcgaHbxT+tBGyA8BtZEYXYht1+fb40NAO1YqQ5/i9BBm81ll
+	4CnElKaY1FbmkzNzdFdNjr4QbyCA9oQQ4abaYkCapJd8x7JdCdcH23bnYIpypZe2sjq/
+	fVD3GOydNst6v8ZuxnUwAE1vymfMEy2n7S3xI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=F//Lfz62kwQPJXjpcjbOyWA+zwnMyfd1Eb46ndLJ6Is=;
+	b=AVo/qJvKOhSAwwbH9RHsJX4r30f9eR5zI9azx9vDzQABllW6G4v67se58ql3hJbn8X
+	EP7dbZAHPRi9tbqg9KUcren5KiVePA1a+4Iw8kmPXl+yjICwuXRBAPOeCljxQMB1qFr/
+	buulZ6ArRejAniksCtclopAWBfwzwsGD8MMHD+PsK8nPhscaDe8f/J8feySy5HfQDxEf
+	ppZpIKR+tsclEo79ZljTC2PGEDEUWHnKDCm0kc0o8S37vA4lptIHjGW0p+ILsv1HMFFs
+	ZXG78tZYqYogyAA0s+v89fobfsr9PqCemaAK6olZx0kZB0pwWhGtR1bYcIhEt+khhp1Y
+	KPHw==
+X-Gm-Message-State: ALoCoQl29lyWbwzN75iFhLUMEN9G3SBagOs8Wd90kVZyzvO6iSmxXg/YzWVJSQHbwNarC7kM7SZ0
 MIME-Version: 1.0
-In-Reply-To: <1443646235-9298-1-git-send-email-jkv@unixcluster.dk>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-oe][PATCH] mongodb: receipe fixed, removed from blacklist and now cross compiles to arm.
+X-Received: by 10.107.149.129 with SMTP id x123mr6969329iod.68.1444299297442; 
+	Thu, 08 Oct 2015 03:14:57 -0700 (PDT)
+Sender: mbc@koumoul.net
+Received: by 10.79.111.6 with HTTP; Thu, 8 Oct 2015 03:14:57 -0700 (PDT)
+X-Originating-IP: [46.18.96.42]
+In-Reply-To: <20151008100330.GB2385@jama>
+References: <1443907359-22569-1-git-send-email-manuel.bachmann@iot.bzh>
+	<20151008100330.GB2385@jama>
+Date: Thu, 8 Oct 2015 12:14:57 +0200
+X-Google-Sender-Auth: Yj9SAP49wJok9-UqJJ-gjMegjdA
+Message-ID: <CANTDXNe25Maj_vYu2MGW=VoFUcAhyhokDE06ZsMtP1McX+1aqw@mail.gmail.com>
+From: Manuel Bachmann <manuel.bachmann@iot.bzh>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH v3][meta-multimedia] mkvtoolnix: fix Boost 1.58 build, update to 7.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,96 +55,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2015 10:12:03 -0000
-X-Groupsio-MsgNum: 57733
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="+1TulI7fc0PCHNy3"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 08 Oct 2015 10:14:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
---+1TulI7fc0PCHNy3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hmm, interesting, didn't try with meta-qt.
+I guess it can be done ; will try and let you know.
 
-On Wed, Sep 30, 2015 at 10:50:35PM +0200, Johnny Vestergaard wrote:
-> Removed the dependencies on system boost.
+Regards,
 
-Still fails in world builds.
+*Manuel Bachmann, Graphics Engineer www.iot.bzh <http://iot.bzh> *
 
-http://errors.yoctoproject.org/Errors/Details/20235/
->=20
-> Signed-off-by: Johnny Vestergaard <jkv@unixcluster.dk>
-> ---
->  meta-oe/recipes-support/mongodb/mongodb_git.bb | 11 ++++-------
->  1 file changed, 4 insertions(+), 7 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-support/mongodb/mongodb_git.bb b/meta-oe/rec=
-ipes-support/mongodb/mongodb_git.bb
-> index 879fc7c..7348978 100644
-> --- a/meta-oe/recipes-support/mongodb/mongodb_git.bb
-> +++ b/meta-oe/recipes-support/mongodb/mongodb_git.bb
-> @@ -3,7 +3,7 @@ LICENSE =3D "AGPL-3.0 & Apache-2.0"
->  LIC_FILES_CHKSUM =3D "file://GNU-AGPL-3.0.txt;md5=3D73f1eb20517c55bf9493=
-b7dd6e480788 \
->                      file://APACHE-2.0.txt;md5=3D3b83ef96387f14655fc854dd=
-c3c6bd57"
-> =20
-> -DEPENDS =3D "openssl libpcre boost libpcap"
-> +DEPENDS =3D "glibc openssl libpcre boost libpcap"
->  # Mongo uses tcmalloc on x86_64, which is provided by gperftools
->  DEPENDS_append_x86-64 =3D " gperftools"
-> =20
-> @@ -14,7 +14,7 @@ inherit scons
->  # | scons: *** [build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g=
-++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod] E=
-rror 1
->  # | scons: building terminated because of errors.
->  # | ERROR: scons build execution failed.
-> -PNBLACKLIST[mongodb] ?=3D "Fails to build with system boost"
-> +#PNBLACKLIST[mongodb] ?=3D "Fails to build with system boost"
-> =20
->  PV =3D "2.6.0+git${SRCPV}"
->  SRCREV =3D "be1905c24c7e5ea258e537fbf0d2c502c4fc6de2"
-> @@ -30,15 +30,12 @@ S =3D "${WORKDIR}/git"
-> =20
->  export OE_TARGET_ARCH=3D"${TARGET_ARCH}"
-> =20
-> -EXTRA_OESCONS =3D "--prefix=3D${D}${prefix} \
-> +EXTRA_OESCONS =3D "sysroot=3D${STAGING_DIR_TARGET} \
-> +                 --prefix=3D${D}${prefix} \
->                   --propagate-shell-environment \
->                   --cc-use-shell-environment \
->                   --cxx-use-shell-environment \
-> -                 --ld=3D'${TARGET_PREFIX}g++' \
->                   --ssl \
-> -                 --use-system-pcre \=20
-> -                 --use-system-boost \
-> -                 --use-system-tcmalloc \
->                   --disable-scripting \
->                   --nostrip \
->                   mongod mongos"
-> --=20
-> 2.6.0
->=20
-> --=20
+
+2015-10-08 12:03 GMT+02:00 Martin Jansa <martin.jansa@gmail.com>:
+
+> On Sat, Oct 03, 2015 at 11:22:39PM +0200, Manuel Bachmann wrote:
+> > mkvtoolnix does not compile with newest Boost 1.58, mostly
+> > due to the following bugs :
+> > https://github.com/mbunkus/mkvtoolnix/issues/1172
+> > https://github.com/mbunkus/mkvtoolnix/issues/1176
+> >
+> > Update to the version immediately subsequent to their
+> > fixes, and adapt configure steps accordingly.
+> >
+> > Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
+> > ---
+> >  meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb | 15
+> +++++++++++----
+> >  1 file changed, 11 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> > index dd613b3..da10153 100644
+> > --- a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> > +++ b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+> > @@ -6,9 +6,16 @@ LIC_FILES_CHKSUM =
+> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> >
+> >  DEPENDS = "curl boost expat zlib libebml libmatroska libogg libvorbis
+> bzip2 lzo file ruby-native"
+> >
+> > -PV = "7.1.0+git${SRCPV}"
+> > -SRCREV = "0c89ff941bfdd9f3378312f293a84f13cf3e2a96"
+> > -SRC_URI = "git://github.com/mbunkus/mkvtoolnix.git"
+> > +PV = "7.9.0+git${SRCPV}"
+> > +SRCREV_mkvtoolnix = "1a8b23b1e82ed180a5aaeb43537f2426be252985"
+> > +SRCREV_libebml = "04b34b0dbded40e0cec93cafa6a4f4c8e90c3206"
+> > +SRCREV_libmatroska = "db5d627b5bf48516c9e0b540254c0d36595760c3"
+> > +SRCREV_FORMAT = "mkvtoolnix"
+> > +SRC_URI = " \
+> > +           git://github.com/mbunkus/mkvtoolnix.git;name=mkvtoolnix \
+> > +           git://
+> github.com/Matroska-Org/libebml.git;name=libebml;destsuffix=git/lib/libebml
+> \
+> > +           git://
+> github.com/Matroska-Org/libmatroska.git;name=libmatroska;destsuffix=git/lib/libmatroska
+> \
+> > +          "
+> >
+> >  S = "${WORKDIR}/git"
+> >
+> > @@ -28,7 +35,7 @@ EXTRA_OECONF = " --with-boost-libdir=${STAGING_LIBDIR}
+> \
+> >
+> >  # remove some hardcoded searchpaths
+> >  do_configure_prepend() {
+> > -    sed -i -e s:/usr/local/lib:${STAGING_LIBDIR}:g -e
+> s:/usr/local/include:${STAGING_INCDIR}:g ${S}/ac/ebml.m4
+> > +    sed -i -e s:/usr/local/lib:${STAGING_LIBDIR}:g -e
+> s:/usr/local/include:${STAGING_INCDIR}:g ${S}/ac/qt5.m4
+>
+> It still fails in do_configure
+> configure:8231: checking for the Qt version
+> /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/moc
+> uses
+> configure:8239: result: too old: 4.8.7
+>
+> Can we use some PACKAGECONFIGs to disable qt{4,5}?
+>
+> >  }
+> >
+> >  # Yeah, no makefile
+> > --
+> > 1.8.3.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---+1TulI7fc0PCHNy3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlYWQXsACgkQN1Ujt2V2gBw84gCcDC8+0RbyyP7KJnG9VHp3LkHO
-220AnA3ZOpOUOcy+mQdsSmSSnX8/Jd/Z
-=LVdV
------END PGP SIGNATURE-----
-
---+1TulI7fc0PCHNy3--
