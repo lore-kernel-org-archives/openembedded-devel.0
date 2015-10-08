@@ -1,34 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 91D5160125
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id C6EA060125
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Oct 2015 10:09:21 +0000 (UTC)
-Received: by wiclk2 with SMTP id lk2so17830908wic.1
+	Thu,  8 Oct 2015 10:10:08 +0000 (UTC)
+Received: by wicge5 with SMTP id ge5so18292419wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Oct 2015 03:09:21 -0700 (PDT)
+	Thu, 08 Oct 2015 03:10:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8Tll6rW02drSJ1kFly96uKx6gcH9ZPhAlWNQ374/eEc=;
-	b=FWuTPmil63M2ZG9UdtgNQt9qYyqsulyoUqybiBglct0KzLoqwbH3MRIbBFngyc1lKH
-	CraVHnVrrN1n0u2Vpp9z3u3qMhP7K/0xMuCUl9ncaO3miozRDw6h9y2Eyx9E3QWrhAFh
-	I7KchIALlNFIe/kZfRnFGV3gZqLz4SUAR1zRgB8aoFoiyCBu2swCJhvYQ5tNMFtqcIRR
-	DF8LwYK/TCzUDJ86mz+l6utaXWq1hyXvhN36rEsnnKxv1GI6amFwzK+GiAgIIw2fV7sZ
-	Y7o/rKbh+66km8S5xHDm2+b88RLLIhBJ8+2i6MaJ1R5Fu1Poi3bNVeNOt/4YYlc6rl2Z
-	rYPg==
-X-Received: by 10.180.149.167 with SMTP id ub7mr3064239wib.43.1444298961171;
-	Thu, 08 Oct 2015 03:09:21 -0700 (PDT)
+	bh=KB89UUSEJj7MgHYfRv0LfaefV3FAylSCIC7BRNGKFRM=;
+	b=tD/UpPpvY7gPOMnHqwzzmVXb6FYDfITBxWYYSzRr3vhb4TnU/N/NuMqb6vigR1+VtJ
+	BB0PtUkAtgy4Yf0Ib/pdOiWjDRE1EnVk0o+V1SU9Nfpb4h6N8ud36oizRPcHQ+m1IvUq
+	TDa0R4j0PRuywFqLhJxGk2cHQqLqGHQVj7SKUOIa5Ea9gYXEBDiLaHRZbN0pWCZVBUxi
+	31+Sz4cPdMJ7AkKpPql6relmr+PGszdBiVvn3tP5D52uTO0d7Ol7yz8hZSD7A87BqUxV
+	p0JiIrtBpgdb6/R/Noq2psYrjKRGyRXcRWePXX4gpLTAl7NU/bvfvcrZ6QMsCE3kS5yy
+	r2nQ==
+X-Received: by 10.194.71.83 with SMTP id s19mr6769266wju.150.1444299008272;
+	Thu, 08 Oct 2015 03:10:08 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id x7sm6553855wia.10.2015.10.08.03.09.20
+	by smtp.gmail.com with ESMTPSA id
+	mc20sm6547237wic.16.2015.10.08.03.10.07
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Oct 2015 03:09:20 -0700 (PDT)
+	Thu, 08 Oct 2015 03:10:07 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 8 Oct 2015 12:09:32 +0200
+Date: Thu, 8 Oct 2015 12:10:19 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151008100932.GE2385@jama>
+Message-ID: <20151008101019.GF2385@jama>
 References: <1443047695-22567-1-git-send-email-haris.okanovic@ni.com>
 MIME-Version: 1.0
 In-Reply-To: <1443047695-22567-1-git-send-email-haris.okanovic@ni.com>
@@ -47,13 +48,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2015 10:09:22 -0000
-X-Groupsio-MsgNum: 57731
+X-List-Received-Date: Thu, 08 Oct 2015 10:10:09 -0000
+X-Groupsio-MsgNum: 57732
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="6Vw0j8UKbyX0bfpA"
+	protocol="application/pgp-signature"; boundary="eNMatiwYGLtwo1cJ"
 Content-Disposition: inline
 
---6Vw0j8UKbyX0bfpA
+--eNMatiwYGLtwo1cJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -69,12 +70,6 @@ On Wed, Sep 23, 2015 at 05:34:55PM -0500, Haris Okanovic wrote:
 > Testing: Built and installed IPK onto an x64 system (OE Fido).
 > inotifywatch and inotifywait successfully detected changes to
 > a test file.
-
-Fails to fetch from github.com, because of redirect to https and native
-wget used in e.g. Ubuntu 12.04:
-
-http://errors.yoctoproject.org/Errors/Details/20240/
-
 >=20
 > Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
 > ---
@@ -100,6 +95,10 @@ b/meta-oe/recipes-support/inotify-tools/inotify-tools_3.14.bb
 -tools-${PV}.tar.gz"
 > +SRC_URI[sha256sum] =3D "222bcca8893d7bf8a1ce207fb39ceead5233b5015623d099=
 392e95197676c92f"
+
+You're also missing md5sum :/ please test your patches a bit more before
+sending them.
+
 > +
 > +inherit autotools-brokensep
 > --=20
@@ -114,16 +113,16 @@ b/meta-oe/recipes-support/inotify-tools/inotify-tools_3.14.bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---6Vw0j8UKbyX0bfpA
+--eNMatiwYGLtwo1cJ
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlYWQNsACgkQN1Ujt2V2gBxsFACeNZP0DpRHJt904xP5JPAKRYfb
-Mc4An1uRV8WbByAckU8pUtWQAIm9pohR
-=MF22
+iEYEARECAAYFAlYWQQoACgkQN1Ujt2V2gBwDewCguvAGnFKsGYHbOsnY0hqARXSl
+8vcAoKeZ61dUi0G9H7Y6XHaK5gGkVvMi
+=QKwg
 -----END PGP SIGNATURE-----
 
---6Vw0j8UKbyX0bfpA--
+--eNMatiwYGLtwo1cJ--
