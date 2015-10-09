@@ -1,38 +1,32 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 988B673CBD
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-io0-f177.google.com (mail-io0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 9FC937391A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Oct 2015 15:26:55 +0000 (UTC)
-Received: by wicfx3 with SMTP id fx3so71748097wic.0
+	Fri,  9 Oct 2015 15:49:54 +0000 (UTC)
+Received: by iofh134 with SMTP id h134so95295158iof.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Oct 2015 08:26:55 -0700 (PDT)
+	Fri, 09 Oct 2015 08:49:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=7O28OMZHnlsBEAyrQwSyFtWs/4mq58U2Wtl+QvXOb6g=;
-	b=jA8dZQZpsGc5Jtw6u+dtgyWs4I+sF6zFzTI51oiQ1uztLqFO35km0YhLRvEoEdLHE+
-	bVd9PwVIBZZNkhdXZAJUwYdQd86KCagx/7yoPVTjqJ2rOdVZqhZRV/F1NRhtzZZtkzht
-	3jwnUikQI+X8Ah1vYTmnZs3Iw7nN1y8uAOcvZiWq1icBbogOsnMjPjb4uaIkpWgLB7HB
-	StVHIOcMRDhl0VKym6OPT5wfmB09zY4S15WyX5kV6Jsys14v8x+uWMtrjZhBYPZ66Xok
-	jPclPUwwxUb2WD5Ne8MBXVCjK9crSu18EDvHsvS2Lx9kO1phldUo/bzYyQcRSIwkwyiM
-	Tzow==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=3f5hVHkSP8ydyZR/+Qzig1FEtDFvCk1GYzzEfd6uN4I=;
+	b=v11UGn3OcmAxIZKnWa0mfUJ2Mwjkxu8MuX3pNJiPmSRuaVxvnG04kTmsIMloqCTEzS
+	Nx010tm/0dgvW5RwXwz0HgjINTGRRCS6XGilY8BqHTTpR1cbd3JCak5eZc8HQ6SuVYce
+	oDLSmhCFKB+GBsoAsio6kXTlwvVB61pUxEKIgvZ/pahcLjz51HSpqlTo9WNeB9lqTs9d
+	6SjzkVZFgiCDPCPmQoOLp5aI5ibUOMzjfeaVPn2jXN9QtcBEaa1ozMPeiZsruj8o6S6j
+	XNiyznmt2IRwhH2Wvg5RDmo1XqtMHOmS9Un4vyXxGHACrFp2eSMdtqC7ZJk3noEDtHXZ
+	Vuvw==
+X-Received: by 10.107.34.149 with SMTP id i143mr17591257ioi.195.1444405794939; 
+	Fri, 09 Oct 2015 08:49:54 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.194.123.168 with SMTP id mb8mr3282850wjb.108.1444404415654; 
-	Fri, 09 Oct 2015 08:26:55 -0700 (PDT)
-Received: by 10.194.154.232 with HTTP; Fri, 9 Oct 2015 08:26:55 -0700 (PDT)
-In-Reply-To: <CAMKF1soEoc0i4b3Z-U9s9htCUZdRUGHEMjCY3eZsw5GT38E5dA@mail.gmail.com>
-References: <1443510290-26782-1-git-send-email-kai.kang@windriver.com>
-	<1443510290-26782-2-git-send-email-kai.kang@windriver.com>
-	<20151008095912.GA2385@jama>
-	<8A50AA18-F461-4AF7-8CE4-2BABCB8710C4@gmail.com>
-	<CA+chaQf_cZxKpd+12V+xJLGLtLgqcBYKmX-pmpGNg+V9RX9e3g@mail.gmail.com>
-	<CAMKF1soEoc0i4b3Z-U9s9htCUZdRUGHEMjCY3eZsw5GT38E5dA@mail.gmail.com>
-Date: Fri, 9 Oct 2015 17:26:55 +0200
-Message-ID: <CA+chaQeNAkL3QH8BT7SnuHOz3O1hvU+_NxHZE=OPd4LZ6Q-RAA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH 1/2] efivar: 0.7 -> 0.21
+Received: by 10.107.142.130 with HTTP; Fri, 9 Oct 2015 08:49:25 -0700 (PDT)
+In-Reply-To: <CAAzKXnjdUYmLrXX4bCT9wmcH9nc3c1OL7eRsdTXXD-T70RDZmA@mail.gmail.com>
+References: <CAAzKXnjdUYmLrXX4bCT9wmcH9nc3c1OL7eRsdTXXD-T70RDZmA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 9 Oct 2015 08:49:25 -0700
+Message-ID: <CAMKF1soPz_p6ZK9yQTiabh9vwnb9vcc3YbJD3AoSr0x+W52Nrg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] Recipes draft for Chromium V45 and V47
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,207 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2015 15:26:57 -0000
+X-List-Received-Date: Fri, 09 Oct 2015 15:49:56 -0000
 Content-Type: text/plain; charset=UTF-8
 
-I could use one for your internal projects, but this efi recipe is first
-one in world which cannot be built with 4.6 (At least first I know about).
-
-In some recipes it was relatively easy to disable (e.g. efl, elementary
-need --disable-cxx-bindings if you build native version with gcc which
-doesn't support -std=gnu++11).
-
-On Fri, Oct 9, 2015 at 5:18 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Fri, Oct 9, 2015 at 1:50 AM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> > There is no gcc-native recipe.
+On Fri, Oct 9, 2015 at 4:31 AM, Zoltan Kuscsik
+<zoltan.kuscsik@linaro.org> wrote:
+> Hi,
 >
-> right, I meant is need one
+> I'm working on updating the Chromium recipes to version 45.
 >
-> >
-> > On Fri, Oct 9, 2015 at 9:20 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> >>
-> >> > On Oct 8, 2015, at 2:59 AM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> >> >
-> >> > On Tue, Sep 29, 2015 at 03:04:49PM +0800, kai.kang@windriver.com
-> wrote:
-> >> >> From: Kai Kang <kai.kang@windriver.com>
-> >> >>
-> >> >> Upgrade efivar from 0.7 to 0.21.
-> >> >>
-> >> >> * update HOMEPAGE and git repo.
-> >> >> * add -native recipe to provide command makeguids
-> >> >>  and add patch for target package to use this native makeguids
-> command
-> >> >
-> >> > -native version is failing on hosts with older gcc (like Ubuntu 12.04
-> >> > with 4.6*).
-> >> >
-> >> > http://errors.yoctoproject.org/Errors/Details/20231/
-> >>
-> >> may be use gcc-native ?
-> >>
-> >> >
-> >> >>
-> >> >> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> >> >> ---
-> >> >> .../efivar/0001-efivar-fix-for-cross-compile.patch | 31
-> >> ++++++++++++++++++++++
-> >> >> meta-oe/recipes-extended/efivar/efivar_0.21.bb     | 28
-> >> +++++++++++++++++++
-> >> >> meta-oe/recipes-extended/efivar/efivar_git.bb      | 18
-> -------------
-> >> >> 3 files changed, 59 insertions(+), 18 deletions(-)
-> >> >> create mode 100644
-> >>
-> meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
-> >> >> create mode 100644 meta-oe/recipes-extended/efivar/efivar_0.21.bb
-> >> >> delete mode 100644 meta-oe/recipes-extended/efivar/efivar_git.bb
-> >> >>
-> >> >> diff --git
-> >>
-> a/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
-> >>
-> b/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
-> >> >> new file mode 100644
-> >> >> index 0000000..4bd7d95
-> >> >> --- /dev/null
-> >> >> +++
-> >>
-> b/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
-> >> >> @@ -0,0 +1,31 @@
-> >> >> +From 7036e8b0dca61432970789e5397b6fb02b362c2b Mon Sep 17 00:00:00
-> 2001
-> >> >> +From: Kai Kang <kai.kang@windriver.com>
-> >> >> +Date: Fri, 25 Sep 2015 18:14:31 +0800
-> >> >> +Subject: [PATCH] efivar: fix for cross compile
-> >> >> +
-> >> >> +It builds and calls elf file makeguids to generate a header file
-> which
-> >> >> +doesn't work for cross compile. Fix it.
-> >> >> +
-> >> >> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> >> >> +---
-> >> >> + src/Makefile | 4 ++--
-> >> >> + 1 file changed, 2 insertions(+), 2 deletions(-)
-> >> >> +
-> >> >> +diff --git a/src/Makefile b/src/Makefile
-> >> >> +index 6eac858..ef4eb1d 100644
-> >> >> +--- a/src/Makefile
-> >> >> ++++ b/src/Makefile
-> >> >> +@@ -65,8 +65,8 @@ makeguids.o : makeguids.c
-> >> >> + makeguids : makeguids.o fakeguid.o
-> >> >> +    $(CC) $(cflags) -o $@ $^ -ldl
-> >> >> +
-> >> >> +-include/efivar/efivar-guids.h : makeguids guids.txt
-> >> >> +-   ./makeguids guids.txt guids.bin names.bin guid-symbols.S $@
-> >> >> ++include/efivar/efivar-guids.h : guids.txt
-> >> >> ++   makeguids guids.txt guids.bin names.bin guid-symbols.S $@
-> >> >> +
-> >> >> + guidlist.o : guids.S include/efivar/efivar-guids.h
-> >> >> +    $(CC) $(cflags) -c -o guidlist.o guids.S
-> >> >> +--
-> >> >> +2.6.0.rc2.10.gf4d9753
-> >> >> +
-> >> >> diff --git a/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-> >> b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-> >> >> new file mode 100644
-> >> >> index 0000000..2e3b643
-> >> >> --- /dev/null
-> >> >> +++ b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-> >> >> @@ -0,0 +1,28 @@
-> >> >> +SUMMARY = "Tools to manipulate UEFI variables"
-> >> >> +DESCRIPTION = "efivar provides a simple command line interface to
-> the
-> >> UEFI variable facility"
-> >> >> +HOMEPAGE = "https://github.com/rhinstaller/efivar"
-> >> >> +
-> >> >> +LICENSE = "LGPLv2.1"
-> >> >> +LIC_FILES_CHKSUM =
-> >> "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
-> >> >> +
-> >> >> +DEPENDS_class-target = "popt efivar-native"
-> >> >> +
-> >> >> +SRCREV = "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
-> >> >> +SRC_URI = "git://github.com/rhinstaller/efivar.git"
-> >> >> +SRC_URI_append_class-target = "
-> >> file://0001-efivar-fix-for-cross-compile.patch"
-> >> >> +
-> >> >> +S = "${WORKDIR}/git"
-> >> >> +
-> >> >> +do_install() {
-> >> >> +    oe_runmake install DESTDIR=${D}
-> >> >> +}
-> >> >> +
-> >> >> +do_compile_class-native() {
-> >> >> +    oe_runmake -C src makeguids
-> >> >> +}
-> >> >> +
-> >> >> +do_install_class-native() {
-> >> >> +    install -D ${B}/src/makeguids ${D}${bindir}/makeguids
-> >> >> +}
-> >> >> +
-> >> >> +BBCLASSEXTEND = "native"
-> >> >> diff --git a/meta-oe/recipes-extended/efivar/efivar_git.bb
-> >> b/meta-oe/recipes-extended/efivar/efivar_git.bb
-> >> >> deleted file mode 100644
-> >> >> index 18446a0..0000000
-> >> >> --- a/meta-oe/recipes-extended/efivar/efivar_git.bb
-> >> >> +++ /dev/null
-> >> >> @@ -1,18 +0,0 @@
-> >> >> -SUMMARY = "Tools to manipulate UEFI variables"
-> >> >> -DESCRIPTION = "efivar provides a simple command line interface to
-> the
-> >> UEFI variable facility"
-> >> >> -HOMEPAGE = "https://github.com/vathpela/efivar"
-> >> >> -
-> >> >> -LICENSE = "LGPLv2.1"
-> >> >> -LIC_FILES_CHKSUM =
-> >> "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
-> >> >> -
-> >> >> -DEPENDS = "popt"
-> >> >> -
-> >> >> -SRCREV = "c9e1f24a81b5374408bca5616402276e47171cf7"
-> >> >> -PV = "0.7+git${SRCPV}"
-> >> >> -SRC_URI = "git://github.com/vathpela/efivar.git"
-> >> >> -
-> >> >> -S = "${WORKDIR}/git"
-> >> >> -
-> >> >> -do_install() {
-> >> >> -    oe_runmake install DESTDIR=${D}
-> >> >> -}
-> >> >> --
-> >> >> 2.6.0.rc2.10.gf4d9753
-> >> >>
-> >> >
-> >> > --
-> >> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> >> > --
-> >> > _______________________________________________
-> >> > Openembedded-devel mailing list
-> >> > Openembedded-devel@lists.openembedded.org
-> >> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
-> >>
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> So far it is tested on Wayland builds (ARM 32bit and ARM 64bit):
+>
+> https://github.com/linaro-home/meta-browser
+>
+> It still needs some cleanup before upstream, comments are welcome.
+
+xkbcommon change should go into oe-core
+tc_malloc disabled, should become a PACKAGECONFIG, its a perf tool
+anyway so disabling it is ok.
+
+ozone and VAAPI should also become packageconfigs
+
+fix_64_bit_builds.patch assumes gcc, I did not like it for that
+reason, it could have been done in compiler independent way
+
+> Br,
+>
+> Zoltan
+>
+> --
+> Zoltan Kuscsik
+>
+> Senior Software Developer, Linaro Digital Home Group
+> email: zoltan.kuscsik@linaro.org
+> IRC: zoli_ on irc.linaro.org
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
