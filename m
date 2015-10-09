@@ -1,40 +1,40 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 83E1C73CBD
+Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
+	[209.85.220.50])
+	by mail.openembedded.org (Postfix) with ESMTP id B60627680D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Oct 2015 07:16:41 +0000 (UTC)
-Received: by padhy16 with SMTP id hy16so78712004pad.1
+	Fri,  9 Oct 2015 07:18:37 +0000 (UTC)
+Received: by pablk4 with SMTP id lk4so78836997pab.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Oct 2015 00:16:42 -0700 (PDT)
+	Fri, 09 Oct 2015 00:18:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
 	:references:to;
-	bh=APEIXD5k+yWeMXc2UckhVCWiTPfYVGbGhmxFUHl5u2M=;
-	b=HA+Errn9W8jUrqQT80TesVWKRCAIumucZwSB5BHVQ7jjzo90vSBaz7FBAb3UafyCV6
-	bEa4mTJRSHQu7q3YzaNLDKxGnAPAtV8NClubD8B9Q8rvy6C0vGkxz83m8OXKTz0sFdhO
-	sZ9hIFznMX4qlG1PerWz3GnuFXm3MiPVC7+b725OZ6/RwZ1fd7IMG4C/VTdT1wEmUTdG
-	YmnLrQ0Bh2lBTBrsz/j4DCHEP/JJY0rHJTzK1YFkbXLuj9FJroqkvr9fqTUFnjx8No4j
-	P+l2Cg+rsst96qfb9hn2rXvvOOFZ40PuVL7F6T3xo9ooNzR4WNi5PEmdaqbdKpCIG0C7
-	g0PA==
-X-Received: by 10.66.131.10 with SMTP id oi10mr13467258pab.87.1444375002014;
-	Fri, 09 Oct 2015 00:16:42 -0700 (PDT)
+	bh=F1dfoX1YGx5H57Gq7nOoHsuYH1qgUpWd7wKLoD+qGkU=;
+	b=qYtusdJsIR+VD/JYc1xxOZncyGEIushxJkHhfCJv/p5PeCL+EbOpbIS6j5hhY2/jc5
+	aDSrZ6NoehDdLrAZpW/MlVVsH/yQ3n/vcJMv1kAXfbcLVyRm/LC0Z1KiA4MhT60u4iJK
+	6iZmZ6tZoYKmrvrknE/KS6I+i//vvu58NMQhsrNMjBGfRjNNvZkw0AqWwvirGXZHtZBn
+	h1zj92PkaG/wjvNxYV5tf6/shgMIT82kIg98H0DwVw8lWPGh0VnA9sXcde89jupStGPr
+	GX4DTezgnw47UHpOg+LIncqwc1EIv/f4BEmpNT8VeRG/XU2+fwPvDZKibkbUaMAXQFIE
+	5PHQ==
+X-Received: by 10.68.216.193 with SMTP id os1mr13317829pbc.110.1444375116516; 
+	Fri, 09 Oct 2015 00:18:36 -0700 (PDT)
 Received: from ?IPv6:2601:646:8601:4580:24ad:a72d:669c:5092?
 	([2601:646:8601:4580:24ad:a72d:669c:5092])
-	by smtp.gmail.com with ESMTPSA id a17sm379623pbu.55.2015.10.09.00.16.41
+	by smtp.gmail.com with ESMTPSA id we9sm452389pab.3.2015.10.09.00.18.35
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 09 Oct 2015 00:16:41 -0700 (PDT)
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 09 Oct 2015 00:18:35 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 9.0 \(3096.1\))
 X-Pgp-Agent: GPGMail 2.6b2
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1444291115-1950-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-Date: Fri, 9 Oct 2015 00:16:40 -0700
-Message-Id: <E2647E29-B9F0-4C1B-A1EA-23C057EF5011@gmail.com>
-References: <1444291115-1950-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+In-Reply-To: <1444291853-5397-1-git-send-email-manuel.bachmann@iot.bzh>
+Date: Fri, 9 Oct 2015 00:18:34 -0700
+Message-Id: <51293558-9B41-4D74-87D1-CF3A118866EB@gmail.com>
+References: <1444291853-5397-1-git-send-email-manuel.bachmann@iot.bzh>
 To: Martin Jansa <openembedded-devel@lists.openembedded.org>
 X-Mailer: Apple Mail (2.3096.1)
-Subject: Re: [meta-oe][PATCH] iptraf: add new recipe
+Subject: Re: [PATCH 3/3 v2][meta-multimedia] rygel: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,244 +48,147 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2015 07:16:41 -0000
-X-Groupsio-MsgNum: 57746
+X-List-Received-Date: Fri, 09 Oct 2015 07:18:38 -0000
+X-Groupsio-MsgNum: 57747
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_BF56A2E0-D3EA-4649-9706-A2CE7D9C0BDC";
+	boundary="Apple-Mail=_3318DFD9-BD2E-4B06-BA1E-67DFD28888C0";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_BF56A2E0-D3EA-4649-9706-A2CE7D9C0BDC
+--Apple-Mail=_3318DFD9-BD2E-4B06-BA1E-67DFD28888C0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
 	charset=utf-8
 
 
-> On Oct 8, 2015, at 12:58 AM, Li xin <lixin.fnst@cn.fujitsu.com> wrote:
+> On Oct 8, 2015, at 1:10 AM, Manuel Bachmann <manuel.bachmann@iot.bzh> =
+wrote:
 >=20
-> From: Li Xin <lixin.fnst@cn.fujitsu.com>
+> Rygel is a UPnP Audio-Video media server, that allows to
+> share media files to other devices. It can also become a
+> MediaRenderer controlled by UPnP or DLNA Controllers.
 >=20
-> IPTraf is a console-based network statistics utility for Linux.
+> Rygel makes use of the GStreamer library to recognize and
+> index media files. UPnp clients will then be able to browse
+> through them with the aid of metadata (artist, date...).
 >=20
-> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> We do not propose to build without GStreamer support
+> (because then if cannot parse any actual media file, and
+> this is pointless), and for the same reason always include
+> the GStreamer engine in the main package ; but allow
+> separate packages for plugins.
+>=20
+> (disable tracker plugin for now, because it pulls 3 layers
+> and needs us to have a PREFERRED udev provider, which is a
+> bit extreme for a first version)
+>=20
+> Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
+> Author: Manuel Bachmann <manuel.bachmann@iot.bzh>
+> Author: Ross Burton <ross.burton@intel.com>
 > ---
-> .../0001-src-Fix-error-in-cross-compile.patch      | 138 =
-+++++++++++++++++++++
-> meta-oe/recipes-devtools/iptraf/iptraf_3.0.0.bb    |  33 +++++
-> 2 files changed, 171 insertions(+)
+> .../recipes-connectivity/rygel/rygel_0.26.1.bb     | 59 =
+++++++++++++++++++++++
+> 1 file changed, 59 insertions(+)
 > create mode 100644 =
-meta-oe/recipes-devtools/iptraf/iptraf/0001-src-Fix-error-in-cross-compile=
-.patch
-> create mode 100644 meta-oe/recipes-devtools/iptraf/iptraf_3.0.0.bb
+meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
 >=20
 > diff --git =
-a/meta-oe/recipes-devtools/iptraf/iptraf/0001-src-Fix-error-in-cross-compi=
-le.patch =
-b/meta-oe/recipes-devtools/iptraf/iptraf/0001-src-Fix-error-in-cross-compi=
-le.patch
+a/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb =
+b/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
 > new file mode 100644
-> index 0000000..291ed31
+> index 0000000..3862b1e
 > --- /dev/null
-> +++ =
-b/meta-oe/recipes-devtools/iptraf/iptraf/0001-src-Fix-error-in-cross-compi=
-le.patch
-> @@ -0,0 +1,138 @@
-> +=46rom 27910ea19260b7f7a3f9c0465addd1dea80cf3bd Mon Sep 17 00:00:00 =
-2001
-> +From: Li Xin <lixin.fnst@cn.fujitsu.com>
-> +Date: Thu, 8 Oct 2015 15:11:17 +0900
-> +Subject: [PATCH] src: Fix error in cross-compile
+> +++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
+> @@ -0,0 +1,59 @@
+> +SUMMARY =3D "A UPnP AV media server and renderer"
+> +DESCRIPTION =3D "Rygel is a home media solution (UPnP AV MediaServer) =
+that \
+> +allow you to easily share audio, video and pictures to other devices. =
+\
+> +Additionally, media player software may use Rygel to become a =
+MediaRenderer \
+> +that may be controlled remotely by a UPnP or DLNA Controller."
+> +HOMEPAGE =3D "http://live.gnome.org/Rygel"
 > +
-> +The errors are like this:
-> +tcptable.h:26:25: fatal error: linux/if_tr.h: No such file or =
-directory
-> +ld: cannot find -ltextbox
-> +
-> +Upstream-Status: pending
-> +
-> +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> +---
-> + src/Makefile     | 2 +-
-> + src/hostmon.c    | 2 +-
-> + src/install.sh   | 4 ++--
-> + src/othptab.c    | 2 +-
-> + src/packet.c     | 2 +-
-> + src/tcptable.h   | 2 +-
-> + src/tr.c         | 2 +-
-> + support/Makefile | 3 +--
-> + 8 files changed, 9 insertions(+), 10 deletions(-)
-> +
-> +diff --git a/src/Makefile b/src/Makefile
-> +index 2043c2d..0f77bea 100644
-> +--- a/src/Makefile
-> ++++ b/src/Makefile
-> +@@ -39,7 +39,7 @@ LDOPTS		=3D #-static
-> + # you may want to change this to point to your ncurses include =
-directory
-> + # if the ncurses include files are not in the default location.
-> +
-> +-INCLUDEDIR	=3D -I/usr/include/ncurses -I../support
-> ++INCLUDEDIR	=3D  -I../support
-> +
-> + # You can uncomment this one to disable the backspace key in input =
-fields.
-> + # This means you must use the Del key or Ctrl+H combination to erase =
-the
-> +diff --git a/src/hostmon.c b/src/hostmon.c
-> +index 14df2c8..6571562 100644
-> +--- a/src/hostmon.c
-> ++++ b/src/hostmon.c
-> +@@ -31,7 +31,7 @@ details.
-> + #include <linux/if_packet.h>
-> + #include <linux/if_ether.h>
-> + #include <linux/if_fddi.h>
-> +-#include <linux/if_tr.h>
-> ++#include <netinet/if_tr.h>
-> + #include <net/if_arp.h>
-> + #include <stdlib.h>
-> + #include <time.h>
-> +diff --git a/src/install.sh b/src/install.sh
-> +index d2fd360..36d3516 100755
-> +--- a/src/install.sh
-> ++++ b/src/install.sh
-> +@@ -23,9 +23,9 @@ echo
-> + echo "*** Installing executable programs and preparing work =
-directories"
-> + echo
-> + echo ">>> Installing iptraf in $TARGET"
-> +-$INSTALL -m 0700 -o root -g root -s iptraf $TARGET
-> ++$INSTALL -m 0700 -o root -g root  iptraf $TARGET
-> + echo ">>> Installing rvnamed in $TARGET"
-> +-$INSTALL -m 0700 -o root -g root -s rvnamed $TARGET
-> ++$INSTALL -m 0700 -o root -g root  rvnamed $TARGET
-> +
-> + if [ ! -d $WORKDIR ]; then
-> +     echo ">>> Creating IPTraf work directory $WORKDIR"
-> +diff --git a/src/othptab.c b/src/othptab.c
-> +index 97771d1..a8bb536 100644
-> +--- a/src/othptab.c
-> ++++ b/src/othptab.c
-> +@@ -18,7 +18,7 @@ details.
-> +
-> + #include <asm/types.h>
-> + #include <linux/if_ether.h>
-> +-#include <linux/if_tr.h>
-> ++#include <netinet/if_tr.h>
-> + #include <linux/if_fddi.h>
-> + #include <winops.h>
-> + #include "arphdr.h"
-> +diff --git a/src/packet.c b/src/packet.c
-> +index 33fdf2a..1e2b81b 100644
-> +--- a/src/packet.c
-> ++++ b/src/packet.c
-> +@@ -36,7 +36,7 @@ details.
-> + #include <linux/if_packet.h>
-> + #include <linux/if_ether.h>
-> + #include <linux/if_fddi.h>
-> +-#include <linux/if_tr.h>
-> ++#include <netinet/if_tr.h>
-> + #include <linux/isdn.h>
-> + #include <linux/sockios.h>
-> + #include <msgboxes.h>
-> +diff --git a/src/tcptable.h b/src/tcptable.h
-> +index 3e17793..d1380b5 100644
-> +--- a/src/tcptable.h
-> ++++ b/src/tcptable.h
-> +@@ -23,7 +23,7 @@
-> + #include <linux/if_packet.h>
-> + #include <linux/if_ether.h>
-> + #include <linux/if_fddi.h>
-> +-#include <linux/if_tr.h>
-> ++#include <netinet/if_tr.h>
-> + #include <net/if.h>
-> + #include <netinet/ip.h>
-> + #include <netinet/udp.h>
-> +diff --git a/src/tr.c b/src/tr.c
-> +index 40c9e63..11f8045 100644
-> +--- a/src/tr.c
-> ++++ b/src/tr.c
-> +@@ -7,7 +7,7 @@
-> +  */
-> +
-> + #include <asm/types.h>
-> +-#include <linux/if_tr.h>
-> ++#include <netinet/if_tr.h>
-> + #include <netinet/in.h>
-> +
-> + unsigned int get_tr_ip_offset(unsigned char *pkt)
-> +diff --git a/support/Makefile b/support/Makefile
-> +index 114bfc3..c962c09 100644
-> +--- a/support/Makefile
-> ++++ b/support/Makefile
-> +@@ -1,4 +1,3 @@
-> +-INCLUDEDIR		=3D -I/usr/include/ncurses
-> +
-> + OBJS			=3D input.o menurt.o listbox.o winops.o =
-labels.o \
-> + 				msgboxes.o txbox.o
-> +@@ -12,7 +11,7 @@ libtextbox.a: $(OBJS)
-> + #	gcc -shared -o libtextbox.so $(OBJS)
-> +
-> + %.o: %.c *.h
-> +-	gcc -O2 -g -Wall -fPIC $(INCLUDEDIR) -c -o $*.o $<
-> ++	${CC} -O2 -g -Wall -fPIC  -c -o $*.o $<
-> +
-> + clean:
-> + 	rm -rf *.o *~ libtextbox.a libtextbox.so
-> +--
-> +1.8.4.2
-> +
-> diff --git a/meta-oe/recipes-devtools/iptraf/iptraf_3.0.0.bb =
-b/meta-oe/recipes-devtools/iptraf/iptraf_3.0.0.bb
-> new file mode 100644
-> index 0000000..7b8f0db
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/iptraf/iptraf_3.0.0.bb
-> @@ -0,0 +1,33 @@
-> +DESCRIPTION =3D "IPTraf is a console-based network statistics utility =
-for Linux. \
-> +It gathers a variety of figures such as TCP connection packet and =
-byte counts, \
-> +interface statistics and activity indicators, TCP/UDP traffic =
-breakdowns, \
-> +and LAN station packet and byte counts."
-> +
-> +HOMEPAGE =3D "http://iptraf.seul.org"
-> +
-> +LICENSE =3D "GPLv2"
+> +LICENSE =3D "LGPLv2+"
 > +LIC_FILES_CHKSUM =3D =
-"file://LICENSE;md5=3Ddc0bdc29df738baf327368b1bbb15a45"
+"file://COPYING;md5=3D5f30f0716dfdd0d91eb439ebec522ec2 \
+> +                    =
+file://src/rygel/rygel-main.vala;endline=3D25;md5=3Da4cce4d389da1c1638fe68=
+d07ae9d811"
 > +
-> +DEPENDS =3D "ncurses"
+> +DEPENDS =3D "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna =
+gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 =
+libmediaart-2.0"
+> +RDEPENDS_${PN} =3D "gstreamer1.0-plugins-base-playback =
+shared-mime-info"
 > +
-> +SRC_URI =3D " \
-> +    ftp://iptraf.seul.org/pub/iptraf/iptraf-3.0.0.tar.gz \
-> +    file://0001-src-Fix-error-in-cross-compile.patch"
-> +SRC_URI[md5sum] =3D "377371c28ee3c21a76f7024920649ea8"
-> +SRC_URI[sha256sum] =3D =
-"9ee433d95573d612539da4b452e6cdcbca6ab6674a88bfbf6eaf12d4902b5163"
-> +RDEPENDS_${PN} =3D "ncurses"
+> +GNOME_COMPRESS_TYPE =3D =E2=80=9Cxz"
+
+isn=E2=80=99t this default ?
+
+> +SRC_URI[archive.md5sum] =3D "f182d54913a528bb5b4fb2f291aca0fc"
+> +SRC_URI[archive.sha256sum] =3D =
+"390740609e34399b886ddb9a8f7eca25055ad72048dfdd869edf02999b1e1d8f"
 > +
-> +do_compile() {
-> +    oe_runmake -C src all
+> +inherit gnomebase
+> +
+> +EXTRA_OECONF =3D "--disable-introspection --disable-tracker-plugin =
+--with-media-engine=3Dgstreamer"
+> +
+> +PACKAGECONFIG ?=3D "external mpris mediathek ruih media-export =
+gst-launch gtk+3"
+> +PACKAGECONFIG[external] =3D =
+"--enable-external-plugin,--disable-external-plugin"
+> +PACKAGECONFIG[mpris] =3D =
+"--enable-mpris-plugin,--disable-mpris-plugin"
+> +PACKAGECONFIG[mediathek] =3D =
+"--enable-mediathek-plugin,--disable-mediathek-plugin"
+> +PACKAGECONFIG[ruih] =3D "--enable-ruih-plugin,--disable-ruih-plugin"
+> +PACKAGECONFIG[media-export] =3D =
+"--enable-media-export-plugin,--disable-media-export-plugin,sqlite3"
+> +PACKAGECONFIG[gst-launch] =3D =
+"--enable-gst-launch-plugin,--disable-gst-launch-plugin"
+> +PACKAGECONFIG[gtk+3] =3D ",--without-ui,gtk+3"
+> +
+> +LIBV =3D "2.6"
+> +
+> +do_install_append() {
+> +       # Remove .la files for loadable modules
+> +       rm -f ${D}/${libdir}/rygel-${LIBV}/engines/*.la
+> +       rm -f ${D}/${libdir}/rygel-${LIBV}/plugins/*.la
 > +}
 > +
-> +do_install() {
-> +    install -d ${D}${bindir}
-> +    oe_runmake -C src install \
-> +        TARGET=3D${D}${bindir} \
-> +        WORKDIR=3D${D}${localstatedir}/local/iptraf \
-> +        LOGDIR=3D${D}${localstatedir}/log/iptraf \
-> +        LOCKDIR=3D${D}${localstatedir}/run/iptraf
-> +}
+> +FILES_${PN} +=3D "${libdir}/rygel-${LIBV}/engines ${datadir}/dbus-1 =
+${datadir}/icons"
+> +FILES_${PN}-dev +=3D "${datadir}/vala=E2=80=9D
+
+did you miss to add vala in DEPENDS ?
+
+> +FILES_${PN}-dbg +=3D "${libdir}/rygel-${LIBV}/engines/.debug =
+${libdir}/rygel-${LIBV}/plugins/.debug"
 > +
-> +FILES_${PN} +=3D "${bindir} ${localstatedir} /run=E2=80=9D
-
-you may not package /run since its dynamically created. Think of other =
-ways to create the files it
-needs in /run at runtime dynamically
-
+> +PACKAGES +=3D "${PN}-meta"
+> +ALLOW_EMPTY_${PN}-meta =3D "1"
+> +
+> +PACKAGES_DYNAMIC =3D "${PN}-plugin-*"
+> +
+> +python populate_packages_prepend () {
+> +    rygel_libdir =3D d.expand('${libdir}/rygel-${LIBV}')
+> +    postinst =3D d.getVar('plugin_postinst', True)
+> +    pkgs =3D []
+> +
+> +    pkgs +=3D do_split_packages(d, oe.path.join(rygel_libdir, =
+"plugins"), 'librygel-(.*)\.so$', d.expand('${PN}-plugin-%s'), 'Rygel =
+plugin for %s', postinst=3Dpostinst, extra_depends=3Dd.expand('${PN}'))
+> +    pkgs +=3D do_split_packages(d, oe.path.join(rygel_libdir, =
+"plugins"), '(.*)\.plugin$', d.expand('${PN}-plugin-%s'), 'Rygel plugin =
+for %s', postinst=3Dpostinst, extra_depends=3Dd.expand('${PN}'))
+> +
+> +    metapkg =3D d.getVar('PN', True) + '-meta'
+> +    d.setVar('RDEPENDS_' + metapkg, ' '.join(pkgs))
+> +}
 > --
-> 1.8.4.2
+> 1.8.3.1
 >=20
 > --
 > _______________________________________________
@@ -294,7 +197,7 @@ needs in /run at runtime dynamically
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
---Apple-Mail=_BF56A2E0-D3EA-4649-9706-A2CE7D9C0BDC
+--Apple-Mail=_3318DFD9-BD2E-4B06-BA1E-67DFD28888C0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -305,9 +208,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlYXadgACgkQuwUzVZGdMxTBUQCdF7a6tsMqGTgaPpZeks3TFxvg
-ozsAnjdhepjrO+waEzjQZgApyHf8Rtjp
-=C9iM
+iEYEARECAAYFAlYXaksACgkQuwUzVZGdMxQaRACfXUY/48RMQ8Eb+edNfVyk1j1F
+HQ0AnR1xeAnqNca8Mw5YEnnDgxegVXiM
+=qghm
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_BF56A2E0-D3EA-4649-9706-A2CE7D9C0BDC--
+--Apple-Mail=_3318DFD9-BD2E-4B06-BA1E-67DFD28888C0--
