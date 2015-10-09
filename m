@@ -1,34 +1,27 @@
-Return-Path: <zoltan.kuscsik@linaro.org>
-Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 6101D73CBD
+Return-Path: <gary@mlbassoc.com>
+X-Greylist: delayed 320 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 09 Oct 2015 12:59:57 UTC
+Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
+	by mail.openembedded.org (Postfix) with ESMTP id E9E0D759D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Oct 2015 11:31:20 +0000 (UTC)
-Received: by iofl186 with SMTP id l186so6237474iof.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Oct 2015 04:31:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-type;
-	bh=D/VT7SX9J//5JacwbJgHfIAY7h2PpcOrA77ie+eHQ4A=;
-	b=Dky0qxD+qxCwshfnFlq7PAQ7WVv3BF7DTJV5QViDB8/leligverfved8aqzDtUCfPU
-	TjBxsoEmwRvxqRHFTRwh+Bd8hjfiTKnVv6fgaezqIoF9/3TBnyLQV0rhmi3655yAmFAh
-	y8BPTHLb4XExg+YEkO7wpyMnV4nZnqbvbCIGVPhGh+iqBwN6RO63yY49b+qf43WrVyUi
-	FNP0XEhUXI3WpOr0yetDbZ55lfFe0OTiZj0xyySV54D9Y2wbUbuRnf3PYubCff8krpGS
-	ErpQTzFF0aotcz4OABYuRpRFT+GSmTnmd5l5brzJTDE780MSSrETAs2f/w6g6XgxGKLG
-	KMZg==
-X-Gm-Message-State: ALoCoQlt88FGvOdaTB0tCb4ny1lrQfXKhyPfhIkKgn0GS3bADYwkysLL99w+kIyOzxR5eEtqZlM+
-X-Received: by 10.107.31.135 with SMTP id f129mr16983966iof.8.1444390280500;
-	Fri, 09 Oct 2015 04:31:20 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.36.76.9 with HTTP; Fri, 9 Oct 2015 04:31:01 -0700 (PDT)
-From: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
-Date: Fri, 9 Oct 2015 13:31:01 +0200
-Message-ID: <CAAzKXnjdUYmLrXX4bCT9wmcH9nc3c1OL7eRsdTXXD-T70RDZmA@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-browser] Recipes draft for Chromium V45 and V47
+	Fri,  9 Oct 2015 12:59:57 +0000 (UTC)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 09064F811D7; Fri,  9 Oct 2015 06:54:36 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=0.8 required=10.0 tests=ALL_TRUSTED,BAYES_00,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from Zeus.chez-thomas.org (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 63ED7F811D7;
+	Fri,  9 Oct 2015 06:54:36 -0600 (MDT)
+From: Gary Thomas <gary@mlbassoc.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  9 Oct 2015 06:55:01 -0600
+Message-Id: <1444395301-28118-1-git-send-email-gary@mlbassoc.com>
+X-Mailer: git-send-email 1.9.1
+Cc: Gary Thomas <gary@mlbassoc.com>
+Subject: [meta-oe][PATCH] poppler: Support building against QT4-embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,26 +35,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2015 11:31:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 09 Oct 2015 12:59:58 -0000
 
-Hi,
+These changes allow the poppler package to build using qt4e.
+To enable them, add this line to local.conf
+  PACKAGECONFIG_append_pn-poppler = " qt4e"
 
-I'm working on updating the Chromium recipes to version 45.
+Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+Upstream-status: Innapropriate [OE configuration]
+---
+ .../fix-qt4e-library-dependencies.patch            | 28 ++++++++++++++++++++++
+ meta-oe/recipes-support/poppler/poppler_0.35.0.bb  |  6 ++++-
+ 2 files changed, 33 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler-0.35.0/fix-qt4e-library-dependencies.patch
 
-So far it is tested on Wayland builds (ARM 32bit and ARM 64bit):
-
-https://github.com/linaro-home/meta-browser
-
-It still needs some cleanup before upstream, comments are welcome.
-Br,
-
-Zoltan
-
+diff --git a/meta-oe/recipes-support/poppler/poppler-0.35.0/fix-qt4e-library-dependencies.patch b/meta-oe/recipes-support/poppler/poppler-0.35.0/fix-qt4e-library-dependencies.patch
+new file mode 100644
+index 0000000..f67e1f5
+--- /dev/null
++++ b/meta-oe/recipes-support/poppler/poppler-0.35.0/fix-qt4e-library-dependencies.patch
+@@ -0,0 +1,28 @@
++Configuration changes needed to allow building with QT4-embedded
++
++Index: poppler-0.35.0/configure.ac
++===================================================================
++--- poppler-0.35.0.orig/configure.ac
+++++ poppler-0.35.0/configure.ac
++@@ -654,17 +654,17 @@ AC_ARG_ENABLE(poppler-qt4,
++               enable_poppler_qt4="try")
++ if test x$enable_poppler_qt4 = xyes; then
++   PKG_CHECK_MODULES(POPPLER_QT4, 
++-	            QtCore >= 4.7.0 QtGui >= 4.7.0 QtXml >= 4.7.0)
+++	            QtCoreE >= 4.7.0 QtGuiE >= 4.7.0 QtXmlE >= 4.7.0)
++   PKG_CHECK_MODULES(POPPLER_QT4_TEST, 
++-	            QtTest >= 4.7.0)
+++	            QtTestE >= 4.7.0)
++ elif test x$enable_poppler_qt4 = xtry; then
++   PKG_CHECK_MODULES(POPPLER_QT4,
++-                    QtCore >= 4.7.0 QtGui >= 4.7.0 QtXml >= 4.7.0,
+++                    QtCoreE >= 4.7.0 QtGuiE >= 4.7.0 QtXmlE >= 4.7.0,
++                     [enable_poppler_qt4="yes"],
++                     [enable_poppler_qt4="no"])
++   if test x$enable_poppler_qt4 = xyes; then
++     PKG_CHECK_MODULES(POPPLER_QT4_TEST,
++-                    QtTest >= 4.7.0,
+++                    QtTestE >= 4.7.0,
++                     [enable_poppler_qt4="yes"],
++                     [enable_poppler_qt4="no"])
++   fi
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.35.0.bb b/meta-oe/recipes-support/poppler/poppler_0.35.0.bb
+index 520aa6b..efb7241 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.35.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.35.0.bb
+@@ -20,14 +20,18 @@ PACKAGECONFIG[tiff] = "--enable-libtiff,--disable-libtiff,tiff"
+ PACKAGECONFIG[curl] = "--enable-libcurl,--disable-libcurl,curl"
+ PACKAGECONFIG[openjpeg] = "--enable-libopenjpeg=openjpeg2,--disable-libopenjpeg,openjpeg"
+ PACKAGECONFIG[qt5] = "--enable-poppler-qt5 --with-moc-qt5=${STAGING_BINDIR_NATIVE}/qt5/moc,--disable-poppler-qt5,qtbase"
++PACKAGECONFIG[qt4e] = "--enable-poppler-qt4 --with-moc-qt4=${STAGING_BINDIR_NATIVE}/moc4,--disable-poppler-qt4,qt4-embedded"
+ 
+ EXTRA_OECONF = "\
+     --enable-xpdf-headers \
+     --disable-gtk-test \
+-    --disable-poppler-qt4 \
+     --enable-zlib \
+ "
+ 
++# Adjust library names when building for QT4e
++QT4E_PATCHES = "${@bb.utils.contains('PACKAGECONFIG', 'qt4e', 'file://fix-qt4e-library-dependencies.patch', '', d)}"
++SRC_URI_append = "${QT4E_PATCHES}"
++
+ # check for TARGET_FPU=soft and inform configure of the result so it can disable some floating points
+ def get_poppler_fpu_setting(bb, d):
+     if d.getVar('TARGET_FPU', 1) in [ 'soft' ]:
 -- 
-Zoltan Kuscsik
+1.9.1
 
-Senior Software Developer, Linaro Digital Home Group
-email: zoltan.kuscsik@linaro.org
-IRC: zoli_ on irc.linaro.org
 
