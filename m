@@ -1,40 +1,41 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
-	[209.85.220.50])
-	by mail.openembedded.org (Postfix) with ESMTP id B60627680D
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id BF995755FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Oct 2015 07:18:37 +0000 (UTC)
-Received: by pablk4 with SMTP id lk4so78836997pab.3
+	Fri,  9 Oct 2015 07:20:40 +0000 (UTC)
+Received: by pabve7 with SMTP id ve7so20281574pab.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Oct 2015 00:18:38 -0700 (PDT)
+	Fri, 09 Oct 2015 00:20:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=F1dfoX1YGx5H57Gq7nOoHsuYH1qgUpWd7wKLoD+qGkU=;
-	b=qYtusdJsIR+VD/JYc1xxOZncyGEIushxJkHhfCJv/p5PeCL+EbOpbIS6j5hhY2/jc5
-	aDSrZ6NoehDdLrAZpW/MlVVsH/yQ3n/vcJMv1kAXfbcLVyRm/LC0Z1KiA4MhT60u4iJK
-	6iZmZ6tZoYKmrvrknE/KS6I+i//vvu58NMQhsrNMjBGfRjNNvZkw0AqWwvirGXZHtZBn
-	h1zj92PkaG/wjvNxYV5tf6/shgMIT82kIg98H0DwVw8lWPGh0VnA9sXcde89jupStGPr
-	GX4DTezgnw47UHpOg+LIncqwc1EIv/f4BEmpNT8VeRG/XU2+fwPvDZKibkbUaMAXQFIE
-	5PHQ==
-X-Received: by 10.68.216.193 with SMTP id os1mr13317829pbc.110.1444375116516; 
-	Fri, 09 Oct 2015 00:18:36 -0700 (PDT)
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=Yzc11pt6z/vBP2Bj62VK64sbxyBJbtU9/MNUh8kuTfM=;
+	b=qbu1FlrwxqlNhMKUsoFMp49+AvaDkW4xZ5AyZhdQdnHV0sw1t6RhKYQZI6yZOK4W0K
+	eE8MkwcUVsLOQDDn5GbnSvc4vSA1D4f2Qyc6ojLldU+MCA/zfxXXgb1y1DXnZflUTvCL
+	ImU8h/4uQgTtXWCF9UZl5PBHu38gLLNYIBp74bnNu4UXGnjfLDWxW5yMq0xbhH4p9y+V
+	TX8xoi9qGIogrUb6rSOgO9rT3Ur2h5i3ckC18tEVmbYv9ryG6rXq3sUtcJ2qvs1QYNSO
+	aAVX4Vi912o1mHTWea3/3SRgqh6FsqIFfOE5SMUAdltesZwo9EnCNZeppG8WtNJrAoKg
+	CULA==
+X-Received: by 10.66.230.169 with SMTP id sz9mr13441379pac.136.1444375240364; 
+	Fri, 09 Oct 2015 00:20:40 -0700 (PDT)
 Received: from ?IPv6:2601:646:8601:4580:24ad:a72d:669c:5092?
 	([2601:646:8601:4580:24ad:a72d:669c:5092])
-	by smtp.gmail.com with ESMTPSA id we9sm452389pab.3.2015.10.09.00.18.35
-	for <openembedded-devel@lists.openembedded.org>
+	by smtp.gmail.com with ESMTPSA id ch3sm454960pbb.18.2015.10.09.00.20.39
 	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 09 Oct 2015 00:18:35 -0700 (PDT)
+	Fri, 09 Oct 2015 00:20:39 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 9.0 \(3096.1\))
 X-Pgp-Agent: GPGMail 2.6b2
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1444291853-5397-1-git-send-email-manuel.bachmann@iot.bzh>
-Date: Fri, 9 Oct 2015 00:18:34 -0700
-Message-Id: <51293558-9B41-4D74-87D1-CF3A118866EB@gmail.com>
-References: <1444291853-5397-1-git-send-email-manuel.bachmann@iot.bzh>
+In-Reply-To: <20151008095912.GA2385@jama>
+Date: Fri, 9 Oct 2015 00:20:38 -0700
+Message-Id: <8A50AA18-F461-4AF7-8CE4-2BABCB8710C4@gmail.com>
+References: <1443510290-26782-1-git-send-email-kai.kang@windriver.com>
+	<1443510290-26782-2-git-send-email-kai.kang@windriver.com>
+	<20151008095912.GA2385@jama>
 To: Martin Jansa <openembedded-devel@lists.openembedded.org>
 X-Mailer: Apple Mail (2.3096.1)
-Subject: Re: [PATCH 3/3 v2][meta-multimedia] rygel: Add recipe
+Subject: Re: [PATCH 1/2] efivar: 0.7 -> 0.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,148 +49,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2015 07:18:38 -0000
-X-Groupsio-MsgNum: 57747
+X-List-Received-Date: Fri, 09 Oct 2015 07:20:42 -0000
+X-Groupsio-MsgNum: 57748
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_3318DFD9-BD2E-4B06-BA1E-67DFD28888C0";
+	boundary="Apple-Mail=_2BCF8461-B4AD-4302-8BB6-C7D4CD12F787";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_3318DFD9-BD2E-4B06-BA1E-67DFD28888C0
+--Apple-Mail=_2BCF8461-B4AD-4302-8BB6-C7D4CD12F787
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
-	charset=utf-8
+	charset=us-ascii
 
 
-> On Oct 8, 2015, at 1:10 AM, Manuel Bachmann <manuel.bachmann@iot.bzh> =
+> On Oct 8, 2015, at 2:59 AM, Martin Jansa <martin.jansa@gmail.com> =
 wrote:
 >=20
-> Rygel is a UPnP Audio-Video media server, that allows to
-> share media files to other devices. It can also become a
-> MediaRenderer controlled by UPnP or DLNA Controllers.
+> On Tue, Sep 29, 2015 at 03:04:49PM +0800, kai.kang@windriver.com =
+wrote:
+>> From: Kai Kang <kai.kang@windriver.com>
+>>=20
+>> Upgrade efivar from 0.7 to 0.21.
+>>=20
+>> * update HOMEPAGE and git repo.
+>> * add -native recipe to provide command makeguids
+>>  and add patch for target package to use this native makeguids =
+command
 >=20
-> Rygel makes use of the GStreamer library to recognize and
-> index media files. UPnp clients will then be able to browse
-> through them with the aid of metadata (artist, date...).
+> -native version is failing on hosts with older gcc (like Ubuntu 12.04
+> with 4.6*).
 >=20
-> We do not propose to build without GStreamer support
-> (because then if cannot parse any actual media file, and
-> this is pointless), and for the same reason always include
-> the GStreamer engine in the main package ; but allow
-> separate packages for plugins.
+> http://errors.yoctoproject.org/Errors/Details/20231/
+
+may be use gcc-native ?
+
 >=20
-> (disable tracker plugin for now, because it pulls 3 layers
-> and needs us to have a PREFERRED udev provider, which is a
-> bit extreme for a first version)
->=20
-> Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
-> Author: Manuel Bachmann <manuel.bachmann@iot.bzh>
-> Author: Ross Burton <ross.burton@intel.com>
-> ---
-> .../recipes-connectivity/rygel/rygel_0.26.1.bb     | 59 =
+>>=20
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ---
+>> .../efivar/0001-efivar-fix-for-cross-compile.patch | 31 =
 ++++++++++++++++++++++
-> 1 file changed, 59 insertions(+)
-> create mode 100644 =
-meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
+>> meta-oe/recipes-extended/efivar/efivar_0.21.bb     | 28 =
++++++++++++++++++++
+>> meta-oe/recipes-extended/efivar/efivar_git.bb      | 18 -------------
+>> 3 files changed, 59 insertions(+), 18 deletions(-)
+>> create mode 100644 =
+meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile.p=
+atch
+>> create mode 100644 meta-oe/recipes-extended/efivar/efivar_0.21.bb
+>> delete mode 100644 meta-oe/recipes-extended/efivar/efivar_git.bb
+>>=20
+>> diff --git =
+a/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile=
+.patch =
+b/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile=
+.patch
+>> new file mode 100644
+>> index 0000000..4bd7d95
+>> --- /dev/null
+>> +++ =
+b/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile=
+.patch
+>> @@ -0,0 +1,31 @@
+>> +=46rom 7036e8b0dca61432970789e5397b6fb02b362c2b Mon Sep 17 00:00:00 =
+2001
+>> +From: Kai Kang <kai.kang@windriver.com>
+>> +Date: Fri, 25 Sep 2015 18:14:31 +0800
+>> +Subject: [PATCH] efivar: fix for cross compile
+>> +
+>> +It builds and calls elf file makeguids to generate a header file =
+which
+>> +doesn't work for cross compile. Fix it.
+>> +
+>> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> +---
+>> + src/Makefile | 4 ++--
+>> + 1 file changed, 2 insertions(+), 2 deletions(-)
+>> +
+>> +diff --git a/src/Makefile b/src/Makefile
+>> +index 6eac858..ef4eb1d 100644
+>> +--- a/src/Makefile
+>> ++++ b/src/Makefile
+>> +@@ -65,8 +65,8 @@ makeguids.o : makeguids.c
+>> + makeguids : makeguids.o fakeguid.o
+>> + 	$(CC) $(cflags) -o $@ $^ -ldl
+>> +
+>> +-include/efivar/efivar-guids.h : makeguids guids.txt
+>> +-	./makeguids guids.txt guids.bin names.bin guid-symbols.S $@
+>> ++include/efivar/efivar-guids.h : guids.txt
+>> ++	makeguids guids.txt guids.bin names.bin guid-symbols.S $@
+>> +
+>> + guidlist.o : guids.S include/efivar/efivar-guids.h
+>> + 	$(CC) $(cflags) -c -o guidlist.o guids.S
+>> +--
+>> +2.6.0.rc2.10.gf4d9753
+>> +
+>> diff --git a/meta-oe/recipes-extended/efivar/efivar_0.21.bb =
+b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+>> new file mode 100644
+>> index 0000000..2e3b643
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+>> @@ -0,0 +1,28 @@
+>> +SUMMARY =3D "Tools to manipulate UEFI variables"
+>> +DESCRIPTION =3D "efivar provides a simple command line interface to =
+the UEFI variable facility"
+>> +HOMEPAGE =3D "https://github.com/rhinstaller/efivar"
+>> +
+>> +LICENSE =3D "LGPLv2.1"
+>> +LIC_FILES_CHKSUM =3D =
+"file://COPYING;md5=3D6626bb1e20189cfa95f2c508ba286393"
+>> +
+>> +DEPENDS_class-target =3D "popt efivar-native"
+>> +
+>> +SRCREV =3D "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
+>> +SRC_URI =3D "git://github.com/rhinstaller/efivar.git"
+>> +SRC_URI_append_class-target =3D " =
+file://0001-efivar-fix-for-cross-compile.patch"
+>> +
+>> +S =3D "${WORKDIR}/git"
+>> +
+>> +do_install() {
+>> +    oe_runmake install DESTDIR=3D${D}
+>> +}
+>> +
+>> +do_compile_class-native() {
+>> +    oe_runmake -C src makeguids
+>> +}
+>> +
+>> +do_install_class-native() {
+>> +    install -D ${B}/src/makeguids ${D}${bindir}/makeguids
+>> +}
+>> +
+>> +BBCLASSEXTEND =3D "native"
+>> diff --git a/meta-oe/recipes-extended/efivar/efivar_git.bb =
+b/meta-oe/recipes-extended/efivar/efivar_git.bb
+>> deleted file mode 100644
+>> index 18446a0..0000000
+>> --- a/meta-oe/recipes-extended/efivar/efivar_git.bb
+>> +++ /dev/null
+>> @@ -1,18 +0,0 @@
+>> -SUMMARY =3D "Tools to manipulate UEFI variables"
+>> -DESCRIPTION =3D "efivar provides a simple command line interface to =
+the UEFI variable facility"
+>> -HOMEPAGE =3D "https://github.com/vathpela/efivar"
+>> -
+>> -LICENSE =3D "LGPLv2.1"
+>> -LIC_FILES_CHKSUM =3D =
+"file://COPYING;md5=3Da6f89e2100d9b6cdffcea4f398e37343"
+>> -
+>> -DEPENDS =3D "popt"
+>> -
+>> -SRCREV =3D "c9e1f24a81b5374408bca5616402276e47171cf7"
+>> -PV =3D "0.7+git${SRCPV}"
+>> -SRC_URI =3D "git://github.com/vathpela/efivar.git"
+>> -
+>> -S =3D "${WORKDIR}/git"
+>> -
+>> -do_install() {
+>> -    oe_runmake install DESTDIR=3D${D}
+>> -}
+>> --
+>> 2.6.0.rc2.10.gf4d9753
+>>=20
 >=20
-> diff --git =
-a/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb =
-b/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
-> new file mode 100644
-> index 0000000..3862b1e
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
-> @@ -0,0 +1,59 @@
-> +SUMMARY =3D "A UPnP AV media server and renderer"
-> +DESCRIPTION =3D "Rygel is a home media solution (UPnP AV MediaServer) =
-that \
-> +allow you to easily share audio, video and pictures to other devices. =
-\
-> +Additionally, media player software may use Rygel to become a =
-MediaRenderer \
-> +that may be controlled remotely by a UPnP or DLNA Controller."
-> +HOMEPAGE =3D "http://live.gnome.org/Rygel"
-> +
-> +LICENSE =3D "LGPLv2+"
-> +LIC_FILES_CHKSUM =3D =
-"file://COPYING;md5=3D5f30f0716dfdd0d91eb439ebec522ec2 \
-> +                    =
-file://src/rygel/rygel-main.vala;endline=3D25;md5=3Da4cce4d389da1c1638fe68=
-d07ae9d811"
-> +
-> +DEPENDS =3D "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna =
-gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 =
-libmediaart-2.0"
-> +RDEPENDS_${PN} =3D "gstreamer1.0-plugins-base-playback =
-shared-mime-info"
-> +
-> +GNOME_COMPRESS_TYPE =3D =E2=80=9Cxz"
-
-isn=E2=80=99t this default ?
-
-> +SRC_URI[archive.md5sum] =3D "f182d54913a528bb5b4fb2f291aca0fc"
-> +SRC_URI[archive.sha256sum] =3D =
-"390740609e34399b886ddb9a8f7eca25055ad72048dfdd869edf02999b1e1d8f"
-> +
-> +inherit gnomebase
-> +
-> +EXTRA_OECONF =3D "--disable-introspection --disable-tracker-plugin =
---with-media-engine=3Dgstreamer"
-> +
-> +PACKAGECONFIG ?=3D "external mpris mediathek ruih media-export =
-gst-launch gtk+3"
-> +PACKAGECONFIG[external] =3D =
-"--enable-external-plugin,--disable-external-plugin"
-> +PACKAGECONFIG[mpris] =3D =
-"--enable-mpris-plugin,--disable-mpris-plugin"
-> +PACKAGECONFIG[mediathek] =3D =
-"--enable-mediathek-plugin,--disable-mediathek-plugin"
-> +PACKAGECONFIG[ruih] =3D "--enable-ruih-plugin,--disable-ruih-plugin"
-> +PACKAGECONFIG[media-export] =3D =
-"--enable-media-export-plugin,--disable-media-export-plugin,sqlite3"
-> +PACKAGECONFIG[gst-launch] =3D =
-"--enable-gst-launch-plugin,--disable-gst-launch-plugin"
-> +PACKAGECONFIG[gtk+3] =3D ",--without-ui,gtk+3"
-> +
-> +LIBV =3D "2.6"
-> +
-> +do_install_append() {
-> +       # Remove .la files for loadable modules
-> +       rm -f ${D}/${libdir}/rygel-${LIBV}/engines/*.la
-> +       rm -f ${D}/${libdir}/rygel-${LIBV}/plugins/*.la
-> +}
-> +
-> +FILES_${PN} +=3D "${libdir}/rygel-${LIBV}/engines ${datadir}/dbus-1 =
-${datadir}/icons"
-> +FILES_${PN}-dev +=3D "${datadir}/vala=E2=80=9D
-
-did you miss to add vala in DEPENDS ?
-
-> +FILES_${PN}-dbg +=3D "${libdir}/rygel-${LIBV}/engines/.debug =
-${libdir}/rygel-${LIBV}/plugins/.debug"
-> +
-> +PACKAGES +=3D "${PN}-meta"
-> +ALLOW_EMPTY_${PN}-meta =3D "1"
-> +
-> +PACKAGES_DYNAMIC =3D "${PN}-plugin-*"
-> +
-> +python populate_packages_prepend () {
-> +    rygel_libdir =3D d.expand('${libdir}/rygel-${LIBV}')
-> +    postinst =3D d.getVar('plugin_postinst', True)
-> +    pkgs =3D []
-> +
-> +    pkgs +=3D do_split_packages(d, oe.path.join(rygel_libdir, =
-"plugins"), 'librygel-(.*)\.so$', d.expand('${PN}-plugin-%s'), 'Rygel =
-plugin for %s', postinst=3Dpostinst, extra_depends=3Dd.expand('${PN}'))
-> +    pkgs +=3D do_split_packages(d, oe.path.join(rygel_libdir, =
-"plugins"), '(.*)\.plugin$', d.expand('${PN}-plugin-%s'), 'Rygel plugin =
-for %s', postinst=3Dpostinst, extra_depends=3Dd.expand('${PN}'))
-> +
-> +    metapkg =3D d.getVar('PN', True) + '-meta'
-> +    d.setVar('RDEPENDS_' + metapkg, ' '.join(pkgs))
-> +}
 > --
-> 1.8.3.1
->=20
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -197,7 +221,7 @@ for %s', postinst=3Dpostinst, extra_depends=3Dd.expand('${PN}'))
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
---Apple-Mail=_3318DFD9-BD2E-4B06-BA1E-67DFD28888C0
+--Apple-Mail=_2BCF8461-B4AD-4302-8BB6-C7D4CD12F787
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -208,9 +232,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlYXaksACgkQuwUzVZGdMxQaRACfXUY/48RMQ8Eb+edNfVyk1j1F
-HQ0AnR1xeAnqNca8Mw5YEnnDgxegVXiM
-=qghm
+iEYEARECAAYFAlYXasYACgkQuwUzVZGdMxQQMQCeMqh7X1DgECa1hNCV30osME6l
+GTAAoJNtd3XGrAhPFizqnp0URzBmlxNB
+=mqug
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_3318DFD9-BD2E-4B06-BA1E-67DFD28888C0--
+--Apple-Mail=_2BCF8461-B4AD-4302-8BB6-C7D4CD12F787--
