@@ -1,26 +1,23 @@
-Return-Path: <Kai.Kang@windriver.com>
+Return-Path: <Qi.Chen@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id EEDDC7702A
+	by mail.openembedded.org (Postfix) with ESMTP id 6230D76F56
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Oct 2015 03:39:14 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9A3dEtG010251
+	Sat, 10 Oct 2015 09:31:39 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9A9VdWN011316
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 9 Oct 2015 20:39:14 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Fri, 9 Oct 2015 20:39:14 -0700
-From: <kai.kang@windriver.com>
-To: <martin.jansa@gmail.com>
-Date: Sat, 10 Oct 2015 11:31:31 +0800
-Message-ID: <1444447891-13579-3-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.6.1
-In-Reply-To: <1444447891-13579-1-git-send-email-kai.kang@windriver.com>
-References: <1444447891-13579-1-git-send-email-kai.kang@windriver.com>
+	Sat, 10 Oct 2015 02:31:39 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Sat, 10 Oct 2015 02:31:39 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
+Date: Sat, 10 Oct 2015 17:19:51 +0800
+Message-ID: <1444468791-18370-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 2/2] efibootmgr: 0.6.0 -> 0.12
+Subject: [meta-networking][PATCH] drbd-utils: fix multilib problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,140 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Oct 2015 03:39:15 -0000
+X-List-Received-Date: Sat, 10 Oct 2015 09:31:40 -0000
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+If multilib is enabled, errors about 'installed-not-shipped' would appear.
+This patch fixes this problem.
 
-Upgrade efibootmgr from 0.6.0 to 0.12.
-
-* update HOMEPAGE
-* drop obsolete patches that source files have been removed
-* add dependency efivar
-* update CFLAGS to fix print wrong version issue
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../{efibootmgr_0.6.0.bb => efibootmgr_0.12.bb}    | 21 ++++++++--------
- .../efibootmgr/files/docbook-fixes.patch           | 28 ----------------------
- .../files/w-keep-existing-mbr-signature.patch      | 26 --------------------
- 3 files changed, 11 insertions(+), 64 deletions(-)
- rename meta-oe/recipes-extended/efibootmgr/{efibootmgr_0.6.0.bb => efibootmgr_0.12.bb} (39%)
- delete mode 100644 meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
- delete mode 100644 meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
+ meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-similarity index 39%
-rename from meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
-rename to meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-index 501ff2a..03aaf13 100644
---- a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.6.0.bb
-+++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-@@ -1,26 +1,27 @@
- DESCRIPTION = "Linux user-space application to modify the EFI Boot Manager."
- SUMMARY = "EFI Boot Manager"
--HOMEPAGE = "http://linux.dell.com/efibootmgr/"
-+HOMEPAGE = "https://github.com/rhinstaller/efibootmgr"
- SECTION = "base"
- 
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
--DEPENDS = "pciutils zlib"
-+DEPENDS = "pciutils zlib efivar"
- 
- COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
- 
--SRC_URI = "http://linux.dell.com/efibootmgr/permalink/efibootmgr-${PV}.tar.gz \
--    file://ldflags.patch \
--    file://docbook-fixes.patch \
--    file://w-keep-existing-mbr-signature.patch \
--"
-+SRC_URI = "https://github.com/rhinstaller/efibootmgr/releases/download/${BP}/${BP}.tar.bz2 \
-+           file://ldflags.patch \
-+          "
- 
--SRC_URI[md5sum] = "9e9a31d79e579644de83a14139b66d10"
--SRC_URI[sha256sum] = "5167488b92950e60028d1025942ce6bda04638c6fb5e110abb8c8f687844d155"
-+SRC_URI[md5sum] = "6647f5cd807bc8484135ba74fcbcc39a"
-+SRC_URI[sha256sum] = "a66f5850677e86255d93cb1cead04c3c48a823a2b864c579321f2a07f00256e6"
- 
--EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/lib -I${S}/src/include -fgnu89-inline'"
-+EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/include `pkg-config --cflags efivar` \
-+                 -DEFIBOOTMGR_VERSION=\"$(RELEASE_MAJOR).$(RELEASE_MINOR)\" '"
- 
- do_install () {
-     install -D -p -m0755 src/efibootmgr/efibootmgr ${D}/${sbindir}/efibootmgr
- }
-+
-+inherit pkgconfig
-diff --git a/meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch b/meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
-deleted file mode 100644
-index f2dc83b..0000000
---- a/meta-oe/recipes-extended/efibootmgr/files/docbook-fixes.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--Upstream-Status: Pending
--
--Import this patch from meta-linaro.
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
--
--diff --git a/src/man/man8/efibootmgr.8.docbook b/src/man/man8/efibootmgr.8.docbook
--index aef4444..eb8f266 100644
----- a/src/man/man8/efibootmgr.8.docbook
--+++ b/src/man/man8/efibootmgr.8.docbook
--@@ -302,7 +302,7 @@
--           <title>Displaying the current settings (must be root).</title>
--           
--           <para>
---            <computeroutput>
--+            <programlisting>
--   [root@localhost ~]# efibootmgr
--   BootCurrent: 0004
--   BootNext: 0003
--@@ -313,7 +313,7 @@
--   Boot0002* Hard Drive(Device:80)/HD(Part1,Sig00112233)   
--   Boot0003* PXE Boot: MAC(00D0B7C15D91)               
--   Boot0004* Linux
---            </computeroutput>
--+            </programlisting>
--           </para>
--           <para>This shows:</para>
--           <itemizedlist>
-diff --git a/meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch b/meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
-deleted file mode 100644
-index 58bd135..0000000
---- a/meta-oe/recipes-extended/efibootmgr/files/w-keep-existing-mbr-signature.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--Upstream-Status: Pending
--
--Import this patch from meta-linaro.
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
-----
--Description: Fix -w option to leave an existing unique MBR signature intact
-- This makes the implementation match the documentation.
--Author: Colin Watson <cjwatson@ubuntu.com>
--Bug-Ubuntu: https://bugs.launchpad.net/bugs/1065261
--Forwarded: no
--Last-Update: 2013-02-01
--
--Index: b/src/lib/disk.c
--===================================================================
----- a/src/lib/disk.c
--+++ b/src/lib/disk.c
--@@ -352,7 +352,7 @@
-- 		printf("******************************************************\n\n");
-- 		
-- 	}
---	else if (opts.write_signature) {
--+	else if (!mbr->unique_mbr_signature && opts.write_signature) {
-- 		
-- 		/* MBR Signatures must be unique for the 
-- 		   EFI Boot Manager
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb b/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb
+index 66b94dd..2971280 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb
++++ b/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb
+@@ -34,7 +34,7 @@ RDEPENDS_${PN} += "bash perl"
+ # The drbd items are explicitly put under /lib when installed.
+ #
+ FILES_${PN} += "/run"
+-FILES_${PN} += "${base_libdir}/drbd \
+-                ${libdir}/drbd \
+-                ${libdir}/tmpfiles.d"
+-FILES_${PN}-dbg += "${base_libdir}/drbd/.debug"
++FILES_${PN} += "${nonarch_base_libdir}/drbd \
++                ${nonarch_libdir}/drbd \
++                ${nonarch_libdir}/tmpfiles.d"
++FILES_${PN}-dbg += "${nonarch_base_libdir}/drbd/.debug"
 -- 
-2.6.0.rc2.10.gf4d9753
+1.9.1
 
 
