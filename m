@@ -1,41 +1,41 @@
 Return-Path: <mbc@koumoul.net>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id AA3557704D
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B00676F56
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Oct 2015 11:40:27 +0000 (UTC)
-Received: by wicgb1 with SMTP id gb1so145411928wic.1
+	Mon, 12 Oct 2015 11:41:06 +0000 (UTC)
+Received: by wijq8 with SMTP id q8so53610889wij.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Oct 2015 04:40:27 -0700 (PDT)
+	Mon, 12 Oct 2015 04:41:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
 	h=sender:from:to:cc:subject:date:message-id;
 	bh=oXQmLTXTuayQf1v4/Db3hEkpQD9lwAWd4TFx5tQZV80=;
-	b=QYEuNdw75csbFh0kDV6MNni/7lH610OiuGy7tnbY54H0rx6SvxmLxo4DccWLYoCPLt
-	H4x5Wj8luZmwAd0S3mSCOMAinuNdgu8fY6gtoZoze0WFFWq+SBfCXoU7+B/WBD6nfDt2
-	db2J5UNTqMEC491keUZOMIowHOJBFZ480WEec=
+	b=k/4nx3qLlSCuCrLxv/lzZiW2HMyFTzM0wS3uM9iAmQEi2usJjfVA4wQQcxCg56MDbG
+	fM+ISxCBJTXowXXPmQ72OhbuTA/j7ilduXWiDcgPxj5ovMU0Po9EzJwgeF09rEY95yj0
+	b9MflolpbDd5QbU4mz8QtvNkQRP0pAT6a+MG0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
 	bh=oXQmLTXTuayQf1v4/Db3hEkpQD9lwAWd4TFx5tQZV80=;
-	b=aMxo1t0/ML6N+fxeuSDWFQpImnmqU066kR05BjkvCi5DFAtyzHFGpSN6oepeUfYmhE
-	3P/Uzxw1W2/qSpzZA/+x7IR4FIExqVAdyAzob0GqVsf4BcSIIZgsb1usQzTB+AcVttzP
-	uUERWCXfc8R/UJucnFsBo3rMUfO1mJU0KtBRgb7FSvaL8f3PhkrXZHEo5fEm7mfmbWaP
-	WuvU68K6vIc1CwXIIbJsqIpqaz8EtBcLOWn36lOdqQzF6WJD+gdhaPSMT5zS5zoiDaAk
-	1LZluBG9VFndBF/nKiflfXydEwqqnEa5rdYBzejdlhkB18IzZFIAQhegbjX4Kb+pJYJ7
-	PG1g==
-X-Gm-Message-State: ALoCoQlqt1kA8P5CDyrvkNbKoq/E3+vqyuumSvsYgFUfUvd9gtURD6gTIVQ1Rzis1Woc0/pAbiv4
-X-Received: by 10.181.29.102 with SMTP id jv6mr6431401wid.59.1444650027506;
-	Mon, 12 Oct 2015 04:40:27 -0700 (PDT)
+	b=ZYWJjc6/HA++ukj3eiVm+08DiTrG55yVJQpLGLf6QpslVbYZ4fB5bcaSOilUcjj7WZ
+	qHfqXm1gb6pGwqT88Ep+TxGQTINynZmXCOWiozmx8NXSxMFawe17tajuXdD6QEC6ai+p
+	mXocucOJZ0tNJ9ycgMGE0mAXTeXIJhVDRB3/joyb8BPtUeX/7+V4VJ5SYlTbSyH9/7iS
+	6qQ88JSz7rHxw+/t52eoiDp1JVfuhUE8OPTeI2PM/DZYs5qMQONv9uWEJGXMz2ImE7fX
+	aPXA1JaJFnf3m//9vSdW31OPpcSvI3tDdjnyer8kX5NLIVy/d/30K06lBwPztwBRc5mK
+	VnVQ==
+X-Gm-Message-State: ALoCoQmLLJ86hcRQ6NUJgSzPIAgsnXN8UdCFxuGp6csldGkW2TrJAQA+7FDBNlYwW6qVM5Trse6M
+X-Received: by 10.194.205.131 with SMTP id lg3mr5895944wjc.20.1444650066434;
+	Mon, 12 Oct 2015 04:41:06 -0700 (PDT)
 Received: from centos7.vannes.iot ([46.18.96.42])
 	by smtp.gmail.com with ESMTPSA id
-	uq5sm19379008wjc.3.2015.10.12.04.40.26
+	ld5sm19371975wjc.18.2015.10.12.04.41.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 12 Oct 2015 04:40:26 -0700 (PDT)
+	Mon, 12 Oct 2015 04:41:05 -0700 (PDT)
 Sender: "Manuel Bachmann [ IoT.bzh ]" <mbc@koumoul.net>
 From: Manuel Bachmann <manuel.bachmann@iot.bzh>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Oct 2015 13:39:57 +0200
-Message-Id: <1444649997-15077-1-git-send-email-manuel.bachmann@iot.bzh>
+Date: Mon, 12 Oct 2015 13:40:35 +0200
+Message-Id: <1444650035-15117-1-git-send-email-manuel.bachmann@iot.bzh>
 X-Mailer: git-send-email 1.8.3.1
 Subject: [PATCH v3 4/4][meta-multimedia] rygel: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -51,7 +51,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Oct 2015 11:40:28 -0000
+X-List-Received-Date: Mon, 12 Oct 2015 11:41:06 -0000
 
 Rygel is a UPnP Audio-Video media server, that allows to
 share media files to other devices. It can also become a
