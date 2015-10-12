@@ -1,43 +1,35 @@
-Return-Path: <mbc@koumoul.net>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B00676F56
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-qk0-f177.google.com (mail-qk0-f177.google.com
+	[209.85.220.177])
+	by mail.openembedded.org (Postfix) with ESMTP id E09BC76E3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Oct 2015 11:41:06 +0000 (UTC)
-Received: by wijq8 with SMTP id q8so53610889wij.0
+	Mon, 12 Oct 2015 13:54:54 +0000 (UTC)
+Received: by qkap81 with SMTP id p81so58469479qka.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Oct 2015 04:41:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=oXQmLTXTuayQf1v4/Db3hEkpQD9lwAWd4TFx5tQZV80=;
-	b=k/4nx3qLlSCuCrLxv/lzZiW2HMyFTzM0wS3uM9iAmQEi2usJjfVA4wQQcxCg56MDbG
-	fM+ISxCBJTXowXXPmQ72OhbuTA/j7ilduXWiDcgPxj5ovMU0Po9EzJwgeF09rEY95yj0
-	b9MflolpbDd5QbU4mz8QtvNkQRP0pAT6a+MG0=
+	Mon, 12 Oct 2015 06:54:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=oXQmLTXTuayQf1v4/Db3hEkpQD9lwAWd4TFx5tQZV80=;
-	b=ZYWJjc6/HA++ukj3eiVm+08DiTrG55yVJQpLGLf6QpslVbYZ4fB5bcaSOilUcjj7WZ
-	qHfqXm1gb6pGwqT88Ep+TxGQTINynZmXCOWiozmx8NXSxMFawe17tajuXdD6QEC6ai+p
-	mXocucOJZ0tNJ9ycgMGE0mAXTeXIJhVDRB3/joyb8BPtUeX/7+V4VJ5SYlTbSyH9/7iS
-	6qQ88JSz7rHxw+/t52eoiDp1JVfuhUE8OPTeI2PM/DZYs5qMQONv9uWEJGXMz2ImE7fX
-	aPXA1JaJFnf3m//9vSdW31OPpcSvI3tDdjnyer8kX5NLIVy/d/30K06lBwPztwBRc5mK
-	VnVQ==
-X-Gm-Message-State: ALoCoQmLLJ86hcRQ6NUJgSzPIAgsnXN8UdCFxuGp6csldGkW2TrJAQA+7FDBNlYwW6qVM5Trse6M
-X-Received: by 10.194.205.131 with SMTP id lg3mr5895944wjc.20.1444650066434;
-	Mon, 12 Oct 2015 04:41:06 -0700 (PDT)
-Received: from centos7.vannes.iot ([46.18.96.42])
-	by smtp.gmail.com with ESMTPSA id
-	ld5sm19371975wjc.18.2015.10.12.04.41.05
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 12 Oct 2015 04:41:05 -0700 (PDT)
-Sender: "Manuel Bachmann [ IoT.bzh ]" <mbc@koumoul.net>
-From: Manuel Bachmann <manuel.bachmann@iot.bzh>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Oct 2015 13:40:35 +0200
-Message-Id: <1444650035-15117-1-git-send-email-manuel.bachmann@iot.bzh>
-X-Mailer: git-send-email 1.8.3.1
-Subject: [PATCH v3 4/4][meta-multimedia] rygel: Add recipe
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=ryJHWo3T2mEOq/yPblgKPkYtfLIqi1dqeSEhpQppR90=;
+	b=M5hgO4f+EopBOsBTyBSsEK6BwQq6/aOOtoki60WsGUySWzKhKkAObL3NQ+0STxY34U
+	7zmvvAn4LxaSLfDqkkhn18L/Zr+VUANuP2hRgQKLV35VQN/nEG3iaXuKa15RNAe95G9l
+	jgvFRS9Wie4vw155gvrSq1Z+L/8ToFBFSvkIVs1PzpE4nhmH/vSH3gI9ZzlfxNv8qyvK
+	y0VYgY7Rnkzdj+11AXo/+TsJplfWV2o5xiOvvOoFvD9FwLjrV3/uitiH4duw849CrTa0
+	Las+2O4igTEpzs40H8hrGBsNXzZmKHbqk/HQyLauXkCPFiGJ4ztoqmYcX5898dqfI7y3
+	WhjA==
+X-Gm-Message-State: ALoCoQnWd5dFEbAZkTaYLecRBQk+E6Y8fT04IF5wFIoGt2SGsivEYkdlZwTvcqbvc7nynt7SDI/A
+X-Received: by 10.55.209.147 with SMTP id o19mr31974825qkl.61.1444658094636;
+	Mon, 12 Oct 2015 06:54:54 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.140.98.55 with HTTP; Mon, 12 Oct 2015 06:54:35 -0700 (PDT)
+In-Reply-To: <CAAzKXnjdUYmLrXX4bCT9wmcH9nc3c1OL7eRsdTXXD-T70RDZmA@mail.gmail.com>
+References: <CAAzKXnjdUYmLrXX4bCT9wmcH9nc3c1OL7eRsdTXXD-T70RDZmA@mail.gmail.com>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Mon, 12 Oct 2015 15:54:35 +0200
+Message-ID: <CAP71WjyDYcoZTUt8osX-B=kwR_Opis8te0EFdn7vypKaztHoSw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] Recipes draft for Chromium V45 and V47
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,99 +43,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Oct 2015 11:41:06 -0000
+X-List-Received-Date: Mon, 12 Oct 2015 13:54:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Rygel is a UPnP Audio-Video media server, that allows to
-share media files to other devices. It can also become a
-MediaRenderer controlled by UPnP or DLNA Controllers.
+hi,
 
-Rygel makes use of the GStreamer library to recognize and
-index media files. UPnp clients will then be able to browse
-through them with the aid of metadata (artist, date...).
+On Fri, Oct 9, 2015 at 1:31 PM, Zoltan Kuscsik
+<zoltan.kuscsik@linaro.org> wrote:
+> So far it is tested on Wayland builds (ARM 32bit and ARM 64bit):
+>
+> https://github.com/linaro-home/meta-browser
 
-We do not propose to build without GStreamer support
-(because then if cannot parse any actual media file, and
-this is pointless), and for the same reason always include
-the GStreamer engine in the main package ; but allow
-separate packages for plugins.
+just for the record.. I am using/testing this set of recipes on
+IFC6410 (armv7) and DragonBoard 410c (armv8), and so far so good.
 
-(disable tracker plugin for now, because it pulls 3 layers
-and needs us to have a PREFERRED udev provider, which is a
-bit extreme for a first version)
+it would be good if the helper script google-chrome could parse a
+'default' config file, so that as a downstream user it is easy for me
+to hook my own customizations in this script, something like
 
-Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
-Author: Manuel Bachmann <manuel.bachmann@iot.bzh>
-Author: Ross Burton <ross.burton@intel.com>
----
- .../recipes-connectivity/rygel/rygel_0.26.1.bb     | 58 ++++++++++++++++++++++
- 1 file changed, 58 insertions(+)
- create mode 100644 meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
+. /etc/default/google-chrome
 
-diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
-new file mode 100644
-index 0000000..af3f2be
---- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
-@@ -0,0 +1,58 @@
-+SUMMARY = "A UPnP AV media server and renderer"
-+DESCRIPTION = "Rygel is a home media solution (UPnP AV MediaServer) that \
-+allow you to easily share audio, video and pictures to other devices. \
-+Additionally, media player software may use Rygel to become a MediaRenderer \
-+that may be controlled remotely by a UPnP or DLNA Controller."
-+HOMEPAGE = "http://live.gnome.org/Rygel"
-+
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-+                    file://src/rygel/rygel-main.vala;endline=25;md5=a4cce4d389da1c1638fe68d07ae9d811"
-+
-+DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 libmediaart-2.0"
-+RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
-+
-+GNOME_COMPRESS_TYPE = "xz"
-+SRC_URI[archive.md5sum] = "f182d54913a528bb5b4fb2f291aca0fc"
-+SRC_URI[archive.sha256sum] = "390740609e34399b886ddb9a8f7eca25055ad72048dfdd869edf02999b1e1d8f"
-+
-+inherit gnomebase vala
-+
-+EXTRA_OECONF = "--disable-introspection --disable-tracker-plugin --with-media-engine=gstreamer"
-+
-+PACKAGECONFIG ?= "external mpris mediathek ruih media-export gst-launch gtk+3"
-+PACKAGECONFIG[external] = "--enable-external-plugin,--disable-external-plugin"
-+PACKAGECONFIG[mpris] = "--enable-mpris-plugin,--disable-mpris-plugin"
-+PACKAGECONFIG[mediathek] = "--enable-mediathek-plugin,--disable-mediathek-plugin"
-+PACKAGECONFIG[ruih] = "--enable-ruih-plugin,--disable-ruih-plugin"
-+PACKAGECONFIG[media-export] = "--enable-media-export-plugin,--disable-media-export-plugin,sqlite3"
-+PACKAGECONFIG[gst-launch] = "--enable-gst-launch-plugin,--disable-gst-launch-plugin"
-+PACKAGECONFIG[gtk+3] = ",--without-ui,gtk+3"
-+
-+LIBV = "2.6"
-+
-+do_install_append() {
-+       # Remove .la files for loadable modules
-+       rm -f ${D}/${libdir}/rygel-${LIBV}/engines/*.la
-+       rm -f ${D}/${libdir}/rygel-${LIBV}/plugins/*.la
-+}
-+
-+FILES_${PN} += "${libdir}/rygel-${LIBV}/engines ${datadir}/dbus-1 ${datadir}/icons"
-+FILES_${PN}-dbg += "${libdir}/rygel-${LIBV}/engines/.debug ${libdir}/rygel-${LIBV}/plugins/.debug"
-+
-+PACKAGES += "${PN}-meta"
-+ALLOW_EMPTY_${PN}-meta = "1"
-+
-+PACKAGES_DYNAMIC = "${PN}-plugin-*"
-+
-+python populate_packages_prepend () {
-+    rygel_libdir = d.expand('${libdir}/rygel-${LIBV}')
-+    postinst = d.getVar('plugin_postinst', True)
-+    pkgs = []
-+
-+    pkgs += do_split_packages(d, oe.path.join(rygel_libdir, "plugins"), 'librygel-(.*)\.so$', d.expand('${PN}-plugin-%s'), 'Rygel plugin for %s', postinst=postinst, extra_depends=d.expand('${PN}'))
-+    pkgs += do_split_packages(d, oe.path.join(rygel_libdir, "plugins"), '(.*)\.plugin$', d.expand('${PN}-plugin-%s'), 'Rygel plugin for %s', postinst=postinst, extra_depends=d.expand('${PN}'))
-+
-+    metapkg = d.getVar('PN', True) + '-meta'
-+    d.setVar('RDEPENDS_' + metapkg, ' '.join(pkgs))
-+}
--- 
-1.8.3.1
-
+nico
 
