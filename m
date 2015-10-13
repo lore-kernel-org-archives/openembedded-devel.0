@@ -1,51 +1,40 @@
-Return-Path: <jbriance@cisco.com>
-X-Greylist: delayed 573 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 13 Oct 2015 10:22:35 UTC
-Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
-	by mail.openembedded.org (Postfix) with ESMTP id A8E2275F3A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 0ECA275A38
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Oct 2015 10:22:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=@cisco.com; l=592; q=dns/txt; s=iport;
-	t=1444731756; x=1445941356;
-	h=from:to:subject:date:message-id:references:in-reply-to:
-	content-transfer-encoding:mime-version;
-	bh=o0FrF5fDAMzbn92/PWoeFfgBJ7ZXu3vJwjjBb+vtcLQ=;
-	b=UYIkY7OOlIRBUvjQDhgUogEbafhZxTsl1n8aSpmSIbUoma83YHjJH47J
-	cL8WQdM7pQTPRGpo7f8V4qfld1IAV4KxJKqzBROpdB0tse5iCVkTQXqMJ
-	gUWpWaRhQUymh94AmUTDVbSAPJ608I+u0w/sC0rBlnLdU/HveNtfM9xmj w=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A0DfAgBD2BxW/5hdJa1dgyZUbwW+CQENgVohgnKCCn8CgT84FAEBAQEBAQF/C4QmAQEBAwE6RAsCAQg2EDIlAgQbiB4IDcBSAQEBAQEBBAEBAQEehnWEfoUUhC4FlhYBhRiHeoInmWcBHwEBQoQChlyBBgEBAQ
-X-IronPort-AV: E=Sophos;i="5.17,677,1437436800"; d="scan'208";a="196880748"
-Received: from rcdn-core-1.cisco.com ([173.37.93.152])
-	by alln-iport-4.cisco.com with ESMTP; 13 Oct 2015 10:13:02 +0000
-Received: from XCH-ALN-008.cisco.com (xch-aln-008.cisco.com [173.36.7.18])
-	by rcdn-core-1.cisco.com (8.14.5/8.14.5) with ESMTP id t9DAD2LZ031006
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	Tue, 13 Oct 2015 10:25:24 +0000 (UTC)
+Received: by wieq12 with SMTP id q12so24844324wie.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Oct 2015 10:13:02 GMT
-Received: from xch-aln-008.cisco.com (173.36.7.18) by XCH-ALN-008.cisco.com
-	(173.36.7.18) with Microsoft SMTP Server (TLS) id 15.0.1104.5;
-	Tue, 13 Oct 2015 05:12:49 -0500
-Received: from xch-aln-008.cisco.com ([173.36.7.18]) by XCH-ALN-008.cisco.com
-	([173.36.7.18]) with mapi id 15.00.1104.000;
-	Tue, 13 Oct 2015 05:12:49 -0500
-From: "Julien Brianceau (jbriance)" <jbriance@cisco.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe]  [meta-browser] Recipes draft for Chromium V45 and V47
-Thread-Index: AQHRAoYUCV2kssPkaUy95Sr6oOwhBp5pNIUw
-Date: Tue, 13 Oct 2015 10:12:49 +0000
-Message-ID: <2f4be637747c4a7eb3f2d5dd7a0b8465@XCH-ALN-008.cisco.com>
-References: <CAAzKXnjdUYmLrXX4bCT9wmcH9nc3c1OL7eRsdTXXD-T70RDZmA@mail.gmail.com>
-In-Reply-To: <CAAzKXnjdUYmLrXX4bCT9wmcH9nc3c1OL7eRsdTXXD-T70RDZmA@mail.gmail.com>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.60.62.122]
+	Tue, 13 Oct 2015 03:25:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=k4f4wVKZKxjfETbF/oxjjL0HF5y6E6I8uwTF7fbGsIc=;
+	b=yjTaIs/LBjUvYkL2QNRnT+zOECWeKucXqclaUV/duTTB+B3NBaqKiAgE9kUQLvmCR4
+	K3xMvOFYW0c+w5FGP/oXh3E7ovp0n6KBl3g+qCovy49w6KyZIbxFbL/K6D3eA0Tr33YP
+	Cvl+MKEkH8j96z0UZd/Bv02P2aNNIeTJvGl6jO3SK1/QdtFhEoz9iuOSg9d8sXSXqmpf
+	nHIvLtIJrXW+h4RMvlkemuoEPINoVPkrMbOxaOAMJ3ldPo5iV9SfBCjjGqSby7iDfV/K
+	LM8faQdHUMeKywDyGyjcu0xFt9BPG+WaPDQ6E4RsXU8lQvcI9om+BIzIWgSixN14iUIS
+	mLzw==
+X-Received: by 10.194.118.5 with SMTP id ki5mr34772190wjb.94.1444731924716;
+	Tue, 13 Oct 2015 03:25:24 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id uq5sm2791504wjc.3.2015.10.13.03.25.23
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 13 Oct 2015 03:25:23 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 13 Oct 2015 12:25:28 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151013102528.GB2396@jama>
+References: <1443016567-15788-1-git-send-email-dv@pseudoterminal.org>
+	<1443016567-15788-5-git-send-email-dv@pseudoterminal.org>
 MIME-Version: 1.0
-Subject: Re: [meta-browser] Recipes draft for Chromium V45 and V47
+In-Reply-To: <1443016567-15788-5-git-send-email-dv@pseudoterminal.org>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-multimedia][PATCH 5/5] opencore-amr: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,27 +48,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Oct 2015 10:22:35 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 13 Oct 2015 10:25:30 -0000
+X-Groupsio-MsgNum: 57792
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="WhfpMioaduB5tiZL"
+Content-Disposition: inline
+
+--WhfpMioaduB5tiZL
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Wed, Sep 23, 2015 at 03:56:07PM +0200, Carlos Rafael Giani wrote:
+> Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 
-> It still needs some cleanup before upstream, comments are welcome.
+This breaks gst-plugins-ugly:
+http://errors.yoctoproject.org/Errors/Details/20432/
 
-I think it would be great to take the opportunity to clarify license declar=
-ation in chromium recipes.
-Currently, LICENSE is set to BSD only for chromium recipes, through chromiu=
-m.inc file.
-Archives from http://gsdview.appspot.com/chromium-browser-official contain =
-third party source code (ffmpeg for instance) that is not BSD licensed, whe=
-reas it is compiled by the recipe.
+Please try to add:
+http://lists.freedesktop.org/archives/gstreamer-commits/2012-March/060287.h=
+tml
+to gst-plugins-ugly if we don't have that already or check why it didn't
+work.
 
-Shouldn't licenses from 3rd party code compiled by chromium be declared in =
-the recipe as well ?
+> ---
+>  .../recipes-multimedia/opencore-amr/opencore-amr_0.1.3.bb   | 13 +++++++=
+++++++
+>  1 file changed, 13 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-multimedia/opencore-amr/openc=
+ore-amr_0.1.3.bb
+>=20
+> diff --git a/meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr=
+_0.1.3.bb b/meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr_0.=
+1.3.bb
+> new file mode 100644
+> index 0000000..ab5813e
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr_0.1.3.=
+bb
+> @@ -0,0 +1,13 @@
+> +DESCRIPTION =3D "OpenCORE Adaptive Multi Rate (AMR) speech codec library=
+ implementation"
+> +HOMEPAGE =3D "http://sourceforge.net/projects/opencore-amr/"
+> +SECTION =3D "libs"
+> +
+> +LICENSE =3D "Apache-2.0"
+> +LICENSE_FLAGS =3D "commercial"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Ddd2c2486aca02190153cf399e508c=
+7e7"
+> +
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/opencore-amr/${BP}.tar.gz"
+> +SRC_URI[md5sum] =3D "09d2c5dfb43a9f6e9fec8b1ae678e725"
+> +SRC_URI[sha256sum] =3D "106bf811c1f36444d7671d8fd2589f8b2e0cca58a2c764da=
+62ffc4a070595385"
+> +
+> +inherit autotools
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Regards,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Julien
+--WhfpMioaduB5tiZL
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlYc3BgACgkQN1Ujt2V2gBzOhQCfTh0ewZyqm0PNqVJAllzdhS6D
+GPIAn29eWYGxSWG44pbtzFICk5ezxYZZ
+=w12G
+-----END PGP SIGNATURE-----
+
+--WhfpMioaduB5tiZL--
