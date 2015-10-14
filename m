@@ -1,40 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 159F0770B5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 19:21:22 +0000 (UTC)
-Received: by wijq8 with SMTP id q8so96556390wij.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 12:21:22 -0700 (PDT)
+Return-Path: <bruce.ashfield@gmail.com>
+Received: from mail-yk0-f172.google.com (mail-yk0-f172.google.com
+	[209.85.160.172])
+	by mail.openembedded.org (Postfix) with ESMTP id DBAE476FDE;
+	Wed, 14 Oct 2015 19:48:13 +0000 (UTC)
+Received: by ykaz22 with SMTP id z22so32194653yka.2;
+	Wed, 14 Oct 2015 12:48:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=eb/k1q1CJTsRGbgpqBF6rxxFK3bVU/HxnW0/jZWbAoM=;
-	b=QcOHh1GeJhTiJmFXZqfadJg7n/538Qncui7Y7yGfHcCNiyHyS0YjdGnGiMM356NNzN
-	leVj7ch03F7n4i3iqL+xM0XmX2Df408OOCe5+eP4lo7PwE5O3AJpbpbl4zIMD3ZL4HES
-	5oHCg1pcnW9UogWsM97zRghwPj5Q7xNOOE32KgzDRM3Ic8MvF9jnv0a9qvRkX+w/qQeI
-	mYZ29sal9oHaOlzzYrbB0N4DGMmfCHFJyW0Lv7Hmm5XMXXHiwJtxPobMTzLlFYXdu4W1
-	q48pd5vcmbj8ixiAcyxZ/w5avz2NnaCjWjeBpRdkz65drfX9LbkuImk2Z+8xT6i3pfEM
-	vREA==
-X-Received: by 10.194.235.39 with SMTP id uj7mr6702302wjc.115.1444850482803;
-	Wed, 14 Oct 2015 12:21:22 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	r9sm11779697wjz.35.2015.10.14.12.21.21
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 14 Oct 2015 12:21:22 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 14 Oct 2015 21:21:38 +0200
-To: Paul Knopf <theonlylawislove@gmail.com>
-Message-ID: <20151014192138.GG22448@jama>
-References: <CAOaDmGXU7LhQmpTJu8oW-Mjyc2pRwNtNpvws2beOFCm7=MXTYg@mail.gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=OIHSJUr4isM+EYAp5dR2pIfZUk3MfmF4omKDtAUoujI=;
+	b=e24UiQUrWeJMnwIuK6OlfwFqgSoqqSVmKwFON0sY3NcMwT1PeOFE10GUcblrl3MlHD
+	MBTskGGspAeRDNxlnmJ6od9DHYS1ljnEDDZxpp4h1zqmqGAmTtevD5frn64FF++RacTq
+	ODChgZ+s1CNIT/8J1kNQOmSdUACevSoVNUvxTOYGRQGxpU0xHlpeTzQc1yX12jwUqvLb
+	Kva4L7tBkbfXQUH3P8qrsqjhw/V1/9/Rsyh4+p44JWIHVBoYxkVUQjwDtaRsIXRdDAap
+	D1uoQL8QEelSLuYJAUw31wmayqlIVF9D8INvJLuI0xzX2/EzuvpYyLvlFPzMy9CHaKyR
+	dfwQ==
 MIME-Version: 1.0
-In-Reply-To: <CAOaDmGXU7LhQmpTJu8oW-Mjyc2pRwNtNpvws2beOFCm7=MXTYg@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: openembedded-devel@lists.openembedded.org, otavio@ossystems.com.br
-Subject: Re: meta-qt5 daisy qtwebkit-examples bitbake error
+X-Received: by 10.129.0.2 with SMTP id 2mr4109955ywa.127.1444852093195; Wed,
+	14 Oct 2015 12:48:13 -0700 (PDT)
+Received: by 10.13.217.201 with HTTP; Wed, 14 Oct 2015 12:48:13 -0700 (PDT)
+In-Reply-To: <20151014193033.GD3552@dent.vctlabs.com>
+References: <1439220090-3305-1-git-send-email-s.mueller-klieser@phytec.de>
+	<20151014193033.GD3552@dent.vctlabs.com>
+Date: Wed, 14 Oct 2015 15:48:13 -0400
+Message-ID: <CADkTA4MMRESA2E2H_0iruywU6AgzSwaZ8Sj03SBB25=ckGv41Q@mail.gmail.com>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Denys Dmytriyenko <denys@ti.com>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] kernel.bbclass: Fix do_shared_workdir task ordering
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,64 +43,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2015 19:21:24 -0000
-X-Groupsio-MsgNum: 57828
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="iAL9S67WQOXgEPD9"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 14 Oct 2015 19:48:14 -0000
+Content-Type: text/plain; charset=UTF-8
 
---iAL9S67WQOXgEPD9
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Oct 14, 2015 at 3:30 PM, S. Lockwood-Childs <sjl@vctlabs.com> wrote:
+> http://patchwork.openembedded.org/patch/99875/
+>
+> Apparently this patch is still not in master, and I just ran across the
+> problem with an externally built module (omaplfb from omap3-sgx-modules)
+> in meta-ti layer.
+>
+> What's the plan for getting a correct Module.symver into shared_workdir
+> for external modules to build against? Above patch, or does someone have
+> an even better idea?
 
-On Wed, Oct 14, 2015 at 11:39:46AM -0700, Paul Knopf wrote:
-> Hey guys,
->=20
-> Are you guys the right person to ask? I am getting a bitbake error when
-> compiling the qtwebkit-examples recipe in the daisy branch.
+Richard and I sync'd on this while in Dublin @ ELCe, and the changes
+aren't missing
+from master by mistake .. but more because we are still working to come up with
+a comprehensive solution (tracked in bugzilla).
 
-openembedded-devel ML is better place to ask (see README)
+The solution is pretty much what I described before, we are balancing
+applications
+and tasks that do not need kernel modules to be built, versus external modules
+that depend on symbols from other modules. The devil is in the
+details, and getting
+a non-racy, task locked solution that allows the recipe writer to
+explicitly decide
+whether they need modules built or not .. attempts at detecting the
+need, or forcing
+a one size fits all solution have all lead to dead ends.
 
-> "bitbake qtwebkit-examples"
->=20
-> I have attached the error file. Here are the relevant bits.
->=20
-> Project ERROR: *Unknown module(s) in QT: webkit*
-> ERROR: Error calling
-> /home/pknopf/Yocto/evo/build/tmp/sysroots/x86_64-linux/usr/bin/qt5/qmake
-> -makefile -o Makefile  -r
-> /home/pknopf/Yocto/evo/build/tmp/work/core2-32-poky-linux/qtwebkit-exampl=
-es/5.2.1-r0/qtwebkit-examples-opensource-src-5.2.1/
-> qtwebkit-examples.pro
->=20
-> Any guidance as to why I am getting this error?
+Since we are close to a release point, I'm still working on this out
+of the tree, and
+will propose some changes when the tree looks stable.
 
-Most likely you didn't enable all required PACKAGECONFIGs to build
-qtwebkit. See comments in qtbase.inc.
+For now, you can carry the patch locally, or you can append to the kernel module
+compilation task and do a second copy of the symvers file to the share
+directory.
 
-> Many thanks in advance.
->=20
-> --=20
-> Thanks!
->=20
-> ~Paul
+i.e. a variant of this:
+http://patchwork.openembedded.org/patch/94891/, done in a
+bbappend versus the class.
+
+Cheers,
+
+Bruce
 
 
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
---iAL9S67WQOXgEPD9
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
 
-iEYEARECAAYFAlYeq0EACgkQN1Ujt2V2gBz4YwCeLXDInQyZ2fW3Zjgayb88b7TG
-k3IAmgNBjg/N0LRJVJIwGgnknsM46F9k
-=85Cj
------END PGP SIGNATURE-----
+-- 
+"Thou shalt not follow the NULL pointer, for chaos and madness await
+thee at its end"
 
---iAL9S67WQOXgEPD9--
