@@ -1,37 +1,34 @@
-Return-Path: <adrian.ratiu@ni.com>
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mail.openembedded.org (Postfix) with ESMTP id A8C0777055
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
+	[209.85.220.52])
+	by mail.openembedded.org (Postfix) with ESMTP id C9F61605D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 10:53:09 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-chan1-1338.natinst.com
-	[130.164.19.134])
-	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	t9EAr9NH017110 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 05:53:09 -0500
-Received: from [10.113.0.102] ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2015101405530765-1894299 ;
-	Wed, 14 Oct 2015 05:53:07 -0500 
-To: openembedded-devel@lists.openembedded.org
-References: <1443597600-29477-1-git-send-email-adrian.ratiu@ni.com>
-	<1444373887-24315-1-git-send-email-adrian.ratiu@ni.com>
-	<20151013105339.GC2396@jama> <561CFBB4.4000404@ni.com>
-	<20151013130825.GE2396@jama>
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-Message-ID: <561E3411.1090600@ni.com>
-Date: Wed, 14 Oct 2015 13:53:05 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
-MIME-Version: 1.0
-In-Reply-To: <20151013130825.GE2396@jama>
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 10/14/2015 05:53:08 AM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 10/14/2015 05:53:08 AM,
-	Serialize complete at 10/14/2015 05:53:08 AM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2015-10-14_05:, , signatures=0
-Subject: Re: [meta-oe][PATCH v2] meta-oe: recipes-graphics: add libvncserver recipe
+	Wed, 14 Oct 2015 11:09:07 +0000 (UTC)
+Received: by pabrc13 with SMTP id rc13so51869590pab.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Oct 2015 04:09:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=/CiEdaFS+08pgXP9y6LYg31XlgX/6tSkz0+saOmgUtM=;
+	b=XZyEojZYqSUdfhtnI7+eu7pATTRjONj9FqBImQFbyse5kv2c0pX4nUpzUsAeqaeaoM
+	dUBF+/6OVBTKva5RlzEg//Avsl+sFBFKDd1lSS3FWUiR1MKvrbKu1hvb0pcIaK9kjmQV
+	ug75halhauZGngF7Nzk8XJoPtq9c32TKVPVRpdd28Mts6vqdvdFuIux+c9UVKFdkU1Ef
+	eBGMZWRe3lYDRFxt4ZFIPZ+Rck1/fdtCCOjvVMdV1FGrXLrS946awVH26C9Y2g0fn79d
+	divhegT2drV0ff8edZw6i/MLXopfgiI+VRs4jtYzzym8eoYIJ4PFvCWfFyw+piLpabpq
+	Wo1A==
+X-Received: by 10.66.193.162 with SMTP id hp2mr3133663pac.108.1444820947821;
+	Wed, 14 Oct 2015 04:09:07 -0700 (PDT)
+Received: from Pahoa2.mvista.com ([192.165.183.201])
+	by smtp.gmail.com with ESMTPSA id w9sm9060420pbt.29.2015.10.14.04.09.04
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 14 Oct 2015 04:09:06 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	martin.jansa@gmail.com
+Date: Wed, 14 Oct 2015 04:08:57 -0700
+Message-Id: <cover.1444820761.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [PATCH 0/1] Add Jethro maintainers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,94 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2015 10:53:12 -0000
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=windows-1252; format=flowed
+X-List-Received-Date: Wed, 14 Oct 2015 11:09:08 -0000
 
-On 13.10.2015 16:08, Martin Jansa wrote:
-> On Tue, Oct 13, 2015 at 03:40:20PM +0300, Ioan-Adrian Ratiu wrote:
->> On 13.10.2015 13:53, Martin Jansa wrote:
->>> On Fri, Oct 09, 2015 at 09:58:07AM +0300, Ioan-Adrian Ratiu wrote:
->>>> Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
->>>> ---
->>>>    .../libvncserver/libvncserver_0.9.10.bb               | 19 +++++++++++++++++++
->>>>    1 file changed, 19 insertions(+)
->>>>    create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
->>>>
->>>> diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
->>>> new file mode 100644
->>>> index 0000000..afa303c
->>>> --- /dev/null
->>>> +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
->>>> @@ -0,0 +1,19 @@
->>>> +DESCRIPTION = "library for easy implementation of a RDP/VNC server"
->
-> Use SUMMARY for such short description.
->
->>>> +HOMEPAGE = "https://libvnc.github.io"
->>>> +SECTION = "libs"
->>>> +PRIORITY = "optional"
->
-> Drop PRIORITY, we don't use it anywhere.
->
->>>> +LICENSE = "GPLv2"
->>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
->>>> +
->>>> +DEPENDS += "zlib jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
->>>> +RDEPENDS_${PN} += "libpng gtk+ libgcrypt"
->>>> +
->>>> +RCONFLICTS_${PN} = "x11vnc"
->>>
->>> This isn't enough to resolve conflicts with x11vnc in sysroot, this only
->>> prevent installing both packages in the same image.
->>>
->>>> +
->>>> +inherit autotools pkgconfig
->>>> +
->>>> +SRC_URI  = "git://github.com/LibVNC/libvncserver.git;tag=LibVNCServer-0.9.10"
->>>
->>> Set SRCREV matching with this tag, otherwise bitbake will always use git
->>> ls-remote to convert tag name to git SHA, which won't work for builds
->>> from premirror (possibly without access to network)
->>>
->>
->> This is easy to fix, however the above x11vnc conflict is not and I have
->> to check with upstream developers which might take awhile.
->>
->> Is it ok to blacklist libvncserver in patch v3 in order to not break
->> x11vnc until this is solved?
->
-> I don't want to introduce more blacklisted recipes in meta-oe, so this
-> won't be merged until it's resolved.
->
+Please consider myself as a maintainer for jethro branch
 
-This makes sense; it's no rush to get it merged.
+The following changes since commit 47f7d287a09329734629cb9d194ef4e077117d79:
 
-Again, thank you for the feedback.
+  gnome-keyring: blacklist gnome-bluetooth, gvfs: try to build with libgnome-keyring only (2015-10-13 12:28:17 +0200)
 
->>>> +
->>>> +S = "${WORKDIR}/git"
->>>> +
->>>> +EXTRA_OEMAKE_append=" SUBDIRS='libvncserver' "
->>>> --
->>>> 2.1.4
->>>>
->>>> --
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>>
->>>
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
+are available in the git repository at:
+
+  git://github.com/akuster/meta-openembedded jethro
+  https://github.com/akuster/meta-openembedded/tree/jethro
+
+Armin Kuster (1):
+  README: update maintainers list for jethro
+
+ meta-efl/README             | 12 ++++++------
+ meta-filesystems/README     | 12 +++++++-----
+ meta-gnome/README           | 11 ++++++-----
+ meta-gpe/README             | 12 ++++++------
+ meta-initramfs/README       | 10 +++++-----
+ meta-multimedia/README      | 13 ++++++-------
+ meta-networking/MAINTAINERS |  7 +++++--
+ meta-oe/README              | 10 +++++-----
+ meta-perl/README            |  9 +++++----
+ meta-python/README          | 14 ++++++--------
+ meta-ruby/README            | 11 ++++++-----
+ meta-systemd/README         | 12 ++++++------
+ meta-webserver/README       | 12 +++++++-----
+ meta-xfce/README            | 11 ++++++-----
+ 14 files changed, 82 insertions(+), 74 deletions(-)
+
+-- 
+2.3.5
 
 
