@@ -1,36 +1,36 @@
 Return-Path: <rehsack@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id A037176E3F
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 27A04770B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 18:53:20 +0000 (UTC)
-Received: by wijp11 with SMTP id p11so7411177wij.0
+	Wed, 14 Oct 2015 18:54:09 +0000 (UTC)
+Received: by wijq8 with SMTP id q8so95469673wij.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 11:53:20 -0700 (PDT)
+	Wed, 14 Oct 2015 11:54:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:content-type:content-transfer-encoding:subject:message-id:date
 	:to:mime-version;
-	bh=Es0aNcOLaF3KZ4rf3xwkjuNaQ2usPRBYzQIrcKeikGQ=;
-	b=eBLiDpkhiNghMSy0trAOaVhetu/h8XWKM2/gJ/S5Vg8bKvGHK3RZoBj4f2s0U8zn1i
-	ydmYagS6hiYSCZKWw3xAkfgdp/kGBFEvO1uxFZpEES1AWfSRTIWCKUMCHo2StcOy9xXC
-	m1ZWZ5czyWDNmu+AcHsFpJmWG3cnyyyhaNSaYeBp7/MvIaLvpw2r+EvBdnXyaR1LTK7i
-	+IWImDU7Op3iW2D0Wlgb0Q2zTWRROloWkggN6IZvGSljh4tNgu57Hpz5V6JmQcBYReHi
-	ZuvB9oG2MoU9ySYE4sDASvD0cKFii28PCvRGWn+b4dqtbLnx2TLvAW/uf7F33iHsqPPb
-	2ylw==
-X-Received: by 10.194.116.197 with SMTP id jy5mr6041674wjb.86.1444848800621;
-	Wed, 14 Oct 2015 11:53:20 -0700 (PDT)
+	bh=7FVU3gNHw2TXaSduCVSYJ4WB3T/f6VTFpNMmmQP4jsQ=;
+	b=gkBwo/W2e3ENv3KNV7AbAJv0q10HuPXSHHaAOKx8z8IZU07jmobuDiWUqlqCq7w1m/
+	xPIqYLf0y90BMyzk+n0++GCEN+hWHX6ai6CI6+QFkpURdfp0sIEa8y7yp/RVRGxWQKiQ
+	feVmWZAWM54nR4hN7fGlBuOCsjv4fnPugp6nRgiXiH2XzN4FR24ycvJCIxmfL4H5ZKx6
+	Jm2nI1TBeaTYd8f2lYwlg05AUaEtXn3TfQijd1Vplkk3eAe343GlUleKD+OmCUuhcY7p
+	yv2kdmk3ywhwD/tOUq8ZkhHHFp7qWgIOOCMJ6/eCjiyDFaCV5ylX8hUjDtDC0GJqB8ch
+	849g==
+X-Received: by 10.180.189.179 with SMTP id gj19mr5986262wic.47.1444848847943; 
+	Wed, 14 Oct 2015 11:54:07 -0700 (PDT)
 Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
-	by smtp.gmail.com with ESMTPSA id mu9sm8228885wib.6.2015.10.14.11.53.19
+	by smtp.gmail.com with ESMTPSA id mu9sm8228885wib.6.2015.10.14.11.54.07
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 14 Oct 2015 11:53:20 -0700 (PDT)
+	Wed, 14 Oct 2015 11:54:07 -0700 (PDT)
 From: Jens Rehsack <rehsack@gmail.com>
-Message-Id: <227DF7DF-2A0C-465B-B35B-E7F9682AF242@gmail.com>
-Date: Wed, 14 Oct 2015 20:53:18 +0200
+Message-Id: <3EA4FB29-8B2D-4F5F-A18C-520E899198BF@gmail.com>
+Date: Wed, 14 Oct 2015 20:54:06 +0200
 To: OE-devel <openembedded-devel@lists.openembedded.org>
 Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
 X-Mailer: Apple Mail (2.2104)
-Subject: [meta-networking][PATCH 5/6] libnftnl: update from 1.0.3 to 1.0.5
+Subject: [meta-networking][PATCH 6/6] nftables: update nftables userland tools from 0.4 to 0.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,41 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2015 18:53:24 -0000
+X-List-Received-Date: Wed, 14 Oct 2015 18:54:09 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
 
-Update libnftnl from 1.0.3 to 1.0.5 (for Changelog see
-http://git.netfilter.org/libnftnl/log/)
+Update nftables tools from 0.4 to 0.5, for ChangeLog see
+http://git.netfilter.org/nftables/log/
 
 Signed-off-by: Jens Rehsack <sno@netbsd.org>
 ---
- .../recipes-filter/libnftnl/{libnftnl_1.0.3.bb =3D> libnftnl_1.0.5.bb}  =
+ .../recipes-filter/nftables/{nftables_0.4.bb =3D> nftables_0.5.bb}      =
 | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-filter/libnftnl/{libnftnl_1.0.3.bb =3D> =
-libnftnl_1.0.5.bb} (70%)
+ rename meta-networking/recipes-filter/nftables/{nftables_0.4.bb =3D> =
+nftables_0.5.bb} (74%)
 
-diff --git a/meta-networking/recipes-filter/libnftnl/libnftnl_1.0.3.bb =
-b/meta-networking/recipes-filter/libnftnl/libnftnl_1.0.5.bb
-similarity index 70%
-rename from meta-networking/recipes-filter/libnftnl/libnftnl_1.0.3.bb
-rename to meta-networking/recipes-filter/libnftnl/libnftnl_1.0.5.bb
-index 112af08..6171151 100644
---- a/meta-networking/recipes-filter/libnftnl/libnftnl_1.0.3.bb
-+++ b/meta-networking/recipes-filter/libnftnl/libnftnl_1.0.5.bb
-@@ -7,7 +7,7 @@ DEPENDS =3D "libmnl"
- SRC_URI =3D "http://netfilter.org/projects/libnftnl/files/${BP}.tar.bz2 =
- \
+diff --git a/meta-networking/recipes-filter/nftables/nftables_0.4.bb =
+b/meta-networking/recipes-filter/nftables/nftables_0.5.bb
+similarity index 74%
+rename from meta-networking/recipes-filter/nftables/nftables_0.4.bb
+rename to meta-networking/recipes-filter/nftables/nftables_0.5.bb
+index 741b330..11b5e5a 100644
+--- a/meta-networking/recipes-filter/nftables/nftables_0.4.bb
++++ b/meta-networking/recipes-filter/nftables/nftables_0.5.bb
+@@ -11,7 +11,7 @@ SRC_URI =3D =
+"http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
+            file://fix-to-generate-ntf.8.patch \
            "
 =20
--SRC_URI[md5sum] =3D "203701a73cc3c51ca751d7cb2e176250"
+-SRC_URI[md5sum] =3D "09b686c489ff10db670ca60dbed7ff43"
 -SRC_URI[sha256sum] =3D =
-"cf0ae7eab6a6866192a1fbd6b370a8a2cbe2066fe3975ab44939fd50747c27f7"
-+SRC_URI[md5sum] =3D "af0c62ce6bbd7a7d39def0996c1c17c9"
+"f6ca69b75c68915f9f3a3972274ec68354dfbbcfc0b9fc55c813a0525c351d3c"
++SRC_URI[md5sum] =3D "94bfe1c54bcb9f6ed974835f2fca8069"
 +SRC_URI[sha256sum] =3D =
-"f6d4f5a702e38bc7987f2363f9fcd65930e8b702595c221a497e2f3a359be497"
+"1fb6dff333d8a4fc347cbbe273bf905a2634b27a8c39df0d3a45d5a3fde10ad6"
 =20
  inherit autotools pkgconfig
 --=20
