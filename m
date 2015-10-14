@@ -1,37 +1,38 @@
 Return-Path: <samuli.piippo@gmail.com>
-Received: from mail-lf0-f52.google.com (mail-lf0-f52.google.com
-	[209.85.215.52])
-	by mail.openembedded.org (Postfix) with ESMTP id AC8B3605D2
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F50060125
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 12:46:20 +0000 (UTC)
-Received: by lffv3 with SMTP id v3so10705950lff.0
+	Wed, 14 Oct 2015 12:49:34 +0000 (UTC)
+Received: by wicge5 with SMTP id ge5so99664273wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 05:46:20 -0700 (PDT)
+	Wed, 14 Oct 2015 05:49:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=subject:to:references:from:message-id:date:user-agent:mime-version
 	:in-reply-to:content-type:content-transfer-encoding;
 	bh=9naWHKgT0Aerdfi0mgnSI9MMPScBprufFqfMTXN/xSI=;
-	b=bUyElHPCDXBQci4/6yn3O3vMrMKsRhVx9Z+kssriaMdyeg6rbKPMedkc+Gv//ywHnf
-	phxCoaqLrvFzIIPbzZbIFT/a28gd1Q7xrnOA8bfHn8/UoLrBLTko92p2MlJ6BF/gaXy5
-	1KWWQidzXJQR9/A4Yxpf4zv62/iFCBlUQk43zD5RoyHN7YjLbA2AAmcRD81JMNsEHPcP
-	j299kDP+vLa6T4HKdx9fZ2vtend3h2G17pVWqcNMYXlG2zK0f0QtdoApJJJCS8wdTuPE
-	3D1oNcyT9V6bvRMeE7WBlnqvuYUIAyO8g11SUDIXlfmajOm4slcemLfEb2a6meboD+TM
-	pjJw==
-X-Received: by 10.25.43.9 with SMTP id r9mr999972lfr.45.1444826779946;
-	Wed, 14 Oct 2015 05:46:19 -0700 (PDT)
+	b=bJ/eAXTvaVVlsY1YcTWMQT7OH6mYCRWDRVqXpzXUDQ6fyAXuHf5w7iPVA9s6XiviMr
+	AfnU8S1zG9G6jCNghxn69dwgfrWzAbSQL4KsaoqW1V7QrM2bQvu2g5/Gyq4FEHzhTMnW
+	d9Eptoo2i3BKCTt95Dkg7QQA+8j8h8rqSHKnIVJjKiIJL52r64u/6H+CHRvampiZNuL6
+	MmgPPmaIHDGfWD1U+U2t3moEdVQYyqa11jX25xO2wFFNfj+I1h5jojF768HHLzFCSIUc
+	4AiK6m7a8gb6yPf4zXKHJm0nl20SnO6k2RB049+FMGn5Am72onnvnTcTsXQ4+Zai6IF/
+	tXlQ==
+X-Received: by 10.194.175.74 with SMTP id by10mr3828138wjc.78.1444826972949;
+	Wed, 14 Oct 2015 05:49:32 -0700 (PDT)
 Received: from [10.9.5.47] ([91.217.248.11])
 	by smtp.googlemail.com with ESMTPSA id
-	j189sm1321667lfg.48.2015.10.14.05.46.18
+	ub7sm7016051wib.17.2015.10.14.05.49.32
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 14 Oct 2015 05:46:19 -0700 (PDT)
+	Wed, 14 Oct 2015 05:49:32 -0700 (PDT)
 To: openembedded-devel@lists.openembedded.org
 References: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
 	<37e08b9cbf4bc8c2194e2274c1ada3f5ead965fa.1440407387.git.samuli.piippo@theqtcompany.com>
 	<20150824124512.GE2446@jama> <55DC1737.1070201@theqtcompany.com>
 From: Samuli Piippo <samuli.piippo@gmail.com>
-Message-ID: <561E4EC4.9020300@gmail.com>
-Date: Wed, 14 Oct 2015 15:47:00 +0300
+X-Enigmail-Draft-Status: N1110
+Message-ID: <561E4F86.10007@gmail.com>
+Date: Wed, 14 Oct 2015 15:50:14 +0300
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
 	Thunderbird/38.2.0
 MIME-Version: 1.0
@@ -50,7 +51,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2015 12:46:24 -0000
+X-List-Received-Date: Wed, 14 Oct 2015 12:49:34 -0000
 Content-Type: text/plain; charset=windows-1252; format=flowed
 Content-Transfer-Encoding: 7bit
 
