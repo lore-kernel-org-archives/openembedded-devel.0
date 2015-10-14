@@ -1,43 +1,37 @@
-Return-Path: <samuli.piippo@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F50060125
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 62DFD7707D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 12:49:34 +0000 (UTC)
-Received: by wicge5 with SMTP id ge5so99664273wic.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 05:49:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=9naWHKgT0Aerdfi0mgnSI9MMPScBprufFqfMTXN/xSI=;
-	b=bJ/eAXTvaVVlsY1YcTWMQT7OH6mYCRWDRVqXpzXUDQ6fyAXuHf5w7iPVA9s6XiviMr
-	AfnU8S1zG9G6jCNghxn69dwgfrWzAbSQL4KsaoqW1V7QrM2bQvu2g5/Gyq4FEHzhTMnW
-	d9Eptoo2i3BKCTt95Dkg7QQA+8j8h8rqSHKnIVJjKiIJL52r64u/6H+CHRvampiZNuL6
-	MmgPPmaIHDGfWD1U+U2t3moEdVQYyqa11jX25xO2wFFNfj+I1h5jojF768HHLzFCSIUc
-	4AiK6m7a8gb6yPf4zXKHJm0nl20SnO6k2RB049+FMGn5Am72onnvnTcTsXQ4+Zai6IF/
-	tXlQ==
-X-Received: by 10.194.175.74 with SMTP id by10mr3828138wjc.78.1444826972949;
-	Wed, 14 Oct 2015 05:49:32 -0700 (PDT)
-Received: from [10.9.5.47] ([91.217.248.11])
-	by smtp.googlemail.com with ESMTPSA id
-	ub7sm7016051wib.17.2015.10.14.05.49.32
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 14 Oct 2015 05:49:32 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org
-References: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
-	<37e08b9cbf4bc8c2194e2274c1ada3f5ead965fa.1440407387.git.samuli.piippo@theqtcompany.com>
-	<20150824124512.GE2446@jama> <55DC1737.1070201@theqtcompany.com>
-From: Samuli Piippo <samuli.piippo@gmail.com>
-X-Enigmail-Draft-Status: N1110
-Message-ID: <561E4F86.10007@gmail.com>
-Date: Wed, 14 Oct 2015 15:50:14 +0300
+	Wed, 14 Oct 2015 14:06:11 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t9EE6BRF007700; Wed, 14 Oct 2015 09:06:11 -0500
+Received: from [10.113.0.102] ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015101409061134-1901646 ;
+	Wed, 14 Oct 2015 09:06:11 -0500 
+To: martin.jansa@gmail.com
+References: <1443597600-29477-1-git-send-email-adrian.ratiu@ni.com>
+	<1444373887-24315-1-git-send-email-adrian.ratiu@ni.com>
+	<20151013105339.GC2396@jama> <561CFBB4.4000404@ni.com>
+	<20151013130825.GE2396@jama>
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Message-ID: <561E614F.4070909@ni.com>
+Date: Wed, 14 Oct 2015 17:06:07 +0300
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+	Thunderbird/38.3.0
 MIME-Version: 1.0
-In-Reply-To: <55DC1737.1070201@theqtcompany.com>
-Subject: Re: [meta-qt5][PATCH 06/11] qt5: make qt5.inc reusable qt5-module.bbclass
+In-Reply-To: <20151013130825.GE2396@jama>
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 10/14/2015 09:06:11 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 10/14/2015 09:06:12 AM,
+	Serialize complete at 10/14/2015 09:06:12 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-10-14_06:, , signatures=0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v2] meta-oe: recipes-graphics: add libvncserver recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,29 +45,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2015 12:49:34 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
+X-List-Received-Date: Wed, 14 Oct 2015 14:06:12 -0000
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=windows-1252; format=flowed
 
-On 25.08.2015 10:20, Samuli Piippo wrote:
-> On 24.08.2015 15:45, Martin Jansa wrote:
->> On Mon, Aug 24, 2015 at 12:13:52PM +0300, Samuli Piippo wrote:
->>> qt5.inc has common parts that can be used to build any Qt5 module.
->>> Make it a bbclass so that it is easily usable from other meta layers.
->>
->> require recipes-qt/qt5/qt5.inc
->>
->> can be used in other layers as well
->>
+On 13.10.2015 16:08, Martin Jansa wrote:
+> On Tue, Oct 13, 2015 at 03:40:20PM +0300, Ioan-Adrian Ratiu wrote:
+>> On 13.10.2015 13:53, Martin Jansa wrote:
+>>> On Fri, Oct 09, 2015 at 09:58:07AM +0300, Ioan-Adrian Ratiu wrote:
+>>>> Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+>>>> ---
+>>>>    .../libvncserver/libvncserver_0.9.10.bb               | 19 +++++++++++++++++++
+>>>>    1 file changed, 19 insertions(+)
+>>>>    create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
+>>>>
+>>>> diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
+>>>> new file mode 100644
+>>>> index 0000000..afa303c
+>>>> --- /dev/null
+>>>> +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
+>>>> @@ -0,0 +1,19 @@
+>>>> +DESCRIPTION = "library for easy implementation of a RDP/VNC server"
 >
-> It can, but as a bblclass it would make it clear that it's a supported
-> thing to do, like qmake5 currently is.
-> And maybe help guide further changes so that it remains usable from
-> other layers as well.
+> Use SUMMARY for such short description.
+>
+>>>> +HOMEPAGE = "https://libvnc.github.io"
+>>>> +SECTION = "libs"
+>>>> +PRIORITY = "optional"
+>
+> Drop PRIORITY, we don't use it anywhere.
+>
+>>>> +LICENSE = "GPLv2"
+>>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
+>>>> +
+>>>> +DEPENDS += "zlib jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
+>>>> +RDEPENDS_${PN} += "libpng gtk+ libgcrypt"
+>>>> +
+>>>> +RCONFLICTS_${PN} = "x11vnc"
+>>>
+>>> This isn't enough to resolve conflicts with x11vnc in sysroot, this only
+>>> prevent installing both packages in the same image.
+>>>
+>>>> +
+>>>> +inherit autotools pkgconfig
+>>>> +
+>>>> +SRC_URI  = "git://github.com/LibVNC/libvncserver.git;tag=LibVNCServer-0.9.10"
+>>>
+>>> Set SRCREV matching with this tag, otherwise bitbake will always use git
+>>> ls-remote to convert tag name to git SHA, which won't work for builds
+>>> from premirror (possibly without access to network)
+>>>
+>>
+>> This is easy to fix, however the above x11vnc conflict is not and I have
+>> to check with upstream developers which might take awhile.
+>>
+>> Is it ok to blacklist libvncserver in patch v3 in order to not break
+>> x11vnc until this is solved?
+>
+> I don't want to introduce more blacklisted recipes in meta-oe, so this
+> won't be merged until it's resolved.
+
+Quick question: Fixing this involves adding a PACKAGECONFIG dependency 
+inside x11vnc on libvncserver. x11vnc is in the openembedded-core layer.
+
+Should I move libvncserver to oe-core, move x11vnc in meta-oe or should 
+I just let them reside in separate layers even though there is this 
+dependency?
+
+>
+>>>> +
+>>>> +S = "${WORKDIR}/git"
+>>>> +
+>>>> +EXTRA_OEMAKE_append=" SUBDIRS='libvncserver' "
+>>>> --
+>>>> 2.1.4
+>>>>
+>>>> --
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>>
+>>>
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 >
 
-Is this something that you can consider adding in?
-I'll do a rebase for it, if it is.
-
--samuli
 
