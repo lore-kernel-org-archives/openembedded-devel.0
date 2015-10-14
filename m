@@ -1,40 +1,37 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 37E537391A
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id A8C0777055
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 10:17:29 +0000 (UTC)
-Received: by padcn9 with SMTP id cn9so19637240pad.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 03:17:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=sUnvYfrx9E2y8tiulNH6vZ3RQCUMnFbh3l3Xr5I9dt8=;
-	b=DD6Tt8C4WFSurOWV1lAIQiVOj+ZaJhw1+N4RYteqB94oDl1pCfNisVULUBPvuRR5Ye
-	vsJmBVkqyarc7qipOOZZ3MtWVGAv2p31KI70oEI//+9Xw4yaAvdPyiY5MIFCZxit0FNb
-	zoXz+ARD1So2ik1NItHa7DLOiiqW8L4n0/bsgMJhI1ECp69Abr+dVXPfm5Ai4X3qmbnm
-	nwGczziS6n6HDri6IJENoPPFO+uoaJRhufNciigMREZOR8EC+gWi0TquGFX2fvVLjy4w
-	WqHiI7hK2dBZscU/e7CtARqVVImrYSoXyDX9Lw/0Juoh6z/whGQ+J9q0d0kHo3l9aGlH
-	C8dw==
-X-Received: by 10.66.146.4 with SMTP id sy4mr2859710pab.79.1444817849797;
-	Wed, 14 Oct 2015 03:17:29 -0700 (PDT)
-Received: from [10.154.14.143] ([192.165.183.201])
-	by smtp.googlemail.com with ESMTPSA id
-	yh3sm8727014pbb.82.2015.10.14.03.17.27
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 14 Oct 2015 03:17:28 -0700 (PDT)
-Message-ID: <561E2BB4.40604@gmail.com>
-Date: Wed, 14 Oct 2015 03:17:24 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
-MIME-Version: 1.0
+	Wed, 14 Oct 2015 10:53:09 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t9EAr9NH017110 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Oct 2015 05:53:09 -0500
+Received: from [10.113.0.102] ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015101405530765-1894299 ;
+	Wed, 14 Oct 2015 05:53:07 -0500 
 To: openembedded-devel@lists.openembedded.org
-References: <20151014091838.GA2386@jama>
-In-Reply-To: <20151014091838.GA2386@jama>
-Subject: Re: jethro branch for meta-openembedded, meta-qt5 / maintainer wanted
+References: <1443597600-29477-1-git-send-email-adrian.ratiu@ni.com>
+	<1444373887-24315-1-git-send-email-adrian.ratiu@ni.com>
+	<20151013105339.GC2396@jama> <561CFBB4.4000404@ni.com>
+	<20151013130825.GE2396@jama>
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Message-ID: <561E3411.1090600@ni.com>
+Date: Wed, 14 Oct 2015 13:53:05 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
+MIME-Version: 1.0
+In-Reply-To: <20151013130825.GE2396@jama>
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 10/14/2015 05:53:08 AM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 10/14/2015 05:53:08 AM,
+	Serialize complete at 10/14/2015 05:53:08 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-10-14_05:, , signatures=0
+Subject: Re: [meta-oe][PATCH v2] meta-oe: recipes-graphics: add libvncserver recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,39 +45,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2015 10:17:30 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Wed, 14 Oct 2015 10:53:12 -0000
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=windows-1252; format=flowed
 
+On 13.10.2015 16:08, Martin Jansa wrote:
+> On Tue, Oct 13, 2015 at 03:40:20PM +0300, Ioan-Adrian Ratiu wrote:
+>> On 13.10.2015 13:53, Martin Jansa wrote:
+>>> On Fri, Oct 09, 2015 at 09:58:07AM +0300, Ioan-Adrian Ratiu wrote:
+>>>> Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+>>>> ---
+>>>>    .../libvncserver/libvncserver_0.9.10.bb               | 19 +++++++++++++++++++
+>>>>    1 file changed, 19 insertions(+)
+>>>>    create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
+>>>>
+>>>> diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
+>>>> new file mode 100644
+>>>> index 0000000..afa303c
+>>>> --- /dev/null
+>>>> +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
+>>>> @@ -0,0 +1,19 @@
+>>>> +DESCRIPTION = "library for easy implementation of a RDP/VNC server"
+>
+> Use SUMMARY for such short description.
+>
+>>>> +HOMEPAGE = "https://libvnc.github.io"
+>>>> +SECTION = "libs"
+>>>> +PRIORITY = "optional"
+>
+> Drop PRIORITY, we don't use it anywhere.
+>
+>>>> +LICENSE = "GPLv2"
+>>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
+>>>> +
+>>>> +DEPENDS += "zlib jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
+>>>> +RDEPENDS_${PN} += "libpng gtk+ libgcrypt"
+>>>> +
+>>>> +RCONFLICTS_${PN} = "x11vnc"
+>>>
+>>> This isn't enough to resolve conflicts with x11vnc in sysroot, this only
+>>> prevent installing both packages in the same image.
+>>>
+>>>> +
+>>>> +inherit autotools pkgconfig
+>>>> +
+>>>> +SRC_URI  = "git://github.com/LibVNC/libvncserver.git;tag=LibVNCServer-0.9.10"
+>>>
+>>> Set SRCREV matching with this tag, otherwise bitbake will always use git
+>>> ls-remote to convert tag name to git SHA, which won't work for builds
+>>> from premirror (possibly without access to network)
+>>>
+>>
+>> This is easy to fix, however the above x11vnc conflict is not and I have
+>> to check with upstream developers which might take awhile.
+>>
+>> Is it ok to blacklist libvncserver in patch v3 in order to not break
+>> x11vnc until this is solved?
+>
+> I don't want to introduce more blacklisted recipes in meta-oe, so this
+> won't be merged until it's resolved.
+>
 
+This makes sense; it's no rush to get it merged.
 
-On 10/14/2015 02:18 AM, Martin Jansa wrote:
-> Hello,
-> 
-> as every 6 months I'm looking for some volunteer(s) to step-up and
-> maintain "jethro" release branch.
-> 
-> You can sign-up by replying to this thread and then one of you need to
-> send README update like this:
+Again, thank you for the feedback.
 
-Sign me up.
+>>>> +
+>>>> +S = "${WORKDIR}/git"
+>>>> +
+>>>> +EXTRA_OEMAKE_append=" SUBDIRS='libvncserver' "
+>>>> --
+>>>> 2.1.4
+>>>>
+>>>> --
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>>
+>>>
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+>
 
-will update README shortly.
-
-- armin
-
-> https://github.com/openembedded/meta-openembedded/commit/3082e30da58df0711182cf114c71a8c6a093aeae
-> 
-> More details in thread searching for daisy maintainer:
-> http://lists.openembedded.org/pipermail/openembedded-devel/2014-April/095601.html
-> http://lists.openembedded.org/pipermail/openembedded-devel/2014-May/095694.html
-> or dizzy maintainer:
-> http://lists.openembedded.org/pipermail/openembedded-devel/2014-October/098441.html
-> or fido maintainer:
-> http://lists.openembedded.org/pipermail/openembedded-devel/2015-March/100901.html
-> 
-> Thanks,
-> 
-> 
-> 
 
