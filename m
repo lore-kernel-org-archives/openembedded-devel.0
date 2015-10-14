@@ -1,40 +1,42 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id A7647605D2
+Return-Path: <samuli.piippo@gmail.com>
+Received: from mail-lf0-f52.google.com (mail-lf0-f52.google.com
+	[209.85.215.52])
+	by mail.openembedded.org (Postfix) with ESMTP id AC8B3605D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 11:25:54 +0000 (UTC)
-Received: by wieq12 with SMTP id q12so77968124wie.1
+	Wed, 14 Oct 2015 12:46:20 +0000 (UTC)
+Received: by lffv3 with SMTP id v3so10705950lff.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 04:25:54 -0700 (PDT)
+	Wed, 14 Oct 2015 05:46:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=bAJK87j8RoVryax/Ylu3vOh6pZEp32JKEBCrr5d5ito=;
-	b=WKJICkzBLVU8QI/dvaBuOXD+6rWGEoquYYpg7za6gWcf4VIoptTAYzaCBJzb7iggPq
-	PoenYhomdhR6OG2IWIvPDywk6IlqrfTnTFkejOnwilUr2vxz0TLs1DpCCSMW8xZn/1u/
-	XbwQ72Hv+Rhk3h75ccdygoRPprakfsRwDehFwUYCwAYnnqRPr0H9c5+6JLnd7U8S0tHI
-	8KW+fblSOisDsBMQOcouoANoSUZlPW1foKPr3CRTkhKHFcbgZ5omM4/4oXxz3dKMzXxV
-	bVAAYfTvN+Om6QBPyLgCJzYvufBCS3qF3/eooTeAclHJCvGuGMTaYoEjxHl/5MVTleUR
-	gurw==
-X-Received: by 10.180.87.74 with SMTP id v10mr25344774wiz.66.1444821954647;
-	Wed, 14 Oct 2015 04:25:54 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	p10sm9415131wjx.36.2015.10.14.04.25.53
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=9naWHKgT0Aerdfi0mgnSI9MMPScBprufFqfMTXN/xSI=;
+	b=bUyElHPCDXBQci4/6yn3O3vMrMKsRhVx9Z+kssriaMdyeg6rbKPMedkc+Gv//ywHnf
+	phxCoaqLrvFzIIPbzZbIFT/a28gd1Q7xrnOA8bfHn8/UoLrBLTko92p2MlJ6BF/gaXy5
+	1KWWQidzXJQR9/A4Yxpf4zv62/iFCBlUQk43zD5RoyHN7YjLbA2AAmcRD81JMNsEHPcP
+	j299kDP+vLa6T4HKdx9fZ2vtend3h2G17pVWqcNMYXlG2zK0f0QtdoApJJJCS8wdTuPE
+	3D1oNcyT9V6bvRMeE7WBlnqvuYUIAyO8g11SUDIXlfmajOm4slcemLfEb2a6meboD+TM
+	pjJw==
+X-Received: by 10.25.43.9 with SMTP id r9mr999972lfr.45.1444826779946;
+	Wed, 14 Oct 2015 05:46:19 -0700 (PDT)
+Received: from [10.9.5.47] ([91.217.248.11])
+	by smtp.googlemail.com with ESMTPSA id
+	j189sm1321667lfg.48.2015.10.14.05.46.18
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 14 Oct 2015 04:25:53 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 14 Oct 2015 13:26:09 +0200
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 14 Oct 2015 05:46:19 -0700 (PDT)
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151014112609.GA22448@jama>
-References: <1444791091-27572-1-git-send-email-jackie.huang@windriver.com>
+References: <cover.1440407387.git.samuli.piippo@theqtcompany.com>
+	<37e08b9cbf4bc8c2194e2274c1ada3f5ead965fa.1440407387.git.samuli.piippo@theqtcompany.com>
+	<20150824124512.GE2446@jama> <55DC1737.1070201@theqtcompany.com>
+From: Samuli Piippo <samuli.piippo@gmail.com>
+Message-ID: <561E4EC4.9020300@gmail.com>
+Date: Wed, 14 Oct 2015 15:47:00 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-In-Reply-To: <1444791091-27572-1-git-send-email-jackie.huang@windriver.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-oe][PATCH] polkit: fix an incomplete patch
+In-Reply-To: <55DC1737.1070201@theqtcompany.com>
+Subject: Re: [meta-qt5][PATCH 06/11] qt5: make qt5.inc reusable qt5-module.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,130 +50,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2015 11:25:55 -0000
-X-Groupsio-MsgNum: 57808
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Dxnq1zWXvFF0Q93v"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 14 Oct 2015 12:46:24 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
---Dxnq1zWXvFF0Q93v
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 25.08.2015 10:20, Samuli Piippo wrote:
+> On 24.08.2015 15:45, Martin Jansa wrote:
+>> On Mon, Aug 24, 2015 at 12:13:52PM +0300, Samuli Piippo wrote:
+>>> qt5.inc has common parts that can be used to build any Qt5 module.
+>>> Make it a bbclass so that it is easily usable from other meta layers.
+>>
+>> require recipes-qt/qt5/qt5.inc
+>>
+>> can be used in other layers as well
+>>
+>
+> It can, but as a bblclass it would make it clear that it's a supported
+> thing to do, like qmake5 currently is.
+> And maybe help guide further changes so that it remains usable from
+> other layers as well.
+>
 
-On Wed, Oct 14, 2015 at 10:51:31AM +0800, jackie.huang@windriver.com wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
->=20
-> The patch 0001-do-not-hardcoded-libdir.patch to fix
-> libprivdir is incomplete, it missed to fix the one
-> in data/Makefile.am, and causes failure:
->=20
-> systemd[676]: polkit.service: Failed at step EXEC spawning /usr/lib/polki=
-t-1/polkitd: No such file or directory
->=20
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  .../polkit/0001-do-not-hardcoded-libdir.patch      | 31 ++++++++++++++++=
-------
->  1 file changed, 23 insertions(+), 8 deletions(-)
+Is this something that you can consider adding in?
+I'll do a rebase for it, if it is.
 
-error:
-meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch:
-does not exist in index
+-samuli
 
-It was removed in:
-commit f86ba9a5583d3b493651134bf710d28dd6509765
-Author: Reinette Chatre <reinette.chatre@intel.com>
-Date:   Thu Sep 24 15:03:01 2015 -0700
-
-    polkit: fix relocation of polkit binaries
-
->=20
-> diff --git a/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded=
--libdir.patch b/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcode=
-d-libdir.patch
-> index e605e30..21ef578 100644
-> --- a/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir=
-=2Epatch
-> +++ b/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir=
-=2Epatch
-> @@ -1,6 +1,6 @@
-> -From c9e09d9b101109832b1dcb050f0c8b588e276686 Mon Sep 17 00:00:00 2001
-> -From: Zhenhua Luo <zhenhua.luo@freescale.com>
-> -Date: Mon, 4 May 2015 04:11:27 -0500
-> +From fd07fbf131e31124094d9123091604dd32726750 Mon Sep 17 00:00:00 2001
-> +From: Jackie Huang <jackie.huang@windriver.com>
-> +Date: Wed, 14 Oct 2015 10:30:12 +0800
->  Subject: [PATCH] do not hardcoded libdir
-> =20
->  Upstream-Status: Pending
-> @@ -8,13 +8,28 @@ Upstream-Status: Pending
->  libdir is hardcoded to ${prefix}/lib, but we want it to support multilib
-> =20
->  Signed-off-by: Chunrong Guo <B40290@freescale.com>
-> +Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
->  ---
-> - polkitagent/Makefile.am   | 2 +-
-> - polkitbackend/Makefile.am | 2 +-
-> - 2 files changed, 2 insertions(+), 2 deletions(-)
-> + data/Makefile.am              | 2 +-
-> + src/polkitagent/Makefile.am   | 2 +-
-> + src/polkitbackend/Makefile.am | 2 +-
-> + 3 files changed, 3 insertions(+), 3 deletions(-)
-> =20
-> +diff --git a/data/Makefile.am b/data/Makefile.am
-> +index fe0f1d5..52cb4b4 100644
-> +--- a/data/Makefile.am
-> ++++ b/data/Makefile.am
-> +@@ -2,7 +2,7 @@
-> +=20
-> + NULL =3D
-> +=20
-> +-libprivdir =3D $(prefix)/lib/polkit-1
-> ++libprivdir =3D $(libdir)/polkit-1
-> +=20
-> + # ---------------------------------------------------------------------=
--------------------------------
-> +=20
->  diff --git a/src/polkitagent/Makefile.am b/src/polkitagent/Makefile.am
-> -index 3bc364e..7d1ac0e 100644
-> +index 58a55bd..1b6156b 100644
->  --- a/src/polkitagent/Makefile.am
->  +++ b/src/polkitagent/Makefile.am
->  @@ -78,7 +78,7 @@ libpolkit_agent_1_la_LIBADD =3D                       =
-        		\
-> @@ -27,7 +42,7 @@ index 3bc364e..7d1ac0e 100644
->  =20
->   polkit_agent_helper_1_SOURCES =3D 					\
->  diff --git a/src/polkitbackend/Makefile.am b/src/polkitbackend/Makefile.=
-am
-> -index 9f430d0..1f7610b 100644
-> +index 547ca82..78ed934 100644
->  --- a/src/polkitbackend/Makefile.am
->  +++ b/src/polkitbackend/Makefile.am
->  @@ -67,7 +67,7 @@ rules_DATA =3D 50-default.rules
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---Dxnq1zWXvFF0Q93v
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlYeO9AACgkQN1Ujt2V2gBz0MQCfUp8b5C+uDdhEWOm8aRJMzc30
-YjwAnj872/Lpd8VsOgcuyW0SdE3T4oNQ
-=+i8X
------END PGP SIGNATURE-----
-
---Dxnq1zWXvFF0Q93v--
