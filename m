@@ -1,37 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BAFA770B4
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 159F0770B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 19:17:37 +0000 (UTC)
-Received: by wijq8 with SMTP id q8so96409731wij.0
+	Wed, 14 Oct 2015 19:21:22 +0000 (UTC)
+Received: by wijq8 with SMTP id q8so96556390wij.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 12:17:37 -0700 (PDT)
+	Wed, 14 Oct 2015 12:21:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=UGPwUL/mLq55nuJMGued7pqoWB/CdnWJYC3H9/VGvM0=;
-	b=jYknXYZM1UT35qRSY159DJOX7IW8pE6C6Kq9SrbHZn17wJCS0JTUcrgkUFzymfYl3z
-	718z64+RiZW3FQo6+tj1vR8pl5L34LDIh6Z0lQB0Dd3/Asv2oQCKODd/JRQrvXvSbQfm
-	+IXO8SSaWKBZMOOaM+ajsNS7mEe1X2hho97iF7GxJWw/KAhHzT8PaT4UuJ15tCoZkbJv
-	Rj/7bwAWFo2d8ruC5A9NOOobveGW0jiHl4ymHr0J0ddPZq0kVFrGv8FWJi7hMv3UrhZL
-	QX1EKNYY8LaCBbrSZ/H84GeC4PQn1VYvEx+SCEBDZUNR1GcJzl8ph2HAtZrebqyvxkJR
-	fpSw==
-X-Received: by 10.180.105.138 with SMTP id gm10mr5940186wib.37.1444850257672; 
-	Wed, 14 Oct 2015 12:17:37 -0700 (PDT)
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=eb/k1q1CJTsRGbgpqBF6rxxFK3bVU/HxnW0/jZWbAoM=;
+	b=QcOHh1GeJhTiJmFXZqfadJg7n/538Qncui7Y7yGfHcCNiyHyS0YjdGnGiMM356NNzN
+	leVj7ch03F7n4i3iqL+xM0XmX2Df408OOCe5+eP4lo7PwE5O3AJpbpbl4zIMD3ZL4HES
+	5oHCg1pcnW9UogWsM97zRghwPj5Q7xNOOE32KgzDRM3Ic8MvF9jnv0a9qvRkX+w/qQeI
+	mYZ29sal9oHaOlzzYrbB0N4DGMmfCHFJyW0Lv7Hmm5XMXXHiwJtxPobMTzLlFYXdu4W1
+	q48pd5vcmbj8ixiAcyxZ/w5avz2NnaCjWjeBpRdkz65drfX9LbkuImk2Z+8xT6i3pfEM
+	vREA==
+X-Received: by 10.194.235.39 with SMTP id uj7mr6702302wjc.115.1444850482803;
+	Wed, 14 Oct 2015 12:21:22 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	hs5sm20483002wib.6.2015.10.14.12.17.36
+	r9sm11779697wjz.35.2015.10.14.12.21.21
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 14 Oct 2015 12:17:36 -0700 (PDT)
+	Wed, 14 Oct 2015 12:21:22 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Oct 2015 21:17:48 +0200
-Message-Id: <1444850269-18516-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.6.1
-In-Reply-To: <1444850269-18516-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1444850269-18516-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-oe][fido 2/3] lirc: use weak assignment in PACKAGECONFIG like other recipes
+Date: Wed, 14 Oct 2015 21:21:38 +0200
+To: Paul Knopf <theonlylawislove@gmail.com>
+Message-ID: <20151014192138.GG22448@jama>
+References: <CAOaDmGXU7LhQmpTJu8oW-Mjyc2pRwNtNpvws2beOFCm7=MXTYg@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAOaDmGXU7LhQmpTJu8oW-Mjyc2pRwNtNpvws2beOFCm7=MXTYg@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: openembedded-devel@lists.openembedded.org, otavio@ossystems.com.br
+Subject: Re: meta-qt5 daisy qtwebkit-examples bitbake error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,34 +48,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2015 19:17:39 -0000
+X-List-Received-Date: Wed, 14 Oct 2015 19:21:24 -0000
+X-Groupsio-MsgNum: 57828
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="iAL9S67WQOXgEPD9"
+Content-Disposition: inline
 
-* using append makes it harder to disable PACKAGECONFIGs set from
-  DISTRO_FEATURES
+--iAL9S67WQOXgEPD9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+On Wed, Oct 14, 2015 at 11:39:46AM -0700, Paul Knopf wrote:
+> Hey guys,
+>=20
+> Are you guys the right person to ask? I am getting a bitbake error when
+> compiling the qtwebkit-examples recipe in the daisy branch.
 
-diff --git a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-index 7d93757..900b68d 100644
---- a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-+++ b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-@@ -22,8 +22,10 @@ inherit autotools pkgconfig systemd pythonnative
- PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd"
- PACKAGECONFIG[x11] = "--with-x,--with-x=no,libx11,"
- 
--PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)}"
--PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)}"
-+PACKAGECONFIG ?= " \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)} \
-+"
- 
- #EXTRA_OEMAKE = 'SUBDIRS="lib daemons tools"'
- do_install_append() {
--- 
-2.6.1
+openembedded-devel ML is better place to ask (see README)
+
+> "bitbake qtwebkit-examples"
+>=20
+> I have attached the error file. Here are the relevant bits.
+>=20
+> Project ERROR: *Unknown module(s) in QT: webkit*
+> ERROR: Error calling
+> /home/pknopf/Yocto/evo/build/tmp/sysroots/x86_64-linux/usr/bin/qt5/qmake
+> -makefile -o Makefile  -r
+> /home/pknopf/Yocto/evo/build/tmp/work/core2-32-poky-linux/qtwebkit-exampl=
+es/5.2.1-r0/qtwebkit-examples-opensource-src-5.2.1/
+> qtwebkit-examples.pro
+>=20
+> Any guidance as to why I am getting this error?
+
+Most likely you didn't enable all required PACKAGECONFIGs to build
+qtwebkit. See comments in qtbase.inc.
+
+> Many thanks in advance.
+>=20
+> --=20
+> Thanks!
+>=20
+> ~Paul
 
 
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--iAL9S67WQOXgEPD9
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlYeq0EACgkQN1Ujt2V2gBz4YwCeLXDInQyZ2fW3Zjgayb88b7TG
+k3IAmgNBjg/N0LRJVJIwGgnknsM46F9k
+=85Cj
+-----END PGP SIGNATURE-----
+
+--iAL9S67WQOXgEPD9--
