@@ -1,35 +1,32 @@
-Return-Path: <bruce.ashfield@gmail.com>
-Received: from mail-yk0-f172.google.com (mail-yk0-f172.google.com
-	[209.85.160.172])
-	by mail.openembedded.org (Postfix) with ESMTP id DBAE476FDE;
-	Wed, 14 Oct 2015 19:48:13 +0000 (UTC)
-Received: by ykaz22 with SMTP id z22so32194653yka.2;
-	Wed, 14 Oct 2015 12:48:13 -0700 (PDT)
+Return-Path: <marek.belisko@gmail.com>
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 4DBB3770AB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Oct 2015 20:34:39 +0000 (UTC)
+Received: by wijq8 with SMTP id q8so99390397wij.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Oct 2015 13:34:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=OIHSJUr4isM+EYAp5dR2pIfZUk3MfmF4omKDtAUoujI=;
-	b=e24UiQUrWeJMnwIuK6OlfwFqgSoqqSVmKwFON0sY3NcMwT1PeOFE10GUcblrl3MlHD
-	MBTskGGspAeRDNxlnmJ6od9DHYS1ljnEDDZxpp4h1zqmqGAmTtevD5frn64FF++RacTq
-	ODChgZ+s1CNIT/8J1kNQOmSdUACevSoVNUvxTOYGRQGxpU0xHlpeTzQc1yX12jwUqvLb
-	Kva4L7tBkbfXQUH3P8qrsqjhw/V1/9/Rsyh4+p44JWIHVBoYxkVUQjwDtaRsIXRdDAap
-	D1uoQL8QEelSLuYJAUw31wmayqlIVF9D8INvJLuI0xzX2/EzuvpYyLvlFPzMy9CHaKyR
-	dfwQ==
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=1LZV8ViWfUuiniIxHT56yDEARF74sA2pliiwbVb3iXg=;
+	b=LOhkgi0qvI9/XRa1CNiog5p2Ezrt/d4XfL5j9filqDFNcDd8ZDlc2yaCa9dmHCe4nr
+	NFi2UF52VVByc7mPpjvlqifDEQmUhkI4vPNatoivOj9BfUu34vY9TSqBJWEs8sETZeF3
+	c6J+IOiSwpd9cfAcrNEN3FlLt0BMV6emoDh+IB6qlL6M2KKzUNZg7nqKM4eThW3AW+Sx
+	hy3i6Sst1Ey2GxkXHkerMfsU2SZhVJZjQ9Y61fwfvTypiDlKWRgqc6i+PR8YkQ+aPWVe
+	3y8beeXbfYC4r+7ugV12cJoo2cySjx3bg5T8bwyjMF1m+PVwzFFY4ywAKlqKEiZPCqso
+	9MMg==
 MIME-Version: 1.0
-X-Received: by 10.129.0.2 with SMTP id 2mr4109955ywa.127.1444852093195; Wed,
-	14 Oct 2015 12:48:13 -0700 (PDT)
-Received: by 10.13.217.201 with HTTP; Wed, 14 Oct 2015 12:48:13 -0700 (PDT)
-In-Reply-To: <20151014193033.GD3552@dent.vctlabs.com>
-References: <1439220090-3305-1-git-send-email-s.mueller-klieser@phytec.de>
-	<20151014193033.GD3552@dent.vctlabs.com>
-Date: Wed, 14 Oct 2015 15:48:13 -0400
-Message-ID: <CADkTA4MMRESA2E2H_0iruywU6AgzSwaZ8Sj03SBB25=ckGv41Q@mail.gmail.com>
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Denys Dmytriyenko <denys@ti.com>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] kernel.bbclass: Fix do_shared_workdir task ordering
+X-Received: by 10.194.48.102 with SMTP id k6mr7136788wjn.124.1444854878611;
+	Wed, 14 Oct 2015 13:34:38 -0700 (PDT)
+Received: by 10.28.12.75 with HTTP; Wed, 14 Oct 2015 13:34:38 -0700 (PDT)
+Date: Wed, 14 Oct 2015 22:34:38 +0200
+Message-ID: <CAAfyv34Ly=rBg=S60qYbjtszCLp7kUaQqwQ9taPen3s3fiokVg@mail.gmail.com>
+From: Belisko Marek <marek.belisko@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	Martin Jansa <martin.jansa@gmail.com>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: meta-qt5 - Qt5LinguistTools cmake problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,63 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2015 19:48:14 -0000
+X-List-Received-Date: Wed, 14 Oct 2015 20:34:45 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Oct 14, 2015 at 3:30 PM, S. Lockwood-Childs <sjl@vctlabs.com> wrote:
-> http://patchwork.openembedded.org/patch/99875/
->
-> Apparently this patch is still not in master, and I just ran across the
-> problem with an externally built module (omaplfb from omap3-sgx-modules)
-> in meta-ti layer.
->
-> What's the plan for getting a correct Module.symver into shared_workdir
-> for external modules to build against? Above patch, or does someone have
-> an even better idea?
+Hi,
 
-Richard and I sync'd on this while in Dublin @ ELCe, and the changes
-aren't missing
-from master by mistake .. but more because we are still working to come up with
-a comprehensive solution (tracked in bugzilla).
+I'm facing the same problem as already reported here:
+http://patchwork.openembedded.org/patch/97183/
 
-The solution is pretty much what I described before, we are balancing
-applications
-and tasks that do not need kernel modules to be built, versus external modules
-that depend on symbols from other modules. The devil is in the
-details, and getting
-a non-racy, task locked solution that allows the recipe writer to
-explicitly decide
-whether they need modules built or not .. attempts at detecting the
-need, or forcing
-a one size fits all solution have all lead to dead ends.
+when using qt5_add_translation in CMakeLists.txt
 
-Since we are close to a release point, I'm still working on this out
-of the tree, and
-will propose some changes when the tree looks stable.
+Mentioned patch isn't included in actual meta-qt5 master which I'm
+using. Is there other solution or can I use this approach? Many
+thanks.
 
-For now, you can carry the patch locally, or you can append to the kernel module
-compilation task and do a second copy of the symvers file to the share
-directory.
+BR,
 
-i.e. a variant of this:
-http://patchwork.openembedded.org/patch/94891/, done in a
-bbappend versus the class.
-
-Cheers,
-
-Bruce
-
-
-
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
-
-
+marek
 
 -- 
-"Thou shalt not follow the NULL pointer, for chaos and madness await
-thee at its end"
+as simple and primitive as possible
+-------------------------------------------------
+Marek Belisko - OPEN-NANDRA
+Freelance Developer
+
+Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+Tel: +421 915 052 184
+skype: marekwhite
+twitter: #opennandra
+web: http://open-nandra.com
 
