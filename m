@@ -1,49 +1,19 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
-	[209.85.213.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 15B3F73232
+Return-Path: <sjl@dent.vctlabs.com>
+Received: from dent.vctlabs.com (dent.vctlabs.com [68.183.110.161])
+	by mail.openembedded.org (Postfix) with ESMTP id D086876E3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 14:43:53 +0000 (UTC)
-Received: by igbni9 with SMTP id ni9so80654957igb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 07:43:53 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc:content-type;
-	bh=QBiDrV6FW2ipCOAkN3pIjZDRiN5dQvN8c4ChTOct4qs=;
-	b=XHZhYcomC3q90FrTuUdgcgr0pL7npHYANF200Hu8X+Atg5FpjPilHUK1ThYEbbghqV
-	TmvpdFr5T/xhAm7F8qC9uykKvJafSucnfaqIQzusP3APjqHvztkixtSvO7Yzj21+WOqS
-	3GCCB9igZzN6i7W9Kir9Z7sES2Fv6xyQRqXboj+uIDAt2PDuNnqFD6/zozre9D1ZU8LZ
-	nrv5f5EfJG4UvSuBr4B87s+MINr2BhjwkfTlBAJUZDoK9xi5v5R6dJeDcU32w4V66VB2
-	U9sjx9N3GtUfnsPyuOtLYs/RVXcMTbYfxwtv2PEzOl32eyoBfhftjHzYLB7R5h2J/vKt
-	8cwQ==
-X-Gm-Message-State: ALoCoQnZMoh8QZWaC6m650U1qJ8zJbU8YDF6+YuPlSdHvPrlcC4oZc49ohLPXo17FJr2bBu7B7VX
-X-Received: by 10.50.79.135 with SMTP id j7mr4154499igx.73.1444833833451;
-	Wed, 14 Oct 2015 07:43:53 -0700 (PDT)
-Received: from mail-io0-f180.google.com (mail-io0-f180.google.com.
-	[209.85.223.180]) by smtp.gmail.com with ESMTPSA id
-	rj10sm9200023igc.20.2015.10.14.07.43.52
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 14 Oct 2015 07:43:52 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by iodv82 with SMTP id v82so57481380iod.0;
-	Wed, 14 Oct 2015 07:43:51 -0700 (PDT)
+	Wed, 14 Oct 2015 18:18:41 +0000 (UTC)
+Received: by dent.vctlabs.com (Postfix, from userid 1000)
+	id 0BBADC05A2; Wed, 14 Oct 2015 11:35:56 -0700 (PDT)
+Date: Wed, 14 Oct 2015 11:35:56 -0700
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151014183556.GB3552@dent.vctlabs.com>
 MIME-Version: 1.0
-X-Received: by 10.107.27.136 with SMTP id b130mr4658414iob.28.1444833831738;
-	Wed, 14 Oct 2015 07:43:51 -0700 (PDT)
-Received: by 10.36.218.7 with HTTP; Wed, 14 Oct 2015 07:43:51 -0700 (PDT)
-In-Reply-To: <2371185.tThFydMRSC@peggleto-mobl.ger.corp.intel.com>
-References: <1443597600-29477-1-git-send-email-adrian.ratiu@ni.com>
-	<20151014141650.GC22448@jama> <561E67B3.7010304@ni.com>
-	<2371185.tThFydMRSC@peggleto-mobl.ger.corp.intel.com>
-Date: Wed, 14 Oct 2015 11:43:51 -0300
-Message-ID: <CAP9ODKqqGf9rQu3iei1LkjfpznmLTL4xmA2SwxAqGLxfszYiMw@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [meta-oe][PATCH v2] meta-oe: recipes-graphics: add libvncserver recipe
+In-Reply-To: <1439220090-3305-1-git-send-email-s.mueller-klieser@phytec.de>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: kernel.bbclass: Fix do_shared_workdir task ordering
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,23 +27,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2015 14:43:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 14 Oct 2015 18:18:42 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, Oct 14, 2015 at 11:41 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> FWIW assuming it works and isn't specially patched, I think for x11vnc we'd
-> probably be better off using an external lib we can keep up-to-date rather than
-> a bundled one that might be out-of-date; that is to say, if we are to keep
-> x11vnc in OE-Core then we might as well also have libvncserver. (One might
-> possibly ask if we really need x11vnc there though, I don't have an answer to
-> that).
+http://patchwork.openembedded.org/patch/99875/
 
-I think x11vnc could go to meta-oe. It does not seem to be widely used
-and a core component.
+Apparently this patch is still not in master, and I just ran across the
+problem with an externally built module (omaplfb from omap3-sgx-modules) 
+in meta-ti layer.
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+What's the plan for getting a correct Module.symver into shared_workdir 
+for external modules to build against? Above patch, or does someone have
+an even better idea?
 
