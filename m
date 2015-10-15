@@ -1,34 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qg0-f44.google.com (mail-qg0-f44.google.com
-	[209.85.192.44])
-	by mail.openembedded.org (Postfix) with ESMTP id EF66A770AD
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EBB0C770A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 01:06:32 +0000 (UTC)
-Received: by qgez77 with SMTP id z77so59134785qge.1
+	Thu, 15 Oct 2015 02:29:41 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t9F2TelR029579
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 18:06:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=NFTAp3fNUBh62EQ2F5YJU9A/Gv9yKuAjCD3lbThMLkU=;
-	b=LfQQLAxw4K42mg4vOpxksfjuqBsUuOxLtGrxn7TZOmTNKFebysfS9MhRXV7K40JMiJ
-	Bs67at7jHv6HxbT19Mzz0oB/JfKT3lLEi1umGldodh8HUB/gsdf506zDRvtQBXIea61o
-	MaXwP85HvrJKp8HsisATeu+q/tqin+nKrXRF77eZcBubc4P59Lj0P3r8Qo+8es71ppsB
-	i+uFAt6TJJExoQF4idbBTS87uEAJgG1PjmwSBV4xrgkvi+5LT8QAV2s3Exn+XE8n9NhX
-	p8EcxzkFBbTXKczSMjsuTTdP2e1DX3/mPeqqlDspPM3izMSENnLnSDUkTqLCF7P8HEAV
-	ax6Q==
-X-Received: by 10.140.109.6 with SMTP id k6mr7945533qgf.28.1444871192247;
-	Wed, 14 Oct 2015 18:06:32 -0700 (PDT)
-Received: from ip-96-114-220-84.ae.ccp.cable.comcast.com ([96.114.220.84])
-	by smtp.gmail.com with ESMTPSA id
-	x81sm4436197qha.24.2015.10.14.18.06.31
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 14 Oct 2015 18:06:31 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Oct 2015 01:06:25 +0000
-Message-Id: <1444871185-1173-1-git-send-email-raj.khem@gmail.com>
+	Wed, 14 Oct 2015 19:29:40 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 14 Oct 2015 19:29:40 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 15 Oct 2015 10:21:04 +0800
+Message-ID: <1444875665-5203-1-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.6.1
-Subject: [PATCH] plymouth: Disable documentation
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 1/2] openldap: 2.4.41 -> 2.4.42
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,28 +32,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2015 01:06:36 -0000
+X-List-Received-Date: Thu, 15 Oct 2015 02:29:43 -0000
+Content-Type: text/plain
 
-It need docbook-xsl built natively and right now its not in its deps
-disable the documentaion generation completely to avoid the build issue
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Upgrade phpmyadmin from 2.4.41 to 2.4.42. And backport patch from
+
+http://www.openldap.org/devel/gitweb.cgi?p=openldap.git;a=commitdiff;h=6fe51a9
+
+to fix CVE-2015-6908.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../openldap/openldap-fix-CVE-2015-6908.patch      | 28 ++++++++++++++++++++++
+ .../{openldap_2.4.41.bb => openldap_2.4.42.bb}     |  6 +++--
+ 2 files changed, 32 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/openldap/openldap/openldap-fix-CVE-2015-6908.patch
+ rename meta-oe/recipes-support/openldap/{openldap_2.4.41.bb => openldap_2.4.42.bb} (98%)
 
-diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
-index b8c82ed..01f633d 100644
---- a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
-+++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
-@@ -20,7 +20,7 @@ SRC_URI[md5sum] = "ff420994deb7ea203df678df92e7ab7d"
- SRC_URI[sha256sum] = "2f0ce82042cf9c7eadd2517a1f74c8a85fa8699781d9f294a06eade29fbed57f"
+diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-fix-CVE-2015-6908.patch b/meta-oe/recipes-support/openldap/openldap/openldap-fix-CVE-2015-6908.patch
+new file mode 100644
+index 0000000..34c87cc
+--- /dev/null
++++ b/meta-oe/recipes-support/openldap/openldap/openldap-fix-CVE-2015-6908.patch
+@@ -0,0 +1,28 @@
++Upstream-Status: Backport
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++From 6fe51a9ab04fd28bbc171da3cf12f1c1040d6629 Mon Sep 17 00:00:00 2001
++From: Howard Chu <hyc@openldap.org>
++Date: Thu, 10 Sep 2015 00:37:32 +0100
++Subject: [PATCH 1/1] ITS#8240 remove obsolete assert
++
++---
++ libraries/liblber/io.c |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/libraries/liblber/io.c b/libraries/liblber/io.c
++index 85c3e23..c05dcf8 100644
++--- a/libraries/liblber/io.c
+++++ b/libraries/liblber/io.c
++@@ -679,7 +679,7 @@ done:
++ 		return (ber->ber_tag);
++ 	}
++ 
++-	assert( 0 ); /* ber structure is messed up ?*/
+++	/* invalid input */
++ 	return LBER_DEFAULT;
++ }
++ 
++-- 
++1.7.10.4
+diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.41.bb b/meta-oe/recipes-support/openldap/openldap_2.4.42.bb
+similarity index 98%
+rename from meta-oe/recipes-support/openldap/openldap_2.4.41.bb
+rename to meta-oe/recipes-support/openldap/openldap_2.4.42.bb
+index e4a928f..49fcb56 100644
+--- a/meta-oe/recipes-support/openldap/openldap_2.4.41.bb
++++ b/meta-oe/recipes-support/openldap/openldap_2.4.42.bb
+@@ -24,9 +24,11 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
+     file://initscript \
+     file://slapd.service \
+     file://thread_stub.patch \
++    file://openldap-fix-CVE-2015-6908.patch \
+ "
+-SRC_URI[md5sum] = "3f1a4cea52827e18feaedfdc1634b5d0"
+-SRC_URI[sha256sum] = "27856bb4a8b44feca2b326c309000e16a9dadd52362c8ab6eec6c67a43737f6e"
++
++SRC_URI[md5sum] = "47c8e2f283647a6105b8b0325257e922"
++SRC_URI[sha256sum] = "eeb7b0e2c5852bfd2650e83909bb6152835c0b862fab10b63954dc1bcbba8e63"
  
- EXTRA_OECONF += " --enable-shared --disable-static --disable-gtk \
--		  --with-logo=${LOGO} \
-+                  --with-logo=${LOGO} --disable-documentation \
-                   ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-systemd-integration --with-system-root-install', '', d)} \
-                 "
+ DEPENDS = "util-linux groff-native"
  
 -- 
 2.6.1
