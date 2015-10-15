@@ -1,37 +1,34 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f42.google.com (mail-qg0-f42.google.com
-	[209.85.192.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 8CB8F770EF
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
+	[209.85.213.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C0C5769A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 13:45:50 +0000 (UTC)
-Received: by qgt47 with SMTP id 47so70926350qgt.2
+	Thu, 15 Oct 2015 14:42:23 +0000 (UTC)
+Received: by igbdj2 with SMTP id dj2so13428693igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 06:45:51 -0700 (PDT)
+	Thu, 15 Oct 2015 07:42:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:from:date:to:subject:user-agent;
-	bh=YYz29A4a5HHZfC69JuUm7jGQCh9pSHqasIRxAjOUxYY=;
-	b=B0A/30BTlGXKGfNHr7J5yVSZ4WJh5BCNAt3rihH39sAnqagQksR9d/FdCW+FDGFH7N
-	Jk/hM/cmB3Hyu6piEJXt2+Dq0FomSFx6427f46sNFPQNuQ5kMaIjrBMzHkIz/TH4g5pZ
-	+udNHaIYtTzdf2A7zcE5/PLiyTWtAFTW/hQx9Ph/clV3TI5nlOalKBvpVdFADHE1Enk5
-	e+AEw8o9/jElLar2/jpshw2TKpkwgE+CumN28dnY8V3obVVLvrX6Ex3BnXuz/BnAXqbl
-	tJgXNq4elltwqBEYIS6QcwX4pAPXwHqhHfjXYclYWU7Oj52MmwLiVWx/pv8UofiYSJrR
-	Pd7w==
-X-Received: by 10.140.34.83 with SMTP id k77mr6621978qgk.23.1444916751100;
-	Thu, 15 Oct 2015 06:45:51 -0700 (PDT)
-Received: from localhost ([177.194.195.186]) by smtp.gmail.com with ESMTPSA id
-	s19sm5478529qgd.27.2015.10.15.06.45.47
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 15 Oct 2015 06:45:50 -0700 (PDT)
-Message-ID: <561fae0e.13588c0a.315af.ffffad15@mx.google.com>
-Received: by localhost (sSMTP sendmail emulation);
-	Thu, 15 Oct 2015 10:45:43 -0300
-From: "Otavio Salvador" <otavio.salvador@gmail.com>
-Date: Thu, 15 Oct 2015 10:45:43 -0300
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-User-Agent: mail v14.8.5
-Subject: Updates to meta-java (master) in 2015-10-15
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=kqk+9E4ku9EP5TgrCQjS6HscpI1GABomhpLK0DzXsLU=;
+	b=gSlfzQwlFVVquHYuZiXevXqm2sB/IC0LjDtNHmiFL7X/8JdI3p4aZg09m2dulOTqFL
+	wNYpr8XCBxpcbPYNIHjW2kklMzuak/RojRJ7XzMUGQF2PiCUEbVh9jiwcChLXT119Ljq
+	KqIykl024UuYth3mrCkRzESSbubfWTvgFqVrI1xMXnwWDJTdtIVyS+1OGeB7ONChyjfQ
+	AE2TiKwxbD1HddGBrFQ7BumepAbicRWmPdq2zOf//sRvBLSGBB3l2DVh5g0Zl7V1kj68
+	imeU+1E3UeJe51tH9yiUwIwWVCd+0AUFdBwV5sypRf/9mKEgQRR9TlafAFYh6nzQAJlT
+	9qeg==
+X-Received: by 10.50.6.43 with SMTP id x11mr20101526igx.77.1444920144197; Thu,
+	15 Oct 2015 07:42:24 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.142.130 with HTTP; Thu, 15 Oct 2015 07:41:54 -0700 (PDT)
+In-Reply-To: <CALbNGRQ1vE0=GP7EfvpdHpNiHW1C1O1ntmFmTPtzeP9+ryTZFg@mail.gmail.com>
+References: <1444871185-1173-1-git-send-email-raj.khem@gmail.com>
+	<CALbNGRQ1vE0=GP7EfvpdHpNiHW1C1O1ntmFmTPtzeP9+ryTZFg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 15 Oct 2015 07:41:54 -0700
+Message-ID: <CAMKF1sqT7q4VGFbspYV=EOfM8+B21rvdFetpv5PjJhtmFsYHtQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] plymouth: Disable documentation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,63 +42,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2015 13:45:55 -0000
+X-List-Received-Date: Thu, 15 Oct 2015 14:42:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+On Thu, Oct 15, 2015 at 6:22 AM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> On Thu, Oct 15, 2015 at 3:06 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>> It need docbook-xsl built natively and right now its not in its deps
+>> disable the documentaion generation completely to avoid the build issue
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>>  meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb b/meta-oe/r=
+ecipes-core/plymouth/plymouth_0.9.2.bb
+>> index b8c82ed..01f633d 100644
+>> --- a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
+>> +++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
+>> @@ -20,7 +20,7 @@ SRC_URI[md5sum] =3D "ff420994deb7ea203df678df92e7ab7d"
+>>  SRC_URI[sha256sum] =3D "2f0ce82042cf9c7eadd2517a1f74c8a85fa8699781d9f29=
+4a06eade29fbed57f"
+>>
+>>  EXTRA_OECONF +=3D " --enable-shared --disable-static --disable-gtk \
+>> -                 --with-logo=3D${LOGO} \
+>> +                  --with-logo=3D${LOGO} --disable-documentation \
+>>                    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-=
+-enable-systemd-integration --with-system-root-install', '', d)} \
+>>                  "
+>>
+>> --
+>> 2.6.1
+>>
+> I think I've sent similar - and if I am not mistaken it was already appli=
+ed.
+>
 
-I pushed following updates:
+indeed you did and its applied. My snapshot was not uptodate with master
 
-commit 573c9b4e706467fe974a026dbbc5309e66071edd (HEAD -> pending, yocto/master, m/master)
-Author: Jens Rehsack <rehsack@gmail.com>
-Date:   Thu Oct 15 13:54:41 2015 +0200
-
-    openjdk: Avoid extra-noise because of self-satisfying dependency
-    
-    I realized one small issue last days: the dependency of openjdk-*-demos on java2-vm, which is
-    provided by the current recipe (eg. openjdk-7) causes bitbake scan for alternatives (eg. java2-vm
-    provided by openjdk-6) without any need.
-    
-    I would recommend to remove such a generic dependency:
-    * openjdk-6-demos require openjdk-6-jre, period.
-    * openjdk-7-demos require openjdk-7-jre, period.
-    * openjdk-8-demos require openjdk-8-jre, period.
-    
-    There is no sense in satisfying openjdk-8-demos with openjdk-6-jre (even if it might be possible).
-    
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-
-commit fd9529fb70fb9621e2563427e1ba7b8a504b6fd0
-Author: Jens Rehsack <rehsack@gmail.com>
-Date:   Thu Oct 15 13:54:04 2015 +0200
-
-    meta-java: avoid garbadge files making noise when gitting around :)
-    
-    Adding a .gitignore file ignoring the typical noise when applying patches,
-    working with common editors and so on. Based on .gitignore of meta-openembedded.
-    
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-
-commit b331dec1d8c18e48b39b3c9e5d0c547e066f1d15
-Author: Jens Rehsack <rehsack@gmail.com>
-Date:   Thu Oct 15 13:52:09 2015 +0200
-
-    icedtea7-native: compiling without x11
-    
-    Allow building icedtea7 without any X11 dependency.
-    
-    This affects the native part only which is required to bootstrap openjdk-8-native
-    for cross-compiling openjdk-8, but should be adoptable for cross-compiled recipe
-    as well as for openjdk-6.
-    
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-
-Regards,
-
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> Andreas
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
