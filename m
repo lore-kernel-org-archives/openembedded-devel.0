@@ -1,37 +1,38 @@
-Return-Path: <anders@chargestorm.se>
-Received: from mail-lf0-f41.google.com (mail-lf0-f41.google.com
-	[209.85.215.41])
-	by mail.openembedded.org (Postfix) with ESMTP id D4505770EF
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qg0-f54.google.com (mail-qg0-f54.google.com
+	[209.85.192.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 106647710B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 18:21:33 +0000 (UTC)
-Received: by lfaz124 with SMTP id z124so40766676lfa.1
+	Thu, 15 Oct 2015 19:42:26 +0000 (UTC)
+Received: by qgt47 with SMTP id 47so80695407qgt.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 11:21:32 -0700 (PDT)
+	Thu, 15 Oct 2015 12:42:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6ttI5FK1UkQBxK6AaUe4zEw3NsPX8r7yKQQYcN54SZY=;
-	b=mXBiVlf9JnRO0YBN3EpxPH7kCwYpyWafxWIlN+hRGCwdMQRU7UExXbMkXtwz1kE3DP
-	t17OZYmvCEzcQesZDyMMAPv5aaJw2ypvI7rAl7rEC33o0/xFerTh7pwjnJ+J+SsHPPrP
-	Q7n0KChRxH8ZncrYKODbax5x8Li90vnO7zPv+iXk9ku+FzJha3VPHk4NW+jr1RCfStQb
-	LzSlqtwDodBksOOGo2DWJK5VxCUtAZSzLWbZX0aCqBBkMDe8XcWbWd+KOEneQXw/E/tR
-	A67Q8JhtsAiEelVODd5lS7We30riHCIrPHRFUB+G2kBKEPgKmv7f3AXHLNZSHoA/bkmn
-	PPvg==
-X-Gm-Message-State: ALoCoQkLeKNw0JSaYqRu1aW+6u6gvUqrWvTBOb8UnFXCbra3k5BJSyYmT+diTFCtCccIACNyX6Uk
-X-Received: by 10.25.15.42 with SMTP id e42mr2187803lfi.49.1444933292750;
-	Thu, 15 Oct 2015 11:21:32 -0700 (PDT)
-Received: from localhost (scandic817.host.songnetworks.se. [212.214.188.138])
-	by smtp.gmail.com with ESMTPSA id
-	um10sm2219932lbc.15.2015.10.15.11.21.31
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 15 Oct 2015 11:21:31 -0700 (PDT)
-From: Anders Darander <anders@chargestorm.se>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Oct 2015 20:21:27 +0200
-Message-Id: <1444933287-26444-1-git-send-email-anders@chargestorm.se>
-X-Mailer: git-send-email 2.6.1
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: [meta-qt5][PATCH] qtbase: fix QA warning of host uid leakage
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=Ki4GeY8L3XyEeBN+Wc5TtxyDlLkgc+2f6jfT7nzDvLM=;
+	b=RLXWwVm//DIrXdiLc8//vCP3LIm/TyYzEYmCpbOT6fh/gL2P1xs0WXyDMHcvGQTbp+
+	J+dLh0BPKRfnKXPSBrZ9hdSfmvZ/11mGZlMnezhW3vMoyXP4kkq7je0Pnda9JaJvm4MS
+	oc+fFNhY724JTqHhjKNTY+IKn8kViZ68WbI67gcZAv8wxpnMZvCt/zePr/B+SqfTuKLp
+	bV0OvvWKV4arWc9FQRPCarpx7YBG9zhKPTyEFuC0eeIMFOthado4mQc3ARNizxYEPgNb
+	c9dCkV30xzMdVkcrscfnCTnuw4dByaVsAA2CuMayaL8mNZWpj9je+/7eudtQDKSm34B3
+	oJXQ==
+X-Gm-Message-State: ALoCoQkx81qFUzkjAJ1T3h6M4SR3CfqImjcEzaOB55auGcooE+vZLzNNZxib1e9kOYdeQEMRophz
+X-Received: by 10.140.20.20 with SMTP id 20mr14230350qgi.87.1444938146318;
+	Thu, 15 Oct 2015 12:42:26 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.140.94.82 with HTTP; Thu, 15 Oct 2015 12:42:06 -0700 (PDT)
+In-Reply-To: <CALbNGRSUht+HkkJOkv0NZ38yjcOdahPRVOhar830BbcSFYEj9Q@mail.gmail.com>
+References: <cover.1444392901.git.jussi.kukkonen@intel.com>
+	<CALbNGRSLEKJUYXgMCdv_oB+JD++AemnvNyM8cmCqD7o26wXqeQ@mail.gmail.com>
+	<CALbNGRSUht+HkkJOkv0NZ38yjcOdahPRVOhar830BbcSFYEj9Q@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 15 Oct 2015 20:42:06 +0100
+Message-ID: <CAJTo0Lb+ocUQw0O=423w9MO9Tr=J64yTb==GxHzWhQgUu7=AvQ@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [OE-core] [PATCH 0/1] Solving the GTK+ libgl runtime dependency issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,29 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2015 18:21:36 -0000
+X-List-Received-Date: Thu, 15 Oct 2015 19:42:27 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Two files in /usr/lib, were own by the uid of the build process.
+On 15 October 2015 at 18:26, Andreas M=C3=BCller <schnitzeltony@googlemail.=
+com>
+wrote:
 
-Signed-off-by: Anders Darander <anders@chargestorm.se>
----
- recipes-qt/qt5/qtbase_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+> I have several gtk3+ applications that stopped working. E.G
+> network-manager-applet has stopped working: running
+> nm-connection-editor fails with 'Couldn't open libGL.so.1'. Same for
+> parole.
+> I grepped network-manager-applet: there is not GtkGL or GdkGL found in
+> the sources (ok - it could be the dependencies). I still get the
+> feeling something goes wrong with libepoxy. And I am quite sure that
+> I've seen both (nm-applet/parole) running with gtk3 requiring
+> libepoxy...
+>
 
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 39d02a9..99ac208 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -232,6 +232,8 @@ do_install_append() {
-         chown -R root:root ${D}/${OE_QMAKE_PATH_QT_FONTS}
-     fi
-     cp -a ${B}/lib/libqt* ${D}${libdir}
-+    chown root:root ${D}${libdir}/libqtpcre.prl
-+    chown root:root ${D}${libdir}/libqtpcre.a
-     # Remove example.pro file as it is useless
-     rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro
- 
--- 
-2.6.1
+That's not good, sounds like a bug in GTK+3 - it shouldn't be initialising
+the GL code.
 
+The only bit of source that includes epoxy is gtkglarea.c.  libepoxy only
+looks up libGL.so.1 when it's invoked.
+
+What's the exact message you get, and bonus points if you can attach a gdb
+with debug symbols to get a backtrace.  Maybe something like Glade is
+instantiating every class?
+
+Ross
 
