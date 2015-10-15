@@ -1,40 +1,21 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 919A876AE2
+Return-Path: <erkka.kaaria@intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id C5EE5770CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 10:19:13 +0000 (UTC)
-Received: by wicgb1 with SMTP id gb1so265571448wic.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 03:19:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:content-type:content-transfer-encoding:mime-version:subject
-	:message-id:date:references:in-reply-to:to;
-	bh=SBwhcE9rHBdkqHmqs0D5fZPgY8YAfeHZTh8tvXkiUJk=;
-	b=qEORTHgfcrQhl/VI9RZiDiqvVqt9LWJRRM67WN53H7bu0EalymZIFMeXIXxWvrzmQi
-	G9pgA2kYs1XoR161Hz8saKH+uHTCe/aIEwnCCeJKuFEyWYflWozWP27PqPFpGuEEJfWf
-	kStqwkttHZOk26r+xg2O2xHyhBj1AMAHVSVnBKJobr2Xkl+ZZSMx5X4yhsGaiPJeBJfX
-	Jlk9ha3AIMUREWXXsCCbxOcAVFOqIAM9B6osQpEsVhjtanVfRIl8yTUBrbkeoa5wDCV0
-	xuN+SHNH98OcJ48TNKW/mtLjPtlk03DkDZ1bU+CSUk+meqGEDczbW8lvjmuQiqsEwvD+
-	7epw==
-X-Received: by 10.194.93.229 with SMTP id cx5mr9447994wjb.62.1444904353871;
-	Thu, 15 Oct 2015 03:19:13 -0700 (PDT)
-Received: from [10.32.170.199] ([37.205.56.247])
-	by smtp.gmail.com with ESMTPSA id
-	cc8sm15550125wjc.46.2015.10.15.03.19.12
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 15 Oct 2015 03:19:12 -0700 (PDT)
-From: Akuster808 <akuster808@gmail.com>
-Mime-Version: 1.0 (1.0)
-Message-Id: <E57D1D43-7D35-4307-8FDC-29809E1FE756@gmail.com>
-Date: Thu, 15 Oct 2015 11:19:12 +0100
-References: <1444850269-18516-1-git-send-email-Martin.Jansa@gmail.com>
-	<1444850269-18516-3-git-send-email-Martin.Jansa@gmail.com>
-In-Reply-To: <1444850269-18516-3-git-send-email-Martin.Jansa@gmail.com>
+	Thu, 15 Oct 2015 10:46:03 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 15 Oct 2015 03:45:41 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.17,684,1437462000"; d="scan'208";a="827266359"
+Received: from ekaaria-xps-8300.fi.intel.com ([10.237.68.35])
+	by orsmga002.jf.intel.com with ESMTP; 15 Oct 2015 03:45:40 -0700
+From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: iPhone Mail (13A452)
-Subject: Re: [PATCH][meta-oe][fido 3/3] ruby: explicitly disable dtrace support
+Date: Thu, 15 Oct 2015 13:46:07 +0300
+Message-Id: <1444905967-8862-1-git-send-email-erkka.kaaria@intel.com>
+X-Mailer: git-send-email 2.1.4
+MIME-Version: 1.0
+Subject: [meta-java][PATCH] cacao-initial-native: Fix sed matching
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,56 +29,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2015 10:19:15 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 15 Oct 2015 10:46:03 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
+VGhlIHJlY2lwZSB1c2VzIHNlZCB0byBwYXRjaCBzcmMvc2NyaXB0cy9qYXZhLmluIHNvIHRoYXQg
+aXQgZXhlY3MgY2FjYW8taW5pdGlhbAppbnN0ZWFkIG9mIGNhY2FvLiBIb3dldmVyLCBpZiBjb25m
+aWd1cmUgc3RlcCBpcyBydW4gYWdhaW4sIC1pbml0aWFsIGlzIGFwcGVuZGVkCmFnYWluIHRvIHRo
+ZSBzdHJpbmcsIGxlYWRpbmcgdG8gJ2V4ZWMgY2FjYW8taW5pdGlhbC1pbml0aWFsJy4gVGhpcyBj
+YXVzZXMgdGhlCmJ1aWxkIHRvIGZhaWwuCgpUaGlzIGlzIGZpeGVkIGJ5IGNoYW5naW5nIHRoZSBz
+ZWQgY29tbWFuZCB0byBjb25zaWRlciBsYXJnZXIgcG9ydGlvbiBvZiB0aGUKc291cmNlIHN0cmlu
+Zy4gVGhpcyBlbnN1cmVzIHRoYXQgdGhlIC1pbml0aWFsIGlzIG9ubHkgYXBwZW5kZWQgb25jZS4K
+ClNpZ25lZC1vZmYtYnk6IEVya2thIEvDpMOkcmnDpCA8ZXJra2Eua2FhcmlhQGludGVsLmNvbT4K
+LS0tCiByZWNpcGVzLWNvcmUvY2FjYW8vY2FjYW8taW5pdGlhbC1uYXRpdmVfMC45OC5iYiB8IDIg
+Ky0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAt
+LWdpdCBhL3JlY2lwZXMtY29yZS9jYWNhby9jYWNhby1pbml0aWFsLW5hdGl2ZV8wLjk4LmJiIGIv
+cmVjaXBlcy1jb3JlL2NhY2FvL2NhY2FvLWluaXRpYWwtbmF0aXZlXzAuOTguYmIKaW5kZXggNzJj
+NjI0Ni4uZWM3ZmJkYiAxMDA2NDQKLS0tIGEvcmVjaXBlcy1jb3JlL2NhY2FvL2NhY2FvLWluaXRp
+YWwtbmF0aXZlXzAuOTguYmIKKysrIGIvcmVjaXBlcy1jb3JlL2NhY2FvL2NhY2FvLWluaXRpYWwt
+bmF0aXZlXzAuOTguYmIKQEAgLTM1LDcgKzM1LDcgQEAgZXhwb3J0IEpBUj0iZmFzdGphciIKIAog
+ZG9fY29uZmlndXJlX2FwcGVuZCgpIHsKICAgIyBGaXggdGhlIGV4ZWN1dGFibGUgbmFtZSBpbiB0
+aGUgd3JhcHBlciBzY3JpcHQuCi0gIHNlZCAtaSAtZSAic3xleGVjIGNhY2FvfGV4ZWMgY2FjYW8t
+aW5pdGlhbHwiIHNyYy9zY3JpcHRzL2phdmEuaW4KKyAgc2VkIC1pIC1lICJzfGV4ZWMgY2FjYW8g
+XFwkfGV4ZWMgY2FjYW8taW5pdGlhbCBcXCR8IiBzcmMvc2NyaXB0cy9qYXZhLmluCiB9CiAKIFNS
+Q19VUklbbWQ1c3VtXSA9ICI4Yjg5MDdjOGI5MjU3NjFjOTQxMGJjYWRiOTcwNTM0NiIKLS0gCjIu
+MS40CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0KSW50ZWwgRmlubGFuZCBPeQpSZWdpc3RlcmVkIEFkZHJlc3M6IFBM
+IDI4MSwgMDAxODEgSGVsc2lua2kgCkJ1c2luZXNzIElkZW50aXR5IENvZGU6IDAzNTc2MDYgLSA0
+IApEb21pY2lsZWQgaW4gSGVsc2lua2kgCgpUaGlzIGUtbWFpbCBhbmQgYW55IGF0dGFjaG1lbnRz
+IG1heSBjb250YWluIGNvbmZpZGVudGlhbCBtYXRlcmlhbCBmb3IKdGhlIHNvbGUgdXNlIG9mIHRo
+ZSBpbnRlbmRlZCByZWNpcGllbnQocykuIEFueSByZXZpZXcgb3IgZGlzdHJpYnV0aW9uCmJ5IG90
+aGVycyBpcyBzdHJpY3RseSBwcm9oaWJpdGVkLiBJZiB5b3UgYXJlIG5vdCB0aGUgaW50ZW5kZWQK
+cmVjaXBpZW50LCBwbGVhc2UgY29udGFjdCB0aGUgc2VuZGVyIGFuZCBkZWxldGUgYWxsIGNvcGll
+cy4K
 
-
-> On Oct 14, 2015, at 20:17, Martin Jansa <martin.jansa@gmail.com> wrote:
->=20
-> both 2.2.1 and 2.2.2 are failing on some hosts native builds with:
-> | linking miniruby
-> | load.o: In function `rb_f_load':
-> | load.c:(.text+0x3af): undefined reference to `RUBY_DTRACE_LOAD_ENTRY_ENA=
-BLED'
-> | load.c:(.text+0x428): undefined reference to `RUBY_DTRACE_LOAD_RETURN_EN=
-ABLED'
-> | load.c:(.text+0x452): undefined reference to `RUBY_DTRACE_LOAD_RETURN'
-> | load.c:(.text+0x492): undefined reference to `RUBY_DTRACE_LOAD_ENTRY'
-> | load.o: In function `rb_require_internal':
->=20
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-Thought this was fixed already. Oh well.
-
-Acked-by: Armin Kuster <akuster808@gmail.com>
-
-Traveling today. Will merge soon
-> ---
-> meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb | 1 +
-> 1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb b/meta-ruby/rec=
-ipes-devtools/ruby/ruby_2.2.1.bb
-> index 29f2291..080d455 100644
-> --- a/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb
-> +++ b/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb
-> @@ -16,6 +16,7 @@ EXTRA_OECONF =3D "\
->     --enable-wide-getaddrinfo \
->     --disable-versioned-paths \
->     --disable-rpath \
-> +    --disable-dtrace \
->     --enable-shared \
->     --enable-load-relative \
-> "
-> --=20
-> 2.6.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
