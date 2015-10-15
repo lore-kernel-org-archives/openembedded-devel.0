@@ -1,32 +1,41 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BE32770AD
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
+	[209.85.220.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 79728770C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 03:15:03 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t9F3F42S006811
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 15 Oct 2015 06:44:34 +0000 (UTC)
+Received: by pabrc13 with SMTP id rc13so78335372pab.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 20:15:04 -0700 (PDT)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.159]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0248.002;
-	Wed, 14 Oct 2015 20:15:03 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-xfce][PATCH] vim: do not autoenable the mouse
-Thread-Index: AQHRBM6qhySTRKPSo0eVWse/z7H94J5r5Szw
-Date: Thu, 15 Oct 2015 03:15:03 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010BCF61AE@ALA-MBA.corp.ad.wrs.com>
-References: <1444641333-11313-1-git-send-email-jackie.huang@windriver.com>
-In-Reply-To: <1444641333-11313-1-git-send-email-jackie.huang@windriver.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.236]
-MIME-Version: 1.0
-Subject: Re: [meta-xfce][PATCH] vim: do not autoenable the mouse
+	Wed, 14 Oct 2015 23:44:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=PFRnR8m23jIUl69pA1XTI9CMlCXtQSRWABuKLOrAEz4=;
+	b=aKY09S+hBrytuMmzKZpwmx0HwwhDWEx32A5BNVDIJFPJoHf6rCoA3bU1HL12tJb7e0
+	N/Gpir2AxIeS4jS68fLaJBZyzOKVPisNaw3JxcNX53DiiSoVFZS6zBuNr/9FJAk1WTFZ
+	rKFW596pGYmOICY8ntcxIVe8JX3dnpOIt5kS8gqRJfz6l1yy/LyiALThkOjwGBkNG9sG
+	HZ6oChfnNX3JwwEzoGzTrwweyBAETfrGBOWyMpGLULjJrKHU04I7F9p8QS+bygo3rNA7
+	vuYPN0HUQVJXvyyqsExcFevWmEVxrxpbQLgldptPDFAAVpJFK5NMEedGcy9u9DXdVH7n
+	80jQ==
+X-Received: by 10.68.197.168 with SMTP id iv8mr8186724pbc.81.1444891475239;
+	Wed, 14 Oct 2015 23:44:35 -0700 (PDT)
+Received: from ?IPv6:2601:646:8601:4580:fd3d:cb0b:3cd1:e450?
+	([2601:646:8601:4580:fd3d:cb0b:3cd1:e450])
+	by smtp.gmail.com with ESMTPSA id
+	rz9sm13225401pbb.61.2015.10.14.23.44.34
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 14 Oct 2015 23:44:34 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 9.0 \(3096.1\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <CAAfyv34Ly=rBg=S60qYbjtszCLp7kUaQqwQ9taPen3s3fiokVg@mail.gmail.com>
+Date: Wed, 14 Oct 2015 23:44:33 -0700
+Message-Id: <90F3B45E-0156-46A9-8BF7-D83F9B0BD059@gmail.com>
+References: <CAAfyv34Ly=rBg=S60qYbjtszCLp7kUaQqwQ9taPen3s3fiokVg@mail.gmail.com>
+To: Martin Jansa <openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.3096.1)
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: meta-qt5 - Qt5LinguistTools cmake problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,61 +49,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2015 03:15:05 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 15 Oct 2015 06:44:35 -0000
+X-Groupsio-MsgNum: 57836
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_2467EF34-E23E-414F-8A02-E69A66CEBBDC";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_2467EF34-E23E-414F-8A02-E69A66CEBBDC
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset=us-ascii
 
 
+> On Oct 14, 2015, at 1:34 PM, Belisko Marek <marek.belisko@gmail.com> wrote:
+> 
+> Hi,
+> 
+> I'm facing the same problem as already reported here:
+> http://patchwork.openembedded.org/patch/97183/
+> 
+> when using qt5_add_translation in CMakeLists.txt
+> 
+> Mentioned patch isn't included in actual meta-qt5 master which I'm
+> using. Is there other solution or can I use this approach? Many
+> thanks.
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of jackie.huang@windriver.com
-> Sent: Monday, October 12, 2015 5:16 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [meta-xfce][PATCH] vim: do not autoenable the mouse
->=20
-> From: Jackie Huang <jackie.huang@windriver.com>
->=20
-> The mouse being autoenabled is just annoying in xfce4-terminal (mouse dra=
-g make vim go into
-> visual mode and there is no right click menu), so remove the setting for =
-mouse.
->=20
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  meta-xfce/recipes-support/vim/vim_%.bbappend | 6 ++++++
->  1 file changed, 6 insertions(+)
->  create mode 100644 meta-xfce/recipes-support/vim/vim_%.bbappend
->=20
-> diff --git a/meta-xfce/recipes-support/vim/vim_%.bbappend b/meta-xfce/rec=
-ipes-
-> support/vim/vim_%.bbappend
-> new file mode 100644
-> index 0000000..abd3128
-> --- /dev/null
-> +++ b/meta-xfce/recipes-support/vim/vim_%.bbappend
-> @@ -0,0 +1,6 @@
-> +do_install_append() {
-> +	# The mouse being autoenabled is just annoying in xfce4-terminal (mouse
-> +	# drag make vim go into visual mode and there is no right click menu),
-> +	# delete the block.
-> +	sed -i '/the mouse works just fine/,+4d' ${D}/${datadir}/${PN}/vimrc }
+that patch looks good to me. Martin ?
 
-Please ignore this since it will fail for multilib, I will change PN -> BPN=
- and send
-v2 patch.
-
-Thanks,
-Jackie
-
+> 
+> BR,
+> 
+> marek
+> 
 > --
-> 1.9.1
->=20
+> as simple and primitive as possible
+> -------------------------------------------------
+> Marek Belisko - OPEN-NANDRA
+> Freelance Developer
+> 
+> Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+> Tel: +421 915 052 184
+> skype: marekwhite
+> twitter: #opennandra
+> web: http://open-nandra.com
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+
+--Apple-Mail=_2467EF34-E23E-414F-8A02-E69A66CEBBDC
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlYfS1EACgkQuwUzVZGdMxS6ZwCeL095l+7dZXejh06wfATb1imR
+Gh0AmwXyOuwoGLSHFYbmw/WetDCOsg6E
+=3f1d
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_2467EF34-E23E-414F-8A02-E69A66CEBBDC--
