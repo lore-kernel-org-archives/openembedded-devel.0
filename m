@@ -1,34 +1,42 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C0C5769A7
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-qk0-f173.google.com (mail-qk0-f173.google.com
+	[209.85.220.173])
+	by mail.openembedded.org (Postfix) with ESMTP id EEDC477109
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 14:42:23 +0000 (UTC)
-Received: by igbdj2 with SMTP id dj2so13428693igb.1
+	Thu, 15 Oct 2015 15:17:51 +0000 (UTC)
+Received: by qkht68 with SMTP id t68so39848072qkh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 07:42:24 -0700 (PDT)
+	Thu, 15 Oct 2015 08:17:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=kqk+9E4ku9EP5TgrCQjS6HscpI1GABomhpLK0DzXsLU=;
-	b=gSlfzQwlFVVquHYuZiXevXqm2sB/IC0LjDtNHmiFL7X/8JdI3p4aZg09m2dulOTqFL
-	wNYpr8XCBxpcbPYNIHjW2kklMzuak/RojRJ7XzMUGQF2PiCUEbVh9jiwcChLXT119Ljq
-	KqIykl024UuYth3mrCkRzESSbubfWTvgFqVrI1xMXnwWDJTdtIVyS+1OGeB7ONChyjfQ
-	AE2TiKwxbD1HddGBrFQ7BumepAbicRWmPdq2zOf//sRvBLSGBB3l2DVh5g0Zl7V1kj68
-	imeU+1E3UeJe51tH9yiUwIwWVCd+0AUFdBwV5sypRf/9mKEgQRR9TlafAFYh6nzQAJlT
-	9qeg==
-X-Received: by 10.50.6.43 with SMTP id x11mr20101526igx.77.1444920144197; Thu,
-	15 Oct 2015 07:42:24 -0700 (PDT)
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=y0Vt7Am2gOnz9fE30lMu+VUQkk7XaiIh+IgAi0LmiHc=;
+	b=iyiqa+plN9B4stnJWGZu65Z8Scywagy8PH5mtDEFuCsXEQNh+lXtpvqrjsSSQTDbbM
+	j5Bav/7ime3+gic6j9Yu4HEHW7l0OWQYdgFYcZyTzH7df9eUDSWUTuMxvghj0ObOnbpv
+	/mAfD/XE5rBCiFpK16g/WYGRY661yTla9IudeQZPI00vpGM0yUjbsLxTr00J4uGF0WfA
+	7QRCAcjIQj7UcXMwCsteq0A4/suMFDejAWiDvGDUvmhn4yzc7yixupuzKEEc4SYfKF6g
+	WWSmIcHUKghYrpHCylNCdlSifn1i7/qyQjwq21wqsMSwmVtYEzXbWoykpMlTWQ1CF49/
+	zhTA==
+X-Received: by 10.194.7.232 with SMTP id m8mr11538992wja.56.1444922271676;
+	Thu, 15 Oct 2015 08:17:51 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	jd7sm17054357wjb.19.2015.10.15.08.17.50
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 15 Oct 2015 08:17:50 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 15 Oct 2015 17:18:12 +0200
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20151015151812.GE2588@jama>
+References: <CAAfyv34Ly=rBg=S60qYbjtszCLp7kUaQqwQ9taPen3s3fiokVg@mail.gmail.com>
+	<90F3B45E-0156-46A9-8BF7-D83F9B0BD059@gmail.com>
 MIME-Version: 1.0
-Received: by 10.107.142.130 with HTTP; Thu, 15 Oct 2015 07:41:54 -0700 (PDT)
-In-Reply-To: <CALbNGRQ1vE0=GP7EfvpdHpNiHW1C1O1ntmFmTPtzeP9+ryTZFg@mail.gmail.com>
-References: <1444871185-1173-1-git-send-email-raj.khem@gmail.com>
-	<CALbNGRQ1vE0=GP7EfvpdHpNiHW1C1O1ntmFmTPtzeP9+ryTZFg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 15 Oct 2015 07:41:54 -0700
-Message-ID: <CAMKF1sqT7q4VGFbspYV=EOfM8+B21rvdFetpv5PjJhtmFsYHtQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] plymouth: Disable documentation
+In-Reply-To: <90F3B45E-0156-46A9-8BF7-D83F9B0BD059@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: Martin Jansa <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: meta-qt5 - Qt5LinguistTools cmake problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,50 +50,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2015 14:42:24 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 15 Oct 2015 15:17:52 -0000
+X-Groupsio-MsgNum: 57854
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="3O1VwFp74L81IIeR"
+Content-Disposition: inline
+
+--3O1VwFp74L81IIeR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 15, 2015 at 6:22 AM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> On Thu, Oct 15, 2015 at 3:06 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> It need docbook-xsl built natively and right now its not in its deps
->> disable the documentaion generation completely to avoid the build issue
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb b/meta-oe/r=
-ecipes-core/plymouth/plymouth_0.9.2.bb
->> index b8c82ed..01f633d 100644
->> --- a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
->> +++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
->> @@ -20,7 +20,7 @@ SRC_URI[md5sum] =3D "ff420994deb7ea203df678df92e7ab7d"
->>  SRC_URI[sha256sum] =3D "2f0ce82042cf9c7eadd2517a1f74c8a85fa8699781d9f29=
-4a06eade29fbed57f"
->>
->>  EXTRA_OECONF +=3D " --enable-shared --disable-static --disable-gtk \
->> -                 --with-logo=3D${LOGO} \
->> +                  --with-logo=3D${LOGO} --disable-documentation \
->>                    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-=
--enable-systemd-integration --with-system-root-install', '', d)} \
->>                  "
->>
->> --
->> 2.6.1
->>
-> I think I've sent similar - and if I am not mistaken it was already appli=
-ed.
->
+On Wed, Oct 14, 2015 at 11:44:33PM -0700, Khem Raj wrote:
+>=20
+> > On Oct 14, 2015, at 1:34 PM, Belisko Marek <marek.belisko@gmail.com> wr=
+ote:
+> >=20
+> > Hi,
+> >=20
+> > I'm facing the same problem as already reported here:
+> > http://patchwork.openembedded.org/patch/97183/
+> >=20
+> > when using qt5_add_translation in CMakeLists.txt
+> >=20
+> > Mentioned patch isn't included in actual meta-qt5 master which I'm
+> > using. Is there other solution or can I use this approach? Many
+> > thanks.
+>=20
+> that patch looks good to me. Martin ?
 
-indeed you did and its applied. My snapshot was not uptodate with master
+Thanks for review, it wasn't applied until now, because of author's
+comment between "---".
 
-> Andreas
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >=20
+> > BR,
+> >=20
+> > marek
+> >=20
+> > --
+> > as simple and primitive as possible
+> > -------------------------------------------------
+> > Marek Belisko - OPEN-NANDRA
+> > Freelance Developer
+> >=20
+> > Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+> > Tel: +421 915 052 184
+> > skype: marekwhite
+> > twitter: #opennandra
+> > web: http://open-nandra.com
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
 
+
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--3O1VwFp74L81IIeR
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlYfwY8ACgkQN1Ujt2V2gBy36wCfSPuhtzPTW4GkEVxZVSWj8dTt
+5UcAn1BfXYTcuq3V+zFXySNBdAoknHyp
+=YjSL
+-----END PGP SIGNATURE-----
+
+--3O1VwFp74L81IIeR--
