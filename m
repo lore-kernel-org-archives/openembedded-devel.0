@@ -1,48 +1,37 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-io0-f175.google.com (mail-io0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 3107D77104
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qg0-f42.google.com (mail-qg0-f42.google.com
+	[209.85.192.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 8CB8F770EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 13:38:32 +0000 (UTC)
-Received: by ioii196 with SMTP id i196so89409436ioi.3
+	Thu, 15 Oct 2015 13:45:50 +0000 (UTC)
+Received: by qgt47 with SMTP id 47so70926350qgt.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 06:38:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:content-type;
-	bh=j9XevpY6pq4/lcazg8A4j+JVCFRKhL/kQ5H35WPNUD0=;
-	b=mAWqmjhyOYQQtqnhZf/mCnaYEl+wL3YreZ5JfelFWojCCd6m1wkJis1OOFlgL6P8s8
-	Q3DVSdqXxWnK1jhL7BGEPHCnVvL9MCQZ/Bfvp8IZeDv4Bfu5ue+2uMGelu12TW3ZzFzq
-	hW2kYBBnwwck1azzW5fjEXWWp+TNJnm3B+sUedYzrDPYThxUxXqCwm7Jl8tYM7umiQhU
-	IJpzgOklWAT8GtPdJfsKLC4HCl+BTNEFY1Qev7hmx5j8AsfwqJ1IEvlF+IiO853Z8oGn
-	M/ll+DPRfOhCbQMN+tOsKBUADtACeu8nBm+/luU17eEBOgdfn9ZAItIzgpTS4fKIHXvr
-	rXdQ==
-X-Gm-Message-State: ALoCoQkfq4GtunfaOtHPcuVAsdb9rV7I407cPGNe9Hxk+i6gj4w6QWd9NmGDkNe4obB7Ufn8P7gH
-X-Received: by 10.107.134.94 with SMTP id i91mr7001623iod.74.1444916312950;
-	Thu, 15 Oct 2015 06:38:32 -0700 (PDT)
-Received: from mail-io0-f175.google.com (mail-io0-f175.google.com.
-	[209.85.223.175]) by smtp.gmail.com with ESMTPSA id
-	e36sm5670165ioj.44.2015.10.15.06.38.31
+	Thu, 15 Oct 2015 06:45:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:from:date:to:subject:user-agent;
+	bh=YYz29A4a5HHZfC69JuUm7jGQCh9pSHqasIRxAjOUxYY=;
+	b=B0A/30BTlGXKGfNHr7J5yVSZ4WJh5BCNAt3rihH39sAnqagQksR9d/FdCW+FDGFH7N
+	Jk/hM/cmB3Hyu6piEJXt2+Dq0FomSFx6427f46sNFPQNuQ5kMaIjrBMzHkIz/TH4g5pZ
+	+udNHaIYtTzdf2A7zcE5/PLiyTWtAFTW/hQx9Ph/clV3TI5nlOalKBvpVdFADHE1Enk5
+	e+AEw8o9/jElLar2/jpshw2TKpkwgE+CumN28dnY8V3obVVLvrX6Ex3BnXuz/BnAXqbl
+	tJgXNq4elltwqBEYIS6QcwX4pAPXwHqhHfjXYclYWU7Oj52MmwLiVWx/pv8UofiYSJrR
+	Pd7w==
+X-Received: by 10.140.34.83 with SMTP id k77mr6621978qgk.23.1444916751100;
+	Thu, 15 Oct 2015 06:45:51 -0700 (PDT)
+Received: from localhost ([177.194.195.186]) by smtp.gmail.com with ESMTPSA id
+	s19sm5478529qgd.27.2015.10.15.06.45.47
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 15 Oct 2015 06:38:31 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by iodv82 with SMTP id v82so89741672iod.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 06:38:31 -0700 (PDT)
-MIME-Version: 1.0
-X-Received: by 10.107.160.194 with SMTP id j185mr9818311ioe.37.1444916311163; 
-	Thu, 15 Oct 2015 06:38:31 -0700 (PDT)
-Received: by 10.36.218.7 with HTTP; Thu, 15 Oct 2015 06:38:31 -0700 (PDT)
-In-Reply-To: <20151015114726.GC2588@jama>
-References: <1444903231-16227-1-git-send-email-samuli.piippo@theqtcompany.com>
-	<20151015114726.GC2588@jama>
-Date: Thu, 15 Oct 2015 10:38:31 -0300
-Message-ID: <CAP9ODKo=UmqZCd2CuwgbrKr3DrvxvqPS1Bi+3-YUiVzF3qutGg@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qt5: use extra .pri file from linux-oe-g++ mkspec
+	Thu, 15 Oct 2015 06:45:50 -0700 (PDT)
+Message-ID: <561fae0e.13588c0a.315af.ffffad15@mx.google.com>
+Received: by localhost (sSMTP sendmail emulation);
+	Thu, 15 Oct 2015 10:45:43 -0300
+From: "Otavio Salvador" <otavio.salvador@gmail.com>
+Date: Thu, 15 Oct 2015 10:45:43 -0300
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+User-Agent: mail v14.8.5
+Subject: Updates to meta-java (master) in 2015-10-15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,28 +45,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2015 13:38:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 15 Oct 2015 13:45:55 -0000
 
-On Thu, Oct 15, 2015 at 8:47 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Thu, Oct 15, 2015 at 01:00:31PM +0300, Samuli Piippo wrote:
->> Load additional oe-device-extra.pri in the default linux-oe-g++ mkspec to
->> allow simple changing of target dependent values. This is useful for any
->> target that needs to specify e.g., QMAKE_LIBS_EGL or other additional configs.
->
-> Looks good, but people using this need to be aware that it will cause
-> qtbase and everything depending on it MACHINE_ARCH which is very
-> unfortunate considering the time needed to build things like
-> qtwebengine/qtwebkit.
+Hello,
 
-However I don't see how any BSP needing to pass extra libraries or
-flags would not be machine specific.
+I pushed following updates:
 
-One way to avoid this would be to split out the QPA backend for those
-to another recipe and this to become machine specific and include the
-.pri file.
+commit 573c9b4e706467fe974a026dbbc5309e66071edd (HEAD -> pending, yocto/master, m/master)
+Author: Jens Rehsack <rehsack@gmail.com>
+Date:   Thu Oct 15 13:54:41 2015 +0200
 
--- 
+    openjdk: Avoid extra-noise because of self-satisfying dependency
+    
+    I realized one small issue last days: the dependency of openjdk-*-demos on java2-vm, which is
+    provided by the current recipe (eg. openjdk-7) causes bitbake scan for alternatives (eg. java2-vm
+    provided by openjdk-6) without any need.
+    
+    I would recommend to remove such a generic dependency:
+    * openjdk-6-demos require openjdk-6-jre, period.
+    * openjdk-7-demos require openjdk-7-jre, period.
+    * openjdk-8-demos require openjdk-8-jre, period.
+    
+    There is no sense in satisfying openjdk-8-demos with openjdk-6-jre (even if it might be possible).
+    
+    Signed-off-by: Jens Rehsack <sno@netbsd.org>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+commit fd9529fb70fb9621e2563427e1ba7b8a504b6fd0
+Author: Jens Rehsack <rehsack@gmail.com>
+Date:   Thu Oct 15 13:54:04 2015 +0200
+
+    meta-java: avoid garbadge files making noise when gitting around :)
+    
+    Adding a .gitignore file ignoring the typical noise when applying patches,
+    working with common editors and so on. Based on .gitignore of meta-openembedded.
+    
+    Signed-off-by: Jens Rehsack <sno@netbsd.org>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+commit b331dec1d8c18e48b39b3c9e5d0c547e066f1d15
+Author: Jens Rehsack <rehsack@gmail.com>
+Date:   Thu Oct 15 13:52:09 2015 +0200
+
+    icedtea7-native: compiling without x11
+    
+    Allow building icedtea7 without any X11 dependency.
+    
+    This affects the native part only which is required to bootstrap openjdk-8-native
+    for cross-compiling openjdk-8, but should be adoptable for cross-compiled recipe
+    as well as for openjdk-6.
+    
+    Signed-off-by: Jens Rehsack <sno@netbsd.org>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+Regards,
+
+--
 Otavio Salvador                             O.S. Systems
 http://www.ossystems.com.br        http://code.ossystems.com.br
 Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
