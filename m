@@ -1,26 +1,23 @@
-Return-Path: <Kai.Kang@windriver.com>
+Return-Path: <Qi.Chen@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 42523770AD
+	by mail.openembedded.org (Postfix) with ESMTP id 369ED770AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 02:29:41 +0000 (UTC)
+	Thu, 15 Oct 2015 03:00:56 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9F2Tf2T009153
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 19:29:42 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9F30tbd009446
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 14 Oct 2015 20:00:55 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 14 Oct 2015 19:29:41 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 15 Oct 2015 10:21:05 +0800
-Message-ID: <1444875665-5203-2-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.6.1
-In-Reply-To: <1444875665-5203-1-git-send-email-kai.kang@windriver.com>
-References: <1444875665-5203-1-git-send-email-kai.kang@windriver.com>
+	14.3.248.2; Wed, 14 Oct 2015 20:00:55 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <martin.jansa@gmail.com>
+Date: Thu, 15 Oct 2015 10:48:48 +0800
+Message-ID: <1444877328-24949-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-webserver][PATCH 2/2] phpmyadmin: 4.4.9 -> 4.5.0.2
+Subject: [meta-webserver][PATCH] webmin: remove perl-module-sdbm from RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,63 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2015 02:29:43 -0000
+X-List-Received-Date: Thu, 15 Oct 2015 03:01:00 -0000
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+Remove 'perl-module-sdbm' from RDEPENDS as perl don't build out this module.
+This also fixes the following warning.
 
-Upgrade phpmyadmin from 4.4.9 to 4.5.0.2 and SRC_URI is updated.
+  WARNING: QA Issue: webmin rdepends on perl-module-sdbm, but it isn't a build dependency? [build-deps]
 
-Accoring to release note, there is NO API changes for 4.5.0.x serial. So
-upgrade to 4.5.0.2 rather than 4.4.15 which will only support for
-security fixes only.
-
-And license file has some text update. See:
-https://github.com/phpmyadmin/phpmyadmin/commit/9d080a482fae73bde5049620088d4687da245163
-
-Change files owner to fix [host-user-contaminated] warnings.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../phpmyadmin/{phpmyadmin_4.4.9.bb => phpmyadmin_4.5.0.2.bb}    | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
- rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.4.9.bb => phpmyadmin_4.5.0.2.bb} (72%)
+ meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.9.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb
-similarity index 72%
-rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.9.bb
-rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb
-index 91a1cbf..e28b66a 100644
---- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.9.bb
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb
-@@ -2,14 +2,14 @@ SUMMARY = "Web-based MySQL administration interface"
- HOMEPAGE = "http://www.phpmyadmin.net"
- # Main code is GPLv2, libraries/tcpdf is under LGPLv3, js/jquery is under MIT
- LICENSE = "GPLv2 & LGPLv3 & MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a \
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://libraries/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c"
+diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb
+index b6fbb0a..3cdb183 100644
+--- a/meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb
++++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb
+@@ -114,7 +114,7 @@ INITSCRIPT_PARAMS = "start 99 5 3 2 . stop 10 0 1 6 ."
+ RDEPENDS_${PN} += "perl perl-module-socket perl-module-exporter perl-module-exporter-heavy perl-module-carp perl-module-strict"
+ RDEPENDS_${PN} += "perl-module-warnings perl-module-xsloader perl-module-posix perl-module-autoloader"
+ RDEPENDS_${PN} += "perl-module-fcntl perl-module-tie-hash perl-module-vars perl-module-time-local perl-module-config perl-module-constant"
+-RDEPENDS_${PN} += "perl-module-file-glob perl-module-file-copy perl-module-sdbm perl-module-sdbm-file perl-module-feature"
++RDEPENDS_${PN} += "perl-module-file-glob perl-module-file-copy perl-module-sdbm-file perl-module-feature"
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/phpmyadmin/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
-+SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/4.5.0.2/phpMyAdmin-4.5.0.2-all-languages.tar.xz \
-            file://apache.conf"
- 
--SRC_URI[md5sum] = "d60d80fabe1b27023122228dcf7ee73e"
--SRC_URI[sha256sum] = "b9a31d6ec3e7abe708160ce8dbc364c029015256766bac6f68134b84a836d766"
-+SRC_URI[md5sum] = "2d08d2fcc8f70f88a11a14723e3ca275"
-+SRC_URI[sha256sum] = "d2e90ea486d90b4ebe5eb02d7ad349ad2916c12a8981f98553395ef78d22a8ec"
- 
- S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
- 
-@@ -18,6 +18,7 @@ inherit allarch
- do_install() {
-     install -d ${D}${datadir}/${BPN}
-     cp -a * ${D}${datadir}/${BPN}
-+    chown -R root:root ${D}${datadir}/${BPN}
-     # Don't install patches to target
-     rm -rf ${D}${datadir}/${BPN}/patches
- 
+ PACKAGES_DYNAMIC += "webmin-module-* webmin-theme-*"
+ RRECOMMENDS_${PN} += "webmin-module-system-status"
 -- 
-2.6.1
+1.9.1
 
 
