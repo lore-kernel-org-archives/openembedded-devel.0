@@ -1,48 +1,48 @@
 Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
-	[209.85.213.174])
-	by mail.openembedded.org (Postfix) with ESMTP id B3235770F2
+Received: from mail-io0-f175.google.com (mail-io0-f175.google.com
+	[209.85.223.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 3107D77104
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 13:34:27 +0000 (UTC)
-Received: by igbkq10 with SMTP id kq10so14149981igb.0
+	Thu, 15 Oct 2015 13:38:32 +0000 (UTC)
+Received: by ioii196 with SMTP id i196so89409436ioi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 06:34:27 -0700 (PDT)
+	Thu, 15 Oct 2015 06:38:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc:content-type;
-	bh=MpiZ++twZeK1+IrDCIQDBFwQREXgoAs6siZbdaqI/9g=;
-	b=Q+TYS4cZv786a8F2+2PTIR+dyldfjn09q1dIVYmL4LY28QtU6HZhGfI9mDU50pGoJb
-	6se6bd4uqao9pwKpN5PM3jc4tDkBB7QB/xPaD8KUOyaNiCzaDTxnSfh2TA9vnpoAgZdD
-	cBl6iYYtcWWE+2pOlKkSzwfGpe9xE8BMXPIrWyFgXun05Ggo0M9y+/uoaiIZBp+fEEsS
-	tXzUtHB4gBKIcLtJarrlCAeanAGfkp8DtUDw5fEG4bYH2/VsBmceFD3jWvTA8IbMCh3x
-	+Vfcmr9BTYAQoBzssFnR8uNHx2RyspR+4yPzT5tdiX2QMOMY2Op6stTMLV3+Zwb+EFYc
-	+F3w==
-X-Gm-Message-State: ALoCoQkjJ+/5HR4JGwZ0oB4usx3WJnmYXgX21BDVC0rOekTl8ZO9aK+95PSEvtglLkV/8FbQ9QMk
-X-Received: by 10.50.111.226 with SMTP id il2mr19365607igb.61.1444916067546;
-	Thu, 15 Oct 2015 06:34:27 -0700 (PDT)
-Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com.
-	[209.85.213.180]) by smtp.gmail.com with ESMTPSA id
-	i26sm5676682iod.27.2015.10.15.06.34.25
+	:message-id:subject:to:content-type;
+	bh=j9XevpY6pq4/lcazg8A4j+JVCFRKhL/kQ5H35WPNUD0=;
+	b=mAWqmjhyOYQQtqnhZf/mCnaYEl+wL3YreZ5JfelFWojCCd6m1wkJis1OOFlgL6P8s8
+	Q3DVSdqXxWnK1jhL7BGEPHCnVvL9MCQZ/Bfvp8IZeDv4Bfu5ue+2uMGelu12TW3ZzFzq
+	hW2kYBBnwwck1azzW5fjEXWWp+TNJnm3B+sUedYzrDPYThxUxXqCwm7Jl8tYM7umiQhU
+	IJpzgOklWAT8GtPdJfsKLC4HCl+BTNEFY1Qev7hmx5j8AsfwqJ1IEvlF+IiO853Z8oGn
+	M/ll+DPRfOhCbQMN+tOsKBUADtACeu8nBm+/luU17eEBOgdfn9ZAItIzgpTS4fKIHXvr
+	rXdQ==
+X-Gm-Message-State: ALoCoQkfq4GtunfaOtHPcuVAsdb9rV7I407cPGNe9Hxk+i6gj4w6QWd9NmGDkNe4obB7Ufn8P7gH
+X-Received: by 10.107.134.94 with SMTP id i91mr7001623iod.74.1444916312950;
+	Thu, 15 Oct 2015 06:38:32 -0700 (PDT)
+Received: from mail-io0-f175.google.com (mail-io0-f175.google.com.
+	[209.85.223.175]) by smtp.gmail.com with ESMTPSA id
+	e36sm5670165ioj.44.2015.10.15.06.38.31
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 15 Oct 2015 06:34:25 -0700 (PDT)
+	Thu, 15 Oct 2015 06:38:31 -0700 (PDT)
 From: Otavio Salvador <otavio.salvador@ossystems.com.br>
 X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by igbkq10 with SMTP id kq10so14149124igb.0
+Received: by iodv82 with SMTP id v82so89741672iod.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 06:34:25 -0700 (PDT)
+	Thu, 15 Oct 2015 06:38:31 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.50.2.67 with SMTP id 3mr10185546igs.19.1444916065401; Thu,
-	15 Oct 2015 06:34:25 -0700 (PDT)
-Received: by 10.36.218.7 with HTTP; Thu, 15 Oct 2015 06:34:25 -0700 (PDT)
-In-Reply-To: <0736624E-A78B-47B2-BABB-18D5839FA698@gmail.com>
-References: <0736624E-A78B-47B2-BABB-18D5839FA698@gmail.com>
-Date: Thu, 15 Oct 2015 10:34:25 -0300
-Message-ID: <CAP9ODKo53YRzTcVSqpmQpVKLR0+6Ew9vywh4VJ3GJn7ybLS4eg@mail.gmail.com>
+X-Received: by 10.107.160.194 with SMTP id j185mr9818311ioe.37.1444916311163; 
+	Thu, 15 Oct 2015 06:38:31 -0700 (PDT)
+Received: by 10.36.218.7 with HTTP; Thu, 15 Oct 2015 06:38:31 -0700 (PDT)
+In-Reply-To: <20151015114726.GC2588@jama>
+References: <1444903231-16227-1-git-send-email-samuli.piippo@theqtcompany.com>
+	<20151015114726.GC2588@jama>
+Date: Thu, 15 Oct 2015 10:38:31 -0300
+Message-ID: <CAP9ODKo=UmqZCd2CuwgbrKr3DrvxvqPS1Bi+3-YUiVzF3qutGg@mail.gmail.com>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-java][PATCH 1/6] cacao-initial-native: fix rebuild with uncleaned workdir breaks accidently
+Subject: Re: [meta-qt5][PATCH] qt5: use extra .pri file from linux-oe-g++ mkspec
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,19 +56,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2015 13:34:27 -0000
+X-List-Received-Date: Thu, 15 Oct 2015 13:38:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Thu, Oct 15, 2015 at 8:51 AM, Jens Rehsack <rehsack@gmail.com> wrote:
+On Thu, Oct 15, 2015 at 8:47 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Thu, Oct 15, 2015 at 01:00:31PM +0300, Samuli Piippo wrote:
+>> Load additional oe-device-extra.pri in the default linux-oe-g++ mkspec to
+>> allow simple changing of target dependent values. This is useful for any
+>> target that needs to specify e.g., QMAKE_LIBS_EGL or other additional configs.
 >
-> When cacao-initial-native is rebuilt because of changed dependency, executable
-> name in wrapper script is accidently changed twice into "cacao-initial-inital".
-> This is prevented now.
->
-> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+> Looks good, but people using this need to be aware that it will cause
+> qtbase and everything depending on it MACHINE_ARCH which is very
+> unfortunate considering the time needed to build things like
+> qtwebengine/qtwebkit.
 
-A patch fixing this very same issue has been applied in meta-java;
-please drop this one for next patchset revision.
+However I don't see how any BSP needing to pass extra libraries or
+flags would not be machine specific.
+
+One way to avoid this would be to split out the QPA backend for those
+to another recipe and this to become machine specific and include the
+.pri file.
 
 -- 
 Otavio Salvador                             O.S. Systems
