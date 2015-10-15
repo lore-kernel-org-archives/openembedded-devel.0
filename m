@@ -1,32 +1,34 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DBB3770AB
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qg0-f44.google.com (mail-qg0-f44.google.com
+	[209.85.192.44])
+	by mail.openembedded.org (Postfix) with ESMTP id EF66A770AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 20:34:39 +0000 (UTC)
-Received: by wijq8 with SMTP id q8so99390397wij.0
+	Thu, 15 Oct 2015 01:06:32 +0000 (UTC)
+Received: by qgez77 with SMTP id z77so59134785qge.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Oct 2015 13:34:38 -0700 (PDT)
+	Wed, 14 Oct 2015 18:06:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=1LZV8ViWfUuiniIxHT56yDEARF74sA2pliiwbVb3iXg=;
-	b=LOhkgi0qvI9/XRa1CNiog5p2Ezrt/d4XfL5j9filqDFNcDd8ZDlc2yaCa9dmHCe4nr
-	NFi2UF52VVByc7mPpjvlqifDEQmUhkI4vPNatoivOj9BfUu34vY9TSqBJWEs8sETZeF3
-	c6J+IOiSwpd9cfAcrNEN3FlLt0BMV6emoDh+IB6qlL6M2KKzUNZg7nqKM4eThW3AW+Sx
-	hy3i6Sst1Ey2GxkXHkerMfsU2SZhVJZjQ9Y61fwfvTypiDlKWRgqc6i+PR8YkQ+aPWVe
-	3y8beeXbfYC4r+7ugV12cJoo2cySjx3bg5T8bwyjMF1m+PVwzFFY4ywAKlqKEiZPCqso
-	9MMg==
-MIME-Version: 1.0
-X-Received: by 10.194.48.102 with SMTP id k6mr7136788wjn.124.1444854878611;
-	Wed, 14 Oct 2015 13:34:38 -0700 (PDT)
-Received: by 10.28.12.75 with HTTP; Wed, 14 Oct 2015 13:34:38 -0700 (PDT)
-Date: Wed, 14 Oct 2015 22:34:38 +0200
-Message-ID: <CAAfyv34Ly=rBg=S60qYbjtszCLp7kUaQqwQ9taPen3s3fiokVg@mail.gmail.com>
-From: Belisko Marek <marek.belisko@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	Martin Jansa <martin.jansa@gmail.com>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: meta-qt5 - Qt5LinguistTools cmake problem
+	h=from:to:cc:subject:date:message-id;
+	bh=NFTAp3fNUBh62EQ2F5YJU9A/Gv9yKuAjCD3lbThMLkU=;
+	b=LfQQLAxw4K42mg4vOpxksfjuqBsUuOxLtGrxn7TZOmTNKFebysfS9MhRXV7K40JMiJ
+	Bs67at7jHv6HxbT19Mzz0oB/JfKT3lLEi1umGldodh8HUB/gsdf506zDRvtQBXIea61o
+	MaXwP85HvrJKp8HsisATeu+q/tqin+nKrXRF77eZcBubc4P59Lj0P3r8Qo+8es71ppsB
+	i+uFAt6TJJExoQF4idbBTS87uEAJgG1PjmwSBV4xrgkvi+5LT8QAV2s3Exn+XE8n9NhX
+	p8EcxzkFBbTXKczSMjsuTTdP2e1DX3/mPeqqlDspPM3izMSENnLnSDUkTqLCF7P8HEAV
+	ax6Q==
+X-Received: by 10.140.109.6 with SMTP id k6mr7945533qgf.28.1444871192247;
+	Wed, 14 Oct 2015 18:06:32 -0700 (PDT)
+Received: from ip-96-114-220-84.ae.ccp.cable.comcast.com ([96.114.220.84])
+	by smtp.gmail.com with ESMTPSA id
+	x81sm4436197qha.24.2015.10.14.18.06.31
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 14 Oct 2015 18:06:31 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 15 Oct 2015 01:06:25 +0000
+Message-Id: <1444871185-1173-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.6.1
+Subject: [PATCH] plymouth: Disable documentation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,33 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2015 20:34:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 15 Oct 2015 01:06:36 -0000
 
-Hi,
+It need docbook-xsl built natively and right now its not in its deps
+disable the documentaion generation completely to avoid the build issue
 
-I'm facing the same problem as already reported here:
-http://patchwork.openembedded.org/patch/97183/
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-when using qt5_add_translation in CMakeLists.txt
-
-Mentioned patch isn't included in actual meta-qt5 master which I'm
-using. Is there other solution or can I use this approach? Many
-thanks.
-
-BR,
-
-marek
-
+diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
+index b8c82ed..01f633d 100644
+--- a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
++++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
+@@ -20,7 +20,7 @@ SRC_URI[md5sum] = "ff420994deb7ea203df678df92e7ab7d"
+ SRC_URI[sha256sum] = "2f0ce82042cf9c7eadd2517a1f74c8a85fa8699781d9f294a06eade29fbed57f"
+ 
+ EXTRA_OECONF += " --enable-shared --disable-static --disable-gtk \
+-		  --with-logo=${LOGO} \
++                  --with-logo=${LOGO} --disable-documentation \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-systemd-integration --with-system-root-install', '', d)} \
+                 "
+ 
 -- 
-as simple and primitive as possible
--------------------------------------------------
-Marek Belisko - OPEN-NANDRA
-Freelance Developer
+2.6.1
 
-Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-Tel: +421 915 052 184
-skype: marekwhite
-twitter: #opennandra
-web: http://open-nandra.com
 
