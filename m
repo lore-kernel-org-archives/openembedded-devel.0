@@ -1,31 +1,34 @@
-Return-Path: <adrian.ratiu@ni.com>
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 0ABBF7713A
+Return-Path: <maxin.john@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 3642977144
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 14:24:23 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-chan1-1338.natinst.com
-	[130.164.19.134])
-	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	t9GEONJU014974; Fri, 16 Oct 2015 09:24:23 -0500
-Received: from adi-pc-linux.natinst.com ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2015101609242356-2125874 ;
-	Fri, 16 Oct 2015 09:24:23 -0500 
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Oct 2015 17:24:20 +0300
-Message-Id: <990b1c8517dc29833819890afb52fe5db0c51abc.1445005215.git.adrian.ratiu@ni.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <7c7ebb1005d3ef6935ce80c02f7059ed7a021d10.1445005215.git.adrian.ratiu@ni.com>
-References: <7c7ebb1005d3ef6935ce80c02f7059ed7a021d10.1445005215.git.adrian.ratiu@ni.com>
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 10/16/2015 09:24:23 AM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 10/16/2015 09:24:23 AM,
-	Serialize complete at 10/16/2015 09:24:23 AM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2015-10-16_10:, , signatures=0
-Subject: [meta-oe][PATCH 3/3] x11vnc: use external libvncserver
+	Fri, 16 Oct 2015 14:44:17 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by orsmga101.jf.intel.com with ESMTP; 16 Oct 2015 07:44:18 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.17,689,1437462000"; d="scan'208";a="812636785"
+Received: from irsmsx152.ger.corp.intel.com ([163.33.192.66])
+	by fmsmga001.fm.intel.com with ESMTP; 16 Oct 2015 07:44:17 -0700
+Received: from irsmsx103.ger.corp.intel.com ([169.254.3.116]) by
+	IRSMSX152.ger.corp.intel.com ([169.254.6.38]) with mapi id
+	14.03.0248.002; Fri, 16 Oct 2015 15:44:16 +0100
+From: "John, Maxin" <maxin.john@intel.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Thread-Topic: [oe] [meta-java] update email address
+Thread-Index: AdEH8WawJsCy2u6+RTemOku1QvHPLAAHlzuAAAQli8A=
+Date: Fri, 16 Oct 2015 14:44:16 +0000
+Message-ID: <61C0517EAD808B429A1DE2DD9164D4002B04E1@IRSMSX103.ger.corp.intel.com>
+References: <20151016041618.GA16359@mbabyjoh-mobl.fi.intel.com>
+	<5581570.JWFFzRXSqs@peggleto-mobl.ger.corp.intel.com>
+In-Reply-To: <5581570.JWFFzRXSqs@peggleto-mobl.ger.corp.intel.com>
+Accept-Language: fi-FI, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [163.33.239.182]
+MIME-Version: 1.0
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] update email address
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,38 +42,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2015 14:24:25 -0000
+X-List-Received-Date: Fri, 16 Oct 2015 14:44:21 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-By default x11vnc compiles its dependency libvncserver from sources
-included in its own source tree. We override this behaviour to use
-the externally provided libvncserver from a separate recipe.
+Hi Paul,
 
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
----
- meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+-----Original Message-----
+From: Paul Eggleton [mailto:paul.eggleton@linux.intel.com]=20
+Sent: Friday, October 16, 2015 4:40 PM
+To: John, Maxin <maxin.john@intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-java] update email address
 
-diff --git a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
-index ec0241f..7e92965 100644
---- a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
-+++ b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
-@@ -14,12 +14,13 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/libvncserver/x11vnc/${PV}/x11vnc-${PV}.tar.gz\
- SRC_URI[md5sum] = "a372ec4fe8211221547b1c108cf56e4c"
- SRC_URI[sha256sum] = "f6829f2e629667a5284de62b080b13126a0736499fe47cdb447aedb07a59f13b"
- 
--DEPENDS = "openssl virtual/libx11 libxext jpeg zlib libxfixes libxrandr libxdamage libxtst"
-+DEPENDS = "openssl virtual/libx11 libxext jpeg zlib libxfixes libxrandr libxdamage libxtst libtasn1 p11-kit"
- 
- inherit autotools-brokensep distro_features_check
- # depends on virtual/libx11
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)}"
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)} libvncserver"
- PACKAGECONFIG[avahi] = "--with-avahi,--without-avahi,avahi"
- PACKAGECONFIG[xinerama] = "--with-xinerama,--without-xinerama,libxinerama"
-+PACKAGECONFIG[libvncserver] = "--with-system-libvncserver,--without-system-libvncserver,libvncserver"
--- 
-2.1.4
+Hi Maxin,
 
+On Friday 16 October 2015 07:16:18 Maxin B. John wrote:
+>>  Hi,
+>>=20
+>>  Updated my email address in README:
+>>=20
+>>  README: update contact info
+>> Signed-off-by: Maxin B. John <maxin.john@intel.com>
+>>=20
+>>  diff --git a/README b/README
+>>   index 7a48f14..f031021 100644
+>> --- a/README
+>>  +++ b/README
+>>  @@ -46,7 +46,7 @@ Main layer maintainers:
+>>=20
+>>     Henning Heinold <henning@itconsulting-heinold.de>
+>>     Mario Domenech Goulart <mario@ossystems.com.br>
+>> -  Maxin John <maxin.john@enea.com>
+>>   +  Maxin John <maxin.john@intel.com>
+>>      Otavio Salvador <otavio@ossystems.com.br>
+
+>I've taken the liberty of updating the layer index entry for meta-java as =
+well. (Something that really ought to be easier than it is...)
+
+Thank you! I thought it uses some magic scripts to fetch it from README fil=
+es :) =20
+
+Can you please help me in updating the meta-oracle-java layer index entry a=
+s well ?
+
+>Cheers,
+>Paul
+
+>Paul Eggleton
+>Intel Open Source Technology Centre
+
+Best Regards,
+Maxin
 
