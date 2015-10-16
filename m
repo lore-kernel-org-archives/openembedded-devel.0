@@ -1,36 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id BE0B97714C
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 8890075B98
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 13:58:09 +0000 (UTC)
-Received: by wijq8 with SMTP id q8so12256822wij.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 06:58:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=WHWt8lXZRIw736O0RXVgEJrEMWeH1CbR/WRn+kYCm+U=;
-	b=mNSjxDrFTGYFPRb2Ek4+19/T6DwvkHwCgeQFPkPiah28hkNBge+Cd5F7eekB4hI9bL
-	lCvJwtnJNYBpi3Xz//Dc3ngIrSykSKC0C2xop/3cUOtS/6bAJmIROWLX9f7pSOKW2Kk5
-	PCabRl1MGHBAgDjvd9RP9/mAwPCDZkjACDHd0BHIyOMBUoUiq6howGzFiApPYp4gw0xB
-	1axgQpbHsZYDfUC2LC+ry0SnddF7ehKNotTgA1Ju+uQK1eVQk96cu+Ze7rEIgvL7uxvZ
-	5GbU5jjtOqPJ32Iua9mUUKm9WDGpYhmdfYofN5u5Hvkjw95jxg2Na1ho2TLiMipTVdrR
-	oTHg==
-X-Received: by 10.180.198.178 with SMTP id jd18mr5066767wic.34.1445003889313; 
-	Fri, 16 Oct 2015 06:58:09 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id z2sm3372231wij.1.2015.10.16.06.58.08
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 16 Oct 2015 06:58:08 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Fri, 16 Oct 2015 14:24:22 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t9GEOM8V014969; Fri, 16 Oct 2015 09:24:22 -0500
+Received: from adi-pc-linux.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015101609242168-2125872 ;
+	Fri, 16 Oct 2015 09:24:21 -0500 
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Oct 2015 15:58:30 +0200
-Message-Id: <1445003910-6444-4-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.6.1
-In-Reply-To: <1445003910-6444-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1445003910-6444-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-oe][dizzy 4/4] geoclue: add PACKAGECONFIG for geoip
+Date: Fri, 16 Oct 2015 17:24:18 +0300
+Message-Id: <7c7ebb1005d3ef6935ce80c02f7059ed7a021d10.1445005215.git.adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.1.4
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 10/16/2015 09:24:22 AM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 10/16/2015 09:24:22 AM,
+	Serialize complete at 10/16/2015 09:24:22 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-10-16_10:, , signatures=0
+Subject: [meta-oe][PATCH 1/3] meta-oe: recipes-graphics: add libvncserver recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,27 +37,613 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2015 13:58:10 -0000
+X-List-Received-Date: Fri, 16 Oct 2015 14:24:25 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 ---
- meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../0001-remove-webclients-build.patch             |  28 ++
+ .../libvncserver/0002-common-add-sha1.patch        | 524 +++++++++++++++++++++
+ .../libvncserver/libvncserver_0.9.10.bb            |  24 +
+ 3 files changed, 576 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver/0001-remove-webclients-build.patch
+ create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver/0002-common-add-sha1.patch
+ create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
 
-diff --git a/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb b/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb
-index a0305fb..5e3d04e 100644
---- a/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb
-+++ b/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb
-@@ -20,6 +20,8 @@ SRC_URI = " \
- SRC_URI[md5sum] = "401ff99d530b177c62afacef0a33efd9"
- SRC_URI[sha256sum] = "4a82f184e55a163d86e0ad69bbe1bba9960bb5094220fe1f01350bceda8c67a1"
- 
-+PACKAGECONFIG[geoip] = "--enable-geoip-server,--disable-geoip-server,geoip"
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver/0001-remove-webclients-build.patch b/meta-oe/recipes-graphics/libvncserver/libvncserver/0001-remove-webclients-build.patch
+new file mode 100644
+index 0000000..8f4365c
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver/0001-remove-webclients-build.patch
+@@ -0,0 +1,28 @@
++diff --git a/Makefile.am b/Makefile.am
++index 5c2a94d..f98038a 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -1,7 +1,7 @@
++ ACLOCAL_AMFLAGS = -I m4
++ 
++-SUBDIRS=libvncserver examples libvncclient webclients client_examples test
++-DIST_SUBDIRS=libvncserver examples libvncclient webclients client_examples test
+++SUBDIRS=libvncserver examples libvncclient client_examples test
+++DIST_SUBDIRS=libvncserver examples libvncclient client_examples test
++ EXTRA_DIST = CMakeLists.txt rfb/rfbint.h.cmake rfb/rfbconfig.h.cmake
++ 
++ bin_SCRIPTS = libvncserver-config
++diff --git a/configure.ac b/configure.ac
++index ca9f3b3..9b464cf 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -600,9 +600,6 @@ AC_CONFIG_FILES([Makefile
++ 	libvncserver/Makefile
++ 	examples/Makefile
++ 	examples/android/Makefile
++-	webclients/Makefile
++-	webclients/java-applet/Makefile
++-	webclients/java-applet/ssl/Makefile
++ 	libvncclient/Makefile
++ 	client_examples/Makefile
++ 	test/Makefile
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver/0002-common-add-sha1.patch b/meta-oe/recipes-graphics/libvncserver/libvncserver/0002-common-add-sha1.patch
+new file mode 100644
+index 0000000..8b70d2f
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver/0002-common-add-sha1.patch
+@@ -0,0 +1,524 @@
++diff --git a/common/sha1.c b/common/sha1.c
++new file mode 100644
++index 0000000..988b188
++--- /dev/null
+++++ b/common/sha1.c
++@@ -0,0 +1,411 @@
+++/*
+++ * Copyright (C) The Internet Society (2001).  All Rights Reserved.
+++ *
+++ * This document and translations of it may be copied and furnished to
+++ * others, and derivative works that comment on or otherwise explain it
+++ * or assist in its implementation may be prepared, copied, published
+++ * and distributed, in whole or in part, without restriction of any
+++ * kind, provided that the above copyright notice and this paragraph are
+++ * included on all such copies and derivative works.  However, this
+++ * document itself may not be modified in any way, such as by removing
+++ * the copyright notice or references to the Internet Society or other
+++ * Internet organizations, except as needed for the purpose of
+++ * developing Internet standards in which case the procedures for
+++ * copyrights defined in the Internet Standards process must be
+++ * followed, or as required to translate it into languages other than
+++ * English.
+++ *
+++ * The limited permissions granted above are perpetual and will not be
+++ * revoked by the Internet Society or its successors or assigns.
+++ *
+++ * This document and the information contained herein is provided on an
+++ * "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+++ * TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+++ * BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+++ * HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+++ * MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+++ */
+++
+++/*
+++ *  sha1.c
+++ *
+++ *  Description:
+++ *      This file implements the Secure Hashing Algorithm 1 as
+++ *      defined in FIPS PUB 180-1 published April 17, 1995.
+++ *
+++ *      The SHA-1, produces a 160-bit message digest for a given
+++ *      data stream.  It should take about 2**n steps to find a
+++ *      message with the same digest as a given message and
+++ *      2**(n/2) to find any two messages with the same digest,
+++ *      when n is the digest size in bits.  Therefore, this
+++ *      algorithm can serve as a means of providing a
+++ *      "fingerprint" for a message.
+++ *
+++ *  Portability Issues:
+++ *      SHA-1 is defined in terms of 32-bit "words".  This code
+++ *      uses <stdint.h> (included via "sha1.h" to define 32 and 8
+++ *      bit unsigned integer types.  If your C compiler does not
+++ *      support 32 bit unsigned integers, this code is not
+++ *      appropriate.
+++ *
+++ *  Caveats:
+++ *      SHA-1 is designed to work with messages less than 2^64 bits
+++ *      long.  Although SHA-1 allows a message digest to be generated
+++ *      for messages of any number of bits less than 2^64, this
+++ *      implementation only works with messages with a length that is
+++ *      a multiple of the size of an 8-bit character.
+++ *
+++ */
+++
+++#include "sha1.h"
+++
+++/*
+++ *  Define the SHA1 circular left shift macro
+++ */
+++#define SHA1CircularShift(bits,word) \
+++                (((word) << (bits)) | ((word) >> (32-(bits))))
+++
+++/* Local Function Prototyptes */
+++void SHA1PadMessage(SHA1Context *);
+++void SHA1ProcessMessageBlock(SHA1Context *);
+++
+++/*
+++ *  SHA1Reset
+++ *
+++ *  Description:
+++ *      This function will initialize the SHA1Context in preparation
+++ *      for computing a new SHA1 message digest.
+++ *
+++ *  Parameters:
+++ *      context: [in/out]
+++ *          The context to reset.
+++ *
+++ *  Returns:
+++ *      sha Error Code.
+++ *
+++ */
+++int SHA1Reset(SHA1Context *context)
+++{
+++    if (!context)
+++    {
+++        return shaNull;
+++    }
+++
+++    context->Length_Low             = 0;
+++    context->Length_High            = 0;
+++    context->Message_Block_Index    = 0;
+++
+++    context->Intermediate_Hash[0]   = 0x67452301;
+++    context->Intermediate_Hash[1]   = 0xEFCDAB89;
+++    context->Intermediate_Hash[2]   = 0x98BADCFE;
+++    context->Intermediate_Hash[3]   = 0x10325476;
+++    context->Intermediate_Hash[4]   = 0xC3D2E1F0;
+++
+++    context->Computed   = 0;
+++    context->Corrupted  = 0;
+++    return shaSuccess;
+++}
+++
+++/*
+++ *  SHA1Result
+++ *
+++ *  Description:
+++ *      This function will return the 160-bit message digest into the
+++ *      Message_Digest array  provided by the caller.
+++ *      NOTE: The first octet of hash is stored in the 0th element,
+++ *            the last octet of hash in the 19th element.
+++ *
+++ *  Parameters:
+++ *      context: [in/out]
+++ *          The context to use to calculate the SHA-1 hash.
+++ *      Message_Digest: [out]
+++ *          Where the digest is returned.
+++ *
+++ *  Returns:
+++ *      sha Error Code.
+++ *
+++ */
+++int SHA1Result( SHA1Context *context,
+++                uint8_t Message_Digest[SHA1HashSize])
+++{
+++    int i;
+++
+++    if (!context || !Message_Digest)
+++    {
+++        return shaNull;
+++    }
+++
+++    if (context->Corrupted)
+++    {
+++        return context->Corrupted;
+++    }
+++
+++    if (!context->Computed)
+++    {
+++        SHA1PadMessage(context);
+++        for(i=0; i<64; ++i)
+++        {
+++            /* message may be sensitive, clear it out */
+++            context->Message_Block[i] = 0;
+++        }
+++        context->Length_Low = 0;    /* and clear length */
+++        context->Length_High = 0;
+++        context->Computed = 1;
+++    }
+++
+++    for(i = 0; i < SHA1HashSize; ++i)
+++    {
+++        Message_Digest[i] = context->Intermediate_Hash[i>>2]
+++                            >> 8 * ( 3 - ( i & 0x03 ) );
+++    }
+++
+++    return shaSuccess;
+++}
+++
+++/*
+++ *  SHA1Input
+++ *
+++ *  Description:
+++ *      This function accepts an array of octets as the next portion
+++ *      of the message.
+++ *
+++ *  Parameters:
+++ *      context: [in/out]
+++ *          The SHA context to update
+++ *      message_array: [in]
+++ *          An array of characters representing the next portion of
+++ *          the message.
+++ *      length: [in]
+++ *          The length of the message in message_array
+++ *
+++ *  Returns:
+++ *      sha Error Code.
+++ *
+++ */
+++int SHA1Input(    SHA1Context    *context,
+++                  const uint8_t  *message_array,
+++                  unsigned       length)
+++{
+++    if (!length)
+++    {
+++        return shaSuccess;
+++    }
+++
+++    if (!context || !message_array)
+++    {
+++        return shaNull;
+++    }
+++
+++    if (context->Computed)
+++    {
+++        context->Corrupted = shaStateError;
+++        return shaStateError;
+++    }
+++
+++    if (context->Corrupted)
+++    {
+++         return context->Corrupted;
+++    }
+++    while(length-- && !context->Corrupted)
+++    {
+++    context->Message_Block[context->Message_Block_Index++] =
+++                    (*message_array & 0xFF);
+++
+++    context->Length_Low += 8;
+++    if (context->Length_Low == 0)
+++    {
+++        context->Length_High++;
+++        if (context->Length_High == 0)
+++        {
+++            /* Message is too long */
+++            context->Corrupted = 1;
+++        }
+++    }
+++
+++    if (context->Message_Block_Index == 64)
+++    {
+++        SHA1ProcessMessageBlock(context);
+++    }
+++
+++    message_array++;
+++    }
+++
+++    return shaSuccess;
+++}
+++
+++/*
+++ *  SHA1ProcessMessageBlock
+++ *
+++ *  Description:
+++ *      This function will process the next 512 bits of the message
+++ *      stored in the Message_Block array.
+++ *
+++ *  Parameters:
+++ *      None.
+++ *
+++ *  Returns:
+++ *      Nothing.
+++ *
+++ *  Comments:
+++ *      Many of the variable names in this code, especially the
+++ *      single character names, were used because those were the
+++ *      names used in the publication.
+++ *
+++ *
+++ */
+++void SHA1ProcessMessageBlock(SHA1Context *context)
+++{
+++    const uint32_t K[] =    {       /* Constants defined in SHA-1   */
+++                            0x5A827999,
+++                            0x6ED9EBA1,
+++                            0x8F1BBCDC,
+++                            0xCA62C1D6
+++                            };
+++    int           t;                 /* Loop counter                */
+++    uint32_t      temp;              /* Temporary word value        */
+++    uint32_t      W[80];             /* Word sequence               */
+++    uint32_t      A, B, C, D, E;     /* Word buffers                */
+++
+++    /*
+++     *  Initialize the first 16 words in the array W
+++     */
+++    for(t = 0; t < 16; t++)
+++    {
+++        W[t] = context->Message_Block[t * 4] << 24;
+++        W[t] |= context->Message_Block[t * 4 + 1] << 16;
+++        W[t] |= context->Message_Block[t * 4 + 2] << 8;
+++        W[t] |= context->Message_Block[t * 4 + 3];
+++    }
+++
+++    for(t = 16; t < 80; t++)
+++    {
+++       W[t] = SHA1CircularShift(1,W[t-3] ^ W[t-8] ^ W[t-14] ^ W[t-16]);
+++    }
+++
+++    A = context->Intermediate_Hash[0];
+++    B = context->Intermediate_Hash[1];
+++    C = context->Intermediate_Hash[2];
+++    D = context->Intermediate_Hash[3];
+++    E = context->Intermediate_Hash[4];
+++
+++    for(t = 0; t < 20; t++)
+++    {
+++        temp =  SHA1CircularShift(5,A) +
+++                ((B & C) | ((~B) & D)) + E + W[t] + K[0];
+++        E = D;
+++        D = C;
+++        C = SHA1CircularShift(30,B);
+++        B = A;
+++        A = temp;
+++    }
+++
+++    for(t = 20; t < 40; t++)
+++    {
+++        temp = SHA1CircularShift(5,A) + (B ^ C ^ D) + E + W[t] + K[1];
+++        E = D;
+++        D = C;
+++        C = SHA1CircularShift(30,B);
+++        B = A;
+++        A = temp;
+++    }
+++
+++    for(t = 40; t < 60; t++)
+++    {
+++        temp = SHA1CircularShift(5,A) +
+++               ((B & C) | (B & D) | (C & D)) + E + W[t] + K[2];
+++        E = D;
+++        D = C;
+++        C = SHA1CircularShift(30,B);
+++        B = A;
+++        A = temp;
+++    }
+++
+++    for(t = 60; t < 80; t++)
+++    {
+++        temp = SHA1CircularShift(5,A) + (B ^ C ^ D) + E + W[t] + K[3];
+++        E = D;
+++        D = C;
+++        C = SHA1CircularShift(30,B);
+++        B = A;
+++        A = temp;
+++    }
+++
+++    context->Intermediate_Hash[0] += A;
+++    context->Intermediate_Hash[1] += B;
+++    context->Intermediate_Hash[2] += C;
+++    context->Intermediate_Hash[3] += D;
+++    context->Intermediate_Hash[4] += E;
+++
+++    context->Message_Block_Index = 0;
+++}
+++
+++
+++/*
+++ *  SHA1PadMessage
+++ *
+++ *  Description:
+++ *      According to the standard, the message must be padded to an even
+++ *      512 bits.  The first padding bit must be a '1'.  The last 64
+++ *      bits represent the length of the original message.  All bits in
+++ *      between should be 0.  This function will pad the message
+++ *      according to those rules by filling the Message_Block array
+++ *      accordingly.  It will also call the ProcessMessageBlock function
+++ *      provided appropriately.  When it returns, it can be assumed that
+++ *      the message digest has been computed.
+++ *
+++ *  Parameters:
+++ *      context: [in/out]
+++ *          The context to pad
+++ *      ProcessMessageBlock: [in]
+++ *          The appropriate SHA*ProcessMessageBlock function
+++ *  Returns:
+++ *      Nothing.
+++ *
+++ */
+++
+++void SHA1PadMessage(SHA1Context *context)
+++{
+++    /*
+++     *  Check to see if the current message block is too small to hold
+++     *  the initial padding bits and length.  If so, we will pad the
+++     *  block, process it, and then continue padding into a second
+++     *  block.
+++     */
+++    if (context->Message_Block_Index > 55)
+++    {
+++        context->Message_Block[context->Message_Block_Index++] = 0x80;
+++        while(context->Message_Block_Index < 64)
+++        {
+++            context->Message_Block[context->Message_Block_Index++] = 0;
+++        }
+++
+++        SHA1ProcessMessageBlock(context);
+++
+++        while(context->Message_Block_Index < 56)
+++        {
+++            context->Message_Block[context->Message_Block_Index++] = 0;
+++        }
+++    }
+++    else
+++    {
+++        context->Message_Block[context->Message_Block_Index++] = 0x80;
+++        while(context->Message_Block_Index < 56)
+++        {
+++            context->Message_Block[context->Message_Block_Index++] = 0;
+++        }
+++    }
+++
+++    /*
+++     *  Store the message length as the last 8 octets
+++     */
+++    context->Message_Block[56] = context->Length_High >> 24;
+++    context->Message_Block[57] = context->Length_High >> 16;
+++    context->Message_Block[58] = context->Length_High >> 8;
+++    context->Message_Block[59] = context->Length_High;
+++    context->Message_Block[60] = context->Length_Low >> 24;
+++    context->Message_Block[61] = context->Length_Low >> 16;
+++    context->Message_Block[62] = context->Length_Low >> 8;
+++    context->Message_Block[63] = context->Length_Low;
+++
+++    SHA1ProcessMessageBlock(context);
+++}
++diff --git a/common/sha1.h b/common/sha1.h
++new file mode 100644
++index 0000000..1d49b1b
++--- /dev/null
+++++ b/common/sha1.h
++@@ -0,0 +1,101 @@
+++/*
+++ * Copyright (C) The Internet Society (2001).  All Rights Reserved.
+++ *
+++ * This document and translations of it may be copied and furnished to
+++ * others, and derivative works that comment on or otherwise explain it
+++ * or assist in its implementation may be prepared, copied, published
+++ * and distributed, in whole or in part, without restriction of any
+++ * kind, provided that the above copyright notice and this paragraph are
+++ * included on all such copies and derivative works.  However, this
+++ * document itself may not be modified in any way, such as by removing
+++ * the copyright notice or references to the Internet Society or other
+++ * Internet organizations, except as needed for the purpose of
+++ * developing Internet standards in which case the procedures for
+++ * copyrights defined in the Internet Standards process must be
+++ * followed, or as required to translate it into languages other than
+++ * English.
+++ *
+++ * The limited permissions granted above are perpetual and will not be
+++ * revoked by the Internet Society or its successors or assigns.
+++ *
+++ * This document and the information contained herein is provided on an
+++ * "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+++ * TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+++ * BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+++ * HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+++ * MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+++ */
+++
+++/*
+++ *  sha1.h
+++ *
+++ *  Description:
+++ *      This is the header file for code which implements the Secure
+++ *      Hashing Algorithm 1 as defined in FIPS PUB 180-1 published
+++ *      April 17, 1995.
+++ *
+++ *      Many of the variable names in this code, especially the
+++ *      single character names, were used because those were the names
+++ *      used in the publication.
+++ *
+++ *      Please read the file sha1.c for more information.
+++ *
+++ */
+++
+++
+++#ifndef _SHA1_H_
+++#define _SHA1_H_
+++
+++#include <stdint.h>
+++/*
+++ * If you do not have the ISO standard stdint.h header file, then you
+++ * must typdef the following:
+++ *    name              meaning
+++ *  uint32_t         unsigned 32 bit integer
+++ *  uint8_t          unsigned 8 bit integer (i.e., unsigned char)
+++ *  int_least16_t    integer of >= 16 bits
+++ *
+++ */
+++
+++#ifndef _SHA_enum_
+++#define _SHA_enum_
+++enum
+++{
+++    shaSuccess = 0,
+++    shaNull,            /* Null pointer parameter */
+++    shaInputTooLong,    /* input data too long */
+++    shaStateError       /* called Input after Result */
+++};
+++#endif
+++#define SHA1HashSize 20
+++
+++/*
+++ *  This structure will hold context information for the SHA-1
+++ *  hashing operation
+++ */
+++typedef struct SHA1Context
+++{
+++    uint32_t Intermediate_Hash[SHA1HashSize/4]; /* Message Digest  */
+++
+++    uint32_t Length_Low;            /* Message length in bits      */
+++    uint32_t Length_High;           /* Message length in bits      */
+++
+++                               /* Index into message block array   */
+++    int_least16_t Message_Block_Index;
+++    uint8_t Message_Block[64];      /* 512-bit message blocks      */
+++
+++    int Computed;               /* Is the digest computed?         */
+++    int Corrupted;             /* Is the message digest corrupted? */
+++} SHA1Context;
+++
+++/*
+++ *  Function Prototypes
+++ */
+++int SHA1Reset(  SHA1Context *);
+++int SHA1Input(  SHA1Context *,
+++                const uint8_t *,
+++                unsigned int);
+++int SHA1Result( SHA1Context *,
+++                uint8_t Message_Digest[SHA1HashSize]);
+++
+++#endif
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
+new file mode 100644
+index 0000000..4eea6ff
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
+@@ -0,0 +1,24 @@
++DESCRIPTION = "library for easy implementation of a RDP/VNC server"
++HOMEPAGE = "https://libvnc.github.io"
++SECTION = "libs"
++PRIORITY = "optional"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
 +
- EXTRA_OECONF += " \
-   --with-dbus-service-user=root \
-   --with-dbus-sys-dir=${sysconfdir}/dbus-1/system.d \
++DEPENDS += "zlib libsdl jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
++RDEPENDS_${PN} += "libpng gtk+ libgcrypt"
++
++inherit autotools binconfig pkgconfig
++
++SRC_URI  = "\
++	 ${DEBIAN_MIRROR}/main/libv/libvncserver/libvncserver_0.9.10+dfsg.orig.tar.xz \
++	 file://0001-remove-webclients-build.patch \
++	 file://0002-common-add-sha1.patch \
++"
++
++SRC_URI[md5sum] = "e883b6c7bd339a5e1c48645051abe5c4"
++SRC_URI[sha256sum] = "583f28869b82aec57768d7d18cd7ff81bf092ecbbc1209b587c2c2cd68330250"
++
++S = "${WORKDIR}/${PN}-LibVNCServer-${PV}"
++
++TARGET_LDFLAGS += "-lgcrypt"
 -- 
-2.6.1
+2.1.4
 
 
