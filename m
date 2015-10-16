@@ -1,25 +1,35 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 0DCB27711D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 06D2F7711D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 13:39:59 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga103.fm.intel.com with ESMTP; 16 Oct 2015 06:40:01 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,689,1437462000"; d="scan'208";a="812595668"
-Received: from unknown (HELO peggleto-mobl.ger.corp.intel.com) ([10.252.9.47])
-	by fmsmga001.fm.intel.com with ESMTP; 16 Oct 2015 06:39:58 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Maxin B. John" <maxin.john@intel.com>
-Date: Fri, 16 Oct 2015 14:39:57 +0100
-Message-ID: <5581570.JWFFzRXSqs@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.9 (Linux/4.1.8-100.fc21.x86_64; KDE/4.14.9; x86_64; ; )
-In-Reply-To: <20151016041618.GA16359@mbabyjoh-mobl.fi.intel.com>
-References: <20151016041618.GA16359@mbabyjoh-mobl.fi.intel.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java] update email address
+	Fri, 16 Oct 2015 13:58:05 +0000 (UTC)
+Received: by wicll6 with SMTP id ll6so12363779wic.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Oct 2015 06:58:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=rMN12a+awu/xWlJFDD+aFHnSf2RqFIatPy0n86Su60k=;
+	b=RLhEIQ6y+e/sVKD2Ctx8anmb/5eXF2DWWoGEH8XpI7bdBhPM9LdA4omGoIWb0B8/Be
+	MGx1xmzEQLX110o/pTzewE8byVG6oafhYUsZ0fqFRsMEJcza1RdqnvEP+dwI8eKyX7Vf
+	RZ44KGNBxFInbF+8b1MrgqBqTml9acL6L5QAHj6pLt/zfq0hZJM+o7NAGDjE0SMSt+Dm
+	oiguVBTKlKrm7/MR0M5umgpqxBtrj+bjQ6tAdFj7+FrlZmbEtnfuL6pxNvikFhS9kqtq
+	yGX2BsCeqizFxvEKJdCxGiKglJ8OrjpPw/yjJ6sZprr2E6WLVf1Juxwi7SRYvhWDAbBB
+	44hg==
+X-Received: by 10.180.11.212 with SMTP id s20mr5003750wib.40.1445003884967;
+	Fri, 16 Oct 2015 06:58:04 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	iw8sm22683358wjb.5.2015.10.16.06.58.03
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 16 Oct 2015 06:58:03 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 16 Oct 2015 15:58:27 +0200
+Message-Id: <1445003910-6444-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.6.1
+Subject: [PATCH][meta-oe][dizzy 1/4] oscam: respect *flags set from OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,40 +43,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2015 13:40:02 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 16 Oct 2015 13:58:08 -0000
 
-Hi Maxin,
+* build with -mfloat-abi=hard are failing with:
+  sysroots/foo/usr/include/gnu/stubs.h:7:29: fatal error: gnu/stubs-soft.h: No such file or directory
+  because cmake wasn't respecting *flags set from OE
 
-On Friday 16 October 2015 07:16:18 Maxin B. John wrote:
->  Hi,
-> 
->  Updated my email address in README:
-> 
->  README: update contact info
->  Signed-off-by: Maxin B. John <maxin.john@intel.com>
-> 
->   diff --git a/README b/README
->   index 7a48f14..f031021 100644
->   --- a/README
->   +++ b/README
->   @@ -46,7 +46,7 @@ Main layer maintainers:
-> 
->      Henning Heinold <henning@itconsulting-heinold.de>
->      Mario Domenech Goulart <mario@ossystems.com.br>
->   -  Maxin John <maxin.john@enea.com>
->   +  Maxin John <maxin.john@intel.com>
->      Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-dvb/oscam/oscam/respect-cflags.patch   | 38 ++++++++++++++++++++++
+ meta-multimedia/recipes-dvb/oscam/oscam_svn.bb     |  4 ++-
+ 2 files changed, 41 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-dvb/oscam/oscam/respect-cflags.patch
 
-I've taken the liberty of updating the layer index entry for meta-java as 
-well. (Something that really ought to be easier than it is...)
-
-Cheers,
-Paul
-
+diff --git a/meta-multimedia/recipes-dvb/oscam/oscam/respect-cflags.patch b/meta-multimedia/recipes-dvb/oscam/oscam/respect-cflags.patch
+new file mode 100644
+index 0000000..179d04a
+--- /dev/null
++++ b/meta-multimedia/recipes-dvb/oscam/oscam/respect-cflags.patch
+@@ -0,0 +1,38 @@
++Upstream-Status: Backport
++http://www.streamboard.tv/oscam/changeset/10068
++http://www.streamboard.tv/oscam/changeset/10070
++
++Index: /CMakeLists.txt
++===================================================================
++--- a/CMakeLists.txt	(revision 10067)
+++++ b/CMakeLists.txt	(revision 10068)
++@@ -625,8 +625,8 @@
++     list(GET GCC_VERSION_COMPONENTS 0 GCC_MINOR)
++     add_definitions ("-W -Wall ")
++-    set (CMAKE_C_FLAGS "-Wall -O2")
++-	set (CMAKE_CXX_FLAGS "-Wall -O2")
++-    set (CMAKE_C_FLAGS_DEBUG "-O0 -ggdb")
++-    set (CMAKE_CXX_FLAGS_DEBUG "-O0 -ggdb")
+++    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O2")
+++	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2")
+++    set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -ggdb")
+++    set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -ggdb")
++ endif (CMAKE_COMPILER_IS_GNUCC)
++ # some optimisations
++Index: /csctapi/CMakeLists.txt
++===================================================================
++--- a/csctapi/CMakeLists.txt	(revision 10069)
+++++ b/csctapi/CMakeLists.txt	(revision 10070)
++@@ -6,8 +6,8 @@
++     list(GET GCC_VERSION_COMPONENTS 0 GCC_MINOR)
++     add_definitions ("-W -Wall ")
++-    set (CMAKE_C_FLAGS "-Wall -O2")
++-	set (CMAKE_CXX_FLAGS "-Wall -O2")
++-    set (CMAKE_C_FLAGS_DEBUG "-O0 -ggdb")
++-    set (CMAKE_CXX_FLAGS_DEBUG "-O0 -ggdb")
+++    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O2")
+++	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2")
+++    set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -ggdb")
+++    set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -ggdb")
++ endif (CMAKE_COMPILER_IS_GNUCC)
++ # Mac extra removes to avoid ranlib warnings in some situations
+diff --git a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
+index c4a4d99..cac517f 100644
+--- a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
++++ b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
+@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ DEPENDS = "libusb1 openssl pcsc-lite"
+ 
+-SRC_URI = "svn://www.streamboard.tv/svn/oscam;module=trunk;protocol=http"
++SRC_URI = "svn://www.streamboard.tv/svn/oscam;module=trunk;protocol=http \
++    file://respect-cflags.patch \
++"
+ SRCREV = "9164"
+ PV = "1.10+${SRCPV}"
+ 
 -- 
+2.6.1
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
