@@ -1,50 +1,40 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
-	[209.85.223.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A1ED770E7
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 9B235770E7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 13:35:56 +0000 (UTC)
-Received: by iofl186 with SMTP id l186so124054037iof.2
+	Fri, 16 Oct 2015 13:37:07 +0000 (UTC)
+Received: by wijp11 with SMTP id p11so10888953wij.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 06:35:57 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:content-type;
-	bh=/kiRX+81w0LaYfWzj+vPHrBohWD6H+BWaXMaByPPS/s=;
-	b=b//2gpplNUC1lHPlPU4N+yMfgwzQQSirkgr5XohRPmSUGT8nKXCed4NtxxPT5FzTDW
-	dsSHXE2JY0FflGO3GXHSc95ENYq1H9x5EC5QklVrD3bn8HVD9qC7z/poQgDJe4excSuu
-	3nOCQL8YcY+Lo/RCvd5laM/2fTqbd+9aklDi4nmg09SfsdhRKXwcJOIKKks2ebbhISVi
-	w+1/fyZ+4riFxwY7L2THasUGrR9hAPLpDOdo+oF2fImJkktSJ0xpp3fQM1tiFFqM85KX
-	Kboqx6Cbhx4jyp9rD8jts3kPewlloY+pYxSSfPQAXlo1DYyJ0AAx6ZfPrM3LnVKADDMT
-	k2TQ==
-X-Gm-Message-State: ALoCoQkmytHODGk8v8IU4SdGc2EFXSH24l93Z/Hvx3Llcl9+1QBvcztDIhQiFpaK2SxjSuurHzlF
-X-Received: by 10.107.132.23 with SMTP id g23mr10935558iod.175.1445002557077; 
-	Fri, 16 Oct 2015 06:35:57 -0700 (PDT)
-Received: from mail-io0-f177.google.com (mail-io0-f177.google.com.
-	[209.85.223.177])
-	by smtp.gmail.com with ESMTPSA id l80sm66138iod.34.2015.10.16.06.35.55
+	Fri, 16 Oct 2015 06:37:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=j1IJptc4IDX0XHfh+gu7tLFLrjSkhjQiVYEzFFVrmiY=;
+	b=wR9g3Plhz5Zm2yzcyQr6bjIZarjvi3XgPWyyJnfEAo/RzXRvi5JPr9C1ZU2XB4Yagi
+	VWdU96RplRVjsYSojQn2cyPChnaW95h3DkflcXVjV8X5tkipBzXAt7br4BFe/Mb3mRuP
+	BJn4qvjwCBSwuYx+A4uLYxlGmJhd51ZS1euMwngaOKakkTSe+QFDIlJHmt0X/zBP0ldT
+	8Eb43MH9SFpLNIAnlp+WzN3UsOj61xHV0g52GcwK0n2TaOOB/r+/gJdFM3LbL8J7oBn/
+	A67rifinooIbvOnO55+BJPlV/zRIW5yzan1yC01w3ggOY6olvPpnZyJYF4/qdiAPnM6G
+	d3Jw==
+X-Received: by 10.194.114.104 with SMTP id jf8mr18726688wjb.155.1445002627437; 
+	Fri, 16 Oct 2015 06:37:07 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	xt1sm22590792wjb.32.2015.10.16.06.37.06
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 16 Oct 2015 06:35:55 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by iodv82 with SMTP id v82so123751179iod.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 06:35:55 -0700 (PDT)
+	Fri, 16 Oct 2015 06:37:06 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 16 Oct 2015 15:37:34 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151016133734.GA2544@jama>
+References: <1444990953-4567-1-git-send-email-folkus@gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.107.131.147 with SMTP id n19mr16840896ioi.192.1445002555395; 
-	Fri, 16 Oct 2015 06:35:55 -0700 (PDT)
-Received: by 10.36.218.7 with HTTP; Fri, 16 Oct 2015 06:35:55 -0700 (PDT)
-In-Reply-To: <CAJ86T=XBmcnBq5WMP=np08K8nJ4_6MycvfiUZL3Hcu_Pj2DkLg@mail.gmail.com>
-References: <1444903231-16227-1-git-send-email-samuli.piippo@theqtcompany.com>
-	<20151015114726.GC2588@jama>
-	<CAP9ODKo=UmqZCd2CuwgbrKr3DrvxvqPS1Bi+3-YUiVzF3qutGg@mail.gmail.com>
-	<CAJ86T=XBmcnBq5WMP=np08K8nJ4_6MycvfiUZL3Hcu_Pj2DkLg@mail.gmail.com>
-Date: Fri, 16 Oct 2015 10:35:55 -0300
-Message-ID: <CAP9ODKo0fU2kQZid_Jdq+k9YiEG1t7RevATxKAHWMR5K9UCPGg@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qt5: use extra .pri file from linux-oe-g++ mkspec
+In-Reply-To: <1444990953-4567-1-git-send-email-folkus@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-qt5][PATCH] There is missing line, which is setting the OE_BLUEZ_ENABLED. It was broken when merging .inc with _git.bb files. Without this missing line libQt5Bluetooth isn't working with bluez!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,46 +48,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2015 13:35:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 16 Oct 2015 13:37:11 -0000
+X-Groupsio-MsgNum: 57870
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="VS++wcV0S1rZb1Fb"
+Content-Disposition: inline
 
-On Thu, Oct 15, 2015 at 11:52 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
-> On Thu, Oct 15, 2015 at 6:38 AM, Otavio Salvador
-> <otavio.salvador@ossystems.com.br> wrote:
->> On Thu, Oct 15, 2015 at 8:47 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->>> On Thu, Oct 15, 2015 at 01:00:31PM +0300, Samuli Piippo wrote:
->>>> Load additional oe-device-extra.pri in the default linux-oe-g++ mkspec to
->>>> allow simple changing of target dependent values. This is useful for any
->>>> target that needs to specify e.g., QMAKE_LIBS_EGL or other additional configs.
->>>
->>> Looks good, but people using this need to be aware that it will cause
->>> qtbase and everything depending on it MACHINE_ARCH which is very
->>> unfortunate considering the time needed to build things like
->>> qtwebengine/qtwebkit.
->>
->> However I don't see how any BSP needing to pass extra libraries or
->> flags would not be machine specific.
->
-> Multiple machines based on the same SoC (or SoC family) can often
-> share the same graphics libraries.
->
->> One way to avoid this would be to split out the QPA backend for those
->> to another recipe and this to become machine specific and include the
->> .pri file.
->
-> Alternatively create "egl.pc" and "glesv2.pc" pkg-config files for the
-> graphics libs. The qtbase build can then set QMAKE_LIBS_EGL etc
-> automatically without needing changes to the default linux-oe-g++
-> mkspec.
->
-> e.g. something like:
->
->   https://github.com/heiher/raspberrypi-firmware-pkgconfig/tree/master/pkgconfig
+--VS++wcV0S1rZb1Fb
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-We do similar for i.MX and we made a sub-arch to allow sharing the binaries.
+On Fri, Oct 16, 2015 at 12:22:33PM +0200, S=C5=82awomir Paszko wrote:
+> From: folkien <folkus@gmail.com>
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Add commit summary (separated with blank line from what you currently
+have in commit message) and use full name in your git configuration.
 
+> ---
+>  recipes-qt/qt5/qtconnectivity_git.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconn=
+ectivity_git.bb
+> index c758d04..2915327 100644
+> --- a/recipes-qt/qt5/qtconnectivity_git.bb
+> +++ b/recipes-qt/qt5/qtconnectivity_git.bb
+> @@ -22,3 +22,4 @@ do_configure_prepend() {
+>  }
+> =20
+>  SRCREV =3D "aa00047183008edd739df472cf0490e9fffbe655"
+> +EXTRA_QMAKEVARS_PRE +=3D "${@base_contains('PACKAGECONFIG', 'bluez4', 'C=
+ONFIG+=3DOE_BLUEZ_ENABLED', '', d)}"
+> --=20
+> 2.6.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--VS++wcV0S1rZb1Fb
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlYg/ZoACgkQN1Ujt2V2gBwIdQCfZQVaTiaEVG2Ppr7FxMnmmtrc
+hesAn0DZCqjxAM8eU4BN9Ul09zPKcDUg
+=ETCw
+-----END PGP SIGNATURE-----
+
+--VS++wcV0S1rZb1Fb--
