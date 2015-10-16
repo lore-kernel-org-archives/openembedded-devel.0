@@ -1,35 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 06D2F7711D
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id B271E7714C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 13:58:05 +0000 (UTC)
-Received: by wicll6 with SMTP id ll6so12363779wic.1
+	Fri, 16 Oct 2015 13:58:06 +0000 (UTC)
+Received: by wijp11 with SMTP id p11so11818725wij.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 06:58:05 -0700 (PDT)
+	Fri, 16 Oct 2015 06:58:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=rMN12a+awu/xWlJFDD+aFHnSf2RqFIatPy0n86Su60k=;
-	b=RLhEIQ6y+e/sVKD2Ctx8anmb/5eXF2DWWoGEH8XpI7bdBhPM9LdA4omGoIWb0B8/Be
-	MGx1xmzEQLX110o/pTzewE8byVG6oafhYUsZ0fqFRsMEJcza1RdqnvEP+dwI8eKyX7Vf
-	RZ44KGNBxFInbF+8b1MrgqBqTml9acL6L5QAHj6pLt/zfq0hZJM+o7NAGDjE0SMSt+Dm
-	oiguVBTKlKrm7/MR0M5umgpqxBtrj+bjQ6tAdFj7+FrlZmbEtnfuL6pxNvikFhS9kqtq
-	yGX2BsCeqizFxvEKJdCxGiKglJ8OrjpPw/yjJ6sZprr2E6WLVf1Juxwi7SRYvhWDAbBB
-	44hg==
-X-Received: by 10.180.11.212 with SMTP id s20mr5003750wib.40.1445003884967;
-	Fri, 16 Oct 2015 06:58:04 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=auDtU2yt4I4YtQnfVDi5rxxTG2z+YeSDpV5MU4/klUc=;
+	b=JOPiS2ILg5e+0ejDW6B4n9T54wJWNGExh6VYZJgBpAjJ7srcUBHsG0oq0Z+AZDQtxe
+	kurS3DAUCb9KgB+TbVLZXH2uPruVjQj9IBT5EFiliveneBsPVDBdnT/+nlTaFqHLQbua
+	j67h+sFHpnMUDE5ZUoi6RFYrgK7RspQcBmUoUrXByZBhaO5T2KEB+CGB6DzzjP770epC
+	PCsYoRVabXyvz7BBOxvODtOOe1qdlviU3izfprK3y7WZnbKkFyIMf6chg5o6WSAPhNKu
+	ZgWSFhTAlUxzGyCZ6l+5u3N0vTsOscfUKuAJAUQw+FQQIe/z95eTMzuDsuxE967pEAXl
+	QxvQ==
+X-Received: by 10.180.88.164 with SMTP id bh4mr4984552wib.18.1445003886414;
+	Fri, 16 Oct 2015 06:58:06 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	iw8sm22683358wjb.5.2015.10.16.06.58.03
+	by smtp.gmail.com with ESMTPSA id x16sm3355562wia.7.2015.10.16.06.58.05
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 16 Oct 2015 06:58:03 -0700 (PDT)
+	Fri, 16 Oct 2015 06:58:05 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Oct 2015 15:58:27 +0200
-Message-Id: <1445003910-6444-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Fri, 16 Oct 2015 15:58:28 +0200
+Message-Id: <1445003910-6444-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.6.1
-Subject: [PATCH][meta-oe][dizzy 1/4] oscam: respect *flags set from OE
+In-Reply-To: <1445003910-6444-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1445003910-6444-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [PATCH][meta-oe][dizzy 2/4] gupnp-igd: fix missing dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,78 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2015 13:58:08 -0000
+X-List-Received-Date: Fri, 16 Oct 2015 13:58:09 -0000
 
-* build with -mfloat-abi=hard are failing with:
-  sysroots/foo/usr/include/gnu/stubs.h:7:29: fatal error: gnu/stubs-soft.h: No such file or directory
-  because cmake wasn't respecting *flags set from OE
+* add gobject-introspection-stub-native to fix:
+  | doc/Makefile.am:70: warning: 'INCLUDES' is the old name for 'AM_CPPFLAGS' (or '*_CPPFLAGS')
+  | libgupnp-igd/Makefile.am:65: error: HAVE_INTROSPECTION does not appear in AM_CONDITIONAL
+* add sqlite3 to fix:
+  WARNING: QA Issue: gupnp-igd rdepends on libsqlite3, but it isn't a build dependency? [build-deps]
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-dvb/oscam/oscam/respect-cflags.patch   | 38 ++++++++++++++++++++++
- meta-multimedia/recipes-dvb/oscam/oscam_svn.bb     |  4 ++-
- 2 files changed, 41 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-dvb/oscam/oscam/respect-cflags.patch
+ meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_0.2.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-dvb/oscam/oscam/respect-cflags.patch b/meta-multimedia/recipes-dvb/oscam/oscam/respect-cflags.patch
-new file mode 100644
-index 0000000..179d04a
---- /dev/null
-+++ b/meta-multimedia/recipes-dvb/oscam/oscam/respect-cflags.patch
-@@ -0,0 +1,38 @@
-+Upstream-Status: Backport
-+http://www.streamboard.tv/oscam/changeset/10068
-+http://www.streamboard.tv/oscam/changeset/10070
-+
-+Index: /CMakeLists.txt
-+===================================================================
-+--- a/CMakeLists.txt	(revision 10067)
-++++ b/CMakeLists.txt	(revision 10068)
-+@@ -625,8 +625,8 @@
-+     list(GET GCC_VERSION_COMPONENTS 0 GCC_MINOR)
-+     add_definitions ("-W -Wall ")
-+-    set (CMAKE_C_FLAGS "-Wall -O2")
-+-	set (CMAKE_CXX_FLAGS "-Wall -O2")
-+-    set (CMAKE_C_FLAGS_DEBUG "-O0 -ggdb")
-+-    set (CMAKE_CXX_FLAGS_DEBUG "-O0 -ggdb")
-++    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O2")
-++	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2")
-++    set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -ggdb")
-++    set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -ggdb")
-+ endif (CMAKE_COMPILER_IS_GNUCC)
-+ # some optimisations
-+Index: /csctapi/CMakeLists.txt
-+===================================================================
-+--- a/csctapi/CMakeLists.txt	(revision 10069)
-++++ b/csctapi/CMakeLists.txt	(revision 10070)
-+@@ -6,8 +6,8 @@
-+     list(GET GCC_VERSION_COMPONENTS 0 GCC_MINOR)
-+     add_definitions ("-W -Wall ")
-+-    set (CMAKE_C_FLAGS "-Wall -O2")
-+-	set (CMAKE_CXX_FLAGS "-Wall -O2")
-+-    set (CMAKE_C_FLAGS_DEBUG "-O0 -ggdb")
-+-    set (CMAKE_CXX_FLAGS_DEBUG "-O0 -ggdb")
-++    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O2")
-++	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2")
-++    set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -ggdb")
-++    set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -ggdb")
-+ endif (CMAKE_COMPILER_IS_GNUCC)
-+ # Mac extra removes to avoid ranlib warnings in some situations
-diff --git a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
-index c4a4d99..cac517f 100644
---- a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
-+++ b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
-@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_0.2.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_0.2.2.bb
+index 112bc4b..667f7ef 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_0.2.2.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_0.2.2.bb
+@@ -3,7 +3,7 @@ LICENSE = "LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343 \
+                     file://libgupnp-igd/gupnp-simple-igd.c;beginline=1;endline=21;md5=aa292c0d9390463a6e1055dc5fc68e80"
  
- DEPENDS = "libusb1 openssl pcsc-lite"
+-DEPENDS = "glib-2.0 gupnp"
++DEPENDS = "glib-2.0 gupnp gobject-introspection-stub-native sqlite3"
  
--SRC_URI = "svn://www.streamboard.tv/svn/oscam;module=trunk;protocol=http"
-+SRC_URI = "svn://www.streamboard.tv/svn/oscam;module=trunk;protocol=http \
-+    file://respect-cflags.patch \
-+"
- SRCREV = "9164"
- PV = "1.10+${SRCPV}"
- 
+ SRC_URI = "http://download.gnome.org/sources/${BPN}/0.2/${BPN}-${PV}.tar.xz"
+ SRC_URI[md5sum] = "f881323304185c02634034e3bda714ba"
 -- 
 2.6.1
 
