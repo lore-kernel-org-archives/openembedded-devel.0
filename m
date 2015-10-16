@@ -1,21 +1,34 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id B41C276FD0
+Return-Path: <folkus@gmail.com>
+Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
+	[209.85.217.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 5EDFC770F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 09:02:37 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga103.fm.intel.com with ESMTP; 16 Oct 2015 02:02:37 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.17,688,1437462000"; d="scan'208";a="582014915"
-Received: from mbabyjoh-mobl.fi.intel.com ([10.237.72.71])
-	by FMSMGA003.fm.intel.com with ESMTP; 16 Oct 2015 02:02:38 -0700
-Date: Fri, 16 Oct 2015 07:16:18 +0300
-From: "Maxin B. John" <maxin.john@intel.com>
+	Fri, 16 Oct 2015 10:23:22 +0000 (UTC)
+Received: by lbcao8 with SMTP id ao8so96778172lbc.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Oct 2015 03:23:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=Wz0eqPe+mO4warv7RNDeyXkcN6qR6Q5I06ZjlABdrBs=;
+	b=R8QZ/y/KNGGkofCpGlXwnVubNosHUmbOw9gGHDzuHzmrE1rlyr/Xt7Ya4cxWf7Fi81
+	H4MpLuOJb8cq4sP4xhQ4FFRUjfXF3Y5sdO0njp2fjmyKROrNJnFnN3UgrfSHGeZaF4rZ
+	w660ZWYVhD3IYu63I71TSNcnmFaeAdBhWVwlJyEJbih5rGbNkPgsMkqWMjaTB8SVtS/P
+	X3gKGZnlUq/mJKN4lL7geit3sbZoTvzVueKcogdZ+w/IxrPz0m0eZPMRdBITSvC8Qsh9
+	iOuVKbjggleX/maj3KNpUlpDNN6itfBj3gZDbfu6ZddyJchz3vMqMtiEI/9P/JGh9U3M
+	go0A==
+X-Received: by 10.112.36.229 with SMTP id t5mr7808225lbj.61.1444991001415;
+	Fri, 16 Oct 2015 03:23:21 -0700 (PDT)
+Received: from localhost.localdomain ([188.121.6.226])
+	by smtp.gmail.com with ESMTPSA id
+	e138sm2772003lfg.36.2015.10.16.03.23.19
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 16 Oct 2015 03:23:19 -0700 (PDT)
+From: =?UTF-8?q?S=C5=82awomir=20Paszko?= <folkus@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151016041618.GA16359@mbabyjoh-mobl.fi.intel.com>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: [meta-java] update email address
+Date: Fri, 16 Oct 2015 12:22:33 +0200
+Message-Id: <1444990953-4567-1-git-send-email-folkus@gmail.com>
+X-Mailer: git-send-email 2.6.1
+Subject: [meta-qt5][PATCH] There is missing line, which is setting the OE_BLUEZ_ENABLED. It was broken when merging .inc with _git.bb files. Without this missing line libQt5Bluetooth isn't working with bluez!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,30 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2015 09:02:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 16 Oct 2015 10:23:22 -0000
 
- Hi,
-  
- Updated my email address in README:
-     
- README: update contact info
- Signed-off-by: Maxin B. John <maxin.john@intel.com>
-        
-  diff --git a/README b/README
-  index 7a48f14..f031021 100644
-  --- a/README
-  +++ b/README
-  @@ -46,7 +46,7 @@ Main layer maintainers:
-               
-     Henning Heinold <henning@itconsulting-heinold.de>
-     Mario Domenech Goulart <mario@ossystems.com.br>
-  -  Maxin John <maxin.john@enea.com>
-  +  Maxin John <maxin.john@intel.com>
-     Otavio Salvador <otavio@ossystems.com.br>
-                              
-                   
-  Best Regards,
-  Maxin                                                                      
+From: folkien <folkus@gmail.com>
+
+---
+ recipes-qt/qt5/qtconnectivity_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconnectivity_git.bb
+index c758d04..2915327 100644
+--- a/recipes-qt/qt5/qtconnectivity_git.bb
++++ b/recipes-qt/qt5/qtconnectivity_git.bb
+@@ -22,3 +22,4 @@ do_configure_prepend() {
+ }
+ 
+ SRCREV = "aa00047183008edd739df472cf0490e9fffbe655"
++EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'bluez4', 'CONFIG+=OE_BLUEZ_ENABLED', '', d)}"
+-- 
+2.6.1
+
 
