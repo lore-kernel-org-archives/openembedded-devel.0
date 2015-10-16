@@ -1,23 +1,24 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D424A73232
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 5177C7710B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 07:17:43 +0000 (UTC)
+	Fri, 16 Oct 2015 07:26:52 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t9G7Hi3E010951
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 16 Oct 2015 00:17:44 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9G7QqNI001029
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Oct 2015 00:26:53 -0700 (PDT)
+Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Fri, 16 Oct 2015 00:17:43 -0700
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
-Date: Fri, 16 Oct 2015 15:05:32 +0800
-Message-ID: <1444979132-28084-1-git-send-email-Qi.Chen@windriver.com>
+	14.3.248.2; Fri, 16 Oct 2015 00:26:52 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 16 Oct 2015 15:27:09 +0800
+Message-ID: <1444980429-14546-1-git-send-email-jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] ntp: fix rpath QA issue
+Subject: [meta-xfce][PATCH v2] vim: do not autoenable the mouse
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,33 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2015 07:17:47 -0000
+X-List-Received-Date: Fri, 16 Oct 2015 07:26:53 -0000
 Content-Type: text/plain
 
-When ntp could be correctly built with openssh and libcrypto, we would meet
-the following QA issue.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-WARNING: QA Issue: package ntp contains bad RPATH ... [rpath]
+The mouse being autoenabled is just annoying in xfce4-terminal (mouse
+drag make vim go into visual mode and there is no right click menu),
+so remove the setting for xfce.
 
-Fix this problem by adding '--disable-rpath' to EXTRA_OECONF.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-networking/recipes-support/ntp/ntp_4.2.8p3.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-xfce/recipes-support/vim/vim_%.bbappend | 6 ++++++
+ 1 file changed, 6 insertions(+)
+ create mode 100644 meta-xfce/recipes-support/vim/vim_%.bbappend
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p3.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p3.bb
-index 71e0b19..7ce993f 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p3.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p3.bb
-@@ -35,6 +35,7 @@ EXTRA_OECONF += "--with-net-snmp-config=no \
-                  ac_cv_header_readline_history_h=no \
-                  --with-yielding_select=yes \
-                  --with-locfile=redhat \
-+                 --without-rpath \
-                  "
- CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
- 
+diff --git a/meta-xfce/recipes-support/vim/vim_%.bbappend b/meta-xfce/recipes-support/vim/vim_%.bbappend
+new file mode 100644
+index 0000000..25403e6
+--- /dev/null
++++ b/meta-xfce/recipes-support/vim/vim_%.bbappend
+@@ -0,0 +1,6 @@
++do_install_append() {
++	# The mouse being autoenabled is just annoying in xfce4-terminal (mouse
++	# drag make vim go into visual mode and there is no right click menu),
++	# delete the block.
++	sed -i '/the mouse works just fine/,+4d' ${D}/${datadir}/${BPN}/vimrc
++}
 -- 
 1.9.1
 
