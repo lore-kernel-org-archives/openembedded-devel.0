@@ -1,27 +1,33 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EAE5B77129
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A4D077120
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 05:02:52 +0000 (UTC)
+	Fri, 16 Oct 2015 06:16:17 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t9G52qrk025326
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9G6GHuu000226
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2015 22:02:52 -0700 (PDT)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Thu, 15 Oct 2015 22:02:52 -0700
-To: <openembedded-devel@lists.openembedded.org>
-References: <1444965782-22372-1-git-send-email-kai.kang@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <562084FA.3080905@windriver.com>
-Date: Fri, 16 Oct 2015 13:02:50 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+	Thu, 15 Oct 2015 23:16:18 -0700 (PDT)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.159]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0248.002;
+	Thu, 15 Oct 2015 23:16:17 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] polkit: fix an incomplete patch
+Thread-Index: AQHRBnMuVlT/At7LvUSrPeMvylDcC55tpxsg
+Date: Fri, 16 Oct 2015 06:16:16 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010BCF8412@ALA-MBA.corp.ad.wrs.com>
+References: <1444791091-27572-1-git-send-email-jackie.huang@windriver.com>
+	<20151014112609.GA22448@jama>
+In-Reply-To: <20151014112609.GA22448@jama>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.236]
 MIME-Version: 1.0
-In-Reply-To: <1444965782-22372-1-git-send-email-kai.kang@windriver.com>
-Subject: [meta-multimedia][PATCH] vorbis-tools: fix CVE-2015-6749
+Subject: Re: [meta-oe][PATCH] polkit: fix an incomplete patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,103 +41,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2015 05:02:55 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-
-On 2015年10月16日 11:23, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Backport patch to fix CVE-2015-6749 from:
->
-> https://trac.xiph.org/ticket/2212
-
-Forgot layer info. Add it to title.
-
---Kai
-
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->   ...oggenc-Fix-large-alloca-on-bad-AIFF-input.patch | 49 ++++++++++++++++++++++
->   .../vorbis-tools/vorbis-tools_1.4.0.bb             |  4 +-
->   2 files changed, 52 insertions(+), 1 deletion(-)
->   create mode 100644 meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/0001-oggenc-Fix-large-alloca-on-bad-AIFF-input.patch
->
-> diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/0001-oggenc-Fix-large-alloca-on-bad-AIFF-input.patch b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/0001-oggenc-Fix-large-alloca-on-bad-AIFF-input.patch
-> new file mode 100644
-> index 0000000..b623dbf
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/0001-oggenc-Fix-large-alloca-on-bad-AIFF-input.patch
-> @@ -0,0 +1,49 @@
-> +Upstream-Status: Backport
-> +
-> +Backport patch to fix CVE-2015-6749 from:
-> +
-> +https://trac.xiph.org/ticket/2212
-> +
-> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> +---
-> +From 04815d3e1bfae3a6cdfb2c25358a5a72b61299f7 Mon Sep 17 00:00:00 2001
-> +From: Mark Harris <mark.hsj@gmail.com>
-> +Date: Sun, 30 Aug 2015 05:54:46 -0700
-> +Subject: [PATCH] oggenc: Fix large alloca on bad AIFF input
-> +
-> +Fixes #2212
-> +---
-> + oggenc/audio.c | 10 +++++-----
-> + 1 file changed, 5 insertions(+), 5 deletions(-)
-> +
-> +diff --git a/oggenc/audio.c b/oggenc/audio.c
-> +index 477da8c..4921fb9 100644
-> +--- a/oggenc/audio.c
-> ++++ b/oggenc/audio.c
-> +@@ -245,8 +245,8 @@ static int aiff_permute_matrix[6][6] =
-> + int aiff_open(FILE *in, oe_enc_opt *opt, unsigned char *buf, int buflen)
-> + {
-> +     int aifc; /* AIFC or AIFF? */
-> +-    unsigned int len;
-> +-    unsigned char *buffer;
-> ++    unsigned int len, readlen;
-> ++    unsigned char buffer[22];
-> +     unsigned char buf2[8];
-> +     aiff_fmt format;
-> +     aifffile *aiff = malloc(sizeof(aifffile));
-> +@@ -269,9 +269,9 @@ int aiff_open(FILE *in, oe_enc_opt *opt, unsigned char *buf, int buflen)
-> +         return 0; /* Weird common chunk */
-> +     }
-> +
-> +-    buffer = alloca(len);
-> +-
-> +-    if(fread(buffer,1,len,in) < len)
-> ++    readlen = len < sizeof(buffer) ? len : sizeof(buffer);
-> ++    if(fread(buffer,1,readlen,in) < readlen ||
-> ++       (len > readlen && !seek_forward(in, len-readlen)))
-> +     {
-> +         fprintf(stderr, _("Warning: Unexpected EOF in reading AIFF header\n"));
-> +         return 0;
-> +--
-> +2.5.0
-> +
-> diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb
-> index a35dee6..2683555 100644
-> --- a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb
-> +++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb
-> @@ -10,7 +10,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
->   
->   DEPENDS = "libogg libvorbis curl libao"
->   
-> -SRC_URI = "http://downloads.xiph.org/releases/vorbis/${BP}.tar.gz"
-> +SRC_URI = "http://downloads.xiph.org/releases/vorbis/${BP}.tar.gz \
-> +           file://0001-oggenc-Fix-large-alloca-on-bad-AIFF-input.patch \
-> +          "
->   
->   SRC_URI[md5sum] = "567e0fb8d321b2cd7124f8208b8b90e6"
->   SRC_URI[sha256sum] = "a389395baa43f8e5a796c99daf62397e435a7e73531c9f44d9084055a05d22bc"
+X-List-Received-Date: Fri, 16 Oct 2015 06:16:18 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
 
--- 
-Regards,
-Neil | Kai Kang
 
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
+> Sent: Wednesday, October 14, 2015 7:26 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH] polkit: fix an incomplete patch
+>=20
+> On Wed, Oct 14, 2015 at 10:51:31AM +0800, jackie.huang@windriver.com wrot=
+e:
+> > From: Jackie Huang <jackie.huang@windriver.com>
+> >
+> > The patch 0001-do-not-hardcoded-libdir.patch to fix libprivdir is
+> > incomplete, it missed to fix the one in data/Makefile.am, and causes
+> > failure:
+> >
+> > systemd[676]: polkit.service: Failed at step EXEC spawning
+> > /usr/lib/polkit-1/polkitd: No such file or directory
+> >
+> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> > ---
+> >  .../polkit/0001-do-not-hardcoded-libdir.patch      | 31 ++++++++++++++=
+++------
+> >  1 file changed, 23 insertions(+), 8 deletions(-)
+>=20
+> error:
+> meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch=
+:
+> does not exist in index
+>=20
+> It was removed in:
+> commit f86ba9a5583d3b493651134bf710d28dd6509765
+> Author: Reinette Chatre <reinette.chatre@intel.com>
+> Date:   Thu Sep 24 15:03:01 2015 -0700
+>=20
+>     polkit: fix relocation of polkit binaries
+
+Ok, I see, please skip it.
+
+Thanks,
+Jackie
+
+>=20
+> >
+> > diff --git
+> > a/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.
+> > patch
+> > b/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.
+> > patch
+> > index e605e30..21ef578 100644
+> > ---
+> > a/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.
+> > patch
+> > +++ b/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-lib
+> > +++ dir.patch
+> > @@ -1,6 +1,6 @@
+> > -From c9e09d9b101109832b1dcb050f0c8b588e276686 Mon Sep 17 00:00:00
+> > 2001
+> > -From: Zhenhua Luo <zhenhua.luo@freescale.com>
+> > -Date: Mon, 4 May 2015 04:11:27 -0500
+> > +From fd07fbf131e31124094d9123091604dd32726750 Mon Sep 17 00:00:00
+> > +2001
+> > +From: Jackie Huang <jackie.huang@windriver.com>
+> > +Date: Wed, 14 Oct 2015 10:30:12 +0800
+> >  Subject: [PATCH] do not hardcoded libdir
+> >
+> >  Upstream-Status: Pending
+> > @@ -8,13 +8,28 @@ Upstream-Status: Pending  libdir is hardcoded to
+> > ${prefix}/lib, but we want it to support multilib
+> >
+> >  Signed-off-by: Chunrong Guo <B40290@freescale.com>
+> > +Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> >  ---
+> > - polkitagent/Makefile.am   | 2 +-
+> > - polkitbackend/Makefile.am | 2 +-
+> > - 2 files changed, 2 insertions(+), 2 deletions(-)
+> > + data/Makefile.am              | 2 +-
+> > + src/polkitagent/Makefile.am   | 2 +-
+> > + src/polkitbackend/Makefile.am | 2 +-
+> > + 3 files changed, 3 insertions(+), 3 deletions(-)
+> >
+> > +diff --git a/data/Makefile.am b/data/Makefile.am index
+> > +fe0f1d5..52cb4b4 100644
+> > +--- a/data/Makefile.am
+> > ++++ b/data/Makefile.am
+> > +@@ -2,7 +2,7 @@
+> > +
+> > + NULL =3D
+> > +
+> > +-libprivdir =3D $(prefix)/lib/polkit-1
+> > ++libprivdir =3D $(libdir)/polkit-1
+> > +
+> > + #
+> > + --------------------------------------------------------------------
+> > + --------------------------------
+> > +
+> >  diff --git a/src/polkitagent/Makefile.am
+> > b/src/polkitagent/Makefile.am -index 3bc364e..7d1ac0e 100644
+> > +index 58a55bd..1b6156b 100644
+> >  --- a/src/polkitagent/Makefile.am
+> >  +++ b/src/polkitagent/Makefile.am
+> >  @@ -78,7 +78,7 @@ libpolkit_agent_1_la_LIBADD =3D                     =
+          		\
+> > @@ -27,7 +42,7 @@ index 3bc364e..7d1ac0e 100644
+> >
+> >   polkit_agent_helper_1_SOURCES =3D 					\
+> >  diff --git a/src/polkitbackend/Makefile.am
+> > b/src/polkitbackend/Makefile.am -index 9f430d0..1f7610b 100644
+> > +index 547ca82..78ed934 100644
+> >  --- a/src/polkitbackend/Makefile.am
+> >  +++ b/src/polkitbackend/Makefile.am
+> >  @@ -67,7 +67,7 @@ rules_DATA =3D 50-default.rules
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
