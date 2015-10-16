@@ -1,24 +1,21 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5177C7710B
+Return-Path: <maxin.john@intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id B41C276FD0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 07:26:52 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9G7QqNI001029
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2015 00:26:53 -0700 (PDT)
-Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Fri, 16 Oct 2015 00:26:52 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 16 Oct 2015 15:27:09 +0800
-Message-ID: <1444980429-14546-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Fri, 16 Oct 2015 09:02:37 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by fmsmga103.fm.intel.com with ESMTP; 16 Oct 2015 02:02:37 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.17,688,1437462000"; d="scan'208";a="582014915"
+Received: from mbabyjoh-mobl.fi.intel.com ([10.237.72.71])
+	by FMSMGA003.fm.intel.com with ESMTP; 16 Oct 2015 02:02:38 -0700
+Date: Fri, 16 Oct 2015 07:16:18 +0300
+From: "Maxin B. John" <maxin.john@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151016041618.GA16359@mbabyjoh-mobl.fi.intel.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH v2] vim: do not autoenable the mouse
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: [meta-java] update email address
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,34 +29,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2015 07:26:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 16 Oct 2015 09:02:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Jackie Huang <jackie.huang@windriver.com>
-
-The mouse being autoenabled is just annoying in xfce4-terminal (mouse
-drag make vim go into visual mode and there is no right click menu),
-so remove the setting for xfce.
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-xfce/recipes-support/vim/vim_%.bbappend | 6 ++++++
- 1 file changed, 6 insertions(+)
- create mode 100644 meta-xfce/recipes-support/vim/vim_%.bbappend
-
-diff --git a/meta-xfce/recipes-support/vim/vim_%.bbappend b/meta-xfce/recipes-support/vim/vim_%.bbappend
-new file mode 100644
-index 0000000..25403e6
---- /dev/null
-+++ b/meta-xfce/recipes-support/vim/vim_%.bbappend
-@@ -0,0 +1,6 @@
-+do_install_append() {
-+	# The mouse being autoenabled is just annoying in xfce4-terminal (mouse
-+	# drag make vim go into visual mode and there is no right click menu),
-+	# delete the block.
-+	sed -i '/the mouse works just fine/,+4d' ${D}/${datadir}/${BPN}/vimrc
-+}
--- 
-1.9.1
-
+ Hi,
+  
+ Updated my email address in README:
+     
+ README: update contact info
+ Signed-off-by: Maxin B. John <maxin.john@intel.com>
+        
+  diff --git a/README b/README
+  index 7a48f14..f031021 100644
+  --- a/README
+  +++ b/README
+  @@ -46,7 +46,7 @@ Main layer maintainers:
+               
+     Henning Heinold <henning@itconsulting-heinold.de>
+     Mario Domenech Goulart <mario@ossystems.com.br>
+  -  Maxin John <maxin.john@enea.com>
+  +  Maxin John <maxin.john@intel.com>
+     Otavio Salvador <otavio@ossystems.com.br>
+                              
+                   
+  Best Regards,
+  Maxin                                                                      
 
