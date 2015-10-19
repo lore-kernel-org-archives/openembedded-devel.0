@@ -1,20 +1,20 @@
 Return-Path: <dv@pseudoterminal.org>
 Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id E55DE77060
+	by mail.openembedded.org (Postfix) with ESMTP id E641277086
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Oct 2015 18:44:37 +0000 (UTC)
+	Mon, 19 Oct 2015 18:44:38 +0000 (UTC)
 Received: from localhost.localdomain (chello062178118086.5.14.vie.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id AF41223187
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 1630B23188
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Oct 2015 20:44:37 +0200 (CEST)
+	Mon, 19 Oct 2015 20:44:38 +0200 (CEST)
 From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Oct 2015 20:44:31 +0200
-Message-Id: <1445280272-23937-3-git-send-email-dv@pseudoterminal.org>
+Date: Mon, 19 Oct 2015 20:44:32 +0200
+Message-Id: <1445280272-23937-4-git-send-email-dv@pseudoterminal.org>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1445280272-23937-1-git-send-email-dv@pseudoterminal.org>
 References: <1445280272-23937-1-git-send-email-dv@pseudoterminal.org>
-Subject: [meta-multimedia][PATCH 3/4] libdvdnav: add new recipe
+Subject: [meta-multimedia][PATCH 4/4] libsrtp: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,30 +32,34 @@ X-List-Received-Date: Mon, 19 Oct 2015 18:44:42 -0000
 
 Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---
- .../recipes-multimedia/libdvdnav/libdvdnav_5.0.3.bb        | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/libdvdnav/libdvdnav_5.0.3.bb
+ .../recipes-support/libsrtp/libsrtp_1.5.2.bb           | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/libdvdnav/libdvdnav_5.0.3.bb b/meta-multimedia/recipes-multimedia/libdvdnav/libdvdnav_5.0.3.bb
+diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb b/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
 new file mode 100644
-index 0000000..c2dd96f
+index 0000000..8ee6634
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libdvdnav/libdvdnav_5.0.3.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "library for DVD navigation features"
-+SECTION = "libs/multimedia"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+DEPENDS = "libdvdread"
++++ b/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "library implementing Secure RTP (RFC 3711)"
++HOMEPAGE = "https://github.com/cisco/libsrtp"
++SECTION = "libs"
 +
-+SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.bz2"
-+SRC_URI[md5sum] = "e9ea4de3bd8f204e61301d407d09f033"
-+SRC_URI[sha256sum] = "5097023e3d2b36944c763f1df707ee06b19dc639b2b68fb30113a5f2cbf60b6d"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=15bc16b9d2e305974dde47e733883714"
 +
-+inherit autotools lib_package binconfig pkgconfig
++SRC_URI = "https://github.com/cisco/libsrtp/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz"
++SRC_URI[md5sum] = "2309aa6027992810a4285b042c71e644"
++SRC_URI[sha256sum] = "86e1efe353397c0751f6bdd709794143bd1b76494412860f16ff2b6d9c304eda"
 +
-+CONFIGUREOPTS_remove = "--disable-silent-rules"
++inherit autotools
 +
++do_install[postfuncs] += " rm_unused_bindir "
++
++rm_unused_bindir() {
++	rmdir ${D}/${bindir}
++}
 -- 
 1.9.1
 
