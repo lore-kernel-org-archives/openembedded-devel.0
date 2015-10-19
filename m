@@ -1,50 +1,37 @@
 Return-Path: <anders@chargestorm.se>
-Received: from mail-lb0-f179.google.com (mail-lb0-f179.google.com
-	[209.85.217.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FA0777070
+Received: from mail-lb0-f172.google.com (mail-lb0-f172.google.com
+	[209.85.217.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 4CC7777070
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Oct 2015 06:06:06 +0000 (UTC)
-Received: by lbbwb3 with SMTP id wb3so72102147lbb.1
+	Mon, 19 Oct 2015 06:17:10 +0000 (UTC)
+Received: by lbbwb3 with SMTP id wb3so72241282lbb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Oct 2015 23:06:05 -0700 (PDT)
+	Sun, 18 Oct 2015 23:17:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id
-	:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:organization:user-agent;
-	bh=HVS4v4Ba3CMbpMfYgZmnn7gUl1Fhc5OLQQ3omTu2FQ8=;
-	b=Dts6nZs+a1Nq9yJ8HKbtbJ+qrQxYxvCzH/sg+wrcbjz33fCvh4fxprd63qNH1kNakA
-	lYuxbpwMFFHIE1kKbvb+8CyGxtWXriHkFIfjnoORaFTstdqzZEO7sGYTEZJc68VLdIG2
-	qw3bipwIy/PFGFGE44TRHXwuKXn7NlOO5Kc4tWaJ5A+lCAfc5slnkFS5+Zr3dPHj8Xvl
-	ZNkii2DqWUdbD2a1ZN8bdx8mNjIdKOTHp3YBkMovZGPvmqhyXvX/BhwP+x9sXLyZfJ4q
-	AmGTq9g9qpDpsny98nQcs1pK4hzJE7huSUdWyYD/tKPud9SNqd5fhya/h1TaDBolmU0K
-	WH/Q==
-X-Gm-Message-State: ALoCoQkNZ9zzEcWBSRz51B5PAzZzsVGfL1pFhq7ighdudrHU4gWnhpYmUR3RwysSvnC4NCcotrd3
-X-Received: by 10.112.63.233 with SMTP id j9mr13505584lbs.113.1445234765442;
-	Sun, 18 Oct 2015 23:06:05 -0700 (PDT)
-Received: from ad.chargestorm.se (213-64-219-84-no126.business.telia.com.
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=h8uA1+wZMlqOShhq7rylm9bb7WpddmMw/rnPKbIBzZI=;
+	b=DiS4MdX3TA+vaCSwo50EoMO0FfGanu2/ae7VepYy46RNbuwFho9t0xdoqSmPde5w/Q
+	Pfhk1atLxr+ec4nIvIllaK6KTRgfzQ1H9W0Akc1bAY3zY6wNMJ2q8yRlxkvTlayvthXE
+	vWUdDypHmQ81PM6lSkFGnfoe3MHIYEqeZhLo3RzopZPfsxFpsxhDpSNCOHx/os88XyYG
+	ZOXcTXfDr7fxcMhVbpRSEudexEfzg7ADvEn0LhKesV3k7krknniCmSQrqU9hkzsEa1qQ
+	W2qGKO/vr0ZuKw0GjFaUxA3Daga5X1q2vyDLk51Ji8U0ICBRl5qCCKe6Fs/EKPPKHpdt
+	XxmA==
+X-Gm-Message-State: ALoCoQnbkw6Gp19QsGrPHXRzx6YZs6l1NJfUNp3Qbp+KYiyOQ5CA3Pu6w9BXEUuurQH3NeV6N6eK
+X-Received: by 10.112.130.2 with SMTP id oa2mr4252264lbb.14.1445235429499;
+	Sun, 18 Oct 2015 23:17:09 -0700 (PDT)
+Received: from localhost (213-64-219-84-no126.business.telia.com.
 	[213.64.219.84])
-	by smtp.gmail.com with ESMTPSA id nb1sm2199328lbb.9.2015.10.18.23.06.04
+	by smtp.gmail.com with ESMTPSA id u6sm4975782lbo.43.2015.10.18.23.17.08
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 18 Oct 2015 23:06:04 -0700 (PDT)
-Date: Mon, 19 Oct 2015 08:06:03 +0200
+	Sun, 18 Oct 2015 23:17:08 -0700 (PDT)
 From: Anders Darander <anders@chargestorm.se>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20151019060603.GA16160@ad.chargestorm.se>
-Mail-Followup-To: Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <1444933287-26444-1-git-send-email-anders@chargestorm.se>
-	<20151015194858.GF2588@jama>
-MIME-Version: 1.0
-In-Reply-To: <20151015194858.GF2588@jama>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5][PATCH] qtbase: fix QA warning of host uid leakage
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Oct 2015 08:17:05 +0200
+Message-Id: <1445235425-19527-1-git-send-email-anders@chargestorm.se>
+X-Mailer: git-send-email 2.6.1
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: [meta-qt5][PATCH v2] qtbase: fix QA warning of host uid leakage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,48 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Oct 2015 06:06:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 19 Oct 2015 06:17:12 -0000
 
-* Martin Jansa <martin.jansa@gmail.com> [151015 21:48]:
+By using cp, the wrong uid ended up in the package. Use install,
+as that will automatically handle the uid and gid.
 
-> On Thu, Oct 15, 2015 at 08:21:27PM +0200, Anders Darander wrote:
-> > Two files in /usr/lib, were own by the uid of the build process.
+Signed-off-by: Anders Darander <anders@chargestorm.se>
+---
+ recipes-qt/qt5/qtbase_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> > Signed-off-by: Anders Darander <anders@chargestorm.se>
-> > ---
-> >  recipes-qt/qt5/qtbase_git.bb | 2 ++
-> >  1 file changed, 2 insertions(+)
-
-> > diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-> > index 39d02a9..99ac208 100644
-> > --- a/recipes-qt/qt5/qtbase_git.bb
-> > +++ b/recipes-qt/qt5/qtbase_git.bb
-> > @@ -232,6 +232,8 @@ do_install_append() {
-> >          chown -R root:root ${D}/${OE_QMAKE_PATH_QT_FONTS}
-> >      fi
-> >      cp -a ${B}/lib/libqt* ${D}${libdir}
-
-> Can we use install instead of cp to resolve this issue instead of chmod?
-
-Well, that was my first idea too. Though, to be honest, I never looked
-into how many files were covered by the cp command.
-
-At least with my minimal configuration Qt, it's only the two files below
-that gets copied. So I'll respin the patch to use install instead.
-
-Do you, or someone else know if there are occasions were more than the
-two file belows matches ${B}/lib/libqt*?
-
-Cheers,
-Anders
-
-> > +    chown root:root ${D}${libdir}/libqtpcre.prl
-> > +    chown root:root ${D}${libdir}/libqtpcre.a
-> >      # Remove example.pro file as it is useless
-> >      rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 39d02a9..7641b63 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -231,7 +231,7 @@ do_install_append() {
+         cp -a ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_QT_FONTS}
+         chown -R root:root ${D}/${OE_QMAKE_PATH_QT_FONTS}
+     fi
+-    cp -a ${B}/lib/libqt* ${D}${libdir}
++    install -m 0644 ${B}/lib/libqt* ${D}${libdir}
+     # Remove example.pro file as it is useless
+     rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro
+ 
 -- 
-Anders Darander
-ChargeStorm AB / eStorm AB
+2.6.1
+
 
