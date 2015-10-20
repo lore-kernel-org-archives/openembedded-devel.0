@@ -1,40 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 5061776E70
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id EB44B76E70
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Oct 2015 15:57:36 +0000 (UTC)
-Received: by wijp11 with SMTP id p11so54409044wij.0
+	Tue, 20 Oct 2015 15:59:22 +0000 (UTC)
+Received: by wicll6 with SMTP id ll6so35524149wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Oct 2015 08:57:36 -0700 (PDT)
+	Tue, 20 Oct 2015 08:59:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=tyuQ6WuhOShBOOsievR+d4IuuHKhDxW0UcjVqLgQkGc=;
-	b=Y3kVZRRDfzZecf1beaUIxkbVIsN+fKL004mLH7NjNf1F/QdxtMQmFPqdos2FVH+d/x
-	NyXMLknhnsJmAXjq22TlVyl7bAVA3tq8SmqtFdHqZo0aSXjdN3RDkSgALE9VqzT392nz
-	HEs1xNqDR3AR+n/O91IGELJqdJVsNpRWBQRZYaiN5YA2b0bT1nee8vFclUke31fzODLK
-	ypeTQfnSOE3gxNTcYsZ8k4y48hIZMxY942mAoPhW4v1fiP2Yg4WQ3aFCDyCilmYKpN2o
-	YmV1BSc0VgUNgc6z+31r6sH/cyBP0MbVkp1NHTBTkW/1VoJtlFH+HAh3VA8CEkjbPVwk
-	Pczw==
-X-Received: by 10.180.198.233 with SMTP id jf9mr23503349wic.66.1445356656370; 
-	Tue, 20 Oct 2015 08:57:36 -0700 (PDT)
+	bh=9w7cU1Z+bqUW3zJtAkl+xjBtTXTi+Bk8pCTSps4gu1U=;
+	b=Npys/Skj1HrVqodCRStITAoFqtXTer5wz+V8xdXU5qVEuyjwJXPSCy1MzwH9W7JaXE
+	3jUMsZEvOSDhHoq5UA4QmcXEXbww9ldivUBNKKPCelIvT9LSStAeVKgQ3I/ge17g3MGr
+	9E9+ETXe4vq76wtpuMegZLODNUHlWageoG2txr5M7H642eudFvJ7AVaW6IU5C4VLAGHw
+	QvdJ9kZnfjuvwMpVB94sShJ4NXWEdy14ohwtYq9juPQCybCf6MpvPgmTrDxXCrb9ZlZt
+	62u9b4DGxYC6ILBmEGWBChlnPZVsf3tMCkbtJMOfjACp2tdIKH937cHlopPdOYxGMo+M
+	fWIg==
+X-Received: by 10.194.239.167 with SMTP id vt7mr4926236wjc.110.1445356762319; 
+	Tue, 20 Oct 2015 08:59:22 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	a9sm19890640wiy.11.2015.10.20.08.57.35
+	by smtp.gmail.com with ESMTPSA id h7sm4677466wjz.7.2015.10.20.08.59.21
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Oct 2015 08:57:35 -0700 (PDT)
+	Tue, 20 Oct 2015 08:59:21 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 20 Oct 2015 17:57:49 +0200
-To: Chen Qi <Qi.Chen@windriver.com>
-Message-ID: <20151020155749.GB2557@jama>
-References: <1444704238-7057-1-git-send-email-Qi.Chen@windriver.com>
+Date: Tue, 20 Oct 2015 17:59:35 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151020155935.GC2557@jama>
+References: <1444658941-16418-1-git-send-email-manuel.bachmann@iot.bzh>
 MIME-Version: 1.0
-In-Reply-To: <1444704238-7057-1-git-send-email-Qi.Chen@windriver.com>
+In-Reply-To: <1444658941-16418-1-git-send-email-manuel.bachmann@iot.bzh>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 1/4] rrdtool: fix useless-rpath QA issue
+Subject: Re: [PATCH v4][meta-oe] freerdp: get out of PNBLACKLIST, fix build, improve
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,83 +47,234 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Oct 2015 15:57:39 -0000
-X-Groupsio-MsgNum: 57928
+X-List-Received-Date: Tue, 20 Oct 2015 15:59:23 -0000
+X-Groupsio-MsgNum: 57929
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="7iMSBzlTiPOCCT2k"
+	protocol="application/pgp-signature"; boundary="TiqCXmo5T1hvSQQg"
 Content-Disposition: inline
 
---7iMSBzlTiPOCCT2k
+--TiqCXmo5T1hvSQQg
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 13, 2015 at 10:43:55AM +0800, Chen Qi wrote:
-> When building rrdtool, we would meet the following error.
+On Mon, Oct 12, 2015 at 04:09:01PM +0200, Manuel Bachmann wrote:
+> We make the "freerdp" recipe active again, fix the build
+> by pulling a more recent version (the "stable" branches are
+> buggy and useless), and fix ARM runtime with -fPIC.
+>=20
+> We can then :
+> - make X11 non-mandatory ;
+> - add support for Wayland ("wlfreerdp" client) ;
+> - add support for DirectFB ("dfreerdp" client) ;
+> - add support for GStreamer 1.0 ;
+> - make "heavy" features such as pulseaudio, cups...
+> non-mandatory.
+>=20
+> We really want to install the "winpr-makecert" tool to have
+> TLS, but CMake does not position its RPATH cleanly, so let
+> us have a custom patch for that until it gets sorted out.
 
-Now it fails for qemuarm and qemux86, not sure which change is causing
-that:
+There is one more issue, vlc is autodetecting this and failing to build:
+http://errors.yoctoproject.org/Errors/Details/20600/
+http://errors.yoctoproject.org/Errors/Details/20603/
 
-http://errors.yoctoproject.org/Errors/Details/20597/
-http://errors.yoctoproject.org/Errors/Details/20601/
+Can you update vlc to explicitly enable/disable freerdp support with
+PACKAGECONFIG and if enabled by default then to work with this version of f=
+reerdp?
+
+Thanks
 
 >=20
->   ERROR: QA Issue: rrdtool-python: work/core2-64-poky-linux/rrdtool
->   /1.5.4-r0/packages-split/rrdtool-python/usr/lib/python2.7/site-packages
->   /rrdtool.so contains probably-redundant RPATH /usr/lib [useless-rpaths]
->=20
-> Fix this issue by removing the redundante RPATH section from rrdtool.so.
->=20
-> As we use '--disable-rpath' in EXTRA_OECONF, we don't need to the `sed'
-> line in do_configure.
->=20
-> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
 > ---
->  meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
+>  meta-oe/recipes-support/freerdp/freerdp.inc        | 39 ++++++++++++++++=
++-----
+>  .../winpr-makecert-Build-with-install-RPATH.patch  | 31 +++++++++++++++++
+>  meta-oe/recipes-support/freerdp/freerdp_git.bb     | 18 +++++-----
+>  3 files changed, 71 insertions(+), 17 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/freerdp/freerdp/winpr-makecer=
+t-Build-with-install-RPATH.patch
 >=20
-> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb b/meta-oe/=
-recipes-extended/rrdtool/rrdtool_1.5.4.bb
-> index 91a30cf..f2ded65 100644
-> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
-> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
-> @@ -71,7 +71,6 @@ do_configure() {
->      PYTHON_INCLUDES=3D"-I=3D/usr/include/python${PYTHON_BASEVERSION}"' \
->          ${S}/m4/acinclude.m4
->      #remove the hardcoded $(libdir) rpath
-> -    sed -i -e 's|--rpath=3D$(libdir)||g' ${S}/bindings/Makefile.am
+> diff --git a/meta-oe/recipes-support/freerdp/freerdp.inc b/meta-oe/recipe=
+s-support/freerdp/freerdp.inc
+> index 34dac4b..2937bc5 100644
+> --- a/meta-oe/recipes-support/freerdp/freerdp.inc
+> +++ b/meta-oe/recipes-support/freerdp/freerdp.inc
+> @@ -1,23 +1,39 @@
+>  # Copyright (C) 2010-2012 O.S. Systems Software Ltda. All Rights Reserved
+>  # Released under the MIT license
 > =20
->      autotools_do_configure
+> -DESCRIPTION =3D "FreeRDP RDP client"
+> +DESCRIPTION =3D "FreeRDP RDP client & server library"
+>  HOMEPAGE =3D "http://www.freerdp.com"
+> -DEPENDS =3D "virtual/libx11 openssl libxcursor libxv cups alsa-lib pulse=
+audio pcsc-lite libxkbfile libxinerama"
+> -SECTION =3D "x11/network"
+> +DEPENDS =3D "openssl alsa-lib pcsc-lite"
+> +SECTION =3D "net"
+>  LICENSE =3D "Apache-2.0"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6b=
+d57"
 > =20
-> @@ -100,6 +99,11 @@ do_configure() {
->          ${B}/examples/*.pl
->  }
+>  inherit pkgconfig cmake
 > =20
-> +do_compile_append() {
-> +    # Remove useless rpath
-> +    find ${B}/bindings/python/build -name "rrdtool.so" | xargs chrpath -d
+> -EXTRA_OECMAKE +=3D "-DWITH_PULSEAUDIO=3DON \
+> +EXTRA_OECMAKE +=3D "-DWITH_ALSA=3DON \
+>                    -DWITH_PCSC=3DON \
+> -                  -DWITH_CUPS=3DON \
+>                    -DWITH_FFMPEG=3DOFF \
+>                    -DWITH_CUNIT=3DOFF \
+> -                  -DWITH_X11=3DON \
+> -                  -DWITH_XKBFILE=3DON \
+> -                  -DWITH_XINERAMA=3DON"
+> +                  -DWITH_NEON=3DOFF \
+> +                 "
+> +
+> +PACKAGECONFIG ??=3D "  \
+> +                ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', ''=
+, d)}\
+> +                ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayl=
+and', '', d)}\
+> +                ${@bb.utils.contains('DISTRO_FEATURES', 'directfb', 'dir=
+ectfb', '', d)}\
+> +                ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', ''=
+, d)}\
+> +                ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'p=
+ulseaudio', '', d)}\
+> +                gstreamer cups \
+> +                "
+> +
+> +X11_DEPS =3D "virtual/libx11 libxinerama libxext libxcursor libxv libxi =
+libxrender libxfixes libxdamage libxrandr libxkbfile"
+> +PACKAGECONFIG[x11] =3D "-DWITH_X11=3DON -DWITH_XINERAMA=3DON -DWITH_XEXT=
+=3DON -DWITH_XCURSOR=3DON -DWITH_XV=3DON -DWITH_XI=3DON -DWITH_XRENDER=3DON=
+ -DWITH_XFIXES=3DON -DWITH_XDAMAGE=3DON -DWITH_XRANDR=3DON -DWITH_XKBFILE=
+=3DON,-DWITH_X11=3DOFF,${X11_DEPS}"
+> +PACKAGECONFIG[wayland] =3D "-DWITH_WAYLAND=3DON,-DWITH_WAYLAND=3DOFF,way=
+land"
+> +PACKAGECONFIG[directfb] =3D "-DWITH_DIRECTFB=3DON,-DWITH_DIRECTFB=3DOFF,=
+directfb"
+> +PACKAGECONFIG[pam] =3D "-DWITH_PAM=3DON,-DWITH_PAM=3DOFF,libpam"
+> +PACKAGECONFIG[pulseaudio] =3D "-DWITH_PULSEAUDIO=3DON,-DWITH_PULSEAUDIO=
+=3DOFF,pulseaudio"
+> +PACKAGECONFIG[gstreamer] =3D "-DWITH_GSTREAMER_1_0=3DON,-DWITH_GSTREAMER=
+_1_0=3DOFF,gstreamer1.0 gstreamer1.0-plugins-base"
+> +PACKAGECONFIG[cups] =3D "-DWITH_CUPS=3DON,-DWITH_CUPS=3DOFF,cups"
+> =20
+>  PACKAGES =3D+ "libfreerdp"
+> =20
+> @@ -26,6 +42,13 @@ FILES_libfreerdp =3D "${libdir}/lib*${SOLIBS}"
+> =20
+>  PACKAGES_DYNAMIC +=3D "^libfreerdp-plugin-.*"
+> =20
+> +# we will need winpr-makecert to generate TLS certificates
+> +do_install_append () {
+> +    install -m755 winpr/tools/makecert/cli/winpr-makecert ${D}${bindir}
+> +    rm -rf ${D}/${libdir}/cmake
+> +    rm -rf ${D}/${libdir}/freerdp
 > +}
 > +
->  PACKAGES =3D+ "${PN}-perl ${PN}-python"
+>  python populate_packages_prepend () {
+>      freerdp_root =3D d.expand('${libdir}/freerdp')
 > =20
->  FILES_${PN}-doc +=3D "${datadir}/examples"
+> diff --git a/meta-oe/recipes-support/freerdp/freerdp/winpr-makecert-Build=
+-with-install-RPATH.patch b/meta-oe/recipes-support/freerdp/freerdp/winpr-m=
+akecert-Build-with-install-RPATH.patch
+> new file mode 100644
+> index 0000000..d279d6d
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/freerdp/freerdp/winpr-makecert-Build-with-i=
+nstall-RPATH.patch
+> @@ -0,0 +1,31 @@
+> +From 253eafc8c8da83fc2b1a99a9e43824efc6105c7a Mon Sep 17 00:00:00 2001
+> +From: Manuel Bachmann <manuel.bachmann@iot.bzh>
+> +Date: Sun, 4 Oct 2015 10:44:49 +0200
+> +Subject: [PATCH] winpr-makecert: Build with install RPATH
+> +
+> +As we are installing "winpr-makecert" manually, we do want
+> +to refer to the library in DESTDIR, not the one resting in
+> +the build tree.
+> +
+> +Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
+> +---
+> + winpr/tools/makecert/cli/CMakeLists.txt | 4 ++++
+> + 1 file changed, 4 insertions(+)
+> +
+> +diff --git a/winpr/tools/makecert/cli/CMakeLists.txt b/winpr/tools/makec=
+ert/cli/CMakeLists.txt
+> +index 17954c4..90c446b 100644
+> +--- a/winpr/tools/makecert/cli/CMakeLists.txt
+> ++++ b/winpr/tools/makecert/cli/CMakeLists.txt
+> +@@ -45,5 +45,9 @@ set(${MODULE_PREFIX}_LIBS winpr-makecert-tool)
+> +=20
+> + target_link_libraries(${MODULE_NAME} ${${MODULE_PREFIX}_LIBS})
+> +=20
+> ++set_target_properties(${MODULE_NAME} PROPERTIES=20
+> ++	BUILD_WITH_INSTALL_RPATH 1)
+> ++
+> + set_property(TARGET ${MODULE_NAME} PROPERTY FOLDER "WinPR/Tools")
+> +=20
+> ++
+> +--=20
+> +1.8.3.1
+> +
+> diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb b/meta-oe/rec=
+ipes-support/freerdp/freerdp_git.bb
+> index fd7f74c..f9cb9a6 100644
+> --- a/meta-oe/recipes-support/freerdp/freerdp_git.bb
+> +++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
+> @@ -5,17 +5,17 @@ include freerdp.inc
+> =20
+>  inherit gitpkgv
+> =20
+> -PV =3D "1.0.2+gitr${SRCPV}"
+> +PV =3D "1.2.5+gitr${SRCPV}"
+>  PKGV =3D "${GITPKGVTAG}"
+> =20
+> -EXTRA_OECMAKE +=3D "-DWITH_MANPAGES=3DOFF"
+> +EXTRA_OECMAKE +=3D "-DBUILD_STATIC_LIBS=3DOFF \
+> +                  -DCMAKE_POSITION_INDEPENDANT_CODE=3DON \
+> +                  -DWITH_MANPAGES=3DOFF \
+> +                 "
+> =20
+> -SRCREV =3D "f311acaffb9190567e2b478a98d7cbfaf2709f6b"
+> -SRC_URI =3D "git://github.com/FreeRDP/FreeRDP.git;branch=3Dstable-1.0"
+> +SRCREV =3D "62da9d28c674814c81c245c1c7882eb0da7be76b"
+> +SRC_URI =3D "git://github.com/FreeRDP/FreeRDP.git \
+> +           file://winpr-makecert-Build-with-install-RPATH.patch \
+> +          "
+> =20
+>  S =3D "${WORKDIR}/git"
+> -
+> -PNBLACKLIST[freerdp] ?=3D "Installs into double prefix, causing all file=
+s installed in /usr/usr and empty packages"
+> -# freerdp-1.0.2+gitrAUTOINC+f311acaffb: freerdp: Files/directories were =
+installed but not shipped
+> -#       /usr/usr
+> -#       ....
 > --=20
-> 1.9.1
+> 1.8.3.1
 >=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---7iMSBzlTiPOCCT2k
+--TiqCXmo5T1hvSQQg
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlYmZGgACgkQN1Ujt2V2gBw/2QCfQB5nZ+rJVH/tdVcOQfkRw3aa
-608AnjqoLLirJiheit1ReB9TGU7fN6kK
-=VF+D
+iEYEARECAAYFAlYmZOYACgkQN1Ujt2V2gBxCJACgqNFcIBg0utXhNFsN/fi4gQvn
+sGMAoJUnIxb5UiLVhBgIJm8QlHWKJPm6
+=7gOX
 -----END PGP SIGNATURE-----
 
---7iMSBzlTiPOCCT2k--
+--TiqCXmo5T1hvSQQg--
