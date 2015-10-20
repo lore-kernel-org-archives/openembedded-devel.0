@@ -1,33 +1,37 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id EA35F76FF2
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id B6F0275D48
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Oct 2015 21:36:06 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9JLa5jw011640
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 20 Oct 2015 00:04:04 +0000 (UTC)
+Received: by pacfv9 with SMTP id fv9so1482794pac.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Oct 2015 14:36:06 -0700 (PDT)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.159]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0248.002;
-	Mon, 19 Oct 2015 14:36:05 -0700
-From: "Slater, Joseph" <joe.slater@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-initramfs][PATCH 1/1] dracut: RDEPEND on util-linux
-Thread-Index: AQHRCDwdlSUJqA2Q0kKZ1EMZKQ7rnp5vAOCAgARab0A=
-Date: Mon, 19 Oct 2015 21:36:04 +0000
-Message-ID: <007BD92917A2324FA403BCF9A464CF84919460D6@ALA-MBA.corp.ad.wrs.com>
-References: <1445018245-30292-1-git-send-email-jslater@windriver.com>
-	<CAMKF1srrWsnVLACj5gNGQrBpvO-XU=gc9gOX2qqyKGkfU_7Umw@mail.gmail.com>
-In-Reply-To: <CAMKF1srrWsnVLACj5gNGQrBpvO-XU=gc9gOX2qqyKGkfU_7Umw@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [147.11.216.76]
-MIME-Version: 1.0
-Subject: Re: [meta-initramfs][PATCH 1/1] dracut: RDEPEND on util-linux
+	Mon, 19 Oct 2015 17:04:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=qvwJMPeH67z/L31u2otLkjbrFXresK+0aZxBDNYQCYg=;
+	b=F/YkD6MGUL3PaWO7vh64nhjcVdBChRRdRl4mdqU3QraGBWE61zMQlgnoZp9PK6ZqcV
+	4heW5ilPHY+KA8+vjPww+LoTQPDiZRW2pTNkeB/q8YgJIdGxc4YEWNndrJCaESkheoPL
+	YSyl+nmzABuzDSo6lYeqVlOWRaRdsYxj+yH/7fv3NwHsGbdMkx04H7/wugO82XFSJLHq
+	f5/isNjXrau6+qAgpPKVHv58B/jTk3qApDSbcI+0PO0aeD8J+6WWwe9VTDRWV6v9a75m
+	UMcrMONz7OyOoaijqOthQkooYz0nYj1UANtjXOLRsrQXvdi3MT+46kgj9q4+RwgdgDha
+	hlHA==
+X-Received: by 10.66.121.163 with SMTP id ll3mr221438pab.69.1445299444302;
+	Mon, 19 Oct 2015 17:04:04 -0700 (PDT)
+Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207])
+	by smtp.gmail.com with ESMTPSA id ch3sm185286pbb.18.2015.10.19.17.04.03
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 19 Oct 2015 17:04:03 -0700 (PDT)
+Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
+	id 209E8FC2079; Mon, 19 Oct 2015 17:03:54 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	otavio@ossystems.com.br
+Date: Mon, 19 Oct 2015 17:03:51 -0700
+Message-Id: <cover.1445299139.git.akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [PATCH 0/5] Dizzy-next update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,39 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Oct 2015 21:36:12 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 20 Oct 2015 00:04:05 -0000
 
+Please consider these changes for dizzy next
 
+The following changes since commit 7f1df52e9409edcc4d4cd5f34694f8740f56e1bf:
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Khem Raj
-> Sent: Friday, October 16, 2015 1:05 PM
-> To: openembeded-devel
-> Subject: Re: [oe] [meta-initramfs][PATCH 1/1] dracut: RDEPEND on util-lin=
-ux
->=20
-> On Fri, Oct 16, 2015 at 10:57 AM, Joe Slater <jslater@windriver.com> wrot=
-e:
-> > We might need findmnt and setsid, which are in the
-> > util-linux package.
->=20
-> would it make sense to put them in a independent package ?
+  fuse: fix for CVE-2015-3202 Privilege Escalation (2015-07-19 17:05:16 -0700)
 
-If we do, I think we should make util-linux RDEPEND on it (them), so we won=
-'t break other
-stuff that assumes that's where they are.
+are available in the git repository at:
 
-Joe
+  git://github.com/akuster/meta-openembedded akuster/dizzy-next
+  https://github.com/akuster/meta-openembedded/tree/akuster/dizzy-next
 
+Martin Jansa (5):
+  oscam: respect *flags set from OE
+  gupnp-igd: fix missing dependencies
+  tcpdump: add PACKAGECONFIG for smi
+  geoclue: add PACKAGECONFIG for geoip
+  llvm.inc: fix PACKAGES_DYNAMIC
 
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+ .../recipes-connectivity/gupnp/gupnp-igd_0.2.2.bb  |  2 +-
+ .../recipes-dvb/oscam/oscam/respect-cflags.patch   | 38 ++++++++++++++++++++++
+ meta-multimedia/recipes-dvb/oscam/oscam_svn.bb     |  4 ++-
+ .../recipes-support/tcpdump/tcpdump_4.6.1.bb       |  1 +
+ meta-oe/recipes-core/llvm/llvm.inc                 |  2 +-
+ .../recipes-navigation/geoclue/geoclue_2.0.0.bb    |  2 ++
+ 6 files changed, 46 insertions(+), 3 deletions(-)
+ create mode 100644 meta-multimedia/recipes-dvb/oscam/oscam/respect-cflags.patch
+
+-- 
+1.9.1
+
 
