@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id EB44B76E70
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 5338976FD0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Oct 2015 15:59:22 +0000 (UTC)
-Received: by wicll6 with SMTP id ll6so35524149wic.1
+	Tue, 20 Oct 2015 16:00:03 +0000 (UTC)
+Received: by wicll6 with SMTP id ll6so52411292wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Oct 2015 08:59:22 -0700 (PDT)
+	Tue, 20 Oct 2015 09:00:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=9w7cU1Z+bqUW3zJtAkl+xjBtTXTi+Bk8pCTSps4gu1U=;
-	b=Npys/Skj1HrVqodCRStITAoFqtXTer5wz+V8xdXU5qVEuyjwJXPSCy1MzwH9W7JaXE
-	3jUMsZEvOSDhHoq5UA4QmcXEXbww9ldivUBNKKPCelIvT9LSStAeVKgQ3I/ge17g3MGr
-	9E9+ETXe4vq76wtpuMegZLODNUHlWageoG2txr5M7H642eudFvJ7AVaW6IU5C4VLAGHw
-	QvdJ9kZnfjuvwMpVB94sShJ4NXWEdy14ohwtYq9juPQCybCf6MpvPgmTrDxXCrb9ZlZt
-	62u9b4DGxYC6ILBmEGWBChlnPZVsf3tMCkbtJMOfjACp2tdIKH937cHlopPdOYxGMo+M
-	fWIg==
-X-Received: by 10.194.239.167 with SMTP id vt7mr4926236wjc.110.1445356762319; 
-	Tue, 20 Oct 2015 08:59:22 -0700 (PDT)
+	bh=cv5Z7XiPn0dw67WJ75bWuClZ72tFNCXdLihBYyQoMCI=;
+	b=pjAzlV+0i18sA2tJbOLgxVjiT3h0D9R6/QPhOnLZ8W7SOaOMQ4wTjpuFftwU+9/sk0
+	lFuCYtHvzm4G4lbZpi+AE1QfqaLxRSQlP/YoY5yR4l0ODALYuMOEdBk9OeySLxRSzYBr
+	9bosaLyAsHy7qdyuC7BiVdpImxUsWjXG9o+mXHxv6igFZ94yE0F2njVjFcAz2mfi3P9c
+	kekiTsSjlifWaQG7+OzcYbqIYDa+SgDmRF2F61P16/yomF4FKJsnQYHgDchF6K3vWlC7
+	g32m7gxtGsIeA63ZF+bBeVnrWXqkmwjSygaNDALd9B/V4rhQ257/VpflliHBNvhwBqss
+	CASw==
+X-Received: by 10.180.99.41 with SMTP id en9mr29839823wib.67.1445356803611;
+	Tue, 20 Oct 2015 09:00:03 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id h7sm4677466wjz.7.2015.10.20.08.59.21
+	by smtp.gmail.com with ESMTPSA id bk4sm4688921wjc.1.2015.10.20.09.00.02
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Oct 2015 08:59:21 -0700 (PDT)
+	Tue, 20 Oct 2015 09:00:02 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 20 Oct 2015 17:59:35 +0200
+Date: Tue, 20 Oct 2015 18:00:16 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151020155935.GC2557@jama>
-References: <1444658941-16418-1-git-send-email-manuel.bachmann@iot.bzh>
+Message-ID: <20151020160016.GD2557@jama>
+References: <1444767490-6833-1-git-send-email-eduardo@monkey.io>
 MIME-Version: 1.0
-In-Reply-To: <1444658941-16418-1-git-send-email-manuel.bachmann@iot.bzh>
+In-Reply-To: <1444767490-6833-1-git-send-email-eduardo@monkey.io>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH v4][meta-oe] freerdp: get out of PNBLACKLIST, fix build, improve
+Subject: Re: [meta-webserver][PATCH] monkey: new v1.6.3 release.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,214 +47,244 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Oct 2015 15:59:23 -0000
-X-Groupsio-MsgNum: 57929
+X-List-Received-Date: Tue, 20 Oct 2015 16:00:05 -0000
+X-Groupsio-MsgNum: 57930
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="TiqCXmo5T1hvSQQg"
+	protocol="application/pgp-signature"; boundary="SFyWQ0h3ruR435lw"
 Content-Disposition: inline
 
---TiqCXmo5T1hvSQQg
+--SFyWQ0h3ruR435lw
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 12, 2015 at 04:09:01PM +0200, Manuel Bachmann wrote:
-> We make the "freerdp" recipe active again, fix the build
-> by pulling a more recent version (the "stable" branches are
-> buggy and useless), and fix ARM runtime with -fPIC.
+On Tue, Oct 13, 2015 at 02:18:10PM -0600, Eduardo Silva wrote:
+> This patch add the new Monkey HTTP Server v1.6.3.
 >=20
-> We can then :
-> - make X11 non-mandatory ;
-> - add support for Wayland ("wlfreerdp" client) ;
-> - add support for DirectFB ("dfreerdp" client) ;
-> - add support for GStreamer 1.0 ;
-> - make "heavy" features such as pulseaudio, cups...
-> non-mandatory.
+> For more details about software changes please visit:
 >=20
-> We really want to install the "winpr-makecert" tool to have
-> TLS, but CMake does not position its RPATH cleanly, so let
-> us have a custom patch for that until it gets sorted out.
+>   http://monkey-project.com/Announcements/v1.6.3
 
-There is one more issue, vlc is autodetecting this and failing to build:
-http://errors.yoctoproject.org/Errors/Details/20600/
-http://errors.yoctoproject.org/Errors/Details/20603/
-
-Can you update vlc to explicitly enable/disable freerdp support with
-PACKAGECONFIG and if enabled by default then to work with this version of f=
-reerdp?
-
-Thanks
+Fails to build with systemd enabled:
+http://errors.yoctoproject.org/Errors/Details/20606/
 
 >=20
-> Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
+> =3D=3D=3D Build Tests =3D=3D
+>=20
+> This version have been tested on Yocto/Fido being packaged and
+> deployed on images based on RPM successfully.
+>=20
+> Signed-off-by: Eduardo Silva <eduardo@monkey.io>
 > ---
->  meta-oe/recipes-support/freerdp/freerdp.inc        | 39 ++++++++++++++++=
-+-----
->  .../winpr-makecert-Build-with-install-RPATH.patch  | 31 +++++++++++++++++
->  meta-oe/recipes-support/freerdp/freerdp_git.bb     | 18 +++++-----
->  3 files changed, 71 insertions(+), 17 deletions(-)
->  create mode 100644 meta-oe/recipes-support/freerdp/freerdp/winpr-makecer=
-t-Build-with-install-RPATH.patch
+>  .../recipes-httpd/monkey/files/monkey.init         | 34 ------------
+>  .../recipes-httpd/monkey/files/monkey.service      | 12 ----
+>  .../recipes-httpd/monkey/monkey_1.5.6.bb           | 64 ----------------=
+------
+>  .../recipes-httpd/monkey/monkey_1.6.3.bb           | 44 +++++++++++++++
+>  4 files changed, 44 insertions(+), 110 deletions(-)
+>  delete mode 100644 meta-webserver/recipes-httpd/monkey/files/monkey.init
+>  delete mode 100644 meta-webserver/recipes-httpd/monkey/files/monkey.serv=
+ice
+>  delete mode 100644 meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
+>  create mode 100644 meta-webserver/recipes-httpd/monkey/monkey_1.6.3.bb
 >=20
-> diff --git a/meta-oe/recipes-support/freerdp/freerdp.inc b/meta-oe/recipe=
-s-support/freerdp/freerdp.inc
-> index 34dac4b..2937bc5 100644
-> --- a/meta-oe/recipes-support/freerdp/freerdp.inc
-> +++ b/meta-oe/recipes-support/freerdp/freerdp.inc
-> @@ -1,23 +1,39 @@
->  # Copyright (C) 2010-2012 O.S. Systems Software Ltda. All Rights Reserved
->  # Released under the MIT license
-> =20
-> -DESCRIPTION =3D "FreeRDP RDP client"
-> +DESCRIPTION =3D "FreeRDP RDP client & server library"
->  HOMEPAGE =3D "http://www.freerdp.com"
-> -DEPENDS =3D "virtual/libx11 openssl libxcursor libxv cups alsa-lib pulse=
-audio pcsc-lite libxkbfile libxinerama"
-> -SECTION =3D "x11/network"
-> +DEPENDS =3D "openssl alsa-lib pcsc-lite"
-> +SECTION =3D "net"
->  LICENSE =3D "Apache-2.0"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6b=
-d57"
-> =20
->  inherit pkgconfig cmake
-> =20
-> -EXTRA_OECMAKE +=3D "-DWITH_PULSEAUDIO=3DON \
-> +EXTRA_OECMAKE +=3D "-DWITH_ALSA=3DON \
->                    -DWITH_PCSC=3DON \
-> -                  -DWITH_CUPS=3DON \
->                    -DWITH_FFMPEG=3DOFF \
->                    -DWITH_CUNIT=3DOFF \
-> -                  -DWITH_X11=3DON \
-> -                  -DWITH_XKBFILE=3DON \
-> -                  -DWITH_XINERAMA=3DON"
-> +                  -DWITH_NEON=3DOFF \
-> +                 "
+> diff --git a/meta-webserver/recipes-httpd/monkey/files/monkey.init b/meta=
+-webserver/recipes-httpd/monkey/files/monkey.init
+> deleted file mode 100644
+> index 40b2118..0000000
+> --- a/meta-webserver/recipes-httpd/monkey/files/monkey.init
+> +++ /dev/null
+> @@ -1,34 +0,0 @@
+> -#!/bin/sh
+> -
+> -PATH=3D/sbin:/bin:/usr/sbin:/usr/bin
+> -DAEMON=3D/usr/bin/monkey
+> -NAME=3Dmonkey
+> -DESC=3D"Monkey HTTP Server"
+> -OPTS=3D"--daemon"
+> -
+> -case "$1" in
+> -  start)
+> -	echo -n "Starting $DESC: "
+> -	start-stop-daemon --start -x "$DAEMON" -- $OPTS
+> -	echo "$NAME."
+> -	;;
+> -  stop)
+> -	echo -n "Stopping $DESC: "
+> -	start-stop-daemon --stop -x "$DAEMON"
+> -	echo "$NAME."
+> -	;;
+> -  restart|force-reload)
+> -	echo -n "Restarting $DESC: "
+> -	start-stop-daemon --stop -x "$DAEMON"
+> -	sleep 1
+> -	start-stop-daemon --start -x "$DAEMON" -- $OPTS
+> -	echo "$NAME."
+> -	;;
+> -  *)
+> -	N=3D/etc/init.d/$NAME
+> -	echo "Usage: $N {start|stop|restart|force-reload}" >&2
+> -	exit 1
+> -	;;
+> -esac
+> -
+> -exit 0
+> diff --git a/meta-webserver/recipes-httpd/monkey/files/monkey.service b/m=
+eta-webserver/recipes-httpd/monkey/files/monkey.service
+> deleted file mode 100644
+> index f9aa57f..0000000
+> --- a/meta-webserver/recipes-httpd/monkey/files/monkey.service
+> +++ /dev/null
+> @@ -1,12 +0,0 @@
+> -[Unit]
+> -Description=3DMonkey HTTP Server
+> -After=3Dnetwork.target remote-fs.target
+> -
+> -[Service]
+> -Type=3Dforking
+> -ExecStart=3D/usr/bin/monkey --daemon
+> -PIDFile=3D/var/run/monkey.pid.2001
+> -TimeoutSec=3D10
+> -
+> -[Install]
+> -WantedBy=3Dmulti-user.target
+> diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb b/meta-w=
+ebserver/recipes-httpd/monkey/monkey_1.5.6.bb
+> deleted file mode 100644
+> index d7330a1..0000000
+> --- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
+> +++ /dev/null
+> @@ -1,64 +0,0 @@
+> -SUMMARY =3D "Fast and Lightweight HTTP Server for Linux"
+> -HOMEPAGE =3D "http://monkey-project.com"
+> -BUGTRACKER =3D "https://github.com/monkey/monkey/issues"
+> -
+> -LICENSE =3D "Apache-2.0"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2ee41112a44fe7014dce33e26468b=
+a93"
+> -
+> -SECTION =3D "net"
+> -
+> -SRC_URI =3D "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz \
+> -           file://monkey.service \
+> -           file://monkey.init"
+> -
+> -SRC_URI[md5sum] =3D "9699e4c9ea6ce6b989907c252ae80254"
+> -SRC_URI[sha256sum] =3D "7c3d845306aa74ee6effd7ab6169d16ac4e6450e564954d0=
+d0baa2d1e9be1a22"
+> -
+> -EXTRA_OECONF =3D "--plugdir=3D${libdir}/monkey/ \
+> -                --logdir=3D${localstatedir}/log/monkey/ \
+> -                --pidfile=3D${localstatedir}/run/monkey.pid \
+> -                --default-user=3Dwww-data \
+> -                --datadir=3D${localstatedir}/www/monkey/ \
+> -                --sysconfdir=3D${sysconfdir}/monkey/ \
+> -                --enable-plugins=3D* \
+> -                --disable-plugins=3Dmbedtls \
+> -                --debug \
+> -                --malloc-libc"
+> -
+> -inherit autotools-brokensep pkgconfig update-rc.d systemd
+> -
+> -INITSCRIPT_NAME =3D "monkey"
+> -INITSCRIPT_PARAMS =3D "defaults 70"
+> -
+> -SYSTEMD_SERVICE_${PN} =3D "monkey.service"
+> -
+> -FILES_${PN} +=3D "${localstatedir}/www/monkey/"
+> -
+> -CONFFILES_${PN} =3D "${sysconfdir}/monkey/monkey.conf \
+> -                   ${sysconfdir}/monkey/sites/default \
+> -                   ${sysconfdir}/monkey/monkey.mime \
+> -                   ${sysconfdir}/monkey/plugins.load \
+> -                   ${sysconfdir}/monkey/plugins/proxy_reverse/proxy_reve=
+rse.conf \
+> -                   ${sysconfdir}/monkey/plugins/mandril/mandril.conf \
+> -                   ${sysconfdir}/monkey/plugins/fastcgi/fastcgi.conf \
+> -                   ${sysconfdir}/monkey/plugins/logger/logger.conf \
+> -                   ${sysconfdir}/monkey/plugins/cgi/cgi.conf \
+> -                   ${sysconfdir}/monkey/plugins/cheetah/cheetah.conf \
+> -                   ${sysconfdir}/monkey/plugins/dirlisting/dirhtml.conf \
+> -                   ${sysconfdir}/monkey/plugins/dirlisting/themes/guineo=
+/header.theme \
+> -                   ${sysconfdir}/monkey/plugins/dirlisting/themes/guineo=
+/footer.theme \
+> -                   ${sysconfdir}/monkey/plugins/dirlisting/themes/guineo=
+/entry.theme \
+> -                   ${sysconfdir}/monkey/plugins/auth/README \
+> -                   ${sysconfdir}/monkey/plugins/auth/monkey.users \
+> -                   "
+> -
+> -do_install_append() {
+> -
+> -    mkdir -p ${D}${sysconfdir}/init.d
+> -    install -m 0755 ${WORKDIR}/monkey.init ${D}${sysconfdir}/init.d/monk=
+ey
+> -
+> -    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; =
+then
+> -        install -d ${D}${systemd_unitdir}/system
+> -        install -m 644 ${WORKDIR}/monkey.service ${D}/${systemd_unitdir}=
+/system
+> -    fi
+> -}
+> diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.6.3.bb b/meta-w=
+ebserver/recipes-httpd/monkey/monkey_1.6.3.bb
+> new file mode 100644
+> index 0000000..b6f78aa
+> --- /dev/null
+> +++ b/meta-webserver/recipes-httpd/monkey/monkey_1.6.3.bb
+> @@ -0,0 +1,44 @@
+> +SUMMARY =3D "Fast and Lightweight HTTP Server for Linux"
+> +HOMEPAGE =3D "http://monkey-project.com"
+> +BUGTRACKER =3D "https://github.com/monkey/monkey/issues"
 > +
-> +PACKAGECONFIG ??=3D "  \
-> +                ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', ''=
-, d)}\
-> +                ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayl=
-and', '', d)}\
-> +                ${@bb.utils.contains('DISTRO_FEATURES', 'directfb', 'dir=
-ectfb', '', d)}\
-> +                ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', ''=
-, d)}\
-> +                ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'p=
-ulseaudio', '', d)}\
-> +                gstreamer cups \
+> +LICENSE =3D "Apache-2.0"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2ee41112a44fe7014dce33e26468b=
+a93"
+> +
+> +SECTION =3D "net"
+> +
+> +SRC_URI =3D "http://monkey-project.com/releases/1.6/monkey-${PV}.tar.gz"
+> +SRC_URI[md5sum] =3D "35a915a20d5bdc5a9338316107a37557"
+> +SRC_URI[sha256sum] =3D "47973b12cc45c185b054e251a6c3d8a36cae70301f614b41=
+32bb1ef504f01cfa"
+> +
+> +EXTRA_OECMAKE =3D "-DCMAKE_INSTALL_LIBDIR=3D${libdir}/monkey/          \
+> +                 -DINSTALL_LOGDIR=3D${localstatedir}/log/monkey/     \
+> +                 -DPID_PATH=3D${localstatedir}/run                   \
+> +                 -DPID_FILE=3Dmonkey.pid                             \
+> +                 -DDEFAULT_USER=3Dwww-data                           \
+> +                 -DDEFAULT_PORT=3D80                                 \
+> +                 -DINSTALL_WEBROOTDIR=3D${localstatedir}/www/monkey/ \
+> +                 -DINSTALL_SYSCONFDIR=3D${sysconfdir}/monkey/        \
+> +                 -DWITH_SYSTEM_MALLOC=3D1                            \
+> +                 -DWITH_PLUGIN_TLS=3D1                               \
+> +                 -DSTATIC_PLUGINS=3Dtls                              \
 > +                "
 > +
-> +X11_DEPS =3D "virtual/libx11 libxinerama libxext libxcursor libxv libxi =
-libxrender libxfixes libxdamage libxrandr libxkbfile"
-> +PACKAGECONFIG[x11] =3D "-DWITH_X11=3DON -DWITH_XINERAMA=3DON -DWITH_XEXT=
-=3DON -DWITH_XCURSOR=3DON -DWITH_XV=3DON -DWITH_XI=3DON -DWITH_XRENDER=3DON=
- -DWITH_XFIXES=3DON -DWITH_XDAMAGE=3DON -DWITH_XRANDR=3DON -DWITH_XKBFILE=
-=3DON,-DWITH_X11=3DOFF,${X11_DEPS}"
-> +PACKAGECONFIG[wayland] =3D "-DWITH_WAYLAND=3DON,-DWITH_WAYLAND=3DOFF,way=
-land"
-> +PACKAGECONFIG[directfb] =3D "-DWITH_DIRECTFB=3DON,-DWITH_DIRECTFB=3DOFF,=
-directfb"
-> +PACKAGECONFIG[pam] =3D "-DWITH_PAM=3DON,-DWITH_PAM=3DOFF,libpam"
-> +PACKAGECONFIG[pulseaudio] =3D "-DWITH_PULSEAUDIO=3DON,-DWITH_PULSEAUDIO=
-=3DOFF,pulseaudio"
-> +PACKAGECONFIG[gstreamer] =3D "-DWITH_GSTREAMER_1_0=3DON,-DWITH_GSTREAMER=
-_1_0=3DOFF,gstreamer1.0 gstreamer1.0-plugins-base"
-> +PACKAGECONFIG[cups] =3D "-DWITH_CUPS=3DON,-DWITH_CUPS=3DOFF,cups"
-> =20
->  PACKAGES =3D+ "libfreerdp"
-> =20
-> @@ -26,6 +42,13 @@ FILES_libfreerdp =3D "${libdir}/lib*${SOLIBS}"
-> =20
->  PACKAGES_DYNAMIC +=3D "^libfreerdp-plugin-.*"
-> =20
-> +# we will need winpr-makecert to generate TLS certificates
-> +do_install_append () {
-> +    install -m755 winpr/tools/makecert/cli/winpr-makecert ${D}${bindir}
-> +    rm -rf ${D}/${libdir}/cmake
-> +    rm -rf ${D}/${libdir}/freerdp
+> +inherit cmake update-rc.d systemd
+> +
+> +INITSCRIPT_NAME =3D "monkey"
+> +INITSCRIPT_PARAMS =3D "defaults 70"
+> +
+> +SYSTEMD_SERVICE_${PN} =3D "monkey.service"
+> +
+> +FILES_${PN} +=3D "${localstatedir}/www/monkey/"
+> +
+> +do_install_append() {
+> +    install -m 0755 -d ${D}${sysconfdir}/init.d
+> +    install -m 755 ${S}/monkey.init ${D}${sysconfdir}/init.d/monkey
+> +
+> +    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; =
+then
+> +        install -d ${D}${systemd_unitdir}/system
+> +        install -m 644 ${WORKDIR}/monkey.service ${D}/${systemd_unitdir}=
+/system
+> +    fi
 > +}
-> +
->  python populate_packages_prepend () {
->      freerdp_root =3D d.expand('${libdir}/freerdp')
-> =20
-> diff --git a/meta-oe/recipes-support/freerdp/freerdp/winpr-makecert-Build=
--with-install-RPATH.patch b/meta-oe/recipes-support/freerdp/freerdp/winpr-m=
-akecert-Build-with-install-RPATH.patch
-> new file mode 100644
-> index 0000000..d279d6d
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/freerdp/freerdp/winpr-makecert-Build-with-i=
-nstall-RPATH.patch
-> @@ -0,0 +1,31 @@
-> +From 253eafc8c8da83fc2b1a99a9e43824efc6105c7a Mon Sep 17 00:00:00 2001
-> +From: Manuel Bachmann <manuel.bachmann@iot.bzh>
-> +Date: Sun, 4 Oct 2015 10:44:49 +0200
-> +Subject: [PATCH] winpr-makecert: Build with install RPATH
-> +
-> +As we are installing "winpr-makecert" manually, we do want
-> +to refer to the library in DESTDIR, not the one resting in
-> +the build tree.
-> +
-> +Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
-> +---
-> + winpr/tools/makecert/cli/CMakeLists.txt | 4 ++++
-> + 1 file changed, 4 insertions(+)
-> +
-> +diff --git a/winpr/tools/makecert/cli/CMakeLists.txt b/winpr/tools/makec=
-ert/cli/CMakeLists.txt
-> +index 17954c4..90c446b 100644
-> +--- a/winpr/tools/makecert/cli/CMakeLists.txt
-> ++++ b/winpr/tools/makecert/cli/CMakeLists.txt
-> +@@ -45,5 +45,9 @@ set(${MODULE_PREFIX}_LIBS winpr-makecert-tool)
-> +=20
-> + target_link_libraries(${MODULE_NAME} ${${MODULE_PREFIX}_LIBS})
-> +=20
-> ++set_target_properties(${MODULE_NAME} PROPERTIES=20
-> ++	BUILD_WITH_INSTALL_RPATH 1)
-> ++
-> + set_property(TARGET ${MODULE_NAME} PROPERTY FOLDER "WinPR/Tools")
-> +=20
-> ++
-> +--=20
-> +1.8.3.1
-> +
-> diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb b/meta-oe/rec=
-ipes-support/freerdp/freerdp_git.bb
-> index fd7f74c..f9cb9a6 100644
-> --- a/meta-oe/recipes-support/freerdp/freerdp_git.bb
-> +++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
-> @@ -5,17 +5,17 @@ include freerdp.inc
-> =20
->  inherit gitpkgv
-> =20
-> -PV =3D "1.0.2+gitr${SRCPV}"
-> +PV =3D "1.2.5+gitr${SRCPV}"
->  PKGV =3D "${GITPKGVTAG}"
-> =20
-> -EXTRA_OECMAKE +=3D "-DWITH_MANPAGES=3DOFF"
-> +EXTRA_OECMAKE +=3D "-DBUILD_STATIC_LIBS=3DOFF \
-> +                  -DCMAKE_POSITION_INDEPENDANT_CODE=3DON \
-> +                  -DWITH_MANPAGES=3DOFF \
-> +                 "
-> =20
-> -SRCREV =3D "f311acaffb9190567e2b478a98d7cbfaf2709f6b"
-> -SRC_URI =3D "git://github.com/FreeRDP/FreeRDP.git;branch=3Dstable-1.0"
-> +SRCREV =3D "62da9d28c674814c81c245c1c7882eb0da7be76b"
-> +SRC_URI =3D "git://github.com/FreeRDP/FreeRDP.git \
-> +           file://winpr-makecert-Build-with-install-RPATH.patch \
-> +          "
-> =20
->  S =3D "${WORKDIR}/git"
-> -
-> -PNBLACKLIST[freerdp] ?=3D "Installs into double prefix, causing all file=
-s installed in /usr/usr and empty packages"
-> -# freerdp-1.0.2+gitrAUTOINC+f311acaffb: freerdp: Files/directories were =
-installed but not shipped
-> -#       /usr/usr
-> -#       ....
 > --=20
-> 1.8.3.1
+> 2.1.4
 >=20
 > --=20
 > _______________________________________________
@@ -265,16 +295,16 @@ installed but not shipped
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---TiqCXmo5T1hvSQQg
+--SFyWQ0h3ruR435lw
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlYmZOYACgkQN1Ujt2V2gBxCJACgqNFcIBg0utXhNFsN/fi4gQvn
-sGMAoJUnIxb5UiLVhBgIJm8QlHWKJPm6
-=7gOX
+iEYEARECAAYFAlYmZQ8ACgkQN1Ujt2V2gBxfzwCfdOW9hv8FXk+7VP81IqdF9ZZ9
+zuEAn12hVX5n62IrXXCehdP4anpjMIUc
+=WGdJ
 -----END PGP SIGNATURE-----
 
---TiqCXmo5T1hvSQQg--
+--SFyWQ0h3ruR435lw--
