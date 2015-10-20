@@ -1,55 +1,40 @@
-Return-Path: <ian.ray@ge.com>
-X-Greylist: delayed 2369 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 20 Oct 2015 11:54:07 UTC
-Received: from mx0b-00176a03.pphosted.com (mx0b-00176a03.pphosted.com
-	[67.231.157.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 6922375E2D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 76C4F76FDE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Oct 2015 11:54:07 +0000 (UTC)
-Received: from pps.filterd (m0048205.ppops.net [127.0.0.1])
-	by m0048205.ppops.net-00176a03. (8.15.0.59/8.15.0.59) with SMTP id
-	t9KBCW2M032121 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Oct 2015 07:14:38 -0400
-Received: from alpmlip10.e2k.ad.ge.com (n165-156-000-000.static.ge.com
-	[165.156.5.1] (may be forged))
-	by m0048205.ppops.net-00176a03. with ESMTP id 1xkhk5ue0a-32
-	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT)
+	Tue, 20 Oct 2015 15:40:57 +0000 (UTC)
+Received: by wicll6 with SMTP id ll6so34706785wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Oct 2015 07:14:38 -0400
-Received: from unknown (HELO CINMBHT01.e2k.ad.ge.com) ([3.159.212.194])
-	by alpmlip10.e2k.ad.ge.com with ESMTP/TLS/AES128-SHA;
-	20 Oct 2015 07:14:29 -0400
-Received: from ALPURTP02.e2k.ad.ge.com (3.159.16.201) by
-	CINMBHT01.e2k.ad.ge.com (3.159.212.194) with Microsoft SMTP Server
-	(TLS) id 14.3.224.2; Tue, 20 Oct 2015 07:14:29 -0400
-Received: from BUDURLND15.e2k.ad.ge.com (3.159.54.83) by
-	ALPURTP02.e2k.ad.ge.com (3.159.16.201) with Microsoft SMTP Server (TLS)
-	id 14.3.224.2; Tue, 20 Oct 2015 07:14:29 -0400
-Received: from BUDURBPA11.e2k.ad.ge.com ([169.254.5.190]) by
-	BUDURLND15.e2k.ad.ge.com ([169.254.9.171]) with mapi id 14.03.0224.002;
-	Tue, 20 Oct 2015 13:14:27 +0200
-From: "Ray, Ian (GE Healthcare)" <ian.ray@ge.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH 1/4] rrdtool: fix useless-rpath QA issue
-Thread-Index: AdELJ0aSHRf0k+SASrS2uH/GNykWdwAAA5qA
-Date: Tue, 20 Oct 2015 11:14:26 +0000
-Message-ID: <30E719D66AEA914CBB7DAB303B1C722D17E67F@BUDURBPA11.e2k.ad.ge.com>
-References: <30E719D66AEA914CBB7DAB303B1C722D17E664@BUDURBPA11.e2k.ad.ge.com>
-In-Reply-To: <30E719D66AEA914CBB7DAB303B1C722D17E664@BUDURBPA11.e2k.ad.ge.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [3.159.54.224]
+	Tue, 20 Oct 2015 08:40:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=voWn8GzOtPxLsrfAyzvRIBMsS09rbwRAz3+mBeKAsOA=;
+	b=v+x599fQ3SepwDW4ZButdpCXupbFtDcWGonLE3ZwqPLiOFoxxHNQ7Hh43eIWzaCLug
+	LMp39oPc0kPuT3jHH1lfbVDD8HLSPW4Qlh9DJheTXLIv+etjPqjTWN2/+aAiHmxY1siT
+	bFtOWZZ5xmRDQZPc6RRFgKPKdtp6GOrkUSMjGiWj3gSVXpQWpKZlFjHCMDVxHbVsrj6V
+	227G/9Z9fmlNNuJch0fUBHWmtOo2Nblx6RPaT9uyusz0RHOIjUp8kgGfiAPxeB1+XnoO
+	Q88dN6d919jmu10DwkfIrWUZ1PO49RvOuN0SaxHwLX3X6GCOhJxaKXJ/D8Q9Gnn3cHlF
+	2iGA==
+X-Received: by 10.180.188.100 with SMTP id fz4mr29540431wic.28.1445355657109; 
+	Tue, 20 Oct 2015 08:40:57 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id z4sm4559464wjz.29.2015.10.20.08.40.55
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 20 Oct 2015 08:40:55 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 20 Oct 2015 17:41:09 +0200
+To: akuster808 <akuster808@gmail.com>
+Message-ID: <20151020154109.GA2557@jama>
+References: <5625864A.4000007@gmail.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2015-10-20_05:, , signatures=0
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	suspectscore=0
-	malwarescore=0 phishscore=0 adultscore=0 bulkscore=0 classifier=spam
-	adjust=0 reason=mlx scancount=1 engine=8.0.1-1507310000
-	definitions=main-1510200188
-Subject: Re: [meta-oe][PATCH 1/4] rrdtool: fix useless-rpath QA issue
+In-Reply-To: <5625864A.4000007@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: dizzy-next sync to dizzy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,51 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Oct 2015 11:54:07 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 20 Oct 2015 15:40:57 -0000
+X-Groupsio-MsgNum: 57927
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="FCuugMFkClbJLl1L"
+Content-Disposition: inline
+
+--FCuugMFkClbJLl1L
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-
-> Signed-off-by: Chen Qi <Qi.Chen at windriver.com>
-> ---
->  meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
+On Mon, Oct 19, 2015 at 05:09:46PM -0700, akuster808 wrote:
+> Hello Martin,
 >=20
-> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb b/meta-
-> oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
-> index 91a30cf..f2ded65 100644
-> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
-> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
-> @@ -71,7 +71,6 @@ do_configure() {
->      PYTHON_INCLUDES=3D"-I=3D/usr/include/python${PYTHON_BASEVERSION}"'
-> \
->          ${S}/m4/acinclude.m4
->      #remove the hardcoded $(libdir) rpath
-> -    sed -i -e 's|--rpath=3D$(libdir)||g' ${S}/bindings/Makefile.am
+> Are there issues with the changes in dizzy-next? need Otavio to signoff?
 
-I tested locally a simpler patch:
+No issues, I was just waiting for one of you to request the merge.
 
-@@ -71,7 +71,7 @@ do_configure() {
-     PYTHON_INCLUDES=3D"-I=3D/usr/include/python${PYTHON_BASEVERSION}"' \
-         ${S}/m4/acinclude.m4
-     #remove the hardcoded $(libdir) rpath
--    sed -i -e 's|--rpath=3D$(libdir)||g' ${S}/bindings/Makefile.am
-+    sed -i -e 's|LD_RUN_PATH=3D$(libdir)||g' ${S}/bindings/Makefile.am
+Pushed now and new pull request pushed to dizzy-next.
 
-
-> @@ -100,6 +99,11 @@ do_configure() {
->          ${B}/examples/*.pl
->  }
+> Dizzy behind by:
 >=20
-> +do_compile_append() {
-> +    # Remove useless rpath
-> +    find ${B}/bindings/python/build -name "rrdtool.so" | xargs chrpath -=
-d
-> +}
+> 7f1df52 fuse: fix for CVE-2015-3202 Privilege Escalation
+> e3dbf78 ipsec-tools: Security Advisory - CVE-2015-4047
+> 0fb90be mariadb: Security Advisory -CVE-2015-2305
+> c580b62 libssh2: fix CVE-2015-1782
+> e00844e ptpd: disable libpcap detection via pcap-config
+>=20
 
-This fails for me since chrpath is not built for multilib.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--FCuugMFkClbJLl1L
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
+iEYEARECAAYFAlYmYH4ACgkQN1Ujt2V2gBxO/QCfXVjqpTIDLrZSBv66szjn7RtI
+C3kAoKwjbd9r8qNX5YEYFFi6z2+Gbo4J
+=+OdS
+-----END PGP SIGNATURE-----
+
+--FCuugMFkClbJLl1L--
