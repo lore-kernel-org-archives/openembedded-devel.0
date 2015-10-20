@@ -1,41 +1,27 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
-	[209.85.220.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 26B71758DB
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A67F76FF2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Oct 2015 00:09:53 +0000 (UTC)
-Received: by padhk11 with SMTP id hk11so1684680pad.1
+	Tue, 20 Oct 2015 01:32:41 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="102030625"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 20 Oct 2015 09:35:00 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t9K1W9PK032112
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Oct 2015 17:09:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=to:from:subject:message-id:date:user-agent:mime-version
-	:content-type:content-transfer-encoding;
-	bh=DjUXjqan077PCIGCPrPGMQTIhNMh+pFtC6d7jlUgnCM=;
-	b=v9bUbbrC+yP36N8Z8hpmwyevPmlHnz4I9EMH65BxR36qiw2yDP2k2uFKeLHhijCqF4
-	owI1TQmp47nC6NKoojLBokS2u3StMrAxFcezsyE8jZ5qg0GdAsHmM0cpui9B1puYNH54
-	5Cd5fyIFi2UxJaIibidH2s9/rcZacIgkbXp9wWkK0bB4qfqreFiMTa2+gZJK12eZouT2
-	C+wehushpYnWTydWpjLM5ePzXWmZwvo7lgr+6qg7ezI063Tamfp/DhUHVeDlW6afcs7Y
-	56lpssY/O+0/ywcXvT886Gh3HyBGmJcNeFccwJBw0ap2W1pZV9vDfocuq2p5f8TMxbdX
-	Zbgw==
-X-Received: by 10.68.57.171 with SMTP id j11mr276722pbq.17.1445299794102;
-	Mon, 19 Oct 2015 17:09:54 -0700 (PDT)
-Received: from ?IPv6:2601:202:4000:1239:6de1:f851:17fb:8dc4?
-	([2601:202:4000:1239:6de1:f851:17fb:8dc4])
-	by smtp.googlemail.com with ESMTPSA id
-	ro3sm175773pbc.69.2015.10.19.17.09.52
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 19 Oct 2015 17:09:52 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
-From: akuster808 <akuster808@gmail.com>
-X-Enigmail-Draft-Status: N1110
-Message-ID: <5625864A.4000007@gmail.com>
-Date: Mon, 19 Oct 2015 17:09:46 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
+	Tue, 20 Oct 2015 09:32:09 +0800
+Received: from localhost.localdomain (10.167.226.26) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Tue, 20 Oct 2015 09:32:38 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 20 Oct 2015 09:32:29 +0800
+Message-ID: <1445304749-3362-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: dizzy-next sync to dizzy
+X-Originating-IP: [10.167.226.26]
+Subject: [meta-oe][PATCH] lmsensors: remove unused service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,20 +35,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Oct 2015 00:09:55 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Oct 2015 01:32:43 -0000
+Content-Type: text/plain
 
-Hello Martin,
+From: Li Xin <lixin.fnst@cn.fujitsu.com>
 
-Are there issues with the changes in dizzy-next? need Otavio to signoff?
+* Upstream ships a systemd service file sensord.service now,
+  so we don't need this anymore.
+* Install lm_sensors.service and fancontrol.service to support systemd systems.
+  lm_sensors.service: Initialize hardware monitoring sensors.
+  fancontrol.service: Start fan control, if configured.
 
-Dizzy behind by:
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-support/lm_sensors/lmsensors/sensord.service | 11 -----------
+ meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb        |  9 ++-------
+ 2 files changed, 2 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/lm_sensors/lmsensors/sensord.service
 
-7f1df52 fuse: fix for CVE-2015-3202 Privilege Escalation
-e3dbf78 ipsec-tools: Security Advisory - CVE-2015-4047
-0fb90be mariadb: Security Advisory -CVE-2015-2305
-c580b62 libssh2: fix CVE-2015-1782
-e00844e ptpd: disable libpcap detection via pcap-config
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors/sensord.service b/meta-oe/recipes-support/lm_sensors/lmsensors/sensord.service
+deleted file mode 100644
+index 4836d8f..0000000
+--- a/meta-oe/recipes-support/lm_sensors/lmsensors/sensord.service
++++ /dev/null
+@@ -1,11 +0,0 @@
+-[Unit]
+-Description=Sensor Information Logging
+-
+-[Service]
+-Type=forking
+-EnvironmentFile=-@SYSCONFDIR@/sensord.conf
+-PIDFile=@LOCALSTATEDIR@/run/sensord.pid
+-ExecStart=@SBINDIR@/sensord $SENSORD_ARGS
+-
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
+index 66e8923..a483fb3 100644
+--- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
++++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
+@@ -10,7 +10,6 @@ DEPENDS = "sysfsutils virtual/libiconv bison-native flex-native rrdtool"
+ SRC_URI = "http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-${PV}.tar.bz2 \
+            file://fancontrol.init \
+            file://sensord.init \
+-           file://sensord.service \
+ "
+ SRC_URI[md5sum] = "c03675ae9d43d60322110c679416901a"
+ SRC_URI[sha256sum] = "e0579016081a262dd23eafe1d22b41ebde78921e73a1dcef71e05e424340061f"
+@@ -26,7 +25,7 @@ INITSCRIPT_PARAMS_${PN}-fancontrol = "defaults 66"
+ INITSCRIPT_PARAMS_${PN}-sensord = "defaults 67"
+ 
+ SYSTEMD_PACKAGES = "${PN}-sensord"
+-SYSTEMD_SERVICE_${PN}-sensord = "sensord.service"
++SYSTEMD_SERVICE_${PN}-sensord = "sensord.service lm_sensors.service fancontrol.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
+ 
+ S = "${WORKDIR}/lm_sensors-${PV}"
+@@ -58,11 +57,7 @@ do_install() {
+     # Insall sensord service script
+     if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+         install -d ${D}${systemd_unitdir}/system
+-        install -m 0644 ${WORKDIR}/sensord.service ${D}${systemd_unitdir}/system
+-
+-        sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/sensord.service
+-        sed -i -e 's#@LOCALSTATEDIR@#${localstatedir}#g' ${D}${systemd_unitdir}/system/sensord.service
+-        sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/sensord.service
++        install -m 0644 ${S}/prog/init/*.service ${D}${systemd_unitdir}/system
+     fi
+ }
+ 
+-- 
+1.8.4.2
 
 
