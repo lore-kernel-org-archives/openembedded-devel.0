@@ -1,27 +1,34 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A67F76FF2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 2DF7A76FF2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Oct 2015 01:32:41 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="102030625"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 20 Oct 2015 09:35:00 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t9K1W9PK032112
+	Tue, 20 Oct 2015 04:19:58 +0000 (UTC)
+Received: by padhk11 with SMTP id hk11so8036199pad.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Oct 2015 09:32:09 +0800
-Received: from localhost.localdomain (10.167.226.26) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 20 Oct 2015 09:32:38 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 20 Oct 2015 09:32:29 +0800
-Message-ID: <1445304749-3362-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH] lmsensors: remove unused service file
+	Mon, 19 Oct 2015 21:19:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=7tN2s+J2SBy9+JdBC0UB+gSLLdblEziMvAYSn5ENsjM=;
+	b=FVnQHTfNXzBu0kclBZ6dmJFwxBYQZjuWE/EQU55qlOixjqEDoi84/IWTREWi+zLyNU
+	Fsv3Q4cRyFt7OHLubzOnHi6HZ9fG0HkCyb0U5BwhtYVKFeEI8PQ++XJklbmxF38glyFG
+	Kl4yGx6BaFsMOEzYR5dCvFPHX6efrgVPCslfrXAUIMnCCyjbJq8p179nF6Q2dm+lAMOQ
+	dInryxa1scWOv8F1jQkuglDBGlRzr8KLcpdFpgaVoNoLbUL79S78osdMi881q8QN4k4H
+	fWEmcNtLFoHoBzZsC7GIwqodq3mUr+tzgIsQJc4cp8TnIeNo4NorQFZMzS5WavE9/nS0
+	f6dg==
+X-Received: by 10.68.94.69 with SMTP id da5mr1373002pbb.65.1445314798980;
+	Mon, 19 Oct 2015 21:19:58 -0700 (PDT)
+Received: from haswell.localdomain ([2601:646:8601:4580:baca:3aff:fe80:aa8f])
+	by smtp.gmail.com with ESMTPSA id
+	we9sm914465pab.3.2015.10.19.21.19.58
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 19 Oct 2015 21:19:58 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Oct 2015 21:29:19 -0700
+Message-Id: <1445315359-30016-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.6.1
+Subject: [meta-oe][PATCH] luajit: Upgrade to 2.1 beta1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,76 +42,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Oct 2015 01:32:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 20 Oct 2015 04:20:00 -0000
 
-From: Li Xin <lixin.fnst@cn.fujitsu.com>
-
-* Upstream ships a systemd service file sensord.service now,
-  so we don't need this anymore.
-* Install lm_sensors.service and fancontrol.service to support systemd systems.
-  lm_sensors.service: Initialize hardware monitoring sensors.
-  fancontrol.service: Start fan control, if configured.
-
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/lm_sensors/lmsensors/sensord.service | 11 -----------
- meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb        |  9 ++-------
- 2 files changed, 2 insertions(+), 18 deletions(-)
- delete mode 100644 meta-oe/recipes-support/lm_sensors/lmsensors/sensord.service
+ ...p-automatically-this-leaves-the-stripping.patch | 33 ----------------------
+ .../luajit/{luajit_2.0.4.bb => luajit_2.1.bb}      | 17 +++++------
+ 2 files changed, 9 insertions(+), 41 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatically-this-leaves-the-stripping.patch
+ rename meta-oe/recipes-devtools/luajit/{luajit_2.0.4.bb => luajit_2.1.bb} (74%)
 
-diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors/sensord.service b/meta-oe/recipes-support/lm_sensors/lmsensors/sensord.service
+diff --git a/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatically-this-leaves-the-stripping.patch b/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatically-this-leaves-the-stripping.patch
 deleted file mode 100644
-index 4836d8f..0000000
---- a/meta-oe/recipes-support/lm_sensors/lmsensors/sensord.service
+index f123b3f..0000000
+--- a/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatically-this-leaves-the-stripping.patch
 +++ /dev/null
-@@ -1,11 +0,0 @@
--[Unit]
--Description=Sensor Information Logging
+@@ -1,33 +0,0 @@
+-From 528009f5ca0685c95ef27f6c8957160499c0576a Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 10 May 2013 10:42:45 -0700
+-Subject: [PATCH] Do not strip automatically, this leaves the stripping
+- busines to OE
 -
--[Service]
--Type=forking
--EnvironmentFile=-@SYSCONFDIR@/sensord.conf
--PIDFile=@LOCALSTATEDIR@/run/sensord.pid
--ExecStart=@SBINDIR@/sensord $SENSORD_ARGS
+-Upstream-Status: Inappropriate [OE-Specific]
 -
--[Install]
--WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-index 66e8923..a483fb3 100644
---- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-+++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-@@ -10,7 +10,6 @@ DEPENDS = "sysfsutils virtual/libiconv bison-native flex-native rrdtool"
- SRC_URI = "http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-${PV}.tar.bz2 \
-            file://fancontrol.init \
-            file://sensord.init \
--           file://sensord.service \
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/Makefile |    2 --
+- 1 file changed, 2 deletions(-)
+-
+-diff --git a/src/Makefile b/src/Makefile
+-index 278324a..5ecd6d5 100644
+---- a/src/Makefile
+-+++ b/src/Makefile
+-@@ -665,12 +665,10 @@ $(LUAJIT_A): $(LJVMCORE_O)
+- $(LUAJIT_SO): $(LJVMCORE_O)
+- 	$(E) "DYNLINK   $@"
+- 	$(Q)$(TARGET_LD) $(TARGET_ASHLDFLAGS) -o $@ $(LJVMCORE_DYNO) $(TARGET_ALIBS)
+--	$(Q)$(TARGET_STRIP) $@
+- 
+- $(LUAJIT_T): $(TARGET_O) $(LUAJIT_O) $(TARGET_DEP)
+- 	$(E) "LINK      $@"
+- 	$(Q)$(TARGET_LD) $(TARGET_ALDFLAGS) -o $@ $(LUAJIT_O) $(TARGET_O) $(TARGET_ALIBS)
+--	$(Q)$(TARGET_STRIP) $@
+- 	$(E) "OK        Successfully built LuaJIT"
+- 
+- ##############################################################################
+--- 
+-1.7.9.5
+-
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb b/meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+similarity index 74%
+rename from meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+rename to meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+index 4a15a4e..ba439d0 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+@@ -3,13 +3,13 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3992f1fbae3b8b061f9056b7fcda8cc6"
+ HOMEPAGE = "http://luajit.org"
+ 
+-SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
+-           file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
++SRCREV = "776c6935ed807fc3b1ee6cd89a0cf682ffb7e9de"
++SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v${PV} \
  "
- SRC_URI[md5sum] = "c03675ae9d43d60322110c679416901a"
- SRC_URI[sha256sum] = "e0579016081a262dd23eafe1d22b41ebde78921e73a1dcef71e05e424340061f"
-@@ -26,7 +25,7 @@ INITSCRIPT_PARAMS_${PN}-fancontrol = "defaults 66"
- INITSCRIPT_PARAMS_${PN}-sensord = "defaults 67"
+-SRC_URI[md5sum] = "dd9c38307f2223a504cbfb96e477eca0"
+-SRC_URI[sha256sum] = "620fa4eb12375021bef6e4f237cbd2dd5d49e56beb414bee052c746beef1807d"
  
- SYSTEMD_PACKAGES = "${PN}-sensord"
--SYSTEMD_SERVICE_${PN}-sensord = "sensord.service"
-+SYSTEMD_SERVICE_${PN}-sensord = "sensord.service lm_sensors.service fancontrol.service"
- SYSTEMD_AUTO_ENABLE = "disable"
+-S = "${WORKDIR}/LuaJIT-${PV}"
++SPIN = ".0-beta1"
++
++S = "${WORKDIR}/git"
  
- S = "${WORKDIR}/lm_sensors-${PV}"
-@@ -58,11 +57,7 @@ do_install() {
-     # Insall sensord service script
-     if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}${systemd_unitdir}/system
--        install -m 0644 ${WORKDIR}/sensord.service ${D}${systemd_unitdir}/system
--
--        sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/sensord.service
--        sed -i -e 's#@LOCALSTATEDIR@#${localstatedir}#g' ${D}${systemd_unitdir}/system/sensord.service
--        sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/sensord.service
-+        install -m 0644 ${S}/prog/init/*.service ${D}${systemd_unitdir}/system
-     fi
+ inherit pkgconfig binconfig
+ 
+@@ -23,7 +23,7 @@ do_configure_prepend() {
+ EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX} \
+                 TARGET_CFLAGS="${TOOLCHAIN_OPTIONS} ${HOST_CC_ARCH}" \
+                 TARGET_LDFLAGS="${TOOLCHAIN_OPTIONS}" \
+-                TARGET_SHLDFLAGS="${TOOLCHAIN_OPTIONS}"'
++                TARGET_SHLDFLAGS="${TOOLCHAIN_OPTIONS}" TARGET_STRIP="/bin/echo"'
+ EXTRA_OEMAKE_append_powerpc = ' HOST_CC="${BUILD_CC} -m32"'
+ EXTRA_OEMAKE_append_x86 = ' HOST_CC="${BUILD_CC} -m32"'
+ EXTRA_OEMAKE_append_x86-64 = ' HOST_CC="${BUILD_CC}"'
+@@ -36,7 +36,8 @@ do_compile () {
  }
  
+ do_install () {
+-    oe_runmake 'DESTDIR=${D}' install
++    oe_runmake 'DESTDIR=${D}' 'TARGET_STRIP=/bin/echo' install
++    ln -s ${bindir}/${BPN}-${PV}${SPIN} ${D}${bindir}/luajit
+     rmdir ${D}${datadir}/lua/5.* \
+           ${D}${datadir}/lua \
+           ${D}${libdir}/lua/5.* \
+@@ -52,5 +53,5 @@ FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
+     ${libdir}/libluajit-5.1.so \
+     ${libdir}/pkgconfig/luajit.pc \
+ "
+-FILES_luajit-common = "${datadir}/${BPN}-${PV}"
++FILES_luajit-common = "${datadir}/${BPN}-${PV}${SPIN}"
+ 
 -- 
-1.8.4.2
+2.6.1
 
 
