@@ -1,23 +1,29 @@
-Return-Path: <Hongxu.Jia@windriver.com>
+Return-Path: <Qi.Chen@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D8BE7680C
+	by mail.openembedded.org (Postfix) with ESMTP id B41FD766F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2015 07:03:03 +0000 (UTC)
+	Wed, 21 Oct 2015 07:58:39 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9L7334j001216
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 21 Oct 2015 00:03:03 -0700 (PDT)
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.159) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 21 Oct 2015 00:03:02 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 Oct 2015 15:02:16 +0800
-Message-ID: <1445410936-10590-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9L7wdwg001549
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Oct 2015 00:58:40 -0700 (PDT)
+Received: from [128.224.162.211] (128.224.162.211) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Wed, 21 Oct 2015 00:58:38 -0700
+Message-ID: <562745D4.8060103@windriver.com>
+Date: Wed, 21 Oct 2015 15:59:16 +0800
+From: ChenQi <Qi.Chen@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] postfix.inc: do not hardcode userid and groupid
+To: <openembedded-devel@lists.openembedded.org>
+References: <30E719D66AEA914CBB7DAB303B1C722D17E664@BUDURBPA11.e2k.ad.ge.com>
+	<30E719D66AEA914CBB7DAB303B1C722D17E67F@BUDURBPA11.e2k.ad.ge.com>
+In-Reply-To: <30E719D66AEA914CBB7DAB303B1C722D17E67F@BUDURBPA11.e2k.ad.ge.com>
+X-Originating-IP: [128.224.162.211]
+Subject: Re: [meta-oe][PATCH 1/4] rrdtool: fix useless-rpath QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,56 +37,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Oct 2015 07:03:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 21 Oct 2015 07:58:44 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-It hardcoded to assign vmail's userid and groupid with 5000,
-which caused the following useradd/groupadd is increased from
-5000 at do_root time. Such as 'tracing' group id is 5001
-(tracing group is added in lttng-tools).
+Hi Ray,
 
-It is better to allocate it dynamically.
+I just saw this email.
+Thanks a lot for your suggestion.
+I've sent out V2.
 
-BTW, you may google to find the hardcoded 5000 in following site:
-https://help.ubuntu.com/community/PostfixVirtualMailBoxClamSmtpHowto
+Best Regards,
+Chen Qi
 
-In its main.cf, it also hardcoded virtual_uid_maps and virtual_gid_maps.
-...
-virtual_uid_maps = static:5000
-virtual_gid_maps = static:5000
-..
 
-But in meta-oe's main.cf_2.0, it assigned virtual_uid_maps and
-virtual_gid_maps with a search.
-...
-virtual_uid_maps = static:`grep vmail /etc/passwd | cut -d ":" -f 3`
-virtual_gid_maps = static:`grep vmail /etc/passwd | cut -d ":" -f 4`
-...
-
-So please feel free to forget 5000.
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-networking/recipes-daemons/postfix/postfix.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index 3e7f918..6d39570 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -36,9 +36,9 @@ INITSCRIPT_PARAMS = "start 58 3 4 5 . stop 13 0 1 6 ."
- USERADD_PACKAGES = "${PN}"
- USERADD_PARAM_${PN} = \
- "-d /var/spool/postfix -r -g postfix --shell /bin/false postfix; \
-- -d /var/spool/vmail -r -u 5000 -g vmail --shell /bin/false vmail \
-+ -d /var/spool/vmail -r -g vmail --shell /bin/false vmail \
- "
--GROUPADD_PARAM_${PN} = "--system postfix;--system postdrop;-g 5000 --system vmail"
-+GROUPADD_PARAM_${PN} = "--system postfix;--system postdrop;--system vmail"
- 
- export SYSLIBS = "${LDFLAGS}"
- 
--- 
-1.9.1
+On 10/20/2015 07:14 PM, Ray, Ian (GE Healthcare) wrote:
+> Hi,
+>
+>> Signed-off-by: Chen Qi <Qi.Chen at windriver.com>
+>> ---
+>>   meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb | 6 +++++-
+>>   1 file changed, 5 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb b/meta-
+>> oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+>> index 91a30cf..f2ded65 100644
+>> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+>> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+>> @@ -71,7 +71,6 @@ do_configure() {
+>>       PYTHON_INCLUDES="-I=/usr/include/python${PYTHON_BASEVERSION}"'
+>> \
+>>           ${S}/m4/acinclude.m4
+>>       #remove the hardcoded $(libdir) rpath
+>> -    sed -i -e 's|--rpath=$(libdir)||g' ${S}/bindings/Makefile.am
+> I tested locally a simpler patch:
+>
+> @@ -71,7 +71,7 @@ do_configure() {
+>       PYTHON_INCLUDES="-I=/usr/include/python${PYTHON_BASEVERSION}"' \
+>           ${S}/m4/acinclude.m4
+>       #remove the hardcoded $(libdir) rpath
+> -    sed -i -e 's|--rpath=$(libdir)||g' ${S}/bindings/Makefile.am
+> +    sed -i -e 's|LD_RUN_PATH=$(libdir)||g' ${S}/bindings/Makefile.am
+>
+>
+>> @@ -100,6 +99,11 @@ do_configure() {
+>>           ${B}/examples/*.pl
+>>   }
+>>
+>> +do_compile_append() {
+>> +    # Remove useless rpath
+>> +    find ${B}/bindings/python/build -name "rrdtool.so" | xargs chrpath -d
+>> +}
+> This fails for me since chrpath is not built for multilib.
+>
+>
 
 
