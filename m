@@ -1,42 +1,32 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 1759575E80
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
+	[209.85.213.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C615758DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2015 15:34:51 +0000 (UTC)
-Received: by wicll6 with SMTP id ll6so80291475wic.1
+	Wed, 21 Oct 2015 15:39:51 +0000 (UTC)
+Received: by igdg1 with SMTP id g1so89198736igd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2015 08:34:51 -0700 (PDT)
+	Wed, 21 Oct 2015 08:39:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=RZpcA4n1U82VIETro/eytLAtuTP2MJ4nXo2NONwDbOU=;
-	b=SE3t2wV7VJ56JjZOEa8RganYgnAUdC37wlPvL7m6244vdXdRBawYSKZSAxhatIhayG
-	f7snrYYugZ0NasAW9XCzC5eWxaMQZpwH/SqLfD8CSn8b+qIHqsM/qVFt+dnjgG0iFbKv
-	aH55cNcsaTY3binJxfLO7RpoS0OPC36GMyLIDlzZC2JsIm5q2/sZCWjivZ8QVJ0SDngH
-	75nFgzAT/Q8ksmKvkLFRrwi820zdRcxYsmh/N88q3VCk5N3cVLZx+VfpF9ta+kybtCsy
-	WuS/xWHlKKBRZbMO4sNHZ6olAoKEm2tsoPhQNlwAcxqjoY6qk3ToNVo7SSUbVeGUAUnf
-	XR+A==
-X-Received: by 10.194.175.232 with SMTP id cd8mr12587192wjc.45.1445441691141; 
-	Wed, 21 Oct 2015 08:34:51 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	bv2sm11100750wjc.11.2015.10.21.08.34.49
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 Oct 2015 08:34:49 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 21 Oct 2015 17:35:08 +0200
-To: akuster808 <akuster808@gmail.com>
-Message-ID: <20151021153508.GF2556@jama>
-References: <5625864A.4000007@gmail.com>
- <20151020154109.GA2557@jama>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=EOMdHJnghjpr51mvrIkwZ1zW4Yz5lzTyRAn+xF9Dq3Q=;
+	b=KR1pyD4MpyJwcX8vKTbbPQEfMdv3a7F3sGyxnFRNWHstbx2yvEwt9ZfqEYk+w+ZDwm
+	8lAW11HIgq14IWaRIsBicaqsD7p2xvHcVl45uRQM+YxevxrRck+0j5Blfk9qwyT3lfo/
+	piJncuWGesGn50yEUY4q66iqsKLSkfOqozys5Koo88HxIFZQszYwKgW6+s6WD9DJOMXc
+	cpRglX73LzaUzY3Vu/Lw8GQW+Yy9wYWL6X4iaa32yByvhFNPNVZYyf5ufyHGt6ORg1kq
+	9gjfw0ImqG5VHc0+da757s7CNJDEV+b15RlqqmXEvZRkO5+sFve0iZsAAgk3XwD/4pwI
+	XwYQ==
+X-Received: by 10.50.55.42 with SMTP id o10mr16754585igp.11.1445441992006;
+	Wed, 21 Oct 2015 08:39:52 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20151020154109.GA2557@jama>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: dizzy-next sync to dizzy
+Received: by 10.107.38.133 with HTTP; Wed, 21 Oct 2015 08:39:22 -0700 (PDT)
+In-Reply-To: <1445426326-25819-1-git-send-email-jkrishnanjanappa@mvista.com>
+References: <1445426326-25819-1-git-send-email-jkrishnanjanappa@mvista.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 21 Oct 2015 08:39:22 -0700
+Message-ID: <CAMKF1spnorJStzBcAUyZDAqDLiN-80qfUeum+_P=Nv+4nQjMiw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libuio: fix build issue with gcc-5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,70 +40,205 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Oct 2015 15:34:52 -0000
-X-Groupsio-MsgNum: 57952
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="HCdXmnRlPgeNBad2"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 21 Oct 2015 15:39:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
---HCdXmnRlPgeNBad2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Oct 21, 2015 at 4:18 AM, Jagadeesh Krishnanjanappa
+<jkrishnanjanappa@mvista.com> wrote:
+> 1. Remove  PNBLACKLIST[libuio] line, since libuio compiles fine with gcc-5
+>    with this patch.
+>
+> 2. By default, gcc-5 uses C99 inline semantics, this semantics doesn't
+> generate externally visible function for inline functions. This results in
+> below error, when an another translation unit (TU) tries to link with the
+> inline function,
+>
+> -- snip --
+> | lsuio.o: In function `main':
+> | <...>/libuio/0.2.1-r0/git/tools/lsuio.c:85: undefined reference to `uio_mmap'
+> | collect2: error: ld returned 1 exit status
+> | make[2]: *** [lsuio] Error 1
+> -- CUT --
+>
+> To solve this error and make libuio to compile with both 4.x and 5.x,
+>
+> 1. We can remove 'uio_mmap' inline function definition in uio_mmap.c, and move
+>    that definition into uio_helper.h file (which is included by lsuio.c) and
+>    replace inline with "static inline". Similarly it can be done to
+>    uio_single_munmap and uio_munmap inline functions
+>
+> 2. Add 'extern' keyword in front of uio_mmap inline function declaration , to
+>    make uio_mmap as a externally visible function, and so that it can be
+>    linked with other TUs.
+>
+> Going with option 1.
 
-On Tue, Oct 20, 2015 at 05:41:09PM +0200, Martin Jansa wrote:
-> On Mon, Oct 19, 2015 at 05:09:46PM -0700, akuster808 wrote:
-> > Hello Martin,
-> >=20
-> > Are there issues with the changes in dizzy-next? need Otavio to signoff?
->=20
-> No issues, I was just waiting for one of you to request the merge.
->=20
-> Pushed now and new pull request pushed to dizzy-next.
+you need to see the impact on code size increase with option 1. Its
+good in general otherwise
+option 2 would do just what was already happening
 
-Hmm there seems to be an issue after all.
+>
+> Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+> ---
+>  .../libuio/replace_inline_with_static-inline.patch | 121 +++++++++++++++++++++
+>  meta-oe/recipes-extended/libuio/libuio_0.2.1.bb    |   6 +-
+>  2 files changed, 123 insertions(+), 4 deletions(-)
+>  create mode 100644 meta-oe/recipes-extended/libuio/libuio/replace_inline_with_static-inline.patch
+>
+> diff --git a/meta-oe/recipes-extended/libuio/libuio/replace_inline_with_static-inline.patch b/meta-oe/recipes-extended/libuio/libuio/replace_inline_with_static-inline.patch
+> new file mode 100644
+> index 0000000..fd314bf
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/libuio/libuio/replace_inline_with_static-inline.patch
+> @@ -0,0 +1,121 @@
+> +By default, gcc-5 uses C99 inline semantics, this semantics doesn't
+> +generate externally visible function for inline functions. This results in
+> +below error, when an another translation unit (TU) tries to link with the
+> +inline function,
+> +
+> +-- snip --
+> +| lsuio.o: In function `main':
+> +| <...>/libuio/0.2.1-r0/git/tools/lsuio.c:85: undefined reference to `uio_mmap'
+> +| collect2: error: ld returned 1 exit status
+> +| make[2]: *** [lsuio] Error 1
+> +-- CUT --
+> +
+> +To solve this error and make libuio to compile with both 4.x and 5.x,
+> +
+> +1. We can remove 'uio_mmap' inline function definition in uio_mmap.c, and move
+> +   that definition into uio_helper.h file (which is included by lsuio.c) and
+> +   replace inline with "static inline". Similarly it can be done to other
+> +   uio_single_munmap and uio_munmap inline functions
+> +
+> +2. Add 'extern' keyword in front of inline functions declaration, to make
+> +   inlined function as externally visible function, and to link with other TUs.
+> +
+> +Going with option 1.
+> +
+> +Upstream-Status: Pending
+> +
+> +Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+> +
+> +--- git_org/src/uio_helper.h   2015-10-20 02:37:04.183075855 -0400
+> ++++ git/src/uio_helper.h       2015-10-20 03:34:24.659970136 -0400
+> +@@ -61,11 +61,11 @@ struct uio_info_t {
+> +
+> + /* function prototypes */
+> +
+> +-inline char* uio_lib_name(void);
+> +-inline char* uio_lib_version(void);
+> +-inline int uio_lib_ifcurrent(void);
+> +-inline int uio_lib_ifrevision(void);
+> +-inline int uio_lib_ifage(void);
+> ++static inline char* uio_lib_name(void);
+> ++static inline char* uio_lib_version(void);
+> ++static inline int uio_lib_ifcurrent(void);
+> ++static inline int uio_lib_ifrevision(void);
+> ++static inline int uio_lib_ifage(void);
+> +
+> + int uio_get_mem_size(struct uio_info_t* info, int map_num);
+> + int uio_get_mem_addr(struct uio_info_t* info, int map_num);
+> +@@ -76,10 +76,30 @@ int uio_get_all_info(struct uio_info_t*
+> + int uio_get_device_attributes(struct uio_info_t* info);
+> +
+> + void* uio_single_mmap(struct uio_info_t* info, int map_num, int fd);
+> +-inline void uio_mmap(struct uio_info_t* info, int fd);
+> +
+> +-inline void uio_single_munmap(struct uio_info_t* info, int map_num);
+> +-inline void uio_munmap(struct uio_info_t* info);
+> ++static inline void uio_mmap(struct uio_info_t* info, int fd);
+> ++static inline void uio_mmap(struct uio_info_t* info, int fd)
+> ++{
+> ++        int map_num;
+> ++        if (!fd) return;
+> ++        for (map_num= 0; map_num < MAX_UIO_MAPS; map_num++)
+> ++                uio_single_mmap(info, map_num, fd);
+> ++}
+> ++
+> ++static inline void uio_single_munmap(struct uio_info_t* info, int map_num);
+> ++static inline void uio_single_munmap(struct uio_info_t* info, int map_num)
+> ++{
+> ++        munmap(info->maps[map_num].internal_addr, info->maps[map_num].size);
+> ++        info->maps[map_num].mmap_result = UIO_MMAP_NOT_DONE;
+> ++}
+> ++
+> ++static inline void uio_munmap(struct uio_info_t* info);
+> ++static inline void uio_munmap(struct uio_info_t* info)
+> ++{
+> ++        int i;
+> ++        for (i = 0; i < MAX_UIO_MAPS; i++)
+> ++                uio_single_munmap(info, i);
+> ++}
+> +
+> + void uio_free_dev_attrs(struct uio_info_t* info);
+> + void uio_free_info(struct uio_info_t* info);
+> +--- git_org/src/uio_mmap.c     2015-10-20 02:37:04.183075855 -0400
+> ++++ git/src/uio_mmap.c 2015-10-20 03:34:45.060003208 -0400
+> +@@ -22,11 +22,3 @@
+> + #include <stdlib.h>
+> +
+> + #include "uio_helper.h"
+> +-
+> +-inline void uio_mmap(struct uio_info_t* info, int fd)
+> +-{
+> +-      int map_num;
+> +-      if (!fd) return;
+> +-      for (map_num= 0; map_num < MAX_UIO_MAPS; map_num++)
+> +-              uio_single_mmap(info, map_num, fd);
+> +-}
+> +--- git_org/src/uio_munmap.c   2015-10-20 02:37:04.183075855 -0400
+> ++++ git/src/uio_munmap.c       2015-10-20 03:34:59.636026835 -0400
+> +@@ -22,10 +22,3 @@
+> + #include <stdlib.h>
+> +
+> + #include "uio_helper.h"
+> +-
+> +-inline void uio_munmap(struct uio_info_t* info)
+> +-{
+> +-      int i;
+> +-      for (i = 0; i < MAX_UIO_MAPS; i++)
+> +-              uio_single_munmap(info, i);
+> +-}
+> +\ No newline at end of file
+> +--- git_org/src/uio_single_munmap.c    2015-10-20 02:37:04.183075855 -0400
+> ++++ git/src/uio_single_munmap.c        2015-10-20 03:52:55.005763023 -0400
+> +@@ -24,9 +24,3 @@
+> + #include <sys/mman.h>
+> +
+> + #include "uio_helper.h"
+> +-
+> +-inline void uio_single_munmap(struct uio_info_t* info, int map_num)
+> +-{
+> +-      munmap(info->maps[map_num].internal_addr, info->maps[map_num].size);
+> +-      info->maps[map_num].mmap_result = UIO_MMAP_NOT_DONE;
+> +-}
+> diff --git a/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb b/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
+> index 0f63e60..f405197 100644
+> --- a/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
+> +++ b/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
+> @@ -3,7 +3,8 @@ SECTION = "base"
+>  LICENSE = "GPL-2.0"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+>
+> -SRC_URI = "git://git.code.sf.net/p/libuio/code"
+> +SRC_URI = "git://git.code.sf.net/p/libuio/code \
+> +           file://replace_inline_with_static-inline.patch"
+>
+>  inherit autotools
+>
+> @@ -15,6 +16,3 @@ PACKAGES += "${PN}-tools"
+>
+>  FILES_${PN} = "${libdir}"
+>  FILES_${PN}-tools = "${bindir}"
+> -
+> -# 0.2.1-r0/git/tools/lsuio.c:85: error: undefined reference to 'uio_mmap'
+> -PNBLACKLIST[libuio] ?= "BROKEN, fails to build with gcc-5"
+> --
+> 1.8.2.3
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-At least
-7f1df52 fuse: fix for CVE-2015-3202 Privilege Escalation
-is missing in fido branch, both are using 2.9.3 version which is
-affected.
-
-I haven't tested other patches (except testing that they don't apply
-cleanly to fido as they are) and haven't checked if we need them in
-master/jethro branch.
-
-But older releases shouldn't get fixes which are missing in newer
-releases, otherwise people upgrading from dizzy to fido will get
-suddenly vulnerable to this fuse issue probably without noticing.
-
-Regards,
-
-> > Dizzy behind by:
-> >=20
-> > e3dbf78 ipsec-tools: Security Advisory - CVE-2015-4047
-> > 0fb90be mariadb: Security Advisory -CVE-2015-2305
-> > c580b62 libssh2: fix CVE-2015-1782
-> > e00844e ptpd: disable libpcap detection via pcap-config
-> >=20
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---HCdXmnRlPgeNBad2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlYnsKsACgkQN1Ujt2V2gByz/wCgr5NvDzhXdgLUDarvaiEK+sf2
-T1gAoLb1t58ltUt/yVCQNFOX3Y/tSegS
-=+Xk6
------END PGP SIGNATURE-----
-
---HCdXmnRlPgeNBad2--
