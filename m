@@ -1,40 +1,42 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 9999A76102
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 72B9165C8A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2015 19:40:29 +0000 (UTC)
-Received: by wijp11 with SMTP id p11so204586wij.0
+	Wed, 21 Oct 2015 19:45:14 +0000 (UTC)
+Received: by pacfv9 with SMTP id fv9so65947324pac.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2015 12:40:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=S/1LiIQFEEWkiBlCH4ClDMcX03oc64mdzr1f/3bMCmk=;
-	b=q6f06MKKFUVwjTWpBYkF4NNlsbngDHCMBOxnlxz4CzKHTdAIARh1IDdZ6E3JnLG5zC
-	sHoL0RM1S8WcPkkgVYEDzxuxJj/3tUGqfWsrpU4OuteXxrLbzONFCbwMr7ND2Od5o3L6
-	nzHnNwlg3hFZRZmo465kMw0lC2WzcAyeJu/scT9UNdySfH5vodHUILaVi6qnchLMtZFo
-	6uKfetJxI4onBtsum1K1zmca1kIKEWJyrNa4fVEyNez5HfbjPBduAM+9p5XO6FvX6TL6
-	+2fz6Z8CpSCiGdpzuOEjCpmJVkT4mwIFRCyjeAq1XLeaFvyxkmSvPvle4DXTIf7P0wP5
-	4Pqw==
-X-Received: by 10.180.81.228 with SMTP id d4mr36868915wiy.38.1445456429248;
-	Wed, 21 Oct 2015 12:40:29 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF14D2.dip0.t-ipconnect.de.
-	[79.223.20.210]) by smtp.googlemail.com with ESMTPSA id
-	g9sm6288wix.1.2015.10.21.12.40.28
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 Oct 2015 12:40:28 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Oct 2015 21:40:18 +0200
-Message-Id: <1445456418-2756-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1445456418-2756-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1445456418-2756-1-git-send-email-schnitzeltony@googlemail.com>
+	Wed, 21 Oct 2015 12:45:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:cc:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-type:content-transfer-encoding;
+	bh=JAYggL9R9vN2FdKFvRTmPw4apzk66oTq2FSmOKDhfUo=;
+	b=xZbMk+WrlKKCCIuk+/SojMY2doE+fYVjJs1F2VxInd8dtM6qlSxsJE242sDksjm6p0
+	JQV0gRcLxzfLoKZA5ZiniIK+xT9Ykk5aOl9mw9COfmJmI9n3H+uJguuWRhCveOetcrdO
+	+AmHQMfSAKmzhT4ZWzUzhahMiIiuDqgh1u3r93wXnTouAR5lRQmV2q2PyjjmnnCk4vMr
+	b2vGRQDJ6uTpDX302gmtrDS+o3HU0MfOcEKEkrPTePIzviCkqFdDtf95bA4Jnu3ln1La
+	32QSSVvXd38LMqYqYGnXcg+NYsIZF1wswxjVjprBlznWS0X3WCFxgJ49wSIpEBLgXZPz
+	8yDg==
+X-Received: by 10.69.26.7 with SMTP id iu7mr12491405pbd.27.1445456714619;
+	Wed, 21 Oct 2015 12:45:14 -0700 (PDT)
+Received: from Akusters-laptop.local ([2601:202:4000:1239:8c9d:98b4:6b27:2e8a])
+	by smtp.googlemail.com with ESMTPSA id
+	yp5sm8880073pac.38.2015.10.21.12.45.12
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 21 Oct 2015 12:45:13 -0700 (PDT)
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <5625864A.4000007@gmail.com> <20151020154109.GA2557@jama>
+	<20151021153508.GF2556@jama>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <5627EB47.6010409@gmail.com>
+Date: Wed, 21 Oct 2015 12:45:11 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:38.0)
+	Gecko/20100101 Thunderbird/38.2.0
 MIME-Version: 1.0
-Subject: [PATCH 2/2] libsdl2-image: Initial add 2.0.0
+In-Reply-To: <20151021153508.GF2556@jama>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: dizzy-next sync to dizzy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,54 +50,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Oct 2015 19:40:29 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 21 Oct 2015 19:45:19 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../libsdl-image/libsdl2-image_2.0.0.bb            | 31 ++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.0.bb
+On 10/21/15 8:35 AM, Martin Jansa wrote:
+> On Tue, Oct 20, 2015 at 05:41:09PM +0200, Martin Jansa wrote:
+>> On Mon, Oct 19, 2015 at 05:09:46PM -0700, akuster808 wrote:
+>>> Hello Martin,
+>>>
+>>> Are there issues with the changes in dizzy-next? need Otavio to signoff?
+>> No issues, I was just waiting for one of you to request the merge.
+>>
+>> Pushed now and new pull request pushed to dizzy-next.
+> Hmm there seems to be an issue after all.
+>
+> At least
+> 7f1df52 fuse: fix for CVE-2015-3202 Privilege Escalation
+> is missing in fido branch, both are using 2.9.3 version which is
+> affected.
+>
+> I haven't tested other patches (except testing that they don't apply
+> cleanly to fido as they are) and haven't checked if we need them in
+> master/jethro branch.
+>
+> But older releases shouldn't get fixes which are missing in newer
+> releases, otherwise people upgrading from dizzy to fido will get
+> suddenly vulnerable to this fuse issue probably without noticing.
 
-diff --git a/meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.0.bb b/meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.0.bb
-new file mode 100644
-index 0000000..a6885da
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.0.bb
-@@ -0,0 +1,31 @@
-+SUMMARY = "Simple DirectMedia Layer image library v2"
-+SECTION = "libs"
-+
-+LICENSE = "Zlib"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=8f66a2e45aa301ea73b5ab275aeb0702"
-+
-+DEPENDS = "tiff zlib libpng jpeg virtual/libsdl2 libwebp"
-+
-+SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL2_image-${PV}.tar.gz"
-+SRC_URI[md5sum] = "fb399c8386fb3248f1b33cfe81bdf92b"
-+SRC_URI[sha256sum] = "b29815c73b17633baca9f07113e8ac476ae66412dec0d29a5045825c27a47234"
-+
-+S = "${WORKDIR}/SDL2_image-${PV}"
-+
-+inherit autotools pkgconfig
-+
-+# Disable the run-time loading of the libs and bring back the soname dependencies.
-+EXTRA_OECONF += "--disable-jpg-shared --disable-png-shared -disable-tif-shared"
-+
-+do_configure_prepend() {
-+    # make autoreconf happy
-+    touch ${S}/NEWS ${S}/README ${S}/AUTHORS ${S}/ChangeLog
-+    # Removing these files fixes a libtool version mismatch.
-+    rm -f ${S}/acinclude/libtool.m4
-+    rm -f ${S}/acinclude/sdl2.m4
-+    rm -f ${S}/acinclude/pkg.m4
-+    rm -f ${S}/acinclude/lt~obsolete.m4
-+    rm -f ${S}/acinclude/ltoptions.m4
-+    rm -f ${S}/acinclude/ltsugar.m4
-+    rm -f ${S}/acinclude/ltversion.m4
-+}
--- 
-2.1.0
+you correct. Will work to correct that.
+
+- armin
+>
+> Regards,
+>
+>>> Dizzy behind by:
+>>>
+>>> e3dbf78 ipsec-tools: Security Advisory - CVE-2015-4047
+>>> 0fb90be mariadb: Security Advisory -CVE-2015-2305
+>>> c580b62 libssh2: fix CVE-2015-1782
+>>> e00844e ptpd: disable libpcap detection via pcap-config
+>>>
+>> -- 
+>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+>
 
 
