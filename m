@@ -1,32 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
-	[209.85.213.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C615758DB
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D4FF769A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2015 15:39:51 +0000 (UTC)
-Received: by igdg1 with SMTP id g1so89198736igd.1
+	Wed, 21 Oct 2015 16:52:04 +0000 (UTC)
+Received: by wicfx6 with SMTP id fx6so100291810wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2015 08:39:52 -0700 (PDT)
+	Wed, 21 Oct 2015 09:52:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=EOMdHJnghjpr51mvrIkwZ1zW4Yz5lzTyRAn+xF9Dq3Q=;
-	b=KR1pyD4MpyJwcX8vKTbbPQEfMdv3a7F3sGyxnFRNWHstbx2yvEwt9ZfqEYk+w+ZDwm
-	8lAW11HIgq14IWaRIsBicaqsD7p2xvHcVl45uRQM+YxevxrRck+0j5Blfk9qwyT3lfo/
-	piJncuWGesGn50yEUY4q66iqsKLSkfOqozys5Koo88HxIFZQszYwKgW6+s6WD9DJOMXc
-	cpRglX73LzaUzY3Vu/Lw8GQW+Yy9wYWL6X4iaa32yByvhFNPNVZYyf5ufyHGt6ORg1kq
-	9gjfw0ImqG5VHc0+da757s7CNJDEV+b15RlqqmXEvZRkO5+sFve0iZsAAgk3XwD/4pwI
-	XwYQ==
-X-Received: by 10.50.55.42 with SMTP id o10mr16754585igp.11.1445441992006;
-	Wed, 21 Oct 2015 08:39:52 -0700 (PDT)
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=6G87RCKJaj7ysyDBBVtxd3yUiGT70uKamlf1CcAPGXk=;
+	b=GHM7PN5OFlT8alPDE8w+h26RIXHbfAP2KLy0pL9tPAAaXe5hjlPszKP1cGMSuMjj4P
+	0OJlS37FypUdGztTUl/8VuDpxonkIfEhiG3IHNbGGOHqgLID3HLVxH/9ehFfs8AzSDeg
+	X3/e/4LIGkp/BztfoyLkV/7MBnqXcNv7l0tyvARNWvBopXbh1THwfZeHekX+X+2bGaej
+	g9TlCBKiQlC4Xl3Zfn+AlT3ZMYoMGRlKKV3bObqHeVXMRrZx8FU66uI55o/mRMoqpK1g
+	FVHLbWBEjWZnIW763tXqlSvnSyek9Eh/ekvx43e8GpNZ6A4kS6ikdfXpVFrQjEUv0/u/
+	3CEw==
+X-Received: by 10.194.24.100 with SMTP id t4mr13383096wjf.121.1445446323925;
+	Wed, 21 Oct 2015 09:52:03 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id t7sm19287789wib.1.2015.10.21.09.52.02
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 21 Oct 2015 09:52:02 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 21 Oct 2015 18:52:21 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151021165221.GG2556@jama>
+References: <1445315359-30016-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-Received: by 10.107.38.133 with HTTP; Wed, 21 Oct 2015 08:39:22 -0700 (PDT)
-In-Reply-To: <1445426326-25819-1-git-send-email-jkrishnanjanappa@mvista.com>
-References: <1445426326-25819-1-git-send-email-jkrishnanjanappa@mvista.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 21 Oct 2015 08:39:22 -0700
-Message-ID: <CAMKF1spnorJStzBcAUyZDAqDLiN-80qfUeum+_P=Nv+4nQjMiw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libuio: fix build issue with gcc-5
+In-Reply-To: <1445315359-30016-1-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-oe][PATCH] luajit: Upgrade to 2.1 beta1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,205 +47,163 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Oct 2015 15:39:52 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 21 Oct 2015 16:52:05 -0000
+X-Groupsio-MsgNum: 57954
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="nqkreNcslJAfgyzk"
+Content-Disposition: inline
 
-On Wed, Oct 21, 2015 at 4:18 AM, Jagadeesh Krishnanjanappa
-<jkrishnanjanappa@mvista.com> wrote:
-> 1. Remove  PNBLACKLIST[libuio] line, since libuio compiles fine with gcc-5
->    with this patch.
->
-> 2. By default, gcc-5 uses C99 inline semantics, this semantics doesn't
-> generate externally visible function for inline functions. This results in
-> below error, when an another translation unit (TU) tries to link with the
-> inline function,
->
-> -- snip --
-> | lsuio.o: In function `main':
-> | <...>/libuio/0.2.1-r0/git/tools/lsuio.c:85: undefined reference to `uio_mmap'
-> | collect2: error: ld returned 1 exit status
-> | make[2]: *** [lsuio] Error 1
-> -- CUT --
->
-> To solve this error and make libuio to compile with both 4.x and 5.x,
->
-> 1. We can remove 'uio_mmap' inline function definition in uio_mmap.c, and move
->    that definition into uio_helper.h file (which is included by lsuio.c) and
->    replace inline with "static inline". Similarly it can be done to
->    uio_single_munmap and uio_munmap inline functions
->
-> 2. Add 'extern' keyword in front of uio_mmap inline function declaration , to
->    make uio_mmap as a externally visible function, and so that it can be
->    linked with other TUs.
->
-> Going with option 1.
+--nqkreNcslJAfgyzk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-you need to see the impact on code size increase with option 1. Its
-good in general otherwise
-option 2 would do just what was already happening
-
->
-> Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+On Mon, Oct 19, 2015 at 09:29:19PM -0700, Khem Raj wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->  .../libuio/replace_inline_with_static-inline.patch | 121 +++++++++++++++++++++
->  meta-oe/recipes-extended/libuio/libuio_0.2.1.bb    |   6 +-
->  2 files changed, 123 insertions(+), 4 deletions(-)
->  create mode 100644 meta-oe/recipes-extended/libuio/libuio/replace_inline_with_static-inline.patch
->
-> diff --git a/meta-oe/recipes-extended/libuio/libuio/replace_inline_with_static-inline.patch b/meta-oe/recipes-extended/libuio/libuio/replace_inline_with_static-inline.patch
-> new file mode 100644
-> index 0000000..fd314bf
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/libuio/libuio/replace_inline_with_static-inline.patch
-> @@ -0,0 +1,121 @@
-> +By default, gcc-5 uses C99 inline semantics, this semantics doesn't
-> +generate externally visible function for inline functions. This results in
-> +below error, when an another translation unit (TU) tries to link with the
-> +inline function,
-> +
-> +-- snip --
-> +| lsuio.o: In function `main':
-> +| <...>/libuio/0.2.1-r0/git/tools/lsuio.c:85: undefined reference to `uio_mmap'
-> +| collect2: error: ld returned 1 exit status
-> +| make[2]: *** [lsuio] Error 1
-> +-- CUT --
-> +
-> +To solve this error and make libuio to compile with both 4.x and 5.x,
-> +
-> +1. We can remove 'uio_mmap' inline function definition in uio_mmap.c, and move
-> +   that definition into uio_helper.h file (which is included by lsuio.c) and
-> +   replace inline with "static inline". Similarly it can be done to other
-> +   uio_single_munmap and uio_munmap inline functions
-> +
-> +2. Add 'extern' keyword in front of inline functions declaration, to make
-> +   inlined function as externally visible function, and to link with other TUs.
-> +
-> +Going with option 1.
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
-> +
-> +--- git_org/src/uio_helper.h   2015-10-20 02:37:04.183075855 -0400
-> ++++ git/src/uio_helper.h       2015-10-20 03:34:24.659970136 -0400
-> +@@ -61,11 +61,11 @@ struct uio_info_t {
-> +
-> + /* function prototypes */
-> +
-> +-inline char* uio_lib_name(void);
-> +-inline char* uio_lib_version(void);
-> +-inline int uio_lib_ifcurrent(void);
-> +-inline int uio_lib_ifrevision(void);
-> +-inline int uio_lib_ifage(void);
-> ++static inline char* uio_lib_name(void);
-> ++static inline char* uio_lib_version(void);
-> ++static inline int uio_lib_ifcurrent(void);
-> ++static inline int uio_lib_ifrevision(void);
-> ++static inline int uio_lib_ifage(void);
-> +
-> + int uio_get_mem_size(struct uio_info_t* info, int map_num);
-> + int uio_get_mem_addr(struct uio_info_t* info, int map_num);
-> +@@ -76,10 +76,30 @@ int uio_get_all_info(struct uio_info_t*
-> + int uio_get_device_attributes(struct uio_info_t* info);
-> +
-> + void* uio_single_mmap(struct uio_info_t* info, int map_num, int fd);
-> +-inline void uio_mmap(struct uio_info_t* info, int fd);
-> +
-> +-inline void uio_single_munmap(struct uio_info_t* info, int map_num);
-> +-inline void uio_munmap(struct uio_info_t* info);
-> ++static inline void uio_mmap(struct uio_info_t* info, int fd);
-> ++static inline void uio_mmap(struct uio_info_t* info, int fd)
-> ++{
-> ++        int map_num;
-> ++        if (!fd) return;
-> ++        for (map_num= 0; map_num < MAX_UIO_MAPS; map_num++)
-> ++                uio_single_mmap(info, map_num, fd);
-> ++}
-> ++
-> ++static inline void uio_single_munmap(struct uio_info_t* info, int map_num);
-> ++static inline void uio_single_munmap(struct uio_info_t* info, int map_num)
-> ++{
-> ++        munmap(info->maps[map_num].internal_addr, info->maps[map_num].size);
-> ++        info->maps[map_num].mmap_result = UIO_MMAP_NOT_DONE;
-> ++}
-> ++
-> ++static inline void uio_munmap(struct uio_info_t* info);
-> ++static inline void uio_munmap(struct uio_info_t* info)
-> ++{
-> ++        int i;
-> ++        for (i = 0; i < MAX_UIO_MAPS; i++)
-> ++                uio_single_munmap(info, i);
-> ++}
-> +
-> + void uio_free_dev_attrs(struct uio_info_t* info);
-> + void uio_free_info(struct uio_info_t* info);
-> +--- git_org/src/uio_mmap.c     2015-10-20 02:37:04.183075855 -0400
-> ++++ git/src/uio_mmap.c 2015-10-20 03:34:45.060003208 -0400
-> +@@ -22,11 +22,3 @@
-> + #include <stdlib.h>
-> +
-> + #include "uio_helper.h"
-> +-
-> +-inline void uio_mmap(struct uio_info_t* info, int fd)
-> +-{
-> +-      int map_num;
-> +-      if (!fd) return;
-> +-      for (map_num= 0; map_num < MAX_UIO_MAPS; map_num++)
-> +-              uio_single_mmap(info, map_num, fd);
-> +-}
-> +--- git_org/src/uio_munmap.c   2015-10-20 02:37:04.183075855 -0400
-> ++++ git/src/uio_munmap.c       2015-10-20 03:34:59.636026835 -0400
-> +@@ -22,10 +22,3 @@
-> + #include <stdlib.h>
-> +
-> + #include "uio_helper.h"
-> +-
-> +-inline void uio_munmap(struct uio_info_t* info)
-> +-{
-> +-      int i;
-> +-      for (i = 0; i < MAX_UIO_MAPS; i++)
-> +-              uio_single_munmap(info, i);
-> +-}
-> +\ No newline at end of file
-> +--- git_org/src/uio_single_munmap.c    2015-10-20 02:37:04.183075855 -0400
-> ++++ git/src/uio_single_munmap.c        2015-10-20 03:52:55.005763023 -0400
-> +@@ -24,9 +24,3 @@
-> + #include <sys/mman.h>
-> +
-> + #include "uio_helper.h"
-> +-
-> +-inline void uio_single_munmap(struct uio_info_t* info, int map_num)
-> +-{
-> +-      munmap(info->maps[map_num].internal_addr, info->maps[map_num].size);
-> +-      info->maps[map_num].mmap_result = UIO_MMAP_NOT_DONE;
-> +-}
-> diff --git a/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb b/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
-> index 0f63e60..f405197 100644
-> --- a/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
-> +++ b/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
-> @@ -3,7 +3,8 @@ SECTION = "base"
->  LICENSE = "GPL-2.0"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
->
-> -SRC_URI = "git://git.code.sf.net/p/libuio/code"
-> +SRC_URI = "git://git.code.sf.net/p/libuio/code \
-> +           file://replace_inline_with_static-inline.patch"
->
->  inherit autotools
->
-> @@ -15,6 +16,3 @@ PACKAGES += "${PN}-tools"
->
->  FILES_${PN} = "${libdir}"
->  FILES_${PN}-tools = "${bindir}"
+>  ...p-automatically-this-leaves-the-stripping.patch | 33 ----------------=
+------
+>  .../luajit/{luajit_2.0.4.bb =3D> luajit_2.1.bb}      | 17 +++++------
+>  2 files changed, 9 insertions(+), 41 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-st=
+rip-automatically-this-leaves-the-stripping.patch
+>  rename meta-oe/recipes-devtools/luajit/{luajit_2.0.4.bb =3D> luajit_2.1.=
+bb} (74%)
+>=20
+> diff --git a/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-aut=
+omatically-this-leaves-the-stripping.patch b/meta-oe/recipes-devtools/luaji=
+t/luajit/0001-Do-not-strip-automatically-this-leaves-the-stripping.patch
+> deleted file mode 100644
+> index f123b3f..0000000
+> --- a/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatica=
+lly-this-leaves-the-stripping.patch
+> +++ /dev/null
+> @@ -1,33 +0,0 @@
+> -From 528009f5ca0685c95ef27f6c8957160499c0576a Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Fri, 10 May 2013 10:42:45 -0700
+> -Subject: [PATCH] Do not strip automatically, this leaves the stripping
+> - busines to OE
 > -
-> -# 0.2.1-r0/git/tools/lsuio.c:85: error: undefined reference to 'uio_mmap'
-> -PNBLACKLIST[libuio] ?= "BROKEN, fails to build with gcc-5"
-> --
-> 1.8.2.3
->
-> --
+> -Upstream-Status: Inappropriate [OE-Specific]
+> -
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> - src/Makefile |    2 --
+> - 1 file changed, 2 deletions(-)
+> -
+> -diff --git a/src/Makefile b/src/Makefile
+> -index 278324a..5ecd6d5 100644
+> ---- a/src/Makefile
+> -+++ b/src/Makefile
+> -@@ -665,12 +665,10 @@ $(LUAJIT_A): $(LJVMCORE_O)
+> - $(LUAJIT_SO): $(LJVMCORE_O)
+> - 	$(E) "DYNLINK   $@"
+> - 	$(Q)$(TARGET_LD) $(TARGET_ASHLDFLAGS) -o $@ $(LJVMCORE_DYNO) $(TARGET_=
+ALIBS)
+> --	$(Q)$(TARGET_STRIP) $@
+> -=20
+> - $(LUAJIT_T): $(TARGET_O) $(LUAJIT_O) $(TARGET_DEP)
+> - 	$(E) "LINK      $@"
+> - 	$(Q)$(TARGET_LD) $(TARGET_ALDFLAGS) -o $@ $(LUAJIT_O) $(TARGET_O) $(TA=
+RGET_ALIBS)
+> --	$(Q)$(TARGET_STRIP) $@
+> - 	$(E) "OK        Successfully built LuaJIT"
+> -=20
+> - #######################################################################=
+#######
+> ---=20
+> -1.7.9.5
+> -
+> diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb b/meta-oe/re=
+cipes-devtools/luajit/luajit_2.1.bb
+> similarity index 74%
+> rename from meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+> rename to meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+> index 4a15a4e..ba439d0 100644
+> --- a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+> +++ b/meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+> @@ -3,13 +3,13 @@ LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3D3992f1fbae3b8b061f9056b7fcd=
+a8cc6"
+>  HOMEPAGE =3D "http://luajit.org"
+> =20
+> -SRC_URI =3D "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
+> -           file://0001-Do-not-strip-automatically-this-leaves-the-stripp=
+ing.patch \
+> +SRCREV =3D "776c6935ed807fc3b1ee6cd89a0cf682ffb7e9de"
+> +SRC_URI =3D "git://luajit.org/git/luajit-2.0.git;protocol=3Dhttp;branch=
+=3Dv${PV} \
+>  "
+> -SRC_URI[md5sum] =3D "dd9c38307f2223a504cbfb96e477eca0"
+> -SRC_URI[sha256sum] =3D "620fa4eb12375021bef6e4f237cbd2dd5d49e56beb414bee=
+052c746beef1807d"
+> =20
+> -S =3D "${WORKDIR}/LuaJIT-${PV}"
+> +SPIN =3D ".0-beta1"
+
+This seems to break meta-oe/recipes-extended/sysdig/sysdig_git.bb
+
+| -- Could NOT find Lua51 (missing:  LUA_LIBRARIES LUA_INCLUDE_DIR)
+| CMake Error at CMakeLists.txt:116 (message):
+|   Couldn't find system LuaJIT or Lua
+|
+
+
+> +
+> +S =3D "${WORKDIR}/git"
+> =20
+>  inherit pkgconfig binconfig
+> =20
+> @@ -23,7 +23,7 @@ do_configure_prepend() {
+>  EXTRA_OEMAKE =3D 'CROSS=3D${HOST_PREFIX} \
+>                  TARGET_CFLAGS=3D"${TOOLCHAIN_OPTIONS} ${HOST_CC_ARCH}" \
+>                  TARGET_LDFLAGS=3D"${TOOLCHAIN_OPTIONS}" \
+> -                TARGET_SHLDFLAGS=3D"${TOOLCHAIN_OPTIONS}"'
+> +                TARGET_SHLDFLAGS=3D"${TOOLCHAIN_OPTIONS}" TARGET_STRIP=
+=3D"/bin/echo"'
+>  EXTRA_OEMAKE_append_powerpc =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
+>  EXTRA_OEMAKE_append_x86 =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
+>  EXTRA_OEMAKE_append_x86-64 =3D ' HOST_CC=3D"${BUILD_CC}"'
+> @@ -36,7 +36,8 @@ do_compile () {
+>  }
+> =20
+>  do_install () {
+> -    oe_runmake 'DESTDIR=3D${D}' install
+> +    oe_runmake 'DESTDIR=3D${D}' 'TARGET_STRIP=3D/bin/echo' install
+> +    ln -s ${bindir}/${BPN}-${PV}${SPIN} ${D}${bindir}/luajit
+>      rmdir ${D}${datadir}/lua/5.* \
+>            ${D}${datadir}/lua \
+>            ${D}${libdir}/lua/5.* \
+> @@ -52,5 +53,5 @@ FILES_${PN}-dev +=3D "${libdir}/libluajit-5.1.a \
+>      ${libdir}/libluajit-5.1.so \
+>      ${libdir}/pkgconfig/luajit.pc \
+>  "
+> -FILES_luajit-common =3D "${datadir}/${BPN}-${PV}"
+> +FILES_luajit-common =3D "${datadir}/${BPN}-${PV}${SPIN}"
+> =20
+> --=20
+> 2.6.1
+>=20
+> --=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--nqkreNcslJAfgyzk
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlYnwsQACgkQN1Ujt2V2gBzRyACgrpCwO9PkavCE653nKVmkpIsv
+sT8AoKJ8yIrw50AuqTpN6Kg29Q0lPVMp
+=tJOA
+-----END PGP SIGNATURE-----
+
+--nqkreNcslJAfgyzk--
