@@ -1,24 +1,21 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D89CE75D22
+Return-Path: <erkka.kaaria@intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id E9EB976104
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2015 08:31:20 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9L8VKV9001822
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2015 01:31:21 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 21 Oct 2015 01:31:20 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 Oct 2015 04:31:19 -0400
-Message-ID: <1445416279-119028-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Wed, 21 Oct 2015 09:41:29 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by fmsmga102.fm.intel.com with ESMTP; 21 Oct 2015 02:41:30 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.17,711,1437462000"; d="scan'208";a="668668206"
+Received: from ekaaria-xps-8300.fi.intel.com ([10.237.68.35])
+	by orsmga003.jf.intel.com with ESMTP; 21 Oct 2015 02:41:29 -0700
+From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 21 Oct 2015 12:41:49 +0300
+Message-Id: <1445420509-1807-1-git-send-email-erkka.kaaria@intel.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-Subject: [PATCH][meta-gnome] libgtop/metacity: add x11 to required DISTRO_FEATURES [ LIN8-343 ]
+Subject: [meta-java][PATCH] cacao-initial-native: Fix undefined behaviour in gc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,52 +29,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Oct 2015 08:31:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 21 Oct 2015 09:41:36 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
-
-The recipes depend on virtual/libx11 indirectly, they only can be
-built with x11 in DISTRO_FEATURES.
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb    | 5 ++++-
- meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb | 4 +++-
- 2 files changed, 7 insertions(+), 2 deletions(-)
-
-diff --git a/meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb b/meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb
-index 51c51d4..8568274 100644
---- a/meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb
-+++ b/meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb
-@@ -2,7 +2,10 @@ SUMMARY = "LibGTop2"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://copyright.txt;md5=dbc839bf158d19a20e661db14db7a58c"
- 
--inherit gnomebase lib_package gtk-doc
-+inherit gnomebase lib_package gtk-doc distro_features_check
-+# depends on libxau
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
- SRC_URI[archive.md5sum] = "ee29a9ef60659ebf4b075ac281f71cb2"
- SRC_URI[archive.sha256sum] = "463bcbe5737b1b93f3345ee34abf601e8eb864f507c49ff1921c2737abafc1e5"
- 
-diff --git a/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb b/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
-index 9c48238..662c90d 100644
---- a/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
-+++ b/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
- DEPENDS = "gsettings-desktop-schemas startup-notification gtk+ gconf gdk-pixbuf-native libcanberra gnome-doc-utils libgtop intltool-native"
- PR = "r1"
- 
--inherit gnomebase update-alternatives
-+inherit gnomebase update-alternatives distro_features_check
-+# depends on startup-notification which depends on virtual/libx11
-+REQUIRED_DISTRO_FEATURES = "x11"
- 
- GNOME_COMPRESS_TYPE = "xz"
- 
--- 
-1.9.1
+VXBzdHJlYW0tU3RhdHVzOiBCYWNrcG9ydAoKRml4ZXMgdW5kZWZpbmVkIGJlaGF2aW91ciBpbiBi
+b2VobSBHQyB1c2VkIGJ5IGNhY2FvLWluaXRpYWwtbmF0aXZlCmFzIHN1Z2dlc3RlZCBhdApodHRw
+czovL2dpdGh1Yi5jb20vaXZtYWkvYmR3Z2MvY29tbWl0LzE2NzgwNDA1Yzg5OWYwMTExOWJjNDUx
+NjcxMjJiNDI0MmY2YjM0ZmIuCgpUaGUgdW5kZWZpbmVkIGJlaGF2aW91ciBhdCB2ZXJ5IGxlYXN0
+IGNhdXNlcyBhIHNlZ21lbnRhdGlvbiBmYXVsdCBkdXJpbmcKY2xhc3NwYXRoLW5hdGl2ZSBjb25m
+aWd1cmUgc3RlcCB3aXRoIEZlZG9yYSAyMi4KClNpZ25lZC1vZmYtYnk6IEVya2thIEvDpMOkcmnD
+pCA8ZXJra2Eua2FhcmlhQGludGVsLmNvbT4KLS0tCiByZWNpcGVzLWNvcmUvY2FjYW8vY2FjYW8t
+aW5pdGlhbC1uYXRpdmVfMC45OC5iYiAgICB8ICAxICsKIC4uLi0wLjkuOC1pbml0aWFsLWZpeC1n
+Yy11bmRlZmluZWQtYmVoYXZpb3VyLnBhdGNoIHwgMzUgKysrKysrKysrKysrKysrKysrKysrKwog
+MiBmaWxlcyBjaGFuZ2VkLCAzNiBpbnNlcnRpb25zKCspCiBjcmVhdGUgbW9kZSAxMDA2NDQgcmVj
+aXBlcy1jb3JlL2NhY2FvL2ZpbGVzL2NhY2FvLTAuOS44LWluaXRpYWwtZml4LWdjLXVuZGVmaW5l
+ZC1iZWhhdmlvdXIucGF0Y2gKCmRpZmYgLS1naXQgYS9yZWNpcGVzLWNvcmUvY2FjYW8vY2FjYW8t
+aW5pdGlhbC1uYXRpdmVfMC45OC5iYiBiL3JlY2lwZXMtY29yZS9jYWNhby9jYWNhby1pbml0aWFs
+LW5hdGl2ZV8wLjk4LmJiCmluZGV4IGVjN2ZiZGIuLjJhOGNlZDUgMTAwNjQ0Ci0tLSBhL3JlY2lw
+ZXMtY29yZS9jYWNhby9jYWNhby1pbml0aWFsLW5hdGl2ZV8wLjk4LmJiCisrKyBiL3JlY2lwZXMt
+Y29yZS9jYWNhby9jYWNhby1pbml0aWFsLW5hdGl2ZV8wLjk4LmJiCkBAIC0xNCw2ICsxNCw3IEBA
+IFNSQ19VUkkgPSAiXAogICAgICAgICBodHRwOi8vd3d3LmNvbXBsYW5nLnR1d2llbi5hYy5hdC9j
+YWNhb2p2bS9kb3dubG9hZC9jYWNhby0ke1BWfS9jYWNhby0ke1BWfS50YXIuYnoyOyBcCiAgICAg
+ICAgIGZpbGU6Ly9jYWNhby0wLjk4LWluaXRpYWwucGF0Y2ggXAogICAgICAgICBmaWxlOi8vZGlz
+YWJsZV9od19leGNlcHRpb25zLnBhdGNoIFwKKyAgICAgICAgZmlsZTovL2NhY2FvLTAuOS44LWlu
+aXRpYWwtZml4LWdjLXVuZGVmaW5lZC1iZWhhdmlvdXIucGF0Y2ggXAogICAgICAgICAiCiAKICMg
+bGlianZtIGRpc2FibGVkIC0gaXQgd291bGQgY29uZmxpY3Qgd2l0aCBjYWNhby1uYXRpdmUgaW5z
+dGFsbGF0aW9ucwpkaWZmIC0tZ2l0IGEvcmVjaXBlcy1jb3JlL2NhY2FvL2ZpbGVzL2NhY2FvLTAu
+OS44LWluaXRpYWwtZml4LWdjLXVuZGVmaW5lZC1iZWhhdmlvdXIucGF0Y2ggYi9yZWNpcGVzLWNv
+cmUvY2FjYW8vZmlsZXMvY2FjYW8tMC45LjgtaW5pdGlhbC1maXgtZ2MtdW5kZWZpbmVkLWJlaGF2
+aW91ci5wYXRjaApuZXcgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAwMDAwMDAwLi5jY2MzNWNiCi0t
+LSAvZGV2L251bGwKKysrIGIvcmVjaXBlcy1jb3JlL2NhY2FvL2ZpbGVzL2NhY2FvLTAuOS44LWlu
+aXRpYWwtZml4LWdjLXVuZGVmaW5lZC1iZWhhdmlvdXIucGF0Y2gKQEAgLTAsMCArMSwzNSBAQAor
+VXBzdHJlYW0tU3RhdHVzOiBCYWNrcG9ydAorCitUaGlzIGZpeGVzIHVuZGVmaW5lZCBiZWhhdmlv
+dXIgaW4gYm9laG0gR0MgYXMgc3VnZ2VzdGVkIGF0CitodHRwczovL2dpdGh1Yi5jb20vaXZtYWkv
+YmR3Z2MvY29tbWl0LzE2NzgwNDA1Yzg5OWYwMTExOWJjNDUxNjcxMjJiNDI0MmY2YjM0ZmIuCisK
+K1RoZSB1bmRlZmluZWQgYmVoYXZpb3VyIGF0IHZlcnkgbGVhc3QgY2F1c2VzIGEgc2VnbWVudGF0
+aW9uIGZhdWx0IGR1cmluZworY2xhc3NwYXRoLW5hdGl2ZSBjb25maWd1cmUgc3RlcC4KKyAgICAK
+K1NpZ25lZC1vZmYtYnk6IEVya2thIEvDpMOkcmnDpCA8ZXJra2Eua2FhcmlhQGludGVsLmNvbT4K
+KworLS0tIGNhY2FvLTAuOTgvc3JjL21tL2JvZWhtLWdjL21hcmtfcnRzLmMKKysrKyBjYWNhby0w
+Ljk4L3NyYy9tbS9ib2VobS1nYy9tYXJrX3J0cy5jCitAQCAtMzcxLDE4ICszNzEsNyBAQCBwdHJf
+dCBwOworIAorIHB0cl90IEdDX2FwcHJveF9zcCgpCisgeworLSAgICBWT0xBVElMRSB3b3JkIGR1
+bW15OworLQorLSAgICBkdW1teSA9IDQyOwkvKiBGb3JjZSBzdGFjayB0byBncm93IGlmIG5lY2Vz
+c2FyeS4JT3RoZXJ3aXNlIHRoZQkqLworLSAgICAJCS8qIGxhdGVyIGFjY2Vzc2VzIG1pZ2h0IGNh
+dXNlIHRoZSBrZXJuZWwgdG8gdGhpbmsgd2UncmUJKi8KKy0gICAgCQkvKiBkb2luZyBzb21ldGhp
+bmcgd3JvbmcuCQkJCSovCistIyAgIGlmZGVmIF9NU0NfVkVSCistIyAgICAgcHJhZ21hIHdhcm5p
+bmcoZGlzYWJsZTo0MTcyKQorLSMgICBlbmRpZgorLSAgICByZXR1cm4oKHB0cl90KSgmZHVtbXkp
+KTsKKy0jICAgaWZkZWYgX01TQ19WRVIKKy0jICAgICBwcmFnbWEgd2FybmluZyhkZWZhdWx0OjQx
+NzIpCistIyAgIGVuZGlmCisrICAgIHJldHVybiBfX2J1aWx0aW5fZnJhbWVfYWRkcmVzcygwKTsK
+KyB9CisgCisgLyoKKy0tIAorMi4xLjQKKwotLSAKMi4xLjQKCi0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpJbnRlbCBG
+aW5sYW5kIE95ClJlZ2lzdGVyZWQgQWRkcmVzczogUEwgMjgxLCAwMDE4MSBIZWxzaW5raSAKQnVz
+aW5lc3MgSWRlbnRpdHkgQ29kZTogMDM1NzYwNiAtIDQgCkRvbWljaWxlZCBpbiBIZWxzaW5raSAK
+ClRoaXMgZS1tYWlsIGFuZCBhbnkgYXR0YWNobWVudHMgbWF5IGNvbnRhaW4gY29uZmlkZW50aWFs
+IG1hdGVyaWFsIGZvcgp0aGUgc29sZSB1c2Ugb2YgdGhlIGludGVuZGVkIHJlY2lwaWVudChzKS4g
+QW55IHJldmlldyBvciBkaXN0cmlidXRpb24KYnkgb3RoZXJzIGlzIHN0cmljdGx5IHByb2hpYml0
+ZWQuIElmIHlvdSBhcmUgbm90IHRoZSBpbnRlbmRlZApyZWNpcGllbnQsIHBsZWFzZSBjb250YWN0
+IHRoZSBzZW5kZXIgYW5kIGRlbGV0ZSBhbGwgY29waWVzLgo=
 
 
