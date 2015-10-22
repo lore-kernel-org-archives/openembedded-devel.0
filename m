@@ -1,41 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 165C377108
+Return-Path: <joe@deserted.net>
+Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
+	[209.85.213.174])
+	by mail.openembedded.org (Postfix) with ESMTP id E70DB77129
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Oct 2015 14:31:56 +0000 (UTC)
-Received: by wicll6 with SMTP id ll6so138270290wic.0
+	Thu, 22 Oct 2015 17:05:45 +0000 (UTC)
+Received: by igbkq10 with SMTP id kq10so18330346igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Oct 2015 07:31:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=1bvpwvG+asgsEB5RoQAYVdXRf2okZrM59g6WICZiQGI=;
-	b=dtsNceZeJT31marQ45eMWlrdZjTJgjDbj3mikPhEe83Vqtf2B4pE8XqKSczp3neh9A
-	9bwYRGKt3BxYNL37/dgmuaoE3cPNeLBbg4Q+I8HKhjiO+ex3551lMhlQ3MffavYOiXCZ
-	wFW+bnniqtsgFZDvEQxVei2XkqoHUhwuG6+BXsSuYe//RQzqny2HULeYgQWHnQJ2mXwV
-	iTvwpM+hJRu/E6869ItpfApEHHsxhM6ipXFZESgFGujIO/YWcJbBp95pQ528g881AAHi
-	Z2VBD8eGGtFq9YW8XhvG0KaGyU4+1hC4f49rqmDB8tBKwr5tFyg8VrRW5LDcR199BN7r
-	nKMw==
-X-Received: by 10.180.89.1 with SMTP id bk1mr24583624wib.56.1445524316540;
-	Thu, 22 Oct 2015 07:31:56 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	bd4sm17179324wjb.15.2015.10.22.07.31.55
+	Thu, 22 Oct 2015 10:05:45 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:from:to:subject:date:message-id;
+	bh=aXyeyKRmDnvNSImO8EpAvs12qTItpeGf9oIt/WFsfyM=;
+	b=cJ9PJqQ5C7TyEvJmsgGjQsmt9FRsO2G4s3KdybHVhVzcwUFLlHTDJNyvVjF0kb/O0Y
+	ov0ehVG5fACrEKucUZsqv542DIzzMmsk0CSecr9iJJpPa7LmwSvjJh6unmv4nGvmya9g
+	khM1FQaxW4ebbGNkaDnfDoEGO25KswDa4s3yNOeu+z2mS9DwxrzU+mGvnFY5p2kP6Lk0
+	xjQLF1yQpyx2ngDMwXxuNckAz4XJEZP04Hk2GWTGWG+RWPT42g8Cg/YizxUWNOftu7Lw
+	NW880GtRYbIKR0ctkUt/NsSajDi1MYWQqsPr9dEClUtm8R5gSjWpc6DOefIcIdloOCJ3
+	2S1Q==
+X-Gm-Message-State: ALoCoQnVOar0XgGDzmb5YzTudDYLxxrNXM4fhDzgoIwcBmTu35RnrsMOOE3nQYm0E7qlg+u9GUbg
+X-Received: by 10.50.60.102 with SMTP id g6mr17278973igr.29.1445533545231;
+	Thu, 22 Oct 2015 10:05:45 -0700 (PDT)
+Received: from mir.deserted.net ([23.233.31.74])
+	by smtp.gmail.com with ESMTPSA id bc4sm6362465igb.2.2015.10.22.10.05.44
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 22 Oct 2015 07:31:55 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 22 Oct 2015 16:32:20 +0200
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 22 Oct 2015 10:05:44 -0700 (PDT)
+Sender: Joe MacDonald <joe@deserted.net>
+From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151022143220.GB2558@jama>
-References: <20151008102504.GJ2385@jama>
-	<1445277032-1590-1-git-send-email-dv@pseudoterminal.org>
-MIME-Version: 1.0
-In-Reply-To: <1445277032-1590-1-git-send-email-dv@pseudoterminal.org>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-multimedia][PATCH v2] aalib: add new recipe
+Date: Thu, 22 Oct 2015 13:06:10 -0400
+Message-Id: <1445533570-14709-1-git-send-email-joe_macdonald@mentor.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] xl2tpd: Update git recipe and add release recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,96 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2015 14:31:58 -0000
-X-Groupsio-MsgNum: 57974
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="MfFXiAuoTsnnDAfZ"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 22 Oct 2015 17:05:48 -0000
 
---MfFXiAuoTsnnDAfZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The previous xl2tpd was significantly out of date, so update the git
+recipe and add in a release recipe for anyone looking to use the latest
+stable release.
 
-On Mon, Oct 19, 2015 at 07:50:32PM +0200, Carlos Rafael Giani wrote:
-> Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-> ---
->  .../recipes-multimedia/aalib/aalib_1.4rc4.bb           | 18 ++++++++++++=
-++++++
->  1 file changed, 18 insertions(+)
->  create mode 100644 meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4=
-=2Ebb
->=20
-> diff --git a/meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb b/m=
-eta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb
-> new file mode 100644
-> index 0000000..6d7d461
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/aalib/aalib_1.4rc4.bb
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION =3D "AAlib is an portable library for rendering graphics as =
-ASCII art."
-> +HOMEPAGE =3D "http://aa-project.sourceforge.net/aalib/"
-> +SECTION =3D "libs"
-> +
-> +DEPENDS =3D "ncurses"
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+---
+ meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb | 3 +++
+ meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb   | 2 +-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb
 
-Still few QA issues:
+diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb
+new file mode 100644
+index 0000000..eba0cf5
+--- /dev/null
++++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb
+@@ -0,0 +1,3 @@
++require xl2tpd.inc
++
++SRC_URI = "git://github.com/xelerance/xl2tpd.git;protocol=git;tag=v${PV}"
+diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
+index bd084aa..0cce7ab 100644
+--- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
++++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
+@@ -1,5 +1,5 @@
+ require xl2tpd.inc
+ PR = "${INC_PR}.0"
+ 
+-SRCREV = "df7e30eb199fc5710faa83866381aea18b66e60c"
++SRCREV = "a96b345962622ea58490924130675df6db062d11"
+ 
+-- 
+1.9.1
 
-aalib-1.4rc4: ELF binary '/home/jenkins/oe/world/shr-core/tmp-glibc/work/ar=
-mv5te-oe-linux-gnueabi/aalib/1.4rc4-r0/packages-split/aalib/usr/lib/libaa.s=
-o.1.0.4' has relocations in .text [textrel]
-aalib-1.4rc4: aalib rdepends on libxdmcp, but it isn't a build dependency? =
-[build-deps]
-aalib-1.4rc4: aalib rdepends on libx11, but it isn't a build dependency? [b=
-uild-deps]
-aalib-1.4rc4: aalib rdepends on libxcb, but it isn't a build dependency? [b=
-uild-deps]
-aalib-1.4rc4: aalib rdepends on libxau, but it isn't a build dependency? [b=
-uild-deps]
 
-gphoto2-2.5.8: gphoto2 rdepends on aalib, but it isn't a build dependency? =
-[build-deps]
-gimp-2.8.14: gimp rdepends on aalib, but it isn't a build dependency? [buil=
-d-deps]
-
-> +
-> +LICENSE =3D "LGPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D55ca817ccb7d5b5b66355690e9abc=
-605"
-> +
-> +S =3D "${WORKDIR}/aalib-1.4.0"
-> +
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/aa-project/aalib-${PV}.tar.gz"
-> +SRC_URI[md5sum] =3D "d5aa8e9eae07b7441298b5c30490f6a6"
-> +SRC_URI[sha256sum] =3D "0b214b98850f559e0a9ef7282de2ff336b094e1aacedefff=
-3ffa50f07711db58"
-> +
-> +inherit autotools
-> +
-> +CFLAGS_append =3D " -fPIC "
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---MfFXiAuoTsnnDAfZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlYo83EACgkQN1Ujt2V2gBwEGgCgnmC7e94WbMkJ6zSJdn048AZt
-/nYAniWowoK75D3J+F6YDQ9hsnuxRJ5C
-=8ILW
------END PGP SIGNATURE-----
-
---MfFXiAuoTsnnDAfZ--
