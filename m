@@ -1,60 +1,33 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-lf0-f47.google.com (mail-lf0-f47.google.com
-	[209.85.215.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 13C7B77035
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id C34DD770C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Oct 2015 09:01:39 +0000 (UTC)
-Received: by lfbn126 with SMTP id n126so5873786lfb.2
+	Thu, 22 Oct 2015 09:47:23 +0000 (UTC)
+Received: by wicfv8 with SMTP id fv8so111779823wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Oct 2015 02:01:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=dresearch-fe_de.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:references:cc:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-type:content-transfer-encoding;
-	bh=9RicdyFUhDzLxETi0XZ3sM0/KNY1YHeBWrt91MKKLso=;
-	b=vdp34Wpx6lCaEWnlyDsp9OktaoeZoZRKCqGhYIkIszc7HlSqkIQzNyVn91JQYqo5Kg
-	0FbpjIoKD7qY9NWnylHHnFDGR4d8iryYd633NqagnMlQC433BZh8kvvAhExYDP/qXox8
-	Q6FPg1cD08nHiZGkQQE6EPYlWseQPqoZ96Zx2EZGkbZd5EEvq1h4g/pnnZVDtKPYBXdU
-	CxgN5wiJ6MoDGhxvvIvujsPOZSLjlOZVSSOqi3o5dB6oKHMwFrs6iz65bO9XQftucjsN
-	TmbVcqUZdZjfKT/xIJ0A6fyO4zX3x/MF8Y0M9QmHg0ABcoywqGGBvWOgQJg+Tv3+RUoO
-	Db0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=9RicdyFUhDzLxETi0XZ3sM0/KNY1YHeBWrt91MKKLso=;
-	b=OOsvzfdzTuQUFdbfHLYUOGWXwi8QoIiVk47lbBUS7MeVaWurt1mdAXJ+mWK4jJSlnY
-	kV8L5Vs9pUQPOwOxOZyLiHB07nnk90m3a/bv8AjhqqOvRD7pWyoxmSIVKgsUPsvFsCbh
-	dhfbnfF9kbXcpTSPV8E05aNa9U7VX5HxGv0WN0E4FBDM7ZSfU/vjPxYL19PVPtnobe7i
-	BIOclKt2SivL8ULgwAAYYBOrL+7qt0fx+P0KjxfIsmStwlz7MKS2CYGvasr40VwSSiW3
-	eDwuvIV/3GvdYbvxDILn0HfxhE4838Ou4Gn5vnv3k+exKgtIgdsIREzFKHBe4SCOU4D7
-	MN6Q==
-X-Gm-Message-State: ALoCoQkeIcI3leg3iPxON1DVdHiCGCrVNgGx0TlQIEsrFcVQgsN07L0crVvFtggRkll68tqzoGwu
-X-Received: by 10.25.165.84 with SMTP id o81mr5192988lfe.80.1445504498669;
-	Thu, 22 Oct 2015 02:01:38 -0700 (PDT)
-Received: from [172.29.23.46] (zk223.dresearch-fe.de. [217.92.177.116])
-	by smtp.googlemail.com with ESMTPSA id
-	m17sm1883832lfb.16.2015.10.22.02.01.37
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Oct 2015 02:01:37 -0700 (PDT)
-To: Richard Leitner <richard.leitner@skidata.com>,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Richard Purdie <richard.purdie@linuxfoundation.org>,
-	Martin Jansa <martin.jansa@gmail.com>,
-	Koen Kooi <koen@dominion.thruhere.net>
-References: <56279AAF.4050704@dresearch-fe.de> <5628952C.8080706@skidata.com>
-	<5628A3BE.3010403@dresearch-fe.de> <5628A439.1030200@skidata.com>
-From: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <5628A5F0.2060009@dresearch-fe.de>
-Date: Thu, 22 Oct 2015 11:01:36 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
+	Thu, 22 Oct 2015 02:47:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=LSs73/rdPCqw0dTEjpXTwTOGhEcXmI0pVnhwjpCA2Dk=;
+	b=uib2rqUYpuKLina8ktKcym1JVRig/rmGmBKfqOoVwQsyW9YobzkyWCoSLE5bkrNlXo
+	6IXgm+aHGKmr8AJChwNT2bcMxVRumVAw63vpAIgVXYMo96EWmX0jjGjQZeXg877Ix3ix
+	8N0ZX94lhqrrXS5lxbuB7tjLVEKeUB+W0IU9+AOM3WYntx24tqWQwzh6f7MYF4hIo9mK
+	QZpn9eY+ReTc+guGjBVtj2tHQgWAZRC54F1XkZ2Aw8vNYtpqsG8kEuxWk7AFjktWPtZW
+	/kTuOsB6HR23LXVEQXgCzFIyV4y4dKbYujxJ3RjG4rx2FQEDH5s3thFsd/Ah4o/WdxJq
+	64OA==
 MIME-Version: 1.0
-In-Reply-To: <5628A439.1030200@skidata.com>
-Cc: Benjamin Reikowski <reikowski@dresearch-fe.de>
-Subject: Re: cups-filters
+X-Received: by 10.194.123.168 with SMTP id mb8mr16094623wjb.108.1445507243159; 
+	Thu, 22 Oct 2015 02:47:23 -0700 (PDT)
+Received: by 10.194.154.232 with HTTP; Thu, 22 Oct 2015 02:47:23 -0700 (PDT)
+In-Reply-To: <1445491305-39447-1-git-send-email-wenzong.fan@windriver.com>
+References: <1445491305-39447-1-git-send-email-wenzong.fan@windriver.com>
+Date: Thu, 22 Oct 2015 11:47:23 +0200
+Message-ID: <CA+chaQf5_A_4gm34f7sdU=ES_5k4fF_-=aRYBo7BiKLbOaR=nQ@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH][meta-multimedia] gst-plugins-good: fix depends to libgudev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,37 +41,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2015 09:01:43 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 22 Oct 2015 09:47:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 22.10.2015 10:54, Richard Leitner wrote:
-> On 10/22/2015 10:52 AM, Steffen Sledz wrote:
->> On 22.10.2015 09:50, Richard Leitner wrote:
->>> On 10/21/2015 04:01 PM, Steffen Sledz wrote:
->>>> Does anybody know about a recipe providing cups-filters?
->>>>
->>>> http://layers.openembedded.org was not really helpful here.
->>>
->>> I have one which works for my purposes but it is not really tested...
->>> It is based on something I found somewhere on the web (I don't remember
->>> the source).
->>
->> Any plans to make this part of an official layer?
->>
-> Currently I have no time for creating and testing a clean patch for it.
-> But if anybody has time and motivation, feel free to do it ;-)
+This shouldn't be needed when:
+http://lists.openembedded.org/pipermail/openembedded-core/2015-October/111271.html
 
-I could try to prepare one.
+is merged.
 
-@layer-maintainers: What would be the right layer for this? openembedded-core or meta-oe?
+On Thu, Oct 22, 2015 at 7:21 AM, <wenzong.fan@windriver.com> wrote:
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+> From: Wenzong Fan <wenzong.fan@windriver.com>
+>
+> * udev provides libgudev but it won't be built with systemd;
+> * systemd provides udev but no libgudev, libgudev has been removed
+>   from systemd and it's a independent project now; libgudev only be
+>   built if systemd distro feature enabled.
+>
+> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+> ---
+>  .../recipes-multimedia/gstreamer-0.10/gst-plugins-good_0.10.31.bb    | 5
+> ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/
+> gst-plugins-good_0.10.31.bb
+> b/meta-multimedia/recipes-multimedia/gstreamer-0.10/
+> gst-plugins-good_0.10.31.bb
+> index af18281..3f3478f 100644
+> --- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/
+> gst-plugins-good_0.10.31.bb
+> +++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/
+> gst-plugins-good_0.10.31.bb
+> @@ -11,12 +11,15 @@ PACKAGECONFIG ?= "jpeg v4l \
+>      ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio',
+> '', d)} \
+>      ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
+>  "
+> +
+> +GUDEV="${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'libgudev',
+> 'udev', d)}"
+> +
+>  PACKAGECONFIG[pulseaudio] = "--enable-pulse,--disable-pulse,pulseaudio"
+>  PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
+>  PACKAGECONFIG[jpeg] = "--enable-jpeg,--disable-jpeg,jpeg"
+>  PACKAGECONFIG[wavpack] = "--enable-wavpack,--disable-wavpack,wavpack"
+>  PACKAGECONFIG[gdkpixbuf] =
+> "--enable-gdk_pixbuf,--disable-gdk_pixbuf,gdk-pixbuf"
+> -PACKAGECONFIG[v4l] = "--enable-gst_v4l2 --with-gudev,--disable-gst_v4l2
+> --without-gudev,udev"
+> +PACKAGECONFIG[v4l] = "--enable-gst_v4l2 --with-gudev,--disable-gst_v4l2
+> --without-gudev,${GUDEV}"
+>  # sub-feature of v4l, but control separately since libv4l is not part of
+> oe-core
+>  PACKAGECONFIG[libv4l] = "--with-libv4l2,--without-libv4l2,libv4l"
+>  PACKAGECONFIG[bzip2] = "--enable-bz2,--disable-bz2,bzip2"
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
