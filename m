@@ -1,24 +1,24 @@
-Return-Path: <mail@webthatworks.it>
-Received: from smtp205.alice.it (smtp205.alice.it [82.57.200.101])
-	by mail.openembedded.org (Postfix) with ESMTP id 3988060657
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CA4060657
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Oct 2015 17:57:18 +0000 (UTC)
-Received: from caronte.home.webthatworks.it (87.9.24.216) by smtp205.alice.it
-	(8.6.060.28) id 55F97357084836EA; Thu, 22 Oct 2015 19:57:17 +0200
-Received: from gloom.home.webthatworks.it (gloom.home.webthatworks.it
-	[192.168.1.14])
-	by caronte.home.webthatworks.it (Postfix) with ESMTP id 36AD46FE0059;
-	Thu, 22 Oct 2015 19:57:17 +0200 (CEST)
-Received: by gloom.home.webthatworks.it (Postfix, from userid 1000)
-	id C96245E0CC6; Thu, 22 Oct 2015 19:56:15 +0200 (CEST)
-From: Ivan Sergio Borgonovo <mail@webthatworks.it>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Oct 2015 19:56:08 +0200
-Message-Id: <1445536568-13948-2-git-send-email-mail@webthatworks.it>
-X-Mailer: git-send-email 2.6.1
-In-Reply-To: <1445536568-13948-1-git-send-email-mail@webthatworks.it>
-References: <1445536568-13948-1-git-send-email-mail@webthatworks.it>
-Subject: [meta-qt5][PATCH 2/2] move qttools-plugins to RRECOMENDS since it's built just with examples
+	Thu, 22 Oct 2015 18:24:25 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9MIOPXY024136
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Oct 2015 11:24:25 -0700 (PDT)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Thu, 22 Oct 2015 11:24:25 -0700
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <randy.macleod@windriver.com>
+Date: Thu, 22 Oct 2015 11:24:25 -0700
+Message-ID: <1445538265-14160-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 1/1] libmodbus: version 3.0.5 -> 3.0.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,34 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2015 17:57:19 -0000
+X-List-Received-Date: Thu, 22 Oct 2015 18:24:27 -0000
+Content-Type: text/plain
 
-qttools-plugins contains just example plugins for qtcreator and get
-built just with examples. A working qt5 toolchain doesn't really
-require it
+Rename recipe then change md5sum and sha256sum.
+
+Signed-off-by: Joe Slater <jslater@windriver.com>
 ---
- recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../{libmodbus_3.0.5.bb => libmodbus_3.0.6.bb}     |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/libmodbus/{libmodbus_3.0.5.bb => libmodbus_3.0.6.bb} (76%)
 
-diff --git a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
-index 37e9649..30d0622 100644
---- a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
-+++ b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
-@@ -92,7 +92,6 @@ RDEPENDS_${PN} += " \
-     ${@base_contains('DISTRO_FEATURES', 'opengl', 'qtsystems-qmlplugins', '', d)} \
-     qttools-dev \
-     qttools-mkspecs \
--    qttools-plugins \
-     qttools-staticdev \
-     qttools-tools \
-     ${@base_contains('DISTRO_FEATURES', 'wayland', '${USE_WAYLAND}', '', d)} \
-@@ -112,4 +111,5 @@ RDEPENDS_${PN} += " \
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.5.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.6.bb
+similarity index 76%
+rename from meta-oe/recipes-extended/libmodbus/libmodbus_3.0.5.bb
+rename to meta-oe/recipes-extended/libmodbus/libmodbus_3.0.6.bb
+index 19ca24c..c5e6ae8 100644
+--- a/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.5.bb
++++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.6.bb
+@@ -12,5 +12,5 @@ SRC_URI = "http://libmodbus.org/site_media/build/${BP}.tar.gz"
  
- RRECOMMENDS_${PN} += " \
-     qtquickcontrols-qmlplugins \
-+    qttools-plugins \
- "
+ inherit autotools pkgconfig
+ 
+-SRC_URI[md5sum] = "18860375a7aa0ca9cba7d6ece54ab666"
+-SRC_URI[sha256sum] = "19aad5d55fa315602d6e836a858a3802f1608f9d824afba05fa12a58a1b1e656"
++SRC_URI[md5sum] = "c80f88b6ca19cabc4ceffc195ca07771"
++SRC_URI[sha256sum] = "046d63f10f755e2160dc56ef681e5f5ad3862a57c1955fd82e0ce036b69471b6"
 -- 
-2.6.1
+1.7.9.5
 
 
