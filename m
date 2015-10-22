@@ -1,40 +1,43 @@
-Return-Path: <schnitzeltony@googlemail.com>
+Return-Path: <mbc@koumoul.net>
 Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
 	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B40665C8A
+	by mail.openembedded.org (Postfix) with ESMTP id 5728760088
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Oct 2015 19:13:21 +0000 (UTC)
-Received: by wicll6 with SMTP id ll6so2573605wic.1
+	Thu, 22 Oct 2015 20:10:02 +0000 (UTC)
+Received: by wicll6 with SMTP id ll6so4483050wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Oct 2015 12:13:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=I5s/7UYzLa55x03vrjLgYoRzdXPWJJOAIXaW+7l+Mqs=;
-	b=NTa9e4E9VfAbXlWD1zdcp7PNSNA6NNEK4A/Qne5t0ocyz4Qk7VvtKyc1d3HdbTw9SD
-	umf4OQXK9I5J40st04t5kFzKAYuZqe31bXRmigkWTydeE15Fi8ZT+YRxmBvPW/z5Gl3q
-	0dB6bC0bZdPNkshsn9092YBbGoLe02yW+hPajEannJ5Az3ED4wxiHchZFscbISSALSU5
-	OutUE/uXeEsD7aC5xOOijz0zPKu6exzPjorZvOO1fYEPYMk7PszZwSUmoKkOOEGkx429
-	L17dHCVZMbn5mvs2uiKIExCwUr0329gR8ISDKtztBBiWXcsYe4WcIm5q0s2mzvkVss1I
-	dBMw==
-X-Received: by 10.180.9.173 with SMTP id a13mr85056wib.63.1445541201397;
-	Thu, 22 Oct 2015 12:13:21 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF1181.dip0.t-ipconnect.de.
-	[79.223.17.129]) by smtp.googlemail.com with ESMTPSA id
-	h8sm203993wib.8.2015.10.22.12.13.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 22 Oct 2015 12:13:20 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Thu, 22 Oct 2015 13:10:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=1WW6mKR3OXGOIESXQfkyMEhnGCY4jaJRbkQQuO9PCHg=;
+	b=MX7MCxL2RqHTjNN/SjXWKbCEsWey+ndwt/Dt2NfnsbXXD9aVmnj60pNGVrLlqBueO8
+	nr1NsdtRBOo2ESpoHlNRhf6s4Z+BIZ3RyDmJuuj1Fy+6Hm5X9J5ZTvwaJbF0815Vv6fs
+	UGD5cfSZnjPyybp8Ep5bs5Ru8MBpZclHQ8ty0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=1WW6mKR3OXGOIESXQfkyMEhnGCY4jaJRbkQQuO9PCHg=;
+	b=amxOaT3y6QeuZLojOs7Ao9LCVpZV2C0/ZxhwZH5qwjhGqfzJkVsM85G6YuyiLZs1lT
+	qN4vWbnjtBF58US9HsA+ekhY0Y+3BBzY1Xw9V7kY/2r4uY83gD34Ral83arOwm9NCZ3N
+	Nfcn6X3JfqaQhtHvqSrpsnqXYR6dS9zukzfN7Z01+nE3qTCzDpV07BGStH45HDdB52Z9
+	g/Xg5vTdJzxYzwuGmyirowQIPBg7KNRjxt7w5uEWJWn5jKw4AFd6xBpGBmKXTMbrXckS
+	b6SWnok/tpgEb5kS+B3WSCL5GBKHUzHthXusJZA4yVhwMru2Upzlne9VdPHEozUxDftV
+	NAkA==
+X-Gm-Message-State: ALoCoQkM5EdN3ux9eNre/L1h8B/nk3m1BEvJ61k4GTSO8kc/yg6Lq8mm3VslLFYmndQhn8uhBWD1
+X-Received: by 10.194.19.134 with SMTP id f6mr250747wje.133.1445544602354;
+	Thu, 22 Oct 2015 13:10:02 -0700 (PDT)
+Received: from localhost.localdomain ([46.18.96.42])
+	by smtp.gmail.com with ESMTPSA id
+	ee5sm18776551wjd.17.2015.10.22.13.10.01
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 22 Oct 2015 13:10:01 -0700 (PDT)
+Sender: "Manuel Bachmann [ IoT.bzh ]" <mbc@koumoul.net>
+From: Manuel Bachmann <manuel.bachmann@iot.bzh>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Oct 2015 21:13:09 +0200
-Message-Id: <1445541189-13375-4-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1445541189-13375-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1445541189-13375-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [PATCH 4/4] epdf: make it build again and get out of blacklist-exile
+Date: Thu, 22 Oct 2015 22:09:39 +0200
+Message-Id: <1445544579-4198-1-git-send-email-manuel.bachmann@iot.bzh>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [PATCH][meta-multimedia] vlc: fix freerdp module build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,232 +51,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2015 19:13:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 22 Oct 2015 20:10:03 -0000
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Since we are building "freerdp" again, build can now fail
+due to reliance on removed APIs. For instance :
+http://errors.yoctoproject.org/Errors/Details/20603/
+
+Fix this by conditionally building the module, and if we
+build it, patching the code until the fix gets merged
+upstream.
+
+Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
 ---
- ...alias-functions-poppler-has-dropped-them-.patch | 132 +++++++++++++++++++++
- ...r_postscript.cpp-fix-build-for-poppler-AP.patch |  45 +++++++
- meta-efl/recipes-efl/efl/epdf_svn.bb               |   8 +-
- 3 files changed, 181 insertions(+), 4 deletions(-)
- create mode 100644 meta-efl/recipes-efl/efl/epdf/0001-remove-antialias-functions-poppler-has-dropped-them-.patch
- create mode 100644 meta-efl/recipes-efl/efl/epdf/0002-epdf_poppler_postscript.cpp-fix-build-for-poppler-AP.patch
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc        |  1 +
+ .../vlc/vlc/0009-fix-rdp-module.patch                 | 19 +++++++++++++++++++
+ meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb   |  3 ++-
+ 3 files changed, 22 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0009-fix-rdp-module.patch
 
-diff --git a/meta-efl/recipes-efl/efl/epdf/0001-remove-antialias-functions-poppler-has-dropped-them-.patch b/meta-efl/recipes-efl/efl/epdf/0001-remove-antialias-functions-poppler-has-dropped-them-.patch
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+index 41b5df9..ee90ac8 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+@@ -57,6 +57,7 @@ PACKAGECONFIG[speex] = "--enable-speex,--disable-speex,speex"
+ PACKAGECONFIG[gstreamer] = "--enable-gst-decode,--disable-gst-decode,gstreamer1.0 gstreamer1.0-plugins-base"
+ PACKAGECONFIG[vpx] = "--enable-vpx,--disable-vpx, libvpx"
+ PACKAGECONFIG[qt4] = "--enable-qt,--disable-qt, qt4-x11-free"
++PACKAGECONFIG[freerdp] = "--enable-freerdp,--disable-freerdp, freerdp"
+ 
+ do_configure_prepend() {
+     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0009-fix-rdp-module.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0009-fix-rdp-module.patch
 new file mode 100644
-index 0000000..728ffa6
+index 0000000..8e554a9
 --- /dev/null
-+++ b/meta-efl/recipes-efl/efl/epdf/0001-remove-antialias-functions-poppler-has-dropped-them-.patch
-@@ -0,0 +1,132 @@
-+From 6691ac5fcbac0e766d4410ae649a13957ae85289 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Thu, 22 Oct 2015 16:27:52 +0200
-+Subject: [PATCH 1/2] remove antialias functions - poppler has dropped them in
-+ the API
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+The functions removed were not used.
-+
-+Upstream-Status: pending
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ src/lib/epdf_main.h                   | 45 -----------------------------------
-+ src/lib/mupdf/epdf_mupdf_main.c       | 18 --------------
-+ src/lib/poppler/epdf_poppler_main.cpp | 21 ----------------
-+ 3 files changed, 84 deletions(-)
-+
-+diff --git a/src/lib/epdf_main.h b/src/lib/epdf_main.h
-+index 54a57ca..0a79bad 100644
-+--- a/src/lib/epdf_main.h
-++++ b/src/lib/epdf_main.h
-+@@ -29,49 +29,4 @@ EAPI int epdf_shutdown();
-+  */
-+ EAPI const char *epdf_backend_version_get (void);
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0009-fix-rdp-module.patch
+@@ -0,0 +1,19 @@
++--- a/modules/access/rdp.c	2015-10-22 19:42:24.447445250 +0000
+++++ b/modules/access/rdp.c	2015-10-22 19:42:46.570445248 +0000
++@@ -428,8 +428,6 @@
++     if ( p_sys->f_fps <= 0 ) p_sys->f_fps = 1.0;
++     p_sys->i_frame_interval = 1000000 / p_sys->f_fps;
 + 
-+-/**
-+- * @brief Return the state of fonts antialiasing in Poppler
-+- *
-+- * @return EINA_TRUE if fonts antialiasing enabled, EINA_FALSE otherwise.
-+- *
-+- * Return EINA_TRUE if the state of fonts antialiasing is enabled in
-+- * Poppler, EINA_FALSE otherwise.
-+- *
-+- * @ingroup Epdf_Main
-+- */
-+-EAPI Eina_Bool epdf_fonts_antialias_get (void);
++-    freerdp_channels_global_init();
 +-
-+-/**
-+- * @brief Sets fonts antialiasing mode in Poppler
-+- *
-+- * @param on EINA_TRUE to enable fonts antialiasing, EINA_FALSE to disable
-+- *
-+- * Set @p on to EINA_TRUE to enable fonts antialiasing in Poppler,
-+- * EINA_FALSE to disable it.
-+- */
-+-EAPI void epdf_fonts_antialias_set (Eina_Bool on);
-+-
-+-/**
-+- * @brief Return the state of lines antialiasing in Poppler
-+- *
-+- * @return EINA_TRUE if lines antialiasing enabled, EINA_FALSE otherwise.
-+- *
-+- * Return EINA_TRUE if the state of lines antialiasing is enabled in
-+- * Poppler, EINA_FALSE otherwise.
-+- *
-+- * @ingroup Epdf_Main
-+- */
-+-EAPI Eina_Bool epdf_lines_antialias_get (void);
-+-
-+-/**
-+- * @brief Sets lines antialiasing mode in Poppler
-+- *
-+- * @param on EINA_TRUE to enable lines antialiasing, EINA_FALSE to disable
-+- *
-+- * Set @p on to EINA_TRUE to enable lines antialiasing in Poppler,
-+- * EINA_FALSE to disable it.
-+- */
-+-EAPI void epdf_lines_antialias_set (Eina_Bool on);
-+-
-+-
-+ #endif /* __EPDF_MAIN_H__ */
-+diff --git a/src/lib/mupdf/epdf_mupdf_main.c b/src/lib/mupdf/epdf_mupdf_main.c
-+index 17bb830..27c6de2 100644
-+--- a/src/lib/mupdf/epdf_mupdf_main.c
-++++ b/src/lib/mupdf/epdf_mupdf_main.c
-+@@ -37,21 +37,3 @@ epdf_backend_version_get (void)
-+ {
-+    return "0.5";
-+ }
-+-
-+-Eina_Bool epdf_fonts_antialias_get(void)
-+-{
-+-   return EINA_TRUE;
-+-}
-+-
-+-void epdf_fonts_antialias_set(Eina_Bool on)
-+-{
-+-}
-+-
-+-Eina_Bool epdf_lines_antialias_get(void)
-+-{
-+-   return EINA_TRUE;
-+-}
-+-
-+-void epdf_lines_antialias_set(Eina_Bool on)
-+-{
-+-}
-+diff --git a/src/lib/poppler/epdf_poppler_main.cpp b/src/lib/poppler/epdf_poppler_main.cpp
-+index 9841987..9efdbe8 100644
-+--- a/src/lib/poppler/epdf_poppler_main.cpp
-++++ b/src/lib/poppler/epdf_poppler_main.cpp
-+@@ -46,24 +46,3 @@ epdf_backend_version_get (void)
-+ {
-+   return POPPLER_VERSION;
-+ }
-+-
-+-Eina_Bool epdf_fonts_antialias_get (void)
-+-{
-+-  return globalParams->getAntialias();
-+-}
-+-
-+-void epdf_fonts_antialias_set (Eina_Bool on)
-+-{
-+-  /* Nice API */
-+-  globalParams->setAntialias((char*)(on ? "yes" : "no"));
-+-}
-+-
-+-Eina_Bool epdf_lines_antialias_get (void)
-+-{
-+-    return globalParams->getVectorAntialias();
-+-}
-+-
-+-void epdf_lines_antialias_set (Eina_Bool on)
-+-{
-+-    globalParams->setVectorAntialias((char*)(on ? "yes" : "no"));
-+-}
-+-- 
-+2.1.0
-+
-diff --git a/meta-efl/recipes-efl/efl/epdf/0002-epdf_poppler_postscript.cpp-fix-build-for-poppler-AP.patch b/meta-efl/recipes-efl/efl/epdf/0002-epdf_poppler_postscript.cpp-fix-build-for-poppler-AP.patch
-new file mode 100644
-index 0000000..c9adaa7
---- /dev/null
-+++ b/meta-efl/recipes-efl/efl/epdf/0002-epdf_poppler_postscript.cpp-fix-build-for-poppler-AP.patch
-@@ -0,0 +1,45 @@
-+From a84c16fdc606f22b993f870b1cea56dd060a35e6 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Thu, 22 Oct 2015 16:55:30 +0200
-+Subject: [PATCH 2/2] epdf_poppler_postscript.cpp: fix build for poppler API
-+ change
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Poppler API was changed in [1]. The patch not only shows the change but also
-+inspires how to fix.
-+
-+[1] http://cgit.freedesktop.org/poppler/poppler/commit/?id=9caf7525409d699c16896653528486451123b485
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ src/lib/poppler/epdf_poppler_postscript.cpp | 7 +++++--
-+ 1 file changed, 5 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/lib/poppler/epdf_poppler_postscript.cpp b/src/lib/poppler/epdf_poppler_postscript.cpp
-+index 0c2836b..656193b 100644
-+--- a/src/lib/poppler/epdf_poppler_postscript.cpp
-++++ b/src/lib/poppler/epdf_poppler_postscript.cpp
-+@@ -82,11 +82,14 @@ epdf_postscript_print (const Epdf_Postscript *postscript)
++     p_sys->p_instance = freerdp_new();
++     if ( !p_sys->p_instance )
++     {
++@@ -504,7 +502,6 @@
 + 
-+   // FIXME: fix postscript title
-+ #ifdef HAVE_POPPLER_0_20
-++  std::vector<int> pages;
-++  for (int i = postscript->first_page; i <= postscript->last_page; ++i) {
-++    pages.push_back(i);
-++  }
-+   PSOutputDev ps_dev(postscript->filename,
-+                      postscript->pdfdoc,
-+                      (char *)"PS title",
-+-                     postscript->first_page,
-+-                     postscript->last_page,
-++                     pages,
-+                      psModePS,
-+                      (int)postscript->width,
-+                      (int)postscript->height,
-+-- 
-+2.1.0
-+
-diff --git a/meta-efl/recipes-efl/efl/epdf_svn.bb b/meta-efl/recipes-efl/efl/epdf_svn.bb
-index a2adf6a..e32a5fd 100644
---- a/meta-efl/recipes-efl/efl/epdf_svn.bb
-+++ b/meta-efl/recipes-efl/efl/epdf_svn.bb
-@@ -11,7 +11,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
-                     file://COPYING.LESSER;md5=6a6a8e020838b23406c81b19c1d46df6 \
++     freerdp_disconnect( p_sys->p_instance );
++     freerdp_free( p_sys->p_instance );
++-    freerdp_channels_global_uninit();
++ 
++     if ( p_sys->p_block )
++         block_Release( p_sys->p_block );
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+index ba8ca4b..fa9d11a 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.1.bb
+@@ -9,8 +9,9 @@ SRC_URI += "file://0001-enable-subdir-objects.patch \
+             file://0004-modules-gui-qt4-out-of-tree-build.patch \
+             file://0005-libpostproc-header-check.patch \
+             file://0006-make-opencv-configurable.patch \
+-	    file://0007-use-vorbisidec.patch \
++            file://0007-use-vorbisidec.patch \
+             file://0008-fix-luaL-checkint.patch \
++            file://0009-fix-rdp-module.patch \
  "
  
--SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};protocol=http;scmdata=keep \
-+SRC_URI = " \
-+    ${E_SVN}/trunk/PROTO;module=${SRCNAME};protocol=http;scmdata=keep \
-+    file://0001-remove-antialias-functions-poppler-has-dropped-them-.patch \
-+    file://0002-epdf_poppler_postscript.cpp-fix-build-for-poppler-AP.patch \
- "
- S = "${WORKDIR}/${SRCNAME}"
- 
-@@ -22,6 +25,3 @@ EXTRA_OECONF = "\
- 
- # Some upgrade path tweaking, as in evas
- AUTO_LIBNAME_PKGS = ""
--
--# 2_0.1.0+svnr82070-r0/epdf/src/lib/poppler/epdf_poppler_main.cpp:52:24: error: 'class GlobalParams' has no member named 'getAntialias'
--PNBLACKLIST[epdf] ?= "BROKEN: fails to build with newer poppler"
+ SRC_URI[md5sum] = "42273945758b521c408fabc7fd6d9946"
 -- 
-2.1.0
+1.8.3.1
 
 
