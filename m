@@ -1,23 +1,26 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id DE13075CD0
+Return-Path: <Liezhi.Yang@windriver.com>
+X-Greylist: delayed 1123 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 23 Oct 2015 08:19:39 UTC
+Received: from mail5.wrs.com (unknown [64.129.254.146])
+	by mail.openembedded.org (Postfix) with ESMTP id 97CEF60034
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2015 07:55:09 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 23 Oct 2015 00:55:10 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,185,1444719600"; d="scan'208";a="817665327"
-Received: from mbabyjoh-mobl.fi.intel.com ([10.237.72.71])
-	by fmsmga001.fm.intel.com with ESMTP; 23 Oct 2015 00:54:36 -0700
-Date: Fri, 23 Oct 2015 10:54:43 +0300
-From: "Maxin B. John" <maxin.john@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151023075442.GA11357@mbabyjoh-mobl.fi.intel.com>
-References: <1445420509-1807-1-git-send-email-erkka.kaaria@intel.com>
+	Fri, 23 Oct 2015 08:19:39 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id t9N80vZj025616
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Oct 2015 01:00:57 -0700
+Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Fri, 23 Oct 2015 01:00:56 -0700
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 23 Oct 2015 01:00:56 -0700
+Message-ID: <1445587256-2553-1-git-send-email-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-In-Reply-To: <1445420509-1807-1-git-send-email-erkka.kaaria@intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-java][PATCH] cacao-initial-native: Fix undefined behaviour in gc
+Subject: [meta-networking][PATCH] netcat: add DESCRIPTION
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,89 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2015 07:55:11 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 23 Oct 2015 08:19:41 -0000
+Content-Type: text/plain
 
-Hi Erkka,
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+---
+ meta-networking/recipes-support/netcat/netcat.inc      | 10 ++++++++++
+ meta-networking/recipes-support/netcat/netcat_0.7.1.bb |  2 --
+ 2 files changed, 10 insertions(+), 2 deletions(-)
 
-On Wed, Oct 21, 2015 at 12:41:49PM +0300, Erkka K‰‰ri‰ wrote:
-> Upstream-Status: Backport
-> 
-> Fixes undefined behaviour in boehm GC used by cacao-initial-native
-> as suggested at
-> https://github.com/ivmai/bdwgc/commit/16780405c899f01119bc45167122b4242f6b34fb.
-> 
-> The undefined behaviour at very least causes a segmentation fault during
-> classpath-native configure step with Fedora 22.
+diff --git a/meta-networking/recipes-support/netcat/netcat.inc b/meta-networking/recipes-support/netcat/netcat.inc
+index 9cb243d..91a24a1 100644
+--- a/meta-networking/recipes-support/netcat/netcat.inc
++++ b/meta-networking/recipes-support/netcat/netcat.inc
+@@ -1,3 +1,13 @@
++SUMMARY = "GNU Netcat"
++HOMEPAGE = "http://netcat.sourceforge.net"
++DESCRIPTION = "A simple Unix utility which reads and writes data across network \
++connections using TCP or UDP protocol.  It is designed to be a reliable \
++'back-end' tool that can be used directly or easily driven by other \
++programs and scripts. At the same time it is a feature-rich network \
++debugging and exploration tool, since it can create almost any kind of \
++connection you would need and has several interesting built-in \
++capabilities."
++
+ SECTION = "net"
+ inherit update-alternatives gettext
+ 
+diff --git a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb b/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
+index 8710c36..d961af5 100644
+--- a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
++++ b/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
+@@ -1,6 +1,4 @@
+ require netcat.inc
+-SUMMARY = "GNU Netcat"
+-HOMEPAGE = "http://netcat.sourceforge.net"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+-- 
+2.0.1
 
-Thanks for fixing it. Pushed to master.
-
-> Signed-off-by: Erkka K‰‰ri‰ <erkka.kaaria@intel.com>
-> ---
->  recipes-core/cacao/cacao-initial-native_0.98.bb    |  1 +
->  ...-0.9.8-initial-fix-gc-undefined-behaviour.patch | 35 ++++++++++++++++++++++
->  2 files changed, 36 insertions(+)
->  create mode 100644 recipes-core/cacao/files/cacao-0.9.8-initial-fix-gc-undefined-behaviour.patch
-> 
-> diff --git a/recipes-core/cacao/cacao-initial-native_0.98.bb b/recipes-core/cacao/cacao-initial-native_0.98.bb
-> index ec7fbdb..2a8ced5 100644
-> --- a/recipes-core/cacao/cacao-initial-native_0.98.bb
-> +++ b/recipes-core/cacao/cacao-initial-native_0.98.bb
-> @@ -14,6 +14,7 @@ SRC_URI = "\
->          http://www.complang.tuwien.ac.at/cacaojvm/download/cacao-${PV}/cacao-${PV}.tar.bz2; \
->          file://cacao-0.98-initial.patch \
->          file://disable_hw_exceptions.patch \
-> +        file://cacao-0.9.8-initial-fix-gc-undefined-behaviour.patch \
->          "
->  
->  # libjvm disabled - it would conflict with cacao-native installations
-> diff --git a/recipes-core/cacao/files/cacao-0.9.8-initial-fix-gc-undefined-behaviour.patch b/recipes-core/cacao/files/cacao-0.9.8-initial-fix-gc-undefined-behaviour.patch
-> new file mode 100644
-> index 0000000..ccc35cb
-> --- /dev/null
-> +++ b/recipes-core/cacao/files/cacao-0.9.8-initial-fix-gc-undefined-behaviour.patch
-> @@ -0,0 +1,35 @@
-> +Upstream-Status: Backport
-> +
-> +This fixes undefined behaviour in boehm GC as suggested at
-> +https://github.com/ivmai/bdwgc/commit/16780405c899f01119bc45167122b4242f6b34fb.
-> +
-> +The undefined behaviour at very least causes a segmentation fault during
-> +classpath-native configure step.
-> +    
-> +Signed-off-by: Erkka K‰‰ri‰ <erkka.kaaria@intel.com>
-> +
-> +--- cacao-0.98/src/mm/boehm-gc/mark_rts.c
-> ++++ cacao-0.98/src/mm/boehm-gc/mark_rts.c
-> +@@ -371,18 +371,7 @@ ptr_t p;
-> + 
-> + ptr_t GC_approx_sp()
-> + {
-> +-    VOLATILE word dummy;
-> +-
-> +-    dummy = 42;	/* Force stack to grow if necessary.	Otherwise the	*/
-> +-    		/* later accesses might cause the kernel to think we're	*/
-> +-    		/* doing something wrong.				*/
-> +-#   ifdef _MSC_VER
-> +-#     pragma warning(disable:4172)
-> +-#   endif
-> +-    return((ptr_t)(&dummy));
-> +-#   ifdef _MSC_VER
-> +-#     pragma warning(default:4172)
-> +-#   endif
-> ++    return __builtin_frame_address(0);
-> + }
-> + 
-> + /*
-> +-- 
-> +2.1.4
-> +
-> -- 
-> 2.1.4
->
-
-Best Regards,
-Maxin
 
