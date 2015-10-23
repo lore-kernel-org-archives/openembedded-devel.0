@@ -1,24 +1,21 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 17C8160125
+Return-Path: <erkka.kaaria@intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 050C160125
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2015 09:45:27 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t9N9jRmo018478
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2015 02:45:27 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Fri, 23 Oct 2015 02:45:27 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Oct 2015 05:45:25 -0400
-Message-ID: <1445593525-172503-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Fri, 23 Oct 2015 09:49:02 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 23 Oct 2015 02:49:02 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,186,1444719600"; d="scan'208";a="817723258"
+Received: from ekaaria-xps-8300.fi.intel.com ([10.237.68.35])
+	by fmsmga001.fm.intel.com with ESMTP; 23 Oct 2015 02:49:01 -0700
+From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 23 Oct 2015 12:50:01 +0300
+Message-Id: <1445593801-30173-1-git-send-email-erkka.kaaria@intel.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] ntp: upgrade 4.2.8p3 -> 4.2.8p4
+Subject: [meta-java][PATCH] icedtea7-native: Fix memory leak when compiled with GCC 5.0+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,57 +29,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2015 09:45:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 23 Oct 2015 09:49:04 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
-
-4.2.8p4 fixed following 13 low- and medium-severity vulnerabilities:
-
-  * Bug 2941 CVE-2015-7871
-  * Bug 2922 CVE-2015-7855
-  * Bug 2921 CVE-2015-7854
-  * Bug 2920 CVE-2015-7853
-  * Bug 2919 CVE-2015-7852
-  * Bug 2918 CVE-2015-7851
-  * Bug 2917 CVE-2015-7850
-  * Bug 2916 CVE-2015-7849
-  * Bug 2913 CVE-2015-7848
-  * Bug 2909 CVE-2015-7701
-  * Bug 2902 CVE-2015-7703
-  * Bug 2901 CVE-2015-7704, CVE-2015-7705
-  * Bug 2899 CVE-2015-7691, CVE-2015-7692, CVE-2015-7702
-
-And three bugs: Bug 2382, 1774, 1593
-
-Details at:
-  http://support.ntp.org/bin/view/Main/SecurityNotice#Recent_Vulnerabilities
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- .../recipes-support/ntp/{ntp_4.2.8p3.bb => ntp_4.2.8p4.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/ntp/{ntp_4.2.8p3.bb => ntp_4.2.8p4.bb} (97%)
-
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p3.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
-similarity index 97%
-rename from meta-networking/recipes-support/ntp/ntp_4.2.8p3.bb
-rename to meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
-index 7ce993f..f9f900e 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p3.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
-@@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://ntpd.list \
- "
- 
--SRC_URI[md5sum] = "b98b0cbb72f6df04608e1dd5f313808b"
--SRC_URI[sha256sum] = "818ca4f2ed6ca845b1c5ec43f5e6ad905eaa0fc0aab2d509ed6b962a37fbf38f"
-+SRC_URI[md5sum] = "6af96862b09324a8ef965ca76b759c8b"
-+SRC_URI[sha256sum] = "0d6961572548d2c4af96f58f763e22ac620f5afef717384ddc317a0e365cfdb9"
- 
- inherit autotools update-rc.d useradd systemd pkgconfig
- 
--- 
-1.9.1
+VXBzdHJlYW0tU3RhdHVzOiBCYWNrcG9ydAoKSG90c3BvdCBjb21waWxlciBoYXMgYSBidWcgd2hl
+cmUgc2lnbmVkIGludGVnZXJzIGNvdWxkIG92ZXJmbG93LiBUaGlzIGlzCnVuZGVmaW5lZCBiZWhh
+dmlvdXIsIGFuZCBjYXVzZXMgbWFzc2l2ZSBtZW1vcnkgbGVhayB3aGVuIGNvbXBpbGVkIHdpdGgg
+R0NDIDUuMCssCmNhdXNpbmcgdGhlIGJ1aWxkIHRvIGZhaWwuCgpUaGlzIGlzIGZpeGVkIGJ5IGJh
+Y2twb3J0aW5nIHBhdGNoIGZyb20KaHR0cHM6Ly9idWdzLm9wZW5qZGsuamF2YS5uZXQvYnJvd3Nl
+L0pESy04MDc4NjY2IHdoZXJlIGl0IHdhcyBmaXhlZCBieQpTZXZlcmluIEdlaHdvbGYuCgpTaWdu
+ZWQtb2ZmLWJ5OiBFcmtrYSBLw6TDpHJpw6QgPGVya2thLmthYXJpYUBpbnRlbC5jb20+Ci0tLQog
+Li4uL2ljZWR0ZWEtaG90c3BvdC1maXgtdW5kZWZpbmVkLWJlaGF2aW91ci5wYXRjaCAgfCA0OSAr
+KysrKysrKysrKysrKysrKysrKysrCiByZWNpcGVzLWNvcmUvaWNlZHRlYS9vcGVuamRrLTctcmVs
+ZWFzZS0wM2IxNDcuaW5jICB8ICAyICsKIDIgZmlsZXMgY2hhbmdlZCwgNTEgaW5zZXJ0aW9ucygr
+KQogY3JlYXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMtY29yZS9pY2VkdGVhL29wZW5qZGstNy0wM2Ix
+NDcvaWNlZHRlYS1ob3RzcG90LWZpeC11bmRlZmluZWQtYmVoYXZpb3VyLnBhdGNoCgpkaWZmIC0t
+Z2l0IGEvcmVjaXBlcy1jb3JlL2ljZWR0ZWEvb3Blbmpkay03LTAzYjE0Ny9pY2VkdGVhLWhvdHNw
+b3QtZml4LXVuZGVmaW5lZC1iZWhhdmlvdXIucGF0Y2ggYi9yZWNpcGVzLWNvcmUvaWNlZHRlYS9v
+cGVuamRrLTctMDNiMTQ3L2ljZWR0ZWEtaG90c3BvdC1maXgtdW5kZWZpbmVkLWJlaGF2aW91ci5w
+YXRjaApuZXcgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAwMDAwMDAwLi41NjUxM2EwCi0tLSAvZGV2
+L251bGwKKysrIGIvcmVjaXBlcy1jb3JlL2ljZWR0ZWEvb3Blbmpkay03LTAzYjE0Ny9pY2VkdGVh
+LWhvdHNwb3QtZml4LXVuZGVmaW5lZC1iZWhhdmlvdXIucGF0Y2gKQEAgLTAsMCArMSw0OSBAQAor
+VXBzdHJlYW0tU3RhdHVzOiBCYWNrcG9ydAorCitIb3RzcG90IGNvbXBpbGVyIGhhcyBhIGJ1ZyB3
+aGVyZSBzaWduZWQgaW50ZWdlcnMgY291bGQgb3ZlcmZsb3cuIFRoaXMgaXMgCit1bmRlZmluZWQg
+YmVoYXZpb3VyLCBhbmQgY2F1c2VzIG1hc3NpdmUgbWVtb3J5IGxlYWsgd2hlbiBjb21waWxlZCB3
+aXRoIEdDQyA1LjArLCAKK2NhdXNpbmcgdGhlIGJ1aWxkIHRvIGZhaWwuCisKK1RoaXMgaXMgZml4
+ZWQgYnkgYmFja3BvcnRpbmcgcGF0Y2ggZnJvbSAKK2h0dHBzOi8vYnVncy5vcGVuamRrLmphdmEu
+bmV0L2Jyb3dzZS9KREstODA3ODY2NiB3aGVyZSBpdCB3YXMgZml4ZWQgYnkgCitTZXZlcmluIEdl
+aHdvbGYuCisKK1NpZ25lZC1vZmYtYnk6IEVya2thIEvDpMOkcmnDpCA8ZXJra2Eua2FhcmlhQGlu
+dGVsLmNvbT4KKworLS0tIG9wZW5qZGsvaG90c3BvdC9zcmMvc2hhcmUvdm0vb3B0by90eXBlLmNw
+cAorKysrIG9wZW5qZGsvaG90c3BvdC9zcmMvc2hhcmUvdm0vb3B0by90eXBlLmNwcAorQEAgLTEw
+NzcsMTEgKzEwNzcsMTEgQEAgc3RhdGljIGludCBub3JtYWxpemVfaW50X3dpZGVuKCBqaW50IGxv
+LCBqaW50IGhpLCBpbnQgdyApIHsKKyAgIC8vIENlcnRhaW4gbm9ybWFsaXphdGlvbnMga2VlcCB1
+cyBzYW5lIHdoZW4gY29tcGFyaW5nIHR5cGVzLgorICAgLy8gVGhlICdTTUFMTElOVCcgY292ZXJz
+IGNvbnN0YW50cyBhbmQgYWxzbyBDQyBhbmQgaXRzIHJlbGF0aXZlcy4KKyAgIGlmIChsbyA8PSBo
+aSkgeworLSAgICBpZiAoKGp1aW50KShoaSAtIGxvKSA8PSBTTUFMTElOVCkgIHcgPSBUeXBlOjpX
+aWRlbk1pbjsKKy0gICAgaWYgKChqdWludCkoaGkgLSBsbykgPj0gbWF4X2p1aW50KSB3ID0gVHlw
+ZTo6V2lkZW5NYXg7IC8vIFR5cGVJbnQ6OklOVAorKyAgICBpZiAoKChqdWludCloaSAtIGxvKSA8
+PSBTTUFMTElOVCkgIHcgPSBUeXBlOjpXaWRlbk1pbjsKKysgICAgaWYgKCgoanVpbnQpaGkgLSBs
+bykgPj0gbWF4X2p1aW50KSB3ID0gVHlwZTo6V2lkZW5NYXg7IC8vIFR5cGVJbnQ6OklOVAorICAg
+fSBlbHNlIHsKKy0gICAgaWYgKChqdWludCkobG8gLSBoaSkgPD0gU01BTExJTlQpICB3ID0gVHlw
+ZTo6V2lkZW5NaW47CistICAgIGlmICgoanVpbnQpKGxvIC0gaGkpID49IG1heF9qdWludCkgdyA9
+IFR5cGU6OldpZGVuTWluOyAvLyBkdWFsIFR5cGVJbnQ6OklOVAorKyAgICBpZiAoKChqdWludCls
+byAtIGhpKSA8PSBTTUFMTElOVCkgIHcgPSBUeXBlOjpXaWRlbk1pbjsKKysgICAgaWYgKCgoanVp
+bnQpbG8gLSBoaSkgPj0gbWF4X2p1aW50KSB3ID0gVHlwZTo6V2lkZW5NaW47IC8vIGR1YWwgVHlw
+ZUludDo6SU5UICAKKyAgIH0KKyAgIHJldHVybiB3OworIH0KK0BAIC0xMzMyLDExICsxMzMyLDEx
+IEBAIHN0YXRpYyBpbnQgbm9ybWFsaXplX2xvbmdfd2lkZW4oIGpsb25nIGxvLCBqbG9uZyBoaSwg
+aW50IHcgKSB7CisgICAvLyBDZXJ0YWluIG5vcm1hbGl6YXRpb25zIGtlZXAgdXMgc2FuZSB3aGVu
+IGNvbXBhcmluZyB0eXBlcy4KKyAgIC8vIFRoZSAnU01BTExJTlQnIGNvdmVycyBjb25zdGFudHMu
+CisgICBpZiAobG8gPD0gaGkpIHsKKy0gICAgaWYgKChqdWxvbmcpKGhpIC0gbG8pIDw9IFNNQUxM
+SU5UKSAgIHcgPSBUeXBlOjpXaWRlbk1pbjsKKy0gICAgaWYgKChqdWxvbmcpKGhpIC0gbG8pID49
+IG1heF9qdWxvbmcpIHcgPSBUeXBlOjpXaWRlbk1heDsgLy8gVHlwZUxvbmc6OkxPTkcKKysgICAg
+aWYgKCgoanVsb25nKWhpIC0gbG8pIDw9IFNNQUxMSU5UKSAgIHcgPSBUeXBlOjpXaWRlbk1pbjsK
+KysgICAgaWYgKCgoanVsb25nKWhpIC0gbG8pID49IG1heF9qdWxvbmcpIHcgPSBUeXBlOjpXaWRl
+bk1heDsgLy8gVHlwZUxvbmc6OkxPTkcgIAorICAgfSBlbHNlIHsKKy0gICAgaWYgKChqdWxvbmcp
+KGxvIC0gaGkpIDw9IFNNQUxMSU5UKSAgIHcgPSBUeXBlOjpXaWRlbk1pbjsKKy0gICAgaWYgKChq
+dWxvbmcpKGxvIC0gaGkpID49IG1heF9qdWxvbmcpIHcgPSBUeXBlOjpXaWRlbk1pbjsgLy8gZHVh
+bCBUeXBlTG9uZzo6TE9ORworKyAgICBpZiAoKChqdWxvbmcpbG8gLSBoaSkgPD0gU01BTExJTlQp
+ICAgdyA9IFR5cGU6OldpZGVuTWluOworKyAgICBpZiAoKChqdWxvbmcpbG8gLSBoaSkgPj0gbWF4
+X2p1bG9uZykgdyA9IFR5cGU6OldpZGVuTWluOyAvLyBkdWFsIFR5cGVMb25nOjpMT05HCisgICB9
+CisgICByZXR1cm4gdzsKKyB9CistLSAKKzIuMS40CisKZGlmZiAtLWdpdCBhL3JlY2lwZXMtY29y
+ZS9pY2VkdGVhL29wZW5qZGstNy1yZWxlYXNlLTAzYjE0Ny5pbmMgYi9yZWNpcGVzLWNvcmUvaWNl
+ZHRlYS9vcGVuamRrLTctcmVsZWFzZS0wM2IxNDcuaW5jCmluZGV4IDk4MjY2ZjcuLmIxY2Y2ZTkg
+MTAwNjQ0Ci0tLSBhL3JlY2lwZXMtY29yZS9pY2VkdGVhL29wZW5qZGstNy1yZWxlYXNlLTAzYjE0
+Ny5pbmMKKysrIGIvcmVjaXBlcy1jb3JlL2ljZWR0ZWEvb3Blbmpkay03LXJlbGVhc2UtMDNiMTQ3
+LmluYwpAQCAtODQsNiArODQsNyBAQCBPUEVOSkRLX1BBVENIRVMgPSAiIFwKIAlmaWxlOi8vaWNl
+ZHRlYS1jaGFuZ2UtdG8tZ2RiLWRlYnVnLWZvcm1hdC5wYXRjaDthcHBseT1ubyBcCiAJZmlsZTov
+L2ljZWR0ZWEtZGlzYWJsZS14MTEtaW4taGVhZGxlc3MucGF0Y2g7YXBwbHk9bm8gXAogCWZpbGU6
+Ly9pY2VkdGVhLWRpc2FibGUtc3VuLmFwcGxldC1mb3ItdG9vbHMtaW4taGVhZGxlc3MucGF0Y2g7
+YXBwbHk9bm8gXAorCWZpbGU6Ly9pY2VkdGVhLWhvdHNwb3QtZml4LXVuZGVmaW5lZC1iZWhhdmlv
+dXIucGF0Y2g7YXBwbHk9bm8gXAogICAgICAgICAiCiAKIE9QRU5KREtfSEVBRExFU1NfUEFUQ0hF
+UyA9ICIgXApAQCAtMTAyLDUgKzEwMyw2IEBAIGV4cG9ydCBESVNUUklCVVRJT05fUEFUQ0hFUyA9
+ICIgXAogCXBhdGNoZXMvaWNlZHRlYS1mbGFncy5wYXRjaCBcCiAJcGF0Y2hlcy9pY2VkdGVhLW9w
+ZW5qZGstcmVtb3ZlLWN1cnJlbmN5LWRhdGEtZ2VuZXJhdGlvbi1leHBpLnBhdGNoIFwKIAlwYXRj
+aGVzL2ljZWR0ZWEtY2hhbmdlLXRvLWdkYi1kZWJ1Zy1mb3JtYXQucGF0Y2ggXAorCXBhdGNoZXMv
+aWNlZHRlYS1ob3RzcG90LWZpeC11bmRlZmluZWQtYmVoYXZpb3VyLnBhdGNoIFwKIAkke0NMRUFO
+X1gxMV9ESVNUUklCVVRJT05fUEFUQ0h9IFwKICAgICAgICAgIgotLSAKMi4xLjQKCi0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLQpJbnRlbCBGaW5sYW5kIE95ClJlZ2lzdGVyZWQgQWRkcmVzczogUEwgMjgxLCAwMDE4MSBI
+ZWxzaW5raSAKQnVzaW5lc3MgSWRlbnRpdHkgQ29kZTogMDM1NzYwNiAtIDQgCkRvbWljaWxlZCBp
+biBIZWxzaW5raSAKClRoaXMgZS1tYWlsIGFuZCBhbnkgYXR0YWNobWVudHMgbWF5IGNvbnRhaW4g
+Y29uZmlkZW50aWFsIG1hdGVyaWFsIGZvcgp0aGUgc29sZSB1c2Ugb2YgdGhlIGludGVuZGVkIHJl
+Y2lwaWVudChzKS4gQW55IHJldmlldyBvciBkaXN0cmlidXRpb24KYnkgb3RoZXJzIGlzIHN0cmlj
+dGx5IHByb2hpYml0ZWQuIElmIHlvdSBhcmUgbm90IHRoZSBpbnRlbmRlZApyZWNpcGllbnQsIHBs
+ZWFzZSBjb250YWN0IHRoZSBzZW5kZXIgYW5kIGRlbGV0ZSBhbGwgY29waWVzLgo=
 
 
