@@ -1,33 +1,19 @@
-Return-Path: <stephanoc@gmail.com>
-Received: from mail-yk0-f173.google.com (mail-yk0-f173.google.com
-	[209.85.160.173])
-	by mail.openembedded.org (Postfix) with ESMTP id D51C560124
+Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
+Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
+	by mail.openembedded.org (Postfix) with ESMTP id 58CB8607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Oct 2015 20:47:27 +0000 (UTC)
-Received: by ykdr3 with SMTP id r3so95763207ykd.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Oct 2015 13:47:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=8LWqVZowHG+8mnN1uFSuQnxZ2kHK2JiUOrTL8P4Rsms=;
-	b=O7CqMTs/WrRd24yI8xwWpnaWn3on9mgxvDFaJdDTYq6MuOdG7PJggeJXN9Vl7TCqgq
-	wdx9LhAyRK9Ikio9/zKmYTYon4UogQMdENgwC5PdL8Nus0ChWyA7wPj0R0t62oBFw+LA
-	bl10RaifTzRS0KbQUdtdC5aa4ATZt3+157LeJt5Hlk1YUQro89m4bqyvz10SnoZ+hPN6
-	ITSu3GAH3woNgah31Yy/L2KPJ6/c/KfT2NEwkq3eb9c2g1GWbTlIVZ6WbcXDt/o2+u0C
-	YfntG/7q9bAQBqM1XohA+fwHM9sudZnii+qrsKy687wdgND2KWoalUhyGltFhXomDcmu
-	cLzg==
-MIME-Version: 1.0
-X-Received: by 10.13.255.4 with SMTP id p4mr12651416ywf.88.1445546847781; Thu,
-	22 Oct 2015 13:47:27 -0700 (PDT)
-Received: by 10.13.211.2 with HTTP; Thu, 22 Oct 2015 13:47:27 -0700 (PDT)
-In-Reply-To: <CAKpvFF1Us5xk3EFTUE1oo5xF14CNZOkJmHN5_uR9o8_CRxSmVQ@mail.gmail.com>
-References: <CAKpvFF1Us5xk3EFTUE1oo5xF14CNZOkJmHN5_uR9o8_CRxSmVQ@mail.gmail.com>
-Date: Thu, 22 Oct 2015 13:47:27 -0700
-Message-ID: <CAB25Ju4q9v8_WPXbmpj_dAy7oasaiyRM2fhN5Gyrr7ZexgSmxQ@mail.gmail.com>
-From: Stephano Cetola <stephanoc@gmail.com>
+	Fri, 23 Oct 2015 06:01:24 +0000 (UTC)
+Received: from hulk.bmw-carit.intra (hulk.bmw-carit.intra [192.168.101.92])
+	by linuxmail.bmw-carit.de (Postfix) with ESMTP id 5226D4032F;
+	Fri, 23 Oct 2015 07:52:45 +0200 (CEST)
+From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: qtmultimedia + qt5.3.2 + yocto dizzy
+Date: Fri, 23 Oct 2015 08:01:16 +0200
+Message-Id: <1445580076-32195-2-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+X-Mailer: git-send-email 1.9.3
+In-Reply-To: <1445580076-32195-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+References: <1445580076-32195-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+Subject: [PATCH 2/2] libeigen: patch to install the find cmake script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,41 +27,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2015 20:47:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 23 Oct 2015 06:01:27 -0000
 
-Ciao Stefano,
+This commit is needed for the pcl-ros 1.3.0 recipe in the
+meta-ros layer, which detects the Eigen library with the provided
+cmake script.
 
-Take a look at this thread:
+Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+---
+ ...Lists.txt-install-FindEigen3.cmake-script.patch | 28 ++++++++++++++++++++++
+ meta-oe/recipes-support/libeigen/libeigen_3.2.6.bb |  4 +++-
+ 2 files changed, 31 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/libeigen/libeigen/0001-CMakeLists.txt-install-FindEigen3.cmake-script.patch
 
-https://community.freescale.com/message/391750#391750
+diff --git a/meta-oe/recipes-support/libeigen/libeigen/0001-CMakeLists.txt-install-FindEigen3.cmake-script.patch b/meta-oe/recipes-support/libeigen/libeigen/0001-CMakeLists.txt-install-FindEigen3.cmake-script.patch
+new file mode 100644
+index 0000000..761dadb
+--- /dev/null
++++ b/meta-oe/recipes-support/libeigen/libeigen/0001-CMakeLists.txt-install-FindEigen3.cmake-script.patch
+@@ -0,0 +1,28 @@
++From fd8bc66efac1059c1068f804746b01b90177c333 Mon Sep 17 00:00:00 2001
++From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
++Date: Sun, 18 Oct 2015 16:52:25 +0200
++Subject: [PATCH] CMakeLists.txt: install FindEigen3.cmake script
++
++Upstream-Status: Pending
++
++Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
++---
++ CMakeLists.txt | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 76a11b9..ec6c6ea 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -342,6 +342,8 @@ if(EIGEN_BUILD_PKGCONFIG)
++         )
++ endif(EIGEN_BUILD_PKGCONFIG)
++ 
+++install(FILES "${PROJECT_SOURCE_DIR}/cmake/FindEigen3.cmake" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/Modules")
+++
++ add_subdirectory(Eigen)
++ 
++ add_subdirectory(doc EXCLUDE_FROM_ALL)
++-- 
++1.9.3
++
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.2.6.bb b/meta-oe/recipes-support/libeigen/libeigen_3.2.6.bb
+index 4d73597..89a25a9 100644
+--- a/meta-oe/recipes-support/libeigen/libeigen_3.2.6.bb
++++ b/meta-oe/recipes-support/libeigen/libeigen_3.2.6.bb
+@@ -4,7 +4,8 @@ HOMEPAGE = "http://eigen.tuxfamily.org/"
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
+ 
+-SRC_URI = "http://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2"
++SRC_URI = "http://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2 \
++           file://0001-CMakeLists.txt-install-FindEigen3.cmake-script.patch"
+ SRC_URI[md5sum] = "87274966745d2d3e7964fcc654d0a24b"
+ SRC_URI[sha256sum] = "8a3352f9a5361fe90e451a7305fb1896fc7f771dc16cc0edd8e6b157f52c343e"
+ 
+@@ -15,6 +16,7 @@ inherit cmake
+ EXTRA_OECMAKE += "-Dpkg_config_libdir=${libdir}"
+ 
+ FILES_${PN} = "${includedir} ${libdir}"
++FILES_${PN}-dev = "${datadir}/cmake/Modules"
+ 
+ # ${PN} is empty so we need to tweak -dev and -dbg package dependencies
+ RDEPENDS_${PN}-dev = ""
+-- 
+1.9.3
 
-You are missing libgstmediaplayer.so. That link should help get you
-the right packages installed.
-
-
-
-On Thu, Oct 22, 2015 at 7:23 AM, Stefano Gurrieri
-<gurrieristefano@gmail.com> wrote:
-> Goodmorning,
-> I tried to compile Qt5.3.2 in my Yocto dizzy successfully etc=E2=80=A6
-> =E2=80=A6 but when I try to run (on my target based on iMX6) a videowidge=
-t
-> application or player application=E2=80=A6 I always have the same error:
-> defaultServiceProvider::requestService(): no service found for -
-> "org.qt-project.qt.mediaplayer"
-> and I can=E2=80=99t to see a video. In /usr/lib/qt5/plugins/mediaservice =
-I=E2=80=99ve only
-> libqtmedia_audioengine.so library. Missing gstreamer multimedia service
-> plugins?
->
-> Could you please help me?
->
-> Thanks a lot.
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
