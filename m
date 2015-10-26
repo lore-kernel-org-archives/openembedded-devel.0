@@ -1,25 +1,36 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id 4F2CD769A7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2015 22:08:01 +0000 (UTC)
-Received: (qmail 9895 invoked by uid 1003); 26 Oct 2015 22:08:01 -0000
-Received: from unknown (HELO ?10.16.32.95?)
-	(philip@opensdr.com@207.114.172.147)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	26 Oct 2015 22:08:01 -0000
-To: openembedded-devel@lists.openembedded.org
-References: <562E9F28.3070508@balister.org>
-	<CAP71WjyfHGBvVC7_g1xzqCJwNQveLj-F6-8WoB4LTkCEr3KB-w@mail.gmail.com>
-From: Philip Balister <philip@balister.org>
-Message-ID: <562EA440.6040103@balister.org>
-Date: Mon, 26 Oct 2015 15:08:00 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.1.0
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-io0-f173.google.com (mail-io0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 6752973D27;
+	Mon, 26 Oct 2015 22:49:18 +0000 (UTC)
+Received: by ioll68 with SMTP id l68so204111319iol.3;
+	Mon, 26 Oct 2015 15:49:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=JVdJ4M9FQqYL7cA/vBdqWml25jp2JXymruhTPQ0405s=;
+	b=1Kd79BcKmjx0fRTJdoBAX/gmsN5nfGOjYsNpMpKCHsZxKpb+is5XH/Sxf6N/myRRrf
+	/5IyKVqm8n3fHHVfDA0CrTxsc1F8KoklbvvInrH5Y8beOL6cQM/FTXznyZPNJaTcmg1w
+	UkZ6ke1tI6cQC5ZjuLINqJDpB+7RPAqvgQ7gMdRtYNNqvW38SPyOKW5cxY0ze9TBbBaL
+	leuOx7Imq+FVY0IdAS5Aa8r3RIfkvnqYVROTWnUyT1PA3p4MPXyIryWFMn671tBYs6PI
+	wqxm0KF5zEEMUu3TsdMGgVUbatL8OnqGEyp/QylfLr1quRpn5Ps9oRBwfgBS4WeUREot
+	HZ1Q==
 MIME-Version: 1.0
-In-Reply-To: <CAP71WjyfHGBvVC7_g1xzqCJwNQveLj-F6-8WoB4LTkCEr3KB-w@mail.gmail.com>
-Subject: Re: Updates to mesa and llvm
+X-Received: by 10.107.135.95 with SMTP id j92mr33404099iod.148.1445899758768; 
+	Mon, 26 Oct 2015 15:49:18 -0700 (PDT)
+Received: by 10.36.31.131 with HTTP; Mon, 26 Oct 2015 15:49:18 -0700 (PDT)
+In-Reply-To: <20151026204716.GJ2554@jama>
+References: <20151026204716.GJ2554@jama>
+Date: Mon, 26 Oct 2015 23:49:18 +0100
+Message-ID: <CALbNGRQCwyFKti9sgx0MHkxFbwuksupsjsnQ0UmK=dWQ47AZaw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2015-10-26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,49 +44,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2015 22:08:02 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 26 Oct 2015 22:49:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 10/26/2015 02:59 PM, Nicolas Dechesne wrote:
-> Le 26 oct. 2015 22:46, "Philip Balister" <philip@balister.org> a écrit :
->>
->> Recently I need to get the llvmpipe driver running with mesa. I ended up
->> adding a llvm-3.7 recipe and updating mesa to 10.6.8. Not sure if going
->> to 11.x.y also works.
-> 
-> I was told 2 weeks ago that updates to 10.6.8 was too late for this cycle,
-> and Ross said we could cherry pick patches from upstream if needed..
-> 
-> As for 11.x, we have patches ready for next cycle.. As soon as we can
-> update master we will send them.
+On Mon, Oct 26, 2015 at 9:47 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-That is what I thought. llvm3.3 doesn't work with mesa-10 (and I assume
-11), so I'll send that in soon, unless there is a compelling reason not
-to. It does look like we support multiple llvm versions.
+> === common (2) ===
+>     * /meta-openembedded/meta-oe/recipes-graphics/gerbil/gerbil_git.bb, do_compile
+>     * /openembedded-core/meta/recipes-graphics/libsdl2/libsdl2_2.0.3.bb, do_compile
+^ Hope I find time for this one. What DISTRO features were set: x11 and wayland?
 
-Philip
-
-> 
->>
->> I'd like to upstream these since they configuration actually worked and
->> performance was much better. I recall some discussion lately about this
->> process and wanted to make sure I didn't break anything :)
->>
->> I'll send on the llvm 3.7 stuff this week, since it should work in
->> parallel with the older recipe. I do need to move the license file
->> checksum into the version specific piece.
->>
->> The timing on the mesa update is trickier since we are trying to
->> stabilize the oe-core release.
->>
->> Comments? Will adding another llvm recipe cause trouble for other
-> packages?
->>
->> Philip
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Andreas
 
