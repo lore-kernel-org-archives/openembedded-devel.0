@@ -1,47 +1,36 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-qg0-f51.google.com (mail-qg0-f51.google.com
-	[209.85.192.51])
-	by mail.openembedded.org (Postfix) with ESMTP id CA23773D27
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2015 21:59:17 +0000 (UTC)
-Received: by qgeo38 with SMTP id o38so132587111qge.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2015 14:59:17 -0700 (PDT)
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
+	[209.85.223.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 57DFD75B98;
+	Mon, 26 Oct 2015 22:04:39 +0000 (UTC)
+Received: by ioll68 with SMTP id l68so203164544iol.3;
+	Mon, 26 Oct 2015 15:04:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linaro_org.20150623.gappssmtp.com; s=20150623;
+	d=googlemail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=oRPABiAG6BA7SQJBHTDW2B4Fsq249XWWuppZnifqAvA=;
-	b=Jle/xXJL2uz++zPAlAHiz1HSfX7DrwsMpEd9OJ1xwdAzon3DmucLkfdJUdeg+9ReOL
-	l7ADRGfpAghuOItwtH3dQsHtYnzXcgCxNnKBvPFl+o6XdyOJ7dwwl26TxOCahz4hAHsN
-	xpyiiZvMCjNbowOclWa8j4QHRvu+PFWsVhbzwMBvWVAIubT9d7yyS+2lpwvIJvAXH2qG
-	j0tYBy7khZo6dy6aibKVvTCs+WsEoQbc7am94Y308HfR0k8cKhpOh+IdkKrbbspNifPP
-	WNyc4tc08CNLA14zUlS9FKu5i5999SlzS2Ll/mOysk/ebT2/0Al0Sew5239mLJj0QrLg
-	CIUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=oRPABiAG6BA7SQJBHTDW2B4Fsq249XWWuppZnifqAvA=;
-	b=dD/F9eXj7IFbRwuRj4LIQisU4V85MXqS+Gv/sCa/P5vkIlMiAfO8GhE4SNLXkrulFk
-	JTtw9nANRsGXuo29pwU+7BS3dGUJDifOiAISSwDtmOswo2kyYOX7ZQHdz3+LwWgoOhe1
-	O04ylDVKmb7Q8riP9zMj2z1RQatnO9ZaQJ5iGz1iQS2O5y2wRTl8z7r3roQh6Pj0M3mG
-	+f50r6LDtJmOgY+ISrZLXMg+aLJuLq/hINlOIlbkOxYaQSCwfU7lJXGw2Z1ZWmcK8Xt0
-	0Z2t4vztdgVDuebvltG9ySkQMDE8lAJUSGmWLysyMwpY9TAnPRRPvz01tTzBm6T98xq7
-	aGJQ==
-X-Gm-Message-State: ALoCoQmpPsiHnkhcfARgGD9DvMbMxCeWZoNr8BT+mZuuyAqPd4CMpjigprzt+9KLWN6zsVhIVEt/
+	:cc:content-type:content-transfer-encoding;
+	bh=hkfMVJu60CaOTsdsSV7KyoOWtLl9KCpNF9IK6DRTYu4=;
+	b=X0qkf7VBYMGgs/F7xV2pDTOoOudjKItmGeZUuQwkDdeVW8tCE1nYY9HMFvyR1W/j+q
+	Yu62eG2igN/a3vVKitYeqkQVQoPuyMNZj/W3GSK7RGWmGJCwwuLvcyO8fSUFig5fWpwR
+	292u+V20ldkxrw9dE6HMykios3ILsaIR2moJcOPEQMvBCl76C3tFEl1FjeKrm8yBWMZz
+	dqkve5y1PnYuKV/qhp0GSACXGoVUz5nR0uWYhrtStsOVSnYAzO1Qz+Cz6TyPL4R/irMH
+	Q6uM/mZ17rNqMLWqY7kR/QxF84lAXMG3TS0C2FROboTNWMqtv0RIhJFJCmQLNoKwpo3D
+	FqPw==
 MIME-Version: 1.0
-X-Received: by 10.140.91.135 with SMTP id z7mr12572251qgd.91.1445896757811;
-	Mon, 26 Oct 2015 14:59:17 -0700 (PDT)
-Received: by 10.140.98.55 with HTTP; Mon, 26 Oct 2015 14:59:17 -0700 (PDT)
-Received: by 10.140.98.55 with HTTP; Mon, 26 Oct 2015 14:59:17 -0700 (PDT)
-In-Reply-To: <562E9F28.3070508@balister.org>
-References: <562E9F28.3070508@balister.org>
-Date: Mon, 26 Oct 2015 22:59:17 +0100
-Message-ID: <CAP71WjyfHGBvVC7_g1xzqCJwNQveLj-F6-8WoB4LTkCEr3KB-w@mail.gmail.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Updates to mesa and llvm
+X-Received: by 10.107.135.95 with SMTP id j92mr33258002iod.148.1445897079546; 
+	Mon, 26 Oct 2015 15:04:39 -0700 (PDT)
+Received: by 10.36.31.131 with HTTP; Mon, 26 Oct 2015 15:04:39 -0700 (PDT)
+In-Reply-To: <20151026132813.GC2554@jama>
+References: <20150908142441.20F8650290@opal.openembedded.org>
+	<20151026132813.GC2554@jama>
+Date: Mon, 26 Oct 2015 23:04:39 +0100
+Message-ID: <CALbNGRQ472dU6HBN6BG5buaJFSPhounE_cEonrkeO9OiBrqZyA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-commits@lists.openembedded.org
+Subject: =?UTF-8?B?UmU6IFtvZS1jb21taXRzXSBBbmRyZWFzIE3DvGxsZXIgOiBmb250Zm9yZ2U6IHVwZGF0ZSB0byAyMDE1MDgyNA==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,42 +44,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2015 21:59:21 -0000
+X-List-Received-Date: Mon, 26 Oct 2015 22:04:40 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Le 26 oct. 2015 22:46, "Philip Balister" <philip@balister.org> a =C3=A9crit=
- :
+On Mon, Oct 26, 2015 at 2:28 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Tue, Sep 08, 2015 at 02:24:41PM +0000, git@git.openembedded.org wrote:
+>> Module: meta-openembedded.git
+>> Branch: master
+>> Commit: de033e18d168af57cab6ce1aa6b01d2999f322b5
+>> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommi=
+t;h=3Dde033e18d168af57cab6ce1aa6b01d2999f322b5
+>>
+>> Author: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>> Date:   Sun Aug 30 12:33:55 2015 +0200
+>>
+>> fontforge: update to 20150824
+>>
+>> * LICENSE was rewrittem stating out more clearly that huge parts were in=
+itially
+>>   licensed under BSD clause 3 - so add that licence.
+>> * Follow suggestion not to use github release tarballs [1] and use git a=
+s
+>>   source.
+>>
+>> [1] http://lists.openembedded.org/pipermail/openembedded-devel/2015-Augu=
+st/102843.html
+>>
+>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>>
+>> ---
+>>
+>>  .../{fontforge_20141126.bb =3D> fontforge_20150824.bb}          | 11 ++=
+++++-----
+>>  1 file changed, 6 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb b/=
+meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
+>> similarity index 77%
+>> rename from meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb
+>> rename to meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
+>> index a2d6cc6..eb58d8f 100644
+>> --- a/meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb
+>> +++ b/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
+>> @@ -1,9 +1,9 @@
+>>  SUMMARY =3D "A font editor"
+>>  HOMEPAGE =3D "http://fontforge.github.io/en-US/"
+>> -LICENSE =3D "GPLv3"
+>> +LICENSE =3D "BSD-3-Clause & GPLv3"
+>>  LIC_FILES_CHKSUM =3D " \
+>>      file://COPYING.gplv3;md5=3Dd32239bcb673463ab874e80d47fae504 \
+>> -    file://LICENSE;md5=3D71d636ba7678baa1573e1b531041386e \
+>> +    file://LICENSE;md5=3D3f922b42ed0033fa0fd4cd3268f6429c \
+>>  "
+>>
+>>  inherit autotools pkgconfig pythonnative distro_features_check
+>> @@ -12,9 +12,10 @@ DEPENDS =3D "glib-2.0 pango giflib tiff libxml2 jpeg =
+python libtool"
+>>  DEPENDS_append_class-target =3D " libxi"
+>>  REQUIRED_DISTRO_FEATURES_append_class-target =3D " x11"
+>>
+>> -SRC_URI =3D "https://github.com/${BPN}/${BPN}/archive/${PV}.tar.gz"
+>> -SRC_URI[md5sum] =3D "0d6f5112c4e5689087339a94aceadf77"
+>> -SRC_URI[sha256sum] =3D "9c90c640023463c0b2b97b87575a014fcf44f688c3763f4=
+cd136d3c267092106"
+>> +SRC_URI =3D "git://github.com/${BPN}/${BPN}.git"
+>> +# tag 20150824
+>> +SRCREV =3D "07d5ccff2704f8a56f1b3cc6695a4e31f85f88e6"
+>> +S =3D "${WORKDIR}/git"
 >
-> Recently I need to get the llvmpipe driver running with mesa. I ended up
-> adding a llvm-3.7 recipe and updating mesa to 10.6.8. Not sure if going
-> to 11.x.y also works.
+> Can you please check why it downloads gnulib in do_configure and prevent =
+it to do that?
+>
+> It just failed in my world build with:
+>
+> | bootstrap: running: libtoolize --force --quiet
+> | bootstrap: running: git clone --depth 365 'git://git.sv.gnu.org/gnulib'=
+ 'gnulib'
+> | fatal: read error: Connection reset by peer
+> | Cloning into 'gnulib'...
+> ..
+> | configure.ac:677: error: required file 'lib/Makefile.in' not found
+> | Makefile.am:63: error: required directory ./lib does not exist
+> | Unicode/Makefile.am: installing 'config/depcomp'
+> | autoreconf: automake failed with exit status: 1
+>
+> http://errors.yoctoproject.org/Errors/Details/21031/
+>
+>>
+>>  EXTRA_OECONF_append_class-native =3D " with_x=3Dno --disable-python-ext=
+ension --disable-python-scripting"
+>>
+>>
+It is on my TODO list
 
-I was told 2 weeks ago that updates to 10.6.8 was too late for this cycle,
-and Ross said we could cherry pick patches from upstream if needed..
-
-As for 11.x, we have patches ready for next cycle.. As soon as we can
-update master we will send them.
-
->
-> I'd like to upstream these since they configuration actually worked and
-> performance was much better. I recall some discussion lately about this
-> process and wanted to make sure I didn't break anything :)
->
-> I'll send on the llvm 3.7 stuff this week, since it should work in
-> parallel with the older recipe. I do need to move the license file
-> checksum into the version specific piece.
->
-> The timing on the mesa update is trickier since we are trying to
-> stabilize the oe-core release.
->
-> Comments? Will adding another llvm recipe cause trouble for other
-packages?
->
-> Philip
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Andreas
 
