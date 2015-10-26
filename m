@@ -1,27 +1,23 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B162E6013D
+Return-Path: <maxin.john@intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id E197C60657
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2015 04:08:02 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="102271197"
-Received: from bogon (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Oct 2015 12:10:14 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t9Q47QZS012697
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2015 12:07:26 +0800
-Received: from localhost.localdomain (10.167.226.26) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 26 Oct 2015 12:07:58 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 26 Oct 2015 12:07:42 +0800
-Message-ID: <1445832462-1614-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
+	Mon, 26 Oct 2015 08:59:57 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 26 Oct 2015 01:59:57 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,200,1444719600"; d="scan'208";a="803018407"
+Received: from mbabyjoh-mobl.fi.intel.com ([10.237.72.71])
+	by orsmga001.jf.intel.com with ESMTP; 26 Oct 2015 01:59:56 -0700
+Date: Mon, 26 Oct 2015 11:00:10 +0200
+From: "Maxin B. John" <maxin.john@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151026090010.GA6012@mbabyjoh-mobl.fi.intel.com>
+References: <1445593801-30173-1-git-send-email-erkka.kaaria@intel.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.26]
-Subject: [meta-networking][PATCH] net-snmp: Modify snmpd.service
+In-Reply-To: <1445593801-30173-1-git-send-email-erkka.kaaria@intel.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-java][PATCH] icedtea7-native: Fix memory leak when compiled with GCC 5.0+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,32 +31,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2015 04:08:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 26 Oct 2015 08:59:58 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-From: Li Xin <lixin.fnst@cn.fujitsu.com>
+Hi,
 
-Add "-a" parameter in snmpd.service,it is needed to address logs.
+On Fri, Oct 23, 2015 at 12:50:01PM +0300, Erkka K‰‰ri‰ wrote:
+> 
+> Hotspot compiler has a bug where signed integers could overflow. This is
+> undefined behaviour, and causes massive memory leak when compiled with GCC 5.0+,
+> causing the build to fail.
+> 
+> This is fixed by backporting patch from
+> https://bugs.openjdk.java.net/browse/JDK-8078666 where it was fixed by
+> Severin Gehwolf.
+>
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Pushed to master, Thanks!
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service b/meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service
-index 3b336a0..447683f 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service
-@@ -6,7 +6,7 @@ After=syslog.target network.target
- Type=notify
- Environment=OPTIONS="-Ls0-6d"
- EnvironmentFile=-/etc/default/snmpd
--ExecStart=/usr/sbin/snmpd $OPTIONS -f
-+ExecStart=/usr/sbin/snmpd $OPTIONS -a -f
- ExecReload=/bin/kill -HUP $MAINPID
- 
- [Install]
--- 
-1.8.4.2
 
+> Signed-off-by: Erkka K‰‰ri‰ <erkka.kaaria@intel.com>
+> ---
+> diff --git a/recipes-core/icedtea/openjdk-7-03b147/icedtea-hotspot-fix-undefined-behaviour.patch b/recipes-core/icedtea/openjdk-7-03b147/icedtea-hotspot-fix-undefined-behaviour.patch
+> new file mode 100644
+> index 0000000..56513a0
+> --- /dev/null
+> +++ b/recipes-core/icedtea/openjdk-7-03b147/icedtea-hotspot-fix-undefined-behaviour.patch
+> @@ -0,0 +1,49 @@
+> +Upstream-Status: Backport
+> +
+> +Hotspot compiler has a bug where signed integers could overflow. This is 
+> +undefined behaviour, and causes massive memory leak when compiled with GCC 5.0+, 
+> +causing the build to fail.
+> +
+> +This is fixed by backporting patch from 
+> +https://bugs.openjdk.java.net/browse/JDK-8078666 where it was fixed by 
+> +Severin Gehwolf.
+> +
+> +Signed-off-by: Erkka K‰‰ri‰ <erkka.kaaria@intel.com>
+> +
+> +--- openjdk/hotspot/src/share/vm/opto/type.cpp
+> ++++ openjdk/hotspot/src/share/vm/opto/type.cpp
+> +@@ -1077,11 +1077,11 @@ static int normalize_int_widen( jint lo, jint hi, int w ) {
+> +   // Certain normalizations keep us sane when comparing types.
+> +   // The 'SMALLINT' covers constants and also CC and its relatives.
+> +   if (lo <= hi) {
+> +-    if ((juint)(hi - lo) <= SMALLINT)  w = Type::WidenMin;
+> +-    if ((juint)(hi - lo) >= max_juint) w = Type::WidenMax; // TypeInt::INT
+> ++    if (((juint)hi - lo) <= SMALLINT)  w = Type::WidenMin;
+> ++    if (((juint)hi - lo) >= max_juint) w = Type::WidenMax; // TypeInt::INT
+> +   } else {
+> +-    if ((juint)(lo - hi) <= SMALLINT)  w = Type::WidenMin;
+> +-    if ((juint)(lo - hi) >= max_juint) w = Type::WidenMin; // dual TypeInt::INT
+> ++    if (((juint)lo - hi) <= SMALLINT)  w = Type::WidenMin;
+> ++    if (((juint)lo - hi) >= max_juint) w = Type::WidenMin; // dual TypeInt::INT  
+> +   }
+> +   return w;
+> + }
+> +@@ -1332,11 +1332,11 @@ static int normalize_long_widen( jlong lo, jlong hi, int w ) {
+> +   // Certain normalizations keep us sane when comparing types.
+> +   // The 'SMALLINT' covers constants.
+> +   if (lo <= hi) {
+> +-    if ((julong)(hi - lo) <= SMALLINT)   w = Type::WidenMin;
+> +-    if ((julong)(hi - lo) >= max_julong) w = Type::WidenMax; // TypeLong::LONG
+> ++    if (((julong)hi - lo) <= SMALLINT)   w = Type::WidenMin;
+> ++    if (((julong)hi - lo) >= max_julong) w = Type::WidenMax; // TypeLong::LONG  
+> +   } else {
+> +-    if ((julong)(lo - hi) <= SMALLINT)   w = Type::WidenMin;
+> +-    if ((julong)(lo - hi) >= max_julong) w = Type::WidenMin; // dual TypeLong::LONG
+> ++    if (((julong)lo - hi) <= SMALLINT)   w = Type::WidenMin;
+> ++    if (((julong)lo - hi) >= max_julong) w = Type::WidenMin; // dual TypeLong::LONG
+> +   }
+> +   return w;
+> + }
+> +-- 
+> +2.1.4
+> +
+> diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc b/recipes-core/icedtea/openjdk-7-release-03b147.inc
+> index 98266f7..b1cf6e9 100644
+> --- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
+> +++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
+> @@ -84,6 +84,7 @@ OPENJDK_PATCHES = " \
+>  	file://icedtea-change-to-gdb-debug-format.patch;apply=no \
+>  	file://icedtea-disable-x11-in-headless.patch;apply=no \
+>  	file://icedtea-disable-sun.applet-for-tools-in-headless.patch;apply=no \
+> +	file://icedtea-hotspot-fix-undefined-behaviour.patch;apply=no \
+>          "
+>  
+>  OPENJDK_HEADLESS_PATCHES = " \
+> @@ -102,5 +103,6 @@ export DISTRIBUTION_PATCHES = " \
+>  	patches/icedtea-flags.patch \
+>  	patches/icedtea-openjdk-remove-currency-data-generation-expi.patch \
+>  	patches/icedtea-change-to-gdb-debug-format.patch \
+> +	patches/icedtea-hotspot-fix-undefined-behaviour.patch \
+>  	${CLEAN_X11_DISTRIBUTION_PATCH} \
+>
+
+Best Regards,
+Maxin
 
