@@ -1,39 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f196.google.com (mail-wi0-f196.google.com
-	[209.85.212.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B25373D27;
-	Mon, 26 Oct 2015 13:28:03 +0000 (UTC)
-Received: by wicuk10 with SMTP id uk10so20425785wic.1;
-	Mon, 26 Oct 2015 06:28:03 -0700 (PDT)
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 29D6D766F3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Oct 2015 13:28:33 +0000 (UTC)
+Received: by wikq8 with SMTP id q8so164877694wik.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Oct 2015 06:28:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=OrGI5N3QgQCZXa8fAh5mDPfZZl8PB8HeJbhL5TF2zmo=;
-	b=qXWDAySeOeHfFia4QUz+YwdLcuFZBiqG37Djwit0/fcMvYZMFDh/aOi/Qtrmng6gf3
-	PKCJ7T/yjdEeSLCepF60IMWBpghtle6vwZVWKkCn0vSg20gIHQWBSKTPMZQ5Vqi9AdIV
-	mHP6vrx8qMYQuFFMlcKJt2U+vw4NW+ocmhjJyimRwQGusQFwquK5WIjaa1FzT/8ToL9d
-	jPIpJzo6tehR6fdzdlAuwy6t5as9mmsG3kuAY91PoYIiu2bHB9HMHrVL/j/KBdvYp+wO
-	TDXrvq7S5J7cA0HFyG6DyRQ0OBYaqGEHcAmALFm83d1O3OtZYz6ola640oNWxh+HcAdR
-	L3ow==
-X-Received: by 10.194.223.39 with SMTP id qr7mr24644712wjc.92.1445866083273;
-	Mon, 26 Oct 2015 06:28:03 -0700 (PDT)
+	bh=Mc5Di1VatgKvd+Ccxdr35PYoM3HT+D52+Jv0lkEMbb8=;
+	b=IKLHcrv3EObINqERsjyPsG0W88CmJF8klYiKNQ3pBA4O622z+qdGoBAu6l4tJUfWVM
+	KsNYJWhZW+oV1n6h5SpkOwFi5K/S7+OkO+gLDmUvTnb/oI9kc8caSmTdT6txKzSqaNin
+	uPcZdLkXKqHsRCG/eQdTRzxU7j3HWaVmRYkIxXgBq+jWiJ5P+KgFI9/VXLxWR70LhLOl
+	F19CqwekHNt32sJngX/QnSEQbm9ah9+vm4V9q+GlaKXZFiTIIRGHMaK2jjVZZqUTYQgW
+	SYvsgkg4+XfUh0E2Q86MaXYoWUbENXTccInilJAQ7VTdAuUG7Ij3J/LvoHQiXxzcdVPk
+	nL0w==
+X-Received: by 10.194.249.3 with SMTP id yq3mr23090274wjc.115.1445866113429;
+	Mon, 26 Oct 2015 06:28:33 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	nd9sm13952256wic.0.2015.10.26.06.28.01
+	ju5sm14619491wjc.1.2015.10.26.06.28.32
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 Oct 2015 06:28:02 -0700 (PDT)
+	Mon, 26 Oct 2015 06:28:32 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 26 Oct 2015 14:28:13 +0100
-To: openembedded-devel@lists.openembedded.org,
-	Andreas =?iso-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
-Message-ID: <20151026132813.GC2554@jama>
-References: <20150908142441.20F8650290@opal.openembedded.org>
+Date: Mon, 26 Oct 2015 14:28:44 +0100
+To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Message-ID: <20151026132844.GD2554@jama>
+References: <1445523733-20612-1-git-send-email-ricardo.ribalda@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20150908142441.20F8650290@opal.openembedded.org>
+In-Reply-To: <1445523733-20612-1-git-send-email-ricardo.ribalda@gmail.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: =?UTF-8?B?UmU6IFtvZS1jb21taXRzXSBBbmRyZWFzIE3DvGxsZXIgOiBmb250Zm9yZ2U6IHVwZGF0ZSB0byAyMDE1MDgyNA==?=
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v2] gerbil: Visualization and analysis tool for hyperspectral images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,123 +48,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2015 13:28:05 -0000
-X-Groupsio-MsgNum: 58024
+X-List-Received-Date: Mon, 26 Oct 2015 13:28:34 -0000
+X-Groupsio-MsgNum: 58025
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="eRtJSFbw+EEWtPj3"
+	protocol="application/pgp-signature"; boundary="d01dLTUuW90fS44H"
 Content-Disposition: inline
 
---eRtJSFbw+EEWtPj3
-Content-Type: text/plain; charset=iso-8859-1
+--d01dLTUuW90fS44H
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 08, 2015 at 02:24:41PM +0000, git@git.openembedded.org wrote:
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: de033e18d168af57cab6ce1aa6b01d2999f322b5
-> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
-;h=3Dde033e18d168af57cab6ce1aa6b01d2999f322b5
+On Thu, Oct 22, 2015 at 04:22:13PM +0200, Ricardo Ribalda Delgado wrote:
+> New recipe
 >=20
-> Author: Andreas M=FCller <schnitzeltony@googlemail.com>
-> Date:   Sun Aug 30 12:33:55 2015 +0200
->=20
-> fontforge: update to 20150824
->=20
-> * LICENSE was rewrittem stating out more clearly that huge parts were ini=
-tially
->   licensed under BSD clause 3 - so add that licence.
-> * Follow suggestion not to use github release tarballs [1] and use git as
->   source.
->=20
-> [1] http://lists.openembedded.org/pipermail/openembedded-devel/2015-Augus=
-t/102843.html
->=20
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->=20
+> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 > ---
+> v2:
 >=20
->  .../{fontforge_20141126.bb =3D> fontforge_20150824.bb}          | 11 +++=
-+++-----
->  1 file changed, 6 insertions(+), 5 deletions(-)
+> v1 failed to link, it was missing the glu library.
 >=20
-> diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb b/m=
-eta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
-> similarity index 77%
-> rename from meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb
-> rename to meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
-> index a2d6cc6..eb58d8f 100644
-> --- a/meta-oe/recipes-graphics/fontforge/fontforge_20141126.bb
-> +++ b/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
-> @@ -1,9 +1,9 @@
->  SUMMARY =3D "A font editor"
->  HOMEPAGE =3D "http://fontforge.github.io/en-US/"
-> -LICENSE =3D "GPLv3"
-> +LICENSE =3D "BSD-3-Clause & GPLv3"
->  LIC_FILES_CHKSUM =3D " \
->      file://COPYING.gplv3;md5=3Dd32239bcb673463ab874e80d47fae504 \
-> -    file://LICENSE;md5=3D71d636ba7678baa1573e1b531041386e \
-> +    file://LICENSE;md5=3D3f922b42ed0033fa0fd4cd3268f6429c \
->  "
-> =20
->  inherit autotools pkgconfig pythonnative distro_features_check
-> @@ -12,9 +12,10 @@ DEPENDS =3D "glib-2.0 pango giflib tiff libxml2 jpeg p=
-ython libtool"
->  DEPENDS_append_class-target =3D " libxi"
->  REQUIRED_DISTRO_FEATURES_append_class-target =3D " x11"
-> =20
-> -SRC_URI =3D "https://github.com/${BPN}/${BPN}/archive/${PV}.tar.gz"
-> -SRC_URI[md5sum] =3D "0d6f5112c4e5689087339a94aceadf77"
-> -SRC_URI[sha256sum] =3D "9c90c640023463c0b2b97b87575a014fcf44f688c3763f4c=
-d136d3c267092106"
-> +SRC_URI =3D "git://github.com/${BPN}/${BPN}.git"
-> +# tag 20150824
-> +SRCREV =3D "07d5ccff2704f8a56f1b3cc6695a4e31f85f88e6"
+> I have not been able to replicate the build error :S
+>=20
+> But after some static analysis it seems that:
+>=20
+> glu should have been automatically added with the cmake
+> variable OPENGL_LIBRARIES, set in FindOpeGL.cmake
+>=20
+> But if glu is not present, then it is not added....
+>=20
+> Sorry for the inconvenience!
+
+Unfortunately it still fails:
+http://errors.yoctoproject.org/Errors/Details/21026/
+
+>=20
+>=20
+>=20
+>  meta-oe/recipes-graphics/gerbil/gerbil_git.bb | 30 +++++++++++++++++++++=
+++++++
+>  1 file changed, 30 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/gerbil/gerbil_git.bb
+>=20
+> diff --git a/meta-oe/recipes-graphics/gerbil/gerbil_git.bb b/meta-oe/reci=
+pes-graphics/gerbil/gerbil_git.bb
+> new file mode 100644
+> index 000000000000..bfcd7c7ce803
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/gerbil/gerbil_git.bb
+> @@ -0,0 +1,30 @@
+> +DESCRIPTION =3D "Generic framework for visualization and analysis of mul=
+tispectral and hyperspectral data that strives to both bring new innovation=
+s in analysis capabilities and be of use in a wide range of hyperspectral d=
+ata applications"
+> +HOMEPAGE =3D "http://gerbilvis.org/"
+> +LICENSE =3D "GPLv3"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd32239bcb673463ab874e80d47fae=
+504"
+> +DEPENDS =3D "boost qt4-x11-free tbb opencv libglu virtual/libgl"
+> +SRCREV =3D "670e06da516ed51dbae75e41e043900256bdabba"
+> +
+> +SRC_URI =3D "git://github.com/gerbilvis/gerbil.git"
+> +
 > +S =3D "${WORKDIR}/git"
-
-Can you please check why it downloads gnulib in do_configure and prevent it=
- to do that?
-
-It just failed in my world build with:
-
-| bootstrap: running: libtoolize --force --quiet
-| bootstrap: running: git clone --depth 365 'git://git.sv.gnu.org/gnulib' '=
-gnulib'
-| fatal: read error: Connection reset by peer
-| Cloning into 'gnulib'...
-=2E.
-| configure.ac:677: error: required file 'lib/Makefile.in' not found
-| Makefile.am:63: error: required directory ./lib does not exist
-| Unicode/Makefile.am: installing 'config/depcomp'
-| autoreconf: automake failed with exit status: 1
-
-http://errors.yoctoproject.org/Errors/Details/21031/
-
-> =20
->  EXTRA_OECONF_append_class-native =3D " with_x=3Dno --disable-python-exte=
-nsion --disable-python-scripting"
-> =20
->=20
+> +
+> +inherit distutils-base cmake qt4x11
+> +
+> +export EXTRA_OECMAKE =3D "\
+> +                        -DQT_MOC_EXECUTABLE=3D${OE_QMAKE_MOC} \
+> +                        -DQT_UIC_EXECUTABLE=3D${OE_QMAKE_UIC} \
+> +                        -DQT_RCC_EXECUTABLE=3D${OE_QMAKE_RCC} \
+> +                        "
+> +
+> +do_configure() {
+> +        # Ensure we get the cmake configure and not qmake
+> +        cmake_do_configure
+> +}
+> +do_install() {
+> +        install -d ${D}${bindir}
+> +        install -m 755 bin/gerbil ${D}${bindir}/
+> +        install -m 755 bin/qgerbil ${D}${bindir}/
+> +}
+> +
+> +RDEPENDS_${PN} +=3D "qt4-x11-free"
 > --=20
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+> 2.6.1
+>=20
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---eRtJSFbw+EEWtPj3
+--d01dLTUuW90fS44H
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlYuKmgACgkQN1Ujt2V2gBwZaACfWd10Pytu0mUhbq3is1Pi2NxG
-PeAAmgJL/jPsU8AbBPqy8RaJnaVKwn00
-=kJXh
+iEYEARECAAYFAlYuKosACgkQN1Ujt2V2gBwyvwCcD0laszbU0nQP/W10KFRVKk62
+rPgAnj78j3hyw2GW5j1CS2PfR3KebAE8
+=Xjlg
 -----END PGP SIGNATURE-----
 
---eRtJSFbw+EEWtPj3--
+--d01dLTUuW90fS44H--
