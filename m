@@ -1,35 +1,40 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id A836D75CC2
+Return-Path: <stephanoc@gmail.com>
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id AA1D0608B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 13:42:20 +0000 (UTC)
-Received: by wicfx6 with SMTP id fx6so160127205wic.1
+	Tue, 27 Oct 2015 16:36:08 +0000 (UTC)
+Received: by pacfv9 with SMTP id fv9so237357067pac.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 06:42:20 -0700 (PDT)
+	Tue, 27 Oct 2015 09:36:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=iUhQYnkBBf6WZasRm4II46gCFrn81jZXsNXTxBtTruE=;
-	b=ylrYZals9XAsEVbf0b1I5HPYSBPI9nDI+B74vE9BZUML0Cbvl5RSQ0SMDazdSBvS4I
-	l+3BFkdj5qlzN6NMreCn1+35SYvTyXM5SS1eAaUYS3B8GcEi6GGoRnb7+IV0CBIGClxe
-	uumLrIJGE0SP1xgmLp78rEpGkdjgUMUBP4c25JB6z2fBADvJSv4uJZUH3hTGfD0XWwxF
-	pt9BiBjNHC+yTYisQZAOTU0+b9Cb6V2Bnxj2B1njLsacoMhdjqaberPA9J/zJQfBvGz8
-	5eFs8YDGY3QJeGPqmMuZS0j/ZcxeVR/8sMAu8et/dF0JTp0hWkn+evq2UjOpvr4s83y7
-	SY0Q==
-X-Received: by 10.194.179.33 with SMTP id dd1mr30965816wjc.79.1445953340469;
-	Tue, 27 Oct 2015 06:42:20 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=qKc7p+M3C+oaamlj3Z6SoTL3zAdfj0TcRFxfHndL0C4=;
+	b=BCF3inp8p4zLMIvZU7DuWNu2pcyICIMZpLUB1fxIxGg8kt8nMB1+FbLVGy/q59wfC6
+	l8wyd2cbCjfxlDdngQaRk9FrzuxXRKxgHwnbYx2y1gFZakBeeQVXhSuYyD2UaWU/8pPf
+	ty5zX8LYNK5PDxGSd/tOOx7tDdVf6yZORoCxAHqeWjVi72OEOMtUKtZbDFHGcd33dMdx
+	XFrgggL4COfkppHFMEXQLPN2NmoISTACMZriIjYIkmlgWMvFCIziYOkuNM6MxxZX9hs5
+	80Asg0vNXAuf7IgD2id2/dRYJlJ9SI23c4QshLvq0RsPEeiCk2C81G8M3s2SxZFleoQL
+	/MOw==
+X-Received: by 10.68.165.194 with SMTP id za2mr29077236pbb.72.1445963767864;
+	Tue, 27 Oct 2015 09:36:07 -0700 (PDT)
+Received: from mail.spox.systems
+	(ec2-52-11-37-43.us-west-2.compute.amazonaws.com. [52.11.37.43])
 	by smtp.gmail.com with ESMTPSA id
-	nd9sm17812181wic.0.2015.10.27.06.42.19
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 27 Oct 2015 06:42:19 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	im9sm40579488pbc.1.2015.10.27.09.36.07
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 27 Oct 2015 09:36:07 -0700 (PDT)
+Date: Tue, 27 Oct 2015 16:35:43 +0000
+From: Stephano Cetola <stephanoc@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Oct 2015 14:42:35 +0100
-Message-Id: <1445953355-13823-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.6.2
-Subject: [PATCH][meta-oe] konkretcmpi: depend on swig-native
+Message-ID: <20151027163542.GA21537@mail.spox.systems>
+References: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>
+Subject: Re: OE/Yocto developer survey
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,32 +48,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2015 13:42:25 -0000
+X-List-Received-Date: Tue, 27 Oct 2015 16:36:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-* otherwise it fails with:
-  | CMake Error at sysroots/x86_64-linux/usr/share/cmake-3.3/Modules/FindPackageHandleStandardArgs.cmake:148 (message):
-  |   Could NOT find SWIG (missing: SWIG_EXECUTABLE SWIG_DIR)
-* drop cmake-native, because it's already added by cmake.bbclass
+On 10/26, Cliff Brake wrote:
+> How long have you been using OE?  
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+~3 years
 
-diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
-index 5d016e7..1d8b0db 100644
---- a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
-+++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
-@@ -6,7 +6,7 @@ implementations for many of the provider operations."
- HOMEPAGE = "https://github.com/rnovacek/konkretcmpi"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f673270bfc350d9ce1efc8724c6c1873"
--DEPENDS = "swig sblim-cmpi-devel python cmake-native"
-+DEPENDS = "swig-native sblim-cmpi-devel python"
+> How do you use OE/Yocto?
+ [ X ] product development
+ [ X ] hobby/research/education/yocto core developer, etc
  
- SRC_URI = "git://github.com/rnovacek/konkretcmpi.git \
-            file://konkretcmpi-0.9.2-fix-returning-instance-from-method.patch \
--- 
-2.6.2
+> What distro do you use?
+ [   ] Poky
+ [   ] Angstrom
+ [ X ] nodistro or custom (Based on Poky)
+ 
+> How do you organize multiple git repos?
+ [   ] Git submodules
+ [ X ] Repo
+ [ X ] Other (Customer Python scripts)
+ 
+> What packaging system?
+ [   ] OPKG
+ [   ] RPM
+ [ X ] Other (IPK)
+ 
+> What GUI toolkits?
+ [ X ] Qt
+ [ X ] Gtk
+ [   ] EFL
+ [ X ] HTML5/JS
+ [   ] Other
+ 
+ Our clients develop in QML.
 
+> What init system?
+ [   ] systemd
+ [ X ] sysvinit
+ [ X ] busybox init
+ [   ] Other
+ 
+> What libc?
+ [ X ] glibc
+ [   ] uclibc
+ [   ] musl
+ [   ] Other
+ 
+> How do you develop custom applications?
+ [   ] application-SDK
+ [ X ] devshell
+ [ X ] develop on PC, test on target
+ [   ] Other
+ 
+> What language do you primarily use for custom applications?
+ [ X ] C
+ [ X ] C++
+ [   ] Python
+ [   ] Javascript
+ [   ] Lua
+ [   ] Other
+ 
+ Qt for C++
+
+> What do you use for Continuous Integration?
+ [   ] Buildbot
+ [ X ] Jenkins
+ [   ] Other
+
+Tried buildbot but it required too much customization for our small
+team.
+
+> Do you use any any of the tooling projects
+> (https://www.yoctoproject.org/tools-resources/projects) such as ADT,
+> Hob, Toaster, etc?
+ 
+ No
 
