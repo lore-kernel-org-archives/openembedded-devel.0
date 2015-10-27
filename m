@@ -1,39 +1,42 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id E3F41755F4
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 711AB76EB2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 11:56:05 +0000 (UTC)
-Received: by wikq8 with SMTP id q8so207862032wik.1
+	Tue, 27 Oct 2015 11:59:59 +0000 (UTC)
+Received: by wikq8 with SMTP id q8so208016517wik.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 04:56:05 -0700 (PDT)
+	Tue, 27 Oct 2015 04:59:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=NFa9umIDSECXZqag3xNydLGEmu9UDYjEFmYnEDrZ9w8=;
-	b=izV0uydKewGG9UhmwGKZZj8oE4ov3lyZlZfzK1LiBRIJGwEBU4usvlGgWkXxlwswrG
-	w7jdmkCHE8tjda/+3aBAdZKbYTZW0HbBARtFBXV8S3lYkHgQvvhaESw7EfakdUrhMKU4
-	F4SvavNRVa4cuoegb4yTR9fyqyNWpohTGELvM7746Z14qe3geZnwweHwEqMpAC3tbMgC
-	XOGXHErTmf/zz83KAYRAXcpEClIFcpSzqt8pzOJ9ZSgIc4jPCeUv1OlMKyTKXKYaxLQ+
-	uY+PXadeHDJ3G4F2O2vzgvSz8tD3sq+zqcWu8LsCua2R6cfbaZC2n2TUsU2TxSMGOADS
-	O0tQ==
-X-Received: by 10.180.39.195 with SMTP id r3mr14845018wik.57.1445946964797;
-	Tue, 27 Oct 2015 04:56:04 -0700 (PDT)
+	bh=W9oCKZaZh45dm0pM/YsZ5RyUZchK7OpioLIqv+8EO1o=;
+	b=qq1Tx5oamtAzdqcQrkxByu8s08YR6zlz8EwDUB35zyE0GUr+3Y4T0aQk9B//ohp/31
+	fVmlmz+TcV4lD+FUCqxRjbh5I1Ss84xBEjlqBuf8Zba20nJQVA9So06rRlvfhbBhJ0ja
+	9IqKL842v3oCY3pvPO6KZ8MyFrFQFAxzLtIm/gczqSKrqHCErRyFH3vaKQwxTL8huuRz
+	3wRXoM2+nL1udcElbp0tToCO0OvwGftg6vSB1oNL2mB7ixoShf9guTMls/++g5g0+N/W
+	BIyXTLp3nOelorZBofHGlOEfjqkNUcbH/9rfldtDstFjzrQIjc+/dK5P3zRpFDeyESCu
+	UqTQ==
+X-Received: by 10.180.76.240 with SMTP id n16mr25488426wiw.11.1445947199841;
+	Tue, 27 Oct 2015 04:59:59 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id e9sm14807292wjw.8.2015.10.27.04.56.03
-	for <openembedded-devel@lists.openembedded.org>
+	by smtp.gmail.com with ESMTPSA id
+	q1sm44376293wjy.31.2015.10.27.04.59.59
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 27 Oct 2015 04:56:03 -0700 (PDT)
+	Tue, 27 Oct 2015 04:59:59 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 27 Oct 2015 12:56:20 +0100
+Date: Tue, 27 Oct 2015 13:00:16 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151027115620.GB2577@jama>
-References: <d65ccb58baa5f0e85ea3719c4826c4a1@losert.org>
+Message-ID: <20151027120016.GC2577@jama>
+References: <562EB36A.1010109@webthatworks.it>
+	<CAP71WjyyrqEGtdfN1mzrwaH=YGAC4zdz5QwFH-aSxNzgXr=4JA@mail.gmail.com>
+	<11758297.Qg5HCuaF4n@peggleto-mobl.ger.corp.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <d65ccb58baa5f0e85ea3719c4826c4a1@losert.org>
+In-Reply-To: <11758297.Qg5HCuaF4n@peggleto-mobl.ger.corp.intel.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-qt5] qtbluetooth not building against bluez
+Cc: Michael Halstead <michael@yoctoproject.org>
+Subject: Re: checking if a patch was approved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,79 +50,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2015 11:56:07 -0000
-X-Groupsio-MsgNum: 58064
+X-List-Received-Date: Tue, 27 Oct 2015 12:00:00 -0000
+X-Groupsio-MsgNum: 58065
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Yylu36WmvOXNoKYn"
+	protocol="application/pgp-signature"; boundary="QRj9sO5tAVLaXnSD"
 Content-Disposition: inline
 
---Yylu36WmvOXNoKYn
+--QRj9sO5tAVLaXnSD
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 27, 2015 at 11:51:44AM +0100, michael@losert.org wrote:
-> I'm using qtbluetooth (qtconnectivity_git.bb) and noticed that it builds=
-=20
-> some kind of empty dummy library.
-> I then tried building in verbose mode: "bitbake -v qtconnectivity" and=20
-> got the following message in the log:
-> "Unsupported Bluetooth platform, will not build a working QtBluetooth=20
-> library.
-> Either no Qt D-Bus found or no BlueZ headers."
+On Tue, Oct 27, 2015 at 11:37:36AM +0000, Paul Eggleton wrote:
+> On Tuesday 27 October 2015 08:12:48 Nicolas Dechesne wrote:
+> > On Tue, Oct 27, 2015 at 12:12 AM, Ivan Sergio Borgonovo
+> > <mail@webthatworks.it> wrote:
+> > > I saw many patch passing by and I submitted a couple about
+> > > meta-toolchain-qt5.
+> > > I didn't see any message from Otavio or Martin "approving" a patches.
+> > >=20
+> > > How can I check if it was approved other than pulling from the
+> > > repo/checking github?
+> > >=20
+> > > Or if there is no place to check... consider this a ping ;)
+> >=20
+> > all commits are published on
+> > openembedded-commits@lists.openembedded.org mailing list, and in
+> > general you see when it's pushed in master-next, then in master.. i
+> > have a mail filter that checks my name there.. it's the poor man
+> > solution.. but it works. Note that the email trigger has been broken
+> > for 2 weeks.. but i suspect this is a temporary issue that should be
+> > fixed..
 >=20
-> My solution was to add
->    EXTRA_QMAKEVARS_PRE +=3D "CONFIG+=3Dconfig_bluez"
-> to
->    recipes-qt/qt5/qtconnectivity_git.bb
+> FWIW there are a small number of us working on improving patchwork so tha=
+t=20
+> we're able to rely upon the results it shows as being the outstanding pat=
+ches=20
+> in the queue and potentially even send email notifications to submitters =
+(opt-
+> in). I'd also like to go a step further and trigger some automatic valida=
+tion=20
+> on patches. At the moment we're trying to figure out if we're able to spe=
+nd the=20
+> time working on this in the next development cycle.
 
-Someone else send patch for this:
-http://patchwork.openembedded.org/patch/105501/
+Paul: do you know what's wrong with git hooks triggering
+openembedded-commits e-mails? Or maybe it's the ML itself, but there
+was no e-mail in last month. I've pinged Michael on IRC twice (+CC here)
 
-I've asked him to resend with proper commit message, author and SOB, but
-haven't seen v2.
-
-But there is also first line in this do_configure_prepend, which should
-take care of respecting PACKAGECONFIG values, we should check why it
-doesn't work anymore and fix the root-cause instead of reintroducing
-
-EXTRA_QMAKEVARS_PRE +=3D "${@base_contains('PACKAGECONFIG', 'bluez4', 'CONF=
-IG+=3DOE_BLUEZ_ENABLED', '', d)}"
-
-do_configure_prepend() {
-    export QMAKE_CACHE_EVAL=3D"CONFIG+=3D${EXTRA_OECONF}"
-    # disable bluez test if it isn't enabled by PACKAGECONFIG
-    sed -i 's/^qtCompileTest(bluez)/OE_BLUEZ_ENABLED:qtCompileTest(bluez)/g=
-' ${S}/qtconnectivity.pro
-}
-
-Can you please look into that?
-
-> after that it worked as expected.
-> I'm unsure if it's the right thing to do though.
->=20
-> I'm working with yocto 1.8 fido but also checked the master branch which=
-=20
-> doesn't seem to have anything changed related to qtconnectivity.
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+http://lists.openembedded.org/pipermail/openembedded-commits/2015-September=
+/thread.html
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---Yylu36WmvOXNoKYn
+--QRj9sO5tAVLaXnSD
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlYvZmQACgkQN1Ujt2V2gBzu2wCgtyNFJ9zesPAhQIX4haAw2iuo
-FEkAnj28dQ677mDjTqB8Yn/Yds3WhICg
-=h2fU
+iEYEARECAAYFAlYvZ08ACgkQN1Ujt2V2gBwSXgCgis6HU4NI7y5Qj8d8yoZJjIZ4
+K0sAoKDwwTErKwsdpoR8A+hXvxaVlt5H
+=9RpB
 -----END PGP SIGNATURE-----
 
---Yylu36WmvOXNoKYn--
+--QRj9sO5tAVLaXnSD--
