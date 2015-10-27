@@ -1,40 +1,40 @@
-Return-Path: <stephanoc@gmail.com>
-Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
-	[209.85.220.46])
-	by mail.openembedded.org (Postfix) with ESMTP id AA1D0608B7
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 04BFF77080
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 16:36:08 +0000 (UTC)
-Received: by pacfv9 with SMTP id fv9so237357067pac.3
+	Tue, 27 Oct 2015 18:21:04 +0000 (UTC)
+Received: by wikq8 with SMTP id q8so224343613wik.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 09:36:08 -0700 (PDT)
+	Tue, 27 Oct 2015 11:21:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=qKc7p+M3C+oaamlj3Z6SoTL3zAdfj0TcRFxfHndL0C4=;
-	b=BCF3inp8p4zLMIvZU7DuWNu2pcyICIMZpLUB1fxIxGg8kt8nMB1+FbLVGy/q59wfC6
-	l8wyd2cbCjfxlDdngQaRk9FrzuxXRKxgHwnbYx2y1gFZakBeeQVXhSuYyD2UaWU/8pPf
-	ty5zX8LYNK5PDxGSd/tOOx7tDdVf6yZORoCxAHqeWjVi72OEOMtUKtZbDFHGcd33dMdx
-	XFrgggL4COfkppHFMEXQLPN2NmoISTACMZriIjYIkmlgWMvFCIziYOkuNM6MxxZX9hs5
-	80Asg0vNXAuf7IgD2id2/dRYJlJ9SI23c4QshLvq0RsPEeiCk2C81G8M3s2SxZFleoQL
-	/MOw==
-X-Received: by 10.68.165.194 with SMTP id za2mr29077236pbb.72.1445963767864;
-	Tue, 27 Oct 2015 09:36:07 -0700 (PDT)
-Received: from mail.spox.systems
-	(ec2-52-11-37-43.us-west-2.compute.amazonaws.com. [52.11.37.43])
+	bh=im7wE6J5OY6EC4D1Qmt4sQlyTcB6xCvNnElznnx9/wQ=;
+	b=OiwMK0EnRQ01YtYn1JraCi0ZETyZULUKLtf3xdB5n36ensE6FBn1BT/mU/yQY6840s
+	M3yCDhfZXfJOwVn+41VpLpLW3UUxikgg1/jaMRQH7AWXn5dNbnk8GhHn3DqupFl8U0nK
+	wEXSsjtxT/QxmGYhsmc5ABv04wLMQtwPCFDshxmfIXkBXnyDyGyFiXNyA4fDqUjT+Ybx
+	6IYcabhCdE6m7k4XRqw+7nf8o7LZ0klQFJFzcg5dc4b3/fiJEMDHJwiOU9g+K9t3puva
+	J5qZOswQEaDM7l3M2DyHdAxFAEj8mWiYtgFYu78UNO2I844kvzlVorUyLlQcaIy92WoT
+	2YzQ==
+X-Received: by 10.180.11.237 with SMTP id t13mr3344013wib.42.1445970064092;
+	Tue, 27 Oct 2015 11:21:04 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	im9sm40579488pbc.1.2015.10.27.09.36.07
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Oct 2015 09:36:07 -0700 (PDT)
-Date: Tue, 27 Oct 2015 16:35:43 +0000
-From: Stephano Cetola <stephanoc@gmail.com>
+	ee1sm18628952wic.17.2015.10.27.11.21.03
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 27 Oct 2015 11:21:03 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 27 Oct 2015 19:21:21 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151027163542.GA21537@mail.spox.systems>
-References: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
+Message-ID: <20151027182121.GF2577@jama>
+References: <55EAE272.5010904@topic.nl>
 MIME-Version: 1.0
-In-Reply-To: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>
-Subject: Re: OE/Yocto developer survey
+In-Reply-To: <55EAE272.5010904@topic.nl>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: "krb" fails to build, suspect GCC bug
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,82 +48,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2015 16:36:11 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 27 Oct 2015 18:21:07 -0000
+X-Groupsio-MsgNum: 58071
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="i3lJ51RuaGWuFYNw"
 Content-Disposition: inline
 
-On 10/26, Cliff Brake wrote:
-> How long have you been using OE?  
+--i3lJ51RuaGWuFYNw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-~3 years
+On Sat, Sep 05, 2015 at 02:39:14PM +0200, Mike Looijmans wrote:
+> I got this weird build failure from the "krb" package:
+>=20
+> | make[3]: Entering directory=20
+> '/TOPDIR/build/tmp/work/mips32el-oe-linux/krb5/1.13.2-r0/krb5-1.13.2/src/=
+lib/krb5/ccache'
+> | mipsel-oe-linux-gcc  -mel -mabi=3D32 -mhard-float -march=3Dmips32=20
+> --sysroot=3D/TOPDIR/build/tmp/sysroots/formuler1 -fPIC -DSHARED=20
+> -DHAVE_CONFIG_H  -I../../../include -I../../../include -I./ccapi -I. -I.=
+=20
+>   -DKRB5_DEPRECATED=3D1 -DKRB5_PRIVATE  -Os -pipe -g=20
+> -feliminate-unused-debug-types -DDESTRUCTOR_ATTR_WORKS=3D1=20
+> -I/TOPDIR/build/tmp/sysroots/formuler1/usr/include/et -Wall -Wcast-align=
+=20
+> -Wshadow -Wmissing-prototypes -Wno-format-zero-length -Woverflow=20
+> -Wstrict-overflow -Wmissing-format-attribute -Wmissing-prototypes=20
+> -Wreturn-type -Wmissing-braces -Wparentheses -Wswitch -Wunused-function=
+=20
+> -Wunused-label -Wunused-variable -Wunused-value -Wunknown-pragmas=20
+> -Wsign-compare -Werror=3Duninitialized -Werror=3Dpointer-arith=20
+> -Werror=3Ddeclaration-after-statement=20
+> -Werror-implicit-function-declaration -pthread -c cc_file.c -o=20
+> cc_file.so.o && mv -f cc_file.so.o cc_file.so
+> | cc_file.c: In function 'fcc_next_cred':
+> | cc_file.c:368:9: error: 'maxsize' may be used uninitialized in this=20
+> function [-Werror=3Dmaybe-uninitialized]
+> |      ret =3D load_data(context, id, maxsize, buf);
+> |          ^
+> | cc_file.c:1091:12: note: 'maxsize' was declared here
+> |      size_t maxsize;
+> |             ^
+> | cc1: some warnings being treated as errors
+>=20
+> Looking at the source, this doesn't make any sense at all. The=20
+> declaration of the variable isn't even in the same method body. And the=
+=20
+> line it complains about is about the fifth time it passes that variable=
+=20
+> to another method.
+>=20
+> And working around it by initializing maxsize=3D0 just makes the compiler=
+=20
+> choke on a similar situation elsewhere:
+> | packet.c:50:67: error: 'id' may be used uninitialized in this function
+>=20
+>=20
+> I suspect the problem here is GCC and not the krb code. Anyone seen this?
 
-> How do you use OE/Yocto?
- [ X ] product development
- [ X ] hobby/research/education/yocto core developer, etc
- 
-> What distro do you use?
- [   ] Poky
- [   ] Angstrom
- [ X ] nodistro or custom (Based on Poky)
- 
-> How do you organize multiple git repos?
- [   ] Git submodules
- [ X ] Repo
- [ X ] Other (Customer Python scripts)
- 
-> What packaging system?
- [   ] OPKG
- [   ] RPM
- [ X ] Other (IPK)
- 
-> What GUI toolkits?
- [ X ] Qt
- [ X ] Gtk
- [   ] EFL
- [ X ] HTML5/JS
- [   ] Other
- 
- Our clients develop in QML.
+I've seen it today in my world builds, It seems to fail only when building =
+with -Os.
 
-> What init system?
- [   ] systemd
- [ X ] sysvinit
- [ X ] busybox init
- [   ] Other
- 
-> What libc?
- [ X ] glibc
- [   ] uclibc
- [   ] musl
- [   ] Other
- 
-> How do you develop custom applications?
- [   ] application-SDK
- [ X ] devshell
- [ X ] develop on PC, test on target
- [   ] Other
- 
-> What language do you primarily use for custom applications?
- [ X ] C
- [ X ] C++
- [   ] Python
- [   ] Javascript
- [   ] Lua
- [   ] Other
- 
- Qt for C++
+I've seen similar issue in mdadm, also only with -Os.
 
-> What do you use for Continuous Integration?
- [   ] Buildbot
- [ X ] Jenkins
- [   ] Other
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Tried buildbot but it required too much customization for our small
-team.
+--i3lJ51RuaGWuFYNw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-> Do you use any any of the tooling projects
-> (https://www.yoctoproject.org/tools-resources/projects) such as ADT,
-> Hob, Toaster, etc?
- 
- No
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
+iEYEARECAAYFAlYvwKAACgkQN1Ujt2V2gBwJmQCbBCxMc01RJbs+TPmAF6CKRulk
+yQ0AoLSQIZwltteLd9r+ETlA6oE6rYPK
+=HhWB
+-----END PGP SIGNATURE-----
+
+--i3lJ51RuaGWuFYNw--
