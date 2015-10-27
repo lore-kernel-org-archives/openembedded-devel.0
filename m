@@ -1,35 +1,34 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lb0-f180.google.com (mail-lb0-f180.google.com
-	[209.85.217.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 881E7757AB
+Return-Path: <marc@cpdesign.com.au>
+X-Greylist: delayed 1722 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 27 Oct 2015 08:38:04 UTC
+Received: from s36.web-servers.com.au (s36.web-servers.com.au [118.127.46.63])
+	by mail.openembedded.org (Postfix) with ESMTP id 132B9755F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 08:21:49 +0000 (UTC)
-Received: by lbcao8 with SMTP id ao8so57470588lbc.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 01:21:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=u0YpdzBMZ8Ei/ZSf+B68Pihb9dCu1J9rIHxAmVc8urM=;
-	b=RA6W9UXvqoB8IzKcXO6EDf8vRILat3PxYBrXwPmn72AEu55JUfomNOcV1z8J3stmyW
-	Jw1rtktkZPryPiSDVDmeNMZPV9lCu4nASYQJrYkJygLoENe1XD7OyW8c/vG8QgLqzPQy
-	cTlfvfdYhUT4xD8b2sGFlQqKUJiS6thCE3TTzhHzIXOTMVQBDd32ALYrDmCOHxY19r5m
-	qTxY1L+P8fcWXqnVTj8/5Fu9/t4NVfMxJTqpR3lJqPI+VyXYCzdDZjAMxTq3d5w+jNFG
-	5yMcGpsqt7inxv6v8mIif2As3shz6ke/kMEaYx57cvwZfzia14QTFO7vh+ZvEtiqtKjc
-	vmRQ==
-X-Received: by 10.112.157.166 with SMTP id wn6mr562784lbb.30.1445934108105;
-	Tue, 27 Oct 2015 01:21:48 -0700 (PDT)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id 34sm6820638lfx.47.2015.10.27.01.21.46
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 27 Oct 2015 01:21:46 -0700 (PDT)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 27 Oct 2015 09:21:45 +0100
-Message-Id: <1445934105-1498-1-git-send-email-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.6.1
-Subject: [meta-oe][PATCH v3] gerbil: Visualization and analysis tool for hyperspectral images
+	Tue, 27 Oct 2015 08:38:04 +0000 (UTC)
+Received: from ppp59-167-120-30.static.internode.on.net ([59.167.120.30]:34718
+	helo=dev2.localnet) by s36.web-servers.com.au with esmtpsa
+	(TLSv1.2:DHE-RSA-AES256-GCM-SHA384:256) (Exim 4.86)
+	(envelope-from <marc@cpdesign.com.au>) id 1ZqzJo-003cdK-MP
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Oct 2015 19:09:20 +1100
+From: Marc Reilly <marc@cpdesign.com.au>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 27 Oct 2015 19:08:34 +1100
+Message-ID: <3871259.KM6vijoE1d@dev2>
+User-Agent: KMail/4.14.9 (Linux/3.16.7-24-desktop; KDE/4.14.9; x86_64; ; )
+In-Reply-To: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
+References: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - s36.web-servers.com.au
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - cpdesign.com.au
+X-Get-Message-Sender-Via: s36.web-servers.com.au: authenticated_id:
+	marc@cpdesign.com.au
+X-Authenticated-Sender: s36.web-servers.com.au: marc@cpdesign.com.au
+Subject: Re: OE/Yocto developer survey
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,65 +42,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2015 08:21:53 -0000
+X-List-Received-Date: Tue, 27 Oct 2015 08:38:07 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-New recipe
+Hi Cliff,
 
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
----
+On Monday, October 26, 2015 03:18:54 PM Cliff Brake wrote:
+> Hi,
+> 
+> I'd like to get some feedback on the following questions -- feel free
+> to respond to list, or directly to me, and I'll withhold your
+> name/company from any results.
+> 
+> I would like to collect feedback until 2015-11-02, and will summarize
+> the results after that.
+> 
+> My goal with this survey is to get a sense for best practices and what
+> is most commonly used among Yocto/OE developers so I can better advise
+> clients using Yocto/OE.  Hopefully this will also generate some
+> interesting discussions.
+> 
+> How long have you been using OE?  _3 years
+> 
+> How do you use OE/Yocto?
+> [ x] product development
+> [  ] hobby/research/education/yocto core developer, etc
+> 
+> What distro do you use?
+> [  ] Poky
+> [x ] Angstrom
+> [x ] nodistro or custom
+> 
+> How do you organize multiple git repos?
+> [  ] Git submodules
+> [  ] Repo
+> [x ] Other
+> 
+> What packaging system?
+> [ x ] OPKG
+> [  ] RPM
+> [  ] Other
+> 
+> What GUI toolkits?
+> [ x ] Qt
+> [  ] Gtk
+> [  ] EFL
+> [  ] HTML5/JS
+> [  ] Other
+> 
+> What init system?
+> [ x ] systemd
+> [  ] sysvinit
+> [  ] busybox init
+> [  ] Other
+> 
+> What libc?
+> [ x ] glibc
+> [  ] uclibc
+> [  ] musl
+> [  ] Other
+> 
+> How do you develop custom applications?
+> [ x ] application-SDK
+> [  ] devshell
+> [x  ] develop on PC, test on target
+> [  ] Other
+> 
+> What language do you primarily use for custom applications?
+> [  ] C
+> [ x ] C++
+> [  ] Python
+> [  ] Javascript
+> [  ] Lua
+> [  ] Other
+> 
+> What do you use for Continuous Integration?
+> [  ] Buildbot
+> [ x ] Jenkins
+> [  ] Other
+> 
+> Do you use any any of the tooling projects
+> (https://www.yoctoproject.org/tools-resources/projects) such as ADT,
+> Hob, Toaster, etc?
+> 
+> _______________________
 
-v3: So I think we have got into the root of why it failed.
+None.
 
-There was a capitalization error on the cmake file.
+We've not modified our initial product image for a few years now, apart from 
+our specific app, so I haven't had any time to play with these newer tools.
 
-I have posted the change to upstream and they have merged it
-(btw extremely fast, thanks ypnos).
 
-Hope this time it also builds on on your test system.
+HTH,
 
-Sorry again for the inconveniences, and thanks for your work!
-
- meta-oe/recipes-graphics/gerbil/gerbil_git.bb | 30 +++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/gerbil/gerbil_git.bb
-
-diff --git a/meta-oe/recipes-graphics/gerbil/gerbil_git.bb b/meta-oe/recipes-graphics/gerbil/gerbil_git.bb
-new file mode 100644
-index 000000000000..cad67d01c724
---- /dev/null
-+++ b/meta-oe/recipes-graphics/gerbil/gerbil_git.bb
-@@ -0,0 +1,30 @@
-+DESCRIPTION = "Generic framework for visualization and analysis of multispectral and hyperspectral data that strives to both bring new innovations in analysis capabilities and be of use in a wide range of hyperspectral data applications"
-+HOMEPAGE = "http://gerbilvis.org/"
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
-+DEPENDS = "boost qt4-x11-free tbb opencv libglu virtual/libgl"
-+SRCREV = "b5cc1dc05b89c6c0d5190f0a49a18a77526fffa9"
-+
-+SRC_URI = "git://github.com/gerbilvis/gerbil.git"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit distutils-base cmake qt4x11
-+
-+export EXTRA_OECMAKE = "\
-+                        -DQT_MOC_EXECUTABLE=${OE_QMAKE_MOC} \
-+                        -DQT_UIC_EXECUTABLE=${OE_QMAKE_UIC} \
-+                        -DQT_RCC_EXECUTABLE=${OE_QMAKE_RCC} \
-+                        "
-+
-+do_configure() {
-+        # Ensure we get the cmake configure and not qmake
-+        cmake_do_configure
-+}
-+do_install() {
-+        install -d ${D}${bindir}
-+        install -m 755 bin/gerbil ${D}${bindir}/
-+        install -m 755 bin/qgerbil ${D}${bindir}/
-+}
-+
-+RDEPENDS_${PN} += "qt4-x11-free"
--- 
-2.6.1
+Cheers,
+Marc
 
 
