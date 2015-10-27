@@ -1,42 +1,59 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id A81F575D4A
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
+	[209.85.223.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 6544B770C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 20:24:47 +0000 (UTC)
-Received: by wikq8 with SMTP id q8so228810105wik.1
+	Tue, 27 Oct 2015 20:24:54 +0000 (UTC)
+Received: by iofz202 with SMTP id z202so234203620iof.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 13:24:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=RtVBm2nWLNnLuCNdE7vvA1CoPceaOaxjeuwzutWSw5U=;
-	b=pq0wnriIrCQZw5kem27CnezwMfhSCl25utGxk9JQmYPTRsF/gn2+yc80vNwfKfEFwC
-	xlJ78/rXoCvVXMPQqtdQWNy+u+i0cj+3avUYRjDRoXJ5ChwyGXqb5zH5W2TiejQ/XdgZ
-	o2aA0+GfTY0BTLLUZTtn2bksfmzlx4LAZt/HsgSmXNM7lEgPfUJG2iHm7y8pRnQ2V0RC
-	50yNjvl0FXUTIEZuQwd9G+W6ml/JacQJhHBDmmneJSsw/y9RLNKs1i5iVMsF22UDMQkJ
-	A+1B9IRbCNsH7t1W6Di242EI8uwfc1qpiWNSn9v3/6hUIcEC1SbauP89WInaqcccZvxA
-	ikYg==
-X-Received: by 10.180.198.227 with SMTP id jf3mr30985439wic.94.1445977487825; 
-	Tue, 27 Oct 2015 13:24:47 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	ub15sm14331092wib.6.2015.10.27.13.24.46
+	Tue, 27 Oct 2015 13:24:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems_com_br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:content-type; bh=IT6x0BsIiSoRhbP7jUMA6LNNFyrcImMSq4BzOKPXOHc=;
+	b=lZngkK4U0aXSGGgiBgPL5yrEY/CpLdI+/4Y5iC4LGjHZBksh2MBEyElI48cI9jdl0G
+	1Z3UCNxQ323657jCN/tbHAycbpPo9Q2izX06csaoS6LPyGhQLezf3LGEYET+FZF2EX/5
+	c+8jkgAj1Nor+dfgqZHYPFvG4tuEXU5q2fPATxBdMxO8H4myCnUkK3Thq5cOUtJZPZVJ
+	dokiU3Vkq/VWHO9x80IGGjhdKrEKGB47L2J+AosDsdnPnjCK1W6vIKUWiLcBphFsOYIr
+	QGnSOtY+6BCG64apA59OqJldQFG9/7VFfNpCG4cv0Vayk9m6gQjmyBscJyBTuyWZCHAA
+	lGZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:content-type;
+	bh=IT6x0BsIiSoRhbP7jUMA6LNNFyrcImMSq4BzOKPXOHc=;
+	b=lOfD1r+zG7HBrBlxnCryQnc7XC3sjYxa6/6oiSNIxcf2Nkr/zCb66ehEVmTZUXTiqy
+	Gt+8tMgam4uVR9eZxGNrPi71MyW5yT2NOexB3rxsfhd3x1jaALTupZ3rNzj46fzJXecd
+	evtNgSyB1p9n0q1f2yK6OTB2XXr1bOcW58PbFEsqCWxV0CBE9AJnwwZAAVKftGLJpHqr
+	IDrDxRBf5s6+CGnlV1UkSoScy10isw7HWZuWetAODdq2JkIXZdrORG9WKe9r64zbNeJ3
+	2HzAXdDz+FpU7JI8mX20dYRrHrjBUBeQI0LhXzYIKihMtY7xAvT0GkfHHuO4JaVPs1s3
+	cvbg==
+X-Gm-Message-State: ALoCoQmQ6Z//djpWr9Mapb4+F7alj92QpT848dkDfRD/HQMV8TqrgBx7wvD4pqIl17+8g7H2oreY
+X-Received: by 10.107.135.204 with SMTP id r73mr42020434ioi.164.1445977494238; 
+	Tue, 27 Oct 2015 13:24:54 -0700 (PDT)
+Received: from mail-io0-f180.google.com (mail-io0-f180.google.com.
+	[209.85.223.180])
+	by smtp.gmail.com with ESMTPSA id ha7sm3448712igb.5.2015.10.27.13.24.52
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 27 Oct 2015 13:24:46 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 27 Oct 2015 21:25:03 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151027202503.GH2577@jama>
-References: <55EAE272.5010904@topic.nl> <20151027182121.GF2577@jama>
-	<CAMKF1spKg10RUh3O3f+skxykHvGHA9Si-LvD1jKLDUQCrE2rtw@mail.gmail.com>
-	<20151027195742.GG2577@jama>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 27 Oct 2015 13:24:52 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by iodd200 with SMTP id d200so71653471iod.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Oct 2015 13:24:52 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20151027195742.GG2577@jama>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: "krb" fails to build, suspect GCC bug
+X-Received: by 10.107.160.198 with SMTP id j189mr28735288ioe.37.1445977492216; 
+	Tue, 27 Oct 2015 13:24:52 -0700 (PDT)
+Received: by 10.36.218.7 with HTTP; Tue, 27 Oct 2015 13:24:52 -0700 (PDT)
+In-Reply-To: <39E716D7-E36A-4696-9503-3DBB6B1C94DF@gmail.com>
+References: <79D6C2B5-2151-4A49-AC04-48342EFD42FD@gmail.com>
+	<CAP9ODKox4BAruNKS8cG8EnB+=egF3zJdHC7WZu3jO9OtresREw@mail.gmail.com>
+	<39E716D7-E36A-4696-9503-3DBB6B1C94DF@gmail.com>
+Date: Tue, 27 Oct 2015 18:24:52 -0200
+Message-ID: <CAP9ODKp5yhi1GqwciLueq1mwzhBekg6DtTxXrPFfP=9gNSEu6w@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] llvm: update 3.5.2 to have a sane ARM JIT for OpenJDK-8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,144 +67,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2015 20:24:51 -0000
-X-Groupsio-MsgNum: 58080
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="k+G3HLlWI7eRTl+h"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 27 Oct 2015 20:24:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
---k+G3HLlWI7eRTl+h
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, Oct 27, 2015 at 6:21 PM, Jens Rehsack <rehsack@gmail.com> wrote:
+>
+>> Am 27.10.2015 um 21:15 schrieb Otavio Salvador <otavio.salvador@ossystems.com.br>:
+>>
+>> On Tue, Oct 27, 2015 at 6:04 PM, Jens Rehsack <rehsack@gmail.com> wrote:
+>>>
+>>> llvm introduced new JIT technology MCJIT with llvm 3.4 and fixes ARM in 3.5
+>>> (see http://llvm.org/releases/3.5.2/docs/ReleaseNotes.html#changes-to-the-arm-backend).
+>>>
+>>> Ensure JIT is built with llvm
+>>>
+>>> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+>>
+>> There is a patch to add LLVM 3.7[1]; I think this one can be dropped.
+>>
+>> 1. http://patchwork.openembedded.org/patch/106281/
+>
+> I'v seen this and I guarantee that OpenJDK-8 will fail heavily with llvm3.7 - the guys
+> put an end to an antiquated API's with each release, and OpenJDK's zeroshark uses lot's
+> of them.
 
-On Tue, Oct 27, 2015 at 08:57:42PM +0100, Martin Jansa wrote:
-> On Tue, Oct 27, 2015 at 11:26:32AM -0700, Khem Raj wrote:
-> > On Tue, Oct 27, 2015 at 11:21 AM, Martin Jansa <martin.jansa@gmail.com>=
- wrote:
-> > > On Sat, Sep 05, 2015 at 02:39:14PM +0200, Mike Looijmans wrote:
-> > >> I got this weird build failure from the "krb" package:
-> > >>
-> > >> | make[3]: Entering directory
-> > >> '/TOPDIR/build/tmp/work/mips32el-oe-linux/krb5/1.13.2-r0/krb5-1.13.2=
-/src/lib/krb5/ccache'
-> > >> | mipsel-oe-linux-gcc  -mel -mabi=3D32 -mhard-float -march=3Dmips32
-> > >> --sysroot=3D/TOPDIR/build/tmp/sysroots/formuler1 -fPIC -DSHARED
-> > >> -DHAVE_CONFIG_H  -I../../../include -I../../../include -I./ccapi -I.=
- -I.
-> > >>   -DKRB5_DEPRECATED=3D1 -DKRB5_PRIVATE  -Os -pipe -g
-> > >> -feliminate-unused-debug-types -DDESTRUCTOR_ATTR_WORKS=3D1
-> > >> -I/TOPDIR/build/tmp/sysroots/formuler1/usr/include/et -Wall -Wcast-a=
-lign
-> > >> -Wshadow -Wmissing-prototypes -Wno-format-zero-length -Woverflow
-> > >> -Wstrict-overflow -Wmissing-format-attribute -Wmissing-prototypes
-> > >> -Wreturn-type -Wmissing-braces -Wparentheses -Wswitch -Wunused-funct=
-ion
-> > >> -Wunused-label -Wunused-variable -Wunused-value -Wunknown-pragmas
-> > >> -Wsign-compare -Werror=3Duninitialized -Werror=3Dpointer-arith
-> > >> -Werror=3Ddeclaration-after-statement
-> > >> -Werror-implicit-function-declaration -pthread -c cc_file.c -o
-> > >> cc_file.so.o && mv -f cc_file.so.o cc_file.so
-> > >> | cc_file.c: In function 'fcc_next_cred':
-> > >> | cc_file.c:368:9: error: 'maxsize' may be used uninitialized in this
-> > >> function [-Werror=3Dmaybe-uninitialized]
-> > >> |      ret =3D load_data(context, id, maxsize, buf);
-> > >> |          ^
-> > >> | cc_file.c:1091:12: note: 'maxsize' was declared here
-> > >> |      size_t maxsize;
-> > >> |             ^
-> > >> | cc1: some warnings being treated as errors
-> > >>
-> > >> Looking at the source, this doesn't make any sense at all. The
-> > >> declaration of the variable isn't even in the same method body. And =
-the
-> > >> line it complains about is about the fifth time it passes that varia=
-ble
-> > >> to another method.
-> > >>
-> > >> And working around it by initializing maxsize=3D0 just makes the com=
-piler
-> > >> choke on a similar situation elsewhere:
-> > >> | packet.c:50:67: error: 'id' may be used uninitialized in this func=
-tion
-> > >>
-> > >>
-> > >> I suspect the problem here is GCC and not the krb code. Anyone seen =
-this?
-> > >
-> > > I've seen it today in my world builds, It seems to fail only when bui=
-lding with -Os.
-> > >
-> > > I've seen similar issue in mdadm, also only with -Os.
-> > >
-> >=20
-> > is this regression ? or seen for first time?
->=20
-> krb5 fails to build like this with -Os at least since dizzy
->=20
-> mdadm failure:
-> | raid6check.c: In function 'check_stripes':
-> | raid6check.c:315:8: error: 'stripe_buf' may be used uninitialized in th=
-is function [-Werror=3Dmaybe-uninitialized]
-> |   char *stripe_buf;
-> |         ^
-> | cc1: all warnings being treated as errors
-> | make: *** [raid6check.o] Error 1
-> | ERROR: oe_runmake failed
->=20
-> is newer (seen only in Jethro builds).
->=20
-> But maybe only because this is built in do_compile_ptest_base and ptest
-> support was added in oe-core/jethro, it fails the same with gcc-5.2 and g=
-cc-4.9.
+So we will need to figure how to deal with this. I see following options:
 
-Quick grep in my last -Os world build shows 2 more recipes with
-similar issue (smbnetfs is failing in krb5 dependency already):
+ - add needed llvm recipe in meta-java (I dislike this)
+ - fix openjdk
+ - update openjdk so it work with 3.7 (preferred)
 
-physfs:
-| physfs/2.0.3-r0/physfs-2.0.3/archivers/zip.c: In function 'ZIP_openArchiv=
-e':
-| physfs/2.0.3-r0/physfs-2.0.3/archivers/zip.c:944:19: error: 'data_start' =
-may be used uninitialized in this function [-Werror=3Dmaybe-uninitialized]
-|      entry->offset +=3D ofs_fixup;
-|                    ^
-| physfs/2.0.3-r0/physfs-2.0.3/archivers/zip.c:1116:19: note: 'data_start' =
-was declared here
-|      PHYSFS_uint32 data_start;
-|                    ^
-| physfs/2.0.3-r0/physfs-2.0.3/archivers/zip.c: In function 'ZIP_openArchiv=
-e':
-| physfs/2.0.3-r0/physfs-2.0.3/archivers/zip.c:944:19: error: 'data_start' =
-may be used uninitialized in this function [-Werror=3Dmaybe-uninitialized]
-|      entry->offset +=3D ofs_fixup;
-|                    ^
-| physfs/2.0.3-r0/physfs-2.0.3/archivers/zip.c:1116:19: note: 'data_start' =
-was declared here
-|      PHYSFS_uint32 data_start;
-|                    ^
-| cc1: all warnings being treated as errors
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
-tvheadend:
-| tvheadend/3.3-r0/git/src/serviceprobe.c: In function 'serviceprobe_thread=
-':
-| tvheadend/3.3-r0/git/src/serviceprobe.c:168:7: error: 's' may be used uni=
-nitialized in this function [-Werror=3Dmaybe-uninitialized]
-|        subscription_unsubscribe(s);
-|        ^
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---k+G3HLlWI7eRTl+h
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlYv3Z4ACgkQN1Ujt2V2gBwSHQCfd8+CVWWqiFfj+YxJhHNLaGTE
-iZ8AoKhnX0vunm3ndVE8ksijvfaTSRB8
-=SRSm
------END PGP SIGNATURE-----
-
---k+G3HLlWI7eRTl+h--
