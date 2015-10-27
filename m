@@ -1,21 +1,21 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F5207570D
+	by mail.openembedded.org (Postfix) with ESMTP id 3D84375E80
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 02:55:34 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t9R2tYIf004411
+	Tue, 27 Oct 2015 02:55:48 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t9R2tmJF004433
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2015 19:55:34 -0700 (PDT)
+	Mon, 26 Oct 2015 19:55:48 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Mon, 26 Oct 2015 19:55:34 -0700
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Mon, 26 Oct 2015 19:55:48 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 27 Oct 2015 10:46:42 +0800
-Message-ID: <1445914005-23569-1-git-send-email-rongqing.li@windriver.com>
+Date: Tue, 27 Oct 2015 10:46:57 +0800
+Message-ID: <1445914019-23995-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 Subject: [meta-networking][PATCH 1/3] dovecot: add PACKAGECONFIG for lz4
@@ -32,7 +32,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2015 02:55:35 -0000
+X-List-Received-Date: Tue, 27 Oct 2015 02:55:49 -0000
 Content-Type: text/plain
 
 From: Roy Li <rongqing.li@windriver.com>
