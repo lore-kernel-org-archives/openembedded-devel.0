@@ -1,40 +1,37 @@
 Return-Path: <rehsack@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 99F8F75D4A
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id D7B4A75D4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 20:21:56 +0000 (UTC)
-Received: by wikq8 with SMTP id q8so228715995wik.1
+	Tue, 27 Oct 2015 20:22:40 +0000 (UTC)
+Received: by wicll6 with SMTP id ll6so177035948wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 13:21:56 -0700 (PDT)
+	Tue, 27 Oct 2015 13:22:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to;
-	bh=T5K3arfeB9XLPgsp5v0ONGGWW2UsHrJNusYSuqWqa0I=;
-	b=KAXxTb8yjdQnRqotzQHl3xMbjeioRLyy8hibnLpC2aMROytDPZa4+Ej3ks3dpNgj+h
-	XJgLLS0AoyJ3W57ka4bNIwXADFaebXbLhARVPUSlhwOiQiZixZXq2Gv1SV3tYG9OUIjn
-	dOme8IeyYE8iSO5u/zlebIdpSYV+FNAqZtH9rxZDINJ3QF3GgNkaBiZ30uS5OZSAwD1n
-	0GaocRZkIgdg5RPltIXikwUNNbRlV0zZCoGgUwAePPAgD7CJPO+QAp/sx2KVUjSGBGE5
-	o2kNEk2zWfpx9Oa3HtA9t0C8pZRxRr7IJ86r3WwZlO32cx6S/OkKKoLIqrSavsp4hyYD
-	Yofw==
-X-Received: by 10.194.190.19 with SMTP id gm19mr33360454wjc.0.1445977316825;
-	Tue, 27 Oct 2015 13:21:56 -0700 (PDT)
+	h=from:content-type:content-transfer-encoding:subject:message-id:date
+	:to:mime-version;
+	bh=+vTDgFgETWqwlrrkqgiqR+8XT+JKpN8d2wGH0BYWYDI=;
+	b=uSwEzagqRMw3cy4VZsprXxAJXjgzJstbup2Nltc+uGIwh3wnAdW6Wc4TzdLP+vMIfI
+	rJ/mqq7ZMsrfy0cJ3pN696p+5Zus9LVnTMrjPVR/EM2t+z1GTKu8cAnzNeTCMfBAJ1VW
+	Mb69PKHPUeEnrFsRsQrojUpwTSruTIbOtIvP7m0VnkHxn/aNpJR62iiesojMtXuVFYxB
+	DI7p5ji2IQBGfqO53RlcZulvQ8Tpb8DsFv1d+aDSxnFH0/xTm6UwfcKHM6b961wJr/V8
+	jJ2iL53BsLOh7J4q7WZ32YhKVUC6ly2xvG3qB3t5I+Qc5cLvhW4AxeTjrxTobWwsFtv4
+	mEUQ==
+X-Received: by 10.194.2.34 with SMTP id 2mr29172812wjr.39.1445977360316;
+	Tue, 27 Oct 2015 13:22:40 -0700 (PDT)
 Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
 	by smtp.gmail.com with ESMTPSA id
-	jf13sm19009075wic.8.2015.10.27.13.21.56
+	jf13sm19009075wic.8.2015.10.27.13.22.38
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Oct 2015 13:21:56 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+	Tue, 27 Oct 2015 13:22:38 -0700 (PDT)
 From: Jens Rehsack <rehsack@gmail.com>
-In-Reply-To: <CAP9ODKox4BAruNKS8cG8EnB+=egF3zJdHC7WZu3jO9OtresREw@mail.gmail.com>
-Date: Tue, 27 Oct 2015 21:21:55 +0100
-Message-Id: <39E716D7-E36A-4696-9503-3DBB6B1C94DF@gmail.com>
-References: <79D6C2B5-2151-4A49-AC04-48342EFD42FD@gmail.com>
-	<CAP9ODKox4BAruNKS8cG8EnB+=egF3zJdHC7WZu3jO9OtresREw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Message-Id: <A162E8E5-5317-4F65-B049-7897DAF41CAC@gmail.com>
+Date: Tue, 27 Oct 2015 21:22:38 +0100
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
 X-Mailer: Apple Mail (2.2104)
-Subject: Re: [meta-oe][PATCH] llvm: update 3.5.2 to have a sane ARM JIT for OpenJDK-8
+Subject: [meta-oe][PATCH] rrdtool: fix compile error V2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,38 +45,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2015 20:21:58 -0000
+X-List-Received-Date: Tue, 27 Oct 2015 20:22:41 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
 
-> Am 27.10.2015 um 21:15 schrieb Otavio Salvador =
-<otavio.salvador@ossystems.com.br>:
->=20
-> On Tue, Oct 27, 2015 at 6:04 PM, Jens Rehsack <rehsack@gmail.com> =
-wrote:
->>=20
->> llvm introduced new JIT technology MCJIT with llvm 3.4 and fixes ARM =
-in 3.5
->> (see =
-http://llvm.org/releases/3.5.2/docs/ReleaseNotes.html#changes-to-the-arm-b=
-ackend).
->>=20
->> Ensure JIT is built with llvm
->>=20
->> Signed-off-by: Jens Rehsack <sno@netbsd.org>
->=20
-> There is a patch to add LLVM 3.7[1]; I think this one can be dropped.
->=20
-> 1. http://patchwork.openembedded.org/patch/106281/
+Since cpan.bbclass has evolved, the old wrapper simulation needs some =
+adoption.
+Use as much as possible from cpan.bbclass instead of copying code from =
+there.
 
-I'v seen this and I guarantee that OpenJDK-8 will fail heavily with =
-llvm3.7 - the guys
-put an end to an antiquated API's with each release, and OpenJDK's =
-zeroshark uses lot's
-of them.
+Signed-off-by: Jens Rehsack <sno@netbsd.org>
+---
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb | 14 +++-----------
+ 1 file changed, 3 insertions(+), 11 deletions(-)
 
-Cheers
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb =
+b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+index 2c81d56..666ace9 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+@@ -15,7 +15,7 @@ SRC_URI =3D "\
+=20
+ S =3D "${WORKDIR}/git"
+=20
+-inherit autotools-brokensep gettext pythonnative perlnative python-dir =
+cpan-base systemd
++inherit cpan autotools-brokensep gettext pythonnative python-dir =
+systemd
+=20
+ BBCLASSEXTEND =3D "native"
+=20
+@@ -50,21 +50,13 @@ EXTRA_OECONF =3D " \
+     --disable-rpath \
+ "
+=20
+-# don't use perl.real, this results in break issues with prebuilts =
+since perl.real doesn't
+-# know where the PERL5LIB is...
+-# use wrapper perl instead
+-EXTRA_OEMAKE =3D "PERL=3D${STAGING_BINDIR_NATIVE}/perl-native/perl =
+FULLPERL=3D${STAGING_BINDIR_NATIVE}/perl-native/perl"
+-
+ export BUILD_SYS
+ export HOST_SYS
+ export STAGING_LIBDIR
+ export STAGING_INCDIR
+=20
+-# Env var which tells perl if it should use host (no) or target (yes) =
+settings
+-export PERLCONFIGTARGET =3D "${@is_target(d)}"
+-export PERL_INC =3D =
+"${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}/CORE"
+-export PERL_LIB =3D =
+"${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}"
+-export PERL_ARCHLIB =3D =
+"${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}"
++# emulate cpan_do_configure
++EXTRA_OEMAKE =3D ' PERL5LIB=3D"${PERL_ARCHLIB}" '
+=20
+ do_configure() {
+     #fix the pkglib problem with newer automake
+--=20
+1.9.1
+
+This is a V2 after rebasing oe/master
+
+Error is here for a few days ... http://nopaste.linux-dev.org/?785761
+
 --=20
 Jens Rehsack - rehsack@gmail.com
 
