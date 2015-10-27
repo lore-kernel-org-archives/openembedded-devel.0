@@ -1,26 +1,26 @@
 Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A29F770B1
+Received: from mail5.wrs.com (unknown [64.129.254.146])
+	by mail.openembedded.org (Postfix) with ESMTP id C17DF7707F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 02:55:49 +0000 (UTC)
+	Tue, 27 Oct 2015 02:55:51 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9R2tnNE001162
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id t9R2tpVn004650
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2015 19:55:50 -0700 (PDT)
+	Mon, 26 Oct 2015 19:55:51 -0700
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Mon, 26 Oct 2015 19:55:49 -0700
+	14.3.248.2; Mon, 26 Oct 2015 19:55:51 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 27 Oct 2015 10:46:58 +0800
-Message-ID: <1445914019-23995-2-git-send-email-rongqing.li@windriver.com>
+Date: Tue, 27 Oct 2015 10:46:59 +0800
+Message-ID: <1445914019-23995-3-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1445914019-23995-1-git-send-email-rongqing.li@windriver.com>
 References: <1445914019-23995-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 2/3] pure-ftpd: add PACKAGECONFIG for libsodium
+Subject: [meta-networking][PATCH 3/3] tcpdump: add PACKAGECONFIG for libcap-ng
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,26 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2015 02:55:50 -0000
+X-List-Received-Date: Tue, 27 Oct 2015 02:55:53 -0000
 Content-Type: text/plain
 
 From: Roy Li <rongqing.li@windriver.com>
 
 Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
-index fa592dc..c1f1504 100644
---- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
-+++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
-@@ -18,3 +18,5 @@ SRC_URI[sha256sum] = "7be73a8e58b190a7054d2ae00c5e650cb9e091980420082d02ec3c3b68
- inherit autotools
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
+index 0ffe589..150e55f 100644
+--- a/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
++++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
+@@ -23,6 +23,7 @@ PACKAGECONFIG ??= "openssl ipv6"
+ PACKAGECONFIG[openssl] = "--with-crypto=yes, --without-openssl --without-crypto, openssl"
+ PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
+ PACKAGECONFIG[smi] = "--with-smi, --without-smi,libsmi"
++PACKAGECONFIG[libcap-ng] = "--with-cap-ng=yes,--with-cap-ng=no,libcap-ng"
  
- EXTRA_OECONF = "--with-minimal"
-+PACKAGECONFIG[libsodium] ="ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=yes, \
-+                       ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=no, libsodium"
+ EXTRA_AUTORECONF += " -I m4"
+ 
 -- 
 1.9.1
 
