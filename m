@@ -1,38 +1,28 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id D444D755F4;
-	Tue, 27 Oct 2015 12:42:04 +0000 (UTC)
-Received: by wicll6 with SMTP id ll6so157721182wic.0;
-	Tue, 27 Oct 2015 05:42:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=KjXd8FsWWUKrgSydN6BRFUFU/lIcgxy6i+XYactBmHQ=;
-	b=VHjzPuQnKJKNcnY6hhMAqent1hT8wQk2+BZWczHzN0Nx9jJdudLljbdo4Qm8YFvRCy
-	PwvryiN2DAE44DnmNmNih7/uq2l9qhjNq7Iop13Z8tbBS4H+LB4Kjpe+mQMNWoLWD1Tr
-	/DcEsN0s3vr6eqxuZQyUPAmYh+QUXh/F5NdhbnKIUV1kRM/ORTbR+mGLJwrwCHlJJFLR
-	D9AYfZxIl8M1/vGuEmojygBKKU68HucREKKAIoz60kjFxGUnnCbg4n2pRNyeLAnAfT3t
-	dM+3rif9IS40tiOQNheSdaycBpc95QX8bjKnrZ4Kj8/5Lyyxeog7BNNVL9va0X7pdPj+
-	Inzg==
-X-Received: by 10.180.86.71 with SMTP id n7mr27739379wiz.91.1445949724402;
-	Tue, 27 Oct 2015 05:42:04 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	lo4sm17634875wic.5.2015.10.27.05.42.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 27 Oct 2015 05:42:03 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 27 Oct 2015 13:42:20 +0100
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20151027124220.GE2577@jama>
-References: <20151026204716.GJ2554@jama>
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 8BBCC755F4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Oct 2015 12:48:23 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by orsmga102.jf.intel.com with ESMTP; 27 Oct 2015 05:48:23 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,205,1444719600"; d="scan'208";a="672667960"
+Received: from fcheverx-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.10.27])
+	by orsmga003.jf.intel.com with ESMTP; 27 Oct 2015 05:48:22 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 27 Oct 2015 12:48:12 +0000
+Message-ID: <5005927.tnreO04m7V@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.9 (Linux/4.1.8-100.fc21.x86_64; KDE/4.14.9; x86_64; ; )
+In-Reply-To: <20151027120016.GC2577@jama>
+References: <562EB36A.1010109@webthatworks.it>
+	<11758297.Qg5HCuaF4n@peggleto-mobl.ger.corp.intel.com>
+	<20151027120016.GC2577@jama>
 MIME-Version: 1.0
-In-Reply-To: <20151026204716.GJ2554@jama>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: State of bitbake world, Failed tasks 2015-10-26
+Cc: Michael Halstead <michael@yoctoproject.org>
+Subject: Re: checking if a patch was approved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,65 +36,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2015 12:42:05 -0000
-X-Groupsio-MsgNum: 58067
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ffoCPvUAPMgSXi6H"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 27 Oct 2015 12:48:26 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---ffoCPvUAPMgSXi6H
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+On Tuesday 27 October 2015 13:00:16 Martin Jansa wrote:
+> On Tue, Oct 27, 2015 at 11:37:36AM +0000, Paul Eggleton wrote:
+> > On Tuesday 27 October 2015 08:12:48 Nicolas Dechesne wrote:
+> > > On Tue, Oct 27, 2015 at 12:12 AM, Ivan Sergio Borgonovo
+> > > 
+> > > <mail@webthatworks.it> wrote:
+> > > > I saw many patch passing by and I submitted a couple about
+> > > > meta-toolchain-qt5.
+> > > > I didn't see any message from Otavio or Martin "approving" a patches.
+> > > > 
+> > > > How can I check if it was approved other than pulling from the
+> > > > repo/checking github?
+> > > > 
+> > > > Or if there is no place to check... consider this a ping ;)
+> > > 
+> > > all commits are published on
+> > > openembedded-commits@lists.openembedded.org mailing list, and in
+> > > general you see when it's pushed in master-next, then in master.. i
+> > > have a mail filter that checks my name there.. it's the poor man
+> > > solution.. but it works. Note that the email trigger has been broken
+> > > for 2 weeks.. but i suspect this is a temporary issue that should be
+> > > fixed..
+> > 
+> > FWIW there are a small number of us working on improving patchwork so that
+> > we're able to rely upon the results it shows as being the outstanding
+> > patches in the queue and potentially even send email notifications to
+> > submitters (opt- in). I'd also like to go a step further and trigger some
+> > automatic validation on patches. At the moment we're trying to figure out
+> > if we're able to spend the time working on this in the next development
+> > cycle.
+> 
+> Paul: do you know what's wrong with git hooks triggering
+> openembedded-commits e-mails? Or maybe it's the ML itself, but there
+> was no e-mail in last month. I've pinged Michael on IRC twice (+CC here)
+> 
+> http://lists.openembedded.org/pipermail/openembedded-commits/2015-September/
+> thread.html
 
-On Mon, Oct 26, 2015 at 09:47:16PM +0100, Martin Jansa wrote:
-> === qemuarm (1) ===
->     * /openembedded-core/meta/recipes-support/libunwind/libunwind_1.1.bb, do_compile
+I don't, I'm afraid - I don't have access to that infrastructure. I hope 
+Michael can shed some light.
 
-I was checking this one today
+Cheers,
+Paul
 
-../arm-oe-linux-gnueabi-libtool  --tag=CC   --mode=link arm-oe-linux-gnueabi-gcc  -march=armv5e -marm  -mthumb-interwork --sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm  -O2 -pipe -g -feliminate-unused-debug-types -DAO_USE_PTHREAD_DEFS=1 -fexceptions -Wall -Wsign-compare  -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -fuse-ld=gold -o test-coredump-unwind test-coredump-unwind.o ../src/libunwind-coredump.la ../src/libunwind-arm.la
-arm-oe-linux-gnueabi-libtool: link: arm-oe-linux-gnueabi-gcc -march=armv5e -marm -mthumb-interwork --sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm -O2 -pipe -g -feliminate-unused-debug-types -DAO_USE_PTHREAD_DEFS=1 -fexceptions -Wall -Wsign-compare -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -fuse-ld=gold -o .libs/Lperf-simple Lperf-simple.o  ../src/.libs/libunwind.so -lc -lgcc_s
-../src/.libs/libunwind.so: error: undefined reference to 'AO_pt_lock'
-collect2: error: ld returned 1 exit status
-make[1]: *** [Lperf-simple] Error 1
+-- 
 
-arm-oe-linux-gnueabi-libtool: link: arm-oe-linux-gnueabi-gcc -march=armv5e -marm -mthumb-interwork --sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm -O2 -pipe -g -feliminate-unused-debug-types -DAO_USE_PTHREAD_DEFS=1 -fexceptions -Wall -Wsign-compare -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -fuse-ld=gold -o .libs/Gperf-simple Gperf-simple.o  ../src/.libs/libunwind-arm.so /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5e-oe-linux-gnueabi/libunwind/1.1-r0/build/src/.libs/libunwind.so ../src/.libs/libunwind.so -lc -lgcc_s
-../src/.libs/libunwind-arm.so: error: undefined reference to 'AO_pt_lock'
-collect2: error: ld returned 1 exit status
+Paul Eggleton
+Intel Open Source Technology Centre
 
-...
-
-Adding -latomic_ops works, but
-
-* News for v0.98.3:
-
-** Dont link against libatomic_ops for now.  Due to a packaging bug on
-   Debian, linking against this library causes libunwind.so to get
-   a dependency on libatomic_ops.so, which is not at all what we want.
-   Fortunately, we don't have to link against that library on x86 or
-   ia64 since the library is strictly needed only for platforms with
-   poor atomic operation support.  Once the libatomic_ops package is fixed,
-   we can re-enable linking against libatomic_ops.
-
-and
-#  AC_CHECK_LIB(atomic_ops, main)
-is commented out in configure for all builds.
-
-https://raw.githubusercontent.com/rdnetto/teapot-buildroot/master/package/libunwind/libunwind-02-Add-AO_REQUIRE_CAS-to-fix-build-on-ARM-v6.patch
-fixes the issue in my builds, I'll send patch shortly, I wonder why YP autobuilder didn't catch this issue.
-
-Regards,
-
---ffoCPvUAPMgSXi6H
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlYvcSsACgkQN1Ujt2V2gByqbACgr9DFMeZWIRURJsDcgOcU4/oF
-zHEAn16aWmlFrlv7MxtvGCtZxJq929nr
-=kbL/
------END PGP SIGNATURE-----
-
---ffoCPvUAPMgSXi6H--
