@@ -1,36 +1,57 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 6CADF77080
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
+	[209.85.213.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 76EED75CC2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 20:10:21 +0000 (UTC)
-Received: by wicfv8 with SMTP id fv8so178822858wic.0
+	Tue, 27 Oct 2015 20:15:21 +0000 (UTC)
+Received: by igbhv6 with SMTP id hv6so87908789igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 13:10:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:content-type:content-transfer-encoding:subject:message-id:date
-	:to:mime-version;
-	bh=H9i9CHQdL584p13Dyzg9QbwKTf6bn+b9IEDXE3Nx8Jk=;
-	b=bnV9EAFR53P04NuURzGzEcTRVn5ahrRmxZnUY3kEy7v8QD3PI86Yjw4qit/Iuj9ZZ8
-	BuP3rI5Hhmz74/f0GllCe5Sf/GQQDYATRjZtN/9tZqQXclmWdnUTkV7IoClnoSzS3IIr
-	wXrtqjOXcfnvSTqVEIVILHbQMxyGuk+eqreB/4pma96pmGEVmBYiwSbvJj5ApsoS2WiH
-	fvSvk3BAX6dxgT9zsvf00oY8ud1Xk+6tWk+sfkZLrVt6vpuT+1jOOtTXdYSk3dfFP6PI
-	botpiefKMNvmPfyc7HDXbqzYTLhXakSUCAdD062tugqSQu2O6QFtHLiUhaXc5nS1cOiv
-	0J4Q==
-X-Received: by 10.180.206.230 with SMTP id lr6mr30656964wic.69.1445976621003; 
-	Tue, 27 Oct 2015 13:10:21 -0700 (PDT)
-Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
-	by smtp.gmail.com with ESMTPSA id bn5sm2954818wib.0.2015.10.27.13.10.20
+	Tue, 27 Oct 2015 13:15:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems_com_br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:content-type; bh=pOiZCmcZH6QWMMXbQ4jUFgt3xOm1e2Jmxmt0Z+xLe8Q=;
+	b=neygl89HcDuK4HucnmpLWoU3FQH5raugcTSAB9OBy0ro5iq4WaGxAvZPOVaHVIjaEf
+	AFmiDQLfjvVVEPI7sNiAIDZJWTucYu2LMCV7yIyw5tEGonbFS0kumbD7lJ+4LME4jlIr
+	ezLgrrVIRWi2bpGE6Ex6k21CGA9SGWDJ6EwHOLKl6FMIvqGbyYnULraEGkIsg6uv2Rc7
+	0oqq6YkWsmK/AzfnpsRZglhZvNoGR6ypkJMF3TdA0biLot96Ryw9767i3RMKLJ+Yp8Gt
+	EBu2blMNRrwW1penyZsQE/lsLrmGhiiWnCbBuQzfUWL1HyTGGOzGP9Dg2Jg/9ENQLsHD
+	1wWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:content-type;
+	bh=pOiZCmcZH6QWMMXbQ4jUFgt3xOm1e2Jmxmt0Z+xLe8Q=;
+	b=CYSv9CZZVMezkH9rkwoNqe8ddO3gUDU2ATfLFEz3XVB8MlZqiNRvShwTFFQB+uagZb
+	DQ4sIn+QhCt30HRpHq09y8UG7G5H3QkAgHBwMRKoxHLQFyy9+8sJlYzdvK12ozxZuuum
+	aTQcc1GTji3//3rtCQuYY4dzLkVdC8vAKxEEaEWpWTD7nxIGCR03PDVb6MJe9z9xfJDr
+	ms2mzyMRijmRXgpp0UiPco/LDL7RRPNzoRx5kID5Rq/NqO96LbnAahpcEYCIQWthBmU8
+	m66BYEU+DE60+42frOjg0/yy8Hc5Pts86Fvl19Od4ajQUhfPorUBkgNS3VRV8phsX4mN
+	oWMw==
+X-Gm-Message-State: ALoCoQk1qRgyFG80231R3yGwDfeviczcGFiyKExjYZFf8cP3oLXbM6GJaQlM84LfHSo0hm+zNCui
+X-Received: by 10.50.142.8 with SMTP id rs8mr28289022igb.87.1445976921578;
+	Tue, 27 Oct 2015 13:15:21 -0700 (PDT)
+Received: from mail-io0-f173.google.com (mail-io0-f173.google.com.
+	[209.85.223.173]) by smtp.gmail.com with ESMTPSA id
+	cj4sm8762443igc.16.2015.10.27.13.15.20
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Oct 2015 13:10:20 -0700 (PDT)
-From: Jens Rehsack <rehsack@gmail.com>
-Message-Id: <143CF7ED-1B54-4239-B957-F9426C4AB267@gmail.com>
-Date: Tue, 27 Oct 2015 21:10:19 +0100
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-X-Mailer: Apple Mail (2.2104)
-Subject: [meta-oe][PATCH] samba: add support for sysvinit via lsb-init-functions
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 27 Oct 2015 13:15:20 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by iodd200 with SMTP id d200so71378819iod.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Oct 2015 13:15:19 -0700 (PDT)
+MIME-Version: 1.0
+X-Received: by 10.107.17.18 with SMTP id z18mr39570542ioi.28.1445976919928;
+	Tue, 27 Oct 2015 13:15:19 -0700 (PDT)
+Received: by 10.36.218.7 with HTTP; Tue, 27 Oct 2015 13:15:19 -0700 (PDT)
+In-Reply-To: <79D6C2B5-2151-4A49-AC04-48342EFD42FD@gmail.com>
+References: <79D6C2B5-2151-4A49-AC04-48342EFD42FD@gmail.com>
+Date: Tue, 27 Oct 2015 18:15:19 -0200
+Message-ID: <CAP9ODKox4BAruNKS8cG8EnB+=egF3zJdHC7WZu3jO9OtresREw@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] llvm: update 3.5.2 to have a sane ARM JIT for OpenJDK-8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,57 +65,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2015 20:10:21 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 27 Oct 2015 20:15:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On Tue, Oct 27, 2015 at 6:04 PM, Jens Rehsack <rehsack@gmail.com> wrote:
+>
+> llvm introduced new JIT technology MCJIT with llvm 3.4 and fixes ARM in 3.5
+> (see http://llvm.org/releases/3.5.2/docs/ReleaseNotes.html#changes-to-the-arm-backend).
+>
+> Ensure JIT is built with llvm
+>
+> Signed-off-by: Jens Rehsack <sno@netbsd.org>
 
-Since there're surely lot's of individual distibutions not moved to =
-systemd,
-allow sane samba start/stop with systemv anyway. Rely on =
-lsb-init-functions
-for improved control.
+There is a patch to add LLVM 3.7[1]; I think this one can be dropped.
 
-Signed-off-by: Jens Rehsack <sno@netbsd.org>
----
- meta-oe/recipes-connectivity/samba/samba_4.1.12.bb | 7 +++++++
- 1 file changed, 7 insertions(+)
+1. http://patchwork.openembedded.org/patch/106281/
 
-diff --git a/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb =
-b/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
-index 22c2bb4..0a04870 100644
---- a/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
-+++ b/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
-@@ -97,6 +97,11 @@ do_install_append() {
- 	install -d ${D}${sysconfdir}/tmpfiles.d
- 	echo "d ${localstatedir}/log/samba 0755 root root -" \
-             > ${D}${sysconfdir}/tmpfiles.d/99-${BPN}.conf
-+    elif ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', =
-'false', d)}; then
-+	install -d ${D}${sysconfdir}/init.d
-+	install -m 0644 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d
-+	update-rc.d -r ${D} samba.sh start 20 3 5 .
-+	update-rc.d -r ${D} samba.sh start 20 0 1 6 .
-     fi
-=20
-     install -d ${D}${sysconfdir}/samba
-@@ -118,7 +123,9 @@ FILES_${PN} +=3D "/run \
-                "
-=20
- SMB_SERVICE=3D"${systemd_unitdir}/system/nmb.service =
-${systemd_unitdir}/system/smb.service"
-+SMB_SYSV=3D"${sysconfdir}/init.d ${sysconfdir}/rc?.d"
- FILES_${PN} +=3D"${@bb.utils.contains('DISTRO_FEATURES', 'systemd', =
-'${SMB_SERVICE}', '', d)}"
-+FILES_${PN} +=3D"${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', =
-'${SMB_SYSV}', '', d)}"
-=20
- FILES_${PN}-dbg +=3D "${libdir}/samba/idmap/.debug/* \
-                     ${libdir}/samba/pdb/.debug/* \
---=20
-1.9.1
-
---=20
-Jens Rehsack - rehsack@gmail.com
-
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
