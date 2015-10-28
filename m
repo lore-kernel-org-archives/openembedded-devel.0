@@ -1,57 +1,34 @@
-Return-Path: <mike.looijmans@topicproducts.com>
-Received: from mx6-05.smtp.antispamcloud.com (mx6-05.smtp.antispamcloud.com
-	[95.211.2.196])
-	by mail.openembedded.org (Postfix) with ESMTP id A7E07755F4
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id A0065755F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 08:23:53 +0000 (UTC)
-Received: from 100-208.ftth.onsbrabantnet.nl ([88.159.208.100]
-	helo=TOP-EX01.TOPIC.LOCAL)
-	by mx6.antispamcloud.com with esmtps (TLSv1:AES256-SHA:256)
-	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
-	id 1ZrM1L-0006zl-0T for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Oct 2015 09:23:51 +0100
-Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
-	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Wed, 28 Oct 2015 09:22:35 +0100
-To: <openembedded-devel@lists.openembedded.org>
-References: <55EAE272.5010904@topic.nl> <20151027182121.GF2577@jama>
-	<CAMKF1spKg10RUh3O3f+skxykHvGHA9Si-LvD1jKLDUQCrE2rtw@mail.gmail.com>
-	<20151027195742.GG2577@jama> <20151027202503.GH2577@jama>
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: TOPIC
-Message-ID: <5630860B.50701@topic.nl>
-Date: Wed, 28 Oct 2015 09:23:39 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
-MIME-Version: 1.0
-In-Reply-To: <20151027202503.GH2577@jama>
-X-Originating-IP: [192.168.80.121]
-X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
-X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
-X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
-	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
-	4XktS92Fqq3Qa0exZrGdvwCI1FSC+XchGESnvFybI5fa2A36RIhVA62ZQk0Uj+tq03E0lOPYQbSV
-	/LyKrKtc9aUV1oY4fX3W5eOCNA39IMF/tWq0Xia4BSmFvzyHGTjedCBNA121Y38SeyRMCs3XcWpW
-	rY6lCH8L7CDV11D5JM7Xk65yci5j+xTRr7HgZJNWyY7q5BA/5iDO7tJWc5LW0A0HkzG7uPVDzc3F
-	/UDJomVIDsS/itDc6L24kzSY8UBJuULIpDl323znR+D07qSzNrGWwyxYQNxlGlctos9lj2eb1EIT
-	aM/sZt80S+wHyfpIUb1+kQ3sB5+pcGh69v1UE7Q9WvntXa9VPL9K4cA+8t3Xj/LzZ5s/OJg1L2as
-	ZxEp4Bv7TWEUoKzFQfrYUeyRYVR0payg4cttk4bRt/Zdg8CBO1Snvm6qXHQp7O9kdfgKq5/ukPRo
-	6r9EQdnU18VWPxtvTWQlG7LubmSVPcFB6J1fhOzjF0b4LXcjJZ5loqO8n5Tkj3jzX/sRnep+cTmW
-	u1fDVz0geMmPEfDrUHDxZLEzWz/H7disenK3OVCk7hHP+qX+PCU7V0fBbBTVPJg=
-X-Report-Abuse-To: spam@mx99.antispamcloud.com
-X-Filter-Fingerprint: IFrWXGses7OKB5S5G8/dJXhXyDRoOQM5J3kcUr0HrMvJUWjZ8+qhjyB23tbDuyLOYL8Ff78gYsez
-	4Rl08xudmXi4esCQ0R1MchVjt7wblGlvhFgW0MjUMRkF5sMCDfftTXNFDzN17hnrWeZYOJvLq0Ic
-	WjZ+XcEjj/7Pkld0zkmvziDInX9WdMov2kn2yXjdwv61T+KDYyYtREgszdyFwv8IxCB3p/oCKvxr
-	eyISh3JGb7OS5oVgiO+kDxZrVPLz3MmEGC2PrUKqLq5WmHK+Nw==
-X-Originating-IP: 88.159.208.100
-X-Spampanel-Domain: topic.nl
-X-Spampanel-Username: 88.159.208.100
-Authentication-Results: antispamcloud.com;
-	auth=pass smtp.auth=88.159.208.100@topic.nl
-X-Spampanel-Outgoing-Class: ham
-X-Spampanel-Outgoing-Evidence: SB/global_tokens (0.00747268488635)
-X-Recommended-Action: accept
-Subject: Re: "krb" fails to build, suspect GCC bug
+	Wed, 28 Oct 2015 08:43:54 +0000 (UTC)
+Received: by wijp11 with SMTP id p11so246093614wij.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Oct 2015 01:43:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=o6dzHlar5MJ6fZqDem7Rr+Sk+UC8xCyuILa5RYvD8Uk=;
+	b=QHGxb+VcNJBjh/EcKnsUTYsinGv8uQyJUzfRu9mRuV43p7/m9W/7lkcl1jgrnkIKS5
+	FxXFe7NfqI4/SZC4ajnO68kCo51dySSo4/dBZMHXE1POxqLguUqO2EwRUBVaqTHI5CkB
+	AjgOAWiuH5obuTr3orx7AXTdS/nc0JfQOrKJcuyTwZJJYmMLDm7YHVROemnV435RLzgT
+	BZ/GrCH7sPG0uaRKydo0MJ479hb4bo0wgIWIZV2Tv6JpWVDlDNu/HG0bdB5+d1gOVYIf
+	VZTOjQQ8MhQMDqkuGiiS310X1lu7Fgbz9uO5HjrwoBIca6p9M3/Cb7zXdovInlYmGS24
+	b4HA==
+X-Received: by 10.194.48.113 with SMTP id k17mr31401901wjn.62.1446021834660;
+	Wed, 28 Oct 2015 01:43:54 -0700 (PDT)
+Received: from linuxdev.toradex.int ([46.140.72.82])
+	by smtp.gmail.com with ESMTPSA id
+	w9sm27417283wjf.20.2015.10.28.01.43.53
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 28 Oct 2015 01:43:53 -0700 (PDT)
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 28 Oct 2015 09:43:33 +0100
+Message-Id: <1446021813-26270-1-git-send-email-max.oss.09@gmail.com>
+X-Mailer: git-send-email 1.9.3
+Subject: [meta-browser][PATCH] chromium: fix missing include of sys/stat.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,108 +42,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2015 08:23:57 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 28 Oct 2015 08:43:59 -0000
 
-=EF=BB=BFOn 27-10-15 21:25, Martin Jansa wrote:
-> On Tue, Oct 27, 2015 at 08:57:42PM +0100, Martin Jansa wrote:
->> On Tue, Oct 27, 2015 at 11:26:32AM -0700, Khem Raj wrote:
->>> On Tue, Oct 27, 2015 at 11:21 AM, Martin Jansa <martin.jansa@gmail.com>=
- wrote:
->>>> On Sat, Sep 05, 2015 at 02:39:14PM +0200, Mike Looijmans wrote:
->>>>> I got this weird build failure from the "krb" package:
->>>>>
->>>>> | make[3]: Entering directory
->>>>> '/TOPDIR/build/tmp/work/mips32el-oe-linux/krb5/1.13.2-r0/krb5-1.13.2/=
-src/lib/krb5/ccache'
->>>>> | mipsel-oe-linux-gcc  -mel -mabi=3D32 -mhard-float -march=3Dmips32
->>>>> --sysroot=3D/TOPDIR/build/tmp/sysroots/formuler1 -fPIC -DSHARED
->>>>> -DHAVE_CONFIG_H  -I../../../include -I../../../include -I./ccapi -I. =
--I.
->>>>>    -DKRB5_DEPRECATED=3D1 -DKRB5_PRIVATE  -Os -pipe -g
->>>>> -feliminate-unused-debug-types -DDESTRUCTOR_ATTR_WORKS=3D1
->>>>> -I/TOPDIR/build/tmp/sysroots/formuler1/usr/include/et -Wall -Wcast-al=
-ign
->>>>> -Wshadow -Wmissing-prototypes -Wno-format-zero-length -Woverflow
->>>>> -Wstrict-overflow -Wmissing-format-attribute -Wmissing-prototypes
->>>>> -Wreturn-type -Wmissing-braces -Wparentheses -Wswitch -Wunused-functi=
-on
->>>>> -Wunused-label -Wunused-variable -Wunused-value -Wunknown-pragmas
->>>>> -Wsign-compare -Werror=3Duninitialized -Werror=3Dpointer-arith
->>>>> -Werror=3Ddeclaration-after-statement
->>>>> -Werror-implicit-function-declaration -pthread -c cc_file.c -o
->>>>> cc_file.so.o && mv -f cc_file.so.o cc_file.so
->>>>> | cc_file.c: In function 'fcc_next_cred':
->>>>> | cc_file.c:368:9: error: 'maxsize' may be used uninitialized in this
->>>>> function [-Werror=3Dmaybe-uninitialized]
->>>>> |      ret =3D load_data(context, id, maxsize, buf);
->>>>> |          ^
->>>>> | cc_file.c:1091:12: note: 'maxsize' was declared here
->>>>> |      size_t maxsize;
->>>>> |             ^
->>>>> | cc1: some warnings being treated as errors
->>>>>
->>>>> Looking at the source, this doesn't make any sense at all. The
->>>>> declaration of the variable isn't even in the same method body. And t=
-he
->>>>> line it complains about is about the fifth time it passes that variab=
-le
->>>>> to another method.
->>>>>
->>>>> And working around it by initializing maxsize=3D0 just makes the comp=
-iler
->>>>> choke on a similar situation elsewhere:
->>>>> | packet.c:50:67: error: 'id' may be used uninitialized in this funct=
-ion
->>>>>
->>>>>
->>>>> I suspect the problem here is GCC and not the krb code. Anyone seen t=
-his?
->>>>
->>>> I've seen it today in my world builds, It seems to fail only when buil=
-ding with -Os.
->>>>
->>>> I've seen similar issue in mdadm, also only with -Os.
->>>>
->>>
->>> is this regression ? or seen for first time?
->>
->> krb5 fails to build like this with -Os at least since dizzy
+Explicitely include a needed header to fix compile time error.
 
-Since the move to gcc5 this fails. This workaround makes the build pass onc=
-e more:
+sys/stat.h used to be indirectly included from another header but
+no longer is.
 
-https://github.com/OpenPLi/openpli-oe-core/commit/781fea2e5e5e9a18ee905a01b=
-1e2ee80b3aa4721
+Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+---
+ .../chromium-40/add_missing_stat_h_include.patch   | 39 ++++++++++++++++++++++
+ recipes-browser/chromium/chromium_40.0.2214.91.bb  |  1 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 recipes-browser/chromium/chromium/chromium-40/add_missing_stat_h_include.patch
 
-...
-> Quick grep in my last -Os world build shows 2 more recipes with
-> similar issue (smbnetfs is failing in krb5 dependency already):
-...
-
-I suspect the bug is in GCC, not in the code of these recipes.
-
-
-Kind regards,
-
-Mike Looijmans
-System Expert
-
-TOPIC Embedded Products
-Eindhovenseweg 32-C, NL-5683 KH Best
-Postbus 440, NL-5680 AK Best
-Telefoon: +31 (0) 499 33 69 79
-Telefax: +31 (0) 499 33 69 70
-E-mail: mike.looijmans@topicproducts.com
-Website: www.topicproducts.com
-
-Please consider the environment before printing this e-mail
-
-Visit us at : Aerospace Electrical Systems Expo Europe which will be held f=
-rom 17.11.2015 till 19.11.2015, Findorffstrasse 101 Bremen, Germany, Hall 5=
-, stand number C65
-http://www.aesexpo.eu
-
+diff --git a/recipes-browser/chromium/chromium/chromium-40/add_missing_stat_h_include.patch b/recipes-browser/chromium/chromium/chromium-40/add_missing_stat_h_include.patch
+new file mode 100644
+index 0000000..64fe840
+--- /dev/null
++++ b/recipes-browser/chromium/chromium/chromium-40/add_missing_stat_h_include.patch
+@@ -0,0 +1,39 @@
++sys/stat.h used to be indirectly included through
++device/udev_linux/scoped_udev.h -> libudev.h -> sys/stat.h
++but libudev.h in jethro no longer includes sys/stat.h resulting in the
++following compile time errors:
++
++arm-angstrom-linux-gnueabi-g++ ...  ../../components/storage_monitor/storage_monitor_linux.cc -o obj/components/storage_monitor/storage_monitor.storage_monitor_linux.o
++../../components/storage_monitor/storage_monitor_linux.cc: In function 'scoped_ptr<storage_monitor::StorageInfo> storage_monitor::{anonymous}::GetDeviceInfo(const base::FilePath&, const base::FilePath&)':
++../../components/storage_monitor/storage_monitor_linux.cc:132:15: error: aggregate 'storage_monitor::{anonymous}::GetDeviceInfo(const base::FilePath&, const base::FilePath&)::stat device_stat' has incomplete type and cannot be defined
++   struct stat device_stat;
++               ^
++../../components/storage_monitor/storage_monitor_linux.cc:133:53: error: invalid use of incomplete type 'struct storage_monitor::{anonymous}::GetDeviceInfo(const base::FilePath&, const base::FilePath&)::stat'
++   if (stat(device_path.value().c_str(), &device_stat) < 0)
++                                                     ^
++../../components/storage_monitor/storage_monitor_linux.cc:132:10: error: forward declaration of 'struct storage_monitor::{anonymous}::GetDeviceInfo(const base::FilePath&, const base::FilePath&)::stat'
++   struct stat device_stat;
++          ^
++../../components/storage_monitor/storage_monitor_linux.cc:137:34: error: 'S_ISCHR' was not declared in this scope
++   if (S_ISCHR(device_stat.st_mode))
++                                  ^
++../../components/storage_monitor/storage_monitor_linux.cc:139:39: error: 'S_ISBLK' was not declared in this scope
++   else if (S_ISBLK(device_stat.st_mode))
++                                       ^
++
++As the code makes use of stat systemcalls include the file explicitely.
++Tested with ARCH armv7.
++
++Signed-off-by: Max Krummenacher <max.oss.09 at gmail.com>
++Upstream-Status: Pending
++
++--- chromium-40.0.2214.91/components/storage_monitor/storage_monitor_linux.cc~	2015-01-21 21:28:16.000000000 +0100
+++++ chromium-40.0.2214.91/components/storage_monitor/storage_monitor_linux.cc	2015-10-27 13:21:08.405655894 +0100
++@@ -8,6 +8,7 @@
++ 
++ #include <mntent.h>
++ #include <stdio.h>
+++#include <sys/stat.h>
++ 
++ #include <list>
++ 
+diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+index 44f8593..8bc05ee 100644
+--- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
++++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+@@ -27,6 +27,7 @@ SRC_URI = "\
+         file://google-chrome \
+         file://google-chrome.desktop \
+         file://chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch \
++        file://chromium-40/add_missing_stat_h_include.patch \
+ "
+ #
+ # * use-egl : Without this packageconfig, the Chromium build will use GLX for creating an OpenGL context in X11,
+-- 
+1.9.3
 
 
