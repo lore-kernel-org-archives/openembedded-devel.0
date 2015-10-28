@@ -1,37 +1,21 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f51.google.com (mail-qg0-f51.google.com
-	[209.85.192.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A57E76710
+Return-Path: <prvs=736b72a50=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id BD3AE76710
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 12:28:10 +0000 (UTC)
-Received: by qgem9 with SMTP id m9so4405536qge.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 05:28:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:from:date:to:subject:user-agent;
-	bh=b0OkOoTK+9H9O13g92Gu4rU2iXXlR3o3fstlYiuwIH0=;
-	b=EEPCvp5i2GrGrWRf6zczdqT0RNLjvWXGa0NbVmCDw07ED12B2A8gjzIz4flkAjF7Qb
-	1SxwmOL1t0kCCiGjsNkDffxJDL5XBoywKUiHYxU1bxynOtFjyK4FB1uW2NlsjgHAaoqb
-	1S78uut5CpqMCmcP/jz7DRjggwlkb6hq17PtYdZdBADCgNB0gizuGFs9x5e8U3upvLy5
-	L2W8GYpaOiPsd4tE39OMv2RW/De6HzuBQgTEWkKwb7wHDHGbr14tpzjtE7alNpyGY7wR
-	IVnbc7LOZp4K2BhnyqJVw9X4u2+BO/hnisPVNIwvJQG0hk/+8ZLYnabCf4b0siTe69cb
-	WRxg==
-X-Received: by 10.140.233.130 with SMTP id e124mr59796950qhc.79.1446035290305; 
-	Wed, 28 Oct 2015 05:28:10 -0700 (PDT)
-Received: from localhost ([177.100.174.62])
-	by smtp.gmail.com with ESMTPSA id c7sm17028272qgc.2.2015.10.28.05.28.07
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 28 Oct 2015 05:28:09 -0700 (PDT)
-Message-ID: <5630bf59.071e8c0a.b7e1d.3ca6@mx.google.com>
-Received: by localhost (sSMTP sendmail emulation);
-	Wed, 28 Oct 2015 10:28:04 -0200
-From: "Otavio Salvador" <otavio.salvador@gmail.com>
-Date: Wed, 28 Oct 2015 10:28:04 -0200
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-User-Agent: mail v14.8.5
-Subject: Updates to meta-browser (master) in 2015-10-28
+	Wed, 28 Oct 2015 12:40:25 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AqoEAMDBMFasEApK/2dsb2JhbABehHkGum2GCYULgRACggoBAQEBAQGBC4Q2AQEEbgsQGDlXBg4FiDXFPwEBAQEGAQEBAQEehneJKWUHF4QXBZY9jn2EP4MYkwSEaHGENEOBBgEBAQ
+X-IPAS-Result: AqoEAMDBMFasEApK/2dsb2JhbABehHkGum2GCYULgRACggoBAQEBAQGBC4Q2AQEEbgsQGDlXBg4FiDXFPwEBAQEGAQEBAQEehneJKWUHF4QXBZY9jn2EP4MYkwSEaHGENEOBBgEBAQ
+From: Richard Leitner <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 28 Oct 2015 13:38:55 +0100
+Message-ID: <1446035935-3070-2-git-send-email-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.1.4
+In-Reply-To: <1446035935-3070-1-git-send-email-richard.leitner@skidata.com>
+References: <1446035935-3070-1-git-send-email-richard.leitner@skidata.com>
+MIME-Version: 1.0
+X-Originating-IP: [172.16.60.30]
+Subject: [meta-java][PATCH 2/2] README: add -M to git format-patch suggestion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,30 +29,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2015 12:28:14 -0000
+X-List-Received-Date: Wed, 28 Oct 2015 12:40:26 -0000
+Content-Type: text/plain
 
-Hello,
+Add the detect renames parameter to the git-format-patch suggestion in
+the README file. This should be used for patches sent to the mailinglist.
+For more information on the parameter see "man git-format-patch"
 
-I pushed following updates:
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+---
+ README | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-commit c44a4ac0970938999c2533042a6629f37d7047cc (HEAD -> pending, origin/master, origin/HEAD)
-Author: Max Krummenacher <max.oss.09@gmail.com>
-Date:   Wed Oct 28 09:43:33 2015 +0100
+diff --git a/README b/README
+index 630e368..3b95c13 100644
+--- a/README
++++ b/README
+@@ -36,7 +36,7 @@ Source code:
+ 
+ When creating patches, please use something like:
+ 
+-    git format-patch -s --subject-prefix='meta-java][PATCH' origin
++    git format-patch -M -s --subject-prefix='meta-java][PATCH' origin
+ 
+ When sending patches, please use something like:
+ 
+-- 
+2.1.4
 
-    chromium: fix missing include of sys/stat.h
-    
-    Explicitely include a needed header to fix compile time error.
-    
-    sys/stat.h used to be indirectly included from another header but
-    no longer is.
-    
-    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-
-Regards,
-
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
