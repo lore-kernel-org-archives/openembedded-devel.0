@@ -1,41 +1,41 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 26A6676E04
+Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
+	[209.85.220.54])
+	by mail.openembedded.org (Postfix) with ESMTP id AA88B76E04
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 16:22:47 +0000 (UTC)
-Received: by padhy1 with SMTP id hy1so5416658pad.0
+	Wed, 28 Oct 2015 16:23:49 +0000 (UTC)
+Received: by pasz6 with SMTP id z6so11402953pas.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 09:22:47 -0700 (PDT)
+	Wed, 28 Oct 2015 09:23:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=subject:to:references:cc:from:message-id:date:user-agent
 	:mime-version:in-reply-to:content-type:content-transfer-encoding;
-	bh=/GuBojfYhXMquu7I1UvTJL9ecMuTo2PWLoWCLv0qnvc=;
-	b=c694DyFOX6zhIwsY3+uP8Zai1Z9Fu4fvy2xhzle2dlW4nnYd4ee2tNvqoWkW2UGbBJ
-	uLvHq9Sh5MLy07S0YzoV++8L9SG3HGildtyPYSif7MOoL273w9sBixFUQLx5KEcMgW5W
-	mjeuiQKnLHYGvPFHsy4EeTu1PwsWJyNiexHrg3EWVzzrqRMuFpE7IoAOHc5G7zwRv2bg
-	pC1LCyx5UgbO5yp4iaD6xA3riJcbDh6U8ibqeqPZAIn6eqkuE3PMHxFVdD6koYxfBE+p
-	XxWLdTPVG8+WR3ix+yz2bcgkthQ+K7DkwJZib2j3RDOMcbpSqNB7RL3ZF+0R1JokvZde
-	ot7A==
-X-Received: by 10.68.179.101 with SMTP id df5mr35470209pbc.73.1446049367817;
-	Wed, 28 Oct 2015 09:22:47 -0700 (PDT)
+	bh=/Y8o7kV6pE9k5ALnJmX4OpktGjKhWV314/1Yr8aWrgM=;
+	b=pZq+TwMmYusAD9nv8N75YltQglAhxt7Rktwug2nv+KyPiMNyE173gZlq9QMvRY5DeP
+	U0J0R6LLtBN5Vy0mc0EQ5ABpSK4aIPeV3i2FukCTbTHzWyFbgbsMN84wr34X/CKwx6hx
+	JaRoepBRcUyb74OLuLvjeXKiibRHTw0R+ty7/I0Gii365ZPaS3svT4SxfMUnVv7E/B5Q
+	3e9LnxNO7ppA0uwNlsr6/cgCMb13tqIxtp+5vzIetxif5p7qfjnAuqdY1Ewcj/xlB3r4
+	ig/dPCOJq0KvEtoS/Q07PCudx32zB5UX7arrXII8bp4g33lPXHnQD8xFYPRScaj3m17m
+	VYVg==
+X-Received: by 10.68.134.73 with SMTP id pi9mr35901173pbb.169.1446049429922;
+	Wed, 28 Oct 2015 09:23:49 -0700 (PDT)
 Received: from ?IPv6:2601:202:4000:1239:64b8:1072:ca0d:242?
 	([2601:202:4000:1239:64b8:1072:ca0d:242])
 	by smtp.googlemail.com with ESMTPSA id
-	nj1sm46318720pbc.2.2015.10.28.09.22.46
+	bt1sm3978915pbb.88.2015.10.28.09.23.48
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 28 Oct 2015 09:22:47 -0700 (PDT)
-To: Roy Li <rongqing.li@windriver.com>
-References: <1445914005-23569-1-git-send-email-rongqing.li@windriver.com>
+	Wed, 28 Oct 2015 09:23:48 -0700 (PDT)
+To: george.mccollister@gmail.com
+References: <1445897141-24786-1-git-send-email-george.mccollister@gmail.com>
 From: akuster808 <akuster808@gmail.com>
-Message-ID: <5630F654.6010009@gmail.com>
-Date: Wed, 28 Oct 2015 09:22:44 -0700
+Message-ID: <5630F692.6050109@gmail.com>
+Date: Wed, 28 Oct 2015 09:23:46 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
 	Thunderbird/38.3.0
 MIME-Version: 1.0
-In-Reply-To: <1445914005-23569-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1445897141-24786-1-git-send-email-george.mccollister@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH 1/3] dovecot: add PACKAGECONFIG for lz4
+Subject: Re: [meta-webserver][PATCH] apache2: fix config_vars.mk path contamination
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,35 +49,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2015 16:22:49 -0000
+X-List-Received-Date: Wed, 28 Oct 2015 16:23:49 -0000
 Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 7bit
 
-Roy,
+George,
 
-Should any of these be back ported to Fido and Dizzy?
+Should this be backported to fido and/or dizzy?
 
 - armin
 
-On 10/26/2015 07:46 PM, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
+On 10/26/2015 03:05 PM, George McCollister wrote:
+> Replace contaminated paths with staging paths so apxs can be successfully used
+> in other recipes to build modules when host and target arch differ.
 > 
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> Signed-off-by: George McCollister <george.mccollister@gmail.com>
 > ---
->  meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb | 1 +
->  1 file changed, 1 insertion(+)
+>  meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb | 4 ++++
+>  1 file changed, 4 insertions(+)
 > 
-> diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb
-> index 9b5f536..a01ef83 100644
-> --- a/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb
-> +++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb
-> @@ -23,6 +23,7 @@ PACKAGECONFIG ??= " \
+> diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
+> index af5c72a..b62fd8c 100644
+> --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
+> +++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
+> @@ -117,6 +117,10 @@ apache_sysroot_preprocess () {
+>      sed -i 's!^APR_CONFIG = .*!APR_CONFIG = ${STAGING_BINDIR_CROSS}/apr-1-config!' ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk
+>      sed -i 's!^APU_CONFIG = .*!APU_CONFIG = ${STAGING_BINDIR_CROSS}/apu-1-config!' ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk
+>      sed -i 's!^includedir = .*!includedir = ${STAGING_INCDIR}/apache2!' ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk
+> +    sed -i 's!^CFLAGS = -I[^ ]*!CFLAGS = -I${STAGING_INCDIR}/openssl!' ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk
+> +    sed -i 's!^EXTRA_LDFLAGS = .*!EXTRA_LDFLAGS = -L${STAGING_LIBDIR}!' ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk
+> +    sed -i 's!^EXTRA_INCLUDES = .*!EXTRA_INCLUDES = -I$(includedir) -I. -I${STAGING_INCDIR}!' ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk
+> +    sed -i 's!--sysroot=[^ ]*!--sysroot=${STAGING_DIR_HOST}!' ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk
+>  }
 >  
->  PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
->  PACKAGECONFIG[ldap] = "--with-ldap=plugin,--without-ldap,openldap,"
-> +PACKAGECONFIG[lz4] = "--with-lz4,--without-lz4,lz4,"
->  
->  # From native build in armv7a-hf/eglibc
->  CACHED_CONFIGUREVARS += "i_cv_signed_size_t=no \
+>  #
 > 
 
