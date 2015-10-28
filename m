@@ -1,38 +1,33 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A4B676710
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 9518576E04
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 19:59:07 +0000 (UTC)
-Received: by wmeg8 with SMTP id g8so11586252wme.0
+	Wed, 28 Oct 2015 20:55:08 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ZrXkP-0004iT-Bp for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Oct 2015 21:55:05 +0100
+Received: from hsi-kbw-078-043-227-090.hsi4.kabel-badenwuerttemberg.de
+	([78.43.227.90]) by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Oct 2015 21:55:05 +0100
+Received: from js by hsi-kbw-078-043-227-090.hsi4.kabel-badenwuerttemberg.de
+	with local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 12:59:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to;
-	bh=fXXQRTNF0jgTwRbiOLq1j+lWjC20V7JFwP2eP+mLx/Y=;
-	b=jVPR5Wm28kw9YYcEqRDuUhYg7zBjqb3xO4gizSVyQRvvSwl87KLn9N30n8IZm823wt
-	SJVv6FH2zpoI1WvbZT3uNxekpkzAAER9aGbzio6s3oNBYsxKdsAleJv3HqypYbVv7xmc
-	idvouhX3SU44KoYfucCdkjXnwKw+S8FuD4MBAZqnEgvEtvzIezr3eBeKoEayWNVlSy3P
-	twwY73hcf9CpJaUI7kTzqcyZz0kfMWlSFmo1SZ2c4HiaZ0cBHtw7VKHrZ6xpm8tP4MXs
-	EBu8mcMqzYHe9it1KlI2354bkx0bC5UuXX+dqqSv9JRqSa1BusEAe3we8pA7uMqFHMX0
-	P+BQ==
-X-Received: by 10.28.54.211 with SMTP id y80mr2624626wmh.3.1446062347543;
-	Wed, 28 Oct 2015 12:59:07 -0700 (PDT)
-Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
-	by smtp.gmail.com with ESMTPSA id t20sm5486073wme.0.2015.10.28.12.59.06
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 28 Oct 2015 12:59:06 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-From: Jens Rehsack <rehsack@gmail.com>
-In-Reply-To: <CACS+7ZR3ok=Dh-ckPXwYVOjVVprkU30TPP_chAtAfCQ5LioXgQ@mail.gmail.com>
-Date: Wed, 28 Oct 2015 20:59:05 +0100
-Message-Id: <96E09775-068F-43DC-BB69-96171C19B783@gmail.com>
-References: <D1946B41-2BFF-49FA-A4C7-19A2A1D6C731@gmail.com>
-	<CACS+7ZR3ok=Dh-ckPXwYVOjVVprkU30TPP_chAtAfCQ5LioXgQ@mail.gmail.com>
+	Wed, 28 Oct 2015 21:55:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.2104)
-Subject: Re: [meta-java][PATCH 4/4] openjdk-8: add recipes for openjdk-8 and openjre-8
+From: Joachim Schiele <js@lastlog.de>
+Date: Wed, 28 Oct 2015 21:35:44 +0100
+Message-ID: <n0rbj0$tj9$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: hsi-kbw-078-043-227-090.hsi4.kabel-badenwuerttemberg.de
+X-Mozilla-News-Host: news://news.gmane.org:119
+X-Enigmail-Draft-Status: N1110
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
+Subject: [meta-qt5] how to setup and use a cross-compiler for qt5 applications?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,50 +41,293 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2015 19:59:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 28 Oct 2015 20:55:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+hi,
+
+i need some directions on how to go on.
 
 
-> Am 28.10.2015 um 20:34 schrieb Dan McGregor =
-<danismostlikely@gmail.com>:
->=20
-> On 28 October 2015 at 12:01, Jens Rehsack <rehsack@gmail.com> wrote:
->>=20
->> This adds openjdk-8 for native and target builds and allows a =
-stripped
->> openjre-8 being built as well instead of trying to cherry-pick jre
->> components from jdk-image.
->>=20
->> The recipes allow building openjdk-8 with or without:
->> * x11
->> * cups
->> * alsa/pulseaudio
->> and let packager enable unlimited-crypto, if desired.
->>=20
->> Since there can be only one PROVIDES for virtual/java-native and =
-virtual/javac-native,
->> move the provides to openjdk-8-native (I think everyone agrees it's a =
-better
->> choice than ecj-bootstrap-native).
->>=20
->> Plus: Applying a fix from openjdk-9 repository which fixes build =
-issues using gcc5
->>=20
->> Signed-off-by: Jens Rehsack <sno@netbsd.org>
->=20
-> My biggest issue with this patchset (I haven't looked at it too
-> closely yet, but it does seem to work) is
-> that the new recipes and recipe include files have inconsistent
-> whitespace. This matches the openjdk-7
-> recipes, but I'd rather not see it perpetuated with new recipes. How
-> you feel about doing a tab kill and
-> using spaces?
+# questions
+- should i use meta-qt5 master instead of daisy on my platform?
+- is meta-toolchain-qt5 the right way to cross compile an application
+vom x86_64 to ppc64 or did i miss something?
+- how to get all qtdemo applications onto the target image (read:
+sd-card image)
 
-Fine with me ;)
 
-Cheers
---=20
-Jens Rehsack - rehsack@gmail.com
+
+
+
+# my requirements
+- develop qt 5.x applications on yocto+poky on PPC64
+- either use a cross compiler, meta-toolchain-qt5, or compile software
+natively
+
+for testing:
+- want all qt5 demos (or qtdemo, or what it is actually called) on the
+ppc64 target to execute them and see that qt5 actually is working
+
+# my platform
+- freescale ppc64 board (big endian) using QorIQ 1.8 from freescale
+
+Build Configuration:
+BB_VERSION        = “1.22.0“
+BUILD_SYS         = “x86_64-linux"
+NATIVELSBSTRING   = “Ubuntu-14.04“
+TARGET_SYS        = “powerpc64-fsl-linux"
+MACHINE           = “t4240rdb-64b"
+DISTRO            = “fsl-networking"
+DISTRO_VERSION    = “QorIQ-SDK-V1.8“
+TUNE_FEATURES     = “m64 fpu-hard e6500 altivec"
+TARGET_FPU        = “hard"
+meta
+meta-yocto
+meta-yocto-bsp    = “daisy:18837ea4cdd4fdab608e0a032a11a2dfb6b1ee1a"
+meta-fsl-ppc      = “daisy:ed8d8f097eb9fb9c4d76cfeb617da5ce72d9b414“
+meta-fsl-toolchain = “daisy:a253b3594d8d9e0a4ed869d1fb502c395c4438ac"
+meta-fsl-networking = “daisy:6eb28ed659bbadfa470237dfce98bcbf53c18fe1“
+meta-oe
+meta-networking
+meta-ruby
+meta-perl
+meta-filesystems
+meta-multimedia
+meta-xfce
+meta-gnome        = “daisy:4a44c4107899363b22c01eb5621b0c86db1c659c"
+meta-security     = “daisy:9f4c3849521465b459845dcc1a7a885bacaae9d9“
+meta-qt5          = “daisy:23405d3a66c308e0b2ea64308b834285850c5c9f"
+
+# after building and installing on the freescale PPC64 board
+
+- qt 5.2.1 from meta-qt5::daisy
+ - i got qt 5.2.1 working, qt assistant can be started! however, it
+ - does not install qmake into the target
+ - does not install the qt examples
+
+i can't use this to compile anything natively without qmake/moc. see
+https://github.com/meta-qt5/meta-qt5/blob/daisy/recipes-qt/qt5/qtbase.inc#L204
+
+
+
+# meta-toolchain-qt5
+
+bitbake meta-toolchain-qt5 builds:
+
+fsl-networking-eglibc-x86_64-ppc64e6500-toolchain-QorIQ-SDK-V1.8.sh
+
+after installation on a different VM i do this:
+
+cd /opt/fsl-networking/QorIQ-SDK-V1.8/
+
+ls
+environment-setup-ppc64e6500-fsl-linux
+environment-setup-ppce6500-fsl-linux
+site-config-ppc64e6500-fsl-linux
+site-config-ppce6500-fsl-linux
+sysroots
+version-ppc64e6500-fsl-linux
+version-ppce6500-fsl-linux
+
+note: i also tried environment-setup-ppce6500-fsl-linux but doesn't work
+either
+
+source  environment-setup-ppc64e6500-fsl-linux
+
+cd ~/screenshot-example/
+
+which qmake
+/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/x86_64-fslsdk-linux/usr/bin/qt5/qmake
+
+qmake
+Project ERROR: Unknown module(s) in QT: widgets gui core
+
+
+
+
+
+
+
+
+
+# my local.conf
+
+... some lines i think are not important ...
+
+MACHINE ??= "t4240rdb"
+
+SDKMACHINE            ?= "x86_64"
+TOOLCHAIN_BUILD       ?= "True"
+DEFAULTTUNE           ?= "ppc64e6500"
+
+DISTRO_FEATURES_append = " opengl"
+DISTRO_FEATURES_remove = "bluetooth irda wifi nfc virtualization
+pulseaudio wayland 3g touch touchscreen"
+MACHINE_FEATURES_remove = "touchscreen"
+
+# EXTRA_IMAGE_FEATURES: Valid features: dbg-pkgs debug-tweaks dev-pkgs
+doc doc-pkgs eclipse-debug hwcodecs nfs-server
+# package-management ptest-pkgs qt4-pkgs qtcreator-debug
+read-only-rootfs splash ssh-server-dropbear ssh-server-openssh
+# staticdev-pkgs tools-debug tools-profile tools-sdk tools-testapps x11
+x11-base x11-sato
+EXTRA_IMAGE_FEATURES += "dev-pkgs ssh-server-openssh tools-debug
+tools-sdk tools-debug tools-profile"
+
+# this created the 'qtbase-examples' once, so now this issue seems to be
+not relevant anymore:
+PACKAGECONFIG_append_pn-qtbase = " tools icu examples accessibility gl
+udev openssl widgets developer sql-sqlite sql-mysql sql-psql sm"
+
+
+#PACKAGECONFIG_remove_pn-qttools= "qtwebkit"
+
+#qtbase-examples, ERROR: qtbase-examples not found in the base feeds
+(t4240rdb_64b ppc64e6500 powerpc64 noarch any all).
+#query the config with this command:
+#   bitbake -e qtbase | grep ^PACKAGECONFIG=
+
+# For recipes inheriting the packagegroup class, setting
+PACKAGEGROUP_DISABLE_COMPLEMENTARY to "1"
+# specifies that the normal complementary packages (i.e. -dev, -dbg, and
+so forth) should not be
+# automatically created by the packagegroup recipe, which is the default
+behavior.
+# FIXME PACKAGEGROUP_DISABLE_COMPLEMENTARY = "0"
+
+# FIXME should packagegroup-xfce-base be removed from IMAGE_INSTALL_append?
+CORE_IMAGE_EXTRA_INSTALL += "\
+  packagegroup-xfce-base \
+  packagegroup-xfce-extended \
+  packagegroup-xfce-multimedia \
+  packagegroup-qt5-toolchain-target \
+  packagegroup-qt5-qtcreator-debug \
+"
+
+IMAGE_INSTALL_append  += "gcc g++ binutils gdb \
+                          git subversion \
+                          bc \
+                          nix libxslt libdbd-sqlite-perl www-curl-perl \
+                          mariadb \
+                          postgresql \
+                          libgcc libgcc-dev \
+                          libstdc++ libstdc++-dev \
+                          automake ccache chkconfig \
+                          glib-2.0 glib-networking glibmm \
+                          packagegroup-core-buildessential pkgconfig \
+                          cmake zlib \
+                          boost jpeg libpng12 \
+                          cairo pango fontconfig freetype pulseaudio dbus \
+                          xterm vim nano \
+                          ruby \
+                          libstdc++-staticdev \
+                          autoconf \
+                          alsa-lib alsa-tools alsa-state
+alsa-utils-alsaconf \
+                          i2c-tools \
+                          cpufrequtils \
+                          gstreamer1.0               \
+                          gstreamer1.0-meta-base     \
+                          gstreamer1.0-plugins-bad   \
+                          gstreamer1.0-plugins-base  \
+                          gstreamer1.0-plugins-good  \
+                          pciutils \
+                          usbutils \
+                          python-core \
+                          ltrace \
+                          strace \
+                          linux-firmware \
+                          htop \
+                          tcpdump \
+                          bash \
+                          util-linux \
+                          e2fsprogs \
+                          e2fsprogs-mke2fs \
+                          e2fsprogs-e2fsck \
+                          e2fsprogs-tune2fs \
+                          mtd-utils \
+                          mtd-utils-jffs2 \
+                          mtd-utils-ubifs \
+                          dosfstools \
+                          net-tools \
+                          kmod \
+                          sysfsutils \
+                          sysklogd \
+                          sysstat \
+                          qtbase               \
+                          qttools              \
+                          qtconnectivity       \
+                          qtdeclarative        \
+                          qtimageformats       \
+                          qtlocation           \
+                          qtscript             \
+                          qtsensors            \
+                          qtserialport         \
+                          qtxmlpatterns        \
+                          qtx11extras          \
+                          qtsvg                \
+                          qtmultimedia         \
+                          qtquick1             \
+"
+
+#
+#
+#
+#
+#
+# not found in base feeds issued packages:
+#                          qttools-native       \
+#                          qtquickcontrols      \
+#                          qtgraphicaleffects   \
+#ERROR: qtgraphicaleffects not found in the base feeds (t4240rdb_64b
+ppc64e6500 powerpc64 noarch any all).
+
+# stuff i don't want for now
+#
+#                          nativesdk-qttools    \
+#                          qtbase-native        \
+#                          qtwebkit             \
+#                          qtwebkit-examples    \
+#
+#
+#qtdeclarative \
+# packages which fail on installation
+#libglu mesa-glut
+#cinematicexperience \
+#
+#IMAGE_INSTALL_append  \
+#    qtdeclarative-plugins \
+#    qtdeclarative-tools \
+#    qtdeclarative-examples \
+#    qtdeclarative-qmlplugins \
+#    qtmultimedia \
+#    qtmultimedia-plugins \
+#    qtmultimedia-examples \
+#    qtmultimedia-qmlplugins \
+#    qtsvg \
+#    qtsvg-plugins \
+#    qtsensors \
+#    qtimageformats-plugins \
+#    qtsystems \
+#    qtsystems-tools \
+#    qtsystems-examples \
+#    qtsystems-qmlplugins \
+#    qtscript \
+#    qt3d \
+#    qt3d-examples \
+#    qt3d-qmlplugins \
+#    qt3d-tools \
+#    qtwebkit \
+#    qtwebkit-examples-examples \
+#    qtwebkit-qmlplugins \
+#    qtgraphicaleffects-qmlplugins \
+#    qtconnectivity-qmlplugins \
+#    qtlocation-plugins \
+#    qtlocation-qmlplugins \
+#    "
+
+#
 
 
