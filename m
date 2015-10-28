@@ -1,34 +1,34 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 8052D75894
+Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
+	[209.85.220.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 2180773695
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 05:12:13 +0000 (UTC)
-Received: by pacfv9 with SMTP id fv9so255855283pac.3
+	Wed, 28 Oct 2015 07:31:36 +0000 (UTC)
+Received: by pasz6 with SMTP id z6so248403312pas.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2015 22:12:13 -0700 (PDT)
+	Wed, 28 Oct 2015 00:31:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=ykbSBQ7zSNAZZYEL4sj0CO1zi88ccI0duO9cBTn2II8=;
-	b=cVsipX5pe/RKfedeC2U8JryHD3Em+Q9MPz3xKHbkqI2wVVhwjJ+RxKtvioFd2jQ7XE
-	pgCpLKVjkgc2KraM9dNXNznKSMQCRdhPn8zjFlrWyhZPJAOlDazQOc5cM0t2fpRUNBcr
-	8HAvC6gyj8TQGkhK3Mnpj0mySzsCZuxxnd5za+D3+K+3KxBBh36gEAxYNdO1AOsFZDwA
-	YwPOayM//obrD0yvpuLgPlkcneIxTkx8B3G2iuaDwbZs7ngDWuGlgfL8J2n1jJuG8gzY
-	BhL8JhfXmUm5ZRtvLt+yZ4tz4N2K4Y124c132RzD81Puqn89Sfb03q8WHJ4r9UuM+bMh
-	T6vg==
-X-Received: by 10.67.4.231 with SMTP id ch7mr2829063pad.109.1446009133487;
-	Tue, 27 Oct 2015 22:12:13 -0700 (PDT)
+	bh=vLa/wuNntVPTcJ+aP8mIM5IuKTVsGicBEmfosPQzmyU=;
+	b=NaHUVzQdx5G7b/uh7bEHwZIfwiXrR1Gd8jwLCBXHlVCimddq2Ri+6Z2zwSoVjKJZvC
+	asevxhz5k7dOOkkuj/fkwSmGEyBTaIhOwwSQk3G4rSFJWtRciGf9CBlny7wNLqM4bWJe
+	a7/ft84nD/3EgwPG95pTHyDVyyuXvFBrjJaDjX5IaCK7d/yI+EjP50RPTPQPTHLmPsva
+	d+hC4z68xVWnoWYpGc6HhVvYYNohyQeCROhPUfqiDY/qgLijjsst0WzfJziviHXjz8CG
+	uRfT6Y8bu1Fh15lLPdW6flGfqUNym7uzo7SqbKX4ZeqQ6HA4QTshiiRw74Z80bn389aX
+	zBjw==
+X-Received: by 10.66.122.33 with SMTP id lp1mr23279187pab.12.1446017496466;
+	Wed, 28 Oct 2015 00:31:36 -0700 (PDT)
 Received: from localhost.localdomain (c-76-103-142-85.hsd1.ca.comcast.net.
 	[76.103.142.85]) by smtp.gmail.com with ESMTPSA id
-	b6sm42661479pbu.90.2015.10.27.22.12.12
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 27 Oct 2015 22:12:12 -0700 (PDT)
+	er1sm33124475pbb.6.2015.10.28.00.31.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 28 Oct 2015 00:31:35 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Oct 2015 22:12:07 -0700
-Message-Id: <1446009127-797-1-git-send-email-raj.khem@gmail.com>
+Date: Wed, 28 Oct 2015 00:31:29 -0700
+Message-Id: <1446017489-1131-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] lua5.1: Reintroduce and make it coexist with lua 5.3
+Subject: [meta-oe][PATCH V2] lua5.1: Reintroduce and make it coexist with lua 5.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2015 05:12:16 -0000
+X-List-Received-Date: Wed, 28 Oct 2015 07:31:38 -0000
 
 many modules still depend on lua5.1 and especially
 luajit only supports 5.1 ABI as of now with no future
@@ -824,7 +824,7 @@ index 0000000..0555e81
 + MYLDFLAGS=
 diff --git a/meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb b/meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb
 new file mode 100644
-index 0000000..44f90c4
+index 0000000..7e2a4c1
 --- /dev/null
 +++ b/meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb
 @@ -0,0 +1,70 @@
@@ -861,7 +861,6 @@ index 0000000..44f90c4
 +
 +do_configure_prepend() {
 +    sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
-+    sed -i -e s:lib/lua/${V}/:${base_libdir}/lua/${V}/:g src/luaconf.h
 +}
 +
 +do_compile () {
@@ -882,12 +881,13 @@ index 0000000..44f90c4
 +    mv ${D}${bindir}/luac ${D}${bindir}/luac${V}
 +    mv ${D}${libdir}/liblua.a ${D}${libdir}/lib${BPN}.a
 +    install -D -m 644 ${WORKDIR}/${BPN}.pc ${D}${libdir}/pkgconfig/${BPN}.pc
-+    rmdir ${D}${libdir}/lua/${V}
-+    rmdir ${D}${libdir}/lua
 +    rmdir ${D}${datadir}/lua/${V}
 +    rmdir ${D}${datadir}/lua
 +
 +}
++
++FILES_${PN} += "${libdir}/lua ${libdir}/lua/${V}"
++
 +BBCLASSEXTEND = "native"
 +
 +inherit update-alternatives
