@@ -1,34 +1,57 @@
-Return-Path: <mail@webthatworks.it>
-Received: from smtp208.alice.it (smtp208.alice.it [82.57.200.104])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E720755F4
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
+	[209.85.213.181])
+	by mail.openembedded.org (Postfix) with ESMTP id C5A4671633
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 10:20:55 +0000 (UTC)
-Received: from caronte.home.webthatworks.it (87.9.24.221) by smtp208.alice.it
-	(8.6.060.28)
-	id 55BB68E10E4AC40B for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Oct 2015 11:20:50 +0100
-Received: from gloom.home.webthatworks.it (gloom.home.webthatworks.it
-	[192.168.1.14])
-	by caronte.home.webthatworks.it (Postfix) with ESMTP id 113946FE2318
+	Wed, 28 Oct 2015 11:07:44 +0000 (UTC)
+Received: by igbdj2 with SMTP id dj2so4207800igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 11:20:50 +0100 (CET)
-Received: from [IPv6:::1] (localhost [IPv6:::1])
-	by gloom.home.webthatworks.it (Postfix) with ESMTP id CB2495E01D3
+	Wed, 28 Oct 2015 04:07:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems_com_br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:content-type; bh=V5iQEF2Y5Df9bzh+Qpg5H5vGjTIazMCdLTmAjLCrrko=;
+	b=Oj8LnWi3sO0ebJsvqNQbbyy5Yccl/VSGsIDu+b3WMCKtx6zKoV93R9qbHWwtrJXGBO
+	4jug5K+/rivNbiGLf1VDEDcIsXHLw/lwN1ZBSb8w788JIhv6uUJLQBXGYUx4G6P5J5Bn
+	bqheOCYE+dKG8b8wbx6vnFvhEPI3x1nRoqRZqkocer8Ht7T6X8O21B75/ZPZhT7GWJz9
+	wYeLdqRVFJv9qNOmC63NryOtaee+Cdm3Orn/vHCMAbWD/LdHTBUSsh/hW1D2bioqm/a1
+	eNhaLhn7jl0ztJhcuUs11soCjvKl7dECVvzgkOclj8dg0z1onSptLRIM65lV8piTmcY9
+	aKTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:content-type;
+	bh=V5iQEF2Y5Df9bzh+Qpg5H5vGjTIazMCdLTmAjLCrrko=;
+	b=ZlxQSEoM0u2AYZAC9O2UMqUOyrFKHONm3+h3wTe9wqF14A/MlclK4+55UlFXI2MvDh
+	4XAgDZKV7t5Pqe7Yd+HfSy3s+jJ721ZIuNtpEzEg7tpUpu26aS/wI+JpNQI4HufjADFg
+	1bFJp9PKgv8XOumWsxSl55YJBKjTyytj34cIi+K1RVu8igZzJf0iqlBEG1U+q6ByQ24v
+	Y9CyMDE0HtOoIliYVgQRFaDikavG1HSoqF4Sv+mWmzG6p//0SI8aU3NQG5GmypRp5twP
+	vf8OaCWKJBbs8N4aPe2u9fCtfYdSl/B5AcfmudYjKbH96nEHZbMWvidIv7WdDeiDdzml
+	Lheg==
+X-Gm-Message-State: ALoCoQmGJK9Vh55i1tEuZcDsiiBunHhp+/PxKQbZeKi9MTkxvfF3VsQYYEJW/jkMERn1hYM/XH74
+X-Received: by 10.50.67.148 with SMTP id n20mr2316064igt.65.1446030464404;
+	Wed, 28 Oct 2015 04:07:44 -0700 (PDT)
+Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com.
+	[209.85.213.181])
+	by smtp.gmail.com with ESMTPSA id yq9sm9777985igb.6.2015.10.28.04.07.42
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 28 Oct 2015 04:07:43 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by igbhv6 with SMTP id hv6so4248048igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 11:20:48 +0100 (CET)
-To: openembedded-devel@lists.openembedded.org
-References: <562EB36A.1010109@webthatworks.it>
-	<CAP71WjyyrqEGtdfN1mzrwaH=YGAC4zdz5QwFH-aSxNzgXr=4JA@mail.gmail.com>
-	<562F54BA.2070905@webthatworks.it> <20151027110541.GA2577@jama>
-From: Ivan Sergio Borgonovo <mail@webthatworks.it>
-Organization: http://www.WebThatWorks.it
-Message-ID: <5630A180.1060609@webthatworks.it>
-Date: Wed, 28 Oct 2015 11:20:48 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Icedove/38.3.0
+	Wed, 28 Oct 2015 04:07:42 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20151027110541.GA2577@jama>
-Subject: Re: checking if a patch was approved
+X-Received: by 10.50.134.98 with SMTP id pj2mr2342903igb.46.1446030462584;
+	Wed, 28 Oct 2015 04:07:42 -0700 (PDT)
+Received: by 10.36.218.7 with HTTP; Wed, 28 Oct 2015 04:07:42 -0700 (PDT)
+In-Reply-To: <1446018829-28181-1-git-send-email-richard.leitner@skidata.com>
+References: <1446018829-28181-1-git-send-email-richard.leitner@skidata.com>
+Date: Wed, 28 Oct 2015 09:07:42 -0200
+Message-ID: <CAP9ODKoPj=PPV6nYW9DxGGHz7EkeeTq-ie6Gy28vz8qsj=B=rQ@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH 1/2] README: remove instructions for OpenJDK6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,33 +65,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2015 10:20:59 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 28 Oct 2015 11:07:45 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 10/27/2015 12:05 PM, Martin Jansa wrote:
+On Wed, Oct 28, 2015 at 5:53 AM, Richard Leitner
+<richard.leitner@skidata.com> wrote:
+> Due to the fact OpenJDK6 was removed from meta-java, remove also its
+> usage instructions from the README file.
+>
+> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 
-> I've noticed second revision as well, it's in master-next, but it
-> haven't finished even the automated jenkins build yet and because I
-> don't use qt5 SDK I was hoping that someone else will review them as
-> well. There are 2 formal issues, I've fixed commit message summary to
-> match our guidelines:
-> http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
-> But both are also missing SOB line, please confirm that I can add your
-> SOB or resend both patches with SOB (and commit message from
-> master-next).
-
-Yes. Feel free to commit it. The changes are mine and the original file 
-is under MIT license and the one below is my real name.
-
-I'll try to be more strict about commit messages next time. The subject 
-seemed so uncomfortably long.
-
-Thanks
+Are you going to push it or should I do it?
 
 -- 
-Ivan Sergio Borgonovo
-http://www.webthatworks.it
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
