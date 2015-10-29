@@ -1,33 +1,22 @@
-Return-Path: <coldnew.tw@gmail.com>
-Received: from mail-qk0-f182.google.com (mail-qk0-f182.google.com
-	[209.85.220.182])
-	by mail.openembedded.org (Postfix) with ESMTP id E32B675D4A
+Return-Path: <prvs=7372357f8=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 99176759B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 06:01:41 +0000 (UTC)
-Received: by qkcl124 with SMTP id l124so9845266qkc.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 23:01:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=LtM9jRJTxL7nrEkelSfuPPYndh/q6VNQMO9Uh1VgYGw=;
-	b=FOXTvdvHz62uzUB7SMH+1mOqWPcQeg5hQMHaJU2wejm4JC426yybj8kniZNfT3YkQC
-	2bl4mgbSisIwe4MmZTkutCL7TzXzL1pFaM3+rfd617gHieKwYzeTMzNSoTH1+VOCI/Fu
-	hik3c5c4mbtB0AQIohnikloFVtaPZ1YXeoVtNp9DgU+vShJ2Yh/LKUnr+kDufyjKPlnI
-	LVjZVvAXf/WwaMp06FduXHTW0Y+OBdzEyjtwae01upc5JeEbqgcM7DnwP+A4H5IN52qV
-	lMuatxwe2dgtoqz1FAU7U658Zi92QpBDQKv6cn+oO7KkuIMUri660bzCMHxssSqY/Vbm
-	87Zw==
+	Thu, 29 Oct 2015 07:42:30 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AqwEAPPMMVasEApK/2dsb2JhbABehApvBrp7hgkdhX4CgXkBAQEBAQGBC4Q1AQEBAwEyARgBLAYLCw0LCRYPCQMCAQIBRQYNBgICiCQNuRoBjBABLIZ3g3iBBoROSYQuBZY+hRyRIReTBIMngUFxAYQ1QYEGAQEB
+X-IPAS-Result: AqwEAPPMMVasEApK/2dsb2JhbABehApvBrp7hgkdhX4CgXkBAQEBAQGBC4Q1AQEBAwEyARgBLAYLCw0LCRYPCQMCAQIBRQYNBgICiCQNuRoBjBABLIZ3g3iBBoROSYQuBZY+hRyRIReTBIMngUFxAYQ1QYEGAQEB
+Message-ID: <5631CDAD.7030703@skidata.com>
+Date: Thu, 29 Oct 2015 08:41:33 +0100
+From: Richard Leitner <richard.leitner@skidata.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Icedove/31.8.0
 MIME-Version: 1.0
-X-Received: by 10.55.200.220 with SMTP id t89mr62297284qkl.78.1446098501661;
-	Wed, 28 Oct 2015 23:01:41 -0700 (PDT)
-Received: by 10.55.165.202 with HTTP; Wed, 28 Oct 2015 23:01:41 -0700 (PDT)
-In-Reply-To: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
-References: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
-Date: Thu, 29 Oct 2015 14:01:41 +0800
-Message-ID: <CAF6djU8XkOUyq1qUcb3B8oTQrGWWPrDu8SnPrcLGV6EV5W9DMQ@mail.gmail.com>
-From: =?UTF-8?B?5b2l55G+?= <coldnew.tw@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: OE/Yocto developer survey
+To: <openembedded-devel@lists.openembedded.org>
+References: <D1946B41-2BFF-49FA-A4C7-19A2A1D6C731@gmail.com>
+In-Reply-To: <D1946B41-2BFF-49FA-A4C7-19A2A1D6C731@gmail.com>
+X-Originating-IP: [172.16.60.30]
+Subject: Re: [meta-java][PATCH 4/4] openjdk-8: add recipes for openjdk-8 and openjre-8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,164 +30,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 06:01:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 29 Oct 2015 07:42:32 -0000
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: 8bit
 
-How long have you been using OE?  __3 years _
+On 10/28/2015 07:01 PM, Jens Rehsack wrote:
+> This adds openjdk-8 for native and target builds and allows a stripped
+> openjre-8 being built as well instead of trying to cherry-pick jre
+> components from jdk-image.
+> 
+> The recipes allow building openjdk-8 with or without:
+> * x11
+> * cups
+> * alsa/pulseaudio
+> and let packager enable unlimited-crypto, if desired.
+> 
+> Since there can be only one PROVIDES for virtual/java-native and virtual/javac-native,
+> move the provides to openjdk-8-native (I think everyone agrees it's a better
+> choice than ecj-bootstrap-native).
+> 
+> Plus: Applying a fix from openjdk-9 repository which fixes build issues using gcc5
+> 
+> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+> ---
+>  README                                             |   13 +-
+>  recipes-core/cacao/cacao_1.6.1.bb                  |    2 +-
+>  recipes-core/ecj/ecj-bootstrap-native.bb           |    2 -
+>  recipes-core/openjdk/openjdk-8-72b00/LICENSE       |  347 +++
+>  .../dont-expect-fqpn-for-make.patch                |   18 +
+>  .../openjdk-8-72b00/filter-aclocal-copy-too.patch  |   11 +
+>  recipes-core/openjdk/openjdk-8-72b00/jvm.cfg       |   41 +
+>  .../openjdk8-find-compiler-fix-env-respect.patch   |  140 +
+>  .../openjdk-8-72b00/openjdk8-fix-shark-build.patch |  453 ++++
+>  .../openjdk8-fix-shark-stdc++11.patch              | 2730 ++++++++++++++++++++
+>  .../openjdk8-no-genx11-in-headless.patch           |   17 +
+>  .../openjdk-8-72b00/openjdk8-no-unused-deps.patch  |   94 +
+>  ...o-in-favour-of-openembedded-package-split.patch |  120 +
+>  .../openjdk8-restrict-to-staging-dir.patch         |   11 +
+>  ..._than_returning_address_of_local_variable.patch |   23 +
+>  .../remove-shell-variables-from-autoheader.patch   |   31 +
+>  recipes-core/openjdk/openjdk-8-common.inc          |  229 ++
+>  recipes-core/openjdk/openjdk-8-cross.inc           |  202 ++
+>  recipes-core/openjdk/openjdk-8-native.inc          |   63 +
+>  recipes-core/openjdk/openjdk-8-native_72b00.bb     |   16 +
+>  recipes-core/openjdk/openjdk-8-release-72b00.inc   |   89 +
+>  recipes-core/openjdk/openjdk-8_72b00.bb            |   36 +
+>  recipes-core/openjdk/openjre-8_72b00.bb            |   30 +
+>  23 files changed, 4706 insertions(+), 12 deletions(-)
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/LICENSE
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/dont-expect-fqpn-for-make.patch
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/filter-aclocal-copy-too.patch
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/jvm.cfg
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/openjdk8-find-compiler-fix-env-respect.patch
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/openjdk8-fix-shark-build.patch
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/openjdk8-fix-shark-stdc++11.patch
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/openjdk8-no-genx11-in-headless.patch
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/openjdk8-no-unused-deps.patch
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/openjdk8-prevent-debuginfo-in-favour-of-openembedded-package-split.patch
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/openjdk8-restrict-to-staging-dir.patch
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/openjdk8-use_builtin_frame_address_0_rather_than_returning_address_of_local_variable.patch
+>  create mode 100644 recipes-core/openjdk/openjdk-8-72b00/remove-shell-variables-from-autoheader.patch
 
-How do you use OE/Yocto?
-[X] product development
-[  ] hobby/research/education/yocto core developer, etc
+IMHO a version independent patches directory like for openjdk-7 would
+also be good here.
 
-What distro do you use?
-[  ] Poky
-[  ] Angstrom
-[X] nodistro or custom
+To cite Otavio:
+We could rename the patches directory for openjdk-7 and avoid the
+version number on it. This would make easier for upgrades and to see
+the diff between the patches.
 
-How do you organize multiple git repos?
-[  ] Git submodules
-[X] Repo
-[  ] Other
+>  create mode 100644 recipes-core/openjdk/openjdk-8-common.inc
+>  create mode 100644 recipes-core/openjdk/openjdk-8-cross.inc
+>  create mode 100644 recipes-core/openjdk/openjdk-8-native.inc
+>  create mode 100644 recipes-core/openjdk/openjdk-8-native_72b00.bb
+>  create mode 100644 recipes-core/openjdk/openjdk-8-release-72b00.inc
+>  create mode 100644 recipes-core/openjdk/openjdk-8_72b00.bb
+>  create mode 100644 recipes-core/openjdk/openjre-8_72b00.bb
 
-What packaging system?
-[X] OPKG
-[  ] RPM
-[  ] Other
+Furthermore I had problems building OpenJDK-7 with this patch applied.
+But I will verify that again and come back to you!
 
-What GUI toolkits?
-[X] Qt
-[  ] Gtk
-[  ] EFL
-[  ] HTML5/JS
-[  ] Other
-
-What init system?
-[  ] systemd
-[  ] sysvinit
-[X] busybox init
-[  ] Other
-
-What libc?
-[X] glibc
-[  ] uclibc
-[  ] musl
-[  ] Other
-
-How do you develop custom applications?
-[  ] application-SDK
-[  ] devshell
-[X] develop on PC, test on target
-[  ] Other
-
-What language do you primarily use for custom applications?
-[  ] C
-[X] C++
-[  ] Python
-[  ] Javascript
-[  ] Lua
-[  ] Other
-
-What do you use for Continuous Integration?
-[  ] Buildbot
-[X] Jenkins
-[  ] Other
-
-Do you use any any of the tooling projects
-(https://www.yoctoproject.org/tools-resources/projects) such as ADT,
-Hob, Toaster, etc?
-
-Toaster
-
-2015-10-27 3:18 GMT+08:00 Cliff Brake <cbrake@bec-systems.com>:
-
-> Hi,
->
-> I'd like to get some feedback on the following questions -- feel free
-> to respond to list, or directly to me, and I'll withhold your
-> name/company from any results.
->
-> I would like to collect feedback until 2015-11-02, and will summarize
-> the results after that.
->
-> My goal with this survey is to get a sense for best practices and what
-> is most commonly used among Yocto/OE developers so I can better advise
-> clients using Yocto/OE.  Hopefully this will also generate some
-> interesting discussions.
->
-> How long have you been using OE?  _____
->
-> How do you use OE/Yocto?
-> [  ] product development
-> [  ] hobby/research/education/yocto core developer, etc
->
-> What distro do you use?
-> [  ] Poky
-> [  ] Angstrom
-> [  ] nodistro or custom
->
-> How do you organize multiple git repos?
-> [  ] Git submodules
-> [  ] Repo
-> [  ] Other
->
-> What packaging system?
-> [  ] OPKG
-> [  ] RPM
-> [  ] Other
->
-> What GUI toolkits?
-> [  ] Qt
-> [  ] Gtk
-> [  ] EFL
-> [  ] HTML5/JS
-> [  ] Other
->
-> What init system?
-> [  ] systemd
-> [  ] sysvinit
-> [  ] busybox init
-> [  ] Other
->
-> What libc?
-> [  ] glibc
-> [  ] uclibc
-> [  ] musl
-> [  ] Other
->
-> How do you develop custom applications?
-> [  ] application-SDK
-> [  ] devshell
-> [  ] develop on PC, test on target
-> [  ] Other
->
-> What language do you primarily use for custom applications?
-> [  ] C
-> [  ] C++
-> [  ] Python
-> [  ] Javascript
-> [  ] Lua
-> [  ] Other
->
-> What do you use for Continuous Integration?
-> [  ] Buildbot
-> [  ] Jenkins
-> [  ] Other
->
-> Do you use any any of the tooling projects
-> (https://www.yoctoproject.org/tools-resources/projects) such as ADT,
-> Hob, Toaster, etc?
->
-> _______________________
->
-> Reasons or explanations are appreciated, and please feel free to
-> include additional choices/information you think are relevant.
->
-> Thanks,
-> Cliff
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+best regards,
+Richard L
 
