@@ -1,24 +1,28 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A9A075E80
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail5.wrs.com (unknown [64.129.254.146])
+	by mail.openembedded.org (Postfix) with ESMTP id BFA9476710
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 02:04:33 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9T24YZw011692
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Oct 2015 19:04:34 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 28 Oct 2015 19:04:33 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 29 Oct 2015 09:55:34 +0800
-Message-ID: <1446083734-19381-1-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.6.1
+	Thu, 29 Oct 2015 02:22:59 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id t9T2Mwfk017862
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Wed, 28 Oct 2015 19:22:59 -0700
+Received: from [128.224.162.134] (128.224.162.134) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Wed, 28 Oct 2015 19:22:58 -0700
+To: akuster808 <akuster808@gmail.com>
+References: <1445914005-23569-1-git-send-email-rongqing.li@windriver.com>
+	<5630F654.6010009@gmail.com>
+From: Rongqing Li <rongqing.li@windriver.com>
+Message-ID: <56318300.8020600@windriver.com>
+Date: Thu, 29 Oct 2015 10:22:56 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.2.0
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH] mousepad: inherit gsettings
+In-Reply-To: <5630F654.6010009@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH 1/3] dovecot: add PACKAGECONFIG for lz4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,37 +36,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 02:04:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 29 Oct 2015 02:23:02 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Kai Kang <kai.kang@windriver.com>
 
-When launch mousepad, it fails with:
 
-| glib-gio-error setting schema 'org.xfce.mousepad' is not installed
+On 2015年10月29日 00:22, akuster808 wrote:
+> Roy,
+>
+> Should any of these be back ported to Fido and Dizzy?
+>
+> - armin
 
-It needs to call glib-compile-schemas to compile its schema file.
-Inherit gsettings to fix it.
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+not, I think;
 
-diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb
-index 4c8c1f5..4ca21a6 100644
---- a/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb
-+++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- # which fixes mousepad/Makefile.am:72: error: HAVE_DBUS does not appear in AM_CONDITIONAL
- DEPENDS = "gtk+ dbus dbus-glib gtksourceview2 intltool-native xfce4-dev-tools-native"
- 
--inherit xfce-app
-+inherit xfce-app gsettings
- 
- SRC_URI[md5sum] = "f55314c5dda6323883241e6cf01550a7"
- SRC_URI[sha256sum] = "60114431eac8db6bb6ce18bd38f1630cccb684375b97a445a1b6fd619848d132"
+it is not a fatal
+
+-Rpu
+
+>
+> On 10/26/2015 07:46 PM, rongqing.li@windriver.com wrote:
+>> From: Roy Li <rongqing.li@windriver.com>
+>>
+>> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+>> ---
+>>   meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb
+>> index 9b5f536..a01ef83 100644
+>> --- a/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb
+>> +++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb
+>> @@ -23,6 +23,7 @@ PACKAGECONFIG ??= " \
+>>
+>>   PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
+>>   PACKAGECONFIG[ldap] = "--with-ldap=plugin,--without-ldap,openldap,"
+>> +PACKAGECONFIG[lz4] = "--with-lz4,--without-lz4,lz4,"
+>>
+>>   # From native build in armv7a-hf/eglibc
+>>   CACHED_CONFIGUREVARS += "i_cv_signed_size_t=no \
+>>
+>
+
 -- 
-2.6.1
-
+Best Reagrds,
+Roy | RongQing Li
 
