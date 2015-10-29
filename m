@@ -1,33 +1,47 @@
-Return-Path: <henry.bruce@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E07E755F4
+Return-Path: <ian@boundarydevices.com>
+Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
+	[209.85.220.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B1E2759B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 23:00:35 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 29 Oct 2015 16:00:35 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,216,1444719600"; d="scan'208";a="822687292"
-Received: from orsmsx106.amr.corp.intel.com ([10.22.225.133])
-	by fmsmga001.fm.intel.com with ESMTP; 29 Oct 2015 16:00:35 -0700
-Received: from orsmsx114.amr.corp.intel.com (10.22.240.10) by
-	ORSMSX106.amr.corp.intel.com (10.22.225.133) with Microsoft SMTP Server
-	(TLS) id 14.3.248.2; Thu, 29 Oct 2015 16:00:35 -0700
-Received: from orsmsx104.amr.corp.intel.com ([169.254.3.250]) by
-	ORSMSX114.amr.corp.intel.com ([169.254.8.204]) with mapi id
-	14.03.0248.002; Thu, 29 Oct 2015 16:00:35 -0700
-From: "Bruce, Henry" <henry.bruce@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: openjdk-7 and gcc v5
-Thread-Index: AdESnZ0dnPu3CKC7S3uLnmy1oEzhfg==
-Date: Thu, 29 Oct 2015 23:00:35 +0000
-Message-ID: <F81DC1078564A34BB4DA30CAE03814D12D4EB65D@ORSMSX104.amr.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.22.254.138]
-MIME-Version: 1.0
-Subject: openjdk-7 and gcc v5
+	Thu, 29 Oct 2015 23:06:29 +0000 (UTC)
+Received: by pacfv9 with SMTP id fv9so55875332pac.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Oct 2015 16:06:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=boundarydevices_com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=EUh2Za+vlgakQiDJUblB90c2Hwc4Z7Nd82Fa0FN9ZgA=;
+	b=D/U7jruUHBTB51XAIzV+96gkHeE7mGeRh40QTBjfvRrZXfaAgUjsxjGVAC839VPtFF
+	p51OG9soxSaAqqAkr0f9LTQbp/JN204uXc2n9tVffdVpAZIQJ+0oz6atBH90CPytyz+8
+	zu2nlq+Q8I7jw7aoulk16eyrYh95A3xc8i+Yvv558MaGOCQYdN1RNmhKZPJjXq69DVny
+	KXxsoxeFlKw1fX8ZrWqEAVsD/7PILR5sU2EQjY946/BbyeqCs6XhE1x2AAi+a1yNXDbg
+	1KQBj1yq1HE93qSpU+4r93/3oO0FRQmyV+CU9CHIuwCfEBlcibVQlSfA8KWQ6emxmenU
+	iDDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=EUh2Za+vlgakQiDJUblB90c2Hwc4Z7Nd82Fa0FN9ZgA=;
+	b=js+kSQCqJLwCuuF1vvkotYsgFzbKiFg7et9pYOix1tpwoJZ4/BMDn2nyH0P/2UPrFi
+	/UXwGBiUhlWESb1ZvHnOKN6QZyhSCzrmDpfqHLG9wDbe5FIpYquYp1KWukkpTVFGwU5s
+	yprgB1NgsikFCUwLKoze2zh4Fjfc1QbxPih2Q6hnGPwxp9MhQI2+8pGoFWTJaUI25+g2
+	MJrcD6XeCIS2tC6u7CbGLm9SXwnYkL+HXpLaedORhSqsPa44bPs88gAr+WLZHgdTJFrZ
+	5boxxYEOh6Nd5YozgF9d6IIyuQt/Jdav4HXbwa0Ssr8fPDmo2xwMUtj48cD6f7wbwjDe
+	WJcw==
+X-Gm-Message-State: ALoCoQkkUIFMSBPrC/3xAnFu0vep0mytljg1lub0d8Y5gp6BJ1bZyTnXISSpsi60ND/nwuJn2dQA
+X-Received: by 10.68.65.104 with SMTP id w8mr4900415pbs.48.1446159989614;
+	Thu, 29 Oct 2015 16:06:29 -0700 (PDT)
+Received: from ian-desktop.attlocal.net
+	(104-53-140-179.lightspeed.irvnca.sbcglobal.net. [104.53.140.179])
+	by smtp.gmail.com with ESMTPSA id
+	bz1sm4285787pab.20.2015.10.29.16.06.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 29 Oct 2015 16:06:28 -0700 (PDT)
+From: Ian Coolidge <ian@boundarydevices.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 29 Oct 2015 16:06:33 -0700
+Message-Id: <1446159993-15239-1-git-send-email-ian@boundarydevices.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-qt5][jethro][PATCH] qtbase: Fix host user contamination
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,33 +55,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 23:00:36 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 29 Oct 2015 23:06:30 -0000
 
-Many thanks to contributors who fixed openjdk build issues introduced by gc=
-c v5 and for maintainers for pushing the updates.
-However one problem remains: openjdk build fails in openjdk/jdk/make/java/n=
-io due to -static compiler flag being used in conjunction with -pthread giv=
-ing error
-/usr/bin/ld: cannot find -lpthread
-/usr/bin/ld: cannot find -lc
+The copy must not use the host user when copying for packaging.
+Error fixed:
+,----
+| WARNING: QA Issue: qtbase: /qtbase-dev/usr/lib/libqtfreetype.prl is owned by
+| uid 1000, which is the same as the user running bitbake. This may be due to
+| host contamination [host-user-contaminated]
+`----
 
-I fixed this by removing -static flag from Makefile. Not sure of this was t=
-he right thing to do (so I didn't submit patch) but it worked for me.=20
-I added the following to the an openjdk bbappend and it fixed the build and=
- resulting jre is running OK.
+Signed-off-by: Ian Coolidge <ian@boundarydevices.com>
+---
+ recipes-qt/qt5/qtbase_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-do_configure_append() {
-	gcc -v 2>&1 | grep 5\..
-	if [ "$?" =3D=3D "0" ]; then
-		sed -i s/-static// ${B}/openjdk/jdk/make/java/nio/Makefile
-	fi
-}
-
-Regards,
-
-Henry Bruce
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 4cffccf..19de7df 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -231,7 +231,7 @@ do_install_append() {
+         cp -a ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_QT_FONTS}
+         chown -R root:root ${D}/${OE_QMAKE_PATH_QT_FONTS}
+     fi
+-    cp -a ${B}/lib/libqt* ${D}${libdir}
++    cp -r ${B}/lib/libqt* ${D}${libdir}
+     # Remove example.pro file as it is useless
+     rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro
+ 
+-- 
+1.9.1
 
 
