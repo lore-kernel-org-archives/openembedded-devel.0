@@ -1,24 +1,22 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id EB20C73CC7
+Return-Path: <prvs=7372357f8=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id C737E73CC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 09:27:29 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id t9T9RUdX013686
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 02:27:30 -0700 (PDT)
-Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 29 Oct 2015 02:27:29 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 29 Oct 2015 17:27:51 +0800
-Message-ID: <1446110871-29764-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Thu, 29 Oct 2015 09:32:56 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AqoEALHmMVasEApK/2dsb2JhbABehHkGunSGCYYbAoF7AQEBAQEBgQuENgEBBDIBRRELDQsJFgQLCQMCAQIBRQYNBgICiDHFLAEBCAIhhneEfoUXF4QXAQSWQpY+F5MEgyeBQXGEd4EGAQEB
+X-IPAS-Result: AqoEALHmMVasEApK/2dsb2JhbABehHkGunSGCYYbAoF7AQEBAQEBgQuENgEBBDIBRRELDQsJFgQLCQMCAQIBRQYNBgICiDHFLAEBCAIhhneEfoUXF4QXAQSWQpY+F5MEgyeBQXGEd4EGAQEB
+Message-ID: <5631E78F.8030300@skidata.com>
+Date: Thu, 29 Oct 2015 10:31:59 +0100
+From: Richard Leitner <richard.leitner@skidata.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Icedove/31.8.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libssh2: specify the search dir to avoid host contamination
+To: <openembedded-devel@lists.openembedded.org>
+References: <C0C9437F-FD83-4433-A8C9-8B8CDD366097@gmail.com>
+In-Reply-To: <C0C9437F-FD83-4433-A8C9-8B8CDD366097@gmail.com>
+X-Originating-IP: [172.16.60.30]
+Subject: Re: [meta-java][PATCH 1/4] Avoid parse time errors due to dependency on x11, for distros without x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,33 +30,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 09:27:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 29 Oct 2015 09:32:58 -0000
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: 8bit
 
-From: Jackie Huang <jackie.huang@windriver.com>
+On 10/28/2015 06:58 PM, Jens Rehsack wrote:
+> 
+> BitBake raises some errors when processing recipes that depend on x11
+> for distros that don't have x11 in DISTRO_FEATURES. To work around
+> that issue, REQUIRED_DISTRO_FEATURES = "x11" (from
+> distro_features_check.bbclass) has been set for the following recipes:
+> 
+> * cacao (_class-target)
+> * classpath (_class-target)
+> * jamvm (_class-target)
+> * openjdk-7-release
+> 
+> That makes BitBake skip those recipes during the cache generation
+> (they'd still be parsed, but ignored).
+> 
+> This patch improves the idea from Mario Domenech Goulart <mario@ossystems.com.br>
+> 
+> Signed-off-by: Jens Rehsack <sno@netbsd.org>
 
-Set the search dir for libssl and libz to only STAGING_LIBDIR
-to avoid searching host libs.
+Successfully tested this patch with OpenJDK 7u91b01 for a ARM Cortex A9
+target with VFP & X11.
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb b/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
-index 022482c..4f03b99 100644
---- a/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
-+++ b/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
-@@ -14,5 +14,7 @@ SRC_URI[sha256sum] = "5a202943a34a1d82a1c31f74094f2453c207bf9936093867f41414968c
- inherit autotools pkgconfig
- 
- EXTRA_OECONF += "--with-openssl \
--                --with-libz \
-+                 --with-libz \
-+                 --with-libssl-prefix=${STAGING_LIBDIR} \
-+                 --with-libz-prefix=${STAGING_LIBDIR} \
-                 "
--- 
-1.9.1
-
+So feel free to add
+Acked-by: Richard Leitner <richard.leitner@skidata.com>
 
