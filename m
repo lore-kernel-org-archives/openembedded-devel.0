@@ -1,26 +1,60 @@
-Return-Path: <prvs=7372357f8=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id A54AE73CC7
+Return-Path: <anders@chargestorm.se>
+Received: from mail-lf0-f53.google.com (mail-lf0-f53.google.com
+	[209.85.215.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E46673695
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 11:55:23 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AqoEALwHMlasEApK/2dsb2JhbABehHkGun2GCYYbAoF1AQEBAQEBgQuENgEBBDIBRRELDQsJFg8JAwIBAgEPNgYNBgICiBcDF8BNDYRPAQEIAiGGd4R+glOBe0kXhBcFjRuJJ4suAYsPF4s1h0+DJ4FBcYQ2QYEGAQEB
-X-IPAS-Result: AqoEALwHMlasEApK/2dsb2JhbABehHkGun2GCYYbAoF1AQEBAQEBgQuENgEBBDIBRRELDQsJFg8JAwIBAgEPNgYNBgICiBcDF8BNDYRPAQEIAiGGd4R+glOBe0kXhBcFjRuJJ4suAYsPF4s1h0+DJ4FBcYQ2QYEGAQEB
-Message-ID: <563208F3.1040900@skidata.com>
-Date: Thu, 29 Oct 2015 12:54:27 +0100
-From: Richard Leitner <richard.leitner@skidata.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Icedove/31.8.0
+	Thu, 29 Oct 2015 11:59:52 +0000 (UTC)
+Received: by lfaz124 with SMTP id z124so17571047lfa.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Oct 2015 04:59:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=chargestorm_se.20150623.gappssmtp.com; s=20150623;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:organization:user-agent;
+	bh=6YISY2y6qUlnGMN/PWhOSUaIG98ZcSW3BwpbJ66dUMo=;
+	b=IsYcMj3xr/1kgoK2S2MeY3qs+otyjyVHqBVA/9GQDpwCg5PWRf4bti05htyKj9C60R
+	VPcoak4ZxgBqSZsXqioaaELltXQUeEqqFcBTpZpPPHqL9tKeDVB+zZWqCMH+1T6Ay/Mw
+	5s4HLF2ACv8uBDUr/KGhBjtxa9pHq7mcwc1UBKvyI86ikfC3xVBEyWW3r2iYLkCI7MJz
+	ID0AKQCOe6NtUOIbqyu2/j3U/QoB2r+njullUH4RuEsci+CaAqAkcAaCMltlnXBDahdi
+	JQ6VBak7w2v4jxUrm2w7POWHACd+iFQ3d659jaftDMe4y65+zM034XkS+/4IJxkF9O7S
+	Z2/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
+	:references:mime-version:content-type:content-disposition
+	:in-reply-to:organization:user-agent;
+	bh=6YISY2y6qUlnGMN/PWhOSUaIG98ZcSW3BwpbJ66dUMo=;
+	b=BpyUAnvGsdUpmeTz0jfiWWOq7sjZ7l/GwXhSuyPXLYimQfrhTMBuns5Giudr7ilP38
+	C+ZLbqfy2SkTC6PrfhHuc/R1DkVOu9oGnxdCIDI3/YG3jD3CMGWJm5+fJ1cXeuFAMZDb
+	90tgvroR6gDa+d3pErRJb+U8tTgtOIkr0dCSpBhe+Tu8GT2MGgSw7LcDBYe0aJyK0zMw
+	DZcaTZWj58twfQFQbag7IMqaaD0uLrxhEzk+JBLXugLzkinJVMQCQAzRFIUhAS0XW9HY
+	/vi7uUM2Kiqsi+vUl5tNe01huEcDwTeEPjD6tnTh8WS2NGOrxZET/GeTQQ0QVqtr+j50
+	Ne0w==
+X-Gm-Message-State: ALoCoQmqxITH2KRop/QjcTSqvYA947N+Uw5FWDwa7pHIiLiunydLmCuDBpmRN6gByOTLOgRDiKIZ
+X-Received: by 10.25.85.193 with SMTP id j184mr489700lfb.2.1446119991831;
+	Thu, 29 Oct 2015 04:59:51 -0700 (PDT)
+Received: from ad.chargestorm.se (213-64-219-84-no126.business.telia.com.
+	[213.64.219.84])
+	by smtp.gmail.com with ESMTPSA id g65sm256468lfb.11.2015.10.29.04.59.50
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 29 Oct 2015 04:59:50 -0700 (PDT)
+Date: Thu, 29 Oct 2015 12:59:49 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151029115949.GC27480@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <D1946B41-2BFF-49FA-A4C7-19A2A1D6C731@gmail.com>
-	<5631CDAD.7030703@skidata.com>
-	<A34BC9F8-F519-435B-B65A-26A533F78877@gmail.com>
-	<CAP9ODKrh9kxCTf3es2Oypx3rPNiKp9Fb3Nk6xafgrc=R+JEkwg@mail.gmail.com>
-	<9E01DDA7-C832-4E17-B17A-25850D0B27B5@gmail.com>
-In-Reply-To: <9E01DDA7-C832-4E17-B17A-25850D0B27B5@gmail.com>
-X-Originating-IP: [172.16.60.30]
-Subject: Re: [meta-java][PATCH 4/4] openjdk-8: add recipes for openjdk-8 and openjre-8
+In-Reply-To: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: OE/Yocto developer survey
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,49 +68,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 11:55:26 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 29 Oct 2015 11:59:55 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 10/29/2015 12:24 PM, Jens Rehsack wrote:
-> 
->> Am 29.10.2015 um 11:46 schrieb Otavio Salvador <otavio.salvador@ossystems.com.br>:
->>
->> On Thu, Oct 29, 2015 at 7:22 AM, Jens Rehsack <rehsack@gmail.com> wrote:
->>>> Am 29.10.2015 um 08:41 schrieb Richard Leitner <richard.leitner@skidata.com>:
->>>> To cite Otavio:
->>>> We could rename the patches directory for openjdk-7 and avoid the
->>>> version number on it. This would make easier for upgrades and to see
->>>> the diff between the patches.
->>>
->>> So git diff -M doesn't work for you? I don't understand the reasoning.
->>
->> It does but reusing the directory easy the upgrade and as the
->> openjdk-8 is in maintenance it is expected that it does not change
->> much in the patches.
-> 
-> Partial. As I told you, I updated OpenJDK from 8u40 to 8u72 when I first
-> encountered massive crashes on the target device with zeroshark until
-> llvm guys told me, that legacy JIT for ARM was utterly broken and they
-> force people to MCJIT.
-> 
-> Having both directories during the upgrade helped me massively to
-> avoid breaking patches by fixing against new upstream adoptions.
-> 
-> Surely, this could be handled developer-side by keeping an foo.old
-> directory - but it smells the same smell ;)
-> 
-> I don't fight against renaming the directory, I just argue, both
-> way have their own kind of smell.
-> 
 
-I really understand both sides... But for me, due to the fact we want to
-support only one version of each OpenJDK release, the patch directory
-without version has "a better smell" ;-)
+How long have you been using OE?  6 years
 
-I would also go one step further and omit the version from
-openjdk-7-release-*.inc. Then the version number is only included in the
-name of the openjdk-7_*.bb file.
+How do you use OE/Yocto?
+[ x ] product development
+[  ] hobby/research/education/yocto core developer, etc
 
-But I'm open to any discussion! So what do you think about it?
+What distro do you use?
+[  ] Poky
+[  ] Angstrom
+[ x ] nodistro or custom
+
+How do you organize multiple git repos?
+[ x ] Git submodules
+[  ] Repo
+[  ] Other
+
+What packaging system?
+[ x ] OPKG
+[  ] RPM
+[  ] Other
+
+What GUI toolkits?
+[ x ] Qt
+[  ] Gtk
+[  ] EFL
+[  ] HTML5/JS
+[  ] Other
+
+What init system?
+[ x ] systemd
+[  ] sysvinit
+[ x ] busybox init
+[  ] Other
+
+What libc?
+[ x ] glibc
+[  ] uclibc
+[  ] musl
+[  ] Other
+
+How do you develop custom applications?
+[ x ] application-SDK
+[  ] devshell
+[ x ] develop on PC, test on target
+[  ] Other
+
+What language do you primarily use for custom applications?
+[ x ] C
+[ x ] C++
+[  ] Python
+[  ] Javascript
+[  ] Lua
+[  ] Other
+
+What do you use for Continuous Integration?
+[  ] Buildbot
+[ x ] Jenkins
+[  ] Other
+
+Do you use any any of the tooling projects
+(https://www.yoctoproject.org/tools-resources/projects) such as ADT,
+Hob, Toaster, etc?  None yet.
+
+-- 
+Anders Darander
+ChargeStorm AB / eStorm AB
 
