@@ -1,47 +1,32 @@
-Return-Path: <ian@boundarydevices.com>
-Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
-	[209.85.220.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B1E2759B4
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E6D6755F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 23:06:29 +0000 (UTC)
-Received: by pacfv9 with SMTP id fv9so55875332pac.3
+	Thu, 29 Oct 2015 23:18:58 +0000 (UTC)
+Received: by wmff134 with SMTP id f134so34894230wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 16:06:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=boundarydevices_com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=EUh2Za+vlgakQiDJUblB90c2Hwc4Z7Nd82Fa0FN9ZgA=;
-	b=D/U7jruUHBTB51XAIzV+96gkHeE7mGeRh40QTBjfvRrZXfaAgUjsxjGVAC839VPtFF
-	p51OG9soxSaAqqAkr0f9LTQbp/JN204uXc2n9tVffdVpAZIQJ+0oz6atBH90CPytyz+8
-	zu2nlq+Q8I7jw7aoulk16eyrYh95A3xc8i+Yvv558MaGOCQYdN1RNmhKZPJjXq69DVny
-	KXxsoxeFlKw1fX8ZrWqEAVsD/7PILR5sU2EQjY946/BbyeqCs6XhE1x2AAi+a1yNXDbg
-	1KQBj1yq1HE93qSpU+4r93/3oO0FRQmyV+CU9CHIuwCfEBlcibVQlSfA8KWQ6emxmenU
-	iDDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=EUh2Za+vlgakQiDJUblB90c2Hwc4Z7Nd82Fa0FN9ZgA=;
-	b=js+kSQCqJLwCuuF1vvkotYsgFzbKiFg7et9pYOix1tpwoJZ4/BMDn2nyH0P/2UPrFi
-	/UXwGBiUhlWESb1ZvHnOKN6QZyhSCzrmDpfqHLG9wDbe5FIpYquYp1KWukkpTVFGwU5s
-	yprgB1NgsikFCUwLKoze2zh4Fjfc1QbxPih2Q6hnGPwxp9MhQI2+8pGoFWTJaUI25+g2
-	MJrcD6XeCIS2tC6u7CbGLm9SXwnYkL+HXpLaedORhSqsPa44bPs88gAr+WLZHgdTJFrZ
-	5boxxYEOh6Nd5YozgF9d6IIyuQt/Jdav4HXbwa0Ssr8fPDmo2xwMUtj48cD6f7wbwjDe
-	WJcw==
-X-Gm-Message-State: ALoCoQkkUIFMSBPrC/3xAnFu0vep0mytljg1lub0d8Y5gp6BJ1bZyTnXISSpsi60ND/nwuJn2dQA
-X-Received: by 10.68.65.104 with SMTP id w8mr4900415pbs.48.1446159989614;
-	Thu, 29 Oct 2015 16:06:29 -0700 (PDT)
-Received: from ian-desktop.attlocal.net
-	(104-53-140-179.lightspeed.irvnca.sbcglobal.net. [104.53.140.179])
-	by smtp.gmail.com with ESMTPSA id
-	bz1sm4285787pab.20.2015.10.29.16.06.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 29 Oct 2015 16:06:28 -0700 (PDT)
-From: Ian Coolidge <ian@boundarydevices.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Oct 2015 16:06:33 -0700
-Message-Id: <1446159993-15239-1-git-send-email-ian@boundarydevices.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-qt5][jethro][PATCH] qtbase: Fix host user contamination
+	Thu, 29 Oct 2015 16:18:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=1ZYkncwSgA+BdLg0KYDikIoDuxwLOAEMlpmhbe9g0cY=;
+	b=vnc5u4ofvWZrfXQz42XbdLPClRR8Z2ZlbEyD/KLMp4sC+C8+MCoLznINpawcbq4Wnj
+	YOBLR9RDnhozB1CYYTqSgD5xZF9pF00DDCbHxIUivnWCWH5IqIseIqYe7Vfr6sa22N1T
+	Qhad6N2IgUVErKe6zITayBLb1EITWX+cNUTBT02jrtkLt3vH/8MJtxamEMRAdH1sggxr
+	0exPC+25nHgklpYDI2KTN7Z1v+wgpeHBZhyAkeUhQIP26C46edHagMXsoytPOAPnSziY
+	0+qjhCyx+fXUjWMKMqccqv3GcNX+pQbKCGAJEORSAXP4q1JS+UakSTD9TQ7rnITTkmRy
+	kIYA==
+MIME-Version: 1.0
+X-Received: by 10.28.214.146 with SMTP id n140mr6619222wmg.47.1446160738933;
+	Thu, 29 Oct 2015 16:18:58 -0700 (PDT)
+Received: by 10.194.154.232 with HTTP; Thu, 29 Oct 2015 16:18:58 -0700 (PDT)
+In-Reply-To: <1446159993-15239-1-git-send-email-ian@boundarydevices.com>
+References: <1446159993-15239-1-git-send-email-ian@boundarydevices.com>
+Date: Fri, 30 Oct 2015 00:18:58 +0100
+Message-ID: <CA+chaQc1mdFOTS3tZK0Cx2UMo8nkQSX2OtrQGoPi_mvFg9++sw@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-qt5][jethro][PATCH] qtbase: Fix host user contamination
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,35 +40,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 23:06:30 -0000
+X-List-Received-Date: Thu, 29 Oct 2015 23:19:00 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The copy must not use the host user when copying for packaging.
-Error fixed:
-,----
-| WARNING: QA Issue: qtbase: /qtbase-dev/usr/lib/libqtfreetype.prl is owned by
-| uid 1000, which is the same as the user running bitbake. This may be due to
-| host contamination [host-user-contaminated]
-`----
+Isn't this fixed by:
+http://patchwork.openembedded.org/patch/105649/
+?
 
-Signed-off-by: Ian Coolidge <ian@boundarydevices.com>
----
- recipes-qt/qt5/qtbase_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Which is already in master-next.
 
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 4cffccf..19de7df 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -231,7 +231,7 @@ do_install_append() {
-         cp -a ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_QT_FONTS}
-         chown -R root:root ${D}/${OE_QMAKE_PATH_QT_FONTS}
-     fi
--    cp -a ${B}/lib/libqt* ${D}${libdir}
-+    cp -r ${B}/lib/libqt* ${D}${libdir}
-     # Remove example.pro file as it is useless
-     rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro
- 
--- 
-1.9.1
+On Fri, Oct 30, 2015 at 12:06 AM, Ian Coolidge <ian@boundarydevices.com>
+wrote:
 
+> The copy must not use the host user when copying for packaging.
+> Error fixed:
+> ,----
+> | WARNING: QA Issue: qtbase: /qtbase-dev/usr/lib/libqtfreetype.prl is
+> owned by
+> | uid 1000, which is the same as the user running bitbake. This may be due
+> to
+> | host contamination [host-user-contaminated]
+> `----
+>
+> Signed-off-by: Ian Coolidge <ian@boundarydevices.com>
+> ---
+>  recipes-qt/qt5/qtbase_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+> index 4cffccf..19de7df 100644
+> --- a/recipes-qt/qt5/qtbase_git.bb
+> +++ b/recipes-qt/qt5/qtbase_git.bb
+> @@ -231,7 +231,7 @@ do_install_append() {
+>          cp -a ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_QT_FONTS}
+>          chown -R root:root ${D}/${OE_QMAKE_PATH_QT_FONTS}
+>      fi
+> -    cp -a ${B}/lib/libqt* ${D}${libdir}
+> +    cp -r ${B}/lib/libqt* ${D}${libdir}
+>      # Remove example.pro file as it is useless
+>      rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro
+>
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
