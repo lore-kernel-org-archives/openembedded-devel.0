@@ -1,47 +1,35 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-yk0-f172.google.com (mail-yk0-f172.google.com
-	[209.85.160.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 67AA27653B
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lb0-f182.google.com (mail-lb0-f182.google.com
+	[209.85.217.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 931F4755F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 16:27:13 +0000 (UTC)
-Received: by ykdr3 with SMTP id r3so47979816ykd.1
+	Thu, 29 Oct 2015 17:01:25 +0000 (UTC)
+Received: by lbbec13 with SMTP id ec13so33665829lbb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 09:27:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems_com_br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=9SK3VcasYOgehwurkIGXUll+wCTpLXUX9Yc6BAp9aL4=;
-	b=icMn36gKees1Bq+/TJRpxPRLG6+Y196UuWin9IKghhcdH+haEY7m8NtOMVWYkqGoz1
-	Nq4IQcrKhX1nSraKoqykAGQyqn7KGlCnXTBHX/G5KB1cJTTpIQvysijnF3RCnbywacvo
-	/Mn8xgerKfhYMaJbg5FCxElhi4SJqYh8k9PN0Gf+Dgr8/5ybpT6cNf+v1BXnQp71v/JJ
-	4YreLmaEielH1O8yVShVYx8QBlqSbtCAAIFfT6+O1EDlqQPzF1z8MNxaQw7gUIiTDEsT
-	t9aYmX5g0IaB+KO7VdOh5ljQh7hzXX7gXtHYzuBtmogJD0ISACv6ajQP5MAJ/Ejk7xHM
-	fJmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=9SK3VcasYOgehwurkIGXUll+wCTpLXUX9Yc6BAp9aL4=;
-	b=m9H0QS6vDz1r0Tbk9tTMhSGkmDcYcJS/dsZdiq6eOBpI443R8v2EJbWiM1HFiOzKI6
-	TNr5gwGx1BrlGpVlacbYQEF1vUROHbvJgJiCQi1hxxa5PtJXUr0i50WwWJ14PcXdJbn+
-	Jb7qtgynuDLlNE2c7jMBgwIKEVCIiOvTEzhM9UjQtqrOIcT98p26y026mqhS6QEBoLxK
-	WP9IOvG1WB62qdiDbyHp3vd/I4MRGkfvLLWe2r0+FIjivr2GJGbSIlhJt9M2QV+QPTOd
-	vt0ke/54Q9qC0Z+QUaathoHO6Ud3sRyBzmrewkmH2oc+HVFDsMMSdhyjVJS2kXQnlSuW
-	vSyw==
-X-Gm-Message-State: ALoCoQl9MT9lcN5cia4KICMUbFZJblFG2qgVWZ37tbJFZhb/iVer9PBp8zq+IwLvMub+n072Sz8y
-X-Received: by 10.129.105.66 with SMTP id e63mr2084012ywc.244.1446136033772;
-	Thu, 29 Oct 2015 09:27:13 -0700 (PDT)
-Received: from localhost.localdomain ([201.22.227.56])
-	by smtp.gmail.com with ESMTPSA id
-	f67sm1267890ywd.19.2015.10.29.09.27.11
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 29 Oct 2015 09:27:12 -0700 (PDT)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Oct 2015 14:27:00 -0200
-Message-Id: <1446136020-13787-1-git-send-email-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-Cc: Fabio Berton <fabio.berton@ossystems.com.br>
-Subject: [meta-python][PATCH] python-cffi: Update to version 1.3.0
+	Thu, 29 Oct 2015 10:01:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=a2OIV0bBFz3ITpGzyiqamkd48mjVY/YEMg1HgO4wBnY=;
+	b=OAJoUaIJhLNdCJChz9A5bi+gSh/n6UPKk9iyXaaNzT0UWR/d044HcErJxAbiQW1nLa
+	SmPWGUqsxWrkv69duSCcBax9FtaIMF8XKTHnwpuC5schocI2Br/1WJfrM8tcvoUN7W1B
+	qrBVLbxjyO1usurExVOhDGaLSRJ390Byyejvqah2FXVJ8pBKeHZAR424UHzgcIKqrF5T
+	NLzZYhfrpiphWbiBYiMh2FsP1j2qTUYdMR4uzt5i7HFtxV5UrYqEzSAUmYCbdCjVNxZU
+	eU8JObK59NWTytU2QHmm2HK3wGQy1ZIqMjS6PYJhT1aDNvD8deSnvY2gWhXrBn3d40Oo
+	VKEQ==
+MIME-Version: 1.0
+X-Received: by 10.112.11.163 with SMTP id r3mr1587979lbb.8.1446138084704; Thu,
+	29 Oct 2015 10:01:24 -0700 (PDT)
+Received: by 10.25.34.202 with HTTP; Thu, 29 Oct 2015 10:01:24 -0700 (PDT)
+In-Reply-To: <1446137120.5251.111.camel@pbcl.net>
+References: <9D79B6D4-2FE1-4C77-A359-C0F47DCC090D@gmail.com>
+	<1446137120.5251.111.camel@pbcl.net>
+Date: Thu, 29 Oct 2015 10:01:24 -0700
+Message-ID: <CANx9H-BLJNKouUAidFAfMmTEQ3mtL34Hp+zCZQHm7WZuB1wOJg@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [OE-core] State of libcs in OE-Core glibc/uclibc/musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,33 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 16:27:13 -0000
+X-List-Received-Date: Thu, 29 Oct 2015 17:01:29 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
----
- .../python/{python-cffi_1.2.1.bb => python-cffi_1.3.0.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cffi_1.2.1.bb => python-cffi_1.3.0.bb} (62%)
+On Thu, Oct 29, 2015 at 9:45 AM, Phil Blundell <pb@pbcl.net> wrote:
 
-diff --git a/meta-python/recipes-devtools/python/python-cffi_1.2.1.bb b/meta-python/recipes-devtools/python/python-cffi_1.3.0.bb
-similarity index 62%
-rename from meta-python/recipes-devtools/python/python-cffi_1.2.1.bb
-rename to meta-python/recipes-devtools/python/python-cffi_1.3.0.bb
-index 0d0958c..0336bd8 100644
---- a/meta-python/recipes-devtools/python/python-cffi_1.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python-cffi_1.3.0.bb
-@@ -3,8 +3,8 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
- DEPENDS = "libffi python-pycparser"
- 
--SRC_URI[md5sum] = "faca1e420e80433db409bb1bdd0a3f45"
--SRC_URI[sha256sum] = "eab571deb0a152e2f53c404c08a94870a131526896cad08cd43bf86ce3771e3d"
-+SRC_URI[md5sum] = "a40ed8c8ac653c8fc7d5603711b06eaf"
-+SRC_URI[sha256sum] = "9daa53aff0b5cf64c85c10eab7ce6776880d0ee71b78cedeae196ae82b6734e9"
- 
- inherit pypi
- 
--- 
-2.1.4
+> On Thu, 2015-10-29 at 08:42 -0700, Khem Raj wrote:
+>
+> > I would like to make a proposal for 2.1 release where
+> >
+> > 1. Drop kconfig support in glibc and we become inline with upstream
+> > 2. Move musl support to OE-Core from meta-musl
+> > 3. Drop uclibc or leave it in current broken state, I would like to
+> > pull it out into a layer in meta-openembedded and we can leave the
+> > core plumbing as it is in OE-Core
+> > 4. Poky-tiny switches to use musl
+>
 
+In the past we have had issues with iconv support when using musl. Any
+experience good or bad with that?
 
