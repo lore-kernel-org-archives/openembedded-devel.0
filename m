@@ -1,66 +1,39 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-io0-f170.google.com (mail-io0-f170.google.com
-	[209.85.223.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 1763A755F4
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 6782D755F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 18:59:59 +0000 (UTC)
-Received: by ioll68 with SMTP id l68so56861028iol.3
+	Thu, 29 Oct 2015 19:14:28 +0000 (UTC)
+Received: by wmec75 with SMTP id c75so30759466wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 11:59:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems_com_br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:content-type; bh=y4byDhrY8En7EV6KsVkWwIKDUM/A3H/7yNr87vQo/uA=;
-	b=tSFU7ly6Bylqd9IR3lO63zj7o+fMU+Bo3Cc4qZuZRwGmJufZd0GeBKFmZ5qxkn/EYR
-	oLd1AhNq/Yo2eSXZW8q4bEDFKrRyrQGnpqn0PKYztZ5mO3IgPV3HKjG/yopknCvXkLHC
-	ZkY5I+xsQ6gH3JJQRKw0T3F7Nd7OpocAEkJp3WCXRmKngYnKx2QvpfVzdU6X6XcwtJDn
-	SmlsBBD2DK9OD7Oxf078KIAhWlJGcmfVYLBbPgh3nUSjpdc5xniReF+Xaqk8qVv1ZMpk
-	1Lu0b7j0qm1nXGbq+lmTAKNt2JMgerDDb5WzOnm7Y4e7dE7lGnbRHJFbQvdk7J0zZPIR
-	E5iQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:content-type;
-	bh=y4byDhrY8En7EV6KsVkWwIKDUM/A3H/7yNr87vQo/uA=;
-	b=Hv1jNuLthlZe33vGGgDTRy8YsIluuI6tYkc8IDhQF0H8FKyKauw2i7U9dyjN/8tJee
-	PPQZ7WlWsd+LN8O5xGccYeZQ6SdaPVcWO+ojxCD577PzwNNDHK7Wrde9FDImhSonIQGC
-	vRN4qxRzgj6ic32ETuYNm9J8TGDRy2sOcjKxnoLnsnhom49lQCf1PRMwCPSmgyhjE6lo
-	8E79rBdDo56GT9GB0vwfMZoDkNsb3k9zGD3u4j6MdW5Gv5nredynvWe8nf2X2K0KnNtV
-	DRU1QTTk0odstdbQhWIVuPZwAjjQ2bVoE6Ve4F3y7cgJ8A4r0mDwPFYKIKQd/yZhoIhW
-	mIxA==
-X-Gm-Message-State: ALoCoQnygktEMiPPMF5a4AL38tTMoaIXVAGsg9epWKoJ1Qz7hFHd/VzKnC45WksNxBO/9GmAE5Th
-X-Received: by 10.107.12.142 with SMTP id 14mr5127773iom.78.1446145199492;
-	Thu, 29 Oct 2015 11:59:59 -0700 (PDT)
-Received: from mail-io0-f182.google.com (mail-io0-f182.google.com.
-	[209.85.223.182])
-	by smtp.gmail.com with ESMTPSA id 71sm1452102iof.28.2015.10.29.11.59.57
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 29 Oct 2015 11:59:58 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by iofz202 with SMTP id z202so56378731iof.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 11:59:57 -0700 (PDT)
+	Thu, 29 Oct 2015 12:14:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=SeC8RBMZJBfbiWoyrSFJqkU0Sz5yMOy9VJBvpX2Jsh8=;
+	b=C5MwXObcH8SJGTE7DlfVgZEeqyVXJmZd1V7Oics5s9nyXzKlv4m8gIuEF2lj1rrLPk
+	9pQYjXKn/Uzox3v/czaMao1rZzTiuCb9VMkH/mcKPbtUl4XrFhg9ViE63L9u7d3cfUQ6
+	wakzTwRSIAxUpj9Ry+1l+K7gISsSq3QmGBwU+J2oX8Ld4Uw9nVO3SITG3dY7zX2qzxIe
+	LBO46kj0pjpgkfIw0aMSRK7Bn/oqCnS1SO+Yp4uNY92J5SLGfkaDgRcjVLkUMyIU0YhP
+	5erj0IwuiloMoXBp52zwszPLMK5rB5kyv1FHUVojJouxqQ8ZR4QOLI/5w6PORdV7sOBc
+	imlw==
+X-Received: by 10.28.88.143 with SMTP id m137mr8638426wmb.13.1446146068384;
+	Thu, 29 Oct 2015 12:14:28 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	q141sm4952889wmg.3.2015.10.29.12.14.26
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 29 Oct 2015 12:14:26 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 29 Oct 2015 20:14:55 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151029191455.GC2564@jama>
+References: <1445901886-17887-1-git-send-email-philip@blister.org>
 MIME-Version: 1.0
-X-Received: by 10.107.131.147 with SMTP id n19mr5463714ioi.192.1446145197597; 
-	Thu, 29 Oct 2015 11:59:57 -0700 (PDT)
-Received: by 10.36.218.7 with HTTP; Thu, 29 Oct 2015 11:59:57 -0700 (PDT)
-In-Reply-To: <56326A97.4040107@skidata.com>
-References: <D1946B41-2BFF-49FA-A4C7-19A2A1D6C731@gmail.com>
-	<5631CDAD.7030703@skidata.com>
-	<A34BC9F8-F519-435B-B65A-26A533F78877@gmail.com>
-	<CAP9ODKrh9kxCTf3es2Oypx3rPNiKp9Fb3Nk6xafgrc=R+JEkwg@mail.gmail.com>
-	<9E01DDA7-C832-4E17-B17A-25850D0B27B5@gmail.com>
-	<563208F3.1040900@skidata.com>
-	<CAP9ODKoUv+-WXzXNEKdFWwFDbJnQGXZtiZzqXtBzS7MmwOXkYA@mail.gmail.com>
-	<56324006.8040905@skidata.com>
-	<CAP9ODKrnG2biyhwNESgA8DBQcaMgYZ39kdRTFU4Cv6PgvAjg4Q@mail.gmail.com>
-	<56326A97.4040107@skidata.com>
-Date: Thu, 29 Oct 2015 16:59:57 -0200
-Message-ID: <CAP9ODKogmLTnhkbcexo58JtSAbq74xta7OfVJ_szSYbxA2nfqg@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java][PATCH 4/4] openjdk-8: add recipes for openjdk-8 and openjre-8
+In-Reply-To: <1445901886-17887-1-git-send-email-philip@blister.org>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: Philip Balister <philip@opensdr.com>
+Subject: Re: [meta-oe][PATCH] llvm: Add recipe for llvm-3.7.0.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -74,34 +47,153 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 19:00:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 29 Oct 2015 19:14:33 -0000
+X-Groupsio-MsgNum: 58159
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="RIYY1s2vRbPFwWeW"
+Content-Disposition: inline
 
-On Thu, Oct 29, 2015 at 4:51 PM, Richard Leitner
-<richard.leitner@skidata.com> wrote:
-> On 10/29/2015 05:03 PM, Otavio Salvador wrote:
->> On Thu, Oct 29, 2015 at 1:49 PM, Richard Leitner
->> <richard.leitner@skidata.com> wrote:
->>>
->>> What indentation should be chosen? Tabs? Spaces (how much)?
->>> Maybe I have also time to fix that in the recipes-core.
->>
->> I would prefer 4 spaces.
->>
->
-> Generally I prefer real tabs displayed with 8 spaces width (like the
-> linux kernel coding style). But of course I will stick to the formatting
-> rules if we have one in OE layers ;-)
->
-> Is there a generally considered rule/advisory across all OE layers or
-> meta-java?
-> If yes, where do I find it?
-> If no, wouldn't that be a good idea? (and of course write it down!)
+--RIYY1s2vRbPFwWeW
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-http://www.openembedded.org/wiki/Styleguide
+On Mon, Oct 26, 2015 at 04:24:46PM -0700, Philip Balister wrote:
+> From: Philip Balister <philip@opensdr.com>
+>=20
+> This version builds in parallel with the 3.3 recipe. I had to use the
+> mesa llvmpipe driver, which required updates to llvm and mesa before it
+> worked. With updates, I succesfully used the mesa llvmpipe driver.
+>=20
+>  * Move the licence file checksum to the version specific part of the rec=
+ipe
+>  * License changed for 3.7.0 due to year change and adding related softwa=
+re
+>  * llvm source is now compressed with xz not gz.
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+It fails to build on older Ubuntu-12.04 with:
+| checking whether GCC is new enough... no
+| configure: error:
+| The selected GCC C++ compiler is not new enough to build LLVM. Please upg=
+rade
+| to GCC 4.7. You may pass --disable-compiler-version-checks to configure to
+| bypass these sanity checks.
 
+Shouldn't it check the cross compiler instead of the native one from
+host? (in this build it was 5.2)
+
+> Signed-off-by: Philip Balister <philip@opensdr.com>
+> ---
+>  meta-oe/recipes-core/llvm/llvm.inc           |  3 +--
+>  meta-oe/recipes-core/llvm/llvm3.3_3.3.bb     |  4 ++++
+>  meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb | 24 ++++++++++++++++++++++=
+++
+>  3 files changed, 29 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb
+>=20
+> diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-core/ll=
+vm/llvm.inc
+> index 04c87aa..7df4f4c 100644
+> --- a/meta-oe/recipes-core/llvm/llvm.inc
+> +++ b/meta-oe/recipes-core/llvm/llvm.inc
+> @@ -23,7 +23,6 @@ HOMEPAGE =3D "http://llvm.org"
+>  # 3-clause BSD-like
+>  # University of Illinois/NCSA Open Source License
+>  LICENSE =3D "NCSA"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3Dd0a3ef0d3e0e8f5cf59e5ffc2=
+73ab1f8"
+> =20
+>  DEPENDS =3D "libffi libxml2-native llvm-common"
+> =20
+> @@ -32,7 +31,7 @@ inherit perlnative pythonnative autotools
+>  LLVM_RELEASE =3D "${PV}"
+>  LLVM_DIR =3D "llvm${LLVM_RELEASE}"
+> =20
+> -SRC_URI =3D "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.gz"
+> +SRC_URI =3D "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.xz"
+>  S =3D "${WORKDIR}/llvm-${PV}.src"
+> =20
+>  LLVM_BUILD_DIR =3D "${WORKDIR}/llvm-${PV}.build"
+> diff --git a/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb b/meta-oe/recipes-c=
+ore/llvm/llvm3.3_3.3.bb
+> index 60a2221..f1562f6 100644
+> --- a/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb
+> +++ b/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb
+> @@ -1,8 +1,12 @@
+>  require llvm.inc
+> =20
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3Dd0a3ef0d3e0e8f5cf59e5ffc2=
+73ab1f8"
+> +
+>  DEPENDS +=3D "zlib"
+>  EXTRA_OECONF +=3D "--enable-zlib"
+> =20
+> +# Overwrite SRC_URI from include file since older llvm uses .gz compress=
+ion
+> +SRC_URI =3D "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.gz"
+>  SRC_URI +=3D "file://Remove-error-output-from-configure-if-CFLAGS-is-set=
+-.patch"
+> =20
+>  SRC_URI_append_libc-uclibc =3D " file://arm_fenv_uclibc.patch "
+> diff --git a/meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb b/meta-oe/recip=
+es-core/llvm/llvm3.7.0_3.7.0.bb
+> new file mode 100644
+> index 0000000..813b185
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb
+> @@ -0,0 +1,24 @@
+> +require llvm.inc
+> +
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3D4c0bc17c954e99fd547528d93=
+8832bfa"
+> +
+> +DEPENDS +=3D "zlib"
+> +EXTRA_OECONF +=3D "--enable-zlib"
+> +
+> +SRC_URI_append_libc-uclibc =3D " file://arm_fenv_uclibc.patch "
+> +
+> +SRC_URI[md5sum] =3D "b98b9495e5655a672d6cb83e1a180f8e"
+> +SRC_URI[sha256sum] =3D "ab45895f9dcdad1e140a3a79fd709f64b05ad7364e308c0e=
+582c5b02e9cc3153"
+> +
+> +PACKAGECONFIG ??=3D ""
+> +PACKAGECONFIG[r600] =3D "--enable-experimental-targets=3DR600,,,"
+> +
+> +PACKAGE_DEBUG_SPLIT_STYLE =3D "debug-without-src"
+> +
+> +# Fails to build with thumb-1 (qemuarm)
+> +# | {standard input}: Assembler messages:
+> +# | {standard input}:22: Error: selected processor does not support Thum=
+b mode `stmdb sp!,{r0,r1,r2,r3,lr}'
+> +# | {standard input}:31: Error: lo register required -- `ldmia sp!,{r0,r=
+1,r2,r3,lr}'
+> +# | {standard input}:32: Error: lo register required -- `ldr pc,[sp],#4'
+> +# | make[3]: *** [/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te=
+-oe-linux-gnueabi/llvm3.3/3.3-r0/llvm-3.3.build/lib/Target/ARM/Release/ARMJ=
+ITInfo.o] Error 1
+> +ARM_INSTRUCTION_SET =3D "arm"
+> --=20
+> 1.9.3
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--RIYY1s2vRbPFwWeW
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEUEARECAAYFAlYycC8ACgkQN1Ujt2V2gBxw6gCeK3uxl9ptO08rczs6MOlFUfne
+Yl4Al2x7zLpoLflSGhDdhnMHLc/QNz0=
+=CIlb
+-----END PGP SIGNATURE-----
+
+--RIYY1s2vRbPFwWeW--
