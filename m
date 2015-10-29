@@ -1,25 +1,31 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id 90FD1755F4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 20:22:34 +0000 (UTC)
-Received: (qmail 7299 invoked by uid 1003); 29 Oct 2015 20:22:35 -0000
-Received: from unknown (HELO ?10.16.32.95?)
-	(philip@opensdr.com@207.114.172.147)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	29 Oct 2015 20:22:34 -0000
-To: openembedded-devel@lists.openembedded.org
-References: <1445901886-17887-1-git-send-email-philip@blister.org>
-	<20151029191455.GC2564@jama>
-From: Philip Balister <philip@balister.org>
-Message-ID: <56328009.30808@balister.org>
-Date: Thu, 29 Oct 2015 13:22:33 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.1.0
+Return-Path: <mark.hatle@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id DEFEB755F4;
+	Thu, 29 Oct 2015 20:26:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id t9TKQ9iW007000
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 29 Oct 2015 13:26:09 -0700 (PDT)
+Received: from Marks-MacBook-Pro.local (172.25.36.227) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.248.2; Thu, 29 Oct 2015 13:26:09 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <9D79B6D4-2FE1-4C77-A359-C0F47DCC090D@gmail.com>
+	<56327C86.60202@windriver.com>
+	<CAMKF1soy5s8iwBBP21cVS=o2ynkKBmoijStH3MjEoYz8uu4yaA@mail.gmail.com>
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+Message-ID: <563280E0.2080809@windriver.com>
+Date: Thu, 29 Oct 2015 15:26:08 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:38.0)
+	Gecko/20100101 Thunderbird/38.3.0
 MIME-Version: 1.0
-In-Reply-To: <20151029191455.GC2564@jama>
-Subject: Re: [meta-oe][PATCH] llvm: Add recipe for llvm-3.7.0.
+In-Reply-To: <CAMKF1soy5s8iwBBP21cVS=o2ynkKBmoijStH3MjEoYz8uu4yaA@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of libcs in OE-Core glibc/uclibc/musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,124 +39,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 20:22:35 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Oct 2015 20:26:13 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On 10/29/2015 12:14 PM, Martin Jansa wrote:
-> On Mon, Oct 26, 2015 at 04:24:46PM -0700, Philip Balister wrote:
->> From: Philip Balister <philip@opensdr.com>
+On 10/29/15 3:14 PM, Khem Raj wrote:
+> On Thu, Oct 29, 2015 at 1:07 PM, Mark Hatle <mark.hatle@windriver.com> wrote:
+>> On 10/29/15 10:42 AM, Khem Raj wrote:
+>>> Hi All,
+>>>
+>>> I would like to get everyone’s opinion on the libcs we maintain in OE-Core, as of now, we have
+>>>
+>>> glibc + cross localedef + kconfig patches which are left overs from eglibc days
 >>
->> This version builds in parallel with the 3.3 recipe. I had to use the
->> mesa llvmpipe driver, which required updates to llvm and mesa before it
->> worked. With updates, I succesfully used the mesa llvmpipe driver.
+>> I do find the above useful -- include the kconfig part.
 >>
->>  * Move the licence file checksum to the version specific part of the recipe
->>  * License changed for 3.7.0 due to year change and adding related software
->>  * llvm source is now compressed with xz not gz.
+>>> uclibc - which is more of less unmaintained
+>>
+>> I've never used uclibc with the Yocto Project framework.  I think musl is a lot
+>> more compelling moving forward.
+>>
+>>> Its a significant effort to keep forward porting the kconfig changes since it touches everywhere in glibc, (I do it in my local glibc tree)
+>>> almost every week there is a commit in upstream glibc which breaks the kconfig patches, I know there are distribution profiles
+>>> like poky-tiny which uses glibc in this capacity, and may be then their are other custom one’s made on top, I would like us to not carry major
+>>> patches which almost makes our component a fork due to obvious maintenance cost. I think there is viable alternatives to tiny libcs in musl now.
+>>>
+>>> I would like to make a proposal for 2.1 release where
+>>>
+>>> 1. Drop kconfig support in glibc and we become inline with upstream
+>>
+>> I really would like to keep kconfig support still.  It's definitely useful, but
+>> it's of course not the main workflow.
 > 
-> It fails to build on older Ubuntu-12.04 with:
-> | checking whether GCC is new enough... no
-> | configure: error:
-> | The selected GCC C++ compiler is not new enough to build LLVM. Please upgrade
-> | to GCC 4.7. You may pass --disable-compiler-version-checks to configure to
-> | bypass these sanity checks.
-> 
-> Shouldn't it check the cross compiler instead of the native one from
-> host? (in this build it was 5.2)
+> its a lot of work and upstream is not so keen on supporting it either,
+> so even if we spend time to clean it up
+> and send upstream it might need dedicated maintenance which is going
+> to be quite frequent breakages
+> since no one will test all kconfig combos. At this point this is the
+> biggest drag to take glibc forward I spend lot of time on keeping
+> these
+> patches moving forward. so we want
+> to avoid needless effort if there is so little userbase for it. Cross
+> localedef and others we still will keep.
 
+I definitely understand this.... I wonder if the right answer is to create a
+project for this either under the Yocto Project umbrella or just as a separate
+project.. everything remains 'glibc' except for the kconfig chunk.
 
-How about disabling the check with the flag the message mentions? We
-aren't going to use this with any OE that has an older gcc.
+That -might- be able to relieve the burden from your shoulders.. but it wouldn't
+be an overnight process.  (And if nobody actually cares, it might prove that
+point and make it easier to justify removing.)
 
-Philip
-> 
->> Signed-off-by: Philip Balister <philip@opensdr.com>
->> ---
->>  meta-oe/recipes-core/llvm/llvm.inc           |  3 +--
->>  meta-oe/recipes-core/llvm/llvm3.3_3.3.bb     |  4 ++++
->>  meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb | 24 ++++++++++++++++++++++++
->>  3 files changed, 29 insertions(+), 2 deletions(-)
->>  create mode 100644 meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb
 >>
->> diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-core/llvm/llvm.inc
->> index 04c87aa..7df4f4c 100644
->> --- a/meta-oe/recipes-core/llvm/llvm.inc
->> +++ b/meta-oe/recipes-core/llvm/llvm.inc
->> @@ -23,7 +23,6 @@ HOMEPAGE = "http://llvm.org"
->>  # 3-clause BSD-like
->>  # University of Illinois/NCSA Open Source License
->>  LICENSE = "NCSA"
->> -LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=d0a3ef0d3e0e8f5cf59e5ffc273ab1f8"
->>  
->>  DEPENDS = "libffi libxml2-native llvm-common"
->>  
->> @@ -32,7 +31,7 @@ inherit perlnative pythonnative autotools
->>  LLVM_RELEASE = "${PV}"
->>  LLVM_DIR = "llvm${LLVM_RELEASE}"
->>  
->> -SRC_URI = "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.gz"
->> +SRC_URI = "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.xz"
->>  S = "${WORKDIR}/llvm-${PV}.src"
->>  
->>  LLVM_BUILD_DIR = "${WORKDIR}/llvm-${PV}.build"
->> diff --git a/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb b/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb
->> index 60a2221..f1562f6 100644
->> --- a/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb
->> +++ b/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb
->> @@ -1,8 +1,12 @@
->>  require llvm.inc
->>  
->> +LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=d0a3ef0d3e0e8f5cf59e5ffc273ab1f8"
->> +
->>  DEPENDS += "zlib"
->>  EXTRA_OECONF += "--enable-zlib"
->>  
->> +# Overwrite SRC_URI from include file since older llvm uses .gz compression
->> +SRC_URI = "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.gz"
->>  SRC_URI += "file://Remove-error-output-from-configure-if-CFLAGS-is-set-.patch"
->>  
->>  SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
->> diff --git a/meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb b/meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb
->> new file mode 100644
->> index 0000000..813b185
->> --- /dev/null
->> +++ b/meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb
->> @@ -0,0 +1,24 @@
->> +require llvm.inc
->> +
->> +LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=4c0bc17c954e99fd547528d938832bfa"
->> +
->> +DEPENDS += "zlib"
->> +EXTRA_OECONF += "--enable-zlib"
->> +
->> +SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
->> +
->> +SRC_URI[md5sum] = "b98b9495e5655a672d6cb83e1a180f8e"
->> +SRC_URI[sha256sum] = "ab45895f9dcdad1e140a3a79fd709f64b05ad7364e308c0e582c5b02e9cc3153"
->> +
->> +PACKAGECONFIG ??= ""
->> +PACKAGECONFIG[r600] = "--enable-experimental-targets=R600,,,"
->> +
->> +PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
->> +
->> +# Fails to build with thumb-1 (qemuarm)
->> +# | {standard input}: Assembler messages:
->> +# | {standard input}:22: Error: selected processor does not support Thumb mode `stmdb sp!,{r0,r1,r2,r3,lr}'
->> +# | {standard input}:31: Error: lo register required -- `ldmia sp!,{r0,r1,r2,r3,lr}'
->> +# | {standard input}:32: Error: lo register required -- `ldr pc,[sp],#4'
->> +# | make[3]: *** [/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/llvm3.3/3.3-r0/llvm-3.3.build/lib/Target/ARM/Release/ARMJITInfo.o] Error 1
->> +ARM_INSTRUCTION_SET = "arm"
->> -- 
->> 1.9.3
+>>> 2. Move musl support to OE-Core from meta-musl
 >>
->> -- 
+>> I wouldn't object to his.
+>>
+>>> 3. Drop uclibc or leave it in current broken state, I would like to pull it out into a layer in meta-openembedded and we can leave the core plumbing as it is in OE-Core
+>>
+>> I definitely wouldn't object to this.  I do think keeping the uclibc hooks and
+>> such in oe-core for the time being does make sense.  It would be interesting to
+>> know how often it is still being used... (and I do think musl is a better
+>> replacement for this use-case.)
+>>
+>>> 4. Poky-tiny switches to use musl
+>>
+>> I think there are two usages here.. one is a small 'glibc' interface where the
+>> API is glibc compatible, but restricted..
+>>
+>> And a "don't care about the libc, as long as it works and is small" use case
+>> which was traditionally uclibc, but now can be fulfilled by musl.
+>>
+>> I do still think a 'tiny' glibc is useful -- however with musl being a lot more
+>> capable of working then uclibc was, the usefulness may be diminishing.
+>>
+>>> may other disto’s have moved to using musl as system C library e.g. alpine linux, openwrt, and I am also deploying it in  real products
+>>> its pretty mature and well maintained with very healthy community around it. Right now meta-musl is capable of building and running
+>>> core-image-sato/core-image-weston for all supported Qemu arches in OE-Core, the amount of software it can build is no less than uclibc
+>>> support in OE-Core.
+>>
+>> This certainly makes it worthwhile to consider putting into oe-core proper.
+>> Again, I have no objections to introducing musl.
+>>
+>> --Mark
+>>
+>>> if collectively we think, this is a good move then I can work on all of above items in early phases of 2.1 so we can settle any
+>>> outstanding issues, due to the shuffle especially in poky-tiny
+>>>
+>>> Thoughts ?
+>>>
+>>> -Khem
+>>>
+>>>
+>>>
+>>
+>> --
 >> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
-> 
-> 
+>> Openembedded-core mailing list
+>> Openembedded-core@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
 
