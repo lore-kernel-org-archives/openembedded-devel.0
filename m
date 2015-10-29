@@ -1,37 +1,46 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f50.google.com (mail-qg0-f50.google.com
-	[209.85.192.50])
-	by mail.openembedded.org (Postfix) with ESMTP id A07EA73695
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 166F3755F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 11:06:37 +0000 (UTC)
-Received: by qgbb65 with SMTP id b65so30523151qgb.2
+	Thu, 29 Oct 2015 11:11:25 +0000 (UTC)
+Received: by wmll128 with SMTP id l128so22739925wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 04:06:38 -0700 (PDT)
+	Thu, 29 Oct 2015 04:11:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:from:date:to:subject:user-agent;
-	bh=FM166gKNc0/ZWyGlFK5ZHUxiykxKzd5V5PB8g4iPynE=;
-	b=a4q/btE0MfS59HgPMc8AaBSjXGQFZMz9mFhNXj0NrQt7zq8VkdVL2g2mNjbaovKE/5
-	zZYj3AwPdrhu1AWqxDnb6hzB40WkPeuQMK8QFaJDYcZLYSqDRtkdK5RZkA2Y+bw0ScVU
-	ogPTpm0iQ8ZMPn+zbpzaFZxXj13VkLdA2TlqNxOHStt+P4Rhuvu4rs0/Nwa2ZYcUE0dh
-	ico10yieqYSlUFNydw8EIyFc1KHWPUF9jTI0TDkFbUVCPRkpOFrUW5kdG3c8FXfOM5R7
-	TVrHzGtMRisMC9lAeEAWUX93SgVPUTtV82NVTvHny2mMnCs6r3l+7pzAMY9l2/khde+F
-	iNaw==
-X-Received: by 10.140.106.7 with SMTP id d7mr1217957qgf.98.1446116798029;
-	Thu, 29 Oct 2015 04:06:38 -0700 (PDT)
-Received: from localhost ([177.100.174.62]) by smtp.gmail.com with ESMTPSA id
-	f133sm102222qkb.22.2015.10.29.04.06.35
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 29 Oct 2015 04:06:37 -0700 (PDT)
-Message-ID: <5631fdbd.8b51370a.27a8b.09a5@mx.google.com>
-Received: by localhost (sSMTP sendmail emulation);
-	Thu, 29 Oct 2015 09:06:32 -0200
-From: "Otavio Salvador" <otavio.salvador@gmail.com>
-Date: Thu, 29 Oct 2015 09:06:32 -0200
-To: Meta-OpenEmbedded Mailing listing
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Z4KLlRe6Cl1WuM7Pu5tWPiQ5Rlo1cOld8T0plrLqG7o=;
+	b=bERXswoUQB0+GWBXFQiWVfwtgcnPeHv2YOOZVpMvPj7ZwTpj1TlEFDOvJn6OrMj1tP
+	eEZVYlulS5LgtCVn8smnot8Fwu6IOpnxn3xzoOPP2b1mzYEQqIlaiD1op8udUv0asaNM
+	omMa8AvbKXSLuZAb1TFBTnSdsTX277JWXxAtbAaZrBplcfktbt8HM2UA6INXoiHbpPRw
+	N9453wXpmYZ6Nz8MaTagHf+SeA6cvulr1h69kA561oz2+kbuD6UzvdR5R4RU3a93Y7r/
+	qfmct78q0pr29Vcw4e0vvQvJlT6xTx/GqwnSLVZYuhZO+q/b2nCJD0GfEApV7CaOZVCG
+	Beng==
+X-Received: by 10.28.140.213 with SMTP id o204mr6508495wmd.12.1446117084956;
+	Thu, 29 Oct 2015 04:11:24 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	ka10sm1234767wjc.30.2015.10.29.04.11.23
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 29 Oct 2015 04:11:23 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 29 Oct 2015 12:11:52 +0100
+To: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Message-ID: <20151029111152.GA2564@jama>
+References: <1445594855-39110-1-git-send-email-zhiquan.li@windriver.com>
+	<1445594855-39110-2-git-send-email-zhiquan.li@windriver.com>
+	<20151026124914.2854e87e@adi-pc-linux>
+	<689881552969744788D482C9A8FAED214EBAA9@ALA-MBB.corp.ad.wrs.com>
+	<20151027124927.448d2c15@adi-pc-linux>
+	<56317960.6030108@windriver.com>
+	<20151029110402.76ae98c8@adi-pc-linux>
+MIME-Version: 1.0
+In-Reply-To: <20151029110402.76ae98c8@adi-pc-linux>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-User-Agent: mail v14.8.5
-Subject: Updates to meta-java (master) in 2015-10-29
+Subject: Re: [PATCH 1/1] snort: fix m4 causes out of memory during configure [ LIN8-299 ]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,41 +54,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 11:06:39 -0000
+X-List-Received-Date: Thu, 29 Oct 2015 11:11:27 -0000
+X-Groupsio-MsgNum: 58138
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="DocE+STaALJfprDB"
+Content-Disposition: inline
 
-Hello,
+--DocE+STaALJfprDB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I pushed following updates:
+On Thu, Oct 29, 2015 at 11:04:02AM +0200, Ioan-Adrian Ratiu wrote:
+> On Thu, 29 Oct 2015 09:41:52 +0800
+> Zhiquan Li <zhiquan.li@windriver.com> wrote:
+>=20
+> >=20
+> >=20
+> > On 2015.10.27 18:49, Ioan-Adrian Ratiu wrote:
+> > > On Tue, 27 Oct 2015 09:54:07 +0000
+> > > "Li, Zhiquan" <Zhiquan.Li@windriver.com> wrote:
+> > >
+> > >> I need to evaluate the possibility to upgrade the snort recipe to
+> > >> >2.9.7, because upgrade to > 2.9.7, some patches will not work
+> > >> >anymore and the daq recipe also need to be upgraded to 2.0.4 at
+> > >> >least. The side-effect is uncertainty.
+> > >>
+> > > What exactly do you mean by "patches will not work anymore"?.
+> > > Do you mean thy do not apply on >2.9.7? AFAIK two of those
+> > > patches are not needed in 2.9.7.6 (fixed upstream), the others
+> > > just need refreshing.
+> > I've tried to upgrade snort from 2.9.6.0 to 2.9.7.5, as its
+> > dependency I also upgrade daq recipe from 2.0.2 to 2.0.6, and
+> > accordingly update the patches:
+> > * add 2 new patches for snort to solve the cross compile issues.
+> > * discard a snort patch since it is not needed.
+> > * refresh the patch for daq new version.
+> > Please see the attachment for the changes.
+> >=20
+> > Unfortunately , it was failed when packaging debug files, the rpm=20
+> > debugedit complain: canonicalization unexpectedly shrank by one
+> > character. At a glance it is a bug of debugedit, please see:=20
+> > http://sourceforge.net/p/snort/mailman/message/34130268/
+> > Redhat hasn't resolved this bug:=20
+> > https://bugzilla.redhat.com/show_bug.cgi?id=3D304121
+> >=20
+> > So, the options are:
+> > * Fix rpm debugedit bug and update it to OE
+> > * Take the workaround that skip the snort debug package
+> > * Backport the fix from snort upstream
+> >=20
+>=20
+> IMO anything rpm-based is fundamentally broken and not worth fixing
+> because of these kind of long-standing bugs. You spend tons of time
+> fixing one, then just hit another that was also ignored for +8 years.
+>=20
+> I don't think we should skip the debug package entirely because ipks
+> and debs should be fine. If it is possible to skip only rpm-debug pkgs
+> then this would be the best way to go IMO.
+>=20
+> Not upgrading the package and backporting fixes only to avoid this rpm
+> bug should be the last option.
+>=20
+> @Martin and @Khem, do you have any suggestions?
 
-commit a88718b6a6ec2a9429cbfd364d590ae69eb661e4 (HEAD -> pending, yocto/master, m/master)
-Author: Jens Rehsack <rehsack@gmail.com>
-Date:   Wed Oct 28 18:58:24 2015 +0100
+I've already merged this change to master-next and I plan to merge it to
+master and jethro soon (when jenkins builds are finished).
 
-    Avoid parse time errors due to dependency on x11, for distros without x11
-    
-    BitBake raises some errors when processing recipes that depend on x11
-    for distros that don't have x11 in DISTRO_FEATURES. To work around
-    that issue, REQUIRED_DISTRO_FEATURES = "x11" (from
-    distro_features_check.bbclass) has been set for the following recipes:
-    
-    * cacao (_class-target)
-    * classpath (_class-target)
-    * jamvm (_class-target)
-    * openjdk-7-release
-    
-    That makes BitBake skip those recipes during the cache generation
-    (they'd still be parsed, but ignored).
-    
-    This patch improves the idea from Mario Domenech Goulart <mario@ossystems.com.br>
-    
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-    Acked-by: Richard Leitner <richard.leitner@skidata.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+It's good incremental step (fixes the root cause why it was
+blacklisted), upgrade to newer version is also good, but can be separate
+and only for master branch (as jethro is almost closed now).
+
+"canonicalization unexpectedly shrank by one character" is something we
+have to fix from time to time, but it's always doable in the component
+source (usually double slash in one of the paths), so it's not 8+ years
+kind of issue.
 
 Regards,
 
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+--DocE+STaALJfprDB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlYx/vcACgkQN1Ujt2V2gBz22wCgpI5AKgvKsE1xMsKmQBtWXO14
+O5oAoLjUzEuOyB9fkF3SD3js7zYMR5Yv
+=TR/i
+-----END PGP SIGNATURE-----
+
+--DocE+STaALJfprDB--
