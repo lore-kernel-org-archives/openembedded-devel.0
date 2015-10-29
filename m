@@ -1,28 +1,40 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail5.wrs.com (unknown [64.129.254.146])
-	by mail.openembedded.org (Postfix) with ESMTP id BFA9476710
+Return-Path: <sven.ebenfeld@gmail.com>
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 4656675D4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2015 02:22:59 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id t9T2Mwfk017862
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Wed, 28 Oct 2015 19:22:59 -0700
-Received: from [128.224.162.134] (128.224.162.134) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 28 Oct 2015 19:22:58 -0700
-To: akuster808 <akuster808@gmail.com>
-References: <1445914005-23569-1-git-send-email-rongqing.li@windriver.com>
-	<5630F654.6010009@gmail.com>
-From: Rongqing Li <rongqing.li@windriver.com>
-Message-ID: <56318300.8020600@windriver.com>
-Date: Thu, 29 Oct 2015 10:22:56 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.2.0
+	Thu, 29 Oct 2015 05:08:32 +0000 (UTC)
+Received: by wicll6 with SMTP id ll6so217774823wic.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Oct 2015 22:08:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=ZFEiaA0zI3ekyE9UPK31j3yZhH6TybuO+GuFx1LSW4k=;
+	b=qUPsnN46ujiHlxP6OuFNdFjGRe6Z7ueYbk0YZoixU+RKUQ++eV9KfP+FjqHgWU1Yzo
+	r6tVcvcbPDtBjLmz1Pu9gvLA6IBMeebvtKsfjueKGSqS3cHr30NiESEabAOTYxRperad
+	uHGd7GW6JpDVAumxGtumw72ledEUjCZ8DBLlQ45QygA1oZuhgYE2C4K0ZnmPsxK85KMG
+	Jmk8QOMUjZ70nSu2ywoidg/VYjEnGDDDJTErkuY4RqtJTNpxSNMzMBbgK9itet/rbB0c
+	agSUyE1CdoZwlj/cSo9fREgu5MN8eGqdm7392GjBi6kCxsgp5fpTLJEWL1r26dZtXNsD
+	m3Ig==
+X-Received: by 10.194.82.166 with SMTP id j6mr39229064wjy.63.1446095312643;
+	Wed, 28 Oct 2015 22:08:32 -0700 (PDT)
+Received: from [192.168.50.198] (ip-88-152-21-93.hsi03.unitymediagroup.de.
+	[88.152.21.93]) by smtp.googlemail.com with ESMTPSA id
+	5sm7157984wmg.14.2015.10.28.22.08.31
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 28 Oct 2015 22:08:31 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org,
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
+References: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
+From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
+Message-ID: <5631A9FF.4090605@gmail.com>
+Date: Thu, 29 Oct 2015 06:09:19 +0100
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
 MIME-Version: 1.0
-In-Reply-To: <5630F654.6010009@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH 1/3] dovecot: add PACKAGECONFIG for lz4
+In-Reply-To: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
+Subject: Re: OE/Yocto developer survey
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,51 +48,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2015 02:23:02 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 29 Oct 2015 05:08:34 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
 
 
-On 2015年10月29日 00:22, akuster808 wrote:
-> Roy,
->
-> Should any of these be back ported to Fido and Dizzy?
->
-> - armin
-
-
-not, I think;
-
-it is not a fatal
-
--Rpu
-
->
-> On 10/26/2015 07:46 PM, rongqing.li@windriver.com wrote:
->> From: Roy Li <rongqing.li@windriver.com>
->>
->> Signed-off-by: Roy Li <rongqing.li@windriver.com>
->> ---
->>   meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb
->> index 9b5f536..a01ef83 100644
->> --- a/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb
->> +++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb
->> @@ -23,6 +23,7 @@ PACKAGECONFIG ??= " \
->>
->>   PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
->>   PACKAGECONFIG[ldap] = "--with-ldap=plugin,--without-ldap,openldap,"
->> +PACKAGECONFIG[lz4] = "--with-lz4,--without-lz4,lz4,"
->>
->>   # From native build in armv7a-hf/eglibc
->>   CACHED_CONFIGUREVARS += "i_cv_signed_size_t=no \
->>
->
-
--- 
-Best Reagrds,
-Roy | RongQing Li
+Am 26.10.2015 um 20:18 schrieb Cliff Brake:
+> Hi,
+> 
+> I'd like to get some feedback on the following questions -- feel free
+> to respond to list, or directly to me, and I'll withhold your
+> name/company from any results.
+> 
+> I would like to collect feedback until 2015-11-02, and will summarize
+> the results after that.
+> 
+> My goal with this survey is to get a sense for best practices and what
+> is most commonly used among Yocto/OE developers so I can better advise
+> clients using Yocto/OE.  Hopefully this will also generate some
+> interesting discussions.
+> 
+> How long have you been using OE?  __2012__
+> 
+> How do you use OE/Yocto?
+> [ x] product development
+> [  ] hobby/research/education/yocto core developer, etc
+> 
+> What distro do you use?
+> [  ] Poky
+> [ x] Angstrom
+> [  ] nodistro or custom
+> 
+> How do you organize multiple git repos?
+> [  ] Git submodules
+> [  ] Repo
+> [ x] Other
+> 
+> What packaging system?
+> [ x] OPKG
+> [  ] RPM
+> [  ] Other
+> 
+> What GUI toolkits?
+> [  ] Qt
+> [  ] Gtk
+> [  ] EFL
+> [  ] HTML5/JS
+> [  ] Other
+> [ x] None
+> 
+> What init system?
+> [ x] systemd
+> [  ] sysvinit
+> [  ] busybox init
+> [  ] Other
+> 
+> What libc?
+> [ x] glibc
+> [  ] uclibc
+> [  ] musl
+> [  ] Other
+> 
+> How do you develop custom applications?
+> [  ] application-SDK
+> [  ] devshell
+> [ x] develop on PC, test on target
+> [  ] Other
+> 
+> What language do you primarily use for custom applications?
+> [ x] C
+> [  ] C++
+> [  ] Python
+> [  ] Javascript
+> [  ] Lua
+> [ x] Other
+> 
+> What do you use for Continuous Integration?
+> [  ] Buildbot
+> [ x] Jenkins
+> [  ] Other
+> 
+> Do you use any any of the tooling projects
+> (https://www.yoctoproject.org/tools-resources/projects) such as ADT,
+> Hob, Toaster, etc?
+> 
+> _____________No________
+> 
+> Reasons or explanations are appreciated, and please feel free to
+> include additional choices/information you think are relevant.
+> 
+> Thanks,
+> Cliff
+> 
 
