@@ -1,24 +1,36 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id 2FA177711C
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Oct 2015 19:56:56 +0000 (UTC)
-Received: (qmail 29869 invoked by uid 1003); 30 Oct 2015 19:56:57 -0000
-Received: from unknown (HELO ?10.16.32.95?)
-	(philip@opensdr.com@207.114.172.147)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	30 Oct 2015 19:56:57 -0000
-To: openembedded-devel@lists.openembedded.org
-References: <1446228808-18756-1-git-send-email-philip@balister.org>
-	<20151030195137.GD2566@jama>
-From: Philip Balister <philip@balister.org>
-Message-ID: <5633CB87.1070903@balister.org>
-Date: Fri, 30 Oct 2015 12:56:55 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.1.0
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-io0-f173.google.com (mail-io0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 34D5E75D4A;
+	Fri, 30 Oct 2015 20:55:02 +0000 (UTC)
+Received: by iody8 with SMTP id y8so92236753iod.1;
+	Fri, 30 Oct 2015 13:55:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=pGHF7kzacS4zHBGv0SqDaSM9/CacVdh7W0dNMG6MAog=;
+	b=wQseUa4G3Y6xDndSVLtWO2MJkmx1vwnXH9CxTNTPArCa6/bFvZ4xLsfGZI+LO6YG0b
+	JL629cgv2tlOOmTjoLKnflSpWXjm1G9hBPSZpONSnUW8FKt0IeTDFZgL3qcP4qVoJwUX
+	Pubw35wmyDF59BRVqlNyHnrArBQzYPGSelijKK13DXBP4Ks9BDt7y00BcO/CfbiPOKFP
+	L0gmfR17KYfUyGB8BLiKrQxfYvRZRPyPLy4632IlzlmWW3LwgWMyPZLScmz2d7MCi87C
+	/mhwteUlo1kpa2Y7vswoNW2bFcyWYnK9vCQsIuWF582y2HmK3Rub0AqKBH7sDs+w2mWb
+	8SwA==
+X-Received: by 10.107.3.77 with SMTP id 74mr11582520iod.49.1446238502631; Fri,
+	30 Oct 2015 13:55:02 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20151030195137.GD2566@jama>
-Subject: Re: [meta-oe][PATCHv2] llvm: Add recipe for llvm-3.7.0.
+Received: by 10.107.38.133 with HTTP; Fri, 30 Oct 2015 13:54:33 -0700 (PDT)
+In-Reply-To: <CAJ86T=UyxiAS3hf_t_R0PVrOqiO4CP1M8qgbw4toGiaC0ZT1HA@mail.gmail.com>
+References: <9D79B6D4-2FE1-4C77-A359-C0F47DCC090D@gmail.com>
+	<5633990D.3090308@gmail.com>
+	<CAJ86T=UyxiAS3hf_t_R0PVrOqiO4CP1M8qgbw4toGiaC0ZT1HA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 30 Oct 2015 13:54:33 -0700
+Message-ID: <CAMKF1sqcE8r_wRwKnfhg7T=Q2knr8yBLPpxn+6T=N5j31ndgPA@mail.gmail.com>
+To: Andre McCurdy <armccurdy@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of libcs in OE-Core glibc/uclibc/musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,137 +44,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2015 19:56:57 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 30 Oct 2015 20:55:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 10/30/2015 12:51 PM, Martin Jansa wrote:
-> On Fri, Oct 30, 2015 at 11:13:28AM -0700, Philip Balister wrote:
->> From: Philip Balister <philip@opensdr.com>
+On Fri, Oct 30, 2015 at 11:31 AM, Andre McCurdy <armccurdy@gmail.com> wrote=
+:
+> On Fri, Oct 30, 2015 at 9:21 AM, akuster808 <akuster808@gmail.com> wrote:
 >>
->> This version builds in parallel with the 3.3 recipe. I had to use the
->> mesa llvmpipe driver, which required updates to llvm and mesa before it
->> worked. With updates, I succesfully used the mesa llvmpipe driver.
 >>
->>  * Move the licence file checksum to the version specific part of the recipe
->>  * License changed for 3.7.0 due to year change and adding related software
->>  * llvm source is now compressed with xz not gz.
->>  * Disable compiler version check since it checks the host compiler.
-> 
-> I made one more change in master-next already, I've renamed it to 
-> llvm3.7_3.7.0.bb
-> 
-> I don't know if there will be 3.7.1 release, but I would assume that 3.7
-> series will be ABI compatible, so users of this won't need to update
-> DEPENDS when switching from 3.7.0 to 3.7.1 (if that exists).
-> 
-> OK?
-
-I tried doing this as 3.7, but for some reason (possibly installing
-something that required me to set the LLVM_VERSION to the full version,
-not 3.7) led me to version it this way.
-
-Check what gets installed as llvmconfig.x.y.x.
-
-Philip
-
-> 
->> Signed-off-by: Philip Balister <philip@opensdr.com>
->> ---
->>  meta-oe/recipes-core/llvm/llvm.inc           |  6 +++---
->>  meta-oe/recipes-core/llvm/llvm3.3_3.3.bb     |  4 ++++
->>  meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb | 24 ++++++++++++++++++++++++
->>  3 files changed, 31 insertions(+), 3 deletions(-)
->>  create mode 100644 meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb
+>> On 10/29/2015 08:42 AM, Khem Raj wrote:
+>>> Hi All,
+>>>
+>>> I would like to get everyone=E2=80=99s opinion on the libcs we maintain=
+ in OE-Core, as of now, we have
+>>>
+>>> glibc + cross localedef + kconfig patches which are left overs from egl=
+ibc days
+>>> uclibc - which is more of less unmaintained
+>>>
+>>> Its a significant effort to keep forward porting the kconfig changes si=
+nce it touches everywhere in glibc, (I do it in my local glibc tree)
+>>> almost every week there is a commit in upstream glibc which breaks the =
+kconfig patches, I know there are distribution profiles
+>>> like poky-tiny which uses glibc in this capacity, and may be then their=
+ are other custom one=E2=80=99s made on top, I would like us to not carry m=
+ajor
+>>> patches which almost makes our component a fork due to obvious maintena=
+nce cost. I think there is viable alternatives to tiny libcs in musl now.
+>>>
+>>> I would like to make a proposal for 2.1 release where
+>>>
+>>> 1. Drop kconfig support in glibc and we become inline with upstream
 >>
->> diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-core/llvm/llvm.inc
->> index 04c87aa..c9a4ce4 100644
->> --- a/meta-oe/recipes-core/llvm/llvm.inc
->> +++ b/meta-oe/recipes-core/llvm/llvm.inc
->> @@ -23,7 +23,6 @@ HOMEPAGE = "http://llvm.org"
->>  # 3-clause BSD-like
->>  # University of Illinois/NCSA Open Source License
->>  LICENSE = "NCSA"
->> -LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=d0a3ef0d3e0e8f5cf59e5ffc273ab1f8"
->>  
->>  DEPENDS = "libffi libxml2-native llvm-common"
->>  
->> @@ -32,7 +31,7 @@ inherit perlnative pythonnative autotools
->>  LLVM_RELEASE = "${PV}"
->>  LLVM_DIR = "llvm${LLVM_RELEASE}"
->>  
->> -SRC_URI = "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.gz"
->> +SRC_URI = "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.xz"
->>  S = "${WORKDIR}/llvm-${PV}.src"
->>  
->>  LLVM_BUILD_DIR = "${WORKDIR}/llvm-${PV}.build"
->> @@ -46,7 +45,8 @@ EXTRA_OECONF += "--disable-assertions \
->>                   --enable-libffi \
->>                   --enable-optimized \
->>                   --enable-shared \
->> -                 --enable-targets=host-only"
->> +                 --enable-targets=host-only \
->> +                 --disable-compiler-version-checks"
->>  EXTRA_OEMAKE += "REQUIRES_RTTI=1 VERBOSE=1"
->>  
->>  do_configure_prepend() {
->> diff --git a/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb b/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb
->> index 60a2221..f1562f6 100644
->> --- a/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb
->> +++ b/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb
->> @@ -1,8 +1,12 @@
->>  require llvm.inc
->>  
->> +LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=d0a3ef0d3e0e8f5cf59e5ffc273ab1f8"
->> +
->>  DEPENDS += "zlib"
->>  EXTRA_OECONF += "--enable-zlib"
->>  
->> +# Overwrite SRC_URI from include file since older llvm uses .gz compression
->> +SRC_URI = "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.gz"
->>  SRC_URI += "file://Remove-error-output-from-configure-if-CFLAGS-is-set-.patch"
->>  
->>  SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
->> diff --git a/meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb b/meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb
->> new file mode 100644
->> index 0000000..813b185
->> --- /dev/null
->> +++ b/meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb
->> @@ -0,0 +1,24 @@
->> +require llvm.inc
->> +
->> +LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=4c0bc17c954e99fd547528d938832bfa"
->> +
->> +DEPENDS += "zlib"
->> +EXTRA_OECONF += "--enable-zlib"
->> +
->> +SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
->> +
->> +SRC_URI[md5sum] = "b98b9495e5655a672d6cb83e1a180f8e"
->> +SRC_URI[sha256sum] = "ab45895f9dcdad1e140a3a79fd709f64b05ad7364e308c0e582c5b02e9cc3153"
->> +
->> +PACKAGECONFIG ??= ""
->> +PACKAGECONFIG[r600] = "--enable-experimental-targets=R600,,,"
->> +
->> +PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
->> +
->> +# Fails to build with thumb-1 (qemuarm)
->> +# | {standard input}: Assembler messages:
->> +# | {standard input}:22: Error: selected processor does not support Thumb mode `stmdb sp!,{r0,r1,r2,r3,lr}'
->> +# | {standard input}:31: Error: lo register required -- `ldmia sp!,{r0,r1,r2,r3,lr}'
->> +# | {standard input}:32: Error: lo register required -- `ldr pc,[sp],#4'
->> +# | make[3]: *** [/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/llvm3.3/3.3-r0/llvm-3.3.build/lib/Target/ARM/Release/ARMJITInfo.o] Error 1
->> +ARM_INSTRUCTION_SET = "arm"
->> -- 
->> 1.9.3
+>> Inline with upstream make a lot of sence and will help make maintenance
+>> simpler going forward.
 >>
->> -- 
+>>> 2. Move musl support to OE-Core from meta-musl
+>>
+>> I see no issue with this.
+>>
+>>> 3. Drop uclibc or leave it in current broken state, I would like to pul=
+l it out into a layer in meta-openembedded and we can leave the core plumbi=
+ng as it is in OE-Core
+>> If its not being maintained, then drop by 2.1.
+>
+> Maintenance of uclibc seems to have moved to the uclibc-ng project:
+>
+>   http://www.uclibc-ng.org/
+>
+> Developers are active and they make regular releases. Buildroot
+> switched to uclibc-ng as the default uclibc a few months ago and it
+> seems to be working OK for them:
+>
+>   http://git.buildroot.net/buildroot/commit/?id=3D68d4a3b5a6a6d03d67418e0=
+b637628ecf9cbf192
+
+Thats something needs to waited and watched.
+
+>
+>
+>>> 4. Poky-tiny switches to use musl
+>>
+>> If Poky-tiny is meant to showcase the smallest of the small , then that
+>> make sense.
+>>
+>> - armin
+>>
+>>>
+>>> may other disto=E2=80=99s have moved to using musl as system C library =
+e.g. alpine linux, openwrt, and I am also deploying it in  real products
+>>> its pretty mature and well maintained with very healthy community aroun=
+d it. Right now meta-musl is capable of building and running
+>>> core-image-sato/core-image-weston for all supported Qemu arches in OE-C=
+ore, the amount of software it can build is no less than uclibc
+>>> support in OE-Core.
+>>>
+>>> if collectively we think, this is a good move then I can work on all of=
+ above items in early phases of 2.1 so we can settle any
+>>> outstanding issues, due to the shuffle especially in poky-tiny
+>>>
+>>> Thoughts ?
+>>>
+>>> -Khem
+>>>
+>>>
+>>>
+>> --
 >> _______________________________________________
 >> Openembedded-devel mailing list
 >> Openembedded-devel@lists.openembedded.org
 >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
-> 
-> 
-
 
