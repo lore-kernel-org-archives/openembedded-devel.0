@@ -1,40 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B0C576FD0
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 574BC76F58
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Oct 2015 12:14:17 +0000 (UTC)
-Received: by wmff134 with SMTP id f134so10340941wmf.1
+	Fri, 30 Oct 2015 12:14:18 +0000 (UTC)
+Received: by wmeg8 with SMTP id g8so10456942wme.1
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 30 Oct 2015 05:14:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=xMiTAqp72SBD2d3QS3rWZ1E6E1j8780neS2BbAfNQSc=;
-	b=G9Xsiek+oNYC0BUsAvWGiruL9jZtUYqNV8M504fJgH0E/jE3Df/qgPgFVY75Hz4Ocq
-	xgE65wjfv1fIBXoLiI1FWzYOeK2bg1wb7+XRMDzjLRDi1QVN4LFRfUHA+E/S/o7daFiD
-	ZgO0HOE55Z6PSYJI6YZsM1HG+8gcYvDbroJr++6Yxzr7XmlZ+XVvKVwHpgYfFeeT8h7T
-	QMS6zPYQC3RRS8DwSYXeDtKsoqn4yD4xMYwJuu4LMTydFuYsbEjPPGQ7uffe47HKAtGL
-	yruMhP/uN4Hiv0HbfbEuGAUu3fcLjf2WubbFvrq78XtAKheFIoMt23IWVEJu8Yjx+Rs/
-	dZFQ==
-X-Received: by 10.28.215.203 with SMTP id o194mr3273937wmg.54.1446207258036;
+	bh=NqalWzBHCnZGbpcGfL0eZwa0GmabfLgWAr68JvUtH1k=;
+	b=Vrt0ZRW2VG5oxeXfazbNp3JJNX649CFj9zVwCUZl0wdnsO2VDKj975geQd5bda2g8l
+	W3wmzlCtl9X46XoWQgLhpBPfwnm7OB2PicxIxs4HZ/es9xBvERZWziI48zvJ7M+6/0vU
+	a/x4HIAHoNd9qhlZCSX2dV+Ke5SMk/IMqiHhQxVsnJs1EAymHQ7C3HW2MUDOKCW+sj+W
+	cNQ8coMGbcdg3nBltzbmH5wOMPsZK+7pMJaWkuZzQlNv/n6plFNhpm+IizmyE0KHAJfw
+	sbIRoQJ1YXn8gH+gWW9fv3UyVNr7yhBfMb7aQIPmoPwR7eMdkGYA34rjN4RWtMG099uF
+	bzgQ==
+X-Received: by 10.28.140.213 with SMTP id o204mr3294850wmd.12.1446207258872;
 	Fri, 30 Oct 2015 05:14:18 -0700 (PDT)
 Received: from localhost.localdomain
 	(ip-95-222-156-185.hsi15.unitymediagroup.de. [95.222.156.185])
 	by smtp.googlemail.com with ESMTPSA id
-	184sm2636122wmk.10.2015.10.30.05.14.17
+	184sm2636122wmk.10.2015.10.30.05.14.18
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 30 Oct 2015 05:14:17 -0700 (PDT)
+	Fri, 30 Oct 2015 05:14:18 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Oct 2015 13:13:34 +0100
-Message-Id: <1446207225-15386-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Fri, 30 Oct 2015 13:13:35 +0100
+Message-Id: <1446207225-15386-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.1.0
 In-Reply-To: <1446207225-15386-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1446207225-15386-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 02/13] xfce-polkit: initial add 0.2
+Subject: [PATCH 03/13] packagegroup-xfce-extended: xfce-polkit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,27 +54,22 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb
+ meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb
-new file mode 100644
-index 0000000..ab720f8
---- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb
-@@ -0,0 +1,11 @@
-+SUMMARY = "A simple PolicyKit authentication agent for XFCE"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=758b03f872a88c99fc36d50c5932091c"
-+
-+DEPENDS = "libxfce4ui polkit"
-+
-+inherit xfce-app
-+
-+SRC_URI = "git://github.com/ncopa/${BPN}.git"
-+SRCREV = "6ad1ee833c9e22e4dd72a8f7d54562d046965283"
-+S = "${WORKDIR}/git"
+diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+index 04934eb..ccd6f45 100644
+--- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
++++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+@@ -50,6 +50,8 @@ RRECOMMENDS_${PN} = " \
+     xfce4-hotcorner-plugin \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'xfce4-pulseaudio-plugin', '', d)} \
+     \
++    xfce-polkit \
++    \
+     thunar-media-tags-plugin \
+     thunar-archive-plugin \
+     \
 -- 
 2.1.0
 
