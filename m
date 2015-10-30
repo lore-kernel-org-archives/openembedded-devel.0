@@ -1,40 +1,40 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 36E0275894
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 94DEB75894
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Oct 2015 11:46:39 +0000 (UTC)
-Received: by wicfv8 with SMTP id fv8so8961202wic.0
+	Fri, 30 Oct 2015 12:14:17 +0000 (UTC)
+Received: by wmff134 with SMTP id f134so10340659wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Oct 2015 04:46:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to;
-	bh=1mbdmQwFXXreiWnGEz2MHudItqiI8nUnaZZZfZMxHCA=;
-	b=UsG1cApACYh5jW1WLP708uNyDI+O15IPS+KZOVoTTRZ6y3jY1ABlCseiKqSoOo2tJS
-	AO9UWewCoSKR0qA2ftA25UuXyo9MFF9EkPjJ7T824tqqRLWBLDfztMAUfOH3+HQ0KyBg
-	YMJHybgT/VIKw9CAlU3Je3T9x5eD8MFLHRGyFn/GPRoXqheFN0e1uHIuYJHP/257oeSo
-	vY15G4Zn7dxAt8QIXbIk69o9QMapHYlJsqvXCWme/UhrjYZSLn1ppqblhemuhU12lls7
-	JCtdl1pJtugF/47ud2uNu6tqslaV4jKzXmq7SsyK3gRlDnhN9XUJdotn2Jy4Ywgtx9R5
-	bu3w==
-X-Received: by 10.194.243.3 with SMTP id wu3mr9384197wjc.85.1446205599452;
-	Fri, 30 Oct 2015 04:46:39 -0700 (PDT)
-Received: from ernie.muppets.liwing.de (p578b540c.dip0.t-ipconnect.de.
-	[87.139.84.12])
-	by smtp.gmail.com with ESMTPSA id ql7sm817805wjc.37.2015.10.30.04.46.38
+	Fri, 30 Oct 2015 05:14:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=RmWG9BamULNBaudeDZEk/DhRKrMqqkHnAcDzXfDQ6ds=;
+	b=qoIfYMQHyzAM7zPP3ttW3ZT9WK225WmdkeWIUWZuW7yXuXUHDDC5UW9Gbfi9eEr6fc
+	pqbwmryvhAB6GZJB4CbHCQ1S4E+DjwQMDp4Vy1PjLVjTgYMzJcICWTuSVHEKs0Dq5ZAI
+	pTLNKuwiOepHejX7NI2kP4zA6DIkNRIiGT3hel0SR1569ZKUA3jMzfyKWJDynHqixoUQ
+	SNzm4Y07/jT+/8bPNEL4AXv+AIAKnZd8riATBc9i5ny4V/khmAiMPtMsiB7wctIxCRfM
+	Su6e3OkmZQPEeO04mN9yHgn27KCqo9yfL5t4lMNvrrddyFjztAqOuMLmirqrwEvMy0Xj
+	WLug==
+X-Received: by 10.28.6.70 with SMTP id 67mr3272401wmg.54.1446207257145;
+	Fri, 30 Oct 2015 05:14:17 -0700 (PDT)
+Received: from localhost.localdomain
+	(ip-95-222-156-185.hsi15.unitymediagroup.de. [95.222.156.185])
+	by smtp.googlemail.com with ESMTPSA id
+	184sm2636122wmk.10.2015.10.30.05.14.16
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 30 Oct 2015 04:46:38 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-From: Jens Rehsack <rehsack@gmail.com>
-In-Reply-To: <17C19527BD855F428F22685986FD58BEA16318@IRSMSX103.ger.corp.intel.com>
-Date: Fri, 30 Oct 2015 12:46:37 +0100
-Message-Id: <25A9A07D-261D-4E51-98CB-EB3307D7D9A2@gmail.com>
-References: <4BA9AF94-31D9-4B1D-99DD-5D1DE20533EA@gmail.com>
-	<17C19527BD855F428F22685986FD58BEA16318@IRSMSX103.ger.corp.intel.com>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 30 Oct 2015 05:14:16 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.2104)
-Subject: Re: [meta-java][PATCH 4/4] openjdk-8: add recipes for openjdk-8 and openjre-8
+Date: Fri, 30 Oct 2015 13:13:33 +0100
+Message-Id: <1446207225-15386-2-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.1.0
+In-Reply-To: <1446207225-15386-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1446207225-15386-1-git-send-email-schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+Subject: [PATCH 01/13] xfce4-vala: unbreak by telling configure vala API version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,85 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2015 11:46:41 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 30 Oct 2015 12:14:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> Am 30.10.2015 um 10:09 schrieb Kaaria, Erkka <erkka.kaaria@intel.com>:
->=20
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
->> Behalf Of Jens Rehsack
->> Sent: Tuesday, October 27, 2015 10:32 PM
->> To: OE-devel <openembedded-devel@lists.openembedded.org>
->> Subject: [oe] [meta-java][PATCH 4/4] openjdk-8: add recipes for =
-openjdk-8
->> and openjre-8
->>=20
->>=20
->> This adds openjdk-8 for native and target builds and allows a =
-stripped
->> openjre-8 being built as well instead of trying to cherry-pick jre
->> components from jdk-image.
->>=20
->> The recipes allow building openjdk-8 with or without:
->> * x11
->> * cups
->> * alsa/pulseaudio
->> and let packager enable unlimited-crypto, if desired.
->>=20
->> Since there can be only one PROVIDES for virtual/java-native and
->> virtual/javac-native,
->> move the provides to openjdk-8-native (I think everyone agrees it's a =
-better
->> choice than ecj-bootstrap-native).
->>=20
->> Plus: Applying a fix from openjdk-9 repository which fixes build =
-issues using
->> gcc5
->>=20
->> Signed-off-by: Jens Rehsack <sno@netbsd.org>
->> ---
->> <snip>
->> Jens Rehsack - rehsack@gmail.com
->>=20
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> Hi,
->=20
-> I tried applying this patch, but openjdk-8 do_fetch task failed due to =
-multiple incorrect checksums (corba, jaxp, jaxws, openjdk).
-
-Weird. Can this happen when a tag is rewritten?
-I have several company-intern customers who didn't report that - even =
-the last of them build last Monday (2015-10-26) for the first time.
-
-> After fixing the checksums manually, openjdk8-fix-shark-build.patch =
-failed due to hotspot/make/Makefile portion not applying.
-
-Maybe I should update to a recent tag and fix those issues...
-
-> Also, the openjdk-8-cross.inc currently uses openjdk-8-native as the =
-boostrap jdk for the openjkd/openjre-8. The build readme =
-(http://hg.openjdk.java.net/jdk8/jdk8/raw-file/tip/README-builds.html) =
-however suggests  that you should use the previous jdk version as the =
-boostrap jdk and that using openjdk 8 to boostrap openjdk 8 may =
-introduce unwanted dependencies. Perhaps using icedtea7-native would be =
-better here?
-
-openjdk-8-native uses icedtea7-native to bootstrap, openjdk-8 and =
-openjre-8 use openjdk-8-native to bootstrap.
-Can you explain which unwanted dependency openjdk-8-native might =
-introduce you don't even have by using icedtea7-native?
-
-Cheers
---=20
-Jens Rehsack - rehsack@gmail.com
+diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
+index 7bcffe5..c1900e9 100644
+--- a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
++++ b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
+@@ -5,12 +5,12 @@ DEPENDS = "libxfce4util garcon xfconf libxfce4ui xfce4-panel exo vala xfce4-dev-
+ 
+ inherit xfce
+ 
+-PNBLACKLIST[xfce4-vala] ?= "Fails to build since vala upgrade to 0.26.1"
+-
+ SRC_URI = "http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
+ SRC_URI[md5sum] = "0bbb1d6e473e0fe9b335b7b1b49d8a71"
+ SRC_URI[sha256sum] = "07a8f2b7c09fcdd3d86e0c52adea3c58ca011d0142a93997a01b4af77260ae7b"
+ 
++EXTRA_OECONF = "-with-vala-api=0.28"
++
+ FILES_${PN} += "${datadir}/vala-*/vapi"
+ 
+ RDEPENDS_${PN} = "vala"
+-- 
+2.1.0
 
 
