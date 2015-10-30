@@ -1,42 +1,42 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F05476FD0;
-	Fri, 30 Oct 2015 16:21:46 +0000 (UTC)
-Received: by pacfv9 with SMTP id fv9so81815864pac.3;
-	Fri, 30 Oct 2015 09:21:45 -0700 (PDT)
+Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
+	[209.85.220.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 50B0176710
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Oct 2015 16:58:55 +0000 (UTC)
+Received: by padhy1 with SMTP id hy1so73383763pad.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Oct 2015 09:58:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=L1yA8Bekd7244P7rJAiU6jFhaqJvgqniEy9JK/ltW2g=;
-	b=qaliF1XPfZWBeQfiiZ+hoaxJ33VRuNC4LgW9ka4al/WEOYX3w82d9rR4+jqpaCbjYs
-	QAy0gjZYwLmKdsXMHO3yVhQJUAmuWybRZ3x+Xw8jfSYzD8z64X2+RZhyRTAMtW5gModZ
-	2wQ/lvy/7Hm5qieImDhbZgxKhXHOfGDCni8T5buKsDpHTsB5jtJ4Tq4q60fuQrGJdfgs
-	J2MbN/ulG3GnvLjV1RFEFwV7W6akz4Lvl4sEElXmA5vOXIq92tLKP21Bl732kpsp+ECR
-	eWd0bqaYjrrre/7bn78sSAVwgMS0+FXWnYUu1S3VchJgVLG6vy+FmWS7VViqzsFudc2o
-	8crg==
-X-Received: by 10.68.243.106 with SMTP id wx10mr9724634pbc.151.1446222105701; 
-	Fri, 30 Oct 2015 09:21:45 -0700 (PDT)
+	h=subject:to:references:cc:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-type:content-transfer-encoding;
+	bh=M1Bco19XVChIuzgDELVt0dxKlCI3ZPEzxOwAaIm/rYU=;
+	b=x7YFnZLyLuhl6WWTgeTEVZJkejLmkIb5nhLO6mEyRyrj461Wtspskc5Gr2pL/4FsGw
+	EKPgDoTmSlwgzqicDtsc7e40fapNQPDr+OMO8Pa3Efvfg9oT6o/YM83r4+IIj6ycG9NA
+	UZhbEdOkVZvJmsFxHMO3JUx5AjN/si6gtSYwUWfrO0vZDBYX9R7133hneMI+QUHHc9Ov
+	H0opZhQmAQPY5/UbN+WRkj5F7DNntLw758a05Z+mRc/KWlYiAWPivTyg1m9QdThXFSMi
+	KbR+PDEeME8kNpF3nTGRQD+KxbBNo98QYQDurxnp/52nrdNIJjow/BL3VjWYQCYud+Ct
+	IfJw==
+X-Received: by 10.68.68.201 with SMTP id y9mr9300708pbt.10.1446224335556;
+	Fri, 30 Oct 2015 09:58:55 -0700 (PDT)
 Received: from ?IPv6:2601:202:4000:1239:b89f:56e0:63e5:80b9?
 	([2601:202:4000:1239:b89f:56e0:63e5:80b9])
 	by smtp.googlemail.com with ESMTPSA id
-	w8sm8987232pbs.87.2015.10.30.09.21.43
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 30 Oct 2015 09:21:43 -0700 (PDT)
-To: Khem Raj <raj.khem@gmail.com>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	Martin Jansa <Openembedded-devel@lists.openembedded.org>
-References: <9D79B6D4-2FE1-4C77-A359-C0F47DCC090D@gmail.com>
+	st5sm9156268pab.42.2015.10.30.09.58.53
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 30 Oct 2015 09:58:54 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <1446135813-13319-1-git-send-email-fabio.berton@ossystems.com.br>
 From: akuster808 <akuster808@gmail.com>
 X-Enigmail-Draft-Status: N1110
-Message-ID: <5633990D.3090308@gmail.com>
-Date: Fri, 30 Oct 2015 09:21:33 -0700
+Message-ID: <5633A1CB.9080508@gmail.com>
+Date: Fri, 30 Oct 2015 09:58:51 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
 	Thunderbird/38.3.0
 MIME-Version: 1.0
-In-Reply-To: <9D79B6D4-2FE1-4C77-A359-C0F47DCC090D@gmail.com>
-Subject: Re: [OE-core] State of libcs in OE-Core glibc/uclibc/musl
+In-Reply-To: <1446135813-13319-1-git-send-email-fabio.berton@ossystems.com.br>
+Cc: Fabio Berton <fabio.berton@ossystems.com.br>
+Subject: Re: [meta-networking][PATCH] lldpd: Update to version 0.7.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,59 +50,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2015 16:21:49 -0000
+X-List-Received-Date: Fri, 30 Oct 2015 16:58:57 -0000
 Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+
+This update also includes:
+
+CVE-2015-8012
 
 
 
-On 10/29/2015 08:42 AM, Khem Raj wrote:
-> Hi All,
+On 10/29/2015 09:23 AM, Fabio Berton wrote:
+> The fix-libevent-configure patch has been applied upstream, so we
+> removed it.
 > 
-> I would like to get everyone’s opinion on the libcs we maintain in OE-Core, as of now, we have
+> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+> ---
+>  .../lldpd/files/fix-libevent-configure.patch       | 39 ----------------------
+>  .../lldpd/{lldpd_0.7.17.bb => lldpd_0.7.19.bb}     |  5 ++-
+>  2 files changed, 2 insertions(+), 42 deletions(-)
+>  delete mode 100644 meta-networking/recipes-daemons/lldpd/files/fix-libevent-configure.patch
+>  rename meta-networking/recipes-daemons/lldpd/{lldpd_0.7.17.bb => lldpd_0.7.19.bb} (92%)
 > 
-> glibc + cross localedef + kconfig patches which are left overs from eglibc days
-> uclibc - which is more of less unmaintained
-> 
-> Its a significant effort to keep forward porting the kconfig changes since it touches everywhere in glibc, (I do it in my local glibc tree)
-> almost every week there is a commit in upstream glibc which breaks the kconfig patches, I know there are distribution profiles
-> like poky-tiny which uses glibc in this capacity, and may be then their are other custom one’s made on top, I would like us to not carry major
-> patches which almost makes our component a fork due to obvious maintenance cost. I think there is viable alternatives to tiny libcs in musl now.
-> 
-> I would like to make a proposal for 2.1 release where
-> 
-> 1. Drop kconfig support in glibc and we become inline with upstream
-
-Inline with upstream make a lot of sence and will help make maintenance
-simpler going forward.
-
-> 2. Move musl support to OE-Core from meta-musl
-
-I see no issue with this.
-
-> 3. Drop uclibc or leave it in current broken state, I would like to pull it out into a layer in meta-openembedded and we can leave the core plumbing as it is in OE-Core
-If its not being maintained, then drop by 2.1.
-
-> 4. Poky-tiny switches to use musl
-
-If Poky-tiny is meant to showcase the smallest of the small , then that
-make sense.
-
-- armin
-
-> 
-> may other disto’s have moved to using musl as system C library e.g. alpine linux, openwrt, and I am also deploying it in  real products
-> its pretty mature and well maintained with very healthy community around it. Right now meta-musl is capable of building and running
-> core-image-sato/core-image-weston for all supported Qemu arches in OE-Core, the amount of software it can build is no less than uclibc
-> support in OE-Core.
-> 
-> if collectively we think, this is a good move then I can work on all of above items in early phases of 2.1 so we can settle any
-> outstanding issues, due to the shuffle especially in poky-tiny
-> 
-> Thoughts ?
-> 
-> -Khem
-> 
-> 
+> diff --git a/meta-networking/recipes-daemons/lldpd/files/fix-libevent-configure.patch b/meta-networking/recipes-daemons/lldpd/files/fix-libevent-configure.patch
+> deleted file mode 100644
+> index 42d6b29..0000000
+> --- a/meta-networking/recipes-daemons/lldpd/files/fix-libevent-configure.patch
+> +++ /dev/null
+> @@ -1,39 +0,0 @@
+> -Upstream-Status: Submitted [https://github.com/vincentbernat/lldpd/issues/133]
+> -
+> -Subject: [PATCH] fix libevent configure
+> -
+> -Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+> ----
+> - m4/libevent.m4 | 4 ++--
+> - 1 file changed, 2 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/m4/libevent.m4 b/m4/libevent.m4
+> -index 275e5a5..dcd3309 100644
+> ---- a/m4/libevent.m4
+> -+++ b/m4/libevent.m4
+> -@@ -45,13 +45,11 @@ AC_DEFUN([lldp_CHECK_LIBEVENT], [
+> -         AC_MSG_ERROR([*** libevent not found])
+> -       fi
+> -     ])
+> --  fi
+> - 
+> -   if test x"$LIBEVENT_EMBEDDED" != x; then
+> -     unset LIBEVENT_LIBS
+> -     LIBEVENT_CFLAGS="-I\$(top_srcdir)/libevent/include -I\$(top_builddir)/libevent/include"
+> -     LIBEVENT_LDFLAGS="\$(top_builddir)/libevent/libevent.la"
+> --  fi
+> - 
+> -   # Call ./configure in libevent. Need it for make dist...
+> -   libevent_configure_args="$libevent_configure_args --disable-libevent-regress"
+> -@@ -64,6 +62,8 @@ AC_DEFUN([lldp_CHECK_LIBEVENT], [
+> -   libevent_configure_args="$libevent_configure_args --with-pic"
+> -   libevent_configure_args="$libevent_configure_args --enable-static"
+> -   lldp_CONFIG_SUBDIRS([libevent], [$libevent_configure_args])
+> -+  fi
+> -+  fi
+> - 
+> -   AM_CONDITIONAL([LIBEVENT_EMBEDDED], [test x"$LIBEVENT_EMBEDDED" != x])
+> -   AC_SUBST([LIBEVENT_LIBS])
+> --- 
+> -2.1.4
+> -
+> diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb b/meta-networking/recipes-daemons/lldpd/lldpd_0.7.19.bb
+> similarity index 92%
+> rename from meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb
+> rename to meta-networking/recipes-daemons/lldpd/lldpd_0.7.19.bb
+> index 47d3c38..7d54626 100644
+> --- a/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb
+> +++ b/meta-networking/recipes-daemons/lldpd/lldpd_0.7.19.bb
+> @@ -9,11 +9,10 @@ SRC_URI = "\
+>      http://media.luffy.cx/files/${PN}/${PN}-${PV}.tar.gz \
+>      file://lldpd.init.d \
+>      file://lldpd.default \
+> -    file://fix-libevent-configure.patch \
+>      "
+>  
+> -SRC_URI[md5sum] = "8cb74065956bc32a575ee5203b0e0fb5"
+> -SRC_URI[sha256sum] = "6b50b8aa47d1424a93ba3df55af26da41f7d5718db8d25e99291c4a6cd09c20e"
+> +SRC_URI[md5sum] = "4e924420e00ccd5dc289506f43221820"
+> +SRC_URI[sha256sum] = "aac11cb1fdc037709517372c70c9bf89c752ab8e5eaab9ce140b84ed5a0507c8"
+>  
+>  inherit autotools update-rc.d useradd systemd pkgconfig
+>  
 > 
 
