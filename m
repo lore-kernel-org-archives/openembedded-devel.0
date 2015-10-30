@@ -1,39 +1,33 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
-	[209.85.213.172])
-	by mail.openembedded.org (Postfix) with ESMTP id CAB1475D4A
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id BF1D975894
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Oct 2015 22:17:01 +0000 (UTC)
-Received: by igdg1 with SMTP id g1so21836662igd.1
+	Fri, 30 Oct 2015 23:41:07 +0000 (UTC)
+Received: by wmll128 with SMTP id l128so23180760wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Oct 2015 15:17:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
+	Fri, 30 Oct 2015 16:41:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	bh=l9cWwCw4gT6yeaUW/aHxBwNE542de49w8hyrBn8BLxs=;
-	b=iSsEREQBfwh0/IoS8aRXCO/MT0RgarXyuiDw4GuaS+fHKyy+dcDhQ7WUfXrky9TBQf
-	R9VsJ+ak73genl0noXnxnwLkcVVZXA6LmT3VCaDrqop7GBKbnP6nZjerI0no/s8kiN6R
-	+qHI854z/KcU9e3WhDPzwfD6mXWO7KSuXgtRZlMJuhaadH7GVpX6U0WMBgtKZzLLewaD
-	oCxNY4/ovjZqLj6CuaJ6lMKtGQvz/8u+MvheQmRaNvv1mf17by1HBiJHIZdQesaHf6vQ
-	lty/qJiprr9anAAGFTIFPxJgHsIfkaXV/cOp0W/n/UnBzZwf09w41aZdRwrE6IbA9xE8
-	D2aA==
+	bh=o/zrmx0MrR5jTPK8Q+wUX6BJ/yEOqyCgaLepIJPniI4=;
+	b=LNnl79eCJ79cxw0pNnFX4GJe43eqJViYejWElVpAnLvB/G+uEgLqWLrVhxA/Joe6Ek
+	dfcPApNpKAc0nN7AxJMed+av75LK0BUX4H4BhqhzPkHmtYMerVhJRfhnWcracjbELGuN
+	CRvqrgVGTP5aKuo0S27epqpk9K1QdgQGZq5PV9tyRoOY/0ujknIfkIu9IHaJ8lSNnw3t
+	o5ylwo8XDg6oxe21eWsJqGqaRaiT45IjJ/JPxfD7dw5zPkGZjGY9mtEx1C7bxj3hBy0H
+	h4Hb3b1JgiAsM6Qzk23822z2/3yGCqCNs4QFIalX5POgmBDQp8DVVIHVRDF4Nk3IPHdV
+	V6tw==
 MIME-Version: 1.0
-X-Received: by 10.50.64.147 with SMTP id o19mr671613igs.52.1446243421903; Fri,
-	30 Oct 2015 15:17:01 -0700 (PDT)
-Received: by 10.36.31.131 with HTTP; Fri, 30 Oct 2015 15:17:01 -0700 (PDT)
-In-Reply-To: <CAMKF1sqRg-WzvMpN=WwXj08zf7vS5kgC1Zr8-QRUt-eNsXhr7w@mail.gmail.com>
-References: <1446207225-15386-1-git-send-email-schnitzeltony@googlemail.com>
-	<1446207225-15386-14-git-send-email-schnitzeltony@googlemail.com>
-	<CAMKF1spmiD9ohoORXi7wnLBFNOFKeG0vgdpJ_n+-5b8-gp_F3A@mail.gmail.com>
-	<CALbNGRTL5Q-enOj1dp4kZvu1=122ebseTizbhh+ondfH31ieHw@mail.gmail.com>
-	<CAMKF1sqRg-WzvMpN=WwXj08zf7vS5kgC1Zr8-QRUt-eNsXhr7w@mail.gmail.com>
-Date: Fri, 30 Oct 2015 23:17:01 +0100
-Message-ID: <CALbNGRSuJKWXkJXgYORYqs9jNLS0_s5h9gtS8NFxXt_gSehFgw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 13/13] fontforge: avoid cloning uthash during do_compile
+X-Received: by 10.28.23.66 with SMTP id 63mr727604wmx.4.1446248466719; Fri, 30
+	Oct 2015 16:41:06 -0700 (PDT)
+Received: by 10.194.140.38 with HTTP; Fri, 30 Oct 2015 16:41:06 -0700 (PDT)
+In-Reply-To: <CALbNGRS-8OJ=XiWQcKjQeKZ9BBvBwUZMJ_yXr2HZ=DKL+S7Eqg@mail.gmail.com>
+References: <1446232789-12178-1-git-send-email-armccurdy@gmail.com>
+	<CALbNGRS-8OJ=XiWQcKjQeKZ9BBvBwUZMJ_yXr2HZ=DKL+S7Eqg@mail.gmail.com>
+Date: Fri, 30 Oct 2015 16:41:06 -0700
+Message-ID: <CAJ86T=WxQUoJmsbQBwWXwRosHJorbM4Kkmr7K2CJRavyJVZaNQ@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] ninja-native: add initial recipe, ninja 1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,65 +41,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2015 22:17:08 -0000
+X-List-Received-Date: Fri, 30 Oct 2015 23:41:08 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 30, 2015 at 11:01 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Fri, Oct 30, 2015 at 2:24 PM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
->> On Fri, Oct 30, 2015 at 10:02 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>> On Fri, Oct 30, 2015 at 5:13 AM, Andreas M=C3=BCller
->>> <schnitzeltony@googlemail.com> wrote:
->>>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->>>> ---
->>>>  meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb | 11 +++++++=
-++--
->>>>  1 file changed, 9 insertions(+), 2 deletions(-)
->>>>
->>>> diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb =
-b/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
->>>> index eb40eaa..21f955f 100644
->>>> --- a/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
->>>> +++ b/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
->>>> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM =3D " \
->>>>      file://LICENSE;md5=3D3f922b42ed0033fa0fd4cd3268f6429c \
->>>>  "
->>>>
->>>> -DEPENDS =3D "glib-2.0 pango giflib tiff libxml2 jpeg python libtool"
->>>> +DEPENDS =3D "glib-2.0 pango giflib tiff libxml2 jpeg python libtool u=
-thash"
->>>>  DEPENDS_append_class-target =3D " libxi"
->>>>
->>>>  inherit bootstrap pkgconfig pythonnative distro_features_check
->>>> @@ -20,7 +20,14 @@ S =3D "${WORKDIR}/git"
->>>>
->>>>  EXTRA_OECONF_append_class-native =3D " with_x=3Dno --disable-python-e=
-xtension --disable-python-scripting"
->>>>
->>>> -EXTRA_OEMAKE =3D "CFLAGS=3D'${CFLAGS} -I${B}/uthash/src'"
->>>> +do_configure_prepend() {
->>>> +    # uthash sources are expected in uthash/src
->>>> +    currdir=3D`pwd`
->>>> +    cd ${S}
->>>> +    mkdir -p uthash/src
->>>> +    cp ${STAGING_INCDIR}/ut*.h uthash/src
->>>
->>> why not teach the component's build system to refer it from sysroot
->>> and avoid copying this.
->> Simple answer: This solution is far more simple: Headers are exactly
->> there where Makefile would put them by cloning. Have no idea how many
->> files expect a fixed location for the uthash headers.
+On Fri, Oct 30, 2015 at 12:31 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> On Fri, Oct 30, 2015 at 8:19 PM, Andre McCurdy <armccurdy@gmail.com> wrot=
+e:
+>> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+>> ---
+>>  .../recipes-devtools/ninja/ninja-native_1.6.0.bb   | 25 +++++++++++++++=
++++++++
+>>  1 file changed, 25 insertions(+)
+>>  create mode 100644 meta-oe/recipes-devtools/ninja/ninja-native_1.6.0.bb
 >>
+>> diff --git a/meta-oe/recipes-devtools/ninja/ninja-native_1.6.0.bb b/meta=
+-oe/recipes-devtools/ninja/ninja-native_1.6.0.bb
+>> new file mode 100644
+>> index 0000000..c00710a
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-devtools/ninja/ninja-native_1.6.0.bb
+>> @@ -0,0 +1,25 @@
+>> +SUMMARY =3D "Ninja is a small build system with a focus on speed."
+>> +HOMEPAGE =3D "http://martine.github.com/ninja/"
+>> +LICENSE =3D "Apache-2.0"
+>> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da81586a64ad4e476c791cda7e2f2=
+c52e"
+>> +
+>> +DEPENDS =3D "re2c-native"
+>> +
+>> +inherit native
+>> +
+>> +SRCREV=3D"484c16336f19bd8970bb6e75322d61b92a229899"
+>> +
+>> +SRC_URI =3D "git://github.com/martine/ninja.git;branch=3Drelease"
+>> +
+>> +S=3D"${WORKDIR}/git"
+>> +
+>> +do_configure[noexec] =3D "1"
+>> +
+>> +do_compile() {
+>> +    python ${S}/configure.py --bootstrap
+>> +}
+>> +
+>> +do_install() {
+>> +    install -d ${D}${bindir}
+>> +    install -m 0755 ${S}/ninja ${D}${bindir}/
+>> +}
+>> --
+>> 1.9.1
+>>
+> Yes ninja-native needs a more central place. Currently we have it (at
+> least - I checked my environment only) in
 >
-> whereever they are used in sources use #include <foo.h>
-> and make sure that it respects -I$(STAGING_INCDIR) that should do it.
+> meta-qt5
+> meta-browser
+> meta-tizen
 >
-I know for sure - but because of this is done by patches this might
-cause additional maintenance when updating to next version of
-fontforge. But let's stop this here - Seems important to you to fix an
-error which nobody has detected before in a very clean way so I will
-look into that and probably send V2.
+> Once applied: Would you send patches to the other layers?
 
-Andreas
+Those layers all currently use older versions of ninja.
+
+Since I can't easily test all the packages in these layers, it's
+probably best if the respective layer maintainers take care of
+removing their own ninja-native recipes at their own pace (ie once
+they've tested against ninja 1.6.0 in meta-oe and confirmed that
+everything works as expected).
+
+
+> Andreas
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
