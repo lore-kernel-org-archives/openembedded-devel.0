@@ -1,33 +1,33 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id BF1D975894
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 25907759B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Oct 2015 23:41:07 +0000 (UTC)
-Received: by wmll128 with SMTP id l128so23180760wml.0
+	Sat, 31 Oct 2015 00:15:07 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ZsJp3-0003vF-Id for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Oct 2015 01:15:05 +0100
+Received: from hsi-kbw-078-043-227-090.hsi4.kabel-badenwuerttemberg.de
+	([78.43.227.90]) by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 31 Oct 2015 01:15:05 +0100
+Received: from js by hsi-kbw-078-043-227-090.hsi4.kabel-badenwuerttemberg.de
+	with local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Oct 2015 16:41:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=o/zrmx0MrR5jTPK8Q+wUX6BJ/yEOqyCgaLepIJPniI4=;
-	b=LNnl79eCJ79cxw0pNnFX4GJe43eqJViYejWElVpAnLvB/G+uEgLqWLrVhxA/Joe6Ek
-	dfcPApNpKAc0nN7AxJMed+av75LK0BUX4H4BhqhzPkHmtYMerVhJRfhnWcracjbELGuN
-	CRvqrgVGTP5aKuo0S27epqpk9K1QdgQGZq5PV9tyRoOY/0ujknIfkIu9IHaJ8lSNnw3t
-	o5ylwo8XDg6oxe21eWsJqGqaRaiT45IjJ/JPxfD7dw5zPkGZjGY9mtEx1C7bxj3hBy0H
-	h4Hb3b1JgiAsM6Qzk23822z2/3yGCqCNs4QFIalX5POgmBDQp8DVVIHVRDF4Nk3IPHdV
-	V6tw==
-MIME-Version: 1.0
-X-Received: by 10.28.23.66 with SMTP id 63mr727604wmx.4.1446248466719; Fri, 30
-	Oct 2015 16:41:06 -0700 (PDT)
-Received: by 10.194.140.38 with HTTP; Fri, 30 Oct 2015 16:41:06 -0700 (PDT)
-In-Reply-To: <CALbNGRS-8OJ=XiWQcKjQeKZ9BBvBwUZMJ_yXr2HZ=DKL+S7Eqg@mail.gmail.com>
-References: <1446232789-12178-1-git-send-email-armccurdy@gmail.com>
-	<CALbNGRS-8OJ=XiWQcKjQeKZ9BBvBwUZMJ_yXr2HZ=DKL+S7Eqg@mail.gmail.com>
-Date: Fri, 30 Oct 2015 16:41:06 -0700
-Message-ID: <CAJ86T=WxQUoJmsbQBwWXwRosHJorbM4Kkmr7K2CJRavyJVZaNQ@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
+	Sat, 31 Oct 2015 01:15:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] ninja-native: add initial recipe, ninja 1.6.0
+From: Joachim Schiele <js@lastlog.de>
+Date: Sat, 31 Oct 2015 01:14:52 +0100
+Message-ID: <n1115s$ucb$1@ger.gmane.org>
+References: <n0rbj0$tj9$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: hsi-kbw-078-043-227-090.hsi4.kabel-badenwuerttemberg.de
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
+In-Reply-To: <n0rbj0$tj9$1@ger.gmane.org>
+Subject: Re: [meta-qt5] how to setup and use a cross-compiler for qt5 applications?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,79 +41,385 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2015 23:41:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 31 Oct 2015 00:15:09 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Oct 30, 2015 at 12:31 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> On Fri, Oct 30, 2015 at 8:19 PM, Andre McCurdy <armccurdy@gmail.com> wrot=
-e:
->> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
->> ---
->>  .../recipes-devtools/ninja/ninja-native_1.6.0.bb   | 25 +++++++++++++++=
-+++++++
->>  1 file changed, 25 insertions(+)
->>  create mode 100644 meta-oe/recipes-devtools/ninja/ninja-native_1.6.0.bb
->>
->> diff --git a/meta-oe/recipes-devtools/ninja/ninja-native_1.6.0.bb b/meta=
--oe/recipes-devtools/ninja/ninja-native_1.6.0.bb
->> new file mode 100644
->> index 0000000..c00710a
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/ninja/ninja-native_1.6.0.bb
->> @@ -0,0 +1,25 @@
->> +SUMMARY =3D "Ninja is a small build system with a focus on speed."
->> +HOMEPAGE =3D "http://martine.github.com/ninja/"
->> +LICENSE =3D "Apache-2.0"
->> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da81586a64ad4e476c791cda7e2f2=
-c52e"
->> +
->> +DEPENDS =3D "re2c-native"
->> +
->> +inherit native
->> +
->> +SRCREV=3D"484c16336f19bd8970bb6e75322d61b92a229899"
->> +
->> +SRC_URI =3D "git://github.com/martine/ninja.git;branch=3Drelease"
->> +
->> +S=3D"${WORKDIR}/git"
->> +
->> +do_configure[noexec] =3D "1"
->> +
->> +do_compile() {
->> +    python ${S}/configure.py --bootstrap
->> +}
->> +
->> +do_install() {
->> +    install -d ${D}${bindir}
->> +    install -m 0755 ${S}/ninja ${D}${bindir}/
->> +}
->> --
->> 1.9.1
->>
-> Yes ninja-native needs a more central place. Currently we have it (at
-> least - I checked my environment only) in
->
-> meta-qt5
-> meta-browser
-> meta-tizen
->
-> Once applied: Would you send patches to the other layers?
+just wanted to report that i got it fixed, took me really quite some
+time to figure this out:
 
-Those layers all currently use older versions of ninja.
+solution: symlink linked
+/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/lib/qt5/mkspecs
+instead of
+/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/lib64/qt5/mkspecs
+          that is lib instead of lib64 and lib was obviously empty!
 
-Since I can't easily test all the packages in these layers, it's
-probably best if the respective layer maintainers take care of
-removing their own ninja-native recipes at their own pace (ie once
-they've tested against ninja 1.6.0 in meta-oe and confirmed that
-everything works as expected).
+linux@linux-VirtualBox:/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/x86_64-fslsdk-linux$
+sudo su
+[sudo] password for linux:
+root@linux-VirtualBox:/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/x86_64-fslsdk-linux#
+rm mkspecs
+root@linux-VirtualBox:/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/x86_64-fslsdk-linux#
+ln -s
+/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/lib64/qt5/mkspecs
+root@linux-VirtualBox:/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/x86_64-fslsdk-linux#
+exit
+linux@linux-VirtualBox:/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/x86_64-fslsdk-linux$
+cd ~/screenshot/
+linux@linux-VirtualBox:~/screenshot$ ls
+main.cpp  mkspecs  screenshot.cpp  screenshot.h  screenshot.pro  test
+test.c
+linux@linux-VirtualBox:~/screenshot$ qmake
+
+linux@linux-VirtualBox:~/screenshot$ make
+powerpc64-fsl-linux-g++  -mhard-float -m64 -mcpu=e6500
+--sysroot=/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux
+-c -pipe  -O2 -pipe -g -feliminate-unused-debug-types -O2 -Wall -W
+-D_REENTRANT -fPIE -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB
+-DQT_CORE_LIB
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/lib64/qt5/mkspecs/linux-oe-g++
+-I.
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5/QtWidgets
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5/QtGui
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5/QtCore
+-I. -o main.o main.cpp
+powerpc64-fsl-linux-g++  -mhard-float -m64 -mcpu=e6500
+--sysroot=/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux
+-c -pipe  -O2 -pipe -g -feliminate-unused-debug-types -O2 -Wall -W
+-D_REENTRANT -fPIE -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB
+-DQT_CORE_LIB
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/lib64/qt5/mkspecs/linux-oe-g++
+-I.
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5/QtWidgets
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5/QtGui
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5/QtCore
+-I. -o screenshot.o screenshot.cpp
+/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/x86_64-fslsdk-linux/usr/bin/qt5/moc
+-DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/lib64/qt5/mkspecs/linux-oe-g++
+-I.
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5/QtWidgets
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5/QtGui
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5/QtCore
+-I.
+-I/home/linux/QorIQ-SDK-V1.8-20150619-yocto/build_t4240rdb-64b_release/tmp/sysroots/t4240rdb-64b/usr/include/c++
+-I/home/linux/QorIQ-SDK-V1.8-20150619-yocto/build_t4240rdb-64b_release/tmp/sysroots/t4240rdb-64b/usr/include/c++/powerpc64-fsl-linux
+-I/home/linux/QorIQ-SDK-V1.8-20150619-yocto/build_t4240rdb-64b_release/tmp/sysroots/t4240rdb-64b/usr/include/c++/backward
+-I/home/linux/QorIQ-SDK-V1.8-20150619-yocto/build_t4240rdb-64b_release/tmp/sysroots/x86_64-linux/usr/lib/ppc64e6500-fsl-linux/gcc/powerpc64-fsl-linux/4.9.2/include
+-I/home/linux/QorIQ-SDK-V1.8-20150619-yocto/build_t4240rdb-64b_release/tmp/sysroots/x86_64-linux/usr/lib/ppc64e6500-fsl-linux/gcc/powerpc64-fsl-linux/4.9.2/include-fixed
+-I/home/linux/QorIQ-SDK-V1.8-20150619-yocto/build_t4240rdb-64b_release/tmp/sysroots/t4240rdb-64b/usr/include
+screenshot.h -o moc_screenshot.cpp
+powerpc64-fsl-linux-g++  -mhard-float -m64 -mcpu=e6500
+--sysroot=/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux
+-c -pipe  -O2 -pipe -g -feliminate-unused-debug-types -O2 -Wall -W
+-D_REENTRANT -fPIE -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB
+-DQT_CORE_LIB
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/lib64/qt5/mkspecs/linux-oe-g++
+-I.
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5/QtWidgets
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5/QtGui
+-I/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/include/qt5/QtCore
+-I. -o moc_screenshot.o moc_screenshot.cpp
+powerpc64-fsl-linux-g++  -mhard-float -m64 -mcpu=e6500
+--sysroot=/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux
+-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-O1 -o screenshot
+main.o screenshot.o moc_screenshot.o
+-L/opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/ppc64e6500-fsl-linux/usr/lib
+-lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread
+
+yay!
 
 
-> Andreas
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+On 28.10.2015 21:35, Joachim Schiele wrote:
+> hi,
+> 
+> i need some directions on how to go on.
+> 
+> 
+> # questions
+> - should i use meta-qt5 master instead of daisy on my platform?
+> - is meta-toolchain-qt5 the right way to cross compile an application
+> vom x86_64 to ppc64 or did i miss something?
+> - how to get all qtdemo applications onto the target image (read:
+> sd-card image)
+> 
+> 
+> 
+> 
+> 
+> # my requirements
+> - develop qt 5.x applications on yocto+poky on PPC64
+> - either use a cross compiler, meta-toolchain-qt5, or compile software
+> natively
+> 
+> for testing:
+> - want all qt5 demos (or qtdemo, or what it is actually called) on the
+> ppc64 target to execute them and see that qt5 actually is working
+> 
+> # my platform
+> - freescale ppc64 board (big endian) using QorIQ 1.8 from freescale
+> 
+> Build Configuration:
+> BB_VERSION        = “1.22.0“
+> BUILD_SYS         = “x86_64-linux"
+> NATIVELSBSTRING   = “Ubuntu-14.04“
+> TARGET_SYS        = “powerpc64-fsl-linux"
+> MACHINE           = “t4240rdb-64b"
+> DISTRO            = “fsl-networking"
+> DISTRO_VERSION    = “QorIQ-SDK-V1.8“
+> TUNE_FEATURES     = “m64 fpu-hard e6500 altivec"
+> TARGET_FPU        = “hard"
+> meta
+> meta-yocto
+> meta-yocto-bsp    = “daisy:18837ea4cdd4fdab608e0a032a11a2dfb6b1ee1a"
+> meta-fsl-ppc      = “daisy:ed8d8f097eb9fb9c4d76cfeb617da5ce72d9b414“
+> meta-fsl-toolchain = “daisy:a253b3594d8d9e0a4ed869d1fb502c395c4438ac"
+> meta-fsl-networking = “daisy:6eb28ed659bbadfa470237dfce98bcbf53c18fe1“
+> meta-oe
+> meta-networking
+> meta-ruby
+> meta-perl
+> meta-filesystems
+> meta-multimedia
+> meta-xfce
+> meta-gnome        = “daisy:4a44c4107899363b22c01eb5621b0c86db1c659c"
+> meta-security     = “daisy:9f4c3849521465b459845dcc1a7a885bacaae9d9“
+> meta-qt5          = “daisy:23405d3a66c308e0b2ea64308b834285850c5c9f"
+> 
+> # after building and installing on the freescale PPC64 board
+> 
+> - qt 5.2.1 from meta-qt5::daisy
+>  - i got qt 5.2.1 working, qt assistant can be started! however, it
+>  - does not install qmake into the target
+>  - does not install the qt examples
+> 
+> i can't use this to compile anything natively without qmake/moc. see
+> https://github.com/meta-qt5/meta-qt5/blob/daisy/recipes-qt/qt5/qtbase.inc#L204
+> 
+> 
+> 
+> # meta-toolchain-qt5
+> 
+> bitbake meta-toolchain-qt5 builds:
+> 
+> fsl-networking-eglibc-x86_64-ppc64e6500-toolchain-QorIQ-SDK-V1.8.sh
+> 
+> after installation on a different VM i do this:
+> 
+> cd /opt/fsl-networking/QorIQ-SDK-V1.8/
+> 
+> ls
+> environment-setup-ppc64e6500-fsl-linux
+> environment-setup-ppce6500-fsl-linux
+> site-config-ppc64e6500-fsl-linux
+> site-config-ppce6500-fsl-linux
+> sysroots
+> version-ppc64e6500-fsl-linux
+> version-ppce6500-fsl-linux
+> 
+> note: i also tried environment-setup-ppce6500-fsl-linux but doesn't work
+> either
+> 
+> source  environment-setup-ppc64e6500-fsl-linux
+> 
+> cd ~/screenshot-example/
+> 
+> which qmake
+> /opt/fsl-networking/QorIQ-SDK-V1.8/sysroots/x86_64-fslsdk-linux/usr/bin/qt5/qmake
+> 
+> qmake
+> Project ERROR: Unknown module(s) in QT: widgets gui core
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> # my local.conf
+> 
+> ... some lines i think are not important ...
+> 
+> MACHINE ??= "t4240rdb"
+> 
+> SDKMACHINE            ?= "x86_64"
+> TOOLCHAIN_BUILD       ?= "True"
+> DEFAULTTUNE           ?= "ppc64e6500"
+> 
+> DISTRO_FEATURES_append = " opengl"
+> DISTRO_FEATURES_remove = "bluetooth irda wifi nfc virtualization
+> pulseaudio wayland 3g touch touchscreen"
+> MACHINE_FEATURES_remove = "touchscreen"
+> 
+> # EXTRA_IMAGE_FEATURES: Valid features: dbg-pkgs debug-tweaks dev-pkgs
+> doc doc-pkgs eclipse-debug hwcodecs nfs-server
+> # package-management ptest-pkgs qt4-pkgs qtcreator-debug
+> read-only-rootfs splash ssh-server-dropbear ssh-server-openssh
+> # staticdev-pkgs tools-debug tools-profile tools-sdk tools-testapps x11
+> x11-base x11-sato
+> EXTRA_IMAGE_FEATURES += "dev-pkgs ssh-server-openssh tools-debug
+> tools-sdk tools-debug tools-profile"
+> 
+> # this created the 'qtbase-examples' once, so now this issue seems to be
+> not relevant anymore:
+> PACKAGECONFIG_append_pn-qtbase = " tools icu examples accessibility gl
+> udev openssl widgets developer sql-sqlite sql-mysql sql-psql sm"
+> 
+> 
+> #PACKAGECONFIG_remove_pn-qttools= "qtwebkit"
+> 
+> #qtbase-examples, ERROR: qtbase-examples not found in the base feeds
+> (t4240rdb_64b ppc64e6500 powerpc64 noarch any all).
+> #query the config with this command:
+> #   bitbake -e qtbase | grep ^PACKAGECONFIG=
+> 
+> # For recipes inheriting the packagegroup class, setting
+> PACKAGEGROUP_DISABLE_COMPLEMENTARY to "1"
+> # specifies that the normal complementary packages (i.e. -dev, -dbg, and
+> so forth) should not be
+> # automatically created by the packagegroup recipe, which is the default
+> behavior.
+> # FIXME PACKAGEGROUP_DISABLE_COMPLEMENTARY = "0"
+> 
+> # FIXME should packagegroup-xfce-base be removed from IMAGE_INSTALL_append?
+> CORE_IMAGE_EXTRA_INSTALL += "\
+>   packagegroup-xfce-base \
+>   packagegroup-xfce-extended \
+>   packagegroup-xfce-multimedia \
+>   packagegroup-qt5-toolchain-target \
+>   packagegroup-qt5-qtcreator-debug \
+> "
+> 
+> IMAGE_INSTALL_append  += "gcc g++ binutils gdb \
+>                           git subversion \
+>                           bc \
+>                           nix libxslt libdbd-sqlite-perl www-curl-perl \
+>                           mariadb \
+>                           postgresql \
+>                           libgcc libgcc-dev \
+>                           libstdc++ libstdc++-dev \
+>                           automake ccache chkconfig \
+>                           glib-2.0 glib-networking glibmm \
+>                           packagegroup-core-buildessential pkgconfig \
+>                           cmake zlib \
+>                           boost jpeg libpng12 \
+>                           cairo pango fontconfig freetype pulseaudio dbus \
+>                           xterm vim nano \
+>                           ruby \
+>                           libstdc++-staticdev \
+>                           autoconf \
+>                           alsa-lib alsa-tools alsa-state
+> alsa-utils-alsaconf \
+>                           i2c-tools \
+>                           cpufrequtils \
+>                           gstreamer1.0               \
+>                           gstreamer1.0-meta-base     \
+>                           gstreamer1.0-plugins-bad   \
+>                           gstreamer1.0-plugins-base  \
+>                           gstreamer1.0-plugins-good  \
+>                           pciutils \
+>                           usbutils \
+>                           python-core \
+>                           ltrace \
+>                           strace \
+>                           linux-firmware \
+>                           htop \
+>                           tcpdump \
+>                           bash \
+>                           util-linux \
+>                           e2fsprogs \
+>                           e2fsprogs-mke2fs \
+>                           e2fsprogs-e2fsck \
+>                           e2fsprogs-tune2fs \
+>                           mtd-utils \
+>                           mtd-utils-jffs2 \
+>                           mtd-utils-ubifs \
+>                           dosfstools \
+>                           net-tools \
+>                           kmod \
+>                           sysfsutils \
+>                           sysklogd \
+>                           sysstat \
+>                           qtbase               \
+>                           qttools              \
+>                           qtconnectivity       \
+>                           qtdeclarative        \
+>                           qtimageformats       \
+>                           qtlocation           \
+>                           qtscript             \
+>                           qtsensors            \
+>                           qtserialport         \
+>                           qtxmlpatterns        \
+>                           qtx11extras          \
+>                           qtsvg                \
+>                           qtmultimedia         \
+>                           qtquick1             \
+> "
+> 
+> #
+> #
+> #
+> #
+> #
+> # not found in base feeds issued packages:
+> #                          qttools-native       \
+> #                          qtquickcontrols      \
+> #                          qtgraphicaleffects   \
+> #ERROR: qtgraphicaleffects not found in the base feeds (t4240rdb_64b
+> ppc64e6500 powerpc64 noarch any all).
+> 
+> # stuff i don't want for now
+> #
+> #                          nativesdk-qttools    \
+> #                          qtbase-native        \
+> #                          qtwebkit             \
+> #                          qtwebkit-examples    \
+> #
+> #
+> #qtdeclarative \
+> # packages which fail on installation
+> #libglu mesa-glut
+> #cinematicexperience \
+> #
+> #IMAGE_INSTALL_append  \
+> #    qtdeclarative-plugins \
+> #    qtdeclarative-tools \
+> #    qtdeclarative-examples \
+> #    qtdeclarative-qmlplugins \
+> #    qtmultimedia \
+> #    qtmultimedia-plugins \
+> #    qtmultimedia-examples \
+> #    qtmultimedia-qmlplugins \
+> #    qtsvg \
+> #    qtsvg-plugins \
+> #    qtsensors \
+> #    qtimageformats-plugins \
+> #    qtsystems \
+> #    qtsystems-tools \
+> #    qtsystems-examples \
+> #    qtsystems-qmlplugins \
+> #    qtscript \
+> #    qt3d \
+> #    qt3d-examples \
+> #    qt3d-qmlplugins \
+> #    qt3d-tools \
+> #    qtwebkit \
+> #    qtwebkit-examples-examples \
+> #    qtwebkit-qmlplugins \
+> #    qtgraphicaleffects-qmlplugins \
+> #    qtconnectivity-qmlplugins \
+> #    qtlocation-plugins \
+> #    qtlocation-qmlplugins \
+> #    "
+> 
+> #
+> 
+
+
 
