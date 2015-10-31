@@ -1,41 +1,40 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
-	[209.85.220.43])
-	by mail.openembedded.org (Postfix) with ESMTP id F08D1759B4
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
+	[209.85.213.174])
+	by mail.openembedded.org (Postfix) with ESMTP id DC75073695
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Oct 2015 00:42:26 +0000 (UTC)
-Received: by pasz6 with SMTP id z6so88274717pas.2
+	Sat, 31 Oct 2015 16:23:25 +0000 (UTC)
+Received: by igpw7 with SMTP id w7so27421698igp.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Oct 2015 17:42:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=p6qgNVffc6RIgvthEMpUNAXOrvR12PMVR1qT6z4dO3M=;
-	b=PBehthadvCxJ9vEe9LErxjaNyS/r8COymt7/Ou/IaW0H+qLMDKzVZDfTe00UBG92mJ
-	361O1v8i3e6LlmedvDiuedu+i6odLN5BwXBHuh51BXjdgUWiO0d5Sqbh0bOF0dmbDfsV
-	GWzB9ApWdYT8C+h34PW6wni2oHvXUsEYr0K301azGNMFpznXL0rNQvUZSGg6hR0Tez/i
-	cRwx4jvqvh35J3k3CkT7h9xohlW+rsjBVof8vTIoipZnk6rqtF9qGcw1sl8nKpFdUVQK
-	Rjzj6FPLeqigN6DK2EbNNIun4CRLv9PX5GPbd4bkUvdIdcIM3BrS/l6mlNZ4mSqlz/+N
-	BA7A==
-X-Received: by 10.66.102.101 with SMTP id fn5mr11704806pab.111.1446252147045; 
-	Fri, 30 Oct 2015 17:42:27 -0700 (PDT)
-Received: from ?IPv6:2601:641:c000:1d0:9139:22be:56a:125d?
-	([2601:641:c000:1d0:9139:22be:56a:125d])
-	by smtp.gmail.com with ESMTPSA id
-	eg5sm10408102pac.30.2015.10.30.17.42.25
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 30 Oct 2015 17:42:26 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.1 \(3096.5\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <562DFDAA.5080805@teseo.com>
-Date: Fri, 30 Oct 2015 17:42:27 -0700
-Message-Id: <F273661B-C0F3-4041-8B90-09369FF0BF32@gmail.com>
-References: <562DFDAA.5080805@teseo.com>
-To: Martin Jansa <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.3096.5)
-Subject: Re: initramfs
+	Sat, 31 Oct 2015 09:23:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=+96GYAS8cmzSC+G0DcqclhmodZiBfmRovF7Uf1CU6fY=;
+	b=wlFdio5/lE5GcelfoCgmoDhxDGInGFxFmIECFa9EmyL6LsWIgL5dl1u9GoHaEorLpM
+	rDfvyecDsQCOgk64agMvMM2AJnZAQ5eTqIS93ibAT+ETNivixvWxhLnasgbOjNyHvWo3
+	hFjn45vJRh0ssGRh4GlxBrBWuYfALW7F1C36V7l6RBHe+7qjOIy2N2ndHUm/Zo8z4j2L
+	YRgH4ebdcLpYSBrawACZF5WMhCexLTT3wqUVF6h7oSOPXntRzktJ6yAjcLiZqwHxf+mw
+	C1LnF/khs+V1LvP0PIGuuhU+d4zefrjCfF+3qXGPrOTaQd8Zs7xe1Kh90hLMRMW9Cprp
+	p5Ag==
+MIME-Version: 1.0
+X-Received: by 10.50.64.179 with SMTP id p19mr3704087igs.64.1446308605821;
+	Sat, 31 Oct 2015 09:23:25 -0700 (PDT)
+Received: by 10.36.31.131 with HTTP; Sat, 31 Oct 2015 09:23:25 -0700 (PDT)
+In-Reply-To: <CALbNGRSuJKWXkJXgYORYqs9jNLS0_s5h9gtS8NFxXt_gSehFgw@mail.gmail.com>
+References: <1446207225-15386-1-git-send-email-schnitzeltony@googlemail.com>
+	<1446207225-15386-14-git-send-email-schnitzeltony@googlemail.com>
+	<CAMKF1spmiD9ohoORXi7wnLBFNOFKeG0vgdpJ_n+-5b8-gp_F3A@mail.gmail.com>
+	<CALbNGRTL5Q-enOj1dp4kZvu1=122ebseTizbhh+ondfH31ieHw@mail.gmail.com>
+	<CAMKF1sqRg-WzvMpN=WwXj08zf7vS5kgC1Zr8-QRUt-eNsXhr7w@mail.gmail.com>
+	<CALbNGRSuJKWXkJXgYORYqs9jNLS0_s5h9gtS8NFxXt_gSehFgw@mail.gmail.com>
+Date: Sat, 31 Oct 2015 17:23:25 +0100
+Message-ID: <CALbNGRT_kpwbZs8=Lg94XGrFnb8Qgmb=uQzmeJaLrF9GqmOUFQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 13/13] fontforge: avoid cloning uthash during do_compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,70 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Oct 2015 00:42:27 -0000
-X-Groupsio-MsgNum: 58232
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_98676AFF-64E0-4251-B92C-17DA0FEA67E1";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-
---Apple-Mail=_98676AFF-64E0-4251-B92C-17DA0FEA67E1
+X-List-Received-Date: Sat, 31 Oct 2015 16:23:27 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
 
+On Fri, Oct 30, 2015 at 11:17 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> On Fri, Oct 30, 2015 at 11:01 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>> whereever they are used in sources use #include <foo.h>
+>> and make sure that it respects -I$(STAGING_INCDIR) that should do it.
+>>
+> I know for sure - but because of this is done by patches this might
+> cause additional maintenance when updating to next version of
+> fontforge. But let's stop this here - Seems important to you to fix an
+> error which nobody has detected before in a very clean way so I will
+> look into that and probably send V2.
+>
+I checked - it is even more simple: just avoiding git clone in
+Makefile by creating a fake directory - that's it. V2 will be send
+next week.
 
-> On Oct 26, 2015, at 3:17 AM, Andrea Di Chiara =
-<andrea.dichiara@teseo.com> wrote:
->=20
-> Hi,
-> I need to create ad initramfs image for an i.MX6 board. does it exist =
-a
-> suitable recipe?
-> core-image-minimal-initramfs doesn't seem to fit ARM boards. am i =
-wrong?
+Andreas
 
-its a template, you can drive your own image using this infra
-
-> thank you for the attention
-> Andrea
->=20
-> Software Department
-> software@teseo.com
->=20
-> =
---------------------------------------------------------------------------=
------------------------------------
-> TESEO spa            via Agnelli, 49              63023 FERMO (FM) =
-ITALY
-> Tel. +39 0734 628818   --    Fax. +39 0734 628816
->=20
-> Disclaimer: This electronic mail transmission may contain legally =
-privileged and/or confidential information. Do not read this if you are =
-not the person(s) named. Any use, distribution, copying or disclosure by =
-any other person is strictly prohibited. If you receive this =
-transmission by mistake destroy the original transmission and its =
-attachments without reading or saving in any manner.
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---Apple-Mail=_98676AFF-64E0-4251-B92C-17DA0FEA67E1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlY0DnMACgkQuwUzVZGdMxQRhQCgiLXyVzlmDrCgbt5FxNbi+A96
-SVwAn0mjCiiCoqxd6iEIW6cWCVr6WGpF
-=PhNc
------END PGP SIGNATURE-----
-
---Apple-Mail=_98676AFF-64E0-4251-B92C-17DA0FEA67E1--
