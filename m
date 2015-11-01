@@ -1,24 +1,30 @@
 Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C2EB0770AF
+X-Greylist: delayed 482 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sun, 01 Nov 2015 03:11:41 UTC
+Received: from mail5.wrs.com (unknown [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AAB473D46
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Nov 2015 02:52:19 +0000 (UTC)
+	Sun,  1 Nov 2015 03:11:41 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tA12qJmv007689
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tA133cAa007196
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Oct 2015 19:52:19 -0700 (PDT)
-Received: from yow-rmacleod-lx3.wrs.com (128.224.56.85) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Sat, 31 Oct 2015 19:52:19 -0700
-From: Randy MacLeod <Randy.MacLeod@windriver.com>
+	Sat, 31 Oct 2015 20:03:38 -0700
+Received: from [172.25.44.6] (172.25.44.6) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Sat, 31 Oct 2015 20:03:38 -0700
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 31 Oct 2015 22:52:12 -0400
-Message-ID: <1446346332-19991-1-git-send-email-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 1.9.1
+References: <1446346332-19991-1-git-send-email-Randy.MacLeod@windriver.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <56358109.7070208@windriver.com>
+Date: Sat, 31 Oct 2015 23:03:37 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mariadb: update to 5.5.46
+In-Reply-To: <1446346332-19991-1-git-send-email-Randy.MacLeod@windriver.com>
+X-Originating-IP: [172.25.44.6]
+Subject: Re: [meta-oe][PATCH] mariadb: update to 5.5.46
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,47 +38,183 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Nov 2015 02:52:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 01 Nov 2015 03:11:43 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This is the latest release in the 5.5.x stable series.
-It fixes 11 CVEs as listed:
-   https://mariadb.com/kb/en/mariadb/mariadb-5546-release-notes/
-and fixes 10s of internal MariaDB tracked defects.
 
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
----
- .../mysql/{mariadb-native_5.5.45.bb => mariadb-native_5.5.46.bb}      | 0
- meta-oe/recipes-support/mysql/mariadb.inc                             | 4 ++--
- .../recipes-support/mysql/{mariadb_5.5.45.bb => mariadb_5.5.46.bb}    | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.45.bb => mariadb-native_5.5.46.bb} (100%)
- rename meta-oe/recipes-support/mysql/{mariadb_5.5.45.bb => mariadb_5.5.46.bb} (100%)
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.45.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.5.46.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.45.bb
-rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.46.bb
-diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-index 47a16a1..42a4eda 100644
---- a/meta-oe/recipes-support/mysql/mariadb.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb.inc
-@@ -14,8 +14,8 @@ SRC_URI = "http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${PV}.tar.gz
-            file://fix-a-building-failure.patch \
-           "
- 
--SRC_URI[md5sum] = "6ec397f717f6e2e4e9154e76de9ec9fc"
--SRC_URI[sha256sum] = "4dc3aff6941ef1068412002915d795bcf67db0eaa38a5c6f3af57474c4226fb0"
-+SRC_URI[md5sum] = "92f682b00eb137af01e59ea93f7e31f7"
-+SRC_URI[sha256sum] = "45b66b7adc87cad32e553df1d5211e5b6426b78a3bc318a5ccde088bf93e6e10"
- 
- S = "${WORKDIR}/mariadb-${PV}"
- 
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.45.bb b/meta-oe/recipes-support/mysql/mariadb_5.5.46.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb_5.5.45.bb
-rename to meta-oe/recipes-support/mysql/mariadb_5.5.46.bb
+I'd like to update both master and jethro to mariadb-5.5.46.
+
+mariadb-5.5.46 is a bug fix only update based on my analysis
+and the projects release notes (both below)
+
+This update would fix these 11 CVEs:
+CVE-2015-4802
+CVE-2015-4807
+CVE-2015-4815
+CVE-2015-4826
+CVE-2015-4830
+CVE-2015-4836
+CVE-2015-4858
+CVE-2015-4861
+CVE-2015-4870
+CVE-2015-4913
+CVE-2015-4792
+
+The CVE list is from:
+https://mariadb.com/kb/en/mariadb/mariadb-5546-release-notes/
+
+Full changelog:
+https://mariadb.com/kb/en/mariadb/mariadb-5546-changelog/
+
+
+Using the updated recipe, I've built:
+
+$ for i in \
+qemux86 qemux86-64 qemuarm qemuarm64 qemumips qemumips64; \
+do \
+MACHINE=$i bitbake mariadb; \
+done
+
+
+As I mentioned above, mariadb-5.5.46 is claimed to be a bug fix
+only update. In reviewing all commits, I've noticed:
+  - one config file change that appears to be backwards compatible.
+  - a few other commits that were not clearly marked as internal
+    bug fixes but appear to be sensible for a production release
+    and are shown below.
+
+
+Using the git repo, there are 68 commits in this release:
+
+$ git log --oneline mariadb-5.5.46 ^mariadb-5.5.45 | wc -l
+68
+
+diffstat bottom line:
+  112 files changed, 2263 insertions(+), 488 deletions(-)
+
+Here are the commits that seemed to warrent a closer look:
+
+$ git show b976852 == Updated yassl to yassl-2.3.8
++yaSSL Release notes, version 2.3.8 (9/17/2015)
++ This release of yaSSL fixes a high security vulnerability. \
+All users
++ SHOULD update.
+
+$ git show 8fe0708
+commit 8fe0708808ddba0d85798d0cd9100b3173064081
+Merge: 608efca 557a57f
+Author: Mithun C Y <mithun.c.y@oracle.com>
+Date: Mon Aug 17 15:26:01 2015 +0530
+
+Merge branch 'mysql-5.1' into mysql-5.5
+
+$ git show 8fe0708 | diffstat
+0 files changed
+
+
+$ git show 5cc149f == The compiler warnings fixed.
+- if (null_value=arg->null_value)
++ if ((null_value=arg->null_value))
+...
+- if (null_value= arg->null_value)
++ if ((null_value= arg->null_value))
+
+
+$ git show 75f43c5
+== Small change to default config for Docker-speci
+commit 75f43c5f6a5332894cf2d90ab2c04cc62c5ad18b
+Author: Lars Tangvald <lars.tangvald@oracle.com>
+Date: Wed Aug 19 14:17:50 2015 +0200
+
+Small change to default config for Docker-specific rpm package
+Syncs "official" and our own Docker images
+
+diff --git a/packaging/rpm-docker/my.cnf b/packaging/rpm-docker/my.cnf
+...
++skip-host-cache
++skip-name-resolve
+
+
+--------------------
+$ git log --oneline mariadb-5.5.46 ^mariadb-5.5.45 |cut -c -55
+16c4b3c fixes for buildbot:
+f41a41f Merge branch 'merge-xtradb-5.5' into 5.5
+db79f4c 5.5.45-37.4
+82e9f6d Merge remote-tracking branch 'mysql/5.5' into 5
+c8d5112 MDEV-8796 Delete with sub query with informatio
+504802f MDEV-7846: postreview fix
+54b9981 MDEV-7846: Server crashes in Item_subselect::fi
+0ab93fd MDEV-7445:Server crash with Signal 6 MDEV-7565:
+2e3e818 MDEV-7445: Server crash with Signal 6
+7ccde2c MDEV-7565: Server crash with Signal 6 (part 2)
+006acf7 Bug #68148: drop index on a foreign key column
+a95711e MDEV-8855: innodb.innodb-fk-warnings fails on W
+02a38fd MDEV-8624: MariaDB hangs on query with many log
+f804b74 MDEV-8154 rpl.show_status_stop_slave_race-7126
+ce7d8c5 MDEV-7330 plugins.feedback_plugin_send fails sp
+bdcf370 MDEV-7933 plugins.feedback_plugin_send depends
+2563609 Increased the version number
+86ed494 MDEV-8849 rpl.rpl_innodb_bug30888 sporadically
+dca4ab9 MDEV-8841 innodb_zip.innodb-create-options fail
+5cc149f The compiler warnings fixed.
+b976852 Updated yassl to yassl-2.3.8
+0243a2d Bug #21025377 CAN'T CONNECT TO SSL ENABLED SERV
+29ac245 MDEV-8473: mysqlbinlog -v does not properly dec
+102a85f MDEV-8663: IF Statement returns multiple values
+b1895fb Bug#21527467 - RPM SCRIPTS FAIL WITH MULTIPLE D
+e414cbf BUG#20449914: HANDLE_FATAL_SIGNAL (SIG=11) IN
+f4ff086 Bug#20198490 : LOWER_CASE_TABLE_NAMES=0 ON WIND
+75f43c5 Small change to default config for Docker-speci
+ee02650 Bug #16171518 - LOAD XML DOES NOT HANDLE EMPTY
+93ac0eb BUG#11754258: INCORRECT ERROR MESSAGE WHEN CREA
+8fe0708 Merge branch 'mysql-5.1' into mysql-5.5
+557a57f Bug #21350175: SUBQUERIES IN PROCEDURE CLAUSE O
+608efca Bug #21025880 DUPLICATE UK VALUES IN READ-COMMI
+f59d68e BUG#21102971 data corruption on arm64
+552b1c8 Merge branch 'mysql-5.1' into mysql-5.5
+f3dce25 Bug #20760261 mysqld crashed in materialized_cu
+1d31744 Follow-up fix : Bug #18145121 - DEPRECATED PERL
+67be190 Follow up Fix: Bug #18145121 - DEPRECATED PERL
+c20911d Merge branch 'mysql-5.1' into mysql-5.5
+c28626d Bug #21096444: MYSQL IS TRYING TO PERFORM A CON
+91a427b Merge branch 'mysql-5.1' into mysql-5.5
+9372c9e Bug #20909518: HANDLE_FATAL_SIGNAL (SIG=11) IN
+b2df544 Merge branch 'mysql-5.1' into mysql-5.5
+8006ad8 Bug #20909518: HANDLE_FATAL_SIGNAL (SIG=11) IN
+18b2c77 Merge branch 'mysql-5.1' into mysql-5.5
+641ab6f Bug #20796566 ERROR: INSERT BUFFER INSERT FAI
+9cbd6d7 Merge branch 'mysql-5.5.45-release' into mysql-
+b5380e0 BUG#19886430: VIEW CREATION WITH NAMED COLUMNS,
+888fabd Bug #21143080: UPDATE ON VARCHAR AND TEXT COLUM
+e57e1b2
+067ae38 Bug #20168526 YASSL: CORRUPT SSL-KEY CRASHES CL
+6fb2cdb Bug #20777016: DELETE CHECKS PRIVILEGES ON THE
+49667f0 Bug#21374104 SETUP_TIMERS INITIALIZATION ASSUME
+c773b32 Merge branch 'mysql-5.1' into mysql-5.5
+33a2e5a Bug #20238729: ILLEGALLY CRAFTED UTF8 SELECT PR
+7255ae6 Bug #20774956: THREAD_POOL.THREAD_POOL_CONNECT
+e7ff204 Bug #21025377 CAN'T CONNECT TO SSL ENABLED SERV
+c9685a7 Bug #20168526 YASSL: CORRUPT SSL-KEY CRASHES CL
+bf681d6 Bug #20802751 - SEGMENTATION FAILURE WHEN RUNNI
+359f102 BUG#16613004 PARTITIONING DDL, CRASH IN FIELD_V
+2ac01ca Bug#18487951 - QUERY_CACHE_MIN_RES_UNIT SET TO
+7ce304d Bug#18487951 - QUERY_CACHE_MIN_RES_UNIT SET TO
+7c5d18e Bug #20772273 : MYSQLIMPORT --USE-THREADS DOESN
+9068238 Bug# 20376760: STACK-BUFFER-OVERFLOW WITH LONG
+0eadada BUG#20310212 PARTITION DDL- CRASH AFTER THD::NO
+1b1161a Empty version change upmerge
+8f87d6c Raise version number after tagging 5.1.76
+da0089a Raise version number after cloning 5.5.45
+
+
+
+../Randy
+
+
 -- 
-1.9.1
-
+# Randy MacLeod. SMTS, Linux, Wind River
+Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, 
+Canada, K2K 2W5
 
