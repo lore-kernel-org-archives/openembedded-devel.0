@@ -1,40 +1,24 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
-	[209.85.213.174])
-	by mail.openembedded.org (Postfix) with ESMTP id DC75073695
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id C2EB0770AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Oct 2015 16:23:25 +0000 (UTC)
-Received: by igpw7 with SMTP id w7so27421698igp.1
+	Sun,  1 Nov 2015 02:52:19 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tA12qJmv007689
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Oct 2015 09:23:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=+96GYAS8cmzSC+G0DcqclhmodZiBfmRovF7Uf1CU6fY=;
-	b=wlFdio5/lE5GcelfoCgmoDhxDGInGFxFmIECFa9EmyL6LsWIgL5dl1u9GoHaEorLpM
-	rDfvyecDsQCOgk64agMvMM2AJnZAQ5eTqIS93ibAT+ETNivixvWxhLnasgbOjNyHvWo3
-	hFjn45vJRh0ssGRh4GlxBrBWuYfALW7F1C36V7l6RBHe+7qjOIy2N2ndHUm/Zo8z4j2L
-	YRgH4ebdcLpYSBrawACZF5WMhCexLTT3wqUVF6h7oSOPXntRzktJ6yAjcLiZqwHxf+mw
-	C1LnF/khs+V1LvP0PIGuuhU+d4zefrjCfF+3qXGPrOTaQd8Zs7xe1Kh90hLMRMW9Cprp
-	p5Ag==
+	Sat, 31 Oct 2015 19:52:19 -0700 (PDT)
+Received: from yow-rmacleod-lx3.wrs.com (128.224.56.85) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Sat, 31 Oct 2015 19:52:19 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sat, 31 Oct 2015 22:52:12 -0400
+Message-ID: <1446346332-19991-1-git-send-email-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Received: by 10.50.64.179 with SMTP id p19mr3704087igs.64.1446308605821;
-	Sat, 31 Oct 2015 09:23:25 -0700 (PDT)
-Received: by 10.36.31.131 with HTTP; Sat, 31 Oct 2015 09:23:25 -0700 (PDT)
-In-Reply-To: <CALbNGRSuJKWXkJXgYORYqs9jNLS0_s5h9gtS8NFxXt_gSehFgw@mail.gmail.com>
-References: <1446207225-15386-1-git-send-email-schnitzeltony@googlemail.com>
-	<1446207225-15386-14-git-send-email-schnitzeltony@googlemail.com>
-	<CAMKF1spmiD9ohoORXi7wnLBFNOFKeG0vgdpJ_n+-5b8-gp_F3A@mail.gmail.com>
-	<CALbNGRTL5Q-enOj1dp4kZvu1=122ebseTizbhh+ondfH31ieHw@mail.gmail.com>
-	<CAMKF1sqRg-WzvMpN=WwXj08zf7vS5kgC1Zr8-QRUt-eNsXhr7w@mail.gmail.com>
-	<CALbNGRSuJKWXkJXgYORYqs9jNLS0_s5h9gtS8NFxXt_gSehFgw@mail.gmail.com>
-Date: Sat, 31 Oct 2015 17:23:25 +0100
-Message-ID: <CALbNGRT_kpwbZs8=Lg94XGrFnb8Qgmb=uQzmeJaLrF9GqmOUFQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 13/13] fontforge: avoid cloning uthash during do_compile
+Subject: [meta-oe][PATCH] mariadb: update to 5.5.46
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,25 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Oct 2015 16:23:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 01 Nov 2015 02:52:20 -0000
+Content-Type: text/plain
 
-On Fri, Oct 30, 2015 at 11:17 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> On Fri, Oct 30, 2015 at 11:01 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> whereever they are used in sources use #include <foo.h>
->> and make sure that it respects -I$(STAGING_INCDIR) that should do it.
->>
-> I know for sure - but because of this is done by patches this might
-> cause additional maintenance when updating to next version of
-> fontforge. But let's stop this here - Seems important to you to fix an
-> error which nobody has detected before in a very clean way so I will
-> look into that and probably send V2.
->
-I checked - it is even more simple: just avoiding git clone in
-Makefile by creating a fake directory - that's it. V2 will be send
-next week.
+This is the latest release in the 5.5.x stable series.
+It fixes 11 CVEs as listed:
+   https://mariadb.com/kb/en/mariadb/mariadb-5546-release-notes/
+and fixes 10s of internal MariaDB tracked defects.
 
-Andreas
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+---
+ .../mysql/{mariadb-native_5.5.45.bb => mariadb-native_5.5.46.bb}      | 0
+ meta-oe/recipes-support/mysql/mariadb.inc                             | 4 ++--
+ .../recipes-support/mysql/{mariadb_5.5.45.bb => mariadb_5.5.46.bb}    | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.45.bb => mariadb-native_5.5.46.bb} (100%)
+ rename meta-oe/recipes-support/mysql/{mariadb_5.5.45.bb => mariadb_5.5.46.bb} (100%)
+
+diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.45.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.5.46.bb
+similarity index 100%
+rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.45.bb
+rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.46.bb
+diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
+index 47a16a1..42a4eda 100644
+--- a/meta-oe/recipes-support/mysql/mariadb.inc
++++ b/meta-oe/recipes-support/mysql/mariadb.inc
+@@ -14,8 +14,8 @@ SRC_URI = "http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${PV}.tar.gz
+            file://fix-a-building-failure.patch \
+           "
+ 
+-SRC_URI[md5sum] = "6ec397f717f6e2e4e9154e76de9ec9fc"
+-SRC_URI[sha256sum] = "4dc3aff6941ef1068412002915d795bcf67db0eaa38a5c6f3af57474c4226fb0"
++SRC_URI[md5sum] = "92f682b00eb137af01e59ea93f7e31f7"
++SRC_URI[sha256sum] = "45b66b7adc87cad32e553df1d5211e5b6426b78a3bc318a5ccde088bf93e6e10"
+ 
+ S = "${WORKDIR}/mariadb-${PV}"
+ 
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.45.bb b/meta-oe/recipes-support/mysql/mariadb_5.5.46.bb
+similarity index 100%
+rename from meta-oe/recipes-support/mysql/mariadb_5.5.45.bb
+rename to meta-oe/recipes-support/mysql/mariadb_5.5.46.bb
+-- 
+1.9.1
+
 
