@@ -1,26 +1,31 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-X-Greylist: delayed 3542 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 02 Nov 2015 06:11:40 UTC
-Received: from mail5.wrs.com (unknown [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D7087704E
+Return-Path: <gurrieristefano@gmail.com>
+Received: from mail-io0-f176.google.com (mail-io0-f176.google.com
+	[209.85.223.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 670C960125
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Nov 2015 06:11:40 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tA25CbTb002374
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Mon,  2 Nov 2015 10:14:13 +0000 (UTC)
+Received: by iodd200 with SMTP id d200so138688601iod.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 1 Nov 2015 21:12:38 -0800
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Sun, 1 Nov 2015 21:12:37 -0800
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 2 Nov 2015 00:12:36 -0500
-Message-ID: <1446441156-135546-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Mon, 02 Nov 2015 02:14:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=Qfw/y89CzUH4jYWL1m5R01iW9mEK1Gssf3ziMt/gvHk=;
+	b=0ruVI2YWx6czxYoFewxPqp8mJWci6J3hRnHf/nskL+80Rs85zR6fDJshtVZaB6su4s
+	AnUTQ15l2ntBO93mfSFxEXAgMRZT+jZ8dCUE2ZU2SXRKCsBM707cy/SgQ4AO5seeToTy
+	KONNlCx+Qoe6f+hEGIavJc76nCEL1gXrxsjVH9iZxBJYY4BM7VV354XKEgyYZkeWkQK5
+	XlKbFIgdezEi7fOFZbu80CknT34hezaxbWCwzp8BZuYzzkvPynzOdDaf9+JW8i7Xp/xa
+	Iqjx+053CpDpzRhXZw1cALTy8Y3Ek1u6HJVTei3ikwoXkC9bwcY26U+cXlqQHaWGI/rs
+	Zz8Q==
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] netcat-openbsd: replace patch with quilt
+X-Received: by 10.107.135.95 with SMTP id j92mr19925495iod.148.1446459253863; 
+	Mon, 02 Nov 2015 02:14:13 -0800 (PST)
+Received: by 10.107.192.5 with HTTP; Mon, 2 Nov 2015 02:14:13 -0800 (PST)
+Date: Mon, 2 Nov 2015 11:14:13 +0100
+Message-ID: <CAKpvFF1iKmibZaEh8FGDLrkR7sSbWkVfNxu_oddq89PUYchehA@mail.gmail.com>
+From: Stefano Gurrieri <gurrieristefano@gmail.com>
+To: openembedded-devel@lists.openembedded.org, interest@qt-project.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: meta-qt5 (fido) in my yocto project (dizzy)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,35 +39,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Nov 2015 06:11:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 02 Nov 2015 10:14:14 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Yue Tao <Yue.Tao@windriver.com>
+Hi people,
+I'd like to use meta-qt5 layer (downloaded from fido branch) in my yocto
+project that is a dizzy.
 
-If run bitbake -c patch -f netcat-openbsd twice, the patch conflict
-will happen, so replace the patch with quilt to avoid do_patch failed.
+Is it possible?
 
-Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+I'd like use an update qt version (5.4 included in fido branch) instead of
+5.3 (include in dizzy branch).
 
-diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-index 12409d4..89a646f 100644
---- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-+++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-@@ -20,7 +20,8 @@ do_configure[noexec] = "1"
- 
- netcat_do_patch() {
-     cd ${S}
--    while read line; do patch -p1 < ${WORKDIR}/debian/patches/$line; done < ${WORKDIR}/debian/patches/series
-+    quilt pop -a || true
-+    QUILT_PATCHES=${WORKDIR}/debian/patches QUILT_SERIES=${WORKDIR}/debian/patches/series quilt push -a
- }
- 
- python do_patch() {
--- 
-1.9.1
-
+Thanks a lot for the help.
+Greetings,
+Stefano
 
