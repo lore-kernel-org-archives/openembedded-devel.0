@@ -1,25 +1,24 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-X-Greylist: delayed 1582 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 02 Nov 2015 04:00:01 UTC
-Received: from mail5.wrs.com (unknown [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E2B9A60125
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 64BF360232
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Nov 2015 04:00:01 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tA23XbZT000551
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Sun, 1 Nov 2015 19:33:38 -0800
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.159) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Sun, 1 Nov 2015 19:33:37 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
+	Mon,  2 Nov 2015 06:05:48 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tA265lsj006442
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 1 Nov 2015 22:05:47 -0800 (PST)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
+	Sun, 1 Nov 2015 22:05:47 -0800
+From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 2 Nov 2015 11:33:32 +0800
-Message-ID: <1446435212-14336-1-git-send-email-hongxu.jia@windriver.com>
+Date: Mon, 2 Nov 2015 01:05:46 -0500
+Message-ID: <1446444346-78456-1-git-send-email-wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH] gvfs: add missing libgudev to DEPENDS
+Subject: [PATCH][meta-networking] ypbind-mt: set path of ypdomainname in ypbind script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,37 +32,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Nov 2015 04:00:02 -0000
+X-List-Received-Date: Mon, 02 Nov 2015 06:05:48 -0000
 Content-Type: text/plain
 
-It requires libgudev, and libgudev requires udev.
-While systemd enabled, there is a build failure:
-...
-$ bitbake systemd -ccleansstate
-$ bitbake gvfs -ccleansstate
-$ bitbake gvfs
-|x86_64-wrs-linux-libtool:   error: cannot find the library
-'.../tmp/sysroots/intel-x86-64/usr/lib64/libudev.la' or
-unhandled argument '=/usr/lib64/libudev.la'
-...
+From: Jian Liu <jian.liu@windriver.com>
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+The script ypbind will cause error if using ypdomainname command
+provided by busybox. So add RDEPENDCY on yp-tools and change
+the path of ypdomainname.
+
+Signed-off-by: Jian Liu <jian.liu@windriver.com>
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 ---
- meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-support/nis/files/ypbind.init | 11 ++++++-----
+ meta-networking/recipes-support/nis/ypbind-mt_1.38.bb |  2 ++
+ 2 files changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb
-index 5b2235f..166e5d2 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb
-@@ -1,6 +1,6 @@
- require gvfs.inc
+diff --git a/meta-networking/recipes-support/nis/files/ypbind.init b/meta-networking/recipes-support/nis/files/ypbind.init
+index 244dc78..669c19c 100644
+--- a/meta-networking/recipes-support/nis/files/ypbind.init
++++ b/meta-networking/recipes-support/nis/files/ypbind.init
+@@ -26,6 +26,7 @@
  
--DEPENDS = "libsoup-2.4 libgnome-keyring glib-2.0 avahi gconf intltool-native"
-+DEPENDS = "libsoup-2.4 libgnome-keyring glib-2.0 avahi gconf intltool-native libgudev"
- # optional: obexftp libimobiledevice
+ YPBIND_BIN=/usr/sbin/ypbind
+ pidfile=/var/run/ypbind.pid
++YPDOMAINNAME_bin=/usr/bin/ypdomainname
  
- PR = "${INC_PR}.0"
+ [ -f /etc/default/ypbind ] && . /etc/default/ypbind
+ 
+@@ -34,14 +35,14 @@ case "$1" in
+ 	echo -n "Starting ypbind"
+ 	## If the domainname is not set, skip starting of ypbind
+ 	## and return with "program not configured"
+-        /bin/ypdomainname >/dev/null 2>&1
+-        if [ $? -ne 0 -o -z "`/bin/ypdomainname 2>/dev/null`" ]; then
++        $YPDOMAINNAME_bin >/dev/null 2>&1
++        if [ $? -ne 0 -o -z "`$YPDOMAINNAME_bin 2>/dev/null`" ]; then
+            if [ -f /etc/defaultdomain ]; then
+              XDOMAINNAME=`cat /etc/defaultdomain`
+-             /bin/ypdomainname "$XDOMAINNAME"
++             $YPDOMAINNAME_bin "$XDOMAINNAME"
+ 	   fi
+-           /bin/ypdomainname >/dev/null 2>&1
+-           if [ $? -ne 0 -o -z "`/bin/ypdomainname 2>/dev/null`" ]; then
++           $YPDOMAINNAME_bin >/dev/null 2>&1
++           if [ $? -ne 0 -o -z "`$YPDOMAINNAME_bin 2>/dev/null`" ]; then
+ 	     # Tell the user this has skipped
+ 	     echo -n " . . . . . . . . . . No domainname set"
+              # service is not configured
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+index 5702cd6..d113b82 100644
+--- a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
++++ b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+@@ -21,6 +21,8 @@ DEPENDS = " \
+            yp-tools \
+            ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+           "
++RDEPENDS_${PN} += "yp-tools"
++
+ # ypbind-mt now provides all the functionality of ypbind
+ # and is used in place of it.
+ PROVIDES += "ypbind"
 -- 
 1.9.1
 
