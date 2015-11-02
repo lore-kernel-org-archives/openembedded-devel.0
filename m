@@ -1,74 +1,38 @@
-Return-Path: <samuli.piippo@theqtcompany.com>
-Received: from emea01-db3-obe.outbound.protection.outlook.com
-	(mail-db3on0102.outbound.protection.outlook.com [157.55.234.102])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A68F60034
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id EA27F60125
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Nov 2015 14:18:15 +0000 (UTC)
-Authentication-Results: spf=none (sender IP is )
-	smtp.mailfrom=samuli.piippo@theqtcompany.com; 
-Received: from piippo.it.local (91.217.248.11) by
-	DB5PR02MB1175.eurprd02.prod.outlook.com (10.162.163.21) with Microsoft
-	SMTP Server (TLS) id 15.1.312.18; Mon, 2 Nov 2015 14:04:08 +0000
-From: Samuli Piippo <samuli.piippo@theqtcompany.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 2 Nov 2015 16:03:41 +0200
-Message-ID: <1446473021-20957-1-git-send-email-samuli.piippo@theqtcompany.com>
-X-Mailer: git-send-email 1.9.1
+	Mon,  2 Nov 2015 14:33:25 +0000 (UTC)
+Received: by wmeg8 with SMTP id g8so62306895wme.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Nov 2015 06:33:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=EUtJMUYpLBevyX/q/BxG7vLP72pISn73a4lwUe/ETic=;
+	b=NaEcU8g1wTjOVGaPoulkFDCmfVKFAnEmBkJTf2bYNe2eGbvMAwbVX1nEVAxurunBZQ
+	jZvcnVy2Nlx2uuXyiy15KnuGoU8bXFxVVNKJsH1AEFOQ53GYEgV6e7a7zHGxH7eSErp8
+	7aHMBL2mc30+ORteCWtsAH0Uf8y+G3hysVW8aspMiymHEp3mfqQOVOs6sGbkAnnYXFJF
+	3T0ppTSZ7Hk284l3LlI5G/+VLvnt3q0C5h9Ni7EOHwPMc85fU5tcuUVbaDg2qL29lajw
+	mw6eVQcFXYp9Td1qOTJ60yKWHtYo2sj42gjIhnWZK683ejLSsFYSJjn+OuNtORbWHm0w
+	WihQ==
+X-Received: by 10.28.212.8 with SMTP id l8mr14598968wmg.32.1446474805429;
+	Mon, 02 Nov 2015 06:33:25 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id h7sm22703206wjz.7.2015.11.02.06.33.24
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 02 Nov 2015 06:33:24 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 2 Nov 2015 15:33:30 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151102143330.GA28051@jama>
+References: <1445585893-28183-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [91.217.248.11]
-X-ClientProxiedBy: DB5PR03CA0007.eurprd03.prod.outlook.com (25.162.150.17) To
-	DB5PR02MB1175.eurprd02.prod.outlook.com (25.162.163.21)
-X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1175;
-	2:8ky7joIfJIfyOpjSFKjMBt+oETlyQFK1oief/K+hK2V7iNvv13iYysbzRLczaUEWoDEtK3bVLWiR7n1KjQyFVK9o/anNLG0J38HeOFavLoxzeycIBkuSbTLNqyZRJFpJshk2HkrgC8/NhItwOKQR95MKx40EiBu8Cxjb9QtgNJU=;
-	3:1Vlpo67cXAHuAtMPhf7jFNMgehlDGyBxBgBburNcTyNAmAvtXeZR28Wa/x9zDSfBE0XpLpj4E7hueJD8by1u92xN8Dqwjnfap+9d5PzDtFXX4/EQ7QugaLVK7OOMxhIs+jX0gKbcsjCf3KwTL/O/Og==;
-	25:XTND5qYOMLveCwwRjvMRlI4tsAixToi0mmGVxVCbF5lJ8ILQdjWJFqUxZwe3OAVTFEoopsZqyKTqJ+Faw6Nm7eNe2TV7Iyhwd30oQhSoC/3ND1HkefEva3+caU30BQdmekRZ8PzcW3cmOdyBevni5LZ2iwnle2Uy6V1/H5aVxWupHP9rbXkA/Dpnw9UABNM0dO9Ft9V7uI5hnYpEWr6tMMg2QdbkVxi+MtduHEYRB7wJFMGVbMs7OG9agRuyDl8X
-X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DB5PR02MB1175;
-X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1175;
-	20:sUQ5gkz7IpRInCz5VKt6FesItBIx/P8NpxBzECCPq8YKJ7rdRyxyInlJfkcLxjgT3QjaMY1K/503oXNAwuJl/3/19zNnbKzDKeTOXCo8F3O5HhhMhAHJM3/RGd423+vhbPyJYW5aeVqHokIKPdkiIc4WLwb6Z/pVuiJC6pMtZk8G/vaYQJvH+i+eM0iqStO/3wvX/qtg2qNAP/PJ6yK2EXOLNXJsbO6xLT2zU4QxkOMaGIm7YMiowQbbxQfBQP6QqgBK/q1BiVOq4MvVZY53QrrZXMTSlgDQ0klAc0MjdZSo6Mwmc/Mcg2I9IM2NT2LNw8ifB4kSbN2f8HEGv0hlpLg13VU/66juZLEnoODCQq9qK6KTao0gkTNJXXGVz/Eq8g5T/b8y//YqrC/XqMgUsiPXiZyPqFu9UMOgCLKTob2eDtDPkXiUtz2drCQ7qCq3XH6pJ2XtSd1t34M5b4YEk/mQTvKin2gMTvbr0Am3kH3hMjzaJpZeaL8EI7dNeX5c;
-	4:1UNHEa6XLDMdxCb7V0FmuMZ+x78GdHX+WmuO3ovBYla1Jq5TtHFmVqLBd8tyZmoI4jDaDAfBGjedCafo9oAqoFCs8oXb47xoTlttOp4B/hzsB4M46eSZgaD3LAxqtuLDQ2buCXQ6v1rUH7TH2PvLE8nPxF6yx4wjgvay2woBL5dfH5V5V+zqWBc0K+AVrjAwkywlEKsBBIRB3a5AD5ToDfJI1Ea+gy+0e5X/Wums5CDhFJ7V4xxRk1/1EdrfQkRCUQmtMSclLvMdGi+l1uh7jA3THpPqKZeCX2Mfs7mpF+scB5/1akBicu1r9Delh36yISRDYxCWDc2CSm2ZrgLL+JZalgApSXuPTobNm5SNFOQC8mPtNSqnBC4+bgm84ltC
-X-Microsoft-Antispam-PRVS: <DB5PR02MB1175CEAEB466E1658FB9F83C902C0@DB5PR02MB1175.eurprd02.prod.outlook.com>
-X-Exchange-Antispam-Report-Test: UriScan:(226695750432114);
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(601004)(2401047)(520078)(5005006)(8121501046)(10201501046)(3002001);
-	SRVR:DB5PR02MB1175; BCL:0; PCL:0; RULEID:; SRVR:DB5PR02MB1175; 
-X-Forefront-PRVS: 0748FF9A04
-X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10019020)(6009001)(189002)(199003)(50466002)(50226001)(106356001)(575784001)(5003940100001)(189998001)(110136002)(105586002)(5001960100002)(86362001)(229853001)(92566002)(81156007)(97736004)(2351001)(107886002)(36756003)(5008740100001)(87976001)(77096005)(101416001)(5007970100001)(47776003)(450100001)(50986999)(5004730100002)(122386002)(230783001)(66066001)(4001430100002)(19580395003)(33646002)(19580405001)(48376002)(40100003)(42186005)(7099028);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:DB5PR02MB1175; H:piippo.it.local;
-	FPR:; SPF:None; PTR:InfoNoRecords; MX:1; A:1; LANG:en; 
-Received-SPF: None (protection.outlook.com: theqtcompany.com does not
-	designate permitted sender hosts)
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DB5PR02MB1175;
-	23:sJWrR5pQtAHBnywSgnkOS4kdo0CS87tTw9LJx8EPB?=
-	=?us-ascii?Q?5znxmr7Oxs/cpqNvMsW3kFyFdFKd+uOAfch53BD7Vr9YvFeyWxU+8lYUmiTW?=
-	=?us-ascii?Q?8i2ZK2Bbk7zBUXNuTdOgRlnS7Jg52FBIil8achZpGua18TeNiQ3MBf7fmXRD?=
-	=?us-ascii?Q?pY3ZKC34x1HFcUTrq3m5eyALj/TP38JKVhKVmEhhirXJR09yHTgIgYD3XbtD?=
-	=?us-ascii?Q?kh5Ymg1k5VSyy4bNkWRQr6Ylkv4vVOWjxdSBSjKVrBnj/psgKUSDwYistFWf?=
-	=?us-ascii?Q?HZekSIRG+Y8q4q8TOlpQ/ztTPxULwe+2x4ROPu3+tFLEsINP8ZhXt3k0TPzC?=
-	=?us-ascii?Q?nBULtXip2HHwLWRNauYu+MMIcsfRRhLie/yMQLhxFG08KNRxVuZIP7y1AA4N?=
-	=?us-ascii?Q?sXgZsOsqKSod70mxu9aKdkPd62PiuRH9qAXmhed32HWPl7aBPTkwsU+iHgNd?=
-	=?us-ascii?Q?TEVZTvnNRYhV0JUIOGEykXdgA7PovCr5cwpLSzuS+TfLzVPHs7PlMlcBizlK?=
-	=?us-ascii?Q?RBq43+n9DLSq6FFJInw7cq5Qsl7Wl6blOE0zp8t6e3uSq+Zm3n0JAtg+HDd0?=
-	=?us-ascii?Q?1gP2xpac0ZBrjUhw7vgNZJ2C6Sji1noND+CcmPZNokWkKs0IjR7UIYpBzbRy?=
-	=?us-ascii?Q?XOar8EHOiNg17nmlnUR8hGLNo6UzqsjrjCE47IJL1QJdNYuhfdYPOx8P3uF5?=
-	=?us-ascii?Q?amLk4ACXKEMbAPBVc9/xjrrRrQ+KQ+fPprtebD4MtP+lxNkH+Oz/dwI2+cdv?=
-	=?us-ascii?Q?AQHLmtjRE3cAVDgXO4MtqC5qGerJWDjiQkknurEvIb7u20zF2AVydmRFuAra?=
-	=?us-ascii?Q?UNjX6M5SC/v8k2uB29Czh1tqfbyatRQTtp37MFQLfQqYlESfEAyhYtsVQ/2b?=
-	=?us-ascii?Q?cZFysyEOnmUdE9onaf0SbYLaTkvx9hOJVcR2axaBEPogGXm0XIKfjLv5lQll?=
-	=?us-ascii?Q?QyBgyOf8G7jVyBrZbM6y6Hk+B7OrSboaCnLmoAmnQM545qwGrelcUyUHHtF3?=
-	=?us-ascii?Q?srM9/o9K7aUF2sFuxQlgTxXNY4Hjtwo9ijFMZMuPQtBENHp00iCyjjFQvU5s?=
-	=?us-ascii?Q?CVSugT+3BkwSn0Cvg5A3Uj4s9BixVsX1HoylTcSExs+WXIyEA=3D=3D?=
-X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1175;
-	5:pENlhfZLsf988kdz0hxYn4xPhv01wXkUMG831LXgitQ5s6sZZqEWRyuxRYhpKEUPpIfenWG4lQpS58hP5tN97dD6S8uIdtMgJ5gc4BkxKjuk0Mb3IVYIE4TxU4THaLy+tHHJfSPJVpxoTvwl8ORMqA==;
-	24:EGGu2hm6qQvbUwtHfXcdqL4HH4BeMI8VYz1tN+BDzvkkiZC2zEwlraundUofzVoWYcL4svmKt3P3cOdAMdaA0EHYrAlUnnCpUkIr4VClHpc=;
-	20:tZYMjHMAWlWMHrzQVHbocJx3m5wapit0Dr8JdfVYuamnm3kDFwwNzlILVKOtNY4+lrzHt4mb+hSLyxdUpetY2g==
-SpamDiagnosticOutput: 1:23
-SpamDiagnosticMetadata: NSPM
-X-OriginatorOrg: theqtcompany.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2015 14:04:08.6783 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR02MB1175
-Subject: [meta-qt5][PATCH] qtbase: include oe-device-extra.pri unconditionally
+In-Reply-To: <1445585893-28183-1-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-oe][PATCH] sysdig: Fix build with lua >= 5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -82,34 +46,264 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Nov 2015 14:18:15 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 02 Nov 2015 14:33:26 -0000
+X-Groupsio-MsgNum: 58247
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="GvXjxJ+pjyke8COw"
+Content-Disposition: inline
 
-configure parses through the mkspec, but does not handle conditions
-at all, so oe-device-extra.pri was not included at configure phase.
-For example QT_QPA_DEFAULT_PLATFORM had no effect for configure.
-include() is conditional and won't break build even when
-oe-device-extra.pri does not exist.
+--GvXjxJ+pjyke8COw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
----
- recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Fri, Oct 23, 2015 at 12:38:13AM -0700, Khem Raj wrote:
+> It was still using deprecated lua contructs
+> also fix for musl while at it
 
-diff --git a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-index a9c448d..d377921 100644
---- a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-+++ b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-@@ -240,7 +240,7 @@ index 0000000..d0a4166
- +# for the SDK
- +isEmpty(QMAKE_QT_CONFIG):QMAKE_QT_CONFIG = $(OE_QMAKE_QT_CONFIG)
- +
--+exists(../oe-device-extra.pri):include(../oe-device-extra.pri)
-++include(../oe-device-extra.pri)
- +
- +load(qt_config)
- diff --git a/mkspecs/linux-oe-g++/qplatformdefs.h b/mkspecs/linux-oe-g++/qplatformdefs.h
--- 
-1.9.1
+Still fails in world builds:
+http://errors.yoctoproject.org/Errors/Details/21266/
+or
+http://errors.yoctoproject.org/Errors/Details/20809/
 
+Should it depend on luajit or lua5.1 you've recently sent?
 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  ...ith-musl-backtrace-APIs-are-glibc-specifi.patch |  50 ++++++++++
+>  .../0001-libsinsp-Port-to-build-with-lua-5.2.patch | 108 +++++++++++++++=
+++++++
+>  meta-oe/recipes-extended/sysdig/sysdig_git.bb      |   7 +-
+>  3 files changed, 163 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-Fix-build=
+-with-musl-backtrace-APIs-are-glibc-specifi.patch
+>  create mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-=
+Port-to-build-with-lua-5.2.patch
+>=20
+> diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-Fix-build-with-m=
+usl-backtrace-APIs-are-glibc-specifi.patch b/meta-oe/recipes-extended/sysdi=
+g/sysdig/0001-Fix-build-with-musl-backtrace-APIs-are-glibc-specifi.patch
+> new file mode 100644
+> index 0000000..7d3f8a1
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/sysdig/sysdig/0001-Fix-build-with-musl-bac=
+ktrace-APIs-are-glibc-specifi.patch
+> @@ -0,0 +1,50 @@
+> +From 290703a5d21f34ea5ec23efc815a9f4df241e7e8 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Fri, 23 Oct 2015 00:33:32 -0700
+> +Subject: [PATCH] Fix build with musl, backtrace() APIs are glibc specific
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + userspace/libsinsp/utils.cpp | 4 +++-
+> + userspace/libsinsp/utils.h   | 2 +-
+> + 2 files changed, 4 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/userspace/libsinsp/utils.cpp b/userspace/libsinsp/utils.cpp
+> +index 8f23f9c..c496a57 100644
+> +--- a/userspace/libsinsp/utils.cpp
+> ++++ b/userspace/libsinsp/utils.cpp
+> +@@ -21,7 +21,9 @@ along with sysdig.  If not, see <http://www.gnu.org/li=
+censes/>.
+> + #include <limits.h>
+> + #include <stdlib.h>
+> + #include <sys/time.h>
+> ++#ifdef __GLIBC__
+> + #include <execinfo.h>
+> ++#endif
+> + #include <unistd.h>
+> + #include <sys/time.h>
+> + #include <netdb.h>
+> +@@ -741,7 +743,7 @@ uint64_t sinsp_utils::get_current_time_ns()
+> +     return tv.tv_sec * (uint64_t) 1000000000 + tv.tv_usec * 1000;
+> + }
+> +=20
+> +-#ifndef _WIN32
+> ++#if defined(_WIN32) && defined(__GLIBC__)
+> + void sinsp_utils::bt(void)
+> + {
+> + 	static const char start[] =3D "BACKTRACE ------------";
+> +diff --git a/userspace/libsinsp/utils.h b/userspace/libsinsp/utils.h
+> +index 600d00b..4ab4650 100644
+> +--- a/userspace/libsinsp/utils.h
+> ++++ b/userspace/libsinsp/utils.h
+> +@@ -79,7 +79,7 @@ public:
+> +=20
+> + 	static uint64_t get_current_time_ns();
+> +=20
+> +-#ifndef _WIN32
+> ++#if not defined(_WIN32) && defined(__GLIBC__)
+> + 	//
+> + 	// Print the call stack
+> + 	//
+> +--=20
+> +2.6.2
+> +
+> diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-Port-to=
+-build-with-lua-5.2.patch b/meta-oe/recipes-extended/sysdig/sysdig/0001-lib=
+sinsp-Port-to-build-with-lua-5.2.patch
+> new file mode 100644
+> index 0000000..8fec0ca
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-Port-to-build-=
+with-lua-5.2.patch
+> @@ -0,0 +1,108 @@
+> +From c2782a6ca968190e221c25b0890600ba8cd43798 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Fri, 23 Oct 2015 00:23:15 -0700
+> +Subject: [PATCH] libsinsp: Port to build with lua >=3D 5.2
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + userspace/libsinsp/chisel.cpp | 40 +++++++++++++++++++++++++++++-------=
+----
+> + 1 file changed, 29 insertions(+), 11 deletions(-)
+> +
+> +diff --git a/userspace/libsinsp/chisel.cpp b/userspace/libsinsp/chisel.c=
+pp
+> +index 3cfbd8d..2db9348 100644
+> +--- a/userspace/libsinsp/chisel.cpp
+> ++++ b/userspace/libsinsp/chisel.cpp
+> +@@ -94,7 +94,7 @@ void lua_stackdump(lua_State *L)
+> + // Lua callbacks
+> + ///////////////////////////////////////////////////////////////////////=
+////////
+> + #ifdef HAS_LUA_CHISELS
+> +-const static struct luaL_reg ll_sysdig [] =3D=20
+> ++const static struct luaL_Reg ll_sysdig [] =3D
+> + {
+> + 	{"set_filter", &lua_cbacks::set_global_filter},
+> + 	{"set_snaplen", &lua_cbacks::set_snaplen},
+> +@@ -120,7 +120,7 @@ const static struct luaL_reg ll_sysdig [] =3D
+> + 	{NULL,NULL}
+> + };
+> +=20
+> +-const static struct luaL_reg ll_chisel [] =3D=20
+> ++const static struct luaL_Reg ll_chisel [] =3D
+> + {
+> + 	{"request_field", &lua_cbacks::request_field},
+> + 	{"set_filter", &lua_cbacks::set_filter},
+> +@@ -131,7 +131,7 @@ const static struct luaL_reg ll_chisel [] =3D
+> + 	{NULL,NULL}
+> + };
+> +=20
+> +-const static struct luaL_reg ll_evt [] =3D=20
+> ++const static struct luaL_Reg ll_evt [] =3D
+> + {
+> + 	{"field", &lua_cbacks::field},
+> + 	{"get_num", &lua_cbacks::get_num},
+> +@@ -853,10 +853,28 @@ bool sinsp_chisel::parse_view_info(lua_State *ls, =
+OUT chisel_desc* cd)
+> +=20
+> +=20
+> + #ifdef HAS_LUA_CHISELS
+> ++static void chisel_lua_registerlib(lua_State *L, const char *libname,
+> ++				const luaL_Reg *l, int ind)
+> ++{
+> ++#if LUA_VERSION_NUM >=3D 502
+> ++	if (libname)
+> ++	{
+> ++		lua_newtable(L);
+> ++		luaL_setfuncs(L, l, ind);
+> ++		lua_pushvalue(L, -1);
+> ++		lua_setglobal(L, libname);
+> ++	}
+> ++	else
+> ++		luaL_setfuncs(L, l, ind);
+> ++#else
+> ++	luaL_register(L, libname, l);
+> ++#endif
+> ++}
+> ++
+> + // Initializes a lua chisel
+> + bool sinsp_chisel::init_lua_chisel(chisel_desc &cd, string const &fpath)
+> + {
+> +-	lua_State* ls =3D lua_open();
+> ++	lua_State* ls =3D luaL_newstate();
+> + 	if(ls =3D=3D NULL)
+> + 	{
+> + 		return false;
+> +@@ -867,9 +885,9 @@ bool sinsp_chisel::init_lua_chisel(chisel_desc &cd, =
+string const &fpath)
+> + 	//
+> + 	// Load our own lua libs
+> + 	//
+> +-	luaL_openlib(ls, "sysdig", ll_sysdig, 0);
+> +-	luaL_openlib(ls, "chisel", ll_chisel, 0);
+> +-	luaL_openlib(ls, "evt", ll_evt, 0);
+> ++	chisel_lua_registerlib(ls, "sysdig", ll_sysdig, 0);
+> ++	chisel_lua_registerlib(ls, "chisel", ll_chisel, 0);
+> ++	chisel_lua_registerlib(ls, "evt", ll_evt, 0);
+> +=20
+> + 	//
+> + 	// Add our chisel paths to package.path
+> +@@ -1111,16 +1129,16 @@ void sinsp_chisel::load(string cmdstr)
+> + 	//
+> + 	// Open the script
+> + 	//
+> +-	m_ls =3D lua_open();
+> ++	m_ls =3D luaL_newstate();
+> + =20
+> + 	luaL_openlibs(m_ls);
+> +=20
+> + 	//
+> + 	// Load our own lua libs
+> + 	//
+> +-	luaL_openlib(m_ls, "sysdig", ll_sysdig, 0);
+> +-	luaL_openlib(m_ls, "chisel", ll_chisel, 0);
+> +-	luaL_openlib(m_ls, "evt", ll_evt, 0);
+> ++	chisel_lua_registerlib(m_ls, "sysdig", ll_sysdig, 0);
+> ++	chisel_lua_registerlib(m_ls, "chisel", ll_chisel, 0);
+> ++	chisel_lua_registerlib(m_ls, "evt", ll_evt, 0);
+> +=20
+> + 	//
+> + 	// Add our chisel paths to package.path
+> +--=20
+> +2.6.2
+> +
+> diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/reci=
+pes-extended/sysdig/sysdig_git.bb
+> index 62aa433..717fab9 100644
+> --- a/meta-oe/recipes-extended/sysdig/sysdig_git.bb
+> +++ b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
+> @@ -11,8 +11,11 @@ inherit cmake pkgconfig
+>  DEPENDS =3D "luajit zlib ncurses"
+>  RDEPENDS_${PN} =3D "bash"
+> =20
+> -SRC_URI =3D "git://github.com/draios/sysdig.git;branch=3Dmaster"
+> -SRCREV =3D "b7394e29ced4f1a991af03c0381a5828abcbab7a"
+> +SRC_URI =3D "git://github.com/draios/sysdig.git;branch=3Dmaster \
+> +           file://0001-libsinsp-Port-to-build-with-lua-5.2.patch \
+> +           file://0001-Fix-build-with-musl-backtrace-APIs-are-glibc-spec=
+ifi.patch \
+> +          "
+> +SRCREV =3D "85d16f33a82a17f87ccdbc088749271c71d87013"
+>  PV =3D "0.1.102+git${SRCPV}"
+> =20
+>  S =3D "${WORKDIR}/git"
+> --=20
+> 2.6.2
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--GvXjxJ+pjyke8COw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlY3dDoACgkQN1Ujt2V2gBzVNQCfTjaTuUxacIwMkY2BPM8cTxJs
+yjoAn2PX4ZUbeVfBIAe2KzwE4csl+FgQ
+=HFCw
+-----END PGP SIGNATURE-----
+
+--GvXjxJ+pjyke8COw--
