@@ -1,38 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id EA27F60125
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-lb0-f177.google.com (mail-lb0-f177.google.com
+	[209.85.217.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 53A4975CC2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Nov 2015 14:33:25 +0000 (UTC)
-Received: by wmeg8 with SMTP id g8so62306895wme.1
+	Mon,  2 Nov 2015 14:36:07 +0000 (UTC)
+Received: by lbjm5 with SMTP id m5so89352078lbj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Nov 2015 06:33:25 -0800 (PST)
+	Mon, 02 Nov 2015 06:36:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=EUtJMUYpLBevyX/q/BxG7vLP72pISn73a4lwUe/ETic=;
-	b=NaEcU8g1wTjOVGaPoulkFDCmfVKFAnEmBkJTf2bYNe2eGbvMAwbVX1nEVAxurunBZQ
-	jZvcnVy2Nlx2uuXyiy15KnuGoU8bXFxVVNKJsH1AEFOQ53GYEgV6e7a7zHGxH7eSErp8
-	7aHMBL2mc30+ORteCWtsAH0Uf8y+G3hysVW8aspMiymHEp3mfqQOVOs6sGbkAnnYXFJF
-	3T0ppTSZ7Hk284l3LlI5G/+VLvnt3q0C5h9Ni7EOHwPMc85fU5tcuUVbaDg2qL29lajw
-	mw6eVQcFXYp9Td1qOTJ60yKWHtYo2sj42gjIhnWZK683ejLSsFYSJjn+OuNtORbWHm0w
-	WihQ==
-X-Received: by 10.28.212.8 with SMTP id l8mr14598968wmg.32.1446474805429;
-	Mon, 02 Nov 2015 06:33:25 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id h7sm22703206wjz.7.2015.11.02.06.33.24
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Nov 2015 06:33:24 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 2 Nov 2015 15:33:30 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151102143330.GA28051@jama>
-References: <1445585893-28183-1-git-send-email-raj.khem@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=50KmIJA8m8XzXhA3pBzrg0oQmFkmPwNqI10yfiVdHs0=;
+	b=voegS8+hgvi8oubJVojYaTCU2GNzn6FmA4X26aHYE/lo7h1GWZyPD92wU1Wb0p3Sif
+	mrgoHGz29sfgi3RdpoaiIkUJ7p8utygHse/NdDoBHRZms8Jlw4g94NKDr4EQonesmLcw
+	azDTc7zGrVXNDeRR5FfvvDBrTWeg0w1iToLw+PkqVgmSpV1sM3taIvGA/pWbt8C3yCdC
+	1uv7kDttIUWpcZS5JYzaePuBbO59m3Yo4f33iik7sSiB3RlByub9gmxDFgHkK1sNvWys
+	uUbSRuk5UyBr3NK9PluVcYmkPLUZlLcFWcchGys2tdcgbLo0ICgPRyyVxrgn2hQHJ2xF
+	VofQ==
+X-Received: by 10.112.168.228 with SMTP id zz4mr10409239lbb.73.1446474966830; 
+	Mon, 02 Nov 2015 06:36:06 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1445585893-28183-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-oe][PATCH] sysdig: Fix build with lua >= 5.2
+Received: by 10.114.245.193 with HTTP; Mon, 2 Nov 2015 06:35:47 -0800 (PST)
+In-Reply-To: <20151102140313.GA15877@jama>
+References: <1445523733-20612-1-git-send-email-ricardo.ribalda@gmail.com>
+	<20151102140313.GA15877@jama>
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Date: Mon, 2 Nov 2015 15:35:47 +0100
+Message-ID: <CAPybu_2HdYz7yP7QdUr2qi0wDcwT312uDMLSd5avMxdt3nztDQ@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] gerbil: Visualization and analysis tool for hyperspectral images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,264 +43,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Nov 2015 14:33:26 -0000
-X-Groupsio-MsgNum: 58247
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="GvXjxJ+pjyke8COw"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 02 Nov 2015 14:36:09 -0000
+Content-Type: text/plain; charset=UTF-8
 
---GvXjxJ+pjyke8COw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello
 
-On Fri, Oct 23, 2015 at 12:38:13AM -0700, Khem Raj wrote:
-> It was still using deprecated lua contructs
-> also fix for musl while at it
+I want to cry :( It runtime depends on the sse instruction set.
 
-Still fails in world builds:
-http://errors.yoctoproject.org/Errors/Details/21266/
-or
-http://errors.yoctoproject.org/Errors/Details/20809/
 
-Should it depend on luajit or lua5.1 you've recently sent?
+Would you accept something like this on the recipe?
 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  ...ith-musl-backtrace-APIs-are-glibc-specifi.patch |  50 ++++++++++
->  .../0001-libsinsp-Port-to-build-with-lua-5.2.patch | 108 +++++++++++++++=
-++++++
->  meta-oe/recipes-extended/sysdig/sysdig_git.bb      |   7 +-
->  3 files changed, 163 insertions(+), 2 deletions(-)
->  create mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-Fix-build=
--with-musl-backtrace-APIs-are-glibc-specifi.patch
->  create mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-=
-Port-to-build-with-lua-5.2.patch
->=20
-> diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-Fix-build-with-m=
-usl-backtrace-APIs-are-glibc-specifi.patch b/meta-oe/recipes-extended/sysdi=
-g/sysdig/0001-Fix-build-with-musl-backtrace-APIs-are-glibc-specifi.patch
-> new file mode 100644
-> index 0000000..7d3f8a1
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/sysdig/sysdig/0001-Fix-build-with-musl-bac=
-ktrace-APIs-are-glibc-specifi.patch
-> @@ -0,0 +1,50 @@
-> +From 290703a5d21f34ea5ec23efc815a9f4df241e7e8 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Fri, 23 Oct 2015 00:33:32 -0700
-> +Subject: [PATCH] Fix build with musl, backtrace() APIs are glibc specific
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + userspace/libsinsp/utils.cpp | 4 +++-
-> + userspace/libsinsp/utils.h   | 2 +-
-> + 2 files changed, 4 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/userspace/libsinsp/utils.cpp b/userspace/libsinsp/utils.cpp
-> +index 8f23f9c..c496a57 100644
-> +--- a/userspace/libsinsp/utils.cpp
-> ++++ b/userspace/libsinsp/utils.cpp
-> +@@ -21,7 +21,9 @@ along with sysdig.  If not, see <http://www.gnu.org/li=
-censes/>.
-> + #include <limits.h>
-> + #include <stdlib.h>
-> + #include <sys/time.h>
-> ++#ifdef __GLIBC__
-> + #include <execinfo.h>
-> ++#endif
-> + #include <unistd.h>
-> + #include <sys/time.h>
-> + #include <netdb.h>
-> +@@ -741,7 +743,7 @@ uint64_t sinsp_utils::get_current_time_ns()
-> +     return tv.tv_sec * (uint64_t) 1000000000 + tv.tv_usec * 1000;
-> + }
-> +=20
-> +-#ifndef _WIN32
-> ++#if defined(_WIN32) && defined(__GLIBC__)
-> + void sinsp_utils::bt(void)
-> + {
-> + 	static const char start[] =3D "BACKTRACE ------------";
-> +diff --git a/userspace/libsinsp/utils.h b/userspace/libsinsp/utils.h
-> +index 600d00b..4ab4650 100644
-> +--- a/userspace/libsinsp/utils.h
-> ++++ b/userspace/libsinsp/utils.h
-> +@@ -79,7 +79,7 @@ public:
-> +=20
-> + 	static uint64_t get_current_time_ns();
-> +=20
-> +-#ifndef _WIN32
-> ++#if not defined(_WIN32) && defined(__GLIBC__)
-> + 	//
-> + 	// Print the call stack
-> + 	//
-> +--=20
-> +2.6.2
-> +
-> diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-Port-to=
--build-with-lua-5.2.patch b/meta-oe/recipes-extended/sysdig/sysdig/0001-lib=
-sinsp-Port-to-build-with-lua-5.2.patch
-> new file mode 100644
-> index 0000000..8fec0ca
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-Port-to-build-=
-with-lua-5.2.patch
-> @@ -0,0 +1,108 @@
-> +From c2782a6ca968190e221c25b0890600ba8cd43798 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Fri, 23 Oct 2015 00:23:15 -0700
-> +Subject: [PATCH] libsinsp: Port to build with lua >=3D 5.2
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + userspace/libsinsp/chisel.cpp | 40 +++++++++++++++++++++++++++++-------=
-----
-> + 1 file changed, 29 insertions(+), 11 deletions(-)
-> +
-> +diff --git a/userspace/libsinsp/chisel.cpp b/userspace/libsinsp/chisel.c=
-pp
-> +index 3cfbd8d..2db9348 100644
-> +--- a/userspace/libsinsp/chisel.cpp
-> ++++ b/userspace/libsinsp/chisel.cpp
-> +@@ -94,7 +94,7 @@ void lua_stackdump(lua_State *L)
-> + // Lua callbacks
-> + ///////////////////////////////////////////////////////////////////////=
-////////
-> + #ifdef HAS_LUA_CHISELS
-> +-const static struct luaL_reg ll_sysdig [] =3D=20
-> ++const static struct luaL_Reg ll_sysdig [] =3D
-> + {
-> + 	{"set_filter", &lua_cbacks::set_global_filter},
-> + 	{"set_snaplen", &lua_cbacks::set_snaplen},
-> +@@ -120,7 +120,7 @@ const static struct luaL_reg ll_sysdig [] =3D
-> + 	{NULL,NULL}
-> + };
-> +=20
-> +-const static struct luaL_reg ll_chisel [] =3D=20
-> ++const static struct luaL_Reg ll_chisel [] =3D
-> + {
-> + 	{"request_field", &lua_cbacks::request_field},
-> + 	{"set_filter", &lua_cbacks::set_filter},
-> +@@ -131,7 +131,7 @@ const static struct luaL_reg ll_chisel [] =3D
-> + 	{NULL,NULL}
-> + };
-> +=20
-> +-const static struct luaL_reg ll_evt [] =3D=20
-> ++const static struct luaL_Reg ll_evt [] =3D
-> + {
-> + 	{"field", &lua_cbacks::field},
-> + 	{"get_num", &lua_cbacks::get_num},
-> +@@ -853,10 +853,28 @@ bool sinsp_chisel::parse_view_info(lua_State *ls, =
-OUT chisel_desc* cd)
-> +=20
-> +=20
-> + #ifdef HAS_LUA_CHISELS
-> ++static void chisel_lua_registerlib(lua_State *L, const char *libname,
-> ++				const luaL_Reg *l, int ind)
-> ++{
-> ++#if LUA_VERSION_NUM >=3D 502
-> ++	if (libname)
-> ++	{
-> ++		lua_newtable(L);
-> ++		luaL_setfuncs(L, l, ind);
-> ++		lua_pushvalue(L, -1);
-> ++		lua_setglobal(L, libname);
-> ++	}
-> ++	else
-> ++		luaL_setfuncs(L, l, ind);
-> ++#else
-> ++	luaL_register(L, libname, l);
-> ++#endif
-> ++}
-> ++
-> + // Initializes a lua chisel
-> + bool sinsp_chisel::init_lua_chisel(chisel_desc &cd, string const &fpath)
-> + {
-> +-	lua_State* ls =3D lua_open();
-> ++	lua_State* ls =3D luaL_newstate();
-> + 	if(ls =3D=3D NULL)
-> + 	{
-> + 		return false;
-> +@@ -867,9 +885,9 @@ bool sinsp_chisel::init_lua_chisel(chisel_desc &cd, =
-string const &fpath)
-> + 	//
-> + 	// Load our own lua libs
-> + 	//
-> +-	luaL_openlib(ls, "sysdig", ll_sysdig, 0);
-> +-	luaL_openlib(ls, "chisel", ll_chisel, 0);
-> +-	luaL_openlib(ls, "evt", ll_evt, 0);
-> ++	chisel_lua_registerlib(ls, "sysdig", ll_sysdig, 0);
-> ++	chisel_lua_registerlib(ls, "chisel", ll_chisel, 0);
-> ++	chisel_lua_registerlib(ls, "evt", ll_evt, 0);
-> +=20
-> + 	//
-> + 	// Add our chisel paths to package.path
-> +@@ -1111,16 +1129,16 @@ void sinsp_chisel::load(string cmdstr)
-> + 	//
-> + 	// Open the script
-> + 	//
-> +-	m_ls =3D lua_open();
-> ++	m_ls =3D luaL_newstate();
-> + =20
-> + 	luaL_openlibs(m_ls);
-> +=20
-> + 	//
-> + 	// Load our own lua libs
-> + 	//
-> +-	luaL_openlib(m_ls, "sysdig", ll_sysdig, 0);
-> +-	luaL_openlib(m_ls, "chisel", ll_chisel, 0);
-> +-	luaL_openlib(m_ls, "evt", ll_evt, 0);
-> ++	chisel_lua_registerlib(m_ls, "sysdig", ll_sysdig, 0);
-> ++	chisel_lua_registerlib(m_ls, "chisel", ll_chisel, 0);
-> ++	chisel_lua_registerlib(m_ls, "evt", ll_evt, 0);
-> +=20
-> + 	//
-> + 	// Add our chisel paths to package.path
-> +--=20
-> +2.6.2
-> +
-> diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/reci=
-pes-extended/sysdig/sysdig_git.bb
-> index 62aa433..717fab9 100644
-> --- a/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-> +++ b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-> @@ -11,8 +11,11 @@ inherit cmake pkgconfig
->  DEPENDS =3D "luajit zlib ncurses"
->  RDEPENDS_${PN} =3D "bash"
-> =20
-> -SRC_URI =3D "git://github.com/draios/sysdig.git;branch=3Dmaster"
-> -SRCREV =3D "b7394e29ced4f1a991af03c0381a5828abcbab7a"
-> +SRC_URI =3D "git://github.com/draios/sysdig.git;branch=3Dmaster \
-> +           file://0001-libsinsp-Port-to-build-with-lua-5.2.patch \
-> +           file://0001-Fix-build-with-musl-backtrace-APIs-are-glibc-spec=
-ifi.patch \
-> +          "
-> +SRCREV =3D "85d16f33a82a17f87ccdbc088749271c71d87013"
->  PV =3D "0.1.102+git${SRCPV}"
-> =20
->  S =3D "${WORKDIR}/git"
-> --=20
-> 2.6.2
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+COMPATIBLE_MACHINE = "(-)"
+COMPATIBLE_MACHINE_x86 = "(.*)"
+COMPATIBLE_MACHINE_x86-64 = "(.*)"
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---GvXjxJ+pjyke8COw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Thanks and Regards!
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
 
-iEYEARECAAYFAlY3dDoACgkQN1Ujt2V2gBzVNQCfTjaTuUxacIwMkY2BPM8cTxJs
-yjoAn2PX4ZUbeVfBIAe2KzwE4csl+FgQ
-=HFCw
------END PGP SIGNATURE-----
 
---GvXjxJ+pjyke8COw--
+On Mon, Nov 2, 2015 at 3:03 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Thu, Oct 22, 2015 at 04:22:13PM +0200, Ricardo Ribalda Delgado wrote:
+>> New recipe
+>
+> Still fails for qemuarm:
+> http://errors.yoctoproject.org/Errors/Details/21264/
+>
+>>
+>> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+>> ---
+>> v2:
+>>
+>> v1 failed to link, it was missing the glu library.
+>>
+>> I have not been able to replicate the build error :S
+>>
+>> But after some static analysis it seems that:
+>>
+>> glu should have been automatically added with the cmake
+>> variable OPENGL_LIBRARIES, set in FindOpeGL.cmake
+>>
+>> But if glu is not present, then it is not added....
+>>
+>> Sorry for the inconvenience!
+>>
+>>
+>>
+>>  meta-oe/recipes-graphics/gerbil/gerbil_git.bb | 30 +++++++++++++++++++++++++++
+>>  1 file changed, 30 insertions(+)
+>>  create mode 100644 meta-oe/recipes-graphics/gerbil/gerbil_git.bb
+>>
+>> diff --git a/meta-oe/recipes-graphics/gerbil/gerbil_git.bb b/meta-oe/recipes-graphics/gerbil/gerbil_git.bb
+>> new file mode 100644
+>> index 000000000000..bfcd7c7ce803
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-graphics/gerbil/gerbil_git.bb
+>> @@ -0,0 +1,30 @@
+>> +DESCRIPTION = "Generic framework for visualization and analysis of multispectral and hyperspectral data that strives to both bring new innovations in analysis capabilities and be of use in a wide range of hyperspectral data applications"
+>> +HOMEPAGE = "http://gerbilvis.org/"
+>> +LICENSE = "GPLv3"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
+>> +DEPENDS = "boost qt4-x11-free tbb opencv libglu virtual/libgl"
+>> +SRCREV = "670e06da516ed51dbae75e41e043900256bdabba"
+>> +
+>> +SRC_URI = "git://github.com/gerbilvis/gerbil.git"
+>> +
+>> +S = "${WORKDIR}/git"
+>> +
+>> +inherit distutils-base cmake qt4x11
+>> +
+>> +export EXTRA_OECMAKE = "\
+>> +                        -DQT_MOC_EXECUTABLE=${OE_QMAKE_MOC} \
+>> +                        -DQT_UIC_EXECUTABLE=${OE_QMAKE_UIC} \
+>> +                        -DQT_RCC_EXECUTABLE=${OE_QMAKE_RCC} \
+>> +                        "
+>> +
+>> +do_configure() {
+>> +        # Ensure we get the cmake configure and not qmake
+>> +        cmake_do_configure
+>> +}
+>> +do_install() {
+>> +        install -d ${D}${bindir}
+>> +        install -m 755 bin/gerbil ${D}${bindir}/
+>> +        install -m 755 bin/qgerbil ${D}${bindir}/
+>> +}
+>> +
+>> +RDEPENDS_${PN} += "qt4-x11-free"
+>> --
+>> 2.6.1
+>>
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
+
+-- 
+Ricardo Ribalda
+
