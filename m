@@ -1,24 +1,27 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 64BF360232
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BE4760232
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Nov 2015 06:05:48 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tA265lsj006442
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  2 Nov 2015 06:11:14 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.15,520,1432569600"; d="scan'208";a="102545658"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 02 Nov 2015 14:12:51 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id tA26A6ts013609
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 1 Nov 2015 22:05:47 -0800 (PST)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
-	Sun, 1 Nov 2015 22:05:47 -0800
-From: <wenzong.fan@windriver.com>
+	Mon, 2 Nov 2015 14:10:06 +0800
+Received: from localhost.localdomain (10.167.226.26) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Mon, 2 Nov 2015 14:10:41 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 2 Nov 2015 01:05:46 -0500
-Message-ID: <1446444346-78456-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Mon, 2 Nov 2015 14:10:19 +0800
+Message-ID: <1446444619-1677-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] ypbind-mt: set path of ypdomainname in ypbind script
+X-Originating-IP: [10.167.226.26]
+Subject: [meta-networking][PATCH] opensaf: remove unused service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,68 +35,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Nov 2015 06:05:48 -0000
+X-List-Received-Date: Mon, 02 Nov 2015 06:11:20 -0000
 Content-Type: text/plain
 
-From: Jian Liu <jian.liu@windriver.com>
+From: Li Xin <lixin.fnst@cn.fujitsu.com>
 
-The script ypbind will cause error if using ypdomainname command
-provided by busybox. So add RDEPENDCY on yp-tools and change
-the path of ypdomainname.
+Upstream ships systemd service file plmcboot.service and plmcd.service now,
+so we don't need this anymore.
 
-Signed-off-by: Jian Liu <jian.liu@windriver.com>
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- meta-networking/recipes-support/nis/files/ypbind.init | 11 ++++++-----
- meta-networking/recipes-support/nis/ypbind-mt_1.38.bb |  2 ++
- 2 files changed, 8 insertions(+), 5 deletions(-)
+ .../recipes-daemons/opensaf/opensaf/plmcboot.service      | 13 -------------
+ .../recipes-daemons/opensaf/opensaf/plmcd.service         | 15 ---------------
+ meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb  |  6 +-----
+ 3 files changed, 1 insertion(+), 33 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.service
+ delete mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/plmcd.service
 
-diff --git a/meta-networking/recipes-support/nis/files/ypbind.init b/meta-networking/recipes-support/nis/files/ypbind.init
-index 244dc78..669c19c 100644
---- a/meta-networking/recipes-support/nis/files/ypbind.init
-+++ b/meta-networking/recipes-support/nis/files/ypbind.init
-@@ -26,6 +26,7 @@
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.service b/meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.service
+deleted file mode 100644
+index 76ec73a..0000000
+--- a/meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.service
++++ /dev/null
+@@ -1,13 +0,0 @@
+-[Unit]
+-Description=PLMCBOOT Program
+-After=network.target
+-ConditionPathExists=@SYSCONFDIR@/plmcd.conf
+-
+-[Service]
+-Type=oneshot
+-ExecStart=@SBINDIR@/plmcd -c @SYSCONFDIR@/plmcd.conf -s
+-ExecStop=@SBINDIR@/plmcd -c @SYSCONFDIR@/plmcd.conf -x
+-RemainAfterExit=yes
+-
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/plmcd.service b/meta-networking/recipes-daemons/opensaf/opensaf/plmcd.service
+deleted file mode 100644
+index 1d48e77..0000000
+--- a/meta-networking/recipes-daemons/opensaf/opensaf/plmcd.service
++++ /dev/null
+@@ -1,15 +0,0 @@
+-[Unit]
+-Description=Plmcd Daemon
+-Requires=plmcboot.service
+-After=network.target plmcboot.service
+-ConditionPathExists=@SYSCONFDIR@/plmcd.conf
+-
+-[Service]
+-Type=forking
+-ExecStart=@SBINDIR@/plmcd -c @SYSCONFDIR@/plmcd.conf
+-ExecStartPost=/bin/touch /var/lock/subsys/plmcd
+-ExecStopPost=/bin/rm -rf /var/lock/subsys/plmcd
+-PIDFile=/var/run/plmcd.pid
+-
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb
+index 28f4c00..9084524 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb
+@@ -15,8 +15,6 @@ inherit autotools useradd systemd pkgconfig
  
- YPBIND_BIN=/usr/sbin/ypbind
- pidfile=/var/run/ypbind.pid
-+YPDOMAINNAME_bin=/usr/bin/ypdomainname
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://install-samples-from-srcdir.patch \
+-           file://plmcd.service \
+-           file://plmcboot.service \
+            file://0001-plmcd-error-fix.patch \
+            file://Revert_imma_client_node_replyPending_to_unsigned_char.patch \
+            file://Fix_GCC_5.1.0_compiler_warning.patch \
+@@ -65,8 +63,6 @@ do_install_append() {
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensafd.service \
+         ${D}${systemd_unitdir}/system
+-    install -m 644 ${WORKDIR}/plmc*.service ${D}/${systemd_unitdir}/system
+-    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/plmc*.service
+-    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/plmc*.service
++    install -m 0644 ${B}/contrib/plmc/config/*.service ${D}/${systemd_unitdir}/system
  
- [ -f /etc/default/ypbind ] && . /etc/default/ypbind
- 
-@@ -34,14 +35,14 @@ case "$1" in
- 	echo -n "Starting ypbind"
- 	## If the domainname is not set, skip starting of ypbind
- 	## and return with "program not configured"
--        /bin/ypdomainname >/dev/null 2>&1
--        if [ $? -ne 0 -o -z "`/bin/ypdomainname 2>/dev/null`" ]; then
-+        $YPDOMAINNAME_bin >/dev/null 2>&1
-+        if [ $? -ne 0 -o -z "`$YPDOMAINNAME_bin 2>/dev/null`" ]; then
-            if [ -f /etc/defaultdomain ]; then
-              XDOMAINNAME=`cat /etc/defaultdomain`
--             /bin/ypdomainname "$XDOMAINNAME"
-+             $YPDOMAINNAME_bin "$XDOMAINNAME"
- 	   fi
--           /bin/ypdomainname >/dev/null 2>&1
--           if [ $? -ne 0 -o -z "`/bin/ypdomainname 2>/dev/null`" ]; then
-+           $YPDOMAINNAME_bin >/dev/null 2>&1
-+           if [ $? -ne 0 -o -z "`$YPDOMAINNAME_bin 2>/dev/null`" ]; then
- 	     # Tell the user this has skipped
- 	     echo -n " . . . . . . . . . . No domainname set"
-              # service is not configured
-diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-index 5702cd6..d113b82 100644
---- a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-+++ b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-@@ -21,6 +21,8 @@ DEPENDS = " \
-            yp-tools \
-            ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-           "
-+RDEPENDS_${PN} += "yp-tools"
-+
- # ypbind-mt now provides all the functionality of ypbind
- # and is used in place of it.
- PROVIDES += "ypbind"
+ }
 -- 
-1.9.1
+1.8.4.2
 
 
