@@ -1,24 +1,32 @@
-Return-Path: <prvs=7422397a9=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BC1071633
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id B2D1873D46
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Nov 2015 15:42:02 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AmYGAF/VOFasEApK/2dsb2JhbABehA5vBrsfhBUjhTc6AoIGAQEBAQEBgQtBEwGDYQEBBHgRCw0LCRYPCQMCAQIBRQYNBgICiC8IwVcBAQEBBgEBAQEbBIZkhH6ENQYBAWqEFAWHQYcLh3qFHZEgF5MNhGhxBYIEgiwIOoEHAQEB
-X-IPAS-Result: AmYGAF/VOFasEApK/2dsb2JhbABehA5vBrsfhBUjhTc6AoIGAQEBAQEBgQtBEwGDYQEBBHgRCw0LCRYPCQMCAQIBRQYNBgICiC8IwVcBAQEBBgEBAQEbBIZkhH6ENQYBAWqEFAWHQYcLh3qFHZEgF5MNhGhxBYIEgiwIOoEHAQEB
-Message-ID: <5638D571.3090500@skidata.com>
-Date: Tue, 3 Nov 2015 16:40:33 +0100
-From: Richard Leitner <richard.leitner@skidata.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Icedove/31.8.0
+	Tue,  3 Nov 2015 16:16:05 +0000 (UTC)
+Received: by iodd200 with SMTP id d200so23811366iod.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Nov 2015 08:16:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=iI2VJBgrfidu8NciXBO1fQWxrz6vwH7A+d+ClKTmI94=;
+	b=iTwZAVWo5b3KUYRLrlleRpdzJ78L2JPfTcf4iztM50pkljG3e+VvMNgfsvlJTc3+1X
+	IPJhgo9E492kbaydvzwfW7M1NAHYBXoFTfz5eqS4mDwaM6KTb03bFZaLmahdTOXjZmkh
+	iVTAQ1I/DhHIyEy28BT/L0dlO6iWglo6mQdZvpIieAB9ETFZTWeoUPwu+1x5ZqOQur2P
+	RNf4fHttP+vl/z50LquAGIPc4oPahkYWMRzI7dJsxrLZztgf5LSQoDrHGzYt5gERBRiS
+	c3DFKQU44O3kB8fp9lAh6bjBclJNBmj1Fe572locPuTwGetS+eVMfIiXKywfIYw720ni
+	La9Q==
+X-Received: by 10.107.4.3 with SMTP id 3mr10541703ioe.195.1446567366238; Tue,
+	03 Nov 2015 08:16:06 -0800 (PST)
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <AE55B37B-BC8F-4516-82BC-B2B1DE341859@gmail.com>
-	<5638C28E.7040505@skidata.com>
-	<2BAA39D9-E6DA-403E-AFAB-1E59CFE61DF2@gmail.com>
-In-Reply-To: <2BAA39D9-E6DA-403E-AFAB-1E59CFE61DF2@gmail.com>
-X-Originating-IP: [172.16.60.30]
-Subject: Re: [meta-java][PATCH] openjdk-8: add recipes for openjdk-8 and openjre-8
+Received: by 10.107.38.133 with HTTP; Tue, 3 Nov 2015 08:15:36 -0800 (PST)
+In-Reply-To: <1446541344-186769-1-git-send-email-wenzong.fan@windriver.com>
+References: <1446541344-186769-1-git-send-email-wenzong.fan@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 3 Nov 2015 08:15:36 -0800
+Message-ID: <CAMKF1so9srmNQoPa3FdXx0QFQmc20dRe=jMOfDUsYa1ddSsUQg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-python] python-pygpgme: add python-pygpgme 0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,57 +40,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Nov 2015 15:42:04 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 03 Nov 2015 16:16:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 11/03/2015 03:54 PM, Jens Rehsack wrote:
-> 
->> Am 03.11.2015 um 15:19 schrieb Richard Leitner <richard.leitner@skidata.com>:
->>
->> On 11/03/2015 10:36 AM, Jens Rehsack wrote:
->>> This adds openjdk-8 for native and target builds and allows a stripped
->>> openjre-8 being built as well instead of trying to cherry-pick jre
->>> components from jdk-image.
->>>
->>> The recipes allow building openjdk-8 with or without:
->>> * x11
->>> * cups
->>> * alsa/pulseaudio
->>> and let packager enable unlimited-crypto, if desired.
->>>
->>> Since there can be only one PROVIDES for virtual/java-native and virtual/javac-native,
->>> move the provides to openjdk-8-native (I think everyone agrees it's a better
->>> choice than ecj-bootstrap-native).
->>>
->>> Plus: Applying a fix from openjdk-9 repository which fixes build issues using gcc5
->>
->> For me the patch fails to apply on current master:
->>
->> git am patches-from-emails/openjdk-8_and_openjre-8.eml
->> Applying: openjdk-8: add recipes for openjdk-8 and openjre-8
->> /home/leri/git/meta-java/.git/rebase-apply/patch:515: trailing whitespace.
->>      xargs -0 -n1
->> ${STAGING_LIBDIR_NATIVE}/jvm/openjdk-8-native/bin/pack200 --repack
->> --effort=9 --segment-limit=-1 --modification-time=latest --strip-debug
->> /home/leri/git/meta-java/.git/rebase-apply/patch:1232: trailing whitespace.
->> #
->> /home/leri/git/meta-java/.git/rebase-apply/patch:1265: trailing whitespace.
->>
->> /home/leri/git/meta-java/.git/rebase-apply/patch:1270: trailing whitespace.
->>
->> /home/leri/git/meta-java/.git/rebase-apply/patch:1289: trailing whitespace.
->>
->> fatal: corrupt patch at line 4592
->> Patch failed at 0001 openjdk-8: add recipes for openjdk-8 and openjre-8
-> 
-> That's maybe because I copy the format-patch output manually into the mail.
-> Use this one: https://github.com/rehsack/meta-java/commit/57eba04b0f68a55b3250a692bc5834902709c903
-> 
+On Tue, Nov 3, 2015 at 1:02 AM,  <wenzong.fan@windriver.com> wrote:
+> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=6517bdc8f2416f27ab725d4702f7aac3"
 
-Same error :-(
-Do I need any previous patches applied which are not yet on master?
-
-kind regards;
-Richard L
+a single line licence ? what does it say, arent there other places
+where it states it more clearly.
 
