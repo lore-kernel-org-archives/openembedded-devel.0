@@ -1,41 +1,26 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id D480F763F2
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 73FEB71633
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Nov 2015 16:20:59 +0000 (UTC)
-Received: by wmeg8 with SMTP id g8so88947285wme.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Nov 2015 08:20:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to;
-	bh=Hf95KTaUQDps9+J/UUJyjNeulis9Tt4pSQl7a4SvBwM=;
-	b=VhAK7c6XGoclpu/WGJMD8vCyVHYviQySJKMBs8+NlvSa512GG4NWCMmQLskQ7Il2Uo
-	no2mvbqpZTI13oujCVuTnq6PIm8DjvzvvterFI7Izi3kQXdxVxq+X/LjW3b89HHpWoHc
-	rrECkMNaKMLQ0gI+6pzX+j7x3yhSvK/gyMQvs89C/oaWOMhXXhY87rDZjme5JYmnuErz
-	V5z7bWzOEA+broGhvLlxw4WmZDng0hOXRRD8sV/Bvlbv9+C1hrDv4Wv5QPS1DDwCYUiN
-	yu6FLSOEh70yrCJUJcs6vSmthNd39KEJ04dn+THe+EmbIAmvo15FxoPQU42V7NaD0x94
-	DiCg==
-X-Received: by 10.28.7.133 with SMTP id 127mr19592999wmh.37.1446567659323;
-	Tue, 03 Nov 2015 08:20:59 -0800 (PST)
-Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
-	by smtp.gmail.com with ESMTPSA id
-	71sm24104121wmm.24.2015.11.03.08.20.58
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 03 Nov 2015 08:20:58 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-From: Jens Rehsack <rehsack@gmail.com>
-In-Reply-To: <5638D571.3090500@skidata.com>
-Date: Tue, 3 Nov 2015 17:20:57 +0100
-Message-Id: <7448BFE6-D551-4E46-A7B0-F568423C219A@gmail.com>
-References: <AE55B37B-BC8F-4516-82BC-B2B1DE341859@gmail.com>
-	<5638C28E.7040505@skidata.com>
-	<2BAA39D9-E6DA-403E-AFAB-1E59CFE61DF2@gmail.com>
-	<5638D571.3090500@skidata.com>
+	Tue,  3 Nov 2015 17:56:39 +0000 (UTC)
+Received: (qmail 6104 invoked by uid 1003); 3 Nov 2015 17:56:39 -0000
+Received: from unknown (HELO ?192.168.11.125?)
+	(philip@opensdr.com@108.44.122.7)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	3 Nov 2015 17:56:39 -0000
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.2104)
-Subject: Re: [meta-java][PATCH] openjdk-8: add recipes for openjdk-8 and openjre-8
+References: <1446228808-18756-1-git-send-email-philip@balister.org>
+	<20151030195137.GD2566@jama> <5633CB87.1070903@balister.org>
+	<20151103141546.GA2556@jama>
+From: Philip Balister <philip@balister.org>
+Message-ID: <5638F552.7000609@balister.org>
+Date: Tue, 3 Nov 2015 12:56:34 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.1.0
+MIME-Version: 1.0
+In-Reply-To: <20151103141546.GA2556@jama>
+Subject: Re: [meta-oe][PATCHv2] llvm: Add recipe for llvm-3.7.0.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,88 +34,208 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Nov 2015 16:21:00 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 03 Nov 2015 17:56:44 -0000
+X-Groupsio-MsgNum: 58269
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="4wj4plhINr2S7qp1BkIq8K8uTQ6ekmFQt"
+
+--4wj4plhINr2S7qp1BkIq8K8uTQ6ekmFQt
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
+On 11/03/2015 09:15 AM, Martin Jansa wrote:
+> On Fri, Oct 30, 2015 at 12:56:55PM -0700, Philip Balister wrote:
+>> On 10/30/2015 12:51 PM, Martin Jansa wrote:
+>>> On Fri, Oct 30, 2015 at 11:13:28AM -0700, Philip Balister wrote:
+>>>> From: Philip Balister <philip@opensdr.com>
+>>>>
+>>>> This version builds in parallel with the 3.3 recipe. I had to use th=
+e
+>>>> mesa llvmpipe driver, which required updates to llvm and mesa before=
+ it
+>>>> worked. With updates, I succesfully used the mesa llvmpipe driver.
+>>>>
+>>>>  * Move the licence file checksum to the version specific part of th=
+e recipe
+>>>>  * License changed for 3.7.0 due to year change and adding related s=
+oftware
+>>>>  * llvm source is now compressed with xz not gz.
+>>>>  * Disable compiler version check since it checks the host compiler.=
 
-> Am 03.11.2015 um 16:40 schrieb Richard Leitner =
-<richard.leitner@skidata.com>:
+>>>
+>>> I made one more change in master-next already, I've renamed it to=20
+>>> llvm3.7_3.7.0.bb
+>>>
+>>> I don't know if there will be 3.7.1 release, but I would assume that =
+3.7
+>>> series will be ABI compatible, so users of this won't need to update
+>>> DEPENDS when switching from 3.7.0 to 3.7.1 (if that exists).
+>>>
+>>> OK?
+>>
+>> I tried doing this as 3.7, but for some reason (possibly installing
+>> something that required me to set the LLVM_VERSION to the full version=
+,
+>> not 3.7) led me to version it this way.
+>>
+>> Check what gets installed as llvmconfig.x.y.x.
 >=20
-> On 11/03/2015 03:54 PM, Jens Rehsack wrote:
->>=20
->>> Am 03.11.2015 um 15:19 schrieb Richard Leitner =
-<richard.leitner@skidata.com>:
->>>=20
->>> On 11/03/2015 10:36 AM, Jens Rehsack wrote:
->>>> This adds openjdk-8 for native and target builds and allows a =
-stripped
->>>> openjre-8 being built as well instead of trying to cherry-pick jre
->>>> components from jdk-image.
->>>>=20
->>>> The recipes allow building openjdk-8 with or without:
->>>> * x11
->>>> * cups
->>>> * alsa/pulseaudio
->>>> and let packager enable unlimited-crypto, if desired.
->>>>=20
->>>> Since there can be only one PROVIDES for virtual/java-native and =
-virtual/javac-native,
->>>> move the provides to openjdk-8-native (I think everyone agrees it's =
-a better
->>>> choice than ecj-bootstrap-native).
->>>>=20
->>>> Plus: Applying a fix from openjdk-9 repository which fixes build =
-issues using gcc5
->>>=20
->>> For me the patch fails to apply on current master:
->>>=20
->>> git am patches-from-emails/openjdk-8_and_openjre-8.eml
->>> Applying: openjdk-8: add recipes for openjdk-8 and openjre-8
->>> /home/leri/git/meta-java/.git/rebase-apply/patch:515: trailing =
-whitespace.
->>>     xargs -0 -n1
->>> ${STAGING_LIBDIR_NATIVE}/jvm/openjdk-8-native/bin/pack200 --repack
->>> --effort=3D9 --segment-limit=3D-1 --modification-time=3Dlatest =
---strip-debug
->>> /home/leri/git/meta-java/.git/rebase-apply/patch:1232: trailing =
-whitespace.
->>> #
->>> /home/leri/git/meta-java/.git/rebase-apply/patch:1265: trailing =
-whitespace.
->>>=20
->>> /home/leri/git/meta-java/.git/rebase-apply/patch:1270: trailing =
-whitespace.
->>>=20
->>> /home/leri/git/meta-java/.git/rebase-apply/patch:1289: trailing =
-whitespace.
->>>=20
->>> fatal: corrupt patch at line 4592
->>> Patch failed at 0001 openjdk-8: add recipes for openjdk-8 and =
-openjre-8
->>=20
->> That's maybe because I copy the format-patch output manually into the =
-mail.
->> Use this one: =
-https://github.com/rehsack/meta-java/commit/57eba04b0f68a55b3250a692bc5834=
-902709c903
->>=20
+> OK, I won't rename it then :).
 >=20
-> Same error :-(
-> Do I need any previous patches applied which are not yet on master?
+> The --disable-compiler-version-checks in EXTRA_OECONF isn't passed to
+> configure:
+> http://errors.yoctoproject.org/Errors/Details/21293/
 
-Depends - this one comes first, because openjdk-8 supports building for =
-distro's without x11:
+That is the log from do_compile. Apparently configure is getting re-run
+with different arguments. Anyone have ideas?
 
-=
-https://github.com/rehsack/meta-java/commit/566f95135c9f8b8bedd1e24b2b5872=
-177b1fdbe4
+Philip
 
-You had trouble testing it because of cacao-native re-configure ... =
-which should now be fixed.
+>=20
+>=20
+>>
+>> Philip
+>>
+>>>
+>>>> Signed-off-by: Philip Balister <philip@opensdr.com>
+>>>> ---
+>>>>  meta-oe/recipes-core/llvm/llvm.inc           |  6 +++---
+>>>>  meta-oe/recipes-core/llvm/llvm3.3_3.3.bb     |  4 ++++
+>>>>  meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb | 24 +++++++++++++++++=
++++++++
+>>>>  3 files changed, 31 insertions(+), 3 deletions(-)
+>>>>  create mode 100644 meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb
+>>>>
+>>>> diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-co=
+re/llvm/llvm.inc
+>>>> index 04c87aa..c9a4ce4 100644
+>>>> --- a/meta-oe/recipes-core/llvm/llvm.inc
+>>>> +++ b/meta-oe/recipes-core/llvm/llvm.inc
+>>>> @@ -23,7 +23,6 @@ HOMEPAGE =3D "http://llvm.org"
+>>>>  # 3-clause BSD-like
+>>>>  # University of Illinois/NCSA Open Source License
+>>>>  LICENSE =3D "NCSA"
+>>>> -LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3Dd0a3ef0d3e0e8f5cf59e=
+5ffc273ab1f8"
+>>>> =20
+>>>>  DEPENDS =3D "libffi libxml2-native llvm-common"
+>>>> =20
+>>>> @@ -32,7 +31,7 @@ inherit perlnative pythonnative autotools
+>>>>  LLVM_RELEASE =3D "${PV}"
+>>>>  LLVM_DIR =3D "llvm${LLVM_RELEASE}"
+>>>> =20
+>>>> -SRC_URI =3D "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.gz"
+>>>> +SRC_URI =3D "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.xz"
+>>>>  S =3D "${WORKDIR}/llvm-${PV}.src"
+>>>> =20
+>>>>  LLVM_BUILD_DIR =3D "${WORKDIR}/llvm-${PV}.build"
+>>>> @@ -46,7 +45,8 @@ EXTRA_OECONF +=3D "--disable-assertions \
+>>>>                   --enable-libffi \
+>>>>                   --enable-optimized \
+>>>>                   --enable-shared \
+>>>> -                 --enable-targets=3Dhost-only"
+>>>> +                 --enable-targets=3Dhost-only \
+>>>> +                 --disable-compiler-version-checks"
+>>>>  EXTRA_OEMAKE +=3D "REQUIRES_RTTI=3D1 VERBOSE=3D1"
+>>>> =20
+>>>>  do_configure_prepend() {
+>>>> diff --git a/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb b/meta-oe/reci=
+pes-core/llvm/llvm3.3_3.3.bb
+>>>> index 60a2221..f1562f6 100644
+>>>> --- a/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb
+>>>> +++ b/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb
+>>>> @@ -1,8 +1,12 @@
+>>>>  require llvm.inc
+>>>> =20
+>>>> +LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3Dd0a3ef0d3e0e8f5cf59e=
+5ffc273ab1f8"
+>>>> +
+>>>>  DEPENDS +=3D "zlib"
+>>>>  EXTRA_OECONF +=3D "--enable-zlib"
+>>>> =20
+>>>> +# Overwrite SRC_URI from include file since older llvm uses .gz com=
+pression
+>>>> +SRC_URI =3D "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.gz"
+>>>>  SRC_URI +=3D "file://Remove-error-output-from-configure-if-CFLAGS-i=
+s-set-.patch"
+>>>> =20
+>>>>  SRC_URI_append_libc-uclibc =3D " file://arm_fenv_uclibc.patch "
+>>>> diff --git a/meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb b/meta-oe/=
+recipes-core/llvm/llvm3.7.0_3.7.0.bb
+>>>> new file mode 100644
+>>>> index 0000000..813b185
+>>>> --- /dev/null
+>>>> +++ b/meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb
+>>>> @@ -0,0 +1,24 @@
+>>>> +require llvm.inc
+>>>> +
+>>>> +LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3D4c0bc17c954e99fd5475=
+28d938832bfa"
+>>>> +
+>>>> +DEPENDS +=3D "zlib"
+>>>> +EXTRA_OECONF +=3D "--enable-zlib"
+>>>> +
+>>>> +SRC_URI_append_libc-uclibc =3D " file://arm_fenv_uclibc.patch "
+>>>> +
+>>>> +SRC_URI[md5sum] =3D "b98b9495e5655a672d6cb83e1a180f8e"
+>>>> +SRC_URI[sha256sum] =3D "ab45895f9dcdad1e140a3a79fd709f64b05ad7364e3=
+08c0e582c5b02e9cc3153"
+>>>> +
+>>>> +PACKAGECONFIG ??=3D ""
+>>>> +PACKAGECONFIG[r600] =3D "--enable-experimental-targets=3DR600,,,"
+>>>> +
+>>>> +PACKAGE_DEBUG_SPLIT_STYLE =3D "debug-without-src"
+>>>> +
+>>>> +# Fails to build with thumb-1 (qemuarm)
+>>>> +# | {standard input}: Assembler messages:
+>>>> +# | {standard input}:22: Error: selected processor does not support=
+ Thumb mode `stmdb sp!,{r0,r1,r2,r3,lr}'
+>>>> +# | {standard input}:31: Error: lo register required -- `ldmia sp!,=
+{r0,r1,r2,r3,lr}'
+>>>> +# | {standard input}:32: Error: lo register required -- `ldr pc,[sp=
+],#4'
+>>>> +# | make[3]: *** [/home/jenkins/oe/world/shr-core/tmp-glibc/work/ar=
+mv5te-oe-linux-gnueabi/llvm3.3/3.3-r0/llvm-3.3.build/lib/Target/ARM/Relea=
+se/ARMJITInfo.o] Error 1
+>>>> +ARM_INSTRUCTION_SET =3D "arm"
+>>>> --=20
+>>>> 1.9.3
+>>>>
+>>>> --=20
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>>
+>>>
+>>
+>> --=20
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+>=20
+>=20
 
-Cheers
---=20
-Jens Rehsack - rehsack@gmail.com
 
+--4wj4plhINr2S7qp1BkIq8K8uTQ6ekmFQt
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQEcBAEBCAAGBQJWOPVSAAoJEMDJd4rr0mer2yUH/2JKyZsCsPkhQz5R/ESuRX9j
+ysGOctT7EEary494yLwfehh5IrMrthybwraWNzPn/1VpBID8xJAI0R5ZQ5WTjhkF
+C4xjHqNDPq5/fvv/TuSPtCVoayxhTEIek7OXM4REuSHzxSIClVD29dufcMdRR0l+
+NRlxOs7fLhKGBAAzhYqRpyLIReCaeGgtqmg8/XNe4TOHDq54tRnkl11s+wVr7gQO
+b4JdFNnyqKQ5y3G8O0o3bMeCUaDBK4mJcb5+AvhwUcVAxUtwUTFBpuFXoQX5XYNJ
+mV0tHXH9fDRaQOtAVzbpKA45vlyRCbDxkFOTk6HGqhrnCIFWoPR9hxZBQgIR3Ug=
+=Px5/
+-----END PGP SIGNATURE-----
+
+--4wj4plhINr2S7qp1BkIq8K8uTQ6ekmFQt--
