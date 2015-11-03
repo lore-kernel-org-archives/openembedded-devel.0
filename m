@@ -1,23 +1,38 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id B35EA770F2
+Return-Path: <henning@itconsulting-heinold.de>
+X-Greylist: delayed 440 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 03 Nov 2015 12:30:49 UTC
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id CBFE975E2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Nov 2015 10:27:15 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga103.jf.intel.com with ESMTP; 03 Nov 2015 02:27:15 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,238,1444719600"; d="scan'208";a="593106683"
-Received: from mbabyjoh-mobl.fi.intel.com ([10.237.72.71])
-	by FMSMGA003.fm.intel.com with ESMTP; 03 Nov 2015 02:27:14 -0800
-Date: Tue, 3 Nov 2015 12:27:44 +0200
-From: "Maxin B. John" <maxin.john@intel.com>
+	Tue,  3 Nov 2015 12:30:49 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 4744AD4114D
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Nov 2015 13:23:27 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 8E087D40375
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Nov 2015 13:23:26 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from mail.itconsulting-heinold.de
+	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
+	by mail.familie-heinold.de (Postfix) with ESMTPSA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Nov 2015 13:23:26 +0100 (CET)
+Date: Tue, 3 Nov 2015 13:23:21 +0100
+From: Henning Heinold <henning@itconsulting-heinold.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151103102744.GA16939@mbabyjoh-mobl.fi.intel.com>
-References: <3F727BA6-C621-4D43-877C-2AF940A47CE0@gmail.com>
+Message-ID: <20151103122312.GA18881@mail.itconsulting-heinold.de>
+References: <AE55B37B-BC8F-4516-82BC-B2B1DE341859@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <3F727BA6-C621-4D43-877C-2AF940A47CE0@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-java][PATCH] cacao: fix configure error
+In-Reply-To: <AE55B37B-BC8F-4516-82BC-B2B1DE341859@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: [meta-java][PATCH] openjdk-8: add recipes for openjdk-8 and openjre-8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,39 +46,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Nov 2015 10:27:15 -0000
+X-List-Received-Date: Tue, 03 Nov 2015 12:30:50 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hi Jens,
 
-On Tue, Nov 03, 2015 at 11:15:01AM +0100, Jens Rehsack wrote:
-> 
-> This patch fixes the nowadays occuring configure error:
->   rm: cannot remove 'src/mm/boehm-gc/ltmain.sh': No such file or directory
-> 
-> Signed-off-by: Jens Rehsack <sno@netbsd.org>
-> ---
->  recipes-core/cacao/cacao_1.6.1.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/recipes-core/cacao/cacao_1.6.1.bb b/recipes-core/cacao/cacao_1.6.1.bb
-> index f88293b..8e212af 100644
-> --- a/recipes-core/cacao/cacao_1.6.1.bb
-> +++ b/recipes-core/cacao/cacao_1.6.1.bb
-> @@ -54,7 +54,7 @@ EXTRA_OECONF = "\
->  do_configure_prepend () {
->      # upgrade m4 macros in source tree
->      libtoolize --force --copy --install
-> -    rm  src/mm/boehm-gc/ltmain.sh
-> +    rm  -f src/mm/boehm-gc/ltmain.sh
->      mkdir -p src/mm/boehm-gc/m4
->  }
->  
-> --
+does the java8-native build do not need any javac? One goal was to build
+all the stuff from scratch without the need to install any java compiler on
+the host.
 
-Pushed, Thanks!
-
-Best Regards,
-Maxin
+Bye Henning
 
