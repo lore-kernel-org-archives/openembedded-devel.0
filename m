@@ -1,43 +1,43 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
-	[209.85.220.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BF9460124
+Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
+	[209.85.220.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 211B071633
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Nov 2015 19:29:40 +0000 (UTC)
-Received: by pabfh17 with SMTP id fh17so26775839pab.0
+	Tue,  3 Nov 2015 19:32:03 +0000 (UTC)
+Received: by pacdm15 with SMTP id dm15so2490442pac.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Nov 2015 11:29:40 -0800 (PST)
+	Tue, 03 Nov 2015 11:32:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
 	:references:to;
-	bh=vMHsKECdbNHv8fvD7i7Plm2KqLpIvJzg93hVa/rrqTY=;
-	b=HNuDSbT+GBhVpqoV69KrPsI31xVQ7YAHGYIBFFOsAZ7mp50xCXq0NEiPGerbc7Tczs
-	ckio6EU5Jm90dH3ZUAmfUgmlID084ev6CbzlcAvV8qS7aq6IF92nOxLNJPGu9BtgLhiu
-	vfpUXU/Bt27CXE+FcCW7KfYKjrHvQyNjjx4Ae2IRTOWlz++L3F4e/kjvTPi6sOci7BUr
-	/GI51dL4O72d0olFYg0vWr17oIaiiPYlz5T/xeU9IPQevDS4aX34jaHYzmqylSYTXB54
-	IvD4tR6bfDa53BMcRDcadgd0xjjnlDyWlPpKiPfF4DjfccxDfscUelGcCf+93IkhAcy/
-	a9Ng==
-X-Received: by 10.66.192.106 with SMTP id hf10mr35988834pac.16.1446578980752; 
-	Tue, 03 Nov 2015 11:29:40 -0800 (PST)
+	bh=uiLt2+rUdPK9Q64CvX05CChoI9m5LjJC5kEASdLvIQc=;
+	b=IY7DaR+uficBHM+OVyathV1y5lL31aB5ZQN25BKrpSrez4+fUOetabUWxdr7b83Cyw
+	QmbQjgx3/h7ITYLuORDGKCSizdLlSqYhjikAd1/XlLM7ipIB/gWPkJWJYaHDZdkObFxp
+	zZi859PhiiyUxPLu2sO2e4qEhuVsGhlO/19upNJRCodXOeA7ckoSwbZG01FCdqI9SaMK
+	o69dQFJwWvSo9U1gDNJDQJwoE9cTSUuE5CQ+7pk3qpFW7ktwfyyVg7SGYVG9GPy4X7Nj
+	Zg2OH+g3T0G1uJE5Yv19qRRWYNgAjVrnUMJWpSUyv11Lg8utnGch+bRSyse8rOTLGQjU
+	DYNA==
+X-Received: by 10.66.161.73 with SMTP id xq9mr35594019pab.0.1446579124140;
+	Tue, 03 Nov 2015 11:32:04 -0800 (PST)
 Received: from ?IPv6:2601:646:8601:4580:440f:8649:8a1c:baf6?
 	([2601:646:8601:4580:440f:8649:8a1c:baf6])
 	by smtp.gmail.com with ESMTPSA id
-	yh3sm30867318pbb.82.2015.11.03.11.29.32
+	ey2sm30884922pbd.77.2015.11.03.11.32.03
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 03 Nov 2015 11:29:33 -0800 (PST)
+	Tue, 03 Nov 2015 11:32:03 -0800 (PST)
 Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3106\))
 X-Pgp-Agent: GPGMail 2.6b2
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <5638F552.7000609@balister.org>
-Date: Tue, 3 Nov 2015 11:29:28 -0800
-Message-Id: <C5B15014-8E0F-479D-AA4D-973D05D92757@gmail.com>
-References: <1446228808-18756-1-git-send-email-philip@balister.org>
-	<20151030195137.GD2566@jama> <5633CB87.1070903@balister.org>
-	<20151103141546.GA2556@jama> <5638F552.7000609@balister.org>
-To: Martin Jansa <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <1446574645.32751.9.camel@intel.com>
+Date: Tue, 3 Nov 2015 11:32:02 -0800
+Message-Id: <E01AAF5B-5430-4028-948C-767910413B51@gmail.com>
+References: <F81DC1078564A34BB4DA30CAE03814D12D4EB65D@ORSMSX104.amr.corp.intel.com>
+	<CAMKF1sqT-fxjZ5TPMrDEGjMq7MVttucqjDxUf7vp4zVdwusw2A@mail.gmail.com>
+	<1446574645.32751.9.camel@intel.com>
+To: openembedded-devel@lists.openembedded.org
 X-Mailer: Apple Mail (2.3106)
-Subject: Re: [meta-oe][PATCHv2] llvm: Add recipe for llvm-3.7.0.
+Subject: Re: openjdk-7 and gcc v5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,37 +51,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Nov 2015 19:29:42 -0000
-X-Groupsio-MsgNum: 58271
+X-List-Received-Date: Tue, 03 Nov 2015 19:32:04 -0000
+X-Groupsio-MsgNum: 58272
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_FDCCB5AB-495C-4BB9-99E4-12AB24B70269";
+	boundary="Apple-Mail=_01C67E7D-AB1D-4699-AC7A-6D46FC26996D";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_FDCCB5AB-495C-4BB9-99E4-12AB24B70269
+--Apple-Mail=_01C67E7D-AB1D-4699-AC7A-6D46FC26996D
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
-	charset=windows-1252
+	charset=utf-8
 
 
-> On Nov 3, 2015, at 9:56 AM, Philip Balister <philip@balister.org> =
+> On Nov 3, 2015, at 10:18 AM, Bruce, Henry <henry.bruce@intel.com> =
 wrote:
 >=20
->> The --disable-compiler-version-checks in EXTRA_OECONF isn't passed to
->> configure:
->> http://errors.yoctoproject.org/Errors/Details/21293/
+> On Thu, 2015-10-29 at 17:43 -0700, Khem Raj wrote:
+>> On Thu, Oct 29, 2015 at 4:00 PM, Bruce, Henry <henry.bruce@intel.com>
+>> wrote:
+>>> Many thanks to contributors who fixed openjdk build issues
+>>> introduced by gcc v5 and for maintainers for pushing the updates.
+>>> However one problem remains: openjdk build fails in
+>>> openjdk/jdk/make/java/nio due to -static compiler flag being used
+>>> in conjunction with -pthread giving error
+>>> /usr/bin/ld: cannot find -lpthread
+>>> /usr/bin/ld: cannot find -lc
+>>>=20
+>>=20
+>> its not clear how the -static flag can cause this. may be its using
+>> CC for LD or wise versa ?
 >=20
-> That is the log from do_compile. Apparently configure is getting =
-re-run
-> with different arguments. Anyone have ideas?
+> Not clear to me either, but if you create a simple file, say test.c
 >=20
+> int main()
+> {
+>  return 0;
+> }
+>=20
+> and compile with gcc test.c -pthread -static
+> it fails as follows with gcc v5
+> /usr/bin/ld: cannot find -lpthread
+> /usr/bin/ld: cannot find -lc
+>=20
+> but compiles OK with earlier versions of gcc.
 
-you need to show log.do_configure or run.do_configure to make sure its =
-not happening
-
-> Philip
+isn=E2=80=99t this gcc on your build host ?
 
 
---Apple-Mail=_FDCCB5AB-495C-4BB9-99E4-12AB24B70269
+>=20
+>>=20
+>>> I fixed this by removing -static flag from Makefile. Not sure of
+>>> this was the right thing to do (so I didn't submit patch) but it
+>>> worked for me.
+>>> I added the following to the an openjdk bbappend and it fixed the
+>>> build and resulting jre is running OK.
+>>>=20
+>>> do_configure_append() {
+>>>        gcc -v 2>&1 | grep 5\..
+>>>        if [ "$?" =3D=3D "0" ]; then
+>>=20
+>> why this check for gcc ?
+>=20
+> It only fails with gcc v5, so if it's not broken, don't fix it...
+>=20
+>>=20
+>>>                sed -i s/-static//
+>>> ${B}/openjdk/jdk/make/java/nio/Makefile
+>>>        fi
+>>> }
+>>>=20
+>>> Regards,
+>>>=20
+>>> Henry Bruce
+>>>=20
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+--Apple-Mail=_01C67E7D-AB1D-4699-AC7A-6D46FC26996D
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -92,9 +147,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlY5CxwACgkQuwUzVZGdMxSx/QCdF6cLnk6/LbCH7Ni25wuVdEcS
-wKUAoI8bvc7VdpIWyJpSnx7qyiMeL8rL
-=jKc1
+iEYEARECAAYFAlY5C7IACgkQuwUzVZGdMxTZpQCffWeokOTLITy56uPgWjPCjyVE
+GQcAn2eXth7wKgAgW6ODEiFWV4TPf6F1
+=afEz
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_FDCCB5AB-495C-4BB9-99E4-12AB24B70269--
+--Apple-Mail=_01C67E7D-AB1D-4699-AC7A-6D46FC26996D--
