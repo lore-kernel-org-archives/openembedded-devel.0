@@ -1,33 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id BAD2060124
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A73CE73D46
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Nov 2015 21:25:23 +0000 (UTC)
-Received: by ioll68 with SMTP id l68so159214981iol.3
+	Tue,  3 Nov 2015 08:18:09 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tA38I6JY024537
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Nov 2015 13:25:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=iDC5CNDeyjvn74gzrO9/T5bX5PNoP7WkJ3hYPyAXotg=;
-	b=zAggmj+KltngunSusF0EYHdtEcdrHNdf4FoG+4OIVPKC9o0PILG8flMvJdeSMIweyK
-	8RslXK6yJ6Jr7uqecxbMIdhWKDvRLmWM/Ji18k8xGkar/0pbdV3O7N7Nm1g8VIRVHFSW
-	cxXPKVg8GV9lfEtPZOiL/PrVo0DNm2UybZ/FW6A1I7h2ET+2sOeXrxyhZ2FJsB/0mCMY
-	jUv5tidTQReEsxYWUOuDyABFRRvDC4UvU8OchqLkygKanoSogBi0EEfsJT6Rl34VEB9a
-	bcGY5ysUdTjP+KDATuAVetZmgH4QtEEvCJlBScnPteBg0vLnxEdBeKNElt6/o1i7b1MY
-	Ir2A==
-X-Received: by 10.107.137.66 with SMTP id l63mr24205761iod.112.1446499523289; 
-	Mon, 02 Nov 2015 13:25:23 -0800 (PST)
+	Tue, 3 Nov 2015 00:18:10 -0800 (PST)
+Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Tue, 3 Nov 2015 00:18:05 -0800
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 3 Nov 2015 16:18:29 +0800
+Message-ID: <1446538709-7917-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received: by 10.107.38.133 with HTTP; Mon, 2 Nov 2015 13:24:53 -0800 (PST)
-In-Reply-To: <CAJ86T=VLZKXwJWL30cuW19d0fYOfKTw=wwfi+p_awqcWWdQQxg@mail.gmail.com>
-References: <1445585893-28183-1-git-send-email-raj.khem@gmail.com>
-	<CAJ86T=VLZKXwJWL30cuW19d0fYOfKTw=wwfi+p_awqcWWdQQxg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 2 Nov 2015 13:24:53 -0800
-Message-ID: <CAMKF1srB2Ds-VR8UwOtiY0aCTLL1HJBomtspekMhTYhZ_E61Lw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] sysdig: Fix build with lua >= 5.2
+Subject: [meta-oe][PATCH 1/1] libtevent: add missing dependency on libcap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,14 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Nov 2015 21:25:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 03 Nov 2015 08:18:10 -0000
+Content-Type: text/plain
 
-On Mon, Nov 2, 2015 at 10:43 AM, Andre McCurdy <armccurdy@gmail.com> wrote:
->> +-#ifndef _WIN32
->> ++#if defined(_WIN32) && defined(__GLIBC__)
->
-> Should that be ! defined (_WIN32) ?
+From: Jackie Huang <jackie.huang@windriver.com>
 
-good catch !
+The built-in library libreplace requires it,
+or it fails with:
+../lib/replace/system/capability.h:40:28: fatal error: sys/capability.h: No such file or directory
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb b/meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb
+index 5c7c560..f297f30 100644
+--- a/meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb
++++ b/meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://tevent.samba.org"
+ SECTION = "libs"
+ LICENSE = "LGPLv3+"
+ 
+-DEPENDS += "talloc"
++DEPENDS += "talloc libcap"
+ RDEPENDS_${PN} += "libtalloc"
+ RDEPENDS_python-tevent = "python"
+ 
+-- 
+1.9.1
+
 
