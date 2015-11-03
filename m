@@ -1,26 +1,36 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id 73FEB71633
+Return-Path: <henry.bruce@intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 4FBE773D46
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Nov 2015 17:56:39 +0000 (UTC)
-Received: (qmail 6104 invoked by uid 1003); 3 Nov 2015 17:56:39 -0000
-Received: from unknown (HELO ?192.168.11.125?)
-	(philip@opensdr.com@108.44.122.7)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	3 Nov 2015 17:56:39 -0000
-To: openembedded-devel@lists.openembedded.org
-References: <1446228808-18756-1-git-send-email-philip@balister.org>
-	<20151030195137.GD2566@jama> <5633CB87.1070903@balister.org>
-	<20151103141546.GA2556@jama>
-From: Philip Balister <philip@balister.org>
-Message-ID: <5638F552.7000609@balister.org>
-Date: Tue, 3 Nov 2015 12:56:34 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.1.0
+	Tue,  3 Nov 2015 18:18:07 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga102.jf.intel.com with ESMTP; 03 Nov 2015 10:18:07 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,239,1444719600"; d="scan'208";a="593352848"
+Received: from orsmsx104.amr.corp.intel.com ([10.22.225.131])
+	by FMSMGA003.fm.intel.com with ESMTP; 03 Nov 2015 10:18:06 -0800
+Received: from orsmsx158.amr.corp.intel.com (10.22.240.20) by
+	ORSMSX104.amr.corp.intel.com (10.22.225.131) with Microsoft SMTP Server
+	(TLS) id 14.3.248.2; Tue, 3 Nov 2015 10:18:06 -0800
+Received: from orsmsx104.amr.corp.intel.com ([169.254.3.250]) by
+	ORSMSX158.amr.corp.intel.com ([169.254.10.191]) with mapi id
+	14.03.0248.002; Tue, 3 Nov 2015 10:18:05 -0800
+From: "Bruce, Henry" <henry.bruce@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] openjdk-7 and gcc v5
+Thread-Index: AdESnZ0dnPu3CKC7S3uLnmy1oEzhfgASRiOAAPAPEoA=
+Date: Tue, 3 Nov 2015 18:18:04 +0000
+Message-ID: <1446574645.32751.9.camel@intel.com>
+References: <F81DC1078564A34BB4DA30CAE03814D12D4EB65D@ORSMSX104.amr.corp.intel.com>
+	<CAMKF1sqT-fxjZ5TPMrDEGjMq7MVttucqjDxUf7vp4zVdwusw2A@mail.gmail.com>
+In-Reply-To: <CAMKF1sqT-fxjZ5TPMrDEGjMq7MVttucqjDxUf7vp4zVdwusw2A@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.7.198.173]
 MIME-Version: 1.0
-In-Reply-To: <20151103141546.GA2556@jama>
-Subject: Re: [meta-oe][PATCHv2] llvm: Add recipe for llvm-3.7.0.
+Subject: Re: openjdk-7 and gcc v5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,208 +44,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Nov 2015 17:56:44 -0000
-X-Groupsio-MsgNum: 58269
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="4wj4plhINr2S7qp1BkIq8K8uTQ6ekmFQt"
+X-List-Received-Date: Tue, 03 Nov 2015 18:18:09 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <78142F68D085244FBC49DD04F3DC6BCF@intel.com>
+Content-Transfer-Encoding: base64
 
---4wj4plhINr2S7qp1BkIq8K8uTQ6ekmFQt
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+T24gVGh1LCAyMDE1LTEwLTI5IGF0IDE3OjQzIC0wNzAwLCBLaGVtIFJhaiB3cm90ZToNCj4gT24g
+VGh1LCBPY3QgMjksIDIwMTUgYXQgNDowMCBQTSwgQnJ1Y2UsIEhlbnJ5IDxoZW5yeS5icnVjZUBp
+bnRlbC5jb20+DQo+IHdyb3RlOg0KPiA+IE1hbnkgdGhhbmtzIHRvIGNvbnRyaWJ1dG9ycyB3aG8g
+Zml4ZWQgb3BlbmpkayBidWlsZCBpc3N1ZXMNCj4gPiBpbnRyb2R1Y2VkIGJ5IGdjYyB2NSBhbmQg
+Zm9yIG1haW50YWluZXJzIGZvciBwdXNoaW5nIHRoZSB1cGRhdGVzLg0KPiA+IEhvd2V2ZXIgb25l
+IHByb2JsZW0gcmVtYWluczogb3BlbmpkayBidWlsZCBmYWlscyBpbg0KPiA+IG9wZW5qZGsvamRr
+L21ha2UvamF2YS9uaW8gZHVlIHRvIC1zdGF0aWMgY29tcGlsZXIgZmxhZyBiZWluZyB1c2VkDQo+
+ID4gaW4gY29uanVuY3Rpb24gd2l0aCAtcHRocmVhZCBnaXZpbmcgZXJyb3INCj4gPiAvdXNyL2Jp
+bi9sZDogY2Fubm90IGZpbmQgLWxwdGhyZWFkDQo+ID4gL3Vzci9iaW4vbGQ6IGNhbm5vdCBmaW5k
+IC1sYw0KPiA+IA0KPiANCj4gaXRzIG5vdCBjbGVhciBob3cgdGhlIC1zdGF0aWMgZmxhZyBjYW4g
+Y2F1c2UgdGhpcy4gbWF5IGJlIGl0cyB1c2luZyANCj4gQ0MgZm9yIExEIG9yIHdpc2UgdmVyc2Eg
+Pw0KDQpOb3QgY2xlYXIgdG8gbWUgZWl0aGVyLCBidXQgaWYgeW91IGNyZWF0ZSBhIHNpbXBsZSBm
+aWxlLCBzYXkgdGVzdC5jDQoNCmludCBtYWluKCkNCnsNCiAgcmV0dXJuIDA7DQp9DQoNCmFuZCBj
+b21waWxlIHdpdGggZ2NjIHRlc3QuYyAtcHRocmVhZCAtc3RhdGljDQppdCBmYWlscyBhcyBmb2xs
+b3dzIHdpdGggZ2NjIHY1IA0KL3Vzci9iaW4vbGQ6IGNhbm5vdCBmaW5kIC1scHRocmVhZA0KL3Vz
+ci9iaW4vbGQ6IGNhbm5vdCBmaW5kIC1sYw0KDQpidXQgY29tcGlsZXMgT0sgd2l0aCBlYXJsaWVy
+IHZlcnNpb25zIG9mIGdjYy4NCg0KPiANCj4gPiBJIGZpeGVkIHRoaXMgYnkgcmVtb3ZpbmcgLXN0
+YXRpYyBmbGFnIGZyb20gTWFrZWZpbGUuIE5vdCBzdXJlIG9mDQo+ID4gdGhpcyB3YXMgdGhlIHJp
+Z2h0IHRoaW5nIHRvIGRvIChzbyBJIGRpZG4ndCBzdWJtaXQgcGF0Y2gpIGJ1dCBpdA0KPiA+IHdv
+cmtlZCBmb3IgbWUuDQo+ID4gSSBhZGRlZCB0aGUgZm9sbG93aW5nIHRvIHRoZSBhbiBvcGVuamRr
+IGJiYXBwZW5kIGFuZCBpdCBmaXhlZCB0aGUNCj4gPiBidWlsZCBhbmQgcmVzdWx0aW5nIGpyZSBp
+cyBydW5uaW5nIE9LLg0KPiA+IA0KPiA+IGRvX2NvbmZpZ3VyZV9hcHBlbmQoKSB7DQo+ID4gICAg
+ICAgICBnY2MgLXYgMj4mMSB8IGdyZXAgNVwuLg0KPiA+ICAgICAgICAgaWYgWyAiJD8iID09ICIw
+IiBdOyB0aGVuDQo+IA0KPiB3aHkgdGhpcyBjaGVjayBmb3IgZ2NjID8NCg0KSXQgb25seSBmYWls
+cyB3aXRoIGdjYyB2NSwgc28gaWYgaXQncyBub3QgYnJva2VuLCBkb24ndCBmaXggaXQuLi4NCg0K
+PiANCj4gPiAgICAgICAgICAgICAgICAgc2VkIC1pIHMvLXN0YXRpYy8vDQo+ID4gJHtCfS9vcGVu
+amRrL2pkay9tYWtlL2phdmEvbmlvL01ha2VmaWxlDQo+ID4gICAgICAgICBmaQ0KPiA+IH0NCj4g
+PiANCj4gPiBSZWdhcmRzLA0KPiA+IA0KPiA+IEhlbnJ5IEJydWNlDQo+ID4gDQo+ID4gLS0NCj4g
+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiA+IE9w
+ZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlz
+dHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21h
+aWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVs
 
-On 11/03/2015 09:15 AM, Martin Jansa wrote:
-> On Fri, Oct 30, 2015 at 12:56:55PM -0700, Philip Balister wrote:
->> On 10/30/2015 12:51 PM, Martin Jansa wrote:
->>> On Fri, Oct 30, 2015 at 11:13:28AM -0700, Philip Balister wrote:
->>>> From: Philip Balister <philip@opensdr.com>
->>>>
->>>> This version builds in parallel with the 3.3 recipe. I had to use th=
-e
->>>> mesa llvmpipe driver, which required updates to llvm and mesa before=
- it
->>>> worked. With updates, I succesfully used the mesa llvmpipe driver.
->>>>
->>>>  * Move the licence file checksum to the version specific part of th=
-e recipe
->>>>  * License changed for 3.7.0 due to year change and adding related s=
-oftware
->>>>  * llvm source is now compressed with xz not gz.
->>>>  * Disable compiler version check since it checks the host compiler.=
-
->>>
->>> I made one more change in master-next already, I've renamed it to=20
->>> llvm3.7_3.7.0.bb
->>>
->>> I don't know if there will be 3.7.1 release, but I would assume that =
-3.7
->>> series will be ABI compatible, so users of this won't need to update
->>> DEPENDS when switching from 3.7.0 to 3.7.1 (if that exists).
->>>
->>> OK?
->>
->> I tried doing this as 3.7, but for some reason (possibly installing
->> something that required me to set the LLVM_VERSION to the full version=
-,
->> not 3.7) led me to version it this way.
->>
->> Check what gets installed as llvmconfig.x.y.x.
->=20
-> OK, I won't rename it then :).
->=20
-> The --disable-compiler-version-checks in EXTRA_OECONF isn't passed to
-> configure:
-> http://errors.yoctoproject.org/Errors/Details/21293/
-
-That is the log from do_compile. Apparently configure is getting re-run
-with different arguments. Anyone have ideas?
-
-Philip
-
->=20
->=20
->>
->> Philip
->>
->>>
->>>> Signed-off-by: Philip Balister <philip@opensdr.com>
->>>> ---
->>>>  meta-oe/recipes-core/llvm/llvm.inc           |  6 +++---
->>>>  meta-oe/recipes-core/llvm/llvm3.3_3.3.bb     |  4 ++++
->>>>  meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb | 24 +++++++++++++++++=
-+++++++
->>>>  3 files changed, 31 insertions(+), 3 deletions(-)
->>>>  create mode 100644 meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb
->>>>
->>>> diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-co=
-re/llvm/llvm.inc
->>>> index 04c87aa..c9a4ce4 100644
->>>> --- a/meta-oe/recipes-core/llvm/llvm.inc
->>>> +++ b/meta-oe/recipes-core/llvm/llvm.inc
->>>> @@ -23,7 +23,6 @@ HOMEPAGE =3D "http://llvm.org"
->>>>  # 3-clause BSD-like
->>>>  # University of Illinois/NCSA Open Source License
->>>>  LICENSE =3D "NCSA"
->>>> -LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3Dd0a3ef0d3e0e8f5cf59e=
-5ffc273ab1f8"
->>>> =20
->>>>  DEPENDS =3D "libffi libxml2-native llvm-common"
->>>> =20
->>>> @@ -32,7 +31,7 @@ inherit perlnative pythonnative autotools
->>>>  LLVM_RELEASE =3D "${PV}"
->>>>  LLVM_DIR =3D "llvm${LLVM_RELEASE}"
->>>> =20
->>>> -SRC_URI =3D "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.gz"
->>>> +SRC_URI =3D "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.xz"
->>>>  S =3D "${WORKDIR}/llvm-${PV}.src"
->>>> =20
->>>>  LLVM_BUILD_DIR =3D "${WORKDIR}/llvm-${PV}.build"
->>>> @@ -46,7 +45,8 @@ EXTRA_OECONF +=3D "--disable-assertions \
->>>>                   --enable-libffi \
->>>>                   --enable-optimized \
->>>>                   --enable-shared \
->>>> -                 --enable-targets=3Dhost-only"
->>>> +                 --enable-targets=3Dhost-only \
->>>> +                 --disable-compiler-version-checks"
->>>>  EXTRA_OEMAKE +=3D "REQUIRES_RTTI=3D1 VERBOSE=3D1"
->>>> =20
->>>>  do_configure_prepend() {
->>>> diff --git a/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb b/meta-oe/reci=
-pes-core/llvm/llvm3.3_3.3.bb
->>>> index 60a2221..f1562f6 100644
->>>> --- a/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb
->>>> +++ b/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb
->>>> @@ -1,8 +1,12 @@
->>>>  require llvm.inc
->>>> =20
->>>> +LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3Dd0a3ef0d3e0e8f5cf59e=
-5ffc273ab1f8"
->>>> +
->>>>  DEPENDS +=3D "zlib"
->>>>  EXTRA_OECONF +=3D "--enable-zlib"
->>>> =20
->>>> +# Overwrite SRC_URI from include file since older llvm uses .gz com=
-pression
->>>> +SRC_URI =3D "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.gz"
->>>>  SRC_URI +=3D "file://Remove-error-output-from-configure-if-CFLAGS-i=
-s-set-.patch"
->>>> =20
->>>>  SRC_URI_append_libc-uclibc =3D " file://arm_fenv_uclibc.patch "
->>>> diff --git a/meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb b/meta-oe/=
-recipes-core/llvm/llvm3.7.0_3.7.0.bb
->>>> new file mode 100644
->>>> index 0000000..813b185
->>>> --- /dev/null
->>>> +++ b/meta-oe/recipes-core/llvm/llvm3.7.0_3.7.0.bb
->>>> @@ -0,0 +1,24 @@
->>>> +require llvm.inc
->>>> +
->>>> +LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3D4c0bc17c954e99fd5475=
-28d938832bfa"
->>>> +
->>>> +DEPENDS +=3D "zlib"
->>>> +EXTRA_OECONF +=3D "--enable-zlib"
->>>> +
->>>> +SRC_URI_append_libc-uclibc =3D " file://arm_fenv_uclibc.patch "
->>>> +
->>>> +SRC_URI[md5sum] =3D "b98b9495e5655a672d6cb83e1a180f8e"
->>>> +SRC_URI[sha256sum] =3D "ab45895f9dcdad1e140a3a79fd709f64b05ad7364e3=
-08c0e582c5b02e9cc3153"
->>>> +
->>>> +PACKAGECONFIG ??=3D ""
->>>> +PACKAGECONFIG[r600] =3D "--enable-experimental-targets=3DR600,,,"
->>>> +
->>>> +PACKAGE_DEBUG_SPLIT_STYLE =3D "debug-without-src"
->>>> +
->>>> +# Fails to build with thumb-1 (qemuarm)
->>>> +# | {standard input}: Assembler messages:
->>>> +# | {standard input}:22: Error: selected processor does not support=
- Thumb mode `stmdb sp!,{r0,r1,r2,r3,lr}'
->>>> +# | {standard input}:31: Error: lo register required -- `ldmia sp!,=
-{r0,r1,r2,r3,lr}'
->>>> +# | {standard input}:32: Error: lo register required -- `ldr pc,[sp=
-],#4'
->>>> +# | make[3]: *** [/home/jenkins/oe/world/shr-core/tmp-glibc/work/ar=
-mv5te-oe-linux-gnueabi/llvm3.3/3.3-r0/llvm-3.3.build/lib/Target/ARM/Relea=
-se/ARMJITInfo.o] Error 1
->>>> +ARM_INSTRUCTION_SET =3D "arm"
->>>> --=20
->>>> 1.9.3
->>>>
->>>> --=20
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>>
->>>
->>
->> --=20
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
->=20
->=20
-
-
---4wj4plhINr2S7qp1BkIq8K8uTQ6ekmFQt
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iQEcBAEBCAAGBQJWOPVSAAoJEMDJd4rr0mer2yUH/2JKyZsCsPkhQz5R/ESuRX9j
-ysGOctT7EEary494yLwfehh5IrMrthybwraWNzPn/1VpBID8xJAI0R5ZQ5WTjhkF
-C4xjHqNDPq5/fvv/TuSPtCVoayxhTEIek7OXM4REuSHzxSIClVD29dufcMdRR0l+
-NRlxOs7fLhKGBAAzhYqRpyLIReCaeGgtqmg8/XNe4TOHDq54tRnkl11s+wVr7gQO
-b4JdFNnyqKQ5y3G8O0o3bMeCUaDBK4mJcb5+AvhwUcVAxUtwUTFBpuFXoQX5XYNJ
-mV0tHXH9fDRaQOtAVzbpKA45vlyRCbDxkFOTk6HGqhrnCIFWoPR9hxZBQgIR3Ug=
-=Px5/
------END PGP SIGNATURE-----
-
---4wj4plhINr2S7qp1BkIq8K8uTQ6ekmFQt--
