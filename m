@@ -1,23 +1,24 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (unknown [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6080B75A31
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C69B860125
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2015 07:39:23 +0000 (UTC)
+	Wed,  4 Nov 2015 07:49:48 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tA47dLPV002354
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Tue, 3 Nov 2015 23:39:21 -0800
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.159) by
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tA47nllh011517
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 3 Nov 2015 23:49:47 -0800 (PST)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Tue, 3 Nov 2015 23:39:21 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
+	14.3.248.2; Tue, 3 Nov 2015 23:49:47 -0800
+From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 4 Nov 2015 15:39:17 +0800
-Message-ID: <1446622757-28389-1-git-send-email-hongxu.jia@windriver.com>
+Date: Wed, 4 Nov 2015 15:36:15 +0800
+Message-ID: <1446622578-21255-1-git-send-email-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] wipe: add version 0.23
+Subject: [meta-oe][PATCH V3 1/4] rrdtool: fix useless-rpath QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,97 +32,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2015 07:39:24 -0000
+X-List-Received-Date: Wed, 04 Nov 2015 07:49:51 -0000
 Content-Type: text/plain
 
-Wipe is a little command for securely erasing files from magnetic media.
+When building rrdtool, we would meet the following error.
 
-We do not support native, because wipe needs root permission.
+  ERROR: QA Issue: rrdtool-python: work/core2-64-poky-linux/rrdtool
+  /1.5.4-r0/packages-split/rrdtool-python/usr/lib/python2.7/site-packages
+  /rrdtool.so contains probably-redundant RPATH /usr/lib [useless-rpaths]
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Fix this issue by removing 'LD_RUN_PATH=$(libdir)' when compiling rrdtool.so.
+
+As we use '--disable-rpath' in EXTRA_OECONF, we don't need to the to remove
+'--rpath=$(libdir)' in Makefile.am.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../files/support-cross-compile-for-linux.patch    | 36 ++++++++++++++++++++++
- meta-oe/recipes-extended/wipe/wipe_git.bb          | 28 +++++++++++++++++
- 2 files changed, 64 insertions(+)
- create mode 100644 meta-oe/recipes-extended/wipe/files/support-cross-compile-for-linux.patch
- create mode 100644 meta-oe/recipes-extended/wipe/wipe_git.bb
+ ...1-bindings-Makefile.am-remove-LD_RUN_PATH.patch | 24 ++++++++++++++++++++++
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb  |  3 +--
+ 2 files changed, 25 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/rrdtool/files/0001-bindings-Makefile.am-remove-LD_RUN_PATH.patch
 
-diff --git a/meta-oe/recipes-extended/wipe/files/support-cross-compile-for-linux.patch b/meta-oe/recipes-extended/wipe/files/support-cross-compile-for-linux.patch
+diff --git a/meta-oe/recipes-extended/rrdtool/files/0001-bindings-Makefile.am-remove-LD_RUN_PATH.patch b/meta-oe/recipes-extended/rrdtool/files/0001-bindings-Makefile.am-remove-LD_RUN_PATH.patch
 new file mode 100644
-index 0000000..fb3aee8
+index 0000000..539caa5
 --- /dev/null
-+++ b/meta-oe/recipes-extended/wipe/files/support-cross-compile-for-linux.patch
-@@ -0,0 +1,36 @@
-+From 35f14bd5aba2ed6cee258e11eab42c408afc04d0 Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Wed, 4 Nov 2015 02:29:05 -0500
-+Subject: [PATCH] Makefile: support cross compile for linux
++++ b/meta-oe/recipes-extended/rrdtool/files/0001-bindings-Makefile.am-remove-LD_RUN_PATH.patch
+@@ -0,0 +1,24 @@
++Upstream-Status: Inappropriate [OE specific]
 +
-+Upstream-Status: Pending
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++Subject: bindings/Makefile.am: remove LD_RUN_PATH
++
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 +---
-+ Makefile | 5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
++ bindings/Makefile.am | 1 -
++ 1 file changed, 1 deletion(-)
 +
-+diff --git a/Makefile b/Makefile
-+index 17d9758..9e74cdf 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -41,7 +41,7 @@
-+ # Linux 2.0.x
-+ #
-+ 
-+-CC_LINUX=gcc
-++CC_LINUX=$(CC)
-+ CCO_LINUX=-Wall -DHAVE_DEV_URANDOM -DHAVE_OSYNC -DHAVE_STRCASECMP -DHAVE_RANDOM -DWEAK_RC6 -DSYNC_WAITS_FOR_SYNC -DFIND_DEVICE_SIZE_BY_BLKGETSIZE -DSIXTYFOUR -D__USE_LARGEFILE -D_FILE_OFFSET_BITS=64
-+ # default should be to turn off debugging and to turn on optimization.
-+ #CCO_LINUX+=-O9 -pipe -fomit-frame-pointer -finline-functions -funroll-loops -fstrength-reduce
-+@@ -185,6 +185,7 @@ clean	:
-+ 		rm -f wipe $(OBJECTS) wipe.tr-asc.1 version.h
-+ 
-+ install:
-+-	install -m755 -o root -g root wipe $(DESTDIR)/usr/bin
-++	[ -e $(DESTDIR)$(bindir) ] || mkdir -p $(DESTDIR)$(bindir)
-++	install -m755 -o root -g root wipe $(DESTDIR)$(bindir)
-+ 
-+ .PHONY: always clean install
++diff --git a/bindings/Makefile.am b/bindings/Makefile.am
++index 54f5c23..8ea16b7 100644
++--- a/bindings/Makefile.am
+++++ b/bindings/Makefile.am
++@@ -67,7 +67,6 @@ python:
++           && env \
++                ABS_TOP_SRCDIR=${abs_top_srcdir} \
++                ABS_TOP_BUILDDIR=${abs_top_builddir} \
++-               LD_RUN_PATH=$(libdir) \
++                $(PYTHON) ${abs_srcdir}/$@/setup.py build_ext $(PYTHON_RPATH) \
++           && env \
++                ABS_TOP_SRCDIR=${abs_top_srcdir} \
 +-- 
 +1.9.1
 +
-diff --git a/meta-oe/recipes-extended/wipe/wipe_git.bb b/meta-oe/recipes-extended/wipe/wipe_git.bb
-new file mode 100644
-index 0000000..e946d06
---- /dev/null
-+++ b/meta-oe/recipes-extended/wipe/wipe_git.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "A UNIX tool for secure deletion"
-+DESCRIPTION = "Wipe is a little command for securely erasing files from \
-+magnetic media. It compiles under various unix platforms, \
-+including Linux 2. * , (Open, Net, Free)BSD, aix 4.1, SunOS \
-+5.5.1, Solaris 2.6. wipe is released under the GPL. Pre-compiled \
-+packages are available on most Linux distributions. \
-+Under Debian, the package name is wipe"
-+HOMEPAGE = "http://lambda-diode.com/software/wipe/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://GPL;md5=0636e73ff0215e8d672dc4c32c317bb3"
-+
-+SRC_URI = "git://github.com/berke/wipe.git;branch=master \
-+           file://support-cross-compile-for-linux.patch \
-+          "
-+SRCREV = "d9c100c9cd0b1cbbe4359e4d6c9a035d11e7597c"
-+PV = "0.23+git${SRCPV}"
-+
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OEMAKE = "linux"
-+
-+do_install() {
-+	make install DESTDIR=${D}
-+}
-+
-+do_configure[noexec] = "1"
-+
-+BBCLASSEXTEND = "nativesdk"
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+index 91a30cf..2cf2dab 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+@@ -11,6 +11,7 @@ PV = "1.5.4"
+ 
+ SRC_URI = "\
+     git://github.com/oetiker/rrdtool-1.x.git;branch=1.5 \
++    file://0001-bindings-Makefile.am-remove-LD_RUN_PATH.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
+@@ -70,8 +71,6 @@ do_configure() {
+     sed -i -e '/PYTHON_INCLUDES="-I${/c \
+     PYTHON_INCLUDES="-I=/usr/include/python${PYTHON_BASEVERSION}"' \
+         ${S}/m4/acinclude.m4
+-    #remove the hardcoded $(libdir) rpath
+-    sed -i -e 's|--rpath=$(libdir)||g' ${S}/bindings/Makefile.am
+ 
+     autotools_do_configure
+ 
 -- 
 1.9.1
 
