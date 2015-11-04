@@ -1,39 +1,39 @@
-Return-Path: <rafael.carre@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id AEF0A76BD7
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C81460125
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2015 16:03:27 +0000 (UTC)
-Received: by wicll6 with SMTP id ll6so92756432wic.0
+	Wed,  4 Nov 2015 17:30:41 +0000 (UTC)
+Received: by widen16 with SMTP id en16so526705wid.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2015 08:03:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id:in-reply-to:references;
-	bh=3uJ9eG9F1f5R3VXzrEFTq8l+ixtLEo8BbuNXw7PyJvg=;
-	b=mvIlKXSFqoDi0btTzKfXX3q5WnqKoyE5M1jNTIVWRm49yKBnOtFvm/y/8lgtOhKCn2
-	ZG+uXwwuQ5dTbl53VEQLHupSGZaPWH3lOc1KdEQauhQ6bBZFAd6J0m6uBXihL6NcYpsT
-	6XrmZfceso8/64qt6CWvnPCkh2+TD/48oN/bDsBXsG4lyCpa8pejCKRLN1m9FiMYJqOs
-	xGwqNFmdRINqkCYE/RrdEbA7pOpxTcBm12T+ao22bcJVtNY/9i/bBbnjo1v0TJdFbcB+
-	hrTIJqCaIqwImGf+zCl9TyLQ1EAswdDJ5XJ86d+4eEzcSAMkvsCzIlQRrR+bMBoisdnm
-	HQEA==
-X-Received: by 10.194.187.14 with SMTP id fo14mr2813728wjc.104.1446653007295; 
-	Wed, 04 Nov 2015 08:03:27 -0800 (PST)
+	Wed, 04 Nov 2015 09:30:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=RyljvuLnDDkbfBYlSHUkF+4Ov1cS78qYAIEqgb8j3gc=;
+	b=MtOLVIOAAnAMwBdsyjzsmKKTE/h0FYYOEqT2CjHHNEKhoqqvjyfkmbhDmgdXKE7hqm
+	d/D2kbQhRYuMSoZ/ZHEpzBDU/cZ1tmdL32TxikKyfT6veGUpAtXqMpGp1QdtdIZEXvIP
+	sFwwlE+GAOF5odKcOupR+EtpMhRJd0TCveRJfa8UYV4yOms/b9OL7QFuBNDNc46T2G4I
+	PtcpHnbZ3+3wnhfL+25YwrkoSkfAV08Phaz4Mbwjcjn67sfwqDxj0gmHTKDjvHHvipwb
+	6BAEPxaggH3PPBWp9MCSsoqK1N7jj4jt4x5aTh0+m0Eo2sKLX2bnq9rh5kylljUz4LHI
+	V4YQ==
+X-Received: by 10.194.71.50 with SMTP id r18mr3243544wju.16.1446658241766;
+	Wed, 04 Nov 2015 09:30:41 -0800 (PST)
 Received: from localhost.localdomain
-	(lns-bzn-47f-81-56-255-191.adsl.proxad.net. [81.56.255.191])
-	by smtp.gmail.com with ESMTPSA id
-	lf10sm2260206wjb.23.2015.11.04.08.03.25
+	(ip-95-222-156-185.hsi15.unitymediagroup.de. [95.222.156.185])
+	by smtp.googlemail.com with ESMTPSA id
+	l78sm29767529wmb.5.2015.11.04.09.30.40
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 04 Nov 2015 08:03:26 -0800 (PST)
-Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
-From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 04 Nov 2015 09:30:41 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Nov 2015 17:03:18 +0100
-Message-Id: <1446652999-24545-2-git-send-email-funman@videolan.org>
-X-Mailer: git-send-email 2.5.0
-In-Reply-To: <1446652999-24545-1-git-send-email-funman@videolan.org>
-References: <1446652999-24545-1-git-send-email-funman@videolan.org>
-Subject: [meta-multimedia][PATCH 2/3] VLC: make libnotify a configurable dependency
+Date: Wed,  4 Nov 2015 18:30:08 +0100
+Message-Id: <1446658209-27822-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.1.0
+MIME-Version: 1.0
+Subject: [meta-qt5][PATCH 1/2] qtbase: add glib to PACKAGECONFIG_X11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,34 +47,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2015 16:03:29 -0000
+X-List-Received-Date: Wed, 04 Nov 2015 17:30:42 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+configure script disables gtkstyle if glib is not set. See configure section:
+
+| # auto-detect GTK style support
+| if [ "$CFG_GLIB" = "yes" -a "$CFG_QGTKSTYLE" != "no" ]; then
+| ...
+| elif [ "$CFG_GLIB" = "no" ]; then
+|     CFG_QGTKSTYLE=no
+| fi
+
+for more details.
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc.inc | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ recipes-qt/qt5/qtbase_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index b989849..ad5c81d 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native \
-    virtual/libsdl libsdl-image dbus dbus-glib libxml2 gnutls \
-    tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
--   libdvdcss libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs \
-+   libdvdcss libdvdread lua-native lua libidn gnome-vfs \
-    libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
-    libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
-    tiff xcb-util-keysyms samba"
-@@ -58,6 +58,7 @@ PACKAGECONFIG[gstreamer] = "--enable-gst-decode,--disable-gst-decode,gstreamer1.
- PACKAGECONFIG[vpx] = "--enable-vpx,--disable-vpx, libvpx"
- PACKAGECONFIG[qt4] = "--enable-qt,--disable-qt, qt4-x11-free"
- PACKAGECONFIG[freerdp] = "--enable-freerdp,--disable-freerdp, freerdp"
-+PACKAGECONFIG[notify] = "--enable-notify,--disable-notify, libnotify gtk+"
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index ecaccd3..0ba8ac8 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -42,7 +42,7 @@ RDEPENDS_${PN}-tools += "perl"
  
- do_configure_prepend() {
-     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
+ PACKAGECONFIG_GL ?= "${@base_contains('DISTRO_FEATURES', 'opengl', 'gl', '', d)}"
+ PACKAGECONFIG_FB ?= "${@base_contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}"
+-PACKAGECONFIG_X11 ?= "${@base_contains('DISTRO_FEATURES', 'x11', 'xcb xvideo xsync xshape xrender xrandr xfixes xinput2 xinput xinerama xcursor gtkstyle xkb', '', d)}"
++PACKAGECONFIG_X11 ?= "${@base_contains('DISTRO_FEATURES', 'x11', 'xcb xvideo xsync xshape xrender xrandr xfixes xinput2 xinput xinerama xcursor glib gtkstyle xkb', '', d)}"
+ PACKAGECONFIG_FONTS ?= ""
+ PACKAGECONFIG_SYSTEM ?= "jpeg libpng zlib"
+ PACKAGECONFIG_MULTIMEDIA ?= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)}"
 -- 
-2.5.0
+2.1.0
 
 
