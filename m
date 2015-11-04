@@ -1,39 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E005770F4
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 4507A770F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2015 23:44:20 +0000 (UTC)
-Received: by wmeg8 with SMTP id g8so255236wme.0
+	Wed,  4 Nov 2015 23:44:22 +0000 (UTC)
+Received: by wmeg8 with SMTP id g8so54570124wme.1
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 04 Nov 2015 15:44:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=NqalWzBHCnZGbpcGfL0eZwa0GmabfLgWAr68JvUtH1k=;
-	b=zAyec6BcwocmVrfN7IFN9Kqzug5hDOpD6HW5kR7AqiSvZXGJViT5bIPbPOFoMWy0Nn
-	nAdQcDIr4VPhFMKCq6QgTQVCscWrJbG253OSi/U+sNb+QPbIUR2Cwtf00M4114gGIhsw
-	pUJwd8C8pYiz6o0lcgv3n8AaYBbKXLuL8Kq/uuh7oc1zBBr2I8vNgK89e3xRMG4oga3i
-	a0A1pH4N5fFGutDhP/ivW0TxqHJY0Ki9o6wnTaYm0tlwITBus3yD9mE4fKTIGN+AftT+
-	Ky5c8PKtOZezS0G4BJrroynhF1qyBmfRyRlQvsAlBPf/vyN2b0LHfemAviE+X0uc6R7F
-	wBLg==
-X-Received: by 10.28.91.11 with SMTP id p11mr6163914wmb.60.1446680660742;
-	Wed, 04 Nov 2015 15:44:20 -0800 (PST)
+	bh=roHNG+wI+jaf38GMctyj2KRsDQbk218oCt41rGnSXjQ=;
+	b=S0yzmuIEU5RSXxxHD8pN4/lQ0Uh+A5cg5j7io4oXzNZLxurqhDbs/sQTbz3HQ63h55
+	X8dRaXicMvmqWO+cKEge8N5OjwM44Ijix+u6L9AZLrJFjAmMuGTJ0PbjoXpAKjpbB6Kq
+	Su55NxJZJYg6eVFHFlV3Q5wdA/lJtmDeTbdDHh+CIk9ttMw8wzeaYEbFR+RIXbZ/pMW2
+	H3wdMzym7sHsoZwOliVsJ1K4PlpFlh+i8+jzVyAiCbzx4umkzkvGg1u/jZnAJfBHItCi
+	rTe8jwywAXGjNyhQgvp2/ejBIpZ3LyZNhDY9H3ewB2tCZ+I4a1zGrvhY8iI3eHxEnLNq
+	RWtg==
+X-Received: by 10.28.132.9 with SMTP id g9mr6964148wmd.0.1446680661655;
+	Wed, 04 Nov 2015 15:44:21 -0800 (PST)
 Received: from localhost.localdomain (p5B0A127D.dip0.t-ipconnect.de.
 	[91.10.18.125]) by smtp.googlemail.com with ESMTPSA id
-	184sm5390014wmk.10.2015.11.04.15.44.19
+	184sm5390014wmk.10.2015.11.04.15.44.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Nov 2015 15:44:20 -0800 (PST)
+	Wed, 04 Nov 2015 15:44:21 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Nov 2015 00:43:45 +0100
-Message-Id: <1446680640-31722-4-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu,  5 Nov 2015 00:43:46 +0100
+Message-Id: <1446680640-31722-5-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.1.0
 In-Reply-To: <1446680640-31722-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1446680640-31722-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH][v2 03/18] packagegroup-xfce-extended: xfce-polkit
+Subject: [PATCH][v2 04/18] gparted: update to 0.24.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,24 +51,45 @@ X-List-Received-Date: Wed, 04 Nov 2015 23:44:22 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Depending on gnome-doc-utils-native fixes (detected when building from scratch):
+
+| gnome-doc-utils.make:63: error: HAVE_GNOME_DOC_UTILS does not appear in AM_CONDITIONAL
+| help/Makefile.am:1:   'gnome-doc-utils.make' included from here
+| gnome-doc-utils.make:133: error: ENABLE_SK does not appear in AM_CONDITIONAL
+| help/Makefile.am:1:   'gnome-doc-utils.make' included from here
+| gnome-doc-utils.make:182: error: ENABLE_SK does not appear in AM_CONDITIONAL
+| help/Makefile.am:1:   'gnome-doc-utils.make' included from here
+| ...
+| autoreconf: automake failed with exit status: 1
+| ERROR: autoreconf execution failed.
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../gparted/{gparted_0.23.0.bb => gparted_0.24.0.bb}                | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-gnome/recipes-extended/gparted/{gparted_0.23.0.bb => gparted_0.24.0.bb} (70%)
 
-diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-index 04934eb..ccd6f45 100644
---- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-+++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-@@ -50,6 +50,8 @@ RRECOMMENDS_${PN} = " \
-     xfce4-hotcorner-plugin \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'xfce4-pulseaudio-plugin', '', d)} \
-     \
-+    xfce-polkit \
-+    \
-     thunar-media-tags-plugin \
-     thunar-archive-plugin \
-     \
+diff --git a/meta-gnome/recipes-extended/gparted/gparted_0.23.0.bb b/meta-gnome/recipes-extended/gparted/gparted_0.24.0.bb
+similarity index 70%
+rename from meta-gnome/recipes-extended/gparted/gparted_0.23.0.bb
+rename to meta-gnome/recipes-extended/gparted/gparted_0.24.0.bb
+index 0705439..d77d1ed 100644
+--- a/meta-gnome/recipes-extended/gparted/gparted_0.23.0.bb
++++ b/meta-gnome/recipes-extended/gparted/gparted_0.24.0.bb
+@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ inherit autotools pkgconfig
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "5901dca33ced32213cccb13a2713dea8"
+-SRC_URI[sha256sum] = "7fd1dddf29814c2982f55ab765b8918561e1b5dabf792012c66b4d3ba25da754"
++SRC_URI[md5sum] = "b8480274c68876acff5965d4346710e7"
++SRC_URI[sha256sum] = "02398ab33894a59b0bd8707e598c46d8bb56f1413cd54de48eed61e2920ecd60"
+ 
+-DEPENDS = "glib-2.0 gtkmm parted"
++DEPENDS = "glib-2.0 gtkmm parted gnome-doc-utils-native"
+ 
+ EXTRA_OECONF = "--disable-scrollkeeper --disable-doc"
+ 
 -- 
 2.1.0
 
