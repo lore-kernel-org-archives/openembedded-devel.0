@@ -1,43 +1,36 @@
 Return-Path: <rehsack@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 692D875E2D
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 4372C75D22
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2015 17:57:37 +0000 (UTC)
-Received: by wmeg8 with SMTP id g8so117226769wme.0
+	Wed,  4 Nov 2015 18:09:20 +0000 (UTC)
+Received: by wijp11 with SMTP id p11so97652334wij.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2015 09:57:37 -0800 (PST)
+	Wed, 04 Nov 2015 10:09:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to;
-	bh=B1/KXraOiUgdRerfl2Q3QasOx1D1csXHjc6tcbkMc9M=;
-	b=yIQQ8H2yoSKvgdIggMERMslIgb5VN4oial2f3Ws90se0RkGVh6ZWI86LecnxXInrsw
-	6uRS90CvVi8LJ8d2szjEf/1ZebFmCgaK6GS+064BlpYg1339G4W3CKGl3lJXCy4wRT6N
-	ohzsdzqkK9K4wfvcnZlZ0AdlHVPiXWk32+zCCb1mEBSghN1Vip+nJzfLRgKdy4yfur2H
-	UAeUGQvtYKwXwt8GjtBLcZqbn/UxKbE8/r+9fdkFeBJSxAeVfrPi41G1Z61RyS/MXVJd
-	u6xXE/mXoGkT+kdIhG/4JOQZZUf3LWdQKDz41FzhUNLjT3TdJlut5cvwFOg088/q9poP
-	o3lA==
-X-Received: by 10.28.94.129 with SMTP id s123mr5046019wmb.78.1446659857384;
-	Wed, 04 Nov 2015 09:57:37 -0800 (PST)
+	h=from:content-type:content-transfer-encoding:subject:message-id:date
+	:to:mime-version;
+	bh=qD0rWUENF4LsCOb6hqEY72P+l/ugQd1TYODGGSFgc4g=;
+	b=lSeDr8zCE5Xf8lt3rSRs3+biuRvgSgs+EMkrqgmqpYjfwNre7DN1IN1M6C+FuGGPJu
+	oQZ0/3iHHnU+RbDOfzT61vXrvcPdX7RkaDAuKZoaFK4zxOa09TfIc4vJJAUhBY1CeIas
+	tgdJ+fFTH+OfaVfEA51/fXow4A43ionCDh5YbbO+r71F1uvx4AYQd+9VHd61REvk2rRl
+	KbdqSDLUA/mc8HzwGRgEYwUSLfJeiw9gEw4i011JckA2jvoJ7ldQzH3CzsRqzToxBuyX
+	j6w9cEOtqQDtavnJhW4t13KGzpcpkMP1uphwAiPiXQIrV6QSy8yque7tm+BhX+K15DDV
+	80uQ==
+X-Received: by 10.194.172.162 with SMTP id bd2mr2170808wjc.140.1446660560909; 
+	Wed, 04 Nov 2015 10:09:20 -0800 (PST)
 Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
-	by smtp.gmail.com with ESMTPSA id
-	d81sm4170250wma.16.2015.11.04.09.57.36
+	by smtp.gmail.com with ESMTPSA id r5sm2792951wjf.18.2015.11.04.10.09.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 04 Nov 2015 09:57:36 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+	Wed, 04 Nov 2015 10:09:20 -0800 (PST)
 From: Jens Rehsack <rehsack@gmail.com>
-In-Reply-To: <5639BBD0.2050201@skidata.com>
-Date: Wed, 4 Nov 2015 18:57:35 +0100
-Message-Id: <F46AA2E3-B76D-4B6D-ABC9-2423E80EA882@gmail.com>
-References: <AE55B37B-BC8F-4516-82BC-B2B1DE341859@gmail.com>
-	<5638C28E.7040505@skidata.com>
-	<2BAA39D9-E6DA-403E-AFAB-1E59CFE61DF2@gmail.com>
-	<5638D571.3090500@skidata.com>
-	<7448BFE6-D551-4E46-A7B0-F568423C219A@gmail.com>
-	<5639BBD0.2050201@skidata.com>
-To: openembedded-devel@lists.openembedded.org
+Message-Id: <FD578A39-55EB-46F0-8AB8-85C7F9B8CC2C@gmail.com>
+Date: Wed, 4 Nov 2015 19:09:19 +0100
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
 X-Mailer: Apple Mail (2.2104)
-Subject: Re: [meta-java][PATCH] openjdk-8: add recipes for openjdk-8 and openjre-8
+Subject: [meta-oe][PATCH] samba: systemv-init script must be executable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,117 +44,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2015 17:57:39 -0000
+X-List-Received-Date: Wed, 04 Nov 2015 18:09:23 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
 
-> Am 04.11.2015 um 09:03 schrieb Richard Leitner =
-<richard.leitner@skidata.com>:
->=20
->=20
-> On 11/03/2015 05:20 PM, Jens Rehsack wrote:
->>=20
->> Am 03.11.2015 um 16:40 schrieb Richard Leitner =
-<richard.leitner@skidata.com>:
->>>=20
->>> On 11/03/2015 03:54 PM, Jens Rehsack wrote:
->>>> That's maybe because I copy the format-patch output manually into =
-the mail.
->>>> Use this one: =
-https://github.com/rehsack/meta-java/commit/57eba04b0f68a55b3250a692bc5834=
-902709c903
->>>=20
->>> Same error :-(
->>> Do I need any previous patches applied which are not yet on master?
->>=20
->> Depends - this one comes first, because openjdk-8 supports building =
-for distro's without x11:
->>=20
->> =
-https://github.com/rehsack/meta-java/commit/566f95135c9f8b8bedd1e24b2b5872=
-177b1fdbe4
->=20
-> Thank you for the hint! Now it applies.
->=20
-> But I get following error when running "bitbake openjdk-7":
+Fix insane permissions installing SystemV init-script for samba4 to =
+allow
+executing it correctly.
 
-Sure? Didn't you "bitbake openjdk-8"? Or is it because =
-virtual/javac-native now points
-to openjdk-8-native and there is no known way for me to let a user =
-sanely pick the
-beloved one on his/her own?
+Signed-off-by: Jens Rehsack <sno@netbsd.org>
+---
+ meta-oe/recipes-connectivity/samba/samba_4.1.12.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-But openjdk-7 should not depend on virtual/javac-native -- so some =
-enlightening is
-required ...
+diff --git a/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb =
+b/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
+index 0a04870..e2bf719 100644
+--- a/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
++++ b/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
+@@ -99,7 +99,7 @@ do_install_append() {
+             > ${D}${sysconfdir}/tmpfiles.d/99-${BPN}.conf
+     elif ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', =
+'false', d)}; then
+ 	install -d ${D}${sysconfdir}/init.d
+-	install -m 0644 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d
++	install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d
+ 	update-rc.d -r ${D} samba.sh start 20 3 5 .
+ 	update-rc.d -r ${D} samba.sh start 20 0 1 6 .
+     fi
+--=20
+1.9.1
 
-> ERROR: Function failed: do_configure (log file is located at
-> =
-/build/myTarget/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/temp/log.d=
-o_configure.31291)
-> ERROR: Logfile of failure stored in:
-> =
-/build/myTarget/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/temp/log.d=
-o_configure.31291
-> Log data follows:
-> | DEBUG: Executing python function sysroot_cleansstate
-> | DEBUG: Python function sysroot_cleansstate finished
-> | DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc',
-> 'bit-64', 'x86_64-linux', 'common']
-> | DEBUG: Executing shell function autotools_preconfigure
-> | DEBUG: Shell function autotools_preconfigure finished
-> | DEBUG: Executing python function autotools_copy_aclocals
-> | DEBUG: Python function autotools_copy_aclocals finished
-> | DEBUG: Executing shell function do_configure
-> | ERROR: no configure script found at
-> =
-/build/myTarget/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/jdk8u-e8be=
-d1496ff2/configure
-> | WARNING: exit code 1 from a shell command.
-> | ERROR: Function failed: do_configure (log file is located at
-> =
-/build/myTarget/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/temp/log.d=
-o_configure.31291)
-> ERROR: Task 1074
-> =
-(/opt/yocto/poky/meta-java/recipes-core/openjdk/openjdk-8-native_72b05.bb,=
-
-> do_configure) failed with exit code '1'
->=20
->=20
-> Why is openjdk-8-native built at all here?
-> Nonetheless the same error occurs when building openjdk-8!
->=20
-> Furthermore following two warnings pop up:
->=20
->=20
-> WARNING: Variable key ALTERNATIVE_${JDKPN} (java) replaces original =
-key
-> ALTERNATIVE_openjdk-8 (java).
-> WARNING: Variable key ALTERNATIVE_${JDKPN} (java) replaces original =
-key
-> ALTERNATIVE_openjdk-8 (java).
->=20
->=20
-> Currently I have no time digging deeper into the problem, sorry for =
-that!
-> But if you have a hint/solution I will test it again!
-
-Otavio didn't apply the stuff, because poky has to commit =
-https://github.com/rehsack/poky/commits/master-java-support first:
-
-* =
-https://github.com/rehsack/poky/commit/65cdad40f2717b85892e12c80749cd43c1e=
-19a40 is universal,
-  because configure of openjdk-8 will be deleted by original =
-autotools.bbclass without any ability to recover
-* =
-https://github.com/rehsack/poky/commit/20ad5ff329a59b92b97ffad889e06b35cca=
-d6e3f is needed for target's with ARMv5e (only
-  the DSP versions, not all ARMv5!)
-
-Cheers
 --=20
 Jens Rehsack - rehsack@gmail.com
 
