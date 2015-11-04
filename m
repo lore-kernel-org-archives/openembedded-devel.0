@@ -1,47 +1,33 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-io0-f170.google.com (mail-io0-f170.google.com
-	[209.85.223.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D4DD76BD7
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F94F770E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2015 19:42:28 +0000 (UTC)
-Received: by ioc74 with SMTP id 74so320693ioc.2
+	Wed,  4 Nov 2015 21:51:54 +0000 (UTC)
+Received: by wmll128 with SMTP id l128so125841190wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2015 11:42:28 -0800 (PST)
+	Wed, 04 Nov 2015 13:51:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=syPPmNhiQo88tAIX1YjN94wWc2MlgILJ8afIqWbge7c=;
-	b=vh6L+BMRRGdziv4niIQkl0GAXcdX4z88bPKC6K8dEqRieh7raYcYcYbPCGngvn9HVr
-	GJizhIcqQMCbqKzMli/TqLYPwcrGKh8IA90tdYczjP+OxYN3bTxLJuR7aHUNOwtW1QG7
-	oQULc5Akx9ihtpGY6rGsn0F8ypiemApGhHGaaeSeKcd1Wr/gcZRXS5xwkPGqDx/UzFqT
-	RnEYboOgMu5EvHPtmfzoslcH1cIMYsCmcls4aFkK8ynv4V99KR9tjzBZmKAp8cd2B4NO
-	vyxVb9HzwWxAktsFrkHFIKYNFXSKv6lmd513QBTIiW7/WIFRvuL0N9JOPiOqWSUu2yX6
-	JPvw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kergoth_com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=syPPmNhiQo88tAIX1YjN94wWc2MlgILJ8afIqWbge7c=;
-	b=XDrJ1zczc9c4ZgKdDk599ZNjX7i08SSbTZEERguEb2j6XH7CGSOkUGMsUZtharLNHL
-	izOBHmUi5C6Xu3V04GHstu2HeYkFiRXfzOZpp2oK/QmsF2xIPquAjpHIPsRPb4jDf877
-	KiBmPujDXH53rYTTSpyUH3niCNKSuK4ygqfRTIxTVyI7XutphhGeY4PKDV1QcbIcjJOA
-	b/e1U5ZJHmSSnVrCaSSYU/NifG00UNLRWs8JByHcRDQ/XMLd0NKT4iPHDGZLK9y3vDSk
-	eCO+wOI8++7YABzNSrEV8dtmw+DvbSAOqvHzQEe4kpTK7sFZK8Xnb1AUvyCcWQO0Pzhj
-	lxKA==
-X-Received: by 10.107.38.70 with SMTP id m67mr5806105iom.98.1446666148422;
-	Wed, 04 Nov 2015 11:42:28 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.93.7 with HTTP; Wed, 4 Nov 2015 11:42:08 -0800 (PST)
-In-Reply-To: <FD578A39-55EB-46F0-8AB8-85C7F9B8CC2C@gmail.com>
-References: <FD578A39-55EB-46F0-8AB8-85C7F9B8CC2C@gmail.com>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Wed, 4 Nov 2015 12:42:08 -0700
-X-Google-Sender-Auth: jEeL3XmCnpnL4jD96-Y_0FaepG4
-Message-ID: <CABcZANnLjb5mF1SLYA+2x0er=RefobM-Dv81wYvi3OOKhoB74Q@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] samba: systemv-init script must be executable
+	h=from:to:cc:subject:date:message-id;
+	bh=sY9VpHxGWzXJUuu8d5VIvXBuoaW27FyS4FXsLpi19s8=;
+	b=m2Ulo1cPF6Gx/hHWd5bWsnXXiXsiL/5ZerSXCRc2UOVI1/4OWqCcFid8Oz6wuRcvq0
+	5KUsapQ4Y70o+fNtOkxKvAltwfpIrB8pY3eo4GA5tNhMf7gkhnMw4m5JY1EiVzvytF+X
+	xnoQCNzUOwa/jyupnLn4gnwu7zF3FTVHViKaZUR30NQgQvFsd0E1InhFL6zWT2dJ4N82
+	O6HlpN5HLdKp0BP+vnwWRYMnXtStxhHfBuZj/OTN+Ee6LTRj4ZLXU11Aozx1c5ZaEpqK
+	dx3L8gRtCbNX9JlszWgUFsKcCp5JjSJE0JYpH39yDUG4yRw9l5xs7pNc8cDbMbjIa08c
+	wcOQ==
+X-Received: by 10.28.130.12 with SMTP id e12mr29585153wmd.76.1446673914118;
+	Wed, 04 Nov 2015 13:51:54 -0800 (PST)
+Received: from Saturn.local.all (212-41-109-218.adsl.solnet.ch.
+	[212.41.109.218]) by smtp.gmail.com with ESMTPSA id
+	d10sm3615748wje.14.2015.11.04.13.51.52
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 04 Nov 2015 13:51:53 -0800 (PST)
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  4 Nov 2015 22:50:03 +0100
+Message-Id: <1446673803-2310-1-git-send-email-max.oss.09@gmail.com>
+X-Mailer: git-send-email 1.8.4.5
+Subject: [meta-browser][PATCH] chromium: fix gcc5 compile issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,24 +41,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2015 19:42:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 04 Nov 2015 21:51:59 -0000
 
-On Wed, Nov 4, 2015 at 11:09 AM, Jens Rehsack <rehsack@gmail.com> wrote:
+A chromium build with gcc5 fails with warnings treated as errors.
 
-> Fix insane permissions installing SystemV init-script for samba4 to allow
-> executing it correctly.
->
-> Signed-off-by: Jens Rehsack <sno@netbsd.org>
->
+bignum.cc, image_util.cc: strict-overflow warning
 
-The /etc/rc our sysvinit package provides will source the startup script
-rather than executing it if its name ends in .sh, so I don't really see why
-this would be necessary.
+Compiles and runs on qemux86-64 with gcc 5.2.0 and still compiles on
+armv7a with gcc linaro-4.9.4.
+
+Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+---
+ .../0001-bignum.cc-fix-warning-from-gcc-5.patch    | 56 ++++++++++++++++++++++
+ ...-image_util.cc-disable-warning-from-gcc-5.patch | 37 ++++++++++++++
+ recipes-browser/chromium/chromium_40.0.2214.91.bb  |  3 ++
+ 3 files changed, 96 insertions(+)
+ create mode 100644 recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch
+ create mode 100644 recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
+
+diff --git a/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch b/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch
+new file mode 100644
+index 0000000..f3d7f77
+--- /dev/null
++++ b/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch
+@@ -0,0 +1,56 @@
++From 689576b2f5c6398f6ef5203fe52edcf86b452790 Mon Sep 17 00:00:00 2001
++From: Max Krummenacher <max.oss.09@gmail.com>
++Date: Tue, 3 Nov 2015 20:51:04 +0100
++Subject: [PATCH 1/2] bignum.cc: fix warning from gcc 5
++
++Refactoring the source seems to workaround the compiler warning.
++
++addresses:
++  ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:105:10: error: assuming
++  signed overflow does not occur when assuming that (X + c) < X is always
++  false [-Werror=strict-overflow]
++      void Bignum::AssignDecimalString(Vector<const char> value) {
++           ^
++
++Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
++Upstream-Status: Pending
++
++---
++ third_party/WebKit/Source/wtf/dtoa/bignum.cc | 15 +++++++--------
++ 1 file changed, 7 insertions(+), 8 deletions(-)
++
++diff --git a/third_party/WebKit/Source/wtf/dtoa/bignum.cc b/third_party/WebKit/Source/wtf/dtoa/bignum.cc
++index a000b46..e5426dd 100644
++--- a/third_party/WebKit/Source/wtf/dtoa/bignum.cc
+++++ b/third_party/WebKit/Source/wtf/dtoa/bignum.cc
++@@ -105,20 +105,19 @@ namespace double_conversion {
++     void Bignum::AssignDecimalString(Vector<const char> value) {
++         // 2^64 = 18446744073709551616 > 10^19
++         const int kMaxUint64DecimalDigits = 19;
+++        int currentLen;
++         Zero();
++         int length = value.length();
++         int pos = 0;
++         // Let's just say that each digit needs 4 bits.
++-        while (length >= kMaxUint64DecimalDigits) {
++-            uint64_t digits = ReadUInt64(value, pos, kMaxUint64DecimalDigits);
++-            pos += kMaxUint64DecimalDigits;
++-            length -= kMaxUint64DecimalDigits;
++-            MultiplyByPowerOfTen(kMaxUint64DecimalDigits);
+++        while (length > 0) {
+++            currentLen = length > kMaxUint64DecimalDigits ? kMaxUint64DecimalDigits : length;
+++            uint64_t digits = ReadUInt64(value, pos, currentLen);
+++            MultiplyByPowerOfTen(currentLen);
++             AddUInt64(digits);
+++            pos += currentLen;
+++            length -= currentLen;
++         }
++-        uint64_t digits = ReadUInt64(value, pos, length);
++-        MultiplyByPowerOfTen(length);
++-        AddUInt64(digits);
++         Clamp();
++     }
++ 
++-- 
++1.8.4.5
++
+diff --git a/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch b/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
+new file mode 100644
+index 0000000..d62645b
+--- /dev/null
++++ b/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
+@@ -0,0 +1,37 @@
++From 2f674d980a116075dc7123a3e243b1451e4a732d Mon Sep 17 00:00:00 2001
++From: Max Krummenacher <max.oss.09@gmail.com>
++Date: Tue, 3 Nov 2015 22:13:40 +0100
++Subject: [PATCH 2/2] image_util.cc: disable warning from gcc 5
++
++addresses:
++  ../../ui/gfx/image/image_util.cc:50:6: error: assuming signed overflow does
++  not occur when assuming that (X - c) <= X is always true
++  [-Werror=strict-overflow]
++  bool VisibleMargins(const ImageSkia& image, int* leading, int* trailing) {
++       ^
++
++Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
++Upstream-Status: Pending
++
++---
++ ui/gfx/image/image_util.cc | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/ui/gfx/image/image_util.cc b/ui/gfx/image/image_util.cc
++index 89a3f8c..d595da3 100644
++--- a/ui/gfx/image/image_util.cc
+++++ b/ui/gfx/image/image_util.cc
++@@ -68,7 +68,10 @@ bool VisibleMargins(const ImageSkia& image, int* leading, int* trailing) {
++   int inner_min = bitmap.width();
++   for (int x = 0; x < bitmap.width(); ++x) {
++     for (int y = 0; y < bitmap.height(); ++y) {
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic warning "-Wstrict-overflow"
++       if (SkColorGetA(bitmap.getColor(x, y)) > kMinimumVisibleOpacity) {
+++#pragma GCC diagnostic pop
++         inner_min = x;
++         break;
++       }
++-- 
++1.8.4.5
++
+diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+index 8bc05ee..3e00b8d 100644
+--- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
++++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+@@ -28,7 +28,10 @@ SRC_URI = "\
+         file://google-chrome.desktop \
+         file://chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch \
+         file://chromium-40/add_missing_stat_h_include.patch \
++        file://chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch \
++        file://chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch \
+ "
++
+ #
+ # * use-egl : Without this packageconfig, the Chromium build will use GLX for creating an OpenGL context in X11,
+ #             and regular OpenGL for painting operations. Neither are desirable on embedded platforms. With this
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.8.4.5
+
 
