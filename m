@@ -1,40 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 8218C75E2D
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 890777707F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2015 23:44:20 +0000 (UTC)
-Received: by wicfv8 with SMTP id fv8so42199691wic.0
+	Wed,  4 Nov 2015 23:44:19 +0000 (UTC)
+Received: by wmeg8 with SMTP id g8so254922wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2015 15:44:20 -0800 (PST)
+	Wed, 04 Nov 2015 15:44:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=xMiTAqp72SBD2d3QS3rWZ1E6E1j8780neS2BbAfNQSc=;
-	b=SgOWFEUgd/WAny4SMxgDMdlkl89ASv31rs5118idq3422I11HEBqp+pW7rh+OheMXI
-	OQPeB6jbWv1VGXyvFfkhIaFufhwL/qqwUAM15agUlubRAiMdVEyrBIm3NvUGhP4jN4vF
-	J9g3C5NN1nkZFbNlnJ6HQ+1bRY23V+NXa4f98sWP/vjBtwTvZW/uwHHtTRS4laSkqw/1
-	JY4R5+jz7OC2QuJbKdJgeemVZuvA5M9+j5gze93QZfF7mU35W2De+9Lybadz/6/s3zkZ
-	5EoYIvD8PdIiUAcOvArEEzmfquz9S5Q1Uafwspr0hHZoimRy01/fAY7FVJuvN4NY362I
-	bGww==
-X-Received: by 10.194.184.81 with SMTP id es17mr4699704wjc.10.1446680659910;
+	bh=RmWG9BamULNBaudeDZEk/DhRKrMqqkHnAcDzXfDQ6ds=;
+	b=HDhjbd4bsVBXk9FD8Ukq+XPuDxkAsXP+A3TjLnOhSVFuwb/JIMrkDWmrIWluulhQfX
+	fukCXhnMtLNXbyshHOOO2+WQck7z+vgTLTMftwDroV5gCjTCxhe9t3r3LvXbL/P2ImFB
+	TmGrRx+OQga8RV0a3h/guKirX45ZnxkNVu5sn6saXvEL6xzN9f1u178GMW5gV5SM8tW1
+	4D7W7NM3BkIIAYKiIOlYRgZc10pzdFsID8Zju/173ae1ZQbbxdT4vrO5liRI2otcH4Ls
+	BlVAyPHbSho0Jsr82HN6E6fCoysoMMjo/5wA0sTlZFEu0jRf4PJDiM20fhhDH9mpgpeJ
+	ZNOg==
+X-Received: by 10.28.88.203 with SMTP id m194mr6216349wmb.68.1446680659087;
 	Wed, 04 Nov 2015 15:44:19 -0800 (PST)
 Received: from localhost.localdomain (p5B0A127D.dip0.t-ipconnect.de.
 	[91.10.18.125]) by smtp.googlemail.com with ESMTPSA id
-	184sm5390014wmk.10.2015.11.04.15.44.19
+	184sm5390014wmk.10.2015.11.04.15.44.18
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Nov 2015 15:44:19 -0800 (PST)
+	Wed, 04 Nov 2015 15:44:18 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Nov 2015 00:43:44 +0100
-Message-Id: <1446680640-31722-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu,  5 Nov 2015 00:43:43 +0100
+Message-Id: <1446680640-31722-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.1.0
 In-Reply-To: <1446680640-31722-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1446680640-31722-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH][v2 02/18] xfce-polkit: initial add 0.2
+Subject: [PATCH][v2 01/18] xfce4-vala: unbreak by telling configure vala API version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,27 +53,28 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb
+ meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb
-new file mode 100644
-index 0000000..ab720f8
---- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb
-@@ -0,0 +1,11 @@
-+SUMMARY = "A simple PolicyKit authentication agent for XFCE"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=758b03f872a88c99fc36d50c5932091c"
+diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
+index 7bcffe5..c1900e9 100644
+--- a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
++++ b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
+@@ -5,12 +5,12 @@ DEPENDS = "libxfce4util garcon xfconf libxfce4ui xfce4-panel exo vala xfce4-dev-
+ 
+ inherit xfce
+ 
+-PNBLACKLIST[xfce4-vala] ?= "Fails to build since vala upgrade to 0.26.1"
+-
+ SRC_URI = "http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
+ SRC_URI[md5sum] = "0bbb1d6e473e0fe9b335b7b1b49d8a71"
+ SRC_URI[sha256sum] = "07a8f2b7c09fcdd3d86e0c52adea3c58ca011d0142a93997a01b4af77260ae7b"
+ 
++EXTRA_OECONF = "-with-vala-api=0.28"
 +
-+DEPENDS = "libxfce4ui polkit"
-+
-+inherit xfce-app
-+
-+SRC_URI = "git://github.com/ncopa/${BPN}.git"
-+SRCREV = "6ad1ee833c9e22e4dd72a8f7d54562d046965283"
-+S = "${WORKDIR}/git"
+ FILES_${PN} += "${datadir}/vala-*/vapi"
+ 
+ RDEPENDS_${PN} = "vala"
 -- 
 2.1.0
 
