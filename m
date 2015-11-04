@@ -1,36 +1,47 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 4372C75D22
+Return-Path: <kergoth@gmail.com>
+Received: from mail-io0-f170.google.com (mail-io0-f170.google.com
+	[209.85.223.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D4DD76BD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2015 18:09:20 +0000 (UTC)
-Received: by wijp11 with SMTP id p11so97652334wij.0
+	Wed,  4 Nov 2015 19:42:28 +0000 (UTC)
+Received: by ioc74 with SMTP id 74so320693ioc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2015 10:09:20 -0800 (PST)
+	Wed, 04 Nov 2015 11:42:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:content-type:content-transfer-encoding:subject:message-id:date
-	:to:mime-version;
-	bh=qD0rWUENF4LsCOb6hqEY72P+l/ugQd1TYODGGSFgc4g=;
-	b=lSeDr8zCE5Xf8lt3rSRs3+biuRvgSgs+EMkrqgmqpYjfwNre7DN1IN1M6C+FuGGPJu
-	oQZ0/3iHHnU+RbDOfzT61vXrvcPdX7RkaDAuKZoaFK4zxOa09TfIc4vJJAUhBY1CeIas
-	tgdJ+fFTH+OfaVfEA51/fXow4A43ionCDh5YbbO+r71F1uvx4AYQd+9VHd61REvk2rRl
-	KbdqSDLUA/mc8HzwGRgEYwUSLfJeiw9gEw4i011JckA2jvoJ7ldQzH3CzsRqzToxBuyX
-	j6w9cEOtqQDtavnJhW4t13KGzpcpkMP1uphwAiPiXQIrV6QSy8yque7tm+BhX+K15DDV
-	80uQ==
-X-Received: by 10.194.172.162 with SMTP id bd2mr2170808wjc.140.1446660560909; 
-	Wed, 04 Nov 2015 10:09:20 -0800 (PST)
-Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
-	by smtp.gmail.com with ESMTPSA id r5sm2792951wjf.18.2015.11.04.10.09.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 04 Nov 2015 10:09:20 -0800 (PST)
-From: Jens Rehsack <rehsack@gmail.com>
-Message-Id: <FD578A39-55EB-46F0-8AB8-85C7F9B8CC2C@gmail.com>
-Date: Wed, 4 Nov 2015 19:09:19 +0100
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-X-Mailer: Apple Mail (2.2104)
-Subject: [meta-oe][PATCH] samba: systemv-init script must be executable
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=syPPmNhiQo88tAIX1YjN94wWc2MlgILJ8afIqWbge7c=;
+	b=vh6L+BMRRGdziv4niIQkl0GAXcdX4z88bPKC6K8dEqRieh7raYcYcYbPCGngvn9HVr
+	GJizhIcqQMCbqKzMli/TqLYPwcrGKh8IA90tdYczjP+OxYN3bTxLJuR7aHUNOwtW1QG7
+	oQULc5Akx9ihtpGY6rGsn0F8ypiemApGhHGaaeSeKcd1Wr/gcZRXS5xwkPGqDx/UzFqT
+	RnEYboOgMu5EvHPtmfzoslcH1cIMYsCmcls4aFkK8ynv4V99KR9tjzBZmKAp8cd2B4NO
+	vyxVb9HzwWxAktsFrkHFIKYNFXSKv6lmd513QBTIiW7/WIFRvuL0N9JOPiOqWSUu2yX6
+	JPvw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=kergoth_com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=syPPmNhiQo88tAIX1YjN94wWc2MlgILJ8afIqWbge7c=;
+	b=XDrJ1zczc9c4ZgKdDk599ZNjX7i08SSbTZEERguEb2j6XH7CGSOkUGMsUZtharLNHL
+	izOBHmUi5C6Xu3V04GHstu2HeYkFiRXfzOZpp2oK/QmsF2xIPquAjpHIPsRPb4jDf877
+	KiBmPujDXH53rYTTSpyUH3niCNKSuK4ygqfRTIxTVyI7XutphhGeY4PKDV1QcbIcjJOA
+	b/e1U5ZJHmSSnVrCaSSYU/NifG00UNLRWs8JByHcRDQ/XMLd0NKT4iPHDGZLK9y3vDSk
+	eCO+wOI8++7YABzNSrEV8dtmw+DvbSAOqvHzQEe4kpTK7sFZK8Xnb1AUvyCcWQO0Pzhj
+	lxKA==
+X-Received: by 10.107.38.70 with SMTP id m67mr5806105iom.98.1446666148422;
+	Wed, 04 Nov 2015 11:42:28 -0800 (PST)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.79.93.7 with HTTP; Wed, 4 Nov 2015 11:42:08 -0800 (PST)
+In-Reply-To: <FD578A39-55EB-46F0-8AB8-85C7F9B8CC2C@gmail.com>
+References: <FD578A39-55EB-46F0-8AB8-85C7F9B8CC2C@gmail.com>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Wed, 4 Nov 2015 12:42:08 -0700
+X-Google-Sender-Auth: jEeL3XmCnpnL4jD96-Y_0FaepG4
+Message-ID: <CABcZANnLjb5mF1SLYA+2x0er=RefobM-Dv81wYvi3OOKhoB74Q@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] samba: systemv-init script must be executable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,39 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2015 18:09:23 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 04 Nov 2015 19:42:29 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On Wed, Nov 4, 2015 at 11:09 AM, Jens Rehsack <rehsack@gmail.com> wrote:
 
-Fix insane permissions installing SystemV init-script for samba4 to =
-allow
-executing it correctly.
+> Fix insane permissions installing SystemV init-script for samba4 to allow
+> executing it correctly.
+>
+> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+>
 
-Signed-off-by: Jens Rehsack <sno@netbsd.org>
----
- meta-oe/recipes-connectivity/samba/samba_4.1.12.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb =
-b/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
-index 0a04870..e2bf719 100644
---- a/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
-+++ b/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
-@@ -99,7 +99,7 @@ do_install_append() {
-             > ${D}${sysconfdir}/tmpfiles.d/99-${BPN}.conf
-     elif ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', =
-'false', d)}; then
- 	install -d ${D}${sysconfdir}/init.d
--	install -m 0644 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d
-+	install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d
- 	update-rc.d -r ${D} samba.sh start 20 3 5 .
- 	update-rc.d -r ${D} samba.sh start 20 0 1 6 .
-     fi
---=20
-1.9.1
-
---=20
-Jens Rehsack - rehsack@gmail.com
-
+The /etc/rc our sysvinit package provides will source the startup script
+rather than executing it if its name ends in .sh, so I don't really see why
+this would be necessary.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
