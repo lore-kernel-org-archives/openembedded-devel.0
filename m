@@ -1,24 +1,28 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (unknown [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 28F1075A31
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D2453770E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2015 09:56:04 +0000 (UTC)
+	Wed,  4 Nov 2015 12:00:04 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tA49u3vc005096
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tA487D8v006051
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 4 Nov 2015 01:56:04 -0800
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 4 Nov 2015 01:56:03 -0800
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 4 Nov 2015 17:46:36 +0800
-Message-ID: <1446630396-14149-1-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.6.1
+	Wed, 4 Nov 2015 00:08:13 -0800 (PST)
+Received: from [128.224.162.211] (128.224.162.211) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Wed, 4 Nov 2015 00:07:12 -0800
+Message-ID: <5639BCB0.9020204@windriver.com>
+Date: Wed, 4 Nov 2015 16:07:12 +0800
+From: ChenQi <Qi.Chen@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libsmi: add configure file
+To: <openembedded-devel@lists.openembedded.org>
+References: <1446622578-21255-1-git-send-email-Qi.Chen@windriver.com>
+In-Reply-To: <1446622578-21255-1-git-send-email-Qi.Chen@windriver.com>
+X-Originating-IP: [128.224.162.211]
+Subject: Re: [meta-oe][PATCH V3 1/4] rrdtool: fix useless-rpath QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,112 +36,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2015 09:56:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 04 Nov 2015 12:00:08 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Kai Kang <kai.kang@windriver.com>
+Please ignore these patches.
+I'll send out patches based on the latest master.
 
-Add configure file duplicated from file smi.conf-example in source code
-and replace paths with mibs files directories.
+// Qi
 
-Then set libsmi-mibs as runtime recommend package to provide mibs files.
-
-Add homepage and update SRC_URI as well.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-oe/recipes-support/libsmi/libsmi/smi.conf | 48 ++++++++++++++++++++++++++
- meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb | 12 ++++++-
- 2 files changed, 59 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/libsmi/libsmi/smi.conf
-
-diff --git a/meta-oe/recipes-support/libsmi/libsmi/smi.conf b/meta-oe/recipes-support/libsmi/libsmi/smi.conf
-new file mode 100644
-index 0000000..7e4da86
---- /dev/null
-+++ b/meta-oe/recipes-support/libsmi/libsmi/smi.conf
-@@ -0,0 +1,48 @@
-+#
-+# smi.conf - Global/User SMI configuration file. (EXAMPLE)
-+#
-+# Copyright (c) 2000 Frank Strauss, Technical University of Braunschweig.
-+#
-+# See the file "COPYING" for information on usage and redistribution
-+# of this file, and for a DISCLAIMER OF ALL WARRANTIES.
-+#
-+# @(#) $Id: smi.conf-example 1134 2001-06-11 09:59:13Z strauss $
-+#
-+#
-+# See smi_config(3) for detailed information on configuration files.
-+#
-+
-+# Extend (note the semicolon) the libsmi default module search path.
-+path :/usr/share/mibs/iana
-+path :/usr/share/mibs/ietf
-+path :/usr/share/mibs/irtf
-+path :/usr/share/mibs/tubs
-+
-+# EXPERIMENTAL: Add a caching method (works only on UNIX systems).
-+# NOTE: the cache directory must exist and permissions must be
-+# handled appropriately. A simple but insecure way is to apply
-+# a tmp flag to the directory (chmod 1777 /usr/local/share/mibs/cache).
-+#cache /usr/local/share/mibs/cache /usr/local/bin/smicache -d /usr/local/share/mibs/cache -p http://www.ibr.cs.tu-bs.de/projects/libsmi/smicache/
-+
-+# Don't show any errors by default.
-+level 0
-+
-+# Preload some basic SMIv2 modules.
-+load SNMPv2-SMI
-+load SNMPv2-TC
-+load SNMPv2-CONF
-+
-+# Make smilint shout loud to report all errors and warnings.
-+smilint: level 9
-+
-+# But please don't claim about any names longer than 32 chars.
-+# (note: this is the prefix of errors `namelength-32-module,
-+#  -type, -object, -enumeration, and -bit)
-+smilint: hide namelength-32
-+
-+# Preloading some more modules for special applications.
-+tcpdump: load DISMAN-SCRIPT-MIB
-+tcpdump: load IF-MIB
-+
-+smiquery: load IF-MIB
-+
-diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb b/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
-index 2b036f9..e1af636 100644
---- a/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
-+++ b/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
-@@ -1,16 +1,26 @@
- SUMMARY = "A Library to Access SMI MIB Information"
-+HOMEPAGE = "https://www.ibr.cs.tu-bs.de/projects/libsmi"
- 
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3ad3076f9332343a21636cfd351f05b7"
- 
--SRC_URI = "ftp://ftp.ibr.cs.tu-bs.de/pub/local/libsmi/${BP}.tar.gz"
-+SRC_URI = "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.tar.gz \
-+           file://smi.conf \
-+          "
- 
- SRC_URI[md5sum] = "760b6b1070738158708649ed2c63425e"
- SRC_URI[sha256sum] = "f048a5270f41bc88b0c3b0a8fe70ca4d716a46b531a0ecaaa87c462f49d74849"
- 
- inherit autotools
- 
-+do_install_append () {
-+	install -d ${D}${sysconfdir}
-+	install -m 0644 ${WORKDIR}/smi.conf ${D}${sysconfdir}/smi.conf
-+}
-+
- PACKAGES += "${PN}-mibs ${PN}-pibs"
- 
- FILES_${PN}-mibs += "${datadir}/mibs"
- FILES_${PN}-pibs += "${datadir}/pibs"
-+
-+RRECOMMENDS_${PN} = "${BPN}-mibs"
--- 
-2.6.1
+On 11/04/2015 03:36 PM, Chen Qi wrote:
+> When building rrdtool, we would meet the following error.
+>
+>    ERROR: QA Issue: rrdtool-python: work/core2-64-poky-linux/rrdtool
+>    /1.5.4-r0/packages-split/rrdtool-python/usr/lib/python2.7/site-packages
+>    /rrdtool.so contains probably-redundant RPATH /usr/lib [useless-rpaths]
+>
+> Fix this issue by removing 'LD_RUN_PATH=$(libdir)' when compiling rrdtool.so.
+>
+> As we use '--disable-rpath' in EXTRA_OECONF, we don't need to the to remove
+> '--rpath=$(libdir)' in Makefile.am.
+>
+> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> ---
+>   ...1-bindings-Makefile.am-remove-LD_RUN_PATH.patch | 24 ++++++++++++++++++++++
+>   meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb  |  3 +--
+>   2 files changed, 25 insertions(+), 2 deletions(-)
+>   create mode 100644 meta-oe/recipes-extended/rrdtool/files/0001-bindings-Makefile.am-remove-LD_RUN_PATH.patch
+>
+> diff --git a/meta-oe/recipes-extended/rrdtool/files/0001-bindings-Makefile.am-remove-LD_RUN_PATH.patch b/meta-oe/recipes-extended/rrdtool/files/0001-bindings-Makefile.am-remove-LD_RUN_PATH.patch
+> new file mode 100644
+> index 0000000..539caa5
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/rrdtool/files/0001-bindings-Makefile.am-remove-LD_RUN_PATH.patch
+> @@ -0,0 +1,24 @@
+> +Upstream-Status: Inappropriate [OE specific]
+> +
+> +Subject: bindings/Makefile.am: remove LD_RUN_PATH
+> +
+> +Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> +---
+> + bindings/Makefile.am | 1 -
+> + 1 file changed, 1 deletion(-)
+> +
+> +diff --git a/bindings/Makefile.am b/bindings/Makefile.am
+> +index 54f5c23..8ea16b7 100644
+> +--- a/bindings/Makefile.am
+> ++++ b/bindings/Makefile.am
+> +@@ -67,7 +67,6 @@ python:
+> +           && env \
+> +                ABS_TOP_SRCDIR=${abs_top_srcdir} \
+> +                ABS_TOP_BUILDDIR=${abs_top_builddir} \
+> +-               LD_RUN_PATH=$(libdir) \
+> +                $(PYTHON) ${abs_srcdir}/$@/setup.py build_ext $(PYTHON_RPATH) \
+> +           && env \
+> +                ABS_TOP_SRCDIR=${abs_top_srcdir} \
+> +--
+> +1.9.1
+> +
+> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+> index 91a30cf..2cf2dab 100644
+> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+> @@ -11,6 +11,7 @@ PV = "1.5.4"
+>   
+>   SRC_URI = "\
+>       git://github.com/oetiker/rrdtool-1.x.git;branch=1.5 \
+> +    file://0001-bindings-Makefile.am-remove-LD_RUN_PATH.patch \
+>   "
+>   
+>   S = "${WORKDIR}/git"
+> @@ -70,8 +71,6 @@ do_configure() {
+>       sed -i -e '/PYTHON_INCLUDES="-I${/c \
+>       PYTHON_INCLUDES="-I=/usr/include/python${PYTHON_BASEVERSION}"' \
+>           ${S}/m4/acinclude.m4
+> -    #remove the hardcoded $(libdir) rpath
+> -    sed -i -e 's|--rpath=$(libdir)||g' ${S}/bindings/Makefile.am
+>   
+>       autotools_do_configure
+>   
 
 
