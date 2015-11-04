@@ -1,27 +1,24 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 19BF675A31
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (unknown [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 28F1075A31
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2015 08:26:27 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tA48QRle018194
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed,  4 Nov 2015 09:56:04 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tA49u3vc005096
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 4 Nov 2015 00:26:27 -0800 (PST)
-Received: from [128.224.162.159] (128.224.162.159) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 4 Nov 2015 00:26:26 -0800
-Message-ID: <5639C12F.8080008@windriver.com>
-Date: Wed, 4 Nov 2015 16:26:23 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
-MIME-Version: 1.0
+	Wed, 4 Nov 2015 01:56:04 -0800
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 4 Nov 2015 01:56:03 -0800
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1446622757-28389-1-git-send-email-hongxu.jia@windriver.com>
-In-Reply-To: <1446622757-28389-1-git-send-email-hongxu.jia@windriver.com>
-Subject: Re: [meta-oe][PATCH] wipe: add version 0.23
+Date: Wed, 4 Nov 2015 17:46:36 +0800
+Message-ID: <1446630396-14149-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.6.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] libsmi: add configure file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,21 +32,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2015 08:26:28 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 Nov 2015 09:56:05 -0000
+Content-Type: text/plain
 
-On 11/04/2015 03:39 PM, Hongxu Jia wrote:
-> +
-> +do_configure[noexec] = "1"
-> +
-> +BBCLASSEXTEND = "nativesdk"
+From: Kai Kang <kai.kang@windriver.com>
 
-There is no specific reason to support nativesdk, please drop this 
-patch, v2 incoming
+Add configure file duplicated from file smi.conf-example in source code
+and replace paths with mibs files directories.
 
-//Hongxu
+Then set libsmi-mibs as runtime recommend package to provide mibs files.
 
+Add homepage and update SRC_URI as well.
 
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-oe/recipes-support/libsmi/libsmi/smi.conf | 48 ++++++++++++++++++++++++++
+ meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb | 12 ++++++-
+ 2 files changed, 59 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/libsmi/libsmi/smi.conf
+
+diff --git a/meta-oe/recipes-support/libsmi/libsmi/smi.conf b/meta-oe/recipes-support/libsmi/libsmi/smi.conf
+new file mode 100644
+index 0000000..7e4da86
+--- /dev/null
++++ b/meta-oe/recipes-support/libsmi/libsmi/smi.conf
+@@ -0,0 +1,48 @@
++#
++# smi.conf - Global/User SMI configuration file. (EXAMPLE)
++#
++# Copyright (c) 2000 Frank Strauss, Technical University of Braunschweig.
++#
++# See the file "COPYING" for information on usage and redistribution
++# of this file, and for a DISCLAIMER OF ALL WARRANTIES.
++#
++# @(#) $Id: smi.conf-example 1134 2001-06-11 09:59:13Z strauss $
++#
++#
++# See smi_config(3) for detailed information on configuration files.
++#
++
++# Extend (note the semicolon) the libsmi default module search path.
++path :/usr/share/mibs/iana
++path :/usr/share/mibs/ietf
++path :/usr/share/mibs/irtf
++path :/usr/share/mibs/tubs
++
++# EXPERIMENTAL: Add a caching method (works only on UNIX systems).
++# NOTE: the cache directory must exist and permissions must be
++# handled appropriately. A simple but insecure way is to apply
++# a tmp flag to the directory (chmod 1777 /usr/local/share/mibs/cache).
++#cache /usr/local/share/mibs/cache /usr/local/bin/smicache -d /usr/local/share/mibs/cache -p http://www.ibr.cs.tu-bs.de/projects/libsmi/smicache/
++
++# Don't show any errors by default.
++level 0
++
++# Preload some basic SMIv2 modules.
++load SNMPv2-SMI
++load SNMPv2-TC
++load SNMPv2-CONF
++
++# Make smilint shout loud to report all errors and warnings.
++smilint: level 9
++
++# But please don't claim about any names longer than 32 chars.
++# (note: this is the prefix of errors `namelength-32-module,
++#  -type, -object, -enumeration, and -bit)
++smilint: hide namelength-32
++
++# Preloading some more modules for special applications.
++tcpdump: load DISMAN-SCRIPT-MIB
++tcpdump: load IF-MIB
++
++smiquery: load IF-MIB
++
+diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb b/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
+index 2b036f9..e1af636 100644
+--- a/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
++++ b/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
+@@ -1,16 +1,26 @@
+ SUMMARY = "A Library to Access SMI MIB Information"
++HOMEPAGE = "https://www.ibr.cs.tu-bs.de/projects/libsmi"
+ 
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3ad3076f9332343a21636cfd351f05b7"
+ 
+-SRC_URI = "ftp://ftp.ibr.cs.tu-bs.de/pub/local/libsmi/${BP}.tar.gz"
++SRC_URI = "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.tar.gz \
++           file://smi.conf \
++          "
+ 
+ SRC_URI[md5sum] = "760b6b1070738158708649ed2c63425e"
+ SRC_URI[sha256sum] = "f048a5270f41bc88b0c3b0a8fe70ca4d716a46b531a0ecaaa87c462f49d74849"
+ 
+ inherit autotools
+ 
++do_install_append () {
++	install -d ${D}${sysconfdir}
++	install -m 0644 ${WORKDIR}/smi.conf ${D}${sysconfdir}/smi.conf
++}
++
+ PACKAGES += "${PN}-mibs ${PN}-pibs"
+ 
+ FILES_${PN}-mibs += "${datadir}/mibs"
+ FILES_${PN}-pibs += "${datadir}/pibs"
++
++RRECOMMENDS_${PN} = "${BPN}-mibs"
+-- 
+2.6.1
 
 
