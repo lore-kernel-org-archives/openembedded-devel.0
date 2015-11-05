@@ -1,36 +1,44 @@
 Return-Path: <rafael.carre@gmail.com>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A55376E2E
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 55D0E76E2E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2015 11:27:00 +0000 (UTC)
-Received: by wicfv8 with SMTP id fv8so7564352wic.0
+	Thu,  5 Nov 2015 11:29:09 +0000 (UTC)
+Received: by wikq8 with SMTP id q8so8462939wik.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Nov 2015 03:27:00 -0800 (PST)
+	Thu, 05 Nov 2015 03:29:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id;
-	bh=saYW3SiPrhhihNu3ewH0AW1k7Ki5Cld2udzvVVvq9vc=;
-	b=uQl8yZnkbzOP0D4Oqd4N3C/HEQkY4tZ1mKyijvB+9TpxXSjDPkjJWtn2qrbnHcchYO
-	ZWQQIYnN1+qlm7BWyv/IyV0xSWk6BPAh2jUSeKsmqSc4WjrJVUyXjJ7KV5ud2MP/gvcq
-	Bkk4u9vC1aBF9lXhSvCLX8Bl6eRSGAQuWzuSaAfnH0T2/3gYFUw6QHFmarIZaEWm0sEg
-	yHgAT74JXCR4L0fYzenLPDRmH1j28AXOvc+YJHX2VVP414GylRzIP8Y4mRn53Izb7T8T
-	hbObW3inMnFHTAwBN1zoi+8Ry33edOKRe5ck0/cPrGYCjbJP+y/CEtOV84Q2cHAPv16I
-	j2Ug==
-X-Received: by 10.194.184.207 with SMTP id ew15mr7466812wjc.99.1446722820510; 
-	Thu, 05 Nov 2015 03:27:00 -0800 (PST)
-Received: from localhost.localdomain
-	(lns-bzn-47f-81-56-255-191.adsl.proxad.net. [81.56.255.191])
-	by smtp.gmail.com with ESMTPSA id m7sm3173089wma.16.2015.11.05.03.26.58
+	h=sender:subject:to:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-type:content-transfer-encoding;
+	bh=7vq08zCxTPcJdJc8ncR9kiGthG+AvmaaxlpgTPkL76g=;
+	b=GRZXd14A7rwDLu84dfm9+ZCepVu8T3BjMdsYOw4B0Y5FibyZsSvMsj2H98em57zKm8
+	+cM2KQMkvY/ZY+AC6Iyp4Ijj12h4webgjYKtuaqmFD+JDKi/GtEveLlaQZH9PGnyjZnW
+	+WaMenoSlspbzGDQCiTXprocql/RL762guOqI9Qw44cOqce2eofNDb5SOyN3Rf15XXsV
+	3QzvCrsmTUVOw0AgxigRJwvnAY4/ki4iKkIbDb+8kCDbMNJJk64ivJeHUgidsuMGAea9
+	fXSBnDExMMPzxC+DfrfhG04AG2zGOfp2ZqGkitJITfuCRJj2RKTOBJrNjJGjMDlr+1/c
+	9OnA==
+X-Received: by 10.194.95.202 with SMTP id dm10mr7963799wjb.56.1446722949717;
+	Thu, 05 Nov 2015 03:29:09 -0800 (PST)
+Received: from [192.168.0.13] (lns-bzn-47f-81-56-255-191.adsl.proxad.net.
+	[81.56.255.191]) by smtp.googlemail.com with ESMTPSA id
+	t126sm7899604wmd.23.2015.11.05.03.29.08
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 05 Nov 2015 03:26:58 -0800 (PST)
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 05 Nov 2015 03:29:08 -0800 (PST)
 Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
-From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Nov 2015 12:26:54 +0100
-Message-Id: <1446722814-21435-1-git-send-email-funman@videolan.org>
-X-Mailer: git-send-email 2.5.0
-Subject: [meta-multimedia][PATCH] VLC: make gnome-vfs configurable
+References: <1446652999-24545-1-git-send-email-funman@videolan.org>
+	<1446652999-24545-3-git-send-email-funman@videolan.org>
+	<20151104222547.GA2556@jama> <563B3682.6000407@videolan.org>
+	<20151105111611.GC2556@jama>
+From: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <funman@videolan.org>
+Message-ID: <563B3D83.4000007@videolan.org>
+Date: Thu, 5 Nov 2015 12:29:07 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
+MIME-Version: 1.0
+In-Reply-To: <20151105111611.GC2556@jama>
+Subject: Re: [meta-multimedia][PATCH 3/3] VLC: drop gnome-vfs, it will be removed from upstream in VLC 3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,27 +52,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2015 11:27:03 -0000
+X-List-Received-Date: Thu, 05 Nov 2015 11:29:10 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 8bit
 
----
-XXX: to be cherry-picked together with <1446652999-24545-3-git-send-email-funman@videolan.org>
+On 05/11/2015 12:16, Martin Jansa wrote:
+> On Thu, Nov 05, 2015 at 11:59:14AM +0100, Rafaël Carré wrote:
+>> Hello,
+>>
+>> On 04/11/2015 23:25, Martin Jansa wrote:
+>>> On Wed, Nov 04, 2015 at 05:03:19PM +0100, Rafaël Carré wrote:
+>>>> ---
+>>>
+>>> Is it still used in 2.2.1 version? we aren't using 3.0 yet:
+>>
+>> Yes, that module is still present in 2.2 (2.2.1 and future 2.2.X versions).
 
- meta-multimedia/recipes-multimedia/vlc/vlc.inc | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index bf08405..ce6e52d 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -60,6 +60,7 @@ PACKAGECONFIG[qt4] = "--enable-qt,--disable-qt, qt4-x11-free"
- PACKAGECONFIG[freerdp] = "--enable-freerdp,--disable-freerdp, freerdp"
- PACKAGECONFIG[notify] = "--enable-notify,--disable-notify, libnotify gtk+"
- PACKAGECONFIG[dvbpsi] = "--enable-dvbpsi,--disable-dvbpsi, libdvbpsi"
-+PACKAGECONFIG[gnome-vfs] = "--enable-gnomevfs,--disable-gnome-vfs, gnome-vfs"
- 
- do_configure_prepend() {
-     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
--- 
-2.5.0
+>> What do you think?
+> 
+> NAK it's not acceptable to make gnome-vfs support undeterministic in
+> 2.2.x just because some future 3.0 recipe won't use it.
 
+Ok
+
+> We already have too many autodetected dependencies again, last bunch
+> added by new 1394 recipes in meta-multimedia:
+> vlc-2.2.1: vlc rdepends on libavc1394, but it isn't a build dependency? [build-deps]
+> vlc-2.2.1: vlc rdepends on libdvdnav, but it isn't a build dependency? [build-deps]
+> vlc-2.2.1: vlc rdepends on libupnp, but it isn't a build dependency? [build-deps]
+> 
+> Add PACKAGECONFIG for it please and to get bonus points add
+
+Done
+
+> PACKAGECONFIG for deps from QA issues above.
+
+I will take a deeper look as there are more than just those
+
+>> Thanks for the feedback
+>>
+>>>>  meta-multimedia/recipes-multimedia/vlc/vlc.inc | 2 +-
+>>>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>>>> index ad5c81d..dddbb5b 100644
+>>>> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>>>> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>>>> @@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>>>>  DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native \
+>>>>     virtual/libsdl libsdl-image dbus dbus-glib libxml2 gnutls \
+>>>>     tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
+>>>> -   libdvdcss libdvdread lua-native lua libidn gnome-vfs \
+>>>> +   libdvdcss libdvdread lua-native lua libidn \
+>>>>     libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
+>>>>     libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
+>>>>     tiff xcb-util-keysyms samba"
 
