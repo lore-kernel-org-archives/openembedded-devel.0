@@ -1,37 +1,46 @@
-Return-Path: <danismostlikely@gmail.com>
-Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
-	[209.85.220.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 7EA73770F4
+Return-Path: <zoltan.kuscsik@linaro.org>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 4237D7702B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2015 05:05:59 +0000 (UTC)
-Received: by pacdm15 with SMTP id dm15so51225115pac.3
+	Thu,  5 Nov 2015 06:31:46 +0000 (UTC)
+Received: by wmec75 with SMTP id c75so4117133wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2015 21:05:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=Ga6Z/MyTaEbVhNLK8Z1UwB8lpxyVyYbsogd0empXzek=;
-	b=uTHV5o204G082oNEBYVos3g5JTv9eBgUJKJdECMt2ShTGWmjRhqrZiPs8WsvV7Bgxo
-	4FjbBensQxpYhFJAY5Iua/+4cvXlQruBlz5KlyAfzmA6MF0Phfy4PAnmcDMMf8fKCM43
-	cqvkDtB8YvJxUapflHdR/Qai5a6DFMGCF7V9t8OSKuQgQtP8kr3TwHrk9C34cm1C3hfQ
-	4+kZrNwKP3prQWKafdXikUM6JJMwBCvHUPfI7L8iNGt6JT/D3JL5QFwSPJ5/hUwjxUdk
-	P9sCSvRtrKx3NiALDYIVxPfgpawvielJ/+qYIFeQwK0JvEYio3GdG+gjTnXEUO7yBiOK
-	UT6g==
-X-Received: by 10.66.172.144 with SMTP id bc16mr6876460pac.114.1446699959571; 
-	Wed, 04 Nov 2015 21:05:59 -0800 (PST)
-Received: from mediabox.local (71-17-233-74.sktn.hsdb.sasknet.sk.ca.
-	[71.17.233.74]) by smtp.gmail.com with ESMTPSA id
-	d13sm5181531pbu.20.2015.11.04.21.05.58
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 04 Nov 2015 21:05:59 -0800 (PST)
-From: Dan McGregor <danismostlikely@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Nov 2015 23:05:55 -0600
-Message-Id: <1446699955-7624-2-git-send-email-danismostlikely@gmail.com>
-X-Mailer: git-send-email 2.6.2.11.gb05c2f9
-In-Reply-To: <1446699955-7624-1-git-send-email-danismostlikely@gmail.com>
-References: <1446699955-7624-1-git-send-email-danismostlikely@gmail.com>
-Subject: [meta-python][PATCH v2 2/2] gateone: update to latest git
+	Wed, 04 Nov 2015 22:31:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linaro_org.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=FPqQr1xYuC6+KGlg/d2TN48JgPlDJ2mR4MuVXkYjax0=;
+	b=JQaBAkXwZQVBRc7g8ciDT6eltdJ7GcCfpb8TnTmx9vk5aFjTjk8v+ijMx89YFGu+m4
+	otrheWF6pjH7q279HtM7cLSGBGVQt08lHJh4QcLqwMDHAFJwEFVVZ0yU3Yv/uzX8APgc
+	rJTVg1URxzNQhpJYVy36zOedJTjCbbNpCScM8+qP3BhKKWgx/4CEAjVcuxkSVYUX+oY4
+	h7sK9Ob3o2AadIPGQtHvk4N4++eiQ8wzF6GxSJLLr3z1MeUWOOhTBw5CpSfUPEDmpbVw
+	1Q99W5z3S9Q6a15uNEP798gO95rtueEDu2vTmPtw+j13Ci+L1CYs0uG/dyY0TBcKfr5V
+	qy7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=FPqQr1xYuC6+KGlg/d2TN48JgPlDJ2mR4MuVXkYjax0=;
+	b=MUnVGnp3s4WtXASm1kpcsV6vjTpxDw07dZAaXc8XJm4XYBkQ7Xuttw0b45JW92KrG6
+	3NUOTibNHY2qoXyM5P9WEFJIiWYHotVDPI+hJdh10N1TPp+eyUdW4emtDAvRU9j2PH/D
+	IPGfmQPC8MKi5tJ/6+0C6R56XfdPR0dvG8l48AnerIIIf6UxgyZXgKjwJiVCaCR0Zy1R
+	q8T+/MDQyJgo32mKh90qyt9c9HTk5JEDaR/hYW09a3P22XPZHmiT5wjCfSKYKrWrWcZN
+	jYmiFt8hQm12CSTEaqDQ8tMDc1lQGBiGbRnpNwEetYpcevgzhLHt6Joq/iLBwgwfXzHm
+	DgIg==
+X-Gm-Message-State: ALoCoQm/8BP6rG0iaqT5L7ZuY0WVVpY+569usg9rbTIQp28e6ai0wJSE9UnUmo5+8Hbq/VqQLe3k
+X-Received: by 10.28.146.136 with SMTP id u130mr1356946wmd.91.1446705105386;
+	Wed, 04 Nov 2015 22:31:45 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.27.34.85 with HTTP; Wed, 4 Nov 2015 22:31:25 -0800 (PST)
+In-Reply-To: <1E07998C-81FF-476F-A066-63266FFDDC1B@gmail.com>
+References: <1446673803-2310-1-git-send-email-max.oss.09@gmail.com>
+	<1E07998C-81FF-476F-A066-63266FFDDC1B@gmail.com>
+From: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
+Date: Thu, 5 Nov 2015 07:31:25 +0100
+Message-ID: <CAAzKXnh3cJ7cLT4a48NUs7L0B-dYAfav3ckvwMds8aT=3PN+Gw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-browser][PATCH] chromium: fix gcc5 compile issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,184 +54,206 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2015 05:05:59 -0000
+X-List-Received-Date: Thu, 05 Nov 2015 06:31:48 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Dan McGregor <dan.mcgregor@usask.ca>
+Why not using pragma in both cases?
+See the discussion on the issue in Chromium upstream:
 
-This version works with pyton-tornado 4.2 as currently distributed
-with OE.
+https://groups.google.com/a/chromium.org/forum/#!topic/chromium-dev/3uwBwunIa7g
 
-Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
----
- ...on.py-Hack-around-broken-gethostname-thin.patch | 26 ----------------------
- .../gateone/gateone/{80oe.conf => 80oe.conf.in}    |  5 +++--
- .../gateone/{gateone-init => gateone-init.in}      |  8 +++----
- .../{gateone.service => gateone.service.in}        |  6 ++---
- .../recipes-connectivity/gateone/gateone_git.bb    | 22 +++++++++++-------
- 5 files changed, 24 insertions(+), 43 deletions(-)
- delete mode 100644 meta-python/recipes-connectivity/gateone/gateone/0001-configuration.py-Hack-around-broken-gethostname-thin.patch
- rename meta-python/recipes-connectivity/gateone/gateone/{80oe.conf => 80oe.conf.in} (81%)
- rename meta-python/recipes-connectivity/gateone/gateone/{gateone-init => gateone-init.in} (85%)
- rename meta-python/recipes-connectivity/gateone/gateone/{gateone.service => gateone.service.in} (38%)
+Z
 
-diff --git a/meta-python/recipes-connectivity/gateone/gateone/0001-configuration.py-Hack-around-broken-gethostname-thin.patch b/meta-python/recipes-connectivity/gateone/gateone/0001-configuration.py-Hack-around-broken-gethostname-thin.patch
-deleted file mode 100644
-index 5f5fa91..0000000
---- a/meta-python/recipes-connectivity/gateone/gateone/0001-configuration.py-Hack-around-broken-gethostname-thin.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From d811d3bdf06d78c93c48bef762c19c392c879077 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Tue, 26 Nov 2013 15:54:10 +0100
--Subject: [PATCH] configuration.py: Hack around broken gethostname thingy
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- gateone/core/configuration.py | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/gateone/core/configuration.py b/gateone/core/configuration.py
--index da41cbd..d1c8222 100644
----- a/gateone/core/configuration.py
--+++ b/gateone/core/configuration.py
--@@ -162,7 +162,7 @@ def define_options(installed=True):
--     ]
--     # Used both http and https above to demonstrate that both are acceptable
--     try:
---        additional_origins = socket.gethostbyname_ex(socket.gethostname())
--+        additional_origins = [] # additional_origins = socket.gethostbyname_ex(socket.gethostname())
--     except socket.gaierror:
--         # Couldn't get any IPs from the hostname
--         additional_origins = []
---- 
--1.8.4.2
--
-diff --git a/meta-python/recipes-connectivity/gateone/gateone/80oe.conf b/meta-python/recipes-connectivity/gateone/gateone/80oe.conf.in
-similarity index 81%
-rename from meta-python/recipes-connectivity/gateone/gateone/80oe.conf
-rename to meta-python/recipes-connectivity/gateone/gateone/80oe.conf.in
-index cde98bc..4503da4 100644
---- a/meta-python/recipes-connectivity/gateone/gateone/80oe.conf
-+++ b/meta-python/recipes-connectivity/gateone/gateone/80oe.conf.in
-@@ -2,13 +2,14 @@
- {
-     "*": {
-         "gateone": { // These settings apply to all of Gate One
-+            "log_file_prefix": "@localstate@/log/gateone.log", // default would be /var/log/gateone/gateone.log
-             "log_file_max_size": 5242880, // 5 megabyte logs for OE by default (default would normally be 100Mb)
-             "log_file_num_backups": 2, // Default is normally 10
-             "origins": ["*"], // Every device has a unique origin
-             "logging": "info",
--            "pid_file": "/var/run/gateone.pid",
-+            "pid_file": "/run/gateone.pid",
-             "session_dir": "/tmp/gateone",
--            "user_dir": "/var/lib/gateone/users"
-+            "user_dir": "@localstate@/lib/gateone/users"
-         },
-         "terminal": {
-             // Disabling session logging for embedded devices is a good idea (limited/slow storage)
-diff --git a/meta-python/recipes-connectivity/gateone/gateone/gateone-init b/meta-python/recipes-connectivity/gateone/gateone/gateone-init.in
-similarity index 85%
-rename from meta-python/recipes-connectivity/gateone/gateone/gateone-init
-rename to meta-python/recipes-connectivity/gateone/gateone/gateone-init.in
-index a1cf5ce..86d655c 100644
---- a/meta-python/recipes-connectivity/gateone/gateone/gateone-init
-+++ b/meta-python/recipes-connectivity/gateone/gateone/gateone-init.in
-@@ -11,13 +11,13 @@
- . /etc/init.d/functions
- 
- NAME=gateone
--DAEMON=/var/lib/gateone/gateone.py
--PIDFILE=/var/run/gateone.pid
--WORKDIR=/var/lib/gateone
-+DAEMON=@bindir@/gateone
-+PIDFILE=/run/gateone.pid
-+WORKDIR=@localstate@/lib/gateone
- 
- do_start() {
-     cd $WORKDIR
--    /usr/bin/python $DAEMON > /dev/null 2>&1 &
-+    @bindir@/python $DAEMON > /dev/null 2>&1 &
-     cd $OLDPWD
- }
- 
-diff --git a/meta-python/recipes-connectivity/gateone/gateone/gateone.service b/meta-python/recipes-connectivity/gateone/gateone/gateone.service.in
-similarity index 38%
-rename from meta-python/recipes-connectivity/gateone/gateone/gateone.service
-rename to meta-python/recipes-connectivity/gateone/gateone/gateone.service.in
-index 7b14d3e..4466727 100644
---- a/meta-python/recipes-connectivity/gateone/gateone/gateone.service
-+++ b/meta-python/recipes-connectivity/gateone/gateone/gateone.service.in
-@@ -1,10 +1,10 @@
- [Unit]
- Description=GateOne daemon
--ConditionPathExists=|/var/lib/gateone
-+ConditionPathExists=|@localstate@/lib/gateone
- 
- [Service]
--WorkingDirectory=/var/lib/gateone
--ExecStart=/usr/bin/python /usr/bin/gateone
-+WorkingDirectory=@localstate@/lib/gateone
-+ExecStart=@bindir@/python @bindir@/gateone
- 
- [Install]
- WantedBy=multi-user.target
-diff --git a/meta-python/recipes-connectivity/gateone/gateone_git.bb b/meta-python/recipes-connectivity/gateone/gateone_git.bb
-index 7eae12a..5ff753e 100644
---- a/meta-python/recipes-connectivity/gateone/gateone_git.bb
-+++ b/meta-python/recipes-connectivity/gateone/gateone_git.bb
-@@ -3,14 +3,13 @@ LICENSE = "AGPL-3.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=834cbc6995db88433db17cdf8953a428"
- HOMEPAGE = "http://liftoffsoftware.com/Products/GateOne"
- 
--PV = "1.2"
--SRCREV = "1528d324088fc1c180b7fdf50f5b5c1af057eef6"
--SRC_URI = "git://github.com/liftoff/GateOne.git \
--           file://0001-configuration.py-Hack-around-broken-gethostname-thin.patch \
-+PV = "1.2+git${SRCPV}"
-+SRCREV = "f7a9be46cb90f57459ebd363d24702de0e651034"
-+SRC_URI = "git://github.com/liftoff/GateOne.git;branch=master \
-            file://gateone-avahi.service \
--           file://80oe.conf \
--           file://gateone.service \
--           file://gateone-init \
-+           file://80oe.conf.in \
-+           file://gateone.service.in \
-+           file://gateone-init.in \
- "
- 
- S = "${WORKDIR}/git"
-@@ -28,7 +27,12 @@ DISTUTILS_INSTALL_ARGS = "--root=${D} \
- do_install_append() {
- 
-     # fix up hardcoded paths
--    sed -i -e s:/usr/bin:${bindir}:g ${WORKDIR}/gateone.service
-+    for file in gateone.service gateone-init 80oe.conf; do
-+        sed -e s:@bindir@:${bindir}:g \
-+            -e s:@localstate@:${localstatedir}:g \
-+            < ${WORKDIR}/$file.in \
-+            > ${WORKDIR}/$file
-+    done
-     
-     install -d ${D}${systemd_unitdir}/system
-     install -m 0644 ${WORKDIR}/gateone.service ${D}${systemd_unitdir}/system
-@@ -49,6 +53,7 @@ FILES_${PN} = "${localstatedir}/lib ${bindir} ${base_libdir} ${sysconfdir} ${PYT
- RDEPENDS_${PN} = "mime-support \
-                   openssh-ssh \
-                   python-compression \
-+                  python-contextlib \
-                   python-crypt \
-                   python-datetime \
-                   python-email \
-@@ -76,6 +81,7 @@ RDEPENDS_${PN} = "mime-support \
-                   python-tornado \
-                   python-unixadmin \
-                   python-xml \
-+                  python-html5lib \
-                   bash \
- "
- 
+On 5 November 2015 at 02:10, Khem Raj <raj.khem@gmail.com> wrote:
+
+>
+> > On Nov 4, 2015, at 1:50 PM, Max Krummenacher <max.oss.09@gmail.com>
+> wrote:
+> >
+> > A chromium build with gcc5 fails with warnings treated as errors.
+> >
+> > bignum.cc, image_util.cc: strict-overflow warning
+> >
+> > Compiles and runs on qemux86-64 with gcc 5.2.0 and still compiles on
+> > armv7a with gcc linaro-4.9.4.
+> >
+>
+> this is ok
+>
+> > Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+> > ---
+> > .../0001-bignum.cc-fix-warning-from-gcc-5.patch    | 56
+> ++++++++++++++++++++++
+> > ...-image_util.cc-disable-warning-from-gcc-5.patch | 37 ++++++++++++++
+> > recipes-browser/chromium/chromium_40.0.2214.91.bb  |  3 ++
+> > 3 files changed, 96 insertions(+)
+> > create mode 100644
+> recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch
+> > create mode 100644
+> recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
+> >
+> > diff --git
+> a/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch
+> b/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch
+> > new file mode 100644
+> > index 0000000..f3d7f77
+> > --- /dev/null
+> > +++
+> b/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch
+> > @@ -0,0 +1,56 @@
+> > +From 689576b2f5c6398f6ef5203fe52edcf86b452790 Mon Sep 17 00:00:00 2001
+> > +From: Max Krummenacher <max.oss.09@gmail.com>
+> > +Date: Tue, 3 Nov 2015 20:51:04 +0100
+> > +Subject: [PATCH 1/2] bignum.cc: fix warning from gcc 5
+> > +
+> > +Refactoring the source seems to workaround the compiler warning.
+> > +
+> > +addresses:
+> > +  ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:105:10: error:
+> assuming
+> > +  signed overflow does not occur when assuming that (X + c) < X is
+> always
+> > +  false [-Werror=strict-overflow]
+> > +      void Bignum::AssignDecimalString(Vector<const char> value) {
+> > +           ^
+> > +
+> > +Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+> > +Upstream-Status: Pending
+> > +
+> > +---
+> > + third_party/WebKit/Source/wtf/dtoa/bignum.cc | 15 +++++++--------
+> > + 1 file changed, 7 insertions(+), 8 deletions(-)
+> > +
+> > +diff --git a/third_party/WebKit/Source/wtf/dtoa/bignum.cc
+> b/third_party/WebKit/Source/wtf/dtoa/bignum.cc
+> > +index a000b46..e5426dd 100644
+> > +--- a/third_party/WebKit/Source/wtf/dtoa/bignum.cc
+> > ++++ b/third_party/WebKit/Source/wtf/dtoa/bignum.cc
+> > +@@ -105,20 +105,19 @@ namespace double_conversion {
+> > +     void Bignum::AssignDecimalString(Vector<const char> value) {
+> > +         // 2^64 = 18446744073709551616 > 10^19
+> > +         const int kMaxUint64DecimalDigits = 19;
+> > ++        int currentLen;
+> > +         Zero();
+> > +         int length = value.length();
+> > +         int pos = 0;
+> > +         // Let's just say that each digit needs 4 bits.
+> > +-        while (length >= kMaxUint64DecimalDigits) {
+> > +-            uint64_t digits = ReadUInt64(value, pos,
+> kMaxUint64DecimalDigits);
+> > +-            pos += kMaxUint64DecimalDigits;
+> > +-            length -= kMaxUint64DecimalDigits;
+> > +-            MultiplyByPowerOfTen(kMaxUint64DecimalDigits);
+> > ++        while (length > 0) {
+> > ++            currentLen = length > kMaxUint64DecimalDigits ?
+> kMaxUint64DecimalDigits : length;
+> > ++            uint64_t digits = ReadUInt64(value, pos, currentLen);
+> > ++            MultiplyByPowerOfTen(currentLen);
+> > +             AddUInt64(digits);
+> > ++            pos += currentLen;
+> > ++            length -= currentLen;
+> > +         }
+> > +-        uint64_t digits = ReadUInt64(value, pos, length);
+> > +-        MultiplyByPowerOfTen(length);
+> > +-        AddUInt64(digits);
+> > +         Clamp();
+> > +     }
+> > +
+> > +--
+> > +1.8.4.5
+> > +
+> > diff --git
+> a/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
+> b/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
+> > new file mode 100644
+> > index 0000000..d62645b
+> > --- /dev/null
+> > +++
+> b/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
+> > @@ -0,0 +1,37 @@
+> > +From 2f674d980a116075dc7123a3e243b1451e4a732d Mon Sep 17 00:00:00 2001
+> > +From: Max Krummenacher <max.oss.09@gmail.com>
+> > +Date: Tue, 3 Nov 2015 22:13:40 +0100
+> > +Subject: [PATCH 2/2] image_util.cc: disable warning from gcc 5
+> > +
+> > +addresses:
+> > +  ../../ui/gfx/image/image_util.cc:50:6: error: assuming signed
+> overflow does
+> > +  not occur when assuming that (X - c) <= X is always true
+> > +  [-Werror=strict-overflow]
+> > +  bool VisibleMargins(const ImageSkia& image, int* leading, int*
+> trailing) {
+> > +       ^
+> > +
+> > +Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+> > +Upstream-Status: Pending
+> > +
+> > +---
+> > + ui/gfx/image/image_util.cc | 3 +++
+> > + 1 file changed, 3 insertions(+)
+> > +
+> > +diff --git a/ui/gfx/image/image_util.cc b/ui/gfx/image/image_util.cc
+> > +index 89a3f8c..d595da3 100644
+> > +--- a/ui/gfx/image/image_util.cc
+> > ++++ b/ui/gfx/image/image_util.cc
+> > +@@ -68,7 +68,10 @@ bool VisibleMargins(const ImageSkia& image, int*
+> leading, int* trailing) {
+> > +   int inner_min = bitmap.width();
+> > +   for (int x = 0; x < bitmap.width(); ++x) {
+> > +     for (int y = 0; y < bitmap.height(); ++y) {
+> > ++#pragma GCC diagnostic push
+> > ++#pragma GCC diagnostic warning "-Wstrict-overflow"
+> > +       if (SkColorGetA(bitmap.getColor(x, y)) > kMinimumVisibleOpacity)
+> {
+> > ++#pragma GCC diagnostic pop
+> > +         inner_min = x;
+> > +         break;
+> > +       }
+> > +--
+> > +1.8.4.5
+> > +
+> > diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb
+> b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+> > index 8bc05ee..3e00b8d 100644
+> > --- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
+> > +++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+> > @@ -28,7 +28,10 @@ SRC_URI = "\
+> >         file://google-chrome.desktop \
+> >         file://chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch \
+> >         file://chromium-40/add_missing_stat_h_include.patch \
+> > +        file://chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch \
+> > +
+> file://chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch \
+> > "
+> > +
+> > #
+> > # * use-egl : Without this packageconfig, the Chromium build will use
+> GLX for creating an OpenGL context in X11,
+> > #             and regular OpenGL for painting operations. Neither are
+> desirable on embedded platforms. With this
+> > --
+> > 1.8.4.5
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+
+
 -- 
-2.6.2.11.gb05c2f9
+Zoltan Kuscsik
 
+Senior Software Developer, Linaro Digital Home Group
+email: zoltan.kuscsik@linaro.org
+IRC: zoli_ on irc.linaro.org
 
