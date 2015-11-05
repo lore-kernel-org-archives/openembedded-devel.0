@@ -1,35 +1,40 @@
-Return-Path: <henry.bruce@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id AEDDD75A31
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id F412C75A31
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2015 19:21:36 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga103.fm.intel.com with ESMTP; 05 Nov 2015 11:21:36 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,248,1444719600"; d="scan'208";a="594711100"
-Received: from orsmsx107.amr.corp.intel.com ([10.22.240.5])
-	by FMSMGA003.fm.intel.com with ESMTP; 05 Nov 2015 11:21:36 -0800
-Received: from orsmsx104.amr.corp.intel.com ([169.254.3.77]) by
-	ORSMSX107.amr.corp.intel.com ([169.254.1.197]) with mapi id
-	14.03.0248.002; Thu, 5 Nov 2015 11:21:35 -0800
-From: "Bruce, Henry" <henry.bruce@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] openjdk-7 and gcc v5
-Thread-Index: AdESnZ0dnPu3CKC7S3uLnmy1oEzhfgASRiOAAPAPEoAAApsgAABkMOyA
-Date: Thu, 5 Nov 2015 19:21:33 +0000
-Message-ID: <1446751249.32751.24.camel@intel.com>
-References: <F81DC1078564A34BB4DA30CAE03814D12D4EB65D@ORSMSX104.amr.corp.intel.com>
-	<CAMKF1sqT-fxjZ5TPMrDEGjMq7MVttucqjDxUf7vp4zVdwusw2A@mail.gmail.com>
-	<1446574645.32751.9.camel@intel.com>
-	<E01AAF5B-5430-4028-948C-767910413B51@gmail.com>
-In-Reply-To: <E01AAF5B-5430-4028-948C-767910413B51@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.7.198.173]
+	Thu,  5 Nov 2015 19:46:06 +0000 (UTC)
+Received: by wicfv8 with SMTP id fv8so16443957wic.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Nov 2015 11:46:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Bt1B1XskqR16GFOjRfBXBjn8HsaN5dmjz+wGwoVVLPs=;
+	b=Sxx8tswz1eLHbwh83vU6fpbHuXtDUh4P4JBnCIn74oQPYUqx1waY7Hfmct4jGfZ2hb
+	dtTVDSR7EMUSNfk38ht2oCG0YpFVBH7EwTkYOaL4TrItcaxZIJ2BHfChkucjHiqji2GZ
+	1cSpP710DZ/nPmanhe8hB1sY9QgdmpxUxRetPDEyac+UoXW+X2zZGMgGfJv6EIAwHmMA
+	PzDppZm4LrzUe8tKCDidGcvgmLNVmYVjPpxGojX/+kaiOtujITnlkqLEPZrDWlOU4lg2
+	Hq/rpnDBatLa+4aBCPyjKATvZQQVkrP6Woqh4ECAm7k0T+MCeSqm8BG8t1qlAC7oY4XG
+	cfJQ==
+X-Received: by 10.194.58.84 with SMTP id o20mr12465568wjq.73.1446752766395;
+	Thu, 05 Nov 2015 11:46:06 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	n17sm9962275wmg.17.2015.11.05.11.46.05
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 05 Nov 2015 11:46:05 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 5 Nov 2015 20:46:17 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151105194617.GF2556@jama>
+References: <1446473021-20957-1-git-send-email-samuli.piippo@theqtcompany.com>
 MIME-Version: 1.0
-Subject: Re: openjdk-7 and gcc v5
+In-Reply-To: <1446473021-20957-1-git-send-email-samuli.piippo@theqtcompany.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-qt5][PATCH] qtbase: include oe-device-extra.pri unconditionally
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,61 +48,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2015 19:21:41 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <FCCA0B813E494C42BDAB898FE958FF9E@intel.com>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 05 Nov 2015 19:46:07 -0000
+X-Groupsio-MsgNum: 58362
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="2FkSFaIQeDFoAt0B"
+Content-Disposition: inline
 
-T24gVHVlLCAyMDE1LTExLTAzIGF0IDExOjMyIC0wODAwLCBLaGVtIFJhaiB3cm90ZToNCj4gPiBP
-biBOb3YgMywgMjAxNSwgYXQgMTA6MTggQU0sIEJydWNlLCBIZW5yeSA8aGVucnkuYnJ1Y2VAaW50
-ZWwuY29tPg0KPiA+IHdyb3RlOg0KPiA+IA0KPiA+IE9uIFRodSwgMjAxNS0xMC0yOSBhdCAxNzo0
-MyAtMDcwMCwgS2hlbSBSYWogd3JvdGU6DQo+ID4gPiBPbiBUaHUsIE9jdCAyOSwgMjAxNSBhdCA0
-OjAwIFBNLCBCcnVjZSwgSGVucnkgPA0KPiA+ID4gaGVucnkuYnJ1Y2VAaW50ZWwuY29tPg0KPiA+
-ID4gd3JvdGU6DQo+ID4gPiA+IE1hbnkgdGhhbmtzIHRvIGNvbnRyaWJ1dG9ycyB3aG8gZml4ZWQg
-b3BlbmpkayBidWlsZCBpc3N1ZXMNCj4gPiA+ID4gaW50cm9kdWNlZCBieSBnY2MgdjUgYW5kIGZv
-ciBtYWludGFpbmVycyBmb3IgcHVzaGluZyB0aGUNCj4gPiA+ID4gdXBkYXRlcy4NCj4gPiA+ID4g
-SG93ZXZlciBvbmUgcHJvYmxlbSByZW1haW5zOiBvcGVuamRrIGJ1aWxkIGZhaWxzIGluDQo+ID4g
-PiA+IG9wZW5qZGsvamRrL21ha2UvamF2YS9uaW8gZHVlIHRvIC1zdGF0aWMgY29tcGlsZXIgZmxh
-ZyBiZWluZw0KPiA+ID4gPiB1c2VkDQo+ID4gPiA+IGluIGNvbmp1bmN0aW9uIHdpdGggLXB0aHJl
-YWQgZ2l2aW5nIGVycm9yDQo+ID4gPiA+IC91c3IvYmluL2xkOiBjYW5ub3QgZmluZCAtbHB0aHJl
-YWQNCj4gPiA+ID4gL3Vzci9iaW4vbGQ6IGNhbm5vdCBmaW5kIC1sYw0KPiA+ID4gPiANCj4gPiA+
-IA0KPiA+ID4gaXRzIG5vdCBjbGVhciBob3cgdGhlIC1zdGF0aWMgZmxhZyBjYW4gY2F1c2UgdGhp
-cy4gbWF5IGJlIGl0cw0KPiA+ID4gdXNpbmcNCj4gPiA+IENDIGZvciBMRCBvciB3aXNlIHZlcnNh
-ID8NCj4gPiANCj4gPiBOb3QgY2xlYXIgdG8gbWUgZWl0aGVyLCBidXQgaWYgeW91IGNyZWF0ZSBh
-IHNpbXBsZSBmaWxlLCBzYXkgdGVzdC5jDQo+ID4gDQo+ID4gaW50IG1haW4oKQ0KPiA+IHsNCj4g
-PiAgcmV0dXJuIDA7DQo+ID4gfQ0KPiA+IA0KPiA+IGFuZCBjb21waWxlIHdpdGggZ2NjIHRlc3Qu
-YyAtcHRocmVhZCAtc3RhdGljDQo+ID4gaXQgZmFpbHMgYXMgZm9sbG93cyB3aXRoIGdjYyB2NQ0K
-PiA+IC91c3IvYmluL2xkOiBjYW5ub3QgZmluZCAtbHB0aHJlYWQNCj4gPiAvdXNyL2Jpbi9sZDog
-Y2Fubm90IGZpbmQgLWxjDQo+ID4gDQo+ID4gYnV0IGNvbXBpbGVzIE9LIHdpdGggZWFybGllciB2
-ZXJzaW9ucyBvZiBnY2MuDQo+IA0KPiBpc27igJl0IHRoaXMgZ2NjIG9uIHlvdXIgYnVpbGQgaG9z
-dCA/DQoNClllcywgaXQgaXMgdGhlIGdjYyBvbiBteSBidWlsZCBob3N0LiANClRoZSBvcGVuamRr
-IHJlY2lwZSBjYXVzZXMgdGhpcyBzcGVjaWZpYyBtYWtlZmlsZSB0byBidWlsZCB3aXRoDQoke0ND
-X0ZPUl9CVUlMRH0gd2hpY2ggaXMgImdjYyIgbm90ICR7Q0N9LiANCg0KDQo+IA0KPiANCj4gPiAN
-Cj4gPiA+IA0KPiA+ID4gPiBJIGZpeGVkIHRoaXMgYnkgcmVtb3ZpbmcgLXN0YXRpYyBmbGFnIGZy
-b20gTWFrZWZpbGUuIE5vdCBzdXJlDQo+ID4gPiA+IG9mDQo+ID4gPiA+IHRoaXMgd2FzIHRoZSBy
-aWdodCB0aGluZyB0byBkbyAoc28gSSBkaWRuJ3Qgc3VibWl0IHBhdGNoKSBidXQNCj4gPiA+ID4g
-aXQNCj4gPiA+ID4gd29ya2VkIGZvciBtZS4NCj4gPiA+ID4gSSBhZGRlZCB0aGUgZm9sbG93aW5n
-IHRvIHRoZSBhbiBvcGVuamRrIGJiYXBwZW5kIGFuZCBpdCBmaXhlZA0KPiA+ID4gPiB0aGUNCj4g
-PiA+ID4gYnVpbGQgYW5kIHJlc3VsdGluZyBqcmUgaXMgcnVubmluZyBPSy4NCj4gPiA+ID4gDQo+
-ID4gPiA+IGRvX2NvbmZpZ3VyZV9hcHBlbmQoKSB7DQo+ID4gPiA+ICAgICAgICBnY2MgLXYgMj4m
-MSB8IGdyZXAgNVwuLg0KPiA+ID4gPiAgICAgICAgaWYgWyAiJD8iID09ICIwIiBdOyB0aGVuDQo+
-ID4gPiANCj4gPiA+IHdoeSB0aGlzIGNoZWNrIGZvciBnY2MgPw0KPiA+IA0KPiA+IEl0IG9ubHkg
-ZmFpbHMgd2l0aCBnY2MgdjUsIHNvIGlmIGl0J3Mgbm90IGJyb2tlbiwgZG9uJ3QgZml4IGl0Li4u
-DQo+ID4gDQo+ID4gPiANCj4gPiA+ID4gICAgICAgICAgICAgICAgc2VkIC1pIHMvLXN0YXRpYy8v
-DQo+ID4gPiA+ICR7Qn0vb3Blbmpkay9qZGsvbWFrZS9qYXZhL25pby9NYWtlZmlsZQ0KPiA+ID4g
-PiAgICAgICAgZmkNCj4gPiA+ID4gfQ0KPiA+ID4gPiANCj4gPiA+ID4gUmVnYXJkcywNCj4gPiA+
-ID4gDQo+ID4gPiA+IEhlbnJ5IEJydWNlDQo+ID4gPiA+IA0KPiA+ID4gPiAtLQ0KPiA+ID4gPiBf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiA+ID4gPiBP
-cGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gPiA+IE9wZW5lbWJlZGRlZC1kZXZl
-bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+ID4gPiA+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRk
-ZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldg0KPiA+ID4gPiBlbA0KPiA+
-IC0tDQo+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18N
-Cj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRl
-dmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCj4gLS0gDQo+IF9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+IE9wZW5lbWJl
-ZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmcNCj4gaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9saXN0
-aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWw=
+--2FkSFaIQeDFoAt0B
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Mon, Nov 02, 2015 at 04:03:41PM +0200, Samuli Piippo wrote:
+> configure parses through the mkspec, but does not handle conditions
+> at all, so oe-device-extra.pri was not included at configure phase.
+> For example QT_QPA_DEFAULT_PLATFORM had no effect for configure.
+> include() is conditional and won't break build even when
+> oe-device-extra.pri does not exist.
+
+And now every log.do_configure shows:
+DEBUG: Executing shell function do_configure
+Cannot read /OE/build/owpb/webos-ports/tmp-glibc/sysroots/qemux86/usr/lib/q=
+t5/mkspecs/oe-device-extra.pri: No such file or directory
+
+Which can confuse some people.. :/
+
+>=20
+> Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
+> ---
+>  recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch b/r=
+ecipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
+> index a9c448d..d377921 100644
+> --- a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
+> +++ b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
+> @@ -240,7 +240,7 @@ index 0000000..d0a4166
+>  +# for the SDK
+>  +isEmpty(QMAKE_QT_CONFIG):QMAKE_QT_CONFIG =3D $(OE_QMAKE_QT_CONFIG)
+>  +
+> -+exists(../oe-device-extra.pri):include(../oe-device-extra.pri)
+> ++include(../oe-device-extra.pri)
+>  +
+>  +load(qt_config)
+>  diff --git a/mkspecs/linux-oe-g++/qplatformdefs.h b/mkspecs/linux-oe-g++=
+/qplatformdefs.h
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--2FkSFaIQeDFoAt0B
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlY7sggACgkQN1Ujt2V2gBwCygCgpCFishFSdq6413kyPX9zMiCi
+KB8AoIecM+vSRi2s+rMA7cZ38pFDbaph
+=S3Xo
+-----END PGP SIGNATURE-----
+
+--2FkSFaIQeDFoAt0B--
