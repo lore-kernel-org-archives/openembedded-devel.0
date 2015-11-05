@@ -1,23 +1,35 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 12982766B2
+Return-Path: <danismostlikely@gmail.com>
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id E4F14766B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2015 01:47:37 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tA51lanW001422
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 4 Nov 2015 17:47:36 -0800 (PST)
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.159) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 4 Nov 2015 17:47:35 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 5 Nov 2015 09:47:30 +0800
-Message-ID: <1446688050-11985-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH V2] wipe: add version 0.23
+	Thu,  5 Nov 2015 03:55:26 +0000 (UTC)
+Received: by pasz6 with SMTP id z6so76127064pas.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Nov 2015 19:55:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=NytfCUH9YfSstFC472WgSyV7ZAm7Bn1S+XTTLRju+Q4=;
+	b=hd7xUuPVuqCiRcex4tq889lzDSfkI684w0xHWVrG7SU3AQuW3QXYH1jlVxxroye5Vd
+	PX5MPxW2l5W2b13EA7YTJAjQts3IndewLr01GmHaqmZAIqYM+Ip9PeWERMs19Th3PY/S
+	382OsDh45V5KHcN22U/zrDP35sjYVEaBrNOGCXpu6oz7O9NSdzhVEE8tTXF4Ox+uspTU
+	Zfl8wlPEDhiJXJn4AdeZIyKmI5pnXaU/1KBsCNvXnqlletYnd/X5x8D1uAYsdpo81S5h
+	k6pATTgxozs0IfRv65eTABJb4AycQpNTz4dCwEvVkL4P+598xTut+kxQUKMcuXbsRm59
+	rUew==
+X-Received: by 10.66.221.105 with SMTP id qd9mr6793878pac.46.1446695725916;
+	Wed, 04 Nov 2015 19:55:25 -0800 (PST)
+Received: from mediabox.local (71-17-233-74.sktn.hsdb.sasknet.sk.ca.
+	[71.17.233.74])
+	by smtp.gmail.com with ESMTPSA id yp9sm4876704pab.1.2015.11.04.19.55.24
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 04 Nov 2015 19:55:25 -0800 (PST)
+From: Dan McGregor <danismostlikely@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  4 Nov 2015 21:55:21 -0600
+Message-Id: <1446695721-21521-1-git-send-email-danismostlikely@gmail.com>
+X-Mailer: git-send-email 2.6.2.11.gb05c2f9
+Subject: [meta-oe][PATCH] tmux: update to 2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,96 +43,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2015 01:47:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 05 Nov 2015 03:55:28 -0000
 
-Wipe is a little command for securely erasing files from magnetic media.
+From: Dan McGregor <dan.mcgregor@usask.ca>
 
-We do not support native, because wipe needs root permission.
+tmux 1.6 is three years old. Update to latest.
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
 ---
- .../files/support-cross-compile-for-linux.patch    | 35 ++++++++++++++++++++++
- meta-oe/recipes-extended/wipe/wipe_git.bb          | 26 ++++++++++++++++
- 2 files changed, 62 insertions(+)
- create mode 100644 meta-oe/recipes-extended/wipe/files/support-cross-compile-for-linux.patch
- create mode 100644 meta-oe/recipes-extended/wipe/wipe_git.bb
+ meta-oe/recipes-extended/tmux/tmux_1.6.bb | 18 ------------------
+ meta-oe/recipes-extended/tmux/tmux_2.1.bb | 17 +++++++++++++++++
+ 2 files changed, 17 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/tmux/tmux_1.6.bb
+ create mode 100644 meta-oe/recipes-extended/tmux/tmux_2.1.bb
 
-diff --git a/meta-oe/recipes-extended/wipe/files/support-cross-compile-for-linux.patch b/meta-oe/recipes-extended/wipe/files/support-cross-compile-for-linux.patch
+diff --git a/meta-oe/recipes-extended/tmux/tmux_1.6.bb b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
+deleted file mode 100644
+index b4294d7..0000000
+--- a/meta-oe/recipes-extended/tmux/tmux_1.6.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-SUMMARY = "Terminal multiplexer"
+-HOMEPAGE = "http://tmux.sourceforge.net"
+-SECTION = "console/utils"
+-
+-LICENSE = "ISC"
+-LIC_FILES_CHKSUM = "file://tmux.c;beginline=3;endline=17;md5=8685b4455330a940fab1ff451aa941a0"
+-
+-DEPENDS = "ncurses libevent"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/tmux/${BP}.tar.gz"
+-SRC_URI[md5sum] = "3e37db24aa596bf108a0442a81c845b3"
+-SRC_URI[sha256sum] = "faee08ba1bd8c22537cd5b7458881d1bdb4985df88ed6bc5967c56881a7efbd6"
+-
+-inherit autotools pkgconfig
+-
+-do_configure_prepend () {
+-    sed -i -e 's:-I/usr/local/include::' ${S}/Makefile.am || bb_fatal "sed failed"
+-}
+diff --git a/meta-oe/recipes-extended/tmux/tmux_2.1.bb b/meta-oe/recipes-extended/tmux/tmux_2.1.bb
 new file mode 100644
-index 0000000..fb3aee8
+index 0000000..6e2c88d
 --- /dev/null
-+++ b/meta-oe/recipes-extended/wipe/files/support-cross-compile-for-linux.patch
-@@ -0,0 +1,36 @@
-+From 35f14bd5aba2ed6cee258e11eab42c408afc04d0 Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Wed, 4 Nov 2015 02:29:05 -0500
-+Subject: [PATCH] Makefile: support cross compile for linux
++++ b/meta-oe/recipes-extended/tmux/tmux_2.1.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Terminal multiplexer"
++HOMEPAGE = "http://tmux.sourceforge.net"
++SECTION = "console/utils"
 +
-+Upstream-Status: Pending
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ Makefile | 5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
++LICENSE = "ISC"
++LIC_FILES_CHKSUM = "file://tmux.c;beginline=3;endline=17;md5=8685b4455330a940fab1ff451aa941a0"
 +
-+diff --git a/Makefile b/Makefile
-+index 17d9758..9e74cdf 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -41,7 +41,7 @@
-+ # Linux 2.0.x
-+ #
-+ 
-+-CC_LINUX=gcc
-++CC_LINUX=$(CC)
-+ CCO_LINUX=-Wall -DHAVE_DEV_URANDOM -DHAVE_OSYNC -DHAVE_STRCASECMP -DHAVE_RANDOM -DWEAK_RC6 -DSYNC_WAITS_FOR_SYNC -DFIND_DEVICE_SIZE_BY_BLKGETSIZE -DSIXTYFOUR -D__USE_LARGEFILE -D_FILE_OFFSET_BITS=64
-+ # default should be to turn off debugging and to turn on optimization.
-+ #CCO_LINUX+=-O9 -pipe -fomit-frame-pointer -finline-functions -funroll-loops -fstrength-reduce
-+@@ -185,6 +185,7 @@ clean	:
-+ 		rm -f wipe $(OBJECTS) wipe.tr-asc.1 version.h
-+ 
-+ install:
-+-	install -m755 -o root -g root wipe $(DESTDIR)/usr/bin
-++	[ -e $(DESTDIR)$(bindir) ] || mkdir -p $(DESTDIR)$(bindir)
-++	install -m755 -o root -g root wipe $(DESTDIR)$(bindir)
-+ 
-+ .PHONY: always clean install
-+-- 
-+1.9.1
++DEPENDS = "ncurses libevent"
 +
-diff --git a/meta-oe/recipes-extended/wipe/wipe_git.bb b/meta-oe/recipes-extended/wipe/wipe_git.bb
-new file mode 100644
-index 0000000..70229f0
---- /dev/null
-+++ b/meta-oe/recipes-extended/wipe/wipe_git.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "A UNIX tool for secure deletion"
-+DESCRIPTION = "Wipe is a little command for securely erasing files from \
-+magnetic media. It compiles under various unix platforms, \
-+including Linux 2. * , (Open, Net, Free)BSD, aix 4.1, SunOS \
-+5.5.1, Solaris 2.6. wipe is released under the GPL. Pre-compiled \
-+packages are available on most Linux distributions. \
-+Under Debian, the package name is wipe"
-+HOMEPAGE = "http://lambda-diode.com/software/wipe/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://GPL;md5=0636e73ff0215e8d672dc4c32c317bb3"
 +
-+SRC_URI = "git://github.com/berke/wipe.git;branch=master \
-+           file://support-cross-compile-for-linux.patch \
-+          "
-+SRCREV = "d9c100c9cd0b1cbbe4359e4d6c9a035d11e7597c"
-+PV = "0.23+git${SRCPV}"
++SRC_URI = "git://github.com/tmux/tmux.git;branch=master"
++SRCREV ?= "310f0a960ca64fa3809545badc629c0c166c6cd2"
 +
 +S = "${WORKDIR}/git"
++B = "${WORKDIR}/build"
 +
-+EXTRA_OEMAKE = "linux"
-+
-+do_install() {
-+	make install DESTDIR=${D}
-+}
-+
-+do_configure[noexec] = "1"
++inherit autotools pkgconfig
 -- 
-1.9.1
+2.6.2.11.gb05c2f9
 
 
