@@ -1,39 +1,40 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id A4A0E77115
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
+	[209.85.220.52])
+	by mail.openembedded.org (Postfix) with ESMTP id A610675E2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2015 23:44:34 +0000 (UTC)
-Received: by wmeg8 with SMTP id g8so257926wme.0
+	Thu,  5 Nov 2015 01:10:55 +0000 (UTC)
+Received: by pasz6 with SMTP id z6so71484172pas.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2015 15:44:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=uzYSpSz+nA0pA7LbnYHF9PT+sFdYa2KFAvctZasMvYM=;
-	b=LalF5wBZ0hz1UdXhBwN3AfV1YUux+xa+Ft7AQShDNU9fPU6u/C26ZjlzQu3piYONOv
-	zlHB+a0TOizkuIB5c2Tqz6E8RNUAHZW9yzf5yK2GNvTWWfv8gFiTyTqnagYUbbM7fkKV
-	7hNx/DLUjDv1I2uj/aTYkMm5MvFEsexgjN0k0tkCqO+vC2N++rKQmGwFVKH9CdJRnWAK
-	M68cuXryUaMr42xjNvDigwecsmNDvrzjbTzsb04oLaYwFsxhTq1cv43/3tpfnGzDGIS0
-	NyKoDfpO+fbK5y3faCEXaGc4vgG1DaCgFX1O//++nTsZyBT+jy+VcLT2YBUkZ8LrApdx
-	juCA==
-X-Received: by 10.28.174.130 with SMTP id x124mr6891719wme.12.1446680674337;
-	Wed, 04 Nov 2015 15:44:34 -0800 (PST)
-Received: from localhost.localdomain (p5B0A127D.dip0.t-ipconnect.de.
-	[91.10.18.125]) by smtp.googlemail.com with ESMTPSA id
-	184sm5390014wmk.10.2015.11.04.15.44.33
+	Wed, 04 Nov 2015 17:10:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=sE0a6lLY12sVD8LZPBeHmQeITNptREmfD9NIj3v72Us=;
+	b=c0sm6/A9DCkj/vU00H1YcRAQT5FiNfAmhkaR4T4C2vpUZBLMvZ6hYEsnQImALQUeGw
+	d1caxLfxemi0Esw8I9e9hL4kPFvXMSbYJajJXgtB4vlLKsNXb8lPAsECiVPHpCvS34oQ
+	dxBrYRsr+eGE/7X1TuO2Y0Lr9CqRLu5ZOgXSxu7hMsabmtfOPVJZwZgUM8IFM7e9rbjM
+	XHH75USLowiQcnKrbtTSHaB9w2pDTdwB56jQs4XfGZwPBfSBUpVTX0j1K/Mps2ZEaqh0
+	TcQ4Z3Q4IImFsSaRqQ6jaazTbOUNYm01ZMJAT4LFw4nXGT1ZYREd+bFxhABWc+2jxyax
+	5XHA==
+X-Received: by 10.68.229.200 with SMTP id ss8mr6026001pbc.38.1446685855219;
+	Wed, 04 Nov 2015 17:10:55 -0800 (PST)
+Received: from [192.168.0.4] (c-76-103-142-85.hsd1.ca.comcast.net.
+	[76.103.142.85]) by smtp.gmail.com with ESMTPSA id
+	xu5sm4354670pab.12.2015.11.04.17.10.54
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Nov 2015 15:44:33 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 04 Nov 2015 17:10:54 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3106\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1446673803-2310-1-git-send-email-max.oss.09@gmail.com>
+Date: Wed, 4 Nov 2015 17:10:49 -0800
+Message-Id: <1E07998C-81FF-476F-A066-63266FFDDC1B@gmail.com>
+References: <1446673803-2310-1-git-send-email-max.oss.09@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Nov 2015 00:44:00 +0100
-Message-Id: <1446680640-31722-19-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1446680640-31722-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1446680640-31722-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [PATCH][v2 18/18] samba: install pam libraries to base_libdir
+X-Mailer: Apple Mail (2.3106)
+Subject: Re: [meta-browser][PATCH] chromium: fix gcc5 compile issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,56 +48,218 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2015 23:44:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 05 Nov 2015 01:10:55 -0000
+X-Groupsio-MsgNum: 58321
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_E9AEBD08-B5F9-48E4-B1C1-27D10A18CB9F";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-that's where libpam installs libraries and expects them
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-connectivity/samba/samba_4.1.12.bb | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb b/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
-index 03b4f75..ca0f241 100644
---- a/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
-+++ b/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
-@@ -63,7 +63,7 @@ EXTRA_OECONF += "--enable-fhs \
-                  --with-piddir=${localstatedir}/run \
-                  --with-sockets-dir=${localstatedir}/run/samba \
-                  --with-modulesdir=${libdir}/samba \
--                 --with-pammodulesdir=${libdir}/security \
-+                 --with-pammodulesdir=${base_libdir}/security \
-                  --with-lockdir=${localstatedir}/lib/samba \
-                  --with-cachedir=${localstatedir}/lib/samba \
-                  --with-perl-lib-install-dir=${PERL_VERNDORLIB} \
-@@ -113,7 +113,7 @@ do_install_append() {
- PACKAGES += "${PN}-python ${PN}-python-dbg ${PN}-pidl libwinbind libwinbind-dbg libwinbind-krb5-locator"
- 
- FILES_${PN} += "/run \
--                ${libdir}/security/pam_smbpass.so \
-+                ${base_libdir}/security/pam_smbpass.so \
-                 ${libdir}/tmpfiles.d/* \
-                "
- 
-@@ -126,12 +126,12 @@ FILES_${PN}-dbg += "${libdir}/samba/idmap/.debug/* \
-                     ${libdir}/samba/nss_info/.debug/* \
-                     ${libdir}/samba/ldb/.debug/* \
-                     ${libdir}/samba/vfs/.debug/* \
--                    ${libdir}/security/.debug/pam_smbpass.so \
-+                    ${base_libdir}/security/.debug/pam_smbpass.so \
-                    "
- 
--FILES_libwinbind = "${libdir}/security/pam_winbind.so"
-+FILES_libwinbind = "${base_libdir}/security/pam_winbind.so"
- FILES_libwinbind += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_unitdir}/system/winbind.service', '', d)}"
--FILES_libwinbind-dbg = "${libdir}/security/.debug/pam_winbind.so"
-+FILES_libwinbind-dbg = "${base_libdir}/security/.debug/pam_winbind.so"
- FILES_libwinbind-krb5-locator = "${libdir}/winbind_krb5_locator.so"
- 
- FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
--- 
-2.1.0
+--Apple-Mail=_E9AEBD08-B5F9-48E4-B1C1-27D10A18CB9F
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
 
+> On Nov 4, 2015, at 1:50 PM, Max Krummenacher <max.oss.09@gmail.com> =
+wrote:
+>=20
+> A chromium build with gcc5 fails with warnings treated as errors.
+>=20
+> bignum.cc, image_util.cc: strict-overflow warning
+>=20
+> Compiles and runs on qemux86-64 with gcc 5.2.0 and still compiles on
+> armv7a with gcc linaro-4.9.4.
+>=20
+
+this is ok
+
+> Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+> ---
+> .../0001-bignum.cc-fix-warning-from-gcc-5.patch    | 56 =
+++++++++++++++++++++++
+> ...-image_util.cc-disable-warning-from-gcc-5.patch | 37 ++++++++++++++
+> recipes-browser/chromium/chromium_40.0.2214.91.bb  |  3 ++
+> 3 files changed, 96 insertions(+)
+> create mode 100644 =
+recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-f=
+rom-gcc-5.patch
+> create mode 100644 =
+recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-w=
+arning-from-gcc-5.patch
+>=20
+> diff --git =
+a/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning=
+-from-gcc-5.patch =
+b/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning=
+-from-gcc-5.patch
+> new file mode 100644
+> index 0000000..f3d7f77
+> --- /dev/null
+> +++ =
+b/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning=
+-from-gcc-5.patch
+> @@ -0,0 +1,56 @@
+> +=46rom 689576b2f5c6398f6ef5203fe52edcf86b452790 Mon Sep 17 00:00:00 =
+2001
+> +From: Max Krummenacher <max.oss.09@gmail.com>
+> +Date: Tue, 3 Nov 2015 20:51:04 +0100
+> +Subject: [PATCH 1/2] bignum.cc: fix warning from gcc 5
+> +
+> +Refactoring the source seems to workaround the compiler warning.
+> +
+> +addresses:
+> +  ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:105:10: error: =
+assuming
+> +  signed overflow does not occur when assuming that (X + c) < X is =
+always
+> +  false [-Werror=3Dstrict-overflow]
+> +      void Bignum::AssignDecimalString(Vector<const char> value) {
+> +           ^
+> +
+> +Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+> +Upstream-Status: Pending
+> +
+> +---
+> + third_party/WebKit/Source/wtf/dtoa/bignum.cc | 15 +++++++--------
+> + 1 file changed, 7 insertions(+), 8 deletions(-)
+> +
+> +diff --git a/third_party/WebKit/Source/wtf/dtoa/bignum.cc =
+b/third_party/WebKit/Source/wtf/dtoa/bignum.cc
+> +index a000b46..e5426dd 100644
+> +--- a/third_party/WebKit/Source/wtf/dtoa/bignum.cc
+> ++++ b/third_party/WebKit/Source/wtf/dtoa/bignum.cc
+> +@@ -105,20 +105,19 @@ namespace double_conversion {
+> +     void Bignum::AssignDecimalString(Vector<const char> value) {
+> +         // 2^64 =3D 18446744073709551616 > 10^19
+> +         const int kMaxUint64DecimalDigits =3D 19;
+> ++        int currentLen;
+> +         Zero();
+> +         int length =3D value.length();
+> +         int pos =3D 0;
+> +         // Let's just say that each digit needs 4 bits.
+> +-        while (length >=3D kMaxUint64DecimalDigits) {
+> +-            uint64_t digits =3D ReadUInt64(value, pos, =
+kMaxUint64DecimalDigits);
+> +-            pos +=3D kMaxUint64DecimalDigits;
+> +-            length -=3D kMaxUint64DecimalDigits;
+> +-            MultiplyByPowerOfTen(kMaxUint64DecimalDigits);
+> ++        while (length > 0) {
+> ++            currentLen =3D length > kMaxUint64DecimalDigits ? =
+kMaxUint64DecimalDigits : length;
+> ++            uint64_t digits =3D ReadUInt64(value, pos, currentLen);
+> ++            MultiplyByPowerOfTen(currentLen);
+> +             AddUInt64(digits);
+> ++            pos +=3D currentLen;
+> ++            length -=3D currentLen;
+> +         }
+> +-        uint64_t digits =3D ReadUInt64(value, pos, length);
+> +-        MultiplyByPowerOfTen(length);
+> +-        AddUInt64(digits);
+> +         Clamp();
+> +     }
+> +
+> +--
+> +1.8.4.5
+> +
+> diff --git =
+a/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable=
+-warning-from-gcc-5.patch =
+b/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable=
+-warning-from-gcc-5.patch
+> new file mode 100644
+> index 0000000..d62645b
+> --- /dev/null
+> +++ =
+b/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable=
+-warning-from-gcc-5.patch
+> @@ -0,0 +1,37 @@
+> +=46rom 2f674d980a116075dc7123a3e243b1451e4a732d Mon Sep 17 00:00:00 =
+2001
+> +From: Max Krummenacher <max.oss.09@gmail.com>
+> +Date: Tue, 3 Nov 2015 22:13:40 +0100
+> +Subject: [PATCH 2/2] image_util.cc: disable warning from gcc 5
+> +
+> +addresses:
+> +  ../../ui/gfx/image/image_util.cc:50:6: error: assuming signed =
+overflow does
+> +  not occur when assuming that (X - c) <=3D X is always true
+> +  [-Werror=3Dstrict-overflow]
+> +  bool VisibleMargins(const ImageSkia& image, int* leading, int* =
+trailing) {
+> +       ^
+> +
+> +Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+> +Upstream-Status: Pending
+> +
+> +---
+> + ui/gfx/image/image_util.cc | 3 +++
+> + 1 file changed, 3 insertions(+)
+> +
+> +diff --git a/ui/gfx/image/image_util.cc b/ui/gfx/image/image_util.cc
+> +index 89a3f8c..d595da3 100644
+> +--- a/ui/gfx/image/image_util.cc
+> ++++ b/ui/gfx/image/image_util.cc
+> +@@ -68,7 +68,10 @@ bool VisibleMargins(const ImageSkia& image, int* =
+leading, int* trailing) {
+> +   int inner_min =3D bitmap.width();
+> +   for (int x =3D 0; x < bitmap.width(); ++x) {
+> +     for (int y =3D 0; y < bitmap.height(); ++y) {
+> ++#pragma GCC diagnostic push
+> ++#pragma GCC diagnostic warning "-Wstrict-overflow"
+> +       if (SkColorGetA(bitmap.getColor(x, y)) > =
+kMinimumVisibleOpacity) {
+> ++#pragma GCC diagnostic pop
+> +         inner_min =3D x;
+> +         break;
+> +       }
+> +--
+> +1.8.4.5
+> +
+> diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb =
+b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+> index 8bc05ee..3e00b8d 100644
+> --- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
+> +++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+> @@ -28,7 +28,10 @@ SRC_URI =3D "\
+>         file://google-chrome.desktop \
+>         =
+file://chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch \
+>         file://chromium-40/add_missing_stat_h_include.patch \
+> +        =
+file://chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch \
+> +        =
+file://chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch \
+> "
+> +
+> #
+> # * use-egl : Without this packageconfig, the Chromium build will use =
+GLX for creating an OpenGL context in X11,
+> #             and regular OpenGL for painting operations. Neither are =
+desirable on embedded platforms. With this
+> --
+> 1.8.4.5
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+--Apple-Mail=_E9AEBD08-B5F9-48E4-B1C1-27D10A18CB9F
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlY6rJ0ACgkQuwUzVZGdMxQFgACZAS4oKY20Sh/fY5rXT4Mm1XsK
+Fn4An0Lo3fStL4S0BKt0AB/fO1Vf/5Yj
+=wS8O
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_E9AEBD08-B5F9-48E4-B1C1-27D10A18CB9F--
