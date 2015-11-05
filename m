@@ -1,43 +1,37 @@
 Return-Path: <rafael.carre@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 053BB75D4A
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 6735775D4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2015 10:59:18 +0000 (UTC)
-Received: by wikq8 with SMTP id q8so7946720wik.1
+	Thu,  5 Nov 2015 11:15:27 +0000 (UTC)
+Received: by wimw2 with SMTP id w2so7808524wim.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Nov 2015 02:59:18 -0800 (PST)
+	Thu, 05 Nov 2015 03:15:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:subject:to:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-type:content-transfer-encoding;
-	bh=YGAOYVqNpES5xnP8BtcafeEMxGPAYNc7HinT1YeYiW4=;
-	b=igl6zHeaY8Fqk5HjhJeNgcnpcIiaOMuVh5t79fF1yF79qus2un6LnVu9mAoQJa5Zp6
-	feoUKOe5Sb74diWs8Kgvno1k6csn686ozHD/VHeaDOdHdqLi7RSRzXqEg2Xw4N7z1VYp
-	Fw8iKyKhWxVtulGBmJysYAAz9fK6U5f2zt1TztHP7f6kw4HWB9jV2VWS5BFKgeagpmOu
-	EZ/P86I6Xe6iqf34PgOph2wfar4c6FEppEjrAj9VmHaDECdmfVn9LlOiIpCzcKo27Bfi
-	hDkOYPnV1NoUI/v6q9EcGnfluRagObQEhLKZGvIFkEuh/3XalhHre/FqCn0+4+Rh8WBt
-	1g2A==
-X-Received: by 10.194.190.19 with SMTP id gm19mr8605340wjc.0.1446721158272;
-	Thu, 05 Nov 2015 02:59:18 -0800 (PST)
-Received: from [192.168.0.13] ([81.56.255.191])
-	by smtp.googlemail.com with ESMTPSA id
-	q1sm6350375wjy.31.2015.11.05.02.59.16
+	h=sender:from:to:subject:date:message-id;
+	bh=7s+NuePbRQo6iZIZVM+TYzEJNWeOrihrzyzmtiavZYU=;
+	b=R1Ne2GC7p/qDXRWBEkTtD6mlEOwR+xrk40JaHyFelLYy6xb8nURsr8gbg7DLBqYP4n
+	sJCxDLabzZ3gqQoXm9gv+1ZwwiMjKX2tPy3u3tqsP8O9RiiLDUNcMB4m/2eYKmvh3pgw
+	6/QQXcXdS6y6yNij3xjw1cduUH6V21uwgYPVTju5lbI3ViMcO8stfSSbI4DpYa9FWVHn
+	Dyj1ik6Ozaok+sCI+KA7/1JvaaCG5RASflICfT8KxgWmDUh/STmp1L0N+QblY2sFPG/e
+	S/NthO3dKZ0Eca3r9/198dkB9eqQ0DzACXqQrjR7ArSg3KchPaiNXWaNzku5JaBkTJTO
+	BA7A==
+X-Received: by 10.194.179.41 with SMTP id dd9mr7830465wjc.123.1446722127148;
+	Thu, 05 Nov 2015 03:15:27 -0800 (PST)
+Received: from localhost.localdomain
+	(lns-bzn-47f-81-56-255-191.adsl.proxad.net. [81.56.255.191])
+	by smtp.gmail.com with ESMTPSA id
+	r65sm33572803wmb.20.2015.11.05.03.15.25
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 05 Nov 2015 02:59:17 -0800 (PST)
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 05 Nov 2015 03:15:26 -0800 (PST)
 Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
+From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1446652999-24545-1-git-send-email-funman@videolan.org>
-	<1446652999-24545-3-git-send-email-funman@videolan.org>
-	<20151104222547.GA2556@jama>
-From: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <funman@videolan.org>
-Message-ID: <563B3682.6000407@videolan.org>
-Date: Thu, 5 Nov 2015 11:59:14 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
-MIME-Version: 1.0
-In-Reply-To: <20151104222547.GA2556@jama>
-Subject: Re: [meta-multimedia][PATCH 3/3] VLC: drop gnome-vfs, it will be removed from upstream in VLC 3.0
+Date: Thu,  5 Nov 2015 12:15:19 +0100
+Message-Id: <1446722120-6291-1-git-send-email-funman@videolan.org>
+X-Mailer: git-send-email 2.5.0
+Subject: [meta-multimedia][PATCH 1/2] Add libdvbpsi 1.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,61 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2015 10:59:19 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 05 Nov 2015 11:15:28 -0000
 
-Hello,
+---
+ .../recipes-multimedia/libdvbpsi/libdvbpsi_1.3.0.bb          | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/libdvbpsi/libdvbpsi_1.3.0.bb
 
-On 04/11/2015 23:25, Martin Jansa wrote:
-> On Wed, Nov 04, 2015 at 05:03:19PM +0100, Rafaël Carré wrote:
->> ---
-> 
-> Is it still used in 2.2.1 version? we aren't using 3.0 yet:
-
-Yes, that module is still present in 2.2 (2.2.1 and future 2.2.X versions).
-
-I'm testing the waters here, as I couldn't build gnome-vfs, and since
-that module
-is being removed from upstream (again, in future 3.0 version but not
-2.2.X), I
-didn't bother to add a PACKAGECONFIG knob for it.
-
-With this patch the gnome-vfs module will still if gnome-vfs is present,
-although it will not load at runtime if gnome-vfs is not installed (without
-preventing the rest of VLC to work properly).
-
-It would be in the same position than the libarchive, dvdnav, samba,
-ssh2 modules, etc
-which coincidentally implement the capabilities that the deprecated (in
-gnome) gnome-vfs
-provides :)
-
-So this simple patch fixes my build failure and at the same time reduces
-future work for when
-VLC 3.0 will be released.
-
-
-What do you think?
-
-
-Thanks for the feedback
-
->>  meta-multimedia/recipes-multimedia/vlc/vlc.inc | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
->> index ad5c81d..dddbb5b 100644
->> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
->> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
->> @@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->>  DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native \
->>     virtual/libsdl libsdl-image dbus dbus-glib libxml2 gnutls \
->>     tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
->> -   libdvdcss libdvdread lua-native lua libidn gnome-vfs \
->> +   libdvdcss libdvdread lua-native lua libidn \
->>     libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
->>     libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
->>     tiff xcb-util-keysyms samba"
+diff --git a/meta-multimedia/recipes-multimedia/libdvbpsi/libdvbpsi_1.3.0.bb b/meta-multimedia/recipes-multimedia/libdvbpsi/libdvbpsi_1.3.0.bb
+new file mode 100644
+index 0000000..48b0111
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/libdvbpsi/libdvbpsi_1.3.0.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "libdvbpsi is a simple library designed for decoding \
++and generation of MPEG TS and DVB PSI tables according to standards \
++ISO/IEC 13818 and ITU-T H.222.0."
++HOMEPAGE = "http://www.videolan.org/developers/libdvbpsi.html"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++
++SRC_URI = "http://download.videolan.org/pub/libdvbpsi/${PV}/libdvbpsi-${PV}.tar.bz2"
++SRC_URI[md5sum] = "2b217039a1299000c39423441f77e76a"
++SRC_URI[sha256sum] = "a2fed1d11980662f919bbd1f29e2462719e0f6227e1a531310bd5a706db0a1fe"
++
++inherit autotools
+-- 
+2.5.0
 
 
