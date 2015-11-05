@@ -1,34 +1,35 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-oi0-f53.google.com (mail-oi0-f53.google.com
-	[209.85.218.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 387EE75D4A
+Return-Path: <ulfalizer@gmail.com>
+Received: from mail-yk0-f176.google.com (mail-yk0-f176.google.com
+	[209.85.160.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 7FCCD76E70
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2015 13:14:37 +0000 (UTC)
-Received: by oiad129 with SMTP id d129so46340415oia.0
+	Thu,  5 Nov 2015 13:36:32 +0000 (UTC)
+Received: by ykdv3 with SMTP id v3so40401856ykd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Nov 2015 05:14:37 -0800 (PST)
+	Thu, 05 Nov 2015 05:36:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=MXd144Ln3caYN0AQKF1ZiIxmiy5OM1mKAr02NdukVTM=;
-	b=gAFQZH3zIBn8ToEyjSPA4ys2RtIPAHsKYJWLxbV73q2fMiYyw9Jh54fDKJSz35z6iJ
-	2amZ8eGklncem4CEVTGHVBTlokw1S2q3jSViU8hHh1hI3RJxL1RZg628dghsjYTDHQQU
-	ydN7qQfZne1D4u2hReduQpbIBm542vk1EYSSjaAVMNEpJEvPfRUqwgNUVbG4wm2HOKs2
-	OB76vTw/JoJn+lT6xEgutH67/GkXTmKY08/OwoNTV7EYlXqX12mGQGhe2iCHkyV1njOO
-	oYj9+vhGgKl3eQPNuxJN6hGHRpDQ8HO5qzbFVcmI+Bi7Lal0ggMLFwD+ev8x9/pE6Cgq
-	ZxXQ==
+	:cc:content-type;
+	bh=iXNPebcs5ZLjH6O4+hu2UrVu3/7ffZxKspoe+UBdP3M=;
+	b=FtnK4V3LT5XMENQLASFMpZ8tlsE1zVLga7jF5f84FbgvqntzR9SlsDXY+trqc9Tx4m
+	tMfASt6AOMI9o/EBbEYkwL/gKFyUM0DLkxJn5wovHC7mpmw7uTH+AdYGl1bJKCbAy8mn
+	gkjGSJI1sPvabpdpuH+H1sp0ND3VzmNfNaG6ujvM5hRYbw31h8EsMX8tWCvKYt51/0np
+	e7Pe7bPvnRxUn5PmOBEPaI6dezJsWKQTYxxozsksckmNJ2AUbCmofsPZrg1EbOOyisBn
+	Rge0A04CnGUSFNfgIsfB8FU0HZYBcje+zzTcAurRrXqfgNaSqu1/Umk3L7nDaW+eOXQx
+	Qhig==
 MIME-Version: 1.0
-X-Received: by 10.202.195.208 with SMTP id t199mr4132094oif.117.1446729277449; 
-	Thu, 05 Nov 2015 05:14:37 -0800 (PST)
-Received: by 10.202.177.86 with HTTP; Thu, 5 Nov 2015 05:14:37 -0800 (PST)
-In-Reply-To: <CAAzKXnh3cJ7cLT4a48NUs7L0B-dYAfav3ckvwMds8aT=3PN+Gw@mail.gmail.com>
-References: <1446673803-2310-1-git-send-email-max.oss.09@gmail.com>
-	<1E07998C-81FF-476F-A066-63266FFDDC1B@gmail.com>
-	<CAAzKXnh3cJ7cLT4a48NUs7L0B-dYAfav3ckvwMds8aT=3PN+Gw@mail.gmail.com>
-Date: Thu, 5 Nov 2015 14:14:37 +0100
-Message-ID: <CAEHkU3WR6yyGb80CGF9vFBVaYnzOJy8fih6zU5zf755pL7bvNg@mail.gmail.com>
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser][PATCH] chromium: fix gcc5 compile issues
+X-Received: by 10.31.49.22 with SMTP id x22mr6907257vkx.60.1446730592812; Thu,
+	05 Nov 2015 05:36:32 -0800 (PST)
+Received: by 10.103.77.91 with HTTP; Thu, 5 Nov 2015 05:36:32 -0800 (PST)
+In-Reply-To: <20151105125733.GE2556@jama>
+References: <CAFkk2KQhpgBHLo2AyxWAL9aB1AQRi4BM3DCOanbCKBY4wKb0Gg@mail.gmail.com>
+	<20151105125733.GE2556@jama>
+Date: Thu, 5 Nov 2015 14:36:32 +0100
+Message-ID: <CAFkk2KSnaBQEzhFj+F3_c9k1J+mQFgie6ZbMK465TOMi0qHSZw@mail.gmail.com>
+From: Ulf Magnusson <ulfalizer@gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, mark.asselstine@windriver.com
+Subject: Re: meta-openembedded/meta-ruby: ruby-1.9.3-disable-versioned-paths.patch misses one path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,233 +43,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2015 13:14:39 -0000
+X-List-Received-Date: Thu, 05 Nov 2015 13:36:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hi Zoltan, Khem
+We seem to still rely on Ruby 1.9, while the openembedded-core Ruby is
+at 2.2. Guess there isn't much to do if it's been removed though. :/
 
-2015-11-05 7:31 GMT+01:00 Zoltan Kuscsik <zoltan.kuscsik@linaro.org>:
-> Why not using pragma in both cases?
+I filed a very minor issue at
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=8652 .
 
-Because I started bignum.cc and found a quick fix without the pragma.
-And in the second case I did not.
+Cheers,
+Ulf
 
-I will rework the patch to silence the warning with a pragma in both
-cases without touching the code.
-
-> See the discussion on the issue in Chromium upstream:
+On Thu, Nov 5, 2015 at 1:57 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Thu, Nov 05, 2015 at 01:38:18PM +0100, Ulf Magnusson wrote:
+>> Hello,
+>>
+>> ruby-1.9.3-disable-versioned-paths.patch adds the
+>> --disable-versioned-paths option, which strips Ruby's version number
+>> from some install paths. The patch misses a spot however, which causes
+>> TOPDIR to get an incorrect value (nil) in rbconfig.rb. This in turn
+>> causes problems e.g. when trying to cross-compile native extensions.
+>>
+>> The following patch fixes this. It assumes
+>> ruby-1.9.3-disable-versioned-paths.patch has already been applied.
 >
-> https://groups.google.com/a/chromium.org/forum/#!topic/chromium-dev/3uwBwunIa7g
-
-I looked at the upstream git repo and googled but did not find the
-discussion already going on.
-
-I'll will rework the upstream status to point to this URL also.
-
+> ruby was already moved from meta-ruby to oe-core, send proper patch to
+> oe-core ML (ruby-1.9.3-disable-versioned-paths.patch isn't there).
 >
-> Z
+> commit 10fd3b41449d1af15ac9432bc1a7fe26c6f1dae1
+> Author: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+> Date:   Thu Jun 4 13:17:31 2015 +0300
 >
-> On 5 November 2015 at 02:10, Khem Raj <raj.khem@gmail.com> wrote:
+>     ruby: add a recipe from meta-ruby
+>
+> commit e04d53bdc83b0ae26fcde85b37fff20963232d9e
+> Author: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+> Date:   Mon Sep 14 15:26:47 2015 +0300
+>
+>     ruby: remove the recipe due to its move to oe-core
 >
 >>
->> > On Nov 4, 2015, at 1:50 PM, Max Krummenacher <max.oss.09@gmail.com>
->> wrote:
->> >
->> > A chromium build with gcc5 fails with warnings treated as errors.
->> >
->> > bignum.cc, image_util.cc: strict-overflow warning
->> >
->> > Compiles and runs on qemux86-64 with gcc 5.2.0 and still compiles on
->> > armv7a with gcc linaro-4.9.4.
->> >
+>> ---
+>>  tool/mkconfig.rb | 8 ++++++--
+>>  1 file changed, 6 insertions(+), 2 deletions(-)
 >>
->> this is ok
-
-Thanks.
-
+>> diff --git a/tool/mkconfig.rb b/tool/mkconfig.rb
+>> index 10dbe65..aa54512 100755
+>> --- a/tool/mkconfig.rb
+>> +++ b/tool/mkconfig.rb
+>> @@ -44,6 +44,7 @@ vars = {}
+>>  continued_name = nil
+>>  continued_line = nil
+>>  path_version = "/$(ruby_version)"
+>> +prefix_version = "/#{version}"
+>>  File.foreach "config.status" do |line|
+>>    next if /^#/ =~ line
+>>    name = nil
+>> @@ -149,7 +150,10 @@ File.foreach "config.status" do |line|
+>>      when "ruby_version"
+>>        version = val[/\A"(.*)"\z/, 1]
+>>      when /^USE_VERSIONED_PATHS$/
+>> -      path_version = nil if /NO/ =~ val
+>> +      if /NO/ =~ val
+>> +        path_version = nil
+>> +        prefix_version = nil
+>> +      end
+>>      end
+>>    end
+>>  #  break if /^CEOF/
+>> @@ -157,7 +161,7 @@ end
 >>
->> > Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
->> > ---
->> > .../0001-bignum.cc-fix-warning-from-gcc-5.patch    | 56
->> ++++++++++++++++++++++
->> > ...-image_util.cc-disable-warning-from-gcc-5.patch | 37 ++++++++++++++
->> > recipes-browser/chromium/chromium_40.0.2214.91.bb  |  3 ++
->> > 3 files changed, 96 insertions(+)
->> > create mode 100644
->> recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch
->> > create mode 100644
->> recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
->> >
->> > diff --git
->> a/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch
->> b/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch
->> > new file mode 100644
->> > index 0000000..f3d7f77
->> > --- /dev/null
->> > +++
->> b/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch
->> > @@ -0,0 +1,56 @@
->> > +From 689576b2f5c6398f6ef5203fe52edcf86b452790 Mon Sep 17 00:00:00 2001
->> > +From: Max Krummenacher <max.oss.09@gmail.com>
->> > +Date: Tue, 3 Nov 2015 20:51:04 +0100
->> > +Subject: [PATCH 1/2] bignum.cc: fix warning from gcc 5
->> > +
->> > +Refactoring the source seems to workaround the compiler warning.
->> > +
->> > +addresses:
->> > +  ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:105:10: error:
->> assuming
->> > +  signed overflow does not occur when assuming that (X + c) < X is
->> always
->> > +  false [-Werror=strict-overflow]
->> > +      void Bignum::AssignDecimalString(Vector<const char> value) {
->> > +           ^
->> > +
->> > +Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
->> > +Upstream-Status: Pending
->> > +
->> > +---
->> > + third_party/WebKit/Source/wtf/dtoa/bignum.cc | 15 +++++++--------
->> > + 1 file changed, 7 insertions(+), 8 deletions(-)
->> > +
->> > +diff --git a/third_party/WebKit/Source/wtf/dtoa/bignum.cc
->> b/third_party/WebKit/Source/wtf/dtoa/bignum.cc
->> > +index a000b46..e5426dd 100644
->> > +--- a/third_party/WebKit/Source/wtf/dtoa/bignum.cc
->> > ++++ b/third_party/WebKit/Source/wtf/dtoa/bignum.cc
->> > +@@ -105,20 +105,19 @@ namespace double_conversion {
->> > +     void Bignum::AssignDecimalString(Vector<const char> value) {
->> > +         // 2^64 = 18446744073709551616 > 10^19
->> > +         const int kMaxUint64DecimalDigits = 19;
->> > ++        int currentLen;
->> > +         Zero();
->> > +         int length = value.length();
->> > +         int pos = 0;
->> > +         // Let's just say that each digit needs 4 bits.
->> > +-        while (length >= kMaxUint64DecimalDigits) {
->> > +-            uint64_t digits = ReadUInt64(value, pos,
->> kMaxUint64DecimalDigits);
->> > +-            pos += kMaxUint64DecimalDigits;
->> > +-            length -= kMaxUint64DecimalDigits;
->> > +-            MultiplyByPowerOfTen(kMaxUint64DecimalDigits);
->> > ++        while (length > 0) {
->> > ++            currentLen = length > kMaxUint64DecimalDigits ?
->> kMaxUint64DecimalDigits : length;
->> > ++            uint64_t digits = ReadUInt64(value, pos, currentLen);
->> > ++            MultiplyByPowerOfTen(currentLen);
->> > +             AddUInt64(digits);
->> > ++            pos += currentLen;
->> > ++            length -= currentLen;
->> > +         }
->> > +-        uint64_t digits = ReadUInt64(value, pos, length);
->> > +-        MultiplyByPowerOfTen(length);
->> > +-        AddUInt64(digits);
->> > +         Clamp();
->> > +     }
->> > +
->> > +--
->> > +1.8.4.5
->> > +
->> > diff --git
->> a/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
->> b/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
->> > new file mode 100644
->> > index 0000000..d62645b
->> > --- /dev/null
->> > +++
->> b/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
->> > @@ -0,0 +1,37 @@
->> > +From 2f674d980a116075dc7123a3e243b1451e4a732d Mon Sep 17 00:00:00 2001
->> > +From: Max Krummenacher <max.oss.09@gmail.com>
->> > +Date: Tue, 3 Nov 2015 22:13:40 +0100
->> > +Subject: [PATCH 2/2] image_util.cc: disable warning from gcc 5
->> > +
->> > +addresses:
->> > +  ../../ui/gfx/image/image_util.cc:50:6: error: assuming signed
->> overflow does
->> > +  not occur when assuming that (X - c) <= X is always true
->> > +  [-Werror=strict-overflow]
->> > +  bool VisibleMargins(const ImageSkia& image, int* leading, int*
->> trailing) {
->> > +       ^
->> > +
->> > +Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
->> > +Upstream-Status: Pending
->> > +
->> > +---
->> > + ui/gfx/image/image_util.cc | 3 +++
->> > + 1 file changed, 3 insertions(+)
->> > +
->> > +diff --git a/ui/gfx/image/image_util.cc b/ui/gfx/image/image_util.cc
->> > +index 89a3f8c..d595da3 100644
->> > +--- a/ui/gfx/image/image_util.cc
->> > ++++ b/ui/gfx/image/image_util.cc
->> > +@@ -68,7 +68,10 @@ bool VisibleMargins(const ImageSkia& image, int*
->> leading, int* trailing) {
->> > +   int inner_min = bitmap.width();
->> > +   for (int x = 0; x < bitmap.width(); ++x) {
->> > +     for (int y = 0; y < bitmap.height(); ++y) {
->> > ++#pragma GCC diagnostic push
->> > ++#pragma GCC diagnostic warning "-Wstrict-overflow"
->> > +       if (SkColorGetA(bitmap.getColor(x, y)) > kMinimumVisibleOpacity)
->> {
->> > ++#pragma GCC diagnostic pop
->> > +         inner_min = x;
->> > +         break;
->> > +       }
->> > +--
->> > +1.8.4.5
->> > +
->> > diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb
->> b/recipes-browser/chromium/chromium_40.0.2214.91.bb
->> > index 8bc05ee..3e00b8d 100644
->> > --- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
->> > +++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
->> > @@ -28,7 +28,10 @@ SRC_URI = "\
->> >         file://google-chrome.desktop \
->> >         file://chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch \
->> >         file://chromium-40/add_missing_stat_h_include.patch \
->> > +        file://chromium-40/0001-bignum.cc-fix-warning-from-gcc-5.patch \
->> > +
->> file://chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch \
->> > "
->> > +
->> > #
->> > # * use-egl : Without this packageconfig, the Chromium build will use
->> GLX for creating an OpenGL context in X11,
->> > #             and regular OpenGL for painting operations. Neither are
->> desirable on embedded platforms. With this
->> > --
->> > 1.8.4.5
->> >
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>  drive = File::PATH_SEPARATOR == ';'
 >>
->>
+>> -prefix = "/#{v_runtime[:libdir] || 'lib'}/ruby/#{version}/#{arch}"
+>> +prefix = "/#{v_runtime[:libdir] || 'lib'}/ruby#{prefix_version}/#{arch}"
+>>  print "  TOPDIR = File.dirname(__FILE__).chomp!(#{prefix.dump})\n"
+>>  print "  DESTDIR = ", (drive ? "TOPDIR && TOPDIR[/\\A[a-z]:/i] || " :
+>> ""), "'' unless defined? DESTDIR\n"
+>>  print <<'ARCH' if universal
 >> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> 2.1.4
 >>
 >>
->
+>> Another "bug" is that meta/recipes-devtools/ruby (i.e., the newer Ruby
+>> recipe) uses --disable-versioned-paths too even though afaics no such
+>> option exists in that version. Maybe I should report that separately.
+>>
+>> Cheers,
+>> Ulf
 >
 > --
-> Zoltan Kuscsik
->
-> Senior Software Developer, Linaro Digital Home Group
-> email: zoltan.kuscsik@linaro.org
-> IRC: zoli_ on irc.linaro.org
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-Regards
-Max
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
