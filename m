@@ -1,39 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 9CA6260125
+Return-Path: <obi@opendreambox.org>
+X-Greylist: delayed 576 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 05 Nov 2015 13:09:15 UTC
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C6C475A31
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2015 12:57:23 +0000 (UTC)
-Received: by wmeg8 with SMTP id g8so12608136wme.1
+	Thu,  5 Nov 2015 13:09:15 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 2C632315C5F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Nov 2015 04:57:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=iIxrjTRtmntYhyKvepBa5dhuNFtx33sKK4YA3YqBq24=;
-	b=cbWD6fggTtfTIhMgh2a6tt9L6OJUit0RvNxv0iyMQKnNTq8L0qkpdpladWbSJ1gk3J
-	n1eK/T42sN0WdHsGfRSb+7JDGkB2NZ9Vv/po6nyKIA/Ibb3U6ownh8z2JlzZ5g6nqAQH
-	R6dFmp2XxOmwfDhNkNBK1OYewam6+KKO2wjrFA5c1Omz7SAxf8wP6wZLPpC6VN3r0uUS
-	LWhm+PBX/oMhs00Ax/yy1APYar66l88zbckZRqxjGUrSNMkxJyf96HOLIW2Fnsw1C/ug
-	5aLMZ+R6m0XYeTl1T7/bLqXF9mVomYX/bsOUdkvgLu19gaBosTzynbqqqtJLrFVCYAJ+
-	T7GA==
-X-Received: by 10.28.21.134 with SMTP id 128mr3517557wmv.29.1446728243012;
-	Thu, 05 Nov 2015 04:57:23 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id e9sm6902520wjw.8.2015.11.05.04.57.21
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 05 Nov 2015 04:57:22 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 5 Nov 2015 13:57:33 +0100
-To: Ulf Magnusson <ulfalizer@gmail.com>,
-	Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Message-ID: <20151105125733.GE2556@jama>
-References: <CAFkk2KQhpgBHLo2AyxWAL9aB1AQRi4BM3DCOanbCKBY4wKb0Gg@mail.gmail.com>
+	Thu,  5 Nov 2015 13:59:38 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id djBOMw42UxbO
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Nov 2015 13:59:35 +0100 (CET)
+Received: from [172.22.22.61] (55d4588a.access.ecotel.net [85.212.88.138])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id CD923315C4B6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Nov 2015 13:59:35 +0100 (CET)
+To: openembedded-devel@lists.openembedded.org
+References: <1446722814-21435-1-git-send-email-funman@videolan.org>
+From: Andreas Oberritter <obi@opendreambox.org>
+Message-ID: <563B52B7.1000403@opendreambox.org>
+Date: Thu, 5 Nov 2015 13:59:35 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
 MIME-Version: 1.0
-In-Reply-To: <CAFkk2KQhpgBHLo2AyxWAL9aB1AQRi4BM3DCOanbCKBY4wKb0Gg@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: mark.asselstine@windriver.com, openembedded-devel@lists.openembedded.org
-Subject: Re: meta-openembedded/meta-ruby: ruby-1.9.3-disable-versioned-paths.patch misses one path
+In-Reply-To: <1446722814-21435-1-git-send-email-funman@videolan.org>
+Subject: Re: [meta-multimedia][PATCH] VLC: make gnome-vfs configurable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,108 +45,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2015 12:57:24 -0000
-X-Groupsio-MsgNum: 58345
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="SNIs70sCzqvszXB4"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Nov 2015 13:09:18 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 8bit
 
---SNIs70sCzqvszXB4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello Rafaël,
 
-On Thu, Nov 05, 2015 at 01:38:18PM +0100, Ulf Magnusson wrote:
-> Hello,
->=20
-> ruby-1.9.3-disable-versioned-paths.patch adds the
-> --disable-versioned-paths option, which strips Ruby's version number
-> from some install paths. The patch misses a spot however, which causes
-> TOPDIR to get an incorrect value (nil) in rbconfig.rb. This in turn
-> causes problems e.g. when trying to cross-compile native extensions.
->=20
-> The following patch fixes this. It assumes
-> ruby-1.9.3-disable-versioned-paths.patch has already been applied.
-
-ruby was already moved from meta-ruby to oe-core, send proper patch to
-oe-core ML (ruby-1.9.3-disable-versioned-paths.patch isn't there).
-
-commit 10fd3b41449d1af15ac9432bc1a7fe26c6f1dae1
-Author: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Date:   Thu Jun 4 13:17:31 2015 +0300
-
-    ruby: add a recipe from meta-ruby
-
-commit e04d53bdc83b0ae26fcde85b37fff20963232d9e
-Author: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Date:   Mon Sep 14 15:26:47 2015 +0300
-
-    ruby: remove the recipe due to its move to oe-core
-
->=20
+On 05.11.2015 12:26, Rafaël Carré wrote:
 > ---
->  tool/mkconfig.rb | 8 ++++++--
->  1 file changed, 6 insertions(+), 2 deletions(-)
->=20
-> diff --git a/tool/mkconfig.rb b/tool/mkconfig.rb
-> index 10dbe65..aa54512 100755
-> --- a/tool/mkconfig.rb
-> +++ b/tool/mkconfig.rb
-> @@ -44,6 +44,7 @@ vars =3D {}
->  continued_name =3D nil
->  continued_line =3D nil
->  path_version =3D "/$(ruby_version)"
-> +prefix_version =3D "/#{version}"
->  File.foreach "config.status" do |line|
->    next if /^#/ =3D~ line
->    name =3D nil
-> @@ -149,7 +150,10 @@ File.foreach "config.status" do |line|
->      when "ruby_version"
->        version =3D val[/\A"(.*)"\z/, 1]
->      when /^USE_VERSIONED_PATHS$/
-> -      path_version =3D nil if /NO/ =3D~ val
-> +      if /NO/ =3D~ val
-> +        path_version =3D nil
-> +        prefix_version =3D nil
-> +      end
->      end
->    end
->  #  break if /^CEOF/
-> @@ -157,7 +161,7 @@ end
->=20
->  drive =3D File::PATH_SEPARATOR =3D=3D ';'
->=20
-> -prefix =3D "/#{v_runtime[:libdir] || 'lib'}/ruby/#{version}/#{arch}"
-> +prefix =3D "/#{v_runtime[:libdir] || 'lib'}/ruby#{prefix_version}/#{arch=
-}"
->  print "  TOPDIR =3D File.dirname(__FILE__).chomp!(#{prefix.dump})\n"
->  print "  DESTDIR =3D ", (drive ? "TOPDIR && TOPDIR[/\\A[a-z]:/i] || " :
-> ""), "'' unless defined? DESTDIR\n"
->  print <<'ARCH' if universal
-> --=20
-> 2.1.4
->=20
->=20
-> Another "bug" is that meta/recipes-devtools/ruby (i.e., the newer Ruby
-> recipe) uses --disable-versioned-paths too even though afaics no such
-> option exists in that version. Maybe I should report that separately.
->=20
-> Cheers,
-> Ulf
+> XXX: to be cherry-picked together with <1446652999-24545-3-git-send-email-funman@videolan.org>
+> 
+>  meta-multimedia/recipes-multimedia/vlc/vlc.inc | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+> index bf08405..ce6e52d 100644
+> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+> @@ -60,6 +60,7 @@ PACKAGECONFIG[qt4] = "--enable-qt,--disable-qt, qt4-x11-free"
+>  PACKAGECONFIG[freerdp] = "--enable-freerdp,--disable-freerdp, freerdp"
+>  PACKAGECONFIG[notify] = "--enable-notify,--disable-notify, libnotify gtk+"
+>  PACKAGECONFIG[dvbpsi] = "--enable-dvbpsi,--disable-dvbpsi, libdvbpsi"
+> +PACKAGECONFIG[gnome-vfs] = "--enable-gnomevfs,--disable-gnome-vfs, gnome-vfs"
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+this looks like a typo (missing dash in enable switch?).
 
---SNIs70sCzqvszXB4
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Regards,
+Andreas
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+>  
+>  do_configure_prepend() {
+>      cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
+> 
 
-iEYEARECAAYFAlY7Uj0ACgkQN1Ujt2V2gBzcTgCgiT4UPvxkZquQ9sqT9JmdTdPS
-n1QAnRRAgONoX7oxQHsq2TAU94ud2J1v
-=gbCL
------END PGP SIGNATURE-----
 
---SNIs70sCzqvszXB4--
