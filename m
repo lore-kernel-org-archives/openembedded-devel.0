@@ -1,45 +1,39 @@
-Return-Path: <rafael.carre@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 75B1760124
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 0786E60124
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Nov 2015 15:16:09 +0000 (UTC)
-Received: by wikq8 with SMTP id q8so32196785wik.1
+	Fri,  6 Nov 2015 16:11:58 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so22203900wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Nov 2015 07:16:09 -0800 (PST)
+	Fri, 06 Nov 2015 08:11:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:subject:to:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-type:content-transfer-encoding;
-	bh=/akg0P2Svwk7IazoMfgAs95olKzvwcS51zawtTeSyWY=;
-	b=B/Y1/Uli2CNQGtuzuFvn9FKEnhGsgIBKFKJCea1rGcYbrNwKUZmc0LAInjGbLqiTZ2
-	o4qy3Ka49OlFQElo+GiPKJVV5f3VcgRJw6ny9+Gu1jGB6clbkLRqf5vZjyDkySMrjwNf
-	7kPvvJGPCXz2bGxEtMwWzPNAr8yDcfyKdimGxauXFaK57BXOve4Yeq8qLS6V4BO75Izv
-	anOIWyfkl2ZpR6sArgMccnCWMmLiZY+zkbm2CNShr0fNnhsVOVvuBYqx5bXIKzzyZatE
-	IsI7B/7QwlROAZjbF5NDp03/6xv7kECY22YO1T9QWTwQhvyp8jvcAP9VSKwnnnNbGRPw
-	b4XQ==
-X-Received: by 10.194.57.142 with SMTP id i14mr17482366wjq.24.1446822969538;
-	Fri, 06 Nov 2015 07:16:09 -0800 (PST)
-Received: from [192.168.0.13] (lns-bzn-47f-81-56-255-191.adsl.proxad.net.
-	[81.56.255.191]) by smtp.googlemail.com with ESMTPSA id
-	b12sm3507191wma.6.2015.11.06.07.16.07
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=nXiaMVFpurvZuMaBlWO5o3ZwmgPWYnDYrOI2f4yuYtQ=;
+	b=qJmTsk6vaL8cbi71p2qS7lejYx/7yFL4gAjbDxRSxM0La+QKLe0HGp2GNfPZ1sHoql
+	UqIbL3JLGKA5HQMm2kxQoec/G1e998tUINC3KAPM5IxwEf2EzVCENywwzKaewoEy+lh8
+	wl47Tqnmye/rsbYh2BQULkSGJUAgNdVurqpvXlN+DFKcbkXeFWclMxrmQ0AX39aYODj3
+	MXxgyfudRztyEOOX5HJKCcoKFd05HtaA+KluU8kwJWgsLeAMVNQTnGEwWRIHeW1sEf3Y
+	tbrWRLgzLsjB0yzO45ylpbYWFeYeV1SmKTyukxOGKmZC4S18849mUBDXFWYI6E3CuYFd
+	WKHA==
+X-Received: by 10.28.19.7 with SMTP id 7mr11786770wmt.89.1446826318646;
+	Fri, 06 Nov 2015 08:11:58 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id r5sm814651wjf.18.2015.11.06.08.11.57
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 Nov 2015 07:16:08 -0800 (PST)
-Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
+	Fri, 06 Nov 2015 08:11:57 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 6 Nov 2015 17:12:15 +0100
 To: openembedded-devel@lists.openembedded.org
-References: <1446652999-24545-1-git-send-email-funman@videolan.org>
-	<1446652999-24545-2-git-send-email-funman@videolan.org>
-	<20151105201759.GG2556@jama> <563BBF43.5010309@videolan.org>
-	<20151105205707.GH2556@jama>
-	<CANx9H-AznEWHvGH9PHb1tjT03h4rPo=F_XAZARmyDDiUZZwncg@mail.gmail.com>
-From: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <funman@videolan.org>
-Message-ID: <563CC437.2090106@videolan.org>
-Date: Fri, 6 Nov 2015 16:16:07 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
+Message-ID: <20151106161215.GB2550@jama>
+References: <1446817092-9386-1-git-send-email-Martin.Jansa@gmail.com>
+	<1446817092-9386-5-git-send-email-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CANx9H-AznEWHvGH9PHb1tjT03h4rPo=F_XAZARmyDDiUZZwncg@mail.gmail.com>
-Subject: Re: [meta-multimedia][PATCH 2/3] VLC: make libnotify a configurable dependency
+In-Reply-To: <1446817092-9386-5-git-send-email-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [PATCH][meta-qt5 5/7] qtwebengine: add dependency on yasm-native and use it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,79 +47,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2015 15:16:10 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 06 Nov 2015 16:12:00 -0000
+X-Groupsio-MsgNum: 58384
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="xXmbgvnjoT4axfJE"
+Content-Disposition: inline
 
-On 06/11/2015 01:07, Tim Orling wrote:
-> On Thu, Nov 5, 2015 at 12:57 PM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> 
->> On Thu, Nov 05, 2015 at 09:42:43PM +0100, Rafaël Carré wrote:
->>> On 05/11/2015 21:17, Martin Jansa wrote:
->>>> On Wed, Nov 04, 2015 at 05:03:18PM +0100, Rafaël Carré wrote:
->>>>> ---
->>>>>  meta-multimedia/recipes-multimedia/vlc/vlc.inc | 3 ++-
->>>>>  1 file changed, 2 insertions(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
->> b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
->>>>> index b989849..ad5c81d 100644
->>>>> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
->>>>> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
->>>>> @@ -8,7 +8,7 @@ LIC_FILES_CHKSUM =
->> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->>>>>  DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native \
->>>>>     virtual/libsdl libsdl-image dbus dbus-glib libxml2 gnutls \
->>>>>     tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
->>>>> -   libdvdcss libdvdread lua-native lua libidn libnotify gtk+
->> gnome-vfs \
->>>>> +   libdvdcss libdvdread lua-native lua libidn gnome-vfs \
->>>>>     libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
->>>>>     libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
->>>>>     tiff xcb-util-keysyms samba"
->>>>> @@ -58,6 +58,7 @@ PACKAGECONFIG[gstreamer] =
->> "--enable-gst-decode,--disable-gst-decode,gstreamer1.
->>>>>  PACKAGECONFIG[vpx] = "--enable-vpx,--disable-vpx, libvpx"
->>>>>  PACKAGECONFIG[qt4] = "--enable-qt,--disable-qt, qt4-x11-free"
->>>>>  PACKAGECONFIG[freerdp] = "--enable-freerdp,--disable-freerdp,
->> freerdp"
->>>>> +PACKAGECONFIG[notify] = "--enable-notify,--disable-notify, libnotify
->> gtk+"
->>>>
->>>> Removing gtk+ from DEPENDS causes even more undeterministic
->>>> dependencies:
->>>
->>> I would guess those real dependencies were hidden by gtk+ which depends
->> on
->>> every single one of them.
->>>
->>> Except maybe vorbis which was hidden by gstreamer plugins?
->>>
->>> I agree that although depending on gtk+ is not fully nice neither
->>> correct, it makes
->>> things deterministic.
->>>
->>>
->>> So I guess I should rather add all the PACKAGECONFIG for these modules
->>> first and then move
->>> those dependencies to their respective PACKAGECONFIG ?
->>
->> yes
->>
->> There are 112 AC_ARG_ENABLE clauses in configure.ac
-> <https://github.com/videolan/vlc/blob/master/configure.ac>... but adding
-> PACKAGECONFIG for those that make sense has been on my list of TODO for a
-> long time. Not all of them apply to our usage (winstore_app for instance).
-> Testing all those options is one of the things that has held me back...so
-> the approach of fixing what becomes broken has been the easier route.
-> 
-> At least there aren't a large amount of PKG_CHECK_MODULES which leads to
-> endless patches to make it deterministic which other upstreams have zero
-> interest in applying.
+--xXmbgvnjoT4axfJE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-There are a lot PKG_ENABLE_MODULES_VLC which call that macro though
+On Fri, Nov 06, 2015 at 02:38:10PM +0100, Martin Jansa wrote:
+> * latest chromium is failing to build yasm, because it's mixing native
+>   (x86_64) with target (x86 qemux86) libraries during the build:
+>   FAILED: /OE/build/oe-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/i586-=
+oe-linux/i586-oe-linux-g++ -m32 -march=3Di586 --sysroot=3D/OE/build/oe-core=
+/tmp-glibc/sysroots/qemux86 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed =
+-Wl,-z,now -Wl,-z,relro -Wl,--fatal-warnings -Wl,-z,defs -pthread -Wl,-z,no=
+execstack -fPIC -Wl,--disable-new-dtags -Wl,--gc-sections -o genstring -Wl,=
+--start-group obj.host/src/3rdparty/chromium/third_party/yasm/source/patche=
+d-yasm/genstring.genstring.o -Wl,--end-group
+>   /OE/build/oe-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/i586-oe-l=
+inux/gcc/i586-oe-linux/5.2.0/ld: i386:x86-64 architecture of input file `ob=
+j.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/genstring=
+=2Egenstring.o' is incompatible with i386 output
+>   /OE/build/oe-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/i586-oe-l=
+inux/gcc/i586-oe-linux/5.2.0/ld: obj.host/src/3rdparty/chromium/third_party=
+/yasm/source/patched-yasm/genstring.genstring.o: file class ELFCLASS64 inco=
+mpatible with ELFCLASS32
+>   /OE/build/oe-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/i586-oe-l=
+inux/gcc/i586-oe-linux/5.2.0/ld: final link failed: File in wrong format
+>   collect2: error: ld returned 1 exit status
+>   ninja: build stopped: subcommand failed.
+>   Makefile.gyp_run:262: recipe for target 'invoke_ninja' failed
+>   make[3]: *** [invoke_ninja] Error 1
+>=20
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  recipes-qt/qt5/qtwebengine_git.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+>=20
+> diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengi=
+ne_git.bb
+> index f02c4d6..e4427c3 100644
+> --- a/recipes-qt/qt5/qtwebengine_git.bb
+> +++ b/recipes-qt/qt5/qtwebengine_git.bb
+> @@ -23,6 +23,9 @@ DEPENDS +=3D " \
+>  # xscreensaver isn't covered in qtbase DEPENDS
+>  DEPENDS +=3D "${@base_contains('DISTRO_FEATURES', 'x11', 'libxscrnsaver'=
+, '', d)}"
+> =20
+> +DEPENDS +=3D "yasm-native"
+> +EXTRA_QMAKEVARS_PRE +=3D "WEBENGINE_CONFIG+=3Duse_system_yasm"
 
-> --Tim
-> 
+This should be GYP_CONFIG, I've sent wrong version of the patch, correct
+version is in master-next and jansa/master branches.
 
+There are some issues when system nss is detected and used, I'll look
+into it later.
+
+> +
+>  COMPATIBLE_MACHINE =3D "(-)"
+>  COMPATIBLE_MACHINE_x86 =3D "(.*)"
+>  COMPATIBLE_MACHINE_x86-64 =3D "(.*)"
+> --=20
+> 2.6.2
+>=20
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--xXmbgvnjoT4axfJE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlY80V4ACgkQN1Ujt2V2gByA3ACcDTE6HpaCBhje4rHRJ/VhwpNn
+XZsAoKyR4jipnuGaRg8Wa7tmeJ3L49p9
+=2aCN
+-----END PGP SIGNATURE-----
+
+--xXmbgvnjoT4axfJE--
