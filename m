@@ -1,40 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E64F60124
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D13277087
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Nov 2015 17:04:58 +0000 (UTC)
-Received: by wicll6 with SMTP id ll6so32611678wic.1
+	Fri,  6 Nov 2015 17:05:29 +0000 (UTC)
+Received: by wmll128 with SMTP id l128so46218123wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Nov 2015 09:04:58 -0800 (PST)
+	Fri, 06 Nov 2015 09:05:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=hpMS88Rfm/+035x7yiOM3pFbJ1HVKKCR8F8i3cu5nPI=;
-	b=RB3rHPgCZ6c+8BZAwYfMQ9v2QIl8gW87go4byHR6qGLBA3nqkMaDPsQQ1oGzpQYln4
-	NtrbTwCLGrpMmr4n/+h64ckfLngYiHbNzIpTVDHpPGZNtJugny2QonWzyGlg8QyFlre4
-	W9wPwdspK1hGvN5PIF9PmmhzF5EDI9wztkzldGHoQ5PmyTQa9gCoFtZvyWVDUL0krYWB
-	u1LCWvj9rXoSgIzV24xotqNWiDjMsEzsTFq4wnIbhhfXzLCmBdjIkQNl7ncCRxALeAVX
-	knYtOCNiG60DkEYjTICzFJ5djmGm+UnnaMc1f0rc+lG8CKeMu9dDwF5InNef7CCoawFE
-	pVsw==
-X-Received: by 10.194.76.9 with SMTP id g9mr15786926wjw.47.1446829498519;
-	Fri, 06 Nov 2015 09:04:58 -0800 (PST)
+	bh=XQ7ZDsYT0z2nKfP9RzFUHo7vk8c+rFKHNn9T3nsBN3s=;
+	b=VYZCfcJKRd66MX4JDY9PyvbeLwtqoT+OAUNa0OGsmV+sYNB/B06DDJem1UOXgsVdTw
+	VWvf9bQALimmexvusOpIBHzkG34/2lxzCmypNE3j2crlPELpWuwJCFbrbZi4PhVPpV1W
+	4E9xg7ovTGR6GAR0ohlj6qcXFI26JsD5VPBYuSu302ELATPneBV7HscIRuwZnhUi1VAQ
+	Nt72rS+WxeuJDe4qq9j6/GFT8d6k7spoqtR2rvT1Rn9lJr/IKz6Db625zchYeMeHknBk
+	tam7ChRh5hxXtQ5RbQsq2TCFOHHxUiyjMRmWfd1hWrvOTYLuWPXQ8fZqNKdT6z9jbasE
+	XhUA==
+X-Received: by 10.28.55.76 with SMTP id e73mr12114566wma.89.1446829529566;
+	Fri, 06 Nov 2015 09:05:29 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	l186sm3902502wmg.19.2015.11.06.09.04.57
+	by smtp.gmail.com with ESMTPSA id 20sm3932962wmh.8.2015.11.06.09.05.28
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 Nov 2015 09:04:57 -0800 (PST)
+	Fri, 06 Nov 2015 09:05:28 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 6 Nov 2015 18:05:16 +0100
+Date: Fri, 6 Nov 2015 18:05:46 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151106170516.GD2550@jama>
-References: <1446630396-14149-1-git-send-email-kai.kang@windriver.com>
+Message-ID: <20151106170546.GE2550@jama>
+References: <1446464931-351-1-git-send-email-jackie.huang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1446630396-14149-1-git-send-email-kai.kang@windriver.com>
+In-Reply-To: <1446464931-351-1-git-send-email-jackie.huang@windriver.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-oe][PATCH] libsmi: add configure file
+Subject: Re: [meta-oe][PATCH] samba: fix the incorrect tmpfiles installed directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,140 +46,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2015 17:04:59 -0000
-X-Groupsio-MsgNum: 58385
+X-List-Received-Date: Fri, 06 Nov 2015 17:05:30 -0000
+X-Groupsio-MsgNum: 58386
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="J5MfuwkIyy7RmF4Q"
+	protocol="application/pgp-signature"; boundary="4Epv4kl9IRBfg3rk"
 Content-Disposition: inline
 
---J5MfuwkIyy7RmF4Q
+--4Epv4kl9IRBfg3rk
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 04, 2015 at 05:46:36PM +0800, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
+On Mon, Nov 02, 2015 at 07:48:51PM +0800, jackie.huang@windriver.com wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
 >=20
-> Add configure file duplicated from file smi.conf-example in source code
-> and replace paths with mibs files directories.
+> - The tmpfiles are always installed in /usr/lib
+>   even for multilib.
+> - It makes no sense to have two tmpfiles in both
+>   /usr/lib/tmpfiles.d and /etc/tmpfiles.d, install
+>   it as one in /etc/tmpfiles.d.
+
+Please rebase on latest master and resend.
+
 >=20
-> Then set libsmi-mibs as runtime recommend package to provide mibs files.
->=20
-> Add homepage and update SRC_URI as well.
->=20
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 > ---
->  meta-oe/recipes-support/libsmi/libsmi/smi.conf | 48 ++++++++++++++++++++=
-++++++
->  meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb | 12 ++++++-
->  2 files changed, 59 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-support/libsmi/libsmi/smi.conf
+>  meta-oe/recipes-connectivity/samba/samba_4.1.12.bb | 11 ++++-------
+>  1 file changed, 4 insertions(+), 7 deletions(-)
 >=20
-> diff --git a/meta-oe/recipes-support/libsmi/libsmi/smi.conf b/meta-oe/rec=
-ipes-support/libsmi/libsmi/smi.conf
-> new file mode 100644
-> index 0000000..7e4da86
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libsmi/libsmi/smi.conf
-> @@ -0,0 +1,48 @@
-> +#
-> +# smi.conf - Global/User SMI configuration file. (EXAMPLE)
-> +#
-> +# Copyright (c) 2000 Frank Strauss, Technical University of Braunschweig.
-> +#
-> +# See the file "COPYING" for information on usage and redistribution
-> +# of this file, and for a DISCLAIMER OF ALL WARRANTIES.
-> +#
-> +# @(#) $Id: smi.conf-example 1134 2001-06-11 09:59:13Z strauss $
-> +#
-> +#
-> +# See smi_config(3) for detailed information on configuration files.
-> +#
-> +
-> +# Extend (note the semicolon) the libsmi default module search path.
-> +path :/usr/share/mibs/iana
-> +path :/usr/share/mibs/ietf
-> +path :/usr/share/mibs/irtf
-> +path :/usr/share/mibs/tubs
-> +
-> +# EXPERIMENTAL: Add a caching method (works only on UNIX systems).
-> +# NOTE: the cache directory must exist and permissions must be
-> +# handled appropriately. A simple but insecure way is to apply
-> +# a tmp flag to the directory (chmod 1777 /usr/local/share/mibs/cache).
-> +#cache /usr/local/share/mibs/cache /usr/local/bin/smicache -d /usr/local=
-/share/mibs/cache -p http://www.ibr.cs.tu-bs.de/projects/libsmi/smicache/
-> +
-> +# Don't show any errors by default.
-> +level 0
-> +
-> +# Preload some basic SMIv2 modules.
-> +load SNMPv2-SMI
-> +load SNMPv2-TC
-> +load SNMPv2-CONF
-> +
-> +# Make smilint shout loud to report all errors and warnings.
-> +smilint: level 9
-> +
-> +# But please don't claim about any names longer than 32 chars.
-> +# (note: this is the prefix of errors `namelength-32-module,
-> +#  -type, -object, -enumeration, and -bit)
-> +smilint: hide namelength-32
-> +
-> +# Preloading some more modules for special applications.
-> +tcpdump: load DISMAN-SCRIPT-MIB
-> +tcpdump: load IF-MIB
-> +
-> +smiquery: load IF-MIB
-> +
-> diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb b/meta-oe/rec=
-ipes-support/libsmi/libsmi_0.4.8.bb
-> index 2b036f9..e1af636 100644
-> --- a/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
-> +++ b/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
-> @@ -1,16 +1,26 @@
->  SUMMARY =3D "A Library to Access SMI MIB Information"
-> +HOMEPAGE =3D "https://www.ibr.cs.tu-bs.de/projects/libsmi"
+> diff --git a/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb b/meta-oe=
+/recipes-connectivity/samba/samba_4.1.12.bb
+> index 22c2bb4..45fdaa7 100644
+> --- a/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
+> +++ b/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
+> @@ -94,18 +94,16 @@ do_install_append() {
+>              -e 's,@SBINDIR@,${sbindir},g' \
+>              -i ${D}${systemd_unitdir}/system/*.service
 > =20
->  LICENSE =3D "BSD"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D3ad3076f9332343a21636cfd351f0=
-5b7"
+> -	install -d ${D}${sysconfdir}/tmpfiles.d
+> -	echo "d ${localstatedir}/log/samba 0755 root root -" \
+> -            > ${D}${sysconfdir}/tmpfiles.d/99-${BPN}.conf
+> +        install -d ${D}${sysconfdir}/tmpfiles.d
+> +        install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}=
+/tmpfiles.d/samba.conf
+> +        echo "d ${localstatedir}/log/samba 0755 root root -" \
+> +            >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
+>      fi
 > =20
-> -SRC_URI =3D "ftp://ftp.ibr.cs.tu-bs.de/pub/local/libsmi/${BP}.tar.gz"
-> +SRC_URI =3D "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.=
-tar.gz \
-> +           file://smi.conf \
-
-4 spaces
-
-> +          "
-
-Closing quote should be first character.
-
+>      install -d ${D}${sysconfdir}/samba
+>      echo "127.0.0.1 localhost" > ${D}${sysconfdir}/samba/lmhosts
+>      install -m644 packaging/LSB/smb.conf ${D}${sysconfdir}/samba/smb.conf
 > =20
->  SRC_URI[md5sum] =3D "760b6b1070738158708649ed2c63425e"
->  SRC_URI[sha256sum] =3D "f048a5270f41bc88b0c3b0a8fe70ca4d716a46b531a0ecaa=
-a87c462f49d74849"
+> -    install -d ${D}${libdir}/tmpfiles.d
+> -    install -m644 packaging/systemd/samba.conf.tmp ${D}${libdir}/tmpfile=
+s.d/samba.conf
+> -
+>      install -d ${D}${sysconfdir}/sysconfig/
+>      install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/sy=
+sconfig/samba
+>  }
+> @@ -114,7 +112,6 @@ PACKAGES +=3D "${PN}-python ${PN}-python-dbg ${PN}-pi=
+dl libwinbind libwinbind-dbg
 > =20
->  inherit autotools
+>  FILES_${PN} +=3D "/run \
+>                  ${libdir}/security/pam_smbpass.so \
+> -                ${libdir}/tmpfiles.d/* \
+>                 "
 > =20
-> +do_install_append () {
-> +	install -d ${D}${sysconfdir}
-> +	install -m 0644 ${WORKDIR}/smi.conf ${D}${sysconfdir}/smi.conf
-
-Sane layers are using consistent indentation with 4 spaces.
-
-I've fixed this when cherry-picking to master.
-
-> +}
-> +
->  PACKAGES +=3D "${PN}-mibs ${PN}-pibs"
-> =20
->  FILES_${PN}-mibs +=3D "${datadir}/mibs"
->  FILES_${PN}-pibs +=3D "${datadir}/pibs"
-> +
-> +RRECOMMENDS_${PN} =3D "${BPN}-mibs"
+>  SMB_SERVICE=3D"${systemd_unitdir}/system/nmb.service ${systemd_unitdir}/=
+system/smb.service"
 > --=20
-> 2.6.1
+> 1.9.1
 >=20
 > --=20
 > _______________________________________________
@@ -192,16 +127,16 @@ I've fixed this when cherry-picking to master.
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---J5MfuwkIyy7RmF4Q
+--4Epv4kl9IRBfg3rk
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlY83csACgkQN1Ujt2V2gByNCgCfQJ+inCUQUdRnuiLsckt2A5UN
-XsAAoKU8kteHuVKIwYBVQxXJ2N/LpH82
-=bMvl
+iEYEARECAAYFAlY83ekACgkQN1Ujt2V2gBxADACbBNvNw8R+n/CynGWcBFWQt+hW
+hiQAoLRQrernMlW4XZY2v61u3r4s0leR
+=eEiX
 -----END PGP SIGNATURE-----
 
---J5MfuwkIyy7RmF4Q--
+--4Epv4kl9IRBfg3rk--
