@@ -1,28 +1,33 @@
-Return-Path: <amarnath.valluri@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 441257708E
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B80375D22
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Nov 2015 13:27:13 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga103.fm.intel.com with ESMTP; 06 Nov 2015 05:27:14 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,252,1444719600"; d="scan'208";a="679721688"
-Received: from linux.intel.com ([10.23.219.25])
-	by orsmga003.jf.intel.com with ESMTP; 06 Nov 2015 05:27:15 -0800
-Received: from avalluri-GigaByte.fi.intel.com (avalluri-gigabyte.fi.intel.com
-	[10.237.68.36]) (using TLSv1 with cipher AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by linux.intel.com (Postfix) with ESMTP id 4EE8B2E055B
+	Fri,  6 Nov 2015 13:37:57 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so17833722wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Nov 2015 05:26:10 -0800 (PST)
-From: Amarnath Valluri <amarnath.valluri@intel.com>
+	Fri, 06 Nov 2015 05:37:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=J9YO207axwTN1OuBmPPiSTll6VlQ0/jnXxFdjKGshsQ=;
+	b=m6RZoNQ1IRJ7sMif7567fA2eolVclRY4j+xcGvgEopNnPQYKdtC9aLO+BCJbvDsthi
+	i73o0BP97H7jVp7WO6Slr+LtCbTwRci9Xm6UCg5b0iVte+EOx45P3C4jLi4q0/Auh+Z6
+	zIUcXN+nWiEZ3TW+GlX5khHBhAh/wu8h4POSlCz/haFTSs1WNLmkYYIDG0dbutBwuhP7
+	C9/xa1HWrYS+9PovdCVxbbtbyMBmKnoJd9y1LC5mRB7GRdR4CK+QgiJjOFDwn2AnEiJ9
+	5wetz+jzT+3wEuDmql8+eXl7WLzboUISA1tl1ES6RxBj6gQpiObOFGj9qTBl/kp1XXvy
+	DLZA==
+X-Received: by 10.28.10.13 with SMTP id 13mr9817366wmk.8.1446817077813;
+	Fri, 06 Nov 2015 05:37:57 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id ft4sm169584wjb.37.2015.11.06.05.37.55
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 06 Nov 2015 05:37:56 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Nov 2015 15:27:38 +0200
-Message-Id: <1446816458-9536-2-git-send-email-amarnath.valluri@intel.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1446816458-9536-1-git-send-email-amarnath.valluri@intel.com>
-References: <1446816458-9536-1-git-send-email-amarnath.valluri@intel.com>
-Subject: [meta-webserver][PATCH 2/2] nginx: Fix systemd service file
+Date: Fri,  6 Nov 2015 14:38:06 +0100
+Message-Id: <1446817092-9386-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.6.2
+Subject: [PATCH][meta-qt5 1/7] qttranslations: add ${PN}-qtserialport
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,53 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2015 13:27:15 -0000
+X-List-Received-Date: Fri, 06 Nov 2015 13:37:59 -0000
 
-systemd service file expects full path of the executatbles.
-
-Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-webserver/recipes-httpd/nginx/files/nginx.service | 2 +-
- meta-webserver/recipes-httpd/nginx/nginx_1.9.5.bb      | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ recipes-qt/qt5/qttranslations_git.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx.service b/meta-webserver/recipes-httpd/nginx/files/nginx.service
-index 705450e..9926a4b 100644
---- a/meta-webserver/recipes-httpd/nginx/files/nginx.service
-+++ b/meta-webserver/recipes-httpd/nginx/files/nginx.service
-@@ -4,7 +4,7 @@ After=network.target
- [Service]
- Type=forking
- PIDFile=@SYSCONFDIR@/nginx/run/nginx.pid
--ExecStartPre=mkdir -p @LOCALSTATEDIR@/log/nginx
-+ExecStartPre=@BASEBINDIR@/mkdir -p @LOCALSTATEDIR@/log/nginx
- ExecStart=@SYSCONFDIR@/init.d/nginx start
- ExecStop=@SYSCONFDIR@/init.d/nginx stop
- [Install]
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.9.5.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.9.5.bb
-index 1c9bff7..87c953b 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.9.5.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.9.5.bb
-@@ -94,6 +94,7 @@ do_install () {
-             install -m 0644 ${WORKDIR}/nginx.service ${D}${systemd_unitdir}/system/
-             sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
-                     -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
-+                    -e 's,@BASEBINDIR@,${base_bindir},g' \
-                     ${D}${systemd_unitdir}/system/nginx.service
-         fi
- }
+diff --git a/recipes-qt/qt5/qttranslations_git.bb b/recipes-qt/qt5/qttranslations_git.bb
+index fb584ab..72a29b3 100644
+--- a/recipes-qt/qt5/qttranslations_git.bb
++++ b/recipes-qt/qt5/qttranslations_git.bb
+@@ -26,6 +26,7 @@ PACKAGES =. " \
+     ${PN}-qtconfig \
+     ${PN}-qtquick1 \
+     ${PN}-qtscript \
++    ${PN}-qtserialport \
+     ${PN}-qtbase \
+     ${PN}-qthelp \
+     ${PN}-qt \
+@@ -87,6 +88,10 @@ FILES_${PN}-qtscript = " \
+     ${OE_QMAKE_PATH_TRANSLATIONS}/qtscript_*.qm \
+ "
+ 
++FILES_${PN}-qtserialport = " \
++    ${OE_QMAKE_PATH_TRANSLATIONS}/qtserialport_*.qm \
++"
++
+ FILES_${PN}-qtbase = " \
+     ${OE_QMAKE_PATH_TRANSLATIONS}/qtbase_*.qm \
+ "
 -- 
-1.9.1
-
----------------------------------------------------------------------
-Intel Finland Oy
-Registered Address: PL 281, 00181 Helsinki 
-Business Identity Code: 0357606 - 4 
-Domiciled in Helsinki 
-
-This e-mail and any attachments may contain confidential material for
-the sole use of the intended recipient(s). Any review or distribution
-by others is strictly prohibited. If you are not the intended
-recipient, please contact the sender and delete all copies.
+2.6.2
 
 
