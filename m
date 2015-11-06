@@ -1,36 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id ACC397708E
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 23BCC7708E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Nov 2015 13:38:02 +0000 (UTC)
-Received: by wicll6 with SMTP id ll6so30294948wic.0
+	Fri,  6 Nov 2015 13:38:03 +0000 (UTC)
+Received: by wikq8 with SMTP id q8so30425562wik.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Nov 2015 05:38:02 -0800 (PST)
+	Fri, 06 Nov 2015 05:38:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=SOTFt/KM/1XfwMRv48dZveZYAnsSLjK7r8MBFbdviO0=;
-	b=BTEtNslRga0cdlJLfmmjGZ49ZPwoxRGmfa5V/4DNMVTrVbbS9mjHGGbPJeaLzuHAmL
-	7flz+pwCo/52jbYVpa2D1PBiP4Z6e7CkQJgbPxfYnTCno4h3GEirGAzMnxkBi53zGd+j
-	7tIS7JJ7utBugjT7VLFHB4rBDVOuM2w+0nG1oD5USJLLWl+0MaFj8R7QIPpTmzsnbFjG
-	MyYxK5t49KISEpn+NmDO283ADUDsjrRGSoxrc0TSdnTtZAq7WbD7Vfn/qotvgd/G7w8S
-	ddQIZTH4rAUpCA53ztdMS91XkO7B6qiz2b68JK5LJy23KWbTcVveNPKOL5b533k4QQSK
-	t2CQ==
-X-Received: by 10.195.13.18 with SMTP id eu18mr16621318wjd.40.1446817082337;
-	Fri, 06 Nov 2015 05:38:02 -0800 (PST)
+	bh=ueYZoAJBaVRiflZOScQxUhpLVCrmMlmX875YKQci3vE=;
+	b=eqprSDlkNvoVr2IaxgPZcHoXAC3fW+LiSYE1kTGGbEQFmgO1fqp3hGkiEsYDe8n8nW
+	Y35Yt/ape1lxgUP6ufpe2l6/YZy7ajkRE8k9g7E/qSftDzECVnAaOCHapzYZAJ9p0Pwx
+	18sdD+7aWym3DN+hCBy4LG1BnorNSsM0FgaRPTxkvTnY6QiJo6ndRY2fWlpOtqIyC3E9
+	pWv9kLg48JdSd3qvOcA9rFtaQLkKINdzlXdMOeKyp5e6HUv4iEvF9EZyzyUlFE8L3N9w
+	ke07r/M1P3XdWF3P1z7q5mfXQN0tIn6r/ZxlbWEr3N5qzGMMiUpHt06EX8Bk352fUPzy
+	Fzog==
+X-Received: by 10.194.6.232 with SMTP id e8mr16642834wja.151.1446817083578;
+	Fri, 06 Nov 2015 05:38:03 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id m143sm844713wmb.1.2015.11.06.05.38.01
+	by smtp.gmail.com with ESMTPSA id c1sm201211wjf.19.2015.11.06.05.38.02
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 Nov 2015 05:38:01 -0800 (PST)
+	Fri, 06 Nov 2015 05:38:02 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Nov 2015 14:38:09 +0100
-Message-Id: <1446817092-9386-4-git-send-email-Martin.Jansa@gmail.com>
+Date: Fri,  6 Nov 2015 14:38:10 +0100
+Message-Id: <1446817092-9386-5-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.6.2
 In-Reply-To: <1446817092-9386-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1446817092-9386-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-qt5 4/7] qtwebengine: fix QMAKE_AR variable
+Subject: [PATCH][meta-qt5 5/7] qtwebengine: add dependency on yasm-native and use it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,36 +44,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2015 13:38:02 -0000
+X-List-Received-Date: Fri, 06 Nov 2015 13:38:06 -0000
 
-* OE_QMAKE_AR is only the tool, qtbase and other modules add correct
-  parameters to it in linux-oe-g++ platform:
-  recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch:+QMAKE_AR = $(OE_QMAKE_AR) cqs
-  but here it was missing "cqs" causing following error at the end of
-  qtwebengine build:
-  i586-oe-linux-ar Release/libqtwebenginecoreapi.a .obj/qwebenginecookiestoreclient.o .obj/qwebengineurlrequestinfo.o .obj/qwebengineurlrequestjob.o .obj/qwebengineurlschemehandler.o .obj/moc_qwebenginecookiestoreclient.o .obj/moc_qwebengineurlrequestinterceptor.o .obj/moc_qwebengineurlrequestjob.o .obj/moc_qwebengineurlschemehandler.o
-  i586-oe-linux-ar: invalid option -- 'R'
-  Usage: i586-oe-linux-ar [emulation options] [-]{dmpqrstx}[abcDfilMNoPsSTuvV] [--plugin <name>] [member-name] [count] archive-file file...
-  ...
+* latest chromium is failing to build yasm, because it's mixing native
+  (x86_64) with target (x86 qemux86) libraries during the build:
+  FAILED: /OE/build/oe-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/i586-oe-linux/i586-oe-linux-g++ -m32 -march=i586 --sysroot=/OE/build/oe-core/tmp-glibc/sysroots/qemux86 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,now -Wl,-z,relro -Wl,--fatal-warnings -Wl,-z,defs -pthread -Wl,-z,noexecstack -fPIC -Wl,--disable-new-dtags -Wl,--gc-sections -o genstring -Wl,--start-group obj.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/genstring.genstring.o -Wl,--end-group
+  /OE/build/oe-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/i586-oe-linux/gcc/i586-oe-linux/5.2.0/ld: i386:x86-64 architecture of input file `obj.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/genstring.genstring.o' is incompatible with i386 output
+  /OE/build/oe-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/i586-oe-linux/gcc/i586-oe-linux/5.2.0/ld: obj.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/genstring.genstring.o: file class ELFCLASS64 incompatible with ELFCLASS32
+  /OE/build/oe-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/i586-oe-linux/gcc/i586-oe-linux/5.2.0/ld: final link failed: File in wrong format
+  collect2: error: ld returned 1 exit status
+  ninja: build stopped: subcommand failed.
+  Makefile.gyp_run:262: recipe for target 'invoke_ninja' failed
+  make[3]: *** [invoke_ninja] Error 1
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/qt5/qtwebengine_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-qt/qt5/qtwebengine_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index 72eb1b4..f02c4d6 100644
+index f02c4d6..e4427c3 100644
 --- a/recipes-qt/qt5/qtwebengine_git.bb
 +++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -59,7 +59,7 @@ do_configure() {
-         QMAKE_LINK="${OE_QMAKE_LINK}" \
-         QMAKE_CFLAGS="${OE_QMAKE_CFLAGS}" \
-         QMAKE_CXXFLAGS="${OE_QMAKE_CXXFLAGS}" \
--        QMAKE_AR="${OE_QMAKE_AR}" \
-+        QMAKE_AR="${OE_QMAKE_AR} cqs" \
-         -after ${EXTRA_QMAKEVARS_POST}
- }
+@@ -23,6 +23,9 @@ DEPENDS += " \
+ # xscreensaver isn't covered in qtbase DEPENDS
+ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'libxscrnsaver', '', d)}"
  
++DEPENDS += "yasm-native"
++EXTRA_QMAKEVARS_PRE += "WEBENGINE_CONFIG+=use_system_yasm"
++
+ COMPATIBLE_MACHINE = "(-)"
+ COMPATIBLE_MACHINE_x86 = "(.*)"
+ COMPATIBLE_MACHINE_x86-64 = "(.*)"
 -- 
 2.6.2
 
