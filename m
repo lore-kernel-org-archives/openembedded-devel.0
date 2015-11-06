@@ -1,45 +1,31 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 54AC760124
+Return-Path: <erkka.kaaria@intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A99A75EE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Nov 2015 10:00:29 +0000 (UTC)
-Received: by wmll128 with SMTP id l128so36239393wml.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Nov 2015 02:00:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to;
-	bh=rLLgiV4PKBTgJWqauEJqx+yweBGSsJYIVcYKe4iRjrg=;
-	b=jJ5xj9WL4R+xWEqiGqNnBXsHVBxBlco++/uHAUZIHBEuYAABMX0N+K5IovzTKsYQzv
-	nkeKY/cQEDfePMtWcejW/BbckZQWtPYZ8lkCvPHjJXkziF6N5EPzOnU6+vKeXj0ZyHJ4
-	MwSLFYiMrvPWYP8v5sxkxKhpeRFqkGw4EqgHHPuIxpxgNo8vtyN4ubt/uLsJ6SQvM5zI
-	OPCou8vWtpb71IZVp3pKnYS/4GjqOXx997LYxitT3N1gJ8SzDPwWngC2IZEP6HKVrwHn
-	15zJKR2c53Hzns6+ChR19+LmJo9fF8HQsdLq9EI4uktrpmKrD46bx92JNy/AMMqsaBSw
-	GROA==
-X-Received: by 10.28.229.70 with SMTP id c67mr9760944wmh.48.1446804029771;
-	Fri, 06 Nov 2015 02:00:29 -0800 (PST)
-Received: from walter.muppets.liwing.de (p578b540c.dip0.t-ipconnect.de.
-	[87.139.84.12]) by smtp.gmail.com with ESMTPSA id
-	gl4sm11363386wjd.49.2015.11.06.02.00.28
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 06 Nov 2015 02:00:29 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-From: Jens Rehsack <rehsack@gmail.com>
-In-Reply-To: <563B5D58.6070709@skidata.com>
-Date: Fri, 6 Nov 2015 11:00:28 +0100
-Message-Id: <CE8264A7-E646-45D4-A602-1916107D94EE@gmail.com>
-References: <AE55B37B-BC8F-4516-82BC-B2B1DE341859@gmail.com>
-	<5638C28E.7040505@skidata.com>
-	<2BAA39D9-E6DA-403E-AFAB-1E59CFE61DF2@gmail.com>
-	<5638D571.3090500@skidata.com>
-	<7448BFE6-D551-4E46-A7B0-F568423C219A@gmail.com>
-	<5639BBD0.2050201@skidata.com>
-	<F46AA2E3-B76D-4B6D-ABC9-2423E80EA882@gmail.com>
-	<563B5D58.6070709@skidata.com>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.2104)
-Subject: Re: [meta-java][PATCH] openjdk-8: add recipes for openjdk-8 and openjre-8
+	Fri,  6 Nov 2015 11:44:02 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga103.jf.intel.com with ESMTP; 06 Nov 2015 03:44:02 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,251,1444719600"; d="scan'208";a="844098891"
+Received: from irsmsx108.ger.corp.intel.com ([163.33.3.3])
+	by orsmga002.jf.intel.com with ESMTP; 06 Nov 2015 03:44:01 -0800
+Received: from irsmsx106.ger.corp.intel.com ([169.254.8.229]) by
+	IRSMSX108.ger.corp.intel.com ([169.254.11.138]) with mapi id
+	14.03.0248.002; Fri, 6 Nov 2015 11:44:00 +0000
+From: "Kaaria, Erkka" <erkka.kaaria@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-java] Sporadic segfaults when compiling jamvm-native and
+	classpath-native
+Thread-Index: AdEYh1mleQZx3N4ORrSipg5JNSUBow==
+Date: Fri, 6 Nov 2015 11:44:00 +0000
+Message-ID: <17C19527BD855F428F22685986FD58BEA213D3@IRSMSX106.ger.corp.intel.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.19.9.42]
+MIME-Version: 1.0
+Subject: [meta-java] Sporadic segfaults when compiling jamvm-native and classpath-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,58 +39,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2015 10:00:30 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 06 Nov 2015 11:44:03 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
+Hi everyone,
 
-> Am 05.11.2015 um 14:44 schrieb Richard Leitner =
-<richard.leitner@skidata.com>:
->=20
-> On 11/04/2015 06:57 PM, Jens Rehsack wrote:
->> Sure? Didn't you "bitbake openjdk-8"? Or is it because =
-virtual/javac-native now points
->> to openjdk-8-native and there is no known way for me to let a user =
-sanely pick the
->> beloved one on his/her own?
->>=20
->> But openjdk-7 should not depend on virtual/javac-native -- so some =
-enlightening is
->> required ...
->=20
-> I'm sure I built openjdk-7 ;-)
->=20
-> Following PREFERRED_PROVIDES were defined:
-> PREFERRED_PROVIDER_virtual/java-initial-native =3D =
-"cacao-initial-native"
-> PREFERRED_PROVIDER_virtual/java-native =3D "jamvm-native"
-> PREFERRED_PROVIDER_virtual/javac-native =3D "ecj-bootstrap-native"
-> PREFERRED_PROVIDER_openjdk-7-jre =3D "openjdk-7-jre"
->=20
-> Any idea?
+There seems to be something wrong with cacao-initial-native JIT compiler th=
+at causes sporadic segfaults when compiling jamvm-native or classpath-nativ=
+e. This is fairly rare, I estimate around 1% of the builds fail due to segf=
+ault. I use 64 bit Ubuntu 15.04 with GCC 4.9.2 as build machine.
 
-Yes. Say bye to "PREFERRED_PROVIDER_virtual/java-native" - since they're =
-insane.
+Example do_compile log:
 
-1) openjdk-7 must not use such a virtual provider, but a well known =
-bootstrap path
-   DEPENDS =3D " ... icedtea7-native ... "
-   do a "bitbake -g openjdk-7" to figure out which bootstrap-component =
-requires virtual/java-native or virtual/javac-native
-2) When several recipes in bootstrap path define the same provider, =
-bitbake refuses install, because one can only one particular package =
-satisfying such a provider
+make[6]: Entering directory '<path-snip>/build/tmp/work/x86_64-linux/jamvm-=
+native/1.5.5+1.6.0-devel+gitAUTOINC+ebd11bde0a-r0/build/src/classlib/gnucla=
+sspath/lib'
+mkdir classes
+<snip, ecj-initial compiling lots of java files>
+LOG: [0x00007f32c46a7700] We received a SIGSEGV and tried to handle it, but=
+ we were
+LOG: [0x00007f32c46a7700] unable to find a Java method at:
+LOG: [0x00007f32c46a7700]
+LOG: [0x00007f32c46a7700] PC=3D0x0000000000440c09
+LOG: [0x00007f32c46a7700]
+LOG: [0x00007f32c46a7700] Dumping the current stacktrace:
+    <<No stacktrace available>>
+LOG: [0x00007f32c46a7700] Exiting...
+Aborted (core dumped)
+Makefile:662: recipe for target 'classes.zip' failed
 
-I have with such a limitation no idea how to let people choose the =
-desired provider for virtual/javac-native between jamvm/ecj, =
-icedtea7-native or openjdk-8-native.
 
-But this is stated in the commit message of both patches you had applied =
-and is mentioned in the README as well. Please read the provided =
-documentation, no worries that you cant' debug problems later on ...
+Examination of the core dump in this particular case indicates that the seg=
+fault is caused by null pointer dereference in builtin_new at builtin.c:764:
 
-Cheers
---=20
-Jens Rehsack - rehsack@gmail.com
+<snip, signal handlers, java stacktrace code etc>
+#5 <signal handler called>
+#6 builtin_new (c=3D0x0) at builtin.c:764
+#7 0x00007f23badb5a5f in ?? ()
+#8 0x0000000000000000 in ?? ()
+
+Gdb is unable to show the calling method, and judging by the fact that the =
+old instruction pointer does not match any shared library addresses, I thin=
+k it originates from JIT compiled code.
+
+This http://c1.complang.tuwien.ac.at/pipermail/cacao/2011-March/001350.html=
+ thread seems to indicate that there could be a race condition in cacao JIT=
+ compiler when multiple Java threads are involved. I forced the ecj to only=
+ use one thread and segfaulting seems to have stopped.
+
+Given the non-deterministic nature of the bug, I am not sure if I actually =
+managed to fix this or if I have just been lucky. As such, I request help to
+
+a) Verify the presence of the bug
+b) Verify that forcing ecj to only use single thread fixes the issue.
+
+Multihreading can be disabled by adding -Djdt.compiler.useSingleThread=3Dtr=
+ue to the third line in "ecj-initial" script in build/tmp/sysroots/<build m=
+achine folder>/usr/bin/
+
+example line:
+${RUNTIME} -Xmx512m -Djdt.compiler.useSingleThread=3Dtrue -cp ${ECJ_JAR} or=
+g.eclipse.jdt.internal.compiler.batch.Main ${1+"$@"}
+
+
+Script I use for the recompilation. I usually get a failure within 90 minut=
+es, but this naturally varies between computers. Run from the build folder
+
+#!/bin/bash
+while [ true ]; do
+  echo $(date)
+  echo "Cleaning..."
+  bitbake -c cleansstate jamvm-native > /dev/null
+  echo "Compiling..."
+  bitbake -c compile jamvm-native > /dev/null   || { echo "Stopping"; exit =
+1; }
+done
+
+Best regards,
+Erkka K=E4=E4ri=E4
+---------------------------------------------------------------------
+Intel Finland Oy
+Registered Address: PL 281, 00181 Helsinki =
+
+Business Identity Code: 0357606 - 4 =
+
+Domiciled in Helsinki =
+
+
+This e-mail and any attachments may contain confidential material for
+the sole use of the intended recipient(s). Any review or distribution
+by others is strictly prohibited. If you are not the intended
+recipient, please contact the sender and delete all copies.
 
 
