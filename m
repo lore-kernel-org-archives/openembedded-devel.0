@@ -1,28 +1,24 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1FA7275E2D
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 97B2B770C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Nov 2015 06:06:35 +0000 (UTC)
+	Sat,  7 Nov 2015 08:21:33 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tA766ZRB006237
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 6 Nov 2015 22:06:35 -0800 (PST)
-Received: from [128.224.162.154] (128.224.162.154) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Fri, 6 Nov 2015 22:06:34 -0800
-Message-ID: <563D94E8.5020703@windriver.com>
-Date: Sat, 7 Nov 2015 14:06:32 +0800
-From: wenzong fan <wenzong.fan@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
-MIME-Version: 1.0
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tA78LV0H020391
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sat, 7 Nov 2015 00:21:32 -0800 (PST)
+Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.159) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Sat, 7 Nov 2015 00:21:30 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1446541344-186769-1-git-send-email-wenzong.fan@windriver.com>
-	<CAMKF1so9srmNQoPa3FdXx0QFQmc20dRe=jMOfDUsYa1ddSsUQg@mail.gmail.com>
-In-Reply-To: <CAMKF1so9srmNQoPa3FdXx0QFQmc20dRe=jMOfDUsYa1ddSsUQg@mail.gmail.com>
-Subject: Re: [PATCH][meta-python] python-pygpgme: add python-pygpgme 0.3
+Date: Sat, 7 Nov 2015 16:21:25 +0800
+Message-ID: <1446884486-23655-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Cc: jeffrey.honig@windriver.com
+Subject: [meta-perl][PATCH 1/2] libmodule-build-perl: add 0.31
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,24 +32,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Nov 2015 06:06:36 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 07 Nov 2015 08:21:35 -0000
+Content-Type: text/plain
 
-On 11/04/2015 12:15 AM, Khem Raj wrote:
-> On Tue, Nov 3, 2015 at 1:02 AM,  <wenzong.fan@windriver.com> wrote:
->> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=6517bdc8f2416f27ab725d4702f7aac3"
->
-> a single line licence ? what does it say, arent there other places
-> where it states it more clearly.
->
+[Description from CPAN]
+`Module::Build' is a system for building, testing, and installing Perl
+modules. It is meant to be an alternative to `ExtUtils::MakeMaker'.
+Developers may alter the behavior of the module through subclassing in a
+much more straightforward way than with `MakeMaker'. It also does not
+require a `make' on your system - most of the `Module::Build' code is
+pure-perl and written in a very cross-platform way.
 
-Yes. The line 8 of PKG-INFO says: "License: LGPL".
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ .../libmodule/libmodule-build-perl_0.31.bb         | 27 ++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.31.bb
 
-There is not full text statement of LGPL license, I found pyrtm_0.2.bb, 
-python-zopeinterface_4.1.1.bb also use the same ways.
-
-Thanks
-Wenzong
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.31.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.31.bb
+new file mode 100644
+index 0000000..c0fa06d
+--- /dev/null
++++ b/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.31.bb
+@@ -0,0 +1,27 @@
++SUMMARY = "Module::Build::Tiny - A tiny replacement for Module::Build"
++DESCRIPTION = "Many Perl distributions use a Build.PL file instead of a \
++Makefile.PL file to drive distribution configuration, build, test and \
++installation. Traditionally, Build.PL uses Module::Build as the underlying \
++build system. This module provides a simple, lightweight, drop-in replacement. \
++Whereas Module::Build has over 6,700 lines of code; this module has less than \
++120, yet supports the features needed by most distributions."
++SECTION = "libs"
++
++HOMEPAGE = "http://search.cpan.org/~kwilliams/Module-Build-0.31/"
++
++LICENSE = "Artistic-1.0 | GPL-1.0+"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=43339d8f9d3a956ee9eceb07717ee95e"
++
++SRC_URI = "${CPAN_MIRROR}/authors/id/K/KW/KWILLIAMS/Module-Build-${PV}.tar.gz"
++SRC_URI[md5sum] = "3d4fdffe58f6236253767e5a71edf29b"
++SRC_URI[sha256sum] = "e2f723be8d6c70b4ddbca3b5e32e52e6e98eae8f43e34d7ede87efcb1796bbb5"
++
++S = "${WORKDIR}/Module-Build-${PV}"
++
++inherit cpan_build
++
++do_install () {
++        cpan_build_do_install
++}
++
++BBCLASSEXTEND = "native"
+-- 
+1.9.1
 
 
