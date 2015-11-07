@@ -1,26 +1,32 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2466E770CA
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id E96F076104
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Nov 2015 08:21:34 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tA78LYGF006614
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sat, 7 Nov 2015 00:21:34 -0800 (PST)
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.159) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Sat, 7 Nov 2015 00:21:33 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 7 Nov 2015 16:21:26 +0800
-Message-ID: <1446884486-23655-2-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1446884486-23655-1-git-send-email-hongxu.jia@windriver.com>
-References: <1446884486-23655-1-git-send-email-hongxu.jia@windriver.com>
-MIME-Version: 1.0
-Cc: jeffrey.honig@windriver.com
-Subject: [meta-perl][PATCH 2/2] libhtml-tree-perl: add version 5.03
+	Sat,  7 Nov 2015 12:22:49 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so37947967wme.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 07 Nov 2015 04:22:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=txnZuixidxHxlKySIT187cbdiDkZA9EvEmOZSwLvMuM=;
+	b=FG5lslE4dXAYih5MkwC8YSNQNi5rp6ZZWXQON4b/jDbSbAApt6mFDdBIt3s8NKP3Yq
+	XL9lqBzL+WVHk729NaBqVYkIER97Vm5Az9bgTVZ1fiZYO5ExDHRT9kXBltBLRmix0ZL8
+	FLHyLHvqb33cSqhBJ/sjEMyVsFlG5nCjas3ygi1x45lCvT20b1hVWTf84dLBoIHPHyEv
+	pg6C8RyRYFLzYE0ugX3I0FjzQ8vqXRnwVkQiqAnHoDiWhIoNgjmkgit9CntyYjn7cSy6
+	njImAzp/ZlQWrr2g7/K5ChyEZkEd0mQu5Ma2IKXeEofO7d4KdGC24nSdE3b+eRQdx/xW
+	0sdQ==
+X-Received: by 10.28.213.212 with SMTP id m203mr15310068wmg.33.1446898969442; 
+	Sat, 07 Nov 2015 04:22:49 -0800 (PST)
+Received: from Saturn.local.all (212-41-102-22.adsl.solnet.ch. [212.41.102.22])
+	by smtp.gmail.com with ESMTPSA id ly4sm4899190wjb.4.2015.11.07.04.22.48
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 07 Nov 2015 04:22:48 -0800 (PST)
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  7 Nov 2015 13:20:24 +0100
+Message-Id: <1446898829-21243-1-git-send-email-max.oss.09@gmail.com>
+X-Mailer: git-send-email 1.8.4.5
+Subject: [meta-browser][PATCH v2 0/5] chromium/cef3: fix gcc build errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,64 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Nov 2015 08:21:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 07 Nov 2015 12:22:50 -0000
 
-HTML-Tree is a suite of Perl modules for making parse trees out of HTML source.
+v2:
+Review Zoltan Kuscsik:
+- prefer #pragma silencing of error over code refactoring
+- add link to upstream discussion
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- .../recipes-perl/libhtml/libhtml-tree-perl_5.03.bb | 40 ++++++++++++++++++++++
- 1 file changed, 40 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb
+Review Martin Jansa:
+- port fixes to cef3 also
 
-diff --git a/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb b/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb
-new file mode 100644
-index 0000000..0b457e3
---- /dev/null
-+++ b/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb
-@@ -0,0 +1,40 @@
-+SUMMARY = "HTML::TreeBuilder - Parser that builds a HTML syntax tree"
-+DESCRIPTION = "This distribution contains a suite of modules for representing, \
-+creating, and extracting information from HTML syntax trees; there is \
-+also relevent documentation.  These modules used to be part of the \
-+libwww-perl distribution, but are now unbundled in order to facilitate \
-+a separate development track."
-+SECTION = "libs"
-+
-+HOMEPAGE = "http://www.cpan.org/authors/id/C/CJ/CJM/HTML-Tree-${PV}.readme"
-+
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3eb57a8958cae73cb65e7d0c26339242"
-+
-+SRC_URI = "${CPAN_MIRROR}/authors/id/C/CJ/CJM/HTML-Tree-${PV}.tar.gz"
-+SRC_URI[md5sum] = "d9271d60b872ed6fbe68b2d0fe8c450e"
-+SRC_URI[sha256sum] = "7d6d73fca622aa74855a8b088faa39454a0f91b7af83c9ec0387f01eefc2148f"
-+
-+S = "${WORKDIR}/HTML-Tree-${PV}"
-+
-+inherit cpan_build
-+
-+DEPENDS += "libmodule-build-perl-native \
-+"
-+
-+RPROVIDES_${PN} = " libhtml-element-perl \
-+		    libhtml-tree-assubs-perl \
-+		    libhtml-tree-perl \
-+		    libhtml-treebuilder-perl \
-+"
-+
-+RDEPENDS_${PN} = " perl-module-b \
-+                   perl-module-base \
-+                   perl-module-strict \
-+                   perl-module-warnings \
-+                   perl-module-exporter \
-+                   perl-module-carp \
-+"
-+
-+BBCLASSEXTEND = "native"
-+
+Max Krummenacher (5):
+  chromium: fix gcc5 compile issues
+  cef3_280796.bb: change indent to 4 spaces
+  cef3: fix gcc5 compile issues
+  cef3: fix build of x86-64
+  cef3: fix build with gcc 4.9.4
+
+ ...0001-bignum.cc-disable-warning-from-gcc-5.patch | 39 ++++++++++++++++++++
+ ...-image_util.cc-disable-warning-from-gcc-5.patch | 40 ++++++++++++++++++++
+ ...-test.h-disable-warning-unused-definition.patch | 43 ++++++++++++++++++++++
+ ...ithmetic.h-put-parentheses-to-silence-war.patch | 39 ++++++++++++++++++++
+ recipes-browser/chromium/cef3_280796.bb            | 33 ++++++++++++-----
+ ...0001-bignum.cc-disable-warning-from-gcc-5.patch | 39 ++++++++++++++++++++
+ ...-image_util.cc-disable-warning-from-gcc-5.patch | 40 ++++++++++++++++++++
+ recipes-browser/chromium/chromium_40.0.2214.91.bb  |  3 ++
+ 8 files changed, 266 insertions(+), 10 deletions(-)
+ create mode 100644 recipes-browser/chromium/cef3/0001-bignum.cc-disable-warning-from-gcc-5.patch
+ create mode 100644 recipes-browser/chromium/cef3/0002-image_util.cc-disable-warning-from-gcc-5.patch
+ create mode 100644 recipes-browser/chromium/cef3/0003-gtest-typed-test.h-disable-warning-unused-definition.patch
+ create mode 100644 recipes-browser/chromium/cef3/0004-SaturatedArithmetic.h-put-parentheses-to-silence-war.patch
+ create mode 100644 recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-disable-warning-from-gcc-5.patch
+ create mode 100644 recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
+
 -- 
-1.9.1
+1.8.4.5
 
 
