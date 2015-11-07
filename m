@@ -1,22 +1,28 @@
-Return-Path: <philb@gnu.org>
-Received: from hetzner.pbcl.net (mail.pbcl.net [88.198.119.4])
-	by mail.openembedded.org (Postfix) with ESMTP id BC8DE75EE7
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FA7275E2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Nov 2015 00:06:29 +0000 (UTC)
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25] helo=e130.local)
-	by hetzner.pbcl.net with esmtpsa (TLS1.2:RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80) (envelope-from <philb@gnu.org>) id 1Zur1X-0007Fr-CL
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Nov 2015 01:06:28 +0100
-Message-ID: <1446854780.5685.20.camel@gnu.org>
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 07 Nov 2015 00:06:20 +0000
-In-Reply-To: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
-References: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
-X-Mailer: Evolution 3.12.9-1+b1 
-Mime-Version: 1.0
-Subject: Re: OE/Yocto developer survey
+	Sat,  7 Nov 2015 06:06:35 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tA766ZRB006237
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 6 Nov 2015 22:06:35 -0800 (PST)
+Received: from [128.224.162.154] (128.224.162.154) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
+	Fri, 6 Nov 2015 22:06:34 -0800
+Message-ID: <563D94E8.5020703@windriver.com>
+Date: Sat, 7 Nov 2015 14:06:32 +0800
+From: wenzong fan <wenzong.fan@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1446541344-186769-1-git-send-email-wenzong.fan@windriver.com>
+	<CAMKF1so9srmNQoPa3FdXx0QFQmc20dRe=jMOfDUsYa1ddSsUQg@mail.gmail.com>
+In-Reply-To: <CAMKF1so9srmNQoPa3FdXx0QFQmc20dRe=jMOfDUsYa1ddSsUQg@mail.gmail.com>
+Subject: Re: [PATCH][meta-python] python-pygpgme: add python-pygpgme 0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,97 +36,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Nov 2015 00:06:30 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 07 Nov 2015 06:06:36 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-(Better late than never...)
+On 11/04/2015 12:15 AM, Khem Raj wrote:
+> On Tue, Nov 3, 2015 at 1:02 AM,  <wenzong.fan@windriver.com> wrote:
+>> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=6517bdc8f2416f27ab725d4702f7aac3"
+>
+> a single line licence ? what does it say, arent there other places
+> where it states it more clearly.
+>
 
-On Mon, 2015-10-26 at 15:18 -0400, Cliff Brake wrote:
-> Hi,
-> 
-> I'd like to get some feedback on the following questions -- feel free
-> to respond to list, or directly to me, and I'll withhold your
-> name/company from any results.
-> 
-> I would like to collect feedback until 2015-11-02, and will summarize
-> the results after that.
-> 
-> My goal with this survey is to get a sense for best practices and what
-> is most commonly used among Yocto/OE developers so I can better advise
-> clients using Yocto/OE.  Hopefully this will also generate some
-> interesting discussions.
-> 
-> How long have you been using OE?  11 years
-> 
-> How do you use OE/Yocto?
-> [X ] product development
-> [  ] hobby/research/education/yocto core developer, etc
-> 
-> What distro do you use?
-> [  ] Poky
-> [  ] Angstrom
-> [X ] nodistro or custom
-> 
-> How do you organize multiple git repos?
-> [X ] Git submodules
-> [  ] Repo
-> [  ] Other
-> 
-> What packaging system?
-> [X ] OPKG
-> [  ] RPM
-> [  ] Other
-> 
-> What GUI toolkits?
-> [X ] Qt
-> [  ] Gtk
-> [  ] EFL
-> [  ] HTML5/JS
-> [  ] Other
-> 
-> What init system?
-> [  ] systemd
-> [  ] sysvinit
-> [X ] busybox init
-> [  ] Other
-> 
-> What libc?
-> [X ] glibc
-> [  ] uclibc
-> [  ] musl
-> [  ] Other
-> 
-> How do you develop custom applications?
-> [  ] application-SDK
-> [X ] devshell
-> [X ] develop on PC, test on target
-> [X ] Other
-> 
-> What language do you primarily use for custom applications?
-> [  ] C
-> [X ] C++
-> [  ] Python
-> [  ] Javascript
-> [  ] Lua
-> [  ] Other
-> 
-> What do you use for Continuous Integration?
-> [  ] Buildbot
-> [X ] Jenkins
-> [  ] Other
-> 
-> Do you use any any of the tooling projects
-> (https://www.yoctoproject.org/tools-resources/projects) such as ADT,
-> Hob, Toaster, etc?
-> 
-> No.
-> 
-> Reasons or explanations are appreciated, and please feel free to
-> include additional choices/information you think are relevant.
-> 
-> Thanks,
-> Cliff
+Yes. The line 8 of PKG-INFO says: "License: LGPL".
 
+There is not full text statement of LGPL license, I found pyrtm_0.2.bb, 
+python-zopeinterface_4.1.1.bb also use the same ways.
+
+Thanks
+Wenzong
 
 
