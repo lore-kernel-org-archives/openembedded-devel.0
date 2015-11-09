@@ -1,61 +1,37 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ig0-f169.google.com (mail-ig0-f169.google.com
-	[209.85.213.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 2286C75EE7
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
+	[209.85.192.45])
+	by mail.openembedded.org (Postfix) with ESMTP id B320A766B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Nov 2015 10:18:54 +0000 (UTC)
-Received: by igvg19 with SMTP id g19so23337371igv.1
+	Mon,  9 Nov 2015 10:49:51 +0000 (UTC)
+Received: by qgec40 with SMTP id c40so78681459qge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Nov 2015 02:18:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems_com_br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=b7NCrmhIGANkyyEH+sjNGuGyWZPll0UOSfGFF+gVJTo=;
-	b=gvaWkvaoo/gkhKo0ecttnrs678VdCnVpnlwVg/G3gi3Ybk5c8JQpfspAzQ5uwIhUot
-	xSz+Cncv9YgbswAovP5Fk6xbYHGevjUECa3vv/d2v2JcFB+ZcddKa5DMl12t9i3JUZhS
-	0QrQJknGDQ6N4LISdM3uAyscMTjDBL86Khy3RJ6a7+w50oe9ZqDotQVMceN7/zDHFAfv
-	kIixDzqNMJltNU9CthM4EhrICO1MwEwq5ZUvmkkk76jKs+460PtJ0xXTgv8+cDpOSRvX
-	reipAXtLKnYAxyuwNBa7wG1y13mdJKh7SVIcqMU98k/0CNToYvEptuVHd4OWR6qkLrwE
-	7Uxg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=b7NCrmhIGANkyyEH+sjNGuGyWZPll0UOSfGFF+gVJTo=;
-	b=escmG6AyVj6fA7qsxjt/ZTGI71ygq9j0mFJVwaxnr3xmHW2CReWzDS8lhJj4UhRgGX
-	jOPW4WLEayCtHFk6dS5vh741IOYdrtX97xydNNj8s+9UmxLRLRhydmYgt2Illa3IP788
-	bebDSvViZlQIN39Rt+6xm2cFIVjeoMZ5RuZ+ICSXFHL6RUjeJr/QpjJjd8/fq3UlNUlq
-	9S1bCXAgu7HyWyB4F2j/AkMzpb/z0tY9ATlsFLsnO2CNZfGFal+0E+0Rr2QyUrloE+bU
-	ZhNdwqtgPrccNBxVsILg7uqiLTegZlMDXYeUjhA4VT+MoUWQSWaYEWVTwRLj61pziMs5
-	zfFA==
-X-Gm-Message-State: ALoCoQljSPE4eVXW2ruagMAHQXsdUfQ7/LHG5f/yDnYqtIW59FYJEqqWQBg65D1S7woJnH8IVq7e
-X-Received: by 10.50.4.33 with SMTP id h1mr20492509igh.24.1447064334706;
-	Mon, 09 Nov 2015 02:18:54 -0800 (PST)
-Received: from mail-io0-f170.google.com (mail-io0-f170.google.com.
-	[209.85.223.170])
-	by smtp.gmail.com with ESMTPSA id d9sm4677469igx.10.2015.11.09.02.18.52
+	Mon, 09 Nov 2015 02:49:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:from:date:to:subject:user-agent;
+	bh=lrBGuf8jr9bhwIGEVQqodzlAj+n2VAweKANfFkYbbNY=;
+	b=Ds5h/JolttlegNjLdK7Tl1dMaFcq228ZY4V6MNwsXKiBWgq48tYDJ2QNLO+wPm07o2
+	TteRjKZdvcqzJwN7BZSrjo0wDySYvDLazan1lBz69ofXK0EYtnEQ5C2JUzPQd4zuDjT+
+	ANH8uMu6uv5yjQcBGRMiOM11+C8OYaxGUEHykjyytozvS2rbRg8sLfbruS1AEjv5jHb0
+	fFpFmALpeVZa6bjxzJErorIWbRjk9Jc1/BfZSMJ59tm60l7lXKnPn7Wfv1AMfBsjXB31
+	pEZP4NCOl5u0DUiA2L2W2p1ekeSMnG8d6l3HBaWxJZgfrH1DY6s88gi8l5G9gYcnaut7
+	qfyQ==
+X-Received: by 10.140.130.200 with SMTP id 191mr30837322qhc.32.1447066191291; 
+	Mon, 09 Nov 2015 02:49:51 -0800 (PST)
+Received: from localhost ([177.100.174.62]) by smtp.gmail.com with ESMTPSA id
+	b108sm4607490qgf.20.2015.11.09.02.49.48
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 09 Nov 2015 02:18:53 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by iodd200 with SMTP id d200so181131466iod.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Nov 2015 02:18:52 -0800 (PST)
-MIME-Version: 1.0
-X-Received: by 10.107.151.131 with SMTP id z125mr1973417iod.192.1447064332570; 
-	Mon, 09 Nov 2015 02:18:52 -0800 (PST)
-Received: by 10.36.15.197 with HTTP; Mon, 9 Nov 2015 02:18:52 -0800 (PST)
-In-Reply-To: <17C19527BD855F428F22685986FD58BEA33E02@IRSMSX103.ger.corp.intel.com>
-References: <17C19527BD855F428F22685986FD58BEA213D3@IRSMSX106.ger.corp.intel.com>
-	<CAP9ODKpP17FSRs+iNU=nne4empeDXCJbVq07ydq-6MoGAmO+yQ@mail.gmail.com>
-	<17C19527BD855F428F22685986FD58BEA33E02@IRSMSX103.ger.corp.intel.com>
-Date: Mon, 9 Nov 2015 08:18:52 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKpg++24j0UJhMCKQ2fGVo9woixSD8aM1-Uh-WfrB9rTTw@mail.gmail.com>
-Message-ID: <CAP9ODKpg++24j0UJhMCKQ2fGVo9woixSD8aM1-Uh-WfrB9rTTw@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java] Sporadic segfaults when compiling jamvm-native and classpath-native
+	Mon, 09 Nov 2015 02:49:50 -0800 (PST)
+Message-ID: <56407a4e.75698c0a.d8a77.525f@mx.google.com>
+Received: by localhost (sSMTP sendmail emulation);
+	Mon, 09 Nov 2015 08:49:46 -0200
+From: "Otavio Salvador" <otavio.salvador@gmail.com>
+Date: Mon, 09 Nov 2015 08:49:46 -0200
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+User-Agent: mail v14.8.5
+Subject: Updates to meta-browser (master) in 2015-11-09
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,30 +45,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Nov 2015 10:18:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 09 Nov 2015 10:49:51 -0000
 
-On Mon, Nov 9, 2015 at 6:10 AM, Kaaria, Erkka <erkka.kaaria@intel.com> wrot=
-e:
-> While the workaround would leave the underlying cause unfixed, it only re=
-quires changing one line. Since the cacao-initial-native is only used brief=
-ly during the build process, I think small workaround is better than large =
-scale changes to the old codebase. I also didn't notice any difference in c=
-lasspath-native or jamvm-native build times, so the performance impact is n=
-egligible.
->
-> On a related note, I ran the clean\recompile script over the weekend and =
-saw no segfaults, so I think the workaround works.
+Hello,
 
-So please cook a patch adding the workaround and add a proper comment
-in the recipe with FIXME so we are aware of it.
+I pushed following updates:
 
-If possible, consider the possibility of packaging the staging
-repository so we could use a newer release, after that,  and likely
-drop patches :)
+commit 7887e66d5df998b91d4df24a150c32a692784451 (HEAD -> pending, origin/master, origin/HEAD)
+Author: Max Krummenacher <max.oss.09@gmail.com>
+Date:   Sat Nov 7 13:20:29 2015 +0100
 
---=20
+    cef3: fix build with gcc 4.9.4
+    
+    During the final link we get errors like this:
+    .../4.9.4/ld: warning: hidden symbol 'sqlite3_temp_directory' in obj/.../sqlite.sqlite3.o) is referenced by DSO .../usr/lib/libsoftokn3.so
+    .../4.9.4/ld: error: treating warnings as errors
+    collect2: error: ld returned 1 exit status
+    
+    Use chromium.bb solution to not treat linker warnings as errors.
+    
+    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+    
+    Upstream-Status: Inappropriate configuration
+    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+commit 8d4ad9ca4049cf8a75f37f260913f6ad106f1e52
+Author: Max Krummenacher <max.oss.09@gmail.com>
+Date:   Sat Nov 7 13:20:28 2015 +0100
+
+    cef3: fix build of x86-64
+    
+    Use gypi file for i586 to create the configuration for the x86-64 architecture.
+    
+    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+    
+    Upstream-Status: Inappropriate configuration
+    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+commit c04205a73182b8d065b1afbc502be0b70fa6017f
+Author: Max Krummenacher <max.oss.09@gmail.com>
+Date:   Sat Nov 7 13:20:27 2015 +0100
+
+    cef3: fix gcc5 compile issues
+    
+    A cef3 build with gcc5 fails with warnings treated as errors.
+    
+    bignum.cc, image_util.cc: strict-overflow warning
+    gtest-typed-test.h: unused-variable warning
+    SaturatedArithmetic.h: parentheses warning
+    
+    Compiles for qemux86 with gcc 5.2.0 and still compiles on
+    armv7a with gcc linaro-4.9.4.
+    Note that the resulting binary has not been tested on a target.
+    
+    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+commit e2b1f6dd53789f8434c424959485090f07982596
+Author: Max Krummenacher <max.oss.09@gmail.com>
+Date:   Sat Nov 7 13:20:26 2015 +0100
+
+    cef3_280796.bb: change indent to 4 spaces
+    
+    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+commit 654ae2847858db5d62e2bc1f04e2049598cda18a
+Author: Max Krummenacher <max.oss.09@gmail.com>
+Date:   Sat Nov 7 13:20:25 2015 +0100
+
+    chromium: fix gcc5 compile issues
+    
+    A chromium build with gcc5 fails with warnings treated as errors.
+    
+    bignum.cc, image_util.cc: strict-overflow warning
+    
+    Compiles and runs on qemux86-64 with gcc 5.2.0 and still compiles on
+    armv7a with gcc linaro-4.9.4.
+    
+    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+Regards,
+
+--
 Otavio Salvador                             O.S. Systems
 http://www.ossystems.com.br        http://code.ossystems.com.br
 Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
