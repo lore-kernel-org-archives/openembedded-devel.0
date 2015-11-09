@@ -1,34 +1,35 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 87BC176E4A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A0AB76230
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Nov 2015 03:30:36 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tA93UaZC017022
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  9 Nov 2015 03:41:57 +0000 (UTC)
+Received: by iody8 with SMTP id y8so173828435iod.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 8 Nov 2015 19:30:36 -0800 (PST)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.247]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0248.002;
-	Sun, 8 Nov 2015 19:30:35 -0800
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] samba: fix the incorrect tmpfiles
-	installed directory
-Thread-Index: AQHRGLVdUSivVbCGhUKHFd8ycVkVw56TDHGg
-Date: Mon, 9 Nov 2015 03:30:34 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010C719AB0@ALA-MBA.corp.ad.wrs.com>
-References: <1446464931-351-1-git-send-email-jackie.huang@windriver.com>
-	<20151106170546.GE2550@jama>
-In-Reply-To: <20151106170546.GE2550@jama>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.135]
+	Sun, 08 Nov 2015 19:41:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=wUVlUuVSb7InIPnIxHEmvEGNBZL+7x3mdTwT2QEIuCI=;
+	b=kAEuDerCs3/h51bdS7PiwMHeEaSDt0rKvi/wijon7ppM9iAGAmOUwLv9sWGUS1rNwk
+	bxO2FRz2kLzLQ4mHCuA0RP/DFzfxCTWXLZLnj0JdbDnzhnihoSMOm9q3nZK7pGgHyn8J
+	f7Djq7c9USIaSPpISnR4RXURXuVgECK4SVilX0NdZGonZhwGRHkw+0nsI8q4Vl9bbtys
+	c2za4oYrdFNgn27aNviNlM/r8kta06FdVI1SAD/IV6e09MscyXGnCzUhG4ifbU7v+qCr
+	rj3bsVnkPqea+aW0ZTPu5Q6BK8bzNVXk34jbSgK66ob1dIUAapJp3SLKqB8Gv+tqz/uu
+	lWpg==
+X-Received: by 10.107.3.77 with SMTP id 74mr22953102iod.49.1447040518133; Sun,
+	08 Nov 2015 19:41:58 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] samba: fix the incorrect tmpfiles installed directory
+Received: by 10.107.38.133 with HTTP; Sun, 8 Nov 2015 19:41:28 -0800 (PST)
+In-Reply-To: <CA+chaQfyy2rFonPRt6v7_wML08JUCFWLnoRic2Rbr33LDiHnaQ@mail.gmail.com>
+References: <1446980869-13083-1-git-send-email-Martin.Jansa@gmail.com>
+	<CALbNGRQk84xAEK01=RAKK3vsY5X0CTqUUAD6Sb6GXqpMEDRswg@mail.gmail.com>
+	<CA+chaQfyy2rFonPRt6v7_wML08JUCFWLnoRic2Rbr33LDiHnaQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 8 Nov 2015 19:41:28 -0800
+Message-ID: <CAMKF1sow6gD0p7oaROFyV+yUmQ5jnfkZe0S6-Za0GwAc=nL=-A@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe] Revert "luajit: Upgrade to 2.1 beta1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,99 +43,235 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Nov 2015 03:30:36 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 09 Nov 2015 03:41:58 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
+Martin
 
+The build failures are not due to luajit, they are due to lua itself
+being upgraded beyond 5.1 and its ABI incompatible. Its being
+highlighted
+by luajit 2.1 most probbably, If the lua 5.1 reintroduction patch has
+been applied then we can look into the fact that lua 5.1 is chosen for
+these packages.
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
-> Sent: Saturday, November 07, 2015 1:06 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH] samba: fix the incorrect tmpfiles inst=
-alled directory
->=20
-> On Mon, Nov 02, 2015 at 07:48:51PM +0800, jackie.huang@windriver.com wrot=
+and yes the 32bit host dependencies has always been a requirement for luaji=
+t.
+
+On Sun, Nov 8, 2015 at 12:50 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
 e:
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >
-> > - The tmpfiles are always installed in /usr/lib
-> >   even for multilib.
-> > - It makes no sense to have two tmpfiles in both
-> >   /usr/lib/tmpfiles.d and /etc/tmpfiles.d, install
-> >   it as one in /etc/tmpfiles.d.
->=20
-> Please rebase on latest master and resend.
-
-Rebased and resent.
-
-Thanks,
-Jackie
-
->=20
-> >
-> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> > ---
-> >  meta-oe/recipes-connectivity/samba/samba_4.1.12.bb | 11 ++++-------
-> >  1 file changed, 4 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb b/meta-=
-oe/recipes-
-> connectivity/samba/samba_4.1.12.bb
-> > index 22c2bb4..45fdaa7 100644
-> > --- a/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
-> > +++ b/meta-oe/recipes-connectivity/samba/samba_4.1.12.bb
-> > @@ -94,18 +94,16 @@ do_install_append() {
-> >              -e 's,@SBINDIR@,${sbindir},g' \
-> >              -i ${D}${systemd_unitdir}/system/*.service
-> >
-> > -	install -d ${D}${sysconfdir}/tmpfiles.d
-> > -	echo "d ${localstatedir}/log/samba 0755 root root -" \
-> > -            > ${D}${sysconfdir}/tmpfiles.d/99-${BPN}.conf
-> > +        install -d ${D}${sysconfdir}/tmpfiles.d
-> > +        install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdi=
-r}/tmpfiles.d/samba.conf
-> > +        echo "d ${localstatedir}/log/samba 0755 root root -" \
-> > +            >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
-> >      fi
-> >
-> >      install -d ${D}${sysconfdir}/samba
-> >      echo "127.0.0.1 localhost" > ${D}${sysconfdir}/samba/lmhosts
-> >      install -m644 packaging/LSB/smb.conf ${D}${sysconfdir}/samba/smb.c=
-onf
-> >
-> > -    install -d ${D}${libdir}/tmpfiles.d
-> > -    install -m644 packaging/systemd/samba.conf.tmp ${D}${libdir}/tmpfi=
-les.d/samba.conf
-> > -
-> >      install -d ${D}${sysconfdir}/sysconfig/
-> >      install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/=
-sysconfig/samba
-> >  }
-> > @@ -114,7 +112,6 @@ PACKAGES +=3D "${PN}-python ${PN}-python-dbg ${PN}-=
-pidl libwinbind
-> libwinbind-dbg
-> >
-> >  FILES_${PN} +=3D "/run \
-> >                  ${libdir}/security/pam_smbpass.so \
-> > -                ${libdir}/tmpfiles.d/* \
-> >                 "
-> >
-> >  SMB_SERVICE=3D"${systemd_unitdir}/system/nmb.service ${systemd_unitdir=
-}/system/smb.service"
-> > --
-> > 1.9.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
+> Was it needed for 2.0 as well? If yes, then I'll re-add it.
+>
+> On Sun, Nov 8, 2015 at 9:32 PM, Andreas M=C3=BCller <schnitzeltony@google=
+mail.com
+>> wrote:
+>
+>> On Sun, Nov 8, 2015 at 12:07 PM, Martin Jansa <martin.jansa@gmail.com>
+>> wrote:
+>> > This reverts commit 2ce3086aa859178fb5f7d6db9876229c8ed5a6eb.
+>> >
+>> > Causes sysdig and devilspie2 build failures.
+>> >
+>> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> > ---
+>> >  ...p-automatically-this-leaves-the-stripping.patch | 33 +++++++++++
+>> >  meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb    | 56
+>> ++++++++++++++++++
+>> >  meta-oe/recipes-devtools/luajit/luajit_2.1.bb      | 67
+>> ----------------------
+>> >  3 files changed, 89 insertions(+), 67 deletions(-)
+>> >  create mode 100644
+>> meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatically-t=
+his-leaves-the-stripping.patch
+>> >  create mode 100644 meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+>> >  delete mode 100644 meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+>> >
+>> > diff --git
+>> a/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatically=
+-this-leaves-the-stripping.patch
+>> b/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatically=
+-this-leaves-the-stripping.patch
+>> > new file mode 100644
+>> > index 0000000..f123b3f
+>> > --- /dev/null
+>> > +++
+>> b/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatically=
+-this-leaves-the-stripping.patch
+>> > @@ -0,0 +1,33 @@
+>> > +From 528009f5ca0685c95ef27f6c8957160499c0576a Mon Sep 17 00:00:00 200=
+1
+>> > +From: Khem Raj <raj.khem@gmail.com>
+>> > +Date: Fri, 10 May 2013 10:42:45 -0700
+>> > +Subject: [PATCH] Do not strip automatically, this leaves the strippin=
+g
+>> > + busines to OE
+>> > +
+>> > +Upstream-Status: Inappropriate [OE-Specific]
+>> > +
+>> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> > +---
+>> > + src/Makefile |    2 --
+>> > + 1 file changed, 2 deletions(-)
+>> > +
+>> > +diff --git a/src/Makefile b/src/Makefile
+>> > +index 278324a..5ecd6d5 100644
+>> > +--- a/src/Makefile
+>> > ++++ b/src/Makefile
+>> > +@@ -665,12 +665,10 @@ $(LUAJIT_A): $(LJVMCORE_O)
+>> > + $(LUAJIT_SO): $(LJVMCORE_O)
+>> > +       $(E) "DYNLINK   $@"
+>> > +       $(Q)$(TARGET_LD) $(TARGET_ASHLDFLAGS) -o $@ $(LJVMCORE_DYNO)
+>> $(TARGET_ALIBS)
+>> > +-      $(Q)$(TARGET_STRIP) $@
+>> > +
+>> > + $(LUAJIT_T): $(TARGET_O) $(LUAJIT_O) $(TARGET_DEP)
+>> > +       $(E) "LINK      $@"
+>> > +       $(Q)$(TARGET_LD) $(TARGET_ALDFLAGS) -o $@ $(LUAJIT_O)
+>> $(TARGET_O) $(TARGET_ALIBS)
+>> > +-      $(Q)$(TARGET_STRIP) $@
+>> > +       $(E) "OK        Successfully built LuaJIT"
+>> > +
+>> > +
+>> ########################################################################=
+######
+>> > +--
+>> > +1.7.9.5
+>> > +
+>> > diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+>> b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+>> > new file mode 100644
+>> > index 0000000..4a15a4e
+>> > --- /dev/null
+>> > +++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+>> > @@ -0,0 +1,56 @@
+>> > +SUMMARY =3D "Just-In-Time Compiler for Lua"
+>> > +LICENSE =3D "MIT"
+>> > +LIC_FILES_CHKSUM =3D
+>> "file://COPYRIGHT;md5=3D3992f1fbae3b8b061f9056b7fcda8cc6"
+>> > +HOMEPAGE =3D "http://luajit.org"
+>> > +
+>> > +SRC_URI =3D "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
+>> > +
+>>  file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch =
+\
+>> > +"
+>> > +SRC_URI[md5sum] =3D "dd9c38307f2223a504cbfb96e477eca0"
+>> > +SRC_URI[sha256sum] =3D
+>> "620fa4eb12375021bef6e4f237cbd2dd5d49e56beb414bee052c746beef1807d"
+>> > +
+>> > +S =3D "${WORKDIR}/LuaJIT-${PV}"
+>> > +
+>> > +inherit pkgconfig binconfig
+>> > +
+>> > +BBCLASSEXTEND =3D "native"
+>> > +
+>> > +do_configure_prepend() {
+>> > +    sed -i 's:PREFIX=3D /usr/local:PREFIX=3D ${prefix}:g' ${S}/Makefi=
+le
+>> > +    sed -i 's:MULTILIB=3D lib:MULTILIB=3D ${baselib}:g' ${S}/Makefile
+>> > +}
+>> > +
+>> > +EXTRA_OEMAKE =3D 'CROSS=3D${HOST_PREFIX} \
+>> > +                TARGET_CFLAGS=3D"${TOOLCHAIN_OPTIONS} ${HOST_CC_ARCH}=
+" \
+>> > +                TARGET_LDFLAGS=3D"${TOOLCHAIN_OPTIONS}" \
+>> > +                TARGET_SHLDFLAGS=3D"${TOOLCHAIN_OPTIONS}"'
+>> > +EXTRA_OEMAKE_append_powerpc =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
+>> > +EXTRA_OEMAKE_append_x86 =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
+>> > +EXTRA_OEMAKE_append_x86-64 =3D ' HOST_CC=3D"${BUILD_CC}"'
+>> > +EXTRA_OEMAKE_append_powerpc64 =3D ' HOST_CC=3D"${BUILD_CC}"'
+>> > +EXTRA_OEMAKE_append_arm =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
+>> > +EXTRA_OEMAKE_append_mips64 =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
+>> > +
+>> > +do_compile () {
+>> > +    oe_runmake
+>> > +}
+>> > +
+>> > +do_install () {
+>> > +    oe_runmake 'DESTDIR=3D${D}' install
+>> > +    rmdir ${D}${datadir}/lua/5.* \
+>> > +          ${D}${datadir}/lua \
+>> > +          ${D}${libdir}/lua/5.* \
+>> > +          ${D}${libdir}/lua
+>> > +}
+>> > +
+>> > +PACKAGES +=3D 'luajit-common'
+>> > +
+>> > +FILES_${PN} +=3D "${libdir}/libluajit-5.1.so.2 \
+>> > +    ${libdir}/libluajit-5.1.so.${PV} \
+>> > +"
+>> > +FILES_${PN}-dev +=3D "${libdir}/libluajit-5.1.a \
+>> > +    ${libdir}/libluajit-5.1.so \
+>> > +    ${libdir}/pkgconfig/luajit.pc \
+>> > +"
+>> > +FILES_luajit-common =3D "${datadir}/${BPN}-${PV}"
+>> > +
+>> > diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+>> b/meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+>> > deleted file mode 100644
+>> > index 5cee532..0000000
+>> > --- a/meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+>> > +++ /dev/null
+>> > @@ -1,67 +0,0 @@
+>> > -SUMMARY =3D "Just-In-Time Compiler for Lua"
+>> > -LICENSE =3D "MIT"
+>> > -LIC_FILES_CHKSUM =3D
+>> "file://COPYRIGHT;md5=3D3992f1fbae3b8b061f9056b7fcda8cc6"
+>> > -HOMEPAGE =3D "http://luajit.org"
+>> > -
+>> > -SRCREV =3D "776c6935ed807fc3b1ee6cd89a0cf682ffb7e9de"
+>> > -SRC_URI =3D "git://
+>> luajit.org/git/luajit-2.0.git;protocol=3Dhttp;branch=3Dv${PV} \
+>> > -"
+>> > -
+>> > -SPIN =3D ".0-beta1"
+>> > -
+>> > -S =3D "${WORKDIR}/git"
+>> > -
+>> > -inherit pkgconfig binconfig
+>> > -
+>> > -BBCLASSEXTEND =3D "native"
+>> > -
+>> > -do_configure_prepend() {
+>> > -    sed -i 's:PREFIX=3D /usr/local:PREFIX=3D ${prefix}:g' ${S}/Makefi=
+le
+>> > -    sed -i 's:MULTILIB=3D lib:MULTILIB=3D ${baselib}:g' ${S}/Makefile
+>> > -}
+>> > -
+>> > -EXTRA_OEMAKE =3D 'CROSS=3D${HOST_PREFIX} \
+>> > -                TARGET_CFLAGS=3D"${TOOLCHAIN_OPTIONS} ${HOST_CC_ARCH}=
+" \
+>> > -                TARGET_LDFLAGS=3D"${TOOLCHAIN_OPTIONS}" \
+>> > -                TARGET_SHLDFLAGS=3D"${TOOLCHAIN_OPTIONS}"
+>> TARGET_STRIP=3D"/bin/echo"'
+>> > -
+>> Would it be a big issue to re-add comment below - I was not aware of
+>> the build host requirements and there could be other users
+>> > -# Important note: On the build machine bit compatible glibc-dev and
+>> libgcc must
+>> > -# be installed. E.g if the target architecture has 32 bit (see '-m32'
+>> below),
+>> > -# 32 bit versions of glibc-dev/libgcc (e.g glibc-devel.i686 /
+>> libgcc.i686 on
+>> > -# fedora) are required.
+>> > -#
+>> > -# Otherwise the following error occurs:
+>> > -# | /usr/include/gnu/stubs.h:7:27: fatal error: gnu/stubs-32.h: No su=
+ch
+>> file or directory
+>> > -# |  # include <gnu/stubs-32.h>
+>> > -
+>> Andreas
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 > --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
