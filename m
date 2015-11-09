@@ -1,41 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id CD74E77150;
-	Mon,  9 Nov 2015 15:32:55 +0000 (UTC)
-Received: by wmec201 with SMTP id c201so85853357wme.0;
-	Mon, 09 Nov 2015 07:32:55 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 25AD676230
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  9 Nov 2015 17:51:09 +0000 (UTC)
+Received: by igbxm8 with SMTP id xm8so56395275igb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 09 Nov 2015 09:51:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=opVzSRDH2UesFqY2KzFqJ2OORcMW8pXxFedUqU3YM0Q=;
-	b=jGSgZRa6JaQ8MMDJlNkwKeUlkd8ewfkkDMcV5cQrbc7q90sjYIREFiKX96oKjimWOd
-	aiwqaxLju+q2hNaAAyZzqL0TBCM6UPz2kfXaEezJ45GjbXwXWopr/+WmIpEbvVihSdou
-	GZoLoxvQcRZMpou0DNY4ImLpnIlAYC/v9ip1sCIE+yOxCdTxbv+eylNa1+LNqIBQqSxo
-	THhMv9fA7ud/4vaX5bfzGTBx/uILpNpARaSBwQhOWyemVERfTW70QQCUveh1FVn4MU6f
-	2l9yiIQZu8Qyw/7ju6l7NW4ICzh0LVXz6a8A5zbIiuHfsamdQ0ziB9W//AlOHKCoSm8K
-	H1eQ==
-X-Received: by 10.28.229.212 with SMTP id c203mr24662965wmh.11.1447083174954; 
-	Mon, 09 Nov 2015 07:32:54 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id 20sm14876766wmh.8.2015.11.09.07.32.53
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 09 Nov 2015 07:32:53 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 9 Nov 2015 16:32:58 +0100
-To: Andreas =?iso-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
-Message-ID: <20151109153258.GC2569@jama>
-References: <20151026204716.GJ2554@jama>
-	<CALbNGRQCwyFKti9sgx0MHkxFbwuksupsjsnQ0UmK=dWQ47AZaw@mail.gmail.com>
-	<20151027120153.GD2577@jama>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=o/d1yTHEZvvKpVIhIMbniFxUWjM52PvdEgsYVVM+u2c=;
+	b=xjtPu2hqV1G++l6WkKvUL3dd3toW2XRnl0CEMYmUsnZ/oBUlcMARpljS/qNsynK+iV
+	yKb60Fb8EHzcOVZ05N1pQSXGAcYP+YWKbujUgZSZrcGnYcxYkxhQ5X0Txo4PaQT2nl1o
+	3kgSDWky61DP8ae4nmJD73x2bkzIi4xyBXVBiWhVZbyy+6tY5/mJr3owlnmOEyeM7b4K
+	WQ6ZHbEw03Zg7Y6ya0jXDUcLh6Qd7rczK6KF3xGDKKtEW3kc6Osk1Tq+ERU9iw51e+q2
+	nZbGLk+asuh8itUkU8MN7wcCB8DEq/dmh+egtDO0nqutRidoccBnfJDq85+rJWK5CijA
+	dXbQ==
+X-Received: by 10.50.20.67 with SMTP id l3mr19600019ige.75.1447091469479; Mon,
+	09 Nov 2015 09:51:09 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20151027120153.GD2577@jama>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2015-10-26
+Received: by 10.107.38.133 with HTTP; Mon, 9 Nov 2015 09:50:39 -0800 (PST)
+In-Reply-To: <20151109094317.GA2569@jama>
+References: <1446980869-13083-1-git-send-email-Martin.Jansa@gmail.com>
+	<CALbNGRQk84xAEK01=RAKK3vsY5X0CTqUUAD6Sb6GXqpMEDRswg@mail.gmail.com>
+	<CA+chaQfyy2rFonPRt6v7_wML08JUCFWLnoRic2Rbr33LDiHnaQ@mail.gmail.com>
+	<CAMKF1sow6gD0p7oaROFyV+yUmQ5jnfkZe0S6-Za0GwAc=nL=-A@mail.gmail.com>
+	<20151109094317.GA2569@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 9 Nov 2015 09:50:39 -0800
+Message-ID: <CAMKF1soaWF=xpd9qq39WuFXVbb5_U+5uA+XSKN9tuXmXrJ8+5A@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe] Revert "luajit: Upgrade to 2.1 beta1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,69 +45,272 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Nov 2015 15:32:57 -0000
-X-Groupsio-MsgNum: 58421
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="c3bfwLpm8qysLVxt"
-Content-Disposition: inline
-
---c3bfwLpm8qysLVxt
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Mon, 09 Nov 2015 17:51:10 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 27, 2015 at 01:01:53PM +0100, Martin Jansa wrote:
-> On Mon, Oct 26, 2015 at 11:49:18PM +0100, Andreas M=FCller wrote:
-> > On Mon, Oct 26, 2015 at 9:47 PM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
-> >=20
-> > > =3D=3D=3D common (2) =3D=3D=3D
-> > >     * /meta-openembedded/meta-oe/recipes-graphics/gerbil/gerbil_git.b=
-b, do_compile
-> > >     * /openembedded-core/meta/recipes-graphics/libsdl2/libsdl2_2.0.3.=
-bb, do_compile
-> > ^ Hope I find time for this one. What DISTRO features were set: x11 and=
- wayland?
->=20
-> yes, both are in
->=20
-> OE qemuarm@ ~/oe/world/shr-core $ grep ^DISTRO_FEATURES=3D env.libsdl2=20
-> DISTRO_FEATURES=3D"alsa argp bluetooth ext2 irda largefile pcmcia usbgadg=
-et usbhost wifi xattr nfs zeroconf pci 3g nfc x11 ipv4 ipv6 libc-backtrace =
-libc-big-macros libc-bsd libc-cxx-tests libc-catgets libc-charsets libc-cry=
-pt                                       libc-crypt-ufc libc-db-aliases lib=
-c-envz libc-fcvt libc-fmtmsg libc-fstab libc-ftraverse                     =
-                 libc-getlogin libc-idn libc-inet-anl libc-libm libc-locale=
-s libc-locale-code         libc-memusage libc-nis libc-nsswitch libc-rcmd l=
-ibc-rtld-debug libc-spawn libc-streams libc-sunrpc                         =
-              libc-utmp libc-utmpx libc-wordexp libc-posix-clang-wchar libc=
--posix-regexp libc-posix-regexp-glibc                                    li=
-bc-posix-wchar-io ld-is-gold systemd opengl wayland pulseaudio bluez5"
->=20
-> OE qemuarm@ ~/oe/world/shr-core $ grep ^PACKAGECONFIG=3D env.libsdl2     =
-                                                                           =
-          =20
-> PACKAGECONFIG=3D"     opengl     alsa          pulseaudio     wayland    =
- x11 "
+On Mon, Nov 9, 2015 at 1:43 AM, Martin Jansa <martin.jansa@gmail.com> wrote=
+:
+> On Sun, Nov 08, 2015 at 07:41:28PM -0800, Khem Raj wrote:
+>> Martin
+>>
+>> The build failures are not due to luajit, they are due to lua itself
+>> being upgraded beyond 5.1 and its ABI incompatible. Its being
+>> highlighted
+>> by luajit 2.1 most probbably, If the lua 5.1 reintroduction patch has
+>> been applied then we can look into the fact that lua 5.1 is chosen for
+>> these packages.
+>
+> It's failing with this commit even without lua 5.2 upgrade.
+>
+> And it's beta anyway, so I would like to revert this for jethro branch
+> and then it can be re-applied in master when sysdig and devilspie are
+> working correctly with it, ok?
 
-I can also confirm that adding:
-PACKAGECONFIG_remove_pn-libsdl2 =3D "wayland"
+for jethro thats fine, let me see this week if I can come up with a
+fix I was not getting the compile issues in my env so obviously I am
+missing something.
 
-fixes the build for me.
+>
+>>
+>> and yes the 32bit host dependencies has always been a requirement for lu=
+ajit.
+>>
+>> On Sun, Nov 8, 2015 at 12:50 PM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+>> > Was it needed for 2.0 as well? If yes, then I'll re-add it.
+>> >
+>> > On Sun, Nov 8, 2015 at 9:32 PM, Andreas M=C3=BCller <schnitzeltony@goo=
+glemail.com
+>> >> wrote:
+>> >
+>> >> On Sun, Nov 8, 2015 at 12:07 PM, Martin Jansa <martin.jansa@gmail.com=
+>
+>> >> wrote:
+>> >> > This reverts commit 2ce3086aa859178fb5f7d6db9876229c8ed5a6eb.
+>> >> >
+>> >> > Causes sysdig and devilspie2 build failures.
+>> >> >
+>> >> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> >> > ---
+>> >> >  ...p-automatically-this-leaves-the-stripping.patch | 33 ++++++++++=
++
+>> >> >  meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb    | 56
+>> >> ++++++++++++++++++
+>> >> >  meta-oe/recipes-devtools/luajit/luajit_2.1.bb      | 67
+>> >> ----------------------
+>> >> >  3 files changed, 89 insertions(+), 67 deletions(-)
+>> >> >  create mode 100644
+>> >> meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automaticall=
+y-this-leaves-the-stripping.patch
+>> >> >  create mode 100644 meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+>> >> >  delete mode 100644 meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+>> >> >
+>> >> > diff --git
+>> >> a/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatica=
+lly-this-leaves-the-stripping.patch
+>> >> b/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatica=
+lly-this-leaves-the-stripping.patch
+>> >> > new file mode 100644
+>> >> > index 0000000..f123b3f
+>> >> > --- /dev/null
+>> >> > +++
+>> >> b/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatica=
+lly-this-leaves-the-stripping.patch
+>> >> > @@ -0,0 +1,33 @@
+>> >> > +From 528009f5ca0685c95ef27f6c8957160499c0576a Mon Sep 17 00:00:00 =
+2001
+>> >> > +From: Khem Raj <raj.khem@gmail.com>
+>> >> > +Date: Fri, 10 May 2013 10:42:45 -0700
+>> >> > +Subject: [PATCH] Do not strip automatically, this leaves the strip=
+ping
+>> >> > + busines to OE
+>> >> > +
+>> >> > +Upstream-Status: Inappropriate [OE-Specific]
+>> >> > +
+>> >> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> >> > +---
+>> >> > + src/Makefile |    2 --
+>> >> > + 1 file changed, 2 deletions(-)
+>> >> > +
+>> >> > +diff --git a/src/Makefile b/src/Makefile
+>> >> > +index 278324a..5ecd6d5 100644
+>> >> > +--- a/src/Makefile
+>> >> > ++++ b/src/Makefile
+>> >> > +@@ -665,12 +665,10 @@ $(LUAJIT_A): $(LJVMCORE_O)
+>> >> > + $(LUAJIT_SO): $(LJVMCORE_O)
+>> >> > +       $(E) "DYNLINK   $@"
+>> >> > +       $(Q)$(TARGET_LD) $(TARGET_ASHLDFLAGS) -o $@ $(LJVMCORE_DYNO=
+)
+>> >> $(TARGET_ALIBS)
+>> >> > +-      $(Q)$(TARGET_STRIP) $@
+>> >> > +
+>> >> > + $(LUAJIT_T): $(TARGET_O) $(LUAJIT_O) $(TARGET_DEP)
+>> >> > +       $(E) "LINK      $@"
+>> >> > +       $(Q)$(TARGET_LD) $(TARGET_ALDFLAGS) -o $@ $(LUAJIT_O)
+>> >> $(TARGET_O) $(TARGET_ALIBS)
+>> >> > +-      $(Q)$(TARGET_STRIP) $@
+>> >> > +       $(E) "OK        Successfully built LuaJIT"
+>> >> > +
+>> >> > +
+>> >> #####################################################################=
+#########
+>> >> > +--
+>> >> > +1.7.9.5
+>> >> > +
+>> >> > diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+>> >> b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+>> >> > new file mode 100644
+>> >> > index 0000000..4a15a4e
+>> >> > --- /dev/null
+>> >> > +++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+>> >> > @@ -0,0 +1,56 @@
+>> >> > +SUMMARY =3D "Just-In-Time Compiler for Lua"
+>> >> > +LICENSE =3D "MIT"
+>> >> > +LIC_FILES_CHKSUM =3D
+>> >> "file://COPYRIGHT;md5=3D3992f1fbae3b8b061f9056b7fcda8cc6"
+>> >> > +HOMEPAGE =3D "http://luajit.org"
+>> >> > +
+>> >> > +SRC_URI =3D "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
+>> >> > +
+>> >>  file://0001-Do-not-strip-automatically-this-leaves-the-stripping.pat=
+ch \
+>> >> > +"
+>> >> > +SRC_URI[md5sum] =3D "dd9c38307f2223a504cbfb96e477eca0"
+>> >> > +SRC_URI[sha256sum] =3D
+>> >> "620fa4eb12375021bef6e4f237cbd2dd5d49e56beb414bee052c746beef1807d"
+>> >> > +
+>> >> > +S =3D "${WORKDIR}/LuaJIT-${PV}"
+>> >> > +
+>> >> > +inherit pkgconfig binconfig
+>> >> > +
+>> >> > +BBCLASSEXTEND =3D "native"
+>> >> > +
+>> >> > +do_configure_prepend() {
+>> >> > +    sed -i 's:PREFIX=3D /usr/local:PREFIX=3D ${prefix}:g' ${S}/Mak=
+efile
+>> >> > +    sed -i 's:MULTILIB=3D lib:MULTILIB=3D ${baselib}:g' ${S}/Makef=
+ile
+>> >> > +}
+>> >> > +
+>> >> > +EXTRA_OEMAKE =3D 'CROSS=3D${HOST_PREFIX} \
+>> >> > +                TARGET_CFLAGS=3D"${TOOLCHAIN_OPTIONS} ${HOST_CC_AR=
+CH}" \
+>> >> > +                TARGET_LDFLAGS=3D"${TOOLCHAIN_OPTIONS}" \
+>> >> > +                TARGET_SHLDFLAGS=3D"${TOOLCHAIN_OPTIONS}"'
+>> >> > +EXTRA_OEMAKE_append_powerpc =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
+>> >> > +EXTRA_OEMAKE_append_x86 =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
+>> >> > +EXTRA_OEMAKE_append_x86-64 =3D ' HOST_CC=3D"${BUILD_CC}"'
+>> >> > +EXTRA_OEMAKE_append_powerpc64 =3D ' HOST_CC=3D"${BUILD_CC}"'
+>> >> > +EXTRA_OEMAKE_append_arm =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
+>> >> > +EXTRA_OEMAKE_append_mips64 =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
+>> >> > +
+>> >> > +do_compile () {
+>> >> > +    oe_runmake
+>> >> > +}
+>> >> > +
+>> >> > +do_install () {
+>> >> > +    oe_runmake 'DESTDIR=3D${D}' install
+>> >> > +    rmdir ${D}${datadir}/lua/5.* \
+>> >> > +          ${D}${datadir}/lua \
+>> >> > +          ${D}${libdir}/lua/5.* \
+>> >> > +          ${D}${libdir}/lua
+>> >> > +}
+>> >> > +
+>> >> > +PACKAGES +=3D 'luajit-common'
+>> >> > +
+>> >> > +FILES_${PN} +=3D "${libdir}/libluajit-5.1.so.2 \
+>> >> > +    ${libdir}/libluajit-5.1.so.${PV} \
+>> >> > +"
+>> >> > +FILES_${PN}-dev +=3D "${libdir}/libluajit-5.1.a \
+>> >> > +    ${libdir}/libluajit-5.1.so \
+>> >> > +    ${libdir}/pkgconfig/luajit.pc \
+>> >> > +"
+>> >> > +FILES_luajit-common =3D "${datadir}/${BPN}-${PV}"
+>> >> > +
+>> >> > diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+>> >> b/meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+>> >> > deleted file mode 100644
+>> >> > index 5cee532..0000000
+>> >> > --- a/meta-oe/recipes-devtools/luajit/luajit_2.1.bb
+>> >> > +++ /dev/null
+>> >> > @@ -1,67 +0,0 @@
+>> >> > -SUMMARY =3D "Just-In-Time Compiler for Lua"
+>> >> > -LICENSE =3D "MIT"
+>> >> > -LIC_FILES_CHKSUM =3D
+>> >> "file://COPYRIGHT;md5=3D3992f1fbae3b8b061f9056b7fcda8cc6"
+>> >> > -HOMEPAGE =3D "http://luajit.org"
+>> >> > -
+>> >> > -SRCREV =3D "776c6935ed807fc3b1ee6cd89a0cf682ffb7e9de"
+>> >> > -SRC_URI =3D "git://
+>> >> luajit.org/git/luajit-2.0.git;protocol=3Dhttp;branch=3Dv${PV} \
+>> >> > -"
+>> >> > -
+>> >> > -SPIN =3D ".0-beta1"
+>> >> > -
+>> >> > -S =3D "${WORKDIR}/git"
+>> >> > -
+>> >> > -inherit pkgconfig binconfig
+>> >> > -
+>> >> > -BBCLASSEXTEND =3D "native"
+>> >> > -
+>> >> > -do_configure_prepend() {
+>> >> > -    sed -i 's:PREFIX=3D /usr/local:PREFIX=3D ${prefix}:g' ${S}/Mak=
+efile
+>> >> > -    sed -i 's:MULTILIB=3D lib:MULTILIB=3D ${baselib}:g' ${S}/Makef=
+ile
+>> >> > -}
+>> >> > -
+>> >> > -EXTRA_OEMAKE =3D 'CROSS=3D${HOST_PREFIX} \
+>> >> > -                TARGET_CFLAGS=3D"${TOOLCHAIN_OPTIONS} ${HOST_CC_AR=
+CH}" \
+>> >> > -                TARGET_LDFLAGS=3D"${TOOLCHAIN_OPTIONS}" \
+>> >> > -                TARGET_SHLDFLAGS=3D"${TOOLCHAIN_OPTIONS}"
+>> >> TARGET_STRIP=3D"/bin/echo"'
+>> >> > -
+>> >> Would it be a big issue to re-add comment below - I was not aware of
+>> >> the build host requirements and there could be other users
+>> >> > -# Important note: On the build machine bit compatible glibc-dev an=
+d
+>> >> libgcc must
+>> >> > -# be installed. E.g if the target architecture has 32 bit (see '-m=
+32'
+>> >> below),
+>> >> > -# 32 bit versions of glibc-dev/libgcc (e.g glibc-devel.i686 /
+>> >> libgcc.i686 on
+>> >> > -# fedora) are required.
+>> >> > -#
+>> >> > -# Otherwise the following error occurs:
+>> >> > -# | /usr/include/gnu/stubs.h:7:27: fatal error: gnu/stubs-32.h: No=
+ such
+>> >> file or directory
+>> >> > -# |  # include <gnu/stubs-32.h>
+>> >> > -
+>> >> Andreas
+>> >> --
+>> >> _______________________________________________
+>> >> Openembedded-devel mailing list
+>> >> Openembedded-devel@lists.openembedded.org
+>> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> >>
+>> > --
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---c3bfwLpm8qysLVxt
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlZAungACgkQN1Ujt2V2gBxDyQCfe5asY3p80QA2AVkOmiF2g34o
-ZVQAoLts9zoOsHAQWejR+zxzahW+zSox
-=EOqH
------END PGP SIGNATURE-----
-
---c3bfwLpm8qysLVxt--
