@@ -1,35 +1,27 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A0AB76230
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 75C4D7704E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Nov 2015 03:41:57 +0000 (UTC)
-Received: by iody8 with SMTP id y8so173828435iod.1
+	Mon,  9 Nov 2015 04:48:40 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tA94meOK017266
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Nov 2015 19:41:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=wUVlUuVSb7InIPnIxHEmvEGNBZL+7x3mdTwT2QEIuCI=;
-	b=kAEuDerCs3/h51bdS7PiwMHeEaSDt0rKvi/wijon7ppM9iAGAmOUwLv9sWGUS1rNwk
-	bxO2FRz2kLzLQ4mHCuA0RP/DFzfxCTWXLZLnj0JdbDnzhnihoSMOm9q3nZK7pGgHyn8J
-	f7Djq7c9USIaSPpISnR4RXURXuVgECK4SVilX0NdZGonZhwGRHkw+0nsI8q4Vl9bbtys
-	c2za4oYrdFNgn27aNviNlM/r8kta06FdVI1SAD/IV6e09MscyXGnCzUhG4ifbU7v+qCr
-	rj3bsVnkPqea+aW0ZTPu5Q6BK8bzNVXk34jbSgK66ob1dIUAapJp3SLKqB8Gv+tqz/uu
-	lWpg==
-X-Received: by 10.107.3.77 with SMTP id 74mr22953102iod.49.1447040518133; Sun,
-	08 Nov 2015 19:41:58 -0800 (PST)
+	Sun, 8 Nov 2015 20:48:40 -0800 (PST)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
+	Sun, 8 Nov 2015 20:48:39 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 8 Nov 2015 23:48:38 -0500
+Message-ID: <1447044518-173488-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1446884486-23655-2-git-send-email-hongxu.jia@windriver.com>
+References: <1446884486-23655-1-git-send-email-hongxu.jia@windriver.com>
+	<1446884486-23655-2-git-send-email-hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Received: by 10.107.38.133 with HTTP; Sun, 8 Nov 2015 19:41:28 -0800 (PST)
-In-Reply-To: <CA+chaQfyy2rFonPRt6v7_wML08JUCFWLnoRic2Rbr33LDiHnaQ@mail.gmail.com>
-References: <1446980869-13083-1-git-send-email-Martin.Jansa@gmail.com>
-	<CALbNGRQk84xAEK01=RAKK3vsY5X0CTqUUAD6Sb6GXqpMEDRswg@mail.gmail.com>
-	<CA+chaQfyy2rFonPRt6v7_wML08JUCFWLnoRic2Rbr33LDiHnaQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 8 Nov 2015 19:41:28 -0800
-Message-ID: <CAMKF1sow6gD0p7oaROFyV+yUmQ5jnfkZe0S6-Za0GwAc=nL=-A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] Revert "luajit: Upgrade to 2.1 beta1"
+Subject: [meta-perl][PATCH] libhtml-tree-perl: fix shebang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,235 +35,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Nov 2015 03:41:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 09 Nov 2015 04:48:42 -0000
+Content-Type: text/plain
 
-Martin
+There is a build failure while installing libhtml-tree-perl to sdk:
+...
+|Computing transaction...error: Can't install nativesdk-libhtml-tree-
+perl-5.03-r0.1@x86_64_nativesdk: no package provides tmp/sysroots/
+x86_64-linux/usr/bin/perl-native/perl.real
+...
 
-The build failures are not due to luajit, they are due to lua itself
-being upgraded beyond 5.1 and its ABI incompatible. Its being
-highlighted
-by luajit 2.1 most probbably, If the lua 5.1 reintroduction patch has
-been applied then we can look into the fact that lua 5.1 is chosen for
-these packages.
+The rpm detects the shebang of perl script, so we correct it.
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ .../libhtml/files/bin-htmltree-fix-shebang.patch   | 25 ++++++++++++++++++++++
+ .../recipes-perl/libhtml/libhtml-tree-perl_5.03.bb |  4 +++-
+ 2 files changed, 28 insertions(+), 1 deletion(-)
+ create mode 100644 meta-perl/recipes-perl/libhtml/files/bin-htmltree-fix-shebang.patch
 
-and yes the 32bit host dependencies has always been a requirement for luaji=
-t.
+diff --git a/meta-perl/recipes-perl/libhtml/files/bin-htmltree-fix-shebang.patch b/meta-perl/recipes-perl/libhtml/files/bin-htmltree-fix-shebang.patch
+new file mode 100644
+index 0000000..4266f05
+--- /dev/null
++++ b/meta-perl/recipes-perl/libhtml/files/bin-htmltree-fix-shebang.patch
+@@ -0,0 +1,25 @@
++From 28ee994780459c3552d3cbbd6b011d054a41c439 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Sun, 8 Nov 2015 23:33:31 -0500
++Subject: [PATCH] bin/htmltree: fix shebang
++
++Upstream-Status: Pending
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ bin/htmltree | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/bin/htmltree b/bin/htmltree
++index 8bf3db2..f9927e5 100755
++--- a/bin/htmltree
+++++ b/bin/htmltree
++@@ -1,4 +1,4 @@
++-#!/usr/bin/perl
+++#!/usr/bin/env perl
++ # Time-stamp: "2000-10-02 14:48:15 MDT"
++ #
++ # Parse the given HTML file(s) and dump the parse tree
++-- 
++1.9.1
++
+diff --git a/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb b/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb
+index 0b457e3..8eb0e06 100644
+--- a/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb
++++ b/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb
+@@ -11,7 +11,9 @@ HOMEPAGE = "http://www.cpan.org/authors/id/C/CJ/CJM/HTML-Tree-${PV}.readme"
+ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3eb57a8958cae73cb65e7d0c26339242"
+ 
+-SRC_URI = "${CPAN_MIRROR}/authors/id/C/CJ/CJM/HTML-Tree-${PV}.tar.gz"
++SRC_URI = "${CPAN_MIRROR}/authors/id/C/CJ/CJM/HTML-Tree-${PV}.tar.gz \
++           file://bin-htmltree-fix-shebang.patch \
++"
+ SRC_URI[md5sum] = "d9271d60b872ed6fbe68b2d0fe8c450e"
+ SRC_URI[sha256sum] = "7d6d73fca622aa74855a8b088faa39454a0f91b7af83c9ec0387f01eefc2148f"
+ 
+-- 
+1.9.1
 
-On Sun, Nov 8, 2015 at 12:50 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> Was it needed for 2.0 as well? If yes, then I'll re-add it.
->
-> On Sun, Nov 8, 2015 at 9:32 PM, Andreas M=C3=BCller <schnitzeltony@google=
-mail.com
->> wrote:
->
->> On Sun, Nov 8, 2015 at 12:07 PM, Martin Jansa <martin.jansa@gmail.com>
->> wrote:
->> > This reverts commit 2ce3086aa859178fb5f7d6db9876229c8ed5a6eb.
->> >
->> > Causes sysdig and devilspie2 build failures.
->> >
->> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> > ---
->> >  ...p-automatically-this-leaves-the-stripping.patch | 33 +++++++++++
->> >  meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb    | 56
->> ++++++++++++++++++
->> >  meta-oe/recipes-devtools/luajit/luajit_2.1.bb      | 67
->> ----------------------
->> >  3 files changed, 89 insertions(+), 67 deletions(-)
->> >  create mode 100644
->> meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatically-t=
-his-leaves-the-stripping.patch
->> >  create mode 100644 meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
->> >  delete mode 100644 meta-oe/recipes-devtools/luajit/luajit_2.1.bb
->> >
->> > diff --git
->> a/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatically=
--this-leaves-the-stripping.patch
->> b/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatically=
--this-leaves-the-stripping.patch
->> > new file mode 100644
->> > index 0000000..f123b3f
->> > --- /dev/null
->> > +++
->> b/meta-oe/recipes-devtools/luajit/luajit/0001-Do-not-strip-automatically=
--this-leaves-the-stripping.patch
->> > @@ -0,0 +1,33 @@
->> > +From 528009f5ca0685c95ef27f6c8957160499c0576a Mon Sep 17 00:00:00 200=
-1
->> > +From: Khem Raj <raj.khem@gmail.com>
->> > +Date: Fri, 10 May 2013 10:42:45 -0700
->> > +Subject: [PATCH] Do not strip automatically, this leaves the strippin=
-g
->> > + busines to OE
->> > +
->> > +Upstream-Status: Inappropriate [OE-Specific]
->> > +
->> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> > +---
->> > + src/Makefile |    2 --
->> > + 1 file changed, 2 deletions(-)
->> > +
->> > +diff --git a/src/Makefile b/src/Makefile
->> > +index 278324a..5ecd6d5 100644
->> > +--- a/src/Makefile
->> > ++++ b/src/Makefile
->> > +@@ -665,12 +665,10 @@ $(LUAJIT_A): $(LJVMCORE_O)
->> > + $(LUAJIT_SO): $(LJVMCORE_O)
->> > +       $(E) "DYNLINK   $@"
->> > +       $(Q)$(TARGET_LD) $(TARGET_ASHLDFLAGS) -o $@ $(LJVMCORE_DYNO)
->> $(TARGET_ALIBS)
->> > +-      $(Q)$(TARGET_STRIP) $@
->> > +
->> > + $(LUAJIT_T): $(TARGET_O) $(LUAJIT_O) $(TARGET_DEP)
->> > +       $(E) "LINK      $@"
->> > +       $(Q)$(TARGET_LD) $(TARGET_ALDFLAGS) -o $@ $(LUAJIT_O)
->> $(TARGET_O) $(TARGET_ALIBS)
->> > +-      $(Q)$(TARGET_STRIP) $@
->> > +       $(E) "OK        Successfully built LuaJIT"
->> > +
->> > +
->> ########################################################################=
-######
->> > +--
->> > +1.7.9.5
->> > +
->> > diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
->> b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
->> > new file mode 100644
->> > index 0000000..4a15a4e
->> > --- /dev/null
->> > +++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
->> > @@ -0,0 +1,56 @@
->> > +SUMMARY =3D "Just-In-Time Compiler for Lua"
->> > +LICENSE =3D "MIT"
->> > +LIC_FILES_CHKSUM =3D
->> "file://COPYRIGHT;md5=3D3992f1fbae3b8b061f9056b7fcda8cc6"
->> > +HOMEPAGE =3D "http://luajit.org"
->> > +
->> > +SRC_URI =3D "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
->> > +
->>  file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch =
-\
->> > +"
->> > +SRC_URI[md5sum] =3D "dd9c38307f2223a504cbfb96e477eca0"
->> > +SRC_URI[sha256sum] =3D
->> "620fa4eb12375021bef6e4f237cbd2dd5d49e56beb414bee052c746beef1807d"
->> > +
->> > +S =3D "${WORKDIR}/LuaJIT-${PV}"
->> > +
->> > +inherit pkgconfig binconfig
->> > +
->> > +BBCLASSEXTEND =3D "native"
->> > +
->> > +do_configure_prepend() {
->> > +    sed -i 's:PREFIX=3D /usr/local:PREFIX=3D ${prefix}:g' ${S}/Makefi=
-le
->> > +    sed -i 's:MULTILIB=3D lib:MULTILIB=3D ${baselib}:g' ${S}/Makefile
->> > +}
->> > +
->> > +EXTRA_OEMAKE =3D 'CROSS=3D${HOST_PREFIX} \
->> > +                TARGET_CFLAGS=3D"${TOOLCHAIN_OPTIONS} ${HOST_CC_ARCH}=
-" \
->> > +                TARGET_LDFLAGS=3D"${TOOLCHAIN_OPTIONS}" \
->> > +                TARGET_SHLDFLAGS=3D"${TOOLCHAIN_OPTIONS}"'
->> > +EXTRA_OEMAKE_append_powerpc =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
->> > +EXTRA_OEMAKE_append_x86 =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
->> > +EXTRA_OEMAKE_append_x86-64 =3D ' HOST_CC=3D"${BUILD_CC}"'
->> > +EXTRA_OEMAKE_append_powerpc64 =3D ' HOST_CC=3D"${BUILD_CC}"'
->> > +EXTRA_OEMAKE_append_arm =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
->> > +EXTRA_OEMAKE_append_mips64 =3D ' HOST_CC=3D"${BUILD_CC} -m32"'
->> > +
->> > +do_compile () {
->> > +    oe_runmake
->> > +}
->> > +
->> > +do_install () {
->> > +    oe_runmake 'DESTDIR=3D${D}' install
->> > +    rmdir ${D}${datadir}/lua/5.* \
->> > +          ${D}${datadir}/lua \
->> > +          ${D}${libdir}/lua/5.* \
->> > +          ${D}${libdir}/lua
->> > +}
->> > +
->> > +PACKAGES +=3D 'luajit-common'
->> > +
->> > +FILES_${PN} +=3D "${libdir}/libluajit-5.1.so.2 \
->> > +    ${libdir}/libluajit-5.1.so.${PV} \
->> > +"
->> > +FILES_${PN}-dev +=3D "${libdir}/libluajit-5.1.a \
->> > +    ${libdir}/libluajit-5.1.so \
->> > +    ${libdir}/pkgconfig/luajit.pc \
->> > +"
->> > +FILES_luajit-common =3D "${datadir}/${BPN}-${PV}"
->> > +
->> > diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.1.bb
->> b/meta-oe/recipes-devtools/luajit/luajit_2.1.bb
->> > deleted file mode 100644
->> > index 5cee532..0000000
->> > --- a/meta-oe/recipes-devtools/luajit/luajit_2.1.bb
->> > +++ /dev/null
->> > @@ -1,67 +0,0 @@
->> > -SUMMARY =3D "Just-In-Time Compiler for Lua"
->> > -LICENSE =3D "MIT"
->> > -LIC_FILES_CHKSUM =3D
->> "file://COPYRIGHT;md5=3D3992f1fbae3b8b061f9056b7fcda8cc6"
->> > -HOMEPAGE =3D "http://luajit.org"
->> > -
->> > -SRCREV =3D "776c6935ed807fc3b1ee6cd89a0cf682ffb7e9de"
->> > -SRC_URI =3D "git://
->> luajit.org/git/luajit-2.0.git;protocol=3Dhttp;branch=3Dv${PV} \
->> > -"
->> > -
->> > -SPIN =3D ".0-beta1"
->> > -
->> > -S =3D "${WORKDIR}/git"
->> > -
->> > -inherit pkgconfig binconfig
->> > -
->> > -BBCLASSEXTEND =3D "native"
->> > -
->> > -do_configure_prepend() {
->> > -    sed -i 's:PREFIX=3D /usr/local:PREFIX=3D ${prefix}:g' ${S}/Makefi=
-le
->> > -    sed -i 's:MULTILIB=3D lib:MULTILIB=3D ${baselib}:g' ${S}/Makefile
->> > -}
->> > -
->> > -EXTRA_OEMAKE =3D 'CROSS=3D${HOST_PREFIX} \
->> > -                TARGET_CFLAGS=3D"${TOOLCHAIN_OPTIONS} ${HOST_CC_ARCH}=
-" \
->> > -                TARGET_LDFLAGS=3D"${TOOLCHAIN_OPTIONS}" \
->> > -                TARGET_SHLDFLAGS=3D"${TOOLCHAIN_OPTIONS}"
->> TARGET_STRIP=3D"/bin/echo"'
->> > -
->> Would it be a big issue to re-add comment below - I was not aware of
->> the build host requirements and there could be other users
->> > -# Important note: On the build machine bit compatible glibc-dev and
->> libgcc must
->> > -# be installed. E.g if the target architecture has 32 bit (see '-m32'
->> below),
->> > -# 32 bit versions of glibc-dev/libgcc (e.g glibc-devel.i686 /
->> libgcc.i686 on
->> > -# fedora) are required.
->> > -#
->> > -# Otherwise the following error occurs:
->> > -# | /usr/include/gnu/stubs.h:7:27: fatal error: gnu/stubs-32.h: No su=
-ch
->> file or directory
->> > -# |  # include <gnu/stubs-32.h>
->> > -
->> Andreas
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
