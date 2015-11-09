@@ -1,37 +1,39 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
-	[209.85.192.45])
-	by mail.openembedded.org (Postfix) with ESMTP id B320A766B2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id CED7677101
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Nov 2015 10:49:51 +0000 (UTC)
-Received: by qgec40 with SMTP id c40so78681459qge.2
+	Mon,  9 Nov 2015 10:51:23 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so72178110wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Nov 2015 02:49:51 -0800 (PST)
+	Mon, 09 Nov 2015 02:51:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:from:date:to:subject:user-agent;
-	bh=lrBGuf8jr9bhwIGEVQqodzlAj+n2VAweKANfFkYbbNY=;
-	b=Ds5h/JolttlegNjLdK7Tl1dMaFcq228ZY4V6MNwsXKiBWgq48tYDJ2QNLO+wPm07o2
-	TteRjKZdvcqzJwN7BZSrjo0wDySYvDLazan1lBz69ofXK0EYtnEQ5C2JUzPQd4zuDjT+
-	ANH8uMu6uv5yjQcBGRMiOM11+C8OYaxGUEHykjyytozvS2rbRg8sLfbruS1AEjv5jHb0
-	fFpFmALpeVZa6bjxzJErorIWbRjk9Jc1/BfZSMJ59tm60l7lXKnPn7Wfv1AMfBsjXB31
-	pEZP4NCOl5u0DUiA2L2W2p1ekeSMnG8d6l3HBaWxJZgfrH1DY6s88gi8l5G9gYcnaut7
-	qfyQ==
-X-Received: by 10.140.130.200 with SMTP id 191mr30837322qhc.32.1447066191291; 
-	Mon, 09 Nov 2015 02:49:51 -0800 (PST)
-Received: from localhost ([177.100.174.62]) by smtp.gmail.com with ESMTPSA id
-	b108sm4607490qgf.20.2015.11.09.02.49.48
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=QTM/j9AV/ggrmEE3S9UK5eGRHqxWonOJLDyMpaw08EI=;
+	b=Gm1IbOIGTR3U0FJN+oJyUAS4PZGkq8GuDLSKDtO8C3h3ko6xZv0j6A0Dg650CTctJl
+	z+JIgDi3GU6sku8o4E2494PSdPPTYuvBxZUIRZBn8/a96NivzPVFLJz2IjQuooVfTE4n
+	QYGrjaqbI+leaMdwmkFBB+F4ai/gPdq/X8V4qg18l/BxbqnkaMAxRo1B+6H49vTEmPq4
+	93aXT4OyH6Uq6IiVHMtIlMMwl1yDJoJfzJ6OYOXq0lbdO1yelnFnbFFNos+8uUgS0cpr
+	uFrM0Wjc7foqY7wLytLl8LN5PTLCuRQ5xiQrBv0FDha9tVoVTD/R7TGYuR2ooXQMqNDW
+	oTXg==
+X-Received: by 10.28.138.148 with SMTP id m142mr26326728wmd.2.1447066283421;
+	Mon, 09 Nov 2015 02:51:23 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	l131sm13612535wmd.14.2015.11.09.02.51.22
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 09 Nov 2015 02:49:50 -0800 (PST)
-Message-ID: <56407a4e.75698c0a.d8a77.525f@mx.google.com>
-Received: by localhost (sSMTP sendmail emulation);
-	Mon, 09 Nov 2015 08:49:46 -0200
-From: "Otavio Salvador" <otavio.salvador@gmail.com>
-Date: Mon, 09 Nov 2015 08:49:46 -0200
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-User-Agent: mail v14.8.5
-Subject: Updates to meta-browser (master) in 2015-11-09
+	Mon, 09 Nov 2015 02:51:22 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 9 Nov 2015 11:51:27 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151109105127.GB2569@jama>
+References: <1446898829-21243-1-git-send-email-max.oss.09@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1446898829-21243-1-git-send-email-max.oss.09@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-browser][PATCH v2 0/5] chromium/cef3: fix gcc build errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,93 +47,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Nov 2015 10:49:51 -0000
+X-List-Received-Date: Mon, 09 Nov 2015 10:51:28 -0000
+X-Groupsio-MsgNum: 58418
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="E39vaYmALEf/7YXx"
+Content-Disposition: inline
 
-Hello,
+--E39vaYmALEf/7YXx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I pushed following updates:
+On Sat, Nov 07, 2015 at 01:20:24PM +0100, Max Krummenacher wrote:
+> v2:
+> Review Zoltan Kuscsik:
+> - prefer #pragma silencing of error over code refactoring
+> - add link to upstream discussion
+>=20
+> Review Martin Jansa:
+> - port fixes to cef3 also
+>=20
+> Max Krummenacher (5):
+>   chromium: fix gcc5 compile issues
+>   cef3_280796.bb: change indent to 4 spaces
+>   cef3: fix gcc5 compile issues
+>   cef3: fix build of x86-64
+>   cef3: fix build with gcc 4.9.4
 
-commit 7887e66d5df998b91d4df24a150c32a692784451 (HEAD -> pending, origin/master, origin/HEAD)
-Author: Max Krummenacher <max.oss.09@gmail.com>
-Date:   Sat Nov 7 13:20:29 2015 +0100
+Fixed both issues for qemux86 as well as qemux86-64.
 
-    cef3: fix build with gcc 4.9.4
-    
-    During the final link we get errors like this:
-    .../4.9.4/ld: warning: hidden symbol 'sqlite3_temp_directory' in obj/.../sqlite.sqlite3.o) is referenced by DSO .../usr/lib/libsoftokn3.so
-    .../4.9.4/ld: error: treating warnings as errors
-    collect2: error: ld returned 1 exit status
-    
-    Use chromium.bb solution to not treat linker warnings as errors.
-    
-    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
-    
-    Upstream-Status: Inappropriate configuration
-    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+They built in "bitbake world" probably for first time since they were
+introduced, Thanks!
 
-commit 8d4ad9ca4049cf8a75f37f260913f6ad106f1e52
-Author: Max Krummenacher <max.oss.09@gmail.com>
-Date:   Sat Nov 7 13:20:28 2015 +0100
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-    cef3: fix build of x86-64
-    
-    Use gypi file for i586 to create the configuration for the x86-64 architecture.
-    
-    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
-    
-    Upstream-Status: Inappropriate configuration
-    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Lets get this merged before jethro branch is created.
 
-commit c04205a73182b8d065b1afbc502be0b70fa6017f
-Author: Max Krummenacher <max.oss.09@gmail.com>
-Date:   Sat Nov 7 13:20:27 2015 +0100
+>  ...0001-bignum.cc-disable-warning-from-gcc-5.patch | 39 ++++++++++++++++=
+++++
+>  ...-image_util.cc-disable-warning-from-gcc-5.patch | 40 ++++++++++++++++=
+++++
+>  ...-test.h-disable-warning-unused-definition.patch | 43 ++++++++++++++++=
+++++++
+>  ...ithmetic.h-put-parentheses-to-silence-war.patch | 39 ++++++++++++++++=
+++++
+>  recipes-browser/chromium/cef3_280796.bb            | 33 ++++++++++++-----
+>  ...0001-bignum.cc-disable-warning-from-gcc-5.patch | 39 ++++++++++++++++=
+++++
+>  ...-image_util.cc-disable-warning-from-gcc-5.patch | 40 ++++++++++++++++=
+++++
+>  recipes-browser/chromium/chromium_40.0.2214.91.bb  |  3 ++
+>  8 files changed, 266 insertions(+), 10 deletions(-)
+>  create mode 100644 recipes-browser/chromium/cef3/0001-bignum.cc-disable-=
+warning-from-gcc-5.patch
+>  create mode 100644 recipes-browser/chromium/cef3/0002-image_util.cc-disa=
+ble-warning-from-gcc-5.patch
+>  create mode 100644 recipes-browser/chromium/cef3/0003-gtest-typed-test.h=
+-disable-warning-unused-definition.patch
+>  create mode 100644 recipes-browser/chromium/cef3/0004-SaturatedArithmeti=
+c.h-put-parentheses-to-silence-war.patch
+>  create mode 100644 recipes-browser/chromium/chromium/chromium-40/0001-bi=
+gnum.cc-disable-warning-from-gcc-5.patch
+>  create mode 100644 recipes-browser/chromium/chromium/chromium-40/0002-im=
+age_util.cc-disable-warning-from-gcc-5.patch
+>=20
+> --=20
+> 1.8.4.5
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-    cef3: fix gcc5 compile issues
-    
-    A cef3 build with gcc5 fails with warnings treated as errors.
-    
-    bignum.cc, image_util.cc: strict-overflow warning
-    gtest-typed-test.h: unused-variable warning
-    SaturatedArithmetic.h: parentheses warning
-    
-    Compiles for qemux86 with gcc 5.2.0 and still compiles on
-    armv7a with gcc linaro-4.9.4.
-    Note that the resulting binary has not been tested on a target.
-    
-    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-commit e2b1f6dd53789f8434c424959485090f07982596
-Author: Max Krummenacher <max.oss.09@gmail.com>
-Date:   Sat Nov 7 13:20:26 2015 +0100
+--E39vaYmALEf/7YXx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-    cef3_280796.bb: change indent to 4 spaces
-    
-    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
-commit 654ae2847858db5d62e2bc1f04e2049598cda18a
-Author: Max Krummenacher <max.oss.09@gmail.com>
-Date:   Sat Nov 7 13:20:25 2015 +0100
+iEYEARECAAYFAlZAen4ACgkQN1Ujt2V2gBzGnwCdHU+M0K9zzoUOqNDO5LUmqd4U
+Ll4An1tm7qgkIGkbmg7WYqdaTPb2L7dU
+=wxLQ
+-----END PGP SIGNATURE-----
 
-    chromium: fix gcc5 compile issues
-    
-    A chromium build with gcc5 fails with warnings treated as errors.
-    
-    bignum.cc, image_util.cc: strict-overflow warning
-    
-    Compiles and runs on qemux86-64 with gcc 5.2.0 and still compiles on
-    armv7a with gcc linaro-4.9.4.
-    
-    Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-
-Regards,
-
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
-
+--E39vaYmALEf/7YXx--
