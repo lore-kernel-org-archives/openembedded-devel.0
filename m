@@ -1,29 +1,34 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BD2F260043
+Return-Path: <erkka.kaaria@intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id A477E73D46
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Nov 2015 07:46:32 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tA97kTwS017813
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 8 Nov 2015 23:46:29 -0800 (PST)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Sun, 8 Nov 2015 23:46:28 -0800
-To: <openembedded-devel@lists.openembedded.org>
-References: <1446630396-14149-1-git-send-email-kai.kang@windriver.com>
-	<20151106170516.GD2550@jama>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <56404F55.6090309@windriver.com>
-Date: Mon, 9 Nov 2015 15:46:29 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
+	Mon,  9 Nov 2015 08:10:49 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 09 Nov 2015 00:10:48 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,265,1444719600"; d="scan'208";a="815166961"
+Received: from irsmsx102.ger.corp.intel.com ([163.33.3.155])
+	by orsmga001.jf.intel.com with ESMTP; 09 Nov 2015 00:10:47 -0800
+Received: from irsmsx103.ger.corp.intel.com ([169.254.3.13]) by
+	IRSMSX102.ger.corp.intel.com ([169.254.2.251]) with mapi id
+	14.03.0248.002; Mon, 9 Nov 2015 08:10:46 +0000
+From: "Kaaria, Erkka" <erkka.kaaria@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-java] Sporadic segfaults when compiling
+	jamvm-native and classpath-native
+Thread-Index: AdEYh1mleQZx3N4ORrSipg5JNSUBowAGbqoAAIjBfnA=
+Date: Mon, 9 Nov 2015 08:10:46 +0000
+Message-ID: <17C19527BD855F428F22685986FD58BEA33E02@IRSMSX103.ger.corp.intel.com>
+References: <17C19527BD855F428F22685986FD58BEA213D3@IRSMSX106.ger.corp.intel.com>
+	<CAP9ODKpP17FSRs+iNU=nne4empeDXCJbVq07ydq-6MoGAmO+yQ@mail.gmail.com>
+In-Reply-To: <CAP9ODKpP17FSRs+iNU=nne4empeDXCJbVq07ydq-6MoGAmO+yQ@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [163.33.239.182]
 MIME-Version: 1.0
-In-Reply-To: <20151106170516.GD2550@jama>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] libsmi: add configure file
+Subject: Re: [meta-java] Sporadic segfaults when compiling jamvm-native and classpath-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,141 +42,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Nov 2015 07:46:36 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 09 Nov 2015 08:10:50 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On 2015年11月07日 01:05, Martin Jansa wrote:
-> On Wed, Nov 04, 2015 at 05:46:36PM +0800, kai.kang@windriver.com wrote:
->> From: Kai Kang <kai.kang@windriver.com>
->>
->> Add configure file duplicated from file smi.conf-example in source code
->> and replace paths with mibs files directories.
->>
->> Then set libsmi-mibs as runtime recommend package to provide mibs files.
->>
->> Add homepage and update SRC_URI as well.
->>
->> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> ---
->>   meta-oe/recipes-support/libsmi/libsmi/smi.conf | 48 ++++++++++++++++++++++++++
->>   meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb | 12 ++++++-
->>   2 files changed, 59 insertions(+), 1 deletion(-)
->>   create mode 100644 meta-oe/recipes-support/libsmi/libsmi/smi.conf
->>
->> diff --git a/meta-oe/recipes-support/libsmi/libsmi/smi.conf b/meta-oe/recipes-support/libsmi/libsmi/smi.conf
->> new file mode 100644
->> index 0000000..7e4da86
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/libsmi/libsmi/smi.conf
->> @@ -0,0 +1,48 @@
->> +#
->> +# smi.conf - Global/User SMI configuration file. (EXAMPLE)
->> +#
->> +# Copyright (c) 2000 Frank Strauss, Technical University of Braunschweig.
->> +#
->> +# See the file "COPYING" for information on usage and redistribution
->> +# of this file, and for a DISCLAIMER OF ALL WARRANTIES.
->> +#
->> +# @(#) $Id: smi.conf-example 1134 2001-06-11 09:59:13Z strauss $
->> +#
->> +#
->> +# See smi_config(3) for detailed information on configuration files.
->> +#
->> +
->> +# Extend (note the semicolon) the libsmi default module search path.
->> +path :/usr/share/mibs/iana
->> +path :/usr/share/mibs/ietf
->> +path :/usr/share/mibs/irtf
->> +path :/usr/share/mibs/tubs
->> +
->> +# EXPERIMENTAL: Add a caching method (works only on UNIX systems).
->> +# NOTE: the cache directory must exist and permissions must be
->> +# handled appropriately. A simple but insecure way is to apply
->> +# a tmp flag to the directory (chmod 1777 /usr/local/share/mibs/cache).
->> +#cache /usr/local/share/mibs/cache /usr/local/bin/smicache -d /usr/local/share/mibs/cache -p http://www.ibr.cs.tu-bs.de/projects/libsmi/smicache/
->> +
->> +# Don't show any errors by default.
->> +level 0
->> +
->> +# Preload some basic SMIv2 modules.
->> +load SNMPv2-SMI
->> +load SNMPv2-TC
->> +load SNMPv2-CONF
->> +
->> +# Make smilint shout loud to report all errors and warnings.
->> +smilint: level 9
->> +
->> +# But please don't claim about any names longer than 32 chars.
->> +# (note: this is the prefix of errors `namelength-32-module,
->> +#  -type, -object, -enumeration, and -bit)
->> +smilint: hide namelength-32
->> +
->> +# Preloading some more modules for special applications.
->> +tcpdump: load DISMAN-SCRIPT-MIB
->> +tcpdump: load IF-MIB
->> +
->> +smiquery: load IF-MIB
->> +
->> diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb b/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
->> index 2b036f9..e1af636 100644
->> --- a/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
->> +++ b/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
->> @@ -1,16 +1,26 @@
->>   SUMMARY = "A Library to Access SMI MIB Information"
->> +HOMEPAGE = "https://www.ibr.cs.tu-bs.de/projects/libsmi"
->>   
->>   LICENSE = "BSD"
->>   LIC_FILES_CHKSUM = "file://COPYING;md5=3ad3076f9332343a21636cfd351f05b7"
->>   
->> -SRC_URI = "ftp://ftp.ibr.cs.tu-bs.de/pub/local/libsmi/${BP}.tar.gz"
->> +SRC_URI = "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.tar.gz \
->> +           file://smi.conf \
-> 4 spaces
->
->> +          "
-> Closing quote should be first character.
->
->>   
->>   SRC_URI[md5sum] = "760b6b1070738158708649ed2c63425e"
->>   SRC_URI[sha256sum] = "f048a5270f41bc88b0c3b0a8fe70ca4d716a46b531a0ecaaa87c462f49d74849"
->>   
->>   inherit autotools
->>   
->> +do_install_append () {
->> +	install -d ${D}${sysconfdir}
->> +	install -m 0644 ${WORKDIR}/smi.conf ${D}${sysconfdir}/smi.conf
-> Sane layers are using consistent indentation with 4 spaces.
->
-> I've fixed this when cherry-picking to master.
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
+> Behalf Of Otavio Salvador
+> Sent: Friday, November 6, 2015 4:40 PM
+> To: OpenEmbedded Devel List <openembedded-
+> devel@lists.openembedded.org>
+> Subject: Re: [oe] [meta-java] Sporadic segfaults when compiling jamvm-
+> native and classpath-native
+> =
 
-Thanks. I'll follow the style next time.
+> On Fri, Nov 6, 2015 at 9:44 AM, Kaaria, Erkka <erkka.kaaria@intel.com>
+> wrote:
+> > There seems to be something wrong with cacao-initial-native JIT compiler
+> that causes sporadic segfaults when compiling jamvm-native or classpath-
+> native. This is fairly rare, I estimate around 1% of the builds fail due =
+to
+> segfault. I use 64 bit Ubuntu 15.04 with GCC 4.9.2 as build machine.
+> =
 
---Kai
-
->
->> +}
->> +
->>   PACKAGES += "${PN}-mibs ${PN}-pibs"
->>   
->>   FILES_${PN}-mibs += "${datadir}/mibs"
->>   FILES_${PN}-pibs += "${datadir}/pibs"
->> +
->> +RRECOMMENDS_${PN} = "${BPN}-mibs"
->> -- 
->> 2.6.1
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+> Did you check if cacao-staging tree does not include a fix for it?
+> =
 
 
--- 
-Regards,
-Neil | Kai Kang
+Hi,
+
+I briefly glanced at the cacao-staging commit history, but I didn't find an=
+y patches that would fix this segfault specifically. There are several patc=
+hes that fix issues and race conditions in the jit compiler, for example ht=
+tps://bitbucket.org/cacaovm/cacao-staging/commits/7e6eef2b4c94 and https://=
+bitbucket.org/cacaovm/cacao-staging/commits/56697326cf27. One of these patc=
+hes may very well fix the segfault, but the problem is that the cacao versi=
+on that is used in the bootstrapping process is positively ancient (0.98, r=
+eleased in 2007). The linked patches for example are patching files that ar=
+e either substantially different from the ones in 0.98 or don't even exist =
+in 0.98. Backporting any patches to would not be easy. =
+
+
+While the workaround would leave the underlying cause unfixed, it only requ=
+ires changing one line. Since the cacao-initial-native is only used briefly=
+ during the build process, I think small workaround is better than large sc=
+ale changes to the old codebase. I also didn't notice any difference in cla=
+sspath-native or jamvm-native build times, so the performance impact is neg=
+ligible.  =
+
+
+On a related note, I ran the clean\recompile script over the weekend and sa=
+w no segfaults, so I think the workaround works. =
+
+
+Best Regards,
+Erkka K=E4=E4ri=E4
+---------------------------------------------------------------------
+Intel Finland Oy
+Registered Address: PL 281, 00181 Helsinki =
+
+Business Identity Code: 0357606 - 4 =
+
+Domiciled in Helsinki =
+
+
+This e-mail and any attachments may contain confidential material for
+the sole use of the intended recipient(s). Any review or distribution
+by others is strictly prohibited. If you are not the intended
+recipient, please contact the sender and delete all copies.
 
 
