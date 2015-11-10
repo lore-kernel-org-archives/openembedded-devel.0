@@ -1,49 +1,33 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
-	[209.85.223.180])
-	by mail.openembedded.org (Postfix) with ESMTP id AA176736B6
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 1841D736B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2015 21:43:09 +0000 (UTC)
-Received: by ioc74 with SMTP id 74so15628734ioc.2
+	Tue, 10 Nov 2015 21:49:59 +0000 (UTC)
+Received: by wmvv187 with SMTP id v187so29557586wmv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2015 13:43:09 -0800 (PST)
+	Tue, 10 Nov 2015 13:49:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=s7wLtFrjh1W58gxGs6O8jWrWl8vw8kpHyeXhH7ZVK08=;
-	b=tWEOJs+GjSVZUCotxPBfvUL3SEd+KM+xpS1lls2pWC8+lNyPT2Lrw1+XfylK+D4IZN
-	lrsU/+1n5YOPwKwQVsLGAZ+4URmaVKH7yXgoOEjsC7iP8aPeDN7P+GCfK37yYS7e7IS0
-	zaJfii3/XN5M9Q7Sc05yD3+tv62TCWOzjbgLzTieO2k9zmuT2FbI6HD79yGTB/58P4MY
-	OKqMGcSGfS95J9V2L/igaxH7cdZVVpbYRu8A0aofWEbcOSbpckxjJTMHVNcXtaSf3ESR
-	yRmpgQOemF95A6imfX9JMp1VC5lsvhyKDgPFA+9etqo73EKdBoOQNIRiHY9ZRRWRTp4s
-	c6Kg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kergoth_com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=s7wLtFrjh1W58gxGs6O8jWrWl8vw8kpHyeXhH7ZVK08=;
-	b=FrZNT15ApyfacKKX3g7TUuS+z1QZ/opMhmjz2iOgq14Zn59+r0YmsiU+hImGWKvifP
-	Xgzo++5Q64rkdUBobM+G5WV5bJUV7IoOm/V8ZmnSaDrGHj6tXJlDWbd4FqIJIT1VlaYS
-	ZdimI2AxtZqj4Afb8yCn7w/0+gLQtyXrt3bGpaywh0FidOO0lz4yqbArq7mEh3necpMx
-	+4mhmIQ7DrniDIJZa2kijWngbB0lJ3i9JsgqYyqZQA2a9j25QwFlvVz2Wneg1CN4ZW59
-	b9itbHJc8nOim0gSV7qn5h/q0gVQkFN8Jn0VzkRpy2uzn2EtZjghQ0fFUIekacetrY6Y
-	vjPg==
-X-Received: by 10.107.38.70 with SMTP id m67mr6868748iom.98.1447191789272;
-	Tue, 10 Nov 2015 13:43:09 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.93.7 with HTTP; Tue, 10 Nov 2015 13:42:49 -0800 (PST)
-In-Reply-To: <A3005F6B-2993-4BA5-9406-D411C19FA636@gmail.com>
-References: <A3005F6B-2993-4BA5-9406-D411C19FA636@gmail.com>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Tue, 10 Nov 2015 14:42:49 -0700
-X-Google-Sender-Auth: -C7OsG3OQlEEGTeWCwU9DivxH2M
-Message-ID: <CABcZANnTbE-6KgFxaNr2p-ruzt3TKQ0jc2VR6-8fhJ-MmGcpZQ@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: =?UTF-8?Q?Volker_M=C3=B6sker?= <volker.moesker@rademacher.de>,
-	Tobias Theophile <Tobias.Theophile@rademacher.de>
-Subject: Re: [meta-oe][PATCH 1/3] samba: fix dependencies and QA issues
+	h=from:to:cc:subject:date:message-id;
+	bh=UOkM4l3q8AIIMPHEq7c2nBtHiRlYAx1F6H7EdMskusE=;
+	b=oCnDpuTNj0dZCmgO43xZXHbgk37Lb6jxNBu7Um4xvzJ5BDhcJQNJaSOsZyzGVSJfZ/
+	QmoBxpOLutU7HFQ48vS/zwp05np/w9psU65oW0oKCuZUNtl7yEkJQ+U02tvzPTSymHLw
+	CaxINrx/OsZ0EN5EaAswGGvJBtCmNnB+z/cqnfuzf2RhJb47K2fOUNw2p5knwpjCv2GB
+	0gJwWSJuw1wpmehOj+a9qxWSNEfooNfxHqbxuAJcfwxfBJ0Pzd7I5zIUZMlWYFDSblYU
+	KELd/QxL44RuPNz0Av5XreiiOGvcf1rlPE3Ue8wLKoxOSonxGSLlDs7+UmHYyw49fqX+
+	lxig==
+X-Received: by 10.28.55.209 with SMTP id e200mr32793599wma.79.1447192199768;
+	Tue, 10 Nov 2015 13:49:59 -0800 (PST)
+Received: from chl500346.lan.ffah.ch (c-82-192-248-24.customer.ggaweb.ch.
+	[82.192.248.24]) by smtp.gmail.com with ESMTPSA id
+	ej10sm4763171wjd.32.2015.11.10.13.49.58
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 10 Nov 2015 13:49:58 -0800 (PST)
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 10 Nov 2015 22:49:07 +0100
+Message-Id: <1447192164-9399-1-git-send-email-adrian.freihofer@gmail.com>
+X-Mailer: git-send-email 2.4.3
+Subject: [meta-oe][PATCH 00/17] network/modemmanager updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,24 +41,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2015 21:43:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 10 Nov 2015 21:50:01 -0000
 
-On Tue, Nov 10, 2015 at 2:22 PM, Jens Rehsack <rehsack@gmail.com> wrote:
+Update networkmanager and modemmanager to latest upstream version
+Add fedora patches
+Add PACKAGECONFIGs to support smaller images: ~17MB in total, ~13MB for gnutls
+(The default configuration is not changed by the new PACKAGECONFIGs.)
+Add networkmanager plugin for openvpn.
+Provide package for nmtui.
 
-> +                   ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'lsb',
-> '', d)} \
->
+Adrian Freihofer (17):
+  libqmi: update to 1.12.6
+  modemmanager: Update to 1.4.12
+  modemmanager: Add PACKAGECONFIGs
+  modemmanager: add dbus config
+  modemmanager: Start always
+  networkmanager: Update to 1.0.6
+  networkmanager: support gnutls and nss
+  networkmanager: add fedora bugfix patches
+  networkmanager: Add package for nmtui
+  networkmanager: run dispatcher
+  networkmanager: PACKAGECONFIG for ifupdown netconfig
+  networkmanager: PACKAGECONFIG for dhclient
+  networkmanager: PACKAGECONFIG for dnsmasq
+  networkmanager: PACKAGECONFIG for wifi
+  networkmanager: PACKAGECONFIG for adsl
+  networkmanager: use bluetooth from distro
+  networkmanager: add openvpn plugin
 
-This really requires lsb to able build, for all sysvinit distros? That
-seems unlikely. Was this intended to be based on the lsb distro feature?
-Also, why add lsb to rdepends independently of the packageconfig? I'd think
-using the packageconfig's 4th field for rdepends, if necessary, would work
-better, unless I'm missing something?
+ .../libqmi/{libqmi_1.12.2.bb => libqmi_1.12.6.bb}  |   4 +-
+ .../modemmanager/modemmanager_1.4.12.bb            |  53 +++++++
+ .../modemmanager/modemmanager_1.4.2.bb             |  40 -----
+ .../networkmanager/networkmanager-openvpn_1.0.6.bb |  43 ++++++
+ .../0002-add-pkg-config-for-libgcrypt.patch        |  41 ++++++
+ ...ix-parse-commandline-options-into-correct.patch |  35 +++++
+ ...-vpn-connection-fix-unsetting-the-gateway.patch |  30 ++++
+ ...tion-set-the-MTU-for-the-VPN-IP-interface.patch |  54 +++++++
+ ...t-reset-NM_UNMANAGED_DEFAULT-when-platfor.patch |  33 +++++
+ .../0007-nmcli-crash-vlan-priorities.patch         |  35 +++++
+ .../0008-nmtui-fix-crash-in-secret-agent.patch     |  88 +++++++++++
+ .../rh1175446-vpn-secondaries-connections.patch    |  57 ++++++++
+ .../rh1261428-ipv6-ignore-auto-dns.patch           |  37 +++++
+ .../rh1263185-nmcli-con-add-generic.patch          |  44 ++++++
+ .../rh1263959-modem-supported-ip-families.patch    |  62 ++++++++
+ .../rh1264676-fix-crash-on-device-removal.patch    |  80 ++++++++++
+ .../rh1265993-nmcli-allow-ipv6-ppp-for-wwan.patch  |  46 ++++++
+ ...rh1266003-fix-crash-on-bss-proxy-acquired.patch |  48 ++++++
+ .../rh1272974-fix-s390-ctc-detection.patch         |  57 ++++++++
+ .../rh1277693-vpn-service-timer.patch              | 161 +++++++++++++++++++++
+ .../networkmanager/networkmanager_1.0.4.bb         |  90 ------------
+ .../networkmanager/networkmanager_1.0.6.bb         | 141 ++++++++++++++++++
+ 22 files changed, 1147 insertions(+), 132 deletions(-)
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.12.2.bb => libqmi_1.12.6.bb} (80%)
+ create mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb
+ delete mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.0.6.bb
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-add-pkg-config-for-libgcrypt.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0003-config-bugfix-parse-commandline-options-into-correct.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0004-vpn-connection-fix-unsetting-the-gateway.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0005-vpn-connection-set-the-MTU-for-the-VPN-IP-interface.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0006-device-don-t-reset-NM_UNMANAGED_DEFAULT-when-platfor.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0007-nmcli-crash-vlan-priorities.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0008-nmtui-fix-crash-in-secret-agent.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1175446-vpn-secondaries-connections.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1261428-ipv6-ignore-auto-dns.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1263185-nmcli-con-add-generic.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1263959-modem-supported-ip-families.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1264676-fix-crash-on-device-removal.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1265993-nmcli-allow-ipv6-ppp-for-wwan.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1266003-fix-crash-on-bss-proxy-acquired.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1272974-fix-s390-ctc-detection.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1277693-vpn-service-timer.patch
+ delete mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.4.bb
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+2.4.3
+
 
