@@ -1,34 +1,21 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id ED51573D46
+Return-Path: <erkka.kaaria@intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F08673D46
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2015 06:49:49 +0000 (UTC)
-Received: by wmdw130 with SMTP id w130so57667896wmd.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Nov 2015 22:49:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=QGsiWqaob11eYs78PkgccQpWUgmfNnGzwm0WA0gunHE=;
-	b=GWRFfLZk/Dz0LpJ81e58T566BrgMQZ6+YQFNR+auqoLpYMc1rDjk/l18xsIXJAfa1E
-	a379ldenBVwVQcaaEArNQaFO/v1xVpFVs3rJcffwPIwXb5PU1yATt0SwbV5CaHGTa0bL
-	fG0fai/HtIC9NTZ4a2xProH/9kCxGsM6MYv7V90TB3aXli2MnYjK+VmmbPgw67F1AJ5F
-	qTCTYDxpREK1Ki+VRrfm1ZQDWN/joKyFx6n4nYCIboeiXbZH5vefCKLFGwmrkHXKSURW
-	mJPI19dhdW92ZQW1ThS28sUyRibM8U0ESqVUfNWMVf6O+AdU+1TpC3is/OJPE/rLbeHq
-	ilIA==
-X-Received: by 10.28.23.66 with SMTP id 63mr29404099wmx.4.1447138188907;
-	Mon, 09 Nov 2015 22:49:48 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	bh5sm1730271wjb.42.2015.11.09.22.49.47
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 09 Nov 2015 22:49:47 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Tue, 10 Nov 2015 06:55:58 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by orsmga102.jf.intel.com with ESMTP; 09 Nov 2015 22:55:58 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,269,1444719600"; d="scan'208";a="681946443"
+Received: from ekaaria-xps-8300.fi.intel.com ([10.237.68.35])
+	by orsmga003.jf.intel.com with ESMTP; 09 Nov 2015 22:55:57 -0800
+From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Nov 2015 07:49:50 +0100
-Message-Id: <1447138190-11249-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.6.2
-Subject: [PATCH][meta-qt5] qtwebengine: disable autodetection from sysroot
+Date: Tue, 10 Nov 2015 08:55:44 +0200
+Message-Id: <1447138544-29758-1-git-send-email-erkka.kaaria@intel.com>
+X-Mailer: git-send-email 2.1.4
+MIME-Version: 1.0
+Subject: [meta-java][PATCH] ecj-initial.in: Disable multithreading to mitigate segfaulting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,64 +29,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2015 06:49:51 -0000
+X-List-Received-Date: Tue, 10 Nov 2015 06:56:01 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-* bundled nspr fails to build when system nss is used
-  | work/i586-oe-linux/qtwebengine/5.5.99+5.6.0-alpha1+gitAUTOINC+64dc919d31_7e655fbb76-r0/git/src/3rdparty/chromium/third_party/nss/nspr/pr/include/md/_unixos.h:596:9: error: unknown type name 'off64_t'
-  |  typedef off64_t _MDOff64_t;
-  |          ^
-* addin qtlocation to resolve:
-  WARNING: Failure to find: git/src/core/Release/obj/src/core/QtWebEngineCore.location_provider_qt.o
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-qt/qt5/qtwebengine_git.bb | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
-
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index d12e3b9..6e913bc 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -13,6 +13,7 @@ DEPENDS += " \
-     ninja-native \
-     qtwebchannel \
-     qtbase qtdeclarative qtxmlpatterns qtquickcontrols \
-+    qtlocation \
-     libdrm fontconfig pixman openssl pango cairo icu pciutils \
-     libcap \
- "
-@@ -28,6 +29,20 @@ DEPENDS += "flac"
- DEPENDS += "yasm-native"
- EXTRA_QMAKEVARS_PRE += "GYP_CONFIG+=use_system_yasm"
- 
-+DEPENDS += "libwebp"
-+EXTRA_QMAKEVARS_PRE += "WEBENGINE_CONFIG+=use_system_libwebp"
-+DEPENDS += "libxslt"
-+EXTRA_QMAKEVARS_PRE += "WEBENGINE_CONFIG+=use_system_libxslt"
-+DEPENDS += "libevent"
-+EXTRA_QMAKEVARS_PRE += "WEBENGINE_CONFIG+=use_system_libevent"
-+DEPENDS += "flac"
-+EXTRA_QMAKEVARS_PRE += "WEBENGINE_CONFIG+=use_system_flac"
-+DEPENDS += "speex"
-+EXTRA_QMAKEVARS_PRE += "WEBENGINE_CONFIG+=use_system_speex"
-+
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[opus] = "WEBENGINE_CONFIG+=use_system_opus,,libopus"
-+
- COMPATIBLE_MACHINE = "(-)"
- COMPATIBLE_MACHINE_x86 = "(.*)"
- COMPATIBLE_MACHINE_x86-64 = "(.*)"
-@@ -57,6 +72,9 @@ do_configure() {
-     export CXX_host="g++"
-     export QMAKE_MAKE_ARGS="${EXTRA_OEMAKE}"
- 
-+    # Disable autodetection from sysroot:
-+    sed -i 's/packagesExist([^)]*vpx[^)]*):/false:/g; s/config_srtp:/false:/g; s/config_snappy:/false:/g; s/packagesExist(nss):/false:/a; s/^ *packagesExist\($$package\):/false:/g' ${S}/tools/qmake/mkspecs/features/configure.prf
-+
-     # qmake can't find the OE_QMAKE_* variables on it's own so directly passing them as
-     # arguments here
-     ${OE_QMAKE_QMAKE} -r ${EXTRA_QMAKEVARS_PRE} QTWEBENGINE_ROOT="${S}" \
--- 
-2.6.2
+Q2FjYW8taW5pdGlhbC1uYXRpdmUgc3VmZmVycyBmcm9tIHNwb3JhZGljIHNlZ21lbnRhdGlvbiBm
+YXVsdHMsIHdoZW4gdGhlIEphdmEKcHJvZ3JhbSB1c2VzIG11bHRpcGxlIEphdmEgdGhyZWFkcywg
+ZHVlIHRvIGEgcmFjZSBjb25kaXRpb24uIEluIHBhcnRpY3VsYXIsCmphbXZtLW5hdGl2ZSBhbmQg
+Y2xhc3NwYXRoLW5hdGl2ZSBidWlsZHMgd291bGQgb2NjYXNpb25hbGx5IGZhaWwgYXMgdGhlCmVj
+bGlwc2UgY29tcGlsZXIgdXNlZCBkdXJpbmcgYnVpbGQgdGFzayBieSBkZWZhdWx0IHVzZXMgbXVs
+dGlwbGUgdGhyZWFkcy4KCkFzIGZpeGluZyB0aGUgcmFjZSBjb25kaXRpb24gd291bGQgcmVxdWly
+ZSBsYXJnZSBjaGFuZ2VzIHRvIHRoZQpjYWNhby1pbml0aWFsLW5hdGl2ZSBjb2RlYmFzZSwgYW5k
+IGFzIGl0IGlzIG9ubHkgdXNlZCBicmllZmx5IGR1cmluZyB0aGUKYm9vdHN0cmFwcGluZyBwcm9j
+ZXNzLCBpdCBpcyBlYXNpZXIgYW5kIHNhZmVyIHRvIGp1c3QgZm9yY2UgZWNqLWluaXRpYWwgdG8g
+cnVuCmluIGEgc2luZ2xldGhyZWFkZWQgbW9kZS4KClNpZ25lZC1vZmYtYnk6IEVya2thIEvDpMOk
+cmnDpCA8ZXJra2Eua2FhcmlhQGludGVsLmNvbT4KLS0tCiByZWNpcGVzLWNvcmUvZWNqL2ZpbGVz
+L2Vjai1pbml0aWFsLmluIHwgNCArKystCiAxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCsp
+LCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvcmVjaXBlcy1jb3JlL2Vjai9maWxlcy9lY2ot
+aW5pdGlhbC5pbiBiL3JlY2lwZXMtY29yZS9lY2ovZmlsZXMvZWNqLWluaXRpYWwuaW4KaW5kZXgg
+MjA5OTk5MS4uMzBjMWM4YSAxMDA3NTUKLS0tIGEvcmVjaXBlcy1jb3JlL2Vjai9maWxlcy9lY2ot
+aW5pdGlhbC5pbgorKysgYi9yZWNpcGVzLWNvcmUvZWNqL2ZpbGVzL2Vjai1pbml0aWFsLmluCkBA
+IC0xICsxLDMgQEAKLSR7UlVOVElNRX0gLVhteDUxMm0gLWNwICR7RUNKX0pBUn0gb3JnLmVjbGlw
+c2UuamR0LmludGVybmFsLmNvbXBpbGVyLmJhdGNoLk1haW4gJHsxKyIkQCJ9CisjIC1EamR0LmNv
+bXBpbGVyLnVzZVNpbmdsZVRocmVhZD10cnVlIGZvcmNlcyB0aGUgY29tcGlsZXIgdG8gb25seSB1
+c2UgYSBzaW5nbGUgdGhyZWFkLiBUaGlzIGlzIGEgd29ya2Fyb3VuZCB0byBhIHJhY2UgY29uZGl0
+aW9uCisjIGJ1ZyBpbiBjYWNhby1pbml0aWFsLW5hdGl2ZSwgd2hlcmUgdXNpbmcgbXVsdGlwbGUg
+amF2YSB0aHJlYWQgY291bGQgY2F1c2Ugc3BvcmFkaWMgc2VnbWVudGF0aW9uIGZhdWx0cworJHtS
+VU5USU1FfSAtWG14NTEybSAtRGpkdC5jb21waWxlci51c2VTaW5nbGVUaHJlYWQ9dHJ1ZSAtY3Ag
+JHtFQ0pfSkFSfSBvcmcuZWNsaXBzZS5qZHQuaW50ZXJuYWwuY29tcGlsZXIuYmF0Y2guTWFpbiAk
+ezErIiRAIn0KLS0gCjIuMS40CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KSW50ZWwgRmlubGFuZCBPeQpSZWdpc3Rl
+cmVkIEFkZHJlc3M6IFBMIDI4MSwgMDAxODEgSGVsc2lua2kgCkJ1c2luZXNzIElkZW50aXR5IENv
+ZGU6IDAzNTc2MDYgLSA0IApEb21pY2lsZWQgaW4gSGVsc2lua2kgCgpUaGlzIGUtbWFpbCBhbmQg
+YW55IGF0dGFjaG1lbnRzIG1heSBjb250YWluIGNvbmZpZGVudGlhbCBtYXRlcmlhbCBmb3IKdGhl
+IHNvbGUgdXNlIG9mIHRoZSBpbnRlbmRlZCByZWNpcGllbnQocykuIEFueSByZXZpZXcgb3IgZGlz
+dHJpYnV0aW9uCmJ5IG90aGVycyBpcyBzdHJpY3RseSBwcm9oaWJpdGVkLiBJZiB5b3UgYXJlIG5v
+dCB0aGUgaW50ZW5kZWQKcmVjaXBpZW50LCBwbGVhc2UgY29udGFjdCB0aGUgc2VuZGVyIGFuZCBk
+ZWxldGUgYWxsIGNvcGllcy4K
 
 
