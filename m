@@ -1,40 +1,45 @@
-Return-Path: <ppf83764@freenet.de>
-X-Greylist: delayed 781 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 10 Nov 2015 13:54:41 UTC
-Received: from mout1.freenet.de (mout1.freenet.de [195.4.92.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D34B74197
+Return-Path: <jussi.kukkonen@intel.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F1D0766B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2015 13:54:41 +0000 (UTC)
-Received: from [195.4.92.142] (helo=mjail2.freenet.de)
-	by mout1.freenet.de with esmtpa (ID ppf83764@freenet.de) (port 25)
-	(Exim 4.85 #1) id 1Zw9B5-0008O8-0m
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2015 14:41:39 +0100
-Received: from localhost ([::1]:44317 helo=mjail2.freenet.de)
-	by mjail2.freenet.de with esmtpa (ID ppf83764@freenet.de) (Exim 4.85
-	#1) id 1Zw9B4-0001mm-Sx
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2015 14:41:38 +0100
-Received: from mx3.freenet.de ([195.4.92.13]:36772)
-	by mjail2.freenet.de with esmtpa (ID ppf83764@freenet.de) (Exim 4.85
-	#1) id 1Zw98q-0005Kf-5S
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2015 14:39:20 +0100
-Received: from p57b3caa8.dip0.t-ipconnect.de ([87.179.202.168]:37719
-	helo=[192.168.178.21])
-	by mx3.freenet.de with esmtpsa (ID ppf83764@freenet.de)
-	(TLSv1.2:DHE-RSA-AES128-SHA:128) (port 587) (Exim 4.85 #1)
-	id 1Zw98q-0006GQ-1A for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2015 14:39:20 +0100
-From: Peter Fink <ppf83764@freenet.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <5641F387.5020904@freenet.de>
-Date: Tue, 10 Nov 2015 14:39:19 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
+	Tue, 10 Nov 2015 14:22:36 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so3132651wme.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Nov 2015 06:22:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel_com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to:cc:content-type;
+	bh=eFNVUxtfxIGyRTPK34hVQRTSWegFbSFMSxOW3dLAT3o=;
+	b=B+SF7nQrZS2wiHOsMj5+kJcznXyD8+pwb7q7nzvjLZORTFqh6/Jwy/07/qiqHq8jeO
+	Qz8V7yj129WnNbjOcfpNTmMJwGPuwrkAK/Uj7yd263ZVPWLoxsv0qW3Nakm4thCu75NO
+	Lnsajy20Zax7t4b1d0oiQvO0U7PY/Z6YBzeYJvTyulM9MefAAHwHNHRyx5hAo8vbcHFf
+	XM885glnR6seqnRwXtiO3jew+nZB9n38mOn6MsikQ1UNx0Qi6DEyXP2VWqiUxzbltmUv
+	JBUzg033snNMpRrWziajRUchoRiVPAdn4LWTVXKFdNpOzDE+z9y0DC+B21cdNAiNthCv
+	QbWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc
+	:content-type;
+	bh=eFNVUxtfxIGyRTPK34hVQRTSWegFbSFMSxOW3dLAT3o=;
+	b=B20NG7Y4deykurxXW3qDO0COHvcmTKNgw6HBTPY8+EOCGSkUVB8H3U07SixQ87w5a5
+	B51fGETe6uW89yftwLTYcSOkNZ3tymmW7OGsCuy6qnWnKUdweKKk4ED/hKtHIJG2iBGu
+	kk8j+3Jwygf1r/DXn794HZtpgNODLBQCqbuFFo0lRRelpw0uwj+2CrLSg9TZ+f1eFHHT
+	MJ6MZZs+HvESxH5dNvwpiTpfzzxc1Z9yn3L3+Pvcj7Fg1Xzi9Mr3XQzPH/CWUbpF/92N
+	HGzOzmylBv83+tBZBrr8YuP7LlTZXF/gt3HpvytmDKsHzn91MsL9kEUOKtDDBpluEkIv
+	Wv9A==
+X-Gm-Message-State: ALoCoQlQ4ciVy8mpWeWaYEPIVMRWggvJTf0elKraxds0MG9DU9iVcy9XImJyrAh9F2cmrGYglYJO
+X-Received: by 10.28.174.144 with SMTP id x138mr33825248wme.28.1447165356506; 
+	Tue, 10 Nov 2015 06:22:36 -0800 (PST)
 MIME-Version: 1.0
-X-Originated-At: 87.179.202.168!37719
-Subject: setting system and qtwebengine default localization
+Received: by 10.27.216.207 with HTTP; Tue, 10 Nov 2015 06:22:07 -0800 (PST)
+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
+Date: Tue, 10 Nov 2015 16:22:07 +0200
+Message-ID: <CAHiDW_Hx6Xi91=8rg3pD_B7F_+wfL2vMUbJTXYh6XGLzksBm7w@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [RFC] Remove vala from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,24 +53,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2015 13:54:46 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 Nov 2015 14:22:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
+Hi all,
 
-I've got two locale specific questions which I didn't find any answers 
-in the last few days...
+There's currently no software built with vala in oe-core. That's not great
+for vala (as it's not getting the automated testing that high quality
+maintenance would require) and it's not great for oe-core (as maintenance
+effort is better spent on components that _are_ used).
 
-#1: Is there a simple approach to set the system locale settings (and 
-keyboard layout) for an image without graphical desktop environment at 
-compile time rather than using localectl at runtime?
+Based on the above there's a feature request** to remove vala from oe-core.
+Please comment here or on the bug if you think this is an inappropriate
+idea or have suggestions.
 
-#2: I also need to change the browser language from a qtwebengine 
-project. I thought changing the system locale might change the 
-"Accept-Language: en-us, en" string, but sadly it doesn't. Is anybody 
-aware of a possibility to change the qtwebengine localization?
+If the plan goes through I intend to send a patch to add vala to another
+layer to minimize disruption: I guess that would be
+meta-openembedded/meta-oe as vala seems to have one user in this layer and
+another one on that layer ... Suggestions welcome on that as well.
 
-Thanks in advance and best regards,
-Peter Fink
+Alex, note that this might affect your GI patch set (or the other way
+round).
+
+
+Regards,
+  Jussi
+
+**) https://bugzilla.yoctoproject.org/show_bug.cgi?id=8640
 
