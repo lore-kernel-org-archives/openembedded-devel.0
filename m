@@ -1,74 +1,41 @@
-Return-Path: <samuli.piippo@theqtcompany.com>
-Received: from emea01-am1-obe.outbound.protection.outlook.com
-	(mail-am1on0124.outbound.protection.outlook.com [157.56.112.124])
-	by mail.openembedded.org (Postfix) with ESMTP id D8043766B2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2015 08:12:05 +0000 (UTC)
-Authentication-Results: spf=none (sender IP is )
-	smtp.mailfrom=samuli.piippo@theqtcompany.com; 
-Received: from piippo.it.local (91.217.248.11) by
-	HE1PR02MB1178.eurprd02.prod.outlook.com (10.163.173.148) with Microsoft
-	SMTP Server (TLS) id 15.1.318.15; Tue, 10 Nov 2015 08:11:56 +0000
-From: Samuli Piippo <samuli.piippo@theqtcompany.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 Nov 2015 10:11:40 +0200
-Message-ID: <1447143100-12365-1-git-send-email-samuli.piippo@theqtcompany.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-Originating-IP: [91.217.248.11]
-X-ClientProxiedBy: AMSPR04CA0030.eurprd04.prod.outlook.com (10.242.87.148) To
-	HE1PR02MB1178.eurprd02.prod.outlook.com (25.163.173.148)
-X-Microsoft-Exchange-Diagnostics: 1; HE1PR02MB1178;
-	2:3GoWTnbkalquw+28jJXnI3h/euHqtIbSKTgF1eJrx5ZlxCayB1w6kPAOKsMoy4VRXCOUhNGhQ2dn8mYu1kAA7phb5kij1aJikVXiWKSgigpifVwuXEpDEcyKVA3zMHRa5VBhV4Bi0c0EI1DNZUPx9Utdub9K3uB5vNzRVNvmnpM=;
-	3:MvM4yBEIK1OE0WYXE4yi9nfjxGSsPrRNeiG20BcR33DhEmJB69Px2QeYmp6+/P2Ri7nX0s8L0pesVqZipcgnHq8njxg5xkeSvrlcrTiwsoBLlUdEuEp5BL3cndAkMpVvTj4ytyb2KVcJNnwjxTXyIA==;
-	25:hsxhlRWYQQTgcF0/beQHQppLafhljNibmES0WnYaCOclnc2ChynHHoLfe4zfl00b1F3rPyGSeDk8TzuDrTtQLip33RUD0SLb+YUXPkV1KW22jBbsGdW9IDBddsjss89Z0f3o+ip0h+0Uz6lYlJSQfVjallR5NMrWAdYdgxOHJV2/JsRLZ2XLfIdGk91TUbIHL5MdesU/KJKZ+VB/hd+djLVJDFP0S1IljzgRrH/+Rs1h5zXVPW9aRppaSO1DzNin
-X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:HE1PR02MB1178;
-X-Microsoft-Exchange-Diagnostics: 1; HE1PR02MB1178;
-	20:42WgsBbTmTOqKcRH8QcFRuLHT0FBFnDYnRp45LEPvgAFaAStbXKbQPiPJE0hRp6HqATRMxo4kNoCuU7gWtkuse5gI/aCh8oFWvVyd3TKsa0O2iC83yLFJTx2o0GPGHFpO8zNC4+WOKnD3R2Ohj+z7ienUwqW/ZbjbZ2wU2KyhGcGDENiIKWhwtRmveEGjfs9dsiJg2xuxg1XveIo3OM4RwIhX9PWTsat3uVGcDSNSvalnddOADrCJ+SXMljmcQ5YWI1QY84tYl4c+eUO69hK1KgpLSNaaMzAo7zxoAItgZSuVx+9u+fRcRVV3DsZiu1svxDkNIpuYunhDEVHODi/fJAZIaHFh+g5ZpX7W7Cna3KBud+cZ8LB5t74Jn41N1R4Mr64OU92mLoIV3d8iqXuhePtzeoxwiLyDETCKjXAO1wwTNcSolAAszgZeXNM5jSTYhsQc/9tWn5gmKhkxtj1eUuhGP41YIxBjANAPYRH8rfHlsZd3lM9AhBW/Xi/BJwv;
-	4:EgrWKu8RlM2gDdXQxxRp6bUJCXZuQrLnuIbyqzaUju1gVuKyaVnffp4rYBALxpR7/Q2tb6RaMjqJgCzG9zvt1VHNMuyb8m/9tIWEJOrCWLi/SFaYxctJbxTm2p8dmy8WYAR5EDyTxnoXv9LP3uFCxePQR37nKM6Kkpl5c64ed3pa1CPjH7OPpHD2nvc5S7xoN3n/jlKuq0r1KhVL86s/NRgDfNtSsHdpugwJla1BAhYhvjzpnQmpeEh48W75SC97/Iy0BImaYO5IQukxrwCIM6GG9xPBWKgxzkvQGrSHjTFzPOTb4XT/GLv4bFhpicm1OCd8qv2pJX5QVN7HzWOAhJE6fvEHUng3pymrtoWStHWD9iEdpVx1CqQ7kiYjGQUS
-X-Microsoft-Antispam-PRVS: <HE1PR02MB1178FED4893C46610FA92D1E90140@HE1PR02MB1178.eurprd02.prod.outlook.com>
-X-Exchange-Antispam-Report-Test: UriScan:(226695750432114);
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(601004)(2401047)(5005006)(8121501046)(520078)(3002001)(10201501046);
-	SRVR:HE1PR02MB1178; BCL:0; PCL:0; RULEID:; SRVR:HE1PR02MB1178; 
-X-Forefront-PRVS: 07562C22DA
-X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10019020)(6009001)(189002)(199003)(450100001)(5008740100001)(101416001)(5007970100001)(5004730100002)(87976001)(50986999)(66066001)(105586002)(86362001)(106356001)(92566002)(47776003)(5003940100001)(50226001)(229853001)(42186005)(19580405001)(19580395003)(2351001)(33646002)(36756003)(81156007)(4001430100002)(5001960100002)(107886002)(189998001)(40100003)(97736004)(77096005)(48376002)(50466002)(122386002)(5001920100001)(110136002)(7099028);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:HE1PR02MB1178; H:piippo.it.local;
-	FPR:; SPF:None; PTR:InfoNoRecords; MX:1; A:1; LANG:en; 
-Received-SPF: None (protection.outlook.com: theqtcompany.com does not
-	designate permitted sender hosts)
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; HE1PR02MB1178;
-	23:UVTaDV4OB4h10mG4xLDmUVz2UMszF+Bsi8aGWOj2a?=
-	=?us-ascii?Q?Swcv2dZvouIT4KiGgP+44ZZhQkycfOPYaF9g8rvyWXMkuOJnkcQOVEqOrILR?=
-	=?us-ascii?Q?5M2lfnijJLEhmfji/SvRRiG+cufX++Wc4qJUtbca0uWzVD5lqQJFky2ciqne?=
-	=?us-ascii?Q?7aXsZhx77qPre0uy4gEvnMgKRX60ncXkpNV/uWn0kU3l3qc6TKXCOQChy0g/?=
-	=?us-ascii?Q?SpbadKgicvMtyaZ1X7jzFGb/jM0AviLQXjcga5TlvcbGCte8mOTL0FlgW3ZP?=
-	=?us-ascii?Q?ITOPC/iNCuBGsbVg4UteL84hrbgUeuDjKwr8QlSLvk79wMb7BB8hZUh50Qg6?=
-	=?us-ascii?Q?Z61WYNVRIkNQ/XmqxzSbXnbYpAkFoB1y6cIp+B0EZC9/FciI+LftCp0ghbB0?=
-	=?us-ascii?Q?/vgCacr5/qnyFEoRKew+Hi4tCeGmhBE8Wn2gpHCOXM35vxmhR/g3Ssyp4QoS?=
-	=?us-ascii?Q?PQ0HC3/puAsYQwm+U+gZv4o99Vr2aHIIIO4RbyrGxZvD4wm9af6i1vaJIPqv?=
-	=?us-ascii?Q?xdGi9tJ90C+5DJk9IsJmd+AQOs0wPZu0C2/W/2ZTReNHIFd51E2sezSpwNYY?=
-	=?us-ascii?Q?NX7NEYwhf2NyfzNWnXQbnx0Hf9GhrPykSIVcW60ILZhlWk+I14WMuJwzr54K?=
-	=?us-ascii?Q?8Dy8ZY31OGnKLd9GoiQLPCNjMoL0p2PtA8HWj+BRxGN2lD0GzVDPMRfNmPi3?=
-	=?us-ascii?Q?p9X475TVg//kzY3dwAD1c6cuZ/6B7Eha2NgWKiTUsz0eMptoVugytpPeL1lU?=
-	=?us-ascii?Q?i2znDA3VIXAk7R5pOch8TF21o1bmDtT3EdiAHNEuYa5nS2pkKNSX/H9n3pU5?=
-	=?us-ascii?Q?uETm7godUQ2Rm+7EuSIZMLRdDg3HNdJNqZwGEiVjhJtTmNm3/jBqEEXFgBsJ?=
-	=?us-ascii?Q?KWklkyEvQHR83HuTWh/hulD2q2U5eGXRkWKkJyENti9x5bV+UBN+2LAVmjUc?=
-	=?us-ascii?Q?AuKL7DdMwiITwM/pD/dgdqM1nLbpb0zl87c7Y4Ho9/lygePE6O4QJto8ELwh?=
-	=?us-ascii?Q?SIVAq3vPflPPjP1Qp8vVxOLi1qq9+lDNeYBAu212+CzRRyN+zDZ6eewiR6fW?=
-	=?us-ascii?Q?5JBwWsDHpRcyPNFgsHS/Nl683tO?=
-X-Microsoft-Exchange-Diagnostics: 1; HE1PR02MB1178;
-	5:JGlbuOPCHuY3zWLIWgbETQy9GsnbWidG7uxjKyH7JHBJ5Wz9VwZhJL3TM1Taavva1ffu8u6PgqIyH2j7bTDz3L3F7iTf47hHdNRbFUSPSsG1FqPFNbYt6cCxP+m9BcFAWqrrqOa4f+NN+cO8S28ZeA==;
-	24:xkAaEKXOVzQzhwHSMd1Lhs/KYe/DLtFCZjUF+P4JPKD0lP0VN6Rxgcp+MpsjLuUFar+B3QmLaQomNWSQ5JsmkF5Ewl1ta3YIo3KXlA99kvY=;
-	20:CiYL2la2iM0goPC0Oy0Whgf+mUo5JEhGJ1ecQjzAy1K0CCic5LSAruU6swJNBhQt8/Wv2TV47tMegJN1nRp4Gw==
-SpamDiagnosticOutput: 1:23
-SpamDiagnosticMetadata: NSPM
-X-OriginatorOrg: theqtcompany.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2015 08:11:56.4404 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR02MB1178
-Subject: [meta-qt5][PATCH] qtwayland: remove unnecessary header install
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 8921276DE1;
+	Tue, 10 Nov 2015 09:33:34 +0000 (UTC)
+Received: by wmww144 with SMTP id w144so109177873wmw.1;
+	Tue, 10 Nov 2015 01:33:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=ksXksh+fpFBdNQpjQl8GwiIYeOGj1v364GbMY8h13t0=;
+	b=cLBa+/xITEiSLceTN4umssz82HKIfCMm/3cVBJfC2Qj6rbUHGb530tPRcATeY0ds3/
+	uRo2C/f5ejXbwxM68n4LuKgONQcGXVn/8iUU6A4sENDLNKkw0UIwnIwwpeQFfcmHMMgj
+	bENDaLnBnpkBFw5hjEv7inrnyB0mNw/SeiZAsIaSA5PsVOT/034nbRYnDnZa9XonUA8z
+	7pTg7di1S4YvHlZ4v0uZ+DOuk1+bXTAUYomRTtlIaiG28tkVX51K+sSR4auW3S0EpwUD
+	XbuwsxM2XZxTW/gMhy+JO9DYYhCicE+GA6mt1xWAysh5vPVGHNzOpW4tgxz2cFS1yr73
+	kP8A==
+X-Received: by 10.28.182.11 with SMTP id g11mr3700837wmf.42.1447148014745;
+	Tue, 10 Nov 2015 01:33:34 -0800 (PST)
+Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
+	by smtp.gmail.com with ESMTPSA id
+	t126sm3040129wmd.23.2015.11.10.01.33.33
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 10 Nov 2015 01:33:34 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+From: Jens Rehsack <rehsack@gmail.com>
+In-Reply-To: <CADkTA4MMRESA2E2H_0iruywU6AgzSwaZ8Sj03SBB25=ckGv41Q@mail.gmail.com>
+Date: Tue, 10 Nov 2015 10:33:32 +0100
+Message-Id: <E48EA04B-494B-4D42-999B-A99E70ED7A0C@gmail.com>
+References: <1439220090-3305-1-git-send-email-s.mueller-klieser@phytec.de>
+	<20151014193033.GD3552@dent.vctlabs.com>
+	<CADkTA4MMRESA2E2H_0iruywU6AgzSwaZ8Sj03SBB25=ckGv41Q@mail.gmail.com>
+To: Bruce Ashfield <bruce.ashfield@gmail.com>
+X-Mailer: Apple Mail (2.2104)
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [OE-core] kernel.bbclass: Fix do_shared_workdir task ordering
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -82,34 +49,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2015 08:12:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 10 Nov 2015 09:33:36 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Installation of the generated headers was fixed in qtbase v5.3.2
 
-Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
----
- recipes-qt/qt5/qtwayland_git.bb | 8 --------
- 1 file changed, 8 deletions(-)
+> Am 14.10.2015 um 21:48 schrieb Bruce Ashfield =
+<bruce.ashfield@gmail.com>:
+>=20
+> On Wed, Oct 14, 2015 at 3:30 PM, S. Lockwood-Childs <sjl@vctlabs.com> =
+wrote:
+>> http://patchwork.openembedded.org/patch/99875/
+>>=20
+>> Apparently this patch is still not in master, and I just ran across =
+the
+>> problem with an externally built module (omaplfb from =
+omap3-sgx-modules)
+>> in meta-ti layer.
+>>=20
+>> What's the plan for getting a correct Module.symver into =
+shared_workdir
+>> for external modules to build against? Above patch, or does someone =
+have
+>> an even better idea?
+>=20
+> Richard and I sync'd on this while in Dublin @ ELCe, and the changes
+> aren't missing
+> from master by mistake .. but more because we are still working to =
+come up with
+> a comprehensive solution (tracked in bugzilla).
+>=20
+> The solution is pretty much what I described before, we are balancing
+> applications
+> and tasks that do not need kernel modules to be built, versus external =
+modules
+> that depend on symbols from other modules. The devil is in the
+> details, and getting
+> a non-racy, task locked solution that allows the recipe writer to
+> explicitly decide
+> whether they need modules built or not .. attempts at detecting the
+> need, or forcing
+> a one size fits all solution have all lead to dead ends.
+>=20
+> Since we are close to a release point, I'm still working on this out
+> of the tree, and
+> will propose some changes when the tree looks stable.
+>=20
+> For now, you can carry the patch locally, or you can append to the =
+kernel module
+> compilation task and do a second copy of the symvers file to the share
+> directory.
+>=20
+> i.e. a variant of this:
+> http://patchwork.openembedded.org/patch/94891/, done in a
+> bbappend versus the class.
+>=20
+> Cheers,
+>=20
+> Bruce
 
-diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-index 2ea3285..f96a6cd 100644
---- a/recipes-qt/qt5/qtwayland_git.bb
-+++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -38,12 +38,4 @@ SRC_URI += " \
-     file://0001-examples-wayland-include-server-buffer-only-when-bui.patch \
- "
- 
--QT_VERSION ?= "5.5.1"
--
--do_install_append() {
--    # do install files created by qtwaylandscanner
--    install ${B}/include/QtCompositor/${QT_VERSION}/QtCompositor/private/qwayland-server-*.h ${D}${OE_QMAKE_PATH_QT_HEADERS}/QtCompositor/${QT_VERSION}/QtCompositor/private
--    install ${B}/include/QtCompositor/${QT_VERSION}/QtCompositor/private/*protocol*.h ${D}${OE_QMAKE_PATH_QT_HEADERS}/QtCompositor/${QT_VERSION}/QtCompositor/private
--}
--
- SRCREV = "9d408649458a274864ae2e7c2d67b4fa3cabbfcd"
--- 
-1.9.1
+This is kind of insane to try a fix duplicating a job in a probably =
+wrong way
+(even a tiny) because of performance issue.
+
+Any 3rd party kernel module depends on do_shared_workdir - so =
+do_shared_workdir
+must wait for do_compile_kernelmodules - that's it by design (build is =
+done
+relying on dependencies ordered in a directed, noncyclical graph.
+
+Since compile_kernelmodules is between compile and strip, I vote for
+
+$ git diff
+diff --git a/meta/classes/kernel.bbclass b/meta/classes/kernel.bbclass
+index 5e8b6cf..49d7561 100644
+--- a/meta/classes/kernel.bbclass
++++ b/meta/classes/kernel.bbclass
+@@ -253,7 +253,7 @@ kernel_do_install() {
+ }
+ do_install[prefuncs] +=3D "package_get_auto_pr"
+
+-addtask shared_workdir after do_compile before do_compile_kernelmodules
++addtask shared_workdir after do_compile_kernelmodules before do_strip
+ addtask shared_workdir_setscene
+
+ do_shared_workdir_setscene () {
+
+But that's surely kind of smell, whether before do_strip and do_install =
+is
+preferred. Mandatory is, that do_shared_workdir must not be processed =
+before
+do_compile_kernelmodules finishes.
+
+There is no way to avoid it, and if those 5 seconds slow down your =
+build,
+there is probably another thing which should be fixed.
+
+Cheers
+--=20
+Jens Rehsack - rehsack@gmail.com
 
 
