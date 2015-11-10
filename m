@@ -1,45 +1,39 @@
-Return-Path: <jussi.kukkonen@intel.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F1D0766B2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2015 14:22:36 +0000 (UTC)
-Received: by wmec201 with SMTP id c201so3132651wme.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2015 06:22:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel_com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to:cc:content-type;
-	bh=eFNVUxtfxIGyRTPK34hVQRTSWegFbSFMSxOW3dLAT3o=;
-	b=B+SF7nQrZS2wiHOsMj5+kJcznXyD8+pwb7q7nzvjLZORTFqh6/Jwy/07/qiqHq8jeO
-	Qz8V7yj129WnNbjOcfpNTmMJwGPuwrkAK/Uj7yd263ZVPWLoxsv0qW3Nakm4thCu75NO
-	Lnsajy20Zax7t4b1d0oiQvO0U7PY/Z6YBzeYJvTyulM9MefAAHwHNHRyx5hAo8vbcHFf
-	XM885glnR6seqnRwXtiO3jew+nZB9n38mOn6MsikQ1UNx0Qi6DEyXP2VWqiUxzbltmUv
-	JBUzg033snNMpRrWziajRUchoRiVPAdn4LWTVXKFdNpOzDE+z9y0DC+B21cdNAiNthCv
-	QbWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc
-	:content-type;
-	bh=eFNVUxtfxIGyRTPK34hVQRTSWegFbSFMSxOW3dLAT3o=;
-	b=B20NG7Y4deykurxXW3qDO0COHvcmTKNgw6HBTPY8+EOCGSkUVB8H3U07SixQ87w5a5
-	B51fGETe6uW89yftwLTYcSOkNZ3tymmW7OGsCuy6qnWnKUdweKKk4ED/hKtHIJG2iBGu
-	kk8j+3Jwygf1r/DXn794HZtpgNODLBQCqbuFFo0lRRelpw0uwj+2CrLSg9TZ+f1eFHHT
-	MJ6MZZs+HvESxH5dNvwpiTpfzzxc1Z9yn3L3+Pvcj7Fg1Xzi9Mr3XQzPH/CWUbpF/92N
-	HGzOzmylBv83+tBZBrr8YuP7LlTZXF/gt3HpvytmDKsHzn91MsL9kEUOKtDDBpluEkIv
-	Wv9A==
-X-Gm-Message-State: ALoCoQlQ4ciVy8mpWeWaYEPIVMRWggvJTf0elKraxds0MG9DU9iVcy9XImJyrAh9F2cmrGYglYJO
-X-Received: by 10.28.174.144 with SMTP id x138mr33825248wme.28.1447165356506; 
-	Tue, 10 Nov 2015 06:22:36 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F93E65CBC;
+	Tue, 10 Nov 2015 16:02:46 +0000 (UTC)
+Received: by wmww144 with SMTP id w144so124064967wmw.1;
+	Tue, 10 Nov 2015 08:02:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=aVcR124jafNolJbSl8bYe+iEAZrJ+euLEUYNsOU/MKc=;
+	b=uMKTzadVrq1rHXBovWx1lBKK1H7OT1NZ96FDGr74C8Z3kJYv1PmJlUmV0+TGyliL3G
+	cOmVBu7ET1BJK+44eP85pW0Pz7QYwWEQ0LPv/Psj/Yauc7jm19f9k6RRUDzj+M7ssmnk
+	FMTv/TVQFQWWW1dG3vrNJPg+GK4uIZNB05iAZwuIiPUnHoxftu1FoIBp3C6JEp9C69r4
+	1KlGmrhok0XeBU0jUUFE9DmNK09nEoqalw15cEIMEzQNP9HQQwuDRByVwoREsJQv/R+8
+	+wEuTuHkQtha7XIHbQEYxOzTROFFviVxkUqbuwy4XNKnXSIPQ6ZFwoveS0l7wlte64iv
+	7OuA==
+X-Received: by 10.194.84.4 with SMTP id u4mr4916708wjy.149.1447171366593;
+	Tue, 10 Nov 2015 08:02:46 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	c194sm4796158wmd.13.2015.11.10.08.02.44
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 10 Nov 2015 08:02:45 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 10 Nov 2015 17:02:50 +0100
+To: Jussi Kukkonen <jussi.kukkonen@intel.com>
+Message-ID: <20151110160250.GB2561@jama>
+References: <CAHiDW_Hx6Xi91=8rg3pD_B7F_+wfL2vMUbJTXYh6XGLzksBm7w@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.27.216.207 with HTTP; Tue, 10 Nov 2015 06:22:07 -0800 (PST)
-From: Jussi Kukkonen <jussi.kukkonen@intel.com>
-Date: Tue, 10 Nov 2015 16:22:07 +0200
-Message-ID: <CAHiDW_Hx6Xi91=8rg3pD_B7F_+wfL2vMUbJTXYh6XGLzksBm7w@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
+In-Reply-To: <CAHiDW_Hx6Xi91=8rg3pD_B7F_+wfL2vMUbJTXYh6XGLzksBm7w@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: openembedded-devel@lists.openembedded.org,
+	Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [RFC] Remove vala from oe-core
+Subject: Re: [OE-core] [RFC] Remove vala from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,31 +47,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2015 14:22:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 10 Nov 2015 16:02:48 -0000
+X-Groupsio-MsgNum: 58436
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="dc+cDN39EJAMEtIO"
+Content-Disposition: inline
 
-Hi all,
+--dc+cDN39EJAMEtIO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-There's currently no software built with vala in oe-core. That's not great
-for vala (as it's not getting the automated testing that high quality
-maintenance would require) and it's not great for oe-core (as maintenance
-effort is better spent on components that _are_ used).
+On Tue, Nov 10, 2015 at 04:22:07PM +0200, Jussi Kukkonen wrote:
+> Hi all,
+>=20
+> There's currently no software built with vala in oe-core. That's not great
+> for vala (as it's not getting the automated testing that high quality
+> maintenance would require) and it's not great for oe-core (as maintenance
+> effort is better spent on components that _are_ used).
+>=20
+> Based on the above there's a feature request** to remove vala from oe-cor=
+e.
+> Please comment here or on the bug if you think this is an inappropriate
+> idea or have suggestions.
+>=20
+> If the plan goes through I intend to send a patch to add vala to another
+> layer to minimize disruption: I guess that would be
+> meta-openembedded/meta-oe as vala seems to have one user in this layer and
+> another one on that layer ... Suggestions welcome on that as well.
+>=20
+> Alex, note that this might affect your GI patch set (or the other way
+> round).
 
-Based on the above there's a feature request** to remove vala from oe-core.
-Please comment here or on the bug if you think this is an inappropriate
-idea or have suggestions.
+It was moved from meta-oe, so if you decide to drop it from oe-core then
+meta-oe is where it should return:
 
-If the plan goes through I intend to send a patch to add vala to another
-layer to minimize disruption: I guess that would be
-meta-openembedded/meta-oe as vala seems to have one user in this layer and
-another one on that layer ... Suggestions welcome on that as well.
+commit 807285c751862aaa775db5a13293007bfb3c29df
+Author: Mihai Prica <mihai.prica@intel.com>
+Date:   Mon Aug 26 11:50:46 2013 +0000
 
-Alex, note that this might affect your GI patch set (or the other way
-round).
+    vala.bbclass: add class from meta-oe
+   =20
+    This can be used by packages written in vala.
+    It is required by the Midori web-browser.
+   =20
+    Signed-off-by: Mihai Prica <mihai.prica@intel.com>
+    Signed-off-by: Saul Wold <sgw@linux.intel.com>
+    Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 
+commit 649b48557d8702daaf4f28482848ab0b07abed83
+Author: Mihai Prica <mihai.prica@intel.com>
+Date:   Mon Aug 26 11:49:26 2013 +0000
 
-Regards,
-  Jussi
+    vala: add version 0.16 from meta-oe
+   =20
+    Vala is a C#-like language dedicated to ease GObject programming.
+    It is required by the Midori web-browser.
+   =20
+    Signed-off-by: Mihai Prica <mihai.prica@intel.com>
+    Signed-off-by: Saul Wold <sgw@linux.intel.com>
+    Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 
-**) https://bugzilla.yoctoproject.org/show_bug.cgi?id=8640
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--dc+cDN39EJAMEtIO
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlZCFSkACgkQN1Ujt2V2gBzBzACfYKJI3YDRPkIs1Y1n5CLuDvFW
+vJMAnjS05hDcpNoLgfSVyEKNRdgRyNtW
+=Vola
+-----END PGP SIGNATURE-----
+
+--dc+cDN39EJAMEtIO--
