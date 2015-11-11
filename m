@@ -1,41 +1,43 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id B5C72762B3
+Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id EECAB77194
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 18:45:12 +0000 (UTC)
-Received: by iouu10 with SMTP id u10so34145666iou.0
+	Wed, 11 Nov 2015 18:48:13 +0000 (UTC)
+Received: by igcph11 with SMTP id ph11so78189002igc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 10:45:13 -0800 (PST)
+	Wed, 11 Nov 2015 10:48:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=qsmG8U1zDVqS5vz/Ocuk9vENyDrQVAOYe1Pj0oM4ERw=;
-	b=wBmbyOQS9u2hw5Rz151RSjiNwNfLHZhusz58rfelih59K9ShwdNW4gWjGLTbXzdq4n
-	YQfw7BZfi8Y/yfosXqKyXvVXKR0/+OTPjqlc8k3VgVzQRB8T8H1VK2zfANFjRT34Ws2Y
-	szIYn0arfa3DPh7fn/iMSjU8GtieFVtJD6FvET4DHlN1AT1D3W8FfTC2U0BA9cPrT6JE
-	c9UuszeIOrHZRvUe4M4RlF5V8If5DNdjH9LU/7zzi+l5hvwKOf+INIDxIFvPB5EaPazl
-	+FK3IlHWksYD26vWxVdvevDe4Oj859ea83aCJt/Gczgi5gxkWQmRiM4DsIwxptazAwl0
-	7FOg==
-X-Received: by 10.107.4.3 with SMTP id 3mr12207398ioe.195.1447267513124; Wed,
-	11 Nov 2015 10:45:13 -0800 (PST)
+	:cc:content-type;
+	bh=LDa4ObT+y1PsYrBPgHgr+l5HKOevKtwEQgWz/W5eruk=;
+	b=zu9Xf4qBqxuhmBxbgMX1WpSTd8BF3lx1gkyUReOYVPORwlw5RTgYObqn7vzpdAHPjp
+	j9Ivj/4Upa1JTKjMTMbB2WMZOmkb6GapW76gekMYKz/naky8ko+G4QI0U/ozgN5bSXgF
+	IzADB/igUDdIwgtjtk1iJbqfNx16NxZl8iqQX2pP/nxTzsa73+pUuccxHqezdRK8YGl0
+	ki8uqeJvoHHGDTM8Hid+x6tevuQlhaJ2/tnZaiViTDWZOAi0ntr2BPPWP5QihQDY8v1X
+	fLe0zaZpNGrnWP6dJHckqbNUpJjFPDUInn7W5Er8s9KoYsaGBlKMjMDyb8OjDNgPSIwi
+	QkwA==
+X-Received: by 10.50.152.72 with SMTP id uw8mr13741552igb.11.1447267693467;
+	Wed, 11 Nov 2015 10:48:13 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.107.12.205 with HTTP; Wed, 11 Nov 2015 10:44:43 -0800 (PST)
-In-Reply-To: <B3CC41C2-7DBD-4C63-8A6B-81A8367392AF@gmail.com>
-References: <33A5922B-6B36-4862-8261-4F59E0AF12AD@gmail.com>
-	<892C1CD0-EAD9-4692-A296-B5635FE35385@gmail.com>
-	<FE25E51D-6F1B-4DB0-8391-9B8B152ECF3F@gmail.com>
-	<CAMKF1sqbxs3SDGdKMzrWsYv887M=EUe200owKo=7ZZ3gWivmKA@mail.gmail.com>
-	<DDE21F3D-050E-449A-8ED0-72BACAA59D43@gmail.com>
-	<CAMKF1sq_z9k6okHK24oFmExqP7F2eJ_nvX70nDsb+-rAH+gQZg@mail.gmail.com>
-	<B3CC41C2-7DBD-4C63-8A6B-81A8367392AF@gmail.com>
+Received: by 10.107.12.205 with HTTP; Wed, 11 Nov 2015 10:47:44 -0800 (PST)
+In-Reply-To: <B3996A75-A243-4E48-9318-C1730ED9141B@gmail.com>
+References: <A3005F6B-2993-4BA5-9406-D411C19FA636@gmail.com>
+	<CABcZANnTbE-6KgFxaNr2p-ruzt3TKQ0jc2VR6-8fhJ-MmGcpZQ@mail.gmail.com>
+	<B2ABFB12-3EF3-4008-94A1-A6390986AAFB@gmail.com>
+	<88DAE25B-BAA9-4F99-B404-71D2D2973BBD@gmail.com>
+	<4E8196B8-4770-41B9-B80A-3A9A911087D3@gmail.com>
+	<CAMKF1sp8SrFpqeY4iD-juwPv6y2y5f4ZDisPU9LiCUuUXDWhqA@mail.gmail.com>
+	<7F78FF81-F48C-45D0-9F1A-2D719A20CC48@gmail.com>
+	<CAMKF1srTimQy2RtDk+=nnA7p+jC80u0eBTd9_v+9_FLfWt0MPA@mail.gmail.com>
+	<B3996A75-A243-4E48-9318-C1730ED9141B@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 11 Nov 2015 10:44:43 -0800
-Message-ID: <CAMKF1srMYPDWpmGFJuMo=1qZ02wJbsj1Mo8sAWkt_QHuFaXh9g@mail.gmail.com>
+Date: Wed, 11 Nov 2015 10:47:44 -0800
+Message-ID: <CAMKF1sqPitU4ZUXZ--qyefnesyu2SqZQvbRGMCG1RRP+BOmw0w@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Cc: =?UTF-8?Q?Volker_M=C3=B6sker?= <volker.moesker@rademacher.de>,
 	Tobias Theophile <Tobias.Theophile@rademacher.de>
-Subject: Re: [meta-oe][PATCH 3/3] libldb: make openldap optional, but default
+Subject: Re: [meta-oe][PATCH 1/3] samba: fix dependencies and QA issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,138 +51,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2015 18:45:16 -0000
+X-List-Received-Date: Wed, 11 Nov 2015 18:48:14 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 11, 2015 at 10:17 AM, Jens Rehsack <rehsack@gmail.com> wrote:
+On Wed, Nov 11, 2015 at 10:20 AM, Jens Rehsack <rehsack@gmail.com> wrote:
 >
->> Am 11.11.2015 um 19:10 schrieb Khem Raj <raj.khem@gmail.com>:
+>> Am 11.11.2015 um 19:07 schrieb Khem Raj <raj.khem@gmail.com>:
 >>
->> On Wed, Nov 11, 2015 at 9:47 AM, Jens Rehsack <rehsack@gmail.com> wrote:
+>> On Wed, Nov 11, 2015 at 8:37 AM, Jens Rehsack <rehsack@gmail.com> wrote:
 >>>
->>>> Am 11.11.2015 um 18:34 schrieb Khem Raj <raj.khem@gmail.com>:
->>>>
->>>> On Wed, Nov 11, 2015 at 1:11 AM, Jens Rehsack <rehsack@gmail.com> wrot=
-e:
->>>>>
->>>>>> Am 11.11.2015 um 04:26 schrieb Khem Raj <raj.khem@gmail.com>:
->>>>>>
->>>>>>>
->>>>>>> On Nov 10, 2015, at 1:26 PM, Jens Rehsack <rehsack@gmail.com> wrote=
-:
->>>>>>>
->>>>>>>
->>>>>>> Since openldap isn't required, but used when found, allow qualified
->>>>>>> users to disable the requirement to save some space.
->>>>>>>
->>>>>>> Signed-off-by: Jens Rehsack <sno@netbsd.org>
->>>>>>> ---
->>>>>>> meta-oe/recipes-support/libldb/libldb_1.1.17.bb | 5 ++++-
->>>>>>> 1 file changed, 4 insertions(+), 1 deletion(-)
->>>>>>>
->>>>>>> diff --git a/meta-oe/recipes-support/libldb/libldb_1.1.17.bb b/meta=
--oe/recipes-support/libldb/libldb_1.1.17.bb
->>>>>>> index 44f061a..07a839d 100644
->>>>>>> --- a/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
->>>>>>> +++ b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
->>>>>>> @@ -4,9 +4,12 @@ SECTION =3D "libs"
->>>>>>> LICENSE =3D "LGPL-3.0+ & LGPL-2.1+ & GPL-3.0+"
->>>>>>>
->>>>>>> DEPENDS +=3D "libtdb talloc libtevent popt"
->>>>>>> -RDEPENDS_${PN} +=3D "libtevent popt libtalloc openldap"
->>>>>>> +RDEPENDS_${PN} +=3D "libtevent popt libtalloc"
->>>>>>> RDEPENDS_pyldb +=3D "python libtdb libtalloc"
->>>>>>>
->>>>>>> +PACKAGECONFIG ??=3D "ldap"
->>>>>>> +PACKAGECONFIG[ldap] =3D ",,openldap"
->>>>>>> +
->>>>>>> SRC_URI =3D "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
->>>>>>>         file://do-not-import-target-module-while-cross-compile.patc=
-h \
->>>>>>>        "
->>>>>>> --
->>>>>>> 1.9.1
->>>>>>>
->>>>>>> This results from analysing why there's still an openldap ...
->>>>>>>
->>>>>>> I know, having no knob to disable ldap is dirty, but there is no su=
-ch switch.
->>>>>>> Even more dirty, the switch in samba_4% is for embedded samba3 sour=
-ce-base only,
->>>>>>> the ldb bundled with samba4 just uses ldap when found.
->>>>>>>
->>>>>>> The patch relies on the idea of qualified users - those who know th=
-at they
->>>>>>> don't want ldap, disable it everywhere and whistle.
->>>>>>
->>>>>> it seems to not fix the problem completely, for exact reasons that s=
-ome other package may bring in openldap and stage it before this recipe is =
-built so you
->>>>>> have exact same problem again. I think if this package is patched to=
- add a knob to disable/enable openldap support explicitly then the fix will=
- be complete and I am sure upstream will also accept such a patch.
->>>>>
->>>>> NO! Please read carefully what "qualified user expected" means!
->>>>>
->>>>
->>>> I understand it well. no we don't want any user tiers here. We should
->>>> tend towards becoming user friendly
->>>> A qualified user is well equipped to maintain a patch with a
->>>> RDEPENDS_${PN}_remove in his layer.
->>>
->>> Both aspects have their pros and cons, but ...
->>>
->>>>> Forcing a dependency because someone else might introduce it either
->>>>> is insane - and adding RDEPENDS is just hiding the symptom, not
->>>>
->>>> its bringing determinism to build thats an important aspect.
->>>
->>> ... this argument beats them all. Nothing to add ;)
->>>
->>> Anyway - for determinism, openldap should be in depends then, not
->>> RDEPENDS, shouldn't it?
+>>> grep remains silent regarding DISTRO_FEATURES and linuxstdbase :(
 >>
->> it would translate into a build time dependency
+>> right, its a OVERRIDE so you can do something like
+>>
+>> foo_linuxstdbase = .....
 >
-> Which is reasonable:
+> And? That's why? ...
 >
-> <bluelightning> sno: RDEPENDS just means that it's going to be the packag=
-ing tasks of the recipe depending on those of the recipes producing the nam=
-ed packages, as opposed to DEPENDS where do_configure depends on do_populat=
-e_sysroot of the mentioned items
->
-> Otherwise, build_1 (which has no other recipe requiring openldap) would b=
-uild
-> without openldap support but sucking in the package, build_2 would be bui=
-ld
-> with ldap support.
+> I still don't get your initial argument why the PACKAGEOPTION shall not be named lsb,
+> when init support based on lsb is added by it.
 
-rare but that seems possible case, so adding a DEPEND along with
-RDEPEND is a good idea to cover it up.
+my only ask was that if I have linuxstdbase in overrides then I should
+get lsb behaviour enabled for this package automatically weather its
+PACKAGRECONFIG or not. and similarly disabled when I dont have it in
+my distro overrides
 
 >
->>>>> fixing the root cause. The root cause is, that waf is broken
->>>>> by design.
->>>>
->>>> such sweeping statements have to backed by reasoning otherwise no one
->>>> will take them seriously. IMO if you atleast report
->>>> this to waf community someone else might be able to help fixing
->>>> whatever the problem is.
->>>
->>> But shouldn't the samba maintainer do that?
->>
->> May be/maybe not I dont know, I even dont know whats broken in waf,
->> you did not explain that
->
-> Having an option or not, in autoconf you can set
->
-> ac_cv_HAVE_LDAP_H=3Dno
->
-> and the test results in "checking for ldap.h: no" - regardless the
-> existence of ldap.h. waf doesn't have such an option, has it?
->
-> Cheers
+> Best regards
 > --
 > Jens Rehsack - rehsack@gmail.com
 >
