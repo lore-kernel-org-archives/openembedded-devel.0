@@ -1,42 +1,41 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
-	[209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id B68FE77179
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id A1FF8770D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 18:01:08 +0000 (UTC)
-Received: by pabfh17 with SMTP id fh17so37251629pab.0
+	Wed, 11 Nov 2015 18:08:07 +0000 (UTC)
+Received: by ioir85 with SMTP id r85so515343ioi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 10:01:09 -0800 (PST)
+	Wed, 11 Nov 2015 10:08:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=0/aTFT1taVyjazAM1D4SuJivtnuxkJMfWTPo5jtGPsg=;
-	b=Jx5iMPvsiX8UX9lcErQMga4nle/xnbPs+tjEvzriRjQB2TfdNTtdE96gjN6H1Y5Ovg
-	RZqG2zmbHc5/7HYJ2Jc2sT5A65GLTFEbRqgZBpxk5lFdRyss0muoWBB7q7c6PWk5iWqh
-	LCRmuxm7H4iHO60Xbm4vunoAuassiMd/CQ4cDL/O4Cj4QLR0Cytni50w3yVsM379zWNx
-	ucTxQ65OMyXPhCREvTzEbjSHpztPq+zzu3xv+2vBEaKeAMO1yzAPzasUE5UC4hs7SvLU
-	XpB8T6xNpxFxxzzK0ELqUiMoCR7Db+fhDaN+3krtmtYiThL9UwTv31Lm6RXbtad8WZSz
-	G+8w==
-X-Received: by 10.66.122.39 with SMTP id lp7mr16341559pab.74.1447264868875;
-	Wed, 11 Nov 2015 10:01:08 -0800 (PST)
-Received: from ?IPv6:2601:202:4000:1239:b99e:8fcb:e922:8a29?
-	([2601:202:4000:1239:b99e:8fcb:e922:8a29])
-	by smtp.googlemail.com with ESMTPSA id
-	cx5sm10467585pbc.50.2015.11.11.10.01.07
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 11 Nov 2015 10:01:08 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <1447208258-28688-1-git-send-email-Randy.MacLeod@windriver.com>
-From: akuster808 <akuster808@gmail.com>
-X-Enigmail-Draft-Status: N1110
-Message-ID: <56438262.6010603@gmail.com>
-Date: Wed, 11 Nov 2015 10:01:06 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=+P9qJdTOWMBb9PrFNP4ULB3n4M+QfUmT1HzKyUHHU8M=;
+	b=OoW+Jy45ljU7SMIwYwKbJlPG8M64KsfWO81/diIKADQmpMnDpNERI9cWlTjOA5S+Bj
+	ueqbMXgiVOXXrMjuCsEgNZ1tGIlj1FQzG8zhDhzFx1iyj8ZmLqGrISsEOgDJWQZesDhY
+	3rTYcR6/wi/NioisbsSVDR4dAkUPwBHpD2LhYQE0QKPdjkHEjpQxAYeEnvlPBBC8AYyv
+	Bq8Ohjac/HK63HWrBZKKuYDi4VxfQymy9xRlv57qi+j0rDvXdL6Vg31WpXDq510HWCz0
+	sZ4IzIdp0EYY9S7a0CjeWBOYiOKiakeoL03wNWJMBnC5kQCEoU8jw0UMarXvpNF9Gec5
+	jeJQ==
+X-Received: by 10.107.162.137 with SMTP id l131mr8168757ioe.49.1447265287340; 
+	Wed, 11 Nov 2015 10:08:07 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1447208258-28688-1-git-send-email-Randy.MacLeod@windriver.com>
-Subject: Re: [meta-networking/jethro][PATCH] lldpd: fix PN -> BPN SRC_URI for multilib build
+Received: by 10.107.12.205 with HTTP; Wed, 11 Nov 2015 10:07:37 -0800 (PST)
+In-Reply-To: <7F78FF81-F48C-45D0-9F1A-2D719A20CC48@gmail.com>
+References: <A3005F6B-2993-4BA5-9406-D411C19FA636@gmail.com>
+	<CABcZANnTbE-6KgFxaNr2p-ruzt3TKQ0jc2VR6-8fhJ-MmGcpZQ@mail.gmail.com>
+	<B2ABFB12-3EF3-4008-94A1-A6390986AAFB@gmail.com>
+	<88DAE25B-BAA9-4F99-B404-71D2D2973BBD@gmail.com>
+	<4E8196B8-4770-41B9-B80A-3A9A911087D3@gmail.com>
+	<CAMKF1sp8SrFpqeY4iD-juwPv6y2y5f4ZDisPU9LiCUuUXDWhqA@mail.gmail.com>
+	<7F78FF81-F48C-45D0-9F1A-2D719A20CC48@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Nov 2015 10:07:37 -0800
+Message-ID: <CAMKF1srTimQy2RtDk+=nnA7p+jC80u0eBTd9_v+9_FLfWt0MPA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: =?UTF-8?Q?Volker_M=C3=B6sker?= <volker.moesker@rademacher.de>,
+	Tobias Theophile <Tobias.Theophile@rademacher.de>
+Subject: Re: [meta-oe][PATCH 1/3] samba: fix dependencies and QA issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,36 +49,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2015 18:01:11 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Nov 2015 18:08:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On Wed, Nov 11, 2015 at 8:37 AM, Jens Rehsack <rehsack@gmail.com> wrote:
+>
+> grep remains silent regarding DISTRO_FEATURES and linuxstdbase :(
 
+right, its a OVERRIDE so you can do something like
 
-On 11/10/2015 06:17 PM, Randy MacLeod wrote:
-> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
-
-cool. time to fire up the queue.
-
-merged to my staging.
-
-thanks
-> ---
->  meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb b/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb
-> index ba7f09e..bd207ad 100644
-> --- a/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb
-> +++ b/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb
-> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/ISC;md5=f3b90e
->  DEPENDS = "libbsd libevent"
->  
->  SRC_URI = "\
-> -    http://media.luffy.cx/files/${PN}/${PN}-${PV}.tar.gz \
-> +    http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
->      file://lldpd.init.d \
->      file://lldpd.default \
->      file://fix-libevent-configure.patch \
-> 
+foo_linuxstdbase = .....
 
