@@ -1,33 +1,35 @@
 Return-Path: <adrian.freihofer@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 1AB257719C
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id E5F49771A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 19:48:31 +0000 (UTC)
-Received: by wmww144 with SMTP id w144so173218988wmw.1
+	Wed, 11 Nov 2015 19:48:32 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so61715690wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 11:48:30 -0800 (PST)
+	Wed, 11 Nov 2015 11:48:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=58sBrzVzSbXqJ5kizBbrfpraHq8vSqfZ6qOMevHVZnY=;
-	b=N1QAF0BAAmsDT7/7v7BMidef4IC6mI8Hq+BOptz2QL8dnXkvulkBTtBBiWMCaEyfyJ
-	fRa87a+bV0Lu+tcM4MCSoYMJNEpPTiDi25NfaBs4drpYaD+hAjeF4eivEk/aBuOwbhg9
-	k5/ja5DTvym3gQUyAAUU5khKxcCZPVdSBuBKQpEE0mYH4DXZuh5/iBgBNUdzzGB7Flli
-	I1asvwavm/4TZl6xxCbqOkQ5qEBQH4dwb+1dUx0rxQuCQ3t3378alu+DLA0lciCtAOM7
-	W44ri/cP+CAlTi/8L9FbiGRBuh0mv7+gxpBxnTgpM3ro7GQrKv0ar6s6s6X9liyGvWi4
-	s+LA==
-X-Received: by 10.28.0.149 with SMTP id 143mr9388072wma.103.1447271310802;
-	Wed, 11 Nov 2015 11:48:30 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=Rw4wTWuNQDiPb8NcGpwngyUhwL9e6Njqwvq/9ji0kzI=;
+	b=fHFtOBn2aTH+VHlceF0kTyXkBRgwK0Z1AHj0Xg4uHChh604lGs3qjM+FR5OFHGAy/d
+	LL8CtAc4K8ayU1Wkn3OeODHvXve7HsOvfZnmHRBfoFYGUBF3bL0N7OUstXPqb9e9J2gT
+	RLRa+XrVFqyHNZG4ZjSEiLVb2WXgeGai9w0KtMupGMhpMEbakGZ3mOOp/oHDQnFjLfRb
+	zmtW+sShgtLmWbmSvTuMTUfjTZd9wiLYk1hdZcaB+c7QWko6TvNdYlAHEEDWw/3BcO+W
+	pvUjOLiemHulBo9V65BB1HVVpkqd33ggaa8Cv7Bcikzn7Vn6RexfBtPVzsSLJXITVYaK
+	SNVw==
+X-Received: by 10.194.58.44 with SMTP id n12mr12073635wjq.118.1447271312661;
+	Wed, 11 Nov 2015 11:48:32 -0800 (PST)
 Received: from chl500346.lan.ffah.ch (c-82-192-248-24.customer.ggaweb.ch.
 	[82.192.248.24]) by smtp.gmail.com with ESMTPSA id
-	ej10sm9700824wjd.32.2015.11.11.11.48.29
+	ej10sm9700824wjd.32.2015.11.11.11.48.31
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 11 Nov 2015 11:48:30 -0800 (PST)
+	Wed, 11 Nov 2015 11:48:32 -0800 (PST)
 From: Adrian Freihofer <adrian.freihofer@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Nov 2015 20:48:03 +0100
-Message-Id: <1447271300-4153-1-git-send-email-adrian.freihofer@gmail.com>
+Date: Wed, 11 Nov 2015 20:48:05 +0100
+Message-Id: <1447271300-4153-3-git-send-email-adrian.freihofer@gmail.com>
 X-Mailer: git-send-email 2.4.3
-Subject: [meta-oe][PATCH V2 00/17] network/modemmanager updates
+In-Reply-To: <1447271300-4153-1-git-send-email-adrian.freihofer@gmail.com>
+References: <1447271300-4153-1-git-send-email-adrian.freihofer@gmail.com>
+Subject: [meta-oe][PATCH V2 02/17] modemmanager: Update to 1.4.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,71 +45,48 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 11 Nov 2015 19:48:33 -0000
 
-Adrian Freihofer (17):
-  libqmi: update to 1.12.6
-  modemmanager: Update to 1.4.12
-  modemmanager: Add PACKAGECONFIGs
-  modemmanager: add dbus config
-  modemmanager: Start always
-  networkmanager: Update to 1.0.6
-  networkmanager: support gnutls and nss
-  networkmanager: add fedora bugfix patches
-  networkmanager: Add package for nmtui
-  networkmanager: run dispatcher
-  networkmanager: PACKAGECONFIG for ifupdown netconfig
-  networkmanager: PACKAGECONFIG for dhclient
-  networkmanager: PACKAGECONFIG for dnsmasq
-  networkmanager: PACKAGECONFIG for wifi
-  networkmanager: package for adsl plugin
-  networkmanager: use bluetooth from distro
-  networkmanager: add openvpn plugin
+ - Fixes segfaults, memleaks and other bugs
+ - Support more modems
 
- .../libqmi/{libqmi_1.12.2.bb => libqmi_1.12.6.bb}  |   4 +-
- .../modemmanager/modemmanager_1.4.12.bb            |  53 +++++++
- .../modemmanager/modemmanager_1.4.2.bb             |  40 -----
- .../networkmanager/networkmanager-openvpn_1.0.6.bb |  32 ++++
- .../0002-add-pkg-config-for-libgcrypt.patch        |  41 ++++++
- ...ix-parse-commandline-options-into-correct.patch |  35 +++++
- ...-vpn-connection-fix-unsetting-the-gateway.patch |  30 ++++
- ...tion-set-the-MTU-for-the-VPN-IP-interface.patch |  54 +++++++
- ...t-reset-NM_UNMANAGED_DEFAULT-when-platfor.patch |  33 +++++
- .../0007-nmcli-crash-vlan-priorities.patch         |  35 +++++
- .../0008-nmtui-fix-crash-in-secret-agent.patch     |  88 +++++++++++
- .../rh1175446-vpn-secondaries-connections.patch    |  57 ++++++++
- .../rh1261428-ipv6-ignore-auto-dns.patch           |  37 +++++
- .../rh1263185-nmcli-con-add-generic.patch          |  44 ++++++
- .../rh1263959-modem-supported-ip-families.patch    |  62 ++++++++
- .../rh1264676-fix-crash-on-device-removal.patch    |  80 ++++++++++
- .../rh1265993-nmcli-allow-ipv6-ppp-for-wwan.patch  |  46 ++++++
- ...rh1266003-fix-crash-on-bss-proxy-acquired.patch |  48 ++++++
- .../rh1272974-fix-s390-ctc-detection.patch         |  57 ++++++++
- .../rh1277693-vpn-service-timer.patch              | 161 +++++++++++++++++++++
- .../networkmanager/networkmanager_1.0.4.bb         |  90 ------------
- .../networkmanager/networkmanager_1.0.6.bb         | 141 ++++++++++++++++++
- 22 files changed, 1136 insertions(+), 132 deletions(-)
- rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.12.2.bb => libqmi_1.12.6.bb} (80%)
- create mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb
- delete mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.0.6.bb
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-add-pkg-config-for-libgcrypt.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0003-config-bugfix-parse-commandline-options-into-correct.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0004-vpn-connection-fix-unsetting-the-gateway.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0005-vpn-connection-set-the-MTU-for-the-VPN-IP-interface.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0006-device-don-t-reset-NM_UNMANAGED_DEFAULT-when-platfor.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0007-nmcli-crash-vlan-priorities.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0008-nmtui-fix-crash-in-secret-agent.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1175446-vpn-secondaries-connections.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1261428-ipv6-ignore-auto-dns.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1263185-nmcli-con-add-generic.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1263959-modem-supported-ip-families.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1264676-fix-crash-on-device-removal.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1265993-nmcli-allow-ipv6-ppp-for-wwan.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1266003-fix-crash-on-bss-proxy-acquired.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1272974-fix-s390-ctc-detection.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/rh1277693-vpn-service-timer.patch
- delete mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.4.bb
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
+Signed-off-by: Adrian Freihofer <adrian.freihofer@gmail.com>
+---
+ .../{modemmanager_1.4.2.bb => modemmanager_1.4.12.bb}        | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.4.2.bb => modemmanager_1.4.12.bb} (71%)
 
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb
+similarity index 71%
+rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb
+rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb
+index b273c91..db7a28d 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb
+@@ -1,19 +1,19 @@
+ SUMMARY = "ModemManager is a daemon controlling broadband devices/connections"
+ DESCRIPTION = "ModemManager is a DBus-activated daemon which controls mobile broadband (2G/3G/4G) devices and connections"
+ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/ModemManager/"
+-LICENSE = "GPLv2 & LGPLv2.1"
++LICENSE = "GPL-2.0 & LGPL-2.1"
+ LIC_FILES_CHKSUM = " \
+     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
+ "
+ 
+-inherit autotools gettext gtk-doc systemd
++inherit gnomebase gettext systemd
+ 
+-DEPENDS = "glib-2.0 libmbim libqmi polkit libgudev dbus-glib"
++DEPENDS = "glib-2.0 libmbim libqmi (>=1.12.4) polkit libgudev dbus-glib"
+ 
+-SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
+-SRC_URI[md5sum] = "fe74eaa9a77e51e552b4356b4c7195cb"
+-SRC_URI[sha256sum] = "07d332fbe6f45f788f740810951e04042aaf023bd5ecf8ef0b3a06e37703585d"
++SRC_URI = "${GNOME_MIRROR}/ModemManager/ModemManager-${PV}.tar.xz"
++SRC_URI[md5sum] = "66cc7266b15525cb366253e6639fc564"
++SRC_URI[sha256sum] = "7ef5035375a953b285a742591df0a65fd442f4641ce4d8f4392a41d6d6bc70b3" 
+ 
+ S = "${WORKDIR}/ModemManager-${PV}"
+ 
 -- 
 2.4.3
 
