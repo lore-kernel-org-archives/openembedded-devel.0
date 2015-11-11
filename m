@@ -1,37 +1,32 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-io0-f169.google.com (mail-io0-f169.google.com
-	[209.85.223.169])
-	by mail.openembedded.org (Postfix) with ESMTP id D340B770EF
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
+	[209.85.213.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B0C376E4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 04:48:28 +0000 (UTC)
-Received: by iouu10 with SMTP id u10so15692143iou.0
+	Wed, 11 Nov 2015 04:54:54 +0000 (UTC)
+Received: by igvg19 with SMTP id g19so64132522igv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2015 20:48:28 -0800 (PST)
+	Tue, 10 Nov 2015 20:54:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=YalYAsznMa8letuKzO42I0SV3NlhAK8OvDZKYfuSjH0=;
-	b=NrQkutv6GEXj2lr9NjIq1whMcndtIS3bGPiF+b93cmikcOr1cmhzhMpVCjiG/3bmdw
-	xQq26DZIZnpDmdej2MFT0/CZivA3cdfo5B4rv1akv7Luq6jeM4dzzhqGiRevys+I4FCq
-	ZWremza7EHnndpSuKd+23hyF6YBb+5ECUqqTr8J+ubXWsk9LPsupwkGes0JFNcn3ZwUI
-	hPqyxhqupZfXVEB/AJRAWk8zGoT00ZgF8PmsFf5j27UzTfBrvEq18WODlOEE2iwDiBVD
-	WTImuiLByQqcaGiuCYLmjAmr/+YBPQmhkbdGz9Kc4aP4cmKLz0jaXhLYEznsgkEXgzeo
-	c2hg==
-X-Received: by 10.107.44.9 with SMTP id s9mr7221486ios.191.1447217308835;
-	Tue, 10 Nov 2015 20:48:28 -0800 (PST)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by smtp.gmail.com with ESMTPSA id
-	ie20sm2628295igb.10.2015.11.10.20.48.27
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 10 Nov 2015 20:48:27 -0800 (PST)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Nov 2015 20:48:16 -0800
-Message-Id: <1447217296-7145-2-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=SUEowDq7Rb8NoQoyDXBWgyuPMbCykaOxpKIk4D2rBKU=;
+	b=Ia2N6qGe/lRoXeu6bBo2LyAR15zeSh41i9BLu+a8Awea6OHl7NV3Njafe6xUrO9aKV
+	PuGV4QmHoZ1C1UXiisl4RG0gGB1A+i9NxM3DKyfyssdZIbc4eJZ5EAStVAs0T9u9ZF+a
+	QeMrQpt7g6RXJ8JVgkN2nZL5HlV+XgTNohyFnNRbEclqIAWG+i6J1QT9KZKhI4LHGpV4
+	M8g3ZVyRw2NOrdPu+yOcBkW5snkAf5gFk8DbufR9bNHwv1ZIHgMXp7C5gmOmpSYJ5H+5
+	H3nQPJ6U6tXNYDqqky9z9NgrUoSiU8uVbedz/7xRilAp/odiGfYyhjdiMDtN8F8kGvAq
+	humg==
+X-Received: by 10.50.142.8 with SMTP id rs8mr8203568igb.77.1447217695034; Tue,
+	10 Nov 2015 20:54:55 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.107.12.205 with HTTP; Tue, 10 Nov 2015 20:54:24 -0800 (PST)
 In-Reply-To: <1447217296-7145-1-git-send-email-armccurdy@gmail.com>
 References: <1447217296-7145-1-git-send-email-armccurdy@gmail.com>
-Subject: [meta-browser][PATCH 2/2] chromium: use PARALLEL_MAKE to control build parallelism
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 10 Nov 2015 20:54:24 -0800
+Message-ID: <CAMKF1soBa58iFxm9K30crBvQqT=o6ugRT-MSPaY1vzJL6KfMsA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH 1/2] cef3: use PARALLEL_MAKE to control build parallelism
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,27 +40,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2015 04:48:29 -0000
+X-List-Received-Date: Wed, 11 Nov 2015 04:54:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- recipes-browser/chromium/chromium_40.0.2214.91.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Tue, Nov 10, 2015 at 8:48 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
+> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> ---
+>  recipes-browser/chromium/cef3_280796.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/recipes-browser/chromium/cef3_280796.bb b/recipes-browser/chromium/cef3_280796.bb
+> index d827b8e..6872e5b 100644
+> --- a/recipes-browser/chromium/cef3_280796.bb
+> +++ b/recipes-browser/chromium/cef3_280796.bb
+> @@ -60,5 +60,5 @@ do_qa_configure() {
+>  }
+>
+>  do_compile() {
+> -    ninja -C out/${CHROMIUM_BUILD_TYPE} -j${BB_NUMBER_THREADS} cefsimple
+> +    ninja -C out/${CHROMIUM_BUILD_TYPE} ${PARALLEL_MAKE} cefsimple
+>  }
 
-diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-index a9635cd..f20610c 100644
---- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
-+++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-@@ -196,7 +196,7 @@ do_configure_append() {
- 
- do_compile() {
-         # build with ninja
--        ninja -C ${S}/out/${CHROMIUM_BUILD_TYPE} -j${BB_NUMBER_THREADS} chrome chrome_sandbox
-+        ninja -C ${S}/out/${CHROMIUM_BUILD_TYPE} ${PARALLEL_MAKE} chrome chrome_sandbox
- }
- 
- 
--- 
-1.9.1
+this is ok
 
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
