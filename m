@@ -1,35 +1,47 @@
-Return-Path: <adrian.freihofer@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 64CE2771B7
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
+	[209.85.213.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 41D0F771B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 19:48:45 +0000 (UTC)
-Received: by wmww144 with SMTP id w144so173226822wmw.1
+	Wed, 11 Nov 2015 19:48:55 +0000 (UTC)
+Received: by igvg19 with SMTP id g19so463327igv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 11:48:46 -0800 (PST)
+	Wed, 11 Nov 2015 11:48:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=wXoMhi/6kG0kyW3btG7fH3X3RfqzZ7i/phD9Sp859/Q=;
-	b=Q+kaZ8+9/CaWFGQOtLTcNTSqDo2bxOwu6FedsGn3nBOgtwJRg4rA3rwPOmhfVx4YXO
-	fN2jpEO3+hN8b+/IJoleAILvbsIntv2RGTfv7KZd/FycQkchPn3ZKgCL0Ozs2yxAe8o/
-	+XrJ6Mb3HSuoJPlgBRsdD1JN/VA9+Y9FZSywBsWYvGMJJ1svOIFFPnwm37jGZ4dUrf76
-	Re/hn8IH+k2jRPliFRwZTtMyE5Z/dYI2s98Ilyowhf9ucQ8+FYu4o1hd13RgQUlvFpkU
-	UjnCfzVxp1ZfinmSWMLmw16N974BTbgr+KbBVO2s2YHE4Z/lz8atbnDkZVW+Uee4whtD
-	qNEg==
-X-Received: by 10.194.176.70 with SMTP id cg6mr13777742wjc.155.1447271326056; 
-	Wed, 11 Nov 2015 11:48:46 -0800 (PST)
-Received: from chl500346.lan.ffah.ch (c-82-192-248-24.customer.ggaweb.ch.
-	[82.192.248.24]) by smtp.gmail.com with ESMTPSA id
-	ej10sm9700824wjd.32.2015.11.11.11.48.45
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 11 Nov 2015 11:48:45 -0800 (PST)
-From: Adrian Freihofer <adrian.freihofer@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Nov 2015 20:48:20 +0100
-Message-Id: <1447271300-4153-18-git-send-email-adrian.freihofer@gmail.com>
-X-Mailer: git-send-email 2.4.3
-In-Reply-To: <1447271300-4153-1-git-send-email-adrian.freihofer@gmail.com>
-References: <1447271300-4153-1-git-send-email-adrian.freihofer@gmail.com>
-Subject: [meta-oe][PATCH V2 17/17] networkmanager: add openvpn plugin
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=kxVFMZODV9mLBK2Vd1rHxNcEFSFGKNiV0T7fe9/TbYs=;
+	b=xGOCKJxabzCVlmJi5QQAVJq4pZptxXREs3WhpxmJELwS0bh04+C2Nb2RVr67vUsAW0
+	VvtoHwOGgcSRNjaF6r5fv4Ncc79uhESmNe+mAjsftr8PXNdcYNZRfaX2bQyRCp5i4CAN
+	4AIyKXIze2uKRwVYvAU7Rqc/ZHqvMyhzVq6WEkWEk+NAhPWs1YitrpT9noyNKO9NUAUz
+	udxGDn0B3l/rGfmmTlf4t1fbJpCnLBq8X2gOVIHXZqxqNQ3mT6DzrqoYmEc812QyOYJl
+	Ho7DoCeqyqNd/2NyJ9ROtRyBbgFkaakK2Z0Gte/RRpxBf1VTRggLY2d/0lNUOEsBL2IA
+	nT7Q==
+X-Received: by 10.50.142.8 with SMTP id rs8mr11953714igb.77.1447271336162;
+	Wed, 11 Nov 2015 11:48:56 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.107.12.205 with HTTP; Wed, 11 Nov 2015 11:48:26 -0800 (PST)
+In-Reply-To: <662EEA96-421F-46A1-97F1-F07CE05D08FA@gmail.com>
+References: <A3005F6B-2993-4BA5-9406-D411C19FA636@gmail.com>
+	<CABcZANnTbE-6KgFxaNr2p-ruzt3TKQ0jc2VR6-8fhJ-MmGcpZQ@mail.gmail.com>
+	<B2ABFB12-3EF3-4008-94A1-A6390986AAFB@gmail.com>
+	<88DAE25B-BAA9-4F99-B404-71D2D2973BBD@gmail.com>
+	<4E8196B8-4770-41B9-B80A-3A9A911087D3@gmail.com>
+	<CAMKF1sp8SrFpqeY4iD-juwPv6y2y5f4ZDisPU9LiCUuUXDWhqA@mail.gmail.com>
+	<7F78FF81-F48C-45D0-9F1A-2D719A20CC48@gmail.com>
+	<CAMKF1srTimQy2RtDk+=nnA7p+jC80u0eBTd9_v+9_FLfWt0MPA@mail.gmail.com>
+	<B3996A75-A243-4E48-9318-C1730ED9141B@gmail.com>
+	<CAMKF1sqPitU4ZUXZ--qyefnesyu2SqZQvbRGMCG1RRP+BOmw0w@mail.gmail.com>
+	<75C83D4F-AE17-44CC-9523-761A33C7F7D1@gmail.com>
+	<CAMKF1soRPp6yxDK+iF_SB0EO=Dvzx9oKDiRgRJqw0WXv2BbbAA@mail.gmail.com>
+	<662EEA96-421F-46A1-97F1-F07CE05D08FA@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Nov 2015 11:48:26 -0800
+Message-ID: <CAMKF1sruZfx4tO+_cwmzrM0XQj39L3mCyXK_WfSOdx8yfWnFvA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: =?UTF-8?Q?Volker_M=C3=B6sker?= <volker.moesker@rademacher.de>,
+	Tobias Theophile <Tobias.Theophile@rademacher.de>
+Subject: Re: [meta-oe][PATCH 1/3] samba: fix dependencies and QA issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,53 +55,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2015 19:48:46 -0000
+X-List-Received-Date: Wed, 11 Nov 2015 19:48:56 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Adrian Freihofer <adrian.freihofer@gmail.com>
----
- .../networkmanager/networkmanager-openvpn_1.0.6.bb | 32 ++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.0.6.bb
+On Wed, Nov 11, 2015 at 11:22 AM, Jens Rehsack <rehsack@gmail.com> wrote:
+>
+>> Am 11.11.2015 um 20:12 schrieb Khem Raj <raj.khem@gmail.com>:
+>>
+>> On Wed, Nov 11, 2015 at 10:54 AM, Jens Rehsack <rehsack@gmail.com> wrote:
+>>> In this special case I intend to say no, because:
+>>>
+>>>  The lsb support is limited to startup only - and the distro features
+>>>  controlling startup are "sysvinit" and "systemd", respectively.
+>>>
+>>> Mixing systemd with linuxstdbase in overrides is possible but installing
+>>> two init-script not knowing each other is likely asking for trouble. Maybe
+>>> I'm wrong with that :)
+>>
+>> and only sysvinit is valid for LSB, if you use systemd then lsb is
+>> violated anyway
+>> you can encode that logic for completion if you want
+>
+> Currently I'd like not to complicate things before jethro :)
+>
+> When you have an example somewhere how it can be sanely done, and it's easily
+> adopted - I'm happy to send an update for that. Otherwise I intend to wait
+> after release and take the patch as it is to fix remaining issues before
+> release is done.
 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.0.6.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.0.6.bb
-new file mode 100644
-index 0000000..d805db9
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.0.6.bb
-@@ -0,0 +1,32 @@
-+SUMMARY = "NetworkManager-openvpn-plugin"
-+SECTION = "net/misc"
-+
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=100d5a599bead70ddcd70dcd73f2e29c"
-+
-+DEPENDS = "dbus dbus-glib networkmanager openvpn"
-+
-+inherit gnomebase useradd gettext systemd 
-+
-+SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
-+
-+SRC_URI[md5sum] = "02931c0302310d06e43d413b5a7a3261"
-+SRC_URI[sha256sum] = "c982b644fa43d3019cb654a17e692bb3a7175a86d28065ea51f55ae7dfe45d8c"
-+
-+S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
-+
-+PACKAGECONFIG[gnome] = "--with-gnome,--without-gnome"
-+
-+# Create user and group nm-openvpn that are needed since version 1.0.6
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM_${PN} = "--system nm-openvpn"
-+
-+FILES_${PN} += " \
-+    ${libdir}/NetworkManager/*.so \
-+"
-+
-+RDEPENDS_${PN} = " \
-+    networkmanager \
-+    openvpn \
-+"
-+
--- 
-2.4.3
+jethro announcement went out yesterday so ..
 
+https://lists.yoctoproject.org/pipermail/yocto/2015-November/027342.html
+
+>
+> Cheers
+> --
+> Jens Rehsack - rehsack@gmail.com
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
