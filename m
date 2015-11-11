@@ -1,43 +1,40 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id C99DC76294
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by mail.openembedded.org (Postfix) with ESMTP id B41E876294
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 03:22:15 +0000 (UTC)
-Received: by padhx2 with SMTP id hx2so17582044pad.1
+	Wed, 11 Nov 2015 03:26:00 +0000 (UTC)
+Received: by pasz6 with SMTP id z6so18150046pas.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2015 19:22:16 -0800 (PST)
+	Tue, 10 Nov 2015 19:26:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=content-type:mime-version:subject:from:in-reply-to:date:cc
 	:content-transfer-encoding:message-id:references:to;
-	bh=29zivRQCrmhdvAZADpTf3QZhK3FwQhmpk5A6tjiWr5Y=;
-	b=CqWIyCR0yqohuoQs+eGJpCZNcep3QVOkFDUtMvRnLfvrrLNFRdRZRkBMGPXj43Srr+
-	/mw8qdzCaxDIX6dSD6B4S3aDdfAWvpa6mO7jgYj2/Zt/zJbBrPI+COF7Z/oyUQfT/K/W
-	6ZLoayQ/7IE5/Uuu0nd28fbkiSCfrLnONIJjBlCqL+K/pJZaw9iGAQesfFiggdIKxm2B
-	KezPg5TqyqJyAW4Gfh2MRuA6IYYVg9D2IUzd+fWdfVN5xIpE4hRQ28xxZh24/mlmO5h0
-	paSlNunugyljRP04MGiqPRntUoB2lWQHDUG0ElOU8ckNhWuVBjcJuEuZ2G+z0ICOi7Nk
-	RUnw==
-X-Received: by 10.68.173.5 with SMTP id bg5mr11033462pbc.104.1447212136022;
-	Tue, 10 Nov 2015 19:22:16 -0800 (PST)
-Received: from ?IPv6:2601:646:8601:4580:716d:29f5:a55d:699f?
-	([2601:646:8601:4580:716d:29f5:a55d:699f])
-	by smtp.gmail.com with ESMTPSA id
-	fx3sm6783735pbb.60.2015.11.10.19.22.14
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 10 Nov 2015 19:22:15 -0800 (PST)
+	bh=f4JAoWNVLwdixkVy2F2LhXA71lusd75NhTsi7N5pWF0=;
+	b=ry0V4Fha9gkBEcZM4573adLERW+cTRuZqgQS8o4Wf+FbH5CodvzValbXmuHJvD2Wv0
+	X3owQzoLhuOJSuqmDDIcyMQdubJIwg1+t/PCS/8ffeWZ8CbzjKg0sj81XSrWRTwe6Xmz
+	VnywxJrcM+KgUHsqgp78jz+GWAmNMvUj/7DHdkwUNaAGy2878P5qXv49Y9EiiSPYptpT
+	Gi5kDFfKvzp9qe9NrNZukGYthC4v516AlRQXymEuRcIM/AlD1baMfi3txub4R6ZwH5BM
+	tZMpdEiCkAMj0qHQan9nVWlSgmaAtpmYlLH3S9rmSCjmqUlb5A9oc07ZNXflmdjqG10O
+	tbDA==
+X-Received: by 10.68.178.229 with SMTP id db5mr11102266pbc.79.1447212360620;
+	Tue, 10 Nov 2015 19:26:00 -0800 (PST)
+Received: from [192.168.0.45] (c-76-103-142-85.hsd1.ca.comcast.net.
+	[76.103.142.85]) by smtp.gmail.com with ESMTPSA id
+	yq2sm6807342pbb.39.2015.11.10.19.25.59
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 10 Nov 2015 19:26:00 -0800 (PST)
 Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3108\))
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <B2ABFB12-3EF3-4008-94A1-A6390986AAFB@gmail.com>
-Date: Tue, 10 Nov 2015 19:22:16 -0800
-Message-Id: <88DAE25B-BAA9-4F99-B404-71D2D2973BBD@gmail.com>
-References: <A3005F6B-2993-4BA5-9406-D411C19FA636@gmail.com>
-	<CABcZANnTbE-6KgFxaNr2p-ruzt3TKQ0jc2VR6-8fhJ-MmGcpZQ@mail.gmail.com>
-	<B2ABFB12-3EF3-4008-94A1-A6390986AAFB@gmail.com>
+In-Reply-To: <33A5922B-6B36-4862-8261-4F59E0AF12AD@gmail.com>
+Date: Tue, 10 Nov 2015 19:26:01 -0800
+Message-Id: <892C1CD0-EAD9-4692-A296-B5635FE35385@gmail.com>
+References: <33A5922B-6B36-4862-8261-4F59E0AF12AD@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Mailer: Apple Mail (2.3108)
 Cc: =?utf-8?Q?Volker_M=C3=B6sker?= <volker.moesker@rademacher.de>,
 	Tobias Theophile <Tobias.Theophile@rademacher.de>
-Subject: Re: [meta-oe][PATCH 1/3] samba: fix dependencies and QA issues
+Subject: Re: [meta-oe][PATCH 3/3] libldb: make openldap optional, but default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,55 +48,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2015 03:22:17 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Wed, 11 Nov 2015 03:26:01 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
 
-> On Nov 10, 2015, at 2:00 PM, Jens Rehsack <rehsack@gmail.com> wrote:
+> On Nov 10, 2015, at 1:26 PM, Jens Rehsack <rehsack@gmail.com> wrote:
 >=20
 >=20
->> Am 10.11.2015 um 22:42 schrieb Christopher Larson =
-<clarson@kergoth.com>:
->>=20
->> On Tue, Nov 10, 2015 at 2:22 PM, Jens Rehsack <rehsack@gmail.com> =
-wrote:
->>=20
->>> +                   ${@base_contains('DISTRO_FEATURES', 'sysvinit', =
-'lsb',
->>> '', d)} \
->>>=20
->>=20
->> This really requires lsb to able build, for all sysvinit distros? =
-That
->> seems unlikely. Was this intended to be based on the lsb distro =
-feature?
->> Also, why add lsb to rdepends independently of the packageconfig? I'd =
-think
->> using the packageconfig's 4th field for rdepends, if necessary, would =
-work
->> better, unless I'm missing something?
+> Since openldap isn't required, but used when found, allow qualified
+> users to disable the requirement to save some space.
 >=20
-> You do ;)
+> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+> ---
+> meta-oe/recipes-support/libldb/libldb_1.1.17.bb | 5 ++++-
+> 1 file changed, 4 insertions(+), 1 deletion(-)
 >=20
-> It uses the LSB init-script for systemv-init - and lsb doesn't suck in =
-that
-> much that it hurts. But the line you quoted just adds an item to =
-PACKAGECONFIG :)
-> Do a PACKAGECONFIG_remove-pn-samba =3D "lsb" to avoid the 4 scripts =
-=E2=80=A6
+> diff --git a/meta-oe/recipes-support/libldb/libldb_1.1.17.bb =
+b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
+> index 44f061a..07a839d 100644
+> --- a/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
+> +++ b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
+> @@ -4,9 +4,12 @@ SECTION =3D "libs"
+> LICENSE =3D "LGPL-3.0+ & LGPL-2.1+ & GPL-3.0+"
 >=20
+> DEPENDS +=3D "libtdb talloc libtevent popt"
+> -RDEPENDS_${PN} +=3D "libtevent popt libtalloc openldap"
+> +RDEPENDS_${PN} +=3D "libtevent popt libtalloc"
+> RDEPENDS_pyldb +=3D "python libtdb libtalloc"
+>=20
+> +PACKAGECONFIG ??=3D "ldap"
+> +PACKAGECONFIG[ldap] =3D ",,openldap"
+> +
+> SRC_URI =3D "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
+>            =
+file://do-not-import-target-module-while-cross-compile.patch \
+>           "
+> --=20
+> 1.9.1
+>=20
+> This results from analysing why there's still an openldap ...
+>=20
+> I know, having no knob to disable ldap is dirty, but there is no such =
+switch.
+> Even more dirty, the switch in samba_4% is for embedded samba3 =
+source-base only,
+> the ldb bundled with samba4 just uses ldap when found.
+>=20
+> The patch relies on the idea of qualified users - those who know that =
+they
+> don't want ldap, disable it everywhere and whistle.
 
-that should be tied to =E2=80=98lsb=E2=80=99 distro feature as it =
-exists. Distro=E2=80=99s then automatically get the intended behavior =
-based upon the selected distro policy.
+it seems to not fix the problem completely, for exact reasons that some =
+other package may bring in openldap and stage it before this recipe is =
+built so you
+have exact same problem again. I think if this package is patched to add =
+a knob to disable/enable openldap support explicitly then the fix will =
+be complete and I am sure upstream will also accept such a patch.
 
-
-
-> I will be happy supporting a patch distinguishing between lsb's =
-init-script
-> and basic init-script with only rudimentary start and stop and nothing =
-else.
 >=20
 > Cheers
 > --=20
