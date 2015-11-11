@@ -1,36 +1,49 @@
-Return-Path: <adrian.freihofer@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id C6C21771B2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
+	[209.85.213.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 6DF05771AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 20:42:12 +0000 (UTC)
-Received: by wmec201 with SMTP id c201so63509630wme.1
+	Wed, 11 Nov 2015 20:53:51 +0000 (UTC)
+Received: by igl9 with SMTP id 9so84050153igl.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 12:42:12 -0800 (PST)
+	Wed, 11 Nov 2015 12:53:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:subject:from:to:date:content-type:mime-version
-	:content-transfer-encoding;
-	bh=e6ApRTgphKAtI0HCZkKN4UpRbt9w3rAPaEcB7VHk8wc=;
-	b=nA9BR7V3e6GSIjr0TpTtA0TM/Xc5LksJqAqWwHO3mFuQzdaiZJ1NrBmlioIcqPVPEr
-	7bN4v9X5ps98Keep3z2i6f0eNUxcKrAPLWp8NzIDfOinrBEcOS0YV9YqN73gHj6TWGNP
-	0Qe+CiJIddpBPV5OpesXSzP6/am6Wp/3hhJOcF+9aGi5BzDQZoLhF0avITtuNkNtqtR1
-	NLUZWz9STy/Cg0K3v9fBwmT3x9VifccoNp+0aUf7r7N9T6HDLnPiTdSWoAX0PKFPylfK
-	DTsMa2jCoZCkCvt+tqXX4Z6ppAg67bDQCBHgk7DfdgsMpb6zWRLCkwpIVc/Y9w4GoPy7
-	X/xQ==
-X-Received: by 10.28.61.213 with SMTP id k204mr24851091wma.5.1447274532280;
-	Wed, 11 Nov 2015 12:42:12 -0800 (PST)
-Received: from chl500346 (c-82-192-248-24.customer.ggaweb.ch. [82.192.248.24])
-	by smtp.gmail.com with ESMTPSA id
-	b1sm10799774wjx.12.2015.11.11.12.42.11
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 11 Nov 2015 12:42:11 -0800 (PST)
-Message-ID: <1447274530.2528.135.camel@gmail.com>
-From: Adrian Freihofer <adrian.freihofer@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Nov 2015 21:42:10 +0100
-X-Mailer: Evolution 3.16.5 (3.16.5-3.fc22) 
-Mime-Version: 1.0
-Subject: Re: [meta-oe][PATCH V2 15/17] networkmanager: package for adsl plugin
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=j/P5oGtIhsh/bjV988iRgUUDJ5Uuuwg9G7HdPxqmT9A=;
+	b=yyJoA5j9dPPX9L0qYlntLaBQYASX3eEvWfeks9J/qMD6avHTMtK/7C+z/iGRRv2W1n
+	LyfSQmNiBWuf/3t/WI9Lenqc8wOHI+qorq70nG9waIQypktEyZnbiXU8WePSAHVCLdvY
+	giwbiTn4VBFrhZ39eyftHF6Dl3glbn/jTEF/J2ps2itqC4+FUNV07COIqFPOL+4FkL3+
+	mL2ozpAo+HVbv/XsPT+1ga2GMfm5sE2zPcwEAdEbTuMv458f8jgoqWezujqbzY7Mh2qL
+	Urwgt5NCxiPbmWQweJhtfhn/M8mBuIpfXZq+qoccQxtzOXyaKroetDKZS9tSvwTb8+/q
+	ZQXA==
+X-Received: by 10.50.20.67 with SMTP id l3mr30572492ige.75.1447275231547; Wed,
+	11 Nov 2015 12:53:51 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.107.12.205 with HTTP; Wed, 11 Nov 2015 12:53:22 -0800 (PST)
+In-Reply-To: <6B63E7FC-B65B-450B-871D-182CCAE06796@gmail.com>
+References: <A3005F6B-2993-4BA5-9406-D411C19FA636@gmail.com>
+	<CABcZANnTbE-6KgFxaNr2p-ruzt3TKQ0jc2VR6-8fhJ-MmGcpZQ@mail.gmail.com>
+	<B2ABFB12-3EF3-4008-94A1-A6390986AAFB@gmail.com>
+	<88DAE25B-BAA9-4F99-B404-71D2D2973BBD@gmail.com>
+	<4E8196B8-4770-41B9-B80A-3A9A911087D3@gmail.com>
+	<CAMKF1sp8SrFpqeY4iD-juwPv6y2y5f4ZDisPU9LiCUuUXDWhqA@mail.gmail.com>
+	<7F78FF81-F48C-45D0-9F1A-2D719A20CC48@gmail.com>
+	<CAMKF1srTimQy2RtDk+=nnA7p+jC80u0eBTd9_v+9_FLfWt0MPA@mail.gmail.com>
+	<B3996A75-A243-4E48-9318-C1730ED9141B@gmail.com>
+	<CAMKF1sqPitU4ZUXZ--qyefnesyu2SqZQvbRGMCG1RRP+BOmw0w@mail.gmail.com>
+	<75C83D4F-AE17-44CC-9523-761A33C7F7D1@gmail.com>
+	<CAMKF1soRPp6yxDK+iF_SB0EO=Dvzx9oKDiRgRJqw0WXv2BbbAA@mail.gmail.com>
+	<662EEA96-421F-46A1-97F1-F07CE05D08FA@gmail.com>
+	<CAMKF1sruZfx4tO+_cwmzrM0XQj39L3mCyXK_WfSOdx8yfWnFvA@mail.gmail.com>
+	<6B63E7FC-B65B-450B-871D-182CCAE06796@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Nov 2015 12:53:22 -0800
+Message-ID: <CAMKF1srbaj5SrkyX_p83GOFbhA4fJrim_qwhmX-hzfs=CKQoOQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: =?UTF-8?Q?Volker_M=C3=B6sker?= <volker.moesker@rademacher.de>,
+	Tobias Theophile <Tobias.Theophile@rademacher.de>
+Subject: Re: [meta-oe][PATCH 1/3] samba: fix dependencies and QA issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,39 +57,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2015 20:42:14 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Nov 2015 20:53:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Adrian Freihofer <adrian.freihofer@gmail.com>
----
- .../recipes-connectivity/networkmanager/networkmanager_1.0.6.bb    | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+On Wed, Nov 11, 2015 at 12:20 PM, Jens Rehsack <rehsack@gmail.com> wrote:
+>
+>> Am 11.11.2015 um 20:48 schrieb Khem Raj <raj.khem@gmail.com>:
+>>
+>> On Wed, Nov 11, 2015 at 11:22 AM, Jens Rehsack <rehsack@gmail.com> wrote:
+>>>
+>>>> Am 11.11.2015 um 20:12 schrieb Khem Raj <raj.khem@gmail.com>:
+>>>>
+>>>> On Wed, Nov 11, 2015 at 10:54 AM, Jens Rehsack <rehsack@gmail.com> wrote:
+>>>>> In this special case I intend to say no, because:
+>>>>>
+>>>>> The lsb support is limited to startup only - and the distro features
+>>>>> controlling startup are "sysvinit" and "systemd", respectively.
+>>>>>
+>>>>> Mixing systemd with linuxstdbase in overrides is possible but installing
+>>>>> two init-script not knowing each other is likely asking for trouble. Maybe
+>>>>> I'm wrong with that :)
+>>>>
+>>>> and only sysvinit is valid for LSB, if you use systemd then lsb is
+>>>> violated anyway
+>>>> you can encode that logic for completion if you want
+>>>
+>>> Currently I'd like not to complicate things before jethro :)
+>>>
+>>> When you have an example somewhere how it can be sanely done, and it's easily
+>>> adopted - I'm happy to send an update for that. Otherwise I intend to wait
+>>> after release and take the patch as it is to fix remaining issues before
+>>> release is done.
+>>
+>> jethro announcement went out yesterday so ..
+>>
+>> https://lists.yoctoproject.org/pipermail/yocto/2015-November/027342.html
+>
+> Cool - so it's shipped with a 3 month known bug https://bugzilla.yoctoproject.org/show_bug.cgi?id=8127 ... anyway ;)
+>
+> So, do you have an example around how to reasonable add your suggestion to check for lsb override?
+>
 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb b/meta-oe/recipes
--connectivity/networkmanager/networkmanager_1.0.6.bb
-index 326ac31..0101b36 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
-@@ -74,12 +74,17 @@ PACKAGECONFIG[wifi] = "--enable-wifi=yes,--enable-wifi=no,wireless-tools,wpa-sup
- PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
- PACKAGECONFIG[netconfig] = "--with-netconfig=yes,--with-netconfig=no"
- 
--PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-completion ${PN}-nmtui ${PN}-nmtui-doc"
-+PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-completion \
-+  ${PN}-nmtui ${PN}-nmtui-doc \
-+  ${PN}-adsl \
-+"
- 
- FILES_libnmutil += "${libdir}/libnm-util.so.*"
- FILES_libnmglib += "${libdir}/libnm-glib.so.*"
- FILES_libnmglib-vpn += "${libdir}/libnm-glib-vpn.so.*"
- 
-+FILES_${PN}-adsl = "${libdir}/NetworkManager/libnm-device-plugin-adsl.so"
-+
- FILES_${PN} += " \
-     ${libexecdir} \
-     ${libdir}/pppd/*/nm-pppd-plugin.so \
--- 
-2.4.3
+PACKAGECONFIG_linuxstdbase = "${@bb.utils.contains('DISTRO_FEATURES',
+'sysvinit', 'foo', '', d)} "
+
+on these line ...
+
+> Cheers
+> --
+> Jens Rehsack - rehsack@gmail.com
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
