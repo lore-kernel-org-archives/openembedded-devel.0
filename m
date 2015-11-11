@@ -1,40 +1,52 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FB88771A7
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id A6CB0771A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 19:56:30 +0000 (UTC)
-Received: by wmec201 with SMTP id c201so61988306wme.1
+	Wed, 11 Nov 2015 20:20:43 +0000 (UTC)
+Received: by wmww144 with SMTP id w144so60131185wmw.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 11:56:30 -0800 (PST)
+	Wed, 11 Nov 2015 12:20:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=wqlPJy1ElzWwfig/ZqHIpYYtVVTIBdN06y2s6G8X1XU=;
-	b=VrhJ/4qwles5vSSydt1FFokzhVtjWfvK9nIc/5B2xD4LP6b4faYrcLGY9b4DLt8c7N
-	gHf97i5UTDw5GM7lszjo6SgmWGYpDfRyZHyGp+Rlp47f9MZexPE/cahsIl8wkWO8cN1/
-	/ol2Mds9eQt1Ly9t3VUcoOzirnLOiI58DsFjd1Ujah5nr/NaEsR/udC43ehawADYJUfq
-	1O64Ee/KULe5n2xTyrXcgzai6fRhRHfBE0A3cpunNYhNeYeVNdJDKfHrG0oiWChLWsQA
-	DtUqp4NTAnEZUAeY2gJY830QhptKWOigj4YvYed5+eZ7U92PoaZmtxPl3Nff3noskPci
-	/UHg==
-X-Received: by 10.28.14.140 with SMTP id 134mr12380457wmo.44.1447271790364;
-	Wed, 11 Nov 2015 11:56:30 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=0qPmEVDsr+M63v/ZGS3Ng92t/9YQfrMYBQAKkY7jmoU=;
+	b=O/GnymrS8c9XM4ZpY72Og2jgSrbiPzcM5XrLlu486Xe0Mvatrpa0jLrv/O7nKwEYJ5
+	0nJb9visnNhS3QrZ2Kzq1qO954LU9cKJEScEiWN9jNzJaUmPYU1OcWL1orMPEB0cvrWQ
+	+Cz4eglLNExTDgKN4bxjAo50acDhWgCGQ4jlMcj5BJD0ai/ym+a/OfJtN1iehj1WImgy
+	LvfwWObaXrMJfVy7HH12Jtlyp8vO6ZMSe4Wixs68neZ7Ua2TVnd0E9KQrSoSeXJkUDqk
+	bPTGfp6qSYWuWuV/ukq8PPIF3whv8EcsE4vnv9c1eGyTeWqj5VuIeoqvCMBrYvKOmT3w
+	Dqkw==
+X-Received: by 10.28.170.18 with SMTP id t18mr14062608wme.73.1447273243724;
+	Wed, 11 Nov 2015 12:20:43 -0800 (PST)
+Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
 	by smtp.gmail.com with ESMTPSA id
-	pn6sm6433510wjb.15.2015.11.11.11.56.28
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 11 Nov 2015 11:56:29 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 11 Nov 2015 20:56:40 +0100
+	197sm26978212wmx.23.2015.11.11.12.20.42
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 11 Nov 2015 12:20:43 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+From: Jens Rehsack <rehsack@gmail.com>
+In-Reply-To: <CAMKF1sruZfx4tO+_cwmzrM0XQj39L3mCyXK_WfSOdx8yfWnFvA@mail.gmail.com>
+Date: Wed, 11 Nov 2015 21:20:41 +0100
+Message-Id: <6B63E7FC-B65B-450B-871D-182CCAE06796@gmail.com>
+References: <A3005F6B-2993-4BA5-9406-D411C19FA636@gmail.com>
+	<CABcZANnTbE-6KgFxaNr2p-ruzt3TKQ0jc2VR6-8fhJ-MmGcpZQ@mail.gmail.com>
+	<B2ABFB12-3EF3-4008-94A1-A6390986AAFB@gmail.com>
+	<88DAE25B-BAA9-4F99-B404-71D2D2973BBD@gmail.com>
+	<4E8196B8-4770-41B9-B80A-3A9A911087D3@gmail.com>
+	<CAMKF1sp8SrFpqeY4iD-juwPv6y2y5f4ZDisPU9LiCUuUXDWhqA@mail.gmail.com>
+	<7F78FF81-F48C-45D0-9F1A-2D719A20CC48@gmail.com>
+	<CAMKF1srTimQy2RtDk+=nnA7p+jC80u0eBTd9_v+9_FLfWt0MPA@mail.gmail.com>
+	<B3996A75-A243-4E48-9318-C1730ED9141B@gmail.com>
+	<CAMKF1sqPitU4ZUXZ--qyefnesyu2SqZQvbRGMCG1RRP+BOmw0w@mail.gmail.com>
+	<75C83D4F-AE17-44CC-9523-761A33C7F7D1@gmail.com>
+	<CAMKF1soRPp6yxDK+iF_SB0EO=Dvzx9oKDiRgRJqw0WXv2BbbAA@mail.gmail.com>
+	<662EEA96-421F-46A1-97F1-F07CE05D08FA@gmail.com>
+	<CAMKF1sruZfx4tO+_cwmzrM0XQj39L3mCyXK_WfSOdx8yfWnFvA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151111195640.GB2564@jama>
-References: <1447271300-4153-1-git-send-email-adrian.freihofer@gmail.com>
-	<1447271300-4153-16-git-send-email-adrian.freihofer@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1447271300-4153-16-git-send-email-adrian.freihofer@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-oe][PATCH V2 15/17] networkmanager: package for adsl plugin
+X-Mailer: Apple Mail (2.2104)
+Cc: =?utf-8?Q?Volker_M=C3=B6sker?= <volker.moesker@rademacher.de>,
+	Tobias Theophile <Tobias.Theophile@rademacher.de>
+Subject: Re: [meta-oe][PATCH 1/3] samba: fix dependencies and QA issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,82 +60,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2015 19:56:32 -0000
-X-Groupsio-MsgNum: 58521
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="tsOsTdHNUZQcU9Ye"
-Content-Disposition: inline
-
---tsOsTdHNUZQcU9Ye
+X-List-Received-Date: Wed, 11 Nov 2015 20:20:45 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 11, 2015 at 08:48:18PM +0100, Adrian Freihofer wrote:
-> Signed-off-by: Adrian Freihofer <adrian.freihofer@gmail.com>
-> ---
->  .../recipes-connectivity/networkmanager/networkmanager_1.0.6.bb   | 8 ++=
-+++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
+
+> Am 11.11.2015 um 20:48 schrieb Khem Raj <raj.khem@gmail.com>:
 >=20
-> diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1=
-=2E0.6.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.=
-6.bb
-> index 326ac31..02fe500 100644
-> --- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
-> +++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
-> @@ -74,12 +74,18 @@ PACKAGECONFIG[wifi] =3D "--enable-wifi=3Dyes,--enable=
--wifi=3Dno,wireless-tools,wpa-sup
->  PACKAGECONFIG[ifupdown] =3D "--enable-ifupdown,--disable-ifupdown"
->  PACKAGECONFIG[netconfig] =3D "--with-netconfig=3Dyes,--with-netconfig=3D=
-no"
-> =20
-> -PACKAGES =3D+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-=
-completion ${PN}-nmtui ${PN}-nmtui-doc"
-> +PACKAGES =3D+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-=
-completion \
-> +  ${PN}-nmtui ${PN}-nmtui-doc \
-> +  ${PN}-adsl ${PN}-adsl-staticdev \
-> +"
-> =20
->  FILES_libnmutil +=3D "${libdir}/libnm-util.so.*"
->  FILES_libnmglib +=3D "${libdir}/libnm-glib.so.*"
->  FILES_libnmglib-vpn +=3D "${libdir}/libnm-glib-vpn.so.*"
-> =20
-> +FILES_${PN}-adsl =3D "${libdir}/NetworkManager/libnm-device-plugin-adsl.=
-so"
-> +FILES_${PN}-adsl-staticdev =3D "${libdir}/NetworkManager/libnm-device-pl=
-ugin-adsl.la"
-
-Thanks, you don't need separate networkmanager-adsl-staticdev,
-libnm-device-plugin-adsl.la should be included in normal PN-dev.
-
-> +
->  FILES_${PN} +=3D " \
->      ${libexecdir} \
->      ${libdir}/pppd/*/nm-pppd-plugin.so \
-> --=20
-> 2.4.3
+> On Wed, Nov 11, 2015 at 11:22 AM, Jens Rehsack <rehsack@gmail.com> =
+wrote:
+>>=20
+>>> Am 11.11.2015 um 20:12 schrieb Khem Raj <raj.khem@gmail.com>:
+>>>=20
+>>> On Wed, Nov 11, 2015 at 10:54 AM, Jens Rehsack <rehsack@gmail.com> =
+wrote:
+>>>> In this special case I intend to say no, because:
+>>>>=20
+>>>> The lsb support is limited to startup only - and the distro =
+features
+>>>> controlling startup are "sysvinit" and "systemd", respectively.
+>>>>=20
+>>>> Mixing systemd with linuxstdbase in overrides is possible but =
+installing
+>>>> two init-script not knowing each other is likely asking for =
+trouble. Maybe
+>>>> I'm wrong with that :)
+>>>=20
+>>> and only sysvinit is valid for LSB, if you use systemd then lsb is
+>>> violated anyway
+>>> you can encode that logic for completion if you want
+>>=20
+>> Currently I'd like not to complicate things before jethro :)
+>>=20
+>> When you have an example somewhere how it can be sanely done, and =
+it's easily
+>> adopted - I'm happy to send an update for that. Otherwise I intend to =
+wait
+>> after release and take the patch as it is to fix remaining issues =
+before
+>> release is done.
 >=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> jethro announcement went out yesterday so ..
+>=20
+> =
+https://lists.yoctoproject.org/pipermail/yocto/2015-November/027342.html
 
+Cool - so it's shipped with a 3 month known bug =
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D8127 ... anyway ;)
+
+So, do you have an example around how to reasonable add your suggestion =
+to check for lsb override?
+
+Cheers
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Jens Rehsack - rehsack@gmail.com
 
---tsOsTdHNUZQcU9Ye
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlZDnXcACgkQN1Ujt2V2gBwJ4wCgulik4PshCr70EFZqza8Kp/Ps
-ja0AoJlYJFTN4Nh5qqbNO8i+FpCSy0+C
-=/cxa
------END PGP SIGNATURE-----
-
---tsOsTdHNUZQcU9Ye--
