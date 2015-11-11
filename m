@@ -1,42 +1,42 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 0FB44762B3
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by mail.openembedded.org (Postfix) with ESMTP id B68FE77179
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 17:47:16 +0000 (UTC)
-Received: by wmww144 with SMTP id w144so54724057wmw.0
+	Wed, 11 Nov 2015 18:01:08 +0000 (UTC)
+Received: by pabfh17 with SMTP id fh17so37251629pab.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 09:47:16 -0800 (PST)
+	Wed, 11 Nov 2015 10:01:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=7UooSuXqKLYTEjSDyu7uwLkjHbZCdxbr5lQBe4Mdu2g=;
-	b=bpku/m3Xsp7FQ10uzShMmb1lQVTwHpLkIQYEbtVdUuNxbhpJ9Z875ZUbUUYYTYjauY
-	ItAcmIGOHhXg8jih4zSjA/EwNev7nKBLdxSXMjy5o2N0kG7DyTnypk/ocv7o6/S/lCv1
-	8V/16KtiDdYjBxRQYOi5MGpkEEwXWXnD/VR51nv9HEjdvOYyGz+4WjVj+AbSumZfQLTQ
-	AFqFdXrWGRxnDNEAIGmQxoh9DWB1rTtVfCPSHqEDDBSuCnZHdnbn8Vti0ynPaPPQsWTz
-	ILfzaW7XGtj5lte/C8Z/78mX4ePerVz/T/BAABA4Y1wtwyIRKKKdvQGJOgVUMSeZ5CjL
-	zP9A==
-X-Received: by 10.194.8.9 with SMTP id n9mr11703745wja.22.1447264036483;
-	Wed, 11 Nov 2015 09:47:16 -0800 (PST)
-Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
-	by smtp.gmail.com with ESMTPSA id
-	l1sm10663229wmg.21.2015.11.11.09.47.15
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 11 Nov 2015 09:47:15 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-From: Jens Rehsack <rehsack@gmail.com>
-In-Reply-To: <CAMKF1sqbxs3SDGdKMzrWsYv887M=EUe200owKo=7ZZ3gWivmKA@mail.gmail.com>
-Date: Wed, 11 Nov 2015 18:47:14 +0100
-Message-Id: <DDE21F3D-050E-449A-8ED0-72BACAA59D43@gmail.com>
-References: <33A5922B-6B36-4862-8261-4F59E0AF12AD@gmail.com>
-	<892C1CD0-EAD9-4692-A296-B5635FE35385@gmail.com>
-	<FE25E51D-6F1B-4DB0-8391-9B8B152ECF3F@gmail.com>
-	<CAMKF1sqbxs3SDGdKMzrWsYv887M=EUe200owKo=7ZZ3gWivmKA@mail.gmail.com>
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=0/aTFT1taVyjazAM1D4SuJivtnuxkJMfWTPo5jtGPsg=;
+	b=Jx5iMPvsiX8UX9lcErQMga4nle/xnbPs+tjEvzriRjQB2TfdNTtdE96gjN6H1Y5Ovg
+	RZqG2zmbHc5/7HYJ2Jc2sT5A65GLTFEbRqgZBpxk5lFdRyss0muoWBB7q7c6PWk5iWqh
+	LCRmuxm7H4iHO60Xbm4vunoAuassiMd/CQ4cDL/O4Cj4QLR0Cytni50w3yVsM379zWNx
+	ucTxQ65OMyXPhCREvTzEbjSHpztPq+zzu3xv+2vBEaKeAMO1yzAPzasUE5UC4hs7SvLU
+	XpB8T6xNpxFxxzzK0ELqUiMoCR7Db+fhDaN+3krtmtYiThL9UwTv31Lm6RXbtad8WZSz
+	G+8w==
+X-Received: by 10.66.122.39 with SMTP id lp7mr16341559pab.74.1447264868875;
+	Wed, 11 Nov 2015 10:01:08 -0800 (PST)
+Received: from ?IPv6:2601:202:4000:1239:b99e:8fcb:e922:8a29?
+	([2601:202:4000:1239:b99e:8fcb:e922:8a29])
+	by smtp.googlemail.com with ESMTPSA id
+	cx5sm10467585pbc.50.2015.11.11.10.01.07
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 11 Nov 2015 10:01:08 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.2104)
-Cc: =?utf-8?Q?Volker_M=C3=B6sker?= <volker.moesker@rademacher.de>,
-	Tobias Theophile <Tobias.Theophile@rademacher.de>
-Subject: Re: [meta-oe][PATCH 3/3] libldb: make openldap optional, but default
+References: <1447208258-28688-1-git-send-email-Randy.MacLeod@windriver.com>
+From: akuster808 <akuster808@gmail.com>
+X-Enigmail-Draft-Status: N1110
+Message-ID: <56438262.6010603@gmail.com>
+Date: Wed, 11 Nov 2015 10:01:06 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
+MIME-Version: 1.0
+In-Reply-To: <1447208258-28688-1-git-send-email-Randy.MacLeod@windriver.com>
+Subject: Re: [meta-networking/jethro][PATCH] lldpd: fix PN -> BPN SRC_URI for multilib build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,109 +50,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2015 17:47:19 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 Nov 2015 18:01:11 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
 
-> Am 11.11.2015 um 18:34 schrieb Khem Raj <raj.khem@gmail.com>:
->=20
-> On Wed, Nov 11, 2015 at 1:11 AM, Jens Rehsack <rehsack@gmail.com> =
-wrote:
->>=20
->>> Am 11.11.2015 um 04:26 schrieb Khem Raj <raj.khem@gmail.com>:
->>>=20
->>>>=20
->>>> On Nov 10, 2015, at 1:26 PM, Jens Rehsack <rehsack@gmail.com> =
-wrote:
->>>>=20
->>>>=20
->>>> Since openldap isn't required, but used when found, allow qualified
->>>> users to disable the requirement to save some space.
->>>>=20
->>>> Signed-off-by: Jens Rehsack <sno@netbsd.org>
->>>> ---
->>>> meta-oe/recipes-support/libldb/libldb_1.1.17.bb | 5 ++++-
->>>> 1 file changed, 4 insertions(+), 1 deletion(-)
->>>>=20
->>>> diff --git a/meta-oe/recipes-support/libldb/libldb_1.1.17.bb =
-b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
->>>> index 44f061a..07a839d 100644
->>>> --- a/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
->>>> +++ b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
->>>> @@ -4,9 +4,12 @@ SECTION =3D "libs"
->>>> LICENSE =3D "LGPL-3.0+ & LGPL-2.1+ & GPL-3.0+"
->>>>=20
->>>> DEPENDS +=3D "libtdb talloc libtevent popt"
->>>> -RDEPENDS_${PN} +=3D "libtevent popt libtalloc openldap"
->>>> +RDEPENDS_${PN} +=3D "libtevent popt libtalloc"
->>>> RDEPENDS_pyldb +=3D "python libtdb libtalloc"
->>>>=20
->>>> +PACKAGECONFIG ??=3D "ldap"
->>>> +PACKAGECONFIG[ldap] =3D ",,openldap"
->>>> +
->>>> SRC_URI =3D "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
->>>>          =
-file://do-not-import-target-module-while-cross-compile.patch \
->>>>         "
->>>> --
->>>> 1.9.1
->>>>=20
->>>> This results from analysing why there's still an openldap ...
->>>>=20
->>>> I know, having no knob to disable ldap is dirty, but there is no =
-such switch.
->>>> Even more dirty, the switch in samba_4% is for embedded samba3 =
-source-base only,
->>>> the ldb bundled with samba4 just uses ldap when found.
->>>>=20
->>>> The patch relies on the idea of qualified users - those who know =
-that they
->>>> don't want ldap, disable it everywhere and whistle.
->>>=20
->>> it seems to not fix the problem completely, for exact reasons that =
-some other package may bring in openldap and stage it before this recipe =
-is built so you
->>> have exact same problem again. I think if this package is patched to =
-add a knob to disable/enable openldap support explicitly then the fix =
-will be complete and I am sure upstream will also accept such a patch.
->>=20
->> NO! Please read carefully what "qualified user expected" means!
->>=20
->=20
-> I understand it well. no we don't want any user tiers here. We should
-> tend towards becoming user friendly
-> A qualified user is well equipped to maintain a patch with a
-> RDEPENDS_${PN}_remove in his layer.
 
-Both aspects have their pros and cons, but ...
+On 11/10/2015 06:17 PM, Randy MacLeod wrote:
+> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 
->> Forcing a dependency because someone else might introduce it either
->> is insane - and adding RDEPENDS is just hiding the symptom, not
->=20
-> its bringing determinism to build thats an important aspect.
+cool. time to fire up the queue.
 
-... this argument beats them all. Nothing to add ;)
+merged to my staging.
 
-Anyway - for determinism, openldap should be in depends then, not
-RDEPENDS, shouldn't it?
-
->> fixing the root cause. The root cause is, that waf is broken
->> by design.
->=20
-> such sweeping statements have to backed by reasoning otherwise no one
-> will take them seriously. IMO if you atleast report
-> this to waf community someone else might be able to help fixing
-> whatever the problem is.
-
-But shouldn't the samba maintainer do that?
-
->> And no, I'm not going to fix waf.
->=20
-> Thats fine.
-
-Cheers
---=20
-Jens Rehsack - rehsack@gmail.com
-
+thanks
+> ---
+>  meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb b/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb
+> index ba7f09e..bd207ad 100644
+> --- a/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb
+> +++ b/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb
+> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/ISC;md5=f3b90e
+>  DEPENDS = "libbsd libevent"
+>  
+>  SRC_URI = "\
+> -    http://media.luffy.cx/files/${PN}/${PN}-${PV}.tar.gz \
+> +    http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
+>      file://lldpd.init.d \
+>      file://lldpd.default \
+>      file://fix-libevent-configure.patch \
+> 
 
