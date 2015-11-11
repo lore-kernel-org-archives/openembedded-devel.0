@@ -1,32 +1,31 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f169.google.com (mail-io0-f169.google.com
-	[209.85.223.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 31E2276294
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id AFF1C766B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 06:33:15 +0000 (UTC)
-Received: by iofh3 with SMTP id h3so25492569iof.3
+	Wed, 11 Nov 2015 07:22:32 +0000 (UTC)
+Received: by wmvv187 with SMTP id v187so42708620wmv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2015 22:33:16 -0800 (PST)
+	Tue, 10 Nov 2015 23:22:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=ZBP+eKJHXtCDT9rwMjPpNvOMXY3qlECFS/joy+EVEA8=;
-	b=pxuor1gfeR1QU0oCedzlHapQysG1q4l2o1hNYNVYio7wbNuhkj3Q+B96oJRqkiTMQy
-	cyZnPxcjXsaQoGEweXrpUu4WJlbAXL1scNfRC4DVmM4XR20xUWsNpJZLT2t/LlN3+sB6
-	+C7G5YR5Jfv6VIpQsfKsobn0I4RTQDavIjoOGh50qqYg8GD2foIalyAmb4Mjy8Z22ZWv
-	z67RebI3mkLlZMTcweUA80quAtY9LQpO3sT7IF89wRC1x4H+DrkKDdpOZ2DxGXF5Iev/
-	6IgA0UBYWavt45ltB8T/IUqAfGLl/FC3JoNXFhVt8/SCRa4+Vj3E4GbMOJM6Cs2RUWgq
-	1Cag==
-X-Received: by 10.107.9.152 with SMTP id 24mr7516406ioj.112.1447223595917;
-	Tue, 10 Nov 2015 22:33:15 -0800 (PST)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=yNDjK6C2KvALvkpohrsIz5fqfwt0geMhBOJ4Kh0zhbU=;
+	b=gku/kRrmmgATHK7Z6OUKNKa6UWnjBbn33rWOOKsXBYEvqyiaN+kUFisTV30ZgT70QE
+	5U1PfhzNANYP9AzXYNnSte8cp/EJcB62lFYkl/bABL12OIShLwWM8aDY4GZpvaYLGOUO
+	wz6DCoXSe8HGUq+6sSd1ZI3HYIznOI250WpgfiB+cK/zysAYdt1aZGWh8Ipi6kwXrejW
+	6z0jRUY+fOzkI/O3fhzhuz+fcBHJ+O3ARByZn5MmROssidtSOGmgaVBwRGBsYo2u5jxn
+	QuGpKXWj849urARE/aaxBNEcaQ+Wnv5Ryw50rkmRMmeSnUZ26KnGrx13nXyUny95vBXp
+	/0/A==
 MIME-Version: 1.0
-Received: by 10.107.12.205 with HTTP; Tue, 10 Nov 2015 22:32:46 -0800 (PST)
+X-Received: by 10.194.90.169 with SMTP id bx9mr3759446wjb.1.1447226552131;
+	Tue, 10 Nov 2015 23:22:32 -0800 (PST)
+Received: by 10.194.140.38 with HTTP; Tue, 10 Nov 2015 23:22:32 -0800 (PST)
 In-Reply-To: <CAAzKXngADOxQ-rOfF1DBSNqhV-GUPookXZjLkTZ=CgOf4ks7Eg@mail.gmail.com>
 References: <1447217296-7145-1-git-send-email-armccurdy@gmail.com>
 	<CAAzKXngADOxQ-rOfF1DBSNqhV-GUPookXZjLkTZ=CgOf4ks7Eg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 10 Nov 2015 22:32:46 -0800
-Message-ID: <CAMKF1srehw6-jLL53xwckqGqWVobbKAHQcewQYXg3g0Qi=je_g@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Date: Tue, 10 Nov 2015 23:22:32 -0800
+Message-ID: <CAJ86T=X_4vtGKXxW5y8e3zS-tv9fAnnmsOPFFuOrZp8wHdJMCA@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-browser][PATCH 1/2] cef3: use PARALLEL_MAKE to control build parallelism
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -41,7 +40,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2015 06:33:16 -0000
+X-List-Received-Date: Wed, 11 Nov 2015 07:22:39 -0000
 Content-Type: text/plain; charset=UTF-8
 
 On Tue, Nov 10, 2015 at 9:48 PM, Zoltan Kuscsik
@@ -50,11 +49,15 @@ On Tue, Nov 10, 2015 at 9:48 PM, Zoltan Kuscsik
 >
 > isn't ninja picking up the number of cores separately? I'm not sure why
 > this is needed.
->
 
-thats another issue. This one atleast improves the current usage a nit.
+Without any -j option, ninja will default to "-j (logical_cores + 2)".
 
->
+The PARALLEL_MAKE value configured in OE isn't just about maximising
+parallelism though (although that's it's common usage), it's also
+useful to limit parallelism and reduce the load on the CPU. If
+PARALLEL_MAKE isn't passed to ninja builds then they will always fully
+load the CPU.
+
 > Z
 >
 > On 11 November 2015 at 05:48, Andre McCurdy <armccurdy@gmail.com> wrote:
