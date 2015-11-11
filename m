@@ -1,50 +1,35 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B243771A7
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 289BB771A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 19:23:02 +0000 (UTC)
-Received: by wmvv187 with SMTP id v187so48720wmv.1
+	Wed, 11 Nov 2015 19:48:31 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so61715231wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 11:23:01 -0800 (PST)
+	Wed, 11 Nov 2015 11:48:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=LP6lAcuHMImVrXgu8SI184e4m4tS2KPrhkxdyaRLSg8=;
-	b=nUUBKu0HvFjKtBLbpi3H1npVfEkLf3SDvIIl0eWFBgijyhXCr327IhDaRZg6IND82R
-	WUv+el7VzZy+WhaeEqKz/ekCA7FD1wmYpRCNjza0elvmrqBIojUfi7RIn5CIJx0WqjTJ
-	iw3ynXH+gh1xU8dj1s/V9/yOTMn+HS2eMdiKnb0J7U7R3h3s6DEJ0oaOsax6lHxRuH8U
-	leu8WBehtCYLkESFdnbdcDAt+Gp4jRonfrWwVdBDx7wZ7bdrFdNrnxKsViv2G76f61p3
-	aXw8KNLa/NfNeu1ZD1T6YAzleDsmdqTRbJcyp9q3q8epitlX4DYPy6aI/H8PB2b3WNGf
-	mW5w==
-X-Received: by 10.28.130.80 with SMTP id e77mr12776071wmd.33.1447269781705;
-	Wed, 11 Nov 2015 11:23:01 -0800 (PST)
-Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
-	by smtp.gmail.com with ESMTPSA id
-	ka10sm10476013wjc.30.2015.11.11.11.23.00
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 11 Nov 2015 11:23:01 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-From: Jens Rehsack <rehsack@gmail.com>
-In-Reply-To: <CAMKF1soRPp6yxDK+iF_SB0EO=Dvzx9oKDiRgRJqw0WXv2BbbAA@mail.gmail.com>
-Date: Wed, 11 Nov 2015 20:22:59 +0100
-Message-Id: <662EEA96-421F-46A1-97F1-F07CE05D08FA@gmail.com>
-References: <A3005F6B-2993-4BA5-9406-D411C19FA636@gmail.com>
-	<CABcZANnTbE-6KgFxaNr2p-ruzt3TKQ0jc2VR6-8fhJ-MmGcpZQ@mail.gmail.com>
-	<B2ABFB12-3EF3-4008-94A1-A6390986AAFB@gmail.com>
-	<88DAE25B-BAA9-4F99-B404-71D2D2973BBD@gmail.com>
-	<4E8196B8-4770-41B9-B80A-3A9A911087D3@gmail.com>
-	<CAMKF1sp8SrFpqeY4iD-juwPv6y2y5f4ZDisPU9LiCUuUXDWhqA@mail.gmail.com>
-	<7F78FF81-F48C-45D0-9F1A-2D719A20CC48@gmail.com>
-	<CAMKF1srTimQy2RtDk+=nnA7p+jC80u0eBTd9_v+9_FLfWt0MPA@mail.gmail.com>
-	<B3996A75-A243-4E48-9318-C1730ED9141B@gmail.com>
-	<CAMKF1sqPitU4ZUXZ--qyefnesyu2SqZQvbRGMCG1RRP+BOmw0w@mail.gmail.com>
-	<75C83D4F-AE17-44CC-9523-761A33C7F7D1@gmail.com>
-	<CAMKF1soRPp6yxDK+iF_SB0EO=Dvzx9oKDiRgRJqw0WXv2BbbAA@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=xPXruyoqaDKXRY6hxDKXgXIbM1WZgqyC5j2asMEpUiQ=;
+	b=alY2kAyc5goORz+Eb6LApAiZXjpy3/YUIhi936wI8wWIMSk9FMxSA0aJp48wY5yf41
+	4PEIXQmj7IE4a632HCERrPLnTLgfhcWhbWrbtyteBBcnV3BZZ3ZnDOUCswVdlMeptp1e
+	aapJzmyPwhUa4+USfgxgVZiUXp+MXtDMSHXaAZRRaICWahRD7IZEeNzsoLjoYosI7BV0
+	POiNjHJni2kNP4vUCcSQi/vkInBBQd3a+4IftCM3cly9fzHZHoE0nUhe0k5iUyqWe+Gb
+	2c2sKXeofDVg0MAPIStx9CwA5m2YE9FRnyV7tCGnwvoKRX4/3gBi3U1S1WxOlx+AgpN0
+	aGtg==
+X-Received: by 10.28.138.148 with SMTP id m142mr12273345wmd.79.1447271311815; 
+	Wed, 11 Nov 2015 11:48:31 -0800 (PST)
+Received: from chl500346.lan.ffah.ch (c-82-192-248-24.customer.ggaweb.ch.
+	[82.192.248.24]) by smtp.gmail.com with ESMTPSA id
+	ej10sm9700824wjd.32.2015.11.11.11.48.30
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 11 Nov 2015 11:48:31 -0800 (PST)
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.2104)
-Cc: =?utf-8?Q?Volker_M=C3=B6sker?= <volker.moesker@rademacher.de>,
-	Tobias Theophile <Tobias.Theophile@rademacher.de>
-Subject: Re: [meta-oe][PATCH 1/3] samba: fix dependencies and QA issues
+Date: Wed, 11 Nov 2015 20:48:04 +0100
+Message-Id: <1447271300-4153-2-git-send-email-adrian.freihofer@gmail.com>
+X-Mailer: git-send-email 2.4.3
+In-Reply-To: <1447271300-4153-1-git-send-email-adrian.freihofer@gmail.com>
+References: <1447271300-4153-1-git-send-email-adrian.freihofer@gmail.com>
+Subject: [meta-oe][PATCH V2 01/17] libqmi: update to 1.12.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,36 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2015 19:23:03 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Nov 2015 19:48:33 -0000
 
+ModemManager 1.4.12 needs at least qmi-glib version 1.12.4
 
-> Am 11.11.2015 um 20:12 schrieb Khem Raj <raj.khem@gmail.com>:
-> 
-> On Wed, Nov 11, 2015 at 10:54 AM, Jens Rehsack <rehsack@gmail.com> wrote:
->> In this special case I intend to say no, because:
->> 
->>  The lsb support is limited to startup only - and the distro features
->>  controlling startup are "sysvinit" and "systemd", respectively.
->> 
->> Mixing systemd with linuxstdbase in overrides is possible but installing
->> two init-script not knowing each other is likely asking for trouble. Maybe
->> I'm wrong with that :)
-> 
-> and only sysvinit is valid for LSB, if you use systemd then lsb is
-> violated anyway
-> you can encode that logic for completion if you want
+Signed-off-by: Adrian Freihofer <adrian.freihofer@gmail.com>
+---
+ .../libqmi/{libqmi_1.12.2.bb => libqmi_1.12.6.bb}                     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.12.2.bb => libqmi_1.12.6.bb} (80%)
 
-Currently I'd like not to complicate things before jethro :)
-
-When you have an example somewhere how it can be sanely done, and it's easily
-adopted - I'm happy to send an update for that. Otherwise I intend to wait
-after release and take the patch as it is to fix remaining issues before
-release is done.
-
-Cheers
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.2.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.6.bb
+similarity index 80%
+rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.12.2.bb
+rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.12.6.bb
+index 789692b..7a15527 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.2.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.6.bb
+@@ -12,5 +12,5 @@ DEPENDS = "glib-2.0"
+ inherit autotools pkgconfig
+ 
+ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
+-SRC_URI[md5sum] = "5b3b6b37a57e2fa828fd4cb6f86d7a9f"
+-SRC_URI[sha256sum] = "d1661d73b510482b29b93b7e396756c433d35360b3d44c72afa7921339a98624"
++SRC_URI[md5sum] = "24c9eb300662ba6cff0152de89bd9ec0"
++SRC_URI[sha256sum] = "0857bffece4e8ddfa7f721dd9ca63b4c78de345ac9ae2faebf04062cacba3780"
 -- 
-Jens Rehsack - rehsack@gmail.com
+2.4.3
 
 
