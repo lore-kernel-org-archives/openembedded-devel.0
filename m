@@ -1,46 +1,36 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
-	[209.85.213.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DE5B7720F
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 12:12:28 +0000 (UTC)
-Received: by igbxm8 with SMTP id xm8so39647991igb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 04:12:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel_com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=a5FV4QDX0EZazV20zsbrQh6tfiU1VGjWYccEoBC0DQ8=;
-	b=gWDa4qeHGumDeUEuCMxgkev3HjKE8bbDYVGhyBFaL8qTDCeA22+0lDN1UMAov6yDnK
-	auo8FlToEgNeHBrfpbCL62qoRktnBLazj7cQXZoObtjXHhIBUQoDMIAZzdQ/zU974kRT
-	xBTmr+T9YOeHpEYAQIb0ZvqpCde6LLmsz7K6uRPNB0ttxye8jHTpmVd9ue+Vl4YZiWoo
-	qYFlJ1A2d9NP7rjiXDD81/KgMXVgz1zn/UYXz8BCSaQ01Tn8CyXFZgJ07UgYyOfPqQoS
-	uGkUv1eweTKD1XTK3CYgd7n0enCFW8oLAHMVgfaGgGM7Ux2iyXsPXU50bvM4UvJpTSt9
-	RDMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=a5FV4QDX0EZazV20zsbrQh6tfiU1VGjWYccEoBC0DQ8=;
-	b=UJhDtO4prR67RUxt4qYqCe71xBY2fnPb+3bRT//J9YcLUu8FdPyP/iyi0l15ZCf2Al
-	tR6ycwyiMOqMVvEiL7ORVqP0b8Cj6VBwmuYymLd+ai+/lpnPpnKYoY/G8MbE1W1GODUo
-	CPrjrEYa7U4t0Jap4dI2YFiYEPP4OHsdaUcda6jhFhov3dbPAmcY5fkOlrVvD7Nsm36P
-	Op+d72NJHeFXIUqYjqUJztNkDaVnkn45aW0NyDT6MyMeEfcSap2oMSHEx+BSso1oXsL5
-	Ns3BpN1TfXsEqTfI5Mucx1uqfUng8/WhMzInNTDbHgP0NBJsGQGbFCRbnM2RVGOZiEOw
-	MiFA==
-X-Gm-Message-State: ALoCoQnYpTQEW/ipCsbak0VFFl2WGLKKn+jtBDattslze4MwnW6dkNyTYw8qP+YorGdrcplN6CZs
-X-Received: by 10.50.112.100 with SMTP id ip4mr15317677igb.78.1447330348496;
-	Thu, 12 Nov 2015 04:12:28 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.136.141 with HTTP; Thu, 12 Nov 2015 04:12:09 -0800 (PST)
-In-Reply-To: <20151112114311.GD2574@jama>
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 3BE327719C;
+	Thu, 12 Nov 2015 12:17:05 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so88611277wme.1;
+	Thu, 12 Nov 2015 04:17:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=JQHMhCtd07Xah21lV6l9O9YOFzz18z6IN7bHdbYTJBI=;
+	b=k8HxY7tP93LLUOPaDp+FY59O1ngLIxQaHpy5Vrg0RzFgZ/Hvj2fH8sJI5Fp26xjUeO
+	KfwrCyABbQ7XJGsmWWB1FpUQwQXe70cKWnUaqqpfwlO1wfKZr6LOm/wjh5dOfxHfYyXq
+	EVamfGp2KfQoIl1AtN+2wcTg/fWrTjS1isNR0/ePq5hatoGwFIA7x8eHqsC7MHMMGcZJ
+	TZRsu0tsihfw0gllzmRdyQ+61g4vNuRVprsMgYzygSupLgcQ8rG4nhG1MqRRdBn+QZzv
+	Up0i+H2OhziB5SG/AGwVQHbdNPijrgRpA7ABTjrnDwiLRRuDBIWQXPvWf6dB5/6KvJQh
+	v7lw==
+X-Received: by 10.28.218.72 with SMTP id r69mr17666463wmg.98.1447330625658;
+	Thu, 12 Nov 2015 04:17:05 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	b12sm30446422wma.6.2015.11.12.04.17.04
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Nov 2015 04:17:04 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 12 Nov 2015 13:17:21 +0100
+To: "Burton, Ross" <ross.burton@intel.com>
+Message-ID: <20151112121721.GE2574@jama>
 References: <20151112114311.GD2574@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 12 Nov 2015 12:12:09 +0000
-Message-ID: <CAJTo0LaeSCxpDbt2QmKXyE+hdYJs5Sb7NuVPZ3=1ZzyfrVfd7A@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CAJTo0LaeSCxpDbt2QmKXyE+hdYJs5Sb7NuVPZ3=1ZzyfrVfd7A@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAJTo0LaeSCxpDbt2QmKXyE+hdYJs5Sb7NuVPZ3=1ZzyfrVfd7A@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
 	OE-core <openembedded-core@lists.openembedded.org>
 Subject: Re: [OE-core] State of bitbake world, test-dependencies 2015-11-12
@@ -57,19 +47,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 12:12:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 12 Nov 2015 12:17:06 -0000
+X-Groupsio-MsgNum: 58553
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Ns7jmDPpOpCD+GE/"
+Content-Disposition: inline
 
-On 12 November 2015 at 11:43, Martin Jansa <martin.jansa@gmail.com> wrote:
+--Ns7jmDPpOpCD+GE/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> WARN: clutter-gst-3.0: clutter-gst-3.0 rdepends on libgudev, but it isn't
-> a build dependency?
-> WARN: gammu: gammu rdepends on libgudev, but it isn't a build dependency?
-> WARN: gstreamer1.0-plugins-good: gstreamer1.0-plugins-good-video4linux2
-> rdepends on libgudev, but it isn't a build dependency?
->
+On Thu, Nov 12, 2015 at 12:12:09PM +0000, Burton, Ross wrote:
+> On 12 November 2015 at 11:43, Martin Jansa <martin.jansa@gmail.com> wrote:
+>=20
+> > WARN: clutter-gst-3.0: clutter-gst-3.0 rdepends on libgudev, but it isn=
+'t
+> > a build dependency?
+> > WARN: gammu: gammu rdepends on libgudev, but it isn't a build dependenc=
+y?
+> > WARN: gstreamer1.0-plugins-good: gstreamer1.0-plugins-good-video4linux2
+> > rdepends on libgudev, but it isn't a build dependency?
+> >
+>=20
+> Looks like oe-core should take gudev for consistency between init systems.
 
-Looks like oe-core should take gudev for consistency between init systems.
+Using correct DEPENDS should be enough to get at least deterministic
+builds.
 
-Ross
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--Ns7jmDPpOpCD+GE/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlZEg1AACgkQN1Ujt2V2gBzEIQCcC+xMsVmgkbX7CLbTVinpenSF
+phIAnjFdoHwxOGEFVybnItl5uYoJ89ru
+=Myfd
+-----END PGP SIGNATURE-----
+
+--Ns7jmDPpOpCD+GE/--
