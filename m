@@ -1,43 +1,34 @@
-Return-Path: <scott@jumpnowtek.com>
-X-Greylist: delayed 498 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 12 Nov 2015 15:36:40 UTC
-Received: from smtp65.iad3a.emailsrvr.com (smtp65.iad3a.emailsrvr.com
-	[173.203.187.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 47CCA77234
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id A0FCF77234
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 15:36:40 +0000 (UTC)
-Received: from smtp1.relay.iad3a.emailsrvr.com (localhost.localdomain
-	[127.0.0.1])
-	by smtp1.relay.iad3a.emailsrvr.com (SMTP Server) with ESMTP id
-	3C875180D1C for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 10:28:20 -0500 (EST)
-Received: from app4.wa-webapps.iad3a (relay-webapps.rsapps.net
-	[172.27.255.140])
-	by smtp1.relay.iad3a.emailsrvr.com (SMTP Server) with ESMTP id
-	32B4E180D12 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 10:28:20 -0500 (EST)
-X-Sender-Id: scott@jumpnowtek.com
-Received: from app4.wa-webapps.iad3a (relay-webapps.rsapps.net
-	[172.27.255.140]) by 0.0.0.0:25 (trex/5.5.4);
-	Thu, 12 Nov 2015 10:28:20 -0500
-Received: from jumpnowtek.com (localhost.localdomain [127.0.0.1])
-	by app4.wa-webapps.iad3a (Postfix) with ESMTP id 1C24C280025
+	Thu, 12 Nov 2015 15:38:27 +0000 (UTC)
+Received: by wmww144 with SMTP id w144so93839374wmw.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 10:28:20 -0500 (EST)
-Received: by apps.rackspace.com (Authenticated sender: scott@jumpnowtek.com,
-	from: scott@jumpnowtek.com) 
-	with HTTP; Thu, 12 Nov 2015 10:28:20 -0500 (EST)
-Date: Thu, 12 Nov 2015 10:28:20 -0500 (EST)
-From: "Scott Ellis" <scott@jumpnowtek.com>
+	Thu, 12 Nov 2015 07:38:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=FeeIwRVfZWugHOWQVW5nNCZpxx/2yA83VVObV9C0tAY=;
+	b=Ko/2TzZHemn77wcsd2P/k4rnhHvywtxJizXKt0lvb75WEEJY1pi5rReceXmgCPdwD0
+	o7GKZ2OpPSb+kHd6Pfh6kEKaIwClnj0kq/in/h0bCFGhyGUFjhvolOl69PRqfVPxVYIP
+	4LPY7gxAdsxpRrpIKGhR6Gvvgv2iqpbxqjRnX7Gimnp3//O+jGlhZk+3t9VB2PK6NDZM
+	gaGB98FQS6YraAq1ttxX0aB+DHcVzo/3OBH+JEUGwJTx+Xv9ZKyzmOg9afpiAf/G03Un
+	kF5Pv+hM+ZX590vhE0DR6iK8A3Mqw5qiu0neIKBzVqjsFbSEN8nSjCh6D9CRTfjI3Vom
+	dZeQ==
+X-Received: by 10.28.139.143 with SMTP id n137mr17211979wmd.8.1447342706480;
+	Thu, 12 Nov 2015 07:38:26 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	l81sm15628422wmb.2.2015.11.12.07.38.25
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Nov 2015 07:38:25 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Importance: Normal
-X-Priority: 3 (Normal)
-X-Type: plain
-X-Auth-ID: scott@jumpnowtek.com
-Message-ID: <1447342100.11374493@apps.rackspace.com>
-X-Mailer: webmail/11.6.5-RC
-Subject: [PATCH][meta-python]: python-requests: Add RDEPENDS
+Date: Thu, 12 Nov 2015 16:38:41 +0100
+Message-Id: <1447342721-8825-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.6.3
+Subject: [PATCH][meta-initramfs] dracut: exclude kernel-modules dependency with SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,20 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 15:36:44 -0000
-Content-Type: text/plain;charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 12 Nov 2015 15:38:30 -0000
 
-The python-requests module has runtime dependencies.=0A=0ASigned-off-by: Sc=
-ott Ellis <scott@jumpnowtek.com>=0A---=0A meta-python/recipes-devtools/pyth=
-on/python-requests_2.7.0.bb | 2 ++=0A 1 file changed, 2 insertions(+)=0A=0A=
-diff --git a/meta-python/recipes-devtools/python/python-requests_2.7.0.bb b=
-/meta-python/recipes-devtools/python/python-requests_2.7.0.bb=0Aindex 1564d=
-50..ac47202 100644=0A--- a/meta-python/recipes-devtools/python/python-reque=
-sts_2.7.0.bb=0A+++ b/meta-python/recipes-devtools/python/python-requests_2.=
-7.0.bb=0A@@ -14,3 +14,5 @@ SRC_URI[sha256sum] =3D "398a3db6d61899d25fd4a06c=
-6ca12051b0ce171d705decd7ed5511517b=0A S =3D "${WORKDIR}/${SRCNAME}-${PV}"=
-=0A=0A inherit setuptools=0A+=0A+RDEPENDS_${PN} =3D "python-email python-js=
-on python-netserver python-zlib"=0A--=0A2.5.0=0A
+* see:
+  http://lists.openembedded.org/pipermail/openembedded-devel/2015-September/103271.html
+* fixes:
+ERROR: dracut different signature for task do_package_write_ipk.sigdata between qemux86copy and qemux86
+runtaskdeps changed from ['bash-completionbash-completion_2.1.bb.do_packagedata', 'bashbash_4.3.30.bb.do_packagedata', 'busyboxbusybox_1.23.2.bb.do_packagedata', 'coreutilscoreutils_8.24.bb.do_packagedata', 'cpiocpio_2.11.bb.do_packagedata', 'dracutdracut_git.bb.do_package', 'dracutdracut_git.bb.do_packagedata', 'findutilsfindutils_4.5.14.bb.do_packagedata', 'glibcglibc_2.22.bb.do_packagedata', 'linuxlinux-yocto_4.1.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'pseudopseudo_1.7.4.bb.do_populate_sysroot:virtual:native', 'systemdsystemd_225.bb.do_packagedata', 'util-linuxutil-linux_2.26.2.bb.do_packagedata']
+to
+['bash-completionbash-completion_2.1.bb.do_packagedata', 'bashbash_4.3.30.bb.do_packagedata', 'busyboxbusybox_1.23.2.bb.do_packagedata', 'coreutilscoreutils_8.24.bb.do_packagedata', 'cpiocpio_2.11.bb.do_packagedata', 'dracutdracut_git.bb.do_package', 'dracutdracut_git.bb.do_packagedata', 'findutilsfindutils_4.5.14.bb.do_packagedata', 'glibcglibc_2.22.bb.do_packagedata', 'linuxlinux-yocto_4.1.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'pseudopseudo_1.7.4.bb.do_populate_sysroot:virtual:native', 'systemdsystemd_225.bb.do_packagedata', 'util-linuxutil-linux_2.26.2.bb.do_packagedata']
+openembedded-core/meta/recipes-kernel/linux/linux-yocto_4.1.bb.do_packagedata with hash a98b79faed8b6633269560af1add43a5
+ changed to
+openembedded-core/meta/recipes-kernel/linux/linux-yocto_4.1.bb.do_packagedata with hash 15962f296d6961232d7350368c604464
+Hash for dependent task linuxlinux-yocto_4.1.bb.do_packagedata changed from a98b79faed8b6633269560af1add43a5 to 15962f296d6961232d7350368c604464
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-initramfs/conf/layer.conf | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/meta-initramfs/conf/layer.conf b/meta-initramfs/conf/layer.conf
+index 0026e04..dbee702 100644
+--- a/meta-initramfs/conf/layer.conf
++++ b/meta-initramfs/conf/layer.conf
+@@ -15,3 +15,7 @@ BBFILE_PATTERN_meta-initramfs := "^${LAYERDIR}/"
+ 
+ BBFILE_PRIORITY_meta-initramfs = "8"
+ LAYERDEPENDS_meta-initramfs = "core"
++
++SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
++  dracut->kernel-modules \
++"
+-- 
+2.6.3
 
 
