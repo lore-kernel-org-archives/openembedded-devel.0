@@ -1,36 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 2270E77225
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ob0-f173.google.com (mail-ob0-f173.google.com
+	[209.85.214.173])
+	by mail.openembedded.org (Postfix) with ESMTP id D512376E4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 14:22:59 +0000 (UTC)
-Received: by wmww144 with SMTP id w144so202578752wmw.1
+	Thu, 12 Nov 2015 14:39:12 +0000 (UTC)
+Received: by obbnk6 with SMTP id nk6so47589188obb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 06:22:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=lM3ZCr17uAp2MQDZY8bffK0Af5wc6vzzEamSUgghp98=;
-	b=Da6Y+ww/3E5TwutCPo0/3Cnj2drSyl68Eqo+qLYwy4tuwa5grd5zEAZZuu1/YIqykw
-	Kh2tg10P7mRpM7ol95Zji0u0ydiVuX1rk5WwINHHFIG7AhsiIh95Jyzdmw3Bp2fYs/mZ
-	M1uIGtcupi0+fvuwGVQapz4l02cItleSwmtu9nIWAhORi1dJjRTLmxBi3NQlQe0TliDg
-	nCLc5kMoKQa9KJ/2QmtU4DG5H9L8J47+aEV4UXj34p67j0AvH6oG6TOgrb9BwFenuK9L
-	52xbgTPQR0dz8VuDgjIiO/iG+2QRqtJmnK14qaC1trjAX0mbcaCD6eOBgpFb7G+pjYul
-	NU6A==
-X-Received: by 10.28.170.19 with SMTP id t19mr16449048wme.65.1447338179792;
-	Thu, 12 Nov 2015 06:22:59 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	r9sm14707321wjz.35.2015.11.12.06.22.59
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Nov 2015 06:22:59 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Nov 2015 15:23:03 +0100
-Message-Id: <1447338183-9675-9-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.6.3
+	Thu, 12 Nov 2015 06:39:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=OHMlqThCcYCJse+gDhCGa2UFgkFdbzJc8dz+4eNRX/s=;
+	b=Yu9sFQlH0aU2uiyswSmmAoakimXP5WNypPFbCkrAXJ0kfa9gPv4Db191nvVuxJOkVi
+	qLDChryuw0ouUkAIRnhd28V6i19KfVwJY0qlrc+1kosius1d2ifGEC1eYcbnlR619OLX
+	88ZvsoDSlQA/nxH/hf17zOpqF09ftzqkpztbW/RYKtUCtexa62iN/6Y8C6kxVqdU9Dmk
+	AaVVr132KhkpomFQHAgB2Wtwp8g+kkj6AQzKiMQDGq3XPOE58Q35xjU+NvoZPidX7oEq
+	qyIF/RJ5FReASJYUSEj9W7b9Cf2tli4nJ4c/9ZvBPs5ZbZaUMu7Q9cP5wBFdsWMUqWol
+	iY2Q==
+MIME-Version: 1.0
+X-Received: by 10.182.153.226 with SMTP id vj2mr8686801obb.61.1447339152585;
+	Thu, 12 Nov 2015 06:39:12 -0800 (PST)
+Received: by 10.76.75.135 with HTTP; Thu, 12 Nov 2015 06:39:12 -0800 (PST)
 In-Reply-To: <1447338183-9675-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1447338183-9675-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-oe 9/9] phpmyadmin: exclude bash dependency with SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS
+Date: Thu, 12 Nov 2015 15:39:12 +0100
+Message-ID: <CALbNGRTs5LyeazLDrmKrrJfYo0NVBaW3uUVe7jxFpWQus-daEA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe 1/9] ipsec-tools: set MACHINE_ARCH, because it depends on kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,36 +43,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 14:23:00 -0000
+X-List-Received-Date: Thu, 12 Nov 2015 14:39:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-* see:
-  http://lists.openembedded.org/pipermail/openembedded-devel/2015-September/103271.html
-* fixes:
-ERROR: phpmyadmin different signature for task do_package_write_ipk.sigdata between qemux86copy and qemuarm
-runtaskdeps changed from ['bashbash_4.3.30.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'phpmyadminphpmyadmin_4.4.9.bb.do_package', 'phpmyadminphpmyadmin_4.4.9.bb.do_packagedata', 'pseudopseudo_1.7.4.bb.do_populate_sysroot:virtual:native'] to ['bashbash_4.3.30.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'phpmyadminphpmyadmin_4.4.9.bb.do_package', 'phpmyadminphpmyadmin_4.4.9.bb.do_packagedata', 'pseudopseudo_1.7.4.bb.do_populate_sysroot:virtual:native']
-openembedded-core/meta/recipes-extended/bash/bash_4.3.30.bb.do_packagedata with hash c08b791d0f860a835a911f5a4c9a32d9
- changed to
-openembedded-core/meta/recipes-extended/bash/bash_4.3.30.bb.do_packagedata with hash 91674ffdfc796e4ab503093d2c8379da
-Hash for dependent task bashbash_4.3.30.bb.do_packagedata changed from c08b791d0f860a835a911f5a4c9a32d9 to 91674ffdfc796e4ab503093d2c8379da
+On Thu, Nov 12, 2015 at 3:22 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> * see:
+>   http://lists.openembedded.org/pipermail/openembedded-devel/2015-Septemb=
+er/103271.html
+> * fixes:
+> ERROR: ipsec-tools different signature for task do_configure.sigdata betw=
+een qemux86copy and qemux86
+> runtaskdeps changed from ['autoconfautoconf_2.69.bb.do_populate_sysroot:v=
+irtual:native', 'automakeautomake_1.15.bb.do_populate_sysroot:virtual:nativ=
+e', 'bisonbison_3.0.4.bb.do_populate_sysroot:virtual:native', 'flexflex_2.5=
+.39.bb.do_populate_sysroot:virtual:native', 'gccgcc-cross_5.2.bb.do_populat=
+e_sysroot', 'gccgcc-runtime_5.2.bb.do_populate_sysroot', 'glibcglibc_2.22.b=
+b.do_populate_sysroot', 'gnu-configgnu-config_git.bb.do_populate_sysroot:vi=
+rtual:native', 'ipsec-toolsipsec-tools_0.8.2.bb.do_patch', 'libtoollibtool-=
+cross_2.4.6.bb.do_populate_sysroot', 'libtoollibtool-native_2.4.6.bb.do_pop=
+ulate_sysroot', 'linuxlinux-yocto_4.1.bb.do_populate_sysroot', 'opensslopen=
+ssl_1.0.2d.bb.do_populate_sysroot', 'readlinereadline_6.3.bb.do_populate_sy=
+sroot', 'systemdsystemd-systemctl-native.bb.do_populate_sysroot']
+> to
+> ['autoconfautoconf_2.69.bb.do_populate_sysroot:virtual:native', 'automake=
+automake_1.15.bb.do_populate_sysroot:virtual:native', 'bisonbison_3.0.4.bb.=
+do_populate_sysroot:virtual:native', 'flexflex_2.5.39.bb.do_populate_sysroo=
+t:virtual:native', 'gccgcc-cross_5.2.bb.do_populate_sysroot', 'gccgcc-runti=
+me_5.2.bb.do_populate_sysroot', 'glibcglibc_2.22.bb.do_populate_sysroot', '=
+gnu-configgnu-config_git.bb.do_populate_sysroot:virtual:native', 'ipsec-too=
+lsipsec-tools_0.8.2.bb.do_patch', 'libtoollibtool-cross_2.4.6.bb.do_populat=
+e_sysroot', 'libtoollibtool-native_2.4.6.bb.do_populate_sysroot', 'linuxlin=
+ux-yocto_4.1.bb.do_populate_sysroot', 'opensslopenssl_1.0.2d.bb.do_populate=
+_sysroot', 'readlinereadline_6.3.bb.do_populate_sysroot', 'systemdsystemd-s=
+ystemctl-native.bb.do_populate_sysroot']
+> openembedded-core/meta/recipes-kernel/linux/linux-yocto_4.1.bb.do_populat=
+e_sysroot with hash 1a8aa7a50a6cf3ebf5401af43dd6bf3b
+>  changed to
+> openembedded-core/meta/recipes-kernel/linux/linux-yocto_4.1.bb.do_populat=
+e_sysroot with hash 143d2686a37f592891fb2aa6fa9b752e
+> Hash for dependent task linuxlinux-yocto_4.1.bb.do_populate_sysroot chang=
+ed from 1a8aa7a50a6cf3ebf5401af43dd6bf3b to 143d2686a37f592891fb2aa6fa9b752=
+e
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.=
+2.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+> index 8ee81f8..d9f1212 100644
+> --- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+> +++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+> @@ -7,6 +7,8 @@ LIC_FILES_CHKSUM =3D "file://src/libipsec/pfkey.c;beginli=
+ne=3D6;endline=3D31;md5=3Dbc9b7
+>
+>  DEPENDS =3D "virtual/kernel openssl readline flex-native bison-native"
+>
+> +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+> +
+>  SRC_URI =3D "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-=
+tools-${PV}.tar.bz2 \
+>             file://0002-Don-t-link-against-libfl.patch \
+>             file://configure.patch \
+> --
+> 2.6.3
+>
+Maybe I am wrong: I think there were times when depending on kernel
+made recipe machine specific. I somehow get the feeling that this is
+the wrong fix...
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-webserver/conf/layer.conf | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta-webserver/conf/layer.conf b/meta-webserver/conf/layer.conf
-index a4d6a27..bb508a8 100644
---- a/meta-webserver/conf/layer.conf
-+++ b/meta-webserver/conf/layer.conf
-@@ -18,3 +18,7 @@ LAYERVERSION_webserver = "1"
- LAYERDEPENDS_webserver = "core"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
-+
-+SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-+  phpmyadmin->bash \
-+"
--- 
-2.6.3
-
+Andreas
 
