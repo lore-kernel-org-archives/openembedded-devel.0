@@ -1,34 +1,40 @@
-Return-Path: <george.mccollister@gmail.com>
-Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
-	[209.85.213.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 726F57722C
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 18:35:58 +0000 (UTC)
-Received: by igbhv6 with SMTP id hv6so46700738igb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 10:35:58 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id A5C5F77242;
+	Thu, 12 Nov 2015 18:58:52 +0000 (UTC)
+Received: by wmww144 with SMTP id w144so213611180wmw.1;
+	Thu, 12 Nov 2015 10:58:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=CpfTlWNklLgTUyfcPos/zAQ/4X4GEXrhEyGiKaSzgQY=;
-	b=wWGT9Mx6Nc4PST3UtDIJ2Qx320zMWAV922FVT3Laxeaydi5d7U3aHIbsczkDEClZEs
-	AADcl3T4uqMDcwH311VGi9m42zCuEkUrnPhms5mW3bFwwZQnVd2do+ysEoaDLt7R/cm8
-	x+TXpxdrq0e/L4C7pyY7FnJWSflhMYs16g3PYi0IdtrQkzJdYiuFp3E7YXaSGvUyYOVX
-	9uRjy1Hk6wF5wxzitBahkSLpCXdilH7oJRQZ/6OrJVNAmVG3E1RgoPsE6na5Aqp0YXQp
-	54Kb7lNTnto3aTEIyF9om4nNF0Aq/KD6xENiV0vSYfE1NOj4FMzGv5FOwbG16DTfY9r+
-	518A==
-X-Received: by 10.50.131.234 with SMTP id op10mr40002869igb.58.1447353358335; 
-	Thu, 12 Nov 2015 10:35:58 -0800 (PST)
-Received: from localhost.localdomain (mail.novatech-llc.com. [64.126.95.172])
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=W4F3Z598IereMruzIXJFwyXnb27TQ5cGicirU7JnZwo=;
+	b=IUOPLGd1kffWuoFp0BCQ1rsN07uC8Rx4sgUaXJKp6ztIQ9XZPGbKt1kQRIu9wPtUdE
+	hX5YoLVWGt9GFYbrZQ4eSadjWEXTA1Y5OnxTo9U13W0VuMbtl/waBBplPHcgUIn19aez
+	/Fh7AXmEs6gqeVZ/0QONQSb/kwtr2tu1Hl/mGc73EfyEYdu1zRP6uY5O6efCUVekt/41
+	dUEgkM23/xey3kOEelYitSQKW6gxpP74NUZBZT81czCeY62sMLmxCwiBPiqfRizVNN4b
+	gbRHUMEvpMR+7qTQzbia9usuCfDDiuPB8BfQH8frf31xcRxg9IhkddDgS3AGq3vGBP7C
+	iBKg==
+X-Received: by 10.28.63.22 with SMTP id m22mr33704771wma.58.1447354732168;
+	Thu, 12 Nov 2015 10:58:52 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	qb2sm2975142igb.10.2015.11.12.10.35.56
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 12 Nov 2015 10:35:57 -0800 (PST)
-From: George McCollister <george.mccollister@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Nov 2015 12:35:36 -0600
-Message-Id: <1447353336-13579-1-git-send-email-george.mccollister@gmail.com>
-X-Mailer: git-send-email 2.4.5
-Subject: [PATCH][meta-oe] postgresql: Don't symlink to perl if it's disabled
+	at4sm15903478wjc.9.2015.11.12.10.58.50
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Nov 2015 10:58:50 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 12 Nov 2015 19:59:07 +0100
+To: alexander.kanavin@linux.intel.com
+Message-ID: <20151112185907.GL2574@jama>
+References: <58488.10.252.13.130.1447346734.squirrel@linux.intel.com>
+	<20151112171915.GK2574@jama>
+	<58904.10.252.13.130.1447349938.squirrel@linux.intel.com>
+MIME-Version: 1.0
+In-Reply-To: <58904.10.252.13.130.1447349938.squirrel@linux.intel.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] qt4 moves out of oe-core - to meta-qt4, or to meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,46 +48,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 18:36:00 -0000
+X-List-Received-Date: Thu, 12 Nov 2015 18:58:53 -0000
+X-Groupsio-MsgNum: 58590
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="00hq2S6J2Jlg6EbK"
+Content-Disposition: inline
 
-Don't create a symlink to libperl.so if perl isn't in PACKAGECONFIG.
-Attempting to do so will fail if perl hasn't been built.
+--00hq2S6J2Jlg6EbK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: George McCollister <george.mccollister@gmail.com>
----
- meta-oe/recipes-support/postgresql/postgresql.inc | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+On Thu, Nov 12, 2015 at 07:38:58PM +0200, alexander.kanavin@linux.intel.com=
+ wrote:
+> > There is already enough meta-oe bloat moved from oe-core:
+> >
+> > http://lists.openembedded.org/pipermail/openembedded-core/2015-November=
+/112665.html
+> >
+> > WARN: qt-mobility-embedded: qt-mobility-embedded rdepends on glib-2.0, =
+but
+> > it isn't a build dependency?
+>=20
+> If increasing bloat is a problem, why do recipes in meta-oe need to be
+> maintained indefinitely? Old cruft can be dropped from meta-oe, just as it
+> is dropped from oe-core. Just ask the public if it's ok, set a timeframe,
+> and do it.
+>=20
+> qt-mobility in particular has been dead for several years, and doesn't
+> even have official upstream tarballs anymore. Why spend time fixing it?
 
-diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index f3ff225..dbc02a0 100644
---- a/meta-oe/recipes-support/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -141,14 +141,16 @@ do_configure() {
-         -e "/^TCLSH/s:=.*:= ${bindir}/tclsh:g" \
-     ${B}/src/Makefile.global
- 
--    # workaround perl package's libperl.so problem
--    # we are using perlnative so this perl should have same version
--    perl_version=`perl -v 2>/dev/null | \
--        sed -n 's/This is perl.*v[a-z ]*\([0-9]\.[0-9][0-9.]*\).*$/\1/p'`
--    if [ ! -h "${STAGING_LIBDIR}/perl/$perl_version/CORE/libperl.so" -a \
--         ! -h "${STAGING_LIBDIR}/libperl.so" ]; then
--        ln -sf ../../../libperl.so.5 \
--            ${STAGING_LIBDIR}/perl/$perl_version/CORE/libperl.so
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'perl', 'true', 'false', d)}; then
-+        # workaround perl package's libperl.so problem
-+        # we are using perlnative so this perl should have same version
-+        perl_version=`perl -v 2>/dev/null | \
-+            sed -n 's/This is perl.*v[a-z ]*\([0-9]\.[0-9][0-9.]*\).*$/\1/p'`
-+        if [ ! -h "${STAGING_LIBDIR}/perl/$perl_version/CORE/libperl.so" -a \
-+             ! -h "${STAGING_LIBDIR}/libperl.so" ]; then
-+            ln -sf ../../../libperl.so.5 \
-+                ${STAGING_LIBDIR}/perl/$perl_version/CORE/libperl.so
-+        fi
-     fi
- }
- 
--- 
-2.4.5
+That's why there is increasing number of PNBLACKLISTs with each release.
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--00hq2S6J2Jlg6EbK
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlZE4XsACgkQN1Ujt2V2gByO+ACbB87WSUnGp4f85wLbGsz7d88J
+bRoAniMWuR2yD+m71jStsPLGUqkJXX0/
+=C4ub
+-----END PGP SIGNATURE-----
+
+--00hq2S6J2Jlg6EbK--
