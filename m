@@ -1,34 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id BFF2C771EF
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E3647717F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 10:32:17 +0000 (UTC)
-Received: by wmww144 with SMTP id w144so194261546wmw.1
+	Thu, 12 Nov 2015 10:44:24 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tACAiNX4018678
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 02:32:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=BR6rxHOZKPUQmFXgzp5SikWEkUFO6UOZAB9Ps9vNGR4=;
-	b=yMPU/wTlJCKBdy81midC4+p3K/F2yYFykKvR7+VqNHjz11Wju8CggXwZl2QZQydMWY
-	nScrBr7nOmtjWJ1rYKbbHW2qx2+wboBISODyNErRqaq1gWOJiVmHGcUsTmbD4JYAXbOe
-	J0XWTJn2FqNmazuaxjSPBEG9X8Jhj1jNkH7pmP/RJ5eFM4ZXv2v0Z+fjwaGiXBG3q57O
-	E1OFKX7FzgirIbXsE7mMACSgnGqofogNEQNYf1RROHsQyM2RPBMSb2SqndWXd3De5C3t
-	ukbUYZEWkJADSixFY9iH6GmagrnxW2UYE9+LYk/Fc4eE5WC14Tj5MT4iqASM99zleFDO
-	jJrg==
-X-Received: by 10.194.191.229 with SMTP id hb5mr15433867wjc.123.1447324337651; 
-	Thu, 12 Nov 2015 02:32:17 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	v192sm13158254wmv.5.2015.11.12.02.32.16
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Nov 2015 02:32:16 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Nov 2015 11:32:32 +0100
-Message-Id: <1447324352-27951-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.6.3
-Subject: [PATCH][meta-oe] devicekit-power: add missing dependency on libgudev
+	Thu, 12 Nov 2015 02:44:24 -0800 (PST)
+Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Thu, 12 Nov 2015 02:44:23 -0800
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 12 Nov 2015 18:44:19 +0800
+Message-ID: <cover.1447324249.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH 0/6] waf-samba: fix build failure on targets unsupported by qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,41 +32,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 10:32:19 -0000
+X-List-Received-Date: Thu, 12 Nov 2015 10:44:24 -0000
+Content-Type: text/plain
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-networking/recipes-kernel/netmap/netmap-modules_git.bb | 2 +-
- meta-oe/recipes-support/devicekit/devicekit-power_014.bb    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+From: Jackie Huang <jackie.huang@windriver.com>
 
-diff --git a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-index c1c319d..6365fee 100644
---- a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-+++ b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-@@ -15,7 +15,7 @@ EXTRA_OECONF = "--kernel-dir=${STAGING_KERNEL_BUILDDIR} \
-                 --driver-suffix="-netmap" \
-                 "
- 
--EXTRA_OECONF += "--no-drivers=ixgbe"
-+EXTRA_OECONF += "--no-drivers=ixgbe --no-drivers=virtio_net.c"
- 
- LDFLAGS := "${@'${LDFLAGS}'.replace('-Wl,-O1', '')}"
- LDFLAGS := "${@'${LDFLAGS}'.replace('-Wl,--as-needed', '')}"
-diff --git a/meta-oe/recipes-support/devicekit/devicekit-power_014.bb b/meta-oe/recipes-support/devicekit/devicekit-power_014.bb
-index 0c1245f..c2b7e66 100644
---- a/meta-oe/recipes-support/devicekit/devicekit-power_014.bb
-+++ b/meta-oe/recipes-support/devicekit/devicekit-power_014.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Devicekit power"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=756cf97871f77233638937da21b025d3"
- 
--DEPENDS = "libusb-compat libusb1 udev glib-2.0 dbus-glib polkit intltool-native"
-+DEPENDS = "libusb-compat libusb1 udev glib-2.0 dbus-glib polkit intltool-native libgudev"
- 
- SRC_URI = "http://upower.freedesktop.org/releases/DeviceKit-power-${PV}.tar.gz;name=archive"
- SRC_URI[archive.md5sum] = "935d37f1e14b3c8a1d6dabcd9a38d3ca"
+Comments:
+
+samba and required packages started to use waf build
+system since 4.x, and the waf bbclass use qemu user mode
+to help configure checking by default, but not all targets
+are supported by qemu user mode, so it definitely fail on those
+targets (it failed on our fsl_t2xxx and cav-octeon3).
+
+The solution here it so use waf cross-answer mode to avoid
+using qemu, but we need to prepare the cross-answers, it's
+easy and error-prone if we try to get these cross-answers manually,
+but fortunately, waf provides another mode to help generate
+them in newer version, so upgrade related packages and
+backport patches for samba (I also tried to upgrad samba
+to 4.3.1, but it still doesn't work in my runtime testing
+after some bug fixing, so I keep in the current version for
+now, I may upgrade it sometime later if I get better understand
+about the new version).
+
+Build tested on:
+
+intel-x86-64
+qemux86
+qemuarm
+qemuarma9
+qemuarm64
+qemumips
+qemumips64
+fsl-ls20xx
+fsl-t2xxx
+xilinx-zynq
+cav-octeon3
+
+
+--
+The following changes since commit 721a2cabf352085d34dd14c22e71914d3429ca59:
+
+  ntp: upgrade 4.2.8p3 -> 4.2.8p4 (2015-11-11 12:12:08 +0100)
+
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib.git jhuang0/d-samba_answer_cross_151112-2
+  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/d-samba_answer_cross_151112-2
+
+Jackie Huang (6):
+  libtevent: upgrade to 0.9.25
+  talloc: upgrade to 2.1.3
+  libldb: upgrade to 1.1.21
+  libtdb: upgrade to 1.3.7
+  samba: backport patches for cross-compiling
+  waf-samba.bbclass: add cross-answers option and files
+
+ meta-oe/classes/waf-samba.bbclass                  |  43 +++++-
+ meta-oe/conf/layer.conf                            |   1 +
+ meta-oe/files/waf-cross-answers/README             |   3 +
+ .../waf-cross-answers/cross-answers-aarch64.txt    |  38 +++++
+ .../files/waf-cross-answers/cross-answers-arm.txt  |  39 +++++
+ .../files/waf-cross-answers/cross-answers-i586.txt |  39 +++++
+ .../files/waf-cross-answers/cross-answers-mips.txt |  39 +++++
+ .../waf-cross-answers/cross-answers-mips64.txt     |  38 +++++
+ .../waf-cross-answers/cross-answers-powerpc.txt    |  39 +++++
+ .../waf-cross-answers/cross-answers-powerpc64.txt  |  39 +++++
+ .../waf-cross-answers/cross-answers-x86_64.txt     |  38 +++++
+ ...1-waf-sanitize-and-fix-added-cross-answer.patch |  60 ++++++++
+ ...-Adds-a-new-mode-to-samba-cross-compiling.patch | 112 ++++++++++++++
+ ...-readability-of-cross-answers-generated-b.patch |  66 ++++++++
+ ...wafsamba-CHECK_SIZEOF-cross-compile-frien.patch |  72 +++++++++
+ .../0005-build-unify-and-fix-endian-tests.patch    | 169 +++++++++++++++++++++
+ ...006-avoid-using-colon-in-the-checking-msg.patch |  32 ++++
+ ...sing-of-cross-answers-file-in-case-answer.patch |  36 +++++
+ meta-oe/recipes-connectivity/samba/samba_4.1.12.bb |   7 +
+ .../libldb/{libldb_1.1.17.bb => libldb_1.1.21.bb}  |   4 +-
+ .../libtdb/{libtdb_1.3.0.bb => libtdb_1.3.7.bb}    |   4 +-
+ .../{libtevent_0.9.21.bb => libtevent_0.9.25.bb}   |   4 +-
+ .../talloc/{talloc_2.1.1.bb => talloc_2.1.3.bb}    |  12 +-
+ 23 files changed, 921 insertions(+), 13 deletions(-)
+ create mode 100644 meta-oe/files/waf-cross-answers/README
+ create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-aarch64.txt
+ create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-arm.txt
+ create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-i586.txt
+ create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-mips.txt
+ create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-mips64.txt
+ create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-powerpc.txt
+ create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-powerpc64.txt
+ create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-x86_64.txt
+ create mode 100644 meta-oe/recipes-connectivity/samba/samba-4.1.12/0001-waf-sanitize-and-fix-added-cross-answer.patch
+ create mode 100644 meta-oe/recipes-connectivity/samba/samba-4.1.12/0002-Adds-a-new-mode-to-samba-cross-compiling.patch
+ create mode 100644 meta-oe/recipes-connectivity/samba/samba-4.1.12/0003-waf-improve-readability-of-cross-answers-generated-b.patch
+ create mode 100644 meta-oe/recipes-connectivity/samba/samba-4.1.12/0004-build-make-wafsamba-CHECK_SIZEOF-cross-compile-frien.patch
+ create mode 100644 meta-oe/recipes-connectivity/samba/samba-4.1.12/0005-build-unify-and-fix-endian-tests.patch
+ create mode 100644 meta-oe/recipes-connectivity/samba/samba-4.1.12/0006-avoid-using-colon-in-the-checking-msg.patch
+ create mode 100644 meta-oe/recipes-connectivity/samba/samba-4.1.12/0007-waf-Fix-parsing-of-cross-answers-file-in-case-answer.patch
+ rename meta-oe/recipes-support/libldb/{libldb_1.1.17.bb => libldb_1.1.21.bb} (92%)
+ rename meta-oe/recipes-support/libtdb/{libtdb_1.3.0.bb => libtdb_1.3.7.bb} (87%)
+ rename meta-oe/recipes-support/libtevent/{libtevent_0.9.21.bb => libtevent_0.9.25.bb} (86%)
+ rename meta-oe/recipes-support/talloc/{talloc_2.1.1.bb => talloc_2.1.3.bb} (80%)
+
 -- 
-2.6.3
+1.9.1
 
 
