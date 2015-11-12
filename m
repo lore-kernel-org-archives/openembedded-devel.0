@@ -1,46 +1,52 @@
-Return-Path: <zoltan.kuscsik@linaro.org>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 589DE77116
+Return-Path: <jbriance@cisco.com>
+Received: from alln-iport-6.cisco.com (alln-iport-6.cisco.com [173.37.142.93])
+	by mail.openembedded.org (Postfix) with ESMTP id C22D8771CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 06:08:17 +0000 (UTC)
-Received: by wmww144 with SMTP id w144so73474975wmw.0
+	Thu, 12 Nov 2015 09:26:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=cisco.com; i=@cisco.com; l=3482; q=dns/txt; s=iport;
+	t=1447320403; x=1448530003;
+	h=from:to:subject:date:message-id:references:in-reply-to:
+	content-transfer-encoding:mime-version;
+	bh=t5CsgdZRlv+Epvj3e9Zb4zgupjne3428rsAN4KhImG0=;
+	b=S5wRZVN3BA/r623SsyEnTiRX6mgsQSyrhJvb0pqu8+Jp1WTax53lj/c9
+	h4p0jlwHKoIHNONTf1BSIRIadTpg+t39DBfYi9XSQrzGwlrcg7TBg3LQl
+	Rj+kA/ObUdvbKfOwLTHW9Y04YI8DCgGB99EfnECvDYICk4Wl/C4F28gHh s=;
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: A0D9AQAYWkRW/4wNJK1egztTbwa+NgENgWUXCoI+gmdKAoE2OBQBAQEBAQEBfwuENAEBAQMBAQEBNzQQBwQCAQgRBAEBAR4JByEGAQoUCQgCBBMIiBEDCggNvnoNhGMBAQEBAQEBAQEBAQEBAQEBAQEBGoZUhH6CU4FVAgsGAYJ/TYExBZJng2EBhRyFIHWBboIrjQiFRodSAR8BAUKCRIFAcoNzAQgXI4EHAQEB
+X-IronPort-AV: E=Sophos;i="5.20,281,1444694400"; d="scan'208";a="207400497"
+Received: from alln-core-7.cisco.com ([173.36.13.140])
+	by alln-iport-6.cisco.com with ESMTP; 12 Nov 2015 09:26:38 +0000
+Received: from XCH-RCD-008.cisco.com (xch-rcd-008.cisco.com [173.37.102.18])
+	by alln-core-7.cisco.com (8.14.5/8.14.5) with ESMTP id tAC9QcbE011265
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 22:08:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linaro_org.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=avH93Ro773WZB7c62HJLp8ddznQbXL7cgqeJR/KAxpo=;
-	b=ej8I1Pizhf+qNNF/Fi+nk0tH8+vYsBqu0PvuT40ThT+ZxRy0/pga/m+TLmGLIqdVOm
-	JFUM6yCMGKomxkb/DHNA3orSdjTpooTqEsbk4vj8y3KY2gjK4gzXhA9qzNQNsjZIgPUJ
-	0j/L5CflU1oKo95IzTh6CKyZtFXFVpUNuZYLEu21DUU6yprJ9FHlN/xAB95EOSrchEZI
-	WgOGoLHh8n8IEWBuLg5/bI/VMX/oZ3LF9zhF6RN/wSkYv83weq2+Nvun/oEbGCLdXvQo
-	oEMNOKbMAI1jzcUieGA+gZH2vBbbzIQ5PSAUns3VNwBUbe72fJO8gFTBjbOxakEiw56G
-	Qpxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=avH93Ro773WZB7c62HJLp8ddznQbXL7cgqeJR/KAxpo=;
-	b=PeE/AGpjbWYq99b7eVkdRj8zMrCSikHTiwXPD371ZZSz0bxDLldF4bQnkP8672VoqO
-	Ft5OJy+sk/l8yf844/FgJdJkthtPgt98NAT9DNw1Lm28jGBoCLUQJ0Cz0gFVcTYXyAQL
-	Bt/gXTFtYlZuOFHBCLzbkYqgfQJkBWh5Uw9fQfcLHePugA1Yp0AvUUgoe8qjEKxJfSbg
-	qGJL4crcE4nC4t0rGgR6hHebyRt9oV18uvP8XN1NYqyWlqumQE0KeBjBFyqaMEr+Hk4G
-	IDKrd+rtXKcnDRJsSWXo1U7ygFWtgEpP+LC8CCyCIiALeZfR3tN8UUKMFwQ9pzdtz2Ve
-	JGSw==
-X-Gm-Message-State: ALoCoQm3uOV2BEjVOVVu4KKH6nmQn3V5pbZcZabsJvBaLzZe85jwHcch+gKRnZxUyKSxPc80UM6G
-X-Received: by 10.28.156.75 with SMTP id f72mr27332156wme.91.1447308497229;
-	Wed, 11 Nov 2015 22:08:17 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.27.127.213 with HTTP; Wed, 11 Nov 2015 22:07:57 -0800 (PST)
-In-Reply-To: <CAJ86T=X_4vtGKXxW5y8e3zS-tv9fAnnmsOPFFuOrZp8wHdJMCA@mail.gmail.com>
+	Thu, 12 Nov 2015 09:26:38 GMT
+Received: from xch-aln-008.cisco.com (173.36.7.18) by XCH-RCD-008.cisco.com
+	(173.37.102.18) with Microsoft SMTP Server (TLS) id 15.0.1104.5;
+	Thu, 12 Nov 2015 03:26:37 -0600
+Received: from xch-aln-008.cisco.com ([173.36.7.18]) by XCH-ALN-008.cisco.com
+	([173.36.7.18]) with mapi id 15.00.1104.000;
+	Thu, 12 Nov 2015 03:26:37 -0600
+From: "Julien Brianceau (jbriance)" <jbriance@cisco.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-browser][PATCH 1/2] cef3: use PARALLEL_MAKE to
+	control build parallelism
+Thread-Index: AQHRHETKdwaON8pMQkqkPZymr4aUVp6Wz4AAgAF9f4D//9E9UA==
+Date: Thu, 12 Nov 2015 09:26:37 +0000
+Message-ID: <51bac70d8a574673855bba1aa7181b72@XCH-ALN-008.cisco.com>
 References: <1447217296-7145-1-git-send-email-armccurdy@gmail.com>
 	<CAAzKXngADOxQ-rOfF1DBSNqhV-GUPookXZjLkTZ=CgOf4ks7Eg@mail.gmail.com>
 	<CAJ86T=X_4vtGKXxW5y8e3zS-tv9fAnnmsOPFFuOrZp8wHdJMCA@mail.gmail.com>
-From: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
-Date: Thu, 12 Nov 2015 07:07:57 +0100
-Message-ID: <CAAzKXnh-muNFgKm+ndHzLgMeSk7X-Zq3f3NWaenPHF-LkQgJ=w@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CAAzKXnh-muNFgKm+ndHzLgMeSk7X-Zq3f3NWaenPHF-LkQgJ=w@mail.gmail.com>
+In-Reply-To: <CAAzKXnh-muNFgKm+ndHzLgMeSk7X-Zq3f3NWaenPHF-LkQgJ=w@mail.gmail.com>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.60.62.142]
+MIME-Version: 1.0
 Subject: Re: [meta-browser][PATCH 1/2] cef3: use PARALLEL_MAKE to control build parallelism
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -55,8 +61,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 06:08:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 12 Nov 2015 09:26:44 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+I've added -j in http://patches.openembedded.org/patch/100133/, because chr=
+omium recipe wasn't fair to other recipes.
+For instance, if bitbake is processing 8 compile tasks (incl. chromium) in =
+parallel on a 24 cores machine, 7 recipes will
+be compiled with -j${BB_NUMBER_THREADS} whereas chromium will use something=
+ like -j24
+
+Just out of my curiosity, what "${PARALLEL_MAKE}" brings compared to "-j${B=
+B_NUMBER_THREADS}" ?
+
+
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
+d-devel-bounces@lists.openembedded.org] On Behalf Of Zoltan Kuscsik
+Sent: jeudi 12 novembre 2015 07:08
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-browser][PATCH 1/2] cef3: use PARALLEL_MAKE to cont=
+rol build parallelism
 
 Fair enough.
 
@@ -81,7 +108,8 @@ On 11 November 2015 at 08:22, Andre McCurdy <armccurdy@gmail.com> wrote:
 >
 > > Z
 > >
-> > On 11 November 2015 at 05:48, Andre McCurdy <armccurdy@gmail.com> wrote:
+> > On 11 November 2015 at 05:48, Andre McCurdy <armccurdy@gmail.com> wrote=
+:
 > >
 > >> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 > >> ---
@@ -133,10 +161,15 @@ On 11 November 2015 at 08:22, Andre McCurdy <armccurdy@gmail.com> wrote:
 
 
 
--- 
+--=20
 Zoltan Kuscsik
 
 Senior Software Developer, Linaro Digital Home Group
 email: zoltan.kuscsik@linaro.org
 IRC: zoli_ on irc.linaro.org
+--=20
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
