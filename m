@@ -1,38 +1,34 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id D7B9377202
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id EBC7777202
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 15:23:01 +0000 (UTC)
-Received: by wmec201 with SMTP id c201so38361448wme.0
+	Thu, 12 Nov 2015 15:35:26 +0000 (UTC)
+Received: by wmdw130 with SMTP id w130so159413301wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 07:23:01 -0800 (PST)
+	Thu, 12 Nov 2015 07:35:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to;
-	bh=DMVRKq92B81WRI5uroa9RrDK7DW9zF0W5Jti+aP5/Iw=;
-	b=BTn8mUAyuLhwVWzGif5cOhZQ5jgq+Sie1krElEI7rFQFzR2DE6ZvJY8dKFXHzlZjOk
-	KknjzxqBPRavHnvRptnKUdmBlUNt7AXIVvQgO1Gh8rgu6oI6SQVbqmIEQo4hbK34Hhhu
-	cYMZaDSTtYLc2W/OdMTnivhLe7qPDX/nr9mqGdgfwoDv8rgFK6XgOlKzj0JW26MibC8U
-	5a+9KTwCndrpytt62taUpQweRIw+bzFNH0wlhCKKRtSonQGE+MvuvSI8F8JL8XdNsQfD
-	hH+PTbSOYJCquCT1OxxQXds/cWHjiSZmgDtOtvgD5jV71vTE3dbwtAL3ypSkaFfkKu9z
-	soeQ==
-X-Received: by 10.28.213.212 with SMTP id m203mr45141252wmg.33.1447341781071; 
-	Thu, 12 Nov 2015 07:23:01 -0800 (PST)
-Received: from walter.muppets.liwing.de (p578b540c.dip0.t-ipconnect.de.
-	[87.139.84.12]) by smtp.gmail.com with ESMTPSA id
-	gl4sm7878846wjd.17.2015.11.12.07.23.00
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 12 Nov 2015 07:23:00 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
-From: Jens Rehsack <rehsack@gmail.com>
-In-Reply-To: <1447327014-27893-1-git-send-email-jackie.huang@windriver.com>
-Date: Thu, 12 Nov 2015 16:22:59 +0100
-Message-Id: <BA61B1AD-E729-4B0E-ABF1-8B5CC3E2768B@gmail.com>
-References: <1447327014-27893-1-git-send-email-jackie.huang@windriver.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=vgVQqly2Kbf/BeYKdTtXNdisBk3IOjUtQmIx5bb7zpk=;
+	b=KOpF98xrAecJtwvvWUcFO0nCx8hfNOopan4hNVzm7w/aA63yPbPkhoHHvG7qmU1eM6
+	cx9aNtfdofTjy9uo9NKVFKNusYnW1/fFJRlQzVOBkUdSUf5RGI58RR+tLuxIx6s+og4S
+	BnBmPhLo9kgJFKijMn/lnIoCiG3BlKi/raLjet/u/4CVjVQ52638R0WlhiiI4e2PY6Zj
+	DVc6wjx7CEAwkTXBpcHLg7VJmc+OrUBqP34WteQ/CjMZ5YUIPfl8sQp91pBVjBjHOfng
+	QwFFyGXSVn4woji1PEZgx+EFTZ2+3RvjrE4p3UlWfvQeEhTtm0BiIxvWTSIGIEev5kth
+	KrAw==
+X-Received: by 10.28.4.212 with SMTP id 203mr18665789wme.89.1447342526586;
+	Thu, 12 Nov 2015 07:35:26 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	it4sm15044302wjb.0.2015.11.12.07.35.24
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Nov 2015 07:35:24 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.2104)
-Subject: Re: [v2][PATCH] talloc: upgrade to 2.1.3
+Date: Thu, 12 Nov 2015 16:35:40 +0100
+Message-Id: <1447342540-4196-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.6.3
+Subject: [PATCH][meta-efl] packagegroup-efl-sdk: exclude packagegroup-core-sdk dependency with SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,92 +42,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 15:23:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 12 Nov 2015 15:35:31 -0000
 
+* packagegroup-core-sdk is MACHINE_ARCH since:
+  commit 66ff089603618dc9b22532509bf39274bf6adf67
+  Author: Dan McGregor <dan.mcgregor@usask.ca>
+  Date:   Wed Dec 10 20:14:57 2014 -0600
+  packagegroup-core-sdk: add gcc-sanitizers to core SDK
+* see:
+  http://lists.openembedded.org/pipermail/openembedded-devel/2015-September/103271.html
+* fixes:
+ERROR: packagegroup-efl-sdk different signature for task do_package_write_ipk.sigdata between qemux86copy and qemux86
+runtaskdeps changed from ['efledbus_1.7.9.bb.do_packagedata', 'eflefl_1.15.1.bb.do_packagedata', 'eflelementary_1.15.1.bb.do_packagedata', 'lttnglttng-ust_git.bb.do_packagedata', 'luajitluajit_2.0.4.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'packagegroupspackagegroup-core-sdk.bb.do_packagedata', 'packagegroupspackagegroup-efl-sdk.bb.do_package', 'packagegroupspackagegroup-efl-sdk.bb.do_packagedata', 'pseudopseudo_1.7.4.bb.do_populate_sysroot:virtual:native', 'valgrindvalgrind_3.10.1.bb.do_packagedata']
+to
+['efledbus_1.7.9.bb.do_packagedata', 'eflefl_1.15.1.bb.do_packagedata', 'eflelementary_1.15.1.bb.do_packagedata', 'lttnglttng-ust_git.bb.do_packagedata', 'luajitluajit_2.0.4.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'packagegroupspackagegroup-core-sdk.bb.do_packagedata', 'packagegroupspackagegroup-efl-sdk.bb.do_package', 'packagegroupspackagegroup-efl-sdk.bb.do_packagedata', 'pseudopseudo_1.7.4.bb.do_populate_sysroot:virtual:native', 'valgrindvalgrind_3.10.1.bb.do_packagedata']
+openembedded-core/meta/recipes-core/packagegroups/packagegroup-core-sdk.bb.do_packagedata with hash 34ab468f4471fb07663ce2952ad545b5
+ changed to
+openembedded-core/meta/recipes-core/packagegroups/packagegroup-core-sdk.bb.do_packagedata with hash 0a589cc6975e9a4d4fdbdc63bc76b84f
+Hash for dependent task packagegroupspackagegroup-core-sdk.bb.do_packagedata changed from 34ab468f4471fb07663ce2952ad545b5 to 0a589cc6975e9a4d4fdbdc63bc76b84f
 
-> Am 12.11.2015 um 12:16 schrieb jackie.huang@windriver.com:
->=20
-> From: Jackie Huang <jackie.huang@windriver.com>
->=20
-> Changes:
-> - use ${SOLIBS} and ${SOLIBSDEV} instead of hardcoded suffix
->=20
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
-> .../talloc/{talloc_2.1.1.bb =3D> talloc_2.1.3.bb}        | 18 =
-++++++++----------
-> 1 file changed, 8 insertions(+), 10 deletions(-)
-> rename meta-oe/recipes-support/talloc/{talloc_2.1.1.bb =3D> =
-talloc_2.1.3.bb} (69%)
->=20
-> diff --git a/meta-oe/recipes-support/talloc/talloc_2.1.1.bb =
-b/meta-oe/recipes-support/talloc/talloc_2.1.3.bb
-> similarity index 69%
-> rename from meta-oe/recipes-support/talloc/talloc_2.1.1.bb
-> rename to meta-oe/recipes-support/talloc/talloc_2.1.3.bb
-> index 89c390f..83c8f8f 100644
-> --- a/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
-> +++ b/meta-oe/recipes-support/talloc/talloc_2.1.3.bb
-> @@ -7,8 +7,8 @@ SRC_URI =3D =
-"http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar.gz"
-> LIC_FILES_CHKSUM =3D =
-"file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=3Dbfccfe952269=
-fff2b407dd11f2f3083b \
->                     =
-file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=3Dc79ff39f19dfec=
-6d293b95dea7b07891"
->=20
-> -SRC_URI[md5sum] =3D "5dffb86414218a91864ed4453ba9be07"
-> -SRC_URI[sha256sum] =3D =
-"3e29ce6c3ba3c4f7c2d57ce8cf0fbc24c86618c519f2b2fb6a459025488b6174"
-> +SRC_URI[md5sum] =3D "3e285de2228ae67ff0a0f5cec658f627"
-> +SRC_URI[sha256sum] =3D =
-"7aa5f75b22d4ef9c737b25515f2a2837ddc13014ff4ac6e58dd9e311f41f2cb0"
->=20
-> inherit waf-samba
->=20
-> @@ -27,19 +27,17 @@ FILES_${PN} =3D ""
-> FILES_${PN}-dev =3D ""
-> FILES_${PN}-dbg =3D ""
->=20
-> -FILES_libtalloc =3D "${libdir}/libtalloc.so.2 \
-> -                   ${libdir}/libtalloc.so.2.1.1"
-> +FILES_libtalloc =3D "${libdir}/libtalloc${SOLIBS}"
-> FILES_libtalloc-dbg =3D "/usr/src/debug/ \
-> -                   ${libdir}/.debug/libtalloc.so.2.1.1"
-> +                   ${libdir}/.debug/libtalloc${SOLIBS}"
-> FILES_libtalloc-dev =3D "${includedir}/ \
-> -                   ${libdir}/libtalloc.so \
-> +                   ${libdir}/libtalloc${SOLIBSDEV} \
->                    ${libdir}/pkgconfig/"
->=20
-> FILES_pytalloc =3D =
-"${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
-> -                  ${libdir}/libpytalloc-util.so.2 \
-> -                  ${libdir}/libpytalloc-util.so.2.1.1 \
-> +                  ${libdir}/libpytalloc-util${SOLIBS} \
->                  "
-> FILES_pytalloc-dbg =3D =
-"${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
-> -                      ${libdir}/.debug/libpytalloc-util.so.2.1.1"
-> -FILES_pytalloc-dev =3D "${libdir}/libpytalloc-util.so"
-> +                      ${libdir}/.debug/libpytalloc-util${SOLIBS}"
-> +FILES_pytalloc-dev =3D "${libdir}/libpytalloc-util${SOLIBSDEV}"
-> RDEPENDS_pytalloc =3D "python"
-> --=20
-> 1.9.1
->=20
-> --=20
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/conf/layer.conf | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-
-I'm missing the fix discussed in =
-http://patchwork.openembedded.org/patch/104719/ - is talloc-dev not =
-empty with the update?
-
-Cheers
---=20
-Jens Rehsack - rehsack@gmail.com
+diff --git a/meta-efl/conf/layer.conf b/meta-efl/conf/layer.conf
+index ed132aa..ea90ce2 100644
+--- a/meta-efl/conf/layer.conf
++++ b/meta-efl/conf/layer.conf
+@@ -29,3 +29,7 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
+   e-wm-theme-illume-neo->e-wm \
+   e-wm-theme-b-and-w->e-wm \
+ "
++
++SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
++  packagegroup-efl-sdk->packagegroup-core-sdk \
++"
+-- 
+2.6.3
 
 
