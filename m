@@ -1,26 +1,40 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A7627720E
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DE147717F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 10:44:33 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tACAiX3s018684
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 12 Nov 2015 10:49:26 +0000 (UTC)
+Received: by wmdw130 with SMTP id w130so148566338wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 02:44:34 -0800 (PST)
-Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 12 Nov 2015 02:44:33 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 12 Nov 2015 18:44:25 +0800
-Message-ID: <da7e6dcaa2ff0e4ac3a38e7937a753b91584bd1a.1447324249.git.jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <cover.1447324249.git.jackie.huang@windriver.com>
+	Thu, 12 Nov 2015 02:49:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=bOU8erdtar1HCK8owZiCbE0pBRnStejJzPR9irMXO1Q=;
+	b=RLBqKEGxD3crhpFlBtFBgLlE9of31lic3eBMfBdZTXsvpmjmkbtdUM2xMKmBm37MfB
+	I0cQ4uMcSx6amTbmJ/DjbDM9VcmR8G7y3mWtcm+yuBkEuyM13OAM2xSl53uIJN6GrWrN
+	8rwT1TvRVTzX3Djx0+b7JDXbL72CmhCZEblGsM5zDan5UToWJ8A2nn9YeAOqhmuma1O+
+	9aUnP4gw851BHpoQBtL+O0Y17EiytAiB4gv5im8QboQ34rKFhltup3Tfz63AojaIFDoH
+	luQllI5rJ3L73EMv5rVU2CKjoJ9O2A4yUOc9tCB2mcjUFq3fEpYB21pCdMoS1LFbbs1i
+	Emyg==
+X-Received: by 10.28.189.5 with SMTP id n5mr12742897wmf.76.1447325366599;
+	Thu, 12 Nov 2015 02:49:26 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	bk2sm13803593wjc.3.2015.11.12.02.49.25
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Nov 2015 02:49:25 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 12 Nov 2015 11:49:42 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151112104942.GC2574@jama>
 References: <cover.1447324249.git.jackie.huang@windriver.com>
+	<003a6952d90ed5b8c4cb45964b5dae59dd7034ff.1447324249.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 6/6] waf-samba.bbclass: add cross-answers option and files
+In-Reply-To: <003a6952d90ed5b8c4cb45964b5dae59dd7034ff.1447324249.git.jackie.huang@windriver.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [PATCH 2/6] talloc: upgrade to 2.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,502 +48,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 10:44:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 12 Nov 2015 10:49:31 -0000
+X-Groupsio-MsgNum: 58545
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="/e2eDi0V/xtL+Mc8"
+Content-Disposition: inline
 
-From: Jackie Huang <jackie.huang@windriver.com>
+--/e2eDi0V/xtL+Mc8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
---cross-execute uses qemu to run cross-compiled binaries,
-it works fine for qemu supported targets, but it definitely
-will fail if the target is not supported by qemu. So we need
-to use the cross-answers option.
+On Thu, Nov 12, 2015 at 06:44:21PM +0800, jackie.huang@windriver.com wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> Changes:
+>  - use PV instead of hardcoded version number
+>=20
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  .../talloc/{talloc_2.1.1.bb =3D> talloc_2.1.3.bb}              | 12 ++++=
+++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
+>  rename meta-oe/recipes-support/talloc/{talloc_2.1.1.bb =3D> talloc_2.1.3=
+=2Ebb} (80%)
+>=20
+> diff --git a/meta-oe/recipes-support/talloc/talloc_2.1.1.bb b/meta-oe/rec=
+ipes-support/talloc/talloc_2.1.3.bb
+> similarity index 80%
+> rename from meta-oe/recipes-support/talloc/talloc_2.1.1.bb
+> rename to meta-oe/recipes-support/talloc/talloc_2.1.3.bb
+> index 89c390f..7784794 100644
+> --- a/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
+> +++ b/meta-oe/recipes-support/talloc/talloc_2.1.3.bb
+> @@ -7,8 +7,8 @@ SRC_URI =3D "http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar=
+=2Egz"
+>  LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/LGPL=
+-3.0;md5=3Dbfccfe952269fff2b407dd11f2f3083b \
+>                      file://${COREBASE}/meta/files/common-licenses/GPL-3.=
+0;md5=3Dc79ff39f19dfec6d293b95dea7b07891"
+> =20
+> -SRC_URI[md5sum] =3D "5dffb86414218a91864ed4453ba9be07"
+> -SRC_URI[sha256sum] =3D "3e29ce6c3ba3c4f7c2d57ce8cf0fbc24c86618c519f2b2fb=
+6a459025488b6174"
+> +SRC_URI[md5sum] =3D "3e285de2228ae67ff0a0f5cec658f627"
+> +SRC_URI[sha256sum] =3D "7aa5f75b22d4ef9c737b25515f2a2837ddc13014ff4ac6e5=
+8dd9e311f41f2cb0"
+> =20
+>  inherit waf-samba
+> =20
+> @@ -28,18 +28,18 @@ FILES_${PN}-dev =3D ""
+>  FILES_${PN}-dbg =3D ""
+> =20
+>  FILES_libtalloc =3D "${libdir}/libtalloc.so.2 \
+> -                   ${libdir}/libtalloc.so.2.1.1"
+> +                   ${libdir}/libtalloc.so.${PV}"
+>  FILES_libtalloc-dbg =3D "/usr/src/debug/ \
+> -                   ${libdir}/.debug/libtalloc.so.2.1.1"
+> +                   ${libdir}/.debug/libtalloc.so.${PV}"
 
-Added three methods and set 'answer' as default:
+Why not use ${SOLIBS} and ${SOLIBSDEV} variables?
 
-1. answers:
-   Only --cross-answers - try the cross-answers file, and if
-   there's no corresponding answer, add to the file and mark
-   the configure process as unfinished.
-2. exec:
-   Only --cross-execute - get the answer from cross-execute,
-   an emulator (qemu) is used to run cross-compiled binaries.
-3. both:
-   Try the cross-answers file first, and if there is no
-   corresponding answer, use cross-execute to get an answer,
-   and add that answer to the file.
+>  FILES_libtalloc-dev =3D "${includedir}/ \
+>                     ${libdir}/libtalloc.so \
+>                     ${libdir}/pkgconfig/"
+> =20
+>  FILES_pytalloc =3D "${libdir}/python${PYTHON_BASEVERSION}/site-packages/=
+* \
+>                    ${libdir}/libpytalloc-util.so.2 \
+> -                  ${libdir}/libpytalloc-util.so.2.1.1 \
+> +                  ${libdir}/libpytalloc-util.so.${PV} \
+>                   "
+>  FILES_pytalloc-dbg =3D "${libdir}/python${PYTHON_BASEVERSION}/site-packa=
+ges/.debug \
+> -                      ${libdir}/.debug/libpytalloc-util.so.2.1.1"
+> +                      ${libdir}/.debug/libpytalloc-util.so.${PV}"
+>  FILES_pytalloc-dev =3D "${libdir}/libpytalloc-util.so"
+>  RDEPENDS_pytalloc =3D "python"
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-The cross files in are all generated by qemu when the 'both'
-mode is enabled, and are placed in a common directory
-LAYERDIR/files/waf-cross-answers which is set as
-WAF_CROSS_ANSWERS_PATH in layer.conf of meta-oe,
-so that we don't have to put copies of them for each
-package (there are 5 packages inerit waf-samba for now)
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-oe/classes/waf-samba.bbclass                  | 43 +++++++++++++++++++++-
- meta-oe/conf/layer.conf                            |  1 +
- meta-oe/files/waf-cross-answers/README             |  3 ++
- .../waf-cross-answers/cross-answers-aarch64.txt    | 38 +++++++++++++++++++
- .../files/waf-cross-answers/cross-answers-arm.txt  | 39 ++++++++++++++++++++
- .../files/waf-cross-answers/cross-answers-i586.txt | 39 ++++++++++++++++++++
- .../files/waf-cross-answers/cross-answers-mips.txt | 39 ++++++++++++++++++++
- .../waf-cross-answers/cross-answers-mips64.txt     | 38 +++++++++++++++++++
- .../waf-cross-answers/cross-answers-powerpc.txt    | 39 ++++++++++++++++++++
- .../waf-cross-answers/cross-answers-powerpc64.txt  | 39 ++++++++++++++++++++
- .../waf-cross-answers/cross-answers-x86_64.txt     | 38 +++++++++++++++++++
- 11 files changed, 355 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/files/waf-cross-answers/README
- create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-aarch64.txt
- create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-arm.txt
- create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-i586.txt
- create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-mips.txt
- create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-mips64.txt
- create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-powerpc.txt
- create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-powerpc64.txt
- create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-x86_64.txt
+--/e2eDi0V/xtL+Mc8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-diff --git a/meta-oe/classes/waf-samba.bbclass b/meta-oe/classes/waf-samba.bbclass
-index b5b85e6..5b0a08e 100644
---- a/meta-oe/classes/waf-samba.bbclass
-+++ b/meta-oe/classes/waf-samba.bbclass
-@@ -20,7 +20,38 @@ CONFIGUREOPTS = " --prefix=${prefix} \
-                   --mandir=${mandir} \
-                 "
- 
-+# Three methods for waf cross compile:
-+# 1. answers:
-+#    Only --cross-answers - try the cross-answers file, and if
-+#    there's no corresponding answer, add to the file and mark
-+#    the configure process as unfinished.
-+# 2. exec:
-+#    Only --cross-execute - get the answer from cross-execute,
-+#    an emulator (qemu) is used to run cross-compiled binaries.
-+# 3. both:
-+#    (notes: not supported in lower version of some packages,
-+#     please check buildtools/wafsamba/samba_cross.py in the
-+#     package source)
-+#    Try the cross-answers file first, and if there is no
-+#    corresponding answer, use cross-execute to get an answer,
-+#    and add that answer to the file.
-+#
-+# The first one is preferred since it may fail with 2 or 3 if
-+# the target board is not suported by qemu, but we can use 2 or 3
-+# to help generate the cross answer when adding new board support.
-+CROSS_METHOD ?= "answer"
-+
- do_configure() {
-+
-+    # Prepare the cross-answers file
-+    CROSS_ANSWERS="${B}/cross-answers-${TARGET_ARCH}.txt"
-+    if [ -e ${CROSS_ANSWERS} ]; then
-+        rm -f ${CROSS_ANSWERS}
-+    fi
-+    echo 'Checking uname machine type: "${TARGET_ARCH}"' >> ${CROSS_ANSWERS}
-+    echo 'Checking uname release type: "${OLDEST_KERNEL}"' >> ${CROSS_ANSWERS}
-+    cat ${WAF_CROSS_ANSWERS_PATH}/cross-answers-${TARGET_ARCH}.txt >> ${CROSS_ANSWERS}
-+
-     qemu_binary="${@qemu_target_binary(d)}"
-     if [ "${qemu_binary}" = "qemu-allarch" ]; then
-         qemu_binary="qemuwrapper"
-@@ -42,7 +73,17 @@ do_configure() {
-     export STAGING_INCDIR=${STAGING_INCDIR}
-     export PYTHONPATH=${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR}
- 
--    ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF} --cross-compile --cross-execute="${CROSS_EXEC}"
-+    CONFIG_CMD="./configure ${CONFIGUREOPTS} ${EXTRA_OECONF} --cross-compile"
-+    if [ "${CROSS_METHOD}" = "answer" ]; then
-+        ${CONFIG_CMD} --cross-answers="${CROSS_ANSWERS}"
-+    elif [ "${CROSS_METHOD}" = "exec" ]; then
-+        ${CONFIG_CMD} --cross-exec="${CROSS_EXEC}"
-+    elif [ "${CROSS_METHOD}" = "both" ]; then
-+        ${CONFIG_CMD} --cross-answers="${CROSS_ANSWERS}" --cross-exec="${CROSS_EXEC}"
-+    else
-+        echo "ERROR: ${CROSS_METHOD} is not valid for cross-compile!"
-+        exit 1
-+    fi
- }
- 
- do_install() {
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index 7af9b3d..c7ce28f 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -30,6 +30,7 @@ LAYERVERSION_openembedded-layer = "1"
- LAYERDEPENDS_openembedded-layer = "core"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
-+WAF_CROSS_ANSWERS_PATH = "${LAYERDIR}/files/waf-cross-answers"
- 
- SIGGEN_EXCLUDERECIPES_ABISAFE += " \
-   mplayer-common \
-diff --git a/meta-oe/files/waf-cross-answers/README b/meta-oe/files/waf-cross-answers/README
-new file mode 100644
-index 0000000..0c23344
---- /dev/null
-+++ b/meta-oe/files/waf-cross-answers/README
-@@ -0,0 +1,3 @@
-+The files in this directory are cross answers files
-+used by waf-samba.bbaclss, please see waf-samba.bbaclss
-+for details about how they are used.
-diff --git a/meta-oe/files/waf-cross-answers/cross-answers-aarch64.txt b/meta-oe/files/waf-cross-answers/cross-answers-aarch64.txt
-new file mode 100644
-index 0000000..bbf7f16
---- /dev/null
-+++ b/meta-oe/files/waf-cross-answers/cross-answers-aarch64.txt
-@@ -0,0 +1,38 @@
-+Checking uname sysname type: "Linux"
-+Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
-+Checking simple C program: "hello world"
-+rpath library support: OK
-+-Wl,--version-script support: OK
-+Checking getconf LFS_CFLAGS: NO
-+Checking correct behavior of strtoll: NO
-+Checking for working strptime: OK
-+Checking for C99 vsnprintf: "1"
-+Checking for HAVE_SHARED_MMAP: OK
-+Checking for HAVE_MREMAP: OK
-+Checking for HAVE_SECURE_MKSTEMP: OK
-+Checking for HAVE_IFACE_GETIFADDRS: NO
-+Checking for HAVE_IFACE_IFCONF: NO
-+Checking for HAVE_IFACE_IFREQ: NO
-+Checking for large file support without additional flags: OK
-+Checking for HAVE_INCOHERENT_MMAP: NO
-+Checking value of NSIG: "65"
-+Checking value of _NSIG: "65"
-+Checking value of SIGRTMAX: "64"
-+Checking value of SIGRTMIN: "34"
-+Checking whether the WRFILE -keytab is supported: OK
-+Checking for kernel change notify support: OK
-+Checking for Linux kernel oplocks: OK
-+Checking for kernel share modes: OK
-+Checking whether POSIX capabilities are available: OK
-+Checking if can we convert from CP850 to UCS-2LE: OK
-+Checking if can we convert from UTF-8 to UCS-2LE: OK
-+vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
-+Checking whether we can use Linux thread-specific credentials: OK
-+Checking whether fcntl locking is available: OK
-+Checking for the maximum value of the 'time_t' type: OK
-+Checking whether the realpath function allows a NULL argument: OK
-+Checking for ftruncate extend: OK
-+getcwd takes a NULL argument: OK
-+Checking for small off_t: NO
-+Checking whether blkcnt_t is 32 bit: NO
-+Checking whether blkcnt_t is 64 bit: OK
-diff --git a/meta-oe/files/waf-cross-answers/cross-answers-arm.txt b/meta-oe/files/waf-cross-answers/cross-answers-arm.txt
-new file mode 100644
-index 0000000..e926fcd
---- /dev/null
-+++ b/meta-oe/files/waf-cross-answers/cross-answers-arm.txt
-@@ -0,0 +1,39 @@
-+Checking uname sysname type: "Linux"
-+Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
-+Checking simple C program: "hello world"
-+rpath library support: OK
-+-Wl,--version-script support: OK
-+Checking getconf LFS_CFLAGS: NO
-+Checking correct behavior of strtoll: NO
-+Checking for working strptime: OK
-+Checking for C99 vsnprintf: "1"
-+Checking for HAVE_SHARED_MMAP: OK
-+Checking for HAVE_MREMAP: OK
-+Checking for HAVE_SECURE_MKSTEMP: OK
-+Checking for HAVE_IFACE_GETIFADDRS: NO
-+Checking for HAVE_IFACE_IFCONF: NO
-+Checking for HAVE_IFACE_IFREQ: NO
-+Checking for large file support without additional flags: NO
-+Checking for -D_FILE_OFFSET_BITS=64: OK
-+Checking for HAVE_INCOHERENT_MMAP: NO
-+Checking value of NSIG: "65"
-+Checking value of _NSIG: "65"
-+Checking value of SIGRTMAX: "64"
-+Checking value of SIGRTMIN: "34"
-+Checking whether the WRFILE -keytab is supported: OK
-+Checking for kernel change notify support: OK
-+Checking for Linux kernel oplocks: OK
-+Checking for kernel share modes: OK
-+Checking whether POSIX capabilities are available: OK
-+Checking if can we convert from CP850 to UCS-2LE: OK
-+Checking if can we convert from UTF-8 to UCS-2LE: OK
-+vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
-+Checking whether we can use Linux thread-specific credentials with 32-bit system calls: OK
-+Checking whether fcntl locking is available: OK
-+Checking for the maximum value of the 'time_t' type: NO
-+Checking whether the realpath function allows a NULL argument: OK
-+Checking for ftruncate extend: OK
-+getcwd takes a NULL argument: OK
-+Checking for small off_t: NO
-+Checking whether blkcnt_t is 32 bit: NO
-+Checking whether blkcnt_t is 64 bit: OK
-diff --git a/meta-oe/files/waf-cross-answers/cross-answers-i586.txt b/meta-oe/files/waf-cross-answers/cross-answers-i586.txt
-new file mode 100644
-index 0000000..e926fcd
---- /dev/null
-+++ b/meta-oe/files/waf-cross-answers/cross-answers-i586.txt
-@@ -0,0 +1,39 @@
-+Checking uname sysname type: "Linux"
-+Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
-+Checking simple C program: "hello world"
-+rpath library support: OK
-+-Wl,--version-script support: OK
-+Checking getconf LFS_CFLAGS: NO
-+Checking correct behavior of strtoll: NO
-+Checking for working strptime: OK
-+Checking for C99 vsnprintf: "1"
-+Checking for HAVE_SHARED_MMAP: OK
-+Checking for HAVE_MREMAP: OK
-+Checking for HAVE_SECURE_MKSTEMP: OK
-+Checking for HAVE_IFACE_GETIFADDRS: NO
-+Checking for HAVE_IFACE_IFCONF: NO
-+Checking for HAVE_IFACE_IFREQ: NO
-+Checking for large file support without additional flags: NO
-+Checking for -D_FILE_OFFSET_BITS=64: OK
-+Checking for HAVE_INCOHERENT_MMAP: NO
-+Checking value of NSIG: "65"
-+Checking value of _NSIG: "65"
-+Checking value of SIGRTMAX: "64"
-+Checking value of SIGRTMIN: "34"
-+Checking whether the WRFILE -keytab is supported: OK
-+Checking for kernel change notify support: OK
-+Checking for Linux kernel oplocks: OK
-+Checking for kernel share modes: OK
-+Checking whether POSIX capabilities are available: OK
-+Checking if can we convert from CP850 to UCS-2LE: OK
-+Checking if can we convert from UTF-8 to UCS-2LE: OK
-+vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
-+Checking whether we can use Linux thread-specific credentials with 32-bit system calls: OK
-+Checking whether fcntl locking is available: OK
-+Checking for the maximum value of the 'time_t' type: NO
-+Checking whether the realpath function allows a NULL argument: OK
-+Checking for ftruncate extend: OK
-+getcwd takes a NULL argument: OK
-+Checking for small off_t: NO
-+Checking whether blkcnt_t is 32 bit: NO
-+Checking whether blkcnt_t is 64 bit: OK
-diff --git a/meta-oe/files/waf-cross-answers/cross-answers-mips.txt b/meta-oe/files/waf-cross-answers/cross-answers-mips.txt
-new file mode 100644
-index 0000000..18bfa02
---- /dev/null
-+++ b/meta-oe/files/waf-cross-answers/cross-answers-mips.txt
-@@ -0,0 +1,39 @@
-+Checking uname sysname type: "Linux"
-+Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
-+Checking simple C program: "hello world"
-+rpath library support: OK
-+-Wl,--version-script support: OK
-+Checking getconf LFS_CFLAGS: NO
-+Checking correct behavior of strtoll: NO
-+Checking for working strptime: OK
-+Checking for C99 vsnprintf: "1"
-+Checking for HAVE_SHARED_MMAP: OK
-+Checking for HAVE_MREMAP: OK
-+Checking for HAVE_SECURE_MKSTEMP: OK
-+Checking for HAVE_IFACE_GETIFADDRS: NO
-+Checking for HAVE_IFACE_IFCONF: NO
-+Checking for HAVE_IFACE_IFREQ: NO
-+Checking for large file support without additional flags: NO
-+Checking for -D_FILE_OFFSET_BITS=64: OK
-+Checking for HAVE_INCOHERENT_MMAP: NO
-+Checking value of NSIG: "128"
-+Checking value of _NSIG: "128"
-+Checking value of SIGRTMAX: "127"
-+Checking value of SIGRTMIN: "34"
-+Checking whether the WRFILE -keytab is supported: OK
-+Checking for kernel change notify support: OK
-+Checking for Linux kernel oplocks: OK
-+Checking for kernel share modes: OK
-+Checking whether POSIX capabilities are available: OK
-+Checking if can we convert from CP850 to UCS-2LE: OK
-+Checking if can we convert from UTF-8 to UCS-2LE: OK
-+vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
-+Checking whether we can use Linux thread-specific credentials: OK
-+Checking whether fcntl locking is available: OK
-+Checking for the maximum value of the 'time_t' type: NO
-+Checking whether the realpath function allows a NULL argument: OK
-+Checking for ftruncate extend: OK
-+getcwd takes a NULL argument: OK
-+Checking for small off_t: NO
-+Checking whether blkcnt_t is 32 bit: NO
-+Checking whether blkcnt_t is 64 bit: OK
-diff --git a/meta-oe/files/waf-cross-answers/cross-answers-mips64.txt b/meta-oe/files/waf-cross-answers/cross-answers-mips64.txt
-new file mode 100644
-index 0000000..8fa015a
---- /dev/null
-+++ b/meta-oe/files/waf-cross-answers/cross-answers-mips64.txt
-@@ -0,0 +1,38 @@
-+Checking uname sysname type: "Linux"
-+Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
-+Checking simple C program: "hello world"
-+rpath library support: OK
-+-Wl,--version-script support: OK
-+Checking getconf LFS_CFLAGS: NO
-+Checking correct behavior of strtoll: NO
-+Checking for working strptime: OK
-+Checking for C99 vsnprintf: "1"
-+Checking for HAVE_SHARED_MMAP: OK
-+Checking for HAVE_MREMAP: OK
-+Checking for HAVE_SECURE_MKSTEMP: OK
-+Checking for HAVE_IFACE_GETIFADDRS: NO
-+Checking for HAVE_IFACE_IFCONF: NO
-+Checking for HAVE_IFACE_IFREQ: NO
-+Checking for large file support without additional flags: OK
-+Checking for HAVE_INCOHERENT_MMAP: OK
-+Checking value of NSIG: "128"
-+Checking value of _NSIG: "128"
-+Checking value of SIGRTMAX: "127"
-+Checking value of SIGRTMIN: "34"
-+Checking whether the WRFILE -keytab is supported: OK
-+Checking for kernel change notify support: OK
-+Checking for Linux kernel oplocks: OK
-+Checking for kernel share modes: OK
-+Checking whether POSIX capabilities are available: OK
-+Checking if can we convert from CP850 to UCS-2LE: OK
-+Checking if can we convert from UTF-8 to UCS-2LE: OK
-+vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
-+Checking whether we can use Linux thread-specific credentials: OK
-+Checking whether fcntl locking is available: OK
-+Checking for the maximum value of the 'time_t' type: OK
-+Checking whether the realpath function allows a NULL argument: OK
-+Checking for ftruncate extend: OK
-+getcwd takes a NULL argument: OK
-+Checking for small off_t: NO
-+Checking whether blkcnt_t is 32 bit: NO
-+Checking whether blkcnt_t is 64 bit: OK
-diff --git a/meta-oe/files/waf-cross-answers/cross-answers-powerpc.txt b/meta-oe/files/waf-cross-answers/cross-answers-powerpc.txt
-new file mode 100644
-index 0000000..fb93b56
---- /dev/null
-+++ b/meta-oe/files/waf-cross-answers/cross-answers-powerpc.txt
-@@ -0,0 +1,39 @@
-+Checking uname sysname type: "Linux"
-+Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
-+Checking simple C program: "hello world"
-+rpath library support: OK
-+-Wl,--version-script support: OK
-+Checking getconf LFS_CFLAGS: NO
-+Checking correct behavior of strtoll: NO
-+Checking for working strptime: OK
-+Checking for C99 vsnprintf: "1"
-+Checking for HAVE_SHARED_MMAP: OK
-+Checking for HAVE_MREMAP: OK
-+Checking for HAVE_SECURE_MKSTEMP: OK
-+Checking for HAVE_IFACE_GETIFADDRS: NO
-+Checking for HAVE_IFACE_IFCONF: NO
-+Checking for HAVE_IFACE_IFREQ: NO
-+Checking for large file support without additional flags: NO
-+Checking for -D_FILE_OFFSET_BITS=64: OK
-+Checking for HAVE_INCOHERENT_MMAP: NO
-+Checking value of NSIG: "65"
-+Checking value of _NSIG: "65"
-+Checking value of SIGRTMAX: "64"
-+Checking value of SIGRTMIN: "34"
-+Checking whether the WRFILE -keytab is supported: OK
-+Checking for kernel change notify support: OK
-+Checking for Linux kernel oplocks: OK
-+Checking for kernel share modes: OK
-+Checking whether POSIX capabilities are available: OK
-+Checking if can we convert from CP850 to UCS-2LE: OK
-+Checking if can we convert from UTF-8 to UCS-2LE: OK
-+vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
-+Checking whether we can use Linux thread-specific credentials: OK
-+Checking whether fcntl locking is available: OK
-+Checking for the maximum value of the 'time_t' type: NO
-+Checking whether the realpath function allows a NULL argument: OK
-+Checking for ftruncate extend: OK
-+getcwd takes a NULL argument: OK
-+Checking for small off_t: NO
-+Checking whether blkcnt_t is 32 bit: NO
-+Checking whether blkcnt_t is 64 bit: OK
-diff --git a/meta-oe/files/waf-cross-answers/cross-answers-powerpc64.txt b/meta-oe/files/waf-cross-answers/cross-answers-powerpc64.txt
-new file mode 100644
-index 0000000..fd585f0
---- /dev/null
-+++ b/meta-oe/files/waf-cross-answers/cross-answers-powerpc64.txt
-@@ -0,0 +1,39 @@
-+Checking uname sysname type: "Linux"
-+Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
-+Checking simple C program: "hello world"
-+rpath library support: OK
-+-Wl,--version-script support: OK
-+Checking getconf LFS_CFLAGS: NO
-+Checking correct behavior of strtoll: NO
-+Checking for working strptime: OK
-+Checking for C99 vsnprintf: "1"
-+Checking for HAVE_SHARED_MMAP: OK
-+Checking for HAVE_MREMAP: OK
-+Checking for HAVE_SECURE_MKSTEMP: OK
-+Checking for HAVE_IFACE_GETIFADDRS: NO
-+Checking for HAVE_IFACE_IFCONF: NO
-+Checking for HAVE_IFACE_IFREQ: NO
-+Checking for large file support without additional flags: OK
-+Checking for HAVE_INCOHERENT_MMAP: NO
-+Checking value of NSIG: "65"
-+Checking value of _NSIG: "65"
-+Checking value of SIGRTMAX: "64"
-+Checking value of SIGRTMIN: "34"
-+Checking whether the WRFILE -keytab is supported: OK
-+Checking for kernel change notify support: OK
-+Checking for Linux kernel oplocks: OK
-+Checking for kernel share modes: OK
-+Checking whether POSIX capabilities are available: OK
-+Checking if can we convert from CP850 to UCS-2LE: (255, "")
-+Checking if can we convert from IBM850 to UCS-2LE: (255, "")
-+Checking if can we convert from UTF-8 to UCS-2LE: OK
-+vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
-+Checking whether we can use Linux thread-specific credentials: OK
-+Checking whether fcntl locking is available: OK
-+Checking for the maximum value of the 'time_t' type: OK
-+Checking whether the realpath function allows a NULL argument: OK
-+Checking for ftruncate extend: OK
-+getcwd takes a NULL argument: OK
-+Checking for small off_t: NO
-+Checking whether blkcnt_t is 32 bit: NO
-+Checking whether blkcnt_t is 64 bit: OK
-diff --git a/meta-oe/files/waf-cross-answers/cross-answers-x86_64.txt b/meta-oe/files/waf-cross-answers/cross-answers-x86_64.txt
-new file mode 100644
-index 0000000..bbf7f16
---- /dev/null
-+++ b/meta-oe/files/waf-cross-answers/cross-answers-x86_64.txt
-@@ -0,0 +1,38 @@
-+Checking uname sysname type: "Linux"
-+Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
-+Checking simple C program: "hello world"
-+rpath library support: OK
-+-Wl,--version-script support: OK
-+Checking getconf LFS_CFLAGS: NO
-+Checking correct behavior of strtoll: NO
-+Checking for working strptime: OK
-+Checking for C99 vsnprintf: "1"
-+Checking for HAVE_SHARED_MMAP: OK
-+Checking for HAVE_MREMAP: OK
-+Checking for HAVE_SECURE_MKSTEMP: OK
-+Checking for HAVE_IFACE_GETIFADDRS: NO
-+Checking for HAVE_IFACE_IFCONF: NO
-+Checking for HAVE_IFACE_IFREQ: NO
-+Checking for large file support without additional flags: OK
-+Checking for HAVE_INCOHERENT_MMAP: NO
-+Checking value of NSIG: "65"
-+Checking value of _NSIG: "65"
-+Checking value of SIGRTMAX: "64"
-+Checking value of SIGRTMIN: "34"
-+Checking whether the WRFILE -keytab is supported: OK
-+Checking for kernel change notify support: OK
-+Checking for Linux kernel oplocks: OK
-+Checking for kernel share modes: OK
-+Checking whether POSIX capabilities are available: OK
-+Checking if can we convert from CP850 to UCS-2LE: OK
-+Checking if can we convert from UTF-8 to UCS-2LE: OK
-+vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
-+Checking whether we can use Linux thread-specific credentials: OK
-+Checking whether fcntl locking is available: OK
-+Checking for the maximum value of the 'time_t' type: OK
-+Checking whether the realpath function allows a NULL argument: OK
-+Checking for ftruncate extend: OK
-+getcwd takes a NULL argument: OK
-+Checking for small off_t: NO
-+Checking whether blkcnt_t is 32 bit: NO
-+Checking whether blkcnt_t is 64 bit: OK
--- 
-1.9.1
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
+iEYEARECAAYFAlZEbsUACgkQN1Ujt2V2gBxwTQCghl64iqkozj9SoSCe2oKe46od
+D8AAnRnwi++s3RxBG65THFnor0sjnqc5
+=F3Jk
+-----END PGP SIGNATURE-----
 
+--/e2eDi0V/xtL+Mc8--
