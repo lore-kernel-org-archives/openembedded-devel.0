@@ -1,24 +1,35 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D9E6277200
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 11:16:53 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tACBGrdU024110
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 03:16:53 -0800
-Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 12 Nov 2015 03:16:52 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 12 Nov 2015 19:16:54 +0800
-Message-ID: <1447327014-27893-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B4D0766A3;
+	Thu, 12 Nov 2015 11:42:56 +0000 (UTC)
+Received: by wmww144 with SMTP id w144so84442260wmw.0;
+	Thu, 12 Nov 2015 03:42:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=Is+QvXu/i62GcCm/A3eW5L10PgrRt3RtnGsFFcnXEjQ=;
+	b=YBFRu0IPNbxL2tkQv5ZJmW90WpXNGqgW5r3zffWVn/L2vbM62vpXsVmcTy7qrxGoMj
+	tPdFpoD7nVTaZgTAI4QbLpcqwGt22DjIv9UyudYzP9XkkCibxU02uyqXcOdpqSFttcka
+	2F3Igw1XWGbB4K7VTwjNYVhfwCBVQUg+/yRYZzYjcTjVymY4swSkYpbdYmLj9SKWeKJI
+	+RG3Bx3K8yMIi6qzrvYTb8nf5DKDRomnfDZ3uPDEHPHwr+V9QXsS+I6Jvh/8nXNP1O47
+	OxM91IXNi4DhI1F5z3A60lkBZSoWdTzGUcZNXtIn24VV8w/KBB4Ud+THbvLSePma2Sj4
+	JFCA==
+X-Received: by 10.195.18.6 with SMTP id gi6mr14970431wjd.83.1447328576019;
+	Thu, 12 Nov 2015 03:42:56 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	vr10sm14018763wjc.38.2015.11.12.03.42.54
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Nov 2015 03:42:54 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 12 Nov 2015 12:43:11 +0100
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20151112114311.GD2574@jama>
 MIME-Version: 1.0
-Subject: [v2][PATCH] talloc: upgrade to 2.1.3
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: State of bitbake world, test-dependencies 2015-11-12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,65 +43,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 11:16:55 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 12 Nov 2015 11:42:58 -0000
+X-Groupsio-MsgNum: 58549
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="+B+y8wtTXqdUj1xM"
+Content-Disposition: inline
 
-From: Jackie Huang <jackie.huang@windriver.com>
+--+B+y8wtTXqdUj1xM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Changes:
- - use ${SOLIBS} and ${SOLIBSDEV} instead of hardcoded suffix
+Another incremental test, only 26 recipes were tested, but it found enough
+issues in just released Jethro.
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../talloc/{talloc_2.1.1.bb => talloc_2.1.3.bb}        | 18 ++++++++----------
- 1 file changed, 8 insertions(+), 10 deletions(-)
- rename meta-oe/recipes-support/talloc/{talloc_2.1.1.bb => talloc_2.1.3.bb} (69%)
+Complete log:
+http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependencies.20151111_11=
+2937.log/
 
-diff --git a/meta-oe/recipes-support/talloc/talloc_2.1.1.bb b/meta-oe/recipes-support/talloc/talloc_2.1.3.bb
-similarity index 69%
-rename from meta-oe/recipes-support/talloc/talloc_2.1.1.bb
-rename to meta-oe/recipes-support/talloc/talloc_2.1.3.bb
-index 89c390f..83c8f8f 100644
---- a/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
-+++ b/meta-oe/recipes-support/talloc/talloc_2.1.3.bb
-@@ -7,8 +7,8 @@ SRC_URI = "http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar.gz"
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
-                     file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
- 
--SRC_URI[md5sum] = "5dffb86414218a91864ed4453ba9be07"
--SRC_URI[sha256sum] = "3e29ce6c3ba3c4f7c2d57ce8cf0fbc24c86618c519f2b2fb6a459025488b6174"
-+SRC_URI[md5sum] = "3e285de2228ae67ff0a0f5cec658f627"
-+SRC_URI[sha256sum] = "7aa5f75b22d4ef9c737b25515f2a2837ddc13014ff4ac6e58dd9e311f41f2cb0"
- 
- inherit waf-samba
- 
-@@ -27,19 +27,17 @@ FILES_${PN} = ""
- FILES_${PN}-dev = ""
- FILES_${PN}-dbg = ""
- 
--FILES_libtalloc = "${libdir}/libtalloc.so.2 \
--                   ${libdir}/libtalloc.so.2.1.1"
-+FILES_libtalloc = "${libdir}/libtalloc${SOLIBS}"
- FILES_libtalloc-dbg = "/usr/src/debug/ \
--                   ${libdir}/.debug/libtalloc.so.2.1.1"
-+                   ${libdir}/.debug/libtalloc${SOLIBS}"
- FILES_libtalloc-dev = "${includedir}/ \
--                   ${libdir}/libtalloc.so \
-+                   ${libdir}/libtalloc${SOLIBSDEV} \
-                    ${libdir}/pkgconfig/"
- 
- FILES_pytalloc = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
--                  ${libdir}/libpytalloc-util.so.2 \
--                  ${libdir}/libpytalloc-util.so.2.1.1 \
-+                  ${libdir}/libpytalloc-util${SOLIBS} \
-                  "
- FILES_pytalloc-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
--                      ${libdir}/.debug/libpytalloc-util.so.2.1.1"
--FILES_pytalloc-dev = "${libdir}/libpytalloc-util.so"
-+                      ${libdir}/.debug/libpytalloc-util${SOLIBS}"
-+FILES_pytalloc-dev = "${libdir}/libpytalloc-util${SOLIBSDEV}"
- RDEPENDS_pytalloc = "python"
--- 
-1.9.1
+ERROR: 42 issues were found in these recipes: cifs-utils clutter-gst-3.0 de=
+vicekit-power fbida gammu gst-plugins-good gstreamer1.0-plugins-bad gstream=
+er1.0-plugins-good imsettings libsdl2 pinpoint qt-mobility-embedded qt-mobi=
+lity-x11 samba sox
 
+I'll send fix for pinpoint, gst* devicekit-power, fbida, gammu before re-tr=
+iggering the testing for qemuarm.
 
+Found differences:=20
+WARN: cifs-utils: cifs-utils rdepends on samba, but it isn't a build depend=
+ency?
+WARN: clutter-gst-3.0: clutter-gst-3.0 rdepends on libcap, but it isn't a b=
+uild dependency?
+WARN: clutter-gst-3.0: clutter-gst-3.0 rdepends on libgudev, but it isn't a=
+ build dependency?
+WARN: clutter-gst-3.0: clutter-gst-3.0 rdepends on libudev, but it isn't a =
+build dependency?
+WARN: fbida: fbida rdepends on lirc, but it isn't a build dependency?
+WARN: gammu: gammu rdepends on libgudev, but it isn't a build dependency?
+WARN: gst-plugins-good: gst-plugins-good-meta rdepends on gst-plugins-good-=
+1394, but it isn't a build dependency?
+WARN: gstreamer1.0-plugins-bad: gstreamer1.0-plugins-bad-meta rdepends on g=
+streamer1.0-plugins-bad-uvch264, but it isn't a build dependency?
+WARN: gstreamer1.0-plugins-good: gstreamer1.0-plugins-good-video4linux2 rde=
+pends on libcap, but it isn't a build dependency?
+WARN: gstreamer1.0-plugins-good: gstreamer1.0-plugins-good-video4linux2 rde=
+pends on libgudev, but it isn't a build dependency?
+WARN: gstreamer1.0-plugins-good: gstreamer1.0-plugins-good-video4linux2 rde=
+pends on libudev, but it isn't a build dependency?
+WARN: gstreamer1.0-plugins-good: gstreamer1.0-plugins-good-video4linux2 rde=
+pends on zlib, but it isn't a build dependency?
+WARN: imsettings: imsettings rdepends on xfconf, but it isn't a build depen=
+dency?
+WARN: pinpoint: pinpoint rdepends on librsvg, but it isn't a build dependen=
+cy?
+WARN: qt-mobility-embedded: qt-mobility-embedded rdepends on glib-2.0, but =
+it isn't a build dependency?
+WARN: qt-mobility-embedded: qt-mobility-embedded rdepends on gstreamer, but=
+ it isn't a build dependency?
+WARN: qt-mobility-embedded: qt-mobility-embedded rdepends on libasound, but=
+ it isn't a build dependency?
+WARN: qt-mobility-embedded: qt-mobility-embedded rdepends on libgstapp-0.10=
+, but it isn't a build dependency?
+WARN: qt-mobility-embedded: qt-mobility-embedded rdepends on libgstvideo-0.=
+10, but it isn't a build dependency?
+WARN: qt-mobility-x11: qt-mobility-x11 rdepends on glib-2.0, but it isn't a=
+ build dependency?
+WARN: qt-mobility-x11: qt-mobility-x11 rdepends on gstreamer, but it isn't =
+a build dependency?
+WARN: qt-mobility-x11: qt-mobility-x11 rdepends on libasound, but it isn't =
+a build dependency?
+WARN: qt-mobility-x11: qt-mobility-x11 rdepends on libgstapp-0.10, but it i=
+sn't a build dependency?
+WARN: qt-mobility-x11: qt-mobility-x11 rdepends on libgstinterfaces-0.10, b=
+ut it isn't a build dependency?
+WARN: qt-mobility-x11: qt-mobility-x11 rdepends on libgstvideo-0.10, but it=
+ isn't a build dependency?
+WARN: qt-mobility-x11: qt-mobility-x11 rdepends on libxext, but it isn't a =
+build dependency?
+WARN: qt-mobility-x11: qt-mobility-x11 rdepends on libxv, but it isn't a bu=
+ild dependency?
+WARN: samba: samba rdepends on cyrus-sasl, but it isn't a build dependency?
+WARN: samba: samba rdepends on dmapi, but it isn't a build dependency?
+WARN: samba: samba rdepends on libaio, but it isn't a build dependency?
+WARN: samba: samba rdepends on libbsd, but it isn't a build dependency?
+WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
+WARN: samba: samba-python rdepends on libbsd, but it isn't a build dependen=
+cy?
+WARN: sox: sox rdepends on opencore-amr, but it isn't a build dependency?
+Found errors:=20
+ERROR: gst-plugins-good: gst-plugins-good-1394 package isn't created when b=
+uilding with minimal dependencies?
+ERROR: gst-plugins-good: gst-plugins-good-1394-dev package isn't created wh=
+en building with minimal dependencies?
+ERROR: gstreamer1.0-plugins-bad: gstreamer1.0-plugins-bad-uvch264 package i=
+sn't created when building with minimal dependencies?
+ERROR: gstreamer1.0-plugins-bad: gstreamer1.0-plugins-bad-uvch264-dev packa=
+ge isn't created when building with minimal dependencies?
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--+B+y8wtTXqdUj1xM
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlZEe04ACgkQN1Ujt2V2gBwR0ACffn2Bp/UNWhSEcniDEYO76EPr
+37AAnRAvMXvqHzMXKlKTkacgUIviNDP+
+=kF+p
+-----END PGP SIGNATURE-----
+
+--+B+y8wtTXqdUj1xM--
