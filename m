@@ -1,29 +1,34 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 1641977259;
-	Thu, 12 Nov 2015 19:09:00 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga103.fm.intel.com with ESMTP; 12 Nov 2015 11:09:00 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,283,1444719600"; d="scan'208";a="818489890"
-Received: from avanloen-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.11.137])
-	by orsmga001.jf.intel.com with ESMTP; 12 Nov 2015 11:08:57 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Date: Thu, 12 Nov 2015 19:08:55 +0000
-Message-ID: <4335862.fNWyiaI9Bu@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.9 (Linux/4.1.10-100.fc21.x86_64; KDE/4.14.11; x86_64; ;
-	)
-In-Reply-To: <CALbNGRTcwpywgtSJvm-q6aZHK5vaF5BFcxmKseHYjcy6aWnmBg@mail.gmail.com>
-References: <58488.10.252.13.130.1447346734.squirrel@linux.intel.com>
-	<CALbNGRTcwpywgtSJvm-q6aZHK5vaF5BFcxmKseHYjcy6aWnmBg@mail.gmail.com>
-MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] qt4 moves out of oe-core - to meta-qt4, or to meta-oe?
+Return-Path: <kergoth@gmail.com>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D1BF77274
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2015 20:17:32 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so51361598wme.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2015 12:17:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=rWeY88NLilnIUZYhgnbbFQEcRBuEXj8hlYUML1MghmU=;
+	b=sv64+jHlzg6ZO9QJsamRXydCb1eEIkCTCFZfyvNPqcjO++UJlu+nI8cy5iW+ta/OK8
+	qTCU4HQ5FD++EkfomxqXXnvHJ3x9C8EN71vlASjv9zdbyKRARdnDIibdgO9BJUasUbPr
+	PkqUTodXQyB13sWnH4/yyctVmTYv1WwxwmLNvBaGG31IukNVDRSh+8CAF+5tk6tLs8uH
+	rpJwXlqeN9p15zhQYwSGuvDxJc8YTVN7+fr3shp56uvx5xIOH2kKflEArbrH0w8hWbV2
+	BKoU4DH24B5PSwfLenkXXDcuPnz4JTtg5DXhWgTgXLOTFRClV+mjBDFKYwuQJguIwY4E
+	/lvw==
+X-Received: by 10.194.84.42 with SMTP id v10mr18801276wjy.116.1447359452148;
+	Thu, 12 Nov 2015 12:17:32 -0800 (PST)
+Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
+	by smtp.gmail.com with ESMTPSA id
+	u185sm276863wmu.19.2015.11.12.12.17.28
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 12 Nov 2015 12:17:29 -0800 (PST)
+From: Christopher Larson <kergoth@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Nov 2015 13:17:21 -0700
+Message-Id: <1447359445-27258-1-git-send-email-kergoth@gmail.com>
+X-Mailer: git-send-email 2.2.1
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-oe][PATCH 1/5] canutils: rdep on iproute2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,54 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 19:09:01 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Thu, 12 Nov 2015 20:17:32 -0000
 
-On Thursday 12 November 2015 18:03:27 Andreas M=FCller wrote:
-> On Thu, Nov 12, 2015 at 5:45 PM,  <alexander.kanavin@linux.intel.com>=
- wrote:
-> > Hello,
-> >=20
-> > now that 2.0 is out, it's time to move the Qt4 recipes out of oe-co=
-re.
-> > This has been discussed previously here:
-> > http://lists.openembedded.org/pipermail/openembedded-core/2015-June=
-/106355
-> > .html
-> >=20
-> > I'm not sure where the recipes should land, and want to ask your op=
-inion.
-> > The options are:
-> > 1) Make a new layer, meta-qt4, under meta-openembedded tree. Move a=
-lso
-> > everything in meta-oe/recipes-qt (and possibly other spots) to that=
- layer.
-> > This is somewhat more disruptive to people's layer configurations, =
-but
-> > would clearly separate qt4, and slim down meta-oe.
-> >=20
-> > 2) Simply move the qt4 recipes from oe-core to meta-oe/recipes-qt, =
-so they
-> > will be next to all the qt4-based software. This is less disruptive=
-, but
-> > adds bloat to meta-oe.
-> >=20
-> > Preferences?
->=20
-> 1) or even better in a separate repo
+From: Christopher Larson <chris_larson@mentor.com>
 
-To be honest, I had anticipated this being a separate meta-qt4 repo mys=
-elf. It=20
-would be consistent with what has been done with Qt 5 and much earlier =
-with=20
-Qt 3.
+busybox ip fails to configure can interfaces, so we need iproute2 to do so.
+See also http://www.armadeus.com/wiki/index.php?title=CAN_bus_Linux_driver.
 
-Cheers,
-Paul
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+---
+ meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
---=20
+diff --git a/meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb b/meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb
+index c220ead..e1508af 100644
+--- a/meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb
++++ b/meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb
+@@ -15,3 +15,6 @@ SRC_URI = "git://git.pengutronix.de/git/tools/canutils.git;protocol=git \
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
++
++# Busybox ip doesn't support can interface configuration, use the real thing
++RDEPENDS_${PN} += "iproute2"
+-- 
+2.2.1
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
