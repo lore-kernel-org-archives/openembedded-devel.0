@@ -1,39 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id D79C577223
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
+	[209.85.213.178])
+	by mail.openembedded.org (Postfix) with ESMTP id B0A3877223
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 14:50:54 +0000 (UTC)
-Received: by wmec201 with SMTP id c201so36766447wme.0
+	Thu, 12 Nov 2015 15:10:09 +0000 (UTC)
+Received: by igbxm8 with SMTP id xm8so42688673igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 06:50:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=+0kGRKOLmF0OLupCCAucX0TiZqy7WKWrdnanBLEfi/4=;
-	b=Wyc10j/HiJtYljbR9Ju55j28NiE/+2b0ChPi96tLQiHIkh+bjJ5CWmD7d0wnbu9u/y
-	LeYJJaUh8c11rRGWvzd4fwzXS3udiZTlvE5518R1i7H4zhOZVJ+f2MoCCS5KoqnSaI3H
-	5GeZSZUeGpMAR10nn8htOYKlVgrJK4qg97St/QBzrB0obugK+AVw2VJFRPnXu53akXQD
-	NWMBcvtkY4h8wMrPOKmeu2NeZzY1uXf9/ZSjkuihwqICvdBLN7iHeXzNtI29Slb7cQhs
-	xPZoaddDFWabfU7POUsvkqGuC6ZxpP4TgXJoBD7N/y2zbDcVeGZpzUR+LJ580cIGCRga
-	lvYg==
-X-Received: by 10.28.111.151 with SMTP id c23mr7373783wmi.28.1447339854579;
-	Thu, 12 Nov 2015 06:50:54 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	s189sm12794134wmf.16.2015.11.12.06.50.53
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Nov 2015 06:50:53 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 12 Nov 2015 15:51:10 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151112145110.GG2574@jama>
-References: <1447324352-27951-1-git-send-email-Martin.Jansa@gmail.com>
+	Thu, 12 Nov 2015 07:10:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=WKK7LJlzS+YZIHq2n72+13chqMAPUFCgOUjYXzu3zHk=;
+	b=rqsXakhnTS9JSXXJZRXF1Iq8QM9OUZw3N2Owu5yOxUr1foL2mTxguryB88K2bMM0qh
+	uviiuMEKoD+ZoTe8QZFUfBE4QE9GFiPr9AhjQ7chyjtR9ARqeLFqxuXn88ARjotwH6S8
+	3BYQ0Vm8epFQSA9fJAKkomyj4iT54rDDWUiMKUxDzgLoKUkYkXnIHHWL+hhhwBbxxdkM
+	0ljQjQUmRHQGy40R4CZthasrCqifcDQUa2dudgg9nO6uH9JlHG3QKUR6FLZGPvXgOdtO
+	ORrtZ/HvVrVdos2HQR6PE52HS7XCkH6jlDAPjbMdrl+oEakrYUCanrP+5C6sa/uqk9wm
+	aRrg==
 MIME-Version: 1.0
-In-Reply-To: <1447324352-27951-1-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH][meta-oe] devicekit-power: add missing dependency on libgudev
+X-Received: by 10.50.64.147 with SMTP id o19mr35706554igs.52.1447341009816;
+	Thu, 12 Nov 2015 07:10:09 -0800 (PST)
+Received: by 10.36.31.131 with HTTP; Thu, 12 Nov 2015 07:10:09 -0800 (PST)
+In-Reply-To: <20151112144939.GF2574@jama>
+References: <1447338183-9675-1-git-send-email-Martin.Jansa@gmail.com>
+	<CALbNGRTs5LyeazLDrmKrrJfYo0NVBaW3uUVe7jxFpWQus-daEA@mail.gmail.com>
+	<20151112144939.GF2574@jama>
+Date: Thu, 12 Nov 2015 16:10:09 +0100
+Message-ID: <CALbNGRQq8Lb_uQFyCCmgf79w7smtrEg2DKPE58Phee9_tBXBnQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe 1/9] ipsec-tools: set MACHINE_ARCH, because it depends on kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,78 +45,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 14:50:56 -0000
-X-Groupsio-MsgNum: 58567
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RMedoP2+Pr6Rq0N2"
-Content-Disposition: inline
-
---RMedoP2+Pr6Rq0N2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 12 Nov 2015 15:10:12 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 12, 2015 at 11:32:32AM +0100, Martin Jansa wrote:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-networking/recipes-kernel/netmap/netmap-modules_git.bb | 2 +-
->  meta-oe/recipes-support/devicekit/devicekit-power_014.bb    | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb =
-b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-> index c1c319d..6365fee 100644
-> --- a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-> +++ b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-> @@ -15,7 +15,7 @@ EXTRA_OECONF =3D "--kernel-dir=3D${STAGING_KERNEL_BUILD=
-DIR} \
->                  --driver-suffix=3D"-netmap" \
->                  "
-> =20
-> -EXTRA_OECONF +=3D "--no-drivers=3Dixgbe"
-> +EXTRA_OECONF +=3D "--no-drivers=3Dixgbe --no-drivers=3Dvirtio_net.c"
+On Thu, Nov 12, 2015 at 3:49 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Thu, Nov 12, 2015 at 03:39:12PM +0100, Andreas M=C3=BCller wrote:
+>> On Thu, Nov 12, 2015 at 3:22 PM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+>> > * see:
+>> >   http://lists.openembedded.org/pipermail/openembedded-devel/2015-Sept=
+ember/103271.html
+>> > * fixes:
+>> > ERROR: ipsec-tools different signature for task do_configure.sigdata b=
+etween qemux86copy and qemux86
+>> > runtaskdeps changed from ['autoconfautoconf_2.69.bb.do_populate_sysroo=
+t:virtual:native', 'automakeautomake_1.15.bb.do_populate_sysroot:virtual:na=
+tive', 'bisonbison_3.0.4.bb.do_populate_sysroot:virtual:native', 'flexflex_=
+2.5.39.bb.do_populate_sysroot:virtual:native', 'gccgcc-cross_5.2.bb.do_popu=
+late_sysroot', 'gccgcc-runtime_5.2.bb.do_populate_sysroot', 'glibcglibc_2.2=
+2.bb.do_populate_sysroot', 'gnu-configgnu-config_git.bb.do_populate_sysroot=
+:virtual:native', 'ipsec-toolsipsec-tools_0.8.2.bb.do_patch', 'libtoollibto=
+ol-cross_2.4.6.bb.do_populate_sysroot', 'libtoollibtool-native_2.4.6.bb.do_=
+populate_sysroot', 'linuxlinux-yocto_4.1.bb.do_populate_sysroot', 'opensslo=
+penssl_1.0.2d.bb.do_populate_sysroot', 'readlinereadline_6.3.bb.do_populate=
+_sysroot', 'systemdsystemd-systemctl-native.bb.do_populate_sysroot']
+>> > to
+>> > ['autoconfautoconf_2.69.bb.do_populate_sysroot:virtual:native', 'autom=
+akeautomake_1.15.bb.do_populate_sysroot:virtual:native', 'bisonbison_3.0.4.=
+bb.do_populate_sysroot:virtual:native', 'flexflex_2.5.39.bb.do_populate_sys=
+root:virtual:native', 'gccgcc-cross_5.2.bb.do_populate_sysroot', 'gccgcc-ru=
+ntime_5.2.bb.do_populate_sysroot', 'glibcglibc_2.22.bb.do_populate_sysroot'=
+, 'gnu-configgnu-config_git.bb.do_populate_sysroot:virtual:native', 'ipsec-=
+toolsipsec-tools_0.8.2.bb.do_patch', 'libtoollibtool-cross_2.4.6.bb.do_popu=
+late_sysroot', 'libtoollibtool-native_2.4.6.bb.do_populate_sysroot', 'linux=
+linux-yocto_4.1.bb.do_populate_sysroot', 'opensslopenssl_1.0.2d.bb.do_popul=
+ate_sysroot', 'readlinereadline_6.3.bb.do_populate_sysroot', 'systemdsystem=
+d-systemctl-native.bb.do_populate_sysroot']
+>> > openembedded-core/meta/recipes-kernel/linux/linux-yocto_4.1.bb.do_popu=
+late_sysroot with hash 1a8aa7a50a6cf3ebf5401af43dd6bf3b
+>> >  changed to
+>> > openembedded-core/meta/recipes-kernel/linux/linux-yocto_4.1.bb.do_popu=
+late_sysroot with hash 143d2686a37f592891fb2aa6fa9b752e
+>> > Hash for dependent task linuxlinux-yocto_4.1.bb.do_populate_sysroot ch=
+anged from 1a8aa7a50a6cf3ebf5401af43dd6bf3b to 143d2686a37f592891fb2aa6fa9b=
+752e
+>> >
+>> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> > ---
+>> >  meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb | 2 =
+++
+>> >  1 file changed, 2 insertions(+)
+>> >
+>> > diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0=
+.8.2.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+>> > index 8ee81f8..d9f1212 100644
+>> > --- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+>> > +++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+>> > @@ -7,6 +7,8 @@ LIC_FILES_CHKSUM =3D "file://src/libipsec/pfkey.c;begi=
+nline=3D6;endline=3D31;md5=3Dbc9b7
+>> >
+>> >  DEPENDS =3D "virtual/kernel openssl readline flex-native bison-native=
+"
+>> >
+>> > +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+>> > +
+>> >  SRC_URI =3D "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ips=
+ec-tools-${PV}.tar.bz2 \
+>> >             file://0002-Don-t-link-against-libfl.patch \
+>> >             file://configure.patch \
+>> > --
+>> > 2.6.3
+>> >
+>> Maybe I am wrong: I think there were times when depending on kernel
+>> made recipe machine specific. I somehow get the feeling that this is
+>> the wrong fix...
+>
+> That's what this patch is doing, or I didn't get your point.
+>
+I thought there was once a magic doing this automatically: As soon as
+there is one package in depends which is machine specific this recipe
+also turns machine specififc.
 
-This chunk obviously belongs to separate patch, fixed in jansa/master
-branch.
+But the more I think over this, it seems I am mixing this up with
+inheriting modules - which does turn the recipe into machine specific.
+So forget my question.
 
-> =20
->  LDFLAGS :=3D "${@'${LDFLAGS}'.replace('-Wl,-O1', '')}"
->  LDFLAGS :=3D "${@'${LDFLAGS}'.replace('-Wl,--as-needed', '')}"
-> diff --git a/meta-oe/recipes-support/devicekit/devicekit-power_014.bb b/m=
-eta-oe/recipes-support/devicekit/devicekit-power_014.bb
-> index 0c1245f..c2b7e66 100644
-> --- a/meta-oe/recipes-support/devicekit/devicekit-power_014.bb
-> +++ b/meta-oe/recipes-support/devicekit/devicekit-power_014.bb
-> @@ -2,7 +2,7 @@ SUMMARY =3D "Devicekit power"
->  LICENSE =3D "GPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D756cf97871f77233638937da21b02=
-5d3"
-> =20
-> -DEPENDS =3D "libusb-compat libusb1 udev glib-2.0 dbus-glib polkit intlto=
-ol-native"
-> +DEPENDS =3D "libusb-compat libusb1 udev glib-2.0 dbus-glib polkit intlto=
-ol-native libgudev"
-> =20
->  SRC_URI =3D "http://upower.freedesktop.org/releases/DeviceKit-power-${PV=
-}.tar.gz;name=3Darchive"
->  SRC_URI[archive.md5sum] =3D "935d37f1e14b3c8a1d6dabcd9a38d3ca"
-> --=20
-> 2.6.3
->=20
+Andreas
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---RMedoP2+Pr6Rq0N2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlZEp14ACgkQN1Ujt2V2gBz3OACfQKxfhb3JooijZ8XuCk3D2uYR
-+R0AoJGzptj/QsWL0TIMhiDTTNKjwaeV
-=DvjU
------END PGP SIGNATURE-----
-
---RMedoP2+Pr6Rq0N2--
