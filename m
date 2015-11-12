@@ -1,53 +1,53 @@
 Return-Path: <mbc@koumoul.net>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id ED648771C2
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 70198771CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 05:10:52 +0000 (UTC)
-Received: by wmww144 with SMTP id w144so185369813wmw.1
+	Thu, 12 Nov 2015 05:11:21 +0000 (UTC)
+Received: by wmww144 with SMTP id w144so72308005wmw.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2015 21:10:52 -0800 (PST)
+	Wed, 11 Nov 2015 21:11:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
 	h=sender:from:to:cc:subject:date:message-id;
-	bh=GJztJreLSqDPdwMZ1Keno5iwRQMimAqFelhfkIrPvTg=;
-	b=ARhgnrA9mDWs0ZgCCBN88W/F96soy6tkO5cG8Eq2R5mEZqpRX4kmtFn4Fhbvvvsd/H
-	5KP5ERxhPs3/YIRVkEOUyJSHws3WV9GQ39XpFIPzi2qLLeVDrrXleEksGS0V1E7d/OaH
-	9odCts6e67mSUfx7/80dZ7yzlKgi+Z6tumaCU=
+	bh=RCZ2jATWdrRb686r7q3+D/6VuWqAt7O/hu5V2e+36aU=;
+	b=BYM1F0h/csbZUwHiJcjMfqyS1JaoDd0GJnKOv79Df99iMExjHWzk7ScRsIRU0aur62
+	ETwLOTgxltDuR7t5A4semZXxs+5tAZscN++ifrotK9vY/86pW9J+bxd3EG2HNY9jbP6L
+	gqvBPPJCG92r3CCgLhXXVCICioKUnSh3Y4gLo=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=iot_bzh.20150623.gappssmtp.com; s=20150623;
 	h=sender:from:to:cc:subject:date:message-id;
-	bh=GJztJreLSqDPdwMZ1Keno5iwRQMimAqFelhfkIrPvTg=;
-	b=tbsNXvi7vJyqgvbjmn8AzbEvB1blTM8182oTteHGZlY9TTWtFIxUuBwu/pyxx6t9e/
-	LMUotmvcvp0c7K2QFgjS6+wuewGD90CFjxdzyujUo9ikFWwdypi4QjqMSrXcy4Kjm1ju
-	iUyS5bbmTCAqheGMbXmw4HfHHElLR7n9s6SpqPCnE1w+n815nMLL5jt1AnjUaH0tm9/J
-	OadSScq+NedoHkWOgzBhzYhQnmf/RYntuX3q1Ih5oiiwi4YwBgCKUls+AAUmXFNqyNwO
-	xQdfMijpyIit0FjjlelcskF30U6kc0mtc9azS/aFhKVk4W+sVw2yckgAPpUokNu7Ar5l
-	2Nyw==
+	bh=RCZ2jATWdrRb686r7q3+D/6VuWqAt7O/hu5V2e+36aU=;
+	b=Hb8x2M7j5D0DAdFnrCEjgnbsCK9zFCwz5uhUvd4xhnloTPzO13X0LQ/9gIeKf7BzHP
+	RGv6smn77VkFqt+npc7iu6Wm/91Q8JhoKWGoHZ3oCn0Ga7ZXjxJeDIyWdFcjtnbkiBMk
+	95/qHYRwxibBPRECFx46BBUEhScBrewAHXqGRbszpnbcdCLj4xI+vrMYByn5YNQXQae+
+	cdemT4He8waWOgOZ+dZDAD0yxkp+mgvLwV7lrhwvtp79qHhIZ8xueRgEy2hGO3twKk2l
+	jcifAiyC4Jl8IkqcP8/Om8YOMd8vg4CzMUndDVwgPn+kIjdk2AJj6e+No2vC7EL4uqd0
+	uTfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=GJztJreLSqDPdwMZ1Keno5iwRQMimAqFelhfkIrPvTg=;
-	b=D72XL2YdM+41wPklzqfiIHFBwz6jczo5leOwwnDW/dVk9yq3Ht0HJt/e6n4yNI8KPR
-	EdCj8CPmc5zTctdmbpCnwyZ2dOOCAZXGnywYd8Xfls56LXpwvxIwwf70O8MuccxXFw85
-	tJsCUAGxua8ql7Arh0SaU4Gf0nVhs+hpytXeDjD0ROmTo0cKr0YQOSfmpR37hA9CX3aP
-	l+ZNBnxodB/GTTClo1/DvVO/ZAl0/dLItTvHDYdwPeENCW+D2lVJho9FfEROnHBEoLKr
-	a68Z1OE5gEwU9/sG0/kE+2aXrnGx8FdQOXSaGx5S/NoY+jAGxTl2oHPs9ncIQ5AYMR00
-	kbBA==
-X-Gm-Message-State: ALoCoQmYbnifG7TF8YlO3kn0qB+63T4oGe7mL+mezxmue8qGdH3fKjknWysVXfplBPyoq4mU6p35
-X-Received: by 10.194.94.137 with SMTP id dc9mr15741834wjb.48.1447305052267;
-	Wed, 11 Nov 2015 21:10:52 -0800 (PST)
+	bh=RCZ2jATWdrRb686r7q3+D/6VuWqAt7O/hu5V2e+36aU=;
+	b=NIUZXZaHuCXQkayVT7BZRRJXDFWXJ++1gTObXycxo5NqtQsPg08fvBrnp6tOapijOI
+	2wcF1Cdaqa4tgny/pLcUlK2SRBiSdyYpjr51SS1nEKtv0zDxZrAU20MIl0syTp/J8Gbh
+	9k7azdxOOqlLkfgCAiR62/jhFU9rwBrNnSuzQvQuRjhKG8AJ+BVxxIkLG6ROoghpO9T5
+	pe4YiQkJZZEhz531u+rAsNPbdMpNbh1epS4d+TVFQ+zr1ITxZOcqJUfZOEMD8Yn2eCq8
+	E/BgiLZ0Z8VjziDhzkiCnfzzeoarJ/otJJ0foGLDSqoKpxq+TH7DZmhnl8hUFRScfQTB
+	ZuLA==
+X-Gm-Message-State: ALoCoQng2DnT77imY4yuc2MVtpz3WG9QH+SSeJW8rRnTlAxkhEHfqwzYZXRRzpUR7iGtv5nZvyVj
+X-Received: by 10.194.92.170 with SMTP id cn10mr15353543wjb.12.1447305081601; 
+	Wed, 11 Nov 2015 21:11:21 -0800 (PST)
 Received: from localhost.localdomain
 	(ARennes-655-1-234-219.w86-214.abo.wanadoo.fr. [86.214.17.219])
 	by smtp.gmail.com with ESMTPSA id
-	197sm28643050wmx.23.2015.11.11.21.10.51
+	jh4sm12351402wjb.33.2015.11.11.21.11.20
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 11 Nov 2015 21:10:51 -0800 (PST)
+	Wed, 11 Nov 2015 21:11:21 -0800 (PST)
 Sender: "Manuel Bachmann [ IoT.bzh ]" <mbc@koumoul.net>
 From: Manuel Bachmann <manuel.bachmann@iot.bzh>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Nov 2015 06:14:37 +0100
-Message-Id: <1447305277-4751-1-git-send-email-manuel.bachmann@iot.bzh>
+Date: Thu, 12 Nov 2015 06:15:07 +0100
+Message-Id: <1447305307-4789-1-git-send-email-manuel.bachmann@iot.bzh>
 X-Mailer: git-send-email 1.8.3.1
-Subject: [meta-multimedia][PATCH 1/4] dleyna-core: Add recipe
+Subject: [meta-multimedia][PATCH 2/4] dleyna-connector-dbus: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,45 +61,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 05:10:53 -0000
+X-List-Received-Date: Thu, 12 Nov 2015 05:11:22 -0000
 
-dleyna-core is a library of utility functions needed by
-other dLeyna packages (most notably "dleyna-connector-dbus"
-"dleyna-server" and "dleyna-renderer").
-
-It provides APIs for logging, error, settings, task
-management and an IPC abstraction API.
+dleyna-connector-dbus is a D-Bus connector library
+depending on "dleyna-core", and needed by dLeyna
+implementations (most notably "dleyna-server" and
+"dleyna-renderer"). It allows them to discover D-Bus
+buses, and to be started via D-Bus services files.
 
 Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
 ---
- .../recipes-multimedia/dleyna/dleyna-core_0.6.0.bb     | 18 ++++++++++++++++++
+ .../dleyna/dleyna-connector-dbus_0.3.0.bb              | 18 ++++++++++++++++++
  1 file changed, 18 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb
+ create mode 100644 meta-multimedia/recipes-multimedia/dleyna/dleyna-connector-dbus_0.3.0.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-connector-dbus_0.3.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-connector-dbus_0.3.0.bb
 new file mode 100644
-index 0000000..a3b2793
+index 0000000..f23bc6c
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-connector-dbus_0.3.0.bb
 @@ -0,0 +1,18 @@
-+SUMMARY = "Utility functions for dLeyna libraries"
-+DESCRIPTION = "dleyna-core is a library of utility functions that are used \
-+by the higher level dLeyna libraries that communicate with DLNA devices, \
-+e.g., dleyna-server. In brief, it provides APIs for logging, error, settings \
-+and task management and an IPC asbstraction API."
++SUMMARY = "D-Bus connector for dLeyna libraries"
 +HOMEPAGE = "https://01.org/dleyna/"
 +
 +LICENSE = "LGPLv2.1+"
 +LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
-+                    file://libdleyna/core/core.c;endline=21;md5=139cba0c634344abc9456694fbb5083b"
++                    file://src/connector-dbus.c;endline=21;md5=0a1695cef53beefc36651de439f643b5"
 +
-+DEPENDS = "glib-2.0 gupnp"
++DEPENDS = "glib-2.0 dbus dleyna-core"
 +
 +SRC_URI = "git://github.com/01org/${BPN}.git"
-+SRCREV = "27a3786ec013f64fd58243410a60798f824acec3"
++SRCREV = "de913c35e5c936e2d40ddbd276ee902cd802bd3a"
 +S = "${WORKDIR}/git"
 +
 +inherit autotools pkgconfig
++
++FILES_${PN} += "${libdir}/dleyna-1.0/connectors/*.so"
++FILES_${PN}-dev += "${libdir}/dleyna-1.0/connectors/*.la"
++FILES_${PN}-dbg += "${libdir}/dleyna-1.0/connectors/.debug/*.so"
 -- 
 1.8.3.1
 
