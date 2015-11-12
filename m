@@ -1,34 +1,43 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id EBC7777202
+Return-Path: <scott@jumpnowtek.com>
+X-Greylist: delayed 498 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 12 Nov 2015 15:36:40 UTC
+Received: from smtp65.iad3a.emailsrvr.com (smtp65.iad3a.emailsrvr.com
+	[173.203.187.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 47CCA77234
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 15:35:26 +0000 (UTC)
-Received: by wmdw130 with SMTP id w130so159413301wmd.0
+	Thu, 12 Nov 2015 15:36:40 +0000 (UTC)
+Received: from smtp1.relay.iad3a.emailsrvr.com (localhost.localdomain
+	[127.0.0.1])
+	by smtp1.relay.iad3a.emailsrvr.com (SMTP Server) with ESMTP id
+	3C875180D1C for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2015 10:28:20 -0500 (EST)
+Received: from app4.wa-webapps.iad3a (relay-webapps.rsapps.net
+	[172.27.255.140])
+	by smtp1.relay.iad3a.emailsrvr.com (SMTP Server) with ESMTP id
+	32B4E180D12 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2015 10:28:20 -0500 (EST)
+X-Sender-Id: scott@jumpnowtek.com
+Received: from app4.wa-webapps.iad3a (relay-webapps.rsapps.net
+	[172.27.255.140]) by 0.0.0.0:25 (trex/5.5.4);
+	Thu, 12 Nov 2015 10:28:20 -0500
+Received: from jumpnowtek.com (localhost.localdomain [127.0.0.1])
+	by app4.wa-webapps.iad3a (Postfix) with ESMTP id 1C24C280025
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2015 07:35:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=vgVQqly2Kbf/BeYKdTtXNdisBk3IOjUtQmIx5bb7zpk=;
-	b=KOpF98xrAecJtwvvWUcFO0nCx8hfNOopan4hNVzm7w/aA63yPbPkhoHHvG7qmU1eM6
-	cx9aNtfdofTjy9uo9NKVFKNusYnW1/fFJRlQzVOBkUdSUf5RGI58RR+tLuxIx6s+og4S
-	BnBmPhLo9kgJFKijMn/lnIoCiG3BlKi/raLjet/u/4CVjVQ52638R0WlhiiI4e2PY6Zj
-	DVc6wjx7CEAwkTXBpcHLg7VJmc+OrUBqP34WteQ/CjMZ5YUIPfl8sQp91pBVjBjHOfng
-	QwFFyGXSVn4woji1PEZgx+EFTZ2+3RvjrE4p3UlWfvQeEhTtm0BiIxvWTSIGIEev5kth
-	KrAw==
-X-Received: by 10.28.4.212 with SMTP id 203mr18665789wme.89.1447342526586;
-	Thu, 12 Nov 2015 07:35:26 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	it4sm15044302wjb.0.2015.11.12.07.35.24
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Nov 2015 07:35:24 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Thu, 12 Nov 2015 10:28:20 -0500 (EST)
+Received: by apps.rackspace.com (Authenticated sender: scott@jumpnowtek.com,
+	from: scott@jumpnowtek.com) 
+	with HTTP; Thu, 12 Nov 2015 10:28:20 -0500 (EST)
+Date: Thu, 12 Nov 2015 10:28:20 -0500 (EST)
+From: "Scott Ellis" <scott@jumpnowtek.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Nov 2015 16:35:40 +0100
-Message-Id: <1447342540-4196-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.6.3
-Subject: [PATCH][meta-efl] packagegroup-efl-sdk: exclude packagegroup-core-sdk dependency with SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS
+MIME-Version: 1.0
+Importance: Normal
+X-Priority: 3 (Normal)
+X-Type: plain
+X-Auth-ID: scott@jumpnowtek.com
+Message-ID: <1447342100.11374493@apps.rackspace.com>
+X-Mailer: webmail/11.6.5-RC
+Subject: [PATCH][meta-python]: python-requests: Add RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,43 +51,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2015 15:35:31 -0000
+X-List-Received-Date: Thu, 12 Nov 2015 15:36:44 -0000
+Content-Type: text/plain;charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-* packagegroup-core-sdk is MACHINE_ARCH since:
-  commit 66ff089603618dc9b22532509bf39274bf6adf67
-  Author: Dan McGregor <dan.mcgregor@usask.ca>
-  Date:   Wed Dec 10 20:14:57 2014 -0600
-  packagegroup-core-sdk: add gcc-sanitizers to core SDK
-* see:
-  http://lists.openembedded.org/pipermail/openembedded-devel/2015-September/103271.html
-* fixes:
-ERROR: packagegroup-efl-sdk different signature for task do_package_write_ipk.sigdata between qemux86copy and qemux86
-runtaskdeps changed from ['efledbus_1.7.9.bb.do_packagedata', 'eflefl_1.15.1.bb.do_packagedata', 'eflelementary_1.15.1.bb.do_packagedata', 'lttnglttng-ust_git.bb.do_packagedata', 'luajitluajit_2.0.4.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'packagegroupspackagegroup-core-sdk.bb.do_packagedata', 'packagegroupspackagegroup-efl-sdk.bb.do_package', 'packagegroupspackagegroup-efl-sdk.bb.do_packagedata', 'pseudopseudo_1.7.4.bb.do_populate_sysroot:virtual:native', 'valgrindvalgrind_3.10.1.bb.do_packagedata']
-to
-['efledbus_1.7.9.bb.do_packagedata', 'eflefl_1.15.1.bb.do_packagedata', 'eflelementary_1.15.1.bb.do_packagedata', 'lttnglttng-ust_git.bb.do_packagedata', 'luajitluajit_2.0.4.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'packagegroupspackagegroup-core-sdk.bb.do_packagedata', 'packagegroupspackagegroup-efl-sdk.bb.do_package', 'packagegroupspackagegroup-efl-sdk.bb.do_packagedata', 'pseudopseudo_1.7.4.bb.do_populate_sysroot:virtual:native', 'valgrindvalgrind_3.10.1.bb.do_packagedata']
-openembedded-core/meta/recipes-core/packagegroups/packagegroup-core-sdk.bb.do_packagedata with hash 34ab468f4471fb07663ce2952ad545b5
- changed to
-openembedded-core/meta/recipes-core/packagegroups/packagegroup-core-sdk.bb.do_packagedata with hash 0a589cc6975e9a4d4fdbdc63bc76b84f
-Hash for dependent task packagegroupspackagegroup-core-sdk.bb.do_packagedata changed from 34ab468f4471fb07663ce2952ad545b5 to 0a589cc6975e9a4d4fdbdc63bc76b84f
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/conf/layer.conf | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta-efl/conf/layer.conf b/meta-efl/conf/layer.conf
-index ed132aa..ea90ce2 100644
---- a/meta-efl/conf/layer.conf
-+++ b/meta-efl/conf/layer.conf
-@@ -29,3 +29,7 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
-   e-wm-theme-illume-neo->e-wm \
-   e-wm-theme-b-and-w->e-wm \
- "
-+
-+SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-+  packagegroup-efl-sdk->packagegroup-core-sdk \
-+"
--- 
-2.6.3
+The python-requests module has runtime dependencies.=0A=0ASigned-off-by: Sc=
+ott Ellis <scott@jumpnowtek.com>=0A---=0A meta-python/recipes-devtools/pyth=
+on/python-requests_2.7.0.bb | 2 ++=0A 1 file changed, 2 insertions(+)=0A=0A=
+diff --git a/meta-python/recipes-devtools/python/python-requests_2.7.0.bb b=
+/meta-python/recipes-devtools/python/python-requests_2.7.0.bb=0Aindex 1564d=
+50..ac47202 100644=0A--- a/meta-python/recipes-devtools/python/python-reque=
+sts_2.7.0.bb=0A+++ b/meta-python/recipes-devtools/python/python-requests_2.=
+7.0.bb=0A@@ -14,3 +14,5 @@ SRC_URI[sha256sum] =3D "398a3db6d61899d25fd4a06c=
+6ca12051b0ce171d705decd7ed5511517b=0A S =3D "${WORKDIR}/${SRCNAME}-${PV}"=
+=0A=0A inherit setuptools=0A+=0A+RDEPENDS_${PN} =3D "python-email python-js=
+on python-netserver python-zlib"=0A--=0A2.5.0=0A
 
 
