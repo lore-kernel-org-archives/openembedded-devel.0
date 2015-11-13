@@ -1,61 +1,28 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
-	[209.85.213.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 146BD772DC
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D6683772D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Nov 2015 11:39:17 +0000 (UTC)
-Received: by igl9 with SMTP id 9so13804164igl.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Nov 2015 03:39:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems_com_br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=Yoq3MYx9VRN8RsWFhU6Xopfi9UKetOiCEaGWPFWg+Wk=;
-	b=DDHnTB4RM6+WUaddRYBIBKXPayJFdW97k7s9Xph09cna0PcHaQNWq5gxb+6RFGfga5
-	TixZQ81oGH/RPEo2uhfxJp5XGOPfNsvVpEMFHiPQFWSi4zQrHUHZsTbBt6nbh39s7ZAN
-	KDRfhtoIR1KpkHPMFMIpyBA2q6RrlNJmKlB/hb1YWdookBmIheqMYukvNz4pa6+icEgn
-	g/s1czoDsyHy2XoGvaHxCTpf97+cxJC1Ls5+FS4ftMoUbtQIJ/+LSRHzwSN6JK4pBpZv
-	LkB0yv/eINgEp+7pWQLKL237uoN5CqTTqvRge9FbKn9cN15P9/fdbiRRKc5tfoVlcqyU
-	++IQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=Yoq3MYx9VRN8RsWFhU6Xopfi9UKetOiCEaGWPFWg+Wk=;
-	b=H6eZ+6GXNPYSIPvrUBzZgjhlrrIkGiRT0OtZh0afQ9WdpD4hcfOcUjYz7ePLDDeU9C
-	H/xb0doLsIC56xYPAN1ze08vQKQOCNkjOsuYuIHRM4L1yV1ZjPyWgKNU/Id7qkLJD6Pl
-	h85tTs5O2NFxtKxj9we8lLa0PgbCneDq2gmcxgvgliLJv+CCxYUlIxKx4jNMlAwSYuQo
-	8IU/PHTqIjup9kzk1sKC7WV7sLl24cWMcHhyFIJWevgeMuVxW1mSoy4uQgaTQd/pZt/w
-	WVBxEOcQOB//6IHgJshAOaVJoYHyUyin1W9k5fqDRM5sEQIJ+v9E2PsqgjKw1AUE70Qg
-	mb8Q==
-X-Gm-Message-State: ALoCoQmnTGIAVyl8WzikAQCXBsrN0cNMYCfqFVL2Y0oQelLBOB+TYWjJxQl0sIc9Y1io46GBLiHA
-X-Received: by 10.50.180.35 with SMTP id dl3mr2846068igc.18.1447414757711;
-	Fri, 13 Nov 2015 03:39:17 -0800 (PST)
-Received: from mail-io0-f177.google.com (mail-io0-f177.google.com.
-	[209.85.223.177])
-	by smtp.gmail.com with ESMTPSA id e8sm1200028igl.9.2015.11.13.03.39.15
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 13 Nov 2015 03:39:16 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by iofh3 with SMTP id h3so94759498iof.3;
-	Fri, 13 Nov 2015 03:39:15 -0800 (PST)
+	Fri, 13 Nov 2015 11:45:45 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tADBjh3j026004
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 13 Nov 2015 03:45:43 -0800 (PST)
+Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
+	Fri, 13 Nov 2015 03:45:42 -0800
+Message-ID: <5645CD5C.8040908@windriver.com>
+Date: Fri, 13 Nov 2015 19:45:32 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
 MIME-Version: 1.0
-X-Received: by 10.107.160.198 with SMTP id j189mr19145294ioe.37.1447414755538; 
-	Fri, 13 Nov 2015 03:39:15 -0800 (PST)
-Received: by 10.36.15.197 with HTTP; Fri, 13 Nov 2015 03:39:15 -0800 (PST)
-In-Reply-To: <4335862.fNWyiaI9Bu@peggleto-mobl.ger.corp.intel.com>
-References: <58488.10.252.13.130.1447346734.squirrel@linux.intel.com>
-	<CALbNGRTcwpywgtSJvm-q6aZHK5vaF5BFcxmKseHYjcy6aWnmBg@mail.gmail.com>
-	<4335862.fNWyiaI9Bu@peggleto-mobl.ger.corp.intel.com>
-Date: Fri, 13 Nov 2015 09:39:15 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKqk4B_i+59asEqoVNjkynBWTACD0cM4f0JdxMCopprTkA@mail.gmail.com>
-Message-ID: <CAP9ODKqk4B_i+59asEqoVNjkynBWTACD0cM4f0JdxMCopprTkA@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] qt4 moves out of oe-core - to meta-qt4, or to meta-oe?
+To: <schnitzeltony@googlemail.com>, Martin Jansa <martin.jansa@gmail.com>
+References: <1447409052-30874-1-git-send-email-hongxu.jia@windriver.com>	<CALbNGRQuQcD54T7raCZdhM3-fTpiiH2Xa2C=0svMq8w+HMrnkg@mail.gmail.com>	<CA+chaQefhmSve7vJPMAFtzmay=+qgcrW-UJ-M3FY4Yoa8ZiAuQ@mail.gmail.com>
+	<CALbNGRSt0Ws2KpBmqL9xuMGEj-CaZN+DXqg1N6Z8Cqj7frR3SA@mail.gmail.com>
+In-Reply-To: <CALbNGRSt0Ws2KpBmqL9xuMGEj-CaZN+DXqg1N6Z8Cqj7frR3SA@mail.gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-xfce][PATCH] meta-xfce/layer: explicitly set networkmanager to NETWORK_MANAGER
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,52 +36,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2015 11:39:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 13 Nov 2015 11:45:46 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thu, Nov 12, 2015 at 5:08 PM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> On Thursday 12 November 2015 18:03:27 Andreas M=C3=BCller wrote:
->> On Thu, Nov 12, 2015 at 5:45 PM,  <alexander.kanavin@linux.intel.com> wr=
-ote:
->> > Hello,
->> >
->> > now that 2.0 is out, it's time to move the Qt4 recipes out of oe-core.
->> > This has been discussed previously here:
->> > http://lists.openembedded.org/pipermail/openembedded-core/2015-June/10=
-6355
->> > .html
->> >
->> > I'm not sure where the recipes should land, and want to ask your opini=
-on.
->> > The options are:
->> > 1) Make a new layer, meta-qt4, under meta-openembedded tree. Move also
->> > everything in meta-oe/recipes-qt (and possibly other spots) to that la=
-yer.
->> > This is somewhat more disruptive to people's layer configurations, but
->> > would clearly separate qt4, and slim down meta-oe.
->> >
->> > 2) Simply move the qt4 recipes from oe-core to meta-oe/recipes-qt, so =
-they
->> > will be next to all the qt4-based software. This is less disruptive, b=
-ut
->> > adds bloat to meta-oe.
->> >
->> > Preferences?
+On 11/13/2015 06:36 PM, Andreas Müller wrote:
+> On Fri, Nov 13, 2015 at 11:19 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> Why not use VIRTUAL-RUNTIME variable like in other places? And if it's
+>> needed by xfce4-power-manager, then why don't you add it to RDEPENDS there?
 >>
->> 1) or even better in a separate repo
+> networkmanager is already in RDEPENDS of xfce4-power-manager. I think
+> when building an image packagegroup-core-x11-sato there is a conflict.
 >
-> To be honest, I had anticipated this being a separate meta-qt4 repo mysel=
-f. It
-> would be consistent with what has been done with Qt 5 and much earlier wi=
-th
-> Qt 3.
+> I looked into this a bit more and think:
+> 1. networkmanger support is optional so a packagroup would allow
+> conman and xfce4-power-manager live together in harmony
+> 2. I think the patch goes much to far: To have networkmanager in
+> images based on packagegroup-core-x11-sato the correct way would be to
+> write NETWORK_MANAGER = "networkmanager" in the image recipe.
 
-Agreed.
+Hi Andreas,
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+The condition of writing  NETWORK_MANAGER = "networkmanager" is
+packagegroup-core-x11-sato + xfce4-power-manager, I think it is not
+proper to test the existence of them in an image recipe.
+
+Hi Martin & Andreas,
+
+How about we still do the setting in meta-xfce's local.conf and replace
+networkmanager with variable ${NETWORK_MANAGER} in
+xfce4-power-manager's RDEPENDS.
+
+So we could globally control network manager by variable
+${NETWORK_MANAGER} for the similar issue.
+
+//Hongxu
+> Andreas
+
 
