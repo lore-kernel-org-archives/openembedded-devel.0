@@ -1,40 +1,49 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id AC5E8772E3
+Return-Path: <kergoth@gmail.com>
+Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
+	[209.85.223.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 77F5C772D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Nov 2015 12:05:47 +0000 (UTC)
-Received: by ioc74 with SMTP id 74so95111133ioc.2
+	Fri, 13 Nov 2015 14:47:28 +0000 (UTC)
+Received: by iouu10 with SMTP id u10so92058363iou.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Nov 2015 04:05:47 -0800 (PST)
+	Fri, 13 Nov 2015 06:47:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=ALamZy9xf/QX5SrlQ3GWHWvDTGssteMicgKOGZ5Z5/g=;
+	b=LWKNvyoLrb1upXw/A7GwALWfF4G7QGTjGMAvM2jU0CXp51OFvZDrZsArFMdDTEe3Wp
+	OE/cL13XbZniAfaXBpSyQxdRFl4Sy4oAJ6z+/qrPT16LbhJl8+yOI0lZhk8QXh65mmPW
+	F5eAlGk2guSZxh1AvwpG5oIIMlS97BWe9joOCLI6evs4VprJVRHY6AsE5wIEm3356jiA
+	PezKSGCbykDvIRp37ymjzhWM69bJ0jEioSfLHoUeFBsxnD2b+OnfA630lKOxGXrRIbsU
+	zFglRQwbW5LisnxtoLiOaMAAdew7YYz0r23wr7IEqPD/5Yb/hGB3HgmefMN5PKhh98bq
+	pAxQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=ieTTKfMKNH22IoVysMWFYaDrD0r/KvY5gUt9F9NGRIs=;
-	b=u4qGIGxgf5L8GLuKZL38M4r1E5LSv2CnLIzpG0g5cyhtFSaS0djJU23aOETloheyOY
-	3zdKpN76mK6kI4mm0aCatNRyJlgVHYpY09LRaqzBpRPhh1EiS8+RDxbcw3TX2ZGIapoH
-	Bxbsri3hquxdm99W31DfXXqbsqfMTv1uDbjSathNi4UuE8gbb2PcBrO5eiXiV8elHbFA
-	vRaCfvV9zXMCroR7jduMYBCG1vJCprvFfAiDfSjEe2/rWCKoPjYmH3S4kYtQ1YvYJI7N
-	Tf0kqG4sXPEqqhT4RHbTqQfK1OecXXxHd+Ytn0YMw9Lp7JDYVDNrKTe4LCFYPpztC14o
-	BnZg==
+	d=mentor_com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=ALamZy9xf/QX5SrlQ3GWHWvDTGssteMicgKOGZ5Z5/g=;
+	b=kZpMGLIceH62f8GZH3c7R6rPSF72XfDluSF1Jc0AxHJAfYe47qsdMFrdkztzuXk7yM
+	jcqiw5Op7ivy6iXMJ9PE4RWKwPx5/DgqwlCekQugTc3/aHueX3VUKJOj9ifOgePCXBMr
+	Ow5M1eq3TX/hkxkg38a7JqbujojIxUwnlpMNRhnIKuOs1LX68d+sk38PYQkehC7/vqrp
+	7nayIKuaxU3uKRRUxp7gTcQict0MNJmgmw3kbP0+UqBueTtvJYTIsi/RrXMZDHkqmTAQ
+	Bj6V9onxrLAI6MK8XIQoQfRQLo9YUAO44qc3ehA3Zf8+m7Hjnn/cqmk8ALezwxGYRiyB
+	B0Sg==
+X-Received: by 10.107.134.28 with SMTP id i28mr20204703iod.74.1447426049129;
+	Fri, 13 Nov 2015 06:47:29 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.107.130.155 with SMTP id m27mr22148582ioi.133.1447416347418; 
-	Fri, 13 Nov 2015 04:05:47 -0800 (PST)
-Received: by 10.36.25.81 with HTTP; Fri, 13 Nov 2015 04:05:47 -0800 (PST)
-In-Reply-To: <5645CD5C.8040908@windriver.com>
-References: <1447409052-30874-1-git-send-email-hongxu.jia@windriver.com>
-	<CALbNGRQuQcD54T7raCZdhM3-fTpiiH2Xa2C=0svMq8w+HMrnkg@mail.gmail.com>
-	<CA+chaQefhmSve7vJPMAFtzmay=+qgcrW-UJ-M3FY4Yoa8ZiAuQ@mail.gmail.com>
-	<CALbNGRSt0Ws2KpBmqL9xuMGEj-CaZN+DXqg1N6Z8Cqj7frR3SA@mail.gmail.com>
-	<5645CD5C.8040908@windriver.com>
-Date: Fri, 13 Nov 2015 13:05:47 +0100
-Message-ID: <CALbNGRSErpjVpHjKQp20u6y-QmNe7GE+GcBWCPhEwSB9==yGEw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH] meta-xfce/layer: explicitly set networkmanager to NETWORK_MANAGER
+Sender: kergoth@gmail.com
+Received: by 10.79.93.7 with HTTP; Fri, 13 Nov 2015 06:47:09 -0800 (PST)
+In-Reply-To: <39CE9B1B-A0D2-4186-90B5-79281E821017@gmail.com>
+References: <1447359445-27258-1-git-send-email-kergoth@gmail.com>
+	<1447359445-27258-2-git-send-email-kergoth@gmail.com>
+	<39CE9B1B-A0D2-4186-90B5-79281E821017@gmail.com>
+From: Christopher Larson <chris_larson@mentor.com>
+Date: Fri, 13 Nov 2015 07:47:09 -0700
+X-Google-Sender-Auth: SVm0Pi6lW7XMs7AbfU7CzSc_G2A
+Message-ID: <CABcZANkTiE5m75F2eaDQfpBNDvoPYT70p5Y7PEMGedvxK2tntA@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH 2/5] talloc, libtevent, libtdb: depend on attr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,64 +57,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2015 12:05:50 -0000
+X-List-Received-Date: Fri, 13 Nov 2015 14:47:31 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 13, 2015 at 12:45 PM, Hongxu Jia <hongxu.jia@windriver.com> wro=
-te:
-> On 11/13/2015 06:36 PM, Andreas M=C3=BCller wrote:
->>
->> On Fri, Nov 13, 2015 at 11:19 AM, Martin Jansa <martin.jansa@gmail.com>
->> wrote:
->>>
->>> Why not use VIRTUAL-RUNTIME variable like in other places? And if it's
->>> needed by xfce4-power-manager, then why don't you add it to RDEPENDS
->>> there?
->>>
->> networkmanager is already in RDEPENDS of xfce4-power-manager. I think
->> when building an image packagegroup-core-x11-sato there is a conflict.
->>
->> I looked into this a bit more and think:
->> 1. networkmanger support is optional so a packagroup would allow
->> conman and xfce4-power-manager live together in harmony
->> 2. I think the patch goes much to far: To have networkmanager in
->> images based on packagegroup-core-x11-sato the correct way would be to
->> write NETWORK_MANAGER =3D "networkmanager" in the image recipe.
->
->
-> Hi Andreas,
->
-> The condition of writing  NETWORK_MANAGER =3D "networkmanager" is
-> packagegroup-core-x11-sato + xfce4-power-manager, I think it is not
-> proper to test the existence of them in an image recipe.
-Here I was wrong
->
-> Hi Martin & Andreas,
->
-> How about we still do the setting in meta-xfce's local.conf and replace
-> networkmanager with variable ${NETWORK_MANAGER} in
-> xfce4-power-manager's RDEPENDS.
->
-> So we could globally control network manager by variable
-> ${NETWORK_MANAGER} for the similar issue.
->
-> //Hongxu
->>
->> Andreas
->
-packagegroup-core-x11-sato ships a more or less complete
-matchbox-desktop. Why build this together with xfce? OK even if you
-really want to do that for some reason - I think this is a corner
-case. So why adding a layer - global variable for this?
+On Fri, Nov 13, 2015 at 2:38 AM, Jens Rehsack <rehsack@gmail.com> wrote:
 
-So I think
-* If you want to use xfce4-power-manager + packagegroup-core-x11-sato
-+ connman -> add a packageconfig in xfce4-power-manager
-* If you are looking for a solution to make packagegroup-core-x11-sato
-use networkmanager ask somwhere else this is not meta-xfce's job
+> > Am 12.11.2015 um 21:17 schrieb Christopher Larson <kergoth@gmail.com>:
+> >
+> > From: Christopher Larson <chris_larson@mentor.com>
+> >
+> > These will depend on libattr if it's available, and we need deterministic
+> > builds. This fixes a build-deps failure which occurs when attr is built
+> before
+> > them. There's currently no configuration option to explicitly control
+> this
+> > dependency, and I don't know enough about waf to add such an option, so
+> > unconditionally dep on it for now.
+> >
+> > Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+> > ---
+> > meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb        | 1 +
+> > meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb | 2 +-
+> > meta-oe/recipes-support/talloc/talloc_2.1.1.bb        | 1 +
+> > 3 files changed, 3 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb
+> b/meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb
+> > index 0b9e1f2..e349187 100644
+> > --- a/meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb
+> > +++ b/meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb
+> > @@ -1,6 +1,7 @@
+> > SUMMARY = "The tdb library"
+> > SECTION = "libs"
+> > LICENSE = "LGPL-3.0+ & GPL-3.0+"
+> > +DEPENDS += "attr"
+> >
+> > LIC_FILES_CHKSUM =
+> "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b
+> \
+> >
+>  file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
+> > diff --git a/meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb
+> b/meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb
+> > index f297f30..c37eeb3 100644
+> > --- a/meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb
+> > +++ b/meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb
+> > @@ -3,7 +3,7 @@ HOMEPAGE = "http://tevent.samba.org"
+> > SECTION = "libs"
+> > LICENSE = "LGPLv3+"
+> >
+> > -DEPENDS += "talloc libcap"
+> > +DEPENDS += "talloc libcap attr"
+> > RDEPENDS_${PN} += "libtalloc"
+> > RDEPENDS_python-tevent = "python"
+> >
+> > diff --git a/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
+> b/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
+> > index 89c390f..7931374 100644
+> > --- a/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
+> > +++ b/meta-oe/recipes-support/talloc/talloc_2.1.1.bb
+> > @@ -2,6 +2,7 @@ SUMMARY = "Hierarchical, reference counted memory pool
+> system with destructors"
+> > HOMEPAGE = "http://talloc.samba.org"
+> > SECTION = "libs"
+> > LICENSE = "LGPL-3.0+ & GPL-3.0+"
+> > +DEPENDS += "attr"
+> >
+> > SRC_URI = "http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar.gz"
+> > LIC_FILES_CHKSUM =
+> "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b
+> \
+> > --
+> > 2.2.1
+>
+> RDEPENDS is wrong for deterministic builds, since they leave a race
+> condition open that attr is build parallel to libtevent
+> and 2nd build is different to first build.
+>
+> If you want, I handle that better in a patchy way I discussed with JaMa
+> yesterday in #yocto (patch check out depending on PACKAGECONFIG)
 
-Andreas
 
-Andreas
+I don't believe anyone said anything about rdepending on attr. This patch
+certainly doesn't, it adds to DEPENDS. But as was said earlier in the
+thread, a way to explicitly enable/disable the dep in the underlying
+buildsystem would be better.
+-- 
+Christopher Larson
+kergoth at gmail dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
