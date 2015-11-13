@@ -1,33 +1,55 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id DDE55772E3
+Return-Path: <sledz@dresearch-fe.de>
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 29E4C772F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Nov 2015 10:19:51 +0000 (UTC)
-Received: by wmww144 with SMTP id w144so24001339wmw.0
+	Fri, 13 Nov 2015 10:19:55 +0000 (UTC)
+Received: by wmdw130 with SMTP id w130so22630591wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Nov 2015 02:19:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Z4bh2m/TeCFwGo+sHUrlVnw0huvsxC0a1cYYfguonF0=;
-	b=c2rEwHvKh8zqgvdEq5XtHLV+eRoRBU+1W/DZeM1wIrSP70/qLB/VqOTHOAy4UCpZx+
-	w/mKdUY081G8O6WQhugh1EqrS9WolmcuFxeRUAHdzj60OOgSt+JVaty10iX1Q2osq2xW
-	czd6TADdGckqA0Br6cH19jZNZXRlRYwPkVbD2AJUyZM9X95gLiO3vUDmMUQiXQDvVt4P
-	upxRqb5BdTWL6777QwtxODM1J08Gt6k+CJl20v+J5Es1r6EgFMX+2b7MaOiLh455ahvH
-	G+LqCPfnGo+uNVrWuxNMmomeZeEdckX9flzybEfBorceMqni05OlD0sD22CVxOIJGPny
-	tBZg==
+	Fri, 13 Nov 2015 02:19:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=dresearch-fe_de.20150623.gappssmtp.com; s=20150623;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=FDXgdyXoMKIWUO3iuqLp8uks3ky7TIdQK8u9iWXM1Is=;
+	b=MOAOeCxjkCPYQgEVJQW7t4vZ8GWJ6/AsnrJOZQkjjxB8LwfOOzg3VfPjOqFTmOoydm
+	FwkOreBMBsE1Tx82H78awMM3rUWuROwiQ3/FzzYpTqTOi08J0sM1oll+ChmezdKxsHKV
+	o4M5lO9MFLu0zbQqp58NM68+gnABPhsHNHn+wzK3RkNySoxmn/rpkfKMYTC5KZPOiPxe
+	hoKx7efAaX0L5Bl8/5FKnUgIKm4foBPAS5laJzYQyz4pzoeidLpCXTftw+T9JRH9hs3h
+	BHvTRjtDda3RWY1fz78q4IclhcjD2kL91EkCohkBXoj5KaEw10I6AtzlzXNCzI03Gvcz
+	bccQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=FDXgdyXoMKIWUO3iuqLp8uks3ky7TIdQK8u9iWXM1Is=;
+	b=fb7GOxdbBKZ6fidzR82+4Wgw258n0Ds9Qx3LOSjrlGbZzLjyRjdYMTNbp7K+YOeYr7
+	Ml1qplERpEJAzv9+IrcBC36S+5QQ/RTIVCJwCtUJA2X6ZmUE/cxvUV/fyz2+HMYkGmtw
+	dJ8u1rR2hGZkVytJNNGbOfF1By9gBO8tkVJI6IJbr/O1jXPItQvEB0CdYhdHw2yV79Pj
+	KhDAUcu1Y776SQ8hVXMGzKhtc8U8WR4b8dnkEDyold2nQl3xkLhD6S2+rfYm80dyQ2YQ
+	+o1v47VfCxNCHBIFBdzE3NL58lGQvs8DdyR+9YvcmKCUvPgGOjh6MVFV0XQn1VYsYlZj
+	EM/w==
+X-Gm-Message-State: ALoCoQk3GUzWxUBdjnTXtfV2NnQC7v+GrMKwOo0C4AI2tsq/I0KlC10A1/nDJNFd3VP/+oGq0csT
+X-Received: by 10.28.24.144 with SMTP id 138mr2649030wmy.43.1447409995547;
+	Fri, 13 Nov 2015 02:19:55 -0800 (PST)
+Received: from [172.29.23.46] (zk223.dresearch-fe.de. [217.92.177.116])
+	by smtp.googlemail.com with ESMTPSA id
+	l1sm3225880wmg.21.2015.11.13.02.19.53
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 13 Nov 2015 02:19:54 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org,
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	Cliff Brake <cliff.brake@gmail.com>
+References: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
+From: Steffen Sledz <sledz@dresearch-fe.de>
+X-Enigmail-Draft-Status: N1110
+Message-ID: <5645B949.6030900@dresearch-fe.de>
+Date: Fri, 13 Nov 2015 11:19:53 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
 MIME-Version: 1.0
-X-Received: by 10.28.183.215 with SMTP id h206mr3064456wmf.0.1447409991378;
-	Fri, 13 Nov 2015 02:19:51 -0800 (PST)
-Received: by 10.194.154.232 with HTTP; Fri, 13 Nov 2015 02:19:51 -0800 (PST)
-In-Reply-To: <CALbNGRQuQcD54T7raCZdhM3-fTpiiH2Xa2C=0svMq8w+HMrnkg@mail.gmail.com>
-References: <1447409052-30874-1-git-send-email-hongxu.jia@windriver.com>
-	<CALbNGRQuQcD54T7raCZdhM3-fTpiiH2Xa2C=0svMq8w+HMrnkg@mail.gmail.com>
-Date: Fri, 13 Nov 2015 11:19:51 +0100
-Message-ID: <CA+chaQefhmSve7vJPMAFtzmay=+qgcrW-UJ-M3FY4Yoa8ZiAuQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-xfce][PATCH] meta-xfce/layer: explicitly set networkmanager to NETWORK_MANAGER
+In-Reply-To: <CAOd_LFwgMqDUBKzxjs50G+=F0TgFg8ZuoCBX6jqs6p8fLFQibg@mail.gmail.com>
+Subject: Re: OE/Yocto developer survey
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,51 +63,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2015 10:19:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 13 Nov 2015 10:19:56 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 8bit
 
-Why not use VIRTUAL-RUNTIME variable like in other places? And if it's
-needed by xfce4-power-manager, then why don't you add it to RDEPENDS there?
+On 26.10.2015 20:18, Cliff Brake wrote:
+> Hi,
+> 
+> I'd like to get some feedback on the following questions -- feel free
+> to respond to list, or directly to me, and I'll withhold your
+> name/company from any results.
+> 
+> I would like to collect feedback until 2015-11-02, and will summarize
+> the results after that.
+> 
+> My goal with this survey is to get a sense for best practices and what
+> is most commonly used among Yocto/OE developers so I can better advise
+> clients using Yocto/OE.  Hopefully this will also generate some
+> interesting discussions.
+> 
+> How long have you been using OE?  _2008_
+> 
+> How do you use OE/Yocto?
+> [ X ] product development
+> [  ] hobby/research/education/yocto core developer, etc
+> 
+> What distro do you use?
+> [  ] Poky
+> [ X ] Angstrom
+> [ X ] nodistro or custom
+> 
+> How do you organize multiple git repos?
+> [ X ] Git submodules
+> [  ] Repo
+> [  ] Other
+> 
+> What packaging system?
+> [ X ] OPKG
+> [  ] RPM
+> [  ] Other
+> 
+> What GUI toolkits?
+> [ X ] Qt
+> [  ] Gtk
+> [  ] EFL
+> [  ] HTML5/JS
+> [  ] Other
+> 
+> What init system?
+> [ X ] systemd
+> [  ] sysvinit
+> [  ] busybox init
+> [  ] Other
+> 
+> What libc?
+> [ X ] glibc
+> [  ] uclibc
+> [  ] musl
+> [  ] Other
+> 
+> How do you develop custom applications?
+> [  ] application-SDK
+> [ X ] devshell
+> [  ] develop on PC, test on target
+> [ X ] Other
+> 
+> What language do you primarily use for custom applications?
+> [ X ] C
+> [  ] C++
+> [  ] Python
+> [  ] Javascript
+> [  ] Lua
+> [  ] Other
+> 
+> What do you use for Continuous Integration?
+> [  ] Buildbot
+> [ X ] Jenkins
+> [  ] Other
+> 
+> Do you use any any of the tooling projects
+> (https://www.yoctoproject.org/tools-resources/projects) such as ADT,
+> Hob, Toaster, etc?
+> 
+> _no_
+> 
+> Reasons or explanations are appreciated, and please feel free to
+> include additional choices/information you think are relevant.
 
-On Fri, Nov 13, 2015 at 11:13 AM, Andreas M=C3=BCller <
-schnitzeltony@googlemail.com> wrote:
-
-> On Fri, Nov 13, 2015 at 11:04 AM, Hongxu Jia <hongxu.jia@windriver.com>
-> wrote:
-> > The NETWORK_MANAGER is connman-gnome in oe-core by default,
-> > which conflicts with networkmanager. And networkmanager is
-> > required by xfce4-power-manager in meta-xfce. So we explicitly
-> > set networkmanager to NETWORK_MANAGER for meta-xfce.
-> >
-> > Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> > ---
-> >  meta-xfce/conf/layer.conf | 3 +++
-> >  1 file changed, 3 insertions(+)
-> >
-> > diff --git a/meta-xfce/conf/layer.conf b/meta-xfce/conf/layer.conf
-> > index 55bcef6..e38d85d 100644
-> > --- a/meta-xfce/conf/layer.conf
-> > +++ b/meta-xfce/conf/layer.conf
-> > @@ -17,3 +17,6 @@ LAYERDEPENDS_xfce-layer +=3D "openembedded-layer"
-> >  LAYERDEPENDS_xfce-layer +=3D "gnome-layer"
-> >  LAYERDEPENDS_xfce-layer +=3D "openembedded-layer"
-> >  LAYERDEPENDS_xfce-layer +=3D "meta-python"
-> > +
-> > +# It is required by xfce4-power-manager
-> > +NETWORK_MANAGER =3D "networkmanager"
-> > --
-> I was wondering why I never needed such kind of patch and checked: In
-> my layers It is only used in packagegroup-core-x11-sato.
->
-> So I am fine with this patch but could you mention
-> packagegroup-core-x11-sato in the commit message please.
->
-> Andreas
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
