@@ -1,34 +1,37 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
-	[209.85.213.172])
-	by mail.openembedded.org (Postfix) with ESMTP id AA02F7735D
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B5BF77359
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Nov 2015 17:02:10 +0000 (UTC)
-Received: by igvi2 with SMTP id i2so40011747igv.0
+	Fri, 13 Nov 2015 17:03:23 +0000 (UTC)
+Received: by wmww144 with SMTP id w144so36972471wmw.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Nov 2015 09:02:10 -0800 (PST)
+	Fri, 13 Nov 2015 09:03:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=zHPXkz8c0inpUI//44uPioht0faLaiZnV/wdzEmeKUE=;
-	b=B0hsCStQkquy/0LPu/qBTMxzIJjPGSqtw60J1GIyfEDmZ07WuRJLiLQFpX95SAtPyF
-	4CtFyj8ZeM/gXyQH1xRp+PxeaqQHxVeXuKFR6UIZja7wRrRcmTr+i8SZq+41NpCNgl+q
-	ChQBcZD5fPrnCQv7UXgTmgap7Wx1G/hUGLqORAlMhrFL6tIC0KnCp2QQ23A5jMcXdDcs
-	93tF8xHiPf5ETTy84hp4H/sD4zcLv80va47LwN+9bIr2nivKinOFV/fNgW3FWbLrJE5O
-	CRcTeiq96Jjhf8CNCJAmuQgarubJx4MwSQxw3HNb7IciqWjb1qigyg8ksVmWARjnvou3
-	hJmA==
-X-Received: by 10.50.13.72 with SMTP id f8mr4601465igc.38.1447434130652; Fri,
-	13 Nov 2015 09:02:10 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.79.93.7 with HTTP; Fri, 13 Nov 2015 09:01:50 -0800 (PST)
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=OnLdIh1IltTDbrptoWcn1Jw90/QBZdsAEUoO5tAUc2g=;
+	b=NJgMlbZRKVusdHCjHonQ8IhwOUmWFAHRVUMqqJK7ZUexHv2GX4rRQnVo1jHq+DS7oj
+	hhmuFqbCU7aTeYVxDazNEEIy859iVUwHg/w8mihDwwzvZdXY7+Y3F57bzRUl14kJWIkw
+	svkSEnFTvR7iX4QVNWyZPD0n/ssCVIhOROQ637j47NGFxfYo+ge674/YrWELIJsw12MF
+	w1L+RfYNKUMV8VxnUar6kpQAHAfJYYpa37J5Ug5XlTFTAmJ1HP2yij0B54MfzCUZLKYq
+	ngaUkqlk4+BVS/ZBh1E2WOK5EeypNvAOSqVZmn6l/EIfqkzCGHh2JjMENK9e/b/b16Qa
+	QT5g==
+X-Received: by 10.28.55.209 with SMTP id e200mr4663538wma.79.1447434203203;
+	Fri, 13 Nov 2015 09:03:23 -0800 (PST)
+Received: from walter.muppets.liwing.de (p578b540c.dip0.t-ipconnect.de.
+	[87.139.84.12])
+	by smtp.gmail.com with ESMTPSA id u4sm14353755wjz.4.2015.11.13.09.03.22
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 13 Nov 2015 09:03:22 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+From: Jens Rehsack <rehsack@gmail.com>
 In-Reply-To: <CABcZAN=+c2SkEiZtVjZ1ZGtp5dXs79xYmRh2f1P50qV0Kzd2cw@mail.gmail.com>
+Date: Fri, 13 Nov 2015 18:03:20 +0100
+Message-Id: <3A90D2C4-0CA5-4CF0-B0CE-5B438629F8FD@gmail.com>
 References: <9A2ED550-50FC-4223-B79E-5801010FEF49@gmail.com>
 	<CABcZAN=+c2SkEiZtVjZ1ZGtp5dXs79xYmRh2f1P50qV0Kzd2cw@mail.gmail.com>
-From: Christopher Larson <kergoth@gmail.com>
-Date: Fri, 13 Nov 2015 10:01:50 -0700
-Message-ID: <CABcZAN=EgNrRxnML=Jb_ipNL-yYiFfwZRQLVaoNT2qBmpHA+rQ@mail.gmail.com>
-To: Jens Rehsack <rehsack@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+To: Christopher Larson <kergoth@gmail.com>
+X-Mailer: Apple Mail (2.2104)
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH] talloc: rename to libtalloc and cleanup dependency mess
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -44,41 +47,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2015 17:02:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 13 Nov 2015 17:03:24 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 13, 2015 at 9:56 AM, Christopher Larson <kergoth@gmail.com>
+
+> Am 13.11.2015 um 17:56 schrieb Christopher Larson <kergoth@gmail.com>:
+>=20
+> On Fri, Nov 13, 2015 at 8:53 AM, Jens Rehsack <rehsack@gmail.com> =
 wrote:
+> To avoid errors when building dev-images (talloc-dev is missing), and =
+to avoid
+> insane empty packages for that, rename talloc -> libtalloc as =
+libtevent shows.
+>=20
+> With that, remove dependencies to attr/xattr and libbsd - unless =
+explicitely
+> enabled via PACKAGECONFIG.
+>=20
+> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+>=20
+> Our recipe names should be named based on the upstream project name, =
+not the library they happen to ship.
+>=20
+> Instead, either we could we should kill all the libtalloc bits in the =
+PACKAGES var, and let the debian shlib renaming handle renaming talloc* =
+to libtalloc*, or add a talloc-dev that pulls in libtalloc-dev & =
+pytalloc-dev.
 
-> On Fri, Nov 13, 2015 at 8:53 AM, Jens Rehsack <rehsack@gmail.com> wrote:
->
->> To avoid errors when building dev-images (talloc-dev is missing), and to
->> avoid
->> insane empty packages for that, rename talloc -> libtalloc as libtevent
->> shows.
->>
->> With that, remove dependencies to attr/xattr and libbsd - unless
->> explicitely
->> enabled via PACKAGECONFIG.
->>
->> Signed-off-by: Jens Rehsack <sno@netbsd.org>
->>
->
-> Our recipe names should be named based on the upstream project name, not
-> the library they happen to ship.
->
-> Instead, either we could we should kill all the libtalloc bits in the
-> PACKAGES var, and let the debian shlib renaming handle renaming talloc* to
-> libtalloc*, or add a talloc-dev that pulls in libtalloc-dev & pytalloc-dev.
->
+libtevent does it the same way - neither is ideal, but the original =
+behaviour results in unbuildable -dev images with talloc (samba) in it.
 
-I just realized this may sound critical, but that wasn't intended. The
-other changes look great, thanks for your work on making those dependencies
-optional, it's good stuff.
--- 
-Christopher Larson
-kergoth at gmail dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Beside of the rename, what's with the rest?
+
+Cheers
+--=20
+Jens Rehsack - rehsack@gmail.com
+
 
