@@ -1,26 +1,26 @@
 Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8558C77389
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EE68277381
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Nov 2015 10:22:33 +0000 (UTC)
+	Sat, 14 Nov 2015 10:22:35 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAEAMXR4007650
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAEAMaTk006316
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Nov 2015 02:22:33 -0800 (PST)
+	Sat, 14 Nov 2015 02:22:36 -0800 (PST)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Sat, 14 Nov 2015 02:22:32 -0800
+	Sat, 14 Nov 2015 02:22:35 -0800
 From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 14 Nov 2015 05:22:26 -0500
-Message-ID: <b55b6b13de605e4ec4a99701c40ff37356c5f8ff.1447495903.git.wenzong.fan@windriver.com>
+Date: Sat, 14 Nov 2015 05:22:28 -0500
+Message-ID: <5be0612f0d32bdec2b6ec5d51ffcc471b7175efe.1447495903.git.wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1447495903.git.wenzong.fan@windriver.com>
 References: <cover.1447495903.git.wenzong.fan@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/4][meta-oe] krb5: fix CVE-2015-2695
+Subject: [PATCH 3/4][meta-oe] krb5: fix CVE-2015-2697
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,614 +34,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Nov 2015 10:22:35 -0000
+X-List-Received-Date: Sat, 14 Nov 2015 10:22:36 -0000
 Content-Type: text/plain
 
 From: Wenzong Fan <wenzong.fan@windriver.com>
 
-lib/gssapi/spnego/spnego_mech.c in MIT Kerberos 5 (aka krb5) before
-1.14 relies on an inappropriate context handle, which allows remote
-attackers to cause a denial of service (incorrect pointer read and
-process crash) via a crafted SPNEGO packet that is mishandled during
-a gss_inquire_context call.
+The build_principal_va function in lib/krb5/krb/bld_princ.c in MIT
+Kerberos 5 (aka krb5) before 1.14 allows remote authenticated users
+to cause a denial of service (out-of-bounds read and KDC crash) via
+an initial '\0' character in a long realm field within a TGS request.
 
 Backport upstream commit to fix it:
-https://github.com/krb5/krb5/commit/b51b33f2bc5d1497ddf5bd107f791c101695000d
+https://github.com/krb5/krb5/commit/f0c094a1b745d91ef2f9a4eae2149aac026a5789
 
 Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 ---
- ...PNEGO-context-aliasing-bugs-CVE-2015-2695.patch | 572 +++++++++++++++++++++
- meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb   |   1 +
- 2 files changed, 573 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/Fix-SPNEGO-context-aliasing-bugs-CVE-2015-2695.patch
+ ...-build_principal-memory-bug-CVE-2015-2697.patch | 58 ++++++++++++++++++++++
+ meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb   |  1 +
+ 2 files changed, 59 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/Fix-build_principal-memory-bug-CVE-2015-2697.patch
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/Fix-SPNEGO-context-aliasing-bugs-CVE-2015-2695.patch b/meta-oe/recipes-connectivity/krb5/krb5/Fix-SPNEGO-context-aliasing-bugs-CVE-2015-2695.patch
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/Fix-build_principal-memory-bug-CVE-2015-2697.patch b/meta-oe/recipes-connectivity/krb5/krb5/Fix-build_principal-memory-bug-CVE-2015-2697.patch
 new file mode 100644
-index 0000000..227e6c6
+index 0000000..9b0c18b
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/krb5/krb5/Fix-SPNEGO-context-aliasing-bugs-CVE-2015-2695.patch
-@@ -0,0 +1,572 @@
-+From 884913e807414a1e06245918dea71243c5fdd0e6 Mon Sep 17 00:00:00 2001
-+From: Nicolas Williams <nico@twosigma.com>
-+Date: Mon, 14 Sep 2015 12:27:52 -0400
-+Subject: [PATCH 1/4] Fix SPNEGO context aliasing bugs [CVE-2015-2695]
++++ b/meta-oe/recipes-connectivity/krb5/krb5/Fix-build_principal-memory-bug-CVE-2015-2697.patch
+@@ -0,0 +1,58 @@
++From 9cb63711e63042f22da914ba039c4537b22e8fb0 Mon Sep 17 00:00:00 2001
++From: Greg Hudson <ghudson@mit.edu>
++Date: Fri, 25 Sep 2015 12:51:47 -0400
++Subject: [PATCH 3/4] Fix build_principal memory bug [CVE-2015-2697]
 +
-+The SPNEGO mechanism currently replaces its context handle with the
-+mechanism context handle upon establishment, under the assumption that
-+most GSS functions are only called after context establishment.  This
-+assumption is incorrect, and can lead to aliasing violations for some
-+programs.  Maintain the SPNEGO context structure after context
-+establishment and refer to it in all GSS methods.  Add initiate and
-+opened flags to the SPNEGO context structure for use in
-+gss_inquire_context() prior to context establishment.
++In build_principal_va(), use k5memdup0() instead of strdup() to make a
++copy of the realm, to ensure that we allocate the correct number of
++bytes and do not read past the end of the input string.  This bug
++affects krb5_build_principal(), krb5_build_principal_va(), and
++krb5_build_principal_alloc_va().  krb5_build_principal_ext() is not
++affected.
 +
-+CVE-2015-2695:
++CVE-2015-2697:
 +
-+In MIT krb5 1.5 and later, applications which call
-+gss_inquire_context() on a partially-established SPNEGO context can
-+cause the GSS-API library to read from a pointer using the wrong type,
-+generally causing a process crash.  This bug may go unnoticed, because
-+the most common SPNEGO authentication scenario establishes the context
-+after just one call to gss_accept_sec_context().  Java server
-+applications using the native JGSS provider are vulnerable to this
-+bug.  A carefully crafted SPNEGO packet might allow the
-+gss_inquire_context() call to succeed with attacker-determined
-+results, but applications should not make access control decisions
-+based on gss_inquire_context() results prior to context establishment.
++In MIT krb5 1.7 and later, an authenticated attacker may be able to
++cause a KDC to crash using a TGS request with a large realm field
++beginning with a null byte.  If the KDC attempts to find a referral to
++answer the request, it constructs a principal name for lookup using
++krb5_build_principal() with the requested realm.  Due to a bug in this
++function, the null byte causes only one byte be allocated for the
++realm field of the constructed principal, far less than its length.
++Subsequent operations on the lookup principal may cause a read beyond
++the end of the mapped memory region, causing the KDC process to crash.
 +
-+    CVSSv2 Vector: AV:N/AC:M/Au:N/C:N/I:N/A:C/E:POC/RL:OF/RC:C
++CVSSv2: AV:N/AC:L/Au:S/C:N/I:N/A:C/E:POC/RL:OF/RC:C
 +
-+[ghudson@mit.edu: several bugfixes, style changes, and edge-case
-+behavior changes; commit message and CVE description]
-+
-+ticket: 8244
++ticket: 8252 (new)
 +target_version: 1.14
 +tags: pullup
 +
 +Backport upstream commit:
-+https://github.com/krb5/krb5/commit/b51b33f2bc5d1497ddf5bd107f791c101695000d
++https://github.com/krb5/krb5/commit/f0c094a1b745d91ef2f9a4eae2149aac026a5789
 +
 +Upstream-Status: Backport
 +---
-+ src/lib/gssapi/spnego/gssapiP_spnego.h |   2 +
-+ src/lib/gssapi/spnego/spnego_mech.c    | 254 ++++++++++++++++++++++++---------
-+ 2 files changed, 192 insertions(+), 64 deletions(-)
++ src/lib/krb5/krb/bld_princ.c | 6 ++----
++ 1 file changed, 2 insertions(+), 4 deletions(-)
 +
-+diff --git a/src/lib/gssapi/spnego/gssapiP_spnego.h b/src/lib/gssapi/spnego/gssapiP_spnego.h
-+index bc23f56..8e05736 100644
-+--- a/src/lib/gssapi/spnego/gssapiP_spnego.h
-++++ b/src/lib/gssapi/spnego/gssapiP_spnego.h
-+@@ -102,6 +102,8 @@ typedef struct {
-+ 	int firstpass;
-+ 	int mech_complete;
-+ 	int nego_done;
-++	int initiate;
-++	int opened;
-+ 	OM_uint32 ctx_flags;
-+ 	gss_name_t internal_name;
-+ 	gss_OID actual_mech;
-+diff --git a/src/lib/gssapi/spnego/spnego_mech.c b/src/lib/gssapi/spnego/spnego_mech.c
-+index f9248ab..3423f22 100644
-+--- a/src/lib/gssapi/spnego/spnego_mech.c
-++++ b/src/lib/gssapi/spnego/spnego_mech.c
-+@@ -101,7 +101,7 @@ static OM_uint32 get_negotiable_mechs(OM_uint32 *, spnego_gss_cred_id_t,
-+ 				      gss_cred_usage_t, gss_OID_set *);
-+ static void release_spnego_ctx(spnego_gss_ctx_id_t *);
-+ static void check_spnego_options(spnego_gss_ctx_id_t);
-+-static spnego_gss_ctx_id_t create_spnego_ctx(void);
-++static spnego_gss_ctx_id_t create_spnego_ctx(int);
-+ static int put_mech_set(gss_OID_set mechSet, gss_buffer_t buf);
-+ static int put_input_token(unsigned char **, gss_buffer_t, unsigned int);
-+ static int put_mech_oid(unsigned char **, gss_OID_const, unsigned int);
-+@@ -439,7 +439,7 @@ check_spnego_options(spnego_gss_ctx_id_t spnego_ctx)
-+ }
++diff --git a/src/lib/krb5/krb/bld_princ.c b/src/lib/krb5/krb/bld_princ.c
++index ab6fed8..8604268 100644
++--- a/src/lib/krb5/krb/bld_princ.c
+++++ b/src/lib/krb5/krb/bld_princ.c
++@@ -40,10 +40,8 @@ build_principal_va(krb5_context context, krb5_principal princ,
++     data = malloc(size * sizeof(krb5_data));
++     if (!data) { retval = ENOMEM; }
 + 
-+ static spnego_gss_ctx_id_t
-+-create_spnego_ctx(void)
-++create_spnego_ctx(int initiate)
-+ {
-+ 	spnego_gss_ctx_id_t spnego_ctx = NULL;
-+ 	spnego_ctx = (spnego_gss_ctx_id_t)
-+@@ -462,6 +462,8 @@ create_spnego_ctx(void)
-+ 	spnego_ctx->mic_rcvd = 0;
-+ 	spnego_ctx->mech_complete = 0;
-+ 	spnego_ctx->nego_done = 0;
-++	spnego_ctx->opened = 0;
-++	spnego_ctx->initiate = initiate;
-+ 	spnego_ctx->internal_name = GSS_C_NO_NAME;
-+ 	spnego_ctx->actual_mech = GSS_C_NO_OID;
++-    if (!retval) {
++-        r = strdup(realm);
++-        if (!r) { retval = ENOMEM; }
++-    }
+++    if (!retval)
+++        r = k5memdup0(realm, rlen, &retval);
 + 
-+@@ -627,7 +629,7 @@ init_ctx_new(OM_uint32 *minor_status,
-+ 	OM_uint32 ret;
-+ 	spnego_gss_ctx_id_t sc = NULL;
-+ 
-+-	sc = create_spnego_ctx();
-++	sc = create_spnego_ctx(1);
-+ 	if (sc == NULL)
-+ 		return GSS_S_FAILURE;
-+ 
-+@@ -644,10 +646,7 @@ init_ctx_new(OM_uint32 *minor_status,
-+ 		ret = GSS_S_FAILURE;
-+ 		goto cleanup;
-+ 	}
-+-	/*
-+-	 * The actual context is not yet determined, set the output
-+-	 * context handle to refer to the spnego context itself.
-+-	 */
-++
-+ 	sc->ctx_handle = GSS_C_NO_CONTEXT;
-+ 	*ctx = (gss_ctx_id_t)sc;
-+ 	sc = NULL;
-+@@ -1088,16 +1087,11 @@ cleanup:
-+ 	}
-+ 	gss_release_buffer(&tmpmin, &mechtok_out);
-+ 	if (ret == GSS_S_COMPLETE) {
-+-		/*
-+-		 * Now, switch the output context to refer to the
-+-		 * negotiated mechanism's context.
-+-		 */
-+-		*context_handle = (gss_ctx_id_t)spnego_ctx->ctx_handle;
-++		spnego_ctx->opened = 1;
-+ 		if (actual_mech != NULL)
-+ 			*actual_mech = spnego_ctx->actual_mech;
-+ 		if (ret_flags != NULL)
-+ 			*ret_flags = spnego_ctx->ctx_flags;
-+-		release_spnego_ctx(&spnego_ctx);
-+ 	} else if (ret != GSS_S_CONTINUE_NEEDED) {
-+ 		if (spnego_ctx != NULL) {
-+ 			gss_delete_sec_context(&tmpmin,
-+@@ -1341,7 +1335,7 @@ acc_ctx_hints(OM_uint32 *minor_status,
-+ 	if (ret != GSS_S_COMPLETE)
-+ 		goto cleanup;
-+ 
-+-	sc = create_spnego_ctx();
-++	sc = create_spnego_ctx(0);
-+ 	if (sc == NULL) {
-+ 		ret = GSS_S_FAILURE;
-+ 		goto cleanup;
-+@@ -1423,7 +1417,7 @@ acc_ctx_new(OM_uint32 *minor_status,
-+ 		gss_release_buffer(&tmpmin, &sc->DER_mechTypes);
-+ 		assert(mech_wanted != GSS_C_NO_OID);
-+ 	} else
-+-		sc = create_spnego_ctx();
-++		sc = create_spnego_ctx(0);
-+ 	if (sc == NULL) {
-+ 		ret = GSS_S_FAILURE;
-+ 		*return_token = NO_TOKEN_SEND;
-+@@ -1806,13 +1800,12 @@ cleanup:
-+ 			ret = GSS_S_FAILURE;
-+ 	}
-+ 	if (ret == GSS_S_COMPLETE) {
-+-		*context_handle = (gss_ctx_id_t)sc->ctx_handle;
-++		sc->opened = 1;
-+ 		if (sc->internal_name != GSS_C_NO_NAME &&
-+ 		    src_name != NULL) {
-+ 			*src_name = sc->internal_name;
-+ 			sc->internal_name = GSS_C_NO_NAME;
-+ 		}
-+-		release_spnego_ctx(&sc);
-+ 	} else if (ret != GSS_S_CONTINUE_NEEDED) {
-+ 		if (sc != NULL) {
-+ 			gss_delete_sec_context(&tmpmin, &sc->ctx_handle,
-+@@ -2125,8 +2118,13 @@ spnego_gss_unwrap(
-+ 		gss_qop_t *qop_state)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_NO_CONTEXT);
-++
-+ 	ret = gss_unwrap(minor_status,
-+-			context_handle,
-++			sc->ctx_handle,
-+ 			input_message_buffer,
-+ 			output_message_buffer,
-+ 			conf_state,
-+@@ -2146,8 +2144,13 @@ spnego_gss_wrap(
-+ 		gss_buffer_t output_message_buffer)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_NO_CONTEXT);
-++
-+ 	ret = gss_wrap(minor_status,
-+-		    context_handle,
-++		    sc->ctx_handle,
-+ 		    conf_req_flag,
-+ 		    qop_req,
-+ 		    input_message_buffer,
-+@@ -2164,8 +2167,14 @@ spnego_gss_process_context_token(
-+ 				const gss_buffer_t token_buffer)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	/* SPNEGO doesn't have its own context tokens. */
-++	if (!sc->opened)
-++		return (GSS_S_DEFECTIVE_TOKEN);
-++
-+ 	ret = gss_process_context_token(minor_status,
-+-					context_handle,
-++					sc->ctx_handle,
-+ 					token_buffer);
-+ 
-+ 	return (ret);
-+@@ -2189,19 +2198,9 @@ spnego_gss_delete_sec_context(
-+ 	if (*ctx == NULL)
-+ 		return (GSS_S_COMPLETE);
-+ 
-+-	/*
-+-	 * If this is still an SPNEGO mech, release it locally.
-+-	 */
-+-	if ((*ctx)->magic_num == SPNEGO_MAGIC_ID) {
-+-		(void) gss_delete_sec_context(minor_status,
-+-				    &(*ctx)->ctx_handle,
-+-				    output_token);
-+-		(void) release_spnego_ctx(ctx);
-+-	} else {
-+-		ret = gss_delete_sec_context(minor_status,
-+-				    context_handle,
-+-				    output_token);
-+-	}
-++	(void) gss_delete_sec_context(minor_status, &(*ctx)->ctx_handle,
-++				      output_token);
-++	(void) release_spnego_ctx(ctx);
-+ 
-+ 	return (ret);
-+ }
-+@@ -2213,8 +2212,13 @@ spnego_gss_context_time(
-+ 			OM_uint32	*time_rec)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_NO_CONTEXT);
-++
-+ 	ret = gss_context_time(minor_status,
-+-			    context_handle,
-++			    sc->ctx_handle,
-+ 			    time_rec);
-+ 	return (ret);
-+ }
-+@@ -2226,9 +2230,20 @@ spnego_gss_export_sec_context(
-+ 			    gss_buffer_t interprocess_token)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = *(spnego_gss_ctx_id_t *)context_handle;
-++
-++	/* We don't currently support exporting partially established
-++	 * contexts. */
-++	if (!sc->opened)
-++		return GSS_S_UNAVAILABLE;
-++
-+ 	ret = gss_export_sec_context(minor_status,
-+-				    context_handle,
-++				    &sc->ctx_handle,
-+ 				    interprocess_token);
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT) {
-++		release_spnego_ctx(&sc);
-++		*context_handle = GSS_C_NO_CONTEXT;
-++	}
-+ 	return (ret);
-+ }
-+ 
-+@@ -2238,11 +2253,12 @@ spnego_gss_import_sec_context(
-+ 	const gss_buffer_t	interprocess_token,
-+ 	gss_ctx_id_t		*context_handle)
-+ {
-+-	OM_uint32 ret;
-+-	ret = gss_import_sec_context(minor_status,
-+-				    interprocess_token,
-+-				    context_handle);
-+-	return (ret);
-++	/*
-++	 * Until we implement partial context exports, there are no SPNEGO
-++	 * exported context tokens, only tokens for underlying mechs.  So just
-++	 * return an error for now.
-++	 */
-++	return GSS_S_UNAVAILABLE;
-+ }
-+ #endif /* LEAN_CLIENT */
-+ 
-+@@ -2259,16 +2275,48 @@ spnego_gss_inquire_context(
-+ 			int		*opened)
-+ {
-+ 	OM_uint32 ret = GSS_S_COMPLETE;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (src_name != NULL)
-++		*src_name = GSS_C_NO_NAME;
-++	if (targ_name != NULL)
-++		*targ_name = GSS_C_NO_NAME;
-++	if (lifetime_rec != NULL)
-++		*lifetime_rec = 0;
-++	if (mech_type != NULL)
-++		*mech_type = (gss_OID)gss_mech_spnego;
-++	if (ctx_flags != NULL)
-++		*ctx_flags = 0;
-++	if (locally_initiated != NULL)
-++		*locally_initiated = sc->initiate;
-++	if (opened != NULL)
-++		*opened = sc->opened;
-++
-++	if (sc->ctx_handle != GSS_C_NO_CONTEXT) {
-++		ret = gss_inquire_context(minor_status, sc->ctx_handle,
-++					  src_name, targ_name, lifetime_rec,
-++					  mech_type, ctx_flags, NULL, NULL);
-++	}
-+ 
-+-	ret = gss_inquire_context(minor_status,
-+-				context_handle,
-+-				src_name,
-+-				targ_name,
-+-				lifetime_rec,
-+-				mech_type,
-+-				ctx_flags,
-+-				locally_initiated,
-+-				opened);
-++	if (!sc->opened) {
-++		/*
-++		 * We are still doing SPNEGO negotiation, so report SPNEGO as
-++		 * the OID.  After negotiation is complete we will report the
-++		 * underlying mechanism OID.
-++		 */
-++		if (mech_type != NULL)
-++			*mech_type = (gss_OID)gss_mech_spnego;
-++
-++		/*
-++		 * Remove flags we don't support with partially-established
-++		 * contexts.  (Change this to keep GSS_C_TRANS_FLAG if we add
-++		 * support for exporting partial SPNEGO contexts.)
-++		 */
-++		if (ctx_flags != NULL) {
-++			*ctx_flags &= ~GSS_C_PROT_READY_FLAG;
-++			*ctx_flags &= ~GSS_C_TRANS_FLAG;
-++		}
-++	}
-+ 
-+ 	return (ret);
-+ }
-+@@ -2283,8 +2331,13 @@ spnego_gss_wrap_size_limit(
-+ 	OM_uint32	*max_input_size)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_NO_CONTEXT);
-++
-+ 	ret = gss_wrap_size_limit(minor_status,
-+-				context_handle,
-++				sc->ctx_handle,
-+ 				conf_req_flag,
-+ 				qop_req,
-+ 				req_output_size,
-+@@ -2301,8 +2354,13 @@ spnego_gss_get_mic(
-+ 		gss_buffer_t message_token)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_NO_CONTEXT);
-++
-+ 	ret = gss_get_mic(minor_status,
-+-		    context_handle,
-++		    sc->ctx_handle,
-+ 		    qop_req,
-+ 		    message_buffer,
-+ 		    message_token);
-+@@ -2318,8 +2376,13 @@ spnego_gss_verify_mic(
-+ 		gss_qop_t *qop_state)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_NO_CONTEXT);
-++
-+ 	ret = gss_verify_mic(minor_status,
-+-			    context_handle,
-++			    sc->ctx_handle,
-+ 			    msg_buffer,
-+ 			    token_buffer,
-+ 			    qop_state);
-+@@ -2334,8 +2397,14 @@ spnego_gss_inquire_sec_context_by_oid(
-+ 		gss_buffer_set_t *data_set)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	/* There are no SPNEGO-specific OIDs for this function. */
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_UNAVAILABLE);
-++
-+ 	ret = gss_inquire_sec_context_by_oid(minor_status,
-+-			    context_handle,
-++			    sc->ctx_handle,
-+ 			    desired_object,
-+ 			    data_set);
-+ 	return (ret);
-+@@ -2404,8 +2473,15 @@ spnego_gss_set_sec_context_option(
-+ 		const gss_buffer_t value)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)*context_handle;
-++
-++	/* There are no SPNEGO-specific OIDs for this function, and we cannot
-++	 * construct an empty SPNEGO context with it. */
-++	if (sc == NULL || sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_UNAVAILABLE);
-++
-+ 	ret = gss_set_sec_context_option(minor_status,
-+-			    context_handle,
-++			    &sc->ctx_handle,
-+ 			    desired_object,
-+ 			    value);
-+ 	return (ret);
-+@@ -2422,8 +2498,13 @@ spnego_gss_wrap_aead(OM_uint32 *minor_status,
-+ 		     gss_buffer_t output_message_buffer)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_NO_CONTEXT);
-++
-+ 	ret = gss_wrap_aead(minor_status,
-+-			    context_handle,
-++			    sc->ctx_handle,
-+ 			    conf_req_flag,
-+ 			    qop_req,
-+ 			    input_assoc_buffer,
-+@@ -2444,8 +2525,13 @@ spnego_gss_unwrap_aead(OM_uint32 *minor_status,
-+ 		       gss_qop_t *qop_state)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_NO_CONTEXT);
-++
-+ 	ret = gss_unwrap_aead(minor_status,
-+-			      context_handle,
-++			      sc->ctx_handle,
-+ 			      input_message_buffer,
-+ 			      input_assoc_buffer,
-+ 			      output_payload_buffer,
-+@@ -2464,8 +2550,13 @@ spnego_gss_wrap_iov(OM_uint32 *minor_status,
-+ 		    int iov_count)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_NO_CONTEXT);
-++
-+ 	ret = gss_wrap_iov(minor_status,
-+-			   context_handle,
-++			   sc->ctx_handle,
-+ 			   conf_req_flag,
-+ 			   qop_req,
-+ 			   conf_state,
-+@@ -2483,8 +2574,13 @@ spnego_gss_unwrap_iov(OM_uint32 *minor_status,
-+ 		      int iov_count)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_NO_CONTEXT);
-++
-+ 	ret = gss_unwrap_iov(minor_status,
-+-			     context_handle,
-++			     sc->ctx_handle,
-+ 			     conf_state,
-+ 			     qop_state,
-+ 			     iov,
-+@@ -2502,8 +2598,13 @@ spnego_gss_wrap_iov_length(OM_uint32 *minor_status,
-+ 			   int iov_count)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_NO_CONTEXT);
-++
-+ 	ret = gss_wrap_iov_length(minor_status,
-+-				  context_handle,
-++				  sc->ctx_handle,
-+ 				  conf_req_flag,
-+ 				  qop_req,
-+ 				  conf_state,
-+@@ -2520,8 +2621,13 @@ spnego_gss_complete_auth_token(
-+ 		gss_buffer_t input_message_buffer)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_UNAVAILABLE);
-++
-+ 	ret = gss_complete_auth_token(minor_status,
-+-				      context_handle,
-++				      sc->ctx_handle,
-+ 				      input_message_buffer);
-+ 	return (ret);
-+ }
-+@@ -2773,8 +2879,13 @@ spnego_gss_pseudo_random(OM_uint32 *minor_status,
-+ 			 gss_buffer_t prf_out)
-+ {
-+ 	OM_uint32 ret;
-++	spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context;
-++
-++	if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++		return (GSS_S_NO_CONTEXT);
-++
-+ 	ret = gss_pseudo_random(minor_status,
-+-				context,
-++				sc->ctx_handle,
-+ 				prf_key,
-+ 				prf_in,
-+ 				desired_output_len,
-+@@ -2915,7 +3026,12 @@ spnego_gss_get_mic_iov(OM_uint32 *minor_status, gss_ctx_id_t context_handle,
-+ 		       gss_qop_t qop_req, gss_iov_buffer_desc *iov,
-+ 		       int iov_count)
-+ {
-+-    return gss_get_mic_iov(minor_status, context_handle, qop_req, iov,
-++    spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++    if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++	    return (GSS_S_NO_CONTEXT);
-++
-++    return gss_get_mic_iov(minor_status, sc->ctx_handle, qop_req, iov,
-+ 			   iov_count);
-+ }
-+ 
-+@@ -2924,7 +3040,12 @@ spnego_gss_verify_mic_iov(OM_uint32 *minor_status, gss_ctx_id_t context_handle,
-+ 			  gss_qop_t *qop_state, gss_iov_buffer_desc *iov,
-+ 			  int iov_count)
-+ {
-+-    return gss_verify_mic_iov(minor_status, context_handle, qop_state, iov,
-++    spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++    if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++	    return (GSS_S_NO_CONTEXT);
-++
-++    return gss_verify_mic_iov(minor_status, sc->ctx_handle, qop_state, iov,
-+ 			      iov_count);
-+ }
-+ 
-+@@ -2933,7 +3054,12 @@ spnego_gss_get_mic_iov_length(OM_uint32 *minor_status,
-+ 			      gss_ctx_id_t context_handle, gss_qop_t qop_req,
-+ 			      gss_iov_buffer_desc *iov, int iov_count)
-+ {
-+-    return gss_get_mic_iov_length(minor_status, context_handle, qop_req, iov,
-++    spnego_gss_ctx_id_t sc = (spnego_gss_ctx_id_t)context_handle;
-++
-++    if (sc->ctx_handle == GSS_C_NO_CONTEXT)
-++	    return (GSS_S_NO_CONTEXT);
-++
-++    return gss_get_mic_iov_length(minor_status, sc->ctx_handle, qop_req, iov,
-+ 				  iov_count);
-+ }
-+ 
++     while (!retval && (component = va_arg(ap, char *))) {
++         if (count == size) {
 +-- 
 +1.9.1
 +
 diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-index ec88296..1b02f1a 100644
+index 6c25d82..c6b873a 100644
 --- a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
 +++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-@@ -23,6 +23,7 @@ SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
- SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar \
-            file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
+@@ -25,6 +25,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar
             file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
-+           file://Fix-SPNEGO-context-aliasing-bugs-CVE-2015-2695.patch;striplevel=2 \
+            file://Fix-SPNEGO-context-aliasing-bugs-CVE-2015-2695.patch;striplevel=2 \
+            file://Fix-IAKERB-context-aliasing-bugs-CVE-2015-2696.patch;striplevel=2 \
++           file://Fix-build_principal-memory-bug-CVE-2015-2697.patch;striplevel=2 \
             file://crosscompile_nm.patch \
             file://etc/init.d/krb5-kdc \
             file://etc/init.d/krb5-admin-server \
