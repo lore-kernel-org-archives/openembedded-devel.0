@@ -1,43 +1,34 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B7EC77340
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 1987B772F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Nov 2015 16:19:29 +0000 (UTC)
-Received: by padhx2 with SMTP id hx2so130068692pad.1
+	Sun, 15 Nov 2015 16:17:37 +0000 (UTC)
+Received: by wmvv187 with SMTP id v187so143796289wmv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Nov 2015 08:19:30 -0800 (PST)
+	Sun, 15 Nov 2015 08:17:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:cc:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-type:content-transfer-encoding;
-	bh=bP/ZIdcFGgov+rpjqSFBIkW2Z1Hc5sA4X2X/2A5oYvc=;
-	b=E5zLSfOQvUhFiOz8phC1MUKgWXSsIR/6D9ooQQoETUGnKY/LCT3JyuPtfoiXGKLEDQ
-	TPCqPh0uFCvGcJb8EHi2EkgQJd0qiU61G0bFGyMszibp+P3ACMOsiMSyUiSZwWVbvbty
-	IduvL0n2AutqhH1zGaUC+AdzOjszU9TbcX0sy+K1PQ1zfSqhX0dxgoP8Y/+0lH9zRYht
-	+cTc91ftRUdwZ1v80X6pYieGh2Uw1aRJWvUra7Mfe7lMooICIEJS06l4/oRm6c4s95Kh
-	9xyKvvhK/w5GaT5UnPa60xLAvhanSp2wF41Nwy5V2u9euIVoDrtiJjskO2vBhs43xDaz
-	73Jg==
-X-Received: by 10.68.238.100 with SMTP id vj4mr40837322pbc.103.1447517969864; 
-	Sat, 14 Nov 2015 08:19:29 -0800 (PST)
-Received: from ?IPv6:2601:202:4000:1239:4137:4912:eb79:3eb?
-	([2601:202:4000:1239:4137:4912:eb79:3eb])
-	by smtp.googlemail.com with ESMTPSA id
-	ey2sm26689054pbd.77.2015.11.14.08.19.28
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 14 Nov 2015 08:19:28 -0800 (PST)
-To: Nicolas Ferre <nicolas.ferre@atmel.com>,
-	openembedded-devel@lists.openembedded.org
-References: <1447432157-15189-1-git-send-email-nicolas.ferre@atmel.com>
-	<1447432157-15189-2-git-send-email-nicolas.ferre@atmel.com>
-From: akuster808 <akuster808@gmail.com>
-X-Enigmail-Draft-Status: N1110
-Message-ID: <56475F06.102@gmail.com>
-Date: Sat, 14 Nov 2015 08:19:18 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
-MIME-Version: 1.0
-In-Reply-To: <1447432157-15189-2-git-send-email-nicolas.ferre@atmel.com>
-Subject: Re: [meta-python][jethro][PATCH] python-evdev: add python-evdev 0.5.0
+	h=from:to:cc:subject:date:message-id;
+	bh=KW0GFd5MDn/G4iUAaaBXOaFbxIPek1kk4IoLLFRJMOY=;
+	b=Taf8qZrX4zW3zmOcou7PWnCnc1iUNcjO7kyaFtB+xePbYKDFXMg9qqqIWSyiBMHoUZ
+	w+BWJC40lD/aENT/JlxoXm3//D6QuJg026uxaPJ4hSN0wKRuQvmRRaalW59SkYfEoEya
+	QRp3btudZPXVOTF20uC2bXrBsd2HaIKjW6lbk2cW+e7enefKJvqq53TyuANK0r8lb/2r
+	BRdJ0Ep0tS17ReJAgBzbGOvShJ/aevFgLGHRyUsHycJAd2khwjIaoNka38u+JLYRHC4u
+	eP2tOB1NIBqwyjtRLacJ4pyCHdIBeZU8YlGXxr37f0d27PU/h2llpm8KinxR+kATWslc
+	jgZA==
+X-Received: by 10.28.139.18 with SMTP id n18mr15243968wmd.63.1447604256862;
+	Sun, 15 Nov 2015 08:17:36 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	gl4sm22963470wjd.17.2015.11.15.08.17.35
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 15 Nov 2015 08:17:35 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 15 Nov 2015 17:17:33 +0100
+Message-Id: <1447604260-5460-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.6.3
+Subject: [PATCH][meta-oe 1/8] qt-mobility: fix dependencies and PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,44 +42,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Nov 2015 16:19:35 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 15 Nov 2015 16:17:39 -0000
 
-Nicolas,
+* this isn't proper fix, just to silence various QA issues
+* nobody cares about qt-mobility, this is just last step before adding
+  PNBLACKLIST for this (or moving it to separate meta-qt4)
+* "Fixes"
+  qt-mobility-embedded-1.2.0: qt-mobility-embedded: invalid PACKAGECONFIG: bluez5 [invalid-packageconfig]
+  qt-mobility-x11-1.2.0: qt-mobility-x11: invalid PACKAGECONFIG: bluez5 [invalid-packageconfig]
+  qt-mobility doesn't really support bluez5, so we'll just silence the
+  QA warning, existing PACKAGECONFIGs for bluez4 and pulseaudio are
+  useless as well, because without disable option both are still
+  autodetected from ssysroot
+* "Fixes"
+  WARN: qt-mobility-embedded: qt-mobility-embedded rdepends on glib-2.0, but it isn't a build dependency?
+  WARN: qt-mobility-embedded: qt-mobility-embedded rdepends on gstreamer, but it isn't a build dependency?
+  WARN: qt-mobility-embedded: qt-mobility-embedded rdepends on libasound, but it isn't a build dependency?
+  WARN: qt-mobility-embedded: qt-mobility-embedded rdepends on libgstapp-0.10, but it isn't a build dependency?
+  WARN: qt-mobility-embedded: qt-mobility-embedded rdepends on libgstvideo-0.10, but it isn't a build dependency?
+  WARN: qt-mobility-x11: qt-mobility-x11 rdepends on glib-2.0, but it isn't a build dependency?
+  WARN: qt-mobility-x11: qt-mobility-x11 rdepends on gstreamer, but it isn't a build dependency?
+  WARN: qt-mobility-x11: qt-mobility-x11 rdepends on libasound, but it isn't a build dependency?
+  WARN: qt-mobility-x11: qt-mobility-x11 rdepends on libgstapp-0.10, but it isn't a build dependency?
+  WARN: qt-mobility-x11: qt-mobility-x11 rdepends on libgstinterfaces-0.10, but it isn't a build dependency?
+  WARN: qt-mobility-x11: qt-mobility-x11 rdepends on libgstvideo-0.10, but it isn't a build dependency?
+  WARN: qt-mobility-x11: qt-mobility-x11 rdepends on libxext, but it isn't a build dependency?
+  WARN: qt-mobility-x11: qt-mobility-x11 rdepends on libxv, but it isn't a build dependency?
+  but it adds dependency on meta-multimedia layer (which isn't in meta-oe dependencies),
+  so it's not correct, but won't make things worse then they already are since
+  qt-mobility was moved from oe-core, hopefully it will move to separate meta-qt4
+  soon. gstreamer was already in DEPENDS, but DEPENDS was overwritten by
+  qt-mobility_1.2.0.inc which was included later, also drop qt4* dependencies
+  because these are already taken care of in qt4(e).bbclass.
 
-meta-openembdded is closed to new packages. Bug and security fixes only.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-qt/qt-mobility/qt-mobility-embedded_1.2.0.bb |  1 -
+ meta-oe/recipes-qt/qt-mobility/qt-mobility-x11_1.2.0.bb      |  2 +-
+ meta-oe/recipes-qt/qt-mobility/qt-mobility_1.2.0.inc         | 11 ++++++++++-
+ 3 files changed, 11 insertions(+), 3 deletions(-)
 
+diff --git a/meta-oe/recipes-qt/qt-mobility/qt-mobility-embedded_1.2.0.bb b/meta-oe/recipes-qt/qt-mobility/qt-mobility-embedded_1.2.0.bb
+index 998de2a..355f183 100644
+--- a/meta-oe/recipes-qt/qt-mobility/qt-mobility-embedded_1.2.0.bb
++++ b/meta-oe/recipes-qt/qt-mobility/qt-mobility-embedded_1.2.0.bb
+@@ -1,5 +1,4 @@
+ SUMMARY = "Mobile device API extensions for Qt/Embedded 4.x"
+-DEPENDS = "qt4-embedded"
+ SECTION = "libs"
+ qtm_embedded := "embedded"
+ qtm_dir = "qtopia"
+diff --git a/meta-oe/recipes-qt/qt-mobility/qt-mobility-x11_1.2.0.bb b/meta-oe/recipes-qt/qt-mobility/qt-mobility-x11_1.2.0.bb
+index e7e4b3c..380e3cb 100644
+--- a/meta-oe/recipes-qt/qt-mobility/qt-mobility-x11_1.2.0.bb
++++ b/meta-oe/recipes-qt/qt-mobility/qt-mobility-x11_1.2.0.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Mobile device API extensions for Qt/X11 4.x"
+-DEPENDS = "qt4-x11-free"
++DEPENDS = "libxv libxext"
+ SECTION = "x11/libs"
+ qtm_embedded := ""
+ qtm_dir = "qt4"
+diff --git a/meta-oe/recipes-qt/qt-mobility/qt-mobility_1.2.0.inc b/meta-oe/recipes-qt/qt-mobility/qt-mobility_1.2.0.inc
+index 56631bb..377d9c7 100644
+--- a/meta-oe/recipes-qt/qt-mobility/qt-mobility_1.2.0.inc
++++ b/meta-oe/recipes-qt/qt-mobility/qt-mobility_1.2.0.inc
+@@ -1,11 +1,20 @@
+ HOMEPAGE = "http://qt-project.org/"
+-DEPENDS = "gstreamer util-linux"
++
++# This creates the dependency on meta-multimedia, which is wrong, but hopefully
++# this will be moved to separate meta-qt4 soon
++DEPENDS += "gstreamer util-linux alsa-lib gst-plugins-base"
+ 
+ inherit bluetooth
+ 
+ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)} \
+                    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)}"
++# This is all wrong, but nobody cares about qt-mobility anymore
++# add bluez5 just to silence:
++# qt-mobility-embedded-1.2.0: qt-mobility-embedded: invalid PACKAGECONFIG: bluez5 [invalid-packageconfig]
++# qt-mobility-x11-1.2.0: qt-mobility-x11: invalid PACKAGECONFIG: bluez5 [invalid-packageconfig]
++# but without --disable options it still autodetects bluez and pulseaudio from sysroot
+ PACKAGECONFIG[bluez4] = ",,bluez4"
++PACKAGECONFIG[bluez5] = ",,bluez5"
+ PACKAGECONFIG[pulseaudio] = ",,pulseaudio"
+ 
+ LICENSE = "LGPLv2.1"
+-- 
+2.6.3
 
-- armin
-
-On 11/13/2015 08:29 AM, Nicolas Ferre wrote:
-> Python-evdev is a Python module that gives access to the input event interface
-> from userspace.
-> https://python-evdev.readthedocs.org/en/latest/
-> 
-> Signed-off-by: Nicolas Ferre <nicolas.ferre@atmel.com>
-> ---
->  meta-python/recipes-devtools/python/python-evdev_0.5.0.bb | 11 +++++++++++
->  1 file changed, 11 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python-evdev_0.5.0.bb
-> 
-> diff --git a/meta-python/recipes-devtools/python/python-evdev_0.5.0.bb b/meta-python/recipes-devtools/python/python-evdev_0.5.0.bb
-> new file mode 100644
-> index 000000000000..2435b456b5e6
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-evdev_0.5.0.bb
-> @@ -0,0 +1,11 @@
-> +SUMMARY = "Python evdev lib"
-> +HOMEPAGE = "https://github.com/gvalkov/python-evdev"
-> +SECTION = "devel/python"
-> +LICENSE = "BSD"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=2b500cb3c70f576a0a75125beda9491a"
-> +
-> +SRC_URI = "https://github.com/gvalkov/python-evdev/archive/v${PV}.zip"
-> +SRC_URI[md5sum] = "30c11ee7bd4a943f8ae586d839b860f2"
-> +SRC_URI[sha256sum] = "ce6a757e28b56a12a9ad4e86420db4b11918b75ba1cd70f7444e904a7284b6fe"
-> +
-> +inherit setuptools
-> 
 
