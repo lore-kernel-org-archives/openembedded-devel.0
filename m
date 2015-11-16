@@ -1,34 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id EE6C5736B6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Nov 2015 09:03:25 +0000 (UTC)
-Received: by wmec201 with SMTP id c201so164960162wme.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Nov 2015 01:03:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=AUemDWapb2SbuaIctALeRiqGRmGJak/q9WoCaKNGP7M=;
-	b=g2LZcCLZMBB2eS3v8tHtimfNo0r1WlFch46M+3b3xOkzt2PI6/kFWaAavoVHTPqjx4
-	I7l6fqbUPPcXOByDsgojNOXCf/jH5z3GBkW6mey8/XvYF9k8oSxWq8ba6Dm+fyVUTRwE
-	1Z7qi+7yl3/PWtKaM9gC9j7tYEYKYv9uFem39fU9ippX6gVu/U7vDib4Qb/4Xt+wbfQG
-	vmZv/2F7gVfKAMfhy2pVGYDgdWFhKWPSgR5voSUSCFjvxcgEWQHZXZCau8FunVGDfr8C
-	DMeirs08wO1bz8niKs9OtO4L6syhK5O5l4oYgCcErcHpxwDBW8hIdprC46nq3Kg+V/g/
-	j6UA==
-X-Received: by 10.194.95.202 with SMTP id dm10mr36205431wjb.56.1447664605275; 
-	Mon, 16 Nov 2015 01:03:25 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	om1sm33450020wjc.2.2015.11.16.01.03.23
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 16 Nov 2015 01:03:23 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Nov 2015 10:03:27 +0100
-Message-Id: <1447664607-30891-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.6.3
-Subject: [PATCHv2][meta-multimedia] vlc: add PACKAGECONFIG for samba, upnp, dvdnav, sftp, vorbis, dc1394, dv1394, svg, svgdec
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 36FA26E26B;
+	Mon, 16 Nov 2015 09:42:20 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga102.jf.intel.com with ESMTP; 16 Nov 2015 01:42:21 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,301,1444719600"; d="scan'208";a="851874626"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
+	([10.237.68.161])
+	by fmsmga002.fm.intel.com with ESMTP; 16 Nov 2015 01:42:20 -0800
+Message-ID: <5649A542.8000307@linux.intel.com>
+Date: Mon, 16 Nov 2015 11:43:30 +0200
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Icedove/31.8.0
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+References: <58488.10.252.13.130.1447346734.squirrel@linux.intel.com>	<CALbNGRTcwpywgtSJvm-q6aZHK5vaF5BFcxmKseHYjcy6aWnmBg@mail.gmail.com>	<4335862.fNWyiaI9Bu@peggleto-mobl.ger.corp.intel.com>	<CAP9ODKqk4B_i+59asEqoVNjkynBWTACD0cM4f0JdxMCopprTkA@mail.gmail.com>
+	<20151113114617.GB2567@jama>
+In-Reply-To: <20151113114617.GB2567@jama>
+Subject: Re: [OE-core] qt4 moves out of oe-core - to meta-qt4, or to meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,56 +35,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2015 09:03:26 -0000
+X-List-Received-Date: Mon, 16 Nov 2015 09:42:25 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* hopefully fixes:
-WARN: vlc: vlc rdepends on libavc1394, but it isn't a build dependency?
-WARN: vlc: vlc rdepends on libcroco, but it isn't a build dependency?
-WARN: vlc: vlc rdepends on libcrypto, but it isn't a build dependency?
-WARN: vlc: vlc rdepends on libdvdnav, but it isn't a build dependency?
-WARN: vlc: vlc rdepends on librsvg, but it isn't a build dependency?
-WARN: vlc: vlc rdepends on libssh2, but it isn't a build dependency?
-WARN: vlc: vlc rdepends on libssl, but it isn't a build dependency?
-WARN: vlc: vlc rdepends on libupnp, but it isn't a build dependency?
-WARN: vlc: vlc rdepends on libvorbis, but it isn't a build dependency?
-WARN: vlc: vlc rdepends on libxml2, but it isn't a build dependency?
+On 11/13/2015 01:46 PM, Martin Jansa wrote:
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-multimedia/recipes-multimedia/vlc/vlc.inc | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+>>>> 1) or even better in a separate repo
+>>>
+>>> To be honest, I had anticipated this being a separate meta-qt4 repo myself. It
+>>> would be consistent with what has been done with Qt 5 and much earlier with
+>>> Qt 3.
+>>
+>> Agreed.
+>
+> I'm also fine with separate layer.
+>
+> Even better for me, I'll be less tempted to include it in my world
+> builds and to fix qt-mobility-* issues.
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index b0dad67..9adcdb1 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -11,7 +11,7 @@ DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native \
-    libdvdcss libdvdread lua-native lua libidn libnotify gtk+ \
-    libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
-    libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
--   tiff xcb-util-keysyms samba"
-+   tiff xcb-util-keysyms"
- 
- SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
- 
-@@ -60,6 +60,16 @@ PACKAGECONFIG[qt4] = "--enable-qt,--disable-qt, qt4-x11-free"
- PACKAGECONFIG[freerdp] = "--enable-freerdp,--disable-freerdp, freerdp"
- PACKAGECONFIG[dvbpsi] = "--enable-dvbpsi,--disable-dvbpsi, libdvbpsi"
- PACKAGECONFIG[gnome-vfs] = "--enable-gnomevfs,--disable-gnomevfs, gnome-vfs"
-+PACKAGECONFIG[samba] = "--enable-smbclient,--disable-smbclient, samba"
-+PACKAGECONFIG[upnp] = "--enable-upnp,--disable-upnp,libupnp"
-+PACKAGECONFIG[dvdnav] = "--enable-dvdnav,--disable-dvdnav,libdvdnav"
-+PACKAGECONFIG[sftp] = "--enable-sftp,--disable-sftp,libssh2"
-+PACKAGECONFIG[vorbis] = "--enable-vorbis,--disable-vorbis,libvorbis libogg"
-+PACKAGECONFIG[ogg] = "--enable-ogg,--disable-ogg,libvorbis libogg"
-+PACKAGECONFIG[dc1394] = "--enable-dc1394,--disable-dc1394,libdc1394"
-+PACKAGECONFIG[dv1394] = "--enable-dv1394,--disable-dv1394,libraw1394 libavc1394"
-+PACKAGECONFIG[svg] = "--enable-svg,--disable-svg,librsvg"
-+PACKAGECONFIG[svgdec] = "--enable-svgdec,--disable-svgdec,librsvg cairo"
- 
- do_configure_prepend() {
-     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
--- 
-2.6.3
+Making a separate repository with this layer is even more disruptive, 
+and complicates administration and maintenance. I'm not going to handle 
+those. So I'll make a meta-qt4 layer under meta-oe, and it's fine if 
+there is no official maintainer or ongoing build testing for it at least 
+until someone volunteers to pick it up.
+
+
+Alex
 
 
