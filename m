@@ -1,41 +1,34 @@
-Return-Path: <adrian.ratiu@ni.com>
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mail.openembedded.org (Postfix) with ESMTP id E9A1F77386
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id EE6C5736B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Nov 2015 08:23:12 +0000 (UTC)
-Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	tAG8NBQa010451; Mon, 16 Nov 2015 02:23:11 -0600
-Received: from adi-pc-linux ([130.164.14.198])
-	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2015111602231167-10552 ;
-	Mon, 16 Nov 2015 02:23:11 -0600 
-Date: Mon, 16 Nov 2015 10:23:07 +0200
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-To: Zhiquan Li <zhiquan.li@windriver.com>
-Message-ID: <20151116102307.7e2ea1f0@adi-pc-linux>
-In-Reply-To: <564941D3.3000105@windriver.com>
-References: <1445594855-39110-1-git-send-email-zhiquan.li@windriver.com>
-	<1445594855-39110-2-git-send-email-zhiquan.li@windriver.com>
-	<20151026124914.2854e87e@adi-pc-linux>
-	<689881552969744788D482C9A8FAED214EBAA9@ALA-MBB.corp.ad.wrs.com>
-	<20151027124927.448d2c15@adi-pc-linux>
-	<56317960.6030108@windriver.com>
-	<20151029110402.76ae98c8@adi-pc-linux> <20151029111152.GA2564@jama>
-	<564941D3.3000105@windriver.com>
-Organization: National Instruments
-MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 11/16/2015 02:23:11 AM,
-	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 11/16/2015 02:23:11 AM,
-	Serialize complete at 11/16/2015 02:23:11 AM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2015-11-16_05:, , signatures=0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/1] snort: fix m4 causes out of memory during configure [ LIN8-299 ]
+	Mon, 16 Nov 2015 09:03:25 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so164960162wme.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Nov 2015 01:03:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=AUemDWapb2SbuaIctALeRiqGRmGJak/q9WoCaKNGP7M=;
+	b=g2LZcCLZMBB2eS3v8tHtimfNo0r1WlFch46M+3b3xOkzt2PI6/kFWaAavoVHTPqjx4
+	I7l6fqbUPPcXOByDsgojNOXCf/jH5z3GBkW6mey8/XvYF9k8oSxWq8ba6Dm+fyVUTRwE
+	1Z7qi+7yl3/PWtKaM9gC9j7tYEYKYv9uFem39fU9ippX6gVu/U7vDib4Qb/4Xt+wbfQG
+	vmZv/2F7gVfKAMfhy2pVGYDgdWFhKWPSgR5voSUSCFjvxcgEWQHZXZCau8FunVGDfr8C
+	DMeirs08wO1bz8niKs9OtO4L6syhK5O5l4oYgCcErcHpxwDBW8hIdprC46nq3Kg+V/g/
+	j6UA==
+X-Received: by 10.194.95.202 with SMTP id dm10mr36205431wjb.56.1447664605275; 
+	Mon, 16 Nov 2015 01:03:25 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	om1sm33450020wjc.2.2015.11.16.01.03.23
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 16 Nov 2015 01:03:23 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 16 Nov 2015 10:03:27 +0100
+Message-Id: <1447664607-30891-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.6.3
+Subject: [PATCHv2][meta-multimedia] vlc: add PACKAGECONFIG for samba, upnp, dvdnav, sftp, vorbis, dc1394, dv1394, svg, svgdec
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,89 +42,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2015 08:23:13 -0000
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Mon, 16 Nov 2015 09:03:26 -0000
 
-On Mon, 16 Nov 2015 10:39:15 +0800
-Zhiquan Li <zhiquan.li@windriver.com> wrote:
+* hopefully fixes:
+WARN: vlc: vlc rdepends on libavc1394, but it isn't a build dependency?
+WARN: vlc: vlc rdepends on libcroco, but it isn't a build dependency?
+WARN: vlc: vlc rdepends on libcrypto, but it isn't a build dependency?
+WARN: vlc: vlc rdepends on libdvdnav, but it isn't a build dependency?
+WARN: vlc: vlc rdepends on librsvg, but it isn't a build dependency?
+WARN: vlc: vlc rdepends on libssh2, but it isn't a build dependency?
+WARN: vlc: vlc rdepends on libssl, but it isn't a build dependency?
+WARN: vlc: vlc rdepends on libupnp, but it isn't a build dependency?
+WARN: vlc: vlc rdepends on libvorbis, but it isn't a build dependency?
+WARN: vlc: vlc rdepends on libxml2, but it isn't a build dependency?
 
-> 
-> 
-> On 2015.10.29 19:11, Martin Jansa wrote:
-> > On Thu, Oct 29, 2015 at 11:04:02AM +0200, Ioan-Adrian Ratiu wrote:
-> >> On Thu, 29 Oct 2015 09:41:52 +0800
-> >> Zhiquan Li <zhiquan.li@windriver.com> wrote:
-> >>
-> >>>
-> >>> On 2015.10.27 18:49, Ioan-Adrian Ratiu wrote:
-> >>>> On Tue, 27 Oct 2015 09:54:07 +0000
-> >>>> "Li, Zhiquan" <Zhiquan.Li@windriver.com> wrote:
-> >>>>
-> >>>>> I need to evaluate the possibility to upgrade the snort recipe to
-> >>>>>> 2.9.7, because upgrade to > 2.9.7, some patches will not work
-> >>>>>> anymore and the daq recipe also need to be upgraded to 2.0.4 at
-> >>>>>> least. The side-effect is uncertainty.
-> >>>> What exactly do you mean by "patches will not work anymore"?.
-> >>>> Do you mean thy do not apply on >2.9.7? AFAIK two of those
-> >>>> patches are not needed in 2.9.7.6 (fixed upstream), the others
-> >>>> just need refreshing.
-> >>> I've tried to upgrade snort from 2.9.6.0 to 2.9.7.5, as its
-> >>> dependency I also upgrade daq recipe from 2.0.2 to 2.0.6, and
-> >>> accordingly update the patches:
-> >>> * add 2 new patches for snort to solve the cross compile issues.
-> >>> * discard a snort patch since it is not needed.
-> >>> * refresh the patch for daq new version.
-> >>> Please see the attachment for the changes.
-> >>>
-> >>> Unfortunately , it was failed when packaging debug files, the rpm
-> >>> debugedit complain: canonicalization unexpectedly shrank by one
-> >>> character. At a glance it is a bug of debugedit, please see:
-> >>> http://sourceforge.net/p/snort/mailman/message/34130268/
-> >>> Redhat hasn't resolved this bug:
-> >>> https://bugzilla.redhat.com/show_bug.cgi?id=304121
-> >>>
-> >>> So, the options are:
-> >>> * Fix rpm debugedit bug and update it to OE
-> >>> * Take the workaround that skip the snort debug package
-> >>> * Backport the fix from snort upstream
-> >>>
-> >> IMO anything rpm-based is fundamentally broken and not worth fixing
-> >> because of these kind of long-standing bugs. You spend tons of time
-> >> fixing one, then just hit another that was also ignored for +8 years.
-> >>
-> >> I don't think we should skip the debug package entirely because ipks
-> >> and debs should be fine. If it is possible to skip only rpm-debug pkgs
-> >> then this would be the best way to go IMO.
-> >>
-> >> Not upgrading the package and backporting fixes only to avoid this rpm
-> >> bug should be the last option.
-> >>
-> >> @Martin and @Khem, do you have any suggestions?
-> > I've already merged this change to master-next and I plan to merge it to
-> > master and jethro soon (when jenkins builds are finished).
-> >
-> > It's good incremental step (fixes the root cause why it was
-> > blacklisted), upgrade to newer version is also good, but can be separate
-> > and only for master branch (as jethro is almost closed now).
-> >
-> > "canonicalization unexpectedly shrank by one character" is something we
-> > have to fix from time to time, but it's always doable in the component
-> > source (usually double slash in one of the paths), so it's not 8+ years
-> > kind of issue.
-> >
-> > Regards,
-> Many thanks, Martin!
-> 
-> I saw your fix for "canonicalization unexpectedly shrank by one 
-> character" issue:
-> http://lists.openembedded.org/pipermail/openembedded-core/2013-October/084960.html
-> 
-> Some redundant '/' were sneakingly inserted into snort binary and lead 
-> to the rpm debugedit error finally.
-> I've submitted a new patch so that snort can be upgraded to 2.9.7+:
-> http://lists.openembedded.org/pipermail/openembedded-devel/2015-November/104661.html
-> 
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-Very nice! Thank you for doing the upgrade.
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+index b0dad67..9adcdb1 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+@@ -11,7 +11,7 @@ DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native \
+    libdvdcss libdvdread lua-native lua libidn libnotify gtk+ \
+    libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
+    libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
+-   tiff xcb-util-keysyms samba"
++   tiff xcb-util-keysyms"
+ 
+ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
+ 
+@@ -60,6 +60,16 @@ PACKAGECONFIG[qt4] = "--enable-qt,--disable-qt, qt4-x11-free"
+ PACKAGECONFIG[freerdp] = "--enable-freerdp,--disable-freerdp, freerdp"
+ PACKAGECONFIG[dvbpsi] = "--enable-dvbpsi,--disable-dvbpsi, libdvbpsi"
+ PACKAGECONFIG[gnome-vfs] = "--enable-gnomevfs,--disable-gnomevfs, gnome-vfs"
++PACKAGECONFIG[samba] = "--enable-smbclient,--disable-smbclient, samba"
++PACKAGECONFIG[upnp] = "--enable-upnp,--disable-upnp,libupnp"
++PACKAGECONFIG[dvdnav] = "--enable-dvdnav,--disable-dvdnav,libdvdnav"
++PACKAGECONFIG[sftp] = "--enable-sftp,--disable-sftp,libssh2"
++PACKAGECONFIG[vorbis] = "--enable-vorbis,--disable-vorbis,libvorbis libogg"
++PACKAGECONFIG[ogg] = "--enable-ogg,--disable-ogg,libvorbis libogg"
++PACKAGECONFIG[dc1394] = "--enable-dc1394,--disable-dc1394,libdc1394"
++PACKAGECONFIG[dv1394] = "--enable-dv1394,--disable-dv1394,libraw1394 libavc1394"
++PACKAGECONFIG[svg] = "--enable-svg,--disable-svg,librsvg"
++PACKAGECONFIG[svgdec] = "--enable-svgdec,--disable-svgdec,librsvg cairo"
+ 
+ do_configure_prepend() {
+     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
+-- 
+2.6.3
+
 
