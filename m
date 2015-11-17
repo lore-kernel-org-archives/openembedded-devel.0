@@ -1,24 +1,32 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 69D1F60108
+Return-Path: <picmaster@mail.bg>
+Received: from mx1.mail.bg (mx1.mail.bg [193.201.172.117])
+	by mail.openembedded.org (Postfix) with ESMTP id EF0176010B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2015 09:57:37 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAH9vcRu029103
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2015 01:57:38 -0800 (PST)
-Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Tue, 17 Nov 2015 01:57:38 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 17 Nov 2015 17:57:42 +0800
-Message-ID: <1447754262-19980-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Tue, 17 Nov 2015 13:19:25 +0000 (UTC)
+Received: from [192.168.43.108] (85-118-68-49.mtel.net [85.118.68.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mx1.mail.bg (Postfix) with ESMTPSA id EFFF1600A01B;
+	Tue, 17 Nov 2015 14:32:13 +0200 (EET)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=mail.bg; s=default;
+	t=1447763534; bh=PVX2XJlK+DCB7AWyi7e+7haa+FFLjUfesnCx+zl8WTE=;
+	h=Message-ID:Date:From:MIME-Version:To:CC:Subject:References:
+	In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	b=buFyr4DhZM7XKessxgstzS9JzNaJvLj7bH3fe7nHiwA3bWxQ4m2nQO6QYYPHkjKm4
+	5WWylk+jJJhPOcoQwSUO9HDrT5JDrJDfBHQudgvpofbjZCGxGVNRH3qAE00uw0zz94
+	jf692fn3C/VDYRUbPMvBZiwM25RYW3tcZMRziG0g=
+Message-ID: <564B1E4C.2090409@mail.bg>
+Date: Tue, 17 Nov 2015 14:32:12 +0200
+From: Nikolay Dimitrov <picmaster@mail.bg>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Icedove/31.8.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] netmap-modules: skip the arch check for kernel module
+To: Andre McCurdy <armccurdy@gmail.com>
+References: <1447217296-7145-1-git-send-email-armccurdy@gmail.com>	<1447217296-7145-2-git-send-email-armccurdy@gmail.com>	<56473F66.3020501@mail.bg>
+	<CAJ86T=X43k=FjHDh288yX4n8z0yDZnmXwvQpFiNiSqO7oYR5tg@mail.gmail.com>
+In-Reply-To: <CAJ86T=X43k=FjHDh288yX4n8z0yDZnmXwvQpFiNiSqO7oYR5tg@mail.gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-browser][PATCH 2/2] chromium: use PARALLEL_MAKE to control build parallelism
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,37 +39,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Nov 2015 09:57:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 17 Nov 2015 13:19:26 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Hi Andre,
 
-When building on a multilib capable BSP, it's possible for the
-kernel bit size to be different then the userspace. Avoid the
-QA test when building the kernel module.
+On 11/16/2015 08:15 PM, Andre McCurdy wrote:
+> Hi Nikolay,
+>
+> On Sat, Nov 14, 2015 at 6:04 AM, Nikolay Dimitrov <picmaster@mail.bg> wrote:
+>> Hi Andre,
+>>
+>> On 11/11/2015 06:48 AM, Andre McCurdy wrote:
+>>>
+>>> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+>>> ---
+>>>    recipes-browser/chromium/chromium_40.0.2214.91.bb | 2 +-
+>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb
+>>> b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+>>> index a9635cd..f20610c 100644
+>>> --- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
+>>> +++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+>>> @@ -196,7 +196,7 @@ do_configure_append() {
+>>>
+>>>    do_compile() {
+>>>            # build with ninja
+>>> -        ninja -C ${S}/out/${CHROMIUM_BUILD_TYPE} -j${BB_NUMBER_THREADS}
+>>> chrome chrome_sandbox
+>>> +        ninja -C ${S}/out/${CHROMIUM_BUILD_TYPE} ${PARALLEL_MAKE} chrome
+>>> chrome_sandbox
+>>>    }
+>>
+>>
+>> Can you please share the chromium build times on your build-box with
+>> and without this patch? I'm just curious how well this worked for you.
+>
+> By default BB_NUMBER_THREADS and PARALLEL_MAKE are both derived from
+> the number of logical CPU cores (as detected by oe.utils.cpu_count()),
+> so the patch should not have any effect on build times.
+>
+> The patch is about correctness - it's not really right to use
+> BB_NUMBER_THREADS for anything other than setting the maximum number
+> of BitBake threads.
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-networking/recipes-kernel/netmap/netmap-modules_git.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+Ahh, I see. Thanks.
 
-diff --git a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-index c1c319d..286b429 100644
---- a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-+++ b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-@@ -9,6 +9,11 @@ CLEANBROKEN = "1"
- 
- export INSTALL_MOD_DIR="kernel/netmap-modules"
- 
-+# When building on a multilib capable BSP, it's possible for the
-+# kernel bit size to be different then the userspace. Avoid the QA test
-+# when building modules
-+INSANE_SKIP_kernel-module-netmap = "arch"
-+
- EXTRA_OECONF = "--kernel-dir=${STAGING_KERNEL_BUILDDIR} \
-                 --kernel-sources=${STAGING_KERNEL_DIR} \
-                 --install-mod-path=${D} \
--- 
-2.3.5
-
+Regards,
+Nikolay
 
