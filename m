@@ -1,39 +1,32 @@
-Return-Path: <adrian.freihofer@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id C2E5E6057A
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2015 21:44:53 +0000 (UTC)
-Received: by wmdw130 with SMTP id w130so173992235wmd.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2015 13:44:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:content-type:mime-version:content-transfer-encoding;
-	bh=XJpV8J1wGVDPTrcAAVKEjwizp7LjSa5XmIzVhy+juIc=;
-	b=NJgGZVbh8jLYfGwqo63/WFr/H+cepdasav3vsFkBgw+QDeC9j7Y0e9r6eeELKBb/CA
-	BrEW1PGWAWpptb2kE2laM3/YKjWdvolTjUTtdRBPXnU1FPbN1jKB/+pB688YFjfZrgOk
-	H+uHqa8veWo220UQ7y/TJsY1VOROkGKHWPCtami8am9X7pPyU5g13OeWy+CuKzO8QT+y
-	A4lAc4DpevNPXL7w2oR3f0/ggXItopCuIL/x08BKgQu9f3gte41m5BKZIdCSnsGX6hfv
-	49L8pA22sxUEk5QksJbv11RkCk5MtNTeIMo6HZ0F6wvdzrgFloQjJ05GKTbJrqUqvu3h
-	rMAw==
-X-Received: by 10.28.22.21 with SMTP id 21mr4843242wmw.72.1447796694275;
-	Tue, 17 Nov 2015 13:44:54 -0800 (PST)
-Received: from chl500346 (c-82-192-248-24.customer.ggaweb.ch. [82.192.248.24])
-	by smtp.gmail.com with ESMTPSA id
-	ot9sm28564859wjc.12.2015.11.17.13.44.53
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 17 Nov 2015 13:44:53 -0800 (PST)
-Message-ID: <1447796692.2296.21.camel@gmail.com>
-From: Adrian Freihofer <adrian.freihofer@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Nov 2015 22:44:52 +0100
-In-Reply-To: <20151116213457.GG2240@jama>
-References: <1447271300-4153-1-git-send-email-adrian.freihofer@gmail.com>
-	<1447271300-4153-8-git-send-email-adrian.freihofer@gmail.com>
-	<20151116213457.GG2240@jama>
-X-Mailer: Evolution 3.16.5 (3.16.5-3.fc22) 
-Mime-Version: 1.0
-Subject: Re: [meta-oe][PATCH V2 07/17] networkmanager: support gnutls and nss
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
+	[209.85.223.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 206C46057A;
+	Tue, 17 Nov 2015 22:53:57 +0000 (UTC)
+Received: by ioir85 with SMTP id r85so35296545ioi.1;
+	Tue, 17 Nov 2015 14:53:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=lc1bbHt4RCTeOqytjhZt6tVaXJaeREY4z3HKXKadJxc=;
+	b=hB7ebyUsyFe7LPeDw/ZYpwJJwg1tHPQP5p2glXDgZoOGvGxvcetN3HRHxprRCrRDT7
+	GLKvVeREhPLIa1+leQ6Jectq7MzvPrPWDwzOiEYaw4bB58Pasyp3wPv4nyYMVQLRVbi+
+	A2NPP0nvxudSDqs9SoaEDLTeVgdijrGzi1EkI2Dp1L5HmvV6gT3kmrhQSUV9287dFEIf
+	kxueuvPTL94Ux242Kpk6sWY33ROxVi7zenuZDukXWGRHlw+fcZCdUz87Zi6gubjRd8tA
+	ZcNDulrhMcrOzgytCC4AS72WniDh3hkPkF/ItefVAbFjnlMBXYxfmFsNepuOA994oRnq
+	JGkw==
+MIME-Version: 1.0
+X-Received: by 10.107.135.30 with SMTP id j30mr19439iod.148.1447800837733;
+	Tue, 17 Nov 2015 14:53:57 -0800 (PST)
+Received: by 10.36.25.81 with HTTP; Tue, 17 Nov 2015 14:53:57 -0800 (PST)
+Date: Tue, 17 Nov 2015 23:53:57 +0100
+Message-ID: <CALbNGRQp4XcpjKdHKq2xTWbANWe6LzxzKeWXNpLg5Db9LoTxvg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: target g++ oddities (with qt5-creator)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,147 +39,186 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Nov 2015 21:44:59 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 17 Nov 2015 22:54:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, 2015-11-16 at 22:34 +0100, Martin Jansa wrote:
-> On Wed, Nov 11, 2015 at 08:48:10PM +0100, Adrian Freihofer wrote:
-> > Signed-off-by: Adrian Freihofer <adrian.freihofer@gmail.com>
-> > ---
-> >  .../0002-add-pkg-config-for-libgcrypt.patch        | 41 ++++++++++++++++++++++
-> >  .../networkmanager/networkmanager_1.0.6.bb         | 14 ++++++--
-> >  2 files changed, 52 insertions(+), 3 deletions(-)
-> >  create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-add-pkg-config-for
-> > -libgcrypt.patch
-> > 
-> > diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-add-pkg-config-for-libgcrypt.patch
-> > b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-add-pkg-config-for-libgcrypt.patch
-> > new file mode 100644
-> > index 0000000..bb95eaa
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-add-pkg-config-for-libgcrypt.patch
-> > @@ -0,0 +1,41 @@
-> > +From a9261fee4a41045c42e0d292237cee532e11982c Mon Sep 17 00:00:00 2001
-> > +From: Adrian <adrian.freihofer@gmail.com>
-> > +Date: Thu, 27 Nov 2014 15:43:26 +0100
-> > +Subject: [PATCH] add pkg config for libgcrypt
-> > +
-> > +---
-> > + configure.ac | 18 +++++++-----------
-> > + 1 file changed, 7 insertions(+), 11 deletions(-)
-> > +
-> > +diff --git a/configure.ac b/configure.ac
-> > +index 94b0758..654a015 100644
-> > +--- a/configure.ac
-> > ++++ b/configure.ac
-> > +@@ -480,17 +480,13 @@ if test x"$ac_crypto" = xnss; then
-> > +   with_nss=yes
-> > + elif test x"$ac_crypto" = xgnutls; then
-> > +   PKG_CHECK_MODULES(GNUTLS, [gnutls >= 1.2])
-> > +-  AC_PATH_PROG(LIBGCRYPT_CONFIG, libgcrypt-config, no)
-> > +-  if test x"$LIBGCRYPT_CONFIG" = xno; then
-> > +-    AC_MSG_ERROR([gnutls explicitly requested but gcrypt not found on system])
-> > +-  else
-> > +-    AC_DEFINE(HAVE_GNUTLS, 1, [Define if you have libgnutls])
-> > +-    LIBGCRYPT_CFLAGS=`$LIBGCRYPT_CONFIG --cflags`
-> > +-    LIBGCRYPT_LIBS=`$LIBGCRYPT_CONFIG --libs`
-> > +-    AC_SUBST(LIBGCRYPT_CFLAGS)
-> > +-    AC_SUBST(LIBGCRYPT_LIBS)
-> > +-    with_gnutls=yes
-> > +-  fi
-> > ++  AC_DEFINE(HAVE_GNUTLS, 1, [Define if you have libgnutls])
-> > ++  PKG_CHECK_MODULES(LIBGCRYPT, [libgcrypt >= 1.1.42], [
-> > ++      AC_DEFINE(HAVE_GCRYPT, 1, [Define if gcrypt library is available.])
-> > ++      with_gnutls=yes
-> > ++    ], [
-> > ++      AC_MSG_ERROR([gnutls explicitly requested but gcrypt not found on system])
-> > ++    ])
-> > + else
-> > +   AC_MSG_ERROR([Please choose either 'nss' or 'gnutls' for certificate and crypto operations])
-> > + fi
-> > +-- 
-> > +1.9.1
-> > +
-> > diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb b/meta-oe/recipes
-> > -connectivity/networkmanager/networkmanager_1.0.6.bb
-> > index d529b4a..3a59f83 100644
-> > --- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
-> > +++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
-> > @@ -6,13 +6,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
-> >                      file://libnm-util/COPYING;md5=1c4fa765d6eb3cd2fbd84344a1b816cd \
-> >                      file://docs/api/html/license.html;md5=51d7fb67bde992e58533a8481cee070b"
-> >  
-> > -DEPENDS = "libnl dbus dbus-glib libgudev wireless-tools nss util-linux libndp"
-> > +DEPENDS = "libnl dbus dbus-glib libgudev wireless-tools util-linux libndp"
-> >  
-> >  inherit gnomebase gettext systemd
-> >  
-> >  SRC_URI = " \
-> >      ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-> >      file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
-> > +    file://0002-add-pkg-config-for-libgcrypt.patch \
-> >  "
-> >  
-> >  SRC_URI[md5sum] = "00f5f9ec69725a9f9b99366853c6f73e"
-> > @@ -26,7 +27,6 @@ EXTRA_OECONF = " \
-> >      --disable-ifnet \
-> >      --disable-ifcfg-suse \
-> >      --with-netconfig \
-> > -    --with-crypto=nss \
-> >      --disable-more-warnings \
-> >      --with-dhclient=${base_sbindir}/dhclient \
-> >      --with-iptables=${sbindir}/iptables \
-> > @@ -34,7 +34,13 @@ EXTRA_OECONF = " \
-> >      --with-dnsmasq=${bindir}/dnsmasq \
-> >  "
-> >  
-> > -PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
-> > +# If you need a different configuration for networkmanager, add lines similar to
-> > +# the following example to your local.conf or distro config
-> > +# PACKAGECONFIG_remove_pn-networkmanager = "nss"
-> > +# PACKAGECONFIG_append_pn-networkmanager = " gnutls modemmanager ppp"
-> > +PACKAGECONFIG ??= "nss \
-> > +    ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)} \
-> > +"
-> >  PACKAGECONFIG[systemd] = " \
-> >      --with-systemdsystemunitdir=${systemd_unitdir}/system --with-session-tracking=systemd --enable-polkit, \
-> >      --without-systemdsystemunitdir, \
-> > @@ -46,6 +52,8 @@ PACKAGECONFIG[bluez5] = "--enable-bluez5-dun,--disable-bluez5-dun,bluez5"
-> >  PACKAGECONFIG[concheck] = "--with-libsoup=yes,--with-libsoup=no,libsoup-2.4"
-> >  PACKAGECONFIG[modemmanager] = "--with-modem-manager-1=yes,--with-modem-manager-1=no,modemmanager"
-> >  PACKAGECONFIG[ppp] = "--enable-ppp,--disable-ppp,ppp"
-> > +PACKAGECONFIG[nss] = "--with-crypto=nss,,nss"
-> 
-> won't it detect nss when available in sysroot?
+Hi,
 
-Why is nss available in sysroot if not because of networkmanager depends on it?
+I try to get qt5-creator running on target again. Up to now I had two
+non working scenarios with gcc 5.2:
 
-> 
-> > +PACKAGECONFIG[gnutls] = "--with-crypto=gnutls,,gnutls libgcrypt,gnutls libgcrypt"
-> 
-> Why do you need to add gnutls and libgcrypt manually to RDEPENDS?
+* Qt 5.5 + qt-creator 3.5.1: As soon as I select /usr/bin/g++ as
+compiler (shipped by g++-symlinks) qt-creator crashes
+* Qt 5.6aplpha + qtcreator 3.5.1: I can select g++ in qt-creator/Menu
+Tools/Options/Build & Run/Tab Compiler. Unfortunately the compiler set
+cannot be selected in Tab 'Kits'. The 'Compiler' combobox remains
+disabled
 
-Your are right. Should be:
-+PACKAGECONFIG[gnutls] = "--with-crypto=gnutls,,gnutls libgcrypt"
-May you apply another fixup for me? (Sorry, I can't see a way how I could do this task.)
+I don't know if it is causing the problem but when I run 'g++
+--target-help' I get (see error at the end)
 
-> 
-> >  
-> >  PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-completion"
-> >  
-> > -- 
-> > 2.4.3
-> > 
-> > -- 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+[operator@bbone ~]$ g++ --target-help
+The following options are target specific:
+  -mabi=                      Specify an ABI
+  -mabort-on-noreturn         Generate a call to abort if a noreturn
+function returns
+  -mandroid                   Generate code for the Android platform.
+  -mapcs-float                Pass FP arguments in FP registers
+  -mapcs-frame                Generate APCS conformant stack frames
+  -mapcs-reentrant            Generate re-entrant, PIC code
+  -march=                     Specify the name of the target architecture
+  -marm                       Generate code in 32 bit ARM state.
+  -masm-syntax-unified        Assume unified syntax for Thumb inline
+assembly code.
+  -mbig-endian                Assume target CPU is configured as big endian
+  -mbionic                    Use Bionic C library
+  -mcallee-super-interworking Thumb: Assume non-static functions may
+be called from ARM code
+  -mcaller-super-interworking Thumb: Assume function pointers may go
+to non-Thumb aware code
+  -mcpu=                      Specify the name of the target CPU
+  -mfix-cortex-m3-ldrd        Avoid overlapping destination and
+address registers on LDRD instructions that may trigger Cortex-M3
+errata.
+  -mfloat-abi=                Specify if floating point hardware should be used
+  -mfp16-format=              Specify the __fp16 floating-point format
+  -mfpu=                      Specify the name of the target floating
+point hardware/format
+  -mglibc                     Use GNU C library
+  -mlittle-endian             Assume target CPU is configured as little endian
+  -mlong-calls                Generate call insns as indirect calls,
+if necessary
+  -mneon-for-64bits           Use Neon to perform 64-bits operations
+rather than core registers.
+  -mnew-generic-costs         Use the new generic RTX cost tables if
+new core-specific cost table not available (transitional).
+  -mold-rtx-costs             Use the old RTX costing tables (transitional).
+  -mpic-data-is-text-relative Assume data segments are relative to text segment.
+  -mpic-register=             Specify the register to be used for PIC addressing
+  -mpoke-function-name        Store function names in object code
+  -mprint-tune-info           Print CPU tuning information as comment
+in assembler file.  This is an option used only for regression testing
+of the compiler and not
+                              intended for ordinary use in compiling code.
+  -mrestrict-it               Generate IT blocks appropriate for ARMv8.
+  -msched-prolog              Permit scheduling of a function's
+prologue sequence
+  -msingle-pic-base           Do not load the PIC register in function prologues
+  -mslow-flash-data           Assume loading data from flash is slower
+than fetching instructions.
+  -mstructure-size-boundary=  Specify the minimum bit alignment of structures
+  -mthumb                     Generate code for Thumb state
+  -mthumb-interwork           Support calls between Thumb and ARM
+instruction sets
+  -mtls-dialect=              Specify thread local storage scheme
+  -mtp=                       Specify how to access the thread pointer
+  -mtpcs-frame                Thumb: Generate (non-leaf) stack frames
+even if not needed
+  -mtpcs-leaf-frame           Thumb: Generate (leaf) stack frames even
+if not needed
+  -mtune=                     Tune code for the given processor
+  -muclibc                    Use uClibc C library
+  -munaligned-access          Enable unaligned word and halfword
+accesses to packed data.
+  -mvectorize-with-neon-double Use Neon double-word (rather than
+quad-word) registers for vectorization
+  -mvectorize-with-neon-quad  Use Neon quad-word (rather than
+double-word) registers for vectorization
+  -mword-relocations          Only generate absolute relocations on
+word sized values.
+
+  Known ARM ABIs (for use with the -mabi= option):
+    aapcs aapcs-linux apcs-gnu atpcs iwmmxt
+
+  Known ARM architectures (for use with the -march= option):
+    armv2 armv2a armv3 armv3m armv4 armv4t armv5 armv5e armv5t armv5te
+armv6 armv6-m armv6j armv6k armv6s-m armv6t2 armv6z armv6zk armv7
+armv7-a armv7-m armv7-r armv7e-m
+    armv7ve armv8-a armv8-a+crc iwmmxt iwmmxt2 native
+
+  Known __fp16 formats (for use with the -mfp16-format= option):
+    alternative ieee none
+
+  Known ARM FPUs (for use with the -mfpu= option):
+    crypto-neon-fp-armv8 fp-armv8 fpv4-sp-d16 fpv5-d16 fpv5-sp-d16
+neon neon-fp-armv8 neon-fp16 neon-vfpv4 vfp vfp3 vfpv3 vfpv3-d16
+vfpv3-d16-fp16 vfpv3-fp16 vfpv3xd
+    vfpv3xd-fp16 vfpv4 vfpv4-d16
+
+  Valid arguments to -mtp=:
+    auto cp15 soft
+
+  Known floating-point ABIs (for use with the -mfloat-abi= option):
+    hard soft softfp
+
+  Known ARM CPUs (for use with the -mcpu= and -mtune= options):
+    arm1020e arm1020t arm1022e arm1026ej-s arm10e arm10tdmi arm1136j-s
+arm1136jf-s arm1156t2-s arm1156t2f-s arm1176jz-s arm1176jzf-s arm2
+arm250 arm3 arm6 arm60 arm600
+    arm610 arm620 arm7 arm70 arm700 arm700i arm710 arm7100 arm710c
+arm710t arm720 arm720t arm740t arm7500 arm7500fe arm7d arm7di arm7dm
+arm7dmi arm7m arm7tdmi arm7tdmi-s
+    arm8 arm810 arm9 arm920 arm920t arm922t arm926ej-s arm940t
+arm946e-s arm966e-s arm968e-s arm9e arm9tdmi cortex-a12 cortex-a15
+cortex-a15.cortex-a7 cortex-a17
+    cortex-a17.cortex-a7 cortex-a5 cortex-a53 cortex-a57
+cortex-a57.cortex-a53 cortex-a7 cortex-a72 cortex-a72.cortex-a53
+cortex-a8 cortex-a9 cortex-m0
+    cortex-m0.small-multiply cortex-m0plus
+cortex-m0plus.small-multiply cortex-m1 cortex-m1.small-multiply
+cortex-m3 cortex-m4 cortex-m7 cortex-r4 cortex-r4f cortex-r5
+    cortex-r7 ep9312 exynos-m1 fa526 fa606te fa626 fa626te fa726te
+fmp626 generic-armv7-a iwmmxt iwmmxt2 marvell-pj4 mpcore mpcorenovfp
+native strongarm strongarm110
+    strongarm1100 strongarm1110 xgene1 xscale
+
+  TLS dialect to use:
+    gnu gnu2
+
+Assembler options
+=================
+
+Use "-Wa,OPTION" to pass "OPTION" to the assembler.
+
+ ARM-specific assembler options:
+  -k                      generate PIC code
+  -mthumb                 assemble Thumb code
+  -mthumb-interwork       support ARM/Thumb interworking
+  -mapcs-32               code uses 32-bit program counter
+  -mapcs-26               code uses 26-bit program counter
+  -mapcs-float            floating point args are in fp regs
+  -mapcs-reentrant        re-entrant code
+  -matpcs                 code is ATPCS conformant
+  -mbig-endian            assemble for big-endian
+  -mlittle-endian         assemble for little-endian
+  -mapcs-frame            use frame pointer
+  -mapcs-stack-check      use stack size checking
+  -mno-warn-deprecated    do not warn on use of deprecated feature
+  -mcpu=<cpu name>      assemble for CPU <cpu name>
+  -march=<arch name>      assemble for architecture <arch name>
+  -mfpu=<fpu name>      assemble for FPU architecture <fpu name>
+  -mfloat-abi=<abi>      assemble for floating point ABI <abi>
+  -meabi=<ver>          assemble for eabi version <ver>
+  -mimplicit-it=<mode>      controls implicit insertion of IT instructions
+  -mccs              TI CodeComposer Studio syntax compatibility mode
+  -EB                     assemble code for a big-endian cpu
+  -EL                     assemble code for a little-endian cpu
+  --fix-v4bx              Allow BX in ARMv4 code
+
+Linker options
+==============
+
+Use "-Wl,OPTION" to pass "OPTION" to the linker.
+
+/usr/lib/gcc/arm-angstrom-linux-gnueabi/5.2.0/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+--target-help: unknown option
+/usr/lib/gcc/arm-angstrom-linux-gnueabi/5.2.0/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+use the --help option for usage information
+collect2: error: ld returned 1 exit status
+
+
+
+Help appreciated.
+
+Andreas
 
