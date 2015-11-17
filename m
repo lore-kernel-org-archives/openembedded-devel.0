@@ -1,45 +1,24 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
-	[209.85.213.178])
-	by mail.openembedded.org (Postfix) with ESMTP id A42486010B;
-	Tue, 17 Nov 2015 15:05:55 +0000 (UTC)
-Received: by igvi2 with SMTP id i2so98475172igv.0;
-	Tue, 17 Nov 2015 07:05:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=XQlFyuTSO1JcmNanLPMnP+6PMLZHjGz0INEYZ6PbDLE=;
-	b=dYoLdl6O/cJloRp0Apc6yOH/fjEqD/IBEKLZjcJKdx+LaEHk2tMnvZmgBA+9rsl0nJ
-	tHTk8tuzd4k+8lzeru9b++2IknRzkoXiq9bLhrQX/tos6Jdb+Ux9vXOvWcfdwn5kaxkE
-	v0XRRmXYPcQQ1Rdt7c5ioQyzpNsdFBDosQQKp+cIMlUKpMTNTq+ILU4JkBk7hoZVEV6S
-	S81UVel978bkDuNAsHbvXHOr08K2Aod2RQr3YDEs86kd593o6n1qfz+KZuXOSs6uS/I4
-	5fW0Nx2SKEYPVAOQagsHf46aDegD7HVS7GzCRVk93wlmU3khiliyk9J+VwjN6M5+xtgc
-	IQ2Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kergoth_com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=XQlFyuTSO1JcmNanLPMnP+6PMLZHjGz0INEYZ6PbDLE=;
-	b=hj5IhTt1LBAy6Rlgwna7JvVOFShieViVfjKLnjPdA3KsMLgA+LnqQ9U5wS9E8ChzFM
-	T4xQ51yRcElm6gWo9FSiF7ODqDjegPO6ngB8g8M0pdSuIeuK5QzLWicOhJNTpROeqXzM
-	pLT12AsUVKVWyaKCxWcJSIdWFH2gQdUTOYutHvwAgLuRVfA5KcY9vz/2dsM5qkcl8EpW
-	bZR2WUwYy3oRVAoS83RjetpRuQ4mX6s9bp58nsqY3Ob7U557q08zTGp+a6rxf5oydm0K
-	MD1vXANk1gr36aDP1E81sykplEvxGcPb8kJXWlkQhhSN3vxL9skylHgC8dR5Xg8lPNoF
-	filA==
-X-Received: by 10.50.78.138 with SMTP id b10mr2553637igx.10.1447772756632;
-	Tue, 17 Nov 2015 07:05:56 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.93.7 with HTTP; Tue, 17 Nov 2015 07:05:05 -0800 (PST)
-In-Reply-To: <564B413F.8040500@balister.org>
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id 0D0F560119
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Nov 2015 15:14:02 +0000 (UTC)
+Received: (qmail 12432 invoked by uid 1003); 17 Nov 2015 15:14:02 -0000
+Received: from unknown (HELO ?192.168.11.125?)
+	(philip@opensdr.com@71.171.14.127)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	17 Nov 2015 15:14:02 -0000
+To: Christopher Larson <clarson@kergoth.com>
 References: <mailman.0.1447754882.1996.openemebdded-architecture@lists.openembedded.org>
 	<564B413F.8040500@balister.org>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Tue, 17 Nov 2015 08:05:05 -0700
-X-Google-Sender-Auth: zVHz457i3ttB3God-eULyyj9etI
-Message-ID: <CABcZAN=+gXP731wev9X+TCDJsu=gJ6Ut6q5_Bjo6SoZj83RVdw@mail.gmail.com>
-To: Philip Balister <philip@balister.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CABcZAN=+gXP731wev9X+TCDJsu=gJ6Ut6q5_Bjo6SoZj83RVdw@mail.gmail.com>
+From: Philip Balister <philip@balister.org>
+Message-ID: <564B4439.3070706@balister.org>
+Date: Tue, 17 Nov 2015 10:14:01 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
+MIME-Version: 1.0
+In-Reply-To: <CABcZAN=+gXP731wev9X+TCDJsu=gJ6Ut6q5_Bjo6SoZj83RVdw@mail.gmail.com>
 Cc: Yocto Project <yocto@yoctoproject.org>,
 	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>,
@@ -57,33 +36,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Nov 2015 15:05:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 17 Nov 2015 15:14:06 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Nov 17, 2015 at 8:01 AM, Philip Balister <philip@balister.org>
-wrote:
+Thanks for catching this Chris. I'll have Michael fix the name and resend.
 
-> During OEDEM in Dublin we talked about creating a list for high level
-> architecture discussions about the OpenEmbedded Build System.
->
-> Bring your big ideas to the list, discuss them, and bring the resources
-> to implement them.
->
-> We did discuss list proliferation, filtering patches, etc and still
-> decided the best solution was a new list.
->
-> Philip
->
->
-> -------- Forwarded Message --------
-> Subject: Welcome to the "Openemebdded-architecture" mailing list
->
+Sorry for the trouble.
 
-Typo. Openemebdded :)
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Philip
+
+On 11/17/2015 10:05 AM, Christopher Larson wrote:
+> On Tue, Nov 17, 2015 at 8:01 AM, Philip Balister <philip@balister.org>
+> wrote:
+> 
+>> During OEDEM in Dublin we talked about creating a list for high level
+>> architecture discussions about the OpenEmbedded Build System.
+>>
+>> Bring your big ideas to the list, discuss them, and bring the resources
+>> to implement them.
+>>
+>> We did discuss list proliferation, filtering patches, etc and still
+>> decided the best solution was a new list.
+>>
+>> Philip
+>>
+>>
+>> -------- Forwarded Message --------
+>> Subject: Welcome to the "Openemebdded-architecture" mailing list
+>>
+> 
+> Typo. Openemebdded :)
+> 
 
