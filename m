@@ -1,74 +1,41 @@
-Return-Path: <samuli.piippo@theqtcompany.com>
-Received: from emea01-am1-obe.outbound.protection.outlook.com
-	(mail-am1on0143.outbound.protection.outlook.com [157.56.112.143])
-	by mail.openembedded.org (Postfix) with ESMTP id B1D6362132
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 74D7F60767
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Nov 2015 11:52:26 +0000 (UTC)
-Authentication-Results: spf=none (sender IP is )
-	smtp.mailfrom=samuli.piippo@theqtcompany.com; 
-Received: from piippo.it.local (91.217.248.11) by
-	DB5PR02MB1173.eurprd02.prod.outlook.com (10.162.163.19) with Microsoft
-	SMTP Server (TLS) id 15.1.325.17; Wed, 18 Nov 2015 11:52:24 +0000
-From: Samuli Piippo <samuli.piippo@theqtcompany.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 18 Nov 2015 13:52:12 +0200
-Message-ID: <1447847532-30741-1-git-send-email-samuli.piippo@theqtcompany.com>
-X-Mailer: git-send-email 1.9.1
+	Wed, 18 Nov 2015 14:33:15 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so281501374wme.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Nov 2015 06:33:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=/m1q3nUprTXvtQX0fG+4BeNrMHIL+ygniN+n7pEpLsQ=;
+	b=HFo98c2ZFfGpTiqwalrxzknLb7bJll+CE84dXKnkqr7PEl7NOAy8VOrhr0dSpxxg9X
+	lqo7dK44B2RJt1v4wQcFLZonHevccwSXbAMgQMEeKZl50NWLD92+pdDHZ5AgqAiQ0f0j
+	41ODNmjRDbho+6mF8qmnz9H/jCHlSm4Yec6PMp9aexplkwNK5avX9BMcRA8q6DxO5q+s
+	R5RBDvjnQ7mCH4n9MJR3qehZuZdSrFpHdKywr6ojEkPrLBLa+ax4oL9Kqhg68koByLLw
+	//LRcE53TPZ0YInLlPLSRaSCgtbp+mfnSGdgd2K0KwmxjD5FgXDYhjlWy5jLxbyCvn+M
+	VH7Q==
+X-Received: by 10.194.200.233 with SMTP id jv9mr2655462wjc.133.1447857195439; 
+	Wed, 18 Nov 2015 06:33:15 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	200sm3601985wmn.11.2015.11.18.06.33.14
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 18 Nov 2015 06:33:14 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 18 Nov 2015 15:33:30 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151118143330.GC2213@jama>
+References: <1447271300-4153-1-git-send-email-adrian.freihofer@gmail.com>
+	<1447271300-4153-3-git-send-email-adrian.freihofer@gmail.com>
+	<20151116212303.GD2240@jama>
 MIME-Version: 1.0
-X-Originating-IP: [91.217.248.11]
-X-ClientProxiedBy: HE1PR02CA0054.eurprd02.prod.outlook.com (25.163.170.22) To
-	DB5PR02MB1173.eurprd02.prod.outlook.com (25.162.163.19)
-X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1173;
-	2:0BC/ULXymv2FDO42h9mr1K79wMWfSf48zJ4LkJoU9J3+ACFsYs6wGQeajZcr4ZJbJrJG6JmeibDIf7L/e7nfWsdH/dm/qP6+ia0yomRbiCAA52u+Qfaf1/6bwfDbzj+Fp1jaJgn5UZc6PN+X9i6MePtrjkYMVXNDRbS2v68fslw=;
-	3:K9aconT0rL7J/gAksdaKLutXSJv0VonpT3cBMaalfWG0TkNjASjoAOMnVgII2ZnFKISfOQn2+i4uqeXk1goIWWfqo5EccobfDzHD1ooCs3t5wNuF1RnzGJLGfCoj6QKuLU73n0jEGjpGNRinQw7kmA==;
-	25:trmKjEyZVCPNmlJDmwl0VJRkWc3i3W2ldT0RSuwlMI8TYrWtJWRBlJBh1P5xmwbcgIdGIuFqTZk9o+2T2SVO7SIQorq3ewElnfCYmnKg88PPp1YC5w4aPIwWieXl7M6BqwfmS7c6i+9xxoPBUUoONoq/rZcwgUTcice3OeKAwEac5MQA6xIks2Vd44/EXsrLQgF5q1oUeD597lpEFbp4N9ar9Pqq8XhJRkBUFZLeemXhbuWAtv0tsdAGDTGZYxiYq4Wm5OaoZ8x6h+fTWrTM+g==
-X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DB5PR02MB1173;
-X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1173;
-	20:KPSgLppmMP1aZfELJNlAUZFyGrStXcJ3zK94jQ+KwTIXQ0ws1u9q4CM/LfxBr3Wilu0fI5oePWwijmdOHdRfJgsnQNVsk+Q19PMilGU4IXynU4Yz4edCjgDsVBpRXOuWms0IHLXssWnUITo8F7jbpUk81g9od1bdw5mjJgPmpd0hAX/hRDT+fVtiLi/9n3/pVIDKoAhSFVo3jX3rp55j2ZNtvnSBxG9QTzqaLI4Vbtdi//dXfMatJVq52/vvEmyAYJb1dY8/5W8Ee6H48Ibg62YdOtITceov35DlzlXaIebiSMFnOjh0taiQqBkBhvZ5pZ+SVMRB1Jr2gaLDQa/16za6XGTogF+3U5n8eq+ZW9h+05V0d4MaOAecHQZwlOS2KjqsldiqOXNOERQ10G1AK4teMika2Uu3o+fyOnrUqYFPt7rPv+idulDnh9Tb/BDVsavRX78tKU+8gDZL9rxh1Vk61YailVc0AqyUOxuL5boG9rD8rjTaHWDr2VW0I9/q;
-	4:j+mplDDNgaN0dfnYXz6EB/Z1uoRvfXLWBiYHYP0xSfv5BOWnlkCs3xusjE2b+YIblN2Z2UCpowVRaXlHq0MEUiS+iXTUfFveUud6shu8ksmlvb1dCUIkD6hP7qQuU2J+YlEKMPeDaSgHLawfTO/DkM/WPIPD9YJkG4IYWr1OVAFFtLu08Sq/PZuKiMHMBSxXsMbtygKmi42go2P9f5l1SgoNrNxjBT4llczvX01DANysrdLyYZ0sGqnC+b5jfSSQlIwfhMne/H/0y7CM7vkkZXrjkaHkXXXDKIZthZmp1Dhn5KO6XilhqjnH4M+tfeHLkD9PpL/Tp7OGjge0adbN9NvwpsxN8CrsyYK4DPuc2wQrBbe9lAOAj3oLtnM7Eumm
-X-Microsoft-Antispam-PRVS: <DB5PR02MB1173C1E3B338500CEF0B04A9901C0@DB5PR02MB1173.eurprd02.prod.outlook.com>
-X-Exchange-Antispam-Report-Test: UriScan:(226695750432114);
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(601004)(2401047)(5005006)(520078)(8121501046)(3002001)(10201501046);
-	SRVR:DB5PR02MB1173; BCL:0; PCL:0; RULEID:; SRVR:DB5PR02MB1173; 
-X-Forefront-PRVS: 0764C4A8CD
-X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10019020)(6009001)(189002)(199003)(86362001)(48376002)(66066001)(47776003)(586003)(36756003)(87976001)(97736004)(81156007)(40100003)(5003940100001)(110136002)(77096005)(189998001)(4001430100002)(450100001)(19580395003)(5004730100002)(5001960100002)(19580405001)(42186005)(50986999)(122386002)(105586002)(106356001)(33646002)(5007970100001)(107886002)(2351001)(101416001)(50226001)(50466002)(5008740100001)(229853001)(92566002)(7099028);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:DB5PR02MB1173; H:piippo.it.local;
-	FPR:; SPF:None; PTR:InfoNoRecords; MX:1; A:1; LANG:; 
-Received-SPF: None (protection.outlook.com: theqtcompany.com does not
-	designate permitted sender hosts)
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DB5PR02MB1173;
-	23:WHtGadpN2x3q7dAu9Q/aF7KKJ7r2SjMcXNOqXHyIz?=
-	=?us-ascii?Q?lqi6o1z+04wXgTAXrvPJUyOW8ly0bxHvYMM2IsIUiLcaWxB39hqGauLCMlP8?=
-	=?us-ascii?Q?Ax6dyslDZ8lHUtq6loNyiymN/XVAClYOlmljcBmT5ZGVMi7RsRil8TSUrvOT?=
-	=?us-ascii?Q?LpiKZivcrF2R+tickJze1JJmtWkW6pI2RqdusFggQswPy9T4R/d2vtn79EoS?=
-	=?us-ascii?Q?W9b1G4KBZUWPhRSUuhPw3TZxb6iwLTha2ZIWpHa1XUsiLPhgLezOSoaUsbrD?=
-	=?us-ascii?Q?L0BxMETjXOkcwaUD5gCuPe1Ia8/biQ/le8OTIVr8L3v8nFd7Ki97aulKMXT5?=
-	=?us-ascii?Q?yaxygkMHq+mtoRJf6+GqKSG6BEFc/Z6x1m3HKqJq9HTgYzDGmZmZV8gMwC1S?=
-	=?us-ascii?Q?1tMu89raeDaX97NzfBGloXmcmZW6+x/ps2u3XYzSyzExdI95PHQiQRL/PYQO?=
-	=?us-ascii?Q?US5aYsCMOgQdqSCjUkQ6FkeCAjc2v+D628hpk0absSa1BGI6WGB052xvyB9M?=
-	=?us-ascii?Q?Vpu+0vi9oVz5DoZ3ZlfhkqBx6U6p13ZCGGjdg8/XqQEFebTFmH+S59QaAAk7?=
-	=?us-ascii?Q?vQKZfwEbJGuu5Vm9mRhHOgBaZKXjw6gzuyEbgoDEDFpZY1JkeJnO2IrRjvwO?=
-	=?us-ascii?Q?VGftmqdnZVYpxAyJ0/RbG1fLictRN3vah/BWhG+MJorYxhWXk6YR2CubeAiL?=
-	=?us-ascii?Q?4wQeNOUeyo3olPgvsfNqMedFIZKqxGjBV4YpKJFq9hZ210b09Rn4R6CJlmlf?=
-	=?us-ascii?Q?s2gQQRtZGYEETn3qajxzndEwx00eSu28AjIGzIV3HhWXYb+sBSi1yoOp3QGC?=
-	=?us-ascii?Q?7DFI+pEUesmdL6Nc1okKDLJam5NKgPznNoYVk+m4b80svXCoYo5AL8GAxRVf?=
-	=?us-ascii?Q?52xCig6gCgHPV9lGmhj2lP7TBI6pLM+8VO3H8ZUTU3mNJVOJsQ/50Pu7RG9V?=
-	=?us-ascii?Q?Ct6ji6F0fVWZ62Ng0d1ywx1WAj3DpL3fQg9Izp0kZQz++F4wiUfIPCMPqSwo?=
-	=?us-ascii?Q?TSKKkTCb2EprY9iiibzP6RMfnkcntQNjAjF5FqN1v1WlpuzzgQmN23119dOf?=
-	=?us-ascii?Q?6Xu2f9sPKox28T3bTm61j1FkdCx?=
-X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1173;
-	5:jHG5jIoaHvhGT/FkHn+IQEBe7rfujZsDfAUoKqvbGTCTO21G5nJeD7xGa18MDzW7cJRDJW2REFPVNcv5u/jVb3B8oXVyhcOYpHDU2GU/IbvIVICcPwIJoAJGBABQ3hFjUrw4Yd1g+HScNENk+Hytog==;
-	24:pteDmSksPlpVCZqpUR4D4Msi5SI1S9NlV2wtNST9UvTpqjXxu++Z6Ca+mod+T+uL3Q2niSLDvwga3+uoVFy2V5IJDieOFJcCCJYY0kwQqho=;
-	20:a7OTtHCNAjNKhKjsfUxrgd3y/xUUcw/EJT6KhisaViPd+lcCh9RH8dG1cESFe6co64rib713Q2nAo9K5C8UAaQ==
-SpamDiagnosticOutput: 1:23
-SpamDiagnosticMetadata: NSPM
-X-OriginatorOrg: theqtcompany.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2015 11:52:24.7226 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR02MB1173
-Subject: [meta-qt5][PATCH] qtbase: add PACKAGECONFIG for xkbcommon-evdev
+In-Reply-To: <20151116212303.GD2240@jama>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-oe][PATCH V2 02/17] modemmanager: Update to 1.4.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -81,30 +48,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2015 11:52:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 18 Nov 2015 14:33:21 -0000
+X-Groupsio-MsgNum: 58705
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="CblX+4bnyfN0pR09"
+Content-Disposition: inline
 
-Add PACKAGECONFIG for xkbcommon-evdev to fix QA Issue:
-qtbase rdepends on libxkbcommon, but it isn't a build dependency? [build-deps]
+--CblX+4bnyfN0pR09
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
----
- recipes-qt/qt5/qtbase_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+On Mon, Nov 16, 2015 at 10:23:03PM +0100, Martin Jansa wrote:
+> On Wed, Nov 11, 2015 at 08:48:05PM +0100, Adrian Freihofer wrote:
+> >  - Fixes segfaults, memleaks and other bugs
+> >  - Support more modems
+> >=20
+> > Signed-off-by: Adrian Freihofer <adrian.freihofer@gmail.com>
+> > ---
+> >  .../{modemmanager_1.4.2.bb =3D> modemmanager_1.4.12.bb}        | 12 ++=
+++++------
+> >  1 file changed, 6 insertions(+), 6 deletions(-)
+> >  rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.4.2.b=
+b =3D> modemmanager_1.4.12.bb} (71%)
+> >=20
+> > diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4=
+=2E2.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb
+> > similarity index 71%
+> > rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.=
+2.bb
+> > rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12=
+=2Ebb
+> > index b273c91..db7a28d 100644
+> > --- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb
+> > +++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb
+> > @@ -1,19 +1,19 @@
+> >  SUMMARY =3D "ModemManager is a daemon controlling broadband devices/co=
+nnections"
+> >  DESCRIPTION =3D "ModemManager is a DBus-activated daemon which control=
+s mobile broadband (2G/3G/4G) devices and connections"
+> >  HOMEPAGE =3D "http://www.freedesktop.org/wiki/Software/ModemManager/"
+> > -LICENSE =3D "GPLv2 & LGPLv2.1"
+> > +LICENSE =3D "GPL-2.0 & LGPL-2.1"
+> >  LIC_FILES_CHKSUM =3D " \
+> >      file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263 \
+> >      file://COPYING.LIB;md5=3D4fbd65380cdd255951079008b364516c \
+> >  "
+> > =20
+> > -inherit autotools gettext gtk-doc systemd
+> > +inherit gnomebase gettext systemd
+> > =20
+> > -DEPENDS =3D "glib-2.0 libmbim libqmi polkit libgudev dbus-glib"
+> > +DEPENDS =3D "glib-2.0 libmbim libqmi (>=3D1.12.4) polkit libgudev dbus=
+-glib"
+>=20
+> bitbake doesn't support versioned dependencies, I've removed
+> "(>=3D1.12.4)" when cherry-picking to master-next, but I wonder how you
+> were able to test this.
+>=20
+> > -SRC_URI =3D "http://www.freedesktop.org/software/ModemManager/ModemMan=
+ager-${PV}.tar.xz"
+> > -SRC_URI[md5sum] =3D "fe74eaa9a77e51e552b4356b4c7195cb"
+> > -SRC_URI[sha256sum] =3D "07d332fbe6f45f788f740810951e04042aaf023bd5ecf8=
+ef0b3a06e37703585d"
+> > +SRC_URI =3D "${GNOME_MIRROR}/ModemManager/ModemManager-${PV}.tar.xz"
 
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index fdc73e1..e504ab7 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -107,6 +107,7 @@ PACKAGECONFIG[xvideo] = "-xvideo,-no-xvideo"
- PACKAGECONFIG[openvg] = "-openvg,-no-openvg"
- PACKAGECONFIG[iconv] = "-iconv,-no-iconv,virtual/libiconv"
- PACKAGECONFIG[xkb] = "-xkb,-no-xkb -no-xkbcommon,libxkbcommon"
-+PACKAGECONFIG[xkbcommon-evdev] = "-xkbcommon-evdev,-no-xkbcommon-evdev,libxkbcommon"
- PACKAGECONFIG[evdev] = "-evdev,-no-evdev"
- PACKAGECONFIG[mtdev] = "-mtdev,-no-mtdev,mtdev"
- # depends on glib
--- 
-1.9.1
+Why do you think it exists on GNOME_MIRROR?
+
+http://ftp.gnome.org/pub/GNOME/sources/ModemManager/
+shows only versions til 0.7.991
+
+I'll undo this change for next build, but please be more careful next
+time and really test the changes.
+
+> > +SRC_URI[md5sum] =3D "66cc7266b15525cb366253e6639fc564"
+> > +SRC_URI[sha256sum] =3D "7ef5035375a953b285a742591df0a65fd442f4641ce4d8=
+f4392a41d6d6bc70b3"=20
+> > =20
+> >  S =3D "${WORKDIR}/ModemManager-${PV}"
+> > =20
+> > --=20
+> > 2.4.3
+> >=20
+> > --=20
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --=20
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--CblX+4bnyfN0pR09
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlZMjDkACgkQN1Ujt2V2gByylwCgklbV++kWDVok6VyW2ArQaA0E
+dl8AoJBDPnnIMGDUjZ7mBdvGrs8ZalZe
+=VCOo
+-----END PGP SIGNATURE-----
+
+--CblX+4bnyfN0pR09--
