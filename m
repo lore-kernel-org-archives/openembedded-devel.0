@@ -1,39 +1,43 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 6393E6010B
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 704F0601A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Nov 2015 10:25:40 +0000 (UTC)
-Received: by wmdw130 with SMTP id w130so192015031wmd.0
+	Wed, 18 Nov 2015 10:37:26 +0000 (UTC)
+Received: by wmww144 with SMTP id w144so191013861wmw.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Nov 2015 02:25:41 -0800 (PST)
+	Wed, 18 Nov 2015 02:37:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=KiydNWTVpAosWre+q5AZnNq1D8rjzafQ396PyLGt590=;
-	b=RXU7F7+VGJtAta8pIGZZx6HENXd0mcKc16EGLWwEQhrR/qatdC3wlyi0xdc66E/9sF
-	hAGsnPbgs/Ko7DojWNiuRuLFG5CRZipjYi9u3RiRpPI+cZuGZkaICxyB8YYafQW+oKrZ
-	WxwlLIc4VB9RL/gns3575rJ5uMLBLP/HTI6SwRjcnFs1sPPIunJr0rxbdnRS4OJRG94V
-	UBeF2YQf85tdBsPHMviuYkdx26G786FogscTzgcdqCQmY1wpwVn9c+E/czYwF+ULi3aS
-	0Vskb7vZsz1lra9INCYCbh95O/UhmD4DMS6WHsCkXT/DQB3UXqdEj5sDDMpeXPrpcXd8
-	XOgA==
-X-Received: by 10.28.135.67 with SMTP id j64mr3250804wmd.93.1447842340958;
-	Wed, 18 Nov 2015 02:25:40 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	z131sm2564262wme.7.2015.11.18.02.25.39
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Nov 2015 02:25:39 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 18 Nov 2015 11:25:55 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151118102555.GB2213@jama>
-References: <1447840941-29496-1-git-send-email-jackie.huang@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1447840941-29496-1-git-send-email-jackie.huang@windriver.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH] netmap-modules: make deterministic builds for drivers
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=m+Qs6gnBnpAZ7B7uqeYQ7j0fzQqQZ45yaPd9fr2Ek74=;
+	b=QS/01syk/H1DWXjaIqf3aECWg3+5W4J8jM9Xo/sLYsDeTlPETvkpX4KIHvgbWfKbsa
+	7cAyHPT16iZJI4hBmXKW6AYK4LasDjHFIQImgVeBrIZZ+uovXrXuFyngVeZlV9EHb8Al
+	VV46g/UQd97Dgh0iGWfznYXm5Ar7hn6JAb+jPopQq3WDGQaKjCWHJ252+0g+LRtY/7+W
+	bT0IAYCkUf516pw6Wjdjhmt/Er/iuvnI6lF4x7nBiEGXSfHVcY8UdZ41J3bAYxSHFSM4
+	1dXPdtcwmTilffUtYTlz0+sIDlMKB8D8184CXmNHb/u3nKxHtJwE1GYHFnp8LHd5sUOR
+	JxaA==
+X-Received: by 10.195.13.135 with SMTP id ey7mr1038475wjd.25.1447843047461;
+	Wed, 18 Nov 2015 02:37:27 -0800 (PST)
+Received: from walter.muppets.liwing.de (p578b540c.dip0.t-ipconnect.de.
+	[87.139.84.12])
+	by smtp.gmail.com with ESMTPSA id at4sm2178038wjc.9.2015.11.18.02.37.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 18 Nov 2015 02:37:26 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+From: Jens Rehsack <rehsack@gmail.com>
+In-Reply-To: <CABcZANm4cka2so5sm0C0FQcJXzAeNjXqBkNAjQChH4VqL=EUTA@mail.gmail.com>
+Date: Wed, 18 Nov 2015 11:37:25 +0100
+Message-Id: <186ABEC8-B079-467A-BC1F-F0EE5043531E@gmail.com>
+References: <9A2ED550-50FC-4223-B79E-5801010FEF49@gmail.com>
+	<CABcZAN=+c2SkEiZtVjZ1ZGtp5dXs79xYmRh2f1P50qV0Kzd2cw@mail.gmail.com>
+	<CABcZAN=EgNrRxnML=Jb_ipNL-yYiFfwZRQLVaoNT2qBmpHA+rQ@mail.gmail.com>
+	<577B0BDF-3AAB-44E9-AA59-781219452896@gmail.com>
+	<CABcZANm4cka2so5sm0C0FQcJXzAeNjXqBkNAjQChH4VqL=EUTA@mail.gmail.com>
+To: Christopher Larson <kergoth@gmail.com>
+X-Mailer: Apple Mail (2.2104)
+Cc: Matthias Rabe <matthias.rabe@sigma-chemnitz.de>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] talloc: rename to libtalloc and cleanup dependency mess
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,118 +50,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2015 10:25:41 -0000
-X-Groupsio-MsgNum: 58702
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="K8nIJk4ghYZn606h"
-Content-Disposition: inline
-
---K8nIJk4ghYZn606h
+X-List-Received-Date: Wed, 18 Nov 2015 10:37:27 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 18, 2015 at 06:02:21PM +0800, jackie.huang@windriver.com wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
+
+> Am 18.11.2015 um 03:08 schrieb Christopher Larson <kergoth@gmail.com>:
 >=20
-> The driver builds are optional, but for deterministic builds,
-> we should should be able to explicitly enable/disable the
-> builds for them in a proper place (maybe in BSP).
-> But we can't use PACKAGECONFIG since there is no option for
-> each driver, and the options are:
->  --no-drivers    do not compile any driver
->  --no-drivers=3D   do not compile the given drivers (comma sep.)
->  --drivers=3D      only compile the given drivers (comma sep.)
 >=20
-> So use NETMAP_DRIVERS to list the needed drivers and add proper
-> configs to EXTRA_OECONF, the default is no drivers, and all
-> supported drivers are listed in NETMAP_ALL_DRIVERS.
+> On Fri, Nov 13, 2015 at 10:08 AM, Jens Rehsack <rehsack@gmail.com> =
+wrote:
+> > Am 13.11.2015 um 18:01 schrieb Christopher Larson =
+<kergoth@gmail.com>:
+> >
+> > On Fri, Nov 13, 2015 at 9:56 AM, Christopher Larson =
+<kergoth@gmail.com> wrote:
+> > On Fri, Nov 13, 2015 at 8:53 AM, Jens Rehsack <rehsack@gmail.com> =
+wrote:
+> > To avoid errors when building dev-images (talloc-dev is missing), =
+and to avoid
+> > insane empty packages for that, rename talloc -> libtalloc as =
+libtevent shows.
+> >
+> > With that, remove dependencies to attr/xattr and libbsd - unless =
+explicitely
+> > enabled via PACKAGECONFIG.
+> >
+> > Signed-off-by: Jens Rehsack <sno@netbsd.org>
+> >
+> > Our recipe names should be named based on the upstream project name, =
+not the library they happen to ship.
+> >
+> > Instead, either we could we should kill all the libtalloc bits in =
+the PACKAGES var, and let the debian shlib renaming handle renaming =
+talloc* to libtalloc*, or add a talloc-dev that pulls in libtalloc-dev & =
+pytalloc-dev.
+> >
+> > I just realized this may sound critical, but that wasn't intended. =
+The other changes look great, thanks for your work on making those =
+dependencies optional, it's good stuff.
 >=20
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  .../recipes-kernel/netmap/netmap-modules_git.bb    | 31 ++++++++++++++++=
-+++++-
->  1 file changed, 30 insertions(+), 1 deletion(-)
+> In that case - please take me by the hand and explain a bit more =
+detailed
 >=20
-> diff --git a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb =
-b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-> index 6365fee..cfe5ce9 100644
-> --- a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-> +++ b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-> @@ -15,7 +15,36 @@ EXTRA_OECONF =3D "--kernel-dir=3D${STAGING_KERNEL_BUIL=
-DDIR} \
->                  --driver-suffix=3D"-netmap" \
->                  "
-> =20
-> -EXTRA_OECONF +=3D "--no-drivers=3Dixgbe --no-drivers=3Dvirtio_net.c"
-> +# The driver builds are optional, but for deterministic builds,
-> +# we should be able to explicitly enable/disable the builds
-> +# for them in a proper place (maybe in BSP).
-> +# But we can't use PACKAGECONFIG since there is no option for
-> +# each driver, and the options are:
-> +#  --no-drivers    do not compile any driver
-> +#  --no-drivers=3D   do not compile the given drivers (comma sep.)
-> +#  --drivers=3D      only compile the given drivers (comma sep.)
-> +#
-> +# So use NETMAP_DRIVERS and the following python code to add proper
-> +# configs to EXTRA_OECONF and skip arch test for kernel modules.
-> +#
-> +# The default is no-drivers, and all supported drivers are listed
-> +# in NETMAP_ALL_DRIVERS.
-> +NETMAP_DRIVERS ??=3D ""
-> +NETMAP_ALL_DRIVERS =3D "ixgbe igb e1000e e1000 veth.c forcedeth.c virtio=
-_net.c r8169.c"
-> +
-> +python __anonymous () {
-> +    drivers_list =3D d.getVar("NETMAP_DRIVERS", True).split()
-> +    all_drivers_list =3D d.getVar("NETMAP_ALL_DRIVERS", True).split()
-> +    config_drivers =3D "--drivers=3D" + ",".join(drivers_list)
-> +
-> +    extra_oeconf_drivers =3D bb.utils.contains_any('NETMAP_DRIVERS', all=
-_drivers_list, config_drivers, '--no-drivers', d)
-> +    d.appendVar("EXTRA_OECONF", extra_oeconf_drivers)
-
-This part looks good to me, thanks for fixing virtio_net.c change (I've
-merged that one by accident).
-
-> +
-> +    # skip the arch test for kernel modules
-> +    if drivers_list:
-> +        for driver in drivers_list:
-> +            d.setVar("INSANE_SKIP_kernel-module-%s-netmap" % driver, "ar=
-ch")
-
-Why is this needed? Shouldn't the kernel modules build with correct
-architecture? And e.g. r8169.c creates kernel-module-r8169.c-netmap package?
-I hope the .c is stripped somewhere in the build.
-
-
-> +}
-> =20
->  LDFLAGS :=3D "${@'${LDFLAGS}'.replace('-Wl,-O1', '')}"
->  LDFLAGS :=3D "${@'${LDFLAGS}'.replace('-Wl,--as-needed', '')}"
-> --=20
-> 1.9.1
+> > Instead, either we could we should kill all the libtalloc bits in =
+the PACKAGES var, and let the debian shlib renaming handle renaming =
+talloc* to libtalloc*
 >=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> since I have no clue what you try to guide me.
+>=20
+> I'm not able to reproduce any error when building an image. Add =
+libtalloc and dev-pkgs, and it builds just fine. You can't add talloc, =
+as there is no talloc package emitted.
+>=20
+> That said, what I was suggesting was something along the lines of =
+https://gist.github.com/kergoth/ead0e1d2682a9e9fcd59 -- debian.bbclass =
+will automatically rename the ${PN}, ${PN}-dev, and ${PN}-dbg packages =
+based on the library soname, so will end up named libtalloc* anyway if =
+you use it. Since the main packages weren't emitted at all, it was =
+pointless complexity in the packaging to add libtalloc* explicitly.
 
+Well, I had the problem and one of our contributors either that samba's =
+dependency on talloc prevents creating a dev-image (not a regular =
+image!), because no -dev image was emitted but talloc-dev was added as =
+RDEPENDS automatically because it might contain header files or so (no =
+idea).
+
+I don't see the win in =
+https://gist.github.com/kergoth/ead0e1d2682a9e9fcd59#file-talloc-patch-L25=
+-L34 vs. renaming the recipe, but during meta-java cleanup and packaging =
+openjdk-8 I encountered lot's of issues with RPROVIDES - so I try to =
+avoid it where possible. And - as said - libtevent =
+(http://cgit.openembedded.org/meta-openembedded/tree/meta-networking/recip=
+es-support/libtevent) is currently there and accepted, don't see =
+adopting talloc -> libtalloc doing similar.
+
+You can HL me in #yocto if I miss something which might be clarified in =
+a short talk.
+
+Cheers
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Jens Rehsack - rehsack@gmail.com
 
---K8nIJk4ghYZn606h
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlZMUjIACgkQN1Ujt2V2gBxt/ACgkJFgbGfaG8hZPsezaTIbSIxf
-lP8An1NgH33RKuSIDcyJTV+OfGBuenBo
-=caf0
------END PGP SIGNATURE-----
-
---K8nIJk4ghYZn606h--
