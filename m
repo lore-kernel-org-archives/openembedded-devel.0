@@ -1,36 +1,36 @@
 Return-Path: <rehsack@gmail.com>
 Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 989FC60107
+	by mail.openembedded.org (Postfix) with ESMTP id 2155C606D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2015 19:45:56 +0000 (UTC)
-Received: by wmvv187 with SMTP id v187so42206877wmv.1
+	Thu, 19 Nov 2015 19:46:31 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so42258013wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2015 11:45:56 -0800 (PST)
+	Thu, 19 Nov 2015 11:46:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:content-type:content-transfer-encoding:subject:message-id:date
 	:to:mime-version;
-	bh=k4+kvh+pxCZM53wxpAb/tphJiZ3RK4waJ7JWo2wvkwo=;
-	b=WQPIpwRkPs48xqAno+b66azENQ6WcLH7Wu+ti/m70EWWxsV2Z63YnkFxpnQFpchWkd
-	gNzB/PBA2TpePseZNOPoWb0vFsE8G1MdsI4yGXnPWaCRpaqUCHAK/j23554IzYYnCKU2
-	aVukRZ+/tMGa2yBS3EoyDMoJe2avdQpu6Zzws6k9N+7KQfDAs5Nr3SDlfb5cQD5vdTgi
-	kKbeMYuJ639iY6xHYQDjDfQ3cd+VlEBxm1Aw37xeJkTo/Q5nJ1Hql6U3GB8B8had+Ort
-	EYO7muzRz/oZcGMyH6iyLnGRDANqnPBkv3uAygbgdJUFn//C9idKVYjoKEXAcCDLbyul
-	HWUQ==
-X-Received: by 10.28.176.200 with SMTP id z191mr13839968wme.102.1447962356800; 
-	Thu, 19 Nov 2015 11:45:56 -0800 (PST)
+	bh=THuB6aqtQlMIZEVJM5Uhf0/y1xi2kWchIIKxDWCXWes=;
+	b=lJCf5KEHrzRrxB4DWM4Tpbs2L7FfHF1ARE9lJofOFBT2y3PowfnHHRYOsyXdLulGzO
+	+r9K5e4SVZPyNqeh4CPN0OyhsLmXV9H6CyJhnpCx+uPLv3MYWoZcSA54GJgZ87SqBuoV
+	e0TT0UCHLr7D1QDAD5zu+iDHfQphcZKNSMXUZcLKRY2WQng1Kiq1YC5aAmuct5IH/ny4
+	rv0TSUgTbeCKxfbm8Iv5jgqjL1dSPZhDKaHI3QV7FXJFLKLH6kY5YqZ3N6n7/thk2M1w
+	xV3TDgNpEMqh2wO9+3VqsK02K87JyGHeOmhPFoLla6sNz/iiBiqO01VgqZ/f5nYFUZb/
+	mU6w==
+X-Received: by 10.194.243.6 with SMTP id wu6mr10219462wjc.14.1447962391408;
+	Thu, 19 Nov 2015 11:46:31 -0800 (PST)
 Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
 	by smtp.gmail.com with ESMTPSA id
-	d66sm35625971wma.21.2015.11.19.11.45.56
+	d66sm35625971wma.21.2015.11.19.11.46.30
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 19 Nov 2015 11:45:56 -0800 (PST)
+	Thu, 19 Nov 2015 11:46:30 -0800 (PST)
 From: Jens Rehsack <rehsack@gmail.com>
-Message-Id: <8F3E8485-A462-4A0B-AC31-2F3D546D3FB7@gmail.com>
-Date: Thu, 19 Nov 2015 20:45:56 +0100
+Message-Id: <F53CCE03-2470-4366-A584-2E4F946F4FBD@gmail.com>
+Date: Thu, 19 Nov 2015 20:46:30 +0100
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
 X-Mailer: Apple Mail (2.2104)
-Subject: [meta-networking][PATCH 4/6] libldb: allow chosing ldap dependency instead of hard requiring it
+Subject: [meta-networking][PATCH 5/6] libtevent: rework dependencies for deterministic build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,83 +43,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2015 19:45:57 -0000
+X-List-Received-Date: Thu, 19 Nov 2015 19:46:31 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
 
-Add a patch to remove the check for openldap but mark prove result =
-negative unless
-ldap dependency is enabled explicitely.
+Since waf configure infrastructure is a body blow compared to reasonable
+autoconf script from packager point of view, samba support libs need
+feature-disable-patches. This one is for libtevent removing libcap
+(introduced by libldap_r) and attr.
 
 Signed-off-by: Jens Rehsack <sno@netbsd.org>
 ---
- .../libldb/libldb/avoid-openldap-unless-wanted.patch        | 13 =
-+++++++++++++
- meta-networking/recipes-support/libldb/libldb_1.1.17.bb     |  6 ++++--
- 2 files changed, 17 insertions(+), 2 deletions(-)
+ .../libtevent/avoid-attr-unless-wanted.patch         | 20 =
+++++++++++++++++++++
+ .../recipes-support/libtevent/libtevent_0.9.21.bb    |  6 +++++-
+ 2 files changed, 25 insertions(+), 1 deletion(-)
  create mode 100644 =
-meta-networking/recipes-support/libldb/libldb/avoid-openldap-unless-wanted=
-.patch
+meta-networking/recipes-support/libtevent/libtevent/avoid-attr-unless-want=
+ed.patch
 
 diff --git =
-a/meta-networking/recipes-support/libldb/libldb/avoid-openldap-unless-want=
-ed.patch =
-b/meta-networking/recipes-support/libldb/libldb/avoid-openldap-unless-want=
-ed.patch
+a/meta-networking/recipes-support/libtevent/libtevent/avoid-attr-unless-wa=
+nted.patch =
+b/meta-networking/recipes-support/libtevent/libtevent/avoid-attr-unless-wa=
+nted.patch
 new file mode 100644
-index 0000000..8ab094f
+index 0000000..2fc5523
 --- /dev/null
 +++ =
-b/meta-networking/recipes-support/libldb/libldb/avoid-openldap-unless-want=
-ed.patch
-@@ -0,0 +1,13 @@
-+--- a/wscript	2015-11-18 12:43:33.000000000 +0100
-++++ b/wscript	2015-11-18 12:46:25.000000000 +0100
-+@@ -58,9 +58,7 @@
-+     if conf.env.standalone_ldb:
-+         conf.CHECK_XSLTPROC_MANPAGES()
+b/meta-networking/recipes-support/libtevent/libtevent/avoid-attr-unless-wa=
+nted.patch
+@@ -0,0 +1,20 @@
++--- a/lib/replace/wscript	2015-11-18 15:40:19.000000000 +0100
+++++ b/lib/replace/wscript	2015-11-18 15:48:09.000000000 +0100
++@@ -618,8 +618,6 @@
++     if not bld.CONFIG_SET('HAVE_INET_ATON'):     REPLACE_SOURCE +=3D ' =
+inet_aton.c'
++     if not bld.CONFIG_SET('HAVE_INET_NTOP'):     REPLACE_SOURCE +=3D ' =
+inet_ntop.c'
++     if not bld.CONFIG_SET('HAVE_INET_PTON'):     REPLACE_SOURCE +=3D ' =
+inet_pton.c'
++-    if not bld.CONFIG_SET('HAVE_GETXATTR') or =
+bld.CONFIG_SET('XATTR_ADDITIONAL_OPTIONS'):
++-                                                 REPLACE_SOURCE +=3D ' =
+xattr.c'
 +=20
-+-        # we need this for the ldap backend
-+-        if conf.CHECK_FUNCS_IN('ber_flush ldap_open ldap_initialize', =
-'lber ldap', headers=3D'lber.h ldap.h'):
-+-            conf.env.ENABLE_LDAP_BACKEND =3D True
-++        conf.env.ENABLE_LDAP_BACKEND =3D False
++     bld.SAMBA_LIBRARY('replace',
++                       source=3DREPLACE_SOURCE,
++@@ -630,7 +628,7 @@
++                       # at the moment:
++                       # hide_symbols=3Dbld.BUILTIN_LIBRARY('replace'),
++                       private_library=3DTrue,
++-                      deps=3D'crypt dl nsl socket rt attr' + =
+extra_libs)
+++                      deps=3D'crypt dl nsl socket rt ' + extra_libs)
 +=20
-+         # we don't want any libraries or modules to rely on runtime
-+         # resolution of symbols
-diff --git a/meta-networking/recipes-support/libldb/libldb_1.1.17.bb =
-b/meta-networking/recipes-support/libldb/libldb_1.1.17.bb
-index e587858..2e708a5 100644
---- a/meta-networking/recipes-support/libldb/libldb_1.1.17.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_1.1.17.bb
-@@ -3,14 +3,16 @@ HOMEPAGE =3D "http://ldb.samba.org"
++     bld.SAMBA_SUBSYSTEM('replace-test',
++                       source=3D'''test/testsuite.c test/strptime.c
+diff --git =
+a/meta-networking/recipes-support/libtevent/libtevent_0.9.21.bb =
+b/meta-networking/recipes-support/libtevent/libtevent_0.9.21.bb
+index 36ce7d6..006b36d 100644
+--- a/meta-networking/recipes-support/libtevent/libtevent_0.9.21.bb
++++ b/meta-networking/recipes-support/libtevent/libtevent_0.9.21.bb
+@@ -3,7 +3,7 @@ HOMEPAGE =3D "http://tevent.samba.org"
  SECTION =3D "libs"
- LICENSE =3D "LGPL-3.0+ & LGPL-2.1+ & GPL-3.0+"
+ LICENSE =3D "LGPLv3+"
 =20
--DEPENDS +=3D "libtdb libtalloc libtevent popt"
--RDEPENDS_${PN} +=3D "openldap"
-+DEPENDS +=3D "libbsd libtdb libtalloc libtevent popt"
- RDEPENDS_pyldb +=3D "python"
+-DEPENDS +=3D "libtalloc libcap"
++DEPENDS +=3D "libbsd libtalloc"
+ RDEPENDS_python-tevent =3D "python"
 =20
- SRC_URI =3D "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
-            file://do-not-import-target-module-while-cross-compile.patch =
-\
-           "
+ SRC_URI =3D "http://samba.org/ftp/tevent/tevent-${PV}.tar.gz"
+@@ -14,6 +14,10 @@ SRC_URI[sha256sum] =3D =
+"f2be7463573dab2d8210cb57fe7e7e2aeb323274cbdc865a6e29ddcfb9
 =20
-+PACKAGECONFIG[ldap] =3D ",,openldap"
-+SRC_URI +=3D "${@bb.utils.contains('PACKAGECONFIG', 'ldap', '', =
-'file://avoid-openldap-unless-wanted.patch', d)}"
+ inherit waf-samba
+=20
++PACKAGECONFIG[attr] =3D ",,attr"
 +
- LIC_FILES_CHKSUM =3D =
-"file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=3Dbfccfe952269=
-fff2b407dd11f2f3083b \
-                     =
-file://${COREBASE}/meta/files/common-licenses/LGPL-2.1;md5=3D1a6d268fd2186=
-75ffea8be556788b780 \
-                     =
-file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=3Dc79ff39f19dfec=
-6d293b95dea7b07891"
++SRC_URI +=3D "${@bb.utils.contains('PACKAGECONFIG', 'attr', '', =
+'file://avoid-attr-unless-wanted.patch', d)}"
++
+ S =3D "${WORKDIR}/tevent-${PV}"
+=20
+ EXTRA_OECONF +=3D "--disable-rpath \
 --=20
 1.9.1
 
