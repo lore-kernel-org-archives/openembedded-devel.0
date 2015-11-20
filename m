@@ -1,26 +1,40 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D090460112
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 30FFF60112
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 09:37:07 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAK9b8pH001362
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 20 Nov 2015 09:40:59 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so13459115wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 01:37:08 -0800 (PST)
-Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Fri, 20 Nov 2015 01:32:49 -0800
-From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 20 Nov 2015 01:32:41 -0800
-Message-ID: <d7b393011e851acffece951cf1ad7c332c19f8c4.1448011904.git.liezhi.yang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1448011904.git.liezhi.yang@windriver.com>
+	Fri, 20 Nov 2015 01:40:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=oLbcbNyFmB7cuGRGzQ2xxbmK4hFiO7APa3+0x4S2/OA=;
+	b=TrqKEvPjc9DKRBuCcNchNrLggfhtcW7F5zQmHskp0AyCDPJnYzAPgEjySWqbR1jmM/
+	+RcQ7uWHHvJrZPBqc3julACCyWlJnbWJu+LE7W9IuwRmIXZu3+fwdHBlYBSkCvKQ7eB8
+	V3D1ygYHamPLTkhl2znXt9cqw38WtcyGRAyWzivc6GpvWa6NsvcRcE2msp1qY/ywa5mx
+	kdheYp9ljEfxqZFN0auYUX0mfyKb8m8YnNJJX+lBvSlYrMYhfhgWSYQP92Q4ZfERh9AD
+	f3uYUz9AfOiRAeb09fW8d//3ZJSrjq+SHDdhmPmVhiWkz0eq4Q2LBlKN8yHfdsoZAo2H
+	npLA==
+X-Received: by 10.194.87.39 with SMTP id u7mr13571002wjz.11.1448012459695;
+	Fri, 20 Nov 2015 01:40:59 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	t194sm1907063wmt.11.2015.11.20.01.40.58
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 20 Nov 2015 01:40:58 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 20 Nov 2015 10:41:22 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151120094122.GB2241@jama>
 References: <cover.1448011904.git.liezhi.yang@windriver.com>
+	<f6e6fa4fab723c1abbaac3d7db659e5913e099b3.1448011904.git.liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/8] lldpad: fix installed-vs-shipped
+In-Reply-To: <f6e6fa4fab723c1abbaac3d7db659e5913e099b3.1448011904.git.liezhi.yang@windriver.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [PATCH 1/8] netmap-modules: fix for --no-drivers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,41 +47,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2015 09:37:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 20 Nov 2015 09:41:04 -0000
+X-Groupsio-MsgNum: 58750
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="wzJLGUyc3ArbnUjN"
+Content-Disposition: inline
 
-Issue: LIN8-1622
+--wzJLGUyc3ArbnUjN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Fixed when multilib:
-lldpad-0.9.46: lldpad: Files/directories were installed but not shipped in any package:
-  /usr/lib
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-lldpad: 1 installed and not shipped files. [installed-vs-shipped]
+On Fri, Nov 20, 2015 at 01:32:40AM -0800, Robert Yang wrote:
+> Issue: LIN8-1697
+>=20
+> The --no-drivers=3Dvirtio_net.c overrided --no-drivers=3Dixgbe, then erro=
+rs:
+> git/LINUX/ixgbe_netmap_linux.h:52:2: error: #error "unsupported ixgbe dri=
+ver version"
+>  #error "unsupported ixgbe driver version"
+>   ^
 
-This is because /usr/lib/systemd has been moved, but /usr/lib was left
-in multilib, use "rmdir -p" to fix the problem.
+There is better fix for this on ML already.
 
-(LOCAL REV: NOT UPSTREAM) -- Sent to oe-devel on 20151120
+>=20
+> (LOCAL REV: NOT UPSTREAM) -- Jackie will will merge into his
+> netmap-modules work and send.
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
----
- .../recipes-daemons/lldpad/lldpad_0.9.46.bb        |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Next time don't include this.
 
-diff --git a/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb b/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb
-index b191df5..b66344f 100644
---- a/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb
-+++ b/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb
-@@ -23,7 +23,7 @@ do_configure_prepend() {
- do_install_append () {
-     install -m 0755 -d ${D}${systemd_unitdir}
-     mv ${D}${prefix}${systemd_unitdir}/* ${D}${systemd_unitdir}/
--    rmdir ${D}${prefix}${systemd_unitdir}
-+    rmdir -p --ignore-fail-on-non-empty ${D}${prefix}${systemd_unitdir}
- }
- 
- FILES_${PN} += "${systemd_unitdir}"
--- 
-1.7.9.5
+>=20
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> ---
+>  .../recipes-kernel/netmap/netmap-modules_git.bb    |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb =
+b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
+> index 6365fee..628c870 100644
+> --- a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
+> +++ b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
+> @@ -15,7 +15,7 @@ EXTRA_OECONF =3D "--kernel-dir=3D${STAGING_KERNEL_BUILD=
+DIR} \
+>                  --driver-suffix=3D"-netmap" \
+>                  "
+> =20
+> -EXTRA_OECONF +=3D "--no-drivers=3Dixgbe --no-drivers=3Dvirtio_net.c"
+> +EXTRA_OECONF +=3D "--no-drivers=3Dixgbe,virtio_net.c"
+> =20
+>  LDFLAGS :=3D "${@'${LDFLAGS}'.replace('-Wl,-O1', '')}"
+>  LDFLAGS :=3D "${@'${LDFLAGS}'.replace('-Wl,--as-needed', '')}"
+> --=20
+> 1.7.9.5
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--wzJLGUyc3ArbnUjN
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlZO6sEACgkQN1Ujt2V2gByj6wCfezrOgEB+w3w7ZgkqYSC6ZBQ8
+lHkAoLdYtGV7fSgrzby11kb2rsr19Ku+
+=8szN
+-----END PGP SIGNATURE-----
+
+--wzJLGUyc3ArbnUjN--
