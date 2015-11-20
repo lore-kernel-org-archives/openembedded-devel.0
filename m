@@ -1,24 +1,24 @@
-Return-Path: <Kai.Kang@windriver.com>
+Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 183246011A
+	by mail.openembedded.org (Postfix) with ESMTP id BCEF860112
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 07:50:31 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAK7oWhT029206
+	Fri, 20 Nov 2015 09:32:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAK9WmsP016460
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2015 23:50:32 -0800 (PST)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 19 Nov 2015 23:50:31 -0800
-From: <kai.kang@windriver.com>
+	Fri, 20 Nov 2015 01:32:48 -0800 (PST)
+Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Fri, 20 Nov 2015 01:32:47 -0800
+From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 20 Nov 2015 15:39:48 +0800
-Message-ID: <1448005188-9317-1-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.6.1
+Date: Fri, 20 Nov 2015 01:32:39 -0800
+Message-ID: <cover.1448011904.git.liezhi.yang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] apache2: fix host-user-contaminated warnings
+Subject: [PATCH 0/8] meta-openembedded: fix QA issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,38 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2015 07:50:36 -0000
+X-List-Received-Date: Fri, 20 Nov 2015 09:32:47 -0000
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+The following changes since commit ea319464b673cbf9a416b582dc4766faeb998430:
 
-It shows warnings when build apache2 such as:
+  vlc: add PACKAGECONFIG for samba, upnp, dvdnav, sftp, vorbis, dc1394, dv1394, svg, svgdec (2015-11-16 21:50:11 +0100)
 
-| WARNING: QA Issue: apache2: /apache2-dev/usr/share/apache2/icons/small/movie.gif
-| is owned by uid 1785, which is the same as the user running bitbake.
-| This may be due to host contamination [host-user-contaminated]
+are available in the git repository at:
 
-Set the owner and group to root to fix it.
+  git://git.openembedded.org/meta-openembedded-contrib rbt/8fixes
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=rbt/8fixes
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Robert Yang (8):
+  netmap-modules: fix for --no-drivers
+  lldpad: fix installed-vs-shipped
+  nbd: use BPN in Files
+  dracut: fix host-user-contaminated
+  cim-schema-exper: fix host-user-contaminated
+  ctdb: RDEPENDS on bash
+  ctdb: add PACKAGECONFIG for libtdb
+  netkit-ftp: fixed invalid symlink
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
-index b62fd8c..48c448e 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
-@@ -95,6 +95,8 @@ do_install_append() {
-     install -m 0644 ${WORKDIR}/apache2.service ${D}${systemd_unitdir}/system
-     sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/apache2.service
-     sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/apache2.service
-+
-+    chown -R root:root ${D}
- }
- 
- do_install_append_class-target() {
+ .../recipes-devtools/dracut/dracut_git.bb          |    3 +++
+ .../recipes-daemons/lldpad/lldpad_0.9.46.bb        |    2 +-
+ .../recipes-kernel/netmap/netmap-modules_git.bb    |    2 +-
+ .../recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb   |    2 +-
+ .../cim-schema/cim-schema-exper_2.39.0.bb          |    1 +
+ .../cim-schema/cim-schema-final_2.40.0.bb          |    1 +
+ meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |    4 ++++
+ meta-networking/recipes-support/nbd/nbd_3.11.bb    |    6 +++---
+ 8 files changed, 15 insertions(+), 6 deletions(-)
+
 -- 
-2.6.1
+1.7.9.5
 
 
