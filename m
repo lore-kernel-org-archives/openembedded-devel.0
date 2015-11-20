@@ -1,26 +1,27 @@
 Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AF96C6072B
+	by mail.openembedded.org (Postfix) with ESMTP id 4BF6860112
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 09:33:56 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAK9XvFW016615
+	Fri, 20 Nov 2015 09:35:24 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAK9ZP24016806
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 01:33:57 -0800 (PST)
-Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Fri, 20 Nov 2015 01:32:50 -0800
-From: Robert Yang <liezhi.yang@windriver.com>
+	Fri, 20 Nov 2015 01:35:25 -0800 (PST)
+Received: from [128.224.163.148] (128.224.163.148) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
+	Fri, 20 Nov 2015 01:35:24 -0800
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 20 Nov 2015 01:32:44 -0800
-Message-ID: <38e43117d054d710c263514f45aaa69c14b53d51.1448011904.git.liezhi.yang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1448011904.git.liezhi.yang@windriver.com>
 References: <cover.1448011904.git.liezhi.yang@windriver.com>
+From: Robert Yang <liezhi.yang@windriver.com>
+Message-ID: <564EE95B.4010200@windriver.com>
+Date: Fri, 20 Nov 2015 17:35:23 +0800
+User-Agent: Mozilla/5.0 (X11; Linux i686; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
 MIME-Version: 1.0
-Subject: [PATCH 5/8] cim-schema-exper: fix host-user-contaminated
+In-Reply-To: <cover.1448011904.git.liezhi.yang@windriver.com>
+Subject: Re: [PATCH 0/8] meta-openembedded: fix QA issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,52 +34,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2015 09:33:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 20 Nov 2015 09:35:24 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Issue: LIN8-1632
 
-Fixed:
-cim-schema-exper-2.39.0: cim-schema-exper: /cim-schema-exper/usr/share/mof/cimv2.39.0/Network/CIM_IPAddressRange.mof is owned by uid 15220, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
-cim-schema-final-2.40.0: cim-schema-final: /cim-schema-final/usr/share/mof/cimv2.40.0/Network/CIM_IPAddressRange.mof is owned by uid 15220, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
-lib32-cim-schema-exper-2.39.0: lib32-cim-schema-exper: /lib32-cim-schema-exper/usr/share/mof/cimv2.39.0/Network/CIM_IPAddressRange.mof is owned by uid 15220, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
-lib32-cim-schema-final-2.40.0: lib32-cim-schema-final: /lib32-cim-schema-final/usr/share/mof/cimv2.40.0/Network/CIM_IPAddressRange.mof is owned by uid 15220, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
+Sorry, please ignore this thread, some commit message should not
+be there, I will send a V2.
 
-It uses cp -a to install the files, so fix the owner to root:root
+// Robert
 
-(LOCAL REV: NOT UPSTREAM) -- Sent to oe-devel on 20151120
-
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
----
- .../cim-schema/cim-schema-exper_2.39.0.bb          |    1 +
- .../cim-schema/cim-schema-final_2.40.0.bb          |    1 +
- 2 files changed, 2 insertions(+)
-
-diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
-index 62e50df..e4ed7b3 100644
---- a/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
-+++ b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
-@@ -17,6 +17,7 @@ do_install() {
-         install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
- 
-         cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
-+        chown -R root:root ${D}${datadir}/mof/cimv${PV}
-         for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
-                 sed -i -e 's/\r//g' $i
-         done
-diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
-index 1694f31..7ab9c4d 100644
---- a/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
-+++ b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
-@@ -22,6 +22,7 @@ do_install() {
-         install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
- 
-         cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
-+        chown -R root:root ${D}${datadir}/mof/cimv${PV}/
-         for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
-                 sed -i -e 's/\r//g' $i
-         done
--- 
-1.7.9.5
-
+On 11/20/2015 05:32 PM, Robert Yang wrote:
+> The following changes since commit ea319464b673cbf9a416b582dc4766faeb998430:
+>
+>    vlc: add PACKAGECONFIG for samba, upnp, dvdnav, sftp, vorbis, dc1394, dv1394, svg, svgdec (2015-11-16 21:50:11 +0100)
+>
+> are available in the git repository at:
+>
+>    git://git.openembedded.org/meta-openembedded-contrib rbt/8fixes
+>    http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=rbt/8fixes
+>
+> Robert Yang (8):
+>    netmap-modules: fix for --no-drivers
+>    lldpad: fix installed-vs-shipped
+>    nbd: use BPN in Files
+>    dracut: fix host-user-contaminated
+>    cim-schema-exper: fix host-user-contaminated
+>    ctdb: RDEPENDS on bash
+>    ctdb: add PACKAGECONFIG for libtdb
+>    netkit-ftp: fixed invalid symlink
+>
+>   .../recipes-devtools/dracut/dracut_git.bb          |    3 +++
+>   .../recipes-daemons/lldpad/lldpad_0.9.46.bb        |    2 +-
+>   .../recipes-kernel/netmap/netmap-modules_git.bb    |    2 +-
+>   .../recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb   |    2 +-
+>   .../cim-schema/cim-schema-exper_2.39.0.bb          |    1 +
+>   .../cim-schema/cim-schema-final_2.40.0.bb          |    1 +
+>   meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |    4 ++++
+>   meta-networking/recipes-support/nbd/nbd_3.11.bb    |    6 +++---
+>   8 files changed, 15 insertions(+), 6 deletions(-)
+>
 
