@@ -1,26 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 120456080F
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B4C9160290
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 10:05:17 +0000 (UTC)
+	Fri, 20 Nov 2015 10:05:18 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAKA5H34001560
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAKA5JI4023108
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 02:05:18 -0800 (PST)
+	Fri, 20 Nov 2015 02:05:19 -0800 (PST)
 Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Fri, 20 Nov 2015 02:05:17 -0800
+	Fri, 20 Nov 2015 02:05:19 -0800
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 20 Nov 2015 02:05:12 -0800
-Message-ID: <b32062fe5fc0dc3c7124a9957693964fa99e7693.1448012203.git.liezhi.yang@windriver.com>
+Date: Fri, 20 Nov 2015 02:05:14 -0800
+Message-ID: <ccfc4d68b91242823e4a6702a9cbf8296402e3d0.1448012203.git.liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1448012203.git.liezhi.yang@windriver.com>
 References: <cover.1448012203.git.liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 5/7] ctdb: RDEPENDS on bash
+Subject: [PATCH 7/7] netkit-ftp: fixed invalid symlink
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,39 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2015 10:05:17 -0000
+X-List-Received-Date: Fri, 20 Nov 2015 10:05:18 -0000
 Content-Type: text/plain
 
-Fixed:
-ctdb-2.5.1: /usr/bin/onnode_ctdb contained in package ctdb requires /bin/bash, but no providers found in its RDEPENDS [file-rdeps]
-
-And really bashisms there:
-$ checkbashisms usr/bin/onnode
-possible bashism in tmp/work/corei7-64-wrs-linux/ctdb/2.5.1-r0/image/usr/bin/onnode line 186 (<<< here string):
-        done <<<"$ctdb_status_output"
-possible bashism in tmp/work/corei7-64-wrs-linux/ctdb/2.5.1-r0/image/usr/bin/onnode line 250 (<<< here string):
-    done <<<"$out"
-possible bashism in tmp/work/corei7-64-wrs-linux/ctdb/2.5.1-r0/image/usr/bin/onnode line 284 (${parm/?/pat[/str]}):
-                echo "${all_nodes//#DEAD/}"
-possible bashism in tmp/work/corei7-64-wrs-linux/ctdb/2.5.1-r0/image/usr/bin/onnode line 337 (${parm/?/pat[/str]}):
+netkit-ftp-0.17: Symlink /usr/bin/pftp in netkit-ftp points to TMPDIR [symlink-to-sysroot]
+lib32-netkit-ftp-0.17: Symlink /usr/bin/pftp in lib32-netkit-ftp points to TMPDIR [symlink-to-sysroot]
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |    1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb   |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb b/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-index 3731efd..70bdfb1 100644
---- a/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-+++ b/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-@@ -27,6 +27,7 @@ inherit autotools-brokensep pkgconfig systemd
- PARALLEL_MAKE = ""
+diff --git a/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb b/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
+index 2f227a6..37f5bc7 100644
+--- a/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
+@@ -31,7 +31,7 @@ do_install () {
+     install -d ${D}${mandir}/man5
  
- DEPENDS += "popt libtevent talloc"
-+RDEPENDS_${PN} += "bash"
- 
- do_configure() {
-     oe_runconf
+     install -m${BINMODE} ${S}/ftp/ftp ${D}${bindir}
+-    ln -sf ${D}${bindir}/ftp ${D}${bindir}/pftp
++    ln -sf ftp ${D}${bindir}/pftp
+     install -m${MANMODE} ${S}/ftp/ftp.1 ${D}${mandir}/man1
+     ln -sf ftp.1 ${D}${mandir}/man1/pftp.1
+     install -m${MANMODE} ${S}/ftp/netrc.5 ${D}${mandir}/man5
 -- 
 1.7.9.5
 
