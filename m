@@ -1,26 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 55A9F60290
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 120456080F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 10:05:16 +0000 (UTC)
+	Fri, 20 Nov 2015 10:05:17 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAKA5Hnl023105
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAKA5H34001560
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 02:05:17 -0800 (PST)
+	Fri, 20 Nov 2015 02:05:18 -0800 (PST)
 Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Fri, 20 Nov 2015 02:05:16 -0800
+	Fri, 20 Nov 2015 02:05:17 -0800
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 20 Nov 2015 02:05:11 -0800
-Message-ID: <6293f10f15c02a4c68cbb8ce39ccc6f495517ac7.1448012203.git.liezhi.yang@windriver.com>
+Date: Fri, 20 Nov 2015 02:05:12 -0800
+Message-ID: <b32062fe5fc0dc3c7124a9957693964fa99e7693.1448012203.git.liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1448012203.git.liezhi.yang@windriver.com>
 References: <cover.1448012203.git.liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 4/7] cim-schema-exper: fix host-user-contaminated
+Subject: [PATCH 5/7] ctdb: RDEPENDS on bash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,47 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2015 10:05:16 -0000
+X-List-Received-Date: Fri, 20 Nov 2015 10:05:17 -0000
 Content-Type: text/plain
 
 Fixed:
-cim-schema-exper-2.39.0: cim-schema-exper: /cim-schema-exper/usr/share/mof/cimv2.39.0/Network/CIM_IPAddressRange.mof is owned by uid 15220, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
-cim-schema-final-2.40.0: cim-schema-final: /cim-schema-final/usr/share/mof/cimv2.40.0/Network/CIM_IPAddressRange.mof is owned by uid 15220, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
-lib32-cim-schema-exper-2.39.0: lib32-cim-schema-exper: /lib32-cim-schema-exper/usr/share/mof/cimv2.39.0/Network/CIM_IPAddressRange.mof is owned by uid 15220, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
-lib32-cim-schema-final-2.40.0: lib32-cim-schema-final: /lib32-cim-schema-final/usr/share/mof/cimv2.40.0/Network/CIM_IPAddressRange.mof is owned by uid 15220, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
+ctdb-2.5.1: /usr/bin/onnode_ctdb contained in package ctdb requires /bin/bash, but no providers found in its RDEPENDS [file-rdeps]
 
-It uses cp -a to install the files, so fix the owner to root:root
+And really bashisms there:
+$ checkbashisms usr/bin/onnode
+possible bashism in tmp/work/corei7-64-wrs-linux/ctdb/2.5.1-r0/image/usr/bin/onnode line 186 (<<< here string):
+        done <<<"$ctdb_status_output"
+possible bashism in tmp/work/corei7-64-wrs-linux/ctdb/2.5.1-r0/image/usr/bin/onnode line 250 (<<< here string):
+    done <<<"$out"
+possible bashism in tmp/work/corei7-64-wrs-linux/ctdb/2.5.1-r0/image/usr/bin/onnode line 284 (${parm/?/pat[/str]}):
+                echo "${all_nodes//#DEAD/}"
+possible bashism in tmp/work/corei7-64-wrs-linux/ctdb/2.5.1-r0/image/usr/bin/onnode line 337 (${parm/?/pat[/str]}):
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- .../cim-schema/cim-schema-exper_2.39.0.bb          |    1 +
- .../cim-schema/cim-schema-final_2.40.0.bb          |    1 +
- 2 files changed, 2 insertions(+)
+ meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |    1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
-index 62e50df..e4ed7b3 100644
---- a/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
-+++ b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
-@@ -17,6 +17,7 @@ do_install() {
-         install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
+diff --git a/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb b/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
+index 3731efd..70bdfb1 100644
+--- a/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
++++ b/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
+@@ -27,6 +27,7 @@ inherit autotools-brokensep pkgconfig systemd
+ PARALLEL_MAKE = ""
  
-         cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
-+        chown -R root:root ${D}${datadir}/mof/cimv${PV}
-         for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
-                 sed -i -e 's/\r//g' $i
-         done
-diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
-index 1694f31..7ab9c4d 100644
---- a/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
-+++ b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
-@@ -22,6 +22,7 @@ do_install() {
-         install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
+ DEPENDS += "popt libtevent talloc"
++RDEPENDS_${PN} += "bash"
  
-         cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
-+        chown -R root:root ${D}${datadir}/mof/cimv${PV}/
-         for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
-                 sed -i -e 's/\r//g' $i
-         done
+ do_configure() {
+     oe_runconf
 -- 
 1.7.9.5
 
