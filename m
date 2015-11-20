@@ -1,27 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4BF6860112
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D090460112
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 09:35:24 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAK9ZP24016806
+	Fri, 20 Nov 2015 09:37:07 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAK9b8pH001362
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 01:35:25 -0800 (PST)
-Received: from [128.224.163.148] (128.224.163.148) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
-	Fri, 20 Nov 2015 01:35:24 -0800
-To: <openembedded-devel@lists.openembedded.org>
-References: <cover.1448011904.git.liezhi.yang@windriver.com>
+	Fri, 20 Nov 2015 01:37:08 -0800 (PST)
+Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Fri, 20 Nov 2015 01:32:49 -0800
 From: Robert Yang <liezhi.yang@windriver.com>
-Message-ID: <564EE95B.4010200@windriver.com>
-Date: Fri, 20 Nov 2015 17:35:23 +0800
-User-Agent: Mozilla/5.0 (X11; Linux i686; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
-MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 20 Nov 2015 01:32:41 -0800
+Message-ID: <d7b393011e851acffece951cf1ad7c332c19f8c4.1448011904.git.liezhi.yang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1448011904.git.liezhi.yang@windriver.com>
-Subject: Re: [PATCH 0/8] meta-openembedded: fix QA issues
+References: <cover.1448011904.git.liezhi.yang@windriver.com>
+MIME-Version: 1.0
+Subject: [PATCH 2/8] lldpad: fix installed-vs-shipped
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,44 +33,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2015 09:35:24 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 Nov 2015 09:37:08 -0000
+Content-Type: text/plain
 
+Issue: LIN8-1622
 
-Sorry, please ignore this thread, some commit message should not
-be there, I will send a V2.
+Fixed when multilib:
+lldpad-0.9.46: lldpad: Files/directories were installed but not shipped in any package:
+  /usr/lib
+Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+lldpad: 1 installed and not shipped files. [installed-vs-shipped]
 
-// Robert
+This is because /usr/lib/systemd has been moved, but /usr/lib was left
+in multilib, use "rmdir -p" to fix the problem.
 
-On 11/20/2015 05:32 PM, Robert Yang wrote:
-> The following changes since commit ea319464b673cbf9a416b582dc4766faeb998430:
->
->    vlc: add PACKAGECONFIG for samba, upnp, dvdnav, sftp, vorbis, dc1394, dv1394, svg, svgdec (2015-11-16 21:50:11 +0100)
->
-> are available in the git repository at:
->
->    git://git.openembedded.org/meta-openembedded-contrib rbt/8fixes
->    http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=rbt/8fixes
->
-> Robert Yang (8):
->    netmap-modules: fix for --no-drivers
->    lldpad: fix installed-vs-shipped
->    nbd: use BPN in Files
->    dracut: fix host-user-contaminated
->    cim-schema-exper: fix host-user-contaminated
->    ctdb: RDEPENDS on bash
->    ctdb: add PACKAGECONFIG for libtdb
->    netkit-ftp: fixed invalid symlink
->
->   .../recipes-devtools/dracut/dracut_git.bb          |    3 +++
->   .../recipes-daemons/lldpad/lldpad_0.9.46.bb        |    2 +-
->   .../recipes-kernel/netmap/netmap-modules_git.bb    |    2 +-
->   .../recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb   |    2 +-
->   .../cim-schema/cim-schema-exper_2.39.0.bb          |    1 +
->   .../cim-schema/cim-schema-final_2.40.0.bb          |    1 +
->   meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |    4 ++++
->   meta-networking/recipes-support/nbd/nbd_3.11.bb    |    6 +++---
->   8 files changed, 15 insertions(+), 6 deletions(-)
->
+(LOCAL REV: NOT UPSTREAM) -- Sent to oe-devel on 20151120
+
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+---
+ .../recipes-daemons/lldpad/lldpad_0.9.46.bb        |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb b/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb
+index b191df5..b66344f 100644
+--- a/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb
++++ b/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb
+@@ -23,7 +23,7 @@ do_configure_prepend() {
+ do_install_append () {
+     install -m 0755 -d ${D}${systemd_unitdir}
+     mv ${D}${prefix}${systemd_unitdir}/* ${D}${systemd_unitdir}/
+-    rmdir ${D}${prefix}${systemd_unitdir}
++    rmdir -p --ignore-fail-on-non-empty ${D}${prefix}${systemd_unitdir}
+ }
+ 
+ FILES_${PN} += "${systemd_unitdir}"
+-- 
+1.7.9.5
+
 
