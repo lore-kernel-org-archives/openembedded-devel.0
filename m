@@ -1,26 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id DC156602D9
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 55A9F60290
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 10:05:15 +0000 (UTC)
+	Fri, 20 Nov 2015 10:05:16 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAKA5GVk001557
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAKA5Hnl023105
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 02:05:16 -0800 (PST)
+	Fri, 20 Nov 2015 02:05:17 -0800 (PST)
 Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Fri, 20 Nov 2015 02:05:15 -0800
+	Fri, 20 Nov 2015 02:05:16 -0800
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 20 Nov 2015 02:05:09 -0800
-Message-ID: <cc309828ad053cfd2d052568d21ddbb5ceebee79.1448012203.git.liezhi.yang@windriver.com>
+Date: Fri, 20 Nov 2015 02:05:11 -0800
+Message-ID: <6293f10f15c02a4c68cbb8ce39ccc6f495517ac7.1448012203.git.liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1448012203.git.liezhi.yang@windriver.com>
 References: <cover.1448012203.git.liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/7] nbd: use BPN in Files
+Subject: [PATCH 4/7] cim-schema-exper: fix host-user-contaminated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,33 +36,44 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Fri, 20 Nov 2015 10:05:16 -0000
 Content-Type: text/plain
 
-Fixed when build with multilib:
-lib32-nbd-3.11: lib32-nbd: Files/directories were installed but not shipped in any package:
-  /usr/sbin/nbd-client
-  /usr/bin/nbd-trdump
-  /usr/bin/nbd-server
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-lib32-nbd: 3 installed and not shipped files. [installed-vs-shipped]
+Fixed:
+cim-schema-exper-2.39.0: cim-schema-exper: /cim-schema-exper/usr/share/mof/cimv2.39.0/Network/CIM_IPAddressRange.mof is owned by uid 15220, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
+cim-schema-final-2.40.0: cim-schema-final: /cim-schema-final/usr/share/mof/cimv2.40.0/Network/CIM_IPAddressRange.mof is owned by uid 15220, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
+lib32-cim-schema-exper-2.39.0: lib32-cim-schema-exper: /lib32-cim-schema-exper/usr/share/mof/cimv2.39.0/Network/CIM_IPAddressRange.mof is owned by uid 15220, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
+lib32-cim-schema-final-2.40.0: lib32-cim-schema-final: /lib32-cim-schema-final/usr/share/mof/cimv2.40.0/Network/CIM_IPAddressRange.mof is owned by uid 15220, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
+
+It uses cp -a to install the files, so fix the owner to root:root
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-networking/recipes-support/nbd/nbd_3.11.bb |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../cim-schema/cim-schema-exper_2.39.0.bb          |    1 +
+ .../cim-schema/cim-schema-final_2.40.0.bb          |    1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/nbd/nbd_3.11.bb b/meta-networking/recipes-support/nbd/nbd_3.11.bb
-index 70dc7e9..0f0ae8e 100644
---- a/meta-networking/recipes-support/nbd/nbd_3.11.bb
-+++ b/meta-networking/recipes-support/nbd/nbd_3.11.bb
-@@ -14,6 +14,6 @@ inherit autotools pkgconfig
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
+index 62e50df..e4ed7b3 100644
+--- a/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
++++ b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
+@@ -17,6 +17,7 @@ do_install() {
+         install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
  
- PACKAGES = "${PN}-client ${PN}-server ${PN}-dbg ${PN}-trdump ${PN}-doc"
+         cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
++        chown -R root:root ${D}${datadir}/mof/cimv${PV}
+         for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
+                 sed -i -e 's/\r//g' $i
+         done
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+index 1694f31..7ab9c4d 100644
+--- a/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
++++ b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+@@ -22,6 +22,7 @@ do_install() {
+         install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
  
--FILES_${PN}-client = "${sbindir}/${PN}-client"
--FILES_${PN}-server = "${bindir}/${PN}-server"
--FILES_${PN}-trdump = "${bindir}/${PN}-trdump"
-+FILES_${PN}-client = "${sbindir}/${BPN}-client"
-+FILES_${PN}-server = "${bindir}/${BPN}-server"
-+FILES_${PN}-trdump = "${bindir}/${BPN}-trdump"
+         cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
++        chown -R root:root ${D}${datadir}/mof/cimv${PV}/
+         for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
+                 sed -i -e 's/\r//g' $i
+         done
 -- 
 1.7.9.5
 
