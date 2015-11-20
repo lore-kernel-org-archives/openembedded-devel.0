@@ -1,26 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3CF2F60112
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1222360112
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 09:32:51 +0000 (UTC)
+	Fri, 20 Nov 2015 09:32:53 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAK9WpMx016474
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAK9WrW4001328
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2015 01:32:52 -0800 (PST)
+	Fri, 20 Nov 2015 01:32:54 -0800 (PST)
 Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Fri, 20 Nov 2015 01:32:51 -0800
+	Fri, 20 Nov 2015 01:32:52 -0800
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 20 Nov 2015 01:32:45 -0800
-Message-ID: <f9c2d0c9671340a4aeb8182eea52e0a906550c59.1448011904.git.liezhi.yang@windriver.com>
+Date: Fri, 20 Nov 2015 01:32:46 -0800
+Message-ID: <c1f07f64bb180eaf777fa8cccd2825ca7394a4a3.1448011904.git.liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1448011904.git.liezhi.yang@windriver.com>
 References: <cover.1448011904.git.liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 6/8] ctdb: RDEPENDS on bash
+Subject: [PATCH 7/8] ctdb: add PACKAGECONFIG for libtdb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,43 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2015 09:32:52 -0000
+X-List-Received-Date: Fri, 20 Nov 2015 09:32:53 -0000
 Content-Type: text/plain
 
-Issue: LIN8-1636
+Issue: LIN8-1713
 
 Fixed:
-ctdb-2.5.1: /usr/bin/onnode_ctdb contained in package ctdb requires /bin/bash, but no providers found in its RDEPENDS [file-rdeps]
-
-And really bashisms there:
-$ checkbashisms usr/bin/onnode
-possible bashism in tmp/work/corei7-64-wrs-linux/ctdb/2.5.1-r0/image/usr/bin/onnode line 186 (<<< here string):
-        done <<<"$ctdb_status_output"
-possible bashism in tmp/work/corei7-64-wrs-linux/ctdb/2.5.1-r0/image/usr/bin/onnode line 250 (<<< here string):
-    done <<<"$out"
-possible bashism in tmp/work/corei7-64-wrs-linux/ctdb/2.5.1-r0/image/usr/bin/onnode line 284 (${parm/?/pat[/str]}):
-                echo "${all_nodes//#DEAD/}"
-possible bashism in tmp/work/corei7-64-wrs-linux/ctdb/2.5.1-r0/image/usr/bin/onnode line 337 (${parm/?/pat[/str]}):
+WARNING: QA Issue: ctdb rdepends on libtdb, but it isn't a build dependency? [build-deps]
 
 (LOCAL REV: NOT UPSTREAM) -- Sent to oe-devel on 20151120
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |    1 +
- 1 file changed, 1 insertion(+)
+ meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |    3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb b/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-index 3731efd..70bdfb1 100644
+index 70bdfb1..c19916c 100644
 --- a/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
 +++ b/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-@@ -27,6 +27,7 @@ inherit autotools-brokensep pkgconfig systemd
+@@ -24,6 +24,9 @@ SRC_URI[sha256sum] = "d5bf3f674cae986bb6178b1db215a703ac94adc5f75fadfdcff63dcbb5
+ 
+ inherit autotools-brokensep pkgconfig systemd
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[libtdb] = "--without-included-tdb,--with-included-tdb,libtdb"
++
  PARALLEL_MAKE = ""
  
  DEPENDS += "popt libtevent talloc"
-+RDEPENDS_${PN} += "bash"
- 
- do_configure() {
-     oe_runconf
 -- 
 1.7.9.5
 
