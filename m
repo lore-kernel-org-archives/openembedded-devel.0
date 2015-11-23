@@ -1,34 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
+Return-Path: <Qi.Chen@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 35F5A605FE
+	by mail.openembedded.org (Postfix) with ESMTP id 229C5605FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2015 02:05:53 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAN25slj027158
+	Mon, 23 Nov 2015 04:48:57 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAN4mvTt027726
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Nov 2015 18:05:54 -0800 (PST)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.225]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0248.002;
-	Sun, 22 Nov 2015 18:05:54 -0800
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] lmsensors: allow lmsensors-isatools to
-	be empty
-Thread-Index: AQHRI4e4maAlC/J8f0Cj5gWUbPg4956o32jA
-Date: Mon, 23 Nov 2015 02:05:53 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010C744B3E@ALA-MBA.corp.ad.wrs.com>
-References: <1448018524-16308-1-git-send-email-jackie.huang@windriver.com>
-	<20151120113641.GD2241@jama>
-In-Reply-To: <20151120113641.GD2241@jama>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.136]
+	Sun, 22 Nov 2015 20:48:58 -0800 (PST)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Sun, 22 Nov 2015 20:48:57 -0800
+From: Chen Qi <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 23 Nov 2015 12:34:12 +0800
+Message-ID: <1448253252-7990-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] lmsensors: allow lmsensors-isatools to be empty
+Subject: [meta-networking][PATCH] quagga: fix segment fault when stopping ospf6d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,64 +31,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2015 02:05:54 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 23 Nov 2015 04:48:59 -0000
+Content-Type: text/plain
 
+In ospf6_clean, the variable ospf6 might be NULL causing segment fault
+when stopping ospf6d. Check the variable before referencing it.
 
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ ...heck-ospf6-before-using-it-in-ospf6_clean.patch | 28 ++++++++++++++++++++++
+ .../recipes-protocols/quagga/quagga_0.99.24.1.bb   |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/0001-ospf6d-check-ospf6-before-using-it-in-ospf6_clean.patch
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
-> Sent: Friday, November 20, 2015 7:37 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH] lmsensors: allow lmsensors-isatools to=
- be empty
->=20
-> On Fri, Nov 20, 2015 at 07:22:04PM +0800, jackie.huang@windriver.com wrot=
-e:
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >
-> > isadump and isaset are only built on x86 machines,
-> > so allow lmsensors-isatools to be empty.
-> >
-> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> > ---
-> >  meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb | 4 ++++
-> >  1 file changed, 4 insertions(+)
-> >
-> > diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb b/me=
-ta-oe/recipes-
-> support/lm_sensors/lmsensors_3.4.0.bb
-> > index 62ea131..364eb9e 100644
-> > --- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-> > +++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-> > @@ -131,3 +131,7 @@ RDEPENDS_${PN}-pwmconfig =3D "${PN}-fancontrol"
-> >  FILES_${PN}-isatools =3D "${sbindir}/isa*"
-> >  FILES_${PN}-isatools-dbg =3D "${sbindir}/.debug/isa*"
-> >  FILES_${PN}-isatools-doc =3D "${mandir}/man8/isa*"
-> > +
-> > +# isadump and isaset are only built on x86 machines,
-> > +# so allow it to be empty.
-> > +ALLOW_EMPTY_${PN}-isatools =3D "1"
->=20
-> Why should anyone on !x86 install lmsensors-isatools package?
->=20
-> And if (s)he does, then why should s(he) be happy with empty package?
+diff --git a/meta-networking/recipes-protocols/quagga/files/0001-ospf6d-check-ospf6-before-using-it-in-ospf6_clean.patch b/meta-networking/recipes-protocols/quagga/files/0001-ospf6d-check-ospf6-before-using-it-in-ospf6_clean.patch
+new file mode 100644
+index 0000000..f08bb57
+--- /dev/null
++++ b/meta-networking/recipes-protocols/quagga/files/0001-ospf6d-check-ospf6-before-using-it-in-ospf6_clean.patch
+@@ -0,0 +1,28 @@
++Upstream-Status: Pending
++
++Subject: ospf6d: check ospf6 before using it in ospf6_clean
++
++The ospf6 variable might be 'NULL' causing segment fault error.
++Check it before referencing it.
++
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++---
++ ospf6d/ospf6d.c | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/ospf6d/ospf6d.c b/ospf6d/ospf6d.c
++index 3cdd5c1..e3bf1af 100644
++--- a/ospf6d/ospf6d.c
+++++ b/ospf6d/ospf6d.c
++@@ -1892,6 +1892,8 @@ ospf6_init (void)
++ void
++ ospf6_clean (void)
++ {
+++  if (ospf6 == NULL)
+++    return;
++   if (ospf6->route_table)
++     ospf6_route_remove_all (ospf6->route_table);
++   if (ospf6->brouter_table)
++-- 
++1.9.1
++
+diff --git a/meta-networking/recipes-protocols/quagga/quagga_0.99.24.1.bb b/meta-networking/recipes-protocols/quagga/quagga_0.99.24.1.bb
+index 09c4e7d..cecf438 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga_0.99.24.1.bb
++++ b/meta-networking/recipes-protocols/quagga/quagga_0.99.24.1.bb
+@@ -1,6 +1,7 @@
+ require quagga.inc
+ 
+ SRC_URI += "file://babel-close-the-stdout-stderr-as-in-other-daemons.patch \
++            file://0001-ospf6d-check-ospf6-before-using-it-in-ospf6_clean.patch \
+ "
+ 
+ SRC_URI[md5sum] = "7986bdc2fe6027d4c9216f7f5791e718"
+-- 
+1.9.1
 
-Sorry, this is not appropriate, we fixed it another way in our layer, pleas=
-e ignore it.
-
-Thanks,
-Jackie
-
->=20
-> Package manager saying that the package doesn't exist is much better
-> user experience than it happily installing completely useless empty
-> package.
->=20
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
