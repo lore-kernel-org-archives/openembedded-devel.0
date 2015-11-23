@@ -1,43 +1,23 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 60168601A5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2015 20:21:25 +0000 (UTC)
-Received: by wmec201 with SMTP id c201so178616274wme.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2015 12:21:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=GfSzmdJ//4f8x0wV50zVsGMClCywpcseKW0WHVeM/pU=;
-	b=V9ZemKtyMQLDPs6AAW0JXD55YBb9U8JyU5Z2+KdjLVquNKS1h0BDTb3JWjkjyO8Nex
-	6RLfZtuSPlEjwSLkbAtfi2PVuFQ+v+aZ7l1qH4OWw2zp0bUcbgTThed/tjgxPwCg+qqs
-	gjKoJpDvZsP7ehj7ZwM2IJ7sMHK39j4tRg3JpVt6Ki/5VCvPdGmq5E8UFpKkM5vqlxmE
-	9f8E8hbs6qgJO1AddiTx+YcFkUqM599Gcrpxp1AsohnJBLj2Wh8JJIavXi9rz+O+sqVo
-	OZq1qisawnHCC/QqIB19SbakBNNMV/GhAtk8/6x4hHX2VvG1JetZH9w8cqu0TjZREfnw
-	yxtA==
-X-Received: by 10.28.126.215 with SMTP id z206mr19061573wmc.71.1448310086266; 
-	Mon, 23 Nov 2015 12:21:26 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	an7sm14862174wjc.44.2015.11.23.12.21.23
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 23 Nov 2015 12:21:24 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 23 Nov 2015 21:21:55 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151123202155.GA17303@jama>
-References: <1448279098-24980-1-git-send-email-otavio@ossystems.com.br>
-	<87h9kcoqw5.fsf@email.parenteses.org>
-	<CAP9ODKqRoEzU_uHtuBNRzq=3tQi5Um0PV+io6bcCcfm8dfWsjQ@mail.gmail.com>
-	<D00C1F8D-0789-4430-BFF0-392336C81D37@gmail.com>
-	<CAP9ODKoxbai1=yE4+XBAXOrQ7-JObwGhdOc7zRcuvz6EcbwGtw@mail.gmail.com>
+Return-Path: <mariano.lopez@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 082A16010D;
+	Mon, 23 Nov 2015 21:41:09 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga102.jf.intel.com with ESMTP; 23 Nov 2015 13:41:11 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,338,1444719600"; d="scan'208";a="858215563"
+Received: from mlopezva-mobl2.zpn.intel.com (HELO [10.219.16.157])
+	([10.219.16.157])
+	by fmsmga002.fm.intel.com with ESMTP; 23 Nov 2015 13:41:11 -0800
+Message-ID: <56538808.5050606@linux.intel.com>
+Date: Mon, 23 Nov 2015 15:41:28 -0600
+From: Mariano Lopez <mariano.lopez@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKoxbai1=yE4+XBAXOrQ7-JObwGhdOc7zRcuvz6EcbwGtw@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-ruby][meta-xfce][PATCH] Move imsettings from meta-ruby to meta-xfce
+To: openembedded-devel@lists.openembedded.org, 
+	OE-core <openembedded-core@lists.openembedded.org>, yocto@yoctoproject.org
+Subject: RFC: Reference updater filesystem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,60 +30,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2015 20:21:26 -0000
-X-Groupsio-MsgNum: 58793
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="45Z9DzgjV8m4Oswq"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 23 Nov 2015 21:41:11 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---45Z9DzgjV8m4Oswq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+There has been interest in an image based software updater in Yocto 
+Project. The proposed solution for a image based updater is to use 
+Stefano Babic's software updater (http://sbabic.github.io/swupdate). 
+This software do a binary copy, so it is needed to have at least two 
+partitions, these partitions would be the rootfs and the maintenance 
+partition. The rootfs it's the main partition used to boot during the 
+normal device operation, on the other hand, the maintenance will be used 
+to update the main partition.
 
-On Mon, Nov 23, 2015 at 05:25:59PM -0200, Otavio Salvador wrote:
-> On Mon, Nov 23, 2015 at 2:52 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> >> On Nov 23, 2015, at 4:29 AM, Otavio Salvador <otavio.salvador@ossystem=
-s.com.br> wrote:
-> >>
-> >> On Mon, Nov 23, 2015 at 10:13 AM, Mario Domenech Goulart
-> >> <mario.goulart@gmail.com> wrote:
-> >>> On Mon, 23 Nov 2015 09:44:58 -0200 Otavio Salvador <otavio@ossystems.=
-com.br> wrote:
-> >>>
-> >>>> The imsettings requires xfconf to run, making it dependent of XFCE. =
-It
-> >>>> makes no sense to make meta-ruby dependent of XFCE so we move the
-> >>>> imsettings recipe to meta-xfce and add the meta-ruby dependency ther=
-e.
-> >>>
-> >>> s/dependent of/dependent on/
-> >>
-> >> Agreed; Martin, can you fix it when applying or do you wish me to send=
- a v2?
-> >
-> > I have sent a patch for same last week see.
-> >
-> > http://permalink.gmane.org/gmane.comp.handhelds.openembedded/72211
->=20
-> You missed the addition of meta-ruby dependency for meta-xfce now.
+To update the system, the user has to connect to device and boot in the 
+maintenance partition; once in the maintenance partition the software 
+updater will copy the new image in the rootfs partition. A final reboot 
+into the rootfs it is necessary to complete the upgrade.
 
-I think he didn't because ruby was moved from meta-ruby to oe-core.
+As mentioned before the the software will copy an image to the 
+partition, so everything in that partition will be wiped out, including 
+custom configurations. To avoid the loss of configuration I explore 
+three different solutions:
+1. Use a separate partition for the configuration.
+   a. The pro of this method is the partition is not touched during the 
+update.
+   b. The con of this method is the configuration is not directly in 
+rootfs (example: /etc).
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+2. Do the backup during the update.
+   a. The pro is the configuration is directly in rootfs.
+   b. The con is If the update fail most likely the configuration would 
+be lost.
 
---45Z9DzgjV8m4Oswq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+3. Have an OverlayFS for the rootfs or the partition that have the 
+configuration.
+   a. The pro is the configuration is  "directly" in rootfs.
+   b. The con is there is need to provide a custom init to guarantee the 
+Overlay is mounted before the boot process.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+With the above information I'm proposing to use a separate partition for 
+the configuration; this is because is more reliable and doesn't require 
+big changes in the current architecture.
 
-iEYEARECAAYFAlZTdWMACgkQN1Ujt2V2gBwZLQCePsMy6u1vzOGA8WHaJL9DY/jq
-OxMAnRlLA7ymPwIJoKS241GtkdN8cmYG
-=q8rD
------END PGP SIGNATURE-----
+So, the idea is to have 4 partitions in the media:
+1. boot. This is the usual boot partition
+2. data. This will hold the configuration files. Not modified by updates.
+3. maintenance. This partition will be used to update rootfs.
+4. rootfs. Partition used for normal operation.
 
---45Z9DzgjV8m4Oswq--
+Mariano
+
