@@ -1,27 +1,24 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 860D76012C
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 3261B65D4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2015 08:27:24 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAN8ROud016721
+	Mon, 23 Nov 2015 09:43:07 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAN9h83J029232
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2015 00:27:24 -0800 (PST)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Mon, 23 Nov 2015 00:27:24 -0800
+	Mon, 23 Nov 2015 01:43:08 -0800 (PST)
+Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Mon, 23 Nov 2015 01:42:04 -0800
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1429016785-29691-1-git-send-email-ross.burton@intel.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <5652CDEA.7070807@windriver.com>
-Date: Mon, 23 Nov 2015 16:27:22 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
+Date: Mon, 23 Nov 2015 17:42:03 +0800
+Message-ID: <1448271723-11198-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1429016785-29691-1-git-send-email-ross.burton@intel.com>
-Subject: Re: [PATCH] libart-lgpl: add (from oe-core)
+Subject: [meta-filesystems][PATCH] xfsprogs: fix the license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,359 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2015 08:27:27 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 23 Nov 2015 09:43:08 -0000
+Content-Type: text/plain
 
-On 2015年04月14日 21:06, Ross Burton wrote:
-> Signed-off-by: Ross Burton <ross.burton@intel.com>
-> ---
->   .../libart-lgpl/libart-lgpl/Makefile.am.patch      |   17 ++++++++++++
->   .../libart-lgpl/libart-lgpl/aarch64/art_config.h   |   10 +++++++
->   .../libart-lgpl/libart-lgpl/aarch64be/art_config.h |   10 +++++++
->   .../libart-lgpl/aarch64be_32/art_config.h          |   10 +++++++
->   .../libart-lgpl/libart-lgpl/arm/art_config.h       |   10 +++++++
->   .../libart-lgpl/libart-lgpl/armeb/art_config.h     |   10 +++++++
->   .../libart-lgpl/libart-lgpl/i386/art_config.h      |   10 +++++++
->   .../libart-lgpl/libart-lgpl/i586/art_config.h      |   10 +++++++
->   .../libart-lgpl/libart-lgpl/i686/art_config.h      |   10 +++++++
->   .../libart-lgpl/libart-lgpl/mips/art_config.h      |   10 +++++++
->   .../libart-lgpl/libart-lgpl/mips64/art_config.h    |   10 +++++++
->   .../libart-lgpl/libart-lgpl/mips64el/art_config.h  |   10 +++++++
->   .../libart-lgpl/libart-lgpl/mipsel/art_config.h    |   10 +++++++
->   .../libart-lgpl/libart-lgpl/powerpc/art_config.h   |   10 +++++++
->   .../libart-lgpl/libart-lgpl/powerpc64/art_config.h |   10 +++++++
->   .../libart-lgpl/libart-lgpl/x86_64/art_config.h    |   10 +++++++
->   .../libart-lgpl/libart-lgpl_2.3.21.bb              |   28 ++++++++++++++++++++
->   17 files changed, 195 insertions(+)
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/Makefile.am.patch
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/aarch64/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/aarch64be/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/aarch64be_32/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/arm/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/armeb/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/i386/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/i586/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/i686/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mips/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mips64/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mips64el/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mipsel/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/powerpc/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/powerpc64/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/x86_64/art_config.h
->   create mode 100644 meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl_2.3.21.bb
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Hi Ross,
+The library named "libhandle" and some specific header files
+are licensed under LGPLv2.1, all other components are licensed
+under GPLv2.
 
-Would you like to tell my why made this copy from oe-core, please?
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.2.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks,
-Kai
-
-
->
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/Makefile.am.patch b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/Makefile.am.patch
-> new file mode 100644
-> index 0000000..190ba96
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/Makefile.am.patch
-> @@ -0,0 +1,17 @@
-> +Upstream-Status: Inappropriate [configuration]
-> +
-> +Index: libart_lgpl-2.3.21/Makefile.am
-> +===================================================================
-> +--- libart_lgpl-2.3.21.orig/Makefile.am	2009-04-18 05:29:25.000000000 -0700
-> ++++ libart_lgpl-2.3.21/Makefile.am	2010-11-23 23:12:32.445450075 -0800
-> +@@ -7,8 +7,8 @@
-> +
-> + BUILT_SOURCES = art_config.h
-> +
-> +-art_config.h:
-> +-	./gen_art_config.sh > art_config.h
-> ++#art_config.h:
-> ++#	./gen_art_config.sh > art_config.h
-> +
-> + EXTRA_DIST = 			\
-> + 	libart.def		\
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/aarch64/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/aarch64/art_config.h
-> new file mode 100644
-> index 0000000..500ffc3
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/aarch64/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 8
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/aarch64be/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/aarch64be/art_config.h
-> new file mode 100644
-> index 0000000..500ffc3
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/aarch64be/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 8
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/aarch64be_32/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/aarch64be_32/art_config.h
-> new file mode 100644
-> index 0000000..b0e74ad
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/aarch64be_32/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 4
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/arm/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/arm/art_config.h
-> new file mode 100644
-> index 0000000..b0e74ad
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/arm/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 4
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/armeb/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/armeb/art_config.h
-> new file mode 100644
-> index 0000000..b0e74ad
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/armeb/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 4
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/i386/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/i386/art_config.h
-> new file mode 100644
-> index 0000000..b0e74ad
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/i386/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 4
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/i586/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/i586/art_config.h
-> new file mode 100644
-> index 0000000..b0e74ad
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/i586/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 4
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/i686/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/i686/art_config.h
-> new file mode 100644
-> index 0000000..b0e74ad
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/i686/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 4
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mips/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mips/art_config.h
-> new file mode 100644
-> index 0000000..b0e74ad
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mips/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 4
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mips64/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mips64/art_config.h
-> new file mode 100644
-> index 0000000..d10cd95
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mips64/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 8
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mips64el/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mips64el/art_config.h
-> new file mode 100644
-> index 0000000..d10cd95
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mips64el/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 8
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mipsel/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mipsel/art_config.h
-> new file mode 100644
-> index 0000000..b0e74ad
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/mipsel/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 4
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/powerpc/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/powerpc/art_config.h
-> new file mode 100644
-> index 0000000..b0e74ad
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/powerpc/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 4
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/powerpc64/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/powerpc64/art_config.h
-> new file mode 100644
-> index 0000000..500ffc3
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/powerpc64/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 8
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/x86_64/art_config.h b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/x86_64/art_config.h
-> new file mode 100644
-> index 0000000..500ffc3
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl/x86_64/art_config.h
-> @@ -0,0 +1,10 @@
-> +/* Automatically generated by gen_art_config.c */
-> +
-> +#define ART_SIZEOF_CHAR 1
-> +#define ART_SIZEOF_SHORT 2
-> +#define ART_SIZEOF_INT 4
-> +#define ART_SIZEOF_LONG 8
-> +
-> +typedef unsigned char art_u8;
-> +typedef unsigned short art_u16;
-> +typedef unsigned int art_u32;
-> diff --git a/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl_2.3.21.bb b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl_2.3.21.bb
-> new file mode 100644
-> index 0000000..4966ea4
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libart-lgpl/libart-lgpl_2.3.21.bb
-> @@ -0,0 +1,28 @@
-> +SUMMARY = "Library of functions for 2D graphics"
-> +SECTION = "x11/gnome"
-> +LICENSE = "LGPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
-> +PR = "r2"
-> +
-> +ART_CONFIG = "${HOST_ARCH}/art_config.h"
-> +
-> +# can't use gnome.oeclass due to _ in filename
-> +SRC_URI = "${GNOME_MIRROR}/libart_lgpl/2.3/libart_lgpl-${PV}.tar.bz2 \
-> +       file://${ART_CONFIG} \
-> +       file://Makefile.am.patch"
-> +
-> +SRC_URI[md5sum] = "08559ff3c67fd95d57b0c5e91a6b4302"
-> +SRC_URI[sha256sum] = "fdc11e74c10fc9ffe4188537e2b370c0abacca7d89021d4d303afdf7fd7476fa"
-> +
-> +inherit autotools pkgconfig
-> +
-> +DEPENDS = ""
-> +
-> +FILES_${PN} = "${libdir}/*.so.*"
-> +FILES_${PN}-dev += "${bindir}/libart2-config"
-> +
-> +S = "${WORKDIR}/libart_lgpl-${PV}"
-> +
-> +do_configure_prepend() {
-> +	cp ${WORKDIR}/${ART_CONFIG} ${S}/art_config.h
-> +}
-
-
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.2.3.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.2.3.bb
+index 8df7bc1..f38239c 100644
+--- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.2.3.bb
++++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.2.3.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "XFS Filesystem Utilities"
+ HOMEPAGE = "http://oss.sgi.com/projects/xfs"
+ SECTION = "base"
+-LICENSE = "GPLv2"
++LICENSE = "GPLv2 & LGPLv2.1"
+ LICENSE_libhandle = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
+ DEPENDS = "util-linux"
 -- 
-Regards,
-Neil | Kai Kang
+2.3.5
 
 
