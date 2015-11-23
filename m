@@ -1,60 +1,37 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
-	[209.85.220.46])
-	by mail.openembedded.org (Postfix) with ESMTP id E51CE6012C
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qg0-f52.google.com (mail-qg0-f52.google.com
+	[209.85.192.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 014036012C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2015 12:29:11 +0000 (UTC)
-Received: by pacdm15 with SMTP id dm15so190052668pac.3
+	Mon, 23 Nov 2015 15:25:37 +0000 (UTC)
+Received: by qgec40 with SMTP id c40so115567007qge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2015 04:29:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:content-type; bh=JQwqwUyc7aPmP0B8HTZJsCuZ61UJBPLJgFrPGkFvOQE=;
-	b=ynjmKqFvBfCbRFiX3NuIYVlVBuTxVSsKj5/+bNWdCPf5gLydVhezT8Le6AbtIOENDG
-	EQbBIqTX6k8DE17sXkFIAgYaq/AV6Oofb6x7ddItI/0faCj+Py926ge5kx+DpRRFd862
-	BvMU+T82cu25SGgX9QlbX8foFblm/8cTjcybx7Z+x+RU8CQ900cIg9FIjl4lAC65wX6A
-	zUr/pdWoBtRL7uhhxxGK23ZOpK1PeXlwEa3gpH7INley1LNT0uXYK4TscbgoNLEjbTcv
-	DGAt4gSI3gRiVNWjnK0EQ81LOhAqbOLCmvG5H3xg6No2bzFAYENz7epPn7YC/BkMDLxO
-	+s1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:content-type;
-	bh=JQwqwUyc7aPmP0B8HTZJsCuZ61UJBPLJgFrPGkFvOQE=;
-	b=C31fXMv2ggr53NFR8nnOLl+3dSRBtfvjMTRJaN9DolzreEAKk+W+I0X6Vp8KhSYkFt
-	qOXEikWSCTZq6xLQ5BV8Ws4PAIHGPQVnVOgiCpo/qm97OMiUrsz9ZiEZbJWIswBZuS00
-	7vizirlrN9ZlzPbVFYAadrRWnG/yO9LUdlLJoLxRzvpQ2EdBKLYRvNUshcQlGzkEq2G/
-	vd4yA9GAyZjLf3lQWCMt84f5ZMpBar6Ap49XoBOVMdX6JcYwfbb7FMz0OgW+y/r9sEFF
-	8Lob4cNAizPElullEl4rvfBPMThZ2Li0B1acX+sqtZBouQ66u5DsmpQZVjAB8lgGk1ue
-	saNw==
-X-Gm-Message-State: ALoCoQmDL9LtyJWjwUk7o09D8VeU3fKaO50B9fY3wMYkRTkxCqDlxWQi9UHNJ8dHtRCf8ahykNb5
-X-Received: by 10.68.237.98 with SMTP id vb2mr35853766pbc.26.1448281751996;
-	Mon, 23 Nov 2015 04:29:11 -0800 (PST)
-Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com.
-	[209.85.220.52]) by smtp.gmail.com with ESMTPSA id
-	n6sm10401437pap.24.2015.11.23.04.29.10
+	Mon, 23 Nov 2015 07:25:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:from:date:to:subject:user-agent;
+	bh=TRuYQ4J2y7Z0Dn6oMv8bWgqwZOhhOjhoyf3CdeYGQ1Y=;
+	b=rtEgd+QWE/Jaem4l8cVmbasN4LGmfWKVNs+RoNiodXNVewK+si960ugf43nG6pIziZ
+	lHbXk/44ydzhOkDOywjKIa4C1SWo3f7Fuo3o6lDksEdWfPof5Q852+kLWiB4aIJU6WpD
+	ZO998KdvufuI7gwpCDpzin4aiPKvPkUHpbFK4LLQBxx1qx+1j76gS2qkHfqwpNY/LqTc
+	GcXmdQ8fH4Zr7gkkVLz6K+x9+OAjujmzx8rnLjqe0Abjfa/mMvct5NYOC2Wf4r8V46w8
+	x/BlpL7mQD5kfmploGbuGxApKPu70KrVeLTqMNvioFpjLAWnUPpBsBS+l2XuRvci9JSh
+	0EAw==
+X-Received: by 10.140.30.68 with SMTP id c62mr28930410qgc.9.1448292338038;
+	Mon, 23 Nov 2015 07:25:38 -0800 (PST)
+Received: from localhost ([177.100.174.62]) by smtp.gmail.com with ESMTPSA id
+	o20sm3117551qki.42.2015.11.23.07.25.34
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 23 Nov 2015 04:29:10 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by pacdm15 with SMTP id dm15so190051920pac.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2015 04:29:09 -0800 (PST)
-MIME-Version: 1.0
-X-Received: by 10.66.63.33 with SMTP id d1mr35445833pas.120.1448281749920;
-	Mon, 23 Nov 2015 04:29:09 -0800 (PST)
-Received: by 10.66.197.129 with HTTP; Mon, 23 Nov 2015 04:29:09 -0800 (PST)
-In-Reply-To: <87h9kcoqw5.fsf@email.parenteses.org>
-References: <1448279098-24980-1-git-send-email-otavio@ossystems.com.br>
-	<87h9kcoqw5.fsf@email.parenteses.org>
-Date: Mon, 23 Nov 2015 10:29:09 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKqRoEzU_uHtuBNRzq=3tQi5Um0PV+io6bcCcfm8dfWsjQ@mail.gmail.com>
-Message-ID: <CAP9ODKqRoEzU_uHtuBNRzq=3tQi5Um0PV+io6bcCcfm8dfWsjQ@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [meta-ruby][meta-xfce][PATCH] Move imsettings from meta-ruby to meta-xfce
+	Mon, 23 Nov 2015 07:25:36 -0800 (PST)
+Message-ID: <56532ff0.14c0370a.7218c.2ca3@mx.google.com>
+Received: by localhost (sSMTP sendmail emulation);
+	Mon, 23 Nov 2015 13:25:31 -0200
+From: "Otavio Salvador" <otavio.salvador@gmail.com>
+Date: Mon, 23 Nov 2015 13:25:31 -0200
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+User-Agent: mail v14.8.5
+Subject: Updates to meta-browser (master and jethro) in 2015-11-23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,22 +44,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2015 12:29:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 23 Nov 2015 15:25:39 -0000
 
-On Mon, Nov 23, 2015 at 10:13 AM, Mario Domenech Goulart
-<mario.goulart@gmail.com> wrote:
-> On Mon, 23 Nov 2015 09:44:58 -0200 Otavio Salvador <otavio@ossystems.com.br> wrote:
->
->> The imsettings requires xfconf to run, making it dependent of XFCE. It
->> makes no sense to make meta-ruby dependent of XFCE so we move the
->> imsettings recipe to meta-xfce and add the meta-ruby dependency there.
->
-> s/dependent of/dependent on/
+Hello,
 
-Agreed; Martin, can you fix it when applying or do you wish me to send a v2?
+I pushed following updates:
 
--- 
+commit e114d625d4bd23a52cc1108a45d96ffd8dc0ab7f (HEAD -> pending, origin/master, origin/jethro, origin/HEAD)
+Author: Fabio Berton <fabio.berton@ossystems.com.br>
+Date:   Wed Sep 2 18:25:21 2015 -0300
+
+    firefox: Update to version 38.2.1esr
+    
+    Update Firefox from 10.0.12esr to 38.2.1esr with the
+    following changes:
+    
+    Add yasm-native, icu, pulseaudio as dependeies of Firefox.
+    
+    Update Debian patches debian-hacks, fixes, iceweasel-branding, porting and
+    prefs from Debian release. This Debian patches can be found here:
+    http://anonscm.debian.org/cgit/pkg-mozilla/iceweasel.git
+    
+    Add patches fix-python-path to fix python path used by mozilla build
+    system, and freetype-2-6 to add some missing freetype headers.
+    
+    Update all languages for 38.2.1esr
+    
+    Add function do_install_append to install additional files needed by
+    firefox.
+    
+    Set variable PN to match correct files
+    
+    Create a variable MOZ_APP_BASE_VERSION to append base version to package
+    name. The installation path used by firefox is
+    /usr/lib/firefox-{MOZ_APP_BASE_VERSION}
+    
+    Update mozconfig file with settings used by new Firefox.
+    
+    Series-to: meta-oe
+    
+    Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+commit 56855bfdebe75e78306687be1ebc84307a38a0e5
+Author: Fabio Berton <fabio.berton@ossystems.com.br>
+Date:   Wed Sep 2 18:33:43 2015 -0300
+
+    mozilla: Remove unused variables
+    
+    Change configure, compile and install functions
+    
+    Mozilla build system has changed compared to old Firefox version 10.
+    For more information about new mozilla build system see
+    https://developer.mozilla.org/en-US/Firefox
+    
+    Remove unused variables.
+    
+    Add SHELL to EXTRA_OEMAKE. Mozilla build system needs pass explicitly
+    SHELL variable.
+    
+    Configure variables needed by mozconfig work properly.
+    
+    Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+commit a7a470a7705487d3e35451e4b2ea46e7ef5fee35
+Author: Otavio Salvador <otavio@ossystems.com.br>
+Date:   Wed Sep 23 16:21:22 2015 -0300
+
+    scripts/firefox-gen-l10n-recipes: Use HTTP to fetch the xpi files
+    
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+Regards,
+
+--
 Otavio Salvador                             O.S. Systems
 http://www.ossystems.com.br        http://code.ossystems.com.br
 Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
