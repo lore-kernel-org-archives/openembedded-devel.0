@@ -1,37 +1,42 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f52.google.com (mail-qg0-f52.google.com
-	[209.85.192.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 014036012C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
+	[209.85.220.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E64F6012C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2015 15:25:37 +0000 (UTC)
-Received: by qgec40 with SMTP id c40so115567007qge.2
+	Mon, 23 Nov 2015 16:52:27 +0000 (UTC)
+Received: by pacdm15 with SMTP id dm15so196347847pac.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2015 07:25:38 -0800 (PST)
+	Mon, 23 Nov 2015 08:52:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:from:date:to:subject:user-agent;
-	bh=TRuYQ4J2y7Z0Dn6oMv8bWgqwZOhhOjhoyf3CdeYGQ1Y=;
-	b=rtEgd+QWE/Jaem4l8cVmbasN4LGmfWKVNs+RoNiodXNVewK+si960ugf43nG6pIziZ
-	lHbXk/44ydzhOkDOywjKIa4C1SWo3f7Fuo3o6lDksEdWfPof5Q852+kLWiB4aIJU6WpD
-	ZO998KdvufuI7gwpCDpzin4aiPKvPkUHpbFK4LLQBxx1qx+1j76gS2qkHfqwpNY/LqTc
-	GcXmdQ8fH4Zr7gkkVLz6K+x9+OAjujmzx8rnLjqe0Abjfa/mMvct5NYOC2Wf4r8V46w8
-	x/BlpL7mQD5kfmploGbuGxApKPu70KrVeLTqMNvioFpjLAWnUPpBsBS+l2XuRvci9JSh
-	0EAw==
-X-Received: by 10.140.30.68 with SMTP id c62mr28930410qgc.9.1448292338038;
-	Mon, 23 Nov 2015 07:25:38 -0800 (PST)
-Received: from localhost ([177.100.174.62]) by smtp.gmail.com with ESMTPSA id
-	o20sm3117551qki.42.2015.11.23.07.25.34
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 23 Nov 2015 07:25:36 -0800 (PST)
-Message-ID: <56532ff0.14c0370a.7218c.2ca3@mx.google.com>
-Received: by localhost (sSMTP sendmail emulation);
-	Mon, 23 Nov 2015 13:25:31 -0200
-From: "Otavio Salvador" <otavio.salvador@gmail.com>
-Date: Mon, 23 Nov 2015 13:25:31 -0200
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-User-Agent: mail v14.8.5
-Subject: Updates to meta-browser (master and jethro) in 2015-11-23
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=rEbjYanLVCmSlMNaglsa0KOEj8m9Onot+xgh/eHOgvw=;
+	b=whNxLK8GE5WYzcZf/C2nsIxmeoEGAJQU566WlhdWANdbvmaltB1SdWNTb2gFKNC39R
+	twuZMGcAoA1FJCx/m/JTGvxzz1AtgSPAsyug/mVxcCfWFvaPZZZE23sysgj9JZkUgqKH
+	txWpltHFDl5lcbt68qKl4+0NzcDulsx03rMSDcRt9DGuHg2dwkxW6wadR7keoe/5UDWK
+	og0MMjLTGKu6qDIdL9MTRlfxOkaE+Z/2qdFr8Mi2WURefIu7N/gLAdpWAHGVuFTkZK4g
+	CiOYAmT+IPRbRVT78gT52ylu5jj0T5X1RmcRaABHAFybfZfnLBLj2JGCiMat0iMPnycz
+	MNDQ==
+X-Received: by 10.66.124.165 with SMTP id mj5mr36416851pab.97.1448297547873;
+	Mon, 23 Nov 2015 08:52:27 -0800 (PST)
+Received: from ?IPv6:2601:646:8802:5d5c:96:49db:54d6:362d?
+	([2601:646:8802:5d5c:96:49db:54d6:362d])
+	by smtp.gmail.com with ESMTPSA id
+	zn2sm11081044pbb.40.2015.11.23.08.52.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 23 Nov 2015 08:52:27 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <CAP9ODKqRoEzU_uHtuBNRzq=3tQi5Um0PV+io6bcCcfm8dfWsjQ@mail.gmail.com>
+Date: Mon, 23 Nov 2015 08:52:23 -0800
+Message-Id: <D00C1F8D-0789-4430-BFF0-392336C81D37@gmail.com>
+References: <1448279098-24980-1-git-send-email-otavio@ossystems.com.br>
+	<87h9kcoqw5.fsf@email.parenteses.org>
+	<CAP9ODKqRoEzU_uHtuBNRzq=3tQi5Um0PV+io6bcCcfm8dfWsjQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.3112)
+Subject: Re: [meta-ruby][meta-xfce][PATCH] Move imsettings from meta-ruby to meta-xfce
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,82 +49,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2015 15:25:39 -0000
+X-List-Received-Date: Mon, 23 Nov 2015 16:52:28 -0000
+X-Groupsio-MsgNum: 58790
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_C0B11094-FCA2-4D9A-A1CF-61A1870C0348";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-Hello,
+--Apple-Mail=_C0B11094-FCA2-4D9A-A1CF-61A1870C0348
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-I pushed following updates:
 
-commit e114d625d4bd23a52cc1108a45d96ffd8dc0ab7f (HEAD -> pending, origin/master, origin/jethro, origin/HEAD)
-Author: Fabio Berton <fabio.berton@ossystems.com.br>
-Date:   Wed Sep 2 18:25:21 2015 -0300
+> On Nov 23, 2015, at 4:29 AM, Otavio Salvador =
+<otavio.salvador@ossystems.com.br> wrote:
+>=20
+> On Mon, Nov 23, 2015 at 10:13 AM, Mario Domenech Goulart
+> <mario.goulart@gmail.com> wrote:
+>> On Mon, 23 Nov 2015 09:44:58 -0200 Otavio Salvador =
+<otavio@ossystems.com.br> wrote:
+>>=20
+>>> The imsettings requires xfconf to run, making it dependent of XFCE. =
+It
+>>> makes no sense to make meta-ruby dependent of XFCE so we move the
+>>> imsettings recipe to meta-xfce and add the meta-ruby dependency =
+there.
+>>=20
+>> s/dependent of/dependent on/
+>=20
+> Agreed; Martin, can you fix it when applying or do you wish me to send =
+a v2?
 
-    firefox: Update to version 38.2.1esr
-    
-    Update Firefox from 10.0.12esr to 38.2.1esr with the
-    following changes:
-    
-    Add yasm-native, icu, pulseaudio as dependeies of Firefox.
-    
-    Update Debian patches debian-hacks, fixes, iceweasel-branding, porting and
-    prefs from Debian release. This Debian patches can be found here:
-    http://anonscm.debian.org/cgit/pkg-mozilla/iceweasel.git
-    
-    Add patches fix-python-path to fix python path used by mozilla build
-    system, and freetype-2-6 to add some missing freetype headers.
-    
-    Update all languages for 38.2.1esr
-    
-    Add function do_install_append to install additional files needed by
-    firefox.
-    
-    Set variable PN to match correct files
-    
-    Create a variable MOZ_APP_BASE_VERSION to append base version to package
-    name. The installation path used by firefox is
-    /usr/lib/firefox-{MOZ_APP_BASE_VERSION}
-    
-    Update mozconfig file with settings used by new Firefox.
-    
-    Series-to: meta-oe
-    
-    Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+I have sent a patch for same last week see.
 
-commit 56855bfdebe75e78306687be1ebc84307a38a0e5
-Author: Fabio Berton <fabio.berton@ossystems.com.br>
-Date:   Wed Sep 2 18:33:43 2015 -0300
+http://permalink.gmane.org/gmane.comp.handhelds.openembedded/72211
 
-    mozilla: Remove unused variables
-    
-    Change configure, compile and install functions
-    
-    Mozilla build system has changed compared to old Firefox version 10.
-    For more information about new mozilla build system see
-    https://developer.mozilla.org/en-US/Firefox
-    
-    Remove unused variables.
-    
-    Add SHELL to EXTRA_OEMAKE. Mozilla build system needs pass explicitly
-    SHELL variable.
-    
-    Configure variables needed by mozconfig work properly.
-    
-    Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>=20
+> --
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-commit a7a470a7705487d3e35451e4b2ea46e7ef5fee35
-Author: Otavio Salvador <otavio@ossystems.com.br>
-Date:   Wed Sep 23 16:21:22 2015 -0300
 
-    scripts/firefox-gen-l10n-recipes: Use HTTP to fetch the xpi files
-    
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+--Apple-Mail=_C0B11094-FCA2-4D9A-A1CF-61A1870C0348
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
-Regards,
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
 
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+iEYEARECAAYFAlZTREoACgkQuwUzVZGdMxS04gCfT36smW/M0X8gbi0n0Oc7Jej3
+whoAn1MiCB45hBUHiFmofFE176g2e0v5
+=G4Lv
+-----END PGP SIGNATURE-----
 
+--Apple-Mail=_C0B11094-FCA2-4D9A-A1CF-61A1870C0348--
