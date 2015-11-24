@@ -1,61 +1,27 @@
-Return-Path: <anders@chargestorm.se>
-Received: from mail-lf0-f48.google.com (mail-lf0-f48.google.com
-	[209.85.215.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 48DD2601D3
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 019B96018D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Nov 2015 06:06:22 +0000 (UTC)
-Received: by lfdl133 with SMTP id l133so7570801lfd.2
+	Tue, 24 Nov 2015 09:25:33 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAO9PXxt010981
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2015 22:06:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:organization:user-agent;
-	bh=yRDk4iKpdGFDTJhtTp2WjdrfSMd2t44C1bs8TrAKe+U=;
-	b=eRJQqqg3HR/+NvSgEe9V0i5FwMHde9UeUbli/S2eXDCPpGD5o9nBfNllgJxby/m6ZT
-	W6A54rztWfMQNCXyg0/6eWX9og7z5x1UtRbqsVkjAeCndntpHnUfqEN5C7+AXWV/yIvp
-	o+abKIn8egFvYFWsxJ5ucEUOVCI0E2/yVUAbNDD6uqXj16SQvwZH57+BQ/AbtNolgpfu
-	4GNSwq6k3yGUl5slmqBnyV9Liaw+TLXFIYz+237RH5tM4yvHso3e2cVupbWn3yR1lJfS
-	XkXj/pjvib8INfRRT3qC4IT+Oo3m31TwW6LfykRVAt6pNaM1iYoVxYHxzErCwcLld6jF
-	x98Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
-	:references:mime-version:content-type:content-disposition
-	:in-reply-to:organization:user-agent;
-	bh=yRDk4iKpdGFDTJhtTp2WjdrfSMd2t44C1bs8TrAKe+U=;
-	b=FQmp4gvTMSE8dfzhgEn5zXq1pWsL10HpFaIdRSd4VVFL3BBRG1MVjX23hpo8JWHXnX
-	zsqoO1XCkn0jH3bL009/WTW8+GfFZmNi1QjSdDnPau+y2YhQ6b2nEdH73M+oR450T8+f
-	BGmTw3+Zu4hEKFsG74fEalLnhKkisg8T7rPETjVZG4xT++pY26EJ7XsxInHMlOoxZhY+
-	9mfHqJjVrCZTAALM7CpTtKoM0B1X8YR99WPqIfhtD34uuJmH6nF0gbvQ2tBDmi11qmSo
-	OUtPVV93QbcQyrizA3TP4EBE585x6JhVxvEVg3F8roTaY81XG1IWL5l0y0hl1HhTOZJ2
-	F3eA==
-X-Gm-Message-State: ALoCoQlCJUmk1Am5HNfgFdjD+Y3B85QPqDhYxJwOrz7a27OiSF+BB1Vr8GyDNjFHkKAKKMZ5zUUv
-X-Received: by 10.112.72.201 with SMTP id f9mr12163688lbv.62.1448345182867;
-	Mon, 23 Nov 2015 22:06:22 -0800 (PST)
-Received: from ad.chargestorm.se (h83-209-191-235.dynamic.se.alltele.net.
-	[83.209.191.235])
-	by smtp.gmail.com with ESMTPSA id ak1sm2307882lbc.2.2015.11.23.22.06.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 23 Nov 2015 22:06:22 -0800 (PST)
-Date: Tue, 24 Nov 2015 07:06:20 +0100
-From: Anders Darander <anders@chargestorm.se>
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org, yocto@yoctoproject.org
-Message-ID: <20151124060620.GA10937@ad.chargestorm.se>
-Mail-Followup-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org, yocto@yoctoproject.org
-References: <56538808.5050606@linux.intel.com>
+	Tue, 24 Nov 2015 01:25:34 -0800 (PST)
+Received: from localhost (128.224.162.175) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Tue, 24 Nov 2015 01:25:33 -0800
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 24 Nov 2015 17:25:24 +0800
+Message-ID: <101abb28ad2f36bb9220b4726d7bc3a8579ad0af.1448356894.git.yi.zhao@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <cover.1448356894.git.yi.zhao@windriver.com>
+References: <cover.1448356894.git.yi.zhao@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <56538808.5050606@linux.intel.com>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [OE-core] RFC: Reference updater filesystem
+X-Originating-IP: [128.224.162.175]
+Subject: [meta-oe][PATCH 1/3] pam-passwdqc: fix the hardcoded libdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,72 +34,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Nov 2015 06:06:23 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 24 Nov 2015 09:25:35 -0000
+Content-Type: text/plain
 
-* Mariano Lopez <mariano.lopez@linux.intel.com> [151123 22:41]:
+Fix QA issue when enable multilib:
+WARNING: QA Issue: pam-passwdqc-dbg: found library in wrong location:
+/lib/security/.debug/pam_passwdqc.so
+pam-passwdqc: found library in wrong location:
+/lib/security/pam_passwdqc.so [libdir]
 
-> There has been interest in an image based software updater in Yocto Project.
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../pam-passwdqc/pam-passwdqc_1.0.5.bb             |    7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-Ok. Sure, it might be nice with something that can be shared, instead
-off everyone's building our own solutions.
-
-> The proposed solution for a image based updater is to use Stefano Babic's
-> software updater (http://sbabic.github.io/swupdate). This software do a
-> binary copy, so it is needed to have at least two partitions, these
-> partitions would be the rootfs and the maintenance partition. The rootfs
-> it's the main partition used to boot during the normal device operation, on
-> the other hand, the maintenance will be used to update the main partition.
-
-I haven't checked the swupdate tool, though I'd suspect that it also
-supports the alternating rootfs use case? (I.e. run system1 update
-system2; reboot to system2. Next update is system1). This is a rather
-common setup, not least when you need a remote upgrade facility.
-
-Would your proposed inclusion to the Yocto Project support that case
-too?
-
-> To update the system, the user has to connect to device and boot in the
-> maintenance partition; once in the maintenance partition the software
-> updater will copy the new image in the rootfs partition. A final reboot into
-> the rootfs it is necessary to complete the upgrade.
-
-Like said above, not all system can be reached manually (at least not in
-cost efficient way). Sure, the mainenance partition scheme can be made
-to work anyway...
-
-> As mentioned before the the software will copy an image to the partition, so
-> everything in that partition will be wiped out, including custom
-> configurations. To avoid the loss of configuration I explore three different
-> solutions:
-> 1. Use a separate partition for the configuration.
->   a. The pro of this method is the partition is not touched during the
-> update.
->   b. The con of this method is the configuration is not directly in rootfs
-> (example: /etc).
-
-I'd vote for that as well. Though, I only keep the re-writable
-configurations here. The one that are constant between all systems are
-shipped in /etc in the read-only-rootfs.
-
-> With the above information I'm proposing to use a separate partition for the
-> configuration; this is because is more reliable and doesn't require big
-> changes in the current architecture.
-
-> So, the idea is to have 4 partitions in the media:
-> 1. boot. This is the usual boot partition
-> 2. data. This will hold the configuration files. Not modified by updates.
-> 3. maintenance. This partition will be used to update rootfs.
-> 4. rootfs. Partition used for normal operation.
-
-How flexible to you intend to make this system? Allow everything that
-swupdate supports? Or a specific subset?
-
-Cheers,
-Anders
-
+diff --git a/meta-oe/recipes-support/pam-passwdqc/pam-passwdqc_1.0.5.bb b/meta-oe/recipes-support/pam-passwdqc/pam-passwdqc_1.0.5.bb
+index 4add367..4e8b7d8 100644
+--- a/meta-oe/recipes-support/pam-passwdqc/pam-passwdqc_1.0.5.bb
++++ b/meta-oe/recipes-support/pam-passwdqc/pam-passwdqc_1.0.5.bb
+@@ -23,12 +23,13 @@ S = "${WORKDIR}/pam_passwdqc-${PV}"
+ 
+ DEPENDS = "libpam"
+ 
+-EXTRA_OEMAKE = "CFLAGS="${CFLAGS} -Wall -fPIC -DHAVE_SHADOW""
++EXTRA_OEMAKE = "CFLAGS="${CFLAGS} -Wall -fPIC -DHAVE_SHADOW" \
++                SECUREDIR=${base_libdir}/security"
+ 
+ do_install() {
+ 	oe_runmake install DESTDIR=${D}
+ }
+ 
+-FILES_${PN} += "/lib/security/pam_passwdqc.so"
+-FILES_${PN}-dbg += "/lib/security/.debug"
++FILES_${PN} += "${base_libdir}/security/pam_passwdqc.so"
++FILES_${PN}-dbg += "${base_libdir}/security/.debug"
+ 
 -- 
-Anders Darander, Senior System Architect
-ChargeStorm AB / eStorm AB
+1.7.9.5
+
 
