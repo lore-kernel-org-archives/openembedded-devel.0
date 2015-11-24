@@ -1,27 +1,37 @@
-Return-Path: <mariano.lopez@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 81D496011C;
-	Tue, 24 Nov 2015 17:19:48 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 24 Nov 2015 09:19:48 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,339,1444719600"; d="scan'208";a="828127184"
-Received: from jwbarz-mobl2.amr.corp.intel.com (HELO [10.254.191.22])
-	([10.254.191.22])
-	by orsmga001.jf.intel.com with ESMTP; 24 Nov 2015 09:19:46 -0800
-To: Randy Witt <rewitt@declaratino.com>
-References: <56538808.5050606@linux.intel.com>
-	<CAP5N7XH-wVfyyCeBK7gdYXtoDLQuXPKkXV=CRNowmbPUGvxb8Q@mail.gmail.com>
-From: "Lopez, Mariano" <mariano.lopez@linux.intel.com>
-Message-ID: <56549C31.8010604@linux.intel.com>
-Date: Tue, 24 Nov 2015 11:19:45 -0600
-User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lf0-f41.google.com (mail-lf0-f41.google.com
+	[209.85.215.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 1B39B6011C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Nov 2015 17:56:51 +0000 (UTC)
+Received: by lfaz4 with SMTP id z4so31148685lfa.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Nov 2015 09:56:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=sp1uigEuhyW+4/njhU8hFjsOXdNx12JIgD5iOvthSAg=;
+	b=pv0SsiUbMCMAQkDNTaD+Y5QtGGytjROKZ8ut/XlVCOgcEIvg7l9uREkGjWLA4S46Zc
+	RJo24Jy9DkFjNLLciUwn2Y8i+KVRMTmz6byDFuyc6lXJH/5j3w3p0c5ClmWKMrZnMxpl
+	3VRi/es0DzaorchvMza/G4XnKRiZx7AI4g5z0pb1JnWdWlRHz/FLWlOoSHRXqoo2gvlw
+	hsLy7rCG9djE81Lv4IQokRriwq5bFZ/uo50bnKeRTVd1cKoI1FuNbn0ejYZbb8VYxr2O
+	Fn11Z3PHuffAK0YsshXmouXVZytLRvdASPircNBzgYXGxZ6fQ4Sh+bDLEzidEByZUorK
+	dnEw==
 MIME-Version: 1.0
-In-Reply-To: <CAP5N7XH-wVfyyCeBK7gdYXtoDLQuXPKkXV=CRNowmbPUGvxb8Q@mail.gmail.com>
-Cc: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] RFC: Reference updater filesystem
+X-Received: by 10.25.146.79 with SMTP id u76mr14049590lfd.146.1448387811557;
+	Tue, 24 Nov 2015 09:56:51 -0800 (PST)
+Received: by 10.25.199.73 with HTTP; Tue, 24 Nov 2015 09:56:51 -0800 (PST)
+In-Reply-To: <1448367278-3115-2-git-send-email-mario@ossystems.com.br>
+References: <1448367278-3115-1-git-send-email-mario@ossystems.com.br>
+	<1448367278-3115-2-git-send-email-mario@ossystems.com.br>
+Date: Tue, 24 Nov 2015 09:56:51 -0800
+Message-ID: <CANx9H-At559xwpyM-qYch3qaUu2KK=4CDdAer8Byt1hkxeLk0A@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: Re: [PATCH] python-chardet: add recipe for version 2.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,94 +44,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Nov 2015 17:19:48 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Nov 2015 17:56:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 11/24/2015 1:32 AM, Randy Witt wrote:
->
->
-> On Mon, Nov 23, 2015 at 1:41 PM, Mariano Lopez 
-> <mariano.lopez@linux.intel.com <mailto:mariano.lopez@linux.intel.com>> 
-> wrote:
->
->     There has been interest in an image based software updater in
->     Yocto Project. The proposed solution for a image based updater is
->     to use Stefano Babic's software updater
->     (http://sbabic.github.io/swupdate). This software do a binary
->     copy, so it is needed to have at least two partitions, these
->     partitions would be the rootfs and the maintenance partition. The
->     rootfs it's the main partition used to boot during the normal
->     device operation, on the other hand, the maintenance will be used
->     to update the main partition.
->
->     To update the system, the user has to connect to device and boot
->     in the maintenance partition; once in the maintenance partition
->     the software updater will copy the new image in the rootfs
->     partition. A final reboot into the rootfs it is necessary to
->     complete the upgrade.
->
->     As mentioned before the the software will copy an image to the
->     partition, so everything in that partition will be wiped out,
->     including custom configurations. To avoid the loss of
->     configuration I explore three different solutions:
->     1. Use a separate partition for the configuration.
->       a. The pro of this method is the partition is not touched during
->     the update.
->       b. The con of this method is the configuration is not directly
->     in rootfs (example: /etc).
->
-> Configuration files can be anywhere a package decides to install them. 
-> So having a single partition would be difficult. If you could, you 
-> would most likely be forced to have an initramfs to make sure /etc was 
-> mounted before init runs.
+This package has some unmet dependencies. Just a quick look at setup.py
+shows you will need python-re and  python-setuptools from oe-core.
 
-/etc was an example, the image should have the required files to make 
-the target boot and the get the application configuration from this 
-other partition. This is like openwrt does, it has a read-only rootfs 
-and small read-write partition where the user can write its 
-configuration and restore it at boot time.
+Regards,
 
->     2. Do the backup during the update.
->       a. The pro is the configuration is directly in rootfs.
->       b. The con is If the update fail most likely the configuration
->     would be lost.
->
-> Why would the configuration be lost if the update fails? Couldn't it 
-> just be stored on the thumbdrive?
+Tim
 
-If there is a power loss while the configuration is copied, the 
-partition could go corrupt and would be difficult to recover. And as you 
-mentioned  before the configuration files could be anywhere, so the 
-script must be customized to get all those files and once the update is 
-complete another script must restore those files, these could be 
-cumbersome instead of the application have the config in another partition.
+On Tue, Nov 24, 2015 at 4:14 AM, Mario Domenech Goulart <
+mario@ossystems.com.br> wrote:
 
->     3. Have an OverlayFS for the rootfs or the partition that have the
->     configuration.
->       a. The pro is the configuration is  "directly" in rootfs.
->       b. The con is there is need to provide a custom init to
->     guarantee the Overlay is mounted before the boot process.
+> Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+> ---
+>  meta-python/recipes-devtools/python/python-chardet_2.3.0.bb | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python-chardet_2.3.0.bb
 >
->     With the above information I'm proposing to use a separate
->     partition for the configuration; this is because is more reliable
->     and doesn't require big changes in the current architecture.
+> diff --git a/meta-python/recipes-devtools/python/python-chardet_2.3.0.bb
+> b/meta-python/recipes-devtools/python/python-chardet_2.3.0.bb
+> new file mode 100644
+> index 0000000..25326aa
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-chardet_2.3.0.bb
+> @@ -0,0 +1,8 @@
+> +SUMMARY = "Universal encoding detector for Python 2 and 3"
+> +LICENSE = "LGPLv2.1"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=a6f89e2100d9b6cdffcea4f398e37343"
+> +
+> +SRC_URI[md5sum] = "25274d664ccb5130adae08047416e1a8"
+> +SRC_URI[sha256sum] =
+> "e53e38b3a4afe6d1132de62b7400a4ac363452dc5dfcf8d88e8e0cce663c68aa"
+> +
+> +inherit pypi
+> --
+> 2.1.4
 >
->     So, the idea is to have 4 partitions in the media:
->     1. boot. This is the usual boot partition
->     2. data. This will hold the configuration files. Not modified by
->     updates.
->     3. maintenance. This partition will be used to update rootfs.
->     4. rootfs. Partition used for normal operation.
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
->     Mariano
->     -- 
->     _______________________________________________
->     Openembedded-core mailing list
->     Openembedded-core@lists.openembedded.org
->     <mailto:Openembedded-core@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
->
-
 
