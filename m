@@ -1,29 +1,24 @@
-Return-Path: <roman@khimov.ru>
-Received: from roman.khimov.ru (roman.khimov.ru [82.146.54.17])
-	by mail.openembedded.org (Postfix) with ESMTP id BBCE86011C;
-	Tue, 24 Nov 2015 18:47:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=khimov.ru;
-	s=mail; 
-	h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:Reply-To:To:From;
-	bh=WzrbswO7mWOAv1y+PXjfGWfED0iBUs7Y56M20Mgg2xw=; 
-	b=nyErRZq12g9SOe9Tx42ijchHIPBfctfYJtueTxBmQsdRC6XGaSP4mx7so3y4GS7qRLCKZIDTFcEJtt2qax7Nh6nlYaKUbhlbweBS9WOQwEgw1ZWY86tKrkeaU3pmFpYHHbT7P73MjoLRjcPjYEi1n7fIFrWbqXv2B5HBx6/d3sxdO1/s1MXe1bUdmgl6iVvVuyin0IMLolWmUYZQbjXiYcN30W1p2PlDQX42fjfFbtyArMqrgh7gC+7LW19udMLHEg9QaZKnT4sYK/OmPq1t5UapPAZdvpL9zhGnGaZ6oMzEWm7mVr5iY6XQF8/sQJr9938VObmNUYS1owry7E/6TQ==;
-Received: from [93.100.16.104] (helo=masala.hex)
-	by roman.khimov.ru with esmtpsa (TLS1.0:ECDHE_RSA_AES_256_CBC_SHA1:256)
-	(Exim 4.84) (envelope-from <roman@khimov.ru>)
-	id 1a1Id6-0002RY-U1; Tue, 24 Nov 2015 21:47:54 +0300
-From: Roman Khimov <roman@khimov.ru>
-To: Mark Hatle <mark.hatle@windriver.com>
-Reply-To: roman@khimov.ru
-Date: Tue, 24 Nov 2015 21:47:52 +0300
-Message-ID: <11874234.lUveKP5eiY@masala.hex>
-User-Agent: KMail/4.14.10 (Linux/4.1.12-1-default; KDE/4.14.10; x86_64; ; )
-In-Reply-To: <5654AC12.9060808@windriver.com>
-References: <56538808.5050606@linux.intel.com> <90526450.BhUWnDVvgQ@masala.hex>
-	<5654AC12.9060808@windriver.com>
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F8616B6F5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Nov 2015 21:50:49 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAOLokGn021487
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Nov 2015 13:50:47 -0800 (PST)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Tue, 24 Nov 2015 13:50:46 -0800
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <randy.macleod@windriver.com>
+Date: Tue, 24 Nov 2015 13:50:46 -0800
+Message-ID: <1448401846-28979-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] RFC: Reference updater filesystem
+Subject: [meta-perl][PATCH 1/1] recipes-perl: inherit allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,93 +31,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Nov 2015 18:47:57 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Tue, 24 Nov 2015 21:50:51 -0000
+Content-Type: text/plain
 
-=D0=92 =D0=BF=D0=B8=D1=81=D1=8C=D0=BC=D0=B5 =D0=BE=D1=82 24 =D0=BD=D0=BE=
-=D1=8F=D0=B1=D1=80=D1=8F 2015 12:27:30 =D0=BF=D0=BE=D0=BB=D1=8C=D0=B7=D0=
-=BE=D0=B2=D0=B0=D1=82=D0=B5=D0=BB=D1=8C Mark Hatle =D0=BD=D0=B0=D0=BF=D0=
-=B8=D1=81=D0=B0=D0=BB:
-> On 11/24/15 12:05 PM, Roman Khimov wrote:
-> > =D0=92 =D0=BF=D0=B8=D1=81=D1=8C=D0=BC=D0=B5 =D0=BE=D1=82 24 =D0=BD=D0=
-=BE=D1=8F=D0=B1=D1=80=D1=8F 2015 07:47:38 =D0=BF=D0=BE=D0=BB=D1=8C=D0=B7=
-=D0=BE=D0=B2=D0=B0=D1=82=D0=B5=D0=BB=D1=8C Mark Hatle =D0=BD=D0=B0=D0=BF=
-=D0=B8=D1=81=D0=B0=D0=BB:
-> >> On 11/24/15 4:39 AM, Roman Khimov wrote:
-> >>> =D0=92 =D0=BF=D0=B8=D1=81=D1=8C=D0=BC=D0=B5 =D0=BE=D1=82 23 =D0=BD=
-=D0=BE=D1=8F=D0=B1=D1=80=D1=8F 2015 15:41:28 =D0=BF=D0=BE=D0=BB=D1=8C=D0=
-=B7=D0=BE=D0=B2=D0=B0=D1=82=D0=B5=D0=BB=D1=8C Mariano Lopez =D0=BD=D0=B0=
-=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> >>>> 1. Use a separate partition for the configuration.
-> >>>>=20
-> >>>>    a. The pro of this method is the partition is not touched dur=
-ing the
-> >>>>=20
-> >>>> update.
-> >>>>=20
-> >>>>    b. The con of this method is the configuration is not directl=
-y in
-> >>>>=20
-> >>>> rootfs (example: /etc).
-> >>>=20
-> >>> That's the right solution, although to do it really right (at lea=
-st IMO)
-> >>> you need to implement the /usr merge [1] (and that's orthogonal t=
-o using
-> >>> or not using systemd), which can also help you make your /usr rea=
-d-only
-> >>> (because that's just code and static data) with read-write / for =
-user
-> >>> data of various sorts.
-> >>=20
-> >> Why does merging /usr have anything to do with this?  I've read th=
-e case
-> >> for merging /usr and / and still don't understand why it "helps". =
- The
-> >> key is that if you have separate partitions for /usr and /, then y=
-ou
-> >> need to update both of them in sequence.  Merging these two just s=
-eems
-> >> like a lazy solution to people not wanting to deal with early boot=
- being
-> >> self-contained.
-> >=20
-> > It helps in that you can achieve a clear separation of your softwar=
-e and
-> > users data (whatever that is, even if that's just some configuratio=
-n
-> > files) and only update your part (which is /usr).
->=20
-> This can easily be archived using different partitions like /opt as w=
-ell.
+allarch packages should inherit the class, not
+set PACKAGE_ARCH to "all".
 
-Usually it leads to more complicated partitioning and more complicated =
-startup=20
-(as well as update) procedure. Of course it can vary from system to sys=
-tem,=20
-but in my experience /usr merge was exactly the thing needed to clearly=
-=20
-separate and simplify things. One way or another you want to have your =
-code=20
-and users data to be separated, /usr merge makes it quite simple.
+Signed-off-by: Joe Slater <jslater@windriver.com>
+---
+ .../libauthen/libauthen-sasl-perl_2.16.bb          |    3 +--
+ .../libdigest/libdigest-hmac-perl_1.03.bb          |    3 +--
+ .../libio/libio-socket-ssl-perl_1.997.bb           |    4 +---
+ 3 files changed, 3 insertions(+), 7 deletions(-)
 
-> Bandwidth is a big deal in areas that are not serviced by anything bu=
-t very
-> GPRS or worse.  So 100 MB is even too big in some cases.  Cost is a f=
-actor
-> as is overall bandwidth.
->=20
-> Again, it depends on the product and what you are building if this ma=
-tters.
->=20
-> The point is we don't want to make some assumptions that preclude
-> alternative implementations.
+diff --git a/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb b/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
+index 361bdf1..637320d 100644
+--- a/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
++++ b/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
+@@ -19,12 +19,11 @@ SRC_URI[sha256sum] = "6614fa7518f094f853741b63c73f3627168c5d3aca89b1d02b1016dc32
+ 
+ S = "${WORKDIR}/Authen-SASL-${PV}"
+ 
+-inherit cpan ptest
++inherit cpan ptest allarch
+ 
+ do_install_ptest () {
+     cp -r ${B}/t ${D}${PTEST_PATH}
+ }
+ 
+-PACKAGE_ARCH = "all"
+ BBCLASSEXTEND = "native"
+ 
+diff --git a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
+index affc9f6..7859c8c 100644
+--- a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
++++ b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
+@@ -16,11 +16,10 @@ SRC_URI[sha256sum] = "3bc72c6d3ff144d73aefb90e9a78d33612d58cf1cd1631ecfb8985ba96
+ 
+ S = "${WORKDIR}/Digest-HMAC-${PV}"
+ 
+-inherit cpan ptest
++inherit cpan ptest allarch
+ 
+ do_install_ptest () {
+     cp -r ${B}/t ${D}${PTEST_PATH}
+ }
+ 
+-PACKAGE_ARCH = "all"
+ BBCLASSEXTEND = "native"
+diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb
+index 19dec83..3c49bb6 100644
+--- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb
++++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb
+@@ -22,9 +22,7 @@ SRC_URI[sha256sum] = "acdb67b5b63aea5b7e70c3e4c70a16128810329592b63753a38c794aff
+ 
+ S = "${WORKDIR}/IO-Socket-SSL-${PV}"
+ 
+-inherit cpan ptest
+-
+-PACKAGE_ARCH = "all"
++inherit cpan ptest allarch
+ 
+ do_install_append () {
+     mkdir -p ${D}${docdir}/${PN}/
+-- 
+1.7.9.5
 
-Sure.
-
---=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
