@@ -1,27 +1,25 @@
 Return-Path: <Yi.Zhao@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5583160DF6
+	by mail.openembedded.org (Postfix) with ESMTP id 767566018D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Nov 2015 09:26:44 +0000 (UTC)
+	Tue, 24 Nov 2015 09:27:39 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAO9Qi71011085
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tAO9Rdd7011194
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Nov 2015 01:26:45 -0800 (PST)
+	Tue, 24 Nov 2015 01:27:40 -0800 (PST)
 Received: from localhost (128.224.162.175) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
-	Tue, 24 Nov 2015 01:25:40 -0800
+	Tue, 24 Nov 2015 01:25:28 -0800
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 24 Nov 2015 17:25:26 +0800
-Message-ID: <49867acc73e0a1f93409245efa3f75a221315d82.1448356894.git.yi.zhao@windriver.com>
+Date: Tue, 24 Nov 2015 17:25:23 +0800
+Message-ID: <cover.1448356894.git.yi.zhao@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1448356894.git.yi.zhao@windriver.com>
-References: <cover.1448356894.git.yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.162.175]
-Subject: [meta-oe][PATCH 3/3] hplip: specify cupsbackenddir and cupsfilterdir
+Subject: [meta-oe][PATCH 0/3] 3 fixes for qa issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,49 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Nov 2015 09:26:44 -0000
+X-List-Received-Date: Tue, 24 Nov 2015 09:27:40 -0000
 Content-Type: text/plain
 
-Fix QA issue when enable multilib:
-ERROR: QA Issue: hplip: Files/directories were installed but not shipped in any package:
-  /usr/lib
-  /usr/lib/cups
-  /usr/lib/cups/filter
-  /usr/lib/cups/backend
-  /usr/lib/cups/filter/hpcac
-  /usr/lib/cups/filter/foomatic-rip-hplip
-  /usr/lib/cups/filter/pstotiff
-  /usr/lib/cups/filter/hpcups
-  /usr/lib/cups/filter/hplipjs
-  /usr/lib/cups/filter/hpps
-  /usr/lib/cups/filter/.debug
-  /usr/lib/cups/filter/.debug/hplipjs
-  /usr/lib/cups/filter/.debug/hpcups
-  /usr/lib/cups/filter/.debug/hpps
-  /usr/lib/cups/backend/hp
-  /usr/lib/cups/backend/.debug
-  /usr/lib/cups/backend/.debug/hp
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-hplip: 17 installed and not shipped files. [installed-vs-shipped]
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- meta-oe/recipes-extended/hplip/hplip_3.12.6.bb |    2 ++
- 1 file changed, 2 insertions(+)
+The following changes since commit ea319464b673cbf9a416b582dc4766faeb998430:
 
-diff --git a/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb b/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb
-index ac1dc7e..86628b1 100644
---- a/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb
-+++ b/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb
-@@ -35,6 +35,8 @@ EXTRA_OECONF += "\
-         --disable-foomatic-drv-install \
-         --enable-foomatic-ppd-install  \
-         --enable-foomatic-rip-hplip-install \
-+        --with-cupsbackenddir=${libdir}/cups/backend \
-+        --with-cupsfilterdir=${libdir}/cups/filter \
- "
- 
- PACKAGES += "${PN}-ppd ${PN}-cups ${PN}-backend ${PN}-filter ${PN}-hal"
+  vlc: add PACKAGECONFIG for samba, upnp, dvdnav, sftp, vorbis, dc1394, dv1394, svg, svgdec (2015-11-16 21:50:11 +0100)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib yzhao/3-fixes-qa-issues
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=yzhao/3-fixes-qa-issues
+
+Yi Zhao (3):
+  pam-passwdqc: fix the hardcoded libdir
+  tmux: add PACKAGECONFIG for utempter
+  hplip: specify cupsbackenddir and cupsfilterdir
+
+ meta-oe/recipes-extended/hplip/hplip_3.12.6.bb     |    2 ++
+ meta-oe/recipes-extended/tmux/tmux_2.1.bb          |    4 ++++
+ .../pam-passwdqc/pam-passwdqc_1.0.5.bb             |    7 ++++---
+ 3 files changed, 10 insertions(+), 3 deletions(-)
+
 -- 
 1.7.9.5
 
