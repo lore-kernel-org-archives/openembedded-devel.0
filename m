@@ -1,33 +1,61 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 849CF6011F
+Return-Path: <anders@chargestorm.se>
+Received: from mail-lf0-f46.google.com (mail-lf0-f46.google.com
+	[209.85.215.46])
+	by mail.openembedded.org (Postfix) with ESMTP id CC3EA601B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2015 08:04:01 +0000 (UTC)
-Received: by wmec201 with SMTP id c201so243659599wme.0
+	Wed, 25 Nov 2015 08:11:54 +0000 (UTC)
+Received: by lfdl133 with SMTP id l133so50666600lfd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2015 00:04:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=8QOAFcdwD2G2azxig+hj25Bh98VU26reuAVcIX9xh/s=;
-	b=hKyMRp8xUJzlYw5AROng/f+o2ycIULcBiIzgq+3JFoPX2cz4wzEyMEGwjiqnktoUJf
-	H5+JpxsI7/3W9Xj8UqZuipJV1qA0vbU9SD4GcRF80bS6Ex1wNyzt8ykau7VlH5c/avOz
-	/B4Vd+sK3R8E4c26ak6vKnK5Adr5U5veY+s8/21CUjooYF0yNn6adpVhOauE+tYw+jNS
-	R449aEdK4JgHflE57PhjAlPGlIs/B5ge2gCfSaGPPyMvwRyjNz4jfUm2HskkI8YhQlPQ
-	0OV/5y17rbb9v7jeTEWFCBzTWQnodcfYRyBx9+mBwCH82iPCa0R9yEr6dEaLjTMM62aJ
-	Lgqg==
+	Wed, 25 Nov 2015 00:11:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:organization:user-agent;
+	bh=Le/ZNmJgLp1P/AjJ1SjYwEBCdBy6RbV6KCVI/z3fPH8=;
+	b=Bbro1saPftI8rjWFSlxbOrs3bnWeJisorHtl2PfKjLRJ6OANWxbSAzTDTSofqVD94C
+	jqy6VuUBZohSebEjPov+GMDuwObVj7FPRtPUWNZNU//H07sRzIH8t05kQvqpcR24V3CE
+	MIS+xLJHKxM0atWHrlfVzNlFkwptne3rAoUPPA79amkFhXASCbDcXr42mRI/UweJ5XYZ
+	+QrTII4LJ+hPIK+yzk0f81Q1ZL43w5dAHgZ6lgW4ahbvnkxM+joDISQ3enqZ2he92BWp
+	8blXpet92OXoHTADC7DzIUfVw5Oj8iM75Jf8gSmvZE0yc9s8RkLRSju3N3awR0m7UdPe
+	mmtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
+	:references:mime-version:content-type:content-disposition
+	:in-reply-to:organization:user-agent;
+	bh=Le/ZNmJgLp1P/AjJ1SjYwEBCdBy6RbV6KCVI/z3fPH8=;
+	b=VN4Y1hh1G/PMW8Odop4T/jmYf+JvlvUhy6ilaurcqUcRM3kMTnZUt4cAXEEWjEfE8X
+	Jfu1nNrjwkjS9BOsorqSPjUSCd9F3jkuOtyBXjccw9XqkQJX0lLASHeGxoIFVw/d93dI
+	t1PAgwB/1K6heuB83b7fxj+wFPiRDSsOoOU3Nc29tqBTyIELDalWOpSP8N83RUNMHvjL
+	c3dR/Vzp8J7foimK7UDWqSuCawAw0mvv8dXXiU3lwT0HPwx7MFJZsvJPV8F6k8uHVygr
+	YMx/5Js+Fi0vxErBj+lzQ3nIE3AfrK7LNXmRhJJA92ptmcH1DwrLiIQspOgz3gFPnrvE
+	lSUg==
+X-Gm-Message-State: ALoCoQmWb9aOgPz3U6eXAjE9Bxo9EiYw3m3IGe+QRrpAejBoH+qUHUjpofqwQRotomujCVLRGwV0
+X-Received: by 10.112.171.35 with SMTP id ar3mr14925690lbc.90.1448439113626;
+	Wed, 25 Nov 2015 00:11:53 -0800 (PST)
+Received: from ad.chargestorm.se (213-64-219-84-no126.business.telia.com.
+	[213.64.219.84]) by smtp.gmail.com with ESMTPSA id
+	tp5sm3081679lbb.27.2015.11.25.00.11.52
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 25 Nov 2015 00:11:52 -0800 (PST)
+Date: Wed, 25 Nov 2015 09:11:51 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151125081151.GB10430@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1448298827-9195-1-git-send-email-mark.asselstine@windriver.com>
+	<CANx9H-CvQgaxGKO11JOT=cZJiSLh7_1tz-Dh-xS=TOO9FvZBfQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.194.184.104 with SMTP id et8mr37874072wjc.87.1448438641483; 
-	Wed, 25 Nov 2015 00:04:01 -0800 (PST)
-Received: by 10.194.2.15 with HTTP; Wed, 25 Nov 2015 00:04:01 -0800 (PST)
-In-Reply-To: <1448401846-28979-1-git-send-email-jslater@windriver.com>
-References: <1448401846-28979-1-git-send-email-jslater@windriver.com>
-Date: Wed, 25 Nov 2015 09:04:01 +0100
-Message-ID: <CA+chaQc9TvK1brL-y0sFNzaPUh3X_p99P6mS4yDsT+55CL-nhQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-perl][PATCH 1/1] recipes-perl: inherit allarch
+In-Reply-To: <CANx9H-CvQgaxGKO11JOT=cZJiSLh7_1tz-Dh-xS=TOO9FvZBfQ@mail.gmail.com>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-python][PATCH] python-cryptography, python-cryptography-vectors: uprev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,87 +68,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2015 08:04:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 25 Nov 2015 08:11:55 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-NAK
-http://patchwork.openembedded.org/patch/107453/
+* Tim Orling <ticotimo@gmail.com> [151124 19:00]:
 
-On Tue, Nov 24, 2015 at 10:50 PM, Joe Slater <jslater@windriver.com> wrote:
+> We have never carried a license in meta-python, rather we use the
+> common-licenses from oe-core (
+> http://git.openembedded.org/openembedded-core/tree/meta/files/common-licenses
+> ).
 
-> allarch packages should inherit the class, not
-> set PACKAGE_ARCH to "all".
->
-> Signed-off-by: Joe Slater <jslater@windriver.com>
-> ---
->  .../libauthen/libauthen-sasl-perl_2.16.bb          |    3 +--
->  .../libdigest/libdigest-hmac-perl_1.03.bb          |    3 +--
->  .../libio/libio-socket-ssl-perl_1.997.bb           |    4 +---
->  3 files changed, 3 insertions(+), 7 deletions(-)
->
-> diff --git a/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
-> b/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
-> index 361bdf1..637320d 100644
-> --- a/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
-> +++ b/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
-> @@ -19,12 +19,11 @@ SRC_URI[sha256sum] =
-> "6614fa7518f094f853741b63c73f3627168c5d3aca89b1d02b1016dc32
->
->  S = "${WORKDIR}/Authen-SASL-${PV}"
->
-> -inherit cpan ptest
-> +inherit cpan ptest allarch
->
->  do_install_ptest () {
->      cp -r ${B}/t ${D}${PTEST_PATH}
->  }
->
-> -PACKAGE_ARCH = "all"
->  BBCLASSEXTEND = "native"
->
-> diff --git a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
-> b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
-> index affc9f6..7859c8c 100644
-> --- a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
-> +++ b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
-> @@ -16,11 +16,10 @@ SRC_URI[sha256sum] =
-> "3bc72c6d3ff144d73aefb90e9a78d33612d58cf1cd1631ecfb8985ba96
->
->  S = "${WORKDIR}/Digest-HMAC-${PV}"
->
-> -inherit cpan ptest
-> +inherit cpan ptest allarch
->
->  do_install_ptest () {
->      cp -r ${B}/t ${D}${PTEST_PATH}
->  }
->
-> -PACKAGE_ARCH = "all"
->  BBCLASSEXTEND = "native"
-> diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb
-> b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb
-> index 19dec83..3c49bb6 100644
-> --- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb
-> +++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb
-> @@ -22,9 +22,7 @@ SRC_URI[sha256sum] =
-> "acdb67b5b63aea5b7e70c3e4c70a16128810329592b63753a38c794aff
->
->  S = "${WORKDIR}/IO-Socket-SSL-${PV}"
->
-> -inherit cpan ptest
-> -
-> -PACKAGE_ARCH = "all"
-> +inherit cpan ptest allarch
->
->  do_install_append () {
->      mkdir -p ${D}${docdir}/${PN}/
-> --
-> 1.7.9.5
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Does the Unicode license exist under another name in oe-core? Otherwise,
+I'd assume that Mark did the right thing to add it here.
+
+Cheers,
+Anders
+
+> Regards,
+
+> --Tim
+
+> On Mon, Nov 23, 2015 at 9:13 AM, Mark Asselstine <
+> mark.asselstine@windriver.com> wrote:
+
+-- 
+Anders Darander, Senior System Architect
+ChargeStorm AB / eStorm AB
 
