@@ -1,61 +1,24 @@
-Return-Path: <anders@chargestorm.se>
-Received: from mail-lf0-f46.google.com (mail-lf0-f46.google.com
-	[209.85.215.46])
-	by mail.openembedded.org (Postfix) with ESMTP id CC3EA601B8
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 623A56011F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2015 08:11:54 +0000 (UTC)
-Received: by lfdl133 with SMTP id l133so50666600lfd.2
+	Wed, 25 Nov 2015 08:28:00 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAP8S01K025009
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2015 00:11:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:organization:user-agent;
-	bh=Le/ZNmJgLp1P/AjJ1SjYwEBCdBy6RbV6KCVI/z3fPH8=;
-	b=Bbro1saPftI8rjWFSlxbOrs3bnWeJisorHtl2PfKjLRJ6OANWxbSAzTDTSofqVD94C
-	jqy6VuUBZohSebEjPov+GMDuwObVj7FPRtPUWNZNU//H07sRzIH8t05kQvqpcR24V3CE
-	MIS+xLJHKxM0atWHrlfVzNlFkwptne3rAoUPPA79amkFhXASCbDcXr42mRI/UweJ5XYZ
-	+QrTII4LJ+hPIK+yzk0f81Q1ZL43w5dAHgZ6lgW4ahbvnkxM+joDISQ3enqZ2he92BWp
-	8blXpet92OXoHTADC7DzIUfVw5Oj8iM75Jf8gSmvZE0yc9s8RkLRSju3N3awR0m7UdPe
-	mmtg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
-	:references:mime-version:content-type:content-disposition
-	:in-reply-to:organization:user-agent;
-	bh=Le/ZNmJgLp1P/AjJ1SjYwEBCdBy6RbV6KCVI/z3fPH8=;
-	b=VN4Y1hh1G/PMW8Odop4T/jmYf+JvlvUhy6ilaurcqUcRM3kMTnZUt4cAXEEWjEfE8X
-	Jfu1nNrjwkjS9BOsorqSPjUSCd9F3jkuOtyBXjccw9XqkQJX0lLASHeGxoIFVw/d93dI
-	t1PAgwB/1K6heuB83b7fxj+wFPiRDSsOoOU3Nc29tqBTyIELDalWOpSP8N83RUNMHvjL
-	c3dR/Vzp8J7foimK7UDWqSuCawAw0mvv8dXXiU3lwT0HPwx7MFJZsvJPV8F6k8uHVygr
-	YMx/5Js+Fi0vxErBj+lzQ3nIE3AfrK7LNXmRhJJA92ptmcH1DwrLiIQspOgz3gFPnrvE
-	lSUg==
-X-Gm-Message-State: ALoCoQmWb9aOgPz3U6eXAjE9Bxo9EiYw3m3IGe+QRrpAejBoH+qUHUjpofqwQRotomujCVLRGwV0
-X-Received: by 10.112.171.35 with SMTP id ar3mr14925690lbc.90.1448439113626;
-	Wed, 25 Nov 2015 00:11:53 -0800 (PST)
-Received: from ad.chargestorm.se (213-64-219-84-no126.business.telia.com.
-	[213.64.219.84]) by smtp.gmail.com with ESMTPSA id
-	tp5sm3081679lbb.27.2015.11.25.00.11.52
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 25 Nov 2015 00:11:52 -0800 (PST)
-Date: Wed, 25 Nov 2015 09:11:51 +0100
-From: Anders Darander <anders@chargestorm.se>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151125081151.GB10430@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1448298827-9195-1-git-send-email-mark.asselstine@windriver.com>
-	<CANx9H-CvQgaxGKO11JOT=cZJiSLh7_1tz-Dh-xS=TOO9FvZBfQ@mail.gmail.com>
+	Wed, 25 Nov 2015 00:28:00 -0800 (PST)
+Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 25 Nov 2015 00:27:59 -0800
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 25 Nov 2015 16:27:58 +0800
+Message-ID: <1448440079-4533-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <CANx9H-CvQgaxGKO11JOT=cZJiSLh7_1tz-Dh-xS=TOO9FvZBfQ@mail.gmail.com>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-python][PATCH] python-cryptography, python-cryptography-vectors: uprev
+Subject: [PATCH 1/2] iscsitarget: split the kernel module into separate package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,31 +31,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2015 08:11:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 Nov 2015 08:28:03 -0000
+Content-Type: text/plain
 
-* Tim Orling <ticotimo@gmail.com> [151124 19:00]:
+From: Jackie Huang <jackie.huang@windriver.com>
 
-> We have never carried a license in meta-python, rather we use the
-> common-licenses from oe-core (
-> http://git.openembedded.org/openembedded-core/tree/meta/files/common-licenses
-> ).
+inherit module instead of module-base, so the module is
+split into kernel-module-iscsi-trgt and make PN rdepends
+on it.
 
-Does the Unicode license exist under another name in oe-core? Otherwise,
-I'd assume that Mark did the right thing to add it here.
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../iscsitarget/iscsitarget_1.4.20.3+svn502.bb                 | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
 
-Cheers,
-Anders
-
-> Regards,
-
-> --Tim
-
-> On Mon, Nov 23, 2015 at 9:13 AM, Mark Asselstine <
-> mark.asselstine@windriver.com> wrote:
-
+diff --git a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
+index c96810b..9d49759 100644
+--- a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
++++ b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
+@@ -15,10 +15,7 @@ SRC_URI = "http://ftp.heanet.ie/mirrors/ubuntu/pool/universe/i/${BPN}/${BPN}_${P
+ SRC_URI[md5sum] = "ef9bc823bbabd3c772208c00d5f2d089"
+ SRC_URI[sha256sum] = "d3196ccb78a43266dce28587bfe30d8ab4db7566d7bce96057dfbb84100babb5"
+ 
+-inherit module-base
+-
+-# Add make_scripts task to create kernel scripts
+-addtask make_scripts after do_patch before do_compile
++inherit module
+ 
+ do_configure[noexec] = "1"
+ 
+@@ -26,9 +23,6 @@ do_configure[noexec] = "1"
+ # kernel scripts
+ do_make_scripts[depends] += "virtual/kernel:do_shared_workdir"
+ 
+-# Make sure we don't have race condition against "make scripts"
+-do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
+-
+ do_compile() {
+     oe_runmake KSRC=${STAGING_KERNEL_DIR} CFLAGS='${CFLAGS}' LDFLAGS='' \
+     CC="${CC}" V=1
+@@ -56,7 +50,7 @@ do_install() {
+ }
+ 
+ FILES_${PN} += "${sbindir} \
+-                /lib \
+                 ${sysconfdir}"
+ 
++RDEPENDS_${PN} = "kernel-module-iscsi-trgt"
+ RRECOMMENDS_${PN} = "kernel-module-crc32c kernel-module-libcrc32c"
 -- 
-Anders Darander, Senior System Architect
-ChargeStorm AB / eStorm AB
+2.3.5
+
 
