@@ -1,23 +1,24 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id F265D6012A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Nov 2015 10:36:53 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAQAasNq006547
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 26 Nov 2015 02:36:54 -0800 (PST)
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.159) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 26 Nov 2015 02:36:53 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 26 Nov 2015 18:36:46 +0800
-Message-ID: <1448534206-31940-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 513826011F;
+	Thu, 26 Nov 2015 21:00:41 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga101.jf.intel.com with ESMTP; 26 Nov 2015 13:00:43 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,348,1444719600"; d="scan'208";a="607686697"
+Received: from rsiu-mobl.gar.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.255.135.187])
+	by FMSMGA003.fm.intel.com with ESMTP; 26 Nov 2015 13:00:40 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Date: Fri, 27 Nov 2015 10:00:36 +1300
+Message-ID: <1633798.xAxFJSpIzb@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.9 (Linux/4.1.13-100.fc21.x86_64; KDE/4.14.11; x86_64; ;
+	)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] postfix.inc: fix start postfix failed while hostname is numeric
+Subject: Patchwork & patch handling improvements
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,40 +31,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Nov 2015 10:36:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 26 Nov 2015 21:00:42 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-While hostname is numeric, start postfix failed
-...
-root@localhost:~# hostname
-128.224.163.251
-root@localhost:~# postfix start
-postfix: warning: valid_hostname: numeric hostname: 128.224.163.251
-postfix: fatal: unable to use my own hostname
-...
+Hi all,
 
-The postfix define a macro SLOPPY_VALID_HOSTNAME to allow the
-numeric hostname.
+Over the past several years one of the regular complaints people have made 
+about our project has been that patches sometimes take a long time to make it 
+into master, and it's not always clear what the state of a patch is during 
+that time. On the other side of things, maintainers are finding it increasingly 
+hard to keep up with testing and integrating incoming patches. Additionally, 
+trivial mistakes sometimes creep in that would be fairly easy to catch with an 
+automated process. We've been talking about this for a while and now I'd like 
+to propose a plan to finally address this:
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-networking/recipes-daemons/postfix/postfix.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+1) Upgrade the OE Patchwork instance [0] to a newer release; this should fix 
+some of the problems we are having [1] plus give us additional features. I 
+propose using the fork that freedesktop.org are using [2] [3] which is moving 
+a bit faster than upstream Patchwork; whilst the changes there may eventually 
+make it upstream (and work is ongoing there) we have a much greater ability to 
+influence the fork given that it's being worked on by one of my colleagues who 
+is pushing it in the direction we need it to go e.g. proper support for series 
+as opposed to treating every patch individually, improved UI, etc.
 
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index 6d39570..f8b8e43 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -67,7 +67,7 @@ export CCARGS-sasl_class-native = ""
- export AUXLIBS-sasl_class-native = ""
- 
- # PCRE, TLS support default
--export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS ${CCARGS-ldap} ${CCARGS-sasl}"
-+export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS -DSLOPPY_VALID_HOSTNAME ${CCARGS-ldap} ${CCARGS-sasl}"
- export AUXLIBS = "-lpcre -lssl -lcrypto ${AUXLIBS-sasl} ${AUXLIBS-ldap}"
- export POSTCONF = "${STAGING_DIR_NATIVE}${sbindir_native}/postconf"
- 
+2) Trigger automatic testing of submitted patches from Patchwork. We'd have a 
+script look at the contents of a patch and first check that the expected style 
+has been adhered to; second it would do some quick tests to verify that the 
+patch hasn't caused any immediately obvious regressions. I've filed some bugs 
+to cover this in more detail [4].
+
+3) Provide a means to easily schedule an overnight build on the autobuilder 
+for the set of patches that have passed the initial testing, as well as 
+present the results in a form that's easier to review for maintainers. For OE-
+Core this would be tied into the Yocto Project autobuilder, but I expect the 
+tools could be made flexible.
+
+At all stages through this process the patch status in patchwork will be kept 
+up-to-date so it's clear to everyone what's happening. I'm also thinking we 
+could do email notifications to the submitter (opt-in) though that would be a 
+later add-on.
+
+Whilst the initial plan covers only OE-Core, once we get them working the 
+tools and scripts used should be just as applicable to other layers. I'm also 
+trying to ensure that the patch validation is generic enough so it can live in 
+OE-Core, and thus we can easily update and refine it over time in line with the 
+code itself as well as encourage submitters to use the script on their own 
+changes before sending.
+
+Please let me know your thoughts on the above, most importantly on the 
+patchwork upgrade, since most of this hinges on that; I don't believe we can 
+practically base it on the version of Patchwork we are using now. 
+
+[Note that this email is cross-posted - it may be best to reply on OE-Core 
+only to save people's inboxes.]
+
+Thanks,
+Paul
+
+[0] http://patchwork.openembedded.org/
+[1] https://bugzilla.yoctoproject.org/show_bug.cgi?id=7657#c21
+[2] http://patchwork.freedesktop.org/ 
+[3] https://github.com/dlespiau/patchwork
+[4] https://bugzilla.yoctoproject.org/show_bug.cgi?id=8648
+
 -- 
-1.9.1
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
