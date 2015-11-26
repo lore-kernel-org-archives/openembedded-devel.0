@@ -1,37 +1,24 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CE036057B
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A44D6057B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2015 20:09:22 +0000 (UTC)
-Received: by wmww144 with SMTP id w144so194430834wmw.1
+	Thu, 26 Nov 2015 04:39:28 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tAQ4dSEe004979
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2015 12:09:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=VqqStreojSgZGCBL392yQdpJFeKlgbawBA3jSXgXTbY=;
-	b=aa2GqDBrPLyQ+iXzft5oMG25ndz8L2K+3+KujWRbfSr1mDjRXD6DerU/P0G5ZpjVC/
-	kt9RHJeQ9A+wy/cleepbqScgb6SdUe+YeWcfn5MGe5QwOvOnsfSm5re9t8UdI/hpaEOz
-	bTVJ5hDe/ZKqa300KQWTqqTcZlKU61kvFbs7lY/VNtOUcRkKO0603optNkonwwg0h1Hc
-	yP+AxmzeuxRI0Xs5d5ENScegoAbAG/lUgpSD8l38ETHcEp9EoMdCvEmWjOa7Srui8y5E
-	q8Fjjyb4Z+AXwWw8EFlRR7f0tVg5P9+el/v+SYucclZxUZD41RbeSfap6tXjem2tICYk
-	r0nw==
-X-Received: by 10.28.57.215 with SMTP id g206mr6884602wma.82.1448482161815;
-	Wed, 25 Nov 2015 12:09:21 -0800 (PST)
-Received: from localhost.localdomain (p4FDF097E.dip0.t-ipconnect.de.
-	[79.223.9.126]) by smtp.googlemail.com with ESMTPSA id
-	cl5sm24647164wjc.29.2015.11.25.12.09.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 25 Nov 2015 12:09:21 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Nov 2015 21:09:07 +0100
-Message-Id: <1448482147-28052-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.1.0
+	Wed, 25 Nov 2015 20:39:29 -0800 (PST)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 25 Nov 2015 20:39:28 -0800
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 26 Nov 2015 12:28:28 +0800
+Message-ID: <1448512108-16659-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] faenza-icon-theme: fix host-user-contamination
+Subject: [PATCH][meta-networking] ufw: improve RRECOMMENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,28 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2015 20:09:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 26 Nov 2015 04:39:30 -0000
+Content-Type: text/plain
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+From: Roy Li <rongqing.li@windriver.com>
+
+ufw needs lots of netfilter module to run
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-networking/recipes-connectivity/ufw/ufw_0.33.bb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb b/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
-index dbaae64..a39b1a0 100644
---- a/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
-+++ b/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
-@@ -20,6 +20,7 @@ do_install() {
-     tar -xf emesene-faenza-theme.tar.gz -C ${D}${datadir}
-     mv -f ${D}${datadir}/emesene/themes ${D}${datadir}/themes
-     rm -rf ${D}${datadir}/emesene
-+    chown -R root:root ${D}${datadir}
- }
+diff --git a/meta-networking/recipes-connectivity/ufw/ufw_0.33.bb b/meta-networking/recipes-connectivity/ufw/ufw_0.33.bb
+index 66e917e..19cfe46 100644
+--- a/meta-networking/recipes-connectivity/ufw/ufw_0.33.bb
++++ b/meta-networking/recipes-connectivity/ufw/ufw_0.33.bb
+@@ -30,6 +30,14 @@ RDEPENDS_${PN} = " \
  
- FILES_${PN} += "${datadir}/icons ${datadir}/themes"
+ RRECOMMENDS_${PN} = " \
+                      kernel-module-ipv6 \
++                     kernel-module-nf-conntrack-ipv6 \
++                     kernel-module-nf-log-common \
++                     kernel-module-nf-log-ipv4 \
++                     kernel-module-nf-log-ipv6 \
++                     kernel-module-nf-addrtype \
++                     kernel-module-nf-limit \
++                     kernel-module-nf-log \
++                     kernel-module-nf-recent \
+ "
+ 
+ # Certain items are explicitly put under /lib, not base_libdir when installed.
 -- 
-2.1.0
+1.9.1
 
 
