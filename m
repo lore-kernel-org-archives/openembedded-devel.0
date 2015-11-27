@@ -1,24 +1,35 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 513826011F;
-	Thu, 26 Nov 2015 21:00:41 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga101.jf.intel.com with ESMTP; 26 Nov 2015 13:00:43 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,348,1444719600"; d="scan'208";a="607686697"
-Received: from rsiu-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.255.135.187])
-	by FMSMGA003.fm.intel.com with ESMTP; 26 Nov 2015 13:00:40 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Nov 2015 10:00:36 +1300
-Message-ID: <1633798.xAxFJSpIzb@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.9 (Linux/4.1.13-100.fc21.x86_64; KDE/4.14.11; x86_64; ;
-	)
-MIME-Version: 1.0
-Subject: Patchwork & patch handling improvements
+Return-Path: <akuster808@gmail.com>
+Received: from mail-ob0-f175.google.com (mail-ob0-f175.google.com
+	[209.85.214.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E92560620
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Nov 2015 06:03:34 +0000 (UTC)
+Received: by obbnk6 with SMTP id nk6so75662761obb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Nov 2015 22:03:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=ZZOZ1lzAHfBk3dp8iGu+oCS30t5Xl5ijsPEHkXAmtoU=;
+	b=C5GzhBqJneSaa987bD16ec1o1S2Z/WFYjeEP6CiBpFaif+kt/9YLgGEV9cpg4dGOrf
+	D0nj28rhLqB3zM1tIMPhsxp6AusMPT80gbgheCOCWtAFzajYn4j1TN8l2RlqVhRRGkEo
+	Xu1jJunSEsEQWy1aUv3orzUqoP+ugE2lO12r73MrWJz7hV137dcMgUXgdyIJT+wUKvjK
+	6Iriyc/uL6uQK8+5LRZz8Pz9EqMuaDX72Zm4yvfAIevx58GvovJAWyWq0wBb6/5053+E
+	Q2MeXIbkT9NTCelv1j3KI3bfSB0d12bZU+CgNHUp9cSFsYIcHNUqYkUDjt8b3TOn5wkO
+	nc+w==
+X-Received: by 10.60.232.42 with SMTP id tl10mr33238576oec.29.1448604215504;
+	Thu, 26 Nov 2015 22:03:35 -0800 (PST)
+Received: from localhost.localdomain (75-163-220-91.clsp.qwest.net.
+	[75.163.220.91])
+	by smtp.gmail.com with ESMTPSA id p3sm14561348oei.9.2015.11.26.22.03.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 26 Nov 2015 22:03:33 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	joe_macdonald@mentor.com
+Date: Thu, 26 Nov 2015 22:03:29 -0800
+Message-Id: <1448604209-8638-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-networking][PATCH v2] wireshark: update to version 2.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,72 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Nov 2015 21:00:42 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 27 Nov 2015 06:03:38 -0000
 
-Hi all,
+updated comments:
 
-Over the past several years one of the regular complaints people have made 
-about our project has been that patches sometimes take a long time to make it 
-into master, and it's not always clear what the state of a patch is during 
-that time. On the other side of things, maintainers are finding it increasingly 
-hard to keep up with testing and integrating incoming patches. Additionally, 
-trivial mistakes sometimes creep in that would be fairly easy to catch with an 
-automated process. We've been talking about this for a while and now I'd like 
-to propose a plan to finally address this:
+QT is the new default GUI for the binary 'wireshark'. This mode is currently disabled in the build.  We build with GTK as the default gui so the resulting binary is now wireshark-gtk.
 
-1) Upgrade the OE Patchwork instance [0] to a newer release; this should fix 
-some of the problems we are having [1] plus give us additional features. I 
-propose using the fork that freedesktop.org are using [2] [3] which is moving 
-a bit faster than upstream Patchwork; whilst the changes there may eventually 
-make it upstream (and work is ongoing there) we have a much greater ability to 
-influence the fork given that it's being worked on by one of my colleagues who 
-is pushing it in the direction we need it to go e.g. proper support for series 
-as opposed to treating every patch individually, improved UI, etc.
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../wireshark/{wireshark_1.12.8.bb => wireshark_2.0.0.bb}         | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_1.12.8.bb => wireshark_2.0.0.bb} (93%)
 
-2) Trigger automatic testing of submitted patches from Patchwork. We'd have a 
-script look at the contents of a patch and first check that the expected style 
-has been adhered to; second it would do some quick tests to verify that the 
-patch hasn't caused any immediately obvious regressions. I've filed some bugs 
-to cover this in more detail [4].
-
-3) Provide a means to easily schedule an overnight build on the autobuilder 
-for the set of patches that have passed the initial testing, as well as 
-present the results in a form that's easier to review for maintainers. For OE-
-Core this would be tied into the Yocto Project autobuilder, but I expect the 
-tools could be made flexible.
-
-At all stages through this process the patch status in patchwork will be kept 
-up-to-date so it's clear to everyone what's happening. I'm also thinking we 
-could do email notifications to the submitter (opt-in) though that would be a 
-later add-on.
-
-Whilst the initial plan covers only OE-Core, once we get them working the 
-tools and scripts used should be just as applicable to other layers. I'm also 
-trying to ensure that the patch validation is generic enough so it can live in 
-OE-Core, and thus we can easily update and refine it over time in line with the 
-code itself as well as encourage submitters to use the script on their own 
-changes before sending.
-
-Please let me know your thoughts on the above, most importantly on the 
-patchwork upgrade, since most of this hinges on that; I don't believe we can 
-practically base it on the version of Patchwork we are using now. 
-
-[Note that this email is cross-posted - it may be best to reply on OE-Core 
-only to save people's inboxes.]
-
-Thanks,
-Paul
-
-[0] http://patchwork.openembedded.org/
-[1] https://bugzilla.yoctoproject.org/show_bug.cgi?id=7657#c21
-[2] http://patchwork.freedesktop.org/ 
-[3] https://github.com/dlespiau/patchwork
-[4] https://bugzilla.yoctoproject.org/show_bug.cgi?id=8648
-
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.8.bb b/meta-networking/recipes-support/wireshark/wireshark_2.0.0.bb
+similarity index 93%
+rename from meta-networking/recipes-support/wireshark/wireshark_1.12.8.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_2.0.0.bb
+index eee9f30..011c6e1 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_1.12.8.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.0.0.bb
+@@ -8,10 +8,8 @@ DEPENDS = "perl-native pcre expat glib-2.0 sbc"
+ 
+ SRC_URI = "https://2.na.dl.wireshark.org/src/${BP}.tar.bz2"
+ 
+-PE = "1"
+-
+-SRC_URI[md5sum] = "988a4595a4a87dafb3c4870ea40e89b5"
+-SRC_URI[sha256sum] = "357e0a4e49525d80cdc740bb16539fcdb526ad38cc2ed6cabedafc9bdee5c7e7"
++SRC_URI[md5sum] = "5909af2a09a9a3023ba61bc62e787ad2"
++SRC_URI[sha256sum] = "90026c761a85701d7783c7e2eaa4c1de247dfbadbd53221df355f121e42691dd"
+ 
+ inherit autotools pkgconfig
+ 
+@@ -55,3 +53,5 @@ do_configure_prepend() {
+ 
+ ALLOW_EMPTY_${PN} = "1"
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
++
++FILES_${PN} += "${datadir}*"
 -- 
+2.3.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
