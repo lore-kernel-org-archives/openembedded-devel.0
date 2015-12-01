@@ -1,28 +1,34 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 498DB606D1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
+	[209.85.220.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F7BF605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Dec 2015 09:51:54 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tB19psaF024062
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 1 Dec 2015 01:51:54 -0800 (PST)
-Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Tue, 1 Dec 2015 01:51:54 -0800
-Message-ID: <565D6DB8.6020209@windriver.com>
-Date: Tue, 1 Dec 2015 17:51:52 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
-MIME-Version: 1.0
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
-References: <1448534206-31940-1-git-send-email-hongxu.jia@windriver.com>
-	<20151130204652.GB20849@mentor.com>
-In-Reply-To: <20151130204652.GB20849@mentor.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] postfix.inc: fix start postfix failed while hostname is numeric
+	Tue,  1 Dec 2015 09:57:00 +0000 (UTC)
+Received: by pacej9 with SMTP id ej9so547193pac.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Dec 2015 01:57:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=FHoO86uiZ3AqSWdNpx2JxDoGZgqF9xxmbSL9JuLLc+c=;
+	b=bj82ag03TgWUIJRvO37EduwSXLi+Ym0oKI0CJqNrT9ljOU1RbPLubQwxUupfXiW63K
+	EoajkyBY8KtwpD8DwFebwmoWAgy9hxsCsWRkEuRZi5XToQLvYJs1vW+M1QPTddApEvH6
+	eR4KpS+WNsewaY++TlVNzDk9Cv20DBb5HBtS35D7yX7ai0JbrPMSjFofOSmaVprZF0EQ
+	/9aY2yZdmZyI3pOm2WD+J9mdurF3yGc99DVDb1Zz0zHqjQjWTLAxkxF11xAQ4sJCU5bN
+	OxdevifCRqRUyDPP9jpLllnH0X8dqP8hTDbLQ4Lug/Z7D3pZ/FeRs4xEW2p1ZRs/bpau
+	C3gA==
+X-Received: by 10.66.122.105 with SMTP id lr9mr99029775pab.8.1448963821415;
+	Tue, 01 Dec 2015 01:57:01 -0800 (PST)
+Received: from haswell.localdomain ([2601:646:8802:5d5c:baca:3aff:fe80:aa8f])
+	by smtp.gmail.com with ESMTPSA id
+	v2sm56689146pfi.44.2015.12.01.01.56.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 01 Dec 2015 01:57:00 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  1 Dec 2015 01:56:54 -0800
+Message-Id: <1448963814-5499-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.6.2
+Subject: [meta-oe][PATCH] smem: Add appropriate python modules to rdeps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,73 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2015 09:51:56 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 01 Dec 2015 09:57:02 -0000
 
-On 12/01/2015 04:46 AM, Joe MacDonald wrote:
-> [[oe] [meta-networking][PATCH] postfix.inc: fix start postfix failed while hostname is numeric] On 15.11.26 (Thu 18:36) Hongxu Jia wrote:
->
->> While hostname is numeric, start postfix failed
->> ...
->> root@localhost:~# hostname
->> 128.224.163.251
->> root@localhost:~# postfix start
->> postfix: warning: valid_hostname: numeric hostname: 128.224.163.251
->> postfix: fatal: unable to use my own hostname
->> ...
->>
->> The postfix define a macro SLOPPY_VALID_HOSTNAME to allow the
->> numeric hostname.
-> This seems like it's asking for a lot of trouble, if you either assign
-> your hostname to '128.224.163.251' (as it appears to be in your commit
-> log, but I don't know off-hand how you'd do that without writing a
-> program specifically for that purpose, and even then ...) or if you
-> assign your hostname to be '128' and the FQDN to be '128.224.163.251'.
-> Certainly the postfix folks think this is a sufficiently unusual and
-> presumably hazzard-prone to make it not even a runtime option but a
-> compile-time one.
->
-> Are you sure the issue you're trying to solve here won't be resolved by
-> applying [] throughout your .cf files?  I'm reluctant to take this patch
-> since it turns on a surprising feature that, my sense is, is not
-> desirable in common setups.
+It wont work without these modules at runtime
 
-With more investigation, for customer convenience,
-I think we could add a hostname check before postfix start,
-if the hostname is not long host name (FQDN), we set
-"myhostname=localhost" to main.cf
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-support/smem/smem_1.4.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-The idea refers postfix's postinst in ubuntu 14.04.
-
-V2 incoming.
-
-//Hongxu
-
-
->
-> -J.
->
->> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
->> ---
->>   meta-networking/recipes-daemons/postfix/postfix.inc | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
->> index 6d39570..f8b8e43 100644
->> --- a/meta-networking/recipes-daemons/postfix/postfix.inc
->> +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
->> @@ -67,7 +67,7 @@ export CCARGS-sasl_class-native = ""
->>   export AUXLIBS-sasl_class-native = ""
->>   
->>   # PCRE, TLS support default
->> -export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS ${CCARGS-ldap} ${CCARGS-sasl}"
->> +export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS -DSLOPPY_VALID_HOSTNAME ${CCARGS-ldap} ${CCARGS-sasl}"
->>   export AUXLIBS = "-lpcre -lssl -lcrypto ${AUXLIBS-sasl} ${AUXLIBS-ldap}"
->>   export POSTCONF = "${STAGING_DIR_NATIVE}${sbindir_native}/postconf"
->>   
->> -- 
->> 1.9.1
->>
+diff --git a/meta-oe/recipes-support/smem/smem_1.4.bb b/meta-oe/recipes-support/smem/smem_1.4.bb
+index 8768c48..519020f 100644
+--- a/meta-oe/recipes-support/smem/smem_1.4.bb
++++ b/meta-oe/recipes-support/smem/smem_1.4.bb
+@@ -24,3 +24,4 @@ do_install() {
+         install -m 0755 ${S}/smemcap ${D}${bindir}/
+         install -m 0644 ${S}/smem.8 ${D}/${mandir}/man8/
+ }
++RDEPENDS_${PN} += "python-textutils python-compression python-shell python-codecs"
+-- 
+2.6.2
 
 
