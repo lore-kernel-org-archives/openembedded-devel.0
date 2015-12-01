@@ -1,34 +1,53 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
-	[209.85.213.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 80502606D1
+Return-Path: <ian@boundarydevices.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id C5D62607AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Dec 2015 18:19:35 +0000 (UTC)
-Received: by igl9 with SMTP id 9so93680727igl.0
+	Tue,  1 Dec 2015 18:36:00 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so219358747wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Dec 2015 10:19:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=4pp4WAyFJrwG+7J2lhcKqyYtP/jUisgnU1Oj7oXxaeE=;
-	b=qSqUyC5QB1gpznCfztqONzyMstEu3VTZPi9u3WwRzFeRbu8XypKoDDCQlRuNkIZ3ym
-	oAWu5k+NbkJlkloL6tS1OTBG/Xym+Kwkh/3SuVnkMqH3SZSrtjJmo5Y4FVLI/Aph3bdD
-	Tnr/2gY8VXoQmAo0AuCFxxy+/pL+a7B4Vb794gfqP7CQq1lWMFI9r9iT5MXintNogXJJ
-	W+0C2K8Baa4RQiyOkgpYDVECSGb4BQO12wET0CHkFVCDDFE/ViTzFVXwsVQaee6+vNKJ
-	YovgbfSeCnSZqrVoCfUXzQi5948ZT9Aldqpf5vwgoGOas3IQCnPqiYTBj3M6Z9zkpEuh
-	PZsg==
-X-Received: by 10.50.150.37 with SMTP id uf5mr29654140igb.10.1448993976326;
-	Tue, 01 Dec 2015 10:19:36 -0800 (PST)
-Received: from openSUSE-i7.site (dsl-67-55-28-109.acanac.net. [67.55.28.109])
-	by smtp.gmail.com with ESMTPSA id
-	q17sm10070800igr.3.2015.12.01.10.19.35
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 01 Dec 2015 10:19:35 -0800 (PST)
-From: Trevor Woerner <twoerner@gmail.com>
+	Tue, 01 Dec 2015 10:36:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=boundarydevices-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=uZ0y+YmIlSIdi6aUrGtsZs2Vawfj5dcfCj+wxG8vJIA=;
+	b=BLvtNGQOM0nSwjo0HEAWiW53YjSazYaVzyXRpBxEWuxvqPr/E+vgghy32tgokqNDWC
+	ewz05q+X9Q0E4gPZfSJYQEl+3veQte/uLfb8Je2r/3XMQ47hMdmLKuwTKoo8tUhnwbU5
+	nRjE8YQVZ4evFA4ZG/ZQ+x8nOeZCrTh83ltiAY2wX7A3fqPGAs2hTep5M2KygSzHlSTo
+	TBrBJlZouNGGXtt5qk+RcYzczXvGUAIdKlNtIN1Uq5I3tD/tjHIYxdNzG6XPS9gZNdFA
+	kxbBhFRvYuVotlZMgdwT1cwdrzmhtggPkfFWVQhQNia2f+ZakxXQmKipj1ONpsl3AEG4
+	3s6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=uZ0y+YmIlSIdi6aUrGtsZs2Vawfj5dcfCj+wxG8vJIA=;
+	b=UpxnC348fPVD/Rf/Q83HO4rSU8Ist8tgh5JxW8vWuI6prVcyUJComifzdNxVPr/aAw
+	/YbbpVDVg1V1pWHr1q9E+GTBrvzzrzaea7UhPM36e7VXpXkV7U3S5cwNdstAwUV3uDeW
+	svovyqYuGiDhM//9wnbHkxwRbE3j5tahxL2bT2Z7syVqqToO9ESqXeSaA+7yUlWnrNfR
+	TMi4Z3Iz4Qtyd4hSN7sNItUDVTR4N0f9rc4n4CmuXq0vhWvOLrAIB1V5xGZ/irkgqgKL
+	aFw4oWZFYw8FPoJ7vdchkpJjWvirxagnKKw/e2jj/LT555Sx1hRHahS87XbS5sIOKbzB
+	bCtg==
+X-Gm-Message-State: ALoCoQlkmbUo/kOToHTmozwvmul++CgE0ovaAPrmeArKUk/XzygFTTAoFXAqVkcen147XdwY6Fzd
+MIME-Version: 1.0
+X-Received: by 10.194.185.234 with SMTP id ff10mr81386489wjc.170.1448994960488;
+	Tue, 01 Dec 2015 10:36:00 -0800 (PST)
+Received: by 10.27.110.18 with HTTP; Tue, 1 Dec 2015 10:36:00 -0800 (PST)
+In-Reply-To: <CAMKF1soK_A0ymhcBKzoi8eP4rGpct5i4pAh5jhiLbBuA1TQyrA@mail.gmail.com>
+References: <1446673803-2310-1-git-send-email-max.oss.09@gmail.com>
+	<1E07998C-81FF-476F-A066-63266FFDDC1B@gmail.com>
+	<CAAzKXnh3cJ7cLT4a48NUs7L0B-dYAfav3ckvwMds8aT=3PN+Gw@mail.gmail.com>
+	<CAEHkU3WR6yyGb80CGF9vFBVaYnzOJy8fih6zU5zf755pL7bvNg@mail.gmail.com>
+	<20151106171738.GF2550@jama>
+	<1446839474.2527.7.camel@Saturn.local.all>
+	<CAP9ODKqR8SHDGvqUs4v82mTpPbFSSm_wd_mvE5H9QiCg23ScpA@mail.gmail.com>
+	<CADseiPmXNcnsCaYsEi_oW-ujY3Q6EWVE1iz5tm=WYt0wULt5NA@mail.gmail.com>
+	<CAMKF1soK_A0ymhcBKzoi8eP4rGpct5i4pAh5jhiLbBuA1TQyrA@mail.gmail.com>
+Date: Tue, 1 Dec 2015 10:36:00 -0800
+Message-ID: <CADseiPm=mpgdXnGwjvG=EULxypjcSAubr1B7+0=r3OzY0FuBZg@mail.gmail.com>
+From: Ian Coolidge <ian@boundarydevices.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Dec 2015 13:19:25 -0500
-Message-Id: <1448993965-32226-1-git-send-email-twoerner@gmail.com>
-X-Mailer: git-send-email 2.6.3.368.gf34be46
-Subject: [meta-oe][PATCH v2] nodejs: cleanup and update
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-browser][PATCH] chromium: fix gcc5 compile issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,123 +60,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2015 18:19:37 -0000
+X-List-Received-Date: Tue, 01 Dec 2015 18:36:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Remove old nodejs_0.4.12 and update nodejs_0.12.7 to the latest stable
-nodejs_4.2.2.
+Yes. Building through Yocto Jethro, uses GCC 5.2
 
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
----
- .../nodejs/nodejs4/libev-cross-cc_0.4.12.patch     | 13 ------
- meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb  | 49 ----------------------
- .../nodejs/{nodejs_0.12.7.bb => nodejs_4.2.2.bb}   |  6 +--
- 3 files changed, 3 insertions(+), 65 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-cc_0.4.12.patch
- delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
- rename meta-oe/recipes-devtools/nodejs/{nodejs_0.12.7.bb => nodejs_4.2.2.bb} (93%)
+On Tue, Dec 1, 2015 at 12:05 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-cc_0.4.12.patch b/meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-cc_0.4.12.patch
-deleted file mode 100644
-index 2b9838f..0000000
---- a/meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-cc_0.4.12.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
--diff --git a/deps/libev/wscript b/deps/libev/wscript
--index 4f6c9a8..1796749 100644
----- a/deps/libev/wscript
--+++ b/deps/libev/wscript
--@@ -58,7 +58,7 @@ def configure(conf):
--           return 0;
--       }
--   """
---  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=True,
--+  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=False,
--                 msg="Checking for SYS_clock_gettime")
-- 
--   have_librt = conf.check(lib='rt', uselib_store='RT')
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb b/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
-deleted file mode 100644
-index c73cefc..0000000
---- a/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
-+++ /dev/null
-@@ -1,49 +0,0 @@
--SUMMARY = "nodeJS Evented I/O for V8 JavaScript"
--HOMEPAGE = "http://nodejs.org"
--LICENSE = "MIT & Zlib"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d6237f3a840aef5b7880fb4e49eecfe5"
--
--DEPENDS = "openssl"
--
--PNBLACKLIST[nodejs4] ?= "Used only by currently blacklisted cloud9 and fails to build for qemuarm with thumb: error: #error For thumb inter-working we require an architecture which supports blx"
--
--SRC_URI = " \
--    http://nodejs.org/dist/node-v${PV}.tar.gz \
--    file://libev-cross-cc_${PV}.patch \
--"
--SRC_URI[md5sum] = "a6375eaa43db5356bf443e25b828ae16"
--SRC_URI[sha256sum] = "c01af05b933ad4d2ca39f63cac057f54f032a4d83cff8711e42650ccee24fce4"
--
--S = "${WORKDIR}/node-v${PV}"
--
--# v8 errors out if you have set CCACHE
--CCACHE = ""
--
--do_configure () {
--    sed -i -e 's:/usr/lib:${STAGING_LIBDIR}:g' wscript
--    sed -i -e 's:/usr/local/lib:${STAGING_LIBDIR}:g' wscript
--    ./configure --prefix=${prefix} --without-snapshot
--}
--
--do_compile () {
--    make
--}
--
--do_install () {
--    oe_runmake install DESTDIR=${D}
--
--    # fix namespace conflicts with other nodejs recipes
--    mv ${D}${bindir}/node ${D}${bindir}/node4
--    mv ${D}${bindir}/node-waf ${D}${bindir}/node4-waf
--
--    mv ${D}${includedir}/node ${D}${includedir}/node4
--
--    mv ${D}${libdir}/node ${D}${libdir}/node4
--    mv ${D}${libdir}/pkgconfig/nodejs.pc ${D}${libdir}/pkgconfig/nodejs4.pc
--    sed -i -e s:include/node:include/node4: ${D}${libdir}/pkgconfig/nodejs4.pc
--
--    mv ${D}${datadir}/man/man1/node.1 ${D}${datadir}/man/man1/node4.1
--}
--
--FILES_${PN} += "${libdir}/node4/wafadmin"
--BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.7.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.2.2.bb
-similarity index 93%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_0.12.7.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_4.2.2.bb
-index 41eb5ee..2ca2403 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.7.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.2.2.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & BSD & Artistic-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=14115ff11211df04b031ec7d40b6d31b"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ee90ba97d933fc8d56e97812b7dd62e9"
- 
- DEPENDS = "openssl"
- 
-@@ -9,8 +9,8 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
-     file://enable-armv5e-build.patch \
-     file://no-registry.patch \
- "
--SRC_URI[md5sum] = "5523ec4347d7fe6b0f6dda1d1c7799d5"
--SRC_URI[sha256sum] = "b23d64df051c9c969b0c583f802d5d71de342e53067127a5061415be7e12f39d"
-+SRC_URI[md5sum] = "7c46c158e4c9a44cfbd039951c13dfe6"
-+SRC_URI[sha256sum] = "00e709353435b436b5bbf5e62272ebb15fe801065422c4c2afe2b93456210cb1"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
--- 
-2.6.0.rc3
-
+> On Mon, Nov 30, 2015 at 11:17 PM, Ian Coolidge <ian@boundarydevices.com>
+> wrote:
+> > I'm getting segfaults when I run google-chrome on my nitrogen6x after the
+> > new updates. Compiles great, just segfaults. Anyone else noticing similar
+> > problems? I'll be digging into it more, thought I'd reach out first
+> though.
+>
+> are you using gcc5 ?
+>
+> >
+> > Thanks,
+> > -Ian
+> >
+> > On Fri, Nov 6, 2015 at 11:58 AM, Otavio Salvador <
+> > otavio.salvador@ossystems.com.br> wrote:
+> >
+> >> On Fri, Nov 6, 2015 at 5:51 PM, Max Krummenacher <max.oss.09@gmail.com>
+> >> wrote:
+> >> > Hi
+> >> > Am Freitag, den 06.11.2015, 18:17 +0100 schrieb Martin Jansa:
+> >> >
+> >> >> After long time first successful chromium build in bitbake world..
+> >> >> Thanks!
+> >> >>
+> >> >> Can you apply the same fix for cef3 recipes?
+> >> >> http://errors.yoctoproject.org/Errors/Details/21442/
+> >> >>
+> >> >> cef3 for qemux86-64 doesn't even configure:
+> >> >> http://errors.yoctoproject.org/Errors/Details/21501/
+> >> >>
+> >> > I'll try to fix this.
+> >> >
+> >> > It looks like this never worked for x86-64 because of a missing config
+> >> > file.
+> >> > One probably can reuse the i568 one.
+> >> >
+> >> > There seem to be additional errors to the one fixed with the packages.
+> >> > So
+> >> > maybe I won't be able to fix it.
+> >>
+> >> Send a complete patchset and we apply them all ;-)
+> >>
+> >> --
+> >> Otavio Salvador                             O.S. Systems
+> >> http://www.ossystems.com.br        http://code.ossystems.com.br
+> >> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
