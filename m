@@ -1,37 +1,42 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-qg0-f50.google.com (mail-qg0-f50.google.com
-	[209.85.192.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 835E26B6F5
+Return-Path: <twoerner@gmail.com>
+Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
+	[209.85.213.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 052FB601D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Dec 2015 17:26:28 +0000 (UTC)
-Received: by qgcc31 with SMTP id c31so10759060qgc.3
+	Tue,  1 Dec 2015 17:44:01 +0000 (UTC)
+Received: by igbxm8 with SMTP id xm8so12510093igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Dec 2015 09:26:28 -0800 (PST)
+	Tue, 01 Dec 2015 09:44:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=GcLJH6xhS4dkoucBAAdsQNPi6euPcZ/SDKQB/q66Aro=;
-	b=UcowSlgXhjybIFyyFMOD4p6tF93B5BXOPg1GHWMKYyl53/ZIVCzMzK7qU+TpFS7paF
-	pAlzm445AC+Yvu2tP4fKiTZVP7zmQQDtc15Kw1BA0qS1dKr3klb2DV8gly3BRltjBXAq
-	mMlqmUgxkwz5dEh/ucm7zZnhpMMAivW63N5TvcZQ5nwzZ2K3bVioEvcGUEi0JnaoL2Wt
-	JkgUXkOcvKzcFMUEx1o4TzDu1hQzKN/caJr/Fc6KTSnKv5I3JdV1r7qegQ6OLBj9Ymsu
-	FEbu6nIeT5nds3poPg1NdxPgHAsdU83GEUcxl8/JVHxHk5bdFttSE9219AfRwynR9p7X
-	isgA==
-X-Received: by 10.140.96.76 with SMTP id j70mr82735296qge.100.1448990788824;
-	Tue, 01 Dec 2015 09:26:28 -0800 (PST)
-Received: from thuvia.localdomain (pool-108-44-110-59.ronkva.east.verizon.net.
-	[108.44.110.59])
-	by smtp.gmail.com with ESMTPSA id s105sm88022qge.40.2015.12.01.09.26.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Dec 2015 09:26:28 -0800 (PST)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Dec 2015 12:26:20 -0500
-Message-Id: <1448990780-11060-3-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1448990780-11060-1-git-send-email-philip@balister.org>
-References: <1448990780-11060-1-git-send-email-philip@balister.org>
-Subject: [meta-python][PATCH 3/3] python-bitarray: Add new recipe.
+	h=subject:to:references:cc:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-type:content-transfer-encoding;
+	bh=aT5+rw94WDelhdpeIauqHeMjFqzAsbF77sBa/LPO4io=;
+	b=yZPgCTH8lXPrfGZEdoH3EuvgzY8ONVsj6QA8S0axHy5iItPdVucqnEHl8Zh3Jd8BhJ
+	zpakW0x4HeN+qVdZBkp+GXglGCrLdWfSGD7NyQ6R0tTUL+ommA7YEwVXp4kWyYl8nMx5
+	TgI0nd2GRvs2ogBPNtkDTgwig920wJ8rDXfuReWcdjUa6mwl2dAGdub5zYajw+e/7UNr
+	w33AIz3QHCTJXlaLtoLbu5SUBDYisydEJTlQIDJKURdgDDPIlEJcbZuHMdTz3B6Mt2Rw
+	8OZFJ6x6Q6JnDUnti6w9fBWmA09R4mtJVWEziPrhLGOL82NZnKd2x2ZR+F1ptQ4KmUiD
+	jvwQ==
+X-Received: by 10.50.61.230 with SMTP id t6mr27732867igr.28.1448991842303;
+	Tue, 01 Dec 2015 09:44:02 -0800 (PST)
+Received: from [192.168.141.85] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	by smtp.gmail.com with ESMTPSA id
+	42sm19601991iom.6.2015.12.01.09.44.00
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 01 Dec 2015 09:44:01 -0800 (PST)
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <1448990151-27720-1-git-send-email-twoerner@gmail.com>
+	<1448990151-27720-2-git-send-email-twoerner@gmail.com>
+	<CA+chaQfVj-tTBhe-5SbVCrYuzA9h0TdmvN44cEvvQkAKpQGRGw@mail.gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Message-ID: <565DDC5D.3050707@gmail.com>
+Date: Tue, 1 Dec 2015 12:43:57 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQfVj-tTBhe-5SbVCrYuzA9h0TdmvN44cEvvQkAKpQGRGw@mail.gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/2] nodejs: cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,41 +49,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2015 17:26:29 -0000
+X-List-Received-Date: Tue, 01 Dec 2015 17:44:02 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Philip Balister <philip@balister.org>
----
- .../recipes-devtools/python/python-bitarray_0.8.1.bb | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-bitarray_0.8.1.bb
+On 12/01/15 12:22, Martin Jansa wrote:
+> As it was already PNBLACKLISTed I wouldn't mind removing it completely and
+> replacing 0.12.7 with new version (without introducing the .inc) file.
 
-diff --git a/meta-python/recipes-devtools/python/python-bitarray_0.8.1.bb b/meta-python/recipes-devtools/python/python-bitarray_0.8.1.bb
-new file mode 100644
-index 0000000..dd79e2c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-bitarray_0.8.1.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
-+HOMEPAGE = "https://github.com/ilanschnell/bitarray"
-+SECTION = "devel/python"
-+LICENSE = "PSF"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3ba469353f9f2a244b2075902351e37d"
-+
-+SRCNAME = "bitarray"
-+
-+SRC_URI = "https://pypi.python.org/packages/source/b/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "3825184f54f4d93508a28031b4c65d3b"
-+SRC_URI[sha256sum] = "7da501356e48a83c61f479393681c1bc4b94e5a34ace7e08cb29e7dd9290ab18"
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit setuptools
-+
-+FILES_${PN} += "${datadir}/bitarray"
-+
-+BBCLASSEXTEND = "nativesdk"
--- 
-2.1.0
+Thanks for providing the background info, I was wondering why it was
+implemented this way.
 
+I'll submit a v2 where everything is replaced with 4.2.2.
+
+Thanks
 
