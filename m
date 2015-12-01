@@ -1,38 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f170.google.com (mail-io0-f170.google.com
-	[209.85.223.170])
-	by mail.openembedded.org (Postfix) with ESMTP id AA0C9605B3
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 498DB606D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Dec 2015 08:05:29 +0000 (UTC)
-Received: by iofh3 with SMTP id h3so1082017iof.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Dec 2015 00:05:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=Xi2N/7bbAjqnqQw4sg5Xcu08tzKBD6rhxP7I3kZbZp8=;
-	b=Zf0GnJQPCtZpexsOodnPyttAE8bc/F5TYzakXYuR0Qy9NDcYIXPN8xndfWFL3bhZXk
-	y6xNC3MIzqdKJeHE4bdwkIp3LJvrH/lSg1i14HuY1hdN+hqDH3ZhN+cwMxWR9jzy/tb3
-	LgBb1UTmm/XYNYFklfVz/r5kv8V/WApT/DiDBgEm8/DYsKtU6TT7fcX8w1/7IYhuPzTw
-	K9eZOdDTqjxNP0ikomCuYhw6Uw44iTX0kuADNtBwwD8oElBAbvQfXVSUWWirprgpfryt
-	W++qemLupvpBL2RVpSZGVMFIStQ+IT6lzovumhrrbTt63CyEu3VviW2WTN34Q9sNDtL2
-	cPLQ==
-X-Received: by 10.107.162.137 with SMTP id l131mr57660025ioe.49.1448957129718; 
-	Tue, 01 Dec 2015 00:05:29 -0800 (PST)
+	Tue,  1 Dec 2015 09:51:54 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tB19psaF024062
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 1 Dec 2015 01:51:54 -0800 (PST)
+Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
+	Tue, 1 Dec 2015 01:51:54 -0800
+Message-ID: <565D6DB8.6020209@windriver.com>
+Date: Tue, 1 Dec 2015 17:51:52 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.8.0
 MIME-Version: 1.0
-Received: by 10.107.12.205 with HTTP; Tue, 1 Dec 2015 00:05:00 -0800 (PST)
-In-Reply-To: <CADseiPmXNcnsCaYsEi_oW-ujY3Q6EWVE1iz5tm=WYt0wULt5NA@mail.gmail.com>
-References: <1446673803-2310-1-git-send-email-max.oss.09@gmail.com>
-	<1E07998C-81FF-476F-A066-63266FFDDC1B@gmail.com>
-	<CAAzKXnh3cJ7cLT4a48NUs7L0B-dYAfav3ckvwMds8aT=3PN+Gw@mail.gmail.com>
-	<CAEHkU3WR6yyGb80CGF9vFBVaYnzOJy8fih6zU5zf755pL7bvNg@mail.gmail.com>
-	<20151106171738.GF2550@jama> <1446839474.2527.7.camel@Saturn.local.all>
-	<CAP9ODKqR8SHDGvqUs4v82mTpPbFSSm_wd_mvE5H9QiCg23ScpA@mail.gmail.com>
-	<CADseiPmXNcnsCaYsEi_oW-ujY3Q6EWVE1iz5tm=WYt0wULt5NA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 1 Dec 2015 00:05:00 -0800
-Message-ID: <CAMKF1soK_A0ymhcBKzoi8eP4rGpct5i4pAh5jhiLbBuA1TQyrA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser][PATCH] chromium: fix gcc5 compile issues
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+References: <1448534206-31940-1-git-send-email-hongxu.jia@windriver.com>
+	<20151130204652.GB20849@mentor.com>
+In-Reply-To: <20151130204652.GB20849@mentor.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] postfix.inc: fix start postfix failed while hostname is numeric
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,62 +35,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2015 08:05:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 01 Dec 2015 09:51:56 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 30, 2015 at 11:17 PM, Ian Coolidge <ian@boundarydevices.com> wrote:
-> I'm getting segfaults when I run google-chrome on my nitrogen6x after the
-> new updates. Compiles great, just segfaults. Anyone else noticing similar
-> problems? I'll be digging into it more, thought I'd reach out first though.
+On 12/01/2015 04:46 AM, Joe MacDonald wrote:
+> [[oe] [meta-networking][PATCH] postfix.inc: fix start postfix failed while hostname is numeric] On 15.11.26 (Thu 18:36) Hongxu Jia wrote:
+>
+>> While hostname is numeric, start postfix failed
+>> ...
+>> root@localhost:~# hostname
+>> 128.224.163.251
+>> root@localhost:~# postfix start
+>> postfix: warning: valid_hostname: numeric hostname: 128.224.163.251
+>> postfix: fatal: unable to use my own hostname
+>> ...
+>>
+>> The postfix define a macro SLOPPY_VALID_HOSTNAME to allow the
+>> numeric hostname.
+> This seems like it's asking for a lot of trouble, if you either assign
+> your hostname to '128.224.163.251' (as it appears to be in your commit
+> log, but I don't know off-hand how you'd do that without writing a
+> program specifically for that purpose, and even then ...) or if you
+> assign your hostname to be '128' and the FQDN to be '128.224.163.251'.
+> Certainly the postfix folks think this is a sufficiently unusual and
+> presumably hazzard-prone to make it not even a runtime option but a
+> compile-time one.
+>
+> Are you sure the issue you're trying to solve here won't be resolved by
+> applying [] throughout your .cf files?  I'm reluctant to take this patch
+> since it turns on a surprising feature that, my sense is, is not
+> desirable in common setups.
 
-are you using gcc5 ?
+With more investigation, for customer convenience,
+I think we could add a hostname check before postfix start,
+if the hostname is not long host name (FQDN), we set
+"myhostname=localhost" to main.cf
+
+The idea refers postfix's postinst in ubuntu 14.04.
+
+V2 incoming.
+
+//Hongxu
+
 
 >
-> Thanks,
-> -Ian
+> -J.
 >
-> On Fri, Nov 6, 2015 at 11:58 AM, Otavio Salvador <
-> otavio.salvador@ossystems.com.br> wrote:
->
->> On Fri, Nov 6, 2015 at 5:51 PM, Max Krummenacher <max.oss.09@gmail.com>
->> wrote:
->> > Hi
->> > Am Freitag, den 06.11.2015, 18:17 +0100 schrieb Martin Jansa:
->> >
->> >> After long time first successful chromium build in bitbake world..
->> >> Thanks!
->> >>
->> >> Can you apply the same fix for cef3 recipes?
->> >> http://errors.yoctoproject.org/Errors/Details/21442/
->> >>
->> >> cef3 for qemux86-64 doesn't even configure:
->> >> http://errors.yoctoproject.org/Errors/Details/21501/
->> >>
->> > I'll try to fix this.
->> >
->> > It looks like this never worked for x86-64 because of a missing config
->> > file.
->> > One probably can reuse the i568 one.
->> >
->> > There seem to be additional errors to the one fixed with the packages.
->> > So
->> > maybe I won't be able to fix it.
+>> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+>> ---
+>>   meta-networking/recipes-daemons/postfix/postfix.inc | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
 >>
->> Send a complete patchset and we apply them all ;-)
+>> diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
+>> index 6d39570..f8b8e43 100644
+>> --- a/meta-networking/recipes-daemons/postfix/postfix.inc
+>> +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+>> @@ -67,7 +67,7 @@ export CCARGS-sasl_class-native = ""
+>>   export AUXLIBS-sasl_class-native = ""
+>>   
+>>   # PCRE, TLS support default
+>> -export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS ${CCARGS-ldap} ${CCARGS-sasl}"
+>> +export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS -DSLOPPY_VALID_HOSTNAME ${CCARGS-ldap} ${CCARGS-sasl}"
+>>   export AUXLIBS = "-lpcre -lssl -lcrypto ${AUXLIBS-sasl} ${AUXLIBS-ldap}"
+>>   export POSTCONF = "${STAGING_DIR_NATIVE}${sbindir_native}/postconf"
+>>   
+>> -- 
+>> 1.9.1
 >>
->> --
->> Otavio Salvador                             O.S. Systems
->> http://www.ossystems.com.br        http://code.ossystems.com.br
->> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
