@@ -1,25 +1,46 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BEE05601D3
+Return-Path: <daniel.adolfsson@bluetest.se>
+Received: from mail-lf0-f48.google.com (mail-lf0-f48.google.com
+	[209.85.215.48])
+	by mail.openembedded.org (Postfix) with ESMTP id A63406014E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Dec 2015 10:15:46 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tB2AFkLw022993
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 2 Dec 2015 02:15:46 -0800 (PST)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 2 Dec 2015 02:15:45 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 2 Dec 2015 05:15:41 -0500
-Message-ID: <1449051341-115343-2-git-send-email-hongxu.jia@windriver.com>
+	Wed,  2 Dec 2015 10:48:53 +0000 (UTC)
+Received: by lfs39 with SMTP id 39so42699545lfs.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Dec 2015 02:48:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bluetest-se.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=Z0DI4/Bo/cVXSy4ObhJnMJnXqzp5k0wI+sXgAGz8f50=;
+	b=GrXrPTrrDvObrwNUQOc+06NG3LP0tkpNNC4reln/P+iF9Nx3eZFXendV/28GWiFxBG
+	xrvzfTqSNCDEXl2iz99EpEtMEwcjBVQR/6cn6FuG1gQJAfDkhdnR//vkFWgn5F+FINeZ
+	0Ta8CCcCQWtCtcKeRo4ezNqiPxyw3ZmoYSdDtSixi8omil1JMGpwxdJOd0bl3L+5wdzU
+	NG6sSk4MeLbcOuhyqxbUHeUt64sYH5lBTChEFc7QfGXq2d+uEMSDrQQ1AqlqHUmidG1U
+	S5JvY4Sh2f35VuBwe6ye4o+SZlLnV3CGJlrIP+0Wkahzcz999/MnfgV/MQiioYH9nDtX
+	J6TA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Z0DI4/Bo/cVXSy4ObhJnMJnXqzp5k0wI+sXgAGz8f50=;
+	b=nGw5RVc9Pw5c6WH6p8ut+ZnwMYRSdZgmSqwFPwXMbyxraj/ygxasBNojTTvfC6gVCm
+	5EpcFt4gT/q+dCkUUOGXbqVKiCLQ7bu86t7IEv8OtqREU7FyTx4su0dVlPtyRGx7JFgo
+	KMTeSQsv05n8CA8T+fHjhy0fYQGCoXG3FWBoOTfpClp1N7BDHgSvf7o/YOzfaXuWx/Cp
+	j5cRwAk2Fmj6R24Sg32AOR+/5cBqIg6LyoVMs+n//DzJoOX7n53n/ActrpcrR6KdtplF
+	Sl4EphypT57fX/bMFP/FHtFvRhe0XFmM2dsw8ol0Ubnk2ewgeCnjSGgZyk+xVL17n2Nn
+	i85g==
+X-Gm-Message-State: ALoCoQlT9vFXImEpAb7IXDrXXBEG3/pNbvy5Dtc4Aeer8Pj3EjqOI+C0kSnHdTTDI+NWxNYEcHwh
+X-Received: by 10.25.20.217 with SMTP id 86mr1699497lfu.164.1449053333356;
+	Wed, 02 Dec 2015 02:48:53 -0800 (PST)
+Received: from bluepc-13-008.internal.bluetest.se
+	(user145.217-10-117.netatonce.net. [217.10.117.145])
+	by smtp.gmail.com with ESMTPSA id l81sm384574lfb.40.2015.12.02.02.48.52
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 02 Dec 2015 02:48:52 -0800 (PST)
+From: Daniel Adolfsson <daniel.adolfsson@bluetest.se>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  2 Dec 2015 11:48:46 +0100
+Message-Id: <1449053326-20657-1-git-send-email-daniel.adolfsson@bluetest.se>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1449051341-115343-1-git-send-email-hongxu.jia@windriver.com>
-References: <1449051341-115343-1-git-send-email-hongxu.jia@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH 2/2] postfix: fix clean broken issue
+Subject: [meta-oe][PATCH] gitpkgv.bbclass: Add support for gitsm:// url type
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,44 +53,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Dec 2015 10:15:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 02 Dec 2015 10:48:56 -0000
 
-There is a build failure while rebuilding postfix
-...
-| NOTE: make -e MAKEFLAGS= OPT= DEBUG= OPTS= clean
-| make -f Makefile.in MAKELEVEL= Makefiles
-| (echo "# Do not edit -- this file documents how Postfix was built for your
-machine.";/bin/sh makedefs) >makedefs.tmp
-| No <db.h> include file found.
-| Install the appropriate db*-devel package first.
-| Makefile.in:31: recipe for target 'Makefiles' failed
-| make: *** [Makefiles] Error 1
-| Makefile:21: recipe for target 'Makefiles' failed
-| make: *** [Makefiles] Error 2
-| ERROR: oe_runmake failed
-| ERROR: Function failed: do_configure (log file is located at tmp/work/
-core2-64-wrs-linux/postfix/3.0.2-r0/temp/do_configure/log.do_configure.12848)
-...
+When using "gitsm://", for projects using submodules, instead of "git://", gitpkgv does not work.
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+The limitation is synthetic, this patch simply adds gitsm as an allowed url type.
+
+Signed-off-by: Daniel Adolfsson <daniel.adolfsson@bluetest.se>
 ---
- meta-networking/recipes-daemons/postfix/postfix.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/classes/gitpkgv.bbclass | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index 271eb09..200d585 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -28,6 +28,8 @@ SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV
+diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
+index 7bdc538..1cba00c 100644
+--- a/meta-oe/classes/gitpkgv.bbclass
++++ b/meta-oe/classes/gitpkgv.bbclass
+@@ -65,7 +65,7 @@ def get_git_pkgv(d, use_tags):
  
- S = "${WORKDIR}/postfix-${PV}"
- 
-+CLEANBROKEN = "1"
-+
- BBCLASSEXTEND = "native"
- 
- inherit update-rc.d useradd update-alternatives systemd
+     found = False
+     for url in ud.values():
+-        if url.type == 'git':
++        if url.type == 'git' or url.type == 'gitsm':
+             for name, rev in url.revisions.items():
+                 if not os.path.exists(url.localpath):
+                     return None
 -- 
 1.9.1
 
