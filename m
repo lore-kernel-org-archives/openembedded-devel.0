@@ -1,32 +1,24 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F0B360616;
-	Wed,  2 Dec 2015 08:45:12 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	tB28j9KT003766; Wed, 2 Dec 2015 08:45:09 GMT
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id uQGpxQZElg3v; Wed,  2 Dec 2015 08:45:09 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	tB28itsQ003755
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
-	Wed, 2 Dec 2015 08:45:07 GMT
-Message-ID: <1449045895.14864.121.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Trevor Woerner <twoerner@gmail.com>
-Date: Wed, 02 Dec 2015 08:44:55 +0000
-In-Reply-To: <565C6907.3020501@gmail.com>
-References: <1633798.xAxFJSpIzb@peggleto-mobl.ger.corp.intel.com>
-	<565C6907.3020501@gmail.com>
-X-Mailer: Evolution 3.12.11-0ubuntu3 
-Mime-Version: 1.0
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	openembedded-architecture@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] Patchwork & patch handling improvements
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id ADC59601D3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  2 Dec 2015 10:03:10 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tB2A3Amb006228
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 2 Dec 2015 02:03:10 -0800 (PST)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 2 Dec 2015 02:03:11 -0800
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 2 Dec 2015 17:51:40 +0800
+Message-ID: <1449049900-1248-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.6.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] edac-utils: add patches for initscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,90 +31,221 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Dec 2015 08:45:14 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 02 Dec 2015 10:03:11 -0000
+Content-Type: text/plain
 
-On Mon, 2015-11-30 at 10:19 -0500, Trevor Woerner wrote:
-> On 11/26/15 16:00, Paul Eggleton wrote:
-> > I'm also 
-> > trying to ensure that the patch validation is generic enough so it can live in 
-> > OE-Core, and thus we can easily update and refine it over time in line with the 
-> > code itself as well as encourage submitters to use the script on their own 
-> > changes before sending.
-> 
-> This all sounds like an improvement and is therefore a step in the right
-> direction :-)
-> 
-> A while back I had the idea of "porting" the kernel's "checkpatch.pl" to
-> The Yocto Project (it was around the same time that I was trying to
-> float the whole "Maintainers File" idea too, since I was also trying to
-> re-purpose "get-maintainer.pl" as well). About one minute into that
-> effort I realized the existing *.bb files were all over the place in
-> terms of the order of statements and the order of the blocks of
-> statements. At that time I found one recipe style guide from OE, and
-> another one from The Yocto Project, each of which described a slightly
-> different preference. So I asked on the mailing list and quickly
-> discovered that both groups prefer a different style.
-> 
-> I'm not saying this job isn't worth doing, but I am pointing out there's
-> the potential for feathers to be ruffled on both sides if someone tries
-> to produce a definitive style guide for recipe files and then enforces
-> it in an automated way. Since it is the OpenEmbedded Project's job to
-> provide the recipes for The Yocto Project, I'm guessing this question
-> needs to be decided by them? If that sounds reasonable, then maybe The
-> Yocto Project needs to acquiesce to OE's decision?
-> 
-> Instead of cross-posting, maybe this would be a good email for the new
-> architecture list (CC'ed)?
+From: Kai Kang <kai.kang@windriver.com>
 
-I think the areas where there are disagreements are comparatively small,
-really just on shell whitespace. Where they do exist, they are
-problematic, not least as some layers effectively ignored an agreement
-made by the TSC simply because they didn't agree with it. It basically
-means the OE TSC only applies to OE-Core as far as I can tell, which is
-sad but is the decision that was made. This also means the TSC has no
-real influence over any proposed coding style being used outside
-OE-Core.
+Update LIC_FILES_CHKSUM that the whole license file should be used
+rather than the first 2 lines.
 
-I do still believe shell whitespace changes would cause significant
-patch compatibility issues, I know I disagree on Martin over that. I
-still don't like the idea of people blindly running a formatting script
-since we'll than start seeing patches every time there is a single space
-in the wrong place. We simply don't want that amount of churn on the
-metadata.
+Remove COMPATIBLE_HOST that edac-utils could build for all architectures.
 
-I can imagine several people replying and saying that patch churn is not
-an issue but having seen the things people send patches for, I believe
-it will be. I don't want to encourage such things as I believe there are
-better things to do with our time (mine included as I'd have to review
-them, even to just say 'no').
+Update runtime dependencies:
 
-The maintainers file is a different problem and its one of maintenance,
-and more specifically what being listed means, who can be listed, how
-that listing can be changed and so on. The Yocto Project has some notion
-of maintainer and there its easy, Ross and I can made decisions on who
-is listed and what those people are expected to do and we can make it
-work (its how we ensure things get upgraded with some regularity). For
-OE, who would do this and what would the maintainer file mean? If
-someone patches something, are they required to cc the maintainer on
-patches for example? (that would imply workflow overhead) What if they
-don't cc a maintainer? Should we be forced to revert such a patch?
+* add perl modules that edac-ctl needs
+* add dmidecode for the archs which are in COMPATIBLE_HOST of dmidecode
+  that dmidecode is required by command edac-ctl.
 
-In many ways its like the "what is a stable branch?" question. Some
-people want to use a maintainers file as a way of having a veto on
-certain patches. Others want to use it as a way of finding people to fix
-bugs. Others again want it to help review patches. The uses vary and you
-need a clear definition about what its being used for to make it work.
+And add patches for initscripts to:
 
-If someone wants to put together a proposal about which problem this
-solves, with clear definitions/charter about how it would all work,
-great, but I've seen a lot of problems with such files and I worry it
-creates more problems than it would solve.
+* add restart subcommand
+* make init script be able to load EDAC module automatically
 
-Cheers,
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ .../recipes-support/edac-utils/edac-utils_git.bb   | 19 +++--
+ .../files/add-restart-to-initscript.patch          | 33 ++++++++
+ ...cript-be-able-to-automatically-load-EDAC-.patch | 98 ++++++++++++++++++++++
+ 3 files changed, 145 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-support/edac-utils/files/add-restart-to-initscript.patch
+ create mode 100644 meta-oe/recipes-support/edac-utils/files/make-init-script-be-able-to-automatically-load-EDAC-.patch
 
-Richard
-
+diff --git a/meta-oe/recipes-support/edac-utils/edac-utils_git.bb b/meta-oe/recipes-support/edac-utils/edac-utils_git.bb
+index e5621ad..9bd2f0a 100644
+--- a/meta-oe/recipes-support/edac-utils/edac-utils_git.bb
++++ b/meta-oe/recipes-support/edac-utils/edac-utils_git.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Userspace helper for Linux kernel EDAC drivers"
+ HOMEPAGE = "https://github.com/grondo/edac-utils"
+ SECTION = "Applications/System"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;beginline=1;endline=2;md5=1fbd81241fe252ec0f5658a521ab7dd8"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+ DEPENDS = " sysfsutils"
+ 
+@@ -11,7 +11,10 @@ PV = "0.16+git${SRCPV}"
+ 
+ S = "${WORKDIR}/git"
+ 
+-SRC_URI = "git://github.com/grondo/edac-utils;protocol=http"
++SRC_URI = "git://github.com/grondo/edac-utils \
++    file://make-init-script-be-able-to-automatically-load-EDAC-.patch \
++    file://add-restart-to-initscript.patch \
++"
+ 
+ inherit autotools-brokensep
+ 
+@@ -20,6 +23,12 @@ do_configure_prepend () {
+     ${S}/bootstrap
+ }
+ 
+-COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
+-
+-RDEPENDS_${PN} = " perl"
++RDEPENDS_${PN}_x86 = "dmidecode"
++RDEPENDS_${PN}_x86-64 = "dmidecode"
++RDEPENDS_${PN}_arm = "dmidecode"
++RDEPENDS_${PN}_aarch64 = "dmidecode"
++RDEPENDS_${PN}_powerpc = "dmidecode"
++RDEPENDS_${PN}_powerpc64 = "dmidecode"
++RDEPENDS_${PN}_append = " \
++    perl-module-file-basename perl-module-file-find perl-module-getopt-long perl-module-posix \
++"
+diff --git a/meta-oe/recipes-support/edac-utils/files/add-restart-to-initscript.patch b/meta-oe/recipes-support/edac-utils/files/add-restart-to-initscript.patch
+new file mode 100644
+index 0000000..87051da
+--- /dev/null
++++ b/meta-oe/recipes-support/edac-utils/files/add-restart-to-initscript.patch
+@@ -0,0 +1,33 @@
++From 3ade837f64de0cfe2aed5bc52f7919760f350531 Mon Sep 17 00:00:00 2001
++From: Wenzong Fan <wenzong.fan@windriver.com>
++Date: Fri, 7 Mar 2014 00:57:12 -0500
++Subject: [PATCH] edac: add restart to initscript
++
++Upstream-Status: Pending
++
++Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
++---
++ src/etc/edac.init.in |    6 +++++-
++ 1 file changed, 5 insertions(+), 1 deletion(-)
++
++diff --git a/src/etc/edac.init.in b/src/etc/edac.init.in
++index adf76ee..007a519 100644
++--- a/src/etc/edac.init.in
+++++ b/src/etc/edac.init.in
++@@ -155,8 +155,12 @@ case "$1" in
++   status)
++     service_status
++     ;;
+++  restart)
+++    service_stop
+++    service_start
+++    ;;
++   *)
++-    COMMANDS="start|stop|status"
+++    COMMANDS="start|stop|status|restart"
++     echo "Usage: $0 {${COMMANDS}}"
++     exit 2
++     ;;
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-support/edac-utils/files/make-init-script-be-able-to-automatically-load-EDAC-.patch b/meta-oe/recipes-support/edac-utils/files/make-init-script-be-able-to-automatically-load-EDAC-.patch
+new file mode 100644
+index 0000000..fddc25f
+--- /dev/null
++++ b/meta-oe/recipes-support/edac-utils/files/make-init-script-be-able-to-automatically-load-EDAC-.patch
+@@ -0,0 +1,98 @@
++make init script be able to automatically load EDAC module.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Roy.Li <rongqing.li@windriver.com>
++---
++ src/etc/edac.init.in |   49 +++++++++++++++++++++++++++++++++++++++++++++++--
++ 1 file changed, 47 insertions(+), 2 deletions(-)
++
++diff --git a/src/etc/edac.init.in b/src/etc/edac.init.in
++index 7a51da9..5b568c4 100644
++--- a/src/etc/edac.init.in
+++++ b/src/etc/edac.init.in
++@@ -42,7 +42,6 @@ for dir in "$sysconfdir/default" "$sysconfdir/sysconfig"; do
++   [ -f "$dir/$SERVICE" ] && . "$dir/$SERVICE"
++ done
++ 
++-
++ ###############################################################################
++ 
++ service_start ()
++@@ -52,6 +51,46 @@ service_start ()
++ # Assume that if EDAC_DRIVER is not set, then EDAC is configured
++ #  automatically, thus return successfully, but don't do anything.
++ #
+++    if [ ! -f /etc/edac/edac-driver ]; then
+++         [ -d /sys/bus/edac/devices/mc/mc0 ] && \
+++         echo `lsmod | grep _edac | cut -d" " -f1` > /etc/edac/edac-driver
+++    fi
+++
+++    [ -f /etc/edac/edac-driver ] && EDAC_DRIVER=`cat /etc/edac/edac-driver`
+++
+++    if [ -z "$EDAC_DRIVER" ]; then
+++
+++        DRIVER_PATH=/lib/modules/`uname -r`/kernel/drivers/edac
+++        oldpath=`pwd`
+++        if [ -d $DRIVER_PATH ]; then
+++
+++            cd $DRIVER_PATH
+++
+++            for i in $(/bin/ls | /usr/bin/cut -d. -f1) ; do
+++                /sbin/modprobe $i 2>/dev/null
+++                if [ -d /sys/bus/edac/devices/mc/mc0 ]; then
+++                    echo $i> /etc/edac/edac-driver
+++                    EDAC_DRIVER=$i
+++                    break
+++                fi
+++                /sbin/modprobe -r $i 2>/dev/null
+++            done
+++
+++            cd "$oldpath"
+++
+++
+++            if [ -z "$EDAC_DRIVER" ]; then
+++                echo "This board may not support EDAC, or EDAC module may not be compiled in"
+++                exit
+++            fi
+++
+++        else
+++            echo "This board may not support EDAC, or EDAC module may not be compiled in"
+++            exit
+++        fi
+++
+++    fi
+++
++   if [ -n "$EDAC_DRIVER" ]; then
++      echo -n "Starting ${SERVICE}: "
++      modprobe $EDAC_DRIVER
++@@ -76,12 +115,15 @@ service_start ()
++ service_stop ()
++ {
++   echo -n "Disabling ${SERVICE}: "
+++
+++  [ -f /etc/edac/edac-driver ] && EDAC_DRIVER=`cat /etc/edac/edac-driver`
+++
++   if [ -n "$EDAC_DRIVER" ]; then
++     modprobe -r $EDAC_DRIVER
++     STATUS=$?
++     [ $STATUS -eq 0 ] && echo success || echo failure
++   else
++-    echo "Not supported for this configuration."
+++    echo "Not supported for this configuration, or EDAC Module is not loaded."
++     STATUS=6
++   fi
++ }
++@@ -92,6 +134,9 @@ service_status ()
++ {
++ # Print the current status of the service.  Required by LSB.
++ #
+++  [ -f /etc/edac/edac-driver ] && EDAC_DRIVER=`cat /etc/edac/edac-driver`
+++  [ -z "$EDAC_DRIVER" ] && STATUS=1 && exit
+++
++   edac-ctl --status
++   STATUS=0
++ }
++-- 
++1.7.10.4
++
+-- 
+2.6.1
 
 
