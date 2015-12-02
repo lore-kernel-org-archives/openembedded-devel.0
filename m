@@ -1,16 +1,24 @@
-Return-Path: <joshua.lock@collabora.co.uk>
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
-	by mail.openembedded.org (Postfix) with ESMTP id 17B7B6011F
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 78FBB601D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Dec 2015 20:56:55 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(Authenticated sender: joshuagl) with ESMTPSA id A597A264C34
-From: Joshua Lock <joshua.lock@collabora.co.uk>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Dec 2015 20:56:52 +0000
-Message-Id: <1449003412-21666-1-git-send-email-joshua.lock@collabora.co.uk>
-X-Mailer: git-send-email 2.4.3
-Subject: [meta-oe][PATCH v2] poppler-data: install CMap resources for CJK glyph support
+	Wed,  2 Dec 2015 02:24:48 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tB22OmLR000282
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 1 Dec 2015 18:24:49 -0800 (PST)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Tue, 1 Dec 2015 18:24:48 -0800
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 2 Dec 2015 10:13:12 +0800
+Message-ID: <1449022392-17978-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.6.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] libssh2: make crypto library selectable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -23,68 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2015 20:56:59 -0000
+X-List-Received-Date: Wed, 02 Dec 2015 02:24:49 -0000
+Content-Type: text/plain
 
-CID-keyed fonts, as commonly used to support pictographic East
-Asian character sets require Character Maps which unidirectionally
-map character codes (i.e. Unicode encoding) to CID (the glyphs in
-the font face).
+From: Kai Kang <kai.kang@windriver.com>
 
-Without a CMap poppler isn't able to correctly PDF files in
-Chinese, Japanese or Korean without embedded fonts.
+Add PACKAGECONFs 'openssl' and 'gcrypt' to make crypto library
+selectable. Only one of them could be set. If they are both set,
+'gcrypt' is invalide.
 
-This change installs a copy of the Identity files from Adobe's
-CMap Resources[1] based on a similar change in Fedora's
-poppler-data[2][3].
-
-1. https://github.com/adobe-type-tools/cmap-resources
-2. http://pkgs.fedoraproject.org/cgit/poppler-data.git/tree/poppler-data.spec#n18
-3. https://bugzilla.redhat.com/show_bug.cgi?id=842351
-
-Signed-off-by: Joshua Lock <joshua.lock@collabora.co.uk>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb | 15 ++++++++++++---
- 1 file changed, 12 insertions(+), 3 deletions(-)
+ meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb b/meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb
-index 4f55e9f..fb8f43d 100644
---- a/meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb
-+++ b/meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb
-@@ -1,5 +1,7 @@
--SUMMARY = "Poppler is a PDF rendering library based on the xpdf-3.0 code base"
--LICENSE = "Adobe"
-+SUMMARY = "Encoding files for Poppler"
-+DESCRIPTION = "Encoding files for use with poppler that enable poppler to \
-+               correctly render CJK and Cyrrilic."
-+LICENSE = "BSD & GPLv2 & GPLv3+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4870b98343f0bbb25fa43b9d2ba59448 \
-                     file://COPYING.adobe;md5=63c6a8a9df204c00461fa5f163d8a663 \
-                     file://COPYING.gpl2;md5=751419260aa954499f7abaabaa882bbe \
-@@ -7,15 +9,22 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4870b98343f0bbb25fa43b9d2ba59448 \
+diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb b/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
+index 4f03b99..c43164e 100644
+--- a/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
++++ b/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
+@@ -2,7 +2,7 @@ SUMMARY = "A client-side C library implementing the SSH2 protocol"
+ HOMEPAGE = "http://www.libssh2.org/"
+ SECTION = "libs"
  
- inherit allarch
+-DEPENDS = "zlib openssl"
++DEPENDS = "zlib"
  
--SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.gz"
-+INHIBIT_DEFAULT_DEPS = "1"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c5cf34fc0acb44b082ef50ef5e4354ca"
+@@ -13,8 +13,12 @@ SRC_URI[sha256sum] = "5a202943a34a1d82a1c31f74094f2453c207bf9936093867f41414968c
+ 
+ inherit autotools pkgconfig
+ 
+-EXTRA_OECONF += "--with-openssl \
++EXTRA_OECONF += "\
+                  --with-libz \
+-                 --with-libssl-prefix=${STAGING_LIBDIR} \
+                  --with-libz-prefix=${STAGING_LIBDIR} \
+                 "
 +
-+SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.gz \
-+           https://github.com/adobe-type-tools/cmap-resources/raw/master/cmapresources_identity-0.zip;name=cmap"
- SRC_URI[md5sum] = "636a8f2b9f6df9e7ced8ec0946961eaf"
- SRC_URI[sha256sum] = "e752b0d88a7aba54574152143e7bf76436a7ef51977c55d6bd9a48dccde3a7de"
-+SRC_URI[cmap.md5sum] = "32aab2e25655e475dd58a50479270f91"
-+SRC_URI[cmap.sha256sum] = "3a3b591b7153588a77d1304bcefc1781750a36811cebae03680c85882765f515"
- 
- do_compile() {
- }
- 
- do_install() {
-     oe_runmake install DESTDIR=${D}
-+    install -d ${D}${datadir}/poppler/cMap
-+    install -m644 ${WORKDIR}/cmapresources_identity-0/CMap/Identity-* ${D}${datadir}/poppler/cMap/
- }
- 
- FILES_${PN} += "${datadir}"
++# only one of openssl and gcrypt could be set
++PACKAGECONFIG ??= "openssl"
++PACKAGECONFIG[openssl] = "--with-openssl --with-libssl-prefix=${STAGING_LIBDIR},--without-openssl,openssl"
++PACKAGECONFIG[gcrypt] = "--with-libgcrypt --with-libgcrypt-prefix=${STAGING_EXECPREFIXDIR},--without-libgcrypt,libgcrypt"
 -- 
-2.4.3
+2.6.1
 
 
