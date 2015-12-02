@@ -1,46 +1,31 @@
-Return-Path: <daniel.adolfsson@bluetest.se>
-Received: from mail-lf0-f48.google.com (mail-lf0-f48.google.com
-	[209.85.215.48])
-	by mail.openembedded.org (Postfix) with ESMTP id A63406014E
+Return-Path: <haris.okanovic@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id B015460589
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Dec 2015 10:48:53 +0000 (UTC)
-Received: by lfs39 with SMTP id 39so42699545lfs.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Dec 2015 02:48:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bluetest-se.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=Z0DI4/Bo/cVXSy4ObhJnMJnXqzp5k0wI+sXgAGz8f50=;
-	b=GrXrPTrrDvObrwNUQOc+06NG3LP0tkpNNC4reln/P+iF9Nx3eZFXendV/28GWiFxBG
-	xrvzfTqSNCDEXl2iz99EpEtMEwcjBVQR/6cn6FuG1gQJAfDkhdnR//vkFWgn5F+FINeZ
-	0Ta8CCcCQWtCtcKeRo4ezNqiPxyw3ZmoYSdDtSixi8omil1JMGpwxdJOd0bl3L+5wdzU
-	NG6sSk4MeLbcOuhyqxbUHeUt64sYH5lBTChEFc7QfGXq2d+uEMSDrQQ1AqlqHUmidG1U
-	S5JvY4Sh2f35VuBwe6ye4o+SZlLnV3CGJlrIP+0Wkahzcz999/MnfgV/MQiioYH9nDtX
-	J6TA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Z0DI4/Bo/cVXSy4ObhJnMJnXqzp5k0wI+sXgAGz8f50=;
-	b=nGw5RVc9Pw5c6WH6p8ut+ZnwMYRSdZgmSqwFPwXMbyxraj/ygxasBNojTTvfC6gVCm
-	5EpcFt4gT/q+dCkUUOGXbqVKiCLQ7bu86t7IEv8OtqREU7FyTx4su0dVlPtyRGx7JFgo
-	KMTeSQsv05n8CA8T+fHjhy0fYQGCoXG3FWBoOTfpClp1N7BDHgSvf7o/YOzfaXuWx/Cp
-	j5cRwAk2Fmj6R24Sg32AOR+/5cBqIg6LyoVMs+n//DzJoOX7n53n/ActrpcrR6KdtplF
-	Sl4EphypT57fX/bMFP/FHtFvRhe0XFmM2dsw8ol0Ubnk2ewgeCnjSGgZyk+xVL17n2Nn
-	i85g==
-X-Gm-Message-State: ALoCoQlT9vFXImEpAb7IXDrXXBEG3/pNbvy5Dtc4Aeer8Pj3EjqOI+C0kSnHdTTDI+NWxNYEcHwh
-X-Received: by 10.25.20.217 with SMTP id 86mr1699497lfu.164.1449053333356;
-	Wed, 02 Dec 2015 02:48:53 -0800 (PST)
-Received: from bluepc-13-008.internal.bluetest.se
-	(user145.217-10-117.netatonce.net. [217.10.117.145])
-	by smtp.gmail.com with ESMTPSA id l81sm384574lfb.40.2015.12.02.02.48.52
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 02 Dec 2015 02:48:52 -0800 (PST)
-From: Daniel Adolfsson <daniel.adolfsson@bluetest.se>
+	Wed,  2 Dec 2015 22:58:04 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	tB2Mw4WX001119 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 2 Dec 2015 16:58:04 -0600
+Received: from harisdt.amer.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015120216580408-679209 ;
+	Wed, 2 Dec 2015 16:58:04 -0600 
+From: Haris Okanovic <haris.okanovic@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Dec 2015 11:48:46 +0100
-Message-Id: <1449053326-20657-1-git-send-email-daniel.adolfsson@bluetest.se>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] gitpkgv.bbclass: Add support for gitsm:// url type
+Date: Wed, 2 Dec 2015 16:57:50 -0600
+Message-Id: <1449097070-28665-1-git-send-email-haris.okanovic@ni.com>
+X-Mailer: git-send-email 2.6.2
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 12/02/2015 04:58:04 PM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 12/02/2015 04:58:04 PM,
+	Serialize complete at 12/02/2015 04:58:04 PM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-12-02_13:, , signatures=0
+Cc: Haris Okanovic <haris.okanovic@ni.com>
+Subject: [meta-oe] [PATCH] python-jinja2: Disable `make clean`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,31 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Dec 2015 10:48:56 -0000
+X-List-Received-Date: Wed, 02 Dec 2015 22:58:04 -0000
 
-When using "gitsm://", for projects using submodules, instead of "git://", gitpkgv does not work.
+Makefile doesn't define "clean". Unless disabled, base_do_configure()
+will fail the build attempting to run `make clean` when rebuilding
+this recipe.
 
-The limitation is synthetic, this patch simply adds gitsm as an allowed url type.
-
-Signed-off-by: Daniel Adolfsson <daniel.adolfsson@bluetest.se>
+Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
+Natinst-ReviewBoard-ID: 119389
 ---
- meta-oe/classes/gitpkgv.bbclass | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-jinja2_2.7.3.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
-index 7bdc538..1cba00c 100644
---- a/meta-oe/classes/gitpkgv.bbclass
-+++ b/meta-oe/classes/gitpkgv.bbclass
-@@ -65,7 +65,7 @@ def get_git_pkgv(d, use_tags):
+diff --git a/meta-python/recipes-devtools/python/python-jinja2_2.7.3.bb b/meta-python/recipes-devtools/python/python-jinja2_2.7.3.bb
+index e66077a..aa5c082 100644
+--- a/meta-python/recipes-devtools/python/python-jinja2_2.7.3.bb
++++ b/meta-python/recipes-devtools/python/python-jinja2_2.7.3.bb
+@@ -17,3 +17,5 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ inherit setuptools
  
-     found = False
-     for url in ud.values():
--        if url.type == 'git':
-+        if url.type == 'git' or url.type == 'gitsm':
-             for name, rev in url.revisions.items():
-                 if not os.path.exists(url.localpath):
-                     return None
+ RDEPENDS_${PN} += "python-io python-pickle python-crypt python-math python-netclient python-re python-textutils python-lang python-pprint python-shell python-markupsafe"
++
++CLEANBROKEN = "1"
 -- 
-1.9.1
+2.6.2
 
 
