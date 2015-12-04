@@ -1,35 +1,37 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-ob0-f169.google.com (mail-ob0-f169.google.com
-	[209.85.214.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B12F6AC4B
+Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
+	[209.85.214.170])
+	by mail.openembedded.org (Postfix) with ESMTP id E07736AC4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Dec 2015 03:22:03 +0000 (UTC)
-Received: by oba1 with SMTP id 1so23448120oba.1
+	Fri,  4 Dec 2015 03:22:06 +0000 (UTC)
+Received: by obbnk6 with SMTP id nk6so66152679obb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Dec 2015 19:22:03 -0800 (PST)
+	Thu, 03 Dec 2015 19:22:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=dNaGB4D+GaMGopdfixHtza9dKdJnFz2R3j/M8Y/5VBk=;
-	b=djC/O9QWYSdmjYmAeON5YqNnWd4UFN6H3nKIhGa3PZRTrQ7bEmSbfbKB5KaEeMtVAB
-	4DrQC4pDse2B5tAMxvInXWEToUAsLpgRLPz1aDsbsulV23+h1j7exwzI/5ysZwlpy3or
-	7Z4CUDkUirLAItgoKh35RlDipLAHKoDZ0MVa+Arot4OCFZoe0O6mwaSMoRP/3OqbT0qS
-	E/mIqZY/1kYzYNd9bbZtEOx2+73U0njSVY6E7hGkC4ufgcA5K/2ol7gWw8roULmPCvar
-	FyhO6CM/D5007Q8zGzsbgVoqqXu2yfzMMUW9WvMM+b5HfowQ3v16hxT/DIPPNVe6U9YJ
-	QyGw==
-X-Received: by 10.182.125.38 with SMTP id mn6mr7737039obb.17.1449199323865;
-	Thu, 03 Dec 2015 19:22:03 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=RQBjvu7NLiWyuScUS7HR1iAicZoSJUmH/cfUmWQ2cvc=;
+	b=qYo48K+ItaAYPLZRrlnFcpR+zAWvILTBoBv+/UElH+zpvVIPmhFMWeCHyHZQgW74zm
+	/FPl0OL3CZ7fPoy0fHPX7EccL5d/D6nJOrpfs9L5oHT7ilWS4t51J+SKT5UjvNc8HV5N
+	YtQZIOOgOduFp69T7al9XriivrWL2acpMX912XDyseXgooqADnU6xtY6wtI1ygmV3+9u
+	W/I+wcn1QTgykELmxt7Iuot6IAIs6PlJhb7CvfKB0FDROPTSpCQgVkG005HNMt3/0StI
+	aomfyvmu0NSqgFrKkYJ1r/gkR3Lat0h+KtHmiwJFj0BbyRDsDsHQhEA+vftL8hoOZTM7
+	UI7w==
+X-Received: by 10.60.137.137 with SMTP id qi9mr11094071oeb.56.1449199327396;
+	Thu, 03 Dec 2015 19:22:07 -0800 (PST)
 Received: from e6520.cablelabs.com
 	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
 	by smtp.gmail.com with ESMTPSA id
-	ct9sm3533633oec.15.2015.12.03.19.22.02
+	ct9sm3533633oec.15.2015.12.03.19.22.06
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 03 Dec 2015 19:22:02 -0800 (PST)
+	Thu, 03 Dec 2015 19:22:06 -0800 (PST)
 From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Dec 2015 19:21:52 -0800
-Message-Id: <1449199316-14048-1-git-send-email-armccurdy@gmail.com>
+Date: Thu,  3 Dec 2015 19:21:53 -0800
+Message-Id: <1449199316-14048-2-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-multimedia][PATCH 0/4] mpg123 cleanups + update
+In-Reply-To: <1449199316-14048-1-git-send-email-armccurdy@gmail.com>
+References: <1449199316-14048-1-git-send-email-armccurdy@gmail.com>
+Subject: [meta-multimedia][PATCH 1/4] mpg123: recipe formatting cleanup, no functional changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,18 +44,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2015 03:22:03 -0000
+X-List-Received-Date: Fri, 04 Dec 2015 03:22:07 -0000
 
-Andre McCurdy (4):
-  mpg123: recipe formatting cleanup, no functional changes
-  mpg123: limit ARM_INSTRUCTION_SET = "arm" over-ride to armv4/armv5
-  mpg123: drop unnecessary dependency on tslib
-  mpg123: update 1.21.0 -> 1.22.4
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ .../recipes-multimedia/mpg123/mpg123_1.21.0.bb     | 42 +++++++++++-----------
+ 1 file changed, 22 insertions(+), 20 deletions(-)
 
- .../mpg123/{mpg123_1.21.0.bb => mpg123_1.22.4.bb}  | 47 ++++++++++++----------
- 1 file changed, 25 insertions(+), 22 deletions(-)
- rename meta-multimedia/recipes-multimedia/mpg123/{mpg123_1.21.0.bb => mpg123_1.22.4.bb} (86%)
-
+diff --git a/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.21.0.bb b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.21.0.bb
+index 3aa5f3d..a3225f2 100644
+--- a/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.21.0.bb
++++ b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.21.0.bb
+@@ -6,40 +6,42 @@ HOMEPAGE = "http://mpg123.de/"
+ BUGTRACKER = "http://sourceforge.net/p/mpg123/bugs/"
+ SECTION = "multimedia"
+ 
++LICENSE = "LGPLv2.1"
++LICENSE_FLAGS = "commercial"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1e86753638d3cf2512528b99079bc4f3"
++
+ DEPENDS = "tslib audiofile"
+ 
++SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/${BP}.tar.bz2"
++
++SRC_URI[md5sum] = "13a9df5d4e7aa110e4ae27cf30128ce9"
++SRC_URI[sha256sum] = "3ad197f77c9ffdf3601e1c3183ae0709ccb3c3de68309527ce9375fcfb15dcba"
++
++inherit autotools pkgconfig
++
+ # The options should be mutually exclusive for configuration script.
+ # If both alsa and pulseaudio are specified (as in the default distro features)
+ # pulseaudio takes precedence.
+ PACKAGECONFIG_ALSA = "${@base_contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)}"
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '${PACKAGECONFIG_ALSA}', d)}"
+-PACKAGECONFIG[pulseaudio] = "--with-default-audio=pulse,,pulseaudio"
++
+ PACKAGECONFIG[alsa] = "--with-default-audio=alsa,,alsa-lib"
+-PACKAGECONFIG[sdl] = ",,libsdl"
+-PACKAGECONFIG[openal] = ",,openal-soft"
++PACKAGECONFIG[esd] = ",,esound"
+ PACKAGECONFIG[jack] = ",,jack"
++PACKAGECONFIG[openal] = ",,openal-soft"
+ PACKAGECONFIG[portaudio] = ",,portaudio-v19"
+-PACKAGECONFIG[esd] = ",,esound"
++PACKAGECONFIG[pulseaudio] = "--with-default-audio=pulse,,pulseaudio"
++PACKAGECONFIG[sdl] = ",,libsdl"
+ 
+-# Following are possible sound output modules
+-#alsa tinyalsa oss coreaudio sndio sun win32 win32_wasapi os2 esd jack portaudio pulse sdl nas arts openal dummy
++# Following are possible sound output modules:
++# alsa arts coreaudio dummy esd jack nas openal os2 oss portaudio pulse sdl sndio sun tinyalsa win32 win32_wasapi
+ AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'alsa', 'alsa', '', d)}"
+-AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'pulseaudio', 'pulse', '', d)}"
+-AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'sdl', 'sdl', '', d)}"
+-AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'openal', 'openal', '', d)}"
++AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'esd', 'esd', '', d)}"
+ AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'jack', 'jack', '', d)}"
++AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'openal', 'openal', '', d)}"
+ AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'portaudio', 'portaudio', '', d)}"
+-AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'esd', 'esd', '', d)}"
+-
+-LICENSE = "LGPLv2.1"
+-LICENSE_FLAGS = "commercial"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=1e86753638d3cf2512528b99079bc4f3"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "13a9df5d4e7aa110e4ae27cf30128ce9"
+-SRC_URI[sha256sum] = "3ad197f77c9ffdf3601e1c3183ae0709ccb3c3de68309527ce9375fcfb15dcba"
+-
+-inherit autotools pkgconfig
++AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'pulseaudio', 'pulse', '', d)}"
++AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'sdl', 'sdl', '', d)}"
+ 
+ EXTRA_OECONF = " \
+     --enable-shared \
 -- 
 1.9.1
 
