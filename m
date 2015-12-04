@@ -1,37 +1,23 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F76260132
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id C8A3F6AC3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Dec 2015 13:54:41 +0000 (UTC)
-Received: by wmww144 with SMTP id w144so65789411wmw.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2015 05:54:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:subject:from:to:date:in-reply-to:references:content-type
-	:mime-version:content-transfer-encoding;
-	bh=Vc82hfFfV+WLdIOn/fXbPC1GAmAhy8g5xtiefnBuaP4=;
-	b=Fn3p06QYM4ErIPSc8/KxFLyru4nGM8WAJ+8bJvSDVRFSs/NxfDEqUA2DbN8kBl78WP
-	zBkNIR6AzjpxRJJOz/Pir8CAbfzDXJ7xXWEwxtY11hYuXg8AGQKs/H1lNFe/GoGWqD8K
-	/fywFhcQXbuaLd0GZ65p/xSvCZ3AD6dzJkcHk3T1lNe+whECDaqMRZMbi9pY2NlCi26I
-	Z6Yxv2z+bmSPfyD8sdpwSspI8sYvtR6CJ/QRtXjV5WU+QIEaa8HOixoHe/qOBGZO9RO1
-	HIjjTzJKlH+dZgbGFOTBKpBYzYRG2wugrUmZjJ+haNGBlhdz2RrCnVPz6jGk4VYQeGuw
-	74sQ==
-X-Received: by 10.28.142.83 with SMTP id q80mr5544971wmd.66.1449237281877;
-	Fri, 04 Dec 2015 05:54:41 -0800 (PST)
-Received: from [192.168.0.7] (212-41-103-249.adsl.solnet.ch. [212.41.103.249])
-	by smtp.gmail.com with ESMTPSA id
-	w4sm12215251wje.49.2015.12.04.05.54.39
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Fri, 04 Dec 2015 05:54:39 -0800 (PST)
-Message-ID: <1449237278.2313.15.camel@Saturn.local.all>
-From: Max Krummenacher <max.oss.09@gmail.com>
+	Fri,  4 Dec 2015 15:08:19 +0000 (UTC)
+Received: (qmail 19384 invoked by uid 1003); 4 Dec 2015 15:08:18 -0000
+Received: from unknown (HELO ?192.168.11.124?)
+	(philip@opensdr.com@108.44.110.59)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	4 Dec 2015 15:08:18 -0000
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 04 Dec 2015 14:54:38 +0100
-In-Reply-To: <56613B9A.7050406@windriver.com>
 References: <56613B9A.7050406@windriver.com>
-X-Mailer: Evolution 3.10.4 
-Mime-Version: 1.0
+From: Philip Balister <philip@balister.org>
+Message-ID: <5661AC5F.3040706@balister.org>
+Date: Fri, 4 Dec 2015 10:08:15 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
+MIME-Version: 1.0
+In-Reply-To: <56613B9A.7050406@windriver.com>
 Subject: Re: Is git.openembedded.org down ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -45,31 +31,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2015 13:54:42 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 04 Dec 2015 15:08:23 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 7bit
 
-Hi
-
-Am Freitag, den 04.12.2015, 15:07 +0800 schrieb Robert Yang:
-$ ping git.openembedded.org doesn't work.
+On 12/04/2015 02:07 AM, Robert Yang wrote:
 > 
-Works for me.
+> $ ping git.openembedded.org doesn't work.
+> 
 
-mk@Saturn:~> date
-Fre Dez  4 14:48:13 CET 2015
+You can also use:
 
-mk@Saturn:~/tmp> ping -c 1 git.openembedded.org
-PING opal.openembedded.org (140.211.169.152) 56(84) bytes of data.
-64 bytes from opal.openembedded.org (140.211.169.152): icmp_seq=1 ttl=45
-time=207 ms
+https://github.com/openembedded
 
---- opal.openembedded.org ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 207.014/207.014/207.014/0.000 ms
-
-Also access with git and cgit web frontend works.
-
-Max
-
+Philip
 
