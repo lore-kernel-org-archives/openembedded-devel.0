@@ -1,31 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 97A0B6612D
+Return-Path: <gerharddeclercq@outlook.com>
+Received: from DUB004-OMC4S4.hotmail.com (dub004-omc4s4.hotmail.com
+	[157.55.2.79])
+	by mail.openembedded.org (Postfix) with ESMTP id E205C601F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Dec 2015 23:01:53 +0000 (UTC)
-Received: by wmvv187 with SMTP id v187so95165978wmv.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2015 15:01:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=0I2vizLtuoCmQPsoMIpDeCoILdd5/36Gve+wXlsW8TM=;
-	b=gTndpUQ27uatTe9UjtJ+dLKuW9a+dppOKT9DdX8fTW2YLiy8h/mraEOz/k1kIUCUzy
-	9AQqRi0RWbgBjgl66X/GhhTt3sGibcIqsPpizt7PFtjwL0n/AJ1l5pkAVfDeyvJv60zP
-	lNOH8PX3SqL6+xDs9MlN3keB3NQuzauN/+UBW8eLGxexNu65mHeJhxzZOXY0pFhPDSJP
-	bu2q3Szn0RhZXpHaiaAmdBkOPi/x3tSq0EMFlfuuR0pz8RFx46J6O/9Va7NhDE/lJvbz
-	lwEHd+qKmeKWuyojFnfBLbzoOziSjE9Esdeh098SSq9lVfI1wnJ1PMcmh1FD9vMvcPfC
-	vQrg==
+	Sat,  5 Dec 2015 07:49:29 +0000 (UTC)
+Received: from DUB127-W2 ([157.55.2.73]) by DUB004-OMC4S4.hotmail.com over TLS
+	secured channel with Microsoft SMTPSVC(7.5.7601.23008); 
+	Fri, 4 Dec 2015 23:49:29 -0800
+X-TMN: [nuo6dE0bX8uUKTyjuxR5Ue6VYhuigX0VDxkiydIfnWk=]
+X-Originating-Email: [gerharddeclercq@outlook.com]
+Message-ID: <DUB127-W2CB55D5F0C305E1BDAA27B80B0@phx.gbl>
+From: Gerhard de Clercq <gerharddeclercq@outlook.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Sat, 5 Dec 2015 07:49:28 +0000
+Importance: Normal
+In-Reply-To: <CA+chaQd-YtjtkE8M0ZdPESsF2tneE5A74_RiyvmPSFx5h07yWQ@mail.gmail.com>
+References: <DUB127-W22D1770BD32DBD895E41FCB80C0@phx.gbl>,
+	<CA+chaQd+6fTZwYqVDSNb+zTEnr7dKZbmS5iYTxobtvn1OhZZpg@mail.gmail.com>,
+	<CA+chaQd-YtjtkE8M0ZdPESsF2tneE5A74_RiyvmPSFx5h07yWQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.194.116.170 with SMTP id jx10mr19712707wjb.166.1449270113562;
-	Fri, 04 Dec 2015 15:01:53 -0800 (PST)
-Received: by 10.194.2.15 with HTTP; Fri, 4 Dec 2015 15:01:53 -0800 (PST)
-In-Reply-To: <CA+chaQd+6fTZwYqVDSNb+zTEnr7dKZbmS5iYTxobtvn1OhZZpg@mail.gmail.com>
-References: <DUB127-W22D1770BD32DBD895E41FCB80C0@phx.gbl>
-	<CA+chaQd+6fTZwYqVDSNb+zTEnr7dKZbmS5iYTxobtvn1OhZZpg@mail.gmail.com>
-Date: Sat, 5 Dec 2015 00:01:53 +0100
-Message-ID: <CA+chaQd-YtjtkE8M0ZdPESsF2tneE5A74_RiyvmPSFx5h07yWQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 05 Dec 2015 07:49:29.0311 (UTC)
+	FILETIME=[7890BEF0:01D12F31]
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: =?UTF-8?B?UmU6IFttZXRhLXF0NV0gR1N0cmVhbWVyLTEuMCBwYXRoIGJyZWFraW5nIDAuMSBzdXBwb3J04oCP?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -40,67 +36,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2015 23:01:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 05 Dec 2015 07:49:30 -0000
+Content-Type: text/plain; charset="windows-1256"
+Content-Transfer-Encoding: base64
 
-FWIW: there is also:
-http://patchwork.openembedded.org/patch/88555/
-
-also still waiting for v3 and I don't know if it was tested with 0.10
-gstreamer.
-
-On Fri, Dec 4, 2015 at 11:59 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
-
-> > Otherwise, why is the patch that seems to have been accepted in 2014 to
-> fix the 1.0 breaking 0.1 support not been implemented in the layer yet?
->
-> It's incorrectly marked as Accepted in patchwork, but it was never merged
-> into the repository, because the author never sent v2 with review comments
-> from me resolved.
->
-> There was another patch:
-> http://patchwork.openembedded.org/patch/85075/
-> which was merged and nobody was reporting broken 0.10 support since then.
-> I'm not using 0.10 version, so I was assuming it works now for people who
-> do.
->
-> Regards,
->
->
-> On Fri, Dec 4, 2015 at 11:24 PM, Gerhard de Clercq <
-> gerharddeclercq@outlook.com> wrote:
->
->> Hi,
->>
->> I've just wasted a lot of time trying to get qtmultimedia to compile on a
->> Fido build using the Fido branch of meta-qt5. After a lot of tinkering I
->> finally got it working and have found that the problem was caused by the
->> 0001-Initial-porting-effort-to-GStreamer-1.0.patch file that ships with the
->> layer. I initially didn't realize that the troublesome code was coming from
->> it and debugged the cached source (which it seems is patched) until it
->> worked. I didn't think it would be so easy but a patch
->> http://patchwork.openembedded.org/patch/79531/ I found from 2014
->> completely told me how to correct the source.
->>
->> What bothers me is how can this can be possible. Are the recipes designed
->> not to apply the patch to non 1.0 build and if so, what could prevent that
->> from working? Otherwise, why is the patch that seems to have been accepted
->> in 2014 to fix the 1.0 breaking 0.1 support not been implemented in the
->> layer yet?
->>
->> PS. I see the patch file has changed a bit after Fido but unfortunately
->> Fido is the latest that my board supports at the moment and I have not been
->> able to test with a newer version.
->>
->> Regards,
->> Gerhard de Clercq
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
->
+SSBndWVzcyBJJ20gdGhlIG9ubHkgb25lIHN0aWxsIHN0dWNrIG9uIDAuMSBidXQgSSdsbCB0cnkg
+dG8gc2VuZCBpbiBhIHBhdGNoIGZvciB3aG9ldmVyIGFsc28gY29tZXMgdG8gbmVlZCB0aGlzLiBJ
+IHdvdWxkIGFwcHJlY2lhdGUgc29tZSBhZHZpY2Ugd2l0aCByZWdhcmRzIHRvIGhvdyBJIHNob3Vs
+ZCBzdWJtaXQgYSBwYXRjaCBiZWNhdXNlIHRoaXMgaXMgaW4gZmFjdCBhIHBhdGNoIG9uIGEgcGF0
+Y2ggZmlsZSB3aGljaCBpcyBzb21ldGhpbmcgcXVpdGUgc3RyYW5nZSBpZiB5b3UgYXNrIG1lLiAN
+Cg0KSSB0cmllZCB0byBtb2RpZnkgdGhlIGFjdHVhbCBwYXRjaCBmaWxlIG1hbnVhbGx5IGJ1dCB0
+aGF0IGRpZCBub3QgZ28gdG8gd2VsbC4gSSBlbmRlZCB1cCBqdXN0IGFwcGx5aW5nIHRoZSBjdXJy
+ZW50IHBhdGNoIHRvIGEgY2xlYW4gcmVwbyBjbG9uZSwgY29weWluZyBteSBtb2RpZmllZCBmaWxl
+cyB0byBpdCBhbmQgdGhlbiBqdXN0IHNhdmluZyAiZ2l0IGRpZmYiIHRvIGEgZmlsZSB0byBjcmVh
+dGUgYSBuZXdlciB2ZXJzaW9uIG9mIHRoYXQgcGF0Y2guIFRoaXMgZG9lcyBub3QgZ2VuZXJhdGUg
+YSBuaWNlIGhlYWRlciBibG9jayBsaWtlIHRoZSBvbGQgcGF0Y2ggZmlsZSBoYWQgYnV0IGl0IGRv
+ZXMgc2VlbSB0byB3b3JrLiBJcyB0aGUgaGVhZGVyIGltcG9ydGFudCBhbmQgaWYgc28sIGhvdyBz
+aG91bGQgSSBnZW5lcmF0ZSBpdD8NCg0KT25lIEkgaGF2ZSB0aGlzIG5ldyBwYXRjaCwgc2hvdWxk
+IEkgc2ltcGx5IHJlcGxhY2UgY29udGVudHMgb2YgdGhlIG9sZCBmaWxlIHdpdGggdGhlIG5ldyBv
+bmUncyBhbmQgcnVuICJnaXQgc2VuZC1lbWFpbCIuIFRoYXQgd291bGQgc2VlbSBub3JtYWwgYnV0
+IHdpdGggdGhpcyBiZWluZyBhIHBhdGNoIG9uIGEgcGF0Y2ggZmlsZSBpdCB3aWxsIGxvb2sgbGlr
+ZSBhIGNvbXBsZXRlIG1lc3MgY29uc2lkZXJpbmcgdGhlIG5ldyBvbmUgaXMgbm90IGV2ZW4gcmVh
+bGx5IGRlcml2ZWQgZnJvbSB0aGUgb2xkIG9uZS4NCg0KPiBEYXRlOiBTYXQsIDUgRGVjIDIwMTUg
+MDA6MDE6NTMgKzAxMDANCj4gRnJvbTogbWFydGluLmphbnNhQGdtYWlsLmNvbQ0KPiBUbzogb3Bl
+bmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFtv
+ZV0JW21ldGEtcXQ1XSBHU3RyZWFtZXItMS4wIHBhdGggYnJlYWtpbmcgMC4xIHN1cHBvcnT+DQo+
+IA0KPiBGV0lXOiB0aGVyZSBpcyBhbHNvOg0KPiBodHRwOi8vcGF0Y2h3b3JrLm9wZW5lbWJlZGRl
+ZC5vcmcvcGF0Y2gvODg1NTUvDQo+IA0KPiBhbHNvIHN0aWxsIHdhaXRpbmcgZm9yIHYzIGFuZCBJ
+IGRvbid0IGtub3cgaWYgaXQgd2FzIHRlc3RlZCB3aXRoIDAuMTANCj4gZ3N0cmVhbWVyLg0KPiAN
+Cj4gT24gRnJpLCBEZWMgNCwgMjAxNSBhdCAxMTo1OSBQTSwgTWFydGluIEphbnNhIDxtYXJ0aW4u
+amFuc2FAZ21haWwuY29tPg0KPiB3cm90ZToNCj4gDQo+ID4gPiBPdGhlcndpc2UsIHdoeSBpcyB0
+aGUgcGF0Y2ggdGhhdCBzZWVtcyB0byBoYXZlIGJlZW4gYWNjZXB0ZWQgaW4gMjAxNCB0bw0KPiA+
+IGZpeCB0aGUgMS4wIGJyZWFraW5nIDAuMSBzdXBwb3J0IG5vdCBiZWVuIGltcGxlbWVudGVkIGlu
+IHRoZSBsYXllciB5ZXQ/DQo+ID4NCj4gPiBJdCdzIGluY29ycmVjdGx5IG1hcmtlZCBhcyBBY2Nl
+cHRlZCBpbiBwYXRjaHdvcmssIGJ1dCBpdCB3YXMgbmV2ZXIgbWVyZ2VkDQo+ID4gaW50byB0aGUg
+cmVwb3NpdG9yeSwgYmVjYXVzZSB0aGUgYXV0aG9yIG5ldmVyIHNlbnQgdjIgd2l0aCByZXZpZXcg
+Y29tbWVudHMNCj4gPiBmcm9tIG1lIHJlc29sdmVkLg0KPiA+DQo+ID4gVGhlcmUgd2FzIGFub3Ro
+ZXIgcGF0Y2g6DQo+ID4gaHR0cDovL3BhdGNod29yay5vcGVuZW1iZWRkZWQub3JnL3BhdGNoLzg1
+MDc1Lw0KPiA+IHdoaWNoIHdhcyBtZXJnZWQgYW5kIG5vYm9keSB3YXMgcmVwb3J0aW5nIGJyb2tl
+biAwLjEwIHN1cHBvcnQgc2luY2UgdGhlbi4NCj4gPiBJJ20gbm90IHVzaW5nIDAuMTAgdmVyc2lv
+biwgc28gSSB3YXMgYXNzdW1pbmcgaXQgd29ya3Mgbm93IGZvciBwZW9wbGUgd2hvDQo+ID4gZG8u
+DQo+ID4NCj4gPiBSZWdhcmRzLA0KPiA+DQo+ID4NCj4gPiBPbiBGcmksIERlYyA0LCAyMDE1IGF0
+IDExOjI0IFBNLCBHZXJoYXJkIGRlIENsZXJjcSA8DQo+ID4gZ2VyaGFyZGRlY2xlcmNxQG91dGxv
+b2suY29tPiB3cm90ZToNCj4gPg0KPiA+PiBIaSwNCj4gPj4NCj4gPj4gSSd2ZSBqdXN0IHdhc3Rl
+ZCBhIGxvdCBvZiB0aW1lIHRyeWluZyB0byBnZXQgcXRtdWx0aW1lZGlhIHRvIGNvbXBpbGUgb24g
+YQ0KPiA+PiBGaWRvIGJ1aWxkIHVzaW5nIHRoZSBGaWRvIGJyYW5jaCBvZiBtZXRhLXF0NS4gQWZ0
+ZXIgYSBsb3Qgb2YgdGlua2VyaW5nIEkNCj4gPj4gZmluYWxseSBnb3QgaXQgd29ya2luZyBhbmQg
+aGF2ZSBmb3VuZCB0aGF0IHRoZSBwcm9ibGVtIHdhcyBjYXVzZWQgYnkgdGhlDQo+ID4+IDAwMDEt
+SW5pdGlhbC1wb3J0aW5nLWVmZm9ydC10by1HU3RyZWFtZXItMS4wLnBhdGNoIGZpbGUgdGhhdCBz
+aGlwcyB3aXRoIHRoZQ0KPiA+PiBsYXllci4gSSBpbml0aWFsbHkgZGlkbid0IHJlYWxpemUgdGhh
+dCB0aGUgdHJvdWJsZXNvbWUgY29kZSB3YXMgY29taW5nIGZyb20NCj4gPj4gaXQgYW5kIGRlYnVn
+Z2VkIHRoZSBjYWNoZWQgc291cmNlICh3aGljaCBpdCBzZWVtcyBpcyBwYXRjaGVkKSB1bnRpbCBp
+dA0KPiA+PiB3b3JrZWQuIEkgZGlkbid0IHRoaW5rIGl0IHdvdWxkIGJlIHNvIGVhc3kgYnV0IGEg
+cGF0Y2gNCj4gPj4gaHR0cDovL3BhdGNod29yay5vcGVuZW1iZWRkZWQub3JnL3BhdGNoLzc5NTMx
+LyBJIGZvdW5kIGZyb20gMjAxNA0KPiA+PiBjb21wbGV0ZWx5IHRvbGQgbWUgaG93IHRvIGNvcnJl
+Y3QgdGhlIHNvdXJjZS4NCj4gPj4NCj4gPj4gV2hhdCBib3RoZXJzIG1lIGlzIGhvdyBjYW4gdGhp
+cyBjYW4gYmUgcG9zc2libGUuIEFyZSB0aGUgcmVjaXBlcyBkZXNpZ25lZA0KPiA+PiBub3QgdG8g
+YXBwbHkgdGhlIHBhdGNoIHRvIG5vbiAxLjAgYnVpbGQgYW5kIGlmIHNvLCB3aGF0IGNvdWxkIHBy
+ZXZlbnQgdGhhdA0KPiA+PiBmcm9tIHdvcmtpbmc/IE90aGVyd2lzZSwgd2h5IGlzIHRoZSBwYXRj
+aCB0aGF0IHNlZW1zIHRvIGhhdmUgYmVlbiBhY2NlcHRlZA0KPiA+PiBpbiAyMDE0IHRvIGZpeCB0
+aGUgMS4wIGJyZWFraW5nIDAuMSBzdXBwb3J0IG5vdCBiZWVuIGltcGxlbWVudGVkIGluIHRoZQ0K
+PiA+PiBsYXllciB5ZXQ/DQo+ID4+DQo+ID4+IFBTLiBJIHNlZSB0aGUgcGF0Y2ggZmlsZSBoYXMg
+Y2hhbmdlZCBhIGJpdCBhZnRlciBGaWRvIGJ1dCB1bmZvcnR1bmF0ZWx5DQo+ID4+IEZpZG8gaXMg
+dGhlIGxhdGVzdCB0aGF0IG15IGJvYXJkIHN1cHBvcnRzIGF0IHRoZSBtb21lbnQgYW5kIEkgaGF2
+ZSBub3QgYmVlbg0KPiA+PiBhYmxlIHRvIHRlc3Qgd2l0aCBhIG5ld2VyIHZlcnNpb24uDQo+ID4+
+DQo+ID4+IFJlZ2FyZHMsDQo+ID4+IEdlcmhhcmQgZGUgQ2xlcmNxDQo+ID4+IC0tDQo+ID4+IF9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+ID4+IE9wZW5l
+bWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gPj4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3Rz
+Lm9wZW5lbWJlZGRlZC5vcmcNCj4gPj4gaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFp
+bG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCj4gPj4NCj4gPg0KPiA+DQo+IC0tIA0K
+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBPcGVu
+ZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5v
+cGVuZW1iZWRkZWQub3JnDQo+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4v
+bGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQogCQkgCSAgIAkJICA=
 
