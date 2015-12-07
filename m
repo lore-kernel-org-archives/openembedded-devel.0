@@ -1,20 +1,37 @@
-Return-Path: <jussi.kukkonen@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 010B06012C
+Return-Path: <obi@opendreambox.org>
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id C348360124
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Dec 2015 07:45:06 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga103.jf.intel.com with ESMTP; 06 Dec 2015 23:45:06 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,393,1444719600"; d="scan'208";a="855398527"
-Received: from theory.fi.intel.com ([10.237.72.196])
-	by fmsmga001.fm.intel.com with ESMTP; 06 Dec 2015 23:45:05 -0800
-From: Jussi Kukkonen <jussi.kukkonen@intel.com>
+	Mon,  7 Dec 2015 10:03:19 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id C98EF315D05E
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  7 Dec 2015 11:03:18 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id MQosoLUYqDLU
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  7 Dec 2015 11:03:16 +0100 (CET)
+Received: from [172.22.22.61] (55d44396.access.ecotel.net [85.212.67.150])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 6CB23315760C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  7 Dec 2015 11:03:16 +0100 (CET)
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  7 Dec 2015 09:48:47 +0200
-Message-Id: <1449474527-15007-1-git-send-email-jussi.kukkonen@intel.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [PATCH] libgudev: Remove (moved to OE-Core)
+References: <1449449949-9463-1-git-send-email-obi@opendreambox.org>
+	<BAF36F5B-C2CD-4F61-B1B4-20115B34FB6C@gmail.com>
+From: Andreas Oberritter <obi@opendreambox.org>
+X-Enigmail-Draft-Status: N1110
+Message-ID: <56655963.9010302@opendreambox.org>
+Date: Mon, 7 Dec 2015 11:03:15 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
+MIME-Version: 1.0
+In-Reply-To: <BAF36F5B-C2CD-4F61-B1B4-20115B34FB6C@gmail.com>
+Subject: Re: [meta-python][PATCH] python-monotonic: new recipe, version 0.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,38 +44,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Dec 2015 07:45:09 -0000
+X-List-Received-Date: Mon, 07 Dec 2015 10:03:20 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-libgudev was added to OE-Core in revision c6d37fc47f.
+On 07.12.2015 03:13, Tim Orling wrote:
+> This recipe has unmet dependencies:
 
-Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
----
- meta-oe/recipes-gnome/libgudev/libgudev_230.bb | 15 ---------------
- 1 file changed, 15 deletions(-)
- delete mode 100644 meta-oe/recipes-gnome/libgudev/libgudev_230.bb
+Sorry, I mistakenly assumed all of them were part of python-core.
 
-diff --git a/meta-oe/recipes-gnome/libgudev/libgudev_230.bb b/meta-oe/recipes-gnome/libgudev/libgudev_230.bb
-deleted file mode 100644
-index ea8e82c..0000000
---- a/meta-oe/recipes-gnome/libgudev/libgudev_230.bb
-+++ /dev/null
-@@ -1,15 +0,0 @@
--SUMMARY = "GObject wrapper for libudev"
--
--SRC_URI[archive.md5sum] = "e4dee8f3f349e9372213d33887819a4d"
--SRC_URI[archive.sha256sum] = "a2e77faced0c66d7498403adefcc0707105e03db71a2b2abd620025b86347c18"
--
--DEPENDS = "glib-2.0 udev"
--
--RCONFLICTS_${PN} = "systemd (<= 220)"
--
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
--
--inherit gnomebase distro_features_check
--
--REQUIRED_DISTRO_FEATURES = "systemd"
--- 
-2.1.4
+> import crypts
+
+It's "ctypes".
+
+> import ctypes.util
+> import os
+> import platform
+> import re
+> import sys
+> import time
+
+I'll send v2 adding python-ctypes and python-re as runtime dependencies.
+
+Regards,
+Andreas
+
+> --Tim
+> 
+>> On Dec 6, 2015, at 4:59 PM, Andreas Oberritter <obi@opendreambox.org> wrote:
+>>
+>> On Python 3.3 or newer, monotonic will be an alias of time.monotonic
+>> from the standard library. On older versions, it will fall back to
+>> an equivalent implementation.
+>>
+>> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+>> ---
+>> Tested on fido.
+>>
+>> meta-python/recipes-devtools/python/python-monotonic_0.4.bb | 8 ++++++++
+>> 1 file changed, 8 insertions(+)
+>> create mode 100644 meta-python/recipes-devtools/python/python-monotonic_0.4.bb
+>>
+>> diff --git a/meta-python/recipes-devtools/python/python-monotonic_0.4.bb b/meta-python/recipes-devtools/python/python-monotonic_0.4.bb
+>> new file mode 100644
+>> index 0000000..3583a7e
+>> --- /dev/null
+>> +++ b/meta-python/recipes-devtools/python/python-monotonic_0.4.bb
+>> @@ -0,0 +1,8 @@
+>> +SUMMARY = "An implementation of time.monotonic() for Python 2.0 through 3.2"
+>> +LICENSE = "Apache-2.0"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
+>> +
+>> +SRC_URI[md5sum] = "1919cc3aff2a1b907fe24c1f801343ef"
+>> +SRC_URI[sha256sum] = "852f656adbf623ee859def6ca2f5498f4cae3256f8320d5c50570ee8a0592ab6"
+>> +
+>> +inherit pypi
+>> -- 
+>> 1.9.1
+>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
