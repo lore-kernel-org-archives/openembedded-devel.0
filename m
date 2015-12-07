@@ -1,41 +1,36 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-yk0-f180.google.com (mail-yk0-f180.google.com
-	[209.85.160.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 929ED6012C
+Return-Path: <fan.xin@jp.fujitsu.com>
+X-Greylist: delayed 608 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 07 Dec 2015 05:52:29 UTC
+Received: from mgwym02.jp.fujitsu.com (mgwym02.jp.fujitsu.com [211.128.242.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F52C6012C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Dec 2015 02:13:51 +0000 (UTC)
-Received: by ykba77 with SMTP id a77so179671204ykb.2
+	Mon,  7 Dec 2015 05:52:29 +0000 (UTC)
+Received: from yt-mxoi1.gw.nic.fujitsu.com (unknown [192.168.229.67]) by
+	mgwym02.jp.fujitsu.com with smtp
+	id 1e74_4085_9ee3b178_eb97_4abe_aed3_d7dcd6aca9e5;
+	Mon, 07 Dec 2015 14:42:15 +0900
+Received: from g01jpfmpwyt02.exch.g01.fujitsu.local
+	(g01jpfmpwyt02.exch.g01.fujitsu.local [10.128.193.56])
+	by yt-mxoi1.gw.nic.fujitsu.com (Postfix) with ESMTP id 840D0AC0236
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Dec 2015 18:13:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:subject:references:content-type:in-reply-to:message-id:date:to
-	:content-transfer-encoding:mime-version;
-	bh=nn1JKdVeN/8yOgWj32oydHMz6dixUsLgAjutSAJJInk=;
-	b=iA0zKNOBY8ubbV6myYz/akHhfKcmojDp/sluLfLfqBe28S8BmlCvZet4SWio63Ueqd
-	m6FwHAqwOkFjA3OUkb2Eg30TrX43MT3SYwM+qzOEyZ+oT0bEui2FHyYMQR1ACmDImJxn
-	quAlVpra2oXxm4POSGgNSmY03q3Fl0QdqRx3Ym8SScaSxzrBmoOFmw5/+xTHStILPfiN
-	YKLDk/0idk1ecbbIFGFKIq/Lg8iMBi1tIlYmvomXJTAfGOkoBKift1ajfLgpsFlPKkBT
-	xeF46KxFphGfihmrraHmGjpZC+BGJfaVLn5k91PdyrZObC3G2XqA3D+K/ES0kdE2r+Dm
-	mWqA==
-X-Received: by 10.129.103.85 with SMTP id b82mr23017821ywc.197.1449454431932; 
-	Sun, 06 Dec 2015 18:13:51 -0800 (PST)
-Received: from [192.168.1.115] (75-128-22-150.dhcp.snlo.ca.charter.com.
-	[75.128.22.150]) by smtp.gmail.com with ESMTPSA id
-	l23sm17410481ywb.26.2015.12.06.18.13.50
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 06 Dec 2015 18:13:51 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
-References: <1449449949-9463-1-git-send-email-obi@opendreambox.org>
-X-Mailer: iPad Mail (13B143)
-In-Reply-To: <1449449949-9463-1-git-send-email-obi@opendreambox.org>
-Message-Id: <BAF36F5B-C2CD-4F61-B1B4-20115B34FB6C@gmail.com>
-Date: Sun, 6 Dec 2015 18:13:55 -0800
-To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (1.0)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH] python-monotonic: new recipe, version 0.4
+	Mon,  7 Dec 2015 14:42:14 +0900 (JST)
+Received: from g01jpexchyt37.g01.fujitsu.local (unknown [10.128.193.4])
+	by g01jpfmpwyt02.exch.g01.fujitsu.local (Postfix) with ESMTP id
+	E52EF5842D4 for <openembedded-devel@lists.openembedded.org>;
+	Mon,  7 Dec 2015 14:42:13 +0900 (JST)
+Received: from localhost.localdomain (10.24.19.99) by
+	g01jpexchyt37.g01.fujitsu.local (10.128.193.67) with Microsoft SMTP
+	Server id 14.3.266.1; Mon, 7 Dec 2015 14:42:13 +0900
+From: Fan Xin <fan.xin@jp.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 7 Dec 2015 14:43:16 +0900
+Message-ID: <1449466996-17396-1-git-send-email-fan.xin@jp.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-SecurityPolicyCheck-GC: OK by FENCE-Mail
+X-TM-AS-MML: disable
+Cc: Fan Xin <fan.xin@jp.fujitsu.com>
+Subject: [PATCH] hostapd: upgrade 2.4 -> 2.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,61 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Dec 2015 02:13:51 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 07 Dec 2015 05:52:33 -0000
+Content-Type: text/plain
 
-This recipe has unmet dependencies:
-import crypts
-import ctypes.util
-import os
-import platform
-import re
-import sys
-import time
---Tim
+1. upgrade to 2.5
+2. update HOMEPAGE and SRC_URI to use w1.fi instead
 
-> On Dec 6, 2015, at 4:59 PM, Andreas Oberritter <obi@opendreambox.org> wrot=
-e:
->=20
-> On Python 3.3 or newer, monotonic will be an alias of time.monotonic
-> from the standard library. On older versions, it will fall back to
-> an equivalent implementation.
->=20
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
-> Tested on fido.
->=20
-> meta-python/recipes-devtools/python/python-monotonic_0.4.bb | 8 ++++++++
-> 1 file changed, 8 insertions(+)
-> create mode 100644 meta-python/recipes-devtools/python/python-monotonic_0.=
-4.bb
->=20
-> diff --git a/meta-python/recipes-devtools/python/python-monotonic_0.4.bb b=
-/meta-python/recipes-devtools/python/python-monotonic_0.4.bb
-> new file mode 100644
-> index 0000000..3583a7e
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-monotonic_0.4.bb
-> @@ -0,0 +1,8 @@
-> +SUMMARY =3D "An implementation of time.monotonic() for Python 2.0 through=
- 3.2"
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd2794c0df5b907fdace235a619d803=
-14"
-> +
-> +SRC_URI[md5sum] =3D "1919cc3aff2a1b907fe24c1f801343ef"
-> +SRC_URI[sha256sum] =3D "852f656adbf623ee859def6ca2f5498f4cae3256f8320d5c5=
-0570ee8a0592ab6"
-> +
-> +inherit pypi
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+---
+ .../hostapd/{hostapd_2.4.bb => hostapd_2.5.bb}                    | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-connectivity/hostapd/{hostapd_2.4.bb => hostapd_2.5.bb} (83%)
+
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.4.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
+similarity index 83%
+rename from meta-oe/recipes-connectivity/hostapd/hostapd_2.4.bb
+rename to meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
+index 901c7ea..d95dbec 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.4.bb
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
+@@ -1,4 +1,4 @@
+-HOMEPAGE = "http://hostap.epitest.fi"
++HOMEPAGE = "http://w1.fi/hostapd/"
+ SECTION = "kernel/userland"
+ LICENSE = "GPLv2 | BSD"
+ LIC_FILES_CHKSUM = "file://README;md5=4d53178f44d4b38418a4fa8de365e11c"
+@@ -12,7 +12,7 @@ SYSTEMD_SERVICE_${PN} = "hostapd.service"
+ SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+ 
+ SRC_URI = " \
+-    http://hostap.epitest.fi/releases/hostapd-${PV}.tar.gz \
++    http://w1.fi/releases/hostapd-${PV}.tar.gz \
+     file://defconfig \
+     file://init \
+     file://hostapd.service \
+@@ -42,5 +42,5 @@ do_install() {
+ 
+ CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
+ 
+-SRC_URI[md5sum] = "04578f3f2c3eb1bec1adf30473813912"
+-SRC_URI[sha256sum] = "6fe0eb6bd1c9cbd24952ece8586b6f7bd14ab358edfda99794e79b9b9dbd657f"
++SRC_URI[md5sum] = "69f9cec3f76d74f402864a43e4f8624f"
++SRC_URI[sha256sum] = "8e272d954dc0d7026c264b79b15389ec2b2c555b32970de39f506b9f463ec74a"
+-- 
+1.8.4.2
+
 
