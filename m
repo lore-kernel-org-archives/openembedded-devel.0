@@ -1,24 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 52A496072C
+Return-Path: <mcfrisk@kapsi.fi>
+Received: from mail.kapsi.fi (mail.kapsi.fi [217.30.184.167])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F8566E5CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Dec 2015 07:15:02 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tB97F2dC013656
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 8 Dec 2015 23:15:03 -0800 (PST)
-Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Tue, 8 Dec 2015 23:15:02 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 9 Dec 2015 15:15:08 +0800
-Message-ID: <1449645308-25141-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [meta-java] [PATCH] antlr/cup: inherit java-bootstrap-components
+	Wed,  9 Dec 2015 08:53:27 +0000 (UTC)
+Received: from lakka.kapsi.fi ([2001:1bc8:1004::1] ident=Debian-exim)
+	by mail.kapsi.fi with esmtps (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80) (envelope-from <mcfrisk@kapsi.fi>)
+	id 1a6aV3-0006sx-TN; Wed, 09 Dec 2015 10:53:25 +0200
+Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.80)
+	(envelope-from <mcfrisk@lakka.kapsi.fi>)
+	id 1a6aV3-0004Ks-OU; Wed, 09 Dec 2015 10:53:25 +0200
+From: Mikko Rapeli <mikko.rapeli@bmw.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  9 Dec 2015 10:53:24 +0200
+Message-Id: <1449651204-16080-1-git-send-email-mikko.rapeli@bmw.de>
+X-Mailer: git-send-email 1.7.10.4
+X-SA-Exim-Connect-IP: 2001:1bc8:1004::1
+X-SA-Exim-Mail-From: mcfrisk@kapsi.fi
+X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
+Subject: [meta-qt5][PATCH] cmake_qt5.bbclass: add DEPENDS to qtbase
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,61 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2015 07:15:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 09 Dec 2015 08:53:29 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
+All packages using this class need it and it is too easy for developers
+to miss and leave race conditions into builds.
 
-This should be part of the following commit but missed:
-commit 04d5d0bf414c05ca59618d77f17ff9898aa1c566
-Author: Jens Rehsack <rehsack@gmail.com>
-Date:   Tue Dec 8 14:51:50 2015 +0100
-
-    meta-java: rely on well known bootstrap-path
-
-    Instead of potential circular depending virtual/javac-native (even this
-    recipe provides such a useable java-native), rely on well known path
-    via cacao-native to build up to icedtea7-native in reliable manner.
-
-    virtual/javac-native should be used by parts not belonging to the bootstrap
-    phase.
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-    Signed-off-by: Maxin B. John <maxin.john@intel.com>
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Change-Id: I713ffdf26e821b8ab12c2d53f9a1e6679d26a4b1
+Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 ---
- recipes-core/antlr/antlr_2.7.7.bb | 2 +-
- recipes-core/cup/cup_0.10k.bb     | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ classes/cmake_qt5.bbclass | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-core/antlr/antlr_2.7.7.bb b/recipes-core/antlr/antlr_2.7.7.bb
-index 9d9d2d4..cff9535 100644
---- a/recipes-core/antlr/antlr_2.7.7.bb
-+++ b/recipes-core/antlr/antlr_2.7.7.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=361934e706423915b4d9f413ad37fb65"
- SRC_URI = "http://www.antlr2.org/download/${BP}.tar.gz"
- SRC_URI_append_class-native = " file://runantlr"
+diff --git a/classes/cmake_qt5.bbclass b/classes/cmake_qt5.bbclass
+index 94a60dc..10b0312 100644
+--- a/classes/cmake_qt5.bbclass
++++ b/classes/cmake_qt5.bbclass
+@@ -1,6 +1,8 @@
+ inherit cmake
+ inherit qmake5_paths
  
--inherit java-library
-+inherit java-library java-bootstrap-components
- 
- do_configure_class-native() {
-     sed -i -e"s|@JAR_FILE@|${STAGING_DATADIR_JAVA_NATIVE}/antlr.jar|" ${WORKDIR}/runantlr
-diff --git a/recipes-core/cup/cup_0.10k.bb b/recipes-core/cup/cup_0.10k.bb
-index 2a957f9..f2f254e 100644
---- a/recipes-core/cup/cup_0.10k.bb
-+++ b/recipes-core/cup/cup_0.10k.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=2c9db91c00f38e52cfc8e67bafaa7c
- RDEPENDS_${PN} = "java2-runtime"
- RDEPENDS_${PN}_virtclass-native = ""
- 
--inherit java-library
-+inherit java-library java-bootstrap-components
- 
- SRC_URI = "http://www.cs.princeton.edu/~appel/modern/java/CUP/java_${BPN}_v10k.tar.gz \
- 	   file://cup \
++DEPENDS_prepend = " qtbase "
++
+ EXTRA_OECMAKE += " \
+     -DOE_QMAKE_PATH_PREFIX=${OE_QMAKE_PATH_PREFIX} \
+     -DOE_QMAKE_PATH_HEADERS=${OE_QMAKE_PATH_HEADERS} \
 -- 
-2.3.5
+2.6.2
 
 
