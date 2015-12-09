@@ -1,44 +1,44 @@
 Return-Path: <kergoth@gmail.com>
 Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
 	[209.85.213.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 019CA6FF77
+	by mail.openembedded.org (Postfix) with ESMTP id C8FDA601D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Dec 2015 17:43:17 +0000 (UTC)
-Received: by igcmv3 with SMTP id mv3so129088961igc.0
+	Wed,  9 Dec 2015 17:58:17 +0000 (UTC)
+Received: by igcph11 with SMTP id ph11so124582140igc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Dec 2015 09:43:18 -0800 (PST)
+	Wed, 09 Dec 2015 09:58:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:from:date:message-id
 	:subject:to:cc:content-type;
-	bh=JpASJuut/dzVTcoqz6pPqfGePpeUsVboX8YjUQKiODE=;
-	b=pQl2IM+hwqpwJP1rbmoaFJkS6ctvjOubYIRvwr4PoT+1cod8Y1y9qkG4/SqaI0EBRh
-	Me9xAWjLg3IY/nSRips0d2dUGaLu7aILQmGOhsTyBl59YRot9GswwSw6yaIyJuD4PZpT
-	FGgTKoytX36Wp4d166qR6Zh2boVLAW/uro47sapCYNIsZ8ncjBluGXNv2eiflZMGhu9K
-	qJPdAaaJu2G3XHlDueNJmM3op1++o7TGKYnoQoqBg1SzhXvYszloH34P2zh6E+s7rUU0
-	Apen40vmHcY5bUR/4fT1m4rDTurEUFALmsnHsgW7TPyrKLJG3Lrd8wvGJEtjMpTi7Y8E
-	HYqw==
+	bh=gsnkHIp5i1Pho9QkzMeAOuNAZR2SCy56pcSTIEOVfbA=;
+	b=wytwhGBDFGw/QS2bNcvDBeNarCi8wplhsh8ty3rU3sYPEHmdVnBlwASgVDD8GHTFC4
+	ib+Pk84h84qNAKvwjOhQtikfkUZO2zPlRorpjbQxhqvCbD4TTfg0RtWJUt8OXDU2JuAJ
+	x1/aNP1ap/XcryRHnSfZxiewY2+dMmD4z4hg/B64fSvC3J4ePLj5XpWp/QkvMQ2axj/8
+	GBVY02dzF3csDcWq/0wKB+M7i3wRYYyI89f8iFA41JgKLhLOomZX2wdjUWTVsdmizatC
+	MKWOZBSxWt0PDUe0rDyqU83yrUGIFKaIAtBWnTeClwL0/Uq1NT1dKMslKuqd4w59OZU4
+	+FmQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=mentor-com.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:sender:in-reply-to:references:from:date:message-id
 	:subject:to:cc:content-type;
-	bh=JpASJuut/dzVTcoqz6pPqfGePpeUsVboX8YjUQKiODE=;
-	b=GhEDCU+tYOc4zrhpBsoeHVwwNru6bOJpBLRu1ODV3QEB3Zy7t5x3Y566SSfq2XVTBE
-	BSS42o5B57n7CAdnjEo3SZpxxCj2LPP/jJgmF9KcaPyui/9paBgFB+rZIDQqMs/sLlJ7
-	7CsEgyehI7yTpx5mrbkfteGXKpUsrSITHUTbnvs+ODXRmchznsSU3TTGVply965m2OdH
-	CLwRuPRh6NGskMNlLgUXGnuWm4i4w4eS+XpawPwRshSygMlNaBiOplpNv+SmSnofTFuJ
-	cIpdWWkAcnEYR1IUB4vwL8A1pAlmiIfPh5vQWh2hN+qtiOjCruGz59DkY9HX+dRNt9hx
-	Bo9A==
-X-Received: by 10.50.150.71 with SMTP id ug7mr10582912igb.68.1449682998128;
-	Wed, 09 Dec 2015 09:43:18 -0800 (PST)
+	bh=gsnkHIp5i1Pho9QkzMeAOuNAZR2SCy56pcSTIEOVfbA=;
+	b=qu6kfQPD7f2q4oHrJl+klASRg/LQEI11mftOGau3sA3qrnHpREriVVJv52RQyYegWB
+	rN0YQeS6CeEgykzdrP1t8hUsCmPy74fkJkYWY2drRCHylckqBbHVCpxXAIyj0HXplqpe
+	yNTHgy/BVrI5OEvK+ormqeSkOx7BYl3nDdYQrob1hjvwNGIjmgNokz2BKSluGBjIDuVQ
+	1GR0zF32M5RQqu9toRlL3oMlAInnbnzMgMqvHCyQ0ZjWhSVDQKjsikS5CsTzcKe2Wo5N
+	CG3VVCcgxpJftOUM/LaqTsbWCjtG01sfta8/j/EEUqgzFhJBtfO66unPMDS+4udBNjKu
+	HF9g==
+X-Received: by 10.50.92.41 with SMTP id cj9mr11254414igb.38.1449683898232;
+	Wed, 09 Dec 2015 09:58:18 -0800 (PST)
 MIME-Version: 1.0
 Sender: kergoth@gmail.com
-Received: by 10.79.69.129 with HTTP; Wed, 9 Dec 2015 09:42:58 -0800 (PST)
+Received: by 10.79.69.129 with HTTP; Wed, 9 Dec 2015 09:57:58 -0800 (PST)
 In-Reply-To: <1449682880-21963-1-git-send-email-kergoth@gmail.com>
 References: <1449682880-21963-1-git-send-email-kergoth@gmail.com>
 From: Christopher Larson <chris_larson@mentor.com>
-Date: Wed, 9 Dec 2015 10:42:58 -0700
-X-Google-Sender-Auth: ELs5vxrsStY4udXXDWgIp2H2v6s
-Message-ID: <CABcZAN=F3T7NMZLnkgAHnEPSaBM+h+Wt6f_FwDk6_fDtgPDy1w@mail.gmail.com>
+Date: Wed, 9 Dec 2015 10:57:58 -0700
+X-Google-Sender-Auth: NS2YUoAWqV1bW9-CNBMaEGgXEO8
+Message-ID: <CABcZANk4m2MOyh+D_yqdVyzAtRPfaHxz5bs3f46MZS7gRaqWOA@mail.gmail.com>
 To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: Christopher Larson <chris_larson@mentor.com>
@@ -55,7 +55,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2015 17:43:18 -0000
+X-List-Received-Date: Wed, 09 Dec 2015 17:58:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 On Wed, Dec 9, 2015 at 10:41 AM, Christopher Larson <kergoth@gmail.com>
