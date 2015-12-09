@@ -1,39 +1,23 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id CCFAE605B3
+Return-Path: <maxin.john@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 7736D6E5CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Dec 2015 09:17:28 +0000 (UTC)
-Received: by wmec201 with SMTP id c201so249746972wme.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Dec 2015 01:17:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=0f7wclidyVBoXywXyjuILBl3wOMuHfzFdPsJdv7A65k=;
-	b=aRJxWa98By1vUAoXqS+usPRiV/p3uWg63HhF0VBnDhRJLuK+uX5T3OFxfe542PmSW+
-	2DKOmMhRVJ/bC+sa47bR4vEGjPNbsL3ejPoKPGi7pGbA9RvdVrrNQO+3uhBDhFf7QiiM
-	96B+W6d9CDprMTJDSqcXOJTJDy3T08qzwfFUTU3v4OKdp8bH5INKBlbGoI2pUR5PPQF3
-	niP64dtMZwOxPLkzhvD/YEK2yEKTLo5qyUoAUdW678YsoeoUz8kZcYRnCRJmgLbnSM0Q
-	I8tBmpolnx51pcv0dNGvS4W9L4rxEKMTIlrI0JHaSvMxQjPCVtspLZqivkhdEMy/wIVN
-	V6kQ==
-X-Received: by 10.28.1.8 with SMTP id 8mr9639706wmb.40.1449652648613;
-	Wed, 09 Dec 2015 01:17:28 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	wh10sm6621739wjb.45.2015.12.09.01.17.26
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 Dec 2015 01:17:26 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 9 Dec 2015 10:19:09 +0100
+	Wed,  9 Dec 2015 09:22:28 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by fmsmga101.fm.intel.com with ESMTP; 09 Dec 2015 01:22:28 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,402,1444719600"; d="scan'208";a="867830459"
+Received: from mbabyjoh-mobl.fi.intel.com ([10.237.72.71])
+	by orsmga002.jf.intel.com with ESMTP; 09 Dec 2015 01:22:27 -0800
+Date: Wed, 9 Dec 2015 11:23:34 +0200
+From: "Maxin B. John" <maxin.john@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151209091909.GC2246@jama>
-References: <1449651204-16080-1-git-send-email-mikko.rapeli@bmw.de>
+Message-ID: <20151209092334.GA26033@mbabyjoh-mobl.fi.intel.com>
+References: <25114564-8777-4A06-85B9-80284717DAFD@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1449651204-16080-1-git-send-email-mikko.rapeli@bmw.de>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-qt5][PATCH] cmake_qt5.bbclass: add DEPENDS to qtbase
+In-Reply-To: <25114564-8777-4A06-85B9-80284717DAFD@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-java][PATCH v7 2/2] openjdk-8: add recipes for openjdk-8 and openjre-8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,68 +30,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2015 09:17:29 -0000
-X-Groupsio-MsgNum: 58946
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XvKFcGCOAo53UbWW"
-Content-Disposition: inline
-
---XvKFcGCOAo53UbWW
+X-List-Received-Date: Wed, 09 Dec 2015 09:22:32 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 09, 2015 at 10:53:24AM +0200, Mikko Rapeli wrote:
-> All packages using this class need it and it is too easy for developers
-> to miss and leave race conditions into builds.
->=20
-> Change-Id: I713ffdf26e821b8ab12c2d53f9a1e6679d26a4b1
+Hi Jens,
 
-You don't need Change-Id.
+On Tue, Dec 08, 2015 at 02:52:51PM +0100, Jens Rehsack wrote:
+> 
+> This adds openjdk-8 for native and target builds and allows a stripped
+> openjre-8 being built as well instead of trying to cherry-pick jre
+> components from jdk-image.
+> 
+> The recipes allow building openjdk-8 with or without:
+> * x11
+> * cups
+> * alsa/pulseaudio
+> and let packager enable unlimited-crypto, if desired.
+> 
+> To support certificate based java libraries, cacerts is created based on
+> ca-certificates from OE-core.
+> 
+> Since there can be only one PROVIDES for virtual/java-native and virtual/javac-native,
+> move the provides to openjdk-8-native (I think everyone agrees it's a better
+> choice than ecj-bootstrap-native).
+> 
+> Plus: Applying a fix from openjdk-9 repository which fixes build issues using gcc5
+> 
+> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+<snip>
 
-> Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
-> ---
->  classes/cmake_qt5.bbclass | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/classes/cmake_qt5.bbclass b/classes/cmake_qt5.bbclass
-> index 94a60dc..10b0312 100644
-> --- a/classes/cmake_qt5.bbclass
-> +++ b/classes/cmake_qt5.bbclass
-> @@ -1,6 +1,8 @@
->  inherit cmake
->  inherit qmake5_paths
-> =20
-> +DEPENDS_prepend =3D " qtbase "
+I have pushed these two patches to the master branch. Thanks a lot for this work.
 
-You don't need leading space in prepend, only the trailing one.
+Best Regards,
+Maxin
 
-> +
->  EXTRA_OECMAKE +=3D " \
->      -DOE_QMAKE_PATH_PREFIX=3D${OE_QMAKE_PATH_PREFIX} \
->      -DOE_QMAKE_PATH_HEADERS=3D${OE_QMAKE_PATH_HEADERS} \
-> --=20
-> 2.6.2
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---XvKFcGCOAo53UbWW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlZn8g0ACgkQN1Ujt2V2gBxe6QCgktGvgzkg/r1Nl054Sa+Hjm/3
-YxAAnj+3WzdFh03fPtGZl4HhZEf8Kscb
-=9ED5
------END PGP SIGNATURE-----
-
---XvKFcGCOAo53UbWW--
