@@ -1,43 +1,24 @@
-Return-Path: <ian@boundarydevices.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DD8B6012C
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 52A496072C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Dec 2015 04:44:39 +0000 (UTC)
-Received: by wmec201 with SMTP id c201so241602044wme.0
+	Wed,  9 Dec 2015 07:15:02 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tB97F2dC013656
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Dec 2015 20:44:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=boundarydevices-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=gewgarcfo9oHTwhCj8TaiYdCZQDYZr/srDaaWjKCdUE=;
-	b=QHgNgXMO9E2eQY6vsmhPh1+giewIqTqOlx1WKxFeKf0k3SolkAdMmcgoxXyRFKAwg0
-	BVowVerePzGC5hoeiClxudzqOTdkgplzVyQoIAaXfreh0BRm1DS73CgtVqBCIj5h6Ry7
-	0zSmS0llVVFcchbWXWiELCDUzH7psQlIZS5g45iWXyo4vXYrNyRM454WchvcV4E0LWw7
-	dJMDQ0Wuvdp7mcRUHcgVA8pSS1JGycioXRBW7Rj27kbkL18HBo3qN9urbG/WoJwq6UCL
-	Y6vwexzuZaF2epV23wTGYdDinPGsgBNP5uvQQbzzKpu8RcPxU4YXpOLeaN/MTBkDXtlw
-	UacQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=gewgarcfo9oHTwhCj8TaiYdCZQDYZr/srDaaWjKCdUE=;
-	b=QCUd6elwd1YCvoQmzr+xeLOtqtcXumLOB5jEyFU3LO5Mlt65Zhr8yqCAf10TO2JOis
-	nL48qK5gpOUv0Z+g3WC2TKLybdmAujZwsvZ6MqIjTkWRcw4qH90HxOdfGJDViX7cptG+
-	PXo5k6fvasF8VumHVRu/rkTCFtFLv93yl8FfOqrtyXFVMZ3MEMj+cjfmhBTVcv7+chEE
-	0jjoPy3HcinTzSR9J4FN+2NhIduf75aktDMR+ksCbkDQrzjj9iRBL1/WUB/LQhclJDOB
-	DQboqgFvhnPPVucCwzHUIAbSdG42srqWvtLFXvLjl8s8+4BJ7iULTq7k9E392DiSbETp
-	3i2w==
-X-Gm-Message-State: ALoCoQkmRWN91aah24ZwyR7nHKFnW2E3Tbfpp1u4h6MRjUZrTT94hB3vAyDeenRsl1YSQfviDhxHQIDEy5lLkalHROGJEWKZFg==
+	Tue, 8 Dec 2015 23:15:03 -0800 (PST)
+Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Tue, 8 Dec 2015 23:15:02 -0800
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 9 Dec 2015 15:15:08 +0800
+Message-ID: <1449645308-25141-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Received: by 10.28.133.4 with SMTP id h4mr8072944wmd.59.1449636279890; Tue,
-	08 Dec 2015 20:44:39 -0800 (PST)
-Received: by 10.27.110.18 with HTTP; Tue, 8 Dec 2015 20:44:39 -0800 (PST)
-Date: Tue, 8 Dec 2015 20:44:39 -0800
-Message-ID: <CADseiPn5N3ji8WhvoEE=F1_u9R_n33MQAdWgHsE7TYHR=3T3bA@mail.gmail.com>
-From: Ian Coolidge <ian@boundarydevices.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-browser] chromium segfault and "Debug" CHROMIUM_BUILD_TYPE fails to build
+Subject: [meta-java] [PATCH] antlr/cup: inherit java-bootstrap-components
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,41 +31,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2015 04:44:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 09 Dec 2015 07:15:05 -0000
+Content-Type: text/plain
 
-All,
+From: Jackie Huang <jackie.huang@windriver.com>
 
-I'm attempting to build chromium in the latest Yocto Jethro environment
-(GCC 5.2). There have been recent patches to fix compiler errors from
-GCC5.2 but I chromium isn't being built properly. I'm building for the
-Nitrogen6x.
+This should be part of the following commit but missed:
+commit 04d5d0bf414c05ca59618d77f17ff9898aa1c566
+Author: Jens Rehsack <rehsack@gmail.com>
+Date:   Tue Dec 8 14:51:50 2015 +0100
 
-root@nitrogen6x:~# export
-> CHROME_DEVEL_SANDBOX=/usr/sbin/chrome-devel-sandbox
-> root@nitrogen6x:~# export LD_LIBRARY_PATH=/usr/lib/chromium
-> root@nitrogen6x:~# DISPLAY=:0 /usr/bin/chromium/chrome --use-gl=egl
-> --gpu-no-context-lost --user-data-dir=/home/root/.chromium/
-> [907:907:1209/043606:ERROR:sandbox_linux.cc(301)] InitializeSandbox()
-> called with multiple threads in process gpu-process
-> Segmentation fault
-> root@nitrogen6x:~#
+    meta-java: rely on well known bootstrap-path
 
+    Instead of potential circular depending virtual/javac-native (even this
+    recipe provides such a useable java-native), rely on well known path
+    via cacao-native to build up to icedtea7-native in reliable manner.
 
-So, reading through the chromium recipe I stumbled upon:
+    virtual/javac-native should be used by parts not belonging to the bootstrap
+    phase.
 
-# The build type defaults to Release. If you want a Debug build, you can set
-> # the variable CHROMIUM_BUILD_TYPE to "Debug" in your conf/local.conf file.
-> CHROMIUM_BUILD_TYPE ??= "Release"
+    Signed-off-by: Jens Rehsack <sno@netbsd.org>
+    Signed-off-by: Maxin B. John <maxin.john@intel.com>
 
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ recipes-core/antlr/antlr_2.7.7.bb | 2 +-
+ recipes-core/cup/cup_0.10k.bb     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-I figured building for Debug would put the debugging symbols in so I could
-run GDB and have a more educated e-mail to send about what might be broken,
-but building that fails for GCC5.2 reasons.
+diff --git a/recipes-core/antlr/antlr_2.7.7.bb b/recipes-core/antlr/antlr_2.7.7.bb
+index 9d9d2d4..cff9535 100644
+--- a/recipes-core/antlr/antlr_2.7.7.bb
++++ b/recipes-core/antlr/antlr_2.7.7.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=361934e706423915b4d9f413ad37fb65"
+ SRC_URI = "http://www.antlr2.org/download/${BP}.tar.gz"
+ SRC_URI_append_class-native = " file://runantlr"
+ 
+-inherit java-library
++inherit java-library java-bootstrap-components
+ 
+ do_configure_class-native() {
+     sed -i -e"s|@JAR_FILE@|${STAGING_DATADIR_JAVA_NATIVE}/antlr.jar|" ${WORKDIR}/runantlr
+diff --git a/recipes-core/cup/cup_0.10k.bb b/recipes-core/cup/cup_0.10k.bb
+index 2a957f9..f2f254e 100644
+--- a/recipes-core/cup/cup_0.10k.bb
++++ b/recipes-core/cup/cup_0.10k.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=2c9db91c00f38e52cfc8e67bafaa7c
+ RDEPENDS_${PN} = "java2-runtime"
+ RDEPENDS_${PN}_virtclass-native = ""
+ 
+-inherit java-library
++inherit java-library java-bootstrap-components
+ 
+ SRC_URI = "http://www.cs.princeton.edu/~appel/modern/java/CUP/java_${BPN}_v10k.tar.gz \
+ 	   file://cup \
+-- 
+2.3.5
 
-Is this a known issue? Has anyone else built and tested on jethro with
-chromium working?
-
-Thanks,
--Ian
 
