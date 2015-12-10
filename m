@@ -1,40 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 84CFF6AC37
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id ECA2D6AC37
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Dec 2015 18:55:43 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id w144so36607486wmw.1
+	Thu, 10 Dec 2015 19:00:01 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id u63so36765045wmu.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Dec 2015 10:55:44 -0800 (PST)
+	Thu, 10 Dec 2015 11:00:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=RmAD1ljbjOzD2pwjhppdzK9ZZnhBRjrIL0WcoTTGwSQ=;
-	b=iwDGasrraBqgSIzOhnZiOIRTzcwb3VOK1AAvLsAVOExTLVUjes1A+5YbDWaY4ulveT
-	3S0tD28Ni0JGbp3zdh8//okqxY4aQByvGTwWrQBOHGH9JfBnQWTfay5PPzMFFaCc6GEh
-	wY0J84KRtvdJvXI6mlWcf3KzHaqNcB6tOs9+Fr1RDGi1piXwklrFavF6QYVnnpW+QhEK
-	/8pOmaKEoRKCjJphqoyVesUy/HIjKDhtz4qo4vJxWhxT8nxQWDvt68bWMuUvMS0kpPEr
-	x2SEviCvFEWOE3wf4AJqqXL+sh/yl8RT2wZNHymbNxm+AZNOcY/51bDnvcjFoqDsD3Gi
-	AOVg==
-X-Received: by 10.28.170.133 with SMTP id t127mr678938wme.65.1449773743742;
-	Thu, 10 Dec 2015 10:55:43 -0800 (PST)
+	h=from:to:cc:subject:date:message-id;
+	bh=wpV19X9K+kZ/K4yulLoqd69eViH5+zWfhaWyfGTfhDQ=;
+	b=IzRKIM3dPx4S5xzexqFSIPsHSZ030npskYdqXQ96oXXRZXMsyr5wNrzx0AHG2/Fi3L
+	vil5ZoEyyGA5rBY9Dj3yqIGCIIYtC/89kHydHMfGUgAumiAPUfh902uHP86Gm42XTmID
+	IcIN77MsepeZIwnbfpTY6Y1pjKANJi263Qi+mPI/d3majn73VDn4Vul0FKus983VjvxR
+	gLg+EU8Yq4ciYUzAoJOehHefuC5enX3rlfBuhCHR5BhDIds5gTAiPUSSEXx1QH9MIPHB
+	cmQY6tcMHtZKT07nvs6olC1SEIPDt3rIMH/gB/W7+oOLwebB0otubfBGV0RlIs2rPb+J
+	zOqg==
+X-Received: by 10.194.117.163 with SMTP id kf3mr14686980wjb.139.1449774002150; 
+	Thu, 10 Dec 2015 11:00:02 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	pn6sm13618509wjb.15.2015.12.10.10.55.42
-	for <openembedded-devel@lists.openembedded.org>
+	gl10sm13619271wjb.30.2015.12.10.11.00.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 10 Dec 2015 10:55:42 -0800 (PST)
+	Thu, 10 Dec 2015 11:00:01 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 10 Dec 2015 19:57:26 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151210185726.GP2246@jama>
-References: <5669BE05.7030904@webthatworks.it>
- <20151210183026.GN2246@jama>
-MIME-Version: 1.0
-In-Reply-To: <20151210183026.GN2246@jama>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-qt5] [meta-ruby] jethro: dependencies on xfce-layer and xfconf probably make qt5 unbuildable without X
+Date: Thu, 10 Dec 2015 20:01:43 +0100
+Message-Id: <1449774103-9458-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.6.3
+Subject: [PATCH][meta-ruby][meta-oe] libgxim: move from meta-ruby back to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,87 +41,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Dec 2015 18:55:45 -0000
-X-Groupsio-MsgNum: 58965
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="V2tfspbppmK1TQo2"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Dec 2015 19:00:02 -0000
 
---V2tfspbppmK1TQo2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* it was moved to meta-ruby (totherer with imsettings which depends on libgxim)
+  because of ruby-native dependency, now when ruby was moved from meta-ruby to
+  oe-core we can move libgxim back to meta-oe (which also allows imsettings
+  in meta-xfce to depend only on meta-oe as well)
 
-On Thu, Dec 10, 2015 at 07:30:26PM +0100, Martin Jansa wrote:
-> On Thu, Dec 10, 2015 at 07:01:41PM +0100, Ivan Sergio Borgonovo wrote:
-> > I was trying to see if I could build
-> > core-image-minimal | meta-toolchain-qt5
-> > and I stumbled into
-> >=20
-> > ERROR: Layer 'ruby-layer' depends on layer 'xfce-layer', but this layer=
-=20
-> > is not enabled in your configuration
->=20
-> Why do you use ruby-layer?
->=20
-> meta-qt5 no longer requires ruby-layer, because ruby-native was moved to
-> oe-core.
->=20
-> Similarly imsettings now doesn't need to be in meta-ruby, because it was
-> moved there just because of ruby dependency, so now it can be moved
-> back.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...CAL_AMFLAGS-isnot-supported-by-autoreconf.patch | 21 ++++++++++++++++++
+ meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb  | 25 ++++++++++++++++++++++
+ ...CAL_AMFLAGS-isnot-supported-by-autoreconf.patch | 21 ------------------
+ .../recipes-extended/libgxim/libgxim_0.5.0.bb      | 25 ----------------------
+ 4 files changed, 46 insertions(+), 46 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/libgxim/libgxim/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+ create mode 100644 meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
+ delete mode 100644 meta-ruby/recipes-extended/libgxim/libgxim/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+ delete mode 100644 meta-ruby/recipes-extended/libgxim/libgxim_0.5.0.bb
 
-See "imsettings: Move from meta-ruby to meta-xfce" in master-next
+diff --git a/meta-oe/recipes-extended/libgxim/libgxim/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch b/meta-oe/recipes-extended/libgxim/libgxim/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+new file mode 100644
+index 0000000..3d293b4
+--- /dev/null
++++ b/meta-oe/recipes-extended/libgxim/libgxim/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+@@ -0,0 +1,21 @@
++multi-line ACLOCAL_AMFLAGS isn't supported by autoreconf.
++It will cause configure error as follow.
++
++   aclocal: error: non-option arguments are not accepted: '\'.
++
++Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
++
++diff -Nurp libgxim-0.5.0.orig/Makefile.am libgxim-0.5.0/Makefile.am
++--- libgxim-0.5.0.orig/Makefile.am	2012-12-13 15:48:09.000000000 +0800
+++++ libgxim-0.5.0/Makefile.am	2014-12-19 11:05:50.727209821 +0800
++@@ -2,9 +2,7 @@ NULL =
++ AUTOMAKE_OPTIONS = dist-bzip2
++ SUBDIRS = libgxim m4macros po tests docs
++ 
++-ACLOCAL_AMFLAGS =			\
++-	-I m4macros			\
++-	$(NULL)
+++ACLOCAL_AMFLAGS = -I m4macros $(NULL)
++ 
++ CONFIGURE_DEPENDENCIES =		\
++ 	requires			\
+diff --git a/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb b/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
+new file mode 100644
+index 0000000..768bdaa
+--- /dev/null
++++ b/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "GObject-based XIM protocol library"
++DESCRIPTION = "libgxim is a X Input Method protocol library that is implemented by GObject.\
++this library helps you to implement XIM servers or client applications to\
++communicate through XIM protocol without using Xlib API directly, particularly\
++if your application uses GObject-based main loop.\
++\
++This package contains the shared library."
++
++HOMEPAGE = "http://code.google.com/p/libgxim/"
++SECTION = "System Environment/Libraries"
++
++SRC_URI = "https://bitbucket.org/tagoh/libgxim/downloads/${BPN}-${PV}.tar.bz2 \
++           file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch"
++
++SRC_URI[md5sum] = "4bb1fa63d00eb224439d413591c29a6a"
++SRC_URI[sha256sum] = "75e20d1744139644f9951b78ea3910b162d3380302315cb4b3d0640f23694c79"
++
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "\
++file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
++
++EXTRA_OECONF = " --disable-static --disable-rebuilds"
++DEPENDS += "gtk+ glib-2.0 ruby-native"
++
++inherit autotools pkgconfig gettext
+diff --git a/meta-ruby/recipes-extended/libgxim/libgxim/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch b/meta-ruby/recipes-extended/libgxim/libgxim/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+deleted file mode 100644
+index 3d293b4..0000000
+--- a/meta-ruby/recipes-extended/libgxim/libgxim/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
++++ /dev/null
+@@ -1,21 +0,0 @@
+-multi-line ACLOCAL_AMFLAGS isn't supported by autoreconf.
+-It will cause configure error as follow.
+-
+-   aclocal: error: non-option arguments are not accepted: '\'.
+-
+-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+-
+-diff -Nurp libgxim-0.5.0.orig/Makefile.am libgxim-0.5.0/Makefile.am
+---- libgxim-0.5.0.orig/Makefile.am	2012-12-13 15:48:09.000000000 +0800
+-+++ libgxim-0.5.0/Makefile.am	2014-12-19 11:05:50.727209821 +0800
+-@@ -2,9 +2,7 @@ NULL =
+- AUTOMAKE_OPTIONS = dist-bzip2
+- SUBDIRS = libgxim m4macros po tests docs
+- 
+--ACLOCAL_AMFLAGS =			\
+--	-I m4macros			\
+--	$(NULL)
+-+ACLOCAL_AMFLAGS = -I m4macros $(NULL)
+- 
+- CONFIGURE_DEPENDENCIES =		\
+- 	requires			\
+diff --git a/meta-ruby/recipes-extended/libgxim/libgxim_0.5.0.bb b/meta-ruby/recipes-extended/libgxim/libgxim_0.5.0.bb
+deleted file mode 100644
+index 768bdaa..0000000
+--- a/meta-ruby/recipes-extended/libgxim/libgxim_0.5.0.bb
++++ /dev/null
+@@ -1,25 +0,0 @@
+-SUMMARY = "GObject-based XIM protocol library"
+-DESCRIPTION = "libgxim is a X Input Method protocol library that is implemented by GObject.\
+-this library helps you to implement XIM servers or client applications to\
+-communicate through XIM protocol without using Xlib API directly, particularly\
+-if your application uses GObject-based main loop.\
+-\
+-This package contains the shared library."
+-
+-HOMEPAGE = "http://code.google.com/p/libgxim/"
+-SECTION = "System Environment/Libraries"
+-
+-SRC_URI = "https://bitbucket.org/tagoh/libgxim/downloads/${BPN}-${PV}.tar.bz2 \
+-           file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch"
+-
+-SRC_URI[md5sum] = "4bb1fa63d00eb224439d413591c29a6a"
+-SRC_URI[sha256sum] = "75e20d1744139644f9951b78ea3910b162d3380302315cb4b3d0640f23694c79"
+-
+-LICENSE = "LGPLv2+"
+-LIC_FILES_CHKSUM = "\
+-file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+-
+-EXTRA_OECONF = " --disable-static --disable-rebuilds"
+-DEPENDS += "gtk+ glib-2.0 ruby-native"
+-
+-inherit autotools pkgconfig gettext
+-- 
+2.6.3
 
->=20
-> Regards,
->=20
-> > that probably is due to
-> >=20
-> > http://patchwork.openembedded.org/patch/107727/
-> >=20
-> > I'm willing to try to make it "optimal" and I'm trying to figure out=20
-> > what it is all about.
-> >=20
-> > Any help would be apreciated.
-> >=20
-> > Most probably whatever imsettings is should be optional rather than a=
-=20
-> > required.
-> >=20
-> > Of course problem occurs just with jethro, there is no imsettings in=20
-> > fido and I've been able to bake and run images for my board without X.
-> >=20
-> > thanks
-> >=20
-> > --=20
-> > Ivan Sergio Borgonovo
-> > http://www.webthatworks.it
-> >=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---V2tfspbppmK1TQo2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlZpyxUACgkQN1Ujt2V2gBxcYwCgmPvrH8T8sc40cZPiPVolpq3C
-IpkAoJDHExua/2ujxctI7WAfDA8bToNE
-=M7mB
------END PGP SIGNATURE-----
-
---V2tfspbppmK1TQo2--
