@@ -1,48 +1,22 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
-	[209.85.213.171])
-	by mail.openembedded.org (Postfix) with ESMTP id C8FDA601D3
+Return-Path: <erkka.kaaria@intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D16960616
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Dec 2015 17:58:17 +0000 (UTC)
-Received: by igcph11 with SMTP id ph11so124582140igc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Dec 2015 09:58:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=gsnkHIp5i1Pho9QkzMeAOuNAZR2SCy56pcSTIEOVfbA=;
-	b=wytwhGBDFGw/QS2bNcvDBeNarCi8wplhsh8ty3rU3sYPEHmdVnBlwASgVDD8GHTFC4
-	ib+Pk84h84qNAKvwjOhQtikfkUZO2zPlRorpjbQxhqvCbD4TTfg0RtWJUt8OXDU2JuAJ
-	x1/aNP1ap/XcryRHnSfZxiewY2+dMmD4z4hg/B64fSvC3J4ePLj5XpWp/QkvMQ2axj/8
-	GBVY02dzF3csDcWq/0wKB+M7i3wRYYyI89f8iFA41JgKLhLOomZX2wdjUWTVsdmizatC
-	MKWOZBSxWt0PDUe0rDyqU83yrUGIFKaIAtBWnTeClwL0/Uq1NT1dKMslKuqd4w59OZU4
-	+FmQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mentor-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=gsnkHIp5i1Pho9QkzMeAOuNAZR2SCy56pcSTIEOVfbA=;
-	b=qu6kfQPD7f2q4oHrJl+klASRg/LQEI11mftOGau3sA3qrnHpREriVVJv52RQyYegWB
-	rN0YQeS6CeEgykzdrP1t8hUsCmPy74fkJkYWY2drRCHylckqBbHVCpxXAIyj0HXplqpe
-	yNTHgy/BVrI5OEvK+ormqeSkOx7BYl3nDdYQrob1hjvwNGIjmgNokz2BKSluGBjIDuVQ
-	1GR0zF32M5RQqu9toRlL3oMlAInnbnzMgMqvHCyQ0ZjWhSVDQKjsikS5CsTzcKe2Wo5N
-	CG3VVCcgxpJftOUM/LaqTsbWCjtG01sfta8/j/EEUqgzFhJBtfO66unPMDS+4udBNjKu
-	HF9g==
-X-Received: by 10.50.92.41 with SMTP id cj9mr11254414igb.38.1449683898232;
-	Wed, 09 Dec 2015 09:58:18 -0800 (PST)
+	Thu, 10 Dec 2015 08:45:17 +0000 (UTC)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.69.129 with HTTP; Wed, 9 Dec 2015 09:57:58 -0800 (PST)
-In-Reply-To: <1449682880-21963-1-git-send-email-kergoth@gmail.com>
-References: <1449682880-21963-1-git-send-email-kergoth@gmail.com>
-From: Christopher Larson <chris_larson@mentor.com>
-Date: Wed, 9 Dec 2015 10:57:58 -0700
-X-Google-Sender-Auth: NS2YUoAWqV1bW9-CNBMaEGgXEO8
-Message-ID: <CABcZANk4m2MOyh+D_yqdVyzAtRPfaHxz5bs3f46MZS7gRaqWOA@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: Re: [PATCHv2][RESEND 1/3] canutils: rdep on iproute2
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 10 Dec 2015 00:45:17 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,407,1444719600"; d="scan'208";a="838302071"
+Received: from ekaaria-xps-8300.fi.intel.com ([10.237.68.35])
+	by orsmga001.jf.intel.com with ESMTP; 10 Dec 2015 00:45:16 -0800
+From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Dec 2015 10:45:45 +0200
+Message-Id: <1449737145-27963-1-git-send-email-erkka.kaaria@intel.com>
+X-Mailer: git-send-email 2.1.4
+MIME-Version: 1.0
+Subject: [meta-java][PATCH] gnumail: Fix race condition in makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,27 +29,189 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2015 17:58:17 -0000
+X-List-Received-Date: Thu, 10 Dec 2015 08:45:20 -0000
+Content-Type: multipart/mixed; boundary="===============3610547508517624890=="
+
+--===============3610547508517624890==
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Dec 9, 2015 at 10:41 AM, Christopher Larson <kergoth@gmail.com>
-wrote:
+Parallel make does not handle multiple javac invocations correctly, as javac
+compiles any uncompiled dependencies on its own. This leads to a race condition
+where make may see incomplete class files and incorrectly assume that the
+class files has already been compiled. This ultimately causes incomplete class
+files to be included in one of the jars, causing build failures later one when
+javac attempts to use such class file.
 
-> From: Christopher Larson <chris_larson@mentor.com>
->
-> busybox ip fails to configure can interfaces, so we need iproute2 to do so.
-> See also http://www.armadeus.com/wiki/index.php?title=CAN_bus_Linux_driver
-> .
->
-> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
->
+This issue is fixed by patching the makefile so that only one instance of javac
+is invoked, which compiles all the java files in one go.
 
-Note: dropped the talloc/tdb/tevent attr change from this little series,
-since Jens Rehsack is working on that.
+Signed-off-by: Erkka K채채ri채 <erkka.kaaria@intel.com>
+---
+ .../fix_makefile_race_condition.patch              | 129 +++++++++++++++++++++
+ recipes-core/classpathx/gnumail_1.1.2.bb           |   1 +
+ 2 files changed, 130 insertions(+)
+ create mode 100644 recipes-core/classpathx/gnumail-1.1.2/fix_makefile_race_condition.patch
+
+diff --git a/recipes-core/classpathx/gnumail-1.1.2/fix_makefile_race_condition.patch b/recipes-core/classpathx/gnumail-1.1.2/fix_makefile_race_condition.patch
+new file mode 100644
+index 0000000..40f3e5a
+--- /dev/null
++++ b/recipes-core/classpathx/gnumail-1.1.2/fix_makefile_race_condition.patch
+@@ -0,0 +1,129 @@
++From b47573456292e90988b661fe3d81c900462d7687 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
++Date: Thu, 10 Dec 2015 08:58:21 +0200
++Subject: [PATCH] gnumail: Fix race condition in makefile
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Parallel make does not handle multiple javac invocations correctly, as javac
++compiles any uncompiled dependencies on its own. This leads to a race condition
++where make may see incomplete class files and incorrectly assume that the class
++file has already been compiled. This ultimately causes incomplete class files
++to be included in one of the jars, causing build failures later on when javac
++attempts to use such class file.
++
++This issue is fixed by patching the makefile in such way that only one instance
++of javac is invoked, which compiles all the java files in one go.
++
++Upstream-Status: Inappropriate [dead project]
++
++Signed-off-by: Erkka K채채ri채 <erkka.kaaria@intel.com>
++---
++ Makefile.am | 70 +++++++++----------------------------------------------------
++ 1 file changed, 10 insertions(+), 60 deletions(-)
++
++diff --git a/Makefile.am b/Makefile.am
++index 8116b55..5c78dbc 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -295,18 +295,6 @@ classpath = $(src):$(activation_jar):$(inetlib_jar):$(jsse_jar)
++ # Targets
++ BUILT_SOURCES = $(gnumail_jar) $(providers_jar)
++ 
++-#쥶XTRA_DIST = jarcompiler $(API_JAVASRC) $(GNU_SRC) $(MAIL_META)
++-
++-gnumail_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(gnumail_sources))
++-util_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(util_sources))
++-provider_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(provider_sources))
++-smtp_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(smtp_sources))
++-imap_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(imap_sources))
++-pop3_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(pop3_sources))
++-nntp_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(nntp_sources))
++-mbox_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(mbox_sources))
++-maildir_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(maildir_sources))
++-
++ META-INF:
++ 	mkdir -p META-INF
++ 
++@@ -361,16 +349,14 @@ $(dst):
++ 
++ # Jars
++ 
++-$(gnumail_jar): $(dst) $(gnumail_meta) $(gnumail_classes) $(util_classes)
+++$(gnumail_jar): $(dst) $(gnumail_meta) build_sources
++ 	$(JAR) cfm $(gnumail_jar) $(manifest_mf) \
++ 		$(gnumail_meta) \
++ 		-C $(dst) javax \
++ 		-C $(dst) gnu/mail/handler \
++ 		-C $(dst) gnu/mail/util 
++ 
++-$(providers_jar): $(dst) $(providers_meta) $(provider_classes) $(smtp_classes) \
++-	$(imap_classes) $(pop3_classes) $(nntp_classes) $(mbox_classes) \
++-	$(maildir_classes)
+++$(providers_jar): $(dst) $(providers_meta) build_sources
++ 	$(JAR) cfm $(providers_jar) $(manifest_mf) \
++ 		$(providers_meta) \
++ 		-C $(dst) gnu/mail/providers \
++@@ -378,50 +364,14 @@ $(providers_jar): $(dst) $(providers_meta) $(provider_classes) $(smtp_classes) \
++ 
++ # Compilation
++ 
++-#gnumail: util $(gnumail_classes)
++-
++-$(gnumail_classes): $(dst)/%.class: $(src)/%.java
++-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
++-
++-#util: $(util_classes)
++-
++-$(util_classes): $(dst)/%.class: $(src)/%.java
++-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
++-
++-#provider_util: $(gnumail_jar) $(provider_classes)
++-
++-$(provider_classes): $(dst)/%.class: $(src)/%.java
++-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
++-
++-#smtp: provider_util $(smtp_classes)
++-
++-$(smtp_classes): $(dst)/%.class: $(src)/%.java
++-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
++-
++-#imap: provider_util $(imap_classes)
++-
++-$(imap_classes): $(dst)/%.class: $(src)/%.java
++-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
++-
++-#pop3: provider_util $(pop3_classes)
++-
++-$(pop3_classes): $(dst)/%.class: $(src)/%.java
++-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
++-
++-#nntp: provider_util $(nntp_classes)
++-
++-$(nntp_classes): $(dst)/%.class: $(src)/%.java
++-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
++-
++-#mbox: provider_util $(mbox_classes)
++-
++-$(mbox_classes): $(dst)/%.class: $(src)/%.java
++-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
++-
++-#maildir: provider_util $(maildir_classes)
++-
++-$(maildir_classes): $(dst)/%.class: $(src)/%.java
++-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
+++build_sources: $(gnumail_sources) $(util_sources) $(provider_sources) \
+++		$(smtp_sources) $(imap_sources) $(pop3_sources) $(nntp_sources) \
+++		$(mbox_sources) $(maildir_sources)
+++	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) \
+++		$(gnumail_sources) $(util_sources) $(provider_sources) \
+++		$(smtp_sources) $(imap_sources) $(pop3_sources) \
+++		$(nntp_sources) $(mbox_sources) $(maildir_sources)
+++	touch build_sources
++ 
++ # Javadoc
++ javadoc:
++-- 
++2.1.4
++
+diff --git a/recipes-core/classpathx/gnumail_1.1.2.bb b/recipes-core/classpathx/gnumail_1.1.2.bb
+index 41417c0..b498c2b 100644
+--- a/recipes-core/classpathx/gnumail_1.1.2.bb
++++ b/recipes-core/classpathx/gnumail_1.1.2.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=14bc6ee8b2e2b409be599212867d126e"
+ 
+ SRC_URI = "http://ftp.gnu.org/gnu/classpathx/mail-${PV}.tar.gz \
+            file://datadir_java.patch \
++           file://fix_makefile_race_condition.patch \
+           "
+ 
+ inherit java-library java-bootstrap-components autotools
 -- 
-Christopher Larson
-kergoth at gmail dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+2.1.4
 
+---------------------------------------------------------------------
+Intel Finland Oy
+Registered Address: PL 281, 00181 Helsinki 
+Business Identity Code: 0357606 - 4 
+Domiciled in Helsinki 
+
+This e-mail and any attachments may contain confidential material for
+the sole use of the intended recipient(s). Any review or distribution
+by others is strictly prohibited. If you are not the intended
+recipient, please contact the sender and delete all copies.
+
+--===============3610547508517624890==--
