@@ -1,22 +1,20 @@
-Return-Path: <erkka.kaaria@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D16960616
+Return-Path: <joshua.lock@collabora.co.uk>
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+	by mail.openembedded.org (Postfix) with ESMTP id 584EB606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Dec 2015 08:45:17 +0000 (UTC)
-MIME-Version: 1.0
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 10 Dec 2015 00:45:17 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,407,1444719600"; d="scan'208";a="838302071"
-Received: from ekaaria-xps-8300.fi.intel.com ([10.237.68.35])
-	by orsmga001.jf.intel.com with ESMTP; 10 Dec 2015 00:45:16 -0800
-From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
+	Thu, 10 Dec 2015 14:42:20 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	(Authenticated sender: joshuagl) with ESMTPSA id 7FFEC260BE5
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Dec 2015 10:45:45 +0200
-Message-Id: <1449737145-27963-1-git-send-email-erkka.kaaria@intel.com>
-X-Mailer: git-send-email 2.1.4
+References: <1449003412-21666-1-git-send-email-joshua.lock@collabora.co.uk>
+From: Joshua Lock <joshua.lock@collabora.co.uk>
+Message-ID: <56698F49.3090900@collabora.co.uk>
+Date: Thu, 10 Dec 2015 14:42:17 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-Subject: [meta-java][PATCH] gnumail: Fix race condition in makefile
+In-Reply-To: <1449003412-21666-1-git-send-email-joshua.lock@collabora.co.uk>
+Subject: Re: [meta-oe][PATCH v2] poppler-data: install CMap resources for CJK glyph support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,189 +27,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Dec 2015 08:45:20 -0000
-Content-Type: multipart/mixed; boundary="===============3610547508517624890=="
+X-List-Received-Date: Thu, 10 Dec 2015 14:42:21 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
---===============3610547508517624890==
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Please don't merge this.
 
-Parallel make does not handle multiple javac invocations correctly, as javac
-compiles any uncompiled dependencies on its own. This leads to a race condition
-where make may see incomplete class files and incorrectly assume that the
-class files has already been compiled. This ultimately causes incomplete class
-files to be included in one of the jars, causing build failures later one when
-javac attempts to use such class file.
+On 01/12/15 20:56, Joshua Lock wrote:
+> CID-keyed fonts, as commonly used to support pictographic East
+> Asian character sets require Character Maps which unidirectionally
+> map character codes (i.e. Unicode encoding) to CID (the glyphs in
+> the font face).
+>
+> Without a CMap poppler isn't able to correctly PDF files in
+> Chinese, Japanese or Korean without embedded fonts.
+>
+> This change installs a copy of the Identity files from Adobe's
+> CMap Resources[1] based on a similar change in Fedora's
+> poppler-data[2][3].
+>
+> 1. https://github.com/adobe-type-tools/cmap-resources
+> 2. http://pkgs.fedoraproject.org/cgit/poppler-data.git/tree/poppler-data.spec#n18
+> 3. https://bugzilla.redhat.com/show_bug.cgi?id=842351
+>
+> Signed-off-by: Joshua Lock <joshua.lock@collabora.co.uk>
+> ---
+>   meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb | 15 ++++++++++++---
+>   1 file changed, 12 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb b/meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb
+> index 4f55e9f..fb8f43d 100644
+> --- a/meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb
+> +++ b/meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb
+> @@ -1,5 +1,7 @@
+> -SUMMARY = "Poppler is a PDF rendering library based on the xpdf-3.0 code base"
+> -LICENSE = "Adobe"
+> +SUMMARY = "Encoding files for Poppler"
+> +DESCRIPTION = "Encoding files for use with poppler that enable poppler to \
+> +               correctly render CJK and Cyrrilic."
+> +LICENSE = "BSD & GPLv2 & GPLv3+"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=4870b98343f0bbb25fa43b9d2ba59448 \
+>                       file://COPYING.adobe;md5=63c6a8a9df204c00461fa5f163d8a663 \
+>                       file://COPYING.gpl2;md5=751419260aa954499f7abaabaa882bbe \
+> @@ -7,15 +9,22 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4870b98343f0bbb25fa43b9d2ba59448 \
+>
+>   inherit allarch
+>
+> -SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.gz"
+> +INHIBIT_DEFAULT_DEPS = "1"
+> +
+> +SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.gz \
+> +           https://github.com/adobe-type-tools/cmap-resources/raw/master/cmapresources_identity-0.zip;name=cmap"
 
-This issue is fixed by patching the makefile so that only one instance of javac
-is invoked, which compiles all the java files in one go.
+This raw URI isn't safe to use and the .zip is no longer present in the 
+master branch of the repository.
 
-Signed-off-by: Erkka K채채ri채 <erkka.kaaria@intel.com>
----
- .../fix_makefile_race_condition.patch              | 129 +++++++++++++++++++++
- recipes-core/classpathx/gnumail_1.1.2.bb           |   1 +
- 2 files changed, 130 insertions(+)
- create mode 100644 recipes-core/classpathx/gnumail-1.1.2/fix_makefile_race_condition.patch
+A colleague is in the process of working up an improved version of this 
+patch with a safer URI.
 
-diff --git a/recipes-core/classpathx/gnumail-1.1.2/fix_makefile_race_condition.patch b/recipes-core/classpathx/gnumail-1.1.2/fix_makefile_race_condition.patch
-new file mode 100644
-index 0000000..40f3e5a
---- /dev/null
-+++ b/recipes-core/classpathx/gnumail-1.1.2/fix_makefile_race_condition.patch
-@@ -0,0 +1,129 @@
-+From b47573456292e90988b661fe3d81c900462d7687 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
-+Date: Thu, 10 Dec 2015 08:58:21 +0200
-+Subject: [PATCH] gnumail: Fix race condition in makefile
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Parallel make does not handle multiple javac invocations correctly, as javac
-+compiles any uncompiled dependencies on its own. This leads to a race condition
-+where make may see incomplete class files and incorrectly assume that the class
-+file has already been compiled. This ultimately causes incomplete class files
-+to be included in one of the jars, causing build failures later on when javac
-+attempts to use such class file.
-+
-+This issue is fixed by patching the makefile in such way that only one instance
-+of javac is invoked, which compiles all the java files in one go.
-+
-+Upstream-Status: Inappropriate [dead project]
-+
-+Signed-off-by: Erkka K채채ri채 <erkka.kaaria@intel.com>
-+---
-+ Makefile.am | 70 +++++++++----------------------------------------------------
-+ 1 file changed, 10 insertions(+), 60 deletions(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 8116b55..5c78dbc 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -295,18 +295,6 @@ classpath = $(src):$(activation_jar):$(inetlib_jar):$(jsse_jar)
-+ # Targets
-+ BUILT_SOURCES = $(gnumail_jar) $(providers_jar)
-+ 
-+-#쥶XTRA_DIST = jarcompiler $(API_JAVASRC) $(GNU_SRC) $(MAIL_META)
-+-
-+-gnumail_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(gnumail_sources))
-+-util_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(util_sources))
-+-provider_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(provider_sources))
-+-smtp_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(smtp_sources))
-+-imap_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(imap_sources))
-+-pop3_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(pop3_sources))
-+-nntp_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(nntp_sources))
-+-mbox_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(mbox_sources))
-+-maildir_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(maildir_sources))
-+-
-+ META-INF:
-+ 	mkdir -p META-INF
-+ 
-+@@ -361,16 +349,14 @@ $(dst):
-+ 
-+ # Jars
-+ 
-+-$(gnumail_jar): $(dst) $(gnumail_meta) $(gnumail_classes) $(util_classes)
-++$(gnumail_jar): $(dst) $(gnumail_meta) build_sources
-+ 	$(JAR) cfm $(gnumail_jar) $(manifest_mf) \
-+ 		$(gnumail_meta) \
-+ 		-C $(dst) javax \
-+ 		-C $(dst) gnu/mail/handler \
-+ 		-C $(dst) gnu/mail/util 
-+ 
-+-$(providers_jar): $(dst) $(providers_meta) $(provider_classes) $(smtp_classes) \
-+-	$(imap_classes) $(pop3_classes) $(nntp_classes) $(mbox_classes) \
-+-	$(maildir_classes)
-++$(providers_jar): $(dst) $(providers_meta) build_sources
-+ 	$(JAR) cfm $(providers_jar) $(manifest_mf) \
-+ 		$(providers_meta) \
-+ 		-C $(dst) gnu/mail/providers \
-+@@ -378,50 +364,14 @@ $(providers_jar): $(dst) $(providers_meta) $(provider_classes) $(smtp_classes) \
-+ 
-+ # Compilation
-+ 
-+-#gnumail: util $(gnumail_classes)
-+-
-+-$(gnumail_classes): $(dst)/%.class: $(src)/%.java
-+-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
-+-
-+-#util: $(util_classes)
-+-
-+-$(util_classes): $(dst)/%.class: $(src)/%.java
-+-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
-+-
-+-#provider_util: $(gnumail_jar) $(provider_classes)
-+-
-+-$(provider_classes): $(dst)/%.class: $(src)/%.java
-+-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
-+-
-+-#smtp: provider_util $(smtp_classes)
-+-
-+-$(smtp_classes): $(dst)/%.class: $(src)/%.java
-+-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
-+-
-+-#imap: provider_util $(imap_classes)
-+-
-+-$(imap_classes): $(dst)/%.class: $(src)/%.java
-+-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
-+-
-+-#pop3: provider_util $(pop3_classes)
-+-
-+-$(pop3_classes): $(dst)/%.class: $(src)/%.java
-+-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
-+-
-+-#nntp: provider_util $(nntp_classes)
-+-
-+-$(nntp_classes): $(dst)/%.class: $(src)/%.java
-+-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
-+-
-+-#mbox: provider_util $(mbox_classes)
-+-
-+-$(mbox_classes): $(dst)/%.class: $(src)/%.java
-+-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
-+-
-+-#maildir: provider_util $(maildir_classes)
-+-
-+-$(maildir_classes): $(dst)/%.class: $(src)/%.java
-+-	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) $<
-++build_sources: $(gnumail_sources) $(util_sources) $(provider_sources) \
-++		$(smtp_sources) $(imap_sources) $(pop3_sources) $(nntp_sources) \
-++		$(mbox_sources) $(maildir_sources)
-++	$(JAVAC) $(JAVACFLAGS) -classpath $(classpath) -d $(dst) \
-++		$(gnumail_sources) $(util_sources) $(provider_sources) \
-++		$(smtp_sources) $(imap_sources) $(pop3_sources) \
-++		$(nntp_sources) $(mbox_sources) $(maildir_sources)
-++	touch build_sources
-+ 
-+ # Javadoc
-+ javadoc:
-+-- 
-+2.1.4
-+
-diff --git a/recipes-core/classpathx/gnumail_1.1.2.bb b/recipes-core/classpathx/gnumail_1.1.2.bb
-index 41417c0..b498c2b 100644
---- a/recipes-core/classpathx/gnumail_1.1.2.bb
-+++ b/recipes-core/classpathx/gnumail_1.1.2.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=14bc6ee8b2e2b409be599212867d126e"
- 
- SRC_URI = "http://ftp.gnu.org/gnu/classpathx/mail-${PV}.tar.gz \
-            file://datadir_java.patch \
-+           file://fix_makefile_race_condition.patch \
-           "
- 
- inherit java-library java-bootstrap-components autotools
--- 
-2.1.4
+>   SRC_URI[md5sum] = "636a8f2b9f6df9e7ced8ec0946961eaf"
+>   SRC_URI[sha256sum] = "e752b0d88a7aba54574152143e7bf76436a7ef51977c55d6bd9a48dccde3a7de"
+> +SRC_URI[cmap.md5sum] = "32aab2e25655e475dd58a50479270f91"
+> +SRC_URI[cmap.sha256sum] = "3a3b591b7153588a77d1304bcefc1781750a36811cebae03680c85882765f515"
+>
+>   do_compile() {
+>   }
+>
+>   do_install() {
+>       oe_runmake install DESTDIR=${D}
+> +    install -d ${D}${datadir}/poppler/cMap
+> +    install -m644 ${WORKDIR}/cmapresources_identity-0/CMap/Identity-* ${D}${datadir}/poppler/cMap/
+>   }
+>
+>   FILES_${PN} += "${datadir}"
+>
 
----------------------------------------------------------------------
-Intel Finland Oy
-Registered Address: PL 281, 00181 Helsinki 
-Business Identity Code: 0357606 - 4 
-Domiciled in Helsinki 
 
-This e-mail and any attachments may contain confidential material for
-the sole use of the intended recipient(s). Any review or distribution
-by others is strictly prohibited. If you are not the intended
-recipient, please contact the sender and delete all copies.
-
---===============3610547508517624890==--
