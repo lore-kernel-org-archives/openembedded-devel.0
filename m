@@ -1,20 +1,29 @@
-Return-Path: <joshua.lock@collabora.co.uk>
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
-	by mail.openembedded.org (Postfix) with ESMTP id 584EB606A8
+Return-Path: <rah@fern.h.settrans.net>
+X-Greylist: delayed 1482 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 10 Dec 2015 14:58:42 UTC
+Received: from verain.settrans.net (verain.settrans.net [93.93.131.233])
+	by mail.openembedded.org (Postfix) with ESMTP id D371E60767
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Dec 2015 14:42:20 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(Authenticated sender: joshuagl) with ESMTPSA id 7FFEC260BE5
+	Thu, 10 Dec 2015 14:58:42 +0000 (UTC)
+Received: from rah-1-pt.tunnel.tserv10.par1.ipv6.he.net
+	([2001:470:1f12:e23::2] helo=myrtle.6gnip.net ident=Debian-exim)
+	by verain.settrans.net with esmtps (TLS1.2:RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80) (envelope-from <rah@fern.h.settrans.net>)
+	id 1a72IC-0001HW-5F for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Dec 2015 14:34:00 +0000
+Received: from fern.arb.net ([172.18.111.33] helo=fern.h.settrans.net)
+	by myrtle.6gnip.net with esmtp (Exim 4.84)
+	(envelope-from <rah@fern.h.settrans.net>) id 1a72IB-0006rx-Dh
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Dec 2015 14:33:59 +0000
+Received: by fern.h.settrans.net (Postfix, from userid 1000)
+	id 6101BB405B3; Thu, 10 Dec 2015 14:33:59 +0000 (GMT)
+From: Bob Ham <bob.ham@collabora.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1449003412-21666-1-git-send-email-joshua.lock@collabora.co.uk>
-From: Joshua Lock <joshua.lock@collabora.co.uk>
-Message-ID: <56698F49.3090900@collabora.co.uk>
-Date: Thu, 10 Dec 2015 14:42:17 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.4.0
-MIME-Version: 1.0
-In-Reply-To: <1449003412-21666-1-git-send-email-joshua.lock@collabora.co.uk>
-Subject: Re: [meta-oe][PATCH v2] poppler-data: install CMap resources for CJK glyph support
+Date: Thu, 10 Dec 2015 14:33:59 +0000
+Message-Id: <1449758039-17252-1-git-send-email-bob.ham@collabora.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH] poppler: move RDEPENDS on poppler-data to libpoppler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,79 +36,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Dec 2015 14:42:21 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Dec 2015 14:58:46 -0000
 
-Please don't merge this.
+The poppler-data package contains data needed by consumers of
+the libpoppler package, for example evince.  However, the RDEPENDS in
+this recipe is only for the poppler package.  Moving the RDEPENDS to
+libpoppler ensures that poppler-data is included in any builds with
+separate libpoppler consumers but not poppler.  The poppler package
+automatically depends on libpoppler so poppler's dependency on
+poppler-data is not lost.
 
-On 01/12/15 20:56, Joshua Lock wrote:
-> CID-keyed fonts, as commonly used to support pictographic East
-> Asian character sets require Character Maps which unidirectionally
-> map character codes (i.e. Unicode encoding) to CID (the glyphs in
-> the font face).
->
-> Without a CMap poppler isn't able to correctly PDF files in
-> Chinese, Japanese or Korean without embedded fonts.
->
-> This change installs a copy of the Identity files from Adobe's
-> CMap Resources[1] based on a similar change in Fedora's
-> poppler-data[2][3].
->
-> 1. https://github.com/adobe-type-tools/cmap-resources
-> 2. http://pkgs.fedoraproject.org/cgit/poppler-data.git/tree/poppler-data.spec#n18
-> 3. https://bugzilla.redhat.com/show_bug.cgi?id=842351
->
-> Signed-off-by: Joshua Lock <joshua.lock@collabora.co.uk>
-> ---
->   meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb | 15 ++++++++++++---
->   1 file changed, 12 insertions(+), 3 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb b/meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb
-> index 4f55e9f..fb8f43d 100644
-> --- a/meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb
-> +++ b/meta-oe/recipes-support/poppler/poppler-data_0.4.7.bb
-> @@ -1,5 +1,7 @@
-> -SUMMARY = "Poppler is a PDF rendering library based on the xpdf-3.0 code base"
-> -LICENSE = "Adobe"
-> +SUMMARY = "Encoding files for Poppler"
-> +DESCRIPTION = "Encoding files for use with poppler that enable poppler to \
-> +               correctly render CJK and Cyrrilic."
-> +LICENSE = "BSD & GPLv2 & GPLv3+"
->   LIC_FILES_CHKSUM = "file://COPYING;md5=4870b98343f0bbb25fa43b9d2ba59448 \
->                       file://COPYING.adobe;md5=63c6a8a9df204c00461fa5f163d8a663 \
->                       file://COPYING.gpl2;md5=751419260aa954499f7abaabaa882bbe \
-> @@ -7,15 +9,22 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4870b98343f0bbb25fa43b9d2ba59448 \
->
->   inherit allarch
->
-> -SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.gz"
-> +INHIBIT_DEFAULT_DEPS = "1"
-> +
-> +SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.gz \
-> +           https://github.com/adobe-type-tools/cmap-resources/raw/master/cmapresources_identity-0.zip;name=cmap"
+Signed-off-by: Bob Ham <bob.ham@collabora.com>
+---
+ meta-oe/recipes-support/poppler/poppler_0.37.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This raw URI isn't safe to use and the .zip is no longer present in the 
-master branch of the repository.
-
-A colleague is in the process of working up an improved version of this 
-patch with a safer URI.
-
->   SRC_URI[md5sum] = "636a8f2b9f6df9e7ced8ec0946961eaf"
->   SRC_URI[sha256sum] = "e752b0d88a7aba54574152143e7bf76436a7ef51977c55d6bd9a48dccde3a7de"
-> +SRC_URI[cmap.md5sum] = "32aab2e25655e475dd58a50479270f91"
-> +SRC_URI[cmap.sha256sum] = "3a3b591b7153588a77d1304bcefc1781750a36811cebae03680c85882765f515"
->
->   do_compile() {
->   }
->
->   do_install() {
->       oe_runmake install DESTDIR=${D}
-> +    install -d ${D}${datadir}/poppler/cMap
-> +    install -m644 ${WORKDIR}/cmapresources_identity-0/CMap/Identity-* ${D}${datadir}/poppler/cMap/
->   }
->
->   FILES_${PN} += "${datadir}"
->
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.37.0.bb b/meta-oe/recipes-support/poppler/poppler_0.37.0.bb
+index 8d49bbe..59c477d 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.37.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.37.0.bb
+@@ -44,4 +44,4 @@ PACKAGES =+ "libpoppler libpoppler-glib"
+ FILES_libpoppler = "${libdir}/libpoppler.so.*"
+ FILES_libpoppler-glib = "${libdir}/libpoppler-glib.so.*"
+ 
+-RDEPENDS_${PN} = "poppler-data"
++RDEPENDS_libpoppler = "poppler-data"
+-- 
+2.1.4
 
 
