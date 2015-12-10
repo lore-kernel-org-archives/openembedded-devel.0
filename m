@@ -1,33 +1,38 @@
-Return-Path: <mail@webthatworks.it>
-X-Greylist: delayed 324 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 10 Dec 2015 18:07:55 UTC
-Received: from smtp207.alice.it (smtp207.alice.it [82.57.200.103])
-	by mail.openembedded.org (Postfix) with ESMTP id A54A160767
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 0797E6612D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Dec 2015 18:07:55 +0000 (UTC)
-Received: from caronte.home.webthatworks.it (79.54.114.136) by
-	smtp207.alice.it (8.6.060.28)
-	id 562CAA69092A4D9B for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Dec 2015 19:02:26 +0100
-Received: from gloom.home.webthatworks.it (gloom.home.webthatworks.it
-	[192.168.1.14])
-	by caronte.home.webthatworks.it (Postfix) with ESMTP id 008946FE0275
+	Thu, 10 Dec 2015 18:28:42 +0000 (UTC)
+Received: by wmec201 with SMTP id c201so36871923wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Dec 2015 19:02:29 +0100 (CET)
-Received: from [IPv6:::1] (localhost [IPv6:::1])
-	by gloom.home.webthatworks.it (Postfix) with ESMTP id E9A355E25EB
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Dec 2015 19:01:41 +0100 (CET)
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-From: Ivan Sergio Borgonovo <mail@webthatworks.it>
-Organization: http://www.WebThatWorks.it
-Message-ID: <5669BE05.7030904@webthatworks.it>
-Date: Thu, 10 Dec 2015 19:01:41 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Icedove/38.4.0
+	Thu, 10 Dec 2015 10:28:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=EYNLOcSxoe3b8SsUaHm97AzlHbJ/1Yrxz1BxAus4Opg=;
+	b=sab1Bts5Juso2/WiPT9vgjUxfbKSQKG9nfaGs/XotgAnULihH51YkmYMtDRFWtsFLm
+	bPaCKYlUOUZLR1HhnjlfvUGjMWFRwkRkhjhpyv4G+ssz8LIIofMDDeOu5Hlzl10SEpoR
+	C/hEkGetPGQt5SBIgTlPH++WdpjsFuTaEELhneZUqlr/QTC8qTdCy2PAbvCcHYnP3bTO
+	Zc+/QqqQaHxBJO5lJu4pqSCQc/+aqUW9Eefls6hkag/vwpf5OvAT5wSJ+WvuDu/Y8uYT
+	SB9izE7FmigM2GRGCR97J6TlxVtGrl2oidnkJf8RGVUwS40Po1bnvhyW1vP7NBW5EbX7
+	1Rog==
+X-Received: by 10.28.183.198 with SMTP id h189mr612789wmf.44.1449772123146;
+	Thu, 10 Dec 2015 10:28:43 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id r74sm2015079wmb.2.2015.12.10.10.28.41
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 10 Dec 2015 10:28:41 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 10 Dec 2015 19:30:26 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151210183026.GN2246@jama>
+References: <5669BE05.7030904@webthatworks.it>
 MIME-Version: 1.0
-Subject: [meta-qt5] [meta-ruby] jethro: dependencies on xfce-layer and xfconf probably make qt5 unbuildable without X
+In-Reply-To: <5669BE05.7030904@webthatworks.it>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-qt5] [meta-ruby] jethro: dependencies on xfce-layer and xfconf probably make qt5 unbuildable without X
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,36 +45,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Dec 2015 18:08:02 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Dec 2015 18:28:44 -0000
+X-Groupsio-MsgNum: 58964
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="7gLe/sNPhR777EPF"
+Content-Disposition: inline
 
-I was trying to see if I could build
-core-image-minimal | meta-toolchain-qt5
-and I stumbled into
+--7gLe/sNPhR777EPF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-ERROR: Layer 'ruby-layer' depends on layer 'xfce-layer', but this layer 
-is not enabled in your configuration
+On Thu, Dec 10, 2015 at 07:01:41PM +0100, Ivan Sergio Borgonovo wrote:
+> I was trying to see if I could build
+> core-image-minimal | meta-toolchain-qt5
+> and I stumbled into
+>=20
+> ERROR: Layer 'ruby-layer' depends on layer 'xfce-layer', but this layer=
+=20
+> is not enabled in your configuration
 
-that probably is due to
+Why do you use ruby-layer?
 
-http://patchwork.openembedded.org/patch/107727/
+meta-qt5 no longer requires ruby-layer, because ruby-native was moved to
+oe-core.
 
-I'm willing to try to make it "optimal" and I'm trying to figure out 
-what it is all about.
+Similarly imsettings now doesn't need to be in meta-ruby, because it was
+moved there just because of ruby dependency, so now it can be moved
+back.
 
-Any help would be apreciated.
+Regards,
 
-Most probably whatever imsettings is should be optional rather than a 
-required.
+> that probably is due to
+>=20
+> http://patchwork.openembedded.org/patch/107727/
+>=20
+> I'm willing to try to make it "optimal" and I'm trying to figure out=20
+> what it is all about.
+>=20
+> Any help would be apreciated.
+>=20
+> Most probably whatever imsettings is should be optional rather than a=20
+> required.
+>=20
+> Of course problem occurs just with jethro, there is no imsettings in=20
+> fido and I've been able to bake and run images for my board without X.
+>=20
+> thanks
+>=20
+> --=20
+> Ivan Sergio Borgonovo
+> http://www.webthatworks.it
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Of course problem occurs just with jethro, there is no imsettings in 
-fido and I've been able to bake and run images for my board without X.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-thanks
+--7gLe/sNPhR777EPF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
--- 
-Ivan Sergio Borgonovo
-http://www.webthatworks.it
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
+iEYEARECAAYFAlZpxMEACgkQN1Ujt2V2gBxhxwCgqDESnOO06yOGfR1lImfySgX9
+Q4MAnjNBowHkSSEsQ5Enq1QGjSYNDXD+
+=0Bqn
+-----END PGP SIGNATURE-----
 
+--7gLe/sNPhR777EPF--
