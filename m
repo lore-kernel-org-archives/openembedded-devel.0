@@ -1,47 +1,50 @@
 Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qg0-f50.google.com (mail-qg0-f50.google.com
-	[209.85.192.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B46E60796
+Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
+	[209.85.220.174])
+	by mail.openembedded.org (Postfix) with ESMTP id EF6A96FFA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Dec 2015 16:36:21 +0000 (UTC)
-Received: by qgz52 with SMTP id 52so12852376qgz.1
+	Fri, 11 Dec 2015 16:36:24 +0000 (UTC)
+Received: by qkck189 with SMTP id k189so10767647qkc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Dec 2015 08:36:22 -0800 (PST)
+	Fri, 11 Dec 2015 08:36:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=Yf4FbrgF6cUoP24R396G0/Bk6DWOVWNtrUKoMdh/Twc=;
-	b=BJhIyjq14Tp0pbT5q+YI8Ip0/JYL/4imU2OzAchx+PPWljcfkJr8XKLpr2o5bqZiUe
-	TUoh0Qjn1NRst3BN5YsSSH+/h+DfE+jtyaUxwT7E9mVpbZ0bMsLjjKQ6eP3O0d87l6/7
-	hXgnIWW9m4IG41pQ/PzkhPMM1ilkKMjCo4UFGJwGXwNYviyb1ry3UPq7gxUvOeIRBbK+
-	o/kTdUpHU6UkCs4Axe8nlhF2KlcXmzYx+OlrpEGkuDlBhL6Zm/TFA/6ZGQGCbvllMTB5
-	mc4opkkmiFRtS+YUcOQx4j23slEWrBlDw/+LH9RF1xkN8oGEswnQCccrE6yi/pPB4Saw
-	1KfQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=4/M+B4BLgCIdwSldPurh0SlDiPCXi08lXf83I+lFysw=;
+	b=M1iqXsH1Fo2JRZK3BktAhPXIrBd2RjPBks1+b8Gdy/dYrdPtjGhVHl1y66xRDaBJtj
+	ovR0aQPTFQHb8ihvdJ1Ow1K/rFtFrc5SEmUKOksT9+7agqZVzjlrPtLw+tyd3+XpgToe
+	rKyCQiIemCmIvsI1iyudrib48/EIOJltrvpqsz+R8lIwtD7+h68YNLMIqfvXHT9TmRqZ
+	6qOTci25SbPDA2F6pOom1eEhhKojQ5JfZJYCwP29mi039TyeZBuPP/ijkPEqwY9o/P+n
+	Ohw/57bbvMpBr359Sbd0EXIcMef4vObz0tfWc/mMrHuhWYB/LuoTyEfWdC7EI+M6V9zo
+	cOJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Yf4FbrgF6cUoP24R396G0/Bk6DWOVWNtrUKoMdh/Twc=;
-	b=KOUZWUvoVUm0hhMEEvpj5bGLLWXaU/TFdlW2DAlfVB8TgGIoiQAlnPQXDRteuAuMWD
-	fIWH2mCgDzMWVk63gBWhvttWTUb3QlbJf1yUP2lnQUk6AlRu0r+x1sBS7HQza4FBDRBy
-	XKVHMn836DUtM5om9exblTEs4SuRiDL+g5ZztqWvyd9s0ZakalyaSfROdjjOK5BnXPJW
-	Yk5mUAkmetMFkb0jILNPta7HG5PekF4CFyaVb8/bQ2OpWjpUoOsGs611ZMWEh5Lr9uKU
-	uGImmU+S1Har1irsCv6bGpD5DcCDaW8CuoCOK3hjXGEKwk6S50rq1IuOq8sUhPGGcw9Z
-	AepA==
-X-Gm-Message-State: ALoCoQkFXNfBp+c1jUagqw0+bsM08iwnZ7ZdSewlm1hDceOyfIDsVxZK3z7qJhcuBl09OaYxsv9dvYRiP/2Bt2JNEgxW9BZCzg==
-X-Received: by 10.140.36.232 with SMTP id p95mr25313314qgp.55.1449851781980;
-	Fri, 11 Dec 2015 08:36:21 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=4/M+B4BLgCIdwSldPurh0SlDiPCXi08lXf83I+lFysw=;
+	b=gzPz68QlnkHuXkZV6a6D0G12SdhtBlWxL6WfHuMKg3KcpPjaaeTmo+6RS6D6QndVdH
+	PrwlWaNShncO7VZ7OaQgzYEihw+lDZd/NxipFvgVJfp4gg4MBgTSY9cRlEtYWEl0XYvO
+	dQZo5JeYPruf2hpYzyMuQRgeq3HJEFkiEHlY41ur9EDgQeycst/9SuVWvVUZPCo/VEvU
+	7bvXZKJQ0+3NYVqKWKcgAM3NXImgQQVV2ZfBtmeK28E+isW2YPi4jqnpu+qsK4STU6N2
+	tezXYIEKNjpA0xieafPA2alFBo2tNbXfWTrxvEvce+WyydUaolVE4ASYmMPjFD/g4Zvr
+	oDRQ==
+X-Gm-Message-State: ALoCoQlLv/KMruafxYMlHGq5s/NIJPh7w1ebd1FPeTPXJNO6C5j7Mtl5+EusKtdH3Le89Ld5YqD7LydHh1l2yg6kE0XTqMsh5g==
+X-Received: by 10.55.74.71 with SMTP id x68mr24267158qka.101.1449851784800;
+	Fri, 11 Dec 2015 08:36:24 -0800 (PST)
 Received: from localhost.localdomain ([177.194.217.47])
 	by smtp.gmail.com with ESMTPSA id
-	s74sm8271229qkl.36.2015.12.11.08.36.19
+	s74sm8271229qkl.36.2015.12.11.08.36.22
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 11 Dec 2015 08:36:21 -0800 (PST)
+	Fri, 11 Dec 2015 08:36:24 -0800 (PST)
 From: Fabio Berton <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Dec 2015 14:35:49 -0200
-Message-Id: <1449851750-30926-1-git-send-email-fabio.berton@ossystems.com.br>
+Date: Fri, 11 Dec 2015 14:35:50 -0200
+Message-Id: <1449851750-30926-2-git-send-email-fabio.berton@ossystems.com.br>
 X-Mailer: git-send-email 2.1.4
+In-Reply-To: <1449851750-30926-1-git-send-email-fabio.berton@ossystems.com.br>
+References: <1449851750-30926-1-git-send-email-fabio.berton@ossystems.com.br>
 Cc: Fabio Berton <fabio.berton@ossystems.com.br>
-Subject: [meta-python][PATCH 1/2] python-daemonize: Update to version 2.4.1
+Subject: [meta-python][PATCH 2/2] python-cffi: Update to version 1.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,29 +57,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Dec 2015 16:36:22 -0000
+X-List-Received-Date: Fri, 11 Dec 2015 16:36:25 -0000
 
 Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
- .../python/{python-daemonize_2.3.1.bb => python-daemonize_2.4.1.bb}   | 4 ++--
+ .../python/{python-cffi_1.3.0.bb => python-cffi_1.3.1.bb}             | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-daemonize_2.3.1.bb => python-daemonize_2.4.1.bb} (72%)
+ rename meta-python/recipes-devtools/python/{python-cffi_1.3.0.bb => python-cffi_1.3.1.bb} (62%)
 
-diff --git a/meta-python/recipes-devtools/python/python-daemonize_2.3.1.bb b/meta-python/recipes-devtools/python/python-daemonize_2.4.1.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python-daemonize_2.3.1.bb
-rename to meta-python/recipes-devtools/python/python-daemonize_2.4.1.bb
-index 2fc9e63..e10c853 100644
---- a/meta-python/recipes-devtools/python/python-daemonize_2.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python-daemonize_2.4.1.bb
-@@ -12,5 +12,5 @@ RDEPENDS_${PN} = "\
-                python-resource \
- "
+diff --git a/meta-python/recipes-devtools/python/python-cffi_1.3.0.bb b/meta-python/recipes-devtools/python/python-cffi_1.3.1.bb
+similarity index 62%
+rename from meta-python/recipes-devtools/python/python-cffi_1.3.0.bb
+rename to meta-python/recipes-devtools/python/python-cffi_1.3.1.bb
+index 0336bd8..f3cdbd9 100644
+--- a/meta-python/recipes-devtools/python/python-cffi_1.3.0.bb
++++ b/meta-python/recipes-devtools/python/python-cffi_1.3.1.bb
+@@ -3,8 +3,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+ DEPENDS = "libffi python-pycparser"
  
--SRC_URI[md5sum] = "f0d401a0a501ba9d36e516ea89146eb2"
--SRC_URI[sha256sum] = "6fa43b56c293ff8bb180008fe47ed49f7d006cdeb0eaa84f157249800d3194d4"
-+SRC_URI[md5sum] = "f08ad971573a1d83d2d4adab13f59448"
-+SRC_URI[sha256sum] = "2fbe8a4af6bafb3f53d64b8c05c073bfff6c8bc829b83563f5774b0052fc656e"
+-SRC_URI[md5sum] = "a40ed8c8ac653c8fc7d5603711b06eaf"
+-SRC_URI[sha256sum] = "9daa53aff0b5cf64c85c10eab7ce6776880d0ee71b78cedeae196ae82b6734e9"
++SRC_URI[md5sum] = "deeba7c1fd32a66f1db587988d760c11"
++SRC_URI[sha256sum] = "d45dd39a770b4afb591c82555f6a8bbc1ac7eb019eda9b621eee1a0a72201220"
+ 
+ inherit pypi
+ 
 -- 
 2.1.4
 
