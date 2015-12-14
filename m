@@ -1,34 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id BC2326FF84
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 2FF5B6FF84
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 18:32:01 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id p66so57370384wmp.0
+	Mon, 14 Dec 2015 18:33:27 +0000 (UTC)
+Received: by wmnn186 with SMTP id n186so133386337wmn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 10:32:02 -0800 (PST)
+	Mon, 14 Dec 2015 10:33:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=PXUGo3P6daI9O4xADbfP4MGa0XGUgmSct6Eoml8DfP4=;
-	b=0kK51LDIlqUmPrq74jJIiEW0LMV0E9N1PhoHh3JqIZvcB8qs7Ktra5kzEaTKp2W+HG
-	fJ+kksjn5FvtJsuNSwKDMXp4NXc1X6pgr44EUu4ubpvdwfn053wuWoYXQhbCZNdIaYxr
-	dvfGm8jNiG6XeOct5/CT4DEC56JCd36jL4fnt1JRJnMriJv1IwUWTeX1SMM3y9/SjiFA
-	kBavX2/BAj9ysI4T/Tsz6ZPXbCLxJ1zpKUwxInsaWoi+LzkghjWBDwre1VsSU9eQM7h2
-	ThHh/hiomcaTCZ0ASO0FswcS2gNR1Vz6HT5vpTmE+kkjbnebrO4smqiFrCKtyZ4S7YYv
-	tVZA==
-X-Received: by 10.194.185.42 with SMTP id ez10mr45351437wjc.82.1450117921852; 
-	Mon, 14 Dec 2015 10:32:01 -0800 (PST)
+	bh=04ZSYyAS2dPBr0qGTw7k/8yrZ8rdgHjyuXW/hoHwPO0=;
+	b=Ge5Vc71rd6srZAlZr2Mit0nPUW32c9RiXfI4hgK2WNMO7pSJbAgxco0zRBiNHVCLlp
+	jh9x1ED1wtgcTXk++2L6nxL1mopbp+MjdqCfJ35Tqk5pBkI6vUPE0X5Pdxk3txdQ8bvw
+	7TLJjp5ri8yjm/G63B1veqnlBu606tcpq8bieyrWbRXKolpVo41LX4A/ERREnn+L0vYd
+	9PP7ZF81yFqDZIuHVHJHFx4hf2cJSqF4qA0/nHZHOubHMEaNdUKFYdNdXJgBAt74c5Ne
+	qbMisFv37UBIjLhnv1yN9ypIzZPRxzo7LYgjx09PEd7tYeh6fOW7q0SI0fVJhrPhf+nO
+	tVPA==
+X-Received: by 10.28.210.74 with SMTP id j71mr24973574wmg.96.1450118008065;
+	Mon, 14 Dec 2015 10:33:28 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	an7sm30969359wjc.44.2015.12.14.10.32.00
+	u17sm17405038wmd.8.2015.12.14.10.33.27
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 14 Dec 2015 10:32:00 -0800 (PST)
+	Mon, 14 Dec 2015 10:33:27 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Dec 2015 19:34:01 +0100
-Message-Id: <1450118041-19638-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon, 14 Dec 2015 19:35:26 +0100
+Message-Id: <1450118126-19721-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.6.4
-Subject: [PATCH][meta-gnome] gnome-panel: add dependency on dbus
+Subject: [PATCH][meta-oe] lcdproc5: add dependency on lirc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,29 +41,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2015 18:32:02 -0000
+X-List-Received-Date: Mon, 14 Dec 2015 18:33:28 -0000
 
 * it's autodetected from sysroot:
-  WARN: gnome-panel: gnome-panel rdepends on dbus-lib, but it isn't a build dependency?
+  ERROR: lcdproc: lcdd-driver-lirc package isn't created when building with minimal dependencies?
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb | 2 +-
+ meta-oe/recipes-extended/lcdproc/lcdproc5.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-index 3a413bd..47c8b80 100644
---- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-@@ -10,7 +10,7 @@ SECTION = "x11/gnome"
- PR = "r7"
+diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc5.inc b/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
+index d7e333a..680f558 100644
+--- a/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
++++ b/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
+@@ -4,7 +4,7 @@ SUMMARY = "Drivers for character-based LCD displays"
+ HOMEPAGE = "http://lcdproc.org"
+ SECTION = "utils"
+ LICENSE = "GPLv2+"
+-DEPENDS = "ncurses"
++DEPENDS = "ncurses lirc"
  
- DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ \
--           pango libwnck gnome-menus cairo libgweather dbus-glib \
-+           pango libwnck gnome-menus cairo libgweather dbus dbus-glib \
- 	   librsvg libcanberra"
- RDEPENDS_${PN} = "python"
- 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
+                     file://README;beginline=60;md5=637e042cdd3671ba00e78b58ede45d3b"
 -- 
 2.6.4
 
