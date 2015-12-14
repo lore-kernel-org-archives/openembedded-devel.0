@@ -1,32 +1,32 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A0A617002B
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 09B1A700FD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 09:02:05 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
-   d="scan'208";a="1549144"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 14 Dec 2015 17:01:53 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 9E848409255D
+	Mon, 14 Dec 2015 10:29:01 +0000 (UTC)
+Received: by wmnn186 with SMTP id n186so114154347wmn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 17:01:53 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.98) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 14 Dec 2015 17:05:04 +0800
-From: Li Xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 Dec 2015 12:01:51 +0300
-Message-ID: <1450083711-1654-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
+	Mon, 14 Dec 2015 02:29:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=HkKlxgDW4mdT5Ku8d/pxgqxJD5sdNh4970gJmSmRpVg=;
+	b=NE4rCtyioRkV7LpSnIOprBquhZgmsRkx9rScBKM5icVxuRgVOb2pNfzkXXzdNYWSJF
+	1+/kYmC4KQXqDsB1FZpw0JCi6YObvQQjkkufKu+4i/cWHk1dosZAmbXE67nzTVcTJ8SB
+	2A0gUmDBUd8/ZR8l3BTCulJ0ztdWcDpCma4OlOmHnTH5BLaUYYu8E2ap0davGRGQcveB
+	Vpdxnx2xNdKWGeNdQRHKBenGk6md+kT8VlkWMa/NXk0Ab385RBN6JYYIEiI4TWketWDd
+	18wl0gOhhGFSClg250DqJ5FrmY6h++AYfefVTofWW+vPtvoC/rkPLWe+o7veJ2R9a2u0
+	Zt3Q==
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.98]
-X-yoursite-MailScanner-Information: Please contact the ISP for more information
-X-yoursite-MailScanner-ID: 9E848409255D.ACDF0
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: lixin.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-perl][PATCH] libnet-dns-perl: remove it from PNBLACKLIST
+X-Received: by 10.194.223.39 with SMTP id qr7mr35549199wjc.63.1450088942200;
+	Mon, 14 Dec 2015 02:29:02 -0800 (PST)
+Received: by 10.194.2.15 with HTTP; Mon, 14 Dec 2015 02:29:01 -0800 (PST)
+In-Reply-To: <1450068857-32490-1-git-send-email-rongqing.li@windriver.com>
+References: <1450068857-32490-1-git-send-email-rongqing.li@windriver.com>
+Date: Mon, 14 Dec 2015 11:29:01 +0100
+Message-ID: <CA+chaQfU0rmV==UX+t1BKpor2o_YRpXStiTX2BcL7_A5mom7-w@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH][meta-oe] phoronix-test-suite: uprev it to 6.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,30 +39,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2015 09:02:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 14 Dec 2015 10:29:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Since errors will not occur anymore.
+It cannot be allarch when it RDEPENDS on TUNE_PKGARCH bash, python, php-cli.
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb | 3 ---
- 1 file changed, 3 deletions(-)
+On Mon, Dec 14, 2015 at 5:54 AM, <rongqing.li@windriver.com> wrote:
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb
-index 312a812..9dc4268 100644
---- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb
-@@ -23,6 +23,3 @@ do_compile() {
- 	cpan_do_compile
- }
- BBCLASSEXTEND = "native"
--
--# Bareword "Errno::EINVAL" not allowed while "strict subs" in use at /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/perl/5.22.0/IO/Socket.pm line 135.
--PNBLACKLIST[libnet-dns-perl] ?= "BROKEN: Fails to build since some changes in perl recipe"
--- 
-1.8.4.2
-
-
-
+> From: Roy Li <rongqing.li@windriver.com>
+>
+> 1. inherit systemd and move the systemd unit files to correct dir
+> 2. inherit allarch
+> 3. add bash/python to RDEDEPENDS
+>
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> ---
+>  ...test-suite_5.2.1.bb => phoronix-test-suite_6.0.1.bb} | 17
+> ++++++++++++++---
+>  1 file changed, 14 insertions(+), 3 deletions(-)
+>  rename meta-oe/recipes-benchmark/phoronix-test-suite/{
+> phoronix-test-suite_5.2.1.bb => phoronix-test-suite_6.0.1.bb} (60%)
+>
+> diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/
+> phoronix-test-suite_5.2.1.bb
+> b/meta-oe/recipes-benchmark/phoronix-test-suite/
+> phoronix-test-suite_6.0.1.bb
+> similarity index 60%
+> rename from meta-oe/recipes-benchmark/phoronix-test-suite/
+> phoronix-test-suite_5.2.1.bb
+> rename to meta-oe/recipes-benchmark/phoronix-test-suite/
+> phoronix-test-suite_6.0.1.bb
+> index ef9f735..5acfbf1 100644
+> --- a/meta-oe/recipes-benchmark/phoronix-test-suite/
+> phoronix-test-suite_5.2.1.bb
+> +++ b/meta-oe/recipes-benchmark/phoronix-test-suite/
+> phoronix-test-suite_6.0.1.bb
+> @@ -6,19 +6,30 @@ LIC_FILES_CHKSUM =
+> "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+>  SECTION = "console/tests"
+>
+>  SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
+> -SRC_URI[md5sum] = "51e52d883710dc516c5494bd1c377219"
+> -SRC_URI[sha256sum] =
+> "1186f460691e2fe7a07df5edb8d8ed1ac0c65327512e646da2b2e3a60dda6cd9"
+> +SRC_URI[md5sum] = "c3b26fcc57a3a253e558f759fdc1089f"
+> +SRC_URI[sha256sum] =
+> "27add54f4ecb464549de580cece84b4a4945b99df3ef7ff7034eb7f23ffb3b39"
+>  S = "${WORKDIR}/phoronix-test-suite"
+>
+> +inherit systemd allarch
+> +
+>  do_install() {
+>         DESTDIR=${D} ./install-sh ${exec_prefix}
+> +
+> +       if [ "${systemd_unitdir}" != "/usr/lib/systemd" ]; then
+> +               install -d ${D}/${systemd_unitdir}/system/
+> +               mv ${D}/usr/lib/systemd/system/*
+> ${D}/${systemd_unitdir}/system/
+> +               rm -rf ${D}/usr/lib/
+> +       fi
+>  }
+>
+> -RDEPENDS_${PN} = "php-cli"
+> +SYSTEMD_SERVICE_${PN} = "phoromatic-client.service
+> phoromatic-server.service"
+> +RDEPENDS_${PN} += "bash python php-cli"
+> +
+>  FILES_${PN} += " \
+>         ${datadir}/phoronix-test-suite \
+>         ${datadir}/appdata/phoronix-test-suite.appdata.xml \
+>         ${datadir}/icons/hicolor/48x48/apps/phoronix-test-suite.png \
+>
+> ${datadir}/icons/hicolor/64x64/mimetypes/application-x-openbenchmarking.png
+> \
+>         ${datadir}/mime/packages/openbenchmarking-mime.xml \
+> +       ${systemd_unitdir}/* \
+>  "
+> --
+> 2.5.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
