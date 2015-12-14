@@ -1,32 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 09B1A700FD
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f176.google.com (mail-pf0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id D97D56FFD3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 10:29:01 +0000 (UTC)
-Received: by wmnn186 with SMTP id n186so114154347wmn.0
+	Mon, 14 Dec 2015 15:34:21 +0000 (UTC)
+Received: by pfbo64 with SMTP id o64so28452313pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 02:29:02 -0800 (PST)
+	Mon, 14 Dec 2015 07:34:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=HkKlxgDW4mdT5Ku8d/pxgqxJD5sdNh4970gJmSmRpVg=;
-	b=NE4rCtyioRkV7LpSnIOprBquhZgmsRkx9rScBKM5icVxuRgVOb2pNfzkXXzdNYWSJF
-	1+/kYmC4KQXqDsB1FZpw0JCi6YObvQQjkkufKu+4i/cWHk1dosZAmbXE67nzTVcTJ8SB
-	2A0gUmDBUd8/ZR8l3BTCulJ0ztdWcDpCma4OlOmHnTH5BLaUYYu8E2ap0davGRGQcveB
-	Vpdxnx2xNdKWGeNdQRHKBenGk6md+kT8VlkWMa/NXk0Ab385RBN6JYYIEiI4TWketWDd
-	18wl0gOhhGFSClg250DqJ5FrmY6h++AYfefVTofWW+vPtvoC/rkPLWe+o7veJ2R9a2u0
-	Zt3Q==
-MIME-Version: 1.0
-X-Received: by 10.194.223.39 with SMTP id qr7mr35549199wjc.63.1450088942200;
-	Mon, 14 Dec 2015 02:29:02 -0800 (PST)
-Received: by 10.194.2.15 with HTTP; Mon, 14 Dec 2015 02:29:01 -0800 (PST)
-In-Reply-To: <1450068857-32490-1-git-send-email-rongqing.li@windriver.com>
-References: <1450068857-32490-1-git-send-email-rongqing.li@windriver.com>
-Date: Mon, 14 Dec 2015 11:29:01 +0100
-Message-ID: <CA+chaQfU0rmV==UX+t1BKpor2o_YRpXStiTX2BcL7_A5mom7-w@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH][meta-oe] phoronix-test-suite: uprev it to 6.0.1
+	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
+	:references; bh=bLAzR/erdaphY/ERq3UN8VEFDDwaIT+mqs1Ub4mJaIQ=;
+	b=vwFATI5Ml+KqgYPvPAVU3PmuzEj6ol++78EkHas8YxSA3nLShXCAnGno8kXEc+yCF8
+	0c7pKZffxpVRpLv6x49Dy9gG/nP5Xcf/4Kc1+WK3iFXDX8jrAoQc1FM7rTpnsNe8UOpx
+	CK6gtBDjfFRTAUUFyv2gPshglgQhHHQ4gyhIjDPn15Ah8xLHjQHVKjD6Cc/e81Loygm+
+	nijcOtWuzz9A7iXI8ZPjZ0d6/CMLwP2cyd/46Xe7RHY6Cj+VynQUoZ+aK2nFVE5FvB2O
+	WCGxM3396TYpiFBqkQMybSjnZ1R3imjXaysqqu/4zqu64QWiwUA4/DmlvSRzjIUDgp4U
+	822Q==
+X-Received: by 10.98.64.7 with SMTP id n7mr26934247pfa.139.1450107262710;
+	Mon, 14 Dec 2015 07:34:22 -0800 (PST)
+Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
+	x7sm10883248pfa.16.2015.12.14.07.34.20
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 14 Dec 2015 07:34:20 -0800 (PST)
+Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
+	id 8FF02FCC83C; Mon, 14 Dec 2015 07:34:18 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 14 Dec 2015 07:34:00 -0800
+Message-Id: <8fb85a6e4f05822442603642ffd9a979b125f8aa.1450027640.git.akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <cover.1450027640.git.akuster808@gmail.com>
+References: <cover.1450027640.git.akuster808@gmail.com>
+In-Reply-To: <cover.1450027640.git.akuster808@gmail.com>
+References: <cover.1450027640.git.akuster808@gmail.com>
+Subject: [PATCH 07/14] lldpd: configure the systemd unit file dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,89 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2015 10:29:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 14 Dec 2015 15:34:23 -0000
 
-It cannot be allarch when it RDEPENDS on TUNE_PKGARCH bash, python, php-cli.
+From: Roy Li <rongqing.li@windriver.com>
 
-On Mon, Dec 14, 2015 at 5:54 AM, <rongqing.li@windriver.com> wrote:
+configure the systemd unit file dir, otherwise it will be auto-checked
+by 'pkg-config --variable=systemdsystemunitdir systemd', but if systemd
+is not built firstly, and the the unit file will not be installed, and
+lead to below error:
+    ERROR: Function failed: SYSTEMD_SERVICE_lldpd value lldpd.service does not exist
+and disable sysusersdir, since sysuser is not used currently.
 
-> From: Roy Li <rongqing.li@windriver.com>
->
-> 1. inherit systemd and move the systemd unit files to correct dir
-> 2. inherit allarch
-> 3. add bash/python to RDEDEPENDS
->
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->  ...test-suite_5.2.1.bb => phoronix-test-suite_6.0.1.bb} | 17
-> ++++++++++++++---
->  1 file changed, 14 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-benchmark/phoronix-test-suite/{
-> phoronix-test-suite_5.2.1.bb => phoronix-test-suite_6.0.1.bb} (60%)
->
-> diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/
-> phoronix-test-suite_5.2.1.bb
-> b/meta-oe/recipes-benchmark/phoronix-test-suite/
-> phoronix-test-suite_6.0.1.bb
-> similarity index 60%
-> rename from meta-oe/recipes-benchmark/phoronix-test-suite/
-> phoronix-test-suite_5.2.1.bb
-> rename to meta-oe/recipes-benchmark/phoronix-test-suite/
-> phoronix-test-suite_6.0.1.bb
-> index ef9f735..5acfbf1 100644
-> --- a/meta-oe/recipes-benchmark/phoronix-test-suite/
-> phoronix-test-suite_5.2.1.bb
-> +++ b/meta-oe/recipes-benchmark/phoronix-test-suite/
-> phoronix-test-suite_6.0.1.bb
-> @@ -6,19 +6,30 @@ LIC_FILES_CHKSUM =
-> "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
->  SECTION = "console/tests"
->
->  SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
-> -SRC_URI[md5sum] = "51e52d883710dc516c5494bd1c377219"
-> -SRC_URI[sha256sum] =
-> "1186f460691e2fe7a07df5edb8d8ed1ac0c65327512e646da2b2e3a60dda6cd9"
-> +SRC_URI[md5sum] = "c3b26fcc57a3a253e558f759fdc1089f"
-> +SRC_URI[sha256sum] =
-> "27add54f4ecb464549de580cece84b4a4945b99df3ef7ff7034eb7f23ffb3b39"
->  S = "${WORKDIR}/phoronix-test-suite"
->
-> +inherit systemd allarch
-> +
->  do_install() {
->         DESTDIR=${D} ./install-sh ${exec_prefix}
-> +
-> +       if [ "${systemd_unitdir}" != "/usr/lib/systemd" ]; then
-> +               install -d ${D}/${systemd_unitdir}/system/
-> +               mv ${D}/usr/lib/systemd/system/*
-> ${D}/${systemd_unitdir}/system/
-> +               rm -rf ${D}/usr/lib/
-> +       fi
->  }
->
-> -RDEPENDS_${PN} = "php-cli"
-> +SYSTEMD_SERVICE_${PN} = "phoromatic-client.service
-> phoromatic-server.service"
-> +RDEPENDS_${PN} += "bash python php-cli"
-> +
->  FILES_${PN} += " \
->         ${datadir}/phoronix-test-suite \
->         ${datadir}/appdata/phoronix-test-suite.appdata.xml \
->         ${datadir}/icons/hicolor/48x48/apps/phoronix-test-suite.png \
->
-> ${datadir}/icons/hicolor/64x64/mimetypes/application-x-openbenchmarking.png
-> \
->         ${datadir}/mime/packages/openbenchmarking-mime.xml \
-> +       ${systemd_unitdir}/* \
->  "
-> --
-> 2.5.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb b/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb
+index 47d3c38..ba7f09e 100644
+--- a/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb
++++ b/meta-networking/recipes-daemons/lldpd/lldpd_0.7.17.bb
+@@ -24,7 +24,10 @@ GROUPADD_PARAM_${PN} = "--system lldpd"
+ EXTRA_OECONF += "--without-embedded-libevent \
+                  --disable-oldies \
+                  --with-privsep-user=lldpd \
+-                 --with-privsep-group=lldpd"
++                 --with-privsep-group=lldpd \
++                 --with-systemdsystemunitdir=${systemd_system_unitdir} \
++                 --without-sysusersdir \
++"
+ 
+ PACKAGECONFIG ??= "cdp fdp edp sonmp lldpmed dot1 dot3"
+ PACKAGECONFIG[json] = "--with-json,--without-json,jansson"
+-- 
+1.9.1
+
 
