@@ -1,34 +1,24 @@
-Return-Path: <fan.xin@jp.fujitsu.com>
-Received: from mgwym03.jp.fujitsu.com (mgwym03.jp.fujitsu.com [211.128.242.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 2914C6FF64
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E5E66FFE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 05:22:56 +0000 (UTC)
-Received: from yt-mxq.gw.nic.fujitsu.com (unknown [192.168.229.66]) by
-	mgwym03.jp.fujitsu.com with smtp
-	id 588b_7a37_596c0ede_e96a_47f2_9244_e4c3d796d4c7;
-	Mon, 14 Dec 2015 14:22:52 +0900
-Received: from g01jpfmpwyt01.exch.g01.fujitsu.local
-	(g01jpfmpwyt01.exch.g01.fujitsu.local [10.128.193.38])
-	by yt-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id 7C0CAAC0211
+	Mon, 14 Dec 2015 09:01:12 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tBE91CId008465
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 14:22:51 +0900 (JST)
-Received: from g01jpexchyt36.g01.fujitsu.local (unknown [10.128.193.4])
-	by g01jpfmpwyt01.exch.g01.fujitsu.local (Postfix) with ESMTP id
-	C93466D657A for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 14:22:50 +0900 (JST)
-Received: from localhost.localdomain (10.24.19.99) by
-	g01jpexchyt36.g01.fujitsu.local (10.128.193.54) with Microsoft SMTP
-	Server id 14.3.266.1; Mon, 14 Dec 2015 14:22:51 +0900
-From: Fan Xin <fan.xin@jp.fujitsu.com>
+	Mon, 14 Dec 2015 01:01:12 -0800 (PST)
+Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Mon, 14 Dec 2015 01:01:11 -0800
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 Dec 2015 14:23:57 +0900
-Message-ID: <1450070637-18179-1-git-send-email-fan.xin@jp.fujitsu.com>
+Date: Mon, 14 Dec 2015 17:01:19 +0800
+Message-ID: <1450083679-2087-1-git-send-email-jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-SecurityPolicyCheck-GC: OK by FENCE-Mail
-X-TM-AS-MML: disable
-Cc: Fan Xin <fan.xin@jp.fujitsu.com>
-Subject: [PATCH] php: Upgrade 5.5.26 -> 5.5.30
+Subject: [meta-java][PATCH] cacao: fix the depends for target package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,33 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2015 05:22:57 -0000
+X-List-Received-Date: Mon, 14 Dec 2015 09:01:13 -0000
 Content-Type: text/plain
 
-Fix CVE-2015-7803, CVE-2015-7804 and other bugs
-http://php.net/ChangeLog-5.php
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+The target package also depends on classpath, zlib, etc,
+which is incorrect overrode, use _append for the
+class-target instead.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-oe/recipes-devtools/php/{php_5.5.26.bb => php_5.5.30.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/php/{php_5.5.26.bb => php_5.5.30.bb} (10%)
+ recipes-core/cacao/cacao_1.6.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/php/php_5.5.26.bb b/meta-oe/recipes-devtools/php/php_5.5.30.bb
-similarity index 10%
-rename from meta-oe/recipes-devtools/php/php_5.5.26.bb
-rename to meta-oe/recipes-devtools/php/php_5.5.30.bb
-index deaf145..2bfadc1 100644
---- a/meta-oe/recipes-devtools/php/php_5.5.26.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.5.30.bb
-@@ -1,4 +1,4 @@
- require php.inc
+diff --git a/recipes-core/cacao/cacao_1.6.1.bb b/recipes-core/cacao/cacao_1.6.1.bb
+index 9ea0f36..03ce0cc 100644
+--- a/recipes-core/cacao/cacao_1.6.1.bb
++++ b/recipes-core/cacao/cacao_1.6.1.bb
+@@ -7,7 +7,7 @@ SECTION  = "interpreters"
+ DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native bdwgc-native"
+ #PROVIDES_class-native = "virtual/java-native"
  
--SRC_URI[md5sum] = "383a4b35327809afd2822e1e5efc8ee1"
--SRC_URI[sha256sum] = "816afffdb03ff4c542bc172a2f77f9c69b817df82d60cce05c1b4f578c2c926e"
-+SRC_URI[md5sum] = "181d153c9fba7ff46534df1bdab4d853"
-+SRC_URI[sha256sum] = "e7332a713cecdd1cb44a1b1336739885c9789f633f0f51236b25e48ab03c3b29"
+-DEPENDS_class-target = " virtual/javac-native "
++DEPENDS_append_class-target = " virtual/javac-native "
+ 
+ DEPENDS = "zlib libtool classpath bdwgc"
+ RPROVIDES_${PN} = "java2-runtime"
 -- 
-1.8.4.2
+2.3.5
 
 
