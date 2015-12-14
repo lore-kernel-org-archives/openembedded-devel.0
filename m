@@ -1,24 +1,32 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E5E66FFE2
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id A0A617002B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 09:01:12 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tBE91CId008465
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 14 Dec 2015 09:02:05 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
+   d="scan'208";a="1549144"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 14 Dec 2015 17:01:53 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 9E848409255D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 01:01:12 -0800 (PST)
-Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Mon, 14 Dec 2015 01:01:11 -0800
-From: <jackie.huang@windriver.com>
+	Mon, 14 Dec 2015 17:01:53 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.98) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Mon, 14 Dec 2015 17:05:04 +0800
+From: Li Xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 Dec 2015 17:01:19 +0800
-Message-ID: <1450083679-2087-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Mon, 14 Dec 2015 12:01:51 +0300
+Message-ID: <1450083711-1654-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [meta-java][PATCH] cacao: fix the depends for target package
+X-Originating-IP: [10.167.226.98]
+X-yoursite-MailScanner-Information: Please contact the ISP for more information
+X-yoursite-MailScanner-ID: 9E848409255D.ACDF0
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: lixin.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-perl][PATCH] libnet-dns-perl: remove it from PNBLACKLIST
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,34 +39,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2015 09:01:13 -0000
+X-List-Received-Date: Mon, 14 Dec 2015 09:02:06 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Since errors will not occur anymore.
 
-The target package also depends on classpath, zlib, etc,
-which is incorrect overrode, use _append for the
-class-target instead.
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- recipes-core/cacao/cacao_1.6.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/recipes-core/cacao/cacao_1.6.1.bb b/recipes-core/cacao/cacao_1.6.1.bb
-index 9ea0f36..03ce0cc 100644
---- a/recipes-core/cacao/cacao_1.6.1.bb
-+++ b/recipes-core/cacao/cacao_1.6.1.bb
-@@ -7,7 +7,7 @@ SECTION  = "interpreters"
- DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native bdwgc-native"
- #PROVIDES_class-native = "virtual/java-native"
- 
--DEPENDS_class-target = " virtual/javac-native "
-+DEPENDS_append_class-target = " virtual/javac-native "
- 
- DEPENDS = "zlib libtool classpath bdwgc"
- RPROVIDES_${PN} = "java2-runtime"
+diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb
+index 312a812..9dc4268 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb
+@@ -23,6 +23,3 @@ do_compile() {
+ 	cpan_do_compile
+ }
+ BBCLASSEXTEND = "native"
+-
+-# Bareword "Errno::EINVAL" not allowed while "strict subs" in use at /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/perl/5.22.0/IO/Socket.pm line 135.
+-PNBLACKLIST[libnet-dns-perl] ?= "BROKEN: Fails to build since some changes in perl recipe"
 -- 
-2.3.5
+1.8.4.2
+
+
 
 
