@@ -1,34 +1,43 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FF5B6FF84
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 51B156FF73
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 18:33:27 +0000 (UTC)
-Received: by wmnn186 with SMTP id n186so133386337wmn.0
+	Mon, 14 Dec 2015 18:56:20 +0000 (UTC)
+Received: by pacdm15 with SMTP id dm15so107896185pac.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 10:33:28 -0800 (PST)
+	Mon, 14 Dec 2015 10:56:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=04ZSYyAS2dPBr0qGTw7k/8yrZ8rdgHjyuXW/hoHwPO0=;
-	b=Ge5Vc71rd6srZAlZr2Mit0nPUW32c9RiXfI4hgK2WNMO7pSJbAgxco0zRBiNHVCLlp
-	jh9x1ED1wtgcTXk++2L6nxL1mopbp+MjdqCfJ35Tqk5pBkI6vUPE0X5Pdxk3txdQ8bvw
-	7TLJjp5ri8yjm/G63B1veqnlBu606tcpq8bieyrWbRXKolpVo41LX4A/ERREnn+L0vYd
-	9PP7ZF81yFqDZIuHVHJHFx4hf2cJSqF4qA0/nHZHOubHMEaNdUKFYdNdXJgBAt74c5Ne
-	qbMisFv37UBIjLhnv1yN9ypIzZPRxzo7LYgjx09PEd7tYeh6fOW7q0SI0fVJhrPhf+nO
-	tVPA==
-X-Received: by 10.28.210.74 with SMTP id j71mr24973574wmg.96.1450118008065;
-	Mon, 14 Dec 2015 10:33:28 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	u17sm17405038wmd.8.2015.12.14.10.33.27
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 14 Dec 2015 10:33:27 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=aliDowhkLuq7XP9fxACnmxfoCBwDH/aFSaD2mnaSLjc=;
+	b=rgbKJnFjvacM5p3D08YV6ALRWQJ2f1yGYxq/LRbj7u1catjmO6TZrh4LMFVierpEy/
+	CFLkHGYu7n+lPX8aFkrnqohsJZv05WEGO6z2kG8aRIVbqIH0hlGJkfdvhJOVgayefD0M
+	Iqsjrbfm6P+tlyUAWo+O/98O7imlX5c3HvbohRzPyJZSUaghYwnRuZfXOk0CiwlQ+sMd
+	vd9YHz+SdKKgA/Rby39fLHiqWCCjUGLZvagiwghRoXSakYnxVXoukFhCfdmbo0aCXg6f
+	qT349NjmWatifvADU0GhWB6GJokHDTATL00CC0lzU2mktFfUhL/pBejYhq0fLIJW6ZHC
+	lgQQ==
+X-Received: by 10.67.6.1 with SMTP id cq1mr47840531pad.78.1450119381713;
+	Mon, 14 Dec 2015 10:56:21 -0800 (PST)
+Received: from ?IPv6:2601:202:4000:1239:ed26:217b:90d5:71ba?
+	([2601:202:4000:1239:ed26:217b:90d5:71ba])
+	by smtp.googlemail.com with ESMTPSA id
+	g86sm12000695pfd.40.2015.12.14.10.56.19
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 14 Dec 2015 10:56:20 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Dec 2015 19:35:26 +0100
-Message-Id: <1450118126-19721-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.6.4
-Subject: [PATCH][meta-oe] lcdproc5: add dependency on lirc
+References: <cover.1450027640.git.akuster808@gmail.com>
+	<c2c72c32cd47ebaaaac9cdbc769e0f4a8e5eac80.1450027640.git.akuster808@gmail.com>
+	<20151214162656.GA2212@jama>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <566F10D0.20507@gmail.com>
+Date: Mon, 14 Dec 2015 10:56:16 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
+MIME-Version: 1.0
+In-Reply-To: <20151214162656.GA2212@jama>
+Subject: Re: [PATCH 04/14] net-snmp: fix cross compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,30 +50,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2015 18:33:28 -0000
+X-List-Received-Date: Mon, 14 Dec 2015 18:56:22 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 8bit
 
-* it's autodetected from sysroot:
-  ERROR: lcdproc: lcdd-driver-lirc package isn't created when building with minimal dependencies?
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-extended/lcdproc/lcdproc5.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc5.inc b/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
-index d7e333a..680f558 100644
---- a/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
-+++ b/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
-@@ -4,7 +4,7 @@ SUMMARY = "Drivers for character-based LCD displays"
- HOMEPAGE = "http://lcdproc.org"
- SECTION = "utils"
- LICENSE = "GPLv2+"
--DEPENDS = "ncurses"
-+DEPENDS = "ncurses lirc"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
-                     file://README;beginline=60;md5=637e042cdd3671ba00e78b58ede45d3b"
--- 
-2.6.4
+On 12/14/2015 08:26 AM, Martin Jansa wrote:
+> On Mon, Dec 14, 2015 at 07:33:57AM -0800, Armin Kuster wrote:
+>> From: Rafaël Carré <funman@videolan.org>
+>>
+>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>> ---
+>>  .../0002-config_os_headers-Error-Fix.patch         | 31 ++++++++++++++++++++++
+>>  1 file changed, 31 insertions(+)
+>>  create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
+> 
+> There is another patch for net-snmp in master next, which actually adds
+> this .patch file to SRC_URI, this change alone doesn't do anything and
+> shouldn't be backported imho.
 
+hmm, I will take a look at that.
+
+thanks,
+Armin
+> 
+>>
+>> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
+>> new file mode 100644
+>> index 0000000..a90ce1f
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
+>> @@ -0,0 +1,31 @@
+>> +From e24fcd140f3f6dd18fd836b197c6d4bb773e50e7 Mon Sep 17 00:00:00 2001
+>> +From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
+>> +Date: Wed, 4 Nov 2015 16:49:30 +0100
+>> +Subject: [PATCH] config_os_headers: Error Fix
+>> +
+>> +ERROR: This autoconf log indicates errors, it looked at host include
+>> +and/or library paths while determining system capabilities.
+>> +---
+>> + configure.d/config_os_libs2 | 4 ++--
+>> + 1 file changed, 2 insertions(+), 2 deletions(-)
+>> +
+>> +diff --git a/configure.d/config_os_libs2 b/configure.d/config_os_libs2
+>> +index 47491e2..e3647f9 100644
+>> +--- a/configure.d/config_os_libs2
+>> ++++ b/configure.d/config_os_libs2
+>> +@@ -226,10 +226,10 @@ if test "x$with_nl" != "xno"; then
+>> +     case $target_os in
+>> +     linux*) # Check for libnl (linux)
+>> +         netsnmp_save_CPPFLAGS="$CPPFLAGS"
+>> +-        CPPFLAGS="-I/usr/include/libnl3 $CPPFLAGS"
+>> ++        CPPFLAGS="$CPPFLAGS"
+>> +         NETSNMP_SEARCH_LIBS(nl_connect, nl-3,
+>> +             [AC_CHECK_HEADERS(netlink/netlink.h)
+>> +-            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES -I/usr/include/libnl3"],
+>> ++            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES"],
+>> +             [CPPFLAGS="$netsnmp_save_CPPFLAGS"], [], [], [LMIBLIBS])
+>> +         if test "x$ac_cv_header_netlink_netlink_h" != xyes; then
+>> +             NETSNMP_SEARCH_LIBS(nl_connect, nl, [
+>> +-- 
+>> +2.5.0
+>> +
+>> -- 
+>> 1.9.1
+>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> 
+> 
 
