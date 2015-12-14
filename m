@@ -1,41 +1,39 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 65B576FFD3
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 88FF470101
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 15:34:22 +0000 (UTC)
-Received: by pfbo64 with SMTP id o64so28452571pfb.1
+	Mon, 14 Dec 2015 15:34:24 +0000 (UTC)
+Received: by pacwq6 with SMTP id wq6so105222089pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 07:34:24 -0800 (PST)
+	Mon, 14 Dec 2015 07:34:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=zJ1FdNNV/qoGZDJ++ydYku0CHaSQFwdoPQ1ylmCh138=;
-	b=G8+H2gLGI+EASjOqEMuBkx3lZeTTlaUePYOnTryQijrnSXdp9z1He0Wiot2Ul2sjQF
-	1dDfMmOe9CWaueUcWhcX/nnOs20zW6bx3J+PftfQuZLEJR1KaIp9WbiWdzaMqp2Ky+mo
-	UcdaXwyhk63Wnu5bGCSuv2bHtOho8Qmm/FqYLOHQcwHqSb2yQBTf7J7ZFRaM/RQXJHOF
-	uAUjSlmO7V1t7Mr4RyxjATcpVsZ8LIiqozSSTVQ35pa92rBuKBXFKNqpRykysX93XjGS
-	zFM8Xn/VptOazgyerY0ivSqLfsx2huq96KW036UbUHQV3WNcx3uF8v6qrTeyPATZYns7
-	JyRA==
-X-Received: by 10.98.10.197 with SMTP id 66mr36398448pfk.37.1450107263879;
-	Mon, 14 Dec 2015 07:34:23 -0800 (PST)
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=C9PZz2xSj2WUAbaz8/8j+w1OP0EFqGTdP8bGN8Mb/+8=;
+	b=V+qmfWnFWfUNY9Ey7UjkgbePJibGA9qZjkKVC9L1Hle7OngllFzVUEz+cd2hnyPEgI
+	rRuaCSjBDiEOmWifjQcznV7sIKIjmS4/adk7sK/DIzcuvoHClh9S4958I5LGFH4jUhSN
+	WL4Yk7wIg+SMFpfTAQwrNpLRS4c187QGhA+lEeCSeegHlApY4KPcAp8Wydgy5yE6LgAA
+	080y9nKa2LGy01mK31OwZwwO5fsriqIiKun+lfyxMVoP9AceeT9drsH0hIyT75o7UIBu
+	s90ePks6Vctqfj8NP/jhN7jkYgoamermjJvtKPCI84ubab6gfR7TYCOfUAqdaZrpTRpS
+	f/Nw==
+X-Received: by 10.66.123.72 with SMTP id ly8mr46639798pab.19.1450107265040;
+	Mon, 14 Dec 2015 07:34:25 -0800 (PST)
 Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
 	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	p65sm15424460pfi.13.2015.12.14.07.34.20
+	g68sm7639714pfj.57.2015.12.14.07.34.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Mon, 14 Dec 2015 07:34:20 -0800 (PST)
 Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
-	id 60A81FCC83A; Mon, 14 Dec 2015 07:34:18 -0800 (PST)
+	id 1696DFCC838; Mon, 14 Dec 2015 07:34:17 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Dec 2015 07:33:56 -0800
-Message-Id: <c9afe506129a8e9e65ae511f9da4f87ef1b2acd4.1450027640.git.akuster808@gmail.com>
+Date: Mon, 14 Dec 2015 07:33:53 -0800
+Message-Id: <cover.1450027640.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <cover.1450027640.git.akuster808@gmail.com>
-References: <cover.1450027640.git.akuster808@gmail.com>
-In-Reply-To: <cover.1450027640.git.akuster808@gmail.com>
-References: <cover.1450027640.git.akuster808@gmail.com>
-Subject: [PATCH 03/14] net-snmp: Modify snmpd.service
+MIME-Version: 1.0
+Subject: [PATCH 00/14] mete-oe Jethro-next
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,33 +46,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2015 15:34:23 -0000
+X-List-Received-Date: Mon, 14 Dec 2015 15:34:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Li Xin <lixin.fnst@cn.fujitsu.com>
+Please consider these changes for jethro-next
 
-Add "-a" parameter in snmpd.service,it is needed to address logs.
+The following changes since commit 4fdb203c182dae6f451ca131c0edfd5f0c99fc28:
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+  vlc: add PACKAGECONFIG for samba, upnp, dvdnav, sftp, vorbis, dc1394, dv1394, svg, svgdec (2015-11-16 21:57:48 +0100)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service b/meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service
-index 3b336a0..447683f 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service
-@@ -6,7 +6,7 @@ After=syslog.target network.target
- Type=notify
- Environment=OPTIONS="-Ls0-6d"
- EnvironmentFile=-/etc/default/snmpd
--ExecStart=/usr/sbin/snmpd $OPTIONS -f
-+ExecStart=/usr/sbin/snmpd $OPTIONS -a -f
- ExecReload=/bin/kill -HUP $MAINPID
- 
- [Install]
+are available in the git repository at:
+
+  git://github.com/akuster/meta-openembedded akuster/jethro-next
+  https://github.com/akuster/meta-openembedded/tree/akuster/jethro-next
+
+Armin Kuster (1):
+  tmux: Fix QA issue
+
+Christopher Larson (1):
+  ctdb: rdep on bash
+
+Jackie Huang (2):
+  netmap-modules: make deterministic builds for drivers
+  netmap-modules: Modules may not have the same arch as userspace
+
+Jian Liu (1):
+  ypbind-mt: set path of ypdomainname in ypbind script
+
+Li Xin (2):
+  net-snmp: Modify snmpd.service
+  opensaf: remove unused service file
+
+Rafaël Carré (1):
+  net-snmp: fix cross compilation
+
+Robert Yang (1):
+  netcat: add DESCRIPTION
+
+Roy Li (4):
+  lldpd: configure the systemd unit file dir
+  ufw: improve RRECOMMENDS
+  dovecot: add PACKAGECONFIG for lz4
+  pure-ftpd: add PACKAGECONFIG for libsodium
+
+Yue Tao (1):
+  netcat-openbsd: replace patch with quilt
+
+ .../recipes-connectivity/ufw/ufw_0.33.bb           |  8 ++++++
+ .../recipes-daemons/lldpd/lldpd_0.7.17.bb          |  5 +++-
+ .../opensaf/opensaf/plmcboot.service               | 13 ---------
+ .../recipes-daemons/opensaf/opensaf/plmcd.service  | 15 -----------
+ .../recipes-daemons/opensaf/opensaf_4.6.0.bb       |  6 +----
+ .../recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb  |  2 ++
+ .../recipes-kernel/netmap/netmap-modules_git.bb    | 31 +++++++++++++++++++++-
+ .../0002-config_os_headers-Error-Fix.patch         | 31 ++++++++++++++++++++++
+ .../net-snmp/net-snmp/snmpd.service                |  2 +-
+ meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |  3 +++
+ .../recipes-support/dovecot/dovecot_2.2.18.bb      |  1 +
+ .../recipes-support/netcat/netcat-openbsd_1.105.bb |  3 ++-
+ meta-networking/recipes-support/netcat/netcat.inc  | 10 +++++++
+ .../recipes-support/netcat/netcat_0.7.1.bb         |  2 --
+ .../recipes-support/nis/files/ypbind.init          | 11 ++++----
+ .../recipes-support/nis/ypbind-mt_1.38.bb          |  2 ++
+ meta-oe/recipes-extended/tmux/tmux_2.1.bb          |  2 ++
+ 17 files changed, 103 insertions(+), 44 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.service
+ delete mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/plmcd.service
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
+
 -- 
 1.9.1
 
