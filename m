@@ -1,41 +1,41 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f178.google.com (mail-pf0-f178.google.com
-	[209.85.192.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B9686FFA6
+Received: from mail-pf0-f171.google.com (mail-pf0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 79D58700FD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 15:34:29 +0000 (UTC)
-Received: by pff63 with SMTP id 63so12866606pff.2
+	Mon, 14 Dec 2015 15:34:27 +0000 (UTC)
+Received: by pfbo64 with SMTP id o64so28453634pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 07:34:30 -0800 (PST)
+	Mon, 14 Dec 2015 07:34:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=/0StPschfp3GLA4wzMp7ZbxvIvyD9fVy87aGxGDtvIA=;
-	b=siDx15KqqmplSjQ+Pxo0sRWbOelGUd4WXtIrhOwyAa6aKilo1wBpxLWvfjSamfHf6r
-	DKgA+xGUesxJHsWHP4HsG9NM01/1kyTYHz0sYrIoSqnsQcsGPqcdxF6ldwwfvx4ng2Mf
-	ZyWGEYgMTNTlh92fpUOE8a5+dlxb3nQHiygB08WW2fSmqN8JKsrA/zyzEo0fEhciPxOa
-	9PhydQMaG2TUZdvKpEZ/tA3sbwEDXpzav7BAWLvwy62d05aqnIJKs32VkQB8wewua26n
-	ZTo25nfPcc4hFHPr68EnPY5/SFFJ24in7A4uPK6gCbtwVFgrNE047uFBDhfNYMSkIR+t
-	VgUw==
-X-Received: by 10.98.17.211 with SMTP id 80mr27741069pfr.57.1450107270935;
-	Mon, 14 Dec 2015 07:34:30 -0800 (PST)
+	:references; bh=m5ZEHjr06WiY9/JXFy+KXGftUs4HVx1tTLUlRwTsnfw=;
+	b=y1LSMTOma4YbKdDLIxdEbqgRkv9Kv20fIR9pRb8PvS1VGht6SNX80MhveqShCmgy0a
+	CCH2pEZFC6VEg4s7/QMLQ98pZhu2lDWtX+RZCpymi/kBo25RMqF3z9N5Cq0RJadk47fy
+	tEFlOTnvXrqPjNeRA2dMdhT6SYVP20xBNsiHdW+ofTrPd9Y1L92T4c+yRpCKeWjPx6ha
+	id8zXl0zyjTq2lI+MD0LzdlCk4L3sKJm1EzY7Bmp5dEqbn1zQO7fW8UKc/jhbgeuTF42
+	wM42N+2vcXSBGS+GUx0G2S372x93JSkFM7yP+uMEOLEJDfNzIH51wZ02GyxOT8LpkVpu
+	4w2Q==
+X-Received: by 10.98.16.67 with SMTP id y64mr33931678pfi.152.1450107268830;
+	Mon, 14 Dec 2015 07:34:28 -0800 (PST)
 Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
 	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	xi8sm43740079pab.9.2015.12.14.07.34.25
+	yn8sm43762155pac.32.2015.12.14.07.34.23
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Mon, 14 Dec 2015 07:34:26 -0800 (PST)
 Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
-	id 2CC32FCC842; Mon, 14 Dec 2015 07:34:18 -0800 (PST)
+	id AE27DFCC83D; Mon, 14 Dec 2015 07:34:17 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Dec 2015 07:34:04 -0800
-Message-Id: <1e5e3dcae2b01b36046a5876c0153ef623bef932.1450027640.git.akuster808@gmail.com>
+Date: Mon, 14 Dec 2015 07:33:54 -0800
+Message-Id: <f4d869b71d52509d21561fad8c1cf060dddee7b1.1450027640.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1450027640.git.akuster808@gmail.com>
 References: <cover.1450027640.git.akuster808@gmail.com>
 In-Reply-To: <cover.1450027640.git.akuster808@gmail.com>
 References: <cover.1450027640.git.akuster808@gmail.com>
-Subject: [PATCH 11/14] ufw: improve RRECOMMENDS
+Subject: [PATCH 01/14] netcat: add DESCRIPTION
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,36 +50,46 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 14 Dec 2015 15:34:31 -0000
 
-From: Roy Li <rongqing.li@windriver.com>
+From: Robert Yang <liezhi.yang@windriver.com>
 
-ufw needs lots of netfilter module to run
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-connectivity/ufw/ufw_0.33.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ meta-networking/recipes-support/netcat/netcat.inc      | 10 ++++++++++
+ meta-networking/recipes-support/netcat/netcat_0.7.1.bb |  2 --
+ 2 files changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/ufw/ufw_0.33.bb b/meta-networking/recipes-connectivity/ufw/ufw_0.33.bb
-index 66e917e..19cfe46 100644
---- a/meta-networking/recipes-connectivity/ufw/ufw_0.33.bb
-+++ b/meta-networking/recipes-connectivity/ufw/ufw_0.33.bb
-@@ -30,6 +30,14 @@ RDEPENDS_${PN} = " \
+diff --git a/meta-networking/recipes-support/netcat/netcat.inc b/meta-networking/recipes-support/netcat/netcat.inc
+index 9cb243d..91a24a1 100644
+--- a/meta-networking/recipes-support/netcat/netcat.inc
++++ b/meta-networking/recipes-support/netcat/netcat.inc
+@@ -1,3 +1,13 @@
++SUMMARY = "GNU Netcat"
++HOMEPAGE = "http://netcat.sourceforge.net"
++DESCRIPTION = "A simple Unix utility which reads and writes data across network \
++connections using TCP or UDP protocol.  It is designed to be a reliable \
++'back-end' tool that can be used directly or easily driven by other \
++programs and scripts. At the same time it is a feature-rich network \
++debugging and exploration tool, since it can create almost any kind of \
++connection you would need and has several interesting built-in \
++capabilities."
++
+ SECTION = "net"
+ inherit update-alternatives gettext
  
- RRECOMMENDS_${PN} = " \
-                      kernel-module-ipv6 \
-+                     kernel-module-nf-conntrack-ipv6 \
-+                     kernel-module-nf-log-common \
-+                     kernel-module-nf-log-ipv4 \
-+                     kernel-module-nf-log-ipv6 \
-+                     kernel-module-nf-addrtype \
-+                     kernel-module-nf-limit \
-+                     kernel-module-nf-log \
-+                     kernel-module-nf-recent \
- "
+diff --git a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb b/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
+index 8710c36..d961af5 100644
+--- a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
++++ b/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
+@@ -1,6 +1,4 @@
+ require netcat.inc
+-SUMMARY = "GNU Netcat"
+-HOMEPAGE = "http://netcat.sourceforge.net"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- # Certain items are explicitly put under /lib, not base_libdir when installed.
 -- 
 1.9.1
 
