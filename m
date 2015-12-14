@@ -1,41 +1,41 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
-	[209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id CF37D6FFA6
+Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id EB9566FFE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 15:34:34 +0000 (UTC)
-Received: by pacdm15 with SMTP id dm15so105234626pac.3
+	Mon, 14 Dec 2015 15:34:36 +0000 (UTC)
+Received: by pff63 with SMTP id 63so12867912pff.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 07:34:35 -0800 (PST)
+	Mon, 14 Dec 2015 07:34:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=0vbBS35DTlK+bxK/xKpElAJiN3vJ25kg5l18Jn8oglI=;
-	b=fmoQzzfepD+q9fdsTTKihiwTEID/VGx67vhW/Urifa5WIY9fAEggKcMKL8MZN6c/A9
-	YDKptj5/1rETd0DdJR9v+qZRvuTPc7aQTTK39RBbcM1x6hyCnrcbk+7KG4Y5y09h7pYq
-	2w5+Cs7jXjjHFb91ds8AjCfgPBdO3NALz63KKcLHdH169pKeWS+B3iKz6g1oMvDaDocg
-	pgdZNysb9TXtnyCqLKz9d+EEj3WeOowrwV6CNo3og90p531uHYqUh5f9w8oFyVorlhV9
-	vlmQZ+OjGKtgSIMEJVhaPZdCmaXZPvPIPqpVRXqaIyFkPcVUU3kmYtDZB2NFm72BDund
-	2d0A==
-X-Received: by 10.67.1.103 with SMTP id bf7mr46465693pad.147.1450107275616;
-	Mon, 14 Dec 2015 07:34:35 -0800 (PST)
+	:references; bh=a6NL+323PZmd7yiu94bNTgjnpi7KswUo02xCerYoso0=;
+	b=SV488Q6xkQdTvxPezxqCJstLgqnjpllf5OuqQjNQAzeh2KlTOXMl/3jEiLi0b6lld9
+	nF3oWlV3p5ELHhISWk69RPrc34otpDhLkWfNKmQGvn4Wmjxiafn2BC/fA0VICfW5oqWs
+	yThVzT1NwjOJRSunx9eM40iTqtE/2uMPuT886JI1F1NpB2V0xjucGe8fl3j/Qo+eDVlv
+	zkO48Tpg5+qE68QU+HfXwEDXiNRV8jPt8H+jB4dgQpq+9FDhwUh3rKFagrqEW9hdqPNe
+	h9SwD6ISf9u41WI04ZFVJTHy42veh4ElPhP79t4hiHxEn29Ca7/kOiw8EB53q63Cb6IJ
+	kA3w==
+X-Received: by 10.98.11.133 with SMTP id 5mr37028737pfl.26.1450107277130;
+	Mon, 14 Dec 2015 07:34:37 -0800 (PST)
 Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	sm8sm43630536pac.43.2015.12.14.07.34.26
+	[76.20.92.207])
+	by smtp.gmail.com with ESMTPSA id 66sm5898819pfl.90.2015.12.14.07.34.27
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 14 Dec 2015 07:34:26 -0800 (PST)
+	Mon, 14 Dec 2015 07:34:35 -0800 (PST)
 Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
-	id 35014FCC843; Mon, 14 Dec 2015 07:34:18 -0800 (PST)
+	id 456EBFCC845; Mon, 14 Dec 2015 07:34:18 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Dec 2015 07:34:05 -0800
-Message-Id: <f8103cf0233c2f58cdac218b79e8d9219b929d73.1450027640.git.akuster808@gmail.com>
+Date: Mon, 14 Dec 2015 07:34:06 -0800
+Message-Id: <a22695429486a4123e5497c7a2c2f3ea44fe298d.1450027640.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1450027640.git.akuster808@gmail.com>
 References: <cover.1450027640.git.akuster808@gmail.com>
 In-Reply-To: <cover.1450027640.git.akuster808@gmail.com>
 References: <cover.1450027640.git.akuster808@gmail.com>
-Subject: [PATCH 12/14] dovecot: add PACKAGECONFIG for lz4
+Subject: [PATCH 13/14] pure-ftpd: add PACKAGECONFIG for libsodium
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,21 +57,19 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb
-index 9b5f536..a01ef83 100644
---- a/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb
-+++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.18.bb
-@@ -23,6 +23,7 @@ PACKAGECONFIG ??= " \
+diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
+index fa592dc..c1f1504 100644
+--- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
++++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
+@@ -18,3 +18,5 @@ SRC_URI[sha256sum] = "7be73a8e58b190a7054d2ae00c5e650cb9e091980420082d02ec3c3b68
+ inherit autotools
  
- PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
- PACKAGECONFIG[ldap] = "--with-ldap=plugin,--without-ldap,openldap,"
-+PACKAGECONFIG[lz4] = "--with-lz4,--without-lz4,lz4,"
- 
- # From native build in armv7a-hf/eglibc
- CACHED_CONFIGUREVARS += "i_cv_signed_size_t=no \
+ EXTRA_OECONF = "--with-minimal"
++PACKAGECONFIG[libsodium] ="ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=yes, \
++                       ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=no, libsodium"
 -- 
 1.9.1
 
