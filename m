@@ -1,41 +1,41 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
-	[209.85.220.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D90E70057
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id D80FF70057
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 15:34:24 +0000 (UTC)
-Received: by pacdm15 with SMTP id dm15so105232582pac.3
+	Mon, 14 Dec 2015 15:34:25 +0000 (UTC)
+Received: by pacwq6 with SMTP id wq6so105222418pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 07:34:25 -0800 (PST)
+	Mon, 14 Dec 2015 07:34:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=B8LAMcDngtIJiLvqrqjD3V1SFuANNCNMPkLx+MChr8E=;
-	b=mXoxu6DEpADuNPOQoy2B8LGPQFZaJAI5btLvaACCjQhAGZ5nkkIzqwEdzDHmdYzH8x
-	8r1dMpMg2x0mI29Ufck+9cMWbIwWaf5ZFRcnXpbKhlXmSUyErdxsFT+JECNjVDFcNvAc
-	ExSoxvF422uMBXr1m/m9omvjBb1ZnXN+oDkjJWwtSG3OXxkuyeHSCIHJjg/zgty4C03Q
-	uaUwLluvwrqGcpJqrkPALo/BZPOM+fqV4O6JZ/hxFyCQCniQHtnUYiRpDbN1jd7zPxI1
-	J9rFfQjsMk5KWBSXbpVj0COlcvZRWIiBN4ZleK22iP1QgDnfyqua/Mei5pPgoLGHIlSO
-	pSDA==
-X-Received: by 10.66.142.168 with SMTP id rx8mr46334619pab.16.1450107265785;
-	Mon, 14 Dec 2015 07:34:25 -0800 (PST)
+	:references; bh=TS0w1YKJBm6zxpdbM+p2hbNl0z7PxqcmCHjUnLJhN7M=;
+	b=fZaQ1TMPkNSCoHLdEPI1GHzPfqpKaG7U1ZbLDy06X55X5IpAS452kdQO99hoeowOVL
+	E0nP6YYhuXX+y6nZdxPZWkODkoSh2+foRtmQDAT94ISq5LAvnOvX2jWmILcUVahEzR+c
+	zl7PfOlMb5LikdIOvFps3NwdkxwkWeGc/7q+IPqWqGSdaw6HqjGIFRpWDegdWXNd09SS
+	DwF2VsN0mN4qIIcUM2EwLyPIGdIq9wmtERjevAN5HLAnFSuAPYMYSP+3NgPbUXk5YcWU
+	RS3M0PMGHi2J+xKL8PkMzGxxkv7uzGGZ7355pEr30N5Ha2Xp8SCADYPbkhEPze65iRVA
+	QFPw==
+X-Received: by 10.66.150.5 with SMTP id ue5mr45995477pab.42.1450107266533;
+	Mon, 14 Dec 2015 07:34:26 -0800 (PST)
 Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
 	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	t26sm43274642pfa.52.2015.12.14.07.34.20
+	n16sm43279216pfa.53.2015.12.14.07.34.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Mon, 14 Dec 2015 07:34:20 -0800 (PST)
 Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
-	id 4C10CFCC839; Mon, 14 Dec 2015 07:34:17 -0800 (PST)
+	id 73361FCC83B; Mon, 14 Dec 2015 07:34:18 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Dec 2015 07:33:55 -0800
-Message-Id: <793d35d5abcfb33d93d9a778147db16cffd8b02f.1450027640.git.akuster808@gmail.com>
+Date: Mon, 14 Dec 2015 07:33:59 -0800
+Message-Id: <c33de7f7223ad97e9647215f90e0a5aab8f3b0ac.1450027640.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1450027640.git.akuster808@gmail.com>
 References: <cover.1450027640.git.akuster808@gmail.com>
 In-Reply-To: <cover.1450027640.git.akuster808@gmail.com>
 References: <cover.1450027640.git.akuster808@gmail.com>
-Subject: [PATCH 02/14] netcat-openbsd: replace patch with quilt
+Subject: [PATCH 06/14] opensaf: remove unused service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,34 +50,86 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 14 Dec 2015 15:34:25 -0000
 
-From: Yue Tao <Yue.Tao@windriver.com>
+From: Li Xin <lixin.fnst@cn.fujitsu.com>
 
-If run bitbake -c patch -f netcat-openbsd twice, the patch conflict
-will happen, so replace the patch with quilt to avoid do_patch failed.
+Upstream ships systemd service file plmcboot.service and plmcd.service now,
+so we don't need this anymore.
 
-Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../recipes-daemons/opensaf/opensaf/plmcboot.service      | 13 -------------
+ .../recipes-daemons/opensaf/opensaf/plmcd.service         | 15 ---------------
+ meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb  |  6 +-----
+ 3 files changed, 1 insertion(+), 33 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.service
+ delete mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/plmcd.service
 
-diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-index 12409d4..89a646f 100644
---- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-+++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-@@ -20,7 +20,8 @@ do_configure[noexec] = "1"
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.service b/meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.service
+deleted file mode 100644
+index 76ec73a..0000000
+--- a/meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.service
++++ /dev/null
+@@ -1,13 +0,0 @@
+-[Unit]
+-Description=PLMCBOOT Program
+-After=network.target
+-ConditionPathExists=@SYSCONFDIR@/plmcd.conf
+-
+-[Service]
+-Type=oneshot
+-ExecStart=@SBINDIR@/plmcd -c @SYSCONFDIR@/plmcd.conf -s
+-ExecStop=@SBINDIR@/plmcd -c @SYSCONFDIR@/plmcd.conf -x
+-RemainAfterExit=yes
+-
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/plmcd.service b/meta-networking/recipes-daemons/opensaf/opensaf/plmcd.service
+deleted file mode 100644
+index 1d48e77..0000000
+--- a/meta-networking/recipes-daemons/opensaf/opensaf/plmcd.service
++++ /dev/null
+@@ -1,15 +0,0 @@
+-[Unit]
+-Description=Plmcd Daemon
+-Requires=plmcboot.service
+-After=network.target plmcboot.service
+-ConditionPathExists=@SYSCONFDIR@/plmcd.conf
+-
+-[Service]
+-Type=forking
+-ExecStart=@SBINDIR@/plmcd -c @SYSCONFDIR@/plmcd.conf
+-ExecStartPost=/bin/touch /var/lock/subsys/plmcd
+-ExecStopPost=/bin/rm -rf /var/lock/subsys/plmcd
+-PIDFile=/var/run/plmcd.pid
+-
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb
+index 28f4c00..9084524 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb
+@@ -15,8 +15,6 @@ inherit autotools useradd systemd pkgconfig
  
- netcat_do_patch() {
-     cd ${S}
--    while read line; do patch -p1 < ${WORKDIR}/debian/patches/$line; done < ${WORKDIR}/debian/patches/series
-+    quilt pop -a || true
-+    QUILT_PATCHES=${WORKDIR}/debian/patches QUILT_SERIES=${WORKDIR}/debian/patches/series quilt push -a
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://install-samples-from-srcdir.patch \
+-           file://plmcd.service \
+-           file://plmcboot.service \
+            file://0001-plmcd-error-fix.patch \
+            file://Revert_imma_client_node_replyPending_to_unsigned_char.patch \
+            file://Fix_GCC_5.1.0_compiler_warning.patch \
+@@ -65,8 +63,6 @@ do_install_append() {
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensafd.service \
+         ${D}${systemd_unitdir}/system
+-    install -m 644 ${WORKDIR}/plmc*.service ${D}/${systemd_unitdir}/system
+-    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/plmc*.service
+-    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/plmc*.service
++    install -m 0644 ${B}/contrib/plmc/config/*.service ${D}/${systemd_unitdir}/system
+ 
  }
- 
- python do_patch() {
 -- 
 1.9.1
 
