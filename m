@@ -1,48 +1,36 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-io0-f169.google.com (mail-io0-f169.google.com
-	[209.85.223.169])
-	by mail.openembedded.org (Postfix) with ESMTP id C4A3C6FFEA
+Return-Path: <ankur.tyagi85@gmail.com>
+Received: from mail-vk0-f43.google.com (mail-vk0-f43.google.com
+	[209.85.213.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D40B6FFCE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 20:41:05 +0000 (UTC)
-Received: by mail-io0-f169.google.com with SMTP id e126so33036436ioa.1
+	Tue, 15 Dec 2015 23:38:03 +0000 (UTC)
+Received: by mail-vk0-f43.google.com with SMTP id a188so16299484vkc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 12:41:06 -0800 (PST)
+	Tue, 15 Dec 2015 15:38:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=d3tn193CvixxNuk4mYWBHA6qb09bnZVRHxqRRGvM7Oo=;
-	b=JBV9YAdiUujDyklMT69mfukIHcTaNHtMZJd0CJJIpO5YJVymg/CG1HTIj4H74czGgS
-	0Q4tIb9JyQxk1QvUTtglXmGdBi5nm6xq+DAyjGacBrXyjVSDhTDPKPCyR2FwGHhiobZw
-	J6CRfv/DBksactigpF+0VSSEA4KJOHi7GIgT6YwRDPGDcpl17veEkAnOtcAnKMkilthz
-	v4OK2C/QU9bbLMaPRKtUWnCyBIsHhbIBG57j/k1Zry9EOlJuXfuQU3pZo2E4s0js1Cxv
-	V/zNqolEJeimn5PQUBBDUtOYIHnA7iLCEi/a1T2hAlJhiaec+JQYrzWT9WBrhNCcYjBr
-	6sXg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mentor-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=d3tn193CvixxNuk4mYWBHA6qb09bnZVRHxqRRGvM7Oo=;
-	b=cjcrQmPxDs+qJekjKmrfLo7HUuH+05cSooBOfEAiF89rKZDdCbK/vb0Ni8WQYTylzq
-	u3R4ej0ciwy20SNGKBPDqB6BRxe3GHSGq0tTuYg2zWXkJmeZnA78qS3+qDh62lKOB0Fi
-	2xM0Dp9MT7PgxGx6nc6omgaZXWppE9AKxs5yrmI57sGS5DWT1ruEhFzw7tYyXA3n5zrP
-	Q2nomIZTGHOecsyFaA47TOD0BrLRMwyRHYgRjrFIrl6VgzGt7U0JeR5ZRnep5+6ZjUp9
-	ePBWRtR3uINl5VEUBTYIqX1rxtR5+Y5xaaSaUyteZtEPOzAtmpCn3B3W2TI8eJ4BgxyR
-	WFzQ==
-X-Received: by 10.107.134.78 with SMTP id i75mr9970904iod.74.1450212065798;
-	Tue, 15 Dec 2015 12:41:05 -0800 (PST)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=VFunjZlRM4v8eh5bTqtBVqE1wWbvvvhts6nuJGuUllQ=;
+	b=Q/EM6f/cqaGt+Esax3SAjBEkVDqGqnaL30ZfewOe/fIvrW1ePcLMXi+OUoWo05a6mZ
+	PZZjwq7wOgpR/lINSxAaJXjW/DVmAnyBlQVpU2WBPJBeCN8eC6+/MsieCqLJJ71mm0wc
+	zjF/AAT/J6SD1TAR/bmpkRVa+X9wlFmwuF1g/zwZmg0ljn55v8H+x8aH+5A/N88f8+l4
+	wTmTFoNRfyKWOmG/5zcnOFEPZeZE6uneNPk7m/ZxNbWV2Dljv7GDLDfhMFX5vYqqaOdi
+	CnZD1uaWQ4MBrI54HRbiIpUIm9EqwTyoYSeF3PMwciUiQCBzfWJWQz2xJ/B2xfKGld+Z
+	Gupw==
+X-Received: by 10.31.3.207 with SMTP id f76mr12234736vki.15.1450222684323;
+	Tue, 15 Dec 2015 15:38:04 -0800 (PST)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.69.129 with HTTP; Tue, 15 Dec 2015 12:40:46 -0800 (PST)
-In-Reply-To: <20151215194939.GE2556@jama>
-References: <cover.1450208019.git.chris_larson@mentor.com>
-	<20151215194939.GE2556@jama>
-From: Christopher Larson <chris_larson@mentor.com>
-Date: Tue, 15 Dec 2015 13:40:46 -0700
-X-Google-Sender-Auth: 8HQLhjsN8knAY77MnatlVP7VApA
-Message-ID: <CABcZANkY6LRBpB6xRbhknu8+2AbDGTht70f-nXJ8Pe+KyFDWQw@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Received: by 10.31.166.146 with HTTP; Tue, 15 Dec 2015 15:37:44 -0800 (PST)
+In-Reply-To: <e230104b40e44ffd95a1dc7dab186765@XCH-ALN-008.cisco.com>
+References: <CADySD0Eg_YH_kr7K73+58q+8ZmfeysPV1vECwQZ=HKNxN6hjZg@mail.gmail.com>
+	<db278e3a48e24cc1b48e6630554815c0@XCH-ALN-008.cisco.com>
+	<CADySD0FqHWC57y4YOeMMENAzisbzpewuY=asaubzgsvN_MXLSg@mail.gmail.com>
+	<e230104b40e44ffd95a1dc7dab186765@XCH-ALN-008.cisco.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Wed, 16 Dec 2015 12:37:44 +1300
+Message-ID: <CADySD0Hwn4_ywxE9pTRLKXy8eAnErsV7u5cwiMp83Mw_aGZX-Q@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 0/3] Add bits to save/restore URI headrevs
+Subject: Re: QT5 application NOT generating core dump upon receiving segmentation fault
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,62 +43,141 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2015 20:41:08 -0000
+X-List-Received-Date: Tue, 15 Dec 2015 23:38:04 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 15, 2015 at 12:49 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+Hi Julien,
 
-> On Tue, Dec 15, 2015 at 12:37:44PM -0700, Christopher Larson wrote:
-> > From: Christopher Larson <chris_larson@mentor.com>
-> >
-> > This is useful to support BB_NO_NETWORK with AUTOREV, by letting someone
-> ship
-> > dumped headrevs to the user, who then inherit this class, which ensures
-> that
-> > the cached headrevs are used, and upstream is not contacted at parse
-> time.
-> > BB_SRCREV_POLICY will be set to "cache" as well, if it's not already
-> set, as
-> > otherwise bitbake will contact upstream to update the cached values.
-> >
-> > This is helpful when shipping downloads to someone when there's a desire
-> to
-> > support both BB_NO_NETWORK and AUTOREV.
-> >
-> > The restore_headrevs.bbclass will restore dumped headrevs at config
-> parse time
-> > (add to INHERIT), and the oe.headrevs python module provides a function
-> one
-> > can call to dump the headrevs.
+I am getting core dumps after exporting QT_QPA_ENABLE_TERMINAL_KEYBOARD=3D1
+
+Many thanks for your help.
+
+After going through void qt_signal_handler(int sig), I also noticed that if
+I don't export QT_QPA_ENABLE_TERMINAL_KEYBOARD but export
+QT_CRASH_OUTPUT=3D/home/coredump.log , then also there is no core dump in
+/home/coredump.log
+What else am I missing here ?=E2=80=8B
+
+
+regards
+Ankur
+
+"Knowledge is knowing tomato is a fruit, wisdom is not putting it in a
+fruit salad"
+
+On Wed, Dec 16, 2015 at 12:25 AM, Julien Brianceau (jbriance) <
+jbriance@cisco.com> wrote:
+
+> Just to be sure, can you try the following export before launching your Q=
+t
+> app on your target:
 >
-> Maybe I'm missing something, but what's advantage of shipping something
-> with AUTOREV which is then used together with BB_NO_NETWORK?
+>     export QT_QPA_ENABLE_TERMINAL_KEYBOARD=3D1
 >
-
-It's quite useful to not have to go through and manually lock down all your
-kernels recipes when doing a release. All our releases ship with sources
-and are BB_NO_NETWORK-capable, as that's a requirement for a lot of folks.
-
-
-> We already have some implementation in bitbake which dumps latest
-> SRCREVs used by all recipes (including AUTOREV) onces so I would expect
-> that the release will ship this .inc files with locked revisions and if
-> the user of such release wants to use BB_NO_NETWORK he will also include
-> that .inc file with locked revisions.
+> It could workaround the signal handler installation, cf.
+> http://code.qt.io/cgit/qt/qtbase.git/tree/src/platformsupport/fbconvenien=
+ce/qfbvthandler.cpp?h=3D5.4#n71
 >
-> Is it because it's easier of faster to dump them from the headrefs db
-> you already ship with release and you don't want to generate .inc from
-> buildhistory?
-
-
-Actually, this was in my patch queue from before buildhistory existed, and
-I somehow managed to forget about buildhistory-collect-srcrevs :) Feel free
-to ignore this, in that case.
--- 
-Christopher Larson
-kergoth at gmail dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+> Julien
+>
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:
+> openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Ankur
+> Tyagi
+> Sent: mardi 15 d=C3=A9cembre 2015 12:06
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] QT5 application NOT generating core dump upon receiving
+> segmentation fault
+>
+> Hi,
+>
+> I am using Qt5.4.1 with eglfs QPA.
+>
+> Is there a way to avoid qt signal handler during compilation ? I would li=
+ke
+> avoid patching Qt code.
+>
+> Thanks
+> Ankur
+> On 16-Dec-2015 12:00 am, "Julien Brianceau (jbriance)" <jbriance@cisco.co=
+m
+> >
+> wrote:
+>
+> > Hi,
+> >
+> > What exact version of Qt5 and which Qt QPA platform do you use with you=
+r
+> > kit ?
+> >
+> > A quick grep shows this:
+> >
+> http://code.qt.io/cgit/qt/qtbase.git/tree/src/corelib/kernel/qcrashhandle=
+r.cpp?h=3D5.5#n409
+> ,
+> > it could explain your issue if it is called.
+> >
+> > Julien
+> >
+> > -----Original Message-----
+> > From: openembedded-devel-bounces@lists.openembedded.org [mailto:
+> > openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Ankur
+> > Tyagi
+> > Sent: mardi 15 d=C3=A9cembre 2015 11:27
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: [oe] QT5 application NOT generating core dump upon receiving
+> > segmentation fault
+> >
+> > Hi,
+> >
+> > I am running a QT5 based application on TI AM335x EVM kit. I am using
+> > meta-arago daisy configuration.
+> >
+> > My system is configured to generate core dump and core dumps are
+> generated
+> > whenever application receives segmentation fault (expected).
+> >
+> > But when my QT5 based application received SIGSEGV, then no core dump i=
+s
+> > generated. It dies without "Segmentation fault" message on stdout.
+> >
+> > To debug this further, I added nullptr dereference in my application
+> main()
+> > before QApplication object is created and when executed, core dump was
+> > created.
+> > When I moved nullptr dereference after QApplication object is created,
+> then
+> > no core dump was created. Application died without any message.
+> >
+> > So it seems QT is handling SIGSEGV and not allowing to create core dump=
+.
+> >
+> > Is it expected ? I believe not. What wrong am I doing and how to fix
+> this ?
+> >
+> > thanks
+> > Ankur
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
