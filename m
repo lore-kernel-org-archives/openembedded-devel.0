@@ -1,61 +1,25 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
-	[209.85.220.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A8D36FEFE
+Return-Path: <gerharddeclercq@outlook.com>
+X-Greylist: delayed 301 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 15 Dec 2015 12:50:47 UTC
+Received: from BLU004-OMC4S30.hotmail.com (blu004-omc4s30.hotmail.com
+	[65.55.111.169])
+	by mail.openembedded.org (Postfix) with ESMTP id ECAE46FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 12:50:03 +0000 (UTC)
-Received: by mail-pa0-f42.google.com with SMTP id hk6so4417397pad.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 04:50:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=VIAaojCeR8xTPlG3so81+QdZgDDR2GlRW8xSPuObuh0=;
-	b=FbAk5P9u5ds+podYFq7lRyD+OR6sl1TK2OaQuXpD41wWQNK8vUnYRp41E0sQ+DmCxK
-	GL5aOGZsq6n8FSBYYY6+FycYMzFJlC/G2AdJB8CEteUrkw1XpKPm6n5yFhohhc84Rvq1
-	9xPCOaAY+vFdoOq+s14WpjPQn1EqvYCbjT2LIkxLkpk7Y/EFZH8GGFq6uGZgAy9ZS9cx
-	Izrlh25DLgAS7P/pXWavUlmRjjaPbmG6+KEAR9G1lMNggk3AF/l+0sw570fKtpajG6da
-	xNSMgLGdNBf61MmVfdUaISn4XAs8MgiND2uuisRHJlVKJAOqGsWTYwy7QX2IIFXKd0xE
-	SO6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=VIAaojCeR8xTPlG3so81+QdZgDDR2GlRW8xSPuObuh0=;
-	b=ZWes3OSFmMqzvvpRD5w1UpBpq0HRmu6L9YGf0qdMmTav+3cMdmsJnPNsj2fxUB/7x+
-	6K+nBo73PKGYxxmMx+mP5gkO+wSL5bi5kHo9JoziZMKUokxylXSIsoQaGfWwDgXVrjRT
-	/tvGvUfqorqElvJSw2I1H6cQ8n2/vYWzprmc3iq8MCgpH/5vN5xyE1rHT/zjilZFbvdD
-	NR85O9dqjmsA+mpttdkja+DWHlZnWcMiUYkPF0hoyHinJaim0kbOaoVW7ATz4f74ytDD
-	PQZPu9kFj6y7QrkMDrIT8xkhZKc3jja8rf6zJxPPFcfxr5XcipD704KOzsw3J27M0bil
-	lpjg==
-X-Gm-Message-State: ALoCoQkcqq3g8niw+I81u/xoFEKD64BAUkfYHaLuwprVEserE7WhfHeQR4IBbKhIw+PmQy5AFtPdTZ+o9HYNAiuKPZmx/rC/WA==
-X-Received: by 10.66.216.73 with SMTP id oo9mr54017597pac.148.1450183804434;
-	Tue, 15 Dec 2015 04:50:04 -0800 (PST)
-Received: from mail-pf0-f173.google.com (mail-pf0-f173.google.com.
-	[209.85.192.173]) by smtp.gmail.com with ESMTPSA id
-	b17sm2251697pfj.43.2015.12.15.04.50.02
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 15 Dec 2015 04:50:02 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-pf0-f173.google.com with SMTP id u66so4387434pfb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 04:50:02 -0800 (PST)
+	Tue, 15 Dec 2015 12:50:47 +0000 (UTC)
+Received: from BLU436-SMTP207 ([65.55.111.135]) by BLU004-OMC4S30.hotmail.com
+	over TLS secured channel with Microsoft SMTPSVC(7.5.7601.23008);
+	Tue, 15 Dec 2015 04:45:47 -0800
+X-TMN: [rMfcRd8VlCOPI2o3d1s3/rdhSkRDwy5J2s1zomikn8M=]
+X-Originating-Email: [gerharddeclercq@outlook.com]
+Message-ID: <BLU436-SMTP207C9BA27436C22DD6BBA47B8EE0@phx.gbl>
+From: Gerhard de Clercq <gerharddeclercq@outlook.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 15 Dec 2015 14:45:40 +0200
+User-Agent: KMail/4.14.10 (Linux/4.1.13-5-default; KDE/4.14.10; x86_64; ; )
 MIME-Version: 1.0
-X-Received: by 10.98.16.84 with SMTP id y81mr31799982pfi.98.1450183802434;
-	Tue, 15 Dec 2015 04:50:02 -0800 (PST)
-Received: by 10.66.72.229 with HTTP; Tue, 15 Dec 2015 04:50:02 -0800 (PST)
-In-Reply-To: <0A579224-B53A-40F8-9C7E-270C6D9D9B4A@gmail.com>
-References: <97430B74-EFAB-4C2E-BB83-D8695FF14CB8@gmail.com>
-	<CAP9ODKpFa5V__us5s+9WY7GHcyvzXT-5U_wzzp8cNmwW5UzYhw@mail.gmail.com>
-	<0A579224-B53A-40F8-9C7E-270C6D9D9B4A@gmail.com>
-Date: Tue, 15 Dec 2015 10:50:02 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKqLsDuyxVWOOC2UJMqGpjep+LGFajQO+N7jyiRa=5ea=Q@mail.gmail.com>
-Message-ID: <CAP9ODKqLsDuyxVWOOC2UJMqGpjep+LGFajQO+N7jyiRa=5ea=Q@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java][PATCH] openjdk-8: fix rewrite QA warnings
+X-OriginalArrivalTime: 15 Dec 2015 12:45:45.0412 (UTC)
+	FILETIME=[84140040:01D13736]
+Subject: Build Qt5 with X11 backend for EGLFS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,59 +32,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2015 12:50:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 15 Dec 2015 12:50:48 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Tue, Dec 15, 2015 at 10:40 AM, Jens Rehsack <rehsack@gmail.com> wrote:
->
->> Am 15.12.2015 um 13:31 schrieb Otavio Salvador <otavio.salvador@ossystem=
-s.com.br>:
->>
->> On Sat, Dec 12, 2015 at 7:36 AM, Jens Rehsack <rehsack@gmail.com> wrote:
->>>
->>> Fix bitbake warnings from variable renaming like
->>>
->>>    Variable key FILES_${PN} (${bindir}/* ${sbindir}/* ${libexecdir}/* $=
-{libdir}/lib*${SOLIBS} ${sysconfdir} ${sharedstatedir} ${localstatedir} ${b=
-ase_bindir}/* ${base_sbindir}/* ${base_libdir}/*${SOLIBS} ${base_prefix}/li=
-b/udev/rules.d ${prefix}/lib/udev/rules.d ${datadir}/${BPN} ${libdir}/${BPN=
-}/* ${datadir}/pixmaps ${datadir}/applications ${datadir}/idl ${datadir}/om=
-f ${datadir}/sounds ${libdir}/bonobo/servers) replaces original key FILES_o=
-penjre-8 (    ${JRE_HOME}/bin/[a-z]*     ${JRE_HOME}/lib/[a-z]*     ${JRE_H=
-OME}/LICENSE     ${JRE_HOME}/release ).
->>>
->>> It is caused by using FILES_${PN} and FILES_{JDKPN} or FILES_${JREPN},
->>> respectively. Moving FILES_{JDKPN} to openjdk-8_%.bb and FILES_${JREPN}=
- to
->>> openjre-8_%.bb to allow consequently use FILES_${PN}.
->>>
->>> Signed-off-by: Jens Rehsack <sno@netbsd.org>
->>
->> Looking at the proposed change, it seems it would be better to squash
->> the JDK and JRE installation to a single recipe and do the proper
->> split using the packaging.
->>
->> Do you think this is reasonable?
->
-> I split openjdk-8/openjre-8 because of weird behavior wrt.
->
-> PREFERRED_PROVIDER_java2-runtime =3D "openjdk-8-jre"
->
-> but I think with all the things I learned during packaging openjdk-8
-> and nqp/perl6 I can retry.
->
-> This will require lots of tests, so unfortunately it's unlikely
-> to manage it this year - maybe even not before our planned HP1 update
-> release.
+Hi,
 
-Right; it is not a problem and I think this could be merged as an
-intermediate solution, in meanwhile. However I think consolidating it
-into a single recipe would give us some benefits as: faster builds,
-single recipe to manage, removal of .inc file at all.
+I am trying to build Qt5 on Fido for my Tegra 3 based device that only 
+provides hardware acceleration through X11 but does have EGL. I have been 
+using the XCB backend but have run into tearing issues and have found that 
+everyone regards switching to EGLFS as the best solution. 
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+I initially thought this was not an option but have recently found that one 
+can use EGLFS with an X11 backend. To do so I created a qtbase_git.bbappend in 
+my layer and filled it with the following:
+
+PACKAGECONFIG[gles2] = "-opengl es2 -xcb -eglfs -no-kms,,virtual/libgles2 
+virtual/egl"
+
+do_configure_prepend() {
+	cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
+EGLFS_PLATFORM_HOOKS_SOURCES = \$\$PWD/qeglfshooks_x11.cpp
+EOF
+	# copy the hook in the mkspecs directory OE is using
+	cp ${S}/src/plugins/platforms/eglfs/qeglfshooks_x11.cpp ${S}/mkspecs/linux-
+oe-g++/
+}
+
+Unfortunately when I try to compile Qt, I get hit with a lot of errors 
+relating to xcb references like:
+
+| /home/gerhard/Toradex-New/yocto/build/out-glibc/work/armv7at2hf-vfp-neon-
+angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-
+r0/git/mkspecs/linux-oe-g++/qeglfshooks_x11.cpp:159: error: undefined reference 
+to 'xcb_wait_for_event'
+| /home/gerhard/Toradex-New/yocto/build/out-glibc/work/armv7at2hf-vfp-neon-
+angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-
+r0/git/mkspecs/linux-oe-g++/qeglfshooks_x11.cpp:219: error: undefined reference 
+to 'XOpenDisplay'
+| /home/gerhard/Toradex-New/yocto/build/out-glibc/work/armv7at2hf-vfp-neon-
+angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-
+r0/git/mkspecs/linux-oe-g++/qeglfshooks_x11.cpp:223: error: undefined reference 
+to 'XSetEventQueueOwner'
+| /home/gerhard/Toradex-New/yocto/build/out-glibc/work/armv7at2hf-vfp-neon-
+angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-
+r0/git/mkspecs/linux-oe-g++/qeglfshooks_x11.cpp:224: error: undefined reference 
+to 'XGetXCBConnection'
+| /home/gerhard/Toradex-New/yocto/build/out-glibc/work/armv7at2hf-vfp-neon-
+angstrom-linux-gnueabi/qtbase/5.4.2+gitAUTOINC+2cb17c1fb9-
+r0/git/mkspecs/linux-oe-g++/qeglfshooks_x11.cpp:228: error: undefined reference 
+to 'xcb_get_setup'
+
+Those aren't all the errors but they all seem to point to the fact that xcb (I 
+guess libxcb) is not being linked to Qt. I thought adding "-xcb" to the 
+packageconfig might have helped but I did not seem to do so. What I can I do to 
+try and fix this?
+
+PS. Considering it is possible to build the proper XCB backend I guess the 
+files must exist somewhere... 
+
+-- 
+Regards,
+Gerhard de Clercq
 
