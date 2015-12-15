@@ -1,36 +1,36 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ig0-f195.google.com (mail-ig0-f195.google.com
-	[209.85.213.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 953DB73184
+Received: from mail-io0-f193.google.com (mail-io0-f193.google.com
+	[209.85.223.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A30A7317D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 11:32:35 +0000 (UTC)
-Received: by mail-ig0-f195.google.com with SMTP id rx7so1452926igc.3
+	Tue, 15 Dec 2015 11:32:56 +0000 (UTC)
+Received: by mail-io0-f193.google.com with SMTP id o67so1483415iof.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 03:32:36 -0800 (PST)
+	Tue, 15 Dec 2015 03:32:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	bh=G15pUIjQuoA8eNsYBvGC5/bzvo88jeUZl3cY1s1/nfM=;
-	b=05wURCbMnRic0gb4LIoEVw65MUx91Lw9BQdhaXaCmq8ScrpoNTjVvzUX0M26vL0u4m
-	6meEUyCF3IG/z83pgFCFEEJd2GfxkpygIhk7eGA79v1BCHQE9qfdeMO0qnCqo0L8SoII
-	YJDXvpRxu5sz8j1HR6Flf8spTZjllerJS3ADVjiJJw11SND1lcs8h80E3ZK3gpGy7Z7R
-	6YhFjfkdBHjls+BmXxfUGfjeK0rnRqbOLn1QmBggBUrgD/U9omCxexY/5O/caIjey/2h
-	kMTHX5K5WTLoDwy51YUGc+glc/vPFGTG6UAk7tgtRVG0nppx7qfrBlTYlqSKJYknQ+m8
-	9/pg==
+	bh=O5cP4wnE4GnMhyDkVG21XUtRiyNtSoFQ80cWeG7iKDw=;
+	b=iqGvsiSCgxY4YhtmFkTumDHiJx2CW70Iio3rwkO8441rs8txt2XpOS09O6AdSI6xhY
+	PDl6mObg1Pb8wRzZPc9DKJr9pOCfwKUvMK15FBceO2lLc3Ys54q+UbFC4r3ikNkChvxF
+	y869OHpYnuMGNmS/l0mhDkuu601lJ/Thf4al4aWFJXv9AY0aio3gAoHzH4INSbWYIOVa
+	4QudHgRO5z7ze2T8qm01m/UtcJaHUwHb58xEEXxWBNcXwMMeaIzBHuGhHG67slewpdAG
+	aaOPhJ6OviDvvs3hOoMDtYZQW3dt4j9guCeGhO4HqDXqD6SlcR4tcXxSwEmMlQ4+0qTo
+	774w==
 MIME-Version: 1.0
-X-Received: by 10.50.155.33 with SMTP id vt1mr3266202igb.64.1450179155806;
-	Tue, 15 Dec 2015 03:32:35 -0800 (PST)
-Received: by 10.36.25.81 with HTTP; Tue, 15 Dec 2015 03:32:35 -0800 (PST)
-In-Reply-To: <1448525199-27504-2-git-send-email-schnitzeltony@googlemail.com>
+X-Received: by 10.107.154.131 with SMTP id c125mr12047705ioe.148.1450179177470;
+	Tue, 15 Dec 2015 03:32:57 -0800 (PST)
+Received: by 10.36.25.81 with HTTP; Tue, 15 Dec 2015 03:32:57 -0800 (PST)
+In-Reply-To: <1448525199-27504-3-git-send-email-schnitzeltony@googlemail.com>
 References: <1448525199-27504-1-git-send-email-schnitzeltony@googlemail.com>
-	<1448525199-27504-2-git-send-email-schnitzeltony@googlemail.com>
-Date: Tue, 15 Dec 2015 12:32:35 +0100
-Message-ID: <CALbNGRReLcVR5J9sGtR2w2EXUiLpATdjFV9O--huGdhxz_Fb5g@mail.gmail.com>
+	<1448525199-27504-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 15 Dec 2015 12:32:57 +0100
+Message-ID: <CALbNGRRa8dVGhY_OUvk0v+wS2YiNq+wYASpr0B87R+WGXioTRg@mail.gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-qt5][jethro] qtbase: align target qmake paths/mkspec
+Subject: Re: [PATCH][meta-qt5][master 2/2] align target qmake paths/mkspec
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,30 +43,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2015 11:32:35 -0000
+X-List-Received-Date: Tue, 15 Dec 2015 11:32:57 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On Thu, Nov 26, 2015 at 9:06 AM, Andreas M=C3=BCller
 <schnitzeltony@googlemail.com> wrote:
-> With this we can setup qt-creator to build/debug on target again.
->
 > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
 > ---
+>  recipes-qt/qt5/nativesdk-qtbase_git.bb             |  4 +-
+>  recipes-qt/qt5/qtbase-native_git.bb                |  5 +-
 >  ...configure-paths-for-target-qmake-properly.patch | 76 ++++++++++++++++=
 ++++++
+>  ...build-uic.patch =3D> 0009-Always-build-uic.patch} |  0
+>  ...xternal-hostbindir-option-for-native-sdk.patch} |  0
 >  recipes-qt/qt5/qtbase_git.bb                       |  1 +
->  2 files changed, 77 insertions(+)
->  create mode 100644 recipes-qt/qt5/qtbase/0011-configure-paths-for-target=
+>  6 files changed, 82 insertions(+), 4 deletions(-)
+>  create mode 100644 recipes-qt/qt5/qtbase/0008-configure-paths-for-target=
 -qmake-properly.patch
+>  rename recipes-qt/qt5/qtbase/{0008-Always-build-uic.patch =3D> 0009-Alwa=
+ys-build-uic.patch} (100%)
+>  rename recipes-qt/qt5/qtbase/{0009-Add-external-hostbindir-option-for-na=
+tive-sdk.patch =3D> 0010-Add-external-hostbindir-option-for-native-sdk.patc=
+h} (100%)
 >
-> diff --git a/recipes-qt/qt5/qtbase/0011-configure-paths-for-target-qmake-=
-properly.patch b/recipes-qt/qt5/qtbase/0011-configure-paths-for-target-qmak=
+> diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nati=
+vesdk-qtbase_git.bb
+> index f712af7..3d4900e 100644
+> --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
+> +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+> @@ -33,8 +33,8 @@ SRC_URI +=3D "\
+>
+>  # common for qtbase-native and nativesdk-qtbase
+>  SRC_URI +=3D " \
+> -    file://0008-Always-build-uic.patch \
+> -    file://0009-Add-external-hostbindir-option-for-native-sdk.patch \
+> +    file://0009-Always-build-uic.patch \
+> +    file://0010-Add-external-hostbindir-option-for-native-sdk.patch \
+>  "
+>
+>  # CMake's toolchain configuration of nativesdk-qtbase
+> diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-=
+native_git.bb
+> index e27d34b..14e8516 100644
+> --- a/recipes-qt/qt5/qtbase-native_git.bb
+> +++ b/recipes-qt/qt5/qtbase-native_git.bb
+> @@ -23,12 +23,13 @@ SRC_URI +=3D "\
+>      file://0005-configure-bump-path-length-from-256-to-512-character.pat=
+ch \
+>      file://0006-QOpenGLPaintDevice-sub-area-support.patch \
+>      file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.pat=
+ch \
+> +    file://0008-configure-paths-for-target-qmake-properly.patch \
+>  "
+>
+>  # common for qtbase-native and nativesdk-qtbase
+>  SRC_URI +=3D " \
+> -    file://0008-Always-build-uic.patch \
+> -    file://0009-Add-external-hostbindir-option-for-native-sdk.patch \
+> +    file://0009-Always-build-uic.patch \
+> +    file://0010-Add-external-hostbindir-option-for-native-sdk.patch \
+>  "
+>
+>  CLEANBROKEN =3D "1"
+> diff --git a/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmake-=
+properly.patch b/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmak=
 e-properly.patch
 > new file mode 100644
 > index 0000000..efd27a5
 > --- /dev/null
-> +++ b/recipes-qt/qt5/qtbase/0011-configure-paths-for-target-qmake-properl=
+> +++ b/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmake-properl=
 y.patch
 > @@ -0,0 +1,76 @@
 > +From fb519b08f564a8a640b1b2f2b6a3bd54a83e19e8 Mon Sep 17 00:00:00 2001
@@ -154,18 +200,30 @@ _hpfxpath=3D$QT_TARGET_PREFIX";
 > +--
 > +2.1.0
 > +
+> diff --git a/recipes-qt/qt5/qtbase/0008-Always-build-uic.patch b/recipes-=
+qt/qt5/qtbase/0009-Always-build-uic.patch
+> similarity index 100%
+> rename from recipes-qt/qt5/qtbase/0008-Always-build-uic.patch
+> rename to recipes-qt/qt5/qtbase/0009-Always-build-uic.patch
+> diff --git a/recipes-qt/qt5/qtbase/0009-Add-external-hostbindir-option-fo=
+r-native-sdk.patch b/recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-opt=
+ion-for-native-sdk.patch
+> similarity index 100%
+> rename from recipes-qt/qt5/qtbase/0009-Add-external-hostbindir-option-for=
+-native-sdk.patch
+> rename to recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-n=
+ative-sdk.patch
 > diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-> index 0ba8ac8..3ef5923 100644
+> index fdc73e1..20627c8 100644
 > --- a/recipes-qt/qt5/qtbase_git.bb
 > +++ b/recipes-qt/qt5/qtbase_git.bb
-> @@ -26,6 +26,7 @@ SRC_URI +=3D "\
->      file://0008-qmake-don-t-build-it-in-configure-but-allow-to-build.pat=
+> @@ -19,6 +19,7 @@ SRC_URI +=3D "\
+>      file://0005-configure-bump-path-length-from-256-to-512-character.pat=
 ch \
->      file://0009-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.pat=
+>      file://0006-QOpenGLPaintDevice-sub-area-support.patch \
+>      file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.pat=
 ch \
->      file://0010-qeglplatformscreen.cpp-reorder-headers-to-fix-build-.pat=
-ch \
-> +    file://0011-configure-paths-for-target-qmake-properly.patch \
+> +    file://0008-configure-paths-for-target-qmake-properly.patch \
 >  "
 >
 >  DEPENDS +=3D "qtbase-native"
