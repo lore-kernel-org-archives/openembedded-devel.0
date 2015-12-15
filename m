@@ -1,44 +1,36 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id C23256FFE8
+Return-Path: <fan.xin@jp.fujitsu.com>
+X-Greylist: delayed 617 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 15 Dec 2015 02:12:07 UTC
+Received: from mgwkm01.jp.fujitsu.com (mgwkm01.jp.fujitsu.com [202.219.69.168])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BB126FF73
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 00:27:09 +0000 (UTC)
-Received: by pfbo64 with SMTP id o64so35484180pfb.1
+	Tue, 15 Dec 2015 02:12:07 +0000 (UTC)
+Received: from kw-mxauth.gw.nic.fujitsu.com (unknown [192.168.231.132]) by
+	mgwkm01.jp.fujitsu.com with smtp
+	id 69be_16f9_40affe9c_e1eb_4f05_9d04_6e4ebcf61fc6;
+	Tue, 15 Dec 2015 11:01:44 +0900
+Received: from g01jpfmpwyt02.exch.g01.fujitsu.local
+	(g01jpfmpwyt02.exch.g01.fujitsu.local [10.128.193.56])
+	by kw-mxauth.gw.nic.fujitsu.com (Postfix) with ESMTP id 3B99DAC0210
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2015 16:27:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=unpFmGYKrJasUZf6jYoE2uz4lwIYdzaPeP6wnwHe6uc=;
-	b=OgXL3hiQ0BTv1oVTMdQFOsElB3qLFIs0t+b+D751eI+rbAYI/AfT1XEycjX+CZMwqx
-	nQ6y1dPfPPWYnbMes9ArZ32uHTzL64kn0JmpPqjrsOye57O845Sa3gHZhuBcVbKyQOsL
-	GvfTpTyGc+F5Qxa1CLT3QlYTJQdes2LgcqnIVJ3j4PpTLU+BkiwkV0dNNJwzPXBWOwV6
-	X5UxlnCsTWgiT6ucpRyGgw5yATDJHOUbnjEdGTeN6AC94mWBrjRxbng6ywn0jFsl73Z7
-	kQOnwRwPgg9CFLmEyHHabk8ejhXyF2Vj47lAbdRjSsu73XynD4WTFSasj4imWbTXWwI5
-	OrMA==
-X-Received: by 10.98.18.157 with SMTP id 29mr39824292pfs.43.1450139230231;
-	Mon, 14 Dec 2015 16:27:10 -0800 (PST)
-Received: from ?IPv6:2601:202:4000:1239:ed26:217b:90d5:71ba?
-	([2601:202:4000:1239:ed26:217b:90d5:71ba])
-	by smtp.googlemail.com with ESMTPSA id
-	17sm30861223pfs.36.2015.12.14.16.27.08
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 14 Dec 2015 16:27:08 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <cover.1450027640.git.akuster808@gmail.com>
-	<c2c72c32cd47ebaaaac9cdbc769e0f4a8e5eac80.1450027640.git.akuster808@gmail.com>
-	<20151214162656.GA2212@jama>
-From: akuster808 <akuster808@gmail.com>
-X-Enigmail-Draft-Status: N1110
-Message-ID: <566F5E58.7060209@gmail.com>
-Date: Mon, 14 Dec 2015 16:27:04 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
+	Tue, 15 Dec 2015 11:01:44 +0900 (JST)
+Received: from g01jpexchyt35.g01.fujitsu.local (unknown [10.128.193.4])
+	by g01jpfmpwyt02.exch.g01.fujitsu.local (Postfix) with ESMTP id
+	566D15842B4 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Dec 2015 11:01:43 +0900 (JST)
+Received: from localhost.localdomain (10.24.19.99) by
+	g01jpexchyt35.g01.fujitsu.local (10.128.193.50) with Microsoft SMTP
+	Server id 14.3.266.1; Tue, 15 Dec 2015 11:01:43 +0900
+From: Fan Xin <fan.xin@jp.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 15 Dec 2015 11:02:51 +0900
+Message-ID: <1450144971-26183-1-git-send-email-fan.xin@jp.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <20151214162656.GA2212@jama>
-Subject: Re: [PATCH 04/14] net-snmp: fix cross compilation
+X-SecurityPolicyCheck-GC: OK by FENCE-Mail
+X-TM-AS-MML: disable
+Cc: Fan Xin <fan.xin@jp.fujitsu.com>
+Subject: [PATCH] apache2: Upgrade 2.4.16 -> 2.4.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,82 +43,369 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2015 00:27:09 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 15 Dec 2015 02:12:09 -0000
+Content-Type: text/plain
 
-Martin,
+1. Upgrade apache2 from 2.4.16 to 2.4.18
 
-On 12/14/2015 08:26 AM, Martin Jansa wrote:
-> On Mon, Dec 14, 2015 at 07:33:57AM -0800, Armin Kuster wrote:
->> From: Rafaël Carré <funman@videolan.org>
->>
->> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
->> Signed-off-by: Armin Kuster <akuster808@gmail.com>
->> ---
->>  .../0002-config_os_headers-Error-Fix.patch         | 31 ++++++++++++++++++++++
->>  1 file changed, 31 insertions(+)
->>  create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
-> 
-> There is another patch for net-snmp in master next, which actually adds
-> this .patch file to SRC_URI, this change alone doesn't do anything and
-> shouldn't be backported imho.
+The changes in 2.4.18 is shown in following URL.
+http://ftp.meisei-u.ac.jp/mirror/apache/dist//httpd/CHANGES_2.4.18
 
-How long before the fix ( c5d821770a5c71c6a905ca889299f027874e9a98) is
-merged to master? I would rather append that commit to jethro than undo
-the above  and forget to back port later.  I an pull in more changes
-then too and do another pull-request.
+2. Delete patch file npn-patch-2.4.7.patch due to this patch file can not be applied to the apache2 2.4.18's source code.
 
-- armin
-> 
->>
->> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
->> new file mode 100644
->> index 0000000..a90ce1f
->> --- /dev/null
->> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
->> @@ -0,0 +1,31 @@
->> +From e24fcd140f3f6dd18fd836b197c6d4bb773e50e7 Mon Sep 17 00:00:00 2001
->> +From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
->> +Date: Wed, 4 Nov 2015 16:49:30 +0100
->> +Subject: [PATCH] config_os_headers: Error Fix
->> +
->> +ERROR: This autoconf log indicates errors, it looked at host include
->> +and/or library paths while determining system capabilities.
->> +---
->> + configure.d/config_os_libs2 | 4 ++--
->> + 1 file changed, 2 insertions(+), 2 deletions(-)
->> +
->> +diff --git a/configure.d/config_os_libs2 b/configure.d/config_os_libs2
->> +index 47491e2..e3647f9 100644
->> +--- a/configure.d/config_os_libs2
->> ++++ b/configure.d/config_os_libs2
->> +@@ -226,10 +226,10 @@ if test "x$with_nl" != "xno"; then
->> +     case $target_os in
->> +     linux*) # Check for libnl (linux)
->> +         netsnmp_save_CPPFLAGS="$CPPFLAGS"
->> +-        CPPFLAGS="-I/usr/include/libnl3 $CPPFLAGS"
->> ++        CPPFLAGS="$CPPFLAGS"
->> +         NETSNMP_SEARCH_LIBS(nl_connect, nl-3,
->> +             [AC_CHECK_HEADERS(netlink/netlink.h)
->> +-            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES -I/usr/include/libnl3"],
->> ++            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES"],
->> +             [CPPFLAGS="$netsnmp_save_CPPFLAGS"], [], [], [LMIBLIBS])
->> +         if test "x$ac_cv_header_netlink_netlink_h" != xyes; then
->> +             NETSNMP_SEARCH_LIBS(nl_connect, nl, [
->> +-- 
->> +2.5.0
->> +
->> -- 
->> 1.9.1
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
-> 
-> 
+The NPN support was removed with r1676004. NPN is now quite unlikely to find its way into a stable release.
+https://bz.apache.org/bugzilla/show_bug.cgi?id=52210
+
+Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+---
+ ...2-native_2.4.16.bb => apache2-native_2.4.18.bb} |   4 +-
+ .../apache2/apache2/npn-patch-2.4.7.patch          | 289 ---------------------
+ .../{apache2_2.4.16.bb => apache2_2.4.18.bb}       |   5 +-
+ 3 files changed, 4 insertions(+), 294 deletions(-)
+ rename meta-webserver/recipes-httpd/apache2/{apache2-native_2.4.16.bb => apache2-native_2.4.18.bb} (91%)
+ delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/npn-patch-2.4.7.patch
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.16.bb => apache2_2.4.18.bb} (97%)
+
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.16.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.18.bb
+similarity index 91%
+rename from meta-webserver/recipes-httpd/apache2/apache2-native_2.4.16.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2-native_2.4.18.bb
+index 59109dd..201efa6 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.16.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.18.bb
+@@ -15,8 +15,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+ S = "${WORKDIR}/httpd-${PV}"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
+-SRC_URI[md5sum] = "2b19cd338fd526dd5a63c57b1e9bfee2"
+-SRC_URI[sha256sum] = "ac660b47aaa7887779a6430404dcb40c0b04f90ea69e7bd49a40552e9ff13743"
++SRC_URI[md5sum] = "3690b3cc991b7dfd22aea9e1264a11b9"
++SRC_URI[sha256sum] = "0644b050de41f5c9f67c825285049b144690421acb709b06fe53eddfa8a9fd4c"
+ 
+ EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
+                 --with-apr-util=${STAGING_BINDIR_CROSS}/apu-1-config \
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/npn-patch-2.4.7.patch b/meta-webserver/recipes-httpd/apache2/apache2/npn-patch-2.4.7.patch
+deleted file mode 100644
+index a4f1855..0000000
+--- a/meta-webserver/recipes-httpd/apache2/apache2/npn-patch-2.4.7.patch
++++ /dev/null
+@@ -1,289 +0,0 @@
+-Add support for TLS Next Protocol Negotiation:
+-
+-* modules/ssl/mod_ssl.c, modules/ssl/mod_ssl.h: Add and implement new
+-  hooks for next protocol advertisement/discovery.
+-
+-* modules/ssl/ssl_engine_init.c (ssl_init_ctx_callbacks): Enable
+-  NPN advertisement callback in handshake.
+-
+-* modules/ssl/ssl_engine_io.c (ssl_io_filter_input): Invoke
+-  next-protocol discovery hook.
+-
+-* modules/ssl/ssl_engine_kernel.c (ssl_callback_AdvertiseNextProtos):
+-  New callback.
+-
+-* modules/ssl/ssl_private.h: Add prototype.
+-
+-Submitted by: Matthew Steele <mdsteele google.com>
+-  with slight tweaks by jorton
+-
+-http://svn.apache.org/viewvc?view=revision&revision=1332643
+-https://bugzilla.redhat.com//show_bug.cgi?id=809599
+-Upstream-Status: Backport
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- CHANGES                         |  2 +
+- modules/ssl/mod_ssl.c           | 12 ++++++
+- modules/ssl/mod_ssl.h           | 21 +++++++++++
+- modules/ssl/ssl_engine_init.c   |  5 +++
+- modules/ssl/ssl_engine_io.c     | 24 ++++++++++++
+- modules/ssl/ssl_engine_kernel.c | 82 +++++++++++++++++++++++++++++++++++++++++
+- modules/ssl/ssl_private.h       |  6 +++
+- 7 files changed, 152 insertions(+)
+-
+-diff --git a/CHANGES b/CHANGES
+---- a/CHANGES
+-+++ b/CHANGES
+-@@ -1,6 +1,8 @@
+-                                                          -*- coding: utf-8 -*-
+- 
+- Changes with Apache 2.4.7
+-+  *) mod_ssl: Add support for TLS Next Protocol Negotiation.  PR 52210.
+-+     [Matthew Steele <mdsteele google.com>]
+- 
+-   *) APR 1.5.0 or later is now required for the event MPM.
+-   
+-diff --git a/modules/ssl/mod_ssl.c b/modules/ssl/mod_ssl.c
+---- a/modules/ssl/mod_ssl.c
+-+++ b/modules/ssl/mod_ssl.c
+-@@ -275,6 +275,18 @@ static const command_rec ssl_config_cmds[] = {
+-     AP_END_CMD
+- };
+- 
+-+/* Implement 'modssl_run_npn_advertise_protos_hook'. */
+-+APR_IMPLEMENT_OPTIONAL_HOOK_RUN_ALL(
+-+    modssl, AP, int, npn_advertise_protos_hook,
+-+    (conn_rec *connection, apr_array_header_t *protos),
+-+    (connection, protos), OK, DECLINED);
+-+
+-+/* Implement 'modssl_run_npn_proto_negotiated_hook'. */
+-+APR_IMPLEMENT_OPTIONAL_HOOK_RUN_ALL(
+-+    modssl, AP, int, npn_proto_negotiated_hook,
+-+    (conn_rec *connection, const char *proto_name, apr_size_t proto_name_len),
+-+    (connection, proto_name, proto_name_len), OK, DECLINED);
+-+
+- /*
+-  *  the various processing hooks
+-  */
+-diff --git a/modules/ssl/mod_ssl.h b/modules/ssl/mod_ssl.h
+---- a/modules/ssl/mod_ssl.h
+-+++ b/modules/ssl/mod_ssl.h
+-@@ -63,5 +63,26 @@ APR_DECLARE_OPTIONAL_FN(int, ssl_proxy_enable, (conn_rec *));
+- 
+- APR_DECLARE_OPTIONAL_FN(int, ssl_engine_disable, (conn_rec *));
+- 
+-+/** The npn_advertise_protos optional hook allows other modules to add entries
+-+ * to the list of protocol names advertised by the server during the Next
+-+ * Protocol Negotiation (NPN) portion of the SSL handshake.  The hook callee is
+-+ * given the connection and an APR array; it should push one or more char*'s
+-+ * pointing to null-terminated strings (such as "http/1.1" or "spdy/2") onto
+-+ * the array and return OK, or do nothing and return DECLINED. */
+-+APR_DECLARE_EXTERNAL_HOOK(modssl, AP, int, npn_advertise_protos_hook,
+-+                          (conn_rec *connection, apr_array_header_t *protos));
+-+
+-+/** The npn_proto_negotiated optional hook allows other modules to discover the
+-+ * name of the protocol that was chosen during the Next Protocol Negotiation
+-+ * (NPN) portion of the SSL handshake.  Note that this may be the empty string
+-+ * (in which case modules should probably assume HTTP), or it may be a protocol
+-+ * that was never even advertised by the server.  The hook callee is given the
+-+ * connection, a non-null-terminated string containing the protocol name, and
+-+ * the length of the string; it should do something appropriate (i.e. insert or
+-+ * remove filters) and return OK, or do nothing and return DECLINED. */
+-+APR_DECLARE_EXTERNAL_HOOK(modssl, AP, int, npn_proto_negotiated_hook,
+-+                          (conn_rec *connection, const char *proto_name,
+-+                           apr_size_t proto_name_len));
+-+
+- #endif /* __MOD_SSL_H__ */
+- /** @} */
+-diff --git a/modules/ssl/ssl_engine_init.c b/modules/ssl/ssl_engine_init.c
+---- a/modules/ssl/ssl_engine_init.c
+-+++ b/modules/ssl/ssl_engine_init.c
+-@@ -546,6 +546,11 @@ static void ssl_init_ctx_callbacks(server_rec *s,
+-     SSL_CTX_set_tmp_dh_callback(ctx,  ssl_callback_TmpDH);
+- 
+-     SSL_CTX_set_info_callback(ctx, ssl_callback_Info);
+-+
+-+#ifdef HAVE_TLS_NPN
+-+    SSL_CTX_set_next_protos_advertised_cb(
+-+        ctx, ssl_callback_AdvertiseNextProtos, NULL);
+-+#endif
+- }
+- 
+- static void ssl_init_ctx_verify(server_rec *s,
+-diff --git a/modules/ssl/ssl_engine_io.c b/modules/ssl/ssl_engine_io.c
+---- a/modules/ssl/ssl_engine_io.c
+-+++ b/modules/ssl/ssl_engine_io.c
+-@@ -28,6 +28,7 @@
+-                                   core keeps dumping.''
+-                                             -- Unknown    */
+- #include "ssl_private.h"
+-+#include "mod_ssl.h"
+- #include "apr_date.h"
+- 
+- /*  _________________________________________________________________
+-@@ -297,6 +298,7 @@ typedef struct {
+-     apr_pool_t *pool;
+-     char buffer[AP_IOBUFSIZE];
+-     ssl_filter_ctx_t *filter_ctx;
+-+    int npn_finished;  /* 1 if NPN has finished, 0 otherwise */
+- } bio_filter_in_ctx_t;
+- 
+- /*
+-@@ -1412,6 +1414,27 @@ static apr_status_t ssl_io_filter_input(ap_filter_t *f,
+-         APR_BRIGADE_INSERT_TAIL(bb, bucket);
+-     }
+- 
+-+#ifdef HAVE_TLS_NPN
+-+    /* By this point, Next Protocol Negotiation (NPN) should be completed (if
+-+     * our version of OpenSSL supports it).  If we haven't already, find out
+-+     * which protocol was decided upon and inform other modules by calling
+-+     * npn_proto_negotiated_hook. */
+-+    if (!inctx->npn_finished) {
+-+        const unsigned char *next_proto = NULL;
+-+        unsigned next_proto_len = 0;
+-+
+-+        SSL_get0_next_proto_negotiated(
+-+            inctx->ssl, &next_proto, &next_proto_len);
+-+        ap_log_cerror(APLOG_MARK, APLOG_DEBUG, APR_SUCCESS, f->c,
+-+                      "SSL NPN negotiated protocol: '%s'",
+-+                      apr_pstrmemdup(f->c->pool, (const char*)next_proto,
+-+                                     next_proto_len));
+-+        modssl_run_npn_proto_negotiated_hook(
+-+            f->c, (const char*)next_proto, next_proto_len);
+-+        inctx->npn_finished = 1;
+-+    }
+-+#endif
+-+
+-     return APR_SUCCESS;
+- }
+- 
+-@@ -1893,6 +1916,7 @@ static void ssl_io_input_add_filter(ssl_filter_ctx_t *filter_ctx, conn_rec *c,
+-     inctx->block = APR_BLOCK_READ;
+-     inctx->pool = c->pool;
+-     inctx->filter_ctx = filter_ctx;
+-+    inctx->npn_finished = 0;
+- }
+- 
+- /* The request_rec pointer is passed in here only to ensure that the
+-diff --git a/modules/ssl/ssl_engine_kernel.c b/modules/ssl/ssl_engine_kernel.c
+---- a/modules/ssl/ssl_engine_kernel.c
+-+++ b/modules/ssl/ssl_engine_kernel.c
+-@@ -29,6 +29,7 @@
+-                                   time I was too famous.''
+-                                             -- Unknown                */
+- #include "ssl_private.h"
+-+#include "mod_ssl.h"
+- #include "util_md5.h"
+- 
+- static void ssl_configure_env(request_rec *r, SSLConnRec *sslconn);
+-@@ -2139,3 +2140,84 @@ int ssl_callback_SRPServerParams(SSL *ssl, int *ad, void *arg)
+- }
+- 
+- #endif /* HAVE_SRP */
+-+
+-+#ifdef HAVE_TLS_NPN
+-+/*
+-+ * This callback function is executed when SSL needs to decide what protocols
+-+ * to advertise during Next Protocol Negotiation (NPN).  It must produce a
+-+ * string in wire format -- a sequence of length-prefixed strings -- indicating
+-+ * the advertised protocols.  Refer to SSL_CTX_set_next_protos_advertised_cb
+-+ * in OpenSSL for reference.
+-+ */
+-+int ssl_callback_AdvertiseNextProtos(SSL *ssl, const unsigned char **data_out,
+-+                                     unsigned int *size_out, void *arg)
+-+{
+-+    conn_rec *c = (conn_rec*)SSL_get_app_data(ssl);
+-+    apr_array_header_t *protos;
+-+    int num_protos;
+-+    unsigned int size;
+-+    int i;
+-+    unsigned char *data;
+-+    unsigned char *start;
+-+
+-+    *data_out = NULL;
+-+    *size_out = 0;
+-+
+-+    /* If the connection object is not available, then there's nothing for us
+-+     * to do. */
+-+    if (c == NULL) {
+-+        return SSL_TLSEXT_ERR_OK;
+-+    }
+-+
+-+    /* Invoke our npn_advertise_protos hook, giving other modules a chance to
+-+     * add alternate protocol names to advertise. */
+-+    protos = apr_array_make(c->pool, 0, sizeof(char*));
+-+    modssl_run_npn_advertise_protos_hook(c, protos);
+-+    num_protos = protos->nelts;
+-+
+-+    /* We now have a list of null-terminated strings; we need to concatenate
+-+     * them together into a single string, where each protocol name is prefixed
+-+     * by its length.  First, calculate how long that string will be. */
+-+    size = 0;
+-+    for (i = 0; i < num_protos; ++i) {
+-+        const char *string = APR_ARRAY_IDX(protos, i, const char*);
+-+        unsigned int length = strlen(string);
+-+        /* If the protocol name is too long (the length must fit in one byte),
+-+         * then log an error and skip it. */
+-+        if (length > 255) {
+-+            ap_log_cerror(APLOG_MARK, APLOG_ERR, 0, c,
+-+                          "SSL NPN protocol name too long (length=%u): %s",
+-+                          length, string);
+-+            continue;
+-+        }
+-+        /* Leave room for the length prefix (one byte) plus the protocol name
+-+         * itself. */
+-+        size += 1 + length;
+-+    }
+-+
+-+    /* If there is nothing to advertise (either because no modules added
+-+     * anything to the protos array, or because all strings added to the array
+-+     * were skipped), then we're done. */
+-+    if (size == 0) {
+-+        return SSL_TLSEXT_ERR_OK;
+-+    }
+-+
+-+    /* Now we can build the string.  Copy each protocol name string into the
+-+     * larger string, prefixed by its length. */
+-+    data = apr_palloc(c->pool, size * sizeof(unsigned char));
+-+    start = data;
+-+    for (i = 0; i < num_protos; ++i) {
+-+        const char *string = APR_ARRAY_IDX(protos, i, const char*);
+-+        apr_size_t length = strlen(string);
+-+        *start = (unsigned char)length;
+-+        ++start;
+-+        memcpy(start, string, length * sizeof(unsigned char));
+-+        start += length;
+-+    }
+-+
+-+    /* Success. */
+-+    *data_out = data;
+-+    *size_out = size;
+-+    return SSL_TLSEXT_ERR_OK;
+-+}
+-+#endif /* HAVE_TLS_NPN */
+-diff --git a/modules/ssl/ssl_private.h b/modules/ssl/ssl_private.h
+---- a/modules/ssl/ssl_private.h
+-+++ b/modules/ssl/ssl_private.h
+-@@ -123,6 +123,11 @@
+- #define MODSSL_SSL_METHOD_CONST
+- #endif
+- 
+-+#if OPENSSL_VERSION_NUMBER >= 0x10001000L && !defined(OPENSSL_NO_NEXTPROTONEG) \
+-+    && !defined(OPENSSL_NO_TLSEXT)
+-+#define HAVE_TLS_NPN
+-+#endif
+-+
+- #if defined(OPENSSL_FIPS)
+- #define HAVE_FIPS
+- #endif
+-@@ -800,6 +805,7 @@ int          ssl_callback_ServerNameIndication(SSL *, int *, modssl_ctx_t *);
+- int         ssl_callback_SessionTicket(SSL *, unsigned char *, unsigned char *,
+-                                        EVP_CIPHER_CTX *, HMAC_CTX *, int);
+- #endif
+-+int ssl_callback_AdvertiseNextProtos(SSL *ssl, const unsigned char **data, unsigned int *len, void *arg);
+- 
+- /**  Session Cache Support  */
+- void         ssl_scache_init(server_rec *, apr_pool_t *);
+--- 
+-1.8.1.2
+-
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb
+similarity index 97%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb
+index b62fd8c..e320cd1 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb
+@@ -15,7 +15,6 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+            file://replace-lynx-to-curl-in-apachectl-script.patch \
+            file://apache-ssl-ltmain-rpath.patch \
+            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
+-           file://npn-patch-2.4.7.patch \
+            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
+            file://configure-allow-to-disable-selinux-support.patch \
+            file://init \
+@@ -24,8 +23,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+           "
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
+-SRC_URI[md5sum] = "2b19cd338fd526dd5a63c57b1e9bfee2"
+-SRC_URI[sha256sum] = "ac660b47aaa7887779a6430404dcb40c0b04f90ea69e7bd49a40552e9ff13743"
++SRC_URI[md5sum] = "3690b3cc991b7dfd22aea9e1264a11b9"
++SRC_URI[sha256sum] = "0644b050de41f5c9f67c825285049b144690421acb709b06fe53eddfa8a9fd4c"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
+-- 
+1.8.4.2
+
 
