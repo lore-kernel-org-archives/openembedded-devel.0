@@ -1,35 +1,44 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A0106FF73;
-	Mon, 14 Dec 2015 19:01:45 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id p66so76836409wmp.1;
-	Mon, 14 Dec 2015 11:01:46 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id C23256FFE8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Dec 2015 00:27:09 +0000 (UTC)
+Received: by pfbo64 with SMTP id o64so35484180pfb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Dec 2015 16:27:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=AXUeFjRt6eehEFOtPBtkkodqFqYpZQM2SYeL+RmbwQI=;
-	b=YchchgKaif1gWI5AS+IblitrrpLZjSaeH8FhFkLAQdxCfcxl0gXFdlcXYS/uxLWGAi
-	G+8JJ1Cc4SZe4Fe/BQ15ZOJfXqAkfc+m7A7g+jofBxMQNbI6lK9oEXh3W5nss8jiNElU
-	heTVxERn9cZxI5AD6j+/L0o+1k61r0OaZ71NC0qo8rEHueMa8yZ0Y5EprabxNKIkzmDW
-	7SttIU110SO25ALDZPcecW8zAUTinN/qroGNcTB6a+9saOFGDP7q0L/d92E9/SIbjAkZ
-	CuXACDC8+9T+EkQimi/KSs5ZEPhG9ggtx8NvVDsQ/pAAtwTzx3Oy3QOFUd8jVldZkkUm
-	c0Ig==
-X-Received: by 10.28.88.5 with SMTP id m5mr27137468wmb.54.1450119706276;
-	Mon, 14 Dec 2015 11:01:46 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	u205sm17370170wmb.12.2015.12.14.11.01.45
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 14 Dec 2015 11:01:45 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 14 Dec 2015 20:03:47 +0100
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20151214190347.GB2212@jama>
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=unpFmGYKrJasUZf6jYoE2uz4lwIYdzaPeP6wnwHe6uc=;
+	b=OgXL3hiQ0BTv1oVTMdQFOsElB3qLFIs0t+b+D751eI+rbAYI/AfT1XEycjX+CZMwqx
+	nQ6y1dPfPPWYnbMes9ArZ32uHTzL64kn0JmpPqjrsOye57O845Sa3gHZhuBcVbKyQOsL
+	GvfTpTyGc+F5Qxa1CLT3QlYTJQdes2LgcqnIVJ3j4PpTLU+BkiwkV0dNNJwzPXBWOwV6
+	X5UxlnCsTWgiT6ucpRyGgw5yATDJHOUbnjEdGTeN6AC94mWBrjRxbng6ywn0jFsl73Z7
+	kQOnwRwPgg9CFLmEyHHabk8ejhXyF2Vj47lAbdRjSsu73XynD4WTFSasj4imWbTXWwI5
+	OrMA==
+X-Received: by 10.98.18.157 with SMTP id 29mr39824292pfs.43.1450139230231;
+	Mon, 14 Dec 2015 16:27:10 -0800 (PST)
+Received: from ?IPv6:2601:202:4000:1239:ed26:217b:90d5:71ba?
+	([2601:202:4000:1239:ed26:217b:90d5:71ba])
+	by smtp.googlemail.com with ESMTPSA id
+	17sm30861223pfs.36.2015.12.14.16.27.08
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 14 Dec 2015 16:27:08 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org
+References: <cover.1450027640.git.akuster808@gmail.com>
+	<c2c72c32cd47ebaaaac9cdbc769e0f4a8e5eac80.1450027640.git.akuster808@gmail.com>
+	<20151214162656.GA2212@jama>
+From: akuster808 <akuster808@gmail.com>
+X-Enigmail-Draft-Status: N1110
+Message-ID: <566F5E58.7060209@gmail.com>
+Date: Mon, 14 Dec 2015 16:27:04 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: State of bitbake world, test-dependencies 2015-11-19
+In-Reply-To: <20151214162656.GA2212@jama>
+Subject: Re: [PATCH 04/14] net-snmp: fix cross compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,113 +51,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2015 19:01:49 -0000
-X-Groupsio-MsgNum: 59010
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WhfpMioaduB5tiZL"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 15 Dec 2015 00:27:09 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 8bit
 
---WhfpMioaduB5tiZL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Martin,
 
-This time full build (testing all recipes available in "my world" - 2503
-recipes), it took record-breaking 25days to finish.
+On 12/14/2015 08:26 AM, Martin Jansa wrote:
+> On Mon, Dec 14, 2015 at 07:33:57AM -0800, Armin Kuster wrote:
+>> From: Rafaël Carré <funman@videolan.org>
+>>
+>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>> ---
+>>  .../0002-config_os_headers-Error-Fix.patch         | 31 ++++++++++++++++++++++
+>>  1 file changed, 31 insertions(+)
+>>  create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
+> 
+> There is another patch for net-snmp in master next, which actually adds
+> this .patch file to SRC_URI, this change alone doesn't do anything and
+> shouldn't be backported imho.
 
-Complete log:
-http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependencies.20151120_14=
-4802.log/
-=20
-I've already sent patches for few of them, will send one for pulseaudio-lir=
-c as well
-as I already have it in out local recipes. For the rest I would appreciate =
-some help
-=66rom people actually using these recipes.
+How long before the fix ( c5d821770a5c71c6a905ca889299f027874e9a98) is
+merged to master? I would rather append that commit to jethro than undo
+the above  and forget to back port later.  I an pull in more changes
+then too and do another pull-request.
 
-I'll trigger new incremental build after that huge meta-oe patch queue from=
- master-next
-is in master.
+- armin
+> 
+>>
+>> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
+>> new file mode 100644
+>> index 0000000..a90ce1f
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
+>> @@ -0,0 +1,31 @@
+>> +From e24fcd140f3f6dd18fd836b197c6d4bb773e50e7 Mon Sep 17 00:00:00 2001
+>> +From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
+>> +Date: Wed, 4 Nov 2015 16:49:30 +0100
+>> +Subject: [PATCH] config_os_headers: Error Fix
+>> +
+>> +ERROR: This autoconf log indicates errors, it looked at host include
+>> +and/or library paths while determining system capabilities.
+>> +---
+>> + configure.d/config_os_libs2 | 4 ++--
+>> + 1 file changed, 2 insertions(+), 2 deletions(-)
+>> +
+>> +diff --git a/configure.d/config_os_libs2 b/configure.d/config_os_libs2
+>> +index 47491e2..e3647f9 100644
+>> +--- a/configure.d/config_os_libs2
+>> ++++ b/configure.d/config_os_libs2
+>> +@@ -226,10 +226,10 @@ if test "x$with_nl" != "xno"; then
+>> +     case $target_os in
+>> +     linux*) # Check for libnl (linux)
+>> +         netsnmp_save_CPPFLAGS="$CPPFLAGS"
+>> +-        CPPFLAGS="-I/usr/include/libnl3 $CPPFLAGS"
+>> ++        CPPFLAGS="$CPPFLAGS"
+>> +         NETSNMP_SEARCH_LIBS(nl_connect, nl-3,
+>> +             [AC_CHECK_HEADERS(netlink/netlink.h)
+>> +-            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES -I/usr/include/libnl3"],
+>> ++            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES"],
+>> +             [CPPFLAGS="$netsnmp_save_CPPFLAGS"], [], [], [LMIBLIBS])
+>> +         if test "x$ac_cv_header_netlink_netlink_h" != xyes; then
+>> +             NETSNMP_SEARCH_LIBS(nl_connect, nl, [
+>> +-- 
+>> +2.5.0
+>> +
+>> -- 
+>> 1.9.1
+>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> 
+> 
 
-ERROR: 34 issues were found in these recipes: clutter-gst-3.0 cryptodev-mod=
-ule ctdb gnome-panel jasper lcdproc libftdi mpd places pulseaudio python py=
-thon3 rain rygel samba shr-e-gadgets shr-wizard snort sysdig tmux uptime vb=
-oxguestdrivers xfce4-clipman-plugin
-
-Found differences:
-WARN: clutter-gst-3.0: clutter-gst-3.0 rdepends on libcap, but it isn't a b=
-uild dependency?
-WARN: clutter-gst-3.0: clutter-gst-3.0 rdepends on libgudev, but it isn't a=
- build dependency?
-WARN: clutter-gst-3.0: clutter-gst-3.0 rdepends on libudev, but it isn't a =
-build dependency?
-WARN: ctdb: ctdb rdepends on libtdb, but it isn't a build dependency?
-WARN: gnome-panel: gnome-panel rdepends on dbus-lib, but it isn't a build d=
-ependency?
-WARN: jasper: jasper-bin rdepends on libgl-mesa, but it isn't a build depen=
-dency?
-WARN: jasper: jasper-bin rdepends on libglu, but it isn't a build dependenc=
-y?
-WARN: jasper: jasper-bin rdepends on mesa-glut, but it isn't a build depend=
-ency?
-WARN: libftdi: libftdi rdepends on libgcc, but it isn't a build dependency?
-WARN: libftdi: libftdi rdepends on libstdc++, but it isn't a build dependen=
-cy?
-WARN: mpd: mpd rdepends on libupnp, but it isn't a build dependency?
-WARN: places: places rdepends on luajit, but it isn't a build dependency?
-WARN: python: python-tkinter rdepends on glibc, but it isn't a build depend=
-ency?
-WARN: python: python-tkinter rdepends on libpython2, but it isn't a build d=
-ependency?
-WARN: python: python-tkinter rdepends on tcl-lib, but it isn't a build depe=
-ndency?
-WARN: python3: python3-tkinter rdepends on glibc, but it isn't a build depe=
-ndency?
-WARN: python3: python3-tkinter rdepends on libpython3, but it isn't a build=
- dependency?
-WARN: python3: python3-tkinter rdepends on tcl-lib, but it isn't a build de=
-pendency?
-WARN: rain: rain rdepends on luajit, but it isn't a build dependency?
-WARN: rygel: rygel-plugin-media-export rdepends on libunistring, but it isn=
-'t a build dependency?
-WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
-WARN: shr-e-gadgets: shr-e-gadgets rdepends on luajit, but it isn't a build=
- dependency?
-WARN: shr-wizard: shr-wizard rdepends on luajit, but it isn't a build depen=
-dency?
-WARN: snort: snort rdepends on liblzma, but it isn't a build dependency?
-WARN: sysdig: sysdig rdepends on luajit, but it isn't a build dependency?
-WARN: tmux: tmux rdepends on libutempter, but it isn't a build dependency?
-WARN: uptime: uptime rdepends on luajit, but it isn't a build dependency?
-WARN: xfce4-clipman-plugin: xfce4-clipman-plugin rdepends on qrencode, but =
-it isn't a build dependency?
-WARN: cryptodev-module: kernel-module-cryptodev rdepends on kernel-3.19.5-y=
-octo-tiny, but it isn't a build dependency?
-WARN: vboxguestdrivers: kernel-module-vboxguest rdepends on kernel-3.19.5-y=
-octo-tiny, but it isn't a build dependency?
-WARN: vboxguestdrivers: kernel-module-vboxsf rdepends on kernel-3.19.5-yoct=
-o-tiny, but it isn't a build dependency?
-WARN: vboxguestdrivers: kernel-module-vboxvideo rdepends on kernel-3.19.5-y=
-octo-tiny, but it isn't a build dependency?
-Found errors:
-ERROR: lcdproc: lcdd-driver-lirc package isn't created when building with m=
-inimal dependencies?
-ERROR: pulseaudio: pulseaudio-module-lirc package isn't created when buildi=
-ng with minimal dependencies?
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---WhfpMioaduB5tiZL
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlZvEpIACgkQN1Ujt2V2gBwnYwCfU1Qa/0GeqC5Ha87B9/kv14br
-i4MAniqPPNItTrusOVne5fL3qIv/yfHl
-=SLwE
------END PGP SIGNATURE-----
-
---WhfpMioaduB5tiZL--
