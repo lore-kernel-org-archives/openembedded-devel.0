@@ -1,58 +1,39 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
-	[209.85.220.52])
-	by mail.openembedded.org (Postfix) with ESMTP id A0FBC6FFD4
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 22E8E6FF72
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 12:31:48 +0000 (UTC)
-Received: by mail-pa0-f52.google.com with SMTP id wq6so4207805pac.1
+	Tue, 15 Dec 2015 12:40:56 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id p66so88861160wmp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 04:31:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=h3ufZT7Pqj67r/igZ32/QxjwWXoUqhB0iGocJdcqgnE=;
-	b=yY0ptiCK/PWuj/YfkQw/ZlTN8b1Jb2QVF+sjbxSS3iTOa1BjemyhZtIPtYykcoNBXu
-	s/3gEEhWhnw9Myel29wAAMVrR7VR92PQ8eBXb1IYMc14oTxx7Q9DsUxgLM5yodSFzu2n
-	k1gpY78Ak5apFQoHhqSa2bPG3acn17F1//5jCwhF+pDt8YsV8ATWznLB9hEaRKlJEpnw
-	JwBU856QQDrNZijbSGKAHSQgYIPEKwjxLxLt8mcpTSzi9iUjXdEIhi21hzsHiuLtQtIz
-	hQHRGMxlXPFBa4NL0odooUy6NXEzxwM2oFZ5LOqElcEVC8z7gxx0/zV4aW1RZR+Uat/x
-	AaRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=h3ufZT7Pqj67r/igZ32/QxjwWXoUqhB0iGocJdcqgnE=;
-	b=f+s1njxxlxeAWF6ced7z8VkbM4EyHSX2CSuzcZTzW1YIVFOT5yRpBExLHliLSJVrrX
-	bhYUzq3dzaiRRWqwO791oNQuOr8gBh4bCZDvmTaleVyHeCYYq43rWWiISx3lgOZxJn7R
-	lvSmgmiDWXSaC/muh354Ft8Mk4b7nXUUlZQRfwiEwksGAwQMlc2zerR176AYznW3a4AM
-	4yxl4qbbRJiFDi+PBZe0WsF9RIB42vzKogpHNsv/rfVmQf9bZg8Q3UN4c3XZSPMT83DZ
-	RGeZySgITDVlxy/3YRpUS7Sxe+Jk+/rU520HEOQApfGOSXoSn5BxvM60HHOuw83WmTKX
-	1JDw==
-X-Gm-Message-State: ALoCoQkVv0p0zFtrR88sYXNl4+OC/w/yT8DoEI4L5z2DUkAiSXr8c85UItsdGdgssbMXwdnbUmSX65crW+lwkFwn0JajR/oOLA==
-X-Received: by 10.67.1.103 with SMTP id bf7mr53748532pad.147.1450182709199;
-	Tue, 15 Dec 2015 04:31:49 -0800 (PST)
-Received: from mail-pf0-f176.google.com (mail-pf0-f176.google.com.
-	[209.85.192.176]) by smtp.gmail.com with ESMTPSA id
-	dz6sm2164780pab.19.2015.12.15.04.31.47
+	Tue, 15 Dec 2015 04:40:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=/HVv7Q681ol5HaG2+DD4nVu7/gOn/dXQk5Z/IETc7ZI=;
+	b=zzPVtwK/sh5WNBycHwXWp42R/PQ1eu8sBVUPAm4ZaOL1xzIvWDGbMH3EKqteGLn3JU
+	3d4whe3ELeyuAX85kaqT/m/Z1vVM85c+OJPRHJWQhX2rjfINBqF0jjwg5wNNIPTdhjub
+	XTPyGyrv245jU3Z24x1WhWBB4BofHTWxIEusrJTV2Mwp4PC/mBYQHI6H1J5Gwso9Pbad
+	ruRb+VcDVyoKJBkqbUUfzDCnGFU4VfjX/40EnVCrzyw2O4DqgSAS218ZAwPo63VEtKHc
+	Rz4QYjOrm2wlP0mO14z7kVt0HmRUj2jbLOZZRsy55eIHTNlMv3tQaszrE6Q43BGHtsJG
+	iFCQ==
+X-Received: by 10.194.185.42 with SMTP id ez10mr51013652wjc.82.1450183257039; 
+	Tue, 15 Dec 2015 04:40:57 -0800 (PST)
+Received: from walter.muppets.liwing.de (p578b540c.dip0.t-ipconnect.de.
+	[87.139.84.12]) by smtp.gmail.com with ESMTPSA id
+	u134sm20899029wmd.0.2015.12.15.04.40.56
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 15 Dec 2015 04:31:47 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-pf0-f176.google.com with SMTP id u66so4140148pfb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 04:31:47 -0800 (PST)
-MIME-Version: 1.0
-X-Received: by 10.98.16.84 with SMTP id y81mr31672551pfi.98.1450182707316;
-	Tue, 15 Dec 2015 04:31:47 -0800 (PST)
-Received: by 10.66.72.229 with HTTP; Tue, 15 Dec 2015 04:31:47 -0800 (PST)
-In-Reply-To: <97430B74-EFAB-4C2E-BB83-D8695FF14CB8@gmail.com>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 15 Dec 2015 04:40:56 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2104\))
+X-Pgp-Agent: GPGMail 2.5.2
+From: Jens Rehsack <rehsack@gmail.com>
+In-Reply-To: <CAP9ODKpFa5V__us5s+9WY7GHcyvzXT-5U_wzzp8cNmwW5UzYhw@mail.gmail.com>
+Date: Tue, 15 Dec 2015 13:40:54 +0100
+Message-Id: <0A579224-B53A-40F8-9C7E-270C6D9D9B4A@gmail.com>
 References: <97430B74-EFAB-4C2E-BB83-D8695FF14CB8@gmail.com>
-Date: Tue, 15 Dec 2015 10:31:47 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKpFa5V__us5s+9WY7GHcyvzXT-5U_wzzp8cNmwW5UzYhw@mail.gmail.com>
-Message-ID: <CAP9ODKpFa5V__us5s+9WY7GHcyvzXT-5U_wzzp8cNmwW5UzYhw@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+	<CAP9ODKpFa5V__us5s+9WY7GHcyvzXT-5U_wzzp8cNmwW5UzYhw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.2104)
 Subject: Re: [meta-java][PATCH] openjdk-8: fix rewrite QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -66,38 +47,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2015 12:31:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 15 Dec 2015 12:40:57 -0000
+X-Groupsio-MsgNum: 59029
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_1D886E62-B574-45FA-9A33-785ADF90DD44";
+	protocol="application/pgp-signature"; micalg=pgp-sha512
+
+--Apple-Mail=_1D886E62-B574-45FA-9A33-785ADF90DD44
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-On Sat, Dec 12, 2015 at 7:36 AM, Jens Rehsack <rehsack@gmail.com> wrote:
->
-> Fix bitbake warnings from variable renaming like
->
->     Variable key FILES_${PN} (${bindir}/* ${sbindir}/* ${libexecdir}/* ${=
-libdir}/lib*${SOLIBS} ${sysconfdir} ${sharedstatedir} ${localstatedir} ${ba=
-se_bindir}/* ${base_sbindir}/* ${base_libdir}/*${SOLIBS} ${base_prefix}/lib=
-/udev/rules.d ${prefix}/lib/udev/rules.d ${datadir}/${BPN} ${libdir}/${BPN}=
-/* ${datadir}/pixmaps ${datadir}/applications ${datadir}/idl ${datadir}/omf=
- ${datadir}/sounds ${libdir}/bonobo/servers) replaces original key FILES_op=
-enjre-8 (    ${JRE_HOME}/bin/[a-z]*     ${JRE_HOME}/lib/[a-z]*     ${JRE_HO=
-ME}/LICENSE     ${JRE_HOME}/release ).
->
-> It is caused by using FILES_${PN} and FILES_{JDKPN} or FILES_${JREPN},
-> respectively. Moving FILES_{JDKPN} to openjdk-8_%.bb and FILES_${JREPN} t=
-o
-> openjre-8_%.bb to allow consequently use FILES_${PN}.
->
-> Signed-off-by: Jens Rehsack <sno@netbsd.org>
 
-Looking at the proposed change, it seems it would be better to squash
-the JDK and JRE installation to a single recipe and do the proper
-split using the packaging.
+> Am 15.12.2015 um 13:31 schrieb Otavio Salvador =
+<otavio.salvador@ossystems.com.br>:
+>=20
+> On Sat, Dec 12, 2015 at 7:36 AM, Jens Rehsack <rehsack@gmail.com> =
+wrote:
+>>=20
+>> Fix bitbake warnings from variable renaming like
+>>=20
+>>    Variable key FILES_${PN} (${bindir}/* ${sbindir}/* ${libexecdir}/* =
+${libdir}/lib*${SOLIBS} ${sysconfdir} ${sharedstatedir} ${localstatedir} =
+${base_bindir}/* ${base_sbindir}/* ${base_libdir}/*${SOLIBS} =
+${base_prefix}/lib/udev/rules.d ${prefix}/lib/udev/rules.d =
+${datadir}/${BPN} ${libdir}/${BPN}/* ${datadir}/pixmaps =
+${datadir}/applications ${datadir}/idl ${datadir}/omf ${datadir}/sounds =
+${libdir}/bonobo/servers) replaces original key FILES_openjre-8 (    =
+${JRE_HOME}/bin/[a-z]*     ${JRE_HOME}/lib/[a-z]*     =
+${JRE_HOME}/LICENSE     ${JRE_HOME}/release ).
+>>=20
+>> It is caused by using FILES_${PN} and FILES_{JDKPN} or =
+FILES_${JREPN},
+>> respectively. Moving FILES_{JDKPN} to openjdk-8_%.bb and =
+FILES_${JREPN} to
+>> openjre-8_%.bb to allow consequently use FILES_${PN}.
+>>=20
+>> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+>=20
+> Looking at the proposed change, it seems it would be better to squash
+> the JDK and JRE installation to a single recipe and do the proper
+> split using the packaging.
+>=20
+> Do you think this is reasonable?
 
-Do you think this is reasonable?
+I split openjdk-8/openjre-8 because of weird behavior wrt.
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+PREFERRED_PROVIDER_java2-runtime =3D "openjdk-8-jre"
 
+but I think with all the things I learned during packaging openjdk-8
+and nqp/perl6 I can retry.
+
+This will require lots of tests, so unfortunately it's unlikely
+to manage it this year - maybe even not before our planned HP1 update
+release.
+
+Cheers
+--
+Jens Rehsack - rehsack@gmail.com
+
+
+--Apple-Mail=_1D886E62-B574-45FA-9A33-785ADF90DD44
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iQIcBAEBCgAGBQJWcApXAAoJEESZlq7c5QqdkkEP/3q4xkodwcrOCjG2o+Lyx6fr
+FgHTGh5paPsKSBSKzPUE9zFX8dYv8cbUdhI03qbtojjeYeDctEbjfKFH04CbX2gK
+5aH+k+2K8GKf71eX9BwI0n37HoKGCkq0n37dond73CK4W9PgG11W5UCcT0dYo4QM
+piyICz1fSUG1NEmCD5CuTjBu0o9rgpkomT5whzZn2tFnFggArRIMdNaAm1kpgtPz
+4IzDVTf0Uz6pIoSO22W6KyOyIgPZTK47QXe6hPSspFIJfhrhhxEAXKAbQkSH90+F
+f9VH3cwJp6aogYlIzZjCIyTl8iWuZNlpuq+WHv79jpH0aKt4PDgELlWNhXazI5+I
+RJpN9aHFgO1s5ZDzmhLXEOGFscC+3XYLALAgZSPtPM56Z5h2cQk1bxUSiLJIE9+/
+jCElgE2/wxNTu354z7wp3hklh5dyfxoGj/n2+KOMchif3/cFDOQXNdCntbd6msQK
+3TEmi7dBA5XySGtr1xRJbe7tI7RzI77FP9NbXLP1lvvSvTsmlJ49mLD4MPhFnJfj
+N4RgL6rgMBnytd3E3uuna3GQpC8O3ccxrWHExcRIGoo2k9ZwwHYC3Sr6QDbFRNMN
+UK8ndNBverGadpOvHXblstwcG/9b2u0p+cz+1x2/StHTXGkgQEpb3gO1pUD8d3vj
+TgG78oQrPqQpOxw0tgKM
+=lBpp
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_1D886E62-B574-45FA-9A33-785ADF90DD44--
