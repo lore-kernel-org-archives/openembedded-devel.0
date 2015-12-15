@@ -1,36 +1,59 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-io0-f193.google.com (mail-io0-f193.google.com
-	[209.85.223.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A30A7317D
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
+	[209.85.220.52])
+	by mail.openembedded.org (Postfix) with ESMTP id A0FBC6FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 11:32:56 +0000 (UTC)
-Received: by mail-io0-f193.google.com with SMTP id o67so1483415iof.2
+	Tue, 15 Dec 2015 12:31:48 +0000 (UTC)
+Received: by mail-pa0-f52.google.com with SMTP id wq6so4207805pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2015 03:32:57 -0800 (PST)
+	Tue, 15 Dec 2015 04:31:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	bh=O5cP4wnE4GnMhyDkVG21XUtRiyNtSoFQ80cWeG7iKDw=;
-	b=iqGvsiSCgxY4YhtmFkTumDHiJx2CW70Iio3rwkO8441rs8txt2XpOS09O6AdSI6xhY
-	PDl6mObg1Pb8wRzZPc9DKJr9pOCfwKUvMK15FBceO2lLc3Ys54q+UbFC4r3ikNkChvxF
-	y869OHpYnuMGNmS/l0mhDkuu601lJ/Thf4al4aWFJXv9AY0aio3gAoHzH4INSbWYIOVa
-	4QudHgRO5z7ze2T8qm01m/UtcJaHUwHb58xEEXxWBNcXwMMeaIzBHuGhHG67slewpdAG
-	aaOPhJ6OviDvvs3hOoMDtYZQW3dt4j9guCeGhO4HqDXqD6SlcR4tcXxSwEmMlQ4+0qTo
-	774w==
+	bh=h3ufZT7Pqj67r/igZ32/QxjwWXoUqhB0iGocJdcqgnE=;
+	b=yY0ptiCK/PWuj/YfkQw/ZlTN8b1Jb2QVF+sjbxSS3iTOa1BjemyhZtIPtYykcoNBXu
+	s/3gEEhWhnw9Myel29wAAMVrR7VR92PQ8eBXb1IYMc14oTxx7Q9DsUxgLM5yodSFzu2n
+	k1gpY78Ak5apFQoHhqSa2bPG3acn17F1//5jCwhF+pDt8YsV8ATWznLB9hEaRKlJEpnw
+	JwBU856QQDrNZijbSGKAHSQgYIPEKwjxLxLt8mcpTSzi9iUjXdEIhi21hzsHiuLtQtIz
+	hQHRGMxlXPFBa4NL0odooUy6NXEzxwM2oFZ5LOqElcEVC8z7gxx0/zV4aW1RZR+Uat/x
+	AaRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=h3ufZT7Pqj67r/igZ32/QxjwWXoUqhB0iGocJdcqgnE=;
+	b=f+s1njxxlxeAWF6ced7z8VkbM4EyHSX2CSuzcZTzW1YIVFOT5yRpBExLHliLSJVrrX
+	bhYUzq3dzaiRRWqwO791oNQuOr8gBh4bCZDvmTaleVyHeCYYq43rWWiISx3lgOZxJn7R
+	lvSmgmiDWXSaC/muh354Ft8Mk4b7nXUUlZQRfwiEwksGAwQMlc2zerR176AYznW3a4AM
+	4yxl4qbbRJiFDi+PBZe0WsF9RIB42vzKogpHNsv/rfVmQf9bZg8Q3UN4c3XZSPMT83DZ
+	RGeZySgITDVlxy/3YRpUS7Sxe+Jk+/rU520HEOQApfGOSXoSn5BxvM60HHOuw83WmTKX
+	1JDw==
+X-Gm-Message-State: ALoCoQkVv0p0zFtrR88sYXNl4+OC/w/yT8DoEI4L5z2DUkAiSXr8c85UItsdGdgssbMXwdnbUmSX65crW+lwkFwn0JajR/oOLA==
+X-Received: by 10.67.1.103 with SMTP id bf7mr53748532pad.147.1450182709199;
+	Tue, 15 Dec 2015 04:31:49 -0800 (PST)
+Received: from mail-pf0-f176.google.com (mail-pf0-f176.google.com.
+	[209.85.192.176]) by smtp.gmail.com with ESMTPSA id
+	dz6sm2164780pab.19.2015.12.15.04.31.47
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 15 Dec 2015 04:31:47 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-pf0-f176.google.com with SMTP id u66so4140148pfb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Dec 2015 04:31:47 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.107.154.131 with SMTP id c125mr12047705ioe.148.1450179177470;
-	Tue, 15 Dec 2015 03:32:57 -0800 (PST)
-Received: by 10.36.25.81 with HTTP; Tue, 15 Dec 2015 03:32:57 -0800 (PST)
-In-Reply-To: <1448525199-27504-3-git-send-email-schnitzeltony@googlemail.com>
-References: <1448525199-27504-1-git-send-email-schnitzeltony@googlemail.com>
-	<1448525199-27504-3-git-send-email-schnitzeltony@googlemail.com>
-Date: Tue, 15 Dec 2015 12:32:57 +0100
-Message-ID: <CALbNGRRa8dVGhY_OUvk0v+wS2YiNq+wYASpr0B87R+WGXioTRg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-qt5][master 2/2] align target qmake paths/mkspec
+X-Received: by 10.98.16.84 with SMTP id y81mr31672551pfi.98.1450182707316;
+	Tue, 15 Dec 2015 04:31:47 -0800 (PST)
+Received: by 10.66.72.229 with HTTP; Tue, 15 Dec 2015 04:31:47 -0800 (PST)
+In-Reply-To: <97430B74-EFAB-4C2E-BB83-D8695FF14CB8@gmail.com>
+References: <97430B74-EFAB-4C2E-BB83-D8695FF14CB8@gmail.com>
+Date: Tue, 15 Dec 2015 10:31:47 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKpFa5V__us5s+9WY7GHcyvzXT-5U_wzzp8cNmwW5UzYhw@mail.gmail.com>
+Message-ID: <CAP9ODKpFa5V__us5s+9WY7GHcyvzXT-5U_wzzp8cNmwW5UzYhw@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH] openjdk-8: fix rewrite QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,192 +66,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2015 11:32:57 -0000
+X-List-Received-Date: Tue, 15 Dec 2015 12:31:51 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 26, 2015 at 9:06 AM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> ---
->  recipes-qt/qt5/nativesdk-qtbase_git.bb             |  4 +-
->  recipes-qt/qt5/qtbase-native_git.bb                |  5 +-
->  ...configure-paths-for-target-qmake-properly.patch | 76 ++++++++++++++++=
-++++++
->  ...build-uic.patch =3D> 0009-Always-build-uic.patch} |  0
->  ...xternal-hostbindir-option-for-native-sdk.patch} |  0
->  recipes-qt/qt5/qtbase_git.bb                       |  1 +
->  6 files changed, 82 insertions(+), 4 deletions(-)
->  create mode 100644 recipes-qt/qt5/qtbase/0008-configure-paths-for-target=
--qmake-properly.patch
->  rename recipes-qt/qt5/qtbase/{0008-Always-build-uic.patch =3D> 0009-Alwa=
-ys-build-uic.patch} (100%)
->  rename recipes-qt/qt5/qtbase/{0009-Add-external-hostbindir-option-for-na=
-tive-sdk.patch =3D> 0010-Add-external-hostbindir-option-for-native-sdk.patc=
-h} (100%)
+On Sat, Dec 12, 2015 at 7:36 AM, Jens Rehsack <rehsack@gmail.com> wrote:
 >
-> diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nati=
-vesdk-qtbase_git.bb
-> index f712af7..3d4900e 100644
-> --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-> +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-> @@ -33,8 +33,8 @@ SRC_URI +=3D "\
+> Fix bitbake warnings from variable renaming like
 >
->  # common for qtbase-native and nativesdk-qtbase
->  SRC_URI +=3D " \
-> -    file://0008-Always-build-uic.patch \
-> -    file://0009-Add-external-hostbindir-option-for-native-sdk.patch \
-> +    file://0009-Always-build-uic.patch \
-> +    file://0010-Add-external-hostbindir-option-for-native-sdk.patch \
->  "
+>     Variable key FILES_${PN} (${bindir}/* ${sbindir}/* ${libexecdir}/* ${=
+libdir}/lib*${SOLIBS} ${sysconfdir} ${sharedstatedir} ${localstatedir} ${ba=
+se_bindir}/* ${base_sbindir}/* ${base_libdir}/*${SOLIBS} ${base_prefix}/lib=
+/udev/rules.d ${prefix}/lib/udev/rules.d ${datadir}/${BPN} ${libdir}/${BPN}=
+/* ${datadir}/pixmaps ${datadir}/applications ${datadir}/idl ${datadir}/omf=
+ ${datadir}/sounds ${libdir}/bonobo/servers) replaces original key FILES_op=
+enjre-8 (    ${JRE_HOME}/bin/[a-z]*     ${JRE_HOME}/lib/[a-z]*     ${JRE_HO=
+ME}/LICENSE     ${JRE_HOME}/release ).
 >
->  # CMake's toolchain configuration of nativesdk-qtbase
-> diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-=
-native_git.bb
-> index e27d34b..14e8516 100644
-> --- a/recipes-qt/qt5/qtbase-native_git.bb
-> +++ b/recipes-qt/qt5/qtbase-native_git.bb
-> @@ -23,12 +23,13 @@ SRC_URI +=3D "\
->      file://0005-configure-bump-path-length-from-256-to-512-character.pat=
-ch \
->      file://0006-QOpenGLPaintDevice-sub-area-support.patch \
->      file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.pat=
-ch \
-> +    file://0008-configure-paths-for-target-qmake-properly.patch \
->  "
+> It is caused by using FILES_${PN} and FILES_{JDKPN} or FILES_${JREPN},
+> respectively. Moving FILES_{JDKPN} to openjdk-8_%.bb and FILES_${JREPN} t=
+o
+> openjre-8_%.bb to allow consequently use FILES_${PN}.
 >
->  # common for qtbase-native and nativesdk-qtbase
->  SRC_URI +=3D " \
-> -    file://0008-Always-build-uic.patch \
-> -    file://0009-Add-external-hostbindir-option-for-native-sdk.patch \
-> +    file://0009-Always-build-uic.patch \
-> +    file://0010-Add-external-hostbindir-option-for-native-sdk.patch \
->  "
->
->  CLEANBROKEN =3D "1"
-> diff --git a/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmake-=
-properly.patch b/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmak=
-e-properly.patch
-> new file mode 100644
-> index 0000000..efd27a5
-> --- /dev/null
-> +++ b/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmake-properl=
-y.patch
-> @@ -0,0 +1,76 @@
-> +From fb519b08f564a8a640b1b2f2b6a3bd54a83e19e8 Mon Sep 17 00:00:00 2001
-> +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlem=
-ail.com>
-> +Date: Fri, 13 Nov 2015 12:36:11 +0100
-> +Subject: [PATCH] configure paths/mkspecs for target qmake properly
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +to use this patch in all qtbase/qtbase-native(sdk) changes ore made
-> +conditionally based on QT_CROSS_COMPILE
-> +
-> +Upstream-Status: Inappropriate [OE specific]
-> +
-> +Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> +---
-> + configure | 23 +++++++++++++++++++----
-> + 1 file changed, 19 insertions(+), 4 deletions(-)
-> +
-> +diff --git a/configure b/configure
-> +index 6edfffd..de74a29 100755
-> +--- a/configure
-> ++++ b/configure
-> +@@ -3857,8 +3857,13 @@ if [ "$CFG_COMPILE_EXAMPLES" =3D "yes" ]; then
-> +     QMAKE_CONFIG=3D"$QMAKE_CONFIG compile_examples"
-> + fi
-> +
-> +-shortxspec=3D`echo $XQMAKESPEC | sed "s,^${relpath}/mkspecs/,,"`
-> +-shortspec=3D`echo $QMAKESPEC | sed "s,^${relpath}/mkspecs/,,"`
-> ++if [ "$QT_CROSS_COMPILE" =3D "yes" ] ; then
-> ++    shortxspec=3Dlinux-g++
-> ++    shortspec=3Dlinux-g++
-> ++else
-> ++    shortxspec=3D`echo $XQMAKESPEC | sed "s,^${relpath}/mkspecs/,,"`
-> ++    shortspec=3D`echo $QMAKESPEC | sed "s,^${relpath}/mkspecs/,,"`
-> ++fi
-> +
-> + QT_CONFIGURE_STR_OFF=3D0
-> +
-> +@@ -3891,7 +3896,11 @@ QT_CONFIGURE_STRS_ALL=3D$QT_CONFIGURE_STRS
-> +
-> + QT_CONFIGURE_STR_OFFSETS=3D
-> + QT_CONFIGURE_STRS=3D
-> +-addConfStr "$CFG_SYSROOT"
-> ++if [ "$QT_CROSS_COMPILE" =3D "yes" ] ; then
-> ++    addConfStr ""
-> ++else
-> ++    addConfStr "$CFG_SYSROOT"
-> ++fi
-> + addConfStr "$QT_REL_HOST_BINS"
-> + addConfStr "$QT_REL_HOST_LIBS"
-> + addConfStr "$QT_REL_HOST_DATA"
-> +@@ -3903,6 +3912,12 @@ addConfStr "$shortspec"
-> + #----------------------------------------------------------------------=
----------
-> + [ -d "$outpath/src/corelib/global" ] || mkdir -p "$outpath/src/corelib/=
-global"
-> +
-> ++if [ "$QT_CROSS_COMPILE" =3D "yes" ] ; then
-> ++    QT_TARGET_PREFIX=3D$QT_EXT_PREFIX
-> ++else
-> ++    QT_TARGET_PREFIX=3D$QT_HOST_PREFIX
-> ++fi
-> ++
-> + cat > "$outpath/src/corelib/global/qconfig.cpp.new" <<EOF
-> + /* License Info */
-> + static const char qt_configure_licensee_str          [256 + 12] =3D "qt=
-_lcnsuser=3D$Licensee";
-> +@@ -3915,7 +3930,7 @@ static const char qt_configure_installation       =
-   [12+11]    =3D "qt_instdate=3D2
-> + static const char qt_configure_prefix_path_str       [512 + 12] =3D "qt=
-_prfxpath=3D$QT_INSTALL_PREFIX";
-> + #ifdef QT_BUILD_QMAKE
-> + static const char qt_configure_ext_prefix_path_str   [512 + 12] =3D "qt=
-_epfxpath=3D$QT_EXT_PREFIX";
-> +-static const char qt_configure_host_prefix_path_str  [512 + 12] =3D "qt=
-_hpfxpath=3D$QT_HOST_PREFIX";
-> ++static const char qt_configure_host_prefix_path_str  [512 + 12] =3D "qt=
-_hpfxpath=3D$QT_TARGET_PREFIX";
-> + #endif
-> +
-> + static const short qt_configure_str_offsets[] =3D {
-> +--
-> +2.1.0
-> +
-> diff --git a/recipes-qt/qt5/qtbase/0008-Always-build-uic.patch b/recipes-=
-qt/qt5/qtbase/0009-Always-build-uic.patch
-> similarity index 100%
-> rename from recipes-qt/qt5/qtbase/0008-Always-build-uic.patch
-> rename to recipes-qt/qt5/qtbase/0009-Always-build-uic.patch
-> diff --git a/recipes-qt/qt5/qtbase/0009-Add-external-hostbindir-option-fo=
-r-native-sdk.patch b/recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-opt=
-ion-for-native-sdk.patch
-> similarity index 100%
-> rename from recipes-qt/qt5/qtbase/0009-Add-external-hostbindir-option-for=
--native-sdk.patch
-> rename to recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-n=
-ative-sdk.patch
-> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-> index fdc73e1..20627c8 100644
-> --- a/recipes-qt/qt5/qtbase_git.bb
-> +++ b/recipes-qt/qt5/qtbase_git.bb
-> @@ -19,6 +19,7 @@ SRC_URI +=3D "\
->      file://0005-configure-bump-path-length-from-256-to-512-character.pat=
-ch \
->      file://0006-QOpenGLPaintDevice-sub-area-support.patch \
->      file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.pat=
-ch \
-> +    file://0008-configure-paths-for-target-qmake-properly.patch \
->  "
->
->  DEPENDS +=3D "qtbase-native"
-> --
-> 2.1.0
->
-Ping
+> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+
+Looking at the proposed change, it seems it would be better to squash
+the JDK and JRE installation to a single recipe and do the proper
+split using the packaging.
+
+Do you think this is reasonable?
+
+--=20
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
