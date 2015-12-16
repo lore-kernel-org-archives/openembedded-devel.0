@@ -1,52 +1,24 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
-	[209.85.213.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 3DE826072C
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4BF276FFEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Dec 2015 09:21:48 +0000 (UTC)
-Received: by mail-ig0-f179.google.com with SMTP id ph11so134164523igc.1
+	Wed, 16 Dec 2015 10:03:34 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tBGA3YIT025510
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Dec 2015 01:21:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=Ry+GXUOEl5dvdb81qAlQAxXVtDhPKujb+tmQqJzt0Ys=;
-	b=btKsQg4CuL4LdNYK396BYhCGKeioaVe4bsATdLRcE2wrCuhY3jd2RZhqytA6I8DePT
-	jhDgEe47JX8VOEqrAg+kMoWuxd78slDCBv6QKrV9zz7VXabJeXPHpE4h/hkb9sk7eNaY
-	ooUn/lMON+QfCJgnBDVyMCSWSubVdS3UpCLLRShsMuO7leb+SmfKTu7ySeJVFE/0YJCS
-	pB73OKZMn2XGcJNEEIJb6/uB2Teq7ATdfaeiidcYJjjsaEWexKr32ujDRprC3QUcbg7h
-	k+x0pUJpoOj/pVhYIdz/apWyUNgppwb+M4Qbr0PZMWzAbi8SISpUZC3MK9UG4T8+IPd8
-	QERw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=Ry+GXUOEl5dvdb81qAlQAxXVtDhPKujb+tmQqJzt0Ys=;
-	b=kwgroAx1SWly0UeikrjqO8yuVZtroRum8sgxy73tvc7IbABA6+QxvxZ1AR5zr8Iqne
-	Acc8p77DRuI9vFxCeeFXz+3Ki0BorI3j8dxXjwAMg7znOVV91wRIuWWJfCFCnHIlAbP1
-	uEWBIsneWbpAoGAouPyR8kgd7yBIct+wFnFTYCIHSpcjdMB68Z5utf2+sXwUFnik73cQ
-	4gxkAIy5FHi4ZBS4gTb0r7DwzYhGIxrC39xAQyY3n14khJAj6E7w0ZfimhECC2HnxAbW
-	ZrYdal8qcsibRIT0gmzKSXnEafpHnOu5ZX4yS71s29b9WzUaYfKc4iMjbOmsACrr3Eqv
-	1QLw==
-X-Gm-Message-State: ALoCoQlGV0SW0rJPrMsLoZ58g3nLfpTsblFgzz6wd7VCZ45FGeZ3etUulZWHTOWNZi5gIDgHFFQslhVru8vFnmHffktwmHQuJlC8ntL/CqgWz1eDnYFUk/g=
-X-Received: by 10.107.3.154 with SMTP id e26mr6712362ioi.99.1450257709343;
-	Wed, 16 Dec 2015 01:21:49 -0800 (PST)
+	Wed, 16 Dec 2015 02:03:34 -0800
+Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 16 Dec 2015 02:03:33 -0800
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 16 Dec 2015 18:03:43 +0800
+Message-ID: <1450260223-19633-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received: by 10.107.136.141 with HTTP; Wed, 16 Dec 2015 01:21:29 -0800 (PST)
-In-Reply-To: <3230301C09DEF9499B442BBE162C5E48ABABDD6C@SESTOEX04.enea.se>
-References: <567039E1.5000205@linux.intel.com>
-	<3230301C09DEF9499B442BBE162C5E48ABABDD6C@SESTOEX04.enea.se>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 16 Dec 2015 09:21:29 +0000
-Message-ID: <CAJTo0LYO9ptJ4PDmR49N-Yw9TbTFGsuyCUBUc4zW2FLk2CNoWQ@mail.gmail.com>
-To: Sona Sarmadi <sona.sarmadi@enea.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	"openembedded-core@lists.openembedded.org"
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFC] Mark of upstream CVE patches
+Subject: [meta-java][PATCH] cacao-initial-native build issues on gcc 4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,28 +31,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2015 09:21:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 16 Dec 2015 10:03:41 -0000
+Content-Type: text/plain
 
-On 16 December 2015 at 09:03, Sona Sarmadi <sona.sarmadi@enea.com> wrote:
+From: Amy Fong <amy.fong@windriver.com>
 
-> We are supposed to have reference to the CVE identifier both in the patch
-> file/s
->  and the commit message(e.g.  xxx- CVE-2013-6435.pacth) according to the
-> guidelines
-> for "Patch name convention and commit message" in the Yocto
-> Wiki https://wiki.yoctoproject.org/wiki/Security.
->
-> If a patch address multiple CVEs, perhaps we should name the patch:
-> Fix-for-multiple-CVEs.patch and list all CVEs in the patch file.
->
-> Will this not solve the problem? Do you think there is still need for a
-> new tag "CVE"?
->
+The following error is seen when cacao-initial is built with gcc 4.4:
 
-I'd say a new tag is essential if we want to automate tooling, to reduce
-the chance of false-positives from simply searching the patch for something
-that looks like a CVE reference.
+  LOG: [0x00007f595fed3700] We received a SIGSEGV and tried to handle it, but we were |
+  LOG: [0x00007f595fed3700] unable to find a Java method at: |
+  LOG: [0x00007f595fed3700] |
+  LOG: [0x00007f595fed3700] PC=0x0000000000459a37 |
+  LOG: [0x00007f595fed3700] |
+  LOG: [0x00007f595fed3700] Dumping the current stacktrace: |
+          at java.lang.String.<clinit>()V(String.java:185) |
+  LOG: [0x00007f595fed3700] Exiting... |
+  Aborted (core dumped)
 
-Ross
+Adapting fix from the following (add -fno-strict-aliasing to CFLAGS):
+
+  2009-06-24 Andrew John Hughes <ahughes@redhat.com>
+
+  * patches/cacao/no-strict-aliasing.patch:
+  New patch to fix CACAO build on GCC 4.4 (see PR129).
+  * Makefile.am: Add new patch.
+  * HACKING: Update.
+
+Signed-off-by: Amy Fong <amy.fong@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ recipes-core/cacao/cacao-initial-native_0.98.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/recipes-core/cacao/cacao-initial-native_0.98.bb b/recipes-core/cacao/cacao-initial-native_0.98.bb
+index 2a8ced5..a26e686 100644
+--- a/recipes-core/cacao/cacao-initial-native_0.98.bb
++++ b/recipes-core/cacao/cacao-initial-native_0.98.bb
+@@ -41,3 +41,8 @@ do_configure_append() {
+ 
+ SRC_URI[md5sum] = "8b8907c8b925761c9410bcadb9705346"
+ SRC_URI[sha256sum] = "cb9363add825cedf77764fc49a223aaf43f0a9f485b711ba8c92f16b13fff188"
++
++do_configure_prepend() {
++        export CFLAGS="${CFLAGS} -fno-strict-aliasing"
++}
++
+-- 
+2.3.5
+
 
