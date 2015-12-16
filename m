@@ -1,33 +1,52 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id F0433605B3
+Return-Path: <ross.burton@intel.com>
+Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
+	[209.85.213.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 3DE826072C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Dec 2015 08:24:58 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tBG8OxZr028871
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 16 Dec 2015 00:24:59 -0800 (PST)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.84]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0248.002;
-	Wed, 16 Dec 2015 00:24:59 -0800
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
-Thread-Topic: [oe] [meta-networking][PATCH 0/7 v2] waf-samba: fix build
-	failure on targets unsupported by qemu
-Thread-Index: AQHRLFY7YSjkKlOYPEeIbxltYzSiY57LtR3QgAGjPUA=
-Date: Wed, 16 Dec 2015 08:24:58 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010C76D493@ALA-MBA.corp.ad.wrs.com>
-References: <cover.1447910888.git.jackie.huang@windriver.com>
-	<20151201163452.GB4384@mentor.com> 
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.144]
+	Wed, 16 Dec 2015 09:21:48 +0000 (UTC)
+Received: by mail-ig0-f179.google.com with SMTP id ph11so134164523igc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Dec 2015 01:21:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=Ry+GXUOEl5dvdb81qAlQAxXVtDhPKujb+tmQqJzt0Ys=;
+	b=btKsQg4CuL4LdNYK396BYhCGKeioaVe4bsATdLRcE2wrCuhY3jd2RZhqytA6I8DePT
+	jhDgEe47JX8VOEqrAg+kMoWuxd78slDCBv6QKrV9zz7VXabJeXPHpE4h/hkb9sk7eNaY
+	ooUn/lMON+QfCJgnBDVyMCSWSubVdS3UpCLLRShsMuO7leb+SmfKTu7ySeJVFE/0YJCS
+	pB73OKZMn2XGcJNEEIJb6/uB2Teq7ATdfaeiidcYJjjsaEWexKr32ujDRprC3QUcbg7h
+	k+x0pUJpoOj/pVhYIdz/apWyUNgppwb+M4Qbr0PZMWzAbi8SISpUZC3MK9UG4T8+IPd8
+	QERw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=Ry+GXUOEl5dvdb81qAlQAxXVtDhPKujb+tmQqJzt0Ys=;
+	b=kwgroAx1SWly0UeikrjqO8yuVZtroRum8sgxy73tvc7IbABA6+QxvxZ1AR5zr8Iqne
+	Acc8p77DRuI9vFxCeeFXz+3Ki0BorI3j8dxXjwAMg7znOVV91wRIuWWJfCFCnHIlAbP1
+	uEWBIsneWbpAoGAouPyR8kgd7yBIct+wFnFTYCIHSpcjdMB68Z5utf2+sXwUFnik73cQ
+	4gxkAIy5FHi4ZBS4gTb0r7DwzYhGIxrC39xAQyY3n14khJAj6E7w0ZfimhECC2HnxAbW
+	ZrYdal8qcsibRIT0gmzKSXnEafpHnOu5ZX4yS71s29b9WzUaYfKc4iMjbOmsACrr3Eqv
+	1QLw==
+X-Gm-Message-State: ALoCoQlGV0SW0rJPrMsLoZ58g3nLfpTsblFgzz6wd7VCZ45FGeZ3etUulZWHTOWNZi5gIDgHFFQslhVru8vFnmHffktwmHQuJlC8ntL/CqgWz1eDnYFUk/g=
+X-Received: by 10.107.3.154 with SMTP id e26mr6712362ioi.99.1450257709343;
+	Wed, 16 Dec 2015 01:21:49 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.107.136.141 with HTTP; Wed, 16 Dec 2015 01:21:29 -0800 (PST)
+In-Reply-To: <3230301C09DEF9499B442BBE162C5E48ABABDD6C@SESTOEX04.enea.se>
+References: <567039E1.5000205@linux.intel.com>
+	<3230301C09DEF9499B442BBE162C5E48ABABDD6C@SESTOEX04.enea.se>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 16 Dec 2015 09:21:29 +0000
+Message-ID: <CAJTo0LYO9ptJ4PDmR49N-Yw9TbTFGsuyCUBUc4zW2FLk2CNoWQ@mail.gmail.com>
+To: Sona Sarmadi <sona.sarmadi@enea.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 0/7 v2] waf-samba: fix build failure on targets unsupported by qemu
+	<openembedded-devel@lists.openembedded.org>,
+	"openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFC] Mark of upstream CVE patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,223 +59,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2015 08:25:00 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 Dec 2015 09:21:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On 16 December 2015 at 09:03, Sona Sarmadi <sona.sarmadi@enea.com> wrote:
 
+> We are supposed to have reference to the CVE identifier both in the patch
+> file/s
+>  and the commit message(e.g.  xxx- CVE-2013-6435.pacth) according to the
+> guidelines
+> for "Patch name convention and commit message" in the Yocto
+> Wiki https://wiki.yoctoproject.org/wiki/Security.
+>
+> If a patch address multiple CVEs, perhaps we should name the patch:
+> Fix-for-multiple-CVEs.patch and list all CVEs in the patch file.
+>
+> Will this not solve the problem? Do you think there is still need for a
+> new tag "CVE"?
+>
 
-> -----Original Message-----
-> From: Huang, Jie (Jackie)
-> Sent: Tuesday, December 15, 2015 3:09 PM
-> To: 'Joe MacDonald'
-> Cc: openembedded-devel@lists.openembedded.org
-> Subject: RE: [oe] [meta-networking][PATCH 0/7 v2] waf-samba: fix build fa=
-ilure on targets
-> unsupported by qemu
->=20
->=20
->=20
-> > -----Original Message-----
-> > From: Joe MacDonald [mailto:Joe_MacDonald@mentor.com]
-> > Sent: Wednesday, December 02, 2015 12:35 AM
-> > To: Huang, Jie (Jackie)
-> > Cc: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [meta-networking][PATCH 0/7 v2] waf-samba: fix build =
-failure on targets
-> > unsupported by qemu
-> >
-> > Hi Jackie,
-> >
-> > I tried pulling in this patch set from:
-> >
-> >    git://git.pokylinux.org/poky-contrib jhuang0/d_samba-rebase_151119-0
-> >
-> > and it quickly crashed into a patching error:
-> >
-> >    http://pastebin.com/k6f0M4c3
-> >
-> > Did you still want that branch considered for merging?
->=20
-> Sorry for late response, yes we still want these be merged,
-> It's a month ago when I rebase these patches, I am not surprised
-> It fails to patch, I will rebase again and re-send.
+I'd say a new tag is essential if we want to automate tooling, to reduce
+the chance of false-positives from simply searching the patch for something
+that looks like a CVE reference.
 
-Hi Joe,
-
-I verified that these still work for me without rebasing, and
-from your pasted logs, it failed at patching:
-05-fix-gecos-field-with-samlogon.patch
-
-which is not part of my fix, it was added along with samba 4.1.12
-recipe months ago, my patches were not started to patch yet :(
-
-So it should be some other things broke your builds, could you check
-again? Thanks!
-
-Thanks,
-Jackie
-
->=20
-> Thanks,
-> Jackie
->=20
-> >
-> > -J.
-> >
-> > [[oe] [meta-networking][PATCH 0/7 v2] waf-samba: fix build failure on t=
-argets unsupported by
-> qemu]
-> > On 15.11.19 (Thu 13:37) jackie.huang@windriver.com wrote:
-> >
-> > > From: Jackie Huang <jackie.huang@windriver.com>
-> > >
-> > > v2 comments:
-> > >
-> > > rebase since samba reladted packages are move to meta-networking
-> > > from meta-oe.
-> > >
-> > > Comments:
-> > >
-> > > samba and required packages started to use waf build
-> > > system since 4.x, and the waf bbclass use qemu user mode
-> > > to help configure checking by default, but not all targets
-> > > are supported by qemu user mode, so it definitely fail on those
-> > > targets (it failed on our fsl_t2xxx and cav-octeon3).
-> > >
-> > > The solution here it so use waf cross-answer mode to avoid
-> > > using qemu, but we need to prepare the cross-answers, it's
-> > > easy and error-prone if we try to get these cross-answers manually,
-> > > but fortunately, waf provides another mode to help generate
-> > > them in newer version, so upgrade related packages and
-> > > backport patches for samba (I also tried to upgrad samba
-> > > to 4.3.1, but it still doesn't work in my runtime testing
-> > > after some bug fixing, so I keep in the current version for
-> > > now, I may upgrade it sometime later if I get better understand
-> > > about the new version).
-> > >
-> > > Build tested on:
-> > >
-> > > intel-x86-64
-> > > qemux86
-> > > qemuarm
-> > > qemuarma9
-> > > qemuarm64
-> > > qemumips
-> > > qemumips64
-> > > fsl-ls20xx
-> > > fsl-t2xxx
-> > > xilinx-zynq
-> > > cav-octeon3
-> > >
-> > >
-> > > --
-> > > The following changes since commit ea319464b673cbf9a416b582dc4766faeb=
-998430:
-> > >
-> > >   vlc: add PACKAGECONFIG for samba, upnp, dvdnav, sftp, vorbis, dc139=
-4, dv1394, svg, svgdec
-> (2015-
-> > 11-16 21:50:11 +0100)
-> > >
-> > > are available in the git repository at:
-> > >
-> > >   git://git.pokylinux.org/poky-contrib jhuang0/d_samba-rebase_151119-=
-0
-> > >   http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=3Djhuang0/d_s=
-amba-rebase_151119-0
-> > >
-> > > Jackie Huang (7):
-> > >   libtdb: upgrade to 1.3.7
-> > >   libldb: upgrade to 1.1.21
-> > >   libtevent: upgrade to 0.9.25
-> > >   talloc: upgrade to 2.1.3
-> > >   samba: fix the incorrect tmpfiles installed directory
-> > >   samba: backport patches for cross-compiling
-> > >   waf-samba.bbclass: add cross-answers option and files
-> > >
-> > >  ...1-waf-sanitize-and-fix-added-cross-answer.patch |  60 ++++++++
-> > >  ...-Adds-a-new-mode-to-samba-cross-compiling.patch | 112 +++++++++++=
-+++
-> > >  ...-readability-of-cross-answers-generated-b.patch |  66 ++++++++
-> > >  ...wafsamba-CHECK_SIZEOF-cross-compile-frien.patch |  72 +++++++++
-> > >  .../0005-build-unify-and-fix-endian-tests.patch    | 169 +++++++++++=
-++++++++++
-> > >  ...006-avoid-using-colon-in-the-checking-msg.patch |  32 ++++
-> > >  ...sing-of-cross-answers-file-in-case-answer.patch |  36 +++++
-> > >  .../recipes-connectivity/samba/samba_4.1.12.bb     |  16 +-
-> > >  .../libldb/{libldb_1.1.17.bb =3D> libldb_1.1.21.bb}  |   4 +-
-> > >  .../libtdb/{libtdb_1.3.0.bb =3D> libtdb_1.3.7.bb}    |   4 +-
-> > >  .../{libtevent_0.9.21.bb =3D> libtevent_0.9.25.bb}   |   4 +-
-> > >  .../talloc/{talloc_2.1.1.bb =3D> talloc_2.1.3.bb}    |  18 +--
-> > >  meta-oe/classes/waf-samba.bbclass                  |  43 +++++-
-> > >  meta-oe/conf/layer.conf                            |   1 +
-> > >  meta-oe/files/waf-cross-answers/README             |   3 +
-> > >  .../waf-cross-answers/cross-answers-aarch64.txt    |  38 +++++
-> > >  .../files/waf-cross-answers/cross-answers-arm.txt  |  39 +++++
-> > >  .../files/waf-cross-answers/cross-answers-i586.txt |  39 +++++
-> > >  .../files/waf-cross-answers/cross-answers-i686.txt |  39 +++++
-> > >  .../files/waf-cross-answers/cross-answers-mips.txt |  39 +++++
-> > >  .../waf-cross-answers/cross-answers-mips64.txt     |  38 +++++
-> > >  .../waf-cross-answers/cross-answers-powerpc.txt    |  39 +++++
-> > >  .../waf-cross-answers/cross-answers-powerpc64.txt  |  39 +++++
-> > >  .../waf-cross-answers/cross-answers-x86_64.txt     |  38 +++++
-> > >  24 files changed, 965 insertions(+), 23 deletions(-)
-> > >  create mode 100644 meta-networking/recipes-connectivity/samba/samba-=
-4.1.12/0001-waf-
-> > sanitize-and-fix-added-cross-answer.patch
-> > >  create mode 100644 meta-networking/recipes-connectivity/samba/samba-=
-4.1.12/0002-Adds-a-
-> > new-mode-to-samba-cross-compiling.patch
-> > >  create mode 100644 meta-networking/recipes-connectivity/samba/samba-=
-4.1.12/0003-waf-
-> > improve-readability-of-cross-answers-generated-b.patch
-> > >  create mode 100644 meta-networking/recipes-connectivity/samba/samba-=
-4.1.12/0004-build-
-> make-
-> > wafsamba-CHECK_SIZEOF-cross-compile-frien.patch
-> > >  create mode 100644 meta-networking/recipes-connectivity/samba/samba-=
-4.1.12/0005-build-
-> unify-
-> > and-fix-endian-tests.patch
-> > >  create mode 100644 meta-networking/recipes-connectivity/samba/samba-=
-4.1.12/0006-avoid-
-> using-
-> > colon-in-the-checking-msg.patch
-> > >  create mode 100644 meta-networking/recipes-connectivity/samba/samba-=
-4.1.12/0007-waf-Fix-
-> > parsing-of-cross-answers-file-in-case-answer.patch
-> > >  rename meta-networking/recipes-support/libldb/{libldb_1.1.17.bb =3D>=
- libldb_1.1.21.bb} (92%)
-> > >  rename meta-networking/recipes-support/libtdb/{libtdb_1.3.0.bb =3D> =
-libtdb_1.3.7.bb} (87%)
-> > >  rename meta-networking/recipes-support/libtevent/{libtevent_0.9.21.b=
-b =3D> libtevent_0.9.25.bb}
-> > (86%)
-> > >  rename meta-networking/recipes-support/talloc/{talloc_2.1.1.bb =3D> =
-talloc_2.1.3.bb} (69%)
-> > >  create mode 100644 meta-oe/files/waf-cross-answers/README
-> > >  create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-aar=
-ch64.txt
-> > >  create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-arm=
-.txt
-> > >  create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-i58=
-6.txt
-> > >  create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-i68=
-6.txt
-> > >  create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-mip=
-s.txt
-> > >  create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-mip=
-s64.txt
-> > >  create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-pow=
-erpc.txt
-> > >  create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-pow=
-erpc64.txt
-> > >  create mode 100644 meta-oe/files/waf-cross-answers/cross-answers-x86=
-_64.txt
-> > >
-> > --
-> > -Joe MacDonald.
-> > :wq
+Ross
 
