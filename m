@@ -1,24 +1,33 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4BF276FFEC
+Return-Path: <vomegaz@gmail.com>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 7FF3B6FFCD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Dec 2015 10:03:34 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tBGA3YIT025510
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Wed, 16 Dec 2015 10:08:15 +0000 (UTC)
+Received: by mail-wm0-f49.google.com with SMTP id l126so30875549wml.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Dec 2015 02:03:34 -0800
-Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 16 Dec 2015 02:03:33 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 16 Dec 2015 18:03:43 +0800
-Message-ID: <1450260223-19633-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [meta-java][PATCH] cacao-initial-native build issues on gcc 4.4
+	Wed, 16 Dec 2015 02:08:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=FO0DzWG7IAPbnVLsq3gx3af9vBnbyJhLPC6YJoL1RME=;
+	b=oPPlP4MUUl/yZvgCowyEhoYxkvBB/WFiLdVkjAQDeD6XeOhp5O4WwN3SB+uokBGGnX
+	qVAc6Y3qXJ6WqVqytMgD4RVf1cExM+/IqGGvcNTYA+bBu/uqCcSagBR7iaxCIrv2z19j
+	6yLbrLs9BK9zyxJv315SOOcw57Z4CyuzfiFFChrW8MTB/y3RoEFTjNPg91MyB3kaFRZv
+	P/PjeWd8tvt/fXj6Fqj0naBGd9Gg6ceApKJxgSWqzDq7Ch6MJFsld3ux1OVO0jlTTWzd
+	CZA9ndPH+h1O/993OUgOe9gMw68x6jIS+kj8TvehAzQnrf3knOnUfpOLE90mZwl0vjw5
+	4TyA==
+X-Received: by 10.194.87.201 with SMTP id ba9mr51036665wjb.125.1450260495630; 
+	Wed, 16 Dec 2015 02:08:15 -0800 (PST)
+Received: from sgxcmp131.intra.sigfox.io ([217.114.201.133])
+	by smtp.gmail.com with ESMTPSA id u17sm6730653wmd.8.2015.12.16.02.08.14
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 16 Dec 2015 02:08:14 -0800 (PST)
+Sender: Thomas PERROT <vomegaz@gmail.com>
+From: Thomas Perrot <thomas.perrot@tupi.fr>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 Dec 2015 11:08:11 +0100
+Message-Id: <1450260491-23059-1-git-send-email-thomas.perrot@tupi.fr>
+X-Mailer: git-send-email 2.1.4
+Subject: [fido][PATCH] Fix build issue on openssl 1.0.2d on Fido branch. OpenSSL's URIs of old releases have changed to /source/old/<x.y.z> instead of /source.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,52 +40,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2015 10:03:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 16 Dec 2015 10:08:15 -0000
 
-From: Amy Fong <amy.fong@windriver.com>
-
-The following error is seen when cacao-initial is built with gcc 4.4:
-
-  LOG: [0x00007f595fed3700] We received a SIGSEGV and tried to handle it, but we were |
-  LOG: [0x00007f595fed3700] unable to find a Java method at: |
-  LOG: [0x00007f595fed3700] |
-  LOG: [0x00007f595fed3700] PC=0x0000000000459a37 |
-  LOG: [0x00007f595fed3700] |
-  LOG: [0x00007f595fed3700] Dumping the current stacktrace: |
-          at java.lang.String.<clinit>()V(String.java:185) |
-  LOG: [0x00007f595fed3700] Exiting... |
-  Aborted (core dumped)
-
-Adapting fix from the following (add -fno-strict-aliasing to CFLAGS):
-
-  2009-06-24 Andrew John Hughes <ahughes@redhat.com>
-
-  * patches/cacao/no-strict-aliasing.patch:
-  New patch to fix CACAO build on GCC 4.4 (see PR129).
-  * Makefile.am: Add new patch.
-  * HACKING: Update.
-
-Signed-off-by: Amy Fong <amy.fong@windriver.com>
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Thomas Perrot <thomas.perrot@tupi.fr>
 ---
- recipes-core/cacao/cacao-initial-native_0.98.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../recipes-connectivity/openssl/openssl_1.0.2d.bb | 51 +++++++++++-----------
+ 1 file changed, 26 insertions(+), 25 deletions(-)
 
-diff --git a/recipes-core/cacao/cacao-initial-native_0.98.bb b/recipes-core/cacao/cacao-initial-native_0.98.bb
-index 2a8ced5..a26e686 100644
---- a/recipes-core/cacao/cacao-initial-native_0.98.bb
-+++ b/recipes-core/cacao/cacao-initial-native_0.98.bb
-@@ -41,3 +41,8 @@ do_configure_append() {
+diff --git a/meta/recipes-connectivity/openssl/openssl_1.0.2d.bb b/meta/recipes-connectivity/openssl/openssl_1.0.2d.bb
+index c862d5d..2f4f7a1 100644
+--- a/meta/recipes-connectivity/openssl/openssl_1.0.2d.bb
++++ b/meta/recipes-connectivity/openssl/openssl_1.0.2d.bb
+@@ -11,31 +11,32 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9a8f968107345e0b75aa8c2ecaa7ec8"
+ export DIRS = "crypto ssl apps engines"
+ export OE_LDFLAGS="${LDFLAGS}"
  
- SRC_URI[md5sum] = "8b8907c8b925761c9410bcadb9705346"
- SRC_URI[sha256sum] = "cb9363add825cedf77764fc49a223aaf43f0a9f485b711ba8c92f16b13fff188"
-+
-+do_configure_prepend() {
-+        export CFLAGS="${CFLAGS} -fno-strict-aliasing"
-+}
-+
+-SRC_URI += "file://configure-targets.patch \
+-            file://shared-libs.patch \
+-            file://oe-ldflags.patch \
+-            file://engines-install-in-libdir-ssl.patch \
+-            file://debian1.0.2/block_diginotar.patch \
+-            file://debian1.0.2/block_digicert_malaysia.patch \
+-            file://debian/ca.patch \
+-            file://debian/c_rehash-compat.patch \
+-            file://debian/debian-targets.patch \
+-            file://debian/man-dir.patch \
+-            file://debian/man-section.patch \
+-            file://debian/no-rpath.patch \
+-            file://debian/no-symbolic.patch \
+-            file://debian/pic.patch \
+-            file://debian/version-script.patch \
+-            file://openssl_fix_for_x32.patch \
+-            file://fix-cipher-des-ede3-cfb1.patch \
+-            file://openssl-avoid-NULL-pointer-dereference-in-EVP_DigestInit_ex.patch \
+-            file://find.pl \
+-            file://openssl-fix-des.pod-error.patch \
+-            file://Makefiles-ptest.patch \
+-            file://ptest-deps.patch \
+-            file://run-ptest \
+-            file://crypto_use_bigint_in_x86-64_perl.patch \
+-           "
++SRC_URI = "http://www.openssl.org/source/old/1.0.2/openssl-${PV}.tar.gz \
++	   file://configure-targets.patch \
++           file://shared-libs.patch \
++           file://oe-ldflags.patch \
++           file://engines-install-in-libdir-ssl.patch \
++           file://debian1.0.2/block_diginotar.patch \
++           file://debian1.0.2/block_digicert_malaysia.patch \
++           file://debian/ca.patch \
++           file://debian/c_rehash-compat.patch \
++           file://debian/debian-targets.patch \
++           file://debian/man-dir.patch \
++           file://debian/man-section.patch \
++           file://debian/no-rpath.patch \
++           file://debian/no-symbolic.patch \
++           file://debian/pic.patch \
++           file://debian/version-script.patch \
++           file://openssl_fix_for_x32.patch \
++           file://fix-cipher-des-ede3-cfb1.patch \
++           file://openssl-avoid-NULL-pointer-dereference-in-EVP_DigestInit_ex.patch \
++           file://find.pl \
++           file://openssl-fix-des.pod-error.patch \
++           file://Makefiles-ptest.patch \
++           file://ptest-deps.patch \
++           file://run-ptest \
++           file://crypto_use_bigint_in_x86-64_perl.patch \
++          "
+ 
+ SRC_URI[md5sum] = "38dd619b2e77cbac69b99f52a053d25a"
+ SRC_URI[sha256sum] = "671c36487785628a703374c652ad2cebea45fa920ae5681515df25d9f2c9a8c8"
 -- 
-2.3.5
+2.1.4
 
 
