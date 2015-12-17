@@ -1,24 +1,37 @@
-Return-Path: <Jian.Liu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C26D27318A
+Return-Path: <vomegaz@gmail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E20C7316F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Dec 2015 03:18:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tBH3IojC015438
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Thu, 17 Dec 2015 10:59:01 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id l126so15710145wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Dec 2015 19:18:51 -0800
-Received: from pek-jliu7-d1.corp.ad.wrs.com (128.224.162.169) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 16 Dec 2015 19:18:50 -0800
-From: Jian Liu <jian.liu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Dec 2015 11:18:46 +0800
-Message-ID: <1450322326-1715-1-git-send-email-jian.liu@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Thu, 17 Dec 2015 02:59:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:reply-to:sender:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=wY7eK9mPQjoAldXBwrD17ET3OjJYbGvulLjE0l1tju4=;
+	b=UOZwni19cjGjmYUpr6fOaxmHU9vGneR3+J8DTw+PoEqZF/oJUV/PhCAkrz/arrrjXo
+	UGnHBtxbgn0e5oqGeSTQUPii90JCqc73kAkSmJuffgoyEUNc3pW9lz57haIb9m5FUnQb
+	3qENueykSbPKhB5R62bENzp+MJbsLg0rTjOpaBF5crf0Nl4vlgRuR4OlrzX7kUapGbbt
+	M4K29c8kUsYMRTAMb4M/89Lc94FRvnAiadncqDJmxAgYlmVuB55JxNL7ocmbjW0N/U7b
+	f0fb+Jtqz9sJUr+qHwhSZFNpUkEh9XtUzUq6p9sWMchsdDvBFsViiMrflNNXw881//gf
+	SdLA==
+X-Received: by 10.194.188.49 with SMTP id fx17mr61138129wjc.47.1450349942164; 
+	Thu, 17 Dec 2015 02:59:02 -0800 (PST)
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] php: uninitialized pointer in phar_make_dirstream()
+Reply-To: thomas.perrot@tupi.fr
+Sender: vomegaz@gmail.com
+Received: by 10.27.145.135 with HTTP; Thu, 17 Dec 2015 02:58:22 -0800 (PST)
+In-Reply-To: <CAJTo0Lb2powZHsuzJnqeYwKddYJfOaLpOiurW3RmFELu3LoC7A@mail.gmail.com>
+References: <1450270689-9022-1-git-send-email-thomas.perrot@tupi.fr>
+	<CAJTo0Lb2powZHsuzJnqeYwKddYJfOaLpOiurW3RmFELu3LoC7A@mail.gmail.com>
+From: Thomas PERROT <thomas.perrot@tupi.fr>
+Date: Thu, 17 Dec 2015 11:58:22 +0100
+X-Google-Sender-Auth: G9W5B53B4CyyZ996OgUUEThpbpA
+Message-ID: <CAGXeWgn_eAUR-QNVZu2ovQ8S20goDbRsk=PYFP=Hq=aJaauZ9g@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [fido][PATCH v2] Fix build issue on openssl 1.0.2d on Fido branch. OpenSSL's URIs of old releases have changed to /source/old/<x.y.z> instead of /source.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,80 +44,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Dec 2015 03:18:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 17 Dec 2015 10:59:03 -0000
+Content-Type: text/plain; charset=UTF-8
 
-CVE-2015-7804:
-Off-by-one error in the phar_parse_zipfile function in ext/phar/zip.c
-in PHP before 5.5.30 and 5.6.x before 5.6.14 allows remote attackers
-to cause a denial of service (uninitialized pointer dereference and
-application crash) by including the / filename in a .zip PHAR archive.
+Hi Ross,
 
-This patch is from
-http://git.php.net/?p=php-src.git;a=commitdiff;\
-h=1ddf72180a52d247db88ea42a3e35f824a8fbda1;hp=f98ab19dc0c978e3caaa2614579e4a61f2c317f5
+I have changed the URI into the bb files instead the inc, because the path
+has only changed for old openssl revision and because this change can
+affect people using this their own openssl's recipe or a recipe of latest
+openssl revision.
 
-Signed-off-by: Jian Liu <jian.liu@windriver.com>
----
- .../php/php-5.6.12/php-CVE-2015-7804.patch         | 35 ++++++++++++++++++++++
- meta-oe/recipes-devtools/php/php.inc               |  1 +
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/php/php-5.6.12/php-CVE-2015-7804.patch
+I will submit the patch to openembedded-core mailing list instead this list.
 
-diff --git a/meta-oe/recipes-devtools/php/php-5.6.12/php-CVE-2015-7804.patch b/meta-oe/recipes-devtools/php/php-5.6.12/php-CVE-2015-7804.patch
-new file mode 100644
-index 0000000..248d1d1
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php-5.6.12/php-CVE-2015-7804.patch
-@@ -0,0 +1,35 @@
-+FIx bug #70433 - Uninitialized pointer in phar_make_dirstream when zip entry filename is "/"
-+
-+Off-by-one error in the phar_parse_zipfile function in ext/phar/zip.c 
-+in PHP before 5.5.30 and 5.6.x before 5.6.14 allows remote attackers 
-+to cause a denial of service (uninitialized pointer dereference and 
-+application crash) by including the / filename in a .zip PHAR archive.
-+
-+Written-by: Stanislav Malyshev <stas@php.net>
-+
-+diff -Nur php-5.6.12.orig/ext/phar/util.c php-5.6.12/ext/phar/util.c
-+--- php-5.6.12.orig/ext/phar/util.c	2015-12-16 18:51:51.603455462 +0800
-++++ php-5.6.12/ext/phar/util.c	2015-12-16 18:53:43.483456242 +0800
-+@@ -1969,7 +1969,7 @@
-+ 
-+ 	while ((s = zend_memrchr(filename, '/', filename_len))) {
-+ 		filename_len = s - filename;
-+-		if (FAILURE == zend_hash_add_empty_element(&phar->virtual_dirs, filename, filename_len)) {
-++		if (!filename_len || FAILURE == zend_hash_add_empty_element(&phar->virtual_dirs, filename, filename_len)) {
-+ 			break;
-+ 		}
-+ 	}
-+diff -Nur php-5.6.12.orig/ext/phar/zip.c php-5.6.12/ext/phar/zip.c
-+--- php-5.6.12.orig/ext/phar/zip.c	2015-12-16 18:51:51.603455462 +0800
-++++ php-5.6.12/ext/phar/zip.c	2015-12-16 18:54:39.667456634 +0800
-+@@ -396,7 +396,9 @@
-+ 
-+ 		if (entry.filename[entry.filename_len - 1] == '/') {
-+ 			entry.is_dir = 1;
-+-			entry.filename_len--;
-++			if(entry.filename_len > 1) {
-++				entry.filename_len--;
-++			}
-+ 			entry.flags |= PHAR_ENT_PERM_DEF_DIR;
-+ 		} else {
-+ 			entry.is_dir = 0;
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index 4aa9c3f..d0c596c 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -15,6 +15,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
-            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
-            file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
-            file://php-CVE-2015-7803.patch \
-+           file://php-CVE-2015-7804.patch \
-           "
- 
- SRC_URI_append_class-target += " \
--- 
-1.9.1
+Best regards,
+Thomas P.
+On Wed, Dec 16, 2015 at 4:29 PM, Burton, Ross <ross.burton@intel.com> wrote:
 
+> On 16 December 2015 at 12:58, Thomas Perrot <thomas.perrot@tupi.fr> wrote:
+>
+> > -SRC_URI += "file://configure-targets.patch \
+> > -            file://shared-libs.patch \
+> > -            file://oe-ldflags.patch \
+> > -            file://engines-install-in-libdir-ssl.patch \
+> > -            file://debian1.0.2/block_diginotar.patch \
+> > -            file://debian1.0.2/block_digicert_malaysia.patch \
+> > -            file://debian/ca.patch \
+> > -            file://debian/c_rehash-compat.patch \
+> > -            file://debian/debian-targets.patch \
+> > -            file://debian/man-dir.patch \
+> > -            file://debian/man-section.patch \
+> > -            file://debian/no-rpath.patch \
+> > -            file://debian/no-symbolic.patch \
+> > -            file://debian/pic.patch \
+> > -            file://debian/version-script.patch \
+> > -            file://openssl_fix_for_x32.patch \
+> > -            file://fix-cipher-des-ede3-cfb1.patch \
+> > -
+> > file://openssl-avoid-NULL-pointer-dereference-in-EVP_DigestInit_ex.patch
+> \
+> > -            file://find.pl \
+> > -            file://openssl-fix-des.pod-error.patch \
+> > -            file://Makefiles-ptest.patch \
+> > -            file://ptest-deps.patch \
+> > -            file://run-ptest \
+> > -            file://crypto_use_bigint_in_x86-64_perl.patch \
+> > -           "
+> > +SRC_URI = "http://www.openssl.org/source/old/1.0.2/openssl-${PV}.tar.gz
+> \
+> > +           file://configure-targets.patch \
+> > +           file://shared-libs.patch \
+> > +           file://oe-ldflags.patch \
+> > +           file://engines-install-in-libdir-ssl.patch \
+> > +           file://debian1.0.2/block_diginotar.patch \
+> > +           file://debian1.0.2/block_digicert_malaysia.patch \
+> > +           file://debian/ca.patch \
+> > +           file://debian/c_rehash-compat.patch \
+> > +           file://debian/debian-targets.patch \
+> > +           file://debian/man-dir.patch \
+> > +           file://debian/man-section.patch \
+> > +           file://debian/no-rpath.patch \
+> > +           file://debian/no-symbolic.patch \
+> > +           file://debian/pic.patch \
+> > +           file://debian/version-script.patch \
+> > +           file://openssl_fix_for_x32.patch \
+> > +           file://fix-cipher-des-ede3-cfb1.patch \
+> > +
+> >
+> file://openssl-avoid-NULL-pointer-dereference-in-EVP_DigestInit_ex.patch \
+> > +           file://find.pl \
+> > +           file://openssl-fix-des.pod-error.patch \
+> > +           file://Makefiles-ptest.patch \
+> > +           file://ptest-deps.patch \
+> > +           file://run-ptest \
+> > +           file://crypto_use_bigint_in_x86-64_perl.patch \
+> > +          "
+> >
+>
+> This was sent to the wrong mailing list (openembedded-core@, please), the
+> commit log is incorrectly formatted (we use standard git style with a
+> recipe prefix), and it's probably best just to edit the SRC_URI entry in
+> openssl.inc instead of overwriting it from the .bb.
+>
+> (insert standard moan about pointless bb/inc splits here)
+>
+> Ross
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
