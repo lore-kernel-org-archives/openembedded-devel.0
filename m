@@ -1,32 +1,34 @@
-Return-Path: <erkka.kaaria@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id A4D097317A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id BA44A6E5CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Dec 2015 11:40:15 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga101.fm.intel.com with ESMTP; 17 Dec 2015 03:39:55 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,440,1444719600"; 
-	d="scan'208,217";a="843173194"
-Received: from irsmsx104.ger.corp.intel.com ([163.33.3.159])
-	by orsmga001.jf.intel.com with ESMTP; 17 Dec 2015 03:39:53 -0800
-Received: from irsmsx103.ger.corp.intel.com ([169.254.3.13]) by
-	IRSMSX104.ger.corp.intel.com ([169.254.5.138]) with mapi id
-	14.03.0248.002; Thu, 17 Dec 2015 11:39:53 +0000
-From: "Kaaria, Erkka" <erkka.kaaria@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-java] Openjdk-8 and D_FORTIFY_SOURCE
-Thread-Index: AdE4uQZsBMwFgAMzQxSbU9q3GRht0A==
-Date: Thu, 17 Dec 2015 11:39:52 +0000
-Message-ID: <17C19527BD855F428F22685986FD58BEA3EA47@IRSMSX103.ger.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [163.33.239.181]
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-java] Openjdk-8 and D_FORTIFY_SOURCE
+	Thu, 17 Dec 2015 12:37:02 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id l126so19404977wml.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Dec 2015 04:37:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=bknoOhnUvBWoDOqqAZgoGwf1tlRaD2UdzatpNyZxyuk=;
+	b=Jch5O43laz8EKGITfxrKFY023qvq1L8EgRv0zceOu/CeF7iGHQSWT3HE+R/wmVM3fk
+	hU91MTvpreWVZTheaEgD7yKTuiL9+tzgFqv9cafv8T2vMLvr6Zl62c6TmqsWUStS7gQh
+	OsPhC1X9FcfomJWXJJtI42VK6BcC8C91OvZbKki+8Afk2DQLUMbfU3VLqKFX03UiBQ04
+	LklTTwevEvj7oucRUAPc+4XBq2BScEjljMcfoqAK7nAjkbix6g6R6bD3PVjfRqA54AWG
+	YiLtRXm2RLhtR86YiNeCdLyYpMms4jiaotIvQVJTXYT5tVoA/w0CQ/DRTG6qKukyq3nD
+	QqFA==
+X-Received: by 10.28.6.130 with SMTP id 124mr3931413wmg.7.1450355822567;
+	Thu, 17 Dec 2015 04:37:02 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	c4sm10299770wjs.36.2015.12.17.04.37.00
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 17 Dec 2015 04:37:01 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 17 Dec 2015 13:39:20 +0100
+Message-Id: <1450355960-1110-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.6.4
+Subject: [PATCH][meta-oe][dizzy] libssh: depends fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,56 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Dec 2015 11:40:16 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Dec 2015 12:37:03 -0000
 
-Hi,
+From: Armin Kuster <akuster808@gmail.com>
 
-Currently openjdk-8 fails to build if D_FORTIFY_SOURCE is set through SECUR=
-ITY_CFLAGS. This happens, because gcc requires at least -O for this feature=
- to work. Otherwise a warning is generated ("_FORTIFY_SOURCE requires compi=
-ling with optimization"), which then gets turned into an error by -Werror.
+the default was to build with GSSAPI enabled.
 
-This is easy enough to fix by providing appropriate compiler flags through =
-EXTRA_OECONF and -with-extra-cflags. The recipe however contains a warning =
-that adding -with-extra-cflags will break building demos for jdk. Everythin=
-g seems to work correctly on my machine even if I add the parameter (packag=
-e is generated for demos, no build failures), but I assume that this warnin=
-g is there for a reason.
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/libssh/libssh_0.6.3.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-There are few ways of solving this as far as I can see:
+diff --git a/meta-oe/recipes-support/libssh/libssh_0.6.3.bb b/meta-oe/recipes-support/libssh/libssh_0.6.3.bb
+index 771a47a..0a944c6 100644
+--- a/meta-oe/recipes-support/libssh/libssh_0.6.3.bb
++++ b/meta-oe/recipes-support/libssh/libssh_0.6.3.bb
+@@ -18,6 +18,9 @@ EXTRA_OECMAKE = " \
+     -DWITH_ZLIB=1 \
+     "
+ 
++PACKAGECONFIG ??=""
++PACKAGECONFIG[gssapi] = "-DWITH_GSSAPI=1, -DWITH_GSSAPI=0, krb5, "
++
+ inherit cmake
+ 
+ do_configure_prepend () {
+-- 
+2.6.4
 
-
-1.       Just add the -with-extra-cflags and disable demos.
-
-2.       Remove D_FORTIFY_SOURCE from SECURITY_CFLAGS
-
-3.       Patch the openjdk build files, either removing -Werror or adding -=
-O2
-
-I personally prefer the first solution, as I don't really see any value in =
-providing demos. The second solution would weaken security, which I'd like =
-to avoid if at all possible. The third solution on the other hand feels lik=
-e it's too hacky-ish for this problem (not to mention that removing -Werror=
- is basically the same than removing D_FORTIFY_SOURCE).
-
-Best Regards,
-Erkka K=E4=E4ri=E4
-
-
----------------------------------------------------------------------
-Intel Finland Oy
-Registered Address: PL 281, 00181 Helsinki =
-
-Business Identity Code: 0357606 - 4 =
-
-Domiciled in Helsinki =
-
-
-This e-mail and any attachments may contain confidential material for
-the sole use of the intended recipient(s). Any review or distribution
-by others is strictly prohibited. If you are not the intended
-recipient, please contact the sender and delete all copies.
 
