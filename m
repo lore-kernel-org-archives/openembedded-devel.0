@@ -1,46 +1,33 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
-	[209.85.213.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 378556FF64
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 719336FFE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Dec 2015 15:30:12 +0000 (UTC)
-Received: by mail-ig0-f175.google.com with SMTP id xm8so53543150igb.1
+	Thu, 17 Dec 2015 00:05:50 +0000 (UTC)
+Received: by mail-wm0-f50.google.com with SMTP id p187so23762136wmp.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Dec 2015 07:30:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=OuxtMfcWN5MPKaInap85baqQUxL8v+uKkWaao+NdLBE=;
-	b=O8hZ1HgW2j6eCpce4xi3bEQoK9h7BMwLbsdSwglfFwRPZSVQ8MeyXGWlIpOIqEKEgS
-	Doiv6XYZAW+tLvX6QI48X0b5f40RNoyAPa7f/6LQKb1jwAojQEWmv0knd2H/lnvXuNxw
-	YJIIg+LzEBf6NYBRyUDmcfNmsz7ylvsPtwp7t50G7H7prT2pvm64zbi85u9e2nukN3Ho
-	ndKd9VOwvbLacMQtMOkX0oUXREmPQ/FGZVHaz8jrJuy/FYcJT/crIgif5dD6oqDpY8kZ
-	NkHHuA9UrWb+xcfYM+R2fQVuPE5hFf87fNwazKDKDxeNCryrTzLNkNizz+uDLiSkE7b0
-	v2Ug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=OuxtMfcWN5MPKaInap85baqQUxL8v+uKkWaao+NdLBE=;
-	b=kyc9ROnmMoWWqsqolpyUWNj8P364mDlH0tuSBFTpRk/+UIrEtpkgxwO0m48EW6ETih
-	j8I53WzHNveEoq9+93xxA2LSI+fZ/jVATSb22PlOJ/0uJvcAgmk0voZ16C0mTU0bfQs1
-	Zbk/KxK3z6JJU4Z+G2D9UoDx/RRu79Fi5dIRmcN18ZEOygkhehfbWyDWis9o3S5tYVfj
-	cFT4VJW9LRNIYlAAedhv0pTuD9FTrQ0LHxQgI7e3YzCUZkpq+Dsle2niy3OiA76xVUuT
-	H/LPFF+98623ZlzVx/fcvxtnKpZXouxBJ83CNKTzwvbSRY/xCXLoJMfHr1YGgiEwdBTo
-	YeRw==
-X-Gm-Message-State: ALoCoQmjhdhYRRexOUwikerpbZgSGayTy3gFnODorl49v0f+GhBnSF0lV7SpqRXW037qbnCf+ZRpiqOIOuEEdPKktQJ6Qg1JnzYqvAat1U3YRFRsksnZNUU=
-X-Received: by 10.107.164.161 with SMTP id d33mr261733ioj.148.1450279813125;
-	Wed, 16 Dec 2015 07:30:13 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.136.141 with HTTP; Wed, 16 Dec 2015 07:29:53 -0800 (PST)
-In-Reply-To: <1450270689-9022-1-git-send-email-thomas.perrot@tupi.fr>
-References: <1450270689-9022-1-git-send-email-thomas.perrot@tupi.fr>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 16 Dec 2015 15:29:53 +0000
-Message-ID: <CAJTo0Lb2powZHsuzJnqeYwKddYJfOaLpOiurW3RmFELu3LoC7A@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [fido][PATCH v2] Fix build issue on openssl 1.0.2d on Fido branch. OpenSSL's URIs of old releases have changed to /source/old/<x.y.z> instead of /source.
+	Wed, 16 Dec 2015 16:05:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=47jGN5xNZ1YKq79pEloXlR+qIrHLbv3C2ITj9KW+k/s=;
+	b=RRR0Hrm0vnziyf92qPTccTdlkzVcSehL6eB6jY+rJ41hmR2Ncw9i9KRtLt3J2trxBu
+	8N6QU1TOjTmxplPD4CvrnVzxOCKyfRV6daxrjHvGs11RqUikShIzZ6dTkag19uZ6QkWq
+	v6OPIWpzxd5jVS1yIad1ijfpI1YQFurLm89WwUMnh0c7rH+VnHHGnUQ+FDwzKbHaZO/R
+	tvO0DWocW0uMdaNHOO2dZrwyoYF02s0glF9gTUKP1P3IpFIZNp5PHaOa9JIuwxpcIon7
+	TeNJc0ipIuLGMlxK8FzdWatJCyIj8AR/jGQciwR2wcr/obwvsR5SNMh8MS/Xvm6ZUUnK
+	weww==
+X-Received: by 10.28.45.72 with SMTP id t69mr520875wmt.32.1450310751326;
+	Wed, 16 Dec 2015 16:05:51 -0800 (PST)
+Received: from ThinkPad-T520.homenet.telecomitalia.it
+	(host67-146-dynamic.30-79-r.retail.telecomitalia.it. [79.30.146.67])
+	by smtp.gmail.com with ESMTPSA id t3sm7925732wjz.11.2015.12.16.16.05.49
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 16 Dec 2015 16:05:50 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 17 Dec 2015 01:05:44 +0100
+Message-Id: <1450310744-27645-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-initramfs][PATCH] kexec-tools-klibc: add explicit SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,72 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2015 15:30:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 17 Dec 2015 00:05:51 -0000
 
-On 16 December 2015 at 12:58, Thomas Perrot <thomas.perrot@tupi.fr> wrote:
+After commit c2492ed SRC_URI of the recipe contains the kdump script.
+Kdump is not in the purposes of this recipe so we restore the plain SRC_URI.
 
-> -SRC_URI += "file://configure-targets.patch \
-> -            file://shared-libs.patch \
-> -            file://oe-ldflags.patch \
-> -            file://engines-install-in-libdir-ssl.patch \
-> -            file://debian1.0.2/block_diginotar.patch \
-> -            file://debian1.0.2/block_digicert_malaysia.patch \
-> -            file://debian/ca.patch \
-> -            file://debian/c_rehash-compat.patch \
-> -            file://debian/debian-targets.patch \
-> -            file://debian/man-dir.patch \
-> -            file://debian/man-section.patch \
-> -            file://debian/no-rpath.patch \
-> -            file://debian/no-symbolic.patch \
-> -            file://debian/pic.patch \
-> -            file://debian/version-script.patch \
-> -            file://openssl_fix_for_x32.patch \
-> -            file://fix-cipher-des-ede3-cfb1.patch \
-> -
-> file://openssl-avoid-NULL-pointer-dereference-in-EVP_DigestInit_ex.patch \
-> -            file://find.pl \
-> -            file://openssl-fix-des.pod-error.patch \
-> -            file://Makefiles-ptest.patch \
-> -            file://ptest-deps.patch \
-> -            file://run-ptest \
-> -            file://crypto_use_bigint_in_x86-64_perl.patch \
-> -           "
-> +SRC_URI = "http://www.openssl.org/source/old/1.0.2/openssl-${PV}.tar.gz \
-> +           file://configure-targets.patch \
-> +           file://shared-libs.patch \
-> +           file://oe-ldflags.patch \
-> +           file://engines-install-in-libdir-ssl.patch \
-> +           file://debian1.0.2/block_diginotar.patch \
-> +           file://debian1.0.2/block_digicert_malaysia.patch \
-> +           file://debian/ca.patch \
-> +           file://debian/c_rehash-compat.patch \
-> +           file://debian/debian-targets.patch \
-> +           file://debian/man-dir.patch \
-> +           file://debian/man-section.patch \
-> +           file://debian/no-rpath.patch \
-> +           file://debian/no-symbolic.patch \
-> +           file://debian/pic.patch \
-> +           file://debian/version-script.patch \
-> +           file://openssl_fix_for_x32.patch \
-> +           file://fix-cipher-des-ede3-cfb1.patch \
-> +
->  file://openssl-avoid-NULL-pointer-dereference-in-EVP_DigestInit_ex.patch \
-> +           file://find.pl \
-> +           file://openssl-fix-des.pod-error.patch \
-> +           file://Makefiles-ptest.patch \
-> +           file://ptest-deps.patch \
-> +           file://run-ptest \
-> +           file://crypto_use_bigint_in_x86-64_perl.patch \
-> +          "
->
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-This was sent to the wrong mailing list (openembedded-core@, please), the
-commit log is incorrectly formatted (we use standard git style with a
-recipe prefix), and it's probably best just to edit the SRC_URI entry in
-openssl.inc instead of overwriting it from the .bb.
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
+index d5b7bbe..c9fec25 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
+@@ -8,6 +8,8 @@ inherit klibc
+ 
+ FILESPATH =. "${FILE_DIRNAME}/kexec-tools-${PV}:"
+ 
++SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/kexec/kexec-tools-${PV}.tar.gz"
++
+ SRC_URI += " \
+             file://kexec-elf-rel.patch \
+             file://kexec-syscall.patch \
+-- 
+1.9.1
 
-(insert standard moan about pointless bb/inc splits here)
-
-Ross
 
