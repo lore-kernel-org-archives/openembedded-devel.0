@@ -1,37 +1,32 @@
-Return-Path: <vomegaz@gmail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E20C7316F
+Return-Path: <erkka.kaaria@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id A4D097317A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Dec 2015 10:59:01 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id l126so15710145wml.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Dec 2015 02:59:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:reply-to:sender:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=wY7eK9mPQjoAldXBwrD17ET3OjJYbGvulLjE0l1tju4=;
-	b=UOZwni19cjGjmYUpr6fOaxmHU9vGneR3+J8DTw+PoEqZF/oJUV/PhCAkrz/arrrjXo
-	UGnHBtxbgn0e5oqGeSTQUPii90JCqc73kAkSmJuffgoyEUNc3pW9lz57haIb9m5FUnQb
-	3qENueykSbPKhB5R62bENzp+MJbsLg0rTjOpaBF5crf0Nl4vlgRuR4OlrzX7kUapGbbt
-	M4K29c8kUsYMRTAMb4M/89Lc94FRvnAiadncqDJmxAgYlmVuB55JxNL7ocmbjW0N/U7b
-	f0fb+Jtqz9sJUr+qHwhSZFNpUkEh9XtUzUq6p9sWMchsdDvBFsViiMrflNNXw881//gf
-	SdLA==
-X-Received: by 10.194.188.49 with SMTP id fx17mr61138129wjc.47.1450349942164; 
-	Thu, 17 Dec 2015 02:59:02 -0800 (PST)
+	Thu, 17 Dec 2015 11:40:15 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by fmsmga101.fm.intel.com with ESMTP; 17 Dec 2015 03:39:55 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,440,1444719600"; 
+	d="scan'208,217";a="843173194"
+Received: from irsmsx104.ger.corp.intel.com ([163.33.3.159])
+	by orsmga001.jf.intel.com with ESMTP; 17 Dec 2015 03:39:53 -0800
+Received: from irsmsx103.ger.corp.intel.com ([169.254.3.13]) by
+	IRSMSX104.ger.corp.intel.com ([169.254.5.138]) with mapi id
+	14.03.0248.002; Thu, 17 Dec 2015 11:39:53 +0000
+From: "Kaaria, Erkka" <erkka.kaaria@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-java] Openjdk-8 and D_FORTIFY_SOURCE
+Thread-Index: AdE4uQZsBMwFgAMzQxSbU9q3GRht0A==
+Date: Thu, 17 Dec 2015 11:39:52 +0000
+Message-ID: <17C19527BD855F428F22685986FD58BEA3EA47@IRSMSX103.ger.corp.intel.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [163.33.239.181]
 MIME-Version: 1.0
-Reply-To: thomas.perrot@tupi.fr
-Sender: vomegaz@gmail.com
-Received: by 10.27.145.135 with HTTP; Thu, 17 Dec 2015 02:58:22 -0800 (PST)
-In-Reply-To: <CAJTo0Lb2powZHsuzJnqeYwKddYJfOaLpOiurW3RmFELu3LoC7A@mail.gmail.com>
-References: <1450270689-9022-1-git-send-email-thomas.perrot@tupi.fr>
-	<CAJTo0Lb2powZHsuzJnqeYwKddYJfOaLpOiurW3RmFELu3LoC7A@mail.gmail.com>
-From: Thomas PERROT <thomas.perrot@tupi.fr>
-Date: Thu, 17 Dec 2015 11:58:22 +0100
-X-Google-Sender-Auth: G9W5B53B4CyyZ996OgUUEThpbpA
-Message-ID: <CAGXeWgn_eAUR-QNVZu2ovQ8S20goDbRsk=PYFP=Hq=aJaauZ9g@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [fido][PATCH v2] Fix build issue on openssl 1.0.2d on Fido branch. OpenSSL's URIs of old releases have changed to /source/old/<x.y.z> instead of /source.
+Subject: [meta-java] Openjdk-8 and D_FORTIFY_SOURCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,94 +39,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Dec 2015 10:59:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 17 Dec 2015 11:40:16 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Ross,
+Hi,
 
-I have changed the URI into the bb files instead the inc, because the path
-has only changed for old openssl revision and because this change can
-affect people using this their own openssl's recipe or a recipe of latest
-openssl revision.
+Currently openjdk-8 fails to build if D_FORTIFY_SOURCE is set through SECUR=
+ITY_CFLAGS. This happens, because gcc requires at least -O for this feature=
+ to work. Otherwise a warning is generated ("_FORTIFY_SOURCE requires compi=
+ling with optimization"), which then gets turned into an error by -Werror.
 
-I will submit the patch to openembedded-core mailing list instead this list.
+This is easy enough to fix by providing appropriate compiler flags through =
+EXTRA_OECONF and -with-extra-cflags. The recipe however contains a warning =
+that adding -with-extra-cflags will break building demos for jdk. Everythin=
+g seems to work correctly on my machine even if I add the parameter (packag=
+e is generated for demos, no build failures), but I assume that this warnin=
+g is there for a reason.
 
-Best regards,
-Thomas P.
-On Wed, Dec 16, 2015 at 4:29 PM, Burton, Ross <ross.burton@intel.com> wrote:
+There are few ways of solving this as far as I can see:
 
-> On 16 December 2015 at 12:58, Thomas Perrot <thomas.perrot@tupi.fr> wrote:
->
-> > -SRC_URI += "file://configure-targets.patch \
-> > -            file://shared-libs.patch \
-> > -            file://oe-ldflags.patch \
-> > -            file://engines-install-in-libdir-ssl.patch \
-> > -            file://debian1.0.2/block_diginotar.patch \
-> > -            file://debian1.0.2/block_digicert_malaysia.patch \
-> > -            file://debian/ca.patch \
-> > -            file://debian/c_rehash-compat.patch \
-> > -            file://debian/debian-targets.patch \
-> > -            file://debian/man-dir.patch \
-> > -            file://debian/man-section.patch \
-> > -            file://debian/no-rpath.patch \
-> > -            file://debian/no-symbolic.patch \
-> > -            file://debian/pic.patch \
-> > -            file://debian/version-script.patch \
-> > -            file://openssl_fix_for_x32.patch \
-> > -            file://fix-cipher-des-ede3-cfb1.patch \
-> > -
-> > file://openssl-avoid-NULL-pointer-dereference-in-EVP_DigestInit_ex.patch
-> \
-> > -            file://find.pl \
-> > -            file://openssl-fix-des.pod-error.patch \
-> > -            file://Makefiles-ptest.patch \
-> > -            file://ptest-deps.patch \
-> > -            file://run-ptest \
-> > -            file://crypto_use_bigint_in_x86-64_perl.patch \
-> > -           "
-> > +SRC_URI = "http://www.openssl.org/source/old/1.0.2/openssl-${PV}.tar.gz
-> \
-> > +           file://configure-targets.patch \
-> > +           file://shared-libs.patch \
-> > +           file://oe-ldflags.patch \
-> > +           file://engines-install-in-libdir-ssl.patch \
-> > +           file://debian1.0.2/block_diginotar.patch \
-> > +           file://debian1.0.2/block_digicert_malaysia.patch \
-> > +           file://debian/ca.patch \
-> > +           file://debian/c_rehash-compat.patch \
-> > +           file://debian/debian-targets.patch \
-> > +           file://debian/man-dir.patch \
-> > +           file://debian/man-section.patch \
-> > +           file://debian/no-rpath.patch \
-> > +           file://debian/no-symbolic.patch \
-> > +           file://debian/pic.patch \
-> > +           file://debian/version-script.patch \
-> > +           file://openssl_fix_for_x32.patch \
-> > +           file://fix-cipher-des-ede3-cfb1.patch \
-> > +
-> >
-> file://openssl-avoid-NULL-pointer-dereference-in-EVP_DigestInit_ex.patch \
-> > +           file://find.pl \
-> > +           file://openssl-fix-des.pod-error.patch \
-> > +           file://Makefiles-ptest.patch \
-> > +           file://ptest-deps.patch \
-> > +           file://run-ptest \
-> > +           file://crypto_use_bigint_in_x86-64_perl.patch \
-> > +          "
-> >
->
-> This was sent to the wrong mailing list (openembedded-core@, please), the
-> commit log is incorrectly formatted (we use standard git style with a
-> recipe prefix), and it's probably best just to edit the SRC_URI entry in
-> openssl.inc instead of overwriting it from the .bb.
->
-> (insert standard moan about pointless bb/inc splits here)
->
-> Ross
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
+1.       Just add the -with-extra-cflags and disable demos.
+
+2.       Remove D_FORTIFY_SOURCE from SECURITY_CFLAGS
+
+3.       Patch the openjdk build files, either removing -Werror or adding -=
+O2
+
+I personally prefer the first solution, as I don't really see any value in =
+providing demos. The second solution would weaken security, which I'd like =
+to avoid if at all possible. The third solution on the other hand feels lik=
+e it's too hacky-ish for this problem (not to mention that removing -Werror=
+ is basically the same than removing D_FORTIFY_SOURCE).
+
+Best Regards,
+Erkka K=E4=E4ri=E4
+
+
+---------------------------------------------------------------------
+Intel Finland Oy
+Registered Address: PL 281, 00181 Helsinki =
+
+Business Identity Code: 0357606 - 4 =
+
+Domiciled in Helsinki =
+
+
+This e-mail and any attachments may contain confidential material for
+the sole use of the intended recipient(s). Any review or distribution
+by others is strictly prohibited. If you are not the intended
+recipient, please contact the sender and delete all copies.
 
