@@ -1,43 +1,37 @@
 Return-Path: <rafael.carre@gmail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id B52C46FFD4
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A61560616
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 11:32:02 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id p187so60987443wmp.0
+	Fri, 18 Dec 2015 11:45:15 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id l126so62076273wml.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 03:32:03 -0800 (PST)
+	Fri, 18 Dec 2015 03:45:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:subject:to:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-type:content-transfer-encoding;
-	bh=wStaGOb8UdBVmoJJICG59lw7Y9s3z1gQ8nqoVVK51uY=;
-	b=p/ogXM3cwr6Xi1oqg/tgazoPZzgZGkV1GH/gO62nomzPXAlFfzxJFNcoDiWEB1sI+t
-	VJZcYN5vaOIXVwdgkQ6EKhnsfqdYj1CKaQxZCIETrC7xNlsPuw1Hb49y6Lhkt3hrXQjh
-	CemYChI4VCQk2TAdZbvH9plwfTgqIY0zce7erHrELHDbNnToG+OXLKaUZeFb44GiALwk
-	GHGIms6uTBdO2I54kUQ2On3jiblMUabOeGt+n841D01AkLdDDJAkTC79A5rRdJ2IXnWn
-	6epJ41FqLOuvZgZA9oiisN9MiZ635ngyZ2gE5GdtXhuWNepp+0mmRmkQfowGfc9R8zsC
-	WDag==
-X-Received: by 10.194.133.135 with SMTP id pc7mr3384863wjb.90.1450438322702;
-	Fri, 18 Dec 2015 03:32:02 -0800 (PST)
-Received: from [192.168.0.15] (lns-bzn-47f-81-56-255-191.adsl.proxad.net.
-	[81.56.255.191]) by smtp.googlemail.com with ESMTPSA id
-	vu4sm14472432wjc.2.2015.12.18.03.32.01
+	h=sender:from:to:subject:date:message-id:in-reply-to:references;
+	bh=Lng+ZGL0S8dFK+G5sPfV0jpjLg8HxcZn9q6tPo2IwYA=;
+	b=p8YEzs7SWMh/m2X3NVieO9eJu7tELMciU0QddHOY5F0efpmqXAlrgoYMgiJGvqHGYM
+	w48aZxWa5T0VMSwjxK9MfW0OHiTL+VJtctJ18tQTRXomyQPKbJy0N0B27hdy79Xjdk4r
+	HaEcArhDDmE35fv8gKhWG1wirCsNxSP/N8LBiLIlPkq6wgjj6/blt4COcp8QFaM4uP3U
+	e0MDOI0F9/rbZnMRs+hQj3kjsZGvUIe5CASF3/AIoqAsujsHSqRHwP01qBlypkJ8bTvQ
+	oTPnhKCtlJFae3YzInAYbCA4MMotX47m0rpkrnVH6543m7MjbxAsM3RcQs83L11tSdZ/
+	cxZQ==
+X-Received: by 10.28.59.133 with SMTP id i127mr2764789wma.24.1450439115997;
+	Fri, 18 Dec 2015 03:45:15 -0800 (PST)
+Received: from localhost.localdomain
+	(lns-bzn-47f-81-56-255-191.adsl.proxad.net. [81.56.255.191])
+	by smtp.gmail.com with ESMTPSA id q74sm6377296wmd.0.2015.12.18.03.45.14
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 18 Dec 2015 03:32:01 -0800 (PST)
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 18 Dec 2015 03:45:14 -0800 (PST)
 Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
+From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
 To: openembedded-devel@lists.openembedded.org
-References: <564DC01B.4000103@videolan.org>
-	<1447938897-26171-1-git-send-email-funman@videolan.org>
-	<1447938897-26171-6-git-send-email-funman@videolan.org>
-	<20151218112939.GC2563@jama>
-From: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <funman@videolan.org>
-Message-ID: <5673EEB0.5090204@videolan.org>
-Date: Fri, 18 Dec 2015 12:32:00 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.4.0
-MIME-Version: 1.0
-In-Reply-To: <20151218112939.GC2563@jama>
-Subject: Re: [meta-multimedia][PATCH 6/6] VLC: do not use --with-contrib
+Date: Fri, 18 Dec 2015 12:45:10 +0100
+Message-Id: <1450439110-17705-1-git-send-email-funman@videolan.org>
+X-Mailer: git-send-email 2.5.0
+In-Reply-To: <CAMKF1sqhNJCSrnVcb7YjfC-XPgP5QnVmyiB5aOh1Kk7A3TbdzA@mail.gmail.com>
+References: <CAMKF1sqhNJCSrnVcb7YjfC-XPgP5QnVmyiB5aOh1Kk7A3TbdzA@mail.gmail.com>
+Subject: [meta-networking][PATCH] net-snmp: apply patch for cross-compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,37 +44,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Dec 2015 11:32:03 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 18 Dec 2015 11:45:16 -0000
 
-On 12/18/2015 12:29 PM, Martin Jansa wrote:
-> On Thu, Nov 19, 2015 at 02:14:57PM +0100, Rafaël Carré wrote:
->> ---
-> 
-> I'll finally merge this patchset today, but can you please fix:
-> 
-> vlc-2.2.1: vlc rdepends on libvncserver, but it isn't a build dependency? [build-deps]
-> 
-> in follow-up change?
+7fb5479 added the patch but did not apply it
+Rename patch to explicit it differentiate it from other patches
+---
+ .../net-snmp/0001-config_os_libs2-Error-Fix.patch  | 31 ++++++++++++++++++++++
+ .../0002-config_os_headers-Error-Fix.patch         | 31 ----------------------
+ .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb   |  1 +
+ 3 files changed, 32 insertions(+), 31 deletions(-)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0001-config_os_libs2-Error-Fix.patch
+ delete mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
 
-Sure
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-config_os_libs2-Error-Fix.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-config_os_libs2-Error-Fix.patch
+new file mode 100644
+index 0000000..5866a95
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-config_os_libs2-Error-Fix.patch
+@@ -0,0 +1,31 @@
++From e24fcd140f3f6dd18fd836b197c6d4bb773e50e7 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
++Date: Wed, 4 Nov 2015 16:49:30 +0100
++Subject: [PATCH] config_os_libs2: Error Fix
++
++ERROR: This autoconf log indicates errors, it looked at host include
++and/or library paths while determining system capabilities.
++---
++ configure.d/config_os_libs2 | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/configure.d/config_os_libs2 b/configure.d/config_os_libs2
++index 47491e2..e3647f9 100644
++--- a/configure.d/config_os_libs2
+++++ b/configure.d/config_os_libs2
++@@ -226,10 +226,10 @@ if test "x$with_nl" != "xno"; then
++     case $target_os in
++     linux*) # Check for libnl (linux)
++         netsnmp_save_CPPFLAGS="$CPPFLAGS"
++-        CPPFLAGS="-I/usr/include/libnl3 $CPPFLAGS"
+++        CPPFLAGS="$CPPFLAGS"
++         NETSNMP_SEARCH_LIBS(nl_connect, nl-3,
++             [AC_CHECK_HEADERS(netlink/netlink.h)
++-            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES -I/usr/include/libnl3"],
+++            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES"],
++             [CPPFLAGS="$netsnmp_save_CPPFLAGS"], [], [], [LMIBLIBS])
++         if test "x$ac_cv_header_netlink_netlink_h" != xyes; then
++             NETSNMP_SEARCH_LIBS(nl_connect, nl, [
++-- 
++2.5.0
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
+deleted file mode 100644
+index a90ce1f..0000000
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From e24fcd140f3f6dd18fd836b197c6d4bb773e50e7 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
+-Date: Wed, 4 Nov 2015 16:49:30 +0100
+-Subject: [PATCH] config_os_headers: Error Fix
+-
+-ERROR: This autoconf log indicates errors, it looked at host include
+-and/or library paths while determining system capabilities.
+----
+- configure.d/config_os_libs2 | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/configure.d/config_os_libs2 b/configure.d/config_os_libs2
+-index 47491e2..e3647f9 100644
+---- a/configure.d/config_os_libs2
+-+++ b/configure.d/config_os_libs2
+-@@ -226,10 +226,10 @@ if test "x$with_nl" != "xno"; then
+-     case $target_os in
+-     linux*) # Check for libnl (linux)
+-         netsnmp_save_CPPFLAGS="$CPPFLAGS"
+--        CPPFLAGS="-I/usr/include/libnl3 $CPPFLAGS"
+-+        CPPFLAGS="$CPPFLAGS"
+-         NETSNMP_SEARCH_LIBS(nl_connect, nl-3,
+-             [AC_CHECK_HEADERS(netlink/netlink.h)
+--            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES -I/usr/include/libnl3"],
+-+            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES"],
+-             [CPPFLAGS="$netsnmp_save_CPPFLAGS"], [], [], [LMIBLIBS])
+-         if test "x$ac_cv_header_netlink_netlink_h" != xyes; then
+-             NETSNMP_SEARCH_LIBS(nl_connect, nl, [
+--- 
+-2.5.0
+-
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+index b32d842..62186d4 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+@@ -20,6 +20,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
+         file://run-ptest \
+         file://dont-return-incompletely-parsed-varbinds.patch \
+         file://0001-config_os_headers-Error-Fix.patch \
++        file://0001-config_os_libs2-Error-Fix.patch \
+         file://0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch \
+ "
+ SRC_URI[md5sum] = "9f682bd70c717efdd9f15b686d07baee"
+-- 
+2.5.0
 
->>  meta-multimedia/recipes-multimedia/vlc/vlc.inc | 1 -
->>  1 file changed, 1 deletion(-)
->>
->> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
->> index 99a6c66..ce3601d 100644
->> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
->> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
->> @@ -22,7 +22,6 @@ REQUIRED_DISTRO_FEATURES = "x11"
->>  ARM_INSTRUCTION_SET = "arm"
->>  
->>  EXTRA_OECONF = "\
->> -    --with-contrib \
->>      --enable-run-as-root \
->>      --enable-xvideo \ 
->>      --disable-screen --disable-caca \
->> -- 
->> 2.5.0
 
