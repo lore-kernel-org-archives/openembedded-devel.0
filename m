@@ -1,40 +1,32 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id C136A73176
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 54BC46E5CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 16:19:34 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id l126so72135497wml.1
+	Fri, 18 Dec 2015 19:54:09 +0000 (UTC)
+Received: by mail-wm0-f50.google.com with SMTP id l126so79130606wml.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 08:19:35 -0800 (PST)
+	Fri, 18 Dec 2015 11:54:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=/PauzqRf7hSJJgq0nz6jELsLMsRM5UHAtUL7M7Zxc+w=;
-	b=VRW/1IQpx4PvAUeSFK3+6Dsol0lhrARPrLaLyFGx+9HHkqmGFJol9P6NLhi4f/KX/t
-	QMGoCxV6sG/a2EFJCFInsSjLcMZuG/srapHTW6acpJoZFN0IFFIvzw8CofPOL4KBqDN+
-	Q8zKnpBTtPC/onrEMg8ir05geK012H0WwFjSSuA7itqgoik+IrAJZLQ61XLKJ7b/pYz7
-	juvkgkoRuxRCzTVH42DpqIvZBsCCbMVgFXZhz/SEUlMEOqHJGRErYMXWUV1mCzp4EzY6
-	tb2F5Dcrm9YcB1NcRWQYhGZz3buLdtpRiHkVrn3vH99XVIzLT1jzCLcamgVfYaDJ3Ags
-	7iAg==
-X-Received: by 10.28.22.1 with SMTP id 1mr4272728wmw.41.1450455574636;
-	Fri, 18 Dec 2015 08:19:34 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	h67sm7261624wmf.17.2015.12.18.08.19.33
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 18 Dec 2015 08:19:33 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 18 Dec 2015 17:22:11 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151218162211.GA2556@jama>
-References: <1449130728-4066-1-git-send-email-kai.kang@windriver.com>
-	<1449130728-4066-5-git-send-email-kai.kang@windriver.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=Ok8OazegMpiweoF0sPgu9ddhZsKLquy9QDApinQLTzg=;
+	b=atHgA0Bcd5KfnJYoud9V5RZxEnppQ8SIBPjMer24qq6De+Ge8dFz0o1RvoZSgIXzfr
+	Xbu9KFLQeiNiZM57FMOj7wyYQgI0y8kjhuC//4XATTY+fpEuLwzsK4IeG+ZY6ALEXGZg
+	D0VuDNk/GDeBfq1j1kqmrWnZhn5+3WtBJl7FNmiovkrIaG7Juxj6lPRT0nX8apjo4Vh6
+	EtlJD5saHJkxfQuJGwul04qLqM+sRBG4F4Eyp56idFpIkR4WW99LbcHZ6XXZcfOxeesq
+	UUmZC+mxHb7dVkWbi+eyugAFgeATc5houpcnjhZrUVHvYILTY+AQwfoEspGuBgcPb+/P
+	3+mw==
 MIME-Version: 1.0
-In-Reply-To: <1449130728-4066-5-git-send-email-kai.kang@windriver.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-networking][PATCH 4/4] meta-networking: depends on layer meta-perl
+X-Received: by 10.194.200.134 with SMTP id js6mr6900983wjc.114.1450468449614; 
+	Fri, 18 Dec 2015 11:54:09 -0800 (PST)
+Received: by 10.194.117.68 with HTTP; Fri, 18 Dec 2015 11:54:09 -0800 (PST)
+In-Reply-To: <20151218113115.GD2563@jama>
+References: <1449199316-14048-1-git-send-email-armccurdy@gmail.com>
+	<20151218113115.GD2563@jama>
+Date: Fri, 18 Dec 2015 11:54:09 -0800
+Message-ID: <CAJ86T=WVuXXzRojbg1yNaJLuTiDVBXecoof1ArQQfJqZqe2vew@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-multimedia][PATCH 0/4] mpg123 cleanups + update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,68 +39,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Dec 2015 16:19:36 -0000
-X-Groupsio-MsgNum: 59103
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BOKacYhQ+x31HxR3"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 18 Dec 2015 19:54:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
---BOKacYhQ+x31HxR3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, Dec 18, 2015 at 3:31 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Thu, Dec 03, 2015 at 07:21:52PM -0800, Andre McCurdy wrote:
+>> Andre McCurdy (4):
+>>   mpg123: recipe formatting cleanup, no functional changes
+>>   mpg123: limit ARM_INSTRUCTION_SET = "arm" over-ride to armv4/armv5
+>>   mpg123: drop unnecessary dependency on tslib
+>>   mpg123: update 1.21.0 -> 1.22.4
+>
+> Can you please fix:
+> mpg123-1.22.4: ELF binary
+> '/tmp/work/i586-oe-linux/mpg123/1.22.4-r0/packages-split/mpg123/usr/lib/libmpg123.so.0.41.2'
+> has relocations in .text [textrel]
 
-On Thu, Dec 03, 2015 at 04:18:48PM +0800, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
->=20
-> Package mime-construct in layer meta-networking depends on some perl
-> modules in layer meta-perl. So make meta-networking depends on layer
-> meta-perl.
+Yes, I can take a look. This isn't a regression though - all versions
+of mpg123 contain x86 assembler which require text relocations and
+upstream isn't planning to fix them:
 
-Cannot we move mime-construct to meta-perl instead?
+  http://sourceforge.net/p/mpg123/bugs/168/
 
-It doesn't have any dependencies provided by meta-networking and also
-nothing in meta-networking is using mime-construct.
+So the solution will be a new patch which disables assembler
+optimisations when building for x86.
 
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  meta-networking/conf/layer.conf | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer=
-=2Econf
-> index 63bb07d..b7fc183 100644
-> --- a/meta-networking/conf/layer.conf
-> +++ b/meta-networking/conf/layer.conf
-> @@ -16,5 +16,6 @@ LAYERVERSION_networking-layer =3D "1"
->  LAYERDEPENDS_networking-layer =3D "core"
->  LAYERDEPENDS_networking-layer +=3D "openembedded-layer"
->  LAYERDEPENDS_networking-layer +=3D "meta-python"
-> +LAYERDEPENDS_networking-layer +=3D "perl-layer"
-> =20
->  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
-> --=20
-> 2.6.1
->=20
-> --=20
+>>
+>>  .../mpg123/{mpg123_1.21.0.bb => mpg123_1.22.4.bb}  | 47 ++++++++++++----------
+>>  1 file changed, 25 insertions(+), 22 deletions(-)
+>>  rename meta-multimedia/recipes-multimedia/mpg123/{mpg123_1.21.0.bb => mpg123_1.22.4.bb} (86%)
+>>
+>> --
+>> 1.9.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---BOKacYhQ+x31HxR3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlZ0MWQACgkQN1Ujt2V2gByQuQCfTwzWlGpcroLL7MDeqted4YU+
-Jm8Ani8DuWwkyLH10MZ5kDBG3lILQVdR
-=+FcW
------END PGP SIGNATURE-----
-
---BOKacYhQ+x31HxR3--
