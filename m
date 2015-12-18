@@ -1,26 +1,35 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C1F79731B0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 07:31:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tBI7VmRT024751
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Dec 2015 23:31:49 -0800 (PST)
-Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 17 Dec 2015 23:31:48 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 Dec 2015 15:31:56 +0800
-Message-ID: <1450423916-4811-2-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1450423916-4811-1-git-send-email-jackie.huang@windriver.com>
-References: <1450423916-4811-1-git-send-email-jackie.huang@windriver.com>
+Return-Path: <just4tech83@gmail.com>
+Received: from mail-oi0-f53.google.com (mail-oi0-f53.google.com
+	[209.85.218.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C7DF731B7;
+	Fri, 18 Dec 2015 07:40:05 +0000 (UTC)
+Received: by mail-oi0-f53.google.com with SMTP id o124so55730174oia.1;
+	Thu, 17 Dec 2015 23:40:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=evyG0jPUnWJUgWLa0Yf3BLk8G18iJ5kNOISs7fW8xAg=;
+	b=m68CqeeRU6qeqxWHrl7TZfZFLB2bgMDNvxprO7BqpWH4vy0ehgbpNZ9T72oQsnIvqF
+	J0GLrr34K7Z9jeUCeVr7dwphwocQZObG4G0+fyeNLtYeRQrvAko4Yv4XB7xA/8yn+2pD
+	eOYY992q0wc+pR7nhffSMbifuFaRLSGWO4qa5RtWYMUDytSm2PT/ruutSjDK/aBokjDt
+	hDkrYt/zCcOSfanRbsXagEuhJyBymRYFpPqt/x0von+NgNof5ByfiBq1X+SdK/WPgnsP
+	28uklb+6m+Twk0giyHrEckLs5ItcpAT09MAZu4Hc/pHQ6S88AywsNJvWVJY+4n9oPuTc
+	1qjQ==
 MIME-Version: 1.0
-Subject: [meta-java][PATCH 2/2] openjdk-8: skip the dev-so test
+X-Received: by 10.202.49.9 with SMTP id x9mr896086oix.75.1450424406440; Thu,
+	17 Dec 2015 23:40:06 -0800 (PST)
+Received: by 10.202.0.204 with HTTP; Thu, 17 Dec 2015 23:40:06 -0800 (PST)
+Received: by 10.202.0.204 with HTTP; Thu, 17 Dec 2015 23:40:06 -0800 (PST)
+In-Reply-To: <CAD2C2VSOXLTPM-yu6JFajf0LMHoE1t3utWG0vLFUzERcZs+7HA@mail.gmail.com>
+References: <CAD2C2VSOXLTPM-yu6JFajf0LMHoE1t3utWG0vLFUzERcZs+7HA@mail.gmail.com>
+Date: Fri, 18 Dec 2015 13:10:06 +0530
+Message-ID: <CAD2C2VQYkHC_ZOj-EjXe+x+AqEqeB-ZXbPkaM-76=Owb4bqpVg@mail.gmail.com>
+From: Bryan <just4tech83@gmail.com>
+To: linux-yocto@yoctoproject.org, poky@yoctoproject.org, 
+	bitbake-devel@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org, 
+	openembedded-core@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: korean/chinese keyboard layout support on yocto
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,40 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Dec 2015 07:31:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 18 Dec 2015 07:40:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Jackie Huang <jackie.huang@windriver.com>
+---------- Forwarded message ----------
+From: "Bryan" <just4tech83@gmail.com>
+Date: Dec 18, 2015 1:03 PM
+Subject: korean/chinese keyboard layout support on yocto
+To: <openembedded-core@lists.openembedded.org>
+Cc:
 
-Fixed:
-ERROR: QA Issue: non -dev/-dbg/nativesdk- package contains symlink .so:
-openjdk-8 path
-'work/core2-64-poky-linux/openjdk-8/72b05-r0/packages-split/openjdk-8/usr/lib/jvm/openjdk-8/jre/lib/amd64/server/libjsig.so'
-[dev-so]
-
-The symlink .so is valid so we just skip the test
-just like what we does in openjdk-7.
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- recipes-core/openjdk/openjdk-8_72b05.bb | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/recipes-core/openjdk/openjdk-8_72b05.bb b/recipes-core/openjdk/openjdk-8_72b05.bb
-index d962b1f..8aa9f9f 100644
---- a/recipes-core/openjdk/openjdk-8_72b05.bb
-+++ b/recipes-core/openjdk/openjdk-8_72b05.bb
-@@ -92,6 +92,9 @@ PROVIDES_${PN} = "java2-vm"
- RPROVIDES_${PN} = "java2-runtime"
- PROVIDES_${PN} = "java2-runtime"
- 
-+# There is a symlink to a .so but this one is valid.
-+INSANE_SKIP_${PN} = "dev-so"
-+
- inherit update-alternatives
- 
- ALTERNATIVE_PRIORITY = "100"
--- 
-2.3.5
-
+Hi,
+>     I am working on yocto poky-dizzy 1.7.1 and have developed some
+> application on top of customized os image. I have a reqirement to support
+> korean/chinese keyboard layout for application.
+> I have added cross complied libraries for  ibus-hangul pckages. Can
+> somebody suggest me how can i add support for keyboart layout and how to
+> enable automatically.
+>
+> Is there any bitbake recipe available to support these keyboard layout.
+>
+>
+> regards
+> Bryan
+>
 
