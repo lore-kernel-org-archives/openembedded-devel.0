@@ -1,39 +1,47 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-qg0-f42.google.com (mail-qg0-f42.google.com
-	[209.85.192.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 0BB316FFCD;
-	Fri, 18 Dec 2015 15:25:23 +0000 (UTC)
-Received: by mail-qg0-f42.google.com with SMTP id v36so35161174qgd.2;
-	Fri, 18 Dec 2015 07:25:24 -0800 (PST)
+Return-Path: <kergoth@gmail.com>
+Received: from mail-ig0-f173.google.com (mail-ig0-f173.google.com
+	[209.85.213.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 4888F60851
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Dec 2015 15:36:37 +0000 (UTC)
+Received: by mail-ig0-f173.google.com with SMTP id ph11so39041544igc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Dec 2015 07:36:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=Sz8DZ26H+HsGxigEOLxt/qgmCcHSNa/z1pkGu6IOmAI=;
-	b=HoaygYdkUp8wGgy3FpeGcJJJ3R35BQwpNa2eHuK3vbclGHwoI6AqfTVted9/Bm1al5
-	7DIqni+iXPGllfhUQrNRKrzbsYaENm5/rlX275tQIuVNYw0eRkNrFaMhT3Kmnb9LCAwP
-	0vmLKjwho/4hPnIcgIL0GFxzIYSKCzpq9nYlm3UeufddluHFuYRYMSNO9XK7Al5pKrit
-	UzU2YJ+GyubE0Mj1Vo1/jeoKswYvWw6izvLFBPXnwx0+As4lmFsqRs03VNk0IVxTwlTc
-	vVsNSSoSd2O0/aeDfbvMLor1CvcFLzXKVD0BzDXfMAR4w44Wog6/VjFiUibYHRdpSoKm
-	I3IQ==
-X-Received: by 10.140.234.17 with SMTP id f17mr6209458qhc.19.1450452324187;
-	Fri, 18 Dec 2015 07:25:24 -0800 (PST)
-Received: from [192.168.141.85] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
-	by smtp.gmail.com with ESMTPSA id
-	45sm6994207qgg.17.2015.12.18.07.25.23
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 18 Dec 2015 07:25:23 -0800 (PST)
-To: Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-References: <20151113165249.GF2567@jama> <20151218112530.GA2563@jama>
-From: Trevor Woerner <twoerner@gmail.com>
-Message-ID: <5674255F.7020009@gmail.com>
-Date: Fri, 18 Dec 2015 10:25:19 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.4.0
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=DUib9txVw9AJd49Fj3PcxK939YyzjyQHqZI6VvHsbcU=;
+	b=gQnJA8J9XrkUIW9mihPLfxlrkvv0Gch+ErWze7CvcYBXB6S137ARmdnAbMngPb3KTo
+	0DJwgqSsSCWDoFcbvjXN7n/yK0KC4eBbL9hyVzdMJDUKIbhXOMqvNhg0Wzi7nXCk9E/1
+	vPpbA5eZ/HS9XK95FYqsM1HHSYkp4fHCWJC35ALFoV3oiRqGN7ABqvhGYByBe085uJxu
+	CPbzdfr5J/JIPUOvoUh9RJCO2arSHok1SBpYhFuEdW3WOuJ+p13dxHp/PK+vU9oo4GWv
+	Cm8mIWzKCWBihX58k4I6vuPz9M0Wm5/J+UvA6BIml916YUNAWLqLQSRLv865L2g3Zhkx
+	BXWA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=kergoth-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=DUib9txVw9AJd49Fj3PcxK939YyzjyQHqZI6VvHsbcU=;
+	b=jfU9oKmlJOPKmLSwkRbEg2t2mDOLjhocf0Xe/QoLyXxQChMvpd3xqBsU3L+R8tNgW8
+	F9M1uuP7wVbs7FVlHbIEqACVlHft0rHM4EbQzKJeZG74iYP4wpa2oZazQrH2xFqRNBqk
+	3SeGewoNTSvbQ1pNR1DWvyO6wQlPru+DXR1sqlMIzUeZwcQ8BOkHjOz3VeWeSJfLf49T
+	McvxUYZ1k+s8CWOpVv1EGoMhwIy1qnn/8UoeFmlJSquJxf9TuEZO1GtHyn/YHeZ57U6O
+	EHJUUGE+qY08rApVULBApnIgm7aZjIrMawWH9ThpLp8MrEToFBKPTRR9p6CFbOvNV7tR
+	4sfw==
+X-Received: by 10.50.13.72 with SMTP id f8mr3784721igc.38.1450452998260; Fri,
+	18 Dec 2015 07:36:38 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20151218112530.GA2563@jama>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2015-12-17
+Sender: kergoth@gmail.com
+Received: by 10.79.69.129 with HTTP; Fri, 18 Dec 2015 07:36:18 -0800 (PST)
+In-Reply-To: <1BDA3F91DD18BA459E26B6B10F84A8D7010AB82D@DEMUMBX004.nsn-intra.net>
+References: <1BDA3F91DD18BA459E26B6B10F84A8D7010AB82D@DEMUMBX004.nsn-intra.net>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Fri, 18 Dec 2015 08:36:18 -0700
+X-Google-Sender-Auth: oitoNjWXSc4a7U1PGajuuxAMhuU
+Message-ID: <CABcZAN=9hSvADBTzvW7jL7maFhTU5vLO=i1RO1-UzQFVG4fdng@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: How to force recipe to be parsed eveey time - dynamic PV value
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,13 +54,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Dec 2015 15:25:24 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 18 Dec 2015 15:36:38 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 12/18/15 06:25, Martin Jansa wrote:
-> === qemuarm (1) ===
->     * /meta-openembedded/meta-oe/recipes-devtools/nodejs/nodejs_4.2.2.bb, do_compile
+On Fri, Dec 18, 2015 at 4:51 AM, Kubalski, Lukasz (EXT-Espotel -
+PL/Wroclaw) <lukasz.kubalski.ext@nokia.com> wrote:
 
-I'm having a look at this one.
+> I have problem that recipe is not always parsed.
+> Is it way to force it? Like checksum/signature/stamp invalidation?
+>
+> Problem details:
+>    I need to have my PV to be generated dynamically e.g like PV =
+> "${@my_get_version_func(d)}"
+>
+> In such case recipe is not parsed every time (checksum doesn't change), PV
+> is no reevaluated  and even my_get_version_func would return different
+> value my image is not rebuilt.
+>
+
+By default, inline python is not expanded when included in the metadata
+checksumming, it's left as is. If you want the result of the calculation to
+be included, you can use vardepvalue:
+
+    PV[vardepvalue] = "${PV}"
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
