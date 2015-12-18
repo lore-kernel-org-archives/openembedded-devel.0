@@ -1,47 +1,40 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-ig0-f173.google.com (mail-ig0-f173.google.com
-	[209.85.213.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 4888F60851
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id C136A73176
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 15:36:37 +0000 (UTC)
-Received: by mail-ig0-f173.google.com with SMTP id ph11so39041544igc.1
+	Fri, 18 Dec 2015 16:19:34 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id l126so72135497wml.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 07:36:38 -0800 (PST)
+	Fri, 18 Dec 2015 08:19:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=DUib9txVw9AJd49Fj3PcxK939YyzjyQHqZI6VvHsbcU=;
-	b=gQnJA8J9XrkUIW9mihPLfxlrkvv0Gch+ErWze7CvcYBXB6S137ARmdnAbMngPb3KTo
-	0DJwgqSsSCWDoFcbvjXN7n/yK0KC4eBbL9hyVzdMJDUKIbhXOMqvNhg0Wzi7nXCk9E/1
-	vPpbA5eZ/HS9XK95FYqsM1HHSYkp4fHCWJC35ALFoV3oiRqGN7ABqvhGYByBe085uJxu
-	CPbzdfr5J/JIPUOvoUh9RJCO2arSHok1SBpYhFuEdW3WOuJ+p13dxHp/PK+vU9oo4GWv
-	Cm8mIWzKCWBihX58k4I6vuPz9M0Wm5/J+UvA6BIml916YUNAWLqLQSRLv865L2g3Zhkx
-	BXWA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kergoth-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=DUib9txVw9AJd49Fj3PcxK939YyzjyQHqZI6VvHsbcU=;
-	b=jfU9oKmlJOPKmLSwkRbEg2t2mDOLjhocf0Xe/QoLyXxQChMvpd3xqBsU3L+R8tNgW8
-	F9M1uuP7wVbs7FVlHbIEqACVlHft0rHM4EbQzKJeZG74iYP4wpa2oZazQrH2xFqRNBqk
-	3SeGewoNTSvbQ1pNR1DWvyO6wQlPru+DXR1sqlMIzUeZwcQ8BOkHjOz3VeWeSJfLf49T
-	McvxUYZ1k+s8CWOpVv1EGoMhwIy1qnn/8UoeFmlJSquJxf9TuEZO1GtHyn/YHeZ57U6O
-	EHJUUGE+qY08rApVULBApnIgm7aZjIrMawWH9ThpLp8MrEToFBKPTRR9p6CFbOvNV7tR
-	4sfw==
-X-Received: by 10.50.13.72 with SMTP id f8mr3784721igc.38.1450452998260; Fri,
-	18 Dec 2015 07:36:38 -0800 (PST)
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=/PauzqRf7hSJJgq0nz6jELsLMsRM5UHAtUL7M7Zxc+w=;
+	b=VRW/1IQpx4PvAUeSFK3+6Dsol0lhrARPrLaLyFGx+9HHkqmGFJol9P6NLhi4f/KX/t
+	QMGoCxV6sG/a2EFJCFInsSjLcMZuG/srapHTW6acpJoZFN0IFFIvzw8CofPOL4KBqDN+
+	Q8zKnpBTtPC/onrEMg8ir05geK012H0WwFjSSuA7itqgoik+IrAJZLQ61XLKJ7b/pYz7
+	juvkgkoRuxRCzTVH42DpqIvZBsCCbMVgFXZhz/SEUlMEOqHJGRErYMXWUV1mCzp4EzY6
+	tb2F5Dcrm9YcB1NcRWQYhGZz3buLdtpRiHkVrn3vH99XVIzLT1jzCLcamgVfYaDJ3Ags
+	7iAg==
+X-Received: by 10.28.22.1 with SMTP id 1mr4272728wmw.41.1450455574636;
+	Fri, 18 Dec 2015 08:19:34 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	h67sm7261624wmf.17.2015.12.18.08.19.33
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 18 Dec 2015 08:19:33 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 18 Dec 2015 17:22:11 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151218162211.GA2556@jama>
+References: <1449130728-4066-1-git-send-email-kai.kang@windriver.com>
+	<1449130728-4066-5-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.69.129 with HTTP; Fri, 18 Dec 2015 07:36:18 -0800 (PST)
-In-Reply-To: <1BDA3F91DD18BA459E26B6B10F84A8D7010AB82D@DEMUMBX004.nsn-intra.net>
-References: <1BDA3F91DD18BA459E26B6B10F84A8D7010AB82D@DEMUMBX004.nsn-intra.net>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Fri, 18 Dec 2015 08:36:18 -0700
-X-Google-Sender-Auth: oitoNjWXSc4a7U1PGajuuxAMhuU
-Message-ID: <CABcZAN=9hSvADBTzvW7jL7maFhTU5vLO=i1RO1-UzQFVG4fdng@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: How to force recipe to be parsed eveey time - dynamic PV value
+In-Reply-To: <1449130728-4066-5-git-send-email-kai.kang@windriver.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-networking][PATCH 4/4] meta-networking: depends on layer meta-perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,33 +47,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Dec 2015 15:36:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 18 Dec 2015 16:19:36 -0000
+X-Groupsio-MsgNum: 59103
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="BOKacYhQ+x31HxR3"
+Content-Disposition: inline
 
-On Fri, Dec 18, 2015 at 4:51 AM, Kubalski, Lukasz (EXT-Espotel -
-PL/Wroclaw) <lukasz.kubalski.ext@nokia.com> wrote:
+--BOKacYhQ+x31HxR3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> I have problem that recipe is not always parsed.
-> Is it way to force it? Like checksum/signature/stamp invalidation?
->
-> Problem details:
->    I need to have my PV to be generated dynamically e.g like PV =
-> "${@my_get_version_func(d)}"
->
-> In such case recipe is not parsed every time (checksum doesn't change), PV
-> is no reevaluated  and even my_get_version_func would return different
-> value my image is not rebuilt.
->
+On Thu, Dec 03, 2015 at 04:18:48PM +0800, kai.kang@windriver.com wrote:
+> From: Kai Kang <kai.kang@windriver.com>
+>=20
+> Package mime-construct in layer meta-networking depends on some perl
+> modules in layer meta-perl. So make meta-networking depends on layer
+> meta-perl.
 
-By default, inline python is not expanded when included in the metadata
-checksumming, it's left as is. If you want the result of the calculation to
-be included, you can use vardepvalue:
+Cannot we move mime-construct to meta-perl instead?
 
-    PV[vardepvalue] = "${PV}"
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+It doesn't have any dependencies provided by meta-networking and also
+nothing in meta-networking is using mime-construct.
 
+> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> ---
+>  meta-networking/conf/layer.conf | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer=
+=2Econf
+> index 63bb07d..b7fc183 100644
+> --- a/meta-networking/conf/layer.conf
+> +++ b/meta-networking/conf/layer.conf
+> @@ -16,5 +16,6 @@ LAYERVERSION_networking-layer =3D "1"
+>  LAYERDEPENDS_networking-layer =3D "core"
+>  LAYERDEPENDS_networking-layer +=3D "openembedded-layer"
+>  LAYERDEPENDS_networking-layer +=3D "meta-python"
+> +LAYERDEPENDS_networking-layer +=3D "perl-layer"
+> =20
+>  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
+> --=20
+> 2.6.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--BOKacYhQ+x31HxR3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlZ0MWQACgkQN1Ujt2V2gByQuQCfTwzWlGpcroLL7MDeqted4YU+
+Jm8Ani8DuWwkyLH10MZ5kDBG3lILQVdR
+=+FcW
+-----END PGP SIGNATURE-----
+
+--BOKacYhQ+x31HxR3--
