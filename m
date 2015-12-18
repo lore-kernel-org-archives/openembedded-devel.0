@@ -1,27 +1,24 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id CD4D4731B1
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EF45731B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 07:19:37 +0000 (UTC)
+	Fri, 18 Dec 2015 07:31:46 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tBI7Jb5d018979
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tBI7Vlue018073
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Dec 2015 23:19:37 -0800 (PST)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Thu, 17 Dec 2015 23:19:36 -0800
+	Thu, 17 Dec 2015 23:31:47 -0800
+Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Thu, 17 Dec 2015 23:31:46 -0800
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <D2648347-D3B8-420B-8527-0FEBE36BFD0C@gmail.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <5673B389.7090401@windriver.com>
-Date: Fri, 18 Dec 2015 15:19:37 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.4.0
+Date: Fri, 18 Dec 2015 15:31:55 +0800
+Message-ID: <1450423916-4811-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <D2648347-D3B8-420B-8527-0FEBE36BFD0C@gmail.com>
-Subject: Re: [meta-networking][PATCH 2/6] talloc: rename to libtalloc and cleanup dependency mess
+Subject: [meta-java][PATCH 1/2] openjdk: fix host-user-contaminated QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,39 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Dec 2015 07:19:38 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 18 Dec 2015 07:31:48 -0000
+Content-Type: text/plain
 
-On 2015年11月20日 03:44, Jens Rehsack wrote:
-> diff --git a/meta-networking/recipes-support/talloc/talloc_2.1.1.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.1.bb
-> similarity index 70%
-> rename from meta-networking/recipes-support/talloc/talloc_2.1.1.bb
-> rename to meta-networking/recipes-support/libtalloc/libtalloc_2.1.1.bb
-> index 89c390f..9016f42 100644
-> --- a/meta-networking/recipes-support/talloc/talloc_2.1.1.bb
-> +++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.1.bb
-> @@ -3,7 +3,9 @@ HOMEPAGE ="http://talloc.samba.org"
->   SECTION = "libs"
->   LICENSE = "LGPL-3.0+ & GPL-3.0+"
->   
-> -SRC_URI ="http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar.gz"
-> +DEPENDS += "libbsd"
-> +
-> +SRC_URI ="http://samba.org/ftp/${BPN}/talloc-${PV}.tar.gz"
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Both the ${BPN} are needed to be replaced with talloc.
+Fixed:
+WARNING: QA Issue: openjdk-8:
+/openjdk-8-doc/usr/lib/jvm/openjdk-8/jre/THIRD_PARTY_README is owned by
+uid 1786, which is the same as the user running bitbake. This may be due
+to host contamination [host-user-contaminated]
 
---Kai
+The use of cp results in files in the recipe being owned by the user
+running bitbake, so fix the owner to root:root
 
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ recipes-core/openjdk/openjdk-8_72b05.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
->   LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
->                       file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
->   
-
-
+diff --git a/recipes-core/openjdk/openjdk-8_72b05.bb b/recipes-core/openjdk/openjdk-8_72b05.bb
+index 96473f5..d962b1f 100644
+--- a/recipes-core/openjdk/openjdk-8_72b05.bb
++++ b/recipes-core/openjdk/openjdk-8_72b05.bb
+@@ -20,6 +20,7 @@ do_install() {
+     rm -rf ${D}${JDK_HOME}
+         mkdir -p ${D}${JDK_HOME}
+     cp -rp ${B}/images/j2sdk-image/* ${D}${JDK_HOME}
++    chown -R root:root ${D}${JDK_HOME}
+     install -m644 ${WORKDIR}/jvm.cfg  ${D}${JDK_HOME}/jre/lib/${JDK_ARCH}/
+     find ${D}${JDK_HOME} -name "*.debuginfo" -print0 | xargs -0 rm
+ }
 -- 
-Regards,
-Neil | Kai Kang
+2.3.5
 
 
