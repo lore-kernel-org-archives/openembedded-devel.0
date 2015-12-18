@@ -1,37 +1,39 @@
-Return-Path: <rafael.carre@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A61560616
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 7DA9A731AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 11:45:15 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id l126so62076273wml.1
+	Fri, 18 Dec 2015 11:48:58 +0000 (UTC)
+Received: by mail-wm0-f49.google.com with SMTP id p187so61023411wmp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 03:45:16 -0800 (PST)
+	Fri, 18 Dec 2015 03:48:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id:in-reply-to:references;
-	bh=Lng+ZGL0S8dFK+G5sPfV0jpjLg8HxcZn9q6tPo2IwYA=;
-	b=p8YEzs7SWMh/m2X3NVieO9eJu7tELMciU0QddHOY5F0efpmqXAlrgoYMgiJGvqHGYM
-	w48aZxWa5T0VMSwjxK9MfW0OHiTL+VJtctJ18tQTRXomyQPKbJy0N0B27hdy79Xjdk4r
-	HaEcArhDDmE35fv8gKhWG1wirCsNxSP/N8LBiLIlPkq6wgjj6/blt4COcp8QFaM4uP3U
-	e0MDOI0F9/rbZnMRs+hQj3kjsZGvUIe5CASF3/AIoqAsujsHSqRHwP01qBlypkJ8bTvQ
-	oTPnhKCtlJFae3YzInAYbCA4MMotX47m0rpkrnVH6543m7MjbxAsM3RcQs83L11tSdZ/
-	cxZQ==
-X-Received: by 10.28.59.133 with SMTP id i127mr2764789wma.24.1450439115997;
-	Fri, 18 Dec 2015 03:45:15 -0800 (PST)
-Received: from localhost.localdomain
-	(lns-bzn-47f-81-56-255-191.adsl.proxad.net. [81.56.255.191])
-	by smtp.gmail.com with ESMTPSA id q74sm6377296wmd.0.2015.12.18.03.45.14
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 18 Dec 2015 03:45:14 -0800 (PST)
-Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
-From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Dec 2015 12:45:10 +0100
-Message-Id: <1450439110-17705-1-git-send-email-funman@videolan.org>
-X-Mailer: git-send-email 2.5.0
-In-Reply-To: <CAMKF1sqhNJCSrnVcb7YjfC-XPgP5QnVmyiB5aOh1Kk7A3TbdzA@mail.gmail.com>
-References: <CAMKF1sqhNJCSrnVcb7YjfC-XPgP5QnVmyiB5aOh1Kk7A3TbdzA@mail.gmail.com>
-Subject: [meta-networking][PATCH] net-snmp: apply patch for cross-compilation
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=X3YnmLj2p6Pn5Vj2cpbUHj+MVykofTQsGuZHfAJ+7qE=;
+	b=PGEW1Hz6ukxlLyIL7XPIrGa5lI0bnlRpDweLklWx2CvvggOFrfHogkBJMDooFbQdO+
+	OpU1hzFxk4RGbl8h/xdCnxDHcLVh/zRoAVNvGe4FUYKt8IbF3g6B9/0LdMeytdwGrAkb
+	hff3Gw9WdzpwpafP84b+P7r0Xmcx6gm2tAMbm41Xq29BihcodilXMTdR+xj0buXtthy1
+	jThf5E8WSPCs8RifQ7Vgr5Duv9iMeKY92+EqSOZedfHLUEeleKYawZfLIAOor6LY3Z2H
+	xL/WgyloZNVRZCdp4FUh9qLcIGpxZN1xlrnv2Eiu5s48ihfr5/824LAlsx2HU3S6LEfe
+	6pcg==
+X-Received: by 10.194.173.233 with SMTP id bn9mr3540126wjc.1.1450439338869;
+	Fri, 18 Dec 2015 03:48:58 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	l20sm6372027wmd.20.2015.12.18.03.48.57
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 18 Dec 2015 03:48:57 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 18 Dec 2015 12:51:29 +0100
+To: Trevor Woerner <twoerner@gmail.com>
+Message-ID: <20151218115129.GE2563@jama>
+References: <1448993965-32226-1-git-send-email-twoerner@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1448993965-32226-1-git-send-email-twoerner@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v2] nodejs: cleanup and update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,105 +46,178 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Dec 2015 11:45:16 -0000
+X-List-Received-Date: Fri, 18 Dec 2015 11:48:59 -0000
+X-Groupsio-MsgNum: 59095
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="IU5/I01NYhRvwH70"
+Content-Disposition: inline
 
-7fb5479 added the patch but did not apply it
-Rename patch to explicit it differentiate it from other patches
----
- .../net-snmp/0001-config_os_libs2-Error-Fix.patch  | 31 ++++++++++++++++++++++
- .../0002-config_os_headers-Error-Fix.patch         | 31 ----------------------
- .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb   |  1 +
- 3 files changed, 32 insertions(+), 31 deletions(-)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0001-config_os_libs2-Error-Fix.patch
- delete mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
+--IU5/I01NYhRvwH70
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-config_os_libs2-Error-Fix.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-config_os_libs2-Error-Fix.patch
-new file mode 100644
-index 0000000..5866a95
---- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-config_os_libs2-Error-Fix.patch
-@@ -0,0 +1,31 @@
-+From e24fcd140f3f6dd18fd836b197c6d4bb773e50e7 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
-+Date: Wed, 4 Nov 2015 16:49:30 +0100
-+Subject: [PATCH] config_os_libs2: Error Fix
-+
-+ERROR: This autoconf log indicates errors, it looked at host include
-+and/or library paths while determining system capabilities.
-+---
-+ configure.d/config_os_libs2 | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure.d/config_os_libs2 b/configure.d/config_os_libs2
-+index 47491e2..e3647f9 100644
-+--- a/configure.d/config_os_libs2
-++++ b/configure.d/config_os_libs2
-+@@ -226,10 +226,10 @@ if test "x$with_nl" != "xno"; then
-+     case $target_os in
-+     linux*) # Check for libnl (linux)
-+         netsnmp_save_CPPFLAGS="$CPPFLAGS"
-+-        CPPFLAGS="-I/usr/include/libnl3 $CPPFLAGS"
-++        CPPFLAGS="$CPPFLAGS"
-+         NETSNMP_SEARCH_LIBS(nl_connect, nl-3,
-+             [AC_CHECK_HEADERS(netlink/netlink.h)
-+-            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES -I/usr/include/libnl3"],
-++            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES"],
-+             [CPPFLAGS="$netsnmp_save_CPPFLAGS"], [], [], [LMIBLIBS])
-+         if test "x$ac_cv_header_netlink_netlink_h" != xyes; then
-+             NETSNMP_SEARCH_LIBS(nl_connect, nl, [
-+-- 
-+2.5.0
-+
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
-deleted file mode 100644
-index a90ce1f..0000000
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From e24fcd140f3f6dd18fd836b197c6d4bb773e50e7 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
--Date: Wed, 4 Nov 2015 16:49:30 +0100
--Subject: [PATCH] config_os_headers: Error Fix
--
--ERROR: This autoconf log indicates errors, it looked at host include
--and/or library paths while determining system capabilities.
-----
-- configure.d/config_os_libs2 | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/configure.d/config_os_libs2 b/configure.d/config_os_libs2
--index 47491e2..e3647f9 100644
----- a/configure.d/config_os_libs2
--+++ b/configure.d/config_os_libs2
--@@ -226,10 +226,10 @@ if test "x$with_nl" != "xno"; then
--     case $target_os in
--     linux*) # Check for libnl (linux)
--         netsnmp_save_CPPFLAGS="$CPPFLAGS"
---        CPPFLAGS="-I/usr/include/libnl3 $CPPFLAGS"
--+        CPPFLAGS="$CPPFLAGS"
--         NETSNMP_SEARCH_LIBS(nl_connect, nl-3,
--             [AC_CHECK_HEADERS(netlink/netlink.h)
---            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES -I/usr/include/libnl3"],
--+            EXTERNAL_MIBGROUP_INCLUDES="$EXTERNAL_MIBGROUP_INCLUDES"],
--             [CPPFLAGS="$netsnmp_save_CPPFLAGS"], [], [], [LMIBLIBS])
--         if test "x$ac_cv_header_netlink_netlink_h" != xyes; then
--             NETSNMP_SEARCH_LIBS(nl_connect, nl, [
---- 
--2.5.0
--
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-index b32d842..62186d4 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-@@ -20,6 +20,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
-         file://run-ptest \
-         file://dont-return-incompletely-parsed-varbinds.patch \
-         file://0001-config_os_headers-Error-Fix.patch \
-+        file://0001-config_os_libs2-Error-Fix.patch \
-         file://0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch \
- "
- SRC_URI[md5sum] = "9f682bd70c717efdd9f15b686d07baee"
--- 
-2.5.0
+On Tue, Dec 01, 2015 at 01:19:25PM -0500, Trevor Woerner wrote:
+> Remove old nodejs_0.4.12 and update nodejs_0.12.7 to the latest stable
+> nodejs_4.2.2.
 
+It does something strange with CC and ends with invalid parameter for
+qemuarm:
 
+arm-oe-linux-gnueabi-g++: error: unrecognized argument in option '-mfpu=3Dv=
+fpv2'
+
+http://errors.yoctoproject.org/Errors/Details/22678/
+
+>=20
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+> ---
+>  .../nodejs/nodejs4/libev-cross-cc_0.4.12.patch     | 13 ------
+>  meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb  | 49 ----------------=
+------
+>  .../nodejs/{nodejs_0.12.7.bb =3D> nodejs_4.2.2.bb}   |  6 +--
+>  3 files changed, 3 insertions(+), 65 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-c=
+c_0.4.12.patch
+>  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
+>  rename meta-oe/recipes-devtools/nodejs/{nodejs_0.12.7.bb =3D> nodejs_4.2=
+=2E2.bb} (93%)
+>=20
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-cc_0.4.1=
+2.patch b/meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-cc_0.4.12.pat=
+ch
+> deleted file mode 100644
+> index 2b9838f..0000000
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-cc_0.4.12.patch
+> +++ /dev/null
+> @@ -1,13 +0,0 @@
+> -diff --git a/deps/libev/wscript b/deps/libev/wscript
+> -index 4f6c9a8..1796749 100644
+> ---- a/deps/libev/wscript
+> -+++ b/deps/libev/wscript
+> -@@ -58,7 +58,7 @@ def configure(conf):
+> -           return 0;
+> -       }
+> -   """
+> --  conf.check_cc(fragment=3Dcode, define_name=3D"HAVE_CLOCK_SYSCALL", ex=
+ecute=3DTrue,
+> -+  conf.check_cc(fragment=3Dcode, define_name=3D"HAVE_CLOCK_SYSCALL", ex=
+ecute=3DFalse,
+> -                 msg=3D"Checking for SYS_clock_gettime")
+> -=20
+> -   have_librt =3D conf.check(lib=3D'rt', uselib_store=3D'RT')
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb b/meta-oe/=
+recipes-devtools/nodejs/nodejs4_0.4.12.bb
+> deleted file mode 100644
+> index c73cefc..0000000
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
+> +++ /dev/null
+> @@ -1,49 +0,0 @@
+> -SUMMARY =3D "nodeJS Evented I/O for V8 JavaScript"
+> -HOMEPAGE =3D "http://nodejs.org"
+> -LICENSE =3D "MIT & Zlib"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd6237f3a840aef5b7880fb4e49eec=
+fe5"
+> -
+> -DEPENDS =3D "openssl"
+> -
+> -PNBLACKLIST[nodejs4] ?=3D "Used only by currently blacklisted cloud9 and=
+ fails to build for qemuarm with thumb: error: #error For thumb inter-worki=
+ng we require an architecture which supports blx"
+> -
+> -SRC_URI =3D " \
+> -    http://nodejs.org/dist/node-v${PV}.tar.gz \
+> -    file://libev-cross-cc_${PV}.patch \
+> -"
+> -SRC_URI[md5sum] =3D "a6375eaa43db5356bf443e25b828ae16"
+> -SRC_URI[sha256sum] =3D "c01af05b933ad4d2ca39f63cac057f54f032a4d83cff8711=
+e42650ccee24fce4"
+> -
+> -S =3D "${WORKDIR}/node-v${PV}"
+> -
+> -# v8 errors out if you have set CCACHE
+> -CCACHE =3D ""
+> -
+> -do_configure () {
+> -    sed -i -e 's:/usr/lib:${STAGING_LIBDIR}:g' wscript
+> -    sed -i -e 's:/usr/local/lib:${STAGING_LIBDIR}:g' wscript
+> -    ./configure --prefix=3D${prefix} --without-snapshot
+> -}
+> -
+> -do_compile () {
+> -    make
+> -}
+> -
+> -do_install () {
+> -    oe_runmake install DESTDIR=3D${D}
+> -
+> -    # fix namespace conflicts with other nodejs recipes
+> -    mv ${D}${bindir}/node ${D}${bindir}/node4
+> -    mv ${D}${bindir}/node-waf ${D}${bindir}/node4-waf
+> -
+> -    mv ${D}${includedir}/node ${D}${includedir}/node4
+> -
+> -    mv ${D}${libdir}/node ${D}${libdir}/node4
+> -    mv ${D}${libdir}/pkgconfig/nodejs.pc ${D}${libdir}/pkgconfig/nodejs4=
+=2Epc
+> -    sed -i -e s:include/node:include/node4: ${D}${libdir}/pkgconfig/node=
+js4.pc
+> -
+> -    mv ${D}${datadir}/man/man1/node.1 ${D}${datadir}/man/man1/node4.1
+> -}
+> -
+> -FILES_${PN} +=3D "${libdir}/node4/wafadmin"
+> -BBCLASSEXTEND =3D "native"
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.7.bb b/meta-oe/r=
+ecipes-devtools/nodejs/nodejs_4.2.2.bb
+> similarity index 93%
+> rename from meta-oe/recipes-devtools/nodejs/nodejs_0.12.7.bb
+> rename to meta-oe/recipes-devtools/nodejs/nodejs_4.2.2.bb
+> index 41eb5ee..2ca2403 100644
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.7.bb
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.2.2.bb
+> @@ -1,7 +1,7 @@
+>  DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
+>  HOMEPAGE =3D "http://nodejs.org"
+>  LICENSE =3D "MIT & BSD & Artistic-2.0"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D14115ff11211df04b031ec7d40b6d=
+31b"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dee90ba97d933fc8d56e97812b7dd6=
+2e9"
+> =20
+>  DEPENDS =3D "openssl"
+> =20
+> @@ -9,8 +9,8 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.ta=
+r.gz \
+>      file://enable-armv5e-build.patch \
+>      file://no-registry.patch \
+>  "
+> -SRC_URI[md5sum] =3D "5523ec4347d7fe6b0f6dda1d1c7799d5"
+> -SRC_URI[sha256sum] =3D "b23d64df051c9c969b0c583f802d5d71de342e53067127a5=
+061415be7e12f39d"
+> +SRC_URI[md5sum] =3D "7c46c158e4c9a44cfbd039951c13dfe6"
+> +SRC_URI[sha256sum] =3D "00e709353435b436b5bbf5e62272ebb15fe801065422c4c2=
+afe2b93456210cb1"
+> =20
+>  S =3D "${WORKDIR}/node-v${PV}"
+> =20
+> --=20
+> 2.6.0.rc3
+>=20
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--IU5/I01NYhRvwH70
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlZz80EACgkQN1Ujt2V2gBxBmACcCcy4cGHCRHXKMKyRxyTrao+H
+Iy8AoIAKokunJkBDZznQJtvuNdj6Izjg
+=pLsB
+-----END PGP SIGNATURE-----
+
+--IU5/I01NYhRvwH70--
