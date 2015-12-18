@@ -1,41 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 60E0060616
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id E7F036FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 11:27:07 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id l126so60929379wml.1
+	Fri, 18 Dec 2015 11:28:43 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id p187so60875238wmp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 03:27:08 -0800 (PST)
+	Fri, 18 Dec 2015 03:28:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=+FcS3HDujU9Y2Bszbp6KJdfamKRD9hOL9zlprdicaDI=;
-	b=kibcdVXjEpw3jJ9ZAEoN38kYL2pzwFlVHJF+ib+UnyvooKqBM24UkM1MQNjZMr/pqj
-	uw0BBqTViB//qHdPA0ZM2VYNkaSVpLmK7sfZdbgUidSC/d7Apegvd8G+UlmGGTfYA6Zx
-	WCmafmpZMWArjS6KgRRcG+KuNU993qqmyPGPKRswU0Jtb3cwHe49dNKN3CRT7BnkCFpn
-	Kf8S5iYtjKgg2ZHuJqe1p9Vt0maiQuf1nsHVeR2oj5Qq1318a0owk6bcE4fEBROIHXgp
-	j+BZF5LQH20FVg8g53H9Cz4/bQRFxQqm7E6Q2O5pQhDxRqXeY4sQkfFJTpOGs3m4J9kg
-	qmmg==
-X-Received: by 10.194.175.194 with SMTP id cc2mr3436544wjc.121.1450438028127; 
-	Fri, 18 Dec 2015 03:27:08 -0800 (PST)
+	bh=O8ch6WR8hpA2TzZyX86BsIxGdBNIdkONZKhldAADPZA=;
+	b=WxmFswYJRs31EUgWc9nq8CAVVi0QG6VSM75f5piShj42IK92qWr7y79XWiMRkGrMaI
+	I/MmqUC7pP8pSloPa/21jpmV0xg7gQRazSpbm2CHvNU2oaKQKM8tTdyYTQRO3PVJ2tA9
+	79nO4Du7zOA8CZqkRm428OHqNvVHI6QhCm98ElZ6zOCAl4Ai22u6NRgF2p8rrQRLgDLN
+	ncdT09mdhCu8pNbSbchrjZilwaBAdhvg1Lr9xfH/+SdRtJUHVwkGMWqUsN9/1SrrbtaY
+	pnjnp1t71ehIDzm1Ey0lI5w7yNtDIQghkxuiQ/ddOMlP7MSn3ZzkakxeySed/FgqixZs
+	chBg==
+X-Received: by 10.28.14.78 with SMTP id 75mr2667813wmo.84.1450438124069;
+	Fri, 18 Dec 2015 03:28:44 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	m16sm6309113wmb.13.2015.12.18.03.27.06
+	q7sm14426584wjz.12.2015.12.18.03.28.42
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 18 Dec 2015 03:27:06 -0800 (PST)
+	Fri, 18 Dec 2015 03:28:42 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 18 Dec 2015 12:29:39 +0100
+Date: Fri, 18 Dec 2015 12:31:15 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151218112939.GC2563@jama>
-References: <564DC01B.4000103@videolan.org>
-	<1447938897-26171-1-git-send-email-funman@videolan.org>
-	<1447938897-26171-6-git-send-email-funman@videolan.org>
+Message-ID: <20151218113115.GD2563@jama>
+References: <1449199316-14048-1-git-send-email-armccurdy@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1447938897-26171-6-git-send-email-funman@videolan.org>
+In-Reply-To: <1449199316-14048-1-git-send-email-armccurdy@gmail.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-multimedia][PATCH 6/6] VLC: do not use --with-contrib
+Subject: Re: [meta-multimedia][PATCH 0/4] mpg123 cleanups + update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,45 +46,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Dec 2015 11:27:08 -0000
-X-Groupsio-MsgNum: 59091
+X-List-Received-Date: Fri, 18 Dec 2015 11:28:44 -0000
+X-Groupsio-MsgNum: 59092
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="5G06lTa6Jq83wMTw"
+	protocol="application/pgp-signature"; boundary="ZJcv+A0YCCLh2VIg"
 Content-Disposition: inline
 
---5G06lTa6Jq83wMTw
-Content-Type: text/plain; charset=iso-8859-1
+--ZJcv+A0YCCLh2VIg
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 19, 2015 at 02:14:57PM +0100, Rafa=EBl Carr=E9 wrote:
-> ---
+On Thu, Dec 03, 2015 at 07:21:52PM -0800, Andre McCurdy wrote:
+> Andre McCurdy (4):
+>   mpg123: recipe formatting cleanup, no functional changes
+>   mpg123: limit ARM_INSTRUCTION_SET =3D "arm" over-ride to armv4/armv5
+>   mpg123: drop unnecessary dependency on tslib
+>   mpg123: update 1.21.0 -> 1.22.4
 
-I'll finally merge this patchset today, but can you please fix:
+Can you please fix:
+mpg123-1.22.4: ELF binary
+'/tmp/work/i586-oe-linux/mpg123/1.22.4-r0/packages-split/mpg123/usr/lib/lib=
+mpg123.so.0.41.2'
+has relocations in .text [textrel]
 
-vlc-2.2.1: vlc rdepends on libvncserver, but it isn't a build dependency? [=
-build-deps]
-
-in follow-up change?
-
->  meta-multimedia/recipes-multimedia/vlc/vlc.inc | 1 -
->  1 file changed, 1 deletion(-)
 >=20
-> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multim=
-edia/recipes-multimedia/vlc/vlc.inc
-> index 99a6c66..ce3601d 100644
-> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-> @@ -22,7 +22,6 @@ REQUIRED_DISTRO_FEATURES =3D "x11"
->  ARM_INSTRUCTION_SET =3D "arm"
-> =20
->  EXTRA_OECONF =3D "\
-> -    --with-contrib \
->      --enable-run-as-root \
->      --enable-xvideo \=20
->      --disable-screen --disable-caca \
+>  .../mpg123/{mpg123_1.21.0.bb =3D> mpg123_1.22.4.bb}  | 47 ++++++++++++--=
+--------
+>  1 file changed, 25 insertions(+), 22 deletions(-)
+>  rename meta-multimedia/recipes-multimedia/mpg123/{mpg123_1.21.0.bb =3D> =
+mpg123_1.22.4.bb} (86%)
+>=20
 > --=20
-> 2.5.0
+> 1.9.1
 >=20
 > --=20
 > _______________________________________________
@@ -97,16 +89,16 @@ edia/recipes-multimedia/vlc/vlc.inc
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---5G06lTa6Jq83wMTw
+--ZJcv+A0YCCLh2VIg
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlZz7iIACgkQN1Ujt2V2gBzqKgCfX1Zn9dP5jLGuoW4dyL1ULqki
-g0UAnRkSYIscFLKgstlXkbhO974QgotP
-=DAqd
+iEYEARECAAYFAlZz7oIACgkQN1Ujt2V2gBzK+gCfW4ICex4UNefvXcihgIpn9lOZ
+5B4An0wfyzUAk+OmkdqnSvxnA6eVJgsp
+=u7i9
 -----END PGP SIGNATURE-----
 
---5G06lTa6Jq83wMTw--
+--ZJcv+A0YCCLh2VIg--
