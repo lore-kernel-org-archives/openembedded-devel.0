@@ -1,39 +1,43 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id E7F036FFD4
+Return-Path: <rafael.carre@gmail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id B52C46FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 11:28:43 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id p187so60875238wmp.0
+	Fri, 18 Dec 2015 11:32:02 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id p187so60987443wmp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 03:28:44 -0800 (PST)
+	Fri, 18 Dec 2015 03:32:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=O8ch6WR8hpA2TzZyX86BsIxGdBNIdkONZKhldAADPZA=;
-	b=WxmFswYJRs31EUgWc9nq8CAVVi0QG6VSM75f5piShj42IK92qWr7y79XWiMRkGrMaI
-	I/MmqUC7pP8pSloPa/21jpmV0xg7gQRazSpbm2CHvNU2oaKQKM8tTdyYTQRO3PVJ2tA9
-	79nO4Du7zOA8CZqkRm428OHqNvVHI6QhCm98ElZ6zOCAl4Ai22u6NRgF2p8rrQRLgDLN
-	ncdT09mdhCu8pNbSbchrjZilwaBAdhvg1Lr9xfH/+SdRtJUHVwkGMWqUsN9/1SrrbtaY
-	pnjnp1t71ehIDzm1Ey0lI5w7yNtDIQghkxuiQ/ddOMlP7MSn3ZzkakxeySed/FgqixZs
-	chBg==
-X-Received: by 10.28.14.78 with SMTP id 75mr2667813wmo.84.1450438124069;
-	Fri, 18 Dec 2015 03:28:44 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	q7sm14426584wjz.12.2015.12.18.03.28.42
+	h=sender:subject:to:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-type:content-transfer-encoding;
+	bh=wStaGOb8UdBVmoJJICG59lw7Y9s3z1gQ8nqoVVK51uY=;
+	b=p/ogXM3cwr6Xi1oqg/tgazoPZzgZGkV1GH/gO62nomzPXAlFfzxJFNcoDiWEB1sI+t
+	VJZcYN5vaOIXVwdgkQ6EKhnsfqdYj1CKaQxZCIETrC7xNlsPuw1Hb49y6Lhkt3hrXQjh
+	CemYChI4VCQk2TAdZbvH9plwfTgqIY0zce7erHrELHDbNnToG+OXLKaUZeFb44GiALwk
+	GHGIms6uTBdO2I54kUQ2On3jiblMUabOeGt+n841D01AkLdDDJAkTC79A5rRdJ2IXnWn
+	6epJ41FqLOuvZgZA9oiisN9MiZ635ngyZ2gE5GdtXhuWNepp+0mmRmkQfowGfc9R8zsC
+	WDag==
+X-Received: by 10.194.133.135 with SMTP id pc7mr3384863wjb.90.1450438322702;
+	Fri, 18 Dec 2015 03:32:02 -0800 (PST)
+Received: from [192.168.0.15] (lns-bzn-47f-81-56-255-191.adsl.proxad.net.
+	[81.56.255.191]) by smtp.googlemail.com with ESMTPSA id
+	vu4sm14472432wjc.2.2015.12.18.03.32.01
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 18 Dec 2015 03:28:42 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 18 Dec 2015 12:31:15 +0100
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 18 Dec 2015 03:32:01 -0800 (PST)
+Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151218113115.GD2563@jama>
-References: <1449199316-14048-1-git-send-email-armccurdy@gmail.com>
+References: <564DC01B.4000103@videolan.org>
+	<1447938897-26171-1-git-send-email-funman@videolan.org>
+	<1447938897-26171-6-git-send-email-funman@videolan.org>
+	<20151218112939.GC2563@jama>
+From: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <funman@videolan.org>
+Message-ID: <5673EEB0.5090204@videolan.org>
+Date: Fri, 18 Dec 2015 12:32:00 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-In-Reply-To: <1449199316-14048-1-git-send-email-armccurdy@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-multimedia][PATCH 0/4] mpg123 cleanups + update
+In-Reply-To: <20151218112939.GC2563@jama>
+Subject: Re: [meta-multimedia][PATCH 6/6] VLC: do not use --with-contrib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,59 +50,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Dec 2015 11:28:44 -0000
-X-Groupsio-MsgNum: 59092
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ZJcv+A0YCCLh2VIg"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 18 Dec 2015 11:32:03 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 8bit
 
---ZJcv+A0YCCLh2VIg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 12/18/2015 12:29 PM, Martin Jansa wrote:
+> On Thu, Nov 19, 2015 at 02:14:57PM +0100, Rafaël Carré wrote:
+>> ---
+> 
+> I'll finally merge this patchset today, but can you please fix:
+> 
+> vlc-2.2.1: vlc rdepends on libvncserver, but it isn't a build dependency? [build-deps]
+> 
+> in follow-up change?
 
-On Thu, Dec 03, 2015 at 07:21:52PM -0800, Andre McCurdy wrote:
-> Andre McCurdy (4):
->   mpg123: recipe formatting cleanup, no functional changes
->   mpg123: limit ARM_INSTRUCTION_SET =3D "arm" over-ride to armv4/armv5
->   mpg123: drop unnecessary dependency on tslib
->   mpg123: update 1.21.0 -> 1.22.4
+Sure
 
-Can you please fix:
-mpg123-1.22.4: ELF binary
-'/tmp/work/i586-oe-linux/mpg123/1.22.4-r0/packages-split/mpg123/usr/lib/lib=
-mpg123.so.0.41.2'
-has relocations in .text [textrel]
+>>  meta-multimedia/recipes-multimedia/vlc/vlc.inc | 1 -
+>>  1 file changed, 1 deletion(-)
+>>
+>> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>> index 99a6c66..ce3601d 100644
+>> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>> @@ -22,7 +22,6 @@ REQUIRED_DISTRO_FEATURES = "x11"
+>>  ARM_INSTRUCTION_SET = "arm"
+>>  
+>>  EXTRA_OECONF = "\
+>> -    --with-contrib \
+>>      --enable-run-as-root \
+>>      --enable-xvideo \ 
+>>      --disable-screen --disable-caca \
+>> -- 
+>> 2.5.0
 
->=20
->  .../mpg123/{mpg123_1.21.0.bb =3D> mpg123_1.22.4.bb}  | 47 ++++++++++++--=
---------
->  1 file changed, 25 insertions(+), 22 deletions(-)
->  rename meta-multimedia/recipes-multimedia/mpg123/{mpg123_1.21.0.bb =3D> =
-mpg123_1.22.4.bb} (86%)
->=20
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---ZJcv+A0YCCLh2VIg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlZz7oIACgkQN1Ujt2V2gBzK+gCfW4ICex4UNefvXcihgIpn9lOZ
-5B4An0wfyzUAk+OmkdqnSvxnA6eVJgsp
-=u7i9
------END PGP SIGNATURE-----
-
---ZJcv+A0YCCLh2VIg--
