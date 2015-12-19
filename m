@@ -1,35 +1,36 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
-	[209.85.213.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 61B956012C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
+	[209.85.213.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 395426FFE8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Dec 2015 01:45:24 +0000 (UTC)
-Received: by mail-ig0-f172.google.com with SMTP id ph11so3932423igc.1
+	Sat, 19 Dec 2015 04:43:20 +0000 (UTC)
+Received: by mail-ig0-f175.google.com with SMTP id jw2so5367601igc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Dec 2015 17:45:25 -0800 (PST)
+	Fri, 18 Dec 2015 20:43:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=0LwlJa/RHMDbczaUtgfwpjJ6RblNcjH/qXa8SZecXpk=;
-	b=DSa4S8vY0mC2VV/Ex07z3ynHCxOCqr1pe9/RCR2WPstQ4YLV5ih4j2wd4mHP/Gr6Bt
-	3PNyuMK+LwOmPYfcjMsTckhCdAKx389Pprk6MXeklX6rNavqUKjkKxnXN6qptBjXMcRi
-	qtJ4p0lOMVoINgJMQrJbPW29Ov4MxLNjXASKkTKHzTj2RVs5qH4JoMYCmY/EfDahLmHR
-	tdXDvSv2b5JZ4TAJTvtSELBBZ8Mf4HooGoFkPgCQQHuKCpiDrHi34TcMQdGr0kKGUUZg
-	Zyt5iK7PcPzVtHhU8MJQrubiTaK3rpLZdP3THXfp0kOHaRSCguyOgXNm60xQ8cLgjprc
-	WMTQ==
-X-Received: by 10.50.83.72 with SMTP id o8mr6360876igy.48.1450489525245;
-	Fri, 18 Dec 2015 17:45:25 -0800 (PST)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by smtp.gmail.com with ESMTPSA id
-	f199sm7631798iof.20.2015.12.18.17.45.23
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 18 Dec 2015 17:45:24 -0800 (PST)
-From: Andre McCurdy <armccurdy@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=2ZoCoPImgYIb1ES+BC4xCiGYvFxPukCpmxaVXvpalZI=;
+	b=WFraJd/w8GUaYv2omfcQaZB6xhhVUOf7X9TrMI7jkMCFdEKX0gXul7bPLXDhQ5VKwc
+	gj67WACvfW0/UCIShfs40I3dE+ZlgTcs7LIeUA7xGOXrKEsLV41JUjQPq/yt/EURP/Z3
+	lvvjvLN3qeobqa/ix3sw/ninvEWtfXB5+pwqEG0b1SFE2RnTyYD+1Hjaan7YZvbz8kp4
+	pzdzGwUDJ3RDKIMoBCNii41G/gMLSmDIV38qAkggHdcr3YsjhpBnR8LXmMCXxJdChclv
+	LT1z3J5eGSAs81pQqJ4ivoHnp0ZzGtr7W4NwOLgLhqxCZuaxaZa29ogjKrfgyc7qgkXs
+	p+Mw==
+MIME-Version: 1.0
+X-Received: by 10.50.143.10 with SMTP id sa10mr7447740igb.77.1450500201564;
+	Fri, 18 Dec 2015 20:43:21 -0800 (PST)
+Received: by 10.107.12.205 with HTTP; Fri, 18 Dec 2015 20:43:21 -0800 (PST)
+Received: by 10.107.12.205 with HTTP; Fri, 18 Dec 2015 20:43:21 -0800 (PST)
+In-Reply-To: <1450471782-25731-1-git-send-email-cjp256@gmail.com>
+References: <1450471782-25731-1-git-send-email-cjp256@gmail.com>
+Date: Fri, 18 Dec 2015 20:43:21 -0800
+Message-ID: <CAMKF1spvhZi0v4Kw4r1KvmtO6qYyptZ45uuSOD8+BPrvPTDyWg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Dec 2015 17:45:18 -0800
-Message-Id: <1450489518-1970-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [PATCH] mpg123: add textrel to INSANE_SKIP
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Chris Patterson <pattersonc@ainfosec.com>
+Subject: Re: [meta-networking][PATCH 1/3] strongswan: add additional PACKAGECONFIG flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,37 +43,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Dec 2015 01:45:25 -0000
+X-List-Received-Date: Sat, 19 Dec 2015 04:43:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The x86 assembler optimisations contains text relocations and there
-are no upstream plans to fix them:
+Shouldnt openssl be a packageconfig too
+On Dec 18, 2015 12:50 PM, "Chris Patterson" <cjp256@gmail.com> wrote:
 
-  http://sourceforge.net/p/mpg123/bugs/168/
-
-Benchmarking suggests that the SSE assembler is still clearly faster
-than the generic C code, so leave the assembler optimisations enabled.
-
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- meta-multimedia/recipes-multimedia/mpg123/mpg123_1.22.4.bb | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.22.4.bb b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.22.4.bb
-index 22ea572..d11a312 100644
---- a/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.22.4.bb
-+++ b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.22.4.bb
-@@ -51,6 +51,10 @@ EXTRA_OECONF = " \
-     ${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
- "
- 
-+# The x86 assembler optimisations contains text relocations and there are no
-+# upstream plans to fix them: http://sourceforge.net/p/mpg123/bugs/168/
-+INSANE_SKIP_${PN}_append_x86 = " textrel"
-+
- # Fails to build with thumb-1 (qemuarm)
- #| {standard input}: Assembler messages:
- #| {standard input}:47: Error: selected processor does not support Thumb mode `smull r5,r6,r7,r4'
--- 
-1.9.1
-
+> From: Chris Patterson <pattersonc@ainfosec.com>
+>
+> - Add aesni, charon, gmp, openssl, scep, stroke, swanctl, and
+>   systemd-charon.
+> - Organize the packageconfig list alphabetically.
+> - Update the default PACKAGECONFIG to match current defaults.
+> - If swanctl is enabled, use strongswan-swanctl.service instead of
+>   strongswan.service.
+>
+> Signed-off-by: Chris Patterson <pattersonc@ainfosec.com>
+> ---
+>  .../recipes-support/strongswan/strongswan_5.3.2.bb |   24
+> ++++++++++++++------
+>  1 file changed, 17 insertions(+), 7 deletions(-)
+>
+> diff --git a/meta-networking/recipes-support/strongswan/
+> strongswan_5.3.2.bb b/meta-networking/recipes-support/strongswan/
+> strongswan_5.3.2.bb
+> index a231a90..df7b496 100644
+> --- a/meta-networking/recipes-support/strongswan/strongswan_5.3.2.bb
+> +++ b/meta-networking/recipes-support/strongswan/strongswan_5.3.2.bb
+> @@ -14,21 +14,31 @@ SRC_URI = "
+> http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+>  SRC_URI[md5sum] = "fab014be1477ef4ebf9a765e10f8802c"
+>  SRC_URI[sha256sum] =
+> "a4a9bc8c4e42bdc4366a87a05a02bf9f425169a7ab0c6f4482d347e44acbf225"
+>
+> -EXTRA_OECONF = "--enable-gmp \
+> -        --enable-openssl \
+> +EXTRA_OECONF = " \
+>          --without-lib-prefix \
+>  "
+>
+>  EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd',
+> '--with-systemdsystemunitdir=${systemd_unitdir}/system/',
+> '--without-systemdsystemunitdir', d)}"
+>
+> -PACKAGECONFIG ??= "sqlite3 curl \
+> +
+> +PACKAGECONFIG ??= "charon curl gmp openssl stroke sqlite3 \
+>          ${@base_contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
+>  "
+> -PACKAGECONFIG[sqlite3] = "--enable-sqlite,--disable-sqlite,sqlite3,"
+> -PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,openldap,"
+> +PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,"
+> +PACKAGECONFIG[charon] = "--enable-charon,--disable-charon,"
+>  PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,"
+> -PACKAGECONFIG[soup] = "--enable-soup,--disable-soup,libsoup-2.4,"
+> +PACKAGECONFIG[gmp] = "--enable-gmp,--disable-gmp,gmp,"
+> +PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,openldap,"
+>  PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,"
+> +PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl,"
+> +PACKAGECONFIG[scep] = "--enable-scepclient,--disable-scepclient,"
+> +PACKAGECONFIG[soup] = "--enable-soup,--disable-soup,libsoup-2.4,"
+> +PACKAGECONFIG[sqlite3] = "--enable-sqlite,--disable-sqlite,sqlite3,"
+> +PACKAGECONFIG[stroke] = "--enable-stroke,--disable-stroke,"
+> +PACKAGECONFIG[swanctl] = "--enable-swanctl,--disable-swanctl,,libgcc"
+> +
+> +# requires swanctl
+> +PACKAGECONFIG[systemd-charon] =
+> "--enable-systemd,--disable-systemd,systemd,"
+>
+>  inherit autotools systemd pkgconfig
+>
+> @@ -42,4 +52,4 @@ FILES_${PN}-staticdev += "${libdir}/ipsec/*.a
+> ${libdir}/ipsec/plugins/*.a"
+>  RPROVIDES_${PN} += "${PN}-systemd"
+>  RREPLACES_${PN} += "${PN}-systemd"
+>  RCONFLICTS_${PN} += "${PN}-systemd"
+> -SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+> +SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'swanctl',
+> '${BPN}-swanctl.service', '${BPN}.service', d)}"
+> --
+> 1.7.10.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
