@@ -1,35 +1,21 @@
-Return-Path: <cjp256@gmail.com>
-Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
-	[209.85.223.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 3ACD26AC37
+Return-Path: <mariano.lopez@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id A7E106FFCE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Dec 2015 15:16:02 +0000 (UTC)
-Received: by mail-io0-f180.google.com with SMTP id 186so119459687iow.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Dec 2015 07:16:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=i5XxbcaGvYBR7LC2fi5l+0mXfkNVjJxkZ/sy0L9hbHo=;
-	b=wUux1HX/nb/dx9dqhFFxCe2iMSDqoc6Jygk5X+esWyFx0lQjqAQyOCWmnTPlYHQEk7
-	PVXLkEudnSEhSkP9X8aMymso6BEKy3CRHXhJdLxdNt2kPZ5xf7mApbVOYDMfeHBj3cEf
-	DWU5C5P+JEIeCEVtMB51qMinm5K5BWO1NQcrPujgcnZahB46n4/BYZe0/P0wY9ak5W34
-	2WJB+LulNzhXN8Rgdcrte4n2OU/I0GlWZau0wcSylM1eTluTmly0tQlKYS0/M355Eq0z
-	mvDkE930Qjz2bMfjy8pi2yp3qD+lM6Aif1fNzKLW5jfnZJhCHOeEtq/KUqCs1abplmf2
-	+fNw==
-MIME-Version: 1.0
-X-Received: by 10.107.28.82 with SMTP id c79mr10296258ioc.86.1450538163232;
-	Sat, 19 Dec 2015 07:16:03 -0800 (PST)
-Received: by 10.79.95.6 with HTTP; Sat, 19 Dec 2015 07:16:03 -0800 (PST)
-In-Reply-To: <CAMKF1spvhZi0v4Kw4r1KvmtO6qYyptZ45uuSOD8+BPrvPTDyWg@mail.gmail.com>
-References: <1450471782-25731-1-git-send-email-cjp256@gmail.com>
-	<CAMKF1spvhZi0v4Kw4r1KvmtO6qYyptZ45uuSOD8+BPrvPTDyWg@mail.gmail.com>
-Date: Sat, 19 Dec 2015 10:16:03 -0500
-Message-ID: <CABZSBQd9REH2oQA00JRaP7LVzxA=uC-BprcjKoSuH0GfNtnMAA@mail.gmail.com>
-From: Chris Patterson <cjp256@gmail.com>
+	Sun, 20 Dec 2015 04:26:39 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by fmsmga102.fm.intel.com with ESMTP; 19 Dec 2015 20:26:40 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.20,452,1444719600"; d="scan'208";a="875248932"
+Received: from yctb01.ostc.intel.com (HELO yctb01.otcr.intel.com)
+	([10.23.219.46])
+	by orsmga002.jf.intel.com with ESMTP; 19 Dec 2015 20:26:39 -0800
+From: mariano.lopez@linux.intel.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Chris Patterson <pattersonc@ainfosec.com>
-Subject: Re: [meta-networking][PATCH 1/3] strongswan: add additional PACKAGECONFIG flags
+Date: Sat, 19 Dec 2015 20:22:36 +0000
+Message-Id: <1450556556-38220-1-git-send-email-mariano.lopez@linux.intel.com>
+X-Mailer: git-send-email 1.8.4.5
+Subject: [meta-oe][PATCH] hostapd: Fix source and build directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,20 +28,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Dec 2015 15:16:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 20 Dec 2015 04:26:40 -0000
 
-On Fri, Dec 18, 2015 at 11:43 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> Shouldnt openssl be a packageconfig too
+From: Mariano Lopez <mariano.lopez@linux.intel.com>
 
-Yes, I added PACKAGECONFIG[openssl] and openssl to the default
-PACKAGECONFIG.  Or is there something else I am missing? :)
+The current recipe make no difference between
+the source and the build directory. There are
+source files outside this directory and isn't
+possible to patch these files.
 
-Cheers,
--Chris
+This changes adds the build directory path to
+the recipe, now is possible to patch files in
+other directories, if required.
 
->> -PACKAGECONFIG ??= "sqlite3 curl \
->> +PACKAGECONFIG ??= "charon curl gmp openssl stroke sqlite3 \
->> ...
->> +PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl,"
+Signed-off-by: Mariano Lopez <mariano.lopez@linux.intel.com>
+---
+ meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
+index d95dbec..c38e20a 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
+@@ -1,7 +1,7 @@
+ HOMEPAGE = "http://w1.fi/hostapd/"
+ SECTION = "kernel/userland"
+ LICENSE = "GPLv2 | BSD"
+-LIC_FILES_CHKSUM = "file://README;md5=4d53178f44d4b38418a4fa8de365e11c"
++LIC_FILES_CHKSUM = "file://${B}/README;md5=4d53178f44d4b38418a4fa8de365e11c"
+ DEPENDS = "libnl openssl"
+ SUMMARY = "User space daemon for extended IEEE 802.11 management"
+ 
+@@ -18,11 +18,11 @@ SRC_URI = " \
+     file://hostapd.service \
+ "
+ 
+-S = "${WORKDIR}/hostapd-${PV}/hostapd"
+-
++S = "${WORKDIR}/hostapd-${PV}"
++B = "${WORKDIR}/hostapd-${PV}/hostapd"
+ 
+ do_configure() {
+-    install -m 0644 ${WORKDIR}/defconfig ${S}/.config
++    install -m 0644 ${WORKDIR}/defconfig ${B}/.config
+ }
+ 
+ do_compile() {
+@@ -32,9 +32,9 @@ do_compile() {
+ 
+ do_install() {
+     install -d ${D}${sbindir} ${D}${sysconfdir}/init.d ${D}${systemd_unitdir}/system/
+-    install -m 0644 ${S}/hostapd.conf ${D}${sysconfdir}
+-    install -m 0755 ${S}/hostapd ${D}${sbindir}
+-    install -m 0755 ${S}/hostapd_cli ${D}${sbindir}
++    install -m 0644 ${B}/hostapd.conf ${D}${sysconfdir}
++    install -m 0755 ${B}/hostapd ${D}${sbindir}
++    install -m 0755 ${B}/hostapd_cli ${D}${sbindir}
+     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/hostapd
+     install -m 0644 ${WORKDIR}/hostapd.service ${D}${systemd_unitdir}/system/
+     sed -i -e 's,@SBINDIR@,${sbindir},g' -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/hostapd.service
+-- 
+1.8.4.5
+
 
