@@ -1,21 +1,30 @@
-Return-Path: <mariano.lopez@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id A7E106FFCE
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B35876FF9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Dec 2015 04:26:39 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga102.fm.intel.com with ESMTP; 19 Dec 2015 20:26:40 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,452,1444719600"; d="scan'208";a="875248932"
-Received: from yctb01.ostc.intel.com (HELO yctb01.otcr.intel.com)
-	([10.23.219.46])
-	by orsmga002.jf.intel.com with ESMTP; 19 Dec 2015 20:26:39 -0800
-From: mariano.lopez@linux.intel.com
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Dec 2015 20:22:36 +0000
-Message-Id: <1450556556-38220-1-git-send-email-mariano.lopez@linux.intel.com>
-X-Mailer: git-send-email 1.8.4.5
-Subject: [meta-oe][PATCH] hostapd: Fix source and build directory
+	Mon, 21 Dec 2015 06:04:55 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tBL64txn009032
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Dec 2015 22:04:55 -0800 (PST)
+Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Sun, 20 Dec 2015 22:04:55 -0800
+To: <openembedded-devel@lists.openembedded.org>
+References: <1449130728-4066-1-git-send-email-kai.kang@windriver.com>
+	<1449130728-4066-5-git-send-email-kai.kang@windriver.com>
+	<20151218162211.GA2556@jama>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <56779688.8020604@windriver.com>
+Date: Mon, 21 Dec 2015 14:04:56 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
+MIME-Version: 1.0
+In-Reply-To: <20151218162211.GA2556@jama>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-networking][PATCH 4/4] meta-networking: depends on layer meta-perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,66 +37,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Dec 2015 04:26:40 -0000
+X-List-Received-Date: Mon, 21 Dec 2015 06:04:55 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Mariano Lopez <mariano.lopez@linux.intel.com>
+On 2015年12月19日 00:22, Martin Jansa wrote:
+> On Thu, Dec 03, 2015 at 04:18:48PM +0800, kai.kang@windriver.com wrote:
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> Package mime-construct in layer meta-networking depends on some perl
+>> modules in layer meta-perl. So make meta-networking depends on layer
+>> meta-perl.
+> Cannot we move mime-construct to meta-perl instead?
+>
+> It doesn't have any dependencies provided by meta-networking and also
+> nothing in meta-networking is using mime-construct.
 
-The current recipe make no difference between
-the source and the build directory. There are
-source files outside this directory and isn't
-possible to patch these files.
+It is ok for me.  I'll move it to meta-perl and revert the layer 
+dependency commit.
 
-This changes adds the build directory path to
-the recipe, now is possible to patch files in
-other directories, if required.
+Thanks,
+Kai
 
-Signed-off-by: Mariano Lopez <mariano.lopez@linux.intel.com>
----
- meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+>
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ---
+>>   meta-networking/conf/layer.conf | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
+>> index 63bb07d..b7fc183 100644
+>> --- a/meta-networking/conf/layer.conf
+>> +++ b/meta-networking/conf/layer.conf
+>> @@ -16,5 +16,6 @@ LAYERVERSION_networking-layer = "1"
+>>   LAYERDEPENDS_networking-layer = "core"
+>>   LAYERDEPENDS_networking-layer += "openembedded-layer"
+>>   LAYERDEPENDS_networking-layer += "meta-python"
+>> +LAYERDEPENDS_networking-layer += "perl-layer"
+>>   
+>>   LICENSE_PATH += "${LAYERDIR}/licenses"
+>> -- 
+>> 2.6.1
+>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
-index d95dbec..c38e20a 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
-@@ -1,7 +1,7 @@
- HOMEPAGE = "http://w1.fi/hostapd/"
- SECTION = "kernel/userland"
- LICENSE = "GPLv2 | BSD"
--LIC_FILES_CHKSUM = "file://README;md5=4d53178f44d4b38418a4fa8de365e11c"
-+LIC_FILES_CHKSUM = "file://${B}/README;md5=4d53178f44d4b38418a4fa8de365e11c"
- DEPENDS = "libnl openssl"
- SUMMARY = "User space daemon for extended IEEE 802.11 management"
- 
-@@ -18,11 +18,11 @@ SRC_URI = " \
-     file://hostapd.service \
- "
- 
--S = "${WORKDIR}/hostapd-${PV}/hostapd"
--
-+S = "${WORKDIR}/hostapd-${PV}"
-+B = "${WORKDIR}/hostapd-${PV}/hostapd"
- 
- do_configure() {
--    install -m 0644 ${WORKDIR}/defconfig ${S}/.config
-+    install -m 0644 ${WORKDIR}/defconfig ${B}/.config
- }
- 
- do_compile() {
-@@ -32,9 +32,9 @@ do_compile() {
- 
- do_install() {
-     install -d ${D}${sbindir} ${D}${sysconfdir}/init.d ${D}${systemd_unitdir}/system/
--    install -m 0644 ${S}/hostapd.conf ${D}${sysconfdir}
--    install -m 0755 ${S}/hostapd ${D}${sbindir}
--    install -m 0755 ${S}/hostapd_cli ${D}${sbindir}
-+    install -m 0644 ${B}/hostapd.conf ${D}${sysconfdir}
-+    install -m 0755 ${B}/hostapd ${D}${sbindir}
-+    install -m 0755 ${B}/hostapd_cli ${D}${sbindir}
-     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/hostapd
-     install -m 0644 ${WORKDIR}/hostapd.service ${D}${systemd_unitdir}/system/
-     sed -i -e 's,@SBINDIR@,${sbindir},g' -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/hostapd.service
+
 -- 
-1.8.4.5
+Regards,
+Neil | Kai Kang
 
 
