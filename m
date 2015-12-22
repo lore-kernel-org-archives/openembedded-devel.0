@@ -1,41 +1,33 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-qk0-f175.google.com (mail-qk0-f175.google.com
-	[209.85.220.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 8416E6FFEF
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BBF8F6E5CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2015 04:40:48 +0000 (UTC)
-Received: by mail-qk0-f175.google.com with SMTP id p187so145126659qkd.1
+	Tue, 22 Dec 2015 07:34:01 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tBM7Y1UL000841
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Dec 2015 20:40:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:cc:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-type:content-transfer-encoding;
-	bh=2WVhSZoCACxCHv0BwK0YiYRBmos5yevDc5KTvzqFPew=;
-	b=mwE+b7BX68c3K0ykz0PbQ1Ts44ZXwQyWA9n3i4lYHgDDBnhNB9LhmFPeXWX7uTIvzI
-	jlEX7rTlFrNHs6XN6sEL4/Ivr+tqvhtESCZ4S6Mz6S/hq4OvJoqfDXFYuv7B1LBjjGtc
-	N/gGJ3sn6RIL8jy4Vn+G36aMHDublLo21P9Ue6PNJtvAaspYfhh+5rtADFWVppKZFGCE
-	bvHf+X129Q1DRZqIxHuy1KGW0G6L9uXuOxSgPcEg8zxl7F6Fkc511ZuYdOq07AhQg403
-	CbW4sgQCp3yxKf0of6ln23TXPVbSu0QSsgoLsRScVmPBdKVKlqoBMlKu8vtkKLeXo6nP
-	7xzA==
-X-Received: by 10.55.54.201 with SMTP id d192mr29690717qka.23.1450759248746;
-	Mon, 21 Dec 2015 20:40:48 -0800 (PST)
-Received: from [192.168.141.85] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
-	by smtp.gmail.com with ESMTPSA id
-	u45sm15390217qgd.26.2015.12.21.20.40.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 21 Dec 2015 20:40:48 -0800 (PST)
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <1448993965-32226-1-git-send-email-twoerner@gmail.com>
-	<20151218115129.GE2563@jama>
-From: Trevor Woerner <twoerner@gmail.com>
-Message-ID: <5678D44A.3040600@gmail.com>
-Date: Mon, 21 Dec 2015 23:40:42 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.4.0
+	Mon, 21 Dec 2015 23:34:01 -0800 (PST)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.162]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0248.002;
+	Mon, 21 Dec 2015 23:34:01 -0800
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-java][PATCH 2/2] openjdk-8: skip the dev-so test
+Thread-Index: AQHROWZPYZoosUf3gEC3iIgTrXrWy57WoN8w
+Date: Tue, 22 Dec 2015 07:33:58 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010C7772BF@ALA-MBA.corp.ad.wrs.com>
+References: <1450423916-4811-1-git-send-email-jackie.huang@windriver.com>
+	<1450423916-4811-2-git-send-email-jackie.huang@windriver.com>
+In-Reply-To: <1450423916-4811-2-git-send-email-jackie.huang@windriver.com>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.138]
 MIME-Version: 1.0
-In-Reply-To: <20151218115129.GE2563@jama>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2] nodejs: cleanup and update
+Subject: Re: [meta-java][PATCH 2/2] openjdk-8: skip the dev-so test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,32 +40,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2015 04:40:48 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Dec 2015 07:34:01 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 12/18/15 06:51, Martin Jansa wrote:
-> On Tue, Dec 01, 2015 at 01:19:25PM -0500, Trevor Woerner wrote:
->> Remove old nodejs_0.4.12 and update nodejs_0.12.7 to the latest stable
->> nodejs_4.2.2.
-> It does something strange with CC and ends with invalid parameter for
-> qemuarm:
->
-> arm-oe-linux-gnueabi-g++: error: unrecognized argument in option '-mfpu=vfpv2'
->
-> http://errors.yoctoproject.org/Errors/Details/22678/
+Please ignore this since openjre-8 also has same issue, I will re-patch in
+a .inc. But a question I have is, why do we needs a different packaging
+strategy for openjdk-8 and there are two recipes: on for openjdk-8 and
+another for openjre-8? Openjdk-7 is using one recipe to provide
+openjdk-7-jdk and opendk-7-jre.
 
-Nodejs (actually V8) dropped support for ARMv5 around V8 version 3.22
-https://github.com/nodejs/node/issues/3061
+Thanks,
+Jackie
 
-A day or so ago I had generated a patch to switch the -mfpu option to
-"vfp" (i.e. version 1) instead of vfpv2 (-mfpu=vfp). This allowed nodejs
-to build for ARMv5, but when I tried running it, it just crashed and
-said "illegal instruction". Since ARMv5 is not supported upstream
-anymore I didn't think it was worth my time trying to get it to work. So
-I simply removed armv5 from COMPATIBLE_MACHINE. See my v3 patch.
-
-As to this specific error, it doesn't look like gcc5 accepts "vfp2" as
-an option to mfpu:
-https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of jackie.huang@windriver.com
+> Sent: Friday, December 18, 2015 3:32 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-java][PATCH 2/2] openjdk-8: skip the dev-so test
+>=20
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> Fixed:
+> ERROR: QA Issue: non -dev/-dbg/nativesdk- package contains symlink .so:
+> openjdk-8 path
+> 'work/core2-64-poky-linux/openjdk-8/72b05-r0/packages-split/openjdk-8/usr=
+/lib/jvm/openjdk-
+> 8/jre/lib/amd64/server/libjsig.so'
+> [dev-so]
+>=20
+> The symlink .so is valid so we just skip the test
+> just like what we does in openjdk-7.
+>=20
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  recipes-core/openjdk/openjdk-8_72b05.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+>=20
+> diff --git a/recipes-core/openjdk/openjdk-8_72b05.bb b/recipes-core/openj=
+dk/openjdk-8_72b05.bb
+> index d962b1f..8aa9f9f 100644
+> --- a/recipes-core/openjdk/openjdk-8_72b05.bb
+> +++ b/recipes-core/openjdk/openjdk-8_72b05.bb
+> @@ -92,6 +92,9 @@ PROVIDES_${PN} =3D "java2-vm"
+>  RPROVIDES_${PN} =3D "java2-runtime"
+>  PROVIDES_${PN} =3D "java2-runtime"
+>=20
+> +# There is a symlink to a .so but this one is valid.
+> +INSANE_SKIP_${PN} =3D "dev-so"
+> +
+>  inherit update-alternatives
+>=20
+>  ALTERNATIVE_PRIORITY =3D "100"
+> --
+> 2.3.5
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
