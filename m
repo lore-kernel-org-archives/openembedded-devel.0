@@ -1,33 +1,24 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BBF8F6E5CC
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 68B0F731CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2015 07:34:01 +0000 (UTC)
+	Tue, 22 Dec 2015 07:49:28 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tBM7Y1UL000841
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tBM7nSsU003967
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Dec 2015 23:34:01 -0800 (PST)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.162]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0248.002;
-	Mon, 21 Dec 2015 23:34:01 -0800
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-java][PATCH 2/2] openjdk-8: skip the dev-so test
-Thread-Index: AQHROWZPYZoosUf3gEC3iIgTrXrWy57WoN8w
-Date: Tue, 22 Dec 2015 07:33:58 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010C7772BF@ALA-MBA.corp.ad.wrs.com>
-References: <1450423916-4811-1-git-send-email-jackie.huang@windriver.com>
-	<1450423916-4811-2-git-send-email-jackie.huang@windriver.com>
-In-Reply-To: <1450423916-4811-2-git-send-email-jackie.huang@windriver.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.138]
+	Mon, 21 Dec 2015 23:49:28 -0800
+Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Mon, 21 Dec 2015 23:49:27 -0800
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 22 Dec 2015 15:49:38 +0800
+Message-ID: <1450770579-6929-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: Re: [meta-java][PATCH 2/2] openjdk-8: skip the dev-so test
+Subject: [meta-java][1/2 v2] openjdk-8/openjre-8: fix host-user-contaminated QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,67 +31,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2015 07:34:01 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 22 Dec 2015 07:49:28 -0000
+Content-Type: text/plain
 
-Please ignore this since openjre-8 also has same issue, I will re-patch in
-a .inc. But a question I have is, why do we needs a different packaging
-strategy for openjdk-8 and there are two recipes: on for openjdk-8 and
-another for openjre-8? Openjdk-7 is using one recipe to provide
-openjdk-7-jdk and opendk-7-jre.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Thanks,
-Jackie
+Fixed:
+WARNING: QA Issue: openjdk-8:
+/openjdk-8-doc/usr/lib/jvm/openjdk-8/jre/THIRD_PARTY_README is owned by
+uid 1786, which is the same as the user running bitbake. This may be due
+to host contamination [host-user-contaminated]
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of jackie.huang@windriver.com
-> Sent: Friday, December 18, 2015 3:32 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [meta-java][PATCH 2/2] openjdk-8: skip the dev-so test
->=20
-> From: Jackie Huang <jackie.huang@windriver.com>
->=20
-> Fixed:
-> ERROR: QA Issue: non -dev/-dbg/nativesdk- package contains symlink .so:
-> openjdk-8 path
-> 'work/core2-64-poky-linux/openjdk-8/72b05-r0/packages-split/openjdk-8/usr=
-/lib/jvm/openjdk-
-> 8/jre/lib/amd64/server/libjsig.so'
-> [dev-so]
->=20
-> The symlink .so is valid so we just skip the test
-> just like what we does in openjdk-7.
->=20
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  recipes-core/openjdk/openjdk-8_72b05.bb | 3 +++
->  1 file changed, 3 insertions(+)
->=20
-> diff --git a/recipes-core/openjdk/openjdk-8_72b05.bb b/recipes-core/openj=
-dk/openjdk-8_72b05.bb
-> index d962b1f..8aa9f9f 100644
-> --- a/recipes-core/openjdk/openjdk-8_72b05.bb
-> +++ b/recipes-core/openjdk/openjdk-8_72b05.bb
-> @@ -92,6 +92,9 @@ PROVIDES_${PN} =3D "java2-vm"
->  RPROVIDES_${PN} =3D "java2-runtime"
->  PROVIDES_${PN} =3D "java2-runtime"
->=20
-> +# There is a symlink to a .so but this one is valid.
-> +INSANE_SKIP_${PN} =3D "dev-so"
-> +
->  inherit update-alternatives
->=20
->  ALTERNATIVE_PRIORITY =3D "100"
-> --
-> 2.3.5
->=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+The use of cp results in files in the recipe being owned by the user
+running bitbake, so fix the owner to root:root
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ recipes-core/openjdk/openjdk-8_72b05.bb | 1 +
+ recipes-core/openjdk/openjre-8_72b05.bb | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/recipes-core/openjdk/openjdk-8_72b05.bb b/recipes-core/openjdk/openjdk-8_72b05.bb
+index 96473f5..d962b1f 100644
+--- a/recipes-core/openjdk/openjdk-8_72b05.bb
++++ b/recipes-core/openjdk/openjdk-8_72b05.bb
+@@ -20,6 +20,7 @@ do_install() {
+     rm -rf ${D}${JDK_HOME}
+         mkdir -p ${D}${JDK_HOME}
+     cp -rp ${B}/images/j2sdk-image/* ${D}${JDK_HOME}
++    chown -R root:root ${D}${JDK_HOME}
+     install -m644 ${WORKDIR}/jvm.cfg  ${D}${JDK_HOME}/jre/lib/${JDK_ARCH}/
+     find ${D}${JDK_HOME} -name "*.debuginfo" -print0 | xargs -0 rm
+ }
+diff --git a/recipes-core/openjdk/openjre-8_72b05.bb b/recipes-core/openjdk/openjre-8_72b05.bb
+index 1543652..f99d25b 100644
+--- a/recipes-core/openjdk/openjre-8_72b05.bb
++++ b/recipes-core/openjdk/openjre-8_72b05.bb
+@@ -20,6 +20,7 @@ do_install() {
+     rm -rf ${D}${JRE_HOME}
+         mkdir -p ${D}${JRE_HOME}
+     cp -rp ${B}/images/j2re-image/* ${D}${JRE_HOME}
++    chown -R root:root ${D}${JRE_HOME}
+     install -m644 ${WORKDIR}/jvm.cfg  ${D}${JRE_HOME}/lib/${JDK_ARCH}/
+     find ${D}${JRE_HOME} -name "*.debuginfo" -print0 | xargs -0 rm
+ }
+-- 
+2.3.5
+
 
