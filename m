@@ -1,42 +1,35 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-qg0-f49.google.com (mail-qg0-f49.google.com
-	[209.85.192.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D8876E665
+Received: from mail-qg0-f51.google.com (mail-qg0-f51.google.com
+	[209.85.192.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 02E366FF77
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2015 15:29:49 +0000 (UTC)
-Received: by mail-qg0-f49.google.com with SMTP id o11so56737325qge.2
+	Tue, 22 Dec 2015 15:45:38 +0000 (UTC)
+Received: by mail-qg0-f51.google.com with SMTP id c96so113160754qgd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2015 07:29:51 -0800 (PST)
+	Tue, 22 Dec 2015 07:45:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=Hx4n5zz8z6t0JRLPKvZAXx6yseS2BG61sKCFeIVWpDI=;
-	b=DZ31Yf5ZFyE5GyV34MZ+wVM3m6yoR2e+7RhNm7nJa7Fu5jKy+UMO2hUpb8p5E5qje9
-	8iIlHlS7frlALMRGMTZS6Zyjz0QwxPuftwjN8o5/bo22IV6Y5nieshr/jvrKja2nf0VX
-	xZ7Aq/kJqTtQg2ib1Q0zzCLKt4NT5w6gSL5GazEGyuXUz87T5ZDuRX89Ex5+eFQvINKp
-	TXjVoktKJOpna+t7Jk9JG1r2bY5J9ZOXRPVpnO9PnCZO4yLz1oT8YVkXCJu4g3SuVbFZ
-	9S7z9L3FpBBDM+G2+fVhlSF5HnhZl1cYyHVax2HLtLPWs+WJ2zTWfwqAw+ZOkdDYI4Kk
-	tkyw==
-X-Received: by 10.141.3.9 with SMTP id f9mr34889627qhd.98.1450798190680;
-	Tue, 22 Dec 2015 07:29:50 -0800 (PST)
-Received: from [192.168.141.85] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	h=from:to:subject:date:message-id;
+	bh=oHK/wi33956K0+I73J4ZG1SHYe7UrvL39qfJd0EN26Q=;
+	b=BHZMTuRIDFBx9GVqioqmyrmi1dLakX5a6LLiqodK0eT7L9+ib/nfx+ezNT/FTWQzlV
+	DG037yNmKyLC3dc1hZ8FChVyYdU1q2CVPSzPcS0BUk3GQCAsbnsKRuHJ/9Jz9R5Q5MqZ
+	hA+HuVudJOVfyZ8OKOaSbbHBia7bjus+mtB83fairwzdKZODN1UPQ9aSKbBoCAhXHoBc
+	3klBRcw+9uFxk+X1/wYKV74EDYJwUkqwq1XutGvudHmP8Eefg5k6+FdrLCknjV33BtEl
+	yBi2YPdTcQVvinMn8PYJztLCcqgQElR63J9A/EmhkLgO3+KkA/e/rEAUrt5WgcyHLf+i
+	zbNA==
+X-Received: by 10.140.140.8 with SMTP id 8mr34494909qhm.60.1450799139000;
+	Tue, 22 Dec 2015 07:45:39 -0800 (PST)
+Received: from openSUSE-i7.site (dsl-67-55-28-109.acanac.net. [67.55.28.109])
 	by smtp.gmail.com with ESMTPSA id
-	q133sm16151214qhq.20.2015.12.22.07.29.49
+	g90sm15497728qgg.45.2015.12.22.07.45.37
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 22 Dec 2015 07:29:50 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <1450758431-18974-1-git-send-email-twoerner@gmail.com>
-	<1450758431-18974-2-git-send-email-twoerner@gmail.com>
-	<CAJ86T=X7-FxDqTZ1fJgx-sQaVUjM+Xe-E_QXe1QfXfgQMptLww@mail.gmail.com>
+	Tue, 22 Dec 2015 07:45:38 -0800 (PST)
 From: Trevor Woerner <twoerner@gmail.com>
-Message-ID: <56796C6B.9070002@gmail.com>
-Date: Tue, 22 Dec 2015 10:29:47 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.4.0
-MIME-Version: 1.0
-In-Reply-To: <CAJ86T=X7-FxDqTZ1fJgx-sQaVUjM+Xe-E_QXe1QfXfgQMptLww@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v3 1/1] nodejs: cleanup and update
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 22 Dec 2015 10:45:24 -0500
+Message-Id: <1450799125-5013-1-git-send-email-twoerner@gmail.com>
+X-Mailer: git-send-email 2.6.3.368.gf34be46
+Subject: [meta-oe][PATCH v4 0/1] nodejs cleanup and update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,36 +42,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2015 15:29:51 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Dec 2015 15:45:40 -0000
 
-Hi Andre,
+My fourth attempt to update and cleanup the nodejs recipes.
 
-On 12/22/15 04:35, Andre McCurdy wrote:
-> Here's the link to the "official" announcement about v8 dropping
-> support for ARM cores without vfp2 support:
+Successfully built for:
+  qemuarm, qemuarm64, qemumips, qemumips64, qemuppc, qemuppc64, qemux86,
+  qemux86-64, beaglebone, intel-corei7-64, genericx86, genericx86-64
 
-Thanks, I'll include that in v4.
+Successfully ran on:
+  qemuarm64, qemumips, qemux86, qemux86-64, intel-corei7-64 (turbot)
 
-> +COMPATIBLE_MACHINE = "(-)"
-> +COMPATIBLE_MACHINE_x86 = "(.*)"
-> +COMPATIBLE_MACHINE_x86-64 = "(.*)"
-> +COMPATIBLE_MACHINE_armv7a = "(.*)"
-> Please blacklist armv4 and armv5 instead of whitelisting armv7a (armv6
-> and potential future arm targets such as armv7ve are still expected to
-> work. It's only armv4 and armv5 which are not).
+Failed to run for:
+  qemuppc:
+    unhandled signal 4 at 2ee3bf48 nip 2ee3bf48 lr 2ee3ed70 code 30001
+    Illegal instruction
+  qemuppc64:
+    I wasn't able to successfully run a qemuppc64 VM
 
-That was what I was trying to do :-) I don't have much experience in
-this, I've been asking on IRC and the mailing lists, and there aren't
-many examples to copy. I think the following works:
+Changes from v3:
+  better link to official announcement regarding the dropping of VFP2
+  instead of whitelisting machines, blacklist the unsupported ones
 
-    COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
-    COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
-    COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+Changes from v2:
+  handle qemuarm build failure
 
-?
+Changes from v1:
+  don't try to keep and unite the old recipe versions, just replace them with
+  the latest stable
 
-Best regards,
-    Trevor
+Trevor Woerner (1):
+  nodejs: cleanup and update
+
+ .../nodejs/nodejs/enable-armv5e-build.patch        | 22 ----------
+ .../nodejs/nodejs4/libev-cross-cc_0.4.12.patch     | 13 ------
+ meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb  | 49 ----------------------
+ .../nodejs/{nodejs_0.12.7.bb => nodejs_4.2.3.bb}   | 18 ++++----
+ 4 files changed, 11 insertions(+), 91 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/enable-armv5e-build.patch
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-cc_0.4.12.patch
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_0.12.7.bb => nodejs_4.2.3.bb} (84%)
+
+-- 
+2.6.0.rc3
+
 
