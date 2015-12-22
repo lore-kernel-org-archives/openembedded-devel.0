@@ -1,37 +1,34 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-pf0-f181.google.com (mail-pf0-f181.google.com
-	[209.85.192.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A3466FF64
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id AC36260721
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Dec 2015 23:00:39 +0000 (UTC)
-Received: by mail-pf0-f181.google.com with SMTP id o64so95402181pfb.3
+	Tue, 22 Dec 2015 00:36:41 +0000 (UTC)
+Received: by mail-ig0-f176.google.com with SMTP id jw2so47621586igc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Dec 2015 15:00:40 -0800 (PST)
+	Mon, 21 Dec 2015 16:36:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=7qlecsZ9ZSvv5GGcETIGfJsitLCJuXyHy8b3gwVFrfw=;
-	b=FvnMR9yELN0ReOVM38LQD5xWvR9ybkZJouDU/hC94lcHFkJxxhsd8Ko6I3ilj/u5wl
-	X3aXl782JZKMHlBAgNQEN/1MvX1l4lxGw64/a9MgctAXsD4VcIr3pWPWB1D7sU1n1Rlu
-	Ev2fOyDEajY5aTtbR1nd/o+KRi+zfgf0pOPhPvyGMorHj2rEROx4ZoVMB29mpGqNvM7S
-	9scxRrm2TcQ56MsW9XIcvl45knRYxHa54yJmaHP59Df5bKsWnm8VLh/FarYwvSYqnDoW
-	moAWuGruGqCbBmzmiz+jB62DmNhV1aP5tM4RcPEJsZSKtzpcoQiZWbUEyXm1jZlDst50
-	4vuQ==
-X-Received: by 10.98.8.157 with SMTP id 29mr10459913pfi.128.1450738840097;
-	Mon, 21 Dec 2015 15:00:40 -0800 (PST)
+	h=from:to:cc:subject:date:message-id;
+	bh=nN6U8kvENYkPupOK1kZq7o11BG2Vy0vAX6B2/mX80Gg=;
+	b=qldFA8xB3dGU33oHcj75SSlvvgEi3S+h3Vpl1gJRRu2xfBLChI2N3zx0Cx0StyKJFC
+	GNpcpZcuwsAKvEKwP50h7AAOQwqPeFdcN53A8uxt4y+SeGoaWF60HIJ062bbckxjHsWV
+	n9PstdjWlmhUy22MTQDxmgzKwfREOkTca/fqEKE1BVbTJVEY7F4XgfdTKHTmKRZiW/jq
+	HF0L1UNVl9fznMcboVJqHdUCWKAa0/TUBn6fdWhyA6SS+ZESkP0oCBVmIFwbxv5y9loY
+	QUPPd7RSZhkGhbgk93k74Prm+jrl6bCG3CnvJOZ5AuMljvwwX//73pxswlosYYkTp/53
+	1INw==
+X-Received: by 10.50.142.3 with SMTP id rs3mr20520333igb.70.1450744602215;
+	Mon, 21 Dec 2015 16:36:42 -0800 (PST)
 Received: from e6520.cablelabs.com
 	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by smtp.gmail.com with ESMTPSA id
-	g10sm36819317pfj.15.2015.12.21.15.00.38
+	by smtp.gmail.com with ESMTPSA id d9sm9184283igx.5.2015.12.21.16.36.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 21 Dec 2015 15:00:39 -0800 (PST)
+	Mon, 21 Dec 2015 16:36:41 -0800 (PST)
 From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Dec 2015 15:00:30 -0800
-Message-Id: <1450738830-30719-2-git-send-email-armccurdy@gmail.com>
+Date: Mon, 21 Dec 2015 16:36:32 -0800
+Message-Id: <1450744595-8679-1-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1450738830-30719-1-git-send-email-armccurdy@gmail.com>
-References: <1450738830-30719-1-git-send-email-armccurdy@gmail.com>
-Subject: [meta-oe][PATCH 2/2] OML: move license file from meta-oe to meta-webserver
+Subject: [meta-oe][PATCH 0/3] opencv: minor recipe updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,21 +41,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Dec 2015 23:00:40 -0000
+X-List-Received-Date: Tue, 22 Dec 2015 00:36:41 -0000
 
-The OML license is specific to fastcgi, which is in meta-webserver,
-not meta-oe.
+Andre McCurdy (3):
+  opencv: sort PACKAGECONFIG options
+  opencv: limit ARM_INSTRUCTION_SET = "arm" over-ride to armv4/armv5
+  opencv: support machines based on oe-core tune-corei7.inc
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- {meta-oe => meta-webserver}/licenses/OML | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename {meta-oe => meta-webserver}/licenses/OML (100%)
+ meta-oe/recipes-support/opencv/opencv_2.4.bb | 10 +++++++---
+ meta-oe/recipes-support/opencv/opencv_3.0.bb | 20 ++++++++++++--------
+ 2 files changed, 19 insertions(+), 11 deletions(-)
 
-diff --git a/meta-oe/licenses/OML b/meta-webserver/licenses/OML
-similarity index 100%
-rename from meta-oe/licenses/OML
-rename to meta-webserver/licenses/OML
 -- 
 1.9.1
 
