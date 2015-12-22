@@ -1,39 +1,32 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
-	[209.85.223.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 6CB7C6FFCC
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id F409F6FF9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2015 16:44:56 +0000 (UTC)
-Received: by mail-io0-f180.google.com with SMTP id q126so191826448iof.2
+	Tue, 22 Dec 2015 18:06:09 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id p187so117987683wmp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2015 08:44:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
+	Tue, 22 Dec 2015 10:06:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=cQNzjxXCMI8uqUSIR2JzhSWjZk5AzO4g6NoiWxOrJWw=;
-	b=R7EkooDM9SFTAhJcRzi9WnPJ+nrr16vLanrsTTvyaD9Do3hxXwEyvMo3DP4rCk7wC4
-	BeUl4buAxpSOJjy933T5MWonEuNwLdIN1Q10mQLwDlp9NVXHDvmQNexOIu/eRz3Mj4F3
-	ijCYyQgjDLLQzh62kQoby5GQ6tFWkjaP0aDpKDAWfQNgOFBQYl8Qmvk34jHpUJpC+1rC
-	KTH+EE9A9k8Q0Js6KN2GJd3QemnqT8bQ8gAQ2xCCjZcVtVRE6FYTJ48AAC5BUGbxdwht
-	Q7L4TCvfg+B1DzgwluiNNWyNrlf2pZlRdaVRU0VV6OtDiPASuNtevJj2sY+kcgEwGP1J
-	0oDg==
+	:content-type; bh=0PqKKnvdl2Wk/a5r50FXRszaA6ebc89IWr4r9lcdGTc=;
+	b=gzESZOPzZ14wurRr2aUxzD/InD2ABCwSETWoxCVswhvpNZxXDZ5rq3Swv0kdWjvtOe
+	/wPzk4kn+WBKj8aLqtv4xi1AFLdL3nYFgGIx6SWoAy9XdED2Ne8OtB5prvUXOOqe3rYP
+	JF/1Up+I5JygjOzLNx5WfXPp1/aB2I2ZKhSCX27MFsmysgTUmg4VIICaeVVFgN39cPe+
+	LWEkB0BambfVcYa/MmMo1ie5ixl+3iT/2FshQRYTXUiApODNAUJp9KNQVzUflNr3VRzA
+	6FcBtC1XlVuYRhUfInXgXna0KsPjOox/6C5VYMBCzZew4tCPvVyZXyQbhlgyiQ1Or4RX
+	lpHQ==
 MIME-Version: 1.0
-X-Received: by 10.107.155.209 with SMTP id d200mr29227132ioe.133.1450802697588;
-	Tue, 22 Dec 2015 08:44:57 -0800 (PST)
-Received: by 10.36.25.81 with HTTP; Tue, 22 Dec 2015 08:44:57 -0800 (PST)
-In-Reply-To: <20151222164032.GB2556@jama>
-References: <1448525199-27504-1-git-send-email-schnitzeltony@googlemail.com>
-	<1448525199-27504-2-git-send-email-schnitzeltony@googlemail.com>
-	<CALbNGRReLcVR5J9sGtR2w2EXUiLpATdjFV9O--huGdhxz_Fb5g@mail.gmail.com>
-	<CALbNGRSZL8kWXfk_2ZH0ceDFV5BS-vEwy1GOr0TAzgiHwRbfdA@mail.gmail.com>
-	<20151222164032.GB2556@jama>
-Date: Tue, 22 Dec 2015 17:44:57 +0100
-Message-ID: <CALbNGRRWtALpzz37U=_Xrt_Goh9QKT4QbkpG9uAqeGZ=JbmNOg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-qt5][jethro] qtbase: align target qmake paths/mkspec
+X-Received: by 10.194.24.226 with SMTP id x2mr28722480wjf.43.1450807570092;
+	Tue, 22 Dec 2015 10:06:10 -0800 (PST)
+Received: by 10.194.209.131 with HTTP; Tue, 22 Dec 2015 10:06:09 -0800 (PST)
+In-Reply-To: <1450799125-5013-2-git-send-email-twoerner@gmail.com>
+References: <1450799125-5013-1-git-send-email-twoerner@gmail.com>
+	<1450799125-5013-2-git-send-email-twoerner@gmail.com>
+Date: Tue, 22 Dec 2015 10:06:09 -0800
+Message-ID: <CAJ86T=XzNuWnP8sanhre_WYi0KFLK9w=4Kj4B+Pk=9Ae8pe_Qg@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v4 1/1] nodejs: cleanup and update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,151 +39,210 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2015 16:44:59 -0000
+X-List-Received-Date: Tue, 22 Dec 2015 18:06:11 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 22, 2015 at 5:40 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Tue, Dec 22, 2015 at 05:14:23PM +0100, Andreas M=C3=BCller wrote:
->> On Tue, Dec 15, 2015 at 12:32 PM, Andreas M=C3=BCller
->> <schnitzeltony@googlemail.com> wrote:
->> > On Thu, Nov 26, 2015 at 9:06 AM, Andreas M=C3=BCller
->> > <schnitzeltony@googlemail.com> wrote:
->> >> With this we can setup qt-creator to build/debug on target again.
->> >>
->> >> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->> >> ---
->> >>  ...configure-paths-for-target-qmake-properly.patch | 76 ++++++++++++=
-++++++++++
->> >>  recipes-qt/qt5/qtbase_git.bb                       |  1 +
->> >>  2 files changed, 77 insertions(+)
->> >>  create mode 100644 recipes-qt/qt5/qtbase/0011-configure-paths-for-ta=
-rget-qmake-properly.patch
->> >>
->> >> diff --git a/recipes-qt/qt5/qtbase/0011-configure-paths-for-target-qm=
-ake-properly.patch b/recipes-qt/qt5/qtbase/0011-configure-paths-for-target-=
-qmake-properly.patch
->> >> new file mode 100644
->> >> index 0000000..efd27a5
->> >> --- /dev/null
->> >> +++ b/recipes-qt/qt5/qtbase/0011-configure-paths-for-target-qmake-pro=
-perly.patch
->> >> @@ -0,0 +1,76 @@
->> >> +From fb519b08f564a8a640b1b2f2b6a3bd54a83e19e8 Mon Sep 17 00:00:00 20=
-01
->> >> +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@goo=
-glemail.com>
->> >> +Date: Fri, 13 Nov 2015 12:36:11 +0100
->> >> +Subject: [PATCH] configure paths/mkspecs for target qmake properly
->> >> +MIME-Version: 1.0
->> >> +Content-Type: text/plain; charset=3DUTF-8
->> >> +Content-Transfer-Encoding: 8bit
->> >> +
->> >> +to use this patch in all qtbase/qtbase-native(sdk) changes ore made
->> >> +conditionally based on QT_CROSS_COMPILE
->> >> +
->> >> +Upstream-Status: Inappropriate [OE specific]
->> >> +
->> >> +Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->> >> +---
->> >> + configure | 23 +++++++++++++++++++----
->> >> + 1 file changed, 19 insertions(+), 4 deletions(-)
->> >> +
->> >> +diff --git a/configure b/configure
->> >> +index 6edfffd..de74a29 100755
->> >> +--- a/configure
->> >> ++++ b/configure
->> >> +@@ -3857,8 +3857,13 @@ if [ "$CFG_COMPILE_EXAMPLES" =3D "yes" ]; the=
-n
->> >> +     QMAKE_CONFIG=3D"$QMAKE_CONFIG compile_examples"
->> >> + fi
->> >> +
->> >> +-shortxspec=3D`echo $XQMAKESPEC | sed "s,^${relpath}/mkspecs/,,"`
->> >> +-shortspec=3D`echo $QMAKESPEC | sed "s,^${relpath}/mkspecs/,,"`
->> >> ++if [ "$QT_CROSS_COMPILE" =3D "yes" ] ; then
->> >> ++    shortxspec=3Dlinux-g++
->> >> ++    shortspec=3Dlinux-g++
->> >> ++else
->> >> ++    shortxspec=3D`echo $XQMAKESPEC | sed "s,^${relpath}/mkspecs/,,"=
-`
->> >> ++    shortspec=3D`echo $QMAKESPEC | sed "s,^${relpath}/mkspecs/,,"`
->> >> ++fi
->> >> +
->> >> + QT_CONFIGURE_STR_OFF=3D0
->> >> +
->> >> +@@ -3891,7 +3896,11 @@ QT_CONFIGURE_STRS_ALL=3D$QT_CONFIGURE_STRS
->> >> +
->> >> + QT_CONFIGURE_STR_OFFSETS=3D
->> >> + QT_CONFIGURE_STRS=3D
->> >> +-addConfStr "$CFG_SYSROOT"
->> >> ++if [ "$QT_CROSS_COMPILE" =3D "yes" ] ; then
->> >> ++    addConfStr ""
->> >> ++else
->> >> ++    addConfStr "$CFG_SYSROOT"
->> >> ++fi
->> >> + addConfStr "$QT_REL_HOST_BINS"
->> >> + addConfStr "$QT_REL_HOST_LIBS"
->> >> + addConfStr "$QT_REL_HOST_DATA"
->> >> +@@ -3903,6 +3912,12 @@ addConfStr "$shortspec"
->> >> + #------------------------------------------------------------------=
--------------
->> >> + [ -d "$outpath/src/corelib/global" ] || mkdir -p "$outpath/src/core=
-lib/global"
->> >> +
->> >> ++if [ "$QT_CROSS_COMPILE" =3D "yes" ] ; then
->> >> ++    QT_TARGET_PREFIX=3D$QT_EXT_PREFIX
->> >> ++else
->> >> ++    QT_TARGET_PREFIX=3D$QT_HOST_PREFIX
->> >> ++fi
->> >> ++
->> >> + cat > "$outpath/src/corelib/global/qconfig.cpp.new" <<EOF
->> >> + /* License Info */
->> >> + static const char qt_configure_licensee_str          [256 + 12] =3D=
- "qt_lcnsuser=3D$Licensee";
->> >> +@@ -3915,7 +3930,7 @@ static const char qt_configure_installation   =
-       [12+11]    =3D "qt_instdate=3D2
->> >> + static const char qt_configure_prefix_path_str       [512 + 12] =3D=
- "qt_prfxpath=3D$QT_INSTALL_PREFIX";
->> >> + #ifdef QT_BUILD_QMAKE
->> >> + static const char qt_configure_ext_prefix_path_str   [512 + 12] =3D=
- "qt_epfxpath=3D$QT_EXT_PREFIX";
->> >> +-static const char qt_configure_host_prefix_path_str  [512 + 12] =3D=
- "qt_hpfxpath=3D$QT_HOST_PREFIX";
->> >> ++static const char qt_configure_host_prefix_path_str  [512 + 12] =3D=
- "qt_hpfxpath=3D$QT_TARGET_PREFIX";
->> >> + #endif
->> >> +
->> >> + static const short qt_configure_str_offsets[] =3D {
->> >> +--
->> >> +2.1.0
->> >> +
->> >> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git=
-.bb
->> >> index 0ba8ac8..3ef5923 100644
->> >> --- a/recipes-qt/qt5/qtbase_git.bb
->> >> +++ b/recipes-qt/qt5/qtbase_git.bb
->> >> @@ -26,6 +26,7 @@ SRC_URI +=3D "\
->> >>      file://0008-qmake-don-t-build-it-in-configure-but-allow-to-build=
-.patch \
->> >>      file://0009-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE=
-.patch \
->> >>      file://0010-qeglplatformscreen.cpp-reorder-headers-to-fix-build-=
-.patch \
->> >> +    file://0011-configure-paths-for-target-qmake-properly.patch \
->> >>  "
->> >>
->> >>  DEPENDS +=3D "qtbase-native"
->> >> --
->> >> 2.1.0
->> >>
->> > Ping
->> Ping for jethro
+On Tue, Dec 22, 2015 at 7:45 AM, Trevor Woerner <twoerner@gmail.com> wrote:
+> Remove old nodejs4_0.4.12 and update nodejs_0.12.7 to the latest stable
+> nodejs_4.2.3.
 >
-> I wanted to keep it a bit longer in master, but I trust you, so pushed
-> to jethro as well.
+> Nodejs is picky about which architectures it supports. The supported arch
+> mapping required some updating to bring it up to date with the current nodejs
+> code. Add COMPATIBLE_MACHINE entries so it only builds for the supported
+> architectures.
 >
-Thanks trusting the only moron running qt-creator on target :)
+> ARM cores that don't support at least VFP2 have been dropped:
+>
+>     https://groups.google.com/forum/#!topic/v8-users/aSOFbaAQvMk
+>
+>     "Due the increasing cost of the keeping the "no-VFPv2" port of V8 working
+>     on ARM, we are planning on making 3.17 the last V8 release that that
+>     supports ARM chips without VFPv2. Starting with the 3.18 release, the
+>     minimal V8 requirements will increase to ARMv6 + VFPv2. In order to
+>     simplify maintenance, we will also remove the "pre-VFP2" ARM code from the
+>     V8 code base."
+>
+> Additionally, gcc no longer supports a VFPv2 option:
+>
+>     https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html#index-mfpu-1460
 
-Andreas
+There's no documented -mfpu=vfpv2 option in older releases either, so
+trying to use it may just be a bug in the v8 build system?
+
+  https://gcc.gnu.org/onlinedocs/gcc-4.4.0/gcc/ARM-Options.html#ARM-Options
+  https://gcc.gnu.org/onlinedocs/gcc-4.5.0/gcc/ARM-Options.html#ARM-Options
+  https://gcc.gnu.org/onlinedocs/gcc-4.6.0/gcc/ARM-Options.html#ARM-Options
+
+The correct option for vfpv2 is -mfpu=vfp and it's certainly still
+supported by current gcc versions (it's used by meta-raspberrypi).
+
+
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+> ---
+>  .../nodejs/nodejs/enable-armv5e-build.patch        | 22 ----------
+>  .../nodejs/nodejs4/libev-cross-cc_0.4.12.patch     | 13 ------
+>  meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb  | 49 ----------------------
+>  .../nodejs/{nodejs_0.12.7.bb => nodejs_4.2.3.bb}   | 18 ++++----
+>  4 files changed, 11 insertions(+), 91 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/enable-armv5e-build.patch
+>  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-cc_0.4.12.patch
+>  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
+>  rename meta-oe/recipes-devtools/nodejs/{nodejs_0.12.7.bb => nodejs_4.2.3.bb} (84%)
+>
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/enable-armv5e-build.patch b/meta-oe/recipes-devtools/nodejs/nodejs/enable-armv5e-build.patch
+> deleted file mode 100644
+> index cc7c9ab..0000000
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs/enable-armv5e-build.patch
+> +++ /dev/null
+> @@ -1,22 +0,0 @@
+> -Building for qemuarm without thumb enabled is using -march=armv5e which isn't
+> -recognized here. Fix it by adding __ARM_ARCH_5E__.
+> -
+> -v0.12.2 branch of node doesn't seem to be affected, because it's using
+> -different version of v8
+> -
+> -Upstream-Status: Pending
+> -
+> -Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> -
+> -diff -uNr node-v0.12.2/deps/v8/src/base/atomicops_internals_arm_gcc.h node-v0.12.2-fix/deps/v8/src/base/atomicops_internals_arm_gcc.h
+> ---- node-v0.12.2/deps/v8/src/base/atomicops_internals_arm_gcc.h        2015-04-01 00:13:01.000000000 +0200
+> -+++ node-v0.12.2-fix/deps/v8/src/base/atomicops_internals_arm_gcc.h    2015-04-28 14:30:43.119509207 +0200
+> -@@ -156,7 +156,7 @@
+> -
+> - // This tests against any known ARMv5 variant.
+> - #elif defined(__ARM_ARCH_5__) || defined(__ARM_ARCH_5T__) || \
+> --      defined(__ARM_ARCH_5TE__) || defined(__ARM_ARCH_5TEJ__)
+> -+      defined(__ARM_ARCH_5E__) || defined(__ARM_ARCH_5TE__) || defined(__ARM_ARCH_5TEJ__)
+> -
+> - // The kernel also provides a helper function to perform an atomic
+> - // compare-and-swap operation at the hard-wired address 0xffff0fc0.
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-cc_0.4.12.patch b/meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-cc_0.4.12.patch
+> deleted file mode 100644
+> index 2b9838f..0000000
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs4/libev-cross-cc_0.4.12.patch
+> +++ /dev/null
+> @@ -1,13 +0,0 @@
+> -diff --git a/deps/libev/wscript b/deps/libev/wscript
+> -index 4f6c9a8..1796749 100644
+> ---- a/deps/libev/wscript
+> -+++ b/deps/libev/wscript
+> -@@ -58,7 +58,7 @@ def configure(conf):
+> -           return 0;
+> -       }
+> -   """
+> --  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=True,
+> -+  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=False,
+> -                 msg="Checking for SYS_clock_gettime")
+> -
+> -   have_librt = conf.check(lib='rt', uselib_store='RT')
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb b/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
+> deleted file mode 100644
+> index c73cefc..0000000
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
+> +++ /dev/null
+> @@ -1,49 +0,0 @@
+> -SUMMARY = "nodeJS Evented I/O for V8 JavaScript"
+> -HOMEPAGE = "http://nodejs.org"
+> -LICENSE = "MIT & Zlib"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=d6237f3a840aef5b7880fb4e49eecfe5"
+> -
+> -DEPENDS = "openssl"
+> -
+> -PNBLACKLIST[nodejs4] ?= "Used only by currently blacklisted cloud9 and fails to build for qemuarm with thumb: error: #error For thumb inter-working we require an architecture which supports blx"
+> -
+> -SRC_URI = " \
+> -    http://nodejs.org/dist/node-v${PV}.tar.gz \
+> -    file://libev-cross-cc_${PV}.patch \
+> -"
+> -SRC_URI[md5sum] = "a6375eaa43db5356bf443e25b828ae16"
+> -SRC_URI[sha256sum] = "c01af05b933ad4d2ca39f63cac057f54f032a4d83cff8711e42650ccee24fce4"
+> -
+> -S = "${WORKDIR}/node-v${PV}"
+> -
+> -# v8 errors out if you have set CCACHE
+> -CCACHE = ""
+> -
+> -do_configure () {
+> -    sed -i -e 's:/usr/lib:${STAGING_LIBDIR}:g' wscript
+> -    sed -i -e 's:/usr/local/lib:${STAGING_LIBDIR}:g' wscript
+> -    ./configure --prefix=${prefix} --without-snapshot
+> -}
+> -
+> -do_compile () {
+> -    make
+> -}
+> -
+> -do_install () {
+> -    oe_runmake install DESTDIR=${D}
+> -
+> -    # fix namespace conflicts with other nodejs recipes
+> -    mv ${D}${bindir}/node ${D}${bindir}/node4
+> -    mv ${D}${bindir}/node-waf ${D}${bindir}/node4-waf
+> -
+> -    mv ${D}${includedir}/node ${D}${includedir}/node4
+> -
+> -    mv ${D}${libdir}/node ${D}${libdir}/node4
+> -    mv ${D}${libdir}/pkgconfig/nodejs.pc ${D}${libdir}/pkgconfig/nodejs4.pc
+> -    sed -i -e s:include/node:include/node4: ${D}${libdir}/pkgconfig/nodejs4.pc
+> -
+> -    mv ${D}${datadir}/man/man1/node.1 ${D}${datadir}/man/man1/node4.1
+> -}
+> -
+> -FILES_${PN} += "${libdir}/node4/wafadmin"
+> -BBCLASSEXTEND = "native"
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.7.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.2.3.bb
+> similarity index 84%
+> rename from meta-oe/recipes-devtools/nodejs/nodejs_0.12.7.bb
+> rename to meta-oe/recipes-devtools/nodejs/nodejs_4.2.3.bb
+> index 41eb5ee..66a3c11 100644
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.7.bb
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.2.3.bb
+> @@ -1,16 +1,19 @@
+>  DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+>  HOMEPAGE = "http://nodejs.org"
+>  LICENSE = "MIT & BSD & Artistic-2.0"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=14115ff11211df04b031ec7d40b6d31b"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=ee90ba97d933fc8d56e97812b7dd62e9"
+>
+>  DEPENDS = "openssl"
+>
+> +COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
+> +COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
+> +COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+> +
+>  SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
+> -    file://enable-armv5e-build.patch \
+>      file://no-registry.patch \
+>  "
+> -SRC_URI[md5sum] = "5523ec4347d7fe6b0f6dda1d1c7799d5"
+> -SRC_URI[sha256sum] = "b23d64df051c9c969b0c583f802d5d71de342e53067127a5061415be7e12f39d"
+> +SRC_URI[md5sum] = "529a8abd4ca5a2225636767d3f14c382"
+> +SRC_URI[sha256sum] = "5008ade5feb4b089f59163f66bffddc113f27de5d78edf203e39435c2c5d554f"
+>
+>  S = "${WORKDIR}/node-v${PV}"
+>
+> @@ -20,10 +23,11 @@ CCACHE = ""
+>  def map_nodejs_arch(a, d):
+>      import re
+>
+> -    if   re.match('p(pc|owerpc)(|64)', a): return 'ppc'
+> -    elif re.match('i.86$', a): return 'ia32'
+> +    if   re.match('i.86$', a): return 'ia32'
+>      elif re.match('x86_64$', a): return 'x64'
+> -    elif re.match('arm64$', a): return 'arm'
+> +    elif re.match('aarch64$', a): return 'arm64'
+> +    elif re.match('powerpc64$', a): return 'ppc64'
+> +    elif re.match('powerpc$', a): return 'ppc'
+>      return a
+>
+>  ARCHFLAGS_arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--with-arm-float-abi=hard', '--with-arm-float-abi=softfp', d)}"
+> --
+> 2.6.0.rc3
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
