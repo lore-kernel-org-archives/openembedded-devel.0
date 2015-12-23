@@ -1,35 +1,42 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 039FB731A3;
-	Wed, 23 Dec 2015 10:04:47 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id p187so142002633wmp.0;
-	Wed, 23 Dec 2015 02:04:48 -0800 (PST)
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id CF9466080F
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Dec 2015 10:37:54 +0000 (UTC)
+Received: by mail-wm0-f47.google.com with SMTP id p187so143083637wmp.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Dec 2015 02:37:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=5u/088kPbIUoh/EX4QK09kcK7t/8uZoG+wDRf+yWonU=;
-	b=h2K4/NzARWBZE6ThAAyyNYlW0sr7nOnFcplDHxrv+bes8RWLMGQfc0k+v0ZoZ83fpm
-	7WT8yi4FkKE/BKH/vHz8xdCa3azK8TNMQ/33tRULPjwejyOXdV6KiUXHXUa3d2aGI20r
-	HvyD0wkqd+KTsr4ddIt7+wTZJgW+1dKQyC7a4nSPkX16A4/icW5b+Z/ZB/6Uv4kfqjhF
-	UEfxCpvEP4UWWjtH36Mr1sy673VBUDBCZeeU6eaaq0XbH+b7CyJA9J5BtPUPtAjKdDZe
-	Y4KBG4kcQFekGv2qZ23aj+0PyFyj4kCwuT5Skx/DXuf+MpWZoW0wtb8s8D2W6+0Jpa1M
-	99bg==
-X-Received: by 10.28.20.197 with SMTP id 188mr34827466wmu.46.1450865087936;
-	Wed, 23 Dec 2015 02:04:47 -0800 (PST)
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=/C4Utx5083w0yFcpJvjC9RoWFcto1aGFIGOGAw2h0/M=;
+	b=rCT/c87In5P5GIZXOU/KQeiPhWjbDjyBToqyA2E+LBVmUqeQxZTIF3Sqspddv5gAyR
+	NIycARxxLd5PidZcZ5y9g1BbrnIQsOtOCkyc4HjzOrYporFUbg9ctwmJSBDefNi0WNnR
+	WZpxmuKBWFB9oTyIMYTNJLbUBjLop+p/91rtS2FtXDrmzeznhlckz23vHEq/bT3qCBxe
+	CK5RUgZfya5vNaC1hWPlVRbN6E3KB05VaLFVYkpuRceHGc9kwwSao+eEDOspmBBRiZZl
+	Ydnbhd4LIRpjFKHynIKoAzV572yj7h3anXQSpoX5268IsNA7Pq0pGho1zoM9hbizcAXs
+	YlQg==
+X-Received: by 10.194.47.231 with SMTP id g7mr33147506wjn.42.1450867074757;
+	Wed, 23 Dec 2015 02:37:54 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	s11sm28522849wmb.14.2015.12.23.02.04.46
+	i63sm2895579wmf.24.2015.12.23.02.37.53
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Dec 2015 02:04:46 -0800 (PST)
+	Wed, 23 Dec 2015 02:37:53 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 23 Dec 2015 11:07:57 +0100
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20151223100757.GB2569@jama>
+Date: Wed, 23 Dec 2015 11:41:04 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151223104104.GD2569@jama>
+References: <CALbNGRQzE+zG0GOPStWAjP6VMZr0YznhVfSD+X0b9CyzS=cKYA@mail.gmail.com>
+	<CALbNGRSgYj_m2_uxFO4VEAND5Ru6aXLJgHkmKRmuC73Ys9YocA@mail.gmail.com>
+	<20151223094204.GA2569@jama>
+	<CALbNGRRPPHk4FXahtc=sMeKd4mGp+J1wW5aUQnN=dwofgLJK9Q@mail.gmail.com>
 MIME-Version: 1.0
+In-Reply-To: <CALbNGRRPPHk4FXahtc=sMeKd4mGp+J1wW5aUQnN=dwofgLJK9Q@mail.gmail.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: State of bitbake world, test-dependencies 2015-12-23
+Subject: Re: [meta-qt5] qtscript, qtwebking: disable thumb issues on armv7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,227 +49,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Dec 2015 10:04:48 -0000
-X-Groupsio-MsgNum: 59156
+X-List-Received-Date: Wed, 23 Dec 2015 10:37:55 -0000
+X-Groupsio-MsgNum: 59157
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="EuxKj2iCbKjpUGkD"
+	protocol="application/pgp-signature"; boundary="cQXOx3fnlpmgJsTP"
 Content-Disposition: inline
 
---EuxKj2iCbKjpUGkD
-Content-Type: text/plain; charset=us-ascii
+--cQXOx3fnlpmgJsTP
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 14, 2015 at 08:03:47PM +0100, Martin Jansa wrote:
-> This time full build (testing all recipes available in "my world" - 2503
-> recipes), it took record-breaking 25days to finish.
+On Wed, Dec 23, 2015 at 10:57:18AM +0100, Andreas M=FCller wrote:
+> On Wed, Dec 23, 2015 at 10:42 AM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+> > On Wed, Dec 23, 2015 at 10:13:45AM +0100, Andreas M=FCller wrote:
+> >> On Wed, Dec 23, 2015 at 9:19 AM, Andreas M=FCller
+> >> <schnitzeltony@googlemail.com> wrote:
+> >> > Hi
+> >> >
+> >> > The story occured on jethro but I think it is the same for master:
+> >> On master fix for qtwebkit won't be necessary - qtwebkit will go away =
+[1]
+> >>
+> >> [1] http://blog.qt.io/blog/2015/12/18/qt-5-6-beta-released/
+> >
+> > True, but there are some attempts to keep 5.5* qtwebkit compatible with
+> > latest 5.6:
+> > http://lists.qt-project.org/pipermail/releasing/2015-December/002026.ht=
+ml
+> >
+> > so I wouldn't hope for qtwebkit recipe removal soon.
+> Yes - also in the blog I linked it was mentioned in the lower area but
+> my mail was already out when I read that.
+> >
+> >>
+> >> Andreas
+> >> >
+> >> > We have a simple application containing a QWebView which segfaulted
+> >> > during loading a page on a CortexA9 (armv7 thumb2). After enabling
+> >> > debug information for qtwebkit and remote debug session the point of
+> >> > segfault was detected in
+> >> >
+> >> > qtwebkit: Source/JavaScriptCore/llint/LowLevelInterpreter.asm:1082
+> >> >    callSlowPath(_llint_slow_path_new_func_exp)
+> >> >
+> >> > Further digging around lead to similar source in:
+> >> >
+> >> > * qtwebkit: Source/JavaScriptCore/assembler/ARMv7Assembler.h
+> >> > * qtscript: src/3rdparty/javascriptcore/JavaScriptCore/assembler/ARM=
+v7Assembler.h
+> >> >
+> >> > In these files a class ARMThumbImmediate is declared and used in many
+> >> > places. This lead me to the assumption that compiling for armv7
+> >> > expects thumb support.
+> >> >
+> >> > So I removed the
+> >> >
+> >> > ARM_INSTRUCTION_SET =3D "arm"
+> >
+> > You build it in distro with ARM_INSTRUCTION_SET set to "thumb", right?
+> Correct
 >=20
-> Complete log:
-> http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependencies.20151120_=
-144802.log/
-> =20
-> I've already sent patches for few of them, will send one for pulseaudio-l=
-irc as well
-> as I already have it in out local recipes. For the rest I would appreciat=
-e some help
-> from people actually using these recipes.
+> > Because the default is still "arm" so this issue you're describing is
+> > still valid in default DISTRO-less builds.
+> Ooh yes - so the right way for now (as long as other arm variants
+> don't fail) would be something like
 >=20
-> I'll trigger new incremental build after that huge meta-oe patch queue fr=
-om master-next
-> is in master.
+> ARM_INSTRUCTION_SET =3D "arm"
+> ARM_INSTRUCTION_SET_armv7 =3D "thumb"
 >=20
-> ERROR: 34 issues were found in these recipes: clutter-gst-3.0 cryptodev-m=
-odule ctdb gnome-panel jasper lcdproc libftdi mpd places pulseaudio python =
-python3 rain rygel samba shr-e-gadgets shr-wizard snort sysdig tmux uptime =
-vboxguestdrivers xfce4-clipman-plugin
+> If agreed I would send out patches for master and jethro with this.
 
-And it just got a lot worse, because more task are failing even in
-regular world builds (report will be sent later this week), but the
-missing and autodetected dependencies improved.
+I'm not sure if I would go that far to set it to "thumb" here, just add
+comment (even better with link to upstream bug).
 
-Most of the issues seems to be caused by gnutls upgrade which isn't
-compatible with the rest of the recipes depending on it, e.g.
-iksemel, libetpan, pidgin, ...
+It would be IMHO first case where we force thumb from the recipe.
 
-qemux86:
-Complete log:
-http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependencies.20151218_17=
-2159.log/
+Also note that there isn't armv7 override only armv7a, armv7m, armv7r,
+armv7ve.
 
-ERROR: 125 issues were found in these recipes:
-android-image-utils-native chkconfig-alternatives-native
-compat-wireless-all core-image-rt core-image-rt-sdk core-image-sato-dev
-core-image-sato-sdk core-image-testmaster cryptodev-module
-dfu-util-native fftwf fftwl freerdp gnome-desktop gnome-panel iksemel
-iscsitarget jasper libetpan libftdi libx11-diet linux-dummy
-linux-yocto-rt linux-yocto-tiny lldpd ltp-ddt mesa-gl mini-iconv netmap
-netmap-modules openlmi-networking openlmi-providers openlmi-storage perf
-php pidgin proxy-libintl pty-forward-native python python3 qwt-e remake
-rsyslog rygel samba samsung-modem-mgr samsung-rfs-mgr shr-image
-shr-image-all shr-lite-image snort synergy system-config-keyboard
-vboxguestdrivers xdg-utils xf86-video-ati xf86-video-nouveau
-xfce4-clipman-plugin
-
-Found differences:=20
-WARN: libftdi: libftdi rdepends on libgcc, but it isn't a build dependency?
-WARN: libftdi: libftdi rdepends on libstdc++, but it isn't a build dependen=
-cy?
-WARN: python: python-tkinter rdepends on glibc, but it isn't a build depend=
-ency?
-WARN: python: python-tkinter rdepends on libpython2, but it isn't a build d=
-ependency?
-WARN: python: python-tkinter rdepends on tcl-lib, but it isn't a build depe=
-ndency?
-WARN: python3: python3-tkinter rdepends on glibc, but it isn't a build depe=
-ndency?
-WARN: python3: python3-tkinter rdepends on libpython3, but it isn't a build=
- dependency?
-WARN: python3: python3-tkinter rdepends on tcl-lib, but it isn't a build de=
-pendency?
-WARN: rygel: rygel-plugin-media-export rdepends on libunistring, but it isn=
-'t a build dependency?
-WARN: snort: snort rdepends on liblzma, but it isn't a build dependency?
-WARN: xfce4-clipman-plugin: xfce4-clipman-plugin rdepends on qrencode, but =
-it isn't a build dependency?
-Found errors:=20
-ERROR: pulseaudio: pulseaudio-module-lirc package isn't created when buildi=
-ng with minimal dependencies?
-
-qemuarm:
-Complete log:
-http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependencies.20151220_19=
-4614.log/
-
-ERROR: 1233 issues were found in these recipes: activitymanager
-android-headers-grouper android-headers-maguro
-android-image-utils-native android-property-service android-system
-android-system-image-grouper android-system-image-maguro
-android-system-image-toro apcupsd app-services asus-grouper-firmware
-audio-service azy bcm4330-firmware benchfft binutils-cross
-binutils-cross-canadian binutils-crosssdk bluez4 build-appliance-image
-c-ares certmgrd chkconfig-alternatives-native cloud9 clutter-box2d
-cmtspeechtest compat-wireless-all configurator cordova core-apps
-core-image-directfb core-image-lsb core-image-lsb-dev core-image-lsb-sdk
-core-image-rt core-image-rt-sdk core-image-sato-dev core-image-sato-sdk
-core-image-testmaster coriander cpuburn-neon crash-handler
-cryptodev-module db8 dbus-hlid dfu-util-native diskio elmdentica emacs
-emprint emtooth2 entrance enyo-1.0 epdfview ffalarms fftwf fftwl
-filecache fim foundation-frameworks foxtrotgps freerdp fso-alsa
-fso-monitord gcalctool gcc-cross gcc-cross-canadian gcc-cross-initial
-gcc-crosssdk gcc-crosssdk-initial gcc-source gdal gdb-cross
-gdb-cross-canadian gnome-desktop gnome-keyring gnome-menus3
-gnome-mplayer gnome-panel gnome-panel3 gnome-power-manager gsmd2
-gst-plugin-bluetooth gst123 gta04-gps-handler gtkextra gwaterpas gypsy
-hunspell iksemel iliwi imaccountvalidator imlibpurpleservice imsettings
-intone ipmiutil iscsitarget jemalloc keymanager ktap ktap-module
-leveldb-tl libdbi-drivers libetpan libfreesmartphone-glib libftdi
-libgfortran libgles-omap4 libgweather3 libhybris libiconv libmsmcomm
-libmsmhll libmsmrpc libpalmsocket libpersistence libpfm4 librdx-stub
-libsandbox libsuspend libsyncml libwebos-application libx11-diet
-linux-acer-a500 linux-asus-grouper linux-dummy linux-samsung-crespo
-linux-samsung-tuna linux-yocto-dev linux-yocto-rt linux-yocto-tiny
-lksctp-tools lldpd lm loadable-frameworks location-service ltp-ddt
-luna-applauncher luna-appmanager luna-init luna-next-cardshell
-luna-qml-launcher luna-sysmgr luna-sysmgr-conf luna-sysservice
-luna-systemui luna-universalsearchmgr luna-webappmanager
-luneos-components luneos-default-wallpapers
-luneos-dev-emulator-appliance luneos-dev-image luneos-dev-package
-luneos-emulator-appliance luneos-image luneos-package luneos-sdk lxc
-maliit-framework maliit-plugins mcnavi media-permission-service
-mediaindexer memnotify-module mesa-gl meta-environment
-meta-environment-extsdk mini-iconv mkvtoolnix mmsd mojoloader
-mojolocation-stub mojomail-common mojomail-imap mojomail-pop
-mojomail-smtp mojoservice-frameworks mojoservicelauncher mongodb
-mplayer2 msmcommd msmcommd-specs mtp-server nautilus3 navit
-nemo-qml-plugin-dbus netmap netmap-modules netperf news node-dbus
-node-gyp-native node-gyp-packages-native node-sqlite3 node-taglib nodejs
-nodejs-module-webos-dynaload nodejs-module-webos-pmlog
-nodejs-module-webos-sysbus nodejs4 novacomd nss-myhostname nyx-conf
-nyx-modules nyx-modules-hybris nyx-utils obexftp ofono-conf
-openlmi-networking openlmi-providers openlmi-storage openmotif
-org.webosinternals.ipkgservice org.webosinternals.preware
-org.webosinternals.tweaks org.webosports.app.browser
-org.webosports.app.calculator org.webosports.app.calendar
-org.webosports.app.contacts org.webosports.app.filemanager
-org.webosports.app.firstuse org.webosports.app.maps
-org.webosports.app.memos org.webosports.app.messaging
-org.webosports.app.pdf org.webosports.app.phone
-org.webosports.app.photos org.webosports.app.settings
-org.webosports.app.testr org.webosports.cdav
-org.webosports.service.devmode org.webosports.service.licenses
-org.webosports.service.lumberjack org.webosports.service.messaging
-org.webosports.service.update packagegroup-cross-canadian
-packagegroup-luneos-development packagegroup-luneos-extended
-packagegroup-webos-extended packagegroup-webos-telephony packagekit perf
-phonesim php pidgin pisi pmcertificatemgr pmklogd pmlogctl pmlogdaemon
-pmstatemachineengine podboy powerd powerstat presage proxy-libintl
-ptmalloc3 pty-forward-native pulseaudio pulseaudio-distro-conf
-pulseaudio-modules-droid python python-tz-native python3 qcanobserver
-qcanobserver-socketcan qconnman qconnman-e qi qi-bootchart qi-debug
-qi-ubi qt-creator qt4-x11-free qt5-qpa-hwcomposer-plugin
-qtscenegraph-adaptation qtsensors-sensorfw-plugin qtwebengine rage
-remake renderer-service-upnp rsyslog rygel samba samsung-crespo-firmware
-samsung-fb-console samsung-modem-mgr samsung-rfs-mgr
-samsung-tuna-firmware screenshot sdl2-opengles-test sensmon sensorfw
-shr-config shr-image shr-image-all shr-installer shr-launcher
-shr-lite-image sleepd slim smemstat snort soft66 start-stop-daemon
-subsurface synergy system-config-keyboard system-tools-backends sysvinit
-tidy-html5 u-boot u-boot-fw-utils uclibc uclibc-initial underscore
-vala-terminal valacompass vboxguestdrivers ventura voicecall
-webos-connman-adapter webos-keyboard webos-system-update
-webos-systemd-services webos-systemsounds webos-telephonyd xbmc
-xdg-utils xf86-input-mtev xf86-video-geode xfce4-clipman-plugin zenity
-zeroc-ice zhone2
-
-Found differences:=20
-WARN: jasper: jasper-bin rdepends on libgl-mesa, but it isn't a build depen=
-dency?
-WARN: jasper: jasper-bin rdepends on libglu, but it isn't a build dependenc=
-y?
-WARN: jasper: jasper-bin rdepends on mesa-glut, but it isn't a build depend=
-ency?
-WARN: libftdi: libftdi rdepends on libgcc, but it isn't a build dependency?
-WARN: libftdi: libftdi rdepends on libstdc++, but it isn't a build dependen=
-cy?
-WARN: python: python-tkinter rdepends on glibc, but it isn't a build depend=
-ency?
-WARN: python: python-tkinter rdepends on libpython2, but it isn't a build d=
-ependency?
-WARN: python: python-tkinter rdepends on tcl-lib, but it isn't a build depe=
-ndency?
-WARN: python3: python3-tkinter rdepends on glibc, but it isn't a build depe=
-ndency?
-WARN: python3: python3-tkinter rdepends on libpython3, but it isn't a build=
- dependency?
-WARN: python3: python3-tkinter rdepends on tcl-lib, but it isn't a build de=
-pendency?
-WARN: rygel: rygel-plugin-media-export rdepends on libunistring, but it isn=
-'t a build dependency?
-WARN: snort: snort rdepends on liblzma, but it isn't a build dependency?
-WARN: xfce4-clipman-plugin: xfce4-clipman-plugin rdepends on qrencode, but =
-it isn't a build dependency?
-WARN: cryptodev-module: kernel-module-cryptodev rdepends on kernel-3.19.5-y=
-octo-tiny, but it isn't a build dependency?
-WARN: vboxguestdrivers: kernel-module-vboxguest rdepends on kernel-3.19.5-y=
-octo-tiny, but it isn't a build dependency?
-WARN: vboxguestdrivers: kernel-module-vboxsf rdepends on kernel-3.19.5-yoct=
-o-tiny, but it isn't a build dependency?
-WARN: vboxguestdrivers: kernel-module-vboxvideo rdepends on kernel-3.19.5-y=
-octo-tiny, but it isn't a build dependency?
+>=20
+> Andreas
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---EuxKj2iCbKjpUGkD
+--cQXOx3fnlpmgJsTP
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlZ6cnwACgkQN1Ujt2V2gBwKPACgishYeTGVifI3dFoawe2yhQLD
-bucAn2J+XjpamcQeWH1xiLNOC1lY9XD7
-=1bXp
+iEYEARECAAYFAlZ6ekAACgkQN1Ujt2V2gBy4egCglk2xoi1JmDRLhgIjRCG7jzqX
+hJwAoJ1U/VYZjU0Y1dxp0XZbLQzuBcwy
+=/Evc
 -----END PGP SIGNATURE-----
 
---EuxKj2iCbKjpUGkD--
+--cQXOx3fnlpmgJsTP--
