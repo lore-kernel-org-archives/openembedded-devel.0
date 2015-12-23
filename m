@@ -1,39 +1,35 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id DAF006FFDF
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-qg0-f41.google.com (mail-qg0-f41.google.com
+	[209.85.192.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D17E6FF77
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Dec 2015 16:40:04 +0000 (UTC)
-Received: by mail-pa0-f49.google.com with SMTP id uo6so30447468pac.1
+	Wed, 23 Dec 2015 21:33:45 +0000 (UTC)
+Received: by mail-qg0-f41.google.com with SMTP id 6so8201916qgy.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Dec 2015 08:40:05 -0800 (PST)
+	Wed, 23 Dec 2015 13:33:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=KPMOFRLrGa/ybjedwKUmCgCGu5K/1qU/rgTkcpU6ymo=;
-	b=S4a8kJ9mvHxKI6i/L7K23qnnGYY8PwIbt8TQFy1ugDr+kh/dBkvAPEWAHTW3Zzkc9B
-	XdpPxZOms39J6dPJjAx6AjrwFcBTBxQRN1NVKd6maWEIy0C4AhkWlXeZ7MVOYq9s0MFv
-	L3RSV0NmY6jKbW+genz+CQ60OD2cr2j4MNNIDmSZPirEz1OYAoRCDZpa+OVJQl9FN2fC
-	AdPYBp9cOZkUzFnuO3iUl6aJHV5LvVMVfuB9E+S9pr/VG+nW201ChcbxhYT7cwF+ifXC
-	2stUxYs7YIjbo65OFBp5sijGMuVYnHYrYpX1cjOj/XvdPyW7GxWOGUWwOf7OgcrtBtnw
-	1mKg==
-X-Received: by 10.66.255.10 with SMTP id am10mr45403187pad.79.1450888805074;
-	Wed, 23 Dec 2015 08:40:05 -0800 (PST)
-Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	q27sm5307606pfi.83.2015.12.23.08.40.03
-	for <openembedded-devel@lists.openembedded.org>
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=GB4Py2FctlDGDbYyCuHuApvP/yK1jbLfCvKxVh0bUxU=;
+	b=sLqe4RWlUQnWV0/WFUtugp/qm6v3j29AWy3RnRJ3txcg0C2ExH3yGjb4a0RgqiG+Ai
+	uwoOKfH0IOt9LkduFidVu3/qqX6q6iSH5zOgq4hKmLyMQmnuihb7L8KinuKWJKThZ+v7
+	AvxUtWaep1L/QB/zmuwKhV1xAz2efceX4jvuzkz2XtcAHtf1uh5YoOI68xUb5YiGGqPT
+	p/NnYvPIpeRt0+V9qNrbskFpNHJgmwaoMxSHFpNZv7ur6GtwboVvcim8qizMhlW3665H
+	fQUQRW7oqgRlqHmcczo563o7dE5AhsoDgF7lFKdfuDZ1OQ5VJ+7Ziy8f6G8XAlpFBjXD
+	L9Uw==
+X-Received: by 10.140.229.72 with SMTP id z69mr44013535qhb.104.1450906426384; 
+	Wed, 23 Dec 2015 13:33:46 -0800 (PST)
+Received: from thuvia.localdomain (pool-108-44-110-59.ronkva.east.verizon.net.
+	[108.44.110.59]) by smtp.gmail.com with ESMTPSA id
+	d62sm18751148qga.41.2015.12.23.13.33.45
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Dec 2015 08:40:03 -0800 (PST)
-Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
-	id 498EFFCC838; Wed, 23 Dec 2015 08:40:01 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
+	Wed, 23 Dec 2015 13:33:45 -0800 (PST)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Dec 2015 08:39:59 -0800
-Message-Id: <cover.1450888554.git.akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH v2 00/54] Jentrho-next pull request
+Date: Wed, 23 Dec 2015 16:33:41 -0500
+Message-Id: <1450906421-24545-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-oe][PATCHv2] thrift: Add recipe for Apache Thrift.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,213 +42,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Dec 2015 16:40:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 23 Dec 2015 21:33:46 -0000
 
-Please consider these changes for Jethro-next
+ * Run tested cpp bindings with GNU Radio Control Port.
 
-I dropped the netmap changes but add more.
+Signed-off-by: Philip Balister <philip@balister.org>
+---
+ .../recipes-connectivity/thrift/thrift_0.9.3.bb    | 33 ++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
 
-The following changes since commit 4fdb203c182dae6f451ca131c0edfd5f0c99fc28:
-
-  vlc: add PACKAGECONFIG for samba, upnp, dvdnav, sftp, vorbis, dc1394, dv1394, svg, svgdec (2015-11-16 21:57:48 +0100)
-
-are available in the git repository at:
-
-  git://github.com/akuster/meta-openembedded akuster/jethro-next
-  https://github.com/akuster/meta-openembedded/tree/akuster/jethro-next
-
-Andre McCurdy (1):
-  tree: respect the package's own default CFLAGS
-
-Andreas Müller (1):
-  faenza-icon-theme: fix host-user-contamination
-
-Bob Ham (1):
-  poppler: move RDEPENDS on poppler-data to libpoppler
-
-Christopher Larson (3):
-  ctdb: rdep on bash
-  gpsd: also support bluez5
-  canutils: rdep on iproute2
-
-George McCollister (1):
-  postgresql: Don't symlink to perl if it's disabled
-
-Haris Okanovic (1):
-  python-jinja2: Disable `make clean`
-
-Hongxu Jia (3):
-  libhtml-tree-perl: fix shebang
-  libnet-ssleay-perl: fix test failures with openssl
-  mariadb.inc: fix mysqld hung at first init time based on systemd
-
-Jackie Huang (4):
-  lmsensors-config: fix the packaging for sensord
-  xfsprogs: fix the license
-  netmap-modules: make deterministic builds for drivers
-  netmap-modules: Modules may not have the same arch as userspace
-
-Jian Liu (1):
-  ypbind-mt: set path of ypdomainname in ypbind script
-
-Joshua Lock (1):
-  poppler-data: install CMap resources for CJK glyph support
-
-Kai Kang (4):
-  libssh2: make crypto library selectable
-  mcelog: remove bashism and create ptest subpackage
-  apache2: fix host-user-contaminated warnings
-  pmtools: support huge ACPI table
-
-Li Xin (2):
-  net-snmp: Modify snmpd.service
-  opensaf: remove unused service file
-
-Li xin (1):
-  sessreg: add a patch to avoid build errors.
-
-Martin Jansa (3):
-  gnome-panel: add dependency on dbus
-  lcdproc5: add dependency on lirc
-  mpd: add dependency on libupnp
-
-Qi.Chen@windriver.com (3):
-  rrdtool: install python site packages into libdir
-  tipcutils: fix host-user-comtaminated QA issue
-  libvpx: fix host-user-comtaminated QA issue
-
-Radek Dostal (1):
-  htop: delete not used patch
-
-Rafaël Carré (7):
-  net-snmp: fix cross compilation
-  vlc: remove libdc1394 libraw1394 from DEPENDS
-  VLC: make libnotify a configurable dependency
-  VLC: explicit PACKAGECONFIG for fontconfig
-  VLC: explicit PACKAGECONFIG for freetype
-  VLC: make libdvdread PACKAGECONFIG
-  VLC: do not use --with-contrib
-
-Robert Yang (2):
-  netcat: add DESCRIPTION
-  dracut: fix host-user-contaminated
-
-Roy Li (3):
-  dovecot: add PACKAGECONFIG for lz4
-  pure-ftpd: add PACKAGECONFIG for libsodium
-  ufw: improve RRECOMMENDS
-
-Scott Ellis (1):
-  python-requests: Add RDEPENDS
-
-Steffen Sledz (1):
-  syslog-ng: add UPDATE_ALTERNATIVE for syslog-service
-
-Wenzong Fan (5):
-  krb5: fix CVE-2015-2695
-  krb5: fix CVE-2015-2696
-  krb5: fix CVE-2015-2697
-  krb5: fix CVE-2015-2698
-  phpmyadmin: fix CVE-2015-7873
-
-Yi Zhao (3):
-  pam-passwdqc: fix the hardcoded libdir
-  hplip: specify cupsbackenddir and cupsfilterdir
-  tmux: add PACKAGECONFIG for utempter
-
-Yue Tao (1):
-  netcat-openbsd: replace patch with quilt
-
- .../recipes-utils/xfsprogs/xfsprogs_3.2.3.bb       |   2 +-
- .../faenza-icon-theme/faenza-icon-theme_1.3.bb     |   1 +
- .../gnome-panel/gnome-panel_2.32.1.bb              |   2 +-
- .../recipes-devtools/dracut/dracut_git.bb          |   3 +
- .../recipes-multimedia/musicpd/mpd_0.19.10.bb      |   2 +-
- meta-multimedia/recipes-multimedia/vlc/vlc.inc     |  14 +-
- .../recipes-connectivity/ufw/ufw_0.33.bb           |   8 +
- .../opensaf/opensaf/plmcboot.service               |  13 -
- .../recipes-daemons/opensaf/opensaf/plmcd.service  |  15 -
- .../recipes-daemons/opensaf/opensaf_4.6.0.bb       |   6 +-
- .../recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb  |   2 +
- .../recipes-kernel/netmap/netmap-modules_git.bb    |  31 +-
- .../0002-config_os_headers-Error-Fix.patch         |  31 +
- .../net-snmp/net-snmp/snmpd.service                |   2 +-
- meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |   3 +
- .../recipes-support/dovecot/dovecot_2.2.18.bb      |   1 +
- .../recipes-support/netcat/netcat-openbsd_1.105.bb |   3 +-
- meta-networking/recipes-support/netcat/netcat.inc  |  10 +
- .../recipes-support/netcat/netcat_0.7.1.bb         |   2 -
- .../recipes-support/nis/files/ypbind.init          |  11 +-
- .../recipes-support/nis/ypbind-mt_1.38.bb          |   2 +
- ...AKERB-context-aliasing-bugs-CVE-2015-2696.patch | 739 +++++++++++++++++++++
- ...AKERB-context-export-import-CVE-2015-2698.patch | 134 ++++
- ...PNEGO-context-aliasing-bugs-CVE-2015-2695.patch | 572 ++++++++++++++++
- ...-build_principal-memory-bug-CVE-2015-2697.patch |  58 ++
- meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb   |   4 +
- ...tch-to-dynamic-buffer-for-huge-ACPI-table.patch |  66 ++
- meta-oe/recipes-devtools/pmtools/pmtools_git.bb    |   4 +-
- meta-oe/recipes-extended/hplip/hplip_3.12.6.bb     |   2 +
- meta-oe/recipes-extended/lcdproc/lcdproc5.inc      |   2 +-
- meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb  |   8 +-
- .../recipes-extended/socketcan/canutils_4.0.6.bb   |   3 +
- .../recipes-extended/tipcutils/tipcutils_2.0.6.bb  |   1 +
- meta-oe/recipes-extended/tmux/tmux_2.1.bb          |   4 +
- .../sessreg/0001-Makefile.am-Error-Fix.patch       |  33 +
- meta-oe/recipes-graphics/xorg-app/sessreg_1.1.0.bb |   7 +-
- meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb    |   5 +-
- meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb       |   4 +-
- .../htop/htop/remove-proc-test.patch               |  13 -
- meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb   |  10 +-
- .../lm_sensors/lmsensors-config_1.0.bb             |   5 +-
- .../mcelog/mcelog/mcelog-debash.patch              |  36 +
- meta-oe/recipes-support/mcelog/mcelog/run-ptest    |   3 +
- meta-oe/recipes-support/mcelog/mcelog_1.09.bb      |  32 +-
- meta-oe/recipes-support/mysql/mariadb.inc          |  51 +-
- meta-oe/recipes-support/mysql/mariadb/install_db   |  13 +
- .../mysql/mariadb/install_db.service               |  17 +
- meta-oe/recipes-support/mysql/mariadb/my.cnf       |   1 -
- .../mysql/mariadb/mysql-systemd-start              |  66 ++
- .../recipes-support/mysql/mariadb/mysqld.service   |   9 +
- .../pam-passwdqc/pam-passwdqc_1.0.5.bb             |   7 +-
- .../recipes-support/poppler/poppler-data_0.4.7.bb  |  21 +-
- meta-oe/recipes-support/poppler/poppler_0.37.0.bb  |   2 +-
- meta-oe/recipes-support/postgresql/postgresql.inc  |  18 +-
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |   8 +-
- meta-oe/recipes-support/tree/tree_1.7.0.bb         |  11 +-
- .../libhtml/files/bin-htmltree-fix-shebang.patch   |  25 +
- .../recipes-perl/libhtml/libhtml-tree-perl_5.03.bb |   4 +-
- ...ay-perl-Disable-test-that-fails-with-open.patch |  70 ++
- ...2-betas-have-dropped-the-SSLv3_method-fun.patch |  75 +++
- .../recipes-perl/libnet/libnet-ssleay-perl_1.65.bb |   2 +
- .../recipes-devtools/python/python-jinja2_2.7.3.bb |   2 +
- .../python/python-requests_2.7.0.bb                |   2 +
- .../recipes-httpd/apache2/apache2_2.4.16.bb        |   2 +
- .../Port-content-spoofing-fix-CVE-2015-7873.patch  |  48 ++
- .../recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb   |   1 +
- 66 files changed, 2222 insertions(+), 142 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.service
- delete mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/plmcd.service
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0002-config_os_headers-Error-Fix.patch
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/Fix-IAKERB-context-aliasing-bugs-CVE-2015-2696.patch
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/Fix-IAKERB-context-export-import-CVE-2015-2698.patch
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/Fix-SPNEGO-context-aliasing-bugs-CVE-2015-2695.patch
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/Fix-build_principal-memory-bug-CVE-2015-2697.patch
- create mode 100644 meta-oe/recipes-devtools/pmtools/pmtools/pmtools-switch-to-dynamic-buffer-for-huge-ACPI-table.patch
- create mode 100644 meta-oe/recipes-graphics/xorg-app/sessreg/0001-Makefile.am-Error-Fix.patch
- delete mode 100644 meta-oe/recipes-support/htop/htop/remove-proc-test.patch
- create mode 100644 meta-oe/recipes-support/mcelog/mcelog/mcelog-debash.patch
- create mode 100644 meta-oe/recipes-support/mcelog/mcelog/run-ptest
- create mode 100755 meta-oe/recipes-support/mysql/mariadb/install_db
- create mode 100644 meta-oe/recipes-support/mysql/mariadb/install_db.service
- create mode 100644 meta-oe/recipes-support/mysql/mariadb/mysql-systemd-start
- create mode 100644 meta-perl/recipes-perl/libhtml/files/bin-htmltree-fix-shebang.patch
- create mode 100644 meta-perl/recipes-perl/libnet/files/0001-libnet-ssleay-perl-Disable-test-that-fails-with-open.patch
- create mode 100644 meta-perl/recipes-perl/libnet/files/0002-Recent-1.0.2-betas-have-dropped-the-SSLv3_method-fun.patch
- create mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/Port-content-spoofing-fix-CVE-2015-7873.patch
-
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
+new file mode 100644
+index 0000000..c8c813b
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
+@@ -0,0 +1,33 @@
++SUMMARY = "Apache Thrift"
++DESCRIPTION =  "A software framework, for scalable cross-language services development"
++HOMEPAGE = "https://thrift.apache.org/"
++
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e4ed21f679b2aafef26eac82ab0c2cbf"
++
++DEPENDS = "thrift-native boost python libevent flex-native bison-native openssl"
++
++SRC_URI = "git://git-wip-us.apache.org/repos/asf/thrift.git;protocol=https \
++"
++SRCREV = "61b8a29b0704ccd81b520f2300f5d1bb261fea3e"
++S = "${WORKDIR}/git"
++
++BBCLASSEXTEND = "native nativesdk"
++
++inherit pkgconfig cmake pythonnative
++
++export STAGING_INCDIR
++export STAGING_LIBDIR
++export BUILD_SYS
++export HOST_SYS
++
++EXTRA_OECMAKE = "-DWITH_QT4=OFF"
++EXTRA_OECMAKE_class-native = "-DWITH_QT4=OFF -DBUILD_TESTING=OFF \
++             -DBUILD_EXAMPLES=OFF -DWITH_CPP=OFF"
++EXTRA_OECMAKE_class-nativesdk = "-DWITH_QT4=OFF -DBUILD_TESTING=OFF \
++             -DBUILD_EXAMPLES=OFF -DWITH_PYTHON=OFF"
++
++do_install_append () {
++	ln -sf thrift ${D}/${bindir}/thrift-compiler
++}
++
 -- 
-1.9.1
+2.1.0
 
 
