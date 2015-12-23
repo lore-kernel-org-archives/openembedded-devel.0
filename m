@@ -1,37 +1,24 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-io0-f175.google.com (mail-io0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 0807B6010D
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B6256731A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Dec 2015 09:57:17 +0000 (UTC)
-Received: by mail-io0-f175.google.com with SMTP id 186so214224159iow.0
+	Wed, 23 Dec 2015 10:03:38 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tBNA3cd9006971
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Dec 2015 01:57:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=lh3tEL8SSs6abNyl/gekQTW3LlZrFOfWvyueCSZtQJQ=;
-	b=gE9Ybh0NaiNU2CiLt4NiPJQbSkkKj2oMApUZYLO+aW0wvmeSKOtoe2pf7e1/XdKLbP
-	m4KKu0C3mFNknP2u0It3o4pv7me0Ui2E15JjBxhPxxTmjfbhgSIYh4zP7xJiF8t2+dT4
-	umlfEveYDzO92v/0J3YviIeEc9bKL3a+A60y2S5y85EeNnwdt9BFHkhTzSk5dmOv3zAs
-	Kb9kXPziHLV5oCH2wZX5oZIQzXIeTXHJRb1ZN396er716BgqD9QZOucQsnhEMi9t02Qq
-	3Y3q67y0SB/0cA4i6KUFipB8414D0zCG5gOrUCHezgkRCDl0DqrCq8FChlSeceuqyT0a
-	ppfw==
+	Wed, 23 Dec 2015 02:03:38 -0800 (PST)
+Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 23 Dec 2015 02:03:37 -0800
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 23 Dec 2015 18:03:48 +0800
+Message-ID: <cover.1450864063.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Received: by 10.107.155.209 with SMTP id d200mr33595458ioe.133.1450864638397;
-	Wed, 23 Dec 2015 01:57:18 -0800 (PST)
-Received: by 10.36.25.81 with HTTP; Wed, 23 Dec 2015 01:57:18 -0800 (PST)
-In-Reply-To: <20151223094204.GA2569@jama>
-References: <CALbNGRQzE+zG0GOPStWAjP6VMZr0YznhVfSD+X0b9CyzS=cKYA@mail.gmail.com>
-	<CALbNGRSgYj_m2_uxFO4VEAND5Ru6aXLJgHkmKRmuC73Ys9YocA@mail.gmail.com>
-	<20151223094204.GA2569@jama>
-Date: Wed, 23 Dec 2015 10:57:18 +0100
-Message-ID: <CALbNGRRPPHk4FXahtc=sMeKd4mGp+J1wW5aUQnN=dwofgLJK9Q@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] qtscript, qtwebking: disable thumb issues on armv7
+Subject: [meta-java][PATCH 0/2] openjdk-8-native: fix do_install and PROVIDES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,68 +31,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Dec 2015 09:57:19 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 23 Dec 2015 10:03:40 -0000
+Content-Type: text/plain
 
-On Wed, Dec 23, 2015 at 10:42 AM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> On Wed, Dec 23, 2015 at 10:13:45AM +0100, Andreas M=C3=BCller wrote:
->> On Wed, Dec 23, 2015 at 9:19 AM, Andreas M=C3=BCller
->> <schnitzeltony@googlemail.com> wrote:
->> > Hi
->> >
->> > The story occured on jethro but I think it is the same for master:
->> On master fix for qtwebkit won't be necessary - qtwebkit will go away [1=
-]
->>
->> [1] http://blog.qt.io/blog/2015/12/18/qt-5-6-beta-released/
->
-> True, but there are some attempts to keep 5.5* qtwebkit compatible with
-> latest 5.6:
-> http://lists.qt-project.org/pipermail/releasing/2015-December/002026.html
->
-> so I wouldn't hope for qtwebkit recipe removal soon.
-Yes - also in the blog I linked it was mentioned in the lower area but
-my mail was already out when I read that.
->
->>
->> Andreas
->> >
->> > We have a simple application containing a QWebView which segfaulted
->> > during loading a page on a CortexA9 (armv7 thumb2). After enabling
->> > debug information for qtwebkit and remote debug session the point of
->> > segfault was detected in
->> >
->> > qtwebkit: Source/JavaScriptCore/llint/LowLevelInterpreter.asm:1082
->> >    callSlowPath(_llint_slow_path_new_func_exp)
->> >
->> > Further digging around lead to similar source in:
->> >
->> > * qtwebkit: Source/JavaScriptCore/assembler/ARMv7Assembler.h
->> > * qtscript: src/3rdparty/javascriptcore/JavaScriptCore/assembler/ARMv7=
-Assembler.h
->> >
->> > In these files a class ARMThumbImmediate is declared and used in many
->> > places. This lead me to the assumption that compiling for armv7
->> > expects thumb support.
->> >
->> > So I removed the
->> >
->> > ARM_INSTRUCTION_SET =3D "arm"
->
-> You build it in distro with ARM_INSTRUCTION_SET set to "thumb", right?
-Correct
+From: Jackie Huang <jackie.huang@windriver.com>
 
-> Because the default is still "arm" so this issue you're describing is
-> still valid in default DISTRO-less builds.
-Ooh yes - so the right way for now (as long as other arm variants
-don't fail) would be something like
+I asked about this issue two days ago but no response, please carefully
+review and correct me if anyone have better understanding.
 
-ARM_INSTRUCTION_SET =3D "arm"
-ARM_INSTRUCTION_SET_armv7 =3D "thumb"
+My tests includes building openjdk7 and openjdk8 on qemux86-64
+with/without sstate cache.
 
-If agreed I would send out patches for master and jethro with this.
+--
+The following changes since commit 35739fca028996c594b1efa2225a77c8d6038193:
 
-Andreas
+  openjdk-8: Use zero mode on arm (2015-12-17 10:39:21 -0200)
+
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib.git jhuang0/d_jdk8-fix_151223_0
+  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/d_jdk8-fix_151223_0
+
+Jackie Huang (2):
+  Revert "meta-java: rely on well known bootstrap-path"
+  openjdk-8-native: fix improper do_install and PROVIDES
+
+ README                                             | 12 ++++++++--
+ classes/java-bootstrap-components.bbclass          |  7 ------
+ classes/java-library.bbclass                       |  3 +--
+ recipes-core/ant/ant-native_1.8.1.bb               |  2 +-
+ recipes-core/antlr/antlr_2.7.7.bb                  |  2 +-
+ recipes-core/cacao/cacao_1.6.1.bb                  |  6 ++---
+ recipes-core/classpath/classpath.inc               |  4 ++--
+ recipes-core/classpathx/gnujaf_1.1.1.bb            |  2 +-
+ recipes-core/classpathx/gnumail_1.1.2.bb           |  2 +-
+ recipes-core/classpathx/inetlib_1.1.1.bb           |  2 +-
+ recipes-core/cup/cup_0.10k.bb                      |  2 +-
+ recipes-core/ecj/ecj-bootstrap-native.bb           |  4 +++-
+ recipes-core/ecj/libecj-bootstrap.inc              |  2 +-
+ recipes-core/icedtea/icedtea7-native.inc           |  2 +-
+ recipes-core/jacl/jacl_1.4.1.bb                    |  2 +-
+ .../jakarta-commons/commons-logging_1.1.1.bb       |  2 --
+ recipes-core/jakarta-commons/commons-net_1.4.1.bb  |  2 --
+ .../jakarta-libs/avalon-framework-api_4.3.bb       |  2 +-
+ recipes-core/jakarta-libs/bsf_2.4.0.bb             |  2 +-
+ recipes-core/jakarta-libs/log4j1.2_1.2.17.bb       |  2 +-
+ recipes-core/jakarta-libs/logkit_1.2.2.bb          |  2 +-
+ recipes-core/jakarta-libs/oro_2.0.8.bb             |  2 +-
+ recipes-core/jakarta-libs/poi_3.0.bb               |  2 +-
+ recipes-core/jakarta-libs/regexp_1.5.bb            |  2 +-
+ recipes-core/jamvm/jamvm.inc                       |  4 ++--
+ recipes-core/jcraft/jsch_0.1.40.bb                 |  2 +-
+ recipes-core/jcraft/jzlib_1.0.7.bb                 |  2 +-
+ recipes-core/jdepend/jdepend_2.9.1.bb              |  2 +-
+ recipes-core/jlex/jlex_1.2.6.bb                    |  2 +-
+ recipes-core/junit/junit4_4.3.1.bb                 |  4 +++-
+ recipes-core/junit/junit_3.8.2.bb                  |  2 +-
+ recipes-core/openjdk/openjdk-8-native.inc          | 13 +++++------
+ recipes-core/openjdk/openjdk-8-native_72b05.bb     | 26 ----------------------
+ recipes-core/rhino/rhino_1.7r4.bb                  |  2 +-
+ recipes-core/servlet-api/servlet2.3_4.1.37.bb      |  4 +++-
+ recipes-core/servlet-api/servlet2.4_5.5.26.bb      |  2 ++
+ recipes-core/xalan-j/xalan-j_2.7.1.bb              |  2 +-
+ recipes-core/xerces-j/xerces-j_2.11.0.bb           |  6 ++---
+ recipes-core/xml-commons/jaxp1.3_1.4.01.bb         |  4 +++-
+ .../xml-commons/xml-commons-resolver1.1_1.2.bb     |  6 ++---
+ recipes-core/xml-commons/xpp2_2.1.10.bb            |  2 ++
+ recipes-core/xml-commons/xpp3_1.1.3.4.O.bb         |  2 ++
+ 42 files changed, 69 insertions(+), 90 deletions(-)
+ delete mode 100644 classes/java-bootstrap-components.bbclass
+
+-- 
+1.9.1
+
 
