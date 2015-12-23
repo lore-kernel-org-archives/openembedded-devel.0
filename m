@@ -1,24 +1,32 @@
-Return-Path: <Fupan.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 87F806612D
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ig0-f173.google.com (mail-ig0-f173.google.com
+	[209.85.213.173])
+	by mail.openembedded.org (Postfix) with ESMTP id F1AD970016
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Dec 2015 05:59:27 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tBN5xRT6005172
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 23 Dec 2015 08:19:37 +0000 (UTC)
+Received: by mail-ig0-f173.google.com with SMTP id m11so63270586igk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2015 21:59:27 -0800 (PST)
-Received: from pek-lpdfs01.wrs.com (128.224.153.15) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
-	Tue, 22 Dec 2015 21:59:26 -0800
-From: <fupan.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 23 Dec 2015 00:59:25 -0500
-Message-ID: <1450850365-33335-1-git-send-email-fupan.li@windriver.com>
-X-Mailer: git-send-email 2.6.4
+	Wed, 23 Dec 2015 00:19:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=jdbJpcjzW5/wCMwQ8g54DJLKZM4m95rXehLQVePMDtI=;
+	b=zzc9ToQ+Nvhqi5OFEPK9PY32pXP0LXbGo11doYHFVBFU+lONhzS1S9waCtpob7vI7Y
+	70Fpwwlq3WDnxYmjI8eYJ8tAIggeL9aVhOVGefQDv3tsG/iH+GVQpxnm9unhNd79tGpW
+	HV/MyspzaLj1Oy8mGz7aFZ6Jnugyc+aOsy9XeEcsvJA6/cu9L458syd40OFD35VBeEZo
+	CZnbNv+yIS041Cv4CNd+tBCAwMl/XIMBhhXQUnmMw6KtWlUwowMJ3f9828K7PVqN3ziV
+	CopZ0IWmLNU3HZm7pqEcihySLzahXZUyEutOMljptYzw5MBomX5i4+zbNxRzHYVWGzbz
+	gRkw==
 MIME-Version: 1.0
-Subject: [PATCH] oe-core:package_manager extract target arch from TARGET_SYS and add it into package_archs
+X-Received: by 10.50.225.1 with SMTP id rg1mr30011069igc.78.1450858777858;
+	Wed, 23 Dec 2015 00:19:37 -0800 (PST)
+Received: by 10.36.25.81 with HTTP; Wed, 23 Dec 2015 00:19:37 -0800 (PST)
+Date: Wed, 23 Dec 2015 09:19:37 +0100
+Message-ID: <CALbNGRQzE+zG0GOPStWAjP6VMZr0YznhVfSD+X0b9CyzS=cKYA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: [meta-qt5] qtscript,qtwebking: disable thumb issues on armv7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,47 +39,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Dec 2015 05:59:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 23 Dec 2015 08:19:40 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: fli <fupan.li@windriver.com>
+Hi
 
-Since the rpmbuild on the target will use TARGET_SYS as the
-'target' to build the source rpm packages, which will extracted
-the target arch from TARGET_SYS, such as if TARGET_SYS values
-'arm-poky-linux-gnueabi', the target arch will be 'arm'.
+The story occured on jethro but I think it is the same for master:
 
-In order to make the rpm pkgs built out on the target compatilbe
-with target, extract the arch from TARGET_SYS and add it into
-package archs which will be write into the rootfs's /etc/rpm/platform.
+We have a simple application containing a QWebView which segfaulted
+during loading a page on a CortexA9 (armv7 thumb2). After enabling
+debug information for qtwebkit and remote debug session the point of
+segfault was detected in
 
-Signed-off-by: fli <fupan.li@windriver.com>
----
- meta/lib/oe/package_manager.py | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+qtwebkit: Source/JavaScriptCore/llint/LowLevelInterpreter.asm:1082
+   callSlowPath(_llint_slow_path_new_func_exp)
 
-diff --git a/meta/lib/oe/package_manager.py b/meta/lib/oe/package_manager.py
-index 04812d2..e4b53a0 100644
---- a/meta/lib/oe/package_manager.py
-+++ b/meta/lib/oe/package_manager.py
-@@ -55,6 +55,16 @@ class RpmIndexer(Indexer):
-             target_os['default'] = self.d.getVar(os_var, True).strip()
-         else:
-             package_archs['default'] = self.d.getVar("PACKAGE_ARCHS", True).split()
-+
-+            #add the compatible arch extracted from TARGET_SYS.
-+            #TARGET_SYS usually values as "arm-poky-linux-gnueabi",
-+            #so the arch is 'arm'
-+            target_sys = self.d.getVar("TARGET_SYS", True)
-+            if target_sys:
-+                target_arch = target_sys.split('-')[0]
-+            if target_arch not in package_archs['default']:
-+                package_archs['default'].append(target_arch)
-+                
-             # arch order is reversed.  This ensures the -best- match is
-             # listed first!
-             package_archs['default'].reverse()
--- 
-1.9.1
+Further digging around lead to similar source in:
 
+* qtwebkit: Source/JavaScriptCore/assembler/ARMv7Assembler.h
+* qtscript: src/3rdparty/javascriptcore/JavaScriptCore/assembler/ARMv7Assembler.h
+
+In these files a class ARMThumbImmediate is declared and used in many
+places. This lead me to the assumption that compiling for armv7
+expects thumb support.
+
+So I removed the
+
+ARM_INSTRUCTION_SET = "arm"
+
+and our application worked fine. To be a good boy I then build tested
+with ARM_INSTRUCTION_SET = "thumb" and for qemuarm: It still fails.
+
+So what would the right way to go? Something like the pending patch
+for icu replacing
+
+ARM_INSTRUCTION_SET = "arm"
+
+by
+
+ARM_INSTRUCTION_SET_armv4 = "arm"
+ARM_INSTRUCTION_SET_armv5 = "arm"
+
+Opinions?
+
+Andreas
 
