@@ -1,42 +1,24 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-qg0-f48.google.com (mail-qg0-f48.google.com
-	[209.85.192.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 873DF6FF84
+Return-Path: <Fupan.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 87F806612D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Dec 2015 04:14:37 +0000 (UTC)
-Received: by mail-qg0-f48.google.com with SMTP id c96so125669646qgd.3
+	Wed, 23 Dec 2015 05:59:27 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tBN5xRT6005172
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2015 20:14:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=A31Uw5NrUFxfngMgjLPbgcUaUI6AqDmhPc1H9jPWe7c=;
-	b=py3pCHB0euvR7Uh5/FYrCcBIWmaXKmcWENqS1XLp9AFwEAUzfCwpmrfCcFTh78yRVB
-	HUoTcQ0qiKD39Uaaxseps8cBmiBbkcYmeGH+R9Fxc1wBg0yp0iXkJ42W/p50jn947XIw
-	6TUUj8m6omIGVPL/OYrnqI+0cWu5QOgEq3FcweDvp1F51DbmZ8ExxCdt5tT3y0Zk+GQg
-	aTN4Uzh+ebqfmt1QKtsm9kHiFE/ed8zg3mFfKIE9AxtNTOvO0NhAx7bCrYDsPfq9/mwC
-	p4W0LisU/KHSV7fU/vhei/Ya9bk9lBP8TNBKbWVuj2DtzGJKchdfToEzFMfB/z1BZnv3
-	valA==
-X-Received: by 10.140.97.2 with SMTP id l2mr37117473qge.30.1450844077766;
-	Tue, 22 Dec 2015 20:14:37 -0800 (PST)
-Received: from [192.168.141.106] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
-	by smtp.googlemail.com with ESMTPSA id
-	c190sm17487361qkb.27.2015.12.22.20.14.36
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 22 Dec 2015 20:14:37 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <1450799125-5013-1-git-send-email-twoerner@gmail.com>
-	<1450799125-5013-2-git-send-email-twoerner@gmail.com>
-	<CAJ86T=XzNuWnP8sanhre_WYi0KFLK9w=4Kj4B+Pk=9Ae8pe_Qg@mail.gmail.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Message-ID: <567A1FAB.4030600@gmail.com>
-Date: Tue, 22 Dec 2015 23:14:35 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.4.0
+	Tue, 22 Dec 2015 21:59:27 -0800 (PST)
+Received: from pek-lpdfs01.wrs.com (128.224.153.15) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
+	Tue, 22 Dec 2015 21:59:26 -0800
+From: <fupan.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 23 Dec 2015 00:59:25 -0500
+Message-ID: <1450850365-33335-1-git-send-email-fupan.li@windriver.com>
+X-Mailer: git-send-email 2.6.4
 MIME-Version: 1.0
-In-Reply-To: <CAJ86T=XzNuWnP8sanhre_WYi0KFLK9w=4Kj4B+Pk=9Ae8pe_Qg@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v4 1/1] nodejs: cleanup and update
+Subject: [PATCH] oe-core:package_manager extract target arch from TARGET_SYS and add it into package_archs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,69 +31,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Dec 2015 04:14:39 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Dec 2015 05:59:27 -0000
+Content-Type: text/plain
 
-Hi Andre,
+From: fli <fupan.li@windriver.com>
 
-On 12/22/15 13:06, Andre McCurdy wrote:
->> Remove old nodejs4_0.4.12 and update nodejs_0.12.7 to the latest stable
->> nodejs_4.2.3.
->>
->> Nodejs is picky about which architectures it supports. The supported arch
->> mapping required some updating to bring it up to date with the current nodejs
->> code. Add COMPATIBLE_MACHINE entries so it only builds for the supported
->> architectures.
->>
->> ARM cores that don't support at least VFP2 have been dropped:
->>
->>      https://groups.google.com/forum/#!topic/v8-users/aSOFbaAQvMk
->>
->>      "Due the increasing cost of the keeping the "no-VFPv2" port of V8 working
->>      on ARM, we are planning on making 3.17 the last V8 release that that
->>      supports ARM chips without VFPv2. Starting with the 3.18 release, the
->>      minimal V8 requirements will increase to ARMv6 + VFPv2. In order to
->>      simplify maintenance, we will also remove the "pre-VFP2" ARM code from the
->>      V8 code base."
->>
->> Additionally, gcc no longer supports a VFPv2 option:
->>
->>      https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html#index-mfpu-1460
-> There's no documented -mfpu=vfpv2 option in older releases either, so
-> trying to use it may just be a bug in the v8 build system?
->
->    https://gcc.gnu.org/onlinedocs/gcc-4.4.0/gcc/ARM-Options.html#ARM-Options
->    https://gcc.gnu.org/onlinedocs/gcc-4.5.0/gcc/ARM-Options.html#ARM-Options
->    https://gcc.gnu.org/onlinedocs/gcc-4.6.0/gcc/ARM-Options.html#ARM-Options
+Since the rpmbuild on the target will use TARGET_SYS as the
+'target' to build the source rpm packages, which will extracted
+the target arch from TARGET_SYS, such as if TARGET_SYS values
+'arm-poky-linux-gnueabi', the target arch will be 'arm'.
 
-Interesting. I hadn't thought to look at the older docs to try to find 
-out "when it was removed". It's rather strange, then, that the V8 build 
-included this at all! How/when could it have ever worked? (rhetorical)
+In order to make the rpm pkgs built out on the target compatilbe
+with target, extract the arch from TARGET_SYS and add it into
+package archs which will be write into the rootfs's /etc/rpm/platform.
 
-> The correct option for vfpv2 is -mfpu=vfp and it's certainly still
-> supported by current gcc versions (it's used by meta-raspberrypi).
+Signed-off-by: fli <fupan.li@windriver.com>
+---
+ meta/lib/oe/package_manager.py | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-A day or so ago I created a patch to switch this flag in the nodejs 
-build from "-mfpu=vfpv2" to "-mfpu=vfp" and the build for qemuarm did 
-succeed. When I tried running the resulting program in the VM, however, 
-it threw an "illegal instruction" and failed. Since ARMv5 is no longer 
-officially supported, I didn't bother introducing that patch and simply 
-continued to remove support for this architecture.
+diff --git a/meta/lib/oe/package_manager.py b/meta/lib/oe/package_manager.py
+index 04812d2..e4b53a0 100644
+--- a/meta/lib/oe/package_manager.py
++++ b/meta/lib/oe/package_manager.py
+@@ -55,6 +55,16 @@ class RpmIndexer(Indexer):
+             target_os['default'] = self.d.getVar(os_var, True).strip()
+         else:
+             package_archs['default'] = self.d.getVar("PACKAGE_ARCHS", True).split()
++
++            #add the compatible arch extracted from TARGET_SYS.
++            #TARGET_SYS usually values as "arm-poky-linux-gnueabi",
++            #so the arch is 'arm'
++            target_sys = self.d.getVar("TARGET_SYS", True)
++            if target_sys:
++                target_arch = target_sys.split('-')[0]
++            if target_arch not in package_archs['default']:
++                package_archs['default'].append(target_arch)
++                
+             # arch order is reversed.  This ensures the -best- match is
+             # listed first!
+             package_archs['default'].reverse()
+-- 
+1.9.1
 
-Interestingly, although the ppc architecture is supported, and it builds 
-fine, running node in qemuppc also threw an illegal instruction and 
-failed. I kept support for ppc, however, since officially it's supported 
-and any run-time errors are, perhaps, an upstream issue?
-
-Maybe I should also disable ppc builds so anyone using the recipe for 
-that purpose doesn't get their hopes up? Strictly from a build point of 
-view, ppc "succeeds".
-
-I never was able to test the ppc64 build (which is also successful) 
-since I couldn't figure out the magic incantation to get 
-qemu-system-ppc64 to boot to a cmdline.
-
-Best regards,
-     Trevor
 
