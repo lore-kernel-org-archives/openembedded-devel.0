@@ -1,32 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f169.google.com (mail-io0-f169.google.com
-	[209.85.223.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 6DB6D606BF
+Return-Path: <cleitonrbueno@gmail.com>
+Received: from mail-qg0-f68.google.com (mail-qg0-f68.google.com
+	[209.85.192.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 33CE6607AB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Dec 2015 18:43:50 +0000 (UTC)
-Received: by mail-io0-f169.google.com with SMTP id o67so247849224iof.3
+	Thu, 24 Dec 2015 22:13:58 +0000 (UTC)
+Received: by mail-qg0-f68.google.com with SMTP id 6so7030360qgy.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Dec 2015 10:43:51 -0800 (PST)
+	Thu, 24 Dec 2015 14:13:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=NIrXkXbnH9wf2wLK7xdFyPsUiXOlmUeB9QfdTdVfrU8=;
-	b=GCjf97FRlbBtJMXrpZZmDnsuAhV75yECXono1N+6wHDHjGqt7wEv6R03WQ6izuNzvk
-	mMUmEUMQzD7UwQlfplbW+0j0o2j49kjKaQjL2ww8/JJolQtzM37Cl59Go0ysrogxLWuQ
-	U0euiHiiFx+b7NFS8f991bC6JBr/8wP18sUEuT1k8o1+vVkAdObSiySJV701ZX4aEDN/
-	4WYjPUfQ0rrxMCgHbIvgGEgF+H5h4EQCJ+X6n43HNEtVgcKk6XH9ltpXZoBnMlbEK76X
-	PZmwha7hb7lpQ/w5eSR1a9hoPSa3qVjHnZfHfSxwTLCxViGHbT06R3GRg415ZIsd7atW
-	Y7Mg==
-X-Received: by 10.107.4.213 with SMTP id 204mr42891552ioe.195.1450982630721;
-	Thu, 24 Dec 2015 10:43:50 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.16.74 with HTTP; Thu, 24 Dec 2015 10:43:21 -0800 (PST)
-In-Reply-To: <1450954209-2353-1-git-send-email-nate.karstens@garmin.com>
-References: <1450954209-2353-1-git-send-email-nate.karstens@garmin.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 24 Dec 2015 10:43:21 -0800
-Message-ID: <CAMKF1sqp0gM9VgvE8M1-HAsAapDsNdNfs0S+AnaROfqFWXFYNg@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] dhcpcd: add recipe for dhcpcd
+	h=from:to:cc:subject:date:message-id;
+	bh=6vV8SfBK5zTHEYQELw6sTlxEM9ny86XlFkD2vU9H9yw=;
+	b=EeSZZlpLENpgVvgY+HBvXjWLAxHXv4qiKds9E1Cgd2uFJloANTwjoVU/GlIYc8R3sb
+	M6ax+gxtIdME8EdRcpv9LNlf0+XEffZKZxn6b0EwOsGXynP5hcNppWiX2aRrGX3OnDtk
+	DqinTKkRY2QWHDwJQLNpzTWHmpRQHIDxH8d0A1GR+9rzEEVI5HSq/5HB/JcRieYrDJrH
+	u6EnIQNC+Mu6P4Kc28BvBfdhNESUjo7X59rQgUTespz/NYTsh7ZrXirld43e+BmdtIK9
+	6i3M2ib2kLgNWM9SErrMkaatjvW1We7V7LTiF0NWSwNCUdt0QaT6u8d3Y9UaJ8gCA8em
+	SOiQ==
+X-Received: by 10.140.247.67 with SMTP id s64mr54229460qhc.20.1450995238988;
+	Thu, 24 Dec 2015 14:13:58 -0800 (PST)
+Received: from localhost.localdomain (179-241-189-104.3g.claro.net.br.
+	[179.241.189.104]) by smtp.gmail.com with ESMTPSA id
+	d13sm20929906qkj.16.2015.12.24.14.13.56
+	(version=TLS1_1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 24 Dec 2015 14:13:58 -0800 (PST)
+From: Cleiton Bueno <cleitonrbueno@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 24 Dec 2015 20:13:46 -0200
+Message-Id: <1450995226-16494-1-git-send-email-cleitonrbueno@gmail.com>
+X-Mailer: git-send-email 1.8.1.2
+Cc: Cleiton Bueno <cleitonrbueno@gmail.com>
+Subject: [PATCH] Change false to FALSE and 1 to TRUE, FIX qtwebengine compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,77 +42,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Dec 2015 18:43:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 24 Dec 2015 22:13:59 -0000
 
-On Thu, Dec 24, 2015 at 2:50 AM, Nate Karstens <nate.karstens@garmin.com> wrote:
-> Adds a new recipe for dhcpcd. Modifies the configure script to keep the
-> host system header files from being used instead of the target system.
->
+Signed-off-by: Cleiton Bueno <cleitonrbueno@gmail.com>
+---
+ src/3rdparty/chromium/ui/gfx/codec/jpeg_codec.cc | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-Can you also see how you differ with
-https://github.com/sarnold/meta-alt-desktop-extras/blob/master/recipes-connectivity/dhcpcd/dhcpcd_1.3.22-pl4.bb
+diff --git a/src/3rdparty/chromium/ui/gfx/codec/jpeg_codec.cc b/src/3rdparty/chromium/ui/gfx/codec/jpeg_codec.cc
+index 8a08fe0..32b2a05 100644
+--- a/src/3rdparty/chromium/ui/gfx/codec/jpeg_codec.cc
++++ b/src/3rdparty/chromium/ui/gfx/codec/jpeg_codec.cc
+@@ -120,7 +120,7 @@ boolean EmptyOutputBuffer(jpeg_compress_struct* cinfo) {
+   // tell libjpeg where to write the next data
+   cinfo->dest->next_output_byte = &(*state->out)[state->image_buffer_used];
+   cinfo->dest->free_in_buffer = state->out->size() - state->image_buffer_used;
+-  return 1;
++  return TRUE;
+ }
+ 
+ // Cleans up the JpegEncoderState to prepare for returning in the final form.
+@@ -261,7 +261,7 @@ bool JPEGCodec::Encode(const unsigned char* input, ColorFormat format,
+   cinfo.data_precision = 8;
+ 
+   jpeg_set_defaults(&cinfo);
+-  jpeg_set_quality(&cinfo, quality, 1);  // quality here is 0-100
++  jpeg_set_quality(&cinfo, quality, TRUE);  // quality here is 0-100
+ 
+   // set up the destination manager
+   jpeg_destination_mgr destmgr;
+@@ -273,7 +273,7 @@ bool JPEGCodec::Encode(const unsigned char* input, ColorFormat format,
+   JpegEncoderState state(output);
+   cinfo.client_data = &state;
+ 
+-  jpeg_start_compress(&cinfo, 1);
++  jpeg_start_compress(&cinfo, TRUE);
+ 
+   // feed it the rows, doing necessary conversions for the color format
+ #ifdef JCS_EXTENSIONS
+@@ -359,7 +359,7 @@ void InitSource(j_decompress_ptr cinfo) {
+ //   set to a positive value if TRUE is returned. A FALSE return should only
+ //   be used when I/O suspension is desired."
+ boolean FillInputBuffer(j_decompress_ptr cinfo) {
+-  return false;
++  return FALSE;
+ }
+ 
+ // Skip data in the buffer. Since we have all the data at once, this operation
+@@ -487,8 +487,8 @@ bool JPEGCodec::Decode(const unsigned char* input, size_t input_size,
+   cinfo.client_data = &state;
+ 
+   // fill the file metadata into our buffer
+-  if (jpeg_read_header(&cinfo, true) != JPEG_HEADER_OK)
+-    return false;
++  if (jpeg_read_header(&cinfo, TRUE) != JPEG_HEADER_OK)
++    return FALSE;
+ 
+   // we want to always get RGB data out
+   switch (cinfo.jpeg_color_space) {
+-- 
+1.8.1.2
 
-and I would prefer you to send a removal patch to above layer and let
-it use it from meta-networking.
-
-> Signed-off-by: Nate Karstens <nate.karstens@garmin.com>
-> ---
->  .../dhcpcd/dhcpcd-6.9.4/configure.patch               | 12 ++++++++++++
->  .../recipes-connectivity/dhcpcd/dhcpcd_6.9.4.bb       | 19 +++++++++++++++++++
->  2 files changed, 31 insertions(+)
->  create mode 100644 meta-networking/recipes-connectivity/dhcpcd/dhcpcd-6.9.4/configure.patch
->  create mode 100644 meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.9.4.bb
->
-> diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd-6.9.4/configure.patch b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd-6.9.4/configure.patch
-> new file mode 100644
-> index 0000000..d61b05e
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd-6.9.4/configure.patch
-> @@ -0,0 +1,12 @@
-> +--- ./configure
-> ++++ ./configure
-> +@@ -316,9 +316,6 @@
-> + if [ "$STATIC" = yes ]; then
-> +       echo "LDFLAGS+= -static" >>$CONFIG_MK
-> + fi
-> +-for x in $INCLUDEDIR; do
-> +-      echo "CPPFLAGS+=        -I$x" >>$CONFIG_MK
-> +-done
-> +
-> + if [ -z "$DEBUG" -a -f .fslckout ]; then
-> +       printf "Found fossil checkout ... "
-> diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.9.4.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.9.4.bb
-> new file mode 100644
-> index 0000000..1c0aff4
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.9.4.bb
-> @@ -0,0 +1,19 @@
-> +SECTION = "console/network"
-> +SUMMARY = "dhcpcd - a DHCP client"
-> +DESCRIPTION = "dhcpcd runs on your machine and silently configures your computer to work on the attached networks without trouble and mostly without configuration."
-> +
-> +HOMEPAGE = "http://roy.marples.name/projects/dhcpcd/"
-> +
-> +LICENSE = "BSD-2-Clause"
-> +LIC_FILES_CHKSUM = "file://dhcpcd.c;endline=26;md5=7daf225c91b8065ecc974fc594b2a7de"
-> +
-> +SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz \
-> +           file://configure.patch"
-> +
-> +SRC_URI[md5sum] = "02f5043a415cd4b6d089631a0cd95f5b"
-> +SRC_URI[sha256sum] = "c3f3ff7473ef158a1e71db9aea7424df2c3477ad064e2b542f27948a5abc9ba0"
-> +
-> +inherit autotools
-> +
-> +B = "${S}"
-> +EXTRA_OECONF = "--enable-ipv4 --enable-ipv6"
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
