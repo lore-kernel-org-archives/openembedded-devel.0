@@ -1,50 +1,21 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
-	[209.85.213.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 31814731A9
+Return-Path: <nate.karstens@garmin.com>
+X-Greylist: delayed 428 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 24 Dec 2015 10:57:35 UTC
+Received: from p3plsmtpa09-02.prod.phx3.secureserver.net
+	(p3plsmtpa09-02.prod.phx3.secureserver.net [173.201.193.231])
+	by mail.openembedded.org (Postfix) with ESMTP id 5084B60667
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Dec 2015 09:09:49 +0000 (UTC)
-Received: by mail-ig0-f181.google.com with SMTP id jw2so93587308igc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Dec 2015 01:09:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=pz1Hdmn/9SpLfP1K6Yw/YJspLNFYP4v3rv0xCqFZ+s8=;
-	b=mP4mY+b2BfGJq1tPkCcKrcgEFTkQG0Xy/0/1O0cpKGD8E6emN3S6Tgt1ZtxR/O1HZy
-	4taaQYv4wwB+UojWI5N/CuwHwtmoObFmWxgNKgx4G0SsNKCPIUvkiTchvoudCdgaIW8J
-	Dwj63FHjBtdyJOPRwEvWL1ALBcm1ol3ROZIxjc/g2E496mMEzHHnP0rLJb2dbI0GU5Qu
-	qJnEQim1iri766yGuWsWn6buKubpElwrM2GUfdpYrQkNnRLaKpHORv2h2tAkGGHMvxeN
-	5V4Kf3ENfcBQ4ZnMfmFT+R7vqI2tCv/L7Gk5Sx5Fme7YTYd01UiJdN/8xv7RHLU70QpC
-	i9BA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=pz1Hdmn/9SpLfP1K6Yw/YJspLNFYP4v3rv0xCqFZ+s8=;
-	b=iyLFhDltGSB7dgxMD5f50cykmtDBevlKTRAbC38uKXt7ajREaoBOlnu1Ip22QSg6Xn
-	wKaqOzpt6H1Zc/4ZNYruaheqQoLuKpxs77wMemN6Gt4DLqgfDHeu+sp/5Rphnp42JYtO
-	WrnzTI7GLClnCn0Yt/qyLGTwqvG024fXGzu+G7LjRxNic4W1wfEOG8Xz1lYQcOV9M7VF
-	lFFECt1FNF1tCSYOURTX2H1l4EiYE42CBAiO13VkreM9EQH0CBwHjcrWNxMKpAkEYt1O
-	J2CMfGRaun9aAVUj+QFllyZcKL6qNxRMGP7tVhaZnzhbluC75RBiJcWwgGQuEGZkeZaY
-	zGsg==
-X-Gm-Message-State: ALoCoQm+v2Ff2Xu2rT7OooVniltlzQ1mKM6U6v4Ij3st8NPiuVC189kCc+LLMkIxa4GEKdDP9QAAbqjbRKdvBlbC4tC1+yoR84quujMt5ADWk6i1VQTYSZc=
-X-Received: by 10.50.126.8 with SMTP id mu8mr33320407igb.52.1450948190601;
-	Thu, 24 Dec 2015 01:09:50 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.162.70 with HTTP; Thu, 24 Dec 2015 01:09:31 -0800 (PST)
-In-Reply-To: <1450910987.2002.86.camel@pbcl.net>
-References: <CAJTo0LayEjj9moB9xgup=vB+C9Sn2-WX+s97UWRt9tg=HYFnag@mail.gmail.com>
-	<1450910987.2002.86.camel@pbcl.net>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 24 Dec 2015 09:09:31 +0000
-Message-ID: <CAJTo0Lbrb-yu=71a+7YnF0pSkiNxB26U7xh7dbS7Jr8DPEJmag@mail.gmail.com>
-To: Phil Blundell <pb@pbcl.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFC] Delete all .la files?
+	Thu, 24 Dec 2015 10:57:35 +0000 (UTC)
+Received: from localhost.localdomain ([74.222.250.91])
+	by p3plsmtpa09-02.prod.phx3.secureserver.net with 
+	id xNqH1r0091z4HfN01NqSqM; Thu, 24 Dec 2015 03:50:28 -0700
+X-Sender: nate@karstens.us
+From: Nate Karstens <nate.karstens@garmin.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 24 Dec 2015 04:50:09 -0600
+Message-Id: <1450954209-2353-1-git-send-email-nate.karstens@garmin.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] dhcpcd: add recipe for dhcpcd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,23 +28,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Dec 2015 09:09:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 24 Dec 2015 10:57:36 -0000
 
-On 23 December 2015 at 22:49, Phil Blundell <pb@pbcl.net> wrote:
+Adds a new recipe for dhcpcd. Modifies the configure script to keep the
+host system header files from being used instead of the target system.
 
-> Sounds good to me.  I have been using the patch from:
->
->
-> http://lists.openembedded.org/pipermail/openembedded-core/2012-October/069912.html
->
-> for what is apparently the past three years and it continues to work
-> well.
->
+Signed-off-by: Nate Karstens <nate.karstens@garmin.com>
+---
+ .../dhcpcd/dhcpcd-6.9.4/configure.patch               | 12 ++++++++++++
+ .../recipes-connectivity/dhcpcd/dhcpcd_6.9.4.bb       | 19 +++++++++++++++++++
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/dhcpcd/dhcpcd-6.9.4/configure.patch
+ create mode 100644 meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.9.4.bb
 
-That's good to know, thanks Phil.  Does  your work not build
-openjade-native?  As I said that needed .la files to be present in my
-testing so I'm wondering what the difference is.
+diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd-6.9.4/configure.patch b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd-6.9.4/configure.patch
+new file mode 100644
+index 0000000..d61b05e
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd-6.9.4/configure.patch
+@@ -0,0 +1,12 @@
++--- ./configure
+++++ ./configure
++@@ -316,9 +316,6 @@
++ if [ "$STATIC" = yes ]; then
++ 	echo "LDFLAGS+=	-static" >>$CONFIG_MK
++ fi
++-for x in $INCLUDEDIR; do
++-	echo "CPPFLAGS+=	-I$x" >>$CONFIG_MK
++-done
++
++ if [ -z "$DEBUG" -a -f .fslckout ]; then
++ 	printf "Found fossil checkout ... "
+diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.9.4.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.9.4.bb
+new file mode 100644
+index 0000000..1c0aff4
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.9.4.bb
+@@ -0,0 +1,19 @@
++SECTION = "console/network"
++SUMMARY = "dhcpcd - a DHCP client"
++DESCRIPTION = "dhcpcd runs on your machine and silently configures your computer to work on the attached networks without trouble and mostly without configuration."
++
++HOMEPAGE = "http://roy.marples.name/projects/dhcpcd/"
++
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://dhcpcd.c;endline=26;md5=7daf225c91b8065ecc974fc594b2a7de"
++
++SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz \
++           file://configure.patch"
++
++SRC_URI[md5sum] = "02f5043a415cd4b6d089631a0cd95f5b"
++SRC_URI[sha256sum] = "c3f3ff7473ef158a1e71db9aea7424df2c3477ad064e2b542f27948a5abc9ba0"
++
++inherit autotools
++
++B = "${S}"
++EXTRA_OECONF = "--enable-ipv4 --enable-ipv6"
+-- 
+1.9.1
 
-Ross
 
