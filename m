@@ -1,35 +1,23 @@
-Return-Path: <just4tech83@gmail.com>
-Received: from mail-oi0-f49.google.com (mail-oi0-f49.google.com
-	[209.85.218.49])
-	by mail.openembedded.org (Postfix) with ESMTP id AF2C56FF7F;
-	Thu, 24 Dec 2015 08:10:28 +0000 (UTC)
-Received: by mail-oi0-f49.google.com with SMTP id l9so107066195oia.2;
-	Thu, 24 Dec 2015 00:10:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=FTZZ0rhjoD1+ZvOD2hupLe7UKJQyGiIL0BhzeFMfLd0=;
-	b=A1KzVL3wKV0LFU+VWZbVQDkxPQlMYkKdnON7uVkPn8vwm0qoAjZy7JIraCVy9D+lLH
-	HASU609Jry1fwvbdUoyIXoAurJoieyQ9yx5fH+D+coJN4Net8aGVejHs80xAu0CY9ZvZ
-	XOeqb4fTTboR5qFwhc3i00jkj6Gunw34dS9cxZsyL87gbh6kSHIoO/USRA16dJ8nf6YD
-	yHSqhcjIKdfvhT673yK33v4nxW7p8jqg8xbkkBmWAhoyYVo9MxTQoB694xQBYSG7IrUH
-	3EuHZE3QyQJ2HIMHmod7IvGUeZBiQ0wz2+yaXau3LtoMgV0RxzT0liC2ZEqU8sJXUZ09
-	N5Fw==
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D625B60796
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Dec 2015 09:04:59 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tBO94xw3018740
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 24 Dec 2015 01:04:59 -0800 (PST)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Thu, 24 Dec 2015 01:04:58 -0800
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 24 Dec 2015 16:51:56 +0800
+Message-ID: <1450947116-25359-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.6.1
 MIME-Version: 1.0
-X-Received: by 10.202.79.5 with SMTP id d5mr13342441oib.121.1450944628710;
-	Thu, 24 Dec 2015 00:10:28 -0800 (PST)
-Received: by 10.202.71.10 with HTTP; Thu, 24 Dec 2015 00:10:28 -0800 (PST)
-Received: by 10.202.71.10 with HTTP; Thu, 24 Dec 2015 00:10:28 -0800 (PST)
-In-Reply-To: <CAD2C2VSOXLTPM-yu6JFajf0LMHoE1t3utWG0vLFUzERcZs+7HA@mail.gmail.com>
-References: <CAD2C2VSOXLTPM-yu6JFajf0LMHoE1t3utWG0vLFUzERcZs+7HA@mail.gmail.com>
-Date: Thu, 24 Dec 2015 13:40:28 +0530
-Message-ID: <CAD2C2VTmyKj=T_F-DHrxNzW4d4gEDJ3=EaZFtQnF4m0in6C2Yg@mail.gmail.com>
-From: Bryan <just4tech83@gmail.com>
-To: openembedded-core@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: bitbake-devel@lists.openembedded.org, poky@yoctoproject.org,
-	linux-yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org
-Subject: Re: korean/chinese keyboard layout support on yocto
+Subject: [meta-networking][PATCH] libtalloc: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,22 +30,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Dec 2015 08:10:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 24 Dec 2015 09:05:00 -0000
+Content-Type: text/plain
 
-On Dec 18, 2015 1:03 PM, "Bryan" <just4tech83@gmail.com> wrote:
->
-> Hi,
->     I am working on yocto poky-dizzy 1.7.1 and have developed some
-application on top of customized os image. I have a reqirement to support
-korean/chinese keyboard layout for application.
-> I have added cross complied libraries for  ibus-hangul pckages. Can
-somebody suggest me how can i add support for keyboart layout and how to
-enable automatically.
->
-> Is there any bitbake recipe available to support these keyboard layout.
->
->
-> regards
-> Bryan
+From: Kai Kang <kai.kang@windriver.com>
+
+It fails to fetch source of libtalloc:
+
+| ERROR: Fetcher failure: Fetch command failed with exit code 8, output:
+| https://www.samba.org/ftp/libtalloc/talloc-2.1.3.tar.gz:
+| 2015-12-21 10:22:09 ERROR 404: Not Found.
+
+Fix it by replace ${BPN} with original package name talloc.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-networking/recipes-support/libtalloc/libtalloc_2.1.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.3.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.3.bb
+index f24d376..db6560a 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.3.bb
++++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.3.bb
+@@ -5,7 +5,7 @@ LICENSE = "LGPL-3.0+ & GPL-3.0+"
+ 
+ DEPENDS += "libbsd"
+ 
+-SRC_URI = "http://samba.org/ftp/${BPN}/talloc-${PV}.tar.gz"
++SRC_URI = "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
+                     file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
+ 
+-- 
+2.6.1
+
 
