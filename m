@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 289A7607A4
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F41573182
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Dec 2015 07:56:23 +0000 (UTC)
+	Fri, 25 Dec 2015 07:56:26 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tBP7uOdM014086
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tBP7uRW1028305
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Dec 2015 23:56:24 -0800
+	Thu, 24 Dec 2015 23:56:27 -0800 (PST)
 Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 24 Dec 2015 23:56:24 -0800
+	14.3.248.2; Thu, 24 Dec 2015 23:56:27 -0800
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 25 Dec 2015 15:56:21 +0800
-Message-ID: <e34a2ce6857f737cc71b220259ff251447a4f507.1451029460.git.jackie.huang@windriver.com>
+Date: Fri, 25 Dec 2015 15:56:23 +0800
+Message-ID: <d3167274a2b06f563dad802436981d3b68a66a73.1451029460.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1451029460.git.jackie.huang@windriver.com>
 References: <cover.1451029460.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-java][PATCH 01/15] java.bbclass: java missing classes during compile
+Subject: [meta-java][PATCH 03/15] openjdk: autools not to override B var
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,45 +38,66 @@ Content-Type: text/plain
 
 From: Amy Fong <amy.fong@windriver.com>
 
-oe_makeclasspath is used to define the classpath argument passed to
-javac for a number of packages. The current behaviour takes a number
-args specifying jar files to look for and if the files exist, it adds
-it to a specified variable.
+${B} is set before autotools and thus is overrided
+by autotools.  Some of the patches within icedtea are
+expected to be patched against ${S}/build (during
+do_configure() phase).  As autotools to change B
+= "${WORKDIR}/build", so this causes some patches failed
+to apply and hence breaks do_configure() with the following
+errors:
 
-On some builds, oe_makeclasspath cannot find the jar file.
+| patching file openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
+| can't find file to patch at input line 13
+| Perhaps you used the wrong -p or --strip option?
+| The text leading up to this was:
+| --------------------------
+| |---
+| | build/openjdk/corba/make/common/shared/Defs-utils.gmk       |    6 +++---
+| | build/openjdk/jdk/make/common/Demo.gmk                      |    2 +-
+| | build/openjdk/jdk/make/common/Release.gmk                   |    2 +-
+| | build/openjdk/jdk/make/common/internal/ImportComponents.gmk |    4 ++--
+| | build/openjdk/jdk/make/common/shared/Defs-utils.gmk         |    6 +++---
+| | build/openjdk/jdk/make/common/shared/Sanity.gmk             |    2 +-
+| | build/openjdk/jdk/make/java/redist/Makefile                 |    4 ++--
+| | 7 files changed, 13 insertions(+), 13 deletions(-)
+| |
+| |--- a/build/openjdk/corba/make/common/shared/Defs-utils.gmk
+| |+++ b/build/openjdk/corba/make/common/shared/Defs-utils.gmk
+| --------------------------
+| File to patch:
+| Skip this patch? [y]
+| File to patch:
+| Skip this patch? [y]
+| Skipping patch.
 
-oe_makeclasspath used an invalid test to see the package is native.
-(testing if the build arch and package arch are the same, if so, native)
-We test to see if PN matches *-native or *-nativesdk instead.
-
+Signed-off-by: Vu Tran <vu.tran@windriver.com>
 Signed-off-by: Amy Fong <amy.fong@windriver.com>
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- classes/java.bbclass | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ recipes-core/openjdk/openjdk-common.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/classes/java.bbclass b/classes/java.bbclass
-index 464d8a8..ab51787 100644
---- a/classes/java.bbclass
-+++ b/classes/java.bbclass
-@@ -98,11 +98,14 @@ oe_makeclasspath() {
-       case "$1" in
-           -s)
-               # take jar files from native staging if this is a -native recipe
--              if [ ${PACKAGE_ARCH} = ${BUILD_ARCH} ]; then
-+              case "$PN" in
-+              *-native|*-nativesdk)
-                   dir=${STAGING_DATADIR_JAVA_NATIVE}
--              else
-+                  ;;
-+              *)
-                   dir=${STAGING_DATADIR_JAVA}
--              fi
-+                  ;;
-+              esac
-               ;;
-           -*)
-               bbfatal "oe_makeclasspath: unknown option: $1"
+diff --git a/recipes-core/openjdk/openjdk-common.inc b/recipes-core/openjdk/openjdk-common.inc
+index dc26522..6a72572 100644
+--- a/recipes-core/openjdk/openjdk-common.inc
++++ b/recipes-core/openjdk/openjdk-common.inc
+@@ -7,7 +7,6 @@ SECTION  = "libs"
+ ICEDTEA_VERSION = "${@bb.parse.BBHandler.vars_from_file(d.getVar('FILE', False),d)[1].split("-")[1] or '1.0'}"
+ 
+ S = "${WORKDIR}/${ICEDTEA}"
+-B = "${S}/build"
+ 
+ DEPENDS_append_libc-uclibc = " virtual/libiconv "
+ 
+@@ -19,6 +18,8 @@ DEPENDS_append = " qemu-native "
+ 
+ inherit java autotools gettext qemu pkgconfig
+ 
++B = "${S}/build"
++
+ # OpenJDK uses slightly different names for certain arches. We need to know
+ #	this to create some files which are expected by the build.
+ def get_jdk_arch(d):
 -- 
 1.9.1
 
