@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F41573182
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B4E067001D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Dec 2015 07:56:26 +0000 (UTC)
+	Fri, 25 Dec 2015 07:56:25 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id tBP7uRW1028305
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tBP7uPtv005301
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Dec 2015 23:56:27 -0800 (PST)
+	Thu, 24 Dec 2015 23:56:26 -0800 (PST)
 Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 24 Dec 2015 23:56:27 -0800
+	14.3.248.2; Thu, 24 Dec 2015 23:56:26 -0800
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 25 Dec 2015 15:56:23 +0800
-Message-ID: <d3167274a2b06f563dad802436981d3b68a66a73.1451029460.git.jackie.huang@windriver.com>
+Date: Fri, 25 Dec 2015 15:56:22 +0800
+Message-ID: <3b2b23d4d1d865f0f9cb5a8726b68f5f47d662d1.1451029460.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1451029460.git.jackie.huang@windriver.com>
 References: <cover.1451029460.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-java][PATCH 03/15] openjdk: autools not to override B var
+Subject: [meta-java][PATCH 02/15] inetlib: fix inetlib dependency during compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,71 +33,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Dec 2015 07:56:26 -0000
+X-List-Received-Date: Fri, 25 Dec 2015 07:56:27 -0000
 Content-Type: text/plain
 
 From: Amy Fong <amy.fong@windriver.com>
 
-${B} is set before autotools and thus is overrided
-by autotools.  Some of the patches within icedtea are
-expected to be patched against ${S}/build (during
-do_configure() phase).  As autotools to change B
-= "${WORKDIR}/build", so this causes some patches failed
-to apply and hence breaks do_configure() with the following
-errors:
+Fix a dependency issue when building many parallel threads for
+inetlib.  The build failure looks like:
+1. ERROR in source/gnu/inet/util/SaslCallbackHandler.java (at line 43)
+        import javax.security.auth.callback.Callback;
+               ^^^^^^^^^^^^^^
+The issue is due to the jar linking before all the objects are
+complete.
 
-| patching file openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
-| can't find file to patch at input line 13
-| Perhaps you used the wrong -p or --strip option?
-| The text leading up to this was:
-| --------------------------
-| |---
-| | build/openjdk/corba/make/common/shared/Defs-utils.gmk       |    6 +++---
-| | build/openjdk/jdk/make/common/Demo.gmk                      |    2 +-
-| | build/openjdk/jdk/make/common/Release.gmk                   |    2 +-
-| | build/openjdk/jdk/make/common/internal/ImportComponents.gmk |    4 ++--
-| | build/openjdk/jdk/make/common/shared/Defs-utils.gmk         |    6 +++---
-| | build/openjdk/jdk/make/common/shared/Sanity.gmk             |    2 +-
-| | build/openjdk/jdk/make/java/redist/Makefile                 |    4 ++--
-| | 7 files changed, 13 insertions(+), 13 deletions(-)
-| |
-| |--- a/build/openjdk/corba/make/common/shared/Defs-utils.gmk
-| |+++ b/build/openjdk/corba/make/common/shared/Defs-utils.gmk
-| --------------------------
-| File to patch:
-| Skip this patch? [y]
-| File to patch:
-| Skip this patch? [y]
-| Skipping patch.
-
-Signed-off-by: Vu Tran <vu.tran@windriver.com>
+Signed-off-by: Paul Barrette <paul.barrette@windriver.com>
 Signed-off-by: Amy Fong <amy.fong@windriver.com>
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- recipes-core/openjdk/openjdk-common.inc | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ ...etlib-missing-dependency-for-util_classes.patch | 31 ++++++++++++++++++++++
+ recipes-core/classpathx/inetlib_1.1.1.bb           |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 recipes-core/classpathx/inetlib-1.1.1/inetlib-missing-dependency-for-util_classes.patch
 
-diff --git a/recipes-core/openjdk/openjdk-common.inc b/recipes-core/openjdk/openjdk-common.inc
-index dc26522..6a72572 100644
---- a/recipes-core/openjdk/openjdk-common.inc
-+++ b/recipes-core/openjdk/openjdk-common.inc
-@@ -7,7 +7,6 @@ SECTION  = "libs"
- ICEDTEA_VERSION = "${@bb.parse.BBHandler.vars_from_file(d.getVar('FILE', False),d)[1].split("-")[1] or '1.0'}"
- 
- S = "${WORKDIR}/${ICEDTEA}"
--B = "${S}/build"
- 
- DEPENDS_append_libc-uclibc = " virtual/libiconv "
- 
-@@ -19,6 +18,8 @@ DEPENDS_append = " qemu-native "
- 
- inherit java autotools gettext qemu pkgconfig
- 
-+B = "${S}/build"
+diff --git a/recipes-core/classpathx/inetlib-1.1.1/inetlib-missing-dependency-for-util_classes.patch b/recipes-core/classpathx/inetlib-1.1.1/inetlib-missing-dependency-for-util_classes.patch
+new file mode 100644
+index 0000000..6691228
+--- /dev/null
++++ b/recipes-core/classpathx/inetlib-1.1.1/inetlib-missing-dependency-for-util_classes.patch
+@@ -0,0 +1,31 @@
++From 9779e734630e65ac7f9b27531c521e6555e2b12b Mon Sep 17 00:00:00 2001
++From: Paul Barrette <paul.barrette@windriver.com>
++Date: Wed, 14 May 2014 10:55:31 -0400
++Subject: [PATCH] inetlib: missing dependency for util_classes
 +
- # OpenJDK uses slightly different names for certain arches. We need to know
- #	this to create some files which are expected by the build.
- def get_jdk_arch(d):
++Fix a dependency for intermittent build failures, e.g.:
++1. ERROR in source/gnu/inet/util/SaslCallbackHandler.java (at line 43)
++        import javax.security.auth.callback.Callback;
++               ^^^^^^^^^^^^^^
++
++Signed-off-by: Paul Barrette <paul.barrette@windriver.com>
++---
++ Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile.am b/Makefile.am
++index 5694974..ca93170 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -205,7 +205,7 @@ comsat_classes = $(patsubst $(src)/%.java, $(dst)/%.class, $(comsat_sources))
++ 
++ # Jar
++ 
++-$(inetlib_jar): $(dst) $(META_INF_FILES) $(smtp_classes) $(imap_classes) $(pop3_classes) $(nntp_classes) $(ftp_classes) $(gopher_classes) $(finger_classes) $(http_classes) $(ldap_classes) $(comsat_classes)
+++$(inetlib_jar): $(dst) $(META_INF_FILES) $(util_classes) $(smtp_classes) $(imap_classes) $(pop3_classes) $(nntp_classes) $(ftp_classes) $(gopher_classes) $(finger_classes) $(http_classes) $(ldap_classes) $(comsat_classes)
++ 	$(JAR) cf $(inetlib_jar) -C $(dst) META-INF -C $(dst) gnu
++ 
++ $(dst):
++-- 
++1.8.3.2
++
+diff --git a/recipes-core/classpathx/inetlib_1.1.1.bb b/recipes-core/classpathx/inetlib_1.1.1.bb
+index f078e33..e42a650 100644
+--- a/recipes-core/classpathx/inetlib_1.1.1.bb
++++ b/recipes-core/classpathx/inetlib_1.1.1.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ 
+ SRC_URI = "http://ftp.gnu.org/gnu/classpath/${BP}.tar.gz \
+            file://datadir_java.patch \
++           file://inetlib-missing-dependency-for-util_classes.patch \
+           "
+ 
+ inherit java-library autotools
 -- 
 1.9.1
 
