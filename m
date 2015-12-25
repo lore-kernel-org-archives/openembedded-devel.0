@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 087FD7001D
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 637C673167
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Dec 2015 07:56:27 +0000 (UTC)
+	Fri, 25 Dec 2015 07:56:29 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tBP7uSXu014089
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tBP7uUUC005307
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Dec 2015 23:56:28 -0800
+	Thu, 24 Dec 2015 23:56:30 -0800 (PST)
 Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 24 Dec 2015 23:56:28 -0800
+	14.3.248.2; Thu, 24 Dec 2015 23:56:30 -0800
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 25 Dec 2015 15:56:24 +0800
-Message-ID: <e501e2dad6c73436ef9819a2d7f6db27d6e8ce99.1451029460.git.jackie.huang@windriver.com>
+Date: Fri, 25 Dec 2015 15:56:25 +0800
+Message-ID: <5bd7495feb1eb5876c419b9f41e52b7c52234118.1451029460.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1451029460.git.jackie.huang@windriver.com>
 References: <cover.1451029460.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-java][PATCH 04/15] jamvm.inc: jamvm recipe cleanup
+Subject: [meta-java][PATCH 05/15] base-files: Define JAVA_HOME by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,40 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Dec 2015 07:56:28 -0000
+X-List-Received-Date: Fri, 25 Dec 2015 07:56:29 -0000
 Content-Type: text/plain
 
 From: Amy Fong <amy.fong@windriver.com>
 
-jamvm.inc's SRC_URI isn't used anymore, all jamvm bb recipes have been
-defining their own.
-
-In a rare instance, a build failed because it was using the SRC_URI
-defined from jamvm.inc instead (jamvm_git.bb), this cleanup should
-prevent this oddity from occuring.
+In the default /etc/profile, search for and define JAVA_HOME
+in the environment variables.
 
 Signed-off-by: Amy Fong <amy.fong@windriver.com>
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- recipes-core/jamvm/jamvm.inc | 5 -----
- 1 file changed, 5 deletions(-)
+ recipes-core/base-files/base-files_3.0.14.bbappend | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 recipes-core/base-files/base-files_3.0.14.bbappend
 
-diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
-index 5893cbc..777b442 100644
---- a/recipes-core/jamvm/jamvm.inc
-+++ b/recipes-core/jamvm/jamvm.inc
-@@ -15,11 +15,6 @@ RPROVIDES_${PN}_virtclass-native = ""
- 
- BBCLASSEXTEND = "native"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/jamvm/jamvm-${PV}.tar.gz \
--            file://jamvm-jni_h-noinst.patch \
--            file://libffi.patch \
--          "
--
- 
- inherit java autotools update-alternatives pkgconfig
- 
+diff --git a/recipes-core/base-files/base-files_3.0.14.bbappend b/recipes-core/base-files/base-files_3.0.14.bbappend
+new file mode 100644
+index 0000000..4651185
+--- /dev/null
++++ b/recipes-core/base-files/base-files_3.0.14.bbappend
+@@ -0,0 +1,13 @@
++do_install_append() {
++	cat >> ${D}${sysconfdir}/profile << EOT
++JAVA_HOME=""
++for dir in ${libdir}/jvm/*; do
++	if [ -x "\${dir}/bin/java" ]; then
++		[ -z "\${JAVA_HOME}" ] && JAVA_HOME="\${dir}"
++	fi
++done
++if [ -n "\${JAVA_HOME}" ]; then
++	export JAVA_HOME=\${JAVA_HOME}
++fi
++EOT
++}
 -- 
 1.9.1
 
