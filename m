@@ -1,39 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B4E66011C
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D0D860088
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Dec 2015 17:33:57 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id f206so15334432wmf.0
+	Tue, 29 Dec 2015 08:53:09 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1aDq1i-0007yZ-Gn for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Dec 2015 09:53:06 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Dec 2015 09:53:06 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Dec 2015 09:33:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=GpbD0DO3z1o4GMu+eqE7rbuYogVflyt7cWdmO9uwbys=;
-	b=NWHg+ZGMwjc8UasywyVZFla91Mcqe2gCupC4BPYkGc88JkRuRNjzjdOhPLd5hPiGQD
-	2xsFNOfRpSv0/GP7wq/qjkD1TQy10oaupjwKGjHc45/0tHEQKqKR2uXAGhUA88fF3cTy
-	qkkdHGvhSIEFjuIF5LZIjISBgqpk3HbJI2AsLySZUdAzqbaxwnl7CdHcRhwsbSBrB4Bi
-	ZIEJ9CKFqz+1G/cbIZdF69iDj+dk/MvCxND1t3FibxvapwEoJVelOLGsOwhzDwxR5hMy
-	TF4Y0AJB/Cvb50pPUpjzHPMZIE1TJE7uMQhXi/y1B5+4+lRpcLFHptMIUXfJHVx5Wsuy
-	3wGQ==
-X-Received: by 10.194.205.103 with SMTP id lf7mr58676471wjc.147.1451324037763; 
-	Mon, 28 Dec 2015 09:33:57 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	i63sm23808793wmf.24.2015.12.28.09.33.56
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 28 Dec 2015 09:33:56 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 28 Dec 2015 18:37:13 +0100
+	Tue, 29 Dec 2015 09:53:06 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151228173713.GG2569@jama>
-References: <011977994B5AE74ABA2BD08E983BAAABDBE8EAD6@ALA-MBB.corp.ad.wrs.com>
-MIME-Version: 1.0
-In-Reply-To: <011977994B5AE74ABA2BD08E983BAAABDBE8EAD6@ALA-MBB.corp.ad.wrs.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-qt5] qtwebengine link errors agains icu
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 29 Dec 2015 09:52:50 +0100
+Message-ID: <n5thl2$r1f$1@ger.gmane.org>
+References: <cover.1451029460.git.jackie.huang@windriver.com>
+	<n5rfsr$342$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:38.0)
+	Gecko/20100101 Thunderbird/38.4.0
+In-Reply-To: <n5rfsr$342$1@ger.gmane.org>
+Subject: Re: [meta-java][PATCH 00/15] meta-java: fixes for some issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,78 +41,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Dec 2015 17:33:58 -0000
-X-Groupsio-MsgNum: 59203
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="O8XZ+2Hy8Kj8wLPZ"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 29 Dec 2015 08:53:09 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
---O8XZ+2Hy8Kj8wLPZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Mon, Dec 28, 2015 at 05:14:48PM +0000, Lerner, Dave wrote:
-> On branches jethro and jethro-next I get several link errors building qtw=
-ebengine like:
-> ...
-> qtwebengine/5.5.1+gitAUTOINC+qtwebengine_146ebe26dc-r0/git/src/3rdparty/c=
-hromium/ui/gfx/render_text.cc:1186: error: undefined reference to 'icu_52::=
-UnicodeString::UnicodeString(unsigned short const*)'
-> /ord-dlerner-d81/dlerner/poky_19/qtwebengine-qtqtuick-errors-jethro/tmp/w=
-ork/core2-64-poky-linux/qtwebengine/5.5.1+gitAUTOINC+qtwebengine_146ebe26dc=
--r0/git/src/3rdparty/chromium/ui/gfx/render_text.cc:1186: error: undefined =
-reference to 'icu_52::StringCharacterIterator::StringCharacterIterator(icu_=
-52::UnicodeString const&)'
-> ...
->=20
-> My local.conf includes
-> MACHINE ?=3D "qemux86-64"
-> PACKAGECONFIG_pn-qtbase_append =3D " accessibility"
-> IMAGE_INSTALL_append +=3D " qtbase qtbase-fonts qtbase-plugins qtwebengin=
-e"
-> PREFERRED_PROVIDER_jpeg =3D "libjpeg-turbo"
-> PREFERRED_PROVIDER_jpeg-native =3D "libjpeg-turbo-native"
->=20
-> This bug is referenced upstream in Task-number: QTBUG-49693 and the bug i=
-s already fixed in the repo referenced by the meta-qt5 recipe at  git://git=
-hub.com/qtproject/qtwebengine.git commit 1847e158e09e24af704b02c8fb30adbf04=
-d3befa branch 5.5, 17 commits after the current meta-qt5 qtwebengine_git.bb=
- SRCREV_qtwebengine =3D "ce095e94b6861".  =20
->=20
-> The change below corrects the link issue.
->      file://0001-chromium-base.gypi-include-atomicops_internals_x86_g.pat=
-ch \
->      file://0002-chromium-third_party-boringssl-Demand-for-newer-POSI.pat=
-ch \
->  "
-> -SRCREV_qtwebengine =3D "ce095e94b686196629244073990530441b9b5f4f"
-> +SRCREV_qtwebengine =3D "1847e158e09e24af704b02c8fb30adbf04d3befa"
+Op 28-12-15 om 15:10 schreef Koen Kooi:
+> Op 25-12-15 om 08:56 schreef jackie.huang@windriver.com:
+>> From: Jackie Huang <jackie.huang@windriver.com>
+> 
+>> These patches had been in our local branch for some times, I think
+>> they are needed here as well, I rebased and did basic build/runtime
+>> tests on x86-64 and ppc, please review and see if they are fine to be
+>> merged.
+> 
+> After merging this I'm finally able to build openjdk-7 for core2-64
+> again.
 
-Can you please send proper patch with git send-email?
+As well as armv6, armv6 and armv7
 
->=20
-> Regards,
-> Dave
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---O8XZ+2Hy8Kj8wLPZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+> 
+> 
+> 
+>> -- The following changes since commit 
+>> c88d019434b5ba0eb7ee1a3b0e27a74587ad9d49:
+> 
+>> openjdk-8-native: fix improper do_install and PROVIDES (2015-12-22 
+>> 23:48:09 -0800)
+> 
+>> are available in the git repository at:
+> 
+>> git://git.pokylinux.org/poky-contrib.git jhuang0/d_java-fixes_151225_0
+>>  
+>> http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/d_java-fixes_151225_0
+>
+>>  Amy Fong (15): java.bbclass: java missing classes during compile
+>> inetlib: fix inetlib dependency during compilation openjdk: autools not
+>> to override B var jamvm.inc: jamvm recipe cleanup base-files: Define 
+>> JAVA_HOME by default Missing inheritance and dependencies in some java 
+>> packages openjdk-7: added java tools to the jdk package openjdk: add 
+>> keytool link openjdk: postinst cleanup icedtea7-native compile failure 
+>> undefined reference to `main' openjdk: fix CVE-2014-1876 jamvm-git
+>> uprev to 2.0.0 openjdk-7: add depends on attr
+>> icedtea7-native/openjdk-7: fails on hosts with no unzip openjdk hotspot
+>> build system std.h fix
+> 
+>> classes/java.bbclass                               |   9 +- 
+>> recipes-core/base-files/base-files_3.0.14.bbappend |  13 ++ 
+>> recipes-core/classpath/classpath-native_0.99.bb    |   2 +- 
+>> ...etlib-missing-dependency-for-util_classes.patch |  31 ++++ 
+>> recipes-core/classpathx/inetlib_1.1.1.bb           |   1 + 
+>> recipes-core/icedtea/icedtea7-native.inc           |   4 +- 
+>> .../icedtea-CVE-2014-1876-unpack.patch             |  44 ++++++ 
+>> .../openjdk-7-03b147/icedtea-jdk-unzip.patch       | 130
+>> +++++++++++++++ .../openjdk-7-03b147/icedtea-makefile-unzip.patch  |
+>> 167 +++++++++++++++++++ .../icedtea-x11_extension_cleanup.patch
+>> | 42 +++++ recipes-core/icedtea/openjdk-7-release-03b147.inc  |   7 + 
+>> recipes-core/jamvm/jamvm.inc                       |   7 +- 
+>> recipes-core/jamvm/jamvm_git.bb                    |   4 +- 
+>> recipes-core/openjdk/openjdk-7-common.inc          |   4 + 
+>> recipes-core/openjdk/openjdk-7_91b01-2.6.2.bb      |   5 + 
+>> recipes-core/openjdk/openjdk-common.inc            |   3 +- 
+>> recipes-core/openjdk/openjdk-postinst.inc          |  24 ++- 
+>> .../patches-openjdk-7/icedtea-dtrace-std_h.patch   |  40 +++++ 
+>> .../patches-openjdk-7/icedtea-jdk-unzip.patch      | 130
+>> +++++++++++++++ .../patches-openjdk-7/icedtea-makefile-unzip.patch |
+>> 176 +++++++++++++++++++++ 20 files changed, 825 insertions(+), 18 
+>> deletions(-) create mode 100644 
+>> recipes-core/base-files/base-files_3.0.14.bbappend create mode 100644 
+>> recipes-core/classpathx/inetlib-1.1.1/inetlib-missing-dependency-for-util_c
+l
+>
+>> 
+asses.patch
+> 
+> 
+> create mode 100644 
+> recipes-core/icedtea/openjdk-7-03b147/icedtea-CVE-2014-1876-unpack.patch
+>> create mode 100644 
+>> recipes-core/icedtea/openjdk-7-03b147/icedtea-jdk-unzip.patch create
+>> mode 100644 
+>> recipes-core/icedtea/openjdk-7-03b147/icedtea-makefile-unzip.patch
+>> create mode 100644 
+>> recipes-core/icedtea/openjdk-7-03b147/icedtea-x11_extension_cleanup.patch
+>
+>> 
+> 
+> create mode 100644 
+> recipes-core/openjdk/patches-openjdk-7/icedtea-dtrace-std_h.patch
+>> create mode 100644 
+>> recipes-core/openjdk/patches-openjdk-7/icedtea-jdk-unzip.patch create 
+>> mode 100644 
+>> recipes-core/openjdk/patches-openjdk-7/icedtea-makefile-unzip.patch
+> 
+> 
+> 
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAlaBc0gACgkQN1Ujt2V2gBz3qACeNBI1pQHiFb92JB3z47RuReEm
-lxcAnAs3cUODqPxf6G5+lYT4EWZwlpDS
-=fBm8
+iD8DBQFWgkniMkyGM64RGpERAtQIAKCVj4XvRea3TCUIW+pRrCMh6OZo7wCfVTww
+a/7l1f/5g383Zb+aWPI6CvU=
+=PuaP
 -----END PGP SIGNATURE-----
 
---O8XZ+2Hy8Kj8wLPZ--
+
