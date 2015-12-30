@@ -1,31 +1,21 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 2CC3860721
+Return-Path: <mike.looijmans@topic.nl>
+Received: from smtp01.mail.online.nl (smtp01.mail.online.nl [194.134.25.71])
+	by mail.openembedded.org (Postfix) with ESMTP id 0772060290
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 09:02:20 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
-   d="scan'208";a="2090548"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 30 Dec 2015 17:02:16 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 062D240427FE
+	Wed, 30 Dec 2015 10:34:04 +0000 (UTC)
+Received: from [192.168.1.4] (s55969068.adsl.online.nl [85.150.144.104])
+	by smtp01.mail.online.nl (Postfix) with ESMTP id F2D454000C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 17:02:06 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.98) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 30 Dec 2015 17:05:31 +0800
-From: Li Xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 30 Dec 2015 12:01:50 +0300
-Message-ID: <1451466110-1881-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
+	Wed, 30 Dec 2015 11:34:03 +0100 (CET)
+To: openembedded-devel@lists.openembedded.org
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Organization: Topic
+Message-ID: <5683B31B.4090103@topic.nl>
+Date: Wed, 30 Dec 2015 11:34:03 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.98]
-X-yoursite-MailScanner-ID: 062D240427FE.AB552
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: lixin.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python][PATCH] python-vcversioner: Error Fix for recipes depend on python-vcversioner.
+Subject: Why does samba think it (R)DEPENDS on perl?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,43 +28,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Dec 2015 09:02:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 30 Dec 2015 10:34:05 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-If you bitbake recipes which depends on python-vcversioner such as
-python-jsonschema. And also your network is not very well.
-Error will occur as following:
-   Download error on https://pypi.python.org/simple/vcversioner/:
-   [Errno -5] No address associated with hostname -- Some packages may not be found!
-    Couldn't find index page for 'vcversioner' (maybe misspelled?)
-    No local packages or download links found for vcversioner
-So add do_compile_append() to fix it.
+When building the current version of samba, it builds perl and drags it 
+into the image through an RDEPENDS.
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- .../recipes-devtools/python/python-vcversioner_2.14.0.0.bb       | 9 +++++++++
- 1 file changed, 9 insertions(+)
+I've been researching this for a while, but failed to figure out what 
+causes this runtime relation. Is there a way to find out where this is 
+being "detected"?
 
-diff --git a/meta-python/recipes-devtools/python/python-vcversioner_2.14.0.0.bb b/meta-python/recipes-devtools/python/python-vcversioner_2.14.0.0.bb
-index f7cd9bb..152034b 100644
---- a/meta-python/recipes-devtools/python/python-vcversioner_2.14.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python-vcversioner_2.14.0.0.bb
-@@ -12,3 +12,12 @@ S = "${WORKDIR}/vcversioner-${PV}"
- 
- inherit setuptools
- 
-+
-+do_compile_append() {
-+    export BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS}
-+    ${PYTHON} setup.py -q bdist_egg --dist-dir ./
-+}
-+
-+do_install_append() {
-+    install -m 0644 ${S}/vcversioner*.egg ${D}/${PYTHON_SITEPACKAGES_DIR}/
-+}
+The workaround I implemented is simply adding this line to the samba 
+recipe, which at least gets rid of the overhead in the image:
+
+RDEPENDS_${PN}_remove = "perl"
+
+(Samba 4 is bloated enough by itself, it doesn't need other packages to 
+inflate its runtime even more)
+
 -- 
-1.8.4.2
-
-
-
+Mike Looijmans
 
