@@ -1,34 +1,39 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D0D860088
+Return-Path: <twoerner@gmail.com>
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 96F82605FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Dec 2015 08:53:09 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1aDq1i-0007yZ-Gn for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Dec 2015 09:53:06 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Dec 2015 09:53:06 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 30 Dec 2015 06:18:54 +0000 (UTC)
+Received: by mail-ig0-f176.google.com with SMTP id to18so162934856igc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Dec 2015 09:53:06 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 29 Dec 2015 09:52:50 +0100
-Message-ID: <n5thl2$r1f$1@ger.gmane.org>
-References: <cover.1451029460.git.jackie.huang@windriver.com>
-	<n5rfsr$342$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:38.0)
-	Gecko/20100101 Thunderbird/38.4.0
-In-Reply-To: <n5rfsr$342$1@ger.gmane.org>
-Subject: Re: [meta-java][PATCH 00/15] meta-java: fixes for some issues
+	Tue, 29 Dec 2015 22:18:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=to:cc:from:subject:message-id:date:user-agent:mime-version
+	:content-type:content-transfer-encoding;
+	bh=2lZJ8MkFQbCQAqYfu0OPa8lABrgwPJsAoCGbug3r+oY=;
+	b=HCSJnWus4Y1+7DzUkeh98FfkbPzlu34DfEvWQO8R6zndal4p6FSuXfrzSY8o+aP9Fg
+	hvIhPzo4bBGvE7pgd5A3tKmld0TsBmisvn2iYCJtW0hz1Z7V3kJyVW1EvlnCB/MN3eR0
+	S2s3TxaJZwnbAboy37fciIBsPUqFvmJs8b0Wi+STYgSgB00ll9iA7JbubwOsXYDeDNiR
+	f0zgdq1IbW9wAmRE+OTjbGC54uOgXgvGuE/gvIMj8xokGQqyeTK1k24+XfYXGQe3wKGF
+	8WzY6olJqhgeMCdVQBu9ymdYgdlgUo9wTsbZhI0kaCo3Ww1Fu5JIMDSd+6Y3VcATXgtJ
+	Pv5w==
+X-Received: by 10.50.82.97 with SMTP id h1mr57562596igy.67.1451456334764;
+	Tue, 29 Dec 2015 22:18:54 -0800 (PST)
+Received: from [192.168.141.85] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	by smtp.gmail.com with ESMTPSA id
+	c67sm17885648iod.5.2015.12.29.22.18.53
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 29 Dec 2015 22:18:54 -0800 (PST)
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+From: Trevor Woerner <twoerner@gmail.com>
+Message-ID: <56837748.6020903@gmail.com>
+Date: Wed, 30 Dec 2015 01:18:48 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: chromium 40.0.2214.91 doesn't like gcc5.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,111 +46,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Dec 2015 08:53:09 -0000
+X-List-Received-Date: Wed, 30 Dec 2015 06:18:55 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I noticed the recent gcc update from 5.2 to 5.3 in openembedded-core
+seems to cause meta-browser's chromium build to fail with more warnings
+being treated as errors. My MACHINE is intel-corei7-64, but I'm guessing
+this probably happens on other architectures too.
 
-Op 28-12-15 om 15:10 schreef Koen Kooi:
-> Op 25-12-15 om 08:56 schreef jackie.huang@windriver.com:
->> From: Jackie Huang <jackie.huang@windriver.com>
-> 
->> These patches had been in our local branch for some times, I think
->> they are needed here as well, I rebased and did basic build/runtime
->> tests on x86-64 and ppc, please review and see if they are fine to be
->> merged.
-> 
-> After merging this I'm finally able to build openjdk-7 for core2-64
-> again.
+Is anyone looking at this?
 
-As well as armv6, armv6 and armv7
+Is there any talk about this upstream?
 
-> 
-> 
-> 
->> -- The following changes since commit 
->> c88d019434b5ba0eb7ee1a3b0e27a74587ad9d49:
-> 
->> openjdk-8-native: fix improper do_install and PROVIDES (2015-12-22 
->> 23:48:09 -0800)
-> 
->> are available in the git repository at:
-> 
->> git://git.pokylinux.org/poky-contrib.git jhuang0/d_java-fixes_151225_0
->>  
->> http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/d_java-fixes_151225_0
->
->>  Amy Fong (15): java.bbclass: java missing classes during compile
->> inetlib: fix inetlib dependency during compilation openjdk: autools not
->> to override B var jamvm.inc: jamvm recipe cleanup base-files: Define 
->> JAVA_HOME by default Missing inheritance and dependencies in some java 
->> packages openjdk-7: added java tools to the jdk package openjdk: add 
->> keytool link openjdk: postinst cleanup icedtea7-native compile failure 
->> undefined reference to `main' openjdk: fix CVE-2014-1876 jamvm-git
->> uprev to 2.0.0 openjdk-7: add depends on attr
->> icedtea7-native/openjdk-7: fails on hosts with no unzip openjdk hotspot
->> build system std.h fix
-> 
->> classes/java.bbclass                               |   9 +- 
->> recipes-core/base-files/base-files_3.0.14.bbappend |  13 ++ 
->> recipes-core/classpath/classpath-native_0.99.bb    |   2 +- 
->> ...etlib-missing-dependency-for-util_classes.patch |  31 ++++ 
->> recipes-core/classpathx/inetlib_1.1.1.bb           |   1 + 
->> recipes-core/icedtea/icedtea7-native.inc           |   4 +- 
->> .../icedtea-CVE-2014-1876-unpack.patch             |  44 ++++++ 
->> .../openjdk-7-03b147/icedtea-jdk-unzip.patch       | 130
->> +++++++++++++++ .../openjdk-7-03b147/icedtea-makefile-unzip.patch  |
->> 167 +++++++++++++++++++ .../icedtea-x11_extension_cleanup.patch
->> | 42 +++++ recipes-core/icedtea/openjdk-7-release-03b147.inc  |   7 + 
->> recipes-core/jamvm/jamvm.inc                       |   7 +- 
->> recipes-core/jamvm/jamvm_git.bb                    |   4 +- 
->> recipes-core/openjdk/openjdk-7-common.inc          |   4 + 
->> recipes-core/openjdk/openjdk-7_91b01-2.6.2.bb      |   5 + 
->> recipes-core/openjdk/openjdk-common.inc            |   3 +- 
->> recipes-core/openjdk/openjdk-postinst.inc          |  24 ++- 
->> .../patches-openjdk-7/icedtea-dtrace-std_h.patch   |  40 +++++ 
->> .../patches-openjdk-7/icedtea-jdk-unzip.patch      | 130
->> +++++++++++++++ .../patches-openjdk-7/icedtea-makefile-unzip.patch |
->> 176 +++++++++++++++++++++ 20 files changed, 825 insertions(+), 18 
->> deletions(-) create mode 100644 
->> recipes-core/base-files/base-files_3.0.14.bbappend create mode 100644 
->> recipes-core/classpathx/inetlib-1.1.1/inetlib-missing-dependency-for-util_c
-l
->
->> 
-asses.patch
-> 
-> 
-> create mode 100644 
-> recipes-core/icedtea/openjdk-7-03b147/icedtea-CVE-2014-1876-unpack.patch
->> create mode 100644 
->> recipes-core/icedtea/openjdk-7-03b147/icedtea-jdk-unzip.patch create
->> mode 100644 
->> recipes-core/icedtea/openjdk-7-03b147/icedtea-makefile-unzip.patch
->> create mode 100644 
->> recipes-core/icedtea/openjdk-7-03b147/icedtea-x11_extension_cleanup.patch
->
->> 
-> 
-> create mode 100644 
-> recipes-core/openjdk/patches-openjdk-7/icedtea-dtrace-std_h.patch
->> create mode 100644 
->> recipes-core/openjdk/patches-openjdk-7/icedtea-jdk-unzip.patch create 
->> mode 100644 
->> recipes-core/openjdk/patches-openjdk-7/icedtea-makefile-unzip.patch
-> 
-> 
-> 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
 
-iD8DBQFWgkniMkyGM64RGpERAtQIAKCVj4XvRea3TCUIW+pRrCMh6OZo7wCfVTww
-a/7l1f/5g383Zb+aWPI6CvU=
-=PuaP
------END PGP SIGNATURE-----
+Build Configuration:
+BB_VERSION        = "1.28.0"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "openSUSE-project-13.2"
+TARGET_SYS        = "x86_64-fortress-linux"
+MACHINE           = "intel-corei7-64"
+DISTRO            = "fortress"
+DISTRO_VERSION    = "0.1"
+TUNE_FEATURES     = "m64 corei7"
+TARGET_FPU        = ""
+meta              = "master:1568f4fa1c8f8abd9b365ecd264841cd4f6b66b1"
+meta-yocto-bsp   
+meta-yocto        = "master:9b392ef494f3fee9b85ee9e37ad700781e32e636"
+meta-intel        = "master:ac56397b913e9f2ccc7d6cf5a1a5a9002b619671"
+meta-oe          
+meta-gnome       
+meta-python      
+meta-networking   =
+"contrib/twoerner/nodejs_v4:40b9f35fa3b4361ca53dbb91d2552f2eae6af460"
+meta-browser      = "master:bb799af123f1361767885d5b8f7e14b334d3fd7a"
+
+
+
+| FAILED: x86_64-fortress-linux-g++  -m64 -march=corei7 -mtune=corei7
+-mfpmath=sse -msse4.2
+--sysroot=/z/layerindex-master/minnowmax/tmp/sysroots/intel-corei7-64
+-MMD -MF obj/third_party/WebKit/Source/wtf/dtoa/wtf.bignum.o.d
+-DV8_DEPRECATION_WARNINGS -D_FILE_OFFSET_BITS=64 -DDISABLE_NACL
+-DCHROMIUM_BUILD -DTOOLKIT_VIEWS=1 -DUI_COMPOSITOR_IMAGE_TRANSPORT
+-DUSE_AURA=1 -DUSE_ASH=1 -DUSE_PANGO=1 -DUSE_CAIRO=1
+-DUSE_DEFAULT_RENDER_THEME=1 -DUSE_LIBJPEG_TURBO=1 -DUSE_X11=1
+-DUSE_CLIPBOARD_AURAX11=1 -DENABLE_ONE_CLICK_SIGNIN
+-DENABLE_PRE_SYNC_BACKUP -DUSE_XI2_MT=2 -DENABLE_REMOTING=1
+-DENABLE_WEBRTC=1 -DENABLE_PEPPER_CDMS -DENABLE_CONFIGURATION_POLICY
+-DENABLE_NOTIFICATIONS -DUSE_UDEV -DDONT_EMBED_BUILD_METADATA
+-DENABLE_TASK_MANAGER=1 -DENABLE_EXTENSIONS=1 -DENABLE_PLUGINS=1
+-DENABLE_SESSION_SERVICE=1 -DENABLE_THEMES=1 -DENABLE_AUTOFILL_DIALOG=1
+-DENABLE_BACKGROUND=1 -DENABLE_GOOGLE_NOW=1 -DCLD_VERSION=2
+-DCLD2_DATA_SOURCE=static -DENABLE_PRINTING=1 -DENABLE_BASIC_PRINTING=1
+-DENABLE_PRINT_PREVIEW=1 -DENABLE_SPELLCHECK=1
+-DENABLE_CAPTIVE_PORTAL_DETECTION=1 -DENABLE_APP_LIST=1
+-DENABLE_SETTINGS_APP=1 -DENABLE_MANAGED_USERS=1 -DENABLE_MDNS=1
+-DENABLE_SERVICE_DISCOVERY=1 -DENABLE_LOAD_COMPLETION_HACKS=1
+-DWTF_IMPLEMENTATION=1 -DENABLE_OPENTYPE_VERTICAL=1
+-DENABLE_LAYOUT_UNIT_IN_INLINE_BOXES=0
+-DWTF_USE_CONCATENATED_IMPULSE_RESPONSES=1
+-DENABLE_INPUT_MULTIPLE_FIELDS_UI=1 -DENABLE_WEB_AUDIO=1
+-DWTF_USE_WEBAUDIO_FFMPEG=1 -DWTF_USE_DEFAULT_RENDER_THEME=1
+-DU_USING_ICU_NAMESPACE=0 -DU_ENABLE_DYLOAD=0 -DU_STATIC_IMPLEMENTATION
+-DUSE_LIBPCI=1 -DUSE_GLIB=1 -DUSE_NSS=1 -D__STDC_CONSTANT_MACROS
+-D__STDC_FORMAT_MACROS -DNDEBUG -DNVALGRIND
+-DDYNAMIC_ANNOTATIONS_ENABLED=0 -D_FORTIFY_SOURCE=2 -Igen
+-I../../third_party/WebKit/Source -I../../third_party/WebKit
+-I../../third_party/icu/source/i18n
+-I../../third_party/icu/source/common -fstack-protector
+--param=ssp-buffer-size=4 -Werror -pthread -fno-strict-aliasing -Wall
+-Wno-unused-parameter -Wno-missing-field-initializers
+-fvisibility=hidden -pipe -fPIC
+-B/z/layerindex-master/minnowmax/tmp/work/corei7-64-fortress-linux/chromium/40.0.2214.91-r0/chromium-40.0.2214.91/third_party/binutils/Linux_x64/Release/bin
+-Wno-unused-local-typedefs -m64 -march=x86-64 -O2 -fno-ident
+-fdata-sections -ffunction-sections -funwind-tables
+-Wno-error=unused-local-typedefs -O2 -pipe -g
+-feliminate-unused-debug-types -fvisibility-inlines-hidden
+-Wno-c++0x-compat -fno-exceptions -fno-rtti -fno-threadsafe-statics
+-fvisibility-inlines-hidden -Wsign-compare -Wno-c++0x-compat
+-std=gnu++11 -Wno-narrowing -Wno-literal-suffix  -c
+../../third_party/WebKit/Source/wtf/dtoa/bignum.cc -o
+obj/third_party/WebKit/Source/wtf/dtoa/wtf.bignum.o
+| ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc: In member function
+'void WTF::double_conversion::Bignum::Align(const
+WTF::double_conversion::Bignum&)':
+| ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:715:31: error:
+assuming signed overflow does not occur when simplifying conditional to
+constant [-Werror=strict-overflow]
+|              for (int i = 0; i < zero_digits; ++i) {
+|                                ^
+| ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:715:31: error:
+assuming signed overflow does not occur when simplifying conditional to
+constant [-Werror=strict-overflow]
+| ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc: In member function
+'void
+WTF::double_conversion::Bignum::AssignDecimalString(WTF::double_conversion::Vector<const
+char>)':
+| ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:105:10: error:
+assuming signed overflow does not occur when assuming that (X + c) < X
+is always false [-Werror=strict-overflow]
+|      void Bignum::AssignDecimalString(Vector<const char> value) {
+|           ^
+| cc1plus: all warnings being treated as errors
+| ninja: build stopped: subcommand failed.
 
 
