@@ -1,39 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id D778560667
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 975A76B6EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 11:53:08 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id u188so37137794wmu.1
+	Wed, 30 Dec 2015 11:57:31 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id f206so64187065wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 03:53:09 -0800 (PST)
+	Wed, 30 Dec 2015 03:57:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=NXdy112KMXMn1i27b4mmM/i3J2vevda0laijgnf4hV4=;
-	b=LNInojGOGX4mrur/78ctheAU6Yx+bwD8yXr/X9oL7RGNx2tIkaRWrDWRCOIVO6PMZA
-	jTpUf2rwt0KXLSgiJ4mBLv7+/z5ZU0U0N1RxXP8sRo670d55n4kfQzzbRuSaAPx1IBwe
-	A8ooyl92rvmUvWGOIFu9D8MFl+tnxB0YCGZwI3rik3CxspBplUZHYE5daJl2LAkFuVPc
-	zJyThTUNZqnN6mZgsmcJ0JZy+24D0CVae4Yk0b5E505hCjl859oQ0yXcfHqoZQnQAcRf
-	8sJSEj7/J3W8WFPZkK78Rgei8KlTX3aUbv4NyzK3T2fzbYEfRYrgC5X92T01C7bx3S6c
-	zFqA==
-X-Received: by 10.28.126.77 with SMTP id z74mr63901101wmc.3.1451476389303;
-	Wed, 30 Dec 2015 03:53:09 -0800 (PST)
+	h=from:to:cc:subject:date:message-id;
+	bh=faKTOo2I80cwvlecBXQD6ZqwFJ2Q77xi3KWfk00Xrqk=;
+	b=SCnmW67LsBbBaQJnXgUGIbgW+pwmHPTgC4Qqfj6SroCr0cU/sURFpZonY8GamvLfc1
+	TLl6V86oNcSODgfR39godwJE5VhE+mQpz7ngXy0jW3zLMVua2tDAW9CFZbiMoG9HuzTF
+	6NTwbiIE+2yiioEg1K9MTjXzXGpBLMySQI02IFZejWEcLSicE3dR0ZKTVrpgkKAvk1C4
+	lod1QRuzFEK4lFsgQ8F3ji7TwcSv/I+dfaE8dttrmtnGslgl0kUBSfqNR8Jc47vXmmk0
+	hMRpZ9pFaA4sBuUlHPUwADPUmV5kGSWIjWeiktRnzltV82BSb19/hlER5LTOhLT2Y+Pm
+	jvUg==
+X-Received: by 10.28.72.2 with SMTP id v2mr73696792wma.84.1451476651509;
+	Wed, 30 Dec 2015 03:57:31 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	pn6sm65157280wjb.15.2015.12.30.03.53.08
+	w194sm10653242wmd.0.2015.12.30.03.57.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Dec 2015 03:53:08 -0800 (PST)
+	Wed, 30 Dec 2015 03:57:30 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 30 Dec 2015 12:56:44 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151230115644.GB2263@jama>
-References: <1450995242-16535-1-git-send-email-cleitonrbueno@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1450995242-16535-1-git-send-email-cleitonrbueno@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: Cleiton Bueno <cleitonrbueno@gmail.com>
-Subject: Re: [PATCH] Include dependency to QCoreApplication::translate()
+Date: Wed, 30 Dec 2015 13:01:05 +0100
+Message-Id: <1451476865-16936-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.6.4
+Subject: [PATCH][meta-initramfs] linux-yocto-tiny-kexecboot: upgrade to 4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,64 +41,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Dec 2015 11:53:10 -0000
-X-Groupsio-MsgNum: 59215
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="IiVenqGWf+H9Y6IX"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 Dec 2015 11:57:31 -0000
 
---IiVenqGWf+H9Y6IX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../linux/linux-yocto-tiny-kexecboot_3.19.bb       | 26 ----------------------
+ .../linux/linux-yocto-tiny-kexecboot_4.1.bb        | 26 ++++++++++++++++++++++
+ 2 files changed, 26 insertions(+), 26 deletions(-)
+ delete mode 100644 meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.bb
+ create mode 100644 meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_4.1.bb
 
-On Thu, Dec 24, 2015 at 08:14:02PM -0200, Cleiton Bueno wrote:
-> Signed-off-by: Cleiton Bueno <cleitonrbueno@gmail.com>
+diff --git a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.bb b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.bb
+deleted file mode 100644
+index f6d2fa0..0000000
+--- a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.bb
++++ /dev/null
+@@ -1,26 +0,0 @@
+-require recipes-kernel/linux/linux-yocto-tiny_${PV}.bb
+-SUMMARY = "Yocto tiny kernel embedding a minimalistic kexecboot initramfs"
+-
+-PACKAGES = ""
+-PROVIDES = ""
+-
+-KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${PV}-${MACHINE}"
+-KERNEL_IMAGE_SYMLINK_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${MACHINE}"
+-
+-INITRAMFS_IMAGE = "initramfs-kexecboot-klibc-image"
+-INITRAMFS_TASK = "${INITRAMFS_IMAGE}:do_rootfs"
+-
+-# disable unneeded tasks
+-do_install[noexec] = "1"
+-do_package[noexec] = "1"
+-do_package_qa[noexec] = "1"
+-do_packagedata[noexec] = "1"
+-do_package_deb[noexec] = "1"
+-do_package_ipk[noexec] = "1"
+-do_package_rpm[noexec] = "1"
+-do_package_tar[noexec] = "1"
+-do_package_write_deb[noexec] = "1"
+-do_package_write_ipk[noexec] = "1"
+-do_package_write_rpm[noexec] = "1"
+-do_package_write_tar[noexec] = "1"
+-do_populate_sysroot[noexec] = "1"
+diff --git a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_4.1.bb b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_4.1.bb
+new file mode 100644
+index 0000000..f6d2fa0
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_4.1.bb
+@@ -0,0 +1,26 @@
++require recipes-kernel/linux/linux-yocto-tiny_${PV}.bb
++SUMMARY = "Yocto tiny kernel embedding a minimalistic kexecboot initramfs"
++
++PACKAGES = ""
++PROVIDES = ""
++
++KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${PV}-${MACHINE}"
++KERNEL_IMAGE_SYMLINK_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${MACHINE}"
++
++INITRAMFS_IMAGE = "initramfs-kexecboot-klibc-image"
++INITRAMFS_TASK = "${INITRAMFS_IMAGE}:do_rootfs"
++
++# disable unneeded tasks
++do_install[noexec] = "1"
++do_package[noexec] = "1"
++do_package_qa[noexec] = "1"
++do_packagedata[noexec] = "1"
++do_package_deb[noexec] = "1"
++do_package_ipk[noexec] = "1"
++do_package_rpm[noexec] = "1"
++do_package_tar[noexec] = "1"
++do_package_write_deb[noexec] = "1"
++do_package_write_ipk[noexec] = "1"
++do_package_write_rpm[noexec] = "1"
++do_package_write_tar[noexec] = "1"
++do_populate_sysroot[noexec] = "1"
+-- 
+2.6.4
 
-Where do you want this to be applied? If it's for qtwebengine recipe in
-meta-qt5 then you should send change for meta-qt5 repo (which includes=20
-=2Epatch for qtwebengine), not patch for qtwebengine repo.
 
-> ---
->  src/core/media_capture_devices_dispatcher.h | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/src/core/media_capture_devices_dispatcher.h b/src/core/media=
-_capture_devices_dispatcher.h
-> index 500fe76..eda2824 100644
-> --- a/src/core/media_capture_devices_dispatcher.h
-> +++ b/src/core/media_capture_devices_dispatcher.h
-> @@ -43,6 +43,8 @@
->  #include <map>
->  #include <QtCore/qcompilerdetection.h>
-> =20
-> +#include <QCoreApplication>
-> +
->  #include "web_contents_adapter_client.h"
-> =20
->  #include "base/callback.h"
-> --=20
-> 1.8.1.2
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---IiVenqGWf+H9Y6IX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlaDxnoACgkQN1Ujt2V2gBw1zwCfVBgZIFkQCUb4I5Gt+Cf/x6qC
-CFMAoJkuD3tA8K7yTYAcAOa6NxFf4/+L
-=y1/3
------END PGP SIGNATURE-----
-
---IiVenqGWf+H9Y6IX--
