@@ -1,36 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
-	[209.85.213.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D37C6FFDC
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 07AC460616
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 18:04:54 +0000 (UTC)
-Received: by mail-ig0-f177.google.com with SMTP id to18so170706371igc.0
+	Wed, 30 Dec 2015 18:16:22 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id f206so73651043wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 10:04:56 -0800 (PST)
+	Wed, 30 Dec 2015 10:16:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=JFocCBW5C5r3/RRC3pJjIxMqz7NnzkTrk6247xjB+YE=;
-	b=laApOlB3lKAWmoA54iN0z3ZeNmeJG9I0C+vzWl8NqL1ekGW0sqlHiyK5ENwf8tNM2I
-	owxcwGYwRTi/kPgjYN7NV8jUulG9xEEGBT6HXHAFbRMTODkDeKFVLpowovca+WEgmnRY
-	Ta7jtjo0i59CnW1OpzY2dHU7DSPcRbukDwNpL3zWzsQuvvmTuNBzPkkILudr0xZej2iG
-	yfnCPbizoCZa/t/InB/yeh3u4z6dqBRCVZ07ZRK4KFA4p5rRCSJdA3NNGYpioqiv53I6
-	RAo5AZfkrO+8Yk3meLzXzcYcAb1YTTlpTb82qCm0+yCBNAJWQBj6ttQ+1DCjOj86ZM6O
-	S0qg==
-X-Received: by 10.50.138.232 with SMTP id qt8mr57334136igb.75.1451498695452;
-	Wed, 30 Dec 2015 10:04:55 -0800 (PST)
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=1MC9Jw5d3g8bG42etO3mcWQ9Jhm8M9IP0QM5wCl5pTU=;
+	b=vQkHQaS4JUENBGFDLS14ycQiT8yD0kCb/FewqQQHJk/DuzP5roMBDPDfRSqM+FgB62
+	RzpNXLTQDDyj3ryqDoGDhehSE2FtDjIa6qb+1VMYN6gh5aARuYhFn9GOJZ8XEbjLpWjC
+	NhUUiS6iXwoDaLTSDayW7AJD/cxSC4shOOY076GaRNgJWIFSaatXTXUZitdkXSrGLT0l
+	uwrK3VtMFGu5pgeu5vjhTyyKdy1wBNoqQDZI7EfQJz1g6o991DUk367xEidVF9/zfK0c
+	zUqJ/0yNRwlUbG+d/xeEACbJtBOUnVQ/umtAfoyVBwyIV2+gnGMTO5nZg1oSz5SdeyzZ
+	B+oQ==
+X-Received: by 10.28.20.83 with SMTP id 80mr51165782wmu.89.1451499382598;
+	Wed, 30 Dec 2015 10:16:22 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	a126sm8095643wmh.0.2015.12.30.10.16.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Dec 2015 10:16:21 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 30 Dec 2015 19:19:58 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151230181958.GJ2263@jama>
+References: <1451498458-17741-1-git-send-email-twoerner@gmail.com>
 MIME-Version: 1.0
-Received: by 10.107.16.74 with HTTP; Wed, 30 Dec 2015 10:04:26 -0800 (PST)
-In-Reply-To: <56837748.6020903@gmail.com>
-References: <56837748.6020903@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 30 Dec 2015 10:04:26 -0800
-Message-ID: <CAMKF1spcVXiHxyPnTg=nYUOM_2yc2vU6x+VwG6unWH3wdNKeag@mail.gmail.com>
-To: Trevor Woerner <twoerner@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: chromium 40.0.2214.91 doesn't like gcc5.3
+In-Reply-To: <1451498458-17741-1-git-send-email-twoerner@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-oe][PATCH] nodejs: update from 4.2.3 to 4.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,115 +46,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Dec 2015 18:04:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 30 Dec 2015 18:16:23 -0000
+X-Groupsio-MsgNum: 59233
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Z8yxTSU1mh2gsre7"
+Content-Disposition: inline
 
-On Tue, Dec 29, 2015 at 10:18 PM, Trevor Woerner <twoerner@gmail.com> wrote:
-> I noticed the recent gcc update from 5.2 to 5.3 in openembedded-core
-> seems to cause meta-browser's chromium build to fail with more warnings
-> being treated as errors. My MACHINE is intel-corei7-64, but I'm guessing
-> this probably happens on other architectures too.
->
-> Is anyone looking at this?
->
-> Is there any talk about this upstream?
->
+--Z8yxTSU1mh2gsre7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-can you backport and report back
+On Wed, Dec 30, 2015 at 01:00:58PM -0500, Trevor Woerner wrote:
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 
-https://chromium.googlesource.com/v8/v8/+/e28183b5977a2d2732f7f8b9a2f26637c9566585%5E%21/#F0
+Mention what was changed in LICENSE file.
 
->
->
-> Build Configuration:
-> BB_VERSION        = "1.28.0"
-> BUILD_SYS         = "x86_64-linux"
-> NATIVELSBSTRING   = "openSUSE-project-13.2"
-> TARGET_SYS        = "x86_64-fortress-linux"
-> MACHINE           = "intel-corei7-64"
-> DISTRO            = "fortress"
-> DISTRO_VERSION    = "0.1"
-> TUNE_FEATURES     = "m64 corei7"
-> TARGET_FPU        = ""
-> meta              = "master:1568f4fa1c8f8abd9b365ecd264841cd4f6b66b1"
-> meta-yocto-bsp
-> meta-yocto        = "master:9b392ef494f3fee9b85ee9e37ad700781e32e636"
-> meta-intel        = "master:ac56397b913e9f2ccc7d6cf5a1a5a9002b619671"
-> meta-oe
-> meta-gnome
-> meta-python
-> meta-networking   =
-> "contrib/twoerner/nodejs_v4:40b9f35fa3b4361ca53dbb91d2552f2eae6af460"
-> meta-browser      = "master:bb799af123f1361767885d5b8f7e14b334d3fd7a"
->
->
->
-> | FAILED: x86_64-fortress-linux-g++  -m64 -march=corei7 -mtune=corei7
-> -mfpmath=sse -msse4.2
-> --sysroot=/z/layerindex-master/minnowmax/tmp/sysroots/intel-corei7-64
-> -MMD -MF obj/third_party/WebKit/Source/wtf/dtoa/wtf.bignum.o.d
-> -DV8_DEPRECATION_WARNINGS -D_FILE_OFFSET_BITS=64 -DDISABLE_NACL
-> -DCHROMIUM_BUILD -DTOOLKIT_VIEWS=1 -DUI_COMPOSITOR_IMAGE_TRANSPORT
-> -DUSE_AURA=1 -DUSE_ASH=1 -DUSE_PANGO=1 -DUSE_CAIRO=1
-> -DUSE_DEFAULT_RENDER_THEME=1 -DUSE_LIBJPEG_TURBO=1 -DUSE_X11=1
-> -DUSE_CLIPBOARD_AURAX11=1 -DENABLE_ONE_CLICK_SIGNIN
-> -DENABLE_PRE_SYNC_BACKUP -DUSE_XI2_MT=2 -DENABLE_REMOTING=1
-> -DENABLE_WEBRTC=1 -DENABLE_PEPPER_CDMS -DENABLE_CONFIGURATION_POLICY
-> -DENABLE_NOTIFICATIONS -DUSE_UDEV -DDONT_EMBED_BUILD_METADATA
-> -DENABLE_TASK_MANAGER=1 -DENABLE_EXTENSIONS=1 -DENABLE_PLUGINS=1
-> -DENABLE_SESSION_SERVICE=1 -DENABLE_THEMES=1 -DENABLE_AUTOFILL_DIALOG=1
-> -DENABLE_BACKGROUND=1 -DENABLE_GOOGLE_NOW=1 -DCLD_VERSION=2
-> -DCLD2_DATA_SOURCE=static -DENABLE_PRINTING=1 -DENABLE_BASIC_PRINTING=1
-> -DENABLE_PRINT_PREVIEW=1 -DENABLE_SPELLCHECK=1
-> -DENABLE_CAPTIVE_PORTAL_DETECTION=1 -DENABLE_APP_LIST=1
-> -DENABLE_SETTINGS_APP=1 -DENABLE_MANAGED_USERS=1 -DENABLE_MDNS=1
-> -DENABLE_SERVICE_DISCOVERY=1 -DENABLE_LOAD_COMPLETION_HACKS=1
-> -DWTF_IMPLEMENTATION=1 -DENABLE_OPENTYPE_VERTICAL=1
-> -DENABLE_LAYOUT_UNIT_IN_INLINE_BOXES=0
-> -DWTF_USE_CONCATENATED_IMPULSE_RESPONSES=1
-> -DENABLE_INPUT_MULTIPLE_FIELDS_UI=1 -DENABLE_WEB_AUDIO=1
-> -DWTF_USE_WEBAUDIO_FFMPEG=1 -DWTF_USE_DEFAULT_RENDER_THEME=1
-> -DU_USING_ICU_NAMESPACE=0 -DU_ENABLE_DYLOAD=0 -DU_STATIC_IMPLEMENTATION
-> -DUSE_LIBPCI=1 -DUSE_GLIB=1 -DUSE_NSS=1 -D__STDC_CONSTANT_MACROS
-> -D__STDC_FORMAT_MACROS -DNDEBUG -DNVALGRIND
-> -DDYNAMIC_ANNOTATIONS_ENABLED=0 -D_FORTIFY_SOURCE=2 -Igen
-> -I../../third_party/WebKit/Source -I../../third_party/WebKit
-> -I../../third_party/icu/source/i18n
-> -I../../third_party/icu/source/common -fstack-protector
-> --param=ssp-buffer-size=4 -Werror -pthread -fno-strict-aliasing -Wall
-> -Wno-unused-parameter -Wno-missing-field-initializers
-> -fvisibility=hidden -pipe -fPIC
-> -B/z/layerindex-master/minnowmax/tmp/work/corei7-64-fortress-linux/chromium/40.0.2214.91-r0/chromium-40.0.2214.91/third_party/binutils/Linux_x64/Release/bin
-> -Wno-unused-local-typedefs -m64 -march=x86-64 -O2 -fno-ident
-> -fdata-sections -ffunction-sections -funwind-tables
-> -Wno-error=unused-local-typedefs -O2 -pipe -g
-> -feliminate-unused-debug-types -fvisibility-inlines-hidden
-> -Wno-c++0x-compat -fno-exceptions -fno-rtti -fno-threadsafe-statics
-> -fvisibility-inlines-hidden -Wsign-compare -Wno-c++0x-compat
-> -std=gnu++11 -Wno-narrowing -Wno-literal-suffix  -c
-> ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc -o
-> obj/third_party/WebKit/Source/wtf/dtoa/wtf.bignum.o
-> | ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc: In member function
-> 'void WTF::double_conversion::Bignum::Align(const
-> WTF::double_conversion::Bignum&)':
-> | ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:715:31: error:
-> assuming signed overflow does not occur when simplifying conditional to
-> constant [-Werror=strict-overflow]
-> |              for (int i = 0; i < zero_digits; ++i) {
-> |                                ^
-> | ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:715:31: error:
-> assuming signed overflow does not occur when simplifying conditional to
-> constant [-Werror=strict-overflow]
-> | ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc: In member function
-> 'void
-> WTF::double_conversion::Bignum::AssignDecimalString(WTF::double_conversion::Vector<const
-> char>)':
-> | ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:105:10: error:
-> assuming signed overflow does not occur when assuming that (X + c) < X
-> is always false [-Werror=strict-overflow]
-> |      void Bignum::AssignDecimalString(Vector<const char> value) {
-> |           ^
-> | cc1plus: all warnings being treated as errors
-> | ninja: build stopped: subcommand failed.
->
+> ---
+>  .../recipes-devtools/nodejs/{nodejs_4.2.3.bb =3D> nodejs_4.2.4.bb}    | =
+6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-oe/recipes-devtools/nodejs/{nodejs_4.2.3.bb =3D> nodejs_4.2.=
+4.bb} (93%)
+>=20
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.2.3.bb b/meta-oe/re=
+cipes-devtools/nodejs/nodejs_4.2.4.bb
+> similarity index 93%
+> rename from meta-oe/recipes-devtools/nodejs/nodejs_4.2.3.bb
+> rename to meta-oe/recipes-devtools/nodejs/nodejs_4.2.4.bb
+> index 66a3c11..18e23b7 100644
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs_4.2.3.bb
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.2.4.bb
+> @@ -1,7 +1,7 @@
+>  DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
+>  HOMEPAGE =3D "http://nodejs.org"
+>  LICENSE =3D "MIT & BSD & Artistic-2.0"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dee90ba97d933fc8d56e97812b7dd6=
+2e9"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D963ca39eebcb15ac618bc3006504a=
+e3f"
+> =20
+>  DEPENDS =3D "openssl"
+> =20
+> @@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 =3D "(!.*mips64).*"
+>  SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
+>      file://no-registry.patch \
+>  "
+> -SRC_URI[md5sum] =3D "529a8abd4ca5a2225636767d3f14c382"
+> -SRC_URI[sha256sum] =3D "5008ade5feb4b089f59163f66bffddc113f27de5d78edf20=
+3e39435c2c5d554f"
+> +SRC_URI[md5sum] =3D "86e4d0d8b626f6e60ca7bef02f2543d2"
+> +SRC_URI[sha256sum] =3D "4ee244ffede7328d9fa24c3024787e71225b7abaac49fe2b=
+30e68b27460c10ec"
+> =20
+>  S =3D "${WORKDIR}/node-v${PV}"
+> =20
+> --=20
+> 2.6.0.rc3
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--Z8yxTSU1mh2gsre7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlaEIE0ACgkQN1Ujt2V2gBw7NACgkEyDp8rTdFQuMn42Q5IZqeBW
+ysQAmwUJbXmhPdRFZIIKVvrQhjUcUunq
+=luSj
+-----END PGP SIGNATURE-----
+
+--Z8yxTSU1mh2gsre7--
