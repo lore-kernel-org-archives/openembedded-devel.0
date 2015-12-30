@@ -1,41 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 7FC0260589
+Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C81460588
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 20:48:28 +0000 (UTC)
-Received: by mail-pa0-f47.google.com with SMTP id uo6so121239911pac.1
+	Wed, 30 Dec 2015 20:55:01 +0000 (UTC)
+Received: by mail-pf0-f175.google.com with SMTP id 78so146545723pfw.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 12:48:29 -0800 (PST)
+	Wed, 30 Dec 2015 12:55:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=1ywFojmFQ6aJy/hYDs+7inbl8itIeMd6nq/b6ey0yKY=;
-	b=Kn2tEawZ9uaftHIf8OZy8yH3IcT+33cWDVFtDg+5b8TcZNa+xgop4MQFCD6orhk7p2
-	RhoDyUB+C1TpNgCRxFaVoH0ibsvxeu8pjEGmRhwEt0Rd299FbJbSN2Q8WpKIWVCooGbI
-	ZaE2F7lscHLQHOH3CQOAmbCPvTTcy0QCIQpJXRMBh5OAjFouG+7+BGnpCY2pxDleRiQk
-	Tojccm70Zb/ZxfmHanx3EJsyx4570Dcby8SU8pnjb06BuvKBS73S0yfL0wGiro08NjTP
-	KNxg+u6QRUCDWztCUUE2QUgeLz7ooOy6kBJToS818U2nG3+lIe5KkxupZcnQSzmAzqYw
-	LRKQ==
-X-Received: by 10.66.141.41 with SMTP id rl9mr96087308pab.139.1451508509130;
-	Wed, 30 Dec 2015 12:48:29 -0800 (PST)
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=xqH7FrFw6JKFTPNKYdwGKHFt/DctJ2n/MeOt9qBHpSw=;
+	b=O3sUuVfo28j+oWv3wbKav21FJY76UVxxHaTVAEZ9qYwWzIfofxD0AKatWGGEw6R8IL
+	vOEVCi7NAcMmT8M8x4/tZvcfDYydKgeM/qwOFa7Kk1Au7SquRN7sVAEDkh38mgyZP1HQ
+	p/ZJcAtLReXXD8YXm/nJNe/yTfJYDKNKoj+lo3gbTAfbekWfYOsjn3A2OCj+Nt5u/2I+
+	oSB74g9mNvuViwRFFMIUHdVR+QvOJ5t+TDdzGZbx64T0IysI4Ft5yhpb1ezJOjR1yxpF
+	AISXJ2TlU+fVLL7nC8OTu8jy6swyCnV/pWceJV/cD3s+w9MtnArSULt76ycL/IiAxmWS
+	8uMw==
+X-Received: by 10.98.74.82 with SMTP id x79mr28911930pfa.163.1451508902365;
+	Wed, 30 Dec 2015 12:55:02 -0800 (PST)
 Received: from ?IPv6:2601:646:8802:5d5c:30cb:380:8779:5f88?
 	([2601:646:8802:5d5c:30cb:380:8779:5f88])
 	by smtp.gmail.com with ESMTPSA id
-	r83sm30375208pfa.13.2015.12.30.12.48.27
-	for <openembedded-devel@lists.openembedded.org>
+	sg4sm96891354pac.48.2015.12.30.12.55.01
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 Dec 2015 12:48:28 -0800 (PST)
+	Wed, 30 Dec 2015 12:55:01 -0800 (PST)
 Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
 X-Pgp-Agent: GPGMail 2.6b2
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1451506017-6206-1-git-send-email-twoerner@gmail.com>
-Date: Wed, 30 Dec 2015 12:48:23 -0800
-Message-Id: <D7088E06-64E6-48CF-B84B-4E47815CFA38@gmail.com>
-References: <1451506017-6206-1-git-send-email-twoerner@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <5684329F.3090206@gmail.com>
+Date: Wed, 30 Dec 2015 12:54:57 -0800
+Message-Id: <C8D964A5-FC00-4FAD-B8BA-CA6AE5801970@gmail.com>
+References: <56837748.6020903@gmail.com>
+	<CAMKF1spcVXiHxyPnTg=nYUOM_2yc2vU6x+VwG6unWH3wdNKeag@mail.gmail.com>
+	<5684329F.3090206@gmail.com>
+To: Trevor Woerner <twoerner@gmail.com>
 X-Mailer: Apple Mail (2.3112)
-Subject: Re: [meta-oe][PATCH v2] nodejs: update from 4.2.3 to 4.2.4
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: chromium 40.0.2214.91 doesn't like gcc5.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,90 +52,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Dec 2015 20:48:30 -0000
-X-Groupsio-MsgNum: 59242
+X-List-Received-Date: Wed, 30 Dec 2015 20:55:04 -0000
+X-Groupsio-MsgNum: 59243
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_95063FF6-A96C-4C12-8295-BDBD17D36763";
+	boundary="Apple-Mail=_4FF66A93-E75B-4DB2-9D6B-93EC337DDD3D";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_95063FF6-A96C-4C12-8295-BDBD17D36763
+--Apple-Mail=_4FF66A93-E75B-4DB2-9D6B-93EC337DDD3D
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
 	charset=us-ascii
 
 
-> On Dec 30, 2015, at 12:06 PM, Trevor Woerner <twoerner@gmail.com> =
+> On Dec 30, 2015, at 11:38 AM, Trevor Woerner <twoerner@gmail.com> =
 wrote:
 >=20
-> Additionally, the LICENSE file changed: Updated node LICENSE file with =
-new npm
-> license:
+> Hi Khem,
 >=20
-> - npm's license changed from being copyrighted "Isaac Z. Schlueter" to =
-"npm,
->  Inc. and Contributors"; more text was added clarifying the copyrights =
+> On 12/30/15 13:04, Khem Raj wrote:
+>> can you backport and report back
+>>=20
+>> =
+https://chromium.googlesource.com/v8/v8/+/e28183b5977a2d2732f7f8b9a2f26637=
+c9566585%5E%21/#F0
+>=20
+> That diff includes 4 patches:
+>    Index: src/bignum.cc
+>    Index: src/compiler/ia32/code-generator-ia32.cc
+>    Index: src/compiler/x64/code-generator-x64.cc
+>    Index: test/cctest/compiler/test-js-typed-lowering.cc
+>=20
+> All of these patches only apply to the code in the "v8" folder.
+>=20
+> The 4th one doesn't apply because I can't find a
+> "test-js-typed-lowering.cc" file anywhere in our version 40 sources.
+>=20
+> Although the files "v8/src/compiler/ia32/code-generator-ia32.cc" and
+> "v8/src/compiler/x64/code-generator-x64.cc" exist, these two patches
+> don't apply since the code in those files doesn't look anything like
+> what these patches are trying to patch.
+>=20
+> The first patch does apply, with the file path change (add v8 to the
+> front), and a 2 line offset.
+>=20
+> For some reason this bignum.cc source is found in both v8/src and
+> third_party/WebKit/Source/wtf/dtoa and, apart from some extra =
+namespace
+> scope, is very similar (if not the same). So I added a second patch to
+> this diff to also correctly patch the code in third_party/... .
+>=20
+> Replacing Max's solution for this one does cause this one file to
+> compile fine, but other -Werror=3Dstrict-overflow problems are simply
+> found later (see attached).
+>=20
+> Combining both Max's patch and this one causes this part of the build =
 to
->  things such as the npm logo, the typeface, and trademarks
+> succeed, but still causes the -Werror=3Duninitialized problem to =
+happen as
+> I reported earlier:
 
-Does this mean we need to alter packaging of these files ?
-are there any commercial implications ?
+Suppressing a given Werror is a workaround. So I am more interested in =
+code changes instead
+if they are new so be it we can fix and send them over to chromium =
+folks.
 
 >=20
-> - further text was added clarifying the separation between npm itself =
-and the
->  various npm packages, their data and licenses
+> |
+> =
+../../third_party/WebKit/Source/core/inspector/InspectorTimelineAgent.cpp:=
+234:8:
+> error: '<anonymous>.blink::TimelineThreadState::inKnownLayerTask' is
+> used uninitialized in this function [-Werror=3Duninitialized]
 >=20
-> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-> ---
-> .../recipes-devtools/nodejs/{nodejs_4.2.3.bb =3D> nodejs_4.2.4.bb}    =
-| 6 +++---
-> 1 file changed, 3 insertions(+), 3 deletions(-)
-> rename meta-oe/recipes-devtools/nodejs/{nodejs_4.2.3.bb =3D> =
-nodejs_4.2.4.bb} (93%)
->=20
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.2.3.bb =
-b/meta-oe/recipes-devtools/nodejs/nodejs_4.2.4.bb
-> similarity index 93%
-> rename from meta-oe/recipes-devtools/nodejs/nodejs_4.2.3.bb
-> rename to meta-oe/recipes-devtools/nodejs/nodejs_4.2.4.bb
-> index 66a3c11..18e23b7 100644
-> --- a/meta-oe/recipes-devtools/nodejs/nodejs_4.2.3.bb
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.2.4.bb
-> @@ -1,7 +1,7 @@
-> DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
-> HOMEPAGE =3D "http://nodejs.org"
-> LICENSE =3D "MIT & BSD & Artistic-2.0"
-> -LIC_FILES_CHKSUM =3D =
-"file://LICENSE;md5=3Dee90ba97d933fc8d56e97812b7dd62e9"
-> +LIC_FILES_CHKSUM =3D =
-"file://LICENSE;md5=3D963ca39eebcb15ac618bc3006504ae3f"
->=20
-> DEPENDS =3D "openssl"
->=20
-> @@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 =3D "(!.*mips64).*"
-> SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
->     file://no-registry.patch \
-> "
-> -SRC_URI[md5sum] =3D "529a8abd4ca5a2225636767d3f14c382"
-> -SRC_URI[sha256sum] =3D =
-"5008ade5feb4b089f59163f66bffddc113f27de5d78edf203e39435c2c5d554f"
-> +SRC_URI[md5sum] =3D "86e4d0d8b626f6e60ca7bef02f2543d2"
-> +SRC_URI[sha256sum] =3D =
-"4ee244ffede7328d9fa24c3024787e71225b7abaac49fe2b30e68b27460c10ec"
->=20
-> S =3D "${WORKDIR}/node-v${PV}"
->=20
-> --
-> 2.7.0.rc3
->=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+This is easily fixable by helping compiler with defining this to 0 or =
+something where its declared.
 
 
---Apple-Mail=_95063FF6-A96C-4C12-8295-BDBD17D36763
+> Best regards,
+>    Trevor
+> <strict-overflow.txt>
+
+
+--Apple-Mail=_4FF66A93-E75B-4DB2-9D6B-93EC337DDD3D
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -142,9 +145,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlaEQxsACgkQuwUzVZGdMxQhtACePdeS1B41rmCy3kBfBbUQ5xgN
-7nQAniXADKjkBRNeLCLKyFVL2bcBybRx
-=vLNj
+iEYEARECAAYFAlaERKQACgkQuwUzVZGdMxTCUACdEMKeta/UjaFF0XDlnW7qDyrD
+TkAAniHVNZFMjQBa5+qUTlFFuDDgy+Eo
+=pP2+
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_95063FF6-A96C-4C12-8295-BDBD17D36763--
+--Apple-Mail=_4FF66A93-E75B-4DB2-9D6B-93EC337DDD3D--
