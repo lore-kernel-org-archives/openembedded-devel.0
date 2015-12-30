@@ -1,40 +1,39 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id BCB096FFCD
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 1ED196011A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 16:53:55 +0000 (UTC)
-Received: by mail-ig0-f170.google.com with SMTP id mw1so53726131igb.1
+	Wed, 30 Dec 2015 17:28:29 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id b14so56831448wmb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 08:53:56 -0800 (PST)
+	Wed, 30 Dec 2015 09:28:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:cc:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-type:content-transfer-encoding;
-	bh=IOP/2jwh1gICxlyA6dQnJo7/YcwhX1MRXvMiKoePwJU=;
-	b=J/Xrt7W6/9LG2v6xZwQFHQh2uDwuMCWA9nuO4mRdM9SwOVt5vQPgbqRgXrh2SjAEme
-	7Fd8zP8XbSUSTwdNjidqnkQ/3YhO3CsyUr+QKl1ctNa7caHEujfSIrmo81+JH9nJbAs7
-	6H/e+3V8ClOT6zN99urC/c4vj1YJQfC9Fi8VdPHJMhNTZgKsaS2TVN1/SrNNTd3z8XYD
-	oAZcYmWm7w+0KlUM9bmY5QJRerJpmA6IcspK7z1uBcIa6X8TJnuEUaWWFG+Z4l4dSo50
-	np4a5E2wLuyYzA6ZLRPwSIT+dxCwlwyMPzS2o48fWDXorYUnMvgLOPLt61qa8oaMqQqU
-	7GVA==
-X-Received: by 10.50.78.70 with SMTP id z6mr16704755igw.92.1451494436097;
-	Wed, 30 Dec 2015 08:53:56 -0800 (PST)
-Received: from [192.168.141.85] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=mroR+AmSrWp7RblTDKAg8o3BsL1ZTo/p7eJwp7m8kzM=;
+	b=oHdlECmibMcoPJuGFYeqvSZBqG7LjtHVdvGivEIvAG+bnf51wgp32L9J04oN0oOL9v
+	F61LeRfxF91yQdSgLNsJNLf47i3hX8vzvAUjwFkRUBKPmeeWZHOXOh1Qi4Rbkhv8xcyz
+	Q/sTV6RYWbboAvxhhfcYHTAPgnxvzx8EwmpCtgilMaLcnhK73DhDdYxgtsHw+/eXIULb
+	u8OE3D/6LCVfTv29tkuuzgY98HEQjUhMQeSJG+/KbgjIwEruBUnAinFSLLUoYfKjYwxg
+	EubHsBw/i/2Nq/ozcYqylW1iP0MnCQcTGv3vBInk531FCvE1/CZqCNBM2neya4G3phhb
+	7lpg==
+X-Received: by 10.194.117.163 with SMTP id kf3mr71380727wjb.139.1451496510008; 
+	Wed, 30 Dec 2015 09:28:30 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	f74sm27175541ioe.6.2015.12.30.08.53.53
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 Dec 2015 08:53:55 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <56837748.6020903@gmail.com> <20151230165246.GE2263@jama>
-From: Trevor Woerner <twoerner@gmail.com>
-Message-ID: <56840C1D.7080800@gmail.com>
-Date: Wed, 30 Dec 2015 11:53:49 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
+	pn6sm66294283wjb.15.2015.12.30.09.28.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Dec 2015 09:28:28 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 30 Dec 2015 18:32:04 +0100
+To: Trevor Woerner <twoerner@gmail.com>
+Message-ID: <20151230173204.GG2263@jama>
+References: <56840B6A.3080001@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20151230165246.GE2263@jama>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: chromium 40.0.2214.91 doesn't like gcc5.3
+In-Reply-To: <56840B6A.3080001@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: next bitbake world run and updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,26 +46,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Dec 2015 16:53:57 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 30 Dec 2015 17:28:30 -0000
+X-Groupsio-MsgNum: 59229
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Sw7tCqrGA+HQ0/zt"
+Content-Disposition: inline
 
-On 12/30/15 11:52, Martin Jansa wrote:
-> On Wed, Dec 30, 2015 at 01:18:48AM -0500, Trevor Woerner wrote:
->> I noticed the recent gcc update from 5.2 to 5.3 in openembedded-core
->> seems to cause meta-browser's chromium build to fail with more warnings
->> being treated as errors. My MACHINE is intel-corei7-64, but I'm guessing
->> this probably happens on other architectures too.
->>
->> Is anyone looking at this?
->>
->> Is there any talk about this upstream?
-> It was fixed for gcc-5.2 with this patch:
-> http://lists.openembedded.org/pipermail/openembedded-devel/2015-November/104327.html
->
-> I'm surprised that it doesn't work with 5.3, but I can confirm the same
-> failures in latest "bitbake world" builds.
+--Sw7tCqrGA+HQ0/zt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I agree, I was surprised too. That's why I CC'ed Max on my email since I
-figured he'd be best positioned to comment on this :-)
+On Wed, Dec 30, 2015 at 11:50:50AM -0500, Trevor Woerner wrote:
+> Hi Martin,
+>=20
+> I'm hoping my nodejs_4.2.3.bb makes it into your next "State of bitbake
+> world" run and passes this time. When do you think your next "bitbake
+> world" will occur? I ask because since sending my v4 patches for
+> nodejs_4.2.3, node-v4.2.4 has been released.
 
+It's running for last 2 days already, it should be finished in next 2
+days. Your recent v4 is included (at least for qemux86*, qemuarm was
+already running when I've updated master-next and jansa/master
+branches).
+
+Previous "christmas" build was wasted, because of server issues in the
+middle of the build. As bonus I had time to go through cumulated logs
+and fix few more issues around for current build.
+
+> Do I send the list a patch of the delta between 4.2.3 and 4.2.4? Or do I
+> update my entire patchset and send a v5?
+
+I also hope that last 4.2.3 build will be OK and your change merged in
+master, so I would prefer separate patch just for 4.2.4.
+
+Regards,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--Sw7tCqrGA+HQ0/zt
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlaEFPwACgkQN1Ujt2V2gBzDyACdG1fDb6BqiYUGcxHozHoD7Ujf
+KNUAn2b316f/ILH9+sUAxkpoksJU7/Dj
+=u3ms
+-----END PGP SIGNATURE-----
+
+--Sw7tCqrGA+HQ0/zt--
