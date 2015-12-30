@@ -1,53 +1,43 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 8820360761
+Return-Path: <twoerner@gmail.com>
+Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
+	[209.85.213.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BE3C6067C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 19:06:32 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id u188so47867606wmu.1
+	Wed, 30 Dec 2015 19:38:11 +0000 (UTC)
+Received: by mail-ig0-f180.google.com with SMTP id to4so184835998igc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 11:06:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=dominion-thruhere-net.20150623.gappssmtp.com; s=20150623;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=l8fNm9gxR6aoNU95bSMm2Yb7W+aMpucBzLuVnDtu9/Q=;
-	b=DKACT8x4hOG3vcA0e0P9s9NDPlNVXrvKr6MWRabyLhwEUFjhfrfm9kS4RTG/fNlRNV
-	oeleWjDTGyTwAxkyNmV3JpjbhjbSiNNufH3zCZ3XFSypVMQLLKOaGCK5VbX3zX/JnZVk
-	5nLolWAVGybpcSrxexo5ygkCZTTTbm3PXbd+ZgpRId9NV5BYZrVRQuYDZIdOJgnmLnD+
-	YIrDGOoskaRX7K6qa62F+lTvuTh3EjiqddqkIc+1HVPlbGBbCUenVzD3/+PgO9Q8iy73
-	5BvRVoI/MVZNcMjRMrBXLMcvVuGDJ/U6L+r+/K5Z0tS3kFwxolxggglCzjatQSdVi2eN
-	LR6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:content-type:mime-version:subject:from
-	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
-	:to; bh=l8fNm9gxR6aoNU95bSMm2Yb7W+aMpucBzLuVnDtu9/Q=;
-	b=cpou4H6XRcbOe/WXudbYrktq9rC/JN7v2ExKUl68j9oDe3To+SXR5EeKPbUPda4sgi
-	A7mlkNgN4JBtV9tIQ9aeZ/wgfVx+g7T5/25tLTW9lwD+toYdxYbXfl0jBP+viI/IqomZ
-	WBoSBbHn3qWI/MXXrIYMi5Wm6FI62Cvf57H4NFjDOZByTdQUg6YRP5mBImzn0M0n9MIg
-	zQ8WCZubpKNNfQhNuNKGPxlcc2j3AA2Fgg1HiP6G7jp2X+eaNZC+akmfR5gScLMb/egH
-	r3Qk7Qz29iEOIeL2Bk1g5YozVmAF+WUg4J/Kjf9uBqYCckO86MTc70n3erVs5OEqsla9
-	V+PQ==
-X-Gm-Message-State: ALoCoQm5qYedly2g6iEASRbgfv/QrPKVPxNMJORfd7QrDxaK2f14XQkDyPqMBRucC6H7DPi++FtBBQvPh3UOl4bXWj95/wO65g==
-X-Received: by 10.28.52.213 with SMTP id b204mr76293031wma.32.1451502393077;
-	Wed, 30 Dec 2015 11:06:33 -0800 (PST)
-Received: from ?IPv6:2001:610:612::e546:4844:7194:5e16?
-	([2001:610:612:0:e546:4844:7194:5e16])
+	Wed, 30 Dec 2015 11:38:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:cc:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-type;
+	bh=KBPkxA4PifLFHj50a0ed4RAZ6n6oRjn3bffmBl6HIJU=;
+	b=XqXhZPPZ7QpmtbHUsvZEV53PbHwbeGWsrzfNVeQ5dnGLkOo8ddTzQVFQXeXLw9Y0+p
+	ILNnOgHbK20uV7wfVBRmzqZsHL3pBgVOGk8OACsifUZQgg+P6qPNLjvjdamGjRSggyVk
+	WZsTc83v9Ji50Qi4cnNBweIzY/pMVLZC7gBd2w9xcP1gYUTMMYeg9HxGYmtaTELOSnfw
+	Yiz3Ts90B8Z0QAcDrqIv+JF4SGRrAYpSrLNiFF1vy+L+ja/QOS0HoVSVGJLT3XKnEC7F
+	q1JnUApnhYbYE8bkB3C6N39bcbxDRyHOLygLbg0g78xA9n4QNjIIElbb8FMXeLZKHVuX
+	5lWA==
+X-Received: by 10.50.150.5 with SMTP id ue5mr51140198igb.50.1451504292735;
+	Wed, 30 Dec 2015 11:38:12 -0800 (PST)
+Received: from [192.168.141.85] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
 	by smtp.gmail.com with ESMTPSA id
-	jm4sm66458035wjb.7.2015.12.30.11.06.31
+	o80sm7624190ioe.15.2015.12.30.11.38.11
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 Dec 2015 11:06:31 -0800 (PST)
-Mime-Version: 1.0 (1.0)
-From: Koen Kooi <koen@dominion.thruhere.net>
-X-Mailer: iPhone Mail (13C75)
-In-Reply-To: <CAMKF1sqWtAXeVqRvVNOarUr9VupQpk5zANC6HR-tVXrOoeQ27g@mail.gmail.com>
-Date: Wed, 30 Dec 2015 20:06:31 +0100
-Message-Id: <91F3034A-0C35-4379-912C-D6B73AB35B41@dominion.thruhere.net>
-References: <1451483875-2370-1-git-send-email-koen@dominion.thruhere.net>
-	<CAMKF1sqWtAXeVqRvVNOarUr9VupQpk5zANC6HR-tVXrOoeQ27g@mail.gmail.com>
+	Wed, 30 Dec 2015 11:38:12 -0800 (PST)
 To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] mariadb: -native also needs gold workaround
+References: <56837748.6020903@gmail.com>
+	<CAMKF1spcVXiHxyPnTg=nYUOM_2yc2vU6x+VwG6unWH3wdNKeag@mail.gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Message-ID: <5684329F.3090206@gmail.com>
+Date: Wed, 30 Dec 2015 14:38:07 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1spcVXiHxyPnTg=nYUOM_2yc2vU6x+VwG6unWH3wdNKeag@mail.gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: chromium 40.0.2214.91 doesn't like gcc5.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,54 +50,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Dec 2015 19:06:35 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 30 Dec 2015 19:38:12 -0000
+X-Groupsio-MsgNum: 59240
+Content-Type: multipart/mixed; boundary="------------030700080908000706060102"
 
+--------------030700080908000706060102
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
+Hi Khem,
 
-> Op 30 dec. 2015 om 19:34 heeft Khem Raj <raj.khem@gmail.com> het volgende g=
-eschreven:
->=20
->> On Wed, Dec 30, 2015 at 5:57 AM, Koen Kooi <koen@dominion.thruhere.net> w=
-rote:
->> When the host distro uses gold mariadb-native fails to build.
->=20
-> what is the failure ?
+On 12/30/15 13:04, Khem Raj wrote:
+> can you backport and report back
+>
+> https://chromium.googlesource.com/v8/v8/+/e28183b5977a2d2732f7f8b9a2f26637c9566585%5E%21/#F0
 
-Not near a computer right now. The same one that you get for the regular rec=
-ipe without the TARGET_CFLAGS. It's in the patchwork discussion between Mart=
-in and Paul for the version update.
+That diff includes 4 patches:
+    Index: src/bignum.cc
+    Index: src/compiler/ia32/code-generator-ia32.cc
+    Index: src/compiler/x64/code-generator-x64.cc
+    Index: test/cctest/compiler/test-js-typed-lowering.cc
 
->=20
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->> ---
->> meta-oe/recipes-support/mysql/mariadb.inc | 3 +++
->> 1 file changed, 3 insertions(+)
->>=20
->> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-=
-support/mysql/mariadb.inc
->> index a6826c3..6a55476 100644
->> --- a/meta-oe/recipes-support/mysql/mariadb.inc
->> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
->> @@ -60,6 +60,9 @@ PACKAGECONFIG[setupdb] =3D ", ,,${PN}-setupdb"
->> # https://mariadb.atlassian.net/browse/MDEV-5982
->> TARGET_CFLAGS +=3D "-fuse-ld=3Dbfd"
->>=20
->> +BUILD_CFLAGS +=3D "-fuse-ld=3Dbfd"
->> +BUILD_CXXFLAGS +=3D "-fuse-ld=3Dbfd"
->> +
->> EXTRA_OECMAKE =3D "-DWITH_EMBEDDED_SERVER=3DON \
->>                  -DWITH_JEMALLOC=3Dno \
->>                  -DWITHOUT_TOKUDB=3DTRUE \
->> --
->> 2.0.1
->>=20
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
+All of these patches only apply to the code in the "v8" folder.
 
+The 4th one doesn't apply because I can't find a
+"test-js-typed-lowering.cc" file anywhere in our version 40 sources.
+
+Although the files "v8/src/compiler/ia32/code-generator-ia32.cc" and
+"v8/src/compiler/x64/code-generator-x64.cc" exist, these two patches
+don't apply since the code in those files doesn't look anything like
+what these patches are trying to patch.
+
+The first patch does apply, with the file path change (add v8 to the
+front), and a 2 line offset.
+
+For some reason this bignum.cc source is found in both v8/src and
+third_party/WebKit/Source/wtf/dtoa and, apart from some extra namespace
+scope, is very similar (if not the same). So I added a second patch to
+this diff to also correctly patch the code in third_party/... .
+
+Replacing Max's solution for this one does cause this one file to
+compile fine, but other -Werror=strict-overflow problems are simply
+found later (see attached).
+
+Combining both Max's patch and this one causes this part of the build to
+succeed, but still causes the -Werror=uninitialized problem to happen as
+I reported earlier:
+
+|
+../../third_party/WebKit/Source/core/inspector/InspectorTimelineAgent.cpp:234:8:
+error: '<anonymous>.blink::TimelineThreadState::inKnownLayerTask' is
+used uninitialized in this function [-Werror=uninitialized]
+
+Best regards,
+    Trevor
+
+--------------030700080908000706060102
+Content-Type: text/plain; charset=UTF-8;
+ name="strict-overflow.txt"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="strict-overflow.txt"
+
+fCBGQUlMRUQ6IHg4Nl82NC1mb3J0cmVzcy1saW51eC1nKysgIC1tNjQgLW1hcmNoPWNvcmVpNyAt
+bXR1bmU9Y29yZWk3IC1tZnBtYXRoPXNzZSAtbXNzZTQuMiAtLXN5c3Jvb3Q9L3ovbGF5ZXJpbmRl
+eC1tYXN0ZXIvbWlubm93bWF4L3RtcC9zeXNyb290cy9pbnRlbC1jb3JlaTctNjQgLU1NRCAtTUYg
+b2JqL3RoaXJkX3BhcnR5L1dlYktpdC9Tb3VyY2Uvd3RmL2R0b2Evd3RmLmJpZ251bS5vLmQgLURW
+OF9ERVBSRUNBVElPTl9XQVJOSU5HUyAtRF9GSUxFX09GRlNFVF9CSVRTPTY0IC1ERElTQUJMRV9O
+QUNMIC1EQ0hST01JVU1fQlVJTEQgLURUT09MS0lUX1ZJRVdTPTEgLURVSV9DT01QT1NJVE9SX0lN
+QUdFX1RSQU5TUE9SVCAtRFVTRV9BVVJBPTEgLURVU0VfQVNIPTEgLURVU0VfUEFOR089MSAtRFVT
+RV9DQUlSTz0xIC1EVVNFX0RFRkFVTFRfUkVOREVSX1RIRU1FPTEgLURVU0VfTElCSlBFR19UVVJC
+Tz0xIC1EVVNFX1gxMT0xIC1EVVNFX0NMSVBCT0FSRF9BVVJBWDExPTEgLURFTkFCTEVfT05FX0NM
+SUNLX1NJR05JTiAtREVOQUJMRV9QUkVfU1lOQ19CQUNLVVAgLURVU0VfWEkyX01UPTIgLURFTkFC
+TEVfUkVNT1RJTkc9MSAtREVOQUJMRV9XRUJSVEM9MSAtREVOQUJMRV9QRVBQRVJfQ0RNUyAtREVO
+QUJMRV9DT05GSUdVUkFUSU9OX1BPTElDWSAtREVOQUJMRV9OT1RJRklDQVRJT05TIC1EVVNFX1VE
+RVYgLURET05UX0VNQkVEX0JVSUxEX01FVEFEQVRBIC1ERU5BQkxFX1RBU0tfTUFOQUdFUj0xIC1E
+RU5BQkxFX0VYVEVOU0lPTlM9MSAtREVOQUJMRV9QTFVHSU5TPTEgLURFTkFCTEVfU0VTU0lPTl9T
+RVJWSUNFPTEgLURFTkFCTEVfVEhFTUVTPTEgLURFTkFCTEVfQVVUT0ZJTExfRElBTE9HPTEgLURF
+TkFCTEVfQkFDS0dST1VORD0xIC1ERU5BQkxFX0dPT0dMRV9OT1c9MSAtRENMRF9WRVJTSU9OPTIg
+LURDTEQyX0RBVEFfU09VUkNFPXN0YXRpYyAtREVOQUJMRV9QUklOVElORz0xIC1ERU5BQkxFX0JB
+U0lDX1BSSU5USU5HPTEgLURFTkFCTEVfUFJJTlRfUFJFVklFVz0xIC1ERU5BQkxFX1NQRUxMQ0hF
+Q0s9MSAtREVOQUJMRV9DQVBUSVZFX1BPUlRBTF9ERVRFQ1RJT049MSAtREVOQUJMRV9BUFBfTElT
+VD0xIC1ERU5BQkxFX1NFVFRJTkdTX0FQUD0xIC1ERU5BQkxFX01BTkFHRURfVVNFUlM9MSAtREVO
+QUJMRV9NRE5TPTEgLURFTkFCTEVfU0VSVklDRV9ESVNDT1ZFUlk9MSAtREVOQUJMRV9MT0FEX0NP
+TVBMRVRJT05fSEFDS1M9MSAtRFdURl9JTVBMRU1FTlRBVElPTj0xIC1ERU5BQkxFX09QRU5UWVBF
+X1ZFUlRJQ0FMPTEgLURFTkFCTEVfTEFZT1VUX1VOSVRfSU5fSU5MSU5FX0JPWEVTPTAgLURXVEZf
+VVNFX0NPTkNBVEVOQVRFRF9JTVBVTFNFX1JFU1BPTlNFUz0xIC1ERU5BQkxFX0lOUFVUX01VTFRJ
+UExFX0ZJRUxEU19VST0xIC1ERU5BQkxFX1dFQl9BVURJTz0xIC1EV1RGX1VTRV9XRUJBVURJT19G
+Rk1QRUc9MSAtRFdURl9VU0VfREVGQVVMVF9SRU5ERVJfVEhFTUU9MSAtRFVfVVNJTkdfSUNVX05B
+TUVTUEFDRT0wIC1EVV9FTkFCTEVfRFlMT0FEPTAgLURVX1NUQVRJQ19JTVBMRU1FTlRBVElPTiAt
+RFVTRV9MSUJQQ0k9MSAtRFVTRV9HTElCPTEgLURVU0VfTlNTPTEgLURfX1NURENfQ09OU1RBTlRf
+TUFDUk9TIC1EX19TVERDX0ZPUk1BVF9NQUNST1MgLUROREVCVUcgLUROVkFMR1JJTkQgLUREWU5B
+TUlDX0FOTk9UQVRJT05TX0VOQUJMRUQ9MCAtRF9GT1JUSUZZX1NPVVJDRT0yIC1JZ2VuIC1JLi4v
+Li4vdGhpcmRfcGFydHkvV2ViS2l0L1NvdXJjZSAtSS4uLy4uL3RoaXJkX3BhcnR5L1dlYktpdCAt
+SS4uLy4uL3RoaXJkX3BhcnR5L2ljdS9zb3VyY2UvaTE4biAtSS4uLy4uL3RoaXJkX3BhcnR5L2lj
+dS9zb3VyY2UvY29tbW9uIC1mc3RhY2stcHJvdGVjdG9yIC0tcGFyYW09c3NwLWJ1ZmZlci1zaXpl
+PTQgLVdlcnJvciAtcHRocmVhZCAtZm5vLXN0cmljdC1hbGlhc2luZyAtV2FsbCAtV25vLXVudXNl
+ZC1wYXJhbWV0ZXIgLVduby1taXNzaW5nLWZpZWxkLWluaXRpYWxpemVycyAtZnZpc2liaWxpdHk9
+aGlkZGVuIC1waXBlIC1mUElDIC1CL3ovbGF5ZXJpbmRleC1tYXN0ZXIvbWlubm93bWF4L3RtcC93
+b3JrL2NvcmVpNy02NC1mb3J0cmVzcy1saW51eC9jaHJvbWl1bS80MC4wLjIyMTQuOTEtcjAvY2hy
+b21pdW0tNDAuMC4yMjE0LjkxL3RoaXJkX3BhcnR5L2JpbnV0aWxzL0xpbnV4X3g2NC9SZWxlYXNl
+L2JpbiAtV25vLXVudXNlZC1sb2NhbC10eXBlZGVmcyAtbTY0IC1tYXJjaD14ODYtNjQgLU8yIC1m
+bm8taWRlbnQgLWZkYXRhLXNlY3Rpb25zIC1mZnVuY3Rpb24tc2VjdGlvbnMgLWZ1bndpbmQtdGFi
+bGVzIC1Xbm8tZXJyb3I9dW51c2VkLWxvY2FsLXR5cGVkZWZzIC1PMiAtcGlwZSAtZyAtZmVsaW1p
+bmF0ZS11bnVzZWQtZGVidWctdHlwZXMgLWZ2aXNpYmlsaXR5LWlubGluZXMtaGlkZGVuIC1Xbm8t
+YysrMHgtY29tcGF0IC1mbm8tZXhjZXB0aW9ucyAtZm5vLXJ0dGkgLWZuby10aHJlYWRzYWZlLXN0
+YXRpY3MgLWZ2aXNpYmlsaXR5LWlubGluZXMtaGlkZGVuIC1Xc2lnbi1jb21wYXJlIC1Xbm8tYysr
+MHgtY29tcGF0IC1zdGQ9Z251KysxMSAtV25vLW5hcnJvd2luZyAtV25vLWxpdGVyYWwtc3VmZml4
+ICAtYyAuLi8uLi90aGlyZF9wYXJ0eS9XZWJLaXQvU291cmNlL3d0Zi9kdG9hL2JpZ251bS5jYyAt
+byBvYmovdGhpcmRfcGFydHkvV2ViS2l0L1NvdXJjZS93dGYvZHRvYS93dGYuYmlnbnVtLm8KfCAu
+Li8uLi90aGlyZF9wYXJ0eS9XZWJLaXQvU291cmNlL3d0Zi9kdG9hL2JpZ251bS5jYzogSW4gbWVt
+YmVyIGZ1bmN0aW9uICd2b2lkIFdURjo6ZG91YmxlX2NvbnZlcnNpb246OkJpZ251bTo6QWxpZ24o
+Y29uc3QgV1RGOjpkb3VibGVfY29udmVyc2lvbjo6QmlnbnVtJiknOgp8IC4uLy4uL3RoaXJkX3Bh
+cnR5L1dlYktpdC9Tb3VyY2Uvd3RmL2R0b2EvYmlnbnVtLmNjOjcxNzozMTogZXJyb3I6IGFzc3Vt
+aW5nIHNpZ25lZCBvdmVyZmxvdyBkb2VzIG5vdCBvY2N1ciB3aGVuIHNpbXBsaWZ5aW5nIGNvbmRp
+dGlvbmFsIHRvIGNvbnN0YW50IFstV2Vycm9yPXN0cmljdC1vdmVyZmxvd10KfCAgICAgICAgICAg
+ICAgZm9yIChpbnQgaSA9IDA7IGkgPCB6ZXJvX2RpZ2l0czsgKytpKSB7CnwgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIF4KfCAuLi8uLi90aGlyZF9wYXJ0eS9XZWJLaXQvU291cmNlL3d0
+Zi9kdG9hL2JpZ251bS5jYzo3MTc6MzE6IGVycm9yOiBhc3N1bWluZyBzaWduZWQgb3ZlcmZsb3cg
+ZG9lcyBub3Qgb2NjdXIgd2hlbiBzaW1wbGlmeWluZyBjb25kaXRpb25hbCB0byBjb25zdGFudCBb
+LVdlcnJvcj1zdHJpY3Qtb3ZlcmZsb3ddCg==
+
+--------------030700080908000706060102--
