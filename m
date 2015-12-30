@@ -1,45 +1,41 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C81460588
+Return-Path: <twoerner@gmail.com>
+Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
+	[209.85.213.171])
+	by mail.openembedded.org (Postfix) with ESMTP id CEDA76FFEF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 20:55:01 +0000 (UTC)
-Received: by mail-pf0-f175.google.com with SMTP id 78so146545723pfw.2
+	Wed, 30 Dec 2015 22:03:33 +0000 (UTC)
+Received: by mail-ig0-f171.google.com with SMTP id mv3so152652167igc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 12:55:02 -0800 (PST)
+	Wed, 30 Dec 2015 14:03:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=xqH7FrFw6JKFTPNKYdwGKHFt/DctJ2n/MeOt9qBHpSw=;
-	b=O3sUuVfo28j+oWv3wbKav21FJY76UVxxHaTVAEZ9qYwWzIfofxD0AKatWGGEw6R8IL
-	vOEVCi7NAcMmT8M8x4/tZvcfDYydKgeM/qwOFa7Kk1Au7SquRN7sVAEDkh38mgyZP1HQ
-	p/ZJcAtLReXXD8YXm/nJNe/yTfJYDKNKoj+lo3gbTAfbekWfYOsjn3A2OCj+Nt5u/2I+
-	oSB74g9mNvuViwRFFMIUHdVR+QvOJ5t+TDdzGZbx64T0IysI4Ft5yhpb1ezJOjR1yxpF
-	AISXJ2TlU+fVLL7nC8OTu8jy6swyCnV/pWceJV/cD3s+w9MtnArSULt76ycL/IiAxmWS
-	8uMw==
-X-Received: by 10.98.74.82 with SMTP id x79mr28911930pfa.163.1451508902365;
-	Wed, 30 Dec 2015 12:55:02 -0800 (PST)
-Received: from ?IPv6:2601:646:8802:5d5c:30cb:380:8779:5f88?
-	([2601:646:8802:5d5c:30cb:380:8779:5f88])
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=+bDJXdjc4xoT3TbjuA5pLlosK1+cy9P26PtBhImipvw=;
+	b=U21ktXCOd4NunBs1THyGPQ37TD6ScwvcPye1xQ7P7x91uUtB4g8facfeNMGyulkoet
+	sML6E33wmGQI2TOEIbXuJ/nYWkskJTuUrvYTevxJ+ESoswB5GB+dmDV84DVX3TxeJKhB
+	R6iJmyCGWYaUa6kLBI3tXjhbho8lS8jRVV+301CfZJP2/GT04vafzUMXvU1JjFFwRMoL
+	aEsbub38c92qoY+ARohhpPcUJQoO9xQD6i3jxbtwtPWWBE60P6xDbG2takS2tLqA5f+w
+	WbyStWzXfPID4qWY3TRIzJmqS7L5Tc1UaET9ZHJI9GDMd8ILJG8+XHGimDhylbuN7klp
+	lWXg==
+X-Received: by 10.50.155.43 with SMTP id vt11mr36765051igb.6.1451513014416;
+	Wed, 30 Dec 2015 14:03:34 -0800 (PST)
+Received: from [192.168.141.85] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
 	by smtp.gmail.com with ESMTPSA id
-	sg4sm96891354pac.48.2015.12.30.12.55.01
+	o80sm7816616ioe.15.2015.12.30.14.03.33
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 Dec 2015 12:55:01 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <5684329F.3090206@gmail.com>
-Date: Wed, 30 Dec 2015 12:54:57 -0800
-Message-Id: <C8D964A5-FC00-4FAD-B8BA-CA6AE5801970@gmail.com>
-References: <56837748.6020903@gmail.com>
-	<CAMKF1spcVXiHxyPnTg=nYUOM_2yc2vU6x+VwG6unWH3wdNKeag@mail.gmail.com>
-	<5684329F.3090206@gmail.com>
-To: Trevor Woerner <twoerner@gmail.com>
-X-Mailer: Apple Mail (2.3112)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: chromium 40.0.2214.91 doesn't like gcc5.3
+	Wed, 30 Dec 2015 14:03:33 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org
+References: <1451506017-6206-1-git-send-email-twoerner@gmail.com>
+	<D7088E06-64E6-48CF-B84B-4E47815CFA38@gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Message-ID: <568454B1.4080803@gmail.com>
+Date: Wed, 30 Dec 2015 17:03:29 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+In-Reply-To: <D7088E06-64E6-48CF-B84B-4E47815CFA38@gmail.com>
+Subject: Re: [meta-oe][PATCH v2] nodejs: update from 4.2.3 to 4.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,102 +48,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Dec 2015 20:55:04 -0000
-X-Groupsio-MsgNum: 59243
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_4FF66A93-E75B-4DB2-9D6B-93EC337DDD3D";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-
---Apple-Mail=_4FF66A93-E75B-4DB2-9D6B-93EC337DDD3D
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-
-> On Dec 30, 2015, at 11:38 AM, Trevor Woerner <twoerner@gmail.com> =
-wrote:
->=20
-> Hi Khem,
->=20
-> On 12/30/15 13:04, Khem Raj wrote:
->> can you backport and report back
->>=20
->> =
-https://chromium.googlesource.com/v8/v8/+/e28183b5977a2d2732f7f8b9a2f26637=
-c9566585%5E%21/#F0
->=20
-> That diff includes 4 patches:
->    Index: src/bignum.cc
->    Index: src/compiler/ia32/code-generator-ia32.cc
->    Index: src/compiler/x64/code-generator-x64.cc
->    Index: test/cctest/compiler/test-js-typed-lowering.cc
->=20
-> All of these patches only apply to the code in the "v8" folder.
->=20
-> The 4th one doesn't apply because I can't find a
-> "test-js-typed-lowering.cc" file anywhere in our version 40 sources.
->=20
-> Although the files "v8/src/compiler/ia32/code-generator-ia32.cc" and
-> "v8/src/compiler/x64/code-generator-x64.cc" exist, these two patches
-> don't apply since the code in those files doesn't look anything like
-> what these patches are trying to patch.
->=20
-> The first patch does apply, with the file path change (add v8 to the
-> front), and a 2 line offset.
->=20
-> For some reason this bignum.cc source is found in both v8/src and
-> third_party/WebKit/Source/wtf/dtoa and, apart from some extra =
-namespace
-> scope, is very similar (if not the same). So I added a second patch to
-> this diff to also correctly patch the code in third_party/... .
->=20
-> Replacing Max's solution for this one does cause this one file to
-> compile fine, but other -Werror=3Dstrict-overflow problems are simply
-> found later (see attached).
->=20
-> Combining both Max's patch and this one causes this part of the build =
-to
-> succeed, but still causes the -Werror=3Duninitialized problem to =
-happen as
-> I reported earlier:
-
-Suppressing a given Werror is a workaround. So I am more interested in =
-code changes instead
-if they are new so be it we can fix and send them over to chromium =
-folks.
-
->=20
-> |
-> =
-../../third_party/WebKit/Source/core/inspector/InspectorTimelineAgent.cpp:=
-234:8:
-> error: '<anonymous>.blink::TimelineThreadState::inKnownLayerTask' is
-> used uninitialized in this function [-Werror=3Duninitialized]
->=20
-
-This is easily fixable by helping compiler with defining this to 0 or =
-something where its declared.
-
-
-> Best regards,
->    Trevor
-> <strict-overflow.txt>
-
-
---Apple-Mail=_4FF66A93-E75B-4DB2-9D6B-93EC337DDD3D
+X-List-Received-Date: Wed, 30 Dec 2015 22:03:36 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
 
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
+On 12/30/15 15:48, Khem Raj wrote:
+>> On Dec 30, 2015, at 12:06 PM, Trevor Woerner <twoerner@gmail.com> wrote:
+>>
+>> Additionally, the LICENSE file changed: Updated node LICENSE file with new npm
+>> license:
+>>
+>> - npm's license changed from being copyrighted "Isaac Z. Schlueter" to "npm,
+>>  Inc. and Contributors"; more text was added clarifying the copyrights to
+>>  things such as the npm logo, the typeface, and trademarks
+> Does this mean we need to alter packaging of these files ?
+> are there any commercial implications ?
 
-iEYEARECAAYFAlaERKQACgkQuwUzVZGdMxTCUACdEMKeta/UjaFF0XDlnW7qDyrD
-TkAAniHVNZFMjQBa5+qUTlFFuDDgy+Eo
-=pP2+
------END PGP SIGNATURE-----
+I'm not a lawyer so I can't say for certain and, to be honest, I don't
+spend much time understanding all the licensing issues revolving around
+Free/OpenSource Software, but both before and after this change the
+licensing of npm itself was and is Artistic License 2.0.
 
---Apple-Mail=_4FF66A93-E75B-4DB2-9D6B-93EC337DDD3D--
+before:
+
+-    Copyright (c) Isaac Z. Schlueter
+-    All rights reserved.
+-    npm is released under the Artistic 2.0 License.
+-    The text of the License follows:
+
+after:
+
++    The npm application
++    Copyright (c) npm, Inc. and Contributors
++    Licensed on the terms of The Artistic License 2.0
+... and then it goes on to mention that npm packages are licensed by
+their creators, npm isn't responsible for them or their contents, and
+specifies the ownership of various trademarks, logos, and the licensing
+of the typeface used on their website.
+
+So my best guess is that nothing has changed other than a legal entity
+was created "npm, Inc." to oversee npm instead of one person being
+personally responsible. But, like I said, I'm no expert in these things.
+
