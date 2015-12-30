@@ -1,35 +1,42 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f179.google.com (mail-pf0-f179.google.com
-	[209.85.192.179])
-	by mail.openembedded.org (Postfix) with ESMTP id DE25E60620
+Return-Path: <twoerner@gmail.com>
+Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id F372160088
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 15:52:03 +0000 (UTC)
-Received: by mail-pf0-f179.google.com with SMTP id 65so98862504pff.3
+	Wed, 30 Dec 2015 15:55:05 +0000 (UTC)
+Received: by mail-ig0-f172.google.com with SMTP id ph11so182426965igc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2015 07:52:04 -0800 (PST)
+	Wed, 30 Dec 2015 07:55:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=NoP3A5IdFSHUU2xtrKqWj80jN+BqdaA5IEbfruFI30c=;
-	b=GcYBL4TxjeIOlfi18xuXkgvfz/RQ7NKQIa9BqzC3k6lI3priASsrjIWJpaDmN5R+2N
-	e2zLuT+5VDy5gAJelXJA2/lCQCWEjd2HePxvnM0XOj+WPViS4E8Zvqn8X9HJmWWzpqqV
-	O16O+5uThLrB+pQNlWwaUcvYKNXSUr8CGVDz4Qo41JRt0I35bVgSYzZRRmr7aH54zB6U
-	zyDgMDQ0y9q5ikVzqvTVG9RK/ZYJ9PVzZKEYmz1aneFTjG+QDqpeQU77UecP9Kf7NQGg
-	+ZzBDz/5um+Zg3IWtERUdR5ZNn9pPsInG81ZhblzmmI5HyjClzk9O3gkPHBpA6bk+Bc8
-	mVNg==
-X-Received: by 10.98.80.144 with SMTP id g16mr94149097pfj.68.1451490723921;
-	Wed, 30 Dec 2015 07:52:03 -0800 (PST)
-Received: from Pahoa2.hsd1.ca.comcast.net (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	u14sm90970234pfi.58.2015.12.30.07.52.02
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 30 Dec 2015 07:52:02 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	joe_macdonald@mentor.com
-Date: Wed, 30 Dec 2015 07:51:58 -0800
-Message-Id: <1451490718-25620-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-networking][PATCH] wireshark: package update to 2.0.1
+	h=subject:to:references:cc:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-type:content-transfer-encoding;
+	bh=svLWgi4v4GcGlJ1f2HMUfCC+EffdDBMNukhK+4OjDQU=;
+	b=f66WgbsvQKoWHqsyhycg4Z5PprCqGiQPQ+0eCK/U/FCMCwoOM2FaC7H5SNY7WCWA1R
+	FIk7jz8/kmM3zC7GySNFU7PLIAkLlWUUslHQntWj7D3lqH2V3vOYhswE1T6LM7rw85Pn
+	3H4Z5jfHDCYEwTdsieuJHN0jldW/yOepUkcAc0jXk0fr47zpM73wfFP8jQYkSNF32O5Q
+	kYIu1Y5P8xbzYi9OXY2goeKWGobUX9f2hOpcc7dvHG6eMIO1TlmUUifsxPZdJsMcRIcm
+	+beZCTSu2Dpn38h3Zm+jT2y+RWLFscCZ3FeOQSdfDxx0mIc0KPab/hZ7/SphtoEI0CfB
+	ioCQ==
+X-Received: by 10.50.141.161 with SMTP id rp1mr62312121igb.28.1451490906528;
+	Wed, 30 Dec 2015 07:55:06 -0800 (PST)
+Received: from [192.168.141.85] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	by smtp.gmail.com with ESMTPSA id
+	f74sm27098748ioe.6.2015.12.30.07.55.05
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 30 Dec 2015 07:55:05 -0800 (PST)
+To: Max Krummenacher <max.oss.09@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <56837748.6020903@gmail.com> <1451489161.2176.12.camel@gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Message-ID: <5683FE56.8080208@gmail.com>
+Date: Wed, 30 Dec 2015 10:55:02 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+In-Reply-To: <1451489161.2176.12.camel@gmail.com>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: chromium 40.0.2214.91 doesn't like gcc5.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,33 +49,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Dec 2015 15:52:04 -0000
+X-List-Received-Date: Wed, 30 Dec 2015 15:55:07 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../wireshark/{wireshark_2.0.0.bb => wireshark_2.0.1.bb}              | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_2.0.0.bb => wireshark_2.0.1.bb} (94%)
+Hi Max,
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.0.0.bb b/meta-networking/recipes-support/wireshark/wireshark_2.0.1.bb
-similarity index 94%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.0.0.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_2.0.1.bb
-index 7dcc5a7..42a1b29 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.0.0.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.0.1.bb
-@@ -8,8 +8,8 @@ DEPENDS = "perl-native pcre expat glib-2.0 sbc"
- 
- SRC_URI = "https://2.na.dl.wireshark.org/src/${BP}.tar.bz2"
- 
--SRC_URI[md5sum] = "5909af2a09a9a3023ba61bc62e787ad2"
--SRC_URI[sha256sum] = "90026c761a85701d7783c7e2eaa4c1de247dfbadbd53221df355f121e42691dd"
-+SRC_URI[md5sum] = "c1610ab2238965363b811e5188750fb1"
-+SRC_URI[sha256sum] = "c9bd07dd0d0045d6ca7537390a1afbcdf33716d193ea7d7084ae4f6c30b683ab"
- 
- PE = "1"
- 
--- 
-2.3.5
+On 12/30/15 10:26, Max Krummenacher wrote:
+> Hi Trevor
+>
+> Am Mittwoch, den 30.12.2015, 01:18 -0500 schrieb Trevor Woerner:
+>> I noticed the recent gcc update from 5.2 to 5.3 in openembedded-core
+>> seems to cause meta-browser's chromium build to fail with more
+>> warnings being treated as errors.
+> I tried to build master with GCC 5.3 for an armv7 target just now.
+> The same error that you see pops up.
 
+Thanks for trying this with a different MACHINE and confirming it's
+there too.
+
+> I propose to lower the strict-overflow to a warning again to get
+> rid of this errors once and for all.
+>
+> The following made the build work for me:
+
+Is there any way to set the flags per compilation unit, or
+per-directory? According to the source layout, the problem is in a file
+identified as "third party". In that case it's understandable that
+someone else's code has an issue. But it would be nice to keep this flag
+for the core chromium build (since that's what the chromium developers set).
+
+Maybe a newer version already has a fix for this in the code (which
+would be a better place to fix an issue such as this)?
+
+Best regards,
+    Trevor
 
