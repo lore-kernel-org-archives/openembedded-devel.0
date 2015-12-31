@@ -1,24 +1,24 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E265C60851
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4869060796
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Dec 2015 09:14:38 +0000 (UTC)
+	Thu, 31 Dec 2015 09:26:18 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id tBV9EcCf021679
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tBV9QIRr028175
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Dec 2015 01:14:38 -0800
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	Thu, 31 Dec 2015 01:26:19 -0800 (PST)
+Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 31 Dec 2015 01:14:37 -0800
-From: <rongqing.li@windriver.com>
+	14.3.248.2; Thu, 31 Dec 2015 01:26:17 -0800
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 31 Dec 2015 17:01:09 +0800
-Message-ID: <1451552469-6237-1-git-send-email-rongqing.li@windriver.com>
+Date: Thu, 31 Dec 2015 17:26:34 +0800
+Message-ID: <1451553994-28930-1-git-send-email-jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking][V2] net-snmp: fix the replacement in net-snmp-config
+Subject: [meta-java][PATCH] classpath: fix invalid options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,45 +31,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Dec 2015 09:14:39 -0000
+X-List-Received-Date: Thu, 31 Dec 2015 09:26:19 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+From: Jackie Huang <jackie.huang@windriver.com>
 
-when net-snmp-config is used to configure by other package, and fail since
-/libnl3 is not found, in fact, it should be -I/usr/include/libnl3, and is
-modified as /libnl3 incorrectly.
+After updated to version 0.99, the following options
+became invalid:
 
-instead of modify the net-snmp-config for target, the one under
-${bindir_crossscripts} should be replaced with ${TAGING_INCDIR}
+* --with-ecj: use JAVAC env variable instead
+* --with-fastjar: change to --with-jar
+* --with-vm: uae JAVA env variable instead
+* --disable-qt4-peer: invalid even in 0.93, just drop it.
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ recipes-core/classpath/classpath.inc | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-index b32d842..68eea3f 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-@@ -63,8 +63,7 @@ do_install_append() {
-     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/snmpd
-     install -m 644 ${WORKDIR}/snmpd.conf ${D}${sysconfdir}/snmp/
-     install -m 644 ${WORKDIR}/snmptrapd.conf ${D}${sysconfdir}/snmp/
--    sed -e "s@-I/usr/include@@g" \
--        -e "s@^prefix=.*@prefix=${STAGING_DIR_HOST}@g" \
-+    sed    -e "s@^prefix=.*@prefix=${STAGING_DIR_HOST}@g" \
-         -e "s@^exec_prefix=.*@exec_prefix=${STAGING_DIR_HOST}@g" \
-         -e "s@^includedir=.*@includedir=${STAGING_INCDIR}@g" \
-         -e "s@^libdir=.*@libdir=${STAGING_LIBDIR}@g" \
-@@ -98,6 +97,8 @@ net_snmp_sysroot_preprocess () {
-     if [ -e ${D}${bindir}/net-snmp-config ]; then
-         install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-         install -m 755 ${D}${bindir}/net-snmp-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-+        sed -e "s@-I/usr/include@-I${STAGING_INCDIR}@g" \
-+          -i  ${SYSROOT_DESTDIR}${bindir_crossscripts}/net-snmp-config
-     fi
- }
+diff --git a/recipes-core/classpath/classpath.inc b/recipes-core/classpath/classpath.inc
+index 1bdfd78..2be849b 100644
+--- a/recipes-core/classpath/classpath.inc
++++ b/recipes-core/classpath/classpath.inc
+@@ -28,24 +28,21 @@ SRC_URI = "${GNU_MIRROR}/classpath/classpath-${PV}.tar.gz"
+ S = "${WORKDIR}/${PBN}-${PV}"
+ 
+ export JAVA = "java"
++export JAVAC = "javac"
+ 
+ EXTRA_OECONF = "\
+   --with-glibj \
+-  --with-ecj=javac \
+-  --with-fastjar=fastjar \
++  --with-jar=${STAGING_BINDIR_NATIVE}/fastjar \
+   --includedir=${includedir}/classpath \
+-  --with-vm=java \
+   --disable-Werror \
+   --with-antlr-jar=${STAGING_DATADIR_JAVA_NATIVE}/antlr.jar \
+   --with-gmp=${STAGING_LIBDIR}/.. \
+   --disable-alsa \
+   --disable-dssi \
+-  --disable-qt4-peer \
+   --disable-plugin \
+   --enable-gconf-peer \
+   --enable-gtk-peer \
+   --enable-local-sockets \
+-  --with-vm=java \
+   "
+ 
  
 -- 
 1.9.1
