@@ -1,24 +1,39 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4869060796
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id C18BC6057B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Dec 2015 09:26:18 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id tBV9QIRr028175
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 31 Dec 2015 13:52:52 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id f206so93703515wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Dec 2015 01:26:19 -0800 (PST)
-Received: from pek-kkang-d2.wrs.com (128.224.162.180) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 31 Dec 2015 01:26:17 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 31 Dec 2015 17:26:34 +0800
-Message-ID: <1451553994-28930-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Thu, 31 Dec 2015 05:52:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=2rvgqzr5MltSdAyzd7rx3ubntpc/KLmCsizn+vUCljg=;
+	b=h/ImuzrWnNFFMa9ssoVjX3k6Ny5pXYZ9L1f53h+Qu0Vu6ul+qa3koQtl7UH5h8Tqts
+	hmWeJ9b3Nv0kRnlJtmJ/nwPY1RTncICYFj71PMb1iRoHQHN02Duh2EjNsb/svHa+pMln
+	X2kQWh2hfWufJzOAOUg6tNUFI/7CUwUK9xbB8ZAu0Zfiiw2yO8324vJKXHKz9X3NdKju
+	EpigiuGSScYGrKa18C7oc6XTJuzoFh5kvP22eT/NTV5sp0V/i+VVSPKBQWpz3JYiIsK+
+	cJjhNSBkDa2QooYg6FjCTjZ4WB9hgjmF1GF7JspnHYEN7pNjk73bAUP0ZRsSAs9ZKYDO
+	ReKQ==
+X-Received: by 10.194.79.201 with SMTP id l9mr84779443wjx.151.1451569972732;
+	Thu, 31 Dec 2015 05:52:52 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	m16sm61922449wmb.13.2015.12.31.05.52.51
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 31 Dec 2015 05:52:51 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 31 Dec 2015 14:56:44 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20151231135644.GA2255@jama>
+References: <cover.1450888554.git.akuster808@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-java][PATCH] classpath: fix invalid options
+In-Reply-To: <cover.1450888554.git.akuster808@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [PATCH v2 00/54] Jentrho-next pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,56 +46,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Dec 2015 09:26:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 31 Dec 2015 13:52:56 -0000
+X-Groupsio-MsgNum: 59255
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="+QahgC5+KEYLbs62"
+Content-Disposition: inline
 
-From: Jackie Huang <jackie.huang@windriver.com>
+--+QahgC5+KEYLbs62
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-After updated to version 0.99, the following options
-became invalid:
+On Wed, Dec 23, 2015 at 08:39:59AM -0800, Armin Kuster wrote:
+> Please consider these changes for Jethro-next
+>=20
+> I dropped the netmap changes but add more.
+>=20
+>   mcelog: remove bashism and create ptest subpackage
 
-* --with-ecj: use JAVAC env variable instead
-* --with-fastjar: change to --with-jar
-* --with-vm: uae JAVA env variable instead
-* --disable-qt4-peer: invalid even in 0.93, just drop it.
+mcelog is completely broken in jethro, because mcelog-inject is missing
+there, I'll add:
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- recipes-core/classpath/classpath.inc | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+commit 906cb0dcf0d40893849b5bd76189b119e9a6c7dc
+Author: Kai Kang <kai.kang@windriver.com>
+Date:   Fri Dec 4 15:09:15 2015 +0800
 
-diff --git a/recipes-core/classpath/classpath.inc b/recipes-core/classpath/classpath.inc
-index 1bdfd78..2be849b 100644
---- a/recipes-core/classpath/classpath.inc
-+++ b/recipes-core/classpath/classpath.inc
-@@ -28,24 +28,21 @@ SRC_URI = "${GNU_MIRROR}/classpath/classpath-${PV}.tar.gz"
- S = "${WORKDIR}/${PBN}-${PV}"
- 
- export JAVA = "java"
-+export JAVAC = "javac"
- 
- EXTRA_OECONF = "\
-   --with-glibj \
--  --with-ecj=javac \
--  --with-fastjar=fastjar \
-+  --with-jar=${STAGING_BINDIR_NATIVE}/fastjar \
-   --includedir=${includedir}/classpath \
--  --with-vm=java \
-   --disable-Werror \
-   --with-antlr-jar=${STAGING_DATADIR_JAVA_NATIVE}/antlr.jar \
-   --with-gmp=${STAGING_LIBDIR}/.. \
-   --disable-alsa \
-   --disable-dssi \
--  --disable-qt4-peer \
-   --disable-plugin \
-   --enable-gconf-peer \
-   --enable-gtk-peer \
-   --enable-local-sockets \
--  --with-vm=java \
-   "
- 
- 
--- 
-1.9.1
+    mce-inject: add recipe
+   =20
+    Add recipe of mce-inject which is required to run mcelog ptest
+cases.
 
+to this patchset.
 
+--+QahgC5+KEYLbs62
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlaFKVIACgkQN1Ujt2V2gBxfcACgrQ2YRLQekONzr2x1JSQHeVqc
+Y4MAn30p2V2X0H110z4kKFj/m03nzqtv
+=nPYB
+-----END PGP SIGNATURE-----
+
+--+QahgC5+KEYLbs62--
