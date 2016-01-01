@@ -1,39 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id C18BC6057B
+Return-Path: <twoerner@gmail.com>
+Received: from mail-ig0-f169.google.com (mail-ig0-f169.google.com
+	[209.85.213.169])
+	by mail.openembedded.org (Postfix) with ESMTP id ECC7465CBB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Dec 2015 13:52:52 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id f206so93703515wmf.0
+	Fri,  1 Jan 2016 03:10:49 +0000 (UTC)
+Received: by mail-ig0-f169.google.com with SMTP id ph11so204755100igc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Dec 2015 05:52:53 -0800 (PST)
+	Thu, 31 Dec 2015 19:10:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=2rvgqzr5MltSdAyzd7rx3ubntpc/KLmCsizn+vUCljg=;
-	b=h/ImuzrWnNFFMa9ssoVjX3k6Ny5pXYZ9L1f53h+Qu0Vu6ul+qa3koQtl7UH5h8Tqts
-	hmWeJ9b3Nv0kRnlJtmJ/nwPY1RTncICYFj71PMb1iRoHQHN02Duh2EjNsb/svHa+pMln
-	X2kQWh2hfWufJzOAOUg6tNUFI/7CUwUK9xbB8ZAu0Zfiiw2yO8324vJKXHKz9X3NdKju
-	EpigiuGSScYGrKa18C7oc6XTJuzoFh5kvP22eT/NTV5sp0V/i+VVSPKBQWpz3JYiIsK+
-	cJjhNSBkDa2QooYg6FjCTjZ4WB9hgjmF1GF7JspnHYEN7pNjk73bAUP0ZRsSAs9ZKYDO
-	ReKQ==
-X-Received: by 10.194.79.201 with SMTP id l9mr84779443wjx.151.1451569972732;
-	Thu, 31 Dec 2015 05:52:52 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	m16sm61922449wmb.13.2015.12.31.05.52.51
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-type;
+	bh=fFMO19m5lHuDaTsfkFFmBbr9rBB4HMdBNJ9dtnObYb0=;
+	b=Z97ZSoAYXJeDJ1rZKHeYDYlqFWF0jFqhqu/h31WduAvRElGlk2aF+AG4c8PWgqkRT7
+	85u/RMI+1+E1zqPUVSwPe4W/qL4KdHiFjEr3B0VAwIkcuoSFKO6XEz/dhr0KN5uyHG9R
+	8nnCb7Wd6TCWwIwcLsd92BDOoWqQ8usqFLr3CxQgf7FkG/LJjkAFE1DbZ+IEHJjgZjwI
+	6I7TsjdcCfrNp0vyyMZ45zXcSdk9xEYrxhwMRHUT3bxxVSWyWsIQB7c0zdbYu3yvcBby
+	VHnwWu5IAwMnjKLXTIPA77mnQ8wdixptUvCoiLwCpvZb++pW7jiO1QrFq26Ywh64X5W5
+	4kzg==
+X-Received: by 10.50.131.201 with SMTP id oo9mr30639722igb.68.1451617850020;
+	Thu, 31 Dec 2015 19:10:50 -0800 (PST)
+Received: from [192.168.141.85] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	by smtp.gmail.com with ESMTPSA id m6sm233240ige.3.2015.12.31.19.10.44
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 31 Dec 2015 05:52:51 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 31 Dec 2015 14:56:44 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20151231135644.GA2255@jama>
-References: <cover.1450888554.git.akuster808@gmail.com>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 31 Dec 2015 19:10:49 -0800 (PST)
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <56837748.6020903@gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Message-ID: <5685EE2D.3050908@gmail.com>
+Date: Thu, 31 Dec 2015 22:10:37 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-In-Reply-To: <cover.1450888554.git.akuster808@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH v2 00/54] Jentrho-next pull request
+In-Reply-To: <56837748.6020903@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: chromium 40.0.2214.91 doesn't like gcc5.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,48 +48,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Dec 2015 13:52:56 -0000
-X-Groupsio-MsgNum: 59255
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="+QahgC5+KEYLbs62"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 01 Jan 2016 03:10:50 -0000
+Content-Type: multipart/mixed; boundary="------------040108000506090008070002"
 
---+QahgC5+KEYLbs62
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+--------------040108000506090008070002
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Dec 23, 2015 at 08:39:59AM -0800, Armin Kuster wrote:
-> Please consider these changes for Jethro-next
->=20
-> I dropped the netmap changes but add more.
->=20
->   mcelog: remove bashism and create ptest subpackage
+The version of chromium we're using is a bit old (it's almost a year old
+now) and I thought that maybe a newer version might have the required
+fixes in it already. Along those lines I tried updating the recipe to
+build chromium-49.0.2607.0 which was released December 30, 2015. As it
+turned out 49.0.2607.0 didn't have any fixes for gcc-5.3, I ran into the
+exact same build problems I had seen building 40.0.2214.91 with gcc-5.3.
+But, for fun, I thought it would be worth seeing if I could get
+49.0.2607.0 to build and, patch after patch, I not only got it building
+but I have also run-time tested it on my turbot. These patches, by the
+way, adjust the code and don't simply turn off compiler warnings/errors.
 
-mcelog is completely broken in jethro, because mcelog-inject is missing
-there, I'll add:
+I haven't tried getting 40 to build, but seeing that I have 49 building
+(and running) I was wondering if I should work on getting 40 to build (I
+assume most of the patches I developed for 49 will probably be the same
+for 40) or should I just concentrate on updating the recipe to 49 and
+getting that to work?
 
-commit 906cb0dcf0d40893849b5bd76189b119e9a6c7dc
-Author: Kai Kang <kai.kang@windriver.com>
-Date:   Fri Dec 4 15:09:15 2015 +0800
+There's a lot of wayland-specific stuff in the recipe and I've never
+built or run a wayland image, so if I'm going to work on making sure my
+recipe for 49 works it'll take a bit of time for me to wrap my head
+around the wayland stuff. Also, from what I can tell, the Linaro people
+use their own branch/version for their ARM builds[1] so I'm wondering
+how much testing people would need to accept such an update?
 
-    mce-inject: add recipe
-   =20
-    Add recipe of mce-inject which is required to run mcelog ptest
-cases.
 
-to this patchset.
 
---+QahgC5+KEYLbs62
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+[1] https://github.com/ndechesne/qcom-oe-manifest/blob/master/default.xml
 
-iEYEARECAAYFAlaFKVIACgkQN1Ujt2V2gBxfcACgrQ2YRLQekONzr2x1JSQHeVqc
-Y4MAn30p2V2X0H110z4kKFj/m03nzqtv
-=nPYB
------END PGP SIGNATURE-----
-
---+QahgC5+KEYLbs62--
+--------------040108000506090008070002--
