@@ -1,52 +1,40 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FB936612D
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Jan 2016 21:01:44 +0000 (UTC)
-Received: by mail-io0-f178.google.com with SMTP id 77so97340254ioc.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Jan 2016 13:01:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=gcuZV+aqzIs66XvqUrfXN2b7Ylx8Bk1T7bPvBdJkOP4=;
-	b=0dyvsmEFH4TaDb+fLeHcyW2l/vx6EnM9KxAqdqdZNKYozNt14oQaYtevDuePN0gl2C
-	ZugiGcT8uwqP9yI8T14HJsLVci8+FpJU4pjLMFZgsQ7tMJSL7H7RNOTAKA4aTG99TDL7
-	4G+w83gZAWJ+8aqp2VKhuoNzKjHOxlFNoTXOJ8mCgKAJqxorpf5zLBiFLL0UNJ5RlRe/
-	I7+X3St8PABwzz/ck8lfpciU20At4aMl8fCGFO/QIcvUwS3q6qdPhznsQGiERPYf+458
-	am6rvyDGLhNpDi2R225KoKCUTXpV2Sdm/GULOZrn5/ZGJCxBVytGv1yOMe9be0vJAdxv
-	kATg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=gcuZV+aqzIs66XvqUrfXN2b7Ylx8Bk1T7bPvBdJkOP4=;
-	b=WiiA/zinKAglh7Q2Jn00FmTRtxhNeBCoq+7RA/qCA3AFA+xCqgNxUTQLi7whzNCifd
-	d4OVNdgEXaSg2yIE8h8sdcEM2vrIeMkedw+AUmxW3LLYnxCiB+6k0o88YWi+gZsAWFrX
-	u1jmqg8J2m1wSWRAoDFNzfGuxwKKOE4ATfVUZJWh3vm2tdaGPhdLfZDW05ZDXMueB4ol
-	zE6PaC0giAkKDu4vA935M9vTGjU8kcotRz43Pew3ITe2i87NzpXKy+5SXfU40+9K2hm2
-	ED0c7qNGcc0oLLm9jk3k62DROAjC+URztYOxwXuIKpx45SdJAdv0LNdVAlPohhtaro0q
-	EbvA==
-X-Gm-Message-State: ALoCoQlRDs2NPVSPnIyUBoFQfHxaXQAGOe+f8LmzeZX51qP+zYj+sqdZLeCg4Mro07NPEidx8rqOvh5cvjHmi5NeZ7CxLrRtCW9g41QD1cJyktVK9dA9yt8=
-X-Received: by 10.107.135.104 with SMTP id j101mr44563140iod.133.1451768505000;
-	Sat, 02 Jan 2016 13:01:45 -0800 (PST)
+Return-Path: <twoerner@gmail.com>
+Received: from mail-qg0-f50.google.com (mail-qg0-f50.google.com
+	[209.85.192.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 96E7C60291;
+	Sat,  2 Jan 2016 22:24:53 +0000 (UTC)
+Received: by mail-qg0-f50.google.com with SMTP id 6so153897606qgy.1;
+	Sat, 02 Jan 2016 14:24:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=+SzdhvonmCyDTaqIPYN7W7joEZztOfIcpRjOIzWjQP8=;
+	b=fRHNAu82s3x62OX7FHGJvMBkHRfRUIMnyMowX5RAGOd0cyetAGB+TFSEo9INHAETfv
+	AoFNq6huBBf4aau/pW/TB1tABAT1a7RUQZXk3qO7tFGMqeLbYno/PlM+mIMX9BoPiW0Q
+	Piwt08rQkk0epB3TKP2vjyMf1GCTAVY/MUA0flDnqCal85Wk0mly5dq4hRNmqq266Xn6
+	bLR55WR1ZJmEyQZ/+LqCH5oVZGmVWVLewz55k2wETSpQi3RFF5UBBS1C+AFkRfXeZXe1
+	cyTW72F6qn9VTkHVgpi2ViX0+6Fwv4TxNhWjum2vKB2Cln3PjsMuwzQyt3bpZnfIa4nE
+	3NRw==
+X-Received: by 10.140.234.17 with SMTP id f17mr114614964qhc.19.1451773493801; 
+	Sat, 02 Jan 2016 14:24:53 -0800 (PST)
+Received: from [192.168.141.85] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	by smtp.gmail.com with ESMTPSA id
+	l38sm37035077qgd.27.2016.01.02.14.24.52
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 02 Jan 2016 14:24:53 -0800 (PST)
+To: Martin Jansa <martin.jansa@gmail.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+References: <CA+chaQfGTBOqGyGq6S7fMbP8c9rdm+1cDrc===xA1kOF=+WGOQ@mail.gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Message-ID: <56884E30.2080703@gmail.com>
+Date: Sat, 2 Jan 2016 17:24:48 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-Received: by 10.107.162.70 with HTTP; Sat, 2 Jan 2016 13:01:25 -0800 (PST)
-In-Reply-To: <1451388119.1472.230.camel@pbcl.net>
-References: <CAJTo0LayEjj9moB9xgup=vB+C9Sn2-WX+s97UWRt9tg=HYFnag@mail.gmail.com>
-	<1450910987.2002.86.camel@pbcl.net>
-	<CAJTo0Lbrb-yu=71a+7YnF0pSkiNxB26U7xh7dbS7Jr8DPEJmag@mail.gmail.com>
-	<1451388119.1472.230.camel@pbcl.net>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Sat, 2 Jan 2016 21:01:25 +0000
-Message-ID: <CAJTo0LbbzumOSU=shtASvr-BtoWGr5t0BaGe52XM1r4E=L-E5Q@mail.gmail.com>
-To: Phil Blundell <pb@pbcl.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFC] Delete all .la files?
+In-Reply-To: <CA+chaQfGTBOqGyGq6S7fMbP8c9rdm+1cDrc===xA1kOF=+WGOQ@mail.gmail.com>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2016-01-01
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,17 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Jan 2016 21:01:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 02 Jan 2016 22:24:54 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-On 29 December 2015 at 11:21, Phil Blundell <pb@pbcl.net> wrote:
-
-> Oh, yes, you're right.  In fact I don't build openjade-native
-> routinely, but a bit of git archaeology reveals that I do have the
-> following patch in my tree as well.
+On 01/02/16 13:19, Martin Jansa wrote:
+>
+> == Tested changes (not included in master yet) - meta-openembedded ==
+...
+> 7020a19 nodejs: cleanup and update
+...
+>
+> == Failed tasks 2016-01-01 ==
+...
+>
+> === qemuarm (1) ===
+>     * /meta-openembedded/meta-oe/recipes-devtools/nodejs/nodejs_4.2.2.bb <http://nodejs_4.2.2.bb>, do_compile
 >
 
-You're my hero, thanks. :)
-
-Ross
+Can it really be considered a failed build when the recipe explicitly
+excludes qemuarm (armv5) from the compatible machine list?
 
