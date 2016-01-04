@@ -1,38 +1,40 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 97A7F6FEF6
+Return-Path: <Javier.Viguera@digi.com>
+Received: from mail1.bemta8.messagelabs.com (mail1.bemta8.messagelabs.com
+	[216.82.243.203])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C3D4731C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 16:13:07 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id f206so220701356wmf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2016 08:13:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=f54KvXdNA0eCerIi8lCdZrJNO0fbqW9npQBPVUMtZsQ=;
-	b=vlsPJB/CdXe+SeJup57O/9zM51ZMQdTxgXXFMnCwOBqG8BWau6libhla2HCZdznRKR
-	OOd5FBTt8sfw8T0U8uDG74NHUxgib2aeKVrIdkHaugDk4IRsXLGPSmazkoLfKuxTSVBr
-	4sqsEyEhJhlvu/0R8XuuOTDJU38TA5lcIPiXNtAwYisgY69IZEE+zD27j2CFG+ju4HgS
-	NFnkZOC/UcSmg+NFnX41DCAVbf4oKJYeJM+TJuZIG9WXNz+UjV7EJYgSAnC66ycvprik
-	xVDa1vdajrxoXWBPYyOFEIpd6UtKHAjyByEbR0iz44R9fLXHiuJ90TriHMj4ALdwRJs6
-	p1Rw==
-X-Received: by 10.194.47.231 with SMTP id g7mr98131407wjn.42.1451923987787;
-	Mon, 04 Jan 2016 08:13:07 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	i3sm42665346wja.47.2016.01.04.08.13.06
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Jan 2016 08:13:07 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 4 Jan 2016 17:17:18 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160104161718.GA2378@jama>
+	Mon,  4 Jan 2016 16:39:53 +0000 (UTC)
+Received: from [216.82.242.35] by server-11.bemta-8.messagelabs.com id
+	A5/57-05489-A50AA865; Mon, 04 Jan 2016 16:39:54 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-16.tower-75.messagelabs.com!1451925592!7561723!1
+X-Originating-IP: [192.109.95.98]
+X-StarScan-Received: 
+X-StarScan-Version: 7.35.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 46266 invoked from network); 4 Jan 2016 16:39:52 -0000
+Received: from unknown (HELO DOR-VMS-XCH01.digi.com) (192.109.95.98)
+	by server-16.tower-75.messagelabs.com with SMTP;
+	4 Jan 2016 16:39:52 -0000
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by DOR-VMS-XCH01.digi.com
+	(10.49.8.98) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Mon, 4 Jan 2016 17:39:46 +0100
+Received: from [10.101.2.54] (10.101.2.54) by dor-sms-xch01.digi.com
+	(10.49.8.99) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Mon, 4 Jan 2016 17:39:45 +0100
+To: <openembedded-devel@lists.openembedded.org>
 References: <1451923194-60100-1-git-send-email-javier.viguera@digi.com>
+	<20160104161718.GA2378@jama>
+From: Javier Viguera <javier.viguera@digi.com>
+Message-ID: <568AA04B.8000101@digi.com>
+Date: Mon, 4 Jan 2016 17:39:39 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-In-Reply-To: <1451923194-60100-1-git-send-email-javier.viguera@digi.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+In-Reply-To: <20160104161718.GA2378@jama>
+X-Originating-IP: [10.101.2.54]
+X-KSE-AntiSpam-Interceptor-Info: protection disabled
+X-KSE-AntiSpam-Interceptor-Info: protection disabled
 Subject: Re: [meta-qt5][master][jethro][PATCH] qtconnectivity, qtsystems: fix bluetooth support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -46,108 +48,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 16:13:11 -0000
-X-Groupsio-MsgNum: 59315
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="jI8keyz6grp/JLjh"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 04 Jan 2016 16:39:55 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---jI8keyz6grp/JLjh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 04/01/16 17:17, Martin Jansa wrote:
+>
+> Is it deterministic?
+>
+> Will it always pick bluez4 when BLUEZ is set to bluez4, but there is
+> bluez5 is already in the sysroot as well?
 
-On Mon, Jan 04, 2016 at 04:59:54PM +0100, Javier Viguera wrote:
-> QMAKE_CACHE_EVAL is only used in qtwebengine and qtwebkit, but not in
-> the rest of the QT5 packages, so use EXTRA_QMAKEVARS_PRE to pass the
-> packageconfig options to the do_configure task.
->=20
-> Also generalize bluetooth support so it can be used not only with bluez4
-> but with bluez5 as well.
+No, BLUEZ is set by *bluetooth* class depending on your distro features 
+and is only used to add 'bluez4' or 'bluez5' to the recipe build-time 
+dependences (DEPENDS). But apart from that it does nothing to the QT5 
+compilation itself.
 
-Is it deterministic?
+>
+> config.tests/bluez/bluez.pro is only using pkgconfig to find bluez, so
+> I'm not sure which one will win.
 
-Will it always pick bluez4 when BLUEZ is set to bluez4, but there is
-bluez5 is already in the sysroot as well?
+Neither do I, but I don't think having both versions of the bluez 
+libraries in the sysroot is a common use-case. The package config file 
+for bluez4 and bluez5 is almost the same. It adds the same cflags and 
+libs to any package querying it:
 
-config.tests/bluez/bluez.pro is only using pkgconfig to find bluez, so
-I'm not sure which one will win.
+Libs: -L${libdir} -lbluetooth
+Cflags: -I${includedir}
 
-> Signed-off-by: Javier Viguera <javier.viguera@digi.com>
-> ---
->  recipes-qt/qt5/qtconnectivity_git.bb | 9 ++++++---
->  recipes-qt/qt5/qtsystems_git.bb      | 9 ++++++---
->  2 files changed, 12 insertions(+), 6 deletions(-)
->=20
-> diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconn=
-ectivity_git.bb
-> index b1e155e2b48d..f677f7107465 100644
-> --- a/recipes-qt/qt5/qtconnectivity_git.bb
-> +++ b/recipes-qt/qt5/qtconnectivity_git.bb
-> @@ -13,11 +13,14 @@ LIC_FILES_CHKSUM =3D " \
-> =20
->  DEPENDS +=3D "qtbase qtdeclarative"
-> =20
-> -PACKAGECONFIG ??=3D ""
-> -PACKAGECONFIG[bluez4] =3D "OE_BLUEZ_ENABLED,,bluez4"
-> +inherit bluetooth
-> +
-> +PACKAGECONFIG ??=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth'=
-, 'bluez', '', d)}"
-> +PACKAGECONFIG[bluez] =3D "CONFIG+=3DOE_BLUEZ_ENABLED,,${BLUEZ}"
-> +
-> +EXTRA_QMAKEVARS_PRE +=3D "${EXTRA_OECONF}"
-> =20
->  do_configure_prepend() {
-> -    export QMAKE_CACHE_EVAL=3D"CONFIG+=3D${EXTRA_OECONF}"
->      # disable bluez test if it isn't enabled by PACKAGECONFIG
->      sed -i 's/^qtCompileTest(bluez)/OE_BLUEZ_ENABLED:qtCompileTest(bluez=
-)/g' ${S}/qtconnectivity.pro
->  }
-> diff --git a/recipes-qt/qt5/qtsystems_git.bb b/recipes-qt/qt5/qtsystems_g=
-it.bb
-> index 27d2bff37b51..9d9d245d2d09 100644
-> --- a/recipes-qt/qt5/qtsystems_git.bb
-> +++ b/recipes-qt/qt5/qtsystems_git.bb
-> @@ -11,11 +11,14 @@ LIC_FILES_CHKSUM =3D " \
-> =20
->  DEPENDS +=3D "qtbase qtdeclarative udev gconf"
-> =20
-> -PACKAGECONFIG ??=3D ""
-> -PACKAGECONFIG[bluez4] =3D "OE_BLUEZ_ENABLED,,bluez4"
-> +inherit bluetooth
-> +
-> +PACKAGECONFIG ??=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth'=
-, 'bluez', '', d)}"
-> +PACKAGECONFIG[bluez] =3D "CONFIG+=3DOE_BLUEZ_ENABLED,,${BLUEZ}"
-> +
-> +EXTRA_QMAKEVARS_PRE +=3D "${EXTRA_OECONF}"
-> =20
->  do_configure_prepend() {
-> -    export QMAKE_CACHE_EVAL=3D"CONFIG+=3D${EXTRA_OECONF}"
->      # disable bluez test if it isn't enabled by PACKAGECONFIG
->      sed -i 's/^    qtCompileTest(bluez)/    OE_BLUEZ_ENABLED:qtCompileTe=
-st(bluez)/g' ${S}/qtsystems.pro
->  }
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+So to recap: this change fix the bluetooth support which is currently 
+broken because QMAKE_CACHE_EVAL is not used at all, and also allows to 
+build QT5 bluetooth support using bluez5 instead of the hard-coded bluez4.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+Regards,
 
---jI8keyz6grp/JLjh
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Javier Viguera
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlaKmw4ACgkQN1Ujt2V2gBySYwCeLzsEZmK0pd8QlIpzWv68qTY6
-W7QAn0Fb+Iw4AnxqtLnbXuVLZajMdE4i
-=xDcz
------END PGP SIGNATURE-----
-
---jI8keyz6grp/JLjh--
