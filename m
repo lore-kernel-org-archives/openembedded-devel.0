@@ -1,50 +1,47 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f182.google.com (mail-io0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id C7ED3731C0
+Received: from mail-io0-f176.google.com (mail-io0-f176.google.com
+	[209.85.223.176])
+	by mail.openembedded.org (Postfix) with ESMTP id A9797731B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 16:50:30 +0000 (UTC)
-Received: by mail-io0-f182.google.com with SMTP id 1so114000566ion.1
+	Mon,  4 Jan 2016 17:29:00 +0000 (UTC)
+Received: by mail-io0-f176.google.com with SMTP id o67so441114644iof.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2016 08:50:31 -0800 (PST)
+	Mon, 04 Jan 2016 09:29:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=DB/jFLJktEI8S+dKhcqvVeyGR6fm8zXwZFVs5o5j04o=;
-	b=H830ut19bCavlkRfMK+PKdNLaL3dUzPcovpnP02wfD10dkxrRpYl8ObwAdcKzAYNo2
-	hymGZHKNdlTBKUoR64s4vUguQReW4TClxrNcf2Ea+A+VGiwUMaBn6q3BcAK8pHi8A36B
-	k0zFepXRWI9mus2RW0kcTFs362F2mGrKV1zrrdMnBKjgZkNH6ibkoBM7PfSSl81u5vi7
-	yFZGBr1jvC0TBbB+KtO2DMhUZCuddIitRkLk/tsd1L9xY9ayMTHCgyRmldawJqPl8iWK
-	xGKQgEgmzybd4E7eHtZtEFnyf7L4W1YI3CiTJ5/FBFXqMLHSVZ2QHkb6ZYDRmmv32qZP
-	x6pg==
+	:content-type; bh=dGsKR9k7QguZdbVUsLVoun3+0aCK1JZvd/13LJ8i2bY=;
+	b=u3zk36ypImjgQl0XO1SuWB53+9oeLoEfe5zHE9N9gpCn9/zfi/oybGgNfIekKit9YB
+	AuGFbrCs7VNPNF96UJ+oO4vGds9ydnMqfiYYkqxxSUexPnzymz9EhJQEfnRt0cLXYTYc
+	w56mJF4mP3RYROM3P8P0lxm9d0q5Kv8r/pf911LKt1AaCSMcaZlP+cr8jv+MjjXdtbc3
+	pSnf8KtURIfhRQFCKfwXhCnHwFNKy5zHvNlD/KmqteSHx415GI3BjvgfBljQWnz3riaP
+	3UtbJDr/f+Q/B8KqVPeN5ZinaFK+hP5arR6XZZZDXV/b/0utDd7kDkT26u6nIS5dlM6m
+	oaEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=DB/jFLJktEI8S+dKhcqvVeyGR6fm8zXwZFVs5o5j04o=;
-	b=m8RTiU2vVaup6z11txATHgTXnujWTR+Devcq/MFjD81zUOipvijW7VJznLE+hEC3rZ
-	Viu3E9cjIt11clySFFbSBZj2+8ngMPmiGV8NGXfTPTwOt4dCzCbdRTnsRjlG4x6TLkuz
-	cnKJOwtRh7FO24VhdhuqgSU8kC+tmD5ViRuI+FA6C7ToykY8JFysozCflPrXxxgC92lx
-	AGv3TIIJcV6kHQqmseDyacT7e4SPsm7IpHsc1koVBsqcPeirVuvnrVoPkvR0bsMmLyB1
-	V71enQJLjrIlquViwiDgEcBnr23vZ/pRJuQRrBZ+R1BL6z6nylHNA+hLAjSE3OqYjEV8
-	MwyQ==
-X-Gm-Message-State: ALoCoQkGwdS+GM2e5GFxfCaM6iVcYOVZa90EinZT07Zfx2XRCrl/07ziarnk3tMisxGJPlX104mB8AybZdjW0nDSLVZmgGatac/FIPoSoJzcXjG3GAeH5N8=
-X-Received: by 10.107.135.104 with SMTP id j101mr51758277iod.133.1451926231070;
-	Mon, 04 Jan 2016 08:50:31 -0800 (PST)
+	:message-id:subject:to:content-type;
+	bh=dGsKR9k7QguZdbVUsLVoun3+0aCK1JZvd/13LJ8i2bY=;
+	b=bqjqs7qP5k/c9BC3E95wSO9cXIA0HNm7cv4bKEmRLwmCAAiISBJaXZXjcMTD9oxZxr
+	OpHa7hf7adP1ZKA7nc7oOVd+iOmoDbNrvz+08dUh1pK4DNxJjjgDMeDQDM3orEoz5Vue
+	CCob0peqrekl8+MncP7dUIlgc4TKB5ozPAUENKZoSUyTXfg5f3N1TDJt9FzTvoyiu/2H
+	gH3Fe3NLyHLIBmne9eDqtqdqsMXe1dfmBe/7qqv+MQsAmQ9KRTr98POypdDuWt9nUFV6
+	z9pXUMAh3RhuKO3rYQudQQBinU+EgjVMZmbqNzjp7KgOmf2IuqUlRMlrp5tnQzwCyfpm
+	/+aQ==
+X-Gm-Message-State: ALoCoQnFdT+rwpeOFzSjOt7ZBAarkLydbsAZTHavWmMIPxPC57GKMMVVEwxTdLQvjux27inB/8oIsJ0TuRTdRtdvwQpZrOIHLjLzrtNMF+hQTTspJgwWliM=
+X-Received: by 10.107.164.161 with SMTP id d33mr73739302ioj.148.1451928541558; 
+	Mon, 04 Jan 2016 09:29:01 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.107.162.70 with HTTP; Mon, 4 Jan 2016 08:50:11 -0800 (PST)
-In-Reply-To: <20160104084826.GA4807@ulm-bmuc496424.bmw-carit.de>
+Received: by 10.107.162.70 with HTTP; Mon, 4 Jan 2016 09:28:42 -0800 (PST)
+In-Reply-To: <CAJTo0LayEjj9moB9xgup=vB+C9Sn2-WX+s97UWRt9tg=HYFnag@mail.gmail.com>
 References: <CAJTo0LayEjj9moB9xgup=vB+C9Sn2-WX+s97UWRt9tg=HYFnag@mail.gmail.com>
-	<20160104084826.GA4807@ulm-bmuc496424.bmw-carit.de>
 From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 4 Jan 2016 16:50:11 +0000
-Message-ID: <CAJTo0LbM6p7BxOXf5bfOVMwRdLDWdYVqJCc5h79euMqfQeoo5g@mail.gmail.com>
-To: Clemens Lang <clemens.lang@bmw-carit.de>
+Date: Mon, 4 Jan 2016 17:28:42 +0000
+Message-ID: <CAJTo0LY-O9ee3jGoSPOPjqpu=u9zCEo2vfh3jfyxvgC15MWxbQ@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFC] Delete all .la files?
+Subject: Re: [RFC] Delete all .la files?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,18 +54,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 16:50:30 -0000
+X-List-Received-Date: Mon, 04 Jan 2016 17:29:03 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 4 January 2016 at 08:48, Clemens Lang <clemens.lang@bmw-carit.de> wrote:
+On 23 December 2015 at 21:41, Burton, Ross <ross.burton@intel.com> wrote:
 
-> Note that any software using libltdl will still require the .la files
-> and must thus opt-out of .la file deletion. ImageMagick is probably the
-> most common occurrence of this.
+> So in the new year I plan on submitting a renamed version of this class to
+> oe-core and adding it to INHERIT_DISTRO.  Any comments?
 >
 
-The use of modules in imagemagick is disabled by default, so this only
-impacts people who change that default (and the wiper will optional).
+Technicalities time: should this be a new class that is in the default
+INHERIT_DISTRO?  Or directly integrated into base.bbclass?  Does anyone
+have a strong opinion either way?
 
 Ross
 
