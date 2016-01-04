@@ -1,33 +1,33 @@
 Return-Path: <lixin.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B88D96B6EA
+	by mail.openembedded.org (Postfix) with ESMTP id D8B3465CC2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 06:22:55 +0000 (UTC)
+	Mon,  4 Jan 2016 06:46:34 +0000 (UTC)
 X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
-   d="scan'208";a="2180293"
+   d="scan'208";a="2181131"
 Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 04 Jan 2016 14:22:55 +0800
+	by heian.cn.fujitsu.com with ESMTP; 04 Jan 2016 14:46:34 +0800
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id DD11C4066D28
+	by cn.fujitsu.com (Postfix) with ESMTP id D8732406CF6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 14:22:41 +0800 (CST)
+	Mon,  4 Jan 2016 14:46:15 +0800 (CST)
 Received: from localhost.localdomain (10.167.226.51) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 4 Jan 2016 14:22:41 +0800
+	Server (TLS) id 14.3.181.6; Mon, 4 Jan 2016 14:46:15 +0800
 From: Li Xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 3 Jan 2016 22:22:39 -0800
-Message-ID: <1451888559-31632-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+Date: Sun, 3 Jan 2016 22:46:13 -0800
+Message-ID: <1451889973-33677-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1451873503-5364-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-References: <1451873503-5364-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+In-Reply-To: <1451873378-5097-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+References: <1451873378-5097-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.51]
-X-yoursite-MailScanner-ID: DD11C4066D28.A0081
+X-yoursite-MailScanner-ID: D8732406CF6E.A3269
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: lixin.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][PATCH v3] xterm: 308 -> 320
+Subject: [meta-oe][PATCH v2] python-simplejson: 2.2.1 -> 3.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,42 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 06:22:56 -0000
+X-List-Received-Date: Mon, 04 Jan 2016 06:46:35 -0000
 Content-Type: text/plain
 
-Upgrade xterm from 308 to 320.
+Upgrade python-simplejson from 2.2.1 to 3.8.1.
 
-Modify LIC_FILES_CHKSUM,since the date in it has been changed, But the LICENSE has not been changed.
+Modify LIC_FILES_CHKSUM,but the LICENSE has not been changed.
+References: https://pypi.python.org/pypi/simplejson
 
 Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-graphics/xorg-app/{xterm_308.bb => xterm_320.bb} | 6 +++---
+ .../{python-simplejson_2.2.1.bb => python-simplejson_3.8.1.bb}      | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{xterm_308.bb => xterm_320.bb} (77%)
+ rename meta-oe/recipes-devtools/python/{python-simplejson_2.2.1.bb => python-simplejson_3.8.1.bb} (68%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_308.bb b/meta-oe/recipes-graphics/xorg-app/xterm_320.bb
-similarity index 77%
-rename from meta-oe/recipes-graphics/xorg-app/xterm_308.bb
-rename to meta-oe/recipes-graphics/xorg-app/xterm_320.bb
-index 9198ca2..c8140d1 100644
---- a/meta-oe/recipes-graphics/xorg-app/xterm_308.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xterm_320.bb
-@@ -2,12 +2,12 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
- SUMMARY = "xterm is the standard terminal emulator for the X Window System"
- DEPENDS = "libxaw xproto xextproto libxext libxau libxpm ncurses"
+diff --git a/meta-oe/recipes-devtools/python/python-simplejson_2.2.1.bb b/meta-oe/recipes-devtools/python/python-simplejson_3.8.1.bb
+similarity index 68%
+rename from meta-oe/recipes-devtools/python/python-simplejson_2.2.1.bb
+rename to meta-oe/recipes-devtools/python/python-simplejson_3.8.1.bb
+index 7e42a7c..96c0aef 100644
+--- a/meta-oe/recipes-devtools/python/python-simplejson_2.2.1.bb
++++ b/meta-oe/recipes-devtools/python/python-simplejson_3.8.1.bb
+@@ -3,14 +3,14 @@ HOMEPAGE = "http://cheeseshop.python.org/pypi/simplejson"
+ SECTION = "devel/python"
  
--LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=540cf18ccc16bc3c5fea40d2ab5d8d51"
-+LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=ee6435019d00b884cde8d7ba2b318ff0"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8a9f8dcfcd28c34daa443e5b1d29813b"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c6338d7abd321c0b50a2a547e441c52e"
+ PR = "r1"
  
- SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
+ SRCNAME = "simplejson"
  
--SRC_URI[md5sum] = "1ec76c1a79a70de4f82c24c527ef4626"
--SRC_URI[sha256sum] = "c5bf7377a5bf35e34b7e3a4ab6c848fbc89e8901dd98f8b237662a72bdbfe372"
-+SRC_URI[md5sum] = "0d7f0e6390d132ae59876b3870e5783d"
-+SRC_URI[sha256sum] = "a60dbb574334c081425fa30f011cd9f571e3be7a91e2a84e252461798bce24a7"
+ SRC_URI = "http://cheeseshop.python.org/packages/source/s/simplejson/${SRCNAME}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "070c6467462bd63306f1756b01df6d70"
+-SRC_URI[sha256sum] = "e85c5ae24dd9827113893c1dd2c799528195057388096f0fc45ad4b32b378c26"
++SRC_URI[md5sum] = "b8441f1053edd9dc335ded8c7f98a974"
++SRC_URI[sha256sum] = "428ac8f3219c78fb04ce05895d5dff9bd813c05a9a7922c53dc879cd32a12493"
  
- EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
-                  --x-libraries=${STAGING_LIBDIR} \
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ 
 -- 
 1.9.1
 
