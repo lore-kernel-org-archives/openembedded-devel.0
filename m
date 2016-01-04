@@ -1,39 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C551731BD
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F5AB731B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 19:16:29 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id b14so342197wmb.1
+	Mon,  4 Jan 2016 19:20:53 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id u188so2718838wmu.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2016 11:16:30 -0800 (PST)
+	Mon, 04 Jan 2016 11:20:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=04vod7oBwpxQmPPQM0aqfEUR3JECU59rbJyVFPoYhtM=;
-	b=aUn0gJefLRcqauHfBtzH5/lhFbuBYWwgkd8g1vzUv/b3FZT0ye/4mqryjVtehMqdLM
-	fpLsmpv66P2Q0zghpQ5xB+v5xk3SY31pZhB8OOr1pIszkGfKy2toOXDFf33PfTxFBM04
-	hLEBCk1RLy3bH2Z/fNtYa8GSNWhXMPy1cWTatU/69eA9LbYBi3QuBVhreu0bxBLraxWg
-	AXH3zydzsnxPssrFeyML5z/w7ervIdgYjGJ//9lNrrcrmF/IoHMWi65QtjXYR+WbKYwW
-	xAnj5iFpvpJ7TfyMtZszeeiKfsl3y56QPwh/e6S3gOi+19PXxHW6Sn6iqzArMwkSX6WO
-	UYcg==
-X-Received: by 10.194.179.162 with SMTP id dh2mr97974759wjc.17.1451934989954; 
-	Mon, 04 Jan 2016 11:16:29 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	ql10sm87527953wjc.23.2016.01.04.11.16.29
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=WGnedt5XgQiRSWsxhVvThJB6DEKRZ2XHOKxYV2chBWI=;
+	b=V0UkKTWTE5IWZxvi0ytiqJWYZBNr/z7OgtW/gM6ao2NFmSC4G0mEaxGiCaahbeA6pF
+	ZgU1ylMGv2NrIpCGSpHTERaT86OPJ7EREMNfxUisF82x/5VMQG8DhYxR990tLHye4qRo
+	04Tb2K+vCZcSreozR/SNUApHWs2VCm5lcdjGgUAWUG2E1kAa8OfmKp06e2VSqfTd0NtE
+	sd4ty3DYr68UAuXpjNXp05qxtTGqkU2qqETH+zeM2BTNqRsS4QfvLfPcIjmS4m5rqDp+
+	D74V3B5XEbGlTqsv2SacIzrET80fcWur42jSxhMyZRQFcUnp7pQVgB1QSl/7rGIGf+i2
+	qJFw==
+X-Received: by 10.194.11.66 with SMTP id o2mr110398866wjb.103.1451935253958;
+	Mon, 04 Jan 2016 11:20:53 -0800 (PST)
+Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
+	by smtp.gmail.com with ESMTPSA id w23sm49587wmd.1.2016.01.04.11.20.51
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Jan 2016 11:16:29 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 4 Jan 2016 20:16:28 +0100
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 04 Jan 2016 11:20:51 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Jens Rehsack <rehsack@gmail.com>
+In-Reply-To: <cover.1450864063.git.jackie.huang@windriver.com>
+Date: Mon, 4 Jan 2016 20:20:50 +0100
+Message-Id: <0E1F3B26-55DA-44FC-BEC4-8AE2277A9D07@gmail.com>
+References: <cover.1450864063.git.jackie.huang@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160104191628.GC5744@jama>
-References: <8E273032-FCAF-4476-A017-50D6D2451F14@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <8E273032-FCAF-4476-A017-50D6D2451F14@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-networking][PATCH] samba: move RDEPENDS of perl from samba to samba-pidl
+X-Mailer: Apple Mail (2.3112)
+Subject: Re: [meta-java][PATCH 0/2] openjdk-8-native: fix do_install and PROVIDES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,83 +45,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 19:16:29 -0000
-X-Groupsio-MsgNum: 59330
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="TiqCXmo5T1hvSQQg"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 04 Jan 2016 19:20:54 -0000
+X-Groupsio-MsgNum: 59331
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_DC4358AD-54B4-411D-8792-294D5BA5D06D";
+	protocol="application/pgp-signature"; micalg=pgp-sha512
 
---TiqCXmo5T1hvSQQg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--Apple-Mail=_DC4358AD-54B4-411D-8792-294D5BA5D06D
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-On Mon, Jan 04, 2016 at 08:06:04PM +0100, Jens Rehsack wrote:
-> samba-pidl is the package containing the perl-extension, so RDEPENDS
-> must include perl for samba-pidl, not for samba.
->=20
-> Signed-off-by: Jens Rehsack <sno@netbsd.org>
-> ---
->  meta-networking/recipes-connectivity/samba/samba_4.1.12.bb | 3 +++
->  1 file changed, 3 insertions(+)
->=20
-> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb b=
-/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-> index 5b343f2..de1f033 100644
-> --- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-> +++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-> @@ -39,6 +39,8 @@ SRC_URI[md5sum] =3D "232016d7581a1ba11e991ec2674553c4"
->  SRC_URI[sha256sum] =3D "033604674936bf5c77d7df299b0626052b84a41505a6a6af=
-e902f6274fc29898"
->=20
->  inherit systemd waf-samba cpan-base perlnative
-> +# remove default added RDEPENDS on perl
-> +RDEPENDS_${PN}_remove =3D "perl"
->=20
->  DEPENDS +=3D "readline virtual/libiconv zlib popt libtalloc libtdb libte=
-vent libldb krb5 ctdb libbsd"
->=20
-> @@ -319,4 +321,5 @@ FILES_${PN}-python-dbg =3D "${libdir}/python${PYTHON_=
-BASEVERSION}/site-packages/.d
->                            ${libdir}/python${PYTHON_BASEVERSION}/site-pac=
-kages/samba/dcerpc/.debug/* \
->  "
->=20
-> +RDEPENDS_${PN}-pidl_append =3D " perl "
+It's insane re-introducing a virtual/javac-native without understanding
+the issues coming with that.
 
-You don't need the trailing space (only the leading space is needed for
-append).
+> Am 23.12.2015 um 11:03 schrieb jackie.huang@windriver.com:
+>=20
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> I asked about this issue two days ago but no response, please =
+carefully
+> review and correct me if anyone have better understanding.
 
->  FILES_${PN}-pidl =3D "${bindir}/pidl ${PERL_VERNDORLIB}/*"
+Please excuse when people enjoy their holidays around Christmas.
+
+> My tests includes building openjdk7 and openjdk8 on qemux86-64
+> with/without sstate cache.
+>=20
+> --
+> The following changes since commit =
+35739fca028996c594b1efa2225a77c8d6038193:
+>=20
+>  openjdk-8: Use zero mode on arm (2015-12-17 10:39:21 -0200)
+>=20
+> are available in the git repository at:
+>=20
+>  git://git.pokylinux.org/poky-contrib.git jhuang0/d_jdk8-fix_151223_0
+>  http://git.pokylinux.org/cgit.cgi//log/?h=3Djhuang0/d_jdk8-fix_151223_0=
+
+>=20
+> Jackie Huang (2):
+>  Revert "meta-java: rely on well known bootstrap-path"
+>  openjdk-8-native: fix improper do_install and PROVIDES
+>=20
+> README                                             | 12 ++++++++--
+> classes/java-bootstrap-components.bbclass          |  7 ------
+> classes/java-library.bbclass                       |  3 +--
+> recipes-core/ant/ant-native_1.8.1.bb               |  2 +-
+> recipes-core/antlr/antlr_2.7.7.bb                  |  2 +-
+> recipes-core/cacao/cacao_1.6.1.bb                  |  6 ++---
+> recipes-core/classpath/classpath.inc               |  4 ++--
+> recipes-core/classpathx/gnujaf_1.1.1.bb            |  2 +-
+> recipes-core/classpathx/gnumail_1.1.2.bb           |  2 +-
+> recipes-core/classpathx/inetlib_1.1.1.bb           |  2 +-
+> recipes-core/cup/cup_0.10k.bb                      |  2 +-
+> recipes-core/ecj/ecj-bootstrap-native.bb           |  4 +++-
+> recipes-core/ecj/libecj-bootstrap.inc              |  2 +-
+> recipes-core/icedtea/icedtea7-native.inc           |  2 +-
+> recipes-core/jacl/jacl_1.4.1.bb                    |  2 +-
+> .../jakarta-commons/commons-logging_1.1.1.bb       |  2 --
+> recipes-core/jakarta-commons/commons-net_1.4.1.bb  |  2 --
+> .../jakarta-libs/avalon-framework-api_4.3.bb       |  2 +-
+> recipes-core/jakarta-libs/bsf_2.4.0.bb             |  2 +-
+> recipes-core/jakarta-libs/log4j1.2_1.2.17.bb       |  2 +-
+> recipes-core/jakarta-libs/logkit_1.2.2.bb          |  2 +-
+> recipes-core/jakarta-libs/oro_2.0.8.bb             |  2 +-
+> recipes-core/jakarta-libs/poi_3.0.bb               |  2 +-
+> recipes-core/jakarta-libs/regexp_1.5.bb            |  2 +-
+> recipes-core/jamvm/jamvm.inc                       |  4 ++--
+> recipes-core/jcraft/jsch_0.1.40.bb                 |  2 +-
+> recipes-core/jcraft/jzlib_1.0.7.bb                 |  2 +-
+> recipes-core/jdepend/jdepend_2.9.1.bb              |  2 +-
+> recipes-core/jlex/jlex_1.2.6.bb                    |  2 +-
+> recipes-core/junit/junit4_4.3.1.bb                 |  4 +++-
+> recipes-core/junit/junit_3.8.2.bb                  |  2 +-
+> recipes-core/openjdk/openjdk-8-native.inc          | 13 +++++------
+> recipes-core/openjdk/openjdk-8-native_72b05.bb     | 26 =
+----------------------
+> recipes-core/rhino/rhino_1.7r4.bb                  |  2 +-
+> recipes-core/servlet-api/servlet2.3_4.1.37.bb      |  4 +++-
+> recipes-core/servlet-api/servlet2.4_5.5.26.bb      |  2 ++
+> recipes-core/xalan-j/xalan-j_2.7.1.bb              |  2 +-
+> recipes-core/xerces-j/xerces-j_2.11.0.bb           |  6 ++---
+> recipes-core/xml-commons/jaxp1.3_1.4.01.bb         |  4 +++-
+> .../xml-commons/xml-commons-resolver1.1_1.2.bb     |  6 ++---
+> recipes-core/xml-commons/xpp2_2.1.10.bb            |  2 ++
+> recipes-core/xml-commons/xpp3_1.1.3.4.O.bb         |  2 ++
+> 42 files changed, 69 insertions(+), 90 deletions(-)
+> delete mode 100644 classes/java-bootstrap-components.bbclass
+>=20
 > --
 > 1.9.1
 >=20
 > --
-> Jens Rehsack - rehsack@gmail.com
->=20
-
-
-
-> --=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--
+Jens Rehsack - rehsack@gmail.com
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---TiqCXmo5T1hvSQQg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+--Apple-Mail=_DC4358AD-54B4-411D-8792-294D5BA5D06D
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlaKxQsACgkQN1Ujt2V2gByCawCeMqNTPGetNvVU/IBBFFr/vHwv
-q5cAnj0Eu9nU++uggzN+56XYZjHDGuMd
-=EapL
+iQIcBAEBCgAGBQJWisYSAAoJEESZlq7c5Qqd0qIQAK7n8RgMK6+6Rkp1Iv/QHMxv
+hMdo9GPB0Vn+Cse3cYHJ/IZ6QXWmHUjcSjA/L1JNwsGoBhURzF+I71Px2/0GCGRO
+JXDkxZWCTkMVRzSoJW9s6hVp67UX4YaIIa0mMBmq7n5KriBEia89PGwg3CrCzgzl
+p19E1ZU7oy/vt2VQQD+0UpTxGwfKDFEi4m2zrJnCA24gh7reDgi9epQdejdV7HNP
+azGEQtWlEvtf+UbeX2Iiqt//JHQzibcgIsVuBQNN3kFnGpWHSvXWZjl23ZvzORAo
+6hCfPESI/Y9s73ke5dJPHT7UrNZy9mHoaPiU4CxM+WZMzqkz3AZOBfA6JKDow173
+iDNdjsqBUUHoWVepbvH/GOTDa8zpKYxJqW6ojhaa/v/RN0LP3FQL1+dT4zcEqbfg
+bKHW/4OMrjC7VK3yCbpRVMdFTieaOWxdVvwwO8Tq93el+uNbAGsSBwI8E0mz0xkX
+zKGfMeFjd/IECTWcA17Sou1tL5IxVsCnk3lKcM2aQigqhaulRvMSrsbINTIwRK/f
+/EaaeC6rLn6T+93KxDDHEJbyqEkT/yZ/uCzPvyCNkW+CDYfGDRAX/PWEviUIGdOZ
+4kbz269Bv5FZ97lSYOB7Tzx/CAFkBS+ddT/YUVM6o4uLjLuD4aZDIPHx54VE6tyB
+ZXGXWcBD0M/ik7aMV2v7
+=UUEy
 -----END PGP SIGNATURE-----
 
---TiqCXmo5T1hvSQQg--
+--Apple-Mail=_DC4358AD-54B4-411D-8792-294D5BA5D06D--
