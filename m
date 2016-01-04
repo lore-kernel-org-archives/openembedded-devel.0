@@ -1,47 +1,38 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f176.google.com (mail-io0-f176.google.com
-	[209.85.223.176])
-	by mail.openembedded.org (Postfix) with ESMTP id A9797731B2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 380D56FFD3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 17:29:00 +0000 (UTC)
-Received: by mail-io0-f176.google.com with SMTP id o67so441114644iof.3
+	Mon,  4 Jan 2016 17:52:01 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id f206so149383992wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2016 09:29:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=dGsKR9k7QguZdbVUsLVoun3+0aCK1JZvd/13LJ8i2bY=;
-	b=u3zk36ypImjgQl0XO1SuWB53+9oeLoEfe5zHE9N9gpCn9/zfi/oybGgNfIekKit9YB
-	AuGFbrCs7VNPNF96UJ+oO4vGds9ydnMqfiYYkqxxSUexPnzymz9EhJQEfnRt0cLXYTYc
-	w56mJF4mP3RYROM3P8P0lxm9d0q5Kv8r/pf911LKt1AaCSMcaZlP+cr8jv+MjjXdtbc3
-	pSnf8KtURIfhRQFCKfwXhCnHwFNKy5zHvNlD/KmqteSHx415GI3BjvgfBljQWnz3riaP
-	3UtbJDr/f+Q/B8KqVPeN5ZinaFK+hP5arR6XZZZDXV/b/0utDd7kDkT26u6nIS5dlM6m
-	oaEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=dGsKR9k7QguZdbVUsLVoun3+0aCK1JZvd/13LJ8i2bY=;
-	b=bqjqs7qP5k/c9BC3E95wSO9cXIA0HNm7cv4bKEmRLwmCAAiISBJaXZXjcMTD9oxZxr
-	OpHa7hf7adP1ZKA7nc7oOVd+iOmoDbNrvz+08dUh1pK4DNxJjjgDMeDQDM3orEoz5Vue
-	CCob0peqrekl8+MncP7dUIlgc4TKB5ozPAUENKZoSUyTXfg5f3N1TDJt9FzTvoyiu/2H
-	gH3Fe3NLyHLIBmne9eDqtqdqsMXe1dfmBe/7qqv+MQsAmQ9KRTr98POypdDuWt9nUFV6
-	z9pXUMAh3RhuKO3rYQudQQBinU+EgjVMZmbqNzjp7KgOmf2IuqUlRMlrp5tnQzwCyfpm
-	/+aQ==
-X-Gm-Message-State: ALoCoQnFdT+rwpeOFzSjOt7ZBAarkLydbsAZTHavWmMIPxPC57GKMMVVEwxTdLQvjux27inB/8oIsJ0TuRTdRtdvwQpZrOIHLjLzrtNMF+hQTTspJgwWliM=
-X-Received: by 10.107.164.161 with SMTP id d33mr73739302ioj.148.1451928541558; 
-	Mon, 04 Jan 2016 09:29:01 -0800 (PST)
+	Mon, 04 Jan 2016 09:52:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=hgC5uqFIOileshZt4dl3tB+0t2W+VVMYs1Kt8wHRrgw=;
+	b=01Vkm3PuFvosodfMdfuYLZ4Bm0IdMHDjHfaaxXPDI9M1yypcirkVuONkXeSEjA8y46
+	vPtVwuPiEhhlXHkOffqgaPIAEkvJBTuOJoliXix5tmhgTZ6K6qtOhRIIGeIuij9P4VY+
+	ufYwm4eQRak46NN4hKPCgRzzDd4h7d6CvikC//rHHxYPTSaBwu3pipe+dXkx1z6qQipx
+	udX7e5UvtWhc563p2q0KVGa7Z5mO9lqKY/9E2RE5zlcFLYz/LfM//cZNtMUcEvYLm44p
+	QlByH4nAYkpYM/ryWxXVGZYKhrn980VflSUqh8qiPTAZ0t1VgboVHcik80LpXIDAlgCP
+	jUZg==
+X-Received: by 10.28.54.65 with SMTP id d62mr62899073wma.35.1451929922155;
+	Mon, 04 Jan 2016 09:52:02 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id q4sm87388396wja.6.2016.01.04.09.52.00
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 04 Jan 2016 09:52:00 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 4 Jan 2016 18:52:00 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160104175200.GA5744@jama>
+References: <1451483875-2370-1-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-Received: by 10.107.162.70 with HTTP; Mon, 4 Jan 2016 09:28:42 -0800 (PST)
-In-Reply-To: <CAJTo0LayEjj9moB9xgup=vB+C9Sn2-WX+s97UWRt9tg=HYFnag@mail.gmail.com>
-References: <CAJTo0LayEjj9moB9xgup=vB+C9Sn2-WX+s97UWRt9tg=HYFnag@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 4 Jan 2016 17:28:42 +0000
-Message-ID: <CAJTo0LY-O9ee3jGoSPOPjqpu=u9zCEo2vfh3jfyxvgC15MWxbQ@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [RFC] Delete all .la files?
+In-Reply-To: <1451483875-2370-1-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH] mariadb: -native also needs gold workaround
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,18 +45,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 17:29:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 04 Jan 2016 17:52:02 -0000
+X-Groupsio-MsgNum: 59319
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="FCuugMFkClbJLl1L"
+Content-Disposition: inline
 
-On 23 December 2015 at 21:41, Burton, Ross <ross.burton@intel.com> wrote:
+--FCuugMFkClbJLl1L
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> So in the new year I plan on submitting a renamed version of this class to
-> oe-core and adding it to INHERIT_DISTRO.  Any comments?
->
+On Wed, Dec 30, 2015 at 02:57:55PM +0100, Koen Kooi wrote:
+> When the host distro uses gold mariadb-native fails to build.
+>=20
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  meta-oe/recipes-support/mysql/mariadb.inc | 3 +++
+>  1 file changed, 3 insertions(+)
+>=20
+> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-=
+support/mysql/mariadb.inc
+> index a6826c3..6a55476 100644
+> --- a/meta-oe/recipes-support/mysql/mariadb.inc
+> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
+> @@ -60,6 +60,9 @@ PACKAGECONFIG[setupdb] =3D ", ,,${PN}-setupdb"
+>  # https://mariadb.atlassian.net/browse/MDEV-5982
+>  TARGET_CFLAGS +=3D "-fuse-ld=3Dbfd"
+> =20
+> +BUILD_CFLAGS +=3D "-fuse-ld=3Dbfd"
+> +BUILD_CXXFLAGS +=3D "-fuse-ld=3Dbfd"
 
-Technicalities time: should this be a new class that is in the default
-INHERIT_DISTRO?  Or directly integrated into base.bbclass?  Does anyone
-have a strong opinion either way?
+Unfortunately this breaks builds on older hosts with older gcc
 
-Ross
+|   cc1: error: unrecognized command line option '-fuse-ld=3Dbfd'
+http://errors.yoctoproject.org/Errors/Details/25859/
 
+Should we consider Ubuntu-12.04 insanely old?
+
+> +
+>  EXTRA_OECMAKE =3D "-DWITH_EMBEDDED_SERVER=3DON \
+>                   -DWITH_JEMALLOC=3Dno \
+>                   -DWITHOUT_TOKUDB=3DTRUE \
+> --=20
+> 2.0.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--FCuugMFkClbJLl1L
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlaKsT8ACgkQN1Ujt2V2gBya7ACgpD0/Dlzbf/r2AXw18G4Msl1W
+2D4AoIqMjH8wo/+EnkhBNt7OobNa4I3/
+=gsUs
+-----END PGP SIGNATURE-----
+
+--FCuugMFkClbJLl1L--
