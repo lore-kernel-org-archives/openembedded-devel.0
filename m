@@ -1,35 +1,34 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id A43B1731C0
+Return-Path: <twoerner@gmail.com>
+Received: from mail-io0-f193.google.com (mail-io0-f193.google.com
+	[209.85.223.193])
+	by mail.openembedded.org (Postfix) with ESMTP id B9363731CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 19:23:29 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id l65so435633wmf.1
+	Mon,  4 Jan 2016 19:35:48 +0000 (UTC)
+Received: by mail-io0-f193.google.com with SMTP id q21so12330826iod.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2016 11:23:30 -0800 (PST)
+	Mon, 04 Jan 2016 11:35:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:content-type:subject:date:message-id:to:mime-version;
-	bh=Gno4rjwaLIo7cfyYAaStQNIKMXv44l/3xraMiGODVV8=;
-	b=LMN37ku1r2NKEkw286q8fhGK1EbozpC9XPGE72Ks9jfiY6vlTThld+Tp/pL1z/RyE1
-	1RRgmHBZCqitwY3czbvqczDXI1vfdrqgX42XSelba2gMZqdCQwlp474KSsoGWtDVEQV/
-	LZwT27R0qHfjBVvD/RKI9BplAZ04GIvpRYnImwi8KHUaqijbDTwJRSASFqHYjioaYn+0
-	TJHwiKIgG7VCWZcY4jASHv5uUZpP9VhWb04+RQVyp4IlhKD/cXKrGl7Rqk9vHp+vxycN
-	7GqyLhyOvv0SPbenTtSZFWYiF6vP0J8PncS/fO60Q0oyPRW4YwBzXxPUu1wdhjupeaNF
-	Fw0Q==
-X-Received: by 10.28.132.146 with SMTP id g140mr26306wmd.49.1451935410173;
-	Mon, 04 Jan 2016 11:23:30 -0800 (PST)
-Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
-	by smtp.gmail.com with ESMTPSA id o132sm42450wmb.7.2016.01.04.11.23.29
-	for <openembedded-devel@lists.openembedded.org>
+	h=from:to:cc:subject:date:message-id;
+	bh=zvZ7d1FJSpWD5htOt8p1F38sSs3lkwxgv06yaPwyAv0=;
+	b=ojAodzBqqVJ89cTJCRUg356ro6syyAxUS/xxEatqhkScDT0sijP3Sq/AofM97t9UfC
+	3bC435rBh+h5kfC9yVCZQIWgXokMeHJq4SeynyKKvBIZYnbe9oOpmcF0k4Xr4R6UO23X
+	ehBR+UFpO6WtZaWYOwUw5bnl9OEr6ppsdfL8t/6Uw4oQ4lVw+SkzhOMj0cNuBLT7zSHV
+	cQnctX8oskuo9OBkjdY0Es3hsGUNvE3lI9I0I4Qgkn5CYvluWUVoHHtwtNmiPkTSYUUG
+	oN9293mx2FNnO6kWQmkSKBf98ijkROJK6/aOlA9XmhAG9V+MqGgeSho5Obc2Om3ljtSG
+	K+Ng==
+X-Received: by 10.107.12.22 with SMTP id w22mr98078271ioi.8.1451936149118;
+	Mon, 04 Jan 2016 11:35:49 -0800 (PST)
+Received: from openSUSE-i7.site (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	by smtp.gmail.com with ESMTPSA id e3sm39684igx.0.2016.01.04.11.35.47
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 04 Jan 2016 11:23:29 -0800 (PST)
-From: Jens Rehsack <rehsack@gmail.com>
-X-Pgp-Agent: GPGMail 2.6b2
-Date: Mon, 4 Jan 2016 20:23:28 +0100
-Message-Id: <39CD663F-7EB1-4C8D-B785-25ADEAB15362@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
-X-Mailer: Apple Mail (2.3112)
-Subject: [meta-networking][PATCH v2] samba: move RDEPENDS of perl from samba to samba-pidl
+	Mon, 04 Jan 2016 11:35:48 -0800 (PST)
+From: Trevor Woerner <twoerner@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  4 Jan 2016 14:35:19 -0500
+Message-Id: <1451936119-27515-1-git-send-email-twoerner@gmail.com>
+X-Mailer: git-send-email 2.7.0.rc3
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-browser][PATCH] chromium_40.0.2214.91: API keys update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,82 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 19:23:30 -0000
-X-Groupsio-MsgNum: 59332
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_88B7BB53-E769-4FA2-BC59-52D54C55DAF6";
-	protocol="application/pgp-signature"; micalg=pgp-sha512
+X-List-Received-Date: Mon, 04 Jan 2016 19:35:49 -0000
 
---Apple-Mail=_88B7BB53-E769-4FA2-BC59-52D54C55DAF6
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+Add more information to the "disable-api-keys-info-bar" PACKAGECONFIG
+description regarding another way to disable the "Google API keys are
+missing" warning.
 
-
-samba-pidl is the package containing the perl-extension, so RDEPENDS
-must include perl for samba-pidl, not for samba.
-
-Signed-off-by: Jens Rehsack <sno@netbsd.org>
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- meta-networking/recipes-connectivity/samba/samba_4.1.12.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ recipes-browser/chromium/chromium_40.0.2214.91.bb | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb =
-b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-index 5b343f2..f8a33e3 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-@@ -39,6 +39,8 @@ SRC_URI[md5sum] =3D "232016d7581a1ba11e991ec2674553c4"
- SRC_URI[sha256sum] =3D =
-"033604674936bf5c77d7df299b0626052b84a41505a6a6afe902f6274fc29898"
-
- inherit systemd waf-samba cpan-base perlnative
-+# remove default added RDEPENDS on perl
-+RDEPENDS_${PN}_remove =3D "perl"
-
- DEPENDS +=3D "readline virtual/libiconv zlib popt libtalloc libtdb =
-libtevent libldb krb5 ctdb libbsd"
-
-@@ -319,4 +321,5 @@ FILES_${PN}-python-dbg =3D =
-"${libdir}/python${PYTHON_BASEVERSION}/site-packages/.d
-                           =
-${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/dcerpc/.debug/* =
-\
- "
-
-+RDEPENDS_${PN}-pidl_append =3D " perl"
- FILES_${PN}-pidl =3D "${bindir}/pidl ${PERL_VERNDORLIB}/*"
---
-1.9.1
-
---
-Jens Rehsack - rehsack@gmail.com
+diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+index 4694506..6fddcc7 100644
+--- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
++++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+@@ -45,7 +45,13 @@ SRC_URI = "\
+ # * disable-api-keys-info-bar: (off by default)
+ #       This disables the info bar that warns: "Google API keys are missing".
+ #       With some builds, missing API keys are considered OK, so the bar needs
+-#       to go.
++#       to go. Conversely, if Chromium is compiled with this option off and
++#       the user wishes to disable the warning, the following lines can be
++#       added to the "google-chrome" script (see patchset) before the
++#       chromium binary is called:
++#           export GOOGLE_API_KEY="no"
++#           export GOOGLE_DEFAULT_CLIENT_ID="no"
++#           export GOOGLE_DEFAULT_CLIENT_SECRET="no"
+ #
+ # * component-build: (off by default)
+ #       Enables component build mode. By default, all of Chromium (with the
+-- 
+2.7.0.rc3
 
 
---Apple-Mail=_88B7BB53-E769-4FA2-BC59-52D54C55DAF6
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iQIcBAEBCgAGBQJWisawAAoJEESZlq7c5QqdyfsP/2LCgutLfhccmNPF5k9FY0vv
-cZhIq9S85MkDwPNP0sSDWNH5kgrCd4U1nxDCnon3Pv0i5BwJagvqABUTVwoPH8LB
-o/uDR/ffbEMtecQi424zZ7tCcBkka1g02SEByvLCRVPQ12W52GtWrqjDo0oWBpYU
-LPluhSaD+fxyZlr0kZ76F+wuqiKEnpPRxEG00G7pjty7bs4CzT4GxFkFhPaWQZRE
-JI9cQjmjgjdsgmful9bUhQFRFRXGt2inqFNtODoaRLZCZFIpApc0v4Rq7NuU7oa4
-ppP1V52Ex8rpVz9jPCGC64/2vmWkGmnwJMe6CqvVqq2baqnSgiilkdllqsTbmUnk
-WFIEpaLndOH2cULrSbFzjW89rK9hrRxqlt8PWDsw8lzo6X43Rz/YQkmIB/n8ItrY
-cTGGmAwYZbatmiOy1K3ygJi4C+12l4Pe7HxshE2TZqPYtzny/dcIzc6l33fiNVno
-NHqM0Vpu/ls4MPm7NZwPuIc7WxNC13QbBQ2C+LJ44wG2y2TEJ9MmoPMXHDD9B5wy
-vnKH6b45uGlTuwELSlGdJsySwck6QzZGJjTyrWJE3BlY2Efmt0KzKHWdolXnRR5q
-yd23SVVZt13Ne20oVXNzAd4ZDP+oLUFP6NadCWXjmqfzHtqIG/nRZLvg41SN3g7T
-za3G4uq6hAZKe5HN4gJt
-=lmSi
------END PGP SIGNATURE-----
-
---Apple-Mail=_88B7BB53-E769-4FA2-BC59-52D54C55DAF6--
