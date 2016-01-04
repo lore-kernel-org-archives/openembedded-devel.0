@@ -1,36 +1,24 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f46.google.com (mail-qg0-f46.google.com
-	[209.85.192.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 612B26FFC7
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5436B6057B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Jan 2016 21:15:31 +0000 (UTC)
-Received: by mail-qg0-f46.google.com with SMTP id e32so152273742qgf.3
+	Mon,  4 Jan 2016 01:27:45 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u041RjSH007446
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Jan 2016 13:15:32 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=from:to:cc:subject:date:message-id;
-	bh=2Lxtum8sP5GlHFPq3/fU0y6AIQWOuX0X4e8vS6hazMc=;
-	b=gFuEswIdlg76xeBM2s1uQU9kyLlJA/ivrcJ8N30YTroTgnBZdf9LtwsG8DDl1Mg7h8
-	GppZM/XKphvlc5JhIZ5O8PhjIwcFRX4JJ26dxVyzwIdLv1fKr+aKu06BE/LVbKFA4Nyu
-	KScm3SZeRMh/53HKri2qUqsAwrmwoArShZIoA5qck5NKPNxJcWsy4+E9Ncx3bNKkP8dw
-	18VjuTi8fwiQh7cXc8rgFjyWrq0gNBOST2fpDi1OTMyxSr7/A7gFRrFzOmth55+AT96v
-	VMTiA+KqR4g6dn/tAw9wT09AhVPM5tRTtLcz5VFOyA57xoRIDVqQiu3zDn2ma6743KDV
-	2Gvw==
-X-Received: by 10.140.142.207 with SMTP id 198mr108143403qho.77.1451855732439; 
-	Sun, 03 Jan 2016 13:15:32 -0800 (PST)
-Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	c128sm38547120qha.5.2016.01.03.13.15.31
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 03 Jan 2016 13:15:31 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Jan 2016 16:15:21 -0500
-Message-Id: <1451855721-13018-1-git-send-email-derek@asterius.io>
+	Sun, 3 Jan 2016 17:27:45 -0800
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Sun, 3 Jan 2016 17:27:45 -0800
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 4 Jan 2016 09:14:01 +0800
+Message-ID: <1451870041-5001-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.9.1
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] Add python-jsonpatch and python-jsonpointer recipes
+MIME-Version: 1.0
+Subject: [PATCH][meta-networking] mime-construct: Perform more mangling for perl path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,68 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Jan 2016 21:15:32 -0000
+X-List-Received-Date: Mon, 04 Jan 2016 01:27:47 -0000
+Content-Type: text/plain
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+From: Roy Li <rongqing.li@windriver.com>
+
+native perl is in /usr/bin/mime-construct, introduce the below
+QA warning, it should be replaced:
+
+WARNING: QA Issue: /usr/bin/mime-construct_mime-construct contained in package mime-construct requires
+tmp/sysroots/x86_64-linux/usr/bin/perl-native/perl, but no providers found in its RDEPENDS [file-rdeps]
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- .../python/python-jsonpatch_1.12.bb                 | 21 +++++++++++++++++++++
- .../python/python-jsonpointer_1.10.bb               | 19 +++++++++++++++++++
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb
- create mode 100644 meta-python/recipes-devtools/python/python-jsonpointer_1.10.bb
+ .../recipes-extended/mime-construct/mime-construct_1.11.bb          | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb b/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb
-new file mode 100644
-index 0000000..4dc3bee
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb
-@@ -0,0 +1,21 @@
-+SUMMARY  = "Appling JSON patches in Python 2.6+ and 3.x"
-+HOMEPAGE = "https://github.com/stefankoegl/python-json-patch"
-+SECTION = "devel/python"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
+diff --git a/meta-networking/recipes-extended/mime-construct/mime-construct_1.11.bb b/meta-networking/recipes-extended/mime-construct/mime-construct_1.11.bb
+index 6db4fdf..61bcd13 100644
+--- a/meta-networking/recipes-extended/mime-construct/mime-construct_1.11.bb
++++ b/meta-networking/recipes-extended/mime-construct/mime-construct_1.11.bb
+@@ -20,3 +20,9 @@ inherit cpan
+ RDEPENDS_${PN} = "msmtp perl perl-module-mime-base64 perl-module-mime-quotedprint \
+     libproc-waitstat-perl libmime-types-perl perl-module-filehandle perl-module-posix \
+ "
 +
-+SRCNAME = "jsonpatch"
-+
-+SRC_URI = " \
-+    https://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
-+"
-+
-+inherit setuptools
-+
-+SRC_URI[md5sum] = "76ae3183db5f2a8f85dd7705e9b6f278"
-+SRC_URI[sha256sum] = "2e1eb457f9c8dd5dae837ca93c0fe5bd2522c9d44b9b380fb1aab2ab4dec04b1"
-+
-+RDEPENDS_${PN} += "python-jsonpointer"
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-diff --git a/meta-python/recipes-devtools/python/python-jsonpointer_1.10.bb b/meta-python/recipes-devtools/python/python-jsonpointer_1.10.bb
-new file mode 100644
-index 0000000..9c69688
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-jsonpointer_1.10.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "Resolve JSON Pointers in Python"
-+HOMEPAGE = "https://github.com/stefankoegl/python-json-pointer"
-+SECTION = "devel/python"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
-+
-+SRCNAME = "jsonpointer"
-+
-+SRC_URI = " \
-+    https://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
-+"
-+
-+inherit setuptools
-+
-+SRC_URI[md5sum] = "d68c0c6ad6889e9c94ec0feba719e45e"
-+SRC_URI[sha256sum] = "9fa5dcac35eefd53e25d6cd4c310d963c9f0b897641772cd6e5e7b89df7ee0b1"
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
++do_install_append() {
++   #change the interpreter in file
++   sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl -w|${bindir}/env perl|g" \
++      ${D}/${bindir}/mime-construct
++}
 -- 
 1.9.1
 
