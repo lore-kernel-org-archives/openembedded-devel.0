@@ -1,33 +1,33 @@
 Return-Path: <lixin.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F605731C9
+	by mail.openembedded.org (Postfix) with ESMTP id B88D96B6EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 06:18:27 +0000 (UTC)
+	Mon,  4 Jan 2016 06:22:55 +0000 (UTC)
 X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
-   d="scan'208";a="2180160"
+   d="scan'208";a="2180293"
 Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 04 Jan 2016 14:18:26 +0800
+	by heian.cn.fujitsu.com with ESMTP; 04 Jan 2016 14:22:55 +0800
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 915624066D1A
+	by cn.fujitsu.com (Postfix) with ESMTP id DD11C4066D28
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 14:18:06 +0800 (CST)
+	Mon,  4 Jan 2016 14:22:41 +0800 (CST)
 Received: from localhost.localdomain (10.167.226.51) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 4 Jan 2016 14:18:06 +0800
+	Server (TLS) id 14.3.181.6; Mon, 4 Jan 2016 14:22:41 +0800
 From: Li Xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 3 Jan 2016 22:18:03 -0800
-Message-ID: <1451888283-31565-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+Date: Sun, 3 Jan 2016 22:22:39 -0800
+Message-ID: <1451888559-31632-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1451873503-5364-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 References: <1451873503-5364-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.51]
-X-yoursite-MailScanner-ID: 915624066D1A.AE3B1
+X-yoursite-MailScanner-ID: DD11C4066D28.A0081
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: lixin.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][PATCH v2] xterm: 308 -> 320
+Subject: [meta-oe][PATCH v3] xterm: 308 -> 320
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,12 +40,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 06:18:28 -0000
+X-List-Received-Date: Mon, 04 Jan 2016 06:22:56 -0000
 Content-Type: text/plain
 
 Upgrade xterm from 308 to 320.
 
-Modify LIC_FILES_CHKSUM,since the license file has changed.
+Modify LIC_FILES_CHKSUM,since the date in it has been changed, But the LICENSE has not been changed.
 
 Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
