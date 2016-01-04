@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id B7206731C2
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id E058A731C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 10:28:58 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id u188so141298537wmu.1
+	Mon,  4 Jan 2016 10:38:14 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id f206so167751863wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2016 02:28:59 -0800 (PST)
+	Mon, 04 Jan 2016 02:38:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=rMtTpURWSG/ThGePS11jHIvCvK6jK7qsVeGPInTap10=;
-	b=Jvh/gH92WDYOID5F4nPZEJNjiZtS9BhIvnrXH1a2jLr99JsI2iK8VQuT47+jXDTIYL
-	l4ftsrMPXLOyKEgw1QCSa9GAQE8KRhhXJg8UQf65aDoPNbn6D8tr+2iv19aYgKqmzgHP
-	DLGVXSEsRyXFiyUIZOAQZSor3+VX/0UCSIiSLVVSMnx+Jak/vsP2pkEbv/Edn4Mjmq+S
-	9TKCI9+jxybOkGsAR0EFNLx79R2hXCJHY2QXbqAeQEkSReGdub21QjbnFYs7PXfyT4py
-	zkprIE+KJtt57ppEZeQFuXkWDJc7/CI10iBcqmPeAmDCzrDxwVg4QgRbwZ0MRkbKoakK
-	Ihpg==
-X-Received: by 10.28.131.70 with SMTP id f67mr43123271wmd.66.1451903338418;
-	Mon, 04 Jan 2016 02:28:58 -0800 (PST)
+	bh=gi2EB55FTIdvr3/a5Ckf+NupoQm42gHM1YvOoPGYEJI=;
+	b=KhpXv+2+cyGywTDf/biBMtX5NS3ScTHmIqye4bk+fA8Y5xef1gAAClmXwOcf1KwydB
+	QhYm8V1hpzsZ+AdWzOu9owPqAJT3q+tdgQh/pF2IAM7+UhdvKHzJnUKEFAUY4NSx24q7
+	VvXe/N3sPCQ+HhInngT2JWg2/YiKqIvyE3d2Z5BZVCRuhdChq5Pi//74LGwsJg/3Y6ms
+	9ZAYLqEolWqPYLqyQf1VrgFI1BDdi4oZB3gndY3aeax/EKHMo3pYw9ac8etCm0xe2C+e
+	jOl68vkw9GwvsQTaQBAmueed+yRsanXh3aJAtSSF0o+49ok+dnAboLlUIF4cf5q60y0o
+	7WUA==
+X-Received: by 10.194.115.164 with SMTP id jp4mr57680919wjb.26.1451903894649; 
+	Mon, 04 Jan 2016 02:38:14 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	z65sm36923284wmg.10.2016.01.04.02.28.57
+	w80sm56201370wme.17.2016.01.04.02.38.13
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Jan 2016 02:28:57 -0800 (PST)
+	Mon, 04 Jan 2016 02:38:13 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 4 Jan 2016 11:33:08 +0100
+Date: Mon, 4 Jan 2016 11:42:24 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160104103308.GA2581@jama>
-References: <1451873378-5097-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+Message-ID: <20160104104224.GB2581@jama>
+References: <1450813380-3570-1-git-send-email-philip@balister.org>
 MIME-Version: 1.0
-In-Reply-To: <1451873378-5097-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+In-Reply-To: <1450813380-3570-1-git-send-email-philip@balister.org>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-oe][PATCH] python-simplejson: 2.2.1 -> 3.8.1
+Subject: Re: [meta-oe][PATCH] thrift: Add recipe for Apache Thrift.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,69 +46,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 10:29:00 -0000
-X-Groupsio-MsgNum: 59298
+X-List-Received-Date: Mon, 04 Jan 2016 10:38:15 -0000
+X-Groupsio-MsgNum: 59299
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="T4sUOijqQbZv57TR"
+	protocol="application/pgp-signature"; boundary="JYK4vJDZwFMowpUq"
 Content-Disposition: inline
 
---T4sUOijqQbZv57TR
+--JYK4vJDZwFMowpUq
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 03, 2016 at 06:09:38PM -0800, Li Xin wrote:
-> Upgrade python-simplejson from 2.2.1 to 3.8.1.
-
-what changed in the license?
-
-Describe it in commit message.
-
+On Tue, Dec 22, 2015 at 02:43:00PM -0500, Philip Balister wrote:
+>  * Run tested cpp bindings with GNU Radio Control Port.
 >=20
-> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> Signed-off-by: Philip Balister <philip@balister.org>
 > ---
->  .../{python-simplejson_2.2.1.bb =3D> python-simplejson_3.8.1.bb}      | =
-6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-devtools/python/{python-simplejson_2.2.1.bb =3D> =
-python-simplejson_3.8.1.bb} (68%)
+>  .../recipes-connectivity/thrift/thrift_0.9.3.bb    | 30 ++++++++++++++++=
+++++++
+>  1 file changed, 30 insertions(+)
+>  create mode 100644 meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
 >=20
-> diff --git a/meta-oe/recipes-devtools/python/python-simplejson_2.2.1.bb b=
-/meta-oe/recipes-devtools/python/python-simplejson_3.8.1.bb
-> similarity index 68%
-> rename from meta-oe/recipes-devtools/python/python-simplejson_2.2.1.bb
-> rename to meta-oe/recipes-devtools/python/python-simplejson_3.8.1.bb
-> index 7e42a7c..96c0aef 100644
-> --- a/meta-oe/recipes-devtools/python/python-simplejson_2.2.1.bb
-> +++ b/meta-oe/recipes-devtools/python/python-simplejson_3.8.1.bb
-> @@ -3,14 +3,14 @@ HOMEPAGE =3D "http://cheeseshop.python.org/pypi/simplej=
-son"
->  SECTION =3D "devel/python"
-> =20
->  LICENSE =3D "MIT"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D8a9f8dcfcd28c34daa443e5b1=
-d29813b"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dc6338d7abd321c0b50a2a547e=
-441c52e"
->  PR =3D "r1"
-> =20
->  SRCNAME =3D "simplejson"
-> =20
->  SRC_URI =3D "http://cheeseshop.python.org/packages/source/s/simplejson/$=
-{SRCNAME}-${PV}.tar.gz"
-> -SRC_URI[md5sum] =3D "070c6467462bd63306f1756b01df6d70"
-> -SRC_URI[sha256sum] =3D "e85c5ae24dd9827113893c1dd2c799528195057388096f0f=
-c45ad4b32b378c26"
-> +SRC_URI[md5sum] =3D "b8441f1053edd9dc335ded8c7f98a974"
-> +SRC_URI[sha256sum] =3D "428ac8f3219c78fb04ce05895d5dff9bd813c05a9a7922c5=
-3dc879cd32a12493"
-> =20
->  S =3D "${WORKDIR}/${SRCNAME}-${PV}"
-> =20
+> diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb b/meta-o=
+e/recipes-connectivity/thrift/thrift_0.9.3.bb
+> new file mode 100644
+> index 0000000..43b93cd
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
+> @@ -0,0 +1,30 @@
+> +LICENSE =3D "Apache-2.0"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De4ed21f679b2aafef26eac82ab0c2=
+cbf"
+> +
+> +SRC_URI =3D "git://git-wip-us.apache.org/repos/asf/thrift.git;protocol=
+=3Dhttps \
+> +"
+> +SRCREV =3D "61b8a29b0704ccd81b520f2300f5d1bb261fea3e"
+> +S =3D "${WORKDIR}/git"
+> +
+> +DEPENDS =3D "thrift-native boost python libevent flex-native bison-nativ=
+e openssl"
+
+Autodetects qt5 qmake and fails to use it, please disable it explicitly
+
+| -- Parsed Thrift version: 1.0.0 (1.0.0)
+| CMake Error at
+/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/lib/cmake/Qt=
+5Core/Qt5CoreConfig.cmake:27
+(message):
+|   The imported target "Qt5::Core" references the file
+|=20
+|      "/qmake"
+|=20
+
+
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
+> +
+> +inherit pkgconfig cmake pythonnative
+> +
+> +export STAGING_INCDIR
+> +export STAGING_LIBDIR
+> +export BUILD_SYS
+> +export HOST_SYS
+> +
+> +EXTRA_OECMAKE =3D "-DWITH_QT4=3DOFF"
+> +EXTRA_OECMAKE_append_class-native =3D "-DWITH_QT4=3DOFF -DBUILD_TESTING=
+=3DOFF \
+> +             -DBUILD_EXAMPLES=3DOFF -DWITH_CPP=3DOFF"
+> +EXTRA_OECMAKE_append_class-nativesdk =3D "-DBUILD_TESTING=3DOFF \
+> +             -DBUILD_EXAMPLES=3DOFF -DWITH_PYTHON=3DOFF"
+> +
+> +do_install_append () {
+> +	cd ${D}/${bindir}
+> +	ln -sf thrift thrift-compiler
+> +}
+> +
 > --=20
-> 1.9.1
->=20
->=20
+> 2.1.0
 >=20
 > --=20
 > _______________________________________________
@@ -119,16 +134,16 @@ c45ad4b32b378c26"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---T4sUOijqQbZv57TR
+--JYK4vJDZwFMowpUq
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlaKSmMACgkQN1Ujt2V2gByzAwCfcPNR+DW1r/r2dUpISXnkXG8d
-S4MAoI0M4SjypGQisZN69HgpgQs1/3Rf
-=Jr1h
+iEYEARECAAYFAlaKTI8ACgkQN1Ujt2V2gBxJKgCaAs7yQF2pMVZQ2KJ+lboWThVX
+kYYAni9i1FnpCzmyjsO0KVTSVOxZQyUP
+=bbyZ
 -----END PGP SIGNATURE-----
 
---T4sUOijqQbZv57TR--
+--JYK4vJDZwFMowpUq--
