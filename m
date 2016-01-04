@@ -1,34 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id D7E8C6067C
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id ECE9E731C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 13:40:06 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id f206so213772843wmf.0
+	Mon,  4 Jan 2016 13:40:07 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id b14so185031225wmb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2016 05:40:07 -0800 (PST)
+	Mon, 04 Jan 2016 05:40:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=iP8Zcnfj8yqb36vBNJwxFAMrl8LZxHCXUuMjR7/pm5U=;
-	b=o4LqONE7hUJyTIpuOeOyPMJqE+dyhFAAlHVQ2Tax2W6w4qOAhTpI9J477smMcRvgoP
-	9XJ0fzsKDUn8EFr1KScVHOo+ILCsf/haCsAIshAtM7cChaQzAO8AgCrKYt+CwZGvsm1V
-	wsxNzXevp/rC73gxmZcdsC/MEt0jhEMYGpj3XGfIig6ozP64zxAiufdJ2X/bsLdpQLR2
-	8V5SNZyBeJyFzkqypDBfQpONzZNz9gyDMQUyIIdG23hEafDabqSxxw3NXnVm/j5de5Ma
-	6AIWnPCp7pm34zp8azSns4PrsKl24Al5sdqDoD2vsKmsmAX8/leUbfRr0hf9N3HqvBuW
-	S3wA==
-X-Received: by 10.28.12.9 with SMTP id 9mr45695306wmm.76.1451914806637;
-	Mon, 04 Jan 2016 05:40:06 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=abbSfBJ7BtjUUv0+cRXEG3o6WGUkS2d2eUROK9AIxzk=;
+	b=gyPPSsiPJpvUxE8AjRya98RX2UqpLyy+zzooA5tUeyGtniTBLi66Fbvyp3kjmT9Ob0
+	A6aNMYhDu4KWUXb0B5EE7lARPe450XrM/nniAd3DMI1YOw0iRpnqDnCNXfBQV9quv2I2
+	QBWQfYYXecJNnOSCuea3XthqX4vydVltCgQ7gmgvoRYVZU/tpS8oNMeX+0RIPRnumTrd
+	vxKI2wjgqIbvB/G0lbi3hZIS3N2MYObpK2YWjzK3HrxJ4p460Q4tmYyLg0jN34a09DF5
+	AtlCGq2it+Nq5f0Hq4vextaEtH4qoiGRq6a1Mxpi2TD/U5BLGv9QkDFfuRb7FlC6rkr1
+	J9xw==
+X-Received: by 10.28.170.139 with SMTP id t133mr53228485wme.50.1451914808251; 
+	Mon, 04 Jan 2016 05:40:08 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	l194sm51418998wmb.14.2016.01.04.05.40.05
+	xx3sm27290047wjc.32.2016.01.04.05.40.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Jan 2016 05:40:05 -0800 (PST)
+	Mon, 04 Jan 2016 05:40:07 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Jan 2016 14:44:12 +0100
-Message-Id: <1451915055-28243-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon,  4 Jan 2016 14:44:13 +0100
+Message-Id: <1451915055-28243-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.6.4
-Subject: [PATCH][meta-oe 1/4] libetpan, claws*: blacklist because of gnutls upgrade
+In-Reply-To: <1451915055-28243-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1451915055-28243-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [PATCH][meta-oe 2/4] pidgin*: blacklist because of gnutls upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,78 +47,37 @@ X-List-Received-Date: Mon, 04 Jan 2016 13:40:08 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb                  | 1 +
- meta-oe/recipes-sato/claws-mail/claws-plugin-gtkhtml2-viewer_0.31.bb | 2 ++
- meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.15.bb        | 2 ++
- meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb           | 2 ++
- meta-oe/recipes-support/libetpan/libetpan_0.57.bb                    | 3 +++
- 5 files changed, 10 insertions(+)
+ meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb | 2 ++
+ meta-oe/recipes-support/pidgin/pidgin_2.10.9.bb    | 3 +++
+ 2 files changed, 5 insertions(+)
 
-diff --git a/meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb b/meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb
-index 1f61c39..5b75a52 100644
---- a/meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb
-+++ b/meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb
-@@ -4,6 +4,7 @@ DEPENDS = "gtk+ libetpan openssl aspell curl libgcrypt"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e059bde2972c1790af786f3e86bac22e"
+diff --git a/meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb b/meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb
+index 18dbe09..8518486 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb
++++ b/meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb
+@@ -4,6 +4,8 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=92fe174bad6da3763f6e9e9eaff6df24"
+ DEPENDS = "libgcrypt libotr pidgin intltool-native"
  
-+PNBLACKLIST[claws-mail] = "depends on blacklisted libetpan"
- 
- inherit autotools pkgconfig gettext
- 
-diff --git a/meta-oe/recipes-sato/claws-mail/claws-plugin-gtkhtml2-viewer_0.31.bb b/meta-oe/recipes-sato/claws-mail/claws-plugin-gtkhtml2-viewer_0.31.bb
-index 9adfd28..cabc1f3 100644
---- a/meta-oe/recipes-sato/claws-mail/claws-plugin-gtkhtml2-viewer_0.31.bb
-+++ b/meta-oe/recipes-sato/claws-mail/claws-plugin-gtkhtml2-viewer_0.31.bb
-@@ -4,6 +4,8 @@ DEPENDS = "claws-mail gtkhtml2 curl"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=977f04a8048c04684e521c06e2844a94"
- 
-+PNBLACKLIST[claws-plugin-gtkhtml2-viewer] = "depends on blacklisted claws-mail"
++PNBLACKLIST[pidgin-otr] = "depends on blacklisted pidgin"
 +
- PR = "r1"
+ SRC_URI = "http://www.cypherpunks.ca/otr/${BP}.tar.gz \
+            file://ignore_extra-portability_warnings.patch \
+ "
+diff --git a/meta-oe/recipes-support/pidgin/pidgin_2.10.9.bb b/meta-oe/recipes-support/pidgin/pidgin_2.10.9.bb
+index b635352..ffc81a1 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin_2.10.9.bb
++++ b/meta-oe/recipes-support/pidgin/pidgin_2.10.9.bb
+@@ -6,6 +6,9 @@ DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl
  
- SRC_URI = "http://www.claws-mail.org/downloads/plugins_obsolete/gtkhtml2_viewer-${PV}.tar.gz \
-diff --git a/meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.15.bb b/meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.15.bb
-index a4717dc..1951832 100644
---- a/meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.15.bb
-+++ b/meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.15.bb
-@@ -4,6 +4,8 @@ DEPENDS = "claws-mail"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ inherit autotools gettext pkgconfig gconf perlnative
  
-+PNBLACKLIST[claws-plugin-mailmbox] = "depends on blacklisted claws-mail"
++# http://errors.yoctoproject.org/Errors/Details/25824/
++PNBLACKLIST[pidgin] = "Not compatible with gnutls version 3.4 currently in oe-core"
 +
- SRC_URI = "http://www.claws-mail.org/downloads/plugins_obsolete/mailmbox-${PV}.tar.gz"
- SRC_URI[md5sum] = "7f72c68e6e1a8768f1247f455fd20b62"
- SRC_URI[sha256sum] = "633f7835261c88a0aa06de38553ac935a1799a7128120963a7fa87ace01dac18"
-diff --git a/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb b/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb
-index cdc465c..a9459d0 100644
---- a/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb
-+++ b/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb
-@@ -4,6 +4,8 @@ DEPENDS = "claws-mail libxml2 curl glib-2.0 gtk+"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0c2348e0a084e573f0220f5e45d8097e"
- 
-+PNBLACKLIST[claws-plugin-rssyl] = "depends on blacklisted claws-mail"
-+
- SRC_URI = "http://www.claws-mail.org/downloads/plugins_obsolete/rssyl-${PV}.tar.gz \
-            file://configure.patch"
- SRC_URI[md5sum] = "49b45608e8d160b3625d3d50016ec2ca"
-diff --git a/meta-oe/recipes-support/libetpan/libetpan_0.57.bb b/meta-oe/recipes-support/libetpan/libetpan_0.57.bb
-index 6be0694..c8d7c58 100644
---- a/meta-oe/recipes-support/libetpan/libetpan_0.57.bb
-+++ b/meta-oe/recipes-support/libetpan/libetpan_0.57.bb
-@@ -8,6 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f18ebe7e452708c26f83954f81062ba7"
- 
- PR = "r1"
- 
-+# http://errors.yoctoproject.org/Errors/Details/25823/
-+PNBLACKLIST[libetpan] = "Not compatible with gnutls version 3.4 currently in oe-core"
-+
- SRC_URI = "${SOURCEFORGE_MIRROR}/libetpan/libetpan-${PV}.tar.gz \
-            file://libetpan-autoreconf.patch \
-            file://libetpan-ldflags.patch \
+ SRC_URI = "\
+     ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
+     file://sanitize-configure.ac.patch \
 -- 
 2.6.4
 
