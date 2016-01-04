@@ -1,33 +1,39 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B22EB731DD
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id B7206731C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 10:13:16 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
-   d="scan'208";a="2188289"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 04 Jan 2016 18:13:16 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id B3BB24004E00
+	Mon,  4 Jan 2016 10:28:58 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id u188so141298537wmu.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 18:13:01 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.98) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 4 Jan 2016 18:16:33 +0800
-From: Li Xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 4 Jan 2016 13:12:38 +0300
-Message-ID: <1451902358-1844-4-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1451902358-1844-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-References: <1451902358-1844-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	Mon, 04 Jan 2016 02:28:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=rMtTpURWSG/ThGePS11jHIvCvK6jK7qsVeGPInTap10=;
+	b=Jvh/gH92WDYOID5F4nPZEJNjiZtS9BhIvnrXH1a2jLr99JsI2iK8VQuT47+jXDTIYL
+	l4ftsrMPXLOyKEgw1QCSa9GAQE8KRhhXJg8UQf65aDoPNbn6D8tr+2iv19aYgKqmzgHP
+	DLGVXSEsRyXFiyUIZOAQZSor3+VX/0UCSIiSLVVSMnx+Jak/vsP2pkEbv/Edn4Mjmq+S
+	9TKCI9+jxybOkGsAR0EFNLx79R2hXCJHY2QXbqAeQEkSReGdub21QjbnFYs7PXfyT4py
+	zkprIE+KJtt57ppEZeQFuXkWDJc7/CI10iBcqmPeAmDCzrDxwVg4QgRbwZ0MRkbKoakK
+	Ihpg==
+X-Received: by 10.28.131.70 with SMTP id f67mr43123271wmd.66.1451903338418;
+	Mon, 04 Jan 2016 02:28:58 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	z65sm36923284wmg.10.2016.01.04.02.28.57
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 04 Jan 2016 02:28:57 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 4 Jan 2016 11:33:08 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160104103308.GA2581@jama>
+References: <1451873378-5097-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.98]
-X-yoursite-MailScanner-ID: B3BB24004E00.AEE6B
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: lixin.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python][jethro][PATCH 4/4] python-cryptography: Error fix
+In-Reply-To: <1451873378-5097-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-oe][PATCH] python-simplejson: 2.2.1 -> 3.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,49 +46,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 10:13:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 04 Jan 2016 10:29:00 -0000
+X-Groupsio-MsgNum: 59298
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="T4sUOijqQbZv57TR"
+Content-Disposition: inline
 
-python-cryptography depends on python-enum34 python-six python-pyasn1,
-And will download modules enum34 six pyasn1 in the step of do_compile.
-If your network is not very well,errors will occur as following:
-  Download error on https://pypi.python.org/simple/enum34/:
-  [Errno -5] No address associated with hostname -- Some packages may not be found!
-  Couldn't find index page for 'enum34' (maybe misspelled?)
+--T4sUOijqQbZv57TR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- .../recipes-devtools/python/python-cryptography_0.8.1.bb   | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+On Sun, Jan 03, 2016 at 06:09:38PM -0800, Li Xin wrote:
+> Upgrade python-simplejson from 2.2.1 to 3.8.1.
 
-diff --git a/meta-python/recipes-devtools/python/python-cryptography_0.8.1.bb b/meta-python/recipes-devtools/python/python-cryptography_0.8.1.bb
-index 41e4acd..d6ebbb7 100644
---- a/meta-python/recipes-devtools/python/python-cryptography_0.8.1.bb
-+++ b/meta-python/recipes-devtools/python/python-cryptography_0.8.1.bb
-@@ -38,6 +38,20 @@ RDEPENDS_${PN}-ptest = "\
- 
- inherit ptest
- 
-+do_compile_prepend() {
-+    install -d ${S}/.eggs
-+    if [ -f ${STAGING_DIR_HOST}/${PYTHON_SITEPACKAGES_DIR}/enum34*.egg ]; then
-+        cp ${STAGING_DIR_HOST}/${PYTHON_SITEPACKAGES_DIR}/enum34*.egg ${S}/.eggs/
-+    fi
-+
-+    if [ -f ${STAGING_DIR_HOST}/${PYTHON_SITEPACKAGES_DIR}/pyasn1*.egg ]; then
-+        cp ${STAGING_DIR_HOST}/${PYTHON_SITEPACKAGES_DIR}/pyasn1*.egg ${S}/.eggs/
-+    fi
-+
-+    if [ -f ${STAGING_DIR_HOST}/${PYTHON_SITEPACKAGES_DIR}/six*.egg ]; then
-+        cp ${STAGING_DIR_HOST}/${PYTHON_SITEPACKAGES_DIR}/six*.egg ${S}/.eggs/
-+    fi
-+}
- do_install_ptest() {
-     install -d ${D}${PTEST_PATH}/tests
-     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--- 
-1.8.4.2
+what changed in the license?
 
+Describe it in commit message.
 
+>=20
+> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> ---
+>  .../{python-simplejson_2.2.1.bb =3D> python-simplejson_3.8.1.bb}      | =
+6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-oe/recipes-devtools/python/{python-simplejson_2.2.1.bb =3D> =
+python-simplejson_3.8.1.bb} (68%)
+>=20
+> diff --git a/meta-oe/recipes-devtools/python/python-simplejson_2.2.1.bb b=
+/meta-oe/recipes-devtools/python/python-simplejson_3.8.1.bb
+> similarity index 68%
+> rename from meta-oe/recipes-devtools/python/python-simplejson_2.2.1.bb
+> rename to meta-oe/recipes-devtools/python/python-simplejson_3.8.1.bb
+> index 7e42a7c..96c0aef 100644
+> --- a/meta-oe/recipes-devtools/python/python-simplejson_2.2.1.bb
+> +++ b/meta-oe/recipes-devtools/python/python-simplejson_3.8.1.bb
+> @@ -3,14 +3,14 @@ HOMEPAGE =3D "http://cheeseshop.python.org/pypi/simplej=
+son"
+>  SECTION =3D "devel/python"
+> =20
+>  LICENSE =3D "MIT"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D8a9f8dcfcd28c34daa443e5b1=
+d29813b"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dc6338d7abd321c0b50a2a547e=
+441c52e"
+>  PR =3D "r1"
+> =20
+>  SRCNAME =3D "simplejson"
+> =20
+>  SRC_URI =3D "http://cheeseshop.python.org/packages/source/s/simplejson/$=
+{SRCNAME}-${PV}.tar.gz"
+> -SRC_URI[md5sum] =3D "070c6467462bd63306f1756b01df6d70"
+> -SRC_URI[sha256sum] =3D "e85c5ae24dd9827113893c1dd2c799528195057388096f0f=
+c45ad4b32b378c26"
+> +SRC_URI[md5sum] =3D "b8441f1053edd9dc335ded8c7f98a974"
+> +SRC_URI[sha256sum] =3D "428ac8f3219c78fb04ce05895d5dff9bd813c05a9a7922c5=
+3dc879cd32a12493"
+> =20
+>  S =3D "${WORKDIR}/${SRCNAME}-${PV}"
+> =20
+> --=20
+> 1.9.1
+>=20
+>=20
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--T4sUOijqQbZv57TR
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlaKSmMACgkQN1Ujt2V2gByzAwCfcPNR+DW1r/r2dUpISXnkXG8d
+S4MAoI0M4SjypGQisZN69HgpgQs1/3Rf
+=Jr1h
+-----END PGP SIGNATURE-----
+
+--T4sUOijqQbZv57TR--
