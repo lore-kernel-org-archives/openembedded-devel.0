@@ -1,38 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 380D56FFD3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 17:52:01 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id f206so149383992wmf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2016 09:52:02 -0800 (PST)
+Return-Path: <kergoth@gmail.com>
+Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
+	[209.85.213.180])
+	by mail.openembedded.org (Postfix) with ESMTP id EDD7B731AE;
+	Mon,  4 Jan 2016 18:02:00 +0000 (UTC)
+Received: by mail-ig0-f180.google.com with SMTP id ik10so147110igb.1;
+	Mon, 04 Jan 2016 10:02:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=hgC5uqFIOileshZt4dl3tB+0t2W+VVMYs1Kt8wHRrgw=;
-	b=01Vkm3PuFvosodfMdfuYLZ4Bm0IdMHDjHfaaxXPDI9M1yypcirkVuONkXeSEjA8y46
-	vPtVwuPiEhhlXHkOffqgaPIAEkvJBTuOJoliXix5tmhgTZ6K6qtOhRIIGeIuij9P4VY+
-	ufYwm4eQRak46NN4hKPCgRzzDd4h7d6CvikC//rHHxYPTSaBwu3pipe+dXkx1z6qQipx
-	udX7e5UvtWhc563p2q0KVGa7Z5mO9lqKY/9E2RE5zlcFLYz/LfM//cZNtMUcEvYLm44p
-	QlByH4nAYkpYM/ryWxXVGZYKhrn980VflSUqh8qiPTAZ0t1VgboVHcik80LpXIDAlgCP
-	jUZg==
-X-Received: by 10.28.54.65 with SMTP id d62mr62899073wma.35.1451929922155;
-	Mon, 04 Jan 2016 09:52:02 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id q4sm87388396wja.6.2016.01.04.09.52.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Jan 2016 09:52:00 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 4 Jan 2016 18:52:00 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160104175200.GA5744@jama>
-References: <1451483875-2370-1-git-send-email-koen@dominion.thruhere.net>
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type;
+	bh=UeuURWtVjfvO6pbgahOI4rCnn7LxTll5L2PxI2jFGNA=;
+	b=ByMHj6wTZaSpfmE2/iAV3vWbpbr5sk8Y9TuLRp1i7JK6SZoKE7c2IKkPCGwNqNC9Ev
+	nE8Fx2ccNAOJ3x4t+Ln82Wxy0ZrHuDXISNgXB5BDr7JvhdsSQhou17+/HkRtthHNWkEq
+	v6VTaQbB4mY5cLudlj8YBi1BJtzYYfM22FYkI8qgdashGx5Nby/go2FzBV5utj7dErA3
+	DMx2IGYIIQdfuJnAoZNIHqAYh+ad1Eq0xXoynM6YHzbvHxyLI9lksj+QWcAfHVRXcQYk
+	P8oXrTh188ZyicEHVYrUmT/e0khXIWFh1QLVmm4vMyQk1CgMt8VGulJHqGl0Tl660kUc
+	yGeA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=kergoth-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type;
+	bh=UeuURWtVjfvO6pbgahOI4rCnn7LxTll5L2PxI2jFGNA=;
+	b=kJc2jRyTZgmp6C4un5w2pANZHgz4LSzp2IlOZI3zelZ9W8rHyBf2G+awxlVjSZPnas
+	tAGFWOna6X2/YrHQlV5hCbMZ+qFMAqW+Kc8NFy40HVTVfE7UgCWzpcRX9gVVFn3+F++E
+	YHnUMrBrOBLqMxDJphtU8pkKwuo0oDJu23TA/WV87TvGpsFO4qwAVrn1ZsR+En8upwRW
+	wKbK6x7sNxqcdxdOKo7msJAyeLiGr3j3tTdu/Tjjw+gMaNZSFgx/c5GPgD7QrPg2uQ0J
+	Qu9fKz/eRCWvi+2PlfWrg7sOGYxZxWDZWx5whCemfgao57p8ooVs0rRgxbNUQM73Pi+G
+	hfiA==
+X-Received: by 10.50.61.177 with SMTP id q17mr80014966igr.68.1451930521013;
+	Mon, 04 Jan 2016 10:02:01 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1451483875-2370-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH] mariadb: -native also needs gold workaround
+Sender: kergoth@gmail.com
+Received: by 10.79.104.194 with HTTP; Mon, 4 Jan 2016 10:01:41 -0800 (PST)
+In-Reply-To: <CAJTo0LY-O9ee3jGoSPOPjqpu=u9zCEo2vfh3jfyxvgC15MWxbQ@mail.gmail.com>
+References: <CAJTo0LayEjj9moB9xgup=vB+C9Sn2-WX+s97UWRt9tg=HYFnag@mail.gmail.com>
+	<CAJTo0LY-O9ee3jGoSPOPjqpu=u9zCEo2vfh3jfyxvgC15MWxbQ@mail.gmail.com>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Mon, 4 Jan 2016 11:01:41 -0700
+X-Google-Sender-Auth: l2E5v58IjeHgOfeyKBS0Zn_fYys
+Message-ID: <CABcZANktEorpFuYzmJ-4awzSLvypP67kao1jA3Kna3KBaOq1xA@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [RFC] Delete all .la files?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,70 +54,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 17:52:02 -0000
-X-Groupsio-MsgNum: 59319
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="FCuugMFkClbJLl1L"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 04 Jan 2016 18:02:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
---FCuugMFkClbJLl1L
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Jan 4, 2016 at 10:28 AM, Burton, Ross <ross.burton@intel.com> wrote:
 
-On Wed, Dec 30, 2015 at 02:57:55PM +0100, Koen Kooi wrote:
-> When the host distro uses gold mariadb-native fails to build.
->=20
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  meta-oe/recipes-support/mysql/mariadb.inc | 3 +++
->  1 file changed, 3 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-=
-support/mysql/mariadb.inc
-> index a6826c3..6a55476 100644
-> --- a/meta-oe/recipes-support/mysql/mariadb.inc
-> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
-> @@ -60,6 +60,9 @@ PACKAGECONFIG[setupdb] =3D ", ,,${PN}-setupdb"
->  # https://mariadb.atlassian.net/browse/MDEV-5982
->  TARGET_CFLAGS +=3D "-fuse-ld=3Dbfd"
-> =20
-> +BUILD_CFLAGS +=3D "-fuse-ld=3Dbfd"
-> +BUILD_CXXFLAGS +=3D "-fuse-ld=3Dbfd"
+> On 23 December 2015 at 21:41, Burton, Ross <ross.burton@intel.com> wrote:
+>
+> > So in the new year I plan on submitting a renamed version of this class
+> to
+> > oe-core and adding it to INHERIT_DISTRO.  Any comments?
+> >
+>
+> Technicalities time: should this be a new class that is in the default
+> INHERIT_DISTRO?  Or directly integrated into base.bbclass?  Does anyone
+> have a strong opinion either way?
 
-Unfortunately this breaks builds on older hosts with older gcc
 
-|   cc1: error: unrecognized command line option '-fuse-ld=3Dbfd'
-http://errors.yoctoproject.org/Errors/Details/25859/
+I'm inclined to say separate class.. as much as I hate too much class
+proliferation, base.bbclass does an awful lot of stuff already, arguably
+too much. *shrug*
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
-Should we consider Ubuntu-12.04 insanely old?
-
-> +
->  EXTRA_OECMAKE =3D "-DWITH_EMBEDDED_SERVER=3DON \
->                   -DWITH_JEMALLOC=3Dno \
->                   -DWITHOUT_TOKUDB=3DTRUE \
-> --=20
-> 2.0.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---FCuugMFkClbJLl1L
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlaKsT8ACgkQN1Ujt2V2gBya7ACgpD0/Dlzbf/r2AXw18G4Msl1W
-2D4AoIqMjH8wo/+EnkhBNt7OobNa4I3/
-=gsUs
------END PGP SIGNATURE-----
-
---FCuugMFkClbJLl1L--
