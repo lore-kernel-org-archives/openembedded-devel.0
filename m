@@ -1,36 +1,41 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id B69E4731A9
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 01B47731BD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 18:21:47 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id f206so150283250wmf.0
+	Mon,  4 Jan 2016 18:24:59 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id f206so226257004wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2016 10:21:48 -0800 (PST)
+	Mon, 04 Jan 2016 10:25:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:content-type:subject:date:message-id:to:mime-version;
-	bh=Fe8CXYFflIphRcTndGDHmZ/AdZxF92DnTBk8aC3kQHw=;
-	b=YAzKN++c/8nDo9urczg6eoOfDyxoGms/7jQ5RfgfX6AMFK9UYXvyf9QuFtoco1lOfr
-	HQZRY4MId7+BahfRbNcb3by54x0NIgehzWzc4yZtS6h5ikShiMLo5Jy9W/WyNlUbUhGM
-	xX+yK9N3IwJl7CWnmKhN9cFbQW2Zn1GLf3VNmbMAVV8nC/3ZDuYogTSgtn6HsRr3iuhp
-	HEW0JxPkUZsEYzeJPJ9a4qPKWdzRBTt876AT/FD/gR+UGSKHmEShdxldOFDsfleVcmj3
-	/EQTTxGLBbh5q6yoak7CYoxSgb2U5nEzXKUiNPfVrW4E5sUomlKUU2KtFgnYF7Bf/hH5
-	KqKA==
-X-Received: by 10.28.94.1 with SMTP id s1mr96502012wmb.60.1451931707986;
-	Mon, 04 Jan 2016 10:21:47 -0800 (PST)
-Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=R5gBuWBv6mXAX7khbAkLJmD9W4uWjsBj/4JMyuAQkKM=;
+	b=cH/QManE4S5nEjIfKAXAAlI8wkA/FyOglLGUw5gqrsCyLWmxHYPzICRbzS5o++Q8XC
+	wvagj7lDnfhnS/mlQkYO3eRAclSIMycx2dmwR/Bf6268uYTyhiccn64EuDeUaoGpKrki
+	ySg0krweBYia+TsapdU57VNJ2gAPX5XnfakXWopxhV/fOamLgbYFZHA1+TM3QOVh7AMd
+	nyAT1CDpzI44qmRBkdsyOuAZmeUSZlXieKXgkstXrxAWlHs8fW6PI3xgHNVOuX+Gkl8Y
+	5Op/t0WDmCDtpQhSd5mw4cEmFTOAVg5LQ1Ac56Sdqpua2eXqcwIS+9t+gN3QSKSutlal
+	/41w==
+X-Received: by 10.28.97.135 with SMTP id v129mr87073792wmb.78.1451931900043;
+	Mon, 04 Jan 2016 10:25:00 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	q129sm44887053wmd.14.2016.01.04.10.21.47
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 04 Jan 2016 10:21:47 -0800 (PST)
-From: Jens Rehsack <rehsack@gmail.com>
-X-Pgp-Agent: GPGMail 2.6b2
-Date: Mon, 4 Jan 2016 19:21:45 +0100
-Message-Id: <FA0361B1-63D8-4713-96BD-169202D7F68F@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
-X-Mailer: Apple Mail (2.3112)
-Subject: [meta-networking][PATCH] samba: split packages similar to samba3
+	75sm38924828wmo.22.2016.01.04.10.24.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 04 Jan 2016 10:24:59 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 4 Jan 2016 19:24:58 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160104182458.GB5744@jama>
+References: <1451483875-2370-1-git-send-email-koen@dominion.thruhere.net>
+	<20160104175200.GA5744@jama>
+	<CAMKF1soMFt_EGLUF8T61+7BcaureScErMsDyRdc-ZxLk3x1eFA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1soMFt_EGLUF8T61+7BcaureScErMsDyRdc-ZxLk3x1eFA@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH] mariadb: -native also needs gold workaround
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,317 +48,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 18:21:48 -0000
-X-Groupsio-MsgNum: 59322
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_7537551B-715C-4483-AD23-B5D3220F4E7D";
-	protocol="application/pgp-signature"; micalg=pgp-sha512
+X-List-Received-Date: Mon, 04 Jan 2016 18:25:00 -0000
+X-Groupsio-MsgNum: 59323
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="7iMSBzlTiPOCCT2k"
+Content-Disposition: inline
 
---Apple-Mail=_7537551B-715C-4483-AD23-B5D3220F4E7D
+--7iMSBzlTiPOCCT2k
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
 
+On Mon, Jan 04, 2016 at 10:15:23AM -0800, Khem Raj wrote:
+> On Mon, Jan 4, 2016 at 9:52 AM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> > On Wed, Dec 30, 2015 at 02:57:55PM +0100, Koen Kooi wrote:
+> >> When the host distro uses gold mariadb-native fails to build.
+> >>
+> >> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> >> ---
+> >>  meta-oe/recipes-support/mysql/mariadb.inc | 3 +++
+> >>  1 file changed, 3 insertions(+)
+> >>
+> >> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recip=
+es-support/mysql/mariadb.inc
+> >> index a6826c3..6a55476 100644
+> >> --- a/meta-oe/recipes-support/mysql/mariadb.inc
+> >> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
+> >> @@ -60,6 +60,9 @@ PACKAGECONFIG[setupdb] =3D ", ,,${PN}-setupdb"
+> >>  # https://mariadb.atlassian.net/browse/MDEV-5982
+> >>  TARGET_CFLAGS +=3D "-fuse-ld=3Dbfd"
+> >>
+> >> +BUILD_CFLAGS +=3D "-fuse-ld=3Dbfd"
+> >> +BUILD_CXXFLAGS +=3D "-fuse-ld=3Dbfd"
+> >
+> > Unfortunately this breaks builds on older hosts with older gcc
+> >
+> > |   cc1: error: unrecognized command line option '-fuse-ld=3Dbfd'
+> > http://errors.yoctoproject.org/Errors/Details/25859/
+> >
+> > Should we consider Ubuntu-12.04 insanely old?
+> >
+>=20
+> Its still maintained and supported until 2017 I believe.
 
-Since entire samba4 package is around 25MB, trying to save some space by
-splitting the package into several ones logically grouped as they were
-at samba3 in fido.
+By Canonical yes:
+http://www.ubuntu.com/info/release-end-of-life
+but that doesn't automatically make it good distribution for OE builds, I'm=
+ playing
+devils advocate here, because most jenkins slaves I have access to are
+currently using 12.04 (that's why I've noticed this issue in first place).
 
-Signed-off-by: Jens Rehsack <sno@netbsd.org>
----
- .../recipes-connectivity/samba/samba_4.1.12.bb     | 161 =
-+++++++++++++++++++--
- 1 file changed, 149 insertions(+), 12 deletions(-)
+I was already considering upgrading them to 14.04 and people can use
+build-appliance-image if they cannot just upgrade their host distro.
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb =
-b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-index 75cf5d2..5b343f2 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-@@ -52,7 +52,7 @@ PACKAGECONFIG ??=3D =
-"${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
-                    acl aio cups ldap \
- "
+FWIW: Poky already dropped it from SANITY_TESTED_DISTROS in Fido release:
 
--RDEPENDS_${PN} +=3D "${@bb.utils.contains('PACKAGECONFIG', 'lsb', =
-'lsb', '', d)}"
-+RDEPENDS_${PN}-base +=3D "${@bb.utils.contains('PACKAGECONFIG', 'lsb', =
-'lsb', '', d)}"
+commit b528712a076ad2fd08ec8a3cbcd7aefd612d999f
+Author: Lucian Musat <george.l.musat@intel.com>
+Date:   Mon Mar 23 12:35:12 2015 +0200
 
- PACKAGECONFIG[acl] =3D "--with-acl-support,---without-acl-support,acl"
- PACKAGECONFIG[aio] =3D =
-"--with-aio-support,---without-aio-support,libaio"
-@@ -78,8 +78,8 @@ =
-SAMBA4_LIBS=3D"heimdal,!zlib,!popt,!talloc,!pytalloc,!pytalloc-util,!teven=
-t,!pytev
- PERL_VERNDORLIB=3D"${libdir}/perl5/vendor_perl/${PERLVERSION}"
+    meta-yocto/distro: Updated SANITY_TESTED_DISTROS.
+   =20
+    Added OpenSUSE-13.2, Fedora 21. Removed poky 1.6 and Ubuntu 12.04.
 
- EXTRA_OECONF +=3D "--enable-fhs \
--                 --with-piddir=3D${localstatedir}/run \
--                 --with-sockets-dir=3D${localstatedir}/run/samba \
-+                 --with-piddir=3D/run \
-+                 --with-sockets-dir=3D/run/samba \
-                  --with-modulesdir=3D${libdir}/samba \
-                  --with-lockdir=3D${localstatedir}/lib/samba \
-                  --with-cachedir=3D${localstatedir}/lib/samba \
-@@ -100,7 +100,8 @@ EXTRA_OECONF +=3D "--enable-fhs \
- LDFLAGS +=3D "-Wl,-z,relro,-z,now"
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
- do_install_append() {
--    rmdir --ignore-fail-on-non-empty "${D}/${localstatedir}/run"
-+    rmdir --ignore-fail-on-non-empty "${D}/run/samba"
-+    rmdir --ignore-fail-on-non-empty "${D}/run"
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-     if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', =
-'false', d)}; then
-         install -d ${D}${systemd_unitdir}/system
-@@ -138,16 +139,151 @@ do_install_append() {
- }
-
- PACKAGES +=3D "${PN}-python ${PN}-python-dbg ${PN}-pidl libwinbind =
-libwinbind-dbg libwinbind-krb5-locator"
-+PACKAGES =3D+ "libwbclient libnss-winbind winbind winbind-dbg libnetapi =
-libsmbsharemodes \
-+             libsmbclient libsmbclient-dev lib${PN}-base ${PN}-base"
-
--FILES_${PN} +=3D "/run \
--                ${base_libdir}/security/pam_smbpass.so \
-+RDEPENDS_${PN} +=3D "${PN}-base"
-+
-+FILES_${PN}-base =3D "${sbindir}/nmbd \
-+                    ${sbindir}/smbd \
-+                    ${sysconfdir}/init.d \
-+                    ${localstatedir}/lib/samba \
-+                    ${localstatedir}/log/samba \
-+                    ${localstatedir}/nmbd \
-+                    ${localstatedir}/spool/samba \
-+"
-+
-+# figured out by
-+# =
-FILES=3D"tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/samba/4.1.12-r0/i=
-mage/usr/sbin/smbd =
-tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/samba/4.1.12-r0/image/usr/=
-sbin/nmbd"
-+#
-+# while [ "${FILES}" !=3D "${OLDFILES}" ]
-+# do
-+#     OLDFILES=3D"${FILES}"
-+#     =
-NEEDED=3D`tmp/sysroots/x86_64-linux/usr/libexec/arm-poky-linux-gnueabi.gcc=
--cross-initial-arm/gcc/arm-poky-linux-gnueabi/5.2.0/objdump -x ${FILES} =
-| grep NEEDED | egrep -E 'so(.[0-9]|$)' | sort -u | perl -MData::Dumper =
--le 'while (<>) {chomp; push @lib, (split)[1]}; print "(", join("|", =
-@lib), ")"'`
-+#     NF=3D`find =
-tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/samba/4.1.12-r0/image/usr/=
-lib -type f | egrep "${NEEDED}" | sort -u`
-+#
-+#     FILES=3D`perl -le 'foreach (@ARGV) { $f{$_}++ }; print join(" ", =
-sort keys %f)' ${FILES} ${NF}`
-+# done
-+#
-+# LIBS=3D`echo ${FILES} | sed -e =
-'s,tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/samba/4.1.12-r0/image/u=
-sr/lib,${libdir},g' -e 's,.so.[0-9]+.*$,.so.*,g'`
-+# for l in ${LIBS}
-+# do
-+#     echo $l
-+# done
-+
-+FILES_lib${PN}-base =3D "\
-+                    ${sysconfdir}/default \
-+                    ${sysconfdir}/samba \
-+                    ${libdir}/libdcerpc-binding.so.* \
-+                    ${libdir}/libgensec.so.* \
-+                    ${libdir}/libndr-krb5pac.so.* \
-+                    ${libdir}/libndr-nbt.so.* \
-+                    ${libdir}/libndr-standard.so.* \
-+                    ${libdir}/libndr.so.* \
-+                    ${libdir}/libnetapi.so.* \
-+                    ${libdir}/libpdb.so.* \
-+                    ${libdir}/libsamba-credentials.so.* \
-+                    ${libdir}/libsamba-hostconfig.so.* \
-+                    ${libdir}/libsamba-util.so.* \
-+                    ${libdir}/libsamdb.so.* \
-+                    ${libdir}/libsmbconf.so.* \
-+                    ${libdir}/libtevent-util.so.* \
-+                    ${libdir}/samba/libCHARSET3.so \
-+                    ${libdir}/samba/libaddns.so \
-+                    ${libdir}/samba/libads.so \
-+                    ${libdir}/samba/libasn1util.so \
-+                    ${libdir}/samba/libauth.so \
-+                    ${libdir}/samba/libauth_sam_reply.so \
-+                    ${libdir}/samba/libauthkrb5.so \
-+                    ${libdir}/samba/libccan.so \
-+                    ${libdir}/samba/libcli-ldap-common.so \
-+                    ${libdir}/samba/libcli-nbt.so \
-+                    ${libdir}/samba/libcli_cldap.so \
-+                    ${libdir}/samba/libcli_smb_common.so \
-+                    ${libdir}/samba/libcli_spoolss.so \
-+                    ${libdir}/samba/libcliauth.so \
-+                    ${libdir}/samba/libdbwrap.so \
-+                    ${libdir}/samba/libdcerpc-samba.so \
-+                    ${libdir}/samba/liberrors.so \
-+                    ${libdir}/samba/libflag_mapping.so \
-+                    ${libdir}/samba/libgse.so \
-+                    ${libdir}/samba/libinterfaces.so \
-+                    ${libdir}/samba/libkrb5samba.so \
-+                    ${libdir}/samba/libldbsamba.so \
-+                    ${libdir}/samba/liblibcli_lsa3.so \
-+                    ${libdir}/samba/liblibcli_netlogon3.so \
-+                    ${libdir}/samba/liblibsmb.so \
-+                    ${libdir}/samba/libmsrpc3.so \
-+                    ${libdir}/samba/libndr-samba.so \
-+                    ${libdir}/samba/libndr-samba4.so \
-+                    ${libdir}/samba/libnpa_tstream.so \
-+                    ${libdir}/samba/libntdb.so.* \
-+                    ${libdir}/samba/libpopt_samba3.so \
-+                    ${libdir}/samba/libprinting_migrate.so \
-+                    ${libdir}/samba/libsamba-modules.so \
-+                    ${libdir}/samba/libsamba-security.so \
-+                    ${libdir}/samba/libsamba-sockets.so \
-+                    ${libdir}/samba/libsamba3-util.so \
-+                    ${libdir}/samba/libsamdb-common.so \
-+                    ${libdir}/samba/libsecrets3.so \
-+                    ${libdir}/samba/libserver-role.so \
-+                    ${libdir}/samba/libsmb_transport.so \
-+                    ${libdir}/samba/libsmbd_base.so \
-+                    ${libdir}/samba/libsmbd_conn.so \
-+                    ${libdir}/samba/libsmbd_shim.so \
-+                    ${libdir}/samba/libsmbregistry.so \
-+                    ${libdir}/samba/libtdb-wrap.so \
-+                    ${libdir}/samba/libutil_cmdline.so \
-+                    ${libdir}/samba/libutil_ntdb.so \
-+                    ${libdir}/samba/libutil_reg.so \
-+                    ${libdir}/samba/libutil_setid.so \
-+                    ${libdir}/samba/libutil_tdb.so \
-+                    ${libdir}/samba/pdb/smbpasswd.so \
-+                    ${libdir}/samba/pdb/tdbsam.so \
-+                    ${libdir}/samba/pdb/wbc_sam.so \
-+"
-+
-+FILES_winbind-dbg =3D "${libdir}/idmap/.debug/*.so \
-+                     ${libdir}/security/.debug/pam_winbind.so \
-+"
-+
-+FILES_${PN} +=3D "${libdir}/vfs/*.so \
-+                ${libdir}/charset/*.so \
-+                ${libdir}/*.dat \
-+                ${libdir}/auth/*.so \
-+                ${libdir}/security/pam_smbpass.so \
-+"
-+
-+FILES_${PN}-dbg +=3D "${libdir}/vfs/.debug/*.so \
-+                    ${libdir}/charset/.debug/*.so \
-+                    ${libdir}/auth/.debug/*.so \
-+                    ${libdir}/security/.debug/pam_smbpass.so \
-+"
-+
-+FILES_libwbclient =3D "${libdir}/libwbclient.so.* =
-${libdir}/samba/libwinbind-client.so"
-+FILES_libnetapi =3D "${libdir}/libnetapi.so.*"
-+FILES_libsmbsharemodes =3D "${libdir}/libsmbsharemodes.so.*"
-+FILES_libsmbclient =3D "${libdir}/libsmbclient.so.*"
-+FILES_libsmbclient-dev =3D "${libdir}/libsmbclient.so ${includedir}"
-+FILES_winbind =3D "${sbindir}/winbindd \
-+                 ${bindir}/wbinfo \
-+                 ${bindir}/ntlm_auth \
-+                 ${sysconfdir}/init.d/winbind \
-+                 ${systemd_unitdir}/system/winbind.service \
-+"
-+
-+FILES_libnss-winbind =3D "${libdir}/libnss_*${SOLIBS} \
-+                        ${libdir}/nss_info \
-+"
-+
-+FILES_${PN} +=3D "${base_libdir}/security/pam_smbpass.so \
-                 ${libdir}/tmpfiles.d/* \
--               "
-+"
-
- SMB_SERVICE=3D"${systemd_unitdir}/system/nmb.service =
-${systemd_unitdir}/system/smb.service"
- SMB_SYSV=3D"${sysconfdir}/init.d ${sysconfdir}/rc?.d"
--FILES_${PN} +=3D"${@bb.utils.contains('DISTRO_FEATURES', 'systemd', =
-'${SMB_SERVICE}', '', d)}"
--FILES_${PN} +=3D"${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', =
-'${SMB_SYSV}', '', d)}"
-+FILES_${PN}-base +=3D"${@bb.utils.contains('DISTRO_FEATURES', =
-'systemd', '${SMB_SERVICE}', '', d)}"
-+FILES_${PN}-base +=3D"${@bb.utils.contains('DISTRO_FEATURES', =
-'sysvinit', '${SMB_SYSV}', '', d)}"
-
- FILES_${PN}-dbg +=3D "${libdir}/samba/idmap/.debug/* \
-                     ${libdir}/samba/pdb/.debug/* \
-@@ -156,7 +292,7 @@ FILES_${PN}-dbg +=3D "${libdir}/samba/idmap/.debug/* =
-\
-                     ${libdir}/samba/ldb/.debug/* \
-                     ${libdir}/samba/vfs/.debug/* \
-                     ${base_libdir}/security/.debug/pam_smbpass.so \
--                   "
-+"
-
- FILES_libwinbind =3D "${base_libdir}/security/pam_winbind.so"
- FILES_libwinbind +=3D "${@bb.utils.contains('DISTRO_FEATURES', =
-'systemd', '${systemd_unitdir}/system/winbind.service', '', d)}"
-@@ -175,11 +311,12 @@ FILES_${PN}-python =3D =
-"${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
-                       =
-${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/samba3/*.so \
-                       =
-${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/tests/* \
-                       =
-${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/web_server/* \
--                     "
-+"
-+
- FILES_${PN}-python-dbg =3D =
-"${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug/* \
-                           =
-${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/.debug/* \
-                           =
-${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/samba3/.debug/* =
-\
-                           =
-${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/dcerpc/.debug/* =
-\
--                         "
-+"
-
- FILES_${PN}-pidl =3D "${bindir}/pidl ${PERL_VERNDORLIB}/*"
---
-1.9.1
-
-
---
-Jens Rehsack - rehsack@gmail.com
-
-
---Apple-Mail=_7537551B-715C-4483-AD23-B5D3220F4E7D
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
+--7iMSBzlTiPOCCT2k
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
+Version: GnuPG v2
 
-iQIcBAEBCgAGBQJWirg6AAoJEESZlq7c5Qqd0iAP/j6Sz0bWTcedEjjDQe2DVGPC
-vrD+XB7MIPqcLMjolw27DWzRttgBxAfQetcZzUNpfW/CZeN13t+pbud9VaHbMJh5
-foSs4WRMXidcAkId4vQRpasLJMBsUQ7MpqKAQqOAToaZWdJq/8BuR0Z5jFufMcEd
-e+2314/m17imJDp6vPtnjyeFSczbUOKGzrKfSTv1HALy1wbtRq9YkHqksscBIHID
-q9XyBBuBokryLxlPpUwlUg14wn+K07NtGfgppWrBZ+lLAYbLGPrzXrqtSFmS2naw
-q3ooLFDXBIdYDuYQub2v89jNS3wFKZmBWwBRIcjZV07KrPxFCoO4PNWTT/cWlYPr
-RBJy13ZrK+O4Q7sfESn6KXVAweJcHXcSAKAWWhO8gYLxUFVdC43XM9sGVoYgQOBY
-E4ybPHRKxvHX892NPIw3twxC3ywG5K7wew++TnUcfr1swjkXZeAXz3fATGgGehEb
-+nyxrCj1OUadRKEZbtL+NMJ3N+oIOW9BhObZLj/z7+x9tzvLVGg41SaGF2roWybV
-TQZQQRMFNmmNT0SY2+hOF54+pjTYJhR1vvdoK1K74CJtN8H/CscgNrwE3ZDis2gC
-7IZCiLu4gD5rN4cI2wzH4RritXw4v36Cm8sUKYCsQIy5SU9b4MjD8griXhcY0czd
-YOQdXvbxtoUygo0bxnP/
-=jdx3
+iEYEARECAAYFAlaKuPkACgkQN1Ujt2V2gBw+MwCeL0c3HRoOWcvlN0rgPB21YaPd
+ktsAn2FMMnLUPotFzGECJ3Vb2d3s6hG7
+=GWJH
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_7537551B-715C-4483-AD23-B5D3220F4E7D--
+--7iMSBzlTiPOCCT2k--
