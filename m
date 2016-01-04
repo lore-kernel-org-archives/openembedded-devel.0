@@ -1,33 +1,27 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D8B3465CC2
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id CACEF6FF9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 06:46:34 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
-   d="scan'208";a="2181131"
-Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 04 Jan 2016 14:46:34 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id D8732406CF6E
+	Mon,  4 Jan 2016 08:53:41 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u048rfKb004944
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 14:46:15 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.51) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 4 Jan 2016 14:46:15 +0800
-From: Li Xin <lixin.fnst@cn.fujitsu.com>
+	Mon, 4 Jan 2016 00:53:41 -0800 (PST)
+Received: from [128.224.162.134] (128.224.162.134) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Mon, 4 Jan 2016 00:53:40 -0800
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 3 Jan 2016 22:46:13 -0800
-Message-ID: <1451889973-33677-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1451873378-5097-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-References: <1451873378-5097-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+References: <1451870041-5001-1-git-send-email-rongqing.li@windriver.com>
+From: Rongqing Li <rongqing.li@windriver.com>
+Message-ID: <568A3313.7050802@windriver.com>
+Date: Mon, 4 Jan 2016 16:53:39 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.51]
-X-yoursite-MailScanner-ID: D8732406CF6E.A3269
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: lixin.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH v2] python-simplejson: 2.2.1 -> 3.8.1
+In-Reply-To: <1451870041-5001-1-git-send-email-rongqing.li@windriver.com>
+Subject: Re: [PATCH][meta-networking] mime-construct: Perform more mangling for perl path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,48 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 06:46:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 04 Jan 2016 08:53:42 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Upgrade python-simplejson from 2.2.1 to 3.8.1.
+sorry, please drop this patch
 
-Modify LIC_FILES_CHKSUM,but the LICENSE has not been changed.
-References: https://pypi.python.org/pypi/simplejson
+-Roy
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- .../{python-simplejson_2.2.1.bb => python-simplejson_3.8.1.bb}      | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/python/{python-simplejson_2.2.1.bb => python-simplejson_3.8.1.bb} (68%)
+On 2016年01月04日 09:14, rongqing.li@windriver.com wrote:
+> From: Roy Li <rongqing.li@windriver.com>
+>
+> native perl is in /usr/bin/mime-construct, introduce the below
+> QA warning, it should be replaced:
+>
+> WARNING: QA Issue: /usr/bin/mime-construct_mime-construct contained in package mime-construct requires
+> tmp/sysroots/x86_64-linux/usr/bin/perl-native/perl, but no providers found in its RDEPENDS [file-rdeps]
+>
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> ---
+>   .../recipes-extended/mime-construct/mime-construct_1.11.bb          | 6 ++++++
+>   1 file changed, 6 insertions(+)
+>
+> diff --git a/meta-networking/recipes-extended/mime-construct/mime-construct_1.11.bb b/meta-networking/recipes-extended/mime-construct/mime-construct_1.11.bb
+> index 6db4fdf..61bcd13 100644
+> --- a/meta-networking/recipes-extended/mime-construct/mime-construct_1.11.bb
+> +++ b/meta-networking/recipes-extended/mime-construct/mime-construct_1.11.bb
+> @@ -20,3 +20,9 @@ inherit cpan
+>   RDEPENDS_${PN} = "msmtp perl perl-module-mime-base64 perl-module-mime-quotedprint \
+>       libproc-waitstat-perl libmime-types-perl perl-module-filehandle perl-module-posix \
+>   "
+> +
+> +do_install_append() {
+> +   #change the interpreter in file
+> +   sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl -w|${bindir}/env perl|g" \
+> +      ${D}/${bindir}/mime-construct
+> +}
+>
 
-diff --git a/meta-oe/recipes-devtools/python/python-simplejson_2.2.1.bb b/meta-oe/recipes-devtools/python/python-simplejson_3.8.1.bb
-similarity index 68%
-rename from meta-oe/recipes-devtools/python/python-simplejson_2.2.1.bb
-rename to meta-oe/recipes-devtools/python/python-simplejson_3.8.1.bb
-index 7e42a7c..96c0aef 100644
---- a/meta-oe/recipes-devtools/python/python-simplejson_2.2.1.bb
-+++ b/meta-oe/recipes-devtools/python/python-simplejson_3.8.1.bb
-@@ -3,14 +3,14 @@ HOMEPAGE = "http://cheeseshop.python.org/pypi/simplejson"
- SECTION = "devel/python"
- 
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8a9f8dcfcd28c34daa443e5b1d29813b"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c6338d7abd321c0b50a2a547e441c52e"
- PR = "r1"
- 
- SRCNAME = "simplejson"
- 
- SRC_URI = "http://cheeseshop.python.org/packages/source/s/simplejson/${SRCNAME}-${PV}.tar.gz"
--SRC_URI[md5sum] = "070c6467462bd63306f1756b01df6d70"
--SRC_URI[sha256sum] = "e85c5ae24dd9827113893c1dd2c799528195057388096f0fc45ad4b32b378c26"
-+SRC_URI[md5sum] = "b8441f1053edd9dc335ded8c7f98a974"
-+SRC_URI[sha256sum] = "428ac8f3219c78fb04ce05895d5dff9bd813c05a9a7922c53dc879cd32a12493"
- 
- S = "${WORKDIR}/${SRCNAME}-${PV}"
- 
 -- 
-1.9.1
-
-
-
+Best Reagrds,
+Roy | RongQing Li
 
