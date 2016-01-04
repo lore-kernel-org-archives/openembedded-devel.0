@@ -1,37 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 73517731BD
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id D4B41731C1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2016 18:31:08 +0000 (UTC)
-Received: by mail-io0-f181.google.com with SMTP id 77so132870527ioc.2
+	Mon,  4 Jan 2016 18:40:26 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id f206so150816845wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2016 10:31:09 -0800 (PST)
+	Mon, 04 Jan 2016 10:40:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=J0UzPPGWQDnZERLf1eI4GcwXoE1rrRj8aDPhVzRDIDE=;
-	b=cpjPOSWXvQ4PWCfsSTNj5gb//NukP8eiNwinBRzq8DYYBsK6U0+KGP+8zpIywx++kh
-	+FvJrVmm5pVXBj0aDt39hlWD/81e7r8rhrD+it4joXh3KEFRL535j9I123lZeW0Dpcdp
-	ws9fUjpNO+B3dsjuH7GC04Amn1mmS5p6UqijqwMClMWgofkamud0SNRySg54oKvEZSS0
-	KxQ9NfN7W9QswlQsf3qK1RdlAIzwMSsff8pAKE8sKdMcWwRCNxcBwV+p7ElKAsFoUUSS
-	OLjzS74le35JmpVlsRdtX5ct7+iYvNnC5FzIgfKm3c+1/Yx5GFBXyipzoaryhQhDo22G
-	ga6w==
-X-Received: by 10.107.34.79 with SMTP id i76mr27484150ioi.195.1451932269530;
-	Mon, 04 Jan 2016 10:31:09 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.16.74 with HTTP; Mon, 4 Jan 2016 10:30:40 -0800 (PST)
-In-Reply-To: <20160104182458.GB5744@jama>
-References: <1451483875-2370-1-git-send-email-koen@dominion.thruhere.net>
-	<20160104175200.GA5744@jama>
-	<CAMKF1soMFt_EGLUF8T61+7BcaureScErMsDyRdc-ZxLk3x1eFA@mail.gmail.com>
-	<20160104182458.GB5744@jama>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 4 Jan 2016 10:30:40 -0800
-Message-ID: <CAMKF1sob3pauwwzSkFB0fxm+hi24x47vdXSVwrG2ZZ=0kaU+EA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH] mariadb: -native also needs gold workaround
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=+gWkb9jPpTQ7RkkOiMR6LmyF0KHjPRymeZe+YteCkko=;
+	b=qzXkl17SRV2IGTItBbigMJwWc58PWbpCMo9Immge2QQyb6Zwc3BXx95CjoAK50StDE
+	/LZ7BFGEiCcwOHNj+ltdoT/uQaXDKOFI7azrob2SWy21oAOY1bfOLc15wBS9VBc8iZNs
+	IqgeK3ard8nAjE+aB39EejnufpWsY1BIkZYcdJjcHJXS1mqcHtYcGFNnjh8k/qTrcMgA
+	xzMi5nhpRorqW/P3th8Oyu+5taOX0G5+lhcTwCbGdeF96V/Twd0GCXHxK1qvt3skBftq
+	FMjfKJnhSf50rlS6cQDYnTiGik33FX9sJaN3LGdC+f49XtZTLsEOLAqoXU2ZTAhfLrJB
+	fYzA==
+X-Received: by 10.28.189.11 with SMTP id n11mr64610472wmf.3.1451932827010;
+	Mon, 04 Jan 2016 10:40:27 -0800 (PST)
+Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
+	by smtp.gmail.com with ESMTPSA id
+	a126sm28893910wmh.0.2016.01.04.10.40.25
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 04 Jan 2016 10:40:26 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Jens Rehsack <rehsack@gmail.com>
+In-Reply-To: <5683B82F.7060003@topic.nl>
+Date: Mon, 4 Jan 2016 19:40:24 +0100
+Message-Id: <E6192AC1-BA02-47DA-8E8A-9688A788AF74@gmail.com>
+References: <5683B31B.4090103@topic.nl> <5683B82F.7060003@topic.nl>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.3112)
+Subject: Re: Why does samba think it (R)DEPENDS on perl?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,83 +46,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2016 18:31:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 04 Jan 2016 18:40:27 -0000
+X-Groupsio-MsgNum: 59326
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_541120CD-A802-49F6-B350-36E6BE9D7F33";
+	protocol="application/pgp-signature"; micalg=pgp-sha512
 
-On Mon, Jan 4, 2016 at 10:24 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Mon, Jan 04, 2016 at 10:15:23AM -0800, Khem Raj wrote:
->> On Mon, Jan 4, 2016 at 9:52 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> > On Wed, Dec 30, 2015 at 02:57:55PM +0100, Koen Kooi wrote:
->> >> When the host distro uses gold mariadb-native fails to build.
->> >>
->> >> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->> >> ---
->> >>  meta-oe/recipes-support/mysql/mariadb.inc | 3 +++
->> >>  1 file changed, 3 insertions(+)
->> >>
->> >> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
->> >> index a6826c3..6a55476 100644
->> >> --- a/meta-oe/recipes-support/mysql/mariadb.inc
->> >> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
->> >> @@ -60,6 +60,9 @@ PACKAGECONFIG[setupdb] = ", ,,${PN}-setupdb"
->> >>  # https://mariadb.atlassian.net/browse/MDEV-5982
->> >>  TARGET_CFLAGS += "-fuse-ld=bfd"
->> >>
->> >> +BUILD_CFLAGS += "-fuse-ld=bfd"
->> >> +BUILD_CXXFLAGS += "-fuse-ld=bfd"
->> >
->> > Unfortunately this breaks builds on older hosts with older gcc
->> >
->> > |   cc1: error: unrecognized command line option '-fuse-ld=bfd'
->> > http://errors.yoctoproject.org/Errors/Details/25859/
->> >
->> > Should we consider Ubuntu-12.04 insanely old?
->> >
->>
->> Its still maintained and supported until 2017 I believe.
->
-> By Canonical yes:
-> http://www.ubuntu.com/info/release-end-of-life
+--Apple-Mail=_541120CD-A802-49F6-B350-36E6BE9D7F33
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-yeah so 2017
 
-> but that doesn't automatically make it good distribution for OE builds, I'm playing
-> devils advocate here, because most jenkins slaves I have access to are
-> currently using 12.04 (that's why I've noticed this issue in first place).
->
-> I was already considering upgrading them to 14.04 and people can use
-> build-appliance-image if they cannot just upgrade their host distro.
+> Am 30.12.2015 um 11:55 schrieb Mike Looijmans =
+<mike.looijmans@topic.nl>:
+>=20
+> Found that the cause is "inherit cpan-base", this hardcodes "perl" =
+into the package.
+>=20
+> I think this requires a split-up of cpan-base.bbclass into two parts, =
+so that one get obtain the perl version without adding these =
+dependencies.
 
-It can be dropped. we have explicitly state that 12.04 may not be used
-anymore. or something like
-mimimum supported ubuntu/debian-like distros or so.  many large corps
-have slow upgrade path. like we still carry patches
-to support centos 5.x,
+It's more reasonable to "move" the RDEPENDS from cpan-base.bbclass to =
+cpan.bbclass and cpan_build.bbclass (WITH commend in source).
+cpan-base.bbclass might be an unfortunate place for adding RDEPENDS, =
+since it's just a helper (abstract base class ^^)
 
->
-> FWIW: Poky already dropped it from SANITY_TESTED_DISTROS in Fido release:
->
-> commit b528712a076ad2fd08ec8a3cbcd7aefd612d999f
-> Author: Lucian Musat <george.l.musat@intel.com>
-> Date:   Mon Mar 23 12:35:12 2015 +0200
->
->     meta-yocto/distro: Updated SANITY_TESTED_DISTROS.
->
->     Added OpenSUSE-13.2, Fedora 21. Removed poky 1.6 and Ubuntu 12.04.
->
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> On 30-12-15 11:34, Mike Looijmans wrote:
+>> When building the current version of samba, it builds perl and drags =
+it
+>> into the image through an RDEPENDS.
+>>=20
+>> I've been researching this for a while, but failed to figure out what
+>> causes this runtime relation. Is there a way to find out where this =
+is
+>> being "detected"?
+>>=20
+>> The workaround I implemented is simply adding this line to the samba
+>> recipe, which at least gets rid of the overhead in the image:
+>>=20
+>> RDEPENDS_${PN}_remove =3D "perl"
+>>=20
+>> (Samba 4 is bloated enough by itself, it doesn't need other packages =
+to
+>> inflate its runtime even more)
+>>=20
+>=20
 
+Cheers
+--
+Jens Rehsack - rehsack@gmail.com
+
+
+--Apple-Mail=_541120CD-A802-49F6-B350-36E6BE9D7F33
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iQIcBAEBCgAGBQJWiryZAAoJEESZlq7c5QqdeoAP/ioB+e8BJ9aC0nxD+i6TATvk
+3/z0bNxZAJvQEqRA5KR7Lih1dJ8pRNIuUzcDfSz6PYzokat/1qcaexLQCXWL0e41
+06DtJh//KDpUW0EYOd224Vnuf8fjjWmsdhUFXwDbgPRF3QwCwjY4GC8JfuRsJOyj
+bwzvgJ2a8P7cYA+RGG8AG+5Gz6puNjeTBSaqO2yhL2MY7g8WtwBgpGp/12PFOoer
+XjBYYGGqefbCbntvQzaLNpJX7pRROJjH0grOAJU05pt6b6HuiQZSyUOS7mF/JX//
+QzX29rgQSGf/EFpLCjnmEY6S52iq8j9FuciNCqYdO8JaEuWN0tMYt0VOqXh/Kieb
+u+Ngy0HWSFvMeeOoPb7YhXo9/Fy/YsKXG/aeHGPwtG59EoZ5IuueWgqy5plWecEa
+Pqa0vgLu3okmzaxyx4taEzyeK8fqBl8JqJgeUro4WV1GXsns5+MThQNoSwaUL8Al
+GT2rzj9cvOcpMOxWpSF712nrH0KGEBIXqzvmfMk5Px6diNoVrTv1mjb7eIsvKLcq
+VWN6phrQdTgbjx1aLtNvU1VjKfWq8m38RMR3PfaK3YKDTaLpIPU+ewVZSWObreCb
+DpvI2Q49NsZgkJ3zl6XPTSdxedqlXLyb5cYb6WY8FQypHgALXKbN3loJTLIQgVFN
+yY7rMZAx8kiP37u79gFe
+=8+Ks
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_541120CD-A802-49F6-B350-36E6BE9D7F33--
