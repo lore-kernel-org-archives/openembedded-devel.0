@@ -1,34 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 3130A605FE
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 03BE6605FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Jan 2016 13:17:24 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id f206so22681533wmf.0
+	Tue,  5 Jan 2016 13:20:21 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id b14so28677924wmb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jan 2016 05:17:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	Tue, 05 Jan 2016 05:20:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=dominion-thruhere-net.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=ntmAT/PMUSUTzAnNjPeu5aVcTrF5jrD+U/pIkTnJKTo=;
-	b=sJwlQmEeeWrgZ8v3k8ZKjwqr0Kyo4iot/6iJfBNs3mMl1JbTKuXfGQFceDo5zRHxrq
-	U26lS8P8j/OHny5XYuubKKClJrxFRZbM0VxPBJ3HKPl1dbLxL4hYcn+dl8ACR2dq3mXI
-	ibG4GQ63eBodWzDV0MiA00QBk/Ba8Phvy7T2Q13tLbkmbRsF9gkLwNag8Bz/2g193s0e
-	sE756MHSkl8GgnLDVMxWvRLquxEoxq/By8vY27F0SgM36jqpbCae1X6L6qoYQ2zeKYmV
-	qZELIF4PZ+yLD1OjSapmz5AVQkxYXuLrHY2HP10iflT5NjeGkVN6uHxWqKQk/EFNTqRH
-	0pnA==
-X-Received: by 10.194.95.199 with SMTP id dm7mr101320254wjb.15.1451999845193; 
-	Tue, 05 Jan 2016 05:17:25 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	bh=vounSbrkR/Ur12NfV1OBP/lsSpdKx+YTMEKojENQnik=;
+	b=GnTRU9+9q0ro+QnCdwDJMBUqa0TFVIjsF1XtnNhE3lJS9HR39r2wiJ6uZmRjXkJ4U7
+	GyjjLP3Kg3o80MJIoYhsyjfwGrg6o+W31FnoFLEAb5OOhkYBpZ0ATmlS+D6OMRCPQ+4F
+	DqRgAy8v15850aIWmy3SMD2zqmbA3D/5jpVjXxr8N+ETcBC9KL9GuJ2ISsX6gDYAWN4m
+	659i5Y+j2f9m2m69hJELzcUhgPZUkoia0yeqDyJWmd/mI1II/XpZ7LPkPHg18+kdGh/2
+	Foo3mOm9b72Epynq61tdEmySzl0KBnewv/Sw08N4jgxOWi9LOR7Heqali0sg3GJfxj7/
+	ilYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=vounSbrkR/Ur12NfV1OBP/lsSpdKx+YTMEKojENQnik=;
+	b=HPbXPPjz+yYNf+SDC/X8Ds8AjN73ZraC6F0MgDrKda7euxM+yhrPmUOY51OJmERhl5
+	UwvGxOOanaQYEbohL1EK8k+FC/zWDwRXdU44UIYIesuGhP1i6KGaMpXhhpGEZZ1sTlt2
+	LfN3UEzYSv1zLcZ8TJRATUPj15prsyw1J65+h0s1x6o0Db8lcz/RMui1nvBMpp8jcg57
+	mYc6ijWw2zPXt5oj+rRU92Iymc7wOp/vwoKz9nJIBMOYpC2liDiB2920xbj2xEGHpSGj
+	Pz0tGsiJ3TywH5CLx8m3ctY7v361FJkybTcIyJqoESQxqHrJIN5WhAA6AUCT73m4yEBF
+	kxpw==
+X-Gm-Message-State: ALoCoQnielG/lcXiWNB963NJ7wkonkSyrtd677rnqrZ3hDUPvXopjy9YsU8iCnFupzUKLNLoLjbA3DvI9NS8sedR1Ju1FJm9Uw==
+X-Received: by 10.28.57.69 with SMTP id g66mr4321521wma.63.1452000021829;
+	Tue, 05 Jan 2016 05:20:21 -0800 (PST)
+Received: from localhost (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
 	by smtp.gmail.com with ESMTPSA id
-	193sm3514983wmg.16.2016.01.05.05.17.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 05 Jan 2016 05:17:24 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	198sm3547071wml.22.2016.01.05.05.20.20
+	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
+	Tue, 05 Jan 2016 05:20:20 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Jan 2016 14:17:33 +0100
-Message-Id: <1451999853-6848-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.6.4
-Subject: [PATCH][meta-oe] freerdp: backport patch to fix build with newer gstreamer
+Date: Tue,  5 Jan 2016 14:20:17 +0100
+Message-Id: <1452000017-19496-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 2.0.1
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] xf86-video-ati: update to 7.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,116 +53,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jan 2016 13:17:25 -0000
+X-List-Received-Date: Tue, 05 Jan 2016 13:20:24 -0000
 
-* otherwise the include path will miss sysroots/qemux86/usr/lib/gstreamer-1.0/include
-* and build will fail like this:
-  In file included from /OE/build/oe-core/tmp-glibc/sysroots/qemux86/usr/include/gstreamer-1.0/gst/gstbin.h:27:0,
-                 from /OE/build/oe-core/tmp-glibc/sysroots/qemux86/usr/include/gstreamer-1.0/gst/gst.h:35,
-                 from /OE/build/oe-core/tmp-glibc/work/i586-oe-linux/freerdp/1.2.5+gitrAUTOINC+62da9d28c6-r0/git/channels/tsmf/client/gstreamer/tsmf_gstreamer.c:36:
-  /OE/build/oe-core/tmp-glibc/sysroots/qemux86/usr/include/gstreamer-1.0/gst/gstelement.h:55:27: fatal error: gst/gstconfig.h: No such file or directory
-  compilation terminated.
+Glamor support needs work in the xorg recipe as well as testing, it
+produced weird artefacts in the picture on my HD6450 when I enabled it a
+few months ago. Anyway, glamor wasn't enabled in 7.2.0 so no actual
+change.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- ...er_1_0-fix-build-failure-for-new-gstreame.patch | 71 ++++++++++++++++++++++
- meta-oe/recipes-support/freerdp/freerdp_git.bb     |  5 +-
- 2 files changed, 74 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp/0001-FindGStreamer_1_0-fix-build-failure-for-new-gstreame.patch
+ .../{xf86-video-ati_7.2.0.bb => xf86-video-ati_7.6.1.bb}      | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-driver/{xf86-video-ati_7.2.0.bb => xf86-video-ati_7.6.1.bb} (73%)
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp/0001-FindGStreamer_1_0-fix-build-failure-for-new-gstreame.patch b/meta-oe/recipes-support/freerdp/freerdp/0001-FindGStreamer_1_0-fix-build-failure-for-new-gstreame.patch
-new file mode 100644
-index 0000000..d5f6485
---- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp/0001-FindGStreamer_1_0-fix-build-failure-for-new-gstreame.patch
-@@ -0,0 +1,71 @@
-+From bea27fd919b64ee8d97996409e279e1e83d13594 Mon Sep 17 00:00:00 2001
-+From: Jean-Louis Dupond <jean-louis@dupond.be>
-+Date: Sun, 4 Oct 2015 18:17:33 +0200
-+Subject: [PATCH] FindGStreamer_1_0: fix build failure for new gstreamer
-+ versions
-+
-+---
-+ cmake/FindGStreamer_1_0.cmake | 30 +++++++++++++++---------------
-+ 1 file changed, 15 insertions(+), 15 deletions(-)
-+
-+diff --git a/cmake/FindGStreamer_1_0.cmake b/cmake/FindGStreamer_1_0.cmake
-+index f7bf990..3aa8fc6 100644
-+--- a/cmake/FindGStreamer_1_0.cmake
-++++ b/cmake/FindGStreamer_1_0.cmake
-+@@ -53,17 +53,17 @@ set(GSTREAMER_1_0_MINIMUM_VERSION 1.0.5)
-+ # Helper macro to find a Gstreamer plugin (or Gstreamer itself)
-+ #   _component_prefix is prepended to the _INCLUDE_DIRS and _LIBRARIES variables (eg. "GSTREAMER_1_0_AUDIO")
-+ #   _pkgconfig_name is the component's pkg-config name (eg. "gstreamer-1.0", or "gstreamer-video-1.0").
-+-#   _header is the component's header, relative to the gstreamer-1.0 directory (eg. "gst/gst.h").
-+ #   _library is the component's library name (eg. "gstreamer-1.0" or "gstvideo-1.0")
-+-macro(FIND_GSTREAMER_COMPONENT _component_prefix _pkgconfig_name _header _library)
-++macro(FIND_GSTREAMER_COMPONENT _component_prefix _pkgconfig_name _library)
-+     # FIXME: The QUIET keyword can be used once we require CMake 2.8.2.
-+-    pkg_check_modules(PC_${_component_prefix} ${_pkgconfig_name})
-+ 
-+-    find_path(${_component_prefix}_INCLUDE_DIRS
-+-        NAMES ${_header}
-+-        HINTS ${PC_${_component_prefix}_INCLUDE_DIRS} ${PC_${_component_prefix}_INCLUDEDIR}
-+-        PATH_SUFFIXES gstreamer-1.0
-+-    )
-++    string(REGEX MATCH "(.*)>=(.*)" _dummy "${_pkgconfig_name}")
-++    if ("${CMAKE_MATCH_2}" STREQUAL "")
-++        pkg_check_modules(PC_${_component_prefix} "${_pkgconfig_name} >= ${GStreamer_FIND_VERSION}")
-++    else ()
-++        pkg_check_modules(PC_${_component_prefix} ${_pkgconfig_name})
-++    endif ()
-++    set(${_component_prefix}_INCLUDE_DIRS ${PC_${_component_prefix}_INCLUDE_DIRS})
-+ 
-+     find_library(${_component_prefix}_LIBRARIES
-+         NAMES ${_library} gstreamer_android
-+@@ -78,8 +78,8 @@ endmacro()
-+ # 1.1. Find headers and libraries
-+ set(GLIB_ROOT_DIR ${GSTREAMER_1_0_ROOT_DIR})
-+ find_package(Glib REQUIRED)
-+-FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0 gstreamer-1.0 gst/gst.h gstreamer-1.0)
-+-FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0_BASE gstreamer-base-1.0 gst/gst.h gstbase-1.0)
-++FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0 gstreamer-1.0 gstreamer-1.0)
-++FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0_BASE gstreamer-base-1.0 gstbase-1.0)
-+ 
-+ # 1.2. Check Gstreamer version
-+ if (GSTREAMER_1_0_INCLUDE_DIRS)
-+@@ -110,11 +110,11 @@ endif ()
-+ # 2. Find Gstreamer plugins
-+ # -------------------------
-+ 
-+-FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0_APP gstreamer-app-1.0 gst/app/gstappsink.h gstapp-1.0)
-+-FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0_AUDIO gstreamer-audio-1.0 gst/audio/audio.h gstaudio-1.0)
-+-FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0_FFT gstreamer-fft-1.0 gst/fft/gstfft.h gstfft-1.0)
-+-FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0_PBUTILS gstreamer-pbutils-1.0 gst/pbutils/pbutils.h gstpbutils-1.0)
-+-FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0_VIDEO gstreamer-video-1.0 gst/video/video.h gstvideo-1.0)
-++FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0_APP gstreamer-app-1.0 gstapp-1.0)
-++FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0_AUDIO gstreamer-audio-1.0 gstaudio-1.0)
-++FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0_FFT gstreamer-fft-1.0 gstfft-1.0)
-++FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0_PBUTILS gstreamer-pbutils-1.0 gstpbutils-1.0)
-++FIND_GSTREAMER_COMPONENT(GSTREAMER_1_0_VIDEO gstreamer-video-1.0 gstvideo-1.0)
-+ 
-+ # ------------------------------------------------
-+ # 3. Process the COMPONENTS passed to FIND_PACKAGE
-+-- 
-+2.6.4
-+
-diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb b/meta-oe/recipes-support/freerdp/freerdp_git.bb
-index f9cb9a6..13dff6e 100644
---- a/meta-oe/recipes-support/freerdp/freerdp_git.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
-@@ -15,7 +15,8 @@ EXTRA_OECMAKE += "-DBUILD_STATIC_LIBS=OFF \
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.6.1.bb
+similarity index 73%
+rename from meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb
+rename to meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.6.1.bb
+index d4d9591..f1d06f2 100644
+--- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.6.1.bb
+@@ -8,10 +8,13 @@ DESCRIPTION = "Open-source X.org graphics driver for ATI Radeon graphics"
  
- SRCREV = "62da9d28c674814c81c245c1c7882eb0da7be76b"
- SRC_URI = "git://github.com/FreeRDP/FreeRDP.git \
--           file://winpr-makecert-Build-with-install-RPATH.patch \
--          "
-+    file://winpr-makecert-Build-with-install-RPATH.patch \
-+    file://0001-FindGStreamer_1_0-fix-build-failure-for-new-gstreame.patch \
-+"
+ DEPENDS += "virtual/libx11 libxvmc drm xf86driproto glproto \
+             virtual/libgl xineramaproto libpciaccess"
+-RDEPENDS_${PN} += "xserver-xorg-module-exa"
+-RRECOMMENDS_${PN} += "linux-firmware"
  
- S = "${WORKDIR}/git"
+ COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
+ 
+-SRC_URI[md5sum] = "5ab9a826699e5c86ef89fca43ebb3821"
+-SRC_URI[sha256sum] = "f30f5efdc8d7d18d06eda7ef2f91a8b7290f1cfbf6ff26362cd47ab8969daec4"
++SRC_URI[md5sum] = "ede86cd3d1b1d8882f0aea61d9e924ed"
++SRC_URI[sha256sum] = "2516d9eeb8da8bcd3a01365ed1314919777910fa904ab268af342b5693e1d34c"
++
++EXTRA_OECONF += "--disable-glamor"
++
++RDEPENDS_${PN} += "xserver-xorg-module-exa"
++RRECOMMENDS_${PN} += "linux-firmware"
 -- 
-2.6.4
+2.0.1
 
 
