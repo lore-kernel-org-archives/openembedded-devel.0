@@ -1,37 +1,38 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
-	[209.85.223.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 1AB5D731D3
+Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
+	[209.85.213.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 80D2F731D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Jan 2016 21:15:57 +0000 (UTC)
-Received: by mail-io0-f180.google.com with SMTP id q21so199536463iod.0
+	Tue,  5 Jan 2016 21:15:59 +0000 (UTC)
+Received: by mail-ig0-f181.google.com with SMTP id to18so20249732igc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jan 2016 13:15:58 -0800 (PST)
+	Tue, 05 Jan 2016 13:16:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=V/1PbW2aBYOodWsynI9irfncwhow8SXDK/IIEdxPa+Q=;
-	b=hgfN8vplaJHwvjy2yV6zaZyxBnZyOyJVCUH5gCn6FjTOpDzEE8luSNHBb9Wk8EFMSX
-	jeL/YMDd6vgdEyqRDEhCsPY1bOgsmsOUC+M9uDYO/VZWhiHlx4fR9yBUXjeUo0cJC8Qy
-	g7fnAunJe+ytvZCmMSCfLVRwjKvBoRrn55yK1V79va/ph7NXcl0M+Fz9zFZRsD4G4WI2
-	VPavEvdWKxCmBujkrxhMyxECgQPJ585fCLIeOC3BSoeE62WV+TW8kH4K9DXnK8Cx2vRY
-	FDfksliKq15sDbHcEsPzJ1NWpYngDL9F5g8wu/uMGQhA7+1MCNUwpDfmeavDApoSMT+W
-	18qA==
-X-Received: by 10.107.13.65 with SMTP id 62mr36966674ion.186.1452028558316;
-	Tue, 05 Jan 2016 13:15:58 -0800 (PST)
+	bh=XdN6RMlo9KsWR5Vg2Q31FMXBLmOdJPVKmUS6ATYeqsE=;
+	b=NzOgSMZSHERptuGqjJCbPyjk7xY8jE8sZ0WOxnsf5GjBgnEHb8uSscadrlfLWyqd53
+	Lp666JGPIiz/4L0SFMwn5ltdJNc14KtFN5RUjPELQtL45Er54ID4H3JhEMMHMjQP6Wvt
+	q4DoYHuUYSx1wrL+fsIG7TYJ1wX2ux+siCzQxKNU8YW8p6u4BYfGsla9wxj30Xq0WOUG
+	jtYrlItthxdY7n+578L4tsEqYk4bKAqrk/ba+jbaN2wFUe8RD6ohEnh5F3MMYvkLC528
+	xx7xiIrRjUxjRZUvRFt3WlYqCsNHyPhgrnm9jqYR3p5ZkkjMIEWjEQQ8Hss/I7/0ZoQf
+	Tnow==
+X-Received: by 10.50.6.104 with SMTP id z8mr5921767igz.58.1452028559919;
+	Tue, 05 Jan 2016 13:15:59 -0800 (PST)
 Received: from openSUSE-i7.site (dsl-67-55-28-109.acanac.net. [67.55.28.109])
 	by smtp.gmail.com with ESMTPSA id
-	g67sm26731272ioe.34.2016.01.05.13.15.57
+	g67sm26731272ioe.34.2016.01.05.13.15.58
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 05 Jan 2016 13:15:57 -0800 (PST)
+	Tue, 05 Jan 2016 13:15:59 -0800 (PST)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Jan 2016 16:15:41 -0500
-Message-Id: <1452028543-30812-2-git-send-email-twoerner@gmail.com>
+Date: Tue,  5 Jan 2016 16:15:42 -0500
+Message-Id: <1452028543-30812-3-git-send-email-twoerner@gmail.com>
 X-Mailer: git-send-email 2.7.0.rc3
 In-Reply-To: <1452028543-30812-1-git-send-email-twoerner@gmail.com>
 References: <1452028543-30812-1-git-send-email-twoerner@gmail.com>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-browser][PATCH 2/3] chromium: update run script for early run
+Cc: Otavio Salvador <otavio@ossystems.com.br>, Gary Thomas <gary@mlbassoc.com>,
+	knagabhirava <kalyankumar.nagabhirava@lnttechservices.com>
+Subject: [meta-browser][PATCH 3/3] chromium: add kiosk-mode PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,51 +47,51 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 05 Jan 2016 21:15:59 -0000
 
-If the chromium run-helper script (google-chrome) is run as part of a
-(sysvinit) init script, shell variables $USER and $HOME will not be set
-(leading to unwanted behaviour).
-
-Replace the use of $USER with `whoami` and replace the use of $HOME with the
-OE bitbake variable ROOT_HOME.
-
-In this way the chromium run-helper script will work as expected in both
-instances (as part of an init script and from the cmdline).
+If you are creating a kiosk, then enable this PACKAGECONFIG and the browser
+will start up fullscreen and without menu bars etc.
 
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- recipes-browser/chromium/chromium/google-chrome   | 4 ++--
- recipes-browser/chromium/chromium_40.0.2214.91.bb | 3 +++
- 2 files changed, 5 insertions(+), 2 deletions(-)
+ recipes-browser/chromium/chromium.inc             | 1 +
+ recipes-browser/chromium/chromium_40.0.2214.91.bb | 6 ++++++
+ 2 files changed, 7 insertions(+)
 
-diff --git a/recipes-browser/chromium/chromium/google-chrome b/recipes-browser/chromium/chromium/google-chrome
-index b1ec288..b5c2541 100644
---- a/recipes-browser/chromium/chromium/google-chrome
-+++ b/recipes-browser/chromium/chromium/google-chrome
-@@ -4,8 +4,8 @@ export CHROME_DEVEL_SANDBOX=/usr/sbin/chrome-devel-sandbox
- export LD_LIBRARY_PATH=/usr/lib/chromium
+diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
+index 716988d..5e8aba6 100644
+--- a/recipes-browser/chromium/chromium.inc
++++ b/recipes-browser/chromium/chromium.inc
+@@ -25,6 +25,7 @@ PACKAGECONFIG[disable-api-keys-info-bar] = ""
+ PACKAGECONFIG[ignore-lost-context] = ""
+ PACKAGECONFIG[impl-side-painting] = ""
+ PACKAGECONFIG[use-egl] = ""
++PACKAGECONFIG[kiosk-mode] = ""
  
- CHROME_EXTRA_ARGS=""
--if [ "${USER}" = "root" ] ; then
--	CHROME_EXTRA_ARGS="${CHROME_EXTRA_ARGS} --user-data-dir=${HOME}/.chromium/"
-+if [ "`whoami`" = "root" ] ; then
-+	CHROME_EXTRA_ARGS="${CHROME_EXTRA_ARGS} --user-data-dir=ROOT_HOME/.chromium/"
- fi
+ GYP_DEFINES += "${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
  
- /usr/bin/chromium/chrome ${CHROME_EXTRA_ARGS} $@
 diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-index 6fddcc7..e138628 100644
+index e138628..dd42903 100644
 --- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
 +++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-@@ -221,6 +221,9 @@ do_install_append() {
-         # the dummy "CHROME_EXTRA_ARGS" line
-         sed -i "s/^CHROME_EXTRA_ARGS=\"\"/CHROME_EXTRA_ARGS=\"${CHROMIUM_EXTRA_ARGS}\"/" ${D}${bindir}/google-chrome
+@@ -77,6 +77,11 @@ SRC_URI = "\
+ #       development stages, it can improve performance See
+ #       http://www.chromium.org/developers/design-documents/impl-side-painting
+ #       for more.
++#
++# * kiosk-mode: (off by default)
++#       Enable this option if you want your browser to start up full-screen,
++#       without any menu bars, without any clutter, and without any initial
++#       start-up indicators.
+ SRC_URI += "\
+         ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://chromium-40/0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
+         ${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', 'file://chromium-40/0002-Add-Linux-to-impl-side-painting-whitelist.patch', '', d)} \
+@@ -86,6 +91,7 @@ CHROMIUM_EXTRA_ARGS ?= " \
+ 	${@bb.utils.contains('PACKAGECONFIG', 'use-egl', '--use-gl=egl', '', d)} \
+ 	${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', '--gpu-no-context-lost', '', d)} \
+ 	${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', '--enable-gpu-rasterization --enable-impl-side-painting', '', d)} \
++	${@bb.utils.contains('PACKAGECONFIG', 'kiosk-mode', '--start-fullscreen --kiosk --no-first-run', '', d)} \
+ "
  
-+        # update ROOT_HOME with the root user's $HOME
-+        sed -i "s#ROOT_HOME#${ROOT_HOME}#" ${D}${bindir}/google-chrome
-+
- 	# Always adding this libdir (not just with component builds), because the
-         # LD_LIBRARY_PATH line in the google-chromium script refers to it
-         install -d ${D}${libdir}/${BPN}/
+ # Conditionally add ozone-wayland and its patches to the Chromium sources
 -- 
 2.7.0.rc3
 
