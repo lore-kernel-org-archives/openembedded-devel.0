@@ -1,49 +1,25 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C87C6FF7B
+Return-Path: <lchristina26@hotmail.com>
+X-Greylist: delayed 301 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 05 Jan 2016 16:33:40 UTC
+Received: from BLU004-OMC3S5.hotmail.com (blu004-omc3s5.hotmail.com
+	[65.55.116.80])
+	by mail.openembedded.org (Postfix) with ESMTP id 4BF4573177
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Jan 2016 16:17:20 +0000 (UTC)
-Received: by mail-io0-f179.google.com with SMTP id o67so470590304iof.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jan 2016 08:17:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=BWPjGAfKt2o/jaeJd5mfAOrHgV4ThmXNikBp6JCV0UQ=;
-	b=rIA57OpnmybIjkT6HeVgrTjAe6tsdMz/xGZB+vtMZ0d3MmkfRRVHwh0DaD3ayh9osr
-	LC/p8CTgTdohOmt0Z1zvvLitwlpgn3//JOHNVWJH7e51j0Fi0UW8aX3uC3lHIEppLqlj
-	/rYNhzzXs/lk00IGjbqNiyu+4o8o97s59DAAakyO/COmh7Adaf0SzvPZwe4TcmgNq+xl
-	XeNTLibe+h2pQVrfvfG1tvtb3/OSXNaoWiI4r8s0rXhaxH1sLT55xSSDz/FpjOlZZibO
-	ejeRNOtV0pozBHg9gtofuiZpw++PEQulj1gcYUw76O/qL/pUFGPSV4FDBIJJXiMCAMrU
-	1HvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=BWPjGAfKt2o/jaeJd5mfAOrHgV4ThmXNikBp6JCV0UQ=;
-	b=bW7jTXZm9v/FPu40Ow/pK8XotLbfYJcJKUfsY+WleiiNGusYsioZpN+Twg5Ar3VSdJ
-	2p/sib/d22wjtbxutNdZd48Twwvzv5I+LUCUqpaqbDmdrWX4LwlrW6Pzaw4x9g7IwwEL
-	J61f4+Xh7Ye/etC3rX7U11WcY8gNlo8H988eZbqoF5j5NKK3vV6eatHEt+3M0zCmoOKj
-	IT5yvK2faeQ+mlLFelnEpK7C8uAhVOpo/YVBoXAPwGJMWXtGKE8W71Nu5kcLiIphh8Xm
-	CUdexHiBtr6VVR8T2qaEWTaaORCYb7X1zJI4u+dvsvm+baS3d4LaLuqh79Ep0F1mTlYP
-	ng0w==
-X-Gm-Message-State: ALoCoQniXcFz++yZAEkcuEytk2jVAqaaebLzxU8v/8Cm3Y9oYl2OVeffPHlVMXLP5ujTflid17pJkvZvjKSjMHUzjDTdhTg6sdmKwLA76eNKKchBrRtuEOs=
-X-Received: by 10.107.135.104 with SMTP id j101mr57241958iod.133.1452010641214;
-	Tue, 05 Jan 2016 08:17:21 -0800 (PST)
+	Tue,  5 Jan 2016 16:33:40 +0000 (UTC)
+Received: from BLU436-SMTP163 ([65.55.116.74]) by BLU004-OMC3S5.hotmail.com
+	over TLS secured channel with Microsoft SMTPSVC(7.5.7601.23008);
+	Tue, 5 Jan 2016 08:28:40 -0800
+X-TMN: [9XokHMdnceFsueZ7Vg9gwosYMU5cbIta]
+X-Originating-Email: [lchristina26@hotmail.com]
+Message-ID: <BLU436-SMTP1639BAACC4B25952154FE54D6F30@phx.gbl>
+From: LC Mac <lchristina26@hotmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 5 Jan 2016 09:28:29 -0700
+X-Mailer: git-send-email 1.9.1
+X-OriginalArrivalTime: 05 Jan 2016 16:28:39.0813 (UTC)
+	FILETIME=[22846350:01D147D6]
 MIME-Version: 1.0
-Received: by 10.107.162.70 with HTTP; Tue, 5 Jan 2016 08:17:01 -0800 (PST)
-In-Reply-To: <CAMKF1sqAGXMFx9re3YgB1u9aLPGRT9KRCR-0Drux=4P5igirWw@mail.gmail.com>
-References: <CAMKF1sqAGXMFx9re3YgB1u9aLPGRT9KRCR-0Drux=4P5igirWw@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 5 Jan 2016 16:17:01 +0000
-Message-ID: <CAJTo0LbB02LR=6Yyy0-3=Hg1tjcdX=DmMKN2MEJqctnvi5n0Kg@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [RFT] glibc 2.23
+Subject: [meta-networking][PATCH] wolfssl: updated version from 3.6.6 to 3.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,20 +32,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jan 2016 16:17:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 05 Jan 2016 16:33:42 -0000
+Content-Type: text/plain
 
-On 4 January 2016 at 19:00, Khem Raj <raj.khem@gmail.com> wrote:
+Version 3.8.0 of wolfSSL includes VxWorks example client/server,
+AESNI use with AES-GCM, Stunnel compatibility, C# wrapper, and more.
 
-> I have done OE-Core only clean world builds for all Qemu machines
-> without a single build failure and
-> runtime boot tested.
->
+Signed-off-by: lchristina26 <leah@wolfssl.com>
+---
+ .../recipes-connectivity/wolfssl/{wolfssl_3.6.6.bb => wolfssl_3.8.0.bb}   | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_3.6.6.bb => wolfssl_3.8.0.bb} (100%)
 
-I threw this at the autobuilder and glibc failed to build on one of the
-runs:
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.6.6.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.8.0.bb
+similarity index 100%
+rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_3.6.6.bb
+rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_3.8.0.bb
+-- 
+1.9.1
 
-http://errors.yoctoproject.org/Errors/Details/26057/
-
-Ross
 
