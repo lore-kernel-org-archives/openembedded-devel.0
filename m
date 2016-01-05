@@ -1,36 +1,49 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-lb0-f177.google.com (mail-lb0-f177.google.com
-	[209.85.217.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 4FB386010D
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C87C6FF7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Jan 2016 14:26:36 +0000 (UTC)
-Received: by mail-lb0-f177.google.com with SMTP id pv2so190828629lbb.1
+	Tue,  5 Jan 2016 16:17:20 +0000 (UTC)
+Received: by mail-io0-f179.google.com with SMTP id o67so470590304iof.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jan 2016 06:26:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	Tue, 05 Jan 2016 08:17:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type;
-	bh=Ux8HbvymcLgLfF9bZw6+zZ+9CgB5KaMTQ2FFmzTKyQg=;
-	b=ueZvWan0Rxa0sMRRsWQ9yg/kkOXkw9xpdtpS9Ahe90E7N6vAPolqVkW8Psaxcn7inY
-	pBcbPqKShI0kLou/hNjuwITMKb8osrtIENXiRWTXFhkK+N35VJ0yojH0JcnMT0QBPBrK
-	Pb11+OzoFoahnOaMrLfI/s2vZII+X/dcyKimuj5DnBY3K4MhGKYTI/VPge4qTdW/bFKs
-	rVWadoqWfFUyOQBf105tFR2F1csHxTMzwrisd/4AP+WdFACOY3oZOZzXXxuk75i2eu3K
-	xi3g8ViF8GJo5L/M9/QFKbNfh/+9Ac89pFJLSNsTGvD7DnVkSmOh0eZWtUf4/K2n9wNe
-	WZUg==
+	bh=BWPjGAfKt2o/jaeJd5mfAOrHgV4ThmXNikBp6JCV0UQ=;
+	b=rIA57OpnmybIjkT6HeVgrTjAe6tsdMz/xGZB+vtMZ0d3MmkfRRVHwh0DaD3ayh9osr
+	LC/p8CTgTdohOmt0Z1zvvLitwlpgn3//JOHNVWJH7e51j0Fi0UW8aX3uC3lHIEppLqlj
+	/rYNhzzXs/lk00IGjbqNiyu+4o8o97s59DAAakyO/COmh7Adaf0SzvPZwe4TcmgNq+xl
+	XeNTLibe+h2pQVrfvfG1tvtb3/OSXNaoWiI4r8s0rXhaxH1sLT55xSSDz/FpjOlZZibO
+	ejeRNOtV0pozBHg9gtofuiZpw++PEQulj1gcYUw76O/qL/pUFGPSV4FDBIJJXiMCAMrU
+	1HvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=BWPjGAfKt2o/jaeJd5mfAOrHgV4ThmXNikBp6JCV0UQ=;
+	b=bW7jTXZm9v/FPu40Ow/pK8XotLbfYJcJKUfsY+WleiiNGusYsioZpN+Twg5Ar3VSdJ
+	2p/sib/d22wjtbxutNdZd48Twwvzv5I+LUCUqpaqbDmdrWX4LwlrW6Pzaw4x9g7IwwEL
+	J61f4+Xh7Ye/etC3rX7U11WcY8gNlo8H988eZbqoF5j5NKK3vV6eatHEt+3M0zCmoOKj
+	IT5yvK2faeQ+mlLFelnEpK7C8uAhVOpo/YVBoXAPwGJMWXtGKE8W71Nu5kcLiIphh8Xm
+	CUdexHiBtr6VVR8T2qaEWTaaORCYb7X1zJI4u+dvsvm+baS3d4LaLuqh79Ep0F1mTlYP
+	ng0w==
+X-Gm-Message-State: ALoCoQniXcFz++yZAEkcuEytk2jVAqaaebLzxU8v/8Cm3Y9oYl2OVeffPHlVMXLP5ujTflid17pJkvZvjKSjMHUzjDTdhTg6sdmKwLA76eNKKchBrRtuEOs=
+X-Received: by 10.107.135.104 with SMTP id j101mr57241958iod.133.1452010641214;
+	Tue, 05 Jan 2016 08:17:21 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.112.205.196 with SMTP id li4mr17798489lbc.143.1452003996934; 
-	Tue, 05 Jan 2016 06:26:36 -0800 (PST)
-Received: by 10.25.150.143 with HTTP; Tue, 5 Jan 2016 06:26:36 -0800 (PST)
-In-Reply-To: <1451855721-13018-1-git-send-email-derek@asterius.io>
-References: <1451855721-13018-1-git-send-email-derek@asterius.io>
-Date: Tue, 5 Jan 2016 06:26:36 -0800
-Message-ID: <CANx9H-CrqzdL_ZHjvCtXjUytePD03V8NSSGPV95SVKw-2CA-Uw@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+Received: by 10.107.162.70 with HTTP; Tue, 5 Jan 2016 08:17:01 -0800 (PST)
+In-Reply-To: <CAMKF1sqAGXMFx9re3YgB1u9aLPGRT9KRCR-0Drux=4P5igirWw@mail.gmail.com>
+References: <CAMKF1sqAGXMFx9re3YgB1u9aLPGRT9KRCR-0Drux=4P5igirWw@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 5 Jan 2016 16:17:01 +0000
+Message-ID: <CAJTo0LbB02LR=6Yyy0-3=Hg1tjcdX=DmMKN2MEJqctnvi5n0Kg@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Derek Straka <derek@asterius.io>
-Subject: Re: [meta-python][PATCH] Add python-jsonpatch and python-jsonpointer recipes
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [RFT] glibc 2.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,99 +56,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jan 2016 14:26:37 -0000
+X-List-Received-Date: Tue, 05 Jan 2016 16:17:22 -0000
 Content-Type: text/plain; charset=UTF-8
 
-python-jsonpointer has unmet dependencies (a quick look at setup.py shows
-that you will need to add python-re to RDEPENDS).
+On 4 January 2016 at 19:00, Khem Raj <raj.khem@gmail.com> wrote:
 
-Also, I would prefer to see two separate patches, one for each new recipe.
-
-Regards,
-Tim
-
-On Sun, Jan 3, 2016 at 1:15 PM, Derek Straka <derek@asterius.io> wrote:
-
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
->  .../python/python-jsonpatch_1.12.bb                 | 21
-> +++++++++++++++++++++
->  .../python/python-jsonpointer_1.10.bb               | 19
-> +++++++++++++++++++
->  2 files changed, 40 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python-jsonpatch_1.12.bb
->  create mode 100644 meta-python/recipes-devtools/python/
-> python-jsonpointer_1.10.bb
+> I have done OE-Core only clean world builds for all Qemu machines
+> without a single build failure and
+> runtime boot tested.
 >
-> diff --git a/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb
-> b/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb
-> new file mode 100644
-> index 0000000..4dc3bee
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb
-> @@ -0,0 +1,21 @@
-> +SUMMARY  = "Appling JSON patches in Python 2.6+ and 3.x"
-> +HOMEPAGE = "https://github.com/stefankoegl/python-json-patch"
-> +SECTION = "devel/python"
-> +LICENSE = "BSD"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
-> +
-> +SRCNAME = "jsonpatch"
-> +
-> +SRC_URI = " \
-> +
-> https://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.tar.gz
-> \
-> +"
-> +
-> +inherit setuptools
-> +
-> +SRC_URI[md5sum] = "76ae3183db5f2a8f85dd7705e9b6f278"
-> +SRC_URI[sha256sum] =
-> "2e1eb457f9c8dd5dae837ca93c0fe5bd2522c9d44b9b380fb1aab2ab4dec04b1"
-> +
-> +RDEPENDS_${PN} += "python-jsonpointer"
-> +
-> +S = "${WORKDIR}/${SRCNAME}-${PV}"
-> +
-> diff --git a/meta-python/recipes-devtools/python/
-> python-jsonpointer_1.10.bb b/meta-python/recipes-devtools/python/
-> python-jsonpointer_1.10.bb
-> new file mode 100644
-> index 0000000..9c69688
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-jsonpointer_1.10.bb
-> @@ -0,0 +1,19 @@
-> +DESCRIPTION = "Resolve JSON Pointers in Python"
-> +HOMEPAGE = "https://github.com/stefankoegl/python-json-pointer"
-> +SECTION = "devel/python"
-> +LICENSE = "BSD"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
-> +
-> +SRCNAME = "jsonpointer"
-> +
-> +SRC_URI = " \
-> +
-> https://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.tar.gz
-> \
-> +"
-> +
-> +inherit setuptools
-> +
-> +SRC_URI[md5sum] = "d68c0c6ad6889e9c94ec0feba719e45e"
-> +SRC_URI[sha256sum] =
-> "9fa5dcac35eefd53e25d6cd4c310d963c9f0b897641772cd6e5e7b89df7ee0b1"
-> +
-> +S = "${WORKDIR}/${SRCNAME}-${PV}"
-> +
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
+I threw this at the autobuilder and glibc failed to build on one of the
+runs:
+
+http://errors.yoctoproject.org/Errors/Details/26057/
+
+Ross
 
