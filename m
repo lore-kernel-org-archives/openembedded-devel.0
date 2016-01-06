@@ -1,29 +1,37 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 2673C6FFCD;
-	Wed,  6 Jan 2016 00:01:44 +0000 (UTC)
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-	by fmsmga103.fm.intel.com with ESMTP; 05 Jan 2016 16:01:45 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.20,526,1444719600"; d="scan'208";a="24225933"
-Received: from nanoar-mobl3.gar.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.255.178.248])
-	by fmsmga004.fm.intel.com with ESMTP; 05 Jan 2016 16:01:36 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 06 Jan 2016 13:01:33 +1300
-Message-ID: <2007809.DSH5DR9lFx@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.10 (Linux/4.2.8-300.fc23.x86_64; KDE/4.14.14; x86_64; ;
-	)
-In-Reply-To: <A374083C-8331-42F2-A3F5-9D5EB49538F7@gmail.com>
-References: <CAMKF1sqAGXMFx9re3YgB1u9aLPGRT9KRCR-0Drux=4P5igirWw@mail.gmail.com>
-	<CAJTo0LbB02LR=6Yyy0-3=Hg1tjcdX=DmMKN2MEJqctnvi5n0Kg@mail.gmail.com>
-	<A374083C-8331-42F2-A3F5-9D5EB49538F7@gmail.com>
+Return-Path: <stephen.arnold42@gmail.com>
+Received: from mail-ob0-f193.google.com (mail-ob0-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id EBF3C731DB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  6 Jan 2016 01:01:30 +0000 (UTC)
+Received: by mail-ob0-f193.google.com with SMTP id q2so24716837obl.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Jan 2016 17:01:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=hCs2Th4yjfnGj+bf6yWIR2mQSIhi1TvxI4QHGXBou/U=;
+	b=PxsXIfgUm+5m9JHdDC4I/ReFkyQefvZOl+uWAXOuVwg6QCU5lZ7k3UNZWRtgFaRCYF
+	he75e7vFHubgWbH6Nh+e0TutpmqmEOCfqSbrZgsfDwtghTk9q/cstAGnllkI7WAzzyzv
+	BaopiF1hzfXQ8u3J/wk6CR7+6kkcLt5tU9jNuAz5i4LrB7UXDXjF7kLtps5OnRVMzq+j
+	140+S+OdYUAY5ReBEc8vuv+a8Bk3ATGz+fVN+vvd1oYzScE5KmKdz4jOQhgXWH8oCq4C
+	d424/UadOi3sCgIY8DJaXY6kUl9nnKiHdlF98qmk3dQnu0blhqTlK+yTO2nfZQSxFzLH
+	nYyw==
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [RFT] glibc 2.23
+X-Received: by 10.60.33.10 with SMTP id n10mr66770319oei.66.1452042091259;
+	Tue, 05 Jan 2016 17:01:31 -0800 (PST)
+Received: by 10.182.165.230 with HTTP; Tue, 5 Jan 2016 17:01:31 -0800 (PST)
+In-Reply-To: <568C3DD8.9020604@gmail.com>
+References: <1450954209-2353-1-git-send-email-nate.karstens@garmin.com>
+	<CAMKF1sqp0gM9VgvE8M1-HAsAapDsNdNfs0S+AnaROfqFWXFYNg@mail.gmail.com>
+	<145451D4E6785E4DA4DFA353A58CB7B2F7E4E724@OLAWPA-EXMB03.ad.garmin.com>
+	<9EE300C1-F57A-461C-8B5C-011C6750DF64@gmail.com>
+	<CAOLEWZWrT7xz1de_tf-XvjQ342L_Tu1Wrm0VjJd4rXsF60gksg@mail.gmail.com>
+	<568C3DD8.9020604@gmail.com>
+Date: Tue, 5 Jan 2016 17:01:31 -0800
+Message-ID: <CAOLEWZX1hDw2rHWutakNUkpzgTO=UW0ZOUDwUzvuVmd8fp55pg@mail.gmail.com>
+From: Stephen Arnold <stephen.arnold42@gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] dhcpcd: add recipe for dhcpcd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,32 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2016 00:01:45 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 06 Jan 2016 01:01:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tue, 05 Jan 2016 13:08:31 Khem Raj wrote:
-> > On Jan 5, 2016, at 8:17 AM, Burton, Ross <ross.burton@intel.com> wrote:
-> > 
-> > On 4 January 2016 at 19:00, Khem Raj <raj.khem@gmail.com> wrote:
-> >> I have done OE-Core only clean world builds for all Qemu machines
-> >> without a single build failure and
-> >> runtime boot tested.
-> > 
-> > I threw this at the autobuilder and glibc failed to build on one of the
-> > runs:
-> > 
-> > http://errors.yoctoproject.org/Errors/Details/26057/
-> 
-> Thanks Ross, what MACHINE did you build for ?
+I never said my vote counted...  ;)  But we do have it in "system" in
+Gentoo as the default in all the stage builds.  So for me I'd like any
+image with a network interface to Just Work using the (sometimes very)
+basic manual readme steps in random BSP layers with minimal deps.  And
+I haven't seen one yet with a bitbake-layers add-layer step to add
+networking...
 
-It's right there in the error report on the right hand side - genericx86.
+Steve
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+On Tue, Jan 5, 2016 at 2:04 PM, Trevor Woerner <twoerner@gmail.com> wrote:
+> On 01/05/16 16:55, Stephen Arnold wrote:
+>> My vote would be whatever is the most stable/reliable should be in
+>> the core layers rather than an "extra" layer people need to add to
+>> bblayers manually.
+>
+> But there's always "bitbake-layers add-layer" and "bitbake-layers
+> layerindex-fetch" to help :-)
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
