@@ -1,24 +1,30 @@
-Return-Path: <pascal.bach@siemens.com>
-X-Greylist: delayed 934 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 06 Jan 2016 13:31:03 UTC
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F38D731D3
+Return-Path: <ovidiu.vancea@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 121AB73219
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jan 2016 13:31:03 +0000 (UTC)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id u06DFQoR028266
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Jan 2016 14:15:26 +0100
-Received: from dev.sbt.siemens.com (MD1FZU9C.ww002.siemens.net [139.16.77.211])
-	by mail3.siemens.de (8.15.1/8.15.1) with ESMTP id u06DFQfi028269;
-	Wed, 6 Jan 2016 14:15:26 +0100
-From: Pascal Bach <pascal.bach@siemens.com>
+	Wed,  6 Jan 2016 13:45:03 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u06Dj36W016670 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 6 Jan 2016 07:45:03 -0600
+Received: from ovidiu-ro-l0.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2016010607450319-1741911 ;
+	Wed, 6 Jan 2016 07:45:03 -0600 
+From: Ovidiu Vancea <ovidiu.vancea@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Jan 2016 14:14:58 +0100
-Message-Id: <1452086098-31513-1-git-send-email-pascal.bach@siemens.com>
+Date: Wed, 6 Jan 2016 15:45:01 +0200
+Message-Id: <1452087901-23648-1-git-send-email-ovidiu.vancea@ni.com>
 X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] poco: Add recipe for POCO C++ library
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 01/06/2016 07:45:03 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 01/06/2016 07:45:03 AM,
+	Serialize complete at 01/06/2016 07:45:03 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-01-06_09:, , signatures=0
+Subject: [meta-networking][PATCH] dnsmasq: Listen only on loopback and disable DHCP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,188 +37,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2016 13:31:05 -0000
+X-List-Received-Date: Wed, 06 Jan 2016 13:45:06 -0000
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+Dnsmasq functions as DHCP and DNS servers by default and listens on all
+interfaces. This conflicts with other DHCP or DNS servers already on
+the network and corrupts DNS configuration on Windows systems.
+
+We noticed that after installing docker, the Linux system became a
+magnet for DNS requests coming from Windows systems. Dnsmasq is a
+dependency for lxc which is recommended for docker.
+
+Windows periodically broadcasts DHCPInform and DHCP servers reply with
+DHCPAck. If the DHCPAck from the Linux target reaches the Windows
+system first, Windows changes its DNS server IP to the Linux system
+running dnsmasq. Dnsmasq ends up forwarding the DNS requests to the
+official DNS server and replies back the answer to the original
+requestor. The Linux system transparently becomes a DNS proxy on the
+subnet.
+
+Signed-off-by: Ovidiu Vancea <ovidiu.vancea@ni.com>
 ---
- ...dation-library-version-back-to-SHARED_LIB.patch |  35 +++++++
- meta-oe/recipes-support/poco/poco/run-ptest        |   9 ++
- meta-oe/recipes-support/poco/poco_1.6.1.bb         | 108 +++++++++++++++++++++
- 3 files changed, 152 insertions(+)
- create mode 100644 meta-oe/recipes-support/poco/poco-1.6.1/0001-Change-Foundation-library-version-back-to-SHARED_LIB.patch
- create mode 100644 meta-oe/recipes-support/poco/poco/run-ptest
- create mode 100644 meta-oe/recipes-support/poco/poco_1.6.1.bb
+ meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/poco/poco-1.6.1/0001-Change-Foundation-library-version-back-to-SHARED_LIB.patch b/meta-oe/recipes-support/poco/poco-1.6.1/0001-Change-Foundation-library-version-back-to-SHARED_LIB.patch
-new file mode 100644
-index 0000000..f65bb15
---- /dev/null
-+++ b/meta-oe/recipes-support/poco/poco-1.6.1/0001-Change-Foundation-library-version-back-to-SHARED_LIB.patch
-@@ -0,0 +1,35 @@
-+From cec5a43151a11d8afbb5dd50caf4e22fb89c6340 Mon Sep 17 00:00:00 2001
-+From: Mike Gelfand <mikedld@mikedld.com>
-+Date: Sun, 20 Sep 2015 03:08:19 +0300
-+Subject: [PATCH] Change Foundation library version back to
-+ SHARED_LIBRARY_VERSION
-+
-+Foundation is the only library using PROJECT_VERSION as library version,
-+the change accidentally introduced by commit b69fafb84c. This causes
-+difference in library being linked to (libPocoFoundation.31.dylib on Mac)
-+and library returned by $<TARGET_FILE:Poco::Foundation> for imported
-+target (libPocoFoundation.1.6.1.dylib), causing inconvenience. Also, this
-+differs from autoconf-based builds where only "31" (soversion) library is
-+being created and not "1.6.1" (project version) one.
-+
-+Upstream-Status: Backport from 1.6.2
-+---
-+ Foundation/CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Foundation/CMakeLists.txt b/Foundation/CMakeLists.txt
-+index c1dd25f..25f401c 100644
-+--- a/Foundation/CMakeLists.txt
-++++ b/Foundation/CMakeLists.txt
-+@@ -108,7 +108,7 @@ add_library( "${LIBNAME}" ${LIB_MODE} ${SRCS})
-+ add_library( "${POCO_LIBNAME}" ALIAS "${LIBNAME}")
-+ set_target_properties( "${LIBNAME}"
-+     PROPERTIES
-+-    VERSION ${PROJECT_VERSION} SOVERSION ${SHARED_LIBRARY_VERSION}
-++    VERSION ${SHARED_LIBRARY_VERSION} SOVERSION ${SHARED_LIBRARY_VERSION}
-+     OUTPUT_NAME ${POCO_LIBNAME}
-+     DEFINE_SYMBOL Foundation_EXPORTS
-+     )
-+-- 
-+2.1.4
-+
-diff --git a/meta-oe/recipes-support/poco/poco/run-ptest b/meta-oe/recipes-support/poco/poco/run-ptest
-new file mode 100644
-index 0000000..c479f7a
---- /dev/null
-+++ b/meta-oe/recipes-support/poco/poco/run-ptest
-@@ -0,0 +1,9 @@
-+#!/bin/sh
-+while read runner; do
-+  pushd . >/dev/null
-+  cd bin
-+  echo Testing $runner
-+  ./$runner-testrunner -all
-+  popd >/dev/null
-+done < testrunners
-+
-diff --git a/meta-oe/recipes-support/poco/poco_1.6.1.bb b/meta-oe/recipes-support/poco/poco_1.6.1.bb
-new file mode 100644
-index 0000000..9822186
---- /dev/null
-+++ b/meta-oe/recipes-support/poco/poco_1.6.1.bb
-@@ -0,0 +1,108 @@
-+SUMMARY = "Modern, powerful open source cross-platform C++ class libraries"
-+DESCRIPTION = "Modern, powerful open source C++ class libraries and frameworks for building network- and internet-based applications that run on desktop, server, mobile and embedded systems."
-+SECTION = "libs"
-+HOMEPAGE = "http://pocoproject.org/"
-+LICENSE = "BSL-1.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
-+
-+# These dependencies are required by Foundation
-+DEPENDS = "libpcre zlib"
-+
-+inherit cmake ptest
-+
-+BBCLASSEXTEND = "native"
-+
-+SRC_URI = " \
-+    https://github.com/pocoproject/poco/archive/poco-${PV}-release.tar.gz \
-+    file://0001-Change-Foundation-library-version-back-to-SHARED_LIB.patch \
-+    file://run-ptest \
-+   "
-+
-+SRC_URI[md5sum] = "208872b13d282dfb0f0580fc11df96f3"
-+SRC_URI[sha256sum] = "08bc0a9bae4fb793eb694ad5ec7742c179bad48a286ae614682483021043658b"
-+
-+S = "${WORKDIR}/poco-poco-${PV}-release"
-+
-+EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPOCO_UNBUNDLED=ON \
-+                 ${@bb.utils.contains('PTEST_ENABLED', '1', '-DENABLE_TESTS=ON ', '', d)}"
-+
-+# For the native build we want to use the bundled version
-+EXTRA_OECMAKE_append_class-native = " -DPOCO_UNBUNDLED=OFF"
-+
-+# do not use rpath
-+EXTRA_OECMAKE_append = " -DCMAKE_SKIP_RPATH=ON"
-+
-+# By default the most commonly used poco components are built
-+# Foundation is built anyway and doesn't need to be listed explicitly
-+# these don't have dependencies outside oe-core
-+PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto Data DataSQLite Zip"
-+
-+PACKAGECONFIG[XML] = "-DENABLE_XML=ON,-DENABLE_XML=OFF,expat"
-+PACKAGECONFIG[JSON] = "-DENABLE_JSON=ON,-DENABLE_JSON=OFF"
-+PACKAGECONFIG[MongoDB] = "-DENABLE_MONGODB=ON,-DENABLE_MONGODB=OFF"
-+PACKAGECONFIG[PDF] = "-DENABLE_PDF=ON,-DENABLE_PDF=OFF,zlib"
-+PACKAGECONFIG[Util] = "-DENABLE_UTIL=ON,-DENABLE_UTIL=OFF"
-+PACKAGECONFIG[Net] = "-DENABLE_NET=ON,-DENABLE_NET=OFF"
-+PACKAGECONFIG[NetSSL] = "-DENABLE_NETSSL=ON,-DENABLE_NETSSL=OFF,openssl"
-+PACKAGECONFIG[Crypto] = "-DENABLE_CRYPTO=ON,-DENABLE_CRYPTO=OFF,openssl"
-+PACKAGECONFIG[Data] = "-DENABLE_DATA=ON,-DENABLE_DATA=OFF"
-+PACKAGECONFIG[DataSQLite] = "-DENABLE_DATA_SQLITE=ON,-DENABLE_DATA_SQLITE=OFF,sqlite3"
-+PACKAGECONFIG[Zip] = "-DENABLE_ZIP=ON,-DENABLE_ZIP=OFF"
-+
-+# Additional components not build by default,
-+# they might have dependencies not included in oe-core
-+# or they don't work on all architectures
-+PACKAGECONFIG[mod_poco] = "-DENABLE_APACHECONNECTOR=ON,-DENABLE_APACHECONNECTOR=OFF,apr apache2"
-+PACKAGECONFIG[CppParser] = "-DENABLE_CPPPARSER=ON,-DENABLE_CPPPARSER=OFF"
-+PACKAGECONFIG[DataMySQL] = "-DENABLE_DATA_MYSQL=ON,-DENABLE_DATA_MYSQL=OFF,mariadb"
-+PACKAGECONFIG[DataODBC] = "-DENABLE_DATA_ODBC=ON,-DENABLE_DATA_ODBC=OFF,libiodbc"
-+PACKAGECONFIG[PageCompiler] = "-DENABLE_PAGECOMPILER=ON,-DENABLE_PAGECOMPILER=OFF"
-+PACKAGECONFIG[PageCompilerFile2Page] = "-DENABLE_PAGECOMPILER_FILE2PAGE=ON,-DENABLE_PAGECOMPILER_FILE2PAGE=OFF"
-+PACKAGECONFIG[SevenZip] = "-DENABLE_SEVENZIP=ON,-DENABLE_SEVENZIP=OFF"
-+
-+# Make a package for each library
-+PACKAGES = "${PN}-dbg ${POCO_PACKAGES}"
-+python __anonymous () {
-+    packages = []
-+    testrunners = []
-+    components = d.getVar("PACKAGECONFIG", True).split()
-+    components.append("Foundation")
-+    for lib in components:
-+        pkg = ("poco-%s" % lib.lower()).replace("_","")
-+        packages.append(pkg)
-+        if not d.getVar("FILES_%s" % pkg, True):
-+            d.setVar("FILES_%s" % pkg, "${libdir}/libPoco%s.so.*" % lib)
-+        testrunners.append("%s" % lib)
-+
-+    d.setVar("POCO_PACKAGES", " ".join(packages))
-+    d.setVar("POCO_TESTRUNNERS", "\n".join(testrunners))
-+}
-+
-+# "poco" is a metapackage which pulls in all Poco components
-+PACKAGES += "${PN}"
-+RRECOMMENDS_${PN} += "${POCO_PACKAGES}"
-+RRECOMMENDS_${PN}_class-native = ""
-+ALLOW_EMPTY_${PN} = "1"
-+
-+# -dev last to pick up the remaining stuff
-+PACKAGES += "${PN}-dev ${PN}-staticdev"
-+FILES_${PN}-dev = "${includedir} ${libdir}/libPoco*.so ${libdir}/cmake"
-+FILES_${PN}-staticdev = "${libdir}/libPoco*.a"
-+
-+# ptest support
-+FILES_${PN}-dbg += "${PTEST_PATH}/bin/.debug"
-+
-+# cppunit is only built if tests are enabled
-+PACKAGES += "${PN}-cppunit"
-+FILES_${PN}-cppunit += "${libdir}/libCppUnit.so*"
-+ALLOW_EMPTY_${PN}-cppunit = "1"
-+
-+RDEPENDS_${PN}-ptest += "${PN}-cppunit"
-+
-+do_install_ptest () {
-+       cp -rf ${B}/bin/ ${D}${PTEST_PATH}
-+       cp -f ${B}/lib/libCppUnit.so* ${D}${libdir}
-+       cp -rf ${B}/*/testsuite/data ${D}${PTEST_PATH}/bin/
-+       find "${D}${PTEST_PATH}" -executable -exec chrpath -d {} \;
-+       echo "${POCO_TESTRUNNERS}" > "${D}${PTEST_PATH}/testrunners"
-+}
+diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf b/meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf
+index 1a198a3..bd0ee00 100755
+--- a/meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf
++++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf
+@@ -77,7 +77,7 @@ bogus-priv
+ #except-interface=
+ # Or which to listen on by address (remember to include 127.0.0.1 if
+ # you use this.)
+-#listen-address=
++listen-address=127.0.0.1
+ 
+ # On systems which support it, dnsmasq binds the wildcard address,
+ # even when it is listening on only some interfaces. It then discards
+@@ -114,7 +114,7 @@ bogus-priv
+ # repeat this for each network on which you want to supply DHCP
+ # service.
+ #dhcp-range=192.168.0.50,192.168.0.150,12h
+-dhcp-range=10.0.0.10,10.0.0.200,2h
++#dhcp-range=10.0.0.10,10.0.0.200,2h
+ 
+ # This is an example of a DHCP range where the netmask is given. This
+ # is needed for networks we reach the dnsmasq DHCP server via a relay 
 -- 
 2.1.4
 
