@@ -1,54 +1,22 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f173.google.com (mail-io0-f173.google.com
-	[209.85.223.173])
-	by mail.openembedded.org (Postfix) with ESMTP id C44BC731DF
+Return-Path: <maciej.borzecki@open-rnd.pl>
+X-Greylist: delayed 469 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 06 Jan 2016 11:45:43 UTC
+Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
+	by mail.openembedded.org (Postfix) with ESMTP id E19A4606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jan 2016 10:04:53 +0000 (UTC)
-Received: by mail-io0-f173.google.com with SMTP id g73so14916131ioe.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jan 2016 02:04:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=PCvtuPPXDLfIoI7kOOjBtyaBFu4MAirPQsGn1jDtENA=;
-	b=Wai0ip+y9e1cqWm3mYGJdW3B3y6ByJh18QE1AFYCzKTeqz3/Dh1nGI1uqz01yf4pT+
-	WIEDwVBywRwmdBq2yqoXovDVRMVTg/tIepyUN4HvrfDBNnwFPfvTdjAb7Jol0wGlTTGB
-	Eq+r6F4npNAVydbGnY5rgl0Nxjjnuz6wW3r0luaJZQPrjtMXRjJBmZxlRZg2LugOHJJk
-	QtX6E7EpsTX/B7rntKX9lo2T431s9cXnfWQJwWfGMkpMZMqoiMGOXyQgvG2A8AVn+rGL
-	xW4VTfqQlgsnzjdynKvfltN1+oBhfzeqyZdhSxCFtoPZc5mY41b2qv4/XP+/Pe08/Oyn
-	RONw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=PCvtuPPXDLfIoI7kOOjBtyaBFu4MAirPQsGn1jDtENA=;
-	b=ipq9J5RtRjbSO/P+Bsg5aMKDn5veInTZi2AdK0HqS7zfxD/muQMqUtFXnuEs0ID4YJ
-	7c4iV6eDo3C5KKOo1VSg5zDLK0Msfzx5vkPBpaB2zF4GYGjl6Xn/aPV4TLRuOgRTIEFh
-	eYlpaRCW7ONM5ooRGtXoWzvmkvpK5fiaic6rLIW3c9BDVm3xJhN2m4uAOgEw9icvlB4n
-	E5bXYMq5mFTHoravvX8y3Gv16ca8GF4Crq91sYbhuB2615AFdAsBqrNwcX0myBa9V4Eh
-	JGNpTOLNn3vmkt4iAl/SgpAuFSaWdWtdK20PDcohiVo6bzRgCOPqlNq7yjpfLxqODON6
-	WklQ==
-X-Gm-Message-State: ALoCoQmAzfCSIfkBXYX49uTLbuKiVPwk8eQ5gYZwXkXBimyP9iREWjPWD8wsuPjaSBi6UV38jECfDPu28X4MqwrBnBc5Bh2e7pxmVbUKKq6X0PBKxnMhCHI=
-X-Received: by 10.107.3.154 with SMTP id e26mr83249738ioi.99.1452074693924;
-	Wed, 06 Jan 2016 02:04:53 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.162.70 with HTTP; Wed, 6 Jan 2016 02:04:34 -0800 (PST)
-In-Reply-To: <8AE765C7-71E0-46D1-A086-A86AEEFE3F6B@gmail.com>
-References: <CAMKF1sqAGXMFx9re3YgB1u9aLPGRT9KRCR-0Drux=4P5igirWw@mail.gmail.com>
-	<CAJTo0LbB02LR=6Yyy0-3=Hg1tjcdX=DmMKN2MEJqctnvi5n0Kg@mail.gmail.com>
-	<A374083C-8331-42F2-A3F5-9D5EB49538F7@gmail.com>
-	<2007809.DSH5DR9lFx@peggleto-mobl.ger.corp.intel.com>
-	<8AE765C7-71E0-46D1-A086-A86AEEFE3F6B@gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 6 Jan 2016 10:04:34 +0000
-Message-ID: <CAJTo0LazG6N2L898BLyr0jCZ-Xv5UK=GBs0DoXP+AK4_geQouQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] glibc 2.23
+	Wed,  6 Jan 2016 11:45:43 +0000 (UTC)
+Received: from comp_016_pc_buildenv.localdomain (unknown [31.182.60.238])
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id E7ED81AB13D;
+	Wed,  6 Jan 2016 12:37:52 +0100 (CET)
+From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+To: openembedded-devel@lists.openembedded.org,
+	Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>
+Date: Wed,  6 Jan 2016 12:37:16 +0100
+Message-Id: <1452080236-16613-1-git-send-email-maciej.borzecki@open-rnd.pl>
+X-Mailer: git-send-email 2.5.0
+Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
+Subject: [meta-oe][PATCH] mozjs: fix linking issues on i586
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,17 +29,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2016 10:04:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 06 Jan 2016 11:45:44 -0000
 
-On 6 January 2016 at 03:16, Khem Raj <raj.khem@gmail.com> wrote:
+When building for qemux86 on a x86 host, there's a possibility that the build
+will try to link with incorrect libraries. Due to problematic -rpath-link the
+linker may try to use host libraries if they are present and are arch
+compatible.
 
-> Same branch now has updated glibc patchset, if you have cycles please try
-> once more.
->
+Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+---
+ ...010-fix-cross-compilation-on-i586-targets.patch | 46 ++++++++++++++++++++++
+ meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     |  1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0010-fix-cross-compilation-on-i586-targets.patch
 
-Thanks Khem.  When meta-fsl-ppc doesn't cause several failures in every run
-I'll re-fire it so we can actually get an all-green build!
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0010-fix-cross-compilation-on-i586-targets.patch b/meta-oe/recipes-extended/mozjs/mozjs/0010-fix-cross-compilation-on-i586-targets.patch
+new file mode 100644
+index 0000000000000000000000000000000000000000..6432e1fb7b5ec86fa81a6275d3ad44a1d8370082
+--- /dev/null
++++ b/meta-oe/recipes-extended/mozjs/mozjs/0010-fix-cross-compilation-on-i586-targets.patch
+@@ -0,0 +1,46 @@
++From a452138a1dd274bfad381a701729783360dc86fb Mon Sep 17 00:00:00 2001
++From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
++Date: Tue, 5 Jan 2016 22:04:17 +0100
++Subject: [PATCH] fix cross compilation on i586 targets
++
++Remove offending -Wl,-rpath-link that may cause host libraries to be picked
++during linking. The patch applies a fix to configure.in. So as not to
++regenerate configure, similar fix is applied there.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
++---
++ js/src/configure    | 2 +-
++ js/src/configure.in | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/js/src/configure b/js/src/configure
++index d019b0fdba44233596541de94307010d85a8e32e..5aa40f757a3dbb7d6887175046f44212c15c2eac 100755
++--- a/js/src/configure
+++++ b/js/src/configure
++@@ -5555,7 +5555,7 @@ TARGET_MD_ARCH=unix
++ DIRENT_INO=d_ino
++ MOZ_USER_DIR=".mozilla"
++ 
++-MOZ_FIX_LINK_PATHS='-Wl,-rpath-link,$(LIBXUL_DIST)/bin -Wl,-rpath-link,$(prefix)/lib'
+++MOZ_FIX_LINK_PATHS='-Wl,-rpath-link,$(LIBXUL_DIST)/bin'
++ 
++ MOZ_COMPONENT_NSPR_LIBS='-L$(LIBXUL_DIST)/bin $(NSPR_LIBS)'
++ 
++diff --git a/js/src/configure.in b/js/src/configure.in
++index 0673aca12f6d83035549ade2a4a83906bf91f0f0..39b22724f9535ac1a6dba04658c91e4ef667fc47 100644
++--- a/js/src/configure.in
+++++ b/js/src/configure.in
++@@ -919,7 +919,7 @@ TARGET_MD_ARCH=unix
++ DIRENT_INO=d_ino
++ MOZ_USER_DIR=".mozilla"
++ 
++-MOZ_FIX_LINK_PATHS='-Wl,-rpath-link,$(LIBXUL_DIST)/bin -Wl,-rpath-link,$(prefix)/lib'
+++MOZ_FIX_LINK_PATHS='-Wl,-rpath-link,$(LIBXUL_DIST)/bin'
++ 
++ MOZ_COMPONENT_NSPR_LIBS='-L$(LIBXUL_DIST)/bin $(NSPR_LIBS)'
++ 
++-- 
++2.5.0
++
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+index bb71707492731871e09870e4e820390a38bd5bd0..be4b50b8eb4e17fcc22299803479903f2a2915ea 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+@@ -13,6 +13,7 @@ SRC_URI = " \
+     file://0001-regenerate-configure.patch;patchdir=../../ \ 
+     file://fix-the-compile-error-of-powerpc64.patch;patchdir=../../ \
+     file://fix_milestone_compile_issue.patch \
++    file://0010-fix-cross-compilation-on-i586-targets.patch;patchdir=../../ \
+   "
+ 
+ SRC_URI[md5sum] = "20b6f8f1140ef6e47daa3b16965c9202"
+-- 
+2.5.0
 
-Ross
 
