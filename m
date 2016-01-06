@@ -1,32 +1,43 @@
-Return-Path: <daicy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A26B60797
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jan 2016 02:23:20 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
-   d="scan'208";a="2262455"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 06 Jan 2016 10:23:20 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 22EEF41896D0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jan 2016 10:23:01 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.51) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 6 Jan 2016 10:23:01 +0800
-From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 5 Jan 2016 18:22:56 -0800
-Message-ID: <1452046976-10053-1-git-send-email-daicy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.51]
-X-yoursite-MailScanner-ID: 22EEF41896D0.ADE08
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Cc: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
-Subject: [meta-oe][PATCH] libsmi: 0.4.8 -> 0.5.0
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f173.google.com (mail-pf0-f173.google.com
+	[209.85.192.173])
+	by mail.openembedded.org (Postfix) with ESMTP id B87AE73189;
+	Wed,  6 Jan 2016 03:16:06 +0000 (UTC)
+Received: by mail-pf0-f173.google.com with SMTP id 65so185741347pff.3;
+	Tue, 05 Jan 2016 19:16:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=L8mqbqliQX2HZ/SwGRDpvtynQ2ksCIER3knnhT2TB+E=;
+	b=lt9ADaNoCDTpsWVCvLqsp0EdXFOEvr6Nr4HyOlnpOENAbopJGuQw1zMT3Jz3S/K+uP
+	lgsMlEdX9vTcyORXktRhe0isNnOg6tTIsn5jW+rEdan6T5wEi08vvsLwd4LBJVRfmIAZ
+	Xq881pH5bNaNFGzATql/69DAPnWqkLKX+gDtaRs8XhSG+tXmqLciYk/tYGclRgP6wv2y
+	Ph5TlU+M6yzio20+3zJlVgnDmq2Dx+HAjDW2hYJhOQUk6Uk35tpVRKIKK8dywXeRZ4vD
+	pQm4qe7aKrZWDsq7gVEMEnagrG7f6uPqbmC9ElfOgl+h1nosyhXBFVHOqGZEWh31NEUR
+	p2GQ==
+X-Received: by 10.98.14.145 with SMTP id 17mr139593452pfo.145.1452050167210;
+	Tue, 05 Jan 2016 19:16:07 -0800 (PST)
+Received: from ?IPv6:2601:646:8802:5d5c:d17f:ed53:e760:c0ba?
+	([2601:646:8802:5d5c:d17f:ed53:e760:c0ba])
+	by smtp.gmail.com with ESMTPSA id
+	f12sm69504645pat.20.2016.01.05.19.16.06
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 05 Jan 2016 19:16:06 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <2007809.DSH5DR9lFx@peggleto-mobl.ger.corp.intel.com>
+Date: Tue, 5 Jan 2016 19:16:01 -0800
+Message-Id: <8AE765C7-71E0-46D1-A086-A86AEEFE3F6B@gmail.com>
+References: <CAMKF1sqAGXMFx9re3YgB1u9aLPGRT9KRCR-0Drux=4P5igirWw@mail.gmail.com>
+	<CAJTo0LbB02LR=6Yyy0-3=Hg1tjcdX=DmMKN2MEJqctnvi5n0Kg@mail.gmail.com>
+	<A374083C-8331-42F2-A3F5-9D5EB49538F7@gmail.com>
+	<2007809.DSH5DR9lFx@peggleto-mobl.ger.corp.intel.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+X-Mailer: Apple Mail (2.3112)
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] [RFT] glibc 2.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,53 +50,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2016 02:23:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 06 Jan 2016 03:16:07 -0000
+X-Groupsio-MsgNum: 59365
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_FA6830F9-D73F-470C-BDE3-7323B21BEC35";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-Upgrade libsmi from 0.4.8 to 0.5.0.
-
-Fix error: QA Issue: libsmi: Files/directories were installed but not shipped in any package:
-    /usr/share/yang/*
-
-Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
----
- .../recipes-support/libsmi/{libsmi_0.4.8.bb => libsmi_0.5.0.bb}    | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/libsmi/{libsmi_0.4.8.bb => libsmi_0.5.0.bb} (71%)
-
-diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-similarity index 71%
-rename from meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
-rename to meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-index 227430d..ecd6dd2 100644
---- a/meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb
-+++ b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-@@ -8,8 +8,8 @@ SRC_URI = "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.tar.gz \
-            file://smi.conf \
-           "
- 
--SRC_URI[md5sum] = "760b6b1070738158708649ed2c63425e"
--SRC_URI[sha256sum] = "f048a5270f41bc88b0c3b0a8fe70ca4d716a46b531a0ecaaa87c462f49d74849"
-+SRC_URI[md5sum] = "4bf47483c06c9f07d1b10fbc74eddf11"
-+SRC_URI[sha256sum] = "f21accdadb1bb328ea3f8a13fc34d715baac6e2db66065898346322c725754d3"
- 
- inherit autotools
- 
-@@ -18,9 +18,10 @@ do_install_append () {
-     install -m 0644 ${WORKDIR}/smi.conf ${D}${sysconfdir}/smi.conf
- }
- 
--PACKAGES += "${PN}-mibs ${PN}-pibs"
-+PACKAGES += "${PN}-mibs ${PN}-pibs ${PN}-yang"
- 
- FILES_${PN}-mibs += "${datadir}/mibs"
- FILES_${PN}-pibs += "${datadir}/pibs"
-+FILES_${PN}-yang += "${datadir}/yang"
- 
- RRECOMMENDS_${PN} = "${BPN}-mibs"
--- 
-1.9.1
+--Apple-Mail=_FA6830F9-D73F-470C-BDE3-7323B21BEC35
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
 
+> On Jan 5, 2016, at 4:01 PM, Paul Eggleton =
+<paul.eggleton@linux.intel.com> wrote:
+>=20
+> On Tue, 05 Jan 2016 13:08:31 Khem Raj wrote:
+>>> On Jan 5, 2016, at 8:17 AM, Burton, Ross <ross.burton@intel.com> =
+wrote:
+>>>=20
+>>> On 4 January 2016 at 19:00, Khem Raj <raj.khem@gmail.com> wrote:
+>>>> I have done OE-Core only clean world builds for all Qemu machines
+>>>> without a single build failure and
+>>>> runtime boot tested.
+>>>=20
+>>> I threw this at the autobuilder and glibc failed to build on one of =
+the
+>>> runs:
+>>>=20
+>>> http://errors.yoctoproject.org/Errors/Details/26057/
+>>=20
+>> Thanks Ross, what MACHINE did you build for ?
+>=20
+> It's right there in the error report on the right hand side - =
+genericx86.
+
+Right, noticed it soon after. I have updated the patchset to fix the =
+genericx86
+and submitted it for glibc upstream as well.
+
+Same branch now has updated glibc patchset, if you have cycles please =
+try once more.
+
+>=20
+> Cheers,
+> Paul
+>=20
+> --
+>=20
+> Paul Eggleton
+> Intel Open Source Technology Centre
 
 
+--Apple-Mail=_FA6830F9-D73F-470C-BDE3-7323B21BEC35
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlaMhvUACgkQuwUzVZGdMxQesgCbBPjFjM0UF4wBvq2dfDXgFVCB
+TcIAmwSceIp21hGp4vRI96ww11nK00dy
+=CJVv
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_FA6830F9-D73F-470C-BDE3-7323B21BEC35--
