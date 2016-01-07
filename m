@@ -1,37 +1,47 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
-	[209.85.213.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 047EE7320F
+Return-Path: <moritz.fischer@ettus.com>
+Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
+	[209.85.220.50])
+	by mail.openembedded.org (Postfix) with ESMTP id BC2A3731EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2016 16:35:26 +0000 (UTC)
-Received: by mail-ig0-f182.google.com with SMTP id t15so32322356igr.0
+	Thu,  7 Jan 2016 17:06:33 +0000 (UTC)
+Received: by mail-pa0-f50.google.com with SMTP id ho8so2294309pac.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jan 2016 08:35:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=tpGUPpCSSVaQV2e6Gkgfx+sXkhQ45tIuJNtFR/bfabU=;
-	b=IYRfTUOyNvX8yT/2wvZT3TDsa0HQ0grk29udQmDO9HzNDsL9xoJyzKvd8SVztO8jB8
-	DevoAJcqv8rvVrvy65N42PzBRLqxImztoRrxENB6rWP/KBXRUFi9PGWZknaNIkb0d11x
-	T09wX0woi4BuPkdZAYJjF4m144hBAgaBGEyvOEIM7fuOutjH5RRX1hOFLriBDQyw1/1I
-	oVktUjix40dDZqL38rMhq+T1tMvG37olaO51wQgwj0Vt8cwacCIkdZJDFM0GmbxLSE9w
-	RB5zzrMIIG+95bxPjvz9ttuJUOJSlBioM7ZTXESuMO6nu9XffyctoLI+n5j0qpNjiV1Y
-	BoTw==
-X-Received: by 10.50.62.179 with SMTP id z19mr4519634igr.19.1452184527496;
-	Thu, 07 Jan 2016 08:35:27 -0800 (PST)
-Received: from openSUSE-i7.site (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	Thu, 07 Jan 2016 09:06:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ettus-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=9NBxlL1a6RLaeDUlgZl1sgowkvBxHm2aB7lWVFmnBW8=;
+	b=HwqfLnr4aHBQ6oinjfcfpWTfBewp1WEb3CjoxwpioN0Av6gjyfjEinAJIXp/+arOK2
+	3jlI9USGBBIhOdfXLLB0PUXGNon5G1bkErzQC6OsBv0kJaglPrLMvENd7LELMd5mIZW/
+	NU4LYTdMN2w8c62xbEuSofGGteUWE3NmwJIm8QNrTWjAclOIuAKdzH+tPYQCC667x8jb
+	UHYH1vLmoSZRnmKhUAaWgcAFPrwh4iJKgDvkjKoxlp3BM4Sfc3BEQxjGPXdz1PJroCPG
+	likBrMExoZMxGJe48H2zmoYruEXLrHmv14mAOv8pIIYam9JEzssnGnTwDujfp3/Mg6hX
+	40fg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=9NBxlL1a6RLaeDUlgZl1sgowkvBxHm2aB7lWVFmnBW8=;
+	b=jv3siSNK+8RPfSaWtPDHvlBQTT6E/DpeW8kGXljMtZyAKxY9wOxVJJ6YsWZyiMmtLN
+	T2dcvw48H3oH69Uezte4YlBwak2AJh8hcF0NVTD+j6gI8vDUWjpn2xMth4gulstJEP+8
+	zJrb/mDln9kVyZpT6NTQwj2q67aM0K4264HTZjMN09FCWHJu5WMxACruBZ3FJbiQOtaF
+	5jvs03Om6hLN51NgoSTczudgJW3D+n2NmMa5MMSVwAZXPRcS4bu1Jc3A7mt9mQg61clP
+	OoOfiV3sU7z/Xomg/wLbNW/egJ9DAdqwQLjbjbkmuDBywJVGm0SxO+M7njSTq30Mc/lN
+	vzDw==
+X-Gm-Message-State: ALoCoQmMhAI1uKhYJ/xpCO1bLKhFyIRV54+qk2w39BTjL/qWEr+CB8qndkdJzBRjHJUEsEGYMffmQOKYsKmlpguAOyGhRBPjbA==
+X-Received: by 10.66.90.133 with SMTP id bw5mr54875050pab.22.1452186394394;
+	Thu, 07 Jan 2016 09:06:34 -0800 (PST)
+Received: from fenrir.amer.corp.natinst.com
+	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
 	by smtp.gmail.com with ESMTPSA id
-	q5sm5108573igh.6.2016.01.07.08.35.26
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 07 Jan 2016 08:35:26 -0800 (PST)
-From: Trevor Woerner <twoerner@gmail.com>
+	d8sm83449435pas.14.2016.01.07.09.06.32
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 07 Jan 2016 09:06:33 -0800 (PST)
+From: Moritz Fischer <moritz.fischer@ettus.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Jan 2016 11:34:54 -0500
-Message-Id: <1452184494-23049-2-git-send-email-twoerner@gmail.com>
-X-Mailer: git-send-email 2.7.0.rc3
-In-Reply-To: <1452184494-23049-1-git-send-email-twoerner@gmail.com>
-References: <1452184494-23049-1-git-send-email-twoerner@gmail.com>
-Subject: [meta-oe][PATCH v3] nodejs: update from 4.2.3 to 4.2.4
+Date: Thu,  7 Jan 2016 09:06:28 -0800
+Message-Id: <1452186388-6796-1-git-send-email-moritz.fischer@ettus.com>
+X-Mailer: git-send-email 2.4.3
+Subject: [meta-oe][PATCH] gpsd: Add patch to fix broken ACTIVATE hook.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,139 +54,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2016 16:35:27 -0000
+X-List-Received-Date: Thu, 07 Jan 2016 17:06:35 -0000
 
-Additionally, the LICENSE file changed as follows:
+This patch is already in mainline gpsd. It fixes a
+bug where the ACTIVATE hook for a device never gets
+called.
 
-   - npm is a package manager program located at deps/npm.
-     npm's license follows:
-     """
-  -    Copyright (c) Isaac Z. Schlueter
-  -    All rights reserved.
-  -
-  -    npm is released under the Artistic 2.0 License.
-  -    The text of the License follows:
-  +    The npm application
-  +    Copyright (c) npm, Inc. and Contributors
-  +    Licensed on the terms of The Artistic License 2.0
-  +
-  +    Node package dependencies of the npm application
-  +    Copyright (c) their respective copyright owners
-  +    Licensed on their respective license terms
-  +
-  +    The npm public registry at https://registry.npmjs.com
-  +    and the npm website at https://www.npmjs.com
-  +    Operated by npm, Inc.
-  +    Use governed by terms published on https://www.npmjs.com
-  +
-  +    "Node.js"
-  +    Trademark Joyent, Inc., https://joyent.com
-  +    Neither npm nor npm, Inc. are affiliated with Joyent, Inc.
-  +
-  +    The Node.js application
-  +    Project of Node Foundation, https://nodejs.org
-  +
-  +    The npm Logo
-  +    Copyright (c) Mathias Pettersson and Brian Hammond
-  +
-  +    "Gubblebum Blocky" typeface
-  +    Copyright (c) Tjarda Koster, https://jelloween.deviantart.com
-  +    Used with permission
-  
-  ...
-  
-  -    "Node.js" and "node" trademark Joyent, Inc. npm is not officially
-  -    part of the Node.js project, and is neither owned by nor
-  -    officially affiliated with Joyent, Inc.
-  -
-  -    Packages published in the npm registry (other than the Software and
-  -    its included dependencies) are not part of npm itself, are the sole
-  -    property of their respective maintainers, and are not covered by
-  -    this license.
-  +    The following additional terms shall apply to use of the npm software, the npm
-  +    website, the npm repository and any other services or products offered by npm,
-  +    Inc.:
-  +
-  +    "Node.js" trademark Joyent, Inc.  npm is not officially part of the Node.js
-  +    project, and is neither owned by nor affiliated with Joyent, Inc.
-  +
-  +    "npm" and "The npm Registry" are owned by npm, Inc. All rights reserved.
-  +
-  +    Modules published on the npm registry are not officially endorsed by npm, Inc.
-  +    or the Node.js project.
-  +
-  +    Data published to the npm registry is not part of npm itself, and is the sole
-  +    property of the publisher. While every effort is made to ensure accountability,
-  +    there is absolutely no guarantee, warrantee, or assertion expressed or implied
-  +    as to the quality, fitness for a specific purpose, or lack of malice in any
-  +    given npm package.  Packages downloaded through the npm registry are
-  +    independently licensed and are not covered by this license.
-  +
-  +    Additional policies relating to, and restrictions on use of, npm products and
-  +    services are available on the npm website.  All such policies and restrictions,
-  +    as updated from time to time, are hereby incorporated into this license
-  +    agreement.  By using npm, you acknowledge your agreement to all such policies
-  +    and restrictions.
-  +
-  +    If you have a complaint about a package in the public npm registry, and cannot
-  +    resolve it with the package owner, please email support@npmjs.com and explain
-  +    the situation.  See the [npm Dispute Resolution
-  +    policy](https://github.com/npm/policies/blob/master/disputes.md) for more
-  +    details.
-  
-  -    "npm Logo" created by Mathias Pettersson and Brian Hammond,
-  -    used with permission.
-  +    Any data published to The npm Registry (including user account information) may
-  +    be removed or modified at the sole discretion of the npm server administrators.
-  +
-  +    "npm Logo" contributed by Mathias Pettersson and Brian Hammond,
-  +    use is subject to https://www.npmjs.com/policies/trademark
-  
-       "Gubblebum Blocky" font
-  -    Copyright (c) by Tjarda Koster, http://jelloween.deviantart.com
-  +    Copyright (c) by Tjarda Koster, https://jelloween.deviantart.com
-       included for use in the npm website and documentation,
-       used with permission.
-  
-  -    This program uses several Node.js modules contained in the node_modules/
-  +    This program uses several Node modules contained in the node_modules/
-       subdirectory, according to the terms of their respective licenses.
-     """
-
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
 ---
- .../recipes-devtools/nodejs/{nodejs_4.2.3.bb => nodejs_4.2.4.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_4.2.3.bb => nodejs_4.2.4.bb} (93%)
+ ...e-Fix-issue-with-ACTIVATE-hook-not-being-.patch | 32 ++++++++++++++++++++++
+ meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb       |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.2.3.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.2.4.bb
-similarity index 93%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_4.2.3.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_4.2.4.bb
-index 66a3c11..18e23b7 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_4.2.3.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.2.4.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & BSD & Artistic-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=ee90ba97d933fc8d56e97812b7dd62e9"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=963ca39eebcb15ac618bc3006504ae3f"
- 
- DEPENDS = "openssl"
- 
-@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
- SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
-     file://no-registry.patch \
- "
--SRC_URI[md5sum] = "529a8abd4ca5a2225636767d3f14c382"
--SRC_URI[sha256sum] = "5008ade5feb4b089f59163f66bffddc113f27de5d78edf203e39435c2c5d554f"
-+SRC_URI[md5sum] = "86e4d0d8b626f6e60ca7bef02f2543d2"
-+SRC_URI[sha256sum] = "4ee244ffede7328d9fa24c3024787e71225b7abaac49fe2b30e68b27460c10ec"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch
+new file mode 100644
+index 0000000..ce971de
+--- /dev/null
++++ b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch
+@@ -0,0 +1,32 @@
++From 6ff099b1ba8de74df9ddeb61e3825264b96ef692 Mon Sep 17 00:00:00 2001
++From: Moritz Fischer <moritz.fischer@ettus.com>
++Date: Tue, 22 Dec 2015 19:38:31 -0800
++Subject: [PATCH] libgpsd-core: Fix issue with ACTIVATE hook not being called.
++
++In the current system session->mode seemed to ignore the
++O_OPTIMIZE flag, leading to the ACTIVATE hook being ignored.
++
++Another way to fix this would be to keep the session->mode
++condition pull up the check for O_CONTINUE.
++
++Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
++---
++ libgpsd_core.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/libgpsd_core.c b/libgpsd_core.c
++index 31fec2a..a84e85f 100644
++--- a/libgpsd_core.c
+++++ b/libgpsd_core.c
++@@ -543,7 +543,7 @@ int gpsd_open(struct gps_device_t *session)
++ int gpsd_activate(struct gps_device_t *session, const int mode)
++ /* acquire a connection to the GPS device */
++ {
++-    if (session->mode == O_OPTIMIZE)
+++    if (mode == O_OPTIMIZE)
++ 	gpsd_run_device_hook(&session->context->errout,
++ 			     session->gpsdata.dev.path, "ACTIVATE");
++     session->gpsdata.gps_fd = gpsd_open(session);
++-- 
++2.4.3
++
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+index 6ae2f30..646360c 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+@@ -16,6 +16,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+     file://0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.patch \
+     file://0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch \
+     file://0001-Include-stdatomic.h-only-in-C-mode.patch \
++    file://0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch \
+     file://gpsd-default \
+     file://gpsd \
+     file://60-gpsd.rules \
 -- 
-2.7.0.rc3
+2.4.3
 
 
