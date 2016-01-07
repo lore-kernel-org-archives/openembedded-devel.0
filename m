@@ -1,38 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 184846FFFE
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 2379D731E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2016 11:40:56 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id b14so118816685wmb.1
+	Thu,  7 Jan 2016 11:40:57 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id b14so118817666wmb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jan 2016 03:40:57 -0800 (PST)
+	Thu, 07 Jan 2016 03:40:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=4x3xYk1iT748PbnZPTcId8ub6F/dvR5F4xNGhT6i+bE=;
-	b=hmstPNHaPa8w/QoaYjegaQWY6hyA29bXNc5IRO33XPH/eDYagSNE2EfdYiD7ip19i1
-	BCY6IruD0lqxbBU84EkTHjH6ZcfrGZfr75j+xZ//nEbWRj00pSP05IFA/XKSG/QYioiC
-	jP21xZU6RUz8VlVgxz3xEex81OhYI6z1mV5NE21+ar2ar9rYXLqaixaOkXlIhdXIT+k2
-	Q/A35Xix/2FF6Xs+M/eXNVvgEZ2Cqs9GDvkV6bIW7tOey9qPpdv9X5L+crlnnwJapqXA
-	axW1b+Mphg3nwqg37vN29NadaBqKmT0zQ3DA3wsbwS06RQelolVBYJMfX34bxf4Txni2
-	ckEw==
-X-Received: by 10.194.242.195 with SMTP id ws3mr112586904wjc.131.1452166856709;
-	Thu, 07 Jan 2016 03:40:56 -0800 (PST)
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=Z2QOr2m2MBVZwuSmu9QVJ/9ZFce7YGmFwX1qfvCAdxI=;
+	b=oHYWWSwbWXICNVSF+SIoERbzuWMKWinSoSVyCsU9HMHcmdteugP5CCwlNM5LDm4jch
+	q2jMUnsV8OP1ucJWozJPpbseRBaxP5A0Pydo4L4cho0gd95TQ/6OM17YBTQeYagSpqP7
+	DMufY3Q5WLeaUFwiiq3RvKKZwXIcKdTBhwaVtvY6aFU9wfbC/eZ7QzLDfHPJquKG0vod
+	EBFRnJBsDvvGaak8HOtmeX4yAACvuoP7ayPUAxIJ2Grj6d5qnOvJzTsFHnAv1Q7F6Q2J
+	OTv/Rvsh2czvtq1X6X1BCv/mO4DZ66/XtXvbFfi8m8s/nNahKxCWfuwiUSTkBcpQdlJx
+	/DLA==
+X-Received: by 10.194.114.1 with SMTP id jc1mr112780481wjb.78.1452166858089;
+	Thu, 07 Jan 2016 03:40:58 -0800 (PST)
 Received: from localhost.localdomain
 	(ip-176-198-253-155.hsi05.unitymediagroup.de. [176.198.253.155])
 	by smtp.googlemail.com with ESMTPSA id
-	c26sm13236460wmi.21.2016.01.07.03.40.55
+	c26sm13236460wmi.21.2016.01.07.03.40.56
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Jan 2016 03:40:56 -0800 (PST)
+	Thu, 07 Jan 2016 03:40:57 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Jan 2016 12:40:24 +0100
-Message-Id: <1452166825-29098-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu,  7 Jan 2016 12:40:25 +0100
+Message-Id: <1452166825-29098-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.0
+In-Reply-To: <1452166825-29098-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1452166825-29098-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 0/1] update to 1.24.2 to make access to windows shares work again
+Subject: [PATCH 1/1] gvfs: update to 1.24.2 to make access to windows shares work again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,16 +47,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2016 11:40:58 -0000
+X-List-Received-Date: Thu, 07 Jan 2016 11:40:59 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The following patch was run-tested with jethro. If it survives Martin's master
-world I would be happy to see it in jethro too.
+* Our very old and heavily patched version was broken for windows shares by
+  the update of samba to 4.x
+* Update to latest gvfs version (1.26.2 currently) is not possible due to
+  | configure: error: Package requirements (glib-2.0 >= 2.45.7 gobject-2.0 gmodule-no-export-2.0 gio-unix-2.0 gio-2.0) were not met:
+  |
+  | Requested 'glib-2.0 >= 2.45.7' but version of GLib is 2.44.1
+* Licence checksum changed by updating the address of the FSF [1]
+* Backported patches were removed
+* obexftp support was removed in [2]
+* some more PACKAGECONFIGs disabled by default (all set -except 'cdda'- was build tested)
 
-Andreas Müller (1):
-  gvfs: update to 1.24.2 to make access to windows shares work again
+[1] https://git.gnome.org/browse/gvfs/commit/?id=1e9c89eafaac6b3a759115df9981526fe9083461
+[2] https://git.gnome.org/browse/gvfs/commit/?id=606ef241fb8677528bd5d5526854658f0f298a2c
 
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
  ...ib-2.31-deprecations-and-thread-API-chang.patch |  599 -----
  .../0003-Adapt-to-glib-mutex-API-changes.patch     | 2454 --------------------
  .../0004-Adapt-to-glib-thread-API-changes.patch    |   44 -
@@ -74,6 +86,3398 @@ Andreas Müller (1):
  create mode 100644 meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.24.2.bb
  rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.10.1.bb => gvfs_1.24.2.bb} (64%)
 
+diff --git a/meta-gnome/recipes-gnome/gvfs/files/0002-Adapt-to-GLib-2.31-deprecations-and-thread-API-chang.patch b/meta-gnome/recipes-gnome/gvfs/files/0002-Adapt-to-GLib-2.31-deprecations-and-thread-API-chang.patch
+deleted file mode 100644
+index 0aa9271..0000000
+--- a/meta-gnome/recipes-gnome/gvfs/files/0002-Adapt-to-GLib-2.31-deprecations-and-thread-API-chang.patch
++++ /dev/null
+@@ -1,599 +0,0 @@
+-From bd014bd8a442cae12aace7deb6e6a4d21ac3dd0e Mon Sep 17 00:00:00 2001
+-From: Matthias Clasen <mclasen@redhat.com>
+-Date: Fri, 21 Oct 2011 14:15:09 +0200
+-Subject: [PATCH] Adapt to GLib 2.31 deprecations and thread API changes
+-
+-GStaticMutex and GStaticRWLock have been replaced by GMutex
+-and GRWLock, and g_thread_init() is no longer needed.
+-
+-https://bugzilla.gnome.org/show_bug.cgi?id=661148
+-
+-Upstream-Status: Backport
+-
+-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+----
+- client/gdaemonvfs.c                          |    5 +-
+- client/gvfsdaemondbus.c                      |   15 ++++---
+- client/gvfsfusedaemon.c                      |    1 -
+- common/gmounttracker.c                       |   43 ++++++------------
+- configure.ac                                 |    2 +-
+- daemon/daemon-main.c                         |    1 -
+- daemon/gvfsdaemonutils.c                     |    8 ++--
+- daemon/main.c                                |    2 -
+- metadata/metatree.c                          |   60 +++++++++++++-------------
+- monitor/proxy/gvfsproxyvolumemonitordaemon.c |    1 -
+- 10 files changed, 60 insertions(+), 78 deletions(-)
+-
+-diff --git a/client/gdaemonvfs.c b/client/gdaemonvfs.c
+-index 0f021b9..ae17c3c 100644
+---- a/client/gdaemonvfs.c
+-+++ b/client/gdaemonvfs.c
+-@@ -298,9 +298,8 @@ g_daemon_vfs_init (GDaemonVfs *vfs)
+- 
+-   bindtextdomain (GETTEXT_PACKAGE, GVFS_LOCALEDIR);
+-   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+--  
+--  if (g_thread_supported ())
+--    dbus_threads_init_default ();
+-+
+-+  dbus_threads_init_default ();
+- 
+-   vfs->async_bus = dbus_bus_get_private (DBUS_BUS_SESSION, NULL);
+- 
+-diff --git a/client/gvfsdaemondbus.c b/client/gvfsdaemondbus.c
+-index f32a6f8..2cfd2e6 100644
+---- a/client/gvfsdaemondbus.c
+-+++ b/client/gvfsdaemondbus.c
+-@@ -53,7 +53,10 @@ typedef struct {
+- static gint32 vfs_data_slot = -1;
+- static GOnce once_init_dbus = G_ONCE_INIT;
+- 
+--static GStaticPrivate local_connections = G_STATIC_PRIVATE_INIT;
+-+typedef struct _ThreadLocalConnections ThreadLocalConnections;
+-+static void free_local_connections (ThreadLocalConnections *local);
+-+
+-+static GPrivate local_connections = G_PRIVATE_INIT((GDestroyNotify)free_local_connections);
+- 
+- /* dbus id -> async connection */
+- static GHashTable *async_map = NULL;
+-@@ -862,10 +865,10 @@ _g_vfs_daemon_call_sync (DBusMessage *message,
+-  *               get per-thread synchronous dbus connections             *
+-  *************************************************************************/
+- 
+--typedef struct {
+-+struct _ThreadLocalConnections {
+-   GHashTable *connections;
+-   DBusConnection *session_bus;
+--} ThreadLocalConnections;
+-+};
+- 
+- static void
+- free_mount_connection (DBusConnection *conn)
+-@@ -891,7 +894,7 @@ invalidate_local_connection (const char *dbus_id,
+-   
+-   _g_daemon_vfs_invalidate_dbus_id (dbus_id);
+- 
+--  local = g_static_private_get (&local_connections);
+-+  local = g_private_get (&local_connections);
+-   if (local)
+-     g_hash_table_remove (local->connections, dbus_id);
+-   
+-@@ -916,13 +919,13 @@ _g_dbus_connection_get_sync (const char *dbus_id,
+- 
+-   g_once (&once_init_dbus, vfs_dbus_init, NULL);
+- 
+--  local = g_static_private_get (&local_connections);
+-+  local = g_private_get (&local_connections);
+-   if (local == NULL)
+-     {
+-       local = g_new0 (ThreadLocalConnections, 1);
+-       local->connections = g_hash_table_new_full (g_str_hash, g_str_equal,
+- 						  g_free, (GDestroyNotify)free_mount_connection);
+--      g_static_private_set (&local_connections, local, (GDestroyNotify)free_local_connections);
+-+      g_private_set (&local_connections, local);
+-     }
+- 
+-   if (dbus_id == NULL)
+-diff --git a/client/gvfsfusedaemon.c b/client/gvfsfusedaemon.c
+-index a4ba32c..7cfa81c 100644
+---- a/client/gvfsfusedaemon.c
+-+++ b/client/gvfsfusedaemon.c
+-@@ -2425,7 +2425,6 @@ gint
+- main (gint argc, gchar *argv [])
+- {
+-   g_type_init ();
+--  g_thread_init (NULL);
+- 
+-   return fuse_main (argc, argv, &vfs_oper, NULL /* user data */);
+- }
+-diff --git a/common/gmounttracker.c b/common/gmounttracker.c
+-index 519cd47..135a2b2 100644
+---- a/common/gmounttracker.c
+-+++ b/common/gmounttracker.c
+-@@ -49,7 +49,7 @@ struct _GMountTracker
+- {
+-   GObject parent_instance;
+- 
+--  GMutex *lock;
+-+  GMutex lock;
+-   GList *mounts;
+-   DBusConnection *connection;
+- };
+-@@ -258,8 +258,7 @@ g_mount_tracker_finalize (GObject *object)
+- 
+-   tracker = G_MOUNT_TRACKER (object);
+- 
+--  if (tracker->lock)
+--    g_mutex_free (tracker->lock);
+-+  g_mutex_clear (&tracker->lock);
+-   
+-   g_list_foreach (tracker->mounts,
+- 		  (GFunc)g_mount_info_unref, NULL);
+-@@ -382,21 +381,18 @@ static void
+- g_mount_tracker_add_mount (GMountTracker *tracker,
+- 			   GMountInfo *info)
+- {
+--  if (tracker->lock)
+--    g_mutex_lock (tracker->lock);
+-+  g_mutex_lock (&tracker->lock);
+-   
+-   /* Don't add multiple times */
+-   if (g_mount_tracker_find (tracker, info))
+-     {
+--      if (tracker->lock)
+--	g_mutex_unlock (tracker->lock);
+-+      g_mutex_unlock (&tracker->lock);
+-       return;
+-     }
+- 
+-   tracker->mounts = g_list_prepend (tracker->mounts, g_mount_info_ref (info));
+- 
+--  if (tracker->lock)
+--    g_mutex_unlock (tracker->lock);
+-+  g_mutex_unlock (&tracker->lock);
+-   
+-   g_signal_emit (tracker, signals[MOUNTED], 0, info);
+- }
+-@@ -408,16 +404,14 @@ g_mount_tracker_remove_mount (GMountTracker *tracker,
+-   GList *l;
+-   GMountInfo *old_info;
+- 
+--  if (tracker->lock)
+--    g_mutex_lock (tracker->lock);
+-+  g_mutex_lock (&tracker->lock);
+-   
+-   l = g_mount_tracker_find (tracker, info);
+-   
+-   /* Don't remove multiple times */
+-   if (l == NULL)
+-     {
+--      if (tracker->lock)
+--	g_mutex_unlock (tracker->lock);
+-+      g_mutex_unlock (&tracker->lock);
+-       return;
+-     }
+- 
+-@@ -425,8 +419,7 @@ g_mount_tracker_remove_mount (GMountTracker *tracker,
+-   
+-   tracker->mounts = g_list_delete_link (tracker->mounts, l);
+-   
+--  if (tracker->lock)
+--    g_mutex_unlock (tracker->lock);
+-+  g_mutex_unlock (&tracker->lock);
+- 
+-   g_signal_emit (tracker, signals[UNMOUNTED], 0, old_info);
+-   g_mount_info_unref (old_info);
+-@@ -548,8 +541,6 @@ init_connection (GMountTracker *tracker)
+- static void
+- g_mount_tracker_init (GMountTracker *tracker)
+- {
+--  if (g_thread_supported ())
+--    tracker->lock = g_mutex_new ();
+- }
+- 
+- 
+-@@ -588,8 +579,7 @@ g_mount_tracker_list_mounts (GMountTracker *tracker)
+-   GList *res, *l;
+-   GMountInfo *copy;
+- 
+--  if (tracker->lock)
+--    g_mutex_lock (tracker->lock);
+-+  g_mutex_lock (&tracker->lock);
+-   
+-   res = NULL;
+-   for (l = tracker->mounts; l != NULL; l = l->next)
+-@@ -598,8 +588,7 @@ g_mount_tracker_list_mounts (GMountTracker *tracker)
+-       res = g_list_prepend (res, copy);
+-     }
+- 
+--  if (tracker->lock)
+--    g_mutex_unlock (tracker->lock);
+-+  g_mutex_unlock (&tracker->lock);
+-   
+-   return g_list_reverse (res);
+- }
+-@@ -611,8 +600,7 @@ g_mount_tracker_find_by_mount_spec (GMountTracker *tracker,
+-   GList *l;
+-   GMountInfo *info, *found;
+- 
+--  if (tracker->lock)
+--    g_mutex_lock (tracker->lock);
+-+  g_mutex_lock (&tracker->lock);
+- 
+-   found = NULL;
+-   for (l = tracker->mounts; l != NULL; l = l->next)
+-@@ -626,8 +614,7 @@ g_mount_tracker_find_by_mount_spec (GMountTracker *tracker,
+- 	}
+-     }
+- 
+--  if (tracker->lock)
+--    g_mutex_unlock (tracker->lock);
+-+  g_mutex_unlock (&tracker->lock);
+-   
+-   return found;
+- }
+-@@ -641,8 +628,7 @@ g_mount_tracker_has_mount_spec (GMountTracker *tracker,
+-   GMountInfo *info;
+-   gboolean found;
+- 
+--  if (tracker->lock)
+--    g_mutex_lock (tracker->lock);
+-+  g_mutex_lock (&tracker->lock);
+- 
+-   found = FALSE;
+-   for (l = tracker->mounts; l != NULL; l = l->next)
+-@@ -656,8 +642,7 @@ g_mount_tracker_has_mount_spec (GMountTracker *tracker,
+- 	}
+-     }
+- 
+--  if (tracker->lock)
+--    g_mutex_unlock (tracker->lock);
+-+  g_mutex_unlock (&tracker->lock);
+-   
+-   return found;
+- }
+-diff --git a/configure.ac b/configure.ac
+-index ee2f90f..be0c6a1 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -46,7 +46,7 @@ GTK_DOC_CHECK
+- DISTCHECK_CONFIGURE_FLAGS="--enable-gtk-doc"
+- AC_SUBST(DISTCHECK_CONFIGURE_FLAGS)
+- 
+--PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.29.14 gthread-2.0 gobject-2.0 gmodule-no-export-2.0 gio-unix-2.0 gio-2.0 )
+-+PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.31.0 gobject-2.0 gmodule-no-export-2.0 gio-unix-2.0 gio-2.0 )
+- 
+- PKG_CHECK_MODULES(DBUS, dbus-1)
+- 
+-diff --git a/daemon/daemon-main.c b/daemon/daemon-main.c
+-index ef9025c..ff2bfde 100644
+---- a/daemon/daemon-main.c
+-+++ b/daemon/daemon-main.c
+-@@ -63,7 +63,6 @@ daemon_init (void)
+-   textdomain (GETTEXT_PACKAGE);
+-   
+-   dbus_threads_init_default ();
+--  g_thread_init (NULL);
+-   g_type_init ();
+- 
+-   g_log_set_handler (NULL, G_LOG_LEVEL_DEBUG, log_debug, NULL);
+-diff --git a/daemon/gvfsdaemonutils.c b/daemon/gvfsdaemonutils.c
+-index f03d4b2..1efcf87 100644
+---- a/daemon/gvfsdaemonutils.c
+-+++ b/daemon/gvfsdaemonutils.c
+-@@ -41,7 +41,7 @@
+- #include "gvfsdaemonprotocol.h"
+- 
+- static gint32 extra_fd_slot = -1;
+--static GStaticMutex extra_lock = G_STATIC_MUTEX_INIT;
+-+static GMutex extra_lock;
+- 
+- typedef struct {
+-   int extra_fd;
+-@@ -93,7 +93,7 @@ dbus_connection_send_fd (DBusConnection *connection,
+-       return FALSE;
+-     }
+- 
+--  g_static_mutex_lock (&extra_lock);
+-+  g_mutex_lock (&extra_lock);
+- 
+-   if (_g_socket_send_fd (extra->extra_fd, fd) == -1)
+-     {
+-@@ -103,13 +103,13 @@ dbus_connection_send_fd (DBusConnection *connection,
+- 		   g_io_error_from_errno (errsv),
+- 		   _("Error sending file descriptor: %s"),
+- 		   g_strerror (errsv));
+--      g_static_mutex_unlock (&extra_lock);
+-+      g_mutex_unlock (&extra_lock);
+-       return FALSE;
+-     }
+- 
+-   *fd_id = extra->fd_count++;
+- 
+--  g_static_mutex_unlock (&extra_lock);
+-+  g_mutex_unlock (&extra_lock);
+- 
+-   return TRUE;
+- }
+-diff --git a/daemon/main.c b/daemon/main.c
+-index 4703562..2b2d549 100644
+---- a/daemon/main.c
+-+++ b/daemon/main.c
+-@@ -52,8 +52,6 @@ main (int argc, char *argv[])
+-   bindtextdomain (GETTEXT_PACKAGE, GVFS_LOCALEDIR);
+-   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+-   textdomain (GETTEXT_PACKAGE);
+--  
+--  g_thread_init (NULL);
+- 
+- #ifdef SIGPIPE
+-   signal (SIGPIPE, SIG_IGN);
+-diff --git a/metadata/metatree.c b/metadata/metatree.c
+-index 3420ad0..850866e 100644
+---- a/metadata/metatree.c
+-+++ b/metadata/metatree.c
+-@@ -68,7 +68,7 @@
+- 
+- #define KEY_IS_LIST_MASK (1<<31)
+- 
+--static GStaticRWLock metatree_lock = G_STATIC_RW_LOCK_INIT;
+-+static GRWLock metatree_lock;
+- 
+- typedef enum {
+-   JOURNAL_OP_SET_KEY,
+-@@ -591,7 +591,7 @@ meta_tree_lookup_by_name (const char *name,
+- MetaTree *
+- meta_tree_ref (MetaTree *tree)
+- {
+--  g_atomic_int_exchange_and_add ((int *)&tree->ref_count, 1);
+-+  g_atomic_int_inc ((int *)&tree->ref_count);
+-   return tree;
+- }
+- 
+-@@ -672,17 +672,17 @@ meta_tree_refresh (MetaTree *tree)
+- {
+-   gboolean needs_refresh;
+- 
+--  g_static_rw_lock_reader_lock (&metatree_lock);
+-+  g_rw_lock_reader_lock (&metatree_lock);
+-   needs_refresh =
+-     meta_tree_needs_rereading (tree) ||
+-     meta_tree_has_new_journal_entries (tree);
+--  g_static_rw_lock_reader_unlock (&metatree_lock);
+-+  g_rw_lock_reader_unlock (&metatree_lock);
+- 
+-   if (needs_refresh)
+-     {
+--      g_static_rw_lock_writer_lock (&metatree_lock);
+-+      g_rw_lock_writer_lock (&metatree_lock);
+-       meta_tree_refresh_locked (tree);
+--      g_static_rw_lock_writer_unlock (&metatree_lock);
+-+      g_rw_lock_writer_unlock (&metatree_lock);
+-     }
+- }
+- 
+-@@ -1468,7 +1468,7 @@ meta_tree_lookup_key_type  (MetaTree                         *tree,
+-   MetaKeyType type;
+-   gpointer value;
+- 
+--  g_static_rw_lock_reader_lock (&metatree_lock);
+-+  g_rw_lock_reader_lock (&metatree_lock);
+- 
+-   new_path = meta_journal_reverse_map_path_and_key (tree->journal,
+- 						    path,
+-@@ -1492,7 +1492,7 @@ meta_tree_lookup_key_type  (MetaTree                         *tree,
+-     type = META_KEY_TYPE_STRING;
+- 
+-  out:
+--  g_static_rw_lock_reader_unlock (&metatree_lock);
+-+  g_rw_lock_reader_unlock (&metatree_lock);
+-   return type;
+- }
+- 
+-@@ -1506,7 +1506,7 @@ meta_tree_get_last_changed (MetaTree *tree,
+-   gpointer value;
+-   guint64 res, mtime;
+- 
+--  g_static_rw_lock_reader_lock (&metatree_lock);
+-+  g_rw_lock_reader_lock (&metatree_lock);
+- 
+-   new_path = meta_journal_reverse_map_path_and_key (tree->journal,
+- 						    path,
+-@@ -1526,7 +1526,7 @@ meta_tree_get_last_changed (MetaTree *tree,
+-   g_free (new_path);
+- 
+-  out:
+--  g_static_rw_lock_reader_unlock (&metatree_lock);
+-+  g_rw_lock_reader_unlock (&metatree_lock);
+- 
+-   return res;
+- }
+-@@ -1543,7 +1543,7 @@ meta_tree_lookup_string (MetaTree   *tree,
+-   char *new_path;
+-   char *res;
+- 
+--  g_static_rw_lock_reader_lock (&metatree_lock);
+-+  g_rw_lock_reader_lock (&metatree_lock);
+- 
+-   new_path = meta_journal_reverse_map_path_and_key (tree->journal,
+- 						    path,
+-@@ -1572,7 +1572,7 @@ meta_tree_lookup_string (MetaTree   *tree,
+-     res = g_strdup (verify_string (tree, ent->value));
+- 
+-  out:
+--  g_static_rw_lock_reader_unlock (&metatree_lock);
+-+  g_rw_lock_reader_unlock (&metatree_lock);
+- 
+-   return res;
+- }
+-@@ -1621,7 +1621,7 @@ meta_tree_lookup_stringv   (MetaTree                         *tree,
+-   char **res;
+-   guint32 num_strings, i;
+- 
+--  g_static_rw_lock_reader_lock (&metatree_lock);
+-+  g_rw_lock_reader_lock (&metatree_lock);
+- 
+-   new_path = meta_journal_reverse_map_path_and_key (tree->journal,
+- 						    path,
+-@@ -1658,7 +1658,7 @@ meta_tree_lookup_stringv   (MetaTree                         *tree,
+-     }
+- 
+-  out:
+--  g_static_rw_lock_reader_unlock (&metatree_lock);
+-+  g_rw_lock_reader_unlock (&metatree_lock);
+- 
+-   return res;
+- }
+-@@ -1876,7 +1876,7 @@ meta_tree_enumerate_dir (MetaTree                         *tree,
+-   MetaFileDir *dir;
+-   char *res_path;
+- 
+--  g_static_rw_lock_reader_lock (&metatree_lock);
+-+  g_rw_lock_reader_lock (&metatree_lock);
+- 
+-   data.children = children =
+-     g_hash_table_new_full (g_str_hash,
+-@@ -1922,7 +1922,7 @@ meta_tree_enumerate_dir (MetaTree                         *tree,
+-  out:
+-   g_free (res_path);
+-   g_hash_table_destroy (children);
+--  g_static_rw_lock_reader_unlock (&metatree_lock);
+-+  g_rw_lock_reader_unlock (&metatree_lock);
+- }
+- 
+- typedef struct {
+-@@ -2116,7 +2116,7 @@ meta_tree_enumerate_keys (MetaTree                         *tree,
+-   GHashTableIter iter;
+-   char *res_path;
+- 
+--  g_static_rw_lock_reader_lock (&metatree_lock);
+-+  g_rw_lock_reader_lock (&metatree_lock);
+- 
+-   keydata.keys = keys =
+-     g_hash_table_new_full (g_str_hash,
+-@@ -2170,7 +2170,7 @@ meta_tree_enumerate_keys (MetaTree                         *tree,
+-  out:
+-   g_free (res_path);
+-   g_hash_table_destroy (keys);
+--  g_static_rw_lock_reader_unlock (&metatree_lock);
+-+  g_rw_lock_reader_unlock (&metatree_lock);
+- }
+- 
+- 
+-@@ -2371,9 +2371,9 @@ meta_tree_flush (MetaTree *tree)
+- {
+-   gboolean res;
+- 
+--  g_static_rw_lock_writer_lock (&metatree_lock);
+-+  g_rw_lock_writer_lock (&metatree_lock);
+-   res = meta_tree_flush_locked (tree);
+--  g_static_rw_lock_writer_unlock (&metatree_lock);
+-+  g_rw_lock_writer_unlock (&metatree_lock);
+-   return res;
+- }
+- 
+-@@ -2386,7 +2386,7 @@ meta_tree_unset (MetaTree                         *tree,
+-   guint64 mtime;
+-   gboolean res;
+- 
+--  g_static_rw_lock_writer_lock (&metatree_lock);
+-+  g_rw_lock_writer_lock (&metatree_lock);
+- 
+-   if (tree->journal == NULL ||
+-       !tree->journal->journal_valid)
+-@@ -2412,7 +2412,7 @@ meta_tree_unset (MetaTree                         *tree,
+-   g_string_free (entry, TRUE);
+- 
+-  out:
+--  g_static_rw_lock_writer_unlock (&metatree_lock);
+-+  g_rw_lock_writer_unlock (&metatree_lock);
+-   return res;
+- }
+- 
+-@@ -2426,7 +2426,7 @@ meta_tree_set_string (MetaTree                         *tree,
+-   guint64 mtime;
+-   gboolean res;
+- 
+--  g_static_rw_lock_writer_lock (&metatree_lock);
+-+  g_rw_lock_writer_lock (&metatree_lock);
+- 
+-   if (tree->journal == NULL ||
+-       !tree->journal->journal_valid)
+-@@ -2452,7 +2452,7 @@ meta_tree_set_string (MetaTree                         *tree,
+-   g_string_free (entry, TRUE);
+- 
+-  out:
+--  g_static_rw_lock_writer_unlock (&metatree_lock);
+-+  g_rw_lock_writer_unlock (&metatree_lock);
+-   return res;
+- }
+- 
+-@@ -2466,7 +2466,7 @@ meta_tree_set_stringv (MetaTree                         *tree,
+-   guint64 mtime;
+-   gboolean res;
+- 
+--  g_static_rw_lock_writer_lock (&metatree_lock);
+-+  g_rw_lock_writer_lock (&metatree_lock);
+- 
+-   if (tree->journal == NULL ||
+-       !tree->journal->journal_valid)
+-@@ -2492,7 +2492,7 @@ meta_tree_set_stringv (MetaTree                         *tree,
+-   g_string_free (entry, TRUE);
+- 
+-  out:
+--  g_static_rw_lock_writer_unlock (&metatree_lock);
+-+  g_rw_lock_writer_unlock (&metatree_lock);
+-   return res;
+- }
+- 
+-@@ -2504,7 +2504,7 @@ meta_tree_remove (MetaTree *tree,
+-   guint64 mtime;
+-   gboolean res;
+- 
+--  g_static_rw_lock_writer_lock (&metatree_lock);
+-+  g_rw_lock_writer_lock (&metatree_lock);
+- 
+-   if (tree->journal == NULL ||
+-       !tree->journal->journal_valid)
+-@@ -2530,7 +2530,7 @@ meta_tree_remove (MetaTree *tree,
+-   g_string_free (entry, TRUE);
+- 
+-  out:
+--  g_static_rw_lock_writer_unlock (&metatree_lock);
+-+  g_rw_lock_writer_unlock (&metatree_lock);
+-   return res;
+- }
+- 
+-@@ -2543,7 +2543,7 @@ meta_tree_copy (MetaTree                         *tree,
+-   guint64 mtime;
+-   gboolean res;
+- 
+--  g_static_rw_lock_writer_lock (&metatree_lock);
+-+  g_rw_lock_writer_lock (&metatree_lock);
+- 
+-   if (tree->journal == NULL ||
+-       !tree->journal->journal_valid)
+-@@ -2569,7 +2569,7 @@ meta_tree_copy (MetaTree                         *tree,
+-   g_string_free (entry, TRUE);
+- 
+-  out:
+--  g_static_rw_lock_writer_unlock (&metatree_lock);
+-+  g_rw_lock_writer_unlock (&metatree_lock);
+-   return res;
+- }
+- 
+-diff --git a/monitor/proxy/gvfsproxyvolumemonitordaemon.c b/monitor/proxy/gvfsproxyvolumemonitordaemon.c
+-index 4be64e0..fe2f1a7 100644
+---- a/monitor/proxy/gvfsproxyvolumemonitordaemon.c
+-+++ b/monitor/proxy/gvfsproxyvolumemonitordaemon.c
+-@@ -2050,7 +2050,6 @@ g_vfs_proxy_volume_monitor_daemon_init (void)
+-   textdomain (GETTEXT_PACKAGE);
+- 
+-   dbus_threads_init_default ();
+--  g_thread_init (NULL);
+-   g_type_init ();
+- }
+- 
+--- 
+-1.7.6.5
+-
+diff --git a/meta-gnome/recipes-gnome/gvfs/files/0003-Adapt-to-glib-mutex-API-changes.patch b/meta-gnome/recipes-gnome/gvfs/files/0003-Adapt-to-glib-mutex-API-changes.patch
+deleted file mode 100644
+index bb5d9c2..0000000
+--- a/meta-gnome/recipes-gnome/gvfs/files/0003-Adapt-to-glib-mutex-API-changes.patch
++++ /dev/null
+@@ -1,2454 +0,0 @@
+-From 185c4ac9c83aac035d2b49ecd95130aa5167e7c2 Mon Sep 17 00:00:00 2001
+-From: Tomas Bzatek <tbzatek@redhat.com>
+-Date: Tue, 25 Oct 2011 18:41:47 +0200
+-Subject: [PATCH 1/2] Adapt to glib mutex API changes
+-
+-A continuation to https://bugzilla.gnome.org/show_bug.cgi?id=661148
+-
+-Upstream-Status: Backport
+-
+-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+----
+- client/gvfsfusedaemon.c        |   80 ++++++++---------
+- common/gmountsource.c          |   60 ++++++-------
+- daemon/gvfsbackendafc.c        |   22 ++---
+- daemon/gvfsbackendftp.c        |   12 +--
+- daemon/gvfsbackendftp.h        |    4 +-
+- daemon/gvfsbackendgphoto2.c    |  112 +++++++++++-------------
+- daemon/gvfsbackendnetwork.c    |   10 +--
+- daemon/gvfsbackendobexftp.c    |  187 ++++++++++++++++++++--------------------
+- daemon/gvfsbackendsmbbrowse.c  |   39 ++++-----
+- daemon/gvfsdaemon.c            |   33 ++++----
+- daemon/gvfsftpdircache.c       |   21 ++---
+- daemon/gvfsftptask.c           |   33 ++++----
+- daemon/trashlib/trashexpunge.c |   33 ++++----
+- daemon/trashlib/trashitem.c    |   36 ++++----
+- 14 files changed, 325 insertions(+), 357 deletions(-)
+-
+-diff --git a/client/gvfsfusedaemon.c b/client/gvfsfusedaemon.c
+-index 7cfa81c..c986f69 100644
+---- a/client/gvfsfusedaemon.c
+-+++ b/client/gvfsfusedaemon.c
+-@@ -69,7 +69,7 @@ typedef enum {
+- typedef struct {
+-   gint      refcount;
+- 
+--  GMutex   *mutex;
+-+  GMutex    mutex;
+-   gchar    *path;
+-   FileOp    op;
+-   gpointer  stream;
+-@@ -84,13 +84,13 @@ static GVolumeMonitor *volume_monitor        = NULL;
+- 
+- /* Contains pointers to MountRecord */
+- static GList          *mount_list            = NULL;
+--static GMutex         *mount_list_mutex;
+-+static GMutex          mount_list_mutex      = {NULL};
+- 
+- static time_t          daemon_creation_time;
+- static uid_t           daemon_uid;
+- static gid_t           daemon_gid;
+- 
+--static GStaticMutex    global_mutex          = G_STATIC_MUTEX_INIT;
+-+static GMutex          global_mutex          = {NULL};
+- static GHashTable     *global_path_to_fh_map = NULL;
+- static GHashTable     *global_active_fh_map  = NULL;
+- 
+-@@ -212,7 +212,6 @@ file_handle_new (const gchar *path)
+- 
+-   file_handle = g_new0 (FileHandle, 1);
+-   file_handle->refcount = 1;
+--  file_handle->mutex = g_mutex_new ();
+-   file_handle->op = FILE_OP_NONE;
+-   file_handle->path = g_strdup (path);
+- 
+-@@ -235,7 +234,7 @@ file_handle_unref (FileHandle *file_handle)
+-     {
+-       gint refs;
+- 
+--      g_static_mutex_lock (&global_mutex);
+-+      g_mutex_lock (&global_mutex);
+- 
+-       /* Test again, since e.g. get_file_handle_for_path() might have
+-        * snatched the global mutex and revived the file handle between
+-@@ -246,7 +245,7 @@ file_handle_unref (FileHandle *file_handle)
+-       if (refs == 0)
+-         g_hash_table_remove (global_path_to_fh_map, file_handle->path);
+- 
+--      g_static_mutex_unlock (&global_mutex);
+-+      g_mutex_unlock (&global_mutex);
+-     }
+- }
+- 
+-@@ -283,7 +282,7 @@ file_handle_free (FileHandle *file_handle)
+-   g_hash_table_remove (global_active_fh_map, file_handle);
+- 
+-   file_handle_close_stream (file_handle);
+--  g_mutex_free (file_handle->mutex);
+-+  g_mutex_clear (&file_handle->mutex);
+-   g_free (file_handle->path);
+-   g_free (file_handle);
+- }
+-@@ -293,14 +292,14 @@ get_file_handle_for_path (const gchar *path)
+- {
+-   FileHandle *fh;
+- 
+--  g_static_mutex_lock (&global_mutex);
+-+  g_mutex_lock (&global_mutex);
+- 
+-   fh = g_hash_table_lookup (global_path_to_fh_map, path);
+- 
+-   if (fh)
+-     file_handle_ref (fh);
+- 
+--  g_static_mutex_unlock (&global_mutex);
+-+  g_mutex_unlock (&global_mutex);
+-   return fh;
+- }
+- 
+-@@ -309,7 +308,7 @@ get_or_create_file_handle_for_path (const gchar *path)
+- {
+-   FileHandle *fh;
+- 
+--  g_static_mutex_lock (&global_mutex);
+-+  g_mutex_lock (&global_mutex);
+- 
+-   fh = g_hash_table_lookup (global_path_to_fh_map, path);
+- 
+-@@ -323,7 +322,7 @@ get_or_create_file_handle_for_path (const gchar *path)
+-       g_hash_table_insert (global_path_to_fh_map, fh->path, fh);
+-     }
+- 
+--  g_static_mutex_unlock (&global_mutex);
+-+  g_mutex_unlock (&global_mutex);
+-   return fh;
+- }
+- 
+-@@ -332,7 +331,7 @@ get_file_handle_from_info (struct fuse_file_info *fi)
+- {
+-   FileHandle *fh;
+- 
+--  g_static_mutex_lock (&global_mutex);
+-+  g_mutex_lock (&global_mutex);
+- 
+-   fh = GET_FILE_HANDLE (fi);
+- 
+-@@ -343,7 +342,7 @@ get_file_handle_from_info (struct fuse_file_info *fi)
+-   if (fh)
+-     file_handle_ref (fh);
+- 
+--  g_static_mutex_unlock (&global_mutex);
+-+  g_mutex_unlock (&global_mutex);
+-   return fh;
+- }
+- 
+-@@ -353,7 +352,7 @@ reindex_file_handle_for_path (const gchar *old_path, const gchar *new_path)
+-   gchar      *old_path_internal;
+-   FileHandle *fh;
+- 
+--  g_static_mutex_lock (&global_mutex);
+-+  g_mutex_lock (&global_mutex);
+- 
+-   if (!g_hash_table_lookup_extended (global_path_to_fh_map, old_path,
+-                                      (gpointer *) &old_path_internal,
+-@@ -368,7 +367,7 @@ reindex_file_handle_for_path (const gchar *old_path, const gchar *new_path)
+-   g_hash_table_insert (global_path_to_fh_map, fh->path, fh);
+- 
+-  out:
+--  g_static_mutex_unlock (&global_mutex);
+-+  g_mutex_unlock (&global_mutex);
+- }
+- 
+- static MountRecord *
+-@@ -405,13 +404,13 @@ mount_record_free (MountRecord *mount_record)
+- static void
+- mount_list_lock (void)
+- {
+--  g_mutex_lock (mount_list_mutex);
+-+  g_mutex_lock (&mount_list_mutex);
+- }
+- 
+- static void
+- mount_list_unlock (void)
+- {
+--  g_mutex_unlock (mount_list_mutex);
+-+  g_mutex_unlock (&mount_list_mutex);
+- }
+- 
+- static void
+-@@ -866,9 +865,9 @@ vfs_getattr (const gchar *path, struct stat *sbuf)
+- 
+-           if (fh != NULL)
+-             {
+--              g_mutex_lock (fh->mutex);
+-+              g_mutex_lock (&fh->mutex);
+-               getattr_for_file_handle (fh, sbuf);
+--              g_mutex_unlock (fh->mutex);
+-+              g_mutex_unlock (&fh->mutex);
+- 
+-               file_handle_unref (fh);
+-               result = 0;
+-@@ -995,7 +994,7 @@ open_common (const gchar *path, struct fuse_file_info *fi, GFile *file, int outp
+-   gint        result;
+-   FileHandle *fh = get_or_create_file_handle_for_path (path);
+- 
+--  g_mutex_lock (fh->mutex);
+-+  g_mutex_lock (&fh->mutex);
+- 
+-   SET_FILE_HANDLE (fi, fh);
+- 
+-@@ -1009,7 +1008,7 @@ open_common (const gchar *path, struct fuse_file_info *fi, GFile *file, int outp
+-   else
+-     result = setup_input_stream (file, fh);
+- 
+--  g_mutex_unlock (fh->mutex);
+-+  g_mutex_unlock (&fh->mutex);
+- 
+-   /* The added reference to the file handle is released in vfs_release() */
+-   return result;
+-@@ -1121,7 +1120,7 @@ vfs_create (const gchar *path, mode_t mode, struct fuse_file_info *fi)
+- 
+-               /* Success */
+- 
+--              g_mutex_lock (fh->mutex);
+-+              g_mutex_lock (&fh->mutex);
+- 
+-               SET_FILE_HANDLE (fi, fh);
+- 
+-@@ -1129,7 +1128,7 @@ vfs_create (const gchar *path, mode_t mode, struct fuse_file_info *fi)
+-               fh->stream = file_output_stream;
+-               fh->op = FILE_OP_WRITE;
+- 
+--              g_mutex_unlock (fh->mutex);
+-+              g_mutex_unlock (&fh->mutex);
+- 
+-               /* The reference added to the file handle is released in vfs_release() */
+-             }
+-@@ -1285,7 +1284,7 @@ vfs_read (const gchar *path, gchar *buf, size_t size,
+- 
+-       if (fh)
+-         {
+--          g_mutex_lock (fh->mutex);
+-+          g_mutex_lock (&fh->mutex);
+- 
+-           result = setup_input_stream (file, fh);
+- 
+-@@ -1298,7 +1297,7 @@ vfs_read (const gchar *path, gchar *buf, size_t size,
+-               debug_print ("vfs_read: failed to setup input_stream!\n");
+-             }
+- 
+--          g_mutex_unlock (fh->mutex);
+-+          g_mutex_unlock (&fh->mutex);
+-           file_handle_unref (fh);
+-         }
+-       else
+-@@ -1413,7 +1412,7 @@ vfs_write (const gchar *path, const gchar *buf, size_t len, off_t offset,
+- 
+-       if (fh)
+-         {
+--          g_mutex_lock (fh->mutex);
+-+          g_mutex_lock (&fh->mutex);
+- 
+-           result = setup_output_stream (file, fh, 0);
+-           if (result == 0)
+-@@ -1421,7 +1420,7 @@ vfs_write (const gchar *path, const gchar *buf, size_t len, off_t offset,
+-               result = write_stream (fh, buf, len, offset);
+-             }
+- 
+--          g_mutex_unlock (fh->mutex);
+-+          g_mutex_unlock (&fh->mutex);
+-           file_handle_unref (fh);
+-         }
+-       else
+-@@ -1453,9 +1452,9 @@ vfs_flush (const gchar *path, struct fuse_file_info *fi)
+- 
+-   if (fh)
+-     {
+--      g_mutex_lock (fh->mutex);
+-+      g_mutex_lock (&fh->mutex);
+-       file_handle_close_stream (fh);
+--      g_mutex_unlock (fh->mutex);
+-+      g_mutex_unlock (&fh->mutex);
+- 
+-       /* get_file_handle_from_info () adds a "working ref", so release that. */
+-       file_handle_unref (fh);
+-@@ -1474,9 +1473,9 @@ vfs_fsync (const gchar *path, gint sync_data_only, struct fuse_file_info *fi)
+- 
+-   if (fh)
+-     {
+--      g_mutex_lock (fh->mutex);
+-+      g_mutex_lock (&fh->mutex);
+-       file_handle_close_stream (fh);
+--      g_mutex_unlock (fh->mutex);
+-+      g_mutex_unlock (&fh->mutex);
+- 
+-       /* get_file_handle_from_info () adds a "working ref", so release that. */
+-       file_handle_unref (fh);
+-@@ -1625,7 +1624,7 @@ vfs_rename (const gchar *old_path, const gchar *new_path)
+- 
+-       if (fh)
+-         {
+--          g_mutex_lock (fh->mutex);
+-+          g_mutex_lock (&fh->mutex);
+-           file_handle_close_stream (fh);
+-         }
+- 
+-@@ -1645,7 +1644,7 @@ vfs_rename (const gchar *old_path, const gchar *new_path)
+- 
+-       if (fh)
+-         {
+--          g_mutex_unlock (fh->mutex);
+-+          g_mutex_unlock (&fh->mutex);
+-           file_handle_unref (fh);
+-         }
+- 
+-@@ -1687,7 +1686,7 @@ vfs_unlink (const gchar *path)
+- 
+-       if (fh)
+-         {
+--          g_mutex_lock (fh->mutex);
+-+          g_mutex_lock (&fh->mutex);
+-           file_handle_close_stream (fh);
+-         }
+- 
+-@@ -1695,7 +1694,7 @@ vfs_unlink (const gchar *path)
+- 
+-       if (fh)
+-         {
+--          g_mutex_unlock (fh->mutex);
+-+          g_mutex_unlock (&fh->mutex);
+-           file_handle_unref (fh);
+-         }
+- 
+-@@ -1864,7 +1863,7 @@ vfs_ftruncate (const gchar *path, off_t size, struct fuse_file_info *fi)
+- 
+-       if (fh)
+-         {
+--          g_mutex_lock (fh->mutex);
+-+          g_mutex_lock (&fh->mutex);
+- 
+-           result = setup_output_stream (file, fh, 0);
+- 
+-@@ -1909,7 +1908,7 @@ vfs_ftruncate (const gchar *path, off_t size, struct fuse_file_info *fi)
+-                 }
+-             }
+- 
+--          g_mutex_unlock (fh->mutex);
+-+          g_mutex_unlock (&fh->mutex);
+-           file_handle_unref (fh);
+-         }
+-       else
+-@@ -1948,7 +1947,7 @@ vfs_truncate (const gchar *path, off_t size)
+-       /* Get a file handle just to lock the path while we're working */
+-       fh = get_file_handle_for_path (path);
+-       if (fh)
+--        g_mutex_lock (fh->mutex);
+-+        g_mutex_lock (&fh->mutex);
+- 
+-       if (size == 0)
+-         {
+-@@ -1975,7 +1974,7 @@ vfs_truncate (const gchar *path, off_t size)
+- 
+-       if (fh)
+-         {
+--          g_mutex_unlock (fh->mutex);
+-+          g_mutex_unlock (&fh->mutex);
+-           file_handle_unref (fh);
+-         }
+- 
+-@@ -2315,7 +2314,6 @@ vfs_init (struct fuse_conn_info *conn)
+-   daemon_uid = getuid ();
+-   daemon_gid = getgid ();
+- 
+--  mount_list_mutex = g_mutex_new ();
+-   global_path_to_fh_map = g_hash_table_new_full (g_str_hash, g_str_equal,
+-                                                  NULL, (GDestroyNotify) file_handle_free);
+-   global_active_fh_map = g_hash_table_new_full (g_direct_hash, g_direct_equal,
+-@@ -2374,7 +2372,7 @@ vfs_destroy (gpointer param)
+-   mount_list_free ();
+-   if (subthread_main_loop != NULL) 
+-     g_main_loop_quit (subthread_main_loop);
+--  g_mutex_free (mount_list_mutex);
+-+  g_mutex_clear (&mount_list_mutex);
+-   g_object_unref (gvfs);
+- }
+- 
+-diff --git a/common/gmountsource.c b/common/gmountsource.c
+-index d228726..af89ed2 100644
+---- a/common/gmountsource.c
+-+++ b/common/gmountsource.c
+-@@ -27,6 +27,8 @@
+- #include <gio/gio.h>
+- #include <gvfsdaemonprotocol.h>
+- 
+-+#include <string.h>
+-+
+- struct _GMountSource
+- {
+-   GObject parent_instance;
+-@@ -137,8 +139,8 @@ typedef struct AskSyncData AskSyncData;
+- struct AskSyncData {
+- 
+-   /* For sync calls */
+--  GMutex *mutex;
+--  GCond *cond;
+-+  GMutex mutex;
+-+  GCond cond;
+- 
+-   /* results: */
+-   GAsyncResult *result;
+-@@ -356,9 +358,9 @@ ask_reply_sync  (GObject *source_object,
+-   data->result = g_object_ref (res);
+- 
+-   /* Wake up sync call thread */
+--  g_mutex_lock (data->mutex);
+--  g_cond_signal (data->cond);
+--  g_mutex_unlock (data->mutex);
+-+  g_mutex_lock (&data->mutex);
+-+  g_cond_signal (&data->cond);
+-+  g_mutex_unlock (&data->mutex);
+- }
+- 
+- gboolean
+-@@ -375,12 +377,10 @@ g_mount_source_ask_password (GMountSource *source,
+- 			     GPasswordSave *password_save_out)
+- {
+-   gboolean handled;
+--  AskSyncData data = {NULL};
+--  
+--  data.mutex = g_mutex_new ();
+--  data.cond = g_cond_new ();
+-+  AskSyncData data;
+- 
+--  g_mutex_lock (data.mutex);
+-+  memset (&data, 0, sizeof (data));
+-+  g_mutex_lock (&data.mutex);
+- 
+- 
+-   g_mount_source_ask_password_async (source,
+-@@ -391,11 +391,11 @@ g_mount_source_ask_password (GMountSource *source,
+-                                      ask_reply_sync,
+-                                      &data);
+-   
+--  g_cond_wait(data.cond, data.mutex);
+--  g_mutex_unlock (data.mutex);
+-+  g_cond_wait (&data.cond, &data.mutex);
+-+  g_mutex_unlock (&data.mutex);
+- 
+--  g_cond_free (data.cond);
+--  g_mutex_free (data.mutex);
+-+  g_cond_clear (&data.cond);
+-+  g_mutex_clear (&data.mutex);
+- 
+- 
+-   handled = g_mount_source_ask_password_finish (source,
+-@@ -546,12 +546,10 @@ g_mount_source_ask_question (GMountSource *source,
+- {
+-   gint choice;
+-   gboolean handled, aborted;
+--  AskSyncData data = {NULL};
+-+  AskSyncData data;
+-   
+--  data.mutex = g_mutex_new ();
+--  data.cond = g_cond_new ();
+--
+--  g_mutex_lock (data.mutex);
+-+  memset (&data, 0, sizeof (data));
+-+  g_mutex_lock (&data.mutex);
+- 
+-   g_mount_source_ask_question_async (source,
+-                                      message,
+-@@ -560,11 +558,11 @@ g_mount_source_ask_question (GMountSource *source,
+-                                      ask_reply_sync,
+-                                      &data);
+-   
+--  g_cond_wait(data.cond, data.mutex);
+--  g_mutex_unlock (data.mutex);
+-+  g_cond_wait (&data.cond, &data.mutex);
+-+  g_mutex_unlock (&data.mutex);
+- 
+--  g_cond_free (data.cond);
+--  g_mutex_free (data.mutex);
+-+  g_cond_clear (&data.cond);
+-+  g_mutex_clear (&data.mutex);
+- 
+-   handled = g_mount_source_ask_question_finish (source,
+-                                                 data.result,
+-@@ -841,12 +839,10 @@ g_mount_source_show_processes (GMountSource *source,
+- {
+-   gint choice;
+-   gboolean handled, aborted;
+--  AskSyncData data = {NULL};
+--
+--  data.mutex = g_mutex_new ();
+--  data.cond = g_cond_new ();
+-+  AskSyncData data;
+- 
+--  g_mutex_lock (data.mutex);
+-+  memset (&data, 0, sizeof (data));
+-+  g_mutex_lock (&data.mutex);
+- 
+-   g_mount_source_show_processes_async (source,
+-                                        message,
+-@@ -856,11 +852,11 @@ g_mount_source_show_processes (GMountSource *source,
+-                                        ask_reply_sync,
+-                                        &data);
+- 
+--  g_cond_wait (data.cond, data.mutex);
+--  g_mutex_unlock (data.mutex);
+-+  g_cond_wait (&data.cond, &data.mutex);
+-+  g_mutex_unlock (&data.mutex);
+- 
+--  g_cond_free (data.cond);
+--  g_mutex_free (data.mutex);
+-+  g_cond_clear (&data.cond);
+-+  g_mutex_clear (&data.mutex);
+- 
+-   handled = g_mount_source_show_processes_finish (source,
+-                                                   data.result,
+-diff --git a/daemon/gvfsbackendafc.c b/daemon/gvfsbackendafc.c
+-index 16c8a23..84227ed 100644
+---- a/daemon/gvfsbackendafc.c
+-+++ b/daemon/gvfsbackendafc.c
+-@@ -87,7 +87,7 @@ struct _GVfsBackendAfc {
+-   GHashTable *apps; /* hash table of AppInfo */
+-   instproxy_client_t inst;
+-   sbservices_client_t sbs;
+--  GMutex *apps_lock;
+-+  GMutex apps_lock;
+- };
+- 
+- struct afc_error_mapping {
+-@@ -182,11 +182,7 @@ g_vfs_backend_afc_close_connection (GVfsBackendAfc *self)
+-               sbservices_client_free (self->sbs);
+-               self->sbs = NULL;
+-             }
+--          if (self->apps_lock)
+--            {
+--              g_mutex_free (self->apps_lock);
+--              self->apps_lock = NULL;
+--            }
+-+          g_mutex_clear (&self->apps_lock);
+-         }
+-       g_free (self->model);
+-       self->model = NULL;
+-@@ -1910,14 +1906,14 @@ g_vfs_backend_afc_enumerate (GVfsBackend *backend,
+-     {
+-       char *app;
+- 
+--      g_mutex_lock (self->apps_lock);
+-+      g_mutex_lock (&self->apps_lock);
+-       if (g_vfs_backend_load_apps (self) == FALSE)
+-         {
+-           g_vfs_backend_afc_check (AFC_E_INTERNAL_ERROR, G_VFS_JOB (job));
+--          g_mutex_unlock (self->apps_lock);
+-+          g_mutex_unlock (&self->apps_lock);
+-           return;
+-         }
+--      g_mutex_unlock (self->apps_lock);
+-+      g_mutex_unlock (&self->apps_lock);
+- 
+-       app = g_vfs_backend_parse_house_arrest_path (self, TRUE, path, &new_path);
+- 
+-@@ -2039,14 +2035,14 @@ g_vfs_backend_afc_query_info (GVfsBackend *backend,
+-     {
+-       char *app;
+- 
+--      g_mutex_lock (self->apps_lock);
+-+      g_mutex_lock (&self->apps_lock);
+-       if (g_vfs_backend_load_apps (self) == FALSE)
+-         {
+-           g_vfs_backend_afc_check (AFC_E_INTERNAL_ERROR, G_VFS_JOB (job));
+--          g_mutex_unlock (self->apps_lock);
+-+          g_mutex_unlock (&self->apps_lock);
+-           return;
+-         }
+--      g_mutex_unlock (self->apps_lock);
+-+      g_mutex_unlock (&self->apps_lock);
+- 
+-       app = g_vfs_backend_parse_house_arrest_path (self, TRUE, path, &new_path);
+- 
+-@@ -2604,8 +2600,6 @@ g_vfs_backend_afc_init (GVfsBackendAfc *self)
+-       /* enable full debugging */
+-       idevice_set_debug_level (1);
+-     }
+--
+--  self->apps_lock = g_mutex_new ();
+- }
+- 
+- static void
+-diff --git a/daemon/gvfsbackendftp.c b/daemon/gvfsbackendftp.c
+-index 35e0b71..3883ca3 100644
+---- a/daemon/gvfsbackendftp.c
+-+++ b/daemon/gvfsbackendftp.c
+-@@ -382,8 +382,8 @@ g_vfs_backend_ftp_finalize (GObject *object)
+- 
+-   /* has been cleared on unmount */
+-   g_assert (ftp->queue == NULL);
+--  g_cond_free (ftp->cond);
+--  g_mutex_free (ftp->mutex);
+-+  g_cond_clear (&ftp->cond);
+-+  g_mutex_clear (&ftp->mutex);
+- 
+-   g_free (ftp->user);
+-   g_free (ftp->password);
+-@@ -395,8 +395,6 @@ g_vfs_backend_ftp_finalize (GObject *object)
+- static void
+- g_vfs_backend_ftp_init (GVfsBackendFtp *ftp)
+- {
+--  ftp->mutex = g_mutex_new ();
+--  ftp->cond = g_cond_new ();
+- }
+- 
+- static void
+-@@ -698,7 +696,7 @@ do_unmount (GVfsBackend *   backend,
+-   GVfsBackendFtp *ftp = G_VFS_BACKEND_FTP (backend);
+-   GVfsFtpConnection *conn;
+- 
+--  g_mutex_lock (ftp->mutex);
+-+  g_mutex_lock (&ftp->mutex);
+-   while ((conn = g_queue_pop_head (ftp->queue)))
+-     {
+-       /* FIXME: properly quit */
+-@@ -706,8 +704,8 @@ do_unmount (GVfsBackend *   backend,
+-     }
+-   g_queue_free (ftp->queue);
+-   ftp->queue = NULL;
+--  g_cond_broadcast (ftp->cond);
+--  g_mutex_unlock (ftp->mutex);
+-+  g_cond_broadcast (&ftp->cond);
+-+  g_mutex_unlock (&ftp->mutex);
+-   g_vfs_job_succeeded (G_VFS_JOB (job));
+- }
+- 
+-diff --git a/daemon/gvfsbackendftp.h b/daemon/gvfsbackendftp.h
+-index f5983b5..767ea35 100644
+---- a/daemon/gvfsbackendftp.h
+-+++ b/daemon/gvfsbackendftp.h
+-@@ -100,8 +100,8 @@ struct _GVfsBackendFtp
+-   GVfsFtpDirCache *     dir_cache;              /* directory cache */
+- 
+-   /* connection collection - accessed from gvfsftptask.c */
+--  GMutex *              mutex;                  /* mutex protecting the following variables */
+--  GCond *               cond;                   /* cond used to signal tasks waiting on the mutex */
+-+  GMutex                mutex;                  /* mutex protecting the following variables */
+-+  GCond                 cond;                   /* cond used to signal tasks waiting on the mutex */
+-   GQueue *              queue;                  /* queue containing the connections */
+-   guint                	connections;            /* current number of connections */
+-   guint                 busy_connections;       /* current number of connections being used for reads/writes */
+-diff --git a/daemon/gvfsbackendgphoto2.c b/daemon/gvfsbackendgphoto2.c
+-index 541dafe..9a1b6d8 100644
+---- a/daemon/gvfsbackendgphoto2.c
+-+++ b/daemon/gvfsbackendgphoto2.c
+-@@ -207,7 +207,7 @@ struct _GVfsBackendGphoto2
+-    *
+-    * Must only be held for very short amounts of time (e.g. no IO).
+-    */
+--  GMutex *lock;
+-+  GMutex lock;
+- 
+-   /* CACHES */
+- 
+-@@ -433,7 +433,7 @@ caches_invalidate_all (GVfsBackendGphoto2 *gphoto2_backend)
+- {
+-   DEBUG ("caches_invalidate_all()");
+- 
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   if (gphoto2_backend->dir_name_cache != NULL)
+-     g_hash_table_remove_all (gphoto2_backend->dir_name_cache);
+-   if (gphoto2_backend->file_name_cache != NULL)
+-@@ -442,7 +442,7 @@ caches_invalidate_all (GVfsBackendGphoto2 *gphoto2_backend)
+-     g_hash_table_remove_all (gphoto2_backend->info_cache);
+-   gphoto2_backend->capacity = -1;  
+-   gphoto2_backend->free_space = -1;  
+--  g_mutex_unlock (gphoto2_backend->lock);
+-+  g_mutex_unlock (&gphoto2_backend->lock);
+- }
+- 
+- /* ------------------------------------------------------------------------------------------------- */
+-@@ -450,9 +450,9 @@ caches_invalidate_all (GVfsBackendGphoto2 *gphoto2_backend)
+- static void
+- caches_invalidate_free_space (GVfsBackendGphoto2 *gphoto2_backend)
+- {
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   gphoto2_backend->free_space = -1;  
+--  g_mutex_unlock (gphoto2_backend->lock);
+-+  g_mutex_unlock (&gphoto2_backend->lock);
+- }
+- 
+- /* ------------------------------------------------------------------------------------------------- */
+-@@ -461,11 +461,11 @@ static void
+- caches_invalidate_dir (GVfsBackendGphoto2 *gphoto2_backend, const char *dir)
+- {
+-   DEBUG ("caches_invalidate_dir() for '%s'", dir);
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   g_hash_table_remove (gphoto2_backend->dir_name_cache, dir);
+-   g_hash_table_remove (gphoto2_backend->file_name_cache, dir);
+-   g_hash_table_remove (gphoto2_backend->info_cache, dir);
+--  g_mutex_unlock (gphoto2_backend->lock);
+-+  g_mutex_unlock (&gphoto2_backend->lock);
+- }
+- 
+- /* ------------------------------------------------------------------------------------------------- */
+-@@ -477,14 +477,14 @@ caches_invalidate_file (GVfsBackendGphoto2 *gphoto2_backend, const char *dir, co
+- 
+-   full_name = g_build_filename (dir, name, NULL);
+- 
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   /* this is essentially: caches_invalidate_dir (gphoto2_backend, dir); */
+-   g_hash_table_remove (gphoto2_backend->dir_name_cache, dir);
+-   g_hash_table_remove (gphoto2_backend->file_name_cache, dir);
+-   g_hash_table_remove (gphoto2_backend->info_cache, dir);
+- 
+-   g_hash_table_remove (gphoto2_backend->info_cache, full_name);
+--  g_mutex_unlock (gphoto2_backend->lock);
+-+  g_mutex_unlock (&gphoto2_backend->lock);
+- 
+-   DEBUG ("caches_invalidate_file() for '%s'", full_name);
+-   g_free (full_name);
+-@@ -618,11 +618,7 @@ release_device (GVfsBackendGphoto2 *gphoto2_backend)
+-   g_list_free (gphoto2_backend->file_monitor_proxies);
+-   gphoto2_backend->file_monitor_proxies = NULL;
+- 
+--  if (gphoto2_backend->lock != NULL)
+--    {
+--      g_mutex_free (gphoto2_backend->lock);
+--      gphoto2_backend->lock = NULL;
+--    }
+-+  g_mutex_clear (&gphoto2_backend->lock);
+-   gphoto2_backend->capacity = -1;
+-   gphoto2_backend->free_space = -1;
+- }
+-@@ -1099,17 +1095,17 @@ file_get_info (GVfsBackendGphoto2 *gphoto2_backend,
+- 
+- 
+-   /* first look up cache */
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   cached_info = g_hash_table_lookup (gphoto2_backend->info_cache, full_path);
+-   if (cached_info != NULL)
+-     {
+-       g_file_info_copy_into (cached_info, info);
+--      g_mutex_unlock (gphoto2_backend->lock);
+-+      g_mutex_unlock (&gphoto2_backend->lock);
+-       DEBUG ("  Using cached info %p for '%s'", cached_info, full_path);
+-       ret = TRUE;
+-       goto out;
+-     }
+--  g_mutex_unlock (gphoto2_backend->lock);
+-+  g_mutex_unlock (&gphoto2_backend->lock);
+- 
+-   if (try_cache_only)
+-     goto out;
+-@@ -1307,9 +1303,9 @@ file_get_info (GVfsBackendGphoto2 *gphoto2_backend,
+- #ifndef DEBUG_NO_CACHING
+-       cached_info = g_file_info_dup (info);
+-       DEBUG ("  Storing cached info %p for '%s'", cached_info, full_path);
+--      g_mutex_lock (gphoto2_backend->lock);
+-+      g_mutex_lock (&gphoto2_backend->lock);
+-       g_hash_table_insert (gphoto2_backend->info_cache, g_strdup (full_path), cached_info);
+--      g_mutex_unlock (gphoto2_backend->lock);
+-+      g_mutex_unlock (&gphoto2_backend->lock);
+- #endif
+-     }
+- 
+-@@ -1716,8 +1712,6 @@ do_mount (GVfsBackend *backend,
+- 
+-   gphoto2_backend->free_space = -1;
+- 
+--  gphoto2_backend->lock = g_mutex_new ();
+--
+-   gphoto2_mount_spec = g_mount_spec_new ("gphoto2");
+-   g_mount_spec_set (gphoto2_mount_spec, "host", host);
+-   g_vfs_backend_set_mount_spec (backend, gphoto2_mount_spec);
+-@@ -1860,9 +1854,9 @@ do_open_for_read_real (GVfsBackend *backend,
+-   DEBUG ("  data=%p size=%ld handle=%p get_preview=%d",
+-          read_handle->data, read_handle->size, read_handle, get_preview);
+- 
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   gphoto2_backend->open_read_handles = g_list_prepend (gphoto2_backend->open_read_handles, read_handle);
+--  g_mutex_unlock (gphoto2_backend->lock);
+-+  g_mutex_unlock (&gphoto2_backend->lock);
+-       
+-   read_handle->cursor = 0;
+- 
+-@@ -2008,9 +2002,9 @@ do_close_read (GVfsBackend *backend,
+- 
+-   DEBUG ("close_read() handle=%p", handle);
+- 
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   gphoto2_backend->open_read_handles = g_list_remove (gphoto2_backend->open_read_handles, read_handle);
+--  g_mutex_unlock (gphoto2_backend->lock);
+-+  g_mutex_unlock (&gphoto2_backend->lock);
+- 
+-   free_read_handle (read_handle);
+-   
+-@@ -2140,11 +2134,11 @@ do_enumerate (GVfsBackend *backend,
+-   g_free (as_name);
+- 
+-   /* first, list the folders */
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   list = g_hash_table_lookup (gphoto2_backend->dir_name_cache, filename);
+-   if (list == NULL)
+-     {
+--      g_mutex_unlock (gphoto2_backend->lock);
+-+      g_mutex_unlock (&gphoto2_backend->lock);
+- 
+-       ensure_not_dirty (gphoto2_backend);
+- 
+-@@ -2169,7 +2163,7 @@ do_enumerate (GVfsBackend *backend,
+-       DEBUG ("  Using cached dir list for dir '%s'", filename);
+-       using_cached_dir_list = TRUE;
+-       gp_list_ref (list);
+--      g_mutex_unlock (gphoto2_backend->lock);
+-+      g_mutex_unlock (&gphoto2_backend->lock);
+-     }
+-   for (n = 0; n < gp_list_count (list); n++) 
+-     {
+-@@ -2193,25 +2187,25 @@ do_enumerate (GVfsBackend *backend,
+-   if (!using_cached_dir_list)
+-     {
+- #ifndef DEBUG_NO_CACHING
+--      g_mutex_lock (gphoto2_backend->lock);
+-+      g_mutex_lock (&gphoto2_backend->lock);
+-       g_hash_table_insert (gphoto2_backend->dir_name_cache, g_strdup (filename), list);
+--      g_mutex_unlock (gphoto2_backend->lock);
+-+      g_mutex_unlock (&gphoto2_backend->lock);
+- #endif
+-     }
+-   else
+-     {
+--      g_mutex_lock (gphoto2_backend->lock);
+-+      g_mutex_lock (&gphoto2_backend->lock);
+-       gp_list_unref (list);
+--      g_mutex_unlock (gphoto2_backend->lock);
+-+      g_mutex_unlock (&gphoto2_backend->lock);
+-     }
+- 
+- 
+-   /* then list the files in each folder */
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   list = g_hash_table_lookup (gphoto2_backend->file_name_cache, filename);
+-   if (list == NULL)
+-     {
+--      g_mutex_unlock (gphoto2_backend->lock);
+-+      g_mutex_unlock (&gphoto2_backend->lock);
+-       ensure_not_dirty (gphoto2_backend);
+- 
+-       DEBUG ("  Generating file list for dir '%s'", filename);
+-@@ -2235,7 +2229,7 @@ do_enumerate (GVfsBackend *backend,
+-       DEBUG ("  Using cached file list for dir '%s'", filename);
+-       using_cached_file_list = TRUE;
+-       gp_list_ref (list);
+--      g_mutex_unlock (gphoto2_backend->lock);
+-+      g_mutex_unlock (&gphoto2_backend->lock);
+-     }
+-   for (n = 0; n < gp_list_count (list); n++) 
+-     {
+-@@ -2260,16 +2254,16 @@ do_enumerate (GVfsBackend *backend,
+-   if (!using_cached_file_list)
+-     {
+- #ifndef DEBUG_NO_CACHING
+--      g_mutex_lock (gphoto2_backend->lock);
+-+      g_mutex_lock (&gphoto2_backend->lock);
+-       g_hash_table_insert (gphoto2_backend->file_name_cache, g_strdup (filename), list);
+--      g_mutex_unlock (gphoto2_backend->lock);
+-+      g_mutex_unlock (&gphoto2_backend->lock);
+- #endif
+-     }
+-   else
+-     {
+--      g_mutex_lock (gphoto2_backend->lock);
+-+      g_mutex_lock (&gphoto2_backend->lock);
+-       gp_list_unref (list);
+--      g_mutex_unlock (gphoto2_backend->lock);
+-+      g_mutex_unlock (&gphoto2_backend->lock);
+-     }
+- 
+-   /* and we're done */
+-@@ -2307,15 +2301,15 @@ try_enumerate (GVfsBackend *backend,
+-   DEBUG ("try_enumerate (%s)", given_filename);
+- 
+-   /* first, list the folders */
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   list = g_hash_table_lookup (gphoto2_backend->dir_name_cache, filename);
+-   if (list == NULL)
+-     {
+--      g_mutex_unlock (gphoto2_backend->lock);
+-+      g_mutex_unlock (&gphoto2_backend->lock);
+-       goto error_not_cached;
+-     }
+-   gp_list_ref (list);
+--  g_mutex_unlock (gphoto2_backend->lock);
+-+  g_mutex_unlock (&gphoto2_backend->lock);
+-   for (n = 0; n < gp_list_count (list); n++) 
+-     {
+-       gp_list_get_name (list, n, &name);
+-@@ -2323,27 +2317,27 @@ try_enumerate (GVfsBackend *backend,
+-       info = g_file_info_new ();
+-       if (!file_get_info (gphoto2_backend, filename, name, info, &error, TRUE))
+-         {
+--          g_mutex_lock (gphoto2_backend->lock);
+-+          g_mutex_lock (&gphoto2_backend->lock);
+-           gp_list_unref (list);
+--          g_mutex_unlock (gphoto2_backend->lock);
+-+          g_mutex_unlock (&gphoto2_backend->lock);
+-           goto error_not_cached;
+-         }
+-       l = g_list_append (l, info);
+-     }
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   gp_list_unref (list);
+--  g_mutex_unlock (gphoto2_backend->lock);
+-+  g_mutex_unlock (&gphoto2_backend->lock);
+- 
+-   /* then list the files in each folder */
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   list = g_hash_table_lookup (gphoto2_backend->file_name_cache, filename);
+-   if (list == NULL)
+-     {
+--      g_mutex_unlock (gphoto2_backend->lock);
+-+      g_mutex_unlock (&gphoto2_backend->lock);
+-       goto error_not_cached;
+-     }
+-   gp_list_ref (list);
+--  g_mutex_unlock (gphoto2_backend->lock);
+-+  g_mutex_unlock (&gphoto2_backend->lock);
+-   for (n = 0; n < gp_list_count (list); n++) 
+-     {
+-       gp_list_get_name (list, n, &name);
+-@@ -2352,16 +2346,16 @@ try_enumerate (GVfsBackend *backend,
+-       info = g_file_info_new ();
+-       if (!file_get_info (gphoto2_backend, filename, name, info, &error, TRUE))
+-         {
+--          g_mutex_lock (gphoto2_backend->lock);
+-+          g_mutex_lock (&gphoto2_backend->lock);
+-           gp_list_unref (list);
+--          g_mutex_unlock (gphoto2_backend->lock);
+-+          g_mutex_unlock (&gphoto2_backend->lock);
+-           goto error_not_cached;
+-         }
+-       l = g_list_append (l, info);
+-     }
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   gp_list_unref (list);
+--  g_mutex_unlock (gphoto2_backend->lock);
+-+  g_mutex_unlock (&gphoto2_backend->lock);
+- 
+-   /* and we're done */
+- 
+-@@ -2412,9 +2406,9 @@ do_query_fs_info (GVfsBackend *backend,
+-           /* for now we only support a single storage head */
+-           if (storage_info[0].fields & GP_STORAGEINFO_MAXCAPACITY)
+-             {
+--              g_mutex_lock (gphoto2_backend->lock);
+-+              g_mutex_lock (&gphoto2_backend->lock);
+-               gphoto2_backend->capacity = storage_info[0].capacitykbytes * 1024;
+--              g_mutex_unlock (gphoto2_backend->lock);
+-+              g_mutex_unlock (&gphoto2_backend->lock);
+-               g_file_info_set_attribute_uint64 (info, 
+-                                                 G_FILE_ATTRIBUTE_FILESYSTEM_SIZE, 
+-                                                 (guint64) gphoto2_backend->capacity);
+-@@ -2422,9 +2416,9 @@ do_query_fs_info (GVfsBackend *backend,
+- 
+-           if (storage_info[0].fields & GP_STORAGEINFO_FREESPACEKBYTES)
+-             {
+--              g_mutex_lock (gphoto2_backend->lock);
+-+              g_mutex_lock (&gphoto2_backend->lock);
+-               gphoto2_backend->free_space = storage_info[0].freekbytes * 1024;
+--              g_mutex_unlock (gphoto2_backend->lock);
+-+              g_mutex_unlock (&gphoto2_backend->lock);
+-               g_file_info_set_attribute_uint64 (info, 
+-                                                 G_FILE_ATTRIBUTE_FILESYSTEM_FREE, 
+-                                                 (guint64) gphoto2_backend->free_space);
+-@@ -2454,10 +2448,10 @@ try_query_fs_info (GVfsBackend *backend,
+- 
+-   ret = FALSE;
+- 
+--  g_mutex_lock (gphoto2_backend->lock);
+-+  g_mutex_lock (&gphoto2_backend->lock);
+-   free_space = gphoto2_backend->free_space;
+-   capacity = gphoto2_backend->capacity;
+--  g_mutex_unlock (gphoto2_backend->lock);
+-+  g_mutex_unlock (&gphoto2_backend->lock);
+- 
+-   if (free_space == -1 || capacity == -1)
+-     {
+-diff --git a/daemon/gvfsbackendnetwork.c b/daemon/gvfsbackendnetwork.c
+-index 80273e5..3c38514 100644
+---- a/daemon/gvfsbackendnetwork.c
+-+++ b/daemon/gvfsbackendnetwork.c
+-@@ -65,7 +65,7 @@ struct _GVfsBackendNetwork
+-   gboolean have_smb;
+-   char *current_workgroup;
+-   GFileMonitor *smb_monitor;
+--  GMutex *smb_mount_lock;
+-+  GMutex smb_mount_lock;
+-   GVfsJobMount *mount_job;
+- 
+-   /* DNS-SD Stuff */
+-@@ -433,7 +433,7 @@ mount_smb_done_cb (GObject *object,
+-       g_vfs_job_succeeded (G_VFS_JOB (backend->mount_job));
+-       g_object_unref (backend->mount_job);
+-     }  
+--  g_mutex_unlock (backend->smb_mount_lock);
+-+  g_mutex_unlock (&backend->smb_mount_lock);
+- }
+- 
+- static void
+-@@ -442,7 +442,7 @@ remount_smb (GVfsBackendNetwork *backend, GVfsJobMount *job)
+-   GFile *file;
+-   char *workgroup;
+- 
+--  if (! g_mutex_trylock (backend->smb_mount_lock))
+-+  if (! g_mutex_trylock (&backend->smb_mount_lock))
+-     /*  Do nothing when the mount operation is already active  */
+-     return;
+-   
+-@@ -769,8 +769,6 @@ g_vfs_backend_network_init (GVfsBackendNetwork *network_backend)
+-   const char * const* supported_vfs;
+-   int i;
+- 
+--  network_backend->smb_mount_lock = g_mutex_new ();
+--
+-   supported_vfs = g_vfs_get_supported_uri_schemes (g_vfs_get_default ());
+- 
+-   network_backend->have_smb = FALSE;
+-@@ -836,7 +834,7 @@ g_vfs_backend_network_finalize (GObject *object)
+-   GVfsBackendNetwork *backend;
+-   backend = G_VFS_BACKEND_NETWORK (object);
+- 
+--  g_mutex_free (backend->smb_mount_lock);
+-+  g_mutex_clear (&backend->smb_mount_lock);
+-   g_mount_spec_unref (backend->mount_spec);
+-   g_object_unref (backend->root_monitor);
+-   g_object_unref (backend->workgroup_icon);
+-diff --git a/daemon/gvfsbackendobexftp.c b/daemon/gvfsbackendobexftp.c
+-index 9630df8..62fe32f 100644
+---- a/daemon/gvfsbackendobexftp.c
+-+++ b/daemon/gvfsbackendobexftp.c
+-@@ -85,8 +85,8 @@ struct _GVfsBackendObexftp
+-   DBusGProxy *session_proxy;
+- 
+-   /* Use for the async notifications and errors */
+--  GCond *cond;
+--  GMutex *mutex;
+-+  GCond cond;
+-+  GMutex mutex;
+-   int status;
+-   gboolean doing_io;
+-   GError *error;
+-@@ -494,8 +494,8 @@ g_vfs_backend_obexftp_finalize (GObject *object)
+- 
+-   if (backend->session_proxy != NULL)
+-         g_object_unref (backend->session_proxy);
+--  g_mutex_free (backend->mutex);
+--  g_cond_free (backend->cond);
+-+  g_mutex_clear (&backend->mutex);
+-+  g_cond_clear (&backend->cond);
+- 
+-   if (G_OBJECT_CLASS (g_vfs_backend_obexftp_parent_class)->finalize)
+-         (*G_OBJECT_CLASS (g_vfs_backend_obexftp_parent_class)->finalize) (object);
+-@@ -530,8 +530,6 @@ g_vfs_backend_obexftp_init (GVfsBackendObexftp *backend)
+-       return;
+-   }
+- 
+--  backend->mutex = g_mutex_new ();
+--  backend->cond = g_cond_new ();
+-   backend->manager_proxy = dbus_g_proxy_new_for_name (backend->connection,
+-                                                       "org.openobex",
+-                                                       "/org/openobex",
+-@@ -759,18 +757,18 @@ error_occurred_cb (DBusGProxy *proxy, const gchar *error_name, const gchar *erro
+-     }
+- 
+-   /* Something is waiting on us */
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+-   if (op_backend->doing_io)
+-     {
+-       op_backend->status = ASYNC_ERROR;
+-       op_backend->error = g_error_new_literal (DBUS_GERROR,
+-                                                DBUS_GERROR_REMOTE_EXCEPTION,
+-                                                error_message);
+--      g_cond_signal (op_backend->cond);
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_cond_signal (&op_backend->cond);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       return;
+-     }
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_mutex_unlock (&op_backend->mutex);
+- 
+-   g_message ("Unhandled error, file a bug");
+-   _exit (1);
+-@@ -785,13 +783,13 @@ session_connect_error_cb (DBusGProxy *proxy,
+- {
+-   GVfsBackendObexftp *op_backend = G_VFS_BACKEND_OBEXFTP (user_data);
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+-   op_backend->status = ASYNC_ERROR;
+-   op_backend->error = g_error_new_literal (DBUS_GERROR,
+-                                            DBUS_GERROR_REMOTE_EXCEPTION,
+-                                            error_message);
+--  g_cond_signal (op_backend->cond);
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_cond_signal (&op_backend->cond);
+-+  g_mutex_unlock (&op_backend->mutex);
+- }
+- 
+- static void
+-@@ -801,10 +799,10 @@ session_connected_cb (DBusGProxy *proxy,
+- {
+-   GVfsBackendObexftp *op_backend = G_VFS_BACKEND_OBEXFTP (user_data);
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+-   op_backend->status = ASYNC_SUCCESS;
+--  g_cond_signal (op_backend->cond);
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_cond_signal (&op_backend->cond);
+-+  g_mutex_unlock (&op_backend->mutex);
+- }
+- 
+- static void
+-@@ -814,10 +812,10 @@ cancelled_cb (DBusGProxy *proxy, gpointer user_data)
+- 
+-   g_message ("transfer got cancelled");
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+-   op_backend->status = ASYNC_ERROR;
+--  g_cond_signal (op_backend->cond);
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_cond_signal (&op_backend->cond);
+-+  g_mutex_unlock (&op_backend->mutex);
+- }
+- 
+- static void
+-@@ -979,17 +977,16 @@ do_mount (GVfsBackend *backend,
+- 
+-   /* Now wait until the device is connected */
+-   count = 0;
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+- 
+-   while (op_backend->status == ASYNC_PENDING && count < 100) {
+--      GTimeVal val;
+--      g_get_current_time (&val);
+--      g_time_val_add (&val, 100000);
+-+      gint64 end_time;
+-+      end_time = g_get_monotonic_time () + 100 * G_TIME_SPAN_MILLISECOND;
+-       count++;
+--      if (g_cond_timed_wait (op_backend->cond, op_backend->mutex, &val) != FALSE)
+-+      if (g_cond_wait_until (&op_backend->cond, &op_backend->mutex, end_time) != FALSE)
+-             break;
+-   }
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_mutex_unlock (&op_backend->mutex);
+- 
+-   if (op_backend->status == ASYNC_ERROR || op_backend->status == ASYNC_PENDING)
+-     {
+-@@ -1026,10 +1023,10 @@ transfer_started_cb (DBusGProxy *proxy, const gchar *filename,
+- 
+-   g_message ("transfer of %s to %s started", filename, local_path);
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+-   op_backend->status = ASYNC_SUCCESS;
+--  g_cond_signal (op_backend->cond);
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_cond_signal (&op_backend->cond);
+-+  g_mutex_unlock (&op_backend->mutex);
+- }
+- 
+- static void
+-@@ -1047,7 +1044,7 @@ do_open_for_read (GVfsBackend *backend,
+- 
+-   g_debug ("+ do_open_for_read, filename: %s\n", filename);
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+-   op_backend->doing_io = TRUE;
+- 
+-   /* Change into the directory and cache the file size */
+-@@ -1055,7 +1052,7 @@ do_open_for_read (GVfsBackend *backend,
+-   if (_query_file_info_helper (backend, filename, info, &error) == FALSE)
+-     {
+-       op_backend->doing_io = FALSE;
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-       g_object_unref (info);
+-@@ -1065,7 +1062,7 @@ do_open_for_read (GVfsBackend *backend,
+-   if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY)
+-     {
+-       op_backend->doing_io = FALSE;
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed (G_VFS_JOB (job), G_IO_ERROR,
+-                         G_IO_ERROR_IS_DIRECTORY,
+-                         _("Can't open directory"));
+-@@ -1079,7 +1076,7 @@ do_open_for_read (GVfsBackend *backend,
+-   if (g_vfs_job_is_cancelled (G_VFS_JOB (job)))
+-     {
+-       op_backend->doing_io = FALSE;
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed (G_VFS_JOB (job), G_IO_ERROR,
+-                         G_IO_ERROR_CANCELLED,
+-                         _("Operation was cancelled"));
+-@@ -1091,7 +1088,7 @@ do_open_for_read (GVfsBackend *backend,
+-   if (fd < 0)
+-     {
+-       op_backend->doing_io = FALSE;
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-       return;
+-@@ -1100,7 +1097,7 @@ do_open_for_read (GVfsBackend *backend,
+-   if (g_vfs_job_is_cancelled (G_VFS_JOB (job)))
+-     {
+-       op_backend->doing_io = FALSE;
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed (G_VFS_JOB (job), G_IO_ERROR,
+-                                    G_IO_ERROR_CANCELLED,
+-                                    _("Operation was cancelled"));
+-@@ -1134,13 +1131,13 @@ do_open_for_read (GVfsBackend *backend,
+-       close (fd);
+- 
+-       op_backend->doing_io = FALSE;
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       return;
+-     }
+- 
+-   /* Wait for TransferStarted or ErrorOccurred to have happened */
+-   while (op_backend->status == ASYNC_PENDING)
+--        g_cond_wait (op_backend->cond, op_backend->mutex);
+-+        g_cond_wait (&op_backend->cond, &op_backend->mutex);
+-   success = op_backend->status;
+-   dbus_g_proxy_disconnect_signal(op_backend->session_proxy, "TransferStarted",
+-                                  G_CALLBACK(transfer_started_cb), op_backend);
+-@@ -1158,7 +1155,7 @@ do_open_for_read (GVfsBackend *backend,
+-   if (success == ASYNC_ERROR)
+-     {
+-       op_backend->doing_io = FALSE;
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       close (fd);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job),
+-                                    op_backend->error);
+-@@ -1179,7 +1176,7 @@ do_open_for_read (GVfsBackend *backend,
+-   g_vfs_job_succeeded (G_VFS_JOB (job));
+- 
+-   op_backend->doing_io = FALSE;
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_mutex_unlock (&op_backend->mutex);
+- }
+- 
+- static int
+-@@ -1266,7 +1263,7 @@ do_close_read (GVfsBackend *backend,
+-         return;
+-   }
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+- 
+-   if (busy > 0)
+-     {
+-@@ -1276,11 +1273,11 @@ do_close_read (GVfsBackend *backend,
+-                          G_TYPE_INVALID, G_TYPE_INVALID) != FALSE)
+-         {
+-           while (op_backend->status == ASYNC_PENDING)
+--                g_cond_wait (op_backend->cond, op_backend->mutex);
+-+                g_cond_wait (&op_backend->cond, &op_backend->mutex);
+-         }
+-     }
+- 
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_mutex_unlock (&op_backend->mutex);
+- 
+-   close (backend_handle->fd);
+-   g_free (backend_handle->source);
+-@@ -1304,17 +1301,17 @@ do_query_info (GVfsBackend *backend,
+- 
+-   g_debug ("+ do_query_info, filename: %s\n", filename);
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+- 
+-   if (_query_file_info_helper (backend, filename, info, &error) == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-       return;
+-     }
+- 
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_mutex_unlock (&op_backend->mutex);
+- 
+-   g_vfs_job_succeeded (G_VFS_JOB (job));
+- 
+-@@ -1341,14 +1338,14 @@ do_query_fs_info (GVfsBackend *backend,
+- 
+-   g_debug ("+ do_query_fs_info, filename: %s\n", filename);
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+- 
+-   /* Get the capabilities */
+-   if (dbus_g_proxy_call (op_backend->session_proxy, "GetCapability", &error,
+-                          G_TYPE_INVALID,
+-                          G_TYPE_STRING, &caps_str, G_TYPE_INVALID) == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-       return;
+-@@ -1356,7 +1353,7 @@ do_query_fs_info (GVfsBackend *backend,
+- 
+-   if (g_vfs_job_is_cancelled (G_VFS_JOB (job)))
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed (G_VFS_JOB (job), G_IO_ERROR,
+-                         G_IO_ERROR_CANCELLED,
+-                         _("Operation was cancelled"));
+-@@ -1368,7 +1365,7 @@ do_query_fs_info (GVfsBackend *backend,
+-   if (caps_str == NULL)
+-     {
+-       /* Best effort, don't error out */
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_succeeded (G_VFS_JOB (job));
+-       return;
+-     }
+-@@ -1377,7 +1374,7 @@ do_query_fs_info (GVfsBackend *backend,
+-   g_free (caps_str);
+-   if (caps == NULL)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-       return;
+-@@ -1395,7 +1392,7 @@ do_query_fs_info (GVfsBackend *backend,
+-     }
+-   if (has_free_memory == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       /* Best effort, don't error out */
+-       g_vfs_job_succeeded (G_VFS_JOB (job));
+-       return;
+-@@ -1411,7 +1408,7 @@ do_query_fs_info (GVfsBackend *backend,
+- 
+-   if (_query_file_info_helper (backend, filename, info, &error) == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-       ovu_caps_free (caps);
+-@@ -1420,7 +1417,7 @@ do_query_fs_info (GVfsBackend *backend,
+- 
+-   if (g_vfs_job_is_cancelled (G_VFS_JOB (job)))
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed (G_VFS_JOB (job), G_IO_ERROR,
+-                         G_IO_ERROR_CANCELLED,
+-                         _("Operation was cancelled"));
+-@@ -1457,7 +1454,7 @@ set_info_from_memory:
+- 
+-   g_vfs_job_succeeded (G_VFS_JOB (job));
+- 
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_mutex_unlock (&op_backend->mutex);
+- 
+-   g_debug ("- do_query_fs_info\n");
+- }
+-@@ -1476,11 +1473,11 @@ do_enumerate (GVfsBackend *backend,
+- 
+-   g_debug ("+ do_enumerate, filename: %s\n", filename);
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+- 
+-   if (_change_directory (op_backend, filename, &error) == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-       return;
+-@@ -1489,7 +1486,7 @@ do_enumerate (GVfsBackend *backend,
+-   files = NULL;
+-   if (_retrieve_folder_listing (backend, filename, &files, &error) == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-       return;
+-@@ -1497,7 +1494,7 @@ do_enumerate (GVfsBackend *backend,
+- 
+-   if (gvfsbackendobexftp_fl_parser_parse (files, strlen (files), &elements, &error) == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       /* See http://web.archive.org/web/20070826221251/http://docs.kde.org/development/en/extragear-pim/kdebluetooth/components.kio_obex.html#devices
+-        * for the reasoning */
+-       if (strstr (files, "SYSTEM\"obex-folder-listing.dtd") != NULL && _is_nokia_3650 (op_backend->bdaddr))
+-@@ -1525,7 +1522,7 @@ do_enumerate (GVfsBackend *backend,
+-   g_list_free (elements);
+-   g_vfs_job_enumerate_done (job);
+- 
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_mutex_unlock (&op_backend->mutex);
+- 
+-   g_debug ("- do_enumerate\n");
+- }
+-@@ -1549,7 +1546,7 @@ push_transfer_started_cb (DBusGProxy *proxy,
+- 
+-   g_message ("transfer of %s to %s started", filename, local_path);
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+- 
+-   op_backend->status = ASYNC_RUNNING;
+-   job_data->total_bytes = (goffset) total_bytes;
+-@@ -1557,8 +1554,8 @@ push_transfer_started_cb (DBusGProxy *proxy,
+-     job_data->progress_callback (0, job_data->total_bytes,
+-                                  job_data->progress_callback_data);
+- 
+--  g_cond_signal (op_backend->cond);
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_cond_signal (&op_backend->cond);
+-+  g_mutex_unlock (&op_backend->mutex);
+- }
+- 
+- static void
+-@@ -1570,12 +1567,12 @@ push_transfer_completed_cb (DBusGProxy *proxy,
+- 
+-   g_message ("transfer completed");
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+- 
+-   op_backend->status = ASYNC_SUCCESS;
+- 
+--  g_cond_signal (op_backend->cond);
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_cond_signal (&op_backend->cond);
+-+  g_mutex_unlock (&op_backend->mutex);
+- }
+- 
+- static void
+-@@ -1657,7 +1654,7 @@ _push_single_file_helper (GVfsBackendObexftp *op_backend,
+- 
+-   /* wait for the TransferStarted or ErrorOccurred signal */
+-   while (op_backend->status == ASYNC_PENDING)
+--    g_cond_wait (op_backend->cond, op_backend->mutex);
+-+    g_cond_wait (&op_backend->cond, &op_backend->mutex);
+- 
+-   dbus_g_proxy_disconnect_signal (op_backend->session_proxy, "TransferStarted",
+-                                   G_CALLBACK (push_transfer_started_cb), job_data);
+-@@ -1678,7 +1675,7 @@ _push_single_file_helper (GVfsBackendObexftp *op_backend,
+-     }
+- 
+-   while (op_backend->status == ASYNC_RUNNING)
+--    g_cond_wait (op_backend->cond, op_backend->mutex);
+-+    g_cond_wait (&op_backend->cond, &op_backend->mutex);
+- 
+-   dbus_g_proxy_disconnect_signal (op_backend->session_proxy, "TransferCompleted", 
+-                                   G_CALLBACK (push_transfer_completed_cb), job_data);
+-@@ -1717,7 +1714,7 @@ do_push (GVfsBackend *backend,
+- 
+-   g_debug ("+ do_push, destination: %s, local_path: %s\n", destination, local_path);
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+-   op_backend->doing_io = TRUE;
+- 
+-   overwrite = (flags & G_FILE_COPY_OVERWRITE);
+-@@ -1728,7 +1725,7 @@ do_push (GVfsBackend *backend,
+-   if (g_vfs_job_is_cancelled (G_VFS_JOB (job)))
+-     {
+-       op_backend->doing_io = FALSE;
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+- 
+-       g_vfs_job_failed (G_VFS_JOB (job), G_IO_ERROR,
+-                         G_IO_ERROR_CANCELLED,
+-@@ -1743,7 +1740,7 @@ do_push (GVfsBackend *backend,
+-       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND))
+-         {
+-           op_backend->doing_io = FALSE;
+--          g_mutex_unlock (op_backend->mutex);
+-+          g_mutex_unlock (&op_backend->mutex);
+- 
+-           g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-           g_error_free (error);
+-@@ -1766,7 +1763,7 @@ do_push (GVfsBackend *backend,
+-   if (is_dir)
+-     {
+-       op_backend->doing_io = FALSE;
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+- 
+-       if (target_type != 0)
+-         {
+-@@ -1799,7 +1796,7 @@ do_push (GVfsBackend *backend,
+-       if (target_type != 0)
+-         {
+-           op_backend->doing_io = FALSE;
+--          g_mutex_unlock (op_backend->mutex);
+-+          g_mutex_unlock (&op_backend->mutex);
+- 
+-           if (overwrite)
+-             {
+-@@ -1831,7 +1828,7 @@ do_push (GVfsBackend *backend,
+-                                 &error, job_data) == FALSE)
+-     {
+-       op_backend->doing_io = FALSE;
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       push_data_free (job_data);
+- 
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-@@ -1859,7 +1856,7 @@ do_push (GVfsBackend *backend,
+-     g_vfs_job_succeeded (G_VFS_JOB (job));
+- 
+-   op_backend->doing_io = FALSE;
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_mutex_unlock (&op_backend->mutex);
+- 
+-   g_debug ("- do_push\n");
+- }
+-@@ -1876,13 +1873,13 @@ do_delete (GVfsBackend *backend,
+- 
+-   g_debug ("+ do_delete, filename: %s\n", filename);
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+- 
+-   /* Check whether we have a directory */
+-   info = g_file_info_new ();
+-   if (_query_file_info_helper (backend, filename, info, &error) == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-       g_object_unref (info);
+-@@ -1891,7 +1888,7 @@ do_delete (GVfsBackend *backend,
+- 
+-   if (g_vfs_job_is_cancelled (G_VFS_JOB (job)))
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed (G_VFS_JOB (job), G_IO_ERROR,
+-                         G_IO_ERROR_CANCELLED,
+-                         _("Operation was cancelled"));
+-@@ -1910,7 +1907,7 @@ do_delete (GVfsBackend *backend,
+- 
+-       if (_change_directory (op_backend, filename, &error) == FALSE)
+-         {
+--          g_mutex_unlock (op_backend->mutex);
+-+          g_mutex_unlock (&op_backend->mutex);
+-           g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-           g_error_free (error);
+-           return;
+-@@ -1918,7 +1915,7 @@ do_delete (GVfsBackend *backend,
+- 
+-       if (g_vfs_job_is_cancelled (G_VFS_JOB (job)))
+-         {
+--          g_mutex_unlock (op_backend->mutex);
+-+          g_mutex_unlock (&op_backend->mutex);
+-           g_vfs_job_failed (G_VFS_JOB (job), G_IO_ERROR,
+-                             G_IO_ERROR_CANCELLED,
+-                             _("Operation was cancelled"));
+-@@ -1928,7 +1925,7 @@ do_delete (GVfsBackend *backend,
+-       files = NULL;
+-       if (_retrieve_folder_listing (backend, filename, &files, &error) == FALSE)
+-         {
+--          g_mutex_unlock (op_backend->mutex);
+-+          g_mutex_unlock (&op_backend->mutex);
+-           g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-           g_error_free (error);
+-           return;
+-@@ -1936,7 +1933,7 @@ do_delete (GVfsBackend *backend,
+- 
+-       if (gvfsbackendobexftp_fl_parser_parse (files, strlen (files), &elements, &error) == FALSE)
+-         {
+--          g_mutex_unlock (op_backend->mutex);
+-+          g_mutex_unlock (&op_backend->mutex);
+-           g_message ("gvfsbackendobexftp_fl_parser_parse failed");
+-           g_free (files);
+-           g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-@@ -1951,7 +1948,7 @@ do_delete (GVfsBackend *backend,
+- 
+-       if (len != 0)
+-         {
+--          g_mutex_unlock (op_backend->mutex);
+-+          g_mutex_unlock (&op_backend->mutex);
+-           g_set_error_literal (&error, G_IO_ERROR,
+- 	                       G_IO_ERROR_NOT_EMPTY,
+-         	               g_strerror (ENOTEMPTY));
+-@@ -1969,7 +1966,7 @@ do_delete (GVfsBackend *backend,
+-   if (strcmp (basename, G_DIR_SEPARATOR_S) == 0
+-       || strcmp (basename, ".") == 0)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_free (basename);
+-       g_vfs_job_failed_from_errno (G_VFS_JOB (job), EPERM);
+-       return;
+-@@ -1977,7 +1974,7 @@ do_delete (GVfsBackend *backend,
+- 
+-   if (g_vfs_job_is_cancelled (G_VFS_JOB (job)))
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed (G_VFS_JOB (job), G_IO_ERROR,
+-                         G_IO_ERROR_CANCELLED,
+-                         _("Operation was cancelled"));
+-@@ -1988,7 +1985,7 @@ do_delete (GVfsBackend *backend,
+-   parent = g_path_get_dirname (filename);
+-   if (_change_directory (op_backend, parent, &error) == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_free (basename);
+-       g_free (parent);
+-@@ -1999,7 +1996,7 @@ do_delete (GVfsBackend *backend,
+- 
+-   if (g_vfs_job_is_cancelled (G_VFS_JOB (job)))
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed (G_VFS_JOB (job), G_IO_ERROR,
+-                         G_IO_ERROR_CANCELLED,
+-                         _("Operation was cancelled"));
+-@@ -2011,7 +2008,7 @@ do_delete (GVfsBackend *backend,
+-                          G_TYPE_STRING, basename, G_TYPE_INVALID,
+-                          G_TYPE_INVALID) == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-       return;
+-@@ -2020,7 +2017,7 @@ do_delete (GVfsBackend *backend,
+- 
+-   g_vfs_job_succeeded (G_VFS_JOB (job));
+- 
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_mutex_unlock (&op_backend->mutex);
+- 
+-   g_debug ("- do_delete\n");
+- }
+-@@ -2037,13 +2034,13 @@ do_make_directory (GVfsBackend *backend,
+- 
+-   g_debug ("+ do_make_directory, filename: %s\n", filename);
+- 
+--  g_mutex_lock (op_backend->mutex);
+-+  g_mutex_lock (&op_backend->mutex);
+- 
+-   /* Check if the folder already exists */
+-   info = g_file_info_new ();
+-   if (_query_file_info_helper (backend, filename, info, &error) != FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_object_unref (info);
+-       g_vfs_job_failed_from_errno (G_VFS_JOB (job), EEXIST);
+-       return;
+-@@ -2051,7 +2048,7 @@ do_make_directory (GVfsBackend *backend,
+-   g_object_unref (info);
+-   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND) == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-       return;
+-@@ -2062,7 +2059,7 @@ do_make_directory (GVfsBackend *backend,
+- 
+-   if (g_vfs_job_is_cancelled (G_VFS_JOB (job)))
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed (G_VFS_JOB (job), G_IO_ERROR,
+-                         G_IO_ERROR_CANCELLED,
+-                         _("Operation was cancelled"));
+-@@ -2072,7 +2069,7 @@ do_make_directory (GVfsBackend *backend,
+-   parent = g_path_get_dirname (filename);
+-   if (_change_directory (op_backend, parent, &error) == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-       return;
+-@@ -2081,7 +2078,7 @@ do_make_directory (GVfsBackend *backend,
+- 
+-   if (g_vfs_job_is_cancelled (G_VFS_JOB (job)))
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_vfs_job_failed (G_VFS_JOB (job), G_IO_ERROR,
+-                         G_IO_ERROR_CANCELLED,
+-                         _("Operation was cancelled"));
+-@@ -2093,7 +2090,7 @@ do_make_directory (GVfsBackend *backend,
+-                          G_TYPE_STRING, basename, G_TYPE_INVALID,
+-                          G_TYPE_INVALID) == FALSE)
+-     {
+--      g_mutex_unlock (op_backend->mutex);
+-+      g_mutex_unlock (&op_backend->mutex);
+-       g_free (basename);
+-       g_vfs_job_failed_from_error (G_VFS_JOB (job), error);
+-       g_error_free (error);
+-@@ -2108,7 +2105,7 @@ do_make_directory (GVfsBackend *backend,
+- 
+-   g_vfs_job_succeeded (G_VFS_JOB (job));
+- 
+--  g_mutex_unlock (op_backend->mutex);
+-+  g_mutex_unlock (&op_backend->mutex);
+- 
+-   g_debug ("- do_make_directory\n");
+- }
+-diff --git a/daemon/gvfsbackendsmbbrowse.c b/daemon/gvfsbackendsmbbrowse.c
+-index 01d7da6..f1055c5 100644
+---- a/daemon/gvfsbackendsmbbrowse.c
+-+++ b/daemon/gvfsbackendsmbbrowse.c
+-@@ -94,8 +94,8 @@ struct _GVfsBackendSmbBrowse
+-   gboolean password_in_keyring;
+-   GPasswordSave password_save;
+- 
+--  GMutex *entries_lock;
+--  GMutex *update_cache_lock;
+-+  GMutex entries_lock;
+-+  GMutex update_cache_lock;
+-   time_t last_entry_update;
+-   GList *entries;
+-   int entry_errno;
+-@@ -226,8 +226,8 @@ g_vfs_backend_smb_browse_finalize (GObject *object)
+-   g_free (backend->server);
+-   g_free (backend->default_workgroup);
+-   
+--  g_mutex_free (backend->entries_lock);
+--  g_mutex_free (backend->update_cache_lock);
+-+  g_mutex_clear (&backend->entries_lock);
+-+  g_mutex_clear (&backend->update_cache_lock);
+- 
+-   smbc_free_context (backend->smb_context, TRUE);
+-   
+-@@ -244,9 +244,6 @@ g_vfs_backend_smb_browse_init (GVfsBackendSmbBrowse *backend)
+-   char *workgroup;
+-   GSettings *settings;
+- 
+--  backend->entries_lock = g_mutex_new ();
+--  backend->update_cache_lock = g_mutex_new ();
+--
+-   if (mount_tracker == NULL)
+-     mount_tracker = g_mount_tracker_new (NULL);
+- 
+-@@ -592,7 +589,7 @@ update_cache (GVfsBackendSmbBrowse *backend, SMBCFILE *supplied_dir)
+-   entry_errno = 0;
+-   res = -1;
+- 
+--  g_mutex_lock (backend->update_cache_lock);
+-+  g_mutex_lock (&backend->update_cache_lock);
+-   
+-   DEBUG ("update_cache - updating...\n");
+-   
+-@@ -665,7 +662,7 @@ update_cache (GVfsBackendSmbBrowse *backend, SMBCFILE *supplied_dir)
+- 
+-  out:
+- 
+--  g_mutex_lock (backend->entries_lock);
+-+  g_mutex_lock (&backend->entries_lock);
+-   
+-   /* Clear old cache */
+-   g_list_foreach (backend->entries, (GFunc)browse_entry_free, NULL);
+-@@ -676,8 +673,8 @@ update_cache (GVfsBackendSmbBrowse *backend, SMBCFILE *supplied_dir)
+- 
+-   DEBUG ("update_cache - done.\n");
+- 
+--  g_mutex_unlock (backend->entries_lock);
+--  g_mutex_unlock (backend->update_cache_lock);
+-+  g_mutex_unlock (&backend->entries_lock);
+-+  g_mutex_unlock (&backend->update_cache_lock);
+- 
+-   return (res >= 0);
+- }
+-@@ -780,9 +777,9 @@ has_name (GVfsBackendSmbBrowse *backend,
+- {
+-   gboolean res;
+-   
+--  g_mutex_lock (backend->entries_lock);
+-+  g_mutex_lock (&backend->entries_lock);
+-   res = (find_entry_unlocked (backend, filename) != NULL);
+--  g_mutex_unlock (backend->entries_lock);
+-+  g_mutex_unlock (&backend->entries_lock);
+-   return res;
+- }
+- 
+-@@ -793,11 +790,11 @@ cache_needs_updating (GVfsBackendSmbBrowse *backend)
+-   gboolean res;
+- 
+-   /*  If there's already cache update in progress, lock and wait until update is finished, then recheck  */
+--  g_mutex_lock (backend->update_cache_lock);
+-+  g_mutex_lock (&backend->update_cache_lock);
+-   now = time (NULL);
+-   res = now < backend->last_entry_update ||
+-     (now - backend->last_entry_update) > DEFAULT_CACHE_EXPIRATION_TIME;
+--  g_mutex_unlock (backend->update_cache_lock);
+-+  g_mutex_unlock (&backend->update_cache_lock);
+-   
+-   return res; 
+- }
+-@@ -1070,7 +1067,7 @@ run_mount_mountable (GVfsBackendSmbBrowse *backend,
+-   GError *error = NULL;
+-   GMountSpec *mount_spec;
+- 
+--  g_mutex_lock (backend->entries_lock);
+-+  g_mutex_lock (&backend->entries_lock);
+-   
+-   entry = find_entry_unlocked (backend, filename);
+- 
+-@@ -1093,7 +1090,7 @@ run_mount_mountable (GVfsBackendSmbBrowse *backend,
+- 			 G_IO_ERROR, G_IO_ERROR_NOT_FOUND,
+- 			 _("File doesn't exist"));
+-       
+--  g_mutex_unlock (backend->entries_lock);
+-+  g_mutex_unlock (&backend->entries_lock);
+- 
+-   if (error)
+-     {
+-@@ -1316,14 +1313,14 @@ run_query_info (GVfsBackendSmbBrowse *backend,
+- {
+-   BrowseEntry *entry;
+- 
+--  g_mutex_lock (backend->entries_lock);
+-+  g_mutex_lock (&backend->entries_lock);
+-   
+-   entry = find_entry_unlocked (backend, filename);
+- 
+-   if (entry)
+-     get_file_info_from_entry (backend, entry, info);
+-       
+--  g_mutex_unlock (backend->entries_lock);
+-+  g_mutex_unlock (&backend->entries_lock);
+- 
+-   if (entry)
+-     g_vfs_job_succeeded (G_VFS_JOB (job));
+-@@ -1408,7 +1405,7 @@ run_enumerate (GVfsBackendSmbBrowse *backend,
+-   g_vfs_job_succeeded (G_VFS_JOB (job));
+- 
+-   files = NULL;
+--  g_mutex_lock (backend->entries_lock);
+-+  g_mutex_lock (&backend->entries_lock);
+-   for (l = backend->entries; l != NULL; l = l->next)
+-     {
+-       BrowseEntry *entry = l->data;
+-@@ -1418,7 +1415,7 @@ run_enumerate (GVfsBackendSmbBrowse *backend,
+- 
+-       files = g_list_prepend (files, info);
+-     }
+--  g_mutex_unlock (backend->entries_lock);
+-+  g_mutex_unlock (&backend->entries_lock);
+-   
+-   files = g_list_reverse (files);
+- 
+-diff --git a/daemon/gvfsdaemon.c b/daemon/gvfsdaemon.c
+-index 9714b39..4f59b94 100644
+---- a/daemon/gvfsdaemon.c
+-+++ b/daemon/gvfsdaemon.c
+-@@ -58,7 +58,7 @@ struct _GVfsDaemon
+- {
+-   GObject parent_instance;
+- 
+--  GMutex *lock;
+-+  GMutex lock;
+-   gboolean main_daemon;
+- 
+-   GThreadPool *thread_pool;
+-@@ -119,7 +119,7 @@ g_vfs_daemon_finalize (GObject *object)
+-   g_assert (daemon->jobs == NULL);
+- 
+-   g_hash_table_destroy (daemon->registered_paths);
+--  g_mutex_free (daemon->lock);
+-+  g_mutex_clear (&daemon->lock);
+- 
+-   if (G_OBJECT_CLASS (g_vfs_daemon_parent_class)->finalize)
+-     (*G_OBJECT_CLASS (g_vfs_daemon_parent_class)->finalize) (object);
+-@@ -150,7 +150,6 @@ g_vfs_daemon_init (GVfsDaemon *daemon)
+-   gint max_threads = 1; /* TODO: handle max threads */
+-   DBusError error;
+-   
+--  daemon->lock = g_mutex_new ();
+-   daemon->session_bus = dbus_bus_get (DBUS_BUS_SESSION, NULL);
+-   daemon->thread_pool = g_thread_pool_new (job_handler_callback,
+- 					   daemon,
+-@@ -326,7 +325,7 @@ static void
+- job_source_closed_callback (GVfsJobSource *job_source,
+- 			    GVfsDaemon *daemon)
+- {
+--  g_mutex_lock (daemon->lock);
+-+  g_mutex_lock (&daemon->lock);
+-   
+-   daemon->job_sources = g_list_remove (daemon->job_sources,
+- 				       job_source);
+-@@ -343,7 +342,7 @@ job_source_closed_callback (GVfsJobSource *job_source,
+-   if (daemon->job_sources == NULL)
+-     daemon_schedule_exit (daemon);
+-   
+--  g_mutex_unlock (daemon->lock);
+-+  g_mutex_unlock (&daemon->lock);
+- }
+- 
+- static void
+-@@ -351,7 +350,7 @@ g_vfs_daemon_re_register_job_sources (GVfsDaemon *daemon)
+- {
+-   GList *l;
+-   
+--  g_mutex_lock (daemon->lock);
+-+  g_mutex_lock (&daemon->lock);
+- 
+-   for (l = daemon->job_sources; l != NULL; l = l->next)
+-     {
+-@@ -366,7 +365,7 @@ g_vfs_daemon_re_register_job_sources (GVfsDaemon *daemon)
+- 	}
+-     }
+-   
+--  g_mutex_unlock (daemon->lock);
+-+  g_mutex_unlock (&daemon->lock);
+- }
+- 
+- void
+-@@ -375,7 +374,7 @@ g_vfs_daemon_add_job_source (GVfsDaemon *daemon,
+- {
+-   g_debug ("Added new job source %p (%s)\n", job_source, g_type_name_from_instance ((gpointer)job_source));
+-   
+--  g_mutex_lock (daemon->lock);
+-+  g_mutex_lock (&daemon->lock);
+- 
+-   daemon_unschedule_exit (daemon);
+-   
+-@@ -387,7 +386,7 @@ g_vfs_daemon_add_job_source (GVfsDaemon *daemon,
+-   g_signal_connect (job_source, "closed",
+- 		    (GCallback)job_source_closed_callback, daemon);
+-   
+--  g_mutex_unlock (daemon->lock);
+-+  g_mutex_unlock (&daemon->lock);
+- }
+- 
+- /* This registers a dbus callback on *all* connections, client and session bus */
+-@@ -437,9 +436,9 @@ job_finished_callback (GVfsJob *job,
+- 					(GCallback)job_finished_callback,
+- 					daemon);
+- 
+--  g_mutex_lock (daemon->lock);
+-+  g_mutex_lock (&daemon->lock);
+-   daemon->jobs = g_list_remove (daemon->jobs, job);
+--  g_mutex_unlock (daemon->lock);
+-+  g_mutex_unlock (&daemon->lock);
+-   
+-   g_object_unref (job);
+- }
+-@@ -454,9 +453,9 @@ g_vfs_daemon_queue_job (GVfsDaemon *daemon,
+-   g_signal_connect (job, "finished", (GCallback)job_finished_callback, daemon);
+-   g_signal_connect (job, "new_source", (GCallback)job_new_source_callback, daemon);
+-   
+--  g_mutex_lock (daemon->lock);
+-+  g_mutex_lock (&daemon->lock);
+-   daemon->jobs = g_list_prepend (daemon->jobs, job);
+--  g_mutex_unlock (daemon->lock);
+-+  g_mutex_unlock (&daemon->lock);
+-   
+-   /* Can we start the job immediately / async */
+-   if (!g_vfs_job_try (job))
+-@@ -949,7 +948,7 @@ daemon_message_func (DBusConnection *conn,
+- 				 DBUS_TYPE_UINT32, &serial,
+- 				 DBUS_TYPE_INVALID))
+- 	{
+--	  g_mutex_lock (daemon->lock);
+-+	  g_mutex_lock (&daemon->lock);
+- 	  for (l = daemon->jobs; l != NULL; l = l->next)
+- 	    {
+- 	      GVfsJob *job = l->data;
+-@@ -962,7 +961,7 @@ daemon_message_func (DBusConnection *conn,
+- 		  break;
+- 		}
+- 	    }
+--	  g_mutex_unlock (daemon->lock);
+-+	  g_mutex_unlock (&daemon->lock);
+- 
+- 
+- 	  if (job_to_cancel)
+-@@ -1007,7 +1006,7 @@ peer_to_peer_filter_func (DBusConnection *conn,
+-     {
+-       GList *l;
+- 
+--      g_mutex_lock (daemon->lock);
+-+      g_mutex_lock (&daemon->lock);
+-       for (l = daemon->jobs; l != NULL; l = l->next)
+-         {
+-           GVfsJob *job = l->data;
+-@@ -1016,7 +1015,7 @@ peer_to_peer_filter_func (DBusConnection *conn,
+-               G_VFS_JOB_DBUS (job)->connection == conn)
+-             g_vfs_job_cancel (job);
+-         }
+--      g_mutex_unlock (daemon->lock);
+-+      g_mutex_unlock (&daemon->lock);
+- 
+-       /* The peer-to-peer connection was disconnected */
+-       dbus_connection_unref (conn);
+-diff --git a/daemon/gvfsftpdircache.c b/daemon/gvfsftpdircache.c
+-index cd19c17..49023b1 100644
+---- a/daemon/gvfsftpdircache.c
+-+++ b/daemon/gvfsftpdircache.c
+-@@ -98,7 +98,7 @@ struct _GVfsFtpDirCache
+- {
+-   GHashTable *          directories;    /* GVfsFtpFile of directory => GVfsFtpDirCacheEntry mapping */
+-   guint                 stamp;          /* used to identify validity of cache when flushing */
+--  GMutex *              lock;           /* mutex for thread safety of stamp and hash table */
+-+  GMutex                lock;           /* mutex for thread safety of stamp and hash table */
+-   const GVfsFtpDirFuncs *funcs;         /* functions to call */
+- };
+- 
+-@@ -114,7 +114,6 @@ g_vfs_ftp_dir_cache_new (const GVfsFtpDirFuncs *funcs)
+-                                               g_vfs_ftp_file_equal,
+-                                               (GDestroyNotify) g_vfs_ftp_file_free,
+-                                               (GDestroyNotify) g_vfs_ftp_dir_cache_entry_unref);
+--  cache->lock = g_mutex_new();
+-   cache->funcs = funcs;
+- 
+-   return cache;
+-@@ -126,7 +125,7 @@ g_vfs_ftp_dir_cache_free (GVfsFtpDirCache *cache)
+-   g_return_if_fail (cache != NULL);
+- 
+-   g_hash_table_destroy (cache->directories);
+--  g_mutex_free (cache->lock);
+-+  g_mutex_clear (&cache->lock);
+-   g_slice_free (GVfsFtpDirCache, cache);
+- }
+- 
+-@@ -138,11 +137,11 @@ g_vfs_ftp_dir_cache_lookup_entry (GVfsFtpDirCache *  cache,
+- {
+-   GVfsFtpDirCacheEntry *entry;
+- 
+--  g_mutex_lock (cache->lock);
+-+  g_mutex_lock (&cache->lock);
+-   entry = g_hash_table_lookup (cache->directories, dir);
+-   if (entry)
+-     g_vfs_ftp_dir_cache_entry_ref (entry);
+--  g_mutex_unlock (cache->lock);
+-+  g_mutex_unlock (&cache->lock);
+-   if (entry && entry->stamp < stamp)
+-     g_vfs_ftp_dir_cache_entry_unref (entry);
+-   else if (entry)
+-@@ -178,11 +177,11 @@ g_vfs_ftp_dir_cache_lookup_entry (GVfsFtpDirCache *  cache,
+-       g_vfs_ftp_dir_cache_entry_unref (entry);
+-       return NULL;
+-     }
+--  g_mutex_lock (cache->lock);
+-+  g_mutex_lock (&cache->lock);
+-   g_hash_table_insert (cache->directories,
+-                        g_vfs_ftp_file_copy (dir),
+-                        g_vfs_ftp_dir_cache_entry_ref (entry));
+--  g_mutex_unlock (cache->lock);
+-+  g_mutex_unlock (&cache->lock);
+-   return entry;
+- }
+- 
+-@@ -357,10 +356,10 @@ g_vfs_ftp_dir_cache_lookup_dir (GVfsFtpDirCache *  cache,
+- 
+-   if (flush)
+-     {
+--      g_mutex_lock (cache->lock);
+-+      g_mutex_lock (&cache->lock);
+-       g_assert (cache->stamp != G_MAXUINT);
+-       stamp = ++cache->stamp;
+--      g_mutex_unlock (cache->lock);
+-+      g_mutex_unlock (&cache->lock);
+-     }
+-   else
+-     stamp = 0;
+-@@ -390,9 +389,9 @@ g_vfs_ftp_dir_cache_purge_dir (GVfsFtpDirCache *  cache,
+-   g_return_if_fail (cache != NULL);
+-   g_return_if_fail (dir != NULL);
+- 
+--  g_mutex_lock (cache->lock);
+-+  g_mutex_lock (&cache->lock);
+-   g_hash_table_remove (cache->directories, dir);
+--  g_mutex_unlock (cache->lock);
+-+  g_mutex_unlock (&cache->lock);
+- }
+- 
+- void
+-diff --git a/daemon/gvfsftptask.c b/daemon/gvfsftptask.c
+-index 8c5f7fb..f83882a 100644
+---- a/daemon/gvfsftptask.c
+-+++ b/daemon/gvfsftptask.c
+-@@ -180,7 +180,7 @@ static gboolean
+- g_vfs_ftp_task_acquire_connection (GVfsFtpTask *task)
+- {
+-   GVfsBackendFtp *ftp;
+--  GTimeVal now;
+-+  gint64 end_time;
+-   gulong id;
+- 
+-   g_return_val_if_fail (task != NULL, FALSE);
+-@@ -190,10 +190,10 @@ g_vfs_ftp_task_acquire_connection (GVfsFtpTask *task)
+-     return FALSE;
+- 
+-   ftp = task->backend;
+--  g_mutex_lock (ftp->mutex);
+-+  g_mutex_lock (&ftp->mutex);
+-   id = g_cancellable_connect (task->cancellable,
+-         		      G_CALLBACK (do_broadcast),
+--        		      ftp->cond, NULL);
+-+        		      &ftp->cond, NULL);
+-   while (task->conn == NULL && ftp->queue != NULL)
+-     {
+-       if (g_cancellable_is_cancelled (task->cancellable))
+-@@ -218,7 +218,7 @@ g_vfs_ftp_task_acquire_connection (GVfsFtpTask *task)
+- 
+-           ftp->connections++;
+-           last_thread = g_thread_self ();
+--          g_mutex_unlock (ftp->mutex);
+-+          g_mutex_unlock (&ftp->mutex);
+-           task->conn = g_vfs_ftp_connection_new (ftp->addr, task->cancellable, &task->error);
+-           if (G_LIKELY (task->conn != NULL))
+-             {
+-@@ -231,7 +231,7 @@ g_vfs_ftp_task_acquire_connection (GVfsFtpTask *task)
+- 
+-           g_vfs_ftp_connection_free (task->conn);
+-           task->conn = NULL;
+--          g_mutex_lock (ftp->mutex);
+-+          g_mutex_lock (&ftp->mutex);
+-           ftp->connections--;
+-           /* If this value is still equal to our thread it means there were no races 
+-            * trying to open connections and the maybe_max_connections value is 
+-@@ -253,10 +253,9 @@ g_vfs_ftp_task_acquire_connection (GVfsFtpTask *task)
+-           continue;
+-         }
+- 
+--      g_get_current_time (&now);
+--      g_time_val_add (&now, G_VFS_FTP_TIMEOUT_IN_SECONDS * 1000 * 1000);
+-+      end_time = g_get_monotonic_time () + G_VFS_FTP_TIMEOUT_IN_SECONDS * G_TIME_SPAN_SECOND;
+-       if (ftp->busy_connections >= ftp->connections ||
+--          !g_cond_timed_wait (ftp->cond, ftp->mutex, &now))
+-+          !g_cond_wait_until (&ftp->cond, &ftp->mutex, end_time))
+-         {
+-           task->error = g_error_new_literal (G_IO_ERROR, G_IO_ERROR_BUSY,
+-         		                     _("The FTP server is busy. Try again later"));
+-@@ -264,7 +263,7 @@ g_vfs_ftp_task_acquire_connection (GVfsFtpTask *task)
+-         }
+-     }
+-   g_cancellable_disconnect (task->cancellable, id);
+--  g_mutex_unlock (ftp->mutex);
+-+  g_mutex_unlock (&ftp->mutex);
+- 
+-   return task->conn != NULL;
+- }
+-@@ -287,18 +286,18 @@ g_vfs_ftp_task_release_connection (GVfsFtpTask *task)
+-   if (task->conn == NULL)
+-     return;
+- 
+--  g_mutex_lock (task->backend->mutex);
+-+  g_mutex_lock (&task->backend->mutex);
+-   if (task->backend->queue && g_vfs_ftp_connection_is_usable (task->conn))
+-     {
+-       g_queue_push_tail (task->backend->queue, task->conn);
+--      g_cond_signal (task->backend->cond);
+-+      g_cond_signal (&task->backend->cond);
+-     }
+-   else
+-     {
+-       task->backend->connections--;
+-       g_vfs_ftp_connection_free (task->conn);
+-     }
+--  g_mutex_unlock (task->backend->mutex);
+-+  g_mutex_unlock (&task->backend->mutex);
+-   task->conn = NULL;
+- }
+- 
+-@@ -434,10 +433,10 @@ g_vfs_ftp_task_give_connection (GVfsFtpTask *      task,
+- 
+-   task->conn = conn;
+-   /* this connection is not busy anymore */
+--  g_mutex_lock (task->backend->mutex);
+-+  g_mutex_lock (&task->backend->mutex);
+-   g_assert (task->backend->busy_connections > 0);
+-   task->backend->busy_connections--;
+--  g_mutex_unlock (task->backend->mutex);
+-+  g_mutex_unlock (&task->backend->mutex);
+- }
+- 
+- /**
+-@@ -465,13 +464,13 @@ g_vfs_ftp_task_take_connection (GVfsFtpTask *task)
+- 
+-   ftp = task->backend;
+-   /* mark this connection as busy */
+--  g_mutex_lock (ftp->mutex);
+-+  g_mutex_lock (&ftp->mutex);
+-   ftp->busy_connections++;
+-   /* if all connections are busy, signal all waiting threads, 
+-    * so they stop waiting and return BUSY earlier */
+-   if (ftp->busy_connections >= ftp->connections)
+--    g_cond_broadcast (ftp->cond);
+--  g_mutex_unlock (ftp->mutex);
+-+    g_cond_broadcast (&ftp->cond);
+-+  g_mutex_unlock (&ftp->mutex);
+- 
+-   return conn;
+- }
+-diff --git a/daemon/trashlib/trashexpunge.c b/daemon/trashlib/trashexpunge.c
+-index 782be54..a5cf975 100644
+---- a/daemon/trashlib/trashexpunge.c
+-+++ b/daemon/trashlib/trashexpunge.c
+-@@ -11,8 +11,8 @@
+- static gsize trash_expunge_initialised;
+- static GHashTable *trash_expunge_queue;
+- static gboolean trash_expunge_alive;
+--static GMutex *trash_expunge_lock;
+--static GCond *trash_expunge_wait;
+-+static GMutex trash_expunge_lock;
+-+static GCond trash_expunge_wait;
+- 
+- static void
+- trash_expunge_delete_everything_under (GFile *directory)
+-@@ -66,9 +66,9 @@ just_return_true (gpointer a,
+- static gpointer
+- trash_expunge_thread (gpointer data)
+- {
+--  GTimeVal timeval;
+-+  gint64 end_time;
+- 
+--  g_mutex_lock (trash_expunge_lock);
+-+  g_mutex_lock (&trash_expunge_lock);
+- 
+-   do
+-     {
+-@@ -80,23 +80,22 @@ trash_expunge_thread (gpointer data)
+-                                          just_return_true, NULL);
+-           g_hash_table_remove (trash_expunge_queue, directory);
+- 
+--          g_mutex_unlock (trash_expunge_lock);
+-+          g_mutex_unlock (&trash_expunge_lock);
+-           trash_expunge_delete_everything_under (directory);
+--          g_mutex_lock (trash_expunge_lock);
+-+          g_mutex_lock (&trash_expunge_lock);
+- 
+-           g_object_unref (directory);
+-         }
+- 
+--      g_get_current_time (&timeval);
+--      g_time_val_add (&timeval, 60 * 1000000); /* 1min */
+-+      end_time = g_get_monotonic_time () + 1 * G_TIME_SPAN_MINUTE;
+-     }
+--  while (g_cond_timed_wait (trash_expunge_wait,
+--                            trash_expunge_lock,
+--                            &timeval));
+-+  while (g_cond_wait_until (&trash_expunge_wait,
+-+                            &trash_expunge_lock,
+-+                            end_time));
+- 
+-   trash_expunge_alive = FALSE;
+- 
+--  g_mutex_unlock (trash_expunge_lock);
+-+  g_mutex_unlock (&trash_expunge_lock);
+- 
+-   return NULL;
+- }
+-@@ -108,13 +107,13 @@ trash_expunge (GFile *directory)
+-     {
+-       trash_expunge_queue = g_hash_table_new (g_file_hash,
+-                                               (GEqualFunc) g_file_equal);
+--      trash_expunge_lock = g_mutex_new ();
+--      trash_expunge_wait = g_cond_new ();
+-+      g_mutex_init (&trash_expunge_lock);
+-+      g_cond_init (&trash_expunge_wait);
+- 
+-       g_once_init_leave (&trash_expunge_initialised, 1);
+-     }
+- 
+--  g_mutex_lock (trash_expunge_lock);
+-+  g_mutex_lock (&trash_expunge_lock);
+- 
+-   if (!g_hash_table_lookup (trash_expunge_queue, directory))
+-     g_hash_table_insert (trash_expunge_queue,
+-@@ -130,7 +129,7 @@ trash_expunge (GFile *directory)
+-       trash_expunge_alive = TRUE;
+-     }
+-   else
+--    g_cond_signal (trash_expunge_wait);
+-+    g_cond_signal (&trash_expunge_wait);
+- 
+--  g_mutex_unlock (trash_expunge_lock);
+-+  g_mutex_unlock (&trash_expunge_lock);
+- }
+-diff --git a/daemon/trashlib/trashitem.c b/daemon/trashlib/trashitem.c
+-index bcfc301..dbc9307 100644
+---- a/daemon/trashlib/trashitem.c
+-+++ b/daemon/trashlib/trashitem.c
+-@@ -20,7 +20,7 @@ typedef struct
+- 
+- struct OPAQUE_TYPE__TrashRoot
+- {
+--  GStaticRWLock lock;
+-+  GRWLock lock;
+-   GQueue *notifications;
+- 
+-   trash_item_notify create_notify;
+-@@ -297,12 +297,12 @@ trash_root_thaw (TrashRoot *root)
+-   /* send notifications until we have none */
+-   while (TRUE)
+-     {
+--      g_static_rw_lock_writer_lock (&root->lock);
+-+      g_rw_lock_writer_lock (&root->lock);
+-       if (g_queue_is_empty (root->notifications))
+-         break;
+- 
+-       closure = g_queue_pop_head (root->notifications);
+--      g_static_rw_lock_writer_unlock (&root->lock);
+-+      g_rw_lock_writer_unlock (&root->lock);
+- 
+-       trash_item_invoke_closure (closure);
+-     }
+-@@ -312,7 +312,7 @@ trash_root_thaw (TrashRoot *root)
+-   size_changed = root->old_size != size;
+-   root->old_size = size;
+- 
+--  g_static_rw_lock_writer_unlock (&root->lock);
+-+  g_rw_lock_writer_unlock (&root->lock);
+- 
+-   if (size_changed)
+-     root->size_change (root->user_data);
+-@@ -336,7 +336,7 @@ trash_root_new (trash_item_notify create,
+-   TrashRoot *root;
+- 
+-   root = g_slice_new (TrashRoot);
+--  g_static_rw_lock_init (&root->lock);
+-+  g_rw_lock_init (&root->lock);
+-   root->create_notify = create;
+-   root->delete_notify = delete;
+-   root->size_change = size_change;
+-@@ -376,11 +376,11 @@ trash_root_add_item (TrashRoot *list,
+- 
+-   item = trash_item_new (list, file, in_homedir);
+- 
+--  g_static_rw_lock_writer_lock (&list->lock);
+-+  g_rw_lock_writer_lock (&list->lock);
+- 
+-   if (g_hash_table_lookup (list->item_table, item->escaped_name))
+-     {
+--      g_static_rw_lock_writer_unlock (&list->lock);
+-+      g_rw_lock_writer_unlock (&list->lock);
+- 
+-       /* already exists... */
+-       trash_item_unref (item);
+-@@ -390,7 +390,7 @@ trash_root_add_item (TrashRoot *list,
+-   g_hash_table_insert (list->item_table, item->escaped_name, item);
+-   trash_item_queue_notify (item, item->root->create_notify);
+- 
+--  g_static_rw_lock_writer_unlock (&list->lock);
+-+  g_rw_lock_writer_unlock (&list->lock);
+- }
+- 
+- void
+-@@ -402,9 +402,9 @@ trash_root_remove_item (TrashRoot *list,
+- 
+-   escaped = trash_item_escape_name (file, in_homedir);
+- 
+--  g_static_rw_lock_writer_lock (&list->lock);
+-+  g_rw_lock_writer_lock (&list->lock);
+-   g_hash_table_remove (list->item_table, escaped);
+--  g_static_rw_lock_writer_unlock (&list->lock);
+-+  g_rw_lock_writer_unlock (&list->lock);
+- 
+-   g_free (escaped);
+- }
+-@@ -414,13 +414,13 @@ trash_root_get_items (TrashRoot *root)
+- {
+-   GList *items, *node;
+- 
+--  g_static_rw_lock_reader_lock (&root->lock);
+-+  g_rw_lock_reader_lock (&root->lock);
+- 
+-   items = g_hash_table_get_values (root->item_table);
+-   for (node = items; node; node = node->next)
+-     trash_item_ref (node->data);
+- 
+--  g_static_rw_lock_reader_unlock (&root->lock);
+-+  g_rw_lock_reader_unlock (&root->lock);
+- 
+-   return items;
+- }
+-@@ -441,12 +441,12 @@ trash_root_lookup_item (TrashRoot  *root,
+- {
+-   TrashItem *item;
+- 
+--  g_static_rw_lock_reader_lock (&root->lock);
+-+  g_rw_lock_reader_lock (&root->lock);
+- 
+-   if ((item = g_hash_table_lookup (root->item_table, escaped)))
+-     trash_item_ref (item);
+- 
+--  g_static_rw_lock_reader_unlock (&root->lock);
+-+  g_rw_lock_reader_unlock (&root->lock);
+- 
+-   return item;
+- }
+-@@ -456,9 +456,9 @@ trash_root_get_n_items (TrashRoot *root)
+- {
+-   int size;
+- 
+--  g_static_rw_lock_reader_lock (&root->lock);
+-+  g_rw_lock_reader_lock (&root->lock);
+-   size = g_hash_table_size (root->item_table);
+--  g_static_rw_lock_reader_unlock (&root->lock);
+-+  g_rw_lock_reader_unlock (&root->lock);
+- 
+-   return size;
+- }
+-@@ -517,9 +517,9 @@ trash_item_restore (TrashItem  *item,
+-                    G_FILE_COPY_NO_FALLBACK_FOR_MOVE,
+-                    NULL, NULL, NULL, error))
+-     {
+--      g_static_rw_lock_writer_lock (&item->root->lock);
+-+      g_rw_lock_writer_lock (&item->root->lock);
+-       g_hash_table_remove (item->root->item_table, item->escaped_name);
+--      g_static_rw_lock_writer_unlock (&item->root->lock);
+-+      g_rw_lock_writer_unlock (&item->root->lock);
+- 
+-       {
+-         GFile *trashinfo;
+--- 
+-1.7.6.5
+-
+diff --git a/meta-gnome/recipes-gnome/gvfs/files/0004-Adapt-to-glib-thread-API-changes.patch b/meta-gnome/recipes-gnome/gvfs/files/0004-Adapt-to-glib-thread-API-changes.patch
+deleted file mode 100644
+index 0fac601..0000000
+--- a/meta-gnome/recipes-gnome/gvfs/files/0004-Adapt-to-glib-thread-API-changes.patch
++++ /dev/null
+@@ -1,44 +0,0 @@
+-From 008031adbe2fd118a4e9a3c7219a9777cab1bb75 Mon Sep 17 00:00:00 2001
+-From: Tomas Bzatek <tbzatek@redhat.com>
+-Date: Wed, 26 Oct 2011 14:12:13 +0200
+-Subject: [PATCH 2/2] Adapt to glib thread API changes
+-
+-Last piece in order to fix https://bugzilla.gnome.org/show_bug.cgi?id=661148
+-
+-Upstream-Status: Backport
+-
+-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+----
+- client/gvfsfusedaemon.c        |    2 +-
+- daemon/trashlib/trashexpunge.c |    2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/client/gvfsfusedaemon.c b/client/gvfsfusedaemon.c
+-index c986f69..5e79638 100644
+---- a/client/gvfsfusedaemon.c
+-+++ b/client/gvfsfusedaemon.c
+-@@ -2358,7 +2358,7 @@ vfs_init (struct fuse_conn_info *conn)
+-   volume_monitor = g_object_new (g_type_from_name ("GDaemonVolumeMonitor"), NULL);
+-   
+-   subthread_main_loop = g_main_loop_new (NULL, FALSE);
+--  subthread = g_thread_create ((GThreadFunc) subthread_main, NULL, FALSE, NULL);
+-+  subthread = g_thread_new ("gvfs-fuse-sub", (GThreadFunc) subthread_main, NULL);
+- 
+-   /* Indicate O_TRUNC support for open() */
+-   conn->want |= FUSE_CAP_ATOMIC_O_TRUNC;
+-diff --git a/daemon/trashlib/trashexpunge.c b/daemon/trashlib/trashexpunge.c
+-index a5cf975..677fb81 100644
+---- a/daemon/trashlib/trashexpunge.c
+-+++ b/daemon/trashlib/trashexpunge.c
+-@@ -124,7 +124,7 @@ trash_expunge (GFile *directory)
+-     {
+-       GThread *thread;
+- 
+--      thread = g_thread_create (trash_expunge_thread, NULL, FALSE, NULL);
+-+      thread = g_thread_new ("trash-expunge", trash_expunge_thread, NULL);
+-       g_assert (thread != NULL);
+-       trash_expunge_alive = TRUE;
+-     }
+--- 
+-1.7.6.5
+-
+diff --git a/meta-gnome/recipes-gnome/gvfs/files/0005-client-gdaemonfile.c-replace-g_memmove-by-memmove.patch b/meta-gnome/recipes-gnome/gvfs/files/0005-client-gdaemonfile.c-replace-g_memmove-by-memmove.patch
+deleted file mode 100644
+index c55a99d..0000000
+--- a/meta-gnome/recipes-gnome/gvfs/files/0005-client-gdaemonfile.c-replace-g_memmove-by-memmove.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From de7b06dea740900fa63e2e011c9f862fe4b9405c Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+-Date: Mon, 27 Oct 2014 10:43:40 +0100
+-Subject: [PATCH] client/gdaemonfile.c: replace g_memmove by memmove
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-g_memmove was deprecated in glib 2.40 [1]
+-
+-Upstream-Status: pending [2]
+-
+-[1] https://developer.gnome.org/glib/stable/glib-Memory-Allocation.html#g-memmove
+-[2] https://bugzilla.gnome.org/show_bug.cgi?id=739233
+-
+-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+----
+- client/gdaemonfile.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/client/gdaemonfile.c b/client/gdaemonfile.c
+-index 15c368c..593ce7a 100644
+---- a/client/gdaemonfile.c
+-+++ b/client/gdaemonfile.c
+-@@ -256,7 +256,7 @@ g_daemon_file_get_parent (GFile *file)
+-   len = (guint) 1 + base - path;
+-   
+-   parent_path = g_new (gchar, len + 1);
+--  g_memmove (parent_path, path, len);
+-+  memmove (parent_path, path, len);
+-   parent_path[len] = 0;
+- 
+-   parent = new_file_for_new_path (daemon_file, parent_path);
+--- 
+-1.8.3.1
+-
+diff --git a/meta-gnome/recipes-gnome/gvfs/files/gphoto_build_with_libgphoto_2.5_API.patch b/meta-gnome/recipes-gnome/gvfs/files/gphoto_build_with_libgphoto_2.5_API.patch
+deleted file mode 100644
+index 25d44b0..0000000
+--- a/meta-gnome/recipes-gnome/gvfs/files/gphoto_build_with_libgphoto_2.5_API.patch
++++ /dev/null
+@@ -1,78 +0,0 @@
+-Upstream-Status: Backport
+-https://git.gnome.org/browse/gvfs/commit/daemon/gvfsbackendgphoto2.c?id=259a09183f7c96b5fb0f6453bb4b0bcf92e3eaa2
+-
+-Signed-off-by: Max Krummenacher <max.oss.09 at gmail.com>
+-
+-From 259a09183f7c96b5fb0f6453bb4b0bcf92e3eaa2 Mon Sep 17 00:00:00 2001
+-From: Cosimo Cecchi <cosimoc@gnome.org>
+-Date: Wed, 8 Aug 2012 13:14:19 +0200
+-Subject: gphoto: build with libgphoto 2.5 API
+-
+-Patch taken from the Fedora package
+-Author: Jindrich Novy <jnovy@redhat.com>
+-
+-http://pkgs.fedoraproject.org/cgit/gvfs.git/commit/?id=cd0c6218df85bf3de101402c1aa9d79aae7c3019
+-
+-diff --git a/configure.ac b/configure.ac
+-index 3215694..3280666 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -436,6 +436,9 @@ if test "x$enable_gphoto2" != "xno" -a \( "x$msg_hal" = "xyes" -o "x$msg_gudev"
+-   if test "x$msg_gphoto2" = "xyes"; then
+-     if test "x$use_gphoto2" = "xyes"; then
+-       AC_DEFINE(HAVE_GPHOTO2, 1, [Define to 1 if gphoto2 is available])
+-+      PKG_CHECK_MODULES(GPHOTO2, libgphoto2 >= 2.5.0,
+-+         AC_DEFINE(HAVE_GPHOTO25, 1, [Define to 1 if libgphoto2 2.5 is available])
+-+      )
+-     else
+-       if test "x$enable_gphoto2" = "xyes"; then
+-         AC_MSG_ERROR([Cannot build with gphoto2 support. Need OS tweaks in hal volume monitor.])
+-diff --git a/daemon/gvfsbackendgphoto2.c b/daemon/gvfsbackendgphoto2.c
+-index 0d2c594..75b4b02 100644
+---- a/daemon/gvfsbackendgphoto2.c
+-+++ b/daemon/gvfsbackendgphoto2.c
+-@@ -1647,7 +1647,9 @@ do_mount (GVfsBackend *backend,
+-       return;
+-     }
+- 
+-+#ifndef HAVE_GPHOTO25
+-   DEBUG ("  '%s' '%s' '%s'",  info.name, info.path, info.library_filename);
+-+#endif
+-   
+-   /* set port */
+-   rc = gp_camera_set_port_info (gphoto2_backend->camera, info);
+-@@ -2590,7 +2592,11 @@ do_slow_file_rename_in_same_dir (GVfsBackendGphoto2 *gphoto2_backend,
+-         }
+-     }
+- 
+-+#ifdef HAVE_GPHOTO25
+-+  rc = gp_camera_folder_put_file (gphoto2_backend->camera, dir, new_name, GP_FILE_TYPE_NORMAL, file_dest, gphoto2_backend->context);
+-+#else
+-   rc = gp_camera_folder_put_file (gphoto2_backend->camera, dir, file_dest, gphoto2_backend->context);
+-+#endif
+-   if (rc != 0)
+-     goto out;
+- 
+-@@ -3222,14 +3228,18 @@ commit_write_handle (GVfsBackendGphoto2 *gphoto2_backend, WriteHandle *write_han
+-   if (rc != 0)
+-     goto out;
+- 
+--  gp_file_set_type (file, GP_FILE_TYPE_NORMAL);
+-   gp_file_set_name (file, write_handle->name);
+-   gp_file_set_mtime (file, time (NULL));
+-   gp_file_set_data_and_size (file, 
+-                              dup_for_gphoto2 (write_handle->data, write_handle->size), 
+-                              write_handle->size);
+-   
+-+#ifdef HAVE_GPHOTO25
+-+  rc = gp_camera_folder_put_file (gphoto2_backend->camera, write_handle->dir, write_handle->name, GP_FILE_TYPE_NORMAL, file, gphoto2_backend->context);
+-+#else
+-+  gp_file_set_type (file, GP_FILE_TYPE_NORMAL);
+-   rc = gp_camera_folder_put_file (gphoto2_backend->camera, write_handle->dir, file, gphoto2_backend->context);
+-+#endif
+-   if (rc != 0)
+-     {
+-       gp_file_unref (file);
+--- 
+-cgit v0.10.2
+-
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.10.1.bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.10.1.bb
+deleted file mode 100644
+index 5c0e07c..0000000
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.10.1.bb
++++ /dev/null
+@@ -1,28 +0,0 @@
+-require gvfs.inc
+-
+-BPN = "gvfs"
+-
+-DEPENDS = "gvfs gnome-disk-utility libgnome-keyring intltool-native"
+-PR = "${INC_PR}.0"
+-
+-# we need gdu files only: reduce files to delete in libexecdir
+-EXTRA_OECONF += "--disable-gphoto2 \
+-                 --disable-afc \
+-                 --disable-samba"
+-
+-do_install_append() {
+-    rm -rf ${D}${sysconfdir}
+-    rm -rf ${D}${bindir}
+-    rm -rf ${D}${includedir}
+-    rm -rf ${D}${libdir}/gio
+-    rm -rf ${D}${libdir}/lib*
+-    rmdir --ignore-fail-on-non-empty ${D}${libdir}
+-    rm -rf ${D}${datadir}/gvfs/mounts
+-    rm -rf ${D}${datadir}/glib-2.0
+-    rm -rf ${D}${datadir}/GConf
+-    rm -f ${D}${datadir}/dbus-1/services/gvfs-*
+-    rm -rf ${D}${datadir}/locale
+-    rm -f ${D}${libexecdir}/gvfsd*
+-    rm -f ${D}${libexecdir}/gvfs-fuse-daemon
+-    rm -f ${D}${libexecdir}/gvfs-gphoto2-volume-monitor
+-}
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.24.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.24.2.bb
+new file mode 100644
+index 0000000..8b0214f
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.24.2.bb
+@@ -0,0 +1,22 @@
++require gvfs.inc
++
++BPN = "gvfs"
++
++DEPENDS = "gvfs gnome-disk-utility libgnome-keyring intltool-native"
++
++# we need gdu files only: reduce files to delete in libexecdir
++EXTRA_OECONF += " \
++    --disable-gphoto2 \
++    --disable-afc \
++    --disable-samba \
++"
++
++do_install_append() {
++    rm -rf ${D}${bindir}
++    rm -rf ${D}${datadir}
++    rm -rf ${D}${includedir}
++    rm -rf ${D}/${libdir}/gio
++    rm -f ${D}${libexecdir}/gvfsd*
++    rm -f ${D}${libexecdir}/lib*
++    rm -f ${D}${libexecdir}/gvfs-mtp-volume-monitor
++}
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs.inc b/meta-gnome/recipes-gnome/gvfs/gvfs.inc
+index f9798e9..e1ba633 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs.inc
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs.inc
+@@ -1,27 +1,15 @@
+ DESCRIPTION = "gvfs is a userspace virtual filesystem"
+ LICENSE = "LGPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
++LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
+ 
+ inherit gnome
+ 
+-INC_PR = "r0"
+-
+-GNOME_COMPRESS_TYPE = "xz"
+-
+-SRC_URI[archive.md5sum] = "0c968704be003d2f6eab29388c41664e"
+-SRC_URI[archive.sha256sum] = "cd30facee5ad6cd0fafc5337bbf7c06a0bff3936f9ff2ae31519b301efcc9288"
++SRC_URI[archive.md5sum] = "83ed317eb2a5264715d4273e90a5cfd8"
++SRC_URI[archive.sha256sum] = "0949eaedd1df7175f8d7ee2700df8210d1f854b8ee37d963bc32ee7091eeb228"
+ SRC_URI += " \
+     file://0001-Revert-Respect-UDISKS_AUTOMOUNT_HINT-available-in-re.patch \
+-    file://0002-Adapt-to-GLib-2.31-deprecations-and-thread-API-chang.patch \
+-    file://0003-Adapt-to-glib-mutex-API-changes.patch \
+-    file://0004-Adapt-to-glib-thread-API-changes.patch \
+-    file://0005-client-gdaemonfile.c-replace-g_memmove-by-memmove.patch \
+-    file://gphoto_build_with_libgphoto_2.5_API.patch \
+ "
+ 
+ EXTRA_OECONF = "--with-archive-includes=${STAGING_INCDIR} \
+                 --with-archive-libs=${STAGING_LIBDIR} \
+ "
+-
+-FILES_${PN} += "${datadir}/dbus-1/services/*"
+-
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.24.2.bb
+similarity index 64%
+rename from meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb
+rename to meta-gnome/recipes-gnome/gvfs/gvfs_1.24.2.bb
+index fb5185f..6031aef 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.24.2.bb
+@@ -1,9 +1,6 @@
+ require gvfs.inc
+ 
+-DEPENDS = "libsoup-2.4 libgnome-keyring glib-2.0 avahi gconf intltool-native libgudev"
+-# optional: obexftp libimobiledevice
+-
+-PR = "${INC_PR}.0"
++DEPENDS = "libsoup-2.4 libsecret glib-2.0 avahi gconf intltool-native libgudev"
+ 
+ # in case of gnome-disk-utility was alresdy built: avoid double files
+ # afc is enabled when it detects libimobiledevice
+@@ -11,7 +8,12 @@ EXTRA_OECONF += "--disable-gdu --disable-afc"
+ 
+ PACKAGES =+ "gvfsd-ftp gvfsd-sftp gvfsd-trash"
+ 
+-FILES_${PN} += "${datadir}/glib-2.0 ${datadir}/GConf ${libdir}/gio/modules/*.so"
++FILES_${PN} += " \
++    ${datadir}/glib-2.0 \
++    ${datadir}/GConf \
++    ${datadir}/dbus-1/services \
++    ${libdir}/gio/modules/*.so \
++"
+ FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/*"
+ FILES_${PN}-dev += "${libdir}/gio/modules/*.la"
+ 
+@@ -22,14 +24,18 @@ FILES_gvfsd-trash = "${libexecdir}/gvfsd-trash ${datadir}/gvfs/mounts/trash.moun
+ RDEPENDS_${PN} = "gvfs-gdu-volume-monitor"
+ RRECOMMENDS_gvfsd-ftp += "openssh-sftp openssh-ssh"
+ 
++PACKAGES += "${PN}-bash-completion"
++FILES_${PN}-bash-completion = "${datadir}/bash-completion"
++RDEPENDS_${PN}-bash-completion = "bash-completion"
++
+ PACKAGECONFIG ?= "libgphoto2"
+ 
++PACKAGECONFIG[libmtp] = "--enable-libmtp, --disable-libmtp, libmtp"
++PACKAGECONFIG[libimobiledevice] = "--enable-afc, --disable-afc, libimobiledevice"
+ PACKAGECONFIG[libgphoto2] = "--enable-gphoto2, --disable-gphoto2, libgphoto2"
+-PACKAGECONFIG[samba] = "--enable-samba --with-samba-includes=${STAGING_INCDIR} \
+-                        --with-samba-libs=${STAGING_LIBDIR}, --disable-samba, samba"
++PACKAGECONFIG[samba] = "--enable-samba, --disable-samba, samba"
+ # needs meta-filesystems
+ PACKAGECONFIG[fuse] = "--enable-fuse, --disable-fuse, fuse"
+ PACKAGECONFIG[archive] = "--enable-archive, --disable-archive, libarchive"
+-PACKAGECONFIG[obexftp] = "--enable-obexftp, --disable-obexftp, bluez4 expat"
+ # libcdio-paranoia recipe doesn't exist yet
+ PACKAGECONFIG[cdda] = "--enable-cdda, --disable-cdda, libcdio-paranoia"
 -- 
 2.5.0
 
