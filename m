@@ -1,56 +1,33 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 0355465CBB
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 389396067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jan 2016 20:53:07 +0000 (UTC)
-Received: by mail-ig0-f170.google.com with SMTP id z14so19177171igp.1
+	Thu,  7 Jan 2016 01:31:16 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
+   d="scan'208";a="2302534"
+Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 07 Jan 2016 09:31:15 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 6877E4092563
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jan 2016 12:53:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=bfkLlODPRd63I9RuEQWdrbE38gzB4vw2mUrK5bhadEE=;
-	b=t/Xaco7ALiMUSdr7JUiaqx7pv4jLFby+p/U/ESGWohTOx9UPuUgiJkslRch5OP2TdX
-	wBgOmta9IAaQ9t3CObr3U61C94/ufQgCX7hYOwEfDfI5noP6is8p60dGG1qCDPCI6Gmy
-	6XmVGVlOvvRA4sfvvHhKBpVAyz9E1dSRnebR+iXu+HsfcnsjbyvaiCY19W9U5RBj+0pm
-	73YuF9lnb0CKo4qsBEYuP4lOPAidRLvjjJJ2Sl3HhCXksmp9gBZSJxJhUHTJG4kAFt2Q
-	8m1wJ8MEvMobZVTVj/Pfe68F3HDr5A4ZjnRQVU86V0F4+5MPERo307dZD9iu6i9RDExt
-	opHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=bfkLlODPRd63I9RuEQWdrbE38gzB4vw2mUrK5bhadEE=;
-	b=Q8iAJfksVJolqFk3o15/o4mzmPf3DzQ68Ds8VJ8RKUaD3bGwIXjJhxzoknTqjfaHnI
-	B579CDXy+laPs6RKG2vS/Tp3PNDwK4ignAPfOcsQo5BVFUDE9xD6YGFBETyPugBdRYiJ
-	3cpGNXLbIPaTEVY+Ed7fp4i0wGfgFDHVhtmSvRjaLRNyCPNFokg4w7Th6akK10y0T0QB
-	fZV1AlpPXhKSSCCoSOlBrEIrcdyTaOhFCKjatG3piUQHJjEsSQdPYiZ1n8NpJpizaArz
-	/8DgBEdRR3CFer9bE6nsB8hy2Qvj1t/ZGECxpV38KgK5OqnbbL8WqCkEOTEmycKyhoRJ
-	M9VA==
-X-Gm-Message-State: ALoCoQkgMs5GHiLJd1IoKa2Asx5zso2DGRUALZT1Ht52hG+DdSw2YqMtCSDe8pFClvyfIUXODIsAGhvWmSuNcPtgWh838funsqxFBfUSJssnkMtsyjhLRCw=
-X-Received: by 10.50.13.100 with SMTP id g4mr10456778igc.64.1452113588320;
-	Wed, 06 Jan 2016 12:53:08 -0800 (PST)
+	Thu,  7 Jan 2016 09:31:05 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.51) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 7 Jan 2016 09:31:05 +0800
+From: Li Xin <lixin.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 6 Jan 2016 17:31:03 -0800
+Message-ID: <1452130263-20943-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <20160106115955.GA11478@jama>
+References: <20160106115955.GA11478@jama>
 MIME-Version: 1.0
-Received: by 10.107.162.70 with HTTP; Wed, 6 Jan 2016 12:52:48 -0800 (PST)
-In-Reply-To: <CAMKF1sqcepBb723aJ7AAW50WyCmQT29QrJdO7QjQ3C_Lo-MxMg@mail.gmail.com>
-References: <CAMKF1sqAGXMFx9re3YgB1u9aLPGRT9KRCR-0Drux=4P5igirWw@mail.gmail.com>
-	<CAJTo0LbB02LR=6Yyy0-3=Hg1tjcdX=DmMKN2MEJqctnvi5n0Kg@mail.gmail.com>
-	<A374083C-8331-42F2-A3F5-9D5EB49538F7@gmail.com>
-	<2007809.DSH5DR9lFx@peggleto-mobl.ger.corp.intel.com>
-	<8AE765C7-71E0-46D1-A086-A86AEEFE3F6B@gmail.com>
-	<CAJTo0LazG6N2L898BLyr0jCZ-Xv5UK=GBs0DoXP+AK4_geQouQ@mail.gmail.com>
-	<CAMKF1sqcepBb723aJ7AAW50WyCmQT29QrJdO7QjQ3C_Lo-MxMg@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 6 Jan 2016 20:52:48 +0000
-Message-ID: <CAJTo0LY+K=TuzR1KmZQ81WZJNQBW-djLTLpuJR+tkpfLKcV8yg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] glibc 2.23
+X-Originating-IP: [10.167.226.51]
+X-yoursite-MailScanner-ID: 6877E4092563.AC9E4
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: lixin.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH v2] xterm: 308 -> 320
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,15 +40,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2016 20:53:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 07 Jan 2016 01:31:17 -0000
+Content-Type: text/plain
 
-On 6 January 2016 at 15:40, Khem Raj <raj.khem@gmail.com> wrote:
+Upgrade xterm from 308 to 320.
 
-> fsl ppc build fails are due to glibc or some other reason
->
+1) Modify LIC_FILES_CHKSUM,since the date in it has been changed, But the LICENSE has not been changed.
+2) Fix WARNING: QA Issue: xterm rdepends on libxinerama, but it isn't a build dependency? [build-deps]
+ 
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-graphics/xorg-app/{xterm_308.bb => xterm_320.bb} | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{xterm_308.bb => xterm_320.bb} (75%)
 
-They're entirely down the their layer (broken fetch, broken recipes).
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_308.bb b/meta-oe/recipes-graphics/xorg-app/xterm_320.bb
+similarity index 75%
+rename from meta-oe/recipes-graphics/xorg-app/xterm_308.bb
+rename to meta-oe/recipes-graphics/xorg-app/xterm_320.bb
+index 9198ca2..ae9aa76 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_308.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_320.bb
+@@ -2,12 +2,12 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
+ SUMMARY = "xterm is the standard terminal emulator for the X Window System"
+ DEPENDS = "libxaw xproto xextproto libxext libxau libxpm ncurses"
+ 
+-LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=540cf18ccc16bc3c5fea40d2ab5d8d51"
++LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=ee6435019d00b884cde8d7ba2b318ff0"
+ 
+ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
+ 
+-SRC_URI[md5sum] = "1ec76c1a79a70de4f82c24c527ef4626"
+-SRC_URI[sha256sum] = "c5bf7377a5bf35e34b7e3a4ab6c848fbc89e8901dd98f8b237662a72bdbfe372"
++SRC_URI[md5sum] = "0d7f0e6390d132ae59876b3870e5783d"
++SRC_URI[sha256sum] = "a60dbb574334c081425fa30f011cd9f571e3be7a91e2a84e252461798bce24a7"
+ 
+ EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
+                  --x-libraries=${STAGING_LIBDIR} \
+@@ -25,6 +25,6 @@ do_configure() {
+ }
+ 
+ FILES_${PN} += " /usr/lib/X11"
+-
++RDEPENDS_${PN} += "libxinerama"
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig"
+-- 
+1.9.1
 
-Ross
+
+
 
