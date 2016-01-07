@@ -1,32 +1,32 @@
 Return-Path: <daicy.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 62599731E6
+	by mail.openembedded.org (Postfix) with ESMTP id AEF94731D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2016 05:02:34 +0000 (UTC)
+	Thu,  7 Jan 2016 05:24:50 +0000 (UTC)
 X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
-   d="scan'208";a="2310470"
+   d="scan'208";a="2311288"
 Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 07 Jan 2016 13:02:34 +0800
+	by heian.cn.fujitsu.com with ESMTP; 07 Jan 2016 13:24:51 +0800
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id C44ED41887F7
+	by cn.fujitsu.com (Postfix) with ESMTP id 5765645DEE0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2016 13:02:21 +0800 (CST)
+	Thu,  7 Jan 2016 13:24:29 +0800 (CST)
 Received: from localhost.localdomain (10.167.226.51) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Thu, 7 Jan 2016 13:02:21 +0800
+	Server (TLS) id 14.3.181.6; Thu, 7 Jan 2016 13:24:29 +0800
 From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Jan 2016 21:02:04 -0800
-Message-ID: <1452142924-881-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+Date: Wed, 6 Jan 2016 21:23:56 -0800
+Message-ID: <1452144236-7978-1-git-send-email-daicy.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.51]
-X-yoursite-MailScanner-ID: C44ED41887F7.ACCB6
+X-yoursite-MailScanner-ID: 5765645DEE0E.AD328
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
 X-Spam-Status: No
 Cc: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
-Subject: [meta-networking][PATCH] opensaf: 4.6.0 -> 4.7.0
+Subject: [meta-networking][PATCH] stunnel: 5.21 -> 5.28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,42 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2016 05:02:39 -0000
+X-List-Received-Date: Thu, 07 Jan 2016 05:24:51 -0000
 Content-Type: text/plain
 
-1) Upgrade opensaf from 4.6.0 to 4.7.0.
-2) Delete two patches,since they are not needed any more.
-   Revert_imma_client_node_replyPending_to_unsigned_char.patch
-   Fix_GCC_5.1.0_compiler_warning.patch
+Upgrade stunnel from 5.21 to 5.28.
 
 Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
 ---
- .../recipes-daemons/opensaf/{opensaf_4.6.0.bb => opensaf_4.7.0.bb}  | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
- rename meta-networking/recipes-daemons/opensaf/{opensaf_4.6.0.bb => opensaf_4.7.0.bb} (89%)
+ .../recipes-support/stunnel/{stunnel_5.21.bb => stunnel_5.28.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/stunnel/{stunnel_5.21.bb => stunnel_5.28.bb} (82%)
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_4.7.0.bb
-similarity index 89%
-rename from meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb
-rename to meta-networking/recipes-daemons/opensaf/opensaf_4.7.0.bb
-index 9084524..42e883a 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.7.0.bb
-@@ -16,12 +16,10 @@ inherit autotools useradd systemd pkgconfig
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
-            file://install-samples-from-srcdir.patch \
-            file://0001-plmcd-error-fix.patch \
--           file://Revert_imma_client_node_replyPending_to_unsigned_char.patch \
--           file://Fix_GCC_5.1.0_compiler_warning.patch \
-            "
+diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.21.bb b/meta-networking/recipes-support/stunnel/stunnel_5.28.bb
+similarity index 82%
+rename from meta-networking/recipes-support/stunnel/stunnel_5.21.bb
+rename to meta-networking/recipes-support/stunnel/stunnel_5.28.bb
+index 88e357a..0a8bcd8 100644
+--- a/meta-networking/recipes-support/stunnel/stunnel_5.21.bb
++++ b/meta-networking/recipes-support/stunnel/stunnel_5.28.bb
+@@ -9,8 +9,8 @@ RDEPENDS_${PN} += "perl"
  
--SRC_URI[md5sum] = "a1ceddb517c0972aa7e899b092d7f464"
--SRC_URI[sha256sum] = "f6ea754a145ae42552f328f96c32f38429ad06478a351b9d0aed812adcecb2b4"
-+SRC_URI[md5sum] = "82dd2777a672140e22b8205f10aa55d3"
-+SRC_URI[sha256sum] = "da9e138650b835728ad51d99268d3a31419b254c4cb4e87c6ec90bc45266d7d2"
+ SRC_URI = "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz"
  
- SECTION = "admin"
- LICENSE = "LGPLv2.1"
+-SRC_URI[md5sum] = "3d0a932ea650c0fa0da1e45547afdbb8"
+-SRC_URI[sha256sum] = "2aef568b1955f5e233f6a8e17ebce3d30755f1be44c813f5a48e621f785596e3"
++SRC_URI[md5sum] = "2c39ae0be771f91bf5b0205beafddca6"
++SRC_URI[sha256sum] = "9a25b87b1ef0c08fa3d796edce07b4408e6a8acece23de2eb7ee9285b78852b5"
+ 
+ inherit autotools
+ 
 -- 
 1.9.1
 
