@@ -1,36 +1,32 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C369D731D9
+Return-Path: <daicy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id CEC9F731C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2016 03:00:56 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u0730uUC016032
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  7 Jan 2016 05:01:23 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
+   d="scan'208";a="2310431"
+Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 07 Jan 2016 13:01:17 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id D3937409255D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Jan 2016 19:00:56 -0800 (PST)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.162]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0248.002;
-	Wed, 6 Jan 2016 19:00:56 -0800
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-java][PATCH 0/2] openjdk-8-native: fix	do_install
-	and PROVIDES
-Thread-Index: AQHRSIoy0rb/h1ZbgUa2XuaQ/NkMcp7vSrtw
-Date: Thu, 7 Jan 2016 03:00:54 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010C7876F5@ALA-MBA.corp.ad.wrs.com>
-References: <cover.1450864063.git.jackie.huang@windriver.com>
-	<0E1F3B26-55DA-44FC-BEC4-8AE2277A9D07@gmail.com>
-	<1B858668EC6A94408DCA5225FDFA85AA010C786816@ALA-MBA.corp.ad.wrs.com>
-	<9C9059BF-A1B5-4E59-97F3-BF2C2CC028F2@gmail.com>
-In-Reply-To: <9C9059BF-A1B5-4E59-97F3-BF2C2CC028F2@gmail.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.194]
+	Thu,  7 Jan 2016 13:01:03 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.51) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 7 Jan 2016 13:01:03 +0800
+From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 6 Jan 2016 21:00:33 -0800
+Message-ID: <1452142833-800-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: Re: [meta-java][PATCH 0/2] openjdk-8-native: fix	do_install	and PROVIDES
+X-Originating-IP: [10.167.226.51]
+X-yoursite-MailScanner-ID: D3937409255D.AC8BB
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Cc: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+Subject: [meta-networking][PATCH] rp-pppoe: 3.11 -> 3.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,193 +39,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2016 03:00:59 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Jan 2016 05:01:25 -0000
+Content-Type: text/plain
+
+Upgrade rp-pppoe from 3.11 to 3.12.
+
+Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+---
+ .../{rp-pppoe-3.11 => rp-pppoe-3.12}/configure.in-Error-fix.patch     | 0
+ .../rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/configure.patch         | 0
+ .../{rp-pppoe-3.11 => rp-pppoe-3.12}/configure_in_cross.patch         | 0
+ .../discard-use-of-dnl-in-Makefile.am.patch                           | 0
+ .../{rp-pppoe-3.11 => rp-pppoe-3.12}/dont-swallow-errors.patch        | 0
+ .../rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/pppoe-server.default    | 0
+ .../rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/pppoe-server.init       | 0
+ .../rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/pppoe-server.service    | 0
+ .../{rp-pppoe-3.11 => rp-pppoe-3.12}/pppoe-src-restrictions.patch     | 0
+ .../rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/top-autoconf.patch      | 0
+ .../rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/update-config.patch     | 0
+ .../recipes-protocols/rp-pppoe/{rp-pppoe_3.11.bb => rp-pppoe_3.12.bb} | 4 ++--
+ 12 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/configure.in-Error-fix.patch (100%)
+ rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/configure.patch (100%)
+ rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/configure_in_cross.patch (100%)
+ rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/discard-use-of-dnl-in-Makefile.am.patch (100%)
+ rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/dont-swallow-errors.patch (100%)
+ rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/pppoe-server.default (100%)
+ rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/pppoe-server.init (100%)
+ rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/pppoe-server.service (100%)
+ rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/pppoe-src-restrictions.patch (100%)
+ rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/top-autoconf.patch (100%)
+ rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.11 => rp-pppoe-3.12}/update-config.patch (100%)
+ rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe_3.11.bb => rp-pppoe_3.12.bb} (95%)
+
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/configure.in-Error-fix.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure.in-Error-fix.patch
+similarity index 100%
+rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/configure.in-Error-fix.patch
+rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure.in-Error-fix.patch
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/configure.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure.patch
+similarity index 100%
+rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/configure.patch
+rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure.patch
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/configure_in_cross.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure_in_cross.patch
+similarity index 100%
+rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/configure_in_cross.patch
+rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure_in_cross.patch
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/discard-use-of-dnl-in-Makefile.am.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/discard-use-of-dnl-in-Makefile.am.patch
+similarity index 100%
+rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/discard-use-of-dnl-in-Makefile.am.patch
+rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/discard-use-of-dnl-in-Makefile.am.patch
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/dont-swallow-errors.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/dont-swallow-errors.patch
+similarity index 100%
+rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/dont-swallow-errors.patch
+rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/dont-swallow-errors.patch
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/pppoe-server.default b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.default
+similarity index 100%
+rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/pppoe-server.default
+rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.default
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/pppoe-server.init b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.init
+similarity index 100%
+rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/pppoe-server.init
+rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.init
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/pppoe-server.service b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.service
+similarity index 100%
+rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/pppoe-server.service
+rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.service
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/pppoe-src-restrictions.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-src-restrictions.patch
+similarity index 100%
+rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/pppoe-src-restrictions.patch
+rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-src-restrictions.patch
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/top-autoconf.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/top-autoconf.patch
+similarity index 100%
+rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/top-autoconf.patch
+rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/top-autoconf.patch
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/update-config.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/update-config.patch
+similarity index 100%
+rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.11/update-config.patch
+rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/update-config.patch
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.11.bb b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb
+similarity index 95%
+rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.11.bb
+rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb
+index 4415c4b..d5f4a20 100644
+--- a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.11.bb
++++ b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb
+@@ -19,8 +19,8 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
+            file://configure.in-Error-fix.patch \
+            file://pppoe-server.service"
+ 
+-SRC_URI[md5sum] = "13b5900c56bd602df6cc526e5e520722"
+-SRC_URI[sha256sum] = "86a1a4d92fcea74fa6dd45516c5975933fa978b36fafe71f76ea70b4b4747720"
++SRC_URI[md5sum] = "216eb52b69062b92a64ee37fd71f4b66"
++SRC_URI[sha256sum] = "00794e04031546b0e9b8cf286f2a6d1ccfc4a621b2a3abb2d7ef2a7ab7cc86c2"
+ 
+ inherit autotools-brokensep update-rc.d systemd
+ 
+-- 
+1.9.1
 
 
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Jens Rehsack
-> Sent: Wednesday, January 06, 2016 9:57 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-java][PATCH 0/2] openjdk-8-native: fix do_install=
- and PROVIDES
->=20
->=20
-> > Am 06.01.2016 um 08:03 schrieb Huang, Jie (Jackie) <Jackie.Huang@windri=
-ver.com>:
-> >
-> >
-> >
-> >> -----Original Message-----
-> >> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openem=
-bedded-devel-
-> >> bounces@lists.openembedded.org] On Behalf Of Jens Rehsack
-> >> Sent: Tuesday, January 05, 2016 3:21 AM
-> >> To: openembedded-devel@lists.openembedded.org
-> >> Subject: Re: [oe] [meta-java][PATCH 0/2] openjdk-8-native: fix do_inst=
-all and PROVIDES
-> >>
-> >> It's insane re-introducing a virtual/javac-native without understandin=
-g
-> >> the issues coming with that.
-> >
-> > Please carefully review the patches before saying insane, I don't think=
- it was
-> > correct to remove virtual/javac-native since there are several provider=
-s.
->=20
-> What does virtual/javac-native mean? Correctly, there can be several prov=
-iders.
->=20
-> How many of them can you have in one sysroot/build? One.
->=20
-> So - when in an openjdk-7 or openjdk-8 bootstrap 4 recipes PROVIDE virtua=
-l/javac-native,
-> what happens?
-
-So seem like you don't really understand how it should be used.
-
-Yes, only one we can have when there are multiple providers, that's why we =
-should
-use PREFERRED_PROVIDER to determines which one it is, and use the virtual/f=
-oo
-instead of specific provider's name in DEPENDS/RDEPENDS of the recipe that =
-requires it,=20
-so we can ensure only one will be built and avoid conflicts.
-
-FYI:
-http://www.yoctoproject.org/docs/2.0/bitbake-user-manual/bitbake-user-manua=
-l.html#bb-bitbake-preferences
-http://www.yoctoproject.org/docs/2.0/ref-manual/ref-manual.html#var-PREFERR=
-ED_PROVIDER
-
->=20
-> It is insane to have multiple providers for the same virtual/foo when at =
-least a bunch
-
-Virtual/foo and PREFERRED_PROVIDER is one of the mechanisms to handle multi=
-ple providers,
-(another one is update-alternatives which is not supported by -native recip=
-e), and work fine
-in many projects, why is it insane here?
-
-I tested my patches to build openjdk7, openjdk8 and most recipes in meta-ja=
-va with and without sstate
-on qemux86-64, qemuarm, qemuppc and some of our BSPs and they all built fin=
-e (previous method
- fails to build openjdk7 sometime and always fail when build with sstate)
-
-Thanks,
-Jackie
-
-> of them are required to finish a particular build.
->=20
-> > Thanks,
-> > Jackie
->=20
-> You're welcome,
-> Jens
->=20
-> >>
-> >>> Am 23.12.2015 um 11:03 schrieb jackie.huang@windriver.com:
-> >>>
-> >>> From: Jackie Huang <jackie.huang@windriver.com>
-> >>>
-> >>> I asked about this issue two days ago but no response, please careful=
-ly
-> >>> review and correct me if anyone have better understanding.
-> >>
-> >> Please excuse when people enjoy their holidays around Christmas.
-> >>
-> >>> My tests includes building openjdk7 and openjdk8 on qemux86-64
-> >>> with/without sstate cache.
-> >>>
-> >>> --
-> >>> The following changes since commit 35739fca028996c594b1efa2225a77c8d6=
-038193:
-> >>>
-> >>> openjdk-8: Use zero mode on arm (2015-12-17 10:39:21 -0200)
-> >>>
-> >>> are available in the git repository at:
-> >>>
-> >>> git://git.pokylinux.org/poky-contrib.git jhuang0/d_jdk8-fix_151223_0
-> >>> http://git.pokylinux.org/cgit.cgi//log/?h=3Djhuang0/d_jdk8-fix_151223=
-_0
-> >>>
-> >>> Jackie Huang (2):
-> >>> Revert "meta-java: rely on well known bootstrap-path"
-> >>> openjdk-8-native: fix improper do_install and PROVIDES
-> >>>
-> >>> README                                             | 12 ++++++++--
-> >>> classes/java-bootstrap-components.bbclass          |  7 ------
-> >>> classes/java-library.bbclass                       |  3 +--
-> >>> recipes-core/ant/ant-native_1.8.1.bb               |  2 +-
-> >>> recipes-core/antlr/antlr_2.7.7.bb                  |  2 +-
-> >>> recipes-core/cacao/cacao_1.6.1.bb                  |  6 ++---
-> >>> recipes-core/classpath/classpath.inc               |  4 ++--
-> >>> recipes-core/classpathx/gnujaf_1.1.1.bb            |  2 +-
-> >>> recipes-core/classpathx/gnumail_1.1.2.bb           |  2 +-
-> >>> recipes-core/classpathx/inetlib_1.1.1.bb           |  2 +-
-> >>> recipes-core/cup/cup_0.10k.bb                      |  2 +-
-> >>> recipes-core/ecj/ecj-bootstrap-native.bb           |  4 +++-
-> >>> recipes-core/ecj/libecj-bootstrap.inc              |  2 +-
-> >>> recipes-core/icedtea/icedtea7-native.inc           |  2 +-
-> >>> recipes-core/jacl/jacl_1.4.1.bb                    |  2 +-
-> >>> .../jakarta-commons/commons-logging_1.1.1.bb       |  2 --
-> >>> recipes-core/jakarta-commons/commons-net_1.4.1.bb  |  2 --
-> >>> .../jakarta-libs/avalon-framework-api_4.3.bb       |  2 +-
-> >>> recipes-core/jakarta-libs/bsf_2.4.0.bb             |  2 +-
-> >>> recipes-core/jakarta-libs/log4j1.2_1.2.17.bb       |  2 +-
-> >>> recipes-core/jakarta-libs/logkit_1.2.2.bb          |  2 +-
-> >>> recipes-core/jakarta-libs/oro_2.0.8.bb             |  2 +-
-> >>> recipes-core/jakarta-libs/poi_3.0.bb               |  2 +-
-> >>> recipes-core/jakarta-libs/regexp_1.5.bb            |  2 +-
-> >>> recipes-core/jamvm/jamvm.inc                       |  4 ++--
-> >>> recipes-core/jcraft/jsch_0.1.40.bb                 |  2 +-
-> >>> recipes-core/jcraft/jzlib_1.0.7.bb                 |  2 +-
-> >>> recipes-core/jdepend/jdepend_2.9.1.bb              |  2 +-
-> >>> recipes-core/jlex/jlex_1.2.6.bb                    |  2 +-
-> >>> recipes-core/junit/junit4_4.3.1.bb                 |  4 +++-
-> >>> recipes-core/junit/junit_3.8.2.bb                  |  2 +-
-> >>> recipes-core/openjdk/openjdk-8-native.inc          | 13 +++++------
-> >>> recipes-core/openjdk/openjdk-8-native_72b05.bb     | 26 -------------=
----------
-> >>> recipes-core/rhino/rhino_1.7r4.bb                  |  2 +-
-> >>> recipes-core/servlet-api/servlet2.3_4.1.37.bb      |  4 +++-
-> >>> recipes-core/servlet-api/servlet2.4_5.5.26.bb      |  2 ++
-> >>> recipes-core/xalan-j/xalan-j_2.7.1.bb              |  2 +-
-> >>> recipes-core/xerces-j/xerces-j_2.11.0.bb           |  6 ++---
-> >>> recipes-core/xml-commons/jaxp1.3_1.4.01.bb         |  4 +++-
-> >>> .../xml-commons/xml-commons-resolver1.1_1.2.bb     |  6 ++---
-> >>> recipes-core/xml-commons/xpp2_2.1.10.bb            |  2 ++
-> >>> recipes-core/xml-commons/xpp3_1.1.3.4.O.bb         |  2 ++
-> >>> 42 files changed, 69 insertions(+), 90 deletions(-)
-> >>> delete mode 100644 classes/java-bootstrap-components.bbclass
-> >>>
-> >>> --
-> >>> 1.9.1
-> >>>
-> >>> --
-> >>> _______________________________________________
-> >>> Openembedded-devel mailing list
-> >>> Openembedded-devel@lists.openembedded.org
-> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
-> >> --
-> >> Jens Rehsack - rehsack@gmail.com
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --
-> Jens Rehsack - rehsack@gmail.com
 
 
