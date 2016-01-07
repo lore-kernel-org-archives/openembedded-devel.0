@@ -1,47 +1,34 @@
-Return-Path: <moritz.fischer@ettus.com>
-Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
-	[209.85.220.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 27E65731D0
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DC42731A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2016 20:17:48 +0000 (UTC)
-Received: by mail-pa0-f53.google.com with SMTP id uo6so248508162pac.1
+	Thu,  7 Jan 2016 21:03:27 +0000 (UTC)
+Received: by mail-wm0-f49.google.com with SMTP id f206so112778404wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jan 2016 12:17:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ettus-com.20150623.gappssmtp.com; s=20150623;
+	Thu, 07 Jan 2016 13:03:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=KoO0eZ38hGYLuE1uchRWMy6etpsgEahmfUi06Ga684U=;
-	b=z8XDbwrawxUdNMsQ25v4Ss0j4HlXHfUZRkh8QZhIEQSHHtfnUKIIrtkIpA6IO/v9yz
-	/jjJQsrOnhDb2LOFhfNY2uqwoTGUWsXpKFlkiTYmcw353wYCfcStF0euwL21vE752ag8
-	WC7s1k1MkNCtP4VKELjBPV+u7ROyuT1qnb+uVZ2D+TOn111EN2gJj/VbZ1lKyiMRHd0x
-	QcnypJEg3bJhEVs61iWzuXXaq7nP2+F8scck+XbXHQOdGXxEdax09frhIt4hQFKyIyxy
-	0jTE/n5GdABN4nJepJiJ4QMwcQuPDpdllK7dee8sK8ck1ia+zSLQzilTwEiQ/T44UuiV
-	ttBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=KoO0eZ38hGYLuE1uchRWMy6etpsgEahmfUi06Ga684U=;
-	b=hlBnUwkh2LXic7EzaatEB81+eueBZxf8rIZwh7/dhq8tkn6aaXNnMYkp94KGBRfGRi
-	jVwy1zjioJyayRfcnPucTU6kjjcqisoZZXnx1arC2ssTlvH0apkcevBNLOKolVHwNJih
-	mZGyqKbd7BhwWW7Ll7ldp+ieIAMc52y70Ek75lnUKR7IGMpMWEETBX8eosrgsIXzwViG
-	ryuQGnsTvtYocxsrsmHgspu6qvShXzsVEAmQ5oFBX8TpqFUbT11yRTih5jsZpAwPMLLF
-	3cFdJFwUSUpxvTC3SU5kbryNyGY0sAYREmA4SMzIdnW5+GnqVrQCGBcNC92vYC8AKItN
-	kniw==
-X-Gm-Message-State: ALoCoQkc6jdAUboXM6KpMBGMFAjKfUsKYSfIW53k6+FkJjqwg8pdwsRH3Sp+gz7pKYqnLZSDJyHPNEibAR6dPHjz+dD9xUQGKQ==
-X-Received: by 10.66.236.129 with SMTP id uu1mr49452592pac.158.1452197868748; 
-	Thu, 07 Jan 2016 12:17:48 -0800 (PST)
-Received: from fenrir.amer.corp.natinst.com
-	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
+	bh=93k5+vF2bpcWenlX0FmaeKD6o1cr4p36gyyYQxH9f+k=;
+	b=GPWFj43iB7ZXqhqE2tFsxVSBbHIMAkQ5PBHBt2s/tH9jdJF3WMTfc2D5VdPR3IFLuJ
+	JswkKMqf6+RrQp85TsH6vZTx8XW+Y9vuLz4ZGe37BlGWAsRZPk2GxgB9xAy7EaHpDHRi
+	OcbHHK2kuTJ1YMIyZBaMMnWSlSq4WCnkko5iM2OHh4bl/lw5HjPWHqTqEUCN6ofvf9op
+	2uzqMRu2JEtVkRCxci8qSvNQPIukMD7s9kAgbeX3gm4X8sEn3vbgYutEBaA3zkfimYUS
+	O4id2Bjk+MwC3FwJHUhQoA+rGOQnW8TbL4me+HfNuRKJMYNNV1hD8HP+Ab0oDRDyfKVD
+	5JAw==
+X-Received: by 10.194.205.5 with SMTP id lc5mr79596331wjc.163.1452200608146;
+	Thu, 07 Jan 2016 13:03:28 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	xz6sm161528475pab.42.2016.01.07.12.17.46
+	dl8sm102916031wjb.29.2016.01.07.13.03.26
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Jan 2016 12:17:47 -0800 (PST)
-From: Moritz Fischer <moritz.fischer@ettus.com>
+	Thu, 07 Jan 2016 13:03:26 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Jan 2016 12:17:34 -0800
-Message-Id: <1452197854-12728-1-git-send-email-moritz.fischer@ettus.com>
-X-Mailer: git-send-email 2.4.3
-Subject: [meta-oe][PATCHv2] gpsd: Add patch to fix broken ACTIVATE hook.
+Date: Thu,  7 Jan 2016 22:03:50 +0100
+Message-Id: <1452200630-3393-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.0
+Subject: [PATCH][WIP][meta-gnome] gnome-desktop: don't try to copy omf.make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,73 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2016 20:17:49 -0000
+X-List-Received-Date: Thu, 07 Jan 2016 21:03:28 -0000
 
-This patch is already in mainline gpsd. It fixes a
-bug where the ACTIVATE hook for a device never gets
-called.
+* omf.make was removed from gnome-common in:
+  https://git.gnome.org/browse/gnome-common/commit/?id=a912a74ba7999fe3ed49b07bab86685a5d117f82
+  which is included in gnome-common-3.18, so this was broken since:
+  commit f459f890cb7c0e11d92b80f0d5a65117428cc87f
+  Author: Jussi Kukkonen <jussi.kukkonen@intel.com>
+  Date:   Thu Nov 26 13:46:48 2015 +0200
 
-Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
+    gnome-common: Upgrade 3.14.0 -> 3.18.0
+
+  but hopefully we don't need omf.make with --disable-desktop-docs in EXTRA_OECONF
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...e-Fix-issue-with-ACTIVATE-hook-not-being-.patch | 35 ++++++++++++++++++++++
- meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb       |  1 +
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch
+ meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch
-new file mode 100644
-index 0000000..7a06795
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch
-@@ -0,0 +1,35 @@
-+From 6ff099b1ba8de74df9ddeb61e3825264b96ef692 Mon Sep 17 00:00:00 2001
-+From: Moritz Fischer <moritz.fischer@ettus.com>
-+Date: Tue, 22 Dec 2015 19:38:31 -0800
-+Subject: [PATCH] libgpsd-core: Fix issue with ACTIVATE hook not being called.
-+
-+In the current system session->mode seemed to ignore the
-+O_OPTIMIZE flag, leading to the ACTIVATE hook being ignored.
-+
-+Another way to fix this would be to keep the session->mode
-+condition pull up the check for O_CONTINUE.
-+
-+Upstream-Status: Backported
-+This patch is in upstream git
-+
-+Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
-+---
-+ libgpsd_core.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/libgpsd_core.c b/libgpsd_core.c
-+index 31fec2a..a84e85f 100644
-+--- a/libgpsd_core.c
-++++ b/libgpsd_core.c
-+@@ -543,7 +543,7 @@ int gpsd_open(struct gps_device_t *session)
-+ int gpsd_activate(struct gps_device_t *session, const int mode)
-+ /* acquire a connection to the GPS device */
-+ {
-+-    if (session->mode == O_OPTIMIZE)
-++    if (mode == O_OPTIMIZE)
-+ 	gpsd_run_device_hook(&session->context->errout,
-+ 			     session->gpsdata.dev.path, "ACTIVATE");
-+     session->gpsdata.gps_fd = gpsd_open(session);
-+-- 
-+2.4.3
-+
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-index 6ae2f30..646360c 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-@@ -16,6 +16,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-     file://0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.patch \
-     file://0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch \
-     file://0001-Include-stdatomic.h-only-in-C-mode.patch \
-+    file://0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch \
-     file://gpsd-default \
-     file://gpsd \
-     file://60-gpsd.rules \
+diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
+index 6256396..4fedbe6 100644
+--- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
+@@ -17,7 +17,6 @@ DEPENDS += "gconf libxrandr virtual/libx11 gtk+ glib-2.0 gnome-doc-utils startup
+ EXTRA_OECONF = "--disable-scrollkeeper --disable-desktop-docs"
+ 
+ do_configure_prepend () {
+-    cp ${STAGING_DATADIR_NATIVE}/gnome-common/data/omf.make ${S}
+     sed -i -e s:^#!@PYTHON@:#!${bindir}/python: ${S}/gnome-about/gnome-about.in
+ }
+ 
 -- 
-2.4.3
+2.7.0
 
 
