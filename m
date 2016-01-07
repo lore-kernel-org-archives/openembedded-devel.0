@@ -1,32 +1,40 @@
-Return-Path: <daicy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B94F6731D3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 0468A6E668
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2016 05:41:30 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
-   d="scan'208";a="2311897"
-Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 07 Jan 2016 13:41:32 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 0ABC941887E8
+	Thu,  7 Jan 2016 10:56:10 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id f206so92255253wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2016 13:41:16 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.51) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Thu, 7 Jan 2016 13:41:15 +0800
-From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Jan 2016 21:41:03 -0800
-Message-ID: <1452145263-9381-1-git-send-email-daicy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Thu, 07 Jan 2016 02:56:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=DywXvzwO+QeGYKD1DozXO3L0OWlnI/Gm8w/JiJxWzWs=;
+	b=VqraF4S1zzGACutH16/Vdh2sYyH2bVzGDthPv1iXtOf9kFzCthPcAkIP2IHCWjlslq
+	AimH2214fYSRYTGeNBS95LHz0SI/YqxlZ5mp88t5gx3zZafIJNPt+BVPpeGuOmxWh5e8
+	JTiZzD1QtoB12ODtsT6mEKDDvmLdQDOlHQdqy32mvtnGcOPbgvhug68RL52VjsWrh5XW
+	xiuSQ251xUtjtQ+eUzsbpV+MC1KASYtfHIrE3JXjuy/8S7aDm2+0n+MiQTSJScJYnvNJ
+	/O6BwhyBUnVbLYa36vCAsfGRKGPDxH+0/99gh+iU8HvhqlOUrGJvchlTrKN+AtE8gBff
+	E60w==
+X-Received: by 10.28.88.210 with SMTP id m201mr16488646wmb.76.1452164170794;
+	Thu, 07 Jan 2016 02:56:10 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	w17sm12993376wmw.15.2016.01.07.02.56.09
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 07 Jan 2016 02:56:09 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 7 Jan 2016 11:56:34 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160107105634.GA2512@jama>
+References: <20160106115955.GA11478@jama>
+	<1452130263-20943-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.51]
-X-yoursite-MailScanner-ID: 0ABC941887E8.ACDBA
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Cc: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
-Subject: [meta-python][PATCH] python-pip: 7.1.0 -> 7.1.2
+In-Reply-To: <1452130263-20943-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-oe][PATCH v2] xterm: 308 -> 320
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,38 +47,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2016 05:41:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 07 Jan 2016 10:56:13 -0000
+X-Groupsio-MsgNum: 59395
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="EVF5PPMfhYS0aIcm"
+Content-Disposition: inline
 
-Upgrade python-pip from 7.1.0 to 7.1.2.
+--EVF5PPMfhYS0aIcm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
----
- .../python/{python-pip_7.1.0.bb => python-pip_7.1.2.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pip_7.1.0.bb => python-pip_7.1.2.bb} (76%)
+On Wed, Jan 06, 2016 at 05:31:03PM -0800, Li Xin wrote:
+> Upgrade xterm from 308 to 320.
+>=20
+> 1) Modify LIC_FILES_CHKSUM,since the date in it has been changed, But the=
+ LICENSE has not been changed.
+> 2) Fix WARNING: QA Issue: xterm rdepends on libxinerama, but it isn't a b=
+uild dependency? [build-deps]
+> =20
+> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> ---
+>  meta-oe/recipes-graphics/xorg-app/{xterm_308.bb =3D> xterm_320.bb} | 8 +=
++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>  rename meta-oe/recipes-graphics/xorg-app/{xterm_308.bb =3D> xterm_320.bb=
+} (75%)
+>=20
+> diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_308.bb b/meta-oe/rec=
+ipes-graphics/xorg-app/xterm_320.bb
+> similarity index 75%
+> rename from meta-oe/recipes-graphics/xorg-app/xterm_308.bb
+> rename to meta-oe/recipes-graphics/xorg-app/xterm_320.bb
+> index 9198ca2..ae9aa76 100644
+> --- a/meta-oe/recipes-graphics/xorg-app/xterm_308.bb
+> +++ b/meta-oe/recipes-graphics/xorg-app/xterm_320.bb
+> @@ -2,12 +2,12 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
+>  SUMMARY =3D "xterm is the standard terminal emulator for the X Window Sy=
+stem"
+>  DEPENDS =3D "libxaw xproto xextproto libxext libxau libxpm ncurses"
+> =20
+> -LIC_FILES_CHKSUM =3D "file://xterm.h;beginline=3D3;endline=3D31;md5=3D54=
+0cf18ccc16bc3c5fea40d2ab5d8d51"
+> +LIC_FILES_CHKSUM =3D "file://xterm.h;beginline=3D3;endline=3D31;md5=3Dee=
+6435019d00b884cde8d7ba2b318ff0"
+> =20
+>  SRC_URI =3D "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
+> =20
+> -SRC_URI[md5sum] =3D "1ec76c1a79a70de4f82c24c527ef4626"
+> -SRC_URI[sha256sum] =3D "c5bf7377a5bf35e34b7e3a4ab6c848fbc89e8901dd98f8b2=
+37662a72bdbfe372"
+> +SRC_URI[md5sum] =3D "0d7f0e6390d132ae59876b3870e5783d"
+> +SRC_URI[sha256sum] =3D "a60dbb574334c081425fa30f011cd9f571e3be7a91e2a84e=
+252461798bce24a7"
+> =20
+>  EXTRA_OECONF =3D " --x-includes=3D${STAGING_INCDIR} \
+>                   --x-libraries=3D${STAGING_LIBDIR} \
+> @@ -25,6 +25,6 @@ do_configure() {
+>  }
+> =20
+>  FILES_${PN} +=3D " /usr/lib/X11"
+> -
+> +RDEPENDS_${PN} +=3D "libxinerama"
 
-diff --git a/meta-python/recipes-devtools/python/python-pip_7.1.0.bb b/meta-python/recipes-devtools/python/python-pip_7.1.2.bb
-similarity index 76%
-rename from meta-python/recipes-devtools/python/python-pip_7.1.0.bb
-rename to meta-python/recipes-devtools/python/python-pip_7.1.2.bb
-index ae02e86..895cf6f 100644
---- a/meta-python/recipes-devtools/python/python-pip_7.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python-pip_7.1.2.bb
-@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=45665b53032c02b35e29ddab8e61fa91"
- 
- SRC_URI = "https://pypi.python.org/packages/source/p/pip/pip-${PV}.tar.gz"
- 
--SRC_URI[md5sum] = "d935ee9146074b1d3f26c5f0acfd120e"
--SRC_URI[sha256sum] = "d5275ba3221182a5dd1b6bcfbfc5ec277fb399dd23226d6fa018048f7e0f10f2"
-+SRC_URI[md5sum] = "3823d2343d9f3aaab21cf9c917710196"
-+SRC_URI[sha256sum] = "ca047986f0528cfa975a14fb9f7f106271d4e0c3fe1ddced6c1db2e7ae57a477"
- 
- S = "${WORKDIR}/pip-${PV}"
- 
--- 
-1.9.1
+This isn't the right fix, see QA talks about build time dependency.
 
+>  PACKAGECONFIG ?=3D ""
+>  PACKAGECONFIG[xft] =3D "--enable-freetype,--disable-freetype,libxft font=
+config"
+> --=20
+> 1.9.1
+>=20
+>=20
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--EVF5PPMfhYS0aIcm
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlaORGEACgkQN1Ujt2V2gBxnlACgn1CwbUCSODGNIcoc3ZuB/XhD
+7zcAn2jN8EUSUh57EgKemxStRx+vJ1L5
+=0zST
+-----END PGP SIGNATURE-----
+
+--EVF5PPMfhYS0aIcm--
