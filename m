@@ -1,38 +1,39 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f42.google.com (mail-qg0-f42.google.com
-	[209.85.192.42])
-	by mail.openembedded.org (Postfix) with ESMTP id C042960620
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 56B35731DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2016 18:59:33 +0000 (UTC)
-Received: by mail-qg0-f42.google.com with SMTP id o11so334980733qge.2
+	Thu,  7 Jan 2016 19:24:04 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id u188so111242780wmu.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jan 2016 10:59:34 -0800 (PST)
+	Thu, 07 Jan 2016 11:24:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:from:date:to:subject:user-agent;
-	bh=KyjjWXL1XM0kPC62OgpUqVpWSsNdl6laj2V45+TEnjU=;
-	b=jRmxVkXFTuqWNEMsfU/J5XlU+zV2Ad4IwREowC62hsawEnp+QtB239HVzdBINioCpR
-	71HwDlRReF2nruCQs95fidVsjbj3GNrx7wKiYwQczqT5d+KG5frWVxZpLcvqo9PrbNvs
-	swt8vO7P0JpejIokmn/cqAlH08l6WWol/DAFlcnHddJeJbCddYdxHCIoO5T7nPST5O1G
-	xLBNKRSTElgh2SD24YHpk/DCOtddBlT3Bl1ey5nDwtPecjsLUmNmyQgFlNIq3ktopbmK
-	Ngju57Z6RDaqyMel+N88rmNN4QVg+j9NwNLN1cQoTe5k1h7oVT5gwjox73iBf2QT+nNl
-	ahTQ==
-X-Received: by 10.140.155.87 with SMTP id b84mr83986206qhb.29.1452193173689;
-	Thu, 07 Jan 2016 10:59:33 -0800 (PST)
-Received: from localhost (189-72-93-128.bnut3700.dsl.brasiltelecom.net.br.
-	[189.72.93.128]) by smtp.gmail.com with ESMTPSA id
-	n91sm38276914qkh.11.2016.01.07.10.59.30
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=dlc/tDtNNPR0CQPWJs6o6Dp94rTAVUmSjtaRfvevRgw=;
+	b=jFKAb//IadYd8e9ummKBcZGbqXR2oeWEvjvY+eKATMItv8w1sVt0LS3KmuBmHKFEUr
+	z+xMo0SF1HsnBmclqJpmBrx9IRaf9ffBFn48I1kw1V0Y+cpEdVnfMytv5UFhcx0Ax3pn
+	17QXb1MFxuQffxc/5gXD1K5zepwFXVBL+N8AkRKGHqctPcksnSN//3Af2ShXQ6bbdZvC
+	a7CCxT9PwbfWpNoPXuRQXocFfywuK6RpliP7jUeClpjqmlXwUMK7eHNSaRHzrdLWP9c4
+	VwDVG+GwS3axp5fdeY/TSBbSo1SJT48CfoapdZPvx2AEWL8pKUaFxi1AgdylFaehdX1T
+	L/SA==
+X-Received: by 10.194.77.137 with SMTP id s9mr53913460wjw.171.1452194645174;
+	Thu, 07 Jan 2016 11:24:05 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	wx2sm13613253wjc.27.2016.01.07.11.24.04
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Jan 2016 10:59:32 -0800 (PST)
-Message-ID: <568eb594.de1f370a.2b615.2b4c@mx.google.com>
-Received: by localhost (sSMTP sendmail emulation);
-	Thu, 07 Jan 2016 16:59:27 -0200
-From: "Otavio Salvador" <otavio.salvador@gmail.com>
-Date: Thu, 07 Jan 2016 16:59:27 -0200
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-User-Agent: mail v14.8.5
-Subject: Updates to meta-browser (master) in 2016-01-07
+	Thu, 07 Jan 2016 11:24:04 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 7 Jan 2016 20:24:29 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160107192429.GG2512@jama>
+References: <1452186388-6796-1-git-send-email-moritz.fischer@ettus.com>
+MIME-Version: 1.0
+In-Reply-To: <1452186388-6796-1-git-send-email-moritz.fischer@ettus.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-oe][PATCH] gpsd: Add patch to fix broken ACTIVATE hook.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,60 +46,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2016 18:59:34 -0000
+X-List-Received-Date: Thu, 07 Jan 2016 19:24:05 -0000
+X-Groupsio-MsgNum: 59410
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="kjpMrWxdCilgNbo1"
+Content-Disposition: inline
 
-Hello,
+--kjpMrWxdCilgNbo1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I pushed following updates:
+On Thu, Jan 07, 2016 at 09:06:28AM -0800, Moritz Fischer wrote:
+> This patch is already in mainline gpsd. It fixes a
 
-commit b6d46d69a261fe6bd7c1e9811dc2a9bbd0b79aeb (HEAD -> pending, origin/master, origin/HEAD)
-Author: Trevor Woerner <twoerner@gmail.com>
-Date:   Tue Jan 5 16:15:42 2016 -0500
+Please add Upstream-Status: Backport inside the .patch file to make it
+clear.
 
-    chromium: add kiosk-mode PACKAGECONFIG
-    
-    If you are creating a kiosk, then enable this PACKAGECONFIG and the browser
-    will start up fullscreen and without menu bars etc.
-    
-    Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> bug where the ACTIVATE hook for a device never gets
+> called.
+>=20
+> Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
+> ---
+>  ...e-Fix-issue-with-ACTIVATE-hook-not-being-.patch | 32 ++++++++++++++++=
+++++++
+>  meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb       |  1 +
+>  2 files changed, 33 insertions(+)
+>  create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-libgps=
+d-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch
+>=20
+> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-libgpsd-core-=
+Fix-issue-with-ACTIVATE-hook-not-being-.patch b/meta-oe/recipes-navigation/=
+gpsd/gpsd-3.14/0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.pa=
+tch
+> new file mode 100644
+> index 0000000..ce971de
+> --- /dev/null
+> +++ b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-libgpsd-core-Fix-iss=
+ue-with-ACTIVATE-hook-not-being-.patch
+> @@ -0,0 +1,32 @@
+> +From 6ff099b1ba8de74df9ddeb61e3825264b96ef692 Mon Sep 17 00:00:00 2001
+> +From: Moritz Fischer <moritz.fischer@ettus.com>
+> +Date: Tue, 22 Dec 2015 19:38:31 -0800
+> +Subject: [PATCH] libgpsd-core: Fix issue with ACTIVATE hook not being ca=
+lled.
+> +
+> +In the current system session->mode seemed to ignore the
+> +O_OPTIMIZE flag, leading to the ACTIVATE hook being ignored.
+> +
+> +Another way to fix this would be to keep the session->mode
+> +condition pull up the check for O_CONTINUE.
+> +
+> +Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
+> +---
+> + libgpsd_core.c | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/libgpsd_core.c b/libgpsd_core.c
+> +index 31fec2a..a84e85f 100644
+> +--- a/libgpsd_core.c
+> ++++ b/libgpsd_core.c
+> +@@ -543,7 +543,7 @@ int gpsd_open(struct gps_device_t *session)
+> + int gpsd_activate(struct gps_device_t *session, const int mode)
+> + /* acquire a connection to the GPS device */
+> + {
+> +-    if (session->mode =3D=3D O_OPTIMIZE)
+> ++    if (mode =3D=3D O_OPTIMIZE)
+> + 	gpsd_run_device_hook(&session->context->errout,
+> + 			     session->gpsdata.dev.path, "ACTIVATE");
+> +     session->gpsdata.gps_fd =3D gpsd_open(session);
+> +--=20
+> +2.4.3
+> +
+> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recip=
+es-navigation/gpsd/gpsd_3.14.bb
+> index 6ae2f30..646360c 100644
+> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+> @@ -16,6 +16,7 @@ SRC_URI =3D "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz=
+ \
+>      file://0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.pat=
+ch \
+>      file://0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.pat=
+ch \
+>      file://0001-Include-stdatomic.h-only-in-C-mode.patch \
+> +    file://0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.pat=
+ch \
+>      file://gpsd-default \
+>      file://gpsd \
+>      file://60-gpsd.rules \
+> --=20
+> 2.4.3
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-commit 36b98f52a929aa26405735cdd23c877b836599a2
-Author: Trevor Woerner <twoerner@gmail.com>
-Date:   Tue Jan 5 16:15:41 2016 -0500
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-    chromium: update run script for early run
-    
-    If the chromium run-helper script (google-chrome) is run as part of a
-    (sysvinit) init script, shell variables $USER and $HOME will not be set
-    (leading to unwanted behaviour).
-    
-    Replace the use of $USER with `whoami` and replace the use of $HOME with the
-    OE bitbake variable ROOT_HOME.
-    
-    In this way the chromium run-helper script will work as expected in both
-    instances (as part of an init script and from the cmdline).
-    
-    Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+--kjpMrWxdCilgNbo1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-commit 5dd3fa45fb48261da33c3d99c464e2186ab54d39
-Author: Trevor Woerner <twoerner@gmail.com>
-Date:   Tue Jan 5 16:15:40 2016 -0500
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
-    chromium: API keys update
-    
-    Add more information to the "disable-api-keys-info-bar" PACKAGECONFIG
-    description regarding another way to disable the "Google API keys are
-    missing" warning.
-    
-    Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+iEYEARECAAYFAlaOu2wACgkQN1Ujt2V2gBykGACguPQ7MQFYldFR/0JrVv2gC/au
+4/sAoImIIMdGanfxoT8Gs2GuPDkib83v
+=M/r7
+-----END PGP SIGNATURE-----
 
-Regards,
-
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
-
+--kjpMrWxdCilgNbo1--
