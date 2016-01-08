@@ -1,49 +1,43 @@
-Return-Path: <piotr.lewicki@elfin.de>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 130D560589
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 919BD60670
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Jan 2016 09:24:08 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id f206so161833848wmf.0
+	Fri,  8 Jan 2016 09:45:52 +0000 (UTC)
+Received: by mail-wm0-f49.google.com with SMTP id f206so128194879wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jan 2016 01:24:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=elfin-de.20150623.gappssmtp.com; s=20150623;
-	h=from:subject:to:message-id:date:user-agent:mime-version
-	:content-type:content-transfer-encoding;
-	bh=hsCQf5ZZOjxhJ+xx04VAMdGP1osQtfIXUT9hTCaDWbs=;
-	b=viRCfQ70nfcRXORy2gOH0xeC00fpimq9gmaxPcUJ7QeXNQxqDT4nJrmBu0YoCxSaNR
-	lqcmtVqXjC/vxxW9r9s3NnnwhThyl0zYL+sdbALsZDvWlEyagQ9VEpRDuzeTyMjyrmBp
-	wtY94w7aO1KgId5v1bA2qBpp4PKCJRFGREERzDkof3vbj966RTS0D2/rV9+88f/dd9hz
-	VnvMpyFFRM5FRN/7yVhIOhkf/QV7ncxjSO+nzP4L8kZZS0YwOn7ABabddFq/+622jytN
-	CkvryJJh8GQ2qrCIOFj/1lYdSdX+RhQhfORD4PqSRqZKPrJwvH5HFBLEmFm3id+D3FqA
-	X0nQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:subject:to:message-id:date:user-agent
-	:mime-version:content-type:content-transfer-encoding;
-	bh=hsCQf5ZZOjxhJ+xx04VAMdGP1osQtfIXUT9hTCaDWbs=;
-	b=MMxEyTb7UM+AaKQgBrhtPFy0FmHh0HDf1kXjVXZI9t1kh9SMF2/Ge378p9FQQ+1R3N
-	59wGDpvDbJFGR/xRwlIuH/1v6PPp1dvKd3tWN7Q1mHoarwjO6JYq6U7BaOF6ZYaMJEHE
-	WIiw2drFWsOUVn04ccUZZqJAWB7h9UhfJxTrHKXr5ZLTo56Xz6P/mrn9/D+pwWeniXmO
-	1PSTL9VHb2+b3E5PTRRWNFXVB+1Rl6tc9T+7X8bbed/34SWU2IdNSbVQdAPxv6FU4bVB
-	H/PILIwoXKQn5S3V6j9df5NWv/Goo1HKHj0hOD45IAsrVXaEkMz6rDPIXpmZb5/dd1u0
-	WDEQ==
-X-Gm-Message-State: ALoCoQmmrUl08ArRl0GIAFxagOJTgVrA4Ly1m8BTUbu2JVbx52BXEFhES1z+QoWq9osWpPdby6U2toNnPS7YXn7Qh+FCw2XTSQ==
-X-Received: by 10.195.13.201 with SMTP id fa9mr138315084wjd.68.1452245049084; 
-	Fri, 08 Jan 2016 01:24:09 -0800 (PST)
-Received: from [192.168.2.181] (b2b-94-79-174-114.unitymedia.biz.
-	[94.79.174.114]) by smtp.gmail.com with ESMTPSA id
-	a126sm17570338wmh.0.2016.01.08.01.24.08
+	Fri, 08 Jan 2016 01:45:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=hhRO5uVvIC85rmyRqVXYirHGwEXhExsbq/4kI+jky+8=;
+	b=cFSv45txQ4zWFCEgPrBPV9kUl5waEYFdCA5V7md/Vkczq1qnktgBtV52mLJ+D6z9bQ
+	poF6G6AoLHPSuGcuV8MAk0Zx0R8mKfVq9kDEKZWhXZj2lAE5hgwvIV1DP8nOWrwrPj4C
+	gJFDka2eDS0+wl34WssWHcCcQxsZYabwLwfc4X2LGFSx4YMvTlt8hHUYyGZhN3qNxoUO
+	e5eBjhuUP6Rc4i3nx7xVbrBNsW+aZ2KvdqnMhu3nkzBM7Y+V4fnh65HjDZYP4JTnqCm0
+	Z47OwD9Fc5rN2nxOSa/r20P/E/m4jN2djA8Y3bK1TMES2znAx9MSrRotxA1Zz0/ERZm6
+	YGFA==
+X-Received: by 10.194.240.194 with SMTP id wc2mr119374221wjc.27.1452246353445; 
+	Fri, 08 Jan 2016 01:45:53 -0800 (PST)
+Received: from walter.muppets.liwing.de (p578b540c.dip0.t-ipconnect.de.
+	[87.139.84.12]) by smtp.gmail.com with ESMTPSA id
+	g187sm17653600wmf.8.2016.01.08.01.45.52
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 08 Jan 2016 01:24:08 -0800 (PST)
-From: Piotr Lewicki <piotr.lewicki@elfin.de>
-To: openembedded-devel@lists.openembedded.org, paul.eggleton@linux.intel.com
-Message-ID: <568F8037.4050902@elfin.de>
-Date: Fri, 8 Jan 2016 10:24:07 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.4.0
-MIME-Version: 1.0
-Subject: Unblacklisting package
+	Fri, 08 Jan 2016 01:45:52 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Jens Rehsack <rehsack@gmail.com>
+In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AA010C7876F5@ALA-MBA.corp.ad.wrs.com>
+Date: Fri, 8 Jan 2016 10:45:51 +0100
+Message-Id: <9E3A8ABC-AAB1-4EA5-8F80-B1E2A1B161BE@gmail.com>
+References: <cover.1450864063.git.jackie.huang@windriver.com>
+	<0E1F3B26-55DA-44FC-BEC4-8AE2277A9D07@gmail.com>
+	<1B858668EC6A94408DCA5225FDFA85AA010C786816@ALA-MBA.corp.ad.wrs.com>
+	<9C9059BF-A1B5-4E59-97F3-BF2C2CC028F2@gmail.com>
+	<1B858668EC6A94408DCA5225FDFA85AA010C7876F5@ALA-MBA.corp.ad.wrs.com>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.3112)
+Subject: Re: [meta-java][PATCH 0/2] openjdk-8-native: fix	do_install	and PROVIDES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,21 +50,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jan 2016 09:24:11 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
+X-List-Received-Date: Fri, 08 Jan 2016 09:45:55 -0000
+X-Groupsio-MsgNum: 59417
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_7FDB11AA-7D10-46C2-A73F-C971585A1109";
+	protocol="application/pgp-signature"; micalg=pgp-sha512
+
+--Apple-Mail=_7FDB11AA-7D10-46C2-A73F-C971585A1109
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+
+> Am 07.01.2016 um 04:00 schrieb Huang, Jie (Jackie) =
+<Jackie.Huang@windriver.com>:
+>=20
+>=20
+>=20
+>> -----Original Message-----
+>> From: openembedded-devel-bounces@lists.openembedded.org =
+[mailto:openembedded-devel-
+>> bounces@lists.openembedded.org] On Behalf Of Jens Rehsack
+>> Sent: Wednesday, January 06, 2016 9:57 PM
+>> To: openembedded-devel@lists.openembedded.org
+>> Subject: Re: [oe] [meta-java][PATCH 0/2] openjdk-8-native: fix =
+do_install and PROVIDES
+>>=20
+>>=20
+>>> Am 06.01.2016 um 08:03 schrieb Huang, Jie (Jackie) =
+<Jackie.Huang@windriver.com>:
+>>>=20
+>>>=20
+>>>=20
+>>>> -----Original Message-----
+>>>> From: openembedded-devel-bounces@lists.openembedded.org =
+[mailto:openembedded-devel-
+>>>> bounces@lists.openembedded.org] On Behalf Of Jens Rehsack
+>>>> Sent: Tuesday, January 05, 2016 3:21 AM
+>>>> To: openembedded-devel@lists.openembedded.org
+>>>> Subject: Re: [oe] [meta-java][PATCH 0/2] openjdk-8-native: fix =
+do_install and PROVIDES
+>>>>=20
+>>>> It's insane re-introducing a virtual/javac-native without =
+understanding
+>>>> the issues coming with that.
+>>>=20
+>>> Please carefully review the patches before saying insane, I don't =
+think it was
+>>> correct to remove virtual/javac-native since there are several =
+providers.
+>>=20
+>> What does virtual/javac-native mean? Correctly, there can be several =
+providers.
+>>=20
+>> How many of them can you have in one sysroot/build? One.
+>>=20
+>> So - when in an openjdk-7 or openjdk-8 bootstrap 4 recipes PROVIDE =
+virtual/javac-native,
+>> what happens?
+>=20
+> So seem like you don't really understand how it should be used.
+>=20
+> Yes, only one we can have when there are multiple providers, that's =
+why we should
+> use PREFERRED_PROVIDER to determines which one it is, and use the =
+virtual/foo
+> instead of specific provider's name in DEPENDS/RDEPENDS of the recipe =
+that requires it,
+> so we can ensure only one will be built and avoid conflicts.
+
+And there starts your misunderstanding:
+
+You can't even install multiple providers, even when picking one.
+But doesn't icedtea7-native provide virtual/java-native and =
+virtual/javac-native?
+Doesn't openjdk-8-native provide virtual/java-native and =
+virtual/javac-native?
+
+When virtual/java-native is only for bootstrapping, that it's misused =
+and
+must be removed. Providers are for abstraction, not for confusing.
+
+> FYI:
+> =
+http://www.yoctoproject.org/docs/2.0/bitbake-user-manual/bitbake-user-manu=
+al.html#bb-bitbake-preferences
+> =
+http://www.yoctoproject.org/docs/2.0/ref-manual/ref-manual.html#var-PREFER=
+RED_PROVIDER
+>=20
+>>=20
+>> It is insane to have multiple providers for the same virtual/foo when =
+at least a bunch
+>=20
+> Virtual/foo and PREFERRED_PROVIDER is one of the mechanisms to handle =
+multiple providers,
+> (another one is update-alternatives which is not supported by -native =
+recipe), and work fine
+> in many projects, why is it insane here?
+
+Insane is, that you cannot choose - you have to install all until you =
+reach the required
+Java language level.
+
+> I tested my patches to build openjdk7, openjdk8 and most recipes in =
+meta-java with and without sstate
+> on qemux86-64, qemuarm, qemuppc and some of our BSPs and they all =
+built fine (previous method
+> fails to build openjdk7 sometime and always fail when build with =
+sstate)
+
+That has nothing to do with the providers, it has to do with the wrong =
+install of same
+binary to a place where another one has been installed. This has to do =
+with alternatives,
+not providers.
+
+Cheers
+--
+Jens Rehsack - rehsack@gmail.com
+
+
+--Apple-Mail=_7FDB11AA-7D10-46C2-A73F-C971585A1109
 Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
-Dear Paul and oe-devel list,
-I've found as a part of this tread 
-http://lists.openembedded.org/pipermail/openembedded-devel/2014-October/098410.html 
-that you know how do "unblacklist" a package from my conf file.
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
 
->/You can still disable that PNBLACKLIST in your local.conf or distro.conf. /
+iQIcBAEBCgAGBQJWj4VPAAoJEESZlq7c5QqdgGoQAKAfHB+zTH86VOfsklJBCs7f
+pYpgHamL9WayZPgXQJNhb1BCcav6CecHqs3c6NSVzL9G+zbCPt/SU/5pyJkH9SyJ
+qeeyZ/IYZ5YhgLHnci4VLkKJp7nS8gJEJrHKi3LmzqPEYcC67M1gMWYd08zixJrJ
+fxtYSdz7t9wL+3iJKQJONbMbpm483eCwDezjyN7aUrk7fDviK2D7FnHi/F2UU45L
+8p2PYJdpKycjkUIxhn23SPbx/VubObSP8t2QSBaSbUjpnQarc9Dp/PasIBj+vZd8
+TGtyd5bjMxinbqFuYDGUGpoyYTEhm+uVwMkLP070yiPBssMoeJMXxCAZ/q2I3lZw
+5uGfRZ6Tk11xahMOit9ch8kt2cpaI/nvGJdIB4vAUKqvFDXnaB42iuqeCcT67d3/
+LjuUqSJE2aRD+KfEdCcHHvDGj5pH39jjy6CDEbOakYMgteteTGXdGXa+iYraJjpL
+KsiAn7kNUwWYi05YinYxyFag7apQNQAVgf79DjfJ/A30BijVm11NphQEnI3VEtlv
+7KROn2YHIT+um/nWLxYFzMNWfeqHHApwQgUETV107I3aoXtnhZYcOSxiemrusCKM
+A/I/xx+ufNKPrnD5C0tMBU7mpftkJ9pjMyA6gTTEv/eR5sBTScPAPpOMIg5OgTNs
+DcX93AZz9bfv2BwP70vC
+=ZBeJ
+-----END PGP SIGNATURE-----
 
-I was trying to find out how to disable it but my research failed.
-Could you share this knowledge with me?
-I'm trying to unblacklist modphp package.
-
-Best regards,
-Piotr Lewicki
-
+--Apple-Mail=_7FDB11AA-7D10-46C2-A73F-C971585A1109--
