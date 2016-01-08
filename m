@@ -1,34 +1,53 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DC42731A0
+Return-Path: <mike.looijmans@topicproducts.com>
+Received: from mx18-05.smtp.antispamcloud.com (mx18-05.smtp.antispamcloud.com
+	[207.244.64.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 04DF16AC37
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2016 21:03:27 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id f206so112778404wmf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jan 2016 13:03:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=93k5+vF2bpcWenlX0FmaeKD6o1cr4p36gyyYQxH9f+k=;
-	b=GPWFj43iB7ZXqhqE2tFsxVSBbHIMAkQ5PBHBt2s/tH9jdJF3WMTfc2D5VdPR3IFLuJ
-	JswkKMqf6+RrQp85TsH6vZTx8XW+Y9vuLz4ZGe37BlGWAsRZPk2GxgB9xAy7EaHpDHRi
-	OcbHHK2kuTJ1YMIyZBaMMnWSlSq4WCnkko5iM2OHh4bl/lw5HjPWHqTqEUCN6ofvf9op
-	2uzqMRu2JEtVkRCxci8qSvNQPIukMD7s9kAgbeX3gm4X8sEn3vbgYutEBaA3zkfimYUS
-	O4id2Bjk+MwC3FwJHUhQoA+rGOQnW8TbL4me+HfNuRKJMYNNV1hD8HP+Ab0oDRDyfKVD
-	5JAw==
-X-Received: by 10.194.205.5 with SMTP id lc5mr79596331wjc.163.1452200608146;
-	Thu, 07 Jan 2016 13:03:28 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	dl8sm102916031wjb.29.2016.01.07.13.03.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Jan 2016 13:03:26 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Jan 2016 22:03:50 +0100
-Message-Id: <1452200630-3393-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.0
-Subject: [PATCH][WIP][meta-gnome] gnome-desktop: don't try to copy omf.make
+	Fri,  8 Jan 2016 07:39:49 +0000 (UTC)
+Received: from 100-208.ftth.onsbrabantnet.nl ([88.159.208.100]
+	helo=TOP-EX01.TOPIC.LOCAL)
+	by mx18.antispamcloud.com with esmtps (TLSv1:AES256-SHA:256)
+	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
+	id 1aHRe6-0003Ab-28 for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Jan 2016 08:39:45 +0100
+Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
+	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.224.2;
+	Fri, 8 Jan 2016 08:37:43 +0100
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Organization: TOPIC
+Message-ID: <568F67B8.7060001@topic.nl>
+Date: Fri, 8 Jan 2016 08:39:36 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
+MIME-Version: 1.0
+X-Originating-IP: [192.168.80.121]
+X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
+X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
+X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
+	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
+	4XktS92Fqq3Qa0exZrGdvwCI1FSC+XchGESnvFyb7UT5VYLs9bPFSY8Fj0rdZw98eryZwb+Vsbgd
+	saBB5cNc9aUV1oY4fX3W5eOCNA39IMF/tWq0Xia4BSmFvzyHGTjedCBNA121Y38SeyRMCs3XcWpW
+	rY6lCH8L7CDV11D5JM7Xk65yci5j+xTRr7HgZJNWyY7q5BA/5iDO7tJWc5LW0A0HkzG7uPVDzc3F
+	/UDJomVIDsS/itDc6L24kzSY8UBJuULIpDl323znR+D07qSzNrGWwyxYQNxlGlctos9lj2eb1EIT
+	aM/sZt80S+wHyfpIUb1+kQ3sB5+pcGh69v1UE7Q9WvntXa9VPL9K4cA+8t3Xj/LzZ5s/OJg1L2as
+	ZxEp4Bv7TWEUoKzFQfrYUeyRYVR0payg4cttk4bRt/Zdg8CBO1Snvm6qXHQp7O9kdewWsgzDQueY
+	8/6mgCJU+cRMbYOEJdE462Jlg4EydpQqASJFC/49WOPBr5nlEUI4xEGzvv/YJUvIMZnAWOuyTtoz
+	k7kDxRWbP/RnPb5MYDVUMny9tYiXK7nj6P0rWU5Ug5YJgAs4KFgLYz1HAWczhpA=
+X-Report-Abuse-To: spam@mx99.antispamcloud.com
+X-Filter-Fingerprint: IFrWXGses7OKB5S5G8/dJUb3OPwsHaH0Fvg5oXltHd/JUWjZ8+qhjyB23tbDuyLOYL8Ff78gYsez
+	4Rl08xudmXi4esCQ0R1MchVjt7wblGlvhFgW0MjUMRkF5sMCDfftTXNFDzN17hnrWeZYOJvLq0Ic
+	WjZ+XcEjj/7Pkld0zkmvziDInX9WdMov2kn2yXjdwv61T+KDYyYtREgszdyFwv8IxCB3p/oCKvxr
+	eyISh3JGb7OS5oVgiO+kDxZrVPLz3MmEGC2PrUKqLq5WmHK+Nw==
+X-Originating-IP: 88.159.208.100
+X-Spampanel-Domain: topic.nl
+X-Spampanel-Username: 88.159.208.100
+Authentication-Results: antispamcloud.com;
+	auth=pass smtp.auth=88.159.208.100@topic.nl
+X-Spampanel-Outgoing-Class: ham
+X-Spampanel-Outgoing-Evidence: Combined (0.00)
+X-Recommended-Action: accept
+Subject: Building java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,37 +60,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2016 21:03:28 -0000
+X-List-Received-Date: Fri, 08 Jan 2016 07:39:52 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-* omf.make was removed from gnome-common in:
-  https://git.gnome.org/browse/gnome-common/commit/?id=a912a74ba7999fe3ed49b07bab86685a5d117f82
-  which is included in gnome-common-3.18, so this was broken since:
-  commit f459f890cb7c0e11d92b80f0d5a65117428cc87f
-  Author: Jussi Kukkonen <jussi.kukkonen@intel.com>
-  Date:   Thu Nov 26 13:46:48 2015 +0200
+=EF=BB=BFSomeone in our project decided he wanted Java on the board, so I j=
+ust added=20
+"meta-java" to the layers and attempted to follow the README.
 
-    gnome-common: Upgrade 3.14.0 -> 3.18.0
+So without a clue as to what I'm really doing (I haven't touched Java in 15=
+=20
+years) I added these to my local.conf:
 
-  but hopefully we don't need omf.make with --disable-desktop-docs in EXTRA_OECONF
+# Headless java
+PREFERRED_PROVIDER_classpath =3D "classpath-minimal"
+# Possible provider: cacao-initial-native and jamvm-initial-native
+PREFERRED_PROVIDER_virtual/java-initial-native =3D "cacao-initial-native"
+# Possible provider: cacao-native and jamvm-native
+PREFERRED_PROVIDER_virtual/java-native =3D "jamvm-native"
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb | 1 -
- 1 file changed, 1 deletion(-)
+And of course added meta-java to bblayers.conf.
 
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-index 6256396..4fedbe6 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-@@ -17,7 +17,6 @@ DEPENDS += "gconf libxrandr virtual/libx11 gtk+ glib-2.0 gnome-doc-utils startup
- EXTRA_OECONF = "--disable-scrollkeeper --disable-desktop-docs"
- 
- do_configure_prepend () {
--    cp ${STAGING_DATADIR_NATIVE}/gnome-common/data/omf.make ${S}
-     sed -i -e s:^#!@PYTHON@:#!${bindir}/python: ${S}/gnome-about/gnome-about.in
- }
- 
--- 
-2.7.0
+I added "openjdk-8" to the image's things to install, and let things build.
+
+While building "openjdk-8-native", things went south, and I get the followi=
+ng=20
+error message:
+
+ERROR: no configure script found at=20
+/home/mike/projects/.../build/tmp-glibc/work/x86_64-linux/openjdk-8-native/=
+72b05-r0/jdk8u-e8bed1496ff2/configure
+
+
+What did I do wrong?
+
+
+
+(Note: the board does not have a display, so I don't need/want x11. I tried=
+=20
+building openjdk-7 instead, but that fails to parse because it requires x11=
+ in=20
+the distro)
+
+
+Kind regards,
+
+Mike Looijmans
+System Expert
+
+TOPIC Embedded Products
+Eindhovenseweg 32-C, NL-5683 KH Best
+Postbus 440, NL-5680 AK Best
+Telefoon: +31 (0) 499 33 69 79
+E-mail: mike.looijmans@topicproducts.com
+Website: www.topicproducts.com
+
+Please consider the environment before printing this e-mail
+
+
+
+
 
 
