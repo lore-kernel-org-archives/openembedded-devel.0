@@ -1,38 +1,37 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B47E973695
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 09BF173CF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Jan 2016 14:22:42 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u09EMgD5013173
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Sat,  9 Jan 2016 21:47:35 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id l65so20797823wmf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 9 Jan 2016 06:22:42 -0800 (PST)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.105]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0248.002;
-	Sat, 9 Jan 2016 06:22:41 -0800
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-java][PATCH 0/2] openjdk-8-native:	fix	do_install
-	and PROVIDES
-Thread-Index: AQHRSflvPu31SLBeT02PsKgmicCjB57xYHQw
-Date: Sat, 9 Jan 2016 14:22:38 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010C78A13B@ALA-MBA.corp.ad.wrs.com>
-References: <cover.1450864063.git.jackie.huang@windriver.com>
-	<0E1F3B26-55DA-44FC-BEC4-8AE2277A9D07@gmail.com>
-	<1B858668EC6A94408DCA5225FDFA85AA010C786816@ALA-MBA.corp.ad.wrs.com>
-	<9C9059BF-A1B5-4E59-97F3-BF2C2CC028F2@gmail.com>
-	<1B858668EC6A94408DCA5225FDFA85AA010C7876F5@ALA-MBA.corp.ad.wrs.com>
-	<9E3A8ABC-AAB1-4EA5-8F80-B1E2A1B161BE@gmail.com>
-In-Reply-To: <9E3A8ABC-AAB1-4EA5-8F80-B1E2A1B161BE@gmail.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.132]
+	Sat, 09 Jan 2016 13:47:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=uM85hLIeL88YyQSjtJiRaNEv3DMH34bh1Kg9nRjOjRA=;
+	b=WEtXZI2dPfLJWtXpAoo3Qwlv/nkEmMTwgdrZKcN362ELGR4epqCcZS/ju6Ug6yjB3l
+	pcFJjYdDrORIb1Zm7V+RQ/zg6cJnTQ3wSeDiFYH6ShuLePT/YtcwsUfITEd9kU2UNIJ2
+	5dyGQnL41WHYKX3ig//zaxYPXpBjBJCm5mSSZ4l4B9Z3Fw3jYuk2mupWYjp/vCxX8W/w
+	UIv4GpRaA3Gl3TxGzREwmO1LkuOIzM8kRTP6xHdgKDXyKxDqPp3LTLAQ3cWbTTF6Ccrf
+	+ZAxjaQxu42YLVtUpvTSQA5NVCy7w1YLwiuodXZ3UoFHTpCViwngXIqorYBHIOJTez4K
+	mp2g==
+X-Received: by 10.194.86.166 with SMTP id q6mr105783144wjz.69.1452376055619;
+	Sat, 09 Jan 2016 13:47:35 -0800 (PST)
+Received: from localhost.localdomain (p4FDF1D02.dip0.t-ipconnect.de.
+	[79.223.29.2]) by smtp.googlemail.com with ESMTPSA id
+	z17sm112721160wjq.1.2016.01.09.13.47.34
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 09 Jan 2016 13:47:34 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  9 Jan 2016 22:47:19 +0100
+Message-Id: <1452376042-19248-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.0
 MIME-Version: 1.0
-Subject: Re: [meta-java][PATCH 0/2] openjdk-8-native:	fix	do_install	and PROVIDES
+Subject: [PATCH 0/3] gavfs enhancements / move to udisks2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,169 +44,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Jan 2016 14:22:42 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 09 Jan 2016 21:47:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+* 0001 is V2
+* The following patches were run-tested with jethro. If they survive Martin's
+  master world I would be happy to see them in jethro too.
+* Tests were performed with thunar. Trash, mounting of USB sticks, detecting
+  avahi shares and windows shares were tested.
 
+Andreas Müller (3):
+  gvfs: update to 1.24.2 to make access to windows shares work again
+  xfce4-power-manager: remove udisks rdependency
+  thunar: remove udisks from RRECOMMENDS
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Jens Rehsack
-> Sent: Friday, January 08, 2016 5:46 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-java][PATCH 0/2] openjdk-8-native: fix do_install=
- and PROVIDES
->=20
->=20
-> > Am 07.01.2016 um 04:00 schrieb Huang, Jie (Jackie) <Jackie.Huang@windri=
-ver.com>:
-> >
-> >
-> >
-> >> -----Original Message-----
-> >> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openem=
-bedded-devel-
-> >> bounces@lists.openembedded.org] On Behalf Of Jens Rehsack
-> >> Sent: Wednesday, January 06, 2016 9:57 PM
-> >> To: openembedded-devel@lists.openembedded.org
-> >> Subject: Re: [oe] [meta-java][PATCH 0/2] openjdk-8-native: fix do_inst=
-all and PROVIDES
-> >>
-> >>
-> >>> Am 06.01.2016 um 08:03 schrieb Huang, Jie (Jackie) <Jackie.Huang@wind=
-river.com>:
-> >>>
-> >>>
-> >>>
-> >>>> -----Original Message-----
-> >>>> From: openembedded-devel-bounces@lists.openembedded.org [mailto:open=
-embedded-
-> devel-
-> >>>> bounces@lists.openembedded.org] On Behalf Of Jens Rehsack
-> >>>> Sent: Tuesday, January 05, 2016 3:21 AM
-> >>>> To: openembedded-devel@lists.openembedded.org
-> >>>> Subject: Re: [oe] [meta-java][PATCH 0/2] openjdk-8-native: fix do_in=
-stall and PROVIDES
-> >>>>
-> >>>> It's insane re-introducing a virtual/javac-native without understand=
-ing
-> >>>> the issues coming with that.
-> >>>
-> >>> Please carefully review the patches before saying insane, I don't thi=
-nk it was
-> >>> correct to remove virtual/javac-native since there are several provid=
-ers.
-> >>
-> >> What does virtual/javac-native mean? Correctly, there can be several p=
-roviders.
-> >>
-> >> How many of them can you have in one sysroot/build? One.
-> >>
-> >> So - when in an openjdk-7 or openjdk-8 bootstrap 4 recipes PROVIDE vir=
-tual/javac-native,
-> >> what happens?
-> >
-> > So seem like you don't really understand how it should be used.
-> >
-> > Yes, only one we can have when there are multiple providers, that's why=
- we should
-> > use PREFERRED_PROVIDER to determines which one it is, and use the virtu=
-al/foo
-> > instead of specific provider's name in DEPENDS/RDEPENDS of the recipe t=
-hat requires it,
-> > so we can ensure only one will be built and avoid conflicts.
->=20
-> And there starts your misunderstanding:
+ .../files/0001-Add-support-for-libsystemd.patch    |   49 +
+ ...ect-UDISKS_AUTOMOUNT_HINT-available-in-re.patch |   57 -
+ ...ib-2.31-deprecations-and-thread-API-chang.patch |  599 -----
+ .../0003-Adapt-to-glib-mutex-API-changes.patch     | 2454 --------------------
+ .../0004-Adapt-to-glib-thread-API-changes.patch    |   44 -
+ ...daemonfile.c-replace-g_memmove-by-memmove.patch |   36 -
+ .../gphoto_build_with_libgphoto_2.5_API.patch      |   78 -
+ .../gvfs/gvfs-gdu-volume-monitor_1.10.1.bb         |   28 -
+ meta-gnome/recipes-gnome/gvfs/gvfs.inc             |   27 -
+ meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb       |   35 -
+ meta-gnome/recipes-gnome/gvfs/gvfs_1.24.2.bb       |   61 +
+ meta-xfce/recipes-xfce/thunar/thunar_1.6.10.bb     |    2 +-
+ .../xfce4-power-manager_1.4.4.bb                   |    2 +-
+ 13 files changed, 112 insertions(+), 3360 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/gvfs/files/0001-Add-support-for-libsystemd.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gvfs/files/0001-Revert-Respect-UDISKS_AUTOMOUNT_HINT-available-in-re.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gvfs/files/0002-Adapt-to-GLib-2.31-deprecations-and-thread-API-chang.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gvfs/files/0003-Adapt-to-glib-mutex-API-changes.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gvfs/files/0004-Adapt-to-glib-thread-API-changes.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gvfs/files/0005-client-gdaemonfile.c-replace-g_memmove-by-memmove.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gvfs/files/gphoto_build_with_libgphoto_2.5_API.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.10.1.bb
+ delete mode 100644 meta-gnome/recipes-gnome/gvfs/gvfs.inc
+ delete mode 100644 meta-gnome/recipes-gnome/gvfs/gvfs_1.10.1.bb
+ create mode 100644 meta-gnome/recipes-gnome/gvfs/gvfs_1.24.2.bb
 
-Ok, if so, sorry that my English is not good enough to understand your word=
-s correctly.
-
->=20
-> You can't even install multiple providers, even when picking one.
-
-Picking one is to avoid installing multiple providers, why do we need to in=
-stall
-multiple providers? Seems likely I'm starting to misunderstand again?
-
-> But doesn't icedtea7-native provide virtual/java-native and virtual/javac=
--native?
-> Doesn't openjdk-8-native provide virtual/java-native and virtual/javac-na=
-tive?
->=20
-> When virtual/java-native is only for bootstrapping, that it's misused and
-> must be removed. Providers are for abstraction, not for confusing.
-
-I think you mean that there are two java: one for bootstrapping and another=
- is normal java,
-So maybe you need something like virtual/java-bootstrap-native and virtual/=
-java-native to
-avoid confusing.
-For now, the followings can provide java:
-cacao-native, jamvm-native, icedtea7-native, openjdk8-native
-
-which ones are for bootstrapping only?
-
->=20
-> > FYI:
-> > http://www.yoctoproject.org/docs/2.0/bitbake-user-manual/bitbake-user-m=
-anual.html#bb-
-> bitbake-preferences
-> > http://www.yoctoproject.org/docs/2.0/ref-manual/ref-manual.html#var-PRE=
-FERRED_PROVIDER
-> >
-> >>
-> >> It is insane to have multiple providers for the same virtual/foo when =
-at least a bunch
-> >
-> > Virtual/foo and PREFERRED_PROVIDER is one of the mechanisms to handle m=
-ultiple providers,
-> > (another one is update-alternatives which is not supported by -native r=
-ecipe), and work fine
-> > in many projects, why is it insane here?
->=20
-> Insane is, that you cannot choose - you have to install all until you rea=
-ch the required
-> Java language level.
-
-Again, I may misunderstand, I don't know why I have to install all (provide=
-rs?)?
-
->=20
-> > I tested my patches to build openjdk7, openjdk8 and most recipes in met=
-a-java with and without
-> sstate
-> > on qemux86-64, qemuarm, qemuppc and some of our BSPs and they all built=
- fine (previous method
-> > fails to build openjdk7 sometime and always fail when build with sstate=
-)
->=20
-> That has nothing to do with the providers, it has to do with the wrong in=
-stall of same
-> binary to a place where another one has been installed. This has to do wi=
-th alternatives,
-
-I agree that the alternatives may be a better solution than providers, but =
-the problem is the
-update-alternative.bbclass doesn't support -native packages, please send pa=
-tch to fix it if you
-think it's needed.
-
-Anyway, these patches have been merged and it works fine for now in our pro=
-ject, no insane error
-happens. Feel free to send your patch to fix the insane part you think, but=
- please remember to do
-enough tests to ensure it doesn't break others. Thanks!
-
-Thanks,
-Jackie
-
-> not providers.
->=20
-> Cheers
-> --
-> Jens Rehsack - rehsack@gmail.com
+-- 
+2.5.0
 
 
