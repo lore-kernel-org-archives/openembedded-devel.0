@@ -1,41 +1,41 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 48842760AD
+Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
+	[209.85.220.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 90FE575D4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2016 01:00:02 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id e65so2226026pfe.0
+	Sun, 10 Jan 2016 01:00:03 +0000 (UTC)
+Received: by mail-pa0-f66.google.com with SMTP id yy13so23099707pab.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Jan 2016 17:00:03 -0800 (PST)
+	Sat, 09 Jan 2016 17:00:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=KmyhVcxKSLFOZyLk3Ab3c+JtaLw72k1Hc67qyHvlejA=;
-	b=m0VnKOvdIt8DWoZiNbHVaW2ln+hSIVURzm6K5GqL3CHGvHPKsZeSGPuA50o9kmoTIY
-	AmmaGTeKE8BBalUswNYqIV6ANGsqyCAaVqYx1iFTvnrMdqXTFtxuK5df0kKwABDeHYRV
-	k8/5MUKHCgxXMcwQxfDFGKkfE43qWFT6y+4HZROkrhSS9/OWlxHBbtYmRJK8t6aLv1M+
-	cS6zNiEtGZwY7BxVUqFx0L9xYYy15YP4fJciPVu8PgDvGUzdOkCILq0rBAb2zbkV5mTo
-	3Sojf3wN7AXxsEYP3StZcLtbaNaUgOlVwJP/dZacIYSK1lCLe4uNqNG4AY+MX/wj57+A
-	VYvA==
-X-Received: by 10.98.72.72 with SMTP id v69mr15752643pfa.100.1452387603199;
-	Sat, 09 Jan 2016 17:00:03 -0800 (PST)
+	:references; bh=gHPnkcjmhHlqbX3O4ryZOzb5IvIELIGk/5EZOKeqPkE=;
+	b=xEJxEuS3aP0obQ/cVojFl7kZHK+eKcPazfEqm9slWVGjsFRrQeNAI1x5hhebHIKKh9
+	HGpuqNZBsfHtCQDzkGlNH+vz9lgnfnTdfan5QjvpeFsknpnRo8aPOR5u3LphT55j1tR2
+	/Z+0XduPpnQpvl6Sqv1L44iBjj8EyWiwfJg989rX4a5tg8LodN30A7ncCqBsS8ffcyOw
+	AIl0JM5Kx3IswlHn7EqPVcr510V+JgrC+R33hLz4bxEMZUPVpccWt3xLpPkOnyGn3ZIV
+	QhtNTEcmbUEHhQpeKwq0OLJVzWXkplVNdyOvivJZ1LL4Z/AVz3rLwazBhoZi+/ze9d5f
+	bp/w==
+X-Received: by 10.66.101.36 with SMTP id fd4mr172665710pab.76.1452387604358;
+	Sat, 09 Jan 2016 17:00:04 -0800 (PST)
 Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
 	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	ix2sm176248119pac.15.2016.01.09.16.59.55
+	x18sm13764345pfa.65.2016.01.09.16.59.56
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Sat, 09 Jan 2016 16:59:57 -0800 (PST)
 Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
-	id DC5F6FCC842; Sat,  9 Jan 2016 16:59:47 -0800 (PST)
+	id E8983FCC843; Sat,  9 Jan 2016 16:59:47 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Jan 2016 16:59:33 -0800
-Message-Id: <b9e10b91f49b5a96fb2fb80b12afc1d9a6a3c448.1452386603.git.akuster808@gmail.com>
+Date: Sat,  9 Jan 2016 16:59:34 -0800
+Message-Id: <95e274a63d02e03dd9156c7d9d60ffb14b381e0d.1452386603.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1452386602.git.akuster808@gmail.com>
 References: <cover.1452386602.git.akuster808@gmail.com>
 In-Reply-To: <cover.1452386602.git.akuster808@gmail.com>
 References: <cover.1452386602.git.akuster808@gmail.com>
-Subject: [PATCH 10/22] opencv: limit ARM_INSTRUCTION_SET = "arm" over-ride to armv4/armv5
+Subject: [PATCH 11/22] opencv: support machines based on oe-core tune-corei7.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,46 +48,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2016 01:00:02 -0000
+X-List-Received-Date: Sun, 10 Jan 2016 01:00:04 -0000
 
 From: Andre McCurdy <armccurdy@gmail.com>
+
+oe-core tune-corei7.inc enables -msse4.2 (rather than -msse3, which is
+only enabled by tune-core2.inc). Add test for -msse4.2 to ensure that
+SSE is enabled for machines based on tune-corei7.inc (also add a test
+for -msse4.1 for completeness).
 
 Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/opencv/opencv_2.4.bb | 3 ++-
- meta-oe/recipes-support/opencv/opencv_3.0.bb | 3 ++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/opencv/opencv_2.4.bb | 2 ++
+ meta-oe/recipes-support/opencv/opencv_3.0.bb | 2 ++
+ 2 files changed, 4 insertions(+)
 
 diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-index 14d025c..508655e 100644
+index 508655e..a74853c 100644
 --- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
 +++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-@@ -5,7 +5,8 @@ SECTION = "libs"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a6fca7a2c192932466bb14"
- 
--ARM_INSTRUCTION_SET = "arm"
-+ARM_INSTRUCTION_SET_armv4 = "arm"
-+ARM_INSTRUCTION_SET_armv5 = "arm"
- 
- DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0"
- 
+@@ -28,6 +28,8 @@ EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}
+                  -DWITH_1394=OFF \
+                  -DCMAKE_SKIP_RPATH=ON \
+                  ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
++                 ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
++                 ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
+                  ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
+                  ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
+ "
 diff --git a/meta-oe/recipes-support/opencv/opencv_3.0.bb b/meta-oe/recipes-support/opencv/opencv_3.0.bb
-index dee4436..8ffe1cf 100644
+index 8ffe1cf..1948a16 100644
 --- a/meta-oe/recipes-support/opencv/opencv_3.0.bb
 +++ b/meta-oe/recipes-support/opencv/opencv_3.0.bb
-@@ -5,7 +5,8 @@ SECTION = "libs"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0ea90d28b4de883d7af5e6711f14f7bf"
- 
--ARM_INSTRUCTION_SET = "arm"
-+ARM_INSTRUCTION_SET_armv4 = "arm"
-+ARM_INSTRUCTION_SET_armv5 = "arm"
- 
- DEFAULT_PREFERENCE = "-1"
- 
+@@ -27,6 +27,8 @@ EXTRA_OECMAKE = "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DI
+                  -DWITH_1394=OFF \
+                  -DCMAKE_SKIP_RPATH=ON \
+                  ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
++                 ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
++                 ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
+                  ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
+                  ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
+ "
 -- 
 1.9.1
 
