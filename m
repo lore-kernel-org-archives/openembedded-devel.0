@@ -1,43 +1,43 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 504DE731DB
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id A0C4B75D4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2016 00:59:54 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id 65so2220156pfd.1
+	Sun, 10 Jan 2016 00:59:56 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id 65so2218083pff.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Jan 2016 16:59:56 -0800 (PST)
+	Sat, 09 Jan 2016 16:59:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=Gu73gjSpu33pF7J6/kHCyWCNf5TUoCCk/xJPIi9V37c=;
-	b=VPMHLvCspHcNFbCIB1eKwqtOxlSmjWcfW05XzjDpVvy7S5ErB3B2DXLOBUJwg96r34
-	NNmtK5aka6E06PNryq0CFvU7UKOpS4ATK/Jsv+ZjLfX55A8sdnuwWtpiVbC7qFGlNuHy
-	zUJOKqat5/pkpq+jKnnrSeKKnkqDTgWYc+JEcLf4cdbp8KMEGrrkXIjTZXkgDaH/QN4d
-	jvS2gb+bnvMrk4ObtL3JXZcIwGLjfQ40RTBkRqvZj0qsiQdDZ7YucBpcbUeqDoMuu6pd
-	V8hONCN2HcLHfGAJ0gpIHBzu6YIe3ITMM8Oz282pOt9geYyP8MqP7KGwjatFU1tWDQJ0
-	4HIw==
-X-Received: by 10.98.31.219 with SMTP id l88mr15766217pfj.92.1452387595897;
-	Sat, 09 Jan 2016 16:59:55 -0800 (PST)
+	bh=2LwwNPUdwHmP2ydp1wL4Vfk3LOsVeQZy9bIbO0QZFwI=;
+	b=u3m+Khe5V24sr951D9EuvBlE6KmyU+jLBhr3CWrWSb/aLCkkDAebquEQmbtf4RMHwV
+	rrN+56PBEHPoZw1DSh/j9P5p0vS9VihBwu2L7f49+GbWmBlOcvqEMhUFggrOhKWsNyjA
+	3bHKDE0QaAuv3WKTpnLNIQ67d9K4/AOSuNrjpT+YLlccZPEq/XqDNrxQnV0Q22Xo+y2U
+	W1NrbcDMBMS15JSDg1zMhrFsHVvjFrRbUu4Dbpr0+gIAA+YpgZeNKg644E+KJtnxm6AR
+	66MR4bnN4cdteeRcrpoGJCU87MXpkAG7I+GL+Nkp+G9rvIARNAfSPKJNbYJ5JC/l93Dj
+	H9Zg==
+X-Received: by 10.98.80.149 with SMTP id g21mr15854448pfj.127.1452387597065;
+	Sat, 09 Jan 2016 16:59:57 -0800 (PST)
 Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
 	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	dg1sm176209624pad.18.2016.01.09.16.59.51
+	y18sm13764807pfi.84.2016.01.09.16.59.52
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Sat, 09 Jan 2016 16:59:52 -0800 (PST)
 Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
-	id 7074DFCC83B; Sat,  9 Jan 2016 16:59:47 -0800 (PST)
+	id 80BDFFCC83C; Sat,  9 Jan 2016 16:59:47 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Jan 2016 16:59:26 -0800
-Message-Id: <fb70606cad762011811931603fcc994b2183523b.1452386603.git.akuster808@gmail.com>
+Date: Sat,  9 Jan 2016 16:59:27 -0800
+Message-Id: <f05f79eb898f675be2de3b2c578fbbe4b4ce7d97.1452386603.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1452386602.git.akuster808@gmail.com>
 References: <cover.1452386602.git.akuster808@gmail.com>
 In-Reply-To: <cover.1452386602.git.akuster808@gmail.com>
 References: <cover.1452386602.git.akuster808@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 03/22] VLC: PACKAGECONFIG for new dependency on libvncserver
+Subject: [PATCH 04/22] VLC: depend on jpeg rather than libjpeg-turbo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,30 +50,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2016 00:59:55 -0000
+X-List-Received-Date: Sun, 10 Jan 2016 00:59:56 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Rafaël Carré <funman@videolan.org>
 
+The underlying libjpeg implementation doesn't matter
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index ce3601d..a5b214d 100644
+index a5b214d..46dbd5d 100644
 --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
 +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -72,6 +72,7 @@ PACKAGECONFIG[notify] = "--enable-notify,--disable-notify, libnotify gtk+"
- PACKAGECONFIG[fontconfig] = "--enable-fontconfig,--disable-fontconfig, fontconfig"
- PACKAGECONFIG[freetype] = "--enable-freetype,--disable-freetype, freetype"
- PACKAGECONFIG[dvdread] = "--enable-dvdread,--disable-dvdread, libdvdread libdvdcss"
-+PACKAGECONFIG[vnc] = "--enable-vnc,--disable-vnc, libvncserver"
+@@ -9,7 +9,7 @@ DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native \
+    virtual/libsdl libsdl-image dbus dbus-glib libxml2 gnutls \
+    tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
+    lua-native lua libidn \
+-   avahi libjpeg-turbo xz libmodplug mpeg2dec \
++   avahi jpeg xz libmodplug mpeg2dec \
+    libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
+    tiff xcb-util-keysyms"
  
- do_configure_prepend() {
-     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
 -- 
 1.9.1
 
