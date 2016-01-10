@@ -1,41 +1,41 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 63C1A731DB
+Received: from mail-pa0-f67.google.com (mail-pa0-f67.google.com
+	[209.85.220.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 0156E731F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2016 00:59:52 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id e65so2225932pfe.0
+	Sun, 10 Jan 2016 00:59:53 +0000 (UTC)
+Received: by mail-pa0-f67.google.com with SMTP id gi1so30430633pac.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 09 Jan 2016 16:59:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=wDRTHq/prijqPh/jBWMgUcyzz38j98j2iGsR92hLa1o=;
-	b=U/t9CGRfRbkBJOoymOeJPWRf/bksJ353UOudObVyrH1ausoIU2w9zBDk+BkF4P60QZ
-	31bdlyoX7L0f+OI3cFtMvuXXKNH3rzfezqIhnqUUOD+8tkopKoYg64tHIqgpJ8vQCo3O
-	epLRn19S/SojrA1IHb2x76D3ciOMoKVeCKnf6d4nEGGkiUR38qYB+r4EEicQx0yk0bRI
-	M8nK9kDQ/Y4PKYtU9xwYpNC0/gEQrBsBC7rzfS8hSczg10qvVDTl8J0Vg4ArSChMQuwS
-	Aev6lGWv6eBlvw0MBQ6bdY+tjrFx5TUyBthA4IuE6gho2TQDnHqQHOLIaax9h4JRHXzK
-	WLHA==
-X-Received: by 10.98.17.199 with SMTP id 68mr15842643pfr.30.1452387593820;
-	Sat, 09 Jan 2016 16:59:53 -0800 (PST)
+	:references; bh=Ql1H/xOaL4a1e2UulE/rw2Op7IDicZijl5g7J3iVHDQ=;
+	b=zcBVnkPBmi1+6td2rJUtzoB8Bq2RWtAHeFGiyqeLFrbFsphpJZ6fMo+aWF+C/T+lFy
+	g1v4e/6MvRVPpT5nzTV/+YkQQjqtPMrpKFLXtRKJBJ3MJ1NwAgo7XLDb6sJSvx41pY3u
+	bHMFxvk3nQwiwIJ8N1AERXgw9+NpPX7qoQ4LlW6Q1NekwBPfYqRYV1oAN3ZoykG9OCEn
+	unHwQBXpcJFTVV3SAsIcs6WmVFOMGCsvFJqFub8WnfqmCLNG3+e/x6dsgkrk0CeeztD0
+	x2UlQ+LRBKsmU8eH6VIMQexPmBPN7ktMNs5UgYs+is36Fgeahxl1u4CftfQfRIOEHNTa
+	O+ew==
+X-Received: by 10.66.240.97 with SMTP id vz1mr170257603pac.29.1452387594589;
+	Sat, 09 Jan 2016 16:59:54 -0800 (PST)
 Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
 	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	r89sm13762624pfa.57.2016.01.09.16.59.51
+	cq4sm60440014pad.28.2016.01.09.16.59.51
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Sat, 09 Jan 2016 16:59:52 -0800 (PST)
 Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
-	id 52880FCC839; Sat,  9 Jan 2016 16:59:47 -0800 (PST)
+	id 6029AFCC83A; Sat,  9 Jan 2016 16:59:47 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Jan 2016 16:59:24 -0800
-Message-Id: <ca0dcf0522c13b32f8a04c95002a979896c6a708.1452386602.git.akuster808@gmail.com>
+Date: Sat,  9 Jan 2016 16:59:25 -0800
+Message-Id: <8e25d89cc2eb0a5348ce12c4a9c4f9bed65b2d63.1452386603.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1452386602.git.akuster808@gmail.com>
 References: <cover.1452386602.git.akuster808@gmail.com>
 In-Reply-To: <cover.1452386602.git.akuster808@gmail.com>
 References: <cover.1452386602.git.akuster808@gmail.com>
-Subject: [PATCH 01/22] edac-utils: add patches for initscript
+Subject: [PATCH 02/22] kexec-tools-klibc: add explicit SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,221 +48,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2016 00:59:53 -0000
+X-List-Received-Date: Sun, 10 Jan 2016 00:59:54 -0000
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 
-Update LIC_FILES_CHKSUM that the whole license file should be used
-rather than the first 2 lines.
+After commit c2492ed SRC_URI of the recipe contains the kdump script.
+Kdump is not in the purposes of this recipe so we restore the plain SRC_URI.
 
-Remove COMPATIBLE_HOST that edac-utils could build for all architectures.
-
-Update runtime dependencies:
-
-* add perl modules that edac-ctl needs
-* add dmidecode for the archs which are in COMPATIBLE_HOST of dmidecode
-  that dmidecode is required by command edac-ctl.
-
-And add patches for initscripts to:
-
-* add restart subcommand
-* make init script be able to load EDAC module automatically
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-support/edac-utils/edac-utils_git.bb   | 19 +++--
- .../files/add-restart-to-initscript.patch          | 33 ++++++++
- ...cript-be-able-to-automatically-load-EDAC-.patch | 98 ++++++++++++++++++++++
- 3 files changed, 145 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-support/edac-utils/files/add-restart-to-initscript.patch
- create mode 100644 meta-oe/recipes-support/edac-utils/files/make-init-script-be-able-to-automatically-load-EDAC-.patch
+ meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/edac-utils/edac-utils_git.bb b/meta-oe/recipes-support/edac-utils/edac-utils_git.bb
-index e5621ad..9bd2f0a 100644
---- a/meta-oe/recipes-support/edac-utils/edac-utils_git.bb
-+++ b/meta-oe/recipes-support/edac-utils/edac-utils_git.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Userspace helper for Linux kernel EDAC drivers"
- HOMEPAGE = "https://github.com/grondo/edac-utils"
- SECTION = "Applications/System"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;beginline=1;endline=2;md5=1fbd81241fe252ec0f5658a521ab7dd8"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
+index d5b7bbe..c9fec25 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
+@@ -8,6 +8,8 @@ inherit klibc
  
- DEPENDS = " sysfsutils"
+ FILESPATH =. "${FILE_DIRNAME}/kexec-tools-${PV}:"
  
-@@ -11,7 +11,10 @@ PV = "0.16+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
- 
--SRC_URI = "git://github.com/grondo/edac-utils;protocol=http"
-+SRC_URI = "git://github.com/grondo/edac-utils \
-+    file://make-init-script-be-able-to-automatically-load-EDAC-.patch \
-+    file://add-restart-to-initscript.patch \
-+"
- 
- inherit autotools-brokensep
- 
-@@ -20,6 +23,12 @@ do_configure_prepend () {
-     ${S}/bootstrap
- }
- 
--COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
--
--RDEPENDS_${PN} = " perl"
-+RDEPENDS_${PN}_x86 = "dmidecode"
-+RDEPENDS_${PN}_x86-64 = "dmidecode"
-+RDEPENDS_${PN}_arm = "dmidecode"
-+RDEPENDS_${PN}_aarch64 = "dmidecode"
-+RDEPENDS_${PN}_powerpc = "dmidecode"
-+RDEPENDS_${PN}_powerpc64 = "dmidecode"
-+RDEPENDS_${PN}_append = " \
-+    perl-module-file-basename perl-module-file-find perl-module-getopt-long perl-module-posix \
-+"
-diff --git a/meta-oe/recipes-support/edac-utils/files/add-restart-to-initscript.patch b/meta-oe/recipes-support/edac-utils/files/add-restart-to-initscript.patch
-new file mode 100644
-index 0000000..87051da
---- /dev/null
-+++ b/meta-oe/recipes-support/edac-utils/files/add-restart-to-initscript.patch
-@@ -0,0 +1,33 @@
-+From 3ade837f64de0cfe2aed5bc52f7919760f350531 Mon Sep 17 00:00:00 2001
-+From: Wenzong Fan <wenzong.fan@windriver.com>
-+Date: Fri, 7 Mar 2014 00:57:12 -0500
-+Subject: [PATCH] edac: add restart to initscript
++SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/kexec/kexec-tools-${PV}.tar.gz"
 +
-+Upstream-Status: Pending
-+
-+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-+---
-+ src/etc/edac.init.in |    6 +++++-
-+ 1 file changed, 5 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/etc/edac.init.in b/src/etc/edac.init.in
-+index adf76ee..007a519 100644
-+--- a/src/etc/edac.init.in
-++++ b/src/etc/edac.init.in
-+@@ -155,8 +155,12 @@ case "$1" in
-+   status)
-+     service_status
-+     ;;
-++  restart)
-++    service_stop
-++    service_start
-++    ;;
-+   *)
-+-    COMMANDS="start|stop|status"
-++    COMMANDS="start|stop|status|restart"
-+     echo "Usage: $0 {${COMMANDS}}"
-+     exit 2
-+     ;;
-+-- 
-+1.7.9.5
-+
-diff --git a/meta-oe/recipes-support/edac-utils/files/make-init-script-be-able-to-automatically-load-EDAC-.patch b/meta-oe/recipes-support/edac-utils/files/make-init-script-be-able-to-automatically-load-EDAC-.patch
-new file mode 100644
-index 0000000..fddc25f
---- /dev/null
-+++ b/meta-oe/recipes-support/edac-utils/files/make-init-script-be-able-to-automatically-load-EDAC-.patch
-@@ -0,0 +1,98 @@
-+make init script be able to automatically load EDAC module.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-+---
-+ src/etc/edac.init.in |   49 +++++++++++++++++++++++++++++++++++++++++++++++--
-+ 1 file changed, 47 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/etc/edac.init.in b/src/etc/edac.init.in
-+index 7a51da9..5b568c4 100644
-+--- a/src/etc/edac.init.in
-++++ b/src/etc/edac.init.in
-+@@ -42,7 +42,6 @@ for dir in "$sysconfdir/default" "$sysconfdir/sysconfig"; do
-+   [ -f "$dir/$SERVICE" ] && . "$dir/$SERVICE"
-+ done
-+ 
-+-
-+ ###############################################################################
-+ 
-+ service_start ()
-+@@ -52,6 +51,46 @@ service_start ()
-+ # Assume that if EDAC_DRIVER is not set, then EDAC is configured
-+ #  automatically, thus return successfully, but don't do anything.
-+ #
-++    if [ ! -f /etc/edac/edac-driver ]; then
-++         [ -d /sys/bus/edac/devices/mc/mc0 ] && \
-++         echo `lsmod | grep _edac | cut -d" " -f1` > /etc/edac/edac-driver
-++    fi
-++
-++    [ -f /etc/edac/edac-driver ] && EDAC_DRIVER=`cat /etc/edac/edac-driver`
-++
-++    if [ -z "$EDAC_DRIVER" ]; then
-++
-++        DRIVER_PATH=/lib/modules/`uname -r`/kernel/drivers/edac
-++        oldpath=`pwd`
-++        if [ -d $DRIVER_PATH ]; then
-++
-++            cd $DRIVER_PATH
-++
-++            for i in $(/bin/ls | /usr/bin/cut -d. -f1) ; do
-++                /sbin/modprobe $i 2>/dev/null
-++                if [ -d /sys/bus/edac/devices/mc/mc0 ]; then
-++                    echo $i> /etc/edac/edac-driver
-++                    EDAC_DRIVER=$i
-++                    break
-++                fi
-++                /sbin/modprobe -r $i 2>/dev/null
-++            done
-++
-++            cd "$oldpath"
-++
-++
-++            if [ -z "$EDAC_DRIVER" ]; then
-++                echo "This board may not support EDAC, or EDAC module may not be compiled in"
-++                exit
-++            fi
-++
-++        else
-++            echo "This board may not support EDAC, or EDAC module may not be compiled in"
-++            exit
-++        fi
-++
-++    fi
-++
-+   if [ -n "$EDAC_DRIVER" ]; then
-+      echo -n "Starting ${SERVICE}: "
-+      modprobe $EDAC_DRIVER
-+@@ -76,12 +115,15 @@ service_start ()
-+ service_stop ()
-+ {
-+   echo -n "Disabling ${SERVICE}: "
-++
-++  [ -f /etc/edac/edac-driver ] && EDAC_DRIVER=`cat /etc/edac/edac-driver`
-++
-+   if [ -n "$EDAC_DRIVER" ]; then
-+     modprobe -r $EDAC_DRIVER
-+     STATUS=$?
-+     [ $STATUS -eq 0 ] && echo success || echo failure
-+   else
-+-    echo "Not supported for this configuration."
-++    echo "Not supported for this configuration, or EDAC Module is not loaded."
-+     STATUS=6
-+   fi
-+ }
-+@@ -92,6 +134,9 @@ service_status ()
-+ {
-+ # Print the current status of the service.  Required by LSB.
-+ #
-++  [ -f /etc/edac/edac-driver ] && EDAC_DRIVER=`cat /etc/edac/edac-driver`
-++  [ -z "$EDAC_DRIVER" ] && STATUS=1 && exit
-++
-+   edac-ctl --status
-+   STATUS=0
-+ }
-+-- 
-+1.7.10.4
-+
+ SRC_URI += " \
+             file://kexec-elf-rel.patch \
+             file://kexec-syscall.patch \
 -- 
 1.9.1
 
