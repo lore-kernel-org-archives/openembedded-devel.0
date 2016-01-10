@@ -1,41 +1,41 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
-	[209.85.220.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C64175D4A
+Received: from mail-pa0-f65.google.com (mail-pa0-f65.google.com
+	[209.85.220.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F5A9731DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2016 01:00:11 +0000 (UTC)
-Received: by mail-pa0-f66.google.com with SMTP id gi1so30430812pac.2
+	Sun, 10 Jan 2016 01:00:12 +0000 (UTC)
+Received: by mail-pa0-f65.google.com with SMTP id pv5so24115138pac.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Jan 2016 17:00:12 -0800 (PST)
+	Sat, 09 Jan 2016 17:00:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=5HxogltzD7tgBUdpHCFr1+H7UcpkrfX6+9UtWKwRQpA=;
-	b=OZMEslYcowZCgy3evuFAJedvEUnDYORb+TrF9iEtMQYu6LcmmaLvI1HKkwGGJ+fmwk
-	uWb7GxNJDdq8xVhAZng2NdxlTNOMZcWwYL9XjEwBydj1Kgunbe1imTLUEyfkjDgkFiGR
-	zrOfNcFlXcqB+Wo3R5XTeA4bvW/8AtfVD5u0UZxeKDjbQBzhMpxW0SREjS666UdtKtMO
-	zfHYIvWERQ76JeegpzpykWXUbsVt8Xqp2q2pSm2zr7G/8G85mPhN5edyVkHG6MPozllB
-	VKr08ow1yv9CV5ra8PtBXyrEt7vPOo4KwLs1WVxL1DlWVRQed1tpg/t2BRHV8p7/hpqh
-	vTMg==
-X-Received: by 10.67.2.73 with SMTP id bm9mr170906982pad.94.1452387612463;
-	Sat, 09 Jan 2016 17:00:12 -0800 (PST)
+	:references; bh=VIEFw8+/P3J0VE4BjIxppgIMPteJynpbb0F3567RiAw=;
+	b=tF9mGT2BWAJkx1eHj3PXN0h52COzzDoBHz2rp7AA7EjscXXb9O5Shji9xdaasdBnpM
+	tl1Sxjhawg+y8vIQebi3JoMn6rq1hJygwWGRCi/KXDwGb3MrVA930t9Vh7FkCivck/dP
+	0AS2FbRSZSxv+pf3wNjwy5O8khxYtRuOnlcZYYASev02iSY6sIvKU06R2dGz4joueQp3
+	T5VH7vYAgoRMxviK/NgS+OWwe474ZA3d3YhkuUoa4P5bPl5P3muPGpTOaOhoWe1CKYEm
+	O4kb1NqLE65cNeOietev5HsB9CqEn75WXHZmS6edqPAcjJ2N/3gP+9cObwyEB+nYNNU6
+	1UhA==
+X-Received: by 10.67.5.69 with SMTP id ck5mr170322969pad.125.1452387613587;
+	Sat, 09 Jan 2016 17:00:13 -0800 (PST)
 Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by smtp.gmail.com with ESMTPSA id r12sm9314568pfi.9.2016.01.09.17.00.02
+	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
+	dz6sm176347833pab.19.2016.01.09.17.00.03
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Sat, 09 Jan 2016 17:00:05 -0800 (PST)
 Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
-	id 85037FCC84F; Sat,  9 Jan 2016 16:59:48 -0800 (PST)
+	id 97549FCC850; Sat,  9 Jan 2016 16:59:48 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Jan 2016 16:59:44 -0800
-Message-Id: <74a7c7d117604750a6098728d7915de242d0cb64.1452386603.git.akuster808@gmail.com>
+Date: Sat,  9 Jan 2016 16:59:45 -0800
+Message-Id: <929d79a18fb2932ccda73e8478698756fc6d7235.1452386603.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1452386602.git.akuster808@gmail.com>
 References: <cover.1452386602.git.akuster808@gmail.com>
 In-Reply-To: <cover.1452386602.git.akuster808@gmail.com>
 References: <cover.1452386602.git.akuster808@gmail.com>
-Subject: [PATCH 21/22] fltk: fix build issue.
+Subject: [PATCH 22/22] fltk: Fix license warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,74 +48,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2016 01:00:11 -0000
+X-List-Received-Date: Sun, 10 Jan 2016 01:00:12 -0000
 
-this patch fixes:
-Fl_JPEG_Image.cxx: In constructor 'Fl_JPEG_Image::Fl_JPEG_Image(const char*)':
-| Fl_JPEG_Image.cxx:156:29: error: invalid conversion from 'int' to 'boolean' [-fpermissive]
+WARNING: fltk: No generic license file exists for: FLTK in any provider
+
+Add license
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../fltk/fltk-1.1.10/Fl_JPEG_Image_buildix.patch   | 37 ++++++++++++++++++++++
- meta-oe/recipes-support/fltk/fltk_1.1.10.bb        |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-support/fltk/fltk-1.1.10/Fl_JPEG_Image_buildix.patch
+ meta-oe/licenses/FLTK | 43 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
+ create mode 100644 meta-oe/licenses/FLTK
 
-diff --git a/meta-oe/recipes-support/fltk/fltk-1.1.10/Fl_JPEG_Image_buildix.patch b/meta-oe/recipes-support/fltk/fltk-1.1.10/Fl_JPEG_Image_buildix.patch
+diff --git a/meta-oe/licenses/FLTK b/meta-oe/licenses/FLTK
 new file mode 100644
-index 0000000..ea80011
+index 0000000..27a32a2
 --- /dev/null
-+++ b/meta-oe/recipes-support/fltk/fltk-1.1.10/Fl_JPEG_Image_buildix.patch
-@@ -0,0 +1,37 @@
-+fltk: Fl_JPEG_Image.cxx bug in fltk-1.3.x for jpeg-9
++++ b/meta-oe/licenses/FLTK
+@@ -0,0 +1,43 @@
++                             FLTK License
++                           December 11, 2001
 +
-+Link: http://www.fltk.org/str.php?L2920
-+Version: 1.3-current
++The FLTK library and included programs are provided under the terms
++of the GNU Library General Public License (LGPL) with the following
++exceptions:
 +
-+There has been a change in jpeg-9:
++    1. Modifications to the FLTK configure script, config
++       header file, and makefiles by themselves to support
++       a specific platform do not constitute a modified or
++       derivative work.
 +
-+Fl_JPEG_Image.cxx: In constructor 'Fl_JPEG_Image::Fl_JPEG_Image(const
-+char*)':
-+Fl_JPEG_Image.cxx:158:29: error: invalid conversion from 'int' to
-+'boolean' [-fpermissive]
-+In file included from Fl_JPEG_Image.cxx:50:0:
-+/usr/include/jpeglib.h:1032:13: error:   initializing argument 2 of 'int
-+jpeg_read_header(j_decompress_ptr, boolean)' [-fpermissive]
++       The authors do request that such modifications be
++       contributed to the FLTK project - send all
++       contributions to "fltk-bugs@fltk.org".
 +
++    2. Widgets that are subclassed from FLTK widgets do not
++       constitute a derivative work.
 +
-+http://permalink.gmane.org/gmane.comp.lib.fltk.bugs/10893
++    3. Static linking of applications and widgets to the
++       FLTK library does not constitute a derivative work
++       and does not require the author to provide source
++       code for the application or widget, use the shared
++       FLTK libraries, or link their applications or
++       widgets against a user-supplied version of FLTK.
 +
-+Upstream-Status: Backport
++       If you link the application or widget to a modified
++       version of FLTK, then the changes to FLTK must be
++       provided under the terms of the LGPL in sections
++       1, 2, and 4.
 +
-+partical back port as this version is only affected by on change.
++    4. You do not have to provide a copy of the FLTK license
++       with programs that are linked to the FLTK library, nor
++       do you have to identify the FLTK license in your
++       program or documentation as required by section 6
++       of the LGPL.
 +
-+Signed-off-by: Armin Kuster <akuster808@gmail.com>
++       However, programs must still identify their use of FLTK.
++       The following example statement can be included in user
++       documentation to satisfy this requirement:
 +
-+Index: fltk-1.1.10/src/Fl_JPEG_Image.cxx
-+===================================================================
-+--- fltk-1.1.10.orig/src/Fl_JPEG_Image.cxx
-++++ fltk-1.1.10/src/Fl_JPEG_Image.cxx
-+@@ -153,7 +153,7 @@ Fl_JPEG_Image::Fl_JPEG_Image(const char
-+ 
-+   jpeg_create_decompress(&dinfo);
-+   jpeg_stdio_src(&dinfo, fp);
-+-  jpeg_read_header(&dinfo, 1);
-++  jpeg_read_header(&dinfo, TRUE);
-+ 
-+   dinfo.quantize_colors      = (boolean)FALSE;
-+   dinfo.out_color_space      = JCS_RGB;
-diff --git a/meta-oe/recipes-support/fltk/fltk_1.1.10.bb b/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
-index 1404961..22a1a50 100644
---- a/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
-+++ b/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
-@@ -13,6 +13,7 @@ SRC_URI = "ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/fltk/${PV}/fl
-            file://dso-fix.patch \
-            file://libpng15.patch \
-            file://fltk-no-freetype-config.patch \
-+	   file://Fl_JPEG_Image_buildix.patch \
- "
- 
- S = "${WORKDIR}/fltk-${PV}"
++           [program/widget] is based in part on the work of
++           the FLTK project (http://www.fltk.org).
 -- 
 1.9.1
 
