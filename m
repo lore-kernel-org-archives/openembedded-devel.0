@@ -1,41 +1,24 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f68.google.com (mail-pa0-f68.google.com
-	[209.85.220.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 16ED2731F2
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 35D18731E7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2016 01:09:36 +0000 (UTC)
-Received: by mail-pa0-f68.google.com with SMTP id yy13so23105417pab.1
+	Mon, 11 Jan 2016 05:08:27 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u0B58RRE013441
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Jan 2016 17:09:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=sGnW4cy6qh/AzPkOw7zEI0veurgVufDtWNJEFtETkQU=;
-	b=kD0hoIG0M/e4I46gP2n58uJKnAEn9BTnm6QPlxm6H+8OCxuUg9QlyROO+1prElEoUD
-	4h5nrYtkTCuL9BohV5XoRRW2xyYO55iNurYNUdTY8OkV4xceS2lvbz9YJPXDbG9V+7A2
-	pjvm57VJ3xXN6EutaadeVB5DWO8oZst4uA+ND5qGtp3CRp1VaSh0lcopYYzjqSAvaHAS
-	Ll8WM3E44QU+XkdFra7t9ZG7wvceKxrqEv6iD25obVDq2iti+x4XY5k+WlGJ+zYyjzCb
-	v3I3yu3sNTTtburT2H97RbsUY1lm97BvK/OnnO+qrAQPf7GmKRAsfOpKdrP0h4xjJknt
-	Du+w==
-X-Received: by 10.66.102.73 with SMTP id fm9mr117290061pab.32.1452388177508;
-	Sat, 09 Jan 2016 17:09:37 -0800 (PST)
-Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	xi8sm176256895pab.9.2016.01.09.17.09.36
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Jan 2016 17:09:36 -0800 (PST)
-Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
-	id 70A7AFCC84D; Sat,  9 Jan 2016 16:59:48 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Jan 2016 16:59:43 -0800
-Message-Id: <eb6ae296f1771c4d6c184d0f8ce0c4b0948f53da.1452386603.git.akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <cover.1452386602.git.akuster808@gmail.com>
-References: <cover.1452386602.git.akuster808@gmail.com>
-In-Reply-To: <cover.1452386602.git.akuster808@gmail.com>
-References: <cover.1452386602.git.akuster808@gmail.com>
-Subject: [PATCH 20/22] gnome-desktop: Fix QA issue
+	Sun, 10 Jan 2016 21:08:28 -0800
+Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Sun, 10 Jan 2016 21:08:27 -0800
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 10 Jan 2016 21:08:27 -0800
+Message-ID: <1452488907-37191-1-git-send-email-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [meta-oe] [PATCH] dfu-util: use BP in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,26 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2016 01:09:37 -0000
+X-List-Received-Date: Mon, 11 Jan 2016 05:08:28 -0000
+Content-Type: text/plain
 
-WARNING: QA Issue: /usr/bin/gnome-about_gnome-desktop contained in package gnome-desktop requires /usr/bin/python, but no providers found in its RDEPENDS [file-rdeps]
+The PN caused multilib do_fetch error.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb | 2 +-
+ meta-oe/recipes-support/dfu-util/dfu-util_0.8.bb |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-index 6256396..1dff745 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-@@ -27,4 +27,4 @@ FILES_${PN} += "${datadir}/gnome-about"
+diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.8.bb b/meta-oe/recipes-support/dfu-util/dfu-util_0.8.bb
+index 51d00c6..51f4ae1 100644
+--- a/meta-oe/recipes-support/dfu-util/dfu-util_0.8.bb
++++ b/meta-oe/recipes-support/dfu-util/dfu-util_0.8.bb
+@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- # for gnome-about
- RRECOMMENDS_${PN} += "python-pygtk python-pycairo"
--
-+RDEPENDS_${PN} += "python"
+ 
+-SRC_URI = "http://dfu-util.gnumonks.org/releases/${PN}-${PV}.tar.gz \
++SRC_URI = "http://dfu-util.gnumonks.org/releases/${BP}.tar.gz \
+     file://0001-configure.ac-Don-t-check-for-usbpath.patch \
+ "
+ 
 -- 
-1.9.1
+1.7.9.5
 
 
