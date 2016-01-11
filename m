@@ -1,40 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
-	[209.85.220.50])
-	by mail.openembedded.org (Postfix) with ESMTP id E659F731C2
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qg0-f65.google.com (mail-qg0-f65.google.com
+	[209.85.192.65])
+	by mail.openembedded.org (Postfix) with ESMTP id BB6046FEE0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2016 20:43:25 +0000 (UTC)
-Received: by mail-pa0-f50.google.com with SMTP id uo6so309917243pac.1
+	Mon, 11 Jan 2016 23:01:07 +0000 (UTC)
+Received: by mail-qg0-f65.google.com with SMTP id b35so41673219qge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2016 12:43:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=UQD19es9Zl39zq7uSrCrg4csnXZ6g3pzu6Tu0XB9xVc=;
-	b=TUsqwLrAzxjvu6+XNWMsjg1f+z7WyXXsFAUXHv91FDvjxiBfMssIY/z1ZWsAEaRIWK
-	WDy9x+fS+IvShVrhEcQznjn0vjpSpaQ5umghE3OZ8r44uDdEunCh37Q4j0UVM1a+j5e9
-	a+JahmTn0s+ZOXf2QWMVy9711i4BN1+vDDjJXVgdHpOaP6GEFwYq6OLStlHlNyHQxK1c
-	fCNNZPQconYo9grlonok81AZ5aCFkAw8ZKmu9AO4zCkgy7C3f4v/oWNNdUso57cj1xfz
-	89PD8wzuKeoETCXfkAPtLf3Sp+F+yEwmcdRarHtQ3no7Y0AAWzYm4KYcu5yOygVdZp56
-	G3pg==
-X-Received: by 10.66.193.36 with SMTP id hl4mr183517449pac.153.1452545005892; 
-	Mon, 11 Jan 2016 12:43:25 -0800 (PST)
-Received: from [192.168.0.4] (c-73-252-206-77.hsd1.ca.comcast.net.
-	[73.252.206.77]) by smtp.gmail.com with ESMTPSA id
-	b28sm25210703pfd.24.2016.01.11.12.43.24
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 11 Jan 2016 12:43:25 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1451901856-5089-1-git-send-email-schnitzeltony@googlemail.com>
-Date: Mon, 11 Jan 2016 12:43:21 -0800
-Message-Id: <3AC232C3-65B9-45D8-8E3B-00D1BBE261BE@gmail.com>
-References: <1451901856-5089-1-git-send-email-schnitzeltony@googlemail.com>
+	Mon, 11 Jan 2016 15:01:08 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=from:to:cc:subject:date:message-id;
+	bh=klXdRKI3KqzPJYC9uIVnpex5EKf31rXRgl2z41zD+Fo=;
+	b=h0ctyRr9SMQIlZ3fdg0rRSpWpk3grVzzH9lf9Ijm0kUVBp0x207KAx+oxAwNp+85Px
+	EzTqfvyibZef81xeboM/yBac/6P4fBiAecdK8yT9jtXB5s7x/eNrc1l0bxgewXZgdk/H
+	sxcFApI8ezpH+nioLJkD2jBZtEbNIKit8iUAtZqUcfYn2yqzTiYyvK5u1/qhH33+iE1X
+	XuiPBe9g4hmD6rWRMLRwskIYTs62WjR1DtFO9w4Zbq9rOMLUWUlvwfQL+DiMSK1BaxVc
+	D2fhbMS81LOreixAhufd0CfzRnwnoP7MApGVmCJDfu8GqTbHrU9N2YKNGtpr+C9you5e
+	Wagg==
+X-Received: by 10.140.101.130 with SMTP id u2mr171430284qge.71.1452553268027; 
+	Mon, 11 Jan 2016 15:01:08 -0800 (PST)
+Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
+	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
+	e184sm55575154qkb.40.2016.01.11.15.01.07
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 11 Jan 2016 15:01:07 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3112)
-Subject: Re: [PATCH][meta-qt5][master/jethro] qtscript/qtwebkit: disable thumb for armv4 and armv5 only to fix segfault on armv7
+Date: Mon, 11 Jan 2016 18:00:59 -0500
+Message-Id: <1452553260-4147-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-python][PATCH v2 1/2] python-jsonpatch: add recipe for 1.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,130 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2016 20:43:27 -0000
-X-Groupsio-MsgNum: 59470
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_D5F4DD22-003D-4BB8-9F39-4CAB758ADACC";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Mon, 11 Jan 2016 23:01:08 -0000
 
---Apple-Mail=_D5F4DD22-003D-4BB8-9F39-4CAB758ADACC
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+---
+ .../python/python-jsonpatch_1.12.bb                 | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb
 
-
-> On Jan 4, 2016, at 2:04 AM, Andreas M=C3=BCller =
-<schnitzeltony@googlemail.com> wrote:
->=20
-> We have a simple application containing a QWebView which segfaulted =
-during
-> loading a page on a CortexA9 (armv7 thumb2). After enabling debug =
-information
-> for qtwebkit and remote debug session the point of segfault was =
-detected in
->=20
-> Source/JavaScriptCore/llint/LowLevelInterpreter.asm:1082
->  callSlowPath(_llint_slow_path_new_func_exp)
-
-
-yes llint has issues with arm mode on armv7
->=20
-> Further digging around lead to similar source in:
->=20
-> * qtwebkit: Source/JavaScriptCore/assembler/ARMv7Assembler.h
-> * qtscript: =
-src/3rdparty/javascriptcore/JavaScriptCore/assembler/ARMv7Assembler.h
->=20
-> In these files a class ARMThumbImmediate is declared and used in many =
-places.
-> This lead me to the suspicion that compiligng for armv7 expects thumb =
-support.
->=20
-> The following tests were performed:
->=20
-> * our application is working fine again
-> * qtscript and qtwebkit were build with
->  'ARM_INSTRUCTION_SET =3D "thumb"' =3D> TUNE_FEATURES =3D "arm armv5 =
-thumb dsp"
->  for qemuarm without issues
->=20
-> This is a partial/rebased revert of:
-> commit 932b32c1c9e9a3ac833c82ff9273683345056ec7
-> Author: Martin Jansa <Martin.Jansa@gmail.com>
-> Date:   Wed Apr 22 15:33:01 2015 +0200
->=20
->    qtscript,qtwebking: disable thumb
->=20
->    * qemuarm builds fail when thumb is enabled
->=20
->    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->=20
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> ---
-> recipes-qt/qt5/qtscript_git.bb | 3 ++-
-> recipes-qt/qt5/qtwebkit_git.bb | 3 ++-
-> 2 files changed, 4 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes-qt/qt5/qtscript_git.bb =
-b/recipes-qt/qt5/qtscript_git.bb
-> index c6dca51..c53217a 100644
-> --- a/recipes-qt/qt5/qtscript_git.bb
-> +++ b/recipes-qt/qt5/qtscript_git.bb
-> @@ -22,7 +22,8 @@ LIC_FILES_CHKSUM =3D " \
-> #{standard input}:23: Error: selected processor does not support Thumb =
-mode `stmdb sp!,{r4-r8,lr}'
-> #{standard input}:30: Error: lo register required -- `ldmia =
-sp!,{r4-r8,lr}'
-> #{standard input}:43: Error: lo register required -- `ldmia =
-sp!,{r4-r8,lr}'
-> -ARM_INSTRUCTION_SET =3D "arm"
-> +ARM_INSTRUCTION_SET_armv4 =3D "arm"
-> +ARM_INSTRUCTION_SET_armv5 =3D "arm"
->=20
-> DEPENDS +=3D "qtbase"
->=20
-> diff --git a/recipes-qt/qt5/qtwebkit_git.bb =
-b/recipes-qt/qt5/qtwebkit_git.bb
-> index 862abd2..a952306 100644
-> --- a/recipes-qt/qt5/qtwebkit_git.bb
-> +++ b/recipes-qt/qt5/qtwebkit_git.bb
-> @@ -15,7 +15,8 @@ DEPENDS +=3D "qtbase qtdeclarative icu ruby-native =
-sqlite3 glib-2.0 libxslt"
-> # | {standard input}: Assembler messages:
-> # | {standard input}:106: Error: invalid immediate: 983040 is out of =
-range
-> # | {standard input}:106: Error: value of 983040 too large for field =
-of 2 bytes at 146
-> -ARM_INSTRUCTION_SET =3D "arm"
-> +ARM_INSTRUCTION_SET_armv4 =3D "arm"
-> +ARM_INSTRUCTION_SET_armv5 =3D "arm"
->=20
-> SRC_URI +=3D "\
->     file://0001-qtwebkit-fix-QA-issue-bad-RPATH.patch \
-> --
-> 2.5.0
->=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb b/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb
+new file mode 100644
+index 0000000..504bb99
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb
+@@ -0,0 +1,21 @@
++SUMMARY  = "Appling JSON patches in Python 2.6+ and 3.x"
++HOMEPAGE = "https://github.com/stefankoegl/python-json-patch"
++SECTION = "devel/python"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
++
++SRCNAME = "jsonpatch"
++
++SRC_URI = " \
++    https://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
++"
++
++inherit setuptools
++
++SRC_URI[md5sum] = "76ae3183db5f2a8f85dd7705e9b6f278"
++SRC_URI[sha256sum] = "2e1eb457f9c8dd5dae837ca93c0fe5bd2522c9d44b9b380fb1aab2ab4dec04b1"
++
++RDEPENDS_${PN} += "python-re python-json python-jsonpointer"
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
+-- 
+1.9.1
 
 
---Apple-Mail=_D5F4DD22-003D-4BB8-9F39-4CAB758ADACC
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlaUE+wACgkQuwUzVZGdMxSTiACdEeO9e+qb4ZVv0UmyzkXgJlU7
-FHwAn0c5BcX8EXKUGE9XRY30DBvKLM1l
-=9LdO
------END PGP SIGNATURE-----
-
---Apple-Mail=_D5F4DD22-003D-4BB8-9F39-4CAB758ADACC--
