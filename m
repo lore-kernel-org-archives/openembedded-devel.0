@@ -1,26 +1,44 @@
-Return-Path: <mike.looijmans@topic.nl>
-Received: from smtp05.mail.online.nl (smtp05.mail.online.nl [194.134.25.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 22463607A4
+Return-Path: <Javier.Viguera@digi.com>
+X-Greylist: delayed 371 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 12 Jan 2016 16:32:12 UTC
+Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
+	[216.82.251.3])
+	by mail.openembedded.org (Postfix) with ESMTP id AE11660132
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2016 15:17:56 +0000 (UTC)
-Received: from [192.168.1.4] (s55969068.adsl.online.nl [85.150.144.104])
-	by smtp05.mail.online.nl (Postfix) with ESMTP id B5269200021
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2016 16:17:55 +0100 (CET)
-To: openembedded-devel@lists.openembedded.org
-References: <1452534832-3203-1-git-send-email-mike.looijmans@topic.nl>
-	<1D770D53-86F4-45AA-9515-0A2F9538575F@gmail.com>
-	<5693EF1C.5090500@topic.nl>
-	<B0874E89-F998-4786-B284-E02D7A86A9B4@gmail.com>
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: Topic
-Message-ID: <56951923.4020703@topic.nl>
-Date: Tue, 12 Jan 2016 16:17:55 +0100
+	Tue, 12 Jan 2016 16:32:12 +0000 (UTC)
+Received: from [216.82.249.147] by server-3.bemta-12.messagelabs.com id
+	31/6E-21005-91925965; Tue, 12 Jan 2016 16:26:01 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-11.tower-29.messagelabs.com!1452615961!12573071!1
+X-Originating-IP: [192.109.95.98]
+X-StarScan-Received: 
+X-StarScan-Version: 7.35.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 10760 invoked from network); 12 Jan 2016 16:26:01 -0000
+Received: from unknown (HELO DOR-VMS-XCH01.digi.com) (192.109.95.98)
+	by server-11.tower-29.messagelabs.com with SMTP;
+	12 Jan 2016 16:26:01 -0000
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by DOR-VMS-XCH01.digi.com
+	(10.49.8.98) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Tue, 12 Jan 2016 17:25:53 +0100
+Received: from [10.101.2.54] (10.101.2.54) by dor-sms-xch01.digi.com
+	(10.49.8.99) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Tue, 12 Jan 2016 17:25:53 +0100
+To: <openembedded-devel@lists.openembedded.org>
+References: <1451923194-60100-1-git-send-email-javier.viguera@digi.com>
+	<20160104161718.GA2378@jama> <568AA04B.8000101@digi.com>
+	<20160104203745.GB2378@jama>
+From: Javier Viguera <javier.viguera@digi.com>
+Message-ID: <5695290B.90706@digi.com>
+Date: Tue, 12 Jan 2016 17:25:47 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
 	Thunderbird/38.4.0
 MIME-Version: 1.0
-In-Reply-To: <B0874E89-F998-4786-B284-E02D7A86A9B4@gmail.com>
-Subject: Re: [meta-networking][PATCH] recipes-connectivity/samba: Only rmdir directories that exist
+In-Reply-To: <20160104203745.GB2378@jama>
+X-Originating-IP: [10.101.2.54]
+X-KSE-AntiSpam-Interceptor-Info: protection disabled
+X-KSE-AntiSpam-Interceptor-Info: protection disabled
+Subject: Re: [meta-qt5][master][jethro][PATCH] qtconnectivity, qtsystems: fix bluetooth support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,62 +51,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2016 15:17:59 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 12 Jan 2016 16:32:14 -0000
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: 7bit
 
-On 11-01-16 19:11, Khem Raj wrote:
->
->> On Jan 11, 2016, at 10:06 AM, Mike Looijmans <mike.looijmans@topic.nl> wrote:
->>
->> On 11-01-16 19:00, Khem Raj wrote:
->>>
->>>> On Jan 11, 2016, at 9:53 AM, Mike Looijmans <mike.looijmans@topic.nl> wrote:
->>>>
->>>> Depending on PACKAGECONFIG selection, the /run/samba directory may not
->>>> have been created. Make the do_install_append handle both situations
->>>> by checking whether these directories exist before attempting to remove
->>>> them.
->>>>
->>>> This fixes do_install failing with an error like this:
->>>> rmdir: failed to remove '/.../samba/4.1.12-r0/image/run/samba': No such file or directory
->>>>
->>>> Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
->>>> ---
->>>> meta-networking/recipes-connectivity/samba/samba_4.1.12.bb | 8 ++++++--
->>>> 1 file changed, 6 insertions(+), 2 deletions(-)
->>>>
->>>> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
->>>> index a51d31f..8e89e49 100644
->>>> --- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
->>>> +++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
->>>> @@ -104,8 +104,12 @@ EXTRA_OECONF += "--enable-fhs \
->>>> LDFLAGS += "-Wl,-z,relro,-z,now"
->>>>
->>>> do_install_append() {
->>>> -    rmdir --ignore-fail-on-non-empty "${D}/run/samba"
->>>> -    rmdir --ignore-fail-on-non-empty "${D}/run"
->>>> +    if [ -d "${D}/run" ]; then
->>>> +        if [ -d "${D}/run/samba" ]; then
->>>> +            rmdir --ignore-fail-on-non-empty "${D}/run/samba"
->>>> +        fi
->>>> +        rmdir --ignore-fail-on-non-empty "${D}/run"
->>>> +    fi
->>>
->>> why don’t we delete /run completely ? it won’t work if package contents are in there anyway
->>>
->>
->> That's what I do in a bbappend, just "rm -rf ${D}/run" (and also replace the non-functional startup script, but that's distro specific), but I thought that it might serve some purpose for the one who wrote the recipe.
->>
->> /run is usually volatile, so putting files in there is pointless, right?
->
-> yes although, you should add code to generate those files during post_inst
+Hi Martin
 
-That wouldn't work, they'll be gone when the system boots. Only way to 
-create files there would be to use the 'volatiles' system.
+On 04/01/16 21:37, Martin Jansa wrote:
+> Some distros are still using bluez4, you can try it as well with:
+> DISTRO_FEATURES_remove = "bluez5"
+> DISTRO_FEATURES_append = " bluez4"
+> 
+> But nothing prevents bluez5 from being populated in the sysroot, because
+> unlike bluez4 in meta-oe, bluez5 in oe-core doesn't set the PNBLACKLIST
+> the make these 2 recipes really mutually exclusive in sysroot.
 
-Just removing /run with "rm -rf ${D}/run" will work just fine. The code 
-above will generate a QA warning if something gets installed into /run.
+Seems that this problem was finally solved in:
 
-Just let me know which you prefer, I'll send a v2 patch.
+http://git.openembedded.org/openembedded-core/commit/?id=0a556af62b509f9defd8ac5b3a6648bdfe1dff67
+
+So here my humble ping for this commit (master and jethro).
+
+-- 
+Regards,
+
+Javier Viguera
 
