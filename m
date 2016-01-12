@@ -1,33 +1,30 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E8AD608B7
+Return-Path: <brunovern.a@gmail.com>
+Received: from mail-lb0-f175.google.com (mail-lb0-f175.google.com
+	[209.85.217.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 4609C731F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2016 10:40:21 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1aIwNA-0004qk-R0 for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2016 11:40:20 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2016 11:40:20 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 12 Jan 2016 12:51:30 +0000 (UTC)
+Received: by mail-lb0-f175.google.com with SMTP id oh2so272250799lbb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2016 11:40:20 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 12 Jan 2016 04:51:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=gZGnC2NnlaeKLT4EBgF8dueTzzKPpQdyztbZX/fh30E=;
+	b=yquYkrptgS8e/3O927zbloiIYiXrTnUOKSdg5lS6hwsv0pBjJts8ZKKySHnDCGwm3z
+	XaT/OgENcdbzXtP59nwLG9A0g6aighBWFzLBpCXrSGHUhjGWRXKHhv2ABQHC8xhZ2EpM
+	3mJTLpTFJi/1bA2UtP0GpJYwk1ynCAHqk5TiDhqqtStAtyQMBUmZzUaboE9c5Gccq10I
+	UkMkAn1bJ1frOKCRlY/6WmpEAFrdkUuNM47PQdMCdyhCewXJmuPmvOSWLX7pdpw2NoUn
+	nVOAXNufWTata90E2BFZrr7VlatjgdBPG++p0OwwcNYxg5vJgOlaK16IIChvNXU9mcJP
+	5Bbw==
+X-Received: by 10.112.184.133 with SMTP id eu5mr35466286lbc.99.1452603089299; 
+	Tue, 12 Jan 2016 04:51:29 -0800 (PST)
+MIME-Version: 1.0
+From: Bruno Vernay <brunovern.a@gmail.com>
+Date: Tue, 12 Jan 2016 12:51:19 +0000
+Message-ID: <CAF3KAoQkwWWr=xfifeqP_bK25_ysY_7+B2h7xT6L9P1Pf34KhQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 12 Jan 2016 11:40:10 +0100
-Message-ID: <n72l6a$mlc$1@ger.gmane.org>
-References: <1452593395-19468-1-git-send-email-adrian.freihofer@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:38.0)
-	Gecko/20100101 Thunderbird/38.5.0
-In-Reply-To: <1452593395-19468-1-git-send-email-adrian.freihofer@gmail.com>
-Subject: Re: [meta-oe][PATCHv2 0/4] networkmanager 1.0.6 -> 1.0.10
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-oe] OpenLDAP modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,26 +37,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2016 10:40:23 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Jan 2016 12:51:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi
+It seems that OpenLDAP modules are build, but not all files are installed
+on the target.
+I created an issue in GitHub:
+https://github.com/openembedded/meta-openembedded/issues/21
 
-Op 12-01-16 om 11:09 schreef Adrian Freihofer:
-> networkmanager: update to 1.0.10 networkmanager: add patches, one of them
-> fixes broken openvpn networkmanager-openvpn: Update to 1.0.8 
-> networkmanager: fix ppp rdepend
+Also I could not find any example or documentation on how to use this
+recipe (had to look at the code and trial and error). Is it the way to go
+or is there a place to contribute examples at least?
 
-Patch 2 and 4 can be squashed into patch 1.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFWlNgKMkyGM64RGpERAipgAJ9LLE+bMWhoMB2njYM0z/QF/sjxfACgsFkQ
-KNoBjCYNeyIr9ML3A2fxkF0=
-=0E4A
------END PGP SIGNATURE-----
-
+Regards
+Bruno
 
