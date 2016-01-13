@@ -1,23 +1,21 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 515696FFDA
+Return-Path: <nate.karstens@garmin.com>
+X-Greylist: delayed 428 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 13 Jan 2016 22:14:35 UTC
+Received: from p3plsmtpa12-06.prod.phx3.secureserver.net
+	(p3plsmtpa12-06.prod.phx3.secureserver.net [68.178.252.235])
+	by mail.openembedded.org (Postfix) with ESMTP id 232E76FFE8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2016 21:23:57 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u0DLNwVu003563
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 13 Jan 2016 13:23:58 -0800 (PST)
-Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 13 Jan 2016 13:23:57 -0800
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 Jan 2016 16:23:57 -0500
-Message-ID: <1452720237-22319-1-git-send-email-mark.asselstine@windriver.com>
-X-Mailer: git-send-email 2.1.4
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] ctdb: Fix rootfs creation errors
+	Wed, 13 Jan 2016 22:14:35 +0000 (UTC)
+Received: from OLA-2FCD1M1.garmin.guest ([204.77.163.43])
+	by p3plsmtpa12-06.prod.phx3.secureserver.net with 
+	id 5a7N1s00F0wVTNs01a7TEz; Wed, 13 Jan 2016 15:07:27 -0700
+X-Sender: nate@karstens.us
+From: Nate Karstens <nate.karstens@garmin.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 13 Jan 2016 16:07:21 -0600
+Message-Id: <1452722841-2952-1-git-send-email-nate.karstens@garmin.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH v3] dhcpcd: add recipe for dhcpcd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,99 +28,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2016 21:23:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 13 Jan 2016 22:14:36 -0000
 
-While building an image I was getting an error during rootfs creation
-that ctdb was conflicting with base-files as both were creating
-'/var/run':
+Adds a new recipe for dhcpcd version 6.10.0.
 
-    warning: Removing ctdb-2.5.1-r0@core2_64 due to file /var/run \
-      conflicting with base-files-3.0.14-r89@genericx86_64
-
-This is normally a volatile directory so we have no need
-to include this in the ctdb package, so revert the actions of the
-Makefile by deleting the directory.
-
-Although /run and $localstatedir/run are linked to be consistent we
-update the .service file to use the latter. To ensure the 'ctdb'
-subdir exists we patch the use of RuntimeDirectory= in to the .service
-file. This will compensate for our removal of this directory creation
-from the Makefile.
-
-Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+Signed-off-by: Nate Karstens <nate.karstens@garmin.com>
 ---
+ .../recipes-connectivity/dhcpcd/dhcpcd_6.10.0.bb   | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.10.0.bb
 
-This is a resend of a patch I sent 11/18/15. I see that it is yet to be
-merged but I also have not received any feedback to provide me with any
-details as to why this may not an acceptable change. I am open to making
-the necessary changes to make it acceptable. Meanwhile the problem persists.
-
-
- ...rvice-ensure-the-PID-directory-is-created.patch | 25 ++++++++++++++++++++++
- meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |  6 ++++--
- 2 files changed, 29 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-support/ctdb/ctdb/service-ensure-the-PID-directory-is-created.patch
-
-diff --git a/meta-networking/recipes-support/ctdb/ctdb/service-ensure-the-PID-directory-is-created.patch b/meta-networking/recipes-support/ctdb/ctdb/service-ensure-the-PID-directory-is-created.patch
+diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.10.0.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.10.0.bb
 new file mode 100644
-index 0000000..a7e987b
+index 0000000..6478a02
 --- /dev/null
-+++ b/meta-networking/recipes-support/ctdb/ctdb/service-ensure-the-PID-directory-is-created.patch
-@@ -0,0 +1,25 @@
-+From f02ff7383f1cc0c118732352ccbae476c7b3b3ba Mon Sep 17 00:00:00 2001
-+From: Mark Asselstine <mark.asselstine@windriver.com>
-+Date: Tue, 17 Nov 2015 16:17:00 -0500
-+Subject: [PATCH] service: ensure the PID directory is created
++++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.10.0.bb
+@@ -0,0 +1,22 @@
++SECTION = "console/network"
++SUMMARY = "dhcpcd - a DHCP client"
++DESCRIPTION = "dhcpcd runs on your machine and silently configures your computer to work on the attached networks without trouble and mostly without configuration."
 +
-+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
-+---
-+ config/ctdb.service | 1 +
-+ 1 file changed, 1 insertion(+)
++HOMEPAGE = "http://roy.marples.name/projects/dhcpcd/"
 +
-+diff --git a/config/ctdb.service b/config/ctdb.service
-+index ea37c30..8537105 100644
-+--- a/config/ctdb.service
-++++ b/config/ctdb.service
-+@@ -5,6 +5,7 @@ After=network.target
-+ [Service]
-+ Type=forking
-+ LimitCORE=infinity
-++RuntimeDirectory=/run/ctdb
-+ PIDFile=/run/ctdb/ctdbd.pid
-+ ExecStart=/usr/sbin/ctdbd_wrapper /run/ctdb/ctdbd.pid start
-+ ExecStop=/usr/sbin/ctdbd_wrapper /run/ctdb/ctdbd.pid stop
-+-- 
-+2.1.4
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://dhcpcd.c;endline=26;md5=77c40d671aff804ca91ea99556da8e9b"
 +
-diff --git a/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb b/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-index 0cc7aad..ba9c4e5 100644
---- a/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-+++ b/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-@@ -17,6 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
- SRC_URI = "https://ftp.samba.org/pub/${PN}/${BP}.tar.gz \
-            file://01-support-cross-compile-for-linux-os.patch \
-            file://02-link-rep_snprintf-for-ltdbtool.patch \
-+           file://service-ensure-the-PID-directory-is-created.patch \
-           "
- 
- SRC_URI[md5sum] = "d0cd91726ff4ca2229e1b21859c94717"
-@@ -36,11 +37,12 @@ do_install_append() {
-     install -d ${D}${systemd_unitdir}/system
-     install -m 0644 ${S}/config/ctdb.service ${D}${systemd_unitdir}/system
-     sed -i -e 's,/usr/sbin/,${sbindir}/,' ${D}${systemd_unitdir}/system/ctdb.service
-+    sed -i -e 's,\([=\ ]\)/run/,\1${localstatedir}/run/,' ${D}${systemd_unitdir}/system/ctdb.service
++SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz"
 +
-+    rm -r ${D}/${localstatedir}/run
- }
- 
- SYSTEMD_SERVICE_${PN} = "ctdb.service"
- 
--FILES_${PN} += "/run"
--
- # onnode is a shell script with bashisms and bash #!
- RDEPENDS_${PN} += "bash"
++SRC_URI[md5sum] = "f39c5773e7c4bea352d9fb7367c899de"
++SRC_URI[sha256sum] = "ab56af9b2e86913c55a965cb0f835e87749df78318564acf90d5d698f413ad35"
++
++inherit autotools
++
++B = "${S}"
++EXTRA_OECONF = "--enable-ipv4 --enable-ipv6"
++
++FILES_${PN}-dbg += "/usr/lib/dhcpcd/dev/.debug"
++
++RDEPENDS_${PN} = "udev"
 -- 
-2.1.4
+1.9.1
 
 
