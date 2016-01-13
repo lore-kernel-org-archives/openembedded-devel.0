@@ -1,19 +1,17 @@
 Return-Path: <nate.karstens@garmin.com>
-X-Greylist: delayed 428 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 13 Jan 2016 22:14:35 UTC
-Received: from p3plsmtpa12-06.prod.phx3.secureserver.net
-	(p3plsmtpa12-06.prod.phx3.secureserver.net [68.178.252.235])
-	by mail.openembedded.org (Postfix) with ESMTP id 232E76FFE8
+Received: from p3plsmtpa08-03.prod.phx3.secureserver.net
+	(p3plsmtpa08-03.prod.phx3.secureserver.net [173.201.193.104])
+	by mail.openembedded.org (Postfix) with ESMTP id E9D37731DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2016 22:14:35 +0000 (UTC)
+	Wed, 13 Jan 2016 22:14:53 +0000 (UTC)
 Received: from OLA-2FCD1M1.garmin.guest ([204.77.163.43])
-	by p3plsmtpa12-06.prod.phx3.secureserver.net with 
-	id 5a7N1s00F0wVTNs01a7TEz; Wed, 13 Jan 2016 15:07:27 -0700
+	by p3plsmtpa08-03.prod.phx3.secureserver.net with 
+	id 5aEp1s0090wVTNs01aEt8k; Wed, 13 Jan 2016 15:14:54 -0700
 X-Sender: nate@karstens.us
 From: Nate Karstens <nate.karstens@garmin.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Jan 2016 16:07:21 -0600
-Message-Id: <1452722841-2952-1-git-send-email-nate.karstens@garmin.com>
+Date: Wed, 13 Jan 2016 16:14:42 -0600
+Message-Id: <1452723282-3050-1-git-send-email-nate.karstens@garmin.com>
 X-Mailer: git-send-email 1.9.1
 Subject: [meta-networking][PATCH v3] dhcpcd: add recipe for dhcpcd
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -28,7 +26,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2016 22:14:36 -0000
+X-List-Received-Date: Wed, 13 Jan 2016 22:14:54 -0000
 
 Adds a new recipe for dhcpcd version 6.10.0.
 
