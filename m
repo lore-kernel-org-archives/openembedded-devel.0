@@ -1,24 +1,36 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A830F6FF9F
+Return-Path: <ankur.tyagi85@gmail.com>
+Received: from mail-vk0-f53.google.com (mail-vk0-f53.google.com
+	[209.85.213.53])
+	by mail.openembedded.org (Postfix) with ESMTP id C63A1601B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2016 22:56:05 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u0CMu5Lc021754
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 13 Jan 2016 00:39:35 +0000 (UTC)
+Received: by mail-vk0-f53.google.com with SMTP id i129so114755812vkb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2016 14:56:05 -0800 (PST)
-Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Tue, 12 Jan 2016 14:56:04 -0800
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <randy.macleod@windriver.com>
-Date: Tue, 12 Jan 2016 14:56:04 -0800
-Message-ID: <1452639364-228585-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Tue, 12 Jan 2016 16:39:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=hbdnUNLWts2MP771hV9NYrpNWw6jZkocvQKrl1hnDG0=;
+	b=whnTri/3evkNhrH/pGHIT3zlyBL6JDc7UtifAgiycckCJfVVfdaB8EodtmBFZho1Im
+	LMa92GZYu9TPIYpZNLtu4uMn99B1xmwqiuQI4f3VBsw3+njHn989UYxgEwCFnrbacsNu
+	gEVoHy02s1A9m7VHysCX9jDqFNtv0W6y9C+MCJoVu8CsCTOooFOuriTPJ0exdPFbO/EK
+	e8od0mvNPQ+yFdBtc9xakFUrSjFZjv0CZo8mS/mUbtzUdckJVI3MX61to39gW3YA9pVv
+	LwU0GZRFUlGhk7RbdfldY5pjwSMNgcVWIO3aViPJnWLjPTZFVSIIRyvgUSqvmQOZKSck
+	dr+A==
+X-Received: by 10.31.162.20 with SMTP id l20mr80158890vke.137.1452645575681;
+	Tue, 12 Jan 2016 16:39:35 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/1] geoip: add ptest functionality
+Received: by 10.31.166.146 with HTTP; Tue, 12 Jan 2016 16:39:16 -0800 (PST)
+In-Reply-To: <90CBA3E6-A9A9-4485-ADAB-2D68D6E88E40@gmail.com>
+References: <CADySD0EiW1oO_wezsLtEFX8h2V-ByykrgfSvOvGLJJLWyrm4uw@mail.gmail.com>
+	<CAMKF1sqmg8gOj3_jjJTGebJQj+msh5tquKnOOV8zwShJtoHaUA@mail.gmail.com>
+	<CADySD0Fx+VpoaPNgFSwvne6D1ENxH=F-v4cpSJmjRtc2rpkS2A@mail.gmail.com>
+	<90CBA3E6-A9A9-4485-ADAB-2D68D6E88E40@gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Wed, 13 Jan 2016 13:39:16 +1300
+Message-ID: <CADySD0GQa+S1OY0R9KaQxJ_EFYB+TRJociEszuuFWW_7dO0JYA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: bitbake meta-toolchain-qt5 error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,96 +43,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2016 22:56:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 13 Jan 2016 00:39:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Also make geoip package rdepend on geoip-database and
-add symbolic link to GeoIPCity.dat.
+sorry it took me a while to reply.
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
----
- .../recipes-support/geoip/files/run-ptest          |   11 ++++++
- .../recipes-support/geoip/geoip_1.6.6.bb           |   38 ++++++++++++++++++++
- 2 files changed, 49 insertions(+)
- create mode 100644 meta-networking/recipes-support/geoip/files/run-ptest
+I am using gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf.
 
-diff --git a/meta-networking/recipes-support/geoip/files/run-ptest b/meta-networking/recipes-support/geoip/files/run-ptest
-new file mode 100644
-index 0000000..14e9619
---- /dev/null
-+++ b/meta-networking/recipes-support/geoip/files/run-ptest
-@@ -0,0 +1,11 @@
-+#!/bin/sh
-+pdir=`dirname $0`
-+cd ${pdir}/tests
-+for i in ./benchmark ./test-geoip-city ; do
-+	${i} 1>/dev/null 2>&1;
-+	if [ $? == 0 ]; then
-+		echo PASS: $i;
-+	else
-+		echo FAIL: $i;
-+	fi;
-+done
-diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.6.bb b/meta-networking/recipes-support/geoip/geoip_1.6.6.bb
-index 5037ae3..0605154 100644
---- a/meta-networking/recipes-support/geoip/geoip_1.6.6.bb
-+++ b/meta-networking/recipes-support/geoip/geoip_1.6.6.bb
-@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/maxmind/geoip-api-c.git \
-            http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat \
-            http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat \
-            http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat \
-+           file://run-ptest \
- "
- SRCREV = "ed3f3e2b87fba05a8f2a5b9b1328e7d55be8bf30"
- 
-@@ -47,9 +48,46 @@ do_install() {
-     install ${WORKDIR}/GeoIPv6.dat ${D}/${datadir}/GeoIP/
-     install ${WORKDIR}/GeoLiteCity.dat ${D}/${datadir}/GeoIP/
-     install ${WORKDIR}/GeoLiteCityv6.dat ${D}/${datadir}/GeoIP/
-+    ln -s GeoLiteCity.dat ${D}${datadir}/GeoIP/GeoIPCity.dat
- }
- 
- PACKAGES =+ "${PN}-database"
- FILES_${PN}-database = ""
- FILES_${PN}-database += "${datadir}/GeoIP/*"
- 
-+# We cannot do much looking up without databases.
-+#
-+RDEPENDS_${PN} += "${PN}-database"
-+
-+inherit ptest
-+
-+do_configure_ptest() {
-+	sed -i -e "s/noinst_PROGRAMS = /test_PROGRAMS = /g" \
-+	    -e 's:SRCDIR=\\"$(top_srcdir)\\":SRCDIR=\\"$(testdir)\\":' \
-+	  ${S}/test/Makefile.am
-+
-+	if ! grep "^testdir = " ${S}/test/Makefile.am ; then
-+	  sed -e '/EXTRA_PROGRAMS = /itestdir = ${PTEST_PATH}/tests' \
-+	    -i ${S}/test/Makefile.am
-+	fi
-+
-+	sed -i -e "s:/usr/local/share:/usr/share:g" \
-+	  ${S}/test/benchmark.c
-+
-+	sed -i -e 's:"../data/:"/usr/share/GeoIP/:g' \
-+	  ${S}/test/test-geoip-city.c \
-+	  ${S}/test/test-geoip-isp.c \
-+	  ${S}/test/test-geoip-asnum.c \
-+	  ${S}/test/test-geoip-netspeed.c \
-+	  ${S}/test/test-geoip-org.c \
-+	  ${S}/test/test-geoip-region.c
-+}
-+
-+
-+do_install_ptest() {
-+	oe_runmake -C test DESTDIR=${D}  install-testPROGRAMS
-+	install ${S}/test/*.txt ${D}${PTEST_PATH}/tests
-+}
-+
-+
-+
--- 
-1.7.9.5
+I have preprocess
+=E2=80=8B =E2=80=8B
+=E2=80=8B=E2=80=8B
+log but looks like pastebin is down. Ok to send the log as attachment ?
 
+On Tue, Jan 12, 2016 at 9:16 AM, Khem Raj <raj.khem@gmail.com> wrote:
+
+>
+> > On Jan 11, 2016, at 11:25 AM, Ankur Tyagi <ankur.tyagi85@gmail.com>
+> wrote:
+> >
+> > included stdint.h in qnetworkinfo_linux.cpp but still getting the same
+> error
+>
+> what version of gcc are you using and can you preprocess the file under
+> error with -E -dD and pastebin it ?
+>
+> >
+> > On Mon, Jan 11, 2016 at 10:47 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> >> On Mon, Jan 11, 2016 at 10:37 AM, Ankur Tyagi <ankur.tyagi85@gmail.com=
+>
+> >> wrote:
+> >>>
+> >>
+> /home/nws/yocto-fido-dev/oe-layersetup/build/arago-tmp-external-linaro-to=
+olchain/sysroots/am335x-evm/usr/include/bluetooth/bluetooth.h:159:9:
+> >>> error: expected identifier before '*' token
+> >>> |   return bt_get_unaligned((const uint64_t *) ptr);
+> >>
+> >> this means that stdint.h is missing from includes.
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
