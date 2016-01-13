@@ -1,20 +1,49 @@
-Return-Path: <mike.looijmans@topic.nl>
-Received: from smtp03.mail.online.nl (smtp03.mail.online.nl [194.134.25.73])
-	by mail.openembedded.org (Postfix) with ESMTP id 4820C731A9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2016 17:17:51 +0000 (UTC)
-Received: from localhost.localdomain (s55969068.adsl.online.nl
-	[85.150.144.104])
-	by smtp03.mail.online.nl (Postfix) with ESMTP id 8ABAF1C0006;
-	Wed, 13 Jan 2016 18:17:49 +0100 (CET)
-From: Mike Looijmans <mike.looijmans@topic.nl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Jan 2016 18:17:45 +0100
-Message-Id: <1452705465-6616-1-git-send-email-mike.looijmans@topic.nl>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1D770D53-86F4-45AA-9515-0A2F9538575F@gmail.com>
-References: <1452534832-3203-1-git-send-email-mike.looijmans@topic.nl>
-Subject: [meta-networking][PATCH v2] recipes-connectivity/samba: Remove /run directory tree
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 229D8731E9;
+	Wed, 13 Jan 2016 17:36:49 +0000 (UTC)
+Received: by mail-pf0-f177.google.com with SMTP id q63so87059451pfb.1;
+	Wed, 13 Jan 2016 09:36:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:content-type:subject:date:message-id:to:mime-version;
+	bh=eGfglY0MT/VUrLLWlg9ntuNqZ9fQdvbKn+UnVB/W9XI=;
+	b=aY0/iu8rH1VN+26BRqZ93q06f0+wF5onLuDMGnNrKq3z89B4kj9y0gDS/23uYk9LIG
+	CL0k5SMl1OwmlholdTzfLeOKhJyolIGn6qa3kPDagj8iVtjWVtKDVoNPM6YcHYwX0ApL
+	ktscJGyxntBiSWaJkadot95HLKgVgAxz25QytIFfDLNyTMlDBxzl4sIhXLNTVOpFpT2j
+	XKB1ocLSK9hLYgnFSWZigTUs/EQGAMGh7/7qo+Fhpd5pI2/ORasMmkFJaZJEK0TkI4HG
+	qvJBo0Nrq0eoOO3t2Z5o+amByOvpyMNUruqskEUVBs0PhFlNce4b7flN5iukPhLCJdz7
+	pJLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:content-type:subject:date:message-id:to
+	:mime-version;
+	bh=eGfglY0MT/VUrLLWlg9ntuNqZ9fQdvbKn+UnVB/W9XI=;
+	b=VxtXw4Ju8fY0vdKIRdC3RLF2g0WMbS2sIpvXopuf7TX5wgv6QLPmiTgCWRt3cCvsp3
+	EB43OOLZfLAXEQs+XTXzd0qC08+4dKKokOWLFVegwDIbChglZosbPFQmAX8DbIR24VWG
+	Jp0MW113xfTTHLk9ht1GcaAiEsG/J0/kUs4eqapYZzIp59WpfyTqM1MWtQAxr4dqgHUv
+	B3fcD1yprkdYN5NHQ+beR2HhcFvb20iQs7V7PlyXCEh5VMGz8yngUj6NqvCR6VMHyroz
+	Wwv7dJ9ghev4aQvm0gJdmOqoTzGZRcpyxM6ZqRHicsXwnKcfoDQaRn9sLwTgde5XYypA
+	bSog==
+X-Gm-Message-State: ALoCoQnxZbI3HrMnPI2ZVB2X+6ISeJyDbI07dz7xxxt9OZUE1w/UTJyFDey4WkosDpnxmcAdo3MDvEsfRmQb8FLUZ+WOZ0WR+w==
+X-Received: by 10.98.71.211 with SMTP id p80mr43840755pfi.135.1452706610207;
+	Wed, 13 Jan 2016 09:36:50 -0800 (PST)
+Received: from ?IPv6:2601:646:8802:5d5c:e406:58c9:b337:c1d9?
+	([2601:646:8802:5d5c:e406:58c9:b337:c1d9])
+	by smtp.gmail.com with ESMTPSA id
+	s19sm3953830pfs.62.2016.01.13.09.36.49
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 13 Jan 2016 09:36:49 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+X-Pgp-Agent: GPGMail 2.6b2
+Date: Wed, 13 Jan 2016 09:36:44 -0800
+Message-Id: <2EB9392C-58FE-4807-9E1D-41738D761079@gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
+X-Mailer: Apple Mail (2.3112)
+Subject: Remove pth recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,38 +56,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2016 17:17:54 -0000
+X-List-Received-Date: Wed, 13 Jan 2016 17:36:51 -0000
+X-Groupsio-MsgNum: 59515
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_51FB96B4-101C-4C75-8F89-FF7748EABF5F";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-Depending on PACKAGECONFIG selection, the /run/samba directory may not
-have been created, causing build errors.
+--Apple-Mail=_51FB96B4-101C-4C75-8F89-FF7748EABF5F
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-Since the /run directory is volatile on target, anything installed
-there will vanish anyway, so just remove the /run tree if it exists.
+Hi All,
 
-This fixes do_install failing with an error like this:
- rmdir: failed to remove '/.../samba/4.1.12-r0/image/run/samba': No such file or directory
-Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
----
-Alternative patch that just removes /run unconditionally.
+We are carrying pth recipe in OE-Core.
 
- meta-networking/recipes-connectivity/samba/samba_4.1.12.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+1. There are no packages in OE-Core which depend on it.
+2. pth is quite old ( last release was in 2006) moreover there is npth =
+replacement available and we have recipe in OE-Core
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-index e51f518..49df0f4 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-@@ -104,8 +104,7 @@ EXTRA_OECONF += "--enable-fhs \
- LDFLAGS += "-Wl,-z,relro,-z,now"
- 
- do_install_append() {
--    rmdir --ignore-fail-on-non-empty "${D}/run/samba"
--    rmdir --ignore-fail-on-non-empty "${D}/run"
-+    rm -rf "${D}/run"
- 
-     if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false', d)}; then
-         install -d ${D}${systemd_unitdir}/system
--- 
-2.1.4
+I would like to propose a removal of this recipe but before doing so,
+but wanted to find if there are any active users of this package
+
+if you use it the please respond
+
+-Khem
 
 
+
+--Apple-Mail=_51FB96B4-101C-4C75-8F89-FF7748EABF5F
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlaWizAACgkQuwUzVZGdMxSuZgCeLqju8ouXTzETZ/3GwU1woS17
+OMQAnjC27UJ2fPOCOjUDZAVagzFxj7rX
+=/l5N
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_51FB96B4-101C-4C75-8F89-FF7748EABF5F--
