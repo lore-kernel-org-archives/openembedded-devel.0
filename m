@@ -1,56 +1,58 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 89C386E6B1
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-pf0-f176.google.com (mail-pf0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id EEBCF73180
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2016 18:35:46 +0000 (UTC)
-Received: by mail-pf0-f175.google.com with SMTP id e65so85548078pfe.0
+	Wed, 13 Jan 2016 18:38:08 +0000 (UTC)
+Received: by mail-pf0-f176.google.com with SMTP id q63so87879301pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2016 10:35:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=BwhoQwbpdFlXMazdEAnVb3MVHA36o3dX4ZXhdH/+hBs=;
-	b=xyPx8KA1JvhC++8NYkXBpw8gAawzjXarGWP4mKui4V+P2EW6aLMHFmtP53UcJ3O0Ws
-	6+kIUCyo4oTjfqPOtnw0ZZcbli6Nj+NxXiMSFmsTWHbb/mraMPqsjRtXBy8bN+0WWrKt
-	fySiPngGEtnUt5nXR1S44TM0bCLBSggClq9naFFXJv4yPhpMScEZEKFi7cIUgnttGq7U
-	rSRJBe0EnAKg/we/eLI3JLm3syxl22gyzKjaTE1cBV5VAlPwKKLC5PIyXy8UqZrmHG1O
-	TBCN81o4u+KKw65m8Neqr8w5UI6DEC+ZqlzFHkR7+xvCkMun1RHd5zw5sKF9R2/ohP4B
-	Y/8Q==
+	Wed, 13 Jan 2016 10:38:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:content-type; bh=b7scWve5wZNJ1lellCddsLweafOky2QhPAONslohdD0=;
+	b=DuMGeUXEYx7KvlGrx/102fYX6McLBYq0X2fKd4mhdWdLRQjLfoiDZNJoI810xAHg48
+	ShlY0dsTYcAgfj5LtrtikCnjv1uXo47/EGqci6bn4kcClZX8uJEPAEtvLCx6s8SZ1XUa
+	tGisQtsid1aiUPKkfK9/HqGsIVQQhTfykp8f4tciuZaMfux543c5NrdNlVCgK+oTL5vW
+	cBBrGgenhMDwmdR0AuCcso7SFIKmp0FEdvfELPImQo9YZVhOSr39fdlrQyDBiVarfhkL
+	6uAlDtOxCqhf6pxZ9lLEcAetcLqVlZuqxeOd3jfSiBHkuj3nkuOTF8i/7AKXGTdz0T98
+	LEtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:content-type:mime-version:subject:from
-	:in-reply-to:date:message-id:references:to;
-	bh=BwhoQwbpdFlXMazdEAnVb3MVHA36o3dX4ZXhdH/+hBs=;
-	b=W0R1/DqgnwXwenT8I2eYXur36zaEEXeq0Xw5jiC4cjBJCGTXo9WyuVY9BCh2JutgJX
-	pFYxI7ZAJVnJEB/AImZjIJn0KDdcuWFyYB4o28MtEwK3xErKXOc3WAQ0IO1Ajfey+T1D
-	YZxyONnmGE1/i5RBIz9TBwSTYm3atn6YbRw0/7h04x4CsVNBPleEHBRKzw96ZPzLhWx8
-	lN4AD83SCSXB3vcX5p5VsxP355sIAAQblsLosLrqrtuOupD9DrH/0CpclzU1AVXIA4MY
-	jy65mkOmVrhH4TXRHSOzkQ8GSUWpahYuNnHkkDziL1zTSUyBFAI7AMOWfgCIRuqapKGm
-	QnbA==
-X-Gm-Message-State: ALoCoQnXnjdVkkrk2z8TEVOItljGce0CkJkPHbIpgKbcH857UOk5hz3bII870X2kigL+SX2Elz8GsNzqPizdrlb5prhYmKU42Q==
-X-Received: by 10.98.67.135 with SMTP id l7mr44477024pfi.148.1452710147095;
-	Wed, 13 Jan 2016 10:35:47 -0800 (PST)
-Received: from ?IPv6:2601:646:8802:5d5c:e406:58c9:b337:c1d9?
-	([2601:646:8802:5d5c:e406:58c9:b337:c1d9])
-	by smtp.gmail.com with ESMTPSA id
-	dz12sm4276221pac.2.2016.01.13.10.35.45
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:content-type;
+	bh=b7scWve5wZNJ1lellCddsLweafOky2QhPAONslohdD0=;
+	b=fQrLYjTYuShb9EIAsLtUXfAUikbE93IdJm7x2io0OTMRvDbfaC7d0d3emS5e08n9Lb
+	r6Zjjs32+YMHA8/2aWYH8l8NmPeHWQPXneasNVFYl6hCdV+lZ6TIp4U4FLHJQr0ro3Hf
+	0Sz5ynf7uAx97mBfY85C2hYz+O1E2sDWsKg2KousBj9JVYGmbrPwwo5T9gyW+sb6xOqt
+	1XhnhaZhsJQq0OK4dKRgXmnQza+Bl/L+TiNO5QCtfS87Qo+VftXs5qXZXAXgzoGhPX3s
+	5K6D7DofGFYJAOdr5KtxX6SJQXGYzLYbUPwmgJp7RXx+YIFw1B0xACQXsABxdAnw3/BS
+	GTlA==
+X-Gm-Message-State: ALoCoQmW1Y5GkkHSRSj2ZXD8ytq+2wVnoG6oArE7Mi/4c07JtMNVW6QIZSUr1eg7DZgN4Wn42mazoxXZLjaBfULM0q4qB4v3SA==
+X-Received: by 10.98.15.27 with SMTP id x27mr1104042pfi.61.1452710289546;
+	Wed, 13 Jan 2016 10:38:09 -0800 (PST)
+Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com.
+	[209.85.220.45]) by smtp.gmail.com with ESMTPSA id
+	n84sm4204134pfa.45.2016.01.13.10.38.07
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 13 Jan 2016 10:35:45 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CAF3KAoRyD7EXhOBjECXnyZzTWAW8P65=GJScxr1TGtoveH_HTA@mail.gmail.com>
-Date: Wed, 13 Jan 2016 10:35:39 -0800
-Message-Id: <DC79C3D6-8838-4EEE-B607-84BAAF5B519D@gmail.com>
-References: <CAF3KAoQkwWWr=xfifeqP_bK25_ysY_7+B2h7xT6L9P1Pf34KhQ@mail.gmail.com>
-	<CAF3KAoS1+0fy16WjorADA3cqTjCPZwSJGOmjex6b1mKcEQw7oA@mail.gmail.com>
-	<CAF3KAoTLPCK3NMm-NfVgJq80mvQBzz2WYw92p5jM6t2ySi0fAw@mail.gmail.com>
-	<CAF3KAoRyD7EXhOBjECXnyZzTWAW8P65=GJScxr1TGtoveH_HTA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.3112)
-Subject: Re: [meta-oe] OpenLDAP modules
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 13 Jan 2016 10:38:07 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-pa0-f45.google.com with SMTP id cy9so362494992pac.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2016 10:38:07 -0800 (PST)
+MIME-Version: 1.0
+X-Received: by 10.66.122.97 with SMTP id lr1mr60063327pab.68.1452710286940;
+	Wed, 13 Jan 2016 10:38:06 -0800 (PST)
+Received: by 10.66.72.229 with HTTP; Wed, 13 Jan 2016 10:38:06 -0800 (PST)
+In-Reply-To: <315045FB-F742-4125-826E-210A07B68780@gmail.com>
+References: <315045FB-F742-4125-826E-210A07B68780@gmail.com>
+Date: Wed, 13 Jan 2016 16:38:06 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKrKZABvZvEkmDdska_t9JgnWLCT8MM6kzov=HqsCc16Hw@mail.gmail.com>
+Message-ID: <CAP9ODKrKZABvZvEkmDdska_t9JgnWLCT8MM6kzov=HqsCc16Hw@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: meta-java Workflow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,46 +65,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2016 18:35:46 -0000
-X-Groupsio-MsgNum: 59517
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_A544704D-9337-4109-827E-230B50D3CA09";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Wed, 13 Jan 2016 18:38:09 -0000
+Content-Type: text/plain; charset=UTF-8
 
---Apple-Mail=_A544704D-9337-4109-827E-230B50D3CA09
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+Hello Jens,
 
+On Wed, Jan 13, 2016 at 4:03 PM, Jens Rehsack <rehsack@gmail.com> wrote:
+> to avoid such a problem as it occurred with ec7b984f, 04d5d0bf and dfb21b44, I strongly suggest that meta-java follows the merge-workflow from other meta-layers:
+>
+> cherry-pick new stuff into master-next, when settled - merge to master
+> Branch releases as other layers do and same, push back-ported patches into ${rel_branch}-next and merge the behaving ones into ${rel_branch}.
+>
+> The current way - pushing to master and live only there result in the happened revert - and to continue my work I would have to revert the reverts without any nice word in the commit message as I did in reverting 24b98ac3 with a88718b6.
 
-> On Jan 13, 2016, at 8:46 AM, Bruno Vernay <brunovern.a@gmail.com> =
-wrote:
->=20
-> Adding this to my bbappend did the trick ...
->=20
-> TARGET_CC_ARCH +=3D "-lpthread=E2=80=9D
+I understand your frustation but I think you are exagerating on this.
 
-make it -pthread and add it to LDFLAGS
+The fix you provide (and was reverted by causing regression at that
+moment) is a great improvement and those should be brought back. To
+bring it back, as I explained on the Hangout, you can revert those and
+apply the fix for the sstate. Doing this, we can integrate those
+changes back and everyone is happy.
 
->=20
-> I may submit a patch
->=20
+To make all this setup you are asking for, I need to reserve resources
+in our autobuilder to properly excercize it and provide useful
+feedback otherwise it is useless. To be honest, I am not being an
+active user of this and been acting as maintainer just due the lack of
+someone more active so I am willing to give the maintenance for
+someone more commited to Java use than me, if desired.
 
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
---Apple-Mail=_A544704D-9337-4109-827E-230B50D3CA09
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlaWmQAACgkQuwUzVZGdMxTWcACff4d+poQ58xpuunTBMsrnIp6Q
-UTwAniXtKi1ihhK75qj4HFxf2gpMZ0Fo
-=z3Pd
------END PGP SIGNATURE-----
-
---Apple-Mail=_A544704D-9337-4109-827E-230B50D3CA09--
