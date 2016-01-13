@@ -1,60 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f180.google.com (mail-pf0-f180.google.com
-	[209.85.192.180])
-	by mail.openembedded.org (Postfix) with ESMTP id C335873176
+Return-Path: <daicy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 9715965CC3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2016 01:50:52 +0000 (UTC)
-Received: by mail-pf0-f180.google.com with SMTP id e65so72368509pfe.0
+	Wed, 13 Jan 2016 02:23:43 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
+   d="scan'208";a="2524197"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 13 Jan 2016 10:23:41 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 2E1B44189119
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2016 17:50:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=CuReLcQc98g5uBPalqeA+s5MGAh5/YVx4q/h+7FPjq8=;
-	b=Qs50VuqU5emMfeCt+1GdeOm12+A0JauZfV9TV/gQH60OCaEcyrKSCLKrF37TxluD2v
-	+6EuBJe1YJcV22Dn++By+lJSR//FThyyINhfn63CeUo9TYP0TyoLwwCiTO+Llwhm3RK0
-	Bbu5s5fg1mnImOo24SJNHgSdcCcsDKUumEci3EanLvHq1bWVfaqo2vY8lnxLD6QQaZ/K
-	S2Eu7yzfl8X5O6j0Eomi89kit5/P6MvQvIciMwEd01TSg0S6gd/AEhc/BEvL3WYBP7Xk
-	8auFIkmCdMswklzwaJvHEoofT9q8ik9kM2aAgViG3eKpZdmrm6OxDlMx7vRfw1I4G+5o
-	UygQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:content-type:mime-version:subject:from
-	:in-reply-to:date:message-id:references:to;
-	bh=CuReLcQc98g5uBPalqeA+s5MGAh5/YVx4q/h+7FPjq8=;
-	b=bru4XonJVrk551MtAb+N/HcxTm964tal0W6mXFnsKe/+vFj3aSr82xf1laREXS9mTl
-	jBjDt/jg1NlR1ZytsAiFi9OEUx6AlnY0ibS1XE3mH6mxNXGYgzq1GlJUzUVzx25p0/ED
-	OlenVVNTk56hJBs92vJA9+HfLs/FEEp+jJJHzpA/SDaO/VJs96jChECuyu9QHfA3bqwO
-	+w/rT5VNi+lkxrtn+PCmyTqyelu/SfSJZ3J4DaIj+PdHfz4GhXeYhPnCSpyqnJvnrTcJ
-	lAGc3Gxt8EWDtAWXMjtWqm9bilMI4VPggtyO/HZXfwh3POBX05qjrcHBIkrkP5AQZ349
-	q6cg==
-X-Gm-Message-State: ALoCoQnd43cKmhQ9ZMWQevajGgTFPqr9yTutNBTwiyC0pYCQlFeoZ05r+kmEiBasY7rcbXWBaKIpsG/zH69GSHfs0cPQG/FULw==
-X-Received: by 10.98.15.66 with SMTP id x63mr29019887pfi.19.1452649853202;
-	Tue, 12 Jan 2016 17:50:53 -0800 (PST)
-Received: from ?IPv6:2601:646:8802:5d5c:5819:3c63:1381:916a?
-	([2601:646:8802:5d5c:5819:3c63:1381:916a])
-	by smtp.gmail.com with ESMTPSA id 20sm11869538pfa.5.2016.01.12.17.50.52
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 12 Jan 2016 17:50:52 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CADySD0G_vmN=SwZsVRrg5Ko+P_jM6Nvs2UTt0paaqiPcfcM0-Q@mail.gmail.com>
-Date: Tue, 12 Jan 2016 17:50:48 -0800
-Message-Id: <41A6B023-03C6-48E4-B3EC-E1BA1F073B70@gmail.com>
-References: <CADySD0EiW1oO_wezsLtEFX8h2V-ByykrgfSvOvGLJJLWyrm4uw@mail.gmail.com>
-	<CAMKF1sqmg8gOj3_jjJTGebJQj+msh5tquKnOOV8zwShJtoHaUA@mail.gmail.com>
-	<CADySD0Fx+VpoaPNgFSwvne6D1ENxH=F-v4cpSJmjRtc2rpkS2A@mail.gmail.com>
-	<90CBA3E6-A9A9-4485-ADAB-2D68D6E88E40@gmail.com>
-	<CADySD0GQa+S1OY0R9KaQxJ_EFYB+TRJociEszuuFWW_7dO0JYA@mail.gmail.com>
-	<BFC78264-0398-49A7-8C37-DA2958AA5BD7@gmail.com>
-	<CADySD0GV+gsBBoU7vFVZwfNxiVUDawzrP5L3n=4ZXuUPhyr6yg@mail.gmail.com>
-	<82CDD0BD-1D28-425B-9F1A-99AFFB42CFE5@gmail.com>
-	<CADySD0G_vmN=SwZsVRrg5Ko+P_jM6Nvs2UTt0paaqiPcfcM0-Q@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.3112)
-Subject: Re: bitbake meta-toolchain-qt5 error
+	Wed, 13 Jan 2016 10:23:33 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.51) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 13 Jan 2016 10:23:32 +0800
+From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 12 Jan 2016 18:23:16 -0800
+Message-ID: <1452651796-26271-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <97A0EB4C-8F32-46BB-8659-B57316C6E54F@gmail.com>
+References: <97A0EB4C-8F32-46BB-8659-B57316C6E54F@gmail.com>
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.51]
+X-yoursite-MailScanner-ID: 2E1B44189119.ABF3E
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH v2] syslog-ng: 3.5.4.1 -> 3.6.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,174 +40,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2016 01:50:52 -0000
-X-Groupsio-MsgNum: 59505
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_94FECFEE-FF5D-4163-AE10-D4CAE7C8E801";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Wed, 13 Jan 2016 02:23:47 -0000
+Content-Type: text/plain
 
---Apple-Mail=_94FECFEE-FF5D-4163-AE10-D4CAE7C8E801
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+Upgrade syslog-ng from 3.5.4.1 to 3.6.4.
 
-No. you need to use complete cmdline that is used while compiling it =
-originally to produce the error
+1) Modify the syslog-ng.service-the-syslog-ng-service.patch,since the datas has been changed.
+2) Delete these patches,since they are not needed any more.
+    afsql-afsql_dd_insert_db-refactor.patch
+    deinit-the-new-config-when-reverting-to-the.patch
+    free-global-LogTemplateOptions.patch
+    still-free-the-unconsumed-item.patch
+    syslog-ng-verify-the-list-before-del.patch
+    rewrite-expr-grammar.ym-Free-up-token.patch
+    logwriter-dont-allocate-a-new-buffer.patch
+3) Fix WARNING:
+    QA Issue: syslog-ng-libs rdepends on libpcre, but it isn't a build dependency? [build-deps]
+    QA Issue: syslog-ng rdepends on libpcre, but it isn't a build dependency? [build-deps]
+4) Fix ERROR: QA Issue: non -staticdev package contains static .a library:
+    work/i586-poky-linux/syslog-ng/3.6.4-r0/packages-split/syslog-ng/usr/lib/syslog-ng/libtest/libsyslog-ng-test.a' [staticdev]
 
-> On Jan 12, 2016, at 5:37 PM, Ankur Tyagi <ankur.tyagi85@gmail.com> =
-wrote:
->=20
-> I posted the complete log file.
->=20
-> I tried with "arm-linux-gnueabihf-gcc -E -dD <filename>"
-> Maybe it is not enough. I'll try with complete command having include =
-paths
-> and see if it improves anything.
->=20
-> On Wed, Jan 13, 2016 at 2:29 PM, Khem Raj <raj.khem@gmail.com> wrote:
->=20
->> =
-/home/nws/yocto-fido-dev/oe-layersetup/build/arago-tmp-external-linaro-too=
-lchain/work/cortexa8hf-vfp-neon-linux-gnueabi/qtsystems/5.5.1+gitAUTOINC+0=
-577ffca58-r0/git/src/systeminfo/linux/qnetworkinfo_linux_p.h:48:26:
->> fatal error: qnetworkinfo.h: No such file or directory
->>=20
->>=20
->> Please post complete file
->>=20
->>> On Jan 12, 2016, at 5:22 PM, Ankur Tyagi <ankur.tyagi85@gmail.com>
->> wrote:
->>>=20
->>> thanks
->>>=20
->>> here it is.. https://gist.github.com/anonymous/a03e9fb2203e45a4b033
->>>=20
->>> On Wed, Jan 13, 2016 at 1:44 PM, Khem Raj <raj.khem@gmail.com> =
-wrote:
->>>=20
->>>>=20
->>>>> On Jan 12, 2016, at 4:39 PM, Ankur Tyagi <ankur.tyagi85@gmail.com>
->>>> wrote:
->>>>>=20
->>>>> sorry it took me a while to reply.
->>>>>=20
->>>>> I am using gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf.
->>>>>=20
->>>>> I have preprocess
->>>>> =E2=80=8B =E2=80=8B
->>>>> =E2=80=8B=E2=80=8B
->>>>> log but looks like pastebin is down. Ok to send the log as =
-attachment ?
->>>>=20
->>>> http://alternativeto.net/software/pastebin/
->>>>=20
->>>>>=20
->>>>> On Tue, Jan 12, 2016 at 9:16 AM, Khem Raj <raj.khem@gmail.com> =
-wrote:
->>>>>=20
->>>>>>=20
->>>>>>> On Jan 11, 2016, at 11:25 AM, Ankur Tyagi =
-<ankur.tyagi85@gmail.com>
->>>>>> wrote:
->>>>>>>=20
->>>>>>> included stdint.h in qnetworkinfo_linux.cpp but still getting =
-the
->> same
->>>>>> error
->>>>>>=20
->>>>>> what version of gcc are you using and can you preprocess the file
->> under
->>>>>> error with -E -dD and pastebin it ?
->>>>>>=20
->>>>>>>=20
->>>>>>> On Mon, Jan 11, 2016 at 10:47 AM, Khem Raj <raj.khem@gmail.com>
->> wrote:
->>>>>>>=20
->>>>>>>> On Mon, Jan 11, 2016 at 10:37 AM, Ankur Tyagi <
->>>> ankur.tyagi85@gmail.com>
->>>>>>>> wrote:
->>>>>>>>>=20
->>>>>>>>=20
->>>>>>=20
->>>>=20
->> =
-/home/nws/yocto-fido-dev/oe-layersetup/build/arago-tmp-external-linaro-too=
-lchain/sysroots/am335x-evm/usr/include/bluetooth/bluetooth.h:159:9:
->>>>>>>>> error: expected identifier before '*' token
->>>>>>>>> |   return bt_get_unaligned((const uint64_t *) ptr);
->>>>>>>>=20
->>>>>>>> this means that stdint.h is missing from includes.
->>>>>>>> --
->>>>>>>> _______________________________________________
->>>>>>>> Openembedded-devel mailing list
->>>>>>>> Openembedded-devel@lists.openembedded.org
->>>>>>>> =
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>>>>>>=20
->>>>>>> --
->>>>>>> _______________________________________________
->>>>>>> Openembedded-devel mailing list
->>>>>>> Openembedded-devel@lists.openembedded.org
->>>>>>> =
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>>>>=20
->>>>>>=20
->>>>>> --
->>>>>> _______________________________________________
->>>>>> Openembedded-devel mailing list
->>>>>> Openembedded-devel@lists.openembedded.org
->>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>>>>=20
->>>>>>=20
->>>>> --
->>>>> _______________________________________________
->>>>> Openembedded-devel mailing list
->>>>> Openembedded-devel@lists.openembedded.org
->>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>>=20
->>>>=20
->>>> --
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>>=20
->>>>=20
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>=20
->>=20
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>=20
->>=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+---
+ .../files/syslog-ng.service-the-syslog-ng-service.patch     | 13 +++++++------
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc             |  6 +++++-
+ .../syslog-ng/{syslog-ng_3.5.4.1.bb => syslog-ng_3.6.4.bb}  | 11 ++---------
+ 3 files changed, 14 insertions(+), 16 deletions(-)
+ rename meta-oe/recipes-support/syslog-ng/{syslog-ng_3.5.4.1.bb => syslog-ng_3.6.4.bb} (44%)
+
+diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+index 90d3ef2..edd01bd 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
++++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+@@ -8,8 +8,8 @@ Upstream-Status: pending
+ 
+ Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+ ---
+- contrib/systemd/syslog-ng.service | 3 +--
+- 1 file changed, 1 insertion(+), 2 deletions(-)
++ contrib/systemd/syslog-ng.service | 5 ++---
++ 1 file changed, 2 insertion(+), 3 deletions(-)
+ 
+ diff --git a/contrib/systemd/syslog-ng.service b/contrib/systemd/syslog-ng.service
+ index fc16f8d..8e09deb 100644
+@@ -20,11 +20,12 @@ index fc16f8d..8e09deb 100644
+  
+  [Service]
+ -Type=notify
+- Sockets=syslog.socket
+ -ExecStart=/usr/sbin/syslog-ng -F
+-+ExecStart=/usr/sbin/syslog-ng -F -p /var/run/syslogd.pid
+- ExecReload=/bin/kill -HUP $MAINPID
+- StandardOutput=null
++-ExecReload=/bin/kill -HUP $MAINPID
+++ExecStart=@SBINDIR@/syslog-ng -F -p @LOCALSTATEDIR@/run/syslogd.pid
+++ExecReload=@BASEBINDIR@/kill -HUP $MAINPID
++ StandardOutput=journal
++ StandardError=journal
+  Restart=on-failure
+ -- 
+ 1.8.4.2
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+index 54f6920..64b0545 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+@@ -13,7 +13,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=e0e8658d9be248f01b7933df24dc1408"
+ 
+ # util-linux added to get libuuid
+-DEPENDS = "flex eventlog glib-2.0 util-linux"
++DEPENDS = "libpcre flex eventlog glib-2.0 util-linux"
+ 
+ SRC_URI = "http://www.balabit.com/downloads/files/syslog-ng/sources/${PV}/source/${BPN}_${PV}.tar.gz \
+            file://syslog-ng.conf \
+@@ -70,6 +70,9 @@ do_install_append() {
+     install -d ${D}/${localstatedir}/lib/${BPN}
+     # Remove /var/run as it is created on startup
+     rm -rf ${D}${localstatedir}/run
++    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
++    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
++    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
+ }
+ 
+ FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
+@@ -80,6 +83,7 @@ PACKAGES =+ "${PN}-libs ${PN}-libs-dev ${PN}-libs-dbg"
+ FILES_${PN}-libs = "${libdir}/${BPN}/*.so ${libdir}/libsyslog-ng-*.so*"
+ FILES_${PN}-libs-dev = "${libdir}/${BPN}/lib*.la"
+ FILES_${PN}-libs-dbg = "${libdir}/${BPN}/.debug"
++FILES_${PN}-staticdev = "${libdir}/${BPN}/libtest/*.a"
+ INSANE_SKIP_${PN}-libs = "dev-so"
+ RDEPENDS_${PN} += "${PN}-libs"
+ 
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+similarity index 44%
+rename from meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb
+rename to meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+index e8940c0..73609af 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+@@ -1,22 +1,15 @@
+ require syslog-ng.inc
+ 
+ SRC_URI += " \
+-    file://afsql-afsql_dd_insert_db-refactor.patch \
+-    file://deinit-the-new-config-when-reverting-to-the.patch \
+     file://fix-a-memory-leak-in-log_driver_free.patch \
+     file://fix-config-libnet.patch \
+     file://fix-invalid-ownership.patch \
+     file://Fix-the-memory-leak-problem-for-mutex.patch \
+     file://Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch \
+-    file://free-global-LogTemplateOptions.patch \
+-    file://still-free-the-unconsumed-item.patch \
+-    file://syslog-ng-verify-the-list-before-del.patch \
+     file://configure.patch \
+     file://dbifix.patch \
+-    file://rewrite-expr-grammar.ym-Free-up-token.patch \
+-    file://logwriter-dont-allocate-a-new-buffer.patch \
+     file://syslog-ng.service-the-syslog-ng-service.patch \
+ "
+ 
+-SRC_URI[md5sum] = "ff3bf223ebafbaa92b69a2d5b729f368"
+-SRC_URI[sha256sum] = "92c6969e4172b4fd32390f80043b4de7b116f29989d8c2e5a8a687ee6dcd6f66"
++SRC_URI[md5sum] = "e9f401615e92e5eb27396c995c1446ba"
++SRC_URI[sha256sum] = "7be11df31ac7d716f1f952e22b5ae8e2049edd633a41b223776a853d9106f4e7"
+-- 
+1.9.1
 
 
---Apple-Mail=_94FECFEE-FF5D-4163-AE10-D4CAE7C8E801
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
 
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlaVrXsACgkQuwUzVZGdMxR4/gCeJj3h9i72pZpvnPW1/RSpYkeU
-KeQAn2kZgOkFZFLb+mXrznMi7sflqKn3
-=0mE8
------END PGP SIGNATURE-----
-
---Apple-Mail=_94FECFEE-FF5D-4163-AE10-D4CAE7C8E801--
