@@ -1,33 +1,33 @@
 Return-Path: <daicy.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 9715965CC3
+	by mail.openembedded.org (Postfix) with ESMTP id D0F7A731D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2016 02:23:43 +0000 (UTC)
+	Wed, 13 Jan 2016 02:27:26 +0000 (UTC)
 X-IronPort-AV: E=Sophos;i="5.20,346,1444665600"; 
-   d="scan'208";a="2524197"
+   d="scan'208";a="2524360"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 13 Jan 2016 10:23:41 +0800
+	by heian.cn.fujitsu.com with ESMTP; 13 Jan 2016 10:27:27 +0800
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 2E1B44189119
+	by cn.fujitsu.com (Postfix) with ESMTP id 958C5418915F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2016 10:23:33 +0800 (CST)
+	Wed, 13 Jan 2016 10:27:12 +0800 (CST)
 Received: from localhost.localdomain (10.167.226.51) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 13 Jan 2016 10:23:32 +0800
+	Server (TLS) id 14.3.181.6; Wed, 13 Jan 2016 10:27:12 +0800
 From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 12 Jan 2016 18:23:16 -0800
-Message-ID: <1452651796-26271-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+Date: Tue, 12 Jan 2016 18:26:58 -0800
+Message-ID: <1452652018-26386-1-git-send-email-daicy.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <97A0EB4C-8F32-46BB-8659-B57316C6E54F@gmail.com>
-References: <97A0EB4C-8F32-46BB-8659-B57316C6E54F@gmail.com>
+In-Reply-To: <20160107105715.GB2512@jama>
+References: <20160107105715.GB2512@jama>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.51]
-X-yoursite-MailScanner-ID: 2E1B44189119.ABF3E
+X-yoursite-MailScanner-ID: 958C5418915F.AC882
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][PATCH v2] syslog-ng: 3.5.4.1 -> 3.6.4
+Subject: [meta-networking][PATCH v2] opensaf: 4.6.0 -> 4.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,129 +40,202 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2016 02:23:47 -0000
+X-List-Received-Date: Wed, 13 Jan 2016 02:27:28 -0000
 Content-Type: text/plain
 
-Upgrade syslog-ng from 3.5.4.1 to 3.6.4.
-
-1) Modify the syslog-ng.service-the-syslog-ng-service.patch,since the datas has been changed.
-2) Delete these patches,since they are not needed any more.
-    afsql-afsql_dd_insert_db-refactor.patch
-    deinit-the-new-config-when-reverting-to-the.patch
-    free-global-LogTemplateOptions.patch
-    still-free-the-unconsumed-item.patch
-    syslog-ng-verify-the-list-before-del.patch
-    rewrite-expr-grammar.ym-Free-up-token.patch
-    logwriter-dont-allocate-a-new-buffer.patch
-3) Fix WARNING:
-    QA Issue: syslog-ng-libs rdepends on libpcre, but it isn't a build dependency? [build-deps]
-    QA Issue: syslog-ng rdepends on libpcre, but it isn't a build dependency? [build-deps]
-4) Fix ERROR: QA Issue: non -staticdev package contains static .a library:
-    work/i586-poky-linux/syslog-ng/3.6.4-r0/packages-split/syslog-ng/usr/lib/syslog-ng/libtest/libsyslog-ng-test.a' [staticdev]
+1) Upgrade opensaf from 4.6.0 to 4.7.0.
+2) Delete two patches,since they are not needed any more.
+    Revert_imma_client_node_replyPending_to_unsigned_char.patch
+    Fix_GCC_5.1.0_compiler_warning.patch
 
 Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
 ---
- .../files/syslog-ng.service-the-syslog-ng-service.patch     | 13 +++++++------
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc             |  6 +++++-
- .../syslog-ng/{syslog-ng_3.5.4.1.bb => syslog-ng_3.6.4.bb}  | 11 ++---------
- 3 files changed, 14 insertions(+), 16 deletions(-)
- rename meta-oe/recipes-support/syslog-ng/{syslog-ng_3.5.4.1.bb => syslog-ng_3.6.4.bb} (44%)
+ .../opensaf/Fix_GCC_5.1.0_compiler_warning.patch   | 64 -----------------
+ ...client_node_replyPending_to_unsigned_char.patch | 80 ----------------------
+ .../opensaf/{opensaf_4.6.0.bb => opensaf_4.7.0.bb} |  6 +-
+ 3 files changed, 2 insertions(+), 148 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/Fix_GCC_5.1.0_compiler_warning.patch
+ delete mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/Revert_imma_client_node_replyPending_to_unsigned_char.patch
+ rename meta-networking/recipes-daemons/opensaf/{opensaf_4.6.0.bb => opensaf_4.7.0.bb} (89%)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
-index 90d3ef2..edd01bd 100644
---- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
-+++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
-@@ -8,8 +8,8 @@ Upstream-Status: pending
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/Fix_GCC_5.1.0_compiler_warning.patch b/meta-networking/recipes-daemons/opensaf/opensaf/Fix_GCC_5.1.0_compiler_warning.patch
+deleted file mode 100644
+index 860d612..0000000
+--- a/meta-networking/recipes-daemons/opensaf/opensaf/Fix_GCC_5.1.0_compiler_warning.patch
++++ /dev/null
+@@ -1,64 +0,0 @@
+-Upstream-Status: Backport
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+-# HG changeset patch
+-# User Anders Widell <anders.widell@ericsson.com>
+-# Date 1431081180 -7200
+-#      Fri May 08 12:33:00 2015 +0200
+-# Branch opensaf-4.5.x
+-# Node ID ee74d1846cadf5c237f420279610968216e3bbe0
+-# Parent  32079e2039d2a31c1adfbe7eef2e6ee8a2e25810
+-amf: Fix GCC 5.1.0 compiler warning [#1340]
+-
+-The following warning was fixed by replacing the case statement with an if
+-statement:
+-
+-susm.cc: In function 'uint32_t avnd_evt_avd_su_pres_evh(AVND_CB*, AVND_EVT*)':
+-susm.cc:1237:26: error: switch condition has type bool [-Werror=switch-bool]
+-  switch (info->term_state) {
+-                          ^
+-
+-diff -r 32079e2039d2 -r ee74d1846cad osaf/services/saf/amf/amfnd/susm.cc
+---- a/osaf/services/saf/amf/amfnd/susm.cc	Fri May 08 12:10:55 2015 +0530
+-+++ b/osaf/services/saf/amf/amfnd/susm.cc	Fri May 08 12:33:00 2015 +0200
+-@@ -1234,8 +1234,7 @@
+- 		goto done;
+- 	}
+- 
+--	switch (info->term_state) {
+--	case true:		/* => terminate the su */
+-+	if (info->term_state) { /* => terminate the su */
+- 		/* Stop saAmfSGSuRestartProb timer if started */
+- 		if (su->su_err_esc_level == AVND_ERR_ESC_LEVEL_1) {
+- 			tmr_su_err_esc_stop(cb, su);
+-@@ -1269,9 +1268,7 @@
+- 			if (NCSCC_RC_SUCCESS != rc)
+- 				goto done;
+- 		}
+--		break;
+--
+--	case false:		/* => instantiate the su */
+-+	} else { /* => instantiate the su */
+- 		TRACE("SU term state is set to false");
+- 		/* Reset admn term operation flag */
+- 		m_AVND_SU_ADMN_TERM_RESET(su);
+-@@ -1299,7 +1296,7 @@
+- 			/* Will transition to instantiation-failed when instantiated */
+- 			LOG_ER("'%s':FAILED", __FUNCTION__); 
+- 			rc = NCSCC_RC_FAILURE;
+--			break;
+-+			goto done;
+- 		}
+- 		/* trigger su instantiation for pi su */
+- 		if (m_AVND_SU_IS_PREINSTANTIABLE(su)) {
+-@@ -1315,8 +1312,7 @@
+- 			} else
+- 				osafassert(0);
+- 		}
+--		break;
+--	}			/* switch */
+-+	}
+- 
+- done:
+- 	TRACE_LEAVE2("%u", rc);
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/Revert_imma_client_node_replyPending_to_unsigned_char.patch b/meta-networking/recipes-daemons/opensaf/opensaf/Revert_imma_client_node_replyPending_to_unsigned_char.patch
+deleted file mode 100644
+index 68d051e..0000000
+--- a/meta-networking/recipes-daemons/opensaf/opensaf/Revert_imma_client_node_replyPending_to_unsigned_char.patch
++++ /dev/null
+@@ -1,80 +0,0 @@
+-Upstream-Status: Backport
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+-# HG changeset patch
+-# User Anders Bjornerstedt <anders.bjornerstedt@ericsson.com>
+-# Date 1430120883 -7200
+-#      Mon Apr 27 09:48:03 2015 +0200
+-# Branch opensaf-4.6.x
+-# Node ID 97eb2e7b29bbe0aacee0ad9b13cf84f1a4d5d9b0
+-# Parent  60b2136fcadf82f653b43ba1b5790f6dc3be3161
+-immsv: Revert imma_client_node->replyPending to unsigned char [#1341]
+-
+-
+-The member imma_client_node->replyPending was in OpenSAF4.1 and earlier
+-defined as 'uns8', i.e. a byte. But this member is a counter and not a boolean.
+-The uns8 type was often used as a proxy for a boolean type in OpenSAF 4.1 and
+-earlier. This was before 'bool' was available as a first class type for gcc.
+-At some point in OpenSAF 4.2 the bool C type became available in gcc. There
+-was then a general sweep across all services to change the use of uns8 to bool.
+-The replyPending member was swept along in this change, but code actually
+-still increments and decrements the value, which makes no sense for a boolean
+-type.
+-
+-The intent of the replyPending member is to keep track of outstanding
+-replies on requests from imma library to immnd server using the handle.
+-This so that a restart of the local IMMND will result in the handle being
+-marked as 'exposed' and not resurrected.
+-An IMMND restart will mean that any unreplied requests will have lost
+-their replies. This violates the interface contract from the imm service
+-side towards the client using the handle and so the handle must not be
+-allowed to get resurrected. Instead the handle must be marked as exposed.
+-The client will then get an ERR_BAD_HANDLE from either saImmOxDispatch
+-(failed active resurrect) or from the next syncronous downcall made after
+-IMMND went down (failed reactive resurrect).
+-
+-For syncronous requests, the count will only go from 0 to 1 and back to 0 on
+-reply. This ticket does not affect syncronous requests. For asyncronous
+-requests it is possible for the client to invoke more than one request,
+-before entering poll to receive replies. For asyncronous requests the
+-replyPending member must work as a counter and not a boolean. The effect
+-of being a boolean is that a handle may get resurrected when there is
+-still asyncronous requests unreplied to, i.e. the replies would get silently
+-lost.
+-
+-This changeset restores the type of the repliesPending member to unsigned char.
+-
+-diff -r 60b2136fcadf -r 97eb2e7b29bb osaf/libs/agents/saf/imma/imma_cb.h
+---- a/osaf/libs/agents/saf/imma/imma_cb.h	Fri Apr 24 14:40:09 2015 +0200
+-+++ b/osaf/libs/agents/saf/imma/imma_cb.h	Mon Apr 27 09:48:03 2015 +0200
+-@@ -50,13 +50,13 @@
+- 	SaUint32T mImplementerId;	/*Only used for OI.*/
+- 	SaImmOiImplementerNameT  mImplementerName; /* needed for active resurrect*/
+- 	SaUint32T syncr_timeout;/* Timeout on syncr downcalls, dflt 10s, or setenv IMMA_SYNCR_TIMEOUT */
+-+	unsigned char replyPending; /* Syncronous or asyncronous call made towards IMMND */
+- 	bool isOm;		/*If true => then this is an OM client */
+- 	bool stale;		/*Loss of connection with immnd 
+- 					  will set this to true for the 
+- 					  connection. A resurrect can remove it.*/
+- 	bool exposed;    /* Exposed => stale is irreversible */
+- 	bool selObjUsable; /* Active resurrect possible for this client */
+--	bool replyPending; /* Syncronous or asyncronous call made towards IMMND */
+- 	bool isPbe;  /* True => This is the PBE-OI */
+- 	bool isImmA2b;       /* Version A.02.11 */
+- 	bool isImmA2bCbk;    /* Version A.02.11 callback*/
+-diff -r 60b2136fcadf -r 97eb2e7b29bb osaf/libs/agents/saf/imma/imma_proc.c
+---- a/osaf/libs/agents/saf/imma/imma_proc.c	Fri Apr 24 14:40:09 2015 +0200
+-+++ b/osaf/libs/agents/saf/imma/imma_proc.c	Mon Apr 27 09:48:03 2015 +0200
+-@@ -3346,7 +3346,10 @@
+- 				cl_node->handle);
+- 		}
+- 	} else {
+--		/* Reaching 255 is sticky. */
+-+		/* Decrementing from zero implies a bug in the library logic. 
+-+		   The real count has been lost. Set the value to 255. This does not
+-+		   disturb current function, but makes the handle not resurrectable in
+-+		   case of iMMND restart while handle is still open. */
+- 		TRACE_3("Will not decrement zero pending reply count for handle %llx",
+- 			cl_node->handle);
+- 		cl_node->replyPending = 0xff;
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_4.7.0.bb
+similarity index 89%
+rename from meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb
+rename to meta-networking/recipes-daemons/opensaf/opensaf_4.7.0.bb
+index 9084524..42e883a 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_4.6.0.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.7.0.bb
+@@ -16,12 +16,10 @@ inherit autotools useradd systemd pkgconfig
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://install-samples-from-srcdir.patch \
+            file://0001-plmcd-error-fix.patch \
+-           file://Revert_imma_client_node_replyPending_to_unsigned_char.patch \
+-           file://Fix_GCC_5.1.0_compiler_warning.patch \
+            "
  
- Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
- ---
-- contrib/systemd/syslog-ng.service | 3 +--
-- 1 file changed, 1 insertion(+), 2 deletions(-)
-+ contrib/systemd/syslog-ng.service | 5 ++---
-+ 1 file changed, 2 insertion(+), 3 deletions(-)
+-SRC_URI[md5sum] = "a1ceddb517c0972aa7e899b092d7f464"
+-SRC_URI[sha256sum] = "f6ea754a145ae42552f328f96c32f38429ad06478a351b9d0aed812adcecb2b4"
++SRC_URI[md5sum] = "82dd2777a672140e22b8205f10aa55d3"
++SRC_URI[sha256sum] = "da9e138650b835728ad51d99268d3a31419b254c4cb4e87c6ec90bc45266d7d2"
  
- diff --git a/contrib/systemd/syslog-ng.service b/contrib/systemd/syslog-ng.service
- index fc16f8d..8e09deb 100644
-@@ -20,11 +20,12 @@ index fc16f8d..8e09deb 100644
-  
-  [Service]
- -Type=notify
-- Sockets=syslog.socket
- -ExecStart=/usr/sbin/syslog-ng -F
--+ExecStart=/usr/sbin/syslog-ng -F -p /var/run/syslogd.pid
-- ExecReload=/bin/kill -HUP $MAINPID
-- StandardOutput=null
-+-ExecReload=/bin/kill -HUP $MAINPID
-++ExecStart=@SBINDIR@/syslog-ng -F -p @LOCALSTATEDIR@/run/syslogd.pid
-++ExecReload=@BASEBINDIR@/kill -HUP $MAINPID
-+ StandardOutput=journal
-+ StandardError=journal
-  Restart=on-failure
- -- 
- 1.8.4.2
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index 54f6920..64b0545 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -13,7 +13,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e0e8658d9be248f01b7933df24dc1408"
- 
- # util-linux added to get libuuid
--DEPENDS = "flex eventlog glib-2.0 util-linux"
-+DEPENDS = "libpcre flex eventlog glib-2.0 util-linux"
- 
- SRC_URI = "http://www.balabit.com/downloads/files/syslog-ng/sources/${PV}/source/${BPN}_${PV}.tar.gz \
-            file://syslog-ng.conf \
-@@ -70,6 +70,9 @@ do_install_append() {
-     install -d ${D}/${localstatedir}/lib/${BPN}
-     # Remove /var/run as it is created on startup
-     rm -rf ${D}${localstatedir}/run
-+    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
-+    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
-+    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
- }
- 
- FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
-@@ -80,6 +83,7 @@ PACKAGES =+ "${PN}-libs ${PN}-libs-dev ${PN}-libs-dbg"
- FILES_${PN}-libs = "${libdir}/${BPN}/*.so ${libdir}/libsyslog-ng-*.so*"
- FILES_${PN}-libs-dev = "${libdir}/${BPN}/lib*.la"
- FILES_${PN}-libs-dbg = "${libdir}/${BPN}/.debug"
-+FILES_${PN}-staticdev = "${libdir}/${BPN}/libtest/*.a"
- INSANE_SKIP_${PN}-libs = "dev-so"
- RDEPENDS_${PN} += "${PN}-libs"
- 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-similarity index 44%
-rename from meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb
-rename to meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-index e8940c0..73609af 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-@@ -1,22 +1,15 @@
- require syslog-ng.inc
- 
- SRC_URI += " \
--    file://afsql-afsql_dd_insert_db-refactor.patch \
--    file://deinit-the-new-config-when-reverting-to-the.patch \
-     file://fix-a-memory-leak-in-log_driver_free.patch \
-     file://fix-config-libnet.patch \
-     file://fix-invalid-ownership.patch \
-     file://Fix-the-memory-leak-problem-for-mutex.patch \
-     file://Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch \
--    file://free-global-LogTemplateOptions.patch \
--    file://still-free-the-unconsumed-item.patch \
--    file://syslog-ng-verify-the-list-before-del.patch \
-     file://configure.patch \
-     file://dbifix.patch \
--    file://rewrite-expr-grammar.ym-Free-up-token.patch \
--    file://logwriter-dont-allocate-a-new-buffer.patch \
-     file://syslog-ng.service-the-syslog-ng-service.patch \
- "
- 
--SRC_URI[md5sum] = "ff3bf223ebafbaa92b69a2d5b729f368"
--SRC_URI[sha256sum] = "92c6969e4172b4fd32390f80043b4de7b116f29989d8c2e5a8a687ee6dcd6f66"
-+SRC_URI[md5sum] = "e9f401615e92e5eb27396c995c1446ba"
-+SRC_URI[sha256sum] = "7be11df31ac7d716f1f952e22b5ae8e2049edd633a41b223776a853d9106f4e7"
+ SECTION = "admin"
+ LICENSE = "LGPLv2.1"
 -- 
 1.9.1
 
