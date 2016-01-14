@@ -1,25 +1,48 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 37645731E8
+Return-Path: <brunovern.a@gmail.com>
+Received: from mail-lf0-f54.google.com (mail-lf0-f54.google.com
+	[209.85.215.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F1996FF4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2016 12:37:39 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga104.fm.intel.com with ESMTP; 14 Jan 2016 04:37:41 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,294,1449561600"; d="scan'208";a="860404000"
-Received: from mbabyjoh-mobl.fi.intel.com ([10.237.72.71])
-	by orsmga001.jf.intel.com with ESMTP; 14 Jan 2016 04:37:38 -0800
-Date: Thu, 14 Jan 2016 14:40:01 +0200
-From: "Maxin B. John" <maxin.john@intel.com>
-To: Jens Rehsack <rehsack@gmail.com>
-Message-ID: <20160114124000.GA2747@mbabyjoh-mobl.fi.intel.com>
-References: <315045FB-F742-4125-826E-210A07B68780@gmail.com>
+	Thu, 14 Jan 2016 17:23:10 +0000 (UTC)
+Received: by mail-lf0-f54.google.com with SMTP id h129so72225485lfh.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Jan 2016 09:23:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:content-type; bh=ecqXAM+xS2Cqb8Ky7sM2IFfx8Ge1Mqi8drYIBNYtwo0=;
+	b=UOGANaMyPa02RuXqfVEZ2bK/H8IWSyhgHMwqBbYuOlzi3qVVaAWIp5KMPXJ+Yki8HX
+	LHuyrZTn3VKXjgGqBZmJeYu3QSjA99OXyHM5fUqJeOVlg26A4EkAjwXmC+rl1pvrOu+c
+	kufEhze5F7gNgSBcX6WMJoKCk6GDBD35CPjdFRt4Z+kav8WB9M0XY5M5cahKSYRLEJC8
+	PRx1Cja2GLtKg8OJBMD32Tj3wIHx4SEVm8TyhO9PY5ERod9eyGv+oZU+DIYV5Fz98Q6/
+	5RjbOj3NtWRddtyZQdNX4MpA/+YbdiaH/HtrOVTuUAqg/wc1ScNBpZpXhkPbkfZxvWuy
+	6qnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:content-type;
+	bh=ecqXAM+xS2Cqb8Ky7sM2IFfx8Ge1Mqi8drYIBNYtwo0=;
+	b=f3vGW8/g+KuIL1VxxnX7YEko0TfoOBlhL5RnmWoHcLBLWV0ZxQW5yTDA/iemUtD5WD
+	eHYtkhLlW5l0yHjEzv4GCQEFEvr81TvKnONtwjzdEIb/FsdndBL4T51auZVICmNbI5eD
+	6JhxgLj7/Ytap38czv32DellxmUpjb4gJTyCpCkg4xFjV3CE3nuEE9jBwiYT8ux/dwE4
+	5tNQQTT8POdtonBEFlWE0vLOLqFWE5myFphTG0trujhOZ0u3Ot9JIKAkSqNQxYySGCeh
+	T5UB+SVYp7PPNgzD4rtC+QsImg4ntFOrChIOAyIz+7n28pWCsAa8JAJcktiGLbhQttIe
+	nZUQ==
+X-Gm-Message-State: ALoCoQmGn3m4FqSDYrWcGJRqipUChMUxOb5R6ytqYZm8suR5ePzOkhn88MA2XZpA/zplxA1yK0CkZ4t4cZnOGzXr3AT5s7bG6g==
+X-Received: by 10.25.22.167 with SMTP id 39mr1392710lfw.153.1452792189654;
+	Thu, 14 Jan 2016 09:23:09 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <315045FB-F742-4125-826E-210A07B68780@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio.salvador@ossystems.com.br>
-Subject: Re: meta-java Workflow
+References: <CAF3KAoQkwWWr=xfifeqP_bK25_ysY_7+B2h7xT6L9P1Pf34KhQ@mail.gmail.com>
+	<CAF3KAoS1+0fy16WjorADA3cqTjCPZwSJGOmjex6b1mKcEQw7oA@mail.gmail.com>
+	<CAF3KAoTLPCK3NMm-NfVgJq80mvQBzz2WYw92p5jM6t2ySi0fAw@mail.gmail.com>
+	<CAF3KAoRyD7EXhOBjECXnyZzTWAW8P65=GJScxr1TGtoveH_HTA@mail.gmail.com>
+	<DC79C3D6-8838-4EEE-B607-84BAAF5B519D@gmail.com>
+In-Reply-To: <DC79C3D6-8838-4EEE-B607-84BAAF5B519D@gmail.com>
+From: Bruno Vernay <brunovern.a@gmail.com>
+Date: Thu, 14 Jan 2016 17:22:59 +0000
+Message-ID: <CAF3KAoTy2xZ6a2KC3ci95fQ1QnH9-KSAuD2jpZ4vLeoqAc_ZQw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe] OpenLDAP modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,37 +55,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jan 2016 12:37:40 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 14 Jan 2016 17:23:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi Jens,
+Thanks it works also.
 
-On Wed, Jan 13, 2016 at 07:03:51PM +0100, Jens Rehsack wrote:
-> Hi,
-> 
-> to avoid such a problem as it occurred with ec7b984f, 04d5d0bf and dfb21b44, I strongly suggest that meta-java follows the merge-workflow from other meta-layers:
-> 
-> cherry-pick new stuff into master-next, when settled - merge to master
+The second issue, that I still cannot resolve is that OpenLDAP requires a
+.la or .so to load its modules.
+The openldap config specify a file name like "back_mdb" and expect either a
+back_mdb.la or back_mdb.so
 
-Agree with this suggestion. Current state of meta-java isn't that great 
-mostly because of the absence of a Continuous Integration process. 
+but both la or so are limited to -dev in Yocto, I don't see how to overcome
+this rule???
 
-I have briefly tried to incorporate automated testing for meta-java layer
-in github using travic CI. However, it is not yet completed due to space 
-limitation and timeout problems in Travis CI. Hoping to fix that soon.
-
-https://github.com/maxinbjohn/meta-java/blob/master/.travis.yml
-
-> Branch releases as other layers do and same, push back-ported patches into ${rel_branch}-next and merge the behaving ones into ${rel_branch}.
-> 
-> The current way - pushing to master and live only there result in the happened revert - and to continue my work I would have to revert the reverts without any nice word in the commit message as I did in reverting 24b98ac3 with a88718b6.
-> 
-> Cheers
-> Jens Rehsack - rehsack@gmail.com
-
-Best Regards,
-Maxin
+Regards
 
 
+On Wed, Jan 13, 2016 at 7:36 PM Khem Raj <raj.khem@gmail.com> wrote:
+
+>
+> > On Jan 13, 2016, at 8:46 AM, Bruno Vernay <brunovern.a@gmail.com> wrote=
+:
+> >
+> > Adding this to my bbappend did the trick ...
+> >
+> > TARGET_CC_ARCH +=3D "-lpthread=E2=80=9D
+>
+> make it -pthread and add it to LDFLAGS
+>
+> >
+> > I may submit a patch
+> >
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
