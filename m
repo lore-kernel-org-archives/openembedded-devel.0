@@ -1,48 +1,33 @@
-Return-Path: <george.mccollister@gmail.com>
-Received: from mail-io0-f195.google.com (mail-io0-f195.google.com
-	[209.85.223.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 68149731CF
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B789731A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2016 21:04:20 +0000 (UTC)
-Received: by mail-io0-f195.google.com with SMTP id 77so18910338ioc.2
+	Fri, 15 Jan 2016 03:29:43 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u0F3TiTL019415
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2016 13:04:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=9B9z57j8zjgAr3OLPECT1hJiQXTaldsFp8rM2P3NX2c=;
-	b=bj5GoVkcWShY7RNrikR3d8gl9IaU0j3P+aFaNs2SB9uskCGPTi9IUczF6Mjq0VtkZP
-	iKeLN0CjTjVkkCi0cnmAb7pejzX2kLhMAOtuMcGDC1alYYZkmccYMUxWXOC7u7rNVDh8
-	OQoR3SVHWg3X8MrbDZCdLx/wXbKaemfZyg2hGfBIcJh9ylOZSi1b7rGq/2e+bwQ8NZCi
-	NXffXimb4rbQUI0ayepP6f+HPz3ceDpBqleWtlTIzGmA4bx3J9SLGTKRyDuLbCX/quTb
-	gJ/tzlsvinXqFWZPgoDIUF70s4N9YXUidnybuKY3Wys/MzviGTufXxxypmIUy/PzP/Sw
-	IsfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=9B9z57j8zjgAr3OLPECT1hJiQXTaldsFp8rM2P3NX2c=;
-	b=jPUzj4FzTYqn8TIAS6I59A0oOopW83Tp/WtFT2f3IgaxcGZ+dlHG+luhEXnQZ4IAzD
-	YUDpwQZAYJQEiszoHdWRNRlhtm7biJJR19z1RkpaahQ/T3VIFEza2bxphKBKuWF3gBHX
-	zuj542qkg83Zp9PQoXJinMdDPv69r6dA9Kjfw6rvT0jjWUH7l9N2trKBopJ64tj4QwVE
-	OzgmZiS4ezEQJYsb+4JAxsyfUkxMJH4U+gQHGhci65tuYh65/ZJwFW+Uqpe1Kd3O+B9v
-	RgFxcr15tPYiZuZlYzoYBG1n8Q2kb/y475nrvp0oAeyX0qwe1W9wgDo9QKIlyOCV4KdD
-	z2qA==
-X-Gm-Message-State: ALoCoQn3wH3jrGPGw2bU6wVBiZYVMBguXVM4uDOqbOn0z9peNg4tTWcqBWz3qacl8kD0aiL8/Tw01K2YASBKLyzrJXmDPJQVSA==
-X-Received: by 10.107.30.17 with SMTP id e17mr5031461ioe.160.1452805461390;
-	Thu, 14 Jan 2016 13:04:21 -0800 (PST)
-Received: from localhost.localdomain (216-21-169-52.slc.googlefiber.net.
-	[216.21.169.52])
-	by smtp.gmail.com with ESMTPSA id 81sm3210754iod.31.2016.01.14.13.04.20
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 14 Jan 2016 13:04:20 -0800 (PST)
-From: George McCollister <george.mccollister@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Jan 2016 15:03:36 -0600
-Message-Id: <1452805416-22520-5-git-send-email-george.mccollister@gmail.com>
-X-Mailer: git-send-email 2.4.5
-In-Reply-To: <1452805416-22520-1-git-send-email-george.mccollister@gmail.com>
-References: <1452805416-22520-1-git-send-email-george.mccollister@gmail.com>
-Subject: [RFC][PATCH 4/4] networkmanager: use bash-completion.bbclass
+	Thu, 14 Jan 2016 19:29:44 -0800 (PST)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.91]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0248.002;
+	Thu, 14 Jan 2016 19:29:43 -0800
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] meta-java Workflow
+Thread-Index: AQHRTjG856W5vRWXskKSrl6pOq6fSZ775elg
+Date: Fri, 15 Jan 2016 03:29:41 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010C79124D@ALA-MBA.corp.ad.wrs.com>
+References: <315045FB-F742-4125-826E-210A07B68780@gmail.com>
+	<CAP9ODKrKZABvZvEkmDdska_t9JgnWLCT8MM6kzov=HqsCc16Hw@mail.gmail.com>
+In-Reply-To: <CAP9ODKrKZABvZvEkmDdska_t9JgnWLCT8MM6kzov=HqsCc16Hw@mail.gmail.com>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.132]
+MIME-Version: 1.0
+Subject: Re: meta-java Workflow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,47 +40,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jan 2016 21:04:21 -0000
+X-List-Received-Date: Fri, 15 Jan 2016 03:29:44 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Use bash-completion.bbclass to package bash completions.
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Otavio Salvador
+> Sent: Thursday, January 14, 2016 2:38 AM
+> To: OpenEmbedded Devel List
+> Subject: Re: [oe] meta-java Workflow
+>=20
+> Hello Jens,
+>=20
+> On Wed, Jan 13, 2016 at 4:03 PM, Jens Rehsack <rehsack@gmail.com> wrote:
+> > to avoid such a problem as it occurred with ec7b984f, 04d5d0bf and dfb2=
+1b44, I strongly suggest that
+> meta-java follows the merge-workflow from other meta-layers:
+> >
+> > cherry-pick new stuff into master-next, when settled - merge to master
+> > Branch releases as other layers do and same, push back-ported patches i=
+nto ${rel_branch}-next and
+> merge the behaving ones into ${rel_branch}.
 
-Signed-off-by: George McCollister <george.mccollister@gmail.com>
----
- meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+I agree to improve this so it should be able to avoid some regression issue=
+s.
 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
-index c2b00ed..4660710 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
- 
- DEPENDS = "libnl dbus dbus-glib libgudev util-linux libndp libnewt"
- 
--inherit gnomebase gettext systemd bluetooth
-+inherit gnomebase gettext systemd bluetooth bash-completion
- 
- SRC_URI = " \
-     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-@@ -56,7 +56,7 @@ PACKAGECONFIG[wifi] = "--enable-wifi=yes,--enable-wifi=no,wireless-tools,wpa-sup
- PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
- PACKAGECONFIG[netconfig] = "--with-netconfig=yes,--with-netconfig=no"
- 
--PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-completion \
-+PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests \
-   ${PN}-nmtui ${PN}-nmtui-doc \
-   ${PN}-adsl \
- "
-@@ -97,8 +97,6 @@ FILES_${PN}-tests = " \
-     ${bindir}/nm-online \
- "
- 
--FILES_${PN}-bash-completion = "${datadir}/bash-completion"
--
- FILES_${PN}-nmtui = " \
-     ${bindir}/nmtui \
-     ${bindir}/nmtui-edit \
--- 
-2.4.5
+> >
+> > The current way - pushing to master and live only there result in the h=
+appened revert - and to
+> continue my work I would have to revert the reverts without any nice word=
+ in the commit message as
 
+I left the detail message in the following commit, if that didn't have nice=
+ word, sorry about that, but I just
+tried to explain the regression issue I found and how I fix it.
+
+> I did in reverting 24b98ac3 with a88718b6.
+>=20
+> I understand your frustation but I think you are exagerating on this.
+>=20
+
+I have the same feeling, if there is no regression issue, I believe no one =
+like to revert anything.
+
+> The fix you provide (and was reverted by causing regression at that
+> moment) is a great improvement and those should be brought back. To
+> bring it back, as I explained on the Hangout, you can revert those and
+> apply the fix for the sstate. Doing this, we can integrate those
+> changes back and everyone is happy.
+
+I agree, I will be happy if there is a better fix.
+
+Thanks,
+Jackie
+
+>=20
+> To make all this setup you are asking for, I need to reserve resources
+> in our autobuilder to properly excercize it and provide useful
+> feedback otherwise it is useless. To be honest, I am not being an
+> active user of this and been acting as maintainer just due the lack of
+> someone more active so I am willing to give the maintenance for
+> someone more commited to Java use than me, if desired.
+>=20
+> --
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
