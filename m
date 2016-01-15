@@ -1,52 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id F155C731D5
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C2D173211
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jan 2016 12:52:55 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id l65so19115188wmf.1
+	Fri, 15 Jan 2016 12:56:25 +0000 (UTC)
+Received: by mail-wm0-f51.google.com with SMTP id f206so23337735wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jan 2016 04:52:56 -0800 (PST)
+	Fri, 15 Jan 2016 04:56:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=7O2OXSPEBV8Dh8WM+XI6j3nl3olWhUcPg5+lJtJx4aY=;
-	b=eQoG2vqCxnwwo4oLfW1tISqOcj8rMduXVF14TkDNu6x5ZkjrOtUmBuaZBlg5t+kfae
-	i06pD1RGOCwhqueu0Y7p53jlAYfoSFUfFBUgVLXiaHUNfLhqkyZquZ6I/W6n6WO9auwP
-	rYdOvmtCePUMh56jp4mS/z+E5XaaGOxIHZhJyGgSdQWK2P2DIg/MXOUOQtFqKjIsDad3
-	hx8tS5bIwnA9qMU0YW0Otfszr00r9D6lG7hMZTJB1a5IcFax/DtSnNA3xwvqPpTFufyX
-	YP7FCYmaZ2HoxgjfZechIoX3t9Jf/w8yTW/Qx6qAHO7zPTUEPKftM+FYEIBNtGOr74XO
-	4CTA==
+	h=from:to:cc:subject:date:message-id;
+	bh=jnRshmMZsRUfc6FGP5uxnbCihEH8c8feX22HXuETFs8=;
+	b=U4djHMVPVsE/ncuZ+OWLj8rHSOH5Kwd2lIQJjX74O/fSnwE8eV9NZQeaeUlkqkF61X
+	QgvUrQH2LJ5BYF/HSd9HLYhFfrUaVAo7sMk8/jrPUz+b+EFgyuDNv3p3DfXcM2vLE3te
+	l7Q0dGIx7jVU4qdcuNQjJ5XrJ9bduuN4WeMKRk/u1e7hucjxLpNPgFBaWRMhyh6YF6nt
+	TvznsTXecgOVcQklCq1HqkMCltWFOu0JzJo6H5+7uspmdUpVTlQobf+MkB/6HCPt0soC
+	Aq8rA7VJB7Mt6qRSbPM1iyaznich1/OoPy+I5GrY+gfHaMuI672j7B9nKbnpkEduPJzf
+	wjcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=7O2OXSPEBV8Dh8WM+XI6j3nl3olWhUcPg5+lJtJx4aY=;
-	b=buGEywcX68RcEKlj2lVqoJsWxTrhBEoNU5fjr8Ga51S451V8xjm387XlwDXYgV4bN7
-	uZBSxTRu+bhXWcPmguq1jR97ItP8kquJt9hzrIurpvY/pOuhaPuAi+YtuFnbX5Tf0xzn
-	ZQCnrMSZ9ReQircs0kI0WK27o94SbYKMcPr0CvU4UB1dGfb/UQMfsCmCL9+B+e3yXFHB
-	fyZM+FpEZ2aMOrugmHrZxOxJh+jDsUJm95/A0cWRDEGGey6EzeQaUVJ5bOVf0he+SMIs
-	WrhSMPMvEP2PvcLOH5tgncX72JfTX+paV67kRriPumHBDch9iTJOPZ1jN3Z/60AggLk4
-	3JWw==
-X-Gm-Message-State: AG10YORXhm0/2W2pQ4GDUQhijI0PTMnKuReS39XwMdnHRf3Q3TJLOA+wfttiJwExOXDqtQ==
-X-Received: by 10.28.179.84 with SMTP id c81mr3325361wmf.30.1452862376037;
-	Fri, 15 Jan 2016 04:52:56 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=jnRshmMZsRUfc6FGP5uxnbCihEH8c8feX22HXuETFs8=;
+	b=ATXe0t4ZmFWULyc14cNRK0LT2TjasPMMOSg2QwMB2EQHZaJ/XbTOW4pW7nRa4vUW4Y
+	REWBnGXEZSqjIWms4+sFRnKns32FFWhMh3RND/ZnXFvJ2UVVByh/7QoYB0Iq9h0wzT1s
+	cpPQ0XxMFMf/g2CBTpwJCccRipO6xVn5XuWyirT4Eky2jdRMjsjnaBqH5rUjRk8UWHKz
+	XhiFux0+Qvz1N0xuW6+87rnsXf5PU//3J9G4YdjfFdrV+bDubr9Bqw7qrSLBMn5UYvam
+	SDDNqDiGoW2750PubIrv6muZcoIX7TkNiXXdENdkWX6L1qL1S+WoAPY+AgG+Z4g3xPea
+	LpJA==
+X-Gm-Message-State: ALoCoQmrWsh1S5w/LVNr+vBmnUcWG6s/tHirHXavKSFR5hgOHwfMC5mDVwLotlFjniIpwxz4FPQuHQuv48GtS9QZUQm+H4q21Q==
+X-Received: by 10.194.120.226 with SMTP id lf2mr9677676wjb.108.1452862585632; 
+	Fri, 15 Jan 2016 04:56:25 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	u69sm2424008wmu.20.2016.01.15.04.52.55
+	u191sm2446630wmd.4.2016.01.15.04.56.24
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 15 Jan 2016 04:52:55 -0800 (PST)
+	Fri, 15 Jan 2016 04:56:24 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 15 Jan 2016 13:53:49 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160115125349.GC2607@jama>
-References: <1452631365-11516-1-git-send-email-adrian.freihofer@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1452631365-11516-1-git-send-email-adrian.freihofer@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: koen@dominion.thruhere.net
-Subject: Re: [meta-oe][PATCHv3 0/3] networkmanager: 1.0.6 -> 1.0.10
+Date: Fri, 15 Jan 2016 13:57:20 +0100
+Message-Id: <1452862640-13133-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.0
+Subject: [PATCH][meta-oe] terminus-font: update perl-native-runtime dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,91 +52,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jan 2016 12:52:56 -0000
-X-Groupsio-MsgNum: 59559
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="aT9PWwzfKXlsBJM1"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 15 Jan 2016 12:56:26 -0000
 
---aT9PWwzfKXlsBJM1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* it was renamed in oe-core with:
+  commit f4dade8e765a8c7bfd131728b9e0a34631e24950
+  Author: Ed Bartosh <ed.bartosh@linux.intel.com>
+  Date:   Thu Jan 7 13:39:39 2016 +0200
 
-On Tue, Jan 12, 2016 at 09:42:42PM +0100, Adrian Freihofer wrote:
-> networkmanager
-> - update to 1.0.10
-> - add patches, one of them fixes broken openvpn
-> - fix pppd rdepend
-> networkmanager-openvpn: Update to 1.0.8
->=20
-> Adrian Freihofer (2):
->   networkmanager: add patches
->   networkmanager-openvpn: Update to 1.0.8
->=20
-> Dai Caiyun (1):
->   networkmanager: 1.0.6 -> 1.0.10
+    meta: rename perl-native-runtime
 
-This seems to break gnome-panel build:
-| In file included from clock-location.c:22:0:
-|
-/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/include/Netw=
-orkManager/NetworkManager.h:31:31:
-fatal error: nm-version-macros.h: No such file or directory
-| compilation terminated.
-| make[5]: *** [clock_applet-clock-location.o] Error 1
-| make[5]: *** Waiting for unfinished jobs....
+    The code in native.bbclass adds -native suffix to the package
+    names that don't have it. perl-native-runtime becomes
+    perl-native-runtime-native because of this.
 
-Can you please test it?
+    Renamed perl-native-runtime -> hostperl-runtime-native to avoid
+    mangling it and to conform with the naming convetion for native
+    packages.
 
->=20
->  .../networkmanager/networkmanager-openvpn_1.0.6.bb |  31 ------
->  .../networkmanager/networkmanager-openvpn_1.0.8.bb |  31 ++++++
->  ...ilure-to-configure-routes-due-to-wrong-de.patch |  54 ++++++++++
->  ...-clear-ppp_watch_id-upon-pppd-termination.patch |  29 +++++
->  ...date-ip_iface-only-if-IP-interface-exists.patch |  45 ++++++++
->  .../networkmanager/networkmanager_1.0.10.bb        | 120 +++++++++++++++=
-++++++
->  .../networkmanager/networkmanager_1.0.6.bb         | 117 ---------------=
------
->  7 files changed, 279 insertions(+), 148 deletions(-)
->  delete mode 100644 meta-oe/recipes-connectivity/networkmanager/networkma=
-nager-openvpn_1.0.6.bb
->  create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkma=
-nager-openvpn_1.0.8.bb
->  create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkma=
-nager/0003-core-fix-failure-to-configure-routes-due-to-wrong-de.patch
->  create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkma=
-nager/0004-ppp-manager-clear-ppp_watch_id-upon-pppd-termination.patch
->  create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkma=
-nager/0005-device-update-ip_iface-only-if-IP-interface-exists.patch
->  create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkma=
-nager_1.0.10.bb
->  delete mode 100644 meta-oe/recipes-connectivity/networkmanager/networkma=
-nager_1.0.6.bb
->=20
-> --=20
-> 2.5.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb
+index a6bef10..337cde4 100644
+--- a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb
++++ b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb
+@@ -8,7 +8,7 @@ SECTION = "fonts"
+ LICENSE = "OFL-1.1"
+ LIC_FILES_CHKSUM = "file://OFL.TXT;md5=9cadb26f4c5c005618c5ae74f041ec54"
+ 
+-DEPENDS = "perl-native-runtime gzip-native"
++DEPENDS = "hostperl-runtime-native gzip-native"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
+ SRC_URI[md5sum] = "a8e792fe6e84c86ed2b6ed3e2a12ba66"
+-- 
+2.7.0
 
---aT9PWwzfKXlsBJM1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlaY690ACgkQN1Ujt2V2gBzVMACggnTlT+Sd0z7Q3pdUe40SvDoL
-S7kAoJAq3MxaYwhWf/e2CLs8RhpKfZDz
-=LE2X
------END PGP SIGNATURE-----
-
---aT9PWwzfKXlsBJM1--
