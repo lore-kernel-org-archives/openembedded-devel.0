@@ -1,43 +1,44 @@
-Return-Path: <scott@jumpnowtek.com>
-X-Greylist: delayed 323 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 16 Jan 2016 14:46:37 UTC
-Received: from smtp121.iad3a.emailsrvr.com (smtp121.iad3a.emailsrvr.com
-	[173.203.187.121])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C4C07318F
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id EEA0B73174
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jan 2016 14:46:37 +0000 (UTC)
-Received: from smtp24.relay.iad3a.emailsrvr.com (localhost.localdomain
-	[127.0.0.1])
-	by smtp24.relay.iad3a.emailsrvr.com (SMTP Server) with ESMTP id
-	E204F1805C9 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jan 2016 09:41:12 -0500 (EST)
-Received: from app26.wa-webapps.iad3a (relay-webapps.rsapps.net
-	[172.27.255.140])
-	by smtp24.relay.iad3a.emailsrvr.com (SMTP Server) with ESMTP id
-	DA45D1805BB for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jan 2016 09:41:12 -0500 (EST)
-X-Sender-Id: scott@jumpnowtek.com
-Received: from app26.wa-webapps.iad3a (relay-webapps.rsapps.net
-	[172.27.255.140]) by 0.0.0.0:25 (trex/5.5.4);
-	Sat, 16 Jan 2016 09:41:12 -0500
-Received: from jumpnowtek.com (localhost.localdomain [127.0.0.1])
-	by app26.wa-webapps.iad3a (Postfix) with ESMTP id CC683380041
+	Sat, 16 Jan 2016 17:47:57 +0000 (UTC)
+Received: by mail-wm0-f43.google.com with SMTP id r129so6767574wmr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jan 2016 09:41:12 -0500 (EST)
-Received: by apps.rackspace.com (Authenticated sender: scott@jumpnowtek.com,
-	from: scott@jumpnowtek.com) 
-	with HTTP; Sat, 16 Jan 2016 09:41:12 -0500 (EST)
-Date: Sat, 16 Jan 2016 09:41:12 -0500 (EST)
-From: "Scott Ellis" <scott@jumpnowtek.com>
-To: openembedded-devel@lists.openembedded.org
+	Sat, 16 Jan 2016 09:47:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=GFbVrQR5jqAYM8kpYh0kqiJqFFCEkVOyDLB34Wq3a+4=;
+	b=NupjWvnYm4oVMYO+Sc5lFijwCUAWifSowtLHpzFdh9n2aMF+4aZZ1mN9tSX6ZDUgiM
+	wKmeSWYmbkIHOrcWL59X+e8/Ke4iZaNYTzA59OMEAYqw9VIkSadIiRM+j4FVrq2FKq5w
+	PZELPe7H4Yugow1iwqlf6uDGAXMO40oWp/jdKgLOWzfB5Bw7MmuiHP4xeWQ9S2gZ+6st
+	Ety/ZiTYvQxirXqYIkFjVq3khzZ68ZmhWE4Dq0Db56K+t9uFwvc5SaVg0cV8JGI8PB1v
+	hC1OxtWuH48fIPRoBvspPB59xyMzieJCehtug5YZhNAvSDTUCOJTU8cfatuhIgypvXfV
+	/DWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=GFbVrQR5jqAYM8kpYh0kqiJqFFCEkVOyDLB34Wq3a+4=;
+	b=c7YXiRX+Kbs2VjuwUKowWkIwZ1uQpTTyHkvWwID62tikloSN3OopACl6KxRBNwz5B/
+	+2tbJ5Vyix+ErkjhzpRmpkrDyOKZG9rL+088/0ehZ3gk+63S/rtXESvBwMS5IoXKnIX0
+	DbM9Ub9UUe590JhXLE7QN1LAIp/CFZjf9Z97g2tAPOukUV/XcKuGstGyu52gM++kjerH
+	vjXFi3sW3qMPog+cUlC6TqBAMB69BUGzmc42pyDbNgkkuhGvjjuVoTO4ymGJoVBxCUF6
+	vT97h/JOG5F8cNPU6lHulSb5B50oalxh800k9rhyXoqRXLg+vrmBCZqwphwyeJswayN4
+	7lXA==
+X-Gm-Message-State: AG10YORZdOGzEJhXXJqV8KGGALIrB3XD3MsnznB3RODb19MnXPZNaiEKL6SpydCTKbA41uqnXuV3xareCkgKSA==
 MIME-Version: 1.0
-Importance: Normal
-X-Priority: 3 (Normal)
-X-Type: plain
-X-Auth-ID: scott@jumpnowtek.com
-Message-ID: <1452955272.835129245@apps.rackspace.com>
-X-Mailer: webmail/11.6.10-RC
-Subject: [PATCH] [coreutils]: Add xattr PACKAGECONFIG
+X-Received: by 10.28.97.11 with SMTP id v11mr5031767wmb.42.1452966477263; Sat,
+	16 Jan 2016 09:47:57 -0800 (PST)
+Received: by 10.194.2.15 with HTTP; Sat, 16 Jan 2016 09:47:57 -0800 (PST)
+In-Reply-To: <1452955272.835129245@apps.rackspace.com>
+References: <1452955272.835129245@apps.rackspace.com>
+Date: Sat, 16 Jan 2016 18:47:57 +0100
+Message-ID: <CA+chaQfnzojovC0NkpMLrqnHcvM4VfOYTXQsD9x2awhJ4Se8Gg@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH] [coreutils]: Add xattr PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,31 +51,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Jan 2016 14:46:38 -0000
-Content-Type: text/plain;charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 16 Jan 2016 17:47:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From Yocto poky where it also stops this warning=0A=0AWARNING: QA Issue: co=
-reutils rdepends on libattr, but it isn't a build dependency? [build-deps]=
-=0A=0ASigned-off-by: Scott Ellis <scott@jumpnowtek.com>=0A---=0A meta/recip=
-es-core/coreutils/coreutils_8.24.bb | 9 +++++++--=0A 1 file changed, 7 inse=
-rtions(+), 2 deletions(-)=0A=0Adiff --git a/meta/recipes-core/coreutils/cor=
-eutils_8.24.bb b/meta/recipes-core/coreutils/coreutils_8.24.bb=0Aindex f042=
-346..6a09c59 100644=0A--- a/meta/recipes-core/coreutils/coreutils_8.24.bb=
-=0A+++ b/meta/recipes-core/coreutils/coreutils_8.24.bb=0A@@ -28,14 +28,19 @=
-@ SRC_URI[manpages.sha256sum] =3D "cf0333b5f134a331e0b46e2ddf90666f8bdc3281=
-c1ca2c7cc=0A EXTRA_OECONF_class-native =3D "--without-gmp"=0A EXTRA_OECONF_=
-class-target =3D "--enable-install-program=3Darch --libexecdir=3D${libdir}"=
-=0A=0A-# acl is not a default feature=0A+# acl and xattr are not default fe=
-atures=0A #=0A-PACKAGECONFIG_class-target ??=3D "${@bb.utils.contains('DIST=
-RO_FEATURES', 'acl', 'acl', '', d)}"=0A+PACKAGECONFIG_class-target ??=3D "\=
-=0A+    ${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)} \=0A+=
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'xattr', '', d)} \=0A+=
-"=0A+=0A PACKAGECONFIG_class-native ??=3D ""=0A=0A # with, without, depends=
-, rdepends=0A #=0A PACKAGECONFIG[acl] =3D "--enable-acl,--disable-acl,acl,"=
-=0A+PACKAGECONFIG[xattr] =3D "--enable-xattr,--disable-xattr,attr,"=0A=0A #=
- [ df mktemp base64 gets a special treatment and is not included in this=0A=
- bindir_progs =3D "arch basename chcon cksum comm csplit cut dir dircolors =
-dirname du \=0A--=0A2.5.0
+This belongs to openembedded-core ML. Please resend.
 
+On Sat, Jan 16, 2016 at 3:41 PM, Scott Ellis <scott@jumpnowtek.com> wrote:
+
+> From Yocto poky where it also stops this warning
+>
+> WARNING: QA Issue: coreutils rdepends on libattr, but it isn't a build
+> dependency? [build-deps]
+>
+> Signed-off-by: Scott Ellis <scott@jumpnowtek.com>
+> ---
+>  meta/recipes-core/coreutils/coreutils_8.24.bb | 9 +++++++--
+>  1 file changed, 7 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta/recipes-core/coreutils/coreutils_8.24.bb
+> b/meta/recipes-core/coreutils/coreutils_8.24.bb
+> index f042346..6a09c59 100644
+> --- a/meta/recipes-core/coreutils/coreutils_8.24.bb
+> +++ b/meta/recipes-core/coreutils/coreutils_8.24.bb
+> @@ -28,14 +28,19 @@ SRC_URI[manpages.sha256sum] =
+> "cf0333b5f134a331e0b46e2ddf90666f8bdc3281c1ca2c7cc
+>  EXTRA_OECONF_class-native = "--without-gmp"
+>  EXTRA_OECONF_class-target = "--enable-install-program=arch
+> --libexecdir=${libdir}"
+>
+> -# acl is not a default feature
+> +# acl and xattr are not default features
+>  #
+> -PACKAGECONFIG_class-target ??= "${@bb.utils.contains('DISTRO_FEATURES',
+> 'acl', 'acl', '', d)}"
+> +PACKAGECONFIG_class-target ??= "\
+> +    ${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)} \
+> +    ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'xattr', '', d)} \
+> +"
+> +
+>  PACKAGECONFIG_class-native ??= ""
+>
+>  # with, without, depends, rdepends
+>  #
+>  PACKAGECONFIG[acl] = "--enable-acl,--disable-acl,acl,"
+> +PACKAGECONFIG[xattr] = "--enable-xattr,--disable-xattr,attr,"
+>
+>  # [ df mktemp base64 gets a special treatment and is not included in this
+>  bindir_progs = "arch basename chcon cksum comm csplit cut dir dircolors
+> dirname du \
+> --
+> 2.5.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
