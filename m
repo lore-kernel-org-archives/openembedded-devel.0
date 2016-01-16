@@ -1,46 +1,43 @@
-Return-Path: <stephanoc@gmail.com>
-Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
-	[209.85.220.53])
-	by mail.openembedded.org (Postfix) with ESMTP id F314D6FFE8
+Return-Path: <scott@jumpnowtek.com>
+X-Greylist: delayed 323 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 16 Jan 2016 14:46:37 UTC
+Received: from smtp121.iad3a.emailsrvr.com (smtp121.iad3a.emailsrvr.com
+	[173.203.187.121])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C4C07318F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jan 2016 07:29:01 +0000 (UTC)
-Received: by mail-pa0-f53.google.com with SMTP id ho8so145409687pac.2
+	Sat, 16 Jan 2016 14:46:37 +0000 (UTC)
+Received: from smtp24.relay.iad3a.emailsrvr.com (localhost.localdomain
+	[127.0.0.1])
+	by smtp24.relay.iad3a.emailsrvr.com (SMTP Server) with ESMTP id
+	E204F1805C9 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Jan 2016 09:41:12 -0500 (EST)
+Received: from app26.wa-webapps.iad3a (relay-webapps.rsapps.net
+	[172.27.255.140])
+	by smtp24.relay.iad3a.emailsrvr.com (SMTP Server) with ESMTP id
+	DA45D1805BB for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Jan 2016 09:41:12 -0500 (EST)
+X-Sender-Id: scott@jumpnowtek.com
+Received: from app26.wa-webapps.iad3a (relay-webapps.rsapps.net
+	[172.27.255.140]) by 0.0.0.0:25 (trex/5.5.4);
+	Sat, 16 Jan 2016 09:41:12 -0500
+Received: from jumpnowtek.com (localhost.localdomain [127.0.0.1])
+	by app26.wa-webapps.iad3a (Postfix) with ESMTP id CC683380041
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jan 2016 23:29:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=MXXDsOuz27LWv2BXWAkQtyclLlI3bfy33FOADbJ4KVY=;
-	b=sqBXaUwxiqBRxy+xZYbwbC57e06Tkw8U6QFl8EjT3ifDugNrmr356G6mHvrIPPCfLf
-	hVOskFvKiWKIJ/h7BbhrzwupkIxvW2aPpvSkk/tbv6pInuMX+MoiaEANVHHBdJk+Kp6l
-	vPsEu+mW+BBayzQKplRF01ZgOqk/Svhc9wIQ0C/lrkRcmeWgoMgzyhxV4iZHxipKWiXI
-	BHx+wpic8VGtpZeKtCT8Jf6x+L279E3YAzEbMIb/Y0cy5SWpDuWhhxhMMTm1t7W4NWiY
-	KaRfuciOSOdDxZixz2xh419vrAS4xAvFurzjlHaahol5+OZvfYxUHWw2Mt7FpQCbSeRF
-	fM3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=MXXDsOuz27LWv2BXWAkQtyclLlI3bfy33FOADbJ4KVY=;
-	b=IfcK8qMDa3Lth4amHZRyZMtNLvl+TJE2U33UC3rBGuBpiNg1oae3NKLKACzrTDnbaU
-	WYWjkTL0lGUz20+/FWTdTUAHBFYPo67QdD2en8I3s72uWeqL8s4h/k5/p/nc4B7jFrgV
-	JzD9aYuwAYeABChjF4duczJSoID3BCnLdciTc/XaM1WxJzX8XjaHFVJGcfuEHw9wJRUg
-	IL63FHvobx+m/tCzsjG/+xH+BIl/db03SGH3vRGvW89mNIboI2/bK8Ztd1i4tKHNj/I1
-	XWqL9qmAC1QSPaF0cT4vYBQ52b7AhHvwTADCRgkQfyE2Ov4NpNOHGDh5NTay/Z9gnUrW
-	fbZA==
-X-Gm-Message-State: ALoCoQmrsnqveWrg6nUDNU7o6pkVq4sprt7FxxIh9oGO1UaSarnLbnifnK/TB0AfbUjyTcnUzhxUUE4eInOIxN6oMtff+JceDw==
-X-Received: by 10.66.163.196 with SMTP id yk4mr20899825pab.115.1452929342329; 
-	Fri, 15 Jan 2016 23:29:02 -0800 (PST)
-Received: from ip-172-31-11-191.us-west-2.compute.internal
-	(ec2-52-11-37-43.us-west-2.compute.amazonaws.com. [52.11.37.43])
-	by smtp.gmail.com with ESMTPSA id
-	tp3sm19824071pac.16.2016.01.15.23.29.01
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 15 Jan 2016 23:29:01 -0800 (PST)
-From: Stephano Cetola <stephanoc@gmail.com>
+	Sat, 16 Jan 2016 09:41:12 -0500 (EST)
+Received: by apps.rackspace.com (Authenticated sender: scott@jumpnowtek.com,
+	from: scott@jumpnowtek.com) 
+	with HTTP; Sat, 16 Jan 2016 09:41:12 -0500 (EST)
+Date: Sat, 16 Jan 2016 09:41:12 -0500 (EST)
+From: "Scott Ellis" <scott@jumpnowtek.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jan 2016 23:28:23 -0800
-Message-Id: <1452929303-24595-1-git-send-email-stephanoc@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH_V2] fix missing packageconfig for samba with sysvinit
+MIME-Version: 1.0
+Importance: Normal
+X-Priority: 3 (Normal)
+X-Type: plain
+X-Auth-ID: scott@jumpnowtek.com
+Message-ID: <1452955272.835129245@apps.rackspace.com>
+X-Mailer: webmail/11.6.10-RC
+Subject: [PATCH] [coreutils]: Add xattr PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,29 +50,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Jan 2016 07:29:03 -0000
+X-List-Received-Date: Sat, 16 Jan 2016 14:46:38 -0000
+Content-Type: text/plain;charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Building samba with sysvinit currently throws a QA warning about
-"invalid PACKAGECONFIG: sysv". This fixes that issue.
-
-Signed-off-by: Stephano Cetola <stephanoc@gmail.com>
----
- meta-networking/recipes-connectivity/samba/samba_4.1.12.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-index a51d31f..c1d53c8 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-@@ -62,6 +62,7 @@ PACKAGECONFIG[aio] = "--with-aio-support,---without-aio-support,libaio"
- PACKAGECONFIG[fam] = "--with-fam,--without-fam,gamin"
- PACKAGECONFIG[pam] = "--with-pam --with-pam_smbpass --with-pammodulesdir=${base_libdir}/security,--without-pam --without-pam_smbpass,libpam"
- PACKAGECONFIG[lsb] = ",,lsb"
-+PACKAGECONFIG[sysv] = ",,sysvinit"
- PACKAGECONFIG[cups] = "--enable-cups,--disable-cups,cups"
- PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
- PACKAGECONFIG[sasl] = ",,cyrus-sasl"
--- 
-1.9.1
+From Yocto poky where it also stops this warning=0A=0AWARNING: QA Issue: co=
+reutils rdepends on libattr, but it isn't a build dependency? [build-deps]=
+=0A=0ASigned-off-by: Scott Ellis <scott@jumpnowtek.com>=0A---=0A meta/recip=
+es-core/coreutils/coreutils_8.24.bb | 9 +++++++--=0A 1 file changed, 7 inse=
+rtions(+), 2 deletions(-)=0A=0Adiff --git a/meta/recipes-core/coreutils/cor=
+eutils_8.24.bb b/meta/recipes-core/coreutils/coreutils_8.24.bb=0Aindex f042=
+346..6a09c59 100644=0A--- a/meta/recipes-core/coreutils/coreutils_8.24.bb=
+=0A+++ b/meta/recipes-core/coreutils/coreutils_8.24.bb=0A@@ -28,14 +28,19 @=
+@ SRC_URI[manpages.sha256sum] =3D "cf0333b5f134a331e0b46e2ddf90666f8bdc3281=
+c1ca2c7cc=0A EXTRA_OECONF_class-native =3D "--without-gmp"=0A EXTRA_OECONF_=
+class-target =3D "--enable-install-program=3Darch --libexecdir=3D${libdir}"=
+=0A=0A-# acl is not a default feature=0A+# acl and xattr are not default fe=
+atures=0A #=0A-PACKAGECONFIG_class-target ??=3D "${@bb.utils.contains('DIST=
+RO_FEATURES', 'acl', 'acl', '', d)}"=0A+PACKAGECONFIG_class-target ??=3D "\=
+=0A+    ${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)} \=0A+=
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'xattr', '', d)} \=0A+=
+"=0A+=0A PACKAGECONFIG_class-native ??=3D ""=0A=0A # with, without, depends=
+, rdepends=0A #=0A PACKAGECONFIG[acl] =3D "--enable-acl,--disable-acl,acl,"=
+=0A+PACKAGECONFIG[xattr] =3D "--enable-xattr,--disable-xattr,attr,"=0A=0A #=
+ [ df mktemp base64 gets a special treatment and is not included in this=0A=
+ bindir_progs =3D "arch basename chcon cksum comm csplit cut dir dircolors =
+dirname du \=0A--=0A2.5.0
 
 
