@@ -1,45 +1,50 @@
-Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 97D436E5CB
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2016 00:26:25 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id l65so60624770wmf.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jan 2016 16:26:27 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
+	[209.85.220.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 81C07731F1;
+	Sun, 17 Jan 2016 11:54:29 +0000 (UTC)
+Received: by mail-pa0-f44.google.com with SMTP id cy9so418874726pac.0;
+	Sun, 17 Jan 2016 03:54:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=TTaClhrEFaeYHOG8kDmXDhmJegdDKswMz9AnudO4Iwk=;
-	b=jaVD3++JOXJRJW73OOeQ4NWJz7yL7JSvQf5dNKJAfZZfJf5ecSkK06FDtvXNJi+qN2
-	Dfbi0J32UDqQ0TSP+isLgJsKE3yX2gCZPJ1T5vc8pKdq8WmlQ504ztJ5SX+aDy+2FqIq
-	kowkuwGeNGKUjUl04yQl0UgtI7aifv6GrbYmvDVWRH/yfleK3KozgNHack1xCKKNQPG3
-	OhQVXH5TMFwOfYFTT89oqrp60eO+7nCd8zLhRbJWSYCd8rh1oP7L/b4QYtlrraIWl3SK
-	6UFKPd5GNQURAvfYp9WYNAyyt3fgxU38VthmgQtoFBcMxOyhyNlXHwVp73oPrLVcP1Fi
-	WyEg==
+	h=from:content-type:subject:date:message-id:to:mime-version;
+	bh=ZgTzfc3yjA8bO7xlGh6+07jGLX5JW21qY+GkSOhudjU=;
+	b=A33I85ZlXpqdVbJV27NbJLefVL9xPjZJxDo98s7bSO/cA8DVKlhBGjXPO9vikbLMME
+	iBzsR8NscP25yJj6Epq9JKRsabaUD7gOlFdsp9GurToZAp03pER5FwSj3AZXj6WA137j
+	mgDvvjSiqC0Qu5KOqbaRilC5ifUrVW/vWxLWxCxE/F8xtqYFVjvNDlXwo6p6bKwjN+RP
+	MhzAFTZliENYtWUWRxUFvbelIonDVcjVmHLfw6DZSDOkzkUk+KWvlemBXzek1QZJFW+J
+	XrKg0nLf1USkVI+3fiKp2J1XlvnSOVZJH0u8QF+Hqhy1KuQgX7aHoRRzKGx7AacJnGsr
+	NTGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=TTaClhrEFaeYHOG8kDmXDhmJegdDKswMz9AnudO4Iwk=;
-	b=ikvBTKFI/d9p6dF4ln1Gt78K+NqhNO4qml/yjwrj1cGZHwKGKyDP/OK6FBSke74K8t
-	93RZuHm5Hr5jLIgbk0Tp4iChAHhsoeilDsiEEGIJttvpUSRZESUOvMesiv8JDR/Dw6ac
-	WSU2m7e6GXgXdXRP2bILRndoJaaSVMXHDk6m15W0qakJv0rQmrqPb7aH7+jTQDSA6mTL
-	CY8boHsKZpk55AN7Nh8BqmLED2C2rX6fqUVkk2Iu9/FUnEBW78xrCAOjX2G/Q3RVVEvK
-	oBD9QHSgAwITxt/CfNF56mtaDks9k+oe4uhmZS2Dx91k5bzwu9hjsVn9I5qYfWvyuKn3
-	XoVA==
-X-Gm-Message-State: AG10YORU/X8kAIpIzfLPQGIFwUGS2vMCG7xjt2Wm1Crhwym6G2fqpB0fxnMWeE02PJHwIw==
-X-Received: by 10.28.64.137 with SMTP id n131mr5482604wma.96.1452990386206;
-	Sat, 16 Jan 2016 16:26:26 -0800 (PST)
-Received: from ubuntu.ebenfeld.local
-	(ip-109-90-30-143.hsi11.unitymediagroup.de. [109.90.30.143])
+	h=x-gm-message-state:from:content-type:subject:date:message-id:to
+	:mime-version;
+	bh=ZgTzfc3yjA8bO7xlGh6+07jGLX5JW21qY+GkSOhudjU=;
+	b=SDZhLPPYUuYYnA1DjVdHrdpAvwJrYQNpY6FgOoVzidu5x6MyRdC479z2Ek7T9twW3i
+	B6VPNz8HpMyVnp1TWuLJyWoyB8QBN5jlnk8NcmESpZQQhIJu8WrDoSOTIE1FIkvFl9F8
+	+8Fhl+GbOfiY5OZN3W27TLQvWNoQKV28kBk+9hfnxmxOUd+afqNmBsPwyrTdryrb6RsD
+	+rSlscAqxW+IxAHddE26iBz9KG7jYtxIDY8Ft9U2nyvf6Y73QaovvVEgHYwfPkj/r6my
+	kpBUmirDGgfcrWRGHUe9XyPr2zDxDXc9zNIzO11fBM4uvXw9ez0s5M3JlmEshEvIZcaa
+	XKMQ==
+X-Gm-Message-State: ALoCoQn+KeX+7gO+ziypbGHLczEKCqYB53qjpRwNJ0EdI82xAlYaazvu2datszWvPJrFdp02sMbGM89yYZ92xrjjt7xVsOxczw==
+X-Received: by 10.67.15.73 with SMTP id fm9mr29009372pad.130.1453031670202;
+	Sun, 17 Jan 2016 03:54:30 -0800 (PST)
+Received: from ?IPv6:2601:646:8802:5d5c:551e:cfd2:447c:a7d1?
+	([2601:646:8802:5d5c:551e:cfd2:447c:a7d1])
 	by smtp.gmail.com with ESMTPSA id
-	z137sm8951909wmc.8.2016.01.16.16.26.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 16 Jan 2016 16:26:25 -0800 (PST)
-From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Jan 2016 01:26:07 +0100
-Message-Id: <1452990367-11666-1-git-send-email-sven.ebenfeld@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] mongodb: 2.6.0 -> 3.3.0 and remove from pnblacklist
+	o4sm26854689pfa.85.2016.01.17.03.54.29
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 17 Jan 2016 03:54:29 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+X-Pgp-Agent: GPGMail 2.6b2
+Date: Sun, 17 Jan 2016 03:54:24 -0800
+Message-Id: <2747032A-1F56-4CA6-860C-484B9292A0B5@gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
+X-Mailer: Apple Mail (2.3112)
+Subject: [RFT] Glibc 2.23 and binutils 2.26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,539 +57,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2016 00:26:29 -0000
+X-List-Received-Date: Sun, 17 Jan 2016 11:54:30 -0000
+X-Groupsio-MsgNum: 59571
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_8D4272E7-1A64-4E3A-81C8-91D1D6629844";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-Since building mongodb was impossible currently, I updated the recipe
-and got it working on arm >= v6, x86 and x86_64. Unfortunately, it fails
-building with system-boost for the current version 1.60. The corresponding
-ticket SERVER-17294 of mongodb jira is still in progress. So we use the
-built-in version of boost.
+--Apple-Mail=_8D4272E7-1A64-4E3A-81C8-91D1D6629844
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
----
- ...Make-it-possible-to-disable-the-use-of-v8.patch |  50 --------
- ...to-use-build-settings-from-environment-va.patch |  67 +++++++++++
- ...02-Fix-linking-when-scripting-is-disabled.patch |  25 ----
- ...d-mongo-binary-when-scripting-is-disabled.patch |  64 -----------
- ...ce-os.uname-with-os.getenv-OE_TARGET_ARCH.patch |  50 --------
- ...ports-atomic-ops-for-armv5-and-up-but-onl.patch | 127 ---------------------
- meta-oe/recipes-support/mongodb/mongodb_git.bb     |  66 ++++++-----
- 7 files changed, 105 insertions(+), 344 deletions(-)
- delete mode 100644 meta-oe/recipes-support/mongodb/mongodb/0001-Make-it-possible-to-disable-the-use-of-v8.patch
- create mode 100644 meta-oe/recipes-support/mongodb/mongodb/0001-Tell-scons-to-use-build-settings-from-environment-va.patch
- delete mode 100644 meta-oe/recipes-support/mongodb/mongodb/0002-Fix-linking-when-scripting-is-disabled.patch
- delete mode 100644 meta-oe/recipes-support/mongodb/mongodb/0003-Do-not-build-mongo-binary-when-scripting-is-disabled.patch
- delete mode 100644 meta-oe/recipes-support/mongodb/mongodb/0004-replace-os.uname-with-os.getenv-OE_TARGET_ARCH.patch
- delete mode 100644 meta-oe/recipes-support/mongodb/mongodb/0005-GCC-4.7-supports-atomic-ops-for-armv5-and-up-but-onl.patch
+Hi all
 
-diff --git a/meta-oe/recipes-support/mongodb/mongodb/0001-Make-it-possible-to-disable-the-use-of-v8.patch b/meta-oe/recipes-support/mongodb/mongodb/0001-Make-it-possible-to-disable-the-use-of-v8.patch
-deleted file mode 100644
-index 650389e..0000000
---- a/meta-oe/recipes-support/mongodb/mongodb/0001-Make-it-possible-to-disable-the-use-of-v8.patch
-+++ /dev/null
-@@ -1,50 +0,0 @@
--From f1bd00e7f54aad6479bc809c27d5cd3c2fb993eb Mon Sep 17 00:00:00 2001
--From: Michael Hudson-Doyle <michael.hudson@linaro.org>
--Date: Fri, 20 Dec 2013 11:10:43 +1300
--Subject: [PATCH 1/5] Make it possible to disable the use of v8.
--
--Currently v8 is always built in, no matter what you pass to scons.
--
--This removes the (useless) --usev8 flag for scons and replaces it with a
----disable-scripting option instead.
-----
-- SConstruct | 9 ++++++---
-- 1 file changed, 6 insertions(+), 3 deletions(-)
--
--diff --git a/SConstruct b/SConstruct
--index 3886d1b..6e0ef3b 100644
----- a/SConstruct
--+++ b/SConstruct
--@@ -225,7 +225,7 @@ add_option( "asio" , "Use Asynchronous IO (NOT READY YET)" , 0 , True )
-- add_option( "ssl" , "Enable SSL" , 0 , True )
-- 
-- # library choices
---add_option( "usev8" , "use v8 for javascript" , 0 , True )
--+add_option( "disable-scripting" , "do not build support for javascript" , 0 , True )
-- add_option( "libc++", "use libc++ (experimental, requires clang)", 0, True )
-- 
-- # mongo feature options
--@@ -442,7 +442,7 @@ static = has_option( "static" )
-- 
-- noshell = has_option( "noshell" ) 
-- 
---usev8 = has_option( "usev8" ) 
--+disable_scripting = has_option( "disable-scripting" )
-- 
-- asio = has_option( "asio" )
-- 
--@@ -600,7 +600,10 @@ if has_option( "durableDefaultOn" ):
-- if has_option( "durableDefaultOff" ):
--     env.Append( CPPDEFINES=[ "_DURABLEDEFAULTOFF" ] )
-- 
---usev8 = True
--+if disable_scripting or justClientLib:
--+    usev8 = False
--+else:
--+    usev8 = True
-- 
-- extraLibPlaces = []
-- 
---- 
--1.9.0
--
-diff --git a/meta-oe/recipes-support/mongodb/mongodb/0001-Tell-scons-to-use-build-settings-from-environment-va.patch b/meta-oe/recipes-support/mongodb/mongodb/0001-Tell-scons-to-use-build-settings-from-environment-va.patch
-new file mode 100644
-index 0000000..09d49d2
---- /dev/null
-+++ b/meta-oe/recipes-support/mongodb/mongodb/0001-Tell-scons-to-use-build-settings-from-environment-va.patch
-@@ -0,0 +1,67 @@
-+From 53368d3f4adc09dd84234a9af31771bcd8ca2757 Mon Sep 17 00:00:00 2001
-+From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-+Date: Fri, 15 Jan 2016 22:41:28 +0100
-+Subject: [PATCH] Tell scons to use build settings from environment variables
-+
-+Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-+---
-+ SConstruct                | 8 ++++++--
-+ src/mongo/util/SConscript | 2 ++
-+ 2 files changed, 8 insertions(+), 2 deletions(-)
-+
-+diff --git a/SConstruct b/SConstruct
-+index 5082a4b..3370f70 100644
-+--- a/SConstruct
-++++ b/SConstruct
-+@@ -507,6 +507,7 @@ def variable_arch_converter(val):
-+         'amd64':  'x86_64',
-+         'emt64':   'x86_64',
-+         'x86':    'i386',
-++        'aarch64': 'arm64',
-+     }
-+     val = val.lower()
-+ 
-+@@ -568,7 +569,8 @@ env_vars.Add('ARFLAGS',
-+     converter=variable_shlex_converter)
-+ 
-+ env_vars.Add('CC',
-+-    help='Select the C compiler to use')
-++    help='Select the C compiler to use',
-++    default=os.getenv('CC'))
-+ 
-+ env_vars.Add('CCFLAGS',
-+     help='Sets flags for the C and C++ compiler',
-+@@ -588,7 +590,8 @@ env_vars.Add('CPPPATH',
-+     converter=variable_shlex_converter)
-+ 
-+ env_vars.Add('CXX',
-+-    help='Select the C++ compiler to use')
-++    help='Select the C++ compiler to use',
-++    default=os.getenv('CXX'))
-+ 
-+ env_vars.Add('CXXFLAGS',
-+     help='Sets flags for the C++ compiler',
-+@@ -818,6 +821,7 @@ envDict = dict(BUILD_ROOT=buildDir,
-+                )
-+ 
-+ env = Environment(variables=env_vars, **envDict)
-++env.PrependENVPath('PATH', os.getenv('PATH'))
-+ del envDict
-+ 
-+ env.AddMethod(env_os_is_wrapper, 'TargetOSIs')
-+diff --git a/src/mongo/util/SConscript b/src/mongo/util/SConscript
-+index 6add602..8d05a62 100644
-+--- a/src/mongo/util/SConscript
-++++ b/src/mongo/util/SConscript
-+@@ -251,6 +251,8 @@ if get_option('allocator') == 'tcmalloc':
-+                 'MONGO_HAVE_GPERFTOOLS_GET_THREAD_CACHE_SIZE'
-+             ]
-+         )
-++    if not use_system_version_of_library('valgrind'):
-++        tcmspEnv.InjectThirdPartyIncludePaths('valgrind')
-+ 
-+     tcmspEnv.Library(
-+         target='tcmalloc_set_parameter',
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-support/mongodb/mongodb/0002-Fix-linking-when-scripting-is-disabled.patch b/meta-oe/recipes-support/mongodb/mongodb/0002-Fix-linking-when-scripting-is-disabled.patch
-deleted file mode 100644
-index b4388d8..0000000
---- a/meta-oe/recipes-support/mongodb/mongodb/0002-Fix-linking-when-scripting-is-disabled.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--From 5b22f64a2e2237082d2733698b07147d27b09ad2 Mon Sep 17 00:00:00 2001
--From: Michael Hudson-Doyle <michael.hudson@linaro.org>
--Date: Fri, 20 Dec 2013 12:28:27 +1300
--Subject: [PATCH 2/5] Fix linking when scripting is disabled.
--
-----
-- src/mongo/scripting/engine_none.cpp | 4 ++++
-- 1 file changed, 4 insertions(+)
--
--diff --git a/src/mongo/scripting/engine_none.cpp b/src/mongo/scripting/engine_none.cpp
--index f5c7109..9ae9d57 100644
----- a/src/mongo/scripting/engine_none.cpp
--+++ b/src/mongo/scripting/engine_none.cpp
--@@ -33,4 +33,8 @@ namespace mongo {
--     void ScriptEngine::setup() {
--         // noop
--     }
--+
--+    std::string ScriptEngine::getInterpreterVersionString() {
--+        return "none";
--+    }
-- }
---- 
--1.9.0
--
-diff --git a/meta-oe/recipes-support/mongodb/mongodb/0003-Do-not-build-mongo-binary-when-scripting-is-disabled.patch b/meta-oe/recipes-support/mongodb/mongodb/0003-Do-not-build-mongo-binary-when-scripting-is-disabled.patch
-deleted file mode 100644
-index 016ac35..0000000
---- a/meta-oe/recipes-support/mongodb/mongodb/0003-Do-not-build-mongo-binary-when-scripting-is-disabled.patch
-+++ /dev/null
-@@ -1,64 +0,0 @@
--From eab4316597a8e9e7bbf845a054564c6daa4a95b7 Mon Sep 17 00:00:00 2001
--From: Michael Hudson-Doyle <michael.hudson@linaro.org>
--Date: Wed, 22 Jan 2014 13:53:10 +1300
--Subject: [PATCH 3/5] * Do not build 'mongo' binary when scripting is disabled
-- * Do not build the jstests when scripting is disabled
--
-----
-- SConstruct           | 8 ++++++--
-- src/mongo/SConscript | 4 +++-
-- 2 files changed, 9 insertions(+), 3 deletions(-)
--
--diff --git a/SConstruct b/SConstruct
--index 6e0ef3b..c84a669 100644
----- a/SConstruct
--+++ b/SConstruct
--@@ -440,10 +440,13 @@ else:
-- 
-- static = has_option( "static" )
-- 
---noshell = has_option( "noshell" ) 
---
-- disable_scripting = has_option( "disable-scripting" )
-- 
--+if not disable_scripting:
--+    noshell = has_option( "noshell" )
--+else:
--+    noshell = True
--+
-- asio = has_option( "asio" )
-- 
-- usePCH = has_option( "usePCH" )
--@@ -1662,6 +1665,7 @@ Export("get_option")
-- Export("has_option use_system_version_of_library")
-- Export("mongoCodeVersion")
-- Export("usev8")
--+Export("disable_scripting")
-- Export("darwin windows solaris linux freebsd nix")
-- Export('module_sconscripts')
-- Export("debugBuild optBuild")
--diff --git a/src/mongo/SConscript b/src/mongo/SConscript
--index 58f8406..b4379e7 100644
----- a/src/mongo/SConscript
--+++ b/src/mongo/SConscript
--@@ -6,6 +6,7 @@ import os
-- import itertools
-- from buildscripts import utils
-- 
--+Import("disable_scripting")
-- Import("env")
-- Import("shellEnv")
-- Import("testEnv")
--@@ -1043,7 +1044,8 @@ test = testEnv.Install(
--                     [ f for f in Glob("dbtests/*.cpp")
--                       if not str(f).endswith('framework.cpp') and
--                          not str(f).endswith('framework_options.cpp') and
---                         not str(f).endswith('framework_options_init.cpp') ],
--+                         not str(f).endswith('framework_options_init.cpp') and
--+                         not (str(f).endswith('jstests.cpp') and disable_scripting)],
--                     LIBDEPS = [
--                        "mutable_bson_test_utils",
--                        "mongocommon",
---- 
--1.9.0
--
-diff --git a/meta-oe/recipes-support/mongodb/mongodb/0004-replace-os.uname-with-os.getenv-OE_TARGET_ARCH.patch b/meta-oe/recipes-support/mongodb/mongodb/0004-replace-os.uname-with-os.getenv-OE_TARGET_ARCH.patch
-deleted file mode 100644
-index ade7ec0..0000000
---- a/meta-oe/recipes-support/mongodb/mongodb/0004-replace-os.uname-with-os.getenv-OE_TARGET_ARCH.patch
-+++ /dev/null
-@@ -1,50 +0,0 @@
--From d02f33d860f2d11f71e9056782a2e75603d6ec25 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen.kooi@linaro.org>
--Date: Tue, 4 Feb 2014 10:56:35 +0100
--Subject: [PATCH 4/5] replace os.uname with os.getenv(OE_TARGET_ARCH)
--
--This fixes crosscompilation
--
--Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
--Upstream-Status: Inappropiate [OE specific]
-----
-- SConstruct | 8 ++++----
-- 1 file changed, 4 insertions(+), 4 deletions(-)
--
--diff --git a/SConstruct b/SConstruct
--index c84a669..05e2ea0 100644
----- a/SConstruct
--+++ b/SConstruct
--@@ -257,9 +257,9 @@ add_option( "pch" , "use precompiled headers to speed up the build (experimental
-- add_option( "distcc" , "use distcc for distributing builds" , 0 , False )
-- 
-- # debugging/profiling help
---if os.sys.platform.startswith("linux") and (os.uname()[-1] == 'x86_64'):
--+if os.sys.platform.startswith("linux") and (os.getenv("OE_TARGET_ARCH") == 'x86_64'):
--     defaultAllocator = 'tcmalloc'
---elif (os.sys.platform == "darwin") and (os.uname()[-1] == 'x86_64'):
--+elif (os.sys.platform == "darwin") and (os.getenv("OE_TARGET_ARCH") == 'x86_64'):
--     defaultAllocator = 'tcmalloc'
-- else:
--     defaultAllocator = 'system'
--@@ -633,7 +633,7 @@ if has_option( "extralib" ):
-- # ---- other build setup -----
-- 
-- if "uname" in dir(os):
---    processor = os.uname()[4]
--+    processor = os.getenv("OE_TARGET_ARCH")
-- else:
--     processor = "i386"
-- 
--@@ -662,7 +662,7 @@ elif linux:
-- 
--     env.Append( LIBS=['m'] )
-- 
---    if os.uname()[4] == "x86_64" and not force32:
--+    if os.getenv("OE_TARGET_ARCH") == "x86_64" and not force32:
--         linux64 = True
--         nixLibPrefix = "lib64"
--         env.Append( EXTRALIBPATH=["/usr/lib64" , "/lib64" ] )
---- 
--1.9.0
--
-diff --git a/meta-oe/recipes-support/mongodb/mongodb/0005-GCC-4.7-supports-atomic-ops-for-armv5-and-up-but-onl.patch b/meta-oe/recipes-support/mongodb/mongodb/0005-GCC-4.7-supports-atomic-ops-for-armv5-and-up-but-onl.patch
-deleted file mode 100644
-index 490d564..0000000
---- a/meta-oe/recipes-support/mongodb/mongodb/0005-GCC-4.7-supports-atomic-ops-for-armv5-and-up-but-onl.patch
-+++ /dev/null
-@@ -1,127 +0,0 @@
--From e31f85e6915d4bf6ed76c5da71c235525fa4ecc3 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen.kooi@linaro.org>
--Date: Mon, 14 Apr 2014 10:29:42 +0200
--Subject: [PATCH 5/5] GCC 4.7+ supports atomic ops for armv5 and up, but only
-- exports the functions for armv6 and up. This patch works around the linker
-- problems associated with that.
--
--Forward ported from http://pkgs.fedoraproject.org/cgit/mongodb.git/tree/mongodb-2.4.5-atomics.patch
--
--Upstream-status: pending
-----
-- src/mongo/bson/util/atomic_int.h                   | 26 ++++++++++++
-- src/mongo/platform/atomic_intrinsics_gcc_generic.h | 47 ++++++++++++++++++++++
-- 2 files changed, 73 insertions(+)
--
--diff --git a/src/mongo/bson/util/atomic_int.h b/src/mongo/bson/util/atomic_int.h
--index 0b85363..ed02c23 100644
----- a/src/mongo/bson/util/atomic_int.h
--+++ b/src/mongo/bson/util/atomic_int.h
--@@ -24,6 +24,10 @@
-- 
-- #include "mongo/platform/compiler.h"
-- 
--+#define GCC_VERSION (__GNUC__ * 10000                 \
--+                     + __GNUC_MINOR__ * 100           \
--+                     + __GNUC_PATCHLEVEL__)
--+
-- namespace mongo {
-- 
--     /**
--@@ -72,6 +76,28 @@ namespace mongo {
--         InterlockedAdd((volatile long *)&x,by);
--     }
-- # endif
--+#elif defined(GCC_VERSION) && GCC_VERSION >= 40700
--+// in GCC version >= 4.7.0 we can use the built-in atomic operations
--+
--+    inline void AtomicUInt::set(unsigned newX) {
--+        __atomic_store_n (&x, newX, __ATOMIC_SEQ_CST);
--+    }
--+    AtomicUInt AtomicUInt::operator++() {    // ++prefix
--+        return __atomic_add_fetch(&x, 1, __ATOMIC_SEQ_CST);
--+    }
--+    AtomicUInt AtomicUInt::operator++(int) { // postfix++
--+        return __atomic_fetch_add(&x, 1, __ATOMIC_SEQ_CST);
--+    }
--+    AtomicUInt AtomicUInt::operator--() {    // --prefix
--+        return __atomic_add_fetch(&x, -1, __ATOMIC_SEQ_CST);
--+    }
--+    AtomicUInt AtomicUInt::operator--(int) { // postfix--
--+        return __atomic_fetch_add(&x, -1, __ATOMIC_SEQ_CST);
--+    }
--+    void AtomicUInt::signedAdd(int by) {
--+        __atomic_fetch_add(&x, by, __ATOMIC_SEQ_CST);
--+    }
--+
-- #elif defined(__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4)
--     // this is in GCC >= 4.1
--     inline void AtomicUInt::set(unsigned newX) { __sync_synchronize(); x = newX; }
--diff --git a/src/mongo/platform/atomic_intrinsics_gcc_generic.h b/src/mongo/platform/atomic_intrinsics_gcc_generic.h
--index 64a2499..b7cc176 100644
----- a/src/mongo/platform/atomic_intrinsics_gcc_generic.h
--+++ b/src/mongo/platform/atomic_intrinsics_gcc_generic.h
--@@ -22,8 +22,53 @@
-- 
-- #include <boost/utility.hpp>
-- 
--+#define GCC_VERSION (__GNUC__ * 10000                 \
--+                     + __GNUC_MINOR__ * 100           \
--+                     + __GNUC_PATCHLEVEL__)
--+
-- namespace mongo {
-- 
--+// If GCC version >= 4.7.0, we can use the built-in atomic operations
--+#if defined(GCC_VERSION) && GCC_VERSION >= 40700
--+
--+    /**
--+     * Instantiation of AtomicIntrinsics<>.
--+     */
--+    template <typename T>
--+    class AtomicIntrinsics {
--+    public:
--+
--+        static T compareAndSwap(volatile T* dest, T expected, T newValue) {
--+            return __atomic_compare_exchange_n (dest, &expected, newValue, 0, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
--+        }
--+
--+        static T swap(volatile T* dest, T newValue) {
--+            return __atomic_exchange_n (dest, newValue, __ATOMIC_SEQ_CST);
--+        }
--+
--+        static T load(volatile const T* value) {
--+            return __atomic_load_n (value, __ATOMIC_SEQ_CST);
--+        }
--+
--+        static T loadRelaxed(volatile const T* value) {
--+            return *value;
--+        }
--+
--+        static void store(volatile T* dest, T newValue) {
--+            __atomic_store_n (dest, newValue, __ATOMIC_SEQ_CST);
--+        }
--+
--+        static T fetchAndAdd(volatile T* dest, T increment) {
--+            return __atomic_fetch_add (dest, increment, __ATOMIC_SEQ_CST);
--+        }
--+
--+    private:
--+        AtomicIntrinsics();
--+        ~AtomicIntrinsics();
--+    };
--+
--+#else // GCC version < 4.7, so we must use legacy (platform-specific) atomic operations
--+
--     /**
--      * Instantiation of AtomicIntrinsics<> for all word types T.
--      */
--@@ -67,4 +112,6 @@ namespace mongo {
--         ~AtomicIntrinsics();
--     };
-- 
--+#endif // GCC_VERSION >= 40700
--+
-- }  // namespace mongo
---- 
--1.9.0
--
-diff --git a/meta-oe/recipes-support/mongodb/mongodb_git.bb b/meta-oe/recipes-support/mongodb/mongodb_git.bb
-index 879fc7c..c358b94 100644
---- a/meta-oe/recipes-support/mongodb/mongodb_git.bb
-+++ b/meta-oe/recipes-support/mongodb/mongodb_git.bb
-@@ -3,44 +3,54 @@ LICENSE = "AGPL-3.0 & Apache-2.0"
- LIC_FILES_CHKSUM = "file://GNU-AGPL-3.0.txt;md5=73f1eb20517c55bf9493b7dd6e480788 \
-                     file://APACHE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
--DEPENDS = "openssl libpcre boost libpcap"
--# Mongo uses tcmalloc on x86_64, which is provided by gperftools
--DEPENDS_append_x86-64 = " gperftools"
-+DEPENDS = "openssl libpcre zlib"
- 
- inherit scons
- 
--# Target 'build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod' depends on the availability of a system provided library for 'boost_program_options', but no suitable library was found during configuration.
--# | Target 'build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod' depends on the availability of a system provided library for 'boost_program_options', but no suitable library was found during configuration.
--# | scons: *** [build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod] Error 1
--# | scons: building terminated because of errors.
--# | ERROR: scons build execution failed.
--PNBLACKLIST[mongodb] ?= "Fails to build with system boost"
--
--PV = "2.6.0+git${SRCPV}"
--SRCREV = "be1905c24c7e5ea258e537fbf0d2c502c4fc6de2"
--SRC_URI = "git://github.com/mongodb/mongo.git;branch=v2.6 \
--           file://0001-Make-it-possible-to-disable-the-use-of-v8.patch \
--           file://0002-Fix-linking-when-scripting-is-disabled.patch \
--           file://0003-Do-not-build-mongo-binary-when-scripting-is-disabled.patch \
--           file://0004-replace-os.uname-with-os.getenv-OE_TARGET_ARCH.patch \
--           file://0005-GCC-4.7-supports-atomic-ops-for-armv5-and-up-but-onl.patch \
--          "
-+PV = "3.3.0+git${SRCPV}"
-+SRCREV = "aacd231be0626a204cb40908afdf62c4b67bb0ad"
-+SRC_URI = "git://github.com/mongodb/mongo.git;branch=master \
-+           file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
-+           "
- 
- S = "${WORKDIR}/git"
- 
--export OE_TARGET_ARCH="${TARGET_ARCH}"
-+# Wiredtiger supports only 64-bit platforms
-+PACKAGECONFIG_x86-64 ??= "tcmalloc wiredtiger"
-+PACKAGECONFIG_aarch64 ??= "tcmalloc wiredtiger"
-+PACKAGECONFIG ??= "tcmalloc"
-+# gperftools compilation fails for arm below v7 because of missing support of
-+# dmb operation. So we use system-allocator instead of tcmalloc
-+PACKAGECONFIG_remove_armv6 = "tcmalloc"
-+
-+#std::current_exception is undefined for arm < v6
-+COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
-+COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
-+COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
-+
-+PACKAGECONFIG[tcmalloc] = "--use-system-tcmalloc,--allocator=system,gperftools,"
-+PACKAGECONFIG[wiredtiger] = "--wiredtiger=on,--wiredtiger=off,,"
- 
- EXTRA_OESCONS = "--prefix=${D}${prefix} \
--                 --propagate-shell-environment \
--                 --cc-use-shell-environment \
--                 --cxx-use-shell-environment \
--                 --ld='${TARGET_PREFIX}g++' \
-+                 LIBPATH=${STAGING_LIBDIR} \
-+                 LINKFLAGS='${LDFLAGS}' \
-+                 CXXFLAGS='${CXXFLAGS}' \
-+                 TARGET_ARCH=${TARGET_ARCH} \
-                  --ssl \
--                 --use-system-pcre \ 
--                 --use-system-boost \
--                 --use-system-tcmalloc \
--                 --disable-scripting \
-+                 --disable-warnings-as-errors \
-+                 --use-system-pcre \
-+                 --use-system-zlib \
-+                 --js-engine=none \
-                  --nostrip \
-+                 ${EXTRA_OECONF} \
-                  mongod mongos"
- 
-+scons_do_compile() {
-+        ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} ${EXTRA_OESCONS} || \
-+        die "scons build execution failed."
-+}
- 
-+scons_do_install() {
-+        ${STAGING_BINDIR_NATIVE}/scons install ${EXTRA_OESCONS}|| \
-+        die "scons install execution failed."
-+}
-\ No newline at end of file
--- 
-1.9.1
+upstream glibc and binutils release branches have been cut out and are =
+being made ready for next release
+I have put together update patchset for both of them
+
+here are the branches
+
+https://github.com/kraj/openembedded-core/tree/kraj/binutils-2.26
+https://github.com/kraj/openembedded-core/tree/kraj/glibc-2.23
+
+FYI These are still using autorev to ensure that we test tip of release =
+branches
+
+Please give them a shot in your environments and report any issues you =
+encounter.
+
+Thanks for help
+
+-Khem
 
 
+
+
+--Apple-Mail=_8D4272E7-1A64-4E3A-81C8-91D1D6629844
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlabgPQACgkQuwUzVZGdMxS0iQCeMjFZdQcyWnlXTVJ52SSkh4Ov
+w08AmwTnRETUMzIELpWrYesmX43wh7ml
+=mZoe
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_8D4272E7-1A64-4E3A-81C8-91D1D6629844--
