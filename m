@@ -1,44 +1,47 @@
 Return-Path: <adrian.freihofer@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 19A5571957
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E94AE73180
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jan 2016 22:45:01 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id u188so19332119wmu.0
+	Mon, 18 Jan 2016 22:45:04 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id b14so19404707wmb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jan 2016 14:45:02 -0800 (PST)
+	Mon, 18 Jan 2016 14:45:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=u9gik7bm5Q/Z6ArSKYWaVZxleBAQdzfiwzDIjFkbmuk=;
-	b=GREIdkmFH3dNukuI8cbWgL9v5QjD7g/XyR70RH7lwC80L+p/HbDyTq92ts/aacsHcr
-	fppY1Npke8mOis5JAP10FsNrWZfSRa6ffzT0UCSLPdvddrhydlC9TL8OtcPunCrWSxF1
-	xw2qYkE3lCRpo/zkKQwiUE1tuv9B1SMXeKQ097/LNLHBCm9KWBsbN3GKJfzH7LCtsckW
-	PqzWL4HfSncAK9QJ8NUWdRGnTII0+qqDuRM2CuYeGL0FsYgGZe+5Kc+FLT6+D7VuoJhz
-	9qfhjF/QRX8GiRsYuU6HcZkYNl72ltfFj29fB8AA940ev7aIDXDVkHLgNyMHxNpXnzE9
-	MjCg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=eo6NqGeTOPp5oyoftKkO+I1cMmDk8/G+HZt7Aroegso=;
+	b=jVOAjieZFa3FZxLyba2p/YwFvmeiNlZK9Hm/97OB8AhvbmVD8uvr52c/XWmu0MsQu4
+	Uq/+411s/Eci+RRVl39Bl/yt6+H2/CNFJG9cCyGvx9OY1AqRP1SwN5yoWQxMZJZgwJGs
+	RTNYf9oFfVKtdns65wBmvq0Vnjt1fyG+RgYxrlmVph9PYNQHgre4ECfu96TrxNDBdy70
+	4zknJ9Crdr9jEr0N1hC6w5pmFWqQyJYyOhttHc+QQVhuKeycROAgUvrDqKQHTMuoVBVn
+	7XkFsqvzdPYbfGUzRbAA+VsfJkhJJOdXXhAalu2XhODwM4jYSl9nh6Ig+Oy52D5FKXNb
+	Si/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=u9gik7bm5Q/Z6ArSKYWaVZxleBAQdzfiwzDIjFkbmuk=;
-	b=SVKwSYVyeUEOC8eX0tqR+IDerxFMW17WKjqNqeAkRONMU+ChTqIrki0JmWfvFAvhS5
-	1mS6CnC53aAqITpgRlRsWMF6lR01PfybEzL8h8iFV/OU26xgZKg8hVKM5iz4YDDiqix0
-	lGMw2E7Yw2pbZzpM4ewfJWY51QJOdnhazgaHx6N7BS8Qap+XKVBR6UOTuLwcSjVWUtXT
-	RlkI+qv4YgXwSP0P0RI/6QnydVm6uqeMzN/+yoVboYgWNTuAJmVodb+BaR/htWExxJA/
-	KWIyhidj3E/sHBb1EXE0eE09DMLBAtHmnZeZJi0foPtaQvyLgQEsB+/5fe8h0KhwdkVs
-	9XMg==
-X-Gm-Message-State: AG10YOQ3A53Xo5u7z6eE0oQiWL0KpkvsW/5jJkp9HMiOpn+883LV+1fLjO6Cln+1WbOmQQ==
-X-Received: by 10.28.50.193 with SMTP id y184mr16112218wmy.103.1453157101849; 
-	Mon, 18 Jan 2016 14:45:01 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=eo6NqGeTOPp5oyoftKkO+I1cMmDk8/G+HZt7Aroegso=;
+	b=i50FhY8t5X5RDQeul/z+ZJieZYrISodz+AxWryBdYjcgDInjOccM50lO/WaKcEgVti
+	4NWPsa6IlUk8G5hIv4YuJ3Y7ZNhfY2ogt7L5MxAC2oYCOOw0JgAa5HzlvlwLfujfvgp/
+	ObAn9d+faZoNqjcY029mOq7T0wZ6BDStahsipfTsVFcvCA4Nn5YEwI/u3U4Ej56OZUMz
+	jAZZVIrtX0TCDWciig1jk0chcqtzLKrVZ3RXqRDYL1KKBPB7+AdRcG8T6c0ETEKMv40q
+	bfagr1ZZKkEcDOgwRRIMH+LBONYZoyDLy6QVj1/5ciDBWxS+ouX5WUsehNDT3UKZiFE4
+	m7Gw==
+X-Gm-Message-State: ALoCoQneoADvWHhTcaSWkUMpENwbWycWnt90DFSrssL3Kmkts5EpMFPcx8nn5DzEcPW+5rUiMElrgywV5Yc2BJgqBo03gs3r5A==
+X-Received: by 10.194.104.5 with SMTP id ga5mr26999819wjb.155.1453157105174;
+	Mon, 18 Jan 2016 14:45:05 -0800 (PST)
 Received: from wsadrian.local (c-82-192-248-24.customer.ggaweb.ch.
 	[82.192.248.24]) by smtp.gmail.com with ESMTPSA id
-	df10sm25734738wjb.44.2016.01.18.14.45.00
+	df10sm25734738wjb.44.2016.01.18.14.45.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 18 Jan 2016 14:45:01 -0800 (PST)
+	Mon, 18 Jan 2016 14:45:04 -0800 (PST)
 From: Adrian Freihofer <adrian.freihofer@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Jan 2016 23:44:04 +0100
-Message-Id: <1453157047-6614-1-git-send-email-adrian.freihofer@gmail.com>
+Date: Mon, 18 Jan 2016 23:44:05 +0100
+Message-Id: <1453157047-6614-2-git-send-email-adrian.freihofer@gmail.com>
 X-Mailer: git-send-email 2.5.0
-Subject: [meta-oe][PATCH v4 0/3] networkmanager: 1.0.6 -> 1.0.10
+In-Reply-To: <1453157047-6614-1-git-send-email-adrian.freihofer@gmail.com>
+References: <1453157047-6614-1-git-send-email-adrian.freihofer@gmail.com>
+Subject: [meta-oe][PATCH v4 1/3] networkmanager: 1.0.6 -> 1.0.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,37 +54,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jan 2016 22:45:02 -0000
+X-List-Received-Date: Mon, 18 Jan 2016 22:45:05 -0000
 
-Hi Martin 
-Thank you for applying the patches. The problem was in the header files
-of latest NetworkManager. The patch "add patches" contains now one more
-patch to address this issue. If you replace just the "add patches" patch
-v3 with v4 gnome-panel will build again. The other patches did not change.
-Thank you in advance.
-Regards Adrian
+From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
 
-Adrian Freihofer (2):
-  networkmanager: add patches
-  networkmanager-openvpn: Update to 1.0.8
+Upgrade networkmanager from 1.0.6 to 1.0.10.
 
-Dai Caiyun (1):
-  networkmanager: 1.0.6 -> 1.0.10
+Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+---
+ .../{networkmanager_1.0.6.bb => networkmanager_1.0.10.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/networkmanager/{networkmanager_1.0.6.bb => networkmanager_1.0.10.bb} (96%)
 
- ...pn_1.0.6.bb => networkmanager-openvpn_1.0.8.bb} |  4 +-
- ...ilure-to-configure-routes-due-to-wrong-de.patch | 54 ++++++++++++++++++++
- ...-clear-ppp_watch_id-upon-pppd-termination.patch | 29 +++++++++++
- ...date-ip_iface-only-if-IP-interface-exists.patch | 45 +++++++++++++++++
- .../0006-Fix-nm-version-macro-includes.patch       | 58 ++++++++++++++++++++++
- ...rkmanager_1.0.6.bb => networkmanager_1.0.10.bb} | 10 ++--
- 6 files changed, 195 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-connectivity/networkmanager/{networkmanager-openvpn_1.0.6.bb => networkmanager-openvpn_1.0.8.bb} (83%)
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0003-core-fix-failure-to-configure-routes-due-to-wrong-de.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0004-ppp-manager-clear-ppp_watch_id-upon-pppd-termination.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0005-device-update-ip_iface-only-if-IP-interface-exists.patch
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0006-Fix-nm-version-macro-includes.patch
- rename meta-oe/recipes-connectivity/networkmanager/{networkmanager_1.0.6.bb => networkmanager_1.0.10.bb} (88%)
-
+diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb
+similarity index 96%
+rename from meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
+rename to meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb
+index c2b00ed..81ce953 100644
+--- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
++++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb
+@@ -16,8 +16,8 @@ SRC_URI = " \
+     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
+     file://0002-add-pkg-config-for-libgcrypt.patch \
+ "
+-SRC_URI[md5sum] = "00f5f9ec69725a9f9b99366853c6f73e"
+-SRC_URI[sha256sum] = "38ea002403e3b884ffa9aae25aea431d2a8420f81f4919761c83fb92648254bd"
++SRC_URI[md5sum] = "a8f54460a4708efd840358f32d0968fd"
++SRC_URI[sha256sum] = "1bcfce8441dfd9f432a100d06b54f3831a2275cccc3b74b1b4c09a011e179fbc"
+ 
+ S = "${WORKDIR}/NetworkManager-${PV}"
+ 
 -- 
 2.5.0
 
