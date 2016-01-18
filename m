@@ -1,50 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
-	[209.85.213.174])
-	by mail.openembedded.org (Postfix) with ESMTP id F1D1A731A5
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 19A5571957
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jan 2016 19:03:27 +0000 (UTC)
-Received: by mail-ig0-f174.google.com with SMTP id t15so61729307igr.0
+	Mon, 18 Jan 2016 22:45:01 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id u188so19332119wmu.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jan 2016 11:03:29 -0800 (PST)
+	Mon, 18 Jan 2016 14:45:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=1OBb0YgLoDwhFR+NZ5aaeNSgfMFzcD2H9cnK8QrXSB8=;
-	b=jEyY2J98OcMJojprgx0TH5aAjxI9qB49aDVwvhi5afUJYkJq3gQFznY3Jgmi+lLFBO
-	BfIpGiX+m9BRsUQ5LxNhYCfXkqGXePLm4ba2BUSo+AABywgbcA50R785zCVPKlvqI/AZ
-	xSdC95zJE2whu/HIJVhORHQXLLa3mzn6CW6576z6vX5+zrFLJuNVia2qvchncb/9jzST
-	GtB8GsxQ3XxSnHQkybwjvRC+7uebNZMLc3AEM3OtnoiOuLOqb4TveJxztEdSt3C9h0h8
-	IEwI98tdjriwc9LtEN245+4OZB7ERo9gqt68Vq/yQhfW3hoBDPJvLLmwEhjIwqPwoUfC
-	mLjw==
+	h=from:to:cc:subject:date:message-id;
+	bh=u9gik7bm5Q/Z6ArSKYWaVZxleBAQdzfiwzDIjFkbmuk=;
+	b=GREIdkmFH3dNukuI8cbWgL9v5QjD7g/XyR70RH7lwC80L+p/HbDyTq92ts/aacsHcr
+	fppY1Npke8mOis5JAP10FsNrWZfSRa6ffzT0UCSLPdvddrhydlC9TL8OtcPunCrWSxF1
+	xw2qYkE3lCRpo/zkKQwiUE1tuv9B1SMXeKQ097/LNLHBCm9KWBsbN3GKJfzH7LCtsckW
+	PqzWL4HfSncAK9QJ8NUWdRGnTII0+qqDuRM2CuYeGL0FsYgGZe+5Kc+FLT6+D7VuoJhz
+	9qfhjF/QRX8GiRsYuU6HcZkYNl72ltfFj29fB8AA940ev7aIDXDVkHLgNyMHxNpXnzE9
+	MjCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=1OBb0YgLoDwhFR+NZ5aaeNSgfMFzcD2H9cnK8QrXSB8=;
-	b=Ak+5sFjqVjnqJyaSP7qAt9rxNP6r3o6t3naU/j2uahp3V8+89DBv87xpMgixI1jsMW
-	Jwci6HO5vBUc96Xxj7Kyc2McEfMgTJBtSwArqbE9us962Djan5dSQzZf54znNop3IIag
-	+uCk9MLgB59bpJouH1QY3D1DWKa6I2cqBJnR1NAGozV+USNNKtSfpIvV+ymKoaZ/DdAu
-	zQ2dcZlguj/k5PLshLkupVKOPjcvLYNAZEfnbFPd9mzRxpQ9LW/tZ8jFOTdxdYYi0HPx
-	nP+7/tePLYwniv9TSDkrS7Gzv8yCMPY2vXp5YjXAQCa0D700xtyMjqtTTJYVA+U4y+EJ
-	PecQ==
-X-Gm-Message-State: AG10YOSCKiZEmFB0EX7bJu2zXEESLBG2vL2YoZApGb4tv527E9SdFZd00CerdetgNEVi/VmxOwx6P3OSJ1nEog==
-MIME-Version: 1.0
-X-Received: by 10.50.134.129 with SMTP id pk1mr12274774igb.11.1453143808569;
-	Mon, 18 Jan 2016 11:03:28 -0800 (PST)
-Received: by 10.107.16.74 with HTTP; Mon, 18 Jan 2016 11:03:27 -0800 (PST)
-Received: by 10.107.16.74 with HTTP; Mon, 18 Jan 2016 11:03:27 -0800 (PST)
-In-Reply-To: <20160118115733.GA2614@jama>
-References: <1451483875-2370-1-git-send-email-koen@dominion.thruhere.net>
-	<20160104175200.GA5744@jama> <569CB4A5.1040602@windriver.com>
-	<20160118115733.GA2614@jama>
-Date: Mon, 18 Jan 2016 11:03:27 -0800
-Message-ID: <CAMKF1sreE8wkS7xDXgq7LgysAqQ+a899-OXW6zqU62QFBzv+Rw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=u9gik7bm5Q/Z6ArSKYWaVZxleBAQdzfiwzDIjFkbmuk=;
+	b=SVKwSYVyeUEOC8eX0tqR+IDerxFMW17WKjqNqeAkRONMU+ChTqIrki0JmWfvFAvhS5
+	1mS6CnC53aAqITpgRlRsWMF6lR01PfybEzL8h8iFV/OU26xgZKg8hVKM5iz4YDDiqix0
+	lGMw2E7Yw2pbZzpM4ewfJWY51QJOdnhazgaHx6N7BS8Qap+XKVBR6UOTuLwcSjVWUtXT
+	RlkI+qv4YgXwSP0P0RI/6QnydVm6uqeMzN/+yoVboYgWNTuAJmVodb+BaR/htWExxJA/
+	KWIyhidj3E/sHBb1EXE0eE09DMLBAtHmnZeZJi0foPtaQvyLgQEsB+/5fe8h0KhwdkVs
+	9XMg==
+X-Gm-Message-State: AG10YOQ3A53Xo5u7z6eE0oQiWL0KpkvsW/5jJkp9HMiOpn+883LV+1fLjO6Cln+1WbOmQQ==
+X-Received: by 10.28.50.193 with SMTP id y184mr16112218wmy.103.1453157101849; 
+	Mon, 18 Jan 2016 14:45:01 -0800 (PST)
+Received: from wsadrian.local (c-82-192-248-24.customer.ggaweb.ch.
+	[82.192.248.24]) by smtp.gmail.com with ESMTPSA id
+	df10sm25734738wjb.44.2016.01.18.14.45.00
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 18 Jan 2016 14:45:01 -0800 (PST)
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH] mariadb: -native also needs gold workaround
+Date: Mon, 18 Jan 2016 23:44:04 +0100
+Message-Id: <1453157047-6614-1-git-send-email-adrian.freihofer@gmail.com>
+X-Mailer: git-send-email 2.5.0
+Subject: [meta-oe][PATCH v4 0/3] networkmanager: 1.0.6 -> 1.0.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,82 +51,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jan 2016 19:03:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 18 Jan 2016 22:45:02 -0000
 
-On Jan 18, 2016 3:56 AM, "Martin Jansa" <martin.jansa@gmail.com> wrote:
->
-> On Mon, Jan 18, 2016 at 05:47:17PM +0800, Robert Yang wrote:
-> >
-> >
-> > On 01/05/2016 01:52 AM, Martin Jansa wrote:
-> > > On Wed, Dec 30, 2015 at 02:57:55PM +0100, Koen Kooi wrote:
-> > >> When the host distro uses gold mariadb-native fails to build.
-> > >>
-> > >> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> > >> ---
-> > >>   meta-oe/recipes-support/mysql/mariadb.inc | 3 +++
-> > >>   1 file changed, 3 insertions(+)
-> > >>
-> > >> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc
-b/meta-oe/recipes-support/mysql/mariadb.inc
-> > >> index a6826c3..6a55476 100644
-> > >> --- a/meta-oe/recipes-support/mysql/mariadb.inc
-> > >> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
-> > >> @@ -60,6 +60,9 @@ PACKAGECONFIG[setupdb] = ", ,,${PN}-setupdb"
-> > >>   # https://mariadb.atlassian.net/browse/MDEV-5982
-> > >>   TARGET_CFLAGS += "-fuse-ld=bfd"
-> > >>
-> > >> +BUILD_CFLAGS += "-fuse-ld=bfd"
-> > >> +BUILD_CXXFLAGS += "-fuse-ld=bfd"
-> > >
-> > > Unfortunately this breaks builds on older hosts with older gcc
-> > >
-> > > |   cc1: error: unrecognized command line option '-fuse-ld=bfd'
-> > > http://errors.yoctoproject.org/Errors/Details/25859/
-> > >
-> > > Should we consider Ubuntu-12.04 insanely old?
-> >
-> > This patch has been merged, so we don't support Ubuntu 12.04 any more?
->
-> Correct, I don't want to push back incompatible changes anymore, so I've
-> upgraded my jenkins slaves and merge this change.
+Hi Martin 
+Thank you for applying the patches. The problem was in the header files
+of latest NetworkManager. The patch "add patches" contains now one more
+patch to address this issue. If you replace just the "add patches" patch
+v3 with v4 gnome-panel will build again. The other patches did not change.
+Thank you in advance.
+Regards Adrian
 
-This is fine it would avoid support question if you could add this info to
-README
->
-> >
-> > // Robert
-> >
-> > >
-> > >> +
-> > >>   EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
-> > >>                    -DWITH_JEMALLOC=no \
-> > >>                    -DWITHOUT_TOKUDB=TRUE \
-> > >> --
-> > >> 2.0.1
-> > >>
-> > >> --
-> > >> _______________________________________________
-> > >> Openembedded-devel mailing list
-> > >> Openembedded-devel@lists.openembedded.org
-> > >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
-> > >
-> > >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Adrian Freihofer (2):
+  networkmanager: add patches
+  networkmanager-openvpn: Update to 1.0.8
+
+Dai Caiyun (1):
+  networkmanager: 1.0.6 -> 1.0.10
+
+ ...pn_1.0.6.bb => networkmanager-openvpn_1.0.8.bb} |  4 +-
+ ...ilure-to-configure-routes-due-to-wrong-de.patch | 54 ++++++++++++++++++++
+ ...-clear-ppp_watch_id-upon-pppd-termination.patch | 29 +++++++++++
+ ...date-ip_iface-only-if-IP-interface-exists.patch | 45 +++++++++++++++++
+ .../0006-Fix-nm-version-macro-includes.patch       | 58 ++++++++++++++++++++++
+ ...rkmanager_1.0.6.bb => networkmanager_1.0.10.bb} | 10 ++--
+ 6 files changed, 195 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-connectivity/networkmanager/{networkmanager-openvpn_1.0.6.bb => networkmanager-openvpn_1.0.8.bb} (83%)
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0003-core-fix-failure-to-configure-routes-due-to-wrong-de.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0004-ppp-manager-clear-ppp_watch_id-upon-pppd-termination.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0005-device-update-ip_iface-only-if-IP-interface-exists.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0006-Fix-nm-version-macro-includes.patch
+ rename meta-oe/recipes-connectivity/networkmanager/{networkmanager_1.0.6.bb => networkmanager_1.0.10.bb} (88%)
+
+-- 
+2.5.0
+
 
