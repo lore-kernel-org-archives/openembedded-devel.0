@@ -1,54 +1,50 @@
-Return-Path: <stephanoc@gmail.com>
-Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
-	[209.85.220.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 28E1E60670
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
+	[209.85.213.174])
+	by mail.openembedded.org (Postfix) with ESMTP id F1D1A731A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jan 2016 17:47:50 +0000 (UTC)
-Received: by mail-pa0-f41.google.com with SMTP id uo6so422998735pac.1
+	Mon, 18 Jan 2016 19:03:27 +0000 (UTC)
+Received: by mail-ig0-f174.google.com with SMTP id t15so61729307igr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jan 2016 09:47:51 -0800 (PST)
+	Mon, 18 Jan 2016 11:03:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ic775UcZd5Cx6m8tlqWGdbiYEO8y3dtVh5MElEjGBkY=;
-	b=NUnMby9Q7MHGbhS6aCaYIgVugANjJBJaY2+/QXbyt8QhyGxiWGPss+Zd5TmMfuC8hD
-	bl7Fvblipy1YrzkOVXUwEcYTTpHDTwN/mZWOin3aEQVBOTtvX1SSksMvnDP7CxU2NPx5
-	m1jEPysuCn+JL4Pg/IgtTR3OZxUqtY/kx+meC/9xyJu1e2zLWsQas3gME5RONNluWWgF
-	Ibxs4a8wqatEVRuIouzTaM65w7WQJNrgybUrMYU5saJBFPJQjaVlZHIy0WvLXqSZE+z4
-	/59jor2WjhfNSg+tENDDX8XIbNmAJ164/Fu1r5+6gSvl3W06YFrV9ISbh1EQWgxTdYRE
-	MmNw==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=1OBb0YgLoDwhFR+NZ5aaeNSgfMFzcD2H9cnK8QrXSB8=;
+	b=jEyY2J98OcMJojprgx0TH5aAjxI9qB49aDVwvhi5afUJYkJq3gQFznY3Jgmi+lLFBO
+	BfIpGiX+m9BRsUQ5LxNhYCfXkqGXePLm4ba2BUSo+AABywgbcA50R785zCVPKlvqI/AZ
+	xSdC95zJE2whu/HIJVhORHQXLLa3mzn6CW6576z6vX5+zrFLJuNVia2qvchncb/9jzST
+	GtB8GsxQ3XxSnHQkybwjvRC+7uebNZMLc3AEM3OtnoiOuLOqb4TveJxztEdSt3C9h0h8
+	IEwI98tdjriwc9LtEN245+4OZB7ERo9gqt68Vq/yQhfW3hoBDPJvLLmwEhjIwqPwoUfC
+	mLjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=ic775UcZd5Cx6m8tlqWGdbiYEO8y3dtVh5MElEjGBkY=;
-	b=SdJ8xhuiasdPUTzZVDuWsgsV9obY61EeQLI9KbzeyyAfbqUZ6b2iUgU76EDe238cBv
-	Rfun6KgAQYBLpRRmU/V3fl4HUOzypjQzcNjhQEMMOJiXU9GGbbCCpmWfB0qWCcXLwRBX
-	nujEq6r1kj8IrmzP0MD119pNLWiuvhgpenogcSFopKIXYwE8fBwHIgKCFIFTumnAT/qh
-	z6+pzJBElOUuIl0k5qpYYSPu5MuZbxRKXMhffFpZcvkLXaGQ03QCG2dmrzMIBF0JbknC
-	6+ZCzhGQrBqLehnwb/pLVVQV18tN4KNkQO/PfAxpU29hFgQaKyE9/G0hIk7xWsG1y7+b
-	hmnQ==
-X-Gm-Message-State: ALoCoQnyW3lBsjHp/yWLfBm70U3fasIx/moB8wD5WJxTX7kNN/Qnapi3n4gzPOrDvALKzDtIkEEBGpWB3NPaMUrz7pylWkamog==
-X-Received: by 10.66.255.39 with SMTP id an7mr36662181pad.101.1453139271194;
-	Mon, 18 Jan 2016 09:47:51 -0800 (PST)
-Received: from mail.spox.systems
-	(ec2-52-11-37-43.us-west-2.compute.amazonaws.com. [52.11.37.43])
-	by smtp.gmail.com with ESMTPSA id
-	11sm35379289pfq.87.2016.01.18.09.47.50
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 18 Jan 2016 09:47:50 -0800 (PST)
-Date: Mon, 18 Jan 2016 09:47:14 -0800
-From: Stephano Cetola <stephanoc@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160118174713.GB28347@mail.spox.systems>
-References: <20160118171933.GA28347@mail.spox.systems>
-	<569D24E2.1060209@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=1OBb0YgLoDwhFR+NZ5aaeNSgfMFzcD2H9cnK8QrXSB8=;
+	b=Ak+5sFjqVjnqJyaSP7qAt9rxNP6r3o6t3naU/j2uahp3V8+89DBv87xpMgixI1jsMW
+	Jwci6HO5vBUc96Xxj7Kyc2McEfMgTJBtSwArqbE9us962Djan5dSQzZf54znNop3IIag
+	+uCk9MLgB59bpJouH1QY3D1DWKa6I2cqBJnR1NAGozV+USNNKtSfpIvV+ymKoaZ/DdAu
+	zQ2dcZlguj/k5PLshLkupVKOPjcvLYNAZEfnbFPd9mzRxpQ9LW/tZ8jFOTdxdYYi0HPx
+	nP+7/tePLYwniv9TSDkrS7Gzv8yCMPY2vXp5YjXAQCa0D700xtyMjqtTTJYVA+U4y+EJ
+	PecQ==
+X-Gm-Message-State: AG10YOSCKiZEmFB0EX7bJu2zXEESLBG2vL2YoZApGb4tv527E9SdFZd00CerdetgNEVi/VmxOwx6P3OSJ1nEog==
 MIME-Version: 1.0
-In-Reply-To: <569D24E2.1060209@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: Require backport of patch to jethro branch
+X-Received: by 10.50.134.129 with SMTP id pk1mr12274774igb.11.1453143808569;
+	Mon, 18 Jan 2016 11:03:28 -0800 (PST)
+Received: by 10.107.16.74 with HTTP; Mon, 18 Jan 2016 11:03:27 -0800 (PST)
+Received: by 10.107.16.74 with HTTP; Mon, 18 Jan 2016 11:03:27 -0800 (PST)
+In-Reply-To: <20160118115733.GA2614@jama>
+References: <1451483875-2370-1-git-send-email-koen@dominion.thruhere.net>
+	<20160104175200.GA5744@jama> <569CB4A5.1040602@windriver.com>
+	<20160118115733.GA2614@jama>
+Date: Mon, 18 Jan 2016 11:03:27 -0800
+Message-ID: <CAMKF1sreE8wkS7xDXgq7LgysAqQ+a899-OXW6zqU62QFBzv+Rw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH] mariadb: -native also needs gold workaround
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,39 +57,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jan 2016 17:47:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 18 Jan 2016 19:03:32 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Perfect, thanks.
+On Jan 18, 2016 3:56 AM, "Martin Jansa" <martin.jansa@gmail.com> wrote:
+>
+> On Mon, Jan 18, 2016 at 05:47:17PM +0800, Robert Yang wrote:
+> >
+> >
+> > On 01/05/2016 01:52 AM, Martin Jansa wrote:
+> > > On Wed, Dec 30, 2015 at 02:57:55PM +0100, Koen Kooi wrote:
+> > >> When the host distro uses gold mariadb-native fails to build.
+> > >>
+> > >> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> > >> ---
+> > >>   meta-oe/recipes-support/mysql/mariadb.inc | 3 +++
+> > >>   1 file changed, 3 insertions(+)
+> > >>
+> > >> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc
+b/meta-oe/recipes-support/mysql/mariadb.inc
+> > >> index a6826c3..6a55476 100644
+> > >> --- a/meta-oe/recipes-support/mysql/mariadb.inc
+> > >> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
+> > >> @@ -60,6 +60,9 @@ PACKAGECONFIG[setupdb] = ", ,,${PN}-setupdb"
+> > >>   # https://mariadb.atlassian.net/browse/MDEV-5982
+> > >>   TARGET_CFLAGS += "-fuse-ld=bfd"
+> > >>
+> > >> +BUILD_CFLAGS += "-fuse-ld=bfd"
+> > >> +BUILD_CXXFLAGS += "-fuse-ld=bfd"
+> > >
+> > > Unfortunately this breaks builds on older hosts with older gcc
+> > >
+> > > |   cc1: error: unrecognized command line option '-fuse-ld=bfd'
+> > > http://errors.yoctoproject.org/Errors/Details/25859/
+> > >
+> > > Should we consider Ubuntu-12.04 insanely old?
+> >
+> > This patch has been merged, so we don't support Ubuntu 12.04 any more?
+>
+> Correct, I don't want to push back incompatible changes anymore, so I've
+> upgraded my jenkins slaves and merge this change.
 
-On 01/18, akuster808 wrote:
-> Stephano,
-> 
-> 
-> On 01/18/2016 09:19 AM, Stephano Cetola wrote:
-> > I'd like to backport this patch to jethro:
-> 
-> Getting there.
-> 
-> > 
-> > http://cgit.openembedded.org/meta-openembedded/commit/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb?id=9546714d2464b950e91d0eaf330865e482450113
-> > 
-> 
-> This commit is in jethro-next.
-> 
-> http://cgit.openembedded.org/meta-openembedded/commit/?h=jethro-next&id=e4c37719db7bcab08b0bce63c268b604252a43e3
-> 
-> - armin
-> 
-> > Without this samba does not install init scripts correctly when using
-> > sysvinit.
-> > 
-> > Does anyone see any problems with this?
-> > 
-> -- 
+This is fine it would avoid support question if you could add this info to
+README
+>
+> >
+> > // Robert
+> >
+> > >
+> > >> +
+> > >>   EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
+> > >>                    -DWITH_JEMALLOC=no \
+> > >>                    -DWITHOUT_TOKUDB=TRUE \
+> > >> --
+> > >> 2.0.1
+> > >>
+> > >> --
+> > >> _______________________________________________
+> > >> Openembedded-devel mailing list
+> > >> Openembedded-devel@lists.openembedded.org
+> > >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > >
+> > >
+> > >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
