@@ -1,24 +1,45 @@
-Return-Path: <Awais_Belal@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id B8C3D600B3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id E5EA360112
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jan 2016 14:08:59 +0000 (UTC)
-Received: from nat-ies.mentorg.com ([192.94.31.2]
-	helo=SVR-IES-FEM-01.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1aLAUM-0001h8-Uw from Awais_Belal@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jan 2016 06:08:59 -0800
-Received: from awais-Precision-M4700.pkl.mentorg.com (137.202.0.76) by
-	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
-	Server id 14.3.224.2; Mon, 18 Jan 2016 14:08:57 +0000
-From: Awais Belal <awais_belal@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 18 Jan 2016 19:08:48 +0500
-Message-ID: <1453126128-17005-1-git-send-email-awais_belal@mentor.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mplayer2: fix building with gcc 5.x
+	Mon, 18 Jan 2016 15:14:30 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id n5so68835870wmn.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jan 2016 07:14:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=4DNV3C/5KDk7vyst/BiSfE39ZtGyp20RHmVqbkOk4Js=;
+	b=HnXCM9eEtvjCpRuJ+wnF2C+pmlbpOdQ5uOLGVI+tu3XHh7/MlNlNFyMZ/ms+/Cz2sm
+	znAIar19SN1E/beW7TrqGee/iRKW4jaKfuymEczYyiuaBpmznvksTIrNEzXmHNOJ3x55
+	lFX5c+Fnbaj70TZyrX5ficmTWq6RVwv0ggXzaFY2BR7FX/ilQYQS34uf0LZRY5JMjVRt
+	oWMzm0KAjg08oPsJTllUqnsb1m6biS2yuj+ped4kr5YtrGwjCzQB+jim3waMiMfJ0Gup
+	d6w4YIyBE1GWSLIOv/t9DEebhkhm2dcMSRYlRLJh0w5oiEhsicg5rMSiM3K7z3Eqn2ud
+	1QuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=4DNV3C/5KDk7vyst/BiSfE39ZtGyp20RHmVqbkOk4Js=;
+	b=fVlp1lTHYtl0nQ41hmKdXg61B+wmgv/wH0UUVqp9qeerkqPWkVlwQ9I1whX6IC0pZx
+	9UW0pFTI1ssSIk/RDu+gaV8kCLGjJGUQD26x+ojQ3Th9NEUp33fQf/3NYIWFzGcYvxv6
+	789qB5y2fQYLPjRtoA/UIPEqFW9ZFeR1FfSD79PqdBnSBRZmjvsYX5ajIJMhnWnkd8iq
+	sGg/bI1gwRyQx3FSbBXHGUIXdMHLDV16UD0q2uZ1FklnIM4SA5PhNB1YQsmfA32w2DwE
+	YBz2arw3GsXyVowWXK+YJ6pQfqJx3H+y/g6fetG9nFtxW9RJkRk8wk/XDRBOPBnz+Eyt
+	TIZw==
+X-Gm-Message-State: ALoCoQmMXu2244NIxmio2TcFZR0UuGmiR0AMK4nbltyV72SIBSr+BT/G8mKmNfOmiU4tm8uSl69IOHNCsy5pvOUGMKdnceJy4w==
+X-Received: by 10.194.103.164 with SMTP id fx4mr25050068wjb.56.1453130071324; 
+	Mon, 18 Jan 2016 07:14:31 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	c15sm16184392wmd.19.2016.01.18.07.14.29
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 18 Jan 2016 07:14:30 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 18 Jan 2016 16:15:42 +0100
+Message-Id: <1453130142-15803-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.0
+Subject: [PATCH][meta-oe] phoronix-test-suite: exclude bash, php, python dependency with SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,188 +52,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jan 2016 14:09:01 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 18 Jan 2016 15:14:34 -0000
 
-This patch works around a potential problem in the theora
-glue code where it assumes that the compiler will
-somehow find a function which is not exported explicitly
-through the libtheora library. Due to this problem the
-build fails with gcc-5.x compiler.
-The included patch essentially backports a commit which
-updates the glue code to use the Theora 1.0 API to
-eliminate this problem and PNBLACKLIST is cleared
-for mplayer2.
+* otherwise the recipe cannot inherit allarch. as detected with
+  openembedded-core/scripts/sstate-diff-machines.sh:
 
-Signed-off-by: Awais Belal <awais_belal@mentor.com>
+ === Comparing signatures for task do_package_write_ipk.sigdata between qemux86copy and qemuarm ===
+ERROR: phoronix-test-suite different signature for task do_package_write_ipk.sigdata between qemux86copy and qemuarm
+runtaskdeps changed from ['bashbash_4.3.30.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'phoronix-test-suitephoronix-test-suite_6.0.1.bb.do_package', 'phoronix-test-suitephoronix-test-suite_6.0.1.bb.do_packagedata', 'phpphp_5.6.16.bb.do_packagedata', 'pseudopseudo_1.7.4.bb.do_populate_sysroot:virtual:native', 'pythonpython_2.7.9.bb.do_packagedata'] to ['bashbash_4.3.30.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'phoronix-test-suitephoronix-test-suite_6.0.1.bb.do_package', 'phoronix-test-suitephoronix-test-suite_6.0.1.bb.do_packagedata', 'phpphp_5.6.16.bb.do_packagedata', 'pseudopseudo_1.7.4.bb.do_populate_sysroot:virtual:native', 'pythonpython_2.7.9.bb.do_packagedata']
+/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-extended/bash/bash_4.3.30.bb.do_packagedata with hash 6750d401e680e6e5dac8e8585c43b386
+ changed to
+/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-extended/bash/bash_4.3.30.bb.do_packagedata with hash bc992ff361286bc2f048935132a20348
+/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-devtools/php/php_5.6.16.bb.do_packagedata with hash 17a21823eea3e0d1cce1d516f77b23ad
+ changed to
+/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-devtools/php/php_5.6.16.bb.do_packagedata with hash 6058efb32e6f622aa866f982c3688f08
+/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-devtools/python/python_2.7.9.bb.do_packagedata with hash 4e3278467af71cb9d0219f674415a2fa
+ changed to
+/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-devtools/python/python_2.7.9.bb.do_packagedata with hash 4186010efd8bd3464948437ae114ec2a
+Hash for dependent task phpphp_5.6.16.bb.do_packagedata changed from 17a21823eea3e0d1cce1d516f77b23ad to 6058efb32e6f622aa866f982c3688f08
+Hash for dependent task bashbash_4.3.30.bb.do_packagedata changed from 6750d401e680e6e5dac8e8585c43b386 to bc992ff361286bc2f048935132a20348
+Hash for dependent task pythonpython_2.7.9.bb.do_packagedata changed from 4e3278467af71cb9d0219f674415a2fa to 4186010efd8bd3464948437ae114ec2a
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...artially-port-libtheora-glue-code-to-Theo.patch | 136 +++++++++++++++++++++
- meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb |   4 +-
- 2 files changed, 137 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer2/0001-demux_ogg-partially-port-libtheora-glue-code-to-Theo.patch
+ meta-oe/conf/layer.conf | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2/0001-demux_ogg-partially-port-libtheora-glue-code-to-Theo.patch b/meta-oe/recipes-multimedia/mplayer/mplayer2/0001-demux_ogg-partially-port-libtheora-glue-code-to-Theo.patch
-new file mode 100644
-index 0000000..b4d9841
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/mplayer/mplayer2/0001-demux_ogg-partially-port-libtheora-glue-code-to-Theo.patch
-@@ -0,0 +1,136 @@
-+From 0571bb4f1a6e1934ee7e093ce7aa517b9bac8e6a Mon Sep 17 00:00:00 2001
-+From: Awais Belal <awais_belal@mentor.com>
-+Date: Sun, 17 Jan 2016 14:46:10 +0500
-+Subject: [PATCH] demux_ogg: partially port libtheora glue code to Theora 1.0
-+ API
-+
-+This partially backports the following commit to allow building
-+with gcc-5.x and otherwise fails to find the definition of
-+the _ilog function the way it is used.
-+
-+https://github.com/pigoz/mplayer-svn/commit/85e51408cd00979fc209da8e3a39b6f0e7f325bc
-+
-+Signed-off-by: Awais Belal <awais_belal@mentor.com>
-+---
-+ libmpdemux/demux_ogg.c | 52 ++++++++++++++++++++++++++------------------------
-+ 1 file changed, 27 insertions(+), 25 deletions(-)
-+
-+diff --git a/libmpdemux/demux_ogg.c b/libmpdemux/demux_ogg.c
-+index 9eea061..9144426 100644
-+--- a/libmpdemux/demux_ogg.c
-++++ b/libmpdemux/demux_ogg.c
-+@@ -50,8 +50,7 @@
-+ #endif
-+ 
-+ #ifdef CONFIG_OGGTHEORA
-+-#include <theora/theora.h>
-+-int _ilog (unsigned int); /* defined in many places in theora/lib/ */
-++#include <theora/theoradec.h>
-+ #endif
-+ 
-+ #define BLOCK_SIZE 4096
-+@@ -62,9 +61,10 @@ int _ilog (unsigned int); /* defined in many places in theora/lib/ */
-+  */
-+ #ifdef CONFIG_OGGTHEORA
-+ typedef struct theora_struct_st {
-+-    theora_state   st;
-+-    theora_comment cc;
-+-    theora_info    inf;
-++    th_setup_info *tsi;
-++    th_dec_ctx    *tctx;
-++    th_comment     tc;
-++    th_info        ti;
-+ } theora_struct_t;
-+ #endif
-+ 
-+@@ -117,7 +117,7 @@ typedef struct ogg_stream {
-+     float   samplerate; /// granulpos 2 time
-+     int64_t lastpos;
-+     int32_t lastsize;
-+-    int     keyframe_frequency_force;
-++    int     keyframe_granule_shift;
-+ 
-+     // Logical stream state
-+     ogg_stream_state stream;
-+@@ -300,11 +300,10 @@ static unsigned char *demux_ogg_read_packet(ogg_stream_t *os, ogg_packet *pack,
-+            have theora_state st, until all header packets were passed to the
-+            decoder. */
-+         if (!pack->bytes || !(*data&0x80)) {
-+-            int keyframe_granule_shift = _ilog(os->keyframe_frequency_force - 1);
-+-            int64_t iframemask = (1 << keyframe_granule_shift) - 1;
-++            int64_t iframemask = iframemask = (1 << os->keyframe_granule_shift) - 1;
-+ 
-+             if (pack->granulepos >= 0) {
-+-                os->lastpos  = pack->granulepos >> keyframe_granule_shift;
-++                os->lastpos  = pack->granulepos >> os->keyframe_granule_shift;
-+                 os->lastpos += pack->granulepos & iframemask;
-+                 *keyframe = (pack->granulepos & iframemask) == 0;
-+             } else {
-+@@ -888,14 +887,15 @@ int demux_ogg_open(demuxer_t *demuxer)
-+ #ifdef CONFIG_OGGTHEORA
-+         } else if (pack.bytes >= 7 && !strncmp (&pack.packet[1], "theora", 6)) {
-+             int errorCode = 0;
-+-            theora_info inf;
-+-            theora_comment cc;
-++            th_info ti;
-++            th_comment tc;
-++            th_setup_info *tsi = NULL;
-+ 
-+-            theora_info_init (&inf);
-+-            theora_comment_init (&cc);
-++            th_info_init (&ti);
-++            th_comment_init (&tc);
-+ 
-+-            errorCode = theora_decode_header (&inf, &cc, &pack);
-+-            if (errorCode) {
-++            errorCode = th_decode_headerin(&ti, &tc, &tsi, &pack);
-++            if (errorCode < 0) {
-+                 mp_msg(MSGT_DEMUX, MSGL_ERR,
-+                        "Theora header parsing failed: %i \n", errorCode);
-+             } else {
-+@@ -904,30 +904,32 @@ int demux_ogg_open(demuxer_t *demuxer)
-+                 sh_v->bih = calloc(1, sizeof(*sh_v->bih));
-+                 sh_v->bih->biSize        = sizeof(*sh_v->bih);
-+                 sh_v->bih->biCompression = sh_v->format = FOURCC_THEORA;
-+-                sh_v->fps = ((double)inf.fps_numerator) / (double)inf.fps_denominator;
-+-                sh_v->frametime = ((double)inf.fps_denominator) / (double)inf.fps_numerator;
-+-                sh_v->disp_w = sh_v->bih->biWidth  = inf.frame_width;
-+-                sh_v->disp_h = sh_v->bih->biHeight = inf.frame_height;
-++                sh_v->fps = ((double)ti.fps_numerator) / (double)ti.fps_denominator;
-++                sh_v->frametime = ((double)ti.fps_denominator) / (double)ti.fps_numerator;
-++                sh_v->i_bps  = ti.target_bitrate / 8;
-++                sh_v->disp_w = sh_v->bih->biWidth  = ti.frame_width;
-++                sh_v->disp_h = sh_v->bih->biHeight = ti.frame_height;
-+                 sh_v->bih->biBitCount  = 24;
-+                 sh_v->bih->biPlanes    = 3;
-+                 sh_v->bih->biSizeImage = ((sh_v->bih->biBitCount / 8) * sh_v->bih->biWidth * sh_v->bih->biHeight);
-+                 ogg_d->subs[ogg_d->num_sub].samplerate               = sh_v->fps;
-+                 ogg_d->subs[ogg_d->num_sub].theora                   = 1;
-+-                ogg_d->subs[ogg_d->num_sub].keyframe_frequency_force = inf.keyframe_frequency_force;
-++                ogg_d->subs[ogg_d->num_sub].keyframe_granule_shift   = ti.keyframe_granule_shift;
-+                 ogg_d->subs[ogg_d->num_sub].id                       = n_video;
-+                 n_video++;
-+                 mp_msg(MSGT_DEMUX, MSGL_INFO,
-+                        "[Ogg] stream %d: video (Theora v%d.%d.%d), -vid %d\n",
-+                        ogg_d->num_sub,
-+-                       (int)inf.version_major,
-+-                       (int)inf.version_minor,
-+-                       (int)inf.version_subminor,
-++                       (int)ti.version_major,
-++                       (int)ti.version_minor,
-++                       (int)ti.version_subminor,
-+                        n_video - 1);
-+                 if (mp_msg_test(MSGT_HEADER, MSGL_V))
-+                     print_video_header(sh_v->bih, MSGL_V);
-+             }
-+-            theora_comment_clear(&cc);
-+-            theora_info_clear(&inf);
-++            th_comment_clear(&tc);
-++            th_info_clear(&ti);
-++            th_setup_free(tsi);
-+ #endif /* CONFIG_OGGTHEORA */
-+         } else if (pack.bytes >= 4 && !strncmp (&pack.packet[0], "fLaC", 4)) {
-+             sh_a = new_sh_audio_aid(demuxer, ogg_d->num_sub, n_audio);
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-index 2f0369a..9df4e74 100644
---- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-@@ -21,6 +21,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
- 
- SRC_URI = "git://repo.or.cz/mplayer.git \
-     file://0001-configure-don-t-disable-ASS-support-when-explicitly-.patch \
-+    file://0001-demux_ogg-partially-port-libtheora-glue-code-to-Theo.patch \
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index aee6234..d37eba0 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -43,6 +43,9 @@ SIGGEN_EXCLUDERECIPES_ABISAFE += " \
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+   usb-modeswitch-data->usb-modeswitch \
+   lmsensors->lmsensors-config \
++  phoronix-test-suite->bash \
++  phoronix-test-suite->python \
++  phoronix-test-suite->php \
  "
  
- SRCREV = "2c378c71a4d9b1df382db9aa787b646628b4e3f9"
-@@ -153,6 +154,3 @@ do_install() {
-     install ${S}/etc/codecs.conf ${D}/usr/etc/mplayer/
-     [ -e ${D}/usr/lib ] && rmdir ${D}/usr/lib
- }
--
--# | libmpdemux/demux_ogg.o:demux_ogg.c:function demux_ogg_read_packet: error: undefined reference to '_ilog'
--PNBLACKLIST[mplayer2] ?= "BROKEN, fails to build with gcc-5"
+ # ttf.inc inherits fontcache which adds fontconfig-utils to RDEPENDS
 -- 
-1.9.1
+2.7.0
 
 
