@@ -1,45 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id E5EA360112
+Return-Path: <stephanoc@gmail.com>
+Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
+	[209.85.220.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 54E986E687
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jan 2016 15:14:30 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id n5so68835870wmn.0
+	Mon, 18 Jan 2016 17:20:12 +0000 (UTC)
+Received: by mail-pa0-f45.google.com with SMTP id uo6so422689499pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jan 2016 07:14:32 -0800 (PST)
+	Mon, 18 Jan 2016 09:20:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=4DNV3C/5KDk7vyst/BiSfE39ZtGyp20RHmVqbkOk4Js=;
-	b=HnXCM9eEtvjCpRuJ+wnF2C+pmlbpOdQ5uOLGVI+tu3XHh7/MlNlNFyMZ/ms+/Cz2sm
-	znAIar19SN1E/beW7TrqGee/iRKW4jaKfuymEczYyiuaBpmznvksTIrNEzXmHNOJ3x55
-	lFX5c+Fnbaj70TZyrX5ficmTWq6RVwv0ggXzaFY2BR7FX/ilQYQS34uf0LZRY5JMjVRt
-	oWMzm0KAjg08oPsJTllUqnsb1m6biS2yuj+ped4kr5YtrGwjCzQB+jim3waMiMfJ0Gup
-	d6w4YIyBE1GWSLIOv/t9DEebhkhm2dcMSRYlRLJh0w5oiEhsicg5rMSiM3K7z3Eqn2ud
-	1QuA==
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=gdVLymAfNTRiraGZLoCDUh4lPQ9H63ambD+ypDHGevI=;
+	b=z6CqCWE05RfUOWb6bDtJR6f1iXqyCrkKI51NZctR4sI+l6kx4hgTkRfl8Q1Y6sii50
+	ve8RbuEbrq47jaeEc0kUs9WX32CkSQqUpxQ30t9HzWTF6GmT9XTVzjanc1kxaXF0hLaD
+	Wyec2dITsaDivfh8Mg9/ZNfFps1iiWkmNRRpYDbpYlVpzNuw8q2Yu3k6gAWI/9O1PRTw
+	pHcx0JcUKwFKrh7qCG/fLsGm1+JLUhS06VB7O3b2qsyj5uk5i+czXb8AlyyF76GzCDo8
+	tbCZfIHKgz02vbvP2ERR0ErLfWQJV80NZ87PcX1j2+erEEeXf+w1EirBvc9eTcNw+d0W
+	LXqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=4DNV3C/5KDk7vyst/BiSfE39ZtGyp20RHmVqbkOk4Js=;
-	b=fVlp1lTHYtl0nQ41hmKdXg61B+wmgv/wH0UUVqp9qeerkqPWkVlwQ9I1whX6IC0pZx
-	9UW0pFTI1ssSIk/RDu+gaV8kCLGjJGUQD26x+ojQ3Th9NEUp33fQf/3NYIWFzGcYvxv6
-	789qB5y2fQYLPjRtoA/UIPEqFW9ZFeR1FfSD79PqdBnSBRZmjvsYX5ajIJMhnWnkd8iq
-	sGg/bI1gwRyQx3FSbBXHGUIXdMHLDV16UD0q2uZ1FklnIM4SA5PhNB1YQsmfA32w2DwE
-	YBz2arw3GsXyVowWXK+YJ6pQfqJx3H+y/g6fetG9nFtxW9RJkRk8wk/XDRBOPBnz+Eyt
-	TIZw==
-X-Gm-Message-State: ALoCoQmMXu2244NIxmio2TcFZR0UuGmiR0AMK4nbltyV72SIBSr+BT/G8mKmNfOmiU4tm8uSl69IOHNCsy5pvOUGMKdnceJy4w==
-X-Received: by 10.194.103.164 with SMTP id fx4mr25050068wjb.56.1453130071324; 
-	Mon, 18 Jan 2016 07:14:31 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	h=x-gm-message-state:date:from:to:subject:message-id:mime-version
+	:content-type:content-disposition:user-agent;
+	bh=gdVLymAfNTRiraGZLoCDUh4lPQ9H63ambD+ypDHGevI=;
+	b=VztnvYJq0OO/NbXwdQ5iKPgoWCRuu2lwfg4pK+wRXI25l0GbCj5G5eHZ79nARzyhWC
+	BdDq/eXHm+kv52WuBgA2azmpXr0g/4n03fB4Y7pFkijQCHt4nbRJ4J/RpuPbP12lOiZW
+	7oN78FRZlJv89s4D1X+s3Ftu2qkDBmTE8W5G2G2bM/Jv1TvDLIG+dQsjfJUgj0SmQx+g
+	dq4J3MbouOivyMln92GZbmP8gntJXlIubE0IdP8QzGHSqO/waBIsVaPdCOtCFMUKL1ej
+	driNFdwPCrvPvGGfgv1tWU1b64HK0+7SX5aTC7LzA4M9Awq0N0SP0uTqGFdW5lVuvirb
+	Wqfw==
+X-Gm-Message-State: ALoCoQmv3gR+jEwoWHV4YtxtHJp/4RNwnPeb6UsL1RBc1rSfEpR/1ZaZYNYGF5GzOczLFLWLJ4DI5Q4KjhDhcPeiEOHUuXTZ8g==
+X-Received: by 10.66.252.198 with SMTP id zu6mr38246676pac.107.1453137613574; 
+	Mon, 18 Jan 2016 09:20:13 -0800 (PST)
+Received: from mail.spox.systems
+	(ec2-52-11-37-43.us-west-2.compute.amazonaws.com. [52.11.37.43])
 	by smtp.gmail.com with ESMTPSA id
-	c15sm16184392wmd.19.2016.01.18.07.14.29
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 18 Jan 2016 07:14:30 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	o67sm35319518pfa.58.2016.01.18.09.20.12
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 18 Jan 2016 09:20:12 -0800 (PST)
+Date: Mon, 18 Jan 2016 09:19:34 -0800
+From: Stephano Cetola <stephanoc@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Jan 2016 16:15:42 +0100
-Message-Id: <1453130142-15803-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.0
-Subject: [PATCH][meta-oe] phoronix-test-suite: exclude bash, php, python dependency with SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS
+Message-ID: <20160118171933.GA28347@mail.spox.systems>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Require backport of patch to jethro branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,47 +57,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jan 2016 15:14:34 -0000
+X-List-Received-Date: Mon, 18 Jan 2016 17:20:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-* otherwise the recipe cannot inherit allarch. as detected with
-  openembedded-core/scripts/sstate-diff-machines.sh:
+I'd like to backport this patch to jethro:
 
- === Comparing signatures for task do_package_write_ipk.sigdata between qemux86copy and qemuarm ===
-ERROR: phoronix-test-suite different signature for task do_package_write_ipk.sigdata between qemux86copy and qemuarm
-runtaskdeps changed from ['bashbash_4.3.30.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'phoronix-test-suitephoronix-test-suite_6.0.1.bb.do_package', 'phoronix-test-suitephoronix-test-suite_6.0.1.bb.do_packagedata', 'phpphp_5.6.16.bb.do_packagedata', 'pseudopseudo_1.7.4.bb.do_populate_sysroot:virtual:native', 'pythonpython_2.7.9.bb.do_packagedata'] to ['bashbash_4.3.30.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'phoronix-test-suitephoronix-test-suite_6.0.1.bb.do_package', 'phoronix-test-suitephoronix-test-suite_6.0.1.bb.do_packagedata', 'phpphp_5.6.16.bb.do_packagedata', 'pseudopseudo_1.7.4.bb.do_populate_sysroot:virtual:native', 'pythonpython_2.7.9.bb.do_packagedata']
-/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-extended/bash/bash_4.3.30.bb.do_packagedata with hash 6750d401e680e6e5dac8e8585c43b386
- changed to
-/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-extended/bash/bash_4.3.30.bb.do_packagedata with hash bc992ff361286bc2f048935132a20348
-/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-devtools/php/php_5.6.16.bb.do_packagedata with hash 17a21823eea3e0d1cce1d516f77b23ad
- changed to
-/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-devtools/php/php_5.6.16.bb.do_packagedata with hash 6058efb32e6f622aa866f982c3688f08
-/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-devtools/python/python_2.7.9.bb.do_packagedata with hash 4e3278467af71cb9d0219f674415a2fa
- changed to
-/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-devtools/python/python_2.7.9.bb.do_packagedata with hash 4186010efd8bd3464948437ae114ec2a
-Hash for dependent task phpphp_5.6.16.bb.do_packagedata changed from 17a21823eea3e0d1cce1d516f77b23ad to 6058efb32e6f622aa866f982c3688f08
-Hash for dependent task bashbash_4.3.30.bb.do_packagedata changed from 6750d401e680e6e5dac8e8585c43b386 to bc992ff361286bc2f048935132a20348
-Hash for dependent task pythonpython_2.7.9.bb.do_packagedata changed from 4e3278467af71cb9d0219f674415a2fa to 4186010efd8bd3464948437ae114ec2a
+http://cgit.openembedded.org/meta-openembedded/commit/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb?id=9546714d2464b950e91d0eaf330865e482450113
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/conf/layer.conf | 3 +++
- 1 file changed, 3 insertions(+)
+Without this samba does not install init scripts correctly when using
+sysvinit.
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index aee6234..d37eba0 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -43,6 +43,9 @@ SIGGEN_EXCLUDERECIPES_ABISAFE += " \
- SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-   usb-modeswitch-data->usb-modeswitch \
-   lmsensors->lmsensors-config \
-+  phoronix-test-suite->bash \
-+  phoronix-test-suite->python \
-+  phoronix-test-suite->php \
- "
- 
- # ttf.inc inherits fontcache which adds fontconfig-utils to RDEPENDS
--- 
-2.7.0
-
+Does anyone see any problems with this?
 
