@@ -1,53 +1,45 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C7D96FFEA
+Return-Path: <ankur.tyagi85@gmail.com>
+Received: from mail-vk0-f44.google.com (mail-vk0-f44.google.com
+	[209.85.213.44])
+	by mail.openembedded.org (Postfix) with ESMTP id C839960616
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2016 18:43:43 +0000 (UTC)
-Received: by mail-pa0-f51.google.com with SMTP id uo6so441992511pac.1
+	Tue, 19 Jan 2016 20:49:15 +0000 (UTC)
+Received: by mail-vk0-f44.google.com with SMTP id n1so200988150vkb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2016 10:43:44 -0800 (PST)
+	Tue, 19 Jan 2016 12:49:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=Z+Zc53Ku+xC/AhMEhWbiOr90EXWgLrjeW4O+gYvpdNI=;
-	b=IlhRJFUPA9zXzVwGF1uXMxXW6idVEc3QlehBrmQU1hN29FVJynY7S9ytbbVO2yHM/F
-	BW0hXOG2Egjpr24vsoIXCHu+jJbjSBtwkQvj2aR4wB0SEY8VJmPqsL0XjSYs0Rcw2LUP
-	hoNcKrFWDxUB1OuKRRvc80ezQ0ARda3Zg2B2bXCxAtxe+rOoYK+rrXmChGVEwYubZVeG
-	DeIS5GiSdRdQY6S8DsUfb+V3hXavP8JUcb0uq/6ttTNBRxJQzsiVEc73t1bTBkTv27jp
-	Hd842104eFMhaepvffA0JBvrnqcCMl9MGw+3KtX95k1DEdv3zxIO01YBlODyeoUtM0iF
-	VutA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=D1tuah6JjEU7Wk56Dn4AiCKWpXhUsg1bAhr9+0mhy7M=;
+	b=hMKDGMIpaNuEzAzmWi87t0nbu+5AyJ9dqRXO1x/MeQBihEVMRWWQx7kkGJmkiOh25c
+	fVyzW6aXfBFNCwNVH/HyYNj0qRfLm4L5J9bXY6EJ6JyjyiqAPkTYxvAlFw4WR6Tzye07
+	t1OJOJLs5ohhdjEy/dKKEd+fWE+2fsScnjxKQLkRrfleW7yhUD8kmX4bkZBlL/wPCp/z
+	grK2ZwZKlYa6WtyenOOkAUoqcNFEcpEOUfZh7y45NSKZSbmofSzEhonrgVCeD901HseZ
+	HBqQRvPIaDvgCTEs4J2GZ6IhBQzk80dAWFVQEeTJD3il2FPtGp4aJTawuI+oR6YWD5P8
+	F15g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:content-type:mime-version:subject:from
-	:in-reply-to:date:message-id:references:to;
-	bh=Z+Zc53Ku+xC/AhMEhWbiOr90EXWgLrjeW4O+gYvpdNI=;
-	b=YJl0H28MPHUAoGbWCN5wDDguQAxYXJn9wYwdMHWk+tOgS5ZKxqrTYM3/eYGsJSSfDw
-	pM+gJjKVcFranVTN5+gUECZP6kWh2ZHTEnKA74ZZitZE4wmiZh9K8WwN/TDv0KdyAp5j
-	4+JUVQzGqKjxf6nLCHQXR9ea3TmQ0Q6ovfLaXhqFKBcbSYbs6JWcz4MLA3WSEGZfxUax
-	a2t6Q1COY0ABFfKKczDG8HXdLkDWD2StDZ+Jac5gP5BvEfmwy6uNsfJYeu3+moOZ8LSa
-	Qbpjqk3YK3jgXqjMIsS22qEKsgxyGpRKEkGIBe6w32Fnnt0kpYh3QzW78hJJoGgMsoAV
-	bPkw==
-X-Gm-Message-State: ALoCoQlsFKQNtlAaC1JYZj5E+XObXPcb5C90I5o/vozXdzMROFw9mPNztne+0id46aQ2W9hKim7UkE1gF7Ein8wbxNeGiD69sA==
-X-Received: by 10.66.120.200 with SMTP id le8mr46496812pab.61.1453229024601;
-	Tue, 19 Jan 2016 10:43:44 -0800 (PST)
-Received: from ?IPv6:2601:646:8802:5d5c:2cdb:35b7:1df4:399a?
-	([2601:646:8802:5d5c:2cdb:35b7:1df4:399a])
-	by smtp.gmail.com with ESMTPSA id
-	73sm43212981pfm.10.2016.01.19.10.43.43
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 19 Jan 2016 10:43:43 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1453217976-27313-1-git-send-email-philip@balister.org>
-Date: Tue, 19 Jan 2016 10:43:39 -0800
-Message-Id: <B4D9EF0F-52D7-4425-999C-B32D50EC72AE@gmail.com>
-References: <1453217976-27313-1-git-send-email-philip@balister.org>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=D1tuah6JjEU7Wk56Dn4AiCKWpXhUsg1bAhr9+0mhy7M=;
+	b=SjLV/hjziSpllmIGVkCNlcTwrI2nvUXR6EiGgfiU/J1KtaY2I1mrs7nLuj5nsnifZi
+	MOsuRlAlRi7KaY28fG4XpoHnf+XwaoEA5uvrll/e4oS/E8Rsqqa1M8Oo3jymLJSTCRtV
+	9nof+0b2H+6jyHsp51FJAZ6ES+MIRf1AOvtzinqUSHuhwUxXMsgUas1gepWza0tBOfLG
+	3NX9OTSwNIi20h7uQUh42nlIdk9Ea5dg8rL05pYE8s7dpweIm8Ax2Xi431ekzCzcqTNF
+	7co7lumQtrNft7j6AgfG7fvTIe3ZiV09fG0J5Qa42yJKWucBv+i6ytuKJ7nIjTkdU7B0
+	NQkw==
+X-Gm-Message-State: ALoCoQlPY25alohrLHiRoAt47SlLcx/R0uVyNM04b+zVbklBphTaQyzv03Ol7AhdxpjkUj6nWJGh9Z6roYKVlJbG2HnPh1+tVw==
+X-Received: by 10.31.162.20 with SMTP id l20mr20061668vke.137.1453236556429;
+	Tue, 19 Jan 2016 12:49:16 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.31.166.146 with HTTP; Tue, 19 Jan 2016 12:48:57 -0800 (PST)
+In-Reply-To: <CADySD0EvwTFr-0hGLTJDGTVLyhEtju3Rgxj85R8Tv=etXnRPuw@mail.gmail.com>
+References: <CADySD0EvwTFr-0hGLTJDGTVLyhEtju3Rgxj85R8Tv=etXnRPuw@mail.gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Wed, 20 Jan 2016 09:48:57 +1300
+Message-ID: <CADySD0EPvpk+zwvn0PKFChZPBev6xz-XOgbPx8W7mgNkwzsDxQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3112)
-Subject: Re: [meta-oe][PATCHv3] thrift: Add recipe for Apache Thrift.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: meta-toolchain-qt5 error on fido branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,109 +52,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2016 18:43:44 -0000
-X-Groupsio-MsgNum: 59599
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_091F1B36-BA29-452E-97CB-55D392351AB4";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 19 Jan 2016 20:49:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
---Apple-Mail=_091F1B36-BA29-452E-97CB-55D392351AB4
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+Looks like the problem is because of partial inclusion of following patch:
+
+http://patchwork.openembedded.org/patch/91807/
+
+libgcov-dev has been removed from libgcc packages but
+packagegroup-core-standalone-sdk-target still adds libgcov-dev to target
+
+Requesting to remove libgov-dev from
+packagegroup-core-standalone-sdk-target as suggested in the above patch to
+fix toolchain build error.
+
+thanks
 
 
-> On Jan 19, 2016, at 7:39 AM, Philip Balister <philip@balister.org> =
+On Tue, Jan 19, 2016 at 1:57 PM, Ankur Tyagi <ankur.tyagi85@gmail.com>
 wrote:
->=20
-> * Run tested cpp bindings with GNU Radio Control Port.
 
-Thrift has compiler framework so I think it should go into =
-recipes-devtools
-also make it more granular on packaging the compiler separately then the =
-libraries
-and bindings.
+> Hi,
+>
+> While building qt5 toolchain, I am getting this error :
+>
+> Collected errors:
+>  * satisfy_dependencies_for: Cannot satisfy the following dependencies for
+> packagegroup-core-standalone-sdk-target:
+>  *     libgcov-dev *
+>  * opkg_install_cmd: Cannot install package
+> packagegroup-core-standalone-sdk-target.
+>
+> ERROR: Function failed: do_populate_sdk
+> ERROR: Logfile of failure stored in: /home/nws/yocto-fido-dev/oe-
+> layersetup/build/arago-tmp-external-linaro-toolchain/work/cortexa8hf-vfp-neon-linux-gnueabi/meta-toolchain-qt5/1.0-r0/temp/log.do_populate_sdk.65427
+> ERROR: Task 8
+> (/home/nws/yocto-fido-dev/oe-layersetup/sources/meta-qt5/recipes-qt/meta/
+> meta-toolchain-qt5.bb, do_populate_sdk) failed with exit code '1'
+>
+> Complete log @ http://pastebin.com/CNuJk2i2
+>
+> I have tried removing previous build tmp/work but still get this error on
+> fresh builds.
+>
+> thanks
+>
 
->=20
-> Signed-off-by: Philip Balister <philip@balister.org>
-> ---
-> .../recipes-connectivity/thrift/thrift_0.9.3.bb    | 34 =
-++++++++++++++++++++++
-> 1 file changed, 34 insertions(+)
-> create mode 100644 meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
->=20
-> diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb =
-b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
-> new file mode 100644
-> index 0000000..7c8f407
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
-> @@ -0,0 +1,34 @@
-> +SUMMARY =3D "Apache Thrift"
-> +DESCRIPTION =3D  "A software framework, for scalable cross-language =
-services development"
-> +HOMEPAGE =3D "https://thrift.apache.org/"
-> +
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D =
-"file://LICENSE;md5=3De4ed21f679b2aafef26eac82ab0c2cbf"
-> +
-> +DEPENDS =3D "thrift-native boost python libevent flex-native =
-bison-native \
-> +           glib-2.0 openssl"
-> +
-> +SRC_URI =3D =
-"git://git-wip-us.apache.org/repos/asf/thrift.git;protocol=3Dhttps \
-> +"
-> +SRCREV =3D "61b8a29b0704ccd81b520f2300f5d1bb261fea3e"
-> +S =3D "${WORKDIR}/git"
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
-> +
-> +inherit pkgconfig cmake pythonnative
-> +
-> +export STAGING_INCDIR
-> +export STAGING_LIBDIR
-> +export BUILD_SYS
-> +export HOST_SYS
-> +
-> +EXTRA_OECMAKE =3D "-DWITH_QT4=3DOFF -DWITH_QT5=3DOFF"
-> +EXTRA_OECMAKE_class-native =3D "-DWITH_QT4=3DOFF -DWITH_QT5=3DOFF \
-> +             -DBUILD_TESTING=3DOFF -DBUILD_EXAMPLES=3DOFF =
--DWITH_CPP=3DOFF"
-> +EXTRA_OECMAKE_class-nativesdk =3D "-DWITH_QT4=3DOFF -DWITH_QT5=3DOFF =
-\
-> +             -DBUILD_TESTING=3DOFF -DBUILD_EXAMPLES=3DOFF =
--DWITH_PYTHON=3DOFF"
-> +
-> +do_install_append () {
-> +	ln -sf thrift ${D}/${bindir}/thrift-compiler
-> +}
-> +
-> --
-> 2.5.0
->=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---Apple-Mail=_091F1B36-BA29-452E-97CB-55D392351AB4
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlaeg94ACgkQuwUzVZGdMxT0PgCfRZJpG6YMP+GLm1yBju71TcTf
-r+4An1mXAXvZeypEyh4H1y7pFuvFL15O
-=DqVA
------END PGP SIGNATURE-----
-
---Apple-Mail=_091F1B36-BA29-452E-97CB-55D392351AB4--
