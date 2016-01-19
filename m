@@ -1,50 +1,30 @@
-Return-Path: <brunovern.a@gmail.com>
-Received: from mail-lf0-f54.google.com (mail-lf0-f54.google.com
-	[209.85.215.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 1644871E63
+Return-Path: <alexandru.but@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D7B56E668
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2016 07:41:50 +0000 (UTC)
-Received: by mail-lf0-f54.google.com with SMTP id c192so333010932lfe.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jan 2016 23:41:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:content-type; bh=fZVQ6jzVNUyTz+Kti+ej3WQpTz8C6DPYOeSrCCtCtCM=;
-	b=oUqw7oe9Ai5zsbsXmdP31Yqb85WR/MFwqCq02+1jCuz8LoXHngw9MFd3batZsxSTGN
-	XESWHejqgHxbFHxtZG7Yy3I7Ux1c42dAQTHzF8pdaWNK4dfLerY1xokmEXVeHwK7vUpk
-	Ju3UXulH2IS3KDgha8REjU6UkwKECrcKkdvbcsKC19bGc1iDEQwHsOH1nwck/dmxRVob
-	A5qY3+xlgrEx2R74il628mkzlSYTclA12elokAHfrOSdUX8Kqf//p9hl+o4rAtswkOql
-	r5ikVgQTvKNpoNgHXv1oPGp7KhBP0MkjgkVZ6JQOpu2jGy9c3Gn3PDG+Xmghho4WXxW+
-	aWyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:content-type;
-	bh=fZVQ6jzVNUyTz+Kti+ej3WQpTz8C6DPYOeSrCCtCtCM=;
-	b=jxvcSQSXLAMc4Zb8htzWyK+iCUFW9HcN1/IKdbGpIVbiI1CfEuYFc+3V7ACbeRVuC2
-	+c+vpCnAODZWIG37c7Vl8yfQSi73APZvs8pvrKtoV5Li6w8GiUhNsgLu6Bh3pmweOIeF
-	7Eo3nryVMT8ia5b38z0FhtTTWQ9k/eOzbbZmJ6szYxaZwZBLAyWYytJv1QjGjOyWiStk
-	KxXcXo4d1E9dzC/DJbyxtjvtPGpIW8NuGhBrMx08DvyWUf/HQuqYRIyyzSbmMwrqX6In
-	29TnbNyE3FN5+vtuTVKg62DWDVrpm8tfG2DZKv+aDhcEkhxWgrbWql07y2MFmtpfDfZS
-	VQbg==
-X-Gm-Message-State: ALoCoQn/RzLA4lOj+rMt6aTDnwSj4Rk0JTmjDLJgEKUjFue5rtmhGVSus6Nvi4V0goP6WdOlUvCwU8wU6zC0Fw2ik5lV8XyPvg==
-X-Received: by 10.25.22.167 with SMTP id 39mr10110576lfw.153.1453189310179;
-	Mon, 18 Jan 2016 23:41:50 -0800 (PST)
-MIME-Version: 1.0
-References: <CAF3KAoQkwWWr=xfifeqP_bK25_ysY_7+B2h7xT6L9P1Pf34KhQ@mail.gmail.com>
-	<CAF3KAoS1+0fy16WjorADA3cqTjCPZwSJGOmjex6b1mKcEQw7oA@mail.gmail.com>
-	<CAF3KAoTLPCK3NMm-NfVgJq80mvQBzz2WYw92p5jM6t2ySi0fAw@mail.gmail.com>
-	<CAF3KAoRyD7EXhOBjECXnyZzTWAW8P65=GJScxr1TGtoveH_HTA@mail.gmail.com>
-	<DC79C3D6-8838-4EEE-B607-84BAAF5B519D@gmail.com>
-	<CAF3KAoTy2xZ6a2KC3ci95fQ1QnH9-KSAuD2jpZ4vLeoqAc_ZQw@mail.gmail.com>
-	<CA1094E9-AA29-4D48-9025-D3CC6E5A7C68@gmail.com>
-In-Reply-To: <CA1094E9-AA29-4D48-9025-D3CC6E5A7C68@gmail.com>
-From: Bruno Vernay <brunovern.a@gmail.com>
-Date: Tue, 19 Jan 2016 07:41:40 +0000
-Message-ID: <CAF3KAoT-RZ-Ayq8D7c9x9_Nr7NXPW5qphV43NVWHQ_N0VUiYSA@mail.gmail.com>
+	Tue, 19 Jan 2016 10:45:29 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u0JAjTkm016394 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2016 04:45:29 -0600
+Received: from zdravan.emea.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2016011904452934-63711 ;
+	Tue, 19 Jan 2016 04:45:29 -0600 
+From: Alexandru But <alexandru.but@ni.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] OpenLDAP modules
+Date: Tue, 19 Jan 2016 12:45:18 +0200
+Message-Id: <1453200318-25633-1-git-send-email-alexandru.but@ni.com>
+X-Mailer: git-send-email 2.6.1
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 01/19/2016 04:45:29 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 01/19/2016 04:45:29 AM,
+	Serialize complete at 01/19/2016 04:45:29 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-01-19_05:, , signatures=0
+Subject: [meta-oe][PATCH] efivar: fix zero initializer compiler error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,160 +37,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2016 07:41:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Jan 2016 10:45:30 -0000
 
-Here is a first try at a patch fixing OpenLDAP.
-I tested it on the Jethro branch and it works: from cleanall to the service
-running in Qemu.
+Patch based on commit a3606c0:
+Sometimes the compiler doesn't like { 0,} as an initializer
 
-From ee7ad184b3b500a711486f378e4a68fbd2a5ae11 Mon Sep 17 00:00:00 2001
-From: BrunoVernay <BrunoVern.a@gmail.com>
-Date: Tue, 19 Jan 2016 08:36:01 +0100
-Subject: [PATCH 1/1] Fixes build and configuration
-
+Signed-off-by: Alexandru But <alexandru.but@ni.com>
 ---
- .../recipes-support/openldap/openldap_2.4.42.bb    | 28
-+++++++++++++++++++++-
- 1 file changed, 27 insertions(+), 1 deletion(-)
+ ...he-compiler-doesn-t-like-0-as-an-initiali.patch | 42 ++++++++++++++++++++++
+ meta-oe/recipes-extended/efivar/efivar_0.21.bb     |  3 +-
+ 2 files changed, 44 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/efivar/efivar/0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch
 
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.42.bb
-b/meta-oe/recipes-support/openldap/openldap_2.4.42.bb
-index 49fcb56..23586b7 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.42.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.42.bb
-@@ -148,6 +148,8 @@ PACKAGES +=3D "${PN}-overlay-proxycache"
- # it was disabled for cross-compiling.
- CPPFLAGS_append =3D " -D_GNU_SOURCE -DURANDOM_DEVICE=3D\'/dev/urandom\'"
-
-+LDFLAGS +=3D "-pthread"
+diff --git a/meta-oe/recipes-extended/efivar/efivar/0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch b/meta-oe/recipes-extended/efivar/efivar/0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch
+new file mode 100644
+index 0000000..68cabd6
+--- /dev/null
++++ b/meta-oe/recipes-extended/efivar/efivar/0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch
+@@ -0,0 +1,42 @@
++From a3606c02fd271d32e364fcc540e34ba1899309f6 Mon Sep 17 00:00:00 2001
++From: Peter Jones <pjones@redhat.com>
++Date: Tue, 14 Jul 2015 09:33:54 -0400
++Subject: [PATCH] Sometimes the compiler doesn't like { 0, } as an
++ initializer...
 +
- do_configure() {
-     cp ${STAGING_DATADIR_NATIVE}/libtool/build-aux/ltmain.sh ${S}/build
-     rm -f ${S}/libtool
-@@ -166,7 +168,7 @@ LEAD_SONAME =3D "libldap-${LDAP_VER}.so.*"
- PACKAGES +=3D "${PN}-slapd ${PN}-slurpd ${PN}-bin"
-
- # Package contents - shift most standard contents to -bin
--FILES_${PN} =3D "${libdir}/lib*.so.* ${sysconfdir}/openldap/ldap.*
-${localstatedir}/openldap-data"
-+FILES_${PN} =3D "${libdir}/lib*.so.* ${sysconfdir}/openldap/ldap.*
-${localstatedir}/${BPN}/data"
- FILES_${PN}-slapd =3D "${sysconfdir}/init.d ${libexecdir}/slapd ${sbindir}
-${localstatedir}/run ${localstatedir}/volatile/run \
-     ${sysconfdir}/openldap/slapd.* ${sysconfdir}/openldap/schema \
-     ${sysconfdir}/openldap/DB_CONFIG.example ${systemd_unitdir}/system/*"
-@@ -195,6 +197,18 @@ do_install_append() {
-     install -d ${D}${systemd_unitdir}/system/
-     install -m 0644 ${WORKDIR}/slapd.service ${D}${systemd_unitdir}/system=
-/
-     sed -i -e 's,@SBINDIR@,${sbindir},g'
-${D}${systemd_unitdir}/system/*.service
++Because it really wants to be { {0, },} or something, and sometimes the
++compiler, knowing full well what we're trying to do, likes to complain
++about the rigor applied to our technique in doing it.
 +
-+    # Uses mdm as the database
-+    #  and localstatedir as data directory ...
-+    sed -e 's/# modulepath/modulepath/' \
-+        -e 's/# moduleload\s*back_bdb.*/moduleload    back_mdb/' \
-+        -e 's/database\s*bdb/database        mdb/' \
-+        -e 's%^directory\s*.*%directory   ${localstatedir}/${BPN}/data/%' =
-\
-+        -i ${D}${sysconfdir}/openldap/slapd.conf
++memset() the struct ifreq to 0 instead so I don't need to figure out its
++internal structure just to zero it out.
 +
-+    mkdir -p ${D}${localstatedir}/${BPN}/data
++Resolves #28
 +
++Signed-off-by: Peter Jones <pjones@redhat.com>
++---
++ src/linux.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
 +
- }
-
- INITSCRIPT_PACKAGES =3D "${PN}-slapd"
-@@ -206,8 +220,20 @@ SYSTEMD_AUTO_ENABLE_${PN}-slapd ?=3D "disable"
-
- PACKAGES_DYNAMIC +=3D "^${PN}-backends.* ^${PN}-backend-.*"
-
-+# The modules require their .so to be dynamicaly loaded
-+INSANE_SKIP_${PN}-backend-dnssrv  +=3D "dev-so"
-+INSANE_SKIP_${PN}-backend-ldap    +=3D "dev-so"
-+INSANE_SKIP_${PN}-backend-meta    +=3D "dev-so"
-+INSANE_SKIP_${PN}-backend-mdb     +=3D "dev-so"
-+INSANE_SKIP_${PN}-backend-monitor +=3D "dev-so"
-+INSANE_SKIP_${PN}-backend-null    +=3D "dev-so"
-+INSANE_SKIP_${PN}-backend-passwd  +=3D "dev-so"
-+INSANE_SKIP_${PN}-backend-shell   +=3D "dev-so"
++diff --git a/src/linux.c b/src/linux.c
++index 57f71f3..817b8e6 100644
++--- a/src/linux.c
+++++ b/src/linux.c
++@@ -847,12 +847,13 @@ ssize_t
++ __attribute__((__visibility__ ("hidden")))
++ make_mac_path(uint8_t *buf, ssize_t size, const char * const ifname)
++ {
++-	struct ifreq ifr = { 0, };
+++	struct ifreq ifr;
++ 	struct ethtool_drvinfo drvinfo = { 0, };
++ 	int fd, rc;
++ 	ssize_t ret = -1, sz, off=0;
++ 	char busname[PATH_MAX+1] = "";
++ 
+++	memset(&ifr, 0, sizeof (ifr));
++ 	strncpy(ifr.ifr_name, ifname, IF_NAMESIZE);
++ 	drvinfo.cmd = ETHTOOL_GDRVINFO;
++ 	ifr.ifr_data = (caddr_t)&drvinfo;
++-- 
++2.6.1
 +
-+
- python populate_packages_prepend () {
-     backend_dir    =3D d.expand('${libexecdir}/openldap')
-+    do_split_packages(d, backend_dir, 'back_([a-z]*)\.so$',
-'openldap-backend-%s', 'OpenLDAP %s backend', prepend=3DTrue,
-extra_depends=3D'', allow_links=3DTrue)
-     do_split_packages(d, backend_dir, 'back_([a-z]*)\-.*\.so\..*$',
-'openldap-backend-%s', 'OpenLDAP %s backend', extra_depends=3D'',
-allow_links=3DTrue)
+diff --git a/meta-oe/recipes-extended/efivar/efivar_0.21.bb b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+index b5ef90a..1684a10 100644
+--- a/meta-oe/recipes-extended/efivar/efivar_0.21.bb
++++ b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+@@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
+ DEPENDS_class-target = "popt efivar-native"
+ 
+ SRCREV = "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
+-SRC_URI = "git://github.com/rhinstaller/efivar.git"
++SRC_URI = "git://github.com/rhinstaller/efivar.git \
++           file://0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch"
+ SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch"
+ SRC_URI_append_class-native = " file://efivar-drop-options-not-supported-by-lower-version-gcc.patch"
+ 
+-- 
+2.6.1
 
-     metapkg =3D "${PN}-backends"
---=20
-2.5.0
-
-
-
-
-On Thu, Jan 14, 2016 at 7:19 PM Khem Raj <raj.khem@gmail.com> wrote:
-
->
-> > On Jan 14, 2016, at 9:22 AM, Bruno Vernay <brunovern.a@gmail.com> wrote=
-:
-> >
-> > Thanks it works also.
-> >
-> > The second issue, that I still cannot resolve is that OpenLDAP requires=
- a
-> > .la or .so to load its modules.
-> > The openldap config specify a file name like "back_mdb" and expect
-> either a
-> > back_mdb.la or back_mdb.so
-> >
-> > but both la or so are limited to -dev in Yocto, I don't see how to
-> overcome
-> > this rule???
->
-> you can reset e.g. FILES_SOLIBSDEV =3D =E2=80=9C"
->
-> >
-> > Regards
-> >
-> >
-> > On Wed, Jan 13, 2016 at 7:36 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> >>
-> >>> On Jan 13, 2016, at 8:46 AM, Bruno Vernay <brunovern.a@gmail.com>
-> wrote:
-> >>>
-> >>> Adding this to my bbappend did the trick ...
-> >>>
-> >>> TARGET_CC_ARCH +=3D "-lpthread=E2=80=9D
-> >>
-> >> make it -pthread and add it to LDFLAGS
-> >>
-> >>>
-> >>> I may submit a patch
-> >>>
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
