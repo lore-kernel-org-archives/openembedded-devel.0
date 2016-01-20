@@ -1,24 +1,45 @@
-Return-Path: <Jian.Liu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CEF576FFF7
+Return-Path: <moritz.fischer@ettus.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 9BF1873172
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jan 2016 09:35:50 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u0K9ZoA0016823
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Wed, 20 Jan 2016 13:56:43 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id 123so133773479wmz.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jan 2016 01:35:50 -0800
-Received: from pek-jliu7-d1.corp.ad.wrs.com (128.224.162.169) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 20 Jan 2016 01:35:49 -0800
-From: Jian Liu <jian.liu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 20 Jan 2016 17:36:46 +0800
-Message-ID: <1453282606-22375-1-git-send-email-jian.liu@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Wed, 20 Jan 2016 05:56:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ettus-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=NS8+TbC/7mmsKc7dyXR7A/Bl/tp9BqFnfgAnyibzl3s=;
+	b=N7I4cfrZEVPI2Xw3atbbTMch1gauqYaQFK7Ez4h3DcFl7lGilf0zV+nIanQy/xhtkt
+	C40n4Yd9cDhy1kzW6yWgHRP3ANE6SglC8KtpGwbEQYg2DBwnmILiXPBTu4KpkfVtonRM
+	PD3wInEcUARms40KooZAHhI6KUVtwHRdDZCYOoEt+Mj052CS8SN7nw+Y0lWN+5zyIBCT
+	/YaWDtTXz6bLV81w7+oz5nMEk5gpJwB30wobm/wKkIkLO/8peL/yTVaQrOVVwn7NhSLU
+	vfO7G6b7/+ppslsN678zUxlHh34IsZ7RTEmJs1eRWECZH1eJGvkZOMLcp0OdKpfqnZGO
+	bDZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=NS8+TbC/7mmsKc7dyXR7A/Bl/tp9BqFnfgAnyibzl3s=;
+	b=j67oikgbiST899BLrhbuoG4Xc78GKK8ZJNd7s+gi78i9bCZTkZ3eA138b3k6SAiheX
+	Uw+CBAivRg9fQFvmz4JxwL/cmEUP79laju6tHK2DDU89hZeUwCNyE9PJzWiiNGAg7Yku
+	1X5BcP3ECiUJ5g5zIafBhGoz3Dgmg66Ra5LdOQO+VQYBtaOMcjfHSr6xxuGxUQtVgPs7
+	1SyckbOKFPuS7qjIRVhlxSO0c4eUeLTcBXYHTif8S/WY0vD/kf5tSAGXXo+pAX096Km5
+	odSYlB0gNxOO5zBxXo9qS8pbUfSB/+bfxcNOOuRa9Puev69pOgJSoBSjxKlZGmsSPBj1
+	qpCA==
+X-Gm-Message-State: ALoCoQlf/cT9BonCmkPneeqtvZrNv5aiP7CRYNbiIB4E10OvAQ3L5It3ZwF1FFjnOGwnWrPYI2/QwSTz+4jFjbWsCs1go+5eXTDUW+yJnEMU4nQNB3M37Q0=
 MIME-Version: 1.0
-Subject: [meta-oe] [PATCH] phpmyadmin: CVE-2015-8669
+X-Received: by 10.194.110.106 with SMTP id hz10mr36392886wjb.135.1453298203179;
+	Wed, 20 Jan 2016 05:56:43 -0800 (PST)
+Received: by 10.28.137.72 with HTTP; Wed, 20 Jan 2016 05:56:43 -0800 (PST)
+In-Reply-To: <1452197854-12728-1-git-send-email-moritz.fischer@ettus.com>
+References: <1452197854-12728-1-git-send-email-moritz.fischer@ettus.com>
+Date: Wed, 20 Jan 2016 14:56:43 +0100
+Message-ID: <CAAtXAHer2aQjARHBa=7KQNQzuYJsnThii=_GgRsOC5BiGB2PZw@mail.gmail.com>
+From: Moritz Fischer <moritz.fischer@ettus.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCHv2] gpsd: Add patch to fix broken ACTIVATE hook.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,63 +52,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jan 2016 09:35:55 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 20 Jan 2016 13:56:43 -0000
+Content-Type: text/plain; charset=UTF-8
 
-libraries/config/messages.inc.php in phpMyAdmin 4.0.x before 4.0.10.12,
-4.4.x before 4.4.15.2, and 4.5.x before 4.5.3.1 allows remote attackers
-to obtain sensitive information via a crafted request, which reveals
-the full path in an error message.
+Hi Martin,
 
-This patch is from https://github.com/phpmyadmin/phpmyadmin/commit/c4d649325b25139d7c097e56e2e46cc7187fae45
+do you want me to resend, is something still missing in v2?
 
-Signed-off-by: Jian Liu <jian.liu@windriver.com>
----
- .../phpmyadmin/phpmyadmin/phpmyadmin-CVE-2015-8669.patch | 16 ++++++++++++++++
- .../recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb         |  4 +++-
- 2 files changed, 19 insertions(+), 1 deletion(-)
- create mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/phpmyadmin-CVE-2015-8669.patch
+Cheers,
 
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/phpmyadmin-CVE-2015-8669.patch b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/phpmyadmin-CVE-2015-8669.patch
-new file mode 100644
-index 0000000..c19996f
---- /dev/null
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/phpmyadmin-CVE-2015-8669.patch
-@@ -0,0 +1,18 @@
-+[Security] Path disclosure, see PMASA-2015-6
-+
-+Upstream-Status: Bacport
-+
-+Signed-off-by: Marc Delisle <marc@infomarc.info>
-+
-+diff -Nur phpMyAdmin-4.5.0.2-all-languages.orig/libraries/config/messages.inc.php phpMyAdmin-4.5.0.2-all-languages/libraries/config/messages.inc.php
-+--- phpMyAdmin-4.5.0.2-all-languages.orig/libraries/config/messages.inc.php	2016-01-20 15:11:15.410106888 +0800
-++++ phpMyAdmin-4.5.0.2-all-languages/libraries/config/messages.inc.php	2016-01-20 15:14:05.758108076 +0800
-+@@ -11,7 +11,7 @@
-+  */
-+ 
-+ if (!function_exists('__')) {
-+-    PMA_fatalError('Bad invocation!');
-++    exit();
-+ }
-+ 
-+ $strConfigAllowArbitraryServer_desc = __(
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb
-index 9297d0c..b8faf12 100644
---- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
- 
- SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/4.5.0.2/phpMyAdmin-4.5.0.2-all-languages.tar.xz \
-            file://Port-content-spoofing-fix-CVE-2015-7873.patch \
--           file://apache.conf"
-+           file://apache.conf \
-+           file://phpmyadmin-CVE-2015-8669.patch \
-+"
- 
- SRC_URI[md5sum] = "2d08d2fcc8f70f88a11a14723e3ca275"
- SRC_URI[sha256sum] = "d2e90ea486d90b4ebe5eb02d7ad349ad2916c12a8981f98553395ef78d22a8ec"
--- 
-1.9.1
-
+Moritz
 
