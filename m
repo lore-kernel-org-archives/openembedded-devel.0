@@ -1,47 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 772A060767
+Return-Path: <Jian.Liu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CEF576FFF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jan 2016 09:27:39 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id l65so170855840wmf.1
+	Wed, 20 Jan 2016 09:35:50 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u0K9ZoA0016823
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jan 2016 01:27:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=CvNsFi6329qvuqVlRk29EWxP9mZ747X/TWgOdwwR+0k=;
-	b=Iru6GqfDOlCxuE5il75XHyVvmgCNzjk+m/5bDgCZyM+BMuUfiJSwcuSuvEn/K9lvR2
-	aViTSwvtQBPlhHGsw5KlaDpncusqus7cBGN5t0KykUjZyF+M5Z1DF0vzPzbxJUYl5ISz
-	KlgMHswfHsk7Q4gX60A9Mm1K2JcHm5IlSvUJ8u5kxaM3u9IHMifpAcWqk+Atix0T3Z0R
-	ThPn7Q9rk4tbtZdSSsaLPHdHoEN0F6IvuwULSTCZkMHwkdbYs5ZLnssik45d/dUSi1vi
-	5qmObzvW3hmgM8IqR5qFWstx2DI61sGai3/lGKDUMtyClaD8Vcm+YUbgt/w0sOtpZxAA
-	2mPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=CvNsFi6329qvuqVlRk29EWxP9mZ747X/TWgOdwwR+0k=;
-	b=A/XiMZHjpHSStlKpOc5yz7QaC8DonVO6n3ziydlpsXWspua/QcuKBUfMwqY1bBzO1W
-	0khlWVMc5R6ofEdMvf8/A8MoaaCVg4hadzNUsMorUJJlrjzNSm35bvmaqUn4/fRSVQoJ
-	4z15L6EaX9cbJqJcGP5D87a8+hQ/F/L5ulkhHEri0PcRZnWIX9w9fyYmD9tBCTtJE51E
-	u5uZdVY7zT410SRWIcfFXGOR4qr4l4jPx1JQ3w6x/4ckOYTJB7JmoW+Iuqa1ydKtoYqY
-	+WkIeEj0+g0LZoTIrQtr9dbfPO7WpgEfJNP/BJfZM/Z2yIsz5ua571czUWWQRTShrH5Q
-	B68w==
-X-Gm-Message-State: AG10YOTXDISDPrBE2QNYzwr+s+M0Gunj0Wt6lvWuhN+fcTPUsRiJwNHC0ji4yyJRPcTCl5Kz4ulg1DIXd97gtA==
+	Wed, 20 Jan 2016 01:35:50 -0800
+Received: from pek-jliu7-d1.corp.ad.wrs.com (128.224.162.169) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 20 Jan 2016 01:35:49 -0800
+From: Jian Liu <jian.liu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 20 Jan 2016 17:36:46 +0800
+Message-ID: <1453282606-22375-1-git-send-email-jian.liu@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Received: by 10.28.30.210 with SMTP id e201mr2985715wme.42.1453282059438;
-	Wed, 20 Jan 2016 01:27:39 -0800 (PST)
-Received: by 10.194.2.15 with HTTP; Wed, 20 Jan 2016 01:27:39 -0800 (PST)
-In-Reply-To: <569F5292.5010506@windriver.com>
-References: <1451304855-1444-1-git-send-email-Martin.Jansa@gmail.com>
-	<569F5292.5010506@windriver.com>
-Date: Wed, 20 Jan 2016 10:27:39 +0100
-Message-ID: <CA+chaQf=NJrHgWNwizXYuZbry9DpGfSadWFRpvvpSFmcrPTZFA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Rongqing Li <rongqing.li@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][jethro][meta-networking] tcpdump: add PACKAGECONFIG for libcap-ng
+Subject: [meta-oe] [PATCH] phpmyadmin: CVE-2015-8669
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,59 +31,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jan 2016 09:27:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 20 Jan 2016 09:35:55 -0000
+Content-Type: text/plain
 
-Joe is maintainer of meta-networking, ask him.
+libraries/config/messages.inc.php in phpMyAdmin 4.0.x before 4.0.10.12,
+4.4.x before 4.4.15.2, and 4.5.x before 4.5.3.1 allows remote attackers
+to obtain sensitive information via a crafted request, which reveals
+the full path in an error message.
 
-On Wed, Jan 20, 2016 at 10:25 AM, Rongqing Li <rongqing.li@windriver.com>
-wrote:
+This patch is from https://github.com/phpmyadmin/phpmyadmin/commit/c4d649325b25139d7c097e56e2e46cc7187fae45
 
->
->
-> On 2015=E5=B9=B412=E6=9C=8828=E6=97=A5 20:14, Martin Jansa wrote:
->
->> From: Roy Li <rongqing.li@windriver.com>
->>
->> Signed-off-by: Roy Li <rongqing.li@windriver.com>
->> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->>
->
->
-> Hi Martin:
->
-> Could you cherry-pick this patch to master?
-> or merge it from master-next to master, it stay in master-next
-> two month.
->
-> thanks
->
-> -Roy
->
-> ---
->>   meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
->> b/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
->> index 0ffe589..150e55f 100644
->> --- a/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
->> +++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
->> @@ -23,6 +23,7 @@ PACKAGECONFIG ??=3D "openssl ipv6"
->>   PACKAGECONFIG[openssl] =3D "--with-crypto=3Dyes, --without-openssl
->> --without-crypto, openssl"
->>   PACKAGECONFIG[ipv6] =3D "--enable-ipv6, --disable-ipv6,"
->>   PACKAGECONFIG[smi] =3D "--with-smi, --without-smi,libsmi"
->> +PACKAGECONFIG[libcap-ng] =3D "--with-cap-ng=3Dyes,--with-cap-ng=3Dno,li=
-bcap-ng"
->>
->>   EXTRA_AUTORECONF +=3D " -I m4"
->>
->>
->>
-> --
-> Best Reagrds,
-> Roy | RongQing Li
->
+Signed-off-by: Jian Liu <jian.liu@windriver.com>
+---
+ .../phpmyadmin/phpmyadmin/phpmyadmin-CVE-2015-8669.patch | 16 ++++++++++++++++
+ .../recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb         |  4 +++-
+ 2 files changed, 19 insertions(+), 1 deletion(-)
+ create mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/phpmyadmin-CVE-2015-8669.patch
+
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/phpmyadmin-CVE-2015-8669.patch b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/phpmyadmin-CVE-2015-8669.patch
+new file mode 100644
+index 0000000..c19996f
+--- /dev/null
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/phpmyadmin-CVE-2015-8669.patch
+@@ -0,0 +1,18 @@
++[Security] Path disclosure, see PMASA-2015-6
++
++Upstream-Status: Bacport
++
++Signed-off-by: Marc Delisle <marc@infomarc.info>
++
++diff -Nur phpMyAdmin-4.5.0.2-all-languages.orig/libraries/config/messages.inc.php phpMyAdmin-4.5.0.2-all-languages/libraries/config/messages.inc.php
++--- phpMyAdmin-4.5.0.2-all-languages.orig/libraries/config/messages.inc.php	2016-01-20 15:11:15.410106888 +0800
+++++ phpMyAdmin-4.5.0.2-all-languages/libraries/config/messages.inc.php	2016-01-20 15:14:05.758108076 +0800
++@@ -11,7 +11,7 @@
++  */
++ 
++ if (!function_exists('__')) {
++-    PMA_fatalError('Bad invocation!');
+++    exit();
++ }
++ 
++ $strConfigAllowArbitraryServer_desc = __(
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb
+index 9297d0c..b8faf12 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb
+@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+ 
+ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/4.5.0.2/phpMyAdmin-4.5.0.2-all-languages.tar.xz \
+            file://Port-content-spoofing-fix-CVE-2015-7873.patch \
+-           file://apache.conf"
++           file://apache.conf \
++           file://phpmyadmin-CVE-2015-8669.patch \
++"
+ 
+ SRC_URI[md5sum] = "2d08d2fcc8f70f88a11a14723e3ca275"
+ SRC_URI[sha256sum] = "d2e90ea486d90b4ebe5eb02d7ad349ad2916c12a8981f98553395ef78d22a8ec"
+-- 
+1.9.1
+
 
