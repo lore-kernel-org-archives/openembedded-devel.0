@@ -1,28 +1,27 @@
 Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id A5031600B3;
-	Thu, 21 Jan 2016 17:55:13 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga101.fm.intel.com with ESMTP; 21 Jan 2016 09:55:10 -0800
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 1360B73179
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Jan 2016 18:25:07 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 21 Jan 2016 10:25:10 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,326,1449561600"; d="scan'208";a="895531902"
+X-IronPort-AV: E=Sophos;i="5.22,326,1449561600"; d="scan'208";a="898289064"
 Received: from unknown (HELO peggleto-mobl.ger.corp.intel.com)
 	([10.255.181.236])
-	by orsmga002.jf.intel.com with ESMTP; 21 Jan 2016 09:55:09 -0800
+	by fmsmga002.fm.intel.com with ESMTP; 21 Jan 2016 10:25:06 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Date: Fri, 22 Jan 2016 06:55:04 +1300
-Message-ID: <2161898.1hvMfJMvNz@peggleto-mobl.ger.corp.intel.com>
+To: Koen Kooi <koen.kooi@linaro.org>
+Date: Fri, 22 Jan 2016 07:25:04 +1300
+Message-ID: <4721149.thKUQa4jfA@peggleto-mobl.ger.corp.intel.com>
 Organization: Intel Corporation
 User-Agent: KMail/4.14.10 (Linux/4.3.3-300.fc23.x86_64; KDE/4.14.14; x86_64; ;
 	)
-In-Reply-To: <CAJTo0LYvEUgd0xNdu-HoVR1dW_eXYpZjy-BjzxOm0KKt0vcWcA@mail.gmail.com>
-References: <56A0F5D4.5090701@linux.intel.com>
-	<CAJTo0LYvEUgd0xNdu-HoVR1dW_eXYpZjy-BjzxOm0KKt0vcWcA@mail.gmail.com>
+In-Reply-To: <1453376040-25632-1-git-send-email-koen.kooi@linaro.org>
+References: <1453376040-25632-1-git-send-email-koen.kooi@linaro.org>
 MIME-Version: 1.0
-Cc: OE-core <openembedded-core@lists.openembedded.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] proposal: let's move oe-core to ffmpeg (from libav)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] various: delete leftovers from qt4 recipes that break parsing due to missing classes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,40 +34,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2016 17:55:15 -0000
+X-List-Received-Date: Thu, 21 Jan 2016 18:25:08 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Thu, 21 Jan 2016 15:40:10 Burton, Ross wrote:
-> [CC'ing oe-devel]
-> 
-> On 21 January 2016 at 15:14, Alexander Kanavin <
-> 
-> alexander.kanavin@linux.intel.com> wrote:
-> > let's replace libav with ffmpeg in oe-core. The reasons are:
-> > 
-> > - all of the major distributions are using ffmpeg now (the last holdout
-> > was Debian, and they switched to ffmpeg in summer 2015 after a long
-> > discussion and deliberation [1][2])
-> > - ffmpeg is much more responsive to security issues
-> > - ffmpeg does regular releases, while libav hasn't had one since spring
-> > 2015
-> > - other reasons listed in [2]
-> > 
-> > [1] https://lwn.net/Articles/650816/
-> > [2] https://wiki.debian.org/Debate/libav-provider/ffmpeg
-> > 
-> > Objections, thoughts?
+On Thu, 21 Jan 2016 12:34:00 Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+> ---
+>  ...erinterface.cpp-add-sys-socket.h-as-inclu.patch |  41 ---
+>  .../0002-qconsole-writethread-gcc-4.5-fixes.patch  |  40 ---
+>  .../qcanobserver/qcanobserver/candemo.xml          |  40 ---
+>  .../qt-creator/fix.missing.cpuid.h.patch           | 384
+> --------------------- .../qt-creator/qbs_transformer_product.patch       | 
+> 93 -----
+>  meta-oe/recipes-qt/qtserialport/qtserialport.inc   |  48 ---
+>  6 files changed, 646 deletions(-)
 
-FWIW I did effectively make this same proposal last July, I think people were broadly in favour:
-
-http://lists.openembedded.org/pipermail/openembedded-core/2015-July/107091.html
-
-> Sounds sensible to me.  However we're a week away from M2 deadline so I'm
-> not sure we'll be able to have a consensus and get patches before that
-> unless someone is incredibly motivated.
-
-Right, yes.
+Not that we wouldn't want to remove these, but how were you getting parse 
+issues just by these files being present? None of them would be noticed by 
+BitBake unless they were explicitly included.
 
 Cheers,
 Paul
