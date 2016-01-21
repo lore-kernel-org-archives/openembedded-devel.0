@@ -1,49 +1,25 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
-	[209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id D09B76E687;
-	Thu, 21 Jan 2016 20:38:59 +0000 (UTC)
-Received: by mail-pa0-f48.google.com with SMTP id cy9so28773237pac.0;
-	Thu, 21 Jan 2016 12:39:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:content-type:subject:date:message-id:to:mime-version;
-	bh=dU3HMJPHKQWqZEpFv2Ee7yEFIaKrU+nbwnOCDwdFoBI=;
-	b=XmhP6Zkn9mIjRUlcymyieuMU61TZIzTokrJaqbolgtHNy3sWvm6gid0bOtHLveS0ny
-	QKf7KVftWTstiPqYLP6ESNl0lcYqx0v+G/NEQS+u+vJdst8S5OIV2hW0hr58ZdbfMVGm
-	A7j5gEolWSjoKLzhpa4pQI6Om6CH4rbjhvuYpISmoy5aGqKHASZ2p4u1s9D3a5Nr4QMX
-	/jtkHmUJ+EsKnW/WqzuAVGFTHH16+p0pIKrYS730u889Dfkmal40RmkQp8It5e1ZuCX3
-	nQ1IEgcreh9MnOC3Gh6QCPGCdiI0rR822GsHTAbHTooMD12+/OAId5Xb2+G532jfvQk1
-	ZG7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:content-type:subject:date:message-id:to
-	:mime-version;
-	bh=dU3HMJPHKQWqZEpFv2Ee7yEFIaKrU+nbwnOCDwdFoBI=;
-	b=PkZbHt3oMujZhUbOJawA4sRL3bXrBGIBXDp3uCTWfkdrSsakE9S3qWEdKPDaojf07V
-	aGqEJce2tWVa4595SX4aCN2S/XD/ZlSyt4S1zABlBtRL1kIHcdS+4gB2dcEWwgqrHw8Q
-	AQoYLWgZ3Yl6MK7YK/qwsMZpwrhDvc50V5EGWC5pfMds5qFQzB86EhsqjWbF0zUrzPtt
-	CK7PRz4yZ5ZPUKdWwDiY3fkfALCkRvRB5j97WuxWdmi0+9DIHr/id8ye1v1y1CKhHSx2
-	CDpOGLiA0ns80MTacQOL8V1/FWyeKNlW+y3b/3c4zEOE6vYqWWfrv0MzMmhsHyQhDNqP
-	JifA==
-X-Gm-Message-State: ALoCoQk55/j/46EZ9msKAGe8NsQ/93EzGKBBy16L5O8iJ63pNWOTEdOE+up83bUaE1mXxlFLEmpKPV9U2hPHfgx4vuu/yBLuSQ==
-X-Received: by 10.66.65.203 with SMTP id z11mr63713905pas.152.1453408740134;
-	Thu, 21 Jan 2016 12:39:00 -0800 (PST)
-Received: from ?IPv6:2601:646:8802:5d5c:153d:39b8:c78:68fa?
-	([2601:646:8802:5d5c:153d:39b8:c78:68fa])
-	by smtp.gmail.com with ESMTPSA id
-	r15sm4546296pfr.59.2016.01.21.12.38.58
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Jan 2016 12:38:59 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-X-Pgp-Agent: GPGMail 2.6b2
-Date: Thu, 21 Jan 2016 12:38:53 -0800
-Message-Id: <27913D31-C426-4F79-B305-92401B7860E0@gmail.com>
-To: OE Core mailing list <openembedded-core@lists.openembedded.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 2336D731F7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Jan 2016 22:24:46 +0000 (UTC)
+Received: (qmail 12132 invoked by uid 1003); 21 Jan 2016 22:24:47 -0000
+Received: from unknown (HELO ?192.168.11.140?)
+	(philip@opensdr.com@108.44.110.59)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	21 Jan 2016 22:24:47 -0000
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
 	Yocto Project <yocto@yoctoproject.org>
-Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
-X-Mailer: Apple Mail (2.3112)
-Subject: meta-openwrt layer is available
+From: Philip Balister <philip@balister.org>
+Message-ID: <56A15AAE.4010109@balister.org>
+Date: Thu, 21 Jan 2016 17:24:46 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.0
+MIME-Version: 1.0
+Subject: Save the day OEDAM April 7 (after ELC and YP devday)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,50 +32,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2016 20:39:01 -0000
-X-Groupsio-MsgNum: 59637
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_5BD983AD-0EF1-478D-87E4-49C631F35CB3";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-
---Apple-Mail=_5BD983AD-0EF1-478D-87E4-49C631F35CB3
+X-List-Received-Date: Thu, 21 Jan 2016 22:24:47 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain;
-	charset=us-ascii
 
-Hi all
+We are arranging an OpenEmbedded developer meeting on April 7, 2016 in
+San Diego. This is after ELC and the Yocto Project developer day on
+Thursday. (This is more a training day)
 
-A new layer for openwrt packages is available
+We will publish more information as we work it out, but we did want
+people to know so they can schedule travel.
 
-https://github.com/kraj/meta-openwrt
+If you have suggestions for this you would like to cover at the
+developer meeting, let us know.
 
-This is aimed at providing OE metadata for packages which are unique to
-openwrt. Currently it does not contain recipes for all possible packages
-but if you have one or are housing them in different layers please feel free
-to move them to this layer
+Thanks,
 
-The layer index URI is
+Philip
 
-http://layers.openembedded.org/layerindex/branch/master/layer/meta-openwrt/
-
-Thanks
--Khem
-
-
---Apple-Mail=_5BD983AD-0EF1-478D-87E4-49C631F35CB3
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlahQeEACgkQuwUzVZGdMxRleQCcDhfw+GyEROtC+hK6UZi5Gx3Z
-KaQAnjiQv2heI9oOoiBLiRn4H1rYfSBk
-=0Gq+
------END PGP SIGNATURE-----
-
---Apple-Mail=_5BD983AD-0EF1-478D-87E4-49C631F35CB3--
