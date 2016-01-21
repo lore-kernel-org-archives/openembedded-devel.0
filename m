@@ -1,39 +1,42 @@
-Return-Path: <henning@itconsulting-heinold.de>
-X-Greylist: delayed 494 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 21 Jan 2016 09:49:27 UTC
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id D748E60667
+Return-Path: <k4230r6@gmail.com>
+Received: from mail-lb0-f194.google.com (mail-lb0-f194.google.com
+	[209.85.217.194])
+	by mail.openembedded.org (Postfix) with ESMTP id DED0673169
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2016 09:49:27 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 02E21D4025E
+	Thu, 21 Jan 2016 10:39:01 +0000 (UTC)
+Received: by mail-lb0-f194.google.com with SMTP id ad5so1253183lbc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2016 10:41:12 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 96F22D40046
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2016 10:41:10 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from mail.itconsulting-heinold.de
-	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
-	by mail.familie-heinold.de (Postfix) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2016 10:41:10 +0100 (CET)
-Date: Thu, 21 Jan 2016 10:41:04 +0100
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160121094057.GA30584@mail.itconsulting-heinold.de>
-References: <56A071BB.6070608@mlbassoc.com>
-	<1B858668EC6A94408DCA5225FDFA85AA010C79ADFA@ALA-MBA.corp.ad.wrs.com>
+	Thu, 21 Jan 2016 02:39:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=rwKI7fNGPJ3ZWhh08jB+hAiqCd1Ihd1nUCM3wSQpM6c=;
+	b=vavCs1O+UnRuZ1jtskpi7lKLMFjUe4jJijfGYRVmoyhEKXldzVuiAmTiRdgfaa7S1C
+	5yOAcS8BYCJ7AlAMh4Hz/2iP0tSSaNouVgtgdZxdUVep9rHPJ8y0Rxa4ey/5KrfPKepz
+	HHJtk3OcB/w63mFSI0gwjXP0sCu534I/o86Kdpnxb0bHpTftvhnB7oS4gCJtbY+ubsyA
+	0x2ZG6WCwXstWaybiCY5mbptxYXesmhFc23C2Wco5PKjrl7m2WBvyEd0gxAGHwnfE4Ky
+	tL9pZ2vzKKt+DhvHQlovPdyhlmk96n/ZmwmBxXgCdiENzug7+DUO+Ylpo0i+k0S3yn0d
+	r8Aw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=rwKI7fNGPJ3ZWhh08jB+hAiqCd1Ihd1nUCM3wSQpM6c=;
+	b=THv7yievQreX2r2c+XYXahz2PsFDjUrQu8hkUvUVDvqFUpk6BNwfOZzete3SuvrGDQ
+	2iu+nP+HQgQFm6ZFghvWVl3OMbQpc8sDROT0ReRTJ3FHyKbFAsDsIm2ojI+ggQelrmUf
+	40+D0t+AU2xaaNYZRMoATUVr739S1u4nWHjUvgE7/4SiIWhBWhWw8eQbXtPSHigTfw+u
+	qKnS/n1zwbEQJI62jm0m5fPkEboepIrN3Nl0Aj/AX63W+ICfbYJ0UClgRbFzkD2G/ZWQ
+	1U2fOhIGH1glDoOt0uIU/V+V2VZDUHSPTQSQEdBQcIMeh0hWJxHNqGiIPVpgAnoNnfiX
+	g9wQ==
+X-Gm-Message-State: ALoCoQm3xK0viRlX0bHIZOb1VRYiALnjFzBf/MuRFP/JOHEmuPNNNtXFM3cKj6FerQwfO4O/DfzUpVBjSl5KtTr+gN98G0uGRg==
 MIME-Version: 1.0
-In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AA010C79ADFA@ALA-MBA.corp.ad.wrs.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [meta-java] unversioned source files
+X-Received: by 10.112.78.33 with SMTP id y1mr14475809lbw.62.1453372741513;
+	Thu, 21 Jan 2016 02:39:01 -0800 (PST)
+Received: by 10.25.141.139 with HTTP; Thu, 21 Jan 2016 02:39:01 -0800 (PST)
+Date: Thu, 21 Jan 2016 11:39:01 +0100
+Message-ID: <CAALGJZY5LQw6a+fk+4TMy+JHFo=_p7kWixh9BJT+XyQqXh6wvA@mail.gmail.com>
+From: Christian Ege <k4230r6@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-openembedded][FIDO PATCH 1/1] ruby: Fixed runtime error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,49 +49,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2016 09:49:28 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 21 Jan 2016 10:39:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, Jan 21, 2016 at 09:08:35AM +0000, Huang, Jie (Jackie) wrote:
-> 
-> 
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded-devel-
-> > bounces@lists.openembedded.org] On Behalf Of Gary Thomas
-> > Sent: Thursday, January 21, 2016 1:51 PM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: [oe] [meta-java] unversioned source files
-> > 
-> > I just built the latest openjdk-7 and noticed that there are
-> > a number of source files downloaded that have no version
-> > information:
-> >    sources/corba.tar.bz2
-> >    sources/hotspot.tar.bz2
-> >    sources/jaxp.tar.bz2
-> >    sources/jaxws.tar.bz2
-> >    sources/jdk.tar.bz2
-> >    sources/langtools.tar.bz2
-> >    sources/openjdk.tar.bz2
-> 
-> The original download file doesn' t have version in the name:
-> http://icedtea.wildebeest.org/download/drops/icedtea7/2.7.0/corba.tar.bz2
-> 
-> > 
-> > This seems very problematic to me - how is this expected to work,
-> > especially when there are changes?
-> 
-> Yeah, there is potential issue, we should fix it by using "downloadfilename"
-> in SRC_URI to rename those files.
-> 
+From 6d2c2b602185a03232635a9c5c97253930c2bc0b Mon Sep 17 00:00:00 2001
+From: Daniel Schnell <daniel.schnell.extern@ifm.com>
+Date: Wed, 14 Oct 2015 14:49:52 +0200
+Subject: [meta-openembedded][FIDO PATCH 1/1] ruby: Fixed runtime error
 
-Okay,
+ Only include "enable-wide-getaddrinfo" if IVP6 is enabled in disto
+ feature otherwise 'gem install rails' throws an error
+ for the missing symbol 'getipnodebyname'
 
-but when we copy them into the buildir we must use the old name, because
-icedtea/openjdk configure script checks for them and will download them itself if not found.
+This is a backport of master branch commit
+86835b4ac5ee593e8bd5b142504194370df71728
+to make any gem installation possible.
 
-> Thanks,
-> Jackie
+Signed-off-by: Daniel Schnell <daniel.schnell.extern@ifm.com>
+Signed-off-by: Christian Ege <k4230r6@gmail.com>
+---
+ meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Bye Henning
+diff --git a/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb
+b/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb
+index 080d455..ccb7cbc 100644
+--- a/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb
++++ b/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb
+@@ -9,11 +9,12 @@ SRC_URI[sha256sum] =
+"5a4de38068eca8919cb087d338c0c2e3d72c9382c804fb27ab746e6c78
+ UNKNOWN_CONFIGURE_WHITELIST += "--enable-wide-getaddrinfo"
+
+ PACKAGECONFIG ??= ""
++PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6',
+'ipv6', '', d)}"
+ PACKAGECONFIG[valgrind] = "--with-valgrind=yes, --with-valgrind=no, valgrind"
+ PACKAGECONFIG[gpm] = "--with-gmp=yes, --with-gmp=no, gmp"
++PACKAGECONFIG[ipv6] = ",--enable-wide-getaddrinfo,"
+
+ EXTRA_OECONF = "\
+-    --enable-wide-getaddrinfo \
+     --disable-versioned-paths \
+     --disable-rpath \
+     --disable-dtrace \
+-- 
+1.7.9.5
+
+
+-- 
+http://ch.ege.io/
 
