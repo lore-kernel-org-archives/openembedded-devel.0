@@ -1,54 +1,49 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 894BC6E5CB
+Return-Path: <ross.burton@intel.com>
+Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
+	[209.85.213.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B6E36FF5B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2016 14:57:48 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id 65so1955245pff.2
+	Thu, 21 Jan 2016 15:40:28 +0000 (UTC)
+Received: by mail-ig0-f180.google.com with SMTP id z14so126430411igp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2016 06:57:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=CHXUJJ8RbysHJ773tTTFVCtMb5DJiqjpXQ6CrxxAqdA=;
-	b=G3n7hlFnp2v5+sjFjl9OI0giW3fCq60fzzBKI4wUCZLYlxLI09PCriT7PAHbNZvYTa
-	UUQeHgBPFZZOjS5qdKMqEY4Nxona0zPfVE70yMnuvLf0J5+7641YVcnEZyGG6T1iFn57
-	DgPzZRt4YJiKQCb3YVtb8uyhirzkppyfUwdSVJdBaGvRTioukoouriW67kxWm+etiPz1
-	6kmKBD9jc0mtxjxyE/uu5JYfBAQkF+HNZLlMAsZs2JNAVSjkv0AkPbbZ7AodVl9R/vDJ
-	LegLBgbHQ88svUjJD6Q56JIIy2o4Tw7FyUWCr1/gT4akl40/Hamy4H1HWwAGzlIB8+ja
-	q+Mg==
+	Thu, 21 Jan 2016 07:40:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=PxbNYRcb49quK/imVt57InGWxjNR5T2yt6QZ3JLRLDw=;
+	b=Ud03wPPwd5Gc7u+NHGPh66o+T9OrEufBcuNARvsuVGd9Nduiw0sbVmYeT9k3gF3+W9
+	qnzyWqHI6EJnSV4EXVQcg83t3BNkw0/pUSlDRIPsQ8Hk8dSIRvgNSqRbEC4Exqb1ivYC
+	7JHqPDSFsLm8x3ipmyih+8UYr4MwPgbKvgyc80EWVwbJZmRlatyznZAOuQh4T9qRGacP
+	KGz88D7mP37sYckCDLddaSd6IIE2fsmbZUuMJY8i04lAzOWQlBx/zLEeneHCcliPOAH9
+	StCnLxYLs1hG1NvF1BQVer8B/SQWdrGMdIIc1I+Gua8I/b4bu+L1kzIHSECBsKzbUVIj
+	xYig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=CHXUJJ8RbysHJ773tTTFVCtMb5DJiqjpXQ6CrxxAqdA=;
-	b=k1erzyYXexfIb1lxoO8Ef0WsKesVp4SJjmhTxfQG1upVg9QWfQb7C2+JST26vrzNJ9
-	fofwVmhLeNswm8Gf4JRrCfaLeCpsidK3ei/8v/bsAOInJqwX4LG3y/pLRkVipH2NT0ed
-	vStWYemiFed2btdXTrRl6lFwYzLD2ItQ8L/MLekLTd5fOoajVrEGkCkhDJQgov70ED+c
-	NL4Bb47DdQ7eTMRDtCXkMSj8dQ7Kxs+QyVKRLKzFnFVJzO0Uum4Jds5mZx8Wcuz+evqq
-	AOfkwOtF8PFqpPuNmNaEj30LJ091bVjTF5Bj0EMVC/rGTrnJy0Ky35Ot94U6RHWykwwI
-	RWHQ==
-X-Gm-Message-State: ALoCoQkmH9X+GoyOZU8uBb0T4nTeaombLAdGNOsPnC3oV8JjQnpPmPy69hneWz6zNaWJ8ZzFs/eHVtJ3rcVuV/XDSiYsLvX20w==
-X-Received: by 10.98.68.193 with SMTP id m62mr61369924pfi.153.1453388269013;
-	Thu, 21 Jan 2016 06:57:49 -0800 (PST)
-Received: from ?IPv6:2601:202:4000:1239:f0f5:a917:60f2:fe2?
-	([2601:202:4000:1239:f0f5:a917:60f2:fe2])
-	by smtp.googlemail.com with ESMTPSA id
-	tm4sm3373453pab.3.2016.01.21.06.57.47
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 21 Jan 2016 06:57:47 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <CAALGJZY5LQw6a+fk+4TMy+JHFo=_p7kWixh9BJT+XyQqXh6wvA@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <56A0F1EA.1080008@gmail.com>
-Date: Thu, 21 Jan 2016 06:57:46 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.3.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=PxbNYRcb49quK/imVt57InGWxjNR5T2yt6QZ3JLRLDw=;
+	b=K9FP9Oi6e4t9UTe1QyzCmuWh2m0Wv4AOY3WzQm4UUkGxBua2krgGWeF8t3/NdCIsTI
+	IS4OyPr/mnv7q/k3ufRuidprHJf08LJs6h0nV6f8XwsEFcv45gGtsbo2Rqrb6afKhABP
+	kGLbgzvzzj+/af6vTSLkJMBCXLUrNclvCAeCNToASDiau0OI+vEXrd8MGUO+UtbUJwLZ
+	IB7k20zaLZlxCWP4ZTHxS7dqBhBpfGlPStq7C3pNk+U+kPQiYC87eW1y5pg2pM1BHl5w
+	5Zytbq+yqTXIPOLlNppOs3qDr6vqFbBkguVIovmHUEAWJjm9vm2cDHkaPlYeefMD1QYh
+	Uytw==
+X-Gm-Message-State: AG10YOQR2z38KXOe3+oAp49Ty6pWEY7gX+TvqBL1leiFZxqGVsihy/wSXf+RkPxKEyuRhWrscSpvKLTKvGqHM3x9
+X-Received: by 10.50.111.111 with SMTP id ih15mr10412379igb.78.1453390829770; 
+	Thu, 21 Jan 2016 07:40:29 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CAALGJZY5LQw6a+fk+4TMy+JHFo=_p7kWixh9BJT+XyQqXh6wvA@mail.gmail.com>
-Subject: Re: [meta-openembedded][FIDO PATCH 1/1] ruby: Fixed runtime error
+Received: by 10.107.162.70 with HTTP; Thu, 21 Jan 2016 07:40:10 -0800 (PST)
+In-Reply-To: <56A0F5D4.5090701@linux.intel.com>
+References: <56A0F5D4.5090701@linux.intel.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 21 Jan 2016 15:40:10 +0000
+Message-ID: <CAJTo0LYvEUgd0xNdu-HoVR1dW_eXYpZjy-BjzxOm0KKt0vcWcA@mail.gmail.com>
+To: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] proposal: let's move oe-core to ffmpeg (from libav)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,56 +56,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2016 14:57:48 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Jan 2016 15:40:29 -0000
+Content-Type: text/plain; charset=UTF-8
 
-thanks,
+[CC'ing oe-devel]
 
-I will add this to my queue and let you know when staged for merging.
+On 21 January 2016 at 15:14, Alexander Kanavin <
+alexander.kanavin@linux.intel.com> wrote:
 
--- armin
+> let's replace libav with ffmpeg in oe-core. The reasons are:
+>
+> - all of the major distributions are using ffmpeg now (the last holdout
+> was Debian, and they switched to ffmpeg in summer 2015 after a long
+> discussion and deliberation [1][2])
+> - ffmpeg is much more responsive to security issues
+> - ffmpeg does regular releases, while libav hasn't had one since spring
+> 2015
+> - other reasons listed in [2]
+>
+> [1] https://lwn.net/Articles/650816/
+> [2] https://wiki.debian.org/Debate/libav-provider/ffmpeg
+>
+> Objections, thoughts?
+>
 
-On 01/21/2016 02:39 AM, Christian Ege wrote:
-> From 6d2c2b602185a03232635a9c5c97253930c2bc0b Mon Sep 17 00:00:00 2001
-> From: Daniel Schnell <daniel.schnell.extern@ifm.com>
-> Date: Wed, 14 Oct 2015 14:49:52 +0200
-> Subject: [meta-openembedded][FIDO PATCH 1/1] ruby: Fixed runtime error
-> 
->  Only include "enable-wide-getaddrinfo" if IVP6 is enabled in disto
->  feature otherwise 'gem install rails' throws an error
->  for the missing symbol 'getipnodebyname'
-> 
-> This is a backport of master branch commit
-> 86835b4ac5ee593e8bd5b142504194370df71728
-> to make any gem installation possible.
-> 
-> Signed-off-by: Daniel Schnell <daniel.schnell.extern@ifm.com>
-> Signed-off-by: Christian Ege <k4230r6@gmail.com>
-> ---
->  meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb |    3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb
-> b/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb
-> index 080d455..ccb7cbc 100644
-> --- a/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb
-> +++ b/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb
-> @@ -9,11 +9,12 @@ SRC_URI[sha256sum] =
-> "5a4de38068eca8919cb087d338c0c2e3d72c9382c804fb27ab746e6c78
->  UNKNOWN_CONFIGURE_WHITELIST += "--enable-wide-getaddrinfo"
-> 
->  PACKAGECONFIG ??= ""
-> +PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6',
-> 'ipv6', '', d)}"
->  PACKAGECONFIG[valgrind] = "--with-valgrind=yes, --with-valgrind=no, valgrind"
->  PACKAGECONFIG[gpm] = "--with-gmp=yes, --with-gmp=no, gmp"
-> +PACKAGECONFIG[ipv6] = ",--enable-wide-getaddrinfo,"
-> 
->  EXTRA_OECONF = "\
-> -    --enable-wide-getaddrinfo \
->      --disable-versioned-paths \
->      --disable-rpath \
->      --disable-dtrace \
-> 
+Sounds sensible to me.  However we're a week away from M2 deadline so I'm
+not sure we'll be able to have a consensus and get patches before that
+unless someone is incredibly motivated.
+
+Ross
 
