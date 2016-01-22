@@ -1,48 +1,44 @@
-Return-Path: <jefro.net@gmail.com>
-Received: from mail-lf0-f47.google.com (mail-lf0-f47.google.com
-	[209.85.215.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B0F573189;
-	Fri, 22 Jan 2016 05:25:04 +0000 (UTC)
-Received: by mail-lf0-f47.google.com with SMTP id c192so40117928lfe.2;
-	Thu, 21 Jan 2016 21:25:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:from:date:message-id:subject:to:cc:content-type; 
-	bh=tjAtfta+qJDoXqyFN/KP8TxKp776x0m15pyz5Qj6Ckk=;
-	b=xfx3jqLH38kwB6Srem/p6Mvm5S/o5H2VsG2JxXPDQnAdTHQMFqf9R5/BE6ErpoTZBQ
-	3yOwstwG5X6lyNlQm1k5A1uqjKhBc80b8Qkk1Ggn27vzKgaMOiwEQsCxh8OSNjeAcmXO
-	1xOlarjfdzZclYKQiyLmaSAoFGp0WWzqx01jDLu8CglbRmLuAEcOAWwrKrZ9T9bjq9NK
-	eyjuYwLifT8RyzoKNcnVzQfFQZFaecFjqqg8qkcKkOitIehwegl3ogvfkhQsBNUSSn5i
-	H7jK/PgL45eaimqfQdyePEd8puoTT0XI7DXNinRPsVQuOF0DeC7xg6sIo9nh/bszk60q
-	rhdA==
+Return-Path: <koen.kooi@linaro.org>
+Received: from mail-lf0-f41.google.com (mail-lf0-f41.google.com
+	[209.85.215.41])
+	by mail.openembedded.org (Postfix) with ESMTP id E7BC673179
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Jan 2016 05:57:28 +0000 (UTC)
+Received: by mail-lf0-f41.google.com with SMTP id c192so40426464lfe.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Jan 2016 21:57:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=dqbBmlxW87e2jcMt9Oo3pP6Mz8wI05JkFH43dtRodc8=;
+	b=jnrE+SQ3adlhPTMoR4F9xW7mV9S8nTYQiUvqui3GHOT1nNNS0p8HQZEKRoy629tUHW
+	LEpW/WOR+x3IqeFVDpKb0TR6r5ZETUyafVgZ8ArHGTZQnlGCmCAUjm4bJT4KxbKqwDo2
+	u528/VOqtKA3kdvXo4xd/tkvK0Gem5WIBd1vo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
-	:to:cc:content-type;
-	bh=tjAtfta+qJDoXqyFN/KP8TxKp776x0m15pyz5Qj6Ckk=;
-	b=SHB2BjSZk449aLL2/NYKFXWgHcZkkKNQyKAF1juE5IlXFPFN0fRzQk1xPt68jZmyCe
-	vuntcQzDnMzY79q/tpUA1LNtMPZ3v/ZT1J0FF+2R0re6DzM6AB3Xl7u6c+b2ZnmjE1Xy
-	ysvR3z9ALd5203dbvxg8pG4vGBxcfLaliOIfCye7HMDvPz0my0bSQg8RQ8iQieOuXPSB
-	bcHPDzZ4yjXQt0F5b+8Zn73QSFkuWLES58CYLYLAwN1VMg4MNvQc+FjahADq/WqJ/3LZ
-	urVswHS1M78ZifW3y9j450Ve0+IfWn2fIFWX2vDwPB7lRbjH4QZQ1dVNmzXd0liYB1Hn
-	iU6w==
-X-Gm-Message-State: AG10YOTY1X40y5Zihj8nnvLm8zbGSRILqIsjFP+Kzc9cqMzKzKJQxs3JY9NEhLrAs8IYFtRtikoYwO+c0J7/xw==
-X-Received: by 10.25.212.199 with SMTP id l190mr423488lfg.163.1453440303487;
-	Thu, 21 Jan 2016 21:25:03 -0800 (PST)
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=dqbBmlxW87e2jcMt9Oo3pP6Mz8wI05JkFH43dtRodc8=;
+	b=mmspROvIftluXGhwoT1kxalZ1S/RV7X4YH546Pz+jxeF6JlxdkvNueH8zBbY4XOuN/
+	h8X0Go4lA1KmtG3WqSK2s96YiS7t8TKIulR0g93fJwN4Hy6/L0xCf3lWOgw4hOWTtO9a
+	9Thp3zJZ8G+l9AxjNJbycr2lMrfcG0ICA8gYC76p0+bvPlzh9SQxyAAaTTWysLCai6tg
+	eqwzPwAg6i+PdnQTKaVPhTTY9S18EeuKDhV6pPksb6EzvG7lQLsKgZHEvOt4blEQTr5y
+	9S4qViRa8OQUzAb2/20R/o62vuqE290InOahWBw1pJ9uTQktuLn+TTEzdlB0JbbfgAJC
+	k0gA==
+X-Gm-Message-State: AG10YOQwgdO74OUnsFEMmuX8zHMND6hGHcLYaSVyQW7zENXVV3kjeHkqmdFEmnXNh+rgL97m9oydViH/kiBwYMHN
 MIME-Version: 1.0
-Sender: jefro.net@gmail.com
-Received: by 10.112.55.101 with HTTP; Thu, 21 Jan 2016 21:24:43 -0800 (PST)
-From: Jeff Osier-Mixon <jefro@jefro.net>
-Date: Thu, 21 Jan 2016 21:24:43 -0800
-X-Google-Sender-Auth: nR0H_jh2R1Gy-hv8wr4wlNyIc4c
-Message-ID: <CA+YB3rb4nYhY+8PHiU9yAwFkfr7vZZkNRhtTVOGLwqNyk85Gkw@mail.gmail.com>
-To: Philip Balister <philip@balister.org>
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: CORRECTION Re: [OE-core] Save the day OEDAM (after ELC and YP devday)
+X-Received: by 10.25.208.213 with SMTP id h204mr500124lfg.112.1453442247858;
+	Thu, 21 Jan 2016 21:57:27 -0800 (PST)
+Received: by 10.112.204.200 with HTTP; Thu, 21 Jan 2016 21:57:27 -0800 (PST)
+In-Reply-To: <4721149.thKUQa4jfA@peggleto-mobl.ger.corp.intel.com>
+References: <1453376040-25632-1-git-send-email-koen.kooi@linaro.org>
+	<4721149.thKUQa4jfA@peggleto-mobl.ger.corp.intel.com>
+Date: Fri, 22 Jan 2016 06:57:27 +0100
+Message-ID: <CAP0W-RkLN7KfOQdKfFUJ+gc7S5mkrrXuU5i9Bf7ox-COmdgaMg@mail.gmail.com>
+From: Koen Kooi <koen.kooi@linaro.org>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] various: delete leftovers from qt4 recipes that break parsing due to missing classes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,47 +51,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2016 05:25:07 -0000
+X-List-Received-Date: Fri, 22 Jan 2016 05:57:30 -0000
 Content-Type: text/plain; charset=UTF-8
 
-This should be Friday, April 8.
-
-If you are making plans to travel to ELC, the conference takes place
-Mon-Wed Apr 4-6. DevDay is being planned for Thu Apr 7. OEDAM will be
-Friday Apr 8.
-
-Please RSVP if you plan to attend. I am looking for a venue and need
-to get an idea of how many people to accommodate. We may also plan
-some kind of social event for Friday night if enough people are
-interested.
-
-Summary: if you plan to come to OEDAM, please plan to stay through Friday eve.
-
-thanks
-
-On Thu, Jan 21, 2016 at 2:24 PM, Philip Balister <philip@balister.org> wrote:
-> We are arranging an OpenEmbedded developer meeting on April 7, 2016 in
-> San Diego. This is after ELC and the Yocto Project developer day on
-> Thursday. (This is more a training day)
+On 21 January 2016 at 19:25, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Thu, 21 Jan 2016 12:34:00 Koen Kooi wrote:
+>> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+>> ---
+>>  ...erinterface.cpp-add-sys-socket.h-as-inclu.patch |  41 ---
+>>  .../0002-qconsole-writethread-gcc-4.5-fixes.patch  |  40 ---
+>>  .../qcanobserver/qcanobserver/candemo.xml          |  40 ---
+>>  .../qt-creator/fix.missing.cpuid.h.patch           | 384
+>> --------------------- .../qt-creator/qbs_transformer_product.patch       |
+>> 93 -----
+>>  meta-oe/recipes-qt/qtserialport/qtserialport.inc   |  48 ---
+>>  6 files changed, 646 deletions(-)
 >
-> We will publish more information as we work it out, but we did want
-> people to know so they can schedule travel.
->
-> If you have suggestions for this you would like to cover at the
-> developer meeting, let us know.
->
-> Thanks,
->
-> Philip
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+> Not that we wouldn't want to remove these, but how were you getting parse
+> issues just by these files being present? None of them would be noticed by
+> BitBake unless they were explicitly included.
 
+I wasn't getting parse errors with the files present, this is just a
+result of rebasing my patch against Martins version. The subject line
+might need some parens, though it should read as:
+
+     leftovers from (qt4 recipes that break parsing)
 
 
 -- 
-Jeff Osier-Mixon
-Open Source Community Architect, Intel Corporation
+Koen Kooi
+
+Builds and Baselines | Release Manager
+Linaro.org | Open source software for ARM SoCs
 
