@@ -1,52 +1,52 @@
 Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 5815A76A98
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 5712676A98
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 23:30:45 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id b14so479265wmb.1
+	Fri, 22 Jan 2016 23:30:46 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id 123so468499wmz.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 15:30:46 -0800 (PST)
+	Fri, 22 Jan 2016 15:30:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:in-reply-to:references;
-	bh=jV1UX410L2hAwGMOM5nhlcfgSrVozV7iViCgUWxuJ/M=;
-	b=YINQlww+6EickRncHHfy9ONI7BcNuhqN46ZB354tYnUOXYJgAIYI3ljwiSwo9KNzsM
-	kHHMbigIFkkYkQmNtfi5OApwbIrhEjk0a8fj6SLPjztCHFtW2uDhvR27nTRhhGbeUm3I
-	jV0KtTD3RlP4EqZWj+lVZpFutkVvXZ7ii7zfkuw9gku1gmO+3QbE92sK+agGnvTYQSXm
-	5Qe7QCNh9Qv0vVxiHEaL+eZLuXT1oiYhj4CXhV+RoV32hfBHuJfTxhaegsX+Zo9GJ++H
-	C1asffTzlQl45o0I9A7bs4mTFmL6oalt3aR7Nk1S8rAw8k3qEYnB5khI1YW6ns3+T9gi
-	9X/g==
+	bh=D/uv30VdVVIky5F95DzqHVP8DbEfMNGW7mIGlQIzFrU=;
+	b=DTYAF18xjJoxOmz7FbY/0EiDzBPyMoYMJhkbd5jpaiUDBfScFNu8r5S+5x/ym2SEYJ
+	WGvbUNs3EvQa0BwkIvCeIIET3W69f6tSEHceQYqDKPTDNoS1d/2ipHFxoDOC+sat3u2v
+	2+0zbCeIZG238LHfoveyz8cvBP+3crHCy+k/D8glGbm30ZJ1D5HetlnURfRxwwhvPK8o
+	JxZXDJ2IqqEyLBGfnfvoALNCFDfkRw9kDRXr8NspZQ8DsbQkc08zHONyBsse1DwgoA8u
+	s2OrVWbBg/N9Gn/7yulZQBn81XSoWKnBJ2lVdpFc6Zh5vlsi/m0oT+w9L01UWJZN2HiZ
+	ciMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:in-reply-to:references;
-	bh=jV1UX410L2hAwGMOM5nhlcfgSrVozV7iViCgUWxuJ/M=;
-	b=L7v5Hi/656gQXifa640pqFIiM3zwCTZRFOhiCx1AduteRuzDGDS+84CdsuEgWRhbmg
-	tazGrFdfvyn+74L4Dck+O5/E3kBWcdfpq6HREvtTxHbyCI19RNPFnJqNHlkIAp934vxa
-	uywYPQCwnIKLjgsCh4nobJUH9m/gUL3gvVaBHjNGyV2KfrgT/XQbnxaSiCLHaUG/Oofn
-	OLpGcGrnoL95/H/JCNi0x/2kvNHyEmsTwMnZZJ1GXkzqODau0yoZW8VgPOCMgrEaRjjq
-	9bsexGDSXZjyzxYAbbQeyv50+xzO8f4qY1WdEwfVaeAsB8jyzKCU8mxD16k1Jca3oXRS
-	1ykQ==
-X-Gm-Message-State: AG10YOTwucHfXypc+NqjOE8OrtWE85HH9XY68H4q1M5MTfANvhmvQMOBqu9Oa8lUm6s10A==
-X-Received: by 10.28.182.133 with SMTP id g127mr5818044wmf.61.1453505445374;
-	Fri, 22 Jan 2016 15:30:45 -0800 (PST)
+	bh=D/uv30VdVVIky5F95DzqHVP8DbEfMNGW7mIGlQIzFrU=;
+	b=YxwByAtZdK7cljau0B7j7r31VYG3iCrOhFrmADS5ZXo8+Fl117d8kT5uDQgJud+vmg
+	/EnojhxF9EqKns/0rqfoc+Npi9tu2H5E3PdbnWFoZ2cYiai9QPSDQPhHRpucxTg3x7yS
+	pElvgQpbmEYWbGJn9TgVJX+SS92yinmzEFaEpKmmjWCLcy4BAoI7PySWdXQS6ip4Ia37
+	Kq9R5tR+V+ZfsNM+CJEoF2MN0Rg6urjDKe9kcUJa6r5gvpClpCAEV7Q4OxLdvXBDfAt5
+	bioSG9jp5JYRwaAF6+ZN5aJrn0+5XhSHYoDE7KBeXUS8I/nun8hNAKdFeKyIRmofmQDg
+	B7qA==
+X-Gm-Message-State: AG10YOTp5PHH9b/CjDPNPSm5pyvojdtKt6d1U7MY1MIpJ+09zMY1jdiLcdT7ks8Y7NCqhQ==
+X-Received: by 10.28.179.84 with SMTP id c81mr6218024wmf.30.1453505447511;
+	Fri, 22 Jan 2016 15:30:47 -0800 (PST)
 Received: from ubuntu.ebenfeld.local
 	(ip-109-90-30-143.hsi11.unitymediagroup.de. [109.90.30.143])
 	by smtp.gmail.com with ESMTPSA id
-	ka4sm7882127wjc.47.2016.01.22.15.30.44
+	ka4sm7882127wjc.47.2016.01.22.15.30.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Jan 2016 15:30:44 -0800 (PST)
+	Fri, 22 Jan 2016 15:30:46 -0800 (PST)
 From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Jan 2016 00:30:03 +0100
-Message-Id: <67add9bb661870090938aedf8ef837883485e7aa.1453504827.git.sven.ebenfeld@gmail.com>
+Date: Sat, 23 Jan 2016 00:30:05 +0100
+Message-Id: <5b243ef2e63155b7d527d7d4c326be866c8e5f41.1453504827.git.sven.ebenfeld@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1453504827.git.sven.ebenfeld@gmail.com>
 References: <cover.1453504827.git.sven.ebenfeld@gmail.com>
 In-Reply-To: <cover.1453504827.git.sven.ebenfeld@gmail.com>
 References: <cover.1453504827.git.sven.ebenfeld@gmail.com>
 Cc: paul.eggleton@linux.intel.com
-Subject: [meta-python][PATCH 01/21] python(3)-lxml: 3.4.4 -> 3.5.0
+Subject: [meta-python][PATCH 03/21] add pypi3 bbclass to make python3 recipe creation easier as well
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,68 +59,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2016 23:30:46 -0000
-
-Update python-lxml and python3-lxml to version 3.5.0 and correct licensing
-information. The file LICENSES.txt states four different licenses.
+X-List-Received-Date: Fri, 22 Jan 2016 23:30:47 -0000
 
 Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 ---
- .../recipes-devtools/python/python-lxml.inc        | 25 ++++++++++++++++------
- .../{python-lxml_3.4.4.bb => python-lxml_3.5.0.bb} |  0
- ...python3-lxml_3.4.4.bb => python3-lxml_3.5.0.bb} |  0
- 3 files changed, 18 insertions(+), 7 deletions(-)
- rename meta-python/recipes-devtools/python/{python-lxml_3.4.4.bb => python-lxml_3.5.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-lxml_3.4.4.bb => python3-lxml_3.5.0.bb} (100%)
+ meta-python/classes/pypi-common.bbclass | 21 +++++++++++++++++++++
+ meta-python/classes/pypi.bbclass        | 22 +---------------------
+ meta-python/classes/pypi3.bbclass       |  1 +
+ 3 files changed, 23 insertions(+), 21 deletions(-)
+ create mode 100644 meta-python/classes/pypi-common.bbclass
+ create mode 100644 meta-python/classes/pypi3.bbclass
 
-diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
-index 7a596c1..337da1b 100644
---- a/meta-python/recipes-devtools/python/python-lxml.inc
-+++ b/meta-python/recipes-devtools/python/python-lxml.inc
-@@ -1,17 +1,28 @@
--SUMMARY = "Python XML bindings for libxml2 and libxslt"
--DESCRIPTION = "Powerful and Pythonic XML processing library combining \
--libxml2/libxslt with the ElementTree API."
-+SUMMARY = "Powerful and Pythonic XML processing library combining libxml2/libxslt with the ElementTree API."
-+DESCRIPTION = "lxml is a Pythonic, mature binding for the libxml2 and \
-+libxslt libraries. It provides safe and convenient access to these \
-+libraries using the ElementTree API. It extends the ElementTree API \
-+significantly to offer support for XPath, RelaxNG, XML Schema, XSLT, \
-+C14N and much more."
- HOMEPAGE = "http://codespeak.net/lxml"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b"
+diff --git a/meta-python/classes/pypi-common.bbclass b/meta-python/classes/pypi-common.bbclass
+new file mode 100644
+index 0000000..365002e
+--- /dev/null
++++ b/meta-python/classes/pypi-common.bbclass
+@@ -0,0 +1,21 @@
++def pypi_package(d):
++    bpn = d.getVar('BPN', True)
++    if bpn.startswith('python-'):
++        return bpn[7:]
++    elif bpn.startswith('python3-'):
++        return bpn[8:]
++    return bpn
++
++PYPI_PACKAGE ?= "${@pypi_package(d)}"
++
++def pypi_src_uri(d):
++    package = d.getVar('PYPI_PACKAGE', True)
++    pv = d.getVar('PV', True)
++    return 'https://pypi.python.org/packages/source/%s/%s/%s-%s.tar.gz' % (package[0], package, package, pv)
++
++PYPI_SRC_URI ?= "${@pypi_src_uri(d)}"
++
++HOMEPAGE ?= "https://pypi.python.org/pypi/${PYPI_PACKAGE}/"
 +SECTION = "devel/python"
-+LICENSE = "BSD & GPLv2 & MIT & PSF"
-+LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b \
-+                    file://doc/licenses/elementtree.txt;md5=eb34d036a6e3d56314ee49a6852ac891 \
-+                    file://doc/licenses/BSD.txt;md5=700a1fc17f4797d4f2d34970c8ee694b \
-+                    file://doc/licenses/GPL.txt;md5=94d55d512a9ba36caa9b7df079bae19f \
-+                    file://src/lxml/isoschematron/resources/rng/iso-schematron.rng;startline=2;endline=7;md5=a2914d12acc7066b3f5b60e8f94a012e \
-+                    file://src/lxml/isoschematron/resources/xsl/iso-schematron-xslt1/iso_schematron_message.xsl;startline=2;endline=24;md5=96976dcc66249c51e8026b159ca5e755 \
-+                    file://src/lxml/isoschematron/resources/xsl/RNG2Schtrn.xsl;startline=2;endline=7;md5=5cac4ad4b5e131a10e9af755b10fbbb7 \
-+                    "
- SRCNAME = "lxml"
- 
- DEPENDS += "libxml2 libxslt"
- 
- SRC_URI = "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
- 
--SRC_URI[md5sum] = "a9a65972afc173ec7a39c585f4eea69c"
--SRC_URI[sha256sum] = "b3d362bac471172747cda3513238f115cbd6c5f8b8e6319bf6a97a7892724099"
-+SRC_URI[md5sum] = "9f0c5f1eb43ff44d5455dab4b4efbe73"
-+SRC_URI[sha256sum] = "349f93e3a4b09cc59418854ab8013d027d246757c51744bf20069bc89016f578"
- 
- S = "${WORKDIR}/${SRCNAME}-${PV}"
- 
-diff --git a/meta-python/recipes-devtools/python/python-lxml_3.4.4.bb b/meta-python/recipes-devtools/python/python-lxml_3.5.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-lxml_3.4.4.bb
-rename to meta-python/recipes-devtools/python/python-lxml_3.5.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-lxml_3.4.4.bb b/meta-python/recipes-devtools/python/python3-lxml_3.5.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-lxml_3.4.4.bb
-rename to meta-python/recipes-devtools/python/python3-lxml_3.5.0.bb
++SRC_URI += "${PYPI_SRC_URI}"
++S = "${WORKDIR}/${PYPI_PACKAGE}-${PV}"
+diff --git a/meta-python/classes/pypi.bbclass b/meta-python/classes/pypi.bbclass
+index 41a70e2..8d8350a 100644
+--- a/meta-python/classes/pypi.bbclass
++++ b/meta-python/classes/pypi.bbclass
+@@ -1,21 +1 @@
+-def pypi_package(d):
+-    bpn = d.getVar('BPN', True)
+-    if bpn.startswith('python-'):
+-        return bpn[7:]
+-    return bpn
+-
+-PYPI_PACKAGE ?= "${@pypi_package(d)}"
+-
+-def pypi_src_uri(d):
+-    package = d.getVar('PYPI_PACKAGE', True)
+-    pv = d.getVar('PV', True)
+-    return 'https://pypi.python.org/packages/source/%s/%s/%s-%s.tar.gz' % (package[0], package, package, pv)
+-
+-PYPI_SRC_URI ?= "${@pypi_src_uri(d)}"
+-
+-HOMEPAGE ?= "https://pypi.python.org/pypi/${PYPI_PACKAGE}/"
+-SECTION = "devel/python"
+-SRC_URI += "${PYPI_SRC_URI}"
+-S = "${WORKDIR}/${PYPI_PACKAGE}-${PV}"
+-
+-inherit setuptools
++inherit pypi-common setuptools
+diff --git a/meta-python/classes/pypi3.bbclass b/meta-python/classes/pypi3.bbclass
+new file mode 100644
+index 0000000..e0f7bb3
+--- /dev/null
++++ b/meta-python/classes/pypi3.bbclass
+@@ -0,0 +1 @@
++inherit pypi-common setuptools3
 -- 
 1.9.1
 
