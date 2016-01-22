@@ -1,52 +1,52 @@
 Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id DB50B77065
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id B568175A31
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 23:30:56 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id u188so518659wmu.0
+	Fri, 22 Jan 2016 23:30:57 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id u188so518691wmu.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 15:30:57 -0800 (PST)
+	Fri, 22 Jan 2016 15:30:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:in-reply-to:references;
-	bh=MsPEeRKfzZEHoDaDTeUIkLvlvZyeUCKzG8gakeoTg40=;
-	b=LAa/oLRtfvorKjT982hgARMuVK4LWvOHt+y1/KFKrEWbDifx6WOboJ8LGEWjNroHFH
-	pMMMsG0Qg64ToCxhxbqrQAnIqWLGOsArnZKs2ew7KW3WZu2pVm8UIVO7fLyxGIcishnx
-	yy7yhOBzdQCMI555JH8xdf9a2/RCqxvoCAoUspRhxS7zoB0zWRxn6BSd/g4AVB3TDJ5K
-	d2WWz8eNok2lr8EOcfFDD0y/QTWd0Kp3rXfnddOKVaX0cTAoDXn6CTNwWWJIz1m61jBb
-	anBeR8ZwXNRNCsykC9lZhhKwkbSZQsUvoekq9ePc5zNvyucX96waEnSFFmcLqpZAHeSV
-	FVyQ==
+	bh=SVLpsUkSz7tf5BTmLAT5IiKT1C6M+rUAi5PYA7bne8k=;
+	b=a2qeGzq+j1fyQvNKbyFT5YR/9MRJIwC70RDKVWO+4vhPk1ahXwUfshePwsW/fvopnS
+	TYhjbDEnGiKJ/Q0Snpxvo1yQ6tYtc2o1XvWjSr3SH2iyYbUVXlMUrRypMpadjcBuQCHp
+	w73uPG6vk5DrryZoNUNTmSrpflZKDMwdPAv2Iiem6gcmLUatwA3sTha6DqcJSNtPb+eN
+	12mg2q5mtZK7DM3uqBJpWmijJ/TwyqenMcslA5A0y/13ef9p0sk3/RvCFahISAm3DMVY
+	g41ts1ppgbUW6Cp2+lllr7p36Sowolqk8gNyb9mzvYztZw5qqlSvlIVhMQGnCdgt9hwg
+	zpmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:in-reply-to:references;
-	bh=MsPEeRKfzZEHoDaDTeUIkLvlvZyeUCKzG8gakeoTg40=;
-	b=mj/OEwAUBgDllWjpobqdd2FfdSpuuZAmK+47gqK5lmYsZvowDuBxPwDwrGcdUmloxv
-	S/+NICTEmZ9zekgXb4lSg5xKm1P4N941PNJ4VJQD5mdRkCLivDZ2i0U0ldUd/2J1n4zt
-	bLiTRt9+zkrazNFlUu/wnJh25crauBZeOBA0hKSNQg0DBHrueiY6WJh8ZZNK0Icl0pz9
-	/8MxfrGg5sMareDKZRMx0R/oNWgiBwE54tWRlJH7rJSm9/AtV2RXDfgtDs8RAwiShwXQ
-	Raiql4dHqBFf64QXb6m6ztv6DFvc/h7vhd8MSyaXqS1MHkjbcNklgKrMIavRbI4HIQa5
-	HSUQ==
-X-Gm-Message-State: AG10YOQB0LXx4EgSGRbmCxBcLURXmhs0rLLto39m3KKG6QKcVZDvWBVUZzEimY5htmMb0Q==
-X-Received: by 10.28.46.193 with SMTP id u184mr6361173wmu.102.1453505457358;
-	Fri, 22 Jan 2016 15:30:57 -0800 (PST)
+	bh=SVLpsUkSz7tf5BTmLAT5IiKT1C6M+rUAi5PYA7bne8k=;
+	b=ephir/+/nuePdWlQNcZiv5+IX+0n2Y64aSPDj1Z4OC+bagd5sfdOKCz3Fq1KQobBaP
+	wS1r1HyLadCsnBpAMnKvBgzzdawp6pGNxW5Awhm/tvOT0C/32hT7pjXc1iquTz/GQs1/
+	yUKHaolrlSUJMXmcGH3Z2I1VmVmtbUS5WbPKg2HWVTVWOKTuUkrzJQ/EAy98bWnCOfMJ
+	71UtLpY5uaYCpE6Nk7NSQQFLOZcuNocMAWvptJpnMTHjI8eY1n2Fzzo6Rw9drSiCoTGg
+	BcmnOYGRyRlV+v7R9/nFeN/NpPn1VesGDIHakgvlo373tpcegr2b5gLxS4mZuQas4s5G
+	hKWQ==
+X-Gm-Message-State: AG10YOR/aFXdz106NRJcdn9JkDigVoJMh+eyJKa6zOFuz+y9+sIoiZpVZ4vGC8rHTodWPQ==
+X-Received: by 10.28.144.10 with SMTP id s10mr5787723wmd.97.1453505458384;
+	Fri, 22 Jan 2016 15:30:58 -0800 (PST)
 Received: from ubuntu.ebenfeld.local
 	(ip-109-90-30-143.hsi11.unitymediagroup.de. [109.90.30.143])
 	by smtp.gmail.com with ESMTPSA id
-	ka4sm7882127wjc.47.2016.01.22.15.30.56
+	ka4sm7882127wjc.47.2016.01.22.15.30.57
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Jan 2016 15:30:56 -0800 (PST)
+	Fri, 22 Jan 2016 15:30:57 -0800 (PST)
 From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Jan 2016 00:30:15 +0100
-Message-Id: <aabeeb9f76d8545da6bdd06bcfcb53e19e3ebe97.1453504827.git.sven.ebenfeld@gmail.com>
+Date: Sat, 23 Jan 2016 00:30:16 +0100
+Message-Id: <10f3a4710ecab187c108c4cf8847666850aa94dd.1453504827.git.sven.ebenfeld@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1453504827.git.sven.ebenfeld@gmail.com>
 References: <cover.1453504827.git.sven.ebenfeld@gmail.com>
 In-Reply-To: <cover.1453504827.git.sven.ebenfeld@gmail.com>
 References: <cover.1453504827.git.sven.ebenfeld@gmail.com>
 Cc: paul.eggleton@linux.intel.com
-Subject: [meta-python][PATCH 13/21] python-jinja2: 2.7.3 -> 2.8 and add python3 recipe
+Subject: [meta-python][PATCH 14/21] python(3)-pymongo: add recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,81 +63,48 @@ X-List-Received-Date: Fri, 22 Jan 2016 23:30:57 -0000
 
 Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 ---
- .../recipes-devtools/python/python-jinja2.inc       | 16 ++++++++++++++++
- .../recipes-devtools/python/python-jinja2_2.7.3.bb  | 21 ---------------------
- .../recipes-devtools/python/python-jinja2_2.8.bb    |  2 ++
- .../recipes-devtools/python/python3-jinja2_2.8.bb   |  2 ++
- 4 files changed, 20 insertions(+), 21 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-jinja2.inc
- delete mode 100644 meta-python/recipes-devtools/python/python-jinja2_2.7.3.bb
- create mode 100644 meta-python/recipes-devtools/python/python-jinja2_2.8.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.8.bb
+ meta-python/recipes-devtools/python/python-pymongo.inc     | 12 ++++++++++++
+ meta-python/recipes-devtools/python/python-pymongo_3.2.bb  |  2 ++
+ meta-python/recipes-devtools/python/python3-pymongo_3.2.bb |  2 ++
+ 3 files changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pymongo.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-pymongo_3.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pymongo_3.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-jinja2.inc b/meta-python/recipes-devtools/python/python-jinja2.inc
+diff --git a/meta-python/recipes-devtools/python/python-pymongo.inc b/meta-python/recipes-devtools/python/python-pymongo.inc
 new file mode 100644
-index 0000000..879550b
+index 0000000..5cdd5bd
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-jinja2.inc
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python."
-+HOMEPAGE = "https://pypi.python.org/pypi/Jinja2"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=20c831f91dd3bd486020f672ba2be386"
++++ b/meta-python/recipes-devtools/python/python-pymongo.inc
+@@ -0,0 +1,12 @@
++SUMMARY = "Python driver for MongoDB <http://www.mongodb.org>"
++DESCRIPTION = "\
++The PyMongo distribution contains tools for interacting with MongoDB \
++database from Python. The bson package is an implementation of the BSON \
++format for Python. The pymongo package is a native Python driver for \
++MongoDB. The gridfs package is a gridfs implementation on top of pymongo."
++HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2a944942e1496af1886903d274dedb13"
 +
-+PR = "r0"
-+PYPI_PACKAGE = "Jinja2"
-+
-+SRC_URI[md5sum] = "edb51693fe22c53cee5403775c71a99e"
-+SRC_URI[sha256sum] = "bc1ff2ff88dbfacefde4ddde471d1417d3b304e8df103a7a9437d47269201bf4"
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-io ${PYTHON_PN}-pickle ${PYTHON_PN}-crypt \
-+    ${PYTHON_PN}-math ${PYTHON_PN}-netclient ${PYTHON_PN}-re ${PYTHON_PN}-textutils \
-+    ${PYTHON_PN}-lang ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-markupsafe"
-+
-+CLEANBROKEN = "1"
-diff --git a/meta-python/recipes-devtools/python/python-jinja2_2.7.3.bb b/meta-python/recipes-devtools/python/python-jinja2_2.7.3.bb
-deleted file mode 100644
-index aa5c082..0000000
---- a/meta-python/recipes-devtools/python/python-jinja2_2.7.3.bb
-+++ /dev/null
-@@ -1,21 +0,0 @@
--DESCRIPTION = "Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python."
--HOMEPAGE = "https://pypi.python.org/pypi/Jinja2"
--SECTION = "devel/python"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=20c831f91dd3bd486020f672ba2be386"
--
--PR = "r0"
--SRCNAME = "Jinja2"
--
--SRC_URI = "https://pypi.python.org/packages/source/J/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
--SRC_URI[md5sum] = "b9dffd2f3b43d673802fe857c8445b1a"
--SRC_URI[sha256sum] = "2e24ac5d004db5714976a04ac0e80c6df6e47e98c354cb2c0d82f8879d4f8fdb"
--
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
--
--RDEPENDS_${PN} += "python-io python-pickle python-crypt python-math python-netclient python-re python-textutils python-lang python-pprint python-shell python-markupsafe"
--
--CLEANBROKEN = "1"
-diff --git a/meta-python/recipes-devtools/python/python-jinja2_2.8.bb b/meta-python/recipes-devtools/python/python-jinja2_2.8.bb
++SRC_URI[md5sum] = "463b4d325d8fb4070c04f15391b457bf"
++SRC_URI[sha256sum] = "f50a5380b45a83c5ea1e673ff19363d3cfd5850f7620536e51341d26eb2ae979"
+diff --git a/meta-python/recipes-devtools/python/python-pymongo_3.2.bb b/meta-python/recipes-devtools/python/python-pymongo_3.2.bb
 new file mode 100644
-index 0000000..712c796
+index 0000000..4038898
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-jinja2_2.8.bb
++++ b/meta-python/recipes-devtools/python/python-pymongo_3.2.bb
 @@ -0,0 +1,2 @@
 +inherit pypi
-+require python-jinja2.inc
-diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.8.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.8.bb
++require python-pymongo.inc
+diff --git a/meta-python/recipes-devtools/python/python3-pymongo_3.2.bb b/meta-python/recipes-devtools/python/python3-pymongo_3.2.bb
 new file mode 100644
-index 0000000..e2f9c1e
+index 0000000..d2cfd55
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-jinja2_2.8.bb
++++ b/meta-python/recipes-devtools/python/python3-pymongo_3.2.bb
 @@ -0,0 +1,2 @@
 +inherit pypi3
-+require python-jinja2.inc
++require python-pymongo.inc
 -- 
 1.9.1
 
