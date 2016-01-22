@@ -1,45 +1,48 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-oi0-f49.google.com (mail-oi0-f49.google.com
-	[209.85.218.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C7927316D
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 04:47:47 +0000 (UTC)
-Received: by mail-oi0-f49.google.com with SMTP id w75so40487382oie.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2016 20:47:48 -0800 (PST)
+Return-Path: <jefro.net@gmail.com>
+Received: from mail-lf0-f47.google.com (mail-lf0-f47.google.com
+	[209.85.215.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B0F573189;
+	Fri, 22 Jan 2016 05:25:04 +0000 (UTC)
+Received: by mail-lf0-f47.google.com with SMTP id c192so40117928lfe.2;
+	Thu, 21 Jan 2016 21:25:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=9COpp44IQM1nnlmXCKBZctWrb66GXMo+yvH36U6f6XQ=;
-	b=d9R85qK/DW4XHqt3+lgdPhFjwvnijPTfAYCWQWc9CED+9VIIDxERBRLF3MJWiU+slk
-	JfQnoEHiSK/nmwT08WnXygaDG31lIav5SW74Bdx3MdVgMpWVXP/uq9uxEZyPuMMAbBsm
-	38nyCg6ZH8WmdudaNvWzz8qnfZAoMTushLVnYkLi2Qq+Xd7ed1TH8eTx80yw1bIga6Wz
-	Iwnt5481LQJlpBXhDdOrAM6LIHNhTHhvrqIFJSOv3WaHzyZ8d6X7EW4zkjTZEDUISRo8
-	CKCYvFB5Gh07XH++fduXcpH+GyD73C5kP2nDTAmXMj8EyxxgdT99SydAhIMdy/8HsEmZ
-	MQBA==
+	h=mime-version:sender:from:date:message-id:subject:to:cc:content-type; 
+	bh=tjAtfta+qJDoXqyFN/KP8TxKp776x0m15pyz5Qj6Ckk=;
+	b=xfx3jqLH38kwB6Srem/p6Mvm5S/o5H2VsG2JxXPDQnAdTHQMFqf9R5/BE6ErpoTZBQ
+	3yOwstwG5X6lyNlQm1k5A1uqjKhBc80b8Qkk1Ggn27vzKgaMOiwEQsCxh8OSNjeAcmXO
+	1xOlarjfdzZclYKQiyLmaSAoFGp0WWzqx01jDLu8CglbRmLuAEcOAWwrKrZ9T9bjq9NK
+	eyjuYwLifT8RyzoKNcnVzQfFQZFaecFjqqg8qkcKkOitIehwegl3ogvfkhQsBNUSSn5i
+	H7jK/PgL45eaimqfQdyePEd8puoTT0XI7DXNinRPsVQuOF0DeC7xg6sIo9nh/bszk60q
+	rhdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=9COpp44IQM1nnlmXCKBZctWrb66GXMo+yvH36U6f6XQ=;
-	b=UYXLRxVjyBr3/9XQadfq43AFNTwNOi8gu+W+MYlpHeWE9vDY9A3uff0bkN4cFqwDMe
-	JfGVVsdlSHEriDYYw1wHBgrP1N6Mlzhs291dftihACyyPoNhwkrjSUX104k+LK0VF3AM
-	u9y5+EsS3gX0u+bQj/vgj1kTHqaxJyT2S6aBLegvfNxSrGAuTKRsNOhIDh35QbFZyAgB
-	+hkXxa8367r41SU+WNAEueWlrrXHUiDL6D+rxUAW+i0ZlOHseUkmJMH/mB3lnTnxmsiB
-	7/F9WUDHjARj6jwnfnGHFIipOO8Mir0+OUmd722l00VtcqKVDsSfKdEu6DCA0jTYPF/B
-	Z1iQ==
-X-Gm-Message-State: AG10YORvP4hBRwbFYTPaAAyNaiu71+LNTqEh+v0ipKcpZPmJGYC7Y/67BThxAo4O4n6htA==
-X-Received: by 10.202.71.147 with SMTP id u141mr712042oia.45.1453438068014;
-	Thu, 21 Jan 2016 20:47:48 -0800 (PST)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by smtp.gmail.com with ESMTPSA id s7sm2328905obk.17.2016.01.21.20.47.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 21 Jan 2016 20:47:46 -0800 (PST)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Jan 2016 20:47:41 -0800
-Message-Id: <1453438061-29267-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-multimedia][PATCH] gst-plugins-base: drop obsolete dependency on liboil
+	h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
+	:to:cc:content-type;
+	bh=tjAtfta+qJDoXqyFN/KP8TxKp776x0m15pyz5Qj6Ckk=;
+	b=SHB2BjSZk449aLL2/NYKFXWgHcZkkKNQyKAF1juE5IlXFPFN0fRzQk1xPt68jZmyCe
+	vuntcQzDnMzY79q/tpUA1LNtMPZ3v/ZT1J0FF+2R0re6DzM6AB3Xl7u6c+b2ZnmjE1Xy
+	ysvR3z9ALd5203dbvxg8pG4vGBxcfLaliOIfCye7HMDvPz0my0bSQg8RQ8iQieOuXPSB
+	bcHPDzZ4yjXQt0F5b+8Zn73QSFkuWLES58CYLYLAwN1VMg4MNvQc+FjahADq/WqJ/3LZ
+	urVswHS1M78ZifW3y9j450Ve0+IfWn2fIFWX2vDwPB7lRbjH4QZQ1dVNmzXd0liYB1Hn
+	iU6w==
+X-Gm-Message-State: AG10YOTY1X40y5Zihj8nnvLm8zbGSRILqIsjFP+Kzc9cqMzKzKJQxs3JY9NEhLrAs8IYFtRtikoYwO+c0J7/xw==
+X-Received: by 10.25.212.199 with SMTP id l190mr423488lfg.163.1453440303487;
+	Thu, 21 Jan 2016 21:25:03 -0800 (PST)
+MIME-Version: 1.0
+Sender: jefro.net@gmail.com
+Received: by 10.112.55.101 with HTTP; Thu, 21 Jan 2016 21:24:43 -0800 (PST)
+From: Jeff Osier-Mixon <jefro@jefro.net>
+Date: Thu, 21 Jan 2016 21:24:43 -0800
+X-Google-Sender-Auth: nR0H_jh2R1Gy-hv8wr4wlNyIc4c
+Message-ID: <CA+YB3rb4nYhY+8PHiU9yAwFkfr7vZZkNRhtTVOGLwqNyk85Gkw@mail.gmail.com>
+To: Philip Balister <philip@balister.org>
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: CORRECTION Re: [OE-core] Save the day OEDAM (after ELC and YP devday)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,31 +55,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2016 04:47:48 -0000
+X-List-Received-Date: Fri, 22 Jan 2016 05:25:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
-liboil was replaced by Orc prior to the gst-plugins-base 0.10.30 release:
+This should be Friday, April 8.
 
-  http://cgit.freedesktop.org/gstreamer/gst-plugins-base/commit/?id=8e4314f0fbfa4957f8e84d46824d10178b106fe6
+If you are making plans to travel to ELC, the conference takes place
+Mon-Wed Apr 4-6. DevDay is being planned for Thu Apr 7. OEDAM will be
+Friday Apr 8.
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- .../recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Please RSVP if you plan to attend. I am looking for a venue and need
+to get an idea of how many people to accommodate. We may also plan
+some kind of social event for Friday night if enough people are
+interested.
 
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
-index 8afc165..aa6b3a1 100644
---- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-                     file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605 \
-                     file://gst/ffmpegcolorspace/utils.c;beginline=1;endline=20;md5=9c83a200b8e597b26ca29df20fc6ecd0"
- 
--DEPENDS += "alsa-lib liboil libogg libvorbis libtheora util-linux tremor glib-2.0-native"
-+DEPENDS += "alsa-lib libogg libvorbis libtheora util-linux tremor glib-2.0-native"
- 
- SRC_URI += "file://gst-plugins-base-tremor.patch \
-             file://configure.ac-fix-subparse-plugin.patch \
+Summary: if you plan to come to OEDAM, please plan to stay through Friday eve.
+
+thanks
+
+On Thu, Jan 21, 2016 at 2:24 PM, Philip Balister <philip@balister.org> wrote:
+> We are arranging an OpenEmbedded developer meeting on April 7, 2016 in
+> San Diego. This is after ELC and the Yocto Project developer day on
+> Thursday. (This is more a training day)
+>
+> We will publish more information as we work it out, but we did want
+> people to know so they can schedule travel.
+>
+> If you have suggestions for this you would like to cover at the
+> developer meeting, let us know.
+>
+> Thanks,
+>
+> Philip
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+
+
+
 -- 
-1.9.1
-
+Jeff Osier-Mixon
+Open Source Community Architect, Intel Corporation
 
