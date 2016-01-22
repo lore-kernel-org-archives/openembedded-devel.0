@@ -1,52 +1,52 @@
 Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id AD20E77060
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id B9DAA7705D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 23:30:58 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id l65so477474wmf.3
+	Fri, 22 Jan 2016 23:30:59 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id 123so469163wmz.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 15:30:59 -0800 (PST)
+	Fri, 22 Jan 2016 15:31:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:in-reply-to:references;
-	bh=KNLJgNDOtyU+o8H0PY84tIki7PtZB0g2vecs1dZLRZY=;
-	b=PSsru+ErkzmpwnveGDv0SX/5Z78R7jhS1QH54SSkGKj2Cw6yziXec2Iju4d5U4nJ13
-	FM4XU/606J8ZTGdrO31zjXGTBbMNlbpmm8Bey1/52v+jFYio3eck2LrAxhgtLEqfb/Ui
-	a65KjFSZMz1Y7Y2umaSWUr6G4BoLwTN497Uhe8vgrjQU1FsXSWH3lDAE7YqdEoY6K4R2
-	p8NusXWqndqiG1WHsS8//i3attYozNY5SbydesiDVDzSk+q+qJC/BZXc6On+PAGf7lhR
-	W8At/po7aVmifH8uIqBLP0iakDnlIr3k7wwV3xZXcxo7iR8C2iQlyk+mv7pCxqHowFB0
-	6yew==
+	bh=mK9d1LchBy1RpfMNgGNenYBNw+JZK2gH6qFd/kmCV5w=;
+	b=oxR7/q7aq+7DCZlboOtldh1/06/MQRyKIKMEh7cm4urxmQbydkGuOFalsXD5JVr3bq
+	iWDK7fzSVyTNVmk2K41oXyVWq7bObtb4NcCaus99zdQneIsuHaJkO++ro8zarw8fSceU
+	QsL/42k/tTpyMqGljubSmzMBq6jfsWovTo/rlGwy2fnr3jJoHDVn8JyTtwP6I728KeFQ
+	4gs4BGJsbdS+B/x92UTT/fsKyFL3mWFI1ME+emkXfxFMTPRgcps+LJdcehvO/UrWn/g7
+	Ds4noXwbFZREFfseWJzRndIYGYJBodrFwHaamMEP5aYQSa4FH5kedE4jasU5ZjXzIpV3
+	i8Og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:in-reply-to:references;
-	bh=KNLJgNDOtyU+o8H0PY84tIki7PtZB0g2vecs1dZLRZY=;
-	b=h/wVITeDuJKm26xZ+gRG0FP27yj9Nh1IwZ/3r7fvuPEpb5/uTJJ+19UezuGPV7VdcX
-	kEZFruHmtnGEqMYxUNJRBHC+bFLq0s9i3Q/VQ2IcRYtC3JOa0kJrWHphHMLDbgiqGR/G
-	Ae3SHe0hTRfE7s7Dwf9p4iYAAyTAQmM6q/8tzFi63+3+b1rj43DUj+CVV4Vv1GeLZBcv
-	996HRIolWBfvUNZTRtjJSF1tKx2eTd/fr3BH42+rRjKBO49uqxg8zrER9Ni+PD/lQDZ4
-	G8EBw9sNTI8mKh4TQ5FioSvIXB1In7u8KEQg1pIhDrWZoWJZUI+6Ao6uIKJnU36NOa6z
-	17wg==
-X-Gm-Message-State: AG10YORicU5g3Mnu5ylUdb+9XRqghkHHG+XKwt2RTInMV7F05L9txPh8wRMT/V8q3x1/kQ==
-X-Received: by 10.194.112.41 with SMTP id in9mr5610863wjb.139.1453505459336;
-	Fri, 22 Jan 2016 15:30:59 -0800 (PST)
+	bh=mK9d1LchBy1RpfMNgGNenYBNw+JZK2gH6qFd/kmCV5w=;
+	b=ad0wXbbQBj7Xp4CNdVzVZBjcyv7g2WHaj1sIuV2GsXseZQ2VJGX7DfJwA0TF0SnOtg
+	4ukVkMBwxe84eqUXoiPYklAH3RkfBAUSZVJXKu0s2dx7lHBb1Bvh7wz+h6Qis7ilEgVE
+	6hl62v5CiDshYWdvO2aQFgF+GQ7XKXVaJ4rqlUYtg6vfPjLqTj4MNvxSnpNOEn/u4F25
+	PyQvJJT5pmxbPds7b3yYozJtK3nyz2n6QsFMYvbrtUmthA4pGQYTaKpvzMJsgOf9dEXt
+	dcb2GLtPqHblp3iV78jk/G78jIlTFjkE9Fd9hT5Gomb9483YsBMrUNX/9jmOmkLDcN0a
+	cX5A==
+X-Gm-Message-State: AG10YOS+GZzmdhTq+YKtnsjH5Bxa4cNP1WKt+ke3Vpk9WgGseV9+O7B9o2ZAgduRTHPmaA==
+X-Received: by 10.194.82.199 with SMTP id k7mr6356459wjy.65.1453505460358;
+	Fri, 22 Jan 2016 15:31:00 -0800 (PST)
 Received: from ubuntu.ebenfeld.local
 	(ip-109-90-30-143.hsi11.unitymediagroup.de. [109.90.30.143])
 	by smtp.gmail.com with ESMTPSA id
-	ka4sm7882127wjc.47.2016.01.22.15.30.58
+	ka4sm7882127wjc.47.2016.01.22.15.30.59
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Jan 2016 15:30:58 -0800 (PST)
+	Fri, 22 Jan 2016 15:30:59 -0800 (PST)
 From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Jan 2016 00:30:17 +0100
-Message-Id: <54d954f5c3b5272ff7808fdd86ccc1c01b51eb8c.1453504827.git.sven.ebenfeld@gmail.com>
+Date: Sat, 23 Jan 2016 00:30:18 +0100
+Message-Id: <b2b8abc00739c65f50bc5fa881daeb3383843b78.1453504827.git.sven.ebenfeld@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1453504827.git.sven.ebenfeld@gmail.com>
 References: <cover.1453504827.git.sven.ebenfeld@gmail.com>
 In-Reply-To: <cover.1453504827.git.sven.ebenfeld@gmail.com>
 References: <cover.1453504827.git.sven.ebenfeld@gmail.com>
 Cc: paul.eggleton@linux.intel.com
-Subject: [meta-python][PATCH 15/21] python-certifi: 14.05.14 -> 2015.11.20.1 and add python3 recipe
+Subject: [meta-python][PATCH 16/21] python3-tornado: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,64 +59,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2016 23:30:59 -0000
+X-List-Received-Date: Fri, 22 Jan 2016 23:31:00 -0000
 
 Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 ---
- .../{python-certifi_14.05.14.bb => python-certifi.inc}    | 15 +++------------
- .../python/python-certifi_2015.11.20.1.bb                 |  2 ++
- .../python/python3-certifi_2015.11.20.1.bb                |  2 ++
- 3 files changed, 7 insertions(+), 12 deletions(-)
- rename meta-python/recipes-devtools/python/{python-certifi_14.05.14.bb => python-certifi.inc} (53%)
- create mode 100644 meta-python/recipes-devtools/python/python-certifi_2015.11.20.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-certifi_2015.11.20.1.bb
+ .../recipes-devtools/python/python-tornado.inc     | 24 ++++++++++++++
+ .../recipes-devtools/python/python-tornado_4.3.bb  | 37 ++--------------------
+ .../recipes-devtools/python/python3-tornado_4.3.bb |  2 ++
+ 3 files changed, 29 insertions(+), 34 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-tornado.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-tornado_4.3.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-certifi_14.05.14.bb b/meta-python/recipes-devtools/python/python-certifi.inc
-similarity index 53%
-rename from meta-python/recipes-devtools/python/python-certifi_14.05.14.bb
-rename to meta-python/recipes-devtools/python/python-certifi.inc
-index 5e0404e..c9c3e2d 100644
---- a/meta-python/recipes-devtools/python/python-certifi_14.05.14.bb
-+++ b/meta-python/recipes-devtools/python/python-certifi.inc
-@@ -2,19 +2,10 @@ SUMMARY = "Python package for providing Mozilla's CA Bundle."
- DESCRIPTION = "This installable Python package contains a CA Bundle that you can reference in your \
- Python code. This is useful for verifying HTTP requests, for example.  This is the same CA Bundle \
- which ships with the Requests codebase, and is derived from Mozilla Firefox's canonical set."
--HOMEPAGE = "https://pypi.python.org/pypi/certifi"
--SECTION = "devel/python"
-+HOMEPAGE = " http://certifi.io/"
- 
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
- 
--SRCNAME = "certifi"
+diff --git a/meta-python/recipes-devtools/python/python-tornado.inc b/meta-python/recipes-devtools/python/python-tornado.inc
+new file mode 100644
+index 0000000..679b7ba
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-tornado.inc
+@@ -0,0 +1,24 @@
++SUMMARY  = "Tornado is an open source version of the scalable, non-blocking web server and tools that power FriendFeed."
++DESCRIPTION = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed. \
++By using non-blocking network I/O, Tornado can scale to tens of thousands of open connections, making it ideal for long \
++polling, WebSockets, and other applications that require a long-lived connection to each user."
++HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://setup.py;startline=2;endline=15;md5=5ab7571a79ad62d0ca7aea308bac7560"
++
++SRC_URI[md5sum] = "d13a99dc0b60ba69f5f8ec1235e5b232"
++SRC_URI[sha256sum] = "c9c2d32593d16eedf2cec1b6a41893626a2649b40b21ca9c4cac4243bde2efbf"
++
++RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-numbers ${PYTHON_PN}-email ${PYTHON_PN}-subprocess \
++                   ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-json ${PYTHON_PN}-certifi"
++
++RDEPENDS_${PN}-test += "${PN} ${PYTHON_PN}-unittest"
++
++PACKAGES =+ "\
++    ${PN}-test \
++"
++
++FILES_${PN}-test = " \
++    ${libdir}/${PYTHON_DIR}/site-packages/${SRCNAME}/test \
++    ${libdir}/${PYTHON_DIR}/site-packages/${SRCNAME}/testing.py* \
++"
+diff --git a/meta-python/recipes-devtools/python/python-tornado_4.3.bb b/meta-python/recipes-devtools/python/python-tornado_4.3.bb
+index c107d6c..5bbad50 100644
+--- a/meta-python/recipes-devtools/python/python-tornado_4.3.bb
++++ b/meta-python/recipes-devtools/python/python-tornado_4.3.bb
+@@ -1,34 +1,3 @@
+-SUMMARY  = "Tornado is an open source version of the scalable, non-blocking web server and tools that power FriendFeed."
+-DESCRIPTION = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed. \
+-By using non-blocking network I/O, Tornado can scale to tens of thousands of open connections, making it ideal for long \
+-polling, WebSockets, and other applications that require a long-lived connection to each user."
+-HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
 -
--SRC_URI = "https://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=65b6c818261e415f48f5463a232ad195"
 -
--SRC_URI[md5sum] = "315ea4e50673a16ab047099f816fd32a"
--SRC_URI[sha256sum] = "1e1bcbacd6357c151ae37cf0290dcc809721d32ce21fd6b7339568f3ddef1b69"
+-SRCNAME = "tornado"
+-
+-SRC_URI = " \
+-    https://pypi.python.org/packages/source/t/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
+-"
+-SRC_URI[md5sum] = "d13a99dc0b60ba69f5f8ec1235e5b232"
+-SRC_URI[sha256sum] = "c9c2d32593d16eedf2cec1b6a41893626a2649b40b21ca9c4cac4243bde2efbf"
+-
+-inherit setuptools
+-
+-RDEPENDS_${PN} += "python-compression python-numbers python-email python-subprocess \
+-                   python-pkgutil python-html python-json python-backports-ssl python-certifi"
+-
+-RDEPENDS_${PN}-test += "${PN} python-unittest"
 -
 -S = "${WORKDIR}/${SRCNAME}-${PV}"
 -
--inherit setuptools
-+SRC_URI[md5sum] = "e04b512009401603f1485380ac879cf5"
-+SRC_URI[sha256sum] = "30b0a7354a1b32caa8b4705d3f5fb2dadefac7ba4bf8af8a2176869f93e38f16"
-diff --git a/meta-python/recipes-devtools/python/python-certifi_2015.11.20.1.bb b/meta-python/recipes-devtools/python/python-certifi_2015.11.20.1.bb
-new file mode 100644
-index 0000000..ce121d6
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-certifi_2015.11.20.1.bb
-@@ -0,0 +1,2 @@
+-PACKAGES =+ "\
+-    ${PN}-test \
+-"
+-
+-FILES_${PN}-test = " \
+-    ${libdir}/${PYTHON_DIR}/site-packages/${SRCNAME}/test \
+-    ${libdir}/${PYTHON_DIR}/site-packages/${SRCNAME}/testing.py* \
+-"
 +inherit pypi
-+require python-certifi.inc
-diff --git a/meta-python/recipes-devtools/python/python3-certifi_2015.11.20.1.bb b/meta-python/recipes-devtools/python/python3-certifi_2015.11.20.1.bb
++require python-tornado.inc
++RDEPENDS_${PN} += "${PYTHON_PN}-backports-ssl"
+diff --git a/meta-python/recipes-devtools/python/python3-tornado_4.3.bb b/meta-python/recipes-devtools/python/python3-tornado_4.3.bb
 new file mode 100644
-index 0000000..dfdd6e9
+index 0000000..21a4300
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-certifi_2015.11.20.1.bb
++++ b/meta-python/recipes-devtools/python/python3-tornado_4.3.bb
 @@ -0,0 +1,2 @@
 +inherit pypi3
-+require python-certifi.inc
++require python-tornado.inc
 -- 
 1.9.1
 
