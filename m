@@ -1,46 +1,54 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 619A5605B3
+Return-Path: <mbc@koumoul.net>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 2620A6E64A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 08:26:35 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id b14so119662934wmb.1
+	Fri, 22 Jan 2016 14:47:29 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id u188so18226140wmu.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 00:26:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=P5rRd5Cl4CuW6DkBqgJJy+pyQD8bndDaAVgETumNW4M=;
-	b=xYl24GkL5cYAgGIrlpnRJVm4+3Alqj/c913dUT8vMSB3ozIg7AUDBPyJpH9mlHM3EQ
-	ERN8cvzNw1ZicuWeQ7x9I/w+CWqNT6iUsh6J4FEccB3E+dn8SrVP3KP/BvHIBeBP0ZWX
-	J4EndfUl1MnhZqOwDin0aFgzjLSv07fbWn7l3ptwUu6Ls31R62hyXo1XZibuMHbqxALr
-	LP/4ecegXu9tzWY2kR7u4m2KfaAU2DLcUgoAP5RXPmIyN7yHzqdO9eQjUM2OmBvEViDh
-	oGofd+ARdGfxUxY4Q0ijxjQRJMv6fYSDNKsk31DbBXQMpuRf36XmOXezuoPG8yL+V7D7
-	KHjQ==
+	Fri, 22 Jan 2016 06:47:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=AM0alaHOFBiEBJUhaoMW+RZMn0/ljEtasQNpoRaRYyQ=;
+	b=RD8e6pMnlscXzNTDf4Ts+hN2raOPMppf/Fzyo/WgcnRZdMBHq5eTDn+A49y4RwvltC
+	YxQjqOuo/8wQknEzfMuNZXZ/lwdLP2tVYqo0Yr14FjBK+fL+Dq6eq6ZNwc6MEt2wZeBN
+	3s9aNQeqrpMUK2lt/ouzFvhAR0msnEuX0M6Ss=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=iot-bzh.20150623.gappssmtp.com; s=20150623;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=AM0alaHOFBiEBJUhaoMW+RZMn0/ljEtasQNpoRaRYyQ=;
+	b=X4cK0ibF48e1W6yUwW7Rsd/UPn72ltTuTs31rQ3Hh351PI0JGiGVCQU5BjE2HX+faX
+	SypxjAUzLatFppghaJEsQzkVgegF4CMegGWsm2xmqb7lEXH0rfggCOjtSZnFs1uMn3Jb
+	O3do2PiYGsecB2XR2H2Gzes/jcZ3Ek18oh+ECAWpQUVxdv/e1bBzVwLmWKRDYtUutBkc
+	7i5d+6xQR85vru7oB1592gV6OLT1l1fc97JR8YOSRmSef7y0Y4zm5+f7txcAs0/CV0aK
+	bb47EIQYl9RF1CIDT06b8VhoLpSxKaiLmZArHyHFhq5OCrjqiyAM/86Qkqq1rx7NlakG
+	L6uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=P5rRd5Cl4CuW6DkBqgJJy+pyQD8bndDaAVgETumNW4M=;
-	b=XIdIAVvBu9wkLpfSPrdT4USwg2A/soOtA1vxNgRAA0an1XPWPpHDZyiTnxaopurafP
-	2WQCuaMARTbDpH/G+Iqd03gQBFS1qyDs2HyGZgRQIBZQTM5dkKWFysMAraj19EO+2IQH
-	ufJ1KsOOvsW3EJhzv/Vlz28j6OJbm8MVIdx3ANGBuXsh3G5FMSHfB+4ijSHE4KOtuISS
-	UsLMt1DXlayJ3aiH3v1ohevhOHyPGSNt+8tH1dhpl8qvoAyTRS7BrCLkO6iABARS6Wwx
-	z5MW2VS3CE7ECcLEXA/KHEQkE5YTubIuvNN7lHt1a/RW4pDimtDkfgfPvtyo1eLydRyJ
-	yvNg==
-X-Gm-Message-State: AG10YOQ/Q/pgpFdbYfasC1aJPTJIWuyIrQePopztPIskfGHNF+9JUk792G96zIpvtZZCcI8PHJeWI3GnzkT7eg==
-MIME-Version: 1.0
-X-Received: by 10.28.6.213 with SMTP id 204mr2047442wmg.47.1453451195613; Fri,
-	22 Jan 2016 00:26:35 -0800 (PST)
-Received: by 10.194.2.15 with HTTP; Fri, 22 Jan 2016 00:26:35 -0800 (PST)
-In-Reply-To: <1453450077.2577.16.camel@gmail.com>
-References: <1453368103-1800-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<1453450077.2577.16.camel@gmail.com>
-Date: Fri, 22 Jan 2016 09:26:35 +0100
-Message-ID: <CA+chaQdhrn9CcNXTde4ULwSodhsN+ajFZGXuY_wkSOcq-MUf+Q@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] networkmanager: Warning Fix
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=AM0alaHOFBiEBJUhaoMW+RZMn0/ljEtasQNpoRaRYyQ=;
+	b=ciOwsWzUYFHR4pQDpGLBcHkeA8gPT4CgjfmiFsDZdgZ3PcO/SeCx6tqi8Kk/A7u8U0
+	6CoEvO01jcMBeZsunuC61ucBHCITBLt8k+SsGKATUz6LHAeZ3XkDxdx+sbx7/SvsseKE
+	kSHs6onJz7TqhISxs6FZYe3v2kRBYygIKD8LiQU3CEDncdWZU9wVpkjgM6nFepnpr6IE
+	sAVw08unFThHPS8z3eMFHtPnPQBA1ef1GW/TfBjk5I5PPJUPthrSaQ+7HHbEr3SZS7tV
+	onncPbRm6AYVTijqxx/6rLENDI7NQdaZuUelgwGxnF6D6SFvKSMHB0pDchAHI3aWI6BN
+	5iMg==
+X-Gm-Message-State: AG10YORKqZDU4/bwxv33Lf3ws5jPoycROvqtDPMIE/tBjnJrO8hIxNZMoyv+0CWg+1+JLA==
+X-Received: by 10.194.123.8 with SMTP id lw8mr3558005wjb.72.1453474049001;
+	Fri, 22 Jan 2016 06:47:29 -0800 (PST)
+Received: from localhost.localdomain
+	(ARennes-655-1-69-63.w109-218.abo.wanadoo.fr. [109.218.244.63])
+	by smtp.gmail.com with ESMTPSA id
+	g187sm3244247wmf.8.2016.01.22.06.47.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 22 Jan 2016 06:47:28 -0800 (PST)
+Sender: "Manuel Bachmann [ IoT.bzh ]" <mbc@koumoul.net>
+From: Manuel Bachmann <manuel.bachmann@iot.bzh>
+To: openembedded-devel@lists.openembedded.org 
+Date: Fri, 22 Jan 2016 15:51:11 +0100
+Message-Id: <1453474271-26539-1-git-send-email-manuel.bachmann@iot.bzh>
+X-Mailer: git-send-email 1.8.3.1
+Cc: Manuel Bachmann <mbc@iot.bzh>
+Subject: [PATCH 1/2][meta-multimedia] gupnp: Update to 0.20.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,67 +61,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2016 08:26:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 22 Jan 2016 14:47:32 -0000
 
-It is correct approach to fix it.
+From: Manuel Bachmann <mbc@iot.bzh>
 
-This isn't:
-RDEPENDS_${PN}-nmtui += "libnewt"
+Update to latest version (required for latest Rygel).
 
-On Fri, Jan 22, 2016 at 9:07 AM, Adrian Freihofer <
-adrian.freihofer@gmail.com> wrote:
+Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
+---
+ meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.12.bb |    8 --------
+ meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.14.bb |    8 ++++++++
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.12.bb
+ create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.14.bb
 
-> Hi
->
-> This is not the right approach to fix this warning.
-> Please try something like this:
-> RDEPENDS_${PN}-nmtui += "libnewt"
->
-> Notes:
-> - I never saw this warning.
-> - I would expect that pkgconfig does this automatically.
->
-> Regards,
-> Adrian
->
-> On Thu, 2016-01-21 at 12:21 +0300, Li Xin wrote:
-> > WARNING: QA Issue: networkmanager rdepends on libnewt, but it isn't a
-> build dependency? [build-deps]
-> >
-> > Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> > ---
-> >  meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb |
-> 1 +
-> >  1 file changed, 1 insertion(+)
-> >
-> > diff --git a/meta-oe/recipes-connectivity/networkmanager/
-> networkmanager_1.0.6.bb b/meta-oe/recipes-
-> > connectivity/networkmanager/networkmanager_1.0.6.bb
-> > index 1ddb66f..72b4e46 100644
-> > --- a/meta-oe/recipes-connectivity/networkmanager/
-> networkmanager_1.0.6.bb
-> > +++ b/meta-oe/recipes-connectivity/networkmanager/
-> networkmanager_1.0.6.bb
-> > @@ -56,6 +56,7 @@ PACKAGECONFIG[wifi] =
-> "--enable-wifi=yes,--enable-wifi=no,wireless-tools,wpa-sup
-> >  PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
-> >  PACKAGECONFIG[netconfig] = "--with-netconfig=yes,--with-netconfig=no"
-> >  PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
-> > +PACKAGECONFIG[libnewt] = "--with-nmtui=yes,--with-nmtui=no,libnewt"
-> >
-> >  PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests
-> ${PN}-bash-completion \
-> >    ${PN}-nmtui ${PN}-nmtui-doc \
-> > --
-> > 1.8.4.2
-> >
-> >
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.12.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.12.bb
+deleted file mode 100644
+index c8c6164..0000000
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.12.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require gupnp.inc
+-
+-SRC_URI = "${GNOME_MIRROR}/${BPN}/0.20/${BPN}-${PV}.tar.xz"
+-SRC_URI[md5sum] = "c01aa6d3a78792b3a24591f036dd91f4"
+-SRC_URI[sha256sum] = "205d47b950a1b7190df1115f454cb38a44d71aacfec75d4287299e400e139b69"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
+-                    file://libgupnp/gupnp.h;beginline=1;endline=20;md5=d78a69d9b6e63ee2dc72e7b674d97520"
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.14.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.14.bb
+new file mode 100644
+index 0000000..ed07175
+--- /dev/null
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.14.bb
+@@ -0,0 +1,8 @@
++require gupnp.inc
++
++SRC_URI = "${GNOME_MIRROR}/${BPN}/0.20/${BPN}-${PV}.tar.xz"
++SRC_URI[md5sum] = "63346ef90ac5cd925c3a941f51d8bca6"
++SRC_URI[sha256sum] = "77ffb940ba77c4a6426d09d41004c75d92652dcbde86c84ac1c847dbd9ad59bd"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
++                    file://libgupnp/gupnp.h;beginline=1;endline=20;md5=d78a69d9b6e63ee2dc72e7b674d97520"
+-- 
+1.7.10.4
+
 
