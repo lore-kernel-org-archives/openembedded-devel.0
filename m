@@ -1,34 +1,45 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by mail.openembedded.org (Postfix) with ESMTP id ACFF3731D5
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-oi0-f49.google.com (mail-oi0-f49.google.com
+	[209.85.218.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C7927316D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 03:46:33 +0000 (UTC)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id 576E868A01C; Fri, 22 Jan 2016 03:46:33 +0000 (GMT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	loki.analogue-micro-ltd.com
-X-Spam-Level: **
-X-Spam-Status: No, score=2.5 required=5.0 tests=ALL_TRUSTED,BAYES_50,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id EFFE768A019;
-	Fri, 22 Jan 2016 03:46:32 +0000 (GMT)
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by zeus.mlbassoc.com (Postfix) with ESMTP id AC15767400E1;
-	Fri, 22 Jan 2016 04:46:32 +0100 (CET)
+	Fri, 22 Jan 2016 04:47:47 +0000 (UTC)
+Received: by mail-oi0-f49.google.com with SMTP id w75so40487382oie.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Jan 2016 20:47:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=9COpp44IQM1nnlmXCKBZctWrb66GXMo+yvH36U6f6XQ=;
+	b=d9R85qK/DW4XHqt3+lgdPhFjwvnijPTfAYCWQWc9CED+9VIIDxERBRLF3MJWiU+slk
+	JfQnoEHiSK/nmwT08WnXygaDG31lIav5SW74Bdx3MdVgMpWVXP/uq9uxEZyPuMMAbBsm
+	38nyCg6ZH8WmdudaNvWzz8qnfZAoMTushLVnYkLi2Qq+Xd7ed1TH8eTx80yw1bIga6Wz
+	Iwnt5481LQJlpBXhDdOrAM6LIHNhTHhvrqIFJSOv3WaHzyZ8d6X7EW4zkjTZEDUISRo8
+	CKCYvFB5Gh07XH++fduXcpH+GyD73C5kP2nDTAmXMj8EyxxgdT99SydAhIMdy/8HsEmZ
+	MQBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=9COpp44IQM1nnlmXCKBZctWrb66GXMo+yvH36U6f6XQ=;
+	b=UYXLRxVjyBr3/9XQadfq43AFNTwNOi8gu+W+MYlpHeWE9vDY9A3uff0bkN4cFqwDMe
+	JfGVVsdlSHEriDYYw1wHBgrP1N6Mlzhs291dftihACyyPoNhwkrjSUX104k+LK0VF3AM
+	u9y5+EsS3gX0u+bQj/vgj1kTHqaxJyT2S6aBLegvfNxSrGAuTKRsNOhIDh35QbFZyAgB
+	+hkXxa8367r41SU+WNAEueWlrrXHUiDL6D+rxUAW+i0ZlOHseUkmJMH/mB3lnTnxmsiB
+	7/F9WUDHjARj6jwnfnGHFIipOO8Mir0+OUmd722l00VtcqKVDsSfKdEu6DCA0jTYPF/B
+	Z1iQ==
+X-Gm-Message-State: AG10YORvP4hBRwbFYTPaAAyNaiu71+LNTqEh+v0ipKcpZPmJGYC7Y/67BThxAo4O4n6htA==
+X-Received: by 10.202.71.147 with SMTP id u141mr712042oia.45.1453438068014;
+	Thu, 21 Jan 2016 20:47:48 -0800 (PST)
+Received: from e6520.cablelabs.com
+	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
+	by smtp.gmail.com with ESMTPSA id s7sm2328905obk.17.2016.01.21.20.47.46
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 21 Jan 2016 20:47:46 -0800 (PST)
+From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <56A071BB.6070608@mlbassoc.com>
-	<1B858668EC6A94408DCA5225FDFA85AA010C79ADFA@ALA-MBA.corp.ad.wrs.com>
-	<20160121094057.GA30584@mail.itconsulting-heinold.de>
-From: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <56A1A618.7030705@mlbassoc.com>
-Date: Fri, 22 Jan 2016 04:46:32 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
-MIME-Version: 1.0
-In-Reply-To: <20160121094057.GA30584@mail.itconsulting-heinold.de>
-Subject: Re: [meta-java] unversioned source files
+Date: Thu, 21 Jan 2016 20:47:41 -0800
+Message-Id: <1453438061-29267-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-multimedia][PATCH] gst-plugins-base: drop obsolete dependency on liboil
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,63 +52,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2016 03:46:33 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Jan 2016 04:47:48 -0000
 
-On 01/21/2016 10:41 AM, Henning Heinold wrote:
-> On Thu, Jan 21, 2016 at 09:08:35AM +0000, Huang, Jie (Jackie) wrote:
->>
->>
->>> -----Original Message-----
->>> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded-devel-
->>> bounces@lists.openembedded.org] On Behalf Of Gary Thomas
->>> Sent: Thursday, January 21, 2016 1:51 PM
->>> To: openembedded-devel@lists.openembedded.org
->>> Subject: [oe] [meta-java] unversioned source files
->>>
->>> I just built the latest openjdk-7 and noticed that there are
->>> a number of source files downloaded that have no version
->>> information:
->>>     sources/corba.tar.bz2
->>>     sources/hotspot.tar.bz2
->>>     sources/jaxp.tar.bz2
->>>     sources/jaxws.tar.bz2
->>>     sources/jdk.tar.bz2
->>>     sources/langtools.tar.bz2
->>>     sources/openjdk.tar.bz2
->>
->> The original download file doesn' t have version in the name:
->> http://icedtea.wildebeest.org/download/drops/icedtea7/2.7.0/corba.tar.bz2
->>
->>>
->>> This seems very problematic to me - how is this expected to work,
->>> especially when there are changes?
->>
->> Yeah, there is potential issue, we should fix it by using "downloadfilename"
->> in SRC_URI to rename those files.
->>
->
-> Okay,
->
-> but when we copy them into the buildir we must use the old name, because
-> icedtea/openjdk configure script checks for them and will download them itself if not found.
->
->> Thanks,
->> Jackie
->
-> Bye Henning
->
+liboil was replaced by Orc prior to the gst-plugins-base 0.10.30 release:
 
-Thinking about it, I'm not sure even these changes will really
-help, especially for local mirrors.
+  http://cgit.freedesktop.org/gstreamer/gst-plugins-base/commit/?id=8e4314f0fbfa4957f8e84d46824d10178b106fe6
 
-Hasn't this topic ever been discussed with the upstream?  It would
-seem very important!
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ .../recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
+index 8afc165..aa6b3a1 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+                     file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605 \
+                     file://gst/ffmpegcolorspace/utils.c;beginline=1;endline=20;md5=9c83a200b8e597b26ca29df20fc6ecd0"
+ 
+-DEPENDS += "alsa-lib liboil libogg libvorbis libtheora util-linux tremor glib-2.0-native"
++DEPENDS += "alsa-lib libogg libvorbis libtheora util-linux tremor glib-2.0-native"
+ 
+ SRC_URI += "file://gst-plugins-base-tremor.patch \
+             file://configure.ac-fix-subparse-plugin.patch \
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.9.1
+
 
