@@ -1,54 +1,52 @@
-Return-Path: <mbc@koumoul.net>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 17ADA738AE
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 946B460043
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 14:47:55 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id u188so18228420wmu.0
+	Fri, 22 Jan 2016 14:54:51 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id b14so136186004wmb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 06:47:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=4vxaQ2wd6bChKL0NSj7EYY9KRjre+mmkysFRlCjHwPs=;
-	b=YYseUopAdaDIJl4OZ0Heg9nFtjqUNZOkY9rLMHNkql64BpWir5anm5vTbyJPmtCFKt
-	wklG/jEA2uTuPXXlJRWZNnHAE6KhXiXyEIR2oV2LJaHF+vjbhnBZN70pmCcm/FJc5OQH
-	RanJhPVMNF8/D6dzUFOS4gdAy2z7inN1AsaoQ=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=iot-bzh.20150623.gappssmtp.com; s=20150623;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=4vxaQ2wd6bChKL0NSj7EYY9KRjre+mmkysFRlCjHwPs=;
-	b=imPHYtXxaFOgN37kgv9Mh0mlmuu8kb1YeMl/D7MYxK1NZg9RGJivCzkqRBwJzTYvlt
-	YscdK1UMFjh0OO/yLlOfQ9dqo3cZyMl4sjM5ZgPjhqANCcz9nqtY9Vv9agAc5Lozpn8k
-	SmXqx5x9JI7Em43CxYPD2swKkgj5x53qI+5O4PqVlUsAUq+mqs9Jt34pGy4UiDydm545
-	9QWyxc2+8W2m8rCtGJmjdC1TZkdjd7zZvJfSsu0esrtWeIu7JN03WAmzf545wucuIUdW
-	l55ONUfOBumCxEbC7kbcbTKFeQ+BS+pOx9hb9YTdEj9UHA7RDEOujwyFF2ZjtwimeH3X
-	CSOg==
+	Fri, 22 Jan 2016 06:54:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:content-type:mime-version:content-transfer-encoding;
+	bh=EEdXILlUoU/i+WoqbYgdXX71vPMVNQv+jNN6Tqaeb8Q=;
+	b=gTYpakeHYBzV2KTVNhIt5Sz4ctdRUH9dr7rxu69h4BVagSj5qpgtVrSU50svYDao6o
+	A5k0phpT/WWf71O887r0+OiJlgBcDxDING2kF7/cJbf/NoZrcS8sqpwmdEtvmOcMkuEA
+	JEFpHKb+Hs+RI+yNojUYln9h988dnBixIDWIa0bWx04i7LoEcL+tJkW2Nype3V962hVA
+	nBLeJ7H4GJX/N6H4nboYqbSJUau3xyprx25PjxDZVzH2RvbA1TEa9LGKPLVsaQ8u8YD/
+	hbhIyMam26v5CB/O9nJP8wEBw/a9hgvNeG86WR8m+t6ZToX2x2poz1UvDGdFuKQr4iWf
+	cbLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=4vxaQ2wd6bChKL0NSj7EYY9KRjre+mmkysFRlCjHwPs=;
-	b=AosUcUjwxNwEYGMmX0iuYCU7nv1FkOnPBGv4ur5oFTbbSzcqKRlEiVNX3zCHzEkdL4
-	G91u/n0vxbsad/oIwpOmhpuEeuraoRjmO3GCgij9OaYjxBPIt+9lm1Q6h/lzFW0IdcEs
-	96jwRZ+227xfhCHsTj2UaE/3CRZC1LuGK/llXDVuhjtDRaAvTEuVyBEqpY7mJ34kawxl
-	ZckUTabNnsnFcCUF9pM9C9/bBJ4m45u0P3ZW4mEl2dikdDXeW9HNdLN9fmP1EKzFyvnY
-	XHMIVJ8pUOXE8/7DSBYhke49el+0UGhmLn5SJQ4P4RBVIoDMrvBdxKIh9asnix3fJ85m
-	5U7w==
-X-Gm-Message-State: AG10YOSqzV86Bc8bNDsLmi+xsCbTUeyxZ9h6I5BlMDZlvOgJ+gL4jDK/JP+JTrMvTMOB0w==
-X-Received: by 10.194.104.38 with SMTP id gb6mr4175344wjb.22.1453474075606;
-	Fri, 22 Jan 2016 06:47:55 -0800 (PST)
-Received: from localhost.localdomain
-	(ARennes-655-1-69-63.w109-218.abo.wanadoo.fr. [109.218.244.63])
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:content-type:mime-version:content-transfer-encoding;
+	bh=EEdXILlUoU/i+WoqbYgdXX71vPMVNQv+jNN6Tqaeb8Q=;
+	b=jnIvcufnp0pWTB3ZHAKjA1MmFawMysWjLvp3adyNni+xs7Zc1viHl6yxdL6f2/CX1p
+	4pb7FgaoNSLP0wMBn1eWYDaLnrINMeGALAkdOvnrITUYEv43UTz/QB8LDzOqpkiN61qd
+	B+5Vu+48bDt7CMZ4Lf/aWG90mt1CadiThNmOQwg8ODaj2vp0rykLta3unvAhuulAyr8C
+	n7WIlqaVcnYOSE/+GUZHfcP99EW2Dr6uh5i4GXixG9GPHmQ4z0h/9lnnpwzly50OMQnG
+	NHMOHgZt77QpyUmGHM7G4uzAklaXsFDgL9YoINoMuyNHalhcFqlZdVRKZk+Bp780TKGk
+	zk0A==
+X-Gm-Message-State: AG10YOQPGjlGkTLIlx4GYZ+WoZYD/gHTdXvKp8dWpnpqXux+3Ft1dQtOFD8C1OBnxa7AKA==
+X-Received: by 10.28.215.136 with SMTP id o130mr3935003wmg.33.1453474491064;
+	Fri, 22 Jan 2016 06:54:51 -0800 (PST)
+Received: from minint-s4ms3ka.neratec.local (mail.neratec.com. [46.140.151.2])
 	by smtp.gmail.com with ESMTPSA id
-	x189sm7576743wmg.1.2016.01.22.06.47.54
+	gb9sm6266542wjb.26.2016.01.22.06.54.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 22 Jan 2016 06:47:55 -0800 (PST)
-Sender: "Manuel Bachmann [ IoT.bzh ]" <mbc@koumoul.net>
-From: Manuel Bachmann <manuel.bachmann@iot.bzh>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Jan 2016 15:51:41 +0100
-Message-Id: <1453474301-26578-1-git-send-email-manuel.bachmann@iot.bzh>
-X-Mailer: git-send-email 1.8.3.1
-Cc: Manuel Bachmann <mbc@iot.bzh>
-Subject: [PATCH 2/2][meta-multimedia] rygel: Update to 0.28.2
+	Fri, 22 Jan 2016 06:54:50 -0800 (PST)
+Message-ID: <1453474488.2577.220.camel@gmail.com>
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
+To: martin.jansa@gmail.com
+Date: Fri, 22 Jan 2016 15:54:48 +0100
+In-Reply-To: <CA+chaQdhrn9CcNXTde4ULwSodhsN+ajFZGXuY_wkSOcq-MUf+Q@mail.gmail.com>
+References: <1453368103-1800-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	<1453450077.2577.16.camel@gmail.com>
+	<CA+chaQdhrn9CcNXTde4ULwSodhsN+ajFZGXuY_wkSOcq-MUf+Q@mail.gmail.com>
+X-Mailer: Evolution 3.18.3 (3.18.3-1.fc23) 
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] networkmanager: Warning Fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,156 +59,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2016 14:47:56 -0000
+X-List-Received-Date: Fri, 22 Jan 2016 14:54:52 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-From: Manuel Bachmann <mbc@iot.bzh>
+Hi Martin,
 
-Update to latest version. This mainly fixes file uploading,
-which did not work in previous version (see upstream commit
-"1d45866a3fd7ca47bdbea60156bd18b994710662" among others).
+Thank you for the response. But it is confusing to me...
+Networkmanager is always built with nmtui enabled, and we split it into package networkmanager-nmtui:
+EXTRA_OECONF = \
+    ...
+    --with-nmtui=yes \
+"
+PACKAGES =+ "... ${PN}-nmtui"
+FILES_${PN}-nmtui = " ...
 
-Rygel will not keep running anymore when its "plugins"
-folder is absent or empty. Thus, to avoid disappointments,
-we now RRECOMMEND at least the "media-export" plugin.
+I guess an additional package option for --with-nmtui does not fit. Either we have a compile time option or a package split.
 
-Signed-off-by: Manuel Bachmann <mbc@iot.bzh>
----
- .../recipes-connectivity/rygel/rygel_0.26.1.bb     |   58 -------------------
- .../recipes-connectivity/rygel/rygel_0.28.2.bb     |   59 ++++++++++++++++++++
- 2 files changed, 59 insertions(+), 58 deletions(-)
- delete mode 100644 meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
- create mode 100644 meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb
+Regarding rdepends:
+Since libnewt is already listed as a build dependency pkgconfig automatically creates the correct rdepends:
+ - libnewt is a runntime dependency of networkmanager-nmtui
+ - networkmanager itself does not rdepend on it.
+This is exatly what I expect. There is no need to force rdepends at all.
 
-diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
-deleted file mode 100644
-index af3f2be..0000000
---- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.26.1.bb
-+++ /dev/null
-@@ -1,58 +0,0 @@
--SUMMARY = "A UPnP AV media server and renderer"
--DESCRIPTION = "Rygel is a home media solution (UPnP AV MediaServer) that \
--allow you to easily share audio, video and pictures to other devices. \
--Additionally, media player software may use Rygel to become a MediaRenderer \
--that may be controlled remotely by a UPnP or DLNA Controller."
--HOMEPAGE = "http://live.gnome.org/Rygel"
--
--LICENSE = "LGPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
--                    file://src/rygel/rygel-main.vala;endline=25;md5=a4cce4d389da1c1638fe68d07ae9d811"
--
--DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 libmediaart-2.0"
--RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
--
--GNOME_COMPRESS_TYPE = "xz"
--SRC_URI[archive.md5sum] = "f182d54913a528bb5b4fb2f291aca0fc"
--SRC_URI[archive.sha256sum] = "390740609e34399b886ddb9a8f7eca25055ad72048dfdd869edf02999b1e1d8f"
--
--inherit gnomebase vala
--
--EXTRA_OECONF = "--disable-introspection --disable-tracker-plugin --with-media-engine=gstreamer"
--
--PACKAGECONFIG ?= "external mpris mediathek ruih media-export gst-launch gtk+3"
--PACKAGECONFIG[external] = "--enable-external-plugin,--disable-external-plugin"
--PACKAGECONFIG[mpris] = "--enable-mpris-plugin,--disable-mpris-plugin"
--PACKAGECONFIG[mediathek] = "--enable-mediathek-plugin,--disable-mediathek-plugin"
--PACKAGECONFIG[ruih] = "--enable-ruih-plugin,--disable-ruih-plugin"
--PACKAGECONFIG[media-export] = "--enable-media-export-plugin,--disable-media-export-plugin,sqlite3"
--PACKAGECONFIG[gst-launch] = "--enable-gst-launch-plugin,--disable-gst-launch-plugin"
--PACKAGECONFIG[gtk+3] = ",--without-ui,gtk+3"
--
--LIBV = "2.6"
--
--do_install_append() {
--       # Remove .la files for loadable modules
--       rm -f ${D}/${libdir}/rygel-${LIBV}/engines/*.la
--       rm -f ${D}/${libdir}/rygel-${LIBV}/plugins/*.la
--}
--
--FILES_${PN} += "${libdir}/rygel-${LIBV}/engines ${datadir}/dbus-1 ${datadir}/icons"
--FILES_${PN}-dbg += "${libdir}/rygel-${LIBV}/engines/.debug ${libdir}/rygel-${LIBV}/plugins/.debug"
--
--PACKAGES += "${PN}-meta"
--ALLOW_EMPTY_${PN}-meta = "1"
--
--PACKAGES_DYNAMIC = "${PN}-plugin-*"
--
--python populate_packages_prepend () {
--    rygel_libdir = d.expand('${libdir}/rygel-${LIBV}')
--    postinst = d.getVar('plugin_postinst', True)
--    pkgs = []
--
--    pkgs += do_split_packages(d, oe.path.join(rygel_libdir, "plugins"), 'librygel-(.*)\.so$', d.expand('${PN}-plugin-%s'), 'Rygel plugin for %s', postinst=postinst, extra_depends=d.expand('${PN}'))
--    pkgs += do_split_packages(d, oe.path.join(rygel_libdir, "plugins"), '(.*)\.plugin$', d.expand('${PN}-plugin-%s'), 'Rygel plugin for %s', postinst=postinst, extra_depends=d.expand('${PN}'))
--
--    metapkg = d.getVar('PN', True) + '-meta'
--    d.setVar('RDEPENDS_' + metapkg, ' '.join(pkgs))
--}
-diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb
-new file mode 100644
-index 0000000..f1c47a0
---- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb
-@@ -0,0 +1,59 @@
-+SUMMARY = "A UPnP AV media server and renderer"
-+DESCRIPTION = "Rygel is a home media solution (UPnP AV MediaServer) that \
-+allow you to easily share audio, video and pictures to other devices. \
-+Additionally, media player software may use Rygel to become a MediaRenderer \
-+that may be controlled remotely by a UPnP or DLNA Controller."
-+HOMEPAGE = "http://live.gnome.org/Rygel"
-+
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-+                    file://src/rygel/rygel-main.vala;endline=27;md5=99324118da4c012d25edae2f779ae9b3"
-+
-+DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 libmediaart-2.0"
-+RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
-+RRECOMMENDS_${PN} = "rygel-plugin-media-export"
-+
-+GNOME_COMPRESS_TYPE = "xz"
-+SRC_URI[archive.md5sum] = "9fbe4fb53b6cfa2f3f3723b7649a2215"
-+SRC_URI[archive.sha256sum] = "9ea23df7186caac5f1aad3137edf6d507d339b9a469fc3133df4043fa66b61f5"
-+
-+inherit gnomebase vala
-+
-+EXTRA_OECONF = "--disable-introspection --disable-tracker-plugin --with-media-engine=gstreamer"
-+
-+PACKAGECONFIG ?= "external mpris mediathek ruih media-export gst-launch gtk+3"
-+PACKAGECONFIG[external] = "--enable-external-plugin,--disable-external-plugin"
-+PACKAGECONFIG[mpris] = "--enable-mpris-plugin,--disable-mpris-plugin"
-+PACKAGECONFIG[mediathek] = "--enable-mediathek-plugin,--disable-mediathek-plugin"
-+PACKAGECONFIG[ruih] = "--enable-ruih-plugin,--disable-ruih-plugin"
-+PACKAGECONFIG[media-export] = "--enable-media-export-plugin,--disable-media-export-plugin,sqlite3"
-+PACKAGECONFIG[gst-launch] = "--enable-gst-launch-plugin,--disable-gst-launch-plugin"
-+PACKAGECONFIG[gtk+3] = ",--without-ui,gtk+3"
-+
-+LIBV = "2.6"
-+
-+do_install_append() {
-+       # Remove .la files for loadable modules
-+       rm -f ${D}/${libdir}/rygel-${LIBV}/engines/*.la
-+       rm -f ${D}/${libdir}/rygel-${LIBV}/plugins/*.la
-+}
-+
-+FILES_${PN} += "${libdir}/rygel-${LIBV}/engines ${datadir}/dbus-1 ${datadir}/icons"
-+FILES_${PN}-dbg += "${libdir}/rygel-${LIBV}/engines/.debug ${libdir}/rygel-${LIBV}/plugins/.debug"
-+
-+PACKAGES += "${PN}-meta"
-+ALLOW_EMPTY_${PN}-meta = "1"
-+
-+PACKAGES_DYNAMIC = "${PN}-plugin-*"
-+
-+python populate_packages_prepend () {
-+    rygel_libdir = d.expand('${libdir}/rygel-${LIBV}')
-+    postinst = d.getVar('plugin_postinst', True)
-+    pkgs = []
-+
-+    pkgs += do_split_packages(d, oe.path.join(rygel_libdir, "plugins"), 'librygel-(.*)\.so$', d.expand('${PN}-plugin-%s'), 'Rygel plugin for %s', postinst=postinst, extra_depends=d.expand('${PN}'))
-+    pkgs += do_split_packages(d, oe.path.join(rygel_libdir, "plugins"), '(.*)\.plugin$', d.expand('${PN}-plugin-%s'), 'Rygel plugin for %s', postinst=postinst, extra_depends=d.expand('${PN}'))
-+
-+    metapkg = d.getVar('PN', True) + '-meta'
-+    d.setVar('RDEPENDS_' + metapkg, ' '.join(pkgs))
-+}
--- 
-1.7.10.4
+Again: I'm on jethro and I cannot see this warning.
+What are we going to fix with this patch?
 
+Please give me a hint, I cannot understand it.
+Regards,
+Adrian
+
+
+
+On Fri, 2016-01-22 at 09:26 +0100, Martin Jansa wrote:
+> It is correct approach to fix it.
+> 
+> This isn't:
+> RDEPENDS_${PN}-nmtui += "libnewt"
+> 
+> On Fri, Jan 22, 2016 at 9:07 AM, Adrian Freihofer <
+> adrian.freihofer@gmail.com> wrote:
+> 
+> > Hi
+> > 
+> > This is not the right approach to fix this warning.
+> > Please try something like this:
+> > RDEPENDS_${PN}-nmtui += "libnewt"
+> > 
+> > Notes:
+> > - I never saw this warning.
+> > - I would expect that pkgconfig does this automatically.
+> > 
+> > Regards,
+> > Adrian
+> > 
+> > On Thu, 2016-01-21 at 12:21 +0300, Li Xin wrote:
+> > > WARNING: QA Issue: networkmanager rdepends on libnewt, but it isn't a
+> > build dependency? [build-deps]
+> > > 
+> > > Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> > > ---
+> > >  meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb |
+> > 1 +
+> > >  1 file changed, 1 insertion(+)
+> > > 
+> > > diff --git a/meta-oe/recipes-connectivity/networkmanager/
+> > networkmanager_1.0.6.bb b/meta-oe/recipes-
+> > > connectivity/networkmanager/networkmanager_1.0.6.bb
+> > > index 1ddb66f..72b4e46 100644
+> > > --- a/meta-oe/recipes-connectivity/networkmanager/
+> > networkmanager_1.0.6.bb
+> > > +++ b/meta-oe/recipes-connectivity/networkmanager/
+> > networkmanager_1.0.6.bb
+> > > @@ -56,6 +56,7 @@ PACKAGECONFIG[wifi] =
+> > "--enable-wifi=yes,--enable-wifi=no,wireless-tools,wpa-sup
+> > >  PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
+> > >  PACKAGECONFIG[netconfig] = "--with-netconfig=yes,--with-netconfig=no"
+> > >  PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
+> > > +PACKAGECONFIG[libnewt] = "--with-nmtui=yes,--with-nmtui=no,libnewt"
+> > > 
+> > >  PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests
+> > ${PN}-bash-completion \
+> > >    ${PN}-nmtui ${PN}-nmtui-doc \
+> > > --
+> > > 1.8.4.2
+> > > 
+> > > 
+> > > 
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > 
 
