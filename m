@@ -1,29 +1,50 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id DB3B1731C7
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 47BFB6067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2016 06:47:41 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga104.fm.intel.com with ESMTP; 21 Jan 2016 22:47:42 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,329,1449561600"; d="scan'208";a="638793656"
-Received: from unknown (HELO peggleto-mobl.ger.corp.intel.com)
-	([10.255.181.236])
-	by FMSMGA003.fm.intel.com with ESMTP; 21 Jan 2016 22:47:37 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Koen Kooi <koen.kooi@linaro.org>
-Date: Fri, 22 Jan 2016 19:47:32 +1300
-Message-ID: <2543304.UfifDR9ESj@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.10 (Linux/4.3.3-300.fc23.x86_64; KDE/4.14.14; x86_64; ;
-	)
-In-Reply-To: <CAP0W-RkLN7KfOQdKfFUJ+gc7S5mkrrXuU5i9Bf7ox-COmdgaMg@mail.gmail.com>
-References: <1453376040-25632-1-git-send-email-koen.kooi@linaro.org>
-	<4721149.thKUQa4jfA@peggleto-mobl.ger.corp.intel.com>
-	<CAP0W-RkLN7KfOQdKfFUJ+gc7S5mkrrXuU5i9Bf7ox-COmdgaMg@mail.gmail.com>
-MIME-Version: 1.0
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] various: delete leftovers from qt4 recipes that break parsing due to missing classes
+	Fri, 22 Jan 2016 08:08:00 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id b14so118980139wmb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Jan 2016 00:08:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:content-type:mime-version:content-transfer-encoding;
+	bh=14HgXMOv5uJPWFjqM9rcWy6hLkL1tXdXJqLnmoetyfY=;
+	b=TzIxZ8z02KswaYzz77WwhJF5nDBstlNC05rECRUZnC7DhEWpR95+UvVfqviiWZb7ER
+	M37Qb9vPuvP3vvkTaNmfUfUU65kWd3coxPIvEBs3wZda6aWFLsFXOY/3oilfIxLw9g/H
+	CSpB0nSJQRPYeIG+UKTytEoEPkJLMXj4Vl5NLV3wgh6maz7u/A39sj4C7W/pjnS1HvqC
+	JgaGwG/JThJAXQsGCvLhRMg27Xayhy8aQfGWCm6J7qIeSPcF38PZb1MQPaB1T1CqSdMu
+	oeVJUbfwDRKSi/qaN5NfgGHIhOMqdQlu5S2J7gZkBTzpOoH8zFbkOQsn0uz2npSlvfL5
+	35PA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:content-type:mime-version:content-transfer-encoding;
+	bh=14HgXMOv5uJPWFjqM9rcWy6hLkL1tXdXJqLnmoetyfY=;
+	b=c5qCnOqZnw/evbizuiU7fbKJSTE1Not7oz3NF+OlHmHxiUpc1KVcg9gbNARJeF5ZLO
+	zdhltqqpcXokvv6WTNpRLFFgphpsE9EepGHES2JG3h9jC0ltEwSlFSVfcdSSI3EIGuVs
+	SSxad39LGhNGLNl256HmW31Uasaea/zv+HszhSOlhUk8kxhbqjuKe50i+3Y7qZn8tOBm
+	CUZDgWAwAadZyDQYR3eRbo8oFsWImg1ZliknRzesYA249m1uEopokdBpgvLDxLfKg+2r
+	Pwe0eQ5NnAhoGIDROpAG0Es7xPn48nLB1qF/Ngci4yqy9OShCxQ+MnQobx0RGVWVMY3L
+	kHhQ==
+X-Gm-Message-State: AG10YORrYv5POvQMzB2xTWr3cioeh2HPuOuPOiCR1GfsRGqeuxV9VAEKPTyj2wczaWikzA==
+X-Received: by 10.28.216.134 with SMTP id p128mr1874263wmg.59.1453450080071;
+	Fri, 22 Jan 2016 00:08:00 -0800 (PST)
+Received: from minint-s4ms3ka.neratec.local (mail.neratec.com. [46.140.151.2])
+	by smtp.gmail.com with ESMTPSA id
+	u69sm1745739wmu.20.2016.01.22.00.07.58
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 22 Jan 2016 00:07:58 -0800 (PST)
+Message-ID: <1453450077.2577.16.camel@gmail.com>
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
+To: lixin.fnst@cn.fujitsu.com
+Date: Fri, 22 Jan 2016 09:07:57 +0100
+In-Reply-To: <1453368103-1800-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+References: <1453368103-1800-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: Evolution 3.18.3 (3.18.3-1.fc23) 
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] networkmanager: Warning Fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,47 +57,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2016 06:47:45 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 22 Jan 2016 08:08:02 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Fri, 22 Jan 2016 06:57:27 Koen Kooi wrote:
-> On 21 January 2016 at 19:25, Paul Eggleton
+Hi
+
+This is not the right approach to fix this warning.
+Please try something like this:
+RDEPENDS_${PN}-nmtui += "libnewt"
+
+Notes:
+- I never saw this warning.
+- I would expect that pkgconfig does this automatically.
+
+Regards,
+Adrian
+
+On Thu, 2016-01-21 at 12:21 +0300, Li Xin wrote:
+> WARNING: QA Issue: networkmanager rdepends on libnewt, but it isn't a build dependency? [build-deps]
 > 
-> <paul.eggleton@linux.intel.com> wrote:
-> > On Thu, 21 Jan 2016 12:34:00 Koen Kooi wrote:
-> >> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
-> >> ---
-> >> 
-> >>  ...erinterface.cpp-add-sys-socket.h-as-inclu.patch |  41 ---
-> >>  .../0002-qconsole-writethread-gcc-4.5-fixes.patch  |  40 ---
-> >>  .../qcanobserver/qcanobserver/candemo.xml          |  40 ---
-> >>  .../qt-creator/fix.missing.cpuid.h.patch           | 384
-> >> 
-> >> --------------------- .../qt-creator/qbs_transformer_product.patch      
-> >> |
-> >> 93 -----
-> >> 
-> >>  meta-oe/recipes-qt/qtserialport/qtserialport.inc   |  48 ---
-> >>  6 files changed, 646 deletions(-)
-> > 
-> > Not that we wouldn't want to remove these, but how were you getting parse
-> > issues just by these files being present? None of them would be noticed by
-> > BitBake unless they were explicitly included.
+> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> ---
+>  meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> I wasn't getting parse errors with the files present, this is just a
-> result of rebasing my patch against Martins version. The subject line
-> might need some parens, though it should read as:
+> diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb b/meta-oe/recipes-
+> connectivity/networkmanager/networkmanager_1.0.6.bb
+> index 1ddb66f..72b4e46 100644
+> --- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
+> +++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.6.bb
+> @@ -56,6 +56,7 @@ PACKAGECONFIG[wifi] = "--enable-wifi=yes,--enable-wifi=no,wireless-tools,wpa-sup
+>  PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
+>  PACKAGECONFIG[netconfig] = "--with-netconfig=yes,--with-netconfig=no"
+>  PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
+> +PACKAGECONFIG[libnewt] = "--with-nmtui=yes,--with-nmtui=no,libnewt"
+>  
+>  PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-completion \
+>    ${PN}-nmtui ${PN}-nmtui-doc \
+> -- 
+> 1.8.4.2
 > 
->      leftovers from (qt4 recipes that break parsing)
-
-Ah, I see - I misread, thanks for the clarification :)
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+> 
+> 
 
