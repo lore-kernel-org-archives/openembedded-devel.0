@@ -1,42 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f67.google.com (mail-qg0-f67.google.com
-	[209.85.192.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 20D3E770C6
+Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
+	[209.85.220.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 72492770C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jan 2016 13:18:07 +0000 (UTC)
-Received: by mail-qg0-f67.google.com with SMTP id o11so8407610qge.0
+	Sun, 24 Jan 2016 13:19:56 +0000 (UTC)
+Received: by mail-qk0-f174.google.com with SMTP id x1so45587795qkc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jan 2016 05:18:08 -0800 (PST)
+	Sun, 24 Jan 2016 05:19:57 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:in-reply-to:references;
-	bh=njHvwblbOvK52uND8S1cihkqdhRaBE492pWuQHfgAII=;
-	b=lGpT2HUwLlwdddBVNHuU8eOjcOa/ZFI7ukMxGIL8JH0mUzIdOl9zKPMPQg+/zBxBKm
-	7yOBAvGRaVg55QP2/iiA752fKxUOKFKz9OqwFB/IIVr05ch2IyWwQXrmnZO45v4DA1BZ
-	VmzoilW3Crbp/kjtDvHtCf9IwdtxA3txPHdlBj8A/S4/iG7pJ7+8P4kn8zijx0xI/tt0
-	0Anvzu/tfNI+7LoDRNMcC0ndpQI+XVfZ4omc1cPv7YfxfkfYFd1WfafrUWccnCqAwgzS
-	wfuL9WEjJJLNnLXuCLzaVirS1SbZisJZ7d6tKQW9tdAKo7XP3dhRfkCPKjRHi+L86d8N
-	eBmw==
-X-Gm-Message-State: AG10YOTCHdDoGnK0q+0dxs6Q0CZX5I/mfSaurXF98DJCAe+hMKfgntHp/IYecVTRrlPVUQ==
-X-Received: by 10.140.104.146 with SMTP id a18mr14955345qgf.59.1453641487945; 
-	Sun, 24 Jan 2016 05:18:07 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=0dsFvRxAb9sh75KS4C7ha8aVmG8gQSs1ZoRAOTXjq78=;
+	b=hAN3kE862o/T7IYm+yBu+y2LKKhh6mjgFFmcSg/Iq7O8o4XUlYGofl2Wr/ygkMIvul
+	3OIb7Gbe1G4hK7n1DYVg9zGRqdzf2qg3D8t0LhUxr95VObtP0AUTqqryAxmH/EmxC+kb
+	dY3T+Yzvoha6uIF/DBpoBOSp/dXY4nJfMwb2BrGlFGn9mQdb04t8Is1MZ7ASAHJUH0kp
+	rMptaP5R5i3VLHcNKrYUyUT+E5t8HJRgI0GMJEJ/+IV3OGi6OBZhFxvSFXeROtIOa3by
+	fEYeflGASZgrX+DxOgZAoZ/bpwpw6xn5QD2EAh7epRkC/W9QRxASExKQW+kqHDwRYWCC
+	bu7Q==
+X-Gm-Message-State: AG10YORJn+jqkIvKaSpvVhBio5QrISxNM2swnw6wmYltD62/tDu4i/Oe9qlsErUIq2+8+w==
+X-Received: by 10.55.16.160 with SMTP id 32mr8973931qkq.45.1453641596779;
+	Sun, 24 Jan 2016 05:19:56 -0800 (PST)
 Received: from build-slave.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	d188sm6865927qkb.9.2016.01.24.05.18.07
-	for <openembedded-devel@lists.openembedded.org>
+	w145sm6798357qhw.36.2016.01.24.05.19.56
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 24 Jan 2016 05:18:07 -0800 (PST)
+	Sun, 24 Jan 2016 05:19:56 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 24 Jan 2016 08:17:46 -0500
-Message-Id: <347b26573030e61fd3ba63e0fe971be4c1ef08b6.1453589999.git.derek@asterius.io>
+Date: Sun, 24 Jan 2016 08:19:44 -0500
+Message-Id: <1453641584-1855-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <cover.1453589999.git.derek@asterius.io>
-References: <cover.1453589999.git.derek@asterius.io>
-In-Reply-To: <cover.1453589999.git.derek@asterius.io>
-References: <cover.1453589999.git.derek@asterius.io>
-Subject: [meta-python][PATCH 13/13] python-flufl-enum: update to 4.1
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-webserver][PATCH] nginx: update to 1.9.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,35 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jan 2016 13:18:07 -0000
+X-List-Received-Date: Sun, 24 Jan 2016 13:19:56 -0000
 
 ---
- .../python/{python-flufl-enum_4.0.1.bb => python-flufl-enum_4.1.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-flufl-enum_4.0.1.bb => python-flufl-enum_4.1.bb} (76%)
+ meta-webserver/recipes-httpd/nginx/{nginx_1.9.5.bb => nginx_1.9.9.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-httpd/nginx/{nginx_1.9.5.bb => nginx_1.9.9.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb b/meta-python/recipes-devtools/python/python-flufl-enum_4.1.bb
-similarity index 76%
-rename from meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
-rename to meta-python/recipes-devtools/python/python-flufl-enum_4.1.bb
-index 458d244..bafa1f7 100644
---- a/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python-flufl-enum_4.1.bb
-@@ -4,12 +4,12 @@ specific, concise semantics in an easy to read and write syntax. flufl.enum has
- features needed to make enumerations useful, but without a lot of extra baggage to weigh them down. "
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.9.5.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.9.9.bb
+similarity index 96%
+rename from meta-webserver/recipes-httpd/nginx/nginx_1.9.5.bb
+rename to meta-webserver/recipes-httpd/nginx/nginx_1.9.9.bb
+index 87c953b..06d61c7 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.9.5.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.9.9.bb
+@@ -19,8 +19,8 @@ SRC_URI = " \
+ 	file://nginx-volatile.conf \
+ 	file://nginx.service \
+ "
+-SRC_URI[md5sum] = "2562320f1535e3e31d165e337ae94f21"
+-SRC_URI[sha256sum] = "48e2787a6b245277e37cb7c5a31b1549a0bbacf288aa4731baacf9eaacdb481b"
++SRC_URI[md5sum] = "50fdfa08e93ead7a111cba5a5f5735af"
++SRC_URI[sha256sum] = "de66bb2b11c82533aa5cb5ccc27cbce736ab87c9f2c761e5237cda0b00068d73"
  
- LICENSE = "LGPLv3"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1fa25baed15d3be23c902636379438e8"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=04363ba21b0f5ce3af8daa2e5aae431f"
- 
- PYPI_PACKAGE = "flufl.enum"
- 
--SRC_URI[md5sum] = "b3ad23761a78232bc78499ced7cb85d9"
--SRC_URI[sha256sum] = "4af7e7cf2dcc7517251570c7ef9ad194e30ee4b6f860eba500c03954ae95f9d8"
-+SRC_URI[md5sum] = "461779384c07ed2b5f554a5d51a000c4"
-+SRC_URI[sha256sum] = "94da1413ba085473652f81565847913ea1543d1739972ecbd6afe57d7b1b68b4"
- 
- inherit pypi setuptools
+ inherit update-rc.d useradd
  
 -- 
 1.9.1
