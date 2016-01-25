@@ -1,26 +1,24 @@
 Return-Path: <Zhenbo.Gao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id DC141731E6
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E9F7077112
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2016 08:55:03 +0000 (UTC)
+	Mon, 25 Jan 2016 08:55:02 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u0P8t4ou001060
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u0P8t2oj026895
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2016 00:55:04 -0800 (PST)
+	Mon, 25 Jan 2016 00:55:02 -0800
 Received: from pek-zgao-d1.corp.ad.wrs.com (128.224.162.191) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Mon, 25 Jan 2016 00:55:03 -0800
+	14.3.248.2; Mon, 25 Jan 2016 00:55:01 -0800
 From: Zhenbo Gao <zhenbo.gao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 25 Jan 2016 16:54:46 +0800
-Message-ID: <1453712086-16685-2-git-send-email-zhenbo.gao@windriver.com>
+Date: Mon, 25 Jan 2016 16:54:45 +0800
+Message-ID: <1453712086-16685-1-git-send-email-zhenbo.gao@windriver.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1453712086-16685-1-git-send-email-zhenbo.gao@windriver.com>
-References: <1453712086-16685-1-git-send-email-zhenbo.gao@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH] postfix: permission of /var/spool/mail seems incorrect
+Subject: [meta-networking] postfix: permission of /var/spool/mail seems incorrect
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,31 +34,22 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Mon, 25 Jan 2016 08:55:05 -0000
 Content-Type: text/plain
 
+Hi all,
+
+I am confused with the permission on /var/spool/mail of the postfix recipe, 
+why it is set to 2755?
+
 See the following output:
 root@qemu0:~# rpm -qlv postfix | grep /var/spool/mail
 drwxr-sr-x 2 postfix nogroup 0 Sep 8 08:46 /var/spool/mail
-The permission of /var/spool/mail "r-s" seems strange as it
-belongs to nogroup, modify it to 0755 as to the normal case.
 
-Signed-off-by: Zhenbo Gao <zhenbo.gao@windriver.com>
----
- meta-networking/recipes-daemons/postfix/postfix.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The premission of /var/spool/mail ("r-s") seems strange as it
+belongs to nogroup, i think it is better to modify it to 0755
+as to the normal case.
 
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index dc652d7..378310a 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -162,7 +162,7 @@ do_install () {
-     install -m 770 -d ${D}${localstatedir}/spool/postfix
-     chown postfix:postfix ${D}${localstatedir}/spool/postfix
- 
--    install -m 2755 -d ${D}${localstatedir}/spool/mail
-+    install -m 0755 -d ${D}${localstatedir}/spool/mail
-     chown postfix:nogroup ${D}${localstatedir}/spool/mail
-     install -m 0755 -d ${D}${localstatedir}/lib/postfix
-     chown postfix:nogroup ${D}${localstatedir}/lib/postfix
--- 
-1.9.1
+If so, the patch is offered.
+If not, Can you give some advice?
 
+Thanks,
+Zhenbo
 
