@@ -1,30 +1,24 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 3601 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 26 Jan 2016 05:09:32 UTC
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 65013731C8
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EFBEA7713F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jan 2016 05:09:32 +0000 (UTC)
-Received: from gandalf.denix.org ([100.15.86.14]) by vms173025.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPSA id <0O1J00FO5KVGIV00@vms173025.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	25 Jan 2016 22:09:17 -0600 (CST)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WpDWSorv c=1 sm=1 tr=0	a=xDJgBcBrK5EN9DJ6g74wNQ==:117
-	a=7aQ_Q-yQQ-AA:10 a=sozttTNsAAAA:8	a=64GYHyxuAAAA:8
-	a=G2WmJx3zI3nAsHGOhdMA:9 a=hekxwLru1oAA:10
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 8F83B161E08;	Mon,
-	25 Jan 2016 23:09:16 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Jan 2016 23:09:12 -0500
-Message-id: <1453781352-17590-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-oe][PATCH] memtester: upgrade 4.1.3 -> 4.3.0
+	Tue, 26 Jan 2016 05:58:49 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u0Q5wnK3019625
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Jan 2016 21:58:49 -0800 (PST)
+Received: from pek-jhuang0-d1.wrs.com (128.224.162.218) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Mon, 25 Jan 2016 21:58:48 -0800
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 26 Jan 2016 13:58:26 +0800
+Message-ID: <1453787906-16552-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [meta-java][PATCH] cacao: remove invalid configure options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,39 +31,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jan 2016 05:09:32 -0000
+X-List-Received-Date: Tue, 26 Jan 2016 05:58:52 -0000
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+These configure options are invalid:
+--with-classpath-libdir
+--with-classpath-classes
+--with-classpath-includedir
+
+They had been replaced by:
+--with-java-runtime-library-libdir
+--with-java-runtime-library-classes
+--with-jni_h and --with-jni_md_h
+
+Remove them to avoid QA Issue:
+WARNING: QA Issue: cacao-native: configure was passed unrecognised
+options: --with-classpath-libdir --with-classpath-includedir
+--with-classpath-classes [unknown-configure-option]
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../memtester/{memtester_4.1.3.bb => memtester_4.3.0.bb}            | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-benchmark/memtester/{memtester_4.1.3.bb => memtester_4.3.0.bb} (71%)
+ recipes-core/cacao/cacao_1.6.1.bb | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/meta-oe/recipes-benchmark/memtester/memtester_4.1.3.bb b/meta-oe/recipes-benchmark/memtester/memtester_4.3.0.bb
-similarity index 71%
-rename from meta-oe/recipes-benchmark/memtester/memtester_4.1.3.bb
-rename to meta-oe/recipes-benchmark/memtester/memtester_4.3.0.bb
-index 74e704b..0964c04 100644
---- a/meta-oe/recipes-benchmark/memtester/memtester_4.1.3.bb
-+++ b/meta-oe/recipes-benchmark/memtester/memtester_4.3.0.bb
-@@ -5,11 +5,11 @@ LICENSE = "GPLv2"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
--SRC_URI = "http://pyropus.ca/software/memtester/old-versions/memtester-${PV}.tar.gz"
-+SRC_URI = "http://pyropus.ca/software/memtester/old-versions/${BP}.tar.gz"
- SRC_URI += "file://Makefile.patch"
- 
--SRC_URI[md5sum] = "e562451620cf5343016950462bc0dc38"
--SRC_URI[sha256sum] = "ac56f0b6d6d6e58bcf2a3fa7f2c9b29894f5177871f21115a1906c535106acf6"
-+SRC_URI[md5sum] = "598f41b7308e1f736164bca3ab84ddbe"
-+SRC_URI[sha256sum] = "f9dfe2fd737c38fad6535bbab327da9a21f7ce4ea6f18c7b3339adef6bf5fd88"
- 
- do_compile () {
-     echo '${CC} ${CFLAGS} -DPOSIX -c' > conf-cc
+diff --git a/recipes-core/cacao/cacao_1.6.1.bb b/recipes-core/cacao/cacao_1.6.1.bb
+index 8e212af..83f216c 100644
+--- a/recipes-core/cacao/cacao_1.6.1.bb
++++ b/recipes-core/cacao/cacao_1.6.1.bb
+@@ -25,10 +25,6 @@ EXTRA_OECONF_class-native = "\
+     --with-vm-zip=${datadir}/cacao/vm.zip \
+     --disable-libjvm \
+     \
+-    --with-classpath-libdir=${libdir_jni}:${libdir} \
+-    --with-classpath-includedir=${includedir}/classpath \
+-    --with-classpath-classes=${datadir}/classpath/glibj.zip \
+-    \
+     --with-java-runtime-library-classes=${datadir}/classpath/glibj.zip \
+     --with-java-runtime-library-libdir=${libdir_jni}:${libdir} \
+     --with-jni_md_h=${includedir}/classpath \
 -- 
-2.2.0
+2.3.5
 
 
