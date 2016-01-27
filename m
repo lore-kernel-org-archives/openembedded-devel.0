@@ -1,54 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-yk0-f173.google.com (mail-yk0-f173.google.com
-	[209.85.160.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B7A662134;
-	Wed, 27 Jan 2016 05:30:30 +0000 (UTC)
-Received: by mail-yk0-f173.google.com with SMTP id a85so228605306ykb.1;
-	Tue, 26 Jan 2016 21:30:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=KlQfl/DX36c1UeHbI2fNAEZ32+2FeJj6mq389dqZ8gs=;
-	b=UKlTe6A0yiBpK1VZalDnBY0MU+JK43tLctgsrvWjYfH1kHbF1XJJIPT+U7I7au4t7e
-	PR+OAPMYuc3ToBX0sqxf90HhGD916mIJljCNyLq9nw8PEIv1sLvs+W5A+lY/8REN/H87
-	F+DJqPahhg0uEWZuJtnfSLUAapw921J1bnWhEyqN2QabIwDLAmhiX7B8qx0FjYFoIxCq
-	WcSlouPbWYVooHy8YWq7/uTfWmIC0lRDgf5mmP1ac3RqXqvDqh/TsxdorBuadxGCG8cW
-	dylKvDHFCiquGbnCHy2hoUgxvP/aMY9n4XoMo3RQT1mIwicv7rOv9+ZdGuDcrL6OehyB
-	MMig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:mime-version:content-type:from
-	:in-reply-to:date:cc:message-id:references:to;
-	bh=KlQfl/DX36c1UeHbI2fNAEZ32+2FeJj6mq389dqZ8gs=;
-	b=FQUqZuENKQQGcypPXFoyBtqnDmAZ/m/VbrqU/DUtf4MBP46nDdxV10j2QKP+ZCMD9+
-	CptOVRX8U1q8p5/eTKgPPZf33MGeCg9fK0Pi/pfAYHreE3jflkpsgFHCRrjll6q+HMH3
-	X8KE9lvh1ofqaOSKio6Y9OpqtHnbLUh22sBkx6O+VGwFkNvVQaAlCmm95h6lB9q4uPKS
-	ubgazC/8RIbNYX7iMVCmOikqgTvrfs6vMfIQDKiwsuMxbhvyni/cX+RLa+c5YYFiIsZW
-	x4vt3fmVzEagHuT4GOiDR+63VSAJb4w71W2INnc84l1mKwwn34X53nMdrsfx//zc83Bo
-	Z2QA==
-X-Gm-Message-State: AG10YORERaTR3hvfhYZzGjyRUu+rBWb/xnUv/CDTPXojVy37SCZXLmArZs1oSZwKr7S3LA==
-X-Received: by 10.37.4.146 with SMTP id 140mr14268902ybe.18.1453872631074;
-	Tue, 26 Jan 2016 21:30:31 -0800 (PST)
-Received: from ?IPv6:2600:1002:b014:c92e:ed2f:4d62:56d8:d791?
-	([2600:1002:b014:c92e:ed2f:4d62:56d8:d791])
-	by smtp.gmail.com with ESMTPSA id
-	m188sm3718858ywe.46.2016.01.26.21.30.29
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 26 Jan 2016 21:30:30 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <56A82765.30403@windriver.com>
-Date: Wed, 27 Jan 2016 00:30:26 -0500
-Message-Id: <C89DF346-CD9F-4CC5-A41A-8FCD4B87DD06@gmail.com>
-References: <2747032A-1F56-4CA6-860C-484B9292A0B5@gmail.com>
-	<56A82765.30403@windriver.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.3112)
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [RFT] Glibc 2.23 and binutils 2.26
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id CC50D731A8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Jan 2016 06:04:27 +0000 (UTC)
+Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
+	by relay1.mentorg.com with esmtp 
+	id 1aOJDP-0002pm-J0 from Joe_MacDonald@mentor.com ;
+	Tue, 26 Jan 2016 22:04:27 -0800
+Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
+	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 26 Jan 2016 22:04:27 -0800
+Received: by burninator (Postfix, from userid 1000)	id A0145580899; Tue, 26
+	Jan 2016 22:04:25 -0800 (PST)
+Date: Tue, 26 Jan 2016 22:04:25 -0800
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Stephen Arnold <sarnold@vctlabs.com>
+Message-ID: <20160127060425.GA4039@mentor.com>
+References: <1453858161-27358-1-git-send-email-sarnold@vctlabs.com>
+MIME-Version: 1.0
+In-Reply-To: <1453858161-27358-1-git-send-email-sarnold@vctlabs.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] net-snmp: fix cross-compile breakage, add libnl pkgconfig option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,85 +37,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2016 05:30:35 -0000
-X-Groupsio-MsgNum: 59712
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_A3BFF862-90CE-4BB9-BF9E-65F482525B46";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Wed, 27 Jan 2016 06:04:30 -0000
+X-Groupsio-MsgNum: 59713
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ew6BAiZeqk4r7MaW"
+Content-Disposition: inline
 
---Apple-Mail=_A3BFF862-90CE-4BB9-BF9E-65F482525B46
+--ew6BAiZeqk4r7MaW
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
 
+[[oe] [meta-networking][PATCH] net-snmp: fix cross-compile breakage, add li=
+bnl pkgconfig option] On 16.01.26 (Tue 17:29) Stephen Arnold wrote:
 
-> On Jan 26, 2016, at 9:11 PM, ChenQi <Qi.Chen@windriver.com> wrote:
+> From: Stephen Arnold <stephen.arnold42@gmail.com>
 >=20
-> On 01/17/2016 07:54 PM, Khem Raj wrote:
->> Hi all
->>=20
->> upstream glibc and binutils release branches have been cut out and =
-are being made ready for next release
->> I have put together update patchset for both of them
->>=20
->> here are the branches
->>=20
->> https://github.com/kraj/openembedded-core/tree/kraj/binutils-2.26
->> https://github.com/kraj/openembedded-core/tree/kraj/glibc-2.23
->>=20
->> FYI These are still using autorev to ensure that we test tip of =
-release branches
->>=20
->> Please give them a shot in your environments and report any issues =
-you encounter.
->>=20
->> Thanks for help
->>=20
->> -Khem
->>=20
->>=20
->>=20
->>=20
->>=20
+> This patch enhances a previously unapplied patch on jethro, plus adds
+> some flexibility in terms of required deps and a few cleanups.
 >=20
-> 0001-Generate-relocatable-SDKs.patch is included in SRC_URI twice, =
-which causes the following error when building binutils-crosssdk-XXX.
+> Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
+> ---
+>  meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 10 ++++++=
+++--
+>  1 file changed, 8 insertions(+), 2 deletions(-)
 >=20
-> ERROR: Command Error: exit status: 1  Output:
-> Patch 0001-Generate-relocatable-SDKs.patch is already applied; check =
-your series file
-> ERROR: Function failed: patch_do_patch
+> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb=
+ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+> index b32d842..93eb025 100644
+> --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+> @@ -27,7 +27,7 @@ SRC_URI[sha256sum] =3D "e8dfc79b6539b71a6ff335746ce63d2=
+da2239062ad41872fff4354cafe
+> =20
+>  inherit autotools update-rc.d siteinfo systemd pkgconfig
+> =20
+> -EXTRA_OEMAKE =3D "INSTALL_PREFIX=3D${D}"
+> +EXTRA_OEMAKE =3D "INSTALL_PREFIX=3D${D} OTHERLDFLAGS=3D'${LDFLAGS}' HOST=
+_CPPFLAGS=3D'${BUILD_CPPFLAGS}'"
+> =20
+>  PARALLEL_MAKE =3D ""
+>  CCACHE =3D ""
+> @@ -36,12 +36,13 @@ TARGET_CC_ARCH +=3D "${LDFLAGS}"
+> =20
+>  PACKAGECONFIG ??=3D ""
+>  PACKAGECONFIG[elfutils] =3D "--with-elf, --without-elf, elfutils"
+> +PACKAGECONFIG[libnl] =3D "--with-nl, --without-nl, libnl"
+> =20
+>  EXTRA_OECONF =3D "--disable-embedded-perl \
+>                  --with-perl-modules=3Dno \
+> -                --enable-shared \
+
+Why this change?
+
+-J.
+
+>                  --disable-manuals \
+>                  --with-defaults \
+> +                --with-install-prefix=3D${D} \
+>                  --with-persistent-directory=3D${localstatedir}/lib/net-s=
+nmp \
+>                  ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with=
+-endianness=3Dlittle', '--with-endianness=3Dbig', d)}"
+> =20
+> @@ -51,10 +52,15 @@ EXTRA_OECONF +=3D "--with-mib-modules=3Dsmux"
+>  CACHED_CONFIGUREVARS =3D " \
+>      ac_cv_header_valgrind_valgrind_h=3Dno \
+>      ac_cv_header_valgrind_memcheck_h=3Dno \
+> +    ac_cv_ETC_MNTTAB=3D/etc/mtab \
+> +    lt_cv_shlibpath_overrides_runpath=3Dyes \
+>  "
+> =20
+>  do_configure_prepend() {
+>      export PERLPROG=3D"${bindir}/env perl"
+> +    sed -i -e "s|I/usr/include|I${STAGING_INCDIR}|g" \
+> +        "${S}"/configure \
+> +        "${S}"/configure.d/config_os_libs2
+>  }
+> =20
+>  do_install_append() {
+> --=20
+> 2.6.4
 >=20
-> binutils-2.26.inc and binutils-crosssdk_2.26.bb both has this patch in =
-its SRC_RUI.
->=20
+--=20
+-Joe MacDonald.
+:wq
 
-Thanks for report. fixed and squashed into original commit in same =
-branch as above.
-
-> Regards,
-> Chen Qi
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---Apple-Mail=_A3BFF862-90CE-4BB9-BF9E-65F482525B46
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
+--ew6BAiZeqk4r7MaW
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
+Version: GnuPG v1
 
-iEYEARECAAYFAlaoVfYACgkQuwUzVZGdMxTquACfXlFjaTreb/TCI2OIIE974AjE
-khgAn1rgEUf/chKvp5ja0/BLV671sIyI
-=+8j8
+iQEcBAEBAgAGBQJWqF3lAAoJEEn8ffcsOfaWCToH/RUet+x3maQSd1lycJMXlKOX
+xfNyPVgl9z64TWvSAh8V0I3yhfBQMSjzgsma3Zz48YHYMsVykbFyEttE4RRbLS3M
+4HfoqY8VzsvOmEdcWAM+aV5JkHPxLqIJh45UclUVtx7UDcrX3WHhkDOK1xxOQGkC
+fRKoEJ07peLxjZh0gPFN7stiooeNnyvx7kn9LfnNPFI4fRcueLKHNqVEZ92u9xsy
+tvM4xTc4+fFFpNpFIahR8PO43cgLJWa9HFmzaV9QiVIlsHtNsxt2WU397GO4bROK
+I71Bv++t3GzPynraz3+ptoM63nnf1nGMO44oHEYGEqOrLBf4eA6yqxg2M5R4T+g=
+=Krw3
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_A3BFF862-90CE-4BB9-BF9E-65F482525B46--
+--ew6BAiZeqk4r7MaW--
