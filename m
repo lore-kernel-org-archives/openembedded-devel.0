@@ -1,30 +1,24 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id CC50D731A8
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 77A03770AB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jan 2016 06:04:27 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1aOJDP-0002pm-J0 from Joe_MacDonald@mentor.com ;
-	Tue, 26 Jan 2016 22:04:27 -0800
-Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
-	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 26 Jan 2016 22:04:27 -0800
-Received: by burninator (Postfix, from userid 1000)	id A0145580899; Tue, 26
-	Jan 2016 22:04:25 -0800 (PST)
-Date: Tue, 26 Jan 2016 22:04:25 -0800
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Stephen Arnold <sarnold@vctlabs.com>
-Message-ID: <20160127060425.GA4039@mentor.com>
-References: <1453858161-27358-1-git-send-email-sarnold@vctlabs.com>
+	Wed, 27 Jan 2016 06:32:12 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u0R6WChM030439
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Jan 2016 22:32:12 -0800
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Tue, 26 Jan 2016 22:32:11 -0800
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 27 Jan 2016 14:30:57 +0800
+Message-ID: <1453876257-30608-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.6.1
 MIME-Version: 1.0
-In-Reply-To: <1453858161-27358-1-git-send-email-sarnold@vctlabs.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] net-snmp: fix cross-compile breakage, add libnl pkgconfig option
+Subject: [meta-networking][PATCH] samba: update systemd service files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,106 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2016 06:04:30 -0000
-X-Groupsio-MsgNum: 59713
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ew6BAiZeqk4r7MaW"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 27 Jan 2016 06:32:14 -0000
+Content-Type: text/plain
 
---ew6BAiZeqk4r7MaW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Kai Kang <kai.kang@windriver.com>
 
-[[oe] [meta-networking][PATCH] net-snmp: fix cross-compile breakage, add li=
-bnl pkgconfig option] On 16.01.26 (Tue 17:29) Stephen Arnold wrote:
+Update systemd service files of samba. There are no '@BASE_BINDIR@' and
+'@SBINDIR@' in these service files, so drop the original replacement.
+Command kill is installed to /bin/kill, then correct in the service files.
 
-> From: Stephen Arnold <stephen.arnold42@gmail.com>
->=20
-> This patch enhances a previously unapplied patch on jethro, plus adds
-> some flexibility in terms of required deps and a few cleanups.
->=20
-> Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
-> ---
->  meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 10 ++++++=
-++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb=
- b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-> index b32d842..93eb025 100644
-> --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-> @@ -27,7 +27,7 @@ SRC_URI[sha256sum] =3D "e8dfc79b6539b71a6ff335746ce63d2=
-da2239062ad41872fff4354cafe
-> =20
->  inherit autotools update-rc.d siteinfo systemd pkgconfig
-> =20
-> -EXTRA_OEMAKE =3D "INSTALL_PREFIX=3D${D}"
-> +EXTRA_OEMAKE =3D "INSTALL_PREFIX=3D${D} OTHERLDFLAGS=3D'${LDFLAGS}' HOST=
-_CPPFLAGS=3D'${BUILD_CPPFLAGS}'"
-> =20
->  PARALLEL_MAKE =3D ""
->  CCACHE =3D ""
-> @@ -36,12 +36,13 @@ TARGET_CC_ARCH +=3D "${LDFLAGS}"
-> =20
->  PACKAGECONFIG ??=3D ""
->  PACKAGECONFIG[elfutils] =3D "--with-elf, --without-elf, elfutils"
-> +PACKAGECONFIG[libnl] =3D "--with-nl, --without-nl, libnl"
-> =20
->  EXTRA_OECONF =3D "--disable-embedded-perl \
->                  --with-perl-modules=3Dno \
-> -                --enable-shared \
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-networking/recipes-connectivity/samba/samba_4.1.12.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-Why this change?
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
+index a51d31f..2e3f118 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
+@@ -112,9 +112,7 @@ do_install_append() {
+         for i in nmb smb winbind; do
+             install -m 0644 packaging/systemd/$i.service ${D}${systemd_unitdir}/system
+         done
+-        sed -e 's,@BASE_BINDIR@,${base_bindir},g' \
+-            -e 's,@SBINDIR@,${sbindir},g' \
+-            -i ${D}${systemd_unitdir}/system/*.service
++        sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_unitdir}/system/*.service
+ 
+ 	install -d ${D}${sysconfdir}/tmpfiles.d
+ 	echo "d ${localstatedir}/log/samba 0755 root root -" \
+-- 
+2.6.1
 
--J.
 
->                  --disable-manuals \
->                  --with-defaults \
-> +                --with-install-prefix=3D${D} \
->                  --with-persistent-directory=3D${localstatedir}/lib/net-s=
-nmp \
->                  ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with=
--endianness=3Dlittle', '--with-endianness=3Dbig', d)}"
-> =20
-> @@ -51,10 +52,15 @@ EXTRA_OECONF +=3D "--with-mib-modules=3Dsmux"
->  CACHED_CONFIGUREVARS =3D " \
->      ac_cv_header_valgrind_valgrind_h=3Dno \
->      ac_cv_header_valgrind_memcheck_h=3Dno \
-> +    ac_cv_ETC_MNTTAB=3D/etc/mtab \
-> +    lt_cv_shlibpath_overrides_runpath=3Dyes \
->  "
-> =20
->  do_configure_prepend() {
->      export PERLPROG=3D"${bindir}/env perl"
-> +    sed -i -e "s|I/usr/include|I${STAGING_INCDIR}|g" \
-> +        "${S}"/configure \
-> +        "${S}"/configure.d/config_os_libs2
->  }
-> =20
->  do_install_append() {
-> --=20
-> 2.6.4
->=20
---=20
--Joe MacDonald.
-:wq
-
---ew6BAiZeqk4r7MaW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJWqF3lAAoJEEn8ffcsOfaWCToH/RUet+x3maQSd1lycJMXlKOX
-xfNyPVgl9z64TWvSAh8V0I3yhfBQMSjzgsma3Zz48YHYMsVykbFyEttE4RRbLS3M
-4HfoqY8VzsvOmEdcWAM+aV5JkHPxLqIJh45UclUVtx7UDcrX3WHhkDOK1xxOQGkC
-fRKoEJ07peLxjZh0gPFN7stiooeNnyvx7kn9LfnNPFI4fRcueLKHNqVEZ92u9xsy
-tvM4xTc4+fFFpNpFIahR8PO43cgLJWa9HFmzaV9QiVIlsHtNsxt2WU397GO4bROK
-I71Bv++t3GzPynraz3+ptoM63nnf1nGMO44oHEYGEqOrLBf4eA6yqxg2M5R4T+g=
-=Krw3
------END PGP SIGNATURE-----
-
---ew6BAiZeqk4r7MaW--
