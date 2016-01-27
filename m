@@ -1,28 +1,29 @@
-Return-Path: <stephen.arnold42@gmail.com>
-X-Greylist: delayed 510 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 27 Jan 2016 01:42:35 UTC
-Received: from dent.vctlabs.com (dent.vctlabs.com [68.183.110.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 16E6B6FFE8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jan 2016 01:42:35 +0000 (UTC)
-Received: by dent.vctlabs.com (Postfix, from userid 112)
-	id 0282F280FE4; Tue, 26 Jan 2016 17:32:40 -0800 (PST)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on dent.vctlabs.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED autolearn=ham
-	autolearn_force=no version=3.4.0
-Received: from ptolemy.arnolds.bogus (gatekeeper.gentoogeek.org
-	[66.159.242.209])
-	(using TLSv1 with cipher ECDHE-RSA-AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by dent.vctlabs.com (Postfix) with ESMTPSA id 7553628086A;
-	Tue, 26 Jan 2016 17:32:39 -0800 (PST)
-From: Stephen Arnold <sarnold@vctlabs.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Jan 2016 17:29:21 -0800
-Message-Id: <1453858161-27358-1-git-send-email-sarnold@vctlabs.com>
-X-Mailer: git-send-email 2.6.4
-Subject: [meta-networking][PATCH] net-snmp: fix cross-compile breakage, add libnl pkgconfig option
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id AA58C7318C;
+	Wed, 27 Jan 2016 02:11:53 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u0R2Br2a026504
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 26 Jan 2016 18:11:53 -0800 (PST)
+Received: from [128.224.163.141] (128.224.163.141) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Tue, 26 Jan 2016 18:11:52 -0800
+Message-ID: <56A82765.30403@windriver.com>
+Date: Wed, 27 Jan 2016 10:11:49 +0800
+From: ChenQi <Qi.Chen@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>, Patches and discussions about
+	the oe-core layer <openembedded-core@lists.openembedded.org>, Yocto Project
+	<yocto@yoctoproject.org>
+References: <2747032A-1F56-4CA6-860C-484B9292A0B5@gmail.com>
+In-Reply-To: <2747032A-1F56-4CA6-860C-484B9292A0B5@gmail.com>
+X-Originating-IP: [128.224.163.141]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [RFT] Glibc 2.23 and binutils 2.26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,63 +36,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2016 01:42:38 -0000
+X-List-Received-Date: Wed, 27 Jan 2016 02:11:53 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Stephen Arnold <stephen.arnold42@gmail.com>
+On 01/17/2016 07:54 PM, Khem Raj wrote:
+> Hi all
+>
+> upstream glibc and binutils release branches have been cut out and are being made ready for next release
+> I have put together update patchset for both of them
+>
+> here are the branches
+>
+> https://github.com/kraj/openembedded-core/tree/kraj/binutils-2.26
+> https://github.com/kraj/openembedded-core/tree/kraj/glibc-2.23
+>
+> FYI These are still using autorev to ensure that we test tip of release branches
+>
+> Please give them a shot in your environments and report any issues you encounter.
+>
+> Thanks for help
+>
+> -Khem
+>
+>
+>
+>
+>
 
-This patch enhances a previously unapplied patch on jethro, plus adds
-some flexibility in terms of required deps and a few cleanups.
+0001-Generate-relocatable-SDKs.patch is included in SRC_URI twice, which 
+causes the following error when building binutils-crosssdk-XXX.
 
-Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
----
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ERROR: Command Error: exit status: 1  Output:
+Patch 0001-Generate-relocatable-SDKs.patch is already applied; check 
+your series file
+ERROR: Function failed: patch_do_patch
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-index b32d842..93eb025 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-@@ -27,7 +27,7 @@ SRC_URI[sha256sum] = "e8dfc79b6539b71a6ff335746ce63d2da2239062ad41872fff4354cafe
- 
- inherit autotools update-rc.d siteinfo systemd pkgconfig
- 
--EXTRA_OEMAKE = "INSTALL_PREFIX=${D}"
-+EXTRA_OEMAKE = "INSTALL_PREFIX=${D} OTHERLDFLAGS='${LDFLAGS}' HOST_CPPFLAGS='${BUILD_CPPFLAGS}'"
- 
- PARALLEL_MAKE = ""
- CCACHE = ""
-@@ -36,12 +36,13 @@ TARGET_CC_ARCH += "${LDFLAGS}"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[elfutils] = "--with-elf, --without-elf, elfutils"
-+PACKAGECONFIG[libnl] = "--with-nl, --without-nl, libnl"
- 
- EXTRA_OECONF = "--disable-embedded-perl \
-                 --with-perl-modules=no \
--                --enable-shared \
-                 --disable-manuals \
-                 --with-defaults \
-+                --with-install-prefix=${D} \
-                 --with-persistent-directory=${localstatedir}/lib/net-snmp \
-                 ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)}"
- 
-@@ -51,10 +52,15 @@ EXTRA_OECONF += "--with-mib-modules=smux"
- CACHED_CONFIGUREVARS = " \
-     ac_cv_header_valgrind_valgrind_h=no \
-     ac_cv_header_valgrind_memcheck_h=no \
-+    ac_cv_ETC_MNTTAB=/etc/mtab \
-+    lt_cv_shlibpath_overrides_runpath=yes \
- "
- 
- do_configure_prepend() {
-     export PERLPROG="${bindir}/env perl"
-+    sed -i -e "s|I/usr/include|I${STAGING_INCDIR}|g" \
-+        "${S}"/configure \
-+        "${S}"/configure.d/config_os_libs2
- }
- 
- do_install_append() {
--- 
-2.6.4
+binutils-2.26.inc and binutils-crosssdk_2.26.bb both has this patch in 
+its SRC_RUI.
 
+Regards,
+Chen Qi
 
