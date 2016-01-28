@@ -1,32 +1,47 @@
-Return-Path: <adrian.ratiu@ni.com>
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mail.openembedded.org (Postfix) with ESMTP id C6516771AC
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-io0-f195.google.com (mail-io0-f195.google.com
+	[209.85.223.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 132E66012A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jan 2016 13:30:14 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-chan1-1338.natinst.com
-	[130.164.19.134])
-	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	u0SDUF9u021992 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jan 2016 07:30:15 -0600
-Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2016012807301503-389483 ;
-	Thu, 28 Jan 2016 07:30:15 -0600 
-Date: Thu, 28 Jan 2016 15:29:59 +0200
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160128152959.55a9a747@adi-pc-linux.emea.corp.natinst.com>
-In-Reply-To: <CALbNGRRTKH2BsXQbB7di3geApmPLz-A_gGaEnGzyLEJzPkX7-Q@mail.gmail.com>
+	Thu, 28 Jan 2016 14:01:03 +0000 (UTC)
+Received: by mail-io0-f195.google.com with SMTP id k127so3920678iok.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jan 2016 06:01:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=tK+6iQ3juboK4VrG7tTiEL8zE1Hdepv/ajIQxX12cAI=;
+	b=d5/6svgeRDupYGJlOdDHB8AidOq7D5tlPVf0pQrY5BoecZFJpvU99ZcS8r1ZJ0d4/b
+	LkAx6F9mX7K1i6zasCctLU7Jc2cnxIJ7zKIZQukk/B+lGSSBVGxqyErzttothbv91nDX
+	T5z20zyJX8zSDw1SGRZv3CeJZ0lJIHG6ugV6zOMNlumpg2aSnYOZQxXor0XaxvWuMBui
+	0ESwKqN+QtpTcVcD19rWQ9vCHajBniBHG4UyyGf4K3scI9nphy9oPfRRCa/MHqpscZkO
+	Qy6KaTw48KUEttqnxE/vS6I/ixaAQCl70VyJyMdYIGOOSBscPXg9/I21gwNvQpndPwZq
+	X/Jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=tK+6iQ3juboK4VrG7tTiEL8zE1Hdepv/ajIQxX12cAI=;
+	b=GWjhRSBqhYyNXZFQU1Ab4abuPIHA07acz627Ei4gvPQptjjfSS8O7FRxfB5te6l4nb
+	ueaB7AoOECbaDnHJhg4TxFBLhTieT5BTgOzKgFeOQB7KfIZyVq/puprF8/4gt/aIwiqi
+	8FNu71zSHbRGwDKO7uIj++sI6hTPq1FddkxFeUW6OJGFgZjusVnvwumxRr6aLvaYQpub
+	WDp5lF7CHZGXmU+Ai14HeWif/c0Rg6k+/hYc2Ygz2QS6p0gHLSkT9SSASXKXBvUXp3Ba
+	2L0qhXJ+t6tccG0/yt+c+LyeA/t+O37VXv68xFB3QF6B3v5p9asjOvl8SKd17KbECS4P
+	J0oQ==
+X-Gm-Message-State: AG10YORuyNE30yWxEoy3a7Dc7KHv0U/1Subj437o/HNkmwo6XMK7We7uv20rVGz8Cu9R/Ak83IBUDaxq1vkgNA==
+MIME-Version: 1.0
+X-Received: by 10.107.135.104 with SMTP id j101mr4538734iod.133.1453989664573; 
+	Thu, 28 Jan 2016 06:01:04 -0800 (PST)
+Received: by 10.36.25.81 with HTTP; Thu, 28 Jan 2016 06:01:04 -0800 (PST)
+In-Reply-To: <20160128152959.55a9a747@adi-pc-linux.emea.corp.natinst.com>
 References: <1453978491-8849-1-git-send-email-adrian.ratiu@ni.com>
 	<CALbNGRRTKH2BsXQbB7di3geApmPLz-A_gGaEnGzyLEJzPkX7-Q@mail.gmail.com>
-Organization: National Instruments
-MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 01/28/2016 07:30:15 AM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 01/28/2016 07:30:15 AM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2016-01-28_06:, , signatures=0
+	<20160128152959.55a9a747@adi-pc-linux.emea.corp.natinst.com>
+Date: Thu, 28 Jan 2016 15:01:04 +0100
+Message-ID: <CALbNGRQroKeu+Sap64Mz3HYJkbchN8GNWvfHeASHRwZ=eA_FdA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-xfce][PATCH 1/1] xfwm4: add patch to fix touch event handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -40,127 +55,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jan 2016 13:30:15 -0000
+X-List-Received-Date: Thu, 28 Jan 2016 14:01:04 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, 28 Jan 2016 12:52:06 +0100
-Andreas M=C3=BCller <schnitzeltony@googlemail.com> wrote:
+On Thu, Jan 28, 2016 at 2:29 PM, Ioan-Adrian Ratiu <adrian.ratiu@ni.com> wrote:
+>> I've checked the thread you point to: I am using xfce for touch
+>> screens and can resize windows, maximize them, move around and close
+>> them all with touch. What kind of error is fixed?
+>
+> Thank you for challenging this, it helped bring more light on the issue.
+> It is a workaround the bug [1] in xserver which was fixed. More details here [2]
+> I did not knew this untill I asked on the xfwm bugzilla.
+>
+> So instead of "fixing" it here, we should try to backport that fix to OE or verify
+> if it's not contained in OE's xserver already since it's working for you :)
+>
+> [1] http://cgit.freedesktop.org/xorg/xserver/commit/?id=24b943132f
+This is the correct fix and - I checked in source - is included in
+xserver-xorg 1.17.2. That version is shipped with jethro I am working
+with currently. Don't know when it came in (for elder oe-core
+releases) but master and jethro don't need to fix.
 
-> On Thu, Jan 28, 2016 at 11:54 AM, Ioan-Adrian Ratiu <adrian.ratiu@ni.com>=
- wrote:
-> > Patch sent upstream, pending acceptance
-> >
-> > Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-> > ---
-> >  ...handling-of-touch-events-on-window-border.patch | 42 ++++++++++++++=
-++++++++
-> >  meta-xfce/recipes-xfce/xfwm4/xfwm4=5F4.12.3.bb       |  6 +++-
-> >  2 files changed, 47 insertions(+), 1 deletion(-)
-> >  create mode 100644 meta-xfce/recipes-xfce/xfwm4/files/0001-events-fix-=
-handling-of-touch-events-on-window-border.patch
-> >
-> > diff --git a/meta-xfce/recipes-xfce/xfwm4/files/0001-events-fix-handlin=
-g-of-touch-events-on-window-border.patch b/meta-xfce/recipes-xfce/xfwm4/fil=
-es/0001-events-fix-handling-of-touch-events-on-window-border.patch
-> > new file mode 100644
-> > index 0000000..e01aac5
-> > --- /dev/null
-> > +++ b/meta-xfce/recipes-xfce/xfwm4/files/0001-events-fix-handling-of-to=
-uch-events-on-window-border.patch
-> > @@ -0,0 +1,42 @@
-> > +From cb966e51ea51088a1d4fd5914fc7f917684e0b51 Mon Sep 17 00:00:00 2001
-> > +From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-> > +Date: Thu, 28 Jan 2016 11:43:01 +0200
-> > +Subject: [PATCH] events: fix handling of touch events on window borders
-> > +
-> > +When the Xorg server translates touch events into ButtonPress/ButtonRe=
-lease
-> > +events, the subwindow in the XEvent structure is set to zero. This cha=
-nge adds
-> > +a querry to determine the subwindow for the event in case it is missin=
-g.
-> > +
-> > +Original patch & discussion at [1].
-> > +
-> > +Upstream-Status: Pending acceptance
-> > +
-> > +[1] http://xfce.10915.n7.nabble.com/Re-Xfwm-window-borders-do-not-resp=
-ond-to-touch-screen-td42357.html
-> > +
-> > +Signed-off-by: Gratian Crisan <gratian.crisan@ni.com>
-> > +Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-> > +---
-> > + src/events.c | 7 +++++++
-> > + 1 file changed, 7 insertions(+)
-> > +
-> > +diff --git a/src/events.c b/src/events.c
-> > +index 8aa0f0a..0565594 100644
-> > +--- a/src/events.c
-> > ++++ b/src/events.c
-> > +@@ -917,6 +917,13 @@ handleButtonPress (DisplayInfo *display=5Finfo, X=
-ButtonEvent * ev)
-> > +     {
-> > +         state =3D ev->state & MODIFIER=5FMASK;
-> > +         win =3D ev->subwindow;
-> > ++        if (!win) {
-> > ++                Window root=5Fret;
-> > ++                int rx,ry,wx,wy;
-> > ++                unsigned int mask=5Fret;
-> > ++                XQueryPointer(display=5Finfo->dpy, ev->window,
-> > ++                              &root=5Fret, &win, &rx, &ry, &wx, &wy, =
-&mask=5Fret);
-> > ++        }
-> > +         screen=5Finfo =3D c->screen=5Finfo;
-> > +
-> > +         if ((ev->button =3D=3D Button1) && (state) && (state =3D=3D s=
-creen=5Finfo->params->easy=5Fclick))
-> > +--
-> > +2.7.0
-> > +
-> > diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4=5F4.12.3.bb b/meta-xfce=
-/recipes-xfce/xfwm4/xfwm4=5F4.12.3.bb
-> > index 41daa00..aa4b290 100644
-> > --- a/meta-xfce/recipes-xfce/xfwm4/xfwm4=5F4.12.3.bb
-> > +++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4=5F4.12.3.bb
-> > @@ -6,7 +6,11 @@ DEPENDS =3D "virtual/libx11 libxpm gtk+ libxfce4util l=
-ibxfce4ui xfconf libwnck dbu
-> >
-> >  inherit xfce update-alternatives
-> >
-> > -SRC=5FURI +=3D "file://0001-don-t-block-display-events-when-time-is-se=
-t-backward.patch"
-> > +SRC=5FURI +=3D " \
-> > +    file://0001-don-t-block-display-events-when-time-is-set-backward.p=
-atch \
-> > +    file://0001-events-fix-handling-of-touch-events-on-window-border.p=
-atch \
-> > +"
-> > +
-> >  SRC=5FURI[md5sum] =3D "197ef087ca6a263627f1bea6d5a79d6f"
-> >  SRC=5FURI[sha256sum] =3D "f4a988fbc4e0df7e8583c781d271559e56fd28696092=
-f94ae052e9e6edb09eac"
-> >
-> > --
-> > 2.7.0
-> > =20
-> I've checked the thread you point to: I am using xfce for touch
-> screens and can resize windows, maximize them, move around and close
-> them all with touch. What kind of error is fixed?
-
-Thank you for challenging this, it helped bring more light on the issue.
-It is a workaround the bug [1] in xserver which was fixed. More details her=
-e [2]
-I did not knew this untill I asked on the xfwm bugzilla.
-
-So instead of "fixing" it here, we should try to backport that fix to OE or=
- verify
-if it's not contained in OE's xserver already since it's working for you :)
-
-[1] http://cgit.freedesktop.org/xorg/xserver/commit/?id=3D24b943132f
-[2] https://bugzilla.xfce.org/show=5Fbug.cgi?id=3D12427
-
->=20
-> Andreas
-
+Andreas
 
