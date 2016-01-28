@@ -1,46 +1,30 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
-	[209.85.213.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 369967712D
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 250BF76486
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jan 2016 04:40:41 +0000 (UTC)
-Received: by mail-ig0-f179.google.com with SMTP id z14so5638080igp.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jan 2016 20:40:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=//LCLNsNtrk4sbf+9PtcWd0Q8C8xGMur5Os2gA4gUR8=;
-	b=R2BK25UHahemOsm3FZLHvjf5o8IPdXM7WTgQDzoxpZsfsMEEoNoOmneZ5F9N6Huu46
-	zHid/asH68WBkd3BWHJqqmmI7EoMpOShH6vqtIiLlIWBeih5gsqqvoaQeOzoMpotHb6X
-	6ataK7V7TBJdCCjdWzE8iQ1xCzG25PEI/HTNCF6Mny/Sq9Q0FjZEiC4VR80uVdLQdfYj
-	KEOjqL548F/gNMQuFA/B3Gf1XTHkxj/1BKdlcJuUCvN/BAuJEAUVCWT25mDq2Te8Kf1p
-	EXfWhuAYMAL2QSlY9jV7wQWovqcrewWUmLmvw+VfqG1uY3szsqM+vgAtffSlckdgy7I1
-	umxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=//LCLNsNtrk4sbf+9PtcWd0Q8C8xGMur5Os2gA4gUR8=;
-	b=l1D9JpwFyVC7/tZzcqAUUq5HjIx7vTe60M+4SQelI3UfRMqAdPYAA6Y1UDO37DBXIp
-	hvmEHg13CJ0g+wUvxYrpgQZ2kvOKeHzGt/7jIfJEBbDBl6oCH5LyybbagHpVr7mnNHXT
-	jU1LH4of3D6rafZY/1HnEQZ22pcEPb35Qs7NjmhLekSgSU1YLivJC3IIWnhxLofmFJ/L
-	popSgaBAEqwJ7Coq1R/MbgMAg7sVOB/aJ4/2zB2ZVcFZjnreEhCpVpOn9V4v54+iEaKX
-	AZ17YryEklXB7ylHoGcR4VP8J7ySjiKomVP+p8ptG32UTRWcOM/nMA50ZjBZW8eKubp6
-	uW1w==
-X-Gm-Message-State: AG10YOQmnr1eVf1vX07hZs7Owoeo7tjCMPS9JbA7ZD+UjQgXIQObtnxYE4ULyxOklOD4UQ==
-X-Received: by 10.50.152.41 with SMTP id uv9mr1023566igb.3.1453956041934;
-	Wed, 27 Jan 2016 20:40:41 -0800 (PST)
-Received: from openSUSE-i7.site (dsl-67-55-28-109.acanac.net. [67.55.28.109])
-	by smtp.gmail.com with ESMTPSA id
-	s19sm455906ign.4.2016.01.27.20.40.41
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 27 Jan 2016 20:40:41 -0800 (PST)
-From: Trevor Woerner <twoerner@gmail.com>
+	Thu, 28 Jan 2016 10:55:04 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u0SAt5Ki008257 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jan 2016 04:55:05 -0600
+Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2016012804550490-384958 ;
+	Thu, 28 Jan 2016 04:55:04 -0600 
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Jan 2016 23:40:27 -0500
-Message-Id: <1453956027-30065-1-git-send-email-twoerner@gmail.com>
-X-Mailer: git-send-email 2.7.0.rc3
-Subject: [meta-oe][PATCH] nodejs: upgrade from 4.2.4 to 4.2.6
+Date: Thu, 28 Jan 2016 12:54:51 +0200
+Message-Id: <1453978491-8849-1-git-send-email-adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.7.0
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 01/28/2016 04:55:05 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 01/28/2016 04:55:05 AM,
+	Serialize complete at 01/28/2016 04:55:05 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-01-28_05:, , signatures=0
+Subject: [meta-xfce][PATCH 1/1] xfwm4: add patch to fix touch event handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,39 +37,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jan 2016 04:40:44 -0000
+X-List-Received-Date: Thu, 28 Jan 2016 10:55:06 -0000
 
-...plus a switch to xz.
+Patch sent upstream, pending acceptance
 
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 ---
- .../recipes-devtools/nodejs/{nodejs_4.2.4.bb => nodejs_4.2.6.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_4.2.4.bb => nodejs_4.2.6.bb} (94%)
+ ...handling-of-touch-events-on-window-border.patch | 42 ++++++++++++++++++++++
+ meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.3.bb       |  6 +++-
+ 2 files changed, 47 insertions(+), 1 deletion(-)
+ create mode 100644 meta-xfce/recipes-xfce/xfwm4/files/0001-events-fix-handling-of-touch-events-on-window-border.patch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.2.4.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.2.6.bb
-similarity index 94%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_4.2.4.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_4.2.6.bb
-index 18e23b7..be863d6 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_4.2.4.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.2.6.bb
-@@ -9,11 +9,11 @@ COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
- COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
- COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+diff --git a/meta-xfce/recipes-xfce/xfwm4/files/0001-events-fix-handling-of-touch-events-on-window-border.patch b/meta-xfce/recipes-xfce/xfwm4/files/0001-events-fix-handling-of-touch-events-on-window-border.patch
+new file mode 100644
+index 0000000..e01aac5
+--- /dev/null
++++ b/meta-xfce/recipes-xfce/xfwm4/files/0001-events-fix-handling-of-touch-events-on-window-border.patch
+@@ -0,0 +1,42 @@
++From cb966e51ea51088a1d4fd5914fc7f917684e0b51 Mon Sep 17 00:00:00 2001
++From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
++Date: Thu, 28 Jan 2016 11:43:01 +0200
++Subject: [PATCH] events: fix handling of touch events on window borders
++
++When the Xorg server translates touch events into ButtonPress/ButtonRelease
++events, the subwindow in the XEvent structure is set to zero. This change adds
++a querry to determine the subwindow for the event in case it is missing.
++
++Original patch & discussion at [1].
++
++Upstream-Status: Pending acceptance
++
++[1] http://xfce.10915.n7.nabble.com/Re-Xfwm-window-borders-do-not-respond-to-touch-screen-td42357.html
++
++Signed-off-by: Gratian Crisan <gratian.crisan@ni.com>
++Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
++---
++ src/events.c | 7 +++++++
++ 1 file changed, 7 insertions(+)
++
++diff --git a/src/events.c b/src/events.c
++index 8aa0f0a..0565594 100644
++--- a/src/events.c
+++++ b/src/events.c
++@@ -917,6 +917,13 @@ handleButtonPress (DisplayInfo *display_info, XButtonEvent * ev)
++     {
++         state = ev->state & MODIFIER_MASK;
++         win = ev->subwindow;
+++        if (!win) {
+++                Window root_ret;
+++                int rx,ry,wx,wy;
+++                unsigned int mask_ret;
+++                XQueryPointer(display_info->dpy, ev->window,
+++                              &root_ret, &win, &rx, &ry, &wx, &wy, &mask_ret);
+++        }
++         screen_info = c->screen_info;
++ 
++         if ((ev->button == Button1) && (state) && (state == screen_info->params->easy_click))
++-- 
++2.7.0
++
+diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.3.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.3.bb
+index 41daa00..aa4b290 100644
+--- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.3.bb
++++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.3.bb
+@@ -6,7 +6,11 @@ DEPENDS = "virtual/libx11 libxpm gtk+ libxfce4util libxfce4ui xfconf libwnck dbu
  
--SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
-+SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-     file://no-registry.patch \
- "
--SRC_URI[md5sum] = "86e4d0d8b626f6e60ca7bef02f2543d2"
--SRC_URI[sha256sum] = "4ee244ffede7328d9fa24c3024787e71225b7abaac49fe2b30e68b27460c10ec"
-+SRC_URI[md5sum] = "edd0c12a6417a96f04ca735c468e624f"
-+SRC_URI[sha256sum] = "dcb935647f9e32fc90db52d393f00c9868ba9d84c5ebe5ddd766e225deb52c40"
+ inherit xfce update-alternatives
  
- S = "${WORKDIR}/node-v${PV}"
+-SRC_URI += "file://0001-don-t-block-display-events-when-time-is-set-backward.patch"
++SRC_URI += " \
++    file://0001-don-t-block-display-events-when-time-is-set-backward.patch \
++    file://0001-events-fix-handling-of-touch-events-on-window-border.patch \
++"
++
+ SRC_URI[md5sum] = "197ef087ca6a263627f1bea6d5a79d6f"
+ SRC_URI[sha256sum] = "f4a988fbc4e0df7e8583c781d271559e56fd28696092f94ae052e9e6edb09eac"
  
 -- 
-2.7.0.rc3
+2.7.0
 
 
