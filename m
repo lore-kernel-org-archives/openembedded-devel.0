@@ -1,24 +1,21 @@
-Return-Path: <Paul.Vaduva@enea.com>
-Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by mail.openembedded.org (Postfix) with SMTP id 7D6B177202
+Return-Path: <erkka.kaaria@intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 6945177217
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jan 2016 12:50:14 +0000 (UTC)
-Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
-	(172.21.1.209) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 29 Jan 2016 13:50:14 +0100
-Received: by sestofb10.enea.se (Postfix, from userid 4538)	id 8BC9228BA23;
-	Fri, 29 Jan 2016 13:50:14 +0100 (CET)
-From: Paul Vaduva <Paul.Vaduva@enea.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 29 Jan 2016 13:50:09 +0100
-Message-ID: <1454071809-2040-2-git-send-email-Paul.Vaduva@enea.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1454071809-2040-1-git-send-email-Paul.Vaduva@enea.com>
-References: <1454071809-2040-1-git-send-email-Paul.Vaduva@enea.com>
+	Fri, 29 Jan 2016 13:02:54 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga103.jf.intel.com with ESMTP; 29 Jan 2016 05:02:54 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.22,364,1449561600"; d="scan'208";a="903816530"
+Received: from ekaaria-xps-8300.fi.intel.com ([10.237.68.35])
+	by fmsmga002.fm.intel.com with ESMTP; 29 Jan 2016 05:02:53 -0800
+From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 29 Jan 2016 15:04:53 +0200
+Message-Id: <1454072693-4081-1-git-send-email-erkka.kaaria@intel.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-Received-SPF: None (SESTOEX03.enea.se: Paul.Vaduva@enea.com does not
-	designate permitted sender hosts)
-Subject: [meta-oe][PATCHv1 1/1] lua: Added ptest for lua
+Subject: [PATCH] ecj.in: Expand retry logic to work around internal compiler errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,91 +28,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jan 2016 12:50:15 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 29 Jan 2016 13:02:56 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-This was added using a special recipe (lua-test_5.3.2.bb) so that we will
-not download the Lua test suites when not building with ptest.
-
-Signed-off-by: Andreas Sundstr
-Signed-off-by: Maxin B. John <maxin.john@enea.com>
-Signed-off-by: Paul Vaduva <Paul.Vaduva@enea.com>
----
- meta-oe/recipes-devtools/lua/lua-test/run-ptest | 19 +++++++++++++++++++
- meta-oe/recipes-devtools/lua/lua-test_5.3.2.bb  | 22 ++++++++++++++++++++++
- meta-oe/recipes-devtools/lua/lua_5.3.2.bb       |  3 +++
- 3 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/lua/lua-test/run-ptest
- create mode 100644 meta-oe/recipes-devtools/lua/lua-test_5.3.2.bb
-
-diff --git a/meta-oe/recipes-devtools/lua/lua-test/run-ptest b/meta-oe/recipes-devtools/lua/lua-test/run-ptest
-new file mode 100644
-index 0000000..8e085e1
---- /dev/null
-+++ b/meta-oe/recipes-devtools/lua/lua-test/run-ptest
-@@ -0,0 +1,19 @@
-+#!/bin/sh
-+
-+cd test
-+lua -e"_U=true" all.lua > lua-test.tmp
-+
-+echo "--- test output ---"
-+cat lua-test.tmp
-+echo ""
-+echo ""
-+echo "--- ptest result ---"
-+
-+grep "final OK \!\!\!" lua-test.tmp > /dev/null
-+if [ $? -eq 0 ]; then
-+   echo "PASS: lua"
-+else
-+   echo "FAIL: lua"
-+fi
-+
-+rm -f lua-test.tmp
-diff --git a/meta-oe/recipes-devtools/lua/lua-test_5.3.2.bb b/meta-oe/recipes-devtools/lua/lua-test_5.3.2.bb
-new file mode 100644
-index 0000000..877df8e
---- /dev/null
-+++ b/meta-oe/recipes-devtools/lua/lua-test_5.3.2.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "Lua test suites"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
-+                    file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-+HOMEPAGE = "http://www.lua.org/"
-+
-+DEPENDS = "lua"
-+SRC_URI = "http://www.lua.org/tests/lua-${PV}-tests.tar.gz \
-+           file://lua-test.patch \
-+           file://run-ptest \
-+"
-+
-+S = "${WORKDIR}/lua-${PV}-tests"
-+
-+SRC_URI[md5sum] = "a3dabd30e5a364c87191b0c1e6f64178"
-+SRC_URI[sha256sum] = "07c1071c66d9cb4dc80200ed430fc21ebbbccf1f55148b87eb0b9522932e4eb6"
-+
-+inherit ptest
-+
-+do_install_ptest () {
-+    cp -a ${S} ${D}${PTEST_PATH}/test
-+}
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.2.bb b/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
-index 3fe8c3f..4ee3b1a 100644
---- a/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
-@@ -7,6 +7,9 @@ HOMEPAGE = "http://www.lua.org/"
- PR = "r0"
- 
- DEPENDS = "readline"
-+PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', '${PN}-ptest', '', d)}"
-+ALLOW_EMPTY_lua-ptest = "1"
-+RDEPENDS_lua-ptest_class-target = "lua-test-ptest"
- SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
-            file://lua.pc \
- "
--- 
-1.9.1
+RWNqIHJhcmVseSBjcmFzaGVzIGR1ZSB0byBpbnRlcm5hbCBjb21waWxlciBlcnJvci4gRXh0ZW5k
+IHRoZSBleGlzdGluZyByZXRyeQpsb2dpYyB0byBzaWxlbnRseSByZXRyeSBpZiBjb21waWxlIGZh
+aWxzLgoKU2lnbmVkLW9mZi1ieTogRXJra2EgS8Okw6RyacOkIDxlcmtrYS5rYWFyaWFAaW50ZWwu
+Y29tPgotLS0KIHJlY2lwZXMtY29yZS9lY2ovZmlsZXMvZWNqLmluIHwgNCArKysrCiAxIGZpbGUg
+Y2hhbmdlZCwgNCBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvcmVjaXBlcy1jb3JlL2Vjai9m
+aWxlcy9lY2ouaW4gYi9yZWNpcGVzLWNvcmUvZWNqL2ZpbGVzL2Vjai5pbgppbmRleCBjYWViZWQz
+Li4zNmZiOWFlIDEwMDc1NQotLS0gYS9yZWNpcGVzLWNvcmUvZWNqL2ZpbGVzL2Vjai5pbgorKysg
+Yi9yZWNpcGVzLWNvcmUvZWNqL2ZpbGVzL2Vjai5pbgpAQCAtOSw2ICs5LDEwIEBAIHdoaWxlIFsg
+JHtlcnJvcl9jb3VudGVyfSAtbGUgJHtlcnJvcl9tYXh9IC1hICR7ZXJyb3Jfb2NjdXJlZH0gPSB0
+cnVlIF07IGRvCiAgICAgICAgIGVjaG8gImVjaiBjcmFzaGVkICR7ZXJyb3JfY291bnRlcn0gLSBz
+aWxlbnRseSB0cnlpbmcgYWdhaW4iCiAgICAgICAgIGVycm9yX29jY3VyZWQ9dHJ1ZQogICAgICAg
+ICBlcnJvcl9jb3VudGVyPSQoKCAkZXJyb3JfY291bnRlciArIDEgKSkKKyAgICBlbGlmIFsgJHtl
+cnJvcl9udW1iZXJ9IC1lcSAyNTUgXTsgdGhlbgorICAgICAgICBlY2hvICJlY2ogcmV0dXJuZWQg
+LTEgLSBsaWtlbHkgaW50ZXJuYWwgY29tcGlsZXIgZXJyb3Igb3Igc2ltaWxhciAtIHNpbGVudGx5
+IHRyeWluZyBhZ2FpbiIKKyAgICAgICAgZXJyb3Jfb2NjdXJlZD10cnVlCisgICAgICAgIGVycm9y
+X2NvdW50ZXI9JCgoICRlcnJvcl9jb3VudGVyICsgMSApKQogICAgIGVsc2UKICAgICAgICAgZXJy
+b3Jfb2NjdXJlZD1mYWxzZQogICAgIGZpCi0tIAoyLjEuNAoKLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCkludGVsIEZp
+bmxhbmQgT3kKUmVnaXN0ZXJlZCBBZGRyZXNzOiBQTCAyODEsIDAwMTgxIEhlbHNpbmtpIApCdXNp
+bmVzcyBJZGVudGl0eSBDb2RlOiAwMzU3NjA2IC0gNCAKRG9taWNpbGVkIGluIEhlbHNpbmtpIAoK
+VGhpcyBlLW1haWwgYW5kIGFueSBhdHRhY2htZW50cyBtYXkgY29udGFpbiBjb25maWRlbnRpYWwg
+bWF0ZXJpYWwgZm9yCnRoZSBzb2xlIHVzZSBvZiB0aGUgaW50ZW5kZWQgcmVjaXBpZW50KHMpLiBB
+bnkgcmV2aWV3IG9yIGRpc3RyaWJ1dGlvbgpieSBvdGhlcnMgaXMgc3RyaWN0bHkgcHJvaGliaXRl
+ZC4gSWYgeW91IGFyZSBub3QgdGhlIGludGVuZGVkCnJlY2lwaWVudCwgcGxlYXNlIGNvbnRhY3Qg
+dGhlIHNlbmRlciBhbmQgZGVsZXRlIGFsbCBjb3BpZXMuCg==
 
 
