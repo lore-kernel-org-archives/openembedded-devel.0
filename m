@@ -1,47 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f172.google.com (mail-io0-f172.google.com
-	[209.85.223.172])
-	by mail.openembedded.org (Postfix) with ESMTP id ABFA07717F
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Jan 2016 17:27:35 +0000 (UTC)
-Received: by mail-io0-f172.google.com with SMTP id g73so135928271ioe.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Jan 2016 09:27:36 -0800 (PST)
+Received: from mail-io0-f176.google.com (mail-io0-f176.google.com
+	[209.85.223.176])
+	by mail.openembedded.org (Postfix) with ESMTP id C7369601A5;
+	Sun, 31 Jan 2016 17:41:46 +0000 (UTC)
+Received: by mail-io0-f176.google.com with SMTP id f81so134426874iof.0;
+	Sun, 31 Jan 2016 09:41:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=0TXFkV16m4F5gPBixbq9XDv9v1N4D4bMk0y9yVJv6D4=;
-	b=FRTgbMf4C8Na7qrIdpw4wqNGKptTLUvnU7a8I3vs6bbziT8xH9FxTq3PMYiavcIQGm
-	jdMpPZGfQBuvA9oOH8d7KZYcyj8TJh/eX+iQAZJwOnZhjPrxaj25iC5ylL5ScMOvoigd
-	zNns0rl4vznPiOCot4cBtx4dUd2N84ttj/ssjJwY6/ymV1Sjz0lb95EVKOAYvI6iZpLu
-	jCdQ1nT9XRzVSFYZlvKF8txe7agLk0nd/fIB0jkG+oKEfbFWh6DaOzAEqd8raXFqlPP0
-	Y71HGRM7vRtKpQVWFIck482lzmpkLSWHnHKmzit54GOUQ6E+wCMJviN9+CrAkc0uZ8UR
-	tIXg==
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=7tkp6wzH5HjvUW9/EDxKTLtlKFSF5VIcDZZoTEPlvOg=;
+	b=aIHjuJOUEsPJTwBJ5Ik5Bdxcp1PC+K7c9uxw4c0P4uy9uNpzGuuJbhH4VdUhQX5M1s
+	H02wQp8Y7N+Ml3C5XsqiMumsB6/eQARUWUGzOmJHtL/5fRn5OpU7BlwdBigxhyZ8+Wuo
+	Gw533w+MN/BxCZQwfIcz9IdPuNylCusk46x5ch9NVhWXimSh6vpoSKE+bFSR8HadE119
+	f1GRzn9vDvhz2l1BFfpQbZPQ5s9be72dGZY1d4uset7k0nj0bQ5dxxbdtGkStiQAgAFs
+	aAZco7m48Q/m+GgyBHU4ROz8kg2KIM+qiqdXVWq6tBk+8oIzu4F+9lukgeb783Q/XeIc
+	x18w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=0TXFkV16m4F5gPBixbq9XDv9v1N4D4bMk0y9yVJv6D4=;
-	b=NsRIiKts9V6QKZGEaurSsTtA5tzivJZw8ZbdoOOtQ8RlrwZ469+9eFfZb0oUJrWu3I
-	jcLTfKT4em14cRsRmt52qoakksHglI24cTaYTmjDtrDmc3E1gSaTdIt1Afmz8slAcADf
-	7YvsDVzfloaGlg3CG/IjCAWdl6FRSW2r3808pRECTqm/ooTws5Kmetg/Omlh5cmBng8z
-	yPtPtn3pmwrq+rO2t+Fe9bRlRXAx7ijJGNaEgNy/hsGGAvk/NCoyXDWiJY8sFwF7oKx2
-	0wZmZlUo66DAy/QiKOufg3wAoM89Pp9CkBi3SeoQBIwD5F2lyl17OA/SPgOU8QhS+H9z
-	UzWw==
-X-Gm-Message-State: AG10YORAPZF912n+PmfpC3a8/qKB2SM+9zUtRNtWJrCGuzm5T01MoncDCqPZbdmnAoV8QvkhNhXObPVSNNne/A==
-X-Received: by 10.107.165.14 with SMTP id o14mr18008835ioe.49.1454261256043;
-	Sun, 31 Jan 2016 09:27:36 -0800 (PST)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+	:content-type;
+	bh=7tkp6wzH5HjvUW9/EDxKTLtlKFSF5VIcDZZoTEPlvOg=;
+	b=URURMn/HQFMHP3dKz3+ngohWcoJ2tWFKTWHY2kt0E1HSzcJhfpQ6/5b2wlbQRIrJpe
+	JjSu7xx8j3fHoY5nL/dP7mnXS1/7VK+0EKHNf74t8Z7+ea8J7tQ04jWmFvYWv0AF95/v
+	bZ23CbxFBpDflq8sIFXf8ZKDsh1RtnttpqyC52Rv5Olp5D4IbxaFEU6dvMFHFvJVOdIF
+	uL8TsptwPLyVlInfbH841piD2Il/1ERq9P+2m9xblUWaozsUoj9EhCBhrRop9dX2ofNs
+	xTB8XhpDOMGfkEKqGVNeF8jLme1UyVkG5JcrXND+VR/LrQ3T53rZ26eLJ+iK3pP5c49k
+	jNjA==
+X-Gm-Message-State: AG10YORy2UWJgllBdCT7T9U9ZSffRhMg8UlXc3Z+Wkiy7+b1pxHuOxnNGglTaw7RRkwr0DWpuLFLKO+kgA3Xpw==
+X-Received: by 10.107.9.211 with SMTP id 80mr12824375ioj.112.1454262107172;
+	Sun, 31 Jan 2016 09:41:47 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.107.46.219 with HTTP; Sun, 31 Jan 2016 09:27:06 -0800 (PST)
-In-Reply-To: <005501d15c42$649442d0$2dbcc870$@gmail.com>
-References: <1454254968-8596-1-git-send-email-sven.ebenfeld@gmail.com>
-	<1454254968-8596-2-git-send-email-sven.ebenfeld@gmail.com>
-	<CAMKF1sqD+vsprAKVV97YxXdbApfzkZCKKpdLQzZ40hqOoir=iQ@mail.gmail.com>
-	<005501d15c42$649442d0$2dbcc870$@gmail.com>
+Received: by 10.107.46.219 with HTTP; Sun, 31 Jan 2016 09:41:17 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 31 Jan 2016 09:27:06 -0800
-Message-ID: <CAMKF1srcf=06JqF-3jUKjr7efGBpszffdfAM-8rAVS3e3T+ZGw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] mongodb: 2.6.0 -> 3.3.0 and remove from pnblacklist
+Date: Sun, 31 Jan 2016 09:41:17 -0800
+Message-ID: <CAMKF1sriCy0VxkkJHKsHaLy0K1N4Ns2E7o-rE_Lq8wSGXoy8hw@mail.gmail.com>
+To: openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>, 
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Glibc 2.24 _might_ require minimum kernel version 3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,31 +52,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Jan 2016 17:27:37 -0000
+X-List-Received-Date: Sun, 31 Jan 2016 17:41:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Sun, Jan 31, 2016 at 8:13 AM, Sven Ebenfeld <sven.ebenfeld@gmail.com> wrote:
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
->> Behalf Of Khem Raj
->> Sent: Sunday, January 31, 2016 5:02 PM
->> To: openembeded-devel <openembedded-
->> devel@lists.openembedded.org>
->> Subject: Re: [oe] [meta-oe][PATCH v2] mongodb: 2.6.0 -> 3.3.0 and remove
->> from pnblacklist
->>
->> On Sun, Jan 31, 2016 at 7:42 AM, Sven Ebenfeld <sven.ebenfeld@gmail.com>
->> wrote:
->> > -DEPENDS = "openssl libpcre boost libpcap"
->> > -# Mongo uses tcmalloc on x86_64, which is provided by gperftools
->> > -DEPENDS_append_x86-64 = " gperftools"
->> > +DEPENDS = "openssl libpcre libpcap zlib"
->>
->> why is gperftools dep dropped ?
->
-> gperftools dependency is added by PACKAGECONFIG[tcmalloc] if the parameters
-> require it.
+Hi
 
-ah yes I see, thanks
+This is FYI, as I have sent a RFT for glibc 2.24, there might be another change
+coming which is under discussion on glibc mailing lists which is on
+supported minimum
+kernel version bump to 3.2 since 2.6.32 will be EOLed this summer [1]
+
+If anyone is planning on using upcoming yocto/OE release and sticking
+to kernels older than  3.2 then please plan for upgrading your kernel.
+
+Thanks
+-Khem
+
+[1] - https://sourceware.org/ml/libc-alpha/2016-01/msg00885.html
 
