@@ -1,60 +1,60 @@
 Return-Path: <otavio.salvador@ossystems.com.br>
 Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
 	[209.85.220.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 523C17729C
+	by mail.openembedded.org (Postfix) with ESMTP id 81E037729C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Feb 2016 19:11:17 +0000 (UTC)
-Received: by mail-pa0-f41.google.com with SMTP id yy13so86556454pab.3
+	Mon,  1 Feb 2016 19:11:30 +0000 (UTC)
+Received: by mail-pa0-f41.google.com with SMTP id uo6so88308017pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Feb 2016 11:11:19 -0800 (PST)
+	Mon, 01 Feb 2016 11:11:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
 	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
 	:cc:content-type;
-	bh=zdimkH9XF1O/2hhLAnmw6tSU08oGPdeEhGGuWbw265o=;
-	b=zsBzoO7w1M5ApgQ0vp18vHLRkdxbLCcQewAMtXyJ6LAbJb0mFG/WJ7jHWslHBxw4p2
-	P8fX6vLvyxGg6jNtLODO4g6Ql3lkfRjwNKUMxQMXhYP7N2WTiNtq4zHBFyH7lwFNG5Xo
-	Jf1zjjEuiLALngvmP0BR0Ie6yVPfvxfPJ3QPACRDKeqi0zigPEUxqwsPBmGZHxWgGL30
-	e6hY1fdPRobiMh1qMRSvkM1kKIJBaKJaPlZBkNRY60wP6JsynJ9YkM3lRukrSm9I4iwQ
-	0+6gQOsqgdH5IDlR8Mo1tx2DhQ6/Pppice1QrO2IwO9+4xG/t4xEI/SJGPxpbvgmtSrw
-	uAOg==
+	bh=P2jSBfYkRTaTrR9LW8+UPSGikTJ8z4yK29r1MyJozz0=;
+	b=iczmcn04HlYuZ97HwEaATlzI7SMzyQNoT76MIyA2jPU1DQsNx/rsJPehOywnIQc6Mi
+	NoK1RrItithXBfh9eJ30cR05jnhsEM3gE5SsjM8vxu2exnrp99TiMJejUXVqRZvl32qD
+	bKyKVgYTFi72YSAb1k3PsQJ6Au0MEHeEreMZaVulv2abzoTz076/44FOhRQOnpOHo52F
+	WrB+I3SzvGd41YgfPMxv/3PXZCm5/vMERW0Vu0dIDX+25TT5C0mgku1KmLSyL+vBDQdj
+	lHU8mPtvE3ra3U5ZLoh8KuVQDxUmmXf/Qje6nWlcK6GaEs148z2X8HmeV/ESwU/dAUYY
+	qjXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
 	:message-id:subject:to:cc:content-type;
-	bh=zdimkH9XF1O/2hhLAnmw6tSU08oGPdeEhGGuWbw265o=;
-	b=Oef4VHwCmJ5jrc5nkW3HeBkp4QP0jv6BIMLqRW0VjWqO+nf/zXQaFKIs4inVoSz6NC
-	FQs82NJy6MUL/Jyz/2iCkRSqTojwLW5gtRBAZpvt15ME+lSSKRzd3wGeuNKxazCiR9O0
-	pePtsTUogk0d0EPjvG6Cgo5MDr3gS6SuY9h391pEkWj7YQxLUiCRgTS0/IyAdCc9zv1H
-	hzjerza63ghtsgZ6VQwyZYsfAASgoPWnyMcmfBxdtGViKaNjhGBEMGpXveRpbNWJwxMr
-	NlN0RneZ5/prEwD7SXqlnQRV3R2raXXWBrXr+RP4Izs+L+Fe0kf6+CTG7DxIGcLV0f/i
-	bXYg==
-X-Gm-Message-State: AG10YOTSbv2WTb+LWGDPyUEhRMGHYr+4a+Yzy2nGsGnlf/isFyCb4vvrkU19B/8+7iM2pA==
-X-Received: by 10.66.162.164 with SMTP id yb4mr40812686pab.94.1454353878728;
-	Mon, 01 Feb 2016 11:11:18 -0800 (PST)
-Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com.
-	[209.85.220.50]) by smtp.gmail.com with ESMTPSA id
-	v2sm44927494pfi.93.2016.02.01.11.11.16
+	bh=P2jSBfYkRTaTrR9LW8+UPSGikTJ8z4yK29r1MyJozz0=;
+	b=fH0SkfFFlLHm2/vHqnhsvn0gWYGMssAepjRNsYb+W3GDyL6XYmQ1U0PonK0u9AjFjE
+	nlLZ31kFrL8Tvqwr/V1uA/R5jT77C6DbpuMcDkljUtdZmN+6Cx7y4CE6kYe8+0fNBDwc
+	oNrxFJsd2pwfY6w3zZ3f9hhrQG+gFei+5gEmu+5+dAToPHQ+k4ixLRxgMdvbKQ+n4WDD
+	vGDWqPJhsc3J3H/Ntec0262TC2O3PCfpRu0xps2Hs2T3G+56sFm9MXg2l8K1MH+3vmwo
+	fiFX7dclSmiMgaeDVJeBzd2ydAQAPOMkfNGGCW7nyQcPieXdW6e7PQALKYaSkX39vOxD
+	r0tw==
+X-Gm-Message-State: AG10YOSyjSMi0BnTbvS2xCwaygtnpKGVXR5/zbpfcjYAnIKFB/lpZ7hT/To09+xPz1owUg==
+X-Received: by 10.66.160.101 with SMTP id xj5mr15984922pab.153.1454353891992; 
+	Mon, 01 Feb 2016 11:11:31 -0800 (PST)
+Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com.
+	[209.85.192.175])
+	by smtp.gmail.com with ESMTPSA id 20sm45031535pfa.5.2016.02.01.11.11.30
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 01 Feb 2016 11:11:17 -0800 (PST)
+	Mon, 01 Feb 2016 11:11:30 -0800 (PST)
 From: Otavio Salvador <otavio.salvador@ossystems.com.br>
 X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-pa0-f50.google.com with SMTP id uo6so88304551pac.1
+Received: by mail-pf0-f175.google.com with SMTP id n128so87865047pfn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Feb 2016 11:11:16 -0800 (PST)
+	Mon, 01 Feb 2016 11:11:30 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.66.227.73 with SMTP id ry9mr40662486pac.120.1454353876342;
-	Mon, 01 Feb 2016 11:11:16 -0800 (PST)
-Received: by 10.66.72.229 with HTTP; Mon, 1 Feb 2016 11:11:16 -0800 (PST)
-In-Reply-To: <1454350624-1149-1-git-send-email-fabio.berton@ossystems.com.br>
-References: <1454350624-1149-1-git-send-email-fabio.berton@ossystems.com.br>
-Date: Mon, 1 Feb 2016 17:11:16 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKpU9V5BcbfxZaKHt17a4D4DnZs4hoo0qmj6XZUwNObEcA@mail.gmail.com>
-Message-ID: <CAP9ODKpU9V5BcbfxZaKHt17a4D4DnZs4hoo0qmj6XZUwNObEcA@mail.gmail.com>
+X-Received: by 10.98.67.149 with SMTP id l21mr40671451pfi.112.1454353890081;
+	Mon, 01 Feb 2016 11:11:30 -0800 (PST)
+Received: by 10.66.72.229 with HTTP; Mon, 1 Feb 2016 11:11:30 -0800 (PST)
+In-Reply-To: <1454350575-1028-1-git-send-email-fabio.berton@ossystems.com.br>
+References: <1454350575-1028-1-git-send-email-fabio.berton@ossystems.com.br>
+Date: Mon, 1 Feb 2016 17:11:30 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKooA6wqEmGstiMnLP=0H-GU2Ys6oAbmMnjfpgMQWFtVXw@mail.gmail.com>
+Message-ID: <CAP9ODKooA6wqEmGstiMnLP=0H-GU2Ys6oAbmMnjfpgMQWFtVXw@mail.gmail.com>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Cc: Fabio Berton <fabio.berton@ossystems.com.br>
-Subject: Re: [meta-networking][PATCH] lldpd: Update to version 0.9.0
+Subject: Re: [meta-python][PATCH] python-daemonize: Update to version 2.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,19 +67,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2016 19:11:20 -0000
+X-List-Received-Date: Mon, 01 Feb 2016 19:11:32 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Feb 1, 2016 at 4:17 PM, Fabio Berton
+On Mon, Feb 1, 2016 at 4:16 PM, Fabio Berton
 <fabio.berton@ossystems.com.br> wrote:
-> The new release has following changes since version 0.7.19:
->
-> - client: fix segfault when displaying some information
-> - build: add some integration tests
->
 > Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 
+
 Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
+
 
 -- 
 Otavio Salvador                             O.S. Systems
