@@ -1,53 +1,88 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 426A17719D;
-	Mon,  1 Feb 2016 10:42:47 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id l66so63543720wml.0;
-	Mon, 01 Feb 2016 02:42:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=amCAxJ8ey+EGoTR2uoFskVhTWEKV+PCwdMPnE+66ruo=;
-	b=kltbwrnYOMuXJhuAIc2F/NzjBbunws17RrBt8i8vHULidDfR354bKIXBPtnoG3CiQD
-	RAQ70QGodsO3aNdjw0uY5r9UkjSb7ncIF4T7a038veE/D97WGxfehVPNrzMaKT07BQdt
-	LdqlsfVXe/UBoRP95Zic7Gzj6LWP/TMYJrUPOQ1et1tlqyvW1ReuTbH0k4vFs6Eiwn0z
-	Hq8DG4pRDio/mGB7+Fme2ZKDQvoflsk/2fpBUGILMfoPuL/EP9JM2SCm2smP3wO/t2rp
-	+YbwYZ7dKnMN+JjphpYmzmXjVtE8e8qQw6ztGoNWDtPWCh0Ab1I/Z9218lj1W8+4BQ2u
-	OhBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=amCAxJ8ey+EGoTR2uoFskVhTWEKV+PCwdMPnE+66ruo=;
-	b=Tv48OSHF909gnq69rR0ObxR3OzUh9jOLAGS1CPBFDzTNqSQEvks1gls8D5cPaCRvwk
-	SLObqNxfB1cgVZN4DqJWUP5AoX2am6amVhJVx5LbdQSoks81AQ0N5LBd0j7v6BVBkpwt
-	t63WW6dmHJJ1wZHyRNNzp3ebOtwhJTerJcMb87Cz9ok9Tv8nF5k0yAiGnuYsQ/8usfgC
-	PneagLiOI44/RiCHsN2jxuDGCORaZqKu7DuOty7KB+HFGAK9ntQyFJ1RmvtfgpWBr7pD
-	l/frEQ/vOLJNvaN+MWwDbeGRb6HGtU1m+ziFcAnxakNUDDVlYHsbJUdy1hoTaThLlKkL
-	2j5w==
-X-Gm-Message-State: AG10YOTqLjTQOP5aqKkiBWsvdV2SMJle48JUAFZw/yr4LIeCWytxsv6z8X+r8w8bz3Ts1w==
-X-Received: by 10.28.103.5 with SMTP id b5mr1378618wmc.5.1454323367534;
-	Mon, 01 Feb 2016 02:42:47 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	e9sm28378588wja.25.2016.02.01.02.42.45
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 01 Feb 2016 02:42:45 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 1 Feb 2016 11:45:27 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160201104527.GB2803@jama>
-References: <1453200318-25633-1-git-send-email-alexandru.but@ni.com>
-	<20160129180157.GA15053@jama>
-	<20160201092403.GA4183@zdravan.emea.corp.natinst.com>
+Return-Path: <samuli.piippo@theqtcompany.com>
+Received: from emea01-db3-obe.outbound.protection.outlook.com
+	(mail-db3on0122.outbound.protection.outlook.com [157.55.234.122])
+	by mail.openembedded.org (Postfix) with ESMTP id 5418360797
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Feb 2016 10:44:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=digiaonline.onmicrosoft.com; s=selector1-theqtcompany-com;
+	h=From:To:Date:Subject:Message-ID:Content-Type:MIME-Version;
+	bh=sg69upRqGQvlwMh7mzWe9pdaC9lttWJSI4SZbJoyEMg=;
+	b=cx07eLc0V2wzlxQqQdoBOBgfCCtPP/0C8YCwp33xeuGwZ72ZcrSPAUXL7UQGfnj1ZOCHIII1GNGFBaQKlyRw78WtbWYZvlJvbyoNnn7MgQMSaULp/kh9omrmF9ONPjno4BpZx8vpb8S5MS9WkrrKBVnwELEjwUmGYknATpxJXjE=
+Authentication-Results: iot.bzh; dkim=none (message not signed)
+	header.d=none; iot.bzh;
+	dmarc=none action=none header.from=theqtcompany.com; 
+Received: from [10.9.5.47] (91.217.248.11) by
+	HE1PR02MB1179.eurprd02.prod.outlook.com (10.163.173.149) with Microsoft
+	SMTP Server (TLS) id 15.1.396.15; Mon, 1 Feb 2016 10:44:36 +0000
+To: <openembedded-devel@lists.openembedded.org>
+References: <1453906715-6881-1-git-send-email-manuel.bachmann@iot.bzh>
+	<CAP9ODKopO2VAkJV_7-X0YpEaZfUSFLGxhHFvsqeXrUvAEWaPsA@mail.gmail.com>
+From: Samuli Piippo <samuli.piippo@theqtcompany.com>
+X-Enigmail-Draft-Status: N1110
+Message-ID: <56AF3715.3010402@theqtcompany.com>
+Date: Mon, 1 Feb 2016 12:44:37 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-In-Reply-To: <20160201092403.GA4183@zdravan.emea.corp.natinst.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: Bruce Ashfield <bruce.ashfield@windriver.com>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: linux-yocto issues Was: [meta-oe][PATCH] efivar: fix zero initializer compiler error
+In-Reply-To: <CAP9ODKopO2VAkJV_7-X0YpEaZfUSFLGxhHFvsqeXrUvAEWaPsA@mail.gmail.com>
+X-Originating-IP: [91.217.248.11]
+X-ClientProxiedBy: DB4PR07CA006.eurprd07.prod.outlook.com (10.242.229.16) To
+	HE1PR02MB1179.eurprd02.prod.outlook.com (25.163.173.149)
+X-Microsoft-Exchange-Diagnostics: 1; HE1PR02MB1179;
+	2:BaOV3cvVIphAFMV/V2Xkq24k+Ww00FCNRfCyK+8VRDyfJerekzNXCv5s/us5iPXS01b19J9zUPaqSQ6oFHTq1q55LDxGfEYL7i9tZnrp9YB0koUaxrgzg2LS1Mem7f7GqaCGltL0n+VYqJlDRLle+w==;
+	3:qnJ/LsMsRRz70rDCvc3Oq9fc1sey8oLPIVuxC31kzUepskCUkifzBqbUmB8wjCVkvfX86M1gKQc+cjSKWxy6nuOpUXa9c0aRAk26IlB74bIspgo4Ow+EuH7J623nwnpt;
+	25:mSLaImDMYcbZn6Ll/K2CqVhEjnjc+yEhbjNKvh1UNvuBGatICUAhPa0j0gIbla/QDH1R9D9iYE7P2EomiTEk9aYws54F7yEg04j3XzIuzHbSdiUZrBSCIpBW55NPjjXvWOEqYN0xAWCyf5H75F5eXFbO/zMDWC3Udn5HiY/n/hHW+3EfOyizflYgBnK5ZsA0lPfdb7GKIfWwvA6MDiiH/hnQpWAC00SVA0u2/+Yd6fKnqGrYXlmMSm/01YscQ0hb
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:HE1PR02MB1179;
+X-MS-Office365-Filtering-Correlation-Id: 46054a1f-5c24-479c-835b-08d32af4ae06
+X-Microsoft-Exchange-Diagnostics: 1; HE1PR02MB1179;
+	20:4uPQjo0JFug7ffC1sjDDYGNyIgfdCiox0e4ZsUsRzknr45V/qF3qy77U5Rrugl1lxRw4Bhg5B9v4ZC44P3MKw7sbSvE5ZPi0qn6RJ5aUD3HPbhcw72LoFTeKSMx09wkyzWiTBe/Qv6pYUhYsF4FhAvTQu0Etq2Deng7OI2/vW2rarnhRdFnlgSSq/N+6QX7GqDilV1bhjAWeTlse2gejBAwzAJ21TN36YKWn2dtOS6V+bkA8yeJZnm4RiDRqSIdqZGWHepn8oBOKp3/aYhADxnQhXkSTgi3b5Ev5NRl3i6UajhjYFFb4XcvImvctlD9xQal7gsEhffrFCIGuSRYtlxSpJfy9r3eEOZrgAsvm1nBGQ4I4/sj+8vtQNw8IghPG6hJ+ACZ+lZXDG8xfJQjBayeja4K0QmcX3oXcR99Imeu6xwwfpZ55Tr57UaSF0kvP9+Gkw++wBQwFnbgaRLdPWxAYpL+sIaLHysmbj8TfFVq7x0XIf00GGnWRCH81Z0Fl;
+	4:cnmzMAUr4W6Z5JAZoLQhatDn83OidixmMNbv0CpaoTb9/3JyR1QZ4ixp2s1hSXpt8CNm4yWa/l0ZCie3d/+J25pizCVSzi97ryO4Nt0jDKQ0lnYWcq9h2oCnqifUoqmkg+xKYCF6J0l2iGicgkabVT7v23iGaqHRbuR7m0XlO5bFiIyElmd7tEKiUTprScpj9hDSJ6NwzMwzytZe2Sfj8taaSaoHrRbwWdeC/dTunViCz8BuP2lbrzqVIOcPaA/oQhvYZvAXOIyFM4dBed88Hby+utGtwCpAWf+OsX+I2xvaWVEl2zIST03vY8aPY3YnYd1I9gpe8AIWzGMJ+7gc4PLY4ElmIrgsNuOQ1aEJLSBiognQj/H/z3UOfdEZ98Lu
+X-Microsoft-Antispam-PRVS: <HE1PR02MB1179E636363CA45F5180AB4090DE0@HE1PR02MB1179.eurprd02.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(601004)(2401047)(5005006)(8121501046)(3002001)(10201501046);
+	SRVR:HE1PR02MB1179; BCL:0; PCL:0; RULEID:; SRVR:HE1PR02MB1179; 
+X-Forefront-PRVS: 0839D067E7
+X-Forefront-Antispam-Report: SFV:NSPM;
+	SFS:(10019020)(6009001)(6049001)(24454002)(377454003)(64126003)(50986999)(59896002)(5004730100002)(586003)(1096002)(54356999)(65816999)(76176999)(87266999)(77096005)(2906002)(5008740100001)(2950100001)(66066001)(189998001)(110136002)(5001960100002)(230700001)(65806001)(3846002)(47776003)(3470700001)(36756003)(65956001)(42186005)(2351001)(19580405001)(87976001)(19580395003)(80316001)(92566002)(83506001)(4001350100001)(33656002)(23746002)(40100003)(50466002)(4326007)(122386002)(86362001)(7099028);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:HE1PR02MB1179; H:[10.9.5.47];
+	FPR:; SPF:None; MLV:sfv; LANG:en; 
+X-Microsoft-Exchange-Diagnostics: =?Windows-1252?Q?1; HE1PR02MB1179;
+	23:m5NNKfzipPtbuCJVs2xfkdgJUphzaSrGTT9tG?=
+	=?Windows-1252?Q?JqfxBX9ys7zNnLToUNkx13snKLP158Fc+sy3uw65WpBN9cJohm/lz8ES?=
+	=?Windows-1252?Q?sSi5wMNXkhGUYIC3WF+Wx7V6ok8+rzljLZzWWh44jfSQL9lduiv/c2+H?=
+	=?Windows-1252?Q?rvCdM9+SokL2iFDwAYYoG2EMl6a8+a1f4hDpO48p8WotShRwR3bpfyys?=
+	=?Windows-1252?Q?a3vm4vxGjXzj3HQAH4xuNpXuPQTi0UHJc/Pc+u2I0iciQcACVIJTCU+m?=
+	=?Windows-1252?Q?59jb+SCL0WfBM9lT8CBr6ai27fMrZlD2wmMg3pYhcpdj9pQgifInTOye?=
+	=?Windows-1252?Q?QkO31CHkPJH9WO+ryMZKHo+GLlvHZliPDVAes1TaPpN5aloRhUYmdQoE?=
+	=?Windows-1252?Q?JUEAjaM3ZQgSHs/ytT2snzBjbz2DpIsvz7dBFuxgv5iOEK/ufoZ7ugYH?=
+	=?Windows-1252?Q?eWsxVYZzFj2pxNZIvA6PKP26+FTgewbSEof/8UPVqYq3c3jzgCrySg57?=
+	=?Windows-1252?Q?5DmeWDxV96E+43QkfCaEkNi8ydGWBi/KqOUnK3nmesYsx/d3XUoepgCZ?=
+	=?Windows-1252?Q?yY6XskbZuqMOGB/0AWUU1QcvTpV2BoVIxYJ3R3/HPAObcrBZ+DWIyvci?=
+	=?Windows-1252?Q?425gWkDIqA7Re2AIGsdx/7Xwbn1lgamJwM4+9Rk4RJ7WkqaE/hbZONVy?=
+	=?Windows-1252?Q?UBA+V3Lb2B6bzr5VCGsekzxGlumniNM0EeJbip5In9QdppvXLyXI7MQc?=
+	=?Windows-1252?Q?EkJGKErIISNNWN4FAbzKn+gqR91RX/vY3fzOFPsZG07Pm1qDW3ia7p3d?=
+	=?Windows-1252?Q?h/GpTTcQP0EOcqLolPv3QPEi/PP+9nYIzEkF68l1o1g1LaXkdl4bBcGr?=
+	=?Windows-1252?Q?E3f4l9aj6zbpB1LaR82Z5ys66YOLumXOMGAs7OQP3OiWwhe4eGoVr7Az?=
+	=?Windows-1252?Q?tZ+mnUEFsh73LzjXQ3hz0+gDarh2oVxVIX9EyKdeD4jFImRGCrzgpt4E?=
+	=?Windows-1252?Q?h9/YKb427Ik7eaPkg+53bQKPsx+rZqO6hM+HXEO0q80nhz025NUsrwk1?=
+	=?Windows-1252?Q?oeXRfzNFzzDNymamFqsC/QIRmPVQOnDY7F3DDihPtm9oYcnEZWA7WWfn?=
+	=?Windows-1252?Q?xUOqYiPdk9fWhCwsiSUdalVhFjDWMr6tSzNvicSqIUu0h7Olfostq1Ac?=
+	=?Windows-1252?Q?jDDy68cNAFZ/jLKqGf6JcgsLVj9E0tF+Oj5jPsQCUJlzz4fmjeiSd00S?=
+	=?Windows-1252?Q?IilMnqHzmnGC8iKNireTJaoKHBLg1tCJ/xFgYOYwVvEj22J+SqoVy3Kg?=
+	=?Windows-1252?Q?WAZ?=
+X-Microsoft-Exchange-Diagnostics: 1; HE1PR02MB1179;
+	5:R48rsnlDxqb4t/ASBvWPWP/6MJj4oP5WVQ3WB88I+Ty+Bc8LyUWZLJxJ3V4dMow1tACxtSEeWhs1vzOZ9Xe0J6EhGVMeHT1sM1gVe4cRE0dwUgz4spVEHb/9YHbiW+vmoVWuSYT9l/Xuong0kVWQqg==;
+	24:UtUlbA5x9VJb0jUAJbifm+LwZuVTh5hnTCCug733Mpr22QSNAb/bXqGGF+Cxz2mxF2j7U94/YHYA5RRgD4/2kqD8KRreWZp8sJd9ZHgmPiE=
+SpamDiagnosticOutput: 1:23
+SpamDiagnosticMetadata: NSPM
+X-OriginatorOrg: theqtcompany.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2016 10:44:36.4487 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR02MB1179
+Cc: Manuel Bachmann <mbc@iot.bzh>
+Subject: Re: [meta-qt5][PATCH] qtwebengine: build examples by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,228 +95,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2016 10:42:49 -0000
-X-Groupsio-MsgNum: 59781
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="2B/JsCI69OhZNC5r"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 Feb 2016 10:44:40 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---2B/JsCI69OhZNC5r
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 30.01.2016 16:13, Otavio Salvador wrote:
+> On Wed, Jan 27, 2016 at 12:58 PM, Manuel Bachmann
+> <manuel.bachmann@iot.bzh> wrote:
+>> From: Manuel Bachmann <mbc@iot.bzh>
+>>
+>> Just as we do for qtwebkit, let us have a patch to build
+>> qtwebengine examples by default.
+>>
+>> Otherwise, the "qtwebengine-examples" package will be
+>> empty, and attempting to add it with "IMAGE_INSTALL_append"
+>> will result in an error message.
+>>
+>> Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
+>
+> This should be a distro option and not enabled for everyone.
+>
 
-On Mon, Feb 01, 2016 at 11:24:03AM +0200, Alexandru But wrote:
-> On Fri, Jan 29, 2016 at 07:01:57PM +0100, Martin Jansa wrote:
-> > On Tue, Jan 19, 2016 at 12:45:18PM +0200, Alexandru But wrote:
-> > > Patch based on commit a3606c0:
-> > > Sometimes the compiler doesn't like { 0,} as an initializer
-> >=20
-> > Probably not caused by this change, but efivar now fails to build in
-> > world build for qemuarm:
-> >=20
-> > | linux.c: In function 'eb_nvme_ns_id':
-> > | linux.c:48:27: error: 'NVME_IOCTL_ID' undeclared (first use in this f=
-unction)
-> > |   uint64_t ret =3D ioctl(fd, NVME_IOCTL_ID, NULL);
-> > |                            ^
-> > | linux.c:48:27: note: each undeclared identifier is reported only once=
- for each function it appears in
-> > | make[1]: *** [linux.o] Error 1
-> > | make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc=
-/work/armv5te-oe-linux-gnueabi/efivar/0.21-r0/git/src'
-> > | make: *** [src] Error 2
-> > | ERROR: oe_runmake failed
-> > | ERROR: Function failed: do_compile (log file is located at /home/jenk=
-ins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/efivar/0.21-r=
-0/temp/log.do_compile.8376)
-> > NOTE: recipe efivar-0.21-r0: task do_compile: Failed
-> > ERROR: Task 5672 (/home/jenkins/oe/world/shr-core/meta-openembedded/met=
-a-oe/recipes-extended/efivar/efivar_0.21.bb, do_compile) failed with exit c=
-ode '1'
-> >=20
->=20
-> Yes, I saw the error, and indeed is not related to this change. The probl=
-em is
-> that NVMe uapi header was renamed from nvme.h to nvme_ioctl.h. Here is the
-> change:
-> https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?i=
-d=3D9d99a8dda154f38307d43d9c9aa504bd3703d596
->=20
-> The Kconfig update unfortunately hasn't been change in the same time. It =
-was
-> commited to the kernel only recently and will most likely be present in 4=
-=2E5.
-> https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?i=
-d=3Da9cf8284b45110a4d98aea180a89c857e53bf850
->=20
-> In the standard/base repository that yocto uses, only the first of the ab=
-ove
-> changes have been pulled. The old header has a new name, so the desired m=
-acro
-> is no longer there. The problem could be solved from the utility point of=
- view
-> with a patch that gentoo tree already has:
-> https://gitweb.gentoo.org/repo/gentoo.git/tree/sys-libs/efivar/files/0.21=
--nvme_ioctl.h.patch
->=20
-> The problem is that even with this change the new header will not be foun=
-d since
-> the second change is not yet in the yocto repo. I cherry-picked and creat=
-ed all
-> the changes above, but efivar still does not find the new header.
-> Problem is that the headers from sysroot are built by linux-libc-headers =
-and
-> this recipe uses the static 4.4 linux release archive from kernel.org. If=
- all
-> the above are pulled in and linux-libc-headers are using sources with both
-> changes, than efivar build will pass.
->=20
-> From my point of view the possible solutions for this problem are:
-> - Push the efivar patch and blacklist the recipe until linux-libc-headers=
- points
->   to 4.5
-> - Revert the rename change in the yocto kernel repo and apply the efivar =
-patch
->   after 4.5 token
-> - Apply the efivar patch, and a patch for linux-libc-headers
-> - Escalate the problem to the kernel comunity to backport the Kconfig cha=
-nge to
->   4.4
->=20
-> I am not sure which is the right approach since they all have downsides.
+Also there is no need to do this with a patch, same result is achieved with:
 
-Thanks for detailed analysis, I don't use efivar or linux-yocto, so I
-was reporting the issue only because I wasn't able to even build-test
-your change in jenkins.
+EXTRA_QMAKEVARS_PRE += "QT_BUILD_PARTS+=examples"
 
-Adding oe-core and Bruce, because the issue is in
-linux-yocto/linux-libc-headers maintained there.
+Maybe this could be added to qt5.inc as a PACKAGECONFIG option?
+This would allow easily enable examples on any qt module.
 
-Regards,
-
-> > > Signed-off-by: Alexandru But <alexandru.but@ni.com>
-> > > ---
-> > >  ...he-compiler-doesn-t-like-0-as-an-initiali.patch | 42 ++++++++++++=
-++++++++++
-> > >  meta-oe/recipes-extended/efivar/efivar_0.21.bb     |  3 +-
-> > >  2 files changed, 44 insertions(+), 1 deletion(-)
-> > >  create mode 100644 meta-oe/recipes-extended/efivar/efivar/0001-Somet=
-imes-the-compiler-doesn-t-like-0-as-an-initiali.patch
-> > >=20
-> > > diff --git a/meta-oe/recipes-extended/efivar/efivar/0001-Sometimes-th=
-e-compiler-doesn-t-like-0-as-an-initiali.patch b/meta-oe/recipes-extended/e=
-fivar/efivar/0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch
-> > > new file mode 100644
-> > > index 0000000..68cabd6
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-extended/efivar/efivar/0001-Sometimes-the-compi=
-ler-doesn-t-like-0-as-an-initiali.patch
-> > > @@ -0,0 +1,42 @@
-> > > +From a3606c02fd271d32e364fcc540e34ba1899309f6 Mon Sep 17 00:00:00 20=
-01
-> > > +From: Peter Jones <pjones@redhat.com>
-> > > +Date: Tue, 14 Jul 2015 09:33:54 -0400
-> > > +Subject: [PATCH] Sometimes the compiler doesn't like { 0, } as an
-> > > + initializer...
-> > > +
-> > > +Because it really wants to be { {0, },} or something, and sometimes =
-the
-> > > +compiler, knowing full well what we're trying to do, likes to compla=
-in
-> > > +about the rigor applied to our technique in doing it.
-> > > +
-> > > +memset() the struct ifreq to 0 instead so I don't need to figure out=
- its
-> > > +internal structure just to zero it out.
-> > > +
-> > > +Resolves #28
-> > > +
-> > > +Signed-off-by: Peter Jones <pjones@redhat.com>
-> > > +---
-> > > + src/linux.c | 3 ++-
-> > > + 1 file changed, 2 insertions(+), 1 deletion(-)
-> > > +
-> > > +diff --git a/src/linux.c b/src/linux.c
-> > > +index 57f71f3..817b8e6 100644
-> > > +--- a/src/linux.c
-> > > ++++ b/src/linux.c
-> > > +@@ -847,12 +847,13 @@ ssize_t
-> > > + __attribute__((__visibility__ ("hidden")))
-> > > + make_mac_path(uint8_t *buf, ssize_t size, const char * const ifname)
-> > > + {
-> > > +-	struct ifreq ifr =3D { 0, };
-> > > ++	struct ifreq ifr;
-> > > + 	struct ethtool_drvinfo drvinfo =3D { 0, };
-> > > + 	int fd, rc;
-> > > + 	ssize_t ret =3D -1, sz, off=3D0;
-> > > + 	char busname[PATH_MAX+1] =3D "";
-> > > +=20
-> > > ++	memset(&ifr, 0, sizeof (ifr));
-> > > + 	strncpy(ifr.ifr_name, ifname, IF_NAMESIZE);
-> > > + 	drvinfo.cmd =3D ETHTOOL_GDRVINFO;
-> > > + 	ifr.ifr_data =3D (caddr_t)&drvinfo;
-> > > +--=20
-> > > +2.6.1
-> > > +
-> > > diff --git a/meta-oe/recipes-extended/efivar/efivar_0.21.bb b/meta-oe=
-/recipes-extended/efivar/efivar_0.21.bb
-> > > index b5ef90a..1684a10 100644
-> > > --- a/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-> > > +++ b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-> > > @@ -8,7 +8,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6626bb1e20=
-189cfa95f2c508ba286393"
-> > >  DEPENDS_class-target =3D "popt efivar-native"
-> > > =20
-> > >  SRCREV =3D "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
-> > > -SRC_URI =3D "git://github.com/rhinstaller/efivar.git"
-> > > +SRC_URI =3D "git://github.com/rhinstaller/efivar.git \
-> > > +           file://0001-Sometimes-the-compiler-doesn-t-like-0-as-an-i=
-nitiali.patch"
-> > >  SRC_URI_append_class-target =3D " file://0001-efivar-fix-for-cross-c=
-ompile.patch"
-> > >  SRC_URI_append_class-native =3D " file://efivar-drop-options-not-sup=
-ported-by-lower-version-gcc.patch"
-> > > =20
-> > > --=20
-> > > 2.6.1
-> > >=20
-> > > --=20
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >=20
-> > --=20
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->=20
->=20
->=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---2B/JsCI69OhZNC5r
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlavN0YACgkQN1Ujt2V2gBzSLwCgqGP+fRyQP01Paz2p5eStOL6h
-fw4An2w2Yr6ZSJ9yPBrgqD0gXcwGKLLC
-=hokz
------END PGP SIGNATURE-----
-
---2B/JsCI69OhZNC5r--
