@@ -1,46 +1,50 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pf0-f180.google.com (mail-pf0-f180.google.com
-	[209.85.192.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C69873289
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f172.google.com (mail-io0-f172.google.com
+	[209.85.223.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 41FC5771D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Feb 2016 21:19:45 +0000 (UTC)
-Received: by mail-pf0-f180.google.com with SMTP id x125so90548873pfb.0
+	Mon,  1 Feb 2016 21:22:29 +0000 (UTC)
+Received: by mail-io0-f172.google.com with SMTP id 9so93943257iom.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Feb 2016 13:19:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=63MBfMiQEdD0u+KqR6usxt25EaP4BfrxQTmqAaDItm0=;
-	b=rE8V3pZn6BPNMByyVurQ0TcCymFT0oMtUtql/f2AmBHwx/vpRhnS7o3zw7Vg2Gs3Pz
-	RbSTTZvpK7qNzz9X/ZyGItK5Meq8ew1n4nrSp4SuWVNLciA5hpvCmNp1yllduvZMRXVM
-	YIUhOYPtB/S2brDsly7Rdmw24TQyApI6Ea5cSETV7yhDXT3JD4OfE6/h4T4TkWgwwzCo
-	wnNrxIJwspAnySrSansjeIjRzkAzAc+TYaNXZe95IxhExAb+0QlA34YJVOkQuoMUlkHM
-	+oLUqSgumnnScPBmeIVe4qvaia/8xrXy5goenzzLGZ3TSEf+b9PbK5LLZm9Q1P+4JCad
-	wRvw==
+	Mon, 01 Feb 2016 13:22:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=RhfPNLj2C3pJGk4oiWItnvPS2u6kH0uO0hrwvtv4nMY=;
+	b=Zr8cYJg4jnLb8tLs8ApGe5PWd6O89C7gkvnxCYhMtMvDP0U3NqTieMtm1+qzvw3+0z
+	kQ7roO1XifR4GAFA8QvfCcLePCsRKoN3xrqI6W/M+R60UmepZFA7hFpLDhZa3ucgKnRo
+	+NUUD9hp4fgopoGb+kSQZRrfSWOD6ZVyO12T0RbXyfRK6IRiQshenztkQQ1C6OJ/y5Pc
+	5YCiZzGNhtbJ2dzER+YQ82U1S2IAzgTu1jTmj3+iBDN3Nh17alqLKszN+I38tylEHJvM
+	NziVDKZdLzMAc606pateAFlXImOH8vPl5lM/ae65/w0OQIm76yi+U2206VBvsFUsM8Zu
+	Ho2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=63MBfMiQEdD0u+KqR6usxt25EaP4BfrxQTmqAaDItm0=;
-	b=fy8v7LTjoMYnqh4CW2GaPDwpgD8eZMEAK6hIX3vyH257+SgILngXqRsprDmEQN65+x
-	ZsWWaKoHML6r40lgIcxXtSZlqSioJzJw82rR9mJ5+VivM8bKr4BZRebseLi+LRI/iWL9
-	v4It+UV8LL8cEaZ0PLAwh/2gOiCP96ovYB12QFMKttgSJxFlnnYqS0UxOmaTLwvqqWm+
-	zyCrQlO68zCeaBfw/+pfSc2FrnDj196FhsKx9Rl2N1T1Q7R/YRQXsKh3ZjCMoo6INvkB
-	xvbNdmk7PuZasXbf4efeINnDSA2iIoBlGQMIQFa6vBaOcsVkbuw2wUVwB84m0cKUCJob
-	Tf2g==
-X-Gm-Message-State: AG10YOS/YV0jHLo0slNYMhed1CNNkgcmj8WNnSKydtUFxGdpA0bH+lY67shQwX5NFNrZOQ==
-X-Received: by 10.98.69.155 with SMTP id n27mr41862722pfi.68.1454361586138;
-	Mon, 01 Feb 2016 13:19:46 -0800 (PST)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by smtp.gmail.com with ESMTPSA id
-	t87sm26722124pfa.14.2016.02.01.13.19.44
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 01 Feb 2016 13:19:44 -0800 (PST)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Feb 2016 13:19:39 -0800
-Message-Id: <1454361579-12806-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-multimedia][PATCH] gst-plugins-base: add perl runtime dependency to gst-plugins-base-apps
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=RhfPNLj2C3pJGk4oiWItnvPS2u6kH0uO0hrwvtv4nMY=;
+	b=JAUpFlDfaVCtxyPK3CQPwQxXRuV2aicdezIfZqunLs1mOO33eY/KxRV/cXRTmg8hlr
+	2rMy0eh49UFiUqIf5UeDIA7RZxZ7cittVMGZi0YsMO6x8qJNMquQPgpL+qV8zhJrT6Iu
+	VV8o/L4FV2wk4v57dDuGq1gzQHNV0Y1GeNyIxtKSQ0eshgnrnS0aHVXyF/T92YVK8j5P
+	d4D5W/czqoj4xeYTQQwebrn24VPjV75gyRPlkglgp2aNXgxfZYsgBtwK7sZp8CNxipyJ
+	jmLAxRmv/5o6Qdh3GeFz+0ciYRly2xj4G2gM0JXJdfBvLzJu7nqiy3NifPiHhIQ9CQ9E
+	s/5w==
+X-Gm-Message-State: AG10YOQEWet7I086u6rw3XRako6QnzIU7zXM94RsxTUD/JnaB8nFbvNZB4biYRpnEtCia/zJBomjboSfyxZyDy9K
+X-Received: by 10.107.10.157 with SMTP id 29mr11131736iok.133.1454361750491;
+	Mon, 01 Feb 2016 13:22:30 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.107.162.70 with HTTP; Mon, 1 Feb 2016 13:22:11 -0800 (PST)
+In-Reply-To: <CAJ86T=XrU3Rz0OMk7EukArS07PBCifE89U2vhmqKcBDAytZ3xQ@mail.gmail.com>
+References: <20160201143944.GA2639@jama>
+	<CAJ86T=XrU3Rz0OMk7EukArS07PBCifE89U2vhmqKcBDAytZ3xQ@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 1 Feb 2016 21:22:11 +0000
+Message-ID: <CAJTo0LYG2=+s=+a4ptGFcM4d-XuS5pRCkHLodGK-CY23CbROfw@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: State of bitbake world, Failed tasks 2016-01-30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,33 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2016 21:19:45 -0000
+X-List-Received-Date: Mon, 01 Feb 2016 21:22:32 -0000
+Content-Type: text/plain; charset=UTF-8
 
-gst-plugins-base-apps contains /usr/bin/gst-visualise-0.10, which is
-a perl script.
+On 1 February 2016 at 20:47, Andre McCurdy <armccurdy@gmail.com> wrote:
 
-Note that the gst-visualise-0.10 script was dropped upstream prior to
-the first gst-plugins-base 1.0 release:
+> There seems to be something odd going on with these file-rdeps warning
+> messages. e.g.
+>
+>   chkconfig-1.3.58: /usr/sbin/ntsysv_chkconfig contained in package
+> chkconfig ...
+>
+> Should be:
+>
+>   chkconfig-1.3.58: /usr/sbin/ntsysv contained in package chkconfig ...
+>
 
-  http://cgit.freedesktop.org/gstreamer/gst-plugins-base/commit/?id=227be98c0b65a1616c0d0689db6fa7576bcbe434
+Yes, insane.bbclass needs to sanitise the string for display.  If the
+filename contains an underscore you get that appearing as @underscore@ too!
+:)
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- .../recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb      | 3 +++
- 1 file changed, 3 insertions(+)
+(patches welcome)
 
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
-index aa6b3a1..c86834f 100644
---- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
-@@ -38,3 +38,6 @@ do_configure_prepend() {
- FILES_${PN} += "${datadir}/${BPN}"
- 
- CACHED_CONFIGUREVARS_append_x86 = " ac_cv_header_emmintrin_h=no ac_cv_header_xmmintrin_h=no"
-+
-+# /usr/bin/gst-visualise-0.10 is a perl script.
-+RDEPENDS_${PN}-apps += "perl"
--- 
-1.9.1
-
+Ross
 
