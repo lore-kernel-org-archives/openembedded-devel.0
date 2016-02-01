@@ -1,47 +1,46 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qg0-f54.google.com (mail-qg0-f54.google.com
-	[209.85.192.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 5CB4C770F8
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
+	[209.85.213.170])
+	by mail.openembedded.org (Postfix) with ESMTP id D83887017C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Feb 2016 18:27:48 +0000 (UTC)
-Received: by mail-qg0-f54.google.com with SMTP id e32so126331566qgf.3
+	Mon,  1 Feb 2016 18:46:36 +0000 (UTC)
+Received: by mail-ig0-f170.google.com with SMTP id ik10so42823511igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Feb 2016 10:27:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=qc23vMpZSX6u9lzVax05kuoYu8kVYRNxOgKXLHkvRdM=;
-	b=Bvts06pC33SDF9qsmw8swoL7WTQwm7J+BVApbHKQr518JsiRNHRRDllXWz2hd/OOWI
-	sk5WDKnMsHDeya2d0l9w1kIWGXdCMMbsfHmBkW7a5Q46MlZhi9LEqAxG4rbfZMw5+Lmb
-	ajxloel3b5DghCNa6Zru0GCqU4tGiWxa+Y27wYmlz+WhbXrnfiI/I7SdiXzzl23Nn5TD
-	yjBGFixEXE5qh+JnkzPSl31r95RSrnZQpCWbjW+Wslm2oLDs0p86Jo8MybSfXy1gxfx0
-	BS3QLPd++uHlPlrz0gxqJVpLmEvm7gJEXx8HjAjegr72nEpr7mp5CMFKq/1wdhIK4kQ5
-	qpQQ==
+	Mon, 01 Feb 2016 10:46:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=Rl08AMim+BbJ6JbDT14ZK8B3S5fVc9tB64Vnf7E8HQk=;
+	b=Kd0A91koYm59ZIJzM+1xaEp9hTZzGcWIuCTr7PO0p9XyM5spMyibPk2EX5Ut3nRiFR
+	edM9+Oahsmt4Xa2qzxcuj9cAmsxpXMsdJ6o7Fp5SBlQ8MSbqw40KwKZzq6nYFso7dTEW
+	usp2vvsytB/KJLrQtvJIqWek5uLZDAt6h9XjS+LeHMgmws9EBlG/ViHf4bYZO4giBwr3
+	5JWMhNkOueCDeOADq6r+0Xf+zyk45qpl5zf8PMLcaCnIL+O81Qv5WzNz7CqHaRgk+exE
+	yDso7QHP452PYSamxl5ocpOrdDeXCj+RyWW61QphRoGyrDvhL5sMaFfgzhcGYNez0i52
+	HlXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=qc23vMpZSX6u9lzVax05kuoYu8kVYRNxOgKXLHkvRdM=;
-	b=D8Djr3h730FJA9yndbkLuXj2pdW89MQquRt1piWvVLotqjQVXpRMwrSwOHTGXNQb9H
-	AuKAnYQyCYBeve6gSlR2d1wzWATRnZIiNYamTflxGHTZOs6xjqqQ8YANUxi/WjxNOi6i
-	pRbKtYgBxnkLLGhaKM526Vymihtz/vfXp4fXjc4SciWIi/vavA9o36wmpc55nRy1wBng
-	TNIUrMVgM/40yFtQDa/poE+bcQy3PX/FNzGlys4BBxfsiF70tacIOyVmGad4HmA1U2Lc
-	aF84j9jw7okAUNFFPB1Qg3ec5Z/Q5Ez0+0dUkgo8I7OXgtHbASJWyM+JrbrXUtqxHLA7
-	es0Q==
-X-Gm-Message-State: AG10YOS3R68rtJpZHFhEyBFR5vI8/dYzLpLhooPBhGuqnsTNnbLEV0j8xOT1ySAfsqlCDQ==
-X-Received: by 10.140.222.146 with SMTP id s140mr32230706qhb.24.1454351268927; 
-	Mon, 01 Feb 2016 10:27:48 -0800 (PST)
-Received: from monster.lab.ossystems.com.br ([177.127.6.77])
-	by smtp.gmail.com with ESMTPSA id
-	e34sm14318729qga.4.2016.02.01.10.27.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 01 Feb 2016 10:27:47 -0800 (PST)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Feb 2016 16:17:04 -0200
-Message-Id: <1454350624-1149-1-git-send-email-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-Cc: Fabio Berton <fabio.berton@ossystems.com.br>
-Subject: [meta-networking][PATCH] lldpd: Update to version 0.9.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=Rl08AMim+BbJ6JbDT14ZK8B3S5fVc9tB64Vnf7E8HQk=;
+	b=bldGZI1EXD5jTUy3oOxwPfvs67pjaIOzlKGOek2fzJyQwCz6Bzrjsm3wg7Ph+gGqj8
+	dXqghUm4lCSGqSkTVVoAs7Tc1wYeG7aSPCDNoiM/SWGU93B2VrqhjTh2yMWTGgyWGRCl
+	vjj7a2o7mHUHNel0PlDpnWGJ+csn4+0lSJ0MlYgV1I+G/8JWdzPTmRGmuQ/wfIPhFZhY
+	MVs7orGItJqumFCZ3OA2Q0eUVNRRDUhpYNsTlkjfZGU/jkHrAVR+ZxGRXRw/Egzx4EWO
+	WiWNUTRM5YJP8hL6fM63lhmkddgA4UIFYxIPIr+xxMq+wZq8qI41/Uf3waBvZ1YZ+KqU
+	C7iQ==
+X-Gm-Message-State: AG10YORWDSmQN3h1dj4gaQqe09EzlBB2NcxnY7rHNf9QkCF9vSmWBMRP+7ezPnJQNtVxUs4IdXi7iFIzARktxw==
+X-Received: by 10.50.33.81 with SMTP id p17mr11223655igi.75.1454352397036;
+	Mon, 01 Feb 2016 10:46:37 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.107.46.219 with HTTP; Mon, 1 Feb 2016 10:46:07 -0800 (PST)
+In-Reply-To: <20160201092403.GA4183@zdravan.emea.corp.natinst.com>
+References: <1453200318-25633-1-git-send-email-alexandru.but@ni.com>
+	<20160129180157.GA15053@jama>
+	<20160201092403.GA4183@zdravan.emea.corp.natinst.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 1 Feb 2016 10:46:07 -0800
+Message-ID: <CAMKF1srGrCKd=u3xuYEB4c2NgBsT1KJWTW6D4DPqFaFoerowFg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] efivar: fix zero initializer compiler error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,38 +53,169 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2016 18:27:49 -0000
+X-List-Received-Date: Mon, 01 Feb 2016 18:46:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The new release has following changes since version 0.7.19:
+On Mon, Feb 1, 2016 at 1:24 AM, Alexandru But <alexandru.but@ni.com> wrote:
+> On Fri, Jan 29, 2016 at 07:01:57PM +0100, Martin Jansa wrote:
+>> On Tue, Jan 19, 2016 at 12:45:18PM +0200, Alexandru But wrote:
+>> > Patch based on commit a3606c0:
+>> > Sometimes the compiler doesn't like { 0,} as an initializer
+>>
+>> Probably not caused by this change, but efivar now fails to build in
+>> world build for qemuarm:
+>>
+>> | linux.c: In function 'eb_nvme_ns_id':
+>> | linux.c:48:27: error: 'NVME_IOCTL_ID' undeclared (first use in this function)
+>> |   uint64_t ret = ioctl(fd, NVME_IOCTL_ID, NULL);
+>> |                            ^
+>> | linux.c:48:27: note: each undeclared identifier is reported only once for each function it appears in
+>> | make[1]: *** [linux.o] Error 1
+>> | make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/efivar/0.21-r0/git/src'
+>> | make: *** [src] Error 2
+>> | ERROR: oe_runmake failed
+>> | ERROR: Function failed: do_compile (log file is located at /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/efivar/0.21-r0/temp/log.do_compile.8376)
+>> NOTE: recipe efivar-0.21-r0: task do_compile: Failed
+>> ERROR: Task 5672 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extended/efivar/efivar_0.21.bb, do_compile) failed with exit code '1'
+>>
+>
+> Yes, I saw the error, and indeed is not related to this change. The problem is
+> that NVMe uapi header was renamed from nvme.h to nvme_ioctl.h. Here is the
+> change:
+> https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=9d99a8dda154f38307d43d9c9aa504bd3703d596
+>
+> The Kconfig update unfortunately hasn't been change in the same time. It was
+> commited to the kernel only recently and will most likely be present in 4.5.
+> https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=a9cf8284b45110a4d98aea180a89c857e53bf850
+>
+> In the standard/base repository that yocto uses, only the first of the above
+> changes have been pulled. The old header has a new name, so the desired macro
+> is no longer there. The problem could be solved from the utility point of view
+> with a patch that gentoo tree already has:
+> https://gitweb.gentoo.org/repo/gentoo.git/tree/sys-libs/efivar/files/0.21-nvme_ioctl.h.patch
+>
+> The problem is that even with this change the new header will not be found since
+> the second change is not yet in the yocto repo. I cherry-picked and created all
+> the changes above, but efivar still does not find the new header.
+> Problem is that the headers from sysroot are built by linux-libc-headers and
+> this recipe uses the static 4.4 linux release archive from kernel.org. If all
+> the above are pulled in and linux-libc-headers are using sources with both
+> changes, than efivar build will pass.
+>
+> From my point of view the possible solutions for this problem are:
+> - Push the efivar patch and blacklist the recipe until linux-libc-headers points
+>   to 4.5
 
-- client: fix segfault when displaying some information
-- build: add some integration tests
+this is usually not preferred since its far away, please propose a
+backport to linux-yocto 4.4
 
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
----
- .../recipes-daemons/lldpd/{lldpd_0.7.19.bb => lldpd_0.9.0.bb}         | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-daemons/lldpd/{lldpd_0.7.19.bb => lldpd_0.9.0.bb} (94%)
+> - Revert the rename change in the yocto kernel repo and apply the efivar patch
+>   after 4.5 token
+> - Apply the efivar patch, and a patch for linux-libc-headers
+> - Escalate the problem to the kernel comunity to backport the Kconfig change to
+>   4.4
 
-diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_0.7.19.bb b/meta-networking/recipes-daemons/lldpd/lldpd_0.9.0.bb
-similarity index 94%
-rename from meta-networking/recipes-daemons/lldpd/lldpd_0.7.19.bb
-rename to meta-networking/recipes-daemons/lldpd/lldpd_0.9.0.bb
-index 1bdc8af..3d97169 100644
---- a/meta-networking/recipes-daemons/lldpd/lldpd_0.7.19.bb
-+++ b/meta-networking/recipes-daemons/lldpd/lldpd_0.9.0.bb
-@@ -11,8 +11,8 @@ SRC_URI = "\
-     file://lldpd.default \
-     "
- 
--SRC_URI[md5sum] = "4e924420e00ccd5dc289506f43221820"
--SRC_URI[sha256sum] = "aac11cb1fdc037709517372c70c9bf89c752ab8e5eaab9ce140b84ed5a0507c8"
-+SRC_URI[md5sum] = "ed0226129b0c90b3a45c273fe1aba8de"
-+SRC_URI[sha256sum] = "300e4a590f7bf21c79d5ff94c2d6a69d0b2c34dbc21e17281496462a04ca80bc"
- 
- inherit autotools update-rc.d useradd systemd pkgconfig
- 
--- 
-2.1.4
+yes thats the right long term approach.
 
+>
+> I am not sure which is the right approach since they all have downsides.
+>
+> Regards,
+> Alex But
+>
+>> >
+>> > Signed-off-by: Alexandru But <alexandru.but@ni.com>
+>> > ---
+>> >  ...he-compiler-doesn-t-like-0-as-an-initiali.patch | 42 ++++++++++++++++++++++
+>> >  meta-oe/recipes-extended/efivar/efivar_0.21.bb     |  3 +-
+>> >  2 files changed, 44 insertions(+), 1 deletion(-)
+>> >  create mode 100644 meta-oe/recipes-extended/efivar/efivar/0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch
+>> >
+>> > diff --git a/meta-oe/recipes-extended/efivar/efivar/0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch b/meta-oe/recipes-extended/efivar/efivar/0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch
+>> > new file mode 100644
+>> > index 0000000..68cabd6
+>> > --- /dev/null
+>> > +++ b/meta-oe/recipes-extended/efivar/efivar/0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch
+>> > @@ -0,0 +1,42 @@
+>> > +From a3606c02fd271d32e364fcc540e34ba1899309f6 Mon Sep 17 00:00:00 2001
+>> > +From: Peter Jones <pjones@redhat.com>
+>> > +Date: Tue, 14 Jul 2015 09:33:54 -0400
+>> > +Subject: [PATCH] Sometimes the compiler doesn't like { 0, } as an
+>> > + initializer...
+>> > +
+>> > +Because it really wants to be { {0, },} or something, and sometimes the
+>> > +compiler, knowing full well what we're trying to do, likes to complain
+>> > +about the rigor applied to our technique in doing it.
+>> > +
+>> > +memset() the struct ifreq to 0 instead so I don't need to figure out its
+>> > +internal structure just to zero it out.
+>> > +
+>> > +Resolves #28
+>> > +
+>> > +Signed-off-by: Peter Jones <pjones@redhat.com>
+>> > +---
+>> > + src/linux.c | 3 ++-
+>> > + 1 file changed, 2 insertions(+), 1 deletion(-)
+>> > +
+>> > +diff --git a/src/linux.c b/src/linux.c
+>> > +index 57f71f3..817b8e6 100644
+>> > +--- a/src/linux.c
+>> > ++++ b/src/linux.c
+>> > +@@ -847,12 +847,13 @@ ssize_t
+>> > + __attribute__((__visibility__ ("hidden")))
+>> > + make_mac_path(uint8_t *buf, ssize_t size, const char * const ifname)
+>> > + {
+>> > +-  struct ifreq ifr = { 0, };
+>> > ++  struct ifreq ifr;
+>> > +   struct ethtool_drvinfo drvinfo = { 0, };
+>> > +   int fd, rc;
+>> > +   ssize_t ret = -1, sz, off=0;
+>> > +   char busname[PATH_MAX+1] = "";
+>> > +
+>> > ++  memset(&ifr, 0, sizeof (ifr));
+>> > +   strncpy(ifr.ifr_name, ifname, IF_NAMESIZE);
+>> > +   drvinfo.cmd = ETHTOOL_GDRVINFO;
+>> > +   ifr.ifr_data = (caddr_t)&drvinfo;
+>> > +--
+>> > +2.6.1
+>> > +
+>> > diff --git a/meta-oe/recipes-extended/efivar/efivar_0.21.bb b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+>> > index b5ef90a..1684a10 100644
+>> > --- a/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+>> > +++ b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+>> > @@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
+>> >  DEPENDS_class-target = "popt efivar-native"
+>> >
+>> >  SRCREV = "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
+>> > -SRC_URI = "git://github.com/rhinstaller/efivar.git"
+>> > +SRC_URI = "git://github.com/rhinstaller/efivar.git \
+>> > +           file://0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch"
+>> >  SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch"
+>> >  SRC_URI_append_class-native = " file://efivar-drop-options-not-supported-by-lower-version-gcc.patch"
+>> >
+>> > --
+>> > 2.6.1
+>> >
+>> > --
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>> --
+>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+>
+>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
