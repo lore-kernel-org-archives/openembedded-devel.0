@@ -1,30 +1,64 @@
-Return-Path: <alexandru.but@ni.com>
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mail.openembedded.org (Postfix) with ESMTP id A740F60745
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 91B3D74197
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Feb 2016 17:40:03 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	u12He3NG005243 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 2 Feb 2016 11:40:03 -0600
-Received: from zdravan.emea.corp.natinst.com ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2016020211400381-565379 ;
-	Tue, 2 Feb 2016 11:40:03 -0600 
-From: Alexandru But <alexandru.but@ni.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 2 Feb 2016 19:40:02 +0200
-Message-Id: <1454434802-29633-1-git-send-email-alexandru.but@ni.com>
-X-Mailer: git-send-email 2.6.1
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 02/02/2016 11:40:03 AM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 02/02/2016 11:40:04 AM,
-	Serialize complete at 02/02/2016 11:40:04 AM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2016-02-02_11:, , signatures=0
-Subject: [meta-oe][PATCH] efivar: nvme header was renamed in linux 4.4
+	Tue,  2 Feb 2016 20:04:08 +0000 (UTC)
+Received: by mail-pa0-f47.google.com with SMTP id cy9so104474125pac.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Feb 2016 12:04:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:cc:content-type;
+	bh=E94hFEcGOcJwzIZAgKXjeiWxZ/5Rtdzd6DWIC/Ma/Uo=;
+	b=uy3Wvd/ACunruVRh9rhpP715Xp8ghlc7LGjRfQMQxRMIYn3rr27LNNssBG3g7W+Jek
+	1MdkOadNS5zCKO6V+ZmyIUxeKVBdXXhVcLsSZi+zmv/7o+hlgZnxSaNEPrvSEwE41Dfj
+	TO2VOXzTc8izwa5o6FRybM/tIi8o+h+NSidLhP1FWk/dowL3BgHELBpvnGq2AWsTOUhp
+	BVwIPJG2/Vml5NSJTsWbQb405BMDmARh/bsoyHPwyyW2e6Pffam7JHvl8i10NI9VoCnY
+	I2qz8EuO1wq77mT//2ucSXcGDlvYBl3JWKMuw/mOXPWyOvIieHj6KY6N7NT3DssRoaTR
+	dDHA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc:content-type;
+	bh=E94hFEcGOcJwzIZAgKXjeiWxZ/5Rtdzd6DWIC/Ma/Uo=;
+	b=DdbhV3+X40Ukwogl3ER9NNJZajvJ9MqESLfghSPxRp1oSpiOUh5gPfjT4Xh7Z3YnJ4
+	oAnHfoIHEtwC/1zlt72SOBGDFzW/PKD7MVrriMNb4cpaUkShFLrd6zBPR8Dk6E/eatOO
+	Pb0UWHcW86un2YIGHZHubm9DcVfbDJjx5ZKI5ofYDP2LWa286BnnB6+R0pTKcxqTOF82
+	445nFrpr05ny1KqXXKTU8hMiIAefEGKaXYkvX2rviRZIlePxqeu/8sJKZs8ax4dGfogK
+	tmDwiWAOwXXA181WvG2NH5Nqx7MZZwIPjsACxirO/WR6U/C30OxOvEkSHkHQibaqAXKe
+	PkvA==
+X-Gm-Message-State: AG10YOQUAoEYwvpyit6mN9E9+5f3c4wgPyHAgtQEYDD5vwLDAgN/LPVlCmDSSCV38ejlNA==
+X-Received: by 10.66.62.195 with SMTP id a3mr50586289pas.8.1454443448620;
+	Tue, 02 Feb 2016 12:04:08 -0800 (PST)
+Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com.
+	[209.85.220.54])
+	by smtp.gmail.com with ESMTPSA id l62sm4615929pfj.7.2016.02.02.12.04.06
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 02 Feb 2016 12:04:06 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-pa0-f54.google.com with SMTP id uo6so106260455pac.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Feb 2016 12:04:06 -0800 (PST)
+MIME-Version: 1.0
+X-Received: by 10.66.227.73 with SMTP id ry9mr49906680pac.120.1454443446423;
+	Tue, 02 Feb 2016 12:04:06 -0800 (PST)
+Received: by 10.66.72.229 with HTTP; Tue, 2 Feb 2016 12:04:06 -0800 (PST)
+In-Reply-To: <56B07AD3.2080608@theqtcompany.com>
+References: <1453906715-6881-1-git-send-email-manuel.bachmann@iot.bzh>
+	<CAP9ODKopO2VAkJV_7-X0YpEaZfUSFLGxhHFvsqeXrUvAEWaPsA@mail.gmail.com>
+	<56AF3715.3010402@theqtcompany.com>
+	<CAP9ODKqVJez0K=6rGfAK3OUgqdSEO4PmzVhFjnjG94WMuhvXsA@mail.gmail.com>
+	<56B07AD3.2080608@theqtcompany.com>
+Date: Tue, 2 Feb 2016 18:04:06 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKreOfhmOGwmjVr7qWSu5F7uKmcX9SqWS4RmO0G3EnwEnA@mail.gmail.com>
+Message-ID: <CAP9ODKreOfhmOGwmjVr7qWSu5F7uKmcX9SqWS4RmO0G3EnwEnA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Manuel Bachmann <mbc@iot.bzh>
+Subject: Re: [meta-qt5][PATCH] qtwebengine: build examples by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,69 +71,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Feb 2016 17:40:03 -0000
+X-List-Received-Date: Tue, 02 Feb 2016 20:04:09 -0000
+Content-Type: text/plain; charset=UTF-8
 
-nvme.h was renamed to nvme_ioctl.h in linux uapi headers since 4.4. Patch
-taken from the gentoo repository.
+On Tue, Feb 2, 2016 at 7:45 AM, Samuli Piippo
+<samuli.piippo@theqtcompany.com> wrote:
+> On 01.02.2016 13:14, Otavio Salvador wrote:
+>>
+>> On Mon, Feb 1, 2016 at 8:44 AM, Samuli Piippo
+>> <samuli.piippo@theqtcompany.com> wrote:
+>>>
+>>> On 30.01.2016 16:13, Otavio Salvador wrote:
+>>>>
+>>>>
+>>>> On Wed, Jan 27, 2016 at 12:58 PM, Manuel Bachmann
+>>>> <manuel.bachmann@iot.bzh> wrote:
+>>>>>
+>>>>>
+>>>>> From: Manuel Bachmann <mbc@iot.bzh>
+>>>>>
+>>>>> Just as we do for qtwebkit, let us have a patch to build
+>>>>> qtwebengine examples by default.
+>>>>>
+>>>>> Otherwise, the "qtwebengine-examples" package will be
+>>>>> empty, and attempting to add it with "IMAGE_INSTALL_append"
+>>>>> will result in an error message.
+>>>>>
+>>>>> Signed-off-by: Manuel Bachmann <manuel.bachmann@iot.bzh>
+>>>>
+>>>>
+>>>>
+>>>> This should be a distro option and not enabled for everyone.
+>>>>
+>>>
+>>> Also there is no need to do this with a patch, same result is achieved
+>>> with:
+>>>
+>>> EXTRA_QMAKEVARS_PRE += "QT_BUILD_PARTS+=examples"
+>>>
+>>> Maybe this could be added to qt5.inc as a PACKAGECONFIG option?
+>>> This would allow easily enable examples on any qt module.
+>>
+>>
+>> It is:
+>>
+>>
+>> https://github.com/meta-qt5/meta-qt5/blob/master/recipes-qt/qt5/qtbase_git.bb#L67
+>>
+>
+> Enabling the PACKAGECONFIG[examples] from qtbase means that every qt module
+> will build their examples.
+> If added to qt5.inc, it would build examples only from a qt module you
+> bbappend with PACKAGECONFIG += examples.
 
-Signed-off-by: Alexandru But <alexandru.but@ni.com>
----
- .../efivar/efivar/0.21-nvme_ioctl.h.patch          | 30 ++++++++++++++++++++++
- meta-oe/recipes-extended/efivar/efivar_0.21.bb     |  3 ++-
- 2 files changed, 32 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch
+Agreed; I support this approach if you are willing to send a patch;
+otherwise  I can do it.
 
-diff --git a/meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch b/meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch
-new file mode 100644
-index 0000000..221ec5a
---- /dev/null
-+++ b/meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch
-@@ -0,0 +1,30 @@
-+From ae0869b71a90bc14e67f3c917bd9c96db25c99a6 Mon Sep 17 00:00:00 2001
-+From: Mike Gilbert <floppym@gentoo.org>
-+Date: Thu, 14 Jan 2016 17:02:31 -0500
-+Subject: [PATCH] Workaround rename of linux/nvme.h
-+
-+Bug: https://bugs.gentoo.org/571548
-+---
-+ src/linux.c | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+diff --git a/src/linux.c b/src/linux.c
-+index 5ebc151..e551377 100644
-+--- a/src/linux.c
-++++ b/src/linux.c
-+@@ -22,7 +22,12 @@
-+ #include <inttypes.h>
-+ #include <limits.h>
-+ #include <linux/ethtool.h>
-++#include <linux/version.h>
-++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0)
-++#include <linux/nvme_ioctl.h>
-++#else
-+ #include <linux/nvme.h>
-++#endif
-+ #include <linux/sockios.h>
-+ #include <net/if.h>
-+ #include <scsi/scsi.h>
-+-- 
-+2.7.0
-+
-diff --git a/meta-oe/recipes-extended/efivar/efivar_0.21.bb b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-index 1684a10..3c34a7b 100644
---- a/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-+++ b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-@@ -9,7 +9,8 @@ DEPENDS_class-target = "popt efivar-native"
- 
- SRCREV = "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
- SRC_URI = "git://github.com/rhinstaller/efivar.git \
--           file://0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch"
-+           file://0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch \
-+           file://0.21-nvme_ioctl.h.patch"
- SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch"
- SRC_URI_append_class-native = " file://efivar-drop-options-not-supported-by-lower-version-gcc.patch"
- 
 -- 
-2.6.1
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
