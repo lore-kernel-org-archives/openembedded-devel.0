@@ -1,27 +1,44 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 53EF373179
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-io0-f176.google.com (mail-io0-f176.google.com
+	[209.85.223.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A43E77142
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Feb 2016 02:37:49 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u132boSB020205
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed,  3 Feb 2016 05:44:00 +0000 (UTC)
+Received: by mail-io0-f176.google.com with SMTP id d63so43923011ioj.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 2 Feb 2016 18:37:50 -0800 (PST)
-Received: from [128.224.162.155] (128.224.162.155) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Tue, 2 Feb 2016 18:37:49 -0800
-To: <openembedded-devel@lists.openembedded.org>
-References: <1454434802-29633-1-git-send-email-alexandru.but@ni.com>
-From: Robert Yang <liezhi.yang@windriver.com>
-Message-ID: <56B167FC.3010901@windriver.com>
-Date: Wed, 3 Feb 2016 10:37:48 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
+	Tue, 02 Feb 2016 21:44:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=UGhVOMS7s3jsQp41crbnzs8Lp6/3f9XYS9+0hpuAynM=;
+	b=L9LM7pODxYUxrUo1J7hQu/GML3+hSoiq3eGnLZi2gxhlvpZGhwtFQ7E2qEhwvoREIT
+	BLz79/zbcGB60ofR33qAihKfBrcm26IoF+aVJpxrwmpaBHJ1nwdkHgd4HTSnDWQN5FJk
+	xFQ1NgL9VBPRaZpzb3MRPgJIelk/UVedFO3009TsjOQ50WXbCVF1V3UqI5vaEhhPc8Xi
+	8I6ZkWr9d9Skx4W/R/rN/vB9opkysP2Zs7d6qFawYfztYWQ75eZxDN6qEYumCz3vVP79
+	1fFSAjYlliUWXjOIUQcSfDwbJAQG2KZVGKbugXHFMS4bXcgXwFcKqXyw0zhgYSaa11FO
+	/rEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=UGhVOMS7s3jsQp41crbnzs8Lp6/3f9XYS9+0hpuAynM=;
+	b=VfBr/5MuJvaMlqEuCd5qbq06Xd/FoAdZ9JPXz54VaXH1LwBM4a9eFPXa6FpBtci3iq
+	0N+aoh0gP+0qLJdth7MskkNGBsd0AQFcOmb5LuWQU20AoCqU31Dl7hueQfkADNemuF33
+	qpUPwGdFSYhT0/HNfO5KIqWKBLsSJF+LeFFCb3fN7mGOG/ytGopuvypJr4FQxpy5pUcO
+	5EAgvOIA2AjM6Omdlqjv+3HzhpmeKmSwLppshFDVdKWOyyzqjvjdVU59ltkA1bSGGpI1
+	8YyrRdroftaQ4Uu40LfktH2Y3eyYFI8uJoYueqXylfDwMle5KAInOjunDM76woBpzCDi
+	kpfA==
+X-Gm-Message-State: AG10YOQrMSbS+LVypL3qVele7lT8WicIW4GnrUygI8C0SHNBR9fkzWGbb0E287nAu+9rWyvO2taC5+6fBG0t1w==
+X-Received: by 10.107.34.79 with SMTP id i76mr1867136ioi.195.1454478240936;
+	Tue, 02 Feb 2016 21:44:00 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1454434802-29633-1-git-send-email-alexandru.but@ni.com>
-Subject: Re: [meta-oe][PATCH] efivar: nvme header was renamed in linux 4.4
+Received: by 10.107.46.219 with HTTP; Tue, 2 Feb 2016 21:43:31 -0800 (PST)
+In-Reply-To: <1454465517-24926-1-git-send-email-alejandro.joya.cruz@intel.com>
+References: <1454465517-24926-1-git-send-email-alejandro.joya.cruz@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 2 Feb 2016 21:43:31 -0800
+Message-ID: <CAMKF1spJ+xeuV_iiyswkfWSkFiQ84t0qBDQsesrGBCyWiO5yHQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] toybox: upgrade to 0.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,85 +51,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2016 02:37:50 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 03 Feb 2016 05:44:00 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On Tue, Feb 2, 2016 at 6:11 PM, Alejandro Joya
+<alejandro.joya.cruz@intel.com> wrote:
+> +CFLAGS_prepend = "-I ${STAGING_DIR_HOST}${includedir_native}"
 
-
-On 02/03/2016 01:40 AM, Alexandru But wrote:
-> nvme.h was renamed to nvme_ioctl.h in linux uapi headers since 4.4. Patch
-> taken from the gentoo repository.
->
-> Signed-off-by: Alexandru But <alexandru.but@ni.com>
-> ---
->   .../efivar/efivar/0.21-nvme_ioctl.h.patch          | 30 ++++++++++++++++++++++
->   meta-oe/recipes-extended/efivar/efivar_0.21.bb     |  3 ++-
->   2 files changed, 32 insertions(+), 1 deletion(-)
->   create mode 100644 meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch
->
-> diff --git a/meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch b/meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch
-> new file mode 100644
-> index 0000000..221ec5a
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch
-> @@ -0,0 +1,30 @@
-> +From ae0869b71a90bc14e67f3c917bd9c96db25c99a6 Mon Sep 17 00:00:00 2001
-> +From: Mike Gilbert <floppym@gentoo.org>
-> +Date: Thu, 14 Jan 2016 17:02:31 -0500
-> +Subject: [PATCH] Workaround rename of linux/nvme.h
-> +
-> +Bug: https://bugs.gentoo.org/571548
-> +---
-> + src/linux.c | 5 +++++
-> + 1 file changed, 5 insertions(+)
-> +
-> +diff --git a/src/linux.c b/src/linux.c
-> +index 5ebc151..e551377 100644
-> +--- a/src/linux.c
-> ++++ b/src/linux.c
-> +@@ -22,7 +22,12 @@
-> + #include <inttypes.h>
-> + #include <limits.h>
-> + #include <linux/ethtool.h>
-> ++#include <linux/version.h>
-> ++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0)
-> ++#include <linux/nvme_ioctl.h>
-> ++#else
-> + #include <linux/nvme.h>
-> ++#endif
-> + #include <linux/sockios.h>
-> + #include <net/if.h>
-> + #include <scsi/scsi.h>
-> +--
-> +2.7.0
-> +
-> diff --git a/meta-oe/recipes-extended/efivar/efivar_0.21.bb b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-> index 1684a10..3c34a7b 100644
-> --- a/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-> +++ b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-> @@ -9,7 +9,8 @@ DEPENDS_class-target = "popt efivar-native"
->
->   SRCREV = "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
->   SRC_URI = "git://github.com/rhinstaller/efivar.git \
-> -           file://0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch"
-> +           file://0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch \
-> +           file://0.21-nvme_ioctl.h.patch"
-
-This path is based on your previous, so it can't be applied.
-
-And I got errors after fix conflicts:
-
-| linux.c:27:30: fatal error: linux/nvme_ioctl.h: No such file or directory
-| compilation terminated.
-
-My kernel is 4.1.
-
-
-// Robert
-
->   SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch"
->   SRC_URI_append_class-native = " file://efivar-drop-options-not-supported-by-lower-version-gcc.patch"
->
->
+why is a native include dir needed here ?
 
