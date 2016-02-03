@@ -1,44 +1,22 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f176.google.com (mail-io0-f176.google.com
-	[209.85.223.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A43E77142
+Return-Path: <Paul.Vaduva@enea.com>
+Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
+	by mail.openembedded.org (Postfix) with SMTP id 06134771C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Feb 2016 05:44:00 +0000 (UTC)
-Received: by mail-io0-f176.google.com with SMTP id d63so43923011ioj.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Feb 2016 21:44:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=UGhVOMS7s3jsQp41crbnzs8Lp6/3f9XYS9+0hpuAynM=;
-	b=L9LM7pODxYUxrUo1J7hQu/GML3+hSoiq3eGnLZi2gxhlvpZGhwtFQ7E2qEhwvoREIT
-	BLz79/zbcGB60ofR33qAihKfBrcm26IoF+aVJpxrwmpaBHJ1nwdkHgd4HTSnDWQN5FJk
-	xFQ1NgL9VBPRaZpzb3MRPgJIelk/UVedFO3009TsjOQ50WXbCVF1V3UqI5vaEhhPc8Xi
-	8I6ZkWr9d9Skx4W/R/rN/vB9opkysP2Zs7d6qFawYfztYWQ75eZxDN6qEYumCz3vVP79
-	1fFSAjYlliUWXjOIUQcSfDwbJAQG2KZVGKbugXHFMS4bXcgXwFcKqXyw0zhgYSaa11FO
-	/rEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=UGhVOMS7s3jsQp41crbnzs8Lp6/3f9XYS9+0hpuAynM=;
-	b=VfBr/5MuJvaMlqEuCd5qbq06Xd/FoAdZ9JPXz54VaXH1LwBM4a9eFPXa6FpBtci3iq
-	0N+aoh0gP+0qLJdth7MskkNGBsd0AQFcOmb5LuWQU20AoCqU31Dl7hueQfkADNemuF33
-	qpUPwGdFSYhT0/HNfO5KIqWKBLsSJF+LeFFCb3fN7mGOG/ytGopuvypJr4FQxpy5pUcO
-	5EAgvOIA2AjM6Omdlqjv+3HzhpmeKmSwLppshFDVdKWOyyzqjvjdVU59ltkA1bSGGpI1
-	8YyrRdroftaQ4Uu40LfktH2Y3eyYFI8uJoYueqXylfDwMle5KAInOjunDM76woBpzCDi
-	kpfA==
-X-Gm-Message-State: AG10YOQrMSbS+LVypL3qVele7lT8WicIW4GnrUygI8C0SHNBR9fkzWGbb0E287nAu+9rWyvO2taC5+6fBG0t1w==
-X-Received: by 10.107.34.79 with SMTP id i76mr1867136ioi.195.1454478240936;
-	Tue, 02 Feb 2016 21:44:00 -0800 (PST)
+	Wed,  3 Feb 2016 08:55:59 +0000 (UTC)
+Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
+	(172.21.1.208) with Microsoft SMTP Server id 14.3.224.2; Wed, 3 Feb 2016
+	09:55:56 +0100
+Received: by sestofb10.enea.se (Postfix, from userid 4538)	id 576EB28BA23;
+	Wed,  3 Feb 2016 09:55:56 +0100 (CET)
+From: Paul Vaduva <Paul.Vaduva@enea.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 3 Feb 2016 09:55:44 +0100
+Message-ID: <1454489752-52888-1-git-send-email-Paul.Vaduva@enea.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received: by 10.107.46.219 with HTTP; Tue, 2 Feb 2016 21:43:31 -0800 (PST)
-In-Reply-To: <1454465517-24926-1-git-send-email-alejandro.joya.cruz@intel.com>
-References: <1454465517-24926-1-git-send-email-alejandro.joya.cruz@intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 2 Feb 2016 21:43:31 -0800
-Message-ID: <CAMKF1spJ+xeuV_iiyswkfWSkFiQ84t0qBDQsesrGBCyWiO5yHQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] toybox: upgrade to 0.7.0
+Received-SPF: None (SESTOEX08.enea.se: Paul.Vaduva@enea.com does not
+	designate permitted sender hosts)
+Subject: [meta-oe][PATCHv2 1/1] lua: Added ptest for lua
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,12 +29,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2016 05:44:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Feb 2016 08:56:02 -0000
+Content-Type: text/plain
 
-On Tue, Feb 2, 2016 at 6:11 PM, Alejandro Joya
-<alejandro.joya.cruz@intel.com> wrote:
-> +CFLAGS_prepend = "-I ${STAGING_DIR_HOST}${includedir_native}"
+Signed-off-by: Andreas Sundstr
+Signed-off-by: Maxin B. John <maxin.john@enea.com>
+Signed-off-by: Paul Vaduva <Paul.Vaduva@enea.com>
+---
+ meta-oe/recipes-devtools/lua/lua/run-ptest | 19 +++++++++++++++++++
+ meta-oe/recipes-devtools/lua/lua_5.3.2.bb  | 23 +++++++++++++++++------
+ 2 files changed, 36 insertions(+), 6 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/lua/lua/run-ptest
 
-why is a native include dir needed here ?
+diff --git a/meta-oe/recipes-devtools/lua/lua/run-ptest b/meta-oe/recipes-devtools/lua/lua/run-ptest
+new file mode 100644
+index 0000000..8e085e1
+--- /dev/null
++++ b/meta-oe/recipes-devtools/lua/lua/run-ptest
+@@ -0,0 +1,19 @@
++#!/bin/sh
++
++cd test
++lua -e"_U=true" all.lua > lua-test.tmp
++
++echo "--- test output ---"
++cat lua-test.tmp
++echo ""
++echo ""
++echo "--- ptest result ---"
++
++grep "final OK \!\!\!" lua-test.tmp > /dev/null
++if [ $? -eq 0 ]; then
++   echo "PASS: lua"
++else
++   echo "FAIL: lua"
++fi
++
++rm -f lua-test.tmp
+diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.2.bb b/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
+index 3fe8c3f..e193c60 100644
+--- a/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
++++ b/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
+@@ -1,20 +1,27 @@
+ DESCRIPTION = "Lua is a powerful light-weight programming language designed \
+ for extending applications."
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=68fc2aa2b751a37ff265524ddf026d7f"
++LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=68fc2aa2b751a37ff265524ddf026d7f \
++                    "
+ HOMEPAGE = "http://www.lua.org/"
+ 
+ PR = "r0"
+ 
+ DEPENDS = "readline"
+-SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
++SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
+            file://lua.pc \
+-"
++           "
++SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \ 
++           'http://www.lua.org/tests/lua-${PV}-tests.tar.gz;name=tarballtest \
++            file://run-ptest \
++           ', '', d)}"
+ 
+-SRC_URI[md5sum] = "33278c2ab5ee3c1a875be8d55c1ca2a1"
+-SRC_URI[sha256sum] = "c740c7bb23a936944e1cc63b7c3c5351a8976d7867c5252c8854f7b2af9da68f"
++SRC_URI[tarballsrc.md5sum] = "33278c2ab5ee3c1a875be8d55c1ca2a1"
++SRC_URI[tarballsrc.sha256sum] = "c740c7bb23a936944e1cc63b7c3c5351a8976d7867c5252c8854f7b2af9da68f"
++SRC_URI[tarballtest.md5sum] = "a2b7ab1b8ff82a0145376e233ef30a4a"
++SRC_URI[tarballtest.sha256sum] = "56909863a3713dee3709b3dbd0c868237e4f5c9ea1744f5bf0ba8bafa6c4ed32"
+ 
+-inherit pkgconfig binconfig
++inherit pkgconfig binconfig ptest
+ 
+ UCLIBC_PATCHES += "file://uclibc-pthread.patch"
+ SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
+@@ -46,4 +53,8 @@ do_install () {
+     rmdir ${D}${datadir}/lua
+ }
+ 
++do_install_ptest () {
++        cp -a ${WORKDIR}/lua-${PV}-tests ${D}${PTEST_PATH}/test
++}
++
+ BBCLASSEXTEND = "native"
+-- 
+1.9.1
+
 
