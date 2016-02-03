@@ -1,20 +1,27 @@
-Return-Path: <alejandro.joya.cruz@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 97E2F77333
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 53EF373179
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Feb 2016 02:11:59 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga102.fm.intel.com with ESMTP; 02 Feb 2016 18:12:00 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,387,1449561600"; d="scan'208";a="646232289"
-Received: from afjoyacr-dvo01.amr.corp.intel.com ([10.64.161.173])
-	by FMSMGA003.fm.intel.com with ESMTP; 02 Feb 2016 18:11:59 -0800
-From: Alejandro Joya <alejandro.joya.cruz@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Feb 2016 18:11:57 -0800
-Message-Id: <1454465517-24926-1-git-send-email-alejandro.joya.cruz@intel.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] toybox: upgrade to 0.7.0
+	Wed,  3 Feb 2016 02:37:49 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u132boSB020205
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 2 Feb 2016 18:37:50 -0800 (PST)
+Received: from [128.224.162.155] (128.224.162.155) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
+	Tue, 2 Feb 2016 18:37:49 -0800
+To: <openembedded-devel@lists.openembedded.org>
+References: <1454434802-29633-1-git-send-email-alexandru.but@ni.com>
+From: Robert Yang <liezhi.yang@windriver.com>
+Message-ID: <56B167FC.3010901@windriver.com>
+Date: Wed, 3 Feb 2016 10:37:48 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+In-Reply-To: <1454434802-29633-1-git-send-email-alexandru.but@ni.com>
+Subject: Re: [meta-oe][PATCH] efivar: nvme header was renamed in linux 4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,485 +34,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2016 02:12:00 -0000
+X-List-Received-Date: Wed, 03 Feb 2016 02:37:50 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Change SRC_URI to latest version and update the checksum for package.
-remove old patch not longer need it to build it and add depedency found for builiding
-on temporary enviroment like yocto.
 
-Signed-off-by: Alejandro Joya <alejandro.joya.cruz@intel.com>
----
- .../toybox/0001-Match-paths-with-busybox.patch     | 388 ---------------------
- .../toybox/toybox_build-add-Missing-CFLAGS.patch   |  28 ++
- .../toybox/{toybox_0.6.0.bb => toybox_0.7.0.bb}    |  10 +-
- 3 files changed, 34 insertions(+), 392 deletions(-)
- delete mode 100644 meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
- create mode 100644 meta-oe/recipes-core/toybox/toybox/toybox_build-add-Missing-CFLAGS.patch
- rename meta-oe/recipes-core/toybox/{toybox_0.6.0.bb => toybox_0.7.0.bb} (87%)
 
-diff --git a/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch b/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
-deleted file mode 100644
-index 9eb965d..0000000
---- a/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
-+++ /dev/null
-@@ -1,388 +0,0 @@
--From 9b37b45067677563dc8daa73d73a015c20ad6222 Mon Sep 17 00:00:00 2001
--From: Paul Barker <paul@paulbarker.me.uk>
--Date: Mon, 18 Aug 2014 12:18:16 +0000
--Subject: [PATCH] Match paths with busybox
--
--To ensure that toybox can be installed alongside busybox without confusing
--update-alternatives, the paths of the links installed by toybox should match
--those installed by busybox. This is accomplished by changing the flags of a few
--tools within toybox.
--
--v3:
--    - Forward ported from v0.5.0 to v0.5.2
--
--v2:
--    - Forward ported from v0.4.9 to v0.5.0
--    - Move new 'mount' command
--
--Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
--
--Upstream-status: Inappropriate
--    (specific to update-alternatives use in OpenEmbedded)
--
--Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
-----
-- toys/lsb/mount.c        | 2 +-
-- toys/lsb/pidof.c        | 2 +-
-- toys/other/chvt.c       | 2 +-
-- toys/other/ifconfig.c   | 2 +-
-- toys/other/insmod.c     | 2 +-
-- toys/other/lsmod.c      | 2 +-
-- toys/other/netcat.c     | 2 +-
-- toys/other/pivot_root.c | 2 +-
-- toys/other/readlink.c   | 2 +-
-- toys/other/reboot.c     | 6 +++---
-- toys/other/rfkill.c     | 2 +-
-- toys/other/rmmod.c      | 2 +-
-- toys/other/swapoff.c    | 2 +-
-- toys/other/swapon.c     | 2 +-
-- toys/other/sysctl.c     | 2 +-
-- toys/posix/cut.c        | 2 +-
-- toys/posix/df.c         | 2 +-
-- toys/posix/head.c       | 2 +-
-- toys/posix/id.c         | 6 +++---
-- toys/posix/mkfifo.c     | 2 +-
-- toys/posix/renice.c     | 2 +-
-- toys/posix/tail.c       | 2 +-
-- toys/posix/tee.c        | 2 +-
-- toys/posix/uniq.c       | 2 +-
-- toys/posix/who.c        | 2 +-
-- 25 files changed, 29 insertions(+), 29 deletions(-)
--
--diff --git a/toys/lsb/mount.c b/toys/lsb/mount.c
--index c334681..b076ca1 100644
----- a/toys/lsb/mount.c
--+++ b/toys/lsb/mount.c
--@@ -6,7 +6,7 @@
--  * Note: -hV is bad spec, haven't implemented -FsLU yet
--  * no mtab (/proc/mounts does it) so -n is NOP.
-- 
---USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
--+USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_BIN|TOYFLAG_STAYROOT))
-- //USE_NFSMOUNT(NEWTOY(nfsmount, "?<2>2", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
-- 
-- config MOUNT
--diff --git a/toys/lsb/pidof.c b/toys/lsb/pidof.c
--index 51b742f..a8fc8ef 100644
----- a/toys/lsb/pidof.c
--+++ b/toys/lsb/pidof.c
--@@ -5,7 +5,7 @@
--  *
--  * http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-generic/LSB-Core-generic/pidof.html
-- 
---USE_PIDOF(NEWTOY(pidof, "<1so:", TOYFLAG_USR|TOYFLAG_BIN))
--+USE_PIDOF(NEWTOY(pidof, "<1so:", TOYFLAG_BIN))
-- 
-- config PIDOF
--   bool "pidof"
--diff --git a/toys/other/chvt.c b/toys/other/chvt.c
--index 6544265..a93327f 100644
----- a/toys/other/chvt.c
--+++ b/toys/other/chvt.c
--@@ -2,7 +2,7 @@
--  *
--  * Copyright (C) 2008 David Anders <danders@amltd.com>
-- 
---USE_CHVT(NEWTOY(chvt, "<1", TOYFLAG_USR|TOYFLAG_SBIN))
--+USE_CHVT(NEWTOY(chvt, "<1", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config CHVT
--   bool "chvt"
--diff --git a/toys/other/ifconfig.c b/toys/other/ifconfig.c
--index 8db3ff0..445799d 100644
----- a/toys/other/ifconfig.c
--+++ b/toys/other/ifconfig.c
--@@ -6,7 +6,7 @@
--  *
--  * Not in SUSv4.
-- 
---USE_IFCONFIG(NEWTOY(ifconfig, "^?a", TOYFLAG_BIN))
--+USE_IFCONFIG(NEWTOY(ifconfig, "^?a", TOYFLAG_SBIN))
-- 
-- config IFCONFIG
--   bool "ifconfig"
--diff --git a/toys/other/insmod.c b/toys/other/insmod.c
--index 81721a3..cb222a5 100644
----- a/toys/other/insmod.c
--+++ b/toys/other/insmod.c
--@@ -2,7 +2,7 @@
--  *
--  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
-- 
---USE_INSMOD(NEWTOY(insmod, "<1", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
--+USE_INSMOD(NEWTOY(insmod, "<1", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-- 
-- config INSMOD
--   bool "insmod"
--diff --git a/toys/other/lsmod.c b/toys/other/lsmod.c
--index b8f5d82..4d16048 100644
----- a/toys/other/lsmod.c
--+++ b/toys/other/lsmod.c
--@@ -2,7 +2,7 @@
--  *
--  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
-- 
---USE_LSMOD(NEWTOY(lsmod, NULL, TOYFLAG_BIN))
--+USE_LSMOD(NEWTOY(lsmod, NULL, TOYFLAG_SBIN))
-- 
-- config LSMOD
--   bool "lsmod"
--diff --git a/toys/other/netcat.c b/toys/other/netcat.c
--index d27aa88..0fd26f7 100644
----- a/toys/other/netcat.c
--+++ b/toys/other/netcat.c
--@@ -4,7 +4,7 @@
--  *
--  * TODO: udp, ipv6, genericize for telnet/microcom/tail-f
-- 
---USE_NETCAT(OLDTOY(nc, netcat, TOYFLAG_BIN))
--+USE_NETCAT(OLDTOY(nc, netcat, TOYFLAG_USR|TOYFLAG_BIN))
-- USE_NETCAT(NEWTOY(netcat, USE_NETCAT_LISTEN("^tlL")"w#p#s:q#f:", TOYFLAG_BIN))
-- 
-- config NETCAT
--diff --git a/toys/other/pivot_root.c b/toys/other/pivot_root.c
--index 9a1f56c..7748032 100644
----- a/toys/other/pivot_root.c
--+++ b/toys/other/pivot_root.c
--@@ -2,7 +2,7 @@
--  *
--  * Copyright 2012 Rob Landley <rob@landley.net>
-- 
---USE_PIVOT_ROOT(NEWTOY(pivot_root, "<2>2", TOYFLAG_USR|TOYFLAG_BIN))
--+USE_PIVOT_ROOT(NEWTOY(pivot_root, "<2>2", TOYFLAG_SBIN))
-- 
-- config PIVOT_ROOT
--   bool "pivot_root"
--diff --git a/toys/other/readlink.c b/toys/other/readlink.c
--index 1c33362..fecd1ef 100644
----- a/toys/other/readlink.c
--+++ b/toys/other/readlink.c
--@@ -2,7 +2,7 @@
--  *
--  * Copyright 2007 Rob Landley <rob@landley.net>
-- 
---USE_READLINK(NEWTOY(readlink, "<1>1fenq[-fe]", TOYFLAG_BIN))
--+USE_READLINK(NEWTOY(readlink, "<1>1fenq[-fe]", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config READLINK
--   bool "readlink"
--diff --git a/toys/other/reboot.c b/toys/other/reboot.c
--index 8baa4d8..a135888 100644
----- a/toys/other/reboot.c
--+++ b/toys/other/reboot.c
--@@ -2,9 +2,9 @@
--  *
--  * Copyright 2013 Elie De Brauwer <eliedebrauwer@gmail.com>
-- 
---USE_REBOOT(NEWTOY(reboot, "n", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
---USE_REBOOT(OLDTOY(halt, reboot, TOYFLAG_BIN|TOYFLAG_NEEDROOT))
---USE_REBOOT(OLDTOY(poweroff, reboot, TOYFLAG_BIN|TOYFLAG_NEEDROOT))
--+USE_REBOOT(NEWTOY(reboot, "n", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
--+USE_REBOOT(OLDTOY(halt, reboot, TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
--+USE_REBOOT(OLDTOY(poweroff, reboot, TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-- 
-- config REBOOT
--   bool "reboot"
--diff --git a/toys/other/rfkill.c b/toys/other/rfkill.c
--index af3efe1..7527ec7 100644
----- a/toys/other/rfkill.c
--+++ b/toys/other/rfkill.c
--@@ -5,7 +5,7 @@
--  *
--  * No Standard
-- 
---USE_RFKILL(NEWTOY(rfkill, "<1>2", TOYFLAG_SBIN))
--+USE_RFKILL(NEWTOY(rfkill, "<1>2", TOYFLAG_USR|TOYFLAG_SBIN))
-- 
-- config RFKILL
--   bool "rfkill"
--diff --git a/toys/other/rmmod.c b/toys/other/rmmod.c
--index b789acc..10c134c 100644
----- a/toys/other/rmmod.c
--+++ b/toys/other/rmmod.c
--@@ -2,7 +2,7 @@
--  *
--  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
-- 
---USE_RMMOD(NEWTOY(rmmod, "<1wf", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
--+USE_RMMOD(NEWTOY(rmmod, "<1wf", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-- 
-- config RMMOD
--   bool "rmmod"
--diff --git a/toys/other/swapoff.c b/toys/other/swapoff.c
--index b89e915..fb17130 100644
----- a/toys/other/swapoff.c
--+++ b/toys/other/swapoff.c
--@@ -2,7 +2,7 @@
--  *
--  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
-- 
---USE_SWAPOFF(NEWTOY(swapoff, "<1>1", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
--+USE_SWAPOFF(NEWTOY(swapoff, "<1>1", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-- 
-- config SWAPOFF
--   bool "swapoff"
--diff --git a/toys/other/swapon.c b/toys/other/swapon.c
--index 49f1249..838d382 100644
----- a/toys/other/swapon.c
--+++ b/toys/other/swapon.c
--@@ -2,7 +2,7 @@
--  *
--  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
-- 
---USE_SWAPON(NEWTOY(swapon, "<1>1p#<0>32767", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
--+USE_SWAPON(NEWTOY(swapon, "<1>1p#<0>32767", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-- 
-- config SWAPON
--   bool "swapon"
--diff --git a/toys/other/sysctl.c b/toys/other/sysctl.c
--index 8e57ca1..0c6c640 100644
----- a/toys/other/sysctl.c
--+++ b/toys/other/sysctl.c
--@@ -5,7 +5,7 @@
--  *
--  * No Standard
--  
---USE_SYSCTL(NEWTOY(sysctl, "^neNqwpaA[!ap][!aq][!aw][+aA]", TOYFLAG_USR|TOYFLAG_BIN))
--+USE_SYSCTL(NEWTOY(sysctl, "^neNqwpaA[!ap][!aq][!aw][+aA]", TOYFLAG_SBIN))
-- 
-- config SYSCTL
--   bool "sysctl"
--diff --git a/toys/posix/cut.c b/toys/posix/cut.c
--index 7f10c5e..1ab3ce8 100644
----- a/toys/posix/cut.c
--+++ b/toys/posix/cut.c
--@@ -5,7 +5,7 @@
--  *
--  * http://pubs.opengroup.org/onlinepubs/9699919799/utilities/cut.html 
-- 
---USE_CUT(NEWTOY(cut, "b:|c:|f:|d:sn[!cbf]", TOYFLAG_BIN))
--+USE_CUT(NEWTOY(cut, "b:|c:|f:|d:sn[!cbf]", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config CUT
--   bool "cut"
--diff --git a/toys/posix/df.c b/toys/posix/df.c
--index 141e8e5..5d37b45 100644
----- a/toys/posix/df.c
--+++ b/toys/posix/df.c
--@@ -4,7 +4,7 @@
--  *
--  * See http://opengroup.org/onlinepubs/9699919799/utilities/df.html
-- 
---USE_DF(NEWTOY(df, "Pkt*a[-Pk]", TOYFLAG_USR|TOYFLAG_SBIN))
--+USE_DF(NEWTOY(df, "Pkt*a[-Pk]", TOYFLAG_BIN))
-- 
-- config DF
--   bool "df"
--diff --git a/toys/posix/head.c b/toys/posix/head.c
--index e8517d4..3ac4373 100644
----- a/toys/posix/head.c
--+++ b/toys/posix/head.c
--@@ -4,7 +4,7 @@
--  *
--  * See http://opengroup.org/onlinepubs/9699919799/utilities/head.html
-- 
---USE_HEAD(NEWTOY(head, "n#<0=10", TOYFLAG_BIN))
--+USE_HEAD(NEWTOY(head, "n#<0=10", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config HEAD
--   bool "head"
--diff --git a/toys/posix/id.c b/toys/posix/id.c
--index 353aa04..7ab489e 100644
----- a/toys/posix/id.c
--+++ b/toys/posix/id.c
--@@ -6,10 +6,10 @@
--  *
--  * See http://opengroup.org/onlinepubs/9699919799/utilities/id.html
-- 
---USE_ID(NEWTOY(id, ">1"USE_ID_SELINUX("Z")"nGgru[!"USE_ID_SELINUX("Z")"Ggu]", TOYFLAG_BIN))
--+USE_ID(NEWTOY(id, ">1"USE_ID_SELINUX("Z")"nGgru[!"USE_ID_SELINUX("Z")"Ggu]", TOYFLAG_USR|TOYFLAG_BIN))
-- USE_GROUPS(NEWTOY(groups, NULL, TOYFLAG_USR|TOYFLAG_BIN))
---USE_LOGNAME(NEWTOY(logname, ">0", TOYFLAG_BIN))
---USE_WHOAMI(OLDTOY(whoami, logname, TOYFLAG_BIN))
--+USE_LOGNAME(NEWTOY(logname, ">0", TOYFLAG_USR|TOYFLAG_BIN))
--+USE_WHOAMI(OLDTOY(whoami, logname, TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config ID
--   bool "id"
--diff --git a/toys/posix/mkfifo.c b/toys/posix/mkfifo.c
--index 15fab70..4e0fca3 100644
----- a/toys/posix/mkfifo.c
--+++ b/toys/posix/mkfifo.c
--@@ -4,7 +4,7 @@
--  *
--  * See http://opengroup.org/onlinepubs/9699919799/utilities/mkfifo.html
-- 
---USE_MKFIFO(NEWTOY(mkfifo, "<1m:", TOYFLAG_BIN))
--+USE_MKFIFO(NEWTOY(mkfifo, "<1m:", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config MKFIFO
--   bool "mkfifo"
--diff --git a/toys/posix/renice.c b/toys/posix/renice.c
--index 8c20644..489eb13 100644
----- a/toys/posix/renice.c
--+++ b/toys/posix/renice.c
--@@ -4,7 +4,7 @@
--  *
--  * See http://pubs.opengroup.org/onlinepubs/9699919799/utilities/renice.html
-- 
---USE_RENICE(NEWTOY(renice, "<1gpun#|", TOYFLAG_BIN))
--+USE_RENICE(NEWTOY(renice, "<1gpun#|", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config RENICE
--   bool "renice"
--diff --git a/toys/posix/tail.c b/toys/posix/tail.c
--index e92c044..ba1d311 100644
----- a/toys/posix/tail.c
--+++ b/toys/posix/tail.c
--@@ -4,7 +4,7 @@
--  *
--  * See http://opengroup.org/onlinepubs/9699919799/utilities/tail.html
-- 
---USE_TAIL(NEWTOY(tail, "fc-n-[-cn]", TOYFLAG_BIN))
--+USE_TAIL(NEWTOY(tail, "fc-n-[-cn]", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config TAIL
--   bool "tail"
--diff --git a/toys/posix/tee.c b/toys/posix/tee.c
--index 0388510..5574088 100644
----- a/toys/posix/tee.c
--+++ b/toys/posix/tee.c
--@@ -4,7 +4,7 @@
--  *
--  * See http://opengroup.org/onlinepubs/9699919799/utilities/tee.html
-- 
---USE_TEE(NEWTOY(tee, "ia", TOYFLAG_BIN))
--+USE_TEE(NEWTOY(tee, "ia", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config TEE
--   bool "tee"
--diff --git a/toys/posix/uniq.c b/toys/posix/uniq.c
--index 3cfdb94..c127cfe 100644
----- a/toys/posix/uniq.c
--+++ b/toys/posix/uniq.c
--@@ -4,7 +4,7 @@
--  *
--  * See http://opengroup.org/onlinepubs/9699919799/utilities/uniq.html
-- 
---USE_UNIQ(NEWTOY(uniq, "f#s#w#zicdu", TOYFLAG_BIN))
--+USE_UNIQ(NEWTOY(uniq, "f#s#w#zicdu", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config UNIQ
--   bool "uniq"
--diff --git a/toys/posix/who.c b/toys/posix/who.c
--index 876a562..414cdfc 100644
----- a/toys/posix/who.c
--+++ b/toys/posix/who.c
--@@ -9,7 +9,7 @@
--  * Posix says to support many options (-abdHlmpqrstTu) but this
--  * isn't aimed at minicomputers with modem pools.
-- 
---USE_WHO(NEWTOY(who, "a", TOYFLAG_BIN))
--+USE_WHO(NEWTOY(who, "a", TOYFLAG_USR|TOYFLAG_BIN))
-- 
-- config WHO
--   bool "who"
---- 
--1.8.1.2
--
-diff --git a/meta-oe/recipes-core/toybox/toybox/toybox_build-add-Missing-CFLAGS.patch b/meta-oe/recipes-core/toybox/toybox/toybox_build-add-Missing-CFLAGS.patch
-new file mode 100644
-index 0000000..80d6b2a
---- /dev/null
-+++ b/meta-oe/recipes-core/toybox/toybox/toybox_build-add-Missing-CFLAGS.patch
-@@ -0,0 +1,28 @@
-+From 686492e6b0aa582b42bf95cfc9a31324204d8f79 Mon Sep 17 00:00:00 2001
-+From: Alejandro Joya <alejandro.joya.cruz@intel.com>
-+Date: Tue, 2 Feb 2016 17:47:50 -0800
-+Subject: [PATCH] toybox_build: add Missing CFLAGS
-+
-+add CFLAGS to multiple builds to forward libraries location in Yocto.
-+
-+Signed-off-by: Alejandro Joya <alejandro.joya.cruz@intel.com>
-+---
-+ Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 5422efe..2dca3ae 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -37,7 +37,7 @@ bloatcheck: toybox_old toybox_unstripped
-+ 
-+ generated/instlist: toybox_stuff
-+ 	NOBUILD=1 scripts/make.sh
-+-	$(HOSTCC) -I . scripts/install.c -o generated/instlist
-++	$(HOSTCC) -I . $(CFLAGS) scripts/install.c -o generated/instlist
-+ 
-+ install_flat: generated/instlist
-+ 	scripts/install.sh --symlink --force
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.6.0.bb b/meta-oe/recipes-core/toybox/toybox_0.7.0.bb
-similarity index 87%
-rename from meta-oe/recipes-core/toybox/toybox_0.6.0.bb
-rename to meta-oe/recipes-core/toybox/toybox_0.7.0.bb
-index da03200..a1fa8a9 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.6.0.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_0.7.0.bb
-@@ -1,10 +1,11 @@
- SUMMARY = "Toybox combines common utilities together into a single executable."
- HOMEPAGE = "http://www.landley.net/toybox/"
- 
--SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
-+SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-+           file://toybox_build-add-Missing-CFLAGS.patch"
- 
--SRC_URI[md5sum] = "7f4a6c89e56c48e3350e611f5b36c2cf"
--SRC_URI[sha256sum] = "b6e2694d19ac08f1c3416d5b2a02a31d445db2ed98dec89761430cdff2c9710d"
-+SRC_URI[md5sum] = "d86c78624b47625c2f0fc64eda599443"
-+SRC_URI[sha256sum] = "65428816f88ad3fe92b67df86dc05427c8078fe03843b8b9715fdfa6d29c0f97"
- 
- 
- LICENSE = "BSD-0-Clause"
-@@ -12,9 +13,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
- 
- SECTION = "base"
- 
-+CFLAGS_prepend = "-I ${STAGING_DIR_HOST}${includedir_native}"
-+
- do_configure() {
-     oe_runmake defconfig
--
-     # Disable killall5 as it isn't managed by update-alternatives
-     sed -e 's/CONFIG_KILLALL5=y/# CONFIG_KILLALL5 is not set/' -i .config
- }
--- 
-1.9.1
+On 02/03/2016 01:40 AM, Alexandru But wrote:
+> nvme.h was renamed to nvme_ioctl.h in linux uapi headers since 4.4. Patch
+> taken from the gentoo repository.
+>
+> Signed-off-by: Alexandru But <alexandru.but@ni.com>
+> ---
+>   .../efivar/efivar/0.21-nvme_ioctl.h.patch          | 30 ++++++++++++++++++++++
+>   meta-oe/recipes-extended/efivar/efivar_0.21.bb     |  3 ++-
+>   2 files changed, 32 insertions(+), 1 deletion(-)
+>   create mode 100644 meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch
+>
+> diff --git a/meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch b/meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch
+> new file mode 100644
+> index 0000000..221ec5a
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch
+> @@ -0,0 +1,30 @@
+> +From ae0869b71a90bc14e67f3c917bd9c96db25c99a6 Mon Sep 17 00:00:00 2001
+> +From: Mike Gilbert <floppym@gentoo.org>
+> +Date: Thu, 14 Jan 2016 17:02:31 -0500
+> +Subject: [PATCH] Workaround rename of linux/nvme.h
+> +
+> +Bug: https://bugs.gentoo.org/571548
+> +---
+> + src/linux.c | 5 +++++
+> + 1 file changed, 5 insertions(+)
+> +
+> +diff --git a/src/linux.c b/src/linux.c
+> +index 5ebc151..e551377 100644
+> +--- a/src/linux.c
+> ++++ b/src/linux.c
+> +@@ -22,7 +22,12 @@
+> + #include <inttypes.h>
+> + #include <limits.h>
+> + #include <linux/ethtool.h>
+> ++#include <linux/version.h>
+> ++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0)
+> ++#include <linux/nvme_ioctl.h>
+> ++#else
+> + #include <linux/nvme.h>
+> ++#endif
+> + #include <linux/sockios.h>
+> + #include <net/if.h>
+> + #include <scsi/scsi.h>
+> +--
+> +2.7.0
+> +
+> diff --git a/meta-oe/recipes-extended/efivar/efivar_0.21.bb b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+> index 1684a10..3c34a7b 100644
+> --- a/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+> +++ b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+> @@ -9,7 +9,8 @@ DEPENDS_class-target = "popt efivar-native"
+>
+>   SRCREV = "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
+>   SRC_URI = "git://github.com/rhinstaller/efivar.git \
+> -           file://0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch"
+> +           file://0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch \
+> +           file://0.21-nvme_ioctl.h.patch"
 
+This path is based on your previous, so it can't be applied.
+
+And I got errors after fix conflicts:
+
+| linux.c:27:30: fatal error: linux/nvme_ioctl.h: No such file or directory
+| compilation terminated.
+
+My kernel is 4.1.
+
+
+// Robert
+
+>   SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch"
+>   SRC_URI_append_class-native = " file://efivar-drop-options-not-supported-by-lower-version-gcc.patch"
+>
+>
 
