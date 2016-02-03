@@ -1,19 +1,30 @@
-Return-Path: <maciej.borzecki@open-rnd.pl>
-Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
-	by mail.openembedded.org (Postfix) with ESMTP id C3AA977337
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Feb 2016 13:04:22 +0000 (UTC)
-Received: from comp_016_pc_buildenv.localdomain (unknown [31.182.60.238])
-	by open-rnd.nazwa.pl (Postfix) with ESMTP id 7F93A42BB0A;
-	Wed,  3 Feb 2016 14:02:46 +0100 (CET)
-From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-To: openembedded-devel@lists.openembedded.org,
-	=?UTF-8?q?Jo=C3=A3o=20Henrique=20Freitas?= <joaohf@gmail.com>
-Date: Wed,  3 Feb 2016 14:02:32 +0100
-Message-Id: <1454504552-27015-1-git-send-email-maciej.borzecki@open-rnd.pl>
-X-Mailer: git-send-email 2.5.0
-Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
-Subject: [meta-erlang][PATCH] erlang: fix host-user-contaminated
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id B376C771B8;
+	Wed,  3 Feb 2016 14:50:16 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	u13EoE9B019254; Wed, 3 Feb 2016 14:50:14 GMT
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id AbPKqVv6cUnY; Wed,  3 Feb 2016 14:50:14 +0000 (GMT)
+Received: from hex ([192.168.3.34]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	u13EoC5R019246
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Wed, 3 Feb 2016 14:50:13 GMT
+Message-ID: <1454511012.27087.183.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Andreas =?ISO-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, Patches and discussions about
+	the oe-core layer <openembedded-core@lists.openembedded.org>
+Date: Wed, 03 Feb 2016 14:50:12 +0000
+In-Reply-To: <CALbNGRRmD=4QUi=+_fx48M4GDB9VwTX5m5wH12j4ed1OK6SW6Q@mail.gmail.com>
+References: <CALbNGRRmD=4QUi=+_fx48M4GDB9VwTX5m5wH12j4ed1OK6SW6Q@mail.gmail.com>
+X-Mailer: Evolution 3.16.5-1ubuntu3.1 
+Mime-Version: 1.0
+Subject: Re: [OE-core] Language settings GTK (glibc?) problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,28 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2016 13:04:25 -0000
+X-List-Received-Date: Wed, 03 Feb 2016 14:50:19 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Fix host-user-contaminated QA issue by running chown on erlang
-installation root in do_install.
+On Wed, 2016-02-03 at 12:49 +0100, Andreas Müller wrote:
+> Hi,
+> 
+> while testing libreoffice language packets I found that language
+> settings for GTK based apps are broken. Interestingly QT based
+> applications (tested with qtcreator and lxqt) and libreoffice are
+> working fine.
+> 
+> I did some research and hope for some expert with helping hints.
+> Details are:
+> 
+> * I am testing with jethro environment
 
-Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
----
- recipes-devtools/erlang/erlang_18.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+I did wonder about http://git.yoctoproject.org/cgit.cgi/poky/commit/?id
+=3b5288f0a28205289063424afc474675cbaa05b8
 
-diff --git a/recipes-devtools/erlang/erlang_18.1.bb b/recipes-devtools/erlang/erlang_18.1.bb
-index 8f947ad4b0dc12a1bf972bf8dcb4f34b585d29e8..63ae68b8772e603a428c89b76f220df3c8382ed8 100644
---- a/recipes-devtools/erlang/erlang_18.1.bb
-+++ b/recipes-devtools/erlang/erlang_18.1.bb
-@@ -59,5 +59,6 @@ do_install() {
- 
-     # Actually wx is not suitable with erlang embedded
-     rm -rf ${D}/${libdir}/erlang/lib/wx-*
-+    chown -R root:root ${D}${libdir}/erlang
- }
- 
--- 
-2.5.0
+or possibly:
 
+https://github.com/rehsack/poky/commit/46ac36953e2e76ba716c7ba42ddfe41c
+9a19a11d
+
+but I haven't looked into this much and don't have experience in this
+area.
+
+Cheers,
+
+Richard
 
