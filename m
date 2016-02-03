@@ -1,44 +1,34 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
-	[209.85.213.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 757ED772FC;
-	Wed,  3 Feb 2016 11:49:47 +0000 (UTC)
-Received: by mail-ig0-f179.google.com with SMTP id 5so34208575igt.0;
-	Wed, 03 Feb 2016 03:49:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=C5YOj552Nbmswz0KIZx4cTPrYaxzhax+xmvEOevdVdc=;
-	b=etgRZdW2cYTJTbU9yusYS5HYeDaLb9VTYD1LjADNm0KrCCh1QkjsBwLr/ajYVjJbB6
-	E5lSyPeKE7Fqc4hqH7Z4PB7DMm2vpR5KFo6NDbreZP4ksMPXkQZ1hAS1/msE/gihwmxg
-	Xgv5akujjfJWrZJ3Hk54KZ5OVkTg/I973EatA0aJ1k26AQACumZWN9IkMYfHBcJlEqOq
-	qJtS393hOZcjfAwpm/seCyVzhOBbd9ZKVoXq39uS/hJ1pWh4kPexuLeFAwd2/BBPmfLf
-	71Wp3WAoe5DaGmd4FGtM9aASumNSQERoVdwyMo9N/5U4Y9jBhHjkrwzEwqZB8e+g19Df
-	lEGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=C5YOj552Nbmswz0KIZx4cTPrYaxzhax+xmvEOevdVdc=;
-	b=VFbqZuxj1d7jnsZU80F5KYJtij0C3BSaTxbFumSu2Vpz2QtxHSTxFsOuNIFAgBDGOe
-	OxI2zrLwfKBkaYcNN7R0VdX+HPKf3S1CUhDg3neX8qqDjARTeMUevel6PtjkwsLoKThW
-	rjLgJSdnoOZ0yChH4/DdyHUpfAwYvvX5AZl9+ut3Kl24RZvXDnRHkDBv3CvYGk4a4yhV
-	o2laFTfd4hdmhaUK3lD1Z6PC6u9uKE00cDSDIIr9c2N4cI7zt1WvNHRO/vZURP8cA4Ma
-	7PEW5jfSNml7RCkAg3pfWyFvca9LIBw3ch3cYDweFzzccv0ZBEgw5q8YqO0sg6KB3/Ck
-	NIrQ==
-X-Gm-Message-State: AG10YOTX5PM883oI/his3ZKcJuBXMar3T9RtxT1leiXIjNxYMVxwOr5FfIUfrM7jmgwxrOGfxexAjO95koRAdg==
+Return-Path: <alexandru.but@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id DC52677253
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Feb 2016 12:00:20 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u13C0LdN010268 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 3 Feb 2016 06:00:21 -0600
+Received: from zdravan.emea.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2016020306002112-597400 ;
+	Wed, 3 Feb 2016 06:00:21 -0600 
+Date: Wed, 3 Feb 2016 14:00:19 +0200
+From: Alexandru But <alexandru.but@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160203120019.GA12718@zdravan.emea.corp.natinst.com>
+References: <1454434802-29633-1-git-send-email-alexandru.but@ni.com>
+	<56B167FC.3010901@windriver.com>
 MIME-Version: 1.0
-X-Received: by 10.50.111.111 with SMTP id ih15mr23869475igb.78.1454500188055; 
-	Wed, 03 Feb 2016 03:49:48 -0800 (PST)
-Received: by 10.36.25.81 with HTTP; Wed, 3 Feb 2016 03:49:48 -0800 (PST)
-Date: Wed, 3 Feb 2016 12:49:48 +0100
-Message-ID: <CALbNGRRmD=4QUi=+_fx48M4GDB9VwTX5m5wH12j4ed1OK6SW6Q@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Language settings GTK (glibc?) problem
+In-Reply-To: <56B167FC.3010901@windriver.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 02/03/2016 06:00:21 AM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 02/03/2016 06:00:21 AM,
+	Serialize complete at 02/03/2016 06:00:21 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-02-03_05:, , signatures=0
+Subject: Re: [meta-oe][PATCH] efivar: nvme header was renamed in linux 4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,49 +41,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2016 11:49:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Feb 2016 12:00:23 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi,
+On Wed, Feb 03, 2016 at 10:37:48AM +0800, Robert Yang wrote:
+> 
+> 
+> On 02/03/2016 01:40 AM, Alexandru But wrote:
+> >nvme.h was renamed to nvme_ioctl.h in linux uapi headers since 4.4. Patch
+> >taken from the gentoo repository.
+> >
+> >Signed-off-by: Alexandru But <alexandru.but@ni.com>
+> >---
+> >  .../efivar/efivar/0.21-nvme_ioctl.h.patch          | 30 ++++++++++++++++++++++
+> >  meta-oe/recipes-extended/efivar/efivar_0.21.bb     |  3 ++-
+> >  2 files changed, 32 insertions(+), 1 deletion(-)
+> >  create mode 100644 meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch
+> >
+> >diff --git a/meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch b/meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch
+> >new file mode 100644
+> >index 0000000..221ec5a
+> >--- /dev/null
+> >+++ b/meta-oe/recipes-extended/efivar/efivar/0.21-nvme_ioctl.h.patch
+> >@@ -0,0 +1,30 @@
+> >+From ae0869b71a90bc14e67f3c917bd9c96db25c99a6 Mon Sep 17 00:00:00 2001
+> >+From: Mike Gilbert <floppym@gentoo.org>
+> >+Date: Thu, 14 Jan 2016 17:02:31 -0500
+> >+Subject: [PATCH] Workaround rename of linux/nvme.h
+> >+
+> >+Bug: https://bugs.gentoo.org/571548
+> >+---
+> >+ src/linux.c | 5 +++++
+> >+ 1 file changed, 5 insertions(+)
+> >+
+> >+diff --git a/src/linux.c b/src/linux.c
+> >+index 5ebc151..e551377 100644
+> >+--- a/src/linux.c
+> >++++ b/src/linux.c
+> >+@@ -22,7 +22,12 @@
+> >+ #include <inttypes.h>
+> >+ #include <limits.h>
+> >+ #include <linux/ethtool.h>
+> >++#include <linux/version.h>
+> >++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0)
+> >++#include <linux/nvme_ioctl.h>
+> >++#else
+> >+ #include <linux/nvme.h>
+> >++#endif
+> >+ #include <linux/sockios.h>
+> >+ #include <net/if.h>
+> >+ #include <scsi/scsi.h>
+> >+--
+> >+2.7.0
+> >+
+> >diff --git a/meta-oe/recipes-extended/efivar/efivar_0.21.bb b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+> >index 1684a10..3c34a7b 100644
+> >--- a/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+> >+++ b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+> >@@ -9,7 +9,8 @@ DEPENDS_class-target = "popt efivar-native"
+> >
+> >  SRCREV = "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
+> >  SRC_URI = "git://github.com/rhinstaller/efivar.git \
+> >-           file://0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch"
+> >+           file://0001-Sometimes-the-compiler-doesn-t-like-0-as-an-initiali.patch \
+> >+           file://0.21-nvme_ioctl.h.patch"
+> 
+> This path is based on your previous, so it can't be applied.
+> 
+> And I got errors after fix conflicts:
+> 
+> | linux.c:27:30: fatal error: linux/nvme_ioctl.h: No such file or directory
+> | compilation terminated.
+> 
+> My kernel is 4.1.
+> 
+> 
+> // Robert
 
-while testing libreoffice language packets I found that language
-settings for GTK based apps are broken. Interestingly QT based
-applications (tested with qtcreator and lxqt) and libreoffice are
-working fine.
+It is weird that the patch is generating this error with 4.1 kernel. Is the
+linux-libc-headers version also 4.1? The headers responsible for the
+KERNEL_VERSION are installed in the sysroot with that recipe.
 
-I did some research and hope for some expert with helping hints. Details are:
+I should of added more context to the patch and not rush to send this change
+before the fix goes in the oe-core layer. Associated discussions:
+http://patches.openembedded.org/patch/114409/
+http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105790.html
 
-* I am testing with jethro environment
+I will come back with the patch created on top of the master branch after the
+headers backport is done in oe-core.
 
-* X session is started for an unprivileged user by display manager
-lxdm. That sets the following environment vars for language:
-| LANG="de_DE"
-| LANGUAGE="de_DE"
-| LC_MESSAGES="de_DE"
+Regards,
+Alex But
 
-* starting e.g gedit from console complains:
-| (process:4205): Gtk-WARNING **: Locale not supported by C library.
-|    Using the fallback 'C' locale.
-
-* 'locale -a' says
-| locale: Kann LC_COLLATE nicht auf die Standard-Lokale einstellen:
-Datei oder Verzeichnis nicht | | gefunden
-| C
-| POSIX
-| de_DE
-| en_GB
-| en_US
-| fr_FR
-Translation of error is (when setting en_GB on lxdm):
-| locale: Cannot set LC_COLLATE to default locale: No such file or directory
-
-Debugging the last two cases show that the error is caused for same reason:
-
-* setlocale(LC_ALL, "") returns NULL for GTK apps
-* setlocale (LC_CTYPE, "") returns NULL for 'locale -a'
-
-
-Anybody with ideas what is missing/wrong on my images?
-
-Andreas
+> 
+> >  SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch"
+> >  SRC_URI_append_class-native = " file://efivar-drop-options-not-supported-by-lower-version-gcc.patch"
+> >
+> >
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
