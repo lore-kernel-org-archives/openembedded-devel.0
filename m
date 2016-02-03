@@ -1,47 +1,49 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F6E177230
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Feb 2016 20:12:15 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id p63so87450988wmp.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Feb 2016 12:12:16 -0800 (PST)
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-qk0-f178.google.com (mail-qk0-f178.google.com
+	[209.85.220.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 2DD24771D6;
+	Wed,  3 Feb 2016 22:02:47 +0000 (UTC)
+Received: by mail-qk0-f178.google.com with SMTP id o6so13756999qkc.2;
+	Wed, 03 Feb 2016 14:02:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:content-type:subject:date:message-id:to:mime-version;
-	bh=Opgykj0ifDQjZkoRMlkKCLOQB3At2AGiRlERGb+ddM0=;
-	b=yJFDJoP/GBDadYSi7MWKpyguVAkO4kh0rIYVCt4WbbbsgHSx7Tp1s8Ih3Aa4fPM4RS
-	mdwqckxXK48EKxfeqs/nUpIIHCSAJGl9IKTEjc1QlKctPxGnIstJe7/rMcDleUcu5Fb0
-	Ws/9rXlRNHfSBCX1G03mOMYlZFIKS4DrfQm6IHyd+Ka29PCypYlhPQ2EP6grtofh4VAz
-	wsNYWerewYlDHBWj10582y8pvJCUndJAfed0qEnp+7OWkEWEJazCbBrXrS6HPkviunas
-	hRpuyL8CPRfkLRqTwn737sXIUmaVmhdwue/y0b8lf2ifmjRP7IXPnHjZU8fDJ2lRarvc
-	QOZw==
+	h=date:mime-version:message-id:from:to:subject:content-type
+	:content-transfer-encoding;
+	bh=pnUYEJGMgvrRrKK2cDuP9cBlaNmifccsdejWqesHRNc=;
+	b=rtowgf1msI+pFyh5zDziZ67C26CPM6e3oJI5CmGBrKkImpOoYNV9hQ4skYiHOCsl0G
+	OuD/Bj+BjGXkS8gZwpCFDzYHrex0DgeiKh9EF1b5mIf0JzLiqVxjcXjuN2bL1+8DUFyj
+	D+siw90l3s171K7GYeviQUY2Giiu8Ye9qZGLVKeZ74b6uhyGHWkZhNmghy8KTiKe9bzH
+	mvVZfcjchuK6V0O+9fxU6Qb3eVhMPp/zr7HielpxW8B8YDn6xrymuuU08iaj1HqdhnKD
+	tqZ4iGWh+rq8qJhuxAWxwX4fNOmTmvVn/6Q2aQFJI0XbbJm+R0/u+hQ6V+5KTxuHkl57
+	SxUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:content-type:subject:date:message-id:to
-	:mime-version;
-	bh=Opgykj0ifDQjZkoRMlkKCLOQB3At2AGiRlERGb+ddM0=;
-	b=ebCjuUVJDLGHjRW874XxVhRbWCs23DapbOYSvHaZVkxIDPRotrH7Z/hUqzyWNCtk6n
-	aOMNbhauqyOS7bUWozZDie0TZh10zhxnUIOu29SOZwd/LWj7n3U/DBg8h8wuG+9s/mIo
-	PfeC02jkznmjq6v4I2nOsE7XCPhlUTs6jQjDGP2SVTuM35EmpmHsicWHFOudxUao28xI
-	pMLAJ6hnAPESqte4RkjbB/qj6RMB7AHX/kX3/WlXml1wAKLA/osPEPyv0Wyf3OsZKVNH
-	O85kBNqgYIKFxyOH0wbytWlykXYSDkqHqnaTlkJ7N8+n0aKAjpVedRvHU7bN9Fg/dBQJ
-	qHCQ==
-X-Gm-Message-State: AG10YORN0FxA7/fOObDiQyGRt9n5plf7ewubeYGeEKIB7Wc+fb5hW7hJe09wJBmYz/syvQ==
-X-Received: by 10.194.119.161 with SMTP id kv1mr3909269wjb.135.1454530335331; 
-	Wed, 03 Feb 2016 12:12:15 -0800 (PST)
-Received: from ernie.rdm.local (rademacherexchange.de. [46.245.221.222])
-	by smtp.gmail.com with ESMTPSA id n5sm9486307wmf.3.2016.02.03.12.12.14
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:date:mime-version:message-id:from:to:subject
+	:content-type:content-transfer-encoding;
+	bh=pnUYEJGMgvrRrKK2cDuP9cBlaNmifccsdejWqesHRNc=;
+	b=jU0vN9PfSBpM/Lxpqt6VOUks3a6gQu4JYsOtyDL2w3mbW1J2svFBdyOCPHo1JW4ejf
+	UYLUD60s2xKzoQIP7URGhIUQbGPhzjKqkseIEDezufkSGtHr4Jt86TLBoGGSlwH20A+Q
+	5he0QRfERQa2p5QuqXbOnQHqBbZW6KMqoYnY3thzqfGYt7n43jHBhwE+rIz7YJp23GnJ
+	xEEBT4gbTpO5btJse2/2kWk1WIS7f3cLL9EDtJp6u25W7pXZMEAgHDWc8ld2Vvh0Fj9M
+	9+QXBYxq8anXWiLMIpN4BoQ5gEQ1W0aflceyH0JtJ4UGqRL2jqQy0BYmoOdqKXKo0iMs
+	/QnQ==
+X-Gm-Message-State: AG10YORZymsiB0AavL3q02ijM+0IeCllShaBmDvFcEwyTCbJKnHdAsXlAy7wx4yqNWL4JA==
+X-Received: by 10.55.78.70 with SMTP id c67mr4791697qkb.37.1454536967714;
+	Wed, 03 Feb 2016 14:02:47 -0800 (PST)
+Received: from [127.0.0.1] (cable2-pool191-cs-134.doycomm.com.
+	[66.219.191.134]) by smtp.gmail.com with ESMTPSA id
+	a196sm195734qha.49.2016.02.03.14.02.44
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 03 Feb 2016 12:12:14 -0800 (PST)
-From: Jens Rehsack <rehsack@gmail.com>
-X-Pgp-Agent: GPGMail 2.6b2
-Date: Wed, 3 Feb 2016 21:12:12 +0100
-Message-Id: <A8DC1FDD-C832-4AF0-B282-77430FBE0685@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
-X-Mailer: Apple Mail (2.3112)
-Subject: [meta-cpan] Updates pushed
+	Wed, 03 Feb 2016 14:02:45 -0800 (PST)
+Date: Wed, 03 Feb 2016 14:02:45 -0800 (PST)
+X-Google-Original-Date: Wed, 03 Feb 2016 22:02:43 GMT
+MIME-Version: 1.0
+X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
+Message-Id: <1454536963709.2efea6f3@Nodemailer>
+From: cliff.brake@gmail.com
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
+Subject: OE Changelog since 2016-01-24 until 2016-01-31
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,1281 +56,570 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2016 20:12:18 -0000
-X-Groupsio-MsgNum: 59833
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_14084FE6-8B19-42F3-9DD7-A245E42FEB2B";
-	protocol="application/pgp-signature"; micalg=pgp-sha512
-
---Apple-Mail=_14084FE6-8B19-42F3-9DD7-A245E42FEB2B
+X-List-Received-Date: Wed, 03 Feb 2016 22:02:47 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
 
-I pushed following commits to meta-cpan =
-(http://github.com/rehsack/meta-cpan/), master and jethro branches (if =
-someone cares ...):
+Changelog since 2016-01-24 until 2016-01-31.  Projects included in this =
+report:
+
+bitbake: git://git.openembedded.org/bitbake
+openembedded-core: git://git.openembedded.org/openembedded-core
+meta-openembedded: git://git.openembedded.org/meta-openembedded
+meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
+meta-arago: git://arago-project.org/git/meta-arago.git
+meta-atmel: https://github.com/linux4sam/meta-atmel.git
+meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
+meta-browser: git://github.com/OSSystems/meta-browser.git
+meta-bug: git://github.com/buglabs/meta-bug.git
+meta-chicken: git://github.com/OSSystems/meta-chicken
+meta-efikamx: git://github.com/kraj/meta-efikamx.git
+meta-ettus: http://github.com/koenkooi/meta-ettus.git
+meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
+meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
+meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
+meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
+meta-gumstix: git://github.com/gumstix/meta-gumstix.git
+meta-gumstix-community: =
+https://github.com/schnitzeltony/meta-gumstix-community.git
+meta-handheld: git://git.openembedded.org/meta-handheld
+meta-igep: http://github.com/ebutera/meta-igep.git
+meta-intel: git://git.yoctoproject.org/meta-intel
+meta-ivi: git://git.yoctoproject.org/meta-ivi
+meta-java: git://github.com/woglinde/meta-java
+meta-jetson-tk1: https://github.com/cubicool/meta-jetson-tk1.git
+meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
+meta-micro: git://git.openembedded.org/meta-micro
+meta-mono: git://git.yoctoproject.org/meta-mono.git
+meta-netbookpro: git://github.com/tworaz/meta-netbookpro
+meta-nodejs: https://github.com/imyller/meta-nodejs.git
+meta-nslu2: git://github.com/kraj/meta-nslu2
+meta-opie: git://git.openembedded.org/meta-opie
+meta-qt3: git://git.yoctoproject.org/meta-qt3
+meta-qt5: git://github.com/meta-qt5/meta-qt5.git
+meta-slugos: git://github.com/kraj/meta-slugos
+meta-systemd: git://git.yoctoproject.org/meta-systemd
+meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
+meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
+meta-ti: git://git.yoctoproject.org/meta-ti
+meta-webos: git://github.com/openwebos/meta-webos.git
+meta-xilinx: git://git.yoctoproject.org/meta-xilinx
+meta-yocto: git://git.yoctoproject.org/meta-yocto
+openembedded: git://git.openembedded.org/openembedded
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for bitbake:
+
+Andre McCurdy (2):
+=20=20build.py: minor shell_trap_code() formatting tweaks
+=20=20data.py: avoid double newlines at the end of functions in emit_var()
+
+Daniel Istrate (1):
+=20=20toaster: Update UI test runner
+
+Martin Samuelsson (1):
+=20=20bitbake-user-manual-metadata: Updated 'dir' flag
+
+Peter Kjellerstedt (3):
+=20=20cooker: Allow BBMASK to contain multiple regular expressions
+=20=20bitbake-user-manual-ref-variables: Update the help for BBMASK
+=20=20fetch2: Simplify logic in verify_checksum()
+
+Phil Blundell (1):
+=20=20cooker, bitbake-worker: Fix spelling of "received"
+
+Richard Purdie (4):
+=20=20utils: Add ability to change the process name
+=20=20bitbake: Set process names to be meaninful
+=20=20knotty: Don't show errors for universe provider issues
+=20=20cooker: Only start as many parse threads as we need
+
+Ross Burton (1):
+=20=20fetch2/wget: fallback to GET if HEAD is rejected in checkstatus()
+
+Scott Rifenbark (1):
+=20=20bitbake-user-manual: Updated the example BitBake directory
+
+Sujith H (1):
+=20=20bitbake: BBUIHelper: Remove function findServerDetails
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded-core:
+
+Alexander Kanavin (17):
+=20=20gcr: check only even upstream versions
+=20=20pixman: only check even upstream versions
+=20=20rxvt-unicode: update to 9.22
+=20=20vala: update to 0.30.0
+=20=20waffle: update to 1.5.2
+=20=20libsoup-2.4: update to 2.52.2
+=20=20gtk-icon-utils-native: update to 3.18.6
+=20=20gtk+: update to 2.24.29
+=20=20gtk+3: update to 3.18.6
+=20=20glib-2.0: update to 2.46.2
+=20=20gdk-pixbuf: update to 2.32.3
+=20=20freetype: update to 2.6.2
+=20=20libsecret: update to 0.18.4
+=20=20webkitgtk: update to 2.10.5
+=20=20at-spi2-core: update to 2.18.3
+=20=20cmake: update to 3.4.2
+=20=20ffmpeg: add a recipe, and remove the libav recipe
+
+Andre McCurdy (22):
+=20=20pango.inc: drop obsolete FULL_OPTIMIZATION over-ride
+=20=20gstreamer1.0-plugins-base.inc: drop obsolete dependency on liboil
+=20=20busybox: backport upstream truncate open mode fix
+=20=20mtools: keep v3.9.9 recipe in sync with the v4.0.18 version
+=20=20busybox: fix stop -vs- start typo in rcS script
+=20=20libtirpc: remove stray .orig file from Use-netbsd-queue.h.patch
+=20=20libsoup-2.4: add glib-2.0-native dependency
+=20=20gstreamer1.0-plugins-good: fix compiler warnings with -Os in 1.7.1
+=20=20gstreamer1.0-plugins-bad: fix compiler warnings with -Os in 1.7.1
+=20=20pango.inc: drop obsolete dependency on qemu-native
+=20=20qemu.bbclass: clarify QEMU_EXTRAOPTIONS
+=20=20glib-2.0: refresh configure-libtool.patch
+=20=20glib-2.0: drop add-march-i486-into-CFLAGS-automatically.patch
+=20=20glib.inc: limit ARM_INSTRUCTION_SET over-rides to armv4/armv5
+=20=20bitbake.conf: stop exporting PATCH_GET =3D "0"
+=20=20gcc-cross.inc: drop pruning of PATCH_GET from the testgcc script
+=20=20glibc-testing.inc: drop pruning of PATCH_GET from the testglibc script
+=20=20autotools.bbclass: don't create subshell to delete configure scripts
+=20=20openssl: update 1.0.2e -> 1.0.2f ( CVE-2016-0701 CVE-2015-3197 )
+=20=20curl: update 7.46.0 -> 7.47.0 ( CVE-2016-0754 CVE-2016-0755 )
+=20=20pango.inc: limit ptest specific do_compile_prepend to target builds
+=20=20pango.inc: misc dependency fixes
+
+Andreas M=C3=BCller (2):
+=20=20xf86-input-libinput: initial add 0.16.0
+=20=20distutils-common-base: do not set PACKAGES - use defaults from =
+bitbake.conf
+
+An=C3=ADbal Lim=C3=B3n (1):
+=20=20ptest-runner: Add ptest-runner_2.0 recipe.
+
+Armin Kuster (2):
+=20=20tzcode: update to 2016a
+=20=20tzdata: update to 2016a
+
+Bruce Ashfield (2):
+=20=20linux-yocto/4.1: update to 4.1.16
+=20=20linux-yocto/4.4: CVEs and preempt-rt update
+
+Catalin Enache (1):
+=20=20dpkg: fix CVE-2015-0860
+
+Chen Qi (1):
+=20=20dbus: upgrade to 1.10.6
+
+Derek Straka (1):
+=20=20bind: update to 9.10.3-P3
+
+Enrico Jorns (1):
+=20=20systemd: fix systemctl enable script for template units
+
+George McCollister (7):
+=20=20bash-completion: move in recipe from meta-oe
+=20=20bash-completion.bbclass: add class
+=20=20dbus-glib: use bash-completion.bbclass
+=20=20util-linux: use bash-completion.bbclass
+=20=20git: use bash-completion.bbclass
+=20=20kmod: use bash-completion.bbclass
+=20=20glib: use bash-completion.bbclass
+
+Hongxu Jia (3):
+=20=20mkelfimage: fix target cflags leaks to host
+=20=20glibc.inc: do not immediate expand SELECTED_OPTIMIZATION
+=20=20systemtap_git.inc: do not immediate expand SELECTED_OPTIMIZATION
+
+Joshua Lock (2):
+=20=20connman-conf: convert to systemd oneshot
+=20=20connman: tidy up connman-conf usage
+
+Khem Raj (13):
+=20=20argp-standalone: Fix build when S !=3D B
+=20=20ltp: Add rdep on ldd
+=20=20gdb: Fix build failures on musl
+=20=20bsd-headers: Fix LICENCE and dev package RDEPENDS
+=20=20btrfs-tools: Disable backtrace on musl
+=20=20grub: Backport fix for largefile detection/use
+=20=20elfutils: Fix build with uclibc/musl
+=20=20pth: Delete
+=20=20fts: Correct LIC_FILES_CHKSUM
+=20=20libdrm: Refresh patch to match upstream submission
+=20=20musl: Upgrade to tip of tree
+=20=20gcc, qemuppc: Explicitly disable forcing SPE flags
+=20=20binutils: Upgrade to 2.26
+
+Markus Lehtonen (6):
+=20=20devtool: extract: use the correct datastore for builddir
+=20=20meta/lib: new module for handling GPG signing
+=20=20buildhistory: fix the check for existence of a git repo
+=20=20autotools.bbclass: use oe_runmake instead of ${MAKE}
+=20=20Make sure that the directory for CONFIGURESTAMPFILE exists
+=20=20externalsrc: use shared CONFIGURESTAMPFILE if B=3DS
+
+Mathieu Desnoyers (1):
+=20=20gcc: fix hidden weak symbols by removing buggy gcc patch
+
+Maxin B. John (2):
+=20=20connman: fix crash with iptables 1.6
+=20=20libical: update to 2.0.0
+
+Olof Johansson (1):
+=20=20bitbake-whatchanged: avoid double do_ task name prefix
+
+Paul Eggleton (6):
+=20=20devtool: move edit-recipe to a separate module
+=20=20devtool: build-image: allow specifying packages to add to image
+=20=20devtool: add: warn if modified recipe found in attic directory
+=20=20devtool: properly handle bb.build.FuncFailed when extracting source
+=20=20devtool: add configure-help subcommand
+=20=20gen-lockedsig-cache: fix bad destination path joining
+
+Peter Kjellerstedt (3):
+=20=20documentation.conf: Update the help for BBMASK
+=20=20local.conf.sample.extended: Update the info about BBMASK
+=20=20lib/oe/patch: Make GitApplyTree._applypatch() support read-only =
+.git/hooks
+
+Phil Blundell (1):
+=20=20native.bbclass: Set CXXFLAGS from BUILD_CXXFLAGS not BUILD_CFLAGS
+
+Richard Purdie (14):
+=20=20Revert "xz: Allow to work with ASSUME_PROVIDED xz-native"
+=20=20libuser: Drop unneeded xz-native dependency
+=20=20libtirpc: Drop unneeded xz-native dependency
+=20=20gcc-cross-canadian: Add missing DEPENDS on =
+virtual/${HOST_PREFIX}gcc-crosssd
+=20=20kernel: Clean DEPLOYDIR before do_deploy runs
+=20=20image: Don't create tasks with '.' in the name
+=20=20gtk-icon-utils-native: Drop problematic dependency
+=20=20sstate: Improve handling of useradd dependencies
+=20=20sstate: Add back packagedata on packagedata dependencies
+=20=20base: Move COMPATIBLE_MACHINE out the scope of SOURCE_MIRROR_FETCH
+=20=20binutils: Use target provided zlib
+=20=20pcmciautils: Fix makefile race
+=20=20libarchive-native: Disable libxml2 support
+=20=20sstate: Revert using -m option to tar in sstate
+
+Richard Tollerton (1):
+=20=20libc-package.bbclass: add LOCALE_UTF8_IS_DEFAULT
+
+Robert Yang (3):
+=20=20image.bbclass: check INITRAMFS_MAXSIZE
+=20=20gdb-common.inc: add PACKAGECONFIG for readline
+=20=20autotools_stage.bbclass: remove it
+
+Ross Burton (8):
+=20=20rootfs-postcommands: fix allow-empty-password on read-only rootfs
+=20=20e2fsprogs: disable blkid
+=20=20scripts/wipe-sysroot: also delete uninative sysroot
+=20=20uninative: fix path to patchelf-uninative
+=20=20uninative: handle UNINATIVE_URL being file:///
+=20=20meta: fix capitalisation in Upstream-Status
+=20=20insane: remove unused variable assignment
+=20=20oeqa/runtime/rpm: be more verbose if test_rpm_query_nonroot fails
+
+Roy Li (3):
+=20=20systemd: make TEST_DIR configurable
+=20=20netbase: add ipv6 host to /etc/hosts
+=20=20kexec: package kdump init script/configuration file correctly
+
+Stefan Agner (1):
+=20=20lib/oe/package_manager: remove package feed lists
+
+Yuqing Zhu (2):
+=20=20gstreamer1.0-plugins-bad: Fix memory leak of navigation thread
+=20=20gstreamer1.0-plugins-base: Add video crop supporting when convert =
+frame
+
+bmouring@ni.com (1):
+=20=20avahi: Add patch to fix Win10 mDNS issues
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-openembedded:
+
+Adrian (1):
+=20=20networkmanager-openvpn: Update to 1.0.8
+
+Andreas M=C3=BCller (3):
+=20=20gvfs: update to 1.24.2 to make access to windows shares work again
+=20=20xfce4-power-manager: remove udisks rdependency
+=20=20thunar: remove udisks from RRECOMMENDS
+
+Belal, Awais (1):
+=20=20mplayer2: fix building with gcc 5.x
+
+Dai Caiyun (6):
+=20=20opensaf: 4.6.0 -> 4.7.0
+=20=20networkmanager: 1.0.6 -> 1.0.10
+=20=20python-pip: 7.1.0 -> 7.1.2
+=20=20dracut: 043 -> 044
+=20=20syslog-ng: 3.5.4.1 -> 3.6.4
+=20=20cryptsetup: 1.6.7 -> 1.7.0
+
+Derek Straka (4):
+=20=20python-jsonpatch: add recipe for 1.12
+=20=20python-jsonpointer: add recipe for 1.10
+=20=20jq: upgrade to 1.5
+=20=20python-tornado: upgrade to 4.3
+
+Li xin (1):
+=20=20python-six: Error fix for recipes depend on python-six
+
+Mark Asselstine (1):
+=20=20ctdb: Fix rootfs creation errors
+
+Martin Jansa (3):
+=20=20terminus-font: update perl-native-runtime dependency
+=20=20phoronix-test-suite: exclude bash, php, python dependency with =
+SIGGEN_EXCLUD
+=20=20telepathy-glib: update python-native-runtime dependency
+
+Maxin B. John (1):
+=20=20libjpeg-turbo: remove recipe
+
+Moritz Fischer (1):
+=20=20gpsd: Add patch to fix broken ACTIVATE hook.
+
+Nate Karstens (1):
+=20=20dhcpcd: add recipe for dhcpcd
+
+Robert Yang (1):
+=20=20dfu-util: use BP in SRC_URI
+
+Trevor Woerner (1):
+=20=20nodejs: update from 4.2.3 to 4.2.4
+
+Yi Zhao (4):
+=20=20debootstrap: fix host-user-contaminated
+=20=20espeak: fix host-user-contaminated
+=20=20orrery: fix host-user-contaminated
+=20=20logwatch: fix host-user-contaminated
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-angstrom:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-arago:
+
+Anand Balagopalakrishnan (2):
+=20=20libgbm: synchronize libgbm with upstream Mesa
+=20=20omapdrmtest: disable viddectest on kmscube
+
+Denys Dmytriyenko (5):
+=20=20stress-ng: add 0.05.09
+=20=20memtester: overlay 4.1.3 from meta-oe
+=20=20memtester: upgrade 4.1.3 -> 4.3.0
+=20=20k2-initramfs: update with NETCP PA FW images
+=20=20k2-initramfs: update with proper initramfs
+
+Gou, Hongmei (4):
+=20=20packagegroup-arago-tisdk-addons-sdk-target: add elfutils-dev and =
+elfutils-st
+=20=20weston-init: update init scripts related to restarting Weston
+=20=20opencv: update to version 3.1
+=20=20tisdk-uenv: remove fdtfile hardcoding for am57xx-evm
+
+Jacob Stiffler (8):
+=20=20ti-llvm3.6: Upgrade ti-llvm from version 3.3 to 3.6
+=20=20ocl: Upgrade to version 1.1.7.2
+=20=20packagegroup-arago-tisdk-addons*: Add OpenCL and related packages for =
+keysto
+=20=20ti-tisdk-makefile: Add OpenCL and related targets for keystone
+=20=20packagegroup-arago-tisdk-matrix: Add OpenCL matrix demos for keystone
+=20=20tisdk-server-rootfs-image: Add unnecessary dev packages to =
+BAD_RECOMMENDATIO
+=20=20arm-benchmarks: Bump SRCREV
+=20=20img-pvr-sdk: ti43x: Update branch and SRCREV for HDMI underrun fix
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-atmel:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-beagleboard:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-browser:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-bug:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-chicken:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-efikamx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ettus:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm:
+
+Otavio Salvador (1):
+=20=20imx-base.inc: Move IMAGE_FSTYPES override to a SoC variable
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm-extra:
+
+Max Krummenacher (1):
+=20=20colibri-vf.conf: set mqxboot version with wildcard
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-ppc:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-guacamayo:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix-community:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-handheld:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-igep:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-intel:
+
+Jianxun Zhang (4):
+=20=20libva: Update to 1.6.2
+=20=20libva-intel-driver: Update to 1.6.2
+=20=20gstreamer-vaapi: Update install-tests.patch
+=20=20gstreamer-vaapi: Update 0.6.1-> 0.7.0
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ivi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-java:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-jetson-tk1:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-kde:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-micro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-mono:
+
+Alex J Lennon (3):
+=20=20mono: add support for 4.2.2.30
+=20=20README: update release notes link/testing of 4.2.2.30 on =
+jethro/qemux86
+=20=20layer.conf: default to mono 4.2.2.30
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-netbookpro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nodejs:
+
+Ilkka Myller (6):
+=20=202016-01-12, Version 5.4.1 (Stable)
+=20=202016-01-20, Version 4.2.5 "Argon" (LTS) Release
+=20=202016-01-20, Version 5.5.0 (Stable)
+=20=202016-01-21, Version 4.2.6 "Argon" (LTS) Release
+=20=20Merge pull request #20 from siemens/sharedlibs
+=20=20Updated copyright year
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nslu2:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-opie:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt3:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt5:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-slugos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-systemd:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-raspberrypi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-smartphone:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ti:
+
+Denys Dmytriyenko (4):
+=20=20netcp-pa-fw: add initial version 1.0.0
+=20=20linux-ti-staging: update to 4.1.16 with latest merges
+=20=20linux-ti-staging: add runtime dependency on NETCP PA firmware
+=20=20netcp-sa-fw: add initial version 1.0.0
+
+Jacob Stiffler (30):
+=20=20ti-cgt6x: Upgrade to version 8.1.0
+=20=20ti-cg-xml: Add version 2.41.00
+=20=20ti-pdk.bbclass: Add class for creating RTOS PDK components
+=20=20common-csl-ip: Upgrade to version 3.3.0.1B
+=20=20rm-lld: Seperate source info into .inc file
+=20=20rm-lld: Bump version to 02.02.00.00
+=20=20rm-lld-rtos: Add RTOS package of the RM LLD
+=20=20qmss-lld: Upgrade to version 2.1.0.12
+=20=20qmss-lld-rtos: Add RTOS package for QMSS LLD
+=20=20cppi-lld: Upgrade version to 2.1.0.11
+=20=20cppi-lld-rtos: Add RTOS package for CPPI LLD
+=20=20openmp-rtos: Add the OpenMP RTOS package
+=20=20gdbc6x: Extend support to keystone SOCs
+=20=20edma3-lld: Upgrade version to 2.12.01.22
+=20=20edma3-lld-rtos: Extend supported SOCs
+=20=20multiprocmgr: Clean up recipes
+=20=20multiprocmgr-rtos: Add RTOS package for multiprocmgr
+=20=20aif2-lld: Upgrade to version 1.2.0.1
+=20=20dfe-lld: Upgrade to version 1.0.0.7
+=20=20hyplnk-lld: Bump SRCREV
+=20=20iqn2-lld: Upgrade to version 1.0.0.10
+=20=20mmap-lld: Upgrade to version 2.0.0.6
+=20=20nwal-lld: Upgrade to version 02.01.00.09
+=20=20pa-lld: Upgrade to version 03.00.01.07
+=20=20pktlib: Upgrade to version 2.1.0.6
+=20=20sa-lld: Upgrade to version 03.00.00.12
+=20=20srio-lld: Upgrade to version 02.00.00.14
+=20=20traceframework: Upgrade to version 01.01.01.08
+=20=20hplib-mod: Add to KERNEL_MODULE_AUTOLOAD
+=20=20uio-module-drv: Add to KERNEL_MODULE_AUTOLOAD
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-webos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-xilinx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+Alejandro Hernandez (1):
+=20=20linux-yocto: Adds new genericx86 and genericx86-64 SRCREVs for kernel =
+4.4
+
+Peter Kjellerstedt (1):
+=20=20local.conf.sample.extended: Update the info about BBMASK
+
+Richard Purdie (1):
+=20=20poky: Add poky-world-exclude.inc and add qwt-as
+
+Ross Burton (1):
+=20=20conf/distro/poky.conf: use example.com for connectivity check
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded:
 
-commit 1d6003bd661ffbecab5699ee6b85f16ba001e8a6
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Feb 3 13:44:03 2016 +0100
 
-    io-socket-ssl-perl: Update to 2.023
 
-    Update recipe for CPAN hosted Perl5 module IO::Socket::SSL from =
-2.022 to 2.023.
-
-    Changes since 2.022: =
-https://metacpan.org/source/SULLR/IO-Socket-SSL-2.023/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 6652b9223be372892ab26c117438270001ab2dc2
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Feb 3 13:18:22 2016 +0100
-
-    exception-class-perl: Update to 1.40
-
-    Update recipe for CPAN hosted Perl5 module Exception::Class from =
-1.39 to 1.40.
-    Mark resulting packages as allarch.
-
-    Changes since 1.39: =
-https://metacpan.org/source/DROLSKY/Exception-Class-1.40/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 9842fbe6ced75206a0bea441165626fef3dc8344
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 21:19:08 2016 +0100
-
-    dancer2-plugin-database-perl: Update to 2.15
-
-    Update recipe for CPAN hosted Perl5 module Dancer2::Plugin::Database =
-2.12 to 2.15.
-    Mark resulting packages as allarch.
-
-    Changes since 2.12: =
-https://metacpan.org/source/AMBS/Dancer2-Plugin-Database-2.15/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 9f350c002503679974836c40dd7cfad0bbabad2d
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 21:16:46 2016 +0100
-
-    dancer-plugin-database-core-perl: Update to 0.14
-
-    Update recipe for CPAN hosted Perl5 module =
-Dancer::Plugin::Database::Core from 0.11 to 0.14.
-    Mark resulting packages as allarch.
-
-    Changes since 0.11: =
-https://metacpan.org/source/AMBS/Dancer-Plugin-Database-Core-0.14/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 4e76659bb3b504fa49424177210c75fee1913059
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 21:14:54 2016 +0100
-
-    apache-logformat-compiler-perl: Update to 0.33
-
-    Update recipe for CPAN hosted Perl5 module =
-Apache::LogFormat::Compiler from 0.32 to 0.33.
-    Mark resulting packages as allarch.
-
-    Changes since 0.32: =
-https://metacpan.org/source/KAZEBURO/Apache-LogFormat-Compiler-0.33/Change=
-s
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 1a556e43396065b7677b5bf2cf2976822b9b73e8
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 16:52:16 2016 +0100
-
-    dancer2-perl: Update to 0.166001
-
-    Update recipe for CPAN hosted Perl5 module Dancer2 from 0.161000 to =
-0.166001.
-    Mark resulting packages as allarch.
-
-    Changes since 0.161000: =
-https://metacpan.org/source/XSAWYERX/Dancer2-0.166001/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 584e228ae84a445c90e9ca1d36d24110f67be0ec
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 16:42:36 2016 +0100
-
-    server-starter-perl: Update to 0.32
-
-    Update recipe for CPAN hosted Perl5 module Server::Starter from 0.31 =
-to 0.32.
-    Mark resulting packages as allarch.
-
-    Changes since 0.31: =
-https://metacpan.org/source/KAZUHO/Server-Starter-0.32/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit deb2f7b663fcc7115e032d8935a2269863695337
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 16:40:33 2016 +0100
-
-    plack-perl: Update to 1.0039
-
-    Update recipe for CPAN hosted Perl5 module Plack from 1.0037 to =
-1.0039.
-    Mark resulting packages as allarch.
-
-    Changes since 1.0037: =
-https://metacpan.org/source/MIYAGAWA/Plack-1.0039/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 019943312feb82fd36c14a16eaa3e7c8878442c6
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 16:25:59 2016 +0100
-
-    http-headers-fast-perl: Update to 0.20
-
-    Update recipe for CPAN hosted Perl5 module HTTP::Headers::Fast from =
-0.18 to 0.20.
-    Mark resulting packages as allarch.
-
-    Changes since 0.18: =
-https://metacpan.org/source/TOKUHIROM/HTTP-Headers-Fast-0.20/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit dd8e9566a868c978cf6548f6644ecf6d759f0df3
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 16:12:53 2016 +0100
-
-    html-parser-perl: Update to 3.72
-
-    Update recipe for CPAN hosted Perl5 module HTML::Parser from 3.71 to =
-3.72:
-
-    Changes since 3.71: =
-https://metacpan.org/source/GAAS/HTML-Parser-3.72/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 1044374158b1ab9159535e0d3bad8dab2c17339b
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 16:10:54 2016 +0100
-
-    http-message-perl: Update to 6.11
-
-    Update recipe for CPAN hosted Perl5 module HTTP::Message from 6.10 =
-to 6.11.
-    Mark resulting packages as allarch.
-
-    Changes since 6.10: =
-https://metacpan.org/source/ETHER/HTTP-Message-6.11/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 850774735ff53edb081fb01ea302a041ae92fc6b
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 16:06:03 2016 +0100
-
-    libwww-perl-perl: Update to 6.15
-
-    Update recipe for CPAN hosted Perl5 module LWP from 6.13 to 6.15.
-    Mark resulting packages as allarch.
-
-    Changes since 6.13: =
-https://metacpan.org/source/ETHER/libwww-perl-6.15/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit ea31bb95f4144825479fc83f35a6ab5b2bfc494f
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 15:57:56 2016 +0100
-
-    uri-perl: Update to 1.71
-
-    Update recipe for CPAN hosted Perl5 module URI from 1.69 to 1.71.
-    Mark resulting packages as allarch.
-
-    Changes since 1.69: =
-https://metacpan.org/source/ETHER/URI-1.71/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit c982cc4de9c39459bf4cb08c3c493873207f086b
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 14:05:57 2016 +0100
-
-    unicode-linebreak-perl: Update to 2015.12
-
-    Update recipe for CPAN hosted Perl5 module Unicode::LineBreak from =
-2015.06 to 2015.12.
-
-    Changes since 2015.06: =
-https://metacpan.org/source/NEZUMI/Unicode-LineBreak-2015.12/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 0f6e9b856a8516e301d296662985b99c5e3aa31d
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 14:01:21 2016 +0100
-
-    text-csv-xs-perl: Update to 1.21
-
-    Update recipe for CPAN hosted Perl5 module Text::CSV_XS from 1.19 to =
-1.21.
-
-    Changes since 1.19: =
-https://metacpan.org/source/HMBRAND/Text-CSV_XS-1.21/ChangeLog
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 402979d105380bc5bb92866ec49714c296da232c
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 13:58:23 2016 +0100
-
-    string-compare-constanttime-perl: Update to 0.311
-
-    Update recipe for CPAN hosted Perl5 module =
-String::Compare::ConstantTime from 0.310 to 0.311.
-
-    Changes since 0.310: =
-https://metacpan.org/source/FRACTAL/String-Compare-ConstantTime-0.311/Chan=
-ges
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 1170665defa14631c4a508e51034ae5ff72d4e25
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 13:56:12 2016 +0100
-
-    sereal-encoder-perl: Update to 3.014
-
-    Update recipe for CPAN hosted Perl5 module Sereal::Encoder from =
-3.005 to 3.014.
-
-    Changes since 3.005: =
-https://metacpan.org/source/YVES/Sereal-Encoder-3.014/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit d1e36aaa518949931c4c257ac3b676b39c438642
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 13:54:30 2016 +0100
-
-    sereal-decoder-perl: Update to 3.014
-
-    Update recipe for CPAN hosted Perl5 module Sereal::Decoder from =
-3.005 to 3.014.
-
-    Changes since 3.005: =
-https://metacpan.org/source/YVES/Sereal-Decoder-3.014/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 0a5c46c792757a91ff8d3547a1751fd8d530bd36
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 13:50:49 2016 +0100
-
-    regexp-common-perl: Update to 2016010801
-
-    Update recipe for CPAN hosted Perl5 module Regexp::Common from =
-2013031301 to 2016010801.
-    Mark resulting packages allarch.
-
-    Changes since 2013031301: =
-https://metacpan.org/source/ABIGAIL/Regexp-Common-2016010801/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 6ce4982543107e76aca94030c48d35eb11403cf8
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 13:48:01 2016 +0100
-
-    encode-perl: Update to 2.80
-
-    Update CPAN hosted Perl5 module Encode from 2.76 to 2.80.
-
-    Changes since 2.76: =
-https://metacpan.org/source/DANKOGAI/Encode-2.80/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit efbbf1a90b3d0a9255aa0e1bf8182510e71a9976
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 13:43:51 2016 +0100
-
-    test-differences-perl: Update to 0.64.
-
-    Update CPAN hosted Perl5 module Test::Differences from 0.63 to 0.64
-    Mark resulting packages as allarch
-
-    Changes since 0.63: =
-https://metacpan.org/source/DCANTRELL/Test-Differences-0.64/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit dcda54f71d0f42ceaffd7da9770e5e4080bde29e
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 13:41:10 2016 +0100
-
-    text-diff-perl: Update to 1.43
-
-    Update CPAN hosted Perl5 package Text::Diff from 1.41 to 1.43.
-    Mark resulting packages as allarch.
-
-    Changes since 1.43: =
-https://metacpan.org/source/NEILB/Text-Diff-1.43/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 92b3b62d9b8f7fb9de9e3bd1c8092e6933348b9d
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 13:37:26 2016 +0100
-
-    business-isbn-perl: Update to 2.010
-
-    Update CPAN hosted Perl5 module Business::ISBN from 2.09 to 2.010.
-    Mark resulting packages as allarch. Remove daisy-supporting =
-no-eumm-version.patch
-
-    Changes since 2.09: =
-https://metacpan.org/source/BDFOY/Business-ISBN-2.010/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 1917b7aa91d198592d915a12ebacff8f374d259f
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 13:27:52 2016 +0100
-
-    business-isbn-data-perl: Update to 20140910.003
-
-    Update CPAN hosted Perl5 module Business::ISBN::Data from =
-20140910.002 to 20140910.003.
-    Mark resulting package as allarch and remove daisy-supporting =
-no-eumm-version.patch
-
-    Changes since 20140910.002: =
-https://metacpan.org/source/BDFOY/Business-ISBN-Data-20140910.003/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit d2dfc88a141f5df97dda7e13e553a54d273f0850
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 12:51:37 2016 +0100
-
-    datetime-timezone-perl: Update to 1.95
-
-    Update CPAN hosted Perl5 module DateTime::TimeZone from 1.94 to =
-1.05.
-
-    Changes since 1.94: =
-https://metacpan.org/source/DROLSKY/DateTime-TimeZone-1.95/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 799f4b9a1f69c08e465f945e69eb75be2f36a8ad
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 12:42:14 2016 +0100
-
-    test-memory-cycle-perl: Update to 1.06
-
-    Update CPAN hosted Perl5 module Test::Memory::Cycle from 1.04 to =
-1.06.
-    Mark resulting packages as allarch.
-
-    Changes since 1.04: =
-https://metacpan.org/source/PETDANCE/Test-Memory-Cycle-1.06/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit f13cd930019fdbb7e002c2f7dc7eb55a61bef3f4
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Thu Jan 28 12:38:52 2016 +0100
-
-    test-warnings-perl: Update to 0.026
-
-    Update CPAN hosted Perl5 module Test::Warnings from 0.025 to 0.026.
-
-    Changes since 0.025: =
-https://metacpan.org/source/ETHER/Test-Warnings-0.026/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 0ff8e914cbe18641c73a27e279c2956862a25fd2
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 20:52:53 2016 +0100
-
-    datetime-format-duration-perl: Add recipe for =
-DateTime::Format::Duration 1.04.
-
-    Add recipe for CPAN hosted Perl5 module DateTime::Format::Duration =
-version 1.04.
-
-    DateTime::Format::Duration formats and parses DateTime::Duration =
-objects
-    as well as other durations representations.
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 6f42d8350c072a4cdefb5bceb17094ab75f50650
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 20:49:17 2016 +0100
-
-    datetime-format-strptime-perl: Update to 1.63
-
-    Update CPAN hosted Perl5 module DateTime::Format::Strptime from 1.56 =
-to 1.63.
-    Mark resulting packages as allarch.
-
-    Changes since 1.56: =
-https://metacpan.org/source/DROLSKY/DateTime-Format-Strptime-1.63/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit d7732f1d6452c85312eb117ef7f8063a6259441c
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 20:44:36 2016 +0100
-
-    datetime-locale-perl: Update to 1.02
-
-    Update CPAN hosted Perl5 module DateTime::Locale from 0.46 to 1.02.
-    Mark resulting packages as allarch.
-
-    Changes since 0.46: =
-https://metacpan.org/source/DROLSKY/DateTime-Locale-1.02/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 0c84308b477b5b080ce012ea9908d2bd42742d2c
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 20:40:21 2016 +0100
-
-    datetime-timezone-perl: Update to 1.94
-
-    Update CPAN hosted Perl5 package DateTime::TimeZone from 1.92 to =
-1.94.
-    Mark resulting packages as allarch.
-
-    Changes since 1.92: =
-https://metacpan.org/source/DROLSKY/DateTime-TimeZone-1.94/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit c5e0c90520bc92ec7fe1a15cefbdabdf13030d23
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 20:35:03 2016 +0100
-
-    datetime-perl: Update to 1.21
-
-    Update recipe for CPAN hosted Perl5 package DateTime.
-    Mark resulting packages as allarch.
-
-    Changes since 1.20: =
-https://metacpan.org/source/DROLSKY/DateTime-1.21/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 69019fa8a9ba8cddacd16f72f00262cf441d173f
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 20:25:31 2016 +0100
-
-    test-tcp-perl: Update to 2.14
-
-    Upate CPAN hosted Perl5 module Test::TCP from 2.13 to 2.14
-    Mark resulting packages as allarch
-
-    Changes since 2.13: =
-https://metacpan.org/source/TOKUHIROM/Test-TCP-2.14/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 6d5459d5a44c4fbb4eb552f88f19ed987997a731
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 20:21:18 2016 +0100
-
-    socket-perl: Update to 2.021
-
-    Update CPAN hosted Perl5 module Socket from 2.020 to 2.021.
-
-    Changes since 2.020: =
-https://metacpan.org/source/PEVANS/Socket-2.021/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit fb4d640da224abd8e2cd897cce38d2e38c3a28aa
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 20:18:49 2016 +0100
-
-    net-async-http-server-perl: Update to 0.09
-
-    Update CPAN hosted Perl5 package Net::Async::HTTP::Server from 0.08 =
-to 0.09.
-    Mark resulting packages as allarch.
-
-    Changes since 0.08: =
-https://metacpan.org/source/PEVANS/Net-Async-HTTP-Server-0.09/Changes
-
-    XXX: Split package for Plack::Handler::Net::Async::HTTP::Server
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 67adb53fd4c609203b38f293c7aa08e0ce5fd478
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 20:10:03 2016 +0100
-
-    io-socket-ssl-perl: Update to 2.022
-
-    Upate CPAN hosted Perl5 module IO::Socket::SSL from 2.016 to 2.022.
-    Mark resulting packages as allarch.
-
-    Changes since 2.016: =
-https://metacpan.org/source/SULLR/IO-Socket-SSL-2.022/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit a1867f656a014acfded3a7b663387768b71c0da7
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 20:04:18 2016 +0100
-
-    data-uuid-perl: Update to 1.221
-
-    Update CPAN hosted Perl5 module Data::UUID from 1.220 to 1.221.
-
-    Changes since 1.220: =
-https://metacpan.org/source/RJBS/Data-UUID-1.221/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 13bfb698218aa24c9e4b3dc593fd4526a715185b
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 19:46:32 2016 +0100
-
-    io-async-perl: Update to 0.70
-
-    Update CPAN hosted Perl5 package IO::Async from 0.68 to 0.70.
-    Mark resulting packages as allarch.
-
-    Changes since 0.68: =
-https://metacpan.org/source/PEVANS/IO-Async-0.70/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit b6a0f98993e167dc02607e6c31cea7a9506a38be
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 19:41:37 2016 +0100
-
-    file-libmagic-perl: Update to 1.15
-
-    Update CPAN hosted Perl5 module File::LibMagic from 1.13 to 1.15.
-
-    Changes since 1.13: =
-https://metacpan.org/source/DROLSKY/File-LibMagic-1.15/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 1bcb2a15c68d228e5284d9fb1ddd5be58ecbb087
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 19:37:30 2016 +0100
-
-    net-ssleay-perl: Update to 1.72
-
-    Updating CPAN hosted Perl5 module Net::SSLeay from 1.70 to 1.72.
-
-    Changes since 1.70: =
-https://metacpan.org/source/MIKEM/Net-SSLeay-1.72/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit bf9b374fa6627f2f20b870084cf1652a2eb1e87d
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 19:31:25 2016 +0100
-
-    number-tolerant-perl: Update to 1.708
-
-    Update CPAN hosted Perl5 module Number::Tolerant from 1.707 to =
-1.708.
-    Mark resulting packages as allarch.
-
-    Changes since 1.707: =
-https://metacpan.org/source/RJBS/Number-Tolerant-1.708/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit dc53351f34776ce6dc82b61b1ca545de85d31368
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 19:26:57 2016 +0100
-
-    math-planepath-perl: Update to 122
-
-    Update CPAN hosted Perl5 module Math::PlanePath from 119 to 112.
-    Mark resulting packages as allarch
-
-    Changes since 119: =
-https://metacpan.org/source/KRYDE/Math-PlanePath-122/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 77f444750feec7b35fa148a6114fc667357a12d7
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 19:22:12 2016 +0100
-
-    mozilla-ca-perl: Update to 20160104
-
-    Update CPAN hosted Perl5 module Mozilla::CA from 20150826 to =
-20160104.
-    Mark resulting packages as allarch.
-
-    Changes since 20150826: =
-https://metacpan.org/changes/distribution/Mozilla-CA
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 6b79839e868ef3416b354b19895b1f27d5250fb4
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 17:48:02 2016 +0100
-
-    app-cmd-perl: fix license deploy regression
-
-    Due SPDX introduction in OE-Core (somewhere between daisy and =
-jethro) the
-    original license templating of Package::Utils doesn't work anymore. =
-Fix ...
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 91fcfdb830076ee7ee942dfa2d0e7d315b1ec5d5
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 17:46:02 2016 +0100
-
-    file-find-rule-perl: Update to 0.33
-
-    Update recipe for CPAN hosted Perl5 module File::Find::Rule from =
-0.33 to 0.34.
-    Mark resulting packages as allarch.
-
-    Changes since 0.33: =
-https://metacpan.org/source/RCLAMP/File-Find-Rule-0.34/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 84090d306f4c6c2ea9535e7425807f488692e560
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 17:43:31 2016 +0100
-
-    path-tiny-perl: Update to 0.076
-
-    Update CPAN hosted Perl5 module Path::Tiny from 0.072 to 0.076.
-    Mark resulting packages as allarch.
-
-    Changes since 0.072: =
-https://metacpan.org/source/DAGOLDEN/Path-Tiny-0.076/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit cec65e068482d1c68248bfa18978f7d69cf814fe
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Wed Jan 27 17:39:28 2016 +0100
-
-    test-mockrandom-perl: add recipe for version 1.01
-
-    Add recipe for CPAN hosted Perl5 module Test::MockRandom by David =
-Golden
-    to satisfy requirements for update of Path::Tiny recipe.
-
-    Test::MockRandom replaces random number generation with non-random =
-number
-    generation, primary for reliable regression testing.
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 6b091d47bd14831d875f41d366e327ab127b4a62
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 23:13:30 2016 +0100
-
-    recipes-devel: clean-up
-
-    Clean up recipes-devel and move some recipes to meanwhile existing =
-better categories.
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 71c6b98f1e2140423d057ad0fbdc9ab1158bf25a
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 18:30:26 2016 +0100
-
-    test-warnings-perl: Update to 0.025
-
-    Update CPAN hosted Perl5 module Test::Warnings from 0.021 to 0.025.
-    Mark resulting packages as allarch.
-
-    Changes since 0.021: =
-https://metacpan.org/source/ETHER/Test-Warnings-0.025/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 1c95d9ef0ffca8aabda15bdf90c7c975f0bf4d9f
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 18:26:33 2016 +0100
-
-    test-sharedfork-perl: Update to 0.35
-
-    Update CPAN hosted Perl5 module Test::SharedFork from 0.33 to 0.35.
-    Mark resulting package as allarch.
-
-    Changes since 0.33: =
-https://metacpan.org/source/EXODIST/Test-SharedFork-0.35/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 59e194ef8b983d5fff06c838d325c2982faf06e7
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 18:22:45 2016 +0100
-
-    test-exception-perl: Update to 0.43
-
-    Update CPAN hosted Perl5 package Test::Exception from 0.40 to 0.43.
-    Mark resulting packages as allarch.
-
-    Changes since 0.40: =
-https://metacpan.org/source/EXODIST/Test-Exception-0.43/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit d5291d03c20561be77a1b784b3984dd4acb0448e
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 18:18:16 2016 +0100
-
-    test-mocktime-perl: Update to 0.15
-
-    Update CPAN hosted Perl5 module Test::MockTime from 0.13 to 0.15.
-    Mark the resulting packages as allarch.
-
-    Changes since 0.13: =
-https://metacpan.org/source/DDICK/Test-MockTime-0.15/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit a3cc045b5d5ed8c48d04825ceea1e90b67097a06
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 18:14:33 2016 +0100
-
-    test-deep-perl: Update to 1.120
-
-    Update CPAN hosted Perl5 module Test::Deep from 0.117 to 1.120.
-    Mark resulting packages as allarch.
-
-    Changes since 0.117: =
-https://metacpan.org/source/RJBS/Test-Deep-1.120/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 4c77efe6f1f1a369d4959636cab2bb5377e7e082
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 18:07:01 2016 +0100
-
-    perl-tidy-perl: Update to 20150815
-
-    Upate CPAN hosted Perl5 module Perl::Tidy from 20140711 to 20150815.
-    Mark resulting packages as allarch.
-
-    Changes since 20140711: =
-https://metacpan.org/source/SHANCOCK/Perl-Tidy-20150815/CHANGES
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 8e28e55f47f9149913cb2468e48caa6f79595d38
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 18:02:28 2016 +0100
-
-    moose-perl: Update to 2.1604
-
-    Update CPAN hosted Perl5 module Moose from 2.1600 to 2.1604.
-
-    Changes since 2.1600: =
-https://metacpan.org/source/ETHER/Moose-2.1604/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 8909c314cac9996107c25b17185d5f9b675b37a7
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 17:57:52 2016 +0100
-
-    variable-magic-perl: Update to 0.59
-
-    Update CPAN hosted Perl5 package Variable::Magic from 0.58 to 0.59.
-
-    Changes since =
-https://metacpan.org/source/VPIT/Variable-Magic-0.59/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 41fd74eb471ba4d9294dfc45aa72f1c113e2b129
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 17:51:57 2016 +0100
-
-    try-tiny-perl: Update to 0.24
-
-    Updating CPAN Hosted Perl module Try::Tiny from 0.22 to 0.24.
-    Mark resulting packages as allarch.
-
-    Changes since 0.22: =
-https://metacpan.org/source/ETHER/Try-Tiny-0.24/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 0bb5fc38ca179624205675fd4291d84b7191c37d
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 17:45:11 2016 +0100
-
-    sub-identify-perl: Update to 0.12
-
-    Update CPAN hosted Perl5 module Sub::Identify from 0.10 to 0.12.
-
-    Changes since 0.10: =
-https://metacpan.org/source/RGARCIA/Sub-Identify-0.12/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 773acdf05b1d6c5324a2b2a85c187171095fb9c1
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 17:36:40 2016 +0100
-
-    struct-dumb-perl: Update to 0.08
-
-    Update CPAN hosted Perl5 module Struct::Dumb from 0.03 to 0.08.
-    Mark resulting packages as allarch.
-
-    Changes since 0.03: =
-https://metacpan.org/source/PEVANS/Struct-Dumb-0.08/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 0f800bde144d093685b6eaf1ec0a0d4f71c0db75
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 17:29:46 2016 +0100
-
-    strictures-perl: Update to 2.000002
-
-    Update CPAN hosted Perl5 pragma strictures from 2.000001 to =
-2.000002.
-    Mark resulting packages as allarch.
-
-    Changes since 2.000001: =
-https://metacpan.org/source/HAARG/strictures-2.000002/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 72052e69f9af898c91f38c2462fa1c18d367e846
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 17:26:10 2016 +0100
-
-    scope-upper-perl: Update to 0.28
-
-    Update CPAN hosted Perl5 module Scope::Upper from 0.27 to 0.28.
-
-    Changes since 0.27: =
-https://metacpan.org/source/VPIT/Scope-Upper-0.28/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 9692089a889905d3f39e689deb364817defdfe2b
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 17:14:44 2016 +0100
-
-    padwalker-perl: Update to 2.2
-
-    Update CPAN hosted Perl5 module PadWalker from 2.1 to 2.2.
-
-    Changes since 2.1: =
-https://metacpan.org/source/ROBIN/PadWalker-2.2/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 93c843bda164e38badcd70b5e0d02067c2a06cde
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 17:11:56 2016 +0100
-
-    package-deprecationmanager-perl: Update to 0.15
-
-    Update CPAN hosted Perl5 module Package::DeprecationManager from =
-0.14 to 0.15.
-    Mark resulting packages as allarch.
-
-    Changes since 0.14: =
-https://metacpan.org/source/DROLSKY/Package-DeprecationManager-0.15/Change=
-s
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 0d17dbc2e3b8a1811db24d9f4f7453d271344593
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 17:08:31 2016 +0100
-
-    namespace-autoclean-perl: Update to 0.28
-
-    Update CPAN hosted Perl5 module namespace::autoclean from 0.26 to =
-0.28.
-    Mark resulting packages as allarch.
-
-    Changes since 0.26: =
-https://metacpan.org/source/ETHER/namespace-autoclean-0.28/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 32399bfdb9933b48420a107b89bd1c23e93ed245
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 17:04:55 2016 +0100
-
-    namespace-clean-perl: Update to 0.26
-
-    Update CPAN hosted Perl5 module namespace::clean from 0.25 to 0.26.
-    Mark resulting packages as allarch.
-
-    Changes since 0.25: =
-https://metacpan.org/source/RIBASUSHI/namespace-clean-0.26/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 50b19920a8bc0c444930e171e87274365e99d34b
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 16:58:01 2016 +0100
-
-    moox-log-any-perl: Update to 0.004004
-
-    Update CPAN hosted Perl5 module MooX::Log::Any from 0.004002 to =
-0.004004.
-    Mark resulting package as allarch.
-
-    Changes since 0.004002: =
-https://metacpan.org/source/CAZADOR/MooX-Log-Any-0.004004/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 5f392d9df0263e53e34a85ad2b3d8043a06ae4d6
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 16:53:55 2016 +0100
-
-    mime-types-perl: Update to 2.12
-
-    Update CPAN hosted Perl5 module MIME::Types from 2.11 to 2.12.
-    Mark resulting packages as allarch.
-
-    Changes since 2.11: =
-https://metacpan.org/source/MARKOV/MIME-Types-2.12/ChangeLog
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 281d514e6e2669c3c8e69d455a7401fe5cd98747
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 16:50:15 2016 +0100
-
-    log-dispatch-perl: Update to 2.54
-
-    Update CPAN hosted Perl5 module Log::Dispatch from 2.46 to 2.54.
-    Mark resulting packages as allarch.
-
-    Move Log::Dispatch::Conflicts to -dev package and move prereq for it
-    (Dist::CheckConflicts) to configure depends and -dev's RDEPENDS.
-
-    Changes since 2.46: =
-https://metacpan.org/source/DROLSKY/Log-Dispatch-2.54/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 3431b1ee60feec89a428a4be8686c9d948f578e9
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 16:32:05 2016 +0100
-
-    io-tiecombine-perl: Update to 1.005
-
-    Update CPAN hosted Perl5 module IO::TieCombine from 1.004 to 1.005.
-    Mark resulting package as allarch.
-
-    Changes since 1.004: =
-https://metacpan.org/source/RJBS/IO-TieCombine-1.005/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 5abb1a44dbe21c0689d47f4a40ce7d430c2d79b8
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 16:29:14 2016 +0100
-
-    import-into-perl: Update to 1.002005
-
-    Update CPAN hosted Perl5 module Import::Into from 1.002004 to =
-1.002005.
-    Mark resulting packages as allarch.
-
-    Changes since 1.002004: =
-https://metacpan.org/source/HAARG/Import-Into-1.002005/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit ed41536d348bb91f2b790836c42f359be1f30fa2
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 16:25:44 2016 +0100
-
-    getopt-long-perl: Update to 2.48
-
-    Update CPAN hosted Perl5 module Getopt::Long from 2.47 to 2.48.
-    Mark resulting packages as allarch.
-
-    Changces since 2.47: =
-https://metacpan.org/source/JV/Getopt-Long-2.48/CHANGES
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 7f11cc1c23aa1432b463a9e482e3d91df9198eac
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 16:20:11 2016 +0100
-
-    extutils-parsexs-perl: Update to 3.30
-
-    Update CPAN hosted Perl5 module ExtUtils::ParseXS from 3.24 to 3.30.
-    Mark resulting packages as allarch.
-
-    Changes since 3.24: =
-https://metacpan.org/source/SMUELLER/ExtUtils-ParseXS-3.30/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 7c4bcb1c3bd50584c45a66a470037dae9dfd2748
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 12:41:40 2016 +0100
-
-    extutils-depends-perl: Update to 0.405
-
-    Update CPAN hosted Perl5 module ExtUtils::Depends from 0.404 to =
-0.405.
-    Mark resulting package as allarch.
-
-    Changes since 0.404: =
-https://metacpan.org/source/XAOC/ExtUtils-Depends-0.405/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 198f15d60c045dc1f3522cb753bf3410378e4716
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 12:14:53 2016 +0100
-
-    extutils-cppguess-perl: Update to 0.11
-
-    Update CPAN hosted Perl5 module ExtUtils::CppGuess from 0.09 to =
-0.11.
-    Mark resulting package as allarch
-
-    Changes since 0.09: =
-https://metacpan.org/source/DAVIDO/ExtUtils-CppGuess-0.11/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 92395f7a5d6931870af147bb28f8c79da4f585d3
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 11:37:09 2016 +0100
-
-    extutils-makemaker-perl: Update to 7.10
-
-    Update CPAN hosted Perl5 module ExtUtils::MakeMaker from 7.04 to =
-7.10.
-    Mark the resulting package as allarch.
-
-    Changes since 7.04: =
-https://metacpan.org/source/BINGOS/ExtUtils-MakeMaker-7.10/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit b00d8b698f3855bbefa3e5873229767a20ef8fe6
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 11:29:14 2016 +0100
-
-    experimental-perl: Update to 0.016
-
-    Updating CPAN hosted Perl5 experimental pragma from 0.013 to 0.016.
-    Marking resulting package as allarch.
-
-    Changes since 0.013: =
-https://metacpan.org/source/LEONT/experimental-0.016/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit e5e5346c53da26d3443bec95421360239c66fe64
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Jan 26 11:13:42 2016 +0100
-
-    devel-overloadinfo-perl: Update to 0.004
-
-    Update CPAN hosted Perl5 module Devel::OverloadInfo from 0.002 to =
-0.004.
-
-    Changes since 0.002: =
-https://metacpan.org/source/ILMARI/Devel-OverloadInfo-0.004/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit d1bf1d679749c516f0d08d8132d84cc010323802
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Mon Jan 25 19:53:42 2016 +0100
-
-    extutils-cbuilder-perl: Update to 0.280224
-
-    Update CPAN hosted Perl5 module ExtUtils::CBuilder from 0.280223 to =
-0.280224.
-
-    Changes since 0.280223: =
-https://metacpan.org/source/AMBS/ExtUtils-CBuilder-0.280224/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit cd1ae042250098ee8b5eb86b83628cd577eb6c19
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Mon Jan 25 18:59:52 2016 +0100
-
-    text-diff-perl: move to recipes-textproc
-
-    Text::Diff is more reasonable below recipes-textproc instead of =
-overflowing recipes-devel
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit f91b387b09f053e8166eb6e0009e765f611fe17f
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Mon Jan 25 18:47:36 2016 +0100
-
-    devel-mat-perl: Update to 0.21
-
-    Update CPAN hosted Perl5 package Devel::MAT from 0.20 to 0.21.
-    Use cpan_build directly ...
-
-    Changes since 0.20: =
-https://metacpan.org/source/PEVANS/Devel-MAT-0.21/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit bd349a4140baf50f8f4faf745d0bc73f757523b8
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Mon Jan 25 18:38:51 2016 +0100
-
-    module-build-perl: Update to 0.4216
-
-    Update CPAN hosted Perl5 module Module::Build from 0.4214 to 0.4216.
-    Mark resulting package as allarch and add a patch to use right path =
-for shebang-fix
-
-    Changes since 0.4214: =
-https://metacpan.org/source/LEONT/Module-Build-0.4216/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 37a933073a86cffed8d34c8e9d4009cdd52f6d0b
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Mon Jan 25 17:00:07 2016 +0100
-
-    app-cmd-perl: Update to 0.330
-
-    Update CPAN hosted Perl5 module App::Cmd from 0.327 to 0.330.
-    Mark resulting package as allarch.
-
-    Changes since 0.327: =
-https://metacpan.org/source/RJBS/App-Cmd-0.330/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 8b8facaa8922f99a7f3918c4bf11643cae5a16e5
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Mon Jan 25 15:16:44 2016 +0100
-
-    io-compress-perl: Update to 2.069
-
-    Update CPAN hosted Perl5 modules IO::Compress::* from 2.068 to =
-2.069.
-
-    Changes since 2.068: =
-https://metacpan.org/source/PMQS/IO-Compress-2.069/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 58465a87a6c5d95c1ba9a4139d95db389484e0d4
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Mon Jan 25 15:11:59 2016 +0100
-
-    compress-raw-zlib-perl: Update to 2.069
-
-    Update CPAN hosted Perl5 module Compress::Raw::Zlib from 2.068 to =
-2.069.
-    Remove libz dependency since Compress::Raw::Zlib always builds =
-bundled libz.
-
-    Chances since 2.068: =
-https://metacpan.org/source/PMQS/Compress-Raw-Zlib-2.069/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit cc91f30e8ce5cb38cfffdf29e1f8ed4852e61f96
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Mon Jan 25 14:57:45 2016 +0100
-
-    compress-raw-bzip2-perl: Update to 2.069
-
-    Update CPAN hosted Perl5 module Compress::Raw::Bzip2 from 2.068 to =
-2.069.
-
-    Changes since 2.068 - =
-https://metacpan.org/source/PMQS/Compress-Raw-Bzip2-2.069/Changes
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-commit 3e939651afaa31e6bdb734c11dfbea0d5faf9871
-Author: Jens Rehsack <sno@netbsd.org>
-Date:   Tue Nov 24 15:18:37 2015 +0100
-
-    mozilla-ca-perl: Update Perl module Mozilla::CA to 20150826
-
-    Updating mozilla-ca-perl for CPAN hosted Perl module Mozilla::CA =
-from 20141217 to 20150826.
-
-    Changes since 20141217:
-    20150826
-      - Update from Mozilla repository
-      - Update license to match license of data source (MPL 2)
-
-    Signed-off-by: Jens Rehsack <sno@netbsd.org>
-
-
---
-Jens Rehsack - rehsack@gmail.com
-
-
---Apple-Mail=_14084FE6-8B19-42F3-9DD7-A245E42FEB2B
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iQIcBAEBCgAGBQJWsl8dAAoJEESZlq7c5QqdJsIP/0ExP3uclsuMjPy7bvW/jPI4
-Kz3hmO0aRuYubKXIqsrWE+LvnALgyC9GiHJTjQ81GXljwBLOAm7FsKqyk07CUck4
-BCb6LkT9VwuNjRFOz8BVo0Ehnw3y5VqCrBmYcpqo+AZfeUuCu3vKhhJ/7T+lz08+
-+e2d698z4MaSjtX9txZpLDis3zbwFza4GT2OBql4Cu/X29H7h1D8phXeE3VP4GW7
-DFfdwvbW+lRjQuUugSWz+UF08Bu/7UgmT9WGPAJGy23EqIZqfxi1YJDsd7gUS2OT
-vEsJ5+R7z9dQfWNEU6rFffxpv3qBqhJeE3jpJmXOEwMI6KrPw8xDcHtLfDr2qXZK
-Z7+ot6YjXi96CgLB7P5J4/monqlihNg7/d4XK04VdhNqH0O84oeZ13kUsYUWPvTQ
-3jdMZGfxJOzna+j8Dy9mBkF0HEJvS1oAIVBiSJ77M9QM4sgiL8yjplKlMWdHTyEg
-ABGj9c572z+nPtOfo0t6XWxzALsGLTAfPlKq1sbyv2Jl32BJBlKibhXUPPyrF2bH
-O5lhfpY5IDv5sxyHaazJ6Z9WNG7I3Gi2KINi3NNfcfNvc4fmM92om7kvBDkFFbxx
-Lujgum5Ej8c70jq7zGb73mZlU867+eXrgArMcqRpwW87BDHpvhDmcMmrOLJN2oEb
-ASTu0k1bi3ge/HMLENfE
-=+2+K
------END PGP SIGNATURE-----
-
---Apple-Mail=_14084FE6-8B19-42F3-9DD7-A245E42FEB2B--
