@@ -1,50 +1,20 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ig0-f169.google.com (mail-ig0-f169.google.com
-	[209.85.213.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 862F977348;
-	Wed,  3 Feb 2016 16:01:59 +0000 (UTC)
-Received: by mail-ig0-f169.google.com with SMTP id xg9so4821212igb.1;
-	Wed, 03 Feb 2016 08:02:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=cEhqtaH7aTCL4AaovH4ffaRKzO0cGDAwvvvfJjULcTQ=;
-	b=QUNKOWy6ueZ8N0bvgYtYVxfCHV6Q8gZ1K8rLWWqXMLEmpBLRxPPgPEQZ+tNaJcp4ro
-	Pls8+S3BGckQx6s51E8z7iKARrTUHzg9xaUUSNtrblt+q6f9aWcxGLtP6BAgydfuhyus
-	FIecu/EaAa7zHO9kqtDhM0Y4vPVk1xsMsTK6XlPWqfSdU0MfP7iPVcrpUklAF3nmGhY8
-	1FkXF3RzVAxRBHOvb6N3Lq0hRYUn1LrX7JJuLuhHfNdowOfEIlxDazSKOC3MdAUQRCGs
-	eRyOzqX8/zpkCSjjQ1keSvyKSxsmEV/uOkoL/n+ib41mUmx3UGuZNqk0BdxxxB3iKHU6
-	psbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=cEhqtaH7aTCL4AaovH4ffaRKzO0cGDAwvvvfJjULcTQ=;
-	b=dIhC2OOE+CxVmhGJXRnBJQ9rk4aDXxNtQoud9Lu34oZWWbdoQpYOyYaJiB2XF9ypCA
-	DxPCF6hzlf4y2qY0pVteiSop1zHpeMXOOCP1HpS4+bG3Gj9hzvZLJ0m9iESv/P6aluEn
-	VvnjrCBILPxqPsJdo9QXT5H8BBfjzOihvDCUfy3XyaNgL9N5DqcHCBTpSNf7qBMig49l
-	wJiyBEpwBpcl3nCQiJi7ZYB9+mQgKzQVjFGzNpqvPX0D5s3uPM+R6zZ37ShML1OY89r1
-	u9yvmdwNKPhnjhNKqsNFNIeFbeFXACW5LvUVPvEy4VjQ8gt9OX2xI56jMGd0dMQeHqha
-	TThQ==
-X-Gm-Message-State: AG10YOSrzbJaJje12ssk7UXbeleAg0z/jPHW68zxPLTzFPp0ZP4c0dLLQ/SuOFH60UkSU1sGWDPGk8FxiMlBRw==
-MIME-Version: 1.0
-X-Received: by 10.50.111.111 with SMTP id ih15mr25126864igb.78.1454515319663; 
-	Wed, 03 Feb 2016 08:01:59 -0800 (PST)
-Received: by 10.36.25.81 with HTTP; Wed, 3 Feb 2016 08:01:59 -0800 (PST)
-In-Reply-To: <1454511012.27087.183.camel@linuxfoundation.org>
-References: <CALbNGRRmD=4QUi=+_fx48M4GDB9VwTX5m5wH12j4ed1OK6SW6Q@mail.gmail.com>
-	<1454511012.27087.183.camel@linuxfoundation.org>
-Date: Wed, 3 Feb 2016 17:01:59 +0100
-Message-ID: <CALbNGRSZ83cE_hOSPNy5J_Jjc5KFtc10uEC7MoF0VbZHUPHUfg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Language settings GTK (glibc?) problem
+Return-Path: <dv@pseudoterminal.org>
+X-Greylist: delayed 324 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 03 Feb 2016 16:50:37 UTC
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 17000770AB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Feb 2016 16:50:37 +0000 (UTC)
+Received: from localhost.localdomain (chello062178118086.5.14.vie.surfer.at
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id E4FAD2B4C1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Feb 2016 17:45:13 +0100 (CET)
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  3 Feb 2016 17:45:02 +0100
+Message-Id: <1454517902-21801-1-git-send-email-dv@pseudoterminal.org>
+X-Mailer: git-send-email 2.5.0
+Subject: [meta-oe][PATCH] ne10: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,37 +27,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2016 16:02:00 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Feb 2016 16:50:42 -0000
 
-On Wed, Feb 3, 2016 at 3:50 PM, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
-> On Wed, 2016-02-03 at 12:49 +0100, Andreas M=C3=BCller wrote:
->> Hi,
->>
->> while testing libreoffice language packets I found that language
->> settings for GTK based apps are broken. Interestingly QT based
->> applications (tested with qtcreator and lxqt) and libreoffice are
->> working fine.
->>
->> I did some research and hope for some expert with helping hints.
->> Details are:
->>
->> * I am testing with jethro environment
->
-> I did wonder about http://git.yoctoproject.org/cgit.cgi/poky/commit/?id
-> =3D3b5288f0a28205289063424afc474675cbaa05b8
->
-> or possibly:
->
-> https://github.com/rehsack/poky/commit/46ac36953e2e76ba716c7ba42ddfe41c
-> 9a19a11d
->
-> but I haven't looked into this much and don't have experience in this
-> area.
-Thanks and yes - I have seen these too but they are not in jethro - if
-I am not mistaken.
+Add recipe for the Ne10 library ( http://projectne10.github.io/Ne10/ ).
+This library provides heavily ARM NEON optimized versions of functions
+that are commonly used.
 
-Andreas
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+---
+ meta-oe/recipes-support/ne10/ne10_1.2.1.bb | 38 ++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+ create mode 100644 meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+
+diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+new file mode 100644
+index 0000000..a465e7d
+--- /dev/null
++++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+@@ -0,0 +1,38 @@
++DESCRIPTION = "Library containing NEON-optimized implementations for a common set of functions"
++HOMEPAGE = "http://projectne10.github.io/Ne10/"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=463ac0a7d64edc2b787c4206635ca2b1"
++SECTION = "libs"
++
++SRC_URI = "git://github.com/projectNe10/Ne10.git"
++SRCREV = "v${PV}"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++NE10_TARGET_ARCH = ""
++EXTRA_OECMAKE = '-DGNULINUX_PLATFORM=ON -DNE10_BUILD_SHARED=ON -DNE10_LINUX_TARGET_ARCH="${NE10_TARGET_ARCH}"'
++
++COMPATIBLE_MACHINE_aarch64 = "(.*)"
++COMPATIBLE_MACHINE_armv7a = "(.*)"
++
++python () {
++    if any(t.startswith('armv7') for t in d.getVar('TUNE_FEATURES', True).split()):
++        d.setVar('NE10_TARGET_ARCH', 'armv7')
++        bb.note('Building Ne10 for armv7')
++    elif any(t.startswith('aarch64') for t in d.getVar('TUNE_FEATURES', True).split()):
++        d.setVar('NE10_TARGET_ARCH', 'aarch64')
++        bb.note('Building Ne10 for aarch64')
++    else:
++        raise bb.parse.SkipPackage("Incompatible with archs other than armv7 and aarch64")
++}
++
++do_install() {
++        install -d ${D}${libdir}
++        install -d ${D}${includedir}
++        install -m 0644 ${S}/inc/NE10*.h ${D}${includedir}/
++        install -m 0644 ${B}/modules/libNE10.a ${D}${libdir}/
++        install -m 0755 ${B}/modules/libNE10.so.* ${D}${libdir}/
++        cp -a ${B}/modules/libNE10.so ${D}${libdir}/
++}
+-- 
+2.5.0
+
 
