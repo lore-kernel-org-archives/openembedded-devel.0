@@ -1,22 +1,22 @@
 Return-Path: <Paul.Vaduva@enea.com>
 Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by mail.openembedded.org (Postfix) with SMTP id 06134771C0
+	by mail.openembedded.org (Postfix) with SMTP id E39726FF64
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Feb 2016 08:55:59 +0000 (UTC)
+	Wed,  3 Feb 2016 09:25:48 +0000 (UTC)
 Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
-	(172.21.1.208) with Microsoft SMTP Server id 14.3.224.2; Wed, 3 Feb 2016
-	09:55:56 +0100
-Received: by sestofb10.enea.se (Postfix, from userid 4538)	id 576EB28BA23;
-	Wed,  3 Feb 2016 09:55:56 +0100 (CET)
+	(172.21.1.209) with Microsoft SMTP Server id 14.3.224.2; Wed, 3 Feb 2016
+	10:25:47 +0100
+Received: by sestofb10.enea.se (Postfix, from userid 4538)	id A0BCB28BA23;
+	Wed,  3 Feb 2016 10:25:47 +0100 (CET)
 From: Paul Vaduva <Paul.Vaduva@enea.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 3 Feb 2016 09:55:44 +0100
-Message-ID: <1454489752-52888-1-git-send-email-Paul.Vaduva@enea.com>
+Date: Wed, 3 Feb 2016 10:25:16 +0100
+Message-ID: <1454491519-55353-1-git-send-email-Paul.Vaduva@enea.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received-SPF: None (SESTOEX08.enea.se: Paul.Vaduva@enea.com does not
+Received-SPF: None (SESTOEX03.enea.se: Paul.Vaduva@enea.com does not
 	designate permitted sender hosts)
-Subject: [meta-oe][PATCHv2 1/1] lua: Added ptest for lua
+Subject: [meta-oe][PATCHv3 1/1] lua: Added ptest for lua
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,7 +29,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2016 08:56:02 -0000
+X-List-Received-Date: Wed, 03 Feb 2016 09:25:51 -0000
 Content-Type: text/plain
 
 Signed-off-by: Andreas Sundstr
@@ -37,8 +37,8 @@ Signed-off-by: Maxin B. John <maxin.john@enea.com>
 Signed-off-by: Paul Vaduva <Paul.Vaduva@enea.com>
 ---
  meta-oe/recipes-devtools/lua/lua/run-ptest | 19 +++++++++++++++++++
- meta-oe/recipes-devtools/lua/lua_5.3.2.bb  | 23 +++++++++++++++++------
- 2 files changed, 36 insertions(+), 6 deletions(-)
+ meta-oe/recipes-devtools/lua/lua_5.3.2.bb  | 20 +++++++++++++++-----
+ 2 files changed, 34 insertions(+), 5 deletions(-)
  create mode 100644 meta-oe/recipes-devtools/lua/lua/run-ptest
 
 diff --git a/meta-oe/recipes-devtools/lua/lua/run-ptest b/meta-oe/recipes-devtools/lua/lua/run-ptest
@@ -67,18 +67,10 @@ index 0000000..8e085e1
 +
 +rm -f lua-test.tmp
 diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.2.bb b/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
-index 3fe8c3f..e193c60 100644
+index 3fe8c3f..0cc882d 100644
 --- a/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
 +++ b/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
-@@ -1,20 +1,27 @@
- DESCRIPTION = "Lua is a powerful light-weight programming language designed \
- for extending applications."
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=68fc2aa2b751a37ff265524ddf026d7f"
-+LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=68fc2aa2b751a37ff265524ddf026d7f \
-+                    "
- HOMEPAGE = "http://www.lua.org/"
- 
+@@ -7,14 +7,20 @@ HOMEPAGE = "http://www.lua.org/"
  PR = "r0"
  
  DEPENDS = "readline"
@@ -87,7 +79,7 @@ index 3fe8c3f..e193c60 100644
             file://lua.pc \
 -"
 +           "
-+SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \ 
++SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
 +           'http://www.lua.org/tests/lua-${PV}-tests.tar.gz;name=tarballtest \
 +            file://run-ptest \
 +           ', '', d)}"
@@ -104,7 +96,7 @@ index 3fe8c3f..e193c60 100644
  
  UCLIBC_PATCHES += "file://uclibc-pthread.patch"
  SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
-@@ -46,4 +53,8 @@ do_install () {
+@@ -46,4 +52,8 @@ do_install () {
      rmdir ${D}${datadir}/lua
  }
  
