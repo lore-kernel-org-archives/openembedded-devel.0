@@ -1,22 +1,44 @@
-Return-Path: <Paul.Vaduva@enea.com>
-Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by mail.openembedded.org (Postfix) with SMTP id E39726FF64
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Feb 2016 09:25:48 +0000 (UTC)
-Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
-	(172.21.1.209) with Microsoft SMTP Server id 14.3.224.2; Wed, 3 Feb 2016
-	10:25:47 +0100
-Received: by sestofb10.enea.se (Postfix, from userid 4538)	id A0BCB28BA23;
-	Wed,  3 Feb 2016 10:25:47 +0100 (CET)
-From: Paul Vaduva <Paul.Vaduva@enea.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 3 Feb 2016 10:25:16 +0100
-Message-ID: <1454491519-55353-1-git-send-email-Paul.Vaduva@enea.com>
-X-Mailer: git-send-email 1.9.1
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
+	[209.85.213.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 757ED772FC;
+	Wed,  3 Feb 2016 11:49:47 +0000 (UTC)
+Received: by mail-ig0-f179.google.com with SMTP id 5so34208575igt.0;
+	Wed, 03 Feb 2016 03:49:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=C5YOj552Nbmswz0KIZx4cTPrYaxzhax+xmvEOevdVdc=;
+	b=etgRZdW2cYTJTbU9yusYS5HYeDaLb9VTYD1LjADNm0KrCCh1QkjsBwLr/ajYVjJbB6
+	E5lSyPeKE7Fqc4hqH7Z4PB7DMm2vpR5KFo6NDbreZP4ksMPXkQZ1hAS1/msE/gihwmxg
+	Xgv5akujjfJWrZJ3Hk54KZ5OVkTg/I973EatA0aJ1k26AQACumZWN9IkMYfHBcJlEqOq
+	qJtS393hOZcjfAwpm/seCyVzhOBbd9ZKVoXq39uS/hJ1pWh4kPexuLeFAwd2/BBPmfLf
+	71Wp3WAoe5DaGmd4FGtM9aASumNSQERoVdwyMo9N/5U4Y9jBhHjkrwzEwqZB8e+g19Df
+	lEGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=C5YOj552Nbmswz0KIZx4cTPrYaxzhax+xmvEOevdVdc=;
+	b=VFbqZuxj1d7jnsZU80F5KYJtij0C3BSaTxbFumSu2Vpz2QtxHSTxFsOuNIFAgBDGOe
+	OxI2zrLwfKBkaYcNN7R0VdX+HPKf3S1CUhDg3neX8qqDjARTeMUevel6PtjkwsLoKThW
+	rjLgJSdnoOZ0yChH4/DdyHUpfAwYvvX5AZl9+ut3Kl24RZvXDnRHkDBv3CvYGk4a4yhV
+	o2laFTfd4hdmhaUK3lD1Z6PC6u9uKE00cDSDIIr9c2N4cI7zt1WvNHRO/vZURP8cA4Ma
+	7PEW5jfSNml7RCkAg3pfWyFvca9LIBw3ch3cYDweFzzccv0ZBEgw5q8YqO0sg6KB3/Ck
+	NIrQ==
+X-Gm-Message-State: AG10YOTX5PM883oI/his3ZKcJuBXMar3T9RtxT1leiXIjNxYMVxwOr5FfIUfrM7jmgwxrOGfxexAjO95koRAdg==
 MIME-Version: 1.0
-Received-SPF: None (SESTOEX03.enea.se: Paul.Vaduva@enea.com does not
-	designate permitted sender hosts)
-Subject: [meta-oe][PATCHv3 1/1] lua: Added ptest for lua
+X-Received: by 10.50.111.111 with SMTP id ih15mr23869475igb.78.1454500188055; 
+	Wed, 03 Feb 2016 03:49:48 -0800 (PST)
+Received: by 10.36.25.81 with HTTP; Wed, 3 Feb 2016 03:49:48 -0800 (PST)
+Date: Wed, 3 Feb 2016 12:49:48 +0100
+Message-ID: <CALbNGRRmD=4QUi=+_fx48M4GDB9VwTX5m5wH12j4ed1OK6SW6Q@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Language settings GTK (glibc?) problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,83 +51,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2016 09:25:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 03 Feb 2016 11:49:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Andreas Sundstr
-Signed-off-by: Maxin B. John <maxin.john@enea.com>
-Signed-off-by: Paul Vaduva <Paul.Vaduva@enea.com>
----
- meta-oe/recipes-devtools/lua/lua/run-ptest | 19 +++++++++++++++++++
- meta-oe/recipes-devtools/lua/lua_5.3.2.bb  | 20 +++++++++++++++-----
- 2 files changed, 34 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/lua/lua/run-ptest
+Hi,
 
-diff --git a/meta-oe/recipes-devtools/lua/lua/run-ptest b/meta-oe/recipes-devtools/lua/lua/run-ptest
-new file mode 100644
-index 0000000..8e085e1
---- /dev/null
-+++ b/meta-oe/recipes-devtools/lua/lua/run-ptest
-@@ -0,0 +1,19 @@
-+#!/bin/sh
-+
-+cd test
-+lua -e"_U=true" all.lua > lua-test.tmp
-+
-+echo "--- test output ---"
-+cat lua-test.tmp
-+echo ""
-+echo ""
-+echo "--- ptest result ---"
-+
-+grep "final OK \!\!\!" lua-test.tmp > /dev/null
-+if [ $? -eq 0 ]; then
-+   echo "PASS: lua"
-+else
-+   echo "FAIL: lua"
-+fi
-+
-+rm -f lua-test.tmp
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.2.bb b/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
-index 3fe8c3f..0cc882d 100644
---- a/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
-@@ -7,14 +7,20 @@ HOMEPAGE = "http://www.lua.org/"
- PR = "r0"
- 
- DEPENDS = "readline"
--SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
-+SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
-            file://lua.pc \
--"
-+           "
-+SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
-+           'http://www.lua.org/tests/lua-${PV}-tests.tar.gz;name=tarballtest \
-+            file://run-ptest \
-+           ', '', d)}"
- 
--SRC_URI[md5sum] = "33278c2ab5ee3c1a875be8d55c1ca2a1"
--SRC_URI[sha256sum] = "c740c7bb23a936944e1cc63b7c3c5351a8976d7867c5252c8854f7b2af9da68f"
-+SRC_URI[tarballsrc.md5sum] = "33278c2ab5ee3c1a875be8d55c1ca2a1"
-+SRC_URI[tarballsrc.sha256sum] = "c740c7bb23a936944e1cc63b7c3c5351a8976d7867c5252c8854f7b2af9da68f"
-+SRC_URI[tarballtest.md5sum] = "a2b7ab1b8ff82a0145376e233ef30a4a"
-+SRC_URI[tarballtest.sha256sum] = "56909863a3713dee3709b3dbd0c868237e4f5c9ea1744f5bf0ba8bafa6c4ed32"
- 
--inherit pkgconfig binconfig
-+inherit pkgconfig binconfig ptest
- 
- UCLIBC_PATCHES += "file://uclibc-pthread.patch"
- SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
-@@ -46,4 +52,8 @@ do_install () {
-     rmdir ${D}${datadir}/lua
- }
- 
-+do_install_ptest () {
-+        cp -a ${WORKDIR}/lua-${PV}-tests ${D}${PTEST_PATH}/test
-+}
-+
- BBCLASSEXTEND = "native"
--- 
-1.9.1
+while testing libreoffice language packets I found that language
+settings for GTK based apps are broken. Interestingly QT based
+applications (tested with qtcreator and lxqt) and libreoffice are
+working fine.
 
+I did some research and hope for some expert with helping hints. Details are:
+
+* I am testing with jethro environment
+
+* X session is started for an unprivileged user by display manager
+lxdm. That sets the following environment vars for language:
+| LANG="de_DE"
+| LANGUAGE="de_DE"
+| LC_MESSAGES="de_DE"
+
+* starting e.g gedit from console complains:
+| (process:4205): Gtk-WARNING **: Locale not supported by C library.
+|    Using the fallback 'C' locale.
+
+* 'locale -a' says
+| locale: Kann LC_COLLATE nicht auf die Standard-Lokale einstellen:
+Datei oder Verzeichnis nicht | | gefunden
+| C
+| POSIX
+| de_DE
+| en_GB
+| en_US
+| fr_FR
+Translation of error is (when setting en_GB on lxdm):
+| locale: Cannot set LC_COLLATE to default locale: No such file or directory
+
+Debugging the last two cases show that the error is caused for same reason:
+
+* setlocale(LC_ALL, "") returns NULL for GTK apps
+* setlocale (LC_CTYPE, "") returns NULL for 'locale -a'
+
+
+Anybody with ideas what is missing/wrong on my images?
+
+Andreas
 
