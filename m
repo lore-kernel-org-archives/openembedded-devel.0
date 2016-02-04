@@ -1,49 +1,40 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id DBE9F77294;
-	Thu,  4 Feb 2016 10:09:05 +0000 (UTC)
-Received: by mail-io0-f171.google.com with SMTP id 9so87662400iom.1;
-	Thu, 04 Feb 2016 02:09:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=5ygXi19HUAt1RYuoB3e8Z+Nw4rf9+IzMofDbR+kOzu0=;
-	b=ldIkylKt60gQpmZdR0TW+1uWMaHXh2iRQFfaAIe22jbQSkWvNs8i9KcljtzbVf5nZf
-	EOboy/Wy/ccnnnfMU1LYZAyGeH9Qcs35lVUpjtDEdwmrdnbtjs7n+yAOC2zvu6f85i6J
-	nTLYNhMqU1vsLxjylWWsqaxS5oW8cdszSfYSQogYLrTlAPmvjve6gB/T1/TIxqMUzCxo
-	7H9DZ1JcVRQUsmeopo+kQpKIAuhJpT3+zQSQbVEC4w0dXhve9XnYmAikxv6zJbFafYOL
-	bXdzZJ39wZHwPS8jcLb4jeeYHyH5BHa2MvHfcEnxljkcZSRvsOfIjwDO8qZ9Vtd3Lcsi
-	bVVQ==
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qk0-f181.google.com (mail-qk0-f181.google.com
+	[209.85.220.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 0ABB67721A
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  4 Feb 2016 11:17:10 +0000 (UTC)
+Received: by mail-qk0-f181.google.com with SMTP id s5so19411472qkd.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Feb 2016 03:17:11 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=5ygXi19HUAt1RYuoB3e8Z+Nw4rf9+IzMofDbR+kOzu0=;
-	b=dZHjhCBfrYUmdm0lXaj3KzPsbW18m+YB8IBFnqagVcNS96QFz2u5FC9HDMFOm+8ZEI
-	e6jIfKnlZp9Suceb/A8GS6J1zfBK6zUe2D1RzkusgRweYy9/XRjQt+DCpKITFDrLtOin
-	dvSbljuuhcexLDNq8E0J5Rk3L4Y8TL2OQUkq2n+tHU5L7BHZ53onvo2NRY8ovXVE8xLK
-	JiwRY0q889VtaYxiCr78Daw0iWZjFsMBb8+Ia6xb1GXmePZ8T6zjvMnwGJ/plduGovG2
-	/kKQQb2gDXGr2PrSjFsqYHQPx5IXYfxftzt6XSXbBCGy6rwwEDqnmCi/TSa5z/QwroJi
-	31Sg==
-X-Gm-Message-State: AG10YOT1qLMDa2yWsostYjYVkK9aX3iN4fmyfGkbQghrp7LWGTiJ6JApzGtrudenoJm/a04yf1zUp/9Amhei+A==
-MIME-Version: 1.0
-X-Received: by 10.107.3.220 with SMTP id e89mr7667896ioi.99.1454580545930;
-	Thu, 04 Feb 2016 02:09:05 -0800 (PST)
-Received: by 10.36.25.81 with HTTP; Thu, 4 Feb 2016 02:09:05 -0800 (PST)
-In-Reply-To: <CALbNGRSZ83cE_hOSPNy5J_Jjc5KFtc10uEC7MoF0VbZHUPHUfg@mail.gmail.com>
-References: <CALbNGRRmD=4QUi=+_fx48M4GDB9VwTX5m5wH12j4ed1OK6SW6Q@mail.gmail.com>
-	<1454511012.27087.183.camel@linuxfoundation.org>
-	<CALbNGRSZ83cE_hOSPNy5J_Jjc5KFtc10uEC7MoF0VbZHUPHUfg@mail.gmail.com>
-Date: Thu, 4 Feb 2016 11:09:05 +0100
-Message-ID: <CALbNGRTjS3Feb9su0DPquW6rMDQcZRd6XPPkRcomgKeoL7z_ow@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Language settings GTK (glibc?) problem
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=bcwTqYGISjvKQqbjIeq2JxLlkwRV53ZX2zo4Xw44FgY=;
+	b=Fmw4azqtJHDfvo/uoAiRyXSNZlMlB5RTMbjJzqIdJS5zsnBG7+HiN5yv8uBrDF3DDP
+	fN5PWoiLHhtHHMqeHD2vbOq/TPDhhmVvPsOVA3uuPVyM6tc66NufRDHBQtG/6oWzdfpw
+	mSqgYoNj1+NX/p5PlkHNMgUle/0AlJptM3LKJTezbcV+axcar4fi7tQqO6MZTD8y+ekq
+	yKX25JI6dFbicw2RtWvuMSjUOid2n2+TqS/qViNzXnttTBW4OAvybulr44+WvPyoHn2B
+	dScP5O+9ObeSvYcxhl6v1UsmSLxP6XlvfGQn+rmWKbQRqkoljJ2YyHzEwEygtCB59Wub
+	LjfQ==
+X-Gm-Message-State: AG10YOT48DTBpHZlBtN5KY6iODyqIEh/A2hlXSJyJ9rmIysJVjJJOz59MHk61IZMLx2uMw==
+X-Received: by 10.55.77.206 with SMTP id a197mr7993853qkb.43.1454584631189;
+	Thu, 04 Feb 2016 03:17:11 -0800 (PST)
+Received: from localhost ([177.127.6.77]) by smtp.gmail.com with ESMTPSA id
+	107sm4755920qge.16.2016.02.04.03.17.08
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 04 Feb 2016 03:17:09 -0800 (PST)
+Received: by localhost (sSMTP sendmail emulation);
+	Thu, 04 Feb 2016 09:17:05 -0200
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu,  4 Feb 2016 09:17:04 -0200
+Message-Id: <1454584624-18202-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.7.0
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-qt5 PATCH] qt5-git.inc: Ensure we export the SRCREV as the module name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,70 +47,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Feb 2016 10:09:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 04 Feb 2016 11:17:11 -0000
 
-On Wed, Feb 3, 2016 at 5:01 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> On Wed, Feb 3, 2016 at 3:50 PM, Richard Purdie
-> <richard.purdie@linuxfoundation.org> wrote:
->> On Wed, 2016-02-03 at 12:49 +0100, Andreas M=C3=BCller wrote:
->>> Hi,
->>>
->>> while testing libreoffice language packets I found that language
->>> settings for GTK based apps are broken. Interestingly QT based
->>> applications (tested with qtcreator and lxqt) and libreoffice are
->>> working fine.
->>>
->>> I did some research and hope for some expert with helping hints.
->>> Details are:
->>>
->>> * I am testing with jethro environment
->>
->> I did wonder about http://git.yoctoproject.org/cgit.cgi/poky/commit/?id
->> =3D3b5288f0a28205289063424afc474675cbaa05b8
->>
->> or possibly:
->>
->> https://github.com/rehsack/poky/commit/46ac36953e2e76ba716c7ba42ddfe41c
->> 9a19a11d
->>
->> but I haven't looked into this much and don't have experience in this
->> area.
-> Thanks and yes - I have seen these too but they are not in jethro - if
-> I am not mistaken.
->
-FWIW: I found an image where the language selection worked. This was based =
-on
+For components which use multiple Git repositories (e.g QtWebEngine)
+it is important to have the module name exported so it can be referred
+in SRCREV_FORMAT.
 
-commit 4e0fb630d3bb0250ece6e2071ae49b2601ae3e57
-Author:     Armin Kuster <akuster808@gmail.com>
-AuthorDate: Tue Aug 11 11:11:04 2015 +0530
-Commit:     Richard Purdie <richard.purdie@linuxfoundation.org>
-CommitDate: Fri Aug 14 08:30:21 2015 +0100
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
 
-    tzdata: update to 2015f
+ recipes-qt/qt5/qt5-git.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-    Changes affecting future time stamps
+diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
+index f8fb38b..bf0be7e 100644
+--- a/recipes-qt/qt5/qt5-git.inc
++++ b/recipes-qt/qt5/qt5-git.inc
+@@ -1,4 +1,4 @@
+-# Copyright (C) 2012 O.S. Systems Software LTDA.
++# Copyright (C) 2012-2016 O.S. Systems Software LTDA.
+ # Copyright (C) 2013-2014 Martin Jansa <martin.jansa@gmail.com>
+ 
+ QT_MODULE ?= "${BPN}"
+@@ -6,7 +6,7 @@ QT_MODULE_BRANCH ?= "5.6"
+ 
+ # each module needs to define valid SRCREV
+ SRC_URI = " \
+-    ${QT_GIT}/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH};protocol=${QT_GIT_PROTOCOL} \
++    ${QT_GIT}/${QT_MODULE}.git;name=${QT_MODULE};branch=${QT_MODULE_BRANCH};protocol=${QT_GIT_PROTOCOL} \
+ "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.7.0
 
-    North Korea switches to +0830 on 2015-08-15.  (Thanks to Steffen Thorse=
-n.)
-    The abbreviation remains "KST".  (Thanks to Robert Elz.)
-
-    Uruguay no longer observes DST.  (Thanks to Steffen Thorsen
-    and Pablo Camargo.)
-
-    Changes affecting past and future time stamps
-
-    Moldova starts and ends DST at 00:00 UTC, not at 01:00 UTC.
-    (Thanks to Roman Tudos.)
-
-    Signed-off-by: Armin Kuster <akuster808@gmail.com>
-    Signed-off-by: Ross Burton <ross.burton@intel.com>
-    Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-
-which was before glibc update 2.21 -> 2.22
-
-Andreas
 
