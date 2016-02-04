@@ -1,33 +1,46 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id DA9E777351
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f181.google.com (mail-pf0-f181.google.com
+	[209.85.192.181])
+	by mail.openembedded.org (Postfix) with ESMTP id E069876E4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Feb 2016 18:11:46 +0000 (UTC)
-Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
-	by relay1.mentorg.com with esmtp 
-	id 1aRONe-0003th-Hf from Joe_MacDonald@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Feb 2016 10:11:46 -0800
-Received: from burninator (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.3.224.2; Thu, 4 Feb 2016
-	10:11:46 -0800
-Received: by burninator (Postfix, from userid 1000)	id 6CE97580520; Thu,  4
-	Feb 2016 13:11:45 -0500 (EST)
-Date: Thu, 4 Feb 2016 13:11:45 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20160204181145.GA4778@mentor.com>
-References: <1454598513-29263-1-git-send-email-mark.asselstine@windriver.com>
-	<20160204160759.GA2573@jama>
-	<CAPuovE+N45VRb-3hOM9gJYAmKkx_6Yp3ayMNcHeV_v+X77VUCQ@mail.gmail.com>
-	<20160204170751.GB2573@jama>
-MIME-Version: 1.0
-In-Reply-To: <20160204170751.GB2573@jama>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH] ntp: remove empty libexecdir to prevent potential QA issues
+	Thu,  4 Feb 2016 19:22:07 +0000 (UTC)
+Received: by mail-pf0-f181.google.com with SMTP id o185so54316862pfb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Feb 2016 11:22:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=zeGOZIAXCoh9dNg/lqX3bqQQk+1+/PfLEaHa7xLYDc0=;
+	b=iGECiAdCeQfNzse7Jx9NLKyKhC71bvLCzJxVulkMue/ACBrElsRN6+apd1DPwMBqV2
+	OKWXSnszh8weTIDlKURQ5DYEZIuaucLoDFGqylr/GpfDDpSWUyqyQTx/QnAW2u94eBpd
+	7bcr+qvC/sUTtJGW9G3TAKgWDx6EJyvre+n0AmnGxQZ+puA0gIf/kQivLGKis4hM7/j3
+	HKNRJG7fyRqh60nAgrWq3HSPBC0HRDvZoe5RniZieIQMesSLgVp9Q6njVihvFVEStTIc
+	h/u/T3cxjDHe7bTaAhDBwAOtHFUA1i19AbF+rk96ncLmxVsjdIzGP6qRjioXRXLL/zdN
+	yPcw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=zeGOZIAXCoh9dNg/lqX3bqQQk+1+/PfLEaHa7xLYDc0=;
+	b=Cs704jG8GCK0BjZkqeOf9bew5KQ0XQc6MmrXGgkuzmmWv5uA6BG/rgapBnpN4/3Pu5
+	h3GS3XS/eprzICu00WiHx03Vg82grIpqcpMKzgPj2NurXtiVh5OS1b1oHilcnwOY6EaW
+	WypxPe54nQM6Sbo+AV4fog4rgO7ydX8ZF/T/7lQRxvCqTG4xyaVuFTQlTnEzLJq67qiy
+	eY6zO25bp065jzqTSFCj0jw6G7CiMN5UwosbyAuNmavbW3lCHHiXyUB6hc5ZJDn7UHvb
+	5OZe2RZxcsJvJM2knnVWEb2BSv4IKCC6BZD3Nv+LHYr3JrczMtSdLO71niHZXM2OOHmb
+	XvXQ==
+X-Gm-Message-State: AG10YOQYbsxkX2xNyYSbSYh5/0pjHs86u4WGMe6c/v2+dxoNCb3pZXOzzZV5BO802gMcmQ==
+X-Received: by 10.66.102.8 with SMTP id fk8mr13497753pab.24.1454613728094;
+	Thu, 04 Feb 2016 11:22:08 -0800 (PST)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
+	q136sm18915409pfq.66.2016.02.04.11.22.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 04 Feb 2016 11:22:06 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org, TicoTimo@gmail.com,
+	paul.eggleton@linux.intel.com
+Date: Thu,  4 Feb 2016 11:22:03 -0800
+Message-Id: <1454613723-22027-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-python][PATCH] python-django: update package to 1.8.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,119 +53,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Feb 2016 18:11:47 -0000
-X-Groupsio-MsgNum: 59844
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="EVF5PPMfhYS0aIcm"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 04 Feb 2016 19:22:08 -0000
 
---EVF5PPMfhYS0aIcm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Update to a LTS version which might EOL in April 2018
 
-[Re: [oe] [meta-networking][PATCH] ntp: remove empty libexecdir to prevent =
-potential QA issues] On 16.02.04 (Thu 18:07) Martin Jansa wrote:
+The following security fixes are included;
+CVE-2015-8213
+CVE-2015-5964
+CVE-2015-5963
+CVE-2015-5145
+CVE-2015-5144
+CVE-2015-5143
+CVE-2015-3982
+CVE-2015-2317
+CVE-2015-2316
+CVE-2015-2241
 
-> On Thu, Feb 04, 2016 at 11:51:56AM -0500, Mark Asselstine wrote:
-> > On Thu, Feb 4, 2016 at 11:07 AM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
-> > > On Thu, Feb 04, 2016 at 10:08:33AM -0500, Mark Asselstine wrote:
-> > >> Depending on the configuration used to build ntp it is possible to
-> > >> have an empty libexecdir. This can cause QA issues. Add a test at the
-> > >> end of install() to remove libexecdir if it is empty, thus avoiding
-> > >> the possibility of QA issues, regardless of configuration.
-> > >>
-> > >> Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
-> > >> ---
-> > >>  meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb | 3 +++
-> > >>  1 file changed, 3 insertions(+)
-> > >>
-> > >> diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb b/me=
-ta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
-> > >> index f9f900e..cb09e77 100644
-> > >> --- a/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
-> > >> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
-> > >> @@ -94,6 +94,9 @@ do_install_append() {
-> > >>
-> > >>      install -d ${D}${systemd_unitdir}/ntp-units.d
-> > >>      install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp=
--units.d/60-ntpd.list
-> > >> +
-> > >> +    # Remove an empty libexecdir.
-> > >> +    [ ! "$(ls -A ${D}${libexecdir})" ] && rm -r ${D}${libexecdir}
-> > >
-> > > Isn't this the same as:
-> > >
-> > > rmdir --ignore-fail-on-non-empty ${D}${libexecdir}
-> > >
-> > > ?
-> >=20
-> > It appears to be. rmdir is not a command I use often so I didn't look
-> > to see if it was suitable for the job. Want me to resend with rmdir or
-> > you care to make the swap prior to merging?
->=20
-> Joe is maintainer of meta-networking, but I would prefer you to send v2.
+LIC_FILES_CHKSUM changed do to:
+https://github.com/django/django/commit/1dae4ac1778f04805c0ed62c8debb13b281ba02b
+* Removed trailing whitespace.
+* Added newline to EOF if missing.
+* Removed blank lines at EOF.
+* Removed some stray tabs.
 
-Yeah, please do.
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../python/{python-django_1.6.10.bb => python-django_1.8.8.bb}    | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-django_1.6.10.bb => python-django_1.8.8.bb} (60%)
 
--J.
-
->=20
-> > Mark
-> >=20
-> >=20
-> > >
-> > >>  }
-> > >>
-> > >>  PACKAGES +=3D "ntpdate sntp ${PN}-tickadj ${PN}-utils"
-> > >> --
-> > >> 2.1.4
-> > >>
-> > >> --
-> > >> _______________________________________________
-> > >> Openembedded-devel mailing list
-> > >> Openembedded-devel@lists.openembedded.org
-> > >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
-> > > --
-> > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-python/recipes-devtools/python/python-django_1.6.10.bb b/meta-python/recipes-devtools/python/python-django_1.8.8.bb
+similarity index 60%
+rename from meta-python/recipes-devtools/python/python-django_1.6.10.bb
+rename to meta-python/recipes-devtools/python/python-django_1.8.8.bb
+index a7ca803..5e4c435 100644
+--- a/meta-python/recipes-devtools/python/python-django_1.6.10.bb
++++ b/meta-python/recipes-devtools/python/python-django_1.8.8.bb
+@@ -2,18 +2,18 @@ SUMMARY = "A high-level Python Web framework"
+ HOMEPAGE = "http://www.djangoproject.com/"
+ SECTION = "devel/python"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=fa8608154dcdd4029ae653131d4b7365"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
+ 
+ SRCNAME = "Django"
+ 
+ SRC_URI = "https://pypi.python.org/packages/source/D/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+ 
+-SRC_URI[md5sum] = "d7123f14ac19ae001be02ed841937b91"
+-SRC_URI[sha256sum] = "54eb59ce785401c7d1fdeed245efce597e90f811d6a20f6b5c6931c0049d63a6"
++SRC_URI[md5sum] = "08ecf83b7e9d064ed7e3981ddc3a8a15"
++SRC_URI[sha256sum] = "8255242fa0d9e0bf331259a6bdb81364933acbe8863291661558ffdb2fc9ed70"
+ 
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ 
+-inherit distutils
++inherit setuptools
+ 
+ FILES_${PN} += "${datadir}/django"
+ 
+-- 
+2.3.5
 
 
-
---=20
--Joe MacDonald.
-:wq
-
---EVF5PPMfhYS0aIcm
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJWs5RdAAoJEEn8ffcsOfaWL+4H/RogdTkZsAc7z3ztClrSWtsS
-7PCC8Ht0RJ5Q1n2CdT69BsOAwyVbw9/OuGyMq4Mrruw0v4rLTew/OVhGVh9sSgSg
-b4EPlaLFJbKIA2/8fVfg2KJUzZt5/nLkfM6CvmtVMwW88I73UEZWipAQl+Sokd00
-4hd/rViA/WdueHcqIrc5g5V9vg0qot/CLOOEjiJSFlvcff2ciURUc+JNku1TC+QO
-eHkRTl+doiSurP5Cyfh5GV9nL76beZ5ncWziSs4O48iqOx/cL7S3VkMSzYsrIdOq
-X2coQHrwgJKuO3ijk1EIZ0u1DBZwh/U47joTRk+EQZhedjpMl2nfnS0PixKrY9I=
-=DLrM
------END PGP SIGNATURE-----
-
---EVF5PPMfhYS0aIcm--
