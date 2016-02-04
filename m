@@ -1,36 +1,23 @@
-Return-Path: <alejandro.joya.cruz@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C65C0770AB
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 56C227722C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Feb 2016 20:36:01 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by orsmga103.jf.intel.com with ESMTP; 04 Feb 2016 12:36:02 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,397,1449561600"; d="scan'208";a="908729920"
-Received: from fmsmsx104.amr.corp.intel.com ([10.18.124.202])
-	by fmsmga002.fm.intel.com with ESMTP; 04 Feb 2016 12:33:20 -0800
-Received: from fmsmsx111.amr.corp.intel.com (10.18.116.5) by
-	fmsmsx104.amr.corp.intel.com (10.18.124.202) with Microsoft SMTP Server
-	(TLS) id 14.3.248.2; Thu, 4 Feb 2016 12:33:20 -0800
-Received: from fmsmsx106.amr.corp.intel.com ([169.254.5.208]) by
-	fmsmsx111.amr.corp.intel.com ([169.254.12.122]) with mapi id
-	14.03.0248.002; Thu, 4 Feb 2016 12:33:20 -0800
-From: "Joya Cruz, Alejandro" <alejandro.joya.cruz@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] toybox: upgrade to 0.7.0
-Thread-Index: AQHRXkX5PhcgXq8B5UeNcO0OyLO0BJ8c4DUA
-Date: Thu, 4 Feb 2016 20:33:19 +0000
-Message-ID: <1454618016.32454.30.camel@intel.com>
-References: <1454465517-24926-1-git-send-email-alejandro.joya.cruz@intel.com>
-	<CAMKF1spJ+xeuV_iiyswkfWSkFiQ84t0qBDQsesrGBCyWiO5yHQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spJ+xeuV_iiyswkfWSkFiQ84t0qBDQsesrGBCyWiO5yHQ@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.219.128.72]
+	Thu,  4 Feb 2016 20:42:16 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u14KgGSt022232
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 4 Feb 2016 12:42:16 -0800 (PST)
+Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Thu, 4 Feb 2016 12:42:16 -0800
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <joe_macdonald@mentor.com>
+Date: Thu, 4 Feb 2016 15:42:15 -0500
+Message-ID: <1454618535-15221-1-git-send-email-mark.asselstine@windriver.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] toybox: upgrade to 0.7.0
+Subject: [meta-networking][v2][PATCH] ntp: remove empty libexecdir to prevent potential QA issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,16 +30,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Feb 2016 20:36:03 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <F00692DDE4449D4FA1E50798A41A83E6@intel.com>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 04 Feb 2016 20:42:17 -0000
+Content-Type: text/plain
 
-T24gbWFyLCAyMDE2LTAyLTAyIGF0IDIxOjQzIC0wODAwLCBLaGVtIFJhaiB3cm90ZToNCj4gT24g
-VHVlLCBGZWIgMiwgMjAxNiBhdCA2OjExIFBNLCBBbGVqYW5kcm8gSm95YQ0KPiA8YWxlamFuZHJv
-LmpveWEuY3J1ekBpbnRlbC5jb20+IHdyb3RlOg0KPiA+ICtDRkxBR1NfcHJlcGVuZCA9ICItSSAk
-e1NUQUdJTkdfRElSX0hPU1R9JHtpbmNsdWRlZGlyX25hdGl2ZX0iDQo+IA0KPiB3aHkgaXMgYSBu
-YXRpdmUgaW5jbHVkZSBkaXIgbmVlZGVkIGhlcmUgPw0KSSBmb3VuZCB0aGF0IGl0IHdhcyBuZWVk
-IHRvIGJ1aWxkaW5nIHdpdGggY29tcGF0aWJpbGl0eSB0byBtdWx0aXBsZSBMU00NCmxpYnMu
+Depending on the configuration used to build ntp it is possible to
+have an empty libexecdir. This can cause QA issues. Add a test at the
+end of install() to remove libexecdir if it is empty, thus avoiding
+the possibility of QA issues, regardless of configuration.
+
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+---
+
+Changes v1 -> v2
+* switched to use rmdir instead of test+rm
+
+ meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
+index f9f900e..7caa5a6 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
+@@ -94,6 +94,9 @@ do_install_append() {
+ 
+     install -d ${D}${systemd_unitdir}/ntp-units.d
+     install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-units.d/60-ntpd.list
++
++    # Remove an empty libexecdir.
++    rmdir --ignore-fail-on-non-empty ${D}${libexecdir}
+ }
+ 
+ PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
+-- 
+2.1.4
+
 
