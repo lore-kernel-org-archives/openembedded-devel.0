@@ -1,40 +1,58 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f181.google.com (mail-qk0-f181.google.com
-	[209.85.220.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 0ABB67721A
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-pf0-f173.google.com (mail-pf0-f173.google.com
+	[209.85.192.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B16E77225
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Feb 2016 11:17:10 +0000 (UTC)
-Received: by mail-qk0-f181.google.com with SMTP id s5so19411472qkd.0
+	Thu,  4 Feb 2016 11:19:56 +0000 (UTC)
+Received: by mail-pf0-f173.google.com with SMTP id o185so42159674pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Feb 2016 03:17:11 -0800 (PST)
+	Thu, 04 Feb 2016 03:19:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:content-type; bh=8lUeMkrkSPtzAKqEGfi6Vb7bNMtQCkzZLbsnLLUUAGI=;
+	b=LZyV2FOncvfqMlXYvyBD//vUUMuQw635syuspx563sBU/26IMS4T2jETaChutzdaK9
+	6aMLOi5EbvccBbNRnhaZFGyfcBBsMFCx+LrPvciEvgDqvhAZOuAmHKog8DCI09pvjMR6
+	o9oRbQRoO/S7Ofl/xjsaSnd0lZo3WtzM/rtBWoKpNo7kJwajpsCr9LHWtLfdksWJl/Ib
+	UhNw82BaAOsQMd95N395/Mi1m8IXpOhsOc/EY5Wnq6xUGCHmqrK+LHx4MFSiDHI0+nvl
+	5GD4yvok0zwdfjr8caVyQHwZI2pSInhNOD7BtiOxP098x3URbLDRWSzCGlQ1kmtv/fKa
+	RtVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
-	bh=bcwTqYGISjvKQqbjIeq2JxLlkwRV53ZX2zo4Xw44FgY=;
-	b=Fmw4azqtJHDfvo/uoAiRyXSNZlMlB5RTMbjJzqIdJS5zsnBG7+HiN5yv8uBrDF3DDP
-	fN5PWoiLHhtHHMqeHD2vbOq/TPDhhmVvPsOVA3uuPVyM6tc66NufRDHBQtG/6oWzdfpw
-	mSqgYoNj1+NX/p5PlkHNMgUle/0AlJptM3LKJTezbcV+axcar4fi7tQqO6MZTD8y+ekq
-	yKX25JI6dFbicw2RtWvuMSjUOid2n2+TqS/qViNzXnttTBW4OAvybulr44+WvPyoHn2B
-	dScP5O+9ObeSvYcxhl6v1UsmSLxP6XlvfGQn+rmWKbQRqkoljJ2YyHzEwEygtCB59Wub
-	LjfQ==
-X-Gm-Message-State: AG10YOT48DTBpHZlBtN5KY6iODyqIEh/A2hlXSJyJ9rmIysJVjJJOz59MHk61IZMLx2uMw==
-X-Received: by 10.55.77.206 with SMTP id a197mr7993853qkb.43.1454584631189;
-	Thu, 04 Feb 2016 03:17:11 -0800 (PST)
-Received: from localhost ([177.127.6.77]) by smtp.gmail.com with ESMTPSA id
-	107sm4755920qge.16.2016.02.04.03.17.08
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:content-type;
+	bh=8lUeMkrkSPtzAKqEGfi6Vb7bNMtQCkzZLbsnLLUUAGI=;
+	b=FGASBkBwZYrhS6ma8n0UZx+Zn96GbTxWR4qUF+vh3QRqz30AsmhJynfLf6VNmYRtHW
+	HahnDUdQyP6vaqSpj0VbzPnitLtHmXgvTwbskW/TMIcYKpNqRk6GhyMM3giQS3DgsHfi
+	Vy+H+h8rJgcgSXY4KEG4fVgUZ733l72r76UgPnD67tgJkevwpGLSDoYi3c2Xnp1jRsjy
+	ZSl60t5nQ2XvHHz0AojOmiGqd1MuncSD0ldtB2aiXS1MTw3NbuwyzGnLBjZTf7JjsYL2
+	qwPLth4MKMojkNGYMk8IbAygIVPbBh9Y9bcg1n2MCNtBarTkivN7Q4SGhXBVtM39UMuz
+	u8gA==
+X-Gm-Message-State: AG10YOQRwpLVc2PHnGERtRUtLW7lDOfSOO6FcxZDmgzoMUaIEv7A11c5g4S60H6CLc9sYw==
+X-Received: by 10.98.72.130 with SMTP id q2mr10181325pfi.154.1454584797924;
+	Thu, 04 Feb 2016 03:19:57 -0800 (PST)
+Received: from mail-pf0-f176.google.com (mail-pf0-f176.google.com.
+	[209.85.192.176]) by smtp.gmail.com with ESMTPSA id
+	d8sm16461821pas.14.2016.02.04.03.19.55
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 04 Feb 2016 03:17:09 -0800 (PST)
-Received: by localhost (sSMTP sendmail emulation);
-	Thu, 04 Feb 2016 09:17:05 -0200
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu,  4 Feb 2016 09:17:04 -0200
-Message-Id: <1454584624-18202-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.7.0
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-qt5 PATCH] qt5-git.inc: Ensure we export the SRCREV as the module name
+	Thu, 04 Feb 2016 03:19:56 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-pf0-f176.google.com with SMTP id 65so42240638pfd.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Feb 2016 03:19:55 -0800 (PST)
+MIME-Version: 1.0
+X-Received: by 10.66.124.164 with SMTP id mj4mr2390183pab.128.1454584795585;
+	Thu, 04 Feb 2016 03:19:55 -0800 (PST)
+Received: by 10.66.72.229 with HTTP; Thu, 4 Feb 2016 03:19:55 -0800 (PST)
+In-Reply-To: <1454512359-2140-1-git-send-email-samuli.piippo@theqtcompany.com>
+References: <1454512359-2140-1-git-send-email-samuli.piippo@theqtcompany.com>
+Date: Thu, 4 Feb 2016 09:19:55 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKo9D=V8w1-oJmz605VsDWGtFJ=1raD+35yeSJCkRt-TSw@mail.gmail.com>
+Message-ID: <CAP9ODKo9D=V8w1-oJmz605VsDWGtFJ=1raD+35yeSJCkRt-TSw@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qt5: use common PACKAGECONFIG to build examples
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,38 +65,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Feb 2016 11:17:11 -0000
+X-List-Received-Date: Thu, 04 Feb 2016 11:19:57 -0000
+Content-Type: text/plain; charset=UTF-8
 
-For components which use multiple Git repositories (e.g QtWebEngine)
-it is important to have the module name exported so it can be referred
-in SRCREV_FORMAT.
+On Wed, Feb 3, 2016 at 1:12 PM, Samuli Piippo
+<samuli.piippo@theqtcompany.com> wrote:
+> Each Qt module's examples can now be enabled with PACKAGECONFIG.
+> Replace the webkit patch with a PACKAGECONFIG option and follow
+> common practice by not building QtWayland examples by default,
+> those can be enabled in a .bbappend with PACKAGECONFIG += "examples"
+>
+> Enabling PACKAGECONFIG[examples] in qtbase, will still cause every
+> Qt module to build their examples.
+>
+> Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
- recipes-qt/qt5/qt5-git.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+I think in a subsequent patch, examples should all to be disabled by
+default. What do you think?
 
-diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
-index f8fb38b..bf0be7e 100644
---- a/recipes-qt/qt5/qt5-git.inc
-+++ b/recipes-qt/qt5/qt5-git.inc
-@@ -1,4 +1,4 @@
--# Copyright (C) 2012 O.S. Systems Software LTDA.
-+# Copyright (C) 2012-2016 O.S. Systems Software LTDA.
- # Copyright (C) 2013-2014 Martin Jansa <martin.jansa@gmail.com>
- 
- QT_MODULE ?= "${BPN}"
-@@ -6,7 +6,7 @@ QT_MODULE_BRANCH ?= "5.6"
- 
- # each module needs to define valid SRCREV
- SRC_URI = " \
--    ${QT_GIT}/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH};protocol=${QT_GIT_PROTOCOL} \
-+    ${QT_GIT}/${QT_MODULE}.git;name=${QT_MODULE};branch=${QT_MODULE_BRANCH};protocol=${QT_GIT_PROTOCOL} \
- "
- 
- S = "${WORKDIR}/git"
 -- 
-2.7.0
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
