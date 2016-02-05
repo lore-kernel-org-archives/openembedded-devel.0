@@ -1,37 +1,47 @@
-Return-Path: <alejandro.joya.cruz@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D11A7717B
+Return-Path: <ross.burton@intel.com>
+Received: from mail-ig0-f169.google.com (mail-ig0-f169.google.com
+	[209.85.213.169])
+	by mail.openembedded.org (Postfix) with ESMTP id A5DEC7716A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Feb 2016 22:15:31 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga102.fm.intel.com with ESMTP; 05 Feb 2016 14:15:32 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,402,1449561600"; d="scan'208";a="647917710"
-Received: from fmsmsx105.amr.corp.intel.com ([10.18.124.203])
-	by FMSMGA003.fm.intel.com with ESMTP; 05 Feb 2016 14:15:26 -0800
-Received: from fmsmsx151.amr.corp.intel.com (10.18.125.4) by
-	FMSMSX105.amr.corp.intel.com (10.18.124.203) with Microsoft SMTP Server
-	(TLS) id 14.3.248.2; Fri, 5 Feb 2016 14:15:25 -0800
-Received: from fmsmsx106.amr.corp.intel.com ([169.254.5.208]) by
-	FMSMSX151.amr.corp.intel.com ([169.254.7.190]) with mapi id
-	14.03.0248.002; Fri, 5 Feb 2016 14:15:25 -0800
-From: "Joya Cruz, Alejandro" <alejandro.joya.cruz@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] toybox: upgrade to 0.7.0
-Thread-Index: AQHRXkX5PhcgXq8B5UeNcO0OyLO0BJ8dK5+AgAFjdAA=
-Date: Fri, 5 Feb 2016 22:15:25 +0000
-Message-ID: <1454710544.32454.33.camel@intel.com>
-References: <1454465517-24926-1-git-send-email-alejandro.joya.cruz@intel.com>
-	<CAMKF1spJ+xeuV_iiyswkfWSkFiQ84t0qBDQsesrGBCyWiO5yHQ@mail.gmail.com>
-	<FEF0A910-0CCF-49A5-9CA0-75D50E23BDA0@gmail.com>
-In-Reply-To: <FEF0A910-0CCF-49A5-9CA0-75D50E23BDA0@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.219.128.72]
+	Fri,  5 Feb 2016 22:54:31 +0000 (UTC)
+Received: by mail-ig0-f169.google.com with SMTP id mw1so23852950igb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 05 Feb 2016 14:54:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=8mQpX6uQgO9pPvQIMHEbKRVHGz7mlVkMwRqqoi7n8/g=;
+	b=N8i9eaVPPIwdaidbWK9/plRRAOeMLz75K0GLhSQul65hj4GUQnj5rodEmaw7G6CD3n
+	suXmunPBhQOyDaGQO9FVfTPg3ZfuC4sQnxL/Wo1mb0BXigq9r1Hos63Vu8zuPGPQl0rJ
+	cVEwlm0+w3lKbiuW3TcCZcVylvYqiqXvr1WLfI3KkOtaT2FGgWq4+wKLrv18b9Bio5u8
+	O7JNjZy9u0dgeAZFz9VCcipGgI2ruJ5GVgsHltJ6Lc//LICOvAfQzaPbVCXk6q0ZgEMU
+	Z3WqqN1f0u5x/ESyD7x2jgTz/ddguBpqebecwUypJCYhgJ7gur2Lp1rdZo6RPpjyoKSY
+	75mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=8mQpX6uQgO9pPvQIMHEbKRVHGz7mlVkMwRqqoi7n8/g=;
+	b=JqXYg122ArLEumV9q5Z2x/D2gWy0V6aH9+66F5rJanWIjGq9FSE5qj1b+w+ibTfS81
+	QHV50caS6KIyYpfWeqF8EbAaewnB+YthAycqb0LukkcLlyT3FbRI/RC4F13Lcdt8uyxZ
+	PdXRUB56N8gXbjoMdsQX9rMSFG/gwTiRU9yyRhUaZVrPgnXCrfpfQwXHhraTM0EM1Wjg
+	I3ZCRTYDlgjXl27Ai4gALRdOAzrLNX8ZeSi4/lneoaY2v8H5LDhydrv07kzcMX7lcksE
+	0psUe5jUCaUW2+9DZEzBWdtt7p8AQ8bJa0nAZG53oveZWb0Cei083i9H7WDuG5U3umnD
+	vKag==
+X-Gm-Message-State: AG10YORXDd0LpC+FiKTcIB/OrRHI2vlHmPK8yljeQEnQRyOUUDoTz7WW7ffe8tn5BkOauEh9sp1ZTjoRnj3g6dHb
+X-Received: by 10.50.126.8 with SMTP id mu8mr17254572igb.52.1454712872433;
+	Fri, 05 Feb 2016 14:54:32 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] toybox: upgrade to 0.7.0
+Received: by 10.107.162.70 with HTTP; Fri, 5 Feb 2016 14:54:13 -0800 (PST)
+In-Reply-To: <CAMKF1srx2eRWua1d1B=VE00-8Exa+k0NGsAPmiKTN6fOgUipUg@mail.gmail.com>
+References: <1454705380-22071-1-git-send-email-ross.burton@intel.com>
+	<CAMKF1srx2eRWua1d1B=VE00-8Exa+k0NGsAPmiKTN6fOgUipUg@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 5 Feb 2016 22:54:13 +0000
+Message-ID: <CAJTo0LYixRNEfrUbccUke=RDcoaQ2k+BcyDJ9x_crPJg3f_h3g@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH] gtk-theme-torturer: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,26 +54,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2016 22:15:32 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <8F1B4260B5276D45B46C8DB7000DD48B@intel.com>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 05 Feb 2016 22:54:32 -0000
+Content-Type: text/plain; charset=UTF-8
 
-T24ganVlLCAyMDE2LTAyLTA0IGF0IDE3OjAzIC0wODAwLCBLaGVtIFJhaiB3cm90ZToNCj4gPiBP
-biBGZWIgMiwgMjAxNiwgYXQgOTo0MyBQTSwgS2hlbSBSYWogPHJhai5raGVtQGdtYWlsLmNvbT4g
-d3JvdGU6DQo+ID4gDQo+ID4gT24gVHVlLCBGZWIgMiwgMjAxNiBhdCA2OjExIFBNLCBBbGVqYW5k
-cm8gSm95YQ0KPiA+IDxhbGVqYW5kcm8uam95YS5jcnV6QGludGVsLmNvbT4gd3JvdGU6DQo+ID4g
-PiArQ0ZMQUdTX3ByZXBlbmQgPSAiLUkgJHtTVEFHSU5HX0RJUl9IT1NUfSR7aW5jbHVkZWRpcl9u
-YXRpdmV9Ig0KPiA+IA0KPiA+IHdoeSBpcyBhIG5hdGl2ZSBpbmNsdWRlIGRpciBuZWVkZWQgaGVy
-ZSA/DQo+IA0KPiANCj4gdGhpcyBpcyBzYW1lIGFzIFNUQUdJTkdfSU5DRElSIGFuZCB0aGF0IHNo
-b3VsZCBiZSBhdXRvbWF0aWNhbGx5IGFkZGVkDQo+IHZpYSBjb21waWxlciBzbyBJIHdvbmRlciB3
-aHkgaXRzIG5lZWRlZC4NCg0KeWVzIHRoaXMgaXMgbmVlZCBpdCBzaW5jZSB0aGUgbWFrZSBidWls
-ZGVyIGlzIHJlYWxseSAgYmFzaWMgZm9yIHRoaXMNCnBhY2thZ2UuDQoNCmRvIHlvdSBzdWdnZXN0
-IGNoYW5nZSB0aGUgdXNlIG9mDQogJHtTVEFHSU5HX0RJUl9IT1NUfSR7aW5jbHVkZWRpcl9uYXRp
-dmV9IHRvICR7U1RBR0lOR19JTkNESVJ9IHRoZW4/DQoNCj4gDQo+IC0tIA0KPiBfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBPcGVuZW1iZWRkZWQtZGV2
-ZWwgbWFpbGluZyBsaXN0DQo+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQu
-b3JnDQo+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3Bl
-bmVtYmVkZGVkLWRldmVs
+On 5 February 2016 at 20:51, Khem Raj <raj.khem@gmail.com> wrote:
+
+> may be recipes-benchmarks in meta-oe is better place for it ?
+>
+
+It's a benchmark that's incredibly focused on GTK+2 theme performance so
+I'm not sure that's the best place for it.  To be honest if I were a
+meta-oe maintainer, I'd reject this patch and let the recipe disappear into
+the ether.
+
+Ross
 
