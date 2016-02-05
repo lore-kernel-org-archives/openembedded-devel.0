@@ -1,44 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qg0-f48.google.com (mail-qg0-f48.google.com
-	[209.85.192.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 64CF176806
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 65F5260088
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Feb 2016 20:52:13 +0000 (UTC)
-Received: by mail-qg0-f48.google.com with SMTP id u30so77829103qge.1
+	Fri,  5 Feb 2016 20:55:04 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id r129so43169068wmr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Feb 2016 12:52:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=3NpY3SE6RKwB6zvRJE4DIlAFjyvZ6PCT92vaPMddGPc=;
-	b=ehxYVHK2hXybGiuKOxulHgyUZNE92Y2EtnctgHnJQKmDQ5U5JVjuxTF2D43MFZm8LQ
-	GqLIwZIYgdvRN3ywkmNTRjsnE963HQNLmkCW+r7B0dkaslZlzekMxAOVOray335qvkiG
-	PkVcoyVuJ7rU3OHDsQFhZYGK6tBH04F+bCHe/mBXgX8eUs8ruIfqWqLlndB23p2XRDfy
-	l0Xm1ulnIIJyJeXaB6Gd8yi7mnIjLcFjUlBPvs28HU/rCKTOCBETasAHjcvhLYi3+Zkm
-	BkyYCjBgHPEkLrUURa4Qwwz1L3JQkoex92VNMQkx4d1KoFjcBgqR/g3UDtpGKG6TKt/x
-	1zrA==
+	Fri, 05 Feb 2016 12:55:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=PpfaX+YEf99fk9S1PwZhnLdlPQ693VjF2W9WNPk7M64=;
+	b=RnTrD+nVe1eLuE6B2MyWk0GPsFxTvrJ7UhQKvesZlbXHDceoInt2SHZtXjsvIA0ROz
+	bwyi/8DkFYJCCh1RAMDruFmW11YjdENG9A7MSA13xxdiaRdwHFr3lP+vVW36aBfSm5Ah
+	Bh0w3m5bNZfR0x5AuBlawwJhKmD2IU0sfZsQ9lzyx3rWv2qBRUrMCYfAXEkdxG6eQcVO
+	Nwzja5rIL/gg4Z7zTf5M7FygdSUjUz6oJObRT5fkXlOgFtOagYPIFC+rHRSZN8O4VaOg
+	qhTWFz8JNmYci80BlAjztrzZ0tlojqSIFGLLPCU5RIWNInw2b3exqLTm+6Yp8qSpEz8F
+	1uQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=3NpY3SE6RKwB6zvRJE4DIlAFjyvZ6PCT92vaPMddGPc=;
-	b=dwUVJuUr6aj9k+ROdMuRhfwkQOn02bR2vTXyRJez5Yv9z7GONoVsgy9KRteJ2C5yRa
-	4WvnWmc5jpRUN8TA1Pv135CJ1olOeAx4akNlNyhebPSZvcIEIa2iRKNOyjEpv7ZwMZZB
-	GG0LkHolGh5xF72/ZJD2DIhV1XUxOezv48esPXjT/kEddQFiqBfTHFbI94pXwUq+kKmq
-	neGiDEJEJP+yE6aW0uz+CXF4XBHbmCpiivWOu9jXQrM9pLjfQD6ooNK2ccSLOCNU8BlH
-	Y48wobMNtDt+DrboA8r0Fjppe8VicO6HQN/gij1365qpt5YZGVmWEm4XiCVM8GT8NxaM
-	hC5A==
-X-Gm-Message-State: AG10YOTXFaYbkK7g48p8bbnqBruhCCVIbszPNeAuqoZcPO0aGyD/5D1bpAtwZW1mfxFiEB4DPkPEoUB2zFxaWQ==
-X-Received: by 10.140.254.9 with SMTP id z9mr20083561qhc.5.1454705534465; Fri,
-	05 Feb 2016 12:52:14 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.55.130.196 with HTTP; Fri, 5 Feb 2016 12:51:45 -0800 (PST)
-In-Reply-To: <1454705380-22071-1-git-send-email-ross.burton@intel.com>
-References: <1454705380-22071-1-git-send-email-ross.burton@intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 5 Feb 2016 12:51:45 -0800
-Message-ID: <CAMKF1srx2eRWua1d1B=VE00-8Exa+k0NGsAPmiKTN6fOgUipUg@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] gtk-theme-torturer: add
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=PpfaX+YEf99fk9S1PwZhnLdlPQ693VjF2W9WNPk7M64=;
+	b=BniGr47gOb2x5DUJYI9+FpmgoVbkmPpcv6TQtHaUUwS6RIrFbjtf9CyBo1+q5gNQjP
+	/1Dk34bnavnfZDfYhZjeQI4N1UCcildnZUWYJoHA/2aQDcfP7IiZUuWdqQkSfinocNn8
+	02mZUFfeTF6mZoog5YrGKA85N5rSBpTqIxIeJwE3gBKE1n6WDAEAUSVOe813SO1wST6k
+	cFtRl3fw178Uefis+feNegeT46kKf0pMEWAxb0J8T4fheHjrL0wNHTUxPt3T73q36Usp
+	iMCBbbywVGmCXSHf3A7mqgH4zP3QctG2JzLzMf7HYFBh6Ox5sdmHjbkFPMPxd5pD7MiG
+	Dz1Q==
+X-Gm-Message-State: AG10YORDl158jSo3+o0zb/E+aEyo9xDunB8N9IehKfWf1vlFXgZwVUHwZshDSfMudCLgn+8G
+X-Received: by 10.28.131.134 with SMTP id f128mr19031672wmd.41.1454705704988; 
+	Fri, 05 Feb 2016 12:55:04 -0800 (PST)
+Received: from flashheart.burtonini.com (home.burtonini.com. [81.2.106.35])
+	by smtp.gmail.com with ESMTPSA id
+	av3sm17447774wjc.44.2016.02.05.12.55.04
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 05 Feb 2016 12:55:04 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  5 Feb 2016 20:55:02 +0000
+Message-Id: <1454705702-23456-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 2.7.0
+Subject: [PATCH] gnome-mime-data: add (from oe-core)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,57 +53,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2016 20:52:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 05 Feb 2016 20:55:06 -0000
 
-On Fri, Feb 5, 2016 at 12:49 PM, Ross Burton <ross.burton@intel.com> wrote:
-> Add this to meta-gnome as it's being removed from oe-core.
->
-> Signed-off-by: Ross Burton <ross.burton@intel.com>
-> ---
->  .../gtk-theme-torturer/gtk-theme-torturer_git.bb   | 24 ++++++++++++++++++++++
->  1 file changed, 24 insertions(+)
->  create mode 100644 meta-gnome/recipes-extended/gtk-theme-torturer/gtk-theme-torturer_git.bb
+Add this recipe as it's being removed from oe-core.
 
-may be recipes-benchmarks in meta-oe is better place for it ?
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ .../gnome-mime-data/gnome-mime-data/pkgconfig.patch   | 14 ++++++++++++++
+ .../gnome-mime-data/gnome-mime-data_2.18.0.bb         | 19 +++++++++++++++++++
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data/pkgconfig.patch
+ create mode 100644 meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb
 
->
-> diff --git a/meta-gnome/recipes-extended/gtk-theme-torturer/gtk-theme-torturer_git.bb b/meta-gnome/recipes-extended/gtk-theme-torturer/gtk-theme-torturer_git.bb
-> new file mode 100644
-> index 0000000..b67806d
-> --- /dev/null
-> +++ b/meta-gnome/recipes-extended/gtk-theme-torturer/gtk-theme-torturer_git.bb
-> @@ -0,0 +1,24 @@
-> +SUMMARY = "GTK+ Theme benchmark program"
-> +DEPENDS = "gtk+"
-> +HOMEPAGE = "http://wiki.laptop.org/go/GTK_for_OLPC"
-> +SECTION = "devel"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://appwindow.c;endline=13;md5=8c09920de460c7ea1f64ee56986aabd9"
-> +
-> +SRCREV = "99962ae39bb5aadb31929b25c58e1a053f9c9545"
-> +PV = "0.0.0+git${SRCPV}"
-> +
-> +SRC_URI = "git://dev.laptop.org/projects/soc-gtk/"
-> +S = "${WORKDIR}/git/gtk-theme-torturer"
-> +
-> +CFLAGS += "-Wl,-rpath-link,${STAGING_LIBDIR}"
-> +
-> +inherit distro_features_check
-> +ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
-> +
-> +do_install() {
-> +       install -d ${D}${bindir}
-> +       install -m 0755 torturer ${D}${bindir}
-> +}
-> +
-> +
-> --
-> 2.7.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data/pkgconfig.patch b/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data/pkgconfig.patch
+new file mode 100644
+index 0000000..0903425
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data/pkgconfig.patch
+@@ -0,0 +1,14 @@
++Upstream-Status: Inappropriate [configuration]
++
++Index: gnome-mime-data-2.18.0/Makefile.am
++===================================================================
++--- gnome-mime-data-2.18.0.orig/Makefile.am	2009-06-11 17:27:48.000000000 +0100
+++++ gnome-mime-data-2.18.0/Makefile.am	2009-06-11 17:27:59.000000000 +0100
++@@ -1,6 +1,6 @@
++ SUBDIRS = man po
++ 
++-pkgconfigdir = $(datadir)/pkgconfig
+++pkgconfigdir = $(libdir)/pkgconfig
++ pkgconfig_DATA = gnome-mime-data-2.0.pc
++ 
++ NULL=
+diff --git a/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb b/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb
+new file mode 100644
+index 0000000..a31eb55
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "Base MIME and Application database for GNOME"
++HOMEPAGE = "http://www.gnome.org/"
++BUGTRACKER = "https://bugzilla.gnome.org/"
++
++LICENSE = "GPLv2 & GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
++                    file://check-mime.pl;endline=26;md5=a95b63c92c33d4ca1af61a315888f450"
++
++inherit gnomebase mime
++PR = "r4"
++
++SRC_URI += "file://pkgconfig.patch"
++
++SRC_URI[archive.md5sum] = "541858188f80090d12a33b5a7c34d42c"
++SRC_URI[archive.sha256sum] = "37196b5b37085bbcd45c338c36e26898fe35dd5975295f69f48028b1e8436fd7"
++GNOME_COMPRESS_TYPE="bz2"
++
++DEPENDS += "shared-mime-info intltool-native"
++RDEPENDS_${PN} = "shared-mime-info"
+-- 
+2.7.0
+
 
