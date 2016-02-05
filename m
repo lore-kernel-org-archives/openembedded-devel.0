@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E222E77331
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E935F77372
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Feb 2016 02:17:42 +0000 (UTC)
+	Fri,  5 Feb 2016 02:17:40 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u152HdkY024575
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u152He25026171
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Feb 2016 18:17:39 -0800 (PST)
+	Thu, 4 Feb 2016 18:17:41 -0800
 Received: from pek-jhuang0-d1.wrs.com (128.224.162.218) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 4 Feb 2016 18:17:38 -0800
+	14.3.248.2; Thu, 4 Feb 2016 18:17:40 -0800
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 5 Feb 2016 10:16:57 +0800
-Message-ID: <7a099f1f9ff07d9b0ff8dc4e4cb010e122ee9810.1454638380.git.jackie.huang@windriver.com>
+Date: Fri, 5 Feb 2016 10:16:58 +0800
+Message-ID: <1d869c0516b6dd0de963c5a8b4719bee491edb4b.1454638380.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1454638380.git.jackie.huang@windriver.com>
 References: <cover.1454638380.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-java][PATCH 1/5] jikes: fix the license name
+Subject: [meta-java][PATCH 2/5] cup: add the license file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,27 +38,38 @@ Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-The license is: IBM Public License Version 1.0
-and it is named IPL-1.0 instead of IBM in common-licenses.
-
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- recipes-core/jikes/jikes_1.22.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ licenses/CUP | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 licenses/CUP
 
-diff --git a/recipes-core/jikes/jikes_1.22.bb b/recipes-core/jikes/jikes_1.22.bb
-index c05b0f6..0c33118 100644
---- a/recipes-core/jikes/jikes_1.22.bb
-+++ b/recipes-core/jikes/jikes_1.22.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Java compiler adhering to language and VM specifications"
- HOMEPAGE = "http://jikes.sourceforge.net/"
- PRIORITY = "optional"
- SECTION = "devel"
--LICENSE = "IBM"
-+LICENSE = "IPL-1.0"
- LIC_FILES_CHKSUM = " \
-                     file://COPYING;md5=2d52359fd0d8f0c3e371e4cd19b213c0 \
-                     file://doc/license.htm;md5=43506e48033a385dc0936f620ae2c745 \
+diff --git a/licenses/CUP b/licenses/CUP
+new file mode 100644
+index 0000000..f3f0299
+--- /dev/null
++++ b/licenses/CUP
+@@ -0,0 +1,20 @@
++CUP PARSER GENERATOR COPYRIGHT NOTICE, LICENSE AND DISCLAIMER.
++
++Copyright 1996 by Scott Hudson, Frank Flannery, C. Scott Ananian
++
++Permission to use, copy, modify, and distribute this software and its
++documentation for any purpose and without fee is hereby granted,
++provided that the above copyright notice appear in all copies and that
++both the copyright notice and this permission notice and warranty
++disclaimer appear in supporting documentation, and that the names of
++the authors or their employers not be used in advertising or publicity 
++pertaining to distribution of the software without specific, written 
++prior permission.
++
++The authors and their employers disclaim all warranties with regard to 
++this software, including all implied warranties of merchantability and 
++fitness.  In no event shall the authors or their employers be liable 
++for any special, indirect or consequential damages or any damages 
++whatsoever resulting from loss of use, data or profits, whether in an 
++action of contract, negligence or other tortious action, arising out of 
++or in connection with the use or performance of this software.
 -- 
 1.9.1
 
