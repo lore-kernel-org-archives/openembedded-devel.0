@@ -1,54 +1,48 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f170.google.com (mail-io0-f170.google.com
-	[209.85.223.170])
-	by mail.openembedded.org (Postfix) with ESMTP id C22D477302
+Return-Path: <danismostlikely@gmail.com>
+Received: from mail-vk0-f44.google.com (mail-vk0-f44.google.com
+	[209.85.213.44])
+	by mail.openembedded.org (Postfix) with ESMTP id A7F3C731AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Feb 2016 15:27:21 +0000 (UTC)
-Received: by mail-io0-f170.google.com with SMTP id g73so132016500ioe.3
+	Fri,  5 Feb 2016 15:48:51 +0000 (UTC)
+Received: by mail-vk0-f44.google.com with SMTP id e6so58732130vkh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Feb 2016 07:27:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=N6590r7sMJnltEVqI1SB7Ra0Mqn6rDtp+tqr041kddc=;
-	b=BcbY8r/YZtDnSHRMHOwJkEOtd/UbKNYkmL/r74mf68E3qPO+zgkZj0OugICfUkugVl
-	jS+lQMOMieUYv/phGzij5A1U2VI5TRgWIhTcrzgvEoMslGzPebsmYVyoGeJPj+UTSq6I
-	R7Sxsx9vfjKESYMDxgantqKpO8mEtn5+Pbjx/KCXwVBV1Ldv4/x8b1XkRQinAqq66dh/
-	hIVTbc7XlJEiNswhvwqeYB3fdrDFo7tCsvWmhtHOEFtLzRl935njKpU+mfJd1zLaBuxj
-	iSCtprqthHEoCOM5dL6jSi3rGSC5OWDh473Yh8iN22W6Y9mgWgcIEo5+Rcqf1RxC2BBr
-	lA/g==
+	Fri, 05 Feb 2016 07:48:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=ef03AdfId6lH5TBwwUiIPH/5YF+k14eYGL5ZjKdsyXA=;
+	b=lHVvSntW7kuD7zg1nqgcx0ZtXfxvqypjAikQGGCGXgs/g+SdxZp7Zlc/Mgodc5bkr6
+	B/7uollEztRlLhIwufUdq5YKooMXsIaSLQquXDt4oWOz3oZIcY+810E4DomzK4Qt/ucE
+	qV1FE6KQEiwO/JUSYoqe2GB1PmD5MVkWyDSNIM8cWNjSBpu/49ma3likg8eujY1ykgFy
+	qblDFx1dxR+1/u5yaETbCPAXjd+aGQMFH59Wg8klR7Ua+wCP/zRZftaf174NFNd+lmVA
+	cKdNavysE3u3H+foQCmcRZTW+OOtP9kYgCG4mqkZ8iM7NVXT9liTdI6YF1aur8uRByRN
+	ZzOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=N6590r7sMJnltEVqI1SB7Ra0Mqn6rDtp+tqr041kddc=;
-	b=YXdORr+sdeav3G4imSiN8Jg/lsySnM7pTmNhYCc2Q9G1qrWGBfy0qfsZ594ocPjaEp
-	cZaxLj4f2RclrrlpXKRYT+pLQWTNl5as62PeETnYBQfzyQrdCm1pnyS+lKNzDXxbVg5c
-	OwRiWRwlKhoGhmObywoP8aShkbAdjF+92j7jSdDI2wJ4Q49eXJ5+KuJzWMyxsn7E4re9
-	WVUDeeNmSBYhQUVaI4WBA7mgTQZmmO5SFi8TFCB9WKhE9pYF0pr3k26FMQwSfQjluv8g
-	DfOzAY1JZjfPUzfKeZ2rU43aYoWM/MXkuOLcEZKHWmQdoeczegJr3w0kuEwRId7XSmHx
-	FTFw==
-X-Gm-Message-State: AG10YOSm3rDg94JL0ObOyVZR1P4wduUqZNeGqjj7JiHoWyhq/4V5QfmO0d8eQyxYjEO2Qhugev7Jop6NwVmQD+oq
-X-Received: by 10.107.3.220 with SMTP id e89mr14532936ioi.99.1454686042673;
-	Fri, 05 Feb 2016 07:27:22 -0800 (PST)
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=ef03AdfId6lH5TBwwUiIPH/5YF+k14eYGL5ZjKdsyXA=;
+	b=MNLM7cqhaoUkV16WuMtQfz7cjfuOTxLQDyc9H+rWqNcPKMbvPeP8rt+ibIQipJjqI4
+	4H2WkXMct2ziaOjkqsk1Y4f/Irnr1026vqEDqBJzdy0C4buru8kjWHVX9ABI8bXQZXsl
+	/64KI16A7Td/Z/sSSK0Y8ZQfJulZuPwNkajl+H2QQG0OsKgIsNj4awGFIYnlqEcv6SQ6
+	o92b74S7VaJXd0My4xs15FP/cphYP/ryiCusAXQyJjXd/MHhn1CGM5acYSvIgdGcvY+5
+	xqWfouCEa63WX+qZ3a4F/hYvOc9iE2AvRoKOKo7gxU41UcaB7D6lutasF0uQk60wR9OQ
+	vgmQ==
+X-Gm-Message-State: AG10YOQI7IxnjfnslMB4FY9C0Tc0kS/nKqjFUlLcOiI/GgAT3fqCVIshiOSqvv3ot4RbF+nqo8oYWGMMm1WSog==
 MIME-Version: 1.0
-Received: by 10.107.162.70 with HTTP; Fri, 5 Feb 2016 07:27:03 -0800 (PST)
-In-Reply-To: <CALbNGRRWrvs7JL6V8ePoofYvWU0Lxs-vBq1=qU2OE7syOOgDXw@mail.gmail.com>
-References: <CALbNGRRmD=4QUi=+_fx48M4GDB9VwTX5m5wH12j4ed1OK6SW6Q@mail.gmail.com>
-	<1454511012.27087.183.camel@linuxfoundation.org>
-	<CALbNGRRWrvs7JL6V8ePoofYvWU0Lxs-vBq1=qU2OE7syOOgDXw@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Fri, 5 Feb 2016 15:27:03 +0000
-Message-ID: <CAJTo0LYu_uQSVgpVSobMP3MwM+vdfaX=xecBLX93T_WRNGjtzA@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+X-Received: by 10.31.137.11 with SMTP id l11mr9045387vkd.98.1454687332314;
+	Fri, 05 Feb 2016 07:48:52 -0800 (PST)
+Received: by 10.103.82.152 with HTTP; Fri, 5 Feb 2016 07:48:52 -0800 (PST)
+Received: by 10.103.82.152 with HTTP; Fri, 5 Feb 2016 07:48:52 -0800 (PST)
+In-Reply-To: <56B4A38C.3090909@gmail.com>
+References: <1454613723-22027-1-git-send-email-akuster808@gmail.com>
+	<CACS+7ZS4DzLZrYZXQ2Uk5vAn-oRSG+PDriOFhCjUsCvPSfnw_A@mail.gmail.com>
+	<56B4A38C.3090909@gmail.com>
+Date: Fri, 5 Feb 2016 09:48:52 -0600
+Message-ID: <CACS+7ZQQqAp-jC6ZRz98R7P94S4=TSf_09bEzLn8vPqSae_Crw@mail.gmail.com>
+From: Dan McGregor <danismostlikely@gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	Richard Purdie <richard.purdie@linuxfoundation.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] Language settings GTK (glibc?) problem
+Subject: Re: [meta-python][PATCH] python-django: update package to 1.8.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,19 +55,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2016 15:27:23 -0000
+X-List-Received-Date: Fri, 05 Feb 2016 15:48:55 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On 5 February 2016 at 12:02, Andreas M=C3=BCller <schnitzeltony@googlemail.=
-com>
-wrote:
-
-> Will give the backport a test and hope I'll get i18n back for GTK (and
-> most likely others).
+On 5 Feb 2016 5:29 a.m., "akuster808" <akuster808@gmail.com> wrote:
+>
+>
+>
+> On 02/04/2016 11:51 PM, Dan McGregor wrote:
+> > On 4 Feb 2016 11:23 a.m., "Armin Kuster" <akuster808@gmail.com> wrote:
+> >>
+> >> Update to a LTS version which might EOL in April 2018
+> >>
+> >> The following security fixes are included;
+> >> CVE-2015-8213
+> >> CVE-2015-5964
+> >> CVE-2015-5963
+> >> CVE-2015-5145
+> >> CVE-2015-5144
+> >> CVE-2015-5143
+> >> CVE-2015-3982
+> >> CVE-2015-2317
+> >> CVE-2015-2316
+> >> CVE-2015-2241
+> >>
+> >> LIC_FILES_CHKSUM changed do to:
+> >>
+> >
+https://github.com/django/django/commit/1dae4ac1778f04805c0ed62c8debb13b281ba02b
+> >> * Removed trailing whitespace.
+> >> * Added newline to EOF if missing.
+> >> * Removed blank lines at EOF.
+> >> * Removed some stray tabs.
+> >>
+> >> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> >
+> > Looks good, but can we also keep 1.6? Bitbake uses 1.6 for toaster.
+> > Alternatively is updating bitbake's dependencies on the roadmap?
+>
+> That would mean oe-core has a dependency on meta-openembedded. This
+> seems wrong.  BTW the requirements.txt for toaster says
+> "Django>1.8,<1.9" maybe that is a host requirement?
 >
 
-FWIW I've tested and queued this for oe-core master too.
+Indeed you are correct. I only looked at jethro. Master this is good.
 
-Ross
+OE-core still wouldn't have a dependency on meta-openembedded because
+toaster is optional. As it stands to make toaster work on jethro one needs
+pip.
+
+This is of course talking about a self-hosted openembedded build machine.
+(oe-core's build appliance for example)
+
+> - armin
+>
+> >> ---
+> >>  .../python/{python-django_1.6.10.bb => python-django_1.8.8.bb}    | 8
+> > ++++----
+> >>  1 file changed, 4 insertions(+), 4 deletions(-)
+> >>  rename meta-python/recipes-devtools/python/{python-django_1.6.10.bb =>
+> > python-django_1.8.8.bb} (60%)
+> >>
+> >> diff --git a/meta-python/recipes-devtools/python/
+python-django_1.6.10.bb
+> > b/meta-python/recipes-devtools/python/python-django_1.8.8.bb
+> >> similarity index 60%
+> >> rename from meta-python/recipes-devtools/python/python-django_1.6.10.bb
+> >> rename to meta-python/recipes-devtools/python/python-django_1.8.8.bb
+> >> index a7ca803..5e4c435 100644
+> >> --- a/meta-python/recipes-devtools/python/python-django_1.6.10.bb
+> >> +++ b/meta-python/recipes-devtools/python/python-django_1.8.8.bb
+> >> @@ -2,18 +2,18 @@ SUMMARY = "A high-level Python Web framework"
+> >>  HOMEPAGE = "http://www.djangoproject.com/"
+> >>  SECTION = "devel/python"
+> >>  LICENSE = "BSD-3-Clause"
+> >> -LIC_FILES_CHKSUM =
+"file://LICENSE;md5=fa8608154dcdd4029ae653131d4b7365"
+> >> +LIC_FILES_CHKSUM =
+"file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
+> >>
+> >>  SRCNAME = "Django"
+> >>
+> >>  SRC_URI = "
+> >
+https://pypi.python.org/packages/source/D/${SRCNAME}/${SRCNAME}-${PV}.tar.gz
+> > "
+> >>
+> >> -SRC_URI[md5sum] = "d7123f14ac19ae001be02ed841937b91"
+> >> -SRC_URI[sha256sum] =
+> > "54eb59ce785401c7d1fdeed245efce597e90f811d6a20f6b5c6931c0049d63a6"
+> >> +SRC_URI[md5sum] = "08ecf83b7e9d064ed7e3981ddc3a8a15"
+> >> +SRC_URI[sha256sum] =
+> > "8255242fa0d9e0bf331259a6bdb81364933acbe8863291661558ffdb2fc9ed70"
+> >>
+> >>  S = "${WORKDIR}/${SRCNAME}-${PV}"
+> >>
+> >> -inherit distutils
+> >> +inherit setuptools
+> >>
+> >>  FILES_${PN} += "${datadir}/django"
+> >>
+> >> --
+> >> 2.3.5
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
