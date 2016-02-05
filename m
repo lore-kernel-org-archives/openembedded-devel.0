@@ -1,47 +1,49 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-ig0-f169.google.com (mail-ig0-f169.google.com
-	[209.85.213.169])
-	by mail.openembedded.org (Postfix) with ESMTP id A5DEC7716A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qg0-f41.google.com (mail-qg0-f41.google.com
+	[209.85.192.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E662731D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Feb 2016 22:54:31 +0000 (UTC)
-Received: by mail-ig0-f169.google.com with SMTP id mw1so23852950igb.1
+	Fri,  5 Feb 2016 22:54:36 +0000 (UTC)
+Received: by mail-qg0-f41.google.com with SMTP id u30so80088160qge.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Feb 2016 14:54:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=8mQpX6uQgO9pPvQIMHEbKRVHGz7mlVkMwRqqoi7n8/g=;
-	b=N8i9eaVPPIwdaidbWK9/plRRAOeMLz75K0GLhSQul65hj4GUQnj5rodEmaw7G6CD3n
-	suXmunPBhQOyDaGQO9FVfTPg3ZfuC4sQnxL/Wo1mb0BXigq9r1Hos63Vu8zuPGPQl0rJ
-	cVEwlm0+w3lKbiuW3TcCZcVylvYqiqXvr1WLfI3KkOtaT2FGgWq4+wKLrv18b9Bio5u8
-	O7JNjZy9u0dgeAZFz9VCcipGgI2ruJ5GVgsHltJ6Lc//LICOvAfQzaPbVCXk6q0ZgEMU
-	Z3WqqN1f0u5x/ESyD7x2jgTz/ddguBpqebecwUypJCYhgJ7gur2Lp1rdZo6RPpjyoKSY
-	75mg==
+	Fri, 05 Feb 2016 14:54:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=EobBEpovna4AzXSc1jcOeECimg6t60ED1Hgeu/St4Ww=;
+	b=wxdohD1sOJ7cFhhVZUXwu/FvGBoZ/0hIHpb7OEV+0zDwMYdoWKiNHyowFIO/TrL4il
+	CpwG8uRdFBpVstp49KSRWAcLLhY1E7NicVG5NiTTL6RSdJd9jW/JOaVULVOx3vXa1w9Q
+	rTC762lhSuMi2XQLvzj5y+WCAt5b/9wC8Hk7dE8QAF+IRugOhpEr2Idyd1oEI3IwRMuZ
+	8OSuGaV5uBvuXq3R5s6qt2xfw/Fhp1VL1/JAB8B7/XGNPOwuZ+kJxqmVCQBiZBY3XTK6
+	iu4G7SJwHcSwpHLnmzfeC5r2vTspAq8MBRU6c+rgLcXfhicDoaZXIAb5MNXT0Vz/74ae
+	Q3QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=8mQpX6uQgO9pPvQIMHEbKRVHGz7mlVkMwRqqoi7n8/g=;
-	b=JqXYg122ArLEumV9q5Z2x/D2gWy0V6aH9+66F5rJanWIjGq9FSE5qj1b+w+ibTfS81
-	QHV50caS6KIyYpfWeqF8EbAaewnB+YthAycqb0LukkcLlyT3FbRI/RC4F13Lcdt8uyxZ
-	PdXRUB56N8gXbjoMdsQX9rMSFG/gwTiRU9yyRhUaZVrPgnXCrfpfQwXHhraTM0EM1Wjg
-	I3ZCRTYDlgjXl27Ai4gALRdOAzrLNX8ZeSi4/lneoaY2v8H5LDhydrv07kzcMX7lcksE
-	0psUe5jUCaUW2+9DZEzBWdtt7p8AQ8bJa0nAZG53oveZWb0Cei083i9H7WDuG5U3umnD
-	vKag==
-X-Gm-Message-State: AG10YORXDd0LpC+FiKTcIB/OrRHI2vlHmPK8yljeQEnQRyOUUDoTz7WW7ffe8tn5BkOauEh9sp1ZTjoRnj3g6dHb
-X-Received: by 10.50.126.8 with SMTP id mu8mr17254572igb.52.1454712872433;
-	Fri, 05 Feb 2016 14:54:32 -0800 (PST)
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=EobBEpovna4AzXSc1jcOeECimg6t60ED1Hgeu/St4Ww=;
+	b=E9uUTF0N+lkpWTzVIKxjoKgZ7bL5PRYcFETBrXrRQAr3g+7UKOJGM05LYAYWmhFjzo
+	ak20PIvADK5UR7YvFnUocRmhoggnid12tf5m4hv6c2sI65nkyoDpXjPX1RuOznR37qc6
+	gfghMOxMNaHkUgbSRrtn83i8fRxj6jbaiWf1jF78i3esOUNsWD3Yu8qByMsdi2/N5KFz
+	vwGPJ7IzX+4GvVmDl43+XPBG9ZwT3pUbS2Y7I9nZB/RiCPsCFluPjRQ+R8wq2KVD27Mr
+	ZOA6P7brog2X5ozMbRt09+YM0f2NdIplUD/DxdoVYhNLZEKRIOsoAzm7w7iEN9aGZqc0
+	dB9Q==
+X-Gm-Message-State: AG10YORi5UHPENH0b0o9ClYqqAKjkJDs9K0xxNhrpEyqneETBkza6IoU5b8vB47iORi//oHM4y8RpoRt3FTARQ==
 MIME-Version: 1.0
-Received: by 10.107.162.70 with HTTP; Fri, 5 Feb 2016 14:54:13 -0800 (PST)
-In-Reply-To: <CAMKF1srx2eRWua1d1B=VE00-8Exa+k0NGsAPmiKTN6fOgUipUg@mail.gmail.com>
-References: <1454705380-22071-1-git-send-email-ross.burton@intel.com>
-	<CAMKF1srx2eRWua1d1B=VE00-8Exa+k0NGsAPmiKTN6fOgUipUg@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Fri, 5 Feb 2016 22:54:13 +0000
-Message-ID: <CAJTo0LYixRNEfrUbccUke=RDcoaQ2k+BcyDJ9x_crPJg3f_h3g@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Received: by 10.140.94.198 with SMTP id g64mr19877111qge.57.1454712877385;
+	Fri, 05 Feb 2016 14:54:37 -0800 (PST)
+Received: by 10.55.130.196 with HTTP; Fri, 5 Feb 2016 14:54:37 -0800 (PST)
+Received: by 10.55.130.196 with HTTP; Fri, 5 Feb 2016 14:54:37 -0800 (PST)
+In-Reply-To: <1454710544.32454.33.camel@intel.com>
+References: <1454465517-24926-1-git-send-email-alejandro.joya.cruz@intel.com>
+	<CAMKF1spJ+xeuV_iiyswkfWSkFiQ84t0qBDQsesrGBCyWiO5yHQ@mail.gmail.com>
+	<FEF0A910-0CCF-49A5-9CA0-75D50E23BDA0@gmail.com>
+	<1454710544.32454.33.camel@intel.com>
+Date: Fri, 5 Feb 2016 14:54:37 -0800
+Message-ID: <CAMKF1sqSJKwwbMJwkd0pBXKi_8VXQCEVDNh1PAe3aonY-350ng@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH] gtk-theme-torturer: add
+Subject: Re: [meta-oe][PATCH] toybox: upgrade to 0.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,18 +56,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2016 22:54:32 -0000
+X-List-Received-Date: Fri, 05 Feb 2016 22:54:37 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 5 February 2016 at 20:51, Khem Raj <raj.khem@gmail.com> wrote:
+Yes
+On Feb 5, 2016 2:15 PM, "Joya Cruz, Alejandro" <
+alejandro.joya.cruz@intel.com> wrote:
 
-> may be recipes-benchmarks in meta-oe is better place for it ?
+> On jue, 2016-02-04 at 17:03 -0800, Khem Raj wrote:
+> > > On Feb 2, 2016, at 9:43 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> > >
+> > > On Tue, Feb 2, 2016 at 6:11 PM, Alejandro Joya
+> > > <alejandro.joya.cruz@intel.com> wrote:
+> > > > +CFLAGS_prepend = "-I ${STAGING_DIR_HOST}${includedir_native}"
+> > >
+> > > why is a native include dir needed here ?
+> >
+> >
+> > this is same as STAGING_INCDIR and that should be automatically added
+> > via compiler so I wonder why its needed.
 >
-
-It's a benchmark that's incredibly focused on GTK+2 theme performance so
-I'm not sure that's the best place for it.  To be honest if I were a
-meta-oe maintainer, I'd reject this patch and let the recipe disappear into
-the ether.
-
-Ross
+> yes this is need it since the make builder is really  basic for this
+> package.
+>
+> do you suggest change the use of
+>  ${STAGING_DIR_HOST}${includedir_native} to ${STAGING_INCDIR} then?
+>
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
