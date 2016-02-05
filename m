@@ -1,49 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qg0-f41.google.com (mail-qg0-f41.google.com
-	[209.85.192.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E662731D2
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id BF737731D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Feb 2016 22:54:36 +0000 (UTC)
-Received: by mail-qg0-f41.google.com with SMTP id u30so80088160qge.1
+	Fri,  5 Feb 2016 23:03:02 +0000 (UTC)
+Received: by mail-io0-f179.google.com with SMTP id d63so144742770ioj.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Feb 2016 14:54:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	Fri, 05 Feb 2016 15:03:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=EobBEpovna4AzXSc1jcOeECimg6t60ED1Hgeu/St4Ww=;
-	b=wxdohD1sOJ7cFhhVZUXwu/FvGBoZ/0hIHpb7OEV+0zDwMYdoWKiNHyowFIO/TrL4il
-	CpwG8uRdFBpVstp49KSRWAcLLhY1E7NicVG5NiTTL6RSdJd9jW/JOaVULVOx3vXa1w9Q
-	rTC762lhSuMi2XQLvzj5y+WCAt5b/9wC8Hk7dE8QAF+IRugOhpEr2Idyd1oEI3IwRMuZ
-	8OSuGaV5uBvuXq3R5s6qt2xfw/Fhp1VL1/JAB8B7/XGNPOwuZ+kJxqmVCQBiZBY3XTK6
-	iu4G7SJwHcSwpHLnmzfeC5r2vTspAq8MBRU6c+rgLcXfhicDoaZXIAb5MNXT0Vz/74ae
-	Q3QQ==
+	:content-type; bh=hHg2SFt6vg9dZqkIAQaHxl2VCCxtx5h+i9LZ6y0edio=;
+	b=It9OnWdgunumE/9TrfUWZCiNzW+DtEEM1dd3Bk7RIBR8lKo6RJO/JFgyq6akZTB1up
+	Gn27s5ZpE9F0F4MmUH1kcjQUYrIeifJjjCZkLRLL9swzP6nmRlKJM9Fvnoj1qSnec0vD
+	yuHDdsL906ec0hvXpNlqGef81yiUomau6ZuOlmw6rsFoIBGjZF64Y4PFjmokYhQ7ivL0
+	xLMKT5gjcR4dS8VEx/BjZMlVcDdgItsTvn/pid009N9zEA+zWgIzvrb3WYXEUSvkIukL
+	P0/PxooRcZ1maNilaqYO0YcC79X8n+DTIyx5rsy+6NfkEXY/lWvMREQXqXLB3++/1xed
+	obnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:content-type;
-	bh=EobBEpovna4AzXSc1jcOeECimg6t60ED1Hgeu/St4Ww=;
-	b=E9uUTF0N+lkpWTzVIKxjoKgZ7bL5PRYcFETBrXrRQAr3g+7UKOJGM05LYAYWmhFjzo
-	ak20PIvADK5UR7YvFnUocRmhoggnid12tf5m4hv6c2sI65nkyoDpXjPX1RuOznR37qc6
-	gfghMOxMNaHkUgbSRrtn83i8fRxj6jbaiWf1jF78i3esOUNsWD3Yu8qByMsdi2/N5KFz
-	vwGPJ7IzX+4GvVmDl43+XPBG9ZwT3pUbS2Y7I9nZB/RiCPsCFluPjRQ+R8wq2KVD27Mr
-	ZOA6P7brog2X5ozMbRt09+YM0f2NdIplUD/DxdoVYhNLZEKRIOsoAzm7w7iEN9aGZqc0
-	dB9Q==
-X-Gm-Message-State: AG10YORi5UHPENH0b0o9ClYqqAKjkJDs9K0xxNhrpEyqneETBkza6IoU5b8vB47iORi//oHM4y8RpoRt3FTARQ==
+	bh=hHg2SFt6vg9dZqkIAQaHxl2VCCxtx5h+i9LZ6y0edio=;
+	b=FtOh9zRajG/xRIkDz3mp5ZPQgyqoiVZEhWwz974spjzXXmaGWxXj3o9LtzBkFftRkw
+	XcBzi4xgSz5pf9FoyFPRStzwLJRmysjjrhlZCdOwoeqRK5HmMt/sBDVmIaVvbZl2k/ec
+	nXSGa32fvc7IQZQ1NGI+g7oyhg8FpEf/pUgk/VDUH2YqqHGZsGv5/OfnoibdMwwjDizl
+	X1ncK345F0MZ5UW2391P/JqK1fjZQgu+syzShJSfsN6v9wDmCY9mNoiT6K+s24ZNiV38
+	qdzOXUgX8K0g704VpPmklyAthJu+4epfzqEzxPtePEKSshgU+8j07FISPrH8qbwWEaLD
+	8R0g==
+X-Gm-Message-State: AG10YOTTJJi9xjW+QSV+fdQEGlHb5IsCOFzufFi7ATga2OQyDZ/DFXFVoKd41AoY17AlhOielB+7HKE6zb45rw==
 MIME-Version: 1.0
-X-Received: by 10.140.94.198 with SMTP id g64mr19877111qge.57.1454712877385;
-	Fri, 05 Feb 2016 14:54:37 -0800 (PST)
-Received: by 10.55.130.196 with HTTP; Fri, 5 Feb 2016 14:54:37 -0800 (PST)
-Received: by 10.55.130.196 with HTTP; Fri, 5 Feb 2016 14:54:37 -0800 (PST)
-In-Reply-To: <1454710544.32454.33.camel@intel.com>
-References: <1454465517-24926-1-git-send-email-alejandro.joya.cruz@intel.com>
-	<CAMKF1spJ+xeuV_iiyswkfWSkFiQ84t0qBDQsesrGBCyWiO5yHQ@mail.gmail.com>
-	<FEF0A910-0CCF-49A5-9CA0-75D50E23BDA0@gmail.com>
-	<1454710544.32454.33.camel@intel.com>
-Date: Fri, 5 Feb 2016 14:54:37 -0800
-Message-ID: <CAMKF1sqSJKwwbMJwkd0pBXKi_8VXQCEVDNh1PAe3aonY-350ng@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] toybox: upgrade to 0.7.0
+X-Received: by 10.107.164.15 with SMTP id n15mr15915968ioe.148.1454713383201; 
+	Fri, 05 Feb 2016 15:03:03 -0800 (PST)
+Received: by 10.36.25.81 with HTTP; Fri, 5 Feb 2016 15:03:03 -0800 (PST)
+In-Reply-To: <CAJTo0LYixRNEfrUbccUke=RDcoaQ2k+BcyDJ9x_crPJg3f_h3g@mail.gmail.com>
+References: <1454705380-22071-1-git-send-email-ross.burton@intel.com>
+	<CAMKF1srx2eRWua1d1B=VE00-8Exa+k0NGsAPmiKTN6fOgUipUg@mail.gmail.com>
+	<CAJTo0LYixRNEfrUbccUke=RDcoaQ2k+BcyDJ9x_crPJg3f_h3g@mail.gmail.com>
+Date: Sat, 6 Feb 2016 00:03:03 +0100
+Message-ID: <CALbNGRS2JVd6x3uR6LHHo=V=Xjg25i2BTmMHCnnRMz8jbpPZfg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] gtk-theme-torturer: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,42 +55,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2016 22:54:37 -0000
+X-List-Received-Date: Fri, 05 Feb 2016 23:03:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Yes
-On Feb 5, 2016 2:15 PM, "Joya Cruz, Alejandro" <
-alejandro.joya.cruz@intel.com> wrote:
+On Fri, Feb 5, 2016 at 11:54 PM, Burton, Ross <ross.burton@intel.com> wrote:
+> meta-oe maintainer, I'd reject this patch and let the recipe disappear into
+> the ether.
+shared same thoughts...
 
-> On jue, 2016-02-04 at 17:03 -0800, Khem Raj wrote:
-> > > On Feb 2, 2016, at 9:43 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> > >
-> > > On Tue, Feb 2, 2016 at 6:11 PM, Alejandro Joya
-> > > <alejandro.joya.cruz@intel.com> wrote:
-> > > > +CFLAGS_prepend = "-I ${STAGING_DIR_HOST}${includedir_native}"
-> > >
-> > > why is a native include dir needed here ?
-> >
-> >
-> > this is same as STAGING_INCDIR and that should be automatically added
-> > via compiler so I wonder why its needed.
->
-> yes this is need it since the make builder is really  basic for this
-> package.
->
-> do you suggest change the use of
->  ${STAGING_DIR_HOST}${includedir_native} to ${STAGING_INCDIR} then?
->
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Andreas
 
