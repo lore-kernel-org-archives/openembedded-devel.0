@@ -1,51 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id E000C7666E
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id A4BE67666E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  7 Feb 2016 21:12:12 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id c10so7458364pfc.0
+	Sun,  7 Feb 2016 21:12:15 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id c10so7458396pfc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Feb 2016 13:12:13 -0800 (PST)
+	Sun, 07 Feb 2016 13:12:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=CDpUfxekpOXPj9lNWQCiwqn7fqTO11bXrOir3XVTmJM=;
-	b=TmHjcv/QrRmGDUrLvXRIalwwr8gNFrOXfa8GIy/BWd0G67JdS9oeF6xF1DOyq4PGQ/
-	2YTPsqRJxnlGJqnn2LuKvjUeF3FfdA5rBgpzJRBsP0f9CyW84yllMjDmFUF9VMSvem8M
-	tC2AkEfyO5fJaOD3ii/vN0Feq8H5OqLJhfGG7PcJ5rGlh3V5RkH/qZUSgWWHDdXKwTrQ
-	90uMWPFg4Ep/8h4JBE33C7f6TB5LH7laveqdjuOmDyyPogoea/p5XtbZDkS27o7f5kUM
-	SN557AH/cNa1SD6qMsi4hh4Nc2X2+Snk1oimx2BeM3sP5BorSl57q5eoiqHEAdZhSYR4
-	2Odg==
+	:references; bh=bx4spCvHcRfTi5O3pgWpUDDiwwS+JKVf2CtHie+wVQw=;
+	b=ryYzs38IudLDUYPwQUjExzqYRVu/tQjpTAjSVV/mRRyhIKj9skL3SyZge6lOlRGLyo
+	DIr0lq/aSEGcT6kerbjPN8u7Nsc/rF+e15LyVrd6nWxBg54u2i0HB1+D2USqU284+nGu
+	uPaEFSO8Dru5dBL+HIdDuFVK9nSrKrl19GEG3aqcQxpr6HjNdh2nnfe0bFEZ0N3ba2JA
+	PV6/UnPsmzb35N0hikfccunNw89BRKI3Pye+OYzgw/A6yfks/tY+V/OSL//MT2EOsb/h
+	auuD5dmOqbIS4DTR57cBPVV3glsZFj9G0w82E4wQTjhkRMI8820sMb/SSfTk/paB1un8
+	pvPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:in-reply-to:references;
-	bh=CDpUfxekpOXPj9lNWQCiwqn7fqTO11bXrOir3XVTmJM=;
-	b=Vy1JEtPjxoFuZk+9SWCvIgQsux9Ig0Cpq0POPIdsVDmcGDz24k/TPNUruwPsg0fHKo
-	TcJBnVhT0BwZ9ShIeLZ3qlosDe6pjnoBB08tz4yAzlQjEEZofiVP1b85W6dqdjLOITUL
-	IKnJXI94Zj8gQ0AjtOblB2As+x8VR/OdIXnJzYyup+fT5PpSTSWqPHFZw81T849Z+r73
-	pNfet8X9qFGy1tqWgRqsbg8XVDlV4bk5DSm9Vaqj2+ZQ5IiAl+8RYWBaaq0T13OUtGnd
-	tHwUYwt+51zIl67yEDB1Kizd8XAe9ENzt8J87ALkvWasuD7xKGDv6I6/AYu84sb760+8
-	kAPQ==
-X-Gm-Message-State: AG10YOQvo4/YOAjFqEuK4vJeyhprnwQXFme5XwHP23TxLP30vehLx8qpgFyYbM49h3AptA==
-X-Received: by 10.98.40.200 with SMTP id o191mr10155470pfo.83.1454879533653;
-	Sun, 07 Feb 2016 13:12:13 -0800 (PST)
+	bh=bx4spCvHcRfTi5O3pgWpUDDiwwS+JKVf2CtHie+wVQw=;
+	b=JvJG2OqTOcL0SSiv1Vb/MlNFjZdKDzsrkJHzbtSFZjKfjg/6vZ+3KJSZ07tRlir3mZ
+	gonfU4C1iXGl/bS0PgDbseX+NFy9jVFDeLx417hcUS/Auq6bag/PgY5S76gsz1Wq2UUa
+	seSMJZlrI25zAIWFJudquIfVghhL4z+kLeSKJk9xCXGPZ5hB65ixhhrGlOKRv6Eks6Ju
+	+p6zu2tF/rP4P6OAlDoQGWIANLYm3BF5fPQ8OYxIJqk+4kS09eyzKc6mt2pULsByILim
+	v1VBQVJ9vS32Uxx2Esn4h6Ean1aVhfeK4i0licd5lXAMS5r07cNUZ6izxMVGmOiLpP78
+	8Ycg==
+X-Gm-Message-State: AG10YOTWcxSD4PGdHew7IfmRHnaRFYlZ5Z1g4USBHNLP3Iq45dTVZu7rZM0O09JE+exNmw==
+X-Received: by 10.98.68.212 with SMTP id m81mr37034092pfi.135.1454879536428;
+	Sun, 07 Feb 2016 13:12:16 -0800 (PST)
 Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
 	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	g81sm38382783pfj.1.2016.02.07.13.12.11
+	g81sm38382783pfj.1.2016.02.07.13.12.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 07 Feb 2016 13:12:12 -0800 (PST)
+	Sun, 07 Feb 2016 13:12:14 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: otavio@ossystems.com.br, openembedded-devel@lists.openembedded.org,
 	akuster808@gmail.com
-Date: Sun,  7 Feb 2016 13:11:55 -0800
-Message-Id: <d5cded2fa0c0dd2ed13af0eb8ba1db6941b8db17.1454879225.git.akuster@mvista.com>
+Date: Sun,  7 Feb 2016 13:11:56 -0800
+Message-Id: <047a9fae678ebb70c75dc6dff4aea8fca34b5350.1454879225.git.akuster@mvista.com>
 X-Mailer: git-send-email 2.3.5
 In-Reply-To: <cover.1454879225.git.akuster@mvista.com>
 References: <cover.1454879225.git.akuster@mvista.com>
 In-Reply-To: <cover.1454879225.git.akuster@mvista.com>
 References: <cover.1454879225.git.akuster@mvista.com>
-Subject: [PATCH 3/7] ntp: upgrade 4.2.8p3 -> 4.2.8p4
+Subject: [PATCH 4/7] php: Security fix CVE-2015-7803
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,57 +58,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Feb 2016 21:12:13 -0000
+X-List-Received-Date: Sun, 07 Feb 2016 21:12:15 -0000
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+From: Armin Kuster <akuster@mvista.com>
 
-4.2.8p4 fixed following 13 low- and medium-severity vulnerabilities:
+CVE-2015-7803 php: NULL pointer dereference in phar_get_fp_offset()
 
-  * Bug 2941 CVE-2015-7871
-  * Bug 2922 CVE-2015-7855
-  * Bug 2921 CVE-2015-7854
-  * Bug 2920 CVE-2015-7853
-  * Bug 2919 CVE-2015-7852
-  * Bug 2918 CVE-2015-7851
-  * Bug 2917 CVE-2015-7850
-  * Bug 2916 CVE-2015-7849
-  * Bug 2913 CVE-2015-7848
-  * Bug 2909 CVE-2015-7701
-  * Bug 2902 CVE-2015-7703
-  * Bug 2901 CVE-2015-7704, CVE-2015-7705
-  * Bug 2899 CVE-2015-7691, CVE-2015-7692, CVE-2015-7702
-
-And three bugs: Bug 2382, 1774, 1593
-
-Details at:
-  http://support.ntp.org/bin/view/Main/SecurityNotice#Recent_Vulnerabilities
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Armin Kuster <akuster@mvista.com>
 ---
- .../recipes-support/ntp/{ntp_4.2.8p3.bb => ntp_4.2.8p4.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/ntp/{ntp_4.2.8p3.bb => ntp_4.2.8p4.bb} (97%)
+ .../recipes-devtools/php/php/CVE-2015-7803.patch   | 82 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_5.5.21.bb         |  1 +
+ 2 files changed, 83 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2015-7803.patch
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p3.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
-similarity index 97%
-rename from meta-networking/recipes-support/ntp/ntp_4.2.8p3.bb
-rename to meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
-index 0a7a39e..4fe2ed5 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p3.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
-@@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://ntpd.list \
- "
+diff --git a/meta-oe/recipes-devtools/php/php/CVE-2015-7803.patch b/meta-oe/recipes-devtools/php/php/CVE-2015-7803.patch
+new file mode 100644
+index 0000000..5636f25
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php/CVE-2015-7803.patch
+@@ -0,0 +1,82 @@
++From d698f0ae51f67c9cce870b09c59df3d6ba959244 Mon Sep 17 00:00:00 2001
++From: Stanislav Malyshev <stas@php.net>
++Date: Mon, 28 Sep 2015 15:51:59 -0700
++Subject: [PATCH] Fix bug #69720: Null pointer dereference in
++ phar_get_fp_offset()
++
++Upsteam-Status: Backport
++https://git.php.net/?p=php-src.git;a=patch;h=d698f0ae51f67c9cce870b09c59df3d6ba959244
++
++CVE: CVE-2015-7803
++Signed-off-by: Armin Kuster <akuster@mvista.com>
++
++---
++ ext/phar/tests/bug69720.phar | Bin 0 -> 8192 bytes
++ ext/phar/tests/bug69720.phpt |  40 ++++++++++++++++++++++++++++++++++++++++
++ ext/phar/util.c              |   6 +++++-
++ 3 files changed, 45 insertions(+), 1 deletion(-)
++ create mode 100644 ext/phar/tests/bug69720.phar
++ create mode 100644 ext/phar/tests/bug69720.phpt
++
++Index: php-5.5.21/ext/phar/tests/bug69720.phpt
++===================================================================
++--- /dev/null
+++++ php-5.5.21/ext/phar/tests/bug69720.phpt
++@@ -0,0 +1,40 @@
+++--TEST--
+++Phar - bug #69720 - Null pointer dereference in phar_get_fp_offset()
+++--SKIPIF--
+++<?php if (!extension_loaded("phar")) die("skip"); ?>
+++--FILE--
+++<?php
+++try {
+++    // open an existing phar
+++    $p = new Phar(__DIR__."/bug69720.phar",0);
+++    // Phar extends SPL's DirectoryIterator class
+++	echo $p->getMetadata();
+++    foreach (new RecursiveIteratorIterator($p) as $file) {
+++        // $file is a PharFileInfo class, and inherits from SplFileInfo
+++	$temp="";
+++        $temp= $file->getFileName() . "\n";
+++        $temp.=file_get_contents($file->getPathName()) . "\n"; // display contents
+++	var_dump($file->getMetadata());
+++    }
+++}
+++ catch (Exception $e) {
+++    echo 'Could not open Phar: ', $e;
+++}
+++?>
+++--EXPECTF--
+++
+++MY_METADATA_NULL
+++
+++Warning: file_get_contents(phar:///%s): failed to open stream: phar error: "test.php" is not a file in phar "%s.phar" in %s.php on line %d
+++array(1) {
+++  ["whatever"]=>
+++  int(123)
+++}
+++object(DateTime)#2 (3) {
+++  ["date"]=>
+++  string(26) "2000-01-01 00:00:00.000000"
+++  ["timezone_type"]=>
+++  int(3)
+++  ["timezone"]=>
+++  string(3) "UTC"
+++}
++Index: php-5.5.21/ext/phar/util.c
++===================================================================
++--- php-5.5.21.orig/ext/phar/util.c
+++++ php-5.5.21/ext/phar/util.c
++@@ -494,7 +494,11 @@ really_get_entry:
++ 	(*ret)->is_tar = entry->is_tar;
++ 	(*ret)->fp = phar_get_efp(entry, 1 TSRMLS_CC);
++ 	if (entry->link) {
++-		(*ret)->zero = phar_get_fp_offset(phar_get_link_source(entry TSRMLS_CC) TSRMLS_CC);
+++		phar_entry_info *link = phar_get_link_source(entry TSRMLS_CC);
+++		if(!link) {
+++			return FAILURE;
+++		}
+++		(*ret)->zero = phar_get_fp_offset(link TSRMLS_CC);
++ 	} else {
++ 		(*ret)->zero = phar_get_fp_offset(entry TSRMLS_CC);
++ 	}
+diff --git a/meta-oe/recipes-devtools/php/php_5.5.21.bb b/meta-oe/recipes-devtools/php/php_5.5.21.bb
+index 4ad198a..3582b45 100644
+--- a/meta-oe/recipes-devtools/php/php_5.5.21.bb
++++ b/meta-oe/recipes-devtools/php/php_5.5.21.bb
+@@ -14,6 +14,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
+            file://acinclude-xml2-config.patch \
+            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
+            file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
++           file://CVE-2015-7803.patch \
+           "
  
--SRC_URI[md5sum] = "b98b0cbb72f6df04608e1dd5f313808b"
--SRC_URI[sha256sum] = "818ca4f2ed6ca845b1c5ec43f5e6ad905eaa0fc0aab2d509ed6b962a37fbf38f"
-+SRC_URI[md5sum] = "6af96862b09324a8ef965ca76b759c8b"
-+SRC_URI[sha256sum] = "0d6961572548d2c4af96f58f763e22ac620f5afef717384ddc317a0e365cfdb9"
- 
- inherit autotools update-rc.d useradd systemd pkgconfig
- 
+ SRC_URI_append_class-target += " \
 -- 
 2.3.5
 
