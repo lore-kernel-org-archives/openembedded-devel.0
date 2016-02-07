@@ -1,48 +1,46 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id BF737731D2
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 1799F760B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Feb 2016 23:03:02 +0000 (UTC)
-Received: by mail-io0-f179.google.com with SMTP id d63so144742770ioj.2
+	Sun,  7 Feb 2016 21:12:06 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id 71so2795838pfv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Feb 2016 15:03:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=hHg2SFt6vg9dZqkIAQaHxl2VCCxtx5h+i9LZ6y0edio=;
-	b=It9OnWdgunumE/9TrfUWZCiNzW+DtEEM1dd3Bk7RIBR8lKo6RJO/JFgyq6akZTB1up
-	Gn27s5ZpE9F0F4MmUH1kcjQUYrIeifJjjCZkLRLL9swzP6nmRlKJM9Fvnoj1qSnec0vD
-	yuHDdsL906ec0hvXpNlqGef81yiUomau6ZuOlmw6rsFoIBGjZF64Y4PFjmokYhQ7ivL0
-	xLMKT5gjcR4dS8VEx/BjZMlVcDdgItsTvn/pid009N9zEA+zWgIzvrb3WYXEUSvkIukL
-	P0/PxooRcZ1maNilaqYO0YcC79X8n+DTIyx5rsy+6NfkEXY/lWvMREQXqXLB3++/1xed
-	obnA==
+	Sun, 07 Feb 2016 13:12:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=Wi9ZjsVPmywJchG+WOVzThZz9ESo5UOnpTWjDUY0fnQ=;
+	b=iedAh41ZCeIE06F+4UxIrfjPz/oZ7lDSWtefG0DBuWZEQez5DLNV5dk2tc//vexMq+
+	QzEHQJ8BW7FE1d3bTl3+0XtjzP98saMYOvZLJ/esw95UmAVHyac7hiyQuPvQxL+bMGpq
+	5UkA+HmOhwJOvRY3QM+OGoPSIMqlpcKYi9KdRHh02dTZYqBqgG1N+Cr4QXTrqFqYPxHQ
+	oR6XBTh/Vwy2F87+AjL3XQ+0C4n7KMZck4clM4TiZEb9C7OLElxXTb8GnJ1iy52hM8Gd
+	okxGPSPdymRqa4h5G/OvO2dBW5mYPZKjTd7ChpaYNbS8INNogMEqOktKUwD0Kq6Wcc8I
+	tHMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=hHg2SFt6vg9dZqkIAQaHxl2VCCxtx5h+i9LZ6y0edio=;
-	b=FtOh9zRajG/xRIkDz3mp5ZPQgyqoiVZEhWwz974spjzXXmaGWxXj3o9LtzBkFftRkw
-	XcBzi4xgSz5pf9FoyFPRStzwLJRmysjjrhlZCdOwoeqRK5HmMt/sBDVmIaVvbZl2k/ec
-	nXSGa32fvc7IQZQ1NGI+g7oyhg8FpEf/pUgk/VDUH2YqqHGZsGv5/OfnoibdMwwjDizl
-	X1ncK345F0MZ5UW2391P/JqK1fjZQgu+syzShJSfsN6v9wDmCY9mNoiT6K+s24ZNiV38
-	qdzOXUgX8K0g704VpPmklyAthJu+4epfzqEzxPtePEKSshgU+8j07FISPrH8qbwWEaLD
-	8R0g==
-X-Gm-Message-State: AG10YOTTJJi9xjW+QSV+fdQEGlHb5IsCOFzufFi7ATga2OQyDZ/DFXFVoKd41AoY17AlhOielB+7HKE6zb45rw==
-MIME-Version: 1.0
-X-Received: by 10.107.164.15 with SMTP id n15mr15915968ioe.148.1454713383201; 
-	Fri, 05 Feb 2016 15:03:03 -0800 (PST)
-Received: by 10.36.25.81 with HTTP; Fri, 5 Feb 2016 15:03:03 -0800 (PST)
-In-Reply-To: <CAJTo0LYixRNEfrUbccUke=RDcoaQ2k+BcyDJ9x_crPJg3f_h3g@mail.gmail.com>
-References: <1454705380-22071-1-git-send-email-ross.burton@intel.com>
-	<CAMKF1srx2eRWua1d1B=VE00-8Exa+k0NGsAPmiKTN6fOgUipUg@mail.gmail.com>
-	<CAJTo0LYixRNEfrUbccUke=RDcoaQ2k+BcyDJ9x_crPJg3f_h3g@mail.gmail.com>
-Date: Sat, 6 Feb 2016 00:03:03 +0100
-Message-ID: <CALbNGRS2JVd6x3uR6LHHo=V=Xjg25i2BTmMHCnnRMz8jbpPZfg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] gtk-theme-torturer: add
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=Wi9ZjsVPmywJchG+WOVzThZz9ESo5UOnpTWjDUY0fnQ=;
+	b=ZV/fpZw5auo5a0dxOtFuEtxbhV+HwdGOHHOTDpnbMjXjD6HE9GFAtA4ly6GdYYzuGt
+	Bczq8Aiqc1GA/PHfiE3EIkbyxllyyOTrSUXoCrIJiH+NLOQyPfI/MPURGgj0eSdpKv27
+	+CRA26k40+0B30KWCsPTqOrK+CnM8/7JCupToScyQWaCcq8hnLU3sCqk0yUgGQi1hnk/
+	y8SYFCW7z6ANj2B9nKbEmgNNoS/9xsyIzAVyYSfZ2w3qqo2o0LBdAGhy/S1wAM4Ps/cv
+	G6W4PEPLl3+M7T4t0OlYLAIdoY7VB5+irHUXY+wySDIYFlQmB3vAP5lRuOfPrEhwguxA
+	ZAZQ==
+X-Gm-Message-State: AG10YOTHeheh9P91s9f+eA1yekYtNxgcWZMq4luAZgXizCgZyMElidbvlSlYwKfwoKgE+A==
+X-Received: by 10.98.10.139 with SMTP id 11mr11344251pfk.87.1454879527545;
+	Sun, 07 Feb 2016 13:12:07 -0800 (PST)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
+	g81sm38382783pfj.1.2016.02.07.13.12.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 07 Feb 2016 13:12:06 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: otavio@ossystems.com.br, openembedded-devel@lists.openembedded.org,
+	akuster808@gmail.com
+Date: Sun,  7 Feb 2016 13:11:52 -0800
+Message-Id: <cover.1454879225.git.akuster@mvista.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [PATCH 0/7][fido] Pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,13 +53,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2016 23:03:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 07 Feb 2016 21:12:09 -0000
 
-On Fri, Feb 5, 2016 at 11:54 PM, Burton, Ross <ross.burton@intel.com> wrote:
-> meta-oe maintainer, I'd reject this patch and let the recipe disappear into
-> the ether.
-shared same thoughts...
+From: Armin Kuster <akuster@mvista.com>
 
-Andreas
+Please consider these few Security and build fixes for fido-next
+
+The following changes since commit 220b31d536cf15e68c11980e0c721a7050313db1:
+
+  ntp: upgrade 4.2.8p2 -> 4.2.8p3 (2015-10-26 21:43:09 +0100)
+
+are available in the git repository at:
+
+  git://github.com/akuster/meta-openembedded akuster/fido-next
+  https://github.com//tree/akuster/fido-next
+
+Armin Kuster (5):
+  squid: serveral missing security fixes
+  php: Security fix CVE-2015-7803
+  php: Security fix CVE-2015-7804
+  php: Security fix CVE-2016-1903
+  krb5: Fix warning.
+
+Qi.Chen@windriver.com (1):
+  ntp: fix rpath QA issue
+
+Wenzong Fan (1):
+  ntp: upgrade 4.2.8p3 -> 4.2.8p4
+
+ .../squid/files/CVE-2014-6270.patch                |  61 +++++
+ .../squid/files/CVE-2014-7141_CVE-2014-7142.patch  | 282 ++++++++++++++++++++
+ .../squid/files/CVE-2015-3455.patch                |  53 ++++
+ .../squid/files/CVE-2015-5400.patch                | 292 +++++++++++++++++++++
+ .../recipes-daemons/squid/squid_3.4.7.bb           |   4 +
+ .../ntp/{ntp_4.2.8p3.bb => ntp_4.2.8p4.bb}         |   5 +-
+ meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb   |   2 +-
+ .../recipes-devtools/php/php/CVE-2015-7803.patch   |  82 ++++++
+ .../recipes-devtools/php/php/CVE-2015-7804.patch   |  62 +++++
+ .../recipes-devtools/php/php/CVE-2016-1903.patch   |  28 ++
+ meta-oe/recipes-devtools/php/php_5.5.21.bb         |   3 +
+ 11 files changed, 871 insertions(+), 3 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2014-6270.patch
+ create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2014-7141_CVE-2014-7142.patch
+ create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2015-3455.patch
+ create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2015-5400.patch
+ rename meta-networking/recipes-support/ntp/{ntp_4.2.8p3.bb => ntp_4.2.8p4.bb} (97%)
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2015-7803.patch
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2015-7804.patch
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2016-1903.patch
+
+-- 
+2.3.5
+
 
