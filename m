@@ -1,49 +1,51 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
-	[209.85.220.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 596C3731FE
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F862731B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  7 Feb 2016 21:23:27 +0000 (UTC)
-Received: by mail-pa0-f43.google.com with SMTP id cy9so63147832pac.0
+	Sun,  7 Feb 2016 22:35:44 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id g62so111797562wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Feb 2016 13:23:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=O4INSpqT2Ppxqc6resvii88xCTmE22djaM139ETWIB4=;
-	b=HJ1fmYYxkmeXkzeCgLiD/z2re5RQYwHrGziTQt2F8XL4VMXLDNocCgSqL6UQ2ZLGVn
-	Yti1JrvMSTQNohH09HnEYdTe2Xox/nAYrEbbkC97OrA3R4ucid30nvxqYMQKybcnUkg+
-	D0AplCk7U1IZe1jqsCoCB8l36xJCbiDcy9Ni0/p53ejfznnScpBDibb5m4vF9yv0+IG4
-	uFtTY5fhh8U/gjQfP59L7x6h5p4cp7vd2+etBJ9eaB8B7c0hPymZgFztbtzojr4EbPZO
-	0pr9rN6rk6CP3wfRSfqqnKxIAG9oFQQ5EzUVJ96P0IP/Nk3hvypQJ8HcJ3sMg2m9/Wgu
-	OReA==
+	Sun, 07 Feb 2016 14:35:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=2j4ZIucY/e6YjFdFu5FNhhhtWGyqiy/uhuPyzSx8n6U=;
+	b=cxQbpvyqhlEDuWCIZW7FkcvblnDODmwMo3IDb8GfjOo4ccWaYdB1urQbFodZBKb4HO
+	rNsio4ejkIA1B/YnEG6OJG3LjsChWh4alYE2pP/86AUVWzUHnKZazc6cDRa2dBBCxurh
+	SDs+PKG7cnuf5RMcbcl3SnnLCWwZXyRtBoQRI86hsKvh7NS/Wsl3AnFmovl8XgJO5jbD
+	0rS4/F/nirHTSUhaNGRQ13IH9Rx+82kQJXT7TRztsiq76Shk9+wBHeYsJVpEsrRbuEuq
+	LVC+bFalVTLl2vBDXhY/Xu9knKtDFMUkYSzKPn+BG1DUX8Cu0EurjhQGnULLzyBQCGPK
+	xwnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-type:content-transfer-encoding;
-	bh=O4INSpqT2Ppxqc6resvii88xCTmE22djaM139ETWIB4=;
-	b=Hr0mRyjPhardqMx8E7e1sgz1e8ZJ2Kp3hONe9DVQfaPXZYs7t29kuMzYFSsNUwqYiZ
-	mat3rWmWVgxRXSY/7ErWUepYE5rIjJnM5gDu4LdK0vIn1s4bwOerBVAHEBoDctTX6ImB
-	ic3eii7Co+AukqmRwhR0IJ2g5r2v7MSlpZvAp7rIwJS3KfbVAzRFxhiF+ZBsHqC/q/KM
-	hOs59V2efTQHmZhvIxJX8aRTuAcWiDQQ4CJyA/pNVnBlEHO8Ksax7LQ1379apunUOYhp
-	KHibkQBgP8azdSgLrkdFQFrNW8YNbFmRGnehiPMpLr+pFy4Gd3RQeRpHEGO6JB8T5v0N
-	hnGw==
-X-Gm-Message-State: AG10YOSaZaoBY4YSxrLCX8NO/sRBSvp9Jz5cebort+wptFi4N6iKSBnRlillp6gJ08r22w==
-X-Received: by 10.67.8.38 with SMTP id dh6mr24610927pad.1.1454880208057;
-	Sun, 07 Feb 2016 13:23:28 -0800 (PST)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	mj1sm38367304pab.34.2016.02.07.13.23.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 07 Feb 2016 13:23:26 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	akuster808@gmail.com
-Date: Sun,  7 Feb 2016 13:22:47 -0800
-Message-Id: <cover.1454879728.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-type:content-transfer-encoding;
+	bh=2j4ZIucY/e6YjFdFu5FNhhhtWGyqiy/uhuPyzSx8n6U=;
+	b=M7Jez6sIdcb9KjartFmL688Dr8nwc/A16jDfCgQKJUPQ9gjtNayoPsVA4dw6RMAsf7
+	Ttp0YumDe7Z3moy0EgatV+zaCamWXXk5HjOsrNhprnVttesfmVVv+CJXCGZpGVLK5zSO
+	qPCy6rTo7r72+ebMHzBbR/uvbbDkuEuG6zNAgA6sTCoWHMK7MfvIMuClpowV+Xev8NGk
+	7aLQriMRQ3JAfh41IHkITMRMP5FNDixOuG7fCfBFSA8/H5Jh2RwMjEM4V9Tv80w2o0jQ
+	UJ27YBNhDBrSdTyUVvIYzuuGyysBJvSFzzhPGVxKXUj422SEwINf5njIzic1MTPvO+7E
+	d8pw==
+X-Gm-Message-State: AG10YOS1D7he5rahIRktrAcRB6nM/EYun6WlzHYQ0XB2Ge6oCpuUXNfA45B0u+4e2PCeLg==
+X-Received: by 10.28.176.131 with SMTP id z125mr29145588wme.5.1454884544626;
+	Sun, 07 Feb 2016 14:35:44 -0800 (PST)
+Received: from localhost.localdomain (p5B0A33CD.dip0.t-ipconnect.de.
+	[91.10.51.205]) by smtp.googlemail.com with ESMTPSA id
+	az10sm26865942wjc.28.2016.02.07.14.35.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 07 Feb 2016 14:35:44 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  7 Feb 2016 23:35:29 +0100
+Message-Id: <1454884529-23770-2-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.0
+In-Reply-To: <1454884529-23770-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1454884529-23770-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 00/27][jethro V2] Pull request
+Subject: [PATCH 2/2] abiword: make build deterministic for meta-office [1] in layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,126 +58,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Feb 2016 21:23:28 -0000
+X-List-Received-Date: Sun, 07 Feb 2016 22:35:44 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-please consider these changes for meta-openembedded jethro-next
+The conditional DEPENDS was added for opendocument-plugin. Problem solving this
+by PACKAGECONFIG is that --enable-plugins enables all plugins. Changing that to
+--enable-plugins=<list of plugins> is a list which needs maintenance for future
+versions of abiword. The change affects users adding meta-office in their
+layers only. These tend to building libreoffice which DEPENDS on the additional
+DEPENDS set her anyway - so there is not much additional build for these users.
 
-The following changes since commit 7bc138a365e20653ddfb9229561e3e9e50b89ee8:
+[1] https://github.com/schnitzeltony/meta-office
 
-  cifs-utils: add PACKAGECONFIG for cifsidmap (2016-01-14 11:22:38 +0100)
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-are available in the git repository at:
-
-  git://github.com/akuster/meta-openembedded akuster/jethro-next
-  https://github.com//tree/akuster/jethro-next
-
-Andreas Müller (1):
-  thunar: remove udisks from RRECOMMENDS
-
-Armin Kuster (5):
-  networkmanager: fix QA warning
-  qwt: Fix host-user-contaminated
-  php: Security fix CVE-2015-7803
-  php: Security fix CVE-2015-7804
-  php: Security fix CVE-2016-1903
-
-Christopher Larson (1):
-  lowpan-tools: add missing flex/bison deps
-
-Hongxu Jia (1):
-  postfix: fix clean broken issue
-
-Jackie Huang (3):
-  iscsitarget: split the kernel module into separate package
-  iscsitarget: skip the arch test for kernel modules
-  ncftp: fix build failures with ccdv
-
-Jens Rehsack (1):
-  waf-samba: enable parallel builds
-
-Joe Slater (1):
-  geoip: add ptest functionality
-
-Kai Kang (1):
-  xl2tpd: fix warnings with gcc 5
-
-Maciej Borzecki (1):
-  mozjs: fix linking issues on i586
-
-Mark Asselstine (1):
-  ctdb: Fix rootfs creation errors
-
-Martin Jansa (2):
-  ctdb: add dependency on libldb
-  terminus-font: update perl-native-runtime dependency
-
-Qi.Chen@windriver.com (1):
-  quagga: fix segment fault when stopping ospf6d
-
-Robert Yang (4):
-  nbd: use BPN in Files
-  cim-schema-exper: fix host-user-contaminated
-  ctdb: add PACKAGECONFIG for libtdb
-  netkit-ftp: fixed invalid symlink
-
-Ruslan Bilovol (1):
-  wireshark: update SRC_URI link to sources
-
-Wenzong Fan (1):
-  samba: add PACKAGECONFIG for valgrind
-
-Yi Zhao (2):
-  logwatch: fix host-user-contaminated
-  orrery: fix host-user-contaminated
-
- .../21-add-config-option-without-valgrind.patch    |  63 ++++++++++
- .../recipes-connectivity/samba/samba_4.1.12.bb     |   2 +
- .../ncftp-configure-use-BUILD_CC-for-ccdv.patch    |  32 +++++
- .../recipes-daemons/ncftp/ncftp_3.2.5.bb           |   7 +-
- .../recipes-daemons/postfix/postfix.inc            |   2 +
- .../iscsitarget/iscsitarget_1.4.20.3+svn502.bb     |  13 +-
- .../recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb   |   2 +-
- ...heck-ospf6-before-using-it-in-ospf6_clean.patch |  28 +++++
- .../recipes-protocols/quagga/quagga_0.99.24.1.bb   |   1 +
- .../recipes-protocols/xl2tpd/xl2tpd.inc            |   4 +-
- .../fix-inline-functions-errors-with-gcc-5.x.patch | 134 +++++++++++++++++++++
- .../cim-schema/cim-schema-exper_2.39.0.bb          |   1 +
- .../cim-schema/cim-schema-final_2.40.0.bb          |   1 +
- ...rvice-ensure-the-PID-directory-is-created.patch |  25 ++++
- meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |  11 +-
- .../recipes-support/geoip/files/run-ptest          |  11 ++
- .../recipes-support/geoip/geoip_1.6.6.bb           |  38 ++++++
- .../lowpan-tools/lowpan-tools_git.bb               |   2 +-
- meta-networking/recipes-support/nbd/nbd_3.11.bb    |   6 +-
- .../recipes-support/wireshark/wireshark_1.12.8.bb  |   2 +-
- meta-oe/classes/waf-samba.bbclass                  |   4 +
- .../networkmanager/networkmanager_1.0.4.bb         |   1 +
- .../php/php-5.6.12/CVE-2015-7803.patch             |  85 +++++++++++++
- .../php/php-5.6.12/CVE-2015-7804.patch             |  64 ++++++++++
- .../php/php-5.6.12/CVE-2016-1903.patch             |  55 +++++++++
- meta-oe/recipes-devtools/php/php_5.6.12.bb         |   6 +-
- .../recipes-extended/logwatch/logwatch_7.4.1.bb    |   1 +
- ...010-fix-cross-compilation-on-i586-targets.patch |  46 +++++++
- meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     |   1 +
- .../terminus-font/terminus-font_4.38.bb            |   2 +-
- meta-oe/recipes-navigation/orrery/orrery_2.7.bb    |   1 +
- meta-oe/recipes-qt/qwt/qwt.inc                     |   1 +
- meta-xfce/recipes-xfce/thunar/thunar_1.6.10.bb     |   2 +-
- 33 files changed, 632 insertions(+), 22 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12/21-add-config-option-without-valgrind.patch
- create mode 100644 meta-networking/recipes-daemons/ncftp/ncftp/ncftp-configure-use-BUILD_CC-for-ccdv.patch
- create mode 100644 meta-networking/recipes-protocols/quagga/files/0001-ospf6d-check-ospf6-before-using-it-in-ospf6_clean.patch
- create mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd/fix-inline-functions-errors-with-gcc-5.x.patch
- create mode 100644 meta-networking/recipes-support/ctdb/ctdb/service-ensure-the-PID-directory-is-created.patch
- create mode 100644 meta-networking/recipes-support/geoip/files/run-ptest
- create mode 100644 meta-oe/recipes-devtools/php/php-5.6.12/CVE-2015-7803.patch
- create mode 100644 meta-oe/recipes-devtools/php/php-5.6.12/CVE-2015-7804.patch
- create mode 100644 meta-oe/recipes-devtools/php/php-5.6.12/CVE-2016-1903.patch
- create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0010-fix-cross-compilation-on-i586-targets.patch
-
+diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb b/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
+index d4c8c56..962a56c 100644
+--- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
++++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
+@@ -4,7 +4,8 @@ SECTION = "x11/office"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
+ DEPENDS     = "perl-native wv libglade libfribidi jpeg libpng \
+-               librsvg libwmf-native gtkmathview asio gtk+ evolution-data-server"
++               librsvg libwmf-native gtkmathview asio gtk+ evolution-data-server \
++               ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'redland rasqal', '', d)}"
+ RDEPENDS_${PN}    = "glibc-gconv-ibm850 glibc-gconv-cp1252 \
+                glibc-gconv-iso8859-15 glibc-gconv-iso8859-1"
+ RCONFLICTS_${PN} = "${PN}-embedded"
+@@ -24,7 +25,11 @@ SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]
+ 
+ inherit autotools-brokensep pkgconfig
+ 
+-PACKAGECONFIG ??= "collab-backend-xmpp collab-backend-tcp"
++PACKAGECONFIG ??= " \
++    collab-backend-xmpp collab-backend-tcp \
++    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'libical', '', d)} \
++"
++PACKAGECONFIG[libical] = "--with-libical,--without-libical,libical raptor2"
+ PACKAGECONFIG[spell] = "--enable-spell,--disable-spell,enchant"
+ PACKAGECONFIG[collab-backend-xmpp] = "--enable-collab-backend-xmpp,--disable-collab-backend-xmpp,libgsf libxml2 loudmouth"
+ PACKAGECONFIG[collab-backend-tcp] = "--enable-collab-backend-tcp,--disable-collab-backend-tcp,libgsf libxml2"
 -- 
-2.3.5
+2.5.0
 
 
