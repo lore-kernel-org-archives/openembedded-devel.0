@@ -1,51 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f65.google.com (mail-pa0-f65.google.com
-	[209.85.220.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 755337666E
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id F1C6D77040
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  7 Feb 2016 21:12:17 +0000 (UTC)
-Received: by mail-pa0-f65.google.com with SMTP id y7so109655paa.0
+	Sun,  7 Feb 2016 21:12:18 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id e127so334233pfe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Feb 2016 13:12:18 -0800 (PST)
+	Sun, 07 Feb 2016 13:12:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=mc/hA6YC6BwxdMAh39NpKawSitnHf1Fx61pyZEAoPk0=;
-	b=Ygcd/VSAn4ICv+PmvwohKVQl0rBV9fRZZmuJm+1N3irRDlfTxJKl31IbDnCqxRpbhb
-	6RwyPCq7FMtlFyMflzJED6YOUV7tlI0Kb3/60p7aT8SO7QdBhSPzk48eF5RS1VOxtf42
-	KLI5wSBZyXkaWodxI+DbzV0eugEKYPIyluww1hTduGFK4EbWj1mPKeEnAsOAlHIsvZR/
-	xYlS93NCZN6nIku2ELGO/1rna+UVf1/RH/vc6JYMBnsOW+WfMC9KCUtPsEY4ueuJZ+KS
-	HM2MZrtrzQoU6WfxEK4caa7Tqo+O1El+tSqJ8s7U1PWgWupBK6E4QWWizNmZq3efh97Q
-	WGOQ==
+	:references; bh=rpAOJ1AtODXuSiP1I0zRKUwDvqoRR9dJwatq9QKQopo=;
+	b=aLCQK4QZjnk5D3nvxert2AIDuSpREoyHf2qpBskfm3HNuVGTjaxG3+PcgkywnCYgal
+	x+iiU3LaYUNfaehapZAdDn7t3v93GnJ1cAQD5PvR0QAp1cJXJkQfletuuM/4TERKuMmO
+	fNMFEzoMDNuS3tD4P7zBEkjs9S1RRbEo7+aszvJZyQdFHL62Et6kOQb4f2MEuK4cAeZ8
+	IKy6jk9buPBexJj21MVLMO4y09KjndW1NS5fiDdlsHT8Bwx1J5OTyZJ4+eE0TtzfWs7F
+	GmSaBui+5dhN6CLjjgOg8T4HGeoUqMppeY61IDVW1L8QohcG5zNEbPq6YrHkGWJESWNA
+	AC0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:in-reply-to:references;
-	bh=mc/hA6YC6BwxdMAh39NpKawSitnHf1Fx61pyZEAoPk0=;
-	b=Ni94EmmSIhQicJ6gC9On+QU/22yy/6U6r0QaTtpQO6F6kz2GHBCKWBlWuGJ4e0o3iV
-	46PKIXZoU+QxFNfGwsM8ca2zb9fP+BDFJAGfE4zUwdKfqohEtkUIuK4FeirMq3fogtjS
-	QK9HIOSikBfSUHeJBZrMDC37zldOCTF4blhSEIWLvqsBNaGyTZ2PwF5O1dAfBBeWRFSj
-	Lf9lBp2KAfMArvgEedxd6G7CvTQrMLfnA/oOXr+7cNGZNqwkmgIPhzXJCQ/C7ZHq5hbO
-	Q7rBGlvPrIvAHHQEJUpDIKCogJPCdIPkMIPIy5sKj/g4OnBPIZlSBSw5k1/eOv9f3fJ7
-	Fkzw==
-X-Gm-Message-State: AG10YORqXKdX8Q8r0jaJ4EGLhoFLkCHrMMqhIAiKLE7jncUu0yTcuw05/fZtmEj9yYbH/Q==
-X-Received: by 10.66.187.77 with SMTP id fq13mr19939678pac.25.1454879538139;
-	Sun, 07 Feb 2016 13:12:18 -0800 (PST)
+	bh=rpAOJ1AtODXuSiP1I0zRKUwDvqoRR9dJwatq9QKQopo=;
+	b=B549ylKUeV/8KHO9IseUjGddPkSdul7ObfDw+wOyMqtiSsE7DSh8nJesL1wMNHFfPV
+	BnLFxibRjubQNn3KbmnFEuztpG/knKxQX9ESYIw+ZuHVVnzjGQkHJF4+F75ZLf6vtEev
+	0E/F+DLS3C7qbScePJEDV0nBxXc7jXisbKS6h3RszU7+YJM9fex1LiUpe0eC2qeoMtU8
+	rM9BAiheNjnoIUywfY9Mcg7xF8QbXnb9A++WWjNybbVGohkwtqIZg+X610L8ixNQeWEA
+	IKxe0af90FYd/OA2X/Aahh6Fuek+kHlkZKpvCVl/L42h9DBSYPAuksQl0DPp+VxXwgFl
+	cjLA==
+X-Gm-Message-State: AG10YOSaHKxi8YVeT4x2Ib2n1DQ6vD6NmYXHffghOf45gvr+bTls5cF/k0kVl6JwI+1YEA==
+X-Received: by 10.98.40.5 with SMTP id o5mr37743980pfo.76.1454879540047;
+	Sun, 07 Feb 2016 13:12:20 -0800 (PST)
 Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
 	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	g81sm38382783pfj.1.2016.02.07.13.12.16
+	g81sm38382783pfj.1.2016.02.07.13.12.18
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 07 Feb 2016 13:12:17 -0800 (PST)
+	Sun, 07 Feb 2016 13:12:19 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: otavio@ossystems.com.br, openembedded-devel@lists.openembedded.org,
 	akuster808@gmail.com
-Date: Sun,  7 Feb 2016 13:11:57 -0800
-Message-Id: <0e1e5f42a8cac06bfcb10a1e4c37bbc35ba30891.1454879225.git.akuster@mvista.com>
+Date: Sun,  7 Feb 2016 13:11:58 -0800
+Message-Id: <8207e090a51141f0fcf30a76c984bb67b5d97127.1454879225.git.akuster@mvista.com>
 X-Mailer: git-send-email 2.3.5
 In-Reply-To: <cover.1454879225.git.akuster@mvista.com>
 References: <cover.1454879225.git.akuster@mvista.com>
 In-Reply-To: <cover.1454879225.git.akuster@mvista.com>
 References: <cover.1454879225.git.akuster@mvista.com>
-Subject: [PATCH 5/7] php: Security fix CVE-2015-7804
+Subject: [PATCH 6/7] php: Security fix CVE-2016-1903
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,96 +58,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Feb 2016 21:12:17 -0000
+X-List-Received-Date: Sun, 07 Feb 2016 21:12:19 -0000
 
 From: Armin Kuster <akuster@mvista.com>
 
-CVE-2015-7804 php: uninitialized pointer in phar_make_dirstream()
+CVE-2016-1903 php: Out-of-bounds memory read via gdImageRotateInterpolated
 
 Signed-off-by: Armin Kuster <akuster@mvista.com>
 ---
- .../recipes-devtools/php/php/CVE-2015-7804.patch   | 62 ++++++++++++++++++++++
+ .../recipes-devtools/php/php/CVE-2016-1903.patch   | 28 ++++++++++++++++++++++
  meta-oe/recipes-devtools/php/php_5.5.21.bb         |  1 +
- 2 files changed, 63 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2015-7804.patch
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2016-1903.patch
 
-diff --git a/meta-oe/recipes-devtools/php/php/CVE-2015-7804.patch b/meta-oe/recipes-devtools/php/php/CVE-2015-7804.patch
+diff --git a/meta-oe/recipes-devtools/php/php/CVE-2016-1903.patch b/meta-oe/recipes-devtools/php/php/CVE-2016-1903.patch
 new file mode 100644
-index 0000000..ad211a3
+index 0000000..46c9a24
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/CVE-2015-7804.patch
-@@ -0,0 +1,62 @@
-+From e78ac461dbefb7c4a3e9fde78d50fbc56b7b0183 Mon Sep 17 00:00:00 2001
-+From: Stanislav Malyshev <stas@php.net>
-+Date: Mon, 28 Sep 2015 17:12:35 -0700
-+Subject: [PATCH] FIx bug #70433 - Uninitialized pointer in phar_make_dirstream
-+ when zip entry filename is "/"
++++ b/meta-oe/recipes-devtools/php/php/CVE-2016-1903.patch
+@@ -0,0 +1,28 @@
++From aa8d3a8cc612ba87c0497275f58a2317a90fb1c4 Mon Sep 17 00:00:00 2001
++From: Remi Collet <remi@php.net>
++Date: Tue, 12 Jan 2016 13:52:27 +0100
++Subject: [PATCH] fix the fix for bug #70976 (imagerotate)
 +
-+Upstream-status: Backport
++Upstream-Status: Backport
++https://github.com/php/php-src/commit/aa8d3a8cc612ba87c0497275f58a2317a90fb1c4
 +
-+https://git.php.net/?p=php-src.git;a=patch;h=e78ac461dbefb7c4a3e9fde78d50fbc56b7b0183
-+
-+CVE: CVE-2015-7804
++CVE: CVE-2016-1903
 +Signed-off-by: Armin Kuster <akuster@mvista.com>
 +
 +---
-+ ext/phar/dirstream.c         |   2 +-
-+ ext/phar/tests/bug70433.phpt |  23 +++++++++++++++++++++++
-+ ext/phar/tests/bug70433.zip  | Bin 0 -> 264 bytes
-+ 3 files changed, 24 insertions(+), 1 deletion(-)
-+ create mode 100644 ext/phar/tests/bug70433.phpt
-+ create mode 100755 ext/phar/tests/bug70433.zip
++ ext/gd/libgd/gd_interpolation.c | 4 ++--
++ 2 files changed, 4 insertions(+), 4 deletions(-)
 +
-+Index: php-5.5.21/ext/phar/dirstream.c
++Index: php-5.5.21/ext/gd/libgd/gd_interpolation.c
 +===================================================================
-+--- php-5.5.21.orig/ext/phar/dirstream.c
-++++ php-5.5.21/ext/phar/dirstream.c
-+@@ -207,7 +207,7 @@ static php_stream *phar_make_dirstream(c
-+ 	zend_hash_internal_pointer_reset(manifest);
-+ 
-+ 	while (FAILURE != zend_hash_has_more_elements(manifest)) {
-+-		if (HASH_KEY_NON_EXISTENT == zend_hash_get_current_key_ex(manifest, &key, &keylen, &unused, 0, NULL)) {
-++		if (HASH_KEY_IS_STRING != zend_hash_get_current_key_ex(manifest, &key, &keylen, &unused, 0, NULL)) {
-+ 			break;
++--- php-5.5.21.orig/ext/gd/libgd/gd_interpolation.c
+++++ php-5.5.21/ext/gd/libgd/gd_interpolation.c
++@@ -2162,7 +2162,7 @@ gdImagePtr gdImageRotateInterpolated(con
++ 	   images can be done at a later point.
++ 	*/
++ 	if (src->trueColor == 0) {
++-		if (bgcolor >= 0) {
+++		if (bgcolor < gdMaxColors) {
++ 			bgcolor =  gdTrueColorAlpha(src->red[bgcolor], src->green[bgcolor], src->blue[bgcolor], src->alpha[bgcolor]);
 + 		}
-+ 
-+Index: php-5.5.21/ext/phar/tests/bug70433.phpt
-+===================================================================
-+--- /dev/null
-++++ php-5.5.21/ext/phar/tests/bug70433.phpt
-+@@ -0,0 +1,23 @@
-++--TEST--
-++Phar - bug #70433 - Uninitialized pointer in phar_make_dirstream when zip entry filename is "/"
-++--SKIPIF--
-++<?php if (!extension_loaded("phar")) die("skip"); ?>
-++--FILE--
-++<?php
-++$phar = new PharData(__DIR__."/bug70433.zip");
-++var_dump($phar);
-++$meta = $phar->getMetadata();
-++var_dump($meta);
-++?>
-++DONE
-++--EXPECTF--
-++object(PharData)#1 (3) {
-++  ["pathName":"SplFileInfo":private]=>
-++  string(0) ""
-++  ["glob":"DirectoryIterator":private]=>
-++  bool(false)
-++  ["subPathName":"RecursiveDirectoryIterator":private]=>
-++  string(0) ""
-++}
-++NULL
-++DONE
++ 		gdImagePaletteToTrueColor(src);
 diff --git a/meta-oe/recipes-devtools/php/php_5.5.21.bb b/meta-oe/recipes-devtools/php/php_5.5.21.bb
-index 3582b45..ed286d6 100644
+index ed286d6..6bdd1c5 100644
 --- a/meta-oe/recipes-devtools/php/php_5.5.21.bb
 +++ b/meta-oe/recipes-devtools/php/php_5.5.21.bb
-@@ -15,6 +15,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
-            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
+@@ -16,6 +16,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
             file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
             file://CVE-2015-7803.patch \
-+           file://CVE-2015-7804.patch \
+            file://CVE-2015-7804.patch \
++           file://CVE-2016-1903.patch \
            "
  
  SRC_URI_append_class-target += " \
