@@ -1,18 +1,20 @@
 Return-Path: <dv@pseudoterminal.org>
 Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 18D326FF01
+	by mail.openembedded.org (Postfix) with ESMTP id 4F0D36FF01
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Feb 2016 14:05:29 +0000 (UTC)
+	Mon,  8 Feb 2016 14:07:58 +0000 (UTC)
 Received: from localhost.localdomain (chello062178118086.5.14.vie.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id BE78123261
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 3D53E23261
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Feb 2016 15:05:29 +0100 (CET)
+	Mon,  8 Feb 2016 15:07:59 +0100 (CET)
 From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Feb 2016 15:05:22 +0100
-Message-Id: <1454940322-6151-1-git-send-email-dv@pseudoterminal.org>
+Date: Mon,  8 Feb 2016 15:07:51 +0100
+Message-Id: <1454940471-6218-1-git-send-email-dv@pseudoterminal.org>
 X-Mailer: git-send-email 2.5.0
-Subject: [meta-oe][PATCH] libopus: upgrade to version 1.1.2
+In-Reply-To: <1454940322-6151-1-git-send-email-dv@pseudoterminal.org>
+References: <1454940322-6151-1-git-send-email-dv@pseudoterminal.org>
+Subject: [meta-oe][PATCH v2] libopus: upgrade to version 1.1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,19 +27,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2016 14:05:31 -0000
+X-List-Received-Date: Mon, 08 Feb 2016 14:07:59 -0000
 
 This release includes support for Ne10 to improve performance on ARM NEON
 capable CPUs. Also, packageconfigs are introduced for controlling whether
 Opus uses fixed or floating point processing and whether or not fast
 floating point approximations are enabled.
 
+libopus-fpu.inc wasn't doing much, and was fully integrated into the
+main recipe.
+
 Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---
+ meta-oe/recipes-multimedia/libopus/libopus-fpu.inc |  6 ------
  .../libopus/{libopus_1.1.bb => libopus_1.1.2.bb}   | 24 ++++++++++++++++++----
- 1 file changed, 20 insertions(+), 4 deletions(-)
+ 2 files changed, 20 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/libopus/libopus-fpu.inc
  rename meta-oe/recipes-multimedia/libopus/{libopus_1.1.bb => libopus_1.1.2.bb} (65%)
 
+diff --git a/meta-oe/recipes-multimedia/libopus/libopus-fpu.inc b/meta-oe/recipes-multimedia/libopus/libopus-fpu.inc
+deleted file mode 100644
+index 8464664..0000000
+--- a/meta-oe/recipes-multimedia/libopus/libopus-fpu.inc
++++ /dev/null
+@@ -1,6 +0,0 @@
+-
+-def get_libopus_fpu_setting(bb, d):
+-    if d.getVar('TARGET_FPU', True) in [ 'soft' ]:
+-        return "--enable-fixed-point"
+-    return ""
+-
 diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.1.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.1.2.bb
 similarity index 65%
 rename from meta-oe/recipes-multimedia/libopus/libopus_1.1.bb
