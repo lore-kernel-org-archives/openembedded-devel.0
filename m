@@ -1,44 +1,43 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 45FD560017
+Return-Path: <ankur.tyagi85@gmail.com>
+Received: from mail-vk0-f42.google.com (mail-vk0-f42.google.com
+	[209.85.213.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 8526E73179
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Feb 2016 22:00:27 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id p63so133681970wmp.1
+	Tue,  9 Feb 2016 00:16:54 +0000 (UTC)
+Received: by mail-vk0-f42.google.com with SMTP id c3so60497931vkb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Feb 2016 14:00:28 -0800 (PST)
+	Mon, 08 Feb 2016 16:16:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=xFqKqJPrOSWZuJESe/BVELscVXFyz8NWDniyQzr5OAA=;
-	b=bp2D704mj7XeaTVEYdojtPWAooGiKQbURUBpbOhInxPoSp3cPEV2nnH9sthuFgBLfW
-	xbZNa/Lu6mfymQdul+VL9BifaXB9pEnHk2cW6wrFdV1q1Pzx54m9Stwr5DgLmd+cmZtI
-	1IrUQiUGmn5iVzvNSzHSdgxyXT1nQX5ASl3hq4m8Q1wzHebeKgJhvRkrf6tOsquscawN
-	KnoMp9uQ/ZueWdIUDYGEP8qBJug7CCt1O9XXY/dVtJnP/GPcIwySSEYUaDwflFOp7cXc
-	1pry8TpKovqU6s7lWHbsG5uBy7wM7rmCnmJM2vqyLZnD0YEYa95jXtfBrjxhh6NzS8W9
-	nlVg==
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=1hiOBro0R/Bsht0AH1RfjsEU6MXeWimBob0RpLSdM7g=;
+	b=UlpZBQUOsezE7em0yKJIbbmmbSVY7MuuRcm17LFUJinHNW8sp+CtyISxh5H3bjFcjq
+	60z4p2i9DikCmH1AwtM46wQIN+xu3sZlFAlJlRMEvi+NpYN42KsOGxolxP4JKWtRC8Z0
+	fgbel30aCbQMlFRCQz7OifN5L1CL5P46G7f3N/aEY3ib0sGDcsgBKNgBh35jq+c5JI96
+	j/si00RO1jyLp+3TYxGJj1vexBVpWX3+Mzm/JWQ51AnACFNWRj2R+wEatInBFQ+JA69U
+	y+gi9NPRbL6IGgtysz9my9AFPjDrXDRrtaJHJJ7Dgug5JrEdgd5IbztZT+pSywEhiUpi
+	wDnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xFqKqJPrOSWZuJESe/BVELscVXFyz8NWDniyQzr5OAA=;
-	b=ZzXSt6ETaJbQoaa3CYnpUCH0NeWmfZ44wLe1A1xke+nceiiECL8MFK7m7Xu6sKQsOQ
-	L1KTU/owcnfGv76EBWy7xmebeSD+p1OHq4ElRkd4g43Stxeu9pBq2htq97ZHLE3Qdmu4
-	Ht7w9NDwBFW85pnE8f1wH+wsm7P8QCVcKxEQPvAbwxhnXdnakNJAV3nl51772WI4BDVQ
-	/Lfb8pBZI5Gpu7W0UiR3gBFhuZY9aHe6P+O0peMfn2tJ9Ujj0wGe43nyHWMtypdODxRK
-	LLga/huljjJS8CbB9FP1rRkI0drH5rQKW8PFmrLXKp9YfBOuKjH3JrPAP3IVeLwniHEU
-	8S5A==
-X-Gm-Message-State: AG10YORX5Y2uFXLdILfnbHGlJqc8Wzv9NISbPhiDUdv9CvAobekVYAvRNA1NX6hzMylxOA==
-X-Received: by 10.194.78.148 with SMTP id b20mr5881076wjx.71.1454968827728;
-	Mon, 08 Feb 2016 14:00:27 -0800 (PST)
-Received: from ThinkPad-T520.homenet.telecomitalia.it ([95.236.250.222])
-	by smtp.gmail.com with ESMTPSA id
-	n131sm14441380wmf.9.2016.02.08.14.00.26
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 08 Feb 2016 14:00:27 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+	:content-type;
+	bh=1hiOBro0R/Bsht0AH1RfjsEU6MXeWimBob0RpLSdM7g=;
+	b=erM6tpdQVaaTjU2SJIUb29KfQvnUMp2hYMzN9Prq66joNkNLS5DMdZb5lq8GKpWYd/
+	LTB6eYaMKArnCBfF80MoDazez2I14vVseKdKtJPsu8q9+Jnv1ZW4jmjAuqXD4NSymEwe
+	S1XAanu6NyhnqCZwQqjsL6sCGBVuvkJ5lkkFFqTbCHnFJmuxLXyuelKAzVBQPTaQUxhQ
+	QC5OLH8GstzeSA7uKmE0Ek79HRW+4Bu8X7FDWXS4l1Z4QDdiYN5wv1CHDu6V3i/jOhpc
+	/4ojYl/B+BSSpcSwKSDFiv7rGQLH3lGVCfHQJHanSCKo03GvPojYC1eKUVzJ6/Uew1sN
+	VMcg==
+X-Gm-Message-State: AG10YORpDyaeytx1t9zmgTmbwC2UHSNJ8VAL3jPpesdM1d2IC107TkJ99N+kvd//16hOJhP1cK0egtvDrMx6jQ==
+X-Received: by 10.31.131.199 with SMTP id f190mr22551736vkd.90.1454977014843; 
+	Mon, 08 Feb 2016 16:16:54 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.31.146.65 with HTTP; Mon, 8 Feb 2016 16:16:35 -0800 (PST)
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Tue, 9 Feb 2016 13:16:35 +1300
+Message-ID: <CADySD0HQZ-u3X4d5Jei6YKxQzocc5bPwjn2Huo+WxCQOSkUDtg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Feb 2016 23:00:04 +0100
-Message-Id: <1454968804-15055-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-initramfs][PATCH] linux-yocto-tiny-kexecboot: upgrade to 4.4
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [PATCH] Fix bluetooth.h compilation error with strict C
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,19 +50,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2016 22:00:30 -0000
+X-List-Received-Date: Tue, 09 Feb 2016 00:16:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Hi,
+
+This patch fixes bluetooth.h strict C compilation error when building
+bluez4 in fido branch.
+
+thanks
+Ankur
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi@gallagher.com>
 ---
- ...inux-yocto-tiny-kexecboot_4.1.bb => linux-yocto-tiny-kexecboot_4.4.bb} | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-initramfs/recipes-kernel/linux/{linux-yocto-tiny-kexecboot_4.1.bb => linux-yocto-tiny-kexecboot_4.4.bb} (100%)
+ .../strict-C-compilation-error-fix.patch           | 42
+++++++++++++++++++++++
+ meta/recipes-connectivity/bluez/bluez4_4.101.bb    |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644
+meta/recipes-connectivity/bluez/bluez4-4.101/strict-C-compilation-error-fix.patch
 
-diff --git a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_4.1.bb b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_4.4.bb
-similarity index 100%
-rename from meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_4.1.bb
-rename to meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_4.4.bb
--- 
-1.9.1
+diff --git
+a/meta/recipes-connectivity/bluez/bluez4-4.101/strict-C-compilation-error-fix.patch
+b/meta/recipes-connectivity/bluez/bluez4-4.101/strict-C-compilation-error-fix.patch
+new file mode 100644
+index 0000000..e8109a0
+--- /dev/null
++++
+b/meta/recipes-connectivity/bluez/bluez4-4.101/strict-C-compilation-error-fix.patch
+@@ -0,0 +1,42 @@
++From d7fab1e161c2344875b1b0a2363f1f62efdd6cd4 Mon Sep 17 00:00:00 2001
++From: Ankur Tyagi <ankur.tyagi@gallagher.com>
++Date: Thu, 14 Jan 2016 18:12:23 +1300
++Subject: [PATCH 1/1] strict C compilation error fix
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi@gallagher.com>
++Upstream-Status: Backported
++---
++ lib/bluetooth.h | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/lib/bluetooth.h b/lib/bluetooth.h
++index 0fc4508..449431d 100644
++--- a/lib/bluetooth.h
+++++ b/lib/bluetooth.h
++@@ -138,18 +138,18 @@ enum {
++
++ /* Bluetooth unaligned access */
++ #define bt_get_unaligned(ptr) \
++-({ \
+++__extension__ ({ \
++ struct __attribute__((packed)) { \
++- typeof(*(ptr)) __v; \
++- } *__p = (typeof(__p)) (ptr); \
+++ __typeof__(*(ptr)) __v; \
+++ } *__p = (__typeof__(__p)) (ptr); \
++ __p->__v; \
++ })
++
++ #define bt_put_unaligned(val, ptr) \
++ do { \
++ struct __attribute__((packed)) { \
++- typeof(*(ptr)) __v; \
++- } *__p = (typeof(__p)) (ptr); \
+++ __typeof__(*(ptr)) __v; \
+++ } *__p = (__typeof__(__p)) (ptr); \
++ __p->__v = (val); \
++ } while(0)
++
++--
++1.9.1
++
+diff --git a/meta/recipes-connectivity/bluez/bluez4_4.101.bb
+b/meta/recipes-connectivity/bluez/bluez4_4.101.bb
+index ccd230d..7944141 100644
+--- a/meta/recipes-connectivity/bluez/bluez4_4.101.bb
++++ b/meta/recipes-connectivity/bluez/bluez4_4.101.bb
+@@ -9,6 +9,7 @@ SRC_URI += "file://bluetooth.conf \
+             file://network-fix-network-Connect-method-parameters.patch \
+             file://install-test-script.patch \
 
+ file://use-legacy-pygobject-instead-ofgobject-introspection.patch \
++            file://strict-C-compilation-error-fix.patch
+ "
+
+ SRC_URI[md5sum] = "fb42cb7038c380eb0e2fa208987c96ad"
+--
 
