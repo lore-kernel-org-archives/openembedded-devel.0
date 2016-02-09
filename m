@@ -1,27 +1,52 @@
-Return-Path: <mcrowe@brightsign.biz>
-Received: from relay.appriver.com (relay.appriver.com [207.97.230.34])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D6CB731EC
+Return-Path: <sebastientaylor@gmail.com>
+Received: from mail-pf0-f182.google.com (mail-pf0-f182.google.com
+	[209.85.192.182])
+	by mail.openembedded.org (Postfix) with ESMTP id EF72A6FFE8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Feb 2016 15:20:46 +0000 (UTC)
-Received: from [82.1.213.155] (HELO elite.brightsign6)
-	by relay.appriver.com (CommuniGate Pro SMTP 6.1.2)
-	with ESMTP id 686380856; Tue, 09 Feb 2016 10:20:47 -0500
-Received: from chuckie.brightsign ([172.30.1.25] helo=chuckie)
-	by elite.brightsign6 with esmtp (Exim 4.84)
-	(envelope-from <mcrowe@brightsign.biz>)
-	id 1aTA5t-0009KU-DI; Tue, 09 Feb 2016 15:20:45 +0000
-Received: from mac by chuckie with local (Exim 4.84)
-	(envelope-from <mcrowe@brightsign.biz>)
-	id 1aTA5t-00014x-CG; Tue, 09 Feb 2016 15:20:45 +0000
-From: Mike Crowe <mac@mcrowe.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Feb 2016 15:20:30 +0000
-Message-Id: <1455031231-4096-3-git-send-email-mac@mcrowe.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1455031231-4096-1-git-send-email-mac@mcrowe.com>
-References: <1455031231-4096-1-git-send-email-mac@mcrowe.com>
-Cc: Mike Crowe <mac@mcrowe.com>
-Subject: [PATCH 2/3] system-setup-keyboard: Explicitly set EXTRA_OEMAKE as required
+	Tue,  9 Feb 2016 17:31:14 +0000 (UTC)
+Received: by mail-pf0-f182.google.com with SMTP id e127so35226158pfe.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Feb 2016 09:31:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:user-agent:date:subject:from:to:message-id:thread-topic
+	:mime-version:content-type:content-transfer-encoding;
+	bh=N2LWnLdS2AKEKdbhgBmG6Y12HmXvszXjxZjZYpcd6q0=;
+	b=PoDDQ1A9Vf/rprg5ds7BEDYoO5+GiXtrA5MOnWfFSjFdfdY2IvBJdq5L5aUbkvmzc4
+	ogp1cecEQjQxOswI/Egm/1VqESRKKxaMd8bVW2F6vgiRJJFvD05zXGkMLbiM5q5DOFPv
+	dLnTdHBQus9tBSDyDgWOGnJXXGXgVzG7d7uhoqAK0iSSW3EMkkQiT8iCwaEaVjfs6EhC
+	Sp1RNs5Wp/FGaB6uPYxavzxI6BqctJjqCnSQSL1nPVtqvFbM8LiV7+bzPNyS9equeygq
+	rRBnx0faID8XUZrzn7CBzAihCID1HvbM7NyNwedG2++JPEdFTodO76z9wcAY2/sjSrIM
+	v1xA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:user-agent:date:subject:from:to
+	:message-id:thread-topic:mime-version:content-type
+	:content-transfer-encoding;
+	bh=N2LWnLdS2AKEKdbhgBmG6Y12HmXvszXjxZjZYpcd6q0=;
+	b=Ly42h05N5/PVIgh91+tuxRyWcTxWdJamvAAmI93mDOArlzPkHBiTXnFrGvCWoTPNIq
+	0BCvsqiUFJg9GfWxJN5hsLsaZJD9Tc2MXrTMso6y6gRNWTqX+SHvGBbuEP6VVngv0kaq
+	iEjWKny8gGaos7cdZR7MExHpLmD3I3hjvAcrOxgcEvGj4G831vr7bBC2VqlmugR79DJy
+	7W1FgGjV83TSENoh/57a6klNvtetsrOCG2V2iewNbbrLC/zghetVAm7B2RElBdJme0FK
+	gF6nWswQDYxk6JVs6nPC1oY8xTfcUh9X7Nhix+VgoUqFoRP30bQk0ta/zYPyYvps3Tmt
+	9XiQ==
+X-Gm-Message-State: AG10YOQRjSfSKKybZ+I/wp6f6QOFOsVMHER3MZ6SXeNNpphjezDqKHH8JVaAt/HgF/x8LQ==
+X-Received: by 10.98.76.80 with SMTP id z77mr52131614pfa.121.1455039075151;
+	Tue, 09 Feb 2016 09:31:15 -0800 (PST)
+Received: from [192.168.1.186] (mail.au-zone.com. [184.70.109.50])
+	by smtp.gmail.com with ESMTPSA id
+	s90sm46417494pfa.49.2016.02.09.09.31.14
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 09 Feb 2016 09:31:14 -0800 (PST)
+Sender: =?UTF-8?Q?S=C3=A9bastien_Taylor?= <sebastientaylor@gmail.com>
+User-Agent: Microsoft-MacOutlook/0.0.0.160109
+Date: Tue, 09 Feb 2016 10:31:14 -0700
+From: =?UTF-8?B?U8OpYmFzdGllbg==?= Taylor <me@staylor.ca>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <EC3D8C09-AC4A-40D6-A828-6B6E0CC34678@staylor.ca>
+Thread-Topic: [meta-qt5] Commercial License
+Mime-version: 1.0
+Subject: [meta-qt5] Commercial License
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,31 +59,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2016 15:20:46 -0000
+X-List-Received-Date: Tue, 09 Feb 2016 17:31:15 -0000
+Content-type: text/plain;
+	charset="UTF-8"
+Content-transfer-encoding: 7bit
 
-This recipe currently relies on EXTRA_OEMAKE having been to set to
-"-e MAKEFLAGS=" in bitbake.conf to operate. It is necessary to make
-this explicit so that the default in bitbake.conf can be changed.
+I am looking to update the qt5 build to build the commercial version (as opposed to the open source) as well as adding the QtCharts and Visualization modules which are part of the commercial release.
 
-Signed-off-by: Mike Crowe <mac@mcrowe.com>
----
- .../system-setup-keyboard/system-setup-keyboard_0.8.8.bb                | 2 ++
- 1 file changed, 2 insertions(+)
+I was hoping for some feedback as to whether this has already been looked at and opinions on how to best handle toggling the license in the configuration in a way that can be submitted back into meta-qt5.
 
-diff --git a/meta-oe/recipes-support/system-setup-keyboard/system-setup-keyboard_0.8.8.bb b/meta-oe/recipes-support/system-setup-keyboard/system-setup-keyboard_0.8.8.bb
-index 8e913c4..fbbfa3d 100644
---- a/meta-oe/recipes-support/system-setup-keyboard/system-setup-keyboard_0.8.8.bb
-+++ b/meta-oe/recipes-support/system-setup-keyboard/system-setup-keyboard_0.8.8.bb
-@@ -16,6 +16,8 @@ inherit pythonnative
- 
- DEPENDS = "glib-2.0 system-config-keyboard-native"
- 
-+EXTRA_OEMAKE = "-e MAKEFLAGS="
-+
- do_compile_prepend() {
-     ${PYTHON} -v get_layouts.py > keyboards.h
- }
--- 
-2.1.4
 
 
