@@ -1,44 +1,46 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id B086571951
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-qg0-f46.google.com (mail-qg0-f46.google.com
+	[209.85.192.46])
+	by mail.openembedded.org (Postfix) with ESMTP id D767273196
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Feb 2016 00:48:42 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id g62so155037566wme.0
+	Tue,  9 Feb 2016 01:54:22 +0000 (UTC)
+Received: by mail-qg0-f46.google.com with SMTP id b67so44227745qgb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Feb 2016 16:48:44 -0800 (PST)
+	Mon, 08 Feb 2016 17:54:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=313qw6yeU+8bOUo/bew100btrCFzxec0+5PpnGF8Sho=;
-	b=wiTQfb25VNCpU0wI2iCAGmDbnQ5wOAoVFr790yyzxUdZX0PdwZlEeRxQJR39itbk3r
-	cXh8JMZrM8gDC/2FRQMRAyGg8fRzcn1tJlT9J2AEo13f/RcxfMLO57kUDUJ9sKJQ+gNA
-	kKzghkWEb30T31pGZ5nRk+4ae40lsh17nJs8Ea3OvbLkjZCgGPrMtKV/MCFmFTYzl8x3
-	HEOJeCyl/AAqeBZIvhXNl8tRLQxuZ6r5YiWuDFzNFZZ8eU9OGM1eclpyOCjRhn1U5aAT
-	ay2vJcf+uSR0P8yoEWH9nMItBIfuvJodn8KwjYVkTq5yZOHWj7m9MQCi0luNidBBizUE
-	FEPA==
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=7tRZXEqZ9EgoY1rA0AmWngggg2n0srGJtu/4AgrzKFQ=;
+	b=B4+8MaSfPseo8xUYysxbwqr+ggs5Fwv53nMJJhji1AHDSZxoHc0PIKjvOBfn/o50l+
+	pKnNWsoG6MK5uMy6DUoF+hlZdD4qa+S2uQWq7hQsQqjohy0njkKr5FL8KygEOeF1zVO1
+	qp+kQP5GDfGZ/INEMvYDuXywFiVnpE1DCk9P3gRowGBWFU4z1XsweHhMhv+3fWYkppj5
+	XrGY+RFALgIv+KIpHdFmX72VFd1b97w7f4/db38i2Unms2n7jfS3tvYTxr4hO36JniCg
+	w4hk1YhEVVT05KhCcdCVcTXIPW7UUS9LabNUjgFg651FJRrDreq9WBsS/W2vgY8DRvgB
+	6JPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=313qw6yeU+8bOUo/bew100btrCFzxec0+5PpnGF8Sho=;
-	b=WbdV8bAQMrsaDfZ0WDJDBPT+/Dd9YG5TQef9DoTuawzBk+vzP4hMhHkTMbyaLYEELl
-	V8Ss8mgpIxNaJYuc+htxf7iMXGJzMZr6ewYvHcWLWXqoQg9XGe57nRz2yPaeaMr41QLM
-	B/op63eC0jLxaM8vcJw7ltpyxUzc2iVvU0R3vm1rM1MMhsDhcm3hb/GZvTG99/iCgpjK
-	uQcDZzeFHO3TZWcnTaeK5oL8GpDcUy8gaTxmV7HSXzbMzv+l8Es/nBQlUmOEkY02xMV1
-	XKHsK3xCVSJF/XBPq1mvI/GsDvYbYYtJxV+BaWGnO4/rOKtHtWuy5FNXhJcI641kgYkZ
-	aRCQ==
-X-Gm-Message-State: AG10YOSe1glqI+zHKr0fkKy98KqbkpDvJMx1jI4xGHK66Owmfy+YbcwSev90yJrbQTTpSQ==
-X-Received: by 10.194.111.232 with SMTP id il8mr35675368wjb.150.1454978923570; 
-	Mon, 08 Feb 2016 16:48:43 -0800 (PST)
-Received: from ThinkPad-T520.homenet.telecomitalia.it ([95.236.250.222])
-	by smtp.gmail.com with ESMTPSA id
-	75sm14969660wmo.22.2016.02.08.16.48.42
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 08 Feb 2016 16:48:43 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=7tRZXEqZ9EgoY1rA0AmWngggg2n0srGJtu/4AgrzKFQ=;
+	b=CQpL9IEyMfRMCjfs7Fdu8WzWgFT/sOmGXnFphFGCj908aBOPxrpYJV8y4CWn/Dcven
+	5ks6i1evZedmyo6UanTY0irRM7p8j+nE+cbV/jmv7s3uUGy6hZwKRC7yfN5gnvwxv7CP
+	7ZBYFbx9rIRUNi9nw5AJNTlcmaKSr3gX7aU0JPEXe0ux7FzbsF3Rat+UJ6dqc9Dg9QtC
+	sJ78ozxrm+6Kr5X27yZWooyaURZiIgBDn8w2sdMqCDC5tIaOL7/EEiRtpaySoMKZ8hP7
+	qAjxIhTAW2HOd5E0AKQ73TwjBAeZwftwUsGqaZogO0AMzIvsUE6rKbkt1lDrUQKu7wGn
+	kM0A==
+X-Gm-Message-State: AG10YOQsHthT6IiT5t9QnD75z/zoYfFBMhFJdnYsB16GV/VFccU5mzkO5KTVMuRVNAzgKA==
+X-Received: by 10.140.228.69 with SMTP id y66mr40604107qhb.78.1454982863063;
+	Mon, 08 Feb 2016 17:54:23 -0800 (PST)
+Received: from thuvia.localdomain (pool-108-44-110-59.ronkva.east.verizon.net.
+	[108.44.110.59]) by smtp.gmail.com with ESMTPSA id
+	l31sm14537942qge.20.2016.02.08.17.54.21
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 08 Feb 2016 17:54:22 -0800 (PST)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Feb 2016 01:48:26 +0100
-Message-Id: <1454978906-28102-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-initramfs][PATCH] klibc: silence QA Error about packaging
+Date: Mon,  8 Feb 2016 20:54:18 -0500
+Message-Id: <1454982858-8458-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 2.5.0
+Subject: [meta-oe][PATCH] libsodium: Update to version 1.0.8.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,33 +53,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2016 00:48:44 -0000
+X-List-Received-Date: Tue, 09 Feb 2016 01:54:23 -0000
 
-Keeping debian packaging-style we have a copy of klibc-xxx.so in libklibc-dev.
-Wile there silence the warning about it being already stripped.
-
-NOTE: klcc in OE is used as cross-compiler so the packaging is tweaked and
-      there is no /bin/klcc for target (drifting from debian).
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Philip Balister <philip@balister.org>
 ---
- meta-initramfs/recipes-devtools/klibc/klibc.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ .../libsodium/{libsodium_1.0.3.bb => libsodium_1.0.8.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libsodium/{libsodium_1.0.3.bb => libsodium_1.0.8.bb} (65%)
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index a707ed5..654d9f1 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -38,6 +38,8 @@ do_configure () {
+diff --git a/meta-oe/recipes-support/libsodium/libsodium_1.0.3.bb b/meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb
+similarity index 65%
+rename from meta-oe/recipes-support/libsodium/libsodium_1.0.3.bb
+rename to meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb
+index d02bb9b..a2eef4b 100644
+--- a/meta-oe/recipes-support/libsodium/libsodium_1.0.3.bb
++++ b/meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=092a09b78c3be486fac807435bf17b7a"
  
- INHIBIT_PACKAGE_STRIP = "1"
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-+INSANE_SKIP_klibc += "already-stripped"
-+INSANE_SKIP_libklibc-dev += "dev-elf"
- KLIBC_ARCH = "${TARGET_ARCH}"
- KLIBC_ARCH_aarch64 = "arm64"
- KLIBC_ARCH_armeb = "arm"
+ SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz"
+ 
+-SRC_URI[md5sum] = "b3bcc98e34d3250f55ae196822307fab"
+-SRC_URI[sha256sum] = "cbcfc63cc90c05d18a20f229a62c7e7054a73731d0aa858c0517152c549b1288"
++SRC_URI[md5sum] = "0a66b86fd3aab3fe4c858edcd2772760"
++SRC_URI[sha256sum] = "c0f191d2527852641e0a996b7b106d2e04cbc76ea50731b2d0babd3409301926"
+ 
+ inherit autotools
 -- 
-1.9.1
+2.5.0
 
 
