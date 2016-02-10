@@ -1,50 +1,48 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id BA224731D7
+Received: from mail-ig0-f193.google.com (mail-ig0-f193.google.com
+	[209.85.213.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A30E7317D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Feb 2016 17:08:57 +0000 (UTC)
-Received: by mail-wm0-f50.google.com with SMTP id c200so38506202wme.0
+	Wed, 10 Feb 2016 17:13:38 +0000 (UTC)
+Received: by mail-ig0-f193.google.com with SMTP id 5so2167775igt.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Feb 2016 09:08:58 -0800 (PST)
+	Wed, 10 Feb 2016 09:13:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=0JQh5DL7+BZOLnNabZDmLgh+RZ7MiIfCSEYuvEskt9A=;
-	b=YYq9usrK6h+tfMKkW1JVQ04DfNlvTV7YxEEObWjgVIvuDV8auVQmnckm/T3wRa9gST
-	yCACpFrqCMgM6twi0WoJDyn+LjDOlLxN11GN0WA7Xsg1OjFgwzG8F8F8JV8rmovFmHCj
-	UPm41y5SpqCoUmgSxByeAr5EDU1Z2qwBexccXrgOX7BTeA1qkyiSpRdL2maIHl54YeAi
-	mgGm9SNtsfa8Tpd4lj7X48q1fZMdYDPi+PGb4HfxXqMKvIlzKNRMA/ht4uzPG9lu7OAd
-	iUkoDm6DvJUfr4B/3GcXpKMGxmgtmrl5VHT+2pWq2hKYaQudlo97Tre92qTjo6BGFvPp
-	KcKQ==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=45KHoJgr8L8hB6hoQ/QnZBnnLaAA2zSrx6K5TkmVHFw=;
+	b=ZuerAw7ZnZA2fMzU7VsIM15c4eqNoyEIK2d6Va/WbjO4bHtQJ3uStsHjsZrWJuARh/
+	I7S01fHHEBsnzI941qLLWrjWLf47yFkONXG8rvcah3y802rkBY0pgLQ8cEJZXYCaCsmc
+	1an6gqAwnbjqM1Tmtku71sGgtJhoFdjeffeidFbP+xRhDZY4KrPMJC4vdTqmuXd1a5C4
+	K2wEyxXoFIOCzBv8vVBRgubXTWSCj9R979bCokii/bWGUZY6fadBdVn8cUpS625fae7o
+	hedIKgwsfgAm3q6r6qvSoubnORxx1bAZXa5Gons31Lybecmfimk6AjUt7pZTd+vn/fCb
+	zZSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-type:content-transfer-encoding;
-	bh=0JQh5DL7+BZOLnNabZDmLgh+RZ7MiIfCSEYuvEskt9A=;
-	b=AEZ4SI63cv8aEuJEc9cpl5yo8r0qa3pvBkfvHCvV5zd7XMW1BkVgZarPWxhKhsXnxD
-	N9+7AXsGoq3hGCndRHAlFkdRNqBTQURq41xU17r3C6PxWKq7WSKdVrRTGgr6/hh565IS
-	C5e+JPLnrKiND+6LUt9IhF2+vauhl4SyfNwvx2p/5n6OUMJwAc+66FqsP0nU7haxM3tN
-	JKDqEx3S7dkRUyaQGVvz+lIYAdckOelf3buE7PkOhzfC7vHck9DpCRez8FuhBMyqBNqf
-	o+wDJx1z+VelVGotIH3PgY5nknjzgrocfdRKBQV1NPA35iiwelbIP+T8TwPp/7JM8yfr
-	SJPA==
-X-Gm-Message-State: AG10YOS1Yfckovwpo3hO8yOePv42XATleMN+bh5dOUrWd/wKlmjyb5yoil6k61CJMbBQbQ==
-X-Received: by 10.194.82.163 with SMTP id j3mr44090079wjy.70.1455124137429;
-	Wed, 10 Feb 2016 09:08:57 -0800 (PST)
-Received: from localhost.localdomain
-	(ip-176-198-253-155.hsi05.unitymediagroup.de. [176.198.253.155])
-	by smtp.googlemail.com with ESMTPSA id
-	i10sm12130318wmf.14.2016.02.10.09.08.56
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 10 Feb 2016 09:08:56 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Feb 2016 18:08:28 +0100
-Message-Id: <1455124108-4180-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=45KHoJgr8L8hB6hoQ/QnZBnnLaAA2zSrx6K5TkmVHFw=;
+	b=A/tXcB1MpauZNcaigqqgCrIRQn58q4EyygTlaxsKdBoy4+0/b/RzQzJ7v1MkkueMqf
+	sQsvCOVU0F5USeYzScoE6numagj/+vn5dNL3IO5blB3E4ADLzvlAqzYTjvm7UE6vL1eY
+	LJmOZYfvhFeIWZO8cxLmZfrwpz6EvEBcMdqLMoIVr58CpTkgkfunlQl3QI731TKMzRXU
+	3tN6SqXKZxlCAplPgxkKxP1VsKPwbNMQAg5sOqh6zQrzhfUHYe7QcwGrzaw8cPcvZxJ4
+	domC9dU4N/RqmwOsPX1DZ+2Muq2l6nfb/Mwndwb0+auQI30g9wtjfZx5n9NwexJof7NQ
+	7UVQ==
+X-Gm-Message-State: AG10YOS8RhSnPCZDbBZfPTnpN9fDBJg5I8QOYN5Juta3H160bBd8cFbW+iZxnBqfPnDfRdwR1E5bhFbtSC+kAA==
 MIME-Version: 1.0
-Subject: [PATCH] xfce4-whiskermenu-plugin: update to 1.5.2
+X-Received: by 10.50.126.8 with SMTP id mu8mr10716773igb.52.1455124419584;
+	Wed, 10 Feb 2016 09:13:39 -0800 (PST)
+Received: by 10.36.25.81 with HTTP; Wed, 10 Feb 2016 09:13:39 -0800 (PST)
+In-Reply-To: <1455115465-28799-1-git-send-email-maciej.borzecki@open-rnd.pl>
+References: <1455115465-28799-1-git-send-email-maciej.borzecki@open-rnd.pl>
+Date: Wed, 10 Feb 2016 18:13:39 +0100
+Message-ID: <CALbNGRTuRCbK8L_OZ2gReD8rYOcPTi66u=r=cv0irV+_6qp1iw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
+Subject: Re: [meta-oe][PATCH 1/2] lua: bump lua.pc version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,35 +55,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2016 17:08:58 -0000
+X-List-Received-Date: Wed, 10 Feb 2016 17:13:40 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-sources moved to common xfce panel location
+On Wed, Feb 10, 2016 at 3:44 PM, Maciej Borzecki
+<maciej.borzecki@open-rnd.pl> wrote:
+> Lua was updated to 5.3.2, however lua.pc still has 5.2.2 listed as
+> Version.
+>
+> Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+> ---
+>  meta-oe/recipes-devtools/lua/lua/lua.pc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-devtools/lua/lua/lua.pc b/meta-oe/recipes-devtools/lua/lua/lua.pc
+> index e6f8b6f096dbcf578665699d2e3570dd22088d40..f14d227543c04189c5c31cd2c2737ac68933979f 100644
+> --- a/meta-oe/recipes-devtools/lua/lua/lua.pc
+> +++ b/meta-oe/recipes-devtools/lua/lua/lua.pc
+> @@ -4,7 +4,7 @@ includedir=${prefix}/include
+>
+>  Name: Lua
+>  Description: Lua language engine
+> -Version: 5.2.2
+> +Version: 5.3.2
+>  Requires:
+>  Libs: -L${libdir} -llua
+>  Libs.private: -lm
+> --
+> 2.5.0
+>
+Is it possible to 'sed' this based on PV so that we don't need to do
+that on next update?
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- ...whiskermenu-plugin_1.5.1.bb => xfce4-whiskermenu-plugin_1.5.2.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_1.5.1.bb => xfce4-whiskermenu-plugin_1.5.2.bb} (54%)
-
-diff --git a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_1.5.1.bb b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_1.5.2.bb
-similarity index 54%
-rename from meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_1.5.1.bb
-rename to meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_1.5.2.bb
-index 22b8762..2875f59 100644
---- a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_1.5.1.bb
-+++ b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_1.5.2.bb
-@@ -5,6 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- inherit xfce-panel-plugin cmake
- 
--SRC_URI = "http://gottcode.org/${BPN}/${BPN}-${PV}-src.tar.bz2"
--SRC_URI[md5sum] = "4886fca2b485dae0e6a64c78f9dca94e"
--SRC_URI[sha256sum] = "1c7650562322867513370ab575536b67aa3712329bb60a0c91a0a70e23a8945a"
-+SRC_URI[md5sum] = "15187645e8be2c0d300714ce55c1a8d4"
-+SRC_URI[sha256sum] = "307cbfa532a28c5c753409aba0330c2da010047b8fc2d669e06f12bf17712e38"
--- 
-2.5.0
-
+Andreas
 
