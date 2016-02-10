@@ -1,31 +1,32 @@
-Return-Path: <Awais_Belal@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C8406011F
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id CFADD73179
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Feb 2016 11:02:32 +0000 (UTC)
-Received: from nat-ies.mentorg.com ([192.94.31.2]
-	helo=SVR-IES-FEM-03.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1aTSXY-0007ki-Mz from Awais_Belal@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2016 03:02:33 -0800
-Received: from EU-MBX-02.mgc.mentorg.com ([169.254.3.44]) by
-	SVR-IES-FEM-03.mgc.mentorg.com ([137.202.0.108]) with mapi id
-	14.03.0224.002; Wed, 10 Feb 2016 11:02:31 +0000
-From: "Belal, Awais" <Awais_Belal@mentor.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: mplayer2 : focus deficiency?
-Thread-Index: AdFj8gxvGSkTjz9IQQGYVRHINI7WYQ==
-Date: Wed, 10 Feb 2016 11:02:30 +0000
-Message-ID: <2021B186DC632746BD5A3CE32F12BD28011FB867B8@EU-MBX-02.mgc.mentorg.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.202.0.69]
+	Wed, 10 Feb 2016 12:54:17 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 7DDA868A01C; Wed, 10 Feb 2016 12:54:17 +0000 (GMT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: **
+X-Spam-Status: No, score=2.5 required=5.0 tests=ALL_TRUSTED,BAYES_50,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id D809F68A019;
+	Wed, 10 Feb 2016 12:54:16 +0000 (GMT)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id 50AEF6740245;
+	Wed, 10 Feb 2016 13:54:16 +0100 (CET)
+To: openembedded-devel@lists.openembedded.org
+References: <2021B186DC632746BD5A3CE32F12BD28011FB867B8@EU-MBX-02.mgc.mentorg.com>
+From: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <56BB32F8.5000201@mlbassoc.com>
+Date: Wed, 10 Feb 2016 13:54:16 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: mplayer2 : focus deficiency?
+In-Reply-To: <2021B186DC632746BD5A3CE32F12BD28011FB867B8@EU-MBX-02.mgc.mentorg.com>
+Subject: Re: mplayer2 : focus deficiency?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,26 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2016 11:02:33 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 10 Feb 2016 12:54:18 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 2016-02-10 12:02, Belal, Awais wrote:
+> Hi,
+>
+> The version of mplayer2 available in meta-oe is almost 2.5 years old while there seems to be active development around it. Is there a reason OE never moved to a newer version?
+>
+> The mplayer team officially releases tarballs from its website https://www.mplayerhq.hu/design7/dload.html while they also provide svn access through svn://svn.mplayerhq.hu/mplayer/trunk. I believe it would be a good idea to move to one of these sources (I would prefer tar downloads myself) and use a newer more robust (probably) version of mplayer2.
+>
 
-The version of mplayer2 available in meta-oe is almost 2.5 years old while =
-there seems to be active development around it. Is there a reason OE never =
-moved to a newer version?
+I didn't think to look anywhere other than their git tree which seems
+to be abandoned (the version we are using is the latest out there)
 
-The mplayer team officially releases tarballs from its website https://www.=
-mplayerhq.hu/design7/dload.html while they also provide svn access through =
-svn://svn.mplayerhq.hu/mplayer/trunk. I believe it would be a good idea to =
-move to one of these sources (I would prefer tar downloads myself) and use =
-a newer more robust (probably) version of mplayer2.
+> I will be working on a new recipe to cater this if there are no objections but I would really like to have some feedback before I do so.
 
-I will be working on a new recipe to cater this if there are no objections =
-but I would really like to have some feedback before I do so.
+I've been trying to fix up what we have now that OE-core has
+abandoned libav, replacing it with a newer ffmpeg.  Maybe I'll
+give this a go myself if you'd like to wait a short while (perhaps
+by tomorrow)?
 
-BR,
-Awais
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
