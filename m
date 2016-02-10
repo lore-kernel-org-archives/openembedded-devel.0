@@ -1,34 +1,22 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E55160722
+Return-Path: <maciej.borzecki@open-rnd.pl>
+Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
+	by mail.openembedded.org (Postfix) with ESMTP id 2599873259
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Feb 2016 14:31:06 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,426,1449529200"; d="scan'208";a="101202999"
-Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
-	by antispam1.usr.ingenico.loc with ESMTP/TLS/AES128-SHA;
-	10 Feb 2016 15:31:06 +0100
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
-	(TLS) id 14.3.266.1; Wed, 10 Feb 2016 15:31:06 +0100
-Received: from COSNADEXC13.usr.ingenico.loc ([169.254.1.166]) by
-	COSNADEXC12.usr.ingenico.loc ([10.31.4.212]) with mapi id
-	14.03.0266.001; Wed, 10 Feb 2016 15:31:06 +0100
-From: Matthieu CRAPET <Matthieu.CRAPET@ingenico.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH v2] libopus: upgrade to version 1.1.2
-Thread-Index: AQHRZAqzl8Wl6uPaU02tc4YNp2V/ap8lVmwg
-Date: Wed, 10 Feb 2016 14:31:05 +0000
-Message-ID: <8672BB614B4CCA40A6B3BDD6FD82050B01CE5BEF23@COSNADEXC13.usr.ingenico.loc>
-References: <1455099698-25946-1-git-send-email-Matthieu.Crapet@ingenico.com>
-	<1455112483-31048-1-git-send-email-Matthieu.Crapet@ingenico.com>
-In-Reply-To: <1455112483-31048-1-git-send-email-Matthieu.Crapet@ingenico.com>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.31.16.119]
-MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH v2] libopus: upgrade to version 1.1.2
+	Wed, 10 Feb 2016 14:44:36 +0000 (UTC)
+Received: from comp_016_pc_buildenv.localdomain (unknown [31.182.60.238])
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id 675AB2DAEC4;
+	Wed, 10 Feb 2016 15:44:35 +0100 (CET)
+From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+To: openembedded-devel@lists.openembedded.org,
+	Li xin <lixin.fnst@cn.fujitsu.com>, Kang Kai <kai.kang@windriver.com>,
+	Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 10 Feb 2016 15:44:25 +0100
+Message-Id: <1455115465-28799-2-git-send-email-maciej.borzecki@open-rnd.pl>
+X-Mailer: git-send-email 2.5.0
+In-Reply-To: <1455115465-28799-1-git-send-email-maciej.borzecki@open-rnd.pl>
+References: <1455115465-28799-1-git-send-email-maciej.borzecki@open-rnd.pl>
+Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
+Subject: [meta-oe][PATCH 2/2] lua: update Libs in lua.pc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,20 +29,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2016 14:31:07 -0000
-Content-Language: fr-FR
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 10 Feb 2016 14:44:37 -0000
 
-SGksDQoNCkkgdG90YWxseSBtaXNzZWQgQ2FybG9zIFJhZmFlbCBHaWFuaSdzIHBhdGNoICgyMDE2
-LjAyLjA4KS4gUGxlYXNlIGRpc2NhcmQgdGhpcyB0aHJlYWQuDQoNClJlZ2FyZHMsDQpNYXR0aGll
-dQ0KVGhpcyBlbWFpbCBhbmQgaXRzIGNvbnRlbnQgYmVsb25nIHRvIEluZ2VuaWNvIEdyb3VwLiBU
-aGUgZW5jbG9zZWQgaW5mb3JtYXRpb24gaXMgY29uZmlkZW50aWFsIGFuZCBtYXkgbm90IGJlIGRp
-c2Nsb3NlZCB0byBhbnkgdW5hdXRob3JpemVkIHBlcnNvbi4gSWYgeW91IGhhdmUgcmVjZWl2ZWQg
-aXQgYnkgbWlzdGFrZSBkbyBub3QgZm9yd2FyZCBpdCBhbmQgZGVsZXRlIGl0IGZyb20geW91ciBz
-eXN0ZW0uIENldCBlbWFpbCBldCBzb24gY29udGVudSBzb250IGxhIHByb3ByacOpdMOpIGR1IEdy
-b3VwZSBJbmdlbmljby4gTOKAmWluZm9ybWF0aW9uIHF14oCZaWwgY29udGllbnQgZXN0IGNvbmZp
-ZGVudGllbGxlIGV0IG5lIHBldXQgw6p0cmUgY29tbXVuaXF1w6llIMOgIGRlcyBwZXJzb25uZXMg
-bm9uIGF1dG9yaXPDqWVzLiBTaSB2b3VzIGzigJlhdmV6IHJlw6d1IHBhciBlcnJldXIgbmUgbGUg
-dHJhbnNmw6lyZXogcGFzIGV0IHN1cHByaW1lei1sZS4NCg==
+Update Libs in lua.pc so that pkg-config --libs gives the correct list
+of libraries for linking. This makes us effectively list the same
+libraries as Fedora does.
+
+Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+---
+ meta-oe/recipes-devtools/lua/lua/lua.pc | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-devtools/lua/lua/lua.pc b/meta-oe/recipes-devtools/lua/lua/lua.pc
+index f14d227543c04189c5c31cd2c2737ac68933979f..4b4fb47b95e27f8c30ecad7b0d2f7254ebafd5ae 100644
+--- a/meta-oe/recipes-devtools/lua/lua/lua.pc
++++ b/meta-oe/recipes-devtools/lua/lua/lua.pc
+@@ -6,6 +6,5 @@ Name: Lua
+ Description: Lua language engine
+ Version: 5.3.2
+ Requires:
+-Libs: -L${libdir} -llua
+-Libs.private: -lm
++Libs: -L${libdir} -llua -lm -ldl
+ Cflags: -I${includedir}
+-- 
+2.5.0
+
 
