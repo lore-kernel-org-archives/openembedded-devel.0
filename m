@@ -1,22 +1,20 @@
 Return-Path: <maciej.borzecki@open-rnd.pl>
 Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
-	by mail.openembedded.org (Postfix) with ESMTP id 2599873259
+	by mail.openembedded.org (Postfix) with ESMTP id 268267328A
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 10 Feb 2016 14:44:36 +0000 (UTC)
 Received: from comp_016_pc_buildenv.localdomain (unknown [31.182.60.238])
-	by open-rnd.nazwa.pl (Postfix) with ESMTP id 675AB2DAEC4;
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id 2B0212DAE8A;
 	Wed, 10 Feb 2016 15:44:35 +0100 (CET)
 From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
 To: openembedded-devel@lists.openembedded.org,
 	Li xin <lixin.fnst@cn.fujitsu.com>, Kang Kai <kai.kang@windriver.com>,
 	Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 10 Feb 2016 15:44:25 +0100
-Message-Id: <1455115465-28799-2-git-send-email-maciej.borzecki@open-rnd.pl>
+Date: Wed, 10 Feb 2016 15:44:24 +0100
+Message-Id: <1455115465-28799-1-git-send-email-maciej.borzecki@open-rnd.pl>
 X-Mailer: git-send-email 2.5.0
-In-Reply-To: <1455115465-28799-1-git-send-email-maciej.borzecki@open-rnd.pl>
-References: <1455115465-28799-1-git-send-email-maciej.borzecki@open-rnd.pl>
 Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
-Subject: [meta-oe][PATCH 2/2] lua: update Libs in lua.pc
+Subject: [meta-oe][PATCH 1/2] lua: bump lua.pc version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,27 +29,27 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 10 Feb 2016 14:44:37 -0000
 
-Update Libs in lua.pc so that pkg-config --libs gives the correct list
-of libraries for linking. This makes us effectively list the same
-libraries as Fedora does.
+Lua was updated to 5.3.2, however lua.pc still has 5.2.2 listed as
+Version.
 
 Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
 ---
- meta-oe/recipes-devtools/lua/lua/lua.pc | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ meta-oe/recipes-devtools/lua/lua/lua.pc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-devtools/lua/lua/lua.pc b/meta-oe/recipes-devtools/lua/lua/lua.pc
-index f14d227543c04189c5c31cd2c2737ac68933979f..4b4fb47b95e27f8c30ecad7b0d2f7254ebafd5ae 100644
+index e6f8b6f096dbcf578665699d2e3570dd22088d40..f14d227543c04189c5c31cd2c2737ac68933979f 100644
 --- a/meta-oe/recipes-devtools/lua/lua/lua.pc
 +++ b/meta-oe/recipes-devtools/lua/lua/lua.pc
-@@ -6,6 +6,5 @@ Name: Lua
+@@ -4,7 +4,7 @@ includedir=${prefix}/include
+ 
+ Name: Lua
  Description: Lua language engine
- Version: 5.3.2
+-Version: 5.2.2
++Version: 5.3.2
  Requires:
--Libs: -L${libdir} -llua
--Libs.private: -lm
-+Libs: -L${libdir} -llua -lm -ldl
- Cflags: -I${includedir}
+ Libs: -L${libdir} -llua
+ Libs.private: -lm
 -- 
 2.5.0
 
