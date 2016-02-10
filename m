@@ -1,52 +1,54 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 50F7D731E7
+Return-Path: <rafael.carre@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 309C2731E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Feb 2016 13:15:56 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id g62so4143385wme.2
+	Wed, 10 Feb 2016 13:20:45 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id g62so4171006wme.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Feb 2016 05:15:57 -0800 (PST)
+	Wed, 10 Feb 2016 05:20:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=++ebYYvpoeakS9QdrofPiLgbirqcksJ8uNGs+mrdNDM=;
-	b=xTkMc6dH7O2zaGO6ZAhrlHC7V/WAj2U1WINjL/lwX0lVxjSKEevNTLAEljtlB7gacJ
-	7YLsBTPwvAuArGKZqRZOIXQYgmwWh11fjARgO6dmTX5/wiBKM/5gbcnMBhHVioBHWNYd
-	tJvMjV6GUaAleObxG58lugz2vnl/W0T3pVpqVOAnPlPrZopoXASi5HJRnsQ1cCmoIUr3
-	syg/rQAWrb7TNIG46vtVc9A1vfTLu8pCUUJSEqQQgyNipXDXbBiUyMkDhnolXmo1bAph
-	HEcajogrxyk+LBIPqBX9LkHZBLFwnQNYiYM9nvCsz3dgAczsQRKhqFZUR2lUuGxUCS1C
-	8FQw==
+	h=sender:subject:to:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-type:content-transfer-encoding;
+	bh=G3/n75U9aMujGQ0j1Ys+PsIZWXzUqSkjU6qMTh4/ing=;
+	b=ojUjqVqrb+0n2wV7AitG0z/lqbjlMZQs0Hi7FMKXopvUl4Xo62uaaJpKhNm7uD/jRg
+	9fxF6V42Br2i42QOGSMBNhZHOjESLnPav0ZsYHcmwa6awutg88MFurA0YfoN3jwFyZU9
+	rwUi63MmpB3WLhJeqMtcZfyprXJJfPnvwWgvihE3duetRAq/TadhwqEqORVN8PJTdSrd
+	vCk/NJnylthO7V/ZhekP0t5J8FgNZQ+13lIakJoQUS7IGY6GfekzblrsMybrc0acI3xN
+	MIcEYiaJlK0Nm1mcsPYxGro7pyEbq+RMfhoVfQKRXzJ0ZI5VRuz0c1Z/mumZT3rGUr1o
+	MbXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=++ebYYvpoeakS9QdrofPiLgbirqcksJ8uNGs+mrdNDM=;
-	b=VPpO3gbMn6tFgyQVPpiRcgYSsATKLAezZKmrJKDMe1dipz6WQwWM97TJWALtNrib3K
-	09+Gh50OkNI0dv8v0itv7Duz/Tm4QxUOJTLCEThGiwvzhcXf9LBRg0yPgNa2dBx6ine0
-	zXRBhE0DMz2yQypr8sM5xVszIPAuGCh71U7blQnq+gPGAtYw9+2QsmsDeoDfSXZ+Vtqs
-	MaDxtbZE5SYky+7s5UUeFUWZVXLb52QRlD1F4gO3bUqXB5QcWxUNDCFpRZwJRMpoQsWn
-	hVFVQq9slwngAapw+WOieuFRKT5Qq7LHXvJGx64OsLTdJN1CUuVB8kXkE/qS8PE+Dgds
-	MTSg==
-X-Gm-Message-State: AG10YOQUBocKm7mziVoNSj3ihPWJKEMsUcW2ZvKytHxG1Yvwe6sfL2ATVx7A8Uk64XofKw==
-X-Received: by 10.28.126.205 with SMTP id z196mr10576836wmc.44.1455110156512; 
-	Wed, 10 Feb 2016 05:15:56 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	ka4sm2915568wjc.47.2016.02.10.05.15.55
+	h=x-gm-message-state:sender:subject:to:references:from:message-id
+	:date:user-agent:mime-version:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=G3/n75U9aMujGQ0j1Ys+PsIZWXzUqSkjU6qMTh4/ing=;
+	b=MgEXIlEiyBSas3aZs5AxA1WMfsQDL0F/RU66AP/hWom9EAhPSh6VrZe3dylRnWDqoq
+	4HW1G/Bn5kLCiUdVuWbrB5n3PzMmNoyvHFJ02SacAJfOx3GE9ri9bCYnC0QJC+lYyuUi
+	ij00Ny5u54q9eakbaz9vapO+6fzXtK0ZPASgHPfGeXSscUZY0hV50ihC9cs50N41wJjY
+	Gtj5xbPXO+fDGxkzTlxR8FwkX4qHAclix3kQ/t0uf8iXx/xP2XRLjnONVFLMkcv+nSGb
+	Y1yqBVo+Je7zpyQ9wOdoQeFw+94AgJmamlfulu4VHv05BS4v8CoRbeRk4ZOTmdjih1Zj
+	ddzg==
+X-Gm-Message-State: AG10YOTeDVyB52MN56D4Y+qtwL8H6ajnCwFCvKXj1YjkczkPPrSTD4DOpO/jqaKSoN+nlA==
+X-Received: by 10.194.9.42 with SMTP id w10mr39130381wja.159.1455110445925;
+	Wed, 10 Feb 2016 05:20:45 -0800 (PST)
+Received: from [192.168.0.13] ([81.56.255.191])
+	by smtp.googlemail.com with ESMTPSA id
+	g3sm2953388wjw.31.2016.02.10.05.20.44
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 10 Feb 2016 05:15:55 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 10 Feb 2016 14:19:46 +0100
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 10 Feb 2016 05:20:44 -0800 (PST)
+Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160210131946.GB2609@jama>
 References: <1455108862-2507-1-git-send-email-funman@videolan.org>
 	<1455108862-2507-2-git-send-email-funman@videolan.org>
+	<20160210131946.GB2609@jama>
+From: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <funman@videolan.org>
+Message-ID: <56BB392B.7000203@videolan.org>
+Date: Wed, 10 Feb 2016 14:20:43 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-In-Reply-To: <1455108862-2507-2-git-send-email-funman@videolan.org>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+In-Reply-To: <20160210131946.GB2609@jama>
 Subject: Re: [meta-multimedia][PATCH 2/2] vlc: make sdl optional (enabled by default)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -60,80 +62,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2016 13:15:56 -0000
-X-Groupsio-MsgNum: 59928
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cmJC7u66zC7hs+87"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 10 Feb 2016 13:20:47 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 8bit
 
---cmJC7u66zC7hs+87
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 10/02/2016 14:19, Martin Jansa wrote:
+> On Wed, Feb 10, 2016 at 01:54:22PM +0100, Rafaël Carré wrote:
+>> ---
+> 
+> Did you forget to add sdl to default PACKAGECONFIG?
 
-On Wed, Feb 10, 2016 at 01:54:22PM +0100, Rafa=EBl Carr=E9 wrote:
-> ---
+Oops yes,
 
-Did you forget to add sdl to default PACKAGECONFIG?
+sdl also depends on x11 and I am not sure how to add that dependency:
+Something like
 
->  meta-multimedia/recipes-multimedia/vlc/vlc.inc | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multim=
-edia/recipes-multimedia/vlc/vlc.inc
-> index 2887a68..c85a811 100644
-> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-> @@ -6,7 +6,7 @@ LICENSE =3D "GPL-2.0"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
-> =20
->  DEPENDS =3D "libfribidi libtool libgcrypt libgcrypt-native \
-> -   virtual/libsdl libsdl-image dbus dbus-glib libxml2 gnutls \
-> +   dbus dbus-glib libxml2 gnutls \
->     tremor faad2 ffmpeg flac fluidsynth alsa-lib \
->     lua-native lua libidn \
->     avahi jpeg xz libmodplug mpeg2dec \
-> @@ -25,7 +25,6 @@ EXTRA_OECONF =3D "\
->      --disable-screen --disable-caca \
->      --enable-httpd --enable-vlm \
->      --enable-freetype \
-> -    --enable-sdl \=20
->      --enable-png \
->      --enable-tremor \
->      --enable-v4l2 --disable-aa --disable-faad \
-> @@ -41,6 +40,7 @@ EXTRA_OECONF =3D "\
-> =20
->  PACKAGECONFIG ?=3D " live555 dc1394 dv1394 notify fontconfig freetype dv=
-dread {@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
->  PACKAGECONFIG[mad] =3D "--enable-mad,--disable-mad,libmad"
-> +PACKAGECONFIG[sdl] =3D "--enable-sdl,--disable-sdl,virtual/libsdl libsdl=
--image "
->  PACKAGECONFIG[a52] =3D "--enable-a52,--disable-a52,liba52"
->  PACKAGECONFIG[jack] =3D "--enable-jack,--disable-jack,jack"
->  PACKAGECONFIG[live555] =3D "--enable-live555,--disable-live555,live555"
-> --=20
-> 2.5.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+	{@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 sdl', '', d)}
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+?
 
---cmJC7u66zC7hs+87
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+>>  meta-multimedia/recipes-multimedia/vlc/vlc.inc | 4 ++--
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>> index 2887a68..c85a811 100644
+>> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>> @@ -6,7 +6,7 @@ LICENSE = "GPL-2.0"
+>>  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>>  
+>>  DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native \
+>> -   virtual/libsdl libsdl-image dbus dbus-glib libxml2 gnutls \
+>> +   dbus dbus-glib libxml2 gnutls \
+>>     tremor faad2 ffmpeg flac fluidsynth alsa-lib \
+>>     lua-native lua libidn \
+>>     avahi jpeg xz libmodplug mpeg2dec \
+>> @@ -25,7 +25,6 @@ EXTRA_OECONF = "\
+>>      --disable-screen --disable-caca \
+>>      --enable-httpd --enable-vlm \
+>>      --enable-freetype \
+>> -    --enable-sdl \ 
+>>      --enable-png \
+>>      --enable-tremor \
+>>      --enable-v4l2 --disable-aa --disable-faad \
+>> @@ -41,6 +40,7 @@ EXTRA_OECONF = "\
+>>  
+>>  PACKAGECONFIG ?= " live555 dc1394 dv1394 notify fontconfig freetype dvdread {@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
+>>  PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
+>> +PACKAGECONFIG[sdl] = "--enable-sdl,--disable-sdl,virtual/libsdl libsdl-image "
+>>  PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
+>>  PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
+>>  PACKAGECONFIG[live555] = "--enable-live555,--disable-live555,live555"
+>> -- 
+>> 2.5.0
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAla7OPEACgkQN1Ujt2V2gBwZfwCcDCxM8tO1TBdcmSnTH6MpSHHq
-3ZAAn2o9BvIKnXJX+Y38MVOcGqT/Ugv3
-=hlUI
------END PGP SIGNATURE-----
-
---cmJC7u66zC7hs+87--
