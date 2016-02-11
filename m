@@ -1,45 +1,51 @@
 Return-Path: <andrea.adami@gmail.com>
 Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id A8F6C73180
+	by mail.openembedded.org (Postfix) with ESMTP id 94E6C73180
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Feb 2016 23:01:23 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id g62so13243557wme.2
+	Thu, 11 Feb 2016 23:01:26 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id c200so13235441wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Feb 2016 15:01:24 -0800 (PST)
+	Thu, 11 Feb 2016 15:01:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=pYYtCZxgR2QPi9c8DnU9kVKBUwl/EF1JsSCnEakYdpU=;
-	b=JVN+fHZIcamo4mLszEcjh/OIzDAGG86O1Yh5U3KLyfXOoySVXjjhp+rOxvuXfnYXjA
-	lypYPXMknIrd6sTR+8+34M4NfaIW3yUzotDOTTjjDpj9/yYQXED+CJewRo0a6izqXSO2
-	5Zna1cguoh2wb4fn0Vs1OLlp89Odx1zdTXvrBPEX7ReF/GjiZWcDPhqmkHGkYcROCUAa
-	6h5QQZfoEGQsD4F8XfocOBKUjkoq5ZgwQTf7ksln0gAAyNJR5YKmwoehuPRapLX1ifCr
-	c+MBiAnJAxMCk6fjVF+oCreGkeMmeROk1Sspi+MmpuhVfQPItmY9XdtVHq35xzQXU5fO
-	RDyw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:in-reply-to:references;
+	bh=r9pgF7Exn0lfDMjPUG7IK3nCbnkQPo5YZa8oBgvMHRo=;
+	b=Erd+s5PiMlNa9naOmuw5SGz9C7Lj3eZ40dm9e6X9yNvy3348cFb3R0V5dsys4r4BXk
+	55RZR5SQzIhtc+bOf8M5o5PV86yum2044BpIwnFS7oJJOZEZd8NRdWnf0LDqFcxcoHQf
+	XxfSZkyTfVwu1PgRHMqpf4Ihgb6/K2im9dwv/2C7rTkJ74sToJCMsivSkx0v0Km3ORMU
+	8AuetPKLWyF/pmsCWZ6mmqHb7dlwHFJk6iP1LcNigi7GkMlbI86gcT/lI7ETJUjwg4UR
+	P0gMH+VkqC8LzTVlz+nGkoHL6WZRTVb3I9COrJBYZaKFk6G/URJlHJQxctqzXVHRdBy/
+	zk+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=pYYtCZxgR2QPi9c8DnU9kVKBUwl/EF1JsSCnEakYdpU=;
-	b=HR7TWhNmxpllyfF1JXiM9WqpxDR7prjmTAfTmEZJhES8P9sbOfoPkyG4rUbnSNi7ek
-	zLJs/l6kr3+IDJkYkRPwx6pzKWdxgaH8MxIG/r9VnyLT4LeLcIicXpoMJe7/UH+a4k3A
-	3FtPRw46hQE5e81A8dRqtSluegm9zXSbndXrRCcZmXqfZ+nS+83blgn9d4X4vCNEHNxR
-	PNPmnnM5uDnuCz4aJ0uzZY2YcG+zQcYZ6VZS2nQ0tibLsAJTEY0rBvdvFXgv6EuEBK8C
-	ECw7+D6gpqfknqzNpaVa1H8CTnS63uE2M4y87rtHZmnmGtqsuTYh3il8SJ2EsDHMTgcs
-	a1PQ==
-X-Gm-Message-State: AG10YOSWQqsocaaFVxxqtb/7khIlbdy9IUi6y5JnrZvhOfXEzwN+bpzfvmyKLAuauvtNjg==
-X-Received: by 10.194.206.71 with SMTP id lm7mr48860554wjc.118.1455231683311; 
-	Thu, 11 Feb 2016 15:01:23 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:in-reply-to:references;
+	bh=r9pgF7Exn0lfDMjPUG7IK3nCbnkQPo5YZa8oBgvMHRo=;
+	b=bO+Yz4xp2IhKzym3BrZAZbZjp6I1uTWwQGuwW7ouUndwPryamKDoRbMWaBTYAD0QQr
+	h0MQ8pEv6f6rGFMaIYjQiBj0pBKiaPjaWahWf59kwG36/1kaO1TBtWFWyc6GIOmZ6buT
+	O2/cZkStwARj1MIAGyD0ztUFhYa1glldq3rN/EhekoP0xb3lnzmc9Fgitr8fjX8FE7Ui
+	clW1a5ee+T8JDTItYtCNfS9S6M6Zu7mnEoj1XbohbLM+zwVvIB5POi5+ycEok1NCy71c
+	isjjjA8XsEwk6ojPTI4TEplTgTAUL6GBXXCavi4yurLg8i+Cfsxr/iDhso5/aplG64x1
+	zrEA==
+X-Gm-Message-State: AG10YOQpW0duK+h6SzwYJda6RssgbnfUZzgcd04nzBIX3t8mLM9G0niQHJ0DYMM3+reNAA==
+X-Received: by 10.194.60.145 with SMTP id h17mr40015002wjr.47.1455231687240;
+	Thu, 11 Feb 2016 15:01:27 -0800 (PST)
 Received: from ThinkPad-T520.homenet.telecomitalia.it
 	(host180-22-dynamic.15-87-r.retail.telecomitalia.it. [87.15.22.180])
 	by smtp.gmail.com with ESMTPSA id
-	yz5sm9520324wjc.36.2016.02.11.15.01.22
+	yz5sm9520324wjc.36.2016.02.11.15.01.26
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 11 Feb 2016 15:01:22 -0800 (PST)
+	Thu, 11 Feb 2016 15:01:26 -0800 (PST)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Feb 2016 00:01:07 +0100
-Message-Id: <cover.1455230414.git.andrea.adami@gmail.com>
+Date: Fri, 12 Feb 2016 00:01:08 +0100
+Message-Id: <a4ea2a7d7f4e08eaba84ff3d9b17be148d6b1d45.1455230414.git.andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-initramfs][PATCH 0/3] klibc_2.0.4 fixes
+In-Reply-To: <cover.1455230414.git.andrea.adami@gmail.com>
+References: <cover.1455230414.git.andrea.adami@gmail.com>
+In-Reply-To: <cover.1455230414.git.andrea.adami@gmail.com>
+References: <cover.1455230414.git.andrea.adami@gmail.com>
+Subject: [meta-initramfs][PATCH 1/3] klibc_2.0.4: update to 4d1997d - Fix build for qemux86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,21 +60,44 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 11 Feb 2016 23:01:26 -0000
 
-Kernel 4.4 exposed a build failure for qemux86.
-The necessary fixes are present in the official klibc git tree: while waiting
-for klibc_2.0.5 we move to the more recent tag.
+Minimally rebase staging.patch and follow upstream commits.
 
-do_package_qa is skipped for libklibc-dev: package contents are like in debian.
+Fixes:
+| usr/klibc/socketcalls/socket.o: In function `socket':
+| .../usr/klibc/socketcalls/socket.S:8: multiple definition of `socket'
 
-Andrea Adami (3):
-  klibc_2.0.4: update to 4d1997d - Fix build for qemux86
-  klibc_2.0.4: Silence QA Error about non-symlink so [dev-elf]
-  klibc_2.0.4: Silence QA Warning about klibc-xxx-so already stripped
-
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
  meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/staging.patch | 2 +-
- meta-initramfs/recipes-devtools/klibc/klibc.inc                 | 4 +++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ meta-initramfs/recipes-devtools/klibc/klibc.inc                 | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/staging.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/staging.patch
+index 400864b..c01c712 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/staging.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/staging.patch
+@@ -27,7 +27,7 @@ Index: klibc-1.5.24/scripts/Kbuild.install
+ @@ -103,7 +100,6 @@
+  	done
+  	$(Q)cp -rf usr/include/. $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include/.
+- 	$(Q)chmod -R a+rX $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include
++ 	$(Q)chmod -R a+rX,go-w $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include
+ -	$(Q)$(install-data) $(srctree)/klcc/klcc.1 $(INSTALLROOT)$(mandir)/man1/$(KCROSS)klcc.1
+  	$(Q)$(install-bin) $(objtree)/klcc/$(KCROSS)klcc $(INSTALLROOT)$(bindir)
+  
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index a707ed5..903424b 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -5,7 +5,7 @@ SECTION = "libs"
+ LICENSE = "BSD-3-Clause & GPL-2.0 & MIT & Zlib"
+ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8b"
+ DEPENDS = "linux-libc-headers perl-native"
+-SRCREV = "7763dd33e5b8eed4b9e3c583c02c10176fd550d3"
++SRCREV = "4d19974d7020488f63651244e1f9f51727c3f66c"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git"
+ SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch \
 -- 
 1.9.1
 
