@@ -1,22 +1,23 @@
 Return-Path: <maciej.borzecki@open-rnd.pl>
 Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F98F731BD
+	by mail.openembedded.org (Postfix) with ESMTP id 59980731EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Feb 2016 09:06:39 +0000 (UTC)
-Received: from localhost (unknown [31.182.60.238])
-	by open-rnd.nazwa.pl (Postfix) with ESMTP id 97F842D7323;
-	Thu, 11 Feb 2016 10:06:38 +0100 (CET)
-Date: Thu, 11 Feb 2016 10:06:38 +0100
+	Thu, 11 Feb 2016 10:12:58 +0000 (UTC)
+Received: from comp_016_pc_buildenv.localdomain (unknown [31.182.60.238])
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id 27CEE42A98B;
+	Thu, 11 Feb 2016 11:12:57 +0100 (CET)
 From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160211090638.GA9319@comp-006-thk.openrnd.local>
-References: <1455115465-28799-1-git-send-email-maciej.borzecki@open-rnd.pl>
-	<CALbNGRTuRCbK8L_OZ2gReD8rYOcPTi66u=r=cv0irV+_6qp1iw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CALbNGRTuRCbK8L_OZ2gReD8rYOcPTi66u=r=cv0irV+_6qp1iw@mail.gmail.com>
-User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
+To: openembedded-devel@lists.openembedded.org,
+	Li xin <lixin.fnst@cn.fujitsu.com>, Kang Kai <kai.kang@windriver.com>,
+	Martin Jansa <Martin.Jansa@gmail.com>,
+	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 11 Feb 2016 11:12:51 +0100
+Message-Id: <1455185571-22165-2-git-send-email-maciej.borzecki@open-rnd.pl>
+X-Mailer: git-send-email 2.5.0
+In-Reply-To: <1455185571-22165-1-git-send-email-maciej.borzecki@open-rnd.pl>
+References: <1455185571-22165-1-git-send-email-maciej.borzecki@open-rnd.pl>
 Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
-Subject: Re: [meta-oe][PATCH 1/2] lua: bump lua.pc version
+Subject: [meta-oe][PATCH v2 2/2] lua: update Libs in lua.pc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,47 +30,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2016 09:06:42 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 11 Feb 2016 10:12:59 -0000
 
-On 02/10 18:13, Andreas Müller wrote:
-> On Wed, Feb 10, 2016 at 3:44 PM, Maciej Borzecki
-> <maciej.borzecki@open-rnd.pl> wrote:
-> > Lua was updated to 5.3.2, however lua.pc still has 5.2.2 listed as
-> > Version.
-> >
-> > Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-> > ---
-> >  meta-oe/recipes-devtools/lua/lua/lua.pc | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-devtools/lua/lua/lua.pc b/meta-oe/recipes-devtools/lua/lua/lua.pc
-> > index e6f8b6f096dbcf578665699d2e3570dd22088d40..f14d227543c04189c5c31cd2c2737ac68933979f 100644
-> > --- a/meta-oe/recipes-devtools/lua/lua/lua.pc
-> > +++ b/meta-oe/recipes-devtools/lua/lua/lua.pc
-> > @@ -4,7 +4,7 @@ includedir=${prefix}/include
-> >
-> >  Name: Lua
-> >  Description: Lua language engine
-> > -Version: 5.2.2
-> > +Version: 5.3.2
-> >  Requires:
-> >  Libs: -L${libdir} -llua
-> >  Libs.private: -lm
-> > --
-> > 2.5.0
-> >
-> Is it possible to 'sed' this based on PV so that we don't need to do
-> that on next update?
->
+Update Libs in lua.pc so that pkg-config --libs gives the correct list
+of libraries for linking. This makes us effectively list the same
+libraries as Fedora does.
 
-Agreed, makes sense to update it based on ${PV}.
+Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+---
+ meta-oe/recipes-devtools/lua/lua/lua.pc.in | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
---
-Maciej Borzęcki
-Senior Software Developer at Open-RnD Sp. z o.o., Poland
-www.open-rnd.pl
-mobile: +48 889 117 365, fax: +48 42 657 9079
+diff --git a/meta-oe/recipes-devtools/lua/lua/lua.pc.in b/meta-oe/recipes-devtools/lua/lua/lua.pc.in
+index fe220160374a2a7261ed9ada91d0c8f9969bf3b6..c27e86e85dbe2f68f8c5240d0f6d4f4eb9c33383 100644
+--- a/meta-oe/recipes-devtools/lua/lua/lua.pc.in
++++ b/meta-oe/recipes-devtools/lua/lua/lua.pc.in
+@@ -6,6 +6,5 @@ Name: Lua
+ Description: Lua language engine
+ Version: @VERSION@
+ Requires:
+-Libs: -L${libdir} -llua
+-Libs.private: -lm
++Libs: -L${libdir} -llua -lm -ldl
+ Cflags: -I${includedir}
+-- 
+2.5.0
+
 
