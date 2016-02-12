@@ -1,48 +1,61 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 854A57317F
+Return-Path: <samuli.piippo@theqtcompany.com>
+Received: from emea01-db3-obe.outbound.protection.outlook.com
+	(mail-db3on0113.outbound.protection.outlook.com [157.55.234.113])
+	by mail.openembedded.org (Postfix) with ESMTP id 954096012C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Feb 2016 16:23:37 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id g62so3570101wme.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Feb 2016 08:23:39 -0800 (PST)
+	Fri, 12 Feb 2016 16:37:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=dominion-thruhere-net.20150623.gappssmtp.com; s=20150623;
-	h=from:content-type:content-transfer-encoding:subject:message-id:date
-	:to:mime-version;
-	bh=wmXVN2h7+hCpfUKtp3KJHlRRmSolIbRgjRH0JNZ4440=;
-	b=vOUASFidiqFJkDXzRmfUkwhWd0r7OmiHQofT3L87UGbTs3VeQILwwVrlOAbihWXBl2
-	IRDTrz8p01hHn12EH01KII7aNcENkOnMqQ5lXfstU3no8zrYhp2nkrwuS/3BlgyHvAxH
-	bc5D5asTjdbw5Qg2JR2LooJcQD0ZpMFGg6HNe9A4V5f97ScyrSH7tW1BrdbO7qsESv6a
-	KoMnOnjUYUdd1FIODZNRCnJlsZh5sfvc5Gt8kjBvTtlDMEUUSFHqvNvkU8AD99Xr0q8x
-	nOuuWnK+Dp/dvnnegKeWaPC8NgARPXGqh/tPzy0IZ5x9jvGESKaf+C9e1UL2CqBssokG
-	Hk7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:content-type:content-transfer-encoding
-	:subject:message-id:date:to:mime-version;
-	bh=wmXVN2h7+hCpfUKtp3KJHlRRmSolIbRgjRH0JNZ4440=;
-	b=dB9nxqNYXDdFXDo03oKhddEPf2XBnuHx5ZdMTM7zWrrVXB1DC2AZNKHJbT/UyYz3Qb
-	EM2I7z1nx9GkGfHUFggQvvnLojr2OZioYnONS14XRBBk/B167SvFUVhYP/3yNr2F3giv
-	UX9VI42cPTsKnXNtR/o+AWvkSPeq0lmElYSBHMxMBqdDOfM7mqb2paEpglbfE1+VYwPo
-	CCmd7Id+wz8s9PzBfW+3E2EpUdJ2P1E7+TcvCvfz9kVL1wDQ0FXV0MB3mxZh1ArNcivZ
-	fd6QBZU1hfAEoYGsI95srzyODcEi6RVJa0C2jrFnzgi/aFEm4O7uKHt8r7kphU0Q3F1m
-	QeBQ==
-X-Gm-Message-State: AG10YOTYMB1EQlB+RKED2a4ZSargWi2WqSU8uf9R00MJVAmnzLhoja1B2xlFeyGsD/Hl8w==
-X-Received: by 10.28.145.7 with SMTP id t7mr5450574wmd.98.1455294218296;
-	Fri, 12 Feb 2016 08:23:38 -0800 (PST)
-Received: from [172.20.0.187] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by smtp.gmail.com with ESMTPSA id k4sm3046834wmc.12.2016.02.12.08.23.37
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 12 Feb 2016 08:23:37 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
-Message-Id: <45119797-AAEF-4ED3-A274-A23D25F85FD3@dominion.thruhere.net>
-Date: Fri, 12 Feb 2016 17:23:36 +0100
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3120\))
-X-Mailer: Apple Mail (2.3120)
-Subject: Kodi 16rc recipes available
+	d=digiaonline.onmicrosoft.com; s=selector1-theqtcompany-com;
+	h=From:To:Date:Subject:Message-ID:Content-Type:MIME-Version;
+	bh=AwHutTfBcz62MKTk2woMmNu1qbpyfYt6hfdn35Fr1Fs=;
+	b=ernEE/Go3NeZx35ygBsXjCiQ95uQgbrbcpk5irAkRvsuqA+7wIghqtnRD0ldItluBeVTHRMtLFnQWY0k+iy8YOe6NqfIHchp91jp/JkQqIGwlmZ7vYLPCQJ75aQmY5CqeRsmGqItQz3kA1srSIgdJa5aniMX58IJmBlJfUQZKN8=
+Received: from DB5PR02MB1175.eurprd02.prod.outlook.com (10.162.163.21) by
+	DB5PR02MB1174.eurprd02.prod.outlook.com (10.162.163.20) with Microsoft
+	SMTP Server (TLS) id 15.1.403.16; Fri, 12 Feb 2016 16:23:17 +0000
+Received: from DB5PR02MB1175.eurprd02.prod.outlook.com ([10.162.163.21]) by
+	DB5PR02MB1175.eurprd02.prod.outlook.com ([10.162.163.21]) with mapi id
+	15.01.0403.017; Fri, 12 Feb 2016 16:23:17 +0000
+From: Piippo Samuli <samuli.piippo@theqtcompany.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-qt5] Commercial License
+Thread-Index: AQHRY1/Ceraq1C08+0+nUsE7X99UVp8omwPg
+Date: Fri, 12 Feb 2016 16:23:17 +0000
+Message-ID: <DB5PR02MB117525C57FE240091B542E5190A90@DB5PR02MB1175.eurprd02.prod.outlook.com>
+References: <EC3D8C09-AC4A-40D6-A828-6B6E0CC34678@staylor.ca>
+In-Reply-To: <EC3D8C09-AC4A-40D6-A828-6B6E0CC34678@staylor.ca>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: lists.openembedded.org; dkim=none (message not signed)
+	header.d=none; lists.openembedded.org;
+	dmarc=none action=none header.from=theqtcompany.com;
+x-originating-ip: [91.217.248.11]
+x-microsoft-exchange-diagnostics: 1; DB5PR02MB1174;
+	5:3Swotul/juRdRlsiTom5Vi2qTInK8ym9iFAt3RFPT7BocLejLAJYvKbsJDcjdg2Mqwviuge1GkbqbV4k1YNo1555wPgHMRGQifGm0xbtJiOU5X5vxk4ywLjFSWycz1BRAhoxNtESjbpPALQzQrlWxQ==;
+	24:7I2icSRi3Nr24s2PJ4ys7zSLWNNl3CQrIds7rCtoPWyNHFMxVVJ18mTQzSN9SvrVIWLSGV6M9ZrVKDRDmbznfPswAv317GtzURqgga/pR+A=
+x-microsoft-antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DB5PR02MB1174;
+x-ms-office365-filtering-correlation-id: 9e458cf0-407b-4dfa-be2f-08d333c8d0bd
+x-microsoft-antispam-prvs: <DB5PR02MB11747E11C39830FDD7A6391F90A90@DB5PR02MB1174.eurprd02.prod.outlook.com>
+x-exchange-antispam-report-test: UriScan:;
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(601004)(2401047)(8121501046)(5005006)(3002001)(10201501046);
+	SRVR:DB5PR02MB1174; BCL:0; PCL:0; RULEID:; SRVR:DB5PR02MB1174; 
+x-forefront-prvs: 0850800A29
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(6009001)(13464003)(450100001)(77096005)(19580395003)(40100003)(2950100001)(5002640100001)(92566002)(66066001)(74316001)(87936001)(189998001)(5008740100001)(106116001)(122556002)(19580405001)(2501003)(110136002)(33656002)(2900100001)(2351001)(76576001)(3660700001)(10400500002)(2906002)(15975445007)(11100500001)(1720100001)(5003600100002)(5001960100002)(50986999)(6116002)(107886002)(76176999)(5004730100002)(3846002)(102836003)(3280700002)(54356999)(86362001)(1096002)(1220700001)(586003);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:DB5PR02MB1174;
+	H:DB5PR02MB1175.eurprd02.prod.outlook.com; FPR:; SPF:None;
+	MLV:sfv; LANG:en; 
+spamdiagnosticoutput: 1:23
+spamdiagnosticmetadata: NSPM
+MIME-Version: 1.0
+X-OriginatorOrg: theqtcompany.com
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Feb 2016 16:23:17.6224 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 6fce4bb8-3501-41c9-afcc-db0fb51c7e3d
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR02MB1174
+Subject: Re: [meta-qt5] Commercial License
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,51 +68,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2016 16:23:38 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Fri, 12 Feb 2016 16:37:34 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-I=E2=80=99ve managed to get kodi 16rc3 to build (and work!) on armv7a =
-and x86-64. The recipes can be found here: =
-https://github.com/koenkooi/meta-dominion/tree/master/recipes-multimedia
+We have recipes available for Qt Charts, Qt Data Visualization, Qt Virtual =
+Keyboard and Qt Quick 2D Renderer, all modules that are open sourced under =
+GPL3 with Qt 5.7. Currently the recipes are available on the commercial Qt =
+for Device Creation layer, but plan is to contribute these recipes to meta-=
+qt5 once it switches to Qt 5.7.
 
-It needs work before I can submit it properly to meta-multimedia. The =
-problems I=E2=80=99ve spotted so far:
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
+d-devel-bounces@lists.openembedded.org] On Behalf Of S=E9bastien Taylor
+Sent: 9. helmikuuta 2016 19:31
+To: openembedded-devel@lists.openembedded.org
+Subject: [oe] [meta-qt5] Commercial License
 
-1) No libva in oe-core, it should move from meta-intel to oe-core. =
-libva-intel-driver is fine where it is.
-2) No vdpau in oe-core, it should move from meta-dominion to oe-core
-3) It runs java in do_configure. Since meta-java only works one day per =
-year we=E2=80=99ll just have to install it on the host.
-4) OpenGLES is broken in kodi, a fork has fixes.
-5) Wayland is broken in kodi, a fork has fixes.
-6) No PACKAGECONFIGs yet for weird media accelerations like openmax, =
-imx6, etc.
+I am looking to update the qt5 build to build the commercial version (as op=
+posed to the open source) as well as adding the QtCharts and Visualization =
+modules which are part of the commercial release.
 
-and the big one for me:
+I was hoping for some feedback as to whether this has already been looked a=
+t and opinions on how to best handle toggling the license in the configurat=
+ion in a way that can be submitted back into meta-qt5.
 
-7) no hts add-ons available. pvr.hts needs ${S} from kodi, but uses =
-cmake instead of autotools. I might just partially copy/paste =
-cmake*bbclass into kodi_git.bb to make this work. Needs more thought and =
-less cmake.
 
-So if you have an x86-64 box with intel graphics, great, everything =
-works as expected. On ARM you need working openGL, so that limits you to =
-snapdragon/freedreno. That works[1], but no accelerated decode.
-If you have non-intel graphics in x86, have a look at what meta-dominion =
-and meta-amd (thanks Kergoth!) do, I have it working on ATI and Nvidia =
-cards locally.
-
-Anyway, if people want to help out with getting the recipes upstreamed =
-into the right layers: awesome. The biggest hurdle named ffmpeg was =
-removed (well, added into OE, but you get what I mean) 16 days ago, so =
-it should be relatively plain sailing :)
-
-regards,
-
-Koen
-
-[1] https://www.youtube.com/watch?v=3DZJcfcKmIgSM=
+--=20
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
