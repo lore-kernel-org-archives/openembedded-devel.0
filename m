@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id C986576639
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id E7AF77680B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Feb 2016 13:52:23 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id g62so1362844wme.1
+	Sat, 13 Feb 2016 13:52:24 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id g62so53738907wme.0
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 13 Feb 2016 05:52:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=IyWEzK/nYy2Z7QWdNSy2NgWBHc73+Fq8ZmesupvWNRU=;
-	b=i8nLSms07dwseC2/zgDmyflzy0pAzX0h5Nqi6ZfBkQX7C5Z0NktUZyyIU9I5wO307u
-	bUv6klkhI6SNNjd3IGrTjUAXPXM1Ezt9k4nFIHW6pnYMgOSA6Pudim6znofwa1qqQ8bm
-	4WqhRlZvtXFdiFvceFIi5uy0PVm3bPC87apj2n2x+w+5/UuAPhG1SofYCzI7WwI4ztFK
-	KAiZkzN2aSGXclS9WqQQ6rvVzQPSWGVkzMuf5vRYfR2hTZn4qT60WfRPwTSCudjMqhbB
-	oF++dGQ68ExjEHMD/3IotGKzLVbKqlz6xAE/LN7YikTWs3DjRs6T5yeZSFimE8Q5WekV
-	OLTg==
+	bh=G+46qHEROE9sKKH932mMO97jotAaW7D/zORTuS6vEjY=;
+	b=Ug3bAFKj5EJVExRYAmYGLp8qw+um7InaOfIiCK4BeZaa5/6RVShHkz+H58cFp+0f0k
+	mVO3er7hPl35hdTrMLtl3xYz1FzPHFVVqd7ZcT4+BogYdrrjoDw+fwHd701/aeYS2kmh
+	PbwlorGzurvg9MNgztDZb7v3g7sf4FDbyn/nYsg5g1PvVjhvPNcVhV8xNMv+MdM8S3JT
+	50cPAaxJYtJHhLHjx5LgXqMQQWCQS7hoXcZP38Aa2QoZWDk9rooUC5gLXERLua2+w/WU
+	H8W8MWmbodHODUN6F47CNIhDOlmAFrMGCHUw1cYuu0jgT8a8+7gsHb73+IZsHFp7gT+c
+	6WuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=IyWEzK/nYy2Z7QWdNSy2NgWBHc73+Fq8ZmesupvWNRU=;
-	b=hojE3mZsPv+EaGN7ENGx772zLoyw3a6bmINjAj7TNei5DLX/Ys0FiqbxgG14R7X+G5
-	vV03aoI7BsBVdyTy/Lny+7RuYC2/oUIDTBWRdfq6qH0AsTmRZ7LKR/UsGHgMBMINq1wq
-	mbd6wWPfnXxbdEd3QmLCm01w8Gc694kva6qKHHJ3DbJpOZ3kl02UkVKvxlVZadUl7pcR
-	LEbRveZNsV2fbVpzAkN+046ya3S1y19fDfF5nN3dj6wDKltJVhh4fuZ5ohF7YJGnaPH0
-	IzuhgH4p7XJa9dl+9wmMCjzaF2RTDlJrjvW1zR5H50ka09CM8u79M2mNSzo8ZMfKzlBY
-	bzbQ==
-X-Gm-Message-State: AG10YOR8t/FqLg21d8b28GY/UzPQ+ds+65HRNV1XrwNoyGDnvAkUnnePGpbU5F9S7yvq2Q==
-X-Received: by 10.194.103.198 with SMTP id fy6mr8177636wjb.48.1455371544121;
-	Sat, 13 Feb 2016 05:52:24 -0800 (PST)
+	bh=G+46qHEROE9sKKH932mMO97jotAaW7D/zORTuS6vEjY=;
+	b=IxpNIfCF/t2/5Iu5CHZOZNzpazzIaHAHaDAzdnJ5vyyum6zAg1/r18hzCmjHNr8KCD
+	xSMe7nUaLyMeNTWuBdWZTnkLzeBt17EQ2kiqwSxNqQ4PvEkhnr407rs27Mso5CtGKwt6
+	iuhLKaEofTnUetQfsUgyDWJFBzO407zcWRl1MgliT61xHUg+lUqO23Jxtc4RhGgdQmDg
+	/4OWU7Es3k0d9CX2ZRy+hvOcmyWWpJlDxStoKpi034wLvEZ7eu8PzzL3qtnLv37MZquw
+	yiLExb44+vnwzoi/jSqbId1OUA9c18nJNqP4cQy0GZt7j6LUv+775Hq6kgO/JUPfjPii
+	6PxQ==
+X-Gm-Message-State: AG10YOQs3KsReEFHlgrUU1FsF1qkn6vdHcG31nzG0T85hiumrXWmWmTJ4YYw5lQqo0qN4Q==
+X-Received: by 10.28.12.80 with SMTP id 77mr3195960wmm.19.1455371545028;
+	Sat, 13 Feb 2016 05:52:25 -0800 (PST)
 Received: from localhost.localdomain (p4FDF11DE.dip0.t-ipconnect.de.
 	[79.223.17.222]) by smtp.googlemail.com with ESMTPSA id
-	jo6sm16553106wjb.48.2016.02.13.05.52.23
+	jo6sm16553106wjb.48.2016.02.13.05.52.24
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 13 Feb 2016 05:52:23 -0800 (PST)
+	Sat, 13 Feb 2016 05:52:24 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Feb 2016 14:52:05 +0100
-Message-Id: <1455371527-11604-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Sat, 13 Feb 2016 14:52:06 +0100
+Message-Id: <1455371527-11604-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.0
 In-Reply-To: <1455371527-11604-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1455371527-11604-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/4] source-han-sans-jp-fonts: initial add 1.004
+Subject: [PATCH 3/4] source-han-sans-kr-fonts: initial add 1.004
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,17 +68,17 @@ Based on [1].
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../44-source-han-sans-jp.conf                     | 19 ++++++++++++
- .../ttf-fonts/source-han-sans-jp-fonts_1.004.bb    | 34 ++++++++++++++++++++++
+ .../44-source-han-sans-kr.conf                     | 19 ++++++++++++
+ .../ttf-fonts/source-han-sans-kr-fonts_1.004.bb    | 34 ++++++++++++++++++++++
  2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts/44-source-han-sans-jp.conf
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_1.004.bb
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts/44-source-han-sans-kr.conf
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_1.004.bb
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts/44-source-han-sans-jp.conf b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts/44-source-han-sans-jp.conf
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts/44-source-han-sans-kr.conf b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts/44-source-han-sans-kr.conf
 new file mode 100644
-index 0000000..a7a93fe
+index 0000000..dee73ae
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts/44-source-han-sans-jp.conf
++++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts/44-source-han-sans-kr.conf
 @@ -0,0 +1,19 @@
 +<?xml version="1.0" encoding="UTF-8"?>
 +<!DOCTYPE fontconfig SYSTEM "../fonts.dtd">
@@ -91,7 +91,7 @@ index 0000000..a7a93fe
 +    -->
 +    <match target="scan">
 +        <test name="fullname" compare="eq">
-+            <string>Source Han Sans JP Medium</string>
++            <string>Source Han Sans KR Medium</string>
 +        </test>
 +        <edit name="weight" mode="assign">
 +            <const>demibold</const>
@@ -99,15 +99,15 @@ index 0000000..a7a93fe
 +    </match>
 +</fontconfig>
 +
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_1.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_1.004.bb
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_1.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_1.004.bb
 new file mode 100644
-index 0000000..4a26a2f
+index 0000000..c91d167
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_1.004.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_1.004.bb
 @@ -0,0 +1,34 @@
 +require ttf.inc
 +
-+SUMMARY = "Adobe OpenType Pan-CJK font family for Japanese"
++SUMMARY = "Adobe OpenType Pan-CJK font family for Korean"
 +HOMEPAGE = "https://github.com/adobe-fonts/source-han-sans"
 +LICENSE = "OFL-1.1"
 +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=55719faa0112708e946b820b24b14097"
@@ -118,17 +118,17 @@ index 0000000..4a26a2f
 +#EXCLUDE_FROM_WORLD = "1"
 +
 +SRC_URI = " \
-+    https://github.com/adobe-fonts/source-han-sans/raw/release/SubsetOTF/SourceHanSansJP.zip \
-+    file://44-source-han-sans-jp.conf \
++    https://github.com/adobe-fonts/source-han-sans/raw/release/SubsetOTF/SourceHanSansKR.zip \
++    file://44-source-han-sans-kr.conf \
 +"
-+SRC_URI[md5sum] = "908fbf97f3df04a6838708c093f1e900"
-+SRC_URI[sha256sum] = "dc6dbae3fba35f220bac88ba7130b826c7efe1282f472788fae3628b79be3f54"
++SRC_URI[md5sum] = "f8d1bd6c87d8575afdb25e2f46bd81d4"
++SRC_URI[sha256sum] = "38fd15c80f9980492faaa1af39ff873d8a38e45027023fb17d5b10d4b4b0e6af"
 +
-+S = "${WORKDIR}/SourceHanSansJP"
++S = "${WORKDIR}/SourceHanSansKR"
 +
 +do_install() {
 +    install -d ${D}${sysconfdir}/fonts/conf.d/
-+    install -m 0644 ${WORKDIR}/44-source-han-sans-jp.conf ${D}${sysconfdir}/fonts/conf.d/
++    install -m 0644 ${WORKDIR}/44-source-han-sans-kr.conf ${D}${sysconfdir}/fonts/conf.d/
 +
 +    install -d ${D}${datadir}/fonts/truetype/
 +    find ./ -name '*.otf' -exec install -m 0644 {} ${D}${datadir}/fonts/truetype/ \;
