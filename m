@@ -1,51 +1,45 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 94E0175D4B
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id C83676FFA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Feb 2016 13:52:25 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id c200so7629163wme.0
+	Sun, 14 Feb 2016 11:28:54 +0000 (UTC)
+Received: by mail-wm0-f50.google.com with SMTP id g62so74292848wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Feb 2016 05:52:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=0l3Fz5osn8h9Ac1i3VE0JHuGgm3hJ53BruinK8NFdLY=;
-	b=0U/CYzEjObFcA6lTq1kpDZu8TrcONVNeN1nJdXPcZ1pGzIjTu7mKevghGaTg09LhSh
-	xNt9opRNCV+GkpadRTINzGOCUtNqZUWJFVSQmdoUkSeshmK9TNlCV5XDgPcjTGZ/2Pm7
-	AaWDvtijFNWl4L1o8DDjqE594UqckdqsU66YwAjm/xLs4FkadVjTbavYNicAkB6PKUW7
-	bBPkkbpbcnx1TcNIdfzUH9ok1ve8IIbFKjafi2cz1iUhrrJnVsjU9+BZvLwXLdzh4BzX
-	vfS4bdyhgxW5yYSD4agW0zsDrOMmaP3HFlYVL3pdza9DB1K6Hw5pqvCvflvIVQAOCJ9i
-	P2OA==
+	Sun, 14 Feb 2016 03:28:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=VN8WxAkxRSYIWB8VG/hh1v6jG6FM1u9cahJOZfhZQZY=;
+	b=lTRjJ7YjxojyOqx2Bp2EJ0CjZ9DfuJagVERL5DJhP9JkzBXU84JRlVQy7bwmZFGhJW
+	KB/T64byGn+UtlT5dIJV7r/9MGdSLUjTkKUibvXu6or+hBk8YwBzQyWB2m0rPw9c14eM
+	ijP7W+5lymtk8xYwdicHttzDlgj5KwPqG8gjL56UZvr/0ZujR5q/xUyn+I0kA/V99MLh
+	9CibdGMqAWmX2XsJajBWsCGiHuGy6hfmzzSFnM0s6m2nbiZh9Swr4jrozqEyjyLaZpJ0
+	f+84jYFhzytYOmUmQoLwiPlQUZ/FfSb6vgO6nOkmSCRwKrJqo+0NrEhWax14G804hnci
+	EaaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-type:content-transfer-encoding;
-	bh=0l3Fz5osn8h9Ac1i3VE0JHuGgm3hJ53BruinK8NFdLY=;
-	b=HTxiNqQIYMSdlImNIh2CW+i/56J+3T6sXQ2sMorZkfwkgmLZeHAXu29S6kxqa6dykS
-	Urcir3tu5pkEK7Fowk6c+uZGyGgfpUCSwvhjWqf9KDpqbg9QMeQEbms5wbP4iFCbo156
-	ImeRlsYiaLleX7rXG+Hxfh/qVY9V4xSYDjbG9OwlZ1JRU76GrLM4TO5hgU7P/kV9xbA7
-	0WvY5g1hHzURMWR8U0QzEQIgDXqjwj95hdTKZLz28g/vFEsiI61sGA3lX+w9qgXbuyQK
-	XA31VsLmwjOdRBUwJJ5dHfW1GvpyE+4G0SHlHwyuFz4Xpli9HaFSqEVX0aGZksIxqu6k
-	T7Aw==
-X-Gm-Message-State: AG10YOTyHsTMAmMfh503NuegP6Mj+K1vuvAJBFUdZBzloqmKtnmI8xlCh5bz8wg9WYXySQ==
-X-Received: by 10.194.250.103 with SMTP id zb7mr7082643wjc.65.1455371545997;
-	Sat, 13 Feb 2016 05:52:25 -0800 (PST)
-Received: from localhost.localdomain (p4FDF11DE.dip0.t-ipconnect.de.
-	[79.223.17.222]) by smtp.googlemail.com with ESMTPSA id
-	jo6sm16553106wjb.48.2016.02.13.05.52.25
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 13 Feb 2016 05:52:25 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=VN8WxAkxRSYIWB8VG/hh1v6jG6FM1u9cahJOZfhZQZY=;
+	b=F2+a+b9CU+K0BpOHuJkG+FKalvzRKBMhCjYI0LJa/oH76dFY2kcf9AGOM0d1DFK3XG
+	hNcq73goP3+GNYlyjdeUe3Go5TJTtmuRR/0Ao0uWKeRWDX+/UsaYyXX5BVzzwS4I0K4A
+	zEOTwOqdi4+6Lvq5GYrZ3set8d0gyYi+RtDAjN4CSW1M3BE/B6UrgvHLgS3LuOHdRFkp
+	QAMAA9JUDOzxafRL7jxZ9UzRNfAI22M2JTOyzVsArAc/RIvVbjkFAjog3qtnk9ez1wXc
+	vOaaKKivCdp6yEq8GSH+TpQZ/jmRKF5KKhKWLYz+xyEQpq1ee5x5pwnPNWmQ10E/HRxH
+	AyZg==
+X-Gm-Message-State: AG10YOT/A02hzKOPs0AGkFcofednfjmgxewncjMHmYi0RvCQa344QWTpMHJS8Q8O/u3UDw==
+X-Received: by 10.28.131.134 with SMTP id f128mr7434021wmd.41.1455449334649;
+	Sun, 14 Feb 2016 03:28:54 -0800 (PST)
+Received: from ThinkPad-T520.homenet.telecomitalia.it
+	(host180-22-dynamic.15-87-r.retail.telecomitalia.it. [87.15.22.180])
+	by smtp.gmail.com with ESMTPSA id
+	x186sm10601707wmg.19.2016.02.14.03.28.53
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 14 Feb 2016 03:28:53 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Feb 2016 14:52:07 +0100
-Message-Id: <1455371527-11604-5-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.0
-In-Reply-To: <1455371527-11604-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1455371527-11604-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [PATCH 4/4] source-han-sans-tw-fonts: initial add 1.004
+Date: Sun, 14 Feb 2016 12:28:42 +0100
+Message-Id: <1455449322-4445-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-initramfs][PATCH] klibc: fix sh deps ver (PR is needed after PV)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,89 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Feb 2016 13:52:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 14 Feb 2016 11:28:56 -0000
 
-Based on [1-2].
+Revert commit dd1ca18 removing ${PR}. Bad idea.
+The shared lib could not be found giving this error:
 
-[1] https://projects.archlinux.org/svntogit/community.git/tree/trunk?h=packages/adobe-source-han-sans-fonts
-[2] http://pkgs.fedoraproject.org/cgit/rpms/adobe-source-han-sans-tw-fonts.git/tree/adobe-source-han-sans-tw-fonts.spec
+Collected errors:
+ * satisfy_dependencies_for: Cannot satisfy the following dependencies for
+   klibc-utils-XXX:
+ * 	libklibc (= 2.0.4) *
+ * opkg_install: Cannot install package klibc-utils-XXX.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../44-source-han-sans-tw.conf                     | 19 ++++++++++++
- .../ttf-fonts/source-han-sans-tw-fonts_1.004.bb    | 34 ++++++++++++++++++++++
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts/44-source-han-sans-tw.conf
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_1.004.bb
+ meta-initramfs/recipes-devtools/klibc/klibc.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts/44-source-han-sans-tw.conf b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts/44-source-han-sans-tw.conf
-new file mode 100644
-index 0000000..ae28940
---- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts/44-source-han-sans-tw.conf
-@@ -0,0 +1,19 @@
-+<?xml version="1.0" encoding="UTF-8"?>
-+<!DOCTYPE fontconfig SYSTEM "../fonts.dtd">
-+<fontconfig>
-+    <!-- 
-+        - Medium variant is used instead of Regular on Qt apps:
-+        https://bugs.launchpad.net/ubuntu-font-family/+bug/744812
-+        - Medium and Bold looks the same in certain applications:
-+        https://bugs.launchpad.net/ubuntu/+source/gnome-specimen/+bug/813373
-+    -->
-+    <match target="scan">
-+        <test name="fullname" compare="eq">
-+            <string>Source Han Sans TWHK Medium</string>
-+        </test>
-+        <edit name="weight" mode="assign">
-+            <const>demibold</const>
-+        </edit>
-+    </match>
-+</fontconfig>
-+
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_1.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_1.004.bb
-new file mode 100644
-index 0000000..7282505
---- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_1.004.bb
-@@ -0,0 +1,34 @@
-+require ttf.inc
-+
-+SUMMARY = "Adobe OpenType Pan-CJK font family for Traditional Chinese"
-+HOMEPAGE = "https://github.com/adobe-fonts/source-han-sans"
-+LICENSE = "OFL-1.1"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=55719faa0112708e946b820b24b14097"
-+
-+inherit allarch fontcache
-+
-+# Download tends to break - so - or not?
-+#EXCLUDE_FROM_WORLD = "1"
-+
-+SRC_URI = " \
-+    https://github.com/adobe-fonts/source-han-sans/raw/release/SubsetOTF/SourceHanSansTW.zip \
-+    file://44-source-han-sans-tw.conf \
-+"
-+SRC_URI[md5sum] = "6533b71b31c19e548768f0fc963202f3"
-+SRC_URI[sha256sum] = "92ba161921c5cdec5a8f8d5711676f0865b50cee071c25eb4bd4125b5af59fd0"
-+
-+S = "${WORKDIR}/SourceHanSansTW"
-+
-+do_install() {
-+    install -d ${D}${sysconfdir}/fonts/conf.d/
-+    install -m 0644 ${WORKDIR}/44-source-han-sans-tw.conf ${D}${sysconfdir}/fonts/conf.d/
-+
-+    install -d ${D}${datadir}/fonts/truetype/
-+    find ./ -name '*.otf' -exec install -m 0644 {} ${D}${datadir}/fonts/truetype/ \;
-+}
-+
-+FILES_${PN} = " \
-+    ${sysconfdir}/fonts \
-+    ${datadir}/fonts \
-+"
-+
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 33be23c..65ee868 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -48,4 +48,4 @@ KLIBC_ARCH_x86 = "i386"
+ KLIBC_ARCH_x86-64 = "x86_64"
+ KLIBC_ARCH_powerpc = "ppc"
+ KLIBC_ARCH_powerpc64 = "ppc64"
+-THIS_LIBKLIBC = "libklibc (= ${PV})"
++THIS_LIBKLIBC = "libklibc (= ${PV}-${PR})"
 -- 
-2.5.0
+1.9.1
 
 
