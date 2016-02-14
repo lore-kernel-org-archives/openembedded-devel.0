@@ -1,46 +1,77 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f178.google.com (mail-pf0-f178.google.com
-	[209.85.192.178])
-	by mail.openembedded.org (Postfix) with ESMTP id B830A6FEFE
+Return-Path: <samuli.piippo@theqtcompany.com>
+Received: from emea01-am1-obe.outbound.protection.outlook.com
+	(mail-am1on0148.outbound.protection.outlook.com [157.56.112.148])
+	by mail.openembedded.org (Postfix) with ESMTP id 8DB1176809
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Feb 2016 15:56:39 +0000 (UTC)
-Received: by mail-pf0-f178.google.com with SMTP id c10so75005036pfc.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Feb 2016 07:56:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=QlOSFQbYGV+81TuzGk67qoQN943zQ0rKC1lKNcLLiuo=;
-	b=OGjNl6sBFVdfr6jIX65CTrPbqtMDbshHSHDSt9ur4eOoDXOSD5w7wr3+uEWXdbUDpf
-	F0jnWQl5eFcaCskv/eyLxlY+BemW3kGGyA1SdwEYqVfCHCMuGBovOJleDe+9zZEQq4ca
-	nhE5S1dI2gaZt7TAxYnWb5KIWOxpqDZvpKqmQ1L/S9OW0XcU8FfCNx46bOYBbj45yNMc
-	+0M4YNDwQrEPPvVMJ3mXx99vpeGcyjpJ0QYTzaDKpJgctpPGtEx1MaTHL8Mpi7kCVH4V
-	POkjwBzExdg/rygNuZQ6op+BmCXESvKSybN0C4BE1lvenRvXJNhNmAsGJ9cC1csMs4Py
-	ZnPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=QlOSFQbYGV+81TuzGk67qoQN943zQ0rKC1lKNcLLiuo=;
-	b=V+FZux6AmgczG2wEjqlW89G9SU+1Xgc23+Eo6dhWcjKccOkfRISUwhzw1Ol1w28TDk
-	EvJ1jcOgr1GgmddZkjwzgpVJAv7EFWFA4OGiLPRTAhy4hPBJ5cXxNQjBshFC+IAhkDZB
-	t8jBk2HRnK+pwq8Oj65gXiEjfi0HwhvpGo3wNeuV36ZNETcX3n0VFdCVpR6jnA/ikjwF
-	XmnbYikEq2MgYwZO2tetXQKyLoXSiku726LcMC0xNOnlWwAA98GQv8Ok5K9JuwGDqSwA
-	iWJgPbnaimsMTX5jP40wr60pBeUTuGeC4AM9x/a4csXzVWB+YJBsWtk+yCuc10Pialvp
-	phVw==
-X-Gm-Message-State: AG10YOR3Z+5BQELctoLshD59+LcrD2xYDZLxtBBQ5jlIlY2RtquszCL4evzO/6cIWtf0QA==
-X-Received: by 10.98.68.212 with SMTP id m81mr17148709pfi.135.1455465400168;
-	Sun, 14 Feb 2016 07:56:40 -0800 (PST)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by smtp.gmail.com with ESMTPSA id 9sm32327235pfc.69.2016.02.14.07.56.37
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 14 Feb 2016 07:56:38 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 14 Feb 2016 07:56:33 -0800
-Message-Id: <1455465393-9781-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-oe][jethro][fido][PATCH] xdelta3: Security fix CVE-2014-9765
+	Sun, 14 Feb 2016 17:58:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=digiaonline.onmicrosoft.com; s=selector1-theqtcompany-com;
+	h=From:To:Date:Subject:Message-ID:Content-Type:MIME-Version;
+	bh=xHIA47gb6OrdZ4qi784J0djQeQ4xd3E2LlMpjeBC/aQ=;
+	b=hYAhuDjlCIg/1RrInhUwIrvNyi19XEJN2x5gJDAAPWdWmhXIs4iFfOKNtYDHeRPXr/K4YEDpz4XorCdhq8wjJIgrmKo2JdOUKi36yPYWxUBkh7cX0jVbv2VFPr83oNBtwz2rCpvFRAi8vxBH1NX3zdqTLrCRbrEwgpIt8eCV/pU=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+	header.d=none; lists.openembedded.org;
+	dmarc=none action=none header.from=theqtcompany.com;
+Received: from piippo.it.local (91.217.248.11) by
+	DB5PR02MB1175.eurprd02.prod.outlook.com (10.162.163.21) with Microsoft
+	SMTP Server (TLS) id 15.1.409.15; Sun, 14 Feb 2016 16:25:29 +0000
+From: Samuli Piippo <samuli.piippo@theqtcompany.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 14 Feb 2016 18:25:28 +0200
+Message-ID: <1455467128-4533-1-git-send-email-samuli.piippo@theqtcompany.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-Originating-IP: [91.217.248.11]
+X-ClientProxiedBy: DB5PR02CA0030.eurprd02.prod.outlook.com (25.161.237.40) To
+	DB5PR02MB1175.eurprd02.prod.outlook.com (25.162.163.21)
+X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1175;
+	2:K7x2iMMkzn5otaopGYtJQl+OJs3JwZxrJTKoZVXV/SBXoH0FPlXfCXw9zsgPuaCSq6WtpOfsjd1MWVBhSUwAzdKkvZgA27Q7owTpHwWRLzoyNHUUz0dH88oc577J5mNl7M0DVl82HAyq6XVcYrLNEw==;
+	3:uuEYfJHNywkPt6A18WY7lccIc8DJDBumK3ijahZcY1cjipw7xJxp77t36DUiNCS6/f5u1iAFA8QJtbqDmROOJcFLTOeUCrBbWntvMtwKSdGPt7N+MKFvjkchTsJKq3Bt;
+	25:6E0aLnhP7dEUNOrpoFCNDcJd6m4uzi8HXqXRtupqBYHtqCGLbRG/SAoGwDjXlzB6tlUbdd2e7Wq8wWLxXoCttlXV0JUHtzS0/avr7PeZEodMlYZiiigEIL22/R2vnli9ncyqhgsGePXVRxYblYYO5BYtEbCsJ8Exupj+DXvWvvEHEozCsrYzfpRSg38g3Sz8jiogtccdOBRO5EDa7GXxPa+YcUKrnjoieZEaowt6FS/+uv9C6ZhoCQxDHzSp6caF01eUsmy4lkXFUJIJnUg0OZ0bPRuZvJfxKCR4FLuDHxSGlvKTpPlB0I5iJEby8HOf
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DB5PR02MB1175;
+X-MS-Office365-Filtering-Correlation-Id: 02657539-bba9-4b21-082c-08d3355b7475
+X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1175;
+	20:9Zz3pMR+tDr503b0ZAPnxHmK+oRw6+EWtNTThgCQ7MgaV/IQpU4oQt/QPtdzFz+04OlWOtvFwKHEtsCICy/ktMXUJHkXT92qiFDrlHvXPxhtE1cdU98+MIIjbZZFwDENu46HFpOsV9AES45fUNrb1chYQ3XGDzw1xuSdcaHy1g72T1y8KV5uwheffGij8Qu61Jo26GtsfH8dFCw36mvde8iLNJxIN9ucFHlab2JWXJc1VZ4YzQQxZSqGcqDv0jF/Gi97LVTuF5IZIirtiHcWK7LrwVeKO51qM0qoGONc1dSstM/FhumG5XMNfWApMVCSN4Y+hMI5XvCwLqkO0CMPZ0Hj1Y+HkNqy83B0ed4RzuNK3Exa5bDJiTTluo3be7+PiKJkIOkY5l+Yy5ZRx8ubBiPXev7nCk04BkUBgYX/dCqjplFDT6LuRy8fUaABtz6VK7J1L5A4pFCQUyn8zWss8mrF+2fEKo9eBUPIA5g4IBtqOod7KkI01z/ZZTD4rcO8;
+	4:39fk1pvge4MzXLkiREb6yBHaf+SnoJXA1kaYIdtLVxN/91g02mUQ+uByjCQfzyN1gaoNGJd0CkvpcKB3egOlQJP6eFGD2c67caR8dvSKIcRbyX2+0Lh84alpazcRpexzhCymh05Y7TqVqpIi3vAicSRNmcAAps7HPlDoQ3GgX9haevjbQ3/JH9r3+sBn/hnSOX+58hySDy4CfZAk5L8tACO+zrqolPujv3agKcOiMzjABO3ftcweFzpQ953NWQHfCKdIvJPQ9vXsL2ZYdsL6GdLTIiA0Y83hcg2BvQKBuul4fLvOlm/D+fKLHfW0rwGkyJOe8b1EMifdXqH/NenxgdgBxQOSpj7ZbI05kCww1WYs3rxnyLeNg1moCizY0NQV
+X-Microsoft-Antispam-PRVS: <DB5PR02MB11759877F035FD251DA09F7B90AB0@DB5PR02MB1175.eurprd02.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(601004)(2401047)(5005006)(8121501046)(10201501046)(3002001);
+	SRVR:DB5PR02MB1175; BCL:0; PCL:0; RULEID:; SRVR:DB5PR02MB1175; 
+X-Forefront-PRVS: 0852EB6797
+X-Forefront-Antispam-Report: SFV:NSPM;
+	SFS:(10019020)(4630300001)(6009001)(5003940100001)(2351001)(2906002)(15975445007)(16601075003)(189998001)(5001960100002)(229853001)(48376002)(110136002)(92566002)(36756003)(5004730100002)(50986999)(107886002)(6116002)(586003)(47776003)(66066001)(50466002)(450100001)(3846002)(5008740100001)(87976001)(86362001)(50226001)(77096005)(122386002)(1096002)(40100003)(33646002)(42186005)(19580405001)(19580395003)(7099028);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:DB5PR02MB1175; H:piippo.it.local;
+	FPR:; SPF:None; MLV:sfv; LANG:en; 
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DB5PR02MB1175;
+	23:wuRXwUeVSa4AoZTeM2JxeyYwR3hTs2Wc16RCL2yg/?=
+	=?us-ascii?Q?pdov7/KxkuX4UrJ4M/awUCo3DCrkchpFaQcaysX3BFzoKqK9HKmM9gA6VQKa?=
+	=?us-ascii?Q?KAjr4LMeZJiQN7CJYVtPw2XOnaOTZphAFWwok7Sd8kBItM6Uc8h2XskdJd7L?=
+	=?us-ascii?Q?iTy3nG15NbS+Or5b0fQVoWmXsu1ngfZAWz/O2a9do7tStQgWa6Db+BJuMtew?=
+	=?us-ascii?Q?eSwsH0LYGIP4WNea/TH7FPsgIEHBLN8vRhmIDrLg0qSZpTjsAZhbKVKnKU8s?=
+	=?us-ascii?Q?0w0Ox9XYmd+bYiqay8eozG8KzPQ+1OeO9uPviYYOCpmRxfqwE4TElXe8quGT?=
+	=?us-ascii?Q?P9Dvybvv62lCW81x7t+GO/dq5aDK9S9WQgPEhxj83VC6WiNPuZ9am25Qclwo?=
+	=?us-ascii?Q?9mWLAxbDWrJDFGuBZ/AmnLZR6zmrh1bX+FTAmD0WjDpjnl8C7Iv4Hq/g/98D?=
+	=?us-ascii?Q?WBJrXiF8emTyrkd5IQjnMt+SbhgCMK2sHOSJ0XV1ZQnS4yYlohXmaARkyX1d?=
+	=?us-ascii?Q?GqQm2tbB5CqNDwm7t9mRQFzshrK3AGsi/ae1UMIS+NESeX/KKv5YVa6C/wG4?=
+	=?us-ascii?Q?iosfLvcf9LV+mL/odJXc8usCDqZtoskywkaOAiIhhvAuJe9jvCy7pGD7Lx9O?=
+	=?us-ascii?Q?bVShVYvUIWCZr7S3Qh1/cLBgMQPEfd6xiTyZpUxcHzH6wakMr/R3R8SkTDLY?=
+	=?us-ascii?Q?EFmidvMh6Wu2gx0huGzElKkfzBNfJZqNeQWEICMjGT3tL34fEeQ1iFRJoQ0v?=
+	=?us-ascii?Q?hcR8bGEyz8IlJuaq7U2GlzKmkJVQr+7i+jjQutaEWHZnNVMjbJrMFGyY703K?=
+	=?us-ascii?Q?QrqxE+VccnDxjMKePS1ptFLWNFv6TWUgSYvd6P+VbZEb9JKgSiky34+DMFN3?=
+	=?us-ascii?Q?hjrmUORT30jkWBn5eAP2qvdpqkRWG6LZLp1/2nXdpSPa3pL3cIu+v1MI8b+6?=
+	=?us-ascii?Q?X40eZb6TB6118JfscHUN70W+qktdkAi812jP36NP8MnhWXvkpKUHKudF3cdh?=
+	=?us-ascii?Q?+FEhlDowlCHkvQvPH4D2c4s?=
+X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1175;
+	5:lOyyG1jZPzos2GQiL5DF+U8pHfctIl9aI7oODqda8D4hFrSfBuNuvzJhsqaipSm7VXC4Qvs6brNcsh7AuKPHLYnSZNzd0C9yuq74yN50GrQa2UgLdNfQ4VnpxQPdFEkTW8JlkVirMDZPdun5OB61qQ==;
+	24:hD+9wIkCK4RbZuY/jdopny9Peyr7oztvX/aNLCidJ2cqZXHK+En/VF/vM1Ekj2oA+uGxr4kguI5l+IrXAltmpGq5SNXZRMi3jSheyON5vjo=
+SpamDiagnosticOutput: 1:23
+SpamDiagnosticMetadata: NSPM
+X-OriginatorOrg: theqtcompany.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2016 16:25:29.9463 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR02MB1175
+Subject: [meta-qt5][PATCH] nativesdk-qtbase: use runtime linked dbus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,347 +84,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Feb 2016 15:56:40 -0000
+X-List-Received-Date: Sun, 14 Feb 2016 17:58:18 -0000
+Content-Type: text/plain
 
-CVE-2014-9765 xdelta: buffer overflow in main_get_appheader
+Remove direct dependency to nativesdk-dbus. Instead configure
+qtbase to use runtime linked dbus library, if that is found.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
 ---
- .../xdelta/files/CVE-2014-9765.patch               | 311 +++++++++++++++++++++
- meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb    |   1 +
- 2 files changed, 312 insertions(+)
- create mode 100644 meta-oe/recipes-support/xdelta/files/CVE-2014-9765.patch
+ recipes-qt/qt5/nativesdk-qtbase_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/xdelta/files/CVE-2014-9765.patch b/meta-oe/recipes-support/xdelta/files/CVE-2014-9765.patch
-new file mode 100644
-index 0000000..572a3c0
---- /dev/null
-+++ b/meta-oe/recipes-support/xdelta/files/CVE-2014-9765.patch
-@@ -0,0 +1,311 @@
-+From ef93ff74203e030073b898c05e8b4860b5d09ef2 Mon Sep 17 00:00:00 2001
-+From: "josh.macdonald" <jmacd@users.noreply.github.com>
-+Date: Sun, 12 Oct 2014 05:24:22 +0000
-+Subject: [PATCH] Add appheader tests; fix buffer overflow in
-+ main_get_appheader
-+
-+Upstream-Status: Backport
-+
-+This appears to be fixed in xdelta3 3.0.9 and later via
-+https://github.com/jmacd/xdelta-devel/commit/ef93ff74203e030073b898c05e8b4860b5d09ef2
-+
-+CVE: CVE-2014-9765
-+Signed-off-by: Armin Kuster <akuster808@gmail.com>
-+
-+---
-+ xdelta3-main.h |   5 +-
-+ xdelta3-test.h | 131 +++++++++++++++++++++++++++++++++++++++----------
-+ 2 files changed, 108 insertions(+), 28 deletions(-)
-+
-+diff --git a/xdelta3-main.h b/xdelta3-main.h
-+index 090b7d9..5146b38 100644
-+--- a/xdelta3-main.h
-++++ b/xdelta3-main.h
-+@@ -2810,14 +2810,15 @@ main_get_appheader (xd3_stream *stream, main_file *ifile,
-+ 
-+   if (appheadsz > 0)
-+     {
-++      const int kMaxArgs = 4;
-+       char *start = (char*)apphead;
-+       char *slash;
-+       int   place = 0;
-+-      char *parsed[4];
-++      char *parsed[kMaxArgs];
-+ 
-+       memset (parsed, 0, sizeof (parsed));
-+ 
-+-      while ((slash = strchr (start, '/')) != NULL)
-++      while ((slash = strchr (start, '/')) != NULL && place < (kMaxArgs-1))
-+ 	{
-+ 	  *slash = 0;
-+ 	  parsed[place++] = start;
-+diff --git a/xdelta3-test.h b/xdelta3-test.h
-+index e9848b6..0e10251 100644
-+--- a/xdelta3-test.h
-++++ b/xdelta3-test.h
-+@@ -1,5 +1,5 @@
-+ /* xdelta 3 - delta compression tools and library Copyright (C) 2001,
-+- * 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012.  
-++ * 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012.
-+  * Joshua P. MacDonald
-+  *
-+  *  This program is free software; you can redistribute it and/or modify
-+@@ -54,7 +54,7 @@ void mt_init(mtrand *mt, uint32_t seed) {
-+     /* only MSBs of the array mt[].                        */
-+     /* 2002/01/09 modified by Makoto Matsumoto             */
-+     mt->mt_buffer_[i] =
-+-	(1812433253UL * (mt->mt_buffer_[i-1] ^ 
-++	(1812433253UL * (mt->mt_buffer_[i-1] ^
-+ 			 (mt->mt_buffer_[i-1] >> 30)) + i);
-+   }
-+ }
-+@@ -69,20 +69,20 @@ uint32_t mt_random (mtrand *mt) {
-+     int kk;
-+ 
-+     for (kk = 0; kk < MT_LEN - MT_IA; kk++) {
-+-      y = (mt->mt_buffer_[kk] & UPPER_MASK) | 
-++      y = (mt->mt_buffer_[kk] & UPPER_MASK) |
-+ 	(mt->mt_buffer_[kk + 1] & LOWER_MASK);
-+-      mt->mt_buffer_[kk] = mt->mt_buffer_[kk + MT_IA] ^ 
-++      mt->mt_buffer_[kk] = mt->mt_buffer_[kk + MT_IA] ^
-+ 	(y >> 1) ^ mag01[y & 0x1UL];
-+     }
-+     for (;kk < MT_LEN - 1; kk++) {
-+-      y = (mt->mt_buffer_[kk] & UPPER_MASK) | 
-++      y = (mt->mt_buffer_[kk] & UPPER_MASK) |
-+ 	(mt->mt_buffer_[kk + 1] & LOWER_MASK);
-+-      mt->mt_buffer_[kk] = mt->mt_buffer_[kk + (MT_IA - MT_LEN)] ^ 
-++      mt->mt_buffer_[kk] = mt->mt_buffer_[kk + (MT_IA - MT_LEN)] ^
-+ 	(y >> 1) ^ mag01[y & 0x1UL];
-+     }
-+-    y = (mt->mt_buffer_[MT_LEN - 1] & UPPER_MASK) | 
-++    y = (mt->mt_buffer_[MT_LEN - 1] & UPPER_MASK) |
-+       (mt->mt_buffer_[0] & LOWER_MASK);
-+-    mt->mt_buffer_[MT_LEN - 1] = mt->mt_buffer_[MT_IA - 1] ^ 
-++    mt->mt_buffer_[MT_LEN - 1] = mt->mt_buffer_[MT_IA - 1] ^
-+       (y >> 1) ^ mag01[y & 0x1UL];
-+     mt->mt_index_ = 0;
-+   }
-+@@ -166,7 +166,7 @@ static int do_cmd (xd3_stream *stream, const char *buf)
-+ 	{
-+ 	  stream->msg = "abnormal command termination";
-+ 	}
-+-      return XD3_INTERNAL;
-++      return ret;
-+     }
-+   return 0;
-+ }
-+@@ -257,8 +257,10 @@ int test_setup (void)
-+ static int
-+ test_make_inputs (xd3_stream *stream, xoff_t *ss_out, xoff_t *ts_out)
-+ {
-+-  usize_t ts = (mt_random (&static_mtrand) % TEST_FILE_MEAN) + TEST_FILE_MEAN / 2;
-+-  usize_t ss = (mt_random (&static_mtrand) % TEST_FILE_MEAN) + TEST_FILE_MEAN / 2;
-++  usize_t ts = (mt_random (&static_mtrand) % TEST_FILE_MEAN) +
-++    TEST_FILE_MEAN / 2;
-++  usize_t ss = (mt_random (&static_mtrand) % TEST_FILE_MEAN) +
-++    TEST_FILE_MEAN / 2;
-+   uint8_t *buf = (uint8_t*) malloc (ts + ss), *sbuf = buf, *tbuf = buf + ss;
-+   usize_t sadd = 0, sadd_max = (usize_t)(ss * TEST_ADD_RATIO);
-+   FILE  *tf = NULL, *sf = NULL;
-+@@ -409,7 +411,7 @@ test_compare_files (const char* tgt, const char *rec)
-+ 	{
-+ 	  if (obuf[i] != rbuf[i])
-+  	    {
-+-	      XPR(NT "byte %u (read %u @ %"Q"u) %d != %d\n", 
-++	      XPR(NT "byte %u (read %u @ %"Q"u) %d != %d\n",
-+ 		  (int)i, (int)oc, offset, obuf[i], rbuf[i]);
-+ 	      diffs++;
-+ 	      return XD3_INTERNAL;
-+@@ -421,7 +423,7 @@ test_compare_files (const char* tgt, const char *rec)
-+ 
-+     fclose (orig);
-+     fclose (recons);
-+-    if (diffs != 0) 
-++    if (diffs != 0)
-+       {
-+ 	return XD3_INTERNAL;
-+       }
-+@@ -429,12 +431,12 @@ test_compare_files (const char* tgt, const char *rec)
-+ }
-+ 
-+ static int
-+-test_save_copy (const char *origname)
-++test_copy_to (const char *from, const char *to)
-+ {
-+   char buf[TESTBUFSIZE];
-+   int ret;
-+ 
-+-  snprintf_func (buf, TESTBUFSIZE, "cp -f %s %s", origname, TEST_COPY_FILE);
-++  snprintf_func (buf, TESTBUFSIZE, "cp -f %s %s", from, to);
-+ 
-+   if ((ret = system (buf)) != 0)
-+     {
-+@@ -445,6 +447,12 @@ test_save_copy (const char *origname)
-+ }
-+ 
-+ static int
-++test_save_copy (const char *origname)
-++{
-++  return test_copy_to(origname, TEST_COPY_FILE);
-++}
-++
-++static int
-+ test_file_size (const char* file, xoff_t *size)
-+ {
-+   struct stat sbuf;
-+@@ -499,7 +507,7 @@ test_read_integer_error (xd3_stream *stream, usize_t trunto, const char *msg)
-+   inp = buf->base;
-+   max = buf->base + buf->next - trunto;
-+ 
-+-  if ((ret = xd3_read_uint32_t (stream, & inp, max, & rval)) != 
-++  if ((ret = xd3_read_uint32_t (stream, & inp, max, & rval)) !=
-+       XD3_INVALID_INPUT ||
-+       !MSG_IS (msg))
-+     {
-+@@ -1654,11 +1662,11 @@ test_compressed_stream_overflow (xd3_stream *stream, int ignore)
-+   if ((buf = (uint8_t*) malloc (TWO_MEGS_AND_DELTA)) == NULL) { return ENOMEM; }
-+ 
-+   memset (buf, 0, TWO_MEGS_AND_DELTA);
-+-  for (i = 0; i < (2 << 20); i += 256) 
-++  for (i = 0; i < (2 << 20); i += 256)
-+     {
-+       int j;
-+       int off = mt_random(& static_mtrand) % 10;
-+-      for (j = 0; j < 256; j++) 
-++      for (j = 0; j < 256; j++)
-+ 	{
-+ 	  buf[i + j] = j + off;
-+ 	}
-+@@ -1683,11 +1691,11 @@ test_compressed_stream_overflow (xd3_stream *stream, int ignore)
-+     }
-+ 
-+   /* Test transfer of exactly 32bits worth of data. */
-+-  if ((ret = test_streaming (stream, 
-+-			     buf, 
-+-			     buf + (1 << 20), 
-+-			     buf + (2 << 20), 
-+-			     1 << 12))) 
-++  if ((ret = test_streaming (stream,
-++			     buf,
-++			     buf + (1 << 20),
-++			     buf + (2 << 20),
-++			     1 << 12)))
-+     {
-+       goto fail;
-+     }
-+@@ -1889,7 +1897,7 @@ test_recode_command2 (xd3_stream *stream, int has_source,
-+     }
-+ 
-+   /* First encode */
-+-  snprintf_func (ecmd, TESTBUFSIZE, "%s %s -f %s %s %s %s %s %s %s", 
-++  snprintf_func (ecmd, TESTBUFSIZE, "%s %s -f %s %s %s %s %s %s %s",
-+ 	    program_name, test_softcfg_str,
-+ 	    has_adler32 ? "" : "-n ",
-+ 	    has_apphead ? "-A=encode_apphead " : "-A= ",
-+@@ -1910,7 +1918,7 @@ test_recode_command2 (xd3_stream *stream, int has_source,
-+   snprintf_func (recmd, TESTBUFSIZE,
-+ 	    "%s recode %s -f %s %s %s %s %s", program_name, test_softcfg_str,
-+ 	    recoded_adler32 ? "" : "-n ",
-+-	    !change_apphead ? "" : 
-++	    !change_apphead ? "" :
-+ 	        (recoded_apphead ? "-A=recode_apphead " : "-A= "),
-+ 	    recoded_secondary ? "-S djw " : "-S none ",
-+ 	    TEST_DELTA_FILE,
-+@@ -2361,6 +2369,76 @@ test_no_output (xd3_stream *stream, int ignore)
-+   return 0;
-+ }
-+ 
-++/* This tests that the default appheader works */
-++static int
-++test_appheader (xd3_stream *stream, int ignore)
-++{
-++  int i;
-++  int ret;
-++  char buf[TESTBUFSIZE];
-++  char bogus[TESTBUFSIZE];
-++  xoff_t ssize, tsize;
-++  test_setup ();
-++
-++  if ((ret = test_make_inputs (stream, &ssize, &tsize))) { return ret; }
-++
-++  snprintf_func (buf, TESTBUFSIZE, "%s -q -f -e -s %s %s %s", program_name,
-++		 TEST_SOURCE_FILE, TEST_TARGET_FILE, TEST_DELTA_FILE);
-++  if ((ret = do_cmd (stream, buf))) { return ret; }
-++
-++  if ((ret = test_copy_to (program_name, TEST_RECON2_FILE))) { return ret; }
-++
-++  snprintf_func (buf, TESTBUFSIZE, "chmod 0700 %s", TEST_RECON2_FILE);
-++  if ((ret = do_cmd (stream, buf))) { return ret; }
-++
-++  if ((ret = test_save_copy (TEST_TARGET_FILE))) { return ret; }
-++  if ((ret = test_copy_to (TEST_SOURCE_FILE, TEST_TARGET_FILE))) { return ret; }
-++
-++  if ((ret = test_compare_files (TEST_TARGET_FILE, TEST_COPY_FILE)) == 0)
-++    {
-++      return XD3_INVALID;  // I.e., files are different!
-++    }
-++
-++  // Test that the target file is restored.
-++  snprintf_func (buf, TESTBUFSIZE, "(cd /tmp && %s -q -f -d %s)",
-++		 TEST_RECON2_FILE,
-++		 TEST_DELTA_FILE);
-++  if ((ret = do_cmd (stream, buf))) { return ret; }
-++
-++  if ((ret = test_compare_files (TEST_TARGET_FILE, TEST_COPY_FILE)) != 0)
-++    {
-++      return ret;
-++    }
-++
-++  // Test a malicious string w/ entries > 4 in the appheader by having
-++  // the encoder write it:
-++  for (i = 0; i < TESTBUFSIZE / 4; ++i)
-++    {
-++      bogus[2*i] = 'G';
-++      bogus[2*i+1] = '/';
-++    }
-++  bogus[TESTBUFSIZE/2-1] = 0;
-++
-++  snprintf_func (buf, TESTBUFSIZE, 
-++		 "%s -q -f -A=%s -e -s %s %s %s", program_name, bogus,
-++		 TEST_SOURCE_FILE, TEST_TARGET_FILE, TEST_DELTA_FILE);
-++  if ((ret = do_cmd (stream, buf))) { return ret; }
-++  // Then read it:
-++  snprintf_func (buf, TESTBUFSIZE, "(cd /tmp && %s -q -f -d %s)",
-++		 TEST_RECON2_FILE,
-++		 TEST_DELTA_FILE);
-++  if ((ret = do_cmd (stream, buf)) == 0) 
-++    { 
-++      return XD3_INVALID;  // Impossible
-++    }
-++  if (!WIFEXITED(ret))
-++    {
-++      return XD3_INVALID;  // Must have crashed!
-++    }
-++
-++  return 0;
-++}
-++
-+ /***********************************************************************
-+  Source identical optimization
-+  ***********************************************************************/
-+@@ -2603,7 +2681,7 @@ test_string_matching (xd3_stream *stream, int ignore)
-+ 	    default: CHECK(0);
-+ 	    }
-+ 
-+-	  snprintf_func (rptr, rbuf+TESTBUFSIZE-rptr, "%d/%d", 
-++	  snprintf_func (rptr, rbuf+TESTBUFSIZE-rptr, "%d/%d",
-+ 			 inst->pos, inst->size);
-+ 	  rptr += strlen (rptr);
-+ 
-+@@ -2848,6 +2926,7 @@ xd3_selftest (void)
-+   DO_TEST (force_behavior, 0, 0);
-+   DO_TEST (stdout_behavior, 0, 0);
-+   DO_TEST (no_output, 0, 0);
-++  DO_TEST (appheader, 0, 0);
-+   DO_TEST (command_line_arguments, 0, 0);
-+ 
-+ #if EXTERNAL_COMPRESSION
-+-- 
-+2.3.5
-+
-diff --git a/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb b/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
-index baa92e4..2ddf78a 100644
---- a/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
-+++ b/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
-@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
- SRC_URI = "http://xdelta.googlecode.com/files/${BPN}-${PV}.tar.xz \
-            file://compilation-fix.patch \
-            file://with-liblzma-configure-option.patch \
-+           file://CVE-2014-9765.patch \
- "
- SRC_URI[md5sum] = "c3ae3286ce4193de8e03d5bcaccf3bc3"
- SRC_URI[sha256sum] = "3a86f29c95664fb44b8a40ff22d9bcc3e87aa8c01f0ff75931a7fa78ed3d2e55"
+diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+index 4ac80be..d800b8c 100644
+--- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
++++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "SDK version of Qt/[X11|Mac|Embedded]"
+-DEPENDS = "nativesdk-zlib nativesdk-dbus qtbase-native"
++DEPENDS = "nativesdk-zlib qtbase-native"
+ SECTION = "libs"
+ HOMEPAGE = "http://qt-project.org"
+ 
+@@ -155,6 +155,7 @@ do_configure() {
+         -sysroot ${STAGING_DIR_NATIVE} \
+         -no-gcc-sysroot \
+         -system-zlib \
++        -dbus-runtime \
+         -no-libjpeg \
+         -no-libpng \
+         -no-gif \
 -- 
-2.3.5
+1.9.1
 
 
