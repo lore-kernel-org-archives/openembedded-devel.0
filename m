@@ -1,49 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 1CFBC6E682
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D9B56E682
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2016 21:17:59 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id c200so131667340wme.0
+	Mon, 15 Feb 2016 21:18:00 +0000 (UTC)
+Received: by mail-wm0-f49.google.com with SMTP id g62so77367997wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2016 13:18:00 -0800 (PST)
+	Mon, 15 Feb 2016 13:18:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=vEELwjUYYu6nCchNZxDyLFi2Fgnq8FLLuJ6QuasrW98=;
-	b=TpUmNHNYZMYLMn2nXoU2zxConmZHv7dsuReLpK3P1Mn6TkRuqT9VCI8rk5LH3CTjCf
-	8Hbs+eElSU2ESI2H+xbmdV1Tle6OQdXQ8yOEgidCrafsGkziVaMlDFPN/Vh5VrHMiM4j
-	p2wT0cm3Kb45APA0ScxUeu9X8ymQ7tVjM/e7G1plsF3XP273YPtjG0W9nhG9EPZMs7lO
-	+/oqgHW6OqPb7YvyEiy5x5C4keQZtHenbNhxxd1RV2VsQA16/Q8sFxLqLziOoDa70Ht3
-	G6MEJOadCxtzUrJfHgZJ7LSIuy1aADILuZJLvcL/2HyuiNarSOmcdjdsBMt05vzAIH3+
-	sgJA==
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=bSe3KssRaiBnRbyh3KJNudczadBfjBtditLtiG8bvD0=;
+	b=TjN1QB7NL5XYQPiud5/Bo6G4mgWdS2DWDQZUicpWjskVsCQTfNjvPg1Ig2zcLGn6mT
+	m7PX3AOtsZflbkNj3nUhcJla5GYvI94AthlUK6vEok/pWfSqyxzJyerJekzHeIawzAHj
+	2ZWFDSaJzvsYv9dVV5D/SnGtOa3ooRO//xMwkA50LFxlHz/bMh10LN6BRkrUECEv4INY
+	2/wgiIHDV2MayCTRM+ghzr9jrWX4JsSOhpF7hnvPEtoRi/bnajw4Y2In4Ak//fQ66JVG
+	4EJPhla8YPKb+h2UNoShQ6glULeQaAusfUCIuNpyMikF8zEfexG20v7Fd+CrzKAGgAgH
+	QXhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-type:content-transfer-encoding;
-	bh=vEELwjUYYu6nCchNZxDyLFi2Fgnq8FLLuJ6QuasrW98=;
-	b=Ei1h2e20HKs484ZMytQFt5AbLmbRJLbBjcHEh3tO6L67W/nDuU9I13XVa8DMSY1jRQ
-	wtF5fSyob7KZC0rZR2E7MLukBEeZkgt1sdHxwGmCAMt5LoptQGfiQWT7oHs8eQWKifM4
-	sg6g9VslPGQrR7oz6w3EfMku3bOQAeEjUGtxq6BI9nOifwLFs+8CNpjeOKLakZ28c14c
-	KQA9O+KtWIghLB1Dj1CdXeQIm0+0HP61L89VCuDspUU5DLYOibigAc6iknTZomMRzJsg
-	21U7rsfzRSBxngq3yvrNrwzfgDvt4SmNbbQPTl3P/Ko43GVT/fv+g2I/fwZT/JYLftGT
-	Tdwg==
-X-Gm-Message-State: AG10YOQR2e9U3qvl5rKyJa2Svltbplt4HVRC3qMLakSVx7jPtDoArN94p5CbGNnmaE0onA==
-X-Received: by 10.28.21.14 with SMTP id 14mr14266977wmv.39.1455571080085;
-	Mon, 15 Feb 2016 13:18:00 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-type:content-transfer-encoding;
+	bh=bSe3KssRaiBnRbyh3KJNudczadBfjBtditLtiG8bvD0=;
+	b=bMintErFA8yrnLpnkzWq7Mv/7KCzCfs7L54oWzdiaDq8/C+9WvkUtich+akqVgkovY
+	Z65BPwXvLJGjmT7VLK2XULHTvklOsTl7iW/TWzUDim1eFrw/rgkQMdNt8Nq1wlfuV2Ah
+	S0IGi4FOQElj6FfZmEea8YkxIc7G8TW+ywUTEcd9kZVn3q5L0oC0MU3Qvb0kDvfaA2SU
+	25HtQv2r8rO7HrxygZEe8bXnK8gxEpgYbWyMSV2AUyjLMf8hUG+0RPrnSTB/9GwZk//1
+	uqADCqBYyfDgKyrQAvaRIYKC1XL6Y2iaS2yvvH85YheFE89ejsejdLQ0bTMGywL9YttV
+	+5yA==
+X-Gm-Message-State: AG10YOThVqqHPg8mexsFOCNoPcpLx/K56xVwE1PCySKQ5fcKlxFPzxs9Ja8oncHQ+k+PQA==
+X-Received: by 10.28.65.5 with SMTP id o5mr15693810wma.75.1455571081144;
+	Mon, 15 Feb 2016 13:18:01 -0800 (PST)
 Received: from localhost.localdomain (p5B0A09DF.dip0.t-ipconnect.de.
 	[91.10.9.223]) by smtp.googlemail.com with ESMTPSA id
-	t8sm25773276wjy.41.2016.02.15.13.17.59
+	t8sm25773276wjy.41.2016.02.15.13.18.00
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 15 Feb 2016 13:17:59 -0800 (PST)
+	Mon, 15 Feb 2016 13:18:00 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Feb 2016 22:17:48 +0100
-Message-Id: <1455571071-10666-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 15 Feb 2016 22:17:49 +0100
+Message-Id: <1455571071-10666-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.0
+In-Reply-To: <1455571071-10666-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1455571071-10666-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/4] libsdl2-image: update to 2.0.1
+Subject: [PATCH 2/4] libsdl-ttf: update to 2.0.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,42 +58,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2016 21:18:00 -0000
+X-List-Received-Date: Mon, 15 Feb 2016 21:18:01 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Licence checksum was changed by change of copyright year.
+* Licence changed to Zlib [1]
+* patch does not apply anymore and does not seem to miss
+
+[1] https://www.libsdl.org/projects/SDL_ttf/
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../libsdl-image/{libsdl2-image_2.0.0.bb => libsdl2-image_2.0.1.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-multimedia/libsdl-image/{libsdl2-image_2.0.0.bb => libsdl2-image_2.0.1.bb} (80%)
+ .../libsdl-ttf/files/configure.patch               | 52 ----------------------
+ .../{libsdl-ttf_2.0.10.bb => libsdl-ttf_2.0.11.bb} | 20 +++------
+ 2 files changed, 7 insertions(+), 65 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/libsdl-ttf/files/configure.patch
+ rename meta-oe/recipes-support/libsdl-ttf/{libsdl-ttf_2.0.10.bb => libsdl-ttf_2.0.11.bb} (55%)
 
-diff --git a/meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.0.bb b/meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.1.bb
-similarity index 80%
-rename from meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.0.bb
-rename to meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.1.bb
-index a6885da..1f9c794 100644
---- a/meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.0.bb
-+++ b/meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.1.bb
-@@ -2,13 +2,13 @@ SUMMARY = "Simple DirectMedia Layer image library v2"
+diff --git a/meta-oe/recipes-support/libsdl-ttf/files/configure.patch b/meta-oe/recipes-support/libsdl-ttf/files/configure.patch
+deleted file mode 100644
+index de88f0a..0000000
+--- a/meta-oe/recipes-support/libsdl-ttf/files/configure.patch
++++ /dev/null
+@@ -1,52 +0,0 @@
+-Index: SDL_ttf-2.0.10/configure.in
+-===================================================================
+---- SDL_ttf-2.0.10.orig/configure.in	2009-10-12 23:06:38.000000000 +0000
+-+++ SDL_ttf-2.0.10/configure.in	2014-07-17 12:33:34.011662505 +0000
+-@@ -1,5 +1,4 @@
+- dnl Process this file with autoconf to produce a configure script.
+--AC_INIT(README)
+- 
+- dnl Set various version strings - taken gratefully from the GTk sources
+- 
+-@@ -11,12 +10,19 @@
+- # if backwards compatibility has been broken,
+- # set BINARY_AGE and INTERFACE_AGE to 0.
+- 
+--MAJOR_VERSION=2
+--MINOR_VERSION=0
+--MICRO_VERSION=10
+-+m4_define([sdlttf_major_version],[2])
+-+m4_define([sdlttf_minor_version],[0])
+-+m4_define([sdlttf_micro_version],[10])
+-+m4_define([sdlttf_version], [sdlttf_major_version.sdlttf_minor_version.sdlttf_micro_version])
+-+
+-+AC_INIT([SDL_ttf], [sdlttf_version])
+-+
+-+MAJOR_VERSION=sdlttf_major_version
+-+MINOR_VERSION=sdlttf_minor_version
+-+MICRO_VERSION=sdlttf_micro_version
+- INTERFACE_AGE=0
+- BINARY_AGE=10
+--VERSION=$MAJOR_VERSION.$MINOR_VERSION.$MICRO_VERSION
+-+VERSION=sdlttf_version
+- 
+- AC_SUBST(MAJOR_VERSION)
+- AC_SUBST(MINOR_VERSION)
+-@@ -25,6 +31,8 @@
+- AC_SUBST(BINARY_AGE)
+- AC_SUBST(VERSION)
+- 
+-+AC_CONFIG_MACRO_DIR([acinclude])
+-+
+- # libtool versioning
+- LT_INIT([win32-dll])
+- 
+-@@ -42,7 +50,7 @@
+- AC_CANONICAL_HOST
+- 
+- dnl Setup for automake
+--AM_INIT_AUTOMAKE(SDL_ttf, $VERSION)
+-+AM_INIT_AUTOMAKE([foreign])
+- 
+- dnl Check for tools
+- AC_PROG_LIBTOOL
+diff --git a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb
+similarity index 55%
+rename from meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb
+rename to meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb
+index ad3792e..0249abe 100644
+--- a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb
++++ b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb
+@@ -1,33 +1,27 @@
+ SUMMARY = "Simple DirectMedia Layer truetype font library"
  SECTION = "libs"
+ DEPENDS = "virtual/libsdl freetype"
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
+-
+-PR = "r2"
++LICENSE = "Zlib"
++LIC_FILES_CHKSUM = "file://COPYING;md5=22800d1b3701377aae0b61ee36f5c303"
  
- LICENSE = "Zlib"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=8f66a2e45aa301ea73b5ab275aeb0702"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=ec65b9778f5584a0bd8dfc17d6340ba0"
+ SRC_URI = "http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-${PV}.tar.gz \
+-           file://configure.patch \
+            file://use.pkg-config.for.freetype2.patch \
+ "
++SRC_URI[md5sum] = "61e29bd9da8d245bc2471d1b2ce591aa"
++SRC_URI[sha256sum] = "724cd895ecf4da319a3ef164892b72078bd92632a5d812111261cde248ebcdb7"
  
- DEPENDS = "tiff zlib libpng jpeg virtual/libsdl2 libwebp"
+ S = "${WORKDIR}/SDL_ttf-${PV}"
+-EXTRA_OECONF += "SDL_CONFIG=${STAGING_BINDIR_CROSS}/sdl-config "
  
- SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL2_image-${PV}.tar.gz"
--SRC_URI[md5sum] = "fb399c8386fb3248f1b33cfe81bdf92b"
--SRC_URI[sha256sum] = "b29815c73b17633baca9f07113e8ac476ae66412dec0d29a5045825c27a47234"
-+SRC_URI[md5sum] = "d94b94555ba022fa249a53a021dc3606"
-+SRC_URI[sha256sum] = "3a3eafbceea5125c04be585373bfd8b3a18f259bd7eae3efc4e6d8e60e0d7f64"
+ inherit autotools
  
- S = "${WORKDIR}/SDL2_image-${PV}"
+-TARGET_CC_ARCH += "${LDFLAGS}"
+-
+ do_configure_prepend() {
++    # make autoreconf happy
++    touch ${S}/NEWS ${S}/AUTHORS ${S}/ChangeLog
  
+     # Removing these files fixes a libtool version mismatch.
+     MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
+ 
+     for i in ${MACROS}; do
+-      rm -f ${S}/acinclude/$i
++        rm -f ${S}/acinclude/$i
+     done
+-
+ }
+-
+-SRC_URI[md5sum] = "814e6e17e8879254208d23b3b7e0354b"
+-SRC_URI[sha256sum] = "7d38704bcc7c34029c2dcb73b2d4857e8ad76341c6e0faed279eb9f743c66c6a"
 -- 
 2.5.0
 
