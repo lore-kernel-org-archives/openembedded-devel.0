@@ -1,37 +1,49 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f179.google.com (mail-qk0-f179.google.com
-	[209.85.220.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 527D0731DB
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 1CFBC6E682
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2016 16:07:24 +0000 (UTC)
-Received: by mail-qk0-f179.google.com with SMTP id s68so56874172qkh.3
+	Mon, 15 Feb 2016 21:17:59 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id c200so131667340wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2016 08:07:25 -0800 (PST)
+	Mon, 15 Feb 2016 13:18:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=vEELwjUYYu6nCchNZxDyLFi2Fgnq8FLLuJ6QuasrW98=;
+	b=TpUmNHNYZMYLMn2nXoU2zxConmZHv7dsuReLpK3P1Mn6TkRuqT9VCI8rk5LH3CTjCf
+	8Hbs+eElSU2ESI2H+xbmdV1Tle6OQdXQ8yOEgidCrafsGkziVaMlDFPN/Vh5VrHMiM4j
+	p2wT0cm3Kb45APA0ScxUeu9X8ymQ7tVjM/e7G1plsF3XP273YPtjG0W9nhG9EPZMs7lO
+	+/oqgHW6OqPb7YvyEiy5x5C4keQZtHenbNhxxd1RV2VsQA16/Q8sFxLqLziOoDa70Ht3
+	G6MEJOadCxtzUrJfHgZJ7LSIuy1aADILuZJLvcL/2HyuiNarSOmcdjdsBMt05vzAIH3+
+	sgJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=3FmHumc38cOP9LQFBvRJxThjPtRLnypAH3Wj0yLFat8=;
-	b=TXYKxndpScGrZGGZa0irfYg7p6QZrpQuo4CrXh+vcZ5BY7mK8M4HQUo9yefrjm76Tt
-	MYJG8Bb/q8MR4pykx+vSck1GriqpBnZ6w0TmPDWt4purmEXQ8z0ccUnYx7/vvnvVzcQS
-	u6FUwtP7xWdA54IgwZT5mCb/57/crWJJZTeW2QEYZXHste2I20NfNWsG+LBxcoRE4QdP
-	YuRrkC7bZ7NxoEpyZEjwbDlXyi26GviJEFb4bIqrdk9MaOHgjwEI94vgysM3+NsGC3GG
-	6SDl4YTPBonN1jMGZArtLZkop+2if3GtUV2SfUzdDfqZoSZ6fuoS8JQpWaw/IZnk8Aep
-	vmyA==
-X-Gm-Message-State: AG10YOREnEkhvIOrp+NJnU24SfHCklzaAOr+pWD6LPRpF0Dtsvk5YwM+jvEA4sCpwVOnCA==
-X-Received: by 10.55.79.86 with SMTP id d83mr21553879qkb.22.1455552445390;
-	Mon, 15 Feb 2016 08:07:25 -0800 (PST)
-Received: from build-slave.star.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	v76sm9888224qkl.15.2016.02.15.08.07.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 15 Feb 2016 08:07:24 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-type:content-transfer-encoding;
+	bh=vEELwjUYYu6nCchNZxDyLFi2Fgnq8FLLuJ6QuasrW98=;
+	b=Ei1h2e20HKs484ZMytQFt5AbLmbRJLbBjcHEh3tO6L67W/nDuU9I13XVa8DMSY1jRQ
+	wtF5fSyob7KZC0rZR2E7MLukBEeZkgt1sdHxwGmCAMt5LoptQGfiQWT7oHs8eQWKifM4
+	sg6g9VslPGQrR7oz6w3EfMku3bOQAeEjUGtxq6BI9nOifwLFs+8CNpjeOKLakZ28c14c
+	KQA9O+KtWIghLB1Dj1CdXeQIm0+0HP61L89VCuDspUU5DLYOibigAc6iknTZomMRzJsg
+	21U7rsfzRSBxngq3yvrNrwzfgDvt4SmNbbQPTl3P/Ko43GVT/fv+g2I/fwZT/JYLftGT
+	Tdwg==
+X-Gm-Message-State: AG10YOQR2e9U3qvl5rKyJa2Svltbplt4HVRC3qMLakSVx7jPtDoArN94p5CbGNnmaE0onA==
+X-Received: by 10.28.21.14 with SMTP id 14mr14266977wmv.39.1455571080085;
+	Mon, 15 Feb 2016 13:18:00 -0800 (PST)
+Received: from localhost.localdomain (p5B0A09DF.dip0.t-ipconnect.de.
+	[91.10.9.223]) by smtp.googlemail.com with ESMTPSA id
+	t8sm25773276wjy.41.2016.02.15.13.17.59
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 15 Feb 2016 13:17:59 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Feb 2016 11:07:13 -0500
-Message-Id: <1455552433-24315-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-webserver][PATCH] nginx: update to 1.9.11
+Date: Mon, 15 Feb 2016 22:17:48 +0100
+Message-Id: <1455571071-10666-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.0
+MIME-Version: 1.0
+Subject: [PATCH 1/4] libsdl2-image: update to 2.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,33 +56,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2016 16:07:25 -0000
+X-List-Received-Date: Mon, 15 Feb 2016 21:18:00 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Licence checksum was changed by change of copyright year.
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-httpd/nginx/{nginx_1.9.10.bb => nginx_1.9.11.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-httpd/nginx/{nginx_1.9.10.bb => nginx_1.9.11.bb} (96%)
+ .../libsdl-image/{libsdl2-image_2.0.0.bb => libsdl2-image_2.0.1.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-multimedia/libsdl-image/{libsdl2-image_2.0.0.bb => libsdl2-image_2.0.1.bb} (80%)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.9.10.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb
-similarity index 96%
-rename from meta-webserver/recipes-httpd/nginx/nginx_1.9.10.bb
-rename to meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb
-index 5d63d41..4ea06c7 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.9.10.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb
-@@ -19,8 +19,8 @@ SRC_URI = " \
- 	file://nginx-volatile.conf \
- 	file://nginx.service \
- "
--SRC_URI[md5sum] = "64cc970988356a5e0fc4fcd1ab84fe57"
--SRC_URI[sha256sum] = "fb14d76844cab0a5a0880768be28965e74f9956790f618c454ef6098e26631d9"
-+SRC_URI[md5sum] = "76eb5853a1190e0cfc691aa21c545de3"
-+SRC_URI[sha256sum] = "6a5c72f4afaf57a6db064bba0965d72335f127481c5d4e64ee8714e7b368a51f"
+diff --git a/meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.0.bb b/meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.1.bb
+similarity index 80%
+rename from meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.0.bb
+rename to meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.1.bb
+index a6885da..1f9c794 100644
+--- a/meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.0.bb
++++ b/meta-oe/recipes-multimedia/libsdl-image/libsdl2-image_2.0.1.bb
+@@ -2,13 +2,13 @@ SUMMARY = "Simple DirectMedia Layer image library v2"
+ SECTION = "libs"
  
- inherit update-rc.d useradd
+ LICENSE = "Zlib"
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=8f66a2e45aa301ea73b5ab275aeb0702"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=ec65b9778f5584a0bd8dfc17d6340ba0"
+ 
+ DEPENDS = "tiff zlib libpng jpeg virtual/libsdl2 libwebp"
+ 
+ SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL2_image-${PV}.tar.gz"
+-SRC_URI[md5sum] = "fb399c8386fb3248f1b33cfe81bdf92b"
+-SRC_URI[sha256sum] = "b29815c73b17633baca9f07113e8ac476ae66412dec0d29a5045825c27a47234"
++SRC_URI[md5sum] = "d94b94555ba022fa249a53a021dc3606"
++SRC_URI[sha256sum] = "3a3eafbceea5125c04be585373bfd8b3a18f259bd7eae3efc4e6d8e60e0d7f64"
+ 
+ S = "${WORKDIR}/SDL2_image-${PV}"
  
 -- 
-1.9.1
+2.5.0
 
 
