@@ -1,40 +1,48 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f65.google.com (mail-qg0-f65.google.com
-	[209.85.192.65])
-	by mail.openembedded.org (Postfix) with ESMTP id CE5A6731A8
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2016 04:05:28 +0000 (UTC)
-Received: by mail-qg0-f65.google.com with SMTP id e61so9842255qgf.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Feb 2016 20:05:29 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 67CD2731E3;
+	Mon, 15 Feb 2016 09:02:20 +0000 (UTC)
+Received: by mail-wm0-f51.google.com with SMTP id c200so102304906wme.0;
+	Mon, 15 Feb 2016 01:02:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=/ytfgV1a8JaxRcJ3HnxOkcxutRrXBDER5438PLcE8Yk=;
+	b=q0hRkcZb//Wtsp1kFlJRl4H+Oc0EJQe92dXWJptRd0beT5Kqh6lbLJkLpY+k7c6icR
+	7pXUbk5vajBDUbx9iDwMzFBNfyR9j9yi3PxOJ9UnQG4xqVYvuQY1ex+5F7MsRC2ZZTLH
+	I2y3UgCjPXkFeuw0enPIIOGDrFedKUT+zc0OjnQJlkmLSPK3ct7fKbCievAzvj3yucT/
+	Kj1Sq+9e+DNRRPfLywrIV6H3zS4cWFbSAz2CznH3vKccY0eyVWtLRKc0ZS3zIMpWSGx4
+	A1XYFjikfoiY+Cz3rYfIj4w7XtJjHbLu2ENQPRCLfXrlU/zojse73xGlUXl4xLYOHprv
+	Wlcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=EuDxu4uOFPoH2T990xrIOcH4BR0bUvGeSHm5psTyGgk=;
-	b=ZMSGiengfHm7Y1LLZCi0LqMSGWhvWtnADjgmEgmCyuN0hGvqDPo5SWPyD4sR55DPOg
-	IJ4LgUWIu56ittMYuhtWtCo48FWwDuJz2wcSrTGJ3S4eHJDXVQNlk3rJ/u12mTuVwBgb
-	2lKzSPtQLoTZIqFqvFIIu8xKFiMW0URsvttZzCn8yQIqieKnFaNMfquhOpseeXHeWliW
-	5bpgf3NJ32CWpfnoGMHLfhLytBCI1pI+AE/jA7w1GP5VN3M/g+gccHUQEeSN/TpZCVRN
-	9Iba7jJzRMNKj36m9MrQkZGDN8DovVk4ucxZiWaECq7hHO9gPpxmFow6PMvnV9MiinYq
-	m5oQ==
-X-Gm-Message-State: AG10YOTS9pU7xpCKrNuRzNfRKtc8Zk1mYCmaRlh2T//oGrWyWoVrsaLDhDgMZNtGyxWJOw==
-X-Received: by 10.140.108.8 with SMTP id i8mr18032497qgf.83.1455509129594;
-	Sun, 14 Feb 2016 20:05:29 -0800 (PST)
-Received: from lnx-desktop.star.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	s64sm10387543qgd.28.2016.02.14.20.05.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 14 Feb 2016 20:05:29 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 14 Feb 2016 23:05:18 -0500
-Message-Id: <1455509118-16863-4-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1455509118-16863-1-git-send-email-derek@asterius.io>
-References: <1455509118-16863-1-git-send-email-derek@asterius.io>
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH v2 4/4] Update python recipes to use the common pypi package
+	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
+	:content-type:content-disposition:user-agent;
+	bh=/ytfgV1a8JaxRcJ3HnxOkcxutRrXBDER5438PLcE8Yk=;
+	b=jquA4hkngconCWCIOwMPfpS+7P/ZDDzyzfMZBUjJ1H1QD0+ZilAjUewsEq6jNI2J6q
+	qf6zDsK5Cs3gJWAfFjFy6cEY0olsvZIvsT0V0PMKYXl6bog0tvwmT4Eq+ymNseuZcvDF
+	xO3sC4ZqLxLEAYm74N4Dx1xE0x6BDgWQISIjSQDxO/HAbLNsDwqkOe1JKzbLEvRM4JHN
+	yNtXV8W1IpCdnEuOsCquQbkcUpFHTZBjHi/FG7/ZdRwkstcQAt91ozTPwqUIu8Jl2kIg
+	4H08JOyeE2WCtAPkuLrgFwc+2YThs3mDBM+vMQO41wGQHFOwiZDKY+Chl86z2z8JO2G2
+	jkFw==
+X-Gm-Message-State: AG10YORNy+/5FrXtB3E5UeDQrfxV/NcMrU9oo0nEj/IlTbFTwdvK2nAGxb45L03V84kxXA==
+X-Received: by 10.28.47.9 with SMTP id v9mr10789712wmv.69.1455526941113;
+	Mon, 15 Feb 2016 01:02:21 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	w8sm24207837wjx.21.2016.02.15.01.02.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 15 Feb 2016 01:02:19 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 15 Feb 2016 10:06:33 +0100
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Message-ID: <20160215090633.GE3028@jama>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: State of bitbake world, Failed tasks 2016-02-14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,1134 +55,671 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2016 04:05:29 -0000
+X-List-Received-Date: Mon, 15 Feb 2016 09:02:23 -0000
+X-Groupsio-MsgNum: 59975
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="N1GIdlSm9i+YlY4t"
+Content-Disposition: inline
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/pyrtm_0.2.bb            |  5 +----
- .../recipes-devtools/python/python-autobahn_0.8.6.bb        |  7 ++-----
- .../recipes-devtools/python/python-backports-ssl_3.4.0.2.bb | 11 ++---------
- .../recipes-devtools/python/python-bitarray_0.8.1.bb        | 11 +----------
- meta-python/recipes-devtools/python/python-cheetah_2.4.4.bb |  9 ++-------
- meta-python/recipes-devtools/python/python-cmd2_0.6.7.bb    | 11 +----------
- .../recipes-devtools/python/python-cryptography_1.1.bb      |  6 +-----
- meta-python/recipes-devtools/python/python-dateutil.inc     |  6 ++----
- meta-python/recipes-devtools/python/python-decorator.inc    |  9 ++-------
- .../recipes-devtools/python/python-django-south_1.0.2.bb    | 10 ++--------
- meta-python/recipes-devtools/python/python-django_1.8.8.bb  | 10 ++--------
- .../recipes-devtools/python/python-flufl-enum_4.0.1.bb      | 13 ++-----------
- meta-python/recipes-devtools/python/python-gevent_0.13.8.bb |  6 +-----
- .../recipes-devtools/python/python-greenlet_0.4.7.bb        |  9 +++------
- .../recipes-devtools/python/python-html5lib_0.999.bb        |  9 +--------
- meta-python/recipes-devtools/python/python-jinja2.inc       |  1 -
- .../recipes-devtools/python/python-jsonpatch_1.12.bb        | 11 +----------
- .../recipes-devtools/python/python-jsonpointer_1.10.bb      | 11 +----------
- meta-python/recipes-devtools/python/python-ldap_2.3.9.bb    |  7 +++----
- meta-python/recipes-devtools/python/python-ldap_2.4.10.bb   |  6 ++----
- meta-python/recipes-devtools/python/python-lxml.inc         |  7 ++-----
- .../recipes-devtools/python/python-m2crypto_0.21.1.bb       |  7 +++----
- meta-python/recipes-devtools/python/python-markupsafe.inc   |  7 ++-----
- meta-python/recipes-devtools/python/python-mccabe_0.2.1.bb  | 11 +----------
- meta-python/recipes-devtools/python/python-mock_1.0.1.bb    | 12 +-----------
- meta-python/recipes-devtools/python/python-msgpack_0.4.5.bb | 10 ++--------
- meta-python/recipes-devtools/python/python-paste_2.0.2.bb   | 12 ++++--------
- meta-python/recipes-devtools/python/python-pep8_1.4.6.bb    | 11 +----------
- meta-python/recipes-devtools/python/python-pip_7.1.2.bb     |  6 +-----
- .../recipes-devtools/python/python-prettytable_0.7.2.bb     | 12 ++----------
- meta-python/recipes-devtools/python/python-pyasn1_0.1.9.bb  |  7 +------
- .../recipes-devtools/python/python-pyflakes_0.7.3.bb        | 11 +----------
- meta-python/recipes-devtools/python/python-pygpgme_0.3.bb   |  9 ++-------
- meta-python/recipes-devtools/python/python-pyinotify.inc    |  8 ++------
- .../recipes-devtools/python/python-pyopenssl_0.15.1.bb      | 11 ++---------
- .../recipes-devtools/python/python-pyparsing_2.0.3.bb       | 12 ++----------
- meta-python/recipes-devtools/python/python-pytz_2015.4.bb   |  7 +------
- meta-python/recipes-devtools/python/python-pyudev_0.16.1.bb |  8 +-------
- meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb  |  9 ++-------
- meta-python/recipes-devtools/python/python-snakefood_1.4.bb |  7 +------
- .../recipes-devtools/python/python-twisted_13.2.0.bb        |  8 +++-----
- meta-python/recipes-devtools/python/python-ujson_1.33.bb    | 13 +++----------
- .../recipes-devtools/python/python-vcversioner_2.14.0.0.bb  |  6 +-----
- .../recipes-devtools/python/python-zopeinterface_4.1.1.bb   |  8 ++------
- 44 files changed, 75 insertions(+), 312 deletions(-)
+--N1GIdlSm9i+YlY4t
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-python/recipes-devtools/python/pyrtm_0.2.bb b/meta-python/recipes-devtools/python/pyrtm_0.2.bb
-index 706515b..3d382b9 100644
---- a/meta-python/recipes-devtools/python/pyrtm_0.2.bb
-+++ b/meta-python/recipes-devtools/python/pyrtm_0.2.bb
-@@ -1,12 +1,9 @@
- SUMMARY = "Python interface for Remember The Milk API"
- AUTHOR = "Sridhar Ratnakumar / srid"
--HOMEPAGE = "http://pypi.python.org/pypi/pyrtm"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=a53cbc7cb75660694e138ba973c148df"
--DEPENDS = "python-native"
- 
--inherit distutils
-+inherit pypi distutils
- 
--SRC_URI = "http://pypi.python.org/packages/source/p/${BPN}/${BP}.tar.gz"
- SRC_URI[md5sum] = "34423f39caf7df8a9db8e243be9cf1a0"
- SRC_URI[sha256sum] = "d9d46d096a38cb692b55f4ee9f364d54348298e9497b11c1ef057539b5de1567"
-diff --git a/meta-python/recipes-devtools/python/python-autobahn_0.8.6.bb b/meta-python/recipes-devtools/python/python-autobahn_0.8.6.bb
-index ac775c4..e64dd8f 100644
---- a/meta-python/recipes-devtools/python/python-autobahn_0.8.6.bb
-+++ b/meta-python/recipes-devtools/python/python-autobahn_0.8.6.bb
-@@ -2,18 +2,15 @@ DESCRIPTION = "AutobahnPython provides a WebSocket (RFC6455, Hybi-10 to -17, Hix
- AutobahnPython also includes an implementation of WAMP (The WebSockets Application Messaging Protocol), a light-weight,  \
- asynchronous RPC/PubSub over JSON/WebSocket protocol."
- HOMEPAGE = "http://autobahn.ws/python"
--SECTION = "console/network"
- 
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = " file://autobahn/__init__.py;beginline=1;endline=17;md5=1fdeccf6e5b70cda64cc1345597c18e3"
- 
--SRC_URI = "https://pypi.python.org/packages/source/a/autobahn/autobahn-${PV}.zip"
- SRC_URI[md5sum] = "160429e7fb043940e79aa7f4ebbab57a"
- SRC_URI[sha256sum] = "94ae5c6f37f9fe7c9d3f12c170fcc273afed4104a1c5508b26d6014bb9e6373e"
- 
--S = "${WORKDIR}/autobahn-${PV}"
--
--inherit setuptools
-+PYPI_PACKAGE_EXT = "zip"
-+inherit pypi setuptools
- 
- RDEPENDS_${PN} = "python python-pprint python-twisted-protocols python-netserver python-twisted-web"
- 
-diff --git a/meta-python/recipes-devtools/python/python-backports-ssl_3.4.0.2.bb b/meta-python/recipes-devtools/python/python-backports-ssl_3.4.0.2.bb
-index 9caae41..5e2d174 100644
---- a/meta-python/recipes-devtools/python/python-backports-ssl_3.4.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python-backports-ssl_3.4.0.2.bb
-@@ -5,19 +5,12 @@ that you are trying to reach. But the matching logic, defined in RFC2818, can be
- on your own. So the ssl package in the Standard Library of Python 3.2 and greater now includes a \
- match_hostname() function for performing this check instead of requiring every application to \
- implement the check separately. This backport brings match_hostname() to users of earlier versions of Python"
--HOMEPAGE = "https://pypi.python.org/pypi/backports.ssl_match_hostname"
--SECTION = "devel/python"
- 
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://PKG-INFO;md5=77b684960b86b7a4bb4a450ffde08605"
- 
--SRCNAME = "backports.ssl_match_hostname"
--
--SRC_URI = "https://pypi.python.org/packages/source/b/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "788214f20214c64631f0859dc79f23c6"
- SRC_URI[sha256sum] = "07410e7fb09aab7bdaf5e618de66c3dac84e2e3d628352814dc4c37de321d6ae"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+PYPI_PACKAGE = "backports.ssl_match_hostname"
-+inherit pypi setuptools
-diff --git a/meta-python/recipes-devtools/python/python-bitarray_0.8.1.bb b/meta-python/recipes-devtools/python/python-bitarray_0.8.1.bb
-index dd79e2c..145f1fb 100644
---- a/meta-python/recipes-devtools/python/python-bitarray_0.8.1.bb
-+++ b/meta-python/recipes-devtools/python/python-bitarray_0.8.1.bb
-@@ -1,20 +1,11 @@
- SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
- HOMEPAGE = "https://github.com/ilanschnell/bitarray"
--SECTION = "devel/python"
- LICENSE = "PSF"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3ba469353f9f2a244b2075902351e37d"
- 
--SRCNAME = "bitarray"
--
--SRC_URI = "https://pypi.python.org/packages/source/b/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "3825184f54f4d93508a28031b4c65d3b"
- SRC_URI[sha256sum] = "7da501356e48a83c61f479393681c1bc4b94e5a34ace7e08cb29e7dd9290ab18"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
--
--FILES_${PN} += "${datadir}/bitarray"
-+inherit pypi setuptools
- 
- BBCLASSEXTEND = "nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-cheetah_2.4.4.bb b/meta-python/recipes-devtools/python/python-cheetah_2.4.4.bb
-index e015d0b..20fc2fd 100644
---- a/meta-python/recipes-devtools/python/python-cheetah_2.4.4.bb
-+++ b/meta-python/recipes-devtools/python/python-cheetah_2.4.4.bb
-@@ -1,16 +1,11 @@
- SUMMARY = "Python template engine and code generation tool"
--SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=aff1107514aa6aae948f9fe71fdc393b"
- 
--SRCNAME = "Cheetah"
--
- PR = "r3"
- 
--SRC_URI = "http://pypi.python.org/packages/source/C/Cheetah/Cheetah-${PV}.tar.gz"
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+PYPI_PACKAGE = "Cheetah"
-+inherit pypi setuptools
- 
- RDEPENDS_${PN} = "python-pickle python-pprint"
- RDEPENDS_${PN}_class-native = ""
-diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.6.7.bb b/meta-python/recipes-devtools/python/python-cmd2_0.6.7.bb
-index fc7f024..0ae5c43 100644
---- a/meta-python/recipes-devtools/python/python-cmd2_0.6.7.bb
-+++ b/meta-python/recipes-devtools/python/python-cmd2_0.6.7.bb
-@@ -1,20 +1,11 @@
--# Imported from git://git.yoctoproject.org/meta-cloud-services
--
- SUMMARY = "Extra features for standard library's cmd module"
- HOMEPAGE = "http://packages.python.org/cmd2/"
--SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://setup.py;beginline=21;endline=21;md5=a00047b7e92e0781452d0beba4e7b44e"
- 
--SRCNAME = "cmd2"
--
--SRC_URI = "http://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "842df29ff2f72d64d7f0d917039c0e51"
- SRC_URI[sha256sum] = "8e98c7a1cfd106183559240b269e7cd9fe97e8342b5c05295f591aab6fd2f4f0"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+inherit pypi setuptools
- 
- RDEPENDS_${PN} += "python-pyparsing"
-diff --git a/meta-python/recipes-devtools/python/python-cryptography_1.1.bb b/meta-python/recipes-devtools/python/python-cryptography_1.1.bb
-index 16806fb..ffc8fd9 100644
---- a/meta-python/recipes-devtools/python/python-cryptography_1.1.bb
-+++ b/meta-python/recipes-devtools/python/python-cryptography_1.1.bb
-@@ -1,14 +1,10 @@
- SUMMARY = "Provides cryptographic recipes and primitives to Python developers"
--SECTION = "devel/python"
- LICENSE = "Apache-2.0 | BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
- DEPENDS += " python-cffi-native python-cffi python-enum34 python-six python-pyasn1"
- SRCNAME = "cryptography"
- 
--SRC_URI = "https://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
--           file://run-ptest \
--"
--S = "${WORKDIR}/${SRCNAME}-${PV}"
-+SRC_URI = "file://run-ptest"
- 
- SRC_URI[md5sum] = "dd06da41535184f48f2c8e8b74dd570f"
- SRC_URI[sha256sum] = "059bc6428b1d0e2317f505698602642f1d8dda5b120ec573a59a430d8cb7a32d"
-diff --git a/meta-python/recipes-devtools/python/python-dateutil.inc b/meta-python/recipes-devtools/python/python-dateutil.inc
-index b38c448..9200afd 100644
---- a/meta-python/recipes-devtools/python/python-dateutil.inc
-+++ b/meta-python/recipes-devtools/python/python-dateutil.inc
-@@ -1,17 +1,15 @@
- SUMMARY = "Extensions to the standard Python datetime module"
- DESCRIPTION = "The dateutil module provides powerful extensions to the datetime module available in the Python standard library."
- HOMEPAGE = "https://dateutil.readthedocs.org"
--SECTION = "devel/python"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=51430b33c900f45f999c459ee29ca493"
- PR = "r0"
- 
--SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
- SRC_URI[md5sum] = "4ef68e1c485b09e9f034e10473e5add2"
- SRC_URI[sha256sum] = "3e95445c1db500a344079a47b171c45ef18f57d188dffdb0e4165c71bea8eb3d"
- 
--SRCNAME = "python-dateutil"
--S = "${WORKDIR}/${SRCNAME}-${PV}"
-+PYPI_PACKAGE = "python-dateutil"
-+inherit pypi 
- 
- PACKAGES =+ "${PN}-zoneinfo"
- FILES_${PN}-zoneinfo = "${libdir}/${PYTHON_DIR}/site-packages/dateutil/zoneinfo"
-diff --git a/meta-python/recipes-devtools/python/python-decorator.inc b/meta-python/recipes-devtools/python/python-decorator.inc
-index 2c230ff..a599fd8 100644
---- a/meta-python/recipes-devtools/python/python-decorator.inc
-+++ b/meta-python/recipes-devtools/python/python-decorator.inc
-@@ -1,5 +1,4 @@
- SUMMARY = "Python decorator utilities"
--HOMEPAGE = "http://pypi.python.org/pypi/decorator/"
- DESCRIPTION = "\
- The aim of the decorator module it to simplify the usage of decorators \
- for the average programmer, and to popularize decorators by showing \
-@@ -7,14 +6,10 @@ various non-trivial examples. Of course, as all techniques, decorators \
- can be abused and you should not try to solve every problem with a \
- decorator, just because you can."
- 
--SECTION = "devel/python"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=41e24e0e235a97e60cdb5c4137fa2cd0"
- 
--SRCNAME = "decorator"
--
--SRC_URI = "https://pypi.python.org/packages/source/d/decorator/decorator-${PV}.tar.gz"
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
- SRC_URI[md5sum] = "033c9563af492c4ce2680ee6ca481fa7"
- SRC_URI[sha256sum] = "1a089279d5de2471c47624d4463f2e5b3fc6a2cf65045c39bf714fc461a25206"
-+
-+inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-django-south_1.0.2.bb b/meta-python/recipes-devtools/python/python-django-south_1.0.2.bb
-index 9eab13d..4d071c4 100644
---- a/meta-python/recipes-devtools/python/python-django-south_1.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python-django-south_1.0.2.bb
-@@ -1,19 +1,13 @@
- SUMMARY = "Migrations for Django"
- DESCRIPTION = "South is an intelligent database migrations library for the Django web framework. It is database-independent and DVCS-friendly, as well as a whole host of other features."
- HOMEPAGE = "http://south.aeracode.org/"
--SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=17;endline=18;md5=2155d8ae21e7c23101d5febac696b27e"
- 
--SRCNAME = "South"
--
--SRC_URI = "https://pypi.python.org/packages/source/S/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "c76a9758b2011bc3b6c39f881bba2f66"
- SRC_URI[sha256sum] = "d360bd31898f9df59f6faa786551065bba45b35e7ee3c39b381b4fbfef7392f4"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit distutils
-+PYPI_PACKAGE = "South"
-+inherit pypi distutils
- 
- BBCLASSEXTEND = "nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-django_1.8.8.bb b/meta-python/recipes-devtools/python/python-django_1.8.8.bb
-index 5e4c435..e56c555 100644
---- a/meta-python/recipes-devtools/python/python-django_1.8.8.bb
-+++ b/meta-python/recipes-devtools/python/python-django_1.8.8.bb
-@@ -1,19 +1,13 @@
- SUMMARY = "A high-level Python Web framework"
- HOMEPAGE = "http://www.djangoproject.com/"
--SECTION = "devel/python"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
- 
--SRCNAME = "Django"
--
--SRC_URI = "https://pypi.python.org/packages/source/D/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "08ecf83b7e9d064ed7e3981ddc3a8a15"
- SRC_URI[sha256sum] = "8255242fa0d9e0bf331259a6bdb81364933acbe8863291661558ffdb2fc9ed70"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+PYPI_PACKAGE = "Django"
-+inherit pypi setuptools
- 
- FILES_${PN} += "${datadir}/django"
- 
-diff --git a/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb b/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
-index a7376db..fe25fd7 100644
---- a/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
-@@ -2,24 +2,15 @@ SUMMARY  = "A Python enumeration package."
- DESCRIPTION = "The flufl.enum library is a Python enumeration package. Its goal is to provide simple, \
- specific, concise semantics in an easy to read and write syntax. flufl.enum has just enough of the \
- features needed to make enumerations useful, but without a lot of extra baggage to weigh them down. "
--HOMEPAGE = "https://pypi.python.org/pypi/flufl.enum"
--SECTION = "devel/python"
- 
- LICENSE = "LGPLv3"
- LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1fa25baed15d3be23c902636379438e8"
- 
--SRCNAME = "flufl.enum"
--
--SRC_URI = " \
--    http://pypi.python.org/packages/source/f/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
--"
--
- SRC_URI[md5sum] = "b3ad23761a78232bc78499ced7cb85d9"
- SRC_URI[sha256sum] = "4af7e7cf2dcc7517251570c7ef9ad194e30ee4b6f860eba500c03954ae95f9d8"
- 
--inherit setuptools
--
--S = "${WORKDIR}/${SRCNAME}-${PV}"
-+PYPI_PACKAGE = "flufl.enum"
-+inherit pypi setuptools
- 
- PACKAGES =+ "\  
-     ${PN}-test \
-diff --git a/meta-python/recipes-devtools/python/python-gevent_0.13.8.bb b/meta-python/recipes-devtools/python/python-gevent_0.13.8.bb
-index 3fd3e7c..d1c0a3c 100644
---- a/meta-python/recipes-devtools/python/python-gevent_0.13.8.bb
-+++ b/meta-python/recipes-devtools/python/python-gevent_0.13.8.bb
-@@ -2,18 +2,14 @@ SUMMARY = "A coroutine-based Python networking library"
- DESCRIPTION = "gevent is a coroutine-based Python networking library that uses greenlet to provide \
- a high-level synchronous API on top of the libevent event loop."
- HOMEPAGE = "http://www.gevent.org"
--SECTION = "devel/python"
- LICENSE = "MIT & BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2dbb33d00e1fd31c7041460a81ac0bd2 \
-                     file://LICENSE.pyevent;md5=718070c63de243053e2c616268b00fdd"
- DEPENDS += "python-greenlet libevent"
- RDEPENDS_${PN} += "python-greenlet python-mime python-pprint python-re"
- 
--SRC_URI = "http://pypi.python.org/packages/source/g/gevent/gevent-${PV}.tar.gz"
- SRC_URI[md5sum] = "ca9dcaa7880762d8ebbc266b11252960"
- SRC_URI[sha256sum] = "54b8d26300ce408c0916a3e63ef6cd3e6aca76230833558deb7de15196ed955e"
- 
--S = "${WORKDIR}/gevent-${PV}"
--
--inherit setuptools
-+inherit pypi setuptools
- 
-diff --git a/meta-python/recipes-devtools/python/python-greenlet_0.4.7.bb b/meta-python/recipes-devtools/python/python-greenlet_0.4.7.bb
-index 97d64d0..a69eb64 100644
---- a/meta-python/recipes-devtools/python/python-greenlet_0.4.7.bb
-+++ b/meta-python/recipes-devtools/python/python-greenlet_0.4.7.bb
-@@ -1,14 +1,11 @@
- SUMMARY = "Python lightweight in-process concurrent programming"
--HOMEPAGE = "http://pypi.python.org/pypi/greenlet"
--SECTION = "devel/python"
- LICENSE = "MIT & PSF"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
-                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
--SRC_URI = "http://pypi.python.org/packages/source/g/greenlet/greenlet-${PV}.zip"
-+
- SRC_URI[md5sum] = "c2333a8ff30fa75c5d5ec0e67b461086"
- SRC_URI[sha256sum] = "f32c4fa4e06443e1bdb0d32b69e7617c25ff772c3ffc6d0aa63d192e9fd795fe"
- 
--S = "${WORKDIR}/greenlet-${PV}"
--
--inherit distutils
-+PYPI_PACKAGE_EXT = "zip"
-+inherit pypi distutils
- 
-diff --git a/meta-python/recipes-devtools/python/python-html5lib_0.999.bb b/meta-python/recipes-devtools/python/python-html5lib_0.999.bb
-index 34a8b30..d4f1f8d 100644
---- a/meta-python/recipes-devtools/python/python-html5lib_0.999.bb
-+++ b/meta-python/recipes-devtools/python/python-html5lib_0.999.bb
-@@ -1,15 +1,8 @@
- DESCRIPTION = "HTML parser based on the WHATWG HTML specifcation"
--HOMEPAGE = "https://github.com/html5lib/html5lib-python"
--SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1ba5ada9e6fead1fdc32f43c9f10ba7c"
- 
--SRCNAME = "html5lib"
--SRC_URI = "http://pypi.python.org/packages/source/h/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "acb8ba4d6db5637360a07859192eb7f8"
- SRC_URI[sha256sum] = "c3887f7e2875d7666107fa8bee761ff95b9391acdcc7cd1b5fd57a23b5fbc49e"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+inherit pypi setuptools
-diff --git a/meta-python/recipes-devtools/python/python-jinja2.inc b/meta-python/recipes-devtools/python/python-jinja2.inc
-index 879550b..f6ee79b 100644
---- a/meta-python/recipes-devtools/python/python-jinja2.inc
-+++ b/meta-python/recipes-devtools/python/python-jinja2.inc
-@@ -1,5 +1,4 @@
- DESCRIPTION = "Python Jinja2: A small but fast and easy to use stand-alone template engine written in pure python."
--HOMEPAGE = "https://pypi.python.org/pypi/Jinja2"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=20c831f91dd3bd486020f672ba2be386"
- 
-diff --git a/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb b/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb
-index 504bb99..bb5a5ff 100644
---- a/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb
-+++ b/meta-python/recipes-devtools/python/python-jsonpatch_1.12.bb
-@@ -1,21 +1,12 @@
- SUMMARY  = "Appling JSON patches in Python 2.6+ and 3.x"
- HOMEPAGE = "https://github.com/stefankoegl/python-json-patch"
--SECTION = "devel/python"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
- 
--SRCNAME = "jsonpatch"
--
--SRC_URI = " \
--    https://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
--"
--
--inherit setuptools
-+inherit pypi setuptools
- 
- SRC_URI[md5sum] = "76ae3183db5f2a8f85dd7705e9b6f278"
- SRC_URI[sha256sum] = "2e1eb457f9c8dd5dae837ca93c0fe5bd2522c9d44b9b380fb1aab2ab4dec04b1"
- 
- RDEPENDS_${PN} += "python-re python-json python-jsonpointer"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
-diff --git a/meta-python/recipes-devtools/python/python-jsonpointer_1.10.bb b/meta-python/recipes-devtools/python/python-jsonpointer_1.10.bb
-index 1af13a9..9b23fb0 100644
---- a/meta-python/recipes-devtools/python/python-jsonpointer_1.10.bb
-+++ b/meta-python/recipes-devtools/python/python-jsonpointer_1.10.bb
-@@ -1,20 +1,11 @@
- DESCRIPTION = "Resolve JSON Pointers in Python"
- HOMEPAGE = "https://github.com/stefankoegl/python-json-pointer"
--SECTION = "devel/python"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
- 
--SRCNAME = "jsonpointer"
--
--SRC_URI = " \
--    https://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
--"
--
--inherit setuptools
-+inherit pypi setuptools
- 
- SRC_URI[md5sum] = "d68c0c6ad6889e9c94ec0feba719e45e"
- SRC_URI[sha256sum] = "9fa5dcac35eefd53e25d6cd4c310d963c9f0b897641772cd6e5e7b89df7ee0b1"
- 
- RDEPENDS_${PN} += "python-re python-json"
--
--S = "${WORKDIR}/${SRCNAME}-${PV}"
-diff --git a/meta-python/recipes-devtools/python/python-ldap_2.3.9.bb b/meta-python/recipes-devtools/python/python-ldap_2.3.9.bb
-index bc4993b..a1b9cf7 100644
---- a/meta-python/recipes-devtools/python/python-ldap_2.3.9.bb
-+++ b/meta-python/recipes-devtools/python/python-ldap_2.3.9.bb
-@@ -1,13 +1,12 @@
- DESCRIPTION = "LDAP client API for Python, C wrapper module around OpenLDAP 2.x with an object-oriented API" 
--SECTION = "devel/python" 
- LICENSE = "Python-style" 
- LIC_FILES_CHKSUM = "file://LICENCE;md5=a41c82edffa04912007cae1d20cac555"
- HOMEPAGE = "http://www.python-ldap.org/" 
- DEPENDS = "python openldap" 
- 
--SRC_URI = "http://pypi.python.org/packages/source/p/${BPN}/${BP}.tar.gz \
--           file://setup.cfg.patch"
-+SRC_URI = "file://setup.cfg.patch"
- SRC_URI[md5sum] = "a9f9f16338288d118a1ae6266c993247"
- SRC_URI[sha256sum] = "62f75b21c5ee744408c9d8b59878328b3bdf47899d30e8abf0c09b3ffb893ed4"
- 
--inherit setuptools  
-+PYPI_PACKAGE = "python-ldap"
-+inherit pypi setuptools  
-diff --git a/meta-python/recipes-devtools/python/python-ldap_2.4.10.bb b/meta-python/recipes-devtools/python/python-ldap_2.4.10.bb
-index e95da9d..0a6ae7e 100644
---- a/meta-python/recipes-devtools/python/python-ldap_2.4.10.bb
-+++ b/meta-python/recipes-devtools/python/python-ldap_2.4.10.bb
-@@ -7,14 +7,12 @@ DESCRIPTION = "This module provides access to the LDAP \
- instead of C API. The module mainly acts as a wrapper for the \
- OpenLDAP 2.x libraries. Errors will appear as exceptions."
- 
--SECTION = "devel/python"
- LICENSE = "PSF"
- HOMEPAGE = "http://www.python-ldap.org/"
- DEPENDS = "python openldap cyrus-sasl"
- 
--SRC_URI = "http://pypi.python.org/packages/source/p/${PN}/${BPN}-${PV}.tar.gz"
--
--inherit setuptools
-+PYPI_PACKAGE = "python-ldap"
-+inherit pypi setuptools  
- 
- LIC_FILES_CHKSUM = "file://LICENCE;md5=a41c82edffa04912007cae1d20cac555"
- SRC_URI[md5sum] = "a15827ca13c90e9101e5e9405c1d83be"
-diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
-index 337da1b..cb9986e 100644
---- a/meta-python/recipes-devtools/python/python-lxml.inc
-+++ b/meta-python/recipes-devtools/python/python-lxml.inc
-@@ -15,17 +15,12 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b \
-                     file://src/lxml/isoschematron/resources/xsl/iso-schematron-xslt1/iso_schematron_message.xsl;startline=2;endline=24;md5=96976dcc66249c51e8026b159ca5e755 \
-                     file://src/lxml/isoschematron/resources/xsl/RNG2Schtrn.xsl;startline=2;endline=7;md5=5cac4ad4b5e131a10e9af755b10fbbb7 \
-                     "
--SRCNAME = "lxml"
- 
- DEPENDS += "libxml2 libxslt"
- 
--SRC_URI = "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "9f0c5f1eb43ff44d5455dab4b4efbe73"
- SRC_URI[sha256sum] = "349f93e3a4b09cc59418854ab8013d027d246757c51744bf20069bc89016f578"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
- DISTUTILS_BUILD_ARGS += " \
-                      --with-xslt-config='pkg-config libxslt' \
-                      --with-xml2-config='pkg-config libxml-2.0' \
-@@ -36,6 +31,8 @@ DISTUTILS_INSTALL_ARGS += " \
-                      --with-xml2-config='pkg-config libxml-2.0' \
- "
- 
-+inherit pypi
-+
- do_configure_prepend() {
-     sed -i -e 's/--version/--modversion/' ${B}/setupinfo.py
- }
-diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb b/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
-index ff6203f..a3f9a09 100644
---- a/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
-+++ b/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
-@@ -6,16 +6,15 @@ DEPENDS = "openssl swig-native python"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
- 
--SRC_URI = "http://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-${PV}.tar.gz \
-+SRC_URI = " \
-            file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch \
-            file://0001-M2Crypto-Error-fix.patch"
- 
- SRC_URI[md5sum] = "f93d8462ff7646397a9f77a2fe602d17"
- SRC_URI[sha256sum] = "25b94498505c2d800ee465db0cc1aff097b1615adc3ac042a1c85ceca264fc0a"
- 
--S = "${WORKDIR}/M2Crypto-${PV}"
--
--inherit setuptools
-+PYPI_PACKAGE = "M2Crypto"
-+inherit pypi setuptools
- 
- SWIG_FEATURES_x86-64 = "-D__x86_64__"
- SWIG_FEATURES ?= ""
-diff --git a/meta-python/recipes-devtools/python/python-markupsafe.inc b/meta-python/recipes-devtools/python/python-markupsafe.inc
-index 1b3e0a0..fd7d9bd 100644
---- a/meta-python/recipes-devtools/python/python-markupsafe.inc
-+++ b/meta-python/recipes-devtools/python/python-markupsafe.inc
-@@ -1,17 +1,14 @@
- DESCRIPTION = "Implements a XML/HTML/XHTML Markup safe string for Python"
- HOMEPAGE = "http://github.com/mitsuhiko/markupsafe"
--SECTION = "devel/python"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c6d1adcf45d69359f256c1cea3254127"
- 
- PR = "r0"
--SRCNAME = "MarkupSafe"
--
--SRC_URI = "https://pypi.python.org/packages/source/M/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
- 
- SRC_URI[md5sum] = "f5ab3deee4c37cd6a922fb81e730da6e"
- SRC_URI[sha256sum] = "a4ec1aff59b95a14b45eb2e23761a0179e98319da5a7eb76b56ea8cdc7b871c3"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
-+PYPI_PACKAGE = "MarkupSafe"
-+inherit pypi
- 
- RDEPENDS_${PN} += "${PYTHON_PN}-re"
-diff --git a/meta-python/recipes-devtools/python/python-mccabe_0.2.1.bb b/meta-python/recipes-devtools/python/python-mccabe_0.2.1.bb
-index a056c09..4541994 100644
---- a/meta-python/recipes-devtools/python/python-mccabe_0.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python-mccabe_0.2.1.bb
-@@ -1,21 +1,12 @@
--# Imported from git://git.yoctoproject.org/meta-cloud-services
--
- SUMMARY = "McCabe checker, plugin for flake8"
- HOMEPAGE = "https://github.com/dreamhost/cliff"
--SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://README.rst;md5=aa0383f6aee4f5c20084a97cd13164c4"
- 
--SRCNAME = "mccabe"
--
--SRC_URI = "https://pypi.python.org/packages/source/m/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "5a3f3fa6a4bad126c88aaaa7dab682f5"
- SRC_URI[sha256sum] = "5a2a170e47de5593a6abfae1e9542bd2c3924ac62bbe4e6ed96c953c0352243a"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+inherit pypi setuptools
- 
- RDEPENDS_${PN} += " \
-     python-prettytable \
-diff --git a/meta-python/recipes-devtools/python/python-mock_1.0.1.bb b/meta-python/recipes-devtools/python/python-mock_1.0.1.bb
-index a23b552..d336f61 100644
---- a/meta-python/recipes-devtools/python/python-mock_1.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python-mock_1.0.1.bb
-@@ -1,21 +1,11 @@
--# Imported from git://git.yoctoproject.org/meta-cloud-services
--
- SUMMARY = "A Python Mocking and Patching Library for Testing"
--HOMEPAGE = "https://pypi.python.org/pypi/mock"
--SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=80e5ba73891255687dff3bee2b4cbb16"
- 
--SRCNAME = "mock"
--
--SRC_URI = "https://pypi.python.org/packages/source/m/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "c3971991738caa55ec7c356bbc154ee2"
- SRC_URI[sha256sum] = "b839dd2d9c117c701430c149956918a423a9863b48b09c90e30a6013e7d2f44f"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+inherit pypi setuptools
- 
- RDEPENDS_${PN} += " \
-     python-prettytable \
-diff --git a/meta-python/recipes-devtools/python/python-msgpack_0.4.5.bb b/meta-python/recipes-devtools/python/python-msgpack_0.4.5.bb
-index 206b03d..c1d6705 100644
---- a/meta-python/recipes-devtools/python/python-msgpack_0.4.5.bb
-+++ b/meta-python/recipes-devtools/python/python-msgpack_0.4.5.bb
-@@ -1,17 +1,11 @@
- DESCRIPTION = "MessagePack (de)serializer"
--HOMEPAGE = "https://pypi.python.org/pypi/msgpack-python/"
--SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
- 
- PR = "r0"
--SRCNAME = "msgpack-python"
--
--SRC_URI = "https://pypi.python.org/packages/source/m/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
- 
- SRC_URI[md5sum] = "3b82bc542d5599896695512e7c32f42d"
- SRC_URI[sha256sum] = "a07cd6615a6bf38cfa2f010b121c7e77b74a3e7b971ef3e475c3d33308014cbb"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+PYPI_PACKAGE = "msgpack-python"
-+inherit pypi setuptools
-diff --git a/meta-python/recipes-devtools/python/python-paste_2.0.2.bb b/meta-python/recipes-devtools/python/python-paste_2.0.2.bb
-index 6338def..4edd038 100644
---- a/meta-python/recipes-devtools/python/python-paste_2.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python-paste_2.0.2.bb
-@@ -1,18 +1,14 @@
- SUMMARY = "Tools for using a Web Server Gateway Interface stack"
- HOMEPAGE = "http://pythonpaste.org/"
--SECTION = "devel/python"
- LICENSE = "MIT"
--SRCNAME = "Paste"
- RDEPENDS_${PN} = "python-six"
- 
- LIC_FILES_CHKSUM = "file://docs/license.txt;md5=1798f29d55080c60365e6283cb49779c"
- 
--SRC_URI = "http://pypi.python.org/packages/source/P/${SRCNAME}/${SRCNAME}-${PV}.tar.gz;name=paste"
--SRC_URI[paste.md5sum] = "4bfc8a7eaf858f6309d2ac0f40fc951c"
--SRC_URI[paste.sha256sum] = "adac3ac893a2dac6b8ffd49901377dd6819e05be3436b374d698641071daba99"
-+SRC_URI[md5sum] = "4bfc8a7eaf858f6309d2ac0f40fc951c"
-+SRC_URI[sha256sum] = "adac3ac893a2dac6b8ffd49901377dd6819e05be3436b374d698641071daba99"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+PYPI_PACKAGE = "Paste"
-+inherit pypi setuptools
- 
- FILES_${PN} += "/usr/lib/*"
-diff --git a/meta-python/recipes-devtools/python/python-pep8_1.4.6.bb b/meta-python/recipes-devtools/python/python-pep8_1.4.6.bb
-index b3c743e..e3a421e 100644
---- a/meta-python/recipes-devtools/python/python-pep8_1.4.6.bb
-+++ b/meta-python/recipes-devtools/python/python-pep8_1.4.6.bb
-@@ -1,21 +1,12 @@
--# Imported from git://git.yoctoproject.org/meta-cloud-services
--
- SUMMARY = "Python style guide checker"
- HOMEPAGE = "https://github.com/dreamhost/cliff"
--SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://README.rst;md5=b0d37793ab91ca25ad5c200e9ea22331"
- 
--SRCNAME = "pep8"
--
--SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "a03bb494859e87b42601b61b1b043a0c"
- SRC_URI[sha256sum] = "603a46e5c358ce20ac4807a0eeafac7505d1125a4c1bd8378757ada06f61bed8"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+inherit pypi setuptools
- 
- RDEPENDS_${PN} += " \
-     python-prettytable \
-diff --git a/meta-python/recipes-devtools/python/python-pip_7.1.2.bb b/meta-python/recipes-devtools/python/python-pip_7.1.2.bb
-index 895cf6f..33e5ee2 100644
---- a/meta-python/recipes-devtools/python/python-pip_7.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python-pip_7.1.2.bb
-@@ -2,14 +2,10 @@ SUMMARY = "PIP is a tool for installing and managing Python packages"
- LICENSE = "MIT & LGPL-2.1"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=45665b53032c02b35e29ddab8e61fa91"
- 
--SRC_URI = "https://pypi.python.org/packages/source/p/pip/pip-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "3823d2343d9f3aaab21cf9c917710196"
- SRC_URI[sha256sum] = "ca047986f0528cfa975a14fb9f7f106271d4e0c3fe1ddced6c1db2e7ae57a477"
- 
--S = "${WORKDIR}/pip-${PV}"
--
--inherit setuptools
-+inherit pypi setuptools
- 
- # Since PIP is like CPAN for PERL we need to drag in all python modules to ensure everything works
- RDEPENDS_${PN} = "python-modules python-distribute"
-diff --git a/meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb b/meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb
-index fdc13eb..14edb03 100644
---- a/meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb
-+++ b/meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb
-@@ -1,21 +1,13 @@
--# Imported from git://git.yoctoproject.org/meta-cloud-services
--
- SUMMARY = "Python library for displaying tabular data in a ASCII table format"
- HOMEPAGE = "http://code.google.com/p/prettytable"
--SECTION = "devel/python"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3e73500ffa52de5071cff65990055282"
- 
--SRCNAME = "prettytable"
--
--SRC_URI = "http://pypi.python.org/packages/source/P/PrettyTable/${SRCNAME}-${PV}.zip"
--
- SRC_URI[md5sum] = "0c1361104caff8b09f220748f9d69899"
- SRC_URI[sha256sum] = "a53da3b43d7a5c229b5e3ca2892ef982c46b7923b51e98f0db49956531211c4f"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+PYPI_PACKAGE_EXT = "zip"
-+inherit pypi setuptools
- 
- do_install_append() {
-     perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "top_level.txt"`
-diff --git a/meta-python/recipes-devtools/python/python-pyasn1_0.1.9.bb b/meta-python/recipes-devtools/python/python-pyasn1_0.1.9.bb
-index 202e4dc..9c0e878 100644
---- a/meta-python/recipes-devtools/python/python-pyasn1_0.1.9.bb
-+++ b/meta-python/recipes-devtools/python/python-pyasn1_0.1.9.bb
-@@ -1,16 +1,11 @@
- DESCRIPTION = "Python library implementing ASN.1 types."
- HOMEPAGE = "http://pyasn1.sourceforge.net/"
--SECTION = "devel/python"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=425e62320d430219736139b134db2fc4"
--DEPENDS = "python"
- 
--SRC_URI = "https://pypi.python.org/packages/source/p/pyasn1/pyasn1-${PV}.tar.gz"
- SRC_URI[md5sum] = "f00a02a631d4016818659d1cc38d229a"
- SRC_URI[sha256sum] = "853cacd96d1f701ddd67aa03ecc05f51890135b7262e922710112f12a2ed2a7f"
- 
--S = "${WORKDIR}/pyasn1-${PV}"
--
--inherit setuptools
-+inherit pypi setuptools
- 
- RDEPENDS_${PN} += "python-lang python-shell"
-diff --git a/meta-python/recipes-devtools/python/python-pyflakes_0.7.3.bb b/meta-python/recipes-devtools/python/python-pyflakes_0.7.3.bb
-index ce48cd7..d4d19cc 100644
---- a/meta-python/recipes-devtools/python/python-pyflakes_0.7.3.bb
-+++ b/meta-python/recipes-devtools/python/python-pyflakes_0.7.3.bb
-@@ -1,21 +1,12 @@
--# Imported from git://git.yoctoproject.org/meta-cloud-services
--
- SUMMARY = "passive checker of Python programs"
- HOMEPAGE = "https://github.com/dreamhost/cliff"
--SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://README.rst;md5=1815018ebbbfc8659a9df33681a0936e"
- 
--SRCNAME = "pyflakes"
--
--SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "ec94ac11cb110e6e72cca23c104b66b1"
- SRC_URI[sha256sum] = "dbd2c940a1030a4f811afc1a04017a44011c0cb54f8f384b66aa624097d9b5e3"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+inherit pypi setuptools
- 
- RDEPENDS_${PN} += " \
-     python-prettytable \
-diff --git a/meta-python/recipes-devtools/python/python-pygpgme_0.3.bb b/meta-python/recipes-devtools/python/python-pygpgme_0.3.bb
-index 39a7ada..03c4790 100644
---- a/meta-python/recipes-devtools/python/python-pygpgme_0.3.bb
-+++ b/meta-python/recipes-devtools/python/python-pygpgme_0.3.bb
-@@ -2,24 +2,19 @@ SUMMARY = "A Python module for working with OpenPGP messages"
- DESCRIPTION = "PyGPGME is a Python module that lets you sign, verify, \
-                encrypt and decrypt messages using the OpenPGP format."
- HOMEPAGE = "https://launchpad.net/pygpgme"
--SECTION = "devel/python"
- 
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=6517bdc8f2416f27ab725d4702f7aac3"
- 
--SRC_URI = "https://pypi.python.org/packages/source/p/pygpgme/pygpgme-${PV}.tar.gz \
--           file://run-ptest \
--          "
-+SRC_URI = "file://run-ptest"
- 
- SRC_URI[md5sum] = "d38355af73f0352cde3d410b25f34fd0"
- SRC_URI[sha256sum] = "5fd887c407015296a8fd3f4b867fe0fcca3179de97ccde90449853a3dfb802e1"
- 
--S = "${WORKDIR}/pygpgme-${PV}"
--
- DEPENDS += "gpgme"
- RDEPENDS_${PN} += "gnupg"
- 
--inherit setuptools ptest
-+inherit pypi setuptools ptest
- 
- do_install_ptest(){
-     install ${S}/test_all.py ${D}${PTEST_PATH}
-diff --git a/meta-python/recipes-devtools/python/python-pyinotify.inc b/meta-python/recipes-devtools/python/python-pyinotify.inc
-index 285fe33..a9edb2c 100644
---- a/meta-python/recipes-devtools/python/python-pyinotify.inc
-+++ b/meta-python/recipes-devtools/python/python-pyinotify.inc
-@@ -1,15 +1,11 @@
- DESCRIPTION = "Python pyinotify: Linux filesystem events monitoring"
--HOMEPAGE = "https://pypi.python.org/pypi/pyinotify"
--SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
- 
- RDEPENDS_${PN} += "python-threading python-io python-subprocess python-misc python-shell"
- 
--SRCNAME = "pyinotify"
--SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "8e580fa1ff3971f94a6f81672b76c406"
- SRC_URI[sha256sum] = "9c998a5d7606ca835065cdabc013ae6c66eb9ea76a00a1e3bc6e0cfe2b4f71f4"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
-+PYPI_PACKAGE = "pyinotify"
-+inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb b/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb
-index d80e666..5027c6d 100644
---- a/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb
-+++ b/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb
-@@ -1,22 +1,15 @@
- SUMMARY = "Simple Python wrapper around the OpenSSL library"
--SECTION = "devel/python"
--
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
--SRCNAME = "pyOpenSSL"
--
- DEPENDS = "openssl python-cryptography"
- PE = "1"
- 
--SRC_URI = "http://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-${PV}.tar.gz"
--
- SRC_URI[md5sum] = "f447644afcbd5f0a1f47350fec63a4c6"
- SRC_URI[sha256sum] = "f0a26070d6db0881de8bcc7846934b7c3c930d8f9c79d45883ee48984bc0d672"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+PYPI_PACKAGE = "pyOpenSSL"
-+inherit pypi setuptools
- 
- PACKAGES =+ "${PN}-tests"
- FILES_${PN}-tests = "${libdir}/${PYTHON_DIR}/site-packages/OpenSSL/test"
-diff --git a/meta-python/recipes-devtools/python/python-pyparsing_2.0.3.bb b/meta-python/recipes-devtools/python/python-pyparsing_2.0.3.bb
-index ab4d584..18a3077 100644
---- a/meta-python/recipes-devtools/python/python-pyparsing_2.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python-pyparsing_2.0.3.bb
-@@ -1,18 +1,10 @@
--# Imported from git://git.yoctoproject.org/meta-cloud-services
--
- SUMMARY = "Python parsing module"
- HOMEPAGE = "http://pyparsing.wikispaces.com/"
--SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fb46329938e6bc829b256e37d5c1e31a"
- 
--SRCNAME = "pyparsing"
--
--SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.zip"
--
- SRC_URI[md5sum] = "0a5ec41bb650aed802751a311b5d820d"
- SRC_URI[sha256sum] = "43d7710fdaa194a3bccf3127d06dec8e2de99a7efe6c47f01d4b748a1d04b192"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit distutils
-+PYPI_PACKAGE_EXT = "zip"
-+inherit pypi distutils
-diff --git a/meta-python/recipes-devtools/python/python-pytz_2015.4.bb b/meta-python/recipes-devtools/python/python-pytz_2015.4.bb
-index eb790f7..dedd864 100644
---- a/meta-python/recipes-devtools/python/python-pytz_2015.4.bb
-+++ b/meta-python/recipes-devtools/python/python-pytz_2015.4.bb
-@@ -1,14 +1,9 @@
- SUMMARY = "World timezone definitions, modern and historical"
- HOMEPAGE = " http://pythonhosted.org/pytz"
--SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22b38951eb857cf285a4560a914b7cd6"
--SRCNAME = "pytz"
- 
--SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+inherit pypi setuptools
- 
- RDEPENDS_${PN} = "\
-     python-core \
-diff --git a/meta-python/recipes-devtools/python/python-pyudev_0.16.1.bb b/meta-python/recipes-devtools/python/python-pyudev_0.16.1.bb
-index 9c77f83..1ec9944 100644
---- a/meta-python/recipes-devtools/python/python-pyudev_0.16.1.bb
-+++ b/meta-python/recipes-devtools/python/python-pyudev_0.16.1.bb
-@@ -1,17 +1,11 @@
- SUMMARY = "A libudev binding"
--HOMEPAGE = "http://pypi.python.org/pypi/pyudev"
--SECTION = "devel/python"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
- 
--SRCNAME = "pyudev"
--SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
- SRC_URI[md5sum] = "4034de584b6d9efcbfc590a047c63285"
- SRC_URI[sha256sum] = "765d1c14bd9bd031f64e2612225621984cb2bbb8cbc0c03538bcc4c735ff1c95"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+inherit pypi setuptools
- 
- do_configure_prepend() {
-     sed -i "/import pyudev/d" ${S}/setup.py
-diff --git a/meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb b/meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb
-index 949b7e1..b5baf82 100644
---- a/meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb
-@@ -1,19 +1,14 @@
- SUMMARY = "Pyzmq provides Zero message queue access for the Python language"
- HOMEPAGE = "http://zeromq.org/bindings:python"
--SECTION = "devel/python"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e"
- DEPENDS = "zeromq"
- 
--SRC_URI = "https://pypi.python.org/packages/source/p/pyzmq/pyzmq-${PV}.tar.gz \
--           file://club-rpath-out.patch \
--"
-+SRC_URI = "file://club-rpath-out.patch"
- SRC_URI[md5sum] = "87e3abb33af5794db5ae85c667bbf324"
- SRC_URI[sha256sum] = "77994f80360488e7153e64e5959dc5471531d1648e3a4bff14a714d074a38cc2"
- 
--S = "${WORKDIR}/pyzmq-${PV}"
--
--inherit setuptools pkgconfig
-+inherit pypi setuptools pkgconfig
- 
- RDEPENDS_${PN} += "python-multiprocessing"
- 
-diff --git a/meta-python/recipes-devtools/python/python-snakefood_1.4.bb b/meta-python/recipes-devtools/python/python-snakefood_1.4.bb
-index 1af33d4..e4a6d76 100644
---- a/meta-python/recipes-devtools/python/python-snakefood_1.4.bb
-+++ b/meta-python/recipes-devtools/python/python-snakefood_1.4.bb
-@@ -35,18 +35,13 @@ given the trade-offs, 99% is good enough for 99% of the uses.\
- "
- AUTHOR = "Martin Blais <blais@furius.ca>"
- HOMEPAGE = "http://furius.ca/snakefood"
--SECTION = "devel/python"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--SRCNAME = "snakefood"
- 
--SRC_URI = "https://pypi.python.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
- SRC_URI[md5sum] = "56c88667a33d8909b0aabf2ab6903bdf"
- SRC_URI[sha256sum] = "295784668032254e7391ca99ba7060edd3ae4eca1a330ac11627b18ab5923b77"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+inherit pypi setuptools
- 
- RDEPENDS_${PN} = " python-logging python-compiler python-shell"
- # the above modules do not have a -native counterpart
-diff --git a/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb b/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
-index 2b433f7..ac88ac9 100644
---- a/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
-@@ -2,19 +2,17 @@ DESCRIPTION = "Twisted is an event-driven networking framework written in Python
- Twisted supports TCP, UDP, SSL/TLS, multicast, Unix sockets, a large number of protocols                   \
- (including HTTP, NNTP, IMAP, SSH, IRC, FTP, and others), and much more."
- HOMEPAGE = "http://www.twistedmatrix.com"
--SECTION = "console/network"
- 
- #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5602d7228daf59a16f0f1b2640c46bca"
- 
--SRC_URI = "https://pypi.python.org/packages/source/T/Twisted/Twisted-${PV}.tar.bz2"
- SRC_URI[md5sum] = "83fe6c0c911cc1602dbffb036be0ba79"
- SRC_URI[sha256sum] = "095175638c019ac7c0604f4c291724a16ff1acd062e181b01293bf4dcbc62cf3"
- 
--S = "${WORKDIR}/Twisted-${PV}"
--
--inherit setuptools
-+PYPI_PACKAGE = "Twisted"
-+PYPI_PACKAGE_EXT = "tar.bz2"
-+inherit pypi setuptools
- 
- do_install_append() {
-     # remove some useless files before packaging
-diff --git a/meta-python/recipes-devtools/python/python-ujson_1.33.bb b/meta-python/recipes-devtools/python/python-ujson_1.33.bb
-index 8fdd2b8..dbe432a 100644
---- a/meta-python/recipes-devtools/python/python-ujson_1.33.bb
-+++ b/meta-python/recipes-devtools/python/python-ujson_1.33.bb
-@@ -1,21 +1,14 @@
- SUMMARY  = "Ultra fast JSON encoder and decoder for Python"
- DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pure C with bindings for Python 2.5+ and 3."
--HOMEPAGE = "https://pypi.python.org/pypi/ujson"
- 
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5b206f6ba5e41c60df8cdcddf79a3d82"
- 
--SRCNAME = "ujson"
--
--SRC_URI = " \
--    http://pypi.python.org/packages/source/u/ujson/${SRCNAME}-${PV}.zip \
--"
--
- SRC_URI[md5sum] = "8148a2493fff78940feab1e11dc0a893"
- SRC_URI[sha256sum] = "68cf825f227c82e1ac61e423cfcad923ff734c27b5bdd7174495d162c42c602b"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-+PYPI_PACKAGE = "ujson"
-+PYPI_PACKAGE_EXT = "zip"
-+inherit pypi setuptools
- 
- RDEPENDS_${PN} += "python-numbers"
-diff --git a/meta-python/recipes-devtools/python/python-vcversioner_2.14.0.0.bb b/meta-python/recipes-devtools/python/python-vcversioner_2.14.0.0.bb
-index 6c96875..84b556f 100644
---- a/meta-python/recipes-devtools/python/python-vcversioner_2.14.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python-vcversioner_2.14.0.0.bb
-@@ -4,14 +4,10 @@ HOMEPAGE = "https://github.com/habnabit/vcversioner"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://PKG-INFO;md5=260625d695c5e0c9dd2c2ef898833c7d"
- 
--SRC_URI = "https://pypi.python.org/packages/source/v/vcversioner/vcversioner-${PV}.tar.gz"
- SRC_URI[md5sum] = "7848a365ced9941053bc25d9a9f8f4b4"
- SRC_URI[sha256sum] = "acd43686e92e6c8bbeb4f2eef54408567a7adea9692fa72d591eec5357c03b86"
- 
--S = "${WORKDIR}/vcversioner-${PV}"
--
--inherit setuptools
--
-+inherit pypi setuptools
- 
- do_compile_append() {
-     export BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS}
-diff --git a/meta-python/recipes-devtools/python/python-zopeinterface_4.1.1.bb b/meta-python/recipes-devtools/python/python-zopeinterface_4.1.1.bb
-index 4151f58..15f8e20 100644
---- a/meta-python/recipes-devtools/python/python-zopeinterface_4.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python-zopeinterface_4.1.1.bb
-@@ -1,16 +1,12 @@
- SUMMARY = "Interface definitions for Zope products"
--SECTION = "console/network"
--
- LICENSE = "ZPL-2.1"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423ec128974bd9d46"
- 
--SRC_URI = "http://pypi.python.org/packages/source/z/zope.interface/zope.interface-${PV}.tar.gz"
- SRC_URI[md5sum] = "edcd5f719c5eb2e18894c4d06e29b6c6"
- SRC_URI[sha256sum] = "91cba7b7cd7cb82f6f4e023fe77f94dc3df4ae5287fd55def2148dc232d0c7da"
- 
--S = "${WORKDIR}/zope.interface-${PV}"
--
--inherit setuptools
-+PYPI_PACKAGE = "zope.interface"
-+inherit pypi setuptools
- 
- RPROVIDES_${PN} += "zope-interfaces"
- FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*.egg/*/*/.debug"
--- 
-1.9.1
+I've reverted EXTRA_OEMAKE change to see which failures were caused by that=
+ and
+which are "old" but as you can see the report isn't very useful, there are =
+too
+many failures.
+
+If you see some recipe you're using failing, start sending patches, I'll st=
+art
+blacklisting next week.
+
+I've started to work on fixing qtbase (together with upgrade to latest 5.6 =
+and 5.7)
+libmms, llvm. The rest isn't included in any image I regularly build.
+
+linux-yocto is still broken, let's see if patches from Andrea will help.
+
+=3D=3D Tested changes (not included in master yet) - bitbake =3D=3D
+d0a840a world-image: add extra target
+
+=3D=3D Tested changes (not included in master yet) - openembedded-core =3D=
+=3D
+33aed58 Revert "bitbake.conf: Remove unhelpful default value for EXTRA_OEMA=
+KE"
+2ba6f7a bitbake.conf: Remove unhelpful default value for EXTRA_OEMAKE
+5dc7dbe sstate-sysroot-cruft.sh: Extend the whitelist
+d5eae27 qemux86: Add identical qemux86copy variant for tests
+c335848 report-error: Allow to upload reports automatically
+01cd1d5 arch-armv7ve.inc: respect armv7a override as well
+5f9fce8 gcc-5.3: backport fix for PR-target-65358
+
+=3D=3D Tested changes (not included in master yet) - meta-openembedded =3D=
+=3D
+d24c10b abiword: make build deterministic for meta-office [1] in layers
+3fb1249 abiword: update to 3.0.1
+f37febf gnome-mime-data: add (from oe-core)
+d63cff8 gtk-theme-torturer: add
+840091a ntp: remove empty libexecdir to prevent potential QA issues
+195aa03 python-django: update package to 1.8.9
+8e4a5be nginx: update to 1.9.10
+e65ca86 nginx: make nginx user and home directory configurable
+472ba33 ne10: add recipe
+42ff87b toybox: upgrade to 0.7.0
+048a5a7 efivar: nvme header was renamed in linux 4.4
+3fd8390 rsyslog: add tls related tests
+b17c0ad rsyslog: avoid deprecated GnuTLS functions
+a710f4b xterm: make xft PACKAGECONFIG depend on freetype-native
+0693ba2 gst-plugins-base: add perl runtime dependency to gst-plugins-base-a=
+pps
+a41c106 lldpd: Update to version 0.9.0
+57a3d5c python-daemonize: Update to version 2.4.2
+1924af4 networkmanager: use bash-completion.bbclass
+5dfa822 lldpd: use bash-completion.bbclass
+b1541ad dracut: use bash-completion.bbclass
+ad565c0 bash-completion: move to oe-core
+75f58aa vpnc: Explicitly set EXTRA_OEMAKE as required
+5b02783 pimd: Explicitly set EXTRA_OEMAKE as required
+0c9a51f pptp-linux: Explicitly set EXTRA_OEMAKE as required
+7b03b02 vsftpd: Explicitly set EXTRA_OEMAKE as required
+b393a75 vlan: Explicitly set EXTRA_OEMAKE as required
+fae40c3 libebml: Explicitly set EXTRA_OEMAKE as required
+4d4f9ec nbench-byte: Explicitly set EXTRA_OEMAKE as required
+b2c123b ckermit: Explicitly set EXTRA_OEMAKE as required
+7fe379f rarpd: Explicitly set EXTRA_OEMAKE as required
+616d121 yavta: Explicitly set EXTRA_OEMAKE as required
+02ab1a3 serialcheck: Explicitly set EXTRA_OEMAKE as required
+98f8b28 iptraf: Explicitly set EXTRA_OEMAKE as required
+3fc81ce mg: Explicitly set EXTRA_OEMAKE as required
+8d7eb56 pngcheck: Explicitly set EXTRA_OEMAKE as required
+91034c8 vboxguestdrivers: upgrade to 4.3.36
+88d35a2 hwdata: add new recipe
+3a12524 thrift: Add recipe for Apache Thrift.
+b1fa1f0 samba: update systemd service files
+795ebef ntp: update 4.2.8p6
+9eaf883 hunspell: initial add 1.3.3
+e32110e apache2: add openldap support to PACKAGECONFIG
+0b116f1 openldap: enable native build
+645b160 mongodb: 2.6.0 -> 3.3.0 and remove from pnblacklist
+51ddcfa lua: Added ptest for lua
+f2c7e73 packagegroup-xfce-extended: add xfce4-calculator-plugin
+bbda40e xfce4-calculator-plugin: initial add 0.5.1
+b3e53c8 python-vcversioner: Fix bad DESCRIPTION and HOMEPAGE entries.
+e2886e5 start-stop-daemon: Upgrade 1.16.0.2 -> 1.17.25
+e61865e nodejs: upgrade from 4.2.4 to 4.2.6
+8308fe2 rygel: Update to 0.28.2
+edc3aab gupnp: Update to 0.20.14
+ded806b ebtables: enable KERNEL_64_USERSPACE_32 for powerpc
+e0ecd67 netkit-telnet: Add to generate telnetlogin.
+e0f527e netkit-rsh: add two patches and some fixes.
+db745a1 net-snmp: fix cross-compile breakage, add libnl pkgconfig option
+069ccfd efivar: fix zero initializer compiler error
+ed722c3 fix missing packageconfig for samba with sysvinit
+3dffa82 waf-samba.bbclass: add cross-answers option and files
+462476f samba: Fix typo in PACKAGECONFIG for "acl" and "aio"
+bede8b1 lowpan-tools: add missing flex/bison deps
+ba89155 postfix: fix clean broken issue
+68e9e07 ncftp: fix build failures with ccdv
+8b6c8af iscsitarget: skip the arch test for kernel modules
+c856fb0 iscsitarget: split the kernel module into separate package
+791e42b netkit-ftp: fixed invalid symlink
+79b4d6a ctdb: add PACKAGECONFIG for libtdb
+a152701 cim-schema-exper: fix host-user-contaminated
+949cd53 nbd: use BPN in Files
+6885241 wireshark: update SRC_URI link to sources
+2d366c7 postfix: premission of /var/spool/mail seems incorrect
+
+=3D=3D Tested changes (not included in master yet) - meta-qt5 =3D=3D
+909858b qt5: use common PACKAGECONFIG to build examples
+8e70eeb qt5-git.inc: Ensure we export the SRCREV as the module name
+d6aeedb qtbase: Fix installation of fonts and libraries
+
+=3D=3D Tested changes (not included in master yet) - meta-browser =3D=3D
+
+=3D=3D Tested changes (not included in master yet) - meta-webos-ports =3D=3D
+
+=3D=3D Tested changes (not included in master yet) - meta-smartphone =3D=3D
+
+=3D=3D Number of issues - stats =3D=3D
+{| class=3D'wikitable'
+!|Date		     !!colspan=3D'3'|Failed tasks			    !!colspan=3D'12'|QA !!Comme=
+nt
+|-
+||		||qemuarm	||qemux86	||qemux86_64	||already-stripped	||libdir	||textrel	=
+||build-deps	||file-rdeps	||version-going-backwards	||host-user-contaminate=
+d	||installed-vs-shipped	||unknown-configure-option	||symlink-to-sysroot	||=
+invalid-pkgconfig	||pkgname	||=09
+|-
+||2016-02-14	||26	||37	||32	||0		||1		||7		||3		||29		||0		||3		||1		||0		|=
+|0		||0		||0		||=09
+|}
+
+http://www.openembedded.org/wiki/Bitbake_World_Status
+
+=3D=3D Failed tasks 2016-02-14 =3D=3D
+
+INFO: jenkins-job.sh-1.7.1 Complete log available at http://logs.nslu2-linu=
+x.org/buildlogs/oe/world/log.report.20160215_045702.log
+
+=3D=3D=3D common (23) =3D=3D=3D
+    * /meta-browser/recipes-mozilla/firefox/firefox_38.4.0esr.bb, do_packag=
+e_qa
+    * /meta-openembedded/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.=
+1.bb, do_install
+    * /meta-openembedded/meta-networking/recipes-connectivity/inetutils/ine=
+tutils_1.9.4.bb, do_install
+    * /meta-openembedded/meta-networking/recipes-connectivity/snort/snort_2=
+=2E9.7.5.bb, do_populate_sysroot
+    * /meta-openembedded/meta-networking/recipes-daemons/squid/squid_3.5.7.=
+bb, do_compile
+    * /meta-openembedded/meta-networking/recipes-irc/znc/znc_git.bb, do_pop=
+ulate_sysroot
+    * /meta-openembedded/meta-networking/recipes-support/curlpp/curlpp_0.7.=
+3.bb, do_populate_sysroot
+    * /meta-openembedded/meta-networking/recipes-support/dovecot/dovecot_2.=
+2.21.bb, do_package_qa
+    * /meta-openembedded/meta-oe/recipes-core/fakeroot/fakeroot_1.18.4.bb, =
+do_package_qa
+    * /meta-openembedded/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb, do_packa=
+ge_qa
+    * /meta-openembedded/meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb, do_=
+populate_sysroot
+    * /meta-openembedded/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb, do_=
+populate_sysroot
+    * /meta-openembedded/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.2.b=
+b, do_populate_sysroot
+    * /meta-openembedded/meta-oe/recipes-extended/efivar/efivar_0.21.bb, do=
+_compile
+    * /meta-openembedded/meta-oe/recipes-extended/mml-widget/gtkmathview_0.=
+8.0.bb, do_populate_sysroot
+    * /meta-openembedded/meta-oe/recipes-graphics/tesseract/tesseract_3.02.=
+02.bb, do_populate_sysroot
+    * /meta-openembedded/meta-oe/recipes-graphics/wayland/wayland-fits_git.=
+bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-support/farsight/libnice_0.0.13.bb=
+, do_populate_sysroot
+    * /meta-openembedded/meta-oe/recipes-support/libtinyxml2/libtinyxml2_gi=
+t.bb, do_compile
+    * /meta-openembedded/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.=
+bb, do_configure
+    * /meta-qt5/recipes-qt/qt5/qtbase_git.bb, do_package_qa
+    * /meta-qt5/recipes-qt/qt5/qtbase_git.bb, do_populate_sysroot
+    * /meta-smartphone/meta-android/recipes-support/invensense/invensense_g=
+it.bb, do_package_qa
+
+=3D=3D=3D common-x86 (5) =3D=3D=3D
+    * /meta-browser/recipes-browser/chromium/cef3_280796.bb, do_compile
+    * /meta-browser/recipes-browser/chromium/chromium_40.0.2214.91.bb, do_c=
+ompile
+    * /meta-openembedded/meta-multimedia/recipes-multimedia/gstreamer-0.10/=
+gst-ffmpeg_0.10.13.bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-devtools/concurrencykit/concurrenc=
+ykit_git.bb, do_configure
+    * /meta-openembedded/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb=
+, do_configure
+
+=3D=3D=3D qemuarm (3) =3D=3D=3D
+    * /meta-openembedded/meta-initramfs/recipes-devtools/klibc/klibc_2.0.4.=
+bb, do_package_qa
+    * /meta-openembedded/meta-networking/recipes-extended/iscsitarget/iscsi=
+target_1.4.20.3+svn502.bb, do_compile
+    * /openembedded-core/meta/recipes-multimedia/ffmpeg/ffmpeg_2.8.6.bb, do=
+_compile
+
+=3D=3D=3D qemux86 (9) =3D=3D=3D
+    * /meta-openembedded/meta-initramfs/recipes-devtools/klibc/klibc-static=
+-utils_2.0.4.bb, do_compile
+    * /meta-openembedded/meta-initramfs/recipes-devtools/klibc/klibc_2.0.4.=
+bb, do_compile
+    * /meta-openembedded/meta-networking/recipes-extended/iscsitarget/iscsi=
+target_1.4.20.3+svn502.bb, do_make_scripts
+    * /meta-openembedded/meta-networking/recipes-kernel/netmap/netmap-modul=
+es_git.bb, do_configure
+    * /meta-openembedded/meta-networking/recipes-kernel/netmap/netmap-modul=
+es_git.bb, do_make_scripts
+    * /meta-openembedded/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb=
+, do_compile
+    * /meta-openembedded/meta-oe/recipes-support/vboxguestdrivers/vboxguest=
+drivers_4.3.36.bb, do_make_scripts
+    * /openembedded-core/meta/recipes-kernel/cryptodev/cryptodev-module_1.8=
+=2Ebb, do_make_scripts
+    * /openembedded-core/meta/recipes-kernel/lttng/lttng-modules_git.bb, do=
+_make_scripts
+
+=3D=3D=3D qemux86_64 (3) =3D=3D=3D
+    * /meta-openembedded/meta-initramfs/recipes-kernel/linux/linux-yocto-ti=
+ny-kexecboot_4.1.bb, do_compile_kernelmodules
+    * /meta-openembedded/meta-oe/recipes-support/opencv/opencv_2.4.bb, do_c=
+ompile
+    * /meta-openembedded/meta-python/recipes-devtools/python/python-matplot=
+lib_1.1.0.bb, do_compile
+
+=3D=3D=3D Number of failed tasks (95) =3D=3D=3D
+{| class=3Dwikitable
+|-
+|| qemuarm 	|| 26	 || http://logs.nslu2-linux.org/buildlogs/oe/world//log.w=
+orld.20160212_142234.log// || http://errors.yoctoproject.org:80/Errors/Buil=
+d/12498/
+|-
+|| qemux86 	|| 37	 || http://logs.nslu2-linux.org/buildlogs/oe/world//log.w=
+orld.20160213_122757.log// || http://errors.yoctoproject.org:80/Errors/Buil=
+d/12499/
+|-
+|| qemux86_64 	|| 32	 || http://logs.nslu2-linux.org/buildlogs/oe/world//lo=
+g.world.20160214_084908.log// || http://errors.yoctoproject.org:80/Errors/B=
+uild/12518/
+|}
+
+=3D=3D=3D PNBLACKLISTs (87) =3D=3D=3D
+
+=3D=3D=3D QA issues (44) =3D=3D=3D
+{| class=3Dwikitable
+!| Count		||Issue
+|-
+||0	||already-stripped
+|-
+||0	||invalid-pkgconfig
+|-
+||0	||pkgname
+|-
+||0	||symlink-to-sysroot
+|-
+||0	||unknown-configure-option
+|-
+||0	||version-going-backwards
+|-
+||1	||installed-vs-shipped
+|-
+||1	||libdir
+|-
+||29	||file-rdeps
+|-
+||3	||build-deps
+|-
+||3	||host-user-contaminated
+|-
+||7	||textrel
+|}
 
 
+PNBLACKLISTs:
+openembedded-core/:
+meta-browser:
+meta-openembedded:
+meta-efl/recipes-efl/e17/diskio_svn.bb:PNBLACKLIST[diskio] ?=3D "broken: sw=
+itch to https://git.enlightenment.org/enlightenment/modules/diskio.git/ and=
+ fix 0.0.1+svnr82070-r0.0/E-MODULES-EXTRA/diskio/e-module-diskio.edc:58. in=
+valid state name: 'off'. "default" state must always be first."
+meta-efl/recipes-efl/e17/elmdentica_svn.bb:PNBLACKLIST[elmdentica] ?=3D "OL=
+D and depends on broken azy"
+meta-efl/recipes-efl/e17/emprint_svn.bb:PNBLACKLIST[emprint] ?=3D "if you w=
+ant to use these modules with E18, then you need to update it to git recipe=
+ fetching newer sources from http://git.enlightenment.org/apps/emprint.git/"
+meta-efl/recipes-efl/e17/news_svn.bb:PNBLACKLIST[news] ?=3D "if you want to=
+ use these modules with E18, then you need to update it to git recipe fetch=
+ing newer sources from http://git.enlightenment.org/enlightenment/modules/n=
+ews.git/"
+meta-efl/recipes-efl/e17/rage_svn.bb:PNBLACKLIST[rage] ?=3D "if you want to=
+ use these modules with E18, then you need to update it to git recipe fetch=
+ing newer sources from  http://git.enlightenment.org/apps/rage.git/"
+meta-efl/recipes-efl/e17/screenshot_svn.bb:PNBLACKLIST[screenshot] ?=3D "de=
+pends on blacklisted emprint"
+meta-efl/recipes-efl/efl/azy_svn.bb:PNBLACKLIST[azy] ?=3D "OLD and doesn't =
+build with gcc-5"
+meta-efl/recipes-efl/efl/entrance_svn.bb:PNBLACKLIST[entrance] ?=3D "broken=
+: switch to https://git.enlightenment.org/misc/entrance.git and fix 0.0.4+s=
+vnr82070-r7/entrance/data/themes/old/default.edc:678. invalid state name: '=
+defaault'. "default" state must always be first."
+meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb:PNBLACKLIST[mcnavi] ?=3D=
+ "BROKEN: latest version 0.3.4 is 3 years old and now broken with more stri=
+ct ejde_cc from efl-1.13"
+meta-gnome/recipes-apps/epdfview/epdfview_0.1.8.bb:PNBLACKLIST[epdfview] ?=
+=3D "BROKEN: images are not displayed anymore"
+meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb:PNBLACKLIST[gn=
+ome-mplayer] ?=3D "rdepends on blacklisted mplayer"
+meta-gnome/recipes-gnome/gcalctool/gcalctool_5.32.0.bb:PNBLACKLIST[gcalctoo=
+l] ?=3D "broken at least since April 2013 http://permalink.gmane.org/gmane.=
+comp.handhelds.openembedded/57920 and nobody complained, it's also replaced=
+ by gnome calculator"
+meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb:PNBLACKLIST[=
+gnome-keyring] ?=3D "This version conflicts with gcr from oe-core"
+meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.10.1.bb:PNBLACKLIST[gno=
+me-menus3] ?=3D "CONFLICT: 24 files are conflicting with gnome-menus"
+meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb:PNBLACKLIST[gnom=
+e-panel3] ?=3D "CONFLICT: depends on libgweather3 which conflicts with libg=
+weather"
+meta-gnome/recipes-gnome/gnome-power-manager/gnome-power-manager_2.32.0.bb:=
+PNBLACKLIST[gnome-power-manager] ?=3D "BROKEN: not compatible with current =
+libnotify"
+meta-gnome/recipes-gnome/gweather/libgweather3_3.0.2.bb:PNBLACKLIST[libgwea=
+ther3] ?=3D "CONFLICT: 876 files are conflicting with libgweather"
+meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb:PNBLACKLIST[nautilus3]=
+ ?=3D "BROKEN: fails to build, maybe missing dependency on gnome-desktop-ut=
+ils.h provider"
+meta-gnome/recipes-gnome/system-tools/system-tools-backends_2.10.2.bb:PNBLA=
+CKLIST[system-tools-backends] ?=3D "does not build with distroless qemuarm =
+as reported in 'State of bitbake world' thread, nobody volunteered to fix t=
+hem"
+meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb:PNBLACKLIST[zenity] ?=3D "=
+BROKEN: doesn't build with B!=3DS"
+meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb:PNBLACKLIST[xbmc] ?=3D=
+ "/usr/include/c++/ctime:70:11: error: '::gmtime' has not been declared"
+meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb:PNBLACKLIST[mkvtoo=
+lnix] ?=3D "BROKEN: Failx to build with gcc-5"
+meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb:PNBLACKLIST=
+[coriander] ?=3D "BROKEN: fails to use SDL probably because libsdl-config w=
+as removed, error: unknown type name 'SDL_Overlay'"
+meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb:PN=
+BLACKLIST[renderer-service-upnp] ?=3D "BROKEN: doesn't build with B!=3DS (t=
+rying to install rendererconsole.py from ${B} instead of ${S})"
+meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb:PNBLACKLIST[gs=
+t123] ?=3D "gst123 is still "sometimes" using wrong sysroot"
+meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb:PNBLACK=
+LIST[lksctp-tools] ?=3D "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', =
+"BROKEN: fails to link against sctp_connectx symbol", '', d)}"
+meta-networking/recipes-support/nis/yp-tools_3.3.bb:PNBLACKLIST[yp-tools] ?=
+=3D "BROKEN: fails to build for qemuarm."
+meta-networking/recipes-support/nis/ypbind-mt_2.2.bb:PNBLACKLIST[ypbind-mt]=
+ ?=3D "BROKEN: Depends on broken yp-tools"
+meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb:PNBLACKLIST[bluez-h=
+cidump] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 con=
+flicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb:PNBLACKLIST[bluez4] ?=3D=
+ "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with =
+bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb:PNBLACKLIS=
+T[gst-plugin-bluetooth] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'blue=
+z5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURE=
+S', '', d)}"
+meta-oe/recipes-connectivity/obexftp/obexftp_0.23.bb:PNBLACKLIST[obexftp] ?=
+=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts wi=
+th bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-connectivity/soft66/soft66_git.bb:PNBLACKLIST[soft66] ?=3D =
+"BROKEN: depends on broken libftdi"
+meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb:PNBLACKLIST[zeroc=
+-ice] ?=3D "BROKEN: not compatible with default db version"
+meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb:PNBLACKLIST[cloud9] ?=3D "Not=
+ comatible with current nodejs 0.12, but upstream is working on it for v3"
+meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb:PNBLACKLIST[package=
+kit] ?=3D "BROKEN: depends on old deprecated libopkg which is currently dis=
+abled and will be removed soon"
+meta-oe/recipes-extended/subsurface/subsurface_git.bb:PNBLACKLIST[subsurfac=
+e] ?=3D "Needs to be upgraded for compatibility with new libdivecomputer"
+meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb:PNBLACKLIST[gtkextra] ?=3D=
+ "BROKEN: Fails to build with gcc-5"
+meta-oe/recipes-graphics/clutter/clutter-box2d_git.bb:PNBLACKLIST[clutter-b=
+ox2d] ?=3D "BROKEN: doesn't build with B!=3DS"
+meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb:PNBLACKLIST[fim] ?=3D "BROKEN: =
+doesn't build with B!=3DS (flex: can't open lex.lex)"
+meta-oe/recipes-graphics/slim/slim_1.3.2.bb:PNBLACKLIST[slim] ?=3D "does no=
+t build with distroless qemuarm as reported in 'State of bitbake world' thr=
+ead, nobody volunteered to fix them"
+meta-oe/recipes-graphics/xorg-driver/xf86-input-mtev_git.bb:PNBLACKLIST[xf8=
+6-input-mtev] ?=3D "BROKEN: doesn't build with B!=3DS (Makefile without ${S=
+} in sed call)"
+meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.16.bb:PNBLACKLIS=
+T[xf86-video-geode] ?=3D "BROKEN, fails to build"
+meta-oe/recipes-kernel/ktap/ktap-module_git.bb:PNBLACKLIST[ktap-module] ?=
+=3D "Not compatible with 3.19 kernel"
+meta-oe/recipes-kernel/ktap/ktap_git.bb:PNBLACKLIST[ktap] ?=3D "Depends on =
+blacklisted kernel-module-ktapvm"
+meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb:PNBLACKLIST[foxtr=
+otgps] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conf=
+licts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb:PNBLACKLIST[gdal] ?=3D "BROK=
+EN: fails to build with gcc-5"
+meta-oe/recipes-navigation/gypsy/gypsy.inc:PNBLACKLIST[gypsy] ?=3D "${@bb.u=
+tils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 an=
+d bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-navigation/navit/navit.inc:PNBLACKLIST[navit] ?=3D "${@bb.u=
+tils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 an=
+d bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb:PNBLACKLIST[claws-mail]=
+ ?=3D "depends on blacklisted libetpan"
+meta-oe/recipes-sato/claws-mail/claws-plugin-gtkhtml2-viewer_0.31.bb:PNBLAC=
+KLIST[claws-plugin-gtkhtml2-viewer] ?=3D "depends on blacklisted claws-mail"
+meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.15.bb:PNBLACKLIST[c=
+laws-plugin-mailmbox] ?=3D "depends on blacklisted claws-mail"
+meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb:PNBLACKLIST[claw=
+s-plugin-rssyl] ?=3D "depends on blacklisted claws-mail"
+meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb:PNBLACKLIST[apcupsd] ?=
+=3D "BROKEN: doesn't build with B!=3DS"
+meta-oe/recipes-support/emacs/emacs_23.4.bb:PNBLACKLIST[emacs] ?=3D "qemu: =
+uncaught target signal 11 (Segmentation fault) - core dumped"
+meta-oe/recipes-support/fftw/benchfft_3.1.bb:PNBLACKLIST[benchfft] ?=3D "do=
+es not build with distroless qemuarm as reported in 'State of bitbake world=
+' thread, nobody volunteered to fix them"
+meta-oe/recipes-support/iksemel/iksemel_1.4.bb:PNBLACKLIST[iksemel] ?=3D "N=
+ot compatible with gnutls version 3.4 currently in oe-core"
+meta-oe/recipes-support/libdbi/libdbi-drivers_0.8.3-1.bb:PNBLACKLIST[libdbi=
+-drivers] ?=3D "BROKEN: fails to build with gcc-5"
+meta-oe/recipes-support/libetpan/libetpan_0.57.bb:PNBLACKLIST[libetpan] ?=
+=3D "Not compatible with gnutls version 3.4 currently in oe-core"
+meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb:PNBLACKLIST[openmotif]=
+ ?=3D "BROKEN: doesn't build with B!=3DS"
+meta-oe/recipes-support/opensync/libsyncml_0.5.4.bb:PNBLACKLIST[libsyncml] =
+?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts w=
+ith bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb:PNBLACKLIST[pidgin-otr] =
+?=3D "depends on blacklisted pidgin"
+meta-oe/recipes-support/pidgin/pidgin_2.10.9.bb:PNBLACKLIST[pidgin] ?=3D "N=
+ot compatible with gnutls version 3.4 currently in oe-core"
+meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb:PNBLACKLIST[vala=
+-terminal] ?=3D "BROKEN: Doesn't work with B!=3DS, touch: cannot touch `src=
+/.stamp': No such file or directory"
+meta-qt5:
+meta-smartphone:
+meta-shr/recipes-shr/3rdparty/emtooth2_svn.bb:PNBLACKLIST[emtooth2] ?=3D "$=
+{@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with blu=
+ez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-shr/recipes-shr/3rdparty/ffalarms_git.bb:PNBLACKLIST[ffalarms] =3D "Do=
+esn't build after vala upgrade from 0.24.0 to 0.26.1"
+meta-shr/recipes-shr/3rdparty/gwaterpas_0.3.bb:PNBLACKLIST[gwaterpas] ?=3D =
+"broken: depends on blacklisted fltk"
+meta-shr/recipes-shr/3rdparty/iliwi_git.bb:PNBLACKLIST[iliwi] =3D "Doesn't =
+build after vala upgrade from 0.24.0 to 0.26.1"
+meta-shr/recipes-shr/3rdparty/intone_git.bb:PNBLACKLIST[intone] =3D "rdepen=
+ds on blacklisted mplayer2"
+meta-shr/recipes-shr/3rdparty/jefliks_git.bb:PNBLACKLIST[jefliks] ?=3D "dep=
+ends on blacklisted iksemel"
+meta-shr/recipes-shr/3rdparty/pisi_0.5.3.bb:PNBLACKLIST[pisi] ?=3D "${@bb.u=
+tils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 an=
+d bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-shr/recipes-shr/3rdparty/podboy_svn.bb:PNBLACKLIST[podboy] ?=3D "${@bb=
+=2Eutils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez=
+4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-shr/recipes-shr/3rdparty/sensmon_git.bb:PNBLACKLIST[sensmon] =3D "Does=
+n't build after vala upgrade from 0.24.0 to 0.26.1"
+meta-shr/recipes-shr/3rdparty/valacompass_git.bb:PNBLACKLIST[valacompass] =
+=3D "Doesn't build after vala upgrade from 0.24.0 to 0.26.1"
+meta-shr/recipes-shr/shr/shr-installer_git.bb:PNBLACKLIST[shr-installer] ?=
+=3D "Depends on blacklisted packagekit"
+meta-webos-ports:
+conf/world_fixes.inc:PNBLACKLIST[android-system] =3D "depends on lxc from m=
+eta-virtualiazation which isn't included in my world builds"
+conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-1080p] =3D "big and doesn't r=
+eally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-480p] =3D "big and doesn't re=
+ally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't re=
+ally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't re=
+ally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[tearsofsteel-1080p] =3D "big and doesn't r=
+eally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[build-appliance-image] =3D "tries to inclu=
+de whole downloads directory in /home/builder/poky :/"
+conf/world_mask.inc:PNBLACKLIST[evince] =3D "fails to build"
+conf/world_mask.inc:PNBLACKLIST[epiphany] =3D "fails to build"
+conf/world_mask.inc:PNBLACKLIST[gnome-power-manager] =3D "fails to build"
+conf/world_mask.inc:PNBLACKLIST[gnome-bluetooth] =3D "fails to build"
+conf/world_mask.inc:PNBLACKLIST[media-ctl] =3D "fails to build"
+QA issues by type:
+count: 0	issue: already-stripped
+
+
+count: 1	issue: libdir
+qtbase-dbg: found library in wrong location: /usr/share/qt5/examples/widget=
+s/tools/echoplugin/plugin/.debug/libechoplugin.so [libdir]
+
+
+count: 7	issue: textrel
+corosync-2.3.5: ELF binary '/tmp/work/core2-64-oe-linux/corosync/2.3.5-r0/p=
+ackages-split/corosync/usr/sbin/corosync' has relocations in .text [textrel]
+ffmpeg-2.8.6: ELF binary '/tmp/work/i586-oe-linux/ffmpeg/2.8.6-r0/packages-=
+split/libavcodec/usr/lib/libavcodec.so.56.60.100' has relocations in .text =
+[textrel]
+ffmpeg-2.8.6: ELF binary '/tmp/work/i586-oe-linux/ffmpeg/2.8.6-r0/packages-=
+split/libavfilter/usr/lib/libavfilter.so.5.40.101' has relocations in .text=
+ [textrel]
+ffmpeg-2.8.6: ELF binary '/tmp/work/i586-oe-linux/ffmpeg/2.8.6-r0/packages-=
+split/libpostproc/usr/lib/libpostproc.so.53.3.100' has relocations in .text=
+ [textrel]
+ffmpeg-2.8.6: ELF binary '/tmp/work/i586-oe-linux/ffmpeg/2.8.6-r0/packages-=
+split/libswresample/usr/lib/libswresample.so.1.2.101' has relocations in .t=
+ext [textrel]
+ffmpeg-2.8.6: ELF binary '/tmp/work/i586-oe-linux/ffmpeg/2.8.6-r0/packages-=
+split/libswscale/usr/lib/libswscale.so.3.1.101' has relocations in .text [t=
+extrel]
+gstreamer1.0-libav-1.6.3: ELF binary '/tmp/work/i586-oe-linux/gstreamer1.0-=
+libav/1.6.3-r0/packages-split/gstreamer1.0-libav/usr/lib/gstreamer-1.0/libg=
+stlibav.so' has relocations in .text [textrel]
+
+
+count: 3	issue: build-deps
+samba-4.1.12: samba rdepends on libpam, but it isn't a build dependency? [b=
+uild-deps]
+snort-2.9.7.5: snort rdepends on liblzma, but it isn't a build dependency? =
+[build-deps]
+toybox-0.7.0: toybox rdepends on libattr, but it isn't a build dependency? =
+[build-deps]
+
+
+count: 29	issue: file-rdeps
+chkconfig-1.3.58: /usr/sbin/ntsysv_chkconfig contained in package chkconfig=
+ requires libnewt.so()(64bit), but no providers found in its RDEPENDS [file=
+-rdeps]
+chkconfig-1.3.58: /usr/sbin/ntsysv_chkconfig contained in package chkconfig=
+ requires libnewt.so, but no providers found in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: /usr/bin/dvbdate_dvbdate contained in package dvbdate requi=
+res libucsi.so()(64bit), but no providers found in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: /usr/bin/dvbdate_dvbdate contained in package dvbdate requi=
+res libucsi.so, but no providers found in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: /usr/bin/dvbnet_dvbnet contained in package dvbnet requires=
+ libdvbapi.so()(64bit), but no providers found in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: /usr/bin/dvbnet_dvbnet contained in package dvbnet requires=
+ libdvbapi.so, but no providers found in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: /usr/bin/dvbscan_dvb-scan contained in package dvb-scan req=
+uires libdvbapi.so, but no providers found in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: /usr/bin/dvbscan_dvb-scan contained in package dvb-scan req=
+uires libdvbsec.so()(64bit), but no providers found in its RDEPENDS [file-r=
+deps]
+dvb-apps-1.1.1: /usr/bin/dvbtraffic_dvbtraffic contained in package dvbtraf=
+fic requires libdvbapi.so()(64bit), but no providers found in its RDEPENDS =
+[file-rdeps]
+dvb-apps-1.1.1: /usr/bin/dvbtraffic_dvbtraffic contained in package dvbtraf=
+fic requires libdvbapi.so, but no providers found in its RDEPENDS [file-rde=
+ps]
+dvb-apps-1.1.1: /usr/bin/femon_dvb-femon contained in package dvb-femon req=
+uires libdvbapi.so()(64bit), but no providers found in its RDEPENDS [file-r=
+deps]
+dvb-apps-1.1.1: /usr/bin/femon_dvb-femon contained in package dvb-femon req=
+uires libdvbapi.so, but no providers found in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: /usr/bin/gotox_dvb-apps contained in package dvb-apps requi=
+res libdvbapi.so, but no providers found in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: /usr/bin/gotox_dvb-apps contained in package dvb-apps requi=
+res libdvbsec.so()(64bit), but no providers found in its RDEPENDS [file-rde=
+ps]
+fakeroot-1.18.4: /usr/bin/fakeroot_fakeroot contained in package fakeroot r=
+equires /bin/bash, but no providers found in its RDEPENDS [file-rdeps]
+gnome-desktop-2.32.1: /usr/bin/gnome-about_gnome-desktop contained in packa=
+ge gnome-desktop requires /usr/bin/python, but no providers found in its RD=
+EPENDS [file-rdeps]
+libbonobo-2.32.1: /usr/bin/bonobo-slay_libbonobo contained in package libbo=
+nobo requires /usr/bin/perl, but no providers found in its RDEPENDS [file-r=
+deps]
+libmodule-build-perl-0.31: /usr/bin/config@underscore@data_libmodule-build-=
+perl contained in package libmodule-build-perl requires /tmp/sysroots/x86_6=
+4-linux/usr/bin/perl-native/perl.real, but no providers found in its RDEPEN=
+DS [file-rdeps]
+libnewt-0.52.18: /usr/bin/whiptail_whiptail contained in package whiptail r=
+equires libnewt.so()(64bit), but no providers found in its RDEPENDS [file-r=
+deps]
+libnewt-0.52.18: /usr/bin/whiptail_whiptail contained in package whiptail r=
+equires libnewt.so, but no providers found in its RDEPENDS [file-rdeps]
+libnewt-python-0.52.18: /usr/lib/python2.7/site-packages/@underscore@snack.=
+so_libnewt-python contained in package libnewt-python requires libnewt.so()=
+(64bit), but no providers found in its RDEPENDS [file-rdeps]
+libnewt-python-0.52.18: /usr/lib/python2.7/site-packages/@underscore@snack.=
+so_libnewt-python contained in package libnewt-python requires libnewt.so, =
+but no providers found in its RDEPENDS [file-rdeps]
+networkmanager-1.0.10: /usr/bin/nmtui-connect_networkmanager-nmtui containe=
+d in package networkmanager-nmtui requires libnewt.so()(64bit), but no prov=
+iders found in its RDEPENDS [file-rdeps]
+networkmanager-1.0.10: /usr/bin/nmtui-connect_networkmanager-nmtui containe=
+d in package networkmanager-nmtui requires libnewt.so, but no providers fou=
+nd in its RDEPENDS [file-rdeps]
+numptyphysics-0.2+svnr109: /usr/share/numptyphysics/convert.pl_numptyphysic=
+s contained in package numptyphysics requires /usr/bin/perl, but no provide=
+rs found in its RDEPENDS [file-rdeps]
+numptyphysics-0.2+svnr109: /usr/share/numptyphysics/convert@underscore@all.=
+sh_numptyphysics contained in package numptyphysics requires /bin/bash, but=
+ no providers found in its RDEPENDS [file-rdeps]
+perf-1.0: /usr/libexec/perf-core/scripts/python/call-graph-from-postgresql.=
+py_perf contained in package perf requires /usr/bin/python2, but no provide=
+rs found in its RDEPENDS [file-rdeps]
+perf-1.0: /usr/libexec/perf-core/tests/attr.py_perf contained in package pe=
+rf requires /usr/bin/python, but no providers found in its RDEPENDS [file-r=
+deps]
+ubx-utils-0.0.0+gitrAUTOINC+b63c0932dd: /usr/bin/memory-map.sh_ubx-utils co=
+ntained in package ubx-utils requires /bin/bash, but no providers found in =
+its RDEPENDS [file-rdeps]
+
+
+count: 0	issue: version-going-backwards
+
+
+count: 3	issue: host-user-contaminated
+firefox-addon-webconverger: /firefox-addon-webconverger/usr/lib/firefox/ext=
+ensions/{ee11fa88-036b-4661-bb04-d436f86bc06a}/content/wc.js is owned by ui=
+d 3004, which is the same as the user running bitbake. This may be due to h=
+ost contamination [host-user-contaminated]
+numptyphysics: /numptyphysics/usr/share/numptyphysics/org_level/L50_nautilu=
+s.nph is owned by uid 3004, which is the same as the user running bitbake. =
+This may be due to host contamination [host-user-contaminated]
+thone: /thone/usr/bin/thone-toggle is owned by uid 3004, which is the same =
+as the user running bitbake. This may be due to host contamination [host-us=
+er-contaminated]
+
+
+count: 1	issue: installed-vs-shipped
+uim: 5 installed and not shipped files. [installed-vs-shipped]
+
+
+count: 0	issue: unknown-configure-option
+
+
+count: 0	issue: symlink-to-sysroot
+
+
+count: 0	issue: invalid-pkgconfig
+
+
+count: 0	issue: pkgname
+
+
+--N1GIdlSm9i+YlY4t
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlbBlRgACgkQN1Ujt2V2gBxLMQCfetmwVj4sKY/sffmDdy4Hxuuo
+jH8An3QY/Ltnfw/HBTIRAAPMF2p6/x2J
+=qaQs
+-----END PGP SIGNATURE-----
+
+--N1GIdlSm9i+YlY4t--
