@@ -1,48 +1,49 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
-	[209.85.220.46])
-	by mail.openembedded.org (Postfix) with ESMTP id C37CD73163
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 111A773206
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Feb 2016 16:26:17 +0000 (UTC)
-Received: by mail-pa0-f46.google.com with SMTP id yy13so105719685pab.3
+	Wed, 17 Feb 2016 11:21:27 +0000 (UTC)
+Received: by mail-wm0-f47.google.com with SMTP id a4so23091899wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Feb 2016 08:26:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=X3hftL5zemI8JC1igGWLjlIDYv71LCdM9b/9gsCc/N4=;
-	b=MQc1ekHYOEu9sxR2ihAcSTcNAYUF1YO0cxIzgy6k829ZFpQQKu8m92dDBIjYibbRLT
-	q/j6lz7Em6HXOWnD1FSdcYqiXoDIAkUz6tlgX5AQF+FUwbYcyyoslJxN4EZyWcPTc5G9
-	tc3wH5ewse41pjB2Hw7j4cwngh+UO22BUiAL4XMRT5DQjlwzEiImjnBBMBifr0TYcajC
-	paXEDT3jb1ftS9ik4Mm9glQ93wViUlbIOPb7Q3BpMDi4QFwfrhNVvdVv4wxJ8QEsRsbc
-	jdh5YVjiXBRbLyEzB4JCsDTdb5QwAfHGqKde9uzmChgcSha7uXyHKStXvNlmIzVEa8D+
-	wB1Q==
+	Wed, 17 Feb 2016 03:21:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=g0SUORA900mi94T/ab5xgiakK+H0kyclh1ae4pLGOiE=;
+	b=Y7EtmQsrq/x6Vmbeao/1KbsyoXaOy5BohxWqtrCDDrl0wFIL9AzzVd8VjNjLOtxstm
+	Vj2ssgoHKF3tWbFgAnyVTyO0iL3HoNAXe4d3d8oSALfmPXFo8fz5fXlsv+yE3hNTQmP0
+	pL8GF3NNtlfi+MuX4WSuZvBlubpaeUGkDuwc5MX+PrPS23OoJ5Ncdemrx3mlVuK6hmQm
+	XonBsbi5MAPTDPmkOz8OscgcuVEduuo20djuQslL31czeWcogBZwWFxpgx5VT715RaKp
+	DUqAuGmYKP7jUySLhYmM4av7eY4POAwCWkvU5/SKD1jkLA8MzeeuZauhUFMQkiGFlKhx
+	i0Bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=X3hftL5zemI8JC1igGWLjlIDYv71LCdM9b/9gsCc/N4=;
-	b=PdgD5e6y+m5zGPt4nMhuPyz++cutY1tfkOZGY7XCezeNPOSy8e8OzZmzgdUJ6RVEpS
-	TPLb35vvB8u3KuA3QF1hu+csag2dKqgktR4Xj9zOGsLhuqDEgw478qdQFc9px86GGr1g
-	d89tsKEuxLOxU3fSjA4/k0bSmWA9mnVrMqj8bkkro97MJ4vwN4GvY1PPYGU0yhVeA0hK
-	aFVEEWtunEN8HU9mOCCurWNI/X1//ZqgyjfS/2y5Wi7MIo31lVrO2G9XV3z6zq1Eo0nY
-	JshRVN2aPyrvk402k+FiEZyMNwciKQ5HIj+q/jSXp8mvIGNmdRrBxsu0Dld2zu9woe+a
-	0uyA==
-X-Gm-Message-State: AG10YOR2DyHaky2ptcDc3UP79nyZwHhC9zqvcpHFTsOIIefoInjLdU3kF4rTikIHu9tQYg==
-X-Received: by 10.67.4.225 with SMTP id ch1mr31439218pad.77.1455639978355;
-	Tue, 16 Feb 2016 08:26:18 -0800 (PST)
-Received: from bigIsland.kama-aina.net (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	k65sm46913098pfb.30.2016.02.16.08.26.16
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-type:content-transfer-encoding;
+	bh=g0SUORA900mi94T/ab5xgiakK+H0kyclh1ae4pLGOiE=;
+	b=frvhxNuU+fVESqdB9V5IBEAtI2Uhv6j/azvHW3wuPeNv3K5fwbxhfZwUY+ioh1aZiD
+	fNKUGCp3fyVGS9849HG4tzsboqzHP3GJ4eSqAPMeOId9nKo+mNakrmp/u1raici/9P+Z
+	1CI+ccxPuAFc44p1mfXdqSDVLTycSjeWw8ihcuPVMgnfYB+NDDxSLi0KnV4ZaBn1ip1l
+	y6wUC7ftDWuWfFtB+2ymsPXLqTr8XsJcyWAe9wk/drid2HS4cka5/qB7BegnUmIyxy4l
+	Gz3kgedRopVE0ymCWEyRM8B+3jkvLLemQbxlaWBxNV1V23I0uCpnq2TnwAv64vkB9WO8
+	dGEg==
+X-Gm-Message-State: AG10YOQaPj01VJ2ys86cjr8vcLlZW5pTJ/3ugEsMBo+if1vQadQHgDIzG6mXfL8esaqzkA==
+X-Received: by 10.194.185.199 with SMTP id fe7mr1303365wjc.50.1455708088263;
+	Wed, 17 Feb 2016 03:21:28 -0800 (PST)
+Received: from localhost.localdomain (p5B0A38F8.dip0.t-ipconnect.de.
+	[91.10.56.248]) by smtp.googlemail.com with ESMTPSA id
+	jo6sm959773wjb.48.2016.02.17.03.21.26
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 16 Feb 2016 08:26:17 -0800 (PST)
-Received: by bigIsland.kama-aina.net (Postfix, from userid 1000)
-	id 14504FC09F8; Tue, 16 Feb 2016 08:26:06 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster@mvista.com,
-	openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Feb 2016 08:26:03 -0800
-Message-Id: <1455639963-13189-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] lssci: Add package
+	Wed, 17 Feb 2016 03:21:27 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 17 Feb 2016 12:21:14 +0100
+Message-Id: <1455708074-526-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.0
+MIME-Version: 1.0
+Subject: [PATCH] xfce4-panel: make date/time plugins handle timezone changes properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,35 +56,697 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Feb 2016 16:26:17 -0000
+X-List-Received-Date: Wed, 17 Feb 2016 11:21:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The lsscsi command lists information about SCSI devices in Linux
+0001... was applied to make 0002... apply on 4.12-release and git master branch.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-extended/lssci/lsscsi_0.28.bb | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-oe/recipes-extended/lssci/lsscsi_0.28.bb
+ ...r-warning-in-clock-plugin-about-shadowed-.patch | 606 +++++++++++++++++++++
+ ...make-change-of-system-s-timezone-change-t.patch |  42 ++
+ .../recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb |   4 +
+ 3 files changed, 652 insertions(+)
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-panel/files/0001-Fix-compiler-warning-in-clock-plugin-about-shadowed-.patch
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-panel/files/0002-clock-time-make-change-of-system-s-timezone-change-t.patch
 
-diff --git a/meta-oe/recipes-extended/lssci/lsscsi_0.28.bb b/meta-oe/recipes-extended/lssci/lsscsi_0.28.bb
+diff --git a/meta-xfce/recipes-xfce/xfce4-panel/files/0001-Fix-compiler-warning-in-clock-plugin-about-shadowed-.patch b/meta-xfce/recipes-xfce/xfce4-panel/files/0001-Fix-compiler-warning-in-clock-plugin-about-shadowed-.patch
 new file mode 100644
-index 0000000..4b8cbaf
+index 0000000..d971fca
 --- /dev/null
-+++ b/meta-oe/recipes-extended/lssci/lsscsi_0.28.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = "The lsscsi command lists information about SCSI devices in Linux"
-+HOMEPAGE = "http://sg.danny.cz/scsi/lsscsi.html"
-+LICENSE = "GPLv2"
-+SECTION = "base"
-+LIC_FILES_CHKSUM="file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
++++ b/meta-xfce/recipes-xfce/xfce4-panel/files/0001-Fix-compiler-warning-in-clock-plugin-about-shadowed-.patch
+@@ -0,0 +1,606 @@
++From 5a9e94ab7bd628f5bf6b46ea7ea91cf40b4aee98 Mon Sep 17 00:00:00 2001
++From: Matt Thirtytwo <matt.59491@gmail.com>
++Date: Mon, 2 Mar 2015 21:18:41 +0100
++Subject: [PATCH] Fix compiler warning in clock plugin about shadowed 'time'
++ variable
 +
-+SRC_URI = "http://sg.danny.cz/scsi/${BP}.tgz"
++Upstream-Status: Backport [1]
 +
-+SRC_URI[md5sum] = "4a39e3b09cd422e2cae3edbaf56b3176"
-+SRC_URI[sha256sum] = "025d009a1af42bc5b2fca664c44c9ecdfd754356e4a44f5c6aced2420afadd50"
++[1] http://git.xfce.org/xfce/xfce4-panel/commit/?id=5a9e94ab7bd628f5bf6b46ea7ea91cf40b4aee98
 +
-+inherit autotools
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++
++---
++ plugins/clock/clock-analog.c  | 20 ++++++-------
++ plugins/clock/clock-binary.c  | 28 +++++++++---------
++ plugins/clock/clock-digital.c |  8 ++---
++ plugins/clock/clock-fuzzy.c   |  6 ++--
++ plugins/clock/clock-lcd.c     | 34 +++++++++++-----------
++ plugins/clock/clock-time.c    | 68 +++++++++++++++++++++----------------------
++ plugins/clock/clock.c         | 12 ++++----
++ 7 files changed, 88 insertions(+), 88 deletions(-)
++
++diff --git a/plugins/clock/clock-analog.c b/plugins/clock/clock-analog.c
++index 2e96a09..910450d 100644
++--- a/plugins/clock/clock-analog.c
+++++ b/plugins/clock/clock-analog.c
++@@ -216,7 +216,7 @@ xfce_clock_analog_expose_event (GtkWidget      *widget,
++   gdouble          xc, yc;
++   gdouble          angle, radius;
++   cairo_t         *cr;
++-  GDateTime       *time;
+++  GDateTime       *date_time;
++ 
++   panel_return_val_if_fail (XFCE_CLOCK_IS_ANALOG (analog), FALSE);
++ 
++@@ -239,7 +239,7 @@ xfce_clock_analog_expose_event (GtkWidget      *widget,
++       cairo_clip (cr);
++ 
++       /* get the local time */
++-      time = clock_time_get_time (analog->time);
+++      date_time = clock_time_get_time (analog->time);
++ 
++       /* set the line properties */
++       cairo_set_line_width (cr, 1);
++@@ -251,20 +251,20 @@ xfce_clock_analog_expose_event (GtkWidget      *widget,
++       if (analog->show_seconds)
++         {
++           /* second pointer */
++-          angle = TICKS_TO_RADIANS (g_date_time_get_second (time));
+++          angle = TICKS_TO_RADIANS (g_date_time_get_second (date_time));
++           xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.7, TRUE);
++         }
++ 
++       /* minute pointer */
++-      angle = TICKS_TO_RADIANS (g_date_time_get_minute (time));
+++      angle = TICKS_TO_RADIANS (g_date_time_get_minute (date_time));
++       xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.8, FALSE);
++ 
++       /* hour pointer */
++-      angle = HOURS_TO_RADIANS (g_date_time_get_hour (time), g_date_time_get_minute (time));
+++      angle = HOURS_TO_RADIANS (g_date_time_get_hour (date_time), g_date_time_get_minute (date_time));
++       xfce_clock_analog_draw_pointer (cr, xc, yc, radius, angle, 0.5, FALSE);
++ 
++       /* cleanup */
++-      g_date_time_unref (time);
+++      g_date_time_unref (date_time);
++       cairo_destroy (cr);
++     }
++ 
++@@ -347,12 +347,12 @@ xfce_clock_analog_draw_pointer (cairo_t *cr,
++ 
++ static gboolean
++ xfce_clock_analog_update (XfceClockAnalog *analog,
++-                          ClockTime       *time)
+++                          ClockTime       *clock_time)
++ {
++   GtkWidget *widget = GTK_WIDGET (analog);
++ 
++   panel_return_val_if_fail (XFCE_CLOCK_IS_ANALOG (analog), FALSE);
++-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), FALSE);
+++  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (clock_time), FALSE);
++ 
++   /* update if the widget if visible */
++   if (G_LIKELY (GTK_WIDGET_VISIBLE (widget)))
++@@ -364,11 +364,11 @@ xfce_clock_analog_update (XfceClockAnalog *analog,
++ 
++ 
++ GtkWidget *
++-xfce_clock_analog_new (ClockTime *time)
+++xfce_clock_analog_new (ClockTime *clock_time)
++ {
++   XfceClockAnalog *analog = g_object_new (XFCE_CLOCK_TYPE_ANALOG, NULL);
++ 
++-  analog->time = time;
+++  analog->time = clock_time;
++   analog->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
++                                             analog->time,
++                                             G_CALLBACK (xfce_clock_analog_update), analog);
++diff --git a/plugins/clock/clock-binary.c b/plugins/clock/clock-binary.c
++index 4751c51..46b852c 100644
++--- a/plugins/clock/clock-binary.c
+++++ b/plugins/clock/clock-binary.c
++@@ -262,7 +262,7 @@ xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
++                                             GtkAllocation   *alloc)
++ {
++   GdkColor    *active, *inactive;
++-  GDateTime   *time;
+++  GDateTime   *date_time;
++   gint         row, rows;
++   static gint  binary_table[] = { 32, 16, 8, 4, 2, 1 };
++   gint         col, cols = G_N_ELEMENTS (binary_table);
++@@ -282,7 +282,7 @@ xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
++       active = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_SELECTED]);
++     }
++ 
++-  time = clock_time_get_time (binary->time);
+++  date_time = clock_time_get_time (binary->time);
++ 
++   /* init sizes */
++   remain_h = alloc->height;
++@@ -293,11 +293,11 @@ xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
++     {
++       /* get the time this row represents */
++       if (row == 0)
++-        ticks = g_date_time_get_hour (time);
+++        ticks = g_date_time_get_hour (date_time);
++       else if (row == 1)
++-        ticks = g_date_time_get_minute (time);
+++        ticks = g_date_time_get_minute (date_time);
++       else
++-        ticks = g_date_time_get_second (time);
+++        ticks = g_date_time_get_second (date_time);
++ 
++       /* reset sizes */
++       remain_w = alloc->width;
++@@ -336,7 +336,7 @@ xfce_clock_binary_expose_event_true_binary (XfceClockBinary *binary,
++       offset_y += h;
++     }
++ 
++-  g_date_time_unref (time);
+++  g_date_time_unref (date_time);
++ }
++ 
++ 
++@@ -348,7 +348,7 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
++ {
++   GdkColor    *active, *inactive;
++   static gint  binary_table[] = { 80, 40, 20, 10, 8, 4, 2, 1 };
++-  GDateTime   *time;
+++  GDateTime   *date_time;
++   gint         row, rows = G_N_ELEMENTS (binary_table) / 2;
++   gint         col, cols;
++   gint         digit;
++@@ -368,7 +368,7 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
++       active = &(GTK_WIDGET (binary)->style->dark[GTK_STATE_SELECTED]);
++     }
++ 
++-  time = clock_time_get_time (binary->time);
+++  date_time = clock_time_get_time (binary->time);
++ 
++   remain_w = alloc->width;
++   offset_x = alloc->x;
++@@ -379,11 +379,11 @@ xfce_clock_binary_expose_event_binary (XfceClockBinary *binary,
++     {
++       /* get the time this row represents */
++       if (col == 0)
++-        ticks = g_date_time_get_hour (time);
+++        ticks = g_date_time_get_hour (date_time);
++       else if (col == 2)
++-        ticks = g_date_time_get_minute (time);
+++        ticks = g_date_time_get_minute (date_time);
++       else if (col == 4)
++-        ticks = g_date_time_get_second (time);
+++        ticks = g_date_time_get_second (date_time);
++ 
++       /* reset sizes */
++       remain_h = alloc->height;
++@@ -520,7 +520,7 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
++ 
++ static gboolean
++ xfce_clock_binary_update (XfceClockBinary     *binary,
++-                          ClockTime           *time)
+++                          ClockTime           *clock_time)
++ {
++   GtkWidget *widget = GTK_WIDGET (binary);
++ 
++@@ -536,11 +536,11 @@ xfce_clock_binary_update (XfceClockBinary     *binary,
++ 
++ 
++ GtkWidget *
++-xfce_clock_binary_new (ClockTime *time)
+++xfce_clock_binary_new (ClockTime *clock_time)
++ {
++   XfceClockBinary *binary = g_object_new (XFCE_CLOCK_TYPE_BINARY, NULL);
++ 
++-  binary->time = time;
+++  binary->time = clock_time;
++   binary->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
++                                             binary->time,
++                                             G_CALLBACK (xfce_clock_binary_update), binary);
++diff --git a/plugins/clock/clock-digital.c b/plugins/clock/clock-digital.c
++index c293ed2..34e7019 100644
++--- a/plugins/clock/clock-digital.c
+++++ b/plugins/clock/clock-digital.c
++@@ -194,12 +194,12 @@ xfce_clock_digital_finalize (GObject *object)
++ 
++ static gboolean
++ xfce_clock_digital_update (XfceClockDigital *digital,
++-                           ClockTime        *time)
+++                           ClockTime        *clock_time)
++ {
++   gchar            *string;
++ 
++   panel_return_val_if_fail (XFCE_CLOCK_IS_DIGITAL (digital), FALSE);
++-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), FALSE);
+++  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (clock_time), FALSE);
++ 
++   /* set time string */
++   string = clock_time_strdup_strftime (digital->time, digital->format);
++@@ -212,11 +212,11 @@ xfce_clock_digital_update (XfceClockDigital *digital,
++ 
++ 
++ GtkWidget *
++-xfce_clock_digital_new (ClockTime *time)
+++xfce_clock_digital_new (ClockTime *clock_time)
++ {
++   XfceClockDigital *digital = g_object_new (XFCE_CLOCK_TYPE_DIGITAL, NULL);
++ 
++-  digital->time = time;
+++  digital->time = clock_time;
++   digital->timeout = clock_time_timeout_new (clock_time_interval_from_format (digital->format),
++                                              digital->time,
++                                              G_CALLBACK (xfce_clock_digital_update), digital);
++diff --git a/plugins/clock/clock-fuzzy.c b/plugins/clock/clock-fuzzy.c
++index 7b0aa41..4b361dd 100644
++--- a/plugins/clock/clock-fuzzy.c
+++++ b/plugins/clock/clock-fuzzy.c
++@@ -275,7 +275,7 @@ xfce_clock_fuzzy_finalize (GObject *object)
++ 
++ static gboolean
++ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
++-                         ClockTime      *time)
+++                         ClockTime      *clock_time)
++ {
++   GDateTime      *date_time;
++   gint            sector;
++@@ -353,11 +353,11 @@ xfce_clock_fuzzy_update (XfceClockFuzzy *fuzzy,
++ 
++ 
++ GtkWidget *
++-xfce_clock_fuzzy_new (ClockTime *time)
+++xfce_clock_fuzzy_new (ClockTime *clock_time)
++ {
++   XfceClockFuzzy *fuzzy = g_object_new (XFCE_CLOCK_TYPE_FUZZY, NULL);
++ 
++-  fuzzy->time = time;
+++  fuzzy->time = clock_time;
++   fuzzy->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
++                                            fuzzy->time,
++                                            G_CALLBACK (xfce_clock_fuzzy_update), fuzzy);
++diff --git a/plugins/clock/clock-lcd.c b/plugins/clock/clock-lcd.c
++index 84e74e6..b180d30 100644
++--- a/plugins/clock/clock-lcd.c
+++++ b/plugins/clock/clock-lcd.c
++@@ -285,7 +285,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
++   gint          ticks, i;
++   gdouble       size;
++   gdouble       ratio;
++-  GDateTime    *time;
+++  GDateTime    *date_time;
++ 
++   panel_return_val_if_fail (XFCE_CLOCK_IS_LCD (lcd), FALSE);
++ 
++@@ -317,10 +317,10 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
++       cairo_set_line_width (cr, MAX (size * 0.05, 1.5));
++ 
++       /* get the local time */
++-      time = clock_time_get_time (lcd->time);
+++      date_time = clock_time_get_time (lcd->time);
++ 
++       /* draw the hours */
++-      ticks = g_date_time_get_hour (time);
+++      ticks = g_date_time_get_hour (date_time);
++ 
++       /* convert 24h clock to 12h clock */
++       if (!lcd->show_military && ticks > 12)
++@@ -333,8 +333,8 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
++        * because we might miss the exact second (due to slightly delayed
++        * timeout) we queue a resize the first 3 seconds or anything in
++        * the first minute */
++-      if ((ticks == 10 || ticks == 0) && g_date_time_get_minute (time) == 0
++-          && (!lcd->show_seconds || g_date_time_get_second (time) < 3))
+++      if ((ticks == 10 || ticks == 0) && g_date_time_get_minute (date_time) == 0
+++          && (!lcd->show_seconds || g_date_time_get_second (date_time) < 3))
++         g_object_notify (G_OBJECT (lcd), "size-ratio");
++ 
++       if (ticks >= 10)
++@@ -352,7 +352,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
++           if (i == 0)
++             {
++               /* get the minutes */
++-              ticks = g_date_time_get_minute (time);
+++              ticks = g_date_time_get_minute (date_time);
++             }
++           else
++             {
++@@ -361,11 +361,11 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
++                 break;
++ 
++               /* get the seconds */
++-              ticks = g_date_time_get_second (time);
+++              ticks = g_date_time_get_second (date_time);
++             }
++ 
++           /* draw the dots */
++-          if (lcd->flash_separators && (g_date_time_get_second (time) % 2) == 1)
+++          if (lcd->flash_separators && (g_date_time_get_second (date_time) % 2) == 1)
++             offset_x += size * RELATIVE_SPACE * 2;
++           else
++             offset_x = xfce_clock_lcd_draw_dots (cr, size, offset_x, offset_y);
++@@ -380,14 +380,14 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
++       if (lcd->show_meridiem)
++         {
++           /* am or pm? */
++-          ticks = g_date_time_get_hour (time) >= 12 ? 11 : 10;
+++          ticks = g_date_time_get_hour (date_time) >= 12 ? 11 : 10;
++ 
++           /* draw the digit */
++           offset_x = xfce_clock_lcd_draw_digit (cr, ticks, size, offset_x, offset_y);
++         }
++ 
++       /* drop the pushed group */
++-      g_date_time_unref (time);
+++      g_date_time_unref (date_time);
++       cairo_pop_group_to_source (cr);
++       cairo_paint (cr);
++       cairo_destroy (cr);
++@@ -403,16 +403,16 @@ xfce_clock_lcd_get_ratio (XfceClockLcd *lcd)
++ {
++   gdouble    ratio;
++   gint       ticks;
++-  GDateTime *time;
+++  GDateTime *date_time;
++ 
++   /* get the local time */
++-  time = clock_time_get_time (lcd->time);
+++  date_time = clock_time_get_time (lcd->time);
++ 
++   /* 8:8(space)8 */
++   ratio = (3 * RELATIVE_DIGIT) + RELATIVE_DOTS + RELATIVE_SPACE;
++ 
++-  ticks = g_date_time_get_hour (time);
++-  g_date_time_unref (time);
+++  ticks = g_date_time_get_hour (date_time);
+++  g_date_time_unref (date_time);
++ 
++   if (!lcd->show_military && ticks > 12)
++     ticks -= 12;
++@@ -584,7 +584,7 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
++ 
++ static gboolean
++ xfce_clock_lcd_update (XfceClockLcd *lcd,
++-                       ClockTime    *time)
+++                       ClockTime    *clock_time)
++ {
++   GtkWidget *widget = GTK_WIDGET (lcd);
++ 
++@@ -600,11 +600,11 @@ xfce_clock_lcd_update (XfceClockLcd *lcd,
++ 
++ 
++ GtkWidget *
++-xfce_clock_lcd_new (ClockTime *time)
+++xfce_clock_lcd_new (ClockTime *clock_time)
++ {
++   XfceClockLcd *lcd = g_object_new (XFCE_CLOCK_TYPE_LCD, NULL);
++ 
++-  lcd->time = time;
+++  lcd->time = clock_time;
++   lcd->timeout = clock_time_timeout_new (CLOCK_INTERVAL_MINUTE,
++                                          lcd->time,
++                                          G_CALLBACK (xfce_clock_lcd_update), lcd);
++diff --git a/plugins/clock/clock-time.c b/plugins/clock/clock-time.c
++index 16b0f89..b015b13 100644
++--- a/plugins/clock/clock-time.c
+++++ b/plugins/clock/clock-time.c
++@@ -107,10 +107,10 @@ clock_time_class_init (ClockTimeClass *klass)
++ 
++ 
++ static void
++-clock_time_init (ClockTime *time)
+++clock_time_init (ClockTime *clock_time)
++ {
++-  time->timezone_name = g_strdup (DEFAULT_TIMEZONE);
++-  time->timezone = g_time_zone_new_local ();
+++  clock_time->timezone_name = g_strdup (DEFAULT_TIMEZONE);
+++  clock_time->timezone = g_time_zone_new_local ();
++ }
++ 
++ 
++@@ -118,11 +118,11 @@ clock_time_init (ClockTime *time)
++ static void
++ clock_time_finalize (GObject *object)
++ {
++-  ClockTime *time = XFCE_CLOCK_TIME (object);
+++  ClockTime *clock_time = XFCE_CLOCK_TIME (object);
++ 
++-  g_free (time->timezone_name);
+++  g_free (clock_time->timezone_name);
++ 
++-  g_time_zone_unref (time->timezone);
+++  g_time_zone_unref (clock_time->timezone);
++ 
++   G_OBJECT_CLASS (clock_time_parent_class)->finalize (object);
++ }
++@@ -135,12 +135,12 @@ clock_time_get_property (GObject    *object,
++                          GValue     *value,
++                          GParamSpec *pspec)
++ {
++-  ClockTime *time = XFCE_CLOCK_TIME (object);
+++  ClockTime *clock_time = XFCE_CLOCK_TIME (object);
++ 
++   switch (prop_id)
++     {
++     case PROP_TIMEZONE:
++-      g_value_set_string (value, time->timezone_name);
+++      g_value_set_string (value, clock_time->timezone_name);
++       break;
++ 
++     default:
++@@ -157,29 +157,29 @@ clock_time_set_property (GObject      *object,
++                          const GValue *value,
++                          GParamSpec   *pspec)
++ {
++-  ClockTime     *time = XFCE_CLOCK_TIME (object);
+++  ClockTime     *clock_time = XFCE_CLOCK_TIME (object);
++   const gchar   *str_value;
++ 
++   switch (prop_id)
++     {
++     case PROP_TIMEZONE:
++       str_value = g_value_get_string (value);
++-      if (g_strcmp0 (time->timezone_name, str_value) != 0)
+++      if (g_strcmp0 (clock_time->timezone_name, str_value) != 0)
++         {
++-          g_free (time->timezone_name);
++-          g_time_zone_unref (time->timezone);
+++          g_free (clock_time->timezone_name);
+++          g_time_zone_unref (clock_time->timezone);
++           if (str_value == NULL || g_strcmp0 (str_value, "") == 0)
++             {
++-              time->timezone_name = g_strdup (DEFAULT_TIMEZONE);
++-              time->timezone = g_time_zone_new_local ();
+++              clock_time->timezone_name = g_strdup (DEFAULT_TIMEZONE);
+++              clock_time->timezone = g_time_zone_new_local ();
++             }
++           else
++             {
++-              time->timezone_name = g_strdup (str_value);
++-              time->timezone = g_time_zone_new (str_value);
+++              clock_time->timezone_name = g_strdup (str_value);
+++              clock_time->timezone = g_time_zone_new (str_value);
++             }
++ 
++-          g_signal_emit (G_OBJECT (time), clock_time_signals[TIME_CHANGED], 0);
+++          g_signal_emit (G_OBJECT (clock_time), clock_time_signals[TIME_CHANGED], 0);
++         }
++       break;
++ 
++@@ -192,14 +192,14 @@ clock_time_set_property (GObject      *object,
++ 
++ 
++ GDateTime *
++-clock_time_get_time (ClockTime *time)
+++clock_time_get_time (ClockTime *clock_time)
++ {
++   GDateTime *date_time;
++ 
++-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), NULL);
+++  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (clock_time), NULL);
++ 
++-  if (time->timezone != NULL)
++-    date_time = g_date_time_new_now (time->timezone);
+++  if (clock_time->timezone != NULL)
+++    date_time = g_date_time_new_now (clock_time->timezone);
++   else
++     date_time = g_date_time_new_now_local ();
++ 
++@@ -209,15 +209,15 @@ clock_time_get_time (ClockTime *time)
++ 
++ 
++ gchar *
++-clock_time_strdup_strftime (ClockTime       *time,
+++clock_time_strdup_strftime (ClockTime       *clock_time,
++                             const gchar     *format)
++ {
++   GDateTime *date_time;
++   gchar     *str;
++ 
++-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), NULL);
+++  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (clock_time), NULL);
++ 
++-  date_time = clock_time_get_time (time);
+++  date_time = clock_time_get_time (clock_time);
++   str = g_date_time_format (date_time, format);
++ 
++   g_date_time_unref (date_time);
++@@ -262,7 +262,7 @@ static gboolean
++ clock_time_timeout_running (gpointer user_data)
++ {
++   ClockTimeTimeout *timeout = user_data;
++-  GDateTime        *time;
+++  GDateTime        *date_time;
++ 
++   g_signal_emit (G_OBJECT (timeout->time), clock_time_signals[TIME_CHANGED], 0);
++ 
++@@ -270,8 +270,8 @@ clock_time_timeout_running (gpointer user_data)
++   if (timeout->interval == CLOCK_INTERVAL_MINUTE)
++     {
++       /* sync again when we don't run on time */
++-      time = clock_time_get_time (timeout->time);
++-      timeout->restart = (g_date_time_get_second (time) != 0);
+++      date_time = clock_time_get_time (timeout->time);
+++      timeout->restart = (g_date_time_get_second (date_time) != 0);
++     }
++ 
++   return !timeout->restart;
++@@ -312,13 +312,13 @@ clock_time_timeout_sync (gpointer user_data)
++ 
++ ClockTimeTimeout *
++ clock_time_timeout_new (guint       interval,
++-                        ClockTime  *time,
+++                        ClockTime  *clock_time,
++                         GCallback   c_handler,
++                         gpointer    gobject)
++ {
++   ClockTimeTimeout *timeout;
++ 
++-  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (time), NULL);
+++  panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (clock_time), NULL);
++ 
++   panel_return_val_if_fail (interval > 0, NULL);
++ 
++@@ -326,10 +326,10 @@ clock_time_timeout_new (guint       interval,
++   timeout->interval = 0;
++   timeout->timeout_id = 0;
++   timeout->restart = FALSE;
++-  timeout->time = time;
+++  timeout->time = clock_time;
++ 
++   timeout->time_changed_id =
++-    g_signal_connect_swapped (G_OBJECT (time), "time-changed",
+++    g_signal_connect_swapped (G_OBJECT (clock_time), "time-changed",
++                               c_handler, gobject);
++ 
++   g_object_ref (G_OBJECT (timeout->time));
++@@ -345,7 +345,7 @@ void
++ clock_time_timeout_set_interval (ClockTimeTimeout *timeout,
++                                  guint             interval)
++ {
++-  GDateTime *time;
+++  GDateTime *date_time;
++   guint      next_interval;
++   gboolean   restart;
++ 
++@@ -372,8 +372,8 @@ clock_time_timeout_set_interval (ClockTimeTimeout *timeout,
++   /* get the seconds to the next internal */
++   if (interval == CLOCK_INTERVAL_MINUTE)
++     {
++-      time = clock_time_get_time (timeout->time);
++-      next_interval = 60 - g_date_time_get_second (time);
+++      date_time = clock_time_get_time (timeout->time);
+++      next_interval = 60 - g_date_time_get_second (date_time);
++     }
++   else
++     {
++diff --git a/plugins/clock/clock.c b/plugins/clock/clock.c
++index 6c80978..e07c17b 100644
++--- a/plugins/clock/clock.c
+++++ b/plugins/clock/clock.c
++@@ -1113,17 +1113,17 @@ static void
++ clock_plugin_calendar_show_event (GtkWidget   *calendar_window,
++                                   ClockPlugin *plugin)
++ {
++-  GDateTime *time;
+++  GDateTime *date_time;
++ 
++   panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
++ 
++   clock_plugin_reposition_calendar (plugin);
++ 
++-  time = clock_time_get_time (plugin->time);
++-  gtk_calendar_select_month (GTK_CALENDAR (plugin->calendar), g_date_time_get_month (time) - 1,
++-                             g_date_time_get_year (time));
++-  gtk_calendar_select_day (GTK_CALENDAR (plugin->calendar), g_date_time_get_day_of_month (time));
++-  g_date_time_unref (time);
+++  date_time = clock_time_get_time (plugin->time);
+++  gtk_calendar_select_month (GTK_CALENDAR (plugin->calendar), g_date_time_get_month (date_time) - 1,
+++                             g_date_time_get_year (date_time));
+++  gtk_calendar_select_day (GTK_CALENDAR (plugin->calendar), g_date_time_get_day_of_month (date_time));
+++  g_date_time_unref (date_time);
++ }
++ 
++ 
++-- 
++2.5.0
++
+diff --git a/meta-xfce/recipes-xfce/xfce4-panel/files/0002-clock-time-make-change-of-system-s-timezone-change-t.patch b/meta-xfce/recipes-xfce/xfce4-panel/files/0002-clock-time-make-change-of-system-s-timezone-change-t.patch
+new file mode 100644
+index 0000000..9dca3ba
+--- /dev/null
++++ b/meta-xfce/recipes-xfce/xfce4-panel/files/0002-clock-time-make-change-of-system-s-timezone-change-t.patch
+@@ -0,0 +1,42 @@
++From c582338ef4f33b3dc07a2636340d55b9fb530650 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Wed, 17 Feb 2016 00:15:44 +0100
++Subject: [PATCH] clock-time: make change of system's timezone change time for
++ DEFAULT_TIMEZONE
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++clock_time->timezone is set in clock_time_init so the condition
++
++'clock_time->timezone != NULL
++
++is matching always.
++
++Tested by selecting seconds displayed (-> quick update) and changing timezone.
++
++Upstream-Status: Submitted [1]
++
++[1] https://bugzilla.xfce.org/show_bug.cgi?id=12453
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ plugins/clock/clock-time.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/plugins/clock/clock-time.c b/plugins/clock/clock-time.c
++index b015b13..4459b85 100644
++--- a/plugins/clock/clock-time.c
+++++ b/plugins/clock/clock-time.c
++@@ -198,7 +198,7 @@ clock_time_get_time (ClockTime *clock_time)
++ 
++   panel_return_val_if_fail (XFCE_IS_CLOCK_TIME (clock_time), NULL);
++ 
++-  if (clock_time->timezone != NULL)
+++  if (g_strcmp0 (clock_time->timezone_name, DEFAULT_TIMEZONE) != 0)
++     date_time = g_date_time_new_now (clock_time->timezone);
++   else
++     date_time = g_date_time_new_now_local ();
++-- 
++2.5.0
++
+diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb
+index d41f9ca..6a2b944 100644
+--- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb
++++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb
+@@ -8,6 +8,10 @@ inherit xfce gtk-doc
+ 
+ SRC_URI[md5sum] = "5a333af704e386c90ad829b6baf1a758"
+ SRC_URI[sha256sum] = "30920fc2e2fc26279a82b5261a155c2cc15ab2aa1ced2275684a6ff8261b97b0"
++SRC_URI += " \
++    file://0001-Fix-compiler-warning-in-clock-plugin-about-shadowed-.patch \
++    file://0002-clock-time-make-change-of-system-s-timezone-change-t.patch \
++"
+ 
+ EXTRA_OECONF += "--enable-gtk3"
+ 
 -- 
-1.9.1
+2.5.0
 
 
