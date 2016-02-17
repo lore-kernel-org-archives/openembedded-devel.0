@@ -1,51 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 2042A6E668
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 21EC1605FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Feb 2016 21:44:39 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id g62so47657866wme.0
+	Wed, 17 Feb 2016 21:56:30 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id a4so48126415wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Feb 2016 13:44:40 -0800 (PST)
+	Wed, 17 Feb 2016 13:56:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=TP//HZMdDmZGPm90VVuKGu9ceESk4GGK1feRbIqa3JY=;
-	b=iLryqdvwOn6rtDoC8zYQlohDjuFQov7IwXUFAFv9WdAbh790/pyqnsT2VD5omDq5Qf
-	GfatJxjYkT97SXOgbKOYFm2X9yBuGSRUdBnrM3qsAmLJw6wosPBRi+ZLujCJ6ZB8/NPR
-	5NIEEzqDUgvFnW745ExTTmfOpHb/qn1B1wwD4gzA4aQQK0mj0CpOMCxp5Nykf+5VKTap
-	D2sT0R1+gVHenuPJoAgeKxshrRtD7rd2SvaUw3QKb3iYotcHfhM6RzlpDXRauwV0Vogw
-	w/hphfLuJnn0agSGdV5kAb4OKE5zbEqoyaADAQY1ICjVRF9FpDlzJYwzTUfJOg7eCYPB
-	nDgg==
+	h=from:to:cc:subject:date:message-id;
+	bh=72YV/mdc1eEn0duf7oYNn1pWDhtbhTNLuTLKGkTokpY=;
+	b=gWjfWjPHPRpkvGvQDSTlsswifEQDdQZ+EoZ2h4hn2OAFzBW2IA35iq2V7+djtVf1zK
+	IZvlbdvNbdAAuB/2NnbYmfZ7b4T5M1QZd0DvEZD5W4Sf++Hc0+C9rBR/uoC/UqT+qyWh
+	Q2LqTkNjoA+WjVL4SQfqVaBPQ6Q22AOkY1UYMP/O4c9y3v8J6djwIIwA+YHJLVe2ZArE
+	JxNRP4ht54Er7M79QAUvDgxSAJ8l3TKDxkh45PGYKOvoGHjd5AMzlpIb0nFC2QVZ9SWv
+	zCiOHDflmJY0mP7+VMsVXHCr/AUHkqqbRVW65zSOeG3u/qSBKKf39n5lFUz8xKIg91Zq
+	LIgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=TP//HZMdDmZGPm90VVuKGu9ceESk4GGK1feRbIqa3JY=;
-	b=S88AyHjY/WHurRPz48zyJtJipX/pdGFw+wkzzoq68k2kZcmpQPRncmSyFY7JVS6HPC
-	mhF/TP86ZhuADcJvPBT23PtpYN7NLjoP7YSOe/RJ7VWLnZlm2qaSAidzsW4iCQiaSRPX
-	yNI//ds1ZjrgyyS23KvbHKfH3Nqo5XmiNLsG83IhUY7NuIbuTMrx+Ei0MfZjAbS8vKd4
-	KL+8kDONZQ0oo3Tvohoi4tWStm2CFcv7KXrBvCzGIvKZAzRBumtW9BMAdGCV68Jm37f+
-	URgiMLFyxenMqs7K3e+rYxiUVgjQ7aUHfpnAMzu3DA3cn7KFc2rmt8vfBBds2q6Iev8R
-	5DsA==
-X-Gm-Message-State: AG10YOS2mM0zaF58hUAK+5BVgeW2EOJJf929Iv6FVfHOfXoyMx0FdOKjAWxvnxWy2UiwRw==
-X-Received: by 10.28.102.69 with SMTP id a66mr24035585wmc.8.1455745479900;
-	Wed, 17 Feb 2016 13:44:39 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=72YV/mdc1eEn0duf7oYNn1pWDhtbhTNLuTLKGkTokpY=;
+	b=H9SpntDi/laWEl/NYBaNckDihjk0A6RoABGiiDa0exI4eK5khVttEm/LBJq3j3LWfS
+	DXp3YZYv4g7Dw2/M+hNh9zMCnsTTN0ovZVjYL3SHJ/1B401QqOv8iYEOMNsj8BGoRsqO
+	+NvQ6HJlNizzJ9poMWvcv6191w4utTQOatvDq4x0vYjNFwIeqCIXAnqZTo4FcW7mzfJx
+	CRS56+DFnBGdu9iQFQ+sE9CQujBhNm5DvCvJ+q08MTfNWb6E1iTOZ/3z/DOL12VEOkgi
+	y0DALebyAqH+5SfYptBdhk3wq2ih8XNPWv2HaIoBqtHlMhAO/nlW8Uwk9mK0sPPSUCLa
+	pU+w==
+X-Gm-Message-State: AG10YOTLKMEiTi++NT5+SfccQaj4ZmGrq7Ky7owvMiPK1e+iDn+/Jw4FHOIw7IdFuvpUeA==
+X-Received: by 10.194.77.167 with SMTP id t7mr4036155wjw.90.1455746190587;
+	Wed, 17 Feb 2016 13:56:30 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id c7sm5008222wmd.13.2016.02.17.13.44.38
-	for <openembedded-devel@lists.openembedded.org>
+	by smtp.gmail.com with ESMTPSA id
+	t12sm27369712wmt.20.2016.02.17.13.56.29
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 17 Feb 2016 13:44:38 -0800 (PST)
+	Wed, 17 Feb 2016 13:56:29 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 17 Feb 2016 22:44:56 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160217214456.GB2574@jama>
-References: <1454055810-25770-1-git-send-email-simon.aittamaa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1454055810-25770-1-git-send-email-simon.aittamaa@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-qt5][PATCH] Fixed installation of qtbase-files.
+Date: Wed, 17 Feb 2016 22:56:41 +0100
+Message-Id: <1455746205-31727-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.1
+Subject: [PATCH][meta-qt5 1/5] qmake5_base: delete *.la files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,188 +52,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Feb 2016 21:44:42 -0000
-X-Groupsio-MsgNum: 60002
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="St7VIuEGZ6dlpu13"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 17 Feb 2016 21:56:31 -0000
 
---St7VIuEGZ6dlpu13
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* they reference workdir and trip sanity check:
+  ERROR: QA Issue: libQt5Sql.la failed sanity test (workdir) in path qtbase/5.5.99+5.6.0-alpha1+gitAUTOINC+f7f4dde80e-r0/sysroot-destdir//usr/lib [la]
+* I'm intentionally not using remove-libtool.bbclass recently
+  added to oe-core, because many people combine newer meta-qt5
+  with older oe-core and can be missing this bbclass, I've
+  pending patch to migrate this to remove-libtool.bbclass, will
+  probably merge it after 2.1 or 2.2 release.
 
-On Fri, Jan 29, 2016 at 09:23:30AM +0100, Simon Aittamaa wrote:
-> This patch fixes three problems
->     1) Running on a case-sensitive system would result in an error
->        due to invalid casing of pattern to install.
->     2) Using install on symlinks would cause multiple copies of the
->        same file to be installed on the target-system, since install
->        doesn't preserve symlinks. This wastes a lot of space and it
->        causes ldconfig to complain about non-symlinked files.
->     3) Leakage of user-ids, i.e. cp -a would preserve the uid/gid of
->        whoever built the files, which is usually not what you want.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ classes/qmake5_base.bbclass            | 7 +++++--
+ recipes-qt/qt5/nativesdk-qtbase_git.bb | 2 +-
+ recipes-qt/qt5/qtbase-native_git.bb    | 2 +-
+ 3 files changed, 7 insertions(+), 4 deletions(-)
 
-Does anyone have test-case which shows why this copy is needed?
+diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+index a766cc6..5b2633b 100644
+--- a/classes/qmake5_base.bbclass
++++ b/classes/qmake5_base.bbclass
+@@ -160,20 +160,23 @@ qmake5_base_do_configure () {
+ 
+ qmake5_base_native_do_install() {
+     oe_runmake install INSTALL_ROOT=${D}
++    find "${D}" -ignore_readdir_race -name "*.la" -delete
+ }
+ 
+ qmake5_base_nativesdk_do_install() {
+     # Fix install paths for all
+-    find -name "Makefile*" | xargs -r sed -i "s,(INSTALL_ROOT)${STAGING_DIR_HOST},(INSTALL_ROOT),g"
++    find . -name "Makefile*" | xargs -r sed -i "s,(INSTALL_ROOT)${STAGING_DIR_HOST},(INSTALL_ROOT),g"
+ 
+     oe_runmake install INSTALL_ROOT=${D}
++    find "${D}" -ignore_readdir_race -name "*.la" -delete
+ }
+ 
+ qmake5_base_do_install() {
+     # Fix install paths for all
+-    find -name "Makefile*" | xargs -r sed -i "s,(INSTALL_ROOT)${STAGING_DIR_TARGET},(INSTALL_ROOT),g"
++    find . -name "Makefile*" | xargs -r sed -i "s,(INSTALL_ROOT)${STAGING_DIR_TARGET},(INSTALL_ROOT),g"
+ 
+     oe_runmake install INSTALL_ROOT=${D}
++    find "${D}" -ignore_readdir_race -name "*.la" -delete
+ 
+     # everything except HostData and HostBinaries is prefixed with sysroot value,
+     # but we cannot remove sysroot override, because that's useful for pkg-config etc
+diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+index 4ac80be..ccb0922 100644
+--- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
++++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+@@ -204,7 +204,7 @@ do_configure() {
+ 
+ do_install() {
+     # Fix install paths for all
+-    find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
++    find . -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
+ 
+     oe_runmake install INSTALL_ROOT=${D}
+ 
+diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
+index 14e8516..0683708 100644
+--- a/recipes-qt/qt5/qtbase-native_git.bb
++++ b/recipes-qt/qt5/qtbase-native_git.bb
+@@ -96,7 +96,7 @@ do_configure_prepend() {
+ 
+ do_install() {
+     # Fix install paths for all
+-    find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
++    find . -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
+ 
+     oe_runmake install INSTALL_ROOT=${D}
+ 
+-- 
+2.7.1
 
-I wanted to remove .la files (in qmake5_base_do_install) and this copies th=
-em back to ${D} which is annoying.
 
-So I've removed this cp line and checked what gets missing and it turns
-out that nothing important is missing and even more importantly the fixed *=
-prl files
-are overwritten with their original version.
-
-So unless someone shouts good reason to keep this I'll just drop it.
-
-OE @ ~/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase $ diff -rq 5.5.99+=
-5.6.0-rc+gitAUTOINC+ac8a3b948d-r0*/image                                   =
-        Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib=
-: libQt5Bootstrap.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-BootstrapDBus.a
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-BootstrapDBus.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-BootstrapDBus.prl
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-Concurrent.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-Core.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-DBus.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-Gui.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-Network.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-OpenGL.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-OpenGLExtensions.la
-Files 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib/libQt5Ope=
-nGLExtensions.prl and 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/image/usr/li=
-b/libQt5OpenGLExtensions.prl differ
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-PlatformSupport.la
-Files 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib/libQt5Pla=
-tformSupport.prl and 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/image/usr/lib=
-/libQt5PlatformSupport.prl differ
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-PrintSupport.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-Sql.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-Test.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-Widgets.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-XcbQpa.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5=
-Xml.la
-OE @ ~/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase $ diff -uNr 5.5.99=
-+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib/libQt5OpenGLExtension=
-s.prl 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/image/usr/lib/libQt5OpenGLEx=
-tensions.prl
---- 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib/libQt5OpenG=
-LExtensions.prl      2016-02-17 22:34:16.397812156 +0100
-+++ 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/image/usr/lib/libQt5OpenGLExte=
-nsions.prl   2016-02-17 22:38:56.637811683 +0100
-@@ -3,4 +3,4 @@
- QMAKE_PRL_TARGET =3D libQt5OpenGLExtensions.a
- QMAKE_PRL_CONFIG =3D silent lex yacc depend_includepath testcase_targets i=
-mport_plugins import_qpa_plugin qt warn_on release link_prl incremental cro=
-ss_compile qpa no_mocdepend release qt_no_framework linux unix posix \$(OE_=
-QMAKE_COMPILER) gcc cross_compile compile_examples qpa largefile use_gold_l=
-inker sse2 sse3 ssse3 sse4_1 sse4_2 avx avx2 pcre prefix_build force_indepe=
-ndent force_bootstrap create_prl link_prl prepare_docs qt_docs_targets no_p=
-rivate_qt_headers_warning QTDIR_build exceptions_off testcase_exceptions qt=
-_example_installs warning_clean c++11 static opengl relative_qt_rpath git_b=
-uild qmake_cache target_qt c++11 strict_c++ c++14 c++1z hide_symbols bsymbo=
-lic_functions qt_install_headers need_fwd_pri qt_install_module create_cmak=
-e compiler_supports_fpmath create_pc create_libtool have_target staticlib t=
-hread opengl moc resources
- QMAKE_PRL_VERSION =3D 5.6.0
--QMAKE_PRL_LIBS =3D -L/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase=
-/5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/build/lib -lQt5Gui -lQt5Core -lpt=
-hread -lGL
-+QMAKE_PRL_LIBS =3D  -lQt5Gui -lQt5Core -lpthread -lGL
-OE @ ~/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase $ diff -uNr 5.5.99=
-+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib/libQt5PlatformSupport=
-=2Eprl 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/image/usr/lib/libQt5Platfor=
-mSupport.prl
---- 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib/libQt5Platf=
-ormSupport.prl       2016-02-17 22:34:16.438812156 +0100
-+++ 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/image/usr/lib/libQt5PlatformSu=
-pport.prl    2016-02-17 22:38:56.969811683 +0100
-@@ -3,4 +3,4 @@
- QMAKE_PRL_TARGET =3D libQt5PlatformSupport.a
- QMAKE_PRL_CONFIG =3D silent lex yacc depend_includepath testcase_targets i=
-mport_plugins import_qpa_plugin qt warn_on release link_prl incremental cro=
-ss_compile qpa no_mocdepend release qt_no_framework linux unix posix \$(OE_=
-QMAKE_COMPILER) gcc cross_compile compile_examples qpa largefile use_gold_l=
-inker sse2 sse3 ssse3 sse4_1 sse4_2 avx avx2 pcre prefix_build force_indepe=
-ndent force_bootstrap create_prl link_prl prepare_docs qt_docs_targets no_p=
-rivate_qt_headers_warning QTDIR_build exceptions_off testcase_exceptions qt=
-_example_installs warning_clean c++11 static internal_module egl opentype q=
-pa/genericunixfontdatabase relative_qt_rpath git_build qmake_cache target_q=
-t c++11 strict_c++ c++14 c++1z hide_symbols bsymbolic_functions qt_install_=
-headers need_fwd_pri qt_install_module compiler_supports_fpmath create_libt=
-ool have_target staticlib qpa/basicunixfontdatabase thread opengl dbusadapt=
-ors dbusinterfaces moc resources
- QMAKE_PRL_VERSION =3D 5.6.0
--QMAKE_PRL_LIBS =3D -L/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase=
-/5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/build/lib -lQt5Gui -lQt5DBus -lQt=
-5Core -lpthread -lgthread-2.0 -pthread -lglib-2.0 -lqtfreetype -lz -lpng -l=
-Xrender -lXext -lX11 -lm -ludev -lEGL -lGL
-+QMAKE_PRL_LIBS =3D  -lQt5Gui -lQt5DBus -lQt5Core -lpthread -lgthread-2.0 -=
-pthread -lglib-2.0 -lqtfreetype -lz -lpng -lXrender -lXext -lX11 -lm -ludev=
- -lEGL -lGL
-
->=20
-> Signed-off-by: Simon Aittamaa <simon.aittamaa@gmail.com>
-> ---
->  recipes-qt/qt5/qtbase_git.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-> index 3ef5923..62c0ab5 100644
-> --- a/recipes-qt/qt5/qtbase_git.bb
-> +++ b/recipes-qt/qt5/qtbase_git.bb
-> @@ -229,10 +229,10 @@ do_install_append() {
->      # install fonts manually if they are missing
->      if [ ! -d ${D}/${OE_QMAKE_PATH_QT_FONTS} ]; then
->          mkdir -p ${D}/${OE_QMAKE_PATH_QT_FONTS}
-> -        cp -a ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_QT_FONTS}
-> +        cp -d ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_QT_FONTS}
->          chown -R root:root ${D}/${OE_QMAKE_PATH_QT_FONTS}
->      fi
-> -    install -m 0644 ${B}/lib/libqt* ${D}${libdir}
-> +    cp -d ${B}/lib/libQt* ${D}${libdir}
->      # Remove example.pro file as it is useless
->      rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro
-> =20
-> --=20
-> 2.7.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---St7VIuEGZ6dlpu13
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlbE6dcACgkQN1Ujt2V2gBydaQCfZTx+euwVl+0JLe6SeS/Mb7d6
-IbUAniE0o6dmGsbxNQSQ237LPSVlzn/X
-=zIBi
------END PGP SIGNATURE-----
-
---St7VIuEGZ6dlpu13--
