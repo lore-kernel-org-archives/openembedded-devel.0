@@ -1,48 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id EB73C605FE
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 0226D60291
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Feb 2016 21:56:35 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id g62so182536559wme.1
+	Wed, 17 Feb 2016 22:07:39 +0000 (UTC)
+Received: by mail-wm0-f43.google.com with SMTP id b205so175391980wmb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Feb 2016 13:56:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=TgVtBMTV1A2z3egminQYzqvdtY+peYIox8+p77TbF8w=;
-	b=a9tYr8UiDbXt5zq3e01kcBlFE2gfTIiEf1+WI5ok3Z0YZNbYsYd+nHFG287n9A/z5b
-	osMSoYgEwOGTz+wKRUeqbagBZINKSzpNkAPpOPESGHucuQvLuNapNaMXQ9pFeNuvevRK
-	tYPXJJzo8q7RQY+QT9dS3qBJ0r7EH80Ga9V9wUwha86s19/QlzgY1TAG/NWSXw45CZ61
-	wrPTwFHVFQJk/8vgN2qq9+u+YI0wB2HbjJbT3y8xRw+am2pfKVDNDRB+/fwghIJbnorV
-	DswVr9eIcOJoRgETzs1tOTmMnuPtnV8gI3NmeEka0ugUAr5jhH36onXy3kFmKXQF6EM/
-	qzYw==
+	Wed, 17 Feb 2016 14:07:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=HuAmbhK7drH3FqOsxOFqTNzPDeWBka2RVieUXMljOQs=;
+	b=Eq9hakxDEhZ7OGrmNsRf+d6tkJdVhJ4vYG90Wtc3SC+FfBzUYCD7xBebR50SUUlQy9
+	K5y17BYyfmniEXTh1McZAlDJ449Scr35n8Qxw1vyqCA7TOjMQqYqCNUcvoEeNm6VhzvX
+	C9n2OlySCllhqjouaVuVcnZ53ReWy3p7Q6MMjD07v9xqZxG6r+HqGMZpKWRSQBJYmPVr
+	nqXDhoDduWkcpfp0hLve6Bss+CDU7DJUK8uZYzWHvlXsLASaPdnl8Xa1IjynEOUZq3q+
+	+MYgcm+Pvjl+6cGe9aALPxz0p4JrI4emYMNmGfeV3o9+HZcQpg2J8AnzEr6Vq5ghS3DH
+	/SZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=TgVtBMTV1A2z3egminQYzqvdtY+peYIox8+p77TbF8w=;
-	b=HS+Yz8gFf7Xm4ZbnqLhI0SBZ5E0xznH9ZjjuEIhmsCxm/uGQs75emT2BKs4vLBBhOw
-	5cMzDMXYyvFhoWD223M5x47m0H01z0VhAYoHnVmoI0fQqdOcX1ncuSsAVBmSu7y01KoA
-	LSfPufYvXYvoedl5xKQk4cwdrXlmgVLVQvGnVclwUJrzH5HV/r3Ympt6xC1dskkLNNTB
-	SmBLhtX0FysrJV/y0Zrjk6M+lhb6Ii88BNa+T3oM4bf16CGvUJ1Z9m33Ku9epfYl6tji
-	P/w9F2i9inNFvNjlLYUvE4YsaXn2THyNeB9Y4m6fItp8ASt7ga6PP6ip2ZJ2eLhwhOrY
-	O9hg==
-X-Gm-Message-State: AG10YOQMNslDsfKkqEWUSqgD8Q3NJDgjW+MzVQ9eP9zJuiiHFV9tkTqlH3SJH8KZYReZOg==
-X-Received: by 10.194.186.232 with SMTP id fn8mr4002179wjc.93.1455746196019;
-	Wed, 17 Feb 2016 13:56:36 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	az10sm3457727wjc.28.2016.02.17.13.56.35
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-type:content-transfer-encoding;
+	bh=HuAmbhK7drH3FqOsxOFqTNzPDeWBka2RVieUXMljOQs=;
+	b=Sj9v1mBrVK6hl15cCFjFzrZAhvPgMFo7FIR5IKP1M1/Dbmg5ERx8sKVwhYb/6mGpZ9
+	CYdk4lYVa3Np9ajWLitvN3ulzLvCSydNk762sqAGh1qg6pbOm4JB4l+wxCYGxYYxzbfb
+	AdVyFwv2Hpanh24+O9otkASQy9iD+0Fy8Vstp6Qp/cNkYsOUv1km8C+izSksiCoVQ2q0
+	/ffPBFf9/l0OUvr6lEn0U2seMeE14/4ujltsH7SIBG/Uq/Y5v2CBq5XaIEbgn6DKa0Ez
+	qf1GZBeAImOXprynXff1XrgrRvuoSdpS0X6/p2Xu0oi/nSN2FzfW6wOs0i1O63w+vjOK
+	pU+A==
+X-Gm-Message-State: AG10YOT7yr1mmYafH7UtkvvgrTBacchHguW64g/q9VQ7D1p+yhoZjLApzWqEWgjYLpm18g==
+X-Received: by 10.194.71.70 with SMTP id s6mr4110280wju.1.1455746859755;
+	Wed, 17 Feb 2016 14:07:39 -0800 (PST)
+Received: from localhost.localdomain (p5B0A38F8.dip0.t-ipconnect.de.
+	[91.10.56.248]) by smtp.googlemail.com with ESMTPSA id
+	lz5sm3517678wjb.5.2016.02.17.14.07.38
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 17 Feb 2016 13:56:35 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Wed, 17 Feb 2016 14:07:39 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Feb 2016 22:56:45 +0100
-Message-Id: <1455746205-31727-5-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.1
-In-Reply-To: <1455746205-31727-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1455746205-31727-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-qt5 5/5] qtbase: Don't install libQt* files twice
+Date: Wed, 17 Feb 2016 23:07:26 +0100
+Message-Id: <1455746846-30648-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.0
+MIME-Version: 1.0
+Subject: [PATCH] xfce4-xkb-plugin: update to 0.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,91 +56,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Feb 2016 21:56:36 -0000
+X-List-Received-Date: Wed, 17 Feb 2016 22:07:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-* they are installed by make correctly (at least with latest 5.6 revisions)
-* I wanted to remove .la files (in qmake5_base_do_install) and this copies them back to ${D} which is annoying.
-So I've removed this cp line and checked what gets missing and it turns
-out that nothing important is missing and even more importantly the fixed *prl files
-are overwritten with their original version.
-
-OE @ ~/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase $ diff -rq 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0*/image
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5Bootstrap.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5BootstrapDBus.a
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5BootstrapDBus.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5BootstrapDBus.prl
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5Concurrent.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5Core.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5DBus.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5Gui.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5Network.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5OpenGL.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5OpenGLExtensions.la
-Files 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib/libQt5OpenGLExtensions.prl and
-5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/image/usr/lib/libQt5OpenGLExtensions.prl differ
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5PlatformSupport.la
-Files 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib/libQt5PlatformSupport.prl and
-5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/image/usr/lib/libQt5PlatformSupport.prl differ
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5PrintSupport.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5Sql.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5Test.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5Widgets.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5XcbQpa.la
-Only in 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib: libQt5Xml.la
-
-OE @ ~/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase $ diff -uNr 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib/libQt5OpenGLExtensions.prl
-5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/image/usr/lib/libQt5OpenGLExtensions.prl
---- 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib/libQt5OpenGLExtensions.prl      2016-02-17 22:34:16.397812156 +0100
-+++ 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/image/usr/lib/libQt5OpenGLExtensions.prl   2016-02-17 22:38:56.637811683 +0100
-@@ -3,4 +3,4 @@
- QMAKE_PRL_TARGET = libQt5OpenGLExtensions.a
- QMAKE_PRL_CONFIG = silent lex yacc depend_includepath testcase_targets import_plugins import_qpa_plugin qt warn_on release link_prl incremental cross_compile
-qpa no_mocdepend release qt_no_framework linux unix posix \$(OE_QMAKE_COMPILER) gcc cross_compile compile_examples qpa largefile use_gold_linker sse2 sse3
-ssse3 sse4_1 sse4_2 avx avx2 pcre prefix_build force_independent force_bootstrap create_prl link_prl prepare_docs qt_docs_targets
-no_private_qt_headers_warning QTDIR_build exceptions_off testcase_exceptions qt_example_installs warning_clean c++11 static opengl relative_qt_rpath git_build
-qmake_cache target_qt c++11 strict_c++ c++14 c++1z hide_symbols bsymbolic_functions qt_install_headers need_fwd_pri qt_install_module create_cmake
-compiler_supports_fpmath create_pc create_libtool have_target staticlib thread opengl moc resources
- QMAKE_PRL_VERSION = 5.6.0
--QMAKE_PRL_LIBS = -L/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/build/lib -lQt5Gui -lQt5Core -lpthread -lGL
-+QMAKE_PRL_LIBS =  -lQt5Gui -lQt5Core -lpthread -lGL
-
-OE @ ~/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase $ diff -uNr 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib/libQt5PlatformSupport.prl
-5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/image/usr/lib/libQt5PlatformSupport.prl
---- 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0.orig/image/usr/lib/libQt5PlatformSupport.prl       2016-02-17 22:34:16.438812156 +0100
-+++ 5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/image/usr/lib/libQt5PlatformSupport.prl    2016-02-17 22:38:56.969811683 +0100
-@@ -3,4 +3,4 @@
- QMAKE_PRL_TARGET = libQt5PlatformSupport.a
- QMAKE_PRL_CONFIG = silent lex yacc depend_includepath testcase_targets import_plugins import_qpa_plugin qt warn_on release link_prl incremental cross_compile
-qpa no_mocdepend release qt_no_framework linux unix posix \$(OE_QMAKE_COMPILER) gcc cross_compile compile_examples qpa largefile use_gold_linker sse2 sse3
-ssse3 sse4_1 sse4_2 avx avx2 pcre prefix_build force_independent force_bootstrap create_prl link_prl prepare_docs qt_docs_targets
-no_private_qt_headers_warning QTDIR_build exceptions_off testcase_exceptions qt_example_installs warning_clean c++11 static internal_module egl opentype
-qpa/genericunixfontdatabase relative_qt_rpath git_build qmake_cache target_qt c++11 strict_c++ c++14 c++1z hide_symbols bsymbolic_functions qt_install_headers
-need_fwd_pri qt_install_module compiler_supports_fpmath create_libtool have_target staticlib qpa/basicunixfontdatabase thread opengl dbusadaptors
-dbusinterfaces moc resources
- QMAKE_PRL_VERSION = 5.6.0
--QMAKE_PRL_LIBS = -L/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.5.99+5.6.0-rc+gitAUTOINC+ac8a3b948d-r0/build/lib -lQt5Gui -lQt5DBus -lQt5Core
--lpthread -lgthread-2.0 -pthread -lglib-2.0 -lqtfreetype -lz -lpng -lXrender -lXext -lX11 -lm -ludev -lEGL -lGL
-+QMAKE_PRL_LIBS =  -lQt5Gui -lQt5DBus -lQt5Core -lpthread -lgthread-2.0 -pthread -lglib-2.0 -lqtfreetype -lz -lpng -lXrender -lXext -lX11 -lm -ludev -lEGL
--lGL
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- recipes-qt/qt5/qtbase_git.bb | 1 -
- 1 file changed, 1 deletion(-)
+ .../xkb/{xfce4-xkb-plugin_0.7.0.bb => xfce4-xkb-plugin_0.7.1.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/xkb/{xfce4-xkb-plugin_0.7.0.bb => xfce4-xkb-plugin_0.7.1.bb} (75%)
 
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 31ef793..b4c6c1f 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -212,7 +212,6 @@ do_install_append() {
-         cp -d ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_QT_FONTS}
-         chown -R root:root ${D}/${OE_QMAKE_PATH_QT_FONTS}
-     fi
--    cp -d ${B}/lib/libQt* ${D}${libdir}
-     # Remove example.pro file as it is useless
-     rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro
+diff --git a/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.7.0.bb b/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.7.1.bb
+similarity index 75%
+rename from meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.7.0.bb
+rename to meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.7.1.bb
+index 22ead2a..2fa1634 100644
+--- a/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.7.0.bb
++++ b/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.7.1.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=496f09f084b0f7e6f02f769a84490c6b"
+ 
+ inherit xfce-panel-plugin
+ 
+-SRC_URI[md5sum] = "7fbc3d8c84d6662d819dd1803f0fee34"
+-SRC_URI[sha256sum] = "28367c309863581ae4de529b35bdedf5a1c918096a9a2e6e771554cba7bf5a6a"
++SRC_URI[md5sum] = "2f68e0d53baf68ecc1a7165ad33c26a9"
++SRC_URI[sha256sum] = "61fe2e33fe99939d5d06a682e94e40e05ef844c930ad612154090d158b2ce681"
+ 
+ DEPENDS += "libxklavier libwnck librsvg garcon"
  
 -- 
-2.7.1
+2.5.0
 
 
