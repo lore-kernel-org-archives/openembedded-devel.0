@@ -1,45 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id AA86E60290
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id ED9F560111
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 15:10:18 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id g62so32602434wme.1
+	Thu, 18 Feb 2016 15:41:14 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id a4so31244008wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 07:10:19 -0800 (PST)
+	Thu, 18 Feb 2016 07:41:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=CcpEcZ+5YEie23tuOKiMblbYoB2+7Kni6YbqGpr/ZVY=;
-	b=kEzkQ+x2CYcCeSaCSC/FoJ7ekp6ye0qKdcAFkv6H19dqOHLgQ8acr/5lP+hxtHIj9z
-	pTp8rQak+tc76ZwJPNRebUZlcqUQ2PuiaNHbWRHW0qt6BcgZPqu/K6akGJdMJkmZov2W
-	Xdg0fW+uDZpf0se5551YXrXNbeSzabmiVnh4gGBkicT+2w5GvUyxggikRhknZU6LSAaO
-	J8WgsdRpkwPmEhbKLzm91ANkXkvg1ntccOh5nYPCgQnxTsyn2elVwT+yqISEGOY9A8GW
-	LAt8S7AcQJRepmnYSnYqogvjseRKDMkCNLZ7HMKpGRgcxPXlGFx8Y9gnltcKasSfxwmn
-	kf7Q==
+	bh=aSnLzGesksfNDMmUTbfZMqJdAvQQPxrDmF3drmFfHos=;
+	b=mtpSvD2fg/uV75WqYlvSI1Dyxg//OjC/VDQ9AM5TvKnL+lu8pVbPuQ7xavw9hV9Y3u
+	Pf989QnUMVJINWla5bPRopzsfaZJk80lxLDYsZ+AFoXFJlkttAM2a6iy1wSv9dMB+JqT
+	kSEvtRisZ7F0bzaqqSJIM/dM859SbiF2lhyhsdaNhxzK/yhQZxyFJp3sAQ2iJFRl6uEw
+	WZ6T1ImHEr1IgfR+qalbOuOps97GskAJS9KVgNnBT44ldiWhtOL0N1qiwaOmNFQ9F8fK
+	jsGaxUr6X8SGil27DjcYBQENsm9zMYmpvvN09y4E2+kuwwd0tYNAn2zj73Svlkfwqc2V
+	BYgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=CcpEcZ+5YEie23tuOKiMblbYoB2+7Kni6YbqGpr/ZVY=;
-	b=bMny6R+Ea2qysqODSEXoXePqmQ3/SabpMIvYnC+8C0r+j6OqTOsI9GWUkJBxgTV/gs
-	q1aKF7MmG0++cBLn6mgOAuSg7TtXmG47nK6FOucgTLoflZYfwwERLjY3IaNA+LRSoosr
-	VjINAwy82Aj62J9bpfJeKGQbT4Ce86ft/HDLmi0mJX1gYHXGTUUfd93Ztjkk/iw+h0Mv
-	e74ofT7yPdFZhKkyj+FFJ6PfldoqJDUWs0z5t+IXv/Puuju2Mj78YGX4c3lvT5lRCnUE
-	UmjpjKL0QHheEBiw97ryiQzFCh2y8iD7N/qY4QVjYFLGMrFc8BliMfHE9EoJvAAcin6A
-	1OQg==
-X-Gm-Message-State: AG10YOTKAkB7wbUGWAXaMTo1V//dTw1me+1aGJqDwu+HEXFduc7uwwMHD7JE6zEBRa9LiA==
-X-Received: by 10.28.132.212 with SMTP id g203mr4021405wmd.30.1455808218664;
-	Thu, 18 Feb 2016 07:10:18 -0800 (PST)
+	bh=aSnLzGesksfNDMmUTbfZMqJdAvQQPxrDmF3drmFfHos=;
+	b=CsOOB5UBNxCGzhdSO3idbbdOzh882hp21d2oTm75hixikg3JI2lFmj4+TBSZTPLsj2
+	Bo9OKLrs13MdjLV5338oe79UwQqSm1rUnVtJV5GOAt7XtacFBc9DHFpXRqiSVdF2EKpU
+	8f+e8WXlLeES6KmF9xjwTUuPVeEASxUNMtmWk34GN62jZ7V4z14EbmoPsKR5MwCObvHo
+	8Oe4ypyME0J32apL6r/M0mdtzhLpNG9pdYG15w0zYCCRWZ8eu5SPrNG2dwrRfcOaOtjs
+	k8/daBQUkueRF9DCtHT1gmrPXJiQ7U0/bfLqdM+gB7L1xq5eugZQzJTaQLOV6cWUAkKR
+	1CfA==
+X-Gm-Message-State: AG10YOTk3dqbDt4vEX9i6D5KF3DizL8sG3QbmLBhHiY1v+5PwLrR0Ah5Nwb4SAmbYwwdSw==
+X-Received: by 10.28.224.84 with SMTP id x81mr4359184wmg.62.1455810075090;
+	Thu, 18 Feb 2016 07:41:15 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	c26sm3382268wmi.24.2016.02.18.07.10.17
+	x66sm3519662wmb.20.2016.02.18.07.41.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 18 Feb 2016 07:10:17 -0800 (PST)
+	Thu, 18 Feb 2016 07:41:13 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Feb 2016 16:10:39 +0100
-Message-Id: <1455808240-29188-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 18 Feb 2016 16:41:35 +0100
+Message-Id: <1455810095-8089-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.7.1
-Subject: [PATCH][meta-qt5] qtwebengine: Fix QA warning
+Subject: [PATCH][meta-qt5] qtwebengine: Hide textrel QA warning until there is proper fix for it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,29 +52,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2016 15:10:18 -0000
-
-* drop section with list of static libraries in workdir
-* feel free to fix it properly in Qt build, I need quick hack to unblock
-  my bitbake world builds
+X-List-Received-Date: Thu, 18 Feb 2016 15:41:18 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/qt5/qtwebengine_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ recipes-qt/qt5/qtwebengine_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index 47d3613..aa45536 100644
+index aa45536..d2975ef 100644
 --- a/recipes-qt/qt5/qtwebengine_git.bb
 +++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -92,6 +92,7 @@ do_configure() {
+@@ -125,3 +125,6 @@ SRCREV = "${SRCREV_qtwebengine}"
+ SRCREV_FORMAT = "qtwebengine_chromium"
  
- do_install_append() {
-     rmdir ${D}${OE_QMAKE_PATH_PLUGINS}/${BPN} ${D}${OE_QMAKE_PATH_PLUGINS} || true
-+    sed -i 's@ -Wl,--start-group.*-Wl,--end-group@@g; s@-L${B}[^ ]* @ @g' ${D}${libdir}/pkgconfig/Qt5WebEngineCore.pc
- }
- PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
- 
+ S = "${WORKDIR}/git"
++
++# WARNING: qtwebengine-5.5.99+5.6.0-rc+gitAUTOINC+3f02c25de4_779a2388fc-r0 do_package_qa: QA Issue: ELF binary '/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtwebengine/5.5.99+5.6.0-rc+gitAUTOINC+3f02c25de4_779a2388fc-r0/packages-split/qtwebengine/usr/lib/libQt5WebEngineCore.so.5.6.0' has relocations in .text [textrel]
++INSANE_SKIP_${PN} += "textrel"
 -- 
 2.7.1
 
