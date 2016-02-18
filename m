@@ -1,31 +1,45 @@
-Return-Path: <diego.ml@zoho.com>
-X-Greylist: delayed 906 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 18 Feb 2016 17:37:55 UTC
-Received: from sender153-mail.zoho.com (sender153-mail.zoho.com
-	[74.201.84.153])
-	by mail.openembedded.org (Postfix) with ESMTP id 7039D731F1
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-lb0-f180.google.com (mail-lb0-f180.google.com
+	[209.85.217.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 8DA62731EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 17:37:55 +0000 (UTC)
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=zapps768; d=zoho.com; 
-	h=from:to:cc:subject:date:message-id; 
-	b=DqFfXM46KH3NifkfRyqiL5IVqQVMLRT7whmmC4dzuWaCdaV3CObZ6NXWy5w3o4D1RsRcnJrIGn3I
-	Kxai47fBy8gKh4PwoIFc4st/bFvcc+kVyVSnABpnx9aRZzxqrDMc  
-Received: from ip-172-31-0-222.eu-west-1.compute.internal
-	(ec2-52-48-117-71.eu-west-1.compute.amazonaws.com
-	[52.48.117.71]) by mx.zohomail.com
-	with SMTPS id 1455816167990364.045405378641;
-	Thu, 18 Feb 2016 09:22:47 -0800 (PST)
-From: Diego Rondini <diego.ml@zoho.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Feb 2016 17:23:15 +0000
-Message-Id: <1455816195-23164-1-git-send-email-diego.ml@zoho.com>
-X-Mailer: git-send-email 1.9.1
-X-Zoho-Virus-Status: 1
-X-ZohoMail: Ss  SS_10 UW UB UW UB ODL   SGR3_1_0_04026_53
-X-ZohoMail-Owner: <1455816195-23164-1-git-send-email-diego.ml@zoho.com>+zmo_0_<diego.ml@zoho.com>
-X-ZohoMail-Sender: 52.48.117.71
-Cc: Diego Rondini <diego.ml@zoho.com>
-Subject: [meta-oe][PATCH] webmin: adjust mysql module default config
+	Thu, 18 Feb 2016 18:33:58 +0000 (UTC)
+Received: by mail-lb0-f180.google.com with SMTP id x4so34210924lbm.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Feb 2016 10:33:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=e8KxHEwHWwqlTlMVyvQ+Cez0fB2c1+tHmKyKqNn+46M=;
+	b=vtvJ7UPHoiAlI6yxiuyQ1PlpNXxHqxE8tLXAasbPLIcQ0qLj5Ru1e7oeUTtXKJjE1z
+	rMu2c39aP4ZUPBsctTFT4ItKpdLMnb4gzLbp2AnEssTUiSqa+oPDUyBekzI6kcfh+Ill
+	inWv5LZ1UcMdPXeeGV96yl4xeApew4Y/mt1YMMvRJWq9OwErhBKvzNvAlvTo+08jh4CX
+	FFaQ9jZTsPKLKkE2BEvTH0jtfRNhiRmib18UrdmRXB65aTyccVOxm3oF5Legfl/QwoNw
+	kt1yYHr1UtWu/eSohSRTrlvcNy/QJoVC/7NbE1OkAHOO1WVunLqRoDtBVOFGk8IRe1rO
+	A5xw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+	:content-type;
+	bh=e8KxHEwHWwqlTlMVyvQ+Cez0fB2c1+tHmKyKqNn+46M=;
+	b=k9dSmqk6F94iX77BhL4bSuJ1SZxy5BszHAeLCQQpJwtOZgC9fINON17+cBEWO90J7t
+	Ib3J4ilIABRziX1v5rM5RPucp6CZEpuNcfXQAqY+n63QxOs3ZqG5oY2vU6V/dJIUSzzL
+	pvFd7tdYI6hmvxZOkn/Wc7Ka8Vib0R3LRLw5gg4SBojBNVFSL5YS/u1T8zf581NLTgQL
+	MYZxg8L5Fc0Kv9E5E/NNGk5OVsopD9Sdxg2WbjvwvPSP3BxL03Wjch9E1KPiFiqHR8RR
+	IxP4wzn2ltplxTrcmmHOtXHN08W4JihZwvYs4gUS+qXS4opP/cQLQACmgFzFFaehDoA0
+	uWPg==
+X-Gm-Message-State: AG10YOSMz3MhTlZwvSA67bxy8DZx4SmfKG5tm4FmCwXeei63ltlJZyppp8Nl5t9jRp+97eWHoz9Sd5/F+fEhhw==
+X-Received: by 10.112.141.165 with SMTP id rp5mr3809539lbb.9.1455820438123;
+	Thu, 18 Feb 2016 10:33:58 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.25.88.67 with HTTP; Thu, 18 Feb 2016 10:33:38 -0800 (PST)
+X-Originating-IP: [177.127.4.90]
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+Date: Thu, 18 Feb 2016 16:33:38 -0200
+Message-ID: <CAAPZna3WT_cz9YpCaE0iueYXCYxNd0ONRCu0=yuHLcrqUdoKaw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org, sven.ebenfeld@gmail.com
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-python] Python Flask recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,88 +52,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2016 17:37:55 -0000
+X-List-Received-Date: Thu, 18 Feb 2016 18:33:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Default config of the mysql Webmin module uses paths of a manually installed
-MySQL. This commit adjusts paths to the ones used by MariaDB in OE.
+Hi all!
 
-Signed-off-by: Diego Rondini <diego.ml@zoho.com>
----
- .../webmin/files/mysql-config-fix.patch            | 50 ++++++++++++++++++++++
- .../recipes-webadmin/webmin/webmin_1.750.bb        |  1 +
- 2 files changed, 51 insertions(+)
- create mode 100644 meta-webserver/recipes-webadmin/webmin/files/mysql-config-fix.patch
+I noticed that a few days ago were added some python-flask recipes.
 
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/mysql-config-fix.patch b/meta-webserver/recipes-webadmin/webmin/files/mysql-config-fix.patch
-new file mode 100644
-index 0000000..587e1d3
---- /dev/null
-+++ b/meta-webserver/recipes-webadmin/webmin/files/mysql-config-fix.patch
-@@ -0,0 +1,50 @@
-+From 524fcf6988841ae6fadd2015f144b6807489e56a Mon Sep 17 00:00:00 2001
-+From: Diego Rondini <diego.rondini@kynetics.it>
-+Date: Thu, 18 Feb 2016 15:44:06 +0100
-+Subject: [PATCH] Adjust Mysql config defaults
-+
-+Upstream-status: Inappropriate [configuration]
-+
-+Signed-off-by: Diego Rondini <diego.rondini@kynetics.it>
-+---
-+ mysql/config | 18 +++++++++---------
-+ 1 file changed, 9 insertions(+), 9 deletions(-)
-+
-+diff --git a/mysql/config b/mysql/config
-+index e5b6fb3..77bfe69 100644
-+--- a/mysql/config
-++++ b/mysql/config
-+@@ -1,13 +1,13 @@
-+-start_cmd=cd /usr/local/mysql ; (./bin/safe_mysqld || ./bin/mysqld_safe) &
-++start_cmd=/usr/bin/mysqld_safe
-+ perpage=25
-+-mysql=/usr/local/mysql/bin/mysql
-+-mysqldump=/usr/local/mysql/bin/mysqldump
-+-mysqlimport=/usr/local/mysql/bin/mysqlimport
-+-pass=foo
-+-mysqlshow=/usr/local/mysql/bin/mysqlshow
-++mysql=/usr/bin/mysql
-++mysqldump=/usr/bin/mysqldump
-++mysqlimport=/usr/bin/mysqlimport
-++pass=
-++mysqlshow=/usr/bin/mysqlshow
-+ login=root
-+-mysql_libs=/usr/local/mysql/lib
-+-mysqladmin=/usr/local/mysql/bin/mysqladmin
-++mysql_libs=/usr/lib
-++mysqladmin=/usr/bin/mysqladmin
-+ style=0
-+ add_mode=1
-+ nodbi=0
-+@@ -15,7 +15,7 @@ access=*: *
-+ blob_mode=0
-+ date_subs=0
-+ passwd_mode=0
-+-mysql_data=/usr/local/mysql/var
-++mysql_data=/var/lib/mysql
-+ max_dbs=50
-+ my_cnf=/etc/my.cnf
-+ max_text=1000
-+-- 
-+2.5.0
-+
-diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb
-index 46478f0..34052a1 100644
---- a/meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb
-+++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb
-@@ -17,6 +17,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
-            file://net-lib.pl.patch \
-            file://media-tomb.patch \
-            file://remove-python2.3.patch \
-+           file://mysql-config-fix.patch \
-             "
- 
- SRC_URI[md5sum] = "4007c390323d840f26c2e0f43c5c81a3"
--- 
-1.9.1
+I've been maintaining a layer with python-flask recipes, hosted here
+http://code.ossystems.com.br/gitweb?p=meta-python-flask.git;a=summary
 
+There are recipes in meta-python-flask that were added to meta-python
+and I want to simplify maintenance and avoid duplicate recipes.
 
+So, do I send recipes from meta-python-flask to meta-python or we move all
+python-flask recipes from meta-python to meta-python-flask, using a layer
+only for Flask web framework?
 
