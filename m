@@ -1,45 +1,44 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 97A056011A
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id D53276FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 13:56:15 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id g62so26416297wme.0
+	Thu, 18 Feb 2016 14:57:14 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id g62so29368129wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 05:56:17 -0800 (PST)
+	Thu, 18 Feb 2016 06:57:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=qfJtdG32DEerQWnniy8RdpY+g6S+JgByzxTx0ZK5dXU=;
-	b=ODDLhTb69TPo1MMOoJf76ZJQ/ElMTA4+JLw7JUgP5Cuq4YSlZCF3jJ0UBaEHR93aNf
-	0+gWMZpru7kNlcYh8CeCp0LPuXsjQCNHLtCcKEwCIIIO/fGceQXSaj4ZbBShip1VzPML
-	jmNjCkFey9adAl6Hwz4lTY3wObxhqGDyzLu2qdwG1wMitZ79OxDsjmRvwvviRadgjuPC
-	UaTTtVut2uJGl1axlT+vxt2NjX5r3TX4XQevteLCZJY+Oj46aaQ9a1sjGceuSoGX5lyc
-	wERrhFp24CsT+MUVX6IyWxnxgMfYXQHNVhkqJh0NTqLkiJ0Z/t76mAURI6yj/clS/XIN
-	NUbg==
+	bh=jqdqkNmUAxa4rm4vUxEf60ytKCCxPr5atUJGdPoo3B0=;
+	b=rLUdkkn4+8JRH3wqpXEOTRmCenHi8RJAexYHen4X2R22oHAptFg18fXQb4OseQLttR
+	AeBEXcflLmjpuur6ExqSR8Sa0Xtqg6bcnqEItBPnOQbXEdKEDVjofKJOD7bAuLAnoExM
+	FQT2waY4o+l4jend2wujniroKa/PMgtwyKyIPN1i5IbQsxFBJERNjTpNnM6CEiXP0BVd
+	NbX7r8VMp7DJYkpb4rJAxIuFmcob3GPXEMEbBeMmT+25eLKk0/z708bGOcPC9B8kBj1O
+	onEHYMNhJFsPDPT7myMaybibnukTPpMnO2RyCO4QyZmjdu1zsSAGSvV789teIR5JhJOA
+	LRtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=qfJtdG32DEerQWnniy8RdpY+g6S+JgByzxTx0ZK5dXU=;
-	b=WaLRfFwNNfSacNRGEq+R/T4J5lEx6D/Je5KZzgCvJQGY4jKrKYfMn6jNbl6zkutvuL
-	3pcXFuUSJnwujqCPyZrWml9Iq8qfyS1fQ5yCgnlKbVoAN3HuW7iwKsxbowKAwdgk4vB+
-	M4jGShUOuOBiedIG1i/N67vMn3CBiplAf62Th+j2vozP8RLIPopP7JQHWZYLhxygZG+4
-	sR+4rW8woV+vIss+KWVAP43QzWjZYcmaztK6MYDJJ5ic+3G6djlTNlh7gWDoc9RUUZZo
-	ImByHXTs8DqHXIYKVeROr3p4Xjme8gtkMFDT0Z09+m3/g4ylnf2WwJzH5eIJcaEA74Eq
-	U0HA==
-X-Gm-Message-State: AG10YOQ9IAdq0JqcKD2wWawgh7Nyrr8HDIEm4p7fEmvtV1fCHV9ov7Vu4b6DsBIiS/HqjQ==
-X-Received: by 10.194.103.198 with SMTP id fy6mr9142261wjb.48.1455803776210;
-	Thu, 18 Feb 2016 05:56:16 -0800 (PST)
+	bh=jqdqkNmUAxa4rm4vUxEf60ytKCCxPr5atUJGdPoo3B0=;
+	b=coRhZEBGvARRdMzWTd2C8RwG0+H7pXwNM45DXTA8FNyAxqUzGk4Fk8SmQHO8KheGzM
+	a0zXmofTtpWy+FQ6TAmspy3BLjkjy94pvF5ouyPb9C5fLRf0rrPHqxLI0SDsUlPeD1se
+	XmbEux4se27q/racnQBNoNcIyX7eqq33tQdzJrMg7bO60zS50o2Sub/TJbaIs67FDbs+
+	nWEfVebft3gT+Bf89WQcCWjWq9iLl4UKuhMnqnIOlnxKzZ3BJIZhC9SMn5cfsgsY89d+
+	ghiFTDWt/NWYiGGoPEHk1cruz7zsk6LYGqQKPppf6ey70SqU8o5TYyMO2rzBYWs9HtW2
+	ef6A==
+X-Gm-Message-State: AG10YOQ7Rt2Rsl4yb31/R2NK6oWz/rlE1C6AWkygSYd0MwpLuU6ifZpyleWZCgL17Sv6Ww==
+X-Received: by 10.28.64.131 with SMTP id n125mr3577507wma.65.1455807434789;
+	Thu, 18 Feb 2016 06:57:14 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	hh8sm6665588wjc.42.2016.02.18.05.56.14
+	by smtp.gmail.com with ESMTPSA id q75sm3397191wmd.6.2016.02.18.06.57.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 18 Feb 2016 05:56:14 -0800 (PST)
+	Thu, 18 Feb 2016 06:57:12 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Feb 2016 14:56:37 +0100
-Message-Id: <1455803797-4057-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 18 Feb 2016 15:57:34 +0100
+Message-Id: <1455807454-10869-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.7.1
-Subject: [PATCH][meta-qt5] examples: fix few thousands host-user-contaminated QA warnings
+Subject: [PATCH][meta-qt5] qtwebkit: Fix QA Warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,162 +51,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2016 13:56:17 -0000
+X-List-Received-Date: Thu, 18 Feb 2016 14:57:15 -0000
+
+* there are multiple -L paths to workdir, causing QA warning like this:
+  ERROR: qtwebkit-5.5.99+5.6.0-rc+gitAUTOINC+d2ff5a0855-r0 do_populate_sysroot: QA Issue: Qt5WebKit.pc failed sanity test
+  (tmpdir) in path qtwebkit/5.5.99+5.6.0-rc+gitAUTOINC+d2ff5a0855-r0/sysroot-destdir//usr/lib/pkgconfig [pkgconfig]
+* qtwebkit is dead, so hack it with simple sed, feel free to fix it in
+  mkspecs if you want
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/demo-extrafiles/qt5-demo-extrafiles.bb | 6 +++---
- recipes-qt/examples/cinematicexperience_1.0.bb    | 2 +-
- recipes-qt/examples/qt5everywheredemo_1.0.bb      | 4 ++--
- recipes-qt/examples/qt5ledscreen_1.0.bb           | 4 ++--
- recipes-qt/examples/qt5nmapcarousedemo_1.0.bb     | 6 +++---
- recipes-qt/examples/qt5nmapper_1.0.bb             | 6 +++---
- recipes-qt/examples/qtsmarthome_1.0.bb            | 6 +++---
- recipes-qt/examples/quitbattery_1.0.0.bb          | 4 ++--
- recipes-qt/examples/quitindicators_1.0.1.bb       | 4 ++--
- 9 files changed, 21 insertions(+), 21 deletions(-)
+ recipes-qt/qt5/qtwebkit_git.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/recipes-qt/demo-extrafiles/qt5-demo-extrafiles.bb b/recipes-qt/demo-extrafiles/qt5-demo-extrafiles.bb
-index 934a30b..0d65ba1 100644
---- a/recipes-qt/demo-extrafiles/qt5-demo-extrafiles.bb
-+++ b/recipes-qt/demo-extrafiles/qt5-demo-extrafiles.bb
-@@ -61,9 +61,9 @@ do_install () {
-     install -m 0644 ${WORKDIR}/quitindicators.png ${D}/${datadir}/pixmaps
-     install -m 0644 ${WORKDIR}/quitindicators.desktop ${D}/${datadir}/applications
-     install -m 0644 ${WORKDIR}/qt5basket.png ${D}/${datadir}/pixmaps
--    install -m 0644 ${WORKDIR}/qt5basket.desktop ${D}/${datadir}/applications 
-+    install -m 0644 ${WORKDIR}/qt5basket.desktop ${D}/${datadir}/applications
-     install -m 0644 ${WORKDIR}/qt5nesting.png ${D}/${datadir}/pixmaps
--    install -m 0644 ${WORKDIR}/qt5nesting.desktop ${D}/${datadir}/applications 
-+    install -m 0644 ${WORKDIR}/qt5nesting.desktop ${D}/${datadir}/applications
-     install -m 0644 ${WORKDIR}/qt5solarsystem.png ${D}/${datadir}/pixmaps
--    install -m 0644 ${WORKDIR}/qt5solarsystem.desktop ${D}/${datadir}/applications    
-+    install -m 0644 ${WORKDIR}/qt5solarsystem.desktop ${D}/${datadir}/applications
- }
-diff --git a/recipes-qt/examples/cinematicexperience_1.0.bb b/recipes-qt/examples/cinematicexperience_1.0.bb
-index 116127f..0c53573 100644
---- a/recipes-qt/examples/cinematicexperience_1.0.bb
-+++ b/recipes-qt/examples/cinematicexperience_1.0.bb
-@@ -26,7 +26,7 @@ require recipes-qt/qt5/qt5.inc
- do_install() {
-     install -d ${D}${datadir}/${P}
-     install -m 0755 ${B}/Qt5_CinematicExperience ${D}${datadir}/${P}
--    cp -a ${S}/content ${D}${datadir}/${P}
-+    cp -R --no-dereference --preserve=mode,links ${S}/content ${D}${datadir}/${P}
-     install -m 0644 ${S}/Qt5_CinematicExperience.qml ${D}${datadir}/${P}
+diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
+index 559efac..9044d4f 100644
+--- a/recipes-qt/qt5/qtwebkit_git.bb
++++ b/recipes-qt/qt5/qtwebkit_git.bb
+@@ -56,6 +56,12 @@ do_configure_prepend() {
+ QTWEBKIT_DEBUG = "QMAKE_CFLAGS+=-g0 QMAKE_CXXFLAGS+=-g0"
+ EXTRA_QMAKEVARS_PRE += "${QTWEBKIT_DEBUG}"
  
-     install -d ${D}${bindir}
-diff --git a/recipes-qt/examples/qt5everywheredemo_1.0.bb b/recipes-qt/examples/qt5everywheredemo_1.0.bb
-index 057aaaa..ab2bbd4 100644
---- a/recipes-qt/examples/qt5everywheredemo_1.0.bb
-+++ b/recipes-qt/examples/qt5everywheredemo_1.0.bb
-@@ -15,8 +15,8 @@ require recipes-qt/qt5/qt5.inc
++do_install_append() {
++    # Remove paths to workdir, qtwebkit is dead now, so I won't spend extra time trying to prevent this
++    # from some .prl or .prf file like for other modules
++    sed -i 's@-Wl,-no-whole-archive -L${B}[^ ]* @ @g' ${D}${libdir}/pkgconfig/Qt5WebKit.pc
++}
++
+ # remove default ${PN}-examples* set in qt5.inc, because they conflicts with ${PN} from separate webkit-examples recipe
+ PACKAGES_remove = "${PN}-examples-dev ${PN}-examples-staticdev ${PN}-examples-dbg ${PN}-examples"
  
- do_install() {
-     install -d ${D}${datadir}/${P}
--    install -m 0755 ${B}/QtDemo ${D}${datadir}/${P}   
--    cp -a ${S}/qml ${D}${datadir}/${P}  
-+    install -m 0755 ${B}/QtDemo ${D}${datadir}/${P}
-+    cp -R --no-dereference --preserve=mode,links ${S}/qml ${D}${datadir}/${P}
- }
- 
- FILES_${PN}-dbg += "${datadir}/${P}/.debug"
-diff --git a/recipes-qt/examples/qt5ledscreen_1.0.bb b/recipes-qt/examples/qt5ledscreen_1.0.bb
-index e16c557..e2b994b 100644
---- a/recipes-qt/examples/qt5ledscreen_1.0.bb
-+++ b/recipes-qt/examples/qt5ledscreen_1.0.bb
-@@ -14,8 +14,8 @@ S = "${WORKDIR}/ledscreen_1.0"
- 
- do_install() {
-     install -d ${D}${datadir}/${P}
--    #install -m 0755 ${B}/QUItBattery ${D}${datadir}/${P}  
--    cp -ar ${S}/* ${D}${datadir}/${P}  
-+    #install -m 0755 ${B}/QUItBattery ${D}${datadir}/${P}
-+    cp -R --no-dereference --preserve=mode,links ${S}/* ${D}${datadir}/${P}
- }
- 
- FILES_${PN}-dbg += "${datadir}/${P}/.debug"
-diff --git a/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb b/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb
-index 7edf727..145f797 100644
---- a/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb
-+++ b/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb
-@@ -16,9 +16,9 @@ require recipes-qt/qt5/qt5.inc
- 
- do_install() {
-     install -d ${D}${datadir}/${P}
--    install -m 0755 ${B}/Qt5_NMap_CarouselDemo ${D}${datadir}/${P}  
--    cp ${S}/Qt5_NMap_CarouselDemo.qml ${D}${datadir}/${P}  
--    cp -a ${S}/content ${D}${datadir}/${P}  
-+    install -m 0755 ${B}/Qt5_NMap_CarouselDemo ${D}${datadir}/${P}
-+    cp ${S}/Qt5_NMap_CarouselDemo.qml ${D}${datadir}/${P}
-+    cp -R --no-dereference --preserve=mode,links ${S}/content ${D}${datadir}/${P}
- }
- 
- FILES_${PN}-dbg += "${datadir}/${P}/.debug"
-diff --git a/recipes-qt/examples/qt5nmapper_1.0.bb b/recipes-qt/examples/qt5nmapper_1.0.bb
-index 77cb067..762ad20 100644
---- a/recipes-qt/examples/qt5nmapper_1.0.bb
-+++ b/recipes-qt/examples/qt5nmapper_1.0.bb
-@@ -17,9 +17,9 @@ require recipes-qt/qt5/qt5.inc
- 
- do_install() {
-     install -d ${D}${datadir}/${P}
--    install -m 0755 ${B}/Qt5_NMapper ${D}${datadir}/${P}  
--    cp ${S}/Qt5_NMapper.qml ${D}${datadir}/${P}  
--    cp -a ${S}/content ${D}${datadir}/${P}  
-+    install -m 0755 ${B}/Qt5_NMapper ${D}${datadir}/${P}
-+    cp ${S}/Qt5_NMapper.qml ${D}${datadir}/${P}
-+    cp -R --no-dereference --preserve=mode,links ${S}/content ${D}${datadir}/${P}
- }
- 
- FILES_${PN}-dbg += "${datadir}/${P}/.debug"
-diff --git a/recipes-qt/examples/qtsmarthome_1.0.bb b/recipes-qt/examples/qtsmarthome_1.0.bb
-index 944c4dc..da1bbdf 100644
---- a/recipes-qt/examples/qtsmarthome_1.0.bb
-+++ b/recipes-qt/examples/qtsmarthome_1.0.bb
-@@ -17,9 +17,9 @@ require recipes-qt/qt5/qt5.inc
- 
- do_install() {
-     install -d ${D}${datadir}/${P}
--    install -m 0755 ${B}/smarthome ${D}${datadir}/${P}   
--    cp -a ${S}/qml ${D}${datadir}/${P}  
--    cp -a ${S}/components ${D}${datadir}/${P}  
-+    install -m 0755 ${B}/smarthome ${D}${datadir}/${P}
-+    cp -R --no-dereference --preserve=mode,links ${S}/qml ${D}${datadir}/${P}
-+    cp -R --no-dereference --preserve=mode,links ${S}/components ${D}${datadir}/${P}
- }
- 
- FILES_${PN}-dbg += "${datadir}/${P}/.debug"
-diff --git a/recipes-qt/examples/quitbattery_1.0.0.bb b/recipes-qt/examples/quitbattery_1.0.0.bb
-index ea218d7..6c2d3d1 100644
---- a/recipes-qt/examples/quitbattery_1.0.0.bb
-+++ b/recipes-qt/examples/quitbattery_1.0.0.bb
-@@ -16,8 +16,8 @@ require recipes-qt/qt5/qt5.inc
- 
- do_install() {
-     install -d ${D}${datadir}/${P}
--    install -m 0755 ${B}/QUItBattery ${D}${datadir}/${P}  
--    cp -a ${S}/qml ${D}${datadir}/${P}  
-+    install -m 0755 ${B}/QUItBattery ${D}${datadir}/${P}
-+    cp -R --no-dereference --preserve=mode,links ${S}/qml ${D}${datadir}/${P}
- }
- 
- FILES_${PN}-dbg += "${datadir}/${P}/.debug"
-diff --git a/recipes-qt/examples/quitindicators_1.0.1.bb b/recipes-qt/examples/quitindicators_1.0.1.bb
-index 19a861a..3e42d04 100644
---- a/recipes-qt/examples/quitindicators_1.0.1.bb
-+++ b/recipes-qt/examples/quitindicators_1.0.1.bb
-@@ -15,8 +15,8 @@ require recipes-qt/qt5/qt5.inc
- 
- do_install() {
-     install -d ${D}${datadir}/${P}
--    install -m 0755 ${B}/QUItIndicators ${D}${datadir}/${P}  
--    cp -a ${S}/qml ${D}${datadir}/${P}  
-+    install -m 0755 ${B}/QUItIndicators ${D}${datadir}/${P}
-+    cp -R --no-dereference --preserve=mode,links ${S}/qml ${D}${datadir}/${P}
- }
- 
- FILES_${PN}-dbg += "${datadir}/${P}/.debug"
 -- 
 2.7.1
 
