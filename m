@@ -1,45 +1,44 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id ED9F560111
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 56E4B6B6F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 15:41:14 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id a4so31244008wme.1
+	Thu, 18 Feb 2016 15:48:10 +0000 (UTC)
+Received: by mail-wm0-f47.google.com with SMTP id g62so34528551wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 07:41:15 -0800 (PST)
+	Thu, 18 Feb 2016 07:48:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=aSnLzGesksfNDMmUTbfZMqJdAvQQPxrDmF3drmFfHos=;
-	b=mtpSvD2fg/uV75WqYlvSI1Dyxg//OjC/VDQ9AM5TvKnL+lu8pVbPuQ7xavw9hV9Y3u
-	Pf989QnUMVJINWla5bPRopzsfaZJk80lxLDYsZ+AFoXFJlkttAM2a6iy1wSv9dMB+JqT
-	kSEvtRisZ7F0bzaqqSJIM/dM859SbiF2lhyhsdaNhxzK/yhQZxyFJp3sAQ2iJFRl6uEw
-	WZ6T1ImHEr1IgfR+qalbOuOps97GskAJS9KVgNnBT44ldiWhtOL0N1qiwaOmNFQ9F8fK
-	jsGaxUr6X8SGil27DjcYBQENsm9zMYmpvvN09y4E2+kuwwd0tYNAn2zj73Svlkfwqc2V
-	BYgw==
+	bh=bbXP73hy/SD3rKMFOkboMeRj+MtLtig8Kb0C3DANYOg=;
+	b=DDwi1o9TQa7KL0MPsyUPhHjSqNM/K8eBO1aiqvx1GvrOsZmlZjLT6kTlHUsCNBWAhX
+	OMjNsq65Y1CF9MsV+UDw/yWRzkUDHVDDa7tYssDET+X58r7+cxzcCbbDUjO4m76dLxAZ
+	YEiXCfyPJCMmFjZr2p1UOj9Gkg2YiIUgbs86Yl+QLQQMXlqHxrMjmmEU7SoFSNcz3w/X
+	r93vUClEsLmyZv9gxVwOS0lpNFUU2KOFToNtMQbYuJOO3dt3vjNkAG18YDLvP1cHurdX
+	5+C8J7DiYInixHcq8pEhcwUZSBVE/zMwW1i3+osg9l/4hjFv333dWP0qBPY2xcf8w74B
+	0I0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=aSnLzGesksfNDMmUTbfZMqJdAvQQPxrDmF3drmFfHos=;
-	b=CsOOB5UBNxCGzhdSO3idbbdOzh882hp21d2oTm75hixikg3JI2lFmj4+TBSZTPLsj2
-	Bo9OKLrs13MdjLV5338oe79UwQqSm1rUnVtJV5GOAt7XtacFBc9DHFpXRqiSVdF2EKpU
-	8f+e8WXlLeES6KmF9xjwTUuPVeEASxUNMtmWk34GN62jZ7V4z14EbmoPsKR5MwCObvHo
-	8Oe4ypyME0J32apL6r/M0mdtzhLpNG9pdYG15w0zYCCRWZ8eu5SPrNG2dwrRfcOaOtjs
-	k8/daBQUkueRF9DCtHT1gmrPXJiQ7U0/bfLqdM+gB7L1xq5eugZQzJTaQLOV6cWUAkKR
-	1CfA==
-X-Gm-Message-State: AG10YOTk3dqbDt4vEX9i6D5KF3DizL8sG3QbmLBhHiY1v+5PwLrR0Ah5Nwb4SAmbYwwdSw==
-X-Received: by 10.28.224.84 with SMTP id x81mr4359184wmg.62.1455810075090;
-	Thu, 18 Feb 2016 07:41:15 -0800 (PST)
+	bh=bbXP73hy/SD3rKMFOkboMeRj+MtLtig8Kb0C3DANYOg=;
+	b=cm/agRgubzfy5dqHtCGm0kh43FR66FDnoyn32uG4dHbs9gAFNk7SGfWODTrXOCDfEp
+	DfQBCRQE35CAc9x4gyN53OIbHjtCeUGtiXKjV36eVaaoCqpLmxkxlD369Ghh6Eegr+5M
+	sz5j3FeurgAjNdMTxPxX6isxFxGOCF8Kbfct7GsgjZxjjxfFHDXfTTlsEqi9/1BxtfAq
+	jQtCn+UF/bYTsbf9ZWHYUvjMpSEz9Hx/7FFZNVUnewj5e7+o0GwigltSZezRUEJkeWBd
+	j30FoJNvKRURXvB0QfeIEjAWgMwmNUkAyAn/i/DTNkUpY3PMRFKLsoOoSwsnQwBJFE6f
+	OuMw==
+X-Gm-Message-State: AG10YOQiQUg6NKuHzxQeUd+/4QQYkcuhLXP0yjM90swNdTQzQelcmSNpl4/ptso3E7cv8A==
+X-Received: by 10.194.189.7 with SMTP id ge7mr8210558wjc.72.1455810490445;
+	Thu, 18 Feb 2016 07:48:10 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	x66sm3519662wmb.20.2016.02.18.07.41.13
+	by smtp.gmail.com with ESMTPSA id 8sm3555418wmk.13.2016.02.18.07.48.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 18 Feb 2016 07:41:13 -0800 (PST)
+	Thu, 18 Feb 2016 07:48:09 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Feb 2016 16:41:35 +0100
-Message-Id: <1455810095-8089-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 18 Feb 2016 16:48:29 +0100
+Message-Id: <1455810509-11987-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.7.1
-Subject: [PATCH][meta-qt5] qtwebengine: Hide textrel QA warning until there is proper fix for it
+Subject: [PATCH][meta-qt5] qttransltations: Add PACKAGE for qtwebengine and qtquickcontrols2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,24 +51,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2016 15:41:18 -0000
+X-List-Received-Date: Thu, 18 Feb 2016 15:48:10 -0000
+
+* fixes QA warning:
+WARNING: qttranslations-5.5.99+5.6.0-rc+gitAUTOINC+ce85e4ee4e-r0 do_package: QA Issue: qttranslations: Files/directories were installed but not shipped in any
+ package:
+  /usr/share/qt5/translations/qtquickcontrols2_uk.qm
+  /usr/share/qt5/translations/qtwebengine_de.qm
+  /usr/share/qt5/translations/qtwebengine_ru.qm
+  /usr/share/qt5/translations/qtwebengine_uk.qm
+  /usr/share/qt5/translations/qtwebengine_en.qm
+Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+qttranslations: 5 installed and not shipped files. [installed-vs-shipped]
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/qt5/qtwebengine_git.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ recipes-qt/qt5/qttranslations_git.bb | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index aa45536..d2975ef 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -125,3 +125,6 @@ SRCREV = "${SRCREV_qtwebengine}"
- SRCREV_FORMAT = "qtwebengine_chromium"
+diff --git a/recipes-qt/qt5/qttranslations_git.bb b/recipes-qt/qt5/qttranslations_git.bb
+index 5d3818e..7908a3e 100644
+--- a/recipes-qt/qt5/qttranslations_git.bb
++++ b/recipes-qt/qt5/qttranslations_git.bb
+@@ -21,7 +21,9 @@ PACKAGES =. " \
+     ${PN}-qtlocation \
+     ${PN}-qtdeclarative \
+     ${PN}-qtquickcontrols \
++    ${PN}-qtquickcontrols2 \
+     ${PN}-qtwebsockets \
++    ${PN}-qtwebengine \
+     ${PN}-qtxmlpatterns \
+     ${PN}-qtconfig \
+     ${PN}-qtquick1 \
+@@ -68,10 +70,18 @@ FILES_${PN}-qtquickcontrols = " \
+     ${OE_QMAKE_PATH_TRANSLATIONS}/qtquickcontrols_*.qm \
+ "
  
- S = "${WORKDIR}/git"
++FILES_${PN}-qtquickcontrols2 = " \
++    ${OE_QMAKE_PATH_TRANSLATIONS}/qtquickcontrols2_*.qm \
++"
 +
-+# WARNING: qtwebengine-5.5.99+5.6.0-rc+gitAUTOINC+3f02c25de4_779a2388fc-r0 do_package_qa: QA Issue: ELF binary '/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtwebengine/5.5.99+5.6.0-rc+gitAUTOINC+3f02c25de4_779a2388fc-r0/packages-split/qtwebengine/usr/lib/libQt5WebEngineCore.so.5.6.0' has relocations in .text [textrel]
-+INSANE_SKIP_${PN} += "textrel"
+ FILES_${PN}-qtwebsockets = " \
+     ${OE_QMAKE_PATH_TRANSLATIONS}/qtwebsockets_*.qm \
+ "
+ 
++FILES_${PN}-qtwebengine = " \
++    ${OE_QMAKE_PATH_TRANSLATIONS}/qtwebengine_*.qm \
++"
++
+ FILES_${PN}-qtxmlpatterns = " \
+     ${OE_QMAKE_PATH_TRANSLATIONS}/qtxmlpatterns_*.qm \
+ "
 -- 
 2.7.1
 
