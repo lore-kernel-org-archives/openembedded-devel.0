@@ -1,44 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 56E4B6B6F7
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qg0-f44.google.com (mail-qg0-f44.google.com
+	[209.85.192.44])
+	by mail.openembedded.org (Postfix) with ESMTP id EFB076FF56
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 15:48:10 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id g62so34528551wme.1
+	Thu, 18 Feb 2016 17:30:27 +0000 (UTC)
+Received: by mail-qg0-f44.google.com with SMTP id b67so42125464qgb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 07:48:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	Thu, 18 Feb 2016 09:30:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=bbXP73hy/SD3rKMFOkboMeRj+MtLtig8Kb0C3DANYOg=;
-	b=DDwi1o9TQa7KL0MPsyUPhHjSqNM/K8eBO1aiqvx1GvrOsZmlZjLT6kTlHUsCNBWAhX
-	OMjNsq65Y1CF9MsV+UDw/yWRzkUDHVDDa7tYssDET+X58r7+cxzcCbbDUjO4m76dLxAZ
-	YEiXCfyPJCMmFjZr2p1UOj9Gkg2YiIUgbs86Yl+QLQQMXlqHxrMjmmEU7SoFSNcz3w/X
-	r93vUClEsLmyZv9gxVwOS0lpNFUU2KOFToNtMQbYuJOO3dt3vjNkAG18YDLvP1cHurdX
-	5+C8J7DiYInixHcq8pEhcwUZSBVE/zMwW1i3+osg9l/4hjFv333dWP0qBPY2xcf8w74B
-	0I0g==
+	bh=zZODbu+dchDo7HnbZTFCyH+LoCgrZ1UhU2BnXtE17FQ=;
+	b=vF8YngyHhB0hgu9zIsD20YfCAoLB9+gSUPQKUAS9BXxiJB/bODHFdXAGzK2e7U8euK
+	SgHKaArAyUcxVa/f0lsnUtf1mL2yjyibOF3Ll35FqKdXQ7JPOf/nezbBFmKwPv/jQhZn
+	0TDuZgY1QcwgiFDDNFMdMsac20SDU64EG0/ieQtmFHz8Mj0BQEQQJQRLe/Vk7N6PSbgP
+	mg7edeiafJQ70/L4dgnzYdthyzcsZhmzlZQBoW5ZxU+MPtSGpPvLMgJ5ix0e2GGZYdN9
+	TrNhlo9lxjIhGRIUIOGKOi0FFlTfj6rF/WoB/WpdnyzkCDw2Ok92+oWEy7AcXA9W2C9G
+	/O3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=bbXP73hy/SD3rKMFOkboMeRj+MtLtig8Kb0C3DANYOg=;
-	b=cm/agRgubzfy5dqHtCGm0kh43FR66FDnoyn32uG4dHbs9gAFNk7SGfWODTrXOCDfEp
-	DfQBCRQE35CAc9x4gyN53OIbHjtCeUGtiXKjV36eVaaoCqpLmxkxlD369Ghh6Eegr+5M
-	sz5j3FeurgAjNdMTxPxX6isxFxGOCF8Kbfct7GsgjZxjjxfFHDXfTTlsEqi9/1BxtfAq
-	jQtCn+UF/bYTsbf9ZWHYUvjMpSEz9Hx/7FFZNVUnewj5e7+o0GwigltSZezRUEJkeWBd
-	j30FoJNvKRURXvB0QfeIEjAWgMwmNUkAyAn/i/DTNkUpY3PMRFKLsoOoSwsnQwBJFE6f
-	OuMw==
-X-Gm-Message-State: AG10YOQiQUg6NKuHzxQeUd+/4QQYkcuhLXP0yjM90swNdTQzQelcmSNpl4/ptso3E7cv8A==
-X-Received: by 10.194.189.7 with SMTP id ge7mr8210558wjc.72.1455810490445;
-	Thu, 18 Feb 2016 07:48:10 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id 8sm3555418wmk.13.2016.02.18.07.48.09
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 18 Feb 2016 07:48:09 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	bh=zZODbu+dchDo7HnbZTFCyH+LoCgrZ1UhU2BnXtE17FQ=;
+	b=A1TO63bW+QWjDeZprkDAT9B3LHkRHGesIEXb9pmP+aqdVh/kKYcGjcwncNl/56wXMB
+	Z7mr5RH5GV1s7nlk7WzEKBXK/d6v6t2Lv89NGLxgokmF3/5GND6Iuoz017I29Noht89z
+	9EdjsvYHD33cnapP55Kc51RVsjEHTT3YvYJdkVoanLcCGfCLT+CUjCnLZhsNgZugRbb9
+	uh9m6IEePh5rXF1SdbrfY0CwjecERhoI2XgXiNXRjvgXW1TJlcjOmIRJQ4IVyQBTQSkB
+	o/Cfn2OxGzJNpRUzJ8CTxh17AN8bxd1GuUG0snTV2uItK89vJn2S9oLAYViAfStfNEhO
+	+akw==
+X-Gm-Message-State: AG10YOSEwV5tdf0Q0x8zv8rF0PxHFJNlo/gJbQn814usomOJjdntVuWYblVyLRASM74igg==
+X-Received: by 10.140.145.72 with SMTP id 69mr10854225qhr.95.1455816628247;
+	Thu, 18 Feb 2016 09:30:28 -0800 (PST)
+Received: from monster.lab.ossystems.com.br ([177.127.4.90])
+	by smtp.gmail.com with ESMTPSA id
+	p129sm2925535qhp.44.2016.02.18.09.30.25
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 18 Feb 2016 09:30:26 -0800 (PST)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Feb 2016 16:48:29 +0100
-Message-Id: <1455810509-11987-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.1
-Subject: [PATCH][meta-qt5] qttransltations: Add PACKAGE for qtwebengine and qtquickcontrols2
+Date: Thu, 18 Feb 2016 15:19:05 -0200
+Message-Id: <1455815945-9857-1-git-send-email-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.1.4
+Cc: Fabio Berton <fabio.berton@ossystems.com.br>
+Subject: [meta-oe][PATCH] fio: Remove --disable-static from EXTRA_OECONF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,58 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2016 15:48:10 -0000
+X-List-Received-Date: Thu, 18 Feb 2016 17:30:28 -0000
 
-* fixes QA warning:
-WARNING: qttranslations-5.5.99+5.6.0-rc+gitAUTOINC+ce85e4ee4e-r0 do_package: QA Issue: qttranslations: Files/directories were installed but not shipped in any
- package:
-  /usr/share/qt5/translations/qtquickcontrols2_uk.qm
-  /usr/share/qt5/translations/qtwebengine_de.qm
-  /usr/share/qt5/translations/qtwebengine_ru.qm
-  /usr/share/qt5/translations/qtwebengine_uk.qm
-  /usr/share/qt5/translations/qtwebengine_en.qm
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-qttranslations: 5 installed and not shipped files. [installed-vs-shipped]
+As of commit OE-Core:773c9e18071d71454473dd81aff911104a2e9bc6
+EXTRA_OECONF is appended with the option --disable-static on
+DISABLE_STATIC variable and this cause the error:
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+    DEBUG: Python function sysroot_cleansstate finished
+    DEBUG: Executing shell function do_configure
+    Bad option --disable-static
+    --cpu=                 Specify target CPU if auto-detect fails
+    --cc=                  Specify compiler to use
+    --extra-cflags=        Specify extra CFLAGS to pass to compiler
+    --build-32bit-win      Enable 32-bit build on Windows
+    --build-static         Build a static fio
+    --esx                  Configure build options for esx
+    --enable-gfio          Enable building of gtk gfio
+    --disable-numa         Disable libnuma even if found
+    --enable-libhdfs       Enable hdfs support
+    WARNING: exit code 1 from a shell command.
+
+So, we need to disable this option.
+
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
- recipes-qt/qt5/qttranslations_git.bb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ meta-oe/recipes-benchmark/fio/fio_2.2.6.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/recipes-qt/qt5/qttranslations_git.bb b/recipes-qt/qt5/qttranslations_git.bb
-index 5d3818e..7908a3e 100644
---- a/recipes-qt/qt5/qttranslations_git.bb
-+++ b/recipes-qt/qt5/qttranslations_git.bb
-@@ -21,7 +21,9 @@ PACKAGES =. " \
-     ${PN}-qtlocation \
-     ${PN}-qtdeclarative \
-     ${PN}-qtquickcontrols \
-+    ${PN}-qtquickcontrols2 \
-     ${PN}-qtwebsockets \
-+    ${PN}-qtwebengine \
-     ${PN}-qtxmlpatterns \
-     ${PN}-qtconfig \
-     ${PN}-qtquick1 \
-@@ -68,10 +70,18 @@ FILES_${PN}-qtquickcontrols = " \
-     ${OE_QMAKE_PATH_TRANSLATIONS}/qtquickcontrols_*.qm \
- "
+diff --git a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+index dca0e64..5bf387c 100644
+--- a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
++++ b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+@@ -25,6 +25,9 @@ SRC_URI = "git://git.kernel.dk/fio.git"
  
-+FILES_${PN}-qtquickcontrols2 = " \
-+    ${OE_QMAKE_PATH_TRANSLATIONS}/qtquickcontrols2_*.qm \
-+"
-+
- FILES_${PN}-qtwebsockets = " \
-     ${OE_QMAKE_PATH_TRANSLATIONS}/qtwebsockets_*.qm \
- "
+ S = "${WORKDIR}/git"
  
-+FILES_${PN}-qtwebengine = " \
-+    ${OE_QMAKE_PATH_TRANSLATIONS}/qtwebengine_*.qm \
-+"
++# avoids build breaks when using no-static-libs.inc
++DISABLE_STATIC = ""
 +
- FILES_${PN}-qtxmlpatterns = " \
-     ${OE_QMAKE_PATH_TRANSLATIONS}/qtxmlpatterns_*.qm \
- "
+ EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
+ 
+ do_configure() {
 -- 
-2.7.1
+2.1.4
 
 
