@@ -1,47 +1,31 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qg0-f44.google.com (mail-qg0-f44.google.com
-	[209.85.192.44])
-	by mail.openembedded.org (Postfix) with ESMTP id EFB076FF56
+Return-Path: <diego.ml@zoho.com>
+X-Greylist: delayed 906 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 18 Feb 2016 17:37:55 UTC
+Received: from sender153-mail.zoho.com (sender153-mail.zoho.com
+	[74.201.84.153])
+	by mail.openembedded.org (Postfix) with ESMTP id 7039D731F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 17:30:27 +0000 (UTC)
-Received: by mail-qg0-f44.google.com with SMTP id b67so42125464qgb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 09:30:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=zZODbu+dchDo7HnbZTFCyH+LoCgrZ1UhU2BnXtE17FQ=;
-	b=vF8YngyHhB0hgu9zIsD20YfCAoLB9+gSUPQKUAS9BXxiJB/bODHFdXAGzK2e7U8euK
-	SgHKaArAyUcxVa/f0lsnUtf1mL2yjyibOF3Ll35FqKdXQ7JPOf/nezbBFmKwPv/jQhZn
-	0TDuZgY1QcwgiFDDNFMdMsac20SDU64EG0/ieQtmFHz8Mj0BQEQQJQRLe/Vk7N6PSbgP
-	mg7edeiafJQ70/L4dgnzYdthyzcsZhmzlZQBoW5ZxU+MPtSGpPvLMgJ5ix0e2GGZYdN9
-	TrNhlo9lxjIhGRIUIOGKOi0FFlTfj6rF/WoB/WpdnyzkCDw2Ok92+oWEy7AcXA9W2C9G
-	/O3w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=zZODbu+dchDo7HnbZTFCyH+LoCgrZ1UhU2BnXtE17FQ=;
-	b=A1TO63bW+QWjDeZprkDAT9B3LHkRHGesIEXb9pmP+aqdVh/kKYcGjcwncNl/56wXMB
-	Z7mr5RH5GV1s7nlk7WzEKBXK/d6v6t2Lv89NGLxgokmF3/5GND6Iuoz017I29Noht89z
-	9EdjsvYHD33cnapP55Kc51RVsjEHTT3YvYJdkVoanLcCGfCLT+CUjCnLZhsNgZugRbb9
-	uh9m6IEePh5rXF1SdbrfY0CwjecERhoI2XgXiNXRjvgXW1TJlcjOmIRJQ4IVyQBTQSkB
-	o/Cfn2OxGzJNpRUzJ8CTxh17AN8bxd1GuUG0snTV2uItK89vJn2S9oLAYViAfStfNEhO
-	+akw==
-X-Gm-Message-State: AG10YOSEwV5tdf0Q0x8zv8rF0PxHFJNlo/gJbQn814usomOJjdntVuWYblVyLRASM74igg==
-X-Received: by 10.140.145.72 with SMTP id 69mr10854225qhr.95.1455816628247;
-	Thu, 18 Feb 2016 09:30:28 -0800 (PST)
-Received: from monster.lab.ossystems.com.br ([177.127.4.90])
-	by smtp.gmail.com with ESMTPSA id
-	p129sm2925535qhp.44.2016.02.18.09.30.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 18 Feb 2016 09:30:26 -0800 (PST)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
+	Thu, 18 Feb 2016 17:37:55 +0000 (UTC)
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=zapps768; d=zoho.com; 
+	h=from:to:cc:subject:date:message-id; 
+	b=DqFfXM46KH3NifkfRyqiL5IVqQVMLRT7whmmC4dzuWaCdaV3CObZ6NXWy5w3o4D1RsRcnJrIGn3I
+	Kxai47fBy8gKh4PwoIFc4st/bFvcc+kVyVSnABpnx9aRZzxqrDMc  
+Received: from ip-172-31-0-222.eu-west-1.compute.internal
+	(ec2-52-48-117-71.eu-west-1.compute.amazonaws.com
+	[52.48.117.71]) by mx.zohomail.com
+	with SMTPS id 1455816167990364.045405378641;
+	Thu, 18 Feb 2016 09:22:47 -0800 (PST)
+From: Diego Rondini <diego.ml@zoho.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Feb 2016 15:19:05 -0200
-Message-Id: <1455815945-9857-1-git-send-email-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-Cc: Fabio Berton <fabio.berton@ossystems.com.br>
-Subject: [meta-oe][PATCH] fio: Remove --disable-static from EXTRA_OECONF
+Date: Thu, 18 Feb 2016 17:23:15 +0000
+Message-Id: <1455816195-23164-1-git-send-email-diego.ml@zoho.com>
+X-Mailer: git-send-email 1.9.1
+X-Zoho-Virus-Status: 1
+X-ZohoMail: Ss  SS_10 UW UB UW UB ODL   SGR3_1_0_04026_53
+X-ZohoMail-Owner: <1455816195-23164-1-git-send-email-diego.ml@zoho.com>+zmo_0_<diego.ml@zoho.com>
+X-ZohoMail-Sender: 52.48.117.71
+Cc: Diego Rondini <diego.ml@zoho.com>
+Subject: [meta-oe][PATCH] webmin: adjust mysql module default config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,48 +38,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2016 17:30:28 -0000
+X-List-Received-Date: Thu, 18 Feb 2016 17:37:55 -0000
 
-As of commit OE-Core:773c9e18071d71454473dd81aff911104a2e9bc6
-EXTRA_OECONF is appended with the option --disable-static on
-DISABLE_STATIC variable and this cause the error:
+Default config of the mysql Webmin module uses paths of a manually installed
+MySQL. This commit adjusts paths to the ones used by MariaDB in OE.
 
-    DEBUG: Python function sysroot_cleansstate finished
-    DEBUG: Executing shell function do_configure
-    Bad option --disable-static
-    --cpu=                 Specify target CPU if auto-detect fails
-    --cc=                  Specify compiler to use
-    --extra-cflags=        Specify extra CFLAGS to pass to compiler
-    --build-32bit-win      Enable 32-bit build on Windows
-    --build-static         Build a static fio
-    --esx                  Configure build options for esx
-    --enable-gfio          Enable building of gtk gfio
-    --disable-numa         Disable libnuma even if found
-    --enable-libhdfs       Enable hdfs support
-    WARNING: exit code 1 from a shell command.
-
-So, we need to disable this option.
-
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+Signed-off-by: Diego Rondini <diego.ml@zoho.com>
 ---
- meta-oe/recipes-benchmark/fio/fio_2.2.6.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../webmin/files/mysql-config-fix.patch            | 50 ++++++++++++++++++++++
+ .../recipes-webadmin/webmin/webmin_1.750.bb        |  1 +
+ 2 files changed, 51 insertions(+)
+ create mode 100644 meta-webserver/recipes-webadmin/webmin/files/mysql-config-fix.patch
 
-diff --git a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-index dca0e64..5bf387c 100644
---- a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-+++ b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-@@ -25,6 +25,9 @@ SRC_URI = "git://git.kernel.dk/fio.git"
- 
- S = "${WORKDIR}/git"
- 
-+# avoids build breaks when using no-static-libs.inc
-+DISABLE_STATIC = ""
+diff --git a/meta-webserver/recipes-webadmin/webmin/files/mysql-config-fix.patch b/meta-webserver/recipes-webadmin/webmin/files/mysql-config-fix.patch
+new file mode 100644
+index 0000000..587e1d3
+--- /dev/null
++++ b/meta-webserver/recipes-webadmin/webmin/files/mysql-config-fix.patch
+@@ -0,0 +1,50 @@
++From 524fcf6988841ae6fadd2015f144b6807489e56a Mon Sep 17 00:00:00 2001
++From: Diego Rondini <diego.rondini@kynetics.it>
++Date: Thu, 18 Feb 2016 15:44:06 +0100
++Subject: [PATCH] Adjust Mysql config defaults
 +
- EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
++Upstream-status: Inappropriate [configuration]
++
++Signed-off-by: Diego Rondini <diego.rondini@kynetics.it>
++---
++ mysql/config | 18 +++++++++---------
++ 1 file changed, 9 insertions(+), 9 deletions(-)
++
++diff --git a/mysql/config b/mysql/config
++index e5b6fb3..77bfe69 100644
++--- a/mysql/config
+++++ b/mysql/config
++@@ -1,13 +1,13 @@
++-start_cmd=cd /usr/local/mysql ; (./bin/safe_mysqld || ./bin/mysqld_safe) &
+++start_cmd=/usr/bin/mysqld_safe
++ perpage=25
++-mysql=/usr/local/mysql/bin/mysql
++-mysqldump=/usr/local/mysql/bin/mysqldump
++-mysqlimport=/usr/local/mysql/bin/mysqlimport
++-pass=foo
++-mysqlshow=/usr/local/mysql/bin/mysqlshow
+++mysql=/usr/bin/mysql
+++mysqldump=/usr/bin/mysqldump
+++mysqlimport=/usr/bin/mysqlimport
+++pass=
+++mysqlshow=/usr/bin/mysqlshow
++ login=root
++-mysql_libs=/usr/local/mysql/lib
++-mysqladmin=/usr/local/mysql/bin/mysqladmin
+++mysql_libs=/usr/lib
+++mysqladmin=/usr/bin/mysqladmin
++ style=0
++ add_mode=1
++ nodbi=0
++@@ -15,7 +15,7 @@ access=*: *
++ blob_mode=0
++ date_subs=0
++ passwd_mode=0
++-mysql_data=/usr/local/mysql/var
+++mysql_data=/var/lib/mysql
++ max_dbs=50
++ my_cnf=/etc/my.cnf
++ max_text=1000
++-- 
++2.5.0
++
+diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb
+index 46478f0..34052a1 100644
+--- a/meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb
++++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.750.bb
+@@ -17,6 +17,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
+            file://net-lib.pl.patch \
+            file://media-tomb.patch \
+            file://remove-python2.3.patch \
++           file://mysql-config-fix.patch \
+             "
  
- do_configure() {
+ SRC_URI[md5sum] = "4007c390323d840f26c2e0f43c5c81a3"
 -- 
-2.1.4
+1.9.1
+
 
 
