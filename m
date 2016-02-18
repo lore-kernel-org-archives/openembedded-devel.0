@@ -1,27 +1,45 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E54E270030
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 97A056011A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 09:39:53 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u1I9dsb5015356
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 18 Feb 2016 13:56:15 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id g62so26416297wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 01:39:54 -0800 (PST)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Thu, 18 Feb 2016 01:39:53 -0800
-To: <openembedded-devel@lists.openembedded.org>
-References: <1453876257-30608-1-git-send-email-kai.kang@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <56C59168.4010600@windriver.com>
-Date: Thu, 18 Feb 2016 17:39:52 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
-MIME-Version: 1.0
-In-Reply-To: <1453876257-30608-1-git-send-email-kai.kang@windriver.com>
-Subject: Re: [meta-networking][PATCH] samba: update systemd service files
+	Thu, 18 Feb 2016 05:56:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=qfJtdG32DEerQWnniy8RdpY+g6S+JgByzxTx0ZK5dXU=;
+	b=ODDLhTb69TPo1MMOoJf76ZJQ/ElMTA4+JLw7JUgP5Cuq4YSlZCF3jJ0UBaEHR93aNf
+	0+gWMZpru7kNlcYh8CeCp0LPuXsjQCNHLtCcKEwCIIIO/fGceQXSaj4ZbBShip1VzPML
+	jmNjCkFey9adAl6Hwz4lTY3wObxhqGDyzLu2qdwG1wMitZ79OxDsjmRvwvviRadgjuPC
+	UaTTtVut2uJGl1axlT+vxt2NjX5r3TX4XQevteLCZJY+Oj46aaQ9a1sjGceuSoGX5lyc
+	wERrhFp24CsT+MUVX6IyWxnxgMfYXQHNVhkqJh0NTqLkiJ0Z/t76mAURI6yj/clS/XIN
+	NUbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=qfJtdG32DEerQWnniy8RdpY+g6S+JgByzxTx0ZK5dXU=;
+	b=WaLRfFwNNfSacNRGEq+R/T4J5lEx6D/Je5KZzgCvJQGY4jKrKYfMn6jNbl6zkutvuL
+	3pcXFuUSJnwujqCPyZrWml9Iq8qfyS1fQ5yCgnlKbVoAN3HuW7iwKsxbowKAwdgk4vB+
+	M4jGShUOuOBiedIG1i/N67vMn3CBiplAf62Th+j2vozP8RLIPopP7JQHWZYLhxygZG+4
+	sR+4rW8woV+vIss+KWVAP43QzWjZYcmaztK6MYDJJ5ic+3G6djlTNlh7gWDoc9RUUZZo
+	ImByHXTs8DqHXIYKVeROr3p4Xjme8gtkMFDT0Z09+m3/g4ylnf2WwJzH5eIJcaEA74Eq
+	U0HA==
+X-Gm-Message-State: AG10YOQ9IAdq0JqcKD2wWawgh7Nyrr8HDIEm4p7fEmvtV1fCHV9ov7Vu4b6DsBIiS/HqjQ==
+X-Received: by 10.194.103.198 with SMTP id fy6mr9142261wjb.48.1455803776210;
+	Thu, 18 Feb 2016 05:56:16 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	hh8sm6665588wjc.42.2016.02.18.05.56.14
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 18 Feb 2016 05:56:14 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 18 Feb 2016 14:56:37 +0100
+Message-Id: <1455803797-4057-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.1
+Subject: [PATCH][meta-qt5] examples: fix few thousands host-user-contaminated QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,46 +52,163 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2016 09:39:55 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 18 Feb 2016 13:56:17 -0000
 
-On 2016年01月27日 14:30, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Update systemd service files of samba. There are no '@BASE_BINDIR@' and
-> '@SBINDIR@' in these service files, so drop the original replacement.
-> Command kill is installed to /bin/kill, then correct in the service files.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-qt/demo-extrafiles/qt5-demo-extrafiles.bb | 6 +++---
+ recipes-qt/examples/cinematicexperience_1.0.bb    | 2 +-
+ recipes-qt/examples/qt5everywheredemo_1.0.bb      | 4 ++--
+ recipes-qt/examples/qt5ledscreen_1.0.bb           | 4 ++--
+ recipes-qt/examples/qt5nmapcarousedemo_1.0.bb     | 6 +++---
+ recipes-qt/examples/qt5nmapper_1.0.bb             | 6 +++---
+ recipes-qt/examples/qtsmarthome_1.0.bb            | 6 +++---
+ recipes-qt/examples/quitbattery_1.0.0.bb          | 4 ++--
+ recipes-qt/examples/quitindicators_1.0.1.bb       | 4 ++--
+ 9 files changed, 21 insertions(+), 21 deletions(-)
 
-Ping.
-
---Kai
-
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->   meta-networking/recipes-connectivity/samba/samba_4.1.12.bb | 4 +---
->   1 file changed, 1 insertion(+), 3 deletions(-)
->
-> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-> index a51d31f..2e3f118 100644
-> --- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-> +++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-> @@ -112,9 +112,7 @@ do_install_append() {
->           for i in nmb smb winbind; do
->               install -m 0644 packaging/systemd/$i.service ${D}${systemd_unitdir}/system
->           done
-> -        sed -e 's,@BASE_BINDIR@,${base_bindir},g' \
-> -            -e 's,@SBINDIR@,${sbindir},g' \
-> -            -i ${D}${systemd_unitdir}/system/*.service
-> +        sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_unitdir}/system/*.service
->   
->   	install -d ${D}${sysconfdir}/tmpfiles.d
->   	echo "d ${localstatedir}/log/samba 0755 root root -" \
-
-
+diff --git a/recipes-qt/demo-extrafiles/qt5-demo-extrafiles.bb b/recipes-qt/demo-extrafiles/qt5-demo-extrafiles.bb
+index 934a30b..0d65ba1 100644
+--- a/recipes-qt/demo-extrafiles/qt5-demo-extrafiles.bb
++++ b/recipes-qt/demo-extrafiles/qt5-demo-extrafiles.bb
+@@ -61,9 +61,9 @@ do_install () {
+     install -m 0644 ${WORKDIR}/quitindicators.png ${D}/${datadir}/pixmaps
+     install -m 0644 ${WORKDIR}/quitindicators.desktop ${D}/${datadir}/applications
+     install -m 0644 ${WORKDIR}/qt5basket.png ${D}/${datadir}/pixmaps
+-    install -m 0644 ${WORKDIR}/qt5basket.desktop ${D}/${datadir}/applications 
++    install -m 0644 ${WORKDIR}/qt5basket.desktop ${D}/${datadir}/applications
+     install -m 0644 ${WORKDIR}/qt5nesting.png ${D}/${datadir}/pixmaps
+-    install -m 0644 ${WORKDIR}/qt5nesting.desktop ${D}/${datadir}/applications 
++    install -m 0644 ${WORKDIR}/qt5nesting.desktop ${D}/${datadir}/applications
+     install -m 0644 ${WORKDIR}/qt5solarsystem.png ${D}/${datadir}/pixmaps
+-    install -m 0644 ${WORKDIR}/qt5solarsystem.desktop ${D}/${datadir}/applications    
++    install -m 0644 ${WORKDIR}/qt5solarsystem.desktop ${D}/${datadir}/applications
+ }
+diff --git a/recipes-qt/examples/cinematicexperience_1.0.bb b/recipes-qt/examples/cinematicexperience_1.0.bb
+index 116127f..0c53573 100644
+--- a/recipes-qt/examples/cinematicexperience_1.0.bb
++++ b/recipes-qt/examples/cinematicexperience_1.0.bb
+@@ -26,7 +26,7 @@ require recipes-qt/qt5/qt5.inc
+ do_install() {
+     install -d ${D}${datadir}/${P}
+     install -m 0755 ${B}/Qt5_CinematicExperience ${D}${datadir}/${P}
+-    cp -a ${S}/content ${D}${datadir}/${P}
++    cp -R --no-dereference --preserve=mode,links ${S}/content ${D}${datadir}/${P}
+     install -m 0644 ${S}/Qt5_CinematicExperience.qml ${D}${datadir}/${P}
+ 
+     install -d ${D}${bindir}
+diff --git a/recipes-qt/examples/qt5everywheredemo_1.0.bb b/recipes-qt/examples/qt5everywheredemo_1.0.bb
+index 057aaaa..ab2bbd4 100644
+--- a/recipes-qt/examples/qt5everywheredemo_1.0.bb
++++ b/recipes-qt/examples/qt5everywheredemo_1.0.bb
+@@ -15,8 +15,8 @@ require recipes-qt/qt5/qt5.inc
+ 
+ do_install() {
+     install -d ${D}${datadir}/${P}
+-    install -m 0755 ${B}/QtDemo ${D}${datadir}/${P}   
+-    cp -a ${S}/qml ${D}${datadir}/${P}  
++    install -m 0755 ${B}/QtDemo ${D}${datadir}/${P}
++    cp -R --no-dereference --preserve=mode,links ${S}/qml ${D}${datadir}/${P}
+ }
+ 
+ FILES_${PN}-dbg += "${datadir}/${P}/.debug"
+diff --git a/recipes-qt/examples/qt5ledscreen_1.0.bb b/recipes-qt/examples/qt5ledscreen_1.0.bb
+index e16c557..e2b994b 100644
+--- a/recipes-qt/examples/qt5ledscreen_1.0.bb
++++ b/recipes-qt/examples/qt5ledscreen_1.0.bb
+@@ -14,8 +14,8 @@ S = "${WORKDIR}/ledscreen_1.0"
+ 
+ do_install() {
+     install -d ${D}${datadir}/${P}
+-    #install -m 0755 ${B}/QUItBattery ${D}${datadir}/${P}  
+-    cp -ar ${S}/* ${D}${datadir}/${P}  
++    #install -m 0755 ${B}/QUItBattery ${D}${datadir}/${P}
++    cp -R --no-dereference --preserve=mode,links ${S}/* ${D}${datadir}/${P}
+ }
+ 
+ FILES_${PN}-dbg += "${datadir}/${P}/.debug"
+diff --git a/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb b/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb
+index 7edf727..145f797 100644
+--- a/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb
++++ b/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb
+@@ -16,9 +16,9 @@ require recipes-qt/qt5/qt5.inc
+ 
+ do_install() {
+     install -d ${D}${datadir}/${P}
+-    install -m 0755 ${B}/Qt5_NMap_CarouselDemo ${D}${datadir}/${P}  
+-    cp ${S}/Qt5_NMap_CarouselDemo.qml ${D}${datadir}/${P}  
+-    cp -a ${S}/content ${D}${datadir}/${P}  
++    install -m 0755 ${B}/Qt5_NMap_CarouselDemo ${D}${datadir}/${P}
++    cp ${S}/Qt5_NMap_CarouselDemo.qml ${D}${datadir}/${P}
++    cp -R --no-dereference --preserve=mode,links ${S}/content ${D}${datadir}/${P}
+ }
+ 
+ FILES_${PN}-dbg += "${datadir}/${P}/.debug"
+diff --git a/recipes-qt/examples/qt5nmapper_1.0.bb b/recipes-qt/examples/qt5nmapper_1.0.bb
+index 77cb067..762ad20 100644
+--- a/recipes-qt/examples/qt5nmapper_1.0.bb
++++ b/recipes-qt/examples/qt5nmapper_1.0.bb
+@@ -17,9 +17,9 @@ require recipes-qt/qt5/qt5.inc
+ 
+ do_install() {
+     install -d ${D}${datadir}/${P}
+-    install -m 0755 ${B}/Qt5_NMapper ${D}${datadir}/${P}  
+-    cp ${S}/Qt5_NMapper.qml ${D}${datadir}/${P}  
+-    cp -a ${S}/content ${D}${datadir}/${P}  
++    install -m 0755 ${B}/Qt5_NMapper ${D}${datadir}/${P}
++    cp ${S}/Qt5_NMapper.qml ${D}${datadir}/${P}
++    cp -R --no-dereference --preserve=mode,links ${S}/content ${D}${datadir}/${P}
+ }
+ 
+ FILES_${PN}-dbg += "${datadir}/${P}/.debug"
+diff --git a/recipes-qt/examples/qtsmarthome_1.0.bb b/recipes-qt/examples/qtsmarthome_1.0.bb
+index 944c4dc..da1bbdf 100644
+--- a/recipes-qt/examples/qtsmarthome_1.0.bb
++++ b/recipes-qt/examples/qtsmarthome_1.0.bb
+@@ -17,9 +17,9 @@ require recipes-qt/qt5/qt5.inc
+ 
+ do_install() {
+     install -d ${D}${datadir}/${P}
+-    install -m 0755 ${B}/smarthome ${D}${datadir}/${P}   
+-    cp -a ${S}/qml ${D}${datadir}/${P}  
+-    cp -a ${S}/components ${D}${datadir}/${P}  
++    install -m 0755 ${B}/smarthome ${D}${datadir}/${P}
++    cp -R --no-dereference --preserve=mode,links ${S}/qml ${D}${datadir}/${P}
++    cp -R --no-dereference --preserve=mode,links ${S}/components ${D}${datadir}/${P}
+ }
+ 
+ FILES_${PN}-dbg += "${datadir}/${P}/.debug"
+diff --git a/recipes-qt/examples/quitbattery_1.0.0.bb b/recipes-qt/examples/quitbattery_1.0.0.bb
+index ea218d7..6c2d3d1 100644
+--- a/recipes-qt/examples/quitbattery_1.0.0.bb
++++ b/recipes-qt/examples/quitbattery_1.0.0.bb
+@@ -16,8 +16,8 @@ require recipes-qt/qt5/qt5.inc
+ 
+ do_install() {
+     install -d ${D}${datadir}/${P}
+-    install -m 0755 ${B}/QUItBattery ${D}${datadir}/${P}  
+-    cp -a ${S}/qml ${D}${datadir}/${P}  
++    install -m 0755 ${B}/QUItBattery ${D}${datadir}/${P}
++    cp -R --no-dereference --preserve=mode,links ${S}/qml ${D}${datadir}/${P}
+ }
+ 
+ FILES_${PN}-dbg += "${datadir}/${P}/.debug"
+diff --git a/recipes-qt/examples/quitindicators_1.0.1.bb b/recipes-qt/examples/quitindicators_1.0.1.bb
+index 19a861a..3e42d04 100644
+--- a/recipes-qt/examples/quitindicators_1.0.1.bb
++++ b/recipes-qt/examples/quitindicators_1.0.1.bb
+@@ -15,8 +15,8 @@ require recipes-qt/qt5/qt5.inc
+ 
+ do_install() {
+     install -d ${D}${datadir}/${P}
+-    install -m 0755 ${B}/QUItIndicators ${D}${datadir}/${P}  
+-    cp -a ${S}/qml ${D}${datadir}/${P}  
++    install -m 0755 ${B}/QUItIndicators ${D}${datadir}/${P}
++    cp -R --no-dereference --preserve=mode,links ${S}/qml ${D}${datadir}/${P}
+ }
+ 
+ FILES_${PN}-dbg += "${datadir}/${P}/.debug"
 -- 
-Regards,
-Neil | Kai Kang
+2.7.1
 
 
