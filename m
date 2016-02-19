@@ -1,53 +1,44 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id A836A77042
+Return-Path: <baptiste.durand@gmail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 38360770AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 04:58:26 +0000 (UTC)
-Received: by mail-pa0-f47.google.com with SMTP id ho8so44785778pac.2
+	Fri, 19 Feb 2016 07:44:33 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id g62so58760656wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 20:58:27 -0800 (PST)
+	Thu, 18 Feb 2016 23:44:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:content-type:content-transfer-encoding:mime-version:subject
-	:message-id:date:references:in-reply-to:to;
-	bh=1GYHHdQ4pClbF/at/lqQH1PVIfIj+MX/WzBdT1Csk0A=;
-	b=MLYjMZ0U82uaGwjisy3FGU6juMIzOe7jhe00Ioq7nmjkMH/rnar16llZ3N3PasUK3T
-	p/nSP7Qguraewn9v9QUDIBJ9sKWcIb5B49meCpt1pQqynrsZLnQx3VQi+DUaa9bMgd6d
-	Mu07O8CrtRVLSnGOWqJzxm5lMPFvv/2GukQKFLZEdq0bhaHEivFW025UXeegqVOaZBN8
-	D7z3b5RmtY4JAFlq/jn/NkuqSk30fR120uh6B//87J/lYGw0HvKKMTPXp+oUXXZAd27G
-	1A2OLt2OXFXkCRoAMENvJ+jWWF7FX+1x9Hqd2Ydmn/gEE6JYwdgC1PJ3k5DsK23KulTg
-	oqlg==
+	h=from:to:cc:subject:date:message-id;
+	bh=O5Opcs+kIj24W8eXkAquZ2Z4V05kZOWMz1nFOxcuV6g=;
+	b=ivGx5C2G1aIeqqgx+y7Se4Bqtb8C7/M6pY3XSV5VqyahbeUfrX00oXQ6yPhVskcKeo
+	tH1y3Bmp0axRJ4yK+lrbmObRmgTE/jYEGCq4x2oAGPpFkMaKLYUcFKVmiterN2Bse9YM
+	C3nGCOutaTq1vIoui/GzZtXD4E+KKYpr1cRmU/fu+1mIHXoLS6rFiUYshcaidbBbMnDc
+	K+E1plXeJoz23vys3XPw6gHifdrg/yXBYQCwJQ623GKNU5S73QMgGn+ykVAE1z+/Ya8F
+	JFhrRtu/5QcCkcPxFYZy5eYhuo6tz0HzD3hfC2dkHTRbCojhWuQbRuMIRhDcVDQI+J3P
+	rS0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:content-type:content-transfer-encoding
-	:mime-version:subject:message-id:date:references:in-reply-to:to;
-	bh=1GYHHdQ4pClbF/at/lqQH1PVIfIj+MX/WzBdT1Csk0A=;
-	b=H22ktxfIrA+mqwe0nSv0jJPjTDjrrjnXzUbeWEp90l7O9n1+cq3FaqmTohJWK7gc2t
-	ETScKohFpD3q9Uv3SHR89rykA7ol/3kbhB477A/BY0KBksdZ33+LBh+pOocTRTcoRPXg
-	hfIPXWZw39GzN22k0fpMRuX1R63+S3JP/RBTcEebeTXFqgot9XF1qDphop/wgm6a6LUq
-	KFrW8OLxJl5NNJmO+p1ez8tCYpeh/sj8Z2o4qd/uUzV49vBAgDZhWLLj6xM+17d/S+6w
-	1j5ZnHjkRdWNlykMn9fAwIYaA6OqToBhJvmFxm1OhHxa/uHzq+uxomTfyq35JEoio2or
-	HaZA==
-X-Gm-Message-State: AG10YOTfC8H2eI0zU9Ygw9mb0BYl1SioDxyxOgNBPgTYMv7gV62cXQkydzchVnf7fIpofQ==
-X-Received: by 10.66.139.166 with SMTP id qz6mr15365392pab.3.1455857907420;
-	Thu, 18 Feb 2016 20:58:27 -0800 (PST)
-Received: from [10.0.0.194] (c-76-115-105-5.hsd1.or.comcast.net.
-	[76.115.105.5]) by smtp.gmail.com with ESMTPSA id
-	l14sm14057310pfi.23.2016.02.18.20.58.25
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 18 Feb 2016 20:58:26 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
-Mime-Version: 1.0 (1.0)
-Message-Id: <EBC32EE9-0D29-4843-95AF-9F7C3F0D42B5@gmail.com>
-Date: Thu, 18 Feb 2016 20:58:24 -0800
-References: <CAAPZna3WT_cz9YpCaE0iueYXCYxNd0ONRCu0=yuHLcrqUdoKaw@mail.gmail.com>
-	<6E3439D2-FEE9-4286-88C5-0D7E3E2AF4B2@gmail.com>
-In-Reply-To: <6E3439D2-FEE9-4286-88C5-0D7E3E2AF4B2@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=O5Opcs+kIj24W8eXkAquZ2Z4V05kZOWMz1nFOxcuV6g=;
+	b=ODhq/vKVUfLTN+3CjASFH0RJhUMdxhA7LKowiggY3by2dbqTTpfWFiTYT3HL/h+yh4
+	+scNa7zRyVUQnwOxZpyAsnrIp5b9A3mLZgsdTg+vgy2fMUFrb0CPOHmJa5e8ja0Th/Tt
+	cATTnIwn4zNtPfH8gUWpPqMUuNbRlRQ9fYJ6Dmiz0wyQg5cR+8mPpowgioBwOlL/43+0
+	pF2yw7zq41mHAFA/SMTjvV56VA+gnYZmCLDB1VJDkf5guV7Q0E86bcYlitdgve8m9XQ3
+	DnBukJ8PWsjZmS+5+R7uGrQaoBkCgPVBJHTiZAHFgFJfjkQpcDm7WRwnXtkFuxzx017s
+	rALg==
+X-Gm-Message-State: AG10YOSfp2RQNjHQ8QdSQdywiPgnY5Gsy4kcJZdOTTSAy8JhpR8gIOaldnA8MCtfhWGTRA==
+X-Received: by 10.194.88.195 with SMTP id bi3mr11321813wjb.34.1455867874008;
+	Thu, 18 Feb 2016 23:44:34 -0800 (PST)
+Received: from localhost.localdomain (bru35-1-88-174-15-70.fbx.proxad.net.
+	[88.174.15.70])
+	by smtp.gmail.com with ESMTPSA id w17sm6374766wmw.5.2016.02.18.23.44.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 18 Feb 2016 23:44:33 -0800 (PST)
+From: Baptiste DURAND <baptiste.durand@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: iPhone Mail (13D15)
-Subject: Re: [meta-python] Python Flask recipes
+Date: Fri, 19 Feb 2016 08:44:27 +0100
+Message-Id: <1455867867-13518-1-git-send-email-baptiste.durand@gmail.com>
+X-Mailer: git-send-email 2.5.0
+Subject: [meta-oe][PATCH] minidlna: 1.1.4 -> 1.1.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,53 +51,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Feb 2016 04:58:28 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 19 Feb 2016 07:44:34 -0000
 
-I agree with Khem on all counts and would welcome the recipes to meta-python=
-, if you so choose.
+Upgrade minidlna from 1.1.4 to 1.1.5
 
-Regards,
-Tim
+Signed-off-by: Baptiste DURAND <baptiste.durand@gmail.com>
+---
+ meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb | 6 ------
+ meta-oe/recipes-multimedia/minidlna/minidlna_1.1.5.bb | 4 ++++
+ 2 files changed, 4 insertions(+), 6 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb
+ create mode 100644 meta-oe/recipes-multimedia/minidlna/minidlna_1.1.5.bb
 
-> On Feb 18, 2016, at 7:46 PM, Khem Raj <raj.khem@gmail.com> wrote:
->=20
->=20
->> On Feb 18, 2016, at 10:33 AM, Fabio Berton <fabio.berton@ossystems.com.br=
-> wrote:
->>=20
->> Hi all!
->>=20
->> I noticed that a few days ago were added some python-flask recipes.
->>=20
->> I've been maintaining a layer with python-flask recipes, hosted here
->> http://code.ossystems.com.br/gitweb?p=3Dmeta-python-flask.git;a=3Dsummary=
+diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb b/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb
+deleted file mode 100644
+index 0531e69..0000000
+--- a/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require ${BPN}.inc
+-
+-SRCREV = "v1_1_4"
+-LIC_FILES_CHKSUM = "file://LICENCE.miniupnpd;md5=b0dabf9d8e0f871554e309d62ead8d2b"
+-SRC_URI[md5sum] = "d966256baf2f9b068b9de871ab5dade5"
+-SRC_URI[sha256sum] = "170560fbe042c2bbcba78c5f15b54f4fac321ff770490b23b55789be463f2851"
+diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.5.bb b/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.5.bb
+new file mode 100644
+index 0000000..7c6db62
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.5.bb
+@@ -0,0 +1,4 @@
++require ${BPN}.inc
++
++SRCREV = "v1_1_5"
++LIC_FILES_CHKSUM = "file://LICENCE.miniupnpd;md5=b0dabf9d8e0f871554e309d62ead8d2b"
+-- 
+2.5.0
 
->>=20
->> There are recipes in meta-python-flask that were added to meta-python
->> and I want to simplify maintenance and avoid duplicate recipes.
->>=20
->> So, do I send recipes from meta-python-flask to meta-python or we move al=
-l
->> python-flask recipes from meta-python to meta-python-flask, using a layer=
-
->> only for Flask web framework?
->=20
-> Here is a hierarchy one can envision
->=20
-> 1. Core python runtime support - Oe-core
-> 2. python extended modules and infrastructure - meta-python
->=20
-> now if you think this framework is quite commonly used and is kind of core=
-
-> to python world, its fine to have it in meta-python, if you think its
-> too specific then move the common packages to meta-python
-> and maintain it as a separate layer
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
