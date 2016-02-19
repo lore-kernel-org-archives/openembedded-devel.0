@@ -1,46 +1,52 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A0FD6E682
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f171.google.com (mail-pf0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E8DF6FF91
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 20:43:30 +0000 (UTC)
-Received: by mail-io0-f178.google.com with SMTP id g203so87309181iof.2
+	Fri, 19 Feb 2016 03:46:48 +0000 (UTC)
+Received: by mail-pf0-f171.google.com with SMTP id x65so43410788pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2016 12:43:31 -0800 (PST)
+	Thu, 18 Feb 2016 19:46:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=Da4NzBF9MkQ1XoYYj3w9nx+LfABQpWOYqWQ+Z8gW39E=;
-	b=fT+cWuMy9KpFz7uIsVcKScvZJY4yc6tmUL+6GJtGxG9ZiqPMnWwBvbsweiS1tId5js
-	IsgCtZ5ZqeXxJAiQNlBRMt5QlvnA2gEitUBLVA5ui6xrX9yDbjzwkV0+1CF/DgNtOWdz
-	bO08JT46KEhZTXquA6pNlNCp5mLOiFxoGviXtLObjBI4w0A9eYimg8z8gqfM+CSzil/Z
-	xdnk5gAocX2G2wduUHU+4dH4Pz9trfQB/P1tPkGIcoYEn3HErM2oiTpsLHqG/Ne1aHWl
-	RtjKIgu+JaGGJtISjAEX+naoW9J+gILtfBT/9Us+KIcJ4U4bZ0gxiHXfXY4UAZzAiqgJ
-	5LWw==
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=X5yCscms554pprUMqO4bdFOAoBFFRUCLUjP8r1s95UE=;
+	b=UdywVsbyEIR6TisDKbLOADNisw/s3zDRm+oah2tTKMFZqCpv1XtDhYbLT3YZYgI7Rp
+	ePjvLZyJUHZ9LhCReGqsjxEwCgQ7OFxHI/+lnLMv6RTCOqpvdtRwZKCmwdZ1G/jaPoua
+	NLWfd3UsEl6Gr0WgB/j3MV8o81uTlZ+9Tpm7rAJ+5HzI83E6U8eraFy405me9BlLfMAy
+	L/Wkm8NshG1JoJVdhmDOzGKr55cprQtul9+pxM/rNzy+GiNsp+562CVlVpKACve/KkCC
+	cD9di3dzLBimEnjaJsVxBCaDW6ECXRq16d6ciXyy7UaiRJyzNSJ7Z0dXb8fHzqul7f19
+	VnQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=Da4NzBF9MkQ1XoYYj3w9nx+LfABQpWOYqWQ+Z8gW39E=;
-	b=bSDnsNRmWxH7rsgybcPpWvbx38L/LZjigdMKnBbDdzUR84eREEz8W7Mfl4X7juOQxb
-	dx0hBG8f9/83YsbALQdsSn5nPU9bKwcdODor0dpYxaMcvyQlQjceql150HO3zJpUV5A0
-	P73iija18qexULL2ajGeExhJJgZbl027y14CUKLuXPBAfJXDcfdHv8kdlmuVtRRklkZR
-	OfZ4/fg7U0L5D3PHHYd3OKGX+kP7RzkjS4KvyAtrd8CuqMPd+ks8ZWWOSfhIf8saJJG8
-	3yi1At/d3Ifqo+dKfgoTftQgRWqgd6fqC+CO0N6r5cluKyM+PhcBBo+OdyU8F91QnZ05
-	8v/w==
-X-Gm-Message-State: AG10YOTCTDwrXWCqAk4+OdTEmJfLB/SW/qIe61sH1PO+cU2DJILO2UAHi11kVIVSwEYWpsFvvNaSboWbz48uFA==
-X-Received: by 10.107.14.66 with SMTP id 63mr11653246ioo.150.1455828211339;
-	Thu, 18 Feb 2016 12:43:31 -0800 (PST)
-MIME-Version: 1.0
-References: <1455815945-9857-1-git-send-email-fabio.berton@ossystems.com.br>
-In-Reply-To: <1455815945-9857-1-git-send-email-fabio.berton@ossystems.com.br>
-From: Christopher Larson <kergoth@gmail.com>
-Date: Thu, 18 Feb 2016 20:43:21 +0000
-Message-ID: <CABcZANmnO78wfOe6p05MdU_jZ-9SqrQOAzxrqejrLBU2AXUR0Q@mail.gmail.com>
+	h=x-gm-message-state:subject:mime-version:content-type:from
+	:in-reply-to:date:cc:message-id:references:to;
+	bh=X5yCscms554pprUMqO4bdFOAoBFFRUCLUjP8r1s95UE=;
+	b=ikIs7yQs4FfeSmYvg/u/VcZS7+t2xzp1TMVLiiYj6crfW/bt2+UQwL41cBrutrSNia
+	ryQhNNQUxtnJopIVqsbNUxs2oEPEoqa86IuuYYsBDo1Ck6Nhw5chSkvz07Vrbe9/0Yxd
+	zzh0rJBSX5MAV/3njWpNT3Ae1rPKt2o+XqEtxRd9jhONj9vrusQwZjxhwQV+qxFtPTdU
+	aoZbZPqhTQeBCqTTm7VwB6Jk4i34ZjX7aecEyIzx+hDTfSCESrXN8wORDMylG/e6A/fu
+	NqEsb+eJ7tIK//P3bhtirIVJCjMcLIwH+gDpgtHnXOSakFn0E4uCq4EO9rbjt02eiXFH
+	jBAg==
+X-Gm-Message-State: AG10YOSWuwPCUdCKaj24+C+E2NgB76NuxOwNip/46nYMqcGv9SRIZ9B09W2pAA9xhD/hxA==
+X-Received: by 10.98.10.149 with SMTP id 21mr15276499pfk.75.1455853609571;
+	Thu, 18 Feb 2016 19:46:49 -0800 (PST)
+Received: from ?IPv6:2601:646:8802:5d5c:cde1:d147:9ec5:6bb6?
+	([2601:646:8802:5d5c:cde1:d147:9ec5:6bb6])
+	by smtp.gmail.com with ESMTPSA id
+	i23sm13571178pfj.68.2016.02.18.19.46.48
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 18 Feb 2016 19:46:49 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <CAAPZna3WT_cz9YpCaE0iueYXCYxNd0ONRCu0=yuHLcrqUdoKaw@mail.gmail.com>
+Date: Thu, 18 Feb 2016 19:46:48 -0800
+Message-Id: <6E3439D2-FEE9-4286-88C5-0D7E3E2AF4B2@gmail.com>
+References: <CAAPZna3WT_cz9YpCaE0iueYXCYxNd0ONRCu0=yuHLcrqUdoKaw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Fabio Berton <fabio.berton@ossystems.com.br>
-Subject: Re: [meta-oe][PATCH] fio: Remove --disable-static from EXTRA_OECONF
+X-Mailer: Apple Mail (2.3112)
+Subject: Re: [meta-python] Python Flask recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,62 +59,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2016 20:43:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 19 Feb 2016 03:46:49 -0000
+X-Groupsio-MsgNum: 60020
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_36223BBF-8549-4E39-96CC-1D1378E6AB96";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-I think the convention is to add such workarounds to no-static-libs.inc,
-not the recipe, at this time.
+--Apple-Mail=_36223BBF-8549-4E39-96CC-1D1378E6AB96
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-On Thu, Feb 18, 2016 at 10:30 AM Fabio Berton <fabio.berton@ossystems.com.br>
-wrote:
 
-> As of commit OE-Core:773c9e18071d71454473dd81aff911104a2e9bc6
-> EXTRA_OECONF is appended with the option --disable-static on
-> DISABLE_STATIC variable and this cause the error:
->
->     DEBUG: Python function sysroot_cleansstate finished
->     DEBUG: Executing shell function do_configure
->     Bad option --disable-static
->     --cpu=                 Specify target CPU if auto-detect fails
->     --cc=                  Specify compiler to use
->     --extra-cflags=        Specify extra CFLAGS to pass to compiler
->     --build-32bit-win      Enable 32-bit build on Windows
->     --build-static         Build a static fio
->     --esx                  Configure build options for esx
->     --enable-gfio          Enable building of gtk gfio
->     --disable-numa         Disable libnuma even if found
->     --enable-libhdfs       Enable hdfs support
->     WARNING: exit code 1 from a shell command.
->
-> So, we need to disable this option.
->
-> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-> ---
->  meta-oe/recipes-benchmark/fio/fio_2.2.6.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-> b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-> index dca0e64..5bf387c 100644
-> --- a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-> +++ b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-> @@ -25,6 +25,9 @@ SRC_URI = "git://git.kernel.dk/fio.git"
->
->  S = "${WORKDIR}/git"
->
-> +# avoids build breaks when using no-static-libs.inc
-> +DISABLE_STATIC = ""
-> +
->  EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
->
->  do_configure() {
-> --
-> 2.1.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> On Feb 18, 2016, at 10:33 AM, Fabio Berton =
+<fabio.berton@ossystems.com.br> wrote:
+>=20
+> Hi all!
+>=20
+> I noticed that a few days ago were added some python-flask recipes.
+>=20
+> I've been maintaining a layer with python-flask recipes, hosted here
+> http://code.ossystems.com.br/gitweb?p=3Dmeta-python-flask.git;a=3Dsummar=
+y
+>=20
+> There are recipes in meta-python-flask that were added to meta-python
+> and I want to simplify maintenance and avoid duplicate recipes.
+>=20
+> So, do I send recipes from meta-python-flask to meta-python or we move =
+all
+> python-flask recipes from meta-python to meta-python-flask, using a =
+layer
+> only for Flask web framework?
 
+Here is a hierarchy one can envision
+
+1. Core python runtime support - Oe-core
+2. python extended modules and infrastructure - meta-python
+
+now if you think this framework is quite commonly used and is kind of =
+core
+to python world, its fine to have it in meta-python, if you think its
+too specific then move the common packages to meta-python
+and maintain it as a separate layer
+
+--Apple-Mail=_36223BBF-8549-4E39-96CC-1D1378E6AB96
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlbGkCgACgkQuwUzVZGdMxT5VQCdHSfzLEEopN/mSyjzdLftO8Fi
+02UAoJMx0mkAxk8zOi5Uqh4UfnLgHZT+
+=u+OB
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_36223BBF-8549-4E39-96CC-1D1378E6AB96--
