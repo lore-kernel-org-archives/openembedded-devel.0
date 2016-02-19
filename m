@@ -1,59 +1,60 @@
 Return-Path: <otavio.salvador@ossystems.com.br>
 Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
 	[209.85.220.43])
-	by mail.openembedded.org (Postfix) with ESMTP id D2FAB6FF5D
+	by mail.openembedded.org (Postfix) with ESMTP id 1617F7708E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 13:32:41 +0000 (UTC)
-Received: by mail-pa0-f43.google.com with SMTP id fy10so50459607pac.1
+	Fri, 19 Feb 2016 13:44:38 +0000 (UTC)
+Received: by mail-pa0-f43.google.com with SMTP id yy13so50616346pab.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 05:32:42 -0800 (PST)
+	Fri, 19 Feb 2016 05:44:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
 	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:content-type; bh=eapiDp4RlTsIeSW7VF7QDQjRbEsh+o4IhX3DkymMuUI=;
-	b=xbhmqTqEB0fSCOc5Se5zpUoDkFv0fciWjETm0yaaYgpgWpIXYl5XW1CpdnUAx7xfpp
-	OivBEO+Tse3czA6co5CRVe20gsPJaRh+KHWOb8Av3jSc3z9Lzr5HS9R+xvLeD7C4G2nh
-	PpT9v6GgMexTTN07ttdjW3xp2lB2pPIsQGupfWTwuYWvlHoreB9Z/Xre0ZWYUUztzTfr
-	WoVT4FfRUCeLZSE0XqJiNGwYEbNbWBwAML3Ha7MCu6HzxHuDUnbqNKPF/DNW/H0o/HG6
-	vZASVdnpCLGrT4kBl4C1aJNYjmXTfSZ4phtWZI/dDhuX+inhSQ9I4jG7VyO+CNx9DhQQ
-	+q8A==
+	:cc:content-type;
+	bh=bkLgPHT4logKr9El8eknF1DVgF0ZTGH7SNALq0HwBO0=;
+	b=H8qzrKt3BIVhTrRH2RrPnugUr1AWRCVMRx0si7mmFo+fSaziqh6kkmRknR/ed6teQn
+	bco5F/Aa5B/2T6V55xrwk3RgnDBT5VUNitsevhjoE8kypJwkpWqU8ZGBcVhHUoiVMMrI
+	L31abzDesRaWbhYjth/OBGnD61BzHX+dJkOP/5Hqgtw/epO9Vpw+5vN5Oz9aF+KicJVE
+	EGIfKXYXA0nMma8j+hEd9okTGTrlis+JLZU847BUMZtioow1AzxWDZ8EwZSfSF7bneme
+	xwuuGGA/bQCYvoirOxpFXnnUmxz05mXKOJJXgwFuUTtGm+sIVuEZJfbCZFkiPOku8bza
+	UGkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:content-type;
-	bh=eapiDp4RlTsIeSW7VF7QDQjRbEsh+o4IhX3DkymMuUI=;
-	b=iBtjiBYgiDIUiWF5Mextu5EHPw7SeZo0Y4dGeWwa5TerLAozOgKitOgq2tMrYrv895
-	OL3VSPuIIe9cT4l5aODqRZ0TTewx7rbJo2p1NILGvJesBi3Eov3ml0NerD7W8TpaRz3P
-	gamwwF3f67W40JSBEeoifBe75RylUVjuHzGB0EMJZniTb9SeeyzASn6XQj+0dYEJtCEL
-	QJR/ErY7csCXAJzjXmvV2WaulPl0Y5HUGNkgC1OhzpE3UTpZO7ody8tJPRuT42wjWuJ2
-	Scl2yyhRO08i8ad29SckB58f8shvD9ARuHrpODOVh2jl/UBs7voJsfUkXKD+FMTq/CBD
-	LSww==
-X-Gm-Message-State: AG10YOTDANCt56jE81lxBh85L6osonva/D3NFTADnlZHRgemJAmsCjrpFLEzclSGjRrmrg==
-X-Received: by 10.66.221.10 with SMTP id qa10mr18053722pac.4.1455888762522;
-	Fri, 19 Feb 2016 05:32:42 -0800 (PST)
-Received: from mail-pf0-f180.google.com (mail-pf0-f180.google.com.
-	[209.85.192.180]) by smtp.gmail.com with ESMTPSA id
-	q16sm17928046pfi.80.2016.02.19.05.32.40
+	:message-id:subject:to:cc:content-type;
+	bh=bkLgPHT4logKr9El8eknF1DVgF0ZTGH7SNALq0HwBO0=;
+	b=SMbWYLcXDDUF/f+NuLqhI+F6hvvqXIcrRVMSaSGMVHFe29nd8pBs3bJyRjvsDGisbu
+	Coh+6AW1VQPglVAFmyRth7EJ2bpXoiBIqQuYjLILZujXgek5XC0IliJB9zZTuuqYIwtc
+	yhmY23e1D2OvPfWyEpG2BAnuIsiSatm2pbGmXivzIVegHYKO69ydGV8MkxiVafRJgnAa
+	KTUn28DED0Y8XLccK4O5EgeMFP/iGc0mp7a0LuBf+meW+h8qdcxEkb63qrTfD/8cDOoI
+	gyomsRpVUeMJ8TEBclJOuwLdIfBmN6Di82Yghlt6dMQtrZ3isBNNzMZ/YEm8xoGKJKYk
+	VXvw==
+X-Gm-Message-State: AG10YOSp5Oz4Pjnqh35/YBEtNdG+7AVkz8Nw9/j0g1cggOoiMHfh9Gmx739UHDiIHvokzw==
+X-Received: by 10.66.251.65 with SMTP id zi1mr18173645pac.133.1455889479561;
+	Fri, 19 Feb 2016 05:44:39 -0800 (PST)
+Received: from mail-pf0-f182.google.com (mail-pf0-f182.google.com.
+	[209.85.192.182])
+	by smtp.gmail.com with ESMTPSA id ti6sm2341704pab.4.2016.02.19.05.44.37
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 19 Feb 2016 05:32:40 -0800 (PST)
+	Fri, 19 Feb 2016 05:44:37 -0800 (PST)
 From: Otavio Salvador <otavio.salvador@ossystems.com.br>
 X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-pf0-f180.google.com with SMTP id e127so51367703pfe.3
+Received: by mail-pf0-f182.google.com with SMTP id q63so51451641pfb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 05:32:40 -0800 (PST)
+	Fri, 19 Feb 2016 05:44:37 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.98.74.23 with SMTP id x23mr18080512pfa.141.1455888760435;
-	Fri, 19 Feb 2016 05:32:40 -0800 (PST)
-Received: by 10.67.3.163 with HTTP; Fri, 19 Feb 2016 05:32:40 -0800 (PST)
-In-Reply-To: <6E3439D2-FEE9-4286-88C5-0D7E3E2AF4B2@gmail.com>
-References: <CAAPZna3WT_cz9YpCaE0iueYXCYxNd0ONRCu0=yuHLcrqUdoKaw@mail.gmail.com>
-	<6E3439D2-FEE9-4286-88C5-0D7E3E2AF4B2@gmail.com>
-Date: Fri, 19 Feb 2016 11:32:40 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKpXkzdSki8exzpbge08Uns1M3rQcc2C1UTPGpuA-WUKOQ@mail.gmail.com>
-Message-ID: <CAP9ODKpXkzdSki8exzpbge08Uns1M3rQcc2C1UTPGpuA-WUKOQ@mail.gmail.com>
+X-Received: by 10.98.11.88 with SMTP id t85mr15040921pfi.98.1455889477222;
+	Fri, 19 Feb 2016 05:44:37 -0800 (PST)
+Received: by 10.67.3.163 with HTTP; Fri, 19 Feb 2016 05:44:37 -0800 (PST)
+In-Reply-To: <00e901d16b08$cbe296b0$63a7c410$@gmail.com>
+References: <00e901d16b08$cbe296b0$63a7c410$@gmail.com>
+Date: Fri, 19 Feb 2016 11:44:37 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKqEBBAfmYR67JRFRyuUQ5VhB7-1pR__tMbB8pdWun815A@mail.gmail.com>
+Message-ID: <CAP9ODKqEBBAfmYR67JRFRyuUQ5VhB7-1pR__tMbB8pdWun815A@mail.gmail.com>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python] Python Flask recipes
+Cc: Fabio Berton <fabio.berton@ossystems.com.br>
+Subject: Re: [meta-python] Python Flask recipes + cve-searching during package creation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,36 +67,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Feb 2016 13:32:42 -0000
+X-List-Received-Date: Fri, 19 Feb 2016 13:44:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Fri, Feb 19, 2016 at 1:46 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> On Feb 18, 2016, at 10:33 AM, Fabio Berton <fabio.berton@ossystems.com.br> wrote:
->> I noticed that a few days ago were added some python-flask recipes.
->>
->> I've been maintaining a layer with python-flask recipes, hosted here
->> http://code.ossystems.com.br/gitweb?p=meta-python-flask.git;a=summary
->>
->> There are recipes in meta-python-flask that were added to meta-python
->> and I want to simplify maintenance and avoid duplicate recipes.
->>
->> So, do I send recipes from meta-python-flask to meta-python or we move all
->> python-flask recipes from meta-python to meta-python-flask, using a layer
->> only for Flask web framework?
->
-> Here is a hierarchy one can envision
->
-> 1. Core python runtime support - Oe-core
-> 2. python extended modules and infrastructure - meta-python
->
-> now if you think this framework is quite commonly used and is kind of core
-> to python world, its fine to have it in meta-python, if you think its
-> too specific then move the common packages to meta-python
-> and maintain it as a separate layer
+On Fri, Feb 19, 2016 at 9:29 AM, Sven Ebenfeld <sven.ebenfeld@gmail.com> wrote:
+...
+> Unfortunately I'm unable to get access to the meta-python-flask layer. As
+> stated in the commit message, I don't know if all dependencies are fulfilled
+> for the flask recipes are fulfilled when building these recipes into images.
+> If you have already done these work, I would really like to benefit from
+> your work and not doing it again.
+...
 
-Agreed but this is a specific framework which is not 'core' to python.
-Do you think we ought to merge those on meta-python or keep them split
-out?
+Could you try:
+
+git clone http://code.ossystems.com.br/meta-python-flask
+
+It should just work ;-)
 
 -- 
 Otavio Salvador                             O.S. Systems
