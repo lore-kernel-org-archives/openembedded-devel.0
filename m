@@ -1,49 +1,60 @@
-Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id AC8B9771CF
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 2960A6013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 11:28:54 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id c200so70967051wme.0
+	Fri, 19 Feb 2016 11:39:42 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id fy10so49128606pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 03:28:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:thread-index:content-language;
-	bh=l1NRKbggTlSt9nzYmcd9WuQvxfoVMDCf+jlnB6HpiNQ=;
-	b=wKJ3tGoEgGHTGhuGXmQfTUUp30iD55SwZPtQL0rghxzCFnyL+JjUL6nhCgpJyk7YYb
-	BV2t6pMqNDuzeeRQIEu8tqT6JCdI69ymmQccA88Byiw8DvPljuws1zqJLoMGwuekiLKI
-	+CO5H4RkcYxhdsjB1wOzvmOYH+0bjg1WYZmnfBajnRHmkDyUFw1A6eDi32GU+iQUPJou
-	/qd5zGihTxBC1fnw09zOhlaM1Vee1xb87IpIn6yGYzBVs0M4cfMDCaBCK2hn1nqQUoNA
-	gNOtdZTimQGlUqQ/sxqd2afOjsBrCBeWn1nZHBNGw0WCq1Y/nKtlmeyCxY+wZVLZBb7f
-	DqSQ==
+	Fri, 19 Feb 2016 03:39:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:content-type; bh=yA5hff3puMOi8Bajjns4eDkZ4Fb++QZE+C7yrlEwdeA=;
+	b=ugle7dPirjxGHJCaOKwZxIzSD+JWOgR0UT6VWNgMp13rik9NUrNbhRwn6sK1KebT0/
+	lHiU55+87WZGMCPiEDZd1T1L2mwOL933lAstZH10KgHo6lJB77TxuSr8bLlNULwt3Kmx
+	LHNX96nQkCTHPh2gOEBlNjNgZGxeqUgihWkEwjW5c7k9zpy5hYC5UYoTw2Vjio3h/jsX
+	WVU0rlZtgd7s+vJ4341zzaJ+UpihqlF3ZY5GHKSTgBu75ydZaVkR6+RYCxwOMoRAWEU9
+	rC55P+bPFGTIUnVqc4emutPSfpQa+H/JIPo7UIMTYEu/t/u+hjP2+4uoNweOa0nwd19S
+	h6Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:thread-index:content-language;
-	bh=l1NRKbggTlSt9nzYmcd9WuQvxfoVMDCf+jlnB6HpiNQ=;
-	b=dWMAHXSmmVGjvpiL3RAiZ7pLVI++BsdN5iXYApJRdegrh6eNu0DFsAfpRgKAANqSV7
-	qQrgwFvflLfG0tMBE1Jq4cXxG7Tr5/8wsjCc11daU6KOLhVPCMKpwv0HrL6OLI/tZEK+
-	PbHCc2mMgDqiFhSgQCWfCGFkTPivC/SfxWypKksAf6/8a3ve7tdsSsNVoAFAn8vQduGG
-	ff74XO89G8hu6ZUfJ1AdGhdeRzA1EvbnD0kL0kn+wPCg/vWUl3FkSzDRi8EpI7Hhlg89
-	gyYlYY6QvuvCYcQ89/r4bLKN/IEUIdIDfBtumHk/WHOruIq0ywfnS2mmDcZhpwgrWz5K
-	kXzw==
-X-Gm-Message-State: AG10YOSgAig55UEPoELr1xWtw6R4rK/tiY/Ee0JdDCK/qsNz+Rfn5MbyezvB591+LETJ5g==
-X-Received: by 10.28.2.68 with SMTP id 65mr8241186wmc.85.1455881335012;
-	Fri, 19 Feb 2016 03:28:55 -0800 (PST)
-Received: from svenpc ([2001:470:1f0a:1031:5888:9e15:628f:21ea])
-	by smtp.gmail.com with ESMTPSA id
-	v22sm7225231wmv.12.2016.02.19.03.28.53
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:content-type;
+	bh=yA5hff3puMOi8Bajjns4eDkZ4Fb++QZE+C7yrlEwdeA=;
+	b=Z6DC/yKcBOOjaL6sVsIUGaMKV4XZlAFOW2xjFp460sHO7tb8O0S/vF/zNALDH1khFh
+	A/rQ24CTYYSjP9LrxovZ+/eNkye3PtOI1F9zCczorcJ4Nxkd5Jz/lBfuilVEJ4B+BY2J
+	AaKSNUzsckJWU5aVM2MnEeYNig3FMBHniPa/EHYuHhsUomCUxUEC75uB0HAvpGh8bH3g
+	7zU2YEystgU2qf18BEWmGzsM/cf9gy79suYTe9rdKhzIPdvxgckhCDOAG10BsXOeUqzo
+	Yd5HyO+FjRxLKD8ewGMl5gFze8UK8JyM7Plw4VgH5PQ9Bht1c0n5D0NsM51h8apvIrPw
+	Cgsw==
+X-Gm-Message-State: AG10YOQlUnnw6jtoYY383nTQ/z8b3WbRzu9w112WUp1pi9s37WNsVG9WZxzRRGr+d98D+w==
+X-Received: by 10.66.118.198 with SMTP id ko6mr17302005pab.11.1455881982714;
+	Fri, 19 Feb 2016 03:39:42 -0800 (PST)
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com.
+	[209.85.220.43]) by smtp.gmail.com with ESMTPSA id
+	ud8sm17359417pac.11.2016.02.19.03.39.40
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 19 Feb 2016 03:28:53 -0800 (PST)
-From: "Sven Ebenfeld" <sven.ebenfeld@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Feb 2016 12:29:28 +0100
-Message-ID: <00e901d16b08$cbe296b0$63a7c410$@gmail.com>
+	Fri, 19 Feb 2016 03:39:41 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-pa0-f43.google.com with SMTP id ho8so50440471pac.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Feb 2016 03:39:40 -0800 (PST)
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 15.0
-Thread-Index: AdFrCMikUIhdfgiFTSKmsc66MAMomg==
-Cc: fabio.berton@ossystems.com.br
-Subject: Re: [meta-python] Python Flask recipes + cve-searching during package creation
+X-Received: by 10.66.151.177 with SMTP id ur17mr17232874pab.68.1455881980526; 
+	Fri, 19 Feb 2016 03:39:40 -0800 (PST)
+Received: by 10.67.3.163 with HTTP; Fri, 19 Feb 2016 03:39:40 -0800 (PST)
+In-Reply-To: <56C6CD05.7070300@gmail.com>
+References: <1454512359-2140-1-git-send-email-samuli.piippo@theqtcompany.com>
+	<CAP9ODKo9D=V8w1-oJmz605VsDWGtFJ=1raD+35yeSJCkRt-TSw@mail.gmail.com>
+	<56C6CD05.7070300@gmail.com>
+Date: Fri, 19 Feb 2016 09:39:40 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKpWBUH_gFQgNZN28KXM_QOjD+z6S3g2rKYSxQbL49DuUA@mail.gmail.com>
+Message-ID: <CAP9ODKpWBUH_gFQgNZN28KXM_QOjD+z6S3g2rKYSxQbL49DuUA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qt5: use common PACKAGECONFIG to build examples
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,109 +67,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Feb 2016 11:28:58 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Language: de
+X-List-Received-Date: Fri, 19 Feb 2016 11:39:43 -0000
+Content-Type: text/plain; charset=UTF-8
 
-First I would like to mention why I added these recipes.
-Currently I'm working on my Master-Thesis for my studies in Applied IT
-Security. The subject is to implement some security scans during image
-creation.
-This work shall help to prevent rolling out vulnerable firmware images.
+On Fri, Feb 19, 2016 at 6:06 AM, Samuli Piippo <samuli.piippo@gmail.com> wrote:
+> On 04.02.2016 13:19, Otavio Salvador wrote:
+>>
+>> On Wed, Feb 3, 2016 at 1:12 PM, Samuli Piippo
+>> <samuli.piippo@theqtcompany.com> wrote:
+>>>
+>>> Each Qt module's examples can now be enabled with PACKAGECONFIG.
+>>> Replace the webkit patch with a PACKAGECONFIG option and follow
+>>> common practice by not building QtWayland examples by default,
+>>> those can be enabled in a .bbappend with PACKAGECONFIG += "examples"
+>>>
+>>> Enabling PACKAGECONFIG[examples] in qtbase, will still cause every
+>>> Qt module to build their examples.
+>>>
+>>> Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
+>>
+>>
+>> Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+>>
+>> I think in a subsequent patch, examples should all to be disabled by
+>> default. What do you think?
+>>
+>
+> Sorry, I don't follow. QtWayland is the only module that has examples built
+> by default, and this disables those as well.
+> Is there anything that's needed in a subsequent patch?
 
-One of the tasks I is trying to implement scanning vulnerability databases
-during image creation or building packages. To achieve this, I'm going to
-use the cve-search project (https://github.com/cve-search/cve-search).
-This is a quite large project with a lot of dependencies of
-python3-packages. But it gives the opportunity to search through a lot of
-databases with quite good performance.
+I missed that you disabled it as part of the patch; alright! :-)
 
-The main work is done in my own layer currently.
-(https://github.com/esven/meta-esven) But when it is working, I hope to
-include it in meta-security layer or something like that.
-Unfortunately I'm unable to get access to the meta-python-flask layer. As
-stated in the commit message, I don't know if all dependencies are fulfilled
-for the flask recipes are fulfilled when building these recipes into images.
-If you have already done these work, I would really like to benefit from
-your work and not doing it again.
-
-I'm trying to implement cve-searching like this:
-1. build mongodb and redis as native
-2. deploy cve-search including mongodb, redis and python3-dependencies in
-native-sysroot
-3. look for previously set up databases in sstate and use them in mongodb
-and redis
-4. start mongodb and redis with bitbake build (currently don't know how to
-start it with shutting them down on bitbake shutdown) + give ability to use
-external mongodb and redis server with configuration in local.conf
-5.  for every package creation, search for known vulnerabilities using PV
-and PN variables.
-5.1. if a CVE fix has been backported, this can be ignored by adding it to a
-defineable variable or by searching through local patch commit messages.
-6. shutdown local mongodb and redis server on bitbake shutdown
-7. save updated databases in sstate
-
-I would really appreciate your feelings about this as I plan to finish this
-task until end of march 2016.
-
-Cheers,
-Sven
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
-> Behalf Of Tim Orling
-> Sent: Friday, February 19, 2016 5:58 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-python] Python Flask recipes
-> 
-> I agree with Khem on all counts and would welcome the recipes to meta-
-> python, if you so choose.
-> 
-> Regards,
-> Tim
-> 
-> > On Feb 18, 2016, at 7:46 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> >
-> >> On Feb 18, 2016, at 10:33 AM, Fabio Berton
-> <fabio.berton@ossystems.com.br> wrote:
-> >>
-> >> Hi all!
-> >>
-> >> I noticed that a few days ago were added some python-flask recipes.
-> >>
-> >> I've been maintaining a layer with python-flask recipes, hosted here
-> >> http://code.ossystems.com.br/gitweb?p=meta-python-
-> flask.git;a=summary
-> >>
-> >> There are recipes in meta-python-flask that were added to meta-python
-> >> and I want to simplify maintenance and avoid duplicate recipes.
-> >>
-> >> So, do I send recipes from meta-python-flask to meta-python or we
-> >> move all python-flask recipes from meta-python to meta-python-flask,
-> >> using a layer only for Flask web framework?
-> >
-> > Here is a hierarchy one can envision
-> >
-> > 1. Core python runtime support - Oe-core 2. python extended modules
-> > and infrastructure - meta-python
-> >
-> > now if you think this framework is quite commonly used and is kind of
-> > core to python world, its fine to have it in meta-python, if you think
-> > its too specific then move the common packages to meta-python and
-> > maintain it as a separate layer
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
