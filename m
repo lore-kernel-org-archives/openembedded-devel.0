@@ -1,47 +1,61 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B63A6FFA4
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by mail.openembedded.org (Postfix) with ESMTP id E57D3771FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 13:15:15 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id g62so75606438wme.1
+	Fri, 19 Feb 2016 13:24:00 +0000 (UTC)
+Received: by mail-pa0-f48.google.com with SMTP id fy10so50352107pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 05:15:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=nsg6FIFKRiZX1v15XgkaqpPFXFxi3aombist1ZFbfhM=;
-	b=t1Oe1r78a8r4V4INN/FTKtDoUv36Wvq0SX5ve6qi1axS+pBx39dUk8PmxhL4jcrx76
-	sY+rLirc5FP+qQH+vVKUgmhshN/tx3Xi3uW4CGjFDpy+SKXjNX/W0qrHVw5EQpIvGF7g
-	TDHZfzYOYAj7DOX3T2PcuhOvNpPxsM+ppwpCdAzNBjbYXvrITbNTj1lPLx9DFLx4ye6h
-	sOiz+O+eLa/4SozoIG5P+toZEbCOBo9zF+vYrEDirDS/deCxrQC8IL9d5G7DXAbAQFeM
-	kxTpargnTHcCU/6mGZ28jUXMQD5pPbSCHfn0NkQWBMM7MFas7bYqZ1j+QrfQiIEvHgua
-	GmrQ==
+	Fri, 19 Feb 2016 05:24:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:cc:content-type;
+	bh=/bxS0AQXEze9V6txgvu5NiWWMQTc8K/WV3FulCJoFys=;
+	b=w9T0OlgzGK06qENcWszch0l41W/SPIqX5PEkFhU0mwrI2iuTqTMYF9XXgy//Ufj34G
+	BNbGJLdA0/JgbmgVlc5FGXYnFqNh1bKg+zmedbf/+9AL3Fp0PUK7dxflq7dc7hf6JHkc
+	P3SENbCCEWiXebi3f0Tt+Gy3NAAmBKH1YFg5KveeEjVS1Uexywh8AaZ29DrCQUhW7cxP
+	92OGQzf/BnqPSMdEegqohH9xInWckgqv4ZYf8oNvtdgn8aaTPH+rmvzWGjB1yj8ijYO9
+	4ZJO/YF78++cq3fp+yEu8WkhNREBk95WucSLuEo40L3iPp68QyVUCyrLot/hggVHkkLu
+	vU7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=nsg6FIFKRiZX1v15XgkaqpPFXFxi3aombist1ZFbfhM=;
-	b=Bvb6VabXKdMnr4Cq4/HmsV3u3jxntn03UNvqTuT+QEied74CF754/xyO89zi46fERE
-	Nkx/hh1cDZ59/BVKRY5Ju8lql5VkFuc2FVGVoOXkPO1WqcOZJVyZKBA2IvrM1ViHkRb7
-	p74CHiyBjroLtMcUnxODOGi1k1I9SB/nOzFvD79bDgyj6z8dsREnMtYoy+/vRz3cES4d
-	sH01fMg1ZR7kXtJttV762a81kTVrrb4d1MlczNxO1w/OQXZ2LlKZpbohexo6REn/STZn
-	wF4OiQSYL6YA1h8wceEgvjmpgtlamoaTUtqEvdlawBqHaBO0RK0h45qRJgyTw3aZuDZT
-	A6mw==
-X-Gm-Message-State: AG10YORXSwPwxsXaifkJWjj8OXxznUGHt6u2AZ+XMNTjLwUIYZsDzR8NojNXZzHQtQuXUw==
-X-Received: by 10.194.61.19 with SMTP id l19mr13060379wjr.148.1455887716031;
-	Fri, 19 Feb 2016 05:15:16 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id x65sm7655214wmg.4.2016.02.19.05.15.10
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc:content-type;
+	bh=/bxS0AQXEze9V6txgvu5NiWWMQTc8K/WV3FulCJoFys=;
+	b=k4pErOlfYb+goWRzu80lP+OYl1uvcw4F1wfQ4NIDPIy9117NEbLhjSROcSE133lcIl
+	YLf69+DtE5qzSLji1N76vyFxkqvEnc4l6YDmNW5EdKix70mYbsRqlRCwUV5Sm0bsS0Vx
+	OL8w677YIbR+dBPnxL/7GYlf1PsGAkWzQ+HIBogUIsHbnmmS89j8Aufpl57jwa87hlNF
+	vpLoZePGASlytB55iSMV1zl494K6eGnBtC8wgPeHVJsiRF7BQnx9r9WW0SyykSXI+wcP
+	ZSd12XZEOG2qd1Ucbgjy9RtGzmBXojGlI9hhAWWpVs4rU9TWkjO3WrbsUZ9503jrqlpV
+	G4cw==
+X-Gm-Message-State: AG10YOTxCfIi04VtnSLG+oJ71Izi+HgNWq2nEmVmc66H+LXK0+ys5uyh2l00xJh2dUzggQ==
+X-Received: by 10.67.23.202 with SMTP id ic10mr10755385pad.127.1455888241153; 
+	Fri, 19 Feb 2016 05:24:01 -0800 (PST)
+Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com.
+	[209.85.192.172]) by smtp.gmail.com with ESMTPSA id
+	t12sm17915221pfa.54.2016.02.19.05.23.59
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 19 Feb 2016 05:15:10 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Feb 2016 14:15:35 +0100
-Message-Id: <1455887735-6148-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.1
-In-Reply-To: <1455887735-6148-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1455887735-6148-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][WIP-for-5.7][meta-qt5 2/2] qtsystems: use 'dev' branch again
+	Fri, 19 Feb 2016 05:23:59 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-pf0-f172.google.com with SMTP id x65so51222708pfb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Feb 2016 05:23:59 -0800 (PST)
+MIME-Version: 1.0
+X-Received: by 10.98.67.149 with SMTP id l21mr18125314pfi.112.1455888238771;
+	Fri, 19 Feb 2016 05:23:58 -0800 (PST)
+Received: by 10.67.3.163 with HTTP; Fri, 19 Feb 2016 05:23:58 -0800 (PST)
+In-Reply-To: <CABcZANmnO78wfOe6p05MdU_jZ-9SqrQOAzxrqejrLBU2AXUR0Q@mail.gmail.com>
+References: <1455815945-9857-1-git-send-email-fabio.berton@ossystems.com.br>
+	<CABcZANmnO78wfOe6p05MdU_jZ-9SqrQOAzxrqejrLBU2AXUR0Q@mail.gmail.com>
+Date: Fri, 19 Feb 2016 11:23:58 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKr2p6LispW-Hm-kbUuxJt4ZjSrB3hio9h2=58Jnid8mSg@mail.gmail.com>
+Message-ID: <CAP9ODKr2p6LispW-Hm-kbUuxJt4ZjSrB3hio9h2=58Jnid8mSg@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Fabio Berton <fabio.berton@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH] fio: Remove --disable-static from EXTRA_OECONF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,35 +68,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Feb 2016 13:15:16 -0000
+X-List-Received-Date: Fri, 19 Feb 2016 13:24:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* 5.7 branch was created in qtsystems and then removed again
-  OE @ ~/projects/qt-project/qtsystems $ git remote prune origin
-  Pruning origin
-  URL: git://code.qt.io/qt/qtsystems.git
-    * [pruned] origin/5.3
-    * [pruned] origin/5.7
+On Thu, Feb 18, 2016 at 6:43 PM, Christopher Larson <kergoth@gmail.com> wrote:
+> I think the convention is to add such workarounds to no-static-libs.inc,
+> not the recipe, at this time.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-qt/qt5/qtsystems_git.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+For OE-Core, yes. For Meta-OE? I think the recipe is the easiest to
+notice when doing the upgrade.
 
-diff --git a/recipes-qt/qt5/qtsystems_git.bb b/recipes-qt/qt5/qtsystems_git.bb
-index 56d6a5c..868e051 100644
---- a/recipes-qt/qt5/qtsystems_git.bb
-+++ b/recipes-qt/qt5/qtsystems_git.bb
-@@ -28,4 +28,9 @@ do_install_append() {
-     rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro	
- }
- 
-+QT_MODULE_BRANCH = "dev"
-+
-+# qtsystems wasn't released yet, last tag before this SRCREV is 5.0.0-beta1
-+# qt5-git PV is only to indicate that this recipe is compatible with qt5 5.6
-+
- SRCREV = "cc2077700bd5503d1fcf53aef83cbb76975e745a"
 -- 
-2.7.1
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
