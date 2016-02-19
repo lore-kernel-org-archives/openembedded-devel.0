@@ -1,51 +1,55 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id A17C1759B4
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com
+	[209.85.192.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 1AFA07728A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 17:53:14 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id g62so81842845wme.0
+	Fri, 19 Feb 2016 18:02:43 +0000 (UTC)
+Received: by mail-pf0-f172.google.com with SMTP id e127so54911695pfe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 09:53:16 -0800 (PST)
+	Fri, 19 Feb 2016 10:02:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=pvXXvyo+YgtndfmDaxCykAxgweQ1WZga6t9gJRvCSV8=;
-	b=L8xksDmaGmLYjFKwBhzHOlbFeUFrEWwDF3m9CG//e0G1Mfo75kEqntpxtULty61npE
-	ez3SrdaBEiwgmGvrqDz2YGqJxhb5gqVzQnqTXMGsXSSFjUPG1k/GQ0+BmpxJZofNj8be
-	IeyjNA262oFVht5lztqvgQRZ2feyz2k58tgW3dps3GLI0EV2bMiibVMgpGRAsgjfJSnV
-	eMAYnba5jJq8xEg+SSjYABXQZuCD5LsB7xYcXKuRon9lE2/vNXTnLRkea07ilodDhn9N
-	Y8YVhE7uZ55H7ahVd3dOfa6cdXH0ZLJMvfzPDaITWBp6JrL4+heQYMZPlV4dK/9b9SZn
-	v+Lw==
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=S0itfGzBxHug0oxKGuCmYXvA0h3ktvy2g+2owrIRU2A=;
+	b=OKnLQ63SESWW7/4n5JYCTvJO9yX0/3td61Erz2aazNkVWDnTozzp3uOStiAsYY/zBq
+	fs+OPkLsOxwFy3mSXj1U2FEsVfrrkPnbufJ//mqzN6JvZV7l8Ri+qTFF6JqNx8JzXO4j
+	499iZ8M386MEm+L47aBnZAT8efs1SHZHatXlE/j2k0jrn63vk436oYPibOxcpryP2TLI
+	u8H6N+9i8peWZ11wUffcBnhdOfDWcDVUVBEVdjID9e7sMNpE93zcXjfhSCXoGFZUrIhj
+	quTnnCVyJ86CgCYHGLUutaXdaV2/iB28j2EaMZB8At8Ej9vf6enaGFrdPEeLPdXXBCyE
+	RCiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=pvXXvyo+YgtndfmDaxCykAxgweQ1WZga6t9gJRvCSV8=;
-	b=g+GYqRmv9vwF5Jb53vkss5gKdGMVp2tRDaduugXwo1OP77Q5tI/LEKGWuvSDCKdf7R
-	Nnq0tfjqkWDItqsrx3KemJ2NaCEEBr7tqBafbPvo+J8qHedN8eLxPNOwDlp8nkGMN8/H
-	3n1dkCZhbzImXHHiB0SkSJQ1m7ynq7Cpmn4zBh9TyvH4gDKCU3MFbBgu2pLdR8/aRs5W
-	XQSav23fhPErqu7fMZFvdySvXu2dsil290I4RBTi9uE+NlHARjUnndy4X+c7OSETIRgT
-	iHB8yGpSGRwbglvY7cZxXYWYmaHkwjK5LHmPb5Ch3T5Mt9JR1PUfMljmHB1GC3NlKzDx
-	Ee6A==
-X-Gm-Message-State: AG10YOQnwutgyj1vbYjioMth3e29Iu15hjGyliFpTQXr6bZeUzG4OKw74vNJaUquvNozng==
-X-Received: by 10.28.211.130 with SMTP id k124mr10927535wmg.7.1455904395584;
-	Fri, 19 Feb 2016 09:53:15 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	h=x-gm-message-state:content-type:mime-version:subject:from
+	:in-reply-to:date:message-id:references:to;
+	bh=S0itfGzBxHug0oxKGuCmYXvA0h3ktvy2g+2owrIRU2A=;
+	b=avmbtmFmN0/77F57Dbft33JMOONdypAp2FayOTh7BCpp2CbV9D0wUokLMSOSIsX2a+
+	Qn6iOjb/8f7HMOjTJS0InY/SS3FSVXpfvKetHz1MuX7HC3NXs2wkOUt+l5jJiaUkSmbO
+	bhJCTnJ7nzuZhO3S0+vRzNNhYSazqbCn+xnM+0EaHubnUnEtTO+VpZvUBuZhZ0XiszHY
+	ifYn+lajmf9w5H3D1sDsfDko4Bw3tzlF8mnRuQh2hqtZEapVF8MLlZBmrYQGUnInfTWx
+	CCDEYbgtGyNcDXRC38zX30p7e1/bfhtQyU3E1qbUpC0XRWVtj+RHu4NiB5biu0ZD/XRA
+	OC9w==
+X-Gm-Message-State: AG10YOQ1IwdOaElocM6tUtgCP2vHFgvdh8zCbmNNvzylpqf8u1Y+1Oacxyn5PssVbyyM9g==
+X-Received: by 10.98.32.150 with SMTP id m22mr19801112pfj.27.1455904964431;
+	Fri, 19 Feb 2016 10:02:44 -0800 (PST)
+Received: from ?IPv6:2601:646:8802:5d5c:185a:94e1:7952:6dd4?
+	([2601:646:8802:5d5c:185a:94e1:7952:6dd4])
 	by smtp.gmail.com with ESMTPSA id
-	i1sm12126490wjs.45.2016.02.19.09.53.14
+	i23sm19210105pfj.68.2016.02.19.10.02.43
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 19 Feb 2016 09:53:14 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 19 Feb 2016 18:53:45 +0100
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 19 Feb 2016 10:02:43 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <CAP9ODKpXkzdSki8exzpbge08Uns1M3rQcc2C1UTPGpuA-WUKOQ@mail.gmail.com>
+Date: Fri, 19 Feb 2016 10:02:38 -0800
+Message-Id: <D98FF053-0891-406C-9C55-C5BE4A148A22@gmail.com>
+References: <CAAPZna3WT_cz9YpCaE0iueYXCYxNd0ONRCu0=yuHLcrqUdoKaw@mail.gmail.com>
+	<6E3439D2-FEE9-4286-88C5-0D7E3E2AF4B2@gmail.com>
+	<CAP9ODKpXkzdSki8exzpbge08Uns1M3rQcc2C1UTPGpuA-WUKOQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160219175345.GA2588@jama>
-References: <1455890654-2396-1-git-send-email-Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1455890654-2396-1-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH][WIP-for-5.7][meta-qt5] qtwebengine: update LICENSE/LIC_FILES_CHKSUM
+X-Mailer: Apple Mail (2.3112)
+Subject: Re: [meta-python] Python Flask recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,51 +62,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Feb 2016 17:53:15 -0000
-X-Groupsio-MsgNum: 60047
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="45Z9DzgjV8m4Oswq"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 19 Feb 2016 18:02:44 -0000
+X-Groupsio-MsgNum: 60048
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_BC277CC3-40D7-45A2-AF37-C836EE9A34AC";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---45Z9DzgjV8m4Oswq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--Apple-Mail=_BC277CC3-40D7-45A2-AF37-C836EE9A34AC
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
-On Fri, Feb 19, 2016 at 03:04:14PM +0100, Martin Jansa wrote:
-> * this should be part of the upgrade to 5.7, but the changes
->   are important and separate change has higher chance to be
->   noticed
-> * it's highly recommended to read:
->   http://blog.qt.io/blog/2016/01/13/new-agreement-with-the-kde-free-qt-foundation/
->   to find out how you're affected check which files/tools are
->   included in your builds
->   OE @ ~/projects/qt-project/qtwebengine $ git grep QT_BEGIN_LICENSE | sed 's/^[^:]*://g' | sort | uniq -c
->      11 ## $QT_BEGIN_LICENSE:GPL-EXCEPT$
->      67 ** $QT_BEGIN_LICENSE:BSD$
->      17 ** $QT_BEGIN_LICENSE:FDL$
->      61 ** $QT_BEGIN_LICENSE:GPL-EXCEPT$
->     261 ** $QT_BEGIN_LICENSE:LGPL$
-> * change in chromium's LICENSE is only copyright year update
 
-With few more smaller fixes this finally builds (including nativesdk).
+> On Feb 19, 2016, at 5:32 AM, Otavio Salvador =
+<otavio.salvador@ossystems.com.br> wrote:
+>=20
+> On Fri, Feb 19, 2016 at 1:46 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>>> On Feb 18, 2016, at 10:33 AM, Fabio Berton =
+<fabio.berton@ossystems.com.br> wrote:
+>>> I noticed that a few days ago were added some python-flask recipes.
+>>>=20
+>>> I've been maintaining a layer with python-flask recipes, hosted here
+>>> =
+http://code.ossystems.com.br/gitweb?p=3Dmeta-python-flask.git;a=3Dsummary
+>>>=20
+>>> There are recipes in meta-python-flask that were added to =
+meta-python
+>>> and I want to simplify maintenance and avoid duplicate recipes.
+>>>=20
+>>> So, do I send recipes from meta-python-flask to meta-python or we =
+move all
+>>> python-flask recipes from meta-python to meta-python-flask, using a =
+layer
+>>> only for Flask web framework?
+>>=20
+>> Here is a hierarchy one can envision
+>>=20
+>> 1. Core python runtime support - Oe-core
+>> 2. python extended modules and infrastructure - meta-python
+>>=20
+>> now if you think this framework is quite commonly used and is kind of =
+core
+>> to python world, its fine to have it in meta-python, if you think its
+>> too specific then move the common packages to meta-python
+>> and maintain it as a separate layer
+>=20
+> Agreed but this is a specific framework which is not 'core' to python.
+> Do you think we ought to merge those on meta-python or keep them split
+> out?
 
-Latest version of all these patches are in jansa/master-5.7.
 
-Fixes for currently used 5.6 version are already in master-next (and
-jansa/master).
+Just review it and common pieces can move to meta-python, so you can
+remove unnecessary recipe copies in multiple layers in future. I don=E2=80=
+=99t
+have a strong opinion on the framework itself. It can probably stay in
+its own layer if its not so commonly used.
 
-Regards,
-
---45Z9DzgjV8m4Oswq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+--Apple-Mail=_BC277CC3-40D7-45A2-AF37-C836EE9A34AC
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlbHVp4ACgkQN1Ujt2V2gBxrlQCgmLMXRaYNYv6sHH2CVBbyKllL
-yX0AoLFLvDCRpUWXbpyKXj0BRxZbIxyX
-=l0Ti
+iEYEARECAAYFAlbHWMIACgkQuwUzVZGdMxSW1ACdF/096UqMjC0ms9HzN5H+zfRM
+0rIAn1JJm2jFT/AJ9Ybr1lCvO3a4qHx5
+=+YwO
 -----END PGP SIGNATURE-----
 
---45Z9DzgjV8m4Oswq--
+--Apple-Mail=_BC277CC3-40D7-45A2-AF37-C836EE9A34AC--
