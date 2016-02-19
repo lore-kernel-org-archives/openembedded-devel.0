@@ -1,54 +1,30 @@
-Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 3527177216
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id DE9F977216
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 15:22:43 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id g62so81445307wme.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 07:22:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:references:in-reply-to:subject:date:message-id
-	:mime-version:content-type:content-transfer-encoding:thread-index
-	:content-language;
-	bh=3BVLB7zIFfryhUroza1Bd+didVkuzwIdM2yoT/N9CCg=;
-	b=foqC8YKfbYqMExEWfw8pJ6qmBszT2DNq8+AI2ML9Fc10ScwqG8VKZVZ3jk/g4+egm8
-	Rc3QI+epC8X9q9M8rkAwDx1inZgDJiIMQ4nOaMjPXdJrnEZsEMUot2nYhoP3aHyEyZ7P
-	I8EstDYfSY2OV+zdOKbSjgUTo4tk11wtcWA0rU920LU+Lgcw9Tgn18sNOH4D+pXYo26o
-	hEyD+09Z2SifOh0GBOtWXce01R8lVW4GdgkyDvejzB+r61puH2cutennUcjFlhLb3YSi
-	etaS1p9Xj9VyhJ7VE0TjKyn6JX9f0a8tOxLalTgmCPjKS775r5daMaRmrZL7Mcj+zUMw
-	vW0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:references:in-reply-to:subject:date
-	:message-id:mime-version:content-type:content-transfer-encoding
-	:thread-index:content-language;
-	bh=3BVLB7zIFfryhUroza1Bd+didVkuzwIdM2yoT/N9CCg=;
-	b=hD3TqUrS9G4/V1NWyn25C9FZRTss8GVC9jL38Jtk5IIwXi2H8Kul7w++HssNF2nify
-	RbDgmu9IfhrTzEj+0YupeRF+OI6P2iT6dwFxTmqYxLtaLOpMkpYnygPSPeq1UOSlMpUY
-	0TgljP0o8yIwHxh6SZs6DA1qzAIVlnBZiogNEMZB/AlUTKLUVEE/StfKXv3HqcPi9suI
-	e/ZEFyBk6RP13B0M7dwfLo5k7VKvBuS0tr3X6RZSyP0mB8DVAXViMRQHHO/8lOKD1Uwd
-	ilaoRTQA4dnYLnoy+qCLAmiDs5FqXUUxrH/r2z36xQnE12bm/NEVWzgMZaO+nIUua3x3
-	xtMg==
-X-Gm-Message-State: AG10YOTN2n3q7F8q2aFC93m/WSRADCwirr2fgX3RcouIc6pQ62ejwrT6dBM/rdG58eAhqA==
-X-Received: by 10.28.184.78 with SMTP id i75mr10214666wmf.22.1455895364367;
-	Fri, 19 Feb 2016 07:22:44 -0800 (PST)
-Received: from svenpc ([2001:470:1f0a:1031:5888:9e15:628f:21ea])
-	by smtp.gmail.com with ESMTPSA id
-	cb2sm11712057wjc.16.2016.02.19.07.22.43
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 19 Feb 2016 07:22:43 -0800 (PST)
-From: "Sven Ebenfeld" <sven.ebenfeld@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <00e901d16b08$cbe296b0$63a7c410$@gmail.com>
-	<CAP9ODKqEBBAfmYR67JRFRyuUQ5VhB7-1pR__tMbB8pdWun815A@mail.gmail.com>
-In-Reply-To: <CAP9ODKqEBBAfmYR67JRFRyuUQ5VhB7-1pR__tMbB8pdWun815A@mail.gmail.com>
-Date: Fri, 19 Feb 2016 16:23:18 +0100
-Message-ID: <017001d16b29$76267cc0$62737640$@gmail.com>
-MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 15.0
-Thread-Index: AQIsMuN4yF6V7mhHNNvimtHXYUonVwGr7s3onnCNgJA=
-Cc: fabio.berton@ossystems.com.br
-Subject: Re: [meta-python] Python Flask recipes + cve-searching during package creation
+	Fri, 19 Feb 2016 15:43:42 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u1JFhf5D020102; Fri, 19 Feb 2016 09:43:41 -0600
+Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2016021909434184-1165484 ;
+	Fri, 19 Feb 2016 09:43:41 -0600 
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 19 Feb 2016 17:43:25 +0200
+Message-Id: <cover.1455895912.git.adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.7.1
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 02/19/2016 09:43:42 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 02/19/2016 09:43:42 AM,
+	Serialize complete at 02/19/2016 09:43:42 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-02-19_08:, , signatures=0
+Cc: markus.lehtonen@linux.intel.com
+Subject: [OE-core][PATCH v6 0/4] IPK signing for the gpg_sign module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,22 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Feb 2016 15:22:44 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Language: de
+X-List-Received-Date: Fri, 19 Feb 2016 15:43:43 -0000
 
-> 
-> Could you try:
-> 
-> git clone http://code.ossystems.com.br/meta-python-flask
-> 
-> It should just work ;-)
+This patch series extends the gpg_sign module to support ipk signing.
 
-Thx, that works  :)
+v6 implements Markus' feedback. The most notable change is the sign_ipk
+and detach_sign merger, as they were almost identical in functionality.
+This also meant a refactoring for detach_sign and a bug fix for the
+STDIN file descriptor introduced in gpg > 2.1.
 
-Cheers,
-Sven
+Technically that STDIN bug is a feature (meh) of gpg >2.1 which breaks
+existing behaviour so we have to work around it i.e. check the gpg
+version and use the loopback interface. This means that gpg-agent to
+which gpg >2.1 always connects needs to be running permanently.
+
+Ioan-Adrian Ratiu (4):
+  gpg_sign: add local ipk package signing functionality
+  gpg_sign: detach_sign: fix gpg > 2.1 STDIN file descriptor
+  gpg_sign: export_pubkey: add signature type support
+  package_manager: sign IPK package feeds
+
+ meta/classes/package_ipk.bbclass       |  5 +++
+ meta/classes/sign_ipk.bbclass          | 52 ++++++++++++++++++++++++
+ meta/classes/sign_package_feed.bbclass | 12 +++++-
+ meta/lib/oe/gpg_sign.py                | 74 +++++++++++++++++++++++++++-------
+ meta/lib/oe/package_manager.py         | 17 +++++++-
+ 5 files changed, 143 insertions(+), 17 deletions(-)
+ create mode 100644 meta/classes/sign_ipk.bbclass
+
+-- 
+2.7.1
 
 
