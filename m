@@ -1,61 +1,59 @@
 Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
-	[209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id E57D3771FC
+Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 4FDC1731B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 13:24:00 +0000 (UTC)
-Received: by mail-pa0-f48.google.com with SMTP id fy10so50352107pac.1
+	Fri, 19 Feb 2016 13:29:40 +0000 (UTC)
+Received: by mail-pf0-f175.google.com with SMTP id c10so52838432pfc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 05:24:01 -0800 (PST)
+	Fri, 19 Feb 2016 05:29:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
 	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
 	:cc:content-type;
-	bh=/bxS0AQXEze9V6txgvu5NiWWMQTc8K/WV3FulCJoFys=;
-	b=w9T0OlgzGK06qENcWszch0l41W/SPIqX5PEkFhU0mwrI2iuTqTMYF9XXgy//Ufj34G
-	BNbGJLdA0/JgbmgVlc5FGXYnFqNh1bKg+zmedbf/+9AL3Fp0PUK7dxflq7dc7hf6JHkc
-	P3SENbCCEWiXebi3f0Tt+Gy3NAAmBKH1YFg5KveeEjVS1Uexywh8AaZ29DrCQUhW7cxP
-	92OGQzf/BnqPSMdEegqohH9xInWckgqv4ZYf8oNvtdgn8aaTPH+rmvzWGjB1yj8ijYO9
-	4ZJO/YF78++cq3fp+yEu8WkhNREBk95WucSLuEo40L3iPp68QyVUCyrLot/hggVHkkLu
-	vU7w==
+	bh=1/auRwaeDa6fs8dSmhy73mU8/IF/eR5n/cC7Gqk/spQ=;
+	b=qRkkBaxwk0C94e0PU7j5FtPUVm78C/LclwryRwcSdK42oZLcJMcxmmy+rvkhWEiOAV
+	90A6u/Z7SGFOdOg45Srar9OXaNBwVsjXN9lskv11s7fLZzAIfH/Ev7VtBLzIYfgrHVsX
+	ZowPQn0ac46XNNhzmmcju9zVMGQfcKmXhA5G8aSXHXhkQcxfrB+crx/bGHc6AE1W0jm8
+	hX8cZweUWSDLGbKnNC5Sc6rDnZiImtWjtdD0l9+hxGbL83D2xE6Vc2dMooFyikv28xio
+	hfJHf3084XZUVwD8ETYdWrXEJHxk2YMg7tVB90sMj55HiD3z7dcI6c+Lv09Uspsb3YSp
+	Q9uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
 	:message-id:subject:to:cc:content-type;
-	bh=/bxS0AQXEze9V6txgvu5NiWWMQTc8K/WV3FulCJoFys=;
-	b=k4pErOlfYb+goWRzu80lP+OYl1uvcw4F1wfQ4NIDPIy9117NEbLhjSROcSE133lcIl
-	YLf69+DtE5qzSLji1N76vyFxkqvEnc4l6YDmNW5EdKix70mYbsRqlRCwUV5Sm0bsS0Vx
-	OL8w677YIbR+dBPnxL/7GYlf1PsGAkWzQ+HIBogUIsHbnmmS89j8Aufpl57jwa87hlNF
-	vpLoZePGASlytB55iSMV1zl494K6eGnBtC8wgPeHVJsiRF7BQnx9r9WW0SyykSXI+wcP
-	ZSd12XZEOG2qd1Ucbgjy9RtGzmBXojGlI9hhAWWpVs4rU9TWkjO3WrbsUZ9503jrqlpV
-	G4cw==
-X-Gm-Message-State: AG10YOTxCfIi04VtnSLG+oJ71Izi+HgNWq2nEmVmc66H+LXK0+ys5uyh2l00xJh2dUzggQ==
-X-Received: by 10.67.23.202 with SMTP id ic10mr10755385pad.127.1455888241153; 
-	Fri, 19 Feb 2016 05:24:01 -0800 (PST)
-Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com.
-	[209.85.192.172]) by smtp.gmail.com with ESMTPSA id
-	t12sm17915221pfa.54.2016.02.19.05.23.59
+	bh=1/auRwaeDa6fs8dSmhy73mU8/IF/eR5n/cC7Gqk/spQ=;
+	b=bCOGYe1Z+TBhGahfIVaUJW8vSF7K3bdzJcuYn6xd9y4bgTKD+8MjITwHRT1OILqlPt
+	RVllKhld6+EqivI0i3kNzaA7njT+RoBiuR4SIAZ8ND05UL3aPObk4SaybOXHmxXzfB/r
+	fmSAehMBM0qSYT5x9j6Q2hXKSFS4+jzzXEO2jUWcCM9NClkaRChkoHKg2Rsp1IbiJnl0
+	hZHH44FV5M3usEBd5Ks4nje+XfrggD3Fv7KbVNkotKumf5MVbO4bS2vW5juxJ9hfVs69
+	G/V2ZAk0b2CI3yNM6lM802DrZYlXwoY8QODMLsFe3cdlB6xEPkfngIOsxP4IcDKblzXu
+	NJCQ==
+X-Gm-Message-State: AG10YORdFVm1hSne1g8fjQrat42NGd09EjDcE+tzuPWuM1ZNTYrPyKfylUqmMQcKT+E8vw==
+X-Received: by 10.98.15.145 with SMTP id 17mr17907088pfp.19.1455888581872;
+	Fri, 19 Feb 2016 05:29:41 -0800 (PST)
+Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com.
+	[209.85.192.175]) by smtp.gmail.com with ESMTPSA id
+	xu1sm18049935pab.31.2016.02.19.05.29.40
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 19 Feb 2016 05:23:59 -0800 (PST)
+	Fri, 19 Feb 2016 05:29:40 -0800 (PST)
 From: Otavio Salvador <otavio.salvador@ossystems.com.br>
 X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-pf0-f172.google.com with SMTP id x65so51222708pfb.1
+Received: by mail-pf0-f175.google.com with SMTP id e127so51328893pfe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 05:23:59 -0800 (PST)
+	Fri, 19 Feb 2016 05:29:40 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.98.67.149 with SMTP id l21mr18125314pfi.112.1455888238771;
-	Fri, 19 Feb 2016 05:23:58 -0800 (PST)
-Received: by 10.67.3.163 with HTTP; Fri, 19 Feb 2016 05:23:58 -0800 (PST)
-In-Reply-To: <CABcZANmnO78wfOe6p05MdU_jZ-9SqrQOAzxrqejrLBU2AXUR0Q@mail.gmail.com>
-References: <1455815945-9857-1-git-send-email-fabio.berton@ossystems.com.br>
-	<CABcZANmnO78wfOe6p05MdU_jZ-9SqrQOAzxrqejrLBU2AXUR0Q@mail.gmail.com>
-Date: Fri, 19 Feb 2016 11:23:58 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKr2p6LispW-Hm-kbUuxJt4ZjSrB3hio9h2=58Jnid8mSg@mail.gmail.com>
-Message-ID: <CAP9ODKr2p6LispW-Hm-kbUuxJt4ZjSrB3hio9h2=58Jnid8mSg@mail.gmail.com>
+X-Received: by 10.98.12.221 with SMTP id 90mr17961410pfm.95.1455888579823;
+	Fri, 19 Feb 2016 05:29:39 -0800 (PST)
+Received: by 10.67.3.163 with HTTP; Fri, 19 Feb 2016 05:29:39 -0800 (PST)
+In-Reply-To: <CAAPZna3WT_cz9YpCaE0iueYXCYxNd0ONRCu0=yuHLcrqUdoKaw@mail.gmail.com>
+References: <CAAPZna3WT_cz9YpCaE0iueYXCYxNd0ONRCu0=yuHLcrqUdoKaw@mail.gmail.com>
+Date: Fri, 19 Feb 2016 11:29:39 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKprnnfvxjxwYc=1aZijpuD5b4oxVXdGtJPtObiCGx6ybQ@mail.gmail.com>
+Message-ID: <CAP9ODKprnnfvxjxwYc=1aZijpuD5b4oxVXdGtJPtObiCGx6ybQ@mail.gmail.com>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Fabio Berton <fabio.berton@ossystems.com.br>
-Subject: Re: [meta-oe][PATCH] fio: Remove --disable-static from EXTRA_OECONF
+Subject: Re: [meta-python] Python Flask recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,15 +66,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Feb 2016 13:24:01 -0000
+X-List-Received-Date: Fri, 19 Feb 2016 13:29:41 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Thu, Feb 18, 2016 at 6:43 PM, Christopher Larson <kergoth@gmail.com> wrote:
-> I think the convention is to add such workarounds to no-static-libs.inc,
-> not the recipe, at this time.
+Hello,
 
-For OE-Core, yes. For Meta-OE? I think the recipe is the easiest to
-notice when doing the upgrade.
+On Thu, Feb 18, 2016 at 4:33 PM, Fabio Berton
+<fabio.berton@ossystems.com.br> wrote:
+> So, do I send recipes from meta-python-flask to meta-python or we move all
+> python-flask recipes from meta-python to meta-python-flask, using a layer
+> only for Flask web framework?
+
+I am in favor of keeping Flask on its own layer as it allows for more
+control on those recipes (e.g: upgrade them) without messing up with
+meta-oe stable branches.
 
 -- 
 Otavio Salvador                             O.S. Systems
