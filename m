@@ -1,48 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E234771E2
+Return-Path: <sven.ebenfeld@gmail.com>
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id AC8B9771CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 11:03:54 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id g62so70501561wme.1
+	Fri, 19 Feb 2016 11:28:54 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id c200so70967051wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2016 03:03:56 -0800 (PST)
+	Fri, 19 Feb 2016 03:28:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=yOjMJ5zyE0JQsjiq3eA4pxFVNL731tMGEvoKAoIoXG8=;
-	b=wwkv0j9pzmekKwa87Yb7u9jFT70RuSwa44YeE+uXTOLItXsVIgwej1oTcge+sOv8cx
-	x8AyWyzfQcqtbJySn4aetEXDk6bHyTnwl8VAr7Qb4w4+ztFUsVspFJMbNmsc8y1kmOBf
-	yKmlgGkFJA4vamo1UT2BEUmuCcDwQ+EynIUbbkrdxRppakrcRoTnhxX3h1uhqL6PTgI3
-	uSTB9CvjxVMILLG625ep5R++XvgMuloC3e5FUOFeaYynnfppkrnVtq262amlb3N3z/UW
-	aYdRF9lXTGKSNXv2f5BcdrrnPinB0yN7s3OpFk1yiQP5FC2PAA6rHTKGVIQfzjTwOyG4
-	SZsw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:thread-index:content-language;
+	bh=l1NRKbggTlSt9nzYmcd9WuQvxfoVMDCf+jlnB6HpiNQ=;
+	b=wKJ3tGoEgGHTGhuGXmQfTUUp30iD55SwZPtQL0rghxzCFnyL+JjUL6nhCgpJyk7YYb
+	BV2t6pMqNDuzeeRQIEu8tqT6JCdI69ymmQccA88Byiw8DvPljuws1zqJLoMGwuekiLKI
+	+CO5H4RkcYxhdsjB1wOzvmOYH+0bjg1WYZmnfBajnRHmkDyUFw1A6eDi32GU+iQUPJou
+	/qd5zGihTxBC1fnw09zOhlaM1Vee1xb87IpIn6yGYzBVs0M4cfMDCaBCK2hn1nqQUoNA
+	gNOtdZTimQGlUqQ/sxqd2afOjsBrCBeWn1nZHBNGw0WCq1Y/nKtlmeyCxY+wZVLZBb7f
+	DqSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=yOjMJ5zyE0JQsjiq3eA4pxFVNL731tMGEvoKAoIoXG8=;
-	b=fWflJdV9kyf3Isfefp+Fzz2pvVLeDAVdFOPVANJKX/x0NNTyxZvSpTvOLcwAkuU8gE
-	mXYyIsCm2x5wVy5fqOGZYbE30hImeME0W+1JkSGr8q3TBb+ZpQEFRfGAham+t5/djO3S
-	wvvxRWfcLKCAOgW6ug6NdcGtppltj97V2uamajHG2H5NB/SBiJRWUG4gsopXW9twP1f8
-	1LFlBOOY2RBcN8mfsZyNRCF+o6kSgs2quapxwoM2TpciBmMUSqYpf1nyXpvsMr/phooY
-	y/aU0HDVpqHeUnIaco/g3J69SJ0Qvf3HhnvGoDAnq6djfNpcKkD5H7qhWSToR7hHXKlY
-	VmlA==
-X-Gm-Message-State: AG10YOTSc390dif54l5Ya0ZA7QEJDwwMn3kqO00gKMvbNdJRLQr0TYbD43w75sv/ASmedg==
-X-Received: by 10.28.65.5 with SMTP id o5mr8919092wma.75.1455879835565;
-	Fri, 19 Feb 2016 03:03:55 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:thread-index:content-language;
+	bh=l1NRKbggTlSt9nzYmcd9WuQvxfoVMDCf+jlnB6HpiNQ=;
+	b=dWMAHXSmmVGjvpiL3RAiZ7pLVI++BsdN5iXYApJRdegrh6eNu0DFsAfpRgKAANqSV7
+	qQrgwFvflLfG0tMBE1Jq4cXxG7Tr5/8wsjCc11daU6KOLhVPCMKpwv0HrL6OLI/tZEK+
+	PbHCc2mMgDqiFhSgQCWfCGFkTPivC/SfxWypKksAf6/8a3ve7tdsSsNVoAFAn8vQduGG
+	ff74XO89G8hu6ZUfJ1AdGhdeRzA1EvbnD0kL0kn+wPCg/vWUl3FkSzDRi8EpI7Hhlg89
+	gyYlYY6QvuvCYcQ89/r4bLKN/IEUIdIDfBtumHk/WHOruIq0ywfnS2mmDcZhpwgrWz5K
+	kXzw==
+X-Gm-Message-State: AG10YOSgAig55UEPoELr1xWtw6R4rK/tiY/Ee0JdDCK/qsNz+Rfn5MbyezvB591+LETJ5g==
+X-Received: by 10.28.2.68 with SMTP id 65mr8241186wmc.85.1455881335012;
+	Fri, 19 Feb 2016 03:28:55 -0800 (PST)
+Received: from svenpc ([2001:470:1f0a:1031:5888:9e15:628f:21ea])
 	by smtp.gmail.com with ESMTPSA id
-	d9sm10664503wjf.43.2016.02.19.03.03.54
+	v22sm7225231wmv.12.2016.02.19.03.28.53
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 19 Feb 2016 03:03:54 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Feb 2016 12:04:19 +0100
-Message-Id: <1455879859-3401-4-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.1
-In-Reply-To: <1455879859-3401-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1455879859-3401-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][WIP-for-5.7][meta-qt5 4/4] qtbase: remove fonts packages
+	Fri, 19 Feb 2016 03:28:53 -0800 (PST)
+From: "Sven Ebenfeld" <sven.ebenfeld@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 Feb 2016 12:29:28 +0100
+Message-ID: <00e901d16b08$cbe296b0$63a7c410$@gmail.com>
+MIME-Version: 1.0
+X-Mailer: Microsoft Outlook 15.0
+Thread-Index: AdFrCMikUIhdfgiFTSKmsc66MAMomg==
+Cc: fabio.berton@ossystems.com.br
+Subject: Re: [meta-python] Python Flask recipes + cve-searching during package creation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,92 +56,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Feb 2016 11:03:55 -0000
+X-List-Received-Date: Fri, 19 Feb 2016 11:28:58 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: de
 
-* fonts were removed from qtbase in:
-  commit c5ceabb9a1caf6b9b7615a28c3097f221772f645
-  Author: Laszlo Agocs <laszlo.agocs@theqtcompany.com>
-  Date:   Mon Aug 17 18:32:41 2015 +0200
+First I would like to mention why I added these recipes.
+Currently I'm working on my Master-Thesis for my studies in Applied IT
+Security. The subject is to implement some security scans during image
+creation.
+This work shall help to prevent rolling out vulnerable firmware images.
 
-    Purge all fonts
+One of the tasks I is trying to implement scanning vulnerability databases
+during image creation or building packages. To achieve this, I'm going to
+use the cve-search project (https://github.com/cve-search/cve-search).
+This is a quite large project with a lot of dependencies of
+python3-packages. But it gives the opportunity to search through a lot of
+databases with quite good performance.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../packagegroup-qt5-toolchain-target.bb           |  1 -
- recipes-qt/qt5/qtbase_git.bb                       | 40 ----------------------
- 2 files changed, 41 deletions(-)
+The main work is done in my own layer currently.
+(https://github.com/esven/meta-esven) But when it is working, I hope to
+include it in meta-security layer or something like that.
+Unfortunately I'm unable to get access to the meta-python-flask layer. As
+stated in the commit message, I don't know if all dependencies are fulfilled
+for the flask recipes are fulfilled when building these recipes into images.
+If you have already done these work, I would really like to benefit from
+your work and not doing it again.
 
-diff --git a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
-index cc4d4b5..eb8a740 100644
---- a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
-+++ b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
-@@ -40,7 +40,6 @@ RDEPENDS_${PN} += " \
-     ${@base_contains('DISTRO_FEATURES', 'opengl', 'qt3d-mkspecs', '', d)} \
-     ${@base_contains('DISTRO_FEATURES', 'opengl', 'qt3d-qmlplugins', '', d)} \
-     qtbase-dev \
--    qtbase-fonts \
-     qtbase-mkspecs \
-     qtbase-plugins \
-     qtbase-staticdev \
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 65c1db5..a0e9c71 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -201,14 +201,6 @@ do_configure() {
- do_install_append() {
-     install -m 0755 ${B}/bin/qmake-target ${D}/${bindir}${QT_DIR_NAME}/qmake
- 
--    ### Fix up the binaries to the right location
--    ### TODO: FIX
--    # install fonts manually if they are missing
--    if [ ! -d ${D}/${OE_QMAKE_PATH_QT_FONTS} ]; then
--        mkdir -p ${D}/${OE_QMAKE_PATH_QT_FONTS}
--        cp -d ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_QT_FONTS}
--        chown -R root:root ${D}/${OE_QMAKE_PATH_QT_FONTS}
--    fi
-     # Remove example.pro file as it is useless
-     rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro
- 
-@@ -224,38 +216,6 @@ do_install_append() {
-         ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/*.pri
- }
- 
--PACKAGES =. " \
--    ${PN}-fonts \
--    ${PN}-fonts-ttf-vera \
--    ${PN}-fonts-ttf-dejavu \
--    ${PN}-fonts-pfa \
--    ${PN}-fonts-pfb \
--    ${PN}-fonts-qpf \
--"
--
--RRECOMMENDS_${PN}-fonts = " \
--    ${PN}-fonts-ttf-vera \
--    ${PN}-fonts-ttf-dejavu \
--    ${PN}-fonts-pfa \
--    ${PN}-fonts-pfb \
--    ${PN}-fonts-qpf \
--"
--
--ALLOW_EMPTY_${PN}-fonts = "1"
--
--FILES_${PN}-fonts-ttf-vera       = "${OE_QMAKE_PATH_QT_FONTS}/Vera*.ttf"
--FILES_${PN}-fonts-ttf-dejavu     = "${OE_QMAKE_PATH_QT_FONTS}/DejaVu*.ttf"
--FILES_${PN}-fonts-pfa            = "${OE_QMAKE_PATH_QT_FONTS}/*.pfa"
--FILES_${PN}-fonts-pfb            = "${OE_QMAKE_PATH_QT_FONTS}/*.pfb"
--FILES_${PN}-fonts-qpf            = "${OE_QMAKE_PATH_QT_FONTS}/*.qpf*"
--FILES_${PN}-fonts                = "${OE_QMAKE_PATH_QT_FONTS}/README \
--                                    ${OE_QMAKE_PATH_QT_FONTS}/fontdir"
--
- RRECOMMENDS_${PN}-plugins += "${@base_contains('DISTRO_FEATURES', 'x11', 'libx11-locale', '', d)}"
- 
--sysroot_stage_dirs_append() {
--    # $to is 2nd parameter passed to sysroot_stage_dir, e.g. ${SYSROOT_DESTDIR} passed from sysroot_stage_all
--    rm -rf $to${OE_QMAKE_PATH_QT_FONTS}
--}
--
- SRCREV = "10742cf8949497b83b87133ed66ec119cb3ab08f"
--- 
-2.7.1
+I'm trying to implement cve-searching like this:
+1. build mongodb and redis as native
+2. deploy cve-search including mongodb, redis and python3-dependencies in
+native-sysroot
+3. look for previously set up databases in sstate and use them in mongodb
+and redis
+4. start mongodb and redis with bitbake build (currently don't know how to
+start it with shutting them down on bitbake shutdown) + give ability to use
+external mongodb and redis server with configuration in local.conf
+5.  for every package creation, search for known vulnerabilities using PV
+and PN variables.
+5.1. if a CVE fix has been backported, this can be ignored by adding it to a
+defineable variable or by searching through local patch commit messages.
+6. shutdown local mongodb and redis server on bitbake shutdown
+7. save updated databases in sstate
+
+I would really appreciate your feelings about this as I plan to finish this
+task until end of march 2016.
+
+Cheers,
+Sven
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
+> Behalf Of Tim Orling
+> Sent: Friday, February 19, 2016 5:58 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-python] Python Flask recipes
+> 
+> I agree with Khem on all counts and would welcome the recipes to meta-
+> python, if you so choose.
+> 
+> Regards,
+> Tim
+> 
+> > On Feb 18, 2016, at 7:46 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> >
+> >> On Feb 18, 2016, at 10:33 AM, Fabio Berton
+> <fabio.berton@ossystems.com.br> wrote:
+> >>
+> >> Hi all!
+> >>
+> >> I noticed that a few days ago were added some python-flask recipes.
+> >>
+> >> I've been maintaining a layer with python-flask recipes, hosted here
+> >> http://code.ossystems.com.br/gitweb?p=meta-python-
+> flask.git;a=summary
+> >>
+> >> There are recipes in meta-python-flask that were added to meta-python
+> >> and I want to simplify maintenance and avoid duplicate recipes.
+> >>
+> >> So, do I send recipes from meta-python-flask to meta-python or we
+> >> move all python-flask recipes from meta-python to meta-python-flask,
+> >> using a layer only for Flask web framework?
+> >
+> > Here is a hierarchy one can envision
+> >
+> > 1. Core python runtime support - Oe-core 2. python extended modules
+> > and infrastructure - meta-python
+> >
+> > now if you think this framework is quite commonly used and is kind of
+> > core to python world, its fine to have it in meta-python, if you think
+> > its too specific then move the common packages to meta-python and
+> > maintain it as a separate layer
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
