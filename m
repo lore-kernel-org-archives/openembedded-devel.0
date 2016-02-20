@@ -1,52 +1,40 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id ADE8277224
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qg0-f47.google.com (mail-qg0-f47.google.com
+	[209.85.192.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 2663F7327E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Feb 2016 13:57:46 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id a4so106215117wme.1
+	Sat, 20 Feb 2016 14:02:54 +0000 (UTC)
+Received: by mail-qg0-f47.google.com with SMTP id y89so82424847qge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Feb 2016 05:57:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=n8AscJzQkU3L7ZvMZRYWdO5b/WKnPMr1Bf7evC+sxxU=;
-	b=p/lBtqzuySJYdvvIpC1kYT+E5UolK2XuUvKg4V8pjr5og62m/sP4Ezy6DFC8ux90Xe
-	IhoPvU5d6oEo0jjiCohoFduFvt6koF5vhPFyXow6Jdh+ULCDLcKov8BBvu6wXhfrpPAC
-	DOb302ryTkxTyBbO+cRZH618XCSjnPzGuGy9fiztwYOz4N1pqc94TgY343xBq3kCIQIT
-	I7i6ZFPEFPjTwveYmisEB90dn6DZbSFozvy4grYHzUqdK9FgDmo6bX0CBkYQJLdfVF4c
-	mIuAQoB9DD1dSHT3o3XKOEQma9hSTAQ4c4fem7M88sOCBa9dNmZp6hcbJQJWqo0Yuuk3
-	/WHw==
+	Sat, 20 Feb 2016 06:02:55 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=n8AscJzQkU3L7ZvMZRYWdO5b/WKnPMr1Bf7evC+sxxU=;
-	b=h4afGbkvSUdGrZiGod32spuEo9emo+DpUs9hdimbQEBYYtu2hqE9Cn17cfEYJmNjzU
-	MSHuDpG/BDu2NEKYu32FFZc7VUO6yCFAH9qhvRgdmBtulJ/oj0PzpgocviERzerTPHRH
-	dciPwV3mUT2HtgkFoqDbuNzjvkBy/Ohb/rvm85aJukzH1Kg7UGRda55mGbIOpqj40n4R
-	t/gnCMPzS654ALXmfF4M7/RS8WftWfJKIkgCCFVu3iJULuSHbGCs2+FOPpJh+XalTRv8
-	/VXR73FQ2+9opVqCcRqSROTvEpNws6i7WHmPC4eXyonWWrqAa8TWyTPAW3p9KlSmQxlW
-	2KgA==
-X-Gm-Message-State: AG10YOTfhcXT5HbUN+JtIXIMgQ2JI/fSvLY6t5mTr5QaSFIhGeqEq/QINM9Pby4vvTGvfA==
-X-Received: by 10.28.9.71 with SMTP id 68mr2690344wmj.33.1455976667089;
-	Sat, 20 Feb 2016 05:57:47 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	ct2sm15835319wjb.46.2016.02.20.05.57.45
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=UmB5XvumUXzyKOr8jasftJ03Bdu7HI5JAVnbpytQ+Pg=;
+	b=gIHWjCKOTn4/Qwtg46TMwYgwWSaTMgcn5QJIqAyGP3Aiew7PBnAeUShfRxH3jdmYlE
+	nHL/hqTrcZmdrPI2XQrN5oimZiChGnTLuQ7Ko+SyvZzRxRjnn1979dLtWa4suJ/a85KE
+	PO4QG3+qiABvSSOe8XOfttKB3RlvCf4SBOdOVD3hybOYfn7lJrTQ6pRl4qn09vmx4ix/
+	QqbeJH9VOkA85eozxEj1eCneZhsLFxf/S9L9u3frxcDWHbhk11rR6b/Ik1i8vTr5Mwtx
+	NUjaUGdD4j1BCTBEy+zka/dJHkjqLekPUVZ32bXLkb5deJ0mqTZ9v5GqjZlsi/4airJA
+	B5MQ==
+X-Gm-Message-State: AG10YOQfXK512gQd4NbA7eK4AgFl3TXA7T3BmklQOdjGsBDO81bL1haPrBkgJqmtKtDGdQ==
+X-Received: by 10.140.85.133 with SMTP id n5mr23404067qgd.32.1455976975293;
+	Sat, 20 Feb 2016 06:02:55 -0800 (PST)
+Received: from localhost ([177.127.4.90])
+	by smtp.gmail.com with ESMTPSA id y99sm3004069qge.3.2016.02.20.06.02.51
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 20 Feb 2016 05:57:45 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sat, 20 Feb 2016 14:58:24 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160220135824.GC2589@jama>
-References: <1455736575-2561-1-git-send-email-raj.khem@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1455736575-2561-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-oe][PATCH] hostapd: Upgrade to 2.5
+	Sat, 20 Feb 2016 06:02:53 -0800 (PST)
+Received: by localhost (sSMTP sendmail emulation);
+	Sat, 20 Feb 2016 12:02:48 -0200
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Sat, 20 Feb 2016 12:02:45 -0200
+Message-Id: <1455976966-32140-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.7.1
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe PATCH v2 1/2] dt: Add 18.32 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,86 +47,297 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Feb 2016 13:57:46 -0000
-X-Groupsio-MsgNum: 60050
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="CblX+4bnyfN0pR09"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 20 Feb 2016 14:02:55 -0000
 
---CblX+4bnyfN0pR09
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This includes the version 18.32; this release has been taken from the
+Fedora package repository at:
 
-On Wed, Feb 17, 2016 at 11:16:15AM -0800, Khem Raj wrote:
-> Change-Id: I8e4a44297492b213dd1001d8b1499864e95b17c2
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+    http://pkgs.fedoraproject.org/git/rpms/dt.git
 
-You're few months late:
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
 
-commit fcb7b50851884264dbd9764ba9781ba0b84900e7
-Author:     fan.xin <fan.xin@jp.fujitsu.com>
-AuthorDate: Mon Dec 7 14:43:16 2015 +0900
-Commit:     Martin Jansa <Martin.Jansa@gmail.com>
-CommitDate: Fri Dec 18 12:43:22 2015 +0100
+Changes in v2:
+- Drop manpage patch (had new line issues and is not worth it)
+- Fix missing shell dependency (tcsh)
 
-    hostapd: upgrade 2.4 -> 2.5
+ ...op-using-relative-path-for-scsilib.c-link.patch | 29 +++++++
+ .../recipes-devtools/dt/dt/Use-tcsh-shell.patch    | 92 ++++++++++++++++++++++
+ .../dt/dt/dt-default-source-define.patch           | 18 +++++
+ .../dt/dt/dt-wformat-security.patch                | 48 +++++++++++
+ meta-oe/recipes-devtools/dt/dt_18.32.bb            | 47 +++++++++++
+ 5 files changed, 234 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/dt/dt/Stop-using-relative-path-for-scsilib.c-link.patch
+ create mode 100644 meta-oe/recipes-devtools/dt/dt/Use-tcsh-shell.patch
+ create mode 100644 meta-oe/recipes-devtools/dt/dt/dt-default-source-define.patch
+ create mode 100644 meta-oe/recipes-devtools/dt/dt/dt-wformat-security.patch
+ create mode 100644 meta-oe/recipes-devtools/dt/dt_18.32.bb
 
-> ---
->  .../recipes-connectivity/hostapd/{hostapd_2.4.bb =3D> hostapd_2.5.bb}  |=
- 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-connectivity/hostapd/{hostapd_2.4.bb =3D> hostapd=
-_2.5.bb} (90%)
->=20
-> diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.4.bb b/meta-o=
-e/recipes-connectivity/hostapd/hostapd_2.5.bb
-> similarity index 90%
-> rename from meta-oe/recipes-connectivity/hostapd/hostapd_2.4.bb
-> rename to meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
-> index 901c7ea..e9158ca 100644
-> --- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.4.bb
-> +++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
-> @@ -17,6 +17,8 @@ SRC_URI =3D " \
->      file://init \
->      file://hostapd.service \
->  "
-> +SRC_URI[md5sum] =3D "69f9cec3f76d74f402864a43e4f8624f"
-> +SRC_URI[sha256sum] =3D "8e272d954dc0d7026c264b79b15389ec2b2c555b32970de3=
-9f506b9f463ec74a"
-> =20
->  S =3D "${WORKDIR}/hostapd-${PV}/hostapd"
-> =20
-> @@ -41,6 +43,3 @@ do_install() {
->  }
-> =20
->  CONFFILES_${PN} +=3D "${sysconfdir}/hostapd.conf"
-> -
-> -SRC_URI[md5sum] =3D "04578f3f2c3eb1bec1adf30473813912"
-> -SRC_URI[sha256sum] =3D "6fe0eb6bd1c9cbd24952ece8586b6f7bd14ab358edfda997=
-94e79b9b9dbd657f"
-> --=20
-> 2.7.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-devtools/dt/dt/Stop-using-relative-path-for-scsilib.c-link.patch b/meta-oe/recipes-devtools/dt/dt/Stop-using-relative-path-for-scsilib.c-link.patch
+new file mode 100644
+index 0000000..ccb9a02
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dt/dt/Stop-using-relative-path-for-scsilib.c-link.patch
+@@ -0,0 +1,29 @@
++From 4cf7e16fe9b773e2e7763d4b773854eefe2aa9ab Mon Sep 17 00:00:00 2001
++From: Otavio Salvador <otavio@ossystems.com.br>
++Date: Tue, 12 Jan 2016 09:59:55 -0200
++Subject: [PATCH] Stop using relative path for scsilib.c link
++Organization: O.S. Systems Software LTDA.
++
++Upstream-Status: Pending
++
++Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
++---
++ Makefile.linux | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile.linux b/Makefile.linux
++index 78333ff..e210564 100644
++--- a/Makefile.linux
+++++ b/Makefile.linux
++@@ -129,7 +129,7 @@ scsilib.c:
++ 	    echo "Please specify OS={aix,linux,hpux,solaris,windows}"; \
++ 	    exit 1; \
++ 	fi; \
++-	ln -sf ../scsilib-$(OS).c scsilib.c
+++	ln -sf scsilib-$(OS).c scsilib.c
++ 
++ print:;
++ 		@$(PRINTER) $(PRINTFLAGS) $(ALL_CFILES)
++-- 
++2.1.4
++
+diff --git a/meta-oe/recipes-devtools/dt/dt/Use-tcsh-shell.patch b/meta-oe/recipes-devtools/dt/dt/Use-tcsh-shell.patch
+new file mode 100644
+index 0000000..0c00fdf
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dt/dt/Use-tcsh-shell.patch
+@@ -0,0 +1,92 @@
++From e3c6eb8776f659eb9e6eeccf90d785eff18ecf74 Mon Sep 17 00:00:00 2001
++From: Otavio Salvador <otavio@ossystems.com.br>
++Date: Mon, 15 Feb 2016 18:00:05 -0200
++Subject: [PATCH] Use 'tcsh' shell
++Organization: O.S. Systems Software LTDA.
++
++Upstream-Status: Pending
++
++Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
++---
++ Scripts/dta | 2 +-
++ Scripts/dtc | 2 +-
++ Scripts/dtf | 2 +-
++ Scripts/dtr | 2 +-
++ Scripts/dts | 2 +-
++ Scripts/dtt | 2 +-
++ Scripts/dtw | 2 +-
++ 7 files changed, 7 insertions(+), 7 deletions(-)
++
++diff --git a/Scripts/dta b/Scripts/dta
++index ebc7072..4f90247 100755
++--- a/Scripts/dta
+++++ b/Scripts/dta
++@@ -1,4 +1,4 @@
++-#!/bin/csh
+++#!/bin/tcsh
++ #
++ #	Script file to test asynchronous communication lines.
++ #
++diff --git a/Scripts/dtc b/Scripts/dtc
++index da69c2e..89d48c2 100755
++--- a/Scripts/dtc
+++++ b/Scripts/dtc
++@@ -1,4 +1,4 @@
++-#!/bin/csh
+++#!/bin/tcsh
++ #	%Z%%M% %I% %E%
++ #
++ #	Date:	August 7, 1990
++diff --git a/Scripts/dtf b/Scripts/dtf
++index 9f8cd87..321d261 100755
++--- a/Scripts/dtf
+++++ b/Scripts/dtf
++@@ -1,4 +1,4 @@
++-#! /bin/csh
+++#! /bin/tcsh
++ #
++ #	Script file to gather floppy disk performance data.
++ #
++diff --git a/Scripts/dtr b/Scripts/dtr
++index ddb7947..1ff5a0b 100755
++--- a/Scripts/dtr
+++++ b/Scripts/dtr
++@@ -1,4 +1,4 @@
++-#!/bin/csh
+++#!/bin/tcsh
++ #	%Z%%M% %I% %E%
++ #
++ #	Date:	August 21, 1990
++diff --git a/Scripts/dts b/Scripts/dts
++index 6b8a167..42d2312 100755
++--- a/Scripts/dts
+++++ b/Scripts/dts
++@@ -1,4 +1,4 @@
++-#!/bin/csh
+++#!/bin/tcsh
++ #	%Z%%M% %I% %E%
++ #
++ #	Date:	August 7, 1990
++diff --git a/Scripts/dtt b/Scripts/dtt
++index 36cc6bd..df19d2f 100755
++--- a/Scripts/dtt
+++++ b/Scripts/dtt
++@@ -1,4 +1,4 @@
++-#! /bin/csh
+++#! /bin/tcsh
++ #	%Z%%M% %I% %E%
++ #
++ #	Date:	August 7, 1990
++diff --git a/Scripts/dtw b/Scripts/dtw
++index 8a4ac39..c58e304 100755
++--- a/Scripts/dtw
+++++ b/Scripts/dtw
++@@ -1,4 +1,4 @@
++-#!/bin/csh
+++#!/bin/tcsh
++ #	%Z%%M% %I% %E%
++ #
++ #	Date:	August 21, 1990
++-- 
++2.1.4
++
+diff --git a/meta-oe/recipes-devtools/dt/dt/dt-default-source-define.patch b/meta-oe/recipes-devtools/dt/dt/dt-default-source-define.patch
+new file mode 100644
+index 0000000..87016ed
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dt/dt/dt-default-source-define.patch
+@@ -0,0 +1,18 @@
++Patch from http://pkgs.fedoraproject.org/git/rpms/dt.git
++
++Upstream-Status: Pending
++
++Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
++
++diff -rupN dt.v18.32.old/common.h dt.v18.32/common.h
++--- dt.v18.32.old/common.h	2013-03-01 23:52:30.000000000 +0100
+++++ dt.v18.32/common.h	2014-09-24 17:41:40.777604710 +0200
++@@ -127,7 +127,7 @@ typedef volatile slarge_t	v_slarge;
++ 
++ #endif /* defined(_WIN64) */
++ 
++-#elif defined(__GNUC__) && defined(_BSD_SOURCE) || defined(SCO) || defined(__QNXNTO__) || defined(SOLARIS) || defined(HP_UX) || defined(AIX) || defined(_NT_SOURCE) 
+++#elif defined(__GNUC__) && defined(_BSD_SOURCE) || defined (_DEFAULT_SOURCE) ||  defined(SCO) || defined(__QNXNTO__) || defined(SOLARIS) || defined(HP_UX) || defined(AIX) || defined(_NT_SOURCE) 
++ 
++ #define QuadIsLongLong
++ typedef unsigned long long int	large_t;
+diff --git a/meta-oe/recipes-devtools/dt/dt/dt-wformat-security.patch b/meta-oe/recipes-devtools/dt/dt/dt-wformat-security.patch
+new file mode 100644
+index 0000000..b6780c1
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dt/dt/dt-wformat-security.patch
+@@ -0,0 +1,48 @@
++Patch from http://pkgs.fedoraproject.org/git/rpms/dt.git
++
++Upstream-Status: Pending
++
++Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
++
++diff -rupN dt.v18.32.old/dt.c dt.v18.32/dt.c
++--- dt.v18.32.old/dt.c	2014-08-18 14:45:53.242351115 +0200
+++++ dt.v18.32/dt.c	2014-08-18 15:11:36.367719880 +0200
++@@ -4378,7 +4378,7 @@ report_error(
++ 	    (void)sprintf(dip->di_msg_buffer, "(%d): '%s', errno = %d - %s\n",
++ 			  dip->di_process_id, error_info, errno, emsg);
++ 	}
++-	syslog(LOG_ERR, dip->di_msg_buffer);
+++	syslog(LOG_ERR, "%s", dip->di_msg_buffer);
++     }
++ #endif /* defined(SYSLOG) */
++ 
++diff -rupN dt.v18.32.old/dtutil.c dt.v18.32/dtutil.c
++--- dt.v18.32.old/dtutil.c	2014-08-18 14:45:53.354350779 +0200
+++++ dt.v18.32/dtutil.c	2014-08-18 15:13:53.835307311 +0200
++@@ -5180,7 +5180,7 @@ ReportDeviceInfo (
++ 	    bp += Sprintf(bp,
++ 			  "(%d) Device name: %s\n",
++ 			   dip->di_process_id, dip->di_dname);
++-	    syslog(LOG_ERR, dip->di_msg_buffer);
+++	    syslog(LOG_ERR, "%s", dip->di_msg_buffer);
++ 	    bp = dip->di_msg_buffer;
++ # if defined(SCSI)
++ 	    if (dip->di_serial_number) {
++@@ -5193,7 +5193,7 @@ ReportDeviceInfo (
++ 			      dip->di_process_id, dip->di_device_id);
++ 	    }
++ # endif /* defined(SCSI) */
++-	    syslog(LOG_ERR, dip->di_msg_buffer);
+++	    syslog(LOG_ERR, "%s", dip->di_msg_buffer);
++ 	    bp = dip->di_msg_buffer;
++ 	    bp += Sprintf(bp,
++ 		  "(%d) Relative block number where the error occurred is " LUF ","
++@@ -5203,7 +5203,7 @@ ReportDeviceInfo (
++   	    } else {
++                 bp += Sprintf(bp, "\n");
++             }
++-	    syslog(LOG_ERR, dip->di_msg_buffer);
+++	    syslog(LOG_ERR, "%s", dip->di_msg_buffer);
++ 	}
++ #endif /* defined(SYSLOG) */
++ 
+diff --git a/meta-oe/recipes-devtools/dt/dt_18.32.bb b/meta-oe/recipes-devtools/dt/dt_18.32.bb
+new file mode 100644
+index 0000000..9688d02
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dt/dt_18.32.bb
+@@ -0,0 +1,47 @@
++SUMMARY = "Generic data test program"
++DESCRIPTION = "The Data Test Program (dt) is a generic data test program used to verify proper \
++operation of peripherals, file systems, device drivers, or any data stream supported by the \
++operating system."
++HOMEPAGE = "http://www.scsifaq.org/RMiller_Tools/dt.html"
++
++SECTION = "console/tests"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=be8bb25bbcfaa0725710d188e5152668"
++
++# Source URI taken from Fedora RPM spec file at:
++#  http://pkgs.fedoraproject.org/git/rpms/dt.git
++SRC_URI = "http://dl.dropboxusercontent.com/u/32363629/Datatest/dt-source-v${PV}.tar.gz \
++           file://dt-default-source-define.patch \
++           file://dt-wformat-security.patch \
++           file://Stop-using-relative-path-for-scsilib.c-link.patch \
++           file://Use-tcsh-shell.patch \
++"
++
++SRC_URI[md5sum] = "3054aeaaba047a1dbe90c2132a382ee2"
++SRC_URI[sha256sum] = "10d164676e918a4d07f233bcd11e4cb6bfd1052c996182cd1827ccd0c063fcc6"
++
++S = "${WORKDIR}/dt.v${PV}"
++
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++EXTRA_OEMAKE += "-f Makefile.linux \
++                 OS=linux \
++                 CFLAGS="-I.. -DAIO -DFIFO -DMMAP -D__linux__ -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -DTHREADS -DSCSI""
++
++do_compile() {
++    oe_runmake
++}
++
++do_install() {
++    install -Dm755 dt ${D}${sbindir}/dt
++    install -Dm644 Documentation/dt.man ${D}${mandir}/man8/dt.8
++
++    install -d ${D}${datadir}/dt/
++    install -d ${D}${docdir}/dt/html/
++    install -m755 Scripts/dt? ${D}${datadir}/dt/
++    install -m644 data/pattern_* ${D}${datadir}/dt/
++    install -m644 html/* ${D}${docdir}/dt/html/
++}
++
++RDEPENDS_${PN} += "tcsh"
+-- 
+2.7.1
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---CblX+4bnyfN0pR09
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlbIcP8ACgkQN1Ujt2V2gBxtUACgjnVo6bvpSFialF4GK+1rGF/5
-x6QAn063QJxYzJrKFqqzRSNZk6h2xl2H
-=V+aM
------END PGP SIGNATURE-----
-
---CblX+4bnyfN0pR09--
