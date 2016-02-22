@@ -1,34 +1,45 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by mail.openembedded.org (Postfix) with ESMTP id 31169770F9
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id EDD046FF78
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 12:47:31 +0000 (UTC)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id 5043A68A019; Mon, 22 Feb 2016 12:47:32 +0000 (GMT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	loki.analogue-micro-ltd.com
-X-Spam-Level: *
-X-Spam-Status: No, score=1.7 required=5.0 tests=ALL_TRUSTED,BAYES_20,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id D1C2268A019;
-	Mon, 22 Feb 2016 12:47:27 +0000 (GMT)
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by zeus.mlbassoc.com (Postfix) with ESMTP id 7D4BF6740886;
-	Mon, 22 Feb 2016 13:47:27 +0100 (CET)
+	Mon, 22 Feb 2016 13:08:13 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id a4so161799106wme.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Feb 2016 05:08:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=RJqZSvxU2ZuVs2EBwZP+3/T5RS9X+4AhEWUemxSdD40=;
+	b=A46UbGp/6m83Xw2d5cSvSiYDWGRBweYZvY2yZL1KdloU/l0TPwCXqmTz37LfCMkLZ2
+	N5qf1r691RlDosHEVfrTKPROuOCio6OoWBvXnON63K+oxFZ7GU6soi19BjSPD0SyjoKg
+	3xoKMCzy8dhSaypqUHPLzZes3UtsH6cc5gJz/FZztMK4D9W92LdS+S3GbOEB3lgOEdqZ
+	a+nUJy4n2LhNoQCcV3xL1YBnej0D7eUQIdClrBiHudb+OE1hUHoB3Hstq+rubvB+Y74B
+	MydibtoEp4QZpNx4FkFVRCtGuaDpEW1oBYuJUmG3UjiDQhak4G2ed1+9llkz1ecZuYon
+	TEhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=RJqZSvxU2ZuVs2EBwZP+3/T5RS9X+4AhEWUemxSdD40=;
+	b=W1bSgQoQq70ox82KrteKp+IJdfHqs5fuXPCrOoPfWdOfPF/KiikjqFKVqaMs6laNHv
+	k5q0ewH7eYn+8ZWVaWVH8OAyWcFk/K7fE6D1RcUFTC/2p6rRV3j96HjbFEiTSBOTJFnn
+	0hK3uC8z5SPcr9E+cUDsRye/Kr9r91tNCjKZHjEfTNsWpvstlzqmuD0zBl+LATGMYg6J
+	VV9MfjTg+FeRcnVHSGNhftl8KrmCeosJ/4LWAwzuwAAl41YP8N9OYd0LY2j6MBE24w/+
+	uCsrjQoAOETuSUrmFyWFkoHo0ZrWIkNXvwpP9S+hRoGhr3T8v//2D/QrNx7DPvXoCgd+
+	nDyg==
+X-Gm-Message-State: AG10YOTHsY+koPFu8d2/NUIY4/zxEGkldYiNI4+q6kpBOlIQ4gSQzWqnsdyiAoZU2dHjKw==
+X-Received: by 10.194.71.46 with SMTP id r14mr31257872wju.100.1456146493896;
+	Mon, 22 Feb 2016 05:08:13 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	n131sm20984669wmf.9.2016.02.22.05.08.12
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 22 Feb 2016 05:08:13 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <56CAE338.7040002@mlbassoc.com>
-	<CA+chaQfxh9R_EN8XSsrPGCv4OsQ31jSTV+EYsFHqJ=thipjAKQ@mail.gmail.com>
-	<56CAE68F.4000102@mlbassoc.com> <56CAFFD2.6090304@siemens.com>
-From: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <56CB035F.9060008@mlbassoc.com>
-Date: Mon, 22 Feb 2016 13:47:27 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
-MIME-Version: 1.0
-In-Reply-To: <56CAFFD2.6090304@siemens.com>
-Subject: Re: [meta-browser] ARM support in Chromium
+Date: Mon, 22 Feb 2016 14:09:04 +0100
+Message-Id: <1456146544-32503-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.1
+Subject: [PATCH][meta-filesystems] yaffs2-utils: Blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,49 +52,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2016 12:47:32 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 22 Feb 2016 13:08:14 -0000
 
-On 2016-02-22 13:32, Pascal Bach wrote:
->
->
-> Am 22.02.2016 um 11:44 schrieb Gary Thomas:
->> On 2016-02-22 11:32, Martin Jansa wrote:
->>> Yes it can, because cortex-a7 is armv7a.
->>
->> My build failed listing the board as not compatible
->>    ERROR: Nothing PROVIDES 'chromium'
->>    ERROR: chromium was skipped: incompatible with machine teton-p0381 (not in COMPATIBLE_MACHINE)
->
-> I think it might be worth to have a look at your MACHINEOVERRIDES variable.
-> bitbake -e should be of assistance here.
->
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Good pointer - the ARM architecture is being set to armv7ve, not armv7a
-
-This was changed (by Martin Jansa) in Poky commit c6a19917ec5350cdfc4053d14462609782613bbc
-
-I suppose a patch to the chromium recipe to allow armv7ve is in order.
-
->>
->>> On Mon, Feb 22, 2016 at 11:30 AM, Gary Thomas <gary@mlbassoc.com> wrote:
->>>
->>>> A recent change to the chromium recipe restricts it to only
->>>> armv6 and armv7a.  I've built (and successfully run) previous
->>>> versions of chromium on my LS102x board which is cortexa7hf.
->>>> It's not clear to me what arm revision that works out to be
->>>> (where does one look for this info?) but I'd like to see if
->>>> chromium can still be used on my board?
->>>>
->>>> Thanks for any pointers
->>
->
-
-
+diff --git a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
+index 0e1e460..b6cf17a 100644
+--- a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
++++ b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
+@@ -33,3 +33,6 @@ do_install() {
+ }
+ 
+ BBCLASSEXTEND = "native"
++
++# http://errors.yoctoproject.org/Errors/Details/35140/
++PNBLACKLIST[yaffs2-utils] ?= "BROKEN: error: unknown type name 'u8'"
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+2.7.1
+
 
