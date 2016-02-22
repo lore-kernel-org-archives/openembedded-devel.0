@@ -1,52 +1,62 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f182.google.com (mail-io0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id C6A4276DF3
+Return-Path: <anders@chargestorm.se>
+Received: from mail-lb0-f175.google.com (mail-lb0-f175.google.com
+	[209.85.217.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 357C375C51
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 09:52:54 +0000 (UTC)
-Received: by mail-io0-f182.google.com with SMTP id g203so171389706iof.2
+	Mon, 22 Feb 2016 10:04:53 +0000 (UTC)
+Received: by mail-lb0-f175.google.com with SMTP id bc4so78898817lbc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 01:52:56 -0800 (PST)
+	Mon, 22 Feb 2016 02:04:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=Wc9Ftkdna32jBo+Pfn07cp9oXKMIQIkExQwUF/6h+Gk=;
-	b=CltJFFCXz0Hkl0dU4WSeK+fKCdBP1kLnWlRpTprCoLG5xrI0wvdEvjjkl76OsKhcij
-	QqT/3f56yt5sQMs6S5sutF9kFgnd+CMpEMcjn0CbcsGJJrmXSPLRoDStclUBd4tuZaw1
-	UYDouBMqPj34kSTAXrG6X4j0c77ka8KdP87JMiLe8g6KUj74AZnmBh23skV/W55Vaful
-	D2q9YbOxN8q4lBE4b92jtmyHIFd6PGp+ZZeL96M4yDu4fsgHD759ZYctNLQomz0Aj5W8
-	nXH++QAPoR/C8SWzUAs5Vnypco0Q6RFlAHmUQzXWipeGzN9S1lbLXoFN7uzoNf1DLsnV
-	1Okg==
+	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:organization:user-agent;
+	bh=iJ9km/P60vhnuUkLicwF4tLiGfXcNuNamSYZcnAbOkA=;
+	b=hGv5cRXnbZlDB2q8jIqPceNinFp2mMDtTewmS7XE+RqpUVg2VmXrd1c9ZyVvEHbM1x
+	12+NwYU1ZP8uEywBm7Ear3h2+iQZzdkI4O1fSFhKdq6gLNSNOwmXBgJRvq5goVGWxlxC
+	UMzXO36kZLA5EDyXJPGbRrVDzqXpi3DCsKY6xim6vXzYFqWsgf+UAroMSurawhYpbq+e
+	j4U0HO1sdfSrnKv33aFrFdVVLCpxJM5tRV627R5xH6FNvjPAz1kDM+xLMLNJMRktU42b
+	2TY40xx01+0oc6syjTj7epuw/I8Uev1SZI9n9JLzTZzhq2io1M+9MwnnyIq29y43Cu3x
+	Ij1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=Wc9Ftkdna32jBo+Pfn07cp9oXKMIQIkExQwUF/6h+Gk=;
-	b=ff7YFlgPksHhsyaPm9a7eGoOm0b9Hd9TkP4u76YYl2aHL0bWatzKTbOiVKJVFPRYoK
-	h/thKPUO3QnosxSvQcADEWkOT3b29v6foNetMXojPDnkLAtoz9JETBE6Tg0jWpr1rGNo
-	UbFF62OC3+0l0vM/KM5bTautrDQk62mYortXRNbUcqNkXHKX5UjRX7AujAWN60QLX28p
-	JWygVvoV/1f0kc+eejx0Eh1xmVe1BGMjvg848sfYi1NbCwvJ0hnpwuMoOpXkR/ZhGlHi
-	NEw3PfH5KA3Tp34QUgpdULbfDUSF+zwO6PM0fO6XEDu/UfTHmuetcmcsNIFf/0EgkAM2
-	k+Ug==
-X-Gm-Message-State: AG10YOTjrKoYp0tBEW48sLvmQEo/B+6aVT4xHt18NLtIpmXDfi8pp0HA88haWHBmjjO5tYvaUn8FINvcYxqXcPkX
-X-Received: by 10.107.164.15 with SMTP id n15mr24880915ioe.148.1456134775689; 
-	Mon, 22 Feb 2016 01:52:55 -0800 (PST)
+	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
+	:references:mime-version:content-type:content-disposition
+	:in-reply-to:organization:user-agent;
+	bh=iJ9km/P60vhnuUkLicwF4tLiGfXcNuNamSYZcnAbOkA=;
+	b=Too/CgYmMMYMPrSFpmh0PPu7IX/4dwIo+q4l7PsBdzMj+aUQ2xHvMkdz3f0Irr4PWM
+	Z1EH3gLS4UgSR1wAZ8A9tRvMHvOqUoBRV9QaTH2beLNwTDXjvkLz+ZDyMTql8MW+CY+J
+	LJwlZLk5PZ/OXRzlUiZ45LKROFt8XqW7OJSFIhol7JMK+XuZMH9iTghUvw38cbU09V6e
+	A/xuITUobHEC/zC+FkR5VBHriq0E7wuTH82n9ZQQs3VboJXwzfso/awqOlaBCYU4w0yb
+	hqDmUri9XfWYtt3b5KBnGVCzIk4CDgRAaY8pOImXBei4jcJ+NLO/ZvLX/b/feptZwn3I
+	WHdw==
+X-Gm-Message-State: AG10YOTPHaJYc4QK2SVTJ7Nb6LHlZ0wzir0ew5GDHec5+GUwRnXrT92uu0jPNoASuxAYxQ==
+X-Received: by 10.112.14.39 with SMTP id m7mr9950155lbc.20.1456135493546;
+	Mon, 22 Feb 2016 02:04:53 -0800 (PST)
+Received: from ad.chargestorm.se (213-64-219-84-no126.business.telia.com.
+	[213.64.219.84])
+	by smtp.gmail.com with ESMTPSA id i2sm3111053lfd.43.2016.02.22.02.04.52
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 22 Feb 2016 02:04:52 -0800 (PST)
+Date: Mon, 22 Feb 2016 11:04:51 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160222100451.GA5300@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <CAAPZna3WT_cz9YpCaE0iueYXCYxNd0ONRCu0=yuHLcrqUdoKaw@mail.gmail.com>
+	<6E3439D2-FEE9-4286-88C5-0D7E3E2AF4B2@gmail.com>
+	<CAP9ODKpXkzdSki8exzpbge08Uns1M3rQcc2C1UTPGpuA-WUKOQ@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.107.162.70 with HTTP; Mon, 22 Feb 2016 01:52:36 -0800 (PST)
-In-Reply-To: <1456094688.28376.178.camel@linuxfoundation.org>
-References: <1455815945-9857-1-git-send-email-fabio.berton@ossystems.com.br>
-	<CABcZANmnO78wfOe6p05MdU_jZ-9SqrQOAzxrqejrLBU2AXUR0Q@mail.gmail.com>
-	<1456050629.28376.160.camel@linuxfoundation.org>
-	<CA+chaQfOYEfP=h8U1_Q7FXLUKuqvZ=o967=5vSVf3Phqag7yyA@mail.gmail.com>
-	<1456094688.28376.178.camel@linuxfoundation.org>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 22 Feb 2016 09:52:36 +0000
-Message-ID: <CAJTo0La0=+naQJYaoZdkKx+rvy218P5WjeZ4b9P2Kfm0KrMSMQ@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Fabio Berton <fabio.berton@ossystems.com.br>
-Subject: Re: [meta-oe][PATCH] fio: Remove --disable-static from EXTRA_OECONF
+In-Reply-To: <CAP9ODKpXkzdSki8exzpbge08Uns1M3rQcc2C1UTPGpuA-WUKOQ@mail.gmail.com>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-python] Python Flask recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,21 +69,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2016 09:52:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 22 Feb 2016 10:04:54 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 21 February 2016 at 22:44, Richard Purdie <
-richard.purdie@linuxfoundation.org> wrote:
+* Otavio Salvador <otavio.salvador@ossystems.com.br> [160219 14:32]:
 
-> I'd note that if we had a way to know if a recipe was really autotools
-> or just acts a bit like it, it would help a lot...
->
+> On Fri, Feb 19, 2016 at 1:46 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> >> On Feb 18, 2016, at 10:33 AM, Fabio Berton <fabio.berton@ossystems.com.br> wrote:
+> >> I noticed that a few days ago were added some python-flask recipes.
 
-Something I've been meaning to do for a long time is review everything that
-is using autotools but isn't really autotools, and stop them using
-autotools.  For example, cmake.bbclass was inheriting autotools.bbclass and
-only using the autotools_do_install function, which is a glorified "make
-install".
+> >> I've been maintaining a layer with python-flask recipes, hosted here
+> >> http://code.ossystems.com.br/gitweb?p=meta-python-flask.git;a=summary
 
-Ross
+> >> There are recipes in meta-python-flask that were added to meta-python
+> >> and I want to simplify maintenance and avoid duplicate recipes.
+
+> >> So, do I send recipes from meta-python-flask to meta-python or we move all
+> >> python-flask recipes from meta-python to meta-python-flask, using a layer
+> >> only for Flask web framework?
+
+> > Here is a hierarchy one can envision
+
+> > 1. Core python runtime support - Oe-core
+> > 2. python extended modules and infrastructure - meta-python
+
+> > now if you think this framework is quite commonly used and is kind of core
+> > to python world, its fine to have it in meta-python, if you think its
+> > too specific then move the common packages to meta-python
+> > and maintain it as a separate layer
+
+> Agreed but this is a specific framework which is not 'core' to python.
+> Do you think we ought to merge those on meta-python or keep them split
+> out?
+
+I'd lean towards merging them in meta-python.
+
+Currently (according to the layerindex) we have python-flask in:
+* meta-virtualization
+* meta-uav
+* meta-python
+
+and if I understood your other email correct, there's also your
+meta-python-flask layer.
+
+I'd think that this makes flask used enough to warrant having it
+directly in meta-python.
+
+Cheers,
+Anders
+
+-- 
+Anders Darander, Senior System Architect
+ChargeStorm AB / eStorm AB
 
