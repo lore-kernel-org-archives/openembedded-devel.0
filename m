@@ -1,30 +1,25 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id E0AE260017
+Return-Path: <prvs=8538b410b=Richard.Leitner@skidata.com>
+X-Greylist: delayed 620 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 22 Feb 2016 14:52:55 UTC
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id E72E7771AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 14:42:31 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	u1MEgUsD028466; Mon, 22 Feb 2016 14:42:30 GMT
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id aUJc4eRt3i2w; Mon, 22 Feb 2016 14:42:29 +0000 (GMT)
-Received: from hex ([192.168.3.34]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	u1MEgPuI028462
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
-	Mon, 22 Feb 2016 14:42:26 GMT
-Message-ID: <1456152145.28376.196.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: openembedded-devel@lists.openembedded.org, Martin Jansa
-	<martin.jansa@gmail.com>
-Date: Mon, 22 Feb 2016 14:42:25 +0000
-In-Reply-To: <1456146625-10100-5-git-send-email-Martin.Jansa@gmail.com>
-References: <1456146625-10100-1-git-send-email-Martin.Jansa@gmail.com>
-	<1456146625-10100-5-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: Evolution 3.16.5-1ubuntu3.1 
-Mime-Version: 1.0
-Subject: Re: [PATCH][meta-networking 5/5] dovecot: Blacklist
+	Mon, 22 Feb 2016 14:52:55 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AqgUAJQdy1asEApK/2dsb2JhbABEGoQMbQEFsyuFD4QHI4VqAoIIAQEBAQEBgQELQQEBAwkEg28BAQSBCQsNCwklDwJGBg0IAogkLLd6AQEBBwIegh+Dc4Q6iG8FlweBQYQWiWNKhnsXhTuFcohXhEdqgmyBdIJSfQEBAQ
+X-IPAS-Result: AqgUAJQdy1asEApK/2dsb2JhbABEGoQMbQEFsyuFD4QHI4VqAoIIAQEBAQEBgQELQQEBAwkEg28BAQSBCQsNCwklDwJGBg0IAogkLLd6AQEBBwIegh+Dc4Q6iG8FlweBQYQWiWNKhnsXhTuFcohXhEdqgmyBdIJSfQEBAQ
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <1451912593-17168-1-git-send-email-richard.leitner@skidata.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Message-ID: <56CB1E64.90707@skidata.com>
+Date: Mon, 22 Feb 2016 15:42:44 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Icedove/38.5.0
+MIME-Version: 1.0
+In-Reply-To: <1451912593-17168-1-git-send-email-richard.leitner@skidata.com>
+X-Originating-IP: [172.16.60.30]
+Subject: Re: [meta-java][PATCH] openjdk-7: update to IcedTea 2.6.3 OpenJDK 7u91b02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,33 +32,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2016 14:42:32 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 22 Feb 2016 14:52:57 -0000
+Content-Type: text/plain; charset="windows-1252"
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2016-02-22 at 14:10 +0100, Martin Jansa wrote:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb | 2 ++
->  1 file changed, 2 insertions(+)
+Hi together,
+any updates on that patch?
+
+On 01/04/2016 02:03 PM, Richard Leitner wrote:
+> This release updates our OpenJDK 7 support in the 2.6.x series with an
+> additional October 2015 security fix from OpenJDK 7 u91. For more
+> details see [1].
 > 
-> diff --git a/meta-networking/recipes
-> -support/dovecot/dovecot_2.2.21.bb b/meta-networking/recipes
-> -support/dovecot/dovecot_2.2.21.bb
-> index 7fb8b44..f297dff 100644
-> --- a/meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb
-> +++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb
-> @@ -63,3 +63,5 @@ FILES_${PN}-staticdev += "${libdir}/dovecot/*/*.a"
->  FILES_${PN}-dev += "${libdir}/dovecot/*.so"
->  FILES_${PN}-dbg += "${libdir}/dovecot/*/.debug"
->  
-> +# http://errors.yoctoproject.org/Errors/Details/35133/
-> +PNBLACKLIST[dovecot] ?= "BROKEN: QA Issue: -dev package contains non
-> -symlink .so""
+> [1] http://blog.fuseyism.com/index.php/2015/11/17/security-icedtea-2-6-3-for-openjdk-7-released/
 
-Typo "" above causes a parsing failure with master-next.
-
-Cheers,
-
+kind regards,
 Richard
 
