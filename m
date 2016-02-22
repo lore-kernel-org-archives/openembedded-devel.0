@@ -1,33 +1,29 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by mail.openembedded.org (Postfix) with ESMTP id 66817601A4
+Return-Path: <richard@rpsys.net>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id C9E267706C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 10:44:32 +0000 (UTC)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id 8F76968A01B; Mon, 22 Feb 2016 10:44:32 +0000 (GMT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	loki.analogue-micro-ltd.com
-X-Spam-Level: *
-X-Spam-Status: No, score=1.7 required=5.0 tests=ALL_TRUSTED,BAYES_20,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id E3EB468A01B;
-	Mon, 22 Feb 2016 10:44:31 +0000 (GMT)
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by zeus.mlbassoc.com (Postfix) with ESMTP id 9726C67400EE;
-	Mon, 22 Feb 2016 11:44:31 +0100 (CET)
+	Mon, 22 Feb 2016 11:59:35 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	u1MBxYnK017879; Mon, 22 Feb 2016 11:59:34 GMT
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id Cb88aNI6LaBs; Mon, 22 Feb 2016 11:59:34 +0000 (GMT)
+Received: from hex ([192.168.3.34]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	u1MBxUPt017875
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Mon, 22 Feb 2016 11:59:31 GMT
+Received: from richard by hex with local (Exim 4.86)
+	(envelope-from <richard@rpsys.net>)
+	id 1aXp9G-0003vb-6W; Mon, 22 Feb 2016 11:59:30 +0000
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-References: <56CAE338.7040002@mlbassoc.com>
-	<CA+chaQfxh9R_EN8XSsrPGCv4OsQ31jSTV+EYsFHqJ=thipjAKQ@mail.gmail.com>
-From: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <56CAE68F.4000102@mlbassoc.com>
-Date: Mon, 22 Feb 2016 11:44:31 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
-MIME-Version: 1.0
-In-Reply-To: <CA+chaQfxh9R_EN8XSsrPGCv4OsQ31jSTV+EYsFHqJ=thipjAKQ@mail.gmail.com>
-Subject: Re: [meta-browser] ARM support in Chromium
+Date: Mon, 22 Feb 2016 11:59:16 +0000
+Message-Id: <1456142367-15064-1-git-send-email-richard.purdie@linuxfoundation.org>
+X-Mailer: git-send-email 2.5.0
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: [PATCH 01/12] gthumb: Fix to work with disabled static libs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,31 +36,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2016 10:44:33 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 22 Feb 2016 11:59:37 -0000
 
-On 2016-02-22 11:32, Martin Jansa wrote:
-> Yes it can, because cortex-a7 is armv7a.
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+---
+ meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-My build failed listing the board as not compatible
-   ERROR: Nothing PROVIDES 'chromium'
-   ERROR: chromium was skipped: incompatible with machine teton-p0381 (not in COMPATIBLE_MACHINE)
-
-> On Mon, Feb 22, 2016 at 11:30 AM, Gary Thomas <gary@mlbassoc.com> wrote:
->
->> A recent change to the chromium recipe restricts it to only
->> armv6 and armv7a.  I've built (and successfully run) previous
->> versions of chromium on my LS102x board which is cortexa7hf.
->> It's not clear to me what arm revision that works out to be
->> (where does one look for this info?) but I'd like to see if
->> chromium can still be used on my board?
->>
->> Thanks for any pointers
-
+diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb b/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb
+index a1c0347..0bf1321 100644
+--- a/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb
++++ b/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb
+@@ -17,7 +17,7 @@ GNOME_COMPRESS_TYPE="bz2"
+ SRC_URI += "file://parallel.patch"
+ 
+ do_install_append () {
+-    rm ${D}${libdir}/${BPN}/extensions/*.a
++    rm -f ${D}${libdir}/${BPN}/extensions/*.a
+ }
+ 
+ FILES_${PN} += "${datadir}/icons"
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+2.5.0
+
 
