@@ -1,45 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F57477196
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E254771F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 13:09:34 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id a4so161854417wme.1
+	Mon, 22 Feb 2016 13:09:35 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id g62so171796525wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 05:09:35 -0800 (PST)
+	Mon, 22 Feb 2016 05:09:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=8TRkRTJAVDCsybgwq6af4bNzQKZHlMmLLCevV9k5rhY=;
-	b=mLc5qJp0aE11qxzMt/fgbAcJIthN41laY+uVIaunx1x9qcnxhjbO7w09oacMoC7kAp
-	80a9uxEloyipi60S+RG4AkFVQ0aBLquLiSC6vo9xq69YWPh5Oju2KTugkplKbRr2n12d
-	6JkzuXP7e0FCj9jKHFgfVEuO6FlwosT7Q91r2JvG11YfhQ/buaL2Yniug5xmA8ZWtpP4
-	bnI29V1Ue6ofxNYJQVmR1+DDdyQ2Z36MvS++89GxYeQ3fn2AoHoG7G0RdEmMiRGC4fyk
-	B1SMraGpbLXbGEf4V3XTNE4KT6ar124AuHYlebAZcsqWG8R7IaRfDaGntL9pslbPOiT2
-	5FGw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=ZXcPhYoI77m7bG4qwiGZ1sqMe057jb7PlURmnEkVzhk=;
+	b=V0xJKofPzDiRgDZ0rBuL9KLgxRgu5lUqMl82VvP9IA42GV6vs99eO4C9KOxeKkbl/9
+	mj0hS7ytzndIvYHsgqXWUixkxM8iYwsotsQvUyl83bwp9/MwG9edmwDY0uz/CZjUg8ls
+	BgZvdkpxKF4YcG62YO36Urdp5FIDF6uLKbODleIgbbB85CFy3pWEOYRLdoUXkv8DBFLs
+	7KkteZmD3QNJK2VZecJ4ZYD6l79VRWP6GvKkMe2Z1puHY+izLnH+k4N5i1g+VtOoicUf
+	tmeLxV4RK3EPsLkTzN4ClIbt6TeExZbRHhupn/jglG/6xr9nwerqAuLgHLJrBJy8RqvB
+	v9zA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=8TRkRTJAVDCsybgwq6af4bNzQKZHlMmLLCevV9k5rhY=;
-	b=DhibOazBMJGIxwgzvARbOqFws0sqaHu66xutHHaVyOJz5po7dG5hpstE9JCu063p1y
-	KLCihL34rAW54KvTJSpYqOwUSyy0MeF8C+Gw+aWgVb/9aoz9PKqgpa83/lp0Qs/grVWx
-	H9QwRMGj0qNWO8AGveDua4y3I9cOeOgGVhM976kSIdwzbjoIXOQgPsztsYpThQ4Io8Mo
-	vog4KOKOC/m4CNUEkyvzdrA8oXANOjh7Ul5lg9k+CwYiRILMeToL9dIGrkDUaO1xkqEn
-	IRdrlf3QkTMTW6CV7+0wPGmtENAsRMT/K0uxsCPdfUoNVdKwrephQO6Dyl0PseV7Nlp/
-	nINQ==
-X-Gm-Message-State: AG10YOR/xB5znXFXfJmArMe/vUgvHkhMlZ0XpxDIpI45JNvg3nb0faDo4AaKQ0D3vRVgBQ==
-X-Received: by 10.28.180.84 with SMTP id d81mr12981020wmf.42.1456146574961;
-	Mon, 22 Feb 2016 05:09:34 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=ZXcPhYoI77m7bG4qwiGZ1sqMe057jb7PlURmnEkVzhk=;
+	b=RU0VqcJgDUeobh/NYm5+YREloBn3ImeAUI8BiHi6eUBl9EDVf9JvGLdAdD2oCXBf28
+	PlkdNDQC3Favtn6Zi9+BdWTPXQtbJTP3GGystY+OHEETTGn3GZXZJh+wGg1vk6qBBT/R
+	s7RXd3EaIlVWhxWsBSGqqdyyvqO2O/70Li8/hGoy/Vh7Jjdku+yw2XIm8HGkJWjoNRpk
+	6h3qVakBzAu7fI3JfpLKjGDzZTSn8rJwHrmgA6oMzKCxyaGU/AG0pLlGZ9mMlMYa9aeS
+	7AcFR2xTIZ/T2RvdrUFhSwd0W1N2M+ESA5lYn8OZe73RaRwTC7yELmb57K3Ub5hf+mgH
+	OiXw==
+X-Gm-Message-State: AG10YOREbd1BMeO/w6AZvo4kGs77CV4XLtnmLXyg0f0jX7K6CNAsksStIj4WC0xZyeIENA==
+X-Received: by 10.28.97.136 with SMTP id v130mr11784730wmb.20.1456146576536;
+	Mon, 22 Feb 2016 05:09:36 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	t8sm24587062wjy.41.2016.02.22.05.09.34
+	qs1sm24644930wjc.2.2016.02.22.05.09.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 22 Feb 2016 05:09:34 -0800 (PST)
+	Mon, 22 Feb 2016 05:09:35 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Feb 2016 14:10:21 +0100
-Message-Id: <1456146625-10100-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon, 22 Feb 2016 14:10:22 +0100
+Message-Id: <1456146625-10100-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.7.1
-Subject: [PATCH][meta-networking 1/5] snort: Blacklist
+In-Reply-To: <1456146625-10100-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1456146625-10100-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [PATCH][meta-networking 2/5] squid: Blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,24 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2016 13:09:34 -0000
+X-List-Received-Date: Mon, 22 Feb 2016 13:09:36 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb | 3 +++
+ meta-networking/recipes-daemons/squid/squid_3.5.7.bb | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
-index a81aa7f..7d946af 100644
---- a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
-+++ b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
-@@ -84,3 +84,6 @@ FILES_${PN}-dev += " \
-     ${libdir}/snort_dynamicrules/*.so \
-     ${prefix}/src/snort_dynamicsrc \
- "
+diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
+index 5b27d46..a94fed7 100644
+--- a/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
++++ b/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
+@@ -73,3 +73,6 @@ FILES_${PN}-doc += "${datadir}/*.txt"
+ 
+ RDEPENDS_${PN} += "perl"
+ RDEPENDS_${PN}-ptest += "make"
 +
-+# http://errors.yoctoproject.org/Errors/Details/35137/
-+PNBLACKLIST[snort] ?= "BROKEN: QA Issue: snort_preproc.pc, snort_output.pc, snort.pc"
++# http://errors.yoctoproject.org/Errors/Details/35128/
++PNBLACKLIST[squid] ?= "BROKEN: sysroots/qemuarm/usr/include/linux/in.h:28:16: error: redeclaration of 'IPPROTO_IP'"
 -- 
 2.7.1
 
