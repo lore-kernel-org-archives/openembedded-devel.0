@@ -1,45 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id D4E136FF78
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 99FF46FF78
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 13:08:34 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id b205so154775802wmb.1
+	Mon, 22 Feb 2016 13:08:36 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id c200so170309492wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 05:08:35 -0800 (PST)
+	Mon, 22 Feb 2016 05:08:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=osRVY248FBEj7+97qwcsCgJUIR7zk4pR08NZGwTsRos=;
-	b=EM3aCEW2CfVQ29QaOl1zCKr3wHdUZW2s3m70SkiXS3LTqzIGS2gjUBiIJttYv2EFDU
-	OK70q233tkDPPpY5VsH6wXrYezQVlLdR44p1fa6jAafqUCLar+iL/nTSlAdkEFLvntr9
-	tThSc7+kxshfIMV/es/tXv2CCRDXt8FwBUTTY4DIPgMXh5SfzCE0zbh6HMjgikgLM1RY
-	ZWFW+oICr5+YWbb4dCBnXkx+kD32fQqD6OPLIBfyDlndFJc7VamvNX2w4rs2iRwnWBCf
-	OUbgd6ePdZkZil2DoqWnsfVuxCB5BSwGh3G0HSSwz8/fx8ZFM7CdvedzlB0Hhzu2cT8S
-	v+iQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=p6tLyLY2TE7kvB1ndwhojloiVbE8qv1Vn/IM6kWYvwY=;
+	b=HzjK3xR3EaTZ4gmwG6ZJGtA5jf6OGkn6k4OBwZM3dP3bfaOTokWWun8fBCLboe8Vh3
+	UJ9IOtpTJnV9q82Vs9tkxrRUGoEBKfKi+QFGs0ciWe25qTcvUWY222VUEX5G55nMrImh
+	eluX5jE+Me8fGUoD4mtCtnjabJH8+CWNbXS1eNIe7EnI9w0+D44p7wfHzgqKvj1KdA8i
+	MCemNJght0vFwKQX7akIcXfv74AkcRQjKMrI3X8IFNRV+njw4gUOdZElKtBOlC+jRVss
+	PDIyT6pSNN8vTOZawe8NPM53FaW0iQtLsaIq00SIq9plNZShuTNx0kmj6+IbSyVOZmzu
+	bC5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=osRVY248FBEj7+97qwcsCgJUIR7zk4pR08NZGwTsRos=;
-	b=Z5EbOUdyum8h4iSa/g6yr3wlt36rhub5kyrS4RU0sk5J9+7r/g1MxMFMxLezzqhMWM
-	bcC6ZDN1hq+f0RIaGqAzWBU6RDZT2C280XL4ABnqMhLDoKE9vCiD5HlHTe2BHM+8Q4Nl
-	VvjIxJtGCVB05w2Ss0Ov8TZtNzdfCM+LtlpDPLYVFe3ORKlLbcyredN3j1ZDJAME7JUP
-	TTVldUm4emD4cJsz0dtogjBeduU4znKCxBxOnhI8lE4Kq5rtJzSWTia73BCU5WOUMAKn
-	ek0kMfWiGShgpioqBvN/WPCysPOEDRU8DQlYu/byUvb3MTqDKJleul3oarxBrnr8U2uJ
-	3VSQ==
-X-Gm-Message-State: AG10YORjXnVTpEQF70dUbKA+tQhVemrF222ZXJlGyQYe7qbQAo0KO/xmPRS8sxhhVWJmzg==
-X-Received: by 10.28.111.10 with SMTP id k10mr11602882wmc.86.1456146515184;
-	Mon, 22 Feb 2016 05:08:35 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=p6tLyLY2TE7kvB1ndwhojloiVbE8qv1Vn/IM6kWYvwY=;
+	b=OPlOflPNomFddSiDD3S+VqkQVTM0HuU5TBh/9/rLzhe9MOe9I4EfArMplhtadRKRi7
+	PzkFaxcLmDV2H25ykbaUuYSkCFnZ5bpQ/Gsz6Cz60Q2IEK2eMNs3+Odw2sPKN5zqTaSU
+	zjCou2vxcQ9NzMLjblxBtAaKzNLKkKyCoSUpXmm9PyzlYd9ZjzxZ2RzeyMC2lhwuOJUr
+	ezRyA0UYybKy26DwpYcKAvo9TFrRznpof68peJ1l+DeVQYcB0nWgPiqErS17htp06Eu5
+	wZ+TCWejWPh5u7iBcoJDt2gH3tC6F7cKC4uOzVwvL/7kKxHPSwJdZZZKxmvOLbzxHMtm
+	OnMQ==
+X-Gm-Message-State: AG10YOQPR6uBjg20nFNLsga9vP1aGANMLSHTsIVkQVZqavI9KyPtrABJ2kurJokqOpkZzQ==
+X-Received: by 10.28.136.19 with SMTP id k19mr11694784wmd.11.1456146516766;
+	Mon, 22 Feb 2016 05:08:36 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	a128sm21026606wmh.6.2016.02.22.05.08.34
+	ll9sm24601340wjc.29.2016.02.22.05.08.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 22 Feb 2016 05:08:34 -0800 (PST)
+	Mon, 22 Feb 2016 05:08:35 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Feb 2016 14:09:24 +0100
-Message-Id: <1456146565-3369-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon, 22 Feb 2016 14:09:25 +0100
+Message-Id: <1456146565-3369-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.7.1
-Subject: [PATCH][meta-gnome 1/2] gtk-theme-torturer: Blacklist
+In-Reply-To: <1456146565-3369-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1456146565-3369-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [PATCH][meta-gnome 2/2] gnome-themes: Blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,20 +59,20 @@ X-List-Received-Date: Mon, 22 Feb 2016 13:08:36 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-extended/gtk-theme-torturer/gtk-theme-torturer_git.bb      | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-gnome/recipes-extended/gtk-theme-torturer/gtk-theme-torturer_git.bb b/meta-gnome/recipes-extended/gtk-theme-torturer/gtk-theme-torturer_git.bb
-index b67806d..2621d15 100644
---- a/meta-gnome/recipes-extended/gtk-theme-torturer/gtk-theme-torturer_git.bb
-+++ b/meta-gnome/recipes-extended/gtk-theme-torturer/gtk-theme-torturer_git.bb
-@@ -21,4 +21,5 @@ do_install() {
- 	install -m 0755 torturer ${D}${bindir}
- }
- 
--
-+# http://errors.yoctoproject.org/Errors/Details/35132/
-+PNBLACKLIST[gtk-theme-torturer] ?= "BROKEN: gmacros.h:182:53: error: size of array '_GStaticAssertCompileTimeAssertion_2' is negative"
+diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+index e9e1b50..fec29e6 100644
+--- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+@@ -31,3 +31,6 @@ SRC_URI += "file://iconpath-option.patch \
+ SRC_URI[archive.md5sum] = "41db9e3cb25d35af2675c599e67944d1"
+ SRC_URI[archive.sha256sum] = "8601ee24c2e096593221cbd6ebdb6686042225a03c02a01c0d67c163f9febd1a"
+ GNOME_COMPRESS_TYPE="bz2"
++
++# http://errors.yoctoproject.org/Errors/Details/35130/
++PNBLACKLIST[gnome-themes] ?= "BROKEN: x86_64-linux/usr/lib/icon-naming-utils/icon-name-mapping: No such file or directory"
 -- 
 2.7.1
 
