@@ -1,24 +1,45 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id F31596E5CC
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 5737B7706E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 16:01:43 +0000 (UTC)
-Received: (qmail 14608 invoked by uid 1003); 22 Feb 2016 16:01:44 -0000
-Received: from unknown (HELO ?192.168.11.140?)
-	(philip@opensdr.com@71.171.13.83)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	22 Feb 2016 16:01:43 -0000
+	Mon, 22 Feb 2016 16:21:14 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id c200so179653894wme.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Feb 2016 08:21:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=sjUMRBGu4K7Lqa15Eg9oBr4JdJNmv2UMTxwtVJw+fYE=;
+	b=MAVqXLh1sMcbTnrf6ba2dXOi9h829jLAdorxyl5oTqQGIbZU3SzIekFfz8uEywBnoh
+	mqYRi7T27JGC3VR8020c2q3dBE0cUdYeA9moj9O9zlWQyMzg/zrFALxcniHSvmd0UUME
+	1JBBA5LkIe7yJlXoZkm0i9x7nqAfMnAqSl1G6UYhtHdp8HyGoZOFWZN16YW3C72p+ySf
+	DjpTtad2+cyAgqVMGHGcSujcd93NU67YEZattoFD7mKmDFHLUYS8nQUGwcNSOx/V9BOM
+	nfyGELlfoQQZhxP1lOecVde/qmrZsmpoQtbHwtEkiaD2h3w9hRGg81qdoEqIKENb5BTZ
+	fxag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=sjUMRBGu4K7Lqa15Eg9oBr4JdJNmv2UMTxwtVJw+fYE=;
+	b=NIlij23dWxS4Yhs2BWGJ8tC8v4knsukTBV+rC9gskv6W4wlcN8yNLVKlwtzt3bu3Zh
+	1fiFQHPAfbo+j0/FeDWwcRiGHQFlGzR5SEinZ/iYhhkmFnkKvNVujrRMHW5FEZXCm/nc
+	pGWNH4rjckOxb4TYX823G5/CJHFqbH3ELJoCTiFvKK2DihECu4V2lUonlVF1DfagOoIz
+	56fuU0w5EswVInP1Q1OOlBlpkdkT/XKaU/wQIjGXo71aKadi17daX/vlE3LtznsKeTG4
+	lMWNb3gwbT23KIo7raSGGsTPVEGnP1lvLQCPJP40KnfhXCm6dI0kJT8YhgiW9LImLZWS
+	FpAg==
+X-Gm-Message-State: AG10YOSJdaSTxQuD5zZs5kXpS1KYwcqr593vuZ65lLS2XsyL0yKJZFwhUul+8qx/gdFxJw==
+X-Received: by 10.28.51.9 with SMTP id z9mr12524819wmz.59.1456158074529;
+	Mon, 22 Feb 2016 08:21:14 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	a128sm21761052wmh.6.2016.02.22.08.21.13
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 22 Feb 2016 08:21:13 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1456146596-6976-1-git-send-email-Martin.Jansa@gmail.com>
-	<1456146596-6976-8-git-send-email-Martin.Jansa@gmail.com>
-From: Philip Balister <philip@balister.org>
-Message-ID: <56CB30E7.2010700@balister.org>
-Date: Mon, 22 Feb 2016 11:01:43 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.0
-MIME-Version: 1.0
-In-Reply-To: <1456146596-6976-8-git-send-email-Martin.Jansa@gmail.com>
-Subject: Re: [PATCH][meta-oe 08/10] zeromq, cppzmq, python-pyzmq: Blacklist, zeromq is broken
+Date: Mon, 22 Feb 2016 17:22:05 +0100
+Message-Id: <1456158125-7516-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.1
+Subject: [PATCH][WIP][meta-xfce] xfce4-vala: unbreak by telling configure new vala API version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,55 +52,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2016 16:01:44 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 22 Feb 2016 16:21:14 -0000
 
-Updating zeromq to 4.1.4 resolves this problem. I'm preparing a patch.
-Thanks for catching this!
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Philip
+diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
+index c1900e9..4bd085a 100644
+--- a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
++++ b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
+@@ -9,7 +9,7 @@ SRC_URI = "http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/
+ SRC_URI[md5sum] = "0bbb1d6e473e0fe9b335b7b1b49d8a71"
+ SRC_URI[sha256sum] = "07a8f2b7c09fcdd3d86e0c52adea3c58ca011d0142a93997a01b4af77260ae7b"
+ 
+-EXTRA_OECONF = "-with-vala-api=0.28"
++EXTRA_OECONF = "-with-vala-api=0.30"
+ 
+ FILES_${PN} += "${datadir}/vala-*/vapi"
+ 
+-- 
+2.7.1
 
-On 02/22/2016 08:09 AM, Martin Jansa wrote:
-> * http://errors.yoctoproject.org/Errors/Details/35121/
-> 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb          | 2 ++
->  meta-oe/recipes-connectivity/zeromq/zeromq_4.1.3.bb        | 3 +++
->  meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb | 2 ++
->  3 files changed, 7 insertions(+)
-> 
-> diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> index 1a59716..3c1eb26 100644
-> --- a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> +++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> @@ -17,3 +17,5 @@ do_install () {
->  PACKAGES = "${PN}-dev"
->  
->  RDEPENDS_${PN}-dev = "zeromq-dev"
-> +
-> +PNBLACKLIST[cppzmq] ?= "Depends on broken zeromq"
-> diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.3.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.3.bb
-> index 5d0e2d5..bd6c1ef 100644
-> --- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.3.bb
-> +++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.3.bb
-> @@ -28,3 +28,6 @@ do_install_ptest () {
->          install -d ${D}${PTEST_PATH}/tests
->          install -m 0755 ${B}/.libs/test_* ${D}${PTEST_PATH}/tests
->  }
-> +
-> +# http://errors.yoctoproject.org/Errors/Details/35121/
-> +PNBLACKLIST[zeromq] ?= "BROKEN: zeromq-4.1.3/src/curve_client.cpp:61:18: error: ignoring return value of 'int sodium_init()', declared with attribute warn_unused_result [-Werror=unused-result]"
-> diff --git a/meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb b/meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb
-> index b5baf82..8aeb1b6 100644
-> --- a/meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb
-> +++ b/meta-python/recipes-devtools/python/python-pyzmq_14.7.0.bb
-> @@ -22,3 +22,5 @@ do_compile_prepend() {
->      echo libzmq_extension = False >> ${S}/setup.cfg
->      echo no_libzmq_extension = True >> ${S}/setup.cfg
->  }
-> +
-> +PNBLACKLIST[python-pyzmq] ?= "Depends on broken zeromq"
-> 
 
