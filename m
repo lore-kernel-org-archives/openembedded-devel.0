@@ -1,31 +1,31 @@
 Return-Path: <richard@rpsys.net>
 Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 95FF87707F
+	by mail.openembedded.org (Postfix) with ESMTP id 828DD7707F
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 22 Feb 2016 11:59:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
 	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	u1MBxjkq017947; Mon, 22 Feb 2016 11:59:45 GMT
+	u1MBxkIO017957; Mon, 22 Feb 2016 11:59:46 GMT
 Received: from dan.rpsys.net ([127.0.0.1])
 	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id njAMrZqcSuOm; Mon, 22 Feb 2016 11:59:45 +0000 (GMT)
+	with LMTP id p-wr6JenGG-6; Mon, 22 Feb 2016 11:59:46 +0000 (GMT)
 Received: from hex ([192.168.3.34]) (authenticated bits=0)
 	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	u1MBxeKm017932
+	u1MBxhKD017933
 	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
-	Mon, 22 Feb 2016 11:59:41 GMT
+	Mon, 22 Feb 2016 11:59:44 GMT
 Received: from richard by hex with local (Exim 4.86)
 	(envelope-from <richard@rpsys.net>)
-	id 1aXp9Q-0003vg-Dk; Mon, 22 Feb 2016 11:59:40 +0000
+	id 1aXp9T-0003vl-Iu; Mon, 22 Feb 2016 11:59:43 +0000
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Feb 2016 11:59:17 +0000
-Message-Id: <1456142367-15064-2-git-send-email-richard.purdie@linuxfoundation.org>
+Date: Mon, 22 Feb 2016 11:59:18 +0000
+Message-Id: <1456142367-15064-3-git-send-email-richard.purdie@linuxfoundation.org>
 X-Mailer: git-send-email 2.5.0
 In-Reply-To: <1456142367-15064-1-git-send-email-richard.purdie@linuxfoundation.org>
 References: <1456142367-15064-1-git-send-email-richard.purdie@linuxfoundation.org>
 Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
-Subject: [PATCH 02/12] fio: Fix to work with disabled static libs
+Subject: [PATCH 03/12] mongodb: Fix to work with disabled static libs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,25 +38,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2016 11:59:47 -0000
+X-List-Received-Date: Mon, 22 Feb 2016 11:59:48 -0000
 
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
- meta-oe/recipes-benchmark/fio/fio_2.2.6.bb | 1 +
+ meta-oe/recipes-support/mongodb/mongodb_git.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-index dca0e64..69be80d 100644
---- a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-+++ b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-@@ -26,6 +26,7 @@ SRC_URI = "git://git.kernel.dk/fio.git"
- S = "${WORKDIR}/git"
- 
- EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
+diff --git a/meta-oe/recipes-support/mongodb/mongodb_git.bb b/meta-oe/recipes-support/mongodb/mongodb_git.bb
+index a91240a..6522a67 100644
+--- a/meta-oe/recipes-support/mongodb/mongodb_git.bb
++++ b/meta-oe/recipes-support/mongodb/mongodb_git.bb
+@@ -44,6 +44,7 @@ EXTRA_OESCONS = "--prefix=${D}${prefix} \
+                  --nostrip \
+                  ${EXTRA_OECONF} \
+                  mongod mongos"
 +DISABLE_STATIC = ""
  
- do_configure() {
-     ./configure ${EXTRA_OECONF}
+ scons_do_compile() {
+         ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} ${EXTRA_OESCONS} || \
 -- 
 2.5.0
 
