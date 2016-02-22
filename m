@@ -1,33 +1,52 @@
-Return-Path: <Awais_Belal@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 82E01731F8
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f182.google.com (mail-io0-f182.google.com
+	[209.85.223.182])
+	by mail.openembedded.org (Postfix) with ESMTP id C6A4276DF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 08:51:45 +0000 (UTC)
-Received: from nat-ies.mentorg.com ([192.94.31.2]
-	helo=SVR-IES-FEM-01.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1aXmDZ-0000JE-Fn from Awais_Belal@mentor.com ;
-	Mon, 22 Feb 2016 00:51:45 -0800
-Received: from EU-MBX-02.mgc.mentorg.com ([169.254.3.44]) by
-	SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) with mapi id
-	14.03.0224.002; Mon, 22 Feb 2016 08:51:44 +0000
-From: "Belal, Awais" <Awais_Belal@mentor.com>
-To: "gary@mlbassoc.com" <gary@mlbassoc.com>
-Thread-Topic: [oe] mplayer2 : focus deficiency?
-Thread-Index: AdFj8gxvGSkTjz9IQQGYVRHINI7WYQAEBmEAAlMCGqs=
-Date: Mon, 22 Feb 2016 08:51:44 +0000
-Message-ID: <2021B186DC632746BD5A3CE32F12BD28011FB8A894@EU-MBX-02.mgc.mentorg.com>
-References: <2021B186DC632746BD5A3CE32F12BD28011FB867B8@EU-MBX-02.mgc.mentorg.com>,
-	<56BB32F8.5000201@mlbassoc.com>
-In-Reply-To: <56BB32F8.5000201@mlbassoc.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.202.0.69]
+	Mon, 22 Feb 2016 09:52:54 +0000 (UTC)
+Received: by mail-io0-f182.google.com with SMTP id g203so171389706iof.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Feb 2016 01:52:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=Wc9Ftkdna32jBo+Pfn07cp9oXKMIQIkExQwUF/6h+Gk=;
+	b=CltJFFCXz0Hkl0dU4WSeK+fKCdBP1kLnWlRpTprCoLG5xrI0wvdEvjjkl76OsKhcij
+	QqT/3f56yt5sQMs6S5sutF9kFgnd+CMpEMcjn0CbcsGJJrmXSPLRoDStclUBd4tuZaw1
+	UYDouBMqPj34kSTAXrG6X4j0c77ka8KdP87JMiLe8g6KUj74AZnmBh23skV/W55Vaful
+	D2q9YbOxN8q4lBE4b92jtmyHIFd6PGp+ZZeL96M4yDu4fsgHD759ZYctNLQomz0Aj5W8
+	nXH++QAPoR/C8SWzUAs5Vnypco0Q6RFlAHmUQzXWipeGzN9S1lbLXoFN7uzoNf1DLsnV
+	1Okg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=Wc9Ftkdna32jBo+Pfn07cp9oXKMIQIkExQwUF/6h+Gk=;
+	b=ff7YFlgPksHhsyaPm9a7eGoOm0b9Hd9TkP4u76YYl2aHL0bWatzKTbOiVKJVFPRYoK
+	h/thKPUO3QnosxSvQcADEWkOT3b29v6foNetMXojPDnkLAtoz9JETBE6Tg0jWpr1rGNo
+	UbFF62OC3+0l0vM/KM5bTautrDQk62mYortXRNbUcqNkXHKX5UjRX7AujAWN60QLX28p
+	JWygVvoV/1f0kc+eejx0Eh1xmVe1BGMjvg848sfYi1NbCwvJ0hnpwuMoOpXkR/ZhGlHi
+	NEw3PfH5KA3Tp34QUgpdULbfDUSF+zwO6PM0fO6XEDu/UfTHmuetcmcsNIFf/0EgkAM2
+	k+Ug==
+X-Gm-Message-State: AG10YOTjrKoYp0tBEW48sLvmQEo/B+6aVT4xHt18NLtIpmXDfi8pp0HA88haWHBmjjO5tYvaUn8FINvcYxqXcPkX
+X-Received: by 10.107.164.15 with SMTP id n15mr24880915ioe.148.1456134775689; 
+	Mon, 22 Feb 2016 01:52:55 -0800 (PST)
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: mplayer2 : focus deficiency?
+Received: by 10.107.162.70 with HTTP; Mon, 22 Feb 2016 01:52:36 -0800 (PST)
+In-Reply-To: <1456094688.28376.178.camel@linuxfoundation.org>
+References: <1455815945-9857-1-git-send-email-fabio.berton@ossystems.com.br>
+	<CABcZANmnO78wfOe6p05MdU_jZ-9SqrQOAzxrqejrLBU2AXUR0Q@mail.gmail.com>
+	<1456050629.28376.160.camel@linuxfoundation.org>
+	<CA+chaQfOYEfP=h8U1_Q7FXLUKuqvZ=o967=5vSVf3Phqag7yyA@mail.gmail.com>
+	<1456094688.28376.178.camel@linuxfoundation.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 22 Feb 2016 09:52:36 +0000
+Message-ID: <CAJTo0La0=+naQJYaoZdkKx+rvy218P5WjeZ4b9P2Kfm0KrMSMQ@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Fabio Berton <fabio.berton@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH] fio: Remove --disable-static from EXTRA_OECONF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,58 +59,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2016 08:51:47 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 22 Feb 2016 09:52:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Gary,=0A=
-=0A=
-Anything here?=0A=
-=0A=
-BR,=0A=
-Awais=0A=
-=0A=
-________________________________________=0A=
-From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
--bounces@lists.openembedded.org] on behalf of Gary Thomas []=0A=
-Sent: Wednesday, February 10, 2016 5:54 PM=0A=
-To: openembedded-devel@lists.openembedded.org=0A=
-Subject: Re: [oe] mplayer2 : focus deficiency?=0A=
-=0A=
-On 2016-02-10 12:02, Belal, Awais wrote:=0A=
-> Hi,=0A=
->=0A=
-> The version of mplayer2 available in meta-oe is almost 2.5 years old whil=
-e there seems to be active development around it. Is there a reason OE neve=
-r moved to a newer version?=0A=
->=0A=
-> The mplayer team officially releases tarballs from its website https://ww=
-w.mplayerhq.hu/design7/dload.html while they also provide svn access throug=
-h svn://svn.mplayerhq.hu/mplayer/trunk. I believe it would be a good idea t=
-o move to one of these sources (I would prefer tar downloads myself) and us=
-e a newer more robust (probably) version of mplayer2.=0A=
->=0A=
-=0A=
-I didn't think to look anywhere other than their git tree which seems=0A=
-to be abandoned (the version we are using is the latest out there)=0A=
-=0A=
-> I will be working on a new recipe to cater this if there are no objection=
-s but I would really like to have some feedback before I do so.=0A=
-=0A=
-I've been trying to fix up what we have now that OE-core has=0A=
-abandoned libav, replacing it with a newer ffmpeg.  Maybe I'll=0A=
-give this a go myself if you'd like to wait a short while (perhaps=0A=
-by tomorrow)?=0A=
-=0A=
---=0A=
-------------------------------------------------------------=0A=
-Gary Thomas                 |  Consulting for the=0A=
-MLB Associates              |    Embedded world=0A=
-------------------------------------------------------------=0A=
---=0A=
-_______________________________________________=0A=
-Openembedded-devel mailing list=0A=
-Openembedded-devel@lists.openembedded.org=0A=
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel=0A=
+On 21 February 2016 at 22:44, Richard Purdie <
+richard.purdie@linuxfoundation.org> wrote:
+
+> I'd note that if we had a way to know if a recipe was really autotools
+> or just acts a bit like it, it would help a lot...
+>
+
+Something I've been meaning to do for a long time is review everything that
+is using autotools but isn't really autotools, and stop them using
+autotools.  For example, cmake.bbclass was inheriting autotools.bbclass and
+only using the autotools_do_install function, which is a glorified "make
+install".
+
+Ross
 
