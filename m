@@ -1,52 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id D74106FFC8
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 8964770101
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 13:26:44 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id c200so171105656wme.0
+	Mon, 22 Feb 2016 13:29:12 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id a4so162650787wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 05:26:45 -0800 (PST)
+	Mon, 22 Feb 2016 05:29:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=lXvI9Gn+0QPhALqOgP7YDqEEIoSeMS8cY4IWPZhWxWU=;
-	b=J4robiqlM8tTJPF8QaH8AKaXvtHVzY9kxqM5jCoQQx+ZjAxfoyI0MIADCc210dfP4q
-	VG94368pK353oIocKshFf4VnuMAX5/680Mm2N0qUqvVfO/MazuEqdjTICiefagXAnOrZ
-	ltsOhFwEI8UpyHPFuSZXe0yU7YEBcOhZv5oycBqXdCI2eZLrj4pHZ/bf9VTNpQsYywXm
-	UkwIoo7v2jhjKZzdFYe4TMZrEYPqtmyav3xmG5S5VnQOn62hMoSfquu8li6RQLl6w0Rl
-	WsSqxcIM4Uraidoiz7touKFofRnutKHpjHsD7xgjcFII+dVp2fb0f/0xXDtbo8IN8sIc
-	5SvQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=bbg2vQBWWcwgx+7QUe/Sdi03GNbzMfug7d1CthcIYnU=;
+	b=Ql14dk9XQnbOTdfLdQWNSbBI4YVYmeGKS4gNRIw9jBpmRAwdZsusO7mdbktuGjq/RN
+	p//QzPSm41tLAB9Sl56joEqY0qJnUnOozTq9wxQd4DxBlv+RSfowrI58lUyBpYOIsQ22
+	bXlE6H+C/WZCdBLI9NonFswwvflIu7c537WFi8q0XDWrrnNS8bFVT3vQ3mDLqXJBtwR/
+	Lv4gQ6NGorCVmMDgHd6hHwC76jGlraeisTXwxK2QjhzkZm5GYYuCJhgCuh8dIf9wqoF5
+	bAQXtiCTmMhG0s2bj9oUNQiSCyta5uOz3LPE7SyUB9Kq0ekHm5H4YfcLs+NOEqQbfqWT
+	Lx1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=lXvI9Gn+0QPhALqOgP7YDqEEIoSeMS8cY4IWPZhWxWU=;
-	b=Vlz6K4M0esLEMsAxdUZbsGA8XX+9ko9y87b3TozeSDT78NOwF+hPm0ua32wfuzk2ja
-	NuuM8RX3Slokxnrl1LhV/vG47D/Ig1q5YqDerE30CL/tYbES5M8xp0E8+hhJTiUYd/Nm
-	mdIimWW4zh/x8fUlAOoVTP1vAoq1DIChHux2rTv2cIOVBgoRX4bonC++OfRwSLV0dL1c
-	pw9x1SfcgYOcu4+/EgNlGl4VAlNrdxzyMFpeFf6pr8X88k6nqY74kEHZB7XnplE+JuMe
-	iiwA086P41zyU553ItAVL6XhFm4yEM1oltDvYsGCNTI26UV+q5qTpMbUKhNMv1Yn4b9q
-	fVGA==
-X-Gm-Message-State: AG10YOSAaufSweHnaqhXTaY876ZHbS15izyTwdB8MaSNP1iOPY+VVBT7+z0GiOdNDhudkQ==
-X-Received: by 10.194.205.8 with SMTP id lc8mr27008971wjc.177.1456147604938;
-	Mon, 22 Feb 2016 05:26:44 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=bbg2vQBWWcwgx+7QUe/Sdi03GNbzMfug7d1CthcIYnU=;
+	b=hJRcJeqyod12Z8xaHnCeg0zLzg5/k+DtrftMdtQ38i2ckf2MyjQ5kAW0ZheV7IZdh8
+	0AqlHUi2Y6MG7gQaqfNK+PxGof0hRKNybiyV7h9qCN6tJO1NG+hGTyhBMlr1sAS8pqPm
+	5b/wkqegnB/vmKEahywdTEuPSXDL+YFQlqYoVbt7cAl9W0zwEBZuU/rn7YmW77goZKuZ
+	ft6Hv8VuJ0mg53U7lVnG+70lRiJYhId/W5wxYpJg26t1xcVpH6xApOGVE5StmxFfGx+q
+	bLUkgVjPGoLH7hEY3/pliZ4T8WDdApgA1AqmlDah2zubyr9uoOHoXkL9riwktYIp8OrH
+	t7gw==
+X-Gm-Message-State: AG10YOS2B84hs2nzevG9KZ/ig1FedbCCjFKUoB4PUuZtTpSAbSXNaQ7DwjdvMDA+2DeDqQ==
+X-Received: by 10.28.54.159 with SMTP id y31mr12938022wmh.89.1456147752603;
+	Mon, 22 Feb 2016 05:29:12 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	c136sm21012140wmd.3.2016.02.22.05.26.43
-	for <openembedded-devel@lists.openembedded.org>
+	u201sm21120282wmu.11.2016.02.22.05.29.11
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 22 Feb 2016 05:26:43 -0800 (PST)
+	Mon, 22 Feb 2016 05:29:11 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 22 Feb 2016 14:27:36 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160222132736.GA6329@jama>
-References: <1455371527-11604-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
+Date: Mon, 22 Feb 2016 14:30:01 +0100
+Message-Id: <1456147801-7624-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.1
 In-Reply-To: <1455371527-11604-1-git-send-email-schnitzeltony@googlemail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH 0/4] cn/jp/kr/tw fonts
+References: <1455371527-11604-1-git-send-email-schnitzeltony@googlemail.com>
+Subject: [PATCH][meta-oe] source-han-sans-*-fonts: exclude fontconfig dependency with SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,84 +55,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2016 13:26:46 -0000
-X-Groupsio-MsgNum: 60097
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="W/nzBZO5zC0uMSeA"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 22 Feb 2016 13:29:13 -0000
 
---W/nzBZO5zC0uMSeA
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* fixes following errors reported by sstate-diff-machine.sh:
+ === Comparing signatures for task do_package_write_ipk.sigdata between qemux86copy and qemuarm ===
+ERROR: source-han-sans-cn-fonts different signature for task do_package_write_ipk.sigdata between qemux86copy and qemuarm
+runtaskdeps changed from ['fontconfigfontconfig_2.11.94.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'pseudopseudo_1.7.5.bb.do_populate_sysroot:virtual:native', 'ttf-fontssource-han-sans-cn-fonts_1.004.bb.do_package', 'ttf-fontssource-han-sans-cn-fonts_1.004.bb.do_packagedata'] to ['fontconfigfontconfig_2.11.94.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'pseudopseudo_1.7.5.bb.do_populate_sysroot:virtual:native', 'ttf-fontssource-han-sans-cn-fonts_1.004.bb.do_package', 'ttf-fontssource-han-sans-cn-fonts_1.004.bb.do_packagedata']
+/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-graphics/fontconfig/fontconfig_2.11.94.bb.do_packagedata with hash e7fb65be80d659ad30e73c7bad692456
+ changed to
+/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-graphics/fontconfig/fontconfig_2.11.94.bb.do_packagedata with hash 96542b26ecfbce93b84889ee4a2e4746
+Hash for dependent task fontconfigfontconfig_2.11.94.bb.do_packagedata changed from e7fb65be80d659ad30e73c7bad692456 to 96542b26ecfbce93b84889ee4a2e4746
 
-On Sat, Feb 13, 2016 at 02:52:03PM +0100, Andreas M=FCller wrote:
-> Did not yet find somebody reading them but to me they look authentic
+ERROR: source-han-sans-jp-fonts different signature for task do_package_write_ipk.sigdata between qemux86copy and qemuarm
+runtaskdeps changed from ['fontconfigfontconfig_2.11.94.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'pseudopseudo_1.7.5.bb.do_populate_sysroot:virtual:native', 'ttf-fontssource-han-sans-jp-fonts_1.004.bb.do_package', 'ttf-fontssource-han-sans-jp-fonts_1.004.bb.do_packagedata'] to ['fontconfigfontconfig_2.11.94.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'pseudopseudo_1.7.5.bb.do_populate_sysroot:virtual:native', 'ttf-fontssource-han-sans-jp-fonts_1.004.bb.do_package', 'ttf-fontssource-han-sans-jp-fonts_1.004.bb.do_packagedata']
+/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-graphics/fontconfig/fontconfig_2.11.94.bb.do_packagedata with hash e7fb65be80d659ad30e73c7bad692456
+ changed to
+/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-graphics/fontconfig/fontconfig_2.11.94.bb.do_packagedata with hash 96542b26ecfbce93b84889ee4a2e4746
+Hash for dependent task fontconfigfontconfig_2.11.94.bb.do_packagedata changed from e7fb65be80d659ad30e73c7bad692456 to 96542b26ecfbce93b84889ee4a2e4746
 
-All these get dependency on fontconfig making them TUNE_PKGARCH not
-allarch.
+ERROR: source-han-sans-kr-fonts different signature for task do_package_write_ipk.sigdata between qemux86copy and qemuarm
+runtaskdeps changed from ['fontconfigfontconfig_2.11.94.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'pseudopseudo_1.7.5.bb.do_populate_sysroot:virtual:native', 'ttf-fontssource-han-sans-kr-fonts_1.004.bb.do_package', 'ttf-fontssource-han-sans-kr-fonts_1.004.bb.do_packagedata'] to ['fontconfigfontconfig_2.11.94.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'pseudopseudo_1.7.5.bb.do_populate_sysroot:virtual:native', 'ttf-fontssource-han-sans-kr-fonts_1.004.bb.do_package', 'ttf-fontssource-han-sans-kr-fonts_1.004.bb.do_packagedata']
+/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-graphics/fontconfig/fontconfig_2.11.94.bb.do_packagedata with hash e7fb65be80d659ad30e73c7bad692456
+ changed to
+/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-graphics/fontconfig/fontconfig_2.11.94.bb.do_packagedata with hash 96542b26ecfbce93b84889ee4a2e4746
+Hash for dependent task fontconfigfontconfig_2.11.94.bb.do_packagedata changed from e7fb65be80d659ad30e73c7bad692456 to 96542b26ecfbce93b84889ee4a2e4746
 
-I'll fix that in follow up commit, but keep that in mind when adding
-more fonts.
+ERROR: source-han-sans-tw-fonts different signature for task do_package_write_ipk.sigdata between qemux86copy and qemuarm
+runtaskdeps changed from ['fontconfigfontconfig_2.11.94.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'pseudopseudo_1.7.5.bb.do_populate_sysroot:virtual:native', 'ttf-fontssource-han-sans-tw-fonts_1.004.bb.do_package', 'ttf-fontssource-han-sans-tw-fonts_1.004.bb.do_packagedata'] to ['fontconfigfontconfig_2.11.94.bb.do_packagedata', 'opkg-utilsopkg-utils_git.bb.do_populate_sysroot:virtual:native', 'pseudopseudo_1.7.5.bb.do_populate_sysroot:virtual:native', 'ttf-fontssource-han-sans-tw-fonts_1.004.bb.do_package', 'ttf-fontssource-han-sans-tw-fonts_1.004.bb.do_packagedata']
+/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-graphics/fontconfig/fontconfig_2.11.94.bb.do_packagedata with hash e7fb65be80d659ad30e73c7bad692456
+ changed to
+/home/jenkins/oe/world/shr-core/openembedded-core/meta/recipes-graphics/fontconfig/fontconfig_2.11.94.bb.do_packagedata with hash 96542b26ecfbce93b84889ee4a2e4746
+Hash for dependent task fontconfigfontconfig_2.11.94.bb.do_packagedata changed from e7fb65be80d659ad30e73c7bad692456 to 96542b26ecfbce93b84889ee4a2e4746
 
-> Andreas M=FCller (4):
->   source-han-sans-cn-fonts: initial add 1.004
->   source-han-sans-jp-fonts: initial add 1.004
->   source-han-sans-kr-fonts: initial add 1.004
->   source-han-sans-tw-fonts: initial add 1.004
->=20
->  .../44-source-han-sans-cn.conf                     | 19 ++++++++++++
->  .../ttf-fonts/source-han-sans-cn-fonts_1.004.bb    | 34 ++++++++++++++++=
-++++++
->  .../44-source-han-sans-jp.conf                     | 19 ++++++++++++
->  .../ttf-fonts/source-han-sans-jp-fonts_1.004.bb    | 34 ++++++++++++++++=
-++++++
->  .../44-source-han-sans-kr.conf                     | 19 ++++++++++++
->  .../ttf-fonts/source-han-sans-kr-fonts_1.004.bb    | 34 ++++++++++++++++=
-++++++
->  .../44-source-han-sans-tw.conf                     | 19 ++++++++++++
->  .../ttf-fonts/source-han-sans-tw-fonts_1.004.bb    | 34 ++++++++++++++++=
-++++++
->  8 files changed, 212 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn=
--fonts/44-source-han-sans-cn.conf
->  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn=
--fonts_1.004.bb
->  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp=
--fonts/44-source-han-sans-jp.conf
->  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp=
--fonts_1.004.bb
->  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr=
--fonts/44-source-han-sans-kr.conf
->  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr=
--fonts_1.004.bb
->  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw=
--fonts/44-source-han-sans-tw.conf
->  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw=
--fonts_1.004.bb
->=20
-> --=20
-> 2.5.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+ERROR: 4 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1456139140/signatures.qemuarm.do_package_write_ipk.sigdata.log
+ERROR: 4 issues were found in these recipes: source-han-sans-cn-fonts source-han-sans-jp-fonts source-han-sans-kr-fonts source-han-sans-tw-fonts
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/conf/layer.conf | 4 ++++
+ 1 file changed, 4 insertions(+)
 
---W/nzBZO5zC0uMSeA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index d37eba0..7237964 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -63,6 +63,10 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+   ttf-tlwg->fontconfig \
+   ttf-ubuntu-font-family->fontconfig \
+   ttf-wqy-zenhei->fontconfig \
++  source-han-sans-cn-fonts->fontconfig \
++  source-han-sans-jp-fonts->fontconfig \
++  source-han-sans-kr-fonts->fontconfig \
++  source-han-sans-tw-fonts->fontconfig \
+ "
+ 
+ FREESMARTPHONE_GIT = "git://git.freesmartphone.org"
+-- 
+2.7.1
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
 
-iEYEARECAAYFAlbLDMcACgkQN1Ujt2V2gBwwugCgjD4RaoedtWLKpEXfYdqJhIuI
-WmQAn3hpPB4zJLV63JMzwZ3ZaVnH6lKi
-=dxx5
------END PGP SIGNATURE-----
-
---W/nzBZO5zC0uMSeA--
