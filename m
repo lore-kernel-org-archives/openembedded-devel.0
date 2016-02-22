@@ -1,39 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f43.google.com (mail-qg0-f43.google.com
-	[209.85.192.43])
-	by mail.openembedded.org (Postfix) with ESMTP id E68A2771A8
+Received: from mail-qk0-f180.google.com (mail-qk0-f180.google.com
+	[209.85.220.180])
+	by mail.openembedded.org (Postfix) with ESMTP id A688B771B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 13:35:34 +0000 (UTC)
-Received: by mail-qg0-f43.google.com with SMTP id b67so110642701qgb.1
+	Mon, 22 Feb 2016 13:35:35 +0000 (UTC)
+Received: by mail-qk0-f180.google.com with SMTP id s5so55449470qkd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 05:35:35 -0800 (PST)
+	Mon, 22 Feb 2016 05:35:36 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=7/97HLlrjezXAfgovM4h7jsAlHXpNnAYRVf+pmZlIFk=;
-	b=SYhSUY32IV3t75HFAEnn5ySLN/NNoqmkZIQ2rtsNr23it70pgOOc6zlCfdqqhL/akR
-	OtKafK/uSbNEg9DmYehqwL+IBcvU7ndZgjm56p+TI6NAh+b1RJr+5C6XBn8TDinVZabi
-	oUBcFUwF97XfOvkhnqdmBaGz6EW6vI4KKgZWVp0JsNtL7EUvex1wFIpF+Rz73e8Zerk3
-	34Eq4QVs4YploQBooGSsXRjw5/Z6Uz1e/4PM7ScFBmvJcx02++dYXUau0Ac7g+/a4EIY
-	yUjKNdETh4+uMw7ZshgX6M7P5hvl/QGQa5MQReBgHod5TPa9Cs6k13B9yq0bI+bpQUv9
-	DJBQ==
-X-Gm-Message-State: AG10YORd2NrCvO9CPm30eYnJnPdI4KnKyjHCtB3vfKhE3e2BarBhIUA+0fB6PcXZkXsARg==
-X-Received: by 10.140.226.135 with SMTP id w129mr36897250qhb.4.1456148135189; 
-	Mon, 22 Feb 2016 05:35:35 -0800 (PST)
+	bh=JH2EhalKFOTuRK65m4yd9aJTuCOxDCagRfErHI/k7kk=;
+	b=RrHwTgvQcKlzICidbY7KwMnTVW6eGo96NCQtUyQOKe/smLM4CiBxcgQXXn55wpJe5M
+	78Ow4w0hhQgFbEmfWhf5k2Uqu5nYOVyHGABYbHW2FqrZqqB5QU4MADlvkX6yCiR5fp4C
+	2lRNfY1hPkXcXznJUoUH//JKp+Bp9+x9mPgEIF4jHP8WcyP0WGNPNm5eyXk6HgLTW7/x
+	8cX7ZnAfdhHCQ783RdR9JSsvbRlIUL06Byrn80QqQggxiW9rg3giluj/0NpFTm9f0mqX
+	WNtdN9cft7spDz/XAgAotd0pNmHZ8iVUY4l9RodWZu/Ks6h2nwXo6GeXcD+ZTKDnSgjl
+	pDKg==
+X-Gm-Message-State: AG10YOR9Y8vp0Vl8xUL0V5iJOOMvjpsBxkimAGPAruPBn3Aez72Mf5Ms1AdpGTo05i0TqA==
+X-Received: by 10.55.78.207 with SMTP id c198mr33720056qkb.34.1456148136559;
+	Mon, 22 Feb 2016 05:35:36 -0800 (PST)
 Received: from localhost.localdomain ([96.91.222.230])
-	by smtp.gmail.com with ESMTPSA id w1sm10232368qha.3.2016.02.22.05.35.34
+	by smtp.gmail.com with ESMTPSA id w1sm10232368qha.3.2016.02.22.05.35.36
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 22 Feb 2016 05:35:34 -0800 (PST)
+	Mon, 22 Feb 2016 05:35:36 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Feb 2016 08:35:02 -0500
-Message-Id: <1456148105-9644-8-git-send-email-derek@asterius.io>
+Date: Mon, 22 Feb 2016 08:35:04 -0500
+Message-Id: <1456148105-9644-10-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1456148105-9644-1-git-send-email-derek@asterius.io>
 References: <1456148105-9644-1-git-send-email-derek@asterius.io>
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH 08/11] python-mock: update to 1.3.0
+Subject: [meta-python][PATCH 10/11] python-msgpack: update to 0.4.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,30 +50,28 @@ X-List-Received-Date: Mon, 22 Feb 2016 13:35:35 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python-mock_1.0.1.bb => python-mock_1.3.0.bb}           | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-mock_1.0.1.bb => python-mock_1.3.0.bb} (54%)
+ .../python/{python-msgpack_0.4.5.bb => python-msgpack_0.4.7.bb}       | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-msgpack_0.4.5.bb => python-msgpack_0.4.7.bb} (59%)
 
-diff --git a/meta-python/recipes-devtools/python/python-mock_1.0.1.bb b/meta-python/recipes-devtools/python/python-mock_1.3.0.bb
-similarity index 54%
-rename from meta-python/recipes-devtools/python/python-mock_1.0.1.bb
-rename to meta-python/recipes-devtools/python/python-mock_1.3.0.bb
-index d336f61..8a7894c 100644
---- a/meta-python/recipes-devtools/python/python-mock_1.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python-mock_1.3.0.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "A Python Mocking and Patching Library for Testing"
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=80e5ba73891255687dff3bee2b4cbb16"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=de9dfbf780446b18aab11f00baaf5b7e"
+diff --git a/meta-python/recipes-devtools/python/python-msgpack_0.4.5.bb b/meta-python/recipes-devtools/python/python-msgpack_0.4.7.bb
+similarity index 59%
+rename from meta-python/recipes-devtools/python/python-msgpack_0.4.5.bb
+rename to meta-python/recipes-devtools/python/python-msgpack_0.4.7.bb
+index 55a2ff1..3b7853e 100644
+--- a/meta-python/recipes-devtools/python/python-msgpack_0.4.5.bb
++++ b/meta-python/recipes-devtools/python/python-msgpack_0.4.7.bb
+@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
  
--SRC_URI[md5sum] = "c3971991738caa55ec7c356bbc154ee2"
--SRC_URI[sha256sum] = "b839dd2d9c117c701430c149956918a423a9863b48b09c90e30a6013e7d2f44f"
-+SRC_URI[md5sum] = "73ee8a4afb3ff4da1b4afa287f39fdeb"
-+SRC_URI[sha256sum] = "1e247dbecc6ce057299eb7ee019ad68314bb93152e81d9a6110d35f4d5eca0f6"
+ PR = "r0"
  
+-SRC_URI[md5sum] = "3b82bc542d5599896695512e7c32f42d"
+-SRC_URI[sha256sum] = "a07cd6615a6bf38cfa2f010b121c7e77b74a3e7b971ef3e475c3d33308014cbb"
++SRC_URI[md5sum] = "eb2aad1081534ef3a9f32a0ecd350b9b"
++SRC_URI[sha256sum] = "5e001229a54180a02dcdd59db23c9978351af55b1290c27bc549e381f43acd6b"
+ 
+ PYPI_PACKAGE = "msgpack-python"
  inherit pypi setuptools
- 
 -- 
 1.9.1
 
