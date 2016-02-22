@@ -1,39 +1,30 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f54.google.com (mail-qg0-f54.google.com
-	[209.85.192.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 48496771A3
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id E0AE260017
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 13:35:35 +0000 (UTC)
-Received: by mail-qg0-f54.google.com with SMTP id y9so111993296qgd.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 05:35:36 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=6bbJwBDw+B6EU8bi+q2/CH4ug3tHdVC2kxpffrqdmaM=;
-	b=ld2vutnIJs0jOLjJro9Qawc2139uYlTtHpaJn4SslnmqMBO63E96C9hlagFeFYr+iT
-	v2tMFCGJOPi2z8I8oX9bVsQU35mLvobeqpqby/IJKn+6s28LwBGyBp45qMd9amOheb8w
-	ecwO3sibO79Kr2GIges0B+48NUkK1DN0jtbB5uTUVlVN9JL9vG2TLlNpf9HGsYQ/kxP2
-	T/O+7RRdIaIwFt2M1R0zs9s0a/5gp7NFfUzkeZPl72sRTLccCz5UXrkoW8+uB64cmUgX
-	SLuaqwPkQW94kxFlrLzUHcSToxcPNHgRBfDklQefxPuh6HajSWoWE3lKXesQ6VlmlM6Q
-	/Lpw==
-X-Gm-Message-State: AG10YOSxf8D0uBNNhmq7K/ITo2rl4oiu2rHvjoJC+m2EYkXdTeIsLm3stRRQActOPUQqfA==
-X-Received: by 10.140.143.134 with SMTP id 128mr1842893qhp.25.1456148135931;
-	Mon, 22 Feb 2016 05:35:35 -0800 (PST)
-Received: from localhost.localdomain ([96.91.222.230])
-	by smtp.gmail.com with ESMTPSA id w1sm10232368qha.3.2016.02.22.05.35.35
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 22 Feb 2016 05:35:35 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Feb 2016 08:35:03 -0500
-Message-Id: <1456148105-9644-9-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1456148105-9644-1-git-send-email-derek@asterius.io>
-References: <1456148105-9644-1-git-send-email-derek@asterius.io>
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH 09/11] python-monotonic: update to 0.6
+	Mon, 22 Feb 2016 14:42:31 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	u1MEgUsD028466; Mon, 22 Feb 2016 14:42:30 GMT
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id aUJc4eRt3i2w; Mon, 22 Feb 2016 14:42:29 +0000 (GMT)
+Received: from hex ([192.168.3.34]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	u1MEgPuI028462
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Mon, 22 Feb 2016 14:42:26 GMT
+Message-ID: <1456152145.28376.196.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel@lists.openembedded.org, Martin Jansa
+	<martin.jansa@gmail.com>
+Date: Mon, 22 Feb 2016 14:42:25 +0000
+In-Reply-To: <1456146625-10100-5-git-send-email-Martin.Jansa@gmail.com>
+References: <1456146625-10100-1-git-send-email-Martin.Jansa@gmail.com>
+	<1456146625-10100-5-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: Evolution 3.16.5-1ubuntu3.1 
+Mime-Version: 1.0
+Subject: Re: [PATCH][meta-networking 5/5] dovecot: Blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,33 +37,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2016 13:35:37 -0000
+X-List-Received-Date: Mon, 22 Feb 2016 14:42:32 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../python/{python-monotonic_0.4.bb => python-monotonic_0.6.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-monotonic_0.4.bb => python-monotonic_0.6.bb} (64%)
+On Mon, 2016-02-22 at 14:10 +0100, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/meta-networking/recipes
+> -support/dovecot/dovecot_2.2.21.bb b/meta-networking/recipes
+> -support/dovecot/dovecot_2.2.21.bb
+> index 7fb8b44..f297dff 100644
+> --- a/meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb
+> +++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb
+> @@ -63,3 +63,5 @@ FILES_${PN}-staticdev += "${libdir}/dovecot/*/*.a"
+>  FILES_${PN}-dev += "${libdir}/dovecot/*.so"
+>  FILES_${PN}-dbg += "${libdir}/dovecot/*/.debug"
+>  
+> +# http://errors.yoctoproject.org/Errors/Details/35133/
+> +PNBLACKLIST[dovecot] ?= "BROKEN: QA Issue: -dev package contains non
+> -symlink .so""
 
-diff --git a/meta-python/recipes-devtools/python/python-monotonic_0.4.bb b/meta-python/recipes-devtools/python/python-monotonic_0.6.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python-monotonic_0.4.bb
-rename to meta-python/recipes-devtools/python/python-monotonic_0.6.bb
-index 875dee2..40207bf 100644
---- a/meta-python/recipes-devtools/python/python-monotonic_0.4.bb
-+++ b/meta-python/recipes-devtools/python/python-monotonic_0.6.bb
-@@ -2,8 +2,8 @@ SUMMARY = "An implementation of time.monotonic() for Python 2.0 through 3.2"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
- 
--SRC_URI[md5sum] = "1919cc3aff2a1b907fe24c1f801343ef"
--SRC_URI[sha256sum] = "852f656adbf623ee859def6ca2f5498f4cae3256f8320d5c50570ee8a0592ab6"
-+SRC_URI[md5sum] = "2f77ba5a56051b0442b1c74fd05dafb5"
-+SRC_URI[sha256sum] = "2bc780a16024427cb4bfbfff77ed328484cf6937a787cc50055b83b13b653e74"
- 
- inherit pypi setuptools
- 
--- 
-1.9.1
+Typo "" above causes a parsing failure with master-next.
 
+Cheers,
+
+Richard
 
