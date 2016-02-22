@@ -1,47 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id BAA6577183
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 4CC67771BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 13:09:38 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id b205so154815335wmb.1
+	Mon, 22 Feb 2016 13:09:40 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id c200so170356580wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2016 05:09:39 -0800 (PST)
+	Mon, 22 Feb 2016 05:09:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=5m6LNuUvaVkoWrSP3hS+1P69A/QDLme+a4kAUdwmih4=;
-	b=YeZqKCWKHtdfWzCBo22mhQiKIl8i8GbtyNFeDHVjYsPJlRrcQxEw7lINFbyWe/BVb1
-	r58TS7QXiR/IdnzY8FVS92f7DisM/vDl0GdMyX38bFTN60otD7RO4NKJpmFASQVPUQVB
-	+YEaaU90onyhRWAzjUi9CqoNcnkRjTbiVRws0KergdPHQRekpCaMY+ULhUWNDPpKkYr0
-	+pNacGaNcn5nOzGVdB9+99QCqHsINEfgzUNwVIWmE+svf1uliD6u1F4EupRDGbnZ+wcM
-	VFQIEM/ucSfHwEF3kBv/l7Tc+Vuq06sK3FdlkznbyBHz4qhe3UXVXoM4ztgUwQxoM/hE
-	pnzQ==
+	bh=jtZ1n/Gk4G4VYqPrk1rQqY6a8tH+VvRvt+cGTgXbpiI=;
+	b=xNhzC8nUk18dgslJD4lFXfVlrIMryOyTSeREPkYw4wdlbEwDkvsJZX8mUq/lAJ/8Bx
+	KzgovAYgS0Nni1EUM8G4MfroGz3DCDegHEp5jlxbfgWyMVtbZ4V3oF7C1R9sVmGV4Ygg
+	RUWtbq1a5heKgFWqflqQVRLjjAouFovjpeAHG8h03BwxXPK/jCoh5937jq5cOdqL3q9/
+	0EE4v8iQwikdLcGSmdIz979fHOLBRr3/21Gi3TJk31+yFdxx06aQG8hcJUw8savve/mG
+	dQKeU0JWXmyNHdi5B0EKbLUxgUHAfE9FdnVvuMGXO5/2R17EW+4MynYwvttIV+Ckmzme
+	T5mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=5m6LNuUvaVkoWrSP3hS+1P69A/QDLme+a4kAUdwmih4=;
-	b=fUGqRBDqiM/tc0gUHiJ2aNxmiyWnWatOH+PLC7PJiV5ZBWJJM9UziXAf3gSkrYVKDn
-	I0hf/ie/Oacxr3tf37h8eU3Hnk/vZ9odRBImWELmfat2U2NHRszObCaM8c0uJgeokZxy
-	+krN6gMQJdf4FTGQFxv3QguaGR5nl0jJiM+bxJK++oe/Y1aYNwHuBQUS/xou+GbaifK1
-	Bad4bTP+lBoFRsPT091fUiFeb+CqFsEtrfGN1u1ap+FKqf2TWovupOMTU8pupPhs1EqT
-	VXpNPpTAKBVtJBt/4zUYZ9GSWfowqyVohPy3DuVjqqzDsFG3bbrG0df9zmK9uJdSCfx+
-	kZOw==
-X-Gm-Message-State: AG10YOSG4XH0KpsDApWkCPqOzauJisESCgPlbDGuVJfZelxkQFJiyIgT5XhV9VgPj4re9A==
-X-Received: by 10.28.63.85 with SMTP id m82mr13253832wma.55.1456146579035;
-	Mon, 22 Feb 2016 05:09:39 -0800 (PST)
+	bh=jtZ1n/Gk4G4VYqPrk1rQqY6a8tH+VvRvt+cGTgXbpiI=;
+	b=RudLGD93e/6mmX/YyAUm+rX8jme+kPGRUgN9o6uJYOHNLMWxBjUlR+7/h4hL9L84SW
+	CghH4GQkROqz1Hm/gofu/xSgKghZuAJS/x2o8dHKLzkkOpLpOymx36n9EgT7eDK/7jYP
+	y3/qGPqR3joMWdzVZ9D5ThdopKBIsviwb5lCIktGYzXGMtEcoCDcaJy1QGpY3/j9egKk
+	Ob/+LIfSQHO2GZ3Vztm5uABcVN2H3ERAFrUyp53ZfAmZswMV6WVWDMN0Fw8qxErzP8IF
+	sYS8VNLrPpwaQRhnTkj5TY/zaiNfAazhGMCoJ7jZMj19RJvMUiVZpI8GmtX6Cy8LyD1c
+	lX/Q==
+X-Gm-Message-State: AG10YOQQBCejPmtaDj+lPcQmlOWgdUkhv1OReD2/NjU1bbaaLJBu4Que+hSSA4tmmCnkBw==
+X-Received: by 10.28.224.87 with SMTP id x84mr12954215wmg.32.1456146580564;
+	Mon, 22 Feb 2016 05:09:40 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id g1sm22580135wmc.0.2016.02.22.05.09.38
+	by smtp.gmail.com with ESMTPSA id
+	t3sm24696662wjz.11.2016.02.22.05.09.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 22 Feb 2016 05:09:38 -0800 (PST)
+	Mon, 22 Feb 2016 05:09:39 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Feb 2016 14:10:24 +0100
-Message-Id: <1456146625-10100-4-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon, 22 Feb 2016 14:10:25 +0100
+Message-Id: <1456146625-10100-5-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.7.1
 In-Reply-To: <1456146625-10100-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1456146625-10100-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-networking 4/5] curlpp: Blacklist
+Subject: [PATCH][meta-networking 5/5] dovecot: Blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,24 +55,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2016 13:09:39 -0000
+X-List-Received-Date: Mon, 22 Feb 2016 13:09:40 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
-index db4c9cd..b3231fb 100644
---- a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
-+++ b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
-@@ -86,3 +86,6 @@ FILES_lib${BPN}-dev = "${includedir} \
- FILES_lib${BPN}-staticdev = "${libdir}/lib*.a"
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb
+index 7fb8b44..f297dff 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb
+@@ -63,3 +63,5 @@ FILES_${PN}-staticdev += "${libdir}/dovecot/*/*.a"
+ FILES_${PN}-dev += "${libdir}/dovecot/*.so"
+ FILES_${PN}-dbg += "${libdir}/dovecot/*/.debug"
  
- BBCLASSEXTEND = "native nativesdk"
-+
-+# http://errors.yoctoproject.org/Errors/Details/35129/
-+PNBLACKLIST[curlpp] ?= "BROKEN: QA Issue: curlpp.pc failed sanity test (tmpdir)"
++# http://errors.yoctoproject.org/Errors/Details/35133/
++PNBLACKLIST[dovecot] ?= "BROKEN: QA Issue: -dev package contains non-symlink .so""
 -- 
 2.7.1
 
