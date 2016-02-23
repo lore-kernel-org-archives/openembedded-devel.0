@@ -1,45 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 177F177373
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id CDFDC771BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 16:23:34 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id c200so228933230wme.0
+	Tue, 23 Feb 2016 16:27:57 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id c200so229143781wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 08:23:35 -0800 (PST)
+	Tue, 23 Feb 2016 08:27:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=dfAX78qmx0nQu/Z+YqsayLxev9aJKTjEoRL3Ct1YhME=;
-	b=dQVw0UKZ+Ztnxbwq6bNXtpqldjkgr2BwY8gGOBPiY7bmqjjGRuo01Vs9klLerFNYj1
-	Msi+JGNXQX/w7Wb6YBzz0zkxeaF2p4K7SsvZaVrkcmuGe+J90MaJDetsfT/Q3vSpaA+8
-	ovKLgrQAMVt1djKK8GnOxnDWlGUQZNJ23vj4++YU9WwtwuYOXElXuL42pgsWSobp7pnK
-	ZYmCm7Yd0kJKgF9tgbLdTqNN6iHcmF4bViR3ti0TTwwd0B1SOdPEneMvqO/Z92BTT1bJ
-	SU9Bx8U7zekAgI6aVVNm5J4fIkRYZeGxcJyQC1gFsDObHnKCrhkprhWbqNSdrRcYT3Dm
-	ynlQ==
+	bh=2KPl6+lybj6dKSB+k20ROAlUD5PRHwPooWTH4MnU2/E=;
+	b=B5Mcw9d4Xkha7Ub+5x4vOUjNTqwtwgBCFIfP7c2CI42ANYiqV93R84ZJ9uF3mC04Ta
+	T8sYYK2963OgzrlZlK58i+eL1mYwL3y4BJj2oeRNOYFBQEl0sslpgruWHZGzO4FfSiFz
+	Lz2r0fg0Nak7tHWR39b2RBzwIWOqmkV2IP+udSwfRabffKpeQVX5I/mf0r2ugLluAYuo
+	6RPhM8KpgFd9xsTOT4kNiO5CnwogfsSBXsRDTCFfLntrljMdR3rnl2lyRJ4BzMGLC8F2
+	gyqij097hEn8hC3CTlKr+8+bgs7rH4K4nZaefItVJAPnMmqfXnS/q86YU8LgWRNDApx1
+	YGgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=dfAX78qmx0nQu/Z+YqsayLxev9aJKTjEoRL3Ct1YhME=;
-	b=ACl9ZGndBNaKn/Ke2tMZFKcqbwUdnvGflOi7FxrIpnD2NKDqI46zrJ/xpSUqQlrevj
-	4WLYMNq7UwyRR4mGGkCmCOsrChYMVL/52CPAEifGAQbGTfs8GVpEbOLy5QnNAtvmS+FN
-	9G2U0VvDh1YndyQsToJyDhHYPF5yqPM9cVp2tODDaNsmr1MKt5/0pToW+Ksa2rsk4luu
-	I6E4PSJO15czWjEgmjQJxCtBjq0JcNc2Jt9joJnXRuUuV1wWPixK5XhKzRz2nffY+z4w
-	QVSCQYSf5gyog2fHZiVdpbiL3bs9jHaSJIX9hXz0MIYlRqYRRGVJBvAxRKB+EJATACC7
-	VmTw==
-X-Gm-Message-State: AG10YORNLrmUSV58V4AxfKte5xCRp6iC+C+Atni/nbxnjgM6u4bMWz9IVDga0tTqNHIdrg==
-X-Received: by 10.194.75.164 with SMTP id d4mr34103690wjw.15.1456244615228;
-	Tue, 23 Feb 2016 08:23:35 -0800 (PST)
+	bh=2KPl6+lybj6dKSB+k20ROAlUD5PRHwPooWTH4MnU2/E=;
+	b=F6HgZKqI6gGbkTSwS2EShWm3IbLUlDHtcXObD8fWc5nUHFa2xIJuSqHY1HIZKnZ3bD
+	JCFGvWkk2Uxxg6/LUwh53oGDy/kmhgN9Is0z0+waSz4RqChLYV9jOcYnjQ//VBUwortd
+	D3MYyiojjAV0oy52M/IIcL06zf78lvCGehGzKJD/hWsiaKU8p8scm90rMVOJN79Bggdh
+	hO25PsaGPMSuk48hBNkbvIT9huFwmt2ePmoNjXiMGBRvhudxvGbmMYBF3BRN6DECdZ4y
+	ElpfXWVLsJxKCCTOg5XpjMhXFz+MHp/xpkRzJ/L+UwmuLVrJy3fcGd2IHiQxRBBkH5IG
+	dtHw==
+X-Gm-Message-State: AG10YOQH2FDRa5hwDQ9KWvk2kNjrwRaQ5VKrnZ0nFEaK1HRwx5IWXgmNcB3t+680sr+sGA==
+X-Received: by 10.194.77.167 with SMTP id t7mr33515824wjw.90.1456244878457;
+	Tue, 23 Feb 2016 08:27:58 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	o128sm2805671wmb.19.2016.02.23.08.23.34
+	ko2sm30493565wjc.9.2016.02.23.08.27.56
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 23 Feb 2016 08:23:34 -0800 (PST)
+	Tue, 23 Feb 2016 08:27:56 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Feb 2016 17:24:33 +0100
-Message-Id: <1456244673-3189-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 23 Feb 2016 17:28:55 +0100
+Message-Id: <1456244935-5288-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.7.1
-Subject: [PATCH][meta-oe] zsh: fold .inc into .bb
+Subject: [PATCH][meta-oe] freerdp: fold .inc into .bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,144 +52,203 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2016 16:23:35 -0000
+X-List-Received-Date: Tue, 23 Feb 2016 16:27:58 -0000
+
+* currently it's broken again
+  ERROR: freerdp-1.2.5+gitrAUTOINC+62da9d28c6-r0 do_package: QA Issue: freerdp: Files/directories were installed but not shipped in any package:
+    /usr/bin
+  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+  freerdp: 1 installed and not shipped files. [installed-vs-shipped]
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-extended/zsh/zsh.inc      | 57 ------------------------------
- meta-oe/recipes-extended/zsh/zsh_5.0.5.bb | 58 +++++++++++++++++++++++++++++--
- 2 files changed, 56 insertions(+), 59 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/zsh/zsh.inc
+ meta-oe/recipes-support/freerdp/freerdp.inc    | 74 -----------------------
+ meta-oe/recipes-support/freerdp/freerdp_git.bb | 83 +++++++++++++++++++++++---
+ 2 files changed, 75 insertions(+), 82 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/freerdp/freerdp.inc
 
-diff --git a/meta-oe/recipes-extended/zsh/zsh.inc b/meta-oe/recipes-extended/zsh/zsh.inc
+diff --git a/meta-oe/recipes-support/freerdp/freerdp.inc b/meta-oe/recipes-support/freerdp/freerdp.inc
 deleted file mode 100644
-index b8fce80..0000000
---- a/meta-oe/recipes-extended/zsh/zsh.inc
+index 2937bc5..0000000
+--- a/meta-oe/recipes-support/freerdp/freerdp.inc
 +++ /dev/null
-@@ -1,57 +0,0 @@
--SUMMARY = "UNIX Shell similar to the Korn shell"
--DESCRIPTION = "Zsh is a shell designed for interactive use, although it is also a \
--               powerful scripting language. Many of the useful features of bash, \
--               ksh, and tcsh were incorporated into zsh; many original features were added."
--HOMEPAGE = "http://www.zsh.org"
--SECTION = "base/shell"
+@@ -1,74 +0,0 @@
+-# Copyright (C) 2010-2012 O.S. Systems Software Ltda. All Rights Reserved
+-# Released under the MIT license
 -
--LICENSE = "zsh"
--LIC_FILES_CHKSUM = "file://LICENCE;md5=b7bc853894664be455a922db9805288e"
+-DESCRIPTION = "FreeRDP RDP client & server library"
+-HOMEPAGE = "http://www.freerdp.com"
+-DEPENDS = "openssl alsa-lib pcsc-lite"
+-SECTION = "net"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 -
--DEPENDS = "ncurses bison-native"
+-inherit pkgconfig cmake
 -
--SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
+-EXTRA_OECMAKE += "-DWITH_ALSA=ON \
+-                  -DWITH_PCSC=ON \
+-                  -DWITH_FFMPEG=OFF \
+-                  -DWITH_CUNIT=OFF \
+-                  -DWITH_NEON=OFF \
+-                 "
 -
--inherit autotools gettext update-alternatives
+-PACKAGECONFIG ??= "  \
+-                ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}\
+-                ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}\
+-                ${@bb.utils.contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}\
+-                ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}\
+-                ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)}\
+-                gstreamer cups \
+-                "
 -
--EXTRA_OECONF = " \
--    --bindir=${base_bindir} \
--    --enable-etcdir=${sysconfdir} \
--    --enable-fndir=${datadir}/${PN}/${PV}/functions \
--    --enable-site-fndir=${datadir}/${PN}/site-functions \
--    --with-term-lib='ncursesw ncurses' \
--    --with-tcsetpgrp \
--    --enable-cap \
--    --enable-multibyte \
--    --disable-gdbm \
--    --disable-dynamic \
--    zsh_cv_shared_environ=yes \
--"
+-X11_DEPS = "virtual/libx11 libxinerama libxext libxcursor libxv libxi libxrender libxfixes libxdamage libxrandr libxkbfile"
+-PACKAGECONFIG[x11] = "-DWITH_X11=ON -DWITH_XINERAMA=ON -DWITH_XEXT=ON -DWITH_XCURSOR=ON -DWITH_XV=ON -DWITH_XI=ON -DWITH_XRENDER=ON -DWITH_XFIXES=ON -DWITH_XDAMAGE=ON -DWITH_XRANDR=ON -DWITH_XKBFILE=ON,-DWITH_X11=OFF,${X11_DEPS}"
+-PACKAGECONFIG[wayland] = "-DWITH_WAYLAND=ON,-DWITH_WAYLAND=OFF,wayland"
+-PACKAGECONFIG[directfb] = "-DWITH_DIRECTFB=ON,-DWITH_DIRECTFB=OFF,directfb"
+-PACKAGECONFIG[pam] = "-DWITH_PAM=ON,-DWITH_PAM=OFF,libpam"
+-PACKAGECONFIG[pulseaudio] = "-DWITH_PULSEAUDIO=ON,-DWITH_PULSEAUDIO=OFF,pulseaudio"
+-PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER_1_0=ON,-DWITH_GSTREAMER_1_0=OFF,gstreamer1.0 gstreamer1.0-plugins-base"
+-PACKAGECONFIG[cups] = "-DWITH_CUPS=ON,-DWITH_CUPS=OFF,cups"
 -
--ALTERNATIVE_${PN} = "sh"
--ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"
--ALTERNATIVE_TARGET[sh] = "${base_bindir}/${BPN}"
--ALTERNATIVE_PRIORITY = "100"
+-PACKAGES =+ "libfreerdp"
 -
--export AUTOHEADER = "true"
+-LEAD_SONAME = "libfreerdp.so"
+-FILES_libfreerdp = "${libdir}/lib*${SOLIBS}"
 -
--do_configure () {
--    gnu-configize --force ${S}
--    oe_runconf
--}
+-PACKAGES_DYNAMIC += "^libfreerdp-plugin-.*"
 -
+-# we will need winpr-makecert to generate TLS certificates
 -do_install_append () {
--    rm -fr ${D}/usr/share
+-    install -m755 winpr/tools/makecert/cli/winpr-makecert ${D}${bindir}
+-    rm -rf ${D}/${libdir}/cmake
+-    rm -rf ${D}/${libdir}/freerdp
 -}
 -
--pkg_postinst_${PN} () {
--    touch $D${sysconfdir}/shells
--    grep -q "bin/zsh" $D${sysconfdir}/shells || echo /bin/zsh >> $D${sysconfdir}/shells
--    grep -q "bin/sh" $D${sysconfdir}/shells || echo /bin/sh >> $D${sysconfdir}/shells
--}
+-python populate_packages_prepend () {
+-    freerdp_root = d.expand('${libdir}/freerdp')
 -
--FILES_${PN}-dbg += "\
--    ${libdir}/${PN}/${PV}/${PN}/.debug/*.so \
--    ${libdir}/${PN}/${PV}/${PN}/db/.debug/*.so \
--    ${libdir}/${PN}/${PV}/${PN}/net/.debug/*.so \
--"
-diff --git a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb b/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
-index a7170dc..658f3d9 100644
---- a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
-+++ b/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
-@@ -1,5 +1,59 @@
--require zsh.inc
--DEPENDS += "libcap libpcre gdbm groff-native"
-+SUMMARY = "UNIX Shell similar to the Korn shell"
-+DESCRIPTION = "Zsh is a shell designed for interactive use, although it is also a \
-+               powerful scripting language. Many of the useful features of bash, \
-+               ksh, and tcsh were incorporated into zsh; many original features were added."
-+HOMEPAGE = "http://www.zsh.org"
-+SECTION = "base/shell"
+-    do_split_packages(d, freerdp_root, '^(audin_.*)\.so$',
+-        output_pattern='libfreerdp-plugin-%s',
+-        description='FreeRDP plugin %s',
+-        prepend=True, extra_depends='libfreerdp-plugin-audin')
+-
+-    do_split_packages(d, freerdp_root, '^(rdpsnd_.*)\.so$',
+-        output_pattern='libfreerdp-plugin-%s',
+-        description='FreeRDP plugin %s',
+-        prepend=True, extra_depends='libfreerdp-plugin-rdpsnd')
+-
+-    do_split_packages(d, freerdp_root, '^(tsmf_.*)\.so$',
+-        output_pattern='libfreerdp-plugin-%s',
+-        description='FreeRDP plugin %s',
+-        prepend=True, extra_depends='libfreerdp-plugin-tsmf')
+-
+-    do_split_packages(d, freerdp_root, '^([^-]*)\.so$',
+-        output_pattern='libfreerdp-plugin-%s',
+-        description='FreeRDP plugin %s',
+-        prepend=True, extra_depends='')
+-}
+diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb b/meta-oe/recipes-support/freerdp/freerdp_git.bb
+index 13dff6e..c749b0c 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp_git.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
+@@ -1,18 +1,18 @@
+-# Copyright (C) 2010-2012, O.S. Systems Software Ltda.
++# Copyright (C) 2010-2012 O.S. Systems Software Ltda. All Rights Reserved
+ # Released under the MIT license
  
-+LICENSE = "zsh"
-+LIC_FILES_CHKSUM = "file://LICENCE;md5=b7bc853894664be455a922db9805288e"
+-include freerdp.inc
++DESCRIPTION = "FreeRDP RDP client & server library"
++HOMEPAGE = "http://www.freerdp.com"
++DEPENDS = "openssl alsa-lib pcsc-lite"
++SECTION = "net"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+-inherit gitpkgv
++inherit pkgconfig cmake gitpkgv
+ 
+ PV = "1.2.5+gitr${SRCPV}"
+ PKGV = "${GITPKGVTAG}"
+ 
+-EXTRA_OECMAKE += "-DBUILD_STATIC_LIBS=OFF \
+-                  -DCMAKE_POSITION_INDEPENDANT_CODE=ON \
+-                  -DWITH_MANPAGES=OFF \
+-                 "
+-
+ SRCREV = "62da9d28c674814c81c245c1c7882eb0da7be76b"
+ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git \
+     file://winpr-makecert-Build-with-install-RPATH.patch \
+@@ -20,3 +20,70 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git \
+ "
+ 
+ S = "${WORKDIR}/git"
 +
-+DEPENDS = "ncurses bison-native libcap libpcre gdbm groff-native"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
- SRC_URI[md5sum] = "6fb0e3e52a0f8de5ca63138391b81ce0"
- SRC_URI[sha256sum] = "b35cf19e4a6ba39fd03c6372b8a8760a491cc2e2e4aba3d15023ff291c2894b4"
-+
-+inherit autotools gettext update-alternatives
-+
-+EXTRA_OECONF = " \
-+    --bindir=${base_bindir} \
-+    --enable-etcdir=${sysconfdir} \
-+    --enable-fndir=${datadir}/${PN}/${PV}/functions \
-+    --enable-site-fndir=${datadir}/${PN}/site-functions \
-+    --with-term-lib='ncursesw ncurses' \
-+    --with-tcsetpgrp \
-+    --enable-cap \
-+    --enable-multibyte \
-+    --disable-gdbm \
-+    --disable-dynamic \
-+    zsh_cv_shared_environ=yes \
++EXTRA_OECMAKE += " \
++    -DWITH_ALSA=ON \
++    -DWITH_PCSC=ON \
++    -DWITH_FFMPEG=OFF \
++    -DWITH_CUNIT=OFF \
++    -DWITH_NEON=OFF \
++    -DBUILD_STATIC_LIBS=OFF \
++    -DCMAKE_POSITION_INDEPENDANT_CODE=ON \
++    -DWITH_MANPAGES=OFF \
 +"
 +
-+ALTERNATIVE_${PN} = "sh"
-+ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"
-+ALTERNATIVE_TARGET[sh] = "${base_bindir}/${BPN}"
-+ALTERNATIVE_PRIORITY = "100"
++PACKAGECONFIG ??= "  \
++                ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}\
++                ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}\
++                ${@bb.utils.contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}\
++                ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}\
++                ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)}\
++                gstreamer cups \
++                "
 +
-+export AUTOHEADER = "true"
++X11_DEPS = "virtual/libx11 libxinerama libxext libxcursor libxv libxi libxrender libxfixes libxdamage libxrandr libxkbfile"
++PACKAGECONFIG[x11] = "-DWITH_X11=ON -DWITH_XINERAMA=ON -DWITH_XEXT=ON -DWITH_XCURSOR=ON -DWITH_XV=ON -DWITH_XI=ON -DWITH_XRENDER=ON -DWITH_XFIXES=ON -DWITH_XDAMAGE=ON -DWITH_XRANDR=ON -DWITH_XKBFILE=ON,-DWITH_X11=OFF,${X11_DEPS}"
++PACKAGECONFIG[wayland] = "-DWITH_WAYLAND=ON,-DWITH_WAYLAND=OFF,wayland"
++PACKAGECONFIG[directfb] = "-DWITH_DIRECTFB=ON,-DWITH_DIRECTFB=OFF,directfb"
++PACKAGECONFIG[pam] = "-DWITH_PAM=ON,-DWITH_PAM=OFF,libpam"
++PACKAGECONFIG[pulseaudio] = "-DWITH_PULSEAUDIO=ON,-DWITH_PULSEAUDIO=OFF,pulseaudio"
++PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER_1_0=ON,-DWITH_GSTREAMER_1_0=OFF,gstreamer1.0 gstreamer1.0-plugins-base"
++PACKAGECONFIG[cups] = "-DWITH_CUPS=ON,-DWITH_CUPS=OFF,cups"
 +
-+do_configure () {
-+    gnu-configize --force ${S}
-+    oe_runconf
-+}
++PACKAGES =+ "libfreerdp"
 +
++LEAD_SONAME = "libfreerdp.so"
++FILES_libfreerdp = "${libdir}/lib*${SOLIBS}"
++
++PACKAGES_DYNAMIC += "^libfreerdp-plugin-.*"
++
++# we will need winpr-makecert to generate TLS certificates
 +do_install_append () {
-+    rm -fr ${D}/usr/share
++    install -m755 winpr/tools/makecert/cli/winpr-makecert ${D}${bindir}
++    rm -rf ${D}/${libdir}/cmake
++    rm -rf ${D}/${libdir}/freerdp
 +}
 +
-+pkg_postinst_${PN} () {
-+    touch $D${sysconfdir}/shells
-+    grep -q "bin/zsh" $D${sysconfdir}/shells || echo /bin/zsh >> $D${sysconfdir}/shells
-+    grep -q "bin/sh" $D${sysconfdir}/shells || echo /bin/sh >> $D${sysconfdir}/shells
-+}
++python populate_packages_prepend () {
++    freerdp_root = d.expand('${libdir}/freerdp')
 +
-+FILES_${PN}-dbg += "\
-+    ${libdir}/${PN}/${PV}/${PN}/.debug/*.so \
-+    ${libdir}/${PN}/${PV}/${PN}/db/.debug/*.so \
-+    ${libdir}/${PN}/${PV}/${PN}/net/.debug/*.so \
-+"
++    do_split_packages(d, freerdp_root, '^(audin_.*)\.so$',
++        output_pattern='libfreerdp-plugin-%s',
++        description='FreeRDP plugin %s',
++        prepend=True, extra_depends='libfreerdp-plugin-audin')
++
++    do_split_packages(d, freerdp_root, '^(rdpsnd_.*)\.so$',
++        output_pattern='libfreerdp-plugin-%s',
++        description='FreeRDP plugin %s',
++        prepend=True, extra_depends='libfreerdp-plugin-rdpsnd')
++
++    do_split_packages(d, freerdp_root, '^(tsmf_.*)\.so$',
++        output_pattern='libfreerdp-plugin-%s',
++        description='FreeRDP plugin %s',
++        prepend=True, extra_depends='libfreerdp-plugin-tsmf')
++
++    do_split_packages(d, freerdp_root, '^([^-]*)\.so$',
++        output_pattern='libfreerdp-plugin-%s',
++        description='FreeRDP plugin %s',
++        prepend=True, extra_depends='')
++}
 -- 
 2.7.1
 
