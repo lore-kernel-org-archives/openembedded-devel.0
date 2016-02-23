@@ -1,24 +1,24 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 3333577377
+	by mail.openembedded.org (Postfix) with ESMTP id 3A44F77343
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 14:23:40 +0000 (UTC)
+	Tue, 23 Feb 2016 14:23:41 +0000 (UTC)
 Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:41 -0800
+	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:42 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751677017"
+X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751677023"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:40 -0800
+	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:41 -0800
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Feb 2016 16:20:04 +0200
-Message-Id: <d245fdb2ab0e8e1bc94e798b4edf0622f9170420.1456236552.git.alexander.kanavin@linux.intel.com>
+Date: Tue, 23 Feb 2016 16:20:05 +0200
+Message-Id: <3a468b9614c945dee07ced1b88d09063bc45ab8f.1456236552.git.alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.7.0
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
-Subject: [PATCH 25/34] libunique: fix gobject introspection support
+Subject: [PATCH 26/34] babl: update to 0.1.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,69 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2016 14:23:40 -0000
+X-List-Received-Date: Tue, 23 Feb 2016 14:23:41 -0000
+
+This fixes gobject introspection support.
 
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- ...-use-LIBTOOL-instead-of-hardcoded-libtool.patch | 27 ++++++++++++++++++++++
- meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb |  6 +++--
- 2 files changed, 31 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-gnome/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch
+ meta-oe/recipes-graphics/babl/{babl_0.1.10.bb => babl_0.1.16.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/babl/{babl_0.1.10.bb => babl_0.1.16.bb} (72%)
 
-diff --git a/meta-oe/recipes-gnome/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch b/meta-oe/recipes-gnome/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch
-new file mode 100644
-index 0000000..2b5eda0
---- /dev/null
-+++ b/meta-oe/recipes-gnome/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch
-@@ -0,0 +1,27 @@
-+From f39bcd5af79aa3efe2cecb2212793c5b596890a8 Mon Sep 17 00:00:00 2001
-+From: Alexander Kanavin <alex.kanavin@gmail.com>
-+Date: Thu, 18 Feb 2016 17:40:45 +0200
-+Subject: [PATCH] Makefile.am: use $(LIBTOOL) instead of hardcoded libtool name
-+
-+Upstream-Status: Pending
-+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-+---
-+ unique/Makefile.am | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/unique/Makefile.am b/unique/Makefile.am
-+index 6475a87..734f431 100644
-+--- a/unique/Makefile.am
-++++ b/unique/Makefile.am
-+@@ -114,7 +114,7 @@ Unique-1.0.gir: $(INTROSPECTION_SCANNER) libunique-1.0.la
-+ 		--include=GObject-2.0 \
-+ 		--include=Gtk-2.0 \
-+ 		--library=libunique-1.0.la \
-+-		--libtool="$(top_builddir)/libtool" \
-++		--libtool="$(LIBTOOL)" \
-+ 		--pkg gobject-2.0 \
-+ 		--pkg gtk+-2.0 \
-+ 		--output $@ \
-+-- 
-+2.7.0
-+
-diff --git a/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb b/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb
-index d97d1d6..3d13e5a 100644
---- a/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb
-+++ b/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb
-@@ -6,7 +6,9 @@ BUGTRACKER = "https://bugzilla.gnome.org/enter_bug.cgi?product=libunique"
- SRC_URI = "${GNOME_MIRROR}/libunique/1.1/libunique-${PV}.tar.bz2 \
- 	file://fix_for_compile_with_gcc-4.6.0.patch \
- 	file://noconst.patch \
--        file://build.patch"
-+        file://build.patch \
-+        file://0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch \
-+        "
+diff --git a/meta-oe/recipes-graphics/babl/babl_0.1.10.bb b/meta-oe/recipes-graphics/babl/babl_0.1.16.bb
+similarity index 72%
+rename from meta-oe/recipes-graphics/babl/babl_0.1.10.bb
+rename to meta-oe/recipes-graphics/babl/babl_0.1.16.bb
+index 4892021..daea052 100644
+--- a/meta-oe/recipes-graphics/babl/babl_0.1.10.bb
++++ b/meta-oe/recipes-graphics/babl/babl_0.1.16.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
+ inherit gnomebase
  
- SRC_URI[md5sum] = "7955769ef31f1bc4f83446dbb3625e6d"
- SRC_URI[sha256sum] = "e5c8041cef8e33c55732f06a292381cb345db946cf792a4ae18aa5c66cdd4fbb"
-@@ -22,4 +24,4 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+ SRC_URI = "http://ftp.gimp.org/pub/${BPN}/0.1/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "9e1542ab5c0b12ea3af076a9a2f02d79"
+-SRC_URI[sha256sum] = "943fc36ceac7dd25bc928256bc7b535a42989c6b971578146869eee5fe5955f4"
++SRC_URI[md5sum] = "a1c72e5f5d55a8b736ef2fa67ddb86ec"
++SRC_URI[sha256sum] = "7d6ba55ec53ee6f6bf6945beec28839d09ff72376f4d83035eb379cd4f3e980e"
  
- 
--inherit autotools pkgconfig
-+inherit autotools pkgconfig gobject-introspection
+ FILES_${PN} += "${libdir}/babl-*/*.so"
+ FILES_${PN}-dev += "${libdir}/babl-*/*.la"
 -- 
 2.7.0
 
