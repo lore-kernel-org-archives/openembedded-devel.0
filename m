@@ -1,24 +1,24 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 42063773B5
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id C2DF5773A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 14:23:51 +0000 (UTC)
+	Tue, 23 Feb 2016 14:23:52 +0000 (UTC)
 Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:52 -0800
+	by fmsmga101.fm.intel.com with ESMTP; 23 Feb 2016 06:23:53 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751677073"
+X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751677111"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:48 -0800
+	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:52 -0800
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Feb 2016 16:20:11 +0200
-Message-Id: <cc4111e7d8659258c7ba4265cc44b3b4a8382b5e.1456236552.git.alexander.kanavin@linux.intel.com>
+Date: Tue, 23 Feb 2016 16:20:13 +0200
+Message-Id: <78142d799f926aa1981b7bdddf8e52f566a271be.1456236552.git.alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.7.0
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
-Subject: [PATCH 32/34] udisks2: fix gobject introspection
+Subject: [PATCH 34/34] python-dbusmock: use real introspection instead on legacy pygobject
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,31 +31,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2016 14:23:51 -0000
+X-List-Received-Date: Tue, 23 Feb 2016 14:23:53 -0000
+
+The patch that switches to pygobject can be now dropped, because
+real introspection is provided in oe-core.
 
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- meta-oe/recipes-support/udisks/udisks2_2.1.5.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...-t-use-gobject-introspection-for-bindings.patch | 29 ----------------------
+ .../python/python-dbusmock_0.10.1.bb               |  1 -
+ 2 files changed, 30 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-dbusmock/0001-Don-t-use-gobject-introspection-for-bindings.patch
 
-diff --git a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb b/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
-index 031b0e8..d273948 100644
---- a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
-+++ b/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
-@@ -11,11 +11,11 @@ SRC_URI = "http://udisks.freedesktop.org/releases/udisks-${PV}.tar.bz2"
- SRC_URI[md5sum] = "73632501002e6de8244f831e38b2b98e"
- SRC_URI[sha256sum] = "2cfcf560447ea44cba2a683342c7062aaaf35e4eb554bed64ac2dd55a70a5fb6"
+diff --git a/meta-python/recipes-devtools/python/python-dbusmock/0001-Don-t-use-gobject-introspection-for-bindings.patch b/meta-python/recipes-devtools/python/python-dbusmock/0001-Don-t-use-gobject-introspection-for-bindings.patch
+deleted file mode 100644
+index f3ab53c..0000000
+--- a/meta-python/recipes-devtools/python/python-dbusmock/0001-Don-t-use-gobject-introspection-for-bindings.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 29960f2fce7ab42ed0a1bf8ce96499fdb6eedf3c Mon Sep 17 00:00:00 2001
+-From: Simon Busch <simon.busch@lge.com>
+-Date: Tue, 25 Mar 2014 15:28:54 +0100
+-Subject: [PATCH] Don't use gobject introspection for bindings
+-
+-In our environment we're not providing the glib python bindings through
+-introspection but just pygobject so we need to use the right import.
+-
+-Signed-off-by: Simon Busch <simon.busch@lge.com>
+----
+- dbusmock/__main__.py |    2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/dbusmock/__main__.py b/dbusmock/__main__.py
+-index 44b63fb..bfd089c 100644
+---- a/dbusmock/__main__.py
+-+++ b/dbusmock/__main__.py
+-@@ -51,7 +51,7 @@ def parse_args():
+- 
+- if __name__ == '__main__':
+-     import dbus.mainloop.glib
+--    from gi.repository import GLib
+-+    import glib as GLib
+- 
+-     args = parse_args()
+-     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+--- 
+-1.7.9.5
+-
+diff --git a/meta-python/recipes-devtools/python/python-dbusmock_0.10.1.bb b/meta-python/recipes-devtools/python/python-dbusmock_0.10.1.bb
+index b247943..2520bfc 100644
+--- a/meta-python/recipes-devtools/python/python-dbusmock_0.10.1.bb
++++ b/meta-python/recipes-devtools/python/python-dbusmock_0.10.1.bb
+@@ -14,7 +14,6 @@ SRC_URI[md5sum] = "7370d325c4a75494dd71885ca65b79e8"
+ SRC_URI[sha256sum] = "03aadc93bdc26ea18d4d78fcff7b6cb34f4e18623bc5cc41cf9539d663cee11e"
  
--inherit autotools systemd gtk-doc
-+inherit autotools systemd gtk-doc gobject-introspection
- 
- S = "${WORKDIR}/udisks-${PV}"
- 
--EXTRA_OECONF = "--disable-introspection --disable-man"
-+EXTRA_OECONF = "--disable-man"
- 
- FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
-                 ${datadir}/dbus-1/ \
+ SRC_URI += " \
+-    file://0001-Don-t-use-gobject-introspection-for-bindings.patch \
+     file://0001-Add-functionality-to-add-own-objects-to-internal-obj.patch \
+     file://0002-Add-possibility-to-import-templates-from-packages.patch \
+ "
 -- 
 2.7.0
 
