@@ -1,52 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 747C077375
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 177F177373
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 16:21:27 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id g62so1630058wme.0
+	Tue, 23 Feb 2016 16:23:34 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id c200so228933230wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 08:21:29 -0800 (PST)
+	Tue, 23 Feb 2016 08:23:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=aYhE6ANugPxHHnK7Ws4+9MHVQ+3vA1sGRT64yT01LPw=;
-	b=rdglnURyMO7uykzt01UZiOLCopqrm1KS6dcfSdxkwMerfmaKKzWzhrxJmW8DHjjnsM
-	+k3jffN+z/pEj1qBSw+D2loOpv9wSSJRtUmAINpeeskRfWA/Yrbue8Vu0AulNgi1VdQn
-	HtPzoQcS+DxraaRxgNBpZLIwE88gS5RdDnwvjISFL8RCw5vFTyK5v4GGkhOyA7yQuPbK
-	yy1ZY5DOPVe6PCZ46G0DY7n+hHo4IEVTYBzfAFN2dAObcvCKwpBYUKTgDait71pA44JD
-	ZnIqBZQ1lchhprkaWb8sV/FOlYpqYQsLwq6giCdaH1LLxf8WU9TESfN4KHOle5GLH2x3
-	Mdww==
+	h=from:to:cc:subject:date:message-id;
+	bh=dfAX78qmx0nQu/Z+YqsayLxev9aJKTjEoRL3Ct1YhME=;
+	b=dQVw0UKZ+Ztnxbwq6bNXtpqldjkgr2BwY8gGOBPiY7bmqjjGRuo01Vs9klLerFNYj1
+	Msi+JGNXQX/w7Wb6YBzz0zkxeaF2p4K7SsvZaVrkcmuGe+J90MaJDetsfT/Q3vSpaA+8
+	ovKLgrQAMVt1djKK8GnOxnDWlGUQZNJ23vj4++YU9WwtwuYOXElXuL42pgsWSobp7pnK
+	ZYmCm7Yd0kJKgF9tgbLdTqNN6iHcmF4bViR3ti0TTwwd0B1SOdPEneMvqO/Z92BTT1bJ
+	SU9Bx8U7zekAgI6aVVNm5J4fIkRYZeGxcJyQC1gFsDObHnKCrhkprhWbqNSdrRcYT3Dm
+	ynlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=aYhE6ANugPxHHnK7Ws4+9MHVQ+3vA1sGRT64yT01LPw=;
-	b=QuLD0coYyVhi36c8BU0O5xdBMiAtfWeXFKs1grzpAJsNiJI6UaN3cvuYvg86a87ZOL
-	mg4O8d/Siz66wHtVq8LyFDS3bVP4R8ifSUW5O6XnfVPP0cY96HHduAwKLiNQu5zSin6b
-	wnRscL5ONi28s5v/KdQK7jM1SqN/l8uKV09yFD93Lkwxr0gmtYLwBjifRQqVYUV+K5U7
-	ieGjF0dtWhaJkRaTgvzZ2rGh877KDICfjx7D3bdMU8EhvULzDvgeaxNX2vbl9geRiT9D
-	6LH5GkD0zyGuIhKp0UCYhyd8vUbYTLcU/6GSn9eQsbGnEg3bEn0oj0bQNTV8Ds0tYd3a
-	/d8Q==
-X-Gm-Message-State: AG10YOTlZJx1l13yhfPQBSDxop55QFF7N6oA+Cy3jCRhkga0FpvLc/l9hXxg20ncYYHt6w==
-X-Received: by 10.28.48.19 with SMTP id w19mr18141241wmw.18.1456244488589;
-	Tue, 23 Feb 2016 08:21:28 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=dfAX78qmx0nQu/Z+YqsayLxev9aJKTjEoRL3Ct1YhME=;
+	b=ACl9ZGndBNaKn/Ke2tMZFKcqbwUdnvGflOi7FxrIpnD2NKDqI46zrJ/xpSUqQlrevj
+	4WLYMNq7UwyRR4mGGkCmCOsrChYMVL/52CPAEifGAQbGTfs8GVpEbOLy5QnNAtvmS+FN
+	9G2U0VvDh1YndyQsToJyDhHYPF5yqPM9cVp2tODDaNsmr1MKt5/0pToW+Ksa2rsk4luu
+	I6E4PSJO15czWjEgmjQJxCtBjq0JcNc2Jt9joJnXRuUuV1wWPixK5XhKzRz2nffY+z4w
+	QVSCQYSf5gyog2fHZiVdpbiL3bs9jHaSJIX9hXz0MIYlRqYRRGVJBvAxRKB+EJATACC7
+	VmTw==
+X-Gm-Message-State: AG10YORNLrmUSV58V4AxfKte5xCRp6iC+C+Atni/nbxnjgM6u4bMWz9IVDga0tTqNHIdrg==
+X-Received: by 10.194.75.164 with SMTP id d4mr34103690wjw.15.1456244615228;
+	Tue, 23 Feb 2016 08:23:35 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	t8sm30455198wjy.41.2016.02.23.08.21.27
-	for <openembedded-devel@lists.openembedded.org>
+	o128sm2805671wmb.19.2016.02.23.08.23.34
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 23 Feb 2016 08:21:27 -0800 (PST)
+	Tue, 23 Feb 2016 08:23:34 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 23 Feb 2016 17:22:27 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160223162227.GB2564@jama>
-References: <1453809321-10937-1-git-send-email-schnitzeltony@googlemail.com>
-	<1453809321-10937-3-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-In-Reply-To: <1453809321-10937-3-git-send-email-schnitzeltony@googlemail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH 3/3] geis: initial add 2.2.17
+Date: Tue, 23 Feb 2016 17:24:33 +0100
+Message-Id: <1456244673-3189-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.1
+Subject: [PATCH][meta-oe] zsh: fold .inc into .bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,117 +52,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2016 16:21:29 -0000
-X-Groupsio-MsgNum: 60167
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ftEhullJWpWg/VHq"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Feb 2016 16:23:35 -0000
 
---ftEhullJWpWg/VHq
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-extended/zsh/zsh.inc      | 57 ------------------------------
+ meta-oe/recipes-extended/zsh/zsh_5.0.5.bb | 58 +++++++++++++++++++++++++++++--
+ 2 files changed, 56 insertions(+), 59 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/zsh/zsh.inc
 
-On Tue, Jan 26, 2016 at 12:55:21PM +0100, Andreas M=FCller wrote:
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> ---
->  .../canonical-multitouch/geis_2.2.17.bb            | 52 ++++++++++++++++=
-++++++
->  1 file changed, 52 insertions(+)
->  create mode 100644 meta-oe/recipes-support/canonical-multitouch/geis_2.2=
-=2E17.bb
->=20
-> diff --git a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb =
-b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-> new file mode 100644
-> index 0000000..9403bdf
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-> @@ -0,0 +1,52 @@
-> +SUMMARY =3D "An implementation of the GEIS interface"
-> +DESCRIPTION =3D "An implementation of the GEIS (Gesture Engine Interface=
- and Support) \
-> +interface\
-> +GEIS is a library for applications and toolkit programmers which \
-> +provides a consistent platform independent interface for any \
-> +system-wide input gesture recognition mechanism."
-> +
-> +HOMEPAGE =3D "https://launchpad.net/geis"
-> +
-> +LICENSE =3D "GPLv3 & LGPLv3"
-> +LIC_FILES_CHKSUM =3D " \
-> +    file://COPYING;md5=3D6a6a8e020838b23406c81b19c1d46df6 \
-> +    file://COPYING.GPL;md5=3Df27defe1e96c2e1ecd4e0c9be8967949 \
-> +"
-> +
-> +inherit autotools pkgconfig python3native lib_package
-> +
-> +DEPENDS +=3D "grail dbus-glib python3"
+diff --git a/meta-oe/recipes-extended/zsh/zsh.inc b/meta-oe/recipes-extended/zsh/zsh.inc
+deleted file mode 100644
+index b8fce80..0000000
+--- a/meta-oe/recipes-extended/zsh/zsh.inc
++++ /dev/null
+@@ -1,57 +0,0 @@
+-SUMMARY = "UNIX Shell similar to the Korn shell"
+-DESCRIPTION = "Zsh is a shell designed for interactive use, although it is also a \
+-               powerful scripting language. Many of the useful features of bash, \
+-               ksh, and tcsh were incorporated into zsh; many original features were added."
+-HOMEPAGE = "http://www.zsh.org"
+-SECTION = "base/shell"
+-
+-LICENSE = "zsh"
+-LIC_FILES_CHKSUM = "file://LICENCE;md5=b7bc853894664be455a922db9805288e"
+-
+-DEPENDS = "ncurses bison-native"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
+-
+-inherit autotools gettext update-alternatives
+-
+-EXTRA_OECONF = " \
+-    --bindir=${base_bindir} \
+-    --enable-etcdir=${sysconfdir} \
+-    --enable-fndir=${datadir}/${PN}/${PV}/functions \
+-    --enable-site-fndir=${datadir}/${PN}/site-functions \
+-    --with-term-lib='ncursesw ncurses' \
+-    --with-tcsetpgrp \
+-    --enable-cap \
+-    --enable-multibyte \
+-    --disable-gdbm \
+-    --disable-dynamic \
+-    zsh_cv_shared_environ=yes \
+-"
+-
+-ALTERNATIVE_${PN} = "sh"
+-ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"
+-ALTERNATIVE_TARGET[sh] = "${base_bindir}/${BPN}"
+-ALTERNATIVE_PRIORITY = "100"
+-
+-export AUTOHEADER = "true"
+-
+-do_configure () {
+-    gnu-configize --force ${S}
+-    oe_runconf
+-}
+-
+-do_install_append () {
+-    rm -fr ${D}/usr/share
+-}
+-
+-pkg_postinst_${PN} () {
+-    touch $D${sysconfdir}/shells
+-    grep -q "bin/zsh" $D${sysconfdir}/shells || echo /bin/zsh >> $D${sysconfdir}/shells
+-    grep -q "bin/sh" $D${sysconfdir}/shells || echo /bin/sh >> $D${sysconfdir}/shells
+-}
+-
+-FILES_${PN}-dbg += "\
+-    ${libdir}/${PN}/${PV}/${PN}/.debug/*.so \
+-    ${libdir}/${PN}/${PV}/${PN}/db/.debug/*.so \
+-    ${libdir}/${PN}/${PV}/${PN}/net/.debug/*.so \
+-"
+diff --git a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb b/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
+index a7170dc..658f3d9 100644
+--- a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
++++ b/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
+@@ -1,5 +1,59 @@
+-require zsh.inc
+-DEPENDS += "libcap libpcre gdbm groff-native"
++SUMMARY = "UNIX Shell similar to the Korn shell"
++DESCRIPTION = "Zsh is a shell designed for interactive use, although it is also a \
++               powerful scripting language. Many of the useful features of bash, \
++               ksh, and tcsh were incorporated into zsh; many original features were added."
++HOMEPAGE = "http://www.zsh.org"
++SECTION = "base/shell"
+ 
++LICENSE = "zsh"
++LIC_FILES_CHKSUM = "file://LICENCE;md5=b7bc853894664be455a922db9805288e"
++
++DEPENDS = "ncurses bison-native libcap libpcre gdbm groff-native"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
+ SRC_URI[md5sum] = "6fb0e3e52a0f8de5ca63138391b81ce0"
+ SRC_URI[sha256sum] = "b35cf19e4a6ba39fd03c6372b8a8760a491cc2e2e4aba3d15023ff291c2894b4"
++
++inherit autotools gettext update-alternatives
++
++EXTRA_OECONF = " \
++    --bindir=${base_bindir} \
++    --enable-etcdir=${sysconfdir} \
++    --enable-fndir=${datadir}/${PN}/${PV}/functions \
++    --enable-site-fndir=${datadir}/${PN}/site-functions \
++    --with-term-lib='ncursesw ncurses' \
++    --with-tcsetpgrp \
++    --enable-cap \
++    --enable-multibyte \
++    --disable-gdbm \
++    --disable-dynamic \
++    zsh_cv_shared_environ=yes \
++"
++
++ALTERNATIVE_${PN} = "sh"
++ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"
++ALTERNATIVE_TARGET[sh] = "${base_bindir}/${BPN}"
++ALTERNATIVE_PRIORITY = "100"
++
++export AUTOHEADER = "true"
++
++do_configure () {
++    gnu-configize --force ${S}
++    oe_runconf
++}
++
++do_install_append () {
++    rm -fr ${D}/usr/share
++}
++
++pkg_postinst_${PN} () {
++    touch $D${sysconfdir}/shells
++    grep -q "bin/zsh" $D${sysconfdir}/shells || echo /bin/zsh >> $D${sysconfdir}/shells
++    grep -q "bin/sh" $D${sysconfdir}/shells || echo /bin/sh >> $D${sysconfdir}/shells
++}
++
++FILES_${PN}-dbg += "\
++    ${libdir}/${PN}/${PV}/${PN}/.debug/*.so \
++    ${libdir}/${PN}/${PV}/${PN}/db/.debug/*.so \
++    ${libdir}/${PN}/${PV}/${PN}/net/.debug/*.so \
++"
+-- 
+2.7.1
 
-Fails to build without XCB (building in DISTRO without x11 in DISTRO_FEATUR=
-ES)
 
-| configure: error: XCB development libraries not found
-
-
-> +
-> +SRC_URI =3D "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BPN}-$=
-{PV}.tar.xz"
-> +SRC_URI[md5sum] =3D "2ff9d76a3ea5794516bb02c9d1924faf"
-> +SRC_URI[sha256sum] =3D "8a60f5683852094038904e690d23cc5a90a980fc52da67f0=
-f28890baa25c70eb"
-> +
-> +EXTRA_OECONF =3D "--disable-integration-tests"
-> +
-> +FILES_${PN}-bin =3D "${bindir}"
-> +RDEPENDS_${PN}-bin =3D " \
-> +    python3-compression \
-> +    python3-core \
-> +    python3-crypt \
-> +    python3-ctypes \
-> +    python3-fcntl \
-> +    python3-misc \
-> +    python3-pickle \
-> +    python3-shell \
-> +    python3-stringold \
-> +    python3-subprocess \
-> +    python3-textutils \
-> +    python3-threading \
-> +"
-> +
-> +FILES_${PN} +=3D " \
-> +    ${datadir}/geisview \
-> +    ${libdir}/${PYTHON_DIR}/site-packages/geis* \
-> +    ${libdir}/${PYTHON_DIR}/site-packages/_*.so \
-> +"
-> +
-> +FILES_${PN}-dbg +=3D "${libdir}/${PYTHON_DIR}/site-packages/.debug"
-> +
-> +FILES_${PN}-dev +=3D "${libdir}/${PYTHON_DIR}/site-packages/_*.la"
-> +
-> +FILES_${PN}-staticdev +=3D "${libdir}/${PYTHON_DIR}/site-packages/_*.a"
-> --=20
-> 2.5.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---ftEhullJWpWg/VHq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlbMhykACgkQN1Ujt2V2gBx/XgCfeD2Arjty7NXq07b9Y6T7/2nj
-xCcAnjcZBfmW9Iv5+KlNdPlkxBeO+MJY
-=P5uY
------END PGP SIGNATURE-----
-
---ftEhullJWpWg/VHq--
