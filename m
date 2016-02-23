@@ -1,24 +1,24 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 40508772E2
+	by mail.openembedded.org (Postfix) with ESMTP id 576A277344
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 14:23:20 +0000 (UTC)
+	Tue, 23 Feb 2016 14:23:21 +0000 (UTC)
 Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:21 -0800
+	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:22 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751676906"
+X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751676907"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:20 -0800
+	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:21 -0800
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Feb 2016 16:19:45 +0200
-Message-Id: <b646c93b776c495f6da9b82d691319aaa6536a52.1456236552.git.alexander.kanavin@linux.intel.com>
+Date: Tue, 23 Feb 2016 16:19:46 +0200
+Message-Id: <38a5787d17447aba9af2377b0573c4f830763017.1456236552.git.alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.7.0
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
-Subject: [PATCH 06/34] libgdata: update to 0.16.1
+Subject: [PATCH 07/34] libgsf: fix gobject introspection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,50 +31,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2016 14:23:20 -0000
-
-This fixes gobject introspection support.
+X-List-Received-Date: Tue, 23 Feb 2016 14:23:21 -0000
 
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- .../{libgdata_0.7.1.bb => libgdata_0.16.1.bb}       | 21 ++++++++++++++++-----
- 1 file changed, 16 insertions(+), 5 deletions(-)
- rename meta-gnome/recipes-gnome/libgdata/{libgdata_0.7.1.bb => libgdata_0.16.1.bb} (43%)
+ ...c-drop-a-copy-paste-of-introspection.m4-m.patch | 103 +++++++++++++++++++++
+ meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb  |   2 +
+ 2 files changed, 105 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
 
-diff --git a/meta-gnome/recipes-gnome/libgdata/libgdata_0.7.1.bb b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-similarity index 43%
-rename from meta-gnome/recipes-gnome/libgdata/libgdata_0.7.1.bb
-rename to meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-index a641270..c1f1238 100644
---- a/meta-gnome/recipes-gnome/libgdata/libgdata_0.7.1.bb
-+++ b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-@@ -7,10 +7,21 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
-                     file://gdata/gdata.h;endline=20;md5=079a554efcf65d46f96a515806e7e99a \
-                     file://gdata/gdata-types.h;endline=20;md5=7399b111aac8718da13888fc634be6ef"
- 
--DEPENDS = "libxml2 glib-2.0 libsoup-2.4 intltool-native"
-+DEPENDS = "libxml2 glib-2.0 libsoup-2.4 intltool-native liboauth gcr json-glib"
- 
--inherit gnomebase pkgconfig autotools-brokensep gettext gtk-doc
-+inherit gnomebase pkgconfig autotools-brokensep gettext gtk-doc vala
- 
--SRC_URI[archive.md5sum] = "ec5262cbcb07b63b58d45aa3ac636096"
--SRC_URI[archive.sha256sum] = "fb244138276a5ce98510b0e2408bbf6f9ce0fd8cdcf86f07cd4be38afbb7c2bc"
--GNOME_COMPRESS_TYPE="bz2"
-+do_configure_prepend_class-target () {
-+    # introspection.m4 pre-packaged with upstream tarballs does not yet
-+    # have our fixes
-+    rm -f ${S}/introspection.m4
-+}
+diff --git a/meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch b/meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
+new file mode 100644
+index 0000000..bc0090e
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
+@@ -0,0 +1,103 @@
++From 16d2c2e74350fda5505982fb150e72af7aee7454 Mon Sep 17 00:00:00 2001
++From: Alexander Kanavin <alex.kanavin@gmail.com>
++Date: Fri, 19 Feb 2016 16:23:56 +0200
++Subject: [PATCH] configure.ac: drop a copy-paste of introspection.m4 macros
 +
-+do_compile_prepend() {
-+        export GIR_EXTRA_LIBS_PATH="${B}/gdata/.libs"
-+}
++Upstream-Status: Pending
++Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++---
++ configure.ac | 78 +-----------------------------------------------------------
++ 1 file changed, 1 insertion(+), 77 deletions(-)
 +
-+EXTRA_OECONF += "--disable-goa --disable-tests"
++diff --git a/configure.ac b/configure.ac
++index 54f7663..3038535 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -77,83 +77,7 @@ libgsf_reqs="
++ "
++ 
++ PKG_CHECK_MODULES(LIBGSF, $libgsf_reqs)
++-# GObject Introspection
++-GIR_REQ=1.0.0
++-AC_ARG_ENABLE(introspection,
++-          AS_HELP_STRING([--enable-introspection[=@<:@no/auto/yes@:>@]],
++-                         [Enable introspection for this build]),, 
++-                         [enable_introspection=no])
++-
++-AC_MSG_CHECKING([for gobject-introspection])
++-
++-dnl presence/version checking
++-AS_CASE([$enable_introspection],
++-[no], [
++-    found_introspection="no (disabled, use --enable-introspection to enable)"
++-],
++-[yes],[
++-    PKG_CHECK_EXISTS([gobject-introspection-1.0],,
++-                     AC_MSG_ERROR([gobject-introspection-1.0 is not installed]))
++-    PKG_CHECK_EXISTS([gobject-introspection-1.0 >= $GIR_REQ],
++-                     found_introspection=yes,
++-                     AC_MSG_ERROR([You need to have gobject-introspection >= $1 installed to build AC_PACKAGE_NAME]))
++-],
++-[auto],[
++-    PKG_CHECK_EXISTS([gobject-introspection-1.0 >= $GIR_REQ], found_introspection=yes, found_introspection=no)
++-dnl Canonicalize enable_introspection
++-enable_introspection=$found_introspection
++-],
++-[	
++-    AC_MSG_ERROR([invalid argument passed to --enable-introspection, should be one of @<:@no/auto/yes@:>@])
++-])
++-
++-AC_MSG_RESULT([$found_introspection])
++-
++-if test "x$found_introspection" = "xyes"; then
++-   dnl You can override INTROSPECTION_GIRDIR and INTROSPECTION_TYPELIBDIR
++-   dnl if you wish.  If you override the latter, you might want to set
++-   dnl GI_TYPELIB_PATH to include the same directory.  For example
++-   dnl
++-   dnl GI_TYPELIB_PATH=$PREFIX/lib64/girepository-1.0
++-   dnl INTROSPECTION_TYPELIBDIR=$GI_TYPELIB_PATH
++-   dnl INTROSPECTION_GIRDIR=$PREFIX/share/gir-1.0
++-   dnl
++-   dnl Note, that unlike binaries produced with libgsf, nothing tells
++-   dnl python where to find libgsf, so you might also need to set
++-   dnl LD_LIBRARY_PATH.
++-
++-   INTROSPECTION_SCANNER=`$PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0`
++-   INTROSPECTION_COMPILER=`$PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0`
++-   INTROSPECTION_GENERATE=`$PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0`
++-   if test "x$INTROSPECTION_GIRDIR" = x; then
++-     INTROSPECTION_GIRDIR=`$PKG_CONFIG --variable=girdir gobject-introspection-1.0`
++-   fi
++-   if test "x$INTROSPECTION_TYPELIBDIR" = x; then
++-     INTROSPECTION_TYPELIBDIR="$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
++-   fi
++-   INTROSPECTION_CFLAGS=`$PKG_CONFIG --cflags gobject-introspection-1.0`
++-   INTROSPECTION_LIBS=`$PKG_CONFIG --libs gobject-introspection-1.0`
++-   INTROSPECTION_MAKEFILE=`$PKG_CONFIG --variable=datadir gobject-introspection-1.0`/gobject-introspection-1.0/Makefile.introspection
++-else
++-   INTROSPECTION_SCANNER=
++-   INTROSPECTION_COMPILER=
++-   INTROSPECTION_GENERATE=
++-   INTROSPECTION_GIRDIR=
++-   INTROSPECTION_TYPELIBDIR=
++-   INTROSPECTION_CFLAGS=
++-   INTROSPECTION_LIBS=
++-   INTROSPECTION_MAKEFILE=
++-fi
++-AC_SUBST(INTROSPECTION_SCANNER)
++-AC_SUBST(INTROSPECTION_COMPILER)
++-AC_SUBST(INTROSPECTION_GENERATE)
++-AC_SUBST(INTROSPECTION_GIRDIR)
++-AC_SUBST(INTROSPECTION_TYPELIBDIR)
++-AC_SUBST(INTROSPECTION_CFLAGS)
++-AC_SUBST(INTROSPECTION_LIBS)
++-AC_SUBST(INTROSPECTION_MAKEFILE)
++-
++-AM_CONDITIONAL(HAVE_INTROSPECTION, test "x$found_introspection" = "xyes")
+++GOBJECT_INTROSPECTION_CHECK([1.46.0])
++ dnl we need to change the install directories for distcheck
++ AC_ARG_WITH([gir-dir],
++ 	AS_HELP_STRING(
++-- 
++2.7.0
 +
-+SRC_URI[archive.md5sum] = "eb552a8a8482e4231a3d1baf7262e64d"
-+SRC_URI[archive.sha256sum] = "8740e071ecb2ae0d2a4b9f180d2ae5fdf9dc4c41e7ff9dc7e057f62442800827"
+diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
+index d7bbd3b..eacbd37 100644
+--- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
++++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
+@@ -9,6 +9,8 @@ DEPENDS= "libxml2 bzip2 glib-2.0 zlib"
+ 
+ inherit autotools pkgconfig gnome gconf
+ 
++SRC_URI += "file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch"
++
+ SRC_URI[archive.md5sum] = "3056b94bb3281dbc8311371bfc23cf72"
+ SRC_URI[archive.sha256sum] = "4d8bca33424eb711acdb6a060cb488b132063d699c4fa201db24c2c89c62529c"
+ 
 -- 
 2.7.0
 
