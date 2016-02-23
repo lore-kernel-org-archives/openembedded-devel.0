@@ -1,24 +1,24 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 576A277344
+	by mail.openembedded.org (Postfix) with ESMTP id 4B1D877344
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 14:23:21 +0000 (UTC)
+	Tue, 23 Feb 2016 14:23:22 +0000 (UTC)
 Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:22 -0800
+	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:23 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751676907"
+X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751676908"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:21 -0800
+	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:22 -0800
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Feb 2016 16:19:46 +0200
-Message-Id: <38a5787d17447aba9af2377b0573c4f830763017.1456236552.git.alexander.kanavin@linux.intel.com>
+Date: Tue, 23 Feb 2016 16:19:47 +0200
+Message-Id: <19160a70bb5fbb5cdf703b50a1ff4e98d481dbb6.1456236552.git.alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.7.0
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
-Subject: [PATCH 07/34] libgsf: fix gobject introspection
+Subject: [PATCH 08/34] libwnck: fix gobject introspection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,137 +31,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2016 14:23:21 -0000
+X-List-Received-Date: Tue, 23 Feb 2016 14:23:22 -0000
 
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- ...c-drop-a-copy-paste-of-introspection.m4-m.patch | 103 +++++++++++++++++++++
- meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb  |   2 +
- 2 files changed, 105 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
+ meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch b/meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
-new file mode 100644
-index 0000000..bc0090e
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
-@@ -0,0 +1,103 @@
-+From 16d2c2e74350fda5505982fb150e72af7aee7454 Mon Sep 17 00:00:00 2001
-+From: Alexander Kanavin <alex.kanavin@gmail.com>
-+Date: Fri, 19 Feb 2016 16:23:56 +0200
-+Subject: [PATCH] configure.ac: drop a copy-paste of introspection.m4 macros
-+
-+Upstream-Status: Pending
-+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-+---
-+ configure.ac | 78 +-----------------------------------------------------------
-+ 1 file changed, 1 insertion(+), 77 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 54f7663..3038535 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -77,83 +77,7 @@ libgsf_reqs="
-+ "
-+ 
-+ PKG_CHECK_MODULES(LIBGSF, $libgsf_reqs)
-+-# GObject Introspection
-+-GIR_REQ=1.0.0
-+-AC_ARG_ENABLE(introspection,
-+-          AS_HELP_STRING([--enable-introspection[=@<:@no/auto/yes@:>@]],
-+-                         [Enable introspection for this build]),, 
-+-                         [enable_introspection=no])
-+-
-+-AC_MSG_CHECKING([for gobject-introspection])
-+-
-+-dnl presence/version checking
-+-AS_CASE([$enable_introspection],
-+-[no], [
-+-    found_introspection="no (disabled, use --enable-introspection to enable)"
-+-],
-+-[yes],[
-+-    PKG_CHECK_EXISTS([gobject-introspection-1.0],,
-+-                     AC_MSG_ERROR([gobject-introspection-1.0 is not installed]))
-+-    PKG_CHECK_EXISTS([gobject-introspection-1.0 >= $GIR_REQ],
-+-                     found_introspection=yes,
-+-                     AC_MSG_ERROR([You need to have gobject-introspection >= $1 installed to build AC_PACKAGE_NAME]))
-+-],
-+-[auto],[
-+-    PKG_CHECK_EXISTS([gobject-introspection-1.0 >= $GIR_REQ], found_introspection=yes, found_introspection=no)
-+-dnl Canonicalize enable_introspection
-+-enable_introspection=$found_introspection
-+-],
-+-[	
-+-    AC_MSG_ERROR([invalid argument passed to --enable-introspection, should be one of @<:@no/auto/yes@:>@])
-+-])
-+-
-+-AC_MSG_RESULT([$found_introspection])
-+-
-+-if test "x$found_introspection" = "xyes"; then
-+-   dnl You can override INTROSPECTION_GIRDIR and INTROSPECTION_TYPELIBDIR
-+-   dnl if you wish.  If you override the latter, you might want to set
-+-   dnl GI_TYPELIB_PATH to include the same directory.  For example
-+-   dnl
-+-   dnl GI_TYPELIB_PATH=$PREFIX/lib64/girepository-1.0
-+-   dnl INTROSPECTION_TYPELIBDIR=$GI_TYPELIB_PATH
-+-   dnl INTROSPECTION_GIRDIR=$PREFIX/share/gir-1.0
-+-   dnl
-+-   dnl Note, that unlike binaries produced with libgsf, nothing tells
-+-   dnl python where to find libgsf, so you might also need to set
-+-   dnl LD_LIBRARY_PATH.
-+-
-+-   INTROSPECTION_SCANNER=`$PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0`
-+-   INTROSPECTION_COMPILER=`$PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0`
-+-   INTROSPECTION_GENERATE=`$PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0`
-+-   if test "x$INTROSPECTION_GIRDIR" = x; then
-+-     INTROSPECTION_GIRDIR=`$PKG_CONFIG --variable=girdir gobject-introspection-1.0`
-+-   fi
-+-   if test "x$INTROSPECTION_TYPELIBDIR" = x; then
-+-     INTROSPECTION_TYPELIBDIR="$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
-+-   fi
-+-   INTROSPECTION_CFLAGS=`$PKG_CONFIG --cflags gobject-introspection-1.0`
-+-   INTROSPECTION_LIBS=`$PKG_CONFIG --libs gobject-introspection-1.0`
-+-   INTROSPECTION_MAKEFILE=`$PKG_CONFIG --variable=datadir gobject-introspection-1.0`/gobject-introspection-1.0/Makefile.introspection
-+-else
-+-   INTROSPECTION_SCANNER=
-+-   INTROSPECTION_COMPILER=
-+-   INTROSPECTION_GENERATE=
-+-   INTROSPECTION_GIRDIR=
-+-   INTROSPECTION_TYPELIBDIR=
-+-   INTROSPECTION_CFLAGS=
-+-   INTROSPECTION_LIBS=
-+-   INTROSPECTION_MAKEFILE=
-+-fi
-+-AC_SUBST(INTROSPECTION_SCANNER)
-+-AC_SUBST(INTROSPECTION_COMPILER)
-+-AC_SUBST(INTROSPECTION_GENERATE)
-+-AC_SUBST(INTROSPECTION_GIRDIR)
-+-AC_SUBST(INTROSPECTION_TYPELIBDIR)
-+-AC_SUBST(INTROSPECTION_CFLAGS)
-+-AC_SUBST(INTROSPECTION_LIBS)
-+-AC_SUBST(INTROSPECTION_MAKEFILE)
-+-
-+-AM_CONDITIONAL(HAVE_INTROSPECTION, test "x$found_introspection" = "xyes")
-++GOBJECT_INTROSPECTION_CHECK([1.46.0])
-+ dnl we need to change the install directories for distcheck
-+ AC_ARG_WITH([gir-dir],
-+ 	AS_HELP_STRING(
-+-- 
-+2.7.0
-+
-diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
-index d7bbd3b..eacbd37 100644
---- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
-+++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
-@@ -9,6 +9,8 @@ DEPENDS= "libxml2 bzip2 glib-2.0 zlib"
+diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
+index 3e5370d..f9e9615 100644
+--- a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
++++ b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
+@@ -3,7 +3,7 @@ LICENSE = "LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
  
- inherit autotools pkgconfig gnome gconf
+ SECTION = "x11/libs"
+-DEPENDS = "gobject-introspection-stub gtk+ gdk-pixbuf-native libxres"
++DEPENDS = "gtk+ gdk-pixbuf-native libxres"
  
-+SRC_URI += "file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch"
-+
- SRC_URI[archive.md5sum] = "3056b94bb3281dbc8311371bfc23cf72"
- SRC_URI[archive.sha256sum] = "4d8bca33424eb711acdb6a060cb488b132063d699c4fa201db24c2c89c62529c"
- 
+ PACKAGECONFIG ??= "startup-notification"
+ PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
 -- 
 2.7.0
 
