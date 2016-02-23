@@ -1,24 +1,24 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 97E6977377
+	by mail.openembedded.org (Postfix) with ESMTP id 6D56A7738B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 14:23:42 +0000 (UTC)
+	Tue, 23 Feb 2016 14:23:43 +0000 (UTC)
 Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:44 -0800
+	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:45 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751677029"
+X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751677038"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:42 -0800
+	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:43 -0800
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Feb 2016 16:20:06 +0200
-Message-Id: <14534fea3286420b1705a4d0d7a26d30fbe86d01.1456236552.git.alexander.kanavin@linux.intel.com>
+Date: Tue, 23 Feb 2016 16:20:07 +0200
+Message-Id: <55a693f43738f30d0878aaf1fdf94d3560c0d6f4.1456236552.git.alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.7.0
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
-Subject: [PATCH 27/34] gegl: update to 0.3.4
+Subject: [PATCH 28/34] gimp: accept newer versins of babl and gegl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,61 +31,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2016 14:23:42 -0000
+X-List-Received-Date: Tue, 23 Feb 2016 14:23:43 -0000
 
-This fixes gobject introspection support.
+Add a patch that makes gimp accept new versions of babl and gegl,
+taken from Debian.
 
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- .../gegl/{gegl_0.2.0.bb => gegl_0.3.4.bb}          | 22 +++++++++++++---------
- 1 file changed, 13 insertions(+), 9 deletions(-)
- rename meta-oe/recipes-graphics/gegl/{gegl_0.2.0.bb => gegl_0.3.4.bb} (46%)
+ .../gimp/gimp/bump_Babl-GEGL_versions.patch        | 53 ++++++++++++++++++++++
+ meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb       |  1 +
+ 2 files changed, 54 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/gimp/gimp/bump_Babl-GEGL_versions.patch
 
-diff --git a/meta-oe/recipes-graphics/gegl/gegl_0.2.0.bb b/meta-oe/recipes-graphics/gegl/gegl_0.3.4.bb
-similarity index 46%
-rename from meta-oe/recipes-graphics/gegl/gegl_0.2.0.bb
-rename to meta-oe/recipes-graphics/gegl/gegl_0.3.4.bb
-index bd2e5d4..64599d3 100644
---- a/meta-oe/recipes-graphics/gegl/gegl_0.2.0.bb
-+++ b/meta-oe/recipes-graphics/gegl/gegl_0.3.4.bb
-@@ -1,24 +1,28 @@
- SUMMARY = "GEGL (Generic Graphics Library) is a graph based image processing framework"
- LICENSE = "LGPL-3.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
--DEPENDS = "babl librsvg glib-2.0 gtk+ pango cairo expat zlib libpng jpeg virtual/libsdl"
-+DEPENDS = "babl librsvg glib-2.0 gtk+ pango cairo expat zlib libpng jpeg virtual/libsdl json-glib"
- 
--inherit gnome
-+EXTRA_OECONF = "--disable-docs"
- 
--EXTRA_OECONF = "--disable-docs "
-+inherit gnomebase vala
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[jasper] = "--with-jasper,--without-jasper,jasper"
- PACKAGECONFIG[avformat] = "--with-libavformat,--without-libavformat,libav"
-+PACKAGECONFIG[lcms] = "--with-lcms,--without-lcms,lcms"
-+PACKAGECONFIG[tiff] = "--with-libtiff,--without-libtiff,tiff"
-+PACKAGECONFIG[webp] = "--with-webp,--without-webp,webp"
- 
--SRC_URI = "http://ftp.gimp.org/pub/${BPN}/0.2/${BP}.tar.bz2 \
-+SRC_URI = "http://ftp.gimp.org/pub/${BPN}/0.3/${BP}.tar.bz2 \
-            file://pkgconfig.patch "
--SRC_URI[md5sum] = "32b00002f1f1e316115c4ed922e1dec8"
--SRC_URI[sha256sum] = "df2e6a0d9499afcbc4f9029c18d9d1e0dd5e8710a75e17c9b1d9a6480dd8d426"
-+SRC_URI[md5sum] = "c19478321594d715a4cb324a0decda6f"
-+SRC_URI[sha256sum] = "846290a790854d1e6b7c17a2d6f82ad7cb14c72e240bd3b81b98cc0ceddbc3ec"
- 
--FILES_${PN} += "${libdir}/gegl-*/*.so"
--FILES_${PN}-dev += "${libdir}/gegl-*/*.la"
--FILES_${PN}-dbg += "${libdir}/gegl-*/.debug"
-+# There are a couple of non-symlink .so files installed into libdir, which need to go into main package
-+FILES_${PN}_append = " ${libdir}/gegl-0.3/*.so ${libdir}/gegl-0.3/*.json ${libdir}/libgegl-npd-0.3.so ${libdir}/libgegl-sc-0.3.so"
-+FILES_${PN}-dev_append = " ${libdir}/gegl-0.3/*.la ${libdir}/libgegl-0.3.so"
-+FILES_${PN}-dev_remove = "${libdir}/lib*.so"
- 
- # Fails to build with thumb-1 (qemuarm)
- # gegl-0.2.0/operations/common/matting-global.c: In function 'matting_process':
+diff --git a/meta-oe/recipes-graphics/gimp/gimp/bump_Babl-GEGL_versions.patch b/meta-oe/recipes-graphics/gimp/gimp/bump_Babl-GEGL_versions.patch
+new file mode 100644
+index 0000000..b71bf32
+--- /dev/null
++++ b/meta-oe/recipes-graphics/gimp/gimp/bump_Babl-GEGL_versions.patch
+@@ -0,0 +1,53 @@
++Bump acceptable versions of babl and gegl.
++
++Patch is taken from debian:
++https://packages.debian.org/stretch/gimp
++
++Upstream-Status: Inappropriate [OE specific]
++Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++diff --git a/app/sanity.c b/app/sanity.c
++index febddfb..85fea55 100644
++--- a/app/sanity.c
+++++ b/app/sanity.c
++@@ -351,7 +351,7 @@ sanity_check_babl (void)
++ 
++ #define BABL_REQUIRED_MAJOR 0
++ #define BABL_REQUIRED_MINOR 1
++-#define BABL_REQUIRED_MICRO 10
+++#define BABL_REQUIRED_MICRO 12
++ 
++   babl_get_version (&babl_major_version,
++                     &babl_minor_version,
++@@ -388,7 +388,7 @@ sanity_check_gegl (void)
++   gint gegl_micro_version;
++ 
++ #define GEGL_REQUIRED_MAJOR 0
++-#define GEGL_REQUIRED_MINOR 2
+++#define GEGL_REQUIRED_MINOR 3
++ #define GEGL_REQUIRED_MICRO 0
++ 
++   gegl_get_version (&gegl_major_version,
++diff --git a/configure.ac b/configure.ac
++index 26812b6..4252fe9 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -40,8 +40,8 @@ m4_define([gimp_stable],
++ m4_define([gimp_full_name], [GNU Image Manipulation Program])
++ 
++ # required versions of other packages
++-m4_define([babl_required_version], [0.1.10])
++-m4_define([gegl_required_version], [0.2.0])
+++m4_define([babl_required_version], [0.1.12])
+++m4_define([gegl_required_version], [0.3.0])
++ m4_define([glib_required_version], [2.30.2])
++ m4_define([atk_required_version], [2.2.0])
++ m4_define([gtk_required_version], [2.24.10])
++@@ -519,7 +519,7 @@ AC_SUBST(ISO_CODES_LOCALEDIR)
++ ###############################
++ 
++ PKG_CHECK_MODULES(BABL, babl >= babl_required_version)
++-PKG_CHECK_MODULES(GEGL, gegl-0.2 >= gegl_required_version)
+++PKG_CHECK_MODULES(GEGL, gegl-0.3 >= gegl_required_version)
++ PKG_CHECK_MODULES(ATK, atk >= atk_required_version)
++ 
++ AM_PATH_GLIB_2_0(glib_required_version, :,
+diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
+index 1522fd6..a647911 100644
+--- a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
++++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
+@@ -12,6 +12,7 @@ inherit gnome gtk-doc
+ SRC_URI = " \
+     http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
+     file://0001-configure-ac-do-not-check-for-freetype-config.patch \
++    file://bump_Babl-GEGL_versions.patch \
+ "
+ SRC_URI[md5sum] = "233c948203383fa078434cc3f8f925cb"
+ SRC_URI[sha256sum] = "d82a958641c9c752d68e35f65840925c08e314cea90222ad845892a40e05b22d"
 -- 
 2.7.0
 
