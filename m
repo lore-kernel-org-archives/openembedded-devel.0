@@ -1,25 +1,25 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E70B77350
+	by mail.openembedded.org (Postfix) with ESMTP id 5A1F67734A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 14:23:13 +0000 (UTC)
+	Tue, 23 Feb 2016 14:23:14 +0000 (UTC)
 Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:14 -0800
+	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:15 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751676876"
+X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751676882"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:13 -0800
+	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:14 -0800
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Feb 2016 16:19:41 +0200
-Message-Id: <3f996133bdd535a06debe33dd769941319f31eec.1456236552.git.alexander.kanavin@linux.intel.com>
+Date: Tue, 23 Feb 2016 16:19:42 +0200
+Message-Id: <7b1eb1425975edb5948717bd0617b777de2e76b1.1456236552.git.alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.7.0
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 MIME-Version: 1.0
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
-Subject: [PATCH 02/34] evince: update to 3.18.2
+Subject: [PATCH 03/34] gnome-bluetooth: update to 3.18.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,233 +36,317 @@ X-List-Received-Date: Tue, 23 Feb 2016 14:23:14 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is done to enable gobject introspection support.
+This also enable gobject introspection support.
 Drop obsolete patches.
-Add a patch that disables yelp m4 macro (which we don't have).
 
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- .../evince/0001-help-remove-YELP-macro.patch       | 24 +++++++++++++++
- .../evince/0001-tiff-fix-compile-warning.patch     | 33 --------------------
- ...ove-pkg-config-check-for-gnome-icon-theme.patch | 35 ----------------------
- .../evince/evince/cross-compile-fix.patch          | 25 ----------------
- .../evince/{evince_2.32.0.bb => evince_3.18.2.bb}  | 29 ++++++++++--------
- 5 files changed, 40 insertions(+), 106 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-help-remove-YELP-macro.patch
- delete mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-tiff-fix-compile-warning.patch
- delete mode 100644 meta-gnome/recipes-gnome/evince/evince/Remove-pkg-config-check-for-gnome-icon-theme.patch
- delete mode 100644 meta-gnome/recipes-gnome/evince/evince/cross-compile-fix.patch
- rename meta-gnome/recipes-gnome/evince/{evince_2.32.0.bb => evince_3.18.2.bb} (60%)
+ .../0001-bluetooth-input-Fix-compile-errors.patch  |  37 -------
+ ...luetooth-client-use-valid-interface-names.patch | 122 ---------------------
+ .../0003-Fix-build-with-libnotify-0.7.0.patch      |  47 --------
+ .../gnome-bluetooth/gnome-bluetooth_2.32.0.bb      |  38 -------
+ .../gnome-bluetooth/gnome-bluetooth_3.18.2.bb      |  20 ++++
+ 5 files changed, 20 insertions(+), 244 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0001-bluetooth-input-Fix-compile-errors.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0002-bluetooth-client-use-valid-interface-names.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0003-Fix-build-with-libnotify-0.7.0.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
+ create mode 100644 meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince/0001-help-remove-YELP-macro.patch b/meta-gnome/recipes-gnome/evince/evince/0001-help-remove-YELP-macro.patch
-new file mode 100644
-index 0000000..592f466
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/evince/evince/0001-help-remove-YELP-macro.patch
-@@ -0,0 +1,24 @@
-+From 40921037d8e7205a3889d529fb4e06f79e1e88b0 Mon Sep 17 00:00:00 2001
-+From: Alexander Kanavin <alex.kanavin@gmail.com>
-+Date: Fri, 19 Feb 2016 16:52:18 +0200
-+Subject: [PATCH] help: remove YELP macro
-+
-+Upstream-Status: Inappropriate [embedded-specific]
-+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-+---
-+ help/Makefile.am | 2 --
-+ 1 file changed, 2 deletions(-)
-+
-+diff --git a/help/Makefile.am b/help/Makefile.am
-+index 7835810..37c88ce 100644
-+--- a/help/Makefile.am
-++++ b/help/Makefile.am
-+@@ -1,5 +1,3 @@
-+-@YELP_HELP_RULES@
-+-
-+ SUBDIRS = reference
-+ 
-+ HELP_ID = evince
-+-- 
-+2.7.0
-+
-diff --git a/meta-gnome/recipes-gnome/evince/evince/0001-tiff-fix-compile-warning.patch b/meta-gnome/recipes-gnome/evince/evince/0001-tiff-fix-compile-warning.patch
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0001-bluetooth-input-Fix-compile-errors.patch b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0001-bluetooth-input-Fix-compile-errors.patch
 deleted file mode 100644
-index ebc8976..0000000
---- a/meta-gnome/recipes-gnome/evince/evince/0001-tiff-fix-compile-warning.patch
+index 0b0cf8b..0000000
+--- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0001-bluetooth-input-Fix-compile-errors.patch
 +++ /dev/null
-@@ -1,33 +0,0 @@
--From 00b5e55c90477eeac02bec58f032cb6916a1eb5c Mon Sep 17 00:00:00 2001
--From: Hib Eris <hib@hiberis.nl>
--Date: Mon, 20 Feb 2012 21:36:16 +0100
--Subject: [PATCH] tiff: fix compile warning
+@@ -1,37 +0,0 @@
+-From e3c789d6dca9a8a99b60b86e28d8119c55253c13 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 15 May 2013 08:37:03 -0700
+-Subject: [PATCH] bluetooth-input: Fix compile errors
+-
+-XID is unsigned long type so %d will error out with -Wformat
+-where format warnings are being treated at errors
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+-Upstream-Status: Unknown
+----
+- wizard/bluetooth-input.c |    4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/wizard/bluetooth-input.c b/wizard/bluetooth-input.c
+-index b3fbdaf..d17e67c 100644
+---- a/wizard/bluetooth-input.c
+-+++ b/wizard/bluetooth-input.c
+-@@ -190,12 +190,12 @@ bluetooth_input_check_for_devices (BluetoothInput *input)
+- 		if (bluetooth_input_device_get_type (&device_info[i], &is_mouse, &is_keyboard) == FALSE)
+- 			continue;
+- 		if (is_mouse != FALSE) {
+--			g_message ("has mouse: %s (id = %d)", device_info[i].name, device_info[i].id);
+-+			g_message ("has mouse: %s (id = %lu)", device_info[i].name, device_info[i].id);
+- 			has_mouse = TRUE;
+- 			//break;
+- 		}
+- 		if (is_keyboard != FALSE) {
+--			g_message ("has keyboard: %s (id = %d)", device_info[i].name, device_info[i].id);
+-+			g_message ("has keyboard: %s (id = %lu)", device_info[i].name, device_info[i].id);
+- 			has_keyboard = TRUE;
+- 			//break;
+- 		}
+--- 
+-1.7.9.5
+-
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0002-bluetooth-client-use-valid-interface-names.patch b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0002-bluetooth-client-use-valid-interface-names.patch
+deleted file mode 100644
+index 99049a0..0000000
+--- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0002-bluetooth-client-use-valid-interface-names.patch
++++ /dev/null
+@@ -1,122 +0,0 @@
+-From 1555f85b222db0d536efe277d31b57b2a8b938f4 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+-Date: Thu, 12 Feb 2015 01:19:41 +0100
+-Subject: [PATCH] bluetooth-client: use valid interface names
 -MIME-Version: 1.0
 -Content-Type: text/plain; charset=UTF-8
 -Content-Transfer-Encoding: 8bit
 -
--Upstream-Status: Backport
+-Upstream-Status: Inappropriate[version unmaintained upstream]
 -
 -Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ----
-- backend/tiff/tiff2ps.c |    4 ++--
-- 1 files changed, 2 insertions(+), 2 deletions(-)
+- lib/bluetooth-client.c   | 12 ++++++------
+- lib/bluetooth-client.xml |  6 +++---
+- lib/test-agent.c         |  2 +-
+- 3 files changed, 10 insertions(+), 10 deletions(-)
 -
--diff --git a/backend/tiff/tiff2ps.c b/backend/tiff/tiff2ps.c
--index c0dc0bf..fc63c2e 100644
----- a/backend/tiff/tiff2ps.c
--+++ b/backend/tiff/tiff2ps.c
--@@ -1127,8 +1127,8 @@ PS_Lvl2page(TIFF2PSContext* ctx, TIFF* tif, uint32 w, uint32 h)
-- 	}
-- 	buf_data = (unsigned char *)_TIFFmalloc(chunk_size);
-- 	if (!buf_data) {
---		TIFFError(ctx->filename, "Can't alloc %u bytes for %s.",
---			chunk_size, tiled_image ? "tiles" : "strips");
--+		TIFFError(ctx->filename, "Can't alloc %u bytes for %s.",
--+			(uint) chunk_size, tiled_image ? "tiles" : "strips");
-- 		return(FALSE);
+-diff --git a/lib/bluetooth-client.c b/lib/bluetooth-client.c
+-index d62d56d..02e194c 100644
+---- a/lib/bluetooth-client.c
+-+++ b/lib/bluetooth-client.c
+-@@ -721,7 +721,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
+- 						BLUEZ_DEVICE_INTERFACE, path);
+- 
+- 		if (device != NULL)
+--			device_get_properties(device, &hash, NULL);
+-+			org_bluez_device_get_properties(device, &hash, NULL);
+- 	} else
+- 		device = NULL;
+- 
+-@@ -945,7 +945,7 @@ static void adapter_added(DBusGProxy *manager,
+- 	adapter = dbus_g_proxy_new_from_proxy(manager,
+- 					BLUEZ_ADAPTER_INTERFACE, path);
+- 
+--	adapter_get_properties(adapter, &hash, NULL);
+-+	org_bluez_adapter_get_properties(adapter, &hash, NULL);
+- 	if (hash != NULL) {
+- 		value = g_hash_table_lookup(hash, "Address");
+- 		address = value ? g_value_get_string(value) : NULL;
+-@@ -1178,7 +1178,7 @@ static void bluetooth_client_init(BluetoothClient *client)
+- 	dbus_g_proxy_connect_signal(priv->manager, "DefaultAdapterChanged",
+- 			G_CALLBACK(default_adapter_changed), client, NULL);
+- 
+--	manager_list_adapters(priv->manager, &array, NULL);
+-+	org_bluez_manager_list_adapters(priv->manager, &array, NULL);
+- 	if (array != NULL) {
+- 		int i;
+- 
+-@@ -1189,7 +1189,7 @@ static void bluetooth_client_init(BluetoothClient *client)
+- 		}
 - 	}
 - 
+--	manager_default_adapter(priv->manager, &default_path, NULL);
+-+	org_bluez_manager_default_adapter(priv->manager, &default_path, NULL);
+- 	if (default_path != NULL) {
+- 		default_adapter_changed(priv->manager, default_path, client);
+- 		g_free(default_path);
+-@@ -1541,7 +1541,7 @@ gboolean bluetooth_client_start_discovery(BluetoothClient *client)
+- 	if (adapter == NULL)
+- 		return FALSE;
+- 
+--	adapter_start_discovery(adapter, NULL);
+-+	org_bluez_adapter_start_discovery(adapter, NULL);
+- 
+- 	g_object_unref(adapter);
+- 
+-@@ -1568,7 +1568,7 @@ gboolean bluetooth_client_stop_discovery(BluetoothClient *client)
+- 	if (adapter == NULL)
+- 		return FALSE;
+- 
+--	adapter_stop_discovery(adapter, NULL);
+-+	org_bluez_adapter_stop_discovery(adapter, NULL);
+- 
+- 	g_object_unref(adapter);
+- 
+-diff --git a/lib/bluetooth-client.xml b/lib/bluetooth-client.xml
+-index 2326277..38c7fb0 100644
+---- a/lib/bluetooth-client.xml
+-+++ b/lib/bluetooth-client.xml
+-@@ -1,7 +1,7 @@
+- <?xml version="1.0" encoding="UTF-8" ?>
+- 
+- <node name="/">
+--  <interface name="manager">
+-+  <interface name="org.bluez.manager">
+-     <method name="DefaultAdapter">
+-       <arg type="o" direction="out"/>
+-     </method>
+-@@ -16,7 +16,7 @@
+-     </method>
+-   </interface>
+- 
+--  <interface name="adapter">
+-+  <interface name="org.bluez.adapter">
+-     <method name="GetProperties">
+-       <arg type="a{sv}" direction="out"/>
+-     </method>
+-@@ -44,7 +44,7 @@
+-     </method>
+-   </interface>
+- 
+--  <interface name="device">
+-+  <interface name="org.bluez.device">
+-     <method name="GetProperties">
+-       <arg type="a{sv}" direction="out"/>
+-     </method>
+-diff --git a/lib/test-agent.c b/lib/test-agent.c
+-index 8d60da6..83464eb 100644
+---- a/lib/test-agent.c
+-+++ b/lib/test-agent.c
+-@@ -40,7 +40,7 @@ static gboolean agent_pincode(DBusGMethodInvocation *context,
+- 	GValue *value;
+- 	const gchar *address, *name;
+- 
+--	device_get_properties(device, &hash, NULL);
+-+	org_bluez_device_get_properties(device, &hash, NULL);
+- 
+- 	if (hash != NULL) {
+- 		value = g_hash_table_lookup(hash, "Address");
 --- 
--1.7.6.5
+-1.9.3
 -
-diff --git a/meta-gnome/recipes-gnome/evince/evince/Remove-pkg-config-check-for-gnome-icon-theme.patch b/meta-gnome/recipes-gnome/evince/evince/Remove-pkg-config-check-for-gnome-icon-theme.patch
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0003-Fix-build-with-libnotify-0.7.0.patch b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0003-Fix-build-with-libnotify-0.7.0.patch
 deleted file mode 100644
-index 6368a31..0000000
---- a/meta-gnome/recipes-gnome/evince/evince/Remove-pkg-config-check-for-gnome-icon-theme.patch
+index 118ef93..0000000
+--- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0003-Fix-build-with-libnotify-0.7.0.patch
 +++ /dev/null
-@@ -1,35 +0,0 @@
--From f4051f27aee7cbe88f206783461784c936d7f5db Mon Sep 17 00:00:00 2001
--From: Jussi Kukkonen <jussi.kukkonen@intel.com>
--Date: Tue, 15 Sep 2015 16:17:50 +0300
--Subject: [PATCH] Remove pkg-config check for gnome-icon-theme
+@@ -1,47 +0,0 @@
+-From 08a5b66d709781c0c596108278979a11b26331d5 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+-Date: Sun, 30 Aug 2015 12:14:53 +0200
+-Subject: [PATCH] Fix build with libnotify >= 0.7.0
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
 -
--Theme is not required for building and the icons are provided by
--adwaita-icon-theme anyway
+-Upstream-Status: Backport [1]
 -
--Upstream-Status: Inappropriate [Current versions are fixed]
--Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
+-[1] https://github.com/GNOME/gnome-bluetooth/commit/9f256799cc6b8367b2466f35b82f1d07076a950e
+-
+-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ----
-- configure.ac | 7 -------
-- 1 file changed, 7 deletions(-)
+- applet/notify.c | 2 +-
+- configure.ac    | 2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
 -
+-diff --git a/applet/notify.c b/applet/notify.c
+-index d2a4f51..cb01dfc 100644
+---- a/applet/notify.c
+-+++ b/applet/notify.c
+-@@ -71,7 +71,7 @@ void show_notification(const gchar *summary, const gchar *message,
+- 		notify_notification_close(notify, NULL);
+- 	}
+- 
+--	notify = notify_notification_new(summary, message, icon_name, NULL);
+-+	notify = notify_notification_new(summary, message, icon_name);
+- 
+- 	notify_notification_set_timeout(notify, timeout);
+- 
 -diff --git a/configure.ac b/configure.ac
--index d061c2e..7856410 100644
+-index 8bbce4e..98ec86e 100644
 ---- a/configure.ac
 -+++ b/configure.ac
--@@ -175,13 +175,6 @@ case "$with_platform" in
--           SHELL_PLATFORM_PKGS="hildon-1 hildon-fm-2 libosso"
--           ;;
--   gnome)
---        # Evince has a rather soft run-time dependency on hicolor-icon-theme.
---        # If the hicolor theme is not available, Evince fails to display some
---        # icons. Because we cannot check for it at run-time, we instead
---        # would like to require the icon theme at compile-time. But, because
---        # the hicolor-icon-theme does not have a pkgconfig file, on gnome we
---        # require the gnome icon theme instead.
---        SHELL_PLATFORM_PKGS="gnome-icon-theme >= $GNOME_ICON_THEME_REQUIRED"
--         # The totem-screensaver and egg_smclient code use x11 directly.
--         SHELL_PLATFORM_PKGS="$SHELL_PLATFORM_PKGS x11"
--         ;;
+-@@ -71,7 +71,7 @@ AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
+- GTK_REQUIRED=2.19.1
+- GLIB_REQUIRED=2.25.7
+- DBUS_GLIB_REQUIRED=0.74
+--NOTIFY_REQUIRED=0.4.3
+-+NOTIFY_REQUIRED=0.7.0
+- NAUTILUS_SENDTO_REQUIRED=2.31.7
+- 
+- dnl Requires for the properties window
 --- 
--2.1.4
+-2.1.0
 -
-diff --git a/meta-gnome/recipes-gnome/evince/evince/cross-compile-fix.patch b/meta-gnome/recipes-gnome/evince/evince/cross-compile-fix.patch
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
 deleted file mode 100644
-index 6f5420a..0000000
---- a/meta-gnome/recipes-gnome/evince/evince/cross-compile-fix.patch
+index f2128d8..0000000
+--- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
 +++ /dev/null
-@@ -1,25 +0,0 @@
--Index: evince-2.30.0/gnome-doc-utils.make
--===================================================================
----- evince-2.30.0.orig/gnome-doc-utils.make	2010-03-29 11:52:47.000000000 -0700
--+++ evince-2.30.0/gnome-doc-utils.make	2010-08-17 15:20:22.597646001 -0700
--@@ -132,13 +132,12 @@ _DOC_ABS_SRCDIR = @abs_srcdir@
-- 
-- _xml2po ?= `which xml2po`
-- _xml2po_mode = $(if $(DOC_ID),mallard,docbook)
---
---_db2html ?= `$(PKG_CONFIG) --variable db2html gnome-doc-utils`
---_db2omf  ?= `$(PKG_CONFIG) --variable db2omf gnome-doc-utils`
---_malrng  ?= `$(PKG_CONFIG) --variable malrng gnome-doc-utils`
---_chunks  ?= `$(PKG_CONFIG) --variable xmldir gnome-doc-utils`/gnome/xslt/docbook/utils/chunks.xsl
---_credits ?= `$(PKG_CONFIG) --variable xmldir gnome-doc-utils`/gnome/xslt/docbook/utils/credits.xsl
---_ids ?= `$(PKG_CONFIG) --variable xmldir gnome-doc-utils`/gnome/xslt/docbook/utils/ids.xsl
--+_db2html ?= ${PKG_CONFIG_SYSROOT_DIR}`$(PKG_CONFIG) --variable db2html gnome-doc-utils`
--+_db2omf  ?= ${PKG_CONFIG_SYSROOT_DIR}`$(PKG_CONFIG) --variable db2omf gnome-doc-utils`
--+_malrng  ?= ${PKG_CONFIG_SYSROOT_DIR}`$(PKG_CONFIG) --variable malrng gnome-doc-utils`
--+_chunks  ?= ${PKG_CONFIG_SYSROOT_DIR}`$(PKG_CONFIG) --variable xmldir gnome-doc-utils`/gnome/xslt/docbook/utils/chunks.xsl
--+_credits ?= ${PKG_CONFIG_SYSROOT_DIR}`$(PKG_CONFIG) --variable xmldir gnome-doc-utils`/gnome/xslt/docbook/utils/credits.xsl
--+_ids ?= ${PKG_CONFIG_SYSROOT_DIR}`$(PKG_CONFIG) --variable xmldir gnome-doc-utils`/gnome/xslt/docbook/utils/ids.xsl
-- 
-- if ENABLE_SK
-- _ENABLE_SK = true
--
-diff --git a/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-similarity index 60%
-rename from meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
-rename to meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-index 2d91075..3d90764 100644
---- a/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-@@ -2,27 +2,24 @@ SUMMARY = "Evince is a document viewer for document formats like pdf, ps, djvu"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
- SECTION = "x11/office"
--DEPENDS = "gnome-doc-utils-native libgnome-keyring tiff libxt ghostscript poppler libxml2 gtk+ gconf libglade"
-+DEPENDS = "gtk+3 libsecret gnome-desktop3 poppler gstreamer1.0-plugins-base orc"
- PR = "r5"
- 
- inherit gnome pkgconfig gtk-icon-cache gsettings
- 
--SRC_URI += " \
--    file://cross-compile-fix.patch \
--    file://0001-tiff-fix-compile-warning.patch \
--    file://Remove-pkg-config-check-for-gnome-icon-theme.patch \
+@@ -1,38 +0,0 @@
+-SUMMARY = "GNOME bluetooth manager"
+-LICENSE = "GPLv2 & LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
+-                    file://COPYING.LIB;md5=a6f89e2100d9b6cdffcea4f398e37343 \
 -"
-+SRC_URI[archive.md5sum] = "c39af6b8b1c44d4393ef8ac9dab99c0b"
-+SRC_URI[archive.sha256sum] = "42ad6c7354d881a9ecab136ea84ff867acb942605bcfac48b6c12e1c2d8ecb17"
- 
--SRC_URI[archive.md5sum] = "ebc3ce6df8dcbf29cb9492f8dd031319"
--SRC_URI[archive.sha256sum] = "2a4c91ae38f8b5028cebb91b9da9ddc50ea8ae3f3d429df89ba351da2d787ff7"
+-
+-PR = "r1"
+-
+-SECTION = "x11/gnome"
+-DEPENDS = "obexd gnome-doc-utils-native gnome-doc-utils gconf gtk+ dbus-glib libunique libnotify libgnome-keyring virtual/libx11 libxi intltool-native"
+-DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','bluez4',d)}"
+-
+-inherit gnomebase gtk-icon-cache
+-
+-SRC_URI += " \
+-    file://0001-bluetooth-input-Fix-compile-errors.patch \
+-    file://0002-bluetooth-client-use-valid-interface-names.patch \
+-    file://0003-Fix-build-with-libnotify-0.7.0.patch \
+-"
+-SRC_URI[archive.md5sum] = "f129686fe46c4c98eb70a0cc85d59cae"
+-SRC_URI[archive.sha256sum] = "57b1f06c96a1b85e1c19ff919d708cc38e95edae658881ed99968c325839a973"
 -GNOME_COMPRESS_TYPE="bz2"
-+SRC_URI += "file://0001-help-remove-YELP-macro.patch"
- 
- EXTRA_OECONF = " --enable-thumbnailer \
--                 --disable-scrollkeeper \
--                 --enable-pixbuf \
--                 --disable-help \
- "
- 
-+do_compile_prepend() {
-+        export GIR_EXTRA_LIBS_PATH="${B}/libdocument/.libs"
-+}
+-
+-# No 'nautilus-sendto' recipe in meta-gnome yet
+-EXTRA_OECONF += "--enable-nautilus-sendto=no"
+-
+-# No native docbook XSL stylesheets recipe in OE yet
+-do_configure_prepend() {
+-    sed -i s/help// ${S}/Makefile.am
+-}
+-
+-do_configure_append() {
+-    sed -i 's,func_fatal_error "error: cannot install,echo "bogus message about,' ${HOST_SYS}-libtool
+-}
+-
+-RRECOMMENDS_${PN} += "obexd obex-data-server"
+-
+-FILES_${PN}-dbg += "${libdir}/gnome-bluetooth/plugins/.debug/"
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
+new file mode 100644
+index 0000000..77e9a15
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "GNOME bluetooth manager"
++LICENSE = "GPLv2 & LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
++                    file://COPYING.LIB;md5=a6f89e2100d9b6cdffcea4f398e37343 \
++"
 +
++SECTION = "x11/gnome"
 +
- do_install_append() {
-     install -d install -d ${D}${datadir}/pixmaps
-     install -m 0755 ${S}/data/icons/48x48/apps/evince.png ${D}${datadir}/pixmaps/
-@@ -30,12 +27,17 @@ do_install_append() {
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[nautilus] = "--enable-nautilus,--disable-nautilus,nautilus"
-+PACKAGECONFIG[browser-plugin] = "--enable-browser-plugin,--disable-browser-plugin,"
- 
- RDEPENDS_${PN} += "glib-2.0-utils"
- RRECOMMMENDS_${PN} = "adwaita-icon-theme"
- 
- PACKAGES =+ "${PN}-nautilus-extension"
--FILES_${PN} += "${datadir}/dbus-1"
-+PACKAGES =+ "${PN}-browser-plugin"
-+FILES_${PN} += "${datadir}/dbus-1 \
-+                ${datadir}/appdata \
-+                ${datadir}/thumbnailers \
-+               "
- FILES_${PN}-dbg += "${libdir}/*/*/.debug \
-                     ${libdir}/*/*/*/.debug"
- FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la \
-@@ -43,3 +45,4 @@ FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la \
- FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a \
-                           ${libdir}/evince/*/backends/*.a"
- FILES_${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
-+FILES_${PN}-browser-plugin = "${libdir}/mozilla/*/*so"
++# systemd is needed because it has a necessary version of libudev
++# Effectively this means that systemd must be in DISTRO_FEATURES
++DEPENDS = "systemd gtk+3 libnotify libcanberra"
++DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','bluez4',d)}"
++
++inherit gnomebase gtk-icon-cache distro_features_check
++REQUIRED_DISTRO_FEATURES = "systemd"
++
++SRC_URI[archive.md5sum] = "75d09c924468ec0c687f9ab3acf7f113"
++SRC_URI[archive.sha256sum] = "d8df073c331df0f97261869fb77ffcdbf4e3e4eaf460d3c3ed2b16e03d9c5398"
++
++FILES_${PN}-dbg += "${libdir}/gnome-bluetooth/plugins/.debug/"
 -- 
 2.7.0
 
