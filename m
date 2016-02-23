@@ -1,24 +1,24 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 339D877359
+	by mail.openembedded.org (Postfix) with ESMTP id 3333577377
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 14:23:39 +0000 (UTC)
+	Tue, 23 Feb 2016 14:23:40 +0000 (UTC)
 Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:40 -0800
+	by fmsmga103.fm.intel.com with ESMTP; 23 Feb 2016 06:23:41 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751677012"
+X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751677017"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:39 -0800
+	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:40 -0800
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Feb 2016 16:20:03 +0200
-Message-Id: <a703d0fde178c406982cd0add4961bb83d6230dd.1456236552.git.alexander.kanavin@linux.intel.com>
+Date: Tue, 23 Feb 2016 16:20:04 +0200
+Message-Id: <d245fdb2ab0e8e1bc94e798b4edf0622f9170420.1456236552.git.alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.7.0
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
 References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
-Subject: [PATCH 24/34] gtkextra: fix gobject introspection support
+Subject: [PATCH 25/34] libunique: fix gobject introspection support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,29 +31,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2016 14:23:39 -0000
+X-List-Received-Date: Tue, 23 Feb 2016 14:23:40 -0000
 
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...-use-LIBTOOL-instead-of-hardcoded-libtool.patch | 27 ++++++++++++++++++++++
+ meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb |  6 +++--
+ 2 files changed, 31 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-gnome/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch
 
-diff --git a/meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb b/meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb
-index 8ce6e94..926eff7 100644
---- a/meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb
-+++ b/meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb
-@@ -11,9 +11,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gtkextra/${BP}.tar.gz \
- SRC_URI[md5sum] = "486cea93666020f85f101ed8341baf41"
- SRC_URI[sha256sum] = "9cab6c5d6b792eb828d17cec2b9c1baba2ef57f789a290464afab80b53969e65"
+diff --git a/meta-oe/recipes-gnome/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch b/meta-oe/recipes-gnome/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch
+new file mode 100644
+index 0000000..2b5eda0
+--- /dev/null
++++ b/meta-oe/recipes-gnome/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch
+@@ -0,0 +1,27 @@
++From f39bcd5af79aa3efe2cecb2212793c5b596890a8 Mon Sep 17 00:00:00 2001
++From: Alexander Kanavin <alex.kanavin@gmail.com>
++Date: Thu, 18 Feb 2016 17:40:45 +0200
++Subject: [PATCH] Makefile.am: use $(LIBTOOL) instead of hardcoded libtool name
++
++Upstream-Status: Pending
++Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++---
++ unique/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/unique/Makefile.am b/unique/Makefile.am
++index 6475a87..734f431 100644
++--- a/unique/Makefile.am
+++++ b/unique/Makefile.am
++@@ -114,7 +114,7 @@ Unique-1.0.gir: $(INTROSPECTION_SCANNER) libunique-1.0.la
++ 		--include=GObject-2.0 \
++ 		--include=Gtk-2.0 \
++ 		--library=libunique-1.0.la \
++-		--libtool="$(top_builddir)/libtool" \
+++		--libtool="$(LIBTOOL)" \
++ 		--pkg gobject-2.0 \
++ 		--pkg gtk+-2.0 \
++ 		--output $@ \
++-- 
++2.7.0
++
+diff --git a/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb b/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb
+index d97d1d6..3d13e5a 100644
+--- a/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb
++++ b/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb
+@@ -6,7 +6,9 @@ BUGTRACKER = "https://bugzilla.gnome.org/enter_bug.cgi?product=libunique"
+ SRC_URI = "${GNOME_MIRROR}/libunique/1.1/libunique-${PV}.tar.bz2 \
+ 	file://fix_for_compile_with_gcc-4.6.0.patch \
+ 	file://noconst.patch \
+-        file://build.patch"
++        file://build.patch \
++        file://0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch \
++        "
  
--DEPENDS = "gtk+ gobject-introspection-stub"
-+DEPENDS = "gtk+"
+ SRC_URI[md5sum] = "7955769ef31f1bc4f83446dbb3625e6d"
+ SRC_URI[sha256sum] = "e5c8041cef8e33c55732f06a292381cb345db946cf792a4ae18aa5c66cdd4fbb"
+@@ -22,4 +24,4 @@ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+ 
  
 -inherit autotools pkgconfig
 +inherit autotools pkgconfig gobject-introspection
- 
- # | ./.libs/libgtkextra-x11-3.0.so: error: undefined reference to 'roundint'
- PNBLACKLIST[gtkextra] ?= "BROKEN: Fails to build with gcc-5"
 -- 
 2.7.0
 
