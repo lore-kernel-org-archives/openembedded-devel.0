@@ -1,24 +1,50 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 5003B773C0
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+X-Greylist: delayed 1353 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 23 Feb 2016 16:10:41 UTC
+Received: from mail3.static.mgsend.net (mail3.static.mgsend.net
+	[104.130.122.3])
+	by mail.openembedded.org (Postfix) with ESMTP id EC15E77334
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 14:24:16 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by orsmga102.jf.intel.com with ESMTP; 23 Feb 2016 06:23:53 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,489,1449561600"; d="scan'208";a="751677093"
-Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga003.jf.intel.com with ESMTP; 23 Feb 2016 06:23:51 -0800
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Feb 2016 16:20:12 +0200
-Message-Id: <598c8279f2b39a194fee287291ed36033be0c67c.1456236552.git.alexander.kanavin@linux.intel.com>
-X-Mailer: git-send-email 2.7.0
-In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
-References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
-In-Reply-To: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
-References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
-Subject: [PATCH 33/34] upower: fix gobject introspection
+	Tue, 23 Feb 2016 16:10:41 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1456243842; h=Content-Type: Cc: To: From: Subject:
+	Message-ID: Date: References: In-Reply-To: MIME-Version: Sender;
+	bh=L+Tq/Y16KWXfFe7XgMQHB+PvQj76JpklEt4KYI/mKZc=;
+	b=phOXC9Z8oophH00NsAWyCSsX7rP5fhJnKwIHl4KPSAqoTO2AEB1BvmV2IAW/uqo3izsyhCj7
+	IDJwgdT0oqyDFXUue/+2iNP40l31jc6iDT0YnKP39UEXnyjzf81Wr5zR7uJCER++Bp57RukV
+	LrjNPnJ+FbqDLsLT49EHuSBdCcc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
+	q=dns; h=Sender: MIME-Version: In-Reply-To: References: Date:
+	Message-ID: Subject: From: To: Cc: Content-Type;
+	b=MGy6Hax2mo2zw8RzzqxccgJsqz51p6Vxaa1iuFHK+qbRBOUa7jL+ryF9jLMpghR2ejHlRW
+	N0dscKSW5Kv6TaJRA0fX7/eTG87oT+f1cq7bVLzJnWH41Xt2TmdHwzz+52bqpeXFWdPZ6E8S
+	DPS1MIipKa1w7ISZ4V34rWRQNCBXw=
+Sender: derek@asterius.io
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
+	[209.85.223.181])
+	by mxa.mailgun.org with ESMTP id 56cc7f14.7c7bb70-in6;
+	Tue, 23 Feb 2016 15:47:32 -0000 (UTC)
+Received: by mail-io0-f181.google.com with SMTP id g203so216681642iof.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Feb 2016 07:47:32 -0800 (PST)
+X-Gm-Message-State: AG10YOSreSh5rnHSFD4+8+BF2kLJNwSR36Rf5MQ3cfPpn49jGHrJpTw3LOajD9j/R/N2B+WSdjwB/8FfKeIDUw==
+MIME-Version: 1.0
+X-Received: by 10.107.6.205 with SMTP id f74mr35431205ioi.63.1456242452066;
+	Tue, 23 Feb 2016 07:47:32 -0800 (PST)
+Received: by 10.107.19.167 with HTTP; Tue, 23 Feb 2016 07:47:32 -0800 (PST)
+In-Reply-To: <CAMKF1sqPpQPoyMvJTPNBXzmTMeWHOoaon_9vnQXZa6HniTDydA@mail.gmail.com>
+References: <1456148105-9644-1-git-send-email-derek@asterius.io>
+	<1456148105-9644-2-git-send-email-derek@asterius.io>
+	<CAMKF1sqPpQPoyMvJTPNBXzmTMeWHOoaon_9vnQXZa6HniTDydA@mail.gmail.com>
+Date: Tue, 23 Feb 2016 10:47:32 -0500
+X-Gmail-Original-Message-ID: <CADNbA1r=qNvYaaHm9UA49_PeKF+rM_muegX6beiRJQLgGnxMsw@mail.gmail.com>
+Message-ID: <CADNbA1r=qNvYaaHm9UA49_PeKF+rM_muegX6beiRJQLgGnxMsw@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH 02/11] python-flufl-enum: update to 4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,34 +57,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2016 14:24:17 -0000
+X-List-Received-Date: Tue, 23 Feb 2016 16:10:42 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
----
- meta-oe/recipes-support/upower/upower_0.9.14.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+The license that applies to the package remains the same.  The issue is the
+PKG-INFO file is updated with each rev (it contains release notes), so the
+checksum would need to be updated each time we update the package.  The
+license info for the package is contained on line 8.  I can just modify the
+checksum each time and manually verify the license is unchanged if that is
+preferred.
 
-diff --git a/meta-oe/recipes-support/upower/upower_0.9.14.bb b/meta-oe/recipes-support/upower/upower_0.9.14.bb
-index 8cf8e43..dddaa9b 100644
---- a/meta-oe/recipes-support/upower/upower_0.9.14.bb
-+++ b/meta-oe/recipes-support/upower/upower_0.9.14.bb
-@@ -4,13 +4,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
- 
- PR = "r2"
- 
--DEPENDS = "libusb1 libgudev glib-2.0 dbus-glib polkit gobject-introspection-stub"
-+DEPENDS = "libusb1 libgudev glib-2.0 dbus-glib polkit"
- 
- SRC_URI = "http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
- SRC_URI[md5sum] = "18803f82102d56aac90949d1e4251645"
- SRC_URI[sha256sum] = "81eb44c0453b264a737d32f763a31d5b1776f050a47d5be85fc5e9caf874a4c5"
- 
--inherit autotools pkgconfig gettext
-+inherit autotools pkgconfig gettext gobject-introspection
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[idevice] = "--with-idevice,--without-idevice,libimobiledevice libplist"
--- 
-2.7.0
+On Mon, Feb 22, 2016 at 2:22 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
+> On Mon, Feb 22, 2016 at 5:34 AM, Derek Straka <derek@asterius.io> wrote:
+> > Signed-off-by: Derek Straka <derek@asterius.io>
+> > ---
+> >  .../python/{python-flufl-enum_4.0.1.bb => python-flufl-enum_4.1.bb} |
+> 6 +++---
+> >  1 file changed, 3 insertions(+), 3 deletions(-)
+> >  rename meta-python/recipes-devtools/python/{python-flufl-enum_4.0.1.bb
+> => python-flufl-enum_4.1.bb} (74%)
+> >
+> > diff --git a/meta-python/recipes-devtools/python/
+> python-flufl-enum_4.0.1.bb b/meta-python/recipes-devtools/python/
+> python-flufl-enum_4.1.bb
+> > similarity index 74%
+> > rename from meta-python/recipes-devtools/python/
+> python-flufl-enum_4.0.1.bb
+> > rename to meta-python/recipes-devtools/python/python-flufl-enum_4.1.bb
+> > index fe25fd7..ef10848 100644
+> > --- a/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
+> > +++ b/meta-python/recipes-devtools/python/python-flufl-enum_4.1.bb
+> > @@ -4,10 +4,10 @@ specific, concise semantics in an easy to read and
+> write syntax. flufl.enum has
+> >  features needed to make enumerations useful, but without a lot of extra
+> baggage to weigh them down. "
+> >
+> >  LICENSE = "LGPLv3"
+> > -LIC_FILES_CHKSUM =
+> "file://PKG-INFO;md5=1fa25baed15d3be23c902636379438e8"
+> > +LIC_FILES_CHKSUM =
+> "file://PKG-INFO;startline=8;endline=9;md5=250adb4c74c359b7049abcd9d6b115e7"
+> >
+>
+> you need to explain what changes with this
+>
+> > -SRC_URI[md5sum] = "b3ad23761a78232bc78499ced7cb85d9"
+> > -SRC_URI[sha256sum] =
+> "4af7e7cf2dcc7517251570c7ef9ad194e30ee4b6f860eba500c03954ae95f9d8"
+> > +SRC_URI[md5sum] = "461779384c07ed2b5f554a5d51a000c4"
+> > +SRC_URI[sha256sum] =
+> "94da1413ba085473652f81565847913ea1543d1739972ecbd6afe57d7b1b68b4"
+> >
+> >  PYPI_PACKAGE = "flufl.enum"
+> >  inherit pypi setuptools
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
