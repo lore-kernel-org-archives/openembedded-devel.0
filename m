@@ -1,50 +1,45 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-X-Greylist: delayed 1353 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 23 Feb 2016 16:10:41 UTC
-Received: from mail3.static.mgsend.net (mail3.static.mgsend.net
-	[104.130.122.3])
-	by mail.openembedded.org (Postfix) with ESMTP id EC15E77334
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id D3FAF77377
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 16:10:41 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1456243842; h=Content-Type: Cc: To: From: Subject:
-	Message-ID: Date: References: In-Reply-To: MIME-Version: Sender;
-	bh=L+Tq/Y16KWXfFe7XgMQHB+PvQj76JpklEt4KYI/mKZc=;
-	b=phOXC9Z8oophH00NsAWyCSsX7rP5fhJnKwIHl4KPSAqoTO2AEB1BvmV2IAW/uqo3izsyhCj7
-	IDJwgdT0oqyDFXUue/+2iNP40l31jc6iDT0YnKP39UEXnyjzf81Wr5zR7uJCER++Bp57RukV
-	LrjNPnJ+FbqDLsLT49EHuSBdCcc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
-	q=dns; h=Sender: MIME-Version: In-Reply-To: References: Date:
-	Message-ID: Subject: From: To: Cc: Content-Type;
-	b=MGy6Hax2mo2zw8RzzqxccgJsqz51p6Vxaa1iuFHK+qbRBOUa7jL+ryF9jLMpghR2ejHlRW
-	N0dscKSW5Kv6TaJRA0fX7/eTG87oT+f1cq7bVLzJnWH41Xt2TmdHwzz+52bqpeXFWdPZ6E8S
-	DPS1MIipKa1w7ISZ4V34rWRQNCBXw=
-Sender: derek@asterius.io
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
-	[209.85.223.181])
-	by mxa.mailgun.org with ESMTP id 56cc7f14.7c7bb70-in6;
-	Tue, 23 Feb 2016 15:47:32 -0000 (UTC)
-Received: by mail-io0-f181.google.com with SMTP id g203so216681642iof.2
+	Tue, 23 Feb 2016 16:17:23 +0000 (UTC)
+Received: by mail-wm0-f51.google.com with SMTP id a4so216540609wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2016 07:47:32 -0800 (PST)
-X-Gm-Message-State: AG10YOSreSh5rnHSFD4+8+BF2kLJNwSR36Rf5MQ3cfPpn49jGHrJpTw3LOajD9j/R/N2B+WSdjwB/8FfKeIDUw==
-MIME-Version: 1.0
-X-Received: by 10.107.6.205 with SMTP id f74mr35431205ioi.63.1456242452066;
-	Tue, 23 Feb 2016 07:47:32 -0800 (PST)
-Received: by 10.107.19.167 with HTTP; Tue, 23 Feb 2016 07:47:32 -0800 (PST)
-In-Reply-To: <CAMKF1sqPpQPoyMvJTPNBXzmTMeWHOoaon_9vnQXZa6HniTDydA@mail.gmail.com>
-References: <1456148105-9644-1-git-send-email-derek@asterius.io>
-	<1456148105-9644-2-git-send-email-derek@asterius.io>
-	<CAMKF1sqPpQPoyMvJTPNBXzmTMeWHOoaon_9vnQXZa6HniTDydA@mail.gmail.com>
-Date: Tue, 23 Feb 2016 10:47:32 -0500
-X-Gmail-Original-Message-ID: <CADNbA1r=qNvYaaHm9UA49_PeKF+rM_muegX6beiRJQLgGnxMsw@mail.gmail.com>
-Message-ID: <CADNbA1r=qNvYaaHm9UA49_PeKF+rM_muegX6beiRJQLgGnxMsw@mail.gmail.com>
-From: Derek Straka <derek@asterius.io>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH 02/11] python-flufl-enum: update to 4.1
+	Tue, 23 Feb 2016 08:17:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=Xq/b3SsH4f7tSN2wL03LRqrKifFmqb9MiXSoUoRJLL0=;
+	b=jgG52O3Xt980SEhUco7Js3LAdIseNpur1XP8y30lAK4XbrtiohH3neE/wdpSfzPwvX
+	R8Ju764yoqYcQgSk16/ijE9PLleR5AG61SxeXb+2clAXOLfcHelbarhotdH7L/OcWqem
+	0TvNwX+iGtBYlwOTiKiKO7BxF23l/jqqdhywin7zxiv4tDKC/3+nBethrMlONxnZ5P60
+	QOUnnZE+WJP+xL2Jt/QA7LnaCIKt7mZE1Kt646jVNBaKAYT5KBLsmtMknC6oNz5ZUpHz
+	6N7WVeDMJHZzZgrSO50Tk/qiKJ9PlGNOP4Ez/yQTAcBesKrtatavznFgXVcxuDPrlBoN
+	7Xog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Xq/b3SsH4f7tSN2wL03LRqrKifFmqb9MiXSoUoRJLL0=;
+	b=AEKggdib8mkafqLWNU2j6l2Zr1dKLIpeRhtfVyT64KQXBly12aIP+4I/WdCYYvSd5E
+	s9HhvsJjb2wE5Cz5aLzw/mXR0wtvWGsZzVjeHTVrIzoeKMmqCpDltxG35AuuaEcWagg8
+	iREmylrpQUGuhg4vcDzdpU7q9Q0OnsobjUK1n0QkQimYaVlvNX5580G6YQO6d2ySOA2F
+	EGJUJmyHBH6scfaz81C5GFNdug/6Q0+BsOw/6PH4CLuDwpSSivKS/Xh8U7XjaEXW3k1J
+	tyhqNvNBA6Ci0UrW82QQMMuLHZgNLzvYzIoOI6LDPrwsXr+ZY24t5TZyZVniermZo4b/
+	rmDA==
+X-Gm-Message-State: AG10YOSrBduR70RAGQ7d7/k/BR3egSeTHFdBGgy92oqgmFAWpMOKqgIe3MKcy5GHor6D6A==
+X-Received: by 10.194.92.68 with SMTP id ck4mr33978512wjb.144.1456244243925;
+	Tue, 23 Feb 2016 08:17:23 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	t3sm30553512wjz.11.2016.02.23.08.17.22
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 23 Feb 2016 08:17:22 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 23 Feb 2016 17:18:21 +0100
+Message-Id: <1456244301-18755-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.1
+Subject: [PATCH][meta-oe] msr-tools: Explicitly set EXTRA_OEMAKE as required
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,67 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2016 16:10:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 23 Feb 2016 16:17:24 -0000
 
-The license that applies to the package remains the same.  The issue is the
-PKG-INFO file is updated with each rev (it contains release notes), so the
-checksum would need to be updated each time we update the package.  The
-license info for the package is contained on line 8.  I can just modify the
-checksum each time and manually verify the license is unchanged if that is
-preferred.
+This recipe currently relies on EXTRA_OEMAKE having been to set to
+"-e MAKEFLAGS=" in bitbake.conf to operate. It is necessary to make
+this explicit so that the default in bitbake.conf can be changed.
 
-On Mon, Feb 22, 2016 at 2:22 PM, Khem Raj <raj.khem@gmail.com> wrote:
+Without this it fails with:
+  msr-tools-1.3-r0 do_package_qa: QA Issue: Architecture did not match (3 to 62)
+because it will build for host architecture
+---
+ meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> On Mon, Feb 22, 2016 at 5:34 AM, Derek Straka <derek@asterius.io> wrote:
-> > Signed-off-by: Derek Straka <derek@asterius.io>
-> > ---
-> >  .../python/{python-flufl-enum_4.0.1.bb => python-flufl-enum_4.1.bb} |
-> 6 +++---
-> >  1 file changed, 3 insertions(+), 3 deletions(-)
-> >  rename meta-python/recipes-devtools/python/{python-flufl-enum_4.0.1.bb
-> => python-flufl-enum_4.1.bb} (74%)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/
-> python-flufl-enum_4.0.1.bb b/meta-python/recipes-devtools/python/
-> python-flufl-enum_4.1.bb
-> > similarity index 74%
-> > rename from meta-python/recipes-devtools/python/
-> python-flufl-enum_4.0.1.bb
-> > rename to meta-python/recipes-devtools/python/python-flufl-enum_4.1.bb
-> > index fe25fd7..ef10848 100644
-> > --- a/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
-> > +++ b/meta-python/recipes-devtools/python/python-flufl-enum_4.1.bb
-> > @@ -4,10 +4,10 @@ specific, concise semantics in an easy to read and
-> write syntax. flufl.enum has
-> >  features needed to make enumerations useful, but without a lot of extra
-> baggage to weigh them down. "
-> >
-> >  LICENSE = "LGPLv3"
-> > -LIC_FILES_CHKSUM =
-> "file://PKG-INFO;md5=1fa25baed15d3be23c902636379438e8"
-> > +LIC_FILES_CHKSUM =
-> "file://PKG-INFO;startline=8;endline=9;md5=250adb4c74c359b7049abcd9d6b115e7"
-> >
->
-> you need to explain what changes with this
->
-> > -SRC_URI[md5sum] = "b3ad23761a78232bc78499ced7cb85d9"
-> > -SRC_URI[sha256sum] =
-> "4af7e7cf2dcc7517251570c7ef9ad194e30ee4b6f860eba500c03954ae95f9d8"
-> > +SRC_URI[md5sum] = "461779384c07ed2b5f554a5d51a000c4"
-> > +SRC_URI[sha256sum] =
-> "94da1413ba085473652f81565847913ea1543d1739972ecbd6afe57d7b1b68b4"
-> >
-> >  PYPI_PACKAGE = "flufl.enum"
-> >  inherit pypi setuptools
-> > --
-> > 1.9.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb b/meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb
+index caebcb9..e4701af 100644
+--- a/meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb
++++ b/meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb
+@@ -12,6 +12,8 @@ S = "${WORKDIR}/msr-tools-master"
+ 
+ COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
+ 
++EXTRA_OEMAKE = "-e MAKEFLAGS="
++
+ do_install() {
+     install -d ${D}${sbindir}
+     install -m 0755 rdmsr ${D}${sbindir}
+-- 
+2.7.1
+
 
