@@ -1,45 +1,57 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 97D6F6FF86
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-pf0-f174.google.com (mail-pf0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 57F3D731AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Feb 2016 18:50:53 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id g62so286502463wme.1
+	Wed, 24 Feb 2016 19:50:35 +0000 (UTC)
+Received: by mail-pf0-f174.google.com with SMTP id c10so19083256pfc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Feb 2016 10:50:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=7W2u7sQ08CU9tSvNr/wMlnguTUn6iNoDMa106IJ48mQ=;
-	b=FD2npgpJvwMdwMK5oHyFWqCoi72gQylMi+AWkGtaGgARHQluyRrT3kpJNTB31O07mm
-	YZrJEucASBIR0K2FVhtnFj8qxiX2vTLjfifbN3M0Q/vcctZC6Y6C8DiffnplmdhswSos
-	6Yta4uklNc4CXmhQI50nxe57xVPBFPEtRKJ/zDlBlrqf+V2io9o7BgqGEXAqJrMJBjgP
-	ad55r4ctQqcBm5KgSuxWZHMQGoqHrFbNQj9g9WcVrVSxp1i4nlRiW3YihortPJ1Uyqw6
-	VDjP8vYrHg018fjWTFpOt8udI+v49ihP7bzuKCDsWjX318neLhhU2XaqfInxqE1J43/Y
-	Z8Cw==
+	Wed, 24 Feb 2016 11:50:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:date:message-id:subject:to:content-type;
+	bh=S6rxiB1qsLV4Ac5LXOKatC0cvMF2vs+KDEA8sj/zV/k=;
+	b=b56sr7dnMPWUWOCuLuWpoAiEpI1wiRtvBYgnFCayThYXiuW9f3++HxSNdIoSvC+zF6
+	uiaS9PEuLuYPynffjcMFqGDAyQknUqo2vyqrJlVMhcpKGSzT95w/GiVfvfUn6Bpjaf4q
+	Pn+sNdJ7MiWmD5ayK8KwL7Cv3YrAKCyQjw/GxsIw5oFKlWBdf9BFTmBq4VAQHQNFNBXq
+	VNNgn2rFatnVTngV5uCgZ0LdNJP0WfHFj5PoPysm0l51y+w/ys5EX5PSm1inlI2jKH/0
+	s7kxDejCYJ3MjU6dn80aRUQWgM9ZwGobyS2ANu6Jm+V8/tX1Pj0gCjV2LdXsOx5OgyG/
+	rmSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=7W2u7sQ08CU9tSvNr/wMlnguTUn6iNoDMa106IJ48mQ=;
-	b=N3aP81LBJ637+6yOu8XED7cj9QlWiCzOvZC/o7rLcxLcI6PXfcmHQgf/k/d5Rimh+5
-	oNFQfow8S3YXok8izCb9Hf774BkTJ3Gp9lbJf6O/8KZ148nLFHLyZ5Rtzzi5QsjHJP5g
-	cFDtik5ueQ48yA3C4PdzWNdwbNGID5MLgB8EwR3SqpOmtYFihO0DrKiQYA9UM0vTJ6dJ
-	Dp6DZm1q5fH4vyMmQr+FKY8PY+yW6x3uEd0wn0APjrDsJJrhpuinIUlowuVQC2xaiEBo
-	EZEWgEttI0UzyxeP2q9OX2NAZt2c692kz6UzuC5NyFDVUQkxD5esG1wuxRnop7zlPs0s
-	T5uQ==
-X-Gm-Message-State: AG10YOSjzlET90KJvUyveY+52AQVjoIn7Ymvjeiu2tlCLfr3c4/AS3thGh9ByZNFsp+JWQ==
-X-Received: by 10.28.17.81 with SMTP id 78mr26491851wmr.84.1456339854088;
-	Wed, 24 Feb 2016 10:50:54 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	x186sm32547529wmg.19.2016.02.24.10.50.52
+	h=x-gm-message-state:from:mime-version:date:message-id:subject:to
+	:content-type;
+	bh=S6rxiB1qsLV4Ac5LXOKatC0cvMF2vs+KDEA8sj/zV/k=;
+	b=fpGci2fQYz+H8UOB6hnVbFqx6hwqaPC8uLiPBcP3JG3jat/AjGMjb9JM+bvdaDSCk8
+	CLQtFK1+Jh0hBLrYkhH1fZXlgXZk5VCQm11yEOLR1hIoJTCoYu3jhWOqIkuKHTb9w+o0
+	s5PzCn0OJsMZ4kAX8Dw+y1lqxOoBJPuzt4J/Kx2938fltDEqRVSYxuIOAi37CAfF3Nqz
+	9HS0M//C1TDpClkbTr1PW75CzyCyu/6woZo3q6Hz9GOUVPnixvROOe5IWbI3GYcyBRQE
+	3EkcIUsSKjlkR86s3bQHwmQ6XqkzxN20+cZgcCdJy9lxDqm7QMHRgz5iUiZ+Mjv6J8e1
+	eZZA==
+X-Gm-Message-State: AG10YOTwpADT6K46YGckAN6isUlV4tULkOV1Q+gxWrDcZ4TfB3LAT1U1fb+62LYOp1L2Ew==
+X-Received: by 10.98.15.17 with SMTP id x17mr57977226pfi.52.1456343436728;
+	Wed, 24 Feb 2016 11:50:36 -0800 (PST)
+Received: from mail-pf0-f181.google.com (mail-pf0-f181.google.com.
+	[209.85.192.181]) by smtp.gmail.com with ESMTPSA id
+	d81sm6862956pfj.77.2016.02.24.11.50.34
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 24 Feb 2016 10:50:53 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Feb 2016 19:51:57 +0100
-Message-Id: <1456339917-10798-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.1
-Subject: [PATCH][meta-browser] chromium: fix build with newer gcc
+	Wed, 24 Feb 2016 11:50:35 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-pf0-f181.google.com with SMTP id c10so19082699pfc.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Feb 2016 11:50:34 -0800 (PST)
+MIME-Version: 1.0
+X-Received: by 10.98.87.80 with SMTP id l77mr57328770pfb.101.1456343434561;
+	Wed, 24 Feb 2016 11:50:34 -0800 (PST)
+Received: by 10.67.3.163 with HTTP; Wed, 24 Feb 2016 11:50:34 -0800 (PST)
+Date: Wed, 24 Feb 2016 16:50:34 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKpg19uSG8=jvwrqsA88EJQQOTkWROwxvmdziLpoA8HG_w@mail.gmail.com>
+Message-ID: <CAP9ODKpg19uSG8=jvwrqsA88EJQQOTkWROwxvmdziLpoA8HG_w@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Robert Yang <liezhi.yang@windriver.com>
+Subject: [jethro] Backport proposal
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,94 +64,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2016 18:50:55 -0000
+X-List-Received-Date: Wed, 24 Feb 2016 19:50:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* for whatever reason setting -Wstrict-overflow just for problematic
-  line doesn't work and it needs to be adjusted on function definition
-* the errors are also report line number where the function starts not
-  the specific line which causes that warning
-../../third_party/WebKit/Source/wtf/dtoa/bignum.cc: In member function 'void WTF::double_conversion::Bignum::Align(const WTF::double_conversion::Bignum&)':
-../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:715:31: error: assuming signed overflow does not occur when simplifying conditional to constant [-Werror=strict-overflow]
-             for (int i = 0; i < zero_digits; ++i) {
-                               ^
-../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:715:31: error: assuming signed overflow does not occur when simplifying conditional to constant [-Werror=strict-overflow]
-../../third_party/WebKit/Source/wtf/dtoa/bignum.cc: In member function 'void WTF::double_conversion::Bignum::AssignDecimalString(WTF::double_conversion::Vector<const char>)':
-../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:105:10: error: assuming signed overflow does not occur when assuming that (X + c) < X is always false [-Werror=strict-overflow]
-     void Bignum::AssignDecimalString(Vector<const char> value) {
-          ^
+Hello folks,
 
-../../ui/gfx/image/image_util.cc: In function 'bool gfx::VisibleMargins(const gfx::ImageSkia&, int*, int*)':
-../../ui/gfx/image/image_util.cc:50:6: error: assuming signed overflow does not occur when assuming that (X - c) <= X is always true [-Werror=strict-overflow]
- bool VisibleMargins(const ImageSkia& image, int* leading, int* trailing) {
-      ^
+[Cced Robert Yang]
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../0001-bignum.cc-disable-warning-from-gcc-5.patch     | 17 ++++++++---------
- .../0002-image_util.cc-disable-warning-from-gcc-5.patch | 17 ++++++++---------
- 2 files changed, 16 insertions(+), 18 deletions(-)
+I would like to propuse the backport of following changes:
 
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-disable-warning-from-gcc-5.patch b/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-disable-warning-from-gcc-5.patch
-index 4a28bda..e01e044 100644
---- a/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-disable-warning-from-gcc-5.patch
-+++ b/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-disable-warning-from-gcc-5.patch
-@@ -23,17 +23,16 @@ diff --git a/third_party/WebKit/Source/wtf/dtoa/bignum.cc b/third_party/WebKit/S
- index a000b46..6c6d336 100644
- --- a/third_party/WebKit/Source/wtf/dtoa/bignum.cc
- +++ b/third_party/WebKit/Source/wtf/dtoa/bignum.cc
--@@ -109,7 +109,10 @@ namespace double_conversion {
--         int length = value.length();
--         int pos = 0;
--         // Let's just say that each digit needs 4 bits.
-+@@ -102,7 +102,10 @@
-+     }
-+ 
-+ 
- +#pragma GCC diagnostic push
- +#pragma GCC diagnostic warning "-Wstrict-overflow"
--         while (length >= kMaxUint64DecimalDigits) {
-+     void Bignum::AssignDecimalString(Vector<const char> value) {
- +#pragma GCC diagnostic pop
--             uint64_t digits = ReadUInt64(value, pos, kMaxUint64DecimalDigits);
--             pos += kMaxUint64DecimalDigits;
--             length -= kMaxUint64DecimalDigits;
-+         // 2^64 = 18446744073709551616 > 10^19
-+         const int kMaxUint64DecimalDigits = 19;
-+         Zero();
- -- 
- 1.8.4.5
--
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch b/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
-index 7023233..1825a85 100644
---- a/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
-+++ b/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
-@@ -24,17 +24,16 @@ diff --git a/ui/gfx/image/image_util.cc b/ui/gfx/image/image_util.cc
- index 89a3f8c..d595da3 100644
- --- a/ui/gfx/image/image_util.cc
- +++ b/ui/gfx/image/image_util.cc
--@@ -68,7 +68,10 @@ bool VisibleMargins(const ImageSkia& image, int* leading, int* trailing) {
--   int inner_min = bitmap.width();
--   for (int x = 0; x < bitmap.width(); ++x) {
--     for (int y = 0; y < bitmap.height(); ++y) {
-+@@ -47,7 +47,10 @@
-+ }
-+ #endif  // !defined(OS_IOS)
-+ 
- +#pragma GCC diagnostic push
- +#pragma GCC diagnostic warning "-Wstrict-overflow"
--       if (SkColorGetA(bitmap.getColor(x, y)) > kMinimumVisibleOpacity) {
-+ bool VisibleMargins(const ImageSkia& image, int* leading, int* trailing) {
- +#pragma GCC diagnostic pop
--         inner_min = x;
--         break;
--       }
-+   *leading = 0;
-+   *trailing = std::max(1, image.width()) - 1;
-+   if (!image.HasRepresentation(1.0))
- -- 
- 1.8.4.5
--
+Author: Mariano Lopez <mariano.lopez@linux.intel.com>
+Date:   Wed Dec 30 06:52:54 2015 +0000
+
+    image_types.bbclass: Rebuild when WICVARS change
+
+    The procces to do a wic image is to save a file with
+    variables required by wic and then call wic using this
+    file. Because this is external to bitbake if the vars
+    change, the image won't be rebuild; an example of such
+    is IMAGE_BOOT_FILES.
+
+    This patch adds these variables to vardeps of do_rootfs
+    when a wic image is build. This will rebuild the image
+    if a variable needed by wic changes.
+
+    [YOCTO #8693]
+
+    Signed-off-by: Mariano Lopez <mariano.lopez@linux.intel.com>
+    Signed-off-by: Ross Burton <ross.burton@intel.com>
+    (cherry picked from commit 12c54d50ed4c321dc272beb3c6cb770965c979f1)
+
+Author: Christopher Larson <chris_larson@mentor.com>
+Date:   Tue Nov 10 14:18:20 2015 -0700
+
+    image_types: improve wks path specification
+
+    Hardcoding a full input path with zero flexibility goes against
+everything the
+    Yocto Project is about. Rework it to let the user specify the wks base
+    filename with WKS_FILE and it'll search the layers for the wks file and use
+    it.
+
+    Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+    Signed-off-by: Ross Burton <ross.burton@intel.com>
+    (cherry picked from commit 8cc7f5229f5447c2183ac319dd52c7ed737ec89b)
+
+Those improve the 'wic' image support on Jethro and are merged into
+master for a while. Could those be backported?
+
 -- 
-2.7.1
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
