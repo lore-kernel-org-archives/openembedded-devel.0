@@ -1,53 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 03478771F2
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 58BDF772E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2016 14:22:07 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id c200so3757066wme.0
+	Thu, 25 Feb 2016 15:33:23 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id g62so34187419wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2016 06:22:08 -0800 (PST)
+	Thu, 25 Feb 2016 07:33:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=IfqxEvBJLGBbCuVVtywsy8gqBRxG5EsfulAI2285M1I=;
-	b=Y55v3bFuJvF48sFPZTB9lDeSJDXPHFZbvWxFxyit0IEbVMN3RcuCl+aO8BjluUWi6g
-	ZAvPrpKfOk7Tpeb2NOna58/p57py2CwB9iwNl2P7YKn/nga7xGkvNkkPnxgClTUwdohr
-	+8hIoYPdaTrburOXBtNECzyAJG2fETtCRXMueX/oDvKaNgARPHiNzvLItQovh/2/olx4
-	7hfBE+9n/wlBwnOPANyVWchxTJ1sTmA3ih6ZEr3tT+QuABySySe32sFOuDZP+odvYoYo
-	s8iTOQVSv8N/Zt9I8PjrRpksIrI0ecNOGbBkRFXAQ5J+8X81gXPaazRC+fYGTg1HxSbF
-	mY+Q==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=YI2V7eOQppbHlOE5oUXkvOGjuW6anA2rruRg7kSH5dQ=;
+	b=aVQKsYc16hQP0fLOR5mHcDsPI2nK7YhUB2jcaY5io8PSow+3pew41GZsGEAZmHHE0t
+	gWoh223lvq6I2uuFg1evfWOhorfkPOUQ8tlmqlQNEn+qmVcTvn+hoDWmYZ+1R6bDoiuL
+	aZn8GwHC8/UsCBJEye4CIW6L5ngLIs19u0Y3uKjSTtSBpPE3WTvUTdjmMDr6l4+hreg6
+	A9Gf88+gqWiWCQdziD9OFGGG14I+NM8pF9SFenwNRoUc2T7lpSYnk474BXR+Cjzbl3Cb
+	Hen5gY+lW51jR3guWzvMWaonDNuxGS/S52Dtb3dz974zJfJuAmAr1UpdHsoJPNmXA6El
+	uDAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=IfqxEvBJLGBbCuVVtywsy8gqBRxG5EsfulAI2285M1I=;
-	b=eopTIeD3icALa22vMnBxZ3Ev9Oj0r8sgQXh5JnM0Xo4810DTk+qGcuJsVVI33AM68k
-	/uCLZ2Sl5FiFt42lBtPEFkA8/3LBrv6+rApZd1N/OROAtiaAWgft6vMa11ihZOduwXim
-	mvdlDR+Er6fBfEAxmLgq53gQpSiweHD9fpn+E+UyA3uMOgIiuZBn/z5bTpWDxO0l1KCo
-	gDpWJgorZcE+Gn2ww2x36/DkKGrKpTMgNfzkmSJo+uSfCOgy5QzMChZ1rupRChTpR2E/
-	XWPFRFWXVfkDwsp5fNQz2Sy0UPp6QWQo4sHJ2ype2w3n4CsTdvMZ93xxFYdm4E88h0Og
-	GH/Q==
-X-Gm-Message-State: AG10YOSeVK4/SDblVD0VUcCPIRRDiCTJPr+ZlQ9oZV44cFcyIhT721l4XnqaW5TxrYt/yw==
-X-Received: by 10.194.90.172 with SMTP id bx12mr45269171wjb.128.1456410127879; 
-	Thu, 25 Feb 2016 06:22:07 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=YI2V7eOQppbHlOE5oUXkvOGjuW6anA2rruRg7kSH5dQ=;
+	b=YMjZXeRwd7sq03FAd1WAdC0k+ty2D9nxPQ3YHwd4GK/R+rsZtXfCm3WAp38Nw/gYKS
+	0aF1HA3zFYUhrGynSaJiXt4WXapHmgu+BKknbowtEDo6tx3PhYzeFNIwSv0cD8Iot1Px
+	7FLjKvm5FidOcZYMUf8D1QCGNQdAG0S58YU6dDh328wuSoyKdB3WJIBxWshV7TLZhN9l
+	mALhgTe0esNoEWmfQO7euACv/8r/7EqNJzjEISd9XhAmmIMphLfFRxATHI59srpnwk+h
+	dFqQJ87px+1e/blaVG8xlC4tvFp0ctuvJhcoA/gMf/h65I1v9zWBXlCTO0EQ1Enyrmyg
+	WVdw==
+X-Gm-Message-State: AG10YORYr9c8K9DB5RrR9XwWcqGzyI4tlLFwERXxWhb0PQ1Nph2JDj++sPZ2S5Oh7azYOA==
+X-Received: by 10.28.12.80 with SMTP id 77mr4177005wmm.19.1456414403431;
+	Thu, 25 Feb 2016 07:33:23 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	ls5sm8135498wjb.33.2016.02.25.06.22.06
-	for <openembedded-devel@lists.openembedded.org>
+	ls5sm8409463wjb.33.2016.02.25.07.33.22
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 25 Feb 2016 06:22:06 -0800 (PST)
+	Thu, 25 Feb 2016 07:33:22 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 25 Feb 2016 15:23:20 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160225142320.GB2565@jama>
-References: <cover.1456236552.git.alexander.kanavin@linux.intel.com>
-	<20160224164704.GH2560@jama> <56CF0363.5070207@linux.intel.com>
-MIME-Version: 1.0
-In-Reply-To: <56CF0363.5070207@linux.intel.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH 00/34] Initial gobject introspection support for meta-openembedded
+Date: Thu, 25 Feb 2016 16:34:34 +0100
+Message-Id: <1456414475-31462-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.1
+In-Reply-To: <CALbNGRS8r8+dO9SVWoK88DrDwzxkLJ-tANBAx3fZiznwjjqT-g@mail.gmail.com>
+References: <CALbNGRS8r8+dO9SVWoK88DrDwzxkLJ-tANBAx3fZiznwjjqT-g@mail.gmail.com>
+Subject: [PATCH][meta-oe 1/2] zsh: Explicitly set EXTRA_OEMAKE as required
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,77 +55,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Feb 2016 14:22:08 -0000
-X-Groupsio-MsgNum: 60203
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="oTHb8nViIGeoXxdp"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 25 Feb 2016 15:33:23 -0000
 
---oTHb8nViIGeoXxdp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* This recipe currently relies on EXTRA_OEMAKE having been to set to
+  "-e MAKEFLAGS=" in bitbake.conf to operate. It is necessary to make
+  this explicit so that the default in bitbake.conf can be changed.
+* Unfortunately the build doesn't fail, it just produces almost empty
+  output and QA warning is shown:
+  WARNING: zsh-5.0.5-r0 do_package: QA Issue: zsh: Files/directories
+  were installed but not shipped in any package:
+    /usr
+  Please set FILES such that these items are packaged. Alternatively if
+  they are unneeded, avoid installing them or delete them within
+  do_install.
+  zsh: 1 installed and not shipped files. [installed-vs-shipped]
 
-On Thu, Feb 25, 2016 at 03:36:35PM +0200, Alexander Kanavin wrote:
-> On 02/24/2016 06:47 PM, Martin Jansa wrote:
-> >
-> > Many people aren't using poky and don't want to play with combo-layer or
-> > format-patch/am combo to reapply the patches from poky repo to oe-core
-> > repo.
-> >
-> > As you're definitely used to such strange environment, can you please
-> > push corresponding branch for oe-core to openembedded-core-contrib repo
-> > as well?
-> >
-> > Thanks!
->  >
-> > I should start reading the cover letters :), will remove this from
-> > master-next until openembedded-core-contrib branch is available.
->=20
-> I think you misunderstood my intent somewhat. I don't want you to queue=
-=20
-> these patches anywhere, they are preliminary. Their purpose is twofold:
->=20
-> 1) People interested in playing and testing that poky branch with=20
-> introspection may want to use recipes or whole layers from meta-oe as=20
-> well (gupnp for instance).
->=20
-> 2) I'd like to demonstrate to you that meta-oe will be taken care of=20
-> when introspection lands in oe-core, because historically there's been=20
-> some bad blood regarding those disruptive oe-core changes :)
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-extended/zsh/zsh_5.0.5.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Thanks I appreciate it.
+diff --git a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb b/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
+index 658f3d9..39b2d95 100644
+--- a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
++++ b/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
+@@ -30,6 +30,8 @@ EXTRA_OECONF = " \
+     zsh_cv_shared_environ=yes \
+ "
+ 
++EXTRA_OEMAKE = "-e MAKEFLAGS="
++
+ ALTERNATIVE_${PN} = "sh"
+ ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"
+ ALTERNATIVE_TARGET[sh] = "${base_bindir}/${BPN}"
+-- 
+2.7.1
 
-> However, I'm reluctant to provide the patchset for oe-contrib. The=20
-> reason is that I've been maintaining the poky patchset since November;=20
-> it's more or less rebasing, merge conflicts fixing and world rebuilding=
-=20
-> once every one or two weeks. I wouldn't want to duplicate this ongoing=20
-> work for oe-contrib as well, and keep the two branches in sync, because=
-=20
-> I don't actually know when these patches make it to master. So if you=20
-> want to try them out against pure oe-core, you have to extract and apply=
-=20
-> them by hand, I'm afraid. As a one-off task, it should not be complicated.
 
-As you stated above it's not one-off task, because you're still updating
-the branch. I'll just ignore both patchsets until both are ready and for
-correct repositories, I'm not personally interested in introspection.
-
-Thanks
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---oTHb8nViIGeoXxdp
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlbPDlcACgkQN1Ujt2V2gBwG5wCfVL0fJnmTSFXiQGnpG9qhsAB5
-UOkAoJBbbwyW1hWdXy/BNdnzfrZ3/TAO
-=yBLa
------END PGP SIGNATURE-----
-
---oTHb8nViIGeoXxdp--
