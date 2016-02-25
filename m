@@ -1,24 +1,51 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EA2A97733D
+Return-Path: <ross.burton@intel.com>
+Received: from mail-ig0-f169.google.com (mail-ig0-f169.google.com
+	[209.85.213.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 22F58773B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2016 02:16:57 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u1P2Gv4Z025799
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Thu, 25 Feb 2016 02:19:53 +0000 (UTC)
+Received: by mail-ig0-f169.google.com with SMTP id z8so4376632ige.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Feb 2016 18:16:57 -0800
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 24 Feb 2016 18:16:57 -0800
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 25 Feb 2016 10:13:55 +0800
-Message-ID: <1456366435-17211-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Wed, 24 Feb 2016 18:19:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=HlII4BsXHqDhQtj4fDcrLpkFQgkEeTLxKUeJfm+7IVc=;
+	b=Fc5GdcjmBcK4TZA2Hq0C24/qsGiqgq97BW80TCXfdMptmkzIQpP7zqZ/dZUPph605l
+	KcLmKyHD3O18mPjR5FDiYnlosX5LQnvdvkSQZhURzV2Z3jVTtNjvFdF40XxurADch8rB
+	LCvX55Kt0ZSn62de4fBk6Nq2k6nKPrShW+RvrOQY+QVlyxRlRQi9zrnYyibYUogKHHZR
+	vcMSE33z4VVZhhESqZdfaRy71dXy9DEMxTH7WTkzIG7mIv1JZC1XU+yZqyNu9j+73auJ
+	usXUUG0JUQqj8r2rQBAMAk/PVU5z1zj14rGyhWCkP0nL3/z8tCzTzpHgRIrbf037B54Z
+	VATg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=HlII4BsXHqDhQtj4fDcrLpkFQgkEeTLxKUeJfm+7IVc=;
+	b=j7NLCHnFWKQ3tcK06qrViTb9FEQreXoi3+3JpLZQ1IJNlvqiF8L3KRJXY8BgoVJiaO
+	EOFI37PwkCfLCltCakTNVp7B6eUPS6W/5uXY12N/sJE6QIQUyG8c3eHXugjFDbU7M0yn
+	F4cCgBQP5jUOLffOkkNQ2WgZ9IAbJPX83mrpg55zEjptRZSFZ5qr7w8LtYng9ynYI+oa
+	ns4nlRZ8RZIZhw5ILBmqaKHUW5yaIzG/Vz6YoziTd/I0UAw21vvPurj7UmesD93FPV1r
+	F3H79/7J2nsAF06k1fMOCbHXgn/eg88d9n5DL363aDnlvGdXYTRsnIU8pdZPxvqQSCn1
+	Zm+g==
+X-Gm-Message-State: AG10YOSVnlNYhSlUC/nHyvzBF0eCyQmfyChStQxigg6DAQMBgi4YuEUBZPwROHhW7/TglLNwsj+ohJMx7gVsDhTc
+X-Received: by 10.50.97.71 with SMTP id dy7mr748299igb.78.1456366794605; Wed,
+	24 Feb 2016 18:19:54 -0800 (PST)
 MIME-Version: 1.0
-Subject: [PATCH][meta-filesystems] yaffs2-utils: set EXTRA_OEMAKE as required
+Received: by 10.107.162.70 with HTTP; Wed, 24 Feb 2016 18:19:35 -0800 (PST)
+In-Reply-To: <20160224162044.GF2560@jama>
+References: <1456148105-9644-1-git-send-email-derek@asterius.io>
+	<1456148105-9644-8-git-send-email-derek@asterius.io>
+	<20160224130413.GD7560@jama> <20160224162044.GF2560@jama>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 25 Feb 2016 02:19:35 +0000
+Message-ID: <CAJTo0LbATKddvyLZNh2d+AHOnyPn2q8dmBQJebowa5CejxuXdQ@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Derek Straka <derek@asterius.io>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] python-setuptools fetch issues Was: [meta-python][PATCH 08/11] python-mock: update to 1.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,30 +58,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Feb 2016 02:16:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 25 Feb 2016 02:19:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-bitbake.conf has now removed "-e MAKEFLAGS=" as the default value of
-EXTRA_OEMAKE. However, yaffs2-utils needs this option to make compile succeed.
+On 24 February 2016 at 16:20, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+> distutils.errors.DistutilsError: Could not find suitable distribution for
+> Requirement.parse('pbr>=1.3')
+>
 
-diff --git a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
-index 0e1e460..253ea62 100644
---- a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
-+++ b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
-@@ -17,6 +17,7 @@ SRCREV = "bc76682d93955cfb33051beb503ad9f8a5450578"
- S = "${WORKDIR}/git"
- 
- CFLAGS_append = " -I.. -DCONFIG_YAFFS_UTIL -DCONFIG_YAFFS_DEFINES_TYPES"
-+EXTRA_OEMAKE = "-e MAKEFLAGS="
- 
- do_compile() {
-     cd utils && oe_runmake
--- 
-1.9.1
+Missing DEPENDS?
 
+Ross
 
