@@ -1,45 +1,76 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 29DA577294
+Return-Path: <samuli.piippo@theqtcompany.com>
+Received: from emea01-am1-obe.outbound.protection.outlook.com
+	(mail-am1on0128.outbound.protection.outlook.com [157.56.112.128])
+	by mail.openembedded.org (Postfix) with ESMTP id 0712C77291
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2016 11:10:36 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id c200so23232478wme.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2016 03:10:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=1qCit/VtaR7rqFX3kfEI4di4oiagT3GxpsAHqxfOPy8=;
-	b=x2cry1sBEZCj247UdDtZIeMTKQCmChYi2SJI7A9YxMgLMXdAEwxX7/lPHNAiKfTiAl
-	V7Yf0Pyb6gGA55QDTvL0p6x4SYpQEIR4LnoxaZgoMtTo7lo4Ml0ch6tk+vZfvWlYy1mK
-	hDPA/U/x99DRicpxJNXhlg/bg72J0EtC3o9mG1Jj9/WmD9+iNkZvXyPpzsKcEK+TDPuj
-	dKbmmTzGF6fGhktDCYE8vwSVyfml2oGz9nFfuAG9oh+llPHoCIlpt5Uui4+Fk3ZY9qX+
-	2YRxp5jp2xbDjRc+jXls3HFCefAv1L/VkKrOyqqBruxnTIfVW9qZXPZbDAf0XWOKKIYy
-	Ebzw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=1qCit/VtaR7rqFX3kfEI4di4oiagT3GxpsAHqxfOPy8=;
-	b=Bw+ijDrMQgGa+BpBPpJ1bBpPXVU/1JRUiymGhl2PcPV9bye1aS7Keh1ABgCvu48ZsB
-	IYmCSS+5wh4WWe/vsXuAQdPZQB0NKbGpFSInCmbPUsq6e1Q3SD3NgYIKxVrvvnbk33ku
-	/TYyP41NM0k1I9Bsk8LIKtFG9jS4Y1AgDWNkl9JO4bpGn0pK0xCHdPjbEpIN93pGxN7j
-	P/b2QFTcLsM7OQ9TCXUOazViX3D2vHYzPlJBqLM+a3XVhsFITVVZtgB9inci2swJm2/D
-	GUYTbFEibmqt/43u2UJjghrJ9O10Z1Tp28J6lkjS4sTH4aEoJvfDRxr9sNlDsQTqPask
-	Uh7A==
-X-Gm-Message-State: AG10YOQT7G0J/7a9XC3b7qJM2+9o94fclu2N9sKGYMYSAtK/Z09kq3biHgesMfy80aCUyA==
-X-Received: by 10.28.225.8 with SMTP id y8mr2935788wmg.23.1456398637379;
-	Thu, 25 Feb 2016 03:10:37 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	et11sm7415178wjc.30.2016.02.25.03.10.35
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 25 Feb 2016 03:10:35 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Feb 2016 12:04:39 +0100
-Message-Id: <1456398279-1954-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.1
-Subject: [PATCH][meta-oe] efivar: BROKEN: blacklist until nvme_ioctl.h issues are resolved
+	Thu, 25 Feb 2016 12:57:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=digiaonline.onmicrosoft.com; s=selector1-theqtcompany-com;
+	h=From:To:Date:Subject:Message-ID:Content-Type:MIME-Version;
+	bh=1iXyVO+CAeb2xLzMIYAXc11q0MUEc2eC7MN2RDrJ6sM=;
+	b=EMqtO/zRxEVOwNbw3YYcaQOSl6g7ionlAUHviymyj0przZzAv20wq1g18/LEfOukDvMcS1csd9sfYl60GGt1hwrAK3GHhqhhwd68RInt/pNmtGGKxlKEJgsGsRUjALfY4P12oXgz8Hb0OaG2ah204LvngCG1ZP/zDYuMaTZoyUQ=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+	header.d=none; lists.openembedded.org;
+	dmarc=none action=none header.from=theqtcompany.com;
+Received: from piippo.it.local (91.217.248.11) by
+	DB5PR02MB1175.eurprd02.prod.outlook.com (10.162.163.21) with Microsoft
+	SMTP Server (TLS) id 15.1.409.15; Thu, 25 Feb 2016 12:57:05 +0000
+From: Samuli Piippo <samuli.piippo@theqtcompany.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 25 Feb 2016 14:56:53 +0200
+Message-ID: <1456405013-5384-1-git-send-email-samuli.piippo@theqtcompany.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-Originating-IP: [91.217.248.11]
+X-ClientProxiedBy: HE1PR06CA0064.eurprd06.prod.outlook.com (25.164.28.160) To
+	DB5PR02MB1175.eurprd02.prod.outlook.com (25.162.163.21)
+X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1175;
+	2:/0ajMQd3a6FwgcFAQnguKI+mNI/0zpfVS0pgIDIYpJLsfrHGyc5paLvgF8loPCMfBXcH46AAYFLyqNYdLFwIKFPkJUsEsMt3RbhD2BhJu47PE8i8bAzK0FMGJhw5m56uElFneYV0oJvvn5cxhbjO9Q==;
+	3:Z1icJfmfXM4lKtN5P3LLWPHSgTtPbdv6xz+0Eb3jvoOWXHvwTghGEDbHciPtbFtgGSolvkwnJ/tD+ThxTC6x+SnGTSWdDj/jGJnz7iIegMLcJgKiaVcT4wBn27a7X5v/;
+	25:eqHJA8mNHIaKH7fW0tpU2Dn3t+b1DYVmFqvCZgfivaEjQ/3wJRWxGjpgnAtnO/hQXbznJOmLviYJaCkxPAtUOAZWLnoPKFM9HLn3xYdWjkveQQsjOhvfoMMyyvmtzCBTT6g4vboMnsJyd1MWldmb3YkxDp1Oj86E403idK7HXH32Ff1JnIObYx/QH2gloAisntEfCNAS5qeup/7dXGGrBC41dSNwMSUuO7UsvDuVP2ux4+LY2rZCuGFcesGqINwn1dbC6nb7P6bYLo/6oA2ZeFo05bXitUIX8amqqh7LWxHioRIxygv3G/EiaELZpl3pYofZ8QMkRUL9K9Q5LXaTqQ==
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DB5PR02MB1175;
+X-MS-Office365-Filtering-Correlation-Id: a978bb40-f7a3-4c50-e958-08d33de3299f
+X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1175;
+	20:19frWc0tjjRwZUdFi4g4kNoTZZEYIKIap8GS4BZjukMVBFD5YG2X05VT7JhmXsxylU2AENU5Pl1TfMgxzZBE6QCncSCayr7ymy7iUQ2ski7EkGP1anYs1NXwvIsTkeQDCCmGRVqbm09UemrQwPGp6lqyI55cmaPARq9YtEjW4rGlUapZAqtSKF50cf3zUABnjRXNbeM1KycETDN7rSmYFbilUr9lk9PIBacvbYZL8hDjsV/HV1b+LXqdoSezygs7rHMGxWCP0/E+VEo1aj8fPo4YEv8/MFz9utx8cdBPmQBjlsFmSUNYfq1RksaIQeBK/aE4lgMcIeEhzXqWPNTcUzhGgQLRn2yGr0MEkgKagsqwY+Xe14Wys02Sm7oIzfa1T79xJA4F1HZBX9p9Y8uQWON6yMoXoxuoCRntmvhPTdWBUY3e8KzZ1hOTPjCI5Xqszegg5MfvwYB757MniOA2VDS3UF/ghFB6+CcONpUHWNb984atSPetYZeu8jizMpHG;
+	4:v0Juo163OvDVTNB85YjQfD75uwx+IWyHdqgU9hEyTH8SztnYRt4ZBYRTc5hgvx3ucV2Z6ojji+v9BMX1KiLEgBcbhJgVg67kginNmaprqIAzmhhsZBV/IR5Xc75VitRh34GzXqnKYh+qx1S685pxjWyZvWD5debKlVlVDtFqi2PCgNcg8Wizd25Xqz2zxvY3QtdOhfWX4A1D7BTqpHXJIgY3EcujPp9qTmte56U4I5I+VyT01/Dd2YZZjB9PnaLYqrPZapcq975wvbmf0gKn/KQ2/HybLE+lok6vJOq2tnChACOcAQDyfMRXmYh5vES0imOVaxRZiz+phibs2wPHS/5HyuEldUEeDyS0n3RA5sbtAUy38sVHozQ2RCe06YYV
+X-Microsoft-Antispam-PRVS: <DB5PR02MB11758139D1B25845787E214190A60@DB5PR02MB1175.eurprd02.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(601004)(2401047)(5005006)(8121501046)(3002001)(10201501046);
+	SRVR:DB5PR02MB1175; BCL:0; PCL:0; RULEID:; SRVR:DB5PR02MB1175; 
+X-Forefront-PRVS: 08635C03D4
+X-Forefront-Antispam-Report: SFV:NSPM;
+	SFS:(10019020)(4630300001)(6009001)(92566002)(2351001)(229853001)(50226001)(40100003)(50466002)(19580405001)(77096005)(19580395003)(33646002)(6116002)(48376002)(450100001)(122386002)(5003940100001)(2906002)(42186005)(107886002)(110136002)(189998001)(50986999)(87976001)(3846002)(1096002)(86362001)(47776003)(5004730100002)(5008740100001)(586003)(36756003)(66066001)(5001960100002)(7099028);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:DB5PR02MB1175; H:piippo.it.local;
+	FPR:; SPF:None; MLV:sfv; LANG:en; 
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DB5PR02MB1175;
+	23:16trcCY1FwXnDd2v9Ygzt87HYFTQQutyFp2cyyiJH?=
+	=?us-ascii?Q?YRhcvSQPapJ0Z1azeo8ejogWN9x8fMcDaHJtF6vXqHtziYYrdUwuvfRa1uu2?=
+	=?us-ascii?Q?LWLJU6JB3AieZTGxAdndhe3OkO/wYwcgeAZgzNQOQDV8fJLxVSzUmqoczY0I?=
+	=?us-ascii?Q?PefZcJY4i98UKSCiHywbi87i/xoI5SW5eOQ6It/+1Z5qiSYlDFO2oevy966C?=
+	=?us-ascii?Q?P1XkKg6hpYZ7dlwBD4VnZAVlIrLxw6QqGuExFnbRpKN4v1c9IlGKXJbwQ2yd?=
+	=?us-ascii?Q?6V92h3Yp0WIa2Qa0uF16pFsWJvT78a1K7l6unsGmMBEh7lCIWwzDHQQyGk9h?=
+	=?us-ascii?Q?RkYuE7CTfzFQVVj05P076uxP/T20BmNzDYA4qbtN53RPrKrdM6DUVXFhLXPt?=
+	=?us-ascii?Q?ZxZntR4tlGAT9vyop70SG5+UZqj7gm9rSb9ba7tWG5abav0BucMsCVwUHIkY?=
+	=?us-ascii?Q?k5RFihGDe7gU6ELziaTVS/hGBSS8WoD0ecEYnoPBxwHqH+g6fnCetWzaQzhZ?=
+	=?us-ascii?Q?2Uez6Ml6wXUHK/3ywSNFNkKAVhdZXOpRYEWuW4GnQ3X3xezWPvy3m/8eiw3M?=
+	=?us-ascii?Q?ht2ycM3zX1On2/ZYg/qtuLoW6+8OX3eLBllt9k3c48VqnljPZOCTVQZCIrz2?=
+	=?us-ascii?Q?FO6ebC6W7uPO6tkmpfUSjpU4crN5P8qiHvpvyONv5Z2Ay//QiGdIZElO8sI1?=
+	=?us-ascii?Q?ZBugxg54QsfEMOf5aotv/ODZM/uCwikq2THo/YCbUY08bNnQ2Ds3sEmLmvq5?=
+	=?us-ascii?Q?TAEeBedpV6c4M3J38ee9bjO3jcb7pm8pkvtkz+NVX/3zez0VuVsiHP89EWJ/?=
+	=?us-ascii?Q?e9pqwyVmWS7UD1dL1MqJ9WT4K/XlMf8jVTeinyW3YTmqGYESowzM6OI4QwxL?=
+	=?us-ascii?Q?cGuMfjMmrgi7Q/jdwo5ef67/2mKjJjtut8pqrwU3AHrTk2LtZ7w3rzcf1xMT?=
+	=?us-ascii?Q?RJ745qczyAvgoX1s0T4dkh57veMhG90cCHhi5W+fg=3D=3D?=
+X-Microsoft-Exchange-Diagnostics: 1; DB5PR02MB1175;
+	5:YTb5yO8jqoTPDxHgVejFoxjrBsrKp+I3ph5HiVM7iOLaMwshQlj+p8Ph65xcyZvbmUOEQkzEeQfsutNdfjA+7opug7unrI9De+vFP1c4KkmsxfQhHWkwO3h3sJIePkXqWZgTZuFyqTXlaYJEoWIa6Q==;
+	24:RKpMElrTLmcv4nKv3ixE9OliPhdtmqkwkZptuQc4xQBCnIBJT30Ih6BFIDpuArF6LIoRW6fH5K1qdbbWLFQwUUJeA9/PA5kEOpWEzQftWDU=
+SpamDiagnosticOutput: 1:23
+SpamDiagnosticMetadata: NSPM
+X-OriginatorOrg: theqtcompany.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2016 12:57:05.2713 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR02MB1175
+Subject: [meta-qt5][PATCH] qtbase: add runtime dependency to xkeyboard-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,32 +83,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Feb 2016 11:10:38 -0000
+X-List-Received-Date: Thu, 25 Feb 2016 12:57:08 -0000
+Content-Type: text/plain
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+When qtbase is configured with xkbcommon-evdev (usually without X),
+make sure xkeyboard-config is installed to provide keymap database.
+
+Signed-off-by: Samuli Piippo <samuli.piippo@theqtcompany.com>
 ---
- meta-oe/recipes-extended/efivar/efivar_0.21.bb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ recipes-qt/qt5/qtbase_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/efivar/efivar_0.21.bb b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-index 3c34a7b..692b2b7 100644
---- a/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-+++ b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-@@ -29,3 +29,13 @@ do_install_class-native() {
- }
- 
- BBCLASSEXTEND = "native"
-+
-+# See
-+# http://lists.openembedded.org/pipermail/openembedded-core/2016-February/116564.html
-+# http://lists.openembedded.org/pipermail/openembedded-core/2016-February/116571.html
-+# http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105802.html
-+# http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105786.html
-+# but it's still broken:
-+# http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105825.html
-+# http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105830.html
-+PNBLACKLIST[efivar] ?= "BROKEN: linux.c:27:30: fatal error: linux/nvme_ioctl.h: No such file or directory"
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index ce07380..794cd8e 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -108,7 +108,7 @@ PACKAGECONFIG[xvideo] = "-xvideo,-no-xvideo"
+ PACKAGECONFIG[openvg] = "-openvg,-no-openvg"
+ PACKAGECONFIG[iconv] = "-iconv,-no-iconv,virtual/libiconv"
+ PACKAGECONFIG[xkb] = "-xkb,-no-xkb -no-xkbcommon,libxkbcommon"
+-PACKAGECONFIG[xkbcommon-evdev] = "-xkbcommon-evdev,-no-xkbcommon-evdev,libxkbcommon"
++PACKAGECONFIG[xkbcommon-evdev] = "-xkbcommon-evdev,-no-xkbcommon-evdev,libxkbcommon,xkeyboard-config"
+ PACKAGECONFIG[evdev] = "-evdev,-no-evdev"
+ PACKAGECONFIG[mtdev] = "-mtdev,-no-mtdev,mtdev"
+ # depends on glib
 -- 
-2.7.1
+1.9.1
 
 
