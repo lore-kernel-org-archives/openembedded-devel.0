@@ -1,28 +1,50 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C7FA2770D8
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f177.google.com (mail-io0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D8CA7722C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2016 07:36:34 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u1P7aZVj008676
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 25 Feb 2016 09:27:33 +0000 (UTC)
+Received: by mail-io0-f177.google.com with SMTP id 9so76797223iom.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Feb 2016 23:36:35 -0800 (PST)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 24 Feb 2016 23:36:34 -0800
-To: <openembedded-devel@lists.openembedded.org>
-References: <1453876257-30608-1-git-send-email-kai.kang@windriver.com>
-	<56C59168.4010600@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <56CEAF00.4070602@windriver.com>
-Date: Thu, 25 Feb 2016 15:36:32 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
+	Thu, 25 Feb 2016 01:27:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=4WT82xjRkhYlLrB34NAJQykocHWt9S3B8Y2Js/b3ubI=;
+	b=jpIk/ZcD+1xW69JxwONXJkckq4R0vbAv+hnTkGNRzpheT/sjT5BxeGF3nsJQcB8fVB
+	JcFgqhyJZJryxLZ0D9JU+p5HyrOLvg6c2DEYVqZ6netz8p3iGMsQFNJfh9qhxnlwGNOl
+	KfYOgihiATbOyjmiHYM+98O+sAPpXA+DHnv/f5v35r0Q/vyPJphLuZeOUXPPNFPjZoIj
+	Hqiq4mzUIP/7/8MU5Q3mzh/yyXdycJt7TRcQFloEgnk5drXsOk3f4OgjwXDW9jqbU5YV
+	ZWm/Fg1xCbkBYL8sf6BVnPk1F01rs33yPovgh3Ke4cT05RUdeSV5CnvZzPhfj+2WtBy6
+	JnRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=4WT82xjRkhYlLrB34NAJQykocHWt9S3B8Y2Js/b3ubI=;
+	b=WjnZX3lOUjgEBgtf17XHhQfHqOYTTM57gYiKJH2b/QTk503dwt9CHFy8gS+Gv5JqZy
+	TCgAGEREV5wkUqH1gcfLZKogccGJboZrMGV3uN1brroaYcwBeNzcmNIHFp0rrj7ZOGCK
+	OFKewOq7pLMH3aLS+pcs2s+5el+pdKhQK5YuesXjn4D83dBcSbD73QsDZ9fpjOHJFRqq
+	2Hpsxo9t5N0ubZgf17vCU2GFZYQmINySq8nxlp/5eQ+6D6PR30rjcSEiDemMSWU5mZnb
+	M7QzcEB5mKq1cfrJatdtWFVqp+yrPDzJYBfB+PZjsWBKnSd3xsCne9vDcfz2YcHQ4gOa
+	A2dA==
+X-Gm-Message-State: AG10YOTmIC+SVPeVHxMAiS1sTzhk13PHiyLW6kT9w4S6h9i5YQy2GebhZpPuG7NK0AemOwfxaT09f6tfkBRfmoGU
+X-Received: by 10.107.3.220 with SMTP id e89mr1851111ioi.99.1456392453766;
+	Thu, 25 Feb 2016 01:27:33 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <56C59168.4010600@windriver.com>
-Subject: Re: [meta-networking][PATCH] samba: update systemd service files
+Received: by 10.107.162.70 with HTTP; Thu, 25 Feb 2016 01:27:14 -0800 (PST)
+In-Reply-To: <1456148220.2298.25.camel@linux.intel.com>
+References: <cover.1455895912.git.adrian.ratiu@ni.com>
+	<ccea554cd4fef5dcffc2e9edfb69a8b606907716.1455895912.git.adrian.ratiu@ni.com>
+	<1456148220.2298.25.camel@linux.intel.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 25 Feb 2016 09:27:14 +0000
+Message-ID: <CAJTo0LaDXv6D470Za-tVobw5idYc6F4qET4wLcmFCKYV04k-OA@mail.gmail.com>
+To: Markus Lehtonen <markus.lehtonen@linux.intel.com>, 
+	Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core][PATCH v6 2/4] gpg_sign: detach_sign: fix gpg > 2.1 STDIN file descriptor
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,56 +57,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Feb 2016 07:36:35 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 25 Feb 2016 09:27:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 2016年02月18日 17:39, Kang Kai wrote:
-> On 2016年01月27日 14:30, kai.kang@windriver.com wrote:
->> From: Kai Kang <kai.kang@windriver.com>
->>
->> Update systemd service files of samba. There are no '@BASE_BINDIR@' and
->> '@SBINDIR@' in these service files, so drop the original replacement.
->> Command kill is installed to /bin/kill, then correct in the service 
->> files.
->
-> Ping.
+On 22 February 2016 at 13:37, Markus Lehtonen <
+markus.lehtonen@linux.intel.com> wrote:
 
-Ping.
-
->
-> --Kai
->
->>
->> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> ---
->>   meta-networking/recipes-connectivity/samba/samba_4.1.12.bb | 4 +---
->>   1 file changed, 1 insertion(+), 3 deletions(-)
->>
->> diff --git 
->> a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb 
->> b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
->> index a51d31f..2e3f118 100644
->> --- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
->> +++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
->> @@ -112,9 +112,7 @@ do_install_append() {
->>           for i in nmb smb winbind; do
->>               install -m 0644 packaging/systemd/$i.service 
->> ${D}${systemd_unitdir}/system
->>           done
->> -        sed -e 's,@BASE_BINDIR@,${base_bindir},g' \
->> -            -e 's,@SBINDIR@,${sbindir},g' \
->> -            -i ${D}${systemd_unitdir}/system/*.service
->> +        sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' 
->> ${D}${systemd_unitdir}/system/*.service
->>         install -d ${D}${sysconfdir}/tmpfiles.d
->>       echo "d ${localstatedir}/log/samba 0755 root root -" \
->
+> As far as I can tell get_gpg_version returns a string. However, you
+> compare that with a float. This should give more correct behavior:
+> +        if gpg_ver > "2.1":
 >
 
+Not sure I'd trust that either, version comparison logic is painful.
+Something like this might be more resilient to interesting versioning:
 
--- 
-Regards,
-Neil | Kai Kang
+dots = versionstring.split('.')
+assert len(dots) >2
+if int(dots[0]) >= 2 and int(dots[1])>= 1:
 
+Also:
+
++        job = subprocess.Popen([self.gpg_bin, "--version"],
+stdout=subprocess.PIPE)
++        (stdout, _) = job.communicate()
++
++        if job.returncode:
++            raise bb.build.FuncFailed("Could not get gpg version (is %s
+installed?)" %
++                                      self.gpg_bin)
++        return stdout.split()[2]
+
+That's a long-winded way of saying:
+
+try:
+    return subprocess.check_output((self.gpg_bin, "version")).split()[2]
+except CalledProcessExceptionOrWhateverThisExceptionIsCalled:
+    raise bb.build.FuncFailed("Could not get gpg version (%s). Called %s,
+output %s" % (e, e.cmd, e.output))
+
+Ross
 
