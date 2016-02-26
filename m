@@ -1,46 +1,46 @@
 Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
-	[209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D222770A6
+Received: from mail-pf0-f174.google.com (mail-pf0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id D5BC377389
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2016 08:20:01 +0000 (UTC)
-Received: by mail-pa0-f45.google.com with SMTP id fy10so47356212pac.1
+	Fri, 26 Feb 2016 08:20:30 +0000 (UTC)
+Received: by mail-pf0-f174.google.com with SMTP id e127so48435067pfe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2016 00:20:02 -0800 (PST)
+	Fri, 26 Feb 2016 00:20:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=QjIiUo0uoif6h8KVPOTuSdLl2lWSQFVVDw7TxYXjUa8=;
-	b=Tc4OrW249Gvg8fO2u5CJSRGVMiFN/QsdWusmAkJ/9UnaNMKC/pY76uLiF3GzLWAfry
-	L6VVIV+WoC2POqXwl6xhmK9fsTrsx6CIpt6mLjYgZXb4JfaV2E4jo71eUFNONp+BU3GD
-	oQtciARMvtfIj57OBn1WWERu/tDb+o3I2EhIC1DPR1+L8PSzuu8Z0W8MODu7gFRaZJ+0
-	FvRh8dlB0OV+z2d0Mcih4bV2sY79qAAks+1KAZLA1nIqD868T3KKRC3+SWrS7wD1urNX
-	996woR4EoZOfxIQtEDxSohxrBr4/D9a9VGGPfYCZLDONIFyJ3DMb18kp+9nWkmabvq32
-	9JKA==
+	bh=UAVdb73eHytBzusow0QAdIX8FecheZjzUrjtH1/ZBAQ=;
+	b=Kdofe42I1Gvr7mEUF0W7eiDgLlijYTNuMf3qAaAa09swqbB5k04nVI4cRHRXLOPoQ5
+	IGOJkXzjvCFa1kIVFh+QSE64ezAJljYoBtnfAZU+G3SEeKsbripEY1Znzx3Wel2kTH4n
+	Q+ZuAoUkzXV9qDL5hx/tK8FVQtYUo0aS7ULxf1EHEWfOU0X0G12G7932pFn5F6Lh6mXX
+	zmzHasVcjOgYH3JwhQmoZ4k/H3QKp1oDvqtkzzIx82yiBm1zBfWskNaLKzRXTQI9JIHF
+	hpjkRKo+lDflOHHIp1W2FvR+n1J4RDKUGL7BiLS4pzyYPHyFpxnrj4zwMPrtpOChYLqX
+	tc1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=QjIiUo0uoif6h8KVPOTuSdLl2lWSQFVVDw7TxYXjUa8=;
-	b=DwHZwX6P/GoEZo4vw21wLKSbIlAU3w8mUPB0uHKJP1hpfvqcai47uY4Vplf+/oRnTx
-	TCoo4/ZdzeUeH+/M8it/V/VT168viJ5Z7m5l8AiyncYwwmNlqCT1XYjncV7z1VtOXvO+
-	rJz+rr0LoZt0nuORVkwgRasRq45vY35f7sVFz1t6AbmWPrPeegtwWY082QTwny96EZxc
-	oGFbT7GQ1pBJTT4Sc4g4FU5lbkoFnsHCvLe4GfmZL9nL38YFW68BkyaOeR2yDRhd4FMM
-	+Zt/pXaWXZGXa0dvS5HfExPhM8gVS2lk1hkQunw837kBTmXIelQVnn0eyMytvOCvp++K
-	yoKw==
-X-Gm-Message-State: AD7BkJJTf32gHcR3rMXOis2WUcmBzWfoxu/Ez2tX5aP04OR+I1qULNnBp0LpmgqyQpxEnA==
-X-Received: by 10.66.145.194 with SMTP id sw2mr288976pab.69.1456474802124;
-	Fri, 26 Feb 2016 00:20:02 -0800 (PST)
+	bh=UAVdb73eHytBzusow0QAdIX8FecheZjzUrjtH1/ZBAQ=;
+	b=RnQ88bXyackMvaJDufn9URD5jMCoMlPoFNkbxDOkFzhT1S31XjE/pyo5o/Buc+mbr1
+	7P2KmD/ZSNyCMdjrEDqTNHOrbJDuVyitEPvi7GFFIL1Tje5dpQiRj6kqnuB5axieiI7e
+	0ggB3xEgDah782USgbQ55pDQU48PpfTp5wog7gv68V908CfhHsU+yq+MGn77NqQ/ZTvb
+	YBXEGr+lmV1Pt1VmameZmXeEQAtf8dcFbkNcNPFm8kTB4v8ipWwylHMh179Qs3za7PTw
+	4PnSuuDmsZL8M1fDfVLuAZ9hJIGNJgjunrtNxiUrFV+2c3YtQn1uFaBN2Gzm228tUgzo
+	C3Ag==
+X-Gm-Message-State: AD7BkJJb2dD96EwOf0HXFcHeF2WTOJBLIAITY1DIRWJm3+F06STfu2d4iXGTKI9rbSpX0Q==
+X-Received: by 10.98.71.147 with SMTP id p19mr286136pfi.165.1456474831503;
+	Fri, 26 Feb 2016 00:20:31 -0800 (PST)
 Received: from 60-242-179-244.static.tpgi.com.au
 	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
 	by smtp.gmail.com with ESMTPSA id
-	fa3sm17300497pab.45.2016.02.26.00.20.01
+	87sm17277973pfq.93.2016.02.26.00.20.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 26 Feb 2016 00:20:01 -0800 (PST)
+	Fri, 26 Feb 2016 00:20:30 -0800 (PST)
 From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Feb 2016 19:20:12 +1100
-Message-Id: <1456474812-18671-1-git-send-email-net147@gmail.com>
+Date: Fri, 26 Feb 2016 19:20:45 +1100
+Message-Id: <1456474845-27746-1-git-send-email-net147@gmail.com>
 X-Mailer: git-send-email 2.7.1
-Subject: [meta-qt5][PATCH] libconnman-qt5: remove blacklist
+Subject: [meta-qt5][PATCH] qtwebkit: backport patch to fix linking with qtwebkit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,26 +53,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2016 08:20:01 -0000
-
-The package no longer fails sanity test because of connman-qt5.pc
-containing references to build host paths.
+X-List-Received-Date: Fri, 26 Feb 2016 08:20:31 -0000
 
 Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- recipes-qt/libconnman-qt/libconnman-qt5_git.bb | 2 --
- 1 file changed, 2 deletions(-)
+ .../0004-Fix-linking-with-libpthread.patch         | 33 ++++++++++++++++++++++
+ recipes-qt/qt5/qtwebkit_git.bb                     |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtwebkit/0004-Fix-linking-with-libpthread.patch
 
-diff --git a/recipes-qt/libconnman-qt/libconnman-qt5_git.bb b/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
-index 71c04df..0fc4bc0 100644
---- a/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
-+++ b/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
-@@ -15,5 +15,3 @@ S = "${WORKDIR}/git"
- inherit pkgconfig
+diff --git a/recipes-qt/qt5/qtwebkit/0004-Fix-linking-with-libpthread.patch b/recipes-qt/qt5/qtwebkit/0004-Fix-linking-with-libpthread.patch
+new file mode 100644
+index 0000000..c5e6ac5
+--- /dev/null
++++ b/recipes-qt/qt5/qtwebkit/0004-Fix-linking-with-libpthread.patch
+@@ -0,0 +1,33 @@
++From 5dd4bb67cfce812fd7686e43616e2069f354a7df Mon Sep 17 00:00:00 2001
++From: Allan Sandfeld Jensen <allan.jensen@theqtcompany.com>
++Date: Mon, 22 Feb 2016 10:57:32 +0100
++Subject: [PATCH] Fix linking with libpthread
++
++WebKit use libpthread directly but is depending on other qt modules
++causing it to be linked against, which might break unless -lpthread
++is last. Instead just add it explicitly after the static libraries.
++
++Upstream-Status: Backport from 5.7 branch
++
++Change-Id: I2b95cff2c96373f8dce6f95052c4fccbe1982b33
++Reviewed-by: Simon Hausmann <simon.hausmann@theqtcompany.com>
++Signed-off-by: Jonathan Liu <net147@gmail.com>
++---
++ Tools/qmake/mkspecs/features/default_post.prf | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/Tools/qmake/mkspecs/features/default_post.prf b/Tools/qmake/mkspecs/features/default_post.prf
++index 67276b7..39bb3f7 100644
++--- a/Tools/qmake/mkspecs/features/default_post.prf
+++++ b/Tools/qmake/mkspecs/features/default_post.prf
++@@ -201,6 +201,7 @@ needToLink() {
++         linkAgainstLibrary($$library, $$eval(WEBKIT.$${library_identifier}.root_source_dir))
++         LIBS += $$eval(WEBKIT.$${library_identifier}.dependent_libs)
++     }
+++    posix:!darwin: LIBS += -lpthread
++ }
++ 
++ creating_module {
++-- 
++2.7.1
++
+diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
+index 9044d4f..04cefad 100644
+--- a/recipes-qt/qt5/qtwebkit_git.bb
++++ b/recipes-qt/qt5/qtwebkit_git.bb
+@@ -22,6 +22,7 @@ SRC_URI += "\
+     file://0001-qtwebkit-fix-QA-issue-bad-RPATH.patch \
+     file://0002-Remove-TEXTREL-tag-in-x86.patch \
+     file://0003-Exclude-backtrace-API-for-non-glibc-libraries.patch \
++    file://0004-Fix-linking-with-libpthread.patch \
+ "
  
- RDEPENDS_${PN} += "connman"
--
--PNBLACKLIST[libconnman-qt5] ?= "BROKEN: QA Issue: connman-qt5.pc failed sanity test (tmpdir)"
+ PACKAGECONFIG ??= "gstreamer qtlocation qtmultimedia qtsensors qtwebchannel"
 -- 
 2.7.1
 
