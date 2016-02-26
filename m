@@ -1,27 +1,49 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 55E5C77353
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id B7FBE7716F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2016 09:59:00 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga102.jf.intel.com with ESMTP; 26 Feb 2016 01:59:01 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,498,1449561600"; d="scan'208";a="659643951"
-Received: from linux.intel.com ([10.23.219.25])
-	by FMSMGA003.fm.intel.com with ESMTP; 26 Feb 2016 01:59:00 -0800
-Received: from mbabyjoh-mobl.fi.intel.com (mbabyjoh-mobl.fi.intel.com
-	[10.237.72.71])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by linux.intel.com (Postfix) with ESMTP id 3CF072C8001
+	Fri, 26 Feb 2016 10:38:42 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id a4so64240885wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2016 02:46:48 -0800 (PST)
-From: "Maxin B. John" <maxin.john@intel.com>
+	Fri, 26 Feb 2016 02:38:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=cIPsqIYxDVbbwScXAfV9Qol92DLHUaYfVmvXy1noOI8=;
+	b=yhVzvbZ1tmWYDYnsE1JaYE+NpIdx1fQmlg8jvLmZzO8I6yPTxLwh1QWczcSpfZt+Bq
+	o7FT528gvc6GPXTCli452KQ1LjuXG2kggJ0BuXQJD/PyNlGteE4uP1eJHAjCm1Hp1FHn
+	829fVJINgb4WnQX20VKlysTGgZqlJclVtj5dclW3rIWPR0OW+48iuNPfVSPbOa5AtOyL
+	+z7gXjrvUQaKaXvxm7v/Fjic5/RoBCd/fYtFtcueqvXgEIEnmU/w07YOhZdMLVSx5qjI
+	CxLA903B2tUFoxuxQ+BKTXPdjJvhKaC73K4iqW943rsu735V78tqUTa8ue41+xL5KbrT
+	DYQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=cIPsqIYxDVbbwScXAfV9Qol92DLHUaYfVmvXy1noOI8=;
+	b=Td7U4n1/qgLr6YTE65rcGgQ0SxiLeQi9lETFP62z9sO6M3kcpPsege+OJtiEk59vOw
+	JCQ+uJ4N46CZz5bRSHSKTcoA7YSvHzPmXyHQ2wuIJJBphlyStyjjOHOsIduzBH4Ai7LN
+	+56ec0LMdc+bx45CdSVIywyYyQ3ZiL0TlPe47eekLq37QGKtTmmYJv5ohMT9ydGAC0zF
+	oFHaoHz8a+IG/oKRkH96wocoLGpwSRqdztCtDRXI1PdnvcXjtUFzeMjgQ4uejGdn4wOH
+	vq4lW7sPUK99b9FF8SbdCZK4Yf4F9CLdJoVbrOSRh/INVC2b8phbQxnvpCpRlXlCAcMv
+	ddUQ==
+X-Gm-Message-State: AD7BkJImmnoWoAe88hP/F2NdD4TapYsDBixJQCt6SHBRv2zFqI4496pUPPYGrSPvJqzIAg==
+X-Received: by 10.28.173.143 with SMTP id w137mr2514148wme.101.1456483122947; 
+	Fri, 26 Feb 2016 02:38:42 -0800 (PST)
+Received: from localhost.localdomain (p4FDF16E9.dip0.t-ipconnect.de.
+	[79.223.22.233]) by smtp.googlemail.com with ESMTPSA id
+	h132sm2291087wmf.9.2016.02.26.02.38.41
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 26 Feb 2016 02:38:42 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Feb 2016 12:02:27 +0200
-Message-Id: <1456480947-32277-1-git-send-email-maxin.john@intel.com>
-X-Mailer: git-send-email 2.4.0
-Subject: [PATCH] gpsd: Fix build when static libs disabled
+Date: Fri, 26 Feb 2016 11:38:26 +0100
+Message-Id: <1456483106-16282-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.0
+MIME-Version: 1.0
+Subject: [PATCH] plymouth: fix empty plymouth-initrd after oe-core's libexec path transition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,29 +56,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2016 09:59:02 -0000
+X-List-Received-Date: Fri, 26 Feb 2016 10:38:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Fix this build error:
-SCons Error: no such option: --disable-static
-
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-index ff268b3..a300595 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-@@ -47,6 +47,7 @@ EXTRA_OESCONS = " \
-     systemd='${SYSTEMD_OESCONS}' \
-     ${EXTRA_OECONF} \
- "
-+DISABLE_STATIC = ""
- # this cannot be used, because then chrpath is not found and only static lib is built
- # target=${HOST_SYS}
+diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
+index 1fb4443..9ca8502 100644
+--- a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
++++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
+@@ -48,7 +48,7 @@ do_install_append() {
  
+ PACKAGES =+ "${PN}-initrd ${PN}-set-default-theme"
+ 
+-FILES_${PN}-initrd = "${libdir}/plymouth/plymouth/*"
++FILES_${PN}-initrd = "${libexecdir}/plymouth/*"
+ FILES_${PN}-set-default-theme = "${sbindir}/plymouth-set-default-theme"
+ 
+ FILES_${PN} += "${systemd_unitdir}/system/*"
 -- 
-2.4.0
+2.5.0
 
 
