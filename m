@@ -1,49 +1,25 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f65.google.com (mail-pa0-f65.google.com
-	[209.85.220.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FBA577251
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id EBA1F731DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2016 00:55:15 +0000 (UTC)
-Received: by mail-pa0-f65.google.com with SMTP id yy13so3613158pab.1
+	Fri, 26 Feb 2016 07:41:15 +0000 (UTC)
+Received: from [172.16.1.4] (chello062178118086.5.14.vie.surfer.at
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 2E8052BB16
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2016 16:55:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=s2aL7hleMTcfmluQKbd3Vc5UGvSSVCq5AqEl63pht4A=;
-	b=RgCoR4tiAFKjyn/GL80jH6RSeQ8wWBP0IpM59rQnUjBQwe+Wm6McwWVFEqBstazLO3
-	1/kiakxmJQPD0RtPmv4541eM9iLQE23WdEFpaMfKejgDqR9b2dvFGkkPBJ5BEp9Bfhb5
-	5u2YV5uU1ie1JPP5e1SOjCdHJSufDHJZrJ53e+qvmlNVbWkdPyqfwQs6y5M1UHN89cxY
-	O8lVDtJX0lK2QHbShwLNvH1bSekr0jeTyweKwWtXilKuBs/WHAJD0iRc4Y2OoTWvC2D9
-	Qvv7eGc/aGhLjPYnsKjJyNTx1Y97fNLiX5ydcP3RNdHU3GqsKqUfc+i0eZzPt5WCRKVG
-	4riw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=s2aL7hleMTcfmluQKbd3Vc5UGvSSVCq5AqEl63pht4A=;
-	b=fuNeVMWkWbiRYKUK+MoqkhkZj+r+lG5NbkHOyu8lgdVSjRpj8iFIsN1/P0/0NuSFLh
-	MULkrAMNZZLD6Jl/YwL6MqiLrftsMBzV62oymG2/m57JBcY0SeKWHBst21dp0Tff7xbY
-	NkQsQ8jWBm81RN4x8fxccIEeypMDDmCNd+hGmj9i3oZY/GaFmZjem8Ksjxx2HAl2ftDI
-	HiJtuAGih82a8L06I4AwYd2AAOTEgBkMg6/ZEPFRcxFUlH6HzzGggZ8hV+deXbLCejPf
-	/G3/cYPMoTPgJrq/GFf7N/xNt+Mr8nZrjVc1A3s4cighcJWmgIaKCm41aCtx+eFz8FE4
-	XRTw==
-X-Gm-Message-State: AG10YOTYLNajPkdLz63ubFWurxLWLo9MqS4d+yIQdtTbqBGmgS6SJuZuA2DsJEkGr14jEw==
-X-Received: by 10.66.251.162 with SMTP id zl2mr68202425pac.116.1456448116145; 
-	Thu, 25 Feb 2016 16:55:16 -0800 (PST)
-Received: from Pahoa2.mvista.com ([64.2.3.194])
-	by smtp.gmail.com with ESMTPSA id
-	ko9sm14769286pab.37.2016.02.25.16.55.14
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 25 Feb 2016 16:55:14 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
+	Fri, 26 Feb 2016 08:41:14 +0100 (CET)
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Feb 2016 16:55:09 -0800
-Message-Id: <1456448109-11375-3-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-In-Reply-To: <1456448109-11375-1-git-send-email-akuster808@gmail.com>
-References: <1456448109-11375-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 3/3] xerces-c: Package update, QA fix and CVE-2016-0729
+References: <1455099698-25946-1-git-send-email-Matthieu.Crapet@ingenico.com>
+	<1455112483-31048-1-git-send-email-Matthieu.Crapet@ingenico.com>
+	<8672BB614B4CCA40A6B3BDD6FD82050B01CE5BEF23@COSNADEXC13.usr.ingenico.loc>
+	<CALbNGRQ=HqpiD5mDX4c5ArOixqLPaaeoGmeAD3Bax-E=GELMUg@mail.gmail.com>
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+Message-ID: <56D0019A.20302@pseudoterminal.org>
+Date: Fri, 26 Feb 2016 08:41:14 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRQ=HqpiD5mDX4c5ArOixqLPaaeoGmeAD3Bax-E=GELMUg@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH v2] libopus: upgrade to version 1.1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,58 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2016 00:55:15 -0000
+X-List-Received-Date: Fri, 26 Feb 2016 07:41:16 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-includes;
-CVE-2016-0729: Apache Xerces-C XML Parser Crashes on Malformed Input
+This is because the ne10 build currently has a .text relocation problem. 
+I am looking into it.
 
-Also  fixes;
-
-ERROR: xerces-c-3.1.3-r0 do_populate_sysroot: QA Issue: xerces-c.pc failed sanity test (tmpdir) in path /home/akuster/oss/maint/mylayers/poky/build/tmp/work/armv5e-poky-linux-gnueabi/xerces-c/3.1.3-r0/sysroot-destdir/usr/lib/pkgconfig [pkgconfig]
-
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../xerces-c/{xerces-c_3.1.2.bb => xerces-c_3.1.3.bb}        | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-devtools/xerces-c/{xerces-c_3.1.2.bb => xerces-c_3.1.3.bb} (84%)
-
-diff --git a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.2.bb b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.3.bb
-similarity index 84%
-rename from meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.2.bb
-rename to meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.3.bb
-index 6e870dd..2355c9d 100644
---- a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.2.bb
-+++ b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.3.bb
-@@ -10,14 +10,19 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
- SRC_URI = "http://apache.lauf-forum.at/xerces/c/3/sources/${BP}.tar.bz2"
--SRC_URI[md5sum] = "d987b8bb576aea456e92454781fe3615"
--SRC_URI[sha256sum] = "95d8655c4c50668ad60d555b59da9f31937b2c53638aa8d5768cb169f192d5e1"
-+SRC_URI[md5sum] = "5e333b55cb43e6b025ddf0e5d0f0fb0d"
-+SRC_URI[sha256sum] = "fc5e5e0247b108b8d64d75aeb124cabdee9b7fcd725a89fe2242b4637b25c1fa"
- 
- inherit autotools
- 
- PACKAGECONFIG ??= "curl icu"
- PACKAGECONFIG[curl] = "--with-curl=${STAGING_DIR},--with-curl=no,curl"
- PACKAGECONFIG[icu] = "--with-icu=${STAGING_DIR},--with-icu=no,icu"
-+
-+do_install_prepend () {
-+        sed -i -e 's:-L${STAGING_DIR}/lib:-L\$\{libdir\}:g' ${B}/xerces-c.pc
-+}
-+
- PACKAGES = "libxerces-c \
-             libxerces-c-dbg \
-             libxerces-c-dev \
-@@ -39,6 +44,3 @@ FILES_xerces-c-samples-dbg = "${bindir}/.debug/"
- FILES_libxerces-c-staticdev = "${libdir}/lib*.a"
- 
- BBCLASSEXTEND = "native"
--
--# http://errors.yoctoproject.org/Errors/Details/35144/
--PNBLACKLIST[xerces-c] ?= "BROKEN: QA Issue: xerces-c.pc failed sanity test (tmpdir)"
--- 
-2.3.5
+On 2016-02-25 23:11, Andreas Müller wrote:
+> On Wed, Feb 10, 2016 at 3:31 PM, Matthieu CRAPET
+> <Matthieu.CRAPET@ingenico.com> wrote:
+>> Hi,
+>>
+>> I totally missed Carlos Rafael Giani's patch (2016.02.08). Please discard this thread.
+>>
+>> Regards,
+>> Matthieu
+>> This email and its content belong to Ingenico Group. The enclosed information is confidential and may not be disclosed to any unauthorized person. If you have received it by mistake do not forward it and delete it from your system. Cet email et son contenu sont la propriété du Groupe Ingenico. L’information qu’il contient est confidentielle et ne peut être communiquée à des personnes non autorisées. Si vous l’avez reçu par erreur ne le transférez pas et supprimez-le.
+>> --
+> We are failing here currently as ne10 was not applied - so I get something like
+>
+> | Missing or unbuildable dependency chain was: ['xfce4-games-image',
+> 'packagegroup-image-full', 'mpd', 'libopus', 'ne10']
+>
+> Andreas
 
 
