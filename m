@@ -1,31 +1,48 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 7803077319
+Return-Path: <joe@deserted.net>
+Received: from mail-vk0-f67.google.com (mail-vk0-f67.google.com
+	[209.85.213.67])
+	by mail.openembedded.org (Postfix) with ESMTP id C8A28771B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Feb 2016 01:48:48 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1aZU01-0000pA-2o from Joe_MacDonald@mentor.com ;
-	Fri, 26 Feb 2016 17:48:49 -0800
-Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
-	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 26 Feb 2016 17:48:48 -0800
-Received: by burninator (Postfix, from userid 1000)	id CA4FB580D05; Fri, 26
-	Feb 2016 20:48:47 -0500 (EST)
-Date: Fri, 26 Feb 2016 20:48:47 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Zhenbo Gao <zhenbo.gao@windriver.com>
-Message-ID: <20160227014847.GC6310@mentor.com>
-References: <1453712086-16685-1-git-send-email-zhenbo.gao@windriver.com>
-	<1453712086-16685-2-git-send-email-zhenbo.gao@windriver.com>
+	Sat, 27 Feb 2016 02:26:41 +0000 (UTC)
+Received: by mail-vk0-f67.google.com with SMTP id e6so6111951vkh.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Feb 2016 18:26:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=deserted-net.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to; 
+	bh=nY9aQU/Vtei4q/U362ohBGVb9p0sDINuAKTWcTErdSQ=;
+	b=iW/TEkfhefqA1IJSlfD6Vx2/j0AsmUiEGDcQgLxk+lvJbHuBQNVTg1cQsPrF8aocd6
+	rLYxfzCbR0NqzHIpf9uktom2aOM+mfTVSbM8ZyrQBrbSgSmEbnCDsUZLu4/r/FWepTEV
+	1grTjhHXSpw9uKykYMtyomm+e7gEmguUe21VUNxkih0ZiJNBSMR5bQ3eKivZNkgiigcu
+	Sq8TZUfWlqCDYqmkLpsdCfdvXl3N0HjJu8lsZels2Vz9L64dgm9d92E2pgU/pAm4MMAB
+	JhM26IH/ndofkJOwf25j8VR398Ja+EudhsK+dc0977BVtPgIy3TFnA8hU1s0HILPjUen
+	qMyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to;
+	bh=nY9aQU/Vtei4q/U362ohBGVb9p0sDINuAKTWcTErdSQ=;
+	b=VGdP83wVmZlIRuBt2bXQ61HP8IX7yhO103iF95F4M1Lxc/yy/Y3Dw09cWciTdJicTY
+	VtDl4NFQ1kQv06+UfLwddrVCR6WzWiYG+LeqBuXA1BiN5YiBJKMZipX0pIerOqp+uzBl
+	VelDlNBj8ivtfqx2CRe5bKpG1MWJdDPUI2ra/E0RU6rMWtnD+uc2j5u57JOR/QVZW3dM
+	+245o2YMVn1o891cjLb1/rDVvpLlvFilrWbNSnoftcrTYamdA7Y5Bc4sRzb7uPCwIbOr
+	5a/y0hLCYKYrDk6GkSoUuGs6rT9hHsHInm019vsJy798K3QnnANsj8z10J1RhF8AZ25R
+	0GRg==
+X-Gm-Message-State: AD7BkJKnz2e1ACa7ZnC3qOViA4KKQwj+aSp2Xzq8K3V6de84U7YKACJukqiIyqW8Tk2N+p5vPRC72Br3n/LUpQ==
 MIME-Version: 1.0
-In-Reply-To: <1453712086-16685-2-git-send-email-zhenbo.gao@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] postfix: permission of /var/spool/mail seems incorrect
+X-Received: by 10.31.54.80 with SMTP id d77mr3194577vka.138.1456540002039;
+	Fri, 26 Feb 2016 18:26:42 -0800 (PST)
+Received: by 10.31.228.5 with HTTP; Fri, 26 Feb 2016 18:26:41 -0800 (PST)
+In-Reply-To: <1448440079-4533-2-git-send-email-jackie.huang@windriver.com>
+References: <1448440079-4533-1-git-send-email-jackie.huang@windriver.com>
+	<1448440079-4533-2-git-send-email-jackie.huang@windriver.com>
+Date: Fri, 26 Feb 2016 21:26:41 -0500
+Message-ID: <CANBf+V2nZwQ-UGi3wDnKyzHHU8wCoO6i74D5tYxjfwv+g1TAtQ@mail.gmail.com>
+From: Joe MacDonald <joe@deserted.net>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	"Huang, Jie (Jackie)" <jackie.huang@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH 2/2] iscsitarget: skip the arch test for kernel modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,80 +55,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Feb 2016 01:48:48 -0000
-X-Groupsio-MsgNum: 60235
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/Uq4LBwYP4y1W6pO"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 27 Feb 2016 02:26:44 -0000
+Content-Type: text/plain; charset=UTF-8
 
---/Uq4LBwYP4y1W6pO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Nov 25, 2015 at 3:27 AM, <jackie.huang@windriver.com> wrote:
 
-[[oe] [PATCH] postfix: permission of /var/spool/mail seems incorrect] On 16=
-=2E01.25 (Mon 16:54) Zhenbo Gao wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
+>
+> Kernel modules may not have the same architecture as user space.
+> So we tell INSANE_SKIP to skip checking the arch for the modules.
+> This is consistent with other kernel modules and the kernel recipe.
+>
 
-> See the following output:
-> root@qemu0:~# rpm -qlv postfix | grep /var/spool/mail
-> drwxr-sr-x 2 postfix nogroup 0 Sep 8 08:46 /var/spool/mail
-> The permission of /var/spool/mail "r-s" seems strange as it
-> belongs to nogroup, modify it to 0755 as to the normal case.
->=20
-> Signed-off-by: Zhenbo Gao <zhenbo.gao@windriver.com>
-> ---
->  meta-networking/recipes-daemons/postfix/postfix.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-n=
-etworking/recipes-daemons/postfix/postfix.inc
-> index dc652d7..378310a 100644
-> --- a/meta-networking/recipes-daemons/postfix/postfix.inc
-> +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-> @@ -162,7 +162,7 @@ do_install () {
->      install -m 770 -d ${D}${localstatedir}/spool/postfix
->      chown postfix:postfix ${D}${localstatedir}/spool/postfix
-> =20
-> -    install -m 2755 -d ${D}${localstatedir}/spool/mail
-> +    install -m 0755 -d ${D}${localstatedir}/spool/mail
+This one still hasn't been merged and since iscsitarget is currently
+unbuildable, I'm not in a rush to merge this one particularly since I'm not
+really clear on the logic underlying the change.  I searched the archives
+and found your response to Martin was essentially "see my netmap-modules
+patch for an explanation" and in that one the explanation was basically
+"this is the way other kernel modules do it".  I merged that one but now
+I'm thinking I shouldn't have without more careful consideration.  Am I
+correct in thinking that this problem only shows up when you're building
+for multilib?  I've reverted "netmap-modules: Modules may not have the same
+arch as userspace" in my contrib tree at
+http://git.openembedded.org/meta-openembedded-contrib/log/?h=joeythesaint/meta-networking-next
+and my initial test builds showed no QA issues related to netmap-modules
+and the arch checks.  So I started looking around for other kernel modules
+doing something similar and I don't actually see this
+"INSANE_SKIP_kernel-module-*" construct being used anywhere else in meta-oe
+or poky (and at the least I would expect something like cryptodev-module to
+need it, it looks like an analogue to me).  Can you fill me in on what's
+special with iscsitarget and netmap, because even if it is a multilib
+issue, why wouldn't that be showing up for other kernel modules built in
+poky?
 
-While this may stop errors from happening (and I'm not sure it will)
-this doesn't seem like the right thing to do.  Consider, for example:
+Thanks.
 
-   http://wiki2.dovecot.org/MailLocation/mbox
-
-You almost certainly want the sgid bit set on /var/*/mail.  If there's
-an error here, my guess it that the mode should be 2775 not 2755.  If
-you'd like to confirm that, cool, otherwise I'll have a look when I get
-a chance.
-
-Thanks,
 -J.
 
->      chown postfix:nogroup ${D}${localstatedir}/spool/mail
->      install -m 0755 -d ${D}${localstatedir}/lib/postfix
->      chown postfix:nogroup ${D}${localstatedir}/lib/postfix
-> --=20
-> 1.9.1
->=20
---=20
--Joe MacDonald.
+
+>
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  .../recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb        |
+> 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git
+> a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+
+> svn502.bb
+> b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+
+> svn502.bb
+> index 9d49759..9db16bc 100644
+> --- a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+
+> svn502.bb
+> +++ b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+
+> svn502.bb
+> @@ -54,3 +54,6 @@ FILES_${PN} += "${sbindir} \
+>
+>  RDEPENDS_${PN} = "kernel-module-iscsi-trgt"
+>  RRECOMMENDS_${PN} = "kernel-module-crc32c kernel-module-libcrc32c"
+> +
+> +# Skip the arch test for kernel modules
+> +INSANE_SKIP_kernel-module-iscsi-trgt = "arch"
+> --
+> 2.3.5
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+
+
+
+-- 
+Joe MacDonald
 :wq
 
---/Uq4LBwYP4y1W6pO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJW0QB/AAoJEEn8ffcsOfaW0yYIALz0mqwT4/pb2xAwZH5IxiuJ
-YkuXyiWmJaWd6EF+75q5A3zU1Dtsv3+7TAzG0NNyBrg64Lgkii7vGdkNiQEdYzHT
-ddFd1P1o7jkC9nnmSQaJ5Qyg5wkXTOxZEGSjZTcexPKccl3jhJqfMEMJPXVR0Xzi
-2lSRk59yN1I3Kw7AIF9OZl4BK1fPopedrerdnSQYjScLqD/St5nXCAcb8vEIj0Kq
-EO9/RXiTw+lj8GkIjGyOFUsFectW1aw19ID0pow3K+LtX4jXAdbxXEjFhrLPYtSW
-nWV6OMVebLsdTGmJUxuNk98U+FAlvwycXw+SajZSqPf2GcXM8KtgqusdWYFr4Qs=
-=X+3k
------END PGP SIGNATURE-----
-
---/Uq4LBwYP4y1W6pO--
