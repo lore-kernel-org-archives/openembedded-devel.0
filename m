@@ -1,23 +1,22 @@
-Return-Path: <rebecca.swee.fun.chang@intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id D949377264
+Return-Path: <pascal.bach@siemens.com>
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 12D607715E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Feb 2016 08:08:48 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga104.fm.intel.com with ESMTP; 29 Feb 2016 00:08:49 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,519,1449561600"; d="scan'208";a="661016206"
-Received: from rebeccas-ilbpg3.png.intel.com ([10.88.227.80])
-	by FMSMGA003.fm.intel.com with ESMTP; 29 Feb 2016 00:08:43 -0800
-From: Rebecca Chang <rebecca.swee.fun.chang@intel.com>
-To: openembedded-devel@lists.openembedded.org,
-	Rebecca Chang <rebecca.swee.fun.chang@intel.com>
-Date: Mon, 29 Feb 2016 16:08:27 +0800
-Message-Id: <1456733307-8500-2-git-send-email-rebecca.swee.fun.chang@intel.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1456733307-8500-1-git-send-email-rebecca.swee.fun.chang@intel.com>
-References: <1456733307-8500-1-git-send-email-rebecca.swee.fun.chang@intel.com>
-Subject: [meta-oe] [PATCH] libvpx: upgrade to version 1.5.0
+	Mon, 29 Feb 2016 08:43:25 +0000 (UTC)
+Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id u1T8hNDv017275
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Feb 2016 09:43:23 +0100
+Received: from dev.sbt.siemens.com (MD1FZU9C.ww002.siemens.net [139.16.79.50])
+	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id u1T8hNMX030019;
+	Mon, 29 Feb 2016 09:43:23 +0100
+From: Pascal Bach <pascal.bach@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 29 Feb 2016 09:43:09 +0100
+Message-Id: <1456735391-9764-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH v2 1/3] nginx: split parts out of the recipe into nginx.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,135 +29,310 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Feb 2016 08:08:49 -0000
+X-List-Received-Date: Mon, 29 Feb 2016 08:43:26 -0000
 
-From: Chang Rebecca Swee Fun <rebecca.swee.fun.chang@intel.com>
+nginx has two maintained branches.
+- stable: is the long term maintained branch where only bugfixes occur
+- mainline: is the branch where new features get added
 
-This version had improved VP9 encoder and speeds up the encoding and
-decoding process.
-
-Signed-off-by: Chang Rebecca Swee Fun <rebecca.swee.fun.chang@intel.com>
+This change is in preparation to support these two branches.
 ---
- meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb | 51 -------------------------
- meta-oe/recipes-multimedia/webm/libvpx_1.5.0.bb | 50 ++++++++++++++++++++++++
- 2 files changed, 50 insertions(+), 51 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb
- create mode 100644 meta-oe/recipes-multimedia/webm/libvpx_1.5.0.bb
+ meta-webserver/recipes-httpd/nginx/nginx.inc       | 137 +++++++++++++++++++++
+ meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb | 137 +--------------------
+ 2 files changed, 139 insertions(+), 135 deletions(-)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx.inc
 
-diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb
-deleted file mode 100644
-index c963a9c..0000000
---- a/meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb
-+++ /dev/null
-@@ -1,51 +0,0 @@
--SUMMARY = "VPX multi-format codec"
--DESCRIPTION = "The BSD-licensed libvpx reference implementation provides en- and decoders for VP8 and VP9 bitstreams."
--HOMEPAGE = "http://www.webmproject.org/code/"
--BUGTRACKER = "http://code.google.com/p/webm/issues/list"
--SECTION = "libs/multimedia"
--LICENSE = "BSD"
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
--
--SRC_URI += "http://storage.googleapis.com/downloads.webmproject.org/releases/webm/${BP}.tar.bz2 \
--            file://libvpx-configure-support-blank-prefix.patch \
--           "
--SRC_URI[md5sum] = "63b1d7f59636a42eeeee9225cc14e7de"
--SRC_URI[sha256sum] = "f582d9b2d60a592a4a3d8c32965ca2d2167e9ade38c6c30bac8801ff66a118e4"
--
--# ffmpeg links with this and fails 
--# sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.text+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@GLIBC_2.4'
--ARM_INSTRUCTION_SET = "arm"
--
--CFLAGS += "-fPIC"
--
--export CC
--export LD = "${CC}"
--
--VPXTARGET_armv5te = "armv5te-linux-gcc"
--VPXTARGET_armv6 = "armv6-linux-gcc"
--VPXTARGET_armv7a = "armv7-linux-gcc"
--VPXTARGET ?= "generic-gnu"
--
--CONFIGUREOPTS = " \
--    --target=${VPXTARGET} \
--    --enable-vp8 \
--    --enable-vp9 \
--    --enable-libs \
--    --disable-install-docs \
--    --disable-static \
--    --enable-shared \
--    --prefix=${prefix} \
--    --libdir=${libdir} \
--    --size-limit=16384x16384 \
--"
--
--do_configure() {
--    ${S}/configure ${CONFIGUREOPTS}
--}
--
--do_install() {
--    oe_runmake install DESTDIR=${D}
--    chown -R root:root ${D}
--}
--
-diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.5.0.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.5.0.bb
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
 new file mode 100644
-index 0000000..8ac178d
+index 0000000..53e3235
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/webm/libvpx_1.5.0.bb
-@@ -0,0 +1,50 @@
-+SUMMARY = "VPX multi-format codec"
-+DESCRIPTION = "The BSD-licensed libvpx reference implementation provides en- and decoders for VP8 and VP9 bitstreams."
-+HOMEPAGE = "http://www.webmproject.org/code/"
-+BUGTRACKER = "http://code.google.com/p/webm/issues/list"
-+SECTION = "libs/multimedia"
-+LICENSE = "BSD"
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -0,0 +1,137 @@
++SUMMARY = "HTTP and reverse proxy server"
 +
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
++DESCRIPTION = "Nginx is a web server and a reverse proxy server for \
++HTTP, SMTP, POP3 and IMAP protocols, with a strong focus on high  \
++concurrency, performance and low memory usage."
 +
-+SRC_URI += "http://storage.googleapis.com/downloads.webmproject.org/releases/webm/${BP}.tar.bz2 \
-+            file://libvpx-configure-support-blank-prefix.patch \
-+           "
-+SRC_URI[md5sum] = "49e59dd184caa255886683facea56fca"
-+SRC_URI[sha256sum] = "306d67908625675f8e188d37a81fbfafdf5068b09d9aa52702b6fbe601c76797"
++HOMEPAGE = "http://nginx.org/"
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0bb58ed0dfd4f5dbece3b52aba79f023"
++SECTION = "net"
 +
-+# ffmpeg links with this and fails
-+# sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.text+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@GLIBC_2.4'
-+ARM_INSTRUCTION_SET = "arm"
++DEPENDS = "libpcre gzip openssl"
 +
-+CFLAGS += "-fPIC"
-+
-+export CC
-+export LD = "${CC}"
-+
-+VPXTARGET_armv5te = "armv5te-linux-gcc"
-+VPXTARGET_armv6 = "armv6-linux-gcc"
-+VPXTARGET_armv7a = "armv7-linux-gcc"
-+VPXTARGET ?= "generic-gnu"
-+
-+CONFIGUREOPTS = " \
-+    --target=${VPXTARGET} \
-+    --enable-vp8 \
-+    --enable-vp9 \
-+    --enable-libs \
-+    --disable-install-docs \
-+    --disable-static \
-+    --enable-shared \
-+    --prefix=${prefix} \
-+    --libdir=${libdir} \
-+    --size-limit=16384x16384 \
++SRC_URI = " \
++	http://nginx.org/download/nginx-${PV}.tar.gz \
++	file://nginx-cross.patch \
++	file://nginx.conf \
++	file://nginx.init \
++	file://nginx-volatile.conf \
++	file://nginx.service \
 +"
 +
-+do_configure() {
-+    ${S}/configure ${CONFIGUREOPTS}
++inherit update-rc.d useradd
++
++CFLAGS_append = " -fPIE -pie"
++CXXFLAGS_append = " -fPIE -pie"
++
++NGINX_WWWDIR ?= "${localstatedir}/www/localhost"
++NGINX_USER   ?= "www"
++
++EXTRA_OECONF = ""
++DISABLE_STATIC = ""
++
++do_configure () {
++	if [ "${SITEINFO_BITS}" = "64" ]; then
++		PTRSIZE=8
++	else
++		PTRSIZE=4
++	fi
++
++	echo $CFLAGS
++	echo $LDFLAGS
++
++	./configure \
++	--crossbuild=Linux:${TUNE_ARCH} \
++	--with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
++	--with-int=4 \
++	--with-long=${PTRSIZE} \
++	--with-long-long=8 \
++	--with-ptr-size=${PTRSIZE} \
++	--with-sig-atomic-t=${PTRSIZE} \
++	--with-size-t=${PTRSIZE} \
++	--with-off-t=${PTRSIZE} \
++	--with-time-t=${PTRSIZE} \
++	--with-sys-nerr=132 \
++	--conf-path=${sysconfdir}/nginx/nginx.conf \
++	--http-log-path=${localstatedir}/log/nginx/access.log \
++	--error-log-path=${localstatedir}/log/nginx/error.log \
++	--pid-path=/run/nginx/nginx.pid \
++	--prefix=${prefix} \
++	--with-http_ssl_module \
++	--with-http_gzip_static_module \
++	${EXTRA_OECONF}
 +}
 +
-+do_install() {
-+    oe_runmake install DESTDIR=${D}
-+    chown -R root:root ${D}
++do_install () {
++	oe_runmake 'DESTDIR=${D}' install
++	rm -fr ${D}${localstatedir}/run ${D}/run
++	if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++		install -d ${D}${sysconfdir}/tmpfiles.d
++		echo "d /run/${BPN} - - - -" \
++		     > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
++	fi
++	install -d ${D}${sysconfdir}/${BPN}
++	ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
++	install -d ${D}${NGINX_WWWDIR}
++	mv ${D}/usr/html ${D}${NGINX_WWWDIR}/
++	chown ${NGINX_USER}:www-data -R ${D}${NGINX_WWWDIR}
++
++	install -d ${D}${sysconfdir}/init.d
++	install -m 0755 ${WORKDIR}/nginx.init ${D}${sysconfdir}/init.d/nginx
++	sed -i 's,/usr/sbin/,${sbindir}/,g' ${D}${sysconfdir}/init.d/nginx
++	sed -i 's,/etc/,${sysconfdir}/,g'  ${D}${sysconfdir}/init.d/nginx
++
++	install -d ${D}${sysconfdir}/nginx
++	install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/nginx.conf
++	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
++	install -d ${D}${sysconfdir}/nginx/sites-enabled
++
++	install -d ${D}${sysconfdir}/default/volatiles
++	install -m 0644 ${WORKDIR}/nginx-volatile.conf ${D}${sysconfdir}/default/volatiles/99_nginx
++	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/default/volatiles/99_nginx
++
++        if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};then
++            install -d ${D}${systemd_unitdir}/system
++            install -m 0644 ${WORKDIR}/nginx.service ${D}${systemd_unitdir}/system/
++            sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
++                    -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
++                    -e 's,@BASEBINDIR@,${base_bindir},g' \
++                    ${D}${systemd_unitdir}/system/nginx.service
++        fi
 +}
++
++pkg_postinst_${PN} () {
++	if [ -z "$D" ]; then
++		if type systemd-tmpfiles >/dev/null; then
++			systemd-tmpfiles --create
++		elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
++			${sysconfdir}/init.d/populate-volatile.sh update
++		fi
++	fi
++}
++
++FILES_${PN} += "${localstatedir}/ \
++                ${systemd_unitdir}/system/nginx.service \
++                "
++
++CONFFILES_${PN} = "${sysconfdir}/nginx/nginx.conf \
++		${sysconfdir}/nginx/fastcgi.conf\
++		${sysconfdir}/nginx/fastcgi_params \
++		${sysconfdir}/nginx/koi-utf \
++		${sysconfdir}/nginx/koi-win \
++		${sysconfdir}/nginx/mime.types \
++		${sysconfdir}/nginx/scgi_params \
++		${sysconfdir}/nginx/uwsgi_params \
++		${sysconfdir}/nginx/win-utf \
++"
++
++INITSCRIPT_NAME = "nginx"
++INITSCRIPT_PARAMS = "defaults 92 20"
++
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM_${PN} = " \
++    --system --no-create-home \
++    --home ${NGINX_WWWDIR} \
++    --groups www-data \
++    --user-group ${NGINX_USER}"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb
+index 8b60e53..d76bd9e 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb
+@@ -1,139 +1,6 @@
+-SUMMARY = "HTTP and reverse proxy server"
++require nginx.inc
+ 
+-DESCRIPTION = "Nginx is a web server and a reverse proxy server for \
+-HTTP, SMTP, POP3 and IMAP protocols, with a strong focus on high  \
+-concurrency, performance and low memory usage."
+-
+-HOMEPAGE = "http://nginx.org/"
+-LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0bb58ed0dfd4f5dbece3b52aba79f023"
+-SECTION = "net"
+-
+-DEPENDS = "libpcre gzip openssl"
+-
+-SRC_URI = " \
+-	http://nginx.org/download/nginx-${PV}.tar.gz \
+-	file://nginx-cross.patch \
+-	file://nginx.conf \
+-	file://nginx.init \
+-	file://nginx-volatile.conf \
+-	file://nginx.service \
+-"
+ SRC_URI[md5sum] = "76eb5853a1190e0cfc691aa21c545de3"
+ SRC_URI[sha256sum] = "6a5c72f4afaf57a6db064bba0965d72335f127481c5d4e64ee8714e7b368a51f"
+ 
+-inherit update-rc.d useradd
+-
+-CFLAGS_append = " -fPIE -pie"
+-CXXFLAGS_append = " -fPIE -pie"
+-
+-NGINX_WWWDIR ?= "${localstatedir}/www/localhost"
+-NGINX_USER   ?= "www"
+-
+-EXTRA_OECONF = ""
+-DISABLE_STATIC = ""
+-
+-do_configure () {
+-	if [ "${SITEINFO_BITS}" = "64" ]; then
+-		PTRSIZE=8
+-	else
+-		PTRSIZE=4
+-	fi
+-
+-	echo $CFLAGS
+-	echo $LDFLAGS
+-
+-	./configure \
+-	--crossbuild=Linux:${TUNE_ARCH} \
+-	--with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
+-	--with-int=4 \
+-	--with-long=${PTRSIZE} \
+-	--with-long-long=8 \
+-	--with-ptr-size=${PTRSIZE} \
+-	--with-sig-atomic-t=${PTRSIZE} \
+-	--with-size-t=${PTRSIZE} \
+-	--with-off-t=${PTRSIZE} \
+-	--with-time-t=${PTRSIZE} \
+-	--with-sys-nerr=132 \
+-	--conf-path=${sysconfdir}/nginx/nginx.conf \
+-	--http-log-path=${localstatedir}/log/nginx/access.log \
+-	--error-log-path=${localstatedir}/log/nginx/error.log \
+-	--pid-path=/run/nginx/nginx.pid \
+-	--prefix=${prefix} \
+-	--with-http_ssl_module \
+-	--with-http_gzip_static_module \
+-	${EXTRA_OECONF}
+-}
+-
+-do_install () {
+-	oe_runmake 'DESTDIR=${D}' install
+-	rm -fr ${D}${localstatedir}/run ${D}/run
+-	if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+-		install -d ${D}${sysconfdir}/tmpfiles.d
+-		echo "d /run/${BPN} - - - -" \
+-		     > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+-	fi
+-	install -d ${D}${sysconfdir}/${BPN}
+-	ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
+-	install -d ${D}${NGINX_WWWDIR}
+-	mv ${D}/usr/html ${D}${NGINX_WWWDIR}/
+-	chown ${NGINX_USER}:www-data -R ${D}${NGINX_WWWDIR}
+-
+-	install -d ${D}${sysconfdir}/init.d
+-	install -m 0755 ${WORKDIR}/nginx.init ${D}${sysconfdir}/init.d/nginx
+-	sed -i 's,/usr/sbin/,${sbindir}/,g' ${D}${sysconfdir}/init.d/nginx
+-	sed -i 's,/etc/,${sysconfdir}/,g'  ${D}${sysconfdir}/init.d/nginx
+-
+-	install -d ${D}${sysconfdir}/nginx
+-	install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/nginx.conf
+-	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
+-	install -d ${D}${sysconfdir}/nginx/sites-enabled
+-
+-	install -d ${D}${sysconfdir}/default/volatiles
+-	install -m 0644 ${WORKDIR}/nginx-volatile.conf ${D}${sysconfdir}/default/volatiles/99_nginx
+-	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/default/volatiles/99_nginx
+-
+-        if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};then
+-            install -d ${D}${systemd_unitdir}/system
+-            install -m 0644 ${WORKDIR}/nginx.service ${D}${systemd_unitdir}/system/
+-            sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+-                    -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
+-                    -e 's,@BASEBINDIR@,${base_bindir},g' \
+-                    ${D}${systemd_unitdir}/system/nginx.service
+-        fi
+-}
+-
+-pkg_postinst_${PN} () {
+-	if [ -z "$D" ]; then
+-		if type systemd-tmpfiles >/dev/null; then
+-			systemd-tmpfiles --create
+-		elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+-			${sysconfdir}/init.d/populate-volatile.sh update
+-		fi
+-	fi
+-}
+-
+-FILES_${PN} += "${localstatedir}/ \
+-                ${systemd_unitdir}/system/nginx.service \
+-                "
+-
+-CONFFILES_${PN} = "${sysconfdir}/nginx/nginx.conf \
+-		${sysconfdir}/nginx/fastcgi.conf\
+-		${sysconfdir}/nginx/fastcgi_params \
+-		${sysconfdir}/nginx/koi-utf \
+-		${sysconfdir}/nginx/koi-win \
+-		${sysconfdir}/nginx/mime.types \
+-		${sysconfdir}/nginx/scgi_params \
+-		${sysconfdir}/nginx/uwsgi_params \
+-		${sysconfdir}/nginx/win-utf \
+-"
+-
+-INITSCRIPT_NAME = "nginx"
+-INITSCRIPT_PARAMS = "defaults 92 20"
+-
+-USERADD_PACKAGES = "${PN}"
+-USERADD_PARAM_${PN} = " \
+-    --system --no-create-home \
+-    --home ${NGINX_WWWDIR} \
+-    --groups www-data \
+-    --user-group ${NGINX_USER}"
++DISABLE_STATIC = ""
+\ No newline at end of file
 -- 
-1.9.1
+2.1.4
 
 
