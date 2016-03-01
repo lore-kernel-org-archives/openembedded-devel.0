@@ -1,21 +1,25 @@
-Return-Path: <maciej.borzecki@open-rnd.pl>
-Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
-	by mail.openembedded.org (Postfix) with ESMTP id 8FD26731F3
+Return-Path: <Li.Zhou@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2AC9E759B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Mar 2016 08:35:10 +0000 (UTC)
-Received: from localhost (unknown [31.182.60.238])
-	by open-rnd.nazwa.pl (Postfix) with ESMTP id B701D1C8C29;
-	Tue,  1 Mar 2016 09:35:08 +0100 (CET)
-Date: Tue, 1 Mar 2016 09:35:08 +0100
-From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-To: =?iso-8859-1?Q?Jo=E3o?= Henrique Freitas <joaohf@gmail.com>
-Message-ID: <20160301083508.GA4897@comp-006-thk.openrnd.local>
-References: <1942614094.432571.c7487dd4-fa75-4480-8552-00e8cab6887c.open-xchange@poczta.nazwa.pl>
+	Tue,  1 Mar 2016 08:41:26 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u218fRQb007613
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 1 Mar 2016 00:41:27 -0800
+Received: from pek-lzhou2-d1.corp.ad.wrs.com (128.224.162.243) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server
+	(TLS) id 14.3.248.2; Tue, 1 Mar 2016 00:41:26 -0800
+From: Li Zhou <li.zhou@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 1 Mar 2016 16:41:10 +0800
+Message-ID: <1456821670-4331-1-git-send-email-li.zhou@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-In-Reply-To: <1942614094.432571.c7487dd4-fa75-4480-8552-00e8cab6887c.open-xchange@poczta.nazwa.pl>
-User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-erlang] generate-manifest update and packaging fixes pull request
+X-Originating-IP: [128.224.162.243]
+Subject: [meta-selinux][PATCH] net-tools: Add SCTP option support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,112 +32,220 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2016 08:35:12 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 01 Mar 2016 08:41:28 -0000
+Content-Type: text/plain
 
-Hi João,
+Patch netstat-selinux-support.patch's context is changed becasue of the
+commit in oe-core which adds SCTP support for net-tools. So rebase it.
 
-Did you get a chance to look at the patches? I can open a pull
-request on github if that's more convenient for you.
+Signed-off-by: Li Zhou <li.zhou@windriver.com>
+---
+ .../net-tools/netstat-selinux-support.patch        |   61 ++++++++++----------
+ 1 file changed, 32 insertions(+), 29 deletions(-)
 
-On 02/25 20:56, Maciej Borzecki wrote:
-> The series contains a number of patches for the `generate-manifest` tool as
-> well as fixes for packaging of Erlang modules.
->
-> The first patch addresses the problem of maintaining multiple versions
-> of `generate-manifest` tool, one for each Erlang version. This is not
-> effective in the long run. The tool has been updated to support multiple
-> Erlang versions. We exploit the fact that Erlang modules have a
-> predictable directory layout. There is very little change between
-> consecutive Erlang versions with respect to module organization. This
-> allowed for reducing much of the duplication into a smaller, more
-> maintainable code. The script can generate manifest for Erlang 18.2.3
-> and 18.1.5 (version currently supported in the tree). Particular version
-> is selected by passing --erlang-version <version> as a command line.
-> Along with the changes described above, the script has been pylinted.
-> The generated manifest contain slightly more packages, as by default a
-> *-doc package is added for each module. The script output is largely
-> identical to what the original code produced.
->
-> The second patch tightens package file selection. We make sure that *-dev
-> packages ship `src` as well as `c_src`, `java_src` and other variants,
-> should they exist. The *-doc packages should ship manpages and other
-> documentation files.
->
-> The third patch fixes the problem of files being shipped in incorrect
-> packages. The commit message is rather long, so for brevity, I will not
-> repeat it here. TL;DR is that the way the packages are populated and how
-> the manifest gets generated results in for instance dialyzer script
-> being shipped in erlang-erts package. The fix addresses this problem by
-> preserving the order in which modules are defined. Since we're using
-> Erlang in an embedded system, we're rather picky about the modules and
-> install only the ones that are needed for particular application. By
-> shipping incorrect files in packages, we either need to install
-> unnecessary packages, or install too many files, thus wasting space.
->
-> The last patch is a regenerated manifest files for Erlang 18.1.5 and
-> 18.2.3. The diff is large (~200kB), that's why I've put everything into
-> a pull request.
->
->
-> The following changes since commit 8878361e26aee0624385a4ef1ede44cdacd8108a:
->
->   erlang: add 18.2.3 (2016-02-07 16:08:55 -0200)
->
-> are available in the git repository at:
->
->   https://github.com/open-rnd/meta-erlang.git
->
-> for you to fetch changes up to c9ee91fed2e5241fc3d506cb0fde971b153f8909:
->
->   erlang-xxx-manifest: regenerate manifest files (2016-02-25 20:27:55 +0100)
->
-> ----------------------------------------------------------------
-> Maciej Borzecki (4):
->       generate-manifest: replace multiple scripts with one
->       generate-manifest: tighten file selection rules
->       generate-manifest: preserve the package order
->       erlang-xxx-manifest: regenerate manifest files
->
->  recipes-devtools/erlang/erlang-18.1.5-manifest.inc | 2058 +++++++++++---------
->  recipes-devtools/erlang/erlang-18.2.3-manifest.inc | 2058 +++++++++++---------
->  scripts/contrib/erlang/generate-manifest           |  394 ++++
->  scripts/contrib/erlang/generate-manifest-18.1.py   |  460 -----
->  scripts/contrib/erlang/generate-manifest-18.2.1.py |  460 -----
->  5 files changed, 2712 insertions(+), 2718 deletions(-)
->  create mode 100755 scripts/contrib/erlang/generate-manifest
->  delete mode 100755 scripts/contrib/erlang/generate-manifest-18.1.py
->  delete mode 100755 scripts/contrib/erlang/generate-manifest-18.2.1.py
->
-> --
-> Maciej Borzęcki
-> Senior Software Engineer at Open-RnD Sp. z o.o.
-> www.open-rnd.pl
+diff --git a/recipes-extended/net-tools/net-tools/netstat-selinux-support.patch b/recipes-extended/net-tools/net-tools/netstat-selinux-support.patch
+index 2a97216..4b023d9 100644
+--- a/recipes-extended/net-tools/net-tools/netstat-selinux-support.patch
++++ b/recipes-extended/net-tools/net-tools/netstat-selinux-support.patch
+@@ -1,17 +1,20 @@
+-From: Xin Ouyang <Xin.Ouyang@windriver.com>
+-Date: Wed, 13 Jun 2012 13:32:01 +0800
++From 759be4a417a6720eff482bc0a20635529d44b8a9 Mon Sep 17 00:00:00 2001
++From: Li Zhou <li.zhou@windriver.com>
++Date: Fri, 15 Jan 2016 17:31:18 +0800
+ Subject: [PATCH] net-tools: netstat add SELinux support.
+ 
+ Upstream-Status: Inappropriate [configuration]
+ 
+ Signed-off-by: Xin Ouyang <Xin.Ouyang@windriver.com>
++[Rebase the patch for  LIN6-10717's commit]
++Signed-off-by: Li Zhou <li.zhou@windriver.com>
+ ---
+- Makefile  |    9 +++++++-
+- netstat.c |   69 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--
++ Makefile  |  9 ++++++++-
++ netstat.c | 69 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++---
+  2 files changed, 74 insertions(+), 4 deletions(-)
+ 
+ diff --git a/Makefile b/Makefile
+-index 8fcc55c..dca8fbc 100644
++index 8fcc55c..0b5c395 100644
+ --- a/Makefile
+ +++ b/Makefile
+ @@ -116,6 +116,13 @@ NET_LIB = $(NET_LIB_PATH)/lib$(NET_LIB_NAME).a
+@@ -38,12 +41,12 @@ index 8fcc55c..dca8fbc 100644
+  iptunnel:	$(NET_LIB) iptunnel.o
+  		$(CC) $(LDFLAGS) -o iptunnel iptunnel.o $(NLIB) $(RESLIB)
+ diff --git a/netstat.c b/netstat.c
+-index c3a7bb1..71be41f 100644
++index 387217c..1c19672 100644
+ --- a/netstat.c
+ +++ b/netstat.c
+-@@ -86,6 +86,12 @@
+- #include <net/if.h>
+- #include <dirent.h>
++@@ -89,6 +89,12 @@
++ #include <sys/stat.h>
++ #include <sys/types.h>
+  
+ +#if HAVE_SELINUX
+ +#include <selinux/selinux.h>
+@@ -54,7 +57,7 @@ index c3a7bb1..71be41f 100644
+  #include "net-support.h"
+  #include "pathnames.h"
+  #include "version.h"
+-@@ -97,6 +103,7 @@
++@@ -100,6 +106,7 @@
+  #include "proc.h"
+  
+  #define PROGNAME_WIDTH 20
+@@ -62,7 +65,7 @@ index c3a7bb1..71be41f 100644
+  
+  #if !defined(s6_addr32) && defined(in6a_words)
+  #define s6_addr32 in6a_words	/* libinet6			*/
+-@@ -153,6 +160,7 @@ int flag_wide= 0;
++@@ -179,6 +186,7 @@ int flag_wide= 0;
+  int flag_prg = 0;
+  int flag_arg = 0;
+  int flag_ver = 0;
+@@ -70,7 +73,7 @@ index c3a7bb1..71be41f 100644
+  
+  FILE *procinfo;
+  
+-@@ -216,12 +224,17 @@ FILE *procinfo;
++@@ -242,12 +250,17 @@ FILE *procinfo;
+  #define PROGNAME_WIDTH1(s) PROGNAME_WIDTH2(s)
+  #define PROGNAME_WIDTH2(s) #s
+  
+@@ -88,7 +91,7 @@ index c3a7bb1..71be41f 100644
+  } *prg_hash[PRG_HASH_SIZE];
+  
+  static char prg_cache_loaded = 0;
+-@@ -229,9 +242,12 @@ static char prg_cache_loaded = 0;
++@@ -255,9 +268,12 @@ static char prg_cache_loaded = 0;
+  #define PRG_HASHIT(x) ((x) % PRG_HASH_SIZE)
+  
+  #define PROGNAME_BANNER "PID/Program name"
+@@ -101,7 +104,7 @@ index c3a7bb1..71be41f 100644
+  #define PRG_LOCAL_ADDRESS "local_address"
+  #define PRG_INODE	 "inode"
+  #define PRG_SOCKET_PFX    "socket:["
+-@@ -253,7 +269,7 @@ static char prg_cache_loaded = 0;
++@@ -279,7 +295,7 @@ static char prg_cache_loaded = 0;
+  /* NOT working as of glibc-2.0.7: */
+  #undef  DIRENT_HAVE_D_TYPE_WORKS
+  
+@@ -110,7 +113,7 @@ index c3a7bb1..71be41f 100644
+  {
+      unsigned hi = PRG_HASHIT(inode);
+      struct prg_node **pnp,*pn;
+-@@ -274,6 +290,14 @@ static void prg_cache_add(unsigned long inode, char *name)
++@@ -300,6 +316,14 @@ static void prg_cache_add(unsigned long inode, char *name)
+      if (strlen(name)>sizeof(pn->name)-1) 
+  	name[sizeof(pn->name)-1]='\0';
+      strcpy(pn->name,name);
+@@ -125,7 +128,7 @@ index c3a7bb1..71be41f 100644
+  }
+  
+  static const char *prg_cache_get(unsigned long inode)
+-@@ -286,6 +310,16 @@ static const char *prg_cache_get(unsigned long inode)
++@@ -312,6 +336,16 @@ static const char *prg_cache_get(unsigned long inode)
+      return("-");
+  }
+  
+@@ -142,7 +145,7 @@ index c3a7bb1..71be41f 100644
+  static void prg_cache_clear(void)
+  {
+      struct prg_node **pnp,*pn;
+-@@ -357,6 +391,7 @@ static void prg_cache_load(void)
++@@ -383,6 +417,7 @@ static void prg_cache_load(void)
+      const char *cs,*cmdlp;
+      DIR *dirproc=NULL,*dirfd=NULL;
+      struct dirent *direproc,*direfd;
+@@ -150,7 +153,7 @@ index c3a7bb1..71be41f 100644
+  
+      if (prg_cache_loaded || !flag_prg) return;
+      prg_cache_loaded=1;
+-@@ -426,7 +461,15 @@ static void prg_cache_load(void)
++@@ -452,7 +487,15 @@ static void prg_cache_load(void)
+  	    }
+  
+  	    snprintf(finbuf, sizeof(finbuf), "%s/%s", direproc->d_name, cmdlp);
+@@ -167,7 +170,7 @@ index c3a7bb1..71be41f 100644
+  	}
+  	closedir(dirfd); 
+  	dirfd = NULL;
+-@@ -546,6 +589,8 @@ static void finish_this_one(int uid, unsigned long inode, const char *timers)
++@@ -572,6 +615,8 @@ static void finish_this_one(int uid, unsigned long inode, const char *timers)
+      }
+      if (flag_prg)
+  	printf(" %-16s",prg_cache_get(inode));
+@@ -176,7 +179,7 @@ index c3a7bb1..71be41f 100644
+      if (flag_opt)
+  	printf(" %s", timers);
+      putchar('\n');
+-@@ -1238,6 +1283,8 @@ static void unix_do_one(int nr, const char *line)
++@@ -1557,6 +1602,8 @@ static void unix_do_one(int nr, const char *line)
+  	printf("-        ");
+      if (flag_prg)
+  	printf("%-" PROGNAME_WIDTHs "s",(has & HAS_INODE?prg_cache_get(inode):"-"));
+@@ -185,7 +188,7 @@ index c3a7bb1..71be41f 100644
+      puts(path);
+  }
+  
+-@@ -1256,6 +1303,7 @@ static int unix_info(void)
++@@ -1575,6 +1622,7 @@ static int unix_info(void)
+  
+      printf(_("\nProto RefCnt Flags       Type       State         I-Node  "));
+      print_progname_banner();
+@@ -193,15 +196,15 @@ index c3a7bb1..71be41f 100644
+      printf(_(" Path\n"));	/* xxx */
+  
+      {
+-@@ -1546,6 +1594,7 @@ static void usage(void)
++@@ -1865,6 +1913,7 @@ static void usage(void)
+      fprintf(stderr, _("        -o, --timers             display timers\n"));
+      fprintf(stderr, _("        -F, --fib                display Forwarding Information Base (default)\n"));
+      fprintf(stderr, _("        -C, --cache              display routing cache instead of FIB\n\n"));
+ +    fprintf(stderr, _("        -Z, --context            display SELinux security context for sockets\n\n"));
+  
+-     fprintf(stderr, _("  <Socket>={-t|--tcp} {-u|--udp} {-w|--raw} {-x|--unix} --ax25 --ipx --netrom\n"));
++     fprintf(stderr, _("  <Socket>={-t|--tcp} {-u|--udp} {-S|--sctp} {-w|--raw} {-x|--unix} --ax25 --ipx --netrom\n"));
+      fprintf(stderr, _("  <AF>=Use '-6|-4' or '-A <af>' or '--<af>'; default: %s\n"), DFLT_AF);
+-@@ -1591,6 +1640,7 @@ int main
++@@ -1911,6 +1960,7 @@ int main
+  	{"cache", 0, 0, 'C'},
+  	{"fib", 0, 0, 'F'},
+  	{"groups", 0, 0, 'g'},
+@@ -209,16 +212,16 @@ index c3a7bb1..71be41f 100644
+  	{NULL, 0, 0, 0}
+      };
+  
+-@@ -1602,7 +1652,7 @@ int main
++@@ -1922,7 +1972,7 @@ int main
+      getroute_init();		/* Set up AF routing support */
+  
+      afname[0] = '\0';
+--    while ((i = getopt_long(argc, argv, "MCFA:acdegphinNorstuWVv?wxl64", longopts, &lop)) != EOF)
+-+    while ((i = getopt_long(argc, argv, "MCFA:acdegphinNorstuWVv?wxlZ64", longopts, &lop)) != EOF)
++-    while ((i = getopt_long(argc, argv, "MCFA:acdegphinNorstuSWVv?wxl64", longopts, &lop)) != EOF)
+++    while ((i = getopt_long(argc, argv, "MCFA:acdegphinNorstuSWVv?wxlZ64", longopts, &lop)) != EOF)
+  	switch (i) {
+  	case -1:
+  	    break;
+-@@ -1705,6 +1755,19 @@ int main
++@@ -2027,6 +2077,19 @@ int main
+  	    if (aftrans_opt("unix"))
+  		exit(1);
+  	    break;
+@@ -239,5 +242,5 @@ index c3a7bb1..71be41f 100644
+  	case 'h':
+  	    usage();
+ -- 
+-1.7.5.4
++1.8.5.2.233.g932f7e4
+ 
+-- 
+1.7.9.5
 
---
-Maciej Borzęcki
-Senior Software Developer at Open-RnD Sp. z o.o., Poland
-www.open-rnd.pl
-mobile: +48 889 117 365, fax: +48 42 657 9079
-
-
-Niniejsza wiadomość wraz z załącznikami może
-zawierać chronione prawem lub poufne informacje i została
-wysłana wyłącznie do wiadomości i użytku osób, do których
-została zaadresowana. Jeśli wiadomość została otrzymana
-przypadkowo zabrania się jej kopiowania lub rozsyłania do osób
-trzecich. W takim przypadku uprasza się o natychmiastowe
-zniszczenie wiadomości oraz poinformowanie nadawcy o
-zaistniałej sytuacji za pomocą wiadomości zwrotnej.
-Dziękujemy.
-
-This message, including any attachments hereto,
-may contain privileged or confidential information and is sent
-solely for the attention and use of the intended addressee(s).
-If you are not an intended addressee, you may neither use this
-message nor copy or deliver it to anyone. In such case, you
-should immediately destroy this message and kindly notify the
-sender by reply email. Thank you.
 
