@@ -1,55 +1,21 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 772F57326D
+Return-Path: <maciej.borzecki@open-rnd.pl>
+Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
+	by mail.openembedded.org (Postfix) with ESMTP id 8FD26731F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Mar 2016 08:24:33 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id p65so22306958wmp.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Mar 2016 00:24:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:reply-to:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=rezIfGocP8P+o1gT6DC7UL63DfYI7JzKBXZ1waSJ33g=;
-	b=fzEBYE8huqCnR1BMwCf+1AwnpqLxRB5ahgS/md3qvtCJmhYRrpgQqJwTkBIWPGFk2j
-	11hQj/CV1cL1IvOQdQoYZMZGW8txAZ0CroBBz/0p1yttriHRhV1bX/frtvGvlunLi1BH
-	ma5NfI+x0t2DARMW+n9viD1ttPoyO38lhlbGKrqqxDRywX60n6uh8vubaqfws6mQHOgd
-	RtgqFF56Rh/pUyytq/TUhCw8cHgc/ukiAKc5mDZhoqe0yNImnDZSUEQzyUJ3HgDPIEr7
-	JS3J/iUZMSEjwA6xK1pkbca2XWETdnkU4lZ9DUHd5X4SpkEp4NShPJaopgTN3mnnzzDc
-	jn4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:reply-to
-	:references:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=rezIfGocP8P+o1gT6DC7UL63DfYI7JzKBXZ1waSJ33g=;
-	b=WfnmEcoq/n1kHIn5FLHvTuY1N3b1fEhnB24uoHPolzfBE2gr6r/bnUdHowd8rsNgiV
-	SafSbQzymHScNekI2GIQcGQAotRJg65yeswy+KiOhtXUkvY4WUxo/z6pr04UL9FToPTl
-	qoGCKO4/DFh80n1Nd8PpUX+cD9tTocd538tFQIvz03zJhmgJEH9RMNjdconQPYycCHKq
-	W4jgKiWs0FJxk9LfeAk6rROT+wN4VjNfg2lOHnAZLCYBJYOQN0Y0Mv8Vbk4Ql00ynwK1
-	ISJKUGAiG9jx5aUD+UJwr5eSCwGwMrwynQP6PX2x4iuMuyQGScF/4XiBkNdEem/Jb31I
-	qItg==
-X-Gm-Message-State: AD7BkJJ0GoFpsot8e4bq3OPDTu/AG5FWLFVyy5xMFIj2wEFBNl6UTcc5Awb0aFoT0Ti+iw==
-X-Received: by 10.28.130.6 with SMTP id e6mr2286506wmd.71.1456820674017;
-	Tue, 01 Mar 2016 00:24:34 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	ks5sm29755470wjb.13.2016.03.01.00.24.32
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Mar 2016 00:24:32 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 1 Mar 2016 09:26:24 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160301082624.GB16002@jama>
-Reply-To: DUB130-W394761EF53CEE03D5EB23ADABB0@phx.gbl
-References: <BLU436-SMTP13341B70B1E43FF04270322DABA0@phx.gbl>
-	<CA+chaQehDvb+YrM0tMP49V2kH1ZmmSYqziPNmywwudEP7YQ=MA@mail.gmail.com>
-	<DUB130-W195DB455AC6F54690CBF1BDABA0@phx.gbl>
-	<CA+chaQfVubgE=fzEDX0HV1e-VYNZ5H0DBLG55bEkUyf55wSSVg@mail.gmail.com>
+	Tue,  1 Mar 2016 08:35:10 +0000 (UTC)
+Received: from localhost (unknown [31.182.60.238])
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id B701D1C8C29;
+	Tue,  1 Mar 2016 09:35:08 +0100 (CET)
+Date: Tue, 1 Mar 2016 09:35:08 +0100
+From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+To: =?iso-8859-1?Q?Jo=E3o?= Henrique Freitas <joaohf@gmail.com>
+Message-ID: <20160301083508.GA4897@comp-006-thk.openrnd.local>
+References: <1942614094.432571.c7487dd4-fa75-4480-8552-00e8cab6887c.open-xchange@poczta.nazwa.pl>
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQfVubgE=fzEDX0HV1e-VYNZ5H0DBLG55bEkUyf55wSSVg@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [OE-core] [meta-oe][PATCH] Fix gpsd build by switching to use EXTRA_CONF_PACKAGECONFIG.
+In-Reply-To: <1942614094.432571.c7487dd4-fa75-4480-8552-00e8cab6887c.open-xchange@poczta.nazwa.pl>
+User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-erlang] generate-manifest update and packaging fixes pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,120 +28,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2016 08:24:35 -0000
-X-Groupsio-MsgNum: 60275
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xgyAXRrhYN0wYx8y"
+X-List-Received-Date: Tue, 01 Mar 2016 08:35:12 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
---xgyAXRrhYN0wYx8y
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi João,
 
-FW
+Did you get a chance to look at the patches? I can open a pull
+request on github if that's more convenient for you.
 
-On Tue, Mar 01, 2016 at 12:58:55AM +0100, Martin Jansa wrote:
-> > I also see now someone else has already posted a different fix to this,
-> although from what I've read about this error, mine is the more general
-> solution.
->=20
-> Your solution depends on oe-core patch which wasn't merged yet, and that
-> change may be refused or the variable could be renamed.
+On 02/25 20:56, Maciej Borzecki wrote:
+> The series contains a number of patches for the `generate-manifest` tool as
+> well as fixes for packaging of Erlang modules.
+>
+> The first patch addresses the problem of maintaining multiple versions
+> of `generate-manifest` tool, one for each Erlang version. This is not
+> effective in the long run. The tool has been updated to support multiple
+> Erlang versions. We exploit the fact that Erlang modules have a
+> predictable directory layout. There is very little change between
+> consecutive Erlang versions with respect to module organization. This
+> allowed for reducing much of the duplication into a smaller, more
+> maintainable code. The script can generate manifest for Erlang 18.2.3
+> and 18.1.5 (version currently supported in the tree). Particular version
+> is selected by passing --erlang-version <version> as a command line.
+> Along with the changes described above, the script has been pylinted.
+> The generated manifest contain slightly more packages, as by default a
+> *-doc package is added for each module. The script output is largely
+> identical to what the original code produced.
+>
+> The second patch tightens package file selection. We make sure that *-dev
+> packages ship `src` as well as `c_src`, `java_src` and other variants,
+> should they exist. The *-doc packages should ship manpages and other
+> documentation files.
+>
+> The third patch fixes the problem of files being shipped in incorrect
+> packages. The commit message is rather long, so for brevity, I will not
+> repeat it here. TL;DR is that the way the packages are populated and how
+> the manifest gets generated results in for instance dialyzer script
+> being shipped in erlang-erts package. The fix addresses this problem by
+> preserving the order in which modules are defined. Since we're using
+> Erlang in an embedded system, we're rather picky about the modules and
+> install only the ones that are needed for particular application. By
+> shipping incorrect files in packages, we either need to install
+> unnecessary packages, or install too many files, thus wasting space.
+>
+> The last patch is a regenerated manifest files for Erlang 18.1.5 and
+> 18.2.3. The diff is large (~200kB), that's why I've put everything into
+> a pull request.
+>
+>
+> The following changes since commit 8878361e26aee0624385a4ef1ede44cdacd8108a:
+>
+>   erlang: add 18.2.3 (2016-02-07 16:08:55 -0200)
+>
+> are available in the git repository at:
+>
+>   https://github.com/open-rnd/meta-erlang.git
+>
+> for you to fetch changes up to c9ee91fed2e5241fc3d506cb0fde971b153f8909:
+>
+>   erlang-xxx-manifest: regenerate manifest files (2016-02-25 20:27:55 +0100)
+>
+> ----------------------------------------------------------------
+> Maciej Borzecki (4):
+>       generate-manifest: replace multiple scripts with one
+>       generate-manifest: tighten file selection rules
+>       generate-manifest: preserve the package order
+>       erlang-xxx-manifest: regenerate manifest files
+>
+>  recipes-devtools/erlang/erlang-18.1.5-manifest.inc | 2058 +++++++++++---------
+>  recipes-devtools/erlang/erlang-18.2.3-manifest.inc | 2058 +++++++++++---------
+>  scripts/contrib/erlang/generate-manifest           |  394 ++++
+>  scripts/contrib/erlang/generate-manifest-18.1.py   |  460 -----
+>  scripts/contrib/erlang/generate-manifest-18.2.1.py |  460 -----
+>  5 files changed, 2712 insertions(+), 2718 deletions(-)
+>  create mode 100755 scripts/contrib/erlang/generate-manifest
+>  delete mode 100755 scripts/contrib/erlang/generate-manifest-18.1.py
+>  delete mode 100755 scripts/contrib/erlang/generate-manifest-18.2.1.py
+>
+> --
+> Maciej Borzęcki
+> Senior Software Engineer at Open-RnD Sp. z o.o.
+> www.open-rnd.pl
 
-http://patchwork.openembedded.org/patch/116719/
+--
+Maciej Borzęcki
+Senior Software Developer at Open-RnD Sp. z o.o., Poland
+www.open-rnd.pl
+mobile: +48 889 117 365, fax: +48 42 657 9079
 
->=20
-> So I'll merge the other change at least for now, it can be cleaned later.
->=20
-> On Tue, Mar 1, 2016 at 12:13 AM, Chris Trobridge <christrobridge@hotmail.=
-com
-> > wrote:
->=20
-> > Thanks!
-> >
-> > First Patch...
-> >
-> > I was puzzling about that.  I did read the readme but obviously not
-> > thoroughly enough.  I saw a few patches to meta-oe apparently send to t=
-he
-> > main list but wasn't aware of the devel list.
-> >
-> > I also see now someone else has already posted a different fix to this,
-> > although from what I've read about this error, mine is the more general
-> > solution.
-> >
-> > Regards,
-> > Chris
-> >
-> >
-> > ------------------------------
-> > Date: Mon, 29 Feb 2016 23:45:31 +0100
-> > Subject: Re: [OE-core] [meta-oe][PATCH] Fix gpsd build by switching to =
-use
-> > EXTRA_CONF_PACKAGECONFIG.
-> > From: martin.jansa@gmail.com
-> > To: christrobridge@hotmail.com
-> > CC: openembedded-core@lists.openembedded.org
-> >
-> >
-> > Wrong ML, patches for meta-oe belong to openembedded-devel ML (see READ=
-ME
-> > file)
-> >
-> > On Mon, Feb 29, 2016 at 11:31 PM, Chris Trobridge <
-> > christrobridge@hotmail.com> wrote:
-> >
-> > Was using EXTRA_OECONF, leading to:
-> >
-> > SCons Error: no such option: --disable-static
-> >
-> > Signed-off-by: Chris Trobridge <christrobridge@hotmail.com>
-> > ---
-> >  meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-> > b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-> > index ff268b3..39d6470 100644
-> > --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-> > +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-> > @@ -45,7 +45,7 @@ EXTRA_OESCONS =3D " \
-> >      strip=3D'false' \
-> >      chrpath=3D'yes' \
-> >      systemd=3D'${SYSTEMD_OESCONS}' \
-> > -    ${EXTRA_OECONF} \
-> > +    ${EXTRA_CONF_PACKAGECONFIG} \
-> >  "
-> >  # this cannot be used, because then chrpath is not found and only stat=
-ic
-> > lib is built
-> >  # target=3D${HOST_SYS}
-> > --
-> > 2.4.3
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-core mailing list
-> > Openembedded-core@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-core
-> >
-> >
-> >
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Niniejsza wiadomość wraz z załącznikami może
+zawierać chronione prawem lub poufne informacje i została
+wysłana wyłącznie do wiadomości i użytku osób, do których
+została zaadresowana. Jeśli wiadomość została otrzymana
+przypadkowo zabrania się jej kopiowania lub rozsyłania do osób
+trzecich. W takim przypadku uprasza się o natychmiastowe
+zniszczenie wiadomości oraz poinformowanie nadawcy o
+zaistniałej sytuacji za pomocą wiadomości zwrotnej.
+Dziękujemy.
 
---xgyAXRrhYN0wYx8y
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+This message, including any attachments hereto,
+may contain privileged or confidential information and is sent
+solely for the attention and use of the intended addressee(s).
+If you are not an intended addressee, you may neither use this
+message nor copy or deliver it to anyone. In such case, you
+should immediately destroy this message and kindly notify the
+sender by reply email. Thank you.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlbVUi8ACgkQN1Ujt2V2gBwongCfexPPIAzaOzC5ChM4tepIAg7u
-3S8An1Kz721aDXbe05dglUYPgDCLhXbp
-=y+SS
------END PGP SIGNATURE-----
-
---xgyAXRrhYN0wYx8y--
