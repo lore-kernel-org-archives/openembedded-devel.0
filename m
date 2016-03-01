@@ -1,23 +1,45 @@
-Return-Path: <rebecca.swee.fun.chang@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id BB8C3731DF
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DB62731DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Mar 2016 00:49:46 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga103.jf.intel.com with ESMTP; 29 Feb 2016 16:49:47 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.22,521,1449561600"; d="scan'208";a="913975601"
-Received: from unknown (HELO rebeccas-iLBPG3.png.intel.com) ([10.88.227.80])
-	by fmsmga001.fm.intel.com with ESMTP; 29 Feb 2016 16:49:48 -0800
-From: rebecca.swee.fun.chang@intel.com
-To: openembedded-devel@lists.openembedded.org,
-	Rebecca Chang <rebecca.swee.fun.chang@intel.com>
-Date: Tue,  1 Mar 2016 08:49:42 +0800
-Message-Id: <1456793382-4567-2-git-send-email-rebecca.swee.fun.chang@intel.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1456793382-4567-1-git-send-email-rebecca.swee.fun.chang@intel.com>
-References: <1456793382-4567-1-git-send-email-rebecca.swee.fun.chang@intel.com>
-Subject: [meta-oe] [PATCH v3] libvpx: upgrade to version 1.5.0
+	Tue,  1 Mar 2016 00:52:37 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id l68so14441180wml.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Feb 2016 16:52:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=R0uj1r2/SHQ7ToNx3iExoG7ZR47Q7EuNLl2aEIQsuXc=;
+	b=UpUjI6e1wHncQdQGEW7aUJEfzR3MS33QAjZ1a00dtnQUDDhovprHr0b8HNx1467jPe
+	GaSJQ1dmcEkt4zi/fbj9szGPEYgstTELlviNbMVl1XBnqECsk2SXnC2LpzgPhtZScm96
+	R03gG1TcbLxoMNfN2zml9I+g0pQHCxzahGyzRYXS3COrioYoGiSjJak44db9BRisAU1T
+	JIk0fJx+ai841lrGhjYEUfEWNjQ1PzbCXDKgSi88y+3Kd6u3L62+iOs2TnRhqNhlHJqm
+	fRuX3FxjY71aGUcX2UxVPQ4LdWCm6VX+THSCaHHams9Mq6Zn6hB7I8U2Nq5RbljvunMt
+	nQWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=R0uj1r2/SHQ7ToNx3iExoG7ZR47Q7EuNLl2aEIQsuXc=;
+	b=WYZ95BJ+JHUx9sTjfp8uyOFzXKWUViFSqiMmgVPemBA9K8iEU0/em9Ttj3ri82BCgU
+	DZ/gQlDwc3HimBbKzcIilz/l9o76lPOFWp51wpB2G2GQvSjpSB4iXO1VB3LQ2ezyLZpw
+	c6vBq+hc455P//oAwHsE6AEr3ZE8Ntdp7DmK0snaThr6u8+TDk3cd3qOcxtukLWIx56v
+	ZGFafYzhdwPxXteokA+heElqIQpZQAgQjK0YpaMFcd1CQwh942Et9k4HTuhvY8NQtXBy
+	XTffHy5NFQDFTK4+74nJEgLaXbwz9Ul5kg3wVVPTpfTitLV59WbmM6Nzo6SWhx6abc29
+	zzsg==
+X-Gm-Message-State: AD7BkJL3w2KteQGQHu4sVb8202OIIh+sdV+5opZzO46naAfz6PO4kSLn9fkB1ucWa28qRg==
+X-Received: by 10.28.183.137 with SMTP id h131mr704407wmf.100.1456793557806;
+	Mon, 29 Feb 2016 16:52:37 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	di1sm28194118wjc.3.2016.02.29.16.52.36
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 29 Feb 2016 16:52:36 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  1 Mar 2016 01:54:26 +0100
+Message-Id: <1456793666-26638-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.2
+Subject: [PATCH][meta-qt5] gdb: append to PACKAGECONFIG instead of changing the default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,46 +52,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2016 00:49:46 -0000
+X-List-Received-Date: Tue, 01 Mar 2016 00:52:37 -0000
 
-From: Chang Rebecca Swee Fun <rebecca.swee.fun.chang@intel.com>
+* without readline in PACKAGECONFIG and with no-static-libraries.inc
+  gdb fails when trying to build against own bundled static readline
 
-This version had improved VP9 encoder and speeds up the encoding and
-decoding process.
-
-Signed-off-by: Chang Rebecca Swee Fun <rebecca.swee.fun.chang@intel.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-multimedia/webm/{libvpx_1.4.0.bb => libvpx_1.5.0.bb}   | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-multimedia/webm/{libvpx_1.4.0.bb => libvpx_1.5.0.bb} (88%)
+ recipes-devtools/gdb/gdb_%.bbappend | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.5.0.bb
-similarity index 88%
-rename from meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb
-rename to meta-oe/recipes-multimedia/webm/libvpx_1.5.0.bb
-index c963a9c..8ac178d 100644
---- a/meta-oe/recipes-multimedia/webm/libvpx_1.4.0.bb
-+++ b/meta-oe/recipes-multimedia/webm/libvpx_1.5.0.bb
-@@ -10,10 +10,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
- SRC_URI += "http://storage.googleapis.com/downloads.webmproject.org/releases/webm/${BP}.tar.bz2 \
-             file://libvpx-configure-support-blank-prefix.patch \
-            "
--SRC_URI[md5sum] = "63b1d7f59636a42eeeee9225cc14e7de"
--SRC_URI[sha256sum] = "f582d9b2d60a592a4a3d8c32965ca2d2167e9ade38c6c30bac8801ff66a118e4"
-+SRC_URI[md5sum] = "49e59dd184caa255886683facea56fca"
-+SRC_URI[sha256sum] = "306d67908625675f8e188d37a81fbfafdf5068b09d9aa52702b6fbe601c76797"
- 
--# ffmpeg links with this and fails 
-+# ffmpeg links with this and fails
- # sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.text+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@GLIBC_2.4'
- ARM_INSTRUCTION_SET = "arm"
- 
-@@ -48,4 +48,3 @@ do_install() {
-     oe_runmake install DESTDIR=${D}
-     chown -R root:root ${D}
- }
--
+diff --git a/recipes-devtools/gdb/gdb_%.bbappend b/recipes-devtools/gdb/gdb_%.bbappend
+index 41592c4..ec17f55 100644
+--- a/recipes-devtools/gdb/gdb_%.bbappend
++++ b/recipes-devtools/gdb/gdb_%.bbappend
+@@ -1 +1 @@
+-PACKAGECONFIG ??= "python"
++PACKAGECONFIG_append = " python"
 -- 
-1.9.1
+2.7.2
 
 
