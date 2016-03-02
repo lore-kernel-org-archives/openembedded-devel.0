@@ -1,44 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 58035755F4
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id A860B76DAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Mar 2016 10:18:15 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id l68so70725509wml.1
+	Wed,  2 Mar 2016 10:18:17 +0000 (UTC)
+Received: by mail-wm0-f50.google.com with SMTP id l68so70726921wml.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Mar 2016 02:18:16 -0800 (PST)
+	Wed, 02 Mar 2016 02:18:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=pgQrTF9mEwqlLC8KormImj+RidQaiyWLPcNuLYOsS50=;
-	b=YjrA4m7268TARD+WfrMMGoitHqYMp9+9vPZpehup2otdGu3cxd3HrS3FqF0SJmmRJI
-	/2tCtLlvaSRmt4W6GzBoYhFuy1jHsPB5YfOU+Q0xiCKKA7FWJx8VrrSFWx8gbE3MDOYI
-	Pr5hOQaI07Qddl+hzuf27LULvM3qWKgYAFVc1/dALSAeilMrdw9tKhPCXqm7nH41ajkL
-	eUyQCcFwt83dHPwu4KabgdR8rAB/0tfIqYq4ca7qJS5ljIpVVketgGWmuoYAD4EmPIQR
-	muvoFFGfXzf6KdduY8WkbGB9MUJSNLVrfhgTqew4CsNFfO1XKNvu2fvOOIpFmiheFO4Q
-	ujeA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=CO37gaIDIZ1RZ9Zvo6PzNQscZUt2573ZGUK8hmtLG7M=;
+	b=WJ8FmCTBvuL21d+PLejKrVxZO/NdACE9hGEJ6DhZSiPOX7wOp2mTjSirhDLqoiNkwe
+	WecMAuTGQBsPLLVv7mZgiUzARmrUHZNH840a/rnuunyleUaBXgCbjCR4dlaYw6gOR7Rb
+	F4H6etB8Ap/pfPfLPLGGvranX88KZbYdYdRF7my5icSB8QLZZxwAn2DjgWjHBRBDoIsX
+	g9SSjUtCuCHiRNzXcMFKsXOQKDhhQ2848yfcrwHJ3gEub9Cg+ABASciGn3MBKJv4ry8z
+	T3tBGa8o4ftxWaVsVkxj4ZHnaGmduEqKtFkJ8MGQVBwDRSxf8dsy2BCNWq8EWonP3ACt
+	cy7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=pgQrTF9mEwqlLC8KormImj+RidQaiyWLPcNuLYOsS50=;
-	b=QJuuUAswknRyjoBcyC2N8k4JhajSjnOPwDNh34S0bAzsj78KO5HzuO73US3sUC4Rsy
-	T8jh2ctQThOvJ3xJ+xgdWx0wByR1GSiVyVSjQ/ccyM5XvCbUc8uCSEraSXedbGZAc3vf
-	qstcUV+mtiMd7WGUGsh4ixokICkjxcaxUm+kX9tyr1cPTg+15Noa6UqDEPI3g7kTUebq
-	K2xlnbJFstBBYAroLeDFGbzy/A6FFuua7sXIUaeJT+kjsvS9ygNNKsk52iOfsS3KyC6k
-	7O6VpwGZ4vUbEYprLvf7ICf9aFKfhea5Rkj0L0e0xUt+x58FpoZoLgCUxme/C6hcZ/5g
-	FCew==
-X-Gm-Message-State: AD7BkJL8nNQOS5T0NJ50vrdDqVXckn+vUUnlzEXIHFQDjp/wUVWHy3bgBIVsI6nWlFy4Ig==
-X-Received: by 10.195.12.42 with SMTP id en10mr24825910wjd.13.1456913895545;
-	Wed, 02 Mar 2016 02:18:15 -0800 (PST)
-Received: from localhost ([86.49.34.37]) by smtp.gmail.com with ESMTPSA id
-	m6sm35054226wje.21.2016.03.02.02.18.13
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=CO37gaIDIZ1RZ9Zvo6PzNQscZUt2573ZGUK8hmtLG7M=;
+	b=NXNSP80UXiqC7UsNSp3N1mvSoZTuAXZsboPn+/0EijTwt9ln22GtEjiOXozUv3RIgw
+	kHlIRTUgtKXMYbxK+G7D+luguSR9I/u80drf0dvUXo4kIuVeKOD2HNy3aRp9CbXNc7NP
+	L0JoBTJv4vWRJPuJH6Qqw9mUPvx9c9zI3ThUPghd/GOoRNkz4QCd6Gk8XI0ma5zoqj4q
+	Zs1y5X/GImcmRQuGFgwbthitKA+AxHPSB9wgF5mRejKqIjKnELyT5vSY710C+AkAv6qC
+	cWIOHPj2XHHoS6SQcC1hjn0wlitHXpAVXz46vUdTtcvAaJhz/Kg+WIfm6pIw+ImzQzk2
+	WJ0A==
+X-Gm-Message-State: AD7BkJJS1rcnKRVWNFLCwhpUYk6upvRGr3yIZG0S6fZvpcCO4feI5tsszhmf42trmaOyjw==
+X-Received: by 10.28.135.1 with SMTP id j1mr3590876wmd.20.1456913897765;
+	Wed, 02 Mar 2016 02:18:17 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id 202sm3459189wmo.7.2016.03.02.02.18.16
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 02 Mar 2016 02:18:13 -0800 (PST)
+	Wed, 02 Mar 2016 02:18:16 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Mar 2016 11:20:08 +0100
-Message-Id: <1456914009-19771-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed,  2 Mar 2016 11:20:09 +0100
+Message-Id: <1456914009-19771-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.7.2
-Subject: [PATCHv2][meta-qt5 1/2] recipes: use new EXTRA_CONF_PACKAGECONFIG instead of EXTRA_OECONF
+In-Reply-To: <1456914009-19771-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1456914009-19771-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [PATCHv2][meta-qt5 2/2] qmake5_base: use remove-libtool bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,160 +54,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Mar 2016 10:18:15 -0000
+X-List-Received-Date: Wed, 02 Mar 2016 10:18:18 -0000
 
-* this fixes builds for DISTROs which include no-static-libraries.inc
-* this change depends on oe-core change:
-  http://patchwork.openembedded.org/patch/116719/
-  which will probably be merged in Yocto 2.1, if you want to use
-  latest meta-qt5 with older oe-core you need to append
-  EXTRA_OECONF to EXTRA_CONF_PACKAGECONFIG
+* this requires latest oe-core (Yocto 2.1), if you want to use latest
+  meta-qt5 with older oe-core, you need to backport this bbclass
+  and more importantly don't forget to provide
+  EXTRA_CONF_PACKAGECONFIG
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/qt5/nativesdk-qtbase_git.bb | 4 ++--
- recipes-qt/qt5/qt3d_git.bb             | 2 +-
- recipes-qt/qt5/qtbase-native_git.bb    | 6 +++---
- recipes-qt/qt5/qtbase_git.bb           | 2 +-
- recipes-qt/qt5/qtconnectivity_git.bb   | 2 +-
- recipes-qt/qt5/qtsystems_git.bb        | 2 +-
- recipes-qt/qt5/qtwebengine_git.bb      | 4 ++--
- recipes-qt/qt5/qtwebkit_git.bb         | 2 +-
- 8 files changed, 12 insertions(+), 12 deletions(-)
+ classes/qmake5_base.bbclass | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-index 35d922e..606078a 100644
---- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-+++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-@@ -82,7 +82,7 @@ QT_CONFIG_FLAGS += " \
-     -no-pch \
-     -no-rpath \
-     -pkg-config \
--    ${EXTRA_OECONF} \
-+    ${EXTRA_CONF_PACKAGECONFIG} \
- "
+diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+index 5b2633b..c2a8498 100644
+--- a/classes/qmake5_base.bbclass
++++ b/classes/qmake5_base.bbclass
+@@ -47,7 +47,7 @@ OE_QMAKE_WAYLAND_SCANNER = "${STAGING_BINDIR_NATIVE}/wayland-scanner"
+ # this one needs to be exported, because qmake reads it from shell env
+ export QT_CONF_PATH = "${WORKDIR}/qt.conf"
  
- # qtbase is exception, as these are used as install path for sysroots
-@@ -201,7 +201,7 @@ do_configure() {
-         -xplatform linux-oe-g++ \
-         ${QT_CONFIG_FLAGS}
+-inherit qmake5_paths
++inherit qmake5_paths remove-libtool
  
--    bin/qmake ${OE_QMAKE_DEBUG_OUTPUT} ${S} -o Makefile || die "Configuring qt with qmake failed. EXTRA_OECONF was ${EXTRA_OECONF}"
-+    bin/qmake ${OE_QMAKE_DEBUG_OUTPUT} ${S} -o Makefile || die "Configuring qt with qmake failed. EXTRA_CONF_PACKAGECONFIG was ${EXTRA_CONF_PACKAGECONFIG}"
+ do_generate_qt_config_file() {
+     cat > ${QT_CONF_PATH} <<EOF
+@@ -168,7 +168,6 @@ qmake5_base_nativesdk_do_install() {
+     find . -name "Makefile*" | xargs -r sed -i "s,(INSTALL_ROOT)${STAGING_DIR_HOST},(INSTALL_ROOT),g"
+ 
+     oe_runmake install INSTALL_ROOT=${D}
+-    find "${D}" -ignore_readdir_race -name "*.la" -delete
  }
  
- do_install() {
-diff --git a/recipes-qt/qt5/qt3d_git.bb b/recipes-qt/qt5/qt3d_git.bb
-index a19422b..3d4b678 100644
---- a/recipes-qt/qt5/qt3d_git.bb
-+++ b/recipes-qt/qt5/qt3d_git.bb
-@@ -20,7 +20,7 @@ PACKAGECONFIG_class-native ??= "tools-only"
- PACKAGECONFIG_class-nativesdk ??= "tools-only"
- PACKAGECONFIG[tools-only] = "CONFIG+=tools-only"
+ qmake5_base_do_install() {
+@@ -176,7 +175,6 @@ qmake5_base_do_install() {
+     find . -name "Makefile*" | xargs -r sed -i "s,(INSTALL_ROOT)${STAGING_DIR_TARGET},(INSTALL_ROOT),g"
  
--EXTRA_QMAKEVARS_PRE += "${EXTRA_OECONF}"
-+EXTRA_QMAKEVARS_PRE += "${EXTRA_CONF_PACKAGECONFIG}"
+     oe_runmake install INSTALL_ROOT=${D}
+-    find "${D}" -ignore_readdir_race -name "*.la" -delete
  
- FILES_${PN}-qmlplugins += " \
-     ${OE_QMAKE_PATH_QML}/*/*/*.bez \
-diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
-index 057edd4..a05f07e 100644
---- a/recipes-qt/qt5/qtbase-native_git.bb
-+++ b/recipes-qt/qt5/qtbase-native_git.bb
-@@ -40,7 +40,7 @@ do_generate_qt_config_file() {
-     :
- }
- 
--EXTRA_OECONF = " \
-+EXTRA_CONF_PACKAGECONFIG = " \
-     -prefix ${prefix} \
-     -sysroot ${STAGING_DIR_NATIVE} \
-     -no-gcc-sysroot \
-@@ -90,8 +90,8 @@ export OE_QMAKE_AR
- export OE_QMAKE_STRIP
- 
- do_configure_prepend() {
--    MAKEFLAGS="${PARALLEL_MAKE}" ${S}/configure -opensource -confirm-license ${EXTRA_OECONF} || die "Configuring qt failed. EXTRA_OECONF was ${EXTRA_OECONF}"
--    bin/qmake ${OE_QMAKE_DEBUG_OUTPUT} ${S} -o Makefile || die "Configuring qt with qmake failed. EXTRA_OECONF was ${EXTRA_OECONF}"
-+    MAKEFLAGS="${PARALLEL_MAKE}" ${S}/configure -opensource -confirm-license ${EXTRA_CONF_PACKAGECONFIG} || die "Configuring qt failed. EXTRA_CONF_PACKAGECONFIG was ${EXTRA_CONF_PACKAGECONFIG}"
-+    bin/qmake ${OE_QMAKE_DEBUG_OUTPUT} ${S} -o Makefile || die "Configuring qt with qmake failed. EXTRA_CONF_PACKAGECONFIG was ${EXTRA_CONF_PACKAGECONFIG}"
- }
- 
- do_install() {
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index bf56741..f9ca1b9 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -135,7 +135,7 @@ QT_CONFIG_FLAGS += " \
-     -no-pch \
-     -no-rpath \
-     -pkg-config \
--    ${EXTRA_OECONF} \
-+    ${EXTRA_CONF_PACKAGECONFIG} \
- "
- 
- do_generate_qt_config_file_append() {
-diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconnectivity_git.bb
-index cf6d3c5..6ce1c18 100644
---- a/recipes-qt/qt5/qtconnectivity_git.bb
-+++ b/recipes-qt/qt5/qtconnectivity_git.bb
-@@ -18,7 +18,7 @@ inherit bluetooth
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)}"
- PACKAGECONFIG[bluez] = "CONFIG+=OE_BLUEZ_ENABLED,,${BLUEZ}"
- 
--EXTRA_QMAKEVARS_PRE += "${EXTRA_OECONF}"
-+EXTRA_QMAKEVARS_PRE += "${EXTRA_CONF_PACKAGECONFIG}"
- 
- do_configure_prepend() {
-     # disable bluez test if it isn't enabled by PACKAGECONFIG
-diff --git a/recipes-qt/qt5/qtsystems_git.bb b/recipes-qt/qt5/qtsystems_git.bb
-index 868e051..943c006 100644
---- a/recipes-qt/qt5/qtsystems_git.bb
-+++ b/recipes-qt/qt5/qtsystems_git.bb
-@@ -16,7 +16,7 @@ inherit bluetooth
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)}"
- PACKAGECONFIG[bluez] = "CONFIG+=OE_BLUEZ_ENABLED,,${BLUEZ}"
- 
--EXTRA_QMAKEVARS_PRE += "${EXTRA_OECONF}"
-+EXTRA_QMAKEVARS_PRE += "${EXTRA_CONF_PACKAGECONFIG}"
- 
- do_configure_prepend() {
-     # disable bluez test if it isn't enabled by PACKAGECONFIG
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index d2975ef..47486e2 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -40,7 +40,7 @@ PACKAGECONFIG[libxslt] = "WEBENGINE_CONFIG+=use_system_libxslt,,libxslt"
- PACKAGECONFIG[speex] = "WEBENGINE_CONFIG+=use_system_speex,,speex"
- PACKAGECONFIG[vpx] = "WEBENGINE_CONFIG+=use_system_vpx,,libvpx"
- 
--EXTRA_QMAKEVARS_PRE += "${EXTRA_OECONF}"
-+EXTRA_QMAKEVARS_PRE += "${EXTRA_CONF_PACKAGECONFIG}"
- 
- COMPATIBLE_MACHINE = "(-)"
- COMPATIBLE_MACHINE_x86 = "(.*)"
-@@ -74,7 +74,7 @@ do_configure() {
-     export CC_host="gcc"
-     export CXX_host="g++"
-     export QMAKE_MAKE_ARGS="${EXTRA_OEMAKE}"
--    export QMAKE_CACHE_EVAL="${EXTRA_OECONF}"
-+    export QMAKE_CACHE_EVAL="${EXTRA_CONF_PACKAGECONFIG}"
- 
-     # Disable autodetection from sysroot:
-     sed -i 's/packagesExist([^)]*vpx[^)]*):/false:/g; s/config_srtp:/false:/g; s/config_snappy:/false:/g; s/packagesExist(nss):/false:/g; s/packagesExist(minizip, zlib):/false:/g; s/packagesExist(libwebp,libwebpdemux):/false:/g; s/packagesExist(libxml-2.0,libxslt):/false:/g; s/^ *packagesExist($$package):/false:/g' ${S}/tools/qmake/mkspecs/features/configure.prf
-diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
-index 04cefad..79f830d 100644
---- a/recipes-qt/qt5/qtwebkit_git.bb
-+++ b/recipes-qt/qt5/qtwebkit_git.bb
-@@ -35,7 +35,7 @@ PACKAGECONFIG[qtwebchannel] = "OE_QTWEBCHANNEL_ENABLED,,qtwebchannel"
- PACKAGECONFIG[libwebp] = "OE_LIBWEBP_ENABLED,,libwebp"
- 
- do_configure_prepend() {
--    export QMAKE_CACHE_EVAL="CONFIG+=${EXTRA_OECONF}"
-+    export QMAKE_CACHE_EVAL="CONFIG+=${EXTRA_CONF_PACKAGECONFIG}"
-     # disable gstreamer-1.0 test if it isn't enabled by PACKAGECONFIG
-     sed -e 's/\s\(packagesExist(".*\<gstreamer-1.0\>.*")\)/ OE_GSTREAMER_ENABLED:\1/' -i ${S}/Tools/qmake/mkspecs/features/features.prf
-     # disable gstreamer-0.10 test if it isn't enabled by PACKAGECONFIG
+     # everything except HostData and HostBinaries is prefixed with sysroot value,
+     # but we cannot remove sysroot override, because that's useful for pkg-config etc
 -- 
 2.7.2
 
