@@ -1,48 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id CFF9977071
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B129731C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Mar 2016 16:19:21 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id l68so87582183wml.0
+	Wed,  2 Mar 2016 18:05:51 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id l68so97871830wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Mar 2016 08:19:22 -0800 (PST)
+	Wed, 02 Mar 2016 10:05:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=mbTRsyWtebKiJzlbVdWmja2UOf+JE4tIeikqBgh0VZo=;
-	b=MKNKwETS736CUsB3HWEzHzvMsNaTzn9x3/hSZOwVSdQ6zM+FUQjLY9UApkwfADWUGr
-	7BYQ8LA34w9NKYNRK8qXICW3MM1QqQT8WFDAtgyZUCCC9QGGaiAY+U5Q+P7vPpyotWcs
-	3N/QmxQ+Xmg/AFCKizWIvgntXZcDZWiYwSjpUzjzeg9YNa0qnahdhfOSm1+beFp6jJHx
-	45KnziLfSzoVUSjwNb0q4Bpx262hcxGdj3w3/P2EqmJ1BGwyNOl9DiXAy4rx85WIsEm/
-	XTObKwtviM7HR0gsPYFfFOscWU5Tl6XqyMeczrFTmFKB3QYGYXcbHoHv3ccW1eXCd9rQ
-	gZfA==
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=Ag1G/SfWcCisqfXcI9hpTPYvSAoHPxOHQq1w8OasQw4=;
+	b=cCgxvBraFX7Kx1E1VKZxxbL8S03spQUoA6EoX39eOYKdTKVv5XbDrkTZb2CxfD9LAF
+	2QEkX8hm8u7IxiJ0bZQSkjyVvaG+EUacAEUENbT3VkB98wbW2AbII3WAtBbgCQb4LomF
+	iR37fjzmbk8qufbeHjdK1pIhfaam9s3az/hFOExOBqNd4bI1HSKzoDAOpIgp/O6DtCBJ
+	/gOFZnZnc0FB9KDfaCfUR0yHln2OEJ6yxyCndcchRiWOxNSVNBvS2cFqP0whUYM9sPOh
+	bQs2tIalsbpVZs4L1dyJfrb3Nji2wcpT80Y8vCnbhq+P/7mPh87XNOkcBqp1U5WfOwto
+	jg2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=mbTRsyWtebKiJzlbVdWmja2UOf+JE4tIeikqBgh0VZo=;
-	b=NOKZ+ZVf3fZ1Imi7XlSjvUdYOtE4LFywIZLiowQpvWdWZSnzKF2mR74d33o8rshDlO
-	JWQSk+Ok9FHLhYAdZFfZ6YrUS5XVw0IrDUA/RwKtj5tvgf+nXHD8EusQ2O9el4EPKSxj
-	XaWQQVRcOEFmZJAsf105SkA9MCMcQofwg1PbI9rJ3OHIFfvqNNAnyjILdQgm/DYHZG8P
-	xLM4nTZ8wnyz5BeCTYuPd1r0FJYZoK1TUUPz+znevP2EH2UFbTlboqWcVyaU5yeMVgsH
-	60c+pxvmOne8Pm0Os2BYNinhljnI0yKurxDumAukSpm8nAPJmBNkywE9TKqIJn808EmK
-	pTpQ==
-X-Gm-Message-State: AD7BkJIHSaH1YIp1d+NIoVn7hp3obsh94QYrRNNs7FFkupfFlo+KG24N49fzC2Qg+pPNMg==
-X-Received: by 10.28.91.142 with SMTP id p136mr794175wmb.76.1456935562434;
-	Wed, 02 Mar 2016 08:19:22 -0800 (PST)
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=Ag1G/SfWcCisqfXcI9hpTPYvSAoHPxOHQq1w8OasQw4=;
+	b=LrcjOFNYhV4DzzsAqcgauEmWSQLPO/YpFPIKhKIK4sEByZI4ZBoGBDkGf0MsUn9Abg
+	iSgKVfT5SQDxlPj7ECjyoIpLGDSvvMOYrlED2BBoH0QbAl0wbBPqOwxnzUPyXwMwOUdD
+	krq79CD0ZHH1n4FFOqg1bDdspRsh6dUxR8fApXZnUYOS+RKtXpy8v6La5+dXGKeZZ1Rl
+	kCSFkVbekLVkRkzxP6Ojp+cdjjlxlX6aCggZ1eQlWz0Kgdx4sBWDZKQFbAWSO7dUK9tJ
+	+RtahtLkF5lGhuzpdXqW/Y+8yEIigECXZnV1GhB6eFa44Qwe+/dk1dFlDIU4NBm586fw
+	4hKQ==
+X-Gm-Message-State: AD7BkJLG08Q084WkKXa+JsS/TIAPvgnK0wB0oqCJTqkA3R9bpkqnm/XKmJFnVy/4GWiFGg==
+X-Received: by 10.194.200.194 with SMTP id ju2mr19314426wjc.63.1456941951634; 
+	Wed, 02 Mar 2016 10:05:51 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	bg1sm36622730wjc.27.2016.03.02.08.19.21
+	js8sm37096241wjc.37.2016.03.02.10.05.50
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 02 Mar 2016 08:19:21 -0800 (PST)
+	Wed, 02 Mar 2016 10:05:50 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Mar 2016 17:21:12 +0100
-Message-Id: <1456935672-15538-5-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.2
-In-Reply-To: <1456935672-15538-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1456935672-15538-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-oe 5/5] webkit-efl: blacklist, webkit-efl is old and unmaintained fork with security issues
+Date: Wed, 2 Mar 2016 19:07:49 +0100
+To: Gerson Fernando Budke <nandojve@gmail.com>
+Message-ID: <20160302180749.GE10529@jama>
+References: <CABOv41MguBOF24ZvCpDWSxAL8jd0GVbKBC4ZoMWNObLCXDzHHw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CABOv41MguBOF24ZvCpDWSxAL8jd0GVbKBC4ZoMWNObLCXDzHHw@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: quagga permission issue detected
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,41 +58,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Mar 2016 16:19:22 -0000
+X-List-Received-Date: Wed, 02 Mar 2016 18:05:53 -0000
+X-Groupsio-MsgNum: 60300
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="VUDLurXRWRKrGuMn"
+Content-Disposition: inline
 
-* now it also fails to build again with;
-  webkit-efl/1_1.11.0-r0/ewebkit/Source/JavaScriptCore/profiler/ProfileNode.cpp:126:41: error: 'isnan' was not declared in this scope
-  adding cmath include could be enough, but this was last drop
-  of my patience
+--VUDLurXRWRKrGuMn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/e17/elbow_git.bb      | 2 ++
- meta-efl/recipes-efl/webkit/webkit-efl.inc | 3 +++
- 2 files changed, 5 insertions(+)
+On Wed, Mar 02, 2016 at 01:53:37PM -0300, Gerson Fernando Budke wrote:
+> Hello Martin and Joe,
 
-diff --git a/meta-efl/recipes-efl/e17/elbow_git.bb b/meta-efl/recipes-efl/e17/elbow_git.bb
-index 064b794..06ed2c9 100644
---- a/meta-efl/recipes-efl/e17/elbow_git.bb
-+++ b/meta-efl/recipes-efl/e17/elbow_git.bb
-@@ -22,3 +22,5 @@ SRC_URI = " \
- S = "${WORKDIR}/git"
- 
- FILES_${PN} += "${datadir}/themes"
-+
-+PNBLACKLIST[elbow] ?= "Depends on blacklisted webkit-efl"
-diff --git a/meta-efl/recipes-efl/webkit/webkit-efl.inc b/meta-efl/recipes-efl/webkit/webkit-efl.inc
-index aa91572..c6ef976 100644
---- a/meta-efl/recipes-efl/webkit/webkit-efl.inc
-+++ b/meta-efl/recipes-efl/webkit/webkit-efl.inc
-@@ -64,3 +64,6 @@ FILES_${PN}-dev += "${libdir}/cmake"
- FILES_${PN}launcher = "${bindir}/EWebLauncher"
- FILES_${PN}launcher-dbg = "${bindir}/.debug/EWebLauncher"
- FILES_${PN}-inspector += "${datadir}/ewebkit2-1/inspector"
-+
-+# http://errors.yoctoproject.org/Errors/Details/40659/
-+PNBLACKLIST[webkit-efl] ?= "Old and unmaintaned fork with many security issues"
--- 
-2.7.2
+Hello Gerson,
 
+I have no experience with quagga, you have higher chance to connect
+with people actually using quagga on target machines if you send an
+e-mail to oe-devel ML.
 
+Did you check that the files are owned by quagga user? E.g. if you
+forget to use --numeric-owner parameter when untaring the image, you
+can get wrong UIDs and that could result in errors like this.
+
+Regards,
+
+> I have work with yocto to build quagga and everything is fine but when
+> system boot up I receive the messages below:
+>=20
+> Starting Quagga daemons: zebravty_read_config: failed to open configurati=
+on
+> file /etc/quagga/zebra.conf: Permission denied
+> can't open configuration file [/etc/quagga/zebra.conf]
+>  bgpdvty_read_config: failed to open configuration file
+> /etc/quagga/bgpd.conf: Permission denied
+> can't open configuration file [/etc/quagga/bgpd.conf]
+>  ripdvty_read_config: failed to open configuration file
+> /etc/quagga/ripd.conf: Permission denied
+> can't open configuration file [/etc/quagga/ripd.conf]
+>  ripngdvty_read_config: failed to open configuration file
+> /etc/quagga/ripngd.conf: Permission denied
+> can't open configuration file [/etc/quagga/ripngd.conf]
+>  ospfdvty_read_config: failed to open configuration file
+> /etc/quagga/ospfd.conf: Permission denied
+> can't open configuration file [/etc/quagga/ospfd.conf]
+>  ospf6dvty_read_config: failed to open configuration file
+> /etc/quagga/ospf6d.conf: Permission denied
+> can't open configuration file [/etc/quagga/ospf6d.conf]
+>  isisdvty_read_config: failed to open configuration file
+> /etc/quagga/isisd.conf: Permission denied
+> can't open configuration file [/etc/quagga/isisd.conf]
+>  babeld.
+> vty_read_config: failed to open configuration file /etc/quagga/babeld.con=
+f:
+> Permission denied
+> can't open configuration file [/etc/quagga/babeld.conf]
+>=20
+> I detect this problem with powerpc kernel 3.12 and cortex-a9 kernel 3.4,
+> both embedded system.
+> This affect quagga version 0.99.23/0.99.24 and I don't compile quagga with
+> any older version.
+>=20
+> I realize that when I put this configuration in /etc/default/quagga file
+> the system work:
+>=20
+> zebra_options=3D" --daemon -A 127.0.0.1 -u root"
+> babeld_options=3D"--daemon -A 127.0.0.1 -u root"
+> bgpd_options=3D"  --daemon -A 127.0.0.1 -u root"
+> ospfd_options=3D" --daemon -A 127.0.0.1 -u root"
+> ospf6d_options=3D"--daemon -A ::1 -u root"
+> ripd_options=3D"  --daemon -A 127.0.0.1 -u root"
+> ripngd_options=3D"--daemon -A ::1 -u root"
+> isisd_options=3D" --daemon -A 127.0.0.1 -u root"
+>=20
+> So, is this a yocto misconfiguration or quagga configuration?
+>=20
+> Best Regards,
+> Gerson
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--VUDLurXRWRKrGuMn
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlbXK/QACgkQN1Ujt2V2gBx+KwCgh7fymnXl8KW+BFHsH9usMhSZ
+rhQAoLNRk7lI0SaZ10ZfOgd/TQw99D8a
+=OUaW
+-----END PGP SIGNATURE-----
+
+--VUDLurXRWRKrGuMn--
