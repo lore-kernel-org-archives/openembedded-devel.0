@@ -1,51 +1,52 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 1504F731DB
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 517C5770E0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Mar 2016 19:22:18 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id l68so363204wml.3
+	Wed,  2 Mar 2016 19:23:15 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id p65so3327177wmp.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Mar 2016 11:22:20 -0800 (PST)
+	Wed, 02 Mar 2016 11:23:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=cbCO02+CreA5OfGFPHB01XrnY6mwrfEC68uCwJyUAIQ=;
-	b=Yr1NZHSHH2ov29Lv8lYi5SjfGP2FTNO5BTQ0zSq8huMy7RTMPPk8HFnJCVX8WsInys
-	Y3yqVtKPohcDFIAdJ8zurnGgPp+XwfifN0a0YGWtPbbobFUFqjpSN/SYlJW/wpqV0HXZ
-	gnztFrU1stt7X1Ely41GiuMSGjrl+QHfr+etIU035O5Qcrtz/afhXK4P4i0Oi6gzqdjC
-	MiJYUJfzWcbIim3qoenDNqQgrrTWy/1FwHYuR0KAfjX/n81+iSwK67qnW2U2tqw8L5ng
-	/Ga1fsR510efnNawfXPBslhxtANKEmobYdxmMCCc4vTo9t0tnKXT4jhf6ZOB9a9OgBW5
-	fQJQ==
+	bh=QLtuUleRKVxAgBuzgOAhibz9j9+qvFCxjF/rPZzQAAU=;
+	b=yKQWo7RJlJavi1emAm5Vq0NGa7HXFYGd0B1l5cWqxJfcwT/q6/xbVKtWK61V3ss306
+	nkrXXnfHtYXNXLBdSNEPInXz6uQ+TwGxryNEf1aBPp6DM+CiJxV8pFBQFu9JFbatsFoc
+	aFgDz16hsx3VePx8GBKdLg+z9ri/292VspBhbpsUT+wk8ZLNqN/ohBaU6bgRxs+LoWvE
+	4yhYKvaqwxhBMZ0Ec21uAwwCDcbve1lcGjm6RUoayStjuUxyuGMRayr7ac+XkRO2mshz
+	c9Cydw+SkmM6eFkAglkqK4HL6g0sG8ob+bhlOiOJuUPsOt4WKEb9OKf/7hoRandw7sRN
+	ZlKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=cbCO02+CreA5OfGFPHB01XrnY6mwrfEC68uCwJyUAIQ=;
-	b=BDzxKmmZ2wEdmctRbUDPoaWeftEMbMX/Cs1nJ09OwqTv5VvDzdQMj4BGBLd781qPVJ
-	knjDOv4DNqWSzlGgN8V+SN4nKaXAuCmNIYJ0D8+v+Isw5FcxvQyfYAWP/dVrfenb/y9V
-	Xk0Z1KtaSsywUJRaMDlfsk6FFAZpTYM/msGkC/TLhbPoM4WkiaKQeWO12ki6jeisBP/d
-	X3TRbIyYX4/RsG7K4WlfQd57rhEwQUUsshNADZxFENVdD8VsvhWZ2AGIlryvMOg80sA+
-	D0ZXhAZgnDlZAsRqjwxCdO0CRj/grxhsWm9jPRzfhMkjUwRZ1sSusl5nzcrwwa9OdS6o
-	22GQ==
-X-Gm-Message-State: AD7BkJJ9Z25X/9SHipoEXcIXWdIrkuumcHBXn6GnHFIkw+KJjMUoxojwk2zTg+R6nYhV3A==
-X-Received: by 10.194.22.35 with SMTP id a3mr28112560wjf.165.1456946539023;
-	Wed, 02 Mar 2016 11:22:19 -0800 (PST)
+	bh=QLtuUleRKVxAgBuzgOAhibz9j9+qvFCxjF/rPZzQAAU=;
+	b=Il9wz+JUZEJHCKb74qiYg2G+US106oo8mry1+i2tFyakIOvF6T/VuE57fc3XP2p0Fb
+	EKkMZtK5RnkXqquw9GAQKIXZf7mXS3+GTc8/HYcJAtviEP7460l2QFsNfdClQN8K75Ak
+	UOz34TP2kxe66H24KUOtvZsU2qcV/cWKy8RWHFeg+4fFW0bdcbYXXp8veGGVKh9chCxH
+	M7/1l0o93cAK5HRDVk1nQUP2ITFH3bXrJ0BbeLDjZPlW5w3J3WpCSye16cdbDX7Kjao9
+	5fg6uU0xwTnG35u1N8mKs2qoTKcToO34QfJ8ZdagpRSsKHV+ppFiRkYhRlIEdXC66EFc
+	2gLg==
+X-Gm-Message-State: AD7BkJKCEjNVWt1LF8i8eRyrJcB0R6vCqMNvM9PlJKDPPL5JZ5qHyk6rMqIJE84Ycvg9ZA==
+X-Received: by 10.28.174.72 with SMTP id x69mr1596838wme.68.1456946596514;
+	Wed, 02 Mar 2016 11:23:16 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	et11sm37217392wjc.30.2016.03.02.11.22.16
+	v68sm5525196wmv.10.2016.03.02.11.23.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 02 Mar 2016 11:22:17 -0800 (PST)
+	Wed, 02 Mar 2016 11:23:15 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 2 Mar 2016 20:24:16 +0100
+Date: Wed, 2 Mar 2016 20:25:15 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160302192416.GF10529@jama>
-References: <1455108862-2507-1-git-send-email-funman@videolan.org>
+Message-ID: <20160302192515.GG10529@jama>
+References: <1456935672-15538-1-git-send-email-Martin.Jansa@gmail.com>
+	<1456935672-15538-2-git-send-email-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1455108862-2507-1-git-send-email-funman@videolan.org>
+In-Reply-To: <1456935672-15538-2-git-send-email-Martin.Jansa@gmail.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-multimedia][PATCH 1/2] vlc: make x11 DISTRO_FEATURE optional (enabled by default)
+Subject: Re: [PATCH][meta-oe 2/5] vlc: blacklist, not compatible with currently used ffmpeg 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,62 +59,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Mar 2016 19:22:22 -0000
-X-Groupsio-MsgNum: 60301
+X-List-Received-Date: Wed, 02 Mar 2016 19:23:18 -0000
+X-Groupsio-MsgNum: 60302
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="5Mfx4RzfBqgnTE/w"
+	protocol="application/pgp-signature"; boundary="Z0mFw3+mXTC5ycVe"
 Content-Disposition: inline
 
---5Mfx4RzfBqgnTE/w
-Content-Type: text/plain; charset=iso-8859-1
+--Z0mFw3+mXTC5ycVe
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 10, 2016 at 01:54:21PM +0100, Rafa=EBl Carr=E9 wrote:
+On Wed, Mar 02, 2016 at 05:21:09PM +0100, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 > ---
->  meta-multimedia/recipes-multimedia/vlc/vlc.inc | 9 ++++-----
->  1 file changed, 4 insertions(+), 5 deletions(-)
+>  meta-multimedia/recipes-multimedia/vlc/vlc.inc | 3 +++
+>  1 file changed, 3 insertions(+)
 >=20
 > diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multim=
 edia/recipes-multimedia/vlc/vlc.inc
-> index 46dbd5d..2887a68 100644
+> index 3267dad..32f3ad0 100644
 > --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
 > +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-> @@ -7,17 +7,15 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5=
-fce4486a80fdaf4a4263"
-> =20
->  DEPENDS =3D "libfribidi libtool libgcrypt libgcrypt-native \
->     virtual/libsdl libsdl-image dbus dbus-glib libxml2 gnutls \
-> -   tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
-> +   tremor faad2 ffmpeg flac fluidsynth alsa-lib \
->     lua-native lua libidn \
->     avahi jpeg xz libmodplug mpeg2dec \
->     libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
-> -   tiff xcb-util-keysyms"
-> +   tiff"
-> =20
->  SRC_URI =3D "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP=
-}.tar.xz"
-> =20
->  inherit autotools gettext pkgconfig distro_features_check
-> -# depends on libxinerama libxpm xcb-util-keysyms
-> -REQUIRED_DISTRO_FEATURES =3D "x11"
-> =20
->  ARM_INSTRUCTION_SET =3D "arm"
-> =20
-> @@ -41,7 +39,7 @@ EXTRA_OECONF =3D "\
->      ac_cv_path_UIC=3D${STAGING_BINDIR_NATIVE}/uic4 \
+> @@ -104,3 +104,6 @@ FILES_${PN}-dbg +=3D "\
+>  FILES_${PN}-staticdev +=3D "\
+>      ${libdir}/vlc/plugins/*/*.a \
 >  "
-> =20
-> -PACKAGECONFIG ?=3D " live555 dc1394 dv1394 notify fontconfig freetype dv=
-dread"
-> +PACKAGECONFIG ?=3D " live555 dc1394 dv1394 notify fontconfig freetype dv=
-dread {@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
+> +
+> +# http://errors.yoctoproject.org/Errors/Details/40690/
+> +PNBLACKLIST[vlc] ?=3D "Not compatible with currently used ffmpeg 3"
+
+If anyone is going to work on unblacklisting this then please fix
+missing $ in PACKAGECONFIG (if I don't forget I'll include this fix in
+the same commit as PNBLACKLISt)
 
 Missing $ before {@ causes few QA errors:
 
-vlc-2.2.1: vlc: invalid PACKAGECONFIG: {@bb.utils.contains('DISTRO_FEATURES=
-', [invalid-packageconfig]
+vlc-2.2.1: vlc: invalid PACKAGECONFIG:
+{@bb.utils.contains('DISTRO_FEATURES', [invalid-packageconfig]
 vlc-2.2.1: vlc: invalid PACKAGECONFIG: 'x11', [invalid-packageconfig]
 vlc-2.2.1: vlc: invalid PACKAGECONFIG: 'x11 [invalid-packageconfig]
 vlc-2.2.1: vlc: invalid PACKAGECONFIG: sdl', [invalid-packageconfig]
@@ -122,43 +105,19 @@ vlc-2.2.1: vlc: invalid PACKAGECONFIG: d)} [invalid-packageconfig]
 
 Interesting that nobody noticed.
 
->  PACKAGECONFIG[mad] =3D "--enable-mad,--disable-mad,libmad"
->  PACKAGECONFIG[a52] =3D "--enable-a52,--disable-a52,liba52"
->  PACKAGECONFIG[jack] =3D "--enable-jack,--disable-jack,jack"
-> @@ -73,6 +71,7 @@ PACKAGECONFIG[fontconfig] =3D "--enable-fontconfig,--di=
-sable-fontconfig, fontconfi
->  PACKAGECONFIG[freetype] =3D "--enable-freetype,--disable-freetype, freet=
-ype"
->  PACKAGECONFIG[dvdread] =3D "--enable-dvdread,--disable-dvdread, libdvdre=
-ad libdvdcss"
->  PACKAGECONFIG[vnc] =3D "--enable-vnc,--disable-vnc, libvncserver"
-> +PACKAGECONFIG[x11] =3D "--with-x --enable-xcb,--without-x --disable-xcb,=
-  xcb-util-keysyms libxpm libxinerama"
-> =20
->  do_configure_prepend() {
->      cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
-> --=20
-> 2.5.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---5Mfx4RzfBqgnTE/w
+--Z0mFw3+mXTC5ycVe
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlbXPd8ACgkQN1Ujt2V2gBxPNQCeKd9Fs96FKJ8ZTqy/cW1nKNQi
-vkIAnRx2RLY3mVgt2xRjbqbNky73ioZf
-=VNqd
+iEYEARECAAYFAlbXPhoACgkQN1Ujt2V2gBxgsQCfaLuLBpadCMLKRKyWujUSOxZY
+ehQAn1y2eHwELKPDqNy8IpsrNNvWkNZh
+=J5WT
 -----END PGP SIGNATURE-----
 
---5Mfx4RzfBqgnTE/w--
+--Z0mFw3+mXTC5ycVe--
