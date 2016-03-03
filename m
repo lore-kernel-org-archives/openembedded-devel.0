@@ -1,50 +1,50 @@
 Return-Path: <rafael.carre@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F1E2770E3
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 8FC41770E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Mar 2016 15:50:43 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id n186so137805298wmn.1
+	Thu,  3 Mar 2016 15:50:44 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id l68so137365293wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Mar 2016 07:50:44 -0800 (PST)
+	Thu, 03 Mar 2016 07:50:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=YzmQbluf1kMweFm9t8B2to9LzP3ipG9P3ruZ1+XimiA=;
-	b=o6UNFYsRQXekQhfaGPllwJpyvhHdY8bxQnQAygsMPFZ8LruptnppCJ1p6U9NNhXzTC
-	yQuPGGlG9/rpVsog5rh4pdurcDvn7Ejs1lA5cpsTdU6mm6bvhCb/PhaYSk6EV6HqWqgN
-	6Iy9mc/LiKV9MxI14YnOzgCiHKwKelT2deRdea3cNJ05hqgW22lxoDpG0Mj0erGUE130
-	6gKA/k2FGvzM/KuuilQJSssjnR7kWcU1HJA3sXsR03eZnjmD1FO/gBp4quGYplrAl/wD
-	SLX7BsfnrzweNS63PBLCDG88n4Bg2M/RF57dBHU7pHix+AuZBjunBvcN5nCne6nLPqzX
-	RKIg==
+	bh=C8RfgBNFb/r2IWna6KS0lSZHo25g9GnELfcgz3xg5ME=;
+	b=xwhab/X6/OhTUN//zH7YO125CXWAdbbp4Mez0m1hM9tX7MUyaGvZKNgCnwZrif8h0f
+	w1IxJ+eWUrWO5uzuCsHGbbM3JUSSuA6sW4yxnOGBTXO9nnq7SQmvN/fFq3YTgYc/nSG8
+	hmQmtxYYYSiJzXNO+vuxgCrTQtPVzTt4rAwOvTXxoBiHFgMwRfUVBPc6+hMbOI3PCgSs
+	AZJAU2V7+rsD7jLvKxF5GYsDm43nFwfrKWiJgSmSEyG0ZNVDSJv8xuMx4hJ9Wv3rylfC
+	Zoq22vAF8zZYR8I8sX8lu7CUznATZhlLkpE08jSdqPY8TTBcB5w9HFBtKx9CKLgXOT0s
+	XGCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=YzmQbluf1kMweFm9t8B2to9LzP3ipG9P3ruZ1+XimiA=;
-	b=jchuAhZ88vo3R1oG9pXDlsk4JlpDvgpPjGLSCEFIq5zxtSj1t9FxfuCJaNYL0wVy0c
-	g6Wu6j8DcUMLHsP6HiMiUCB3m+zbuHZqulCySFHDE30dl9X+86UOrzKBmSKPwIbXciZG
-	Bu4CnLxE7COgm40cVpOwlGQevqaibSUY3UiFdiFBtcRZ/K/BYvBAAFpPxwLs7DFO9QhV
-	/b7R398bNi7/sjg2FHVnCJTVOgl+Xwd2aDYqQtFmEM0SMMTp97/GC3ZVKXkCiDJu8J2b
-	BxbK3O503yOLYjdnvjJ7iIcWVMLpOH7l35Fk/P4LHg4QBL3VQ50l4gzacgzofZ1fiun/
-	mzPQ==
-X-Gm-Message-State: AD7BkJLWKgVX9Te5zPvM143+uszTOSa70JQdlS59czz66q5Ufpxa9bqihMQ5QLa2gewOIg==
-X-Received: by 10.28.146.202 with SMTP id u193mr6800119wmd.82.1457020243514;
-	Thu, 03 Mar 2016 07:50:43 -0800 (PST)
+	bh=C8RfgBNFb/r2IWna6KS0lSZHo25g9GnELfcgz3xg5ME=;
+	b=QPEJjaGFnTQN/YcKJ+VkO1Uk918G628vH9kWhxul+SuVCMdaUyGgmPiQldlbrKAcsD
+	nAeiuGxCAk3VJBj930l8oUmM31xMKXmpBwEXGR15SfvSigwpWh+ROjGBehmncq1wZs3C
+	/iTRyf8hXFgae9EFst0UP+lq5HMKmR1n3KvOc9/RXDwWDxNuRpyq5Ty0MJaTZVjkw1MU
+	1ovlJ45jUx5lQOmVhSXz9+CrJhZ7Nyq22Gdv2BBS5EXIZ0SS+3hWh+bX5+aHvQLV7Mzq
+	t5gdSafCTUYSSzPa1q+FgXgdvRQKv2AWN9SU6V/HxNUUpevdwKovwZjUkR0XFJyVDEt+
+	UhdA==
+X-Gm-Message-State: AD7BkJIWw8nGZQLxpXePBHNEsy6Zj4ourCTcPBtufQsYp49fpR74CArsOdThMnTLvhhT/g==
+X-Received: by 10.28.20.145 with SMTP id 139mr6754771wmu.76.1457020244786;
+	Thu, 03 Mar 2016 07:50:44 -0800 (PST)
 Received: from localhost.localdomain ([81.56.255.191])
-	by smtp.gmail.com with ESMTPSA id z65sm3388184wmg.1.2016.03.03.07.50.41
+	by smtp.gmail.com with ESMTPSA id z65sm3388184wmg.1.2016.03.03.07.50.43
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 03 Mar 2016 07:50:42 -0800 (PST)
+	Thu, 03 Mar 2016 07:50:44 -0800 (PST)
 Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
 From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Mar 2016 16:50:30 +0100
-Message-Id: <1457020231-24024-3-git-send-email-funman@videolan.org>
+Date: Thu,  3 Mar 2016 16:50:31 +0100
+Message-Id: <1457020231-24024-4-git-send-email-funman@videolan.org>
 X-Mailer: git-send-email 2.5.0
 In-Reply-To: <1457020231-24024-1-git-send-email-funman@videolan.org>
 References: <20160302192515.GG10529@jama>
 	<1457020231-24024-1-git-send-email-funman@videolan.org>
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCHv2 3/4] vlc: fix build with ffmpeg 3.0
+Subject: [meta-multimedia][PATCHv2 4/4] vlc: add libpng PACKAGECONFIG (on by default)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,382 +57,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2016 15:50:43 -0000
+X-List-Received-Date: Thu, 03 Mar 2016 15:50:45 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+WARNING: vlc-2.2.2-r0 do_package_qa: QA Issue: vlc rdepends on libpng, but it isn't a build dependency, missing libpng in DEPENDS or PACKAGECONFIG? [build-deps]
 Signed-off-by: Rafaël Carré <funman@videolan.org>
 ---
- ...codec-swscale-use-AV_PIX_FMT-consistently.patch | 293 +++++++++++++++++++++
- .../0010-SWSCALE-fix-compilation-with-4.x.patch    |  45 ++++
- .../recipes-multimedia/vlc/vlc_2.2.2.bb            |   2 +
- 3 files changed, 340 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0009-Avcodec-swscale-use-AV_PIX_FMT-consistently.patch
- create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0010-SWSCALE-fix-compilation-with-4.x.patch
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0009-Avcodec-swscale-use-AV_PIX_FMT-consistently.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0009-Avcodec-swscale-use-AV_PIX_FMT-consistently.patch
-new file mode 100644
-index 0000000..cb3ba71
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0009-Avcodec-swscale-use-AV_PIX_FMT-consistently.patch
-@@ -0,0 +1,293 @@
-+From 427732a379893491eac27aeadff0e0b3e252d158 Mon Sep 17 00:00:00 2001
-+From: Jean-Baptiste Kempf <jb@videolan.org>
-+Date: Mon, 31 Aug 2015 08:19:00 +0200
-+Subject: [PATCH] Avcodec/swscale: use AV_PIX_FMT consistently
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+(cherry picked from commit faa7bd357b1f9e07a6ffbc451a188773fad7a275)
-+Signed-off-by: Rafaël Carré <funman@videolan.org>
-+
-+Conflicts:
-+	modules/codec/avcodec/chroma.c
-+	modules/codec/avcodec/video.c
-+---
-+ modules/codec/avcodec/chroma.c | 104 ++++++++++++++++++++---------------------
-+ modules/codec/avcodec/video.c  |  10 ++--
-+ modules/video_chroma/swscale.c |  28 +++++------
-+ 3 files changed, 71 insertions(+), 71 deletions(-)
-+
-+diff --git a/modules/codec/avcodec/chroma.c b/modules/codec/avcodec/chroma.c
-+index 393364b..c31f93d 100644
-+--- a/modules/codec/avcodec/chroma.c
-++++ b/modules/codec/avcodec/chroma.c
-+@@ -62,77 +62,77 @@ static const struct
-+ } chroma_table[] =
-+ {
-+     /* Planar YUV formats */
-+-    {VLC_CODEC_I444, PIX_FMT_YUV444P, 0, 0, 0 },
-+-    {VLC_CODEC_J444, PIX_FMT_YUVJ444P, 0, 0, 0 },
-+-
-+-    {VLC_CODEC_I440, PIX_FMT_YUV440P, 0, 0, 0 },
-+-    {VLC_CODEC_J440, PIX_FMT_YUVJ440P, 0, 0, 0 },
-+-
-+-    {VLC_CODEC_I422, PIX_FMT_YUV422P, 0, 0, 0 },
-+-    {VLC_CODEC_J422, PIX_FMT_YUVJ422P, 0, 0, 0 },
-+-
-+-    {VLC_CODEC_I420, PIX_FMT_YUV420P, 0, 0, 0 },
-+-    {VLC_CODEC_YV12, PIX_FMT_YUV420P, 0, 0, 0 },
-+-    {VLC_FOURCC('I','Y','U','V'), PIX_FMT_YUV420P, 0, 0, 0 },
-+-    {VLC_CODEC_J420, PIX_FMT_YUVJ420P, 0, 0, 0 },
-+-    {VLC_CODEC_I411, PIX_FMT_YUV411P, 0, 0, 0 },
-+-    {VLC_CODEC_I410, PIX_FMT_YUV410P, 0, 0, 0 },
-+-    {VLC_FOURCC('Y','V','U','9'), PIX_FMT_YUV410P, 0, 0, 0 },
-+-
-+-    {VLC_FOURCC('N','V','1','2'), PIX_FMT_NV12, 0, 0, 0 },
-+-    {VLC_FOURCC('N','V','2','1'), PIX_FMT_NV21, 0, 0, 0 },
-+-
-+-    {VLC_CODEC_I420_9L, PIX_FMT_YUV420P9LE, 0, 0, 0 },
-+-    {VLC_CODEC_I420_9B, PIX_FMT_YUV420P9BE, 0, 0, 0 },
-+-    {VLC_CODEC_I420_10L, PIX_FMT_YUV420P10LE, 0, 0, 0 },
-+-    {VLC_CODEC_I420_10B, PIX_FMT_YUV420P10BE, 0, 0, 0 },
-++    {VLC_CODEC_I444, AV_PIX_FMT_YUV444P, 0, 0, 0 },
-++    {VLC_CODEC_J444, AV_PIX_FMT_YUVJ444P, 0, 0, 0 },
-++
-++    {VLC_CODEC_I440, AV_PIX_FMT_YUV440P, 0, 0, 0 },
-++    {VLC_CODEC_J440, AV_PIX_FMT_YUVJ440P, 0, 0, 0 },
-++
-++    {VLC_CODEC_I422, AV_PIX_FMT_YUV422P, 0, 0, 0 },
-++    {VLC_CODEC_J422, AV_PIX_FMT_YUVJ422P, 0, 0, 0 },
-++
-++    {VLC_CODEC_I420, AV_PIX_FMT_YUV420P, 0, 0, 0 },
-++    {VLC_CODEC_YV12, AV_PIX_FMT_YUV420P, 0, 0, 0 },
-++    {VLC_FOURCC('I','Y','U','V'), AV_PIX_FMT_YUV420P, 0, 0, 0 },
-++    {VLC_CODEC_J420, AV_PIX_FMT_YUVJ420P, 0, 0, 0 },
-++    {VLC_CODEC_I411, AV_PIX_FMT_YUV411P, 0, 0, 0 },
-++    {VLC_CODEC_I410, AV_PIX_FMT_YUV410P, 0, 0, 0 },
-++    {VLC_FOURCC('Y','V','U','9'), AV_PIX_FMT_YUV410P, 0, 0, 0 },
-++
-++    {VLC_FOURCC('N','V','1','2'), AV_PIX_FMT_NV12, 0, 0, 0 },
-++    {VLC_FOURCC('N','V','2','1'), AV_PIX_FMT_NV21, 0, 0, 0 },
-++
-++    {VLC_CODEC_I420_9L, AV_PIX_FMT_YUV420P9LE, 0, 0, 0 },
-++    {VLC_CODEC_I420_9B, AV_PIX_FMT_YUV420P9BE, 0, 0, 0 },
-++    {VLC_CODEC_I420_10L, AV_PIX_FMT_YUV420P10LE, 0, 0, 0 },
-++    {VLC_CODEC_I420_10B, AV_PIX_FMT_YUV420P10BE, 0, 0, 0 },
-+ #if LIBAVUTIL_VERSION_INT >= AV_VERSION_INT(51,13,0)
-+-    {VLC_CODEC_I422_9L, PIX_FMT_YUV422P9LE, 0, 0, 0 },
-+-    {VLC_CODEC_I422_9B, PIX_FMT_YUV422P9BE, 0, 0, 0 },
-++    {VLC_CODEC_I422_9L, AV_PIX_FMT_YUV422P9LE, 0, 0, 0 },
-++    {VLC_CODEC_I422_9B, AV_PIX_FMT_YUV422P9BE, 0, 0, 0 },
-+ #endif
-+-    {VLC_CODEC_I422_10L, PIX_FMT_YUV422P10LE, 0, 0, 0 },
-+-    {VLC_CODEC_I422_10B, PIX_FMT_YUV422P10BE, 0, 0, 0 },
-++    {VLC_CODEC_I422_10L, AV_PIX_FMT_YUV422P10LE, 0, 0, 0 },
-++    {VLC_CODEC_I422_10B, AV_PIX_FMT_YUV422P10BE, 0, 0, 0 },
-+ 
-+-    {VLC_CODEC_YUV420A, PIX_FMT_YUVA420P, 0, 0, 0 },
-++    {VLC_CODEC_YUV420A, AV_PIX_FMT_YUVA420P, 0, 0, 0 },
-+ #if LIBAVUTIL_VERSION_CHECK( 51, 45, 0, 74, 100 )
-+     {VLC_CODEC_YUV422A, AV_PIX_FMT_YUVA422P, 0, 0, 0 },
-+ #endif
-+ 
-+-    {VLC_CODEC_I444_9L, PIX_FMT_YUV444P9LE, 0, 0, 0 },
-+-    {VLC_CODEC_I444_9B, PIX_FMT_YUV444P9BE, 0, 0, 0 },
-+-    {VLC_CODEC_I444_10L, PIX_FMT_YUV444P10LE, 0, 0, 0 },
-+-    {VLC_CODEC_I444_10B, PIX_FMT_YUV444P10BE, 0, 0, 0 },
-+-    {VLC_CODEC_I444_16L, PIX_FMT_YUV444P16LE, 0, 0, 0 },
-+-    {VLC_CODEC_I444_16B, PIX_FMT_YUV444P16BE, 0, 0, 0 },
-++    {VLC_CODEC_I444_9L, AV_PIX_FMT_YUV444P9LE, 0, 0, 0 },
-++    {VLC_CODEC_I444_9B, AV_PIX_FMT_YUV444P9BE, 0, 0, 0 },
-++    {VLC_CODEC_I444_10L, AV_PIX_FMT_YUV444P10LE, 0, 0, 0 },
-++    {VLC_CODEC_I444_10B, AV_PIX_FMT_YUV444P10BE, 0, 0, 0 },
-++    {VLC_CODEC_I444_16L, AV_PIX_FMT_YUV444P16LE, 0, 0, 0 },
-++    {VLC_CODEC_I444_16B, AV_PIX_FMT_YUV444P16BE, 0, 0, 0 },
-+ 
-+     /* Packed YUV formats */
-+-    {VLC_CODEC_YUYV, PIX_FMT_YUYV422, 0, 0, 0 },
-+-    {VLC_FOURCC('Y','U','Y','V'), PIX_FMT_YUYV422, 0, 0, 0 },
-+-    {VLC_CODEC_UYVY, PIX_FMT_UYVY422, 0, 0, 0 },
-+-    {VLC_FOURCC('Y','4','1','1'), PIX_FMT_UYYVYY411, 0, 0, 0 },
-++    {VLC_CODEC_YUYV, AV_PIX_FMT_YUYV422, 0, 0, 0 },
-++    {VLC_FOURCC('Y','U','Y','V'), AV_PIX_FMT_YUYV422, 0, 0, 0 },
-++    {VLC_CODEC_UYVY, AV_PIX_FMT_UYVY422, 0, 0, 0 },
-++    {VLC_FOURCC('Y','4','1','1'), AV_PIX_FMT_UYYVYY411, 0, 0, 0 },
-+ 
-+     /* Packed RGB formats */
-+-    VLC_RGB( VLC_FOURCC('R','G','B','4'), PIX_FMT_RGB4, PIX_FMT_BGR4, 0x10, 0x06, 0x01 )
-+-    VLC_RGB( VLC_FOURCC('R','G','B','8'), PIX_FMT_RGB8, PIX_FMT_BGR8, 0xC0, 0x38, 0x07 )
-++    VLC_RGB( VLC_FOURCC('R','G','B','4'), AV_PIX_FMT_RGB4, AV_PIX_FMT_BGR4, 0x10, 0x06, 0x01 )
-++    VLC_RGB( VLC_FOURCC('R','G','B','8'), AV_PIX_FMT_RGB8, AV_PIX_FMT_BGR8, 0xC0, 0x38, 0x07 )
-+ 
-+-    VLC_RGB( VLC_CODEC_RGB15, PIX_FMT_RGB555, PIX_FMT_BGR555, 0x7c00, 0x03e0, 0x001f )
-+-    VLC_RGB( VLC_CODEC_RGB16, PIX_FMT_RGB565, PIX_FMT_BGR565, 0xf800, 0x07e0, 0x001f )
-+-    VLC_RGB( VLC_CODEC_RGB24, PIX_FMT_BGR24, PIX_FMT_RGB24, 0xff0000, 0x00ff00, 0x0000ff )
-++    VLC_RGB( VLC_CODEC_RGB15, AV_PIX_FMT_RGB555, AV_PIX_FMT_BGR555, 0x7c00, 0x03e0, 0x001f )
-++    VLC_RGB( VLC_CODEC_RGB16, AV_PIX_FMT_RGB565, AV_PIX_FMT_BGR565, 0xf800, 0x07e0, 0x001f )
-++    VLC_RGB( VLC_CODEC_RGB24, AV_PIX_FMT_BGR24, AV_PIX_FMT_RGB24, 0xff0000, 0x00ff00, 0x0000ff )
-+ 
-+-    VLC_RGB( VLC_CODEC_RGB32, PIX_FMT_RGB32, PIX_FMT_BGR32, 0x00ff0000, 0x0000ff00, 0x000000ff )
-+-    VLC_RGB( VLC_CODEC_RGB32, PIX_FMT_RGB32_1, PIX_FMT_BGR32_1, 0xff000000, 0x00ff0000, 0x0000ff00 )
-++    VLC_RGB( VLC_CODEC_RGB32, AV_PIX_FMT_RGB32, AV_PIX_FMT_BGR32, 0x00ff0000, 0x0000ff00, 0x000000ff )
-++    VLC_RGB( VLC_CODEC_RGB32, AV_PIX_FMT_RGB32_1, AV_PIX_FMT_BGR32_1, 0xff000000, 0x00ff0000, 0x0000ff00 )
-+ 
-+ #ifdef AV_PIX_FMT_0BGR32
-+     VLC_RGB( VLC_CODEC_RGB32, AV_PIX_FMT_0BGR32, AV_PIX_FMT_0RGB32, 0x000000ff, 0x0000ff00, 0x00ff0000 )
-+ #endif
-+ 
-+-    {VLC_CODEC_RGBA, PIX_FMT_RGBA, 0, 0, 0 },
-+-    {VLC_CODEC_ARGB, PIX_FMT_ARGB, 0, 0, 0 },
-+-    {VLC_CODEC_BGRA, PIX_FMT_BGRA, 0, 0, 0 },
-+-    {VLC_CODEC_GREY, PIX_FMT_GRAY8, 0, 0, 0},
-++    {VLC_CODEC_RGBA, AV_PIX_FMT_RGBA, 0, 0, 0 },
-++    {VLC_CODEC_ARGB, AV_PIX_FMT_ARGB, 0, 0, 0 },
-++    {VLC_CODEC_BGRA, AV_PIX_FMT_BGRA, 0, 0, 0 },
-++    {VLC_CODEC_GREY, AV_PIX_FMT_GRAY8, 0, 0, 0},
-+ 
-+      /* Paletized RGB */
-+-    {VLC_CODEC_RGBP, PIX_FMT_PAL8, 0, 0, 0},
-++    {VLC_CODEC_RGBP, AV_PIX_FMT_PAL8, 0, 0, 0},
-+ 
-+ #if LIBAVUTIL_VERSION_CHECK(51, 42, 0, 74,100)
-+     {VLC_CODEC_GBR_PLANAR, AV_PIX_FMT_GBRP, 0, 0, 0 },
-+@@ -201,5 +201,5 @@ int FindFfmpegChroma( vlc_fourcc_t fourcc )
-+     for( int i = 0; chroma_table[i].i_chroma != 0; i++ )
-+         if( chroma_table[i].i_chroma == fourcc )
-+             return chroma_table[i].i_chroma_id;
-+-    return PIX_FMT_NONE;
-++    return AV_PIX_FMT_NONE;
-+ }
-+diff --git a/modules/codec/avcodec/video.c b/modules/codec/avcodec/video.c
-+index c115db9..ae600e8 100644
-+--- a/modules/codec/avcodec/video.c
-++++ b/modules/codec/avcodec/video.c
-+@@ -1004,7 +1004,7 @@ static picture_t *lavc_dr_GetFrame(struct AVCodecContext *ctx,
-+     if (GetVlcChroma(&dec->fmt_out.video, ctx->pix_fmt) != VLC_SUCCESS)
-+         return NULL;
-+     dec->fmt_out.i_codec = dec->fmt_out.video.i_chroma;
-+-    if (ctx->pix_fmt == PIX_FMT_PAL8)
-++    if (ctx->pix_fmt == AV_PIX_FMT_PAL8)
-+         return NULL;
-+ 
-+     int width = frame->width;
-+@@ -1180,7 +1180,7 @@ static picture_t *ffmpeg_dr_GetFrameBuf(struct AVCodecContext *p_context)
-+     if (GetVlcChroma(&p_dec->fmt_out.video, p_context->pix_fmt) != VLC_SUCCESS)
-+         goto no_dr;
-+ 
-+-    if (p_context->pix_fmt == PIX_FMT_PAL8)
-++    if (p_context->pix_fmt == AV_PIX_FMT_PAL8)
-+         goto no_dr;
-+ 
-+     p_dec->fmt_out.i_codec = p_dec->fmt_out.video.i_chroma;
-+@@ -1215,7 +1215,7 @@ static picture_t *ffmpeg_dr_GetFrameBuf(struct AVCodecContext *p_context)
-+             goto no_dr;
-+     }
-+ 
-+-    if( p_context->pix_fmt == PIX_FMT_YUV422P )
-++    if( p_context->pix_fmt == AV_PIX_FMT_YUV422P )
-+     {
-+         if( 2 * p_pic->p[1].i_pitch != p_pic->p[0].i_pitch ||
-+             2 * p_pic->p[2].i_pitch != p_pic->p[0].i_pitch )
-+@@ -1325,7 +1325,7 @@ static enum PixelFormat ffmpeg_GetFormat( AVCodecContext *p_context,
-+ 
-+     /* Enumerate available formats */
-+     bool can_hwaccel = false;
-+-    for( size_t i = 0; pi_fmt[i] != PIX_FMT_NONE; i++ )
-++    for( size_t i = 0; pi_fmt[i] != AV_PIX_FMT_NONE; i++ )
-+     {
-+         const AVPixFmtDescriptor *dsc = av_pix_fmt_desc_get(pi_fmt[i]);
-+         if (dsc == NULL)
-+@@ -1352,7 +1352,7 @@ static enum PixelFormat ffmpeg_GetFormat( AVCodecContext *p_context,
-+     if( p_va == NULL )
-+         goto end;
-+ 
-+-    for( size_t i = 0; pi_fmt[i] != PIX_FMT_NONE; i++ )
-++    for( size_t i = 0; pi_fmt[i] != AV_PIX_FMT_NONE; i++ )
-+     {
-+         if( p_va->pix_fmt != pi_fmt[i] )
-+             continue;
-+diff --git a/modules/video_chroma/swscale.c b/modules/video_chroma/swscale.c
-+index 569e0f5..4e0ecf1 100644
-+--- a/modules/video_chroma/swscale.c
-++++ b/modules/video_chroma/swscale.c
-+@@ -257,35 +257,35 @@ static void FixParameters( int *pi_fmt, bool *pb_has_a, bool *pb_swap_uv, vlc_fo
-+     switch( fmt )
-+     {
-+     case VLC_CODEC_YUV422A:
-+-        *pi_fmt = PIX_FMT_YUV422P;
-++        *pi_fmt = AV_PIX_FMT_YUV422P;
-+         *pb_has_a = true;
-+         break;
-+     case VLC_CODEC_YUV420A:
-+-        *pi_fmt = PIX_FMT_YUV420P;
-++        *pi_fmt = AV_PIX_FMT_YUV420P;
-+         *pb_has_a = true;
-+         break;
-+     case VLC_CODEC_YUVA:
-+-        *pi_fmt = PIX_FMT_YUV444P;
-++        *pi_fmt = AV_PIX_FMT_YUV444P;
-+         *pb_has_a = true;
-+         break;
-+     case VLC_CODEC_RGBA:
-+-        *pi_fmt = PIX_FMT_BGR32;
-++        *pi_fmt = AV_PIX_FMT_BGR32;
-+         *pb_has_a = true;
-+         break;
-+     case VLC_CODEC_ARGB:
-+-        *pi_fmt = PIX_FMT_BGR32_1;
-++        *pi_fmt = AV_PIX_FMT_BGR32_1;
-+         *pb_has_a = true;
-+         break;
-+     case VLC_CODEC_BGRA:
-+-        *pi_fmt = PIX_FMT_RGB32;
-++        *pi_fmt = AV_PIX_FMT_RGB32;
-+         *pb_has_a = true;
-+         break;
-+     case VLC_CODEC_YV12:
-+-        *pi_fmt = PIX_FMT_YUV420P;
-++        *pi_fmt = AV_PIX_FMT_YUV420P;
-+         *pb_swap_uv = true;
-+         break;
-+     case VLC_CODEC_YV9:
-+-        *pi_fmt = PIX_FMT_YUV410P;
-++        *pi_fmt = AV_PIX_FMT_YUV410P;
-+         *pb_swap_uv = true;
-+         break;
-+     default:
-+@@ -314,7 +314,7 @@ static int GetParameters( ScalerConfiguration *p_cfg,
-+     {
-+         if( p_fmti->i_chroma == VLC_CODEC_YUVP && ALLOW_YUVP )
-+         {
-+-            i_fmti = i_fmto = PIX_FMT_GRAY8;
-++            i_fmti = i_fmto = AV_PIX_FMT_GRAY8;
-+             i_sws_flags = SWS_POINT;
-+         }
-+     }
-+@@ -327,9 +327,9 @@ static int GetParameters( ScalerConfiguration *p_cfg,
-+      * Without SWS_ACCURATE_RND the quality is really bad for some conversions */
-+     switch( i_fmto )
-+     {
-+-    case PIX_FMT_ARGB:
-+-    case PIX_FMT_RGBA:
-+-    case PIX_FMT_ABGR:
-++    case AV_PIX_FMT_ARGB:
-++    case AV_PIX_FMT_RGBA:
-++    case AV_PIX_FMT_ABGR:
-+         i_sws_flags |= SWS_ACCURATE_RND;
-+         break;
-+     }
-+@@ -403,8 +403,8 @@ static int Init( filter_t *p_filter )
-+     const unsigned i_fmto_visible_width = p_fmto->i_visible_width * p_sys->i_extend_factor;
-+     for( int n = 0; n < (cfg.b_has_a ? 2 : 1); n++ )
-+     {
-+-        const int i_fmti = n == 0 ? cfg.i_fmti : PIX_FMT_GRAY8;
-+-        const int i_fmto = n == 0 ? cfg.i_fmto : PIX_FMT_GRAY8;
-++        const int i_fmti = n == 0 ? cfg.i_fmti : AV_PIX_FMT_GRAY8;
-++        const int i_fmto = n == 0 ? cfg.i_fmto : AV_PIX_FMT_GRAY8;
-+         struct SwsContext *ctx;
-+ 
-+         ctx = sws_getContext( i_fmti_visible_width, p_fmti->i_visible_height, i_fmti,
-+-- 
-+2.5.0
-+
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0010-SWSCALE-fix-compilation-with-4.x.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0010-SWSCALE-fix-compilation-with-4.x.patch
-new file mode 100644
-index 0000000..56744e7
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0010-SWSCALE-fix-compilation-with-4.x.patch
-@@ -0,0 +1,45 @@
-+From 6fa8a4a9bb64ff34328aae46acd600f8502b2c05 Mon Sep 17 00:00:00 2001
-+From: Jean-Baptiste Kempf <jb@videolan.org>
-+Date: Mon, 31 Aug 2015 09:07:39 +0200
-+Subject: [PATCH] SWSCALE: fix compilation with 4.x
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+(cherry picked from commit 2b23857c68622edda76b72b74aeb3d943ee277c9)
-+Signed-off-by: Rafaël Carré <funman@videolan.org>
-+---
-+ modules/video_chroma/swscale.c | 3 +++
-+ 1 file changed, 3 insertions(+)
-+
-+diff --git a/modules/video_chroma/swscale.c b/modules/video_chroma/swscale.c
-+index 4e0ecf1..26d0d6f 100644
-+--- a/modules/video_chroma/swscale.c
-++++ b/modules/video_chroma/swscale.c
-+@@ -36,6 +36,7 @@
-+ #include <vlc_cpu.h>
-+ 
-+ #include <libswscale/swscale.h>
-++#include <libswscale/version.h>
-+ 
-+ #ifdef __APPLE__
-+ # include <TargetConditionals.h>
-+@@ -235,6 +236,7 @@ static int GetSwsCpuMask(void)
-+ {
-+     int i_sws_cpu = 0;
-+ 
-++#if LIBSWSCALE_VERSION_MAJOR < 4
-+ #if defined(__i386__) || defined(__x86_64__)
-+     if( vlc_CPU_MMX() )
-+         i_sws_cpu |= SWS_CPU_CAPS_MMX;
-+@@ -248,6 +250,7 @@ static int GetSwsCpuMask(void)
-+     if( vlc_CPU_ALTIVEC() )
-+         i_sws_cpu |= SWS_CPU_CAPS_ALTIVEC;
-+ #endif
-++#endif
-+ 
-+     return i_sws_cpu;
-+ }
-+-- 
-+2.5.0
-+
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.2.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.2.bb
-index 5b15839..b5be04c 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.2.bb
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc_2.2.2.bb
-@@ -11,6 +11,8 @@ SRC_URI += "file://0001-enable-subdir-objects.patch \
-             file://0006-make-opencv-configurable.patch \
-             file://0007-use-vorbisidec.patch \
-             file://0008-fix-luaL-checkint.patch \
-+            file://0009-Avcodec-swscale-use-AV_PIX_FMT-consistently.patch \
-+            file://0010-SWSCALE-fix-compilation-with-4.x.patch \
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+index c77f2d1..8142e16 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+@@ -25,7 +25,6 @@ EXTRA_OECONF = "\
+     --disable-screen --disable-caca \
+     --enable-httpd --enable-vlm \
+     --enable-freetype \
+-    --enable-png \
+     --enable-tremor \
+     --enable-v4l2 --disable-aa --disable-faad \
+     --enable-dbus \
+@@ -38,7 +37,7 @@ EXTRA_OECONF = "\
+     ac_cv_path_UIC=${STAGING_BINDIR_NATIVE}/uic4 \
  "
  
- SRC_URI[md5sum] = "f98d60f0f59ef72b6e3407f2ff09bda6"
+-PACKAGECONFIG ?= " live555 dc1394 dv1394 notify fontconfig freetype dvdread ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 sdl', '', d)}"
++PACKAGECONFIG ?= " live555 dc1394 dv1394 notify fontconfig freetype dvdread png ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 sdl', '', d)}"
+ PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
+ PACKAGECONFIG[sdl] = "--enable-sdl,--disable-sdl,virtual/libsdl libsdl-image "
+ PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
+@@ -72,6 +71,7 @@ PACKAGECONFIG[freetype] = "--enable-freetype,--disable-freetype, freetype"
+ PACKAGECONFIG[dvdread] = "--enable-dvdread,--disable-dvdread, libdvdread libdvdcss"
+ PACKAGECONFIG[vnc] = "--enable-vnc,--disable-vnc, libvncserver"
+ PACKAGECONFIG[x11] = "--with-x --enable-xcb,--without-x --disable-xcb,  xcb-util-keysyms libxpm libxinerama"
++PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
+ 
+ do_configure_prepend() {
+     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
 -- 
 2.5.0
 
