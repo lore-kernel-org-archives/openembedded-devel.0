@@ -1,34 +1,43 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A2A206E666
+Return-Path: <anders.roxell@linaro.org>
+Received: from mail-lb0-f169.google.com (mail-lb0-f169.google.com
+	[209.85.217.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 515D9762AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Mar 2016 04:41:53 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u234fpsa008941
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Wed, 2 Mar 2016 20:41:52 -0800
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.21]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0248.002;
-	Wed, 2 Mar 2016 20:41:51 -0800
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: Joe MacDonald <joe@deserted.net>
-Thread-Topic: [oe] [PATCH 2/2] iscsitarget: skip the arch test for kernel
-	modules
-Thread-Index: AQHRcQZTls3s0sD2Lky5YboT2JG0kZ9HKzIg
-Date: Thu, 3 Mar 2016 04:41:50 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010C80D944@ALA-MBA.corp.ad.wrs.com>
-References: <1448440079-4533-1-git-send-email-jackie.huang@windriver.com>
-	<1448440079-4533-2-git-send-email-jackie.huang@windriver.com>
-	<CANBf+V2nZwQ-UGi3wDnKyzHHU8wCoO6i74D5tYxjfwv+g1TAtQ@mail.gmail.com>
-In-Reply-To: <CANBf+V2nZwQ-UGi3wDnKyzHHU8wCoO6i74D5tYxjfwv+g1TAtQ@mail.gmail.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.196]
-MIME-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/2] iscsitarget: skip the arch test for kernel modules
+	Thu,  3 Mar 2016 08:53:05 +0000 (UTC)
+Received: by mail-lb0-f169.google.com with SMTP id x1so15045841lbj.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Mar 2016 00:53:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=+gCKD3F7KKPxfZjKbeLk2dCY4fwjTZz7G3zJbvJxpDo=;
+	b=jPbWKuPbjoNaa8WTy2cSj7DD7DPwbBITLV1waL5IYV/avIm8m18PIA0ox7C2iGUY47
+	+YoXkM7AnwJgP6SwhBWJuUKkuH5rPbweboV9up4ykxjdXncQXE4jqvAvSHnwk7bWdLr6
+	YW7VF7l32rpNp/f3TvAmGY89VWxvx077rWiGo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=+gCKD3F7KKPxfZjKbeLk2dCY4fwjTZz7G3zJbvJxpDo=;
+	b=hYLDJ1Tqhe8vv9ro9CSptll6DulPRbTEqM77QVWopaIYR2iWJveddRR8rOX5SeEtT4
+	b3UIgmdPJ03XyGKPujdqpBJX1jMRGaPxd6cuHGGH6NIbNbPupDFWpTe5CEWieEnC6KF2
+	WpvNgM8pPHaI/CL8XvUrtMYa7kOKIMz6PhXAWcq7SvTuz3B8I6hhqs66JkIyLU7ABzqG
+	RpDEUKTaWwq8J7p3nAth7RAXa5cCx+fDS+K3atR5rRlnaxCpVK5SFDbImfj7TLzXynAq
+	E8e3bL0C1/vP33gbxvFaylFrpyErdS3cocWpEoNawBe8+Y9BA/V/filOSAYEy0/Fy+0e
+	lOzg==
+X-Gm-Message-State: AD7BkJKuZe4hZiwo5we96Yg20YtcgFfkzdkzPJcPHMJbxw+c64dWPyw+qI0oTKnDSbSFgmTA
+X-Received: by 10.112.62.165 with SMTP id z5mr445582lbr.89.1456995184875;
+	Thu, 03 Mar 2016 00:53:04 -0800 (PST)
+Received: from localhost (c-932171d5.07-21-73746f28.cust.bredbandsbolaget.se.
+	[213.113.33.147]) by smtp.gmail.com with ESMTPSA id
+	zr6sm6042546lbb.19.2016.03.03.00.53.03
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 03 Mar 2016 00:53:03 -0800 (PST)
+From: Anders Roxell <anders.roxell@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  3 Mar 2016 09:46:27 +0100
+Message-Id: <1456994787-29216-1-git-send-email-anders.roxell@linaro.org>
+X-Mailer: git-send-email 2.1.4
+Cc: koen.kooi@linaro.org
+Subject: [PATCH] meta-oe: cunit: delete *.la files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,86 +50,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2016 04:41:55 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 03 Mar 2016 08:53:06 -0000
 
-PiANCj4gDQo+IE9uIFdlZCwgTm92IDI1LCAyMDE1IGF0IDM6MjcgQU0sIDxqYWNraWUuaHVhbmdA
-d2luZHJpdmVyLmNvbT4gd3JvdGU6DQo+IEZyb206IEphY2tpZSBIdWFuZyA8amFja2llLmh1YW5n
-QHdpbmRyaXZlci5jb20+DQo+IA0KPiBLZXJuZWwgbW9kdWxlcyBtYXkgbm90IGhhdmUgdGhlIHNh
-bWUgYXJjaGl0ZWN0dXJlIGFzIHVzZXIgc3BhY2UuDQo+IFNvIHdlIHRlbGwgSU5TQU5FX1NLSVAg
-dG8gc2tpcCBjaGVja2luZyB0aGUgYXJjaCBmb3IgdGhlIG1vZHVsZXMuDQo+IFRoaXMgaXMgY29u
-c2lzdGVudCB3aXRoIG90aGVyIGtlcm5lbCBtb2R1bGVzIGFuZCB0aGUga2VybmVsIHJlY2lwZS4N
-Cj4gDQo+IFRoaXMgb25lIHN0aWxsIGhhc24ndCBiZWVuIG1lcmdlZCBhbmQgc2luY2UgaXNjc2l0
-YXJnZXQgaXMgY3VycmVudGx5IHVuYnVpbGRhYmxlLCANCj4gSSdtIG5vdCBpbiBhIHJ1c2ggdG8g
-bWVyZ2UgdGhpcyBvbmUgcGFydGljdWxhcmx5IHNpbmNlIEknbSBub3QgcmVhbGx5IGNsZWFyIG9u
-IHRoZSANCj4gbG9naWMgdW5kZXJseWluZyB0aGUgY2hhbmdlLiAgSSBzZWFyY2hlZCB0aGUgYXJj
-aGl2ZXMgYW5kIGZvdW5kIHlvdXIgcmVzcG9uc2UgdG8gDQo+IE1hcnRpbiB3YXMgZXNzZW50aWFs
-bHkgInNlZSBteSBuZXRtYXAtbW9kdWxlcyBwYXRjaCBmb3IgYW4gZXhwbGFuYXRpb24iIGFuZCBp
-biB0aGF0IA0KPiBvbmUgdGhlIGV4cGxhbmF0aW9uIHdhcyBiYXNpY2FsbHkgInRoaXMgaXMgdGhl
-IHdheSBvdGhlciBrZXJuZWwgbW9kdWxlcyBkbyBpdCIuIA0KDQpJIHRoaW5rIEkgbWVhbnQgdG8g
-cmVmZXIgdG8gdGhpcyBvbmUgd2hpY2ggaXMgbm90IG1lcmdlZCBlaXRoZXI6DQpjb21taXQgNjcy
-NzE1NGM5MjlmM2RjOGVkODZiYWIyOWFhMWRlODg2MjA5MDZlOQ0KQXV0aG9yOiBKYWNraWUgSHVh
-bmcgPGphY2tpZS5odWFuZ0B3aW5kcml2ZXIuY29tPg0KRGF0ZTogICBUdWUgTm92IDE3IDAxOjQ0
-OjQ3IDIwMTUgLTA4MDANCg0KICAgIG5ldG1hcC1tb2R1bGVzOiBza2lwIHRoZSBhcmNoIGNoZWNr
-IGZvciBrZXJuZWwgbW9kdWxlDQogICAgDQogICAgV2hlbiBidWlsZGluZyBvbiBhIG11bHRpbGli
-IGNhcGFibGUgQlNQLCBpdCdzIHBvc3NpYmxlIGZvciB0aGUNCiAgICBrZXJuZWwgYml0IHNpemUg
-dG8gYmUgZGlmZmVyZW50IHRoYW4gdGhlIHVzZXJzcGFjZS4gQXZvaWQgdGhlDQogICAgUUEgdGVz
-dCB3aGVuIGJ1aWxkaW5nIHRoZSBrZXJuZWwgbW9kdWxlLg0KICAgIA0KICAgIFNpZ25lZC1vZmYt
-Ynk6IEphY2tpZSBIdWFuZyA8amFja2llLmh1YW5nQHdpbmRyaXZlci5jb20+DQoNCnNvcnJ5IHRo
-YXQgaWYgdGhlIGV4cGxhbmF0aW9uIGlzIG5vdCBjbGVhciBlbm91Z2guDQoNCj4gSSBtZXJnZWQg
-dGhhdCBvbmUgYnV0IG5vdyBJJ20gdGhpbmtpbmcgSSBzaG91bGRuJ3QgaGF2ZSB3aXRob3V0IG1v
-cmUgY2FyZWZ1bCBjb25zaWRlcmF0aW9uLiAgDQoNClRoZSBvbmUgeW91IG1lcmdlZCBpcyAibmV0
-bWFwLW1vZHVsZXM6IE1vZHVsZXMgbWF5IG5vdCBoYXZlIHRoZSBzYW1lIGFyY2ggYXMgdXNlcnNw
-YWNlIg0KYW5kIE1hcmsgaGVscGVkIHRvIHNwbGl0IGFuZCByZS13b3JkIHRoZSBjb21taXQgbWVz
-c2FnZSBsaWtlIHdoYXQgaXQgaXMgbm93Lg0KDQo+IEFtIEkgY29ycmVjdCBpbiB0aGlua2luZyB0
-aGF0IHRoaXMgcHJvYmxlbSBvbmx5IHNob3dzIHVwIHdoZW4geW91J3JlIGJ1aWxkaW5nIGZvciBt
-dWx0aWxpYj8gIA0KDQpXZSBoYXZlIEJTUHMgd2l0aCBhIDY0IGJpdCBrZXJuZWwgKyBtb2R1bGVz
-ICsgMzIgYml0IHVzZXJzcGFjZSBieSBkZWZhdWx0LCB0aGUNCnByb2JsZW0gYWx3YXlzIHNob3cg
-dXAgd2hlbiB3ZSdyZSBidWlsZGluZyBzdWNoIEJTUCwgYW5kIHdlIGhhdmUgYSBiYmNsYXNzIHRv
-DQphZGQgSU5TQU5FX1NLSVAgZm9yIGludGVybmFsIG1vZHVsZXM6DQoNCiMgc2FuaXR5IHVwZGF0
-ZXMuIFRoZSBkb19wYWNrYWdlX3FhX3ByZXBlbmQgYW5kIHZtbGludXggc2FuaXR5DQojIGZsYWdz
-IGFsbG93IGEgNjQgYml0IGtlcm5lbCArIG1vZHVsZXMgdG8gYmUgcGFja2FnZWQgYWdhaW5zdCBh
-DQojIDMyIGJpdCB1c2Vyc3BhY2UuIElmIGV4dGVybmFsIG1vZHVsZXMgYXJlIGJ1aWx0LCB0aGV5
-IG11c3Qgc3VwcGx5DQojIHRoZWlyIG93biBJTlNBTkVfU0tJUF88bW9kdWxlPiA9ICJhcmNoIiBp
-ZiB0aGV5IHdhbnQgdG8gYmUgcHJvcGVybHkNCiMgcGFja2FnZWQuDQpweXRob24gZG9fcGFja2Fn
-ZV9xYV9wcmVwZW5kICgpIHsNCg0KDQo+IEkndmUgcmV2ZXJ0ZWQgIm5ldG1hcC1tb2R1bGVzOiBN
-b2R1bGVzIG1heSBub3QgaGF2ZSB0aGUgc2FtZSBhcmNoIGFzIHVzZXJzcGFjZSIgaW4gbXkgY29u
-dHJpYiANCj4gdHJlZSBhdCBodHRwOi8vZ2l0Lm9wZW5lbWJlZGRlZC5vcmcvbWV0YS1vcGVuZW1i
-ZWRkZWQtY29udHJpYi9sb2cvP2g9am9leXRoZXNhaW50L21ldGEtbmV0d29ya2luZy1uZXh0IA0K
-PiBhbmQgbXkgaW5pdGlhbCB0ZXN0IGJ1aWxkcyBzaG93ZWQgbm8gUUEgaXNzdWVzIHJlbGF0ZWQg
-dG8gbmV0bWFwLW1vZHVsZXMgYW5kIHRoZSBhcmNoIGNoZWNrcy4gIA0KPiBTbyBJIHN0YXJ0ZWQg
-bG9va2luZyBhcm91bmQgZm9yIG90aGVyIGtlcm5lbCBtb2R1bGVzIGRvaW5nIHNvbWV0aGluZyBz
-aW1pbGFyIGFuZCBJIGRvbid0IGFjdHVhbGx5IA0KPiBzZWUgdGhpcyAiSU5TQU5FX1NLSVBfa2Vy
-bmVsLW1vZHVsZS0qIiBjb25zdHJ1Y3QgYmVpbmcgdXNlZCBhbnl3aGVyZSBlbHNlIGluIG1ldGEt
-b2Ugb3IgcG9reSANCj4gKGFuZCBhdCB0aGUgbGVhc3QgSSB3b3VsZCBleHBlY3Qgc29tZXRoaW5n
-IGxpa2UgY3J5cHRvZGV2LW1vZHVsZSB0byBuZWVkIGl0LCBpdCBsb29rcyBsaWtlIGFuIA0KPiBh
-bmFsb2d1ZSB0byBtZSkuICBDYW4geW91IGZpbGwgbWUgaW4gb24gd2hhdCdzIHNwZWNpYWwgd2l0
-aCBpc2NzaXRhcmdldCBhbmQgbmV0bWFwLCBiZWNhdXNlIA0KPiBldmVuIGlmIGl0IGlzIGEgbXVs
-dGlsaWIgaXNzdWUsIHdoeSB3b3VsZG4ndCB0aGF0IGJlIHNob3dpbmcgdXAgZm9yIG90aGVyIGtl
-cm5lbCBtb2R1bGVzIGJ1aWx0IA0KPiBpbiBwb2t5Pw0KDQpUaGF0J3MgYmVjYXVzZSB0aGVyZSBp
-cyBubyBzdWNoIEJTUCBsaWtlIEkgbWVudGlvbmVkIGFib3ZlIGluIHBva3ksIEkNCnVuZGVyc2F0
-YW5kIGlmIHRoaXMgaXMgbm90IGFjY3BldGVkLCB3ZSBtYXkgYWRkIHRoaXMgaW4gb3VyIG93biBs
-YXllci4NCg0KVGhhbmtzLA0KSmFja2llDQoNCg0KPiANCj4gVGhhbmtzLg0KPiANCj4gLUouDQo+
-ICANCj4gDQo+IFNpZ25lZC1vZmYtYnk6IEphY2tpZSBIdWFuZyA8amFja2llLmh1YW5nQHdpbmRy
-aXZlci5jb20+DQo+IC0tLQ0KPiAgLi4uL3JlY2lwZXMtZXh0ZW5kZWQvaXNjc2l0YXJnZXQvaXNj
-c2l0YXJnZXRfMS40LjIwLjMrc3ZuNTAyLmJiICAgICAgICB8IDMgKysrDQo+ICAxIGZpbGUgY2hh
-bmdlZCwgMyBpbnNlcnRpb25zKCspDQo+IA0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1uZXR3b3JraW5n
-L3JlY2lwZXMtZXh0ZW5kZWQvaXNjc2l0YXJnZXQvaXNjc2l0YXJnZXRfMS40LjIwLjMrc3ZuNTAy
-LmJiIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZXh0ZW5kZWQvaXNjc2l0YXJnZXQvaXNjc2l0
-YXJnZXRfMS40LjIwLjMrc3ZuNTAyLmJiDQo+IGluZGV4IDlkNDk3NTkuLjlkYjE2YmMgMTAwNjQ0
-DQo+IC0tLSBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWV4dGVuZGVkL2lzY3NpdGFyZ2V0L2lz
-Y3NpdGFyZ2V0XzEuNC4yMC4zK3N2bjUwMi5iYg0KPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVj
-aXBlcy1leHRlbmRlZC9pc2NzaXRhcmdldC9pc2NzaXRhcmdldF8xLjQuMjAuMytzdm41MDIuYmIN
-Cj4gQEAgLTU0LDMgKzU0LDYgQEAgRklMRVNfJHtQTn0gKz0gIiR7c2JpbmRpcn0gXA0KPiANCj4g
-IFJERVBFTkRTXyR7UE59ID0gImtlcm5lbC1tb2R1bGUtaXNjc2ktdHJndCINCj4gIFJSRUNPTU1F
-TkRTXyR7UE59ID0gImtlcm5lbC1tb2R1bGUtY3JjMzJjIGtlcm5lbC1tb2R1bGUtbGliY3JjMzJj
-Ig0KPiArDQo+ICsjIFNraXAgdGhlIGFyY2ggdGVzdCBmb3Iga2VybmVsIG1vZHVsZXMNCj4gK0lO
-U0FORV9TS0lQX2tlcm5lbC1tb2R1bGUtaXNjc2ktdHJndCA9ICJhcmNoIg0KPiAtLQ0KPiAyLjMu
-NQ0KPiANCj4gLS0NCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18NCj4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KPiBPcGVuZW1iZWRkZWQt
-ZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCj4gDQo+IA0KPiAN
-Cj4gLS0gDQo+IEpvZSBNYWNEb25hbGQNCj4gOndxDQo+DQo=
+Remove from blacklist and fix populate_sysroot issue:
+ERROR: cunit-2.1-3-r0 do_populate_sysroot: QA Issue: libcunit.la failed
+sanity test  (workdir) in path
+.../cunit/2.1-3-r0/sysroot-destdir/usr/lib [la]
+ERROR: cunit-2.1-3-r0 do_populate_sysroot: QA staging was broken by the
+package built above
+ERROR: cunit-2.1-3-r0 do_populate_sysroot: Function failed: do_qa_staging
+
+Suggested-by: Koen Kooi <koen.kooi@linaro.org>
+Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
+---
+ meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb b/meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb
+index ab8cf76..ad62e52 100644
+--- a/meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb
++++ b/meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb
+@@ -18,5 +18,6 @@ EXTRA_OECONF = "--enable-memtrace --enable-automated --enable-basic --enable-con
+ FILES_${PN}-dev += "${datadir}/CUnit"
+ FILES_${PN}-doc += "${docdir}"
+ 
+-# http://errors.yoctoproject.org/Errors/Details/35136/
+-PNBLACKLIST[cunit] ?= "BROKEN: QA Issue: libcunit.la failed sanity test (workdir)"
++do_install_append() {
++    find ${D} -name "*.la" -delete
++}
+-- 
+2.1.4
+
 
