@@ -1,47 +1,49 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
-	[209.85.213.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F08F731D2
+Return-Path: <rafael.carre@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id B5BFD6FFE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Mar 2016 13:47:30 +0000 (UTC)
-Received: by mail-ig0-f181.google.com with SMTP id hb3so64528703igb.0
+	Thu,  3 Mar 2016 14:28:55 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id p65so4373586wmp.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Mar 2016 05:47:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=Q84e9u84+e8FrEyznhI4Cq/Qv6pULMgweCjM7iS2heg=;
-	b=1rpuHwbHqCvCXB5unKOvIirJVpH4svVMBdDLVTcEWAB4R29Zk3tQ/hpRPnUFeeNTcZ
-	syLOHRZl3ZRBu4fGlxwHf7x3W1HJ3sW+xndSptdwrg6L3eKJrKzUX6iF/rSE/stohUmt
-	H4+K/EPCZOJzi/YYscex898J0kdpp9nZx+Ytya+d9nLIVPZOoaz2yUUwFA+BfhyMCXb8
-	GjZwcOxs2jZhEMrr6WzDo50TE7L69olxCwQChOGj7kqpxD7OCTitOdAURfEZS2Q34BmG
-	7+mJZPdggGQMctScn2Vp5PL9sMqDDTeapLhxpRxifY4jtTXuVYJvHWl1WMBmHCemIGgR
-	kk1A==
+	Thu, 03 Mar 2016 06:28:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:subject:date:message-id:in-reply-to:references;
+	bh=FWsCf710eZQmVK6bxi872RXEqJKnWef+DqYHUmEJn2Q=;
+	b=b0WgESkAU8fslWqfMP4K2vuMhE9MRo4YP9NpglSYzVjRSt2jmgkvXZ8InRWxW18BBk
+	INcgt9LPy529yMn3Iz7irlgjx7XhoSBAkPpPXreqFFMbmKQIA0TgVB8vt+KDEz4Xy5pE
+	kHiwx1vbME8Lesl+vudXNpMgvxjdEUajbwD8anhGsL+36b+lzvciJd6TOg1/5BjUhnuv
+	7Vd8XNB+nNgNSGcLTYDG/2S0tUqmeLY1b1C1EvjM9qUVb9Bd4nPbwFSQfAUqtfYL3jsQ
+	Lo0tViK87radUxHttQ5NhpjnZJAd3TPfC2eilgZDDw0KRpkiy2yQlwEN3yNvM89UWjPR
+	rIZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=Q84e9u84+e8FrEyznhI4Cq/Qv6pULMgweCjM7iS2heg=;
-	b=bqfj0HjMFc3UxiGMLhdXeBY5BDKuDbOaXJGibC8TV9nd/Z1qIq3zzQ+n1D0qVV8RF3
-	rgD/iCNvjurVCk6gD2Rc7gNgt3yUCiziKCJo/DjUPl7jyyrA6KpaCXoBOBlmioGt4zC+
-	Gcb/wP9cQ0drC29qCdMfmKeE30KiXp/ztXGCDSJc+q6KnB/k5n/yxA+nYFyxyuj33njO
-	113n+Y/k1vc17OO6qxoMYdQnzbXi8/AIJBj+4mah9vnA9by53YAuk4EbATfDeGrDxjss
-	Zc2O5T4cuNeyQel+J7AiZL/RMxPOE5VnCDg9WK0SuYjcTNTuO9Tj2w7lz6z3yygRhGAk
-	gxJQ==
-X-Gm-Message-State: AD7BkJJhanw1/XmTqWcg6zoM83dPBcpL6hhhgyIgKgrHSVLTrBaYacbxVsXPBe6ihH3vzSR2v1UQjYU6/iyN42Ud
-X-Received: by 10.50.112.101 with SMTP id ip5mr984872igb.52.1457012851403;
-	Thu, 03 Mar 2016 05:47:31 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.162.70 with HTTP; Thu, 3 Mar 2016 05:47:12 -0800 (PST)
-In-Reply-To: <1457002594-12327-1-git-send-email-anders.roxell@linaro.org>
-References: <1456994787-29216-1-git-send-email-anders.roxell@linaro.org>
-	<1457002594-12327-1-git-send-email-anders.roxell@linaro.org>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 3 Mar 2016 13:47:12 +0000
-Message-ID: <CAJTo0LY-OnDmo=KyCJF2Tsc+8Xxn4mKBXmy3=6vLj3ATi7P9vQ@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCHv2] cunit: delete *.la files
+	h=x-gm-message-state:sender:from:to:subject:date:message-id
+	:in-reply-to:references;
+	bh=FWsCf710eZQmVK6bxi872RXEqJKnWef+DqYHUmEJn2Q=;
+	b=A8STm87OKkCTCL+gBfZ1XTwQeXEQBdBGHR8lQv0YeTPiWUzsMF+6Ve1Dk8V72KSTUr
+	RYKohtbddQz3x/hATlWmi9mkh3RN+7qKNbnMFIs67atEikdW7q4n+2KgpTAy7Lj8iM/e
+	bdX2kLslFG1fZfi0f2lQ/CUMyfvAzH4gLJ29G3g11B1f7VLaXaP4oc9qUrAyaoCuTpmV
+	y1aF1ReH0MjBHdNauFIhFwRBm/i7dwW53dduSDYXj6XeHKTAwEL6OjCp08JZm41vBkK/
+	I8kmmg4Ytwp9P7EfYVVRrD5lkxWaT+OuTmEQyEvH2MFUQPxHtX2PxSEmDb1WK9yW58nk
+	BZMg==
+X-Gm-Message-State: AD7BkJIJtCFSjokLbI41Pa2Kxg0Y1y8R/3XAw51U1Tvu9l7VX2C8zn0WiECo0Se6UL7jlg==
+X-Received: by 10.194.115.8 with SMTP id jk8mr3607815wjb.136.1457015336308;
+	Thu, 03 Mar 2016 06:28:56 -0800 (PST)
+Received: from localhost.localdomain ([81.56.255.191])
+	by smtp.gmail.com with ESMTPSA id
+	k124sm9177231wmb.11.2016.03.03.06.28.54
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 03 Mar 2016 06:28:55 -0800 (PST)
+Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
+From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  3 Mar 2016 15:28:47 +0100
+Message-Id: <1457015330-16676-1-git-send-email-funman@videolan.org>
+X-Mailer: git-send-email 2.5.0
+In-Reply-To: <20160302192515.GG10529@jama>
+References: <20160302192515.GG10529@jama>
+Subject: [meta-multimedia][PATCH 1/4] vlc: Fix typo introduced in 0f2b3139521570ad494a72399f8a9dae76e69b16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,16 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2016 13:47:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 03 Mar 2016 14:28:57 -0000
 
-On 3 March 2016 at 10:56, Anders Roxell <anders.roxell@linaro.org> wrote:
+vlc-2.2.1: vlc: invalid PACKAGECONFIG: {@bb.utils.contains('DISTRO_FEATURES', [invalid-packageconfig]
+vlc-2.2.1: vlc: invalid PACKAGECONFIG: 'x11', [invalid-packageconfig]
+vlc-2.2.1: vlc: invalid PACKAGECONFIG: 'x11 [invalid-packageconfig]
+vlc-2.2.1: vlc: invalid PACKAGECONFIG: sdl', [invalid-packageconfig]
+vlc-2.2.1: vlc: invalid PACKAGECONFIG: '', [invalid-packageconfig]
+vlc-2.2.1: vlc: invalid PACKAGECONFIG: d)} [invalid-packageconfig]
+---
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> +inherit autotools-brokensep remove-libtool
->
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+index 3267dad..c77f2d1 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+@@ -38,7 +38,7 @@ EXTRA_OECONF = "\
+     ac_cv_path_UIC=${STAGING_BINDIR_NATIVE}/uic4 \
+ "
+ 
+-PACKAGECONFIG ?= " live555 dc1394 dv1394 notify fontconfig freetype dvdread {@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 sdl', '', d)}"
++PACKAGECONFIG ?= " live555 dc1394 dv1394 notify fontconfig freetype dvdread ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 sdl', '', d)}"
+ PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
+ PACKAGECONFIG[sdl] = "--enable-sdl,--disable-sdl,virtual/libsdl libsdl-image "
+ PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
+-- 
+2.5.0
 
-I should point out this was meant to be something that the distro or user
-inherited, not per-recipe to avoid broken .la files.
-
-Ross
 
