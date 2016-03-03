@@ -1,46 +1,36 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
-	[209.85.220.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 75DC276E70
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C80060119
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Mar 2016 00:20:23 +0000 (UTC)
-Received: by mail-pa0-f41.google.com with SMTP id bj10so3444649pad.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Mar 2016 16:20:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=0T+R23FlkRNJfyBX5itdZqHXmoKboRYgAf8bCcoHnEE=;
-	b=kEFOb9zsycSB6IikummiGhfwd6IKOpaeiIKZ5Ld8gAvtzKPAjnX5jY9SRKoKKvxjX/
-	QkJ2pTyZAoT4M0L5YZnwzLZq9IVW9GIAMqxsi0SDgbyq0CAiNo5BS7I2BARHao8dOhUs
-	j5bkQM4g9NkFVzXl4vkNv/IWIOxNa7p6Bmh6R5dsJUP0BURncWxEbhBgeylqIUA5J+R8
-	1jbxfeoYEvr9gur/ye/T7HEdVgX+ZQAUdbNrvurogXEF+rIhAPxWgZWYk+k1rNlqYB/t
-	oXCSSQAiiE83pgFK11MyW9IWr27dOx9NqmRF09AASwmbHT3Regd6bDJ31+K8r1psOp3j
-	L6JQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=0T+R23FlkRNJfyBX5itdZqHXmoKboRYgAf8bCcoHnEE=;
-	b=B59BscVEmsgAUnl/oRz1arpeZyI7AyOoG7PV1JuMdZLdHPp6ROYnMkOYzRrA+6v8mv
-	9DOZpUEhJcro/YUqfy4g3hnuyTfiB39ozuFTHvuGccTu7TiULhEV4XkI2EPaar1eBqKw
-	GSIbxqrLj/BVdC0xKWrhS3h+eiwWOIu15z+1XG3jB+Pfh3AnYPJNJio+FC5dKPAy6+7N
-	YPSKuNWYegef/PJ+Fbj29f2zFxm+Hm7Clmo48a8U9HuPQG92beJWeBnCB3LOFogHsBQm
-	Y5bvrSTwFCOlenmEqr0wTSMDYgmqAiASTmC0tHYRF6ochJGsHnJkOUbnKEwEr7g5vJ8q
-	6wZA==
-X-Gm-Message-State: AD7BkJLyMnsYCFHu+asc7bIcSfVUW7g/iVyfvFEhf51aHkZee6VkcGeWLdegyxmzAy2gmQ==
-X-Received: by 10.67.6.72 with SMTP id cs8mr42572821pad.138.1456964424153;
-	Wed, 02 Mar 2016 16:20:24 -0800 (PST)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by smtp.gmail.com with ESMTPSA id
-	r29sm19459442pfi.9.2016.03.02.16.20.22
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 02 Mar 2016 16:20:22 -0800 (PST)
-From: Jonathan Liu <net147@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Mar 2016 11:20:42 +1100
-Message-Id: <1456964442-8368-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 2.7.1
-Subject: [meta-oe][PATCH] nodejs: update to 4.3.2
+	Thu,  3 Mar 2016 02:51:30 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u232pSd7006522
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Wed, 2 Mar 2016 18:51:29 -0800
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.21]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0248.002;
+	Wed, 2 Mar 2016 18:51:28 -0800
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: Martin Jansa <martin.jansa@gmail.com>, "Joe MacDonald
+	(Joe_MacDonald@mentor.com)" <Joe_MacDonald@mentor.com>
+Thread-Topic: [oe] Still many meta-networking changes waiting in
+	patchwork/master-next
+Thread-Index: AQHRdG7KOI7fHLSciUi9xZKnVyt5PJ9Gq8QAgABYR6A=
+Date: Thu, 3 Mar 2016 02:51:25 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA010C80C833@ALA-MBA.corp.ad.wrs.com>
+References: <20160225171903.GC2565@jama> <20160226181315.GA6310@mentor.com>
+	<20160226195617.GA2554@jama> <20160227013944.GB6310@mentor.com>
+	<20160302103341.GA10529@jama> <20160302132725.GC12524@mentor.com>
+In-Reply-To: <20160302132725.GC12524@mentor.com>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.196]
+MIME-Version: 1.0
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: Still many meta-networking changes waiting in patchwork/master-next
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,33 +43,327 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2016 00:20:25 -0000
+X-List-Received-Date: Thu, 03 Mar 2016 02:51:31 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- meta-oe/recipes-devtools/nodejs/{nodejs_4.3.1.bb => nodejs_4.3.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_4.3.1.bb => nodejs_4.3.2.bb} (95%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.3.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.3.2.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_4.3.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_4.3.2.bb
-index 44a4a51..c58fad5 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_4.3.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.3.2.bb
-@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
- SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-     file://no-registry.patch \
- "
--SRC_URI[md5sum] = "8032419325e619d7fb04fd22c29810a2"
--SRC_URI[sha256sum] = "9f2fb884655add686a0414800ec2a58279a973520d42f18362f492715625ffa8"
-+SRC_URI[md5sum] = "03f1424a1cfd322b5ba89da507d4cf07"
-+SRC_URI[sha256sum] = "f0c5761a7e4f520ab8793cb2dcabbd7dfd7f5839ce4f2cf79d9d52d1c2da5bca"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
--- 
-2.7.1
 
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Joe MacDonald
+> Sent: Wednesday, March 02, 2016 9:27 PM
+> To: Martin Jansa
+> Cc: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Still many meta-networking changes waiting in patchwork=
+/master-next
+>=20
+> [Re: [oe] Still many meta-networking changes waiting in patchwork/master-=
+next] On 16.03.02 (Wed
+> 11:33) Martin Jansa wrote:
+>=20
+> > On Fri, Feb 26, 2016 at 08:39:45PM -0500, Joe MacDonald wrote:
+> > > Hi Martin,
+> > >
+> > > [Re: [oe] Still many meta-networking changes waiting in patchwork/mas=
+ter-next] On 16.02.26 (Fri
+> 20:56) Martin Jansa wrote:
+> > >
+> > > > On Fri, Feb 26, 2016 at 01:13:17PM -0500, Joe MacDonald wrote:
+> > > > > Hey Martin,
+> > > > >
+> > > > > [[oe] Still many meta-networking changes waiting in patchwork/mas=
+ter-next] On 16.02.25 (Thu
+> 18:19) Martin Jansa wrote:
+> > > > >
+> > > > > > Hi Joe.
+> > > > > >
+> > > > > > there are still 18 meta-networking commits in master-next:
+> > > > >
+> > > > > I thought I'd follow up to this and let you know I'll do somethin=
+g with
+> > > > > these before the end of the month.  Almost all of them (waf-samba=
+ aside)
+> > > > > obviously got missed because I'm watching patchwork based on
+> > > > > 'meta-networking' and none of these had it in the subject line.
+> > > > >
+> > > > > I think I've asked before, but are you curating all of those bund=
+les by
+> > > > > hand or have you got some machinery that filters patches into bun=
+dles
+> > > > > based on path names in the patches?  Because that would be kind o=
+f neat
+> > > > > to have.
+> > > >
+> > > > I think I've answered before, but I'm filtering them manually based=
+ on
+> > > > subject and also actual paths inside the patch. I also need to mark=
+ them
+> > > > "Accepted", "Superseded", ..  manually, there is git hooks which is=
+ supposed
+> > > > to mark at least accepted one, but it finds 1 from 1000 if any.
+> > >
+> > > Yeah, I've seen the hooks trying to find something when I push commit=
+s and
+> > > just spewing a slew of errors.  I generally do my best to stay on top=
+ of
+> > > the status in patchwork, doing it all at one time, though.
+> > >
+> > > > This is of course a bit error prone, especially when there are mult=
+iple
+> > > > versions of the same patch already in master-next - I usually end u=
+p
+> > > > marking all versions merged patch as Accepted (unless I've marked o=
+lder
+> > > > versions already as Superseded when filtering incoming queue).
+> > >
+> > > I took a bit of time this afternoon to try to come up with a way to
+> > > automate at least part of the process for me and I'm sure there's a b=
+etter
+> > > way to do it (hence why I asked again) but since it sounds like you'r=
+e
+> > > doing it by hand for a much larger space than I am, maybe there's not=
+.
+> > >
+> > > Anyway, for what it's worth, here's what I came up with:
+> > >
+> > >    git log --cherry-pick --format=3D"'%s'" \
+> > >       oe/master-next...oe/master meta-networking | \
+> > >       xargs -r -n1 pwclient search -f "%{id} %{name}" -s New
+> > >
+> > > Which does pretty well, though it obviously goes a little insane if
+> > > someone puts a ' in the short log, but it didn't seem worth trying to=
+ work
+> > > around that pretty rare (I hope) corner case.  As an aside, the first=
+ time
+> > > I did this I was using --format=3D"\"%s\"" and the *very* top commit
+> > > ('recipes: Replace "cp ...) showed me what kind of pain I'm in for wh=
+en
+> > > there are colliding characters in the short log.  It's ugly but nothi=
+ng
+> > > catastrophic.
+> > >
+> > > So that gave me 14 of the patches you asked about.  The others were e=
+asy
+> > > to find:
+> > >
+> > >    git log --cherry-pick --format=3D"'%s'" \
+> > >       oe/master-next...oe/master meta-networking | \
+> > >       xargs -r -n1 pwclient search -f "%{id} %{name}" -s Accepted
+> > >
+> > > But obviously they haven't been accepted into 'master' next, obviousl=
+y
+> > > just a typo or a mis-click at some point.  So that's not bad.
+> > >
+> > > Once I had that sanity check done, it's easy to harvest them all:
+> > >
+> > >
+> > >    git log --cherry-pick --format=3D"'%s'" \
+> > >       oe/master-next...oe/master meta-networking | \
+> > >       xargs -r -n1 pwclient search -f "%{name}" -s new | \
+> > >       sed 's=3D\[.*\] *=3D=3D;s=3D"=3D.=3Dg;s=3D\(.*\)=3D"\1"=3D' | \
+> > >       xargs -r -n1 git log --format=3D"%h" --grep | \
+> > >       xargs -r -n1 git cherry-pick -s
+> > >
+> > > The hideous sed in the middle is just to throw out stuff from the pwc=
+lient
+> > > output that doesn't appear in the git logs (eg. "[v2]") and to skip o=
+ver
+> > > the craziness that happens on the 'git log grep' if you have a " in t=
+he
+> > > subject.
+> > >
+> > > Run it a second time to grab the three 'accepted' patches and we're n=
+early
+> > > done.
+> > >
+> > > Setting aside all of the inspection steps that follow that nobody wou=
+ld
+> > > want to automate, the same machinery applies equally well to keeping
+> > > patchwork up to date:
+> > >
+> > >    git log --cherry-pick --format=3D"'%s'" \
+> > >       master...oe/master meta-networking | \
+> > >       xargs -r -n1 pwclient search -f "%{id}" -s new | \
+> > >       xargs -r -n1 pwclient update -s "accepted"
+> > >
+> > > There's not really any point in running this one a second time for th=
+e
+> > > patches already marked 'accepted'.
+> > >
+> > > I've been using a version of this last one for a while now because th=
+e git
+> > > hooks are non-functional.
+> > >
+> > > The end result is that my semi-automated process above gets 17 of the=
+ 18
+> > > patches you cited and the 18th (waf-samba.bbclass) is a special case =
+that
+> > > I don't think could ever be caught except by manual intervention.
+> > >
+> > > Mostly just throwing this out there so that maybe it'll help you or
+> > > someone else with similar tasks and maybe someone can look at what I'=
+m
+> > > doing and point out obvious flaws / shortcomings / bear-traps /
+> > > improvements.  And also since I haven't bothered to put this into a s=
+hell
+> > > function or git alias yet, at least my process is archived in the mai=
+ling
+> > > list and I can find it again if I need it.
+> >
+> > Thanks for trying to improve patchwork experience with bunch of scripts=
+.
+> > Personally I would prefer to just use gerrit (that's why I gave up
+> > trying to work around patchwork issues with scripts and rather sort &
+> > apply the patches manually with just small help from pwclient).
+>=20
+> I've never been a fan of gerrit, but I've only used it on a couple of
+> projects, so I don't really have a lot of experience with it.  Probably
+> obviously, so long as the CLI experience isn't terrible and I can easily
+> script around things that don't work well for me, I can work with almost
+> anything.
+>=20
+> > After bigger merge yesterday I have only the waf-samba change in
+> > master-next (and few new changes),
+>=20
+> Yeah, the waf-samba change has been deliberately left to the end since
+> Jackie's waf-samba commits are now considerably out of date and touch
+
+When I made those patches, samba and related recipes were in meta-oe,
+then they were moved to meta-networking and I rebased them twice after
+that, but the patch for waf-samba.bbclass  is still applied for meta-oe. Do=
+=20
+you think we need to move it to meta-networking as well?
+
+Thanks,
+Jackie
+
+> more than just meta-networking, so I'm trying to be extra careful with
+> them.
+>=20
+> > can you please update status of few pending changes in meta-networking
+> > bundle?
+> > http://patchwork.openembedded.org/bundle/jama/meta-networking/?archive=
+=3Dboth
+>=20
+> Sure thing.
+>=20
+> > There is 22 changes and most of them were probably already merged or
+> > rejected.
+> >
+> > >
+> > > -J.
+> > >
+> > > >
+> > > > >
+> > > > > -J.
+> > > > >
+> > > > > > pick 959b908 postfix: premission of /var/spool/mail seems incor=
+rect
+> > > > > > pick 21ccb84 wireshark: update SRC_URI link to sources
+> > > > > > pick 204683a nbd: use BPN in Files
+> > > > > > pick ed0b197 cim-schema-exper: fix host-user-contaminated
+> > > > > > pick 1dd195e ctdb: add PACKAGECONFIG for libtdb
+> > > > > > pick 3c95127 netkit-ftp: fixed invalid symlink
+> > > > > > pick 56c4f31 iscsitarget: split the kernel module into separate=
+ package
+> > > > > > pick 38fd81c iscsitarget: skip the arch test for kernel modules
+> > > > > > pick 84bfeae ncftp: fix build failures with ccdv
+> > > > > > pick 46b1e93 postfix: fix clean broken issue
+> > > > > > pick ba57020 lowpan-tools: add missing flex/bison deps
+> > > > > > pick dd64a6b samba: Fix typo in PACKAGECONFIG for "acl" and "ai=
+o"
+> > > > > > pick c3c6106 waf-samba.bbclass: add cross-answers option and fi=
+les
+> > > > > > pick ef42784 ebtables: enable KERNEL_64_USERSPACE_32 for powerp=
+c
+> > > > > > pick 87edda7 samba: update systemd service files
+> > > > > > pick 8b320f4 lldpd: use bash-completion.bbclass
+> > > > > > pick 32b5c6f ntp: remove empty libexecdir to prevent potential =
+QA issues
+> > > > > > pick 93c8a3c inetutils: Fix build when static libs disabled
+> > > > > >
+> > > > > > Not all of them are still "open" on patchwork, maybe they are n=
+o longer valid.
+> > > > > >
+> > > > > > + there are few meta-networking patches on patchwork which didn=
+'t make it to master-next
+> > > > > >   here is complete list:
+> > > > > >   http://patchwork.openembedded.org/bundle/jama/master-next/?ar=
+chive=3Dboth
+> > > > > > 	postfix: premission of /var/spool/mail seems incorrect	2015-10=
+-27	Zhenbo Gao
+> 		New
+> > > > > > 	[meta-oe] lldpd: configure the systemd unit file dir	2015-10-3=
+0
+> 	rongqing.li@windriver.com		New
+> > > > > > 	[meta-oe] samba: systemv-init script must be executable	2015-1=
+1-04	Jens
+> Rehsack		New
+> > > > > > 	[meta-oe,v2,1/3] samba: fix dependencies and QA issues	2015-11=
+-12	Jens
+> Rehsack		New
+> > > > > > 	[2/7] nbd: use BPN in Files	2015-11-20	Robert Yang		New
+> > > > > > 	[4/7] cim-schema-exper: fix host-user-contaminated	2015-11-20	=
+Robert Yang
+> 		New
+> > > > > > 	[6/7] ctdb: add PACKAGECONFIG for libtdb	2015-11-20	Robert Yan=
+g
+> 	New
+> > > > > > 	[7/7] netkit-ftp: fixed invalid symlink	2015-11-20	Robert Yang=
+		New
+> > > > > > 	[1/2] iscsitarget: split the kernel module into separate packa=
+ge	2015-11-25	jackie
+> huang		New
+> > > > > > 	[2/2] iscsitarget: skip the arch test for kernel modules	2015-=
+11-25	jackie huang
+> 		New
+> > > > > > 	ncftp: fix build failures with ccdv	2015-11-30	jackie huang		N=
+ew
+> > > > > > 	samba: Fix typo in PACKAGECONFIG for "acl" and "aio"	2015-12-2=
+2
+> 	mike.looijmans@topic.nl		New
+> > > > > > 	[meta-networking,0/7,v3] waf-samba: fix build failure on targe=
+ts unsupported by
+> qemu	2016-01-06	jackie huang		New
+> > > > > > 	[meta-oe,7/7,v3] waf-samba.bbclass: add cross-answers option a=
+nd files	2016-
+> 01-06	jackie huang		New
+> > > > > > 	ebtables: enable KERNEL_64_USERSPACE_32 for powerpc	2016-01-20
+> 	rongqing.li@windriver.com		New
+> > > > > > 	[RFC,3/4] lldpd: use bash-completion.bbclass	2016-01-14	George=
+ McCollister
+> 		New
+> > > > > > 	[07/12] inetutils: Fix build when static libs disabled	2016-02=
+-22	Richard Purdie
+> 		New
+> > > > > >
+> > > > > > If they are still there next month, I'll drop them from master-=
+next branch
+> > > > > > and master-next bundle on patchwork.
+> > > > > >
+> > > > > > Thanks
+> > > > > >
+> > > > > > --
+> > > > > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> > > > >
+> > > > >
+> > > > >
+> > > > > --
+> > > > > -Joe MacDonald.
+> > > > > :wq
+> > > >
+> > > >
+> > > >
+> > > --
+> > > -Joe MacDonald.
+> > > :wq
+> >
+> >
+> >
+> --
+> -Joe MacDonald.
+> :wq
 
