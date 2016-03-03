@@ -1,33 +1,32 @@
 Return-Path: <Joe_MacDonald@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 735AE770C9
+	by mail.openembedded.org (Postfix) with ESMTP id 8604877038
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Mar 2016 16:17:05 +0000 (UTC)
+	Thu,  3 Mar 2016 20:46:46 +0000 (UTC)
 Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
 	by relay1.mentorg.com with esmtp 
-	id 1abVw1-0000ej-DG from Joe_MacDonald@mentor.com ;
-	Thu, 03 Mar 2016 08:17:05 -0800
+	id 1aba91-0002uy-A8 from Joe_MacDonald@mentor.com ;
+	Thu, 03 Mar 2016 12:46:47 -0800
 Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
 	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 3 Mar 2016 08:17:05 -0800
-Received: by burninator (Postfix, from userid 1000)	id C98D3581D60; Thu,  3
-	Mar 2016 11:17:02 -0500 (EST)
-Date: Thu, 3 Mar 2016 11:17:02 -0500
+	Thu, 3 Mar 2016 12:46:47 -0800
+Received: by burninator (Postfix, from userid 1000)	id 1997E5833BA; Thu,  3
+	Mar 2016 15:46:46 -0500 (EST)
+Date: Thu, 3 Mar 2016 15:46:46 -0500
 From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-Message-ID: <20160303161701.GA4671@mentor.com>
-References: <1448440079-4533-1-git-send-email-jackie.huang@windriver.com>
-	<1448440079-4533-2-git-send-email-jackie.huang@windriver.com>
-	<CANBf+V2nZwQ-UGi3wDnKyzHHU8wCoO6i74D5tYxjfwv+g1TAtQ@mail.gmail.com>
-	<1B858668EC6A94408DCA5225FDFA85AA010C80D944@ALA-MBA.corp.ad.wrs.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Message-ID: <20160303204645.GF4671@mentor.com>
+References: <20160225171903.GC2565@jama> <20160302103341.GA10529@jama>
+	<20160302132725.GC12524@mentor.com>
+	<1592801.EHfQ34bF0n@peggleto-mobl.ger.corp.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AA010C80D944@ALA-MBA.corp.ad.wrs.com>
+In-Reply-To: <1592801.EHfQ34bF0n@peggleto-mobl.ger.corp.intel.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-704 http://www.vim.org
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/2] iscsitarget: skip the arch test for kernel modules
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Still many meta-networking changes waiting in patchwork/master-next
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,130 +39,227 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2016 16:17:06 -0000
-X-Groupsio-MsgNum: 60326
+X-List-Received-Date: Thu, 03 Mar 2016 20:46:49 -0000
+X-Groupsio-MsgNum: 60327
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="8t9RHnE3ZwKMSgU+"
+	protocol="application/pgp-signature"; boundary="8TaQrIeukR7mmbKf"
 Content-Disposition: inline
 
---8t9RHnE3ZwKMSgU+
+--8TaQrIeukR7mmbKf
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Jackie,
+[Re: [oe] Still many meta-networking changes waiting in patchwork/master-ne=
+xt] On 16.03.03 (Thu 11:08) Paul Eggleton wrote:
 
-[Re: [oe] [PATCH 2/2] iscsitarget: skip the arch test for kernel modules] O=
-n 16.03.03 (Thu 04:41) Huang, Jie (Jackie) wrote:
-
-> > On Wed, Nov 25, 2015 at 3:27 AM, <jackie.huang@windriver.com> wrote:
-> > From: Jackie Huang <jackie.huang@windriver.com>
+> On Wed, 02 Mar 2016 08:27:26 Joe MacDonald wrote:
+> > [Re: [oe] Still many meta-networking changes waiting in patchwork/maste=
+r-
+> next] On 16.03.02 (Wed 11:33) Martin Jansa wrote:
+> > > On Fri, Feb 26, 2016 at 08:39:45PM -0500, Joe MacDonald wrote:
+> > > > Hi Martin,
+> > > >=20
+> > > > [Re: [oe] Still many meta-networking changes waiting in=20
+> patchwork/master-next] On 16.02.26 (Fri 20:56) Martin Jansa wrote:
+> > > > > On Fri, Feb 26, 2016 at 01:13:17PM -0500, Joe MacDonald wrote:
+> > > > > > Hey Martin,
+> > > > > >=20
+> > > > > > [[oe] Still many meta-networking changes waiting in=20
+> patchwork/master-next] On 16.02.25 (Thu 18:19) Martin Jansa wrote:
+> > > > > > > Hi Joe.
+> > > > > >=20
+> > > > > > > there are still 18 meta-networking commits in master-next:
+> > > > > > I thought I'd follow up to this and let you know I'll do someth=
+ing
+> > > > > > with
+> > > > > > these before the end of the month.  Almost all of them (waf-sam=
+ba
+> > > > > > aside)
+> > > > > > obviously got missed because I'm watching patchwork based on
+> > > > > > 'meta-networking' and none of these had it in the subject line.
+> > > > > >=20
+> > > > > > I think I've asked before, but are you curating all of those bu=
+ndles
+> > > > > > by
+> > > > > > hand or have you got some machinery that filters patches into
+> > > > > > bundles
+> > > > > > based on path names in the patches?  Because that would be kind=
+ of
+> > > > > > neat
+> > > > > > to have.
+> > > > >=20
+> > > > > I think I've answered before, but I'm filtering them manually bas=
+ed on
+> > > > > subject and also actual paths inside the patch. I also need to ma=
+rk
+> > > > > them
+> > > > > "Accepted", "Superseded", ..  manually, there is git hooks which =
+is
+> > > > > supposed to mark at least accepted one, but it finds 1 from 1000 =
+if
+> > > > > any.
+> > > >=20
+> > > > Yeah, I've seen the hooks trying to find something when I push comm=
+its
+> > > > and
+> > > > just spewing a slew of errors.  I generally do my best to stay on t=
+op of
+> > > > the status in patchwork, doing it all at one time, though.
+> > > >=20
+> > > > > This is of course a bit error prone, especially when there are
+> > > > > multiple
+> > > > > versions of the same patch already in master-next - I usually end=
+ up
+> > > > > marking all versions merged patch as Accepted (unless I've marked
+> > > > > older
+> > > > > versions already as Superseded when filtering incoming queue).
+> > > >=20
+> > > > I took a bit of time this afternoon to try to come up with a way to
+> > > > automate at least part of the process for me and I'm sure there's a
+> > > > better
+> > > > way to do it (hence why I asked again) but since it sounds like you=
+'re
+> > > > doing it by hand for a much larger space than I am, maybe there's n=
+ot.
+> > > >=20
+> > > > Anyway, for what it's worth, here's what I came up with:
+> > > >    git log --cherry-pick --format=3D"'%s'" \
+> > > >   =20
+> > > >       oe/master-next...oe/master meta-networking | \
+> > > >       xargs -r -n1 pwclient search -f "%{id} %{name}" -s New
+> > > >=20
+> > > > Which does pretty well, though it obviously goes a little insane if
+> > > > someone puts a ' in the short log, but it didn't seem worth trying =
+to
+> > > > work
+> > > > around that pretty rare (I hope) corner case.  As an aside, the fir=
+st
+> > > > time
+> > > > I did this I was using --format=3D"\"%s\"" and the *very* top commit
+> > > > ('recipes: Replace "cp ...) showed me what kind of pain I'm in for =
+when
+> > > > there are colliding characters in the short log.  It's ugly but not=
+hing
+> > > > catastrophic.
+> > > >=20
+> > > > So that gave me 14 of the patches you asked about.  The others were=
+ easy
+> > > >=20
+> > > > to find:
+> > > >    git log --cherry-pick --format=3D"'%s'" \
+> > > >   =20
+> > > >       oe/master-next...oe/master meta-networking | \
+> > > >       xargs -r -n1 pwclient search -f "%{id} %{name}" -s Accepted
+> > > >=20
+> > > > But obviously they haven't been accepted into 'master' next, obviou=
+sly
+> > > > just a typo or a mis-click at some point.  So that's not bad.
+> > > >=20
+> > > > Once I had that sanity check done, it's easy to harvest them all:
+> > > >    git log --cherry-pick --format=3D"'%s'" \
+> > > >   =20
+> > > >       oe/master-next...oe/master meta-networking | \
+> > > >       xargs -r -n1 pwclient search -f "%{name}" -s new | \
+> > > >       sed 's=3D\[.*\] *=3D=3D;s=3D"=3D.=3Dg;s=3D\(.*\)=3D"\1"=3D' |=
+ \
+> > > >       xargs -r -n1 git log --format=3D"%h" --grep | \
+> > > >       xargs -r -n1 git cherry-pick -s
+> > > >=20
+> > > > The hideous sed in the middle is just to throw out stuff from the
+> > > > pwclient
+> > > > output that doesn't appear in the git logs (eg. "[v2]") and to skip=
+ over
+> > > > the craziness that happens on the 'git log grep' if you have a " in=
+ the
+> > > > subject.
+> > > >=20
+> > > > Run it a second time to grab the three 'accepted' patches and we're
+> > > > nearly
+> > > > done.
+> > > >=20
+> > > > Setting aside all of the inspection steps that follow that nobody w=
+ould
+> > > > want to automate, the same machinery applies equally well to keeping
+> > > >=20
+> > > > patchwork up to date:
+> > > >    git log --cherry-pick --format=3D"'%s'" \
+> > > >   =20
+> > > >       master...oe/master meta-networking | \
+> > > >       xargs -r -n1 pwclient search -f "%{id}" -s new | \
+> > > >       xargs -r -n1 pwclient update -s "accepted"
+> > > >=20
+> > > > There's not really any point in running this one a second time for =
+the
+> > > > patches already marked 'accepted'.
+> > > >=20
+> > > > I've been using a version of this last one for a while now because =
+the
+> > > > git
+> > > > hooks are non-functional.
+> > > >=20
+> > > > The end result is that my semi-automated process above gets 17 of t=
+he 18
+> > > > patches you cited and the 18th (waf-samba.bbclass) is a special case
+> > > > that
+> > > > I don't think could ever be caught except by manual intervention.
+> > > >=20
+> > > > Mostly just throwing this out there so that maybe it'll help you or
+> > > > someone else with similar tasks and maybe someone can look at what =
+I'm
+> > > > doing and point out obvious flaws / shortcomings / bear-traps /
+> > > > improvements.  And also since I haven't bothered to put this into a
+> > > > shell
+> > > > function or git alias yet, at least my process is archived in the
+> > > > mailing
+> > > > list and I can find it again if I need it.
+> > >=20
+> > > Thanks for trying to improve patchwork experience with bunch of scrip=
+ts.
+> > > Personally I would prefer to just use gerrit (that's why I gave up
+> > > trying to work around patchwork issues with scripts and rather sort &
+> > > apply the patches manually with just small help from pwclient).
 > >=20
-> > Kernel modules may not have the same architecture as user space.
-> > So we tell INSANE_SKIP to skip checking the arch for the modules.
-> > This is consistent with other kernel modules and the kernel recipe.
-> >=20
-> > This one still hasn't been merged and since iscsitarget is currently un=
-buildable,=20
-> > I'm not in a rush to merge this one particularly since I'm not really c=
-lear on the=20
-> > logic underlying the change.  I searched the archives and found your re=
-sponse to=20
-> > Martin was essentially "see my netmap-modules patch for an explanation"=
- and in that=20
-> > one the explanation was basically "this is the way other kernel modules=
- do it".=20
+> > I've never been a fan of gerrit, but I've only used it on a couple of
+> > projects, so I don't really have a lot of experience with it.  Probably
+> > obviously, so long as the CLI experience isn't terrible and I can easily
+> > script around things that don't work well for me, I can work with almost
+> > anything.
 >=20
-> I think I meant to refer to this one which is not merged either:
-> commit 6727154c929f3dc8ed86bab29aa1de88620906e9
-> Author: Jackie Huang <jackie.huang@windriver.com>
-> Date:   Tue Nov 17 01:44:47 2015 -0800
->=20
->     netmap-modules: skip the arch check for kernel module
->    =20
->     When building on a multilib capable BSP, it's possible for the
->     kernel bit size to be different than the userspace. Avoid the
->     QA test when building the kernel module.
->    =20
->     Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
->=20
-> sorry that if the explanation is not clear enough.
->=20
-> > I merged that one but now I'm thinking I shouldn't have without more
-> > careful consideration. =20
->=20
-> The one you merged is "netmap-modules: Modules may not have the same arch=
- as userspace"
-> and Mark helped to split and re-word the commit message like what it is n=
-ow.
+> FWIW, and I know some people may be tired of hearing about this without m=
+uch=20
+> visible progress, but we still have some people within Intel working on=
+=20
+> Patchwork as well as some automated patch testing functionality aimed at =
+OE=20
+> specifically, and they are making progress. I hope to have something to s=
+how=20
+> pretty soon. It should eliminate a lot of the manual work required with t=
+he=20
+> current version.
 
-Okay, so at least I am looking at what I think I'm looking at.
-
-> > Am I correct in thinking that this problem only shows up when you're
-> > building for multilib? =20
->=20
-> We have BSPs with a 64 bit kernel + modules + 32 bit userspace by default=
-, the
-> problem always show up when we're building such BSP, and we have a bbclas=
-s to
-> add INSANE_SKIP for internal modules:
->=20
-> # sanity updates. The do_package_qa_prepend and vmlinux sanity
-> # flags allow a 64 bit kernel + modules to be packaged against a
-> # 32 bit userspace. If external modules are built, they must supply
-> # their own INSANE_SKIP_<module> =3D "arch" if they want to be properly
-> # packaged.
-> python do_package_qa_prepend () {
-
-I guess in this case you mean it's a bbclass that's internal to Wind
-River, I did a quick search and couldn't find the code you reference above
-anywhere in my poky tree.
-
-> > I've reverted "netmap-modules: Modules may not have the same arch as us=
-erspace" in my contrib=20
-> > tree at http://git.openembedded.org/meta-openembedded-contrib/log/?h=3D=
-joeythesaint/meta-networking-next=20
-> > and my initial test builds showed no QA issues related to netmap-module=
-s and the arch checks. =20
-> > So I started looking around for other kernel modules doing something si=
-milar and I don't actually=20
-> > see this "INSANE_SKIP_kernel-module-*" construct being used anywhere el=
-se in meta-oe or poky=20
-> > (and at the least I would expect something like cryptodev-module to nee=
-d it, it looks like an=20
-> > analogue to me).  Can you fill me in on what's special with iscsitarget=
- and netmap, because=20
-> > even if it is a multilib issue, why wouldn't that be showing up for oth=
-er kernel modules built=20
-> > in poky?
->=20
-> That's because there is no such BSP like I mentioned above in poky, I
-> undersatand if this is not accpeted, we may add this in our own layer.
-
-I think that's best, since otherwise the you'll be submitting these
-changes for any external module to support a use-case that we don't have
-in Yocto and there's no obvious corresponding behaviour in poky.
-
-Thanks.
+I was wondering about that.  I'm quite looking forward to it.  At the
+very least I know newer versions of patchwork than the one we have right
+now offer an improved bundle experience.
 
 --=20
 -Joe MacDonald.
 :wq
 
---8t9RHnE3ZwKMSgU+
+--8TaQrIeukR7mmbKf
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iQEcBAEBAgAGBQJW2GN6AAoJEEn8ffcsOfaWHHEIAMgHDJFYYf3oC+pBW+98u/Ag
-+0C3sz9S+E/bhNBBZkc8HxxNu19K/dkSJAqnCdja4hn2BvAssDwXTwKI2/1zvEJT
-78VZYrgBXaGIxqHphxJJsr9cI1cwIzlFv9LZHtAeAs66w20Od2/DVAO4wURrd8gm
-QLMorOLddsbNRFa42L0y6WWjBDqBGt9WrtGPE4MN+IyH4rpqoZwTwnfETWQtYOii
-7LOKIDGvj8VwKjqBlJ2dxnwwVZQvtCnlS6/6XGsvY1+5lBf1O+KkR261YZwn6AGh
-i7ZEwn++fw+yNiWSLERILwzrqTWyM3aEd4P8CI7mAPqtILgEZYFxMl3+yxXOyHk=
-=fj3E
+iQEcBAEBAgAGBQJW2KK1AAoJEEn8ffcsOfaWdqwH/1AFXELxBiFIXVrY6pI2P7w3
+zAvi6GGlCSJT+e/dLxpNsef9EaitTq89FRTD007OwXGO8w9JPEF487E6gBy5KPCC
+AkvN6/0cCx4d8vudSPTu6X++n3fkRH7c6Q5/M0EkQGAbMyn7UTWAg8rKTfwxDp0e
+Yx6I43TrQs3KinS+2ImCvnIfjNo7p7G/ydiqtMcIAJPX7zuVWwsc43LKXGC+UPjp
+fQywn59T5WmbePhH/9fxYyRRI1e5IVMhS/wRiZItQAYLORczaiPnK2TGDeVzjn6k
+U4wz09fWn6ZIjJJ4ttIYJA0mGpfdpb0mvkRC5DXlI0ID6SNqIOETTGxUWmnPTlw=
+=8ewQ
 -----END PGP SIGNATURE-----
 
---8t9RHnE3ZwKMSgU+--
+--8TaQrIeukR7mmbKf--
