@@ -1,53 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 09FF276806
+Return-Path: <ross.burton@intel.com>
+Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
+	[209.85.213.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F08F731D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Mar 2016 12:58:17 +0000 (UTC)
-Received: by mail-wm0-f50.google.com with SMTP id l68so130047318wml.0
+	Thu,  3 Mar 2016 13:47:30 +0000 (UTC)
+Received: by mail-ig0-f181.google.com with SMTP id hb3so64528703igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Mar 2016 04:58:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=dAMDvM1coYyQiRE/rKIwZ7SRkwayRz/Pwnc4ZhS/HyA=;
-	b=nFDEnBEpNx9BRgm0DDM7H9hW+BpD7BNE0BW/hbNv/CI2VXU8dp4QEG0sm1K0+u6c0C
-	tbqXVvKem4ZbXXLP9my5aKtFwWSEhcKImAeqypNUKO1oEDOCyQSJIZRrD9DWl52Ue+0v
-	iGN2WraOtXLewaCsO1gOv6PARQbPNCU8iZf6fbqVBMJXmDItfh+UoK73t74EBc8OVjw+
-	Jp5ZnWYuGxdZkYeNC29+KLA4KLC/0MpnHJIaf6mmuKLWalZux/bUpfVHK51Ab0OIlPC3
-	MrmSCpdUKgOtLsC7OPskTwt60/x1gH1+v7CXQWAqwwpI4nwxicq6gb1E81O6eVJeu6kF
-	GXlw==
+	Thu, 03 Mar 2016 05:47:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=Q84e9u84+e8FrEyznhI4Cq/Qv6pULMgweCjM7iS2heg=;
+	b=1rpuHwbHqCvCXB5unKOvIirJVpH4svVMBdDLVTcEWAB4R29Zk3tQ/hpRPnUFeeNTcZ
+	syLOHRZl3ZRBu4fGlxwHf7x3W1HJ3sW+xndSptdwrg6L3eKJrKzUX6iF/rSE/stohUmt
+	H4+K/EPCZOJzi/YYscex898J0kdpp9nZx+Ytya+d9nLIVPZOoaz2yUUwFA+BfhyMCXb8
+	GjZwcOxs2jZhEMrr6WzDo50TE7L69olxCwQChOGj7kqpxD7OCTitOdAURfEZS2Q34BmG
+	7+mJZPdggGQMctScn2Vp5PL9sMqDDTeapLhxpRxifY4jtTXuVYJvHWl1WMBmHCemIGgR
+	kk1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=dAMDvM1coYyQiRE/rKIwZ7SRkwayRz/Pwnc4ZhS/HyA=;
-	b=eFFKRpUEXuNsicNdxaFzIfleug9IeBDc9qGquLW3Yk51/d/8C4+//SceQSv2NqW0WM
-	t8CaPxYsGfc6NjPmpch9FpuU2Sh/tcNX1o/WfLZrUEcBcO5ynVRnpOR28sX0q8zyREzP
-	s7UcNmvrpRI4FnpdWW1ti6s3AunA/V0BRPk/E5JaOwOC2AyJCRjd2FBccIEaGzmmX12U
-	RrFoYr18lZGHeCH2m4HlzY3H1lwKl2mCjk60mPofbbV1uk+hWvyBFVoQZ86aZdxSpxrI
-	WbnEaK/7P6LHS3eLVqeJ9ngsu4Lr17Xp+KPPwbRQ4klkFctbRHPzJ5z4l+Tsf+VwuI2V
-	c+uA==
-X-Gm-Message-State: AD7BkJJgve1nzVJng+IjAVg18PY6nfkJ17+6vMhln47DyBYn8QKYcNNxPrGKASV9drbUnw==
-X-Received: by 10.28.148.16 with SMTP id w16mr3423502wmd.90.1457009898081;
-	Thu, 03 Mar 2016 04:58:18 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	fv6sm40633220wjc.12.2016.03.03.04.58.16
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 03 Mar 2016 04:58:16 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 3 Mar 2016 14:00:22 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160303130022.GD2569@jama>
-References: <1456935672-15538-1-git-send-email-Martin.Jansa@gmail.com>
-	<1456935672-15538-4-git-send-email-Martin.Jansa@gmail.com>
-	<56D83036.9020909@linux.intel.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=Q84e9u84+e8FrEyznhI4Cq/Qv6pULMgweCjM7iS2heg=;
+	b=bqfj0HjMFc3UxiGMLhdXeBY5BDKuDbOaXJGibC8TV9nd/Z1qIq3zzQ+n1D0qVV8RF3
+	rgD/iCNvjurVCk6gD2Rc7gNgt3yUCiziKCJo/DjUPl7jyyrA6KpaCXoBOBlmioGt4zC+
+	Gcb/wP9cQ0drC29qCdMfmKeE30KiXp/ztXGCDSJc+q6KnB/k5n/yxA+nYFyxyuj33njO
+	113n+Y/k1vc17OO6qxoMYdQnzbXi8/AIJBj+4mah9vnA9by53YAuk4EbATfDeGrDxjss
+	Zc2O5T4cuNeyQel+J7AiZL/RMxPOE5VnCDg9WK0SuYjcTNTuO9Tj2w7lz6z3yygRhGAk
+	gxJQ==
+X-Gm-Message-State: AD7BkJJhanw1/XmTqWcg6zoM83dPBcpL6hhhgyIgKgrHSVLTrBaYacbxVsXPBe6ihH3vzSR2v1UQjYU6/iyN42Ud
+X-Received: by 10.50.112.101 with SMTP id ip5mr984872igb.52.1457012851403;
+	Thu, 03 Mar 2016 05:47:31 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <56D83036.9020909@linux.intel.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH][meta-oe 4/5] gst-ffmpeg: blacklist, not compatible with currently used ffmpeg 3
+Received: by 10.107.162.70 with HTTP; Thu, 3 Mar 2016 05:47:12 -0800 (PST)
+In-Reply-To: <1457002594-12327-1-git-send-email-anders.roxell@linaro.org>
+References: <1456994787-29216-1-git-send-email-anders.roxell@linaro.org>
+	<1457002594-12327-1-git-send-email-anders.roxell@linaro.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 3 Mar 2016 13:47:12 +0000
+Message-ID: <CAJTo0LY-OnDmo=KyCJF2Tsc+8Xxn4mKBXmy3=6vLj3ATi7P9vQ@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCHv2] cunit: delete *.la files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,56 +54,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Mar 2016 12:58:20 -0000
-X-Groupsio-MsgNum: 60316
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="tNQTSEo8WG/FKZ8E"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 03 Mar 2016 13:47:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
---tNQTSEo8WG/FKZ8E
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 3 March 2016 at 10:56, Anders Roxell <anders.roxell@linaro.org> wrote:
 
-On Thu, Mar 03, 2016 at 02:38:14PM +0200, Alexander Kanavin wrote:
-> On 03/02/2016 06:21 PM, Martin Jansa wrote:
->=20
-> > +# http://errors.yoctoproject.org/Errors/Details/40736/
-> > +PNBLACKLIST[gst-ffmpeg] ?=3D "Not compatible with currently used ffmpe=
-g 3"
->=20
-> Before blacklisting, you should try switching to gst-ffmpeg's internal=20
-> copy of that library, and see if it helps:
+> +inherit autotools-brokensep remove-libtool
+>
 
-I'm not using gst-ffmpeg, someone who can test it in runtime should try
-it.
+I should point out this was meant to be something that the distro or user
+inherited, not per-recipe to avoid broken .la files.
 
-> PACKAGECONFIG ??=3D "external-libav"
-> PACKAGECONFIG[external-libav] =3D "--with-system-ffmpeg,,libav"
->=20
-> So drop external-libav from PACKAGECONFIG.
->=20
-> Alex
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Ross
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---tNQTSEo8WG/FKZ8E
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlbYNWUACgkQN1Ujt2V2gBzViwCfeKziXrXMdlSTg4cTuo0gMLg5
-A/0An3qFtJBUZoEC9W0iaIKIFtRtQs5s
-=L7f9
------END PGP SIGNATURE-----
-
---tNQTSEo8WG/FKZ8E--
