@@ -1,37 +1,45 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 3602 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 04 Mar 2016 19:33:36 UTC
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 8938C74197;
-	Fri,  4 Mar 2016 19:33:36 +0000 (UTC)
-Received: from vz-proxy-l007.mx.aol.com ([64.236.82.151])
-	by vms173017.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014))
-	with ESMTPA id <0O3J005S4279AY60@vms173017.mailsrvcs.net>; Fri,
-	04 Mar 2016 12:33:09 -0600 (CST)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WcjxEBVX c=1 sm=1 tr=0	a=eaPqxu9IKnv3tbb7QsXVMw==:117
-	a=kj9zAlcOel0A:10 a=7OsogOcEt9IA:10	a=fk1lIlRQAAAA:8 a=Ntg_Zx-WAAAA:8
-	a=lyf1682xAAAA:8 a=Q4-j1AaZAAAA:8	a=glYYetgiuCdXDsQQ4xQA:9
-	a=CjuIK1q_8ugA:10
-Received: by 100.15.86.14 with SMTP id 1c4a90b2; Fri, 04 Mar 2016 18:33:09 GMT
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 55AA3161EFD; Fri,
-	4 Mar 2016 13:33:07 -0500 (EST)
-Date: Fri, 04 Mar 2016 13:33:07 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Mark Hatle <mark.hatle@windriver.com>
-Message-id: <20160304183307.GF13743@denix.org>
-References: <1456904241-17157-1-git-send-email-akuster808@gmail.com>
-	<20160304153952.GC13743@denix.org> <56D9BBC9.6010707@mvista.com>
-	<20160304165116.GE13743@denix.org> <56D9BFAE.5030509@windriver.com>
-MIME-version: 1.0
-In-reply-to: <56D9BFAE.5030509@windriver.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: akuster <akuster@mvista.com>, openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [jethro][fido][PATCH] openssl: Security fix CVE-2016-0800
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qg0-f43.google.com (mail-qg0-f43.google.com
+	[209.85.192.43])
+	by mail.openembedded.org (Postfix) with ESMTP id BE77D731E5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  4 Mar 2016 23:33:38 +0000 (UTC)
+Received: by mail-qg0-f43.google.com with SMTP id w104so56388542qge.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Mar 2016 15:33:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=JVOon4hnXRN20XrbJ0DJl8K+4FrBrjQNfgLVzQZmtwI=;
+	b=HnBe37dh1epHvly3vSRkoKCa25RgPg0TgmK3/J9PsgNEdLtKNtoCFysBZKyp7uyyFW
+	EszUOD5gcjMKpnJWAtKvwdPT7fNh8vzRKM1kzIEWVgKzM+dRz+iJo0W9kl4Y7PhGHLJF
+	41/piAj+xaJbLgUx8KxNM2IhDqkQ3oLqLQSO/qsyBohGqP8UVKy5+DR6PDNoJ0nrbMy1
+	G/GzHOYdEzjh2qXb8h67hM+0CwOPkdM2IItkEZUcetxnjf8n+gzRUI4V+6v1w5hUOsuG
+	dMRKTqSm6AkrYqmsYIox/D2Hw4+kPEJ9aaD9cNd7dCGaYXccpTRal1U3uGWXxHZ4lUb2
+	GDlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=JVOon4hnXRN20XrbJ0DJl8K+4FrBrjQNfgLVzQZmtwI=;
+	b=h3iQFG0hqCzYrunWSXFpDilHHPMH2OUJHp6qFCZgMC65CjDMEr5EvCaccA3qyJs/Vj
+	Hun5AfeLW9JfdvJ435Y73Dr6T2kOkePn+2awD5FBTvPN0Eb2cMdNfNAO4HuKsT+l0HUD
+	Y91JJQpr9gM3WQL7MKBM4UQTLd7SWLWZ+Y4alMevCGqK1Kx4Ie+SPrpGzxM/QRPS4G2n
+	WWOvmjB8ePoYJ4rqmf8E9YOrjIk2dMbjqBqITPAK43wlpPz0J+pdPoEGSEbwbdsnfb/G
+	ioStn2X+BwdDWbEUU6L5WCuRvuqqDZkmEVf4Ic+aBrN0iC5O9RAO6ReJkcIcW+3HJ4YV
+	fMRg==
+X-Gm-Message-State: AD7BkJLj+9N90EkYGLTcZa9fwzS6FoJWAv8crx6PTU8YiPnJAckBy1Td7fOYJ4gLzlr52DpFmNfyPF+NeFFd0A==
+X-Received: by 10.140.241.68 with SMTP id m65mr14260312qhc.98.1457134418957;
+	Fri, 04 Mar 2016 15:33:38 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.55.130.196 with HTTP; Fri, 4 Mar 2016 15:33:09 -0800 (PST)
+In-Reply-To: <1456266340-30312-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1456266340-30312-1-git-send-email-schnitzeltony@googlemail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 5 Mar 2016 07:33:09 +0800
+Message-ID: <CAMKF1sr_oFNbatzU4_pXnwZ7WU5JjmExeD0NFSYoScQD8YmpZA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH] firefox: fix install for oe-core master and cleanup packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,122 +52,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Mar 2016 19:33:36 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 04 Mar 2016 23:33:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 04, 2016 at 11:02:38AM -0600, Mark Hatle wrote:
-> On 3/4/16 10:51 AM, Denys Dmytriyenko wrote:
-> > On Fri, Mar 04, 2016 at 08:46:01AM -0800, akuster wrote:
-> >>
-> >>
-> >> On 03/04/2016 07:39 AM, Denys Dmytriyenko wrote:
-> >>> On Tue, Mar 01, 2016 at 11:37:21PM -0800, Armin Kuster wrote:
-> >>>> From: Armin Kuster <akuster@mvista.com>
-> >>>>
-> >>>> CVE-2016-0800 SSL/TLS: Cross-protocol attack on TLS using SSLv2 (DROWN)
-> >>>>
-> >>>> https://www.openssl.org/news/secadv/20160301.txt
-> >>>>
-> >>>> Signed-off-by: Armin Kuster <akuster@mvista.com>
-> >>>> ---
-> >>>>  .../openssl/openssl/CVE-2016-0800.patch            | 198 +++++++
-> >>>>  .../openssl/openssl/CVE-2016-0800_2.patch          | 592 +++++++++++++++++++++
-> >>>>  .../openssl/openssl/CVE-2016-0800_3.patch          | 503 +++++++++++++++++
-> >>>>  .../recipes-connectivity/openssl/openssl_1.0.2d.bb |   3 +
-> >>>>  4 files changed, 1296 insertions(+)
-> >>>>  create mode 100644 meta/recipes-connectivity/openssl/openssl/CVE-2016-0800.patch
-> >>>>  create mode 100644 meta/recipes-connectivity/openssl/openssl/CVE-2016-0800_2.patch
-> >>>>  create mode 100644 meta/recipes-connectivity/openssl/openssl/CVE-2016-0800_3.patch
-> >>>>
-> >>>> diff --git a/meta/recipes-connectivity/openssl/openssl/CVE-2016-0800.patch b/meta/recipes-connectivity/openssl/openssl/CVE-2016-0800.patch
-> >>>> new file mode 100644
-> >>>> index 0000000..e5635fe
-> >>>> --- /dev/null
-> >>>> +++ b/meta/recipes-connectivity/openssl/openssl/CVE-2016-0800.patch
-> >>>> @@ -0,0 +1,198 @@
-> >>>> +From 9dfd2be8a1761fffd152a92d8f1b356ad667eea7 Mon Sep 17 00:00:00 2001
-> >>>> +From: Viktor Dukhovni <openssl-users@dukhovni.org>
-> >>>> +Date: Wed, 17 Feb 2016 21:07:48 -0500
-> >>>> +Subject: [PATCH] Disable SSLv2 default build, default negotiation and weak
-> >>>> + ciphers.
-> >>>> +MIME-Version: 1.0
-> >>>> +Content-Type: text/plain; charset=UTF-8
-> >>>> +Content-Transfer-Encoding: 8bit
-> >>>> +
-> >>>> +SSLv2 is by default disabled at build-time.  Builds that are not
-> >>>> +configured with "enable-ssl2" will not support SSLv2.  Even if
-> >>>> +"enable-ssl2" is used, users who want to negotiate SSLv2 via the
-> >>>> +version-flexible SSLv23_method() will need to explicitly call either
-> >>>> +of:
-> >>>> +
-> >>>> +    SSL_CTX_clear_options(ctx, SSL_OP_NO_SSLv2);
-> >>>> +or
-> >>>> +    SSL_clear_options(ssl, SSL_OP_NO_SSLv2);
-> >>>> +
-> >>>> +as appropriate.  Even if either of those is used, or the application
-> >>>> +explicitly uses the version-specific SSLv2_method() or its client
-> >>>> +or server variants, SSLv2 ciphers vulnerable to exhaustive search
-> >>>> +key recovery have been removed.  Specifically, the SSLv2 40-bit
-> >>>> +EXPORT ciphers, and SSLv2 56-bit DES are no longer available.
-> >>>> +
-> >>>> +Mitigation for CVE-2016-0800
-> >>>
-> >>> So, this CVE is all nice and good, but it breaks things and other OE recipes.
-> >>>
-> >>> For starters, python-m2crypto and crda from meta-openembedded:
-> >>>
-> >>> ERROR: Failed to import the "M2Crypto" module: .../usr/lib/python2.7/site-packages/M2Crypto/__m2crypto.so: undefined symbol: SSLv2_method
-> >>
-> >> well we built that internally and it pass because we are using the one
-> >> from meta-virt. its a newer version (0.22.3) than the one in meta-python
-> >> (0.21.1).
-> >>
-> >> working on the one in meta-python.
-> > 
-> > Ah, thanks! So, what would be the approach to fix it in meta-python? Would 
-> > version update be allowed for backport to fido/dizzy? It's rather against the 
-> > policy, but in this case it's broken w/o the update...
-> 
-> I think in this case, it makes sense to backport a python first for the issue.
-> 
-> SSLv2 really isn't secure any longer.  Anything using cryptography should not be
-> using SSLv2, but if it available should be switching based on OpenSSL having (or
-> not) the necessary symbols.
-> 
-> For reference the CVE-2016-0800 change disables SSLv2 and various 'weak' SSLv3+
-> cryptographic functions.  This can be re-enabled, with a simple build switch in
-> OpenSSL -- but I'd caution against doing so.  Previous patches have mitigated a
-> related problem that would allow an attacker to get OpenSSL to downgrade to a
-> weak SSLv2 encryption, the 0800 patch takes it one further and just disables
-> SSLv2 completely.  So the previous fixes will help mitigate the problem, but
-> only disabling will remove potential reliance on less then secure methods.
+On Wed, Feb 24, 2016 at 6:25 AM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> Could build test only due to lack of building image
+>
 
-Thanks, Mark!
+this is ok to install.
 
-As I said before, I understand and agree with this CVE fix, especially in 
-light of all the latest news... But backporting it all the way to fido seems 
-to break bunch of older packages that still rely on SSLv2. Just saying that we 
-now need to fix those either by patching or by upgrading, since past releases 
-should not only be secure, but also stable :)
-
--- 
-Denys
-
-
-> >>> Are there any plans to go and ensure that other recipes using SSLv2 are not 
-> >>> broken now?
-> >>
-> >> yes, as I find time and not _all_ meta layers.
-> >>
-> >> thanks for letting me know. it will make this task go by faster.
-> > 
-> > I'll let you know if anything else is broken :)
-> > 
-> 
-> -- 
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ---
+>  recipes-mozilla/firefox/firefox_38.6.1esr.bb | 16 +++-------------
+>  1 file changed, 3 insertions(+), 13 deletions(-)
+>
+> diff --git a/recipes-mozilla/firefox/firefox_38.6.1esr.bb b/recipes-mozil=
+la/firefox/firefox_38.6.1esr.bb
+> index 8356532..4e4a7aa 100644
+> --- a/recipes-mozilla/firefox/firefox_38.6.1esr.bb
+> +++ b/recipes-mozilla/firefox/firefox_38.6.1esr.bb
+> @@ -68,7 +68,7 @@ do_install_append() {
+>
+>      install -m 0644 ${WORKDIR}/mozilla-firefox.desktop ${D}${datadir}/ap=
+plications/
+>      install -m 0644 ${WORKDIR}/mozilla-firefox.png ${D}${datadir}/pixmap=
+s/
+> -    install -m 0644 ${WORKDIR}/vendor.js ${D}${libdir}/${PN}-${MOZ_APP_B=
+ASE_VERSION}/defaults/pref/
+> +    install -m 0644 ${WORKDIR}/vendor.js ${D}${libdir}/${PN}/defaults/pr=
+ef/
+>
+>      # Fix ownership of files
+>      chown root:root -R ${D}${datadir}
+> @@ -78,19 +78,9 @@ do_install_append() {
+>  FILES_${PN} =3D "${bindir}/${PN} \
+>                 ${datadir}/applications/ \
+>                 ${datadir}/pixmaps/ \
+> -               ${libdir}/${PN}-${MOZ_APP_BASE_VERSION}/* \
+> -               ${libdir}/${PN}-${MOZ_APP_BASE_VERSION}/.autoreg \
+> +               ${libdir}/${PN}/* \
+>                 ${bindir}/defaults"
+> -FILES_${PN}-dev +=3D "${datadir}/idl ${bindir}/${PN}-config ${libdir}/${=
+PN}-devel-*"
+> -FILES_${PN}-staticdev +=3D "${libdir}/${PN}-devel-*/sdk/lib/*.a"
+> -FILES_${PN}-dbg +=3D "${libdir}/${PN}-${MOZ_APP_BASE_VERSION}/.debug \
+> -                    ${libdir}/${PN}-${MOZ_APP_BASE_VERSION}/*/.debug \
+> -                    ${libdir}/${PN}-${MOZ_APP_BASE_VERSION}/*/*/.debug \
+> -                    ${libdir}/${PN}-${MOZ_APP_BASE_VERSION}/*/*/*/.debug=
+ \
+> -                    ${libdir}/${PN}-devel-*/*/.debug \
+> -                    ${libdir}/${PN}-devel-*/*/*/.debug \
+> -                    ${libdir}/${PN}-devel-*/*/*/*/.debug \
+> -                    ${bindir}/.debug"
+> +FILES_${PN}-dev +=3D "${datadir}/idl ${bindir}/${PN}-config"
+>
+>  # We don't build XUL as system shared lib, so we can mark all libs as pr=
+ivate
+>  PRIVATE_LIBS =3D "libmozjs.so \
+> --
+> 2.5.0
+>
+> --
 > _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
