@@ -1,45 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DF7576312
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Mar 2016 15:14:43 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id p65so33092432wmp.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Mar 2016 07:14:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=/BduOsWRnVDSkJRqQGkS1f4IAWvivDFiX3ZkHOTMqY8=;
-	b=BtzhuV6ycl4nFlHMmuNQ04fOayLTLWj+CUjEJg2IJz3TWa+ce8f99itbpY+eNb5vlk
-	D2cE0wlmKGD/74ygX5o1u0rk9as4/2ALf4wIRMRTOxDSsWyIzqUZ1wiX58UByIkk/LP9
-	dU1fQbeN3rEo7ong2Nm7a3U0IPRD4bWr53fakoW5kmgjqJ8JwDLALwK4qS82XQ9FQn1Z
-	DINsbj/PPjloDk3KRS3qEJWpjw+mAl18eNdMscKUy3Rm18GtM7TauhTE6SQfcbJzMciB
-	s5k6XZeTtG2A2RQd5y7Cxa7Hrb+c0UNGnmwoXmxIm9omoR4VRrRa7FCc+KQsdTdRNG1k
-	2OQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=/BduOsWRnVDSkJRqQGkS1f4IAWvivDFiX3ZkHOTMqY8=;
-	b=ekudObYqD/7/qrf8bIaUOeOMPxivyGXcCNJg4Dz7jaBoLBsOoB3pu2LOMB4CgW6iPu
-	dhnox8JWUTkuTc8XsRf85nsgLlRNqwtmUwsuvlCCQEL/sFvEvLi2Itk9ux7Nq+971BHo
-	RJ2IU3dVS4RnO2QTE5vMtrvfJKWpAyZ6WXWNPBEwgqC4tWbRRW+8xiUFCPIVEkTe8Qd4
-	jOuNyMOixqKMZZOVFVN/kab9PCV3MaXW1ALTeiRIgHcPTjGEAYvpH+6MReGpcaC6bMKt
-	ryLlnnU5FsqrJ/80VtnWMlAqaVcByArLyAAE599typfkUNTeSrZDFIno0KjgoekwWjOF
-	Ao5A==
-X-Gm-Message-State: AD7BkJJlwhN64xc50JezAcxgBBkzhuSmFDn/AFFCDg3q0qEnKmcH7mvRojYuqtnspl4cBA==
-X-Received: by 10.28.51.9 with SMTP id z9mr5380491wmz.59.1457104483507;
-	Fri, 04 Mar 2016 07:14:43 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	c136sm3772093wmd.3.2016.03.04.07.14.42
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 04 Mar 2016 07:14:42 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Mar 2016 16:16:53 +0100
-Message-Id: <1457104613-2192-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.2
-Subject: [PATCH][meta-oe] Revert "toybox: upgrade to 0.7.0"
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 3611 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 04 Mar 2016 16:40:35 UTC
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by mail.openembedded.org (Postfix) with ESMTP id D143160232;
+	Fri,  4 Mar 2016 16:40:35 +0000 (UTC)
+Received: from vz-proxy-l002.mx.aol.com ([64.236.82.153])
+	by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014))
+	with ESMTPA id <0O3I00MMGU6G6W70@vms173021.mailsrvcs.net>; Fri,
+	04 Mar 2016 09:39:53 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
+	a=8nJEP1OIZ-IA:10 a=7OsogOcEt9IA:10	a=fk1lIlRQAAAA:8 a=Ntg_Zx-WAAAA:8
+	a=lyf1682xAAAA:8 a=Q4-j1AaZAAAA:8	a=QTCOHL96HVOOjIvTpVMA:9
+	a=DQVNrz0TAAgxaTwt:21 a=pSIYwRPj844TrXgW:21	a=IlSbniZuvGecwpEr:21
+	a=wPNLvfGTeEIA:10
+Received: by 100.15.86.14 with SMTP id 017cb71e; Fri, 04 Mar 2016 15:39:52 GMT
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 11874161EFB; Fri,
+	4 Mar 2016 10:39:52 -0500 (EST)
+Date: Fri, 04 Mar 2016 10:39:52 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Armin Kuster <akuster808@gmail.com>
+Message-id: <20160304153952.GC13743@denix.org>
+References: <1456904241-17157-1-git-send-email-akuster808@gmail.com>
+MIME-version: 1.0
+In-reply-to: <1456904241-17157-1-git-send-email-akuster808@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: akuster@mvista.com, openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] [jethro][fido][PATCH] openssl: Security fix CVE-2016-0800
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,485 +43,1375 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Mar 2016 15:14:46 -0000
+X-List-Received-Date: Fri, 04 Mar 2016 16:40:37 -0000
+Content-type: text/plain; charset=iso-8859-1
+Content-disposition: inline
+Content-transfer-encoding: 8bit
 
-* issues reported by me and Khem weren't addressed
-  http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105824.html
-  http://lists.openembedded.org/pipermail/openembedded-devel/2016-March/106344.html
+On Tue, Mar 01, 2016 at 11:37:21PM -0800, Armin Kuster wrote:
+> From: Armin Kuster <akuster@mvista.com>
+> 
+> CVE-2016-0800 SSL/TLS: Cross-protocol attack on TLS using SSLv2 (DROWN)
+> 
+> https://www.openssl.org/news/secadv/20160301.txt
+> 
+> Signed-off-by: Armin Kuster <akuster@mvista.com>
+> ---
+>  .../openssl/openssl/CVE-2016-0800.patch            | 198 +++++++
+>  .../openssl/openssl/CVE-2016-0800_2.patch          | 592 +++++++++++++++++++++
+>  .../openssl/openssl/CVE-2016-0800_3.patch          | 503 +++++++++++++++++
+>  .../recipes-connectivity/openssl/openssl_1.0.2d.bb |   3 +
+>  4 files changed, 1296 insertions(+)
+>  create mode 100644 meta/recipes-connectivity/openssl/openssl/CVE-2016-0800.patch
+>  create mode 100644 meta/recipes-connectivity/openssl/openssl/CVE-2016-0800_2.patch
+>  create mode 100644 meta/recipes-connectivity/openssl/openssl/CVE-2016-0800_3.patch
+> 
+> diff --git a/meta/recipes-connectivity/openssl/openssl/CVE-2016-0800.patch b/meta/recipes-connectivity/openssl/openssl/CVE-2016-0800.patch
+> new file mode 100644
+> index 0000000..e5635fe
+> --- /dev/null
+> +++ b/meta/recipes-connectivity/openssl/openssl/CVE-2016-0800.patch
+> @@ -0,0 +1,198 @@
+> +From 9dfd2be8a1761fffd152a92d8f1b356ad667eea7 Mon Sep 17 00:00:00 2001
+> +From: Viktor Dukhovni <openssl-users@dukhovni.org>
+> +Date: Wed, 17 Feb 2016 21:07:48 -0500
+> +Subject: [PATCH] Disable SSLv2 default build, default negotiation and weak
+> + ciphers.
+> +MIME-Version: 1.0
+> +Content-Type: text/plain; charset=UTF-8
+> +Content-Transfer-Encoding: 8bit
+> +
+> +SSLv2 is by default disabled at build-time.  Builds that are not
+> +configured with "enable-ssl2" will not support SSLv2.  Even if
+> +"enable-ssl2" is used, users who want to negotiate SSLv2 via the
+> +version-flexible SSLv23_method() will need to explicitly call either
+> +of:
+> +
+> +    SSL_CTX_clear_options(ctx, SSL_OP_NO_SSLv2);
+> +or
+> +    SSL_clear_options(ssl, SSL_OP_NO_SSLv2);
+> +
+> +as appropriate.  Even if either of those is used, or the application
+> +explicitly uses the version-specific SSLv2_method() or its client
+> +or server variants, SSLv2 ciphers vulnerable to exhaustive search
+> +key recovery have been removed.  Specifically, the SSLv2 40-bit
+> +EXPORT ciphers, and SSLv2 56-bit DES are no longer available.
+> +
+> +Mitigation for CVE-2016-0800
 
-This reverts commit 26ee1849d1d70296aee8694f89502eb813842565.
----
- .../toybox/0001-Match-paths-with-busybox.patch     | 388 +++++++++++++++++++++
- .../toybox/toybox_build-add-Missing-CFLAGS.patch   |  28 --
- .../toybox/{toybox_0.7.0.bb => toybox_0.6.0.bb}    |  10 +-
- 3 files changed, 392 insertions(+), 34 deletions(-)
- create mode 100644 meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
- delete mode 100644 meta-oe/recipes-core/toybox/toybox/toybox_build-add-Missing-CFLAGS.patch
- rename meta-oe/recipes-core/toybox/{toybox_0.7.0.bb => toybox_0.6.0.bb} (87%)
+So, this CVE is all nice and good, but it breaks things and other OE recipes.
 
-diff --git a/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch b/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
-new file mode 100644
-index 0000000..9eb965d
---- /dev/null
-+++ b/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
-@@ -0,0 +1,388 @@
-+From 9b37b45067677563dc8daa73d73a015c20ad6222 Mon Sep 17 00:00:00 2001
-+From: Paul Barker <paul@paulbarker.me.uk>
-+Date: Mon, 18 Aug 2014 12:18:16 +0000
-+Subject: [PATCH] Match paths with busybox
-+
-+To ensure that toybox can be installed alongside busybox without confusing
-+update-alternatives, the paths of the links installed by toybox should match
-+those installed by busybox. This is accomplished by changing the flags of a few
-+tools within toybox.
-+
-+v3:
-+    - Forward ported from v0.5.0 to v0.5.2
-+
-+v2:
-+    - Forward ported from v0.4.9 to v0.5.0
-+    - Move new 'mount' command
-+
-+Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
-+
-+Upstream-status: Inappropriate
-+    (specific to update-alternatives use in OpenEmbedded)
-+
-+Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
-+---
-+ toys/lsb/mount.c        | 2 +-
-+ toys/lsb/pidof.c        | 2 +-
-+ toys/other/chvt.c       | 2 +-
-+ toys/other/ifconfig.c   | 2 +-
-+ toys/other/insmod.c     | 2 +-
-+ toys/other/lsmod.c      | 2 +-
-+ toys/other/netcat.c     | 2 +-
-+ toys/other/pivot_root.c | 2 +-
-+ toys/other/readlink.c   | 2 +-
-+ toys/other/reboot.c     | 6 +++---
-+ toys/other/rfkill.c     | 2 +-
-+ toys/other/rmmod.c      | 2 +-
-+ toys/other/swapoff.c    | 2 +-
-+ toys/other/swapon.c     | 2 +-
-+ toys/other/sysctl.c     | 2 +-
-+ toys/posix/cut.c        | 2 +-
-+ toys/posix/df.c         | 2 +-
-+ toys/posix/head.c       | 2 +-
-+ toys/posix/id.c         | 6 +++---
-+ toys/posix/mkfifo.c     | 2 +-
-+ toys/posix/renice.c     | 2 +-
-+ toys/posix/tail.c       | 2 +-
-+ toys/posix/tee.c        | 2 +-
-+ toys/posix/uniq.c       | 2 +-
-+ toys/posix/who.c        | 2 +-
-+ 25 files changed, 29 insertions(+), 29 deletions(-)
-+
-+diff --git a/toys/lsb/mount.c b/toys/lsb/mount.c
-+index c334681..b076ca1 100644
-+--- a/toys/lsb/mount.c
-++++ b/toys/lsb/mount.c
-+@@ -6,7 +6,7 @@
-+  * Note: -hV is bad spec, haven't implemented -FsLU yet
-+  * no mtab (/proc/mounts does it) so -n is NOP.
-+ 
-+-USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
-++USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_BIN|TOYFLAG_STAYROOT))
-+ //USE_NFSMOUNT(NEWTOY(nfsmount, "?<2>2", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
-+ 
-+ config MOUNT
-+diff --git a/toys/lsb/pidof.c b/toys/lsb/pidof.c
-+index 51b742f..a8fc8ef 100644
-+--- a/toys/lsb/pidof.c
-++++ b/toys/lsb/pidof.c
-+@@ -5,7 +5,7 @@
-+  *
-+  * http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-generic/LSB-Core-generic/pidof.html
-+ 
-+-USE_PIDOF(NEWTOY(pidof, "<1so:", TOYFLAG_USR|TOYFLAG_BIN))
-++USE_PIDOF(NEWTOY(pidof, "<1so:", TOYFLAG_BIN))
-+ 
-+ config PIDOF
-+   bool "pidof"
-+diff --git a/toys/other/chvt.c b/toys/other/chvt.c
-+index 6544265..a93327f 100644
-+--- a/toys/other/chvt.c
-++++ b/toys/other/chvt.c
-+@@ -2,7 +2,7 @@
-+  *
-+  * Copyright (C) 2008 David Anders <danders@amltd.com>
-+ 
-+-USE_CHVT(NEWTOY(chvt, "<1", TOYFLAG_USR|TOYFLAG_SBIN))
-++USE_CHVT(NEWTOY(chvt, "<1", TOYFLAG_USR|TOYFLAG_BIN))
-+ 
-+ config CHVT
-+   bool "chvt"
-+diff --git a/toys/other/ifconfig.c b/toys/other/ifconfig.c
-+index 8db3ff0..445799d 100644
-+--- a/toys/other/ifconfig.c
-++++ b/toys/other/ifconfig.c
-+@@ -6,7 +6,7 @@
-+  *
-+  * Not in SUSv4.
-+ 
-+-USE_IFCONFIG(NEWTOY(ifconfig, "^?a", TOYFLAG_BIN))
-++USE_IFCONFIG(NEWTOY(ifconfig, "^?a", TOYFLAG_SBIN))
-+ 
-+ config IFCONFIG
-+   bool "ifconfig"
-+diff --git a/toys/other/insmod.c b/toys/other/insmod.c
-+index 81721a3..cb222a5 100644
-+--- a/toys/other/insmod.c
-++++ b/toys/other/insmod.c
-+@@ -2,7 +2,7 @@
-+  *
-+  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
-+ 
-+-USE_INSMOD(NEWTOY(insmod, "<1", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
-++USE_INSMOD(NEWTOY(insmod, "<1", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-+ 
-+ config INSMOD
-+   bool "insmod"
-+diff --git a/toys/other/lsmod.c b/toys/other/lsmod.c
-+index b8f5d82..4d16048 100644
-+--- a/toys/other/lsmod.c
-++++ b/toys/other/lsmod.c
-+@@ -2,7 +2,7 @@
-+  *
-+  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
-+ 
-+-USE_LSMOD(NEWTOY(lsmod, NULL, TOYFLAG_BIN))
-++USE_LSMOD(NEWTOY(lsmod, NULL, TOYFLAG_SBIN))
-+ 
-+ config LSMOD
-+   bool "lsmod"
-+diff --git a/toys/other/netcat.c b/toys/other/netcat.c
-+index d27aa88..0fd26f7 100644
-+--- a/toys/other/netcat.c
-++++ b/toys/other/netcat.c
-+@@ -4,7 +4,7 @@
-+  *
-+  * TODO: udp, ipv6, genericize for telnet/microcom/tail-f
-+ 
-+-USE_NETCAT(OLDTOY(nc, netcat, TOYFLAG_BIN))
-++USE_NETCAT(OLDTOY(nc, netcat, TOYFLAG_USR|TOYFLAG_BIN))
-+ USE_NETCAT(NEWTOY(netcat, USE_NETCAT_LISTEN("^tlL")"w#p#s:q#f:", TOYFLAG_BIN))
-+ 
-+ config NETCAT
-+diff --git a/toys/other/pivot_root.c b/toys/other/pivot_root.c
-+index 9a1f56c..7748032 100644
-+--- a/toys/other/pivot_root.c
-++++ b/toys/other/pivot_root.c
-+@@ -2,7 +2,7 @@
-+  *
-+  * Copyright 2012 Rob Landley <rob@landley.net>
-+ 
-+-USE_PIVOT_ROOT(NEWTOY(pivot_root, "<2>2", TOYFLAG_USR|TOYFLAG_BIN))
-++USE_PIVOT_ROOT(NEWTOY(pivot_root, "<2>2", TOYFLAG_SBIN))
-+ 
-+ config PIVOT_ROOT
-+   bool "pivot_root"
-+diff --git a/toys/other/readlink.c b/toys/other/readlink.c
-+index 1c33362..fecd1ef 100644
-+--- a/toys/other/readlink.c
-++++ b/toys/other/readlink.c
-+@@ -2,7 +2,7 @@
-+  *
-+  * Copyright 2007 Rob Landley <rob@landley.net>
-+ 
-+-USE_READLINK(NEWTOY(readlink, "<1>1fenq[-fe]", TOYFLAG_BIN))
-++USE_READLINK(NEWTOY(readlink, "<1>1fenq[-fe]", TOYFLAG_USR|TOYFLAG_BIN))
-+ 
-+ config READLINK
-+   bool "readlink"
-+diff --git a/toys/other/reboot.c b/toys/other/reboot.c
-+index 8baa4d8..a135888 100644
-+--- a/toys/other/reboot.c
-++++ b/toys/other/reboot.c
-+@@ -2,9 +2,9 @@
-+  *
-+  * Copyright 2013 Elie De Brauwer <eliedebrauwer@gmail.com>
-+ 
-+-USE_REBOOT(NEWTOY(reboot, "n", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
-+-USE_REBOOT(OLDTOY(halt, reboot, TOYFLAG_BIN|TOYFLAG_NEEDROOT))
-+-USE_REBOOT(OLDTOY(poweroff, reboot, TOYFLAG_BIN|TOYFLAG_NEEDROOT))
-++USE_REBOOT(NEWTOY(reboot, "n", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-++USE_REBOOT(OLDTOY(halt, reboot, TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-++USE_REBOOT(OLDTOY(poweroff, reboot, TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-+ 
-+ config REBOOT
-+   bool "reboot"
-+diff --git a/toys/other/rfkill.c b/toys/other/rfkill.c
-+index af3efe1..7527ec7 100644
-+--- a/toys/other/rfkill.c
-++++ b/toys/other/rfkill.c
-+@@ -5,7 +5,7 @@
-+  *
-+  * No Standard
-+ 
-+-USE_RFKILL(NEWTOY(rfkill, "<1>2", TOYFLAG_SBIN))
-++USE_RFKILL(NEWTOY(rfkill, "<1>2", TOYFLAG_USR|TOYFLAG_SBIN))
-+ 
-+ config RFKILL
-+   bool "rfkill"
-+diff --git a/toys/other/rmmod.c b/toys/other/rmmod.c
-+index b789acc..10c134c 100644
-+--- a/toys/other/rmmod.c
-++++ b/toys/other/rmmod.c
-+@@ -2,7 +2,7 @@
-+  *
-+  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
-+ 
-+-USE_RMMOD(NEWTOY(rmmod, "<1wf", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
-++USE_RMMOD(NEWTOY(rmmod, "<1wf", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-+ 
-+ config RMMOD
-+   bool "rmmod"
-+diff --git a/toys/other/swapoff.c b/toys/other/swapoff.c
-+index b89e915..fb17130 100644
-+--- a/toys/other/swapoff.c
-++++ b/toys/other/swapoff.c
-+@@ -2,7 +2,7 @@
-+  *
-+  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
-+ 
-+-USE_SWAPOFF(NEWTOY(swapoff, "<1>1", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
-++USE_SWAPOFF(NEWTOY(swapoff, "<1>1", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-+ 
-+ config SWAPOFF
-+   bool "swapoff"
-+diff --git a/toys/other/swapon.c b/toys/other/swapon.c
-+index 49f1249..838d382 100644
-+--- a/toys/other/swapon.c
-++++ b/toys/other/swapon.c
-+@@ -2,7 +2,7 @@
-+  *
-+  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
-+ 
-+-USE_SWAPON(NEWTOY(swapon, "<1>1p#<0>32767", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
-++USE_SWAPON(NEWTOY(swapon, "<1>1p#<0>32767", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-+ 
-+ config SWAPON
-+   bool "swapon"
-+diff --git a/toys/other/sysctl.c b/toys/other/sysctl.c
-+index 8e57ca1..0c6c640 100644
-+--- a/toys/other/sysctl.c
-++++ b/toys/other/sysctl.c
-+@@ -5,7 +5,7 @@
-+  *
-+  * No Standard
-+  
-+-USE_SYSCTL(NEWTOY(sysctl, "^neNqwpaA[!ap][!aq][!aw][+aA]", TOYFLAG_USR|TOYFLAG_BIN))
-++USE_SYSCTL(NEWTOY(sysctl, "^neNqwpaA[!ap][!aq][!aw][+aA]", TOYFLAG_SBIN))
-+ 
-+ config SYSCTL
-+   bool "sysctl"
-+diff --git a/toys/posix/cut.c b/toys/posix/cut.c
-+index 7f10c5e..1ab3ce8 100644
-+--- a/toys/posix/cut.c
-++++ b/toys/posix/cut.c
-+@@ -5,7 +5,7 @@
-+  *
-+  * http://pubs.opengroup.org/onlinepubs/9699919799/utilities/cut.html 
-+ 
-+-USE_CUT(NEWTOY(cut, "b:|c:|f:|d:sn[!cbf]", TOYFLAG_BIN))
-++USE_CUT(NEWTOY(cut, "b:|c:|f:|d:sn[!cbf]", TOYFLAG_USR|TOYFLAG_BIN))
-+ 
-+ config CUT
-+   bool "cut"
-+diff --git a/toys/posix/df.c b/toys/posix/df.c
-+index 141e8e5..5d37b45 100644
-+--- a/toys/posix/df.c
-++++ b/toys/posix/df.c
-+@@ -4,7 +4,7 @@
-+  *
-+  * See http://opengroup.org/onlinepubs/9699919799/utilities/df.html
-+ 
-+-USE_DF(NEWTOY(df, "Pkt*a[-Pk]", TOYFLAG_USR|TOYFLAG_SBIN))
-++USE_DF(NEWTOY(df, "Pkt*a[-Pk]", TOYFLAG_BIN))
-+ 
-+ config DF
-+   bool "df"
-+diff --git a/toys/posix/head.c b/toys/posix/head.c
-+index e8517d4..3ac4373 100644
-+--- a/toys/posix/head.c
-++++ b/toys/posix/head.c
-+@@ -4,7 +4,7 @@
-+  *
-+  * See http://opengroup.org/onlinepubs/9699919799/utilities/head.html
-+ 
-+-USE_HEAD(NEWTOY(head, "n#<0=10", TOYFLAG_BIN))
-++USE_HEAD(NEWTOY(head, "n#<0=10", TOYFLAG_USR|TOYFLAG_BIN))
-+ 
-+ config HEAD
-+   bool "head"
-+diff --git a/toys/posix/id.c b/toys/posix/id.c
-+index 353aa04..7ab489e 100644
-+--- a/toys/posix/id.c
-++++ b/toys/posix/id.c
-+@@ -6,10 +6,10 @@
-+  *
-+  * See http://opengroup.org/onlinepubs/9699919799/utilities/id.html
-+ 
-+-USE_ID(NEWTOY(id, ">1"USE_ID_SELINUX("Z")"nGgru[!"USE_ID_SELINUX("Z")"Ggu]", TOYFLAG_BIN))
-++USE_ID(NEWTOY(id, ">1"USE_ID_SELINUX("Z")"nGgru[!"USE_ID_SELINUX("Z")"Ggu]", TOYFLAG_USR|TOYFLAG_BIN))
-+ USE_GROUPS(NEWTOY(groups, NULL, TOYFLAG_USR|TOYFLAG_BIN))
-+-USE_LOGNAME(NEWTOY(logname, ">0", TOYFLAG_BIN))
-+-USE_WHOAMI(OLDTOY(whoami, logname, TOYFLAG_BIN))
-++USE_LOGNAME(NEWTOY(logname, ">0", TOYFLAG_USR|TOYFLAG_BIN))
-++USE_WHOAMI(OLDTOY(whoami, logname, TOYFLAG_USR|TOYFLAG_BIN))
-+ 
-+ config ID
-+   bool "id"
-+diff --git a/toys/posix/mkfifo.c b/toys/posix/mkfifo.c
-+index 15fab70..4e0fca3 100644
-+--- a/toys/posix/mkfifo.c
-++++ b/toys/posix/mkfifo.c
-+@@ -4,7 +4,7 @@
-+  *
-+  * See http://opengroup.org/onlinepubs/9699919799/utilities/mkfifo.html
-+ 
-+-USE_MKFIFO(NEWTOY(mkfifo, "<1m:", TOYFLAG_BIN))
-++USE_MKFIFO(NEWTOY(mkfifo, "<1m:", TOYFLAG_USR|TOYFLAG_BIN))
-+ 
-+ config MKFIFO
-+   bool "mkfifo"
-+diff --git a/toys/posix/renice.c b/toys/posix/renice.c
-+index 8c20644..489eb13 100644
-+--- a/toys/posix/renice.c
-++++ b/toys/posix/renice.c
-+@@ -4,7 +4,7 @@
-+  *
-+  * See http://pubs.opengroup.org/onlinepubs/9699919799/utilities/renice.html
-+ 
-+-USE_RENICE(NEWTOY(renice, "<1gpun#|", TOYFLAG_BIN))
-++USE_RENICE(NEWTOY(renice, "<1gpun#|", TOYFLAG_USR|TOYFLAG_BIN))
-+ 
-+ config RENICE
-+   bool "renice"
-+diff --git a/toys/posix/tail.c b/toys/posix/tail.c
-+index e92c044..ba1d311 100644
-+--- a/toys/posix/tail.c
-++++ b/toys/posix/tail.c
-+@@ -4,7 +4,7 @@
-+  *
-+  * See http://opengroup.org/onlinepubs/9699919799/utilities/tail.html
-+ 
-+-USE_TAIL(NEWTOY(tail, "fc-n-[-cn]", TOYFLAG_BIN))
-++USE_TAIL(NEWTOY(tail, "fc-n-[-cn]", TOYFLAG_USR|TOYFLAG_BIN))
-+ 
-+ config TAIL
-+   bool "tail"
-+diff --git a/toys/posix/tee.c b/toys/posix/tee.c
-+index 0388510..5574088 100644
-+--- a/toys/posix/tee.c
-++++ b/toys/posix/tee.c
-+@@ -4,7 +4,7 @@
-+  *
-+  * See http://opengroup.org/onlinepubs/9699919799/utilities/tee.html
-+ 
-+-USE_TEE(NEWTOY(tee, "ia", TOYFLAG_BIN))
-++USE_TEE(NEWTOY(tee, "ia", TOYFLAG_USR|TOYFLAG_BIN))
-+ 
-+ config TEE
-+   bool "tee"
-+diff --git a/toys/posix/uniq.c b/toys/posix/uniq.c
-+index 3cfdb94..c127cfe 100644
-+--- a/toys/posix/uniq.c
-++++ b/toys/posix/uniq.c
-+@@ -4,7 +4,7 @@
-+  *
-+  * See http://opengroup.org/onlinepubs/9699919799/utilities/uniq.html
-+ 
-+-USE_UNIQ(NEWTOY(uniq, "f#s#w#zicdu", TOYFLAG_BIN))
-++USE_UNIQ(NEWTOY(uniq, "f#s#w#zicdu", TOYFLAG_USR|TOYFLAG_BIN))
-+ 
-+ config UNIQ
-+   bool "uniq"
-+diff --git a/toys/posix/who.c b/toys/posix/who.c
-+index 876a562..414cdfc 100644
-+--- a/toys/posix/who.c
-++++ b/toys/posix/who.c
-+@@ -9,7 +9,7 @@
-+  * Posix says to support many options (-abdHlmpqrstTu) but this
-+  * isn't aimed at minicomputers with modem pools.
-+ 
-+-USE_WHO(NEWTOY(who, "a", TOYFLAG_BIN))
-++USE_WHO(NEWTOY(who, "a", TOYFLAG_USR|TOYFLAG_BIN))
-+ 
-+ config WHO
-+   bool "who"
-+-- 
-+1.8.1.2
-+
-diff --git a/meta-oe/recipes-core/toybox/toybox/toybox_build-add-Missing-CFLAGS.patch b/meta-oe/recipes-core/toybox/toybox/toybox_build-add-Missing-CFLAGS.patch
-deleted file mode 100644
-index 80d6b2a..0000000
---- a/meta-oe/recipes-core/toybox/toybox/toybox_build-add-Missing-CFLAGS.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 686492e6b0aa582b42bf95cfc9a31324204d8f79 Mon Sep 17 00:00:00 2001
--From: Alejandro Joya <alejandro.joya.cruz@intel.com>
--Date: Tue, 2 Feb 2016 17:47:50 -0800
--Subject: [PATCH] toybox_build: add Missing CFLAGS
--
--add CFLAGS to multiple builds to forward libraries location in Yocto.
--
--Signed-off-by: Alejandro Joya <alejandro.joya.cruz@intel.com>
-----
-- Makefile | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/Makefile b/Makefile
--index 5422efe..2dca3ae 100644
----- a/Makefile
--+++ b/Makefile
--@@ -37,7 +37,7 @@ bloatcheck: toybox_old toybox_unstripped
-- 
-- generated/instlist: toybox_stuff
-- 	NOBUILD=1 scripts/make.sh
---	$(HOSTCC) -I . scripts/install.c -o generated/instlist
--+	$(HOSTCC) -I . $(CFLAGS) scripts/install.c -o generated/instlist
-- 
-- install_flat: generated/instlist
-- 	scripts/install.sh --symlink --force
---- 
--1.9.1
--
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.7.0.bb b/meta-oe/recipes-core/toybox/toybox_0.6.0.bb
-similarity index 87%
-rename from meta-oe/recipes-core/toybox/toybox_0.7.0.bb
-rename to meta-oe/recipes-core/toybox/toybox_0.6.0.bb
-index a1fa8a9..da03200 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.7.0.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_0.6.0.bb
-@@ -1,11 +1,10 @@
- SUMMARY = "Toybox combines common utilities together into a single executable."
- HOMEPAGE = "http://www.landley.net/toybox/"
- 
--SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
--           file://toybox_build-add-Missing-CFLAGS.patch"
-+SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
- 
--SRC_URI[md5sum] = "d86c78624b47625c2f0fc64eda599443"
--SRC_URI[sha256sum] = "65428816f88ad3fe92b67df86dc05427c8078fe03843b8b9715fdfa6d29c0f97"
-+SRC_URI[md5sum] = "7f4a6c89e56c48e3350e611f5b36c2cf"
-+SRC_URI[sha256sum] = "b6e2694d19ac08f1c3416d5b2a02a31d445db2ed98dec89761430cdff2c9710d"
- 
- 
- LICENSE = "BSD-0-Clause"
-@@ -13,10 +12,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
- 
- SECTION = "base"
- 
--CFLAGS_prepend = "-I ${STAGING_DIR_HOST}${includedir_native}"
--
- do_configure() {
-     oe_runmake defconfig
-+
-     # Disable killall5 as it isn't managed by update-alternatives
-     sed -e 's/CONFIG_KILLALL5=y/# CONFIG_KILLALL5 is not set/' -i .config
- }
+For starters, python-m2crypto and crda from meta-openembedded:
+
+ERROR: Failed to import the "M2Crypto" module: .../usr/lib/python2.7/site-packages/M2Crypto/__m2crypto.so: undefined symbol: SSLv2_method
+
+Are there any plans to go and ensure that other recipes using SSLv2 are not 
+broken now?
+
 -- 
-2.7.2
+Denys
+
+
+> +Reviewed-by: Emilia Käsper <emilia@openssl.org>
+> +
+> +Upstream-Status: Backport
+> +
+> +https://git.openssl.org/?p=openssl.git;a=commit;h=9dfd2be8a1761fffd152a92d8f1b356ad667eea7
+> +
+> +CVE: CVE-2016-0800
+> +Signed-off-by: Armin Kuster <akuster@mvista.com>
+> +
+> +---
+> + CHANGES        | 17 +++++++++++++++++
+> + Configure      |  3 ++-
+> + NEWS           |  2 +-
+> + ssl/s2_lib.c   |  6 ++++++
+> + ssl/ssl_conf.c | 10 +++++++++-
+> + ssl/ssl_lib.c  |  7 +++++++
+> + 6 files changed, 42 insertions(+), 3 deletions(-)
+> +
+> +Index: openssl-1.0.2d/Configure
+> +===================================================================
+> +--- openssl-1.0.2d.orig/Configure
+> ++++ openssl-1.0.2d/Configure
+> +@@ -847,9 +847,10 @@ my %disabled = ( # "what"         => "co
+> + 		 "md2"            => "default",
+> + 		 "rc5"            => "default",
+> + 		 "rfc3779"	  => "default",
+> +-		 "sctp"       => "default",
+> ++		 "sctp"           => "default",
+> + 		 "shared"         => "default",
+> + 		 "ssl-trace"	  => "default",
+> ++		 "ssl2"           => "default",
+> + 		 "store"	  => "experimental",
+> + 		 "unit-test"	  => "default",
+> + 		 "zlib"           => "default",
+> +Index: openssl-1.0.2d/ssl/s2_lib.c
+> +===================================================================
+> +--- openssl-1.0.2d.orig/ssl/s2_lib.c
+> ++++ openssl-1.0.2d/ssl/s2_lib.c
+> +@@ -156,6 +156,7 @@ OPENSSL_GLOBAL const SSL_CIPHER ssl2_cip
+> +      128,
+> +      },
+> + 
+> ++# if 0
+> + /* RC4_128_EXPORT40_WITH_MD5 */
+> +     {
+> +      1,
+> +@@ -171,6 +172,7 @@ OPENSSL_GLOBAL const SSL_CIPHER ssl2_cip
+> +      40,
+> +      128,
+> +      },
+> ++# endif
+> + 
+> + /* RC2_128_CBC_WITH_MD5 */
+> +     {
+> +@@ -188,6 +190,7 @@ OPENSSL_GLOBAL const SSL_CIPHER ssl2_cip
+> +      128,
+> +      },
+> + 
+> ++# if 0
+> + /* RC2_128_CBC_EXPORT40_WITH_MD5 */
+> +     {
+> +      1,
+> +@@ -203,6 +206,7 @@ OPENSSL_GLOBAL const SSL_CIPHER ssl2_cip
+> +      40,
+> +      128,
+> +      },
+> ++# endif
+> + 
+> + # ifndef OPENSSL_NO_IDEA
+> + /* IDEA_128_CBC_WITH_MD5 */
+> +@@ -222,6 +226,7 @@ OPENSSL_GLOBAL const SSL_CIPHER ssl2_cip
+> +      },
+> + # endif
+> + 
+> ++# if 0
+> + /* DES_64_CBC_WITH_MD5 */
+> +     {
+> +      1,
+> +@@ -237,6 +242,7 @@ OPENSSL_GLOBAL const SSL_CIPHER ssl2_cip
+> +      56,
+> +      56,
+> +      },
+> ++# endif
+> + 
+> + /* DES_192_EDE3_CBC_WITH_MD5 */
+> +     {
+> +Index: openssl-1.0.2d/ssl/ssl_conf.c
+> +===================================================================
+> +--- openssl-1.0.2d.orig/ssl/ssl_conf.c
+> ++++ openssl-1.0.2d/ssl/ssl_conf.c
+> +@@ -330,11 +330,19 @@ static int cmd_Protocol(SSL_CONF_CTX *cc
+> +         SSL_FLAG_TBL_INV("TLSv1.1", SSL_OP_NO_TLSv1_1),
+> +         SSL_FLAG_TBL_INV("TLSv1.2", SSL_OP_NO_TLSv1_2)
+> +     };
+> ++    int ret;
+> ++    int sslv2off;
+> ++
+> +     if (!(cctx->flags & SSL_CONF_FLAG_FILE))
+> +         return -2;
+> +     cctx->tbl = ssl_protocol_list;
+> +     cctx->ntbl = sizeof(ssl_protocol_list) / sizeof(ssl_flag_tbl);
+> +-    return CONF_parse_list(value, ',', 1, ssl_set_option_list, cctx);
+> ++
+> ++    sslv2off = *cctx->poptions & SSL_OP_NO_SSLv2;
+> ++    ret = CONF_parse_list(value, ',', 1, ssl_set_option_list, cctx);
+> ++    /* Never turn on SSLv2 through configuration */
+> ++    *cctx->poptions |= sslv2off;
+> ++    return ret;
+> + }
+> + 
+> + static int cmd_Options(SSL_CONF_CTX *cctx, const char *value)
+> +Index: openssl-1.0.2d/ssl/ssl_lib.c
+> +===================================================================
+> +--- openssl-1.0.2d.orig/ssl/ssl_lib.c
+> ++++ openssl-1.0.2d/ssl/ssl_lib.c
+> +@@ -2052,6 +2052,13 @@ SSL_CTX *SSL_CTX_new(const SSL_METHOD *m
+> +      */
+> +     ret->options |= SSL_OP_LEGACY_SERVER_CONNECT;
+> + 
+> ++    /*
+> ++     * Disable SSLv2 by default, callers that want to enable SSLv2 will have to
+> ++     * explicitly clear this option via either of SSL_CTX_clear_options() or
+> ++     * SSL_clear_options().
+> ++     */
+> ++    ret->options |= SSL_OP_NO_SSLv2;
+> ++
+> +     return (ret);
+> +  err:
+> +     SSLerr(SSL_F_SSL_CTX_NEW, ERR_R_MALLOC_FAILURE);
+> +Index: openssl-1.0.2d/CHANGES
+> +===================================================================
+> +--- openssl-1.0.2d.orig/CHANGES
+> ++++ openssl-1.0.2d/CHANGES
+> +@@ -2,6 +2,25 @@
+> +  OpenSSL CHANGES
+> +  _______________
+> + 
+> ++ 
+> ++  * Disable SSLv2 default build, default negotiation and weak ciphers.  SSLv2
+> ++    is by default disabled at build-time.  Builds that are not configured with
+> ++    "enable-ssl2" will not support SSLv2.  Even if "enable-ssl2" is used,
+> ++    users who want to negotiate SSLv2 via the version-flexible SSLv23_method()
+> ++    will need to explicitly call either of:
+> ++
+> ++        SSL_CTX_clear_options(ctx, SSL_OP_NO_SSLv2);
+> ++    or
+> ++        SSL_clear_options(ssl, SSL_OP_NO_SSLv2);
+> ++
+> ++    as appropriate.  Even if either of those is used, or the application
+> ++    explicitly uses the version-specific SSLv2_method() or its client and
+> ++    server variants, SSLv2 ciphers vulnerable to exhaustive search key
+> ++    recovery have been removed.  Specifically, the SSLv2 40-bit EXPORT
+> ++    ciphers, and SSLv2 56-bit DES are no longer available.
+> ++    [Viktor Dukhovni]
+> ++    
+> ++
+> +  Changes between 1.0.2c and 1.0.2d [9 Jul 2015]
+> + 
+> +   *) Alternate chains certificate forgery
+> +Index: openssl-1.0.2d/NEWS
+> +===================================================================
+> +--- openssl-1.0.2d.orig/NEWS
+> ++++ openssl-1.0.2d/NEWS
+> +@@ -1,6 +1,7 @@
+> + 
+> +   NEWS
+> +   ====
+> ++  Disable SSLv2 default build, default negotiation and weak ciphers.
+> + 
+> +   This file gives a brief overview of the major changes between each OpenSSL
+> +   release. For more details please read the CHANGES file.
+> diff --git a/meta/recipes-connectivity/openssl/openssl/CVE-2016-0800_2.patch b/meta/recipes-connectivity/openssl/openssl/CVE-2016-0800_2.patch
+> new file mode 100644
+> index 0000000..de89d08
+> --- /dev/null
+> +++ b/meta/recipes-connectivity/openssl/openssl/CVE-2016-0800_2.patch
+> @@ -0,0 +1,592 @@
+> +From 021fb42dd0cf2bf985b0e26ca50418eb42c00d09 Mon Sep 17 00:00:00 2001
+> +From: Viktor Dukhovni <openssl-users@dukhovni.org>
+> +Date: Wed, 17 Feb 2016 23:38:55 -0500
+> +Subject: [PATCH] Bring SSL method documentation up to date
+> +MIME-Version: 1.0
+> +Content-Type: text/plain; charset=UTF-8
+> +Content-Transfer-Encoding: 8bit
+> +
+> +Reviewed-by: Emilia Käsper <emilia@openssl.org>
+> +
+> +Upstream-Status: Backport
+> +
+> +https://git.openssl.org/?p=openssl.git;a=commit;h=021fb42dd0cf2bf985b0e26ca50418eb42c00d09
+> +
+> +CVE: CVE-2016-0800 #2 patch
+> +Signed-off-by: Armin Kuster <akuster@mvista.com>
+> +
+> +---
+> + doc/apps/ciphers.pod            |  29 ++++---
+> + doc/apps/s_client.pod           |  12 +--
+> + doc/apps/s_server.pod           |   8 +-
+> + doc/ssl/SSL_CONF_cmd.pod        |  33 ++++----
+> + doc/ssl/SSL_CTX_new.pod         | 168 ++++++++++++++++++++++++++++------------
+> + doc/ssl/SSL_CTX_set_options.pod |  10 +++
+> + doc/ssl/ssl.pod                 |  77 ++++++++++++++----
+> + 7 files changed, 226 insertions(+), 111 deletions(-)
+> +
+> +diff --git a/doc/apps/ciphers.pod b/doc/apps/ciphers.pod
+> +index 1c26e3b..8038b05 100644
+> +--- a/doc/apps/ciphers.pod
+> ++++ b/doc/apps/ciphers.pod
+> +@@ -38,25 +38,21 @@ SSL v2 and for SSL v3/TLS v1.
+> + 
+> + Like B<-v>, but include cipher suite codes in output (hex format).
+> + 
+> +-=item B<-ssl3>
+> ++=item B<-ssl3>, B<-tls1>
+> + 
+> +-only include SSL v3 ciphers.
+> ++This lists ciphers compatible with any of SSLv3, TLSv1, TLSv1.1 or TLSv1.2.
+> + 
+> + =item B<-ssl2>
+> + 
+> +-only include SSL v2 ciphers.
+> +-
+> +-=item B<-tls1>
+> +-
+> +-only include TLS v1 ciphers.
+> ++Only include SSLv2 ciphers.
+> + 
+> + =item B<-h>, B<-?>
+> + 
+> +-print a brief usage message.
+> ++Print a brief usage message.
+> + 
+> + =item B<cipherlist>
+> + 
+> +-a cipher list to convert to a cipher preference list. If it is not included
+> ++A cipher list to convert to a cipher preference list. If it is not included
+> + then the default cipher list will be used. The format is described below.
+> + 
+> + =back
+> +@@ -109,9 +105,10 @@ The following is a list of all permitted cipher strings and their meanings.
+> + 
+> + =item B<DEFAULT>
+> + 
+> +-the default cipher list. This is determined at compile time and
+> +-is normally B<ALL:!EXPORT:!aNULL:!eNULL:!SSLv2>. This must be the firstcipher string
+> +-specified.
+> ++The default cipher list.
+> ++This is determined at compile time and is normally
+> ++B<ALL:!EXPORT:!aNULL:!eNULL:!SSLv2>.
+> ++When used, this must be the first cipherstring specified.
+> + 
+> + =item B<COMPLEMENTOFDEFAULT>
+> + 
+> +@@ -582,11 +579,11 @@ Note: these ciphers can also be used in SSL v3.
+> + =head2 Deprecated SSL v2.0 cipher suites.
+> + 
+> +  SSL_CK_RC4_128_WITH_MD5                 RC4-MD5
+> +- SSL_CK_RC4_128_EXPORT40_WITH_MD5        EXP-RC4-MD5
+> +- SSL_CK_RC2_128_CBC_WITH_MD5             RC2-MD5
+> +- SSL_CK_RC2_128_CBC_EXPORT40_WITH_MD5    EXP-RC2-MD5
+> ++ SSL_CK_RC4_128_EXPORT40_WITH_MD5        Not implemented.
+> ++ SSL_CK_RC2_128_CBC_WITH_MD5             RC2-CBC-MD5
+> ++ SSL_CK_RC2_128_CBC_EXPORT40_WITH_MD5    Not implemented.
+> +  SSL_CK_IDEA_128_CBC_WITH_MD5            IDEA-CBC-MD5
+> +- SSL_CK_DES_64_CBC_WITH_MD5              DES-CBC-MD5
+> ++ SSL_CK_DES_64_CBC_WITH_MD5              Not implemented.
+> +  SSL_CK_DES_192_EDE3_CBC_WITH_MD5        DES-CBC3-MD5
+> + 
+> + =head1 NOTES
+> +diff --git a/doc/apps/s_client.pod b/doc/apps/s_client.pod
+> +index 84d0527..618df96 100644
+> +--- a/doc/apps/s_client.pod
+> ++++ b/doc/apps/s_client.pod
+> +@@ -201,15 +201,11 @@ Use the PSK key B<key> when using a PSK cipher suite. The key is
+> + given as a hexadecimal number without leading 0x, for example -psk
+> + 1a2b3c4d.
+> + 
+> +-=item B<-ssl2>, B<-ssl3>, B<-tls1>, B<-no_ssl2>, B<-no_ssl3>, B<-no_tls1>, B<-no_tls1_1>, B<-no_tls1_2>
+> ++=item B<-ssl2>, B<-ssl3>, B<-tls1>, B<-tls1_1>, B<-tls1_2>, B<-no_ssl2>, B<-no_ssl3>, B<-no_tls1>, B<-no_tls1_1>, B<-no_tls1_2>
+> + 
+> +-these options disable the use of certain SSL or TLS protocols. By default
+> +-the initial handshake uses a method which should be compatible with all
+> +-servers and permit them to use SSL v3, SSL v2 or TLS as appropriate.
+> +-
+> +-Unfortunately there are still ancient and broken servers in use which
+> +-cannot handle this technique and will fail to connect. Some servers only
+> +-work if TLS is turned off.
+> ++These options require or disable the use of the specified SSL or TLS protocols.
+> ++By default the initial handshake uses a I<version-flexible> method which will
+> ++negotiate the highest mutually supported protocol version.
+> + 
+> + =item B<-fallback_scsv>
+> + 
+> +diff --git a/doc/apps/s_server.pod b/doc/apps/s_server.pod
+> +index baca779..6f4acb7 100644
+> +--- a/doc/apps/s_server.pod
+> ++++ b/doc/apps/s_server.pod
+> +@@ -217,11 +217,11 @@ Use the PSK key B<key> when using a PSK cipher suite. The key is
+> + given as a hexadecimal number without leading 0x, for example -psk
+> + 1a2b3c4d.
+> + 
+> +-=item B<-ssl2>, B<-ssl3>, B<-tls1>, B<-no_ssl2>, B<-no_ssl3>, B<-no_tls1>
+> ++=item B<-ssl2>, B<-ssl3>, B<-tls1>, B<-tls1_1>, B<-tls1_2>, B<-no_ssl2>, B<-no_ssl3>, B<-no_tls1>, B<-no_tls1_1>, B<-no_tls1_2>
+> + 
+> +-these options disable the use of certain SSL or TLS protocols. By default
+> +-the initial handshake uses a method which should be compatible with all
+> +-servers and permit them to use SSL v3, SSL v2 or TLS as appropriate.
+> ++These options require or disable the use of the specified SSL or TLS protocols.
+> ++By default the initial handshake uses a I<version-flexible> method which will
+> ++negotiate the highest mutually supported protocol version.
+> + 
+> + =item B<-bugs>
+> + 
+> +diff --git a/doc/ssl/SSL_CONF_cmd.pod b/doc/ssl/SSL_CONF_cmd.pod
+> +index 2bf1a60..e81d76a 100644
+> +--- a/doc/ssl/SSL_CONF_cmd.pod
+> ++++ b/doc/ssl/SSL_CONF_cmd.pod
+> +@@ -74,7 +74,7 @@ B<prime256v1>). Curve names are case sensitive.
+> + 
+> + =item B<-named_curve>
+> + 
+> +-This sets the temporary curve used for ephemeral ECDH modes. Only used by 
+> ++This sets the temporary curve used for ephemeral ECDH modes. Only used by
+> + servers
+> + 
+> + The B<value> argument is a curve name or the special value B<auto> which
+> +@@ -85,7 +85,7 @@ can be either the B<NIST> name (e.g. B<P-256>) or an OpenSSL OID name
+> + =item B<-cipher>
+> + 
+> + Sets the cipher suite list to B<value>. Note: syntax checking of B<value> is
+> +-currently not performed unless a B<SSL> or B<SSL_CTX> structure is 
+> ++currently not performed unless a B<SSL> or B<SSL_CTX> structure is
+> + associated with B<cctx>.
+> + 
+> + =item B<-cert>
+> +@@ -111,9 +111,9 @@ operations are permitted.
+> + 
+> + =item B<-no_ssl2>, B<-no_ssl3>, B<-no_tls1>, B<-no_tls1_1>, B<-no_tls1_2>
+> + 
+> +-Disables protocol support for SSLv2, SSLv3, TLS 1.0, TLS 1.1 or TLS 1.2 
+> +-by setting the corresponding options B<SSL_OP_NO_SSL2>, B<SSL_OP_NO_SSL3>,
+> +-B<SSL_OP_NO_TLS1>, B<SSL_OP_NO_TLS1_1> and B<SSL_OP_NO_TLS1_2> respectively.
+> ++Disables protocol support for SSLv2, SSLv3, TLSv1.0, TLSv1.1 or TLSv1.2
+> ++by setting the corresponding options B<SSL_OP_NO_SSLv2>, B<SSL_OP_NO_SSLv3>,
+> ++B<SSL_OP_NO_TLSv1>, B<SSL_OP_NO_TLSv1_1> and B<SSL_OP_NO_TLSv1_2> respectively.
+> + 
+> + =item B<-bugs>
+> + 
+> +@@ -177,7 +177,7 @@ Note: the command prefix (if set) alters the recognised B<cmd> values.
+> + =item B<CipherString>
+> + 
+> + Sets the cipher suite list to B<value>. Note: syntax checking of B<value> is
+> +-currently not performed unless an B<SSL> or B<SSL_CTX> structure is 
+> ++currently not performed unless an B<SSL> or B<SSL_CTX> structure is
+> + associated with B<cctx>.
+> + 
+> + =item B<Certificate>
+> +@@ -244,7 +244,7 @@ B<prime256v1>). Curve names are case sensitive.
+> + 
+> + =item B<ECDHParameters>
+> + 
+> +-This sets the temporary curve used for ephemeral ECDH modes. Only used by 
+> ++This sets the temporary curve used for ephemeral ECDH modes. Only used by
+> + servers
+> + 
+> + The B<value> argument is a curve name or the special value B<Automatic> which
+> +@@ -258,10 +258,11 @@ The supported versions of the SSL or TLS protocol.
+> + 
+> + The B<value> argument is a comma separated list of supported protocols to
+> + enable or disable. If an protocol is preceded by B<-> that version is disabled.
+> +-All versions are enabled by default, though applications may choose to
+> +-explicitly disable some. Currently supported protocol values are B<SSLv2>,
+> +-B<SSLv3>, B<TLSv1>, B<TLSv1.1> and B<TLSv1.2>. The special value B<ALL> refers
+> +-to all supported versions.
+> ++Currently supported protocol values are B<SSLv2>, B<SSLv3>, B<TLSv1>,
+> ++B<TLSv1.1> and B<TLSv1.2>.
+> ++All protocol versions other than B<SSLv2> are enabled by default.
+> ++To avoid inadvertent enabling of B<SSLv2>, when SSLv2 is disabled, it is not
+> ++possible to enable it via the B<Protocol> command.
+> + 
+> + =item B<Options>
+> + 
+> +@@ -339,16 +340,16 @@ The value is a directory name.
+> + The order of operations is significant. This can be used to set either defaults
+> + or values which cannot be overridden. For example if an application calls:
+> + 
+> +- SSL_CONF_cmd(ctx, "Protocol", "-SSLv2");
+> ++ SSL_CONF_cmd(ctx, "Protocol", "-SSLv3");
+> +  SSL_CONF_cmd(ctx, userparam, uservalue);
+> + 
+> +-it will disable SSLv2 support by default but the user can override it. If 
+> ++it will disable SSLv3 support by default but the user can override it. If
+> + however the call sequence is:
+> + 
+> +  SSL_CONF_cmd(ctx, userparam, uservalue);
+> +- SSL_CONF_cmd(ctx, "Protocol", "-SSLv2");
+> ++ SSL_CONF_cmd(ctx, "Protocol", "-SSLv3");
+> + 
+> +-SSLv2 is B<always> disabled and attempt to override this by the user are
+> ++then SSLv3 is B<always> disabled and attempt to override this by the user are
+> + ignored.
+> + 
+> + By checking the return code of SSL_CTX_cmd() it is possible to query if a
+> +@@ -372,7 +373,7 @@ can be checked instead. If -3 is returned a required argument is missing
+> + and an error is indicated. If 0 is returned some other error occurred and
+> + this can be reported back to the user.
+> + 
+> +-The function SSL_CONF_cmd_value_type() can be used by applications to 
+> ++The function SSL_CONF_cmd_value_type() can be used by applications to
+> + check for the existence of a command or to perform additional syntax
+> + checking or translation of the command value. For example if the return
+> + value is B<SSL_CONF_TYPE_FILE> an application could translate a relative
+> +diff --git a/doc/ssl/SSL_CTX_new.pod b/doc/ssl/SSL_CTX_new.pod
+> +index 491ac8c..b8cc879 100644
+> +--- a/doc/ssl/SSL_CTX_new.pod
+> ++++ b/doc/ssl/SSL_CTX_new.pod
+> +@@ -2,13 +2,55 @@
+> + 
+> + =head1 NAME
+> + 
+> +-SSL_CTX_new - create a new SSL_CTX object as framework for TLS/SSL enabled functions
+> ++SSL_CTX_new,
+> ++SSLv23_method, SSLv23_server_method, SSLv23_client_method,
+> ++TLSv1_2_method, TLSv1_2_server_method, TLSv1_2_client_method,
+> ++TLSv1_1_method, TLSv1_1_server_method, TLSv1_1_client_method,
+> ++TLSv1_method, TLSv1_server_method, TLSv1_client_method,
+> ++SSLv3_method, SSLv3_server_method, SSLv3_client_method,
+> ++SSLv2_method, SSLv2_server_method, SSLv2_client_method,
+> ++DTLS_method, DTLS_server_method, DTLS_client_method,
+> ++DTLSv1_2_method, DTLSv1_2_server_method, DTLSv1_2_client_method,
+> ++DTLSv1_method, DTLSv1_server_method, DTLSv1_client_method -
+> ++create a new SSL_CTX object as framework for TLS/SSL enabled functions
+> + 
+> + =head1 SYNOPSIS
+> + 
+> +  #include <openssl/ssl.h>
+> + 
+> +  SSL_CTX *SSL_CTX_new(const SSL_METHOD *method);
+> ++ const SSL_METHOD *SSLv23_method(void);
+> ++ const SSL_METHOD *SSLv23_server_method(void);
+> ++ const SSL_METHOD *SSLv23_client_method(void);
+> ++ const SSL_METHOD *TLSv1_2_method(void);
+> ++ const SSL_METHOD *TLSv1_2_server_method(void);
+> ++ const SSL_METHOD *TLSv1_2_client_method(void);
+> ++ const SSL_METHOD *TLSv1_1_method(void);
+> ++ const SSL_METHOD *TLSv1_1_server_method(void);
+> ++ const SSL_METHOD *TLSv1_1_client_method(void);
+> ++ const SSL_METHOD *TLSv1_method(void);
+> ++ const SSL_METHOD *TLSv1_server_method(void);
+> ++ const SSL_METHOD *TLSv1_client_method(void);
+> ++ #ifndef OPENSSL_NO_SSL3_METHOD
+> ++ const SSL_METHOD *SSLv3_method(void);
+> ++ const SSL_METHOD *SSLv3_server_method(void);
+> ++ const SSL_METHOD *SSLv3_client_method(void);
+> ++ #endif
+> ++ #ifndef OPENSSL_NO_SSL2
+> ++ const SSL_METHOD *SSLv2_method(void);
+> ++ const SSL_METHOD *SSLv2_server_method(void);
+> ++ const SSL_METHOD *SSLv2_client_method(void);
+> ++ #endif
+> ++
+> ++ const SSL_METHOD *DTLS_method(void);
+> ++ const SSL_METHOD *DTLS_server_method(void);
+> ++ const SSL_METHOD *DTLS_client_method(void);
+> ++ const SSL_METHOD *DTLSv1_2_method(void);
+> ++ const SSL_METHOD *DTLSv1_2_server_method(void);
+> ++ const SSL_METHOD *DTLSv1_2_client_method(void);
+> ++ const SSL_METHOD *DTLSv1_method(void);
+> ++ const SSL_METHOD *DTLSv1_server_method(void);
+> ++ const SSL_METHOD *DTLSv1_client_method(void);
+> + 
+> + =head1 DESCRIPTION
+> + 
+> +@@ -23,65 +65,88 @@ client only type. B<method> can be of the following types:
+> + 
+> + =over 4
+> + 
+> +-=item SSLv2_method(void), SSLv2_server_method(void), SSLv2_client_method(void)
+> ++=item SSLv23_method(), SSLv23_server_method(), SSLv23_client_method()
+> ++
+> ++These are the general-purpose I<version-flexible> SSL/TLS methods.
+> ++The actual protocol version used will be negotiated to the highest version
+> ++mutually supported by the client and the server.
+> ++The supported protocols are SSLv2, SSLv3, TLSv1, TLSv1.1 and TLSv1.2.
+> ++Most applications should use these method, and avoid the version specific
+> ++methods described below.
+> ++
+> ++The list of protocols available can be further limited using the
+> ++B<SSL_OP_NO_SSLv2>, B<SSL_OP_NO_SSLv3>, B<SSL_OP_NO_TLSv1>,
+> ++B<SSL_OP_NO_TLSv1_1> and B<SSL_OP_NO_TLSv1_2> options of the
+> ++L<SSL_CTX_set_options(3)> or L<SSL_set_options(3)> functions.
+> ++Clients should avoid creating "holes" in the set of protocols they support,
+> ++when disabling a protocol, make sure that you also disable either all previous
+> ++or all subsequent protocol versions.
+> ++In clients, when a protocol version is disabled without disabling I<all>
+> ++previous protocol versions, the effect is to also disable all subsequent
+> ++protocol versions.
+> ++
+> ++The SSLv2 and SSLv3 protocols are deprecated and should generally not be used.
+> ++Applications should typically use L<SSL_CTX_set_options(3)> in combination with
+> ++the B<SSL_OP_NO_SSLv3> flag to disable negotiation of SSLv3 via the above
+> ++I<version-flexible> SSL/TLS methods.
+> ++The B<SSL_OP_NO_SSLv2> option is set by default, and would need to be cleared
+> ++via L<SSL_CTX_clear_options(3)> in order to enable negotiation of SSLv2.
+> ++
+> ++=item TLSv1_2_method(), TLSv1_2_server_method(), TLSv1_2_client_method()
+> + 
+> +-A TLS/SSL connection established with these methods will only understand
+> +-the SSLv2 protocol. A client will send out SSLv2 client hello messages
+> +-and will also indicate that it only understand SSLv2. A server will only
+> +-understand SSLv2 client hello messages.
+> ++A TLS/SSL connection established with these methods will only understand the
+> ++TLSv1.2 protocol.  A client will send out TLSv1.2 client hello messages and
+> ++will also indicate that it only understand TLSv1.2.  A server will only
+> ++understand TLSv1.2 client hello messages.
+> + 
+> +-=item SSLv3_method(void), SSLv3_server_method(void), SSLv3_client_method(void)
+> ++=item TLSv1_1_method(), TLSv1_1_server_method(), TLSv1_1_client_method()
+> + 
+> + A TLS/SSL connection established with these methods will only understand the
+> +-SSLv3 protocol. A client will send out SSLv3 client hello messages
+> +-and will indicate that it only understands SSLv3. A server will only understand
+> +-SSLv3 client hello messages. This especially means, that it will
+> +-not understand SSLv2 client hello messages which are widely used for
+> +-compatibility reasons, see SSLv23_*_method().
+> ++TLSv1.1 protocol.  A client will send out TLSv1.1 client hello messages and
+> ++will also indicate that it only understand TLSv1.1.  A server will only
+> ++understand TLSv1.1 client hello messages.
+> + 
+> +-=item TLSv1_method(void), TLSv1_server_method(void), TLSv1_client_method(void)
+> ++=item TLSv1_method(), TLSv1_server_method(), TLSv1_client_method()
+> + 
+> + A TLS/SSL connection established with these methods will only understand the
+> +-TLSv1 protocol. A client will send out TLSv1 client hello messages
+> +-and will indicate that it only understands TLSv1. A server will only understand
+> +-TLSv1 client hello messages. This especially means, that it will
+> +-not understand SSLv2 client hello messages which are widely used for
+> +-compatibility reasons, see SSLv23_*_method(). It will also not understand
+> +-SSLv3 client hello messages.
+> +-
+> +-=item SSLv23_method(void), SSLv23_server_method(void), SSLv23_client_method(void)
+> +-
+> +-A TLS/SSL connection established with these methods may understand the SSLv2,
+> +-SSLv3, TLSv1, TLSv1.1 and TLSv1.2 protocols.
+> +-
+> +-If the cipher list does not contain any SSLv2 ciphersuites (the default
+> +-cipher list does not) or extensions are required (for example server name)
+> +-a client will send out TLSv1 client hello messages including extensions and
+> +-will indicate that it also understands TLSv1.1, TLSv1.2 and permits a
+> +-fallback to SSLv3. A server will support SSLv3, TLSv1, TLSv1.1 and TLSv1.2
+> +-protocols. This is the best choice when compatibility is a concern.
+> +-
+> +-If any SSLv2 ciphersuites are included in the cipher list and no extensions
+> +-are required then SSLv2 compatible client hellos will be used by clients and
+> +-SSLv2 will be accepted by servers. This is B<not> recommended due to the
+> +-insecurity of SSLv2 and the limited nature of the SSLv2 client hello
+> +-prohibiting the use of extensions.
+> ++TLSv1 protocol.  A client will send out TLSv1 client hello messages and will
+> ++indicate that it only understands TLSv1.  A server will only understand TLSv1
+> ++client hello messages.
+> + 
+> +-=back
+> ++=item SSLv3_method(), SSLv3_server_method(), SSLv3_client_method()
+> ++
+> ++A TLS/SSL connection established with these methods will only understand the
+> ++SSLv3 protocol.  A client will send out SSLv3 client hello messages and will
+> ++indicate that it only understands SSLv3.  A server will only understand SSLv3
+> ++client hello messages.  The SSLv3 protocol is deprecated and should not be
+> ++used.
+> ++
+> ++=item SSLv2_method(), SSLv2_server_method(), SSLv2_client_method()
+> ++
+> ++A TLS/SSL connection established with these methods will only understand the
+> ++SSLv2 protocol.  A client will send out SSLv2 client hello messages and will
+> ++also indicate that it only understand SSLv2.  A server will only understand
+> ++SSLv2 client hello messages.  The SSLv2 protocol offers little to no security
+> ++and should not be used.
+> ++As of OpenSSL 1.0.2g, EXPORT ciphers and 56-bit DES are no longer available
+> ++with SSLv2.
+> + 
+> +-The list of protocols available can later be limited using the SSL_OP_NO_SSLv2,
+> +-SSL_OP_NO_SSLv3, SSL_OP_NO_TLSv1, SSL_OP_NO_TLSv1_1 and SSL_OP_NO_TLSv1_2
+> +-options of the SSL_CTX_set_options() or SSL_set_options() functions.
+> +-Using these options it is possible to choose e.g. SSLv23_server_method() and
+> +-be able to negotiate with all possible clients, but to only allow newer
+> +-protocols like TLSv1, TLSv1.1 or TLS v1.2.
+> ++=item DTLS_method(), DTLS_server_method(), DTLS_client_method()
+> + 
+> +-Applications which never want to support SSLv2 (even is the cipher string
+> +-is configured to use SSLv2 ciphersuites) can set SSL_OP_NO_SSLv2.
+> ++These are the version-flexible DTLS methods.
+> ++
+> ++=item DTLSv1_2_method(), DTLSv1_2_server_method(), DTLSv1_2_client_method()
+> ++
+> ++These are the version-specific methods for DTLSv1.2.
+> ++
+> ++=item DTLSv1_method(), DTLSv1_server_method(), DTLSv1_client_method()
+> ++
+> ++These are the version-specific methods for DTLSv1.
+> ++
+> ++=back
+> + 
+> +-SSL_CTX_new() initializes the list of ciphers, the session cache setting,
+> +-the callbacks, the keys and certificates and the options to its default
+> +-values.
+> ++SSL_CTX_new() initializes the list of ciphers, the session cache setting, the
+> ++callbacks, the keys and certificates and the options to its default values.
+> + 
+> + =head1 RETURN VALUES
+> + 
+> +@@ -91,8 +156,8 @@ The following return values can occur:
+> + 
+> + =item NULL
+> + 
+> +-The creation of a new SSL_CTX object failed. Check the error stack to
+> +-find out the reason.
+> ++The creation of a new SSL_CTX object failed. Check the error stack to find out
+> ++the reason.
+> + 
+> + =item Pointer to an SSL_CTX object
+> + 
+> +@@ -102,6 +167,7 @@ The return value points to an allocated SSL_CTX object.
+> + 
+> + =head1 SEE ALSO
+> + 
+> ++L<SSL_CTX_set_options(3)>, L<SSL_CTX_clear_options(3)>, L<SSL_set_options(3)>,
+> + L<SSL_CTX_free(3)|SSL_CTX_free(3)>, L<SSL_accept(3)|SSL_accept(3)>,
+> + L<ssl(3)|ssl(3)>,  L<SSL_set_connect_state(3)|SSL_set_connect_state(3)>
+> + 
+> +diff --git a/doc/ssl/SSL_CTX_set_options.pod b/doc/ssl/SSL_CTX_set_options.pod
+> +index e80a72c..9a7e98c 100644
+> +--- a/doc/ssl/SSL_CTX_set_options.pod
+> ++++ b/doc/ssl/SSL_CTX_set_options.pod
+> +@@ -189,15 +189,25 @@ browser has a cert, it will crash/hang.  Works for 3.x and 4.xbeta
+> + =item SSL_OP_NO_SSLv2
+> + 
+> + Do not use the SSLv2 protocol.
+> ++As of OpenSSL 1.0.2g the B<SSL_OP_NO_SSLv2> option is set by default.
+> + 
+> + =item SSL_OP_NO_SSLv3
+> + 
+> + Do not use the SSLv3 protocol.
+> ++It is recommended that applications should set this option.
+> + 
+> + =item SSL_OP_NO_TLSv1
+> + 
+> + Do not use the TLSv1 protocol.
+> + 
+> ++=item SSL_OP_NO_TLSv1_1
+> ++
+> ++Do not use the TLSv1.1 protocol.
+> ++
+> ++=item SSL_OP_NO_TLSv1_2
+> ++
+> ++Do not use the TLSv1.2 protocol.
+> ++
+> + =item SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION
+> + 
+> + When performing renegotiation as a server, always start a new session
+> +diff --git a/doc/ssl/ssl.pod b/doc/ssl/ssl.pod
+> +index 242087e..70cca17 100644
+> +--- a/doc/ssl/ssl.pod
+> ++++ b/doc/ssl/ssl.pod
+> +@@ -130,41 +130,86 @@ protocol methods defined in B<SSL_METHOD> structures.
+> + 
+> + =over 4
+> + 
+> +-=item const SSL_METHOD *B<SSLv2_client_method>(void);
+> ++=item const SSL_METHOD *B<SSLv23_method>(void);
+> + 
+> +-Constructor for the SSLv2 SSL_METHOD structure for a dedicated client.
+> ++Constructor for the I<version-flexible> SSL_METHOD structure for
+> ++clients, servers or both.
+> ++See L<SSL_CTX_new(3)> for details.
+> + 
+> +-=item const SSL_METHOD *B<SSLv2_server_method>(void);
+> ++=item const SSL_METHOD *B<SSLv23_client_method>(void);
+> + 
+> +-Constructor for the SSLv2 SSL_METHOD structure for a dedicated server.
+> ++Constructor for the I<version-flexible> SSL_METHOD structure for
+> ++clients.
+> + 
+> +-=item const SSL_METHOD *B<SSLv2_method>(void);
+> ++=item const SSL_METHOD *B<SSLv23_client_method>(void);
+> + 
+> +-Constructor for the SSLv2 SSL_METHOD structure for combined client and server.
+> ++Constructor for the I<version-flexible> SSL_METHOD structure for
+> ++servers.
+> + 
+> +-=item const SSL_METHOD *B<SSLv3_client_method>(void);
+> ++=item const SSL_METHOD *B<TLSv1_2_method>(void);
+> + 
+> +-Constructor for the SSLv3 SSL_METHOD structure for a dedicated client.
+> ++Constructor for the TLSv1.2 SSL_METHOD structure for clients, servers
+> ++or both.
+> + 
+> +-=item const SSL_METHOD *B<SSLv3_server_method>(void);
+> ++=item const SSL_METHOD *B<TLSv1_2_client_method>(void);
+> + 
+> +-Constructor for the SSLv3 SSL_METHOD structure for a dedicated server.
+> ++Constructor for the TLSv1.2 SSL_METHOD structure for clients.
+> + 
+> +-=item const SSL_METHOD *B<SSLv3_method>(void);
+> ++=item const SSL_METHOD *B<TLSv1_2_server_method>(void);
+> ++
+> ++Constructor for the TLSv1.2 SSL_METHOD structure for servers.
+> ++
+> ++=item const SSL_METHOD *B<TLSv1_1_method>(void);
+> + 
+> +-Constructor for the SSLv3 SSL_METHOD structure for combined client and server.
+> ++Constructor for the TLSv1.1 SSL_METHOD structure for clients, servers
+> ++or both.
+> ++
+> ++=item const SSL_METHOD *B<TLSv1_1_client_method>(void);
+> ++
+> ++Constructor for the TLSv1.1 SSL_METHOD structure for clients.
+> ++
+> ++=item const SSL_METHOD *B<TLSv1_1_server_method>(void);
+> ++
+> ++Constructor for the TLSv1.1 SSL_METHOD structure for servers.
+> ++
+> ++=item const SSL_METHOD *B<TLSv1_method>(void);
+> ++
+> ++Constructor for the TLSv1 SSL_METHOD structure for clients, servers
+> ++or both.
+> + 
+> + =item const SSL_METHOD *B<TLSv1_client_method>(void);
+> + 
+> +-Constructor for the TLSv1 SSL_METHOD structure for a dedicated client.
+> ++Constructor for the TLSv1 SSL_METHOD structure for clients.
+> + 
+> + =item const SSL_METHOD *B<TLSv1_server_method>(void);
+> + 
+> +-Constructor for the TLSv1 SSL_METHOD structure for a dedicated server.
+> ++Constructor for the TLSv1 SSL_METHOD structure for servers.
+> + 
+> +-=item const SSL_METHOD *B<TLSv1_method>(void);
+> ++=item const SSL_METHOD *B<SSLv3_method>(void);
+> ++
+> ++Constructor for the SSLv3 SSL_METHOD structure for clients, servers
+> ++or both.
+> ++
+> ++=item const SSL_METHOD *B<SSLv3_client_method>(void);
+> ++
+> ++Constructor for the SSLv3 SSL_METHOD structure for clients.
+> ++
+> ++=item const SSL_METHOD *B<SSLv3_server_method>(void);
+> ++
+> ++Constructor for the SSLv3 SSL_METHOD structure for servers.
+> ++
+> ++=item const SSL_METHOD *B<SSLv2_method>(void);
+> ++
+> ++Constructor for the SSLv2 SSL_METHOD structure for clients, servers
+> ++or both.
+> ++
+> ++=item const SSL_METHOD *B<SSLv2_client_method>(void);
+> ++
+> ++Constructor for the SSLv2 SSL_METHOD structure for clients.
+> ++
+> ++=item const SSL_METHOD *B<SSLv2_server_method>(void);
+> + 
+> +-Constructor for the TLSv1 SSL_METHOD structure for combined client and server.
+> ++Constructor for the SSLv2 SSL_METHOD structure for servers.
+> + 
+> + =back
+> + 
+> +-- 
+> +2.3.5
+> +
+> diff --git a/meta/recipes-connectivity/openssl/openssl/CVE-2016-0800_3.patch b/meta/recipes-connectivity/openssl/openssl/CVE-2016-0800_3.patch
+> new file mode 100644
+> index 0000000..d260244
+> --- /dev/null
+> +++ b/meta/recipes-connectivity/openssl/openssl/CVE-2016-0800_3.patch
+> @@ -0,0 +1,503 @@
+> +From bc38a7d2d3c6082163c50ddf99464736110f2000 Mon Sep 17 00:00:00 2001
+> +From: Viktor Dukhovni <openssl-users@dukhovni.org>
+> +Date: Fri, 19 Feb 2016 13:05:11 -0500
+> +Subject: [PATCH] Disable EXPORT and LOW SSLv3+ ciphers by default
+> +MIME-Version: 1.0
+> +Content-Type: text/plain; charset=UTF-8
+> +Content-Transfer-Encoding: 8bit
+> +
+> +Reviewed-by: Emilia Käsper <emilia@openssl.org>
+> +
+> +Upstream-Status: Backport
+> +
+> +https://git.openssl.org/?p=openssl.git;a=commit;h=bc38a7d2d3c6082163c50ddf99464736110f2000
+> +
+> +CVE: CVE-2016-0800 #3 patch
+> +Signed-off-by: Armin Kuster <akuster@mvista.com>
+> +
+> +---
+> + CHANGES              |  5 +++++
+> + Configure            |  5 +++++
+> + NEWS                 |  1 +
+> + doc/apps/ciphers.pod | 30 ++++++++++++++++++++---------
+> + ssl/s3_lib.c         | 54 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+> + 5 files changed, 86 insertions(+), 9 deletions(-)
+> +
+> +Index: openssl-1.0.2d/Configure
+> +===================================================================
+> +--- openssl-1.0.2d.orig/Configure
+> ++++ openssl-1.0.2d/Configure
+> +@@ -58,6 +58,10 @@ my $usage="Usage: Configure [no-<cipher>
+> + #		library and will be loaded in run-time by the OpenSSL library.
+> + # sctp          include SCTP support
+> + # 386           generate 80386 code
+> ++# enable-weak-ssl-ciphers
+> ++#		Enable EXPORT and LOW SSLv3 ciphers that are disabled by
+> ++#		default.  Note, weak SSLv2 ciphers are unconditionally
+> ++#		disabled.
+> + # no-sse2	disables IA-32 SSE2 code, above option implies no-sse2
+> + # no-<cipher>   build without specified algorithm (rsa, idea, rc5, ...)
+> + # -<xxx> +<xxx> compiler options are passed through 
+> +@@ -853,6 +857,7 @@ my %disabled = ( # "what"         => "co
+> + 		 "ssl2"           => "default",
+> + 		 "store"	  => "experimental",
+> + 		 "unit-test"	  => "default",
+> ++		 "weak-ssl-ciphers" => "default",
+> + 		 "zlib"           => "default",
+> + 		 "zlib-dynamic"   => "default"
+> + 	       );
+> +Index: openssl-1.0.2d/doc/apps/ciphers.pod
+> +===================================================================
+> +--- openssl-1.0.2d.orig/doc/apps/ciphers.pod
+> ++++ openssl-1.0.2d/doc/apps/ciphers.pod
+> +@@ -136,34 +136,46 @@ than 128 bits, and some cipher suites wi
+> + 
+> + =item B<LOW>
+> + 
+> +-"low" encryption cipher suites, currently those using 64 or 56 bit encryption algorithms
+> +-but excluding export cipher suites.
+> ++Low strength encryption cipher suites, currently those using 64 or 56 bit
+> ++encryption algorithms but excluding export cipher suites.
+> ++As of OpenSSL 1.0.2g, these are disabled in default builds.
+> + 
+> + =item B<EXP>, B<EXPORT>
+> + 
+> +-export encryption algorithms. Including 40 and 56 bits algorithms.
+> ++Export strength encryption algorithms. Including 40 and 56 bits algorithms.
+> ++As of OpenSSL 1.0.2g, these are disabled in default builds.
+> + 
+> + =item B<EXPORT40>
+> + 
+> +-40 bit export encryption algorithms
+> ++40-bit export encryption algorithms
+> ++As of OpenSSL 1.0.2g, these are disabled in default builds.
+> + 
+> + =item B<EXPORT56>
+> + 
+> +-56 bit export encryption algorithms. In OpenSSL 0.9.8c and later the set of
+> ++56-bit export encryption algorithms. In OpenSSL 0.9.8c and later the set of
+> + 56 bit export ciphers is empty unless OpenSSL has been explicitly configured
+> + with support for experimental ciphers.
+> ++As of OpenSSL 1.0.2g, these are disabled in default builds.
+> + 
+> + =item B<eNULL>, B<NULL>
+> + 
+> +-the "NULL" ciphers that is those offering no encryption. Because these offer no
+> +-encryption at all and are a security risk they are disabled unless explicitly
+> +-included.
+> ++The "NULL" ciphers that is those offering no encryption. Because these offer no
+> ++encryption at all and are a security risk they are not enabled via either the
+> ++B<DEFAULT> or B<ALL> cipher strings.
+> ++Be careful when building cipherlists out of lower-level primitives such as
+> ++B<kRSA> or B<aECDSA> as these do overlap with the B<eNULL> ciphers.
+> ++When in doubt, include B<!eNULL> in your cipherlist.
+> + 
+> + =item B<aNULL>
+> + 
+> +-the cipher suites offering no authentication. This is currently the anonymous
+> ++The cipher suites offering no authentication. This is currently the anonymous
+> + DH algorithms and anonymous ECDH algorithms. These cipher suites are vulnerable
+> + to a "man in the middle" attack and so their use is normally discouraged.
+> ++These are excluded from the B<DEFAULT> ciphers, but included in the B<ALL>
+> ++ciphers.
+> ++Be careful when building cipherlists out of lower-level primitives such as
+> ++B<kDHE> or B<AES> as these do overlap with the B<aNULL> ciphers.
+> ++When in doubt, include B<!aNULL> in your cipherlist.
+> + 
+> + =item B<kRSA>, B<RSA>
+> + 
+> +Index: openssl-1.0.2d/ssl/s3_lib.c
+> +===================================================================
+> +--- openssl-1.0.2d.orig/ssl/s3_lib.c
+> ++++ openssl-1.0.2d/ssl/s3_lib.c
+> +@@ -198,6 +198,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      },
+> + 
+> + /* Cipher 03 */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_RSA_RC4_40_MD5,
+> +@@ -212,6 +213,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      128,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 04 */
+> +     {
+> +@@ -246,6 +248,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      },
+> + 
+> + /* Cipher 06 */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_RSA_RC2_40_MD5,
+> +@@ -260,6 +263,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      128,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 07 */
+> + #ifndef OPENSSL_NO_IDEA
+> +@@ -280,6 +284,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> + #endif
+> + 
+> + /* Cipher 08 */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_RSA_DES_40_CBC_SHA,
+> +@@ -294,8 +299,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      56,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 09 */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_RSA_DES_64_CBC_SHA,
+> +@@ -310,6 +317,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      56,
+> +      56,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 0A */
+> +     {
+> +@@ -329,6 +337,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> + 
+> + /* The DH ciphers */
+> + /* Cipher 0B */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      0,
+> +      SSL3_TXT_DH_DSS_DES_40_CBC_SHA,
+> +@@ -343,8 +352,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      56,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 0C */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_DH_DSS_DES_64_CBC_SHA,
+> +@@ -359,6 +370,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      56,
+> +      56,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 0D */
+> +     {
+> +@@ -377,6 +389,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      },
+> + 
+> + /* Cipher 0E */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      0,
+> +      SSL3_TXT_DH_RSA_DES_40_CBC_SHA,
+> +@@ -391,8 +404,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      56,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 0F */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_DH_RSA_DES_64_CBC_SHA,
+> +@@ -407,6 +422,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      56,
+> +      56,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 10 */
+> +     {
+> +@@ -426,6 +442,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> + 
+> + /* The Ephemeral DH ciphers */
+> + /* Cipher 11 */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_EDH_DSS_DES_40_CBC_SHA,
+> +@@ -440,8 +457,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      56,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 12 */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_EDH_DSS_DES_64_CBC_SHA,
+> +@@ -456,6 +475,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      56,
+> +      56,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 13 */
+> +     {
+> +@@ -474,6 +494,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      },
+> + 
+> + /* Cipher 14 */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_EDH_RSA_DES_40_CBC_SHA,
+> +@@ -488,8 +509,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      56,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 15 */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_EDH_RSA_DES_64_CBC_SHA,
+> +@@ -504,6 +527,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      56,
+> +      56,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 16 */
+> +     {
+> +@@ -522,6 +546,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      },
+> + 
+> + /* Cipher 17 */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_ADH_RC4_40_MD5,
+> +@@ -536,6 +561,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      128,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 18 */
+> +     {
+> +@@ -554,6 +580,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      },
+> + 
+> + /* Cipher 19 */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_ADH_DES_40_CBC_SHA,
+> +@@ -568,8 +595,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      128,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 1A */
+> ++#ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_ADH_DES_64_CBC_SHA,
+> +@@ -584,6 +613,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      56,
+> +      56,
+> +      },
+> ++#endif
+> + 
+> + /* Cipher 1B */
+> +     {
+> +@@ -655,6 +685,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> + #ifndef OPENSSL_NO_KRB5
+> + /* The Kerberos ciphers*/
+> + /* Cipher 1E */
+> ++# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_KRB5_DES_64_CBC_SHA,
+> +@@ -669,6 +700,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      56,
+> +      56,
+> +      },
+> ++# endif
+> + 
+> + /* Cipher 1F */
+> +     {
+> +@@ -719,6 +751,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      },
+> + 
+> + /* Cipher 22 */
+> ++# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_KRB5_DES_64_CBC_MD5,
+> +@@ -733,6 +766,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      56,
+> +      56,
+> +      },
+> ++# endif
+> + 
+> + /* Cipher 23 */
+> +     {
+> +@@ -783,6 +817,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      },
+> + 
+> + /* Cipher 26 */
+> ++# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_KRB5_DES_40_CBC_SHA,
+> +@@ -797,8 +832,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      56,
+> +      },
+> ++# endif
+> + 
+> + /* Cipher 27 */
+> ++# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_KRB5_RC2_40_CBC_SHA,
+> +@@ -813,8 +850,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      128,
+> +      },
+> ++# endif
+> + 
+> + /* Cipher 28 */
+> ++# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_KRB5_RC4_40_SHA,
+> +@@ -829,8 +868,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      128,
+> +      },
+> ++# endif
+> + 
+> + /* Cipher 29 */
+> ++# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_KRB5_DES_40_CBC_MD5,
+> +@@ -845,8 +886,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      56,
+> +      },
+> ++# endif
+> + 
+> + /* Cipher 2A */
+> ++# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_KRB5_RC2_40_CBC_MD5,
+> +@@ -861,8 +904,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      128,
+> +      },
+> ++# endif
+> + 
+> + /* Cipher 2B */
+> ++# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      SSL3_TXT_KRB5_RC4_40_MD5,
+> +@@ -877,6 +922,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      40,
+> +      128,
+> +      },
+> ++# endif
+> + #endif                          /* OPENSSL_NO_KRB5 */
+> + 
+> + /* New AES ciphersuites */
+> +@@ -1300,6 +1346,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> + # endif
+> + 
+> +     /* Cipher 62 */
+> ++# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      TLS1_TXT_RSA_EXPORT1024_WITH_DES_CBC_SHA,
+> +@@ -1314,8 +1361,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      56,
+> +      56,
+> +      },
+> ++# endif
+> + 
+> +     /* Cipher 63 */
+> ++# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      TLS1_TXT_DHE_DSS_EXPORT1024_WITH_DES_CBC_SHA,
+> +@@ -1330,8 +1379,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      56,
+> +      56,
+> +      },
+> ++# endif
+> + 
+> +     /* Cipher 64 */
+> ++# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      TLS1_TXT_RSA_EXPORT1024_WITH_RC4_56_SHA,
+> +@@ -1346,8 +1397,10 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      56,
+> +      128,
+> +      },
+> ++# endif
+> + 
+> +     /* Cipher 65 */
+> ++# ifndef OPENSSL_NO_WEAK_SSL_CIPHERS
+> +     {
+> +      1,
+> +      TLS1_TXT_DHE_DSS_EXPORT1024_WITH_RC4_56_SHA,
+> +@@ -1362,6 +1415,7 @@ OPENSSL_GLOBAL SSL_CIPHER ssl3_ciphers[]
+> +      56,
+> +      128,
+> +      },
+> ++# endif
+> + 
+> +     /* Cipher 66 */
+> +     {
+> +Index: openssl-1.0.2d/CHANGES
+> +===================================================================
+> +--- openssl-1.0.2d.orig/CHANGES
+> ++++ openssl-1.0.2d/CHANGES
+> +@@ -2,7 +2,11 @@
+> +  OpenSSL CHANGES
+> +  _______________
+> + 
+> +- 
+> ++  * Disable weak ciphers in SSLv3 and up in default builds of OpenSSL.
+> ++    Builds that are not configured with "enable-weak-ssl-ciphers" will not
+> ++    provide any "EXPORT" or "LOW" strength ciphers.
+> ++    [Viktor Dukhovni]
+> ++
+> +   * Disable SSLv2 default build, default negotiation and weak ciphers.  SSLv2
+> +     is by default disabled at build-time.  Builds that are not configured with
+> +     "enable-ssl2" will not support SSLv2.  Even if "enable-ssl2" is used,
+> +Index: openssl-1.0.2d/NEWS
+> +===================================================================
+> +--- openssl-1.0.2d.orig/NEWS
+> ++++ openssl-1.0.2d/NEWS
+> +@@ -1,6 +1,7 @@
+> + 
+> +   NEWS
+> +   ====
+> ++  Disable weak ciphers in SSLv3 and up in default builds of OpenSSL.
+> +   Disable SSLv2 default build, default negotiation and weak ciphers.
+> + 
+> +   This file gives a brief overview of the major changes between each OpenSSL
+> diff --git a/meta/recipes-connectivity/openssl/openssl_1.0.2d.bb b/meta/recipes-connectivity/openssl/openssl_1.0.2d.bb
+> index 8defa5b..f900bf6 100644
+> --- a/meta/recipes-connectivity/openssl/openssl_1.0.2d.bb
+> +++ b/meta/recipes-connectivity/openssl/openssl_1.0.2d.bb
+> @@ -44,6 +44,9 @@ SRC_URI += "file://configure-targets.patch \
+>              file://CVE-2015-3197.patch \
+>              file://CVE-2016-0701_1.patch \
+>              file://CVE-2016-0701_2.patch \
+> +            file://CVE-2016-0800.patch \
+> +            file://CVE-2016-0800_2.patch \
+> +            file://CVE-2016-0800_3.patch \
+>             "
+>  
+>  SRC_URI[md5sum] = "38dd619b2e77cbac69b99f52a053d25a"
+> -- 
+> 2.3.5
+> 
+
+> -- 
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
 
