@@ -1,51 +1,52 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 280807017C
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 43AB86011C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Mar 2016 13:31:57 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id l68so4174339wml.3
+	Fri,  4 Mar 2016 13:34:27 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id l68so35138436wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Mar 2016 05:31:58 -0800 (PST)
+	Fri, 04 Mar 2016 05:34:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=nZWPccHc7rgcawfa9WaJBzJiY243E1FAEviJmv88fLw=;
-	b=EKI/v6VVNKpft1J5qJvXsGTb2nYghWFYC1l9JE7/r7J78jR8gWW1HdUlb3Q4kLPXsQ
-	E/2BtYWZYzSwY/G4lj1p6XQJJb8VbZXlXi6wuCbcnqODIEIlNS2TcMUwxpMQ+LSVLTAe
-	EPYE/uCL2dpTjzh1EDW6WiuIfEhw0vyD7SI3F9X1zfRK2UhQhawrBcRTQhOfzgTaMu+8
-	nY4hU4GyYTlozGs9OcfKg3njkldLtkklwbvXCF6V1dvNp2bgrhFbmRTaflZVYPRaK5mU
-	iuv6uxZE8pPx9vlQNLNNzSDtsldOErzVBZ4CD1XfRxlcKHRq66rEgIE2v6FoyseHigUb
-	IDVA==
+	bh=YMa+MLNy/shVVQY7I3/l1p5F/qprOZRBaCz/ZNbb0lw=;
+	b=wC8oIM8CZhAhWgVIL1TSAuTEYAH7qChLenm/7fM4Fy58Tnu3TqExAqHdmHnOGmP2FO
+	O5clo2VkYvRvlPz+QcJQG1g1+qO8KnplgjxTtIrFKr//5foxhPkLE+hIzgGPbMcqk2Y6
+	vKtgr1j3TIM5cLVGOSEQ6PkUL/TdwkHgD9hFuGLursvzC9gZZQkYK/ZsXa4uTli7sdhD
+	NkBvmPh2NHUrQovaMivoJ9VsejPdhYKr3WbEvBNaW2x8ktbyx5s9UUMzGJO6t0rcvzjj
+	rUt/nwGvzP9OgN75hwLAfU09iwLhfpycQLYYKI+zLmkRE+njguiVFNDjU6roluXruX35
+	nEug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=nZWPccHc7rgcawfa9WaJBzJiY243E1FAEviJmv88fLw=;
-	b=ApyQkd4X+YYHfxiGsS2yOI+w5DbytpqXwFzTQh5nyoVF5aVjPokRyxkUtS61e8YGri
-	a1+yrwUKaX+dGFXmjJHZ8nQvQufJnG0BhC8olojV0UHcYde6yD0SBLCwHSmI/zqp98P3
-	ea8Nlum549y+VnN41t9KN/eM6IUr+7JhAUU3rFpBmsS9jxfiZmqUh+KGxU6qLnZJ/UG3
-	9PUzipJEWQyNHVn/qojnDP3ZkYbv5M375TI5G7BwCth+OmNyx2KqydWmxPVAw5Wg+qRP
-	7FfhdjHTjoedm0FfNANIYlPmLs0qB5TZ3S+NKbgSQEk4qOCrpmm2LRBFr2PeR9NALgx8
-	Ej7w==
-X-Gm-Message-State: AD7BkJKjvHFv/pisAJh2ctUjD3GUNmgZBKZ1PjwcCg1JSAhSxHMHhHfQD0lHwDFO03gBdw==
-X-Received: by 10.28.222.214 with SMTP id v205mr4959014wmg.92.1457098318072;
-	Fri, 04 Mar 2016 05:31:58 -0800 (PST)
+	bh=YMa+MLNy/shVVQY7I3/l1p5F/qprOZRBaCz/ZNbb0lw=;
+	b=cjtwKlSFPndHdP7otMCeJMmudRa6buvuzlFVsxnoMzLRDnqi74Q3aX/8AU9ucHot37
+	tbXX9d7aHuDyURweIOJy7GTaFSu3OGmlXUlOvYnkxkIzazaiBWLlP1X8xH2EIoKm1i7W
+	mjt1/BInAAXh6IMzv+fW8rmcEBTkso/XjnIjurFcih7PPF1EmPH1y4ifYSE4JKHa6LEE
+	FaHySfuCaFQZP0ffcQr0UjRXD1vpc5KFiI+nnIJh0EQ80VOLOyxvlnenw8HQXfGAWrww
+	RZd0RmwtT/iQfZgOdzJ1DzEEiNT+6mS8O04evIVtYDrh39XkXC5l3nepuG0zPcnTvOFJ
+	8yuA==
+X-Gm-Message-State: AD7BkJKGe0MQUFWsaOyW/XaiOulEisspLJ7gCJsnxievWs4wvob+pdaEIlixwe7/PGMt3Q==
+X-Received: by 10.28.65.5 with SMTP id o5mr5423835wma.75.1457098467840;
+	Fri, 04 Mar 2016 05:34:27 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	b203sm3378271wmh.8.2016.03.04.05.31.56
+	hx10sm3381044wjb.25.2016.03.04.05.34.26
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 04 Mar 2016 05:31:57 -0800 (PST)
+	Fri, 04 Mar 2016 05:34:26 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 4 Mar 2016 14:34:09 +0100
+Date: Fri, 4 Mar 2016 14:36:39 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160304133409.GB2557@jama>
-References: <1457075695-17045-1-git-send-email-koen.kooi@linaro.org>
+Message-ID: <20160304133639.GC2557@jama>
+References: <1454465517-24926-1-git-send-email-alejandro.joya.cruz@intel.com>
+	<20160215092100.GF3028@jama>
 MIME-Version: 1.0
-In-Reply-To: <1457075695-17045-1-git-send-email-koen.kooi@linaro.org>
+In-Reply-To: <20160215092100.GF3028@jama>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: Re: [meta-oe][PATCH v2 1/2] efivar: update to 0.23
+Subject: Re: [meta-oe][PATCH] toybox: upgrade to 0.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,294 +59,577 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Mar 2016 13:31:58 -0000
-X-Groupsio-MsgNum: 60337
+X-List-Received-Date: Fri, 04 Mar 2016 13:34:30 -0000
+X-Groupsio-MsgNum: 60338
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="DKU6Jbt7q3WqK7+M"
+	protocol="application/pgp-signature"; boundary="bKyqfOwhbdpXa4YI"
 Content-Disposition: inline
 
---DKU6Jbt7q3WqK7+M
+--bKyqfOwhbdpXa4YI
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 04, 2016 at 08:14:54AM +0100, Koen Kooi wrote:
-> Upstream removed the use of the nvme headers completely, so no more confl=
-icts. Also drop gcc options patch, ubuntu 12.04 is too old to support in me=
-ta-oe/master.
+On Mon, Feb 15, 2016 at 10:21:00AM +0100, Martin Jansa wrote:
+> On Tue, Feb 02, 2016 at 06:11:57PM -0800, Alejandro Joya wrote:
+> > Change SRC_URI to latest version and update the checksum for package.
+> > remove old patch not longer need it to build it and add depedency found=
+ for builiding
+> > on temporary enviroment like yocto.
+>=20
+> Please fix following QA and Khem's comments and send v2.
+>=20
+> toybox-0.7.0: toybox rdepends on libattr, but it isn't a build
+> dependency? [build-deps]
 
-This fails to build static version, when no-static-libs.inc is used
-(e.g. default in Poky).
+I've already merged this in good mood expecting follow-up fix soon, but
+now I regret that and will revert this soon.
 
-Can you either disable static in popt or change efivar to respect
---disable-static (if possible)?
-
-5.3.0/ld: cannot find -lpopt
-| collect2: error: ld returned 1 exit status
-| make[1]: *** [efivar-static] Error 1
-| make[1]: *** Waiting for unfinished jobs....
-
+It also fails when hardfloat is used:
+usr/include/gnu/stubs.h:7:29: fatal error: gnu/stubs-soft.h: No such
+file or directory
+|  # include <gnu/stubs-soft.h>
+|                              ^
+| compilation terminated.
+| make: *** [generated/instlist] Error 1
 
 >=20
-> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
-> ---
->  .../efivar/0001-efivar-fix-for-cross-compile.patch | 21 +++----
->  ...ptions-not-supported-by-lower-version-gcc.patch | 71 ----------------=
-------
->  meta-oe/recipes-extended/efivar/efivar_0.21.bb     | 39 ------------
->  meta-oe/recipes-extended/efivar/efivar_0.23.bb     | 36 +++++++++++
->  4 files changed, 45 insertions(+), 122 deletions(-)
->  delete mode 100644 meta-oe/recipes-extended/efivar/efivar/efivar-drop-op=
-tions-not-supported-by-lower-version-gcc.patch
->  delete mode 100644 meta-oe/recipes-extended/efivar/efivar_0.21.bb
->  create mode 100644 meta-oe/recipes-extended/efivar/efivar_0.23.bb
+> >=20
+> > Signed-off-by: Alejandro Joya <alejandro.joya.cruz@intel.com>
+> > ---
+> >  .../toybox/0001-Match-paths-with-busybox.patch     | 388 -------------=
+--------
+> >  .../toybox/toybox_build-add-Missing-CFLAGS.patch   |  28 ++
+> >  .../toybox/{toybox_0.6.0.bb =3D> toybox_0.7.0.bb}    |  10 +-
+> >  3 files changed, 34 insertions(+), 392 deletions(-)
+> >  delete mode 100644 meta-oe/recipes-core/toybox/toybox/0001-Match-paths=
+-with-busybox.patch
+> >  create mode 100644 meta-oe/recipes-core/toybox/toybox/toybox_build-add=
+-Missing-CFLAGS.patch
+> >  rename meta-oe/recipes-core/toybox/{toybox_0.6.0.bb =3D> toybox_0.7.0.=
+bb} (87%)
+> >=20
+> > diff --git a/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-b=
+usybox.patch b/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-bus=
+ybox.patch
+> > deleted file mode 100644
+> > index 9eb965d..0000000
+> > --- a/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.=
+patch
+> > +++ /dev/null
+> > @@ -1,388 +0,0 @@
+> > -From 9b37b45067677563dc8daa73d73a015c20ad6222 Mon Sep 17 00:00:00 2001
+> > -From: Paul Barker <paul@paulbarker.me.uk>
+> > -Date: Mon, 18 Aug 2014 12:18:16 +0000
+> > -Subject: [PATCH] Match paths with busybox
+> > -
+> > -To ensure that toybox can be installed alongside busybox without confu=
+sing
+> > -update-alternatives, the paths of the links installed by toybox should=
+ match
+> > -those installed by busybox. This is accomplished by changing the flags=
+ of a few
+> > -tools within toybox.
+> > -
+> > -v3:
+> > -    - Forward ported from v0.5.0 to v0.5.2
+> > -
+> > -v2:
+> > -    - Forward ported from v0.4.9 to v0.5.0
+> > -    - Move new 'mount' command
+> > -
+> > -Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+> > -
+> > -Upstream-status: Inappropriate
+> > -    (specific to update-alternatives use in OpenEmbedded)
+> > -
+> > -Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
+> > ----
+> > - toys/lsb/mount.c        | 2 +-
+> > - toys/lsb/pidof.c        | 2 +-
+> > - toys/other/chvt.c       | 2 +-
+> > - toys/other/ifconfig.c   | 2 +-
+> > - toys/other/insmod.c     | 2 +-
+> > - toys/other/lsmod.c      | 2 +-
+> > - toys/other/netcat.c     | 2 +-
+> > - toys/other/pivot_root.c | 2 +-
+> > - toys/other/readlink.c   | 2 +-
+> > - toys/other/reboot.c     | 6 +++---
+> > - toys/other/rfkill.c     | 2 +-
+> > - toys/other/rmmod.c      | 2 +-
+> > - toys/other/swapoff.c    | 2 +-
+> > - toys/other/swapon.c     | 2 +-
+> > - toys/other/sysctl.c     | 2 +-
+> > - toys/posix/cut.c        | 2 +-
+> > - toys/posix/df.c         | 2 +-
+> > - toys/posix/head.c       | 2 +-
+> > - toys/posix/id.c         | 6 +++---
+> > - toys/posix/mkfifo.c     | 2 +-
+> > - toys/posix/renice.c     | 2 +-
+> > - toys/posix/tail.c       | 2 +-
+> > - toys/posix/tee.c        | 2 +-
+> > - toys/posix/uniq.c       | 2 +-
+> > - toys/posix/who.c        | 2 +-
+> > - 25 files changed, 29 insertions(+), 29 deletions(-)
+> > -
+> > -diff --git a/toys/lsb/mount.c b/toys/lsb/mount.c
+> > -index c334681..b076ca1 100644
+> > ---- a/toys/lsb/mount.c
+> > -+++ b/toys/lsb/mount.c
+> > -@@ -6,7 +6,7 @@
+> > -  * Note: -hV is bad spec, haven't implemented -FsLU yet
+> > -  * no mtab (/proc/mounts does it) so -n is NOP.
+> > -=20
+> > --USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_USR|TOYFLAG_BIN=
+|TOYFLAG_STAYROOT))
+> > -+USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_BIN|TOYFLAG_STA=
+YROOT))
+> > - //USE_NFSMOUNT(NEWTOY(nfsmount, "?<2>2", TOYFLAG_USR|TOYFLAG_BIN|TOYF=
+LAG_STAYROOT))
+> > -=20
+> > - config MOUNT
+> > -diff --git a/toys/lsb/pidof.c b/toys/lsb/pidof.c
+> > -index 51b742f..a8fc8ef 100644
+> > ---- a/toys/lsb/pidof.c
+> > -+++ b/toys/lsb/pidof.c
+> > -@@ -5,7 +5,7 @@
+> > -  *
+> > -  * http://refspecs.linuxfoundation.org/LSB_4.1.0/LSB-Core-generic/LSB=
+-Core-generic/pidof.html
+> > -=20
+> > --USE_PIDOF(NEWTOY(pidof, "<1so:", TOYFLAG_USR|TOYFLAG_BIN))
+> > -+USE_PIDOF(NEWTOY(pidof, "<1so:", TOYFLAG_BIN))
+> > -=20
+> > - config PIDOF
+> > -   bool "pidof"
+> > -diff --git a/toys/other/chvt.c b/toys/other/chvt.c
+> > -index 6544265..a93327f 100644
+> > ---- a/toys/other/chvt.c
+> > -+++ b/toys/other/chvt.c
+> > -@@ -2,7 +2,7 @@
+> > -  *
+> > -  * Copyright (C) 2008 David Anders <danders@amltd.com>
+> > -=20
+> > --USE_CHVT(NEWTOY(chvt, "<1", TOYFLAG_USR|TOYFLAG_SBIN))
+> > -+USE_CHVT(NEWTOY(chvt, "<1", TOYFLAG_USR|TOYFLAG_BIN))
+> > -=20
+> > - config CHVT
+> > -   bool "chvt"
+> > -diff --git a/toys/other/ifconfig.c b/toys/other/ifconfig.c
+> > -index 8db3ff0..445799d 100644
+> > ---- a/toys/other/ifconfig.c
+> > -+++ b/toys/other/ifconfig.c
+> > -@@ -6,7 +6,7 @@
+> > -  *
+> > -  * Not in SUSv4.
+> > -=20
+> > --USE_IFCONFIG(NEWTOY(ifconfig, "^?a", TOYFLAG_BIN))
+> > -+USE_IFCONFIG(NEWTOY(ifconfig, "^?a", TOYFLAG_SBIN))
+> > -=20
+> > - config IFCONFIG
+> > -   bool "ifconfig"
+> > -diff --git a/toys/other/insmod.c b/toys/other/insmod.c
+> > -index 81721a3..cb222a5 100644
+> > ---- a/toys/other/insmod.c
+> > -+++ b/toys/other/insmod.c
+> > -@@ -2,7 +2,7 @@
+> > -  *
+> > -  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
+> > -=20
+> > --USE_INSMOD(NEWTOY(insmod, "<1", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
+> > -+USE_INSMOD(NEWTOY(insmod, "<1", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
+> > -=20
+> > - config INSMOD
+> > -   bool "insmod"
+> > -diff --git a/toys/other/lsmod.c b/toys/other/lsmod.c
+> > -index b8f5d82..4d16048 100644
+> > ---- a/toys/other/lsmod.c
+> > -+++ b/toys/other/lsmod.c
+> > -@@ -2,7 +2,7 @@
+> > -  *
+> > -  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
+> > -=20
+> > --USE_LSMOD(NEWTOY(lsmod, NULL, TOYFLAG_BIN))
+> > -+USE_LSMOD(NEWTOY(lsmod, NULL, TOYFLAG_SBIN))
+> > -=20
+> > - config LSMOD
+> > -   bool "lsmod"
+> > -diff --git a/toys/other/netcat.c b/toys/other/netcat.c
+> > -index d27aa88..0fd26f7 100644
+> > ---- a/toys/other/netcat.c
+> > -+++ b/toys/other/netcat.c
+> > -@@ -4,7 +4,7 @@
+> > -  *
+> > -  * TODO: udp, ipv6, genericize for telnet/microcom/tail-f
+> > -=20
+> > --USE_NETCAT(OLDTOY(nc, netcat, TOYFLAG_BIN))
+> > -+USE_NETCAT(OLDTOY(nc, netcat, TOYFLAG_USR|TOYFLAG_BIN))
+> > - USE_NETCAT(NEWTOY(netcat, USE_NETCAT_LISTEN("^tlL")"w#p#s:q#f:", TOYF=
+LAG_BIN))
+> > -=20
+> > - config NETCAT
+> > -diff --git a/toys/other/pivot_root.c b/toys/other/pivot_root.c
+> > -index 9a1f56c..7748032 100644
+> > ---- a/toys/other/pivot_root.c
+> > -+++ b/toys/other/pivot_root.c
+> > -@@ -2,7 +2,7 @@
+> > -  *
+> > -  * Copyright 2012 Rob Landley <rob@landley.net>
+> > -=20
+> > --USE_PIVOT_ROOT(NEWTOY(pivot_root, "<2>2", TOYFLAG_USR|TOYFLAG_BIN))
+> > -+USE_PIVOT_ROOT(NEWTOY(pivot_root, "<2>2", TOYFLAG_SBIN))
+> > -=20
+> > - config PIVOT_ROOT
+> > -   bool "pivot_root"
+> > -diff --git a/toys/other/readlink.c b/toys/other/readlink.c
+> > -index 1c33362..fecd1ef 100644
+> > ---- a/toys/other/readlink.c
+> > -+++ b/toys/other/readlink.c
+> > -@@ -2,7 +2,7 @@
+> > -  *
+> > -  * Copyright 2007 Rob Landley <rob@landley.net>
+> > -=20
+> > --USE_READLINK(NEWTOY(readlink, "<1>1fenq[-fe]", TOYFLAG_BIN))
+> > -+USE_READLINK(NEWTOY(readlink, "<1>1fenq[-fe]", TOYFLAG_USR|TOYFLAG_BI=
+N))
+> > -=20
+> > - config READLINK
+> > -   bool "readlink"
+> > -diff --git a/toys/other/reboot.c b/toys/other/reboot.c
+> > -index 8baa4d8..a135888 100644
+> > ---- a/toys/other/reboot.c
+> > -+++ b/toys/other/reboot.c
+> > -@@ -2,9 +2,9 @@
+> > -  *
+> > -  * Copyright 2013 Elie De Brauwer <eliedebrauwer@gmail.com>
+> > -=20
+> > --USE_REBOOT(NEWTOY(reboot, "n", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
+> > --USE_REBOOT(OLDTOY(halt, reboot, TOYFLAG_BIN|TOYFLAG_NEEDROOT))
+> > --USE_REBOOT(OLDTOY(poweroff, reboot, TOYFLAG_BIN|TOYFLAG_NEEDROOT))
+> > -+USE_REBOOT(NEWTOY(reboot, "n", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
+> > -+USE_REBOOT(OLDTOY(halt, reboot, TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
+> > -+USE_REBOOT(OLDTOY(poweroff, reboot, TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
+> > -=20
+> > - config REBOOT
+> > -   bool "reboot"
+> > -diff --git a/toys/other/rfkill.c b/toys/other/rfkill.c
+> > -index af3efe1..7527ec7 100644
+> > ---- a/toys/other/rfkill.c
+> > -+++ b/toys/other/rfkill.c
+> > -@@ -5,7 +5,7 @@
+> > -  *
+> > -  * No Standard
+> > -=20
+> > --USE_RFKILL(NEWTOY(rfkill, "<1>2", TOYFLAG_SBIN))
+> > -+USE_RFKILL(NEWTOY(rfkill, "<1>2", TOYFLAG_USR|TOYFLAG_SBIN))
+> > -=20
+> > - config RFKILL
+> > -   bool "rfkill"
+> > -diff --git a/toys/other/rmmod.c b/toys/other/rmmod.c
+> > -index b789acc..10c134c 100644
+> > ---- a/toys/other/rmmod.c
+> > -+++ b/toys/other/rmmod.c
+> > -@@ -2,7 +2,7 @@
+> > -  *
+> > -  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
+> > -=20
+> > --USE_RMMOD(NEWTOY(rmmod, "<1wf", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
+> > -+USE_RMMOD(NEWTOY(rmmod, "<1wf", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
+> > -=20
+> > - config RMMOD
+> > -   bool "rmmod"
+> > -diff --git a/toys/other/swapoff.c b/toys/other/swapoff.c
+> > -index b89e915..fb17130 100644
+> > ---- a/toys/other/swapoff.c
+> > -+++ b/toys/other/swapoff.c
+> > -@@ -2,7 +2,7 @@
+> > -  *
+> > -  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
+> > -=20
+> > --USE_SWAPOFF(NEWTOY(swapoff, "<1>1", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
+> > -+USE_SWAPOFF(NEWTOY(swapoff, "<1>1", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
+> > -=20
+> > - config SWAPOFF
+> > -   bool "swapoff"
+> > -diff --git a/toys/other/swapon.c b/toys/other/swapon.c
+> > -index 49f1249..838d382 100644
+> > ---- a/toys/other/swapon.c
+> > -+++ b/toys/other/swapon.c
+> > -@@ -2,7 +2,7 @@
+> > -  *
+> > -  * Copyright 2012 Elie De Brauwer <eliedebrauwer@gmail.com>
+> > -=20
+> > --USE_SWAPON(NEWTOY(swapon, "<1>1p#<0>32767", TOYFLAG_BIN|TOYFLAG_NEEDR=
+OOT))
+> > -+USE_SWAPON(NEWTOY(swapon, "<1>1p#<0>32767", TOYFLAG_SBIN|TOYFLAG_NEED=
+ROOT))
+> > -=20
+> > - config SWAPON
+> > -   bool "swapon"
+> > -diff --git a/toys/other/sysctl.c b/toys/other/sysctl.c
+> > -index 8e57ca1..0c6c640 100644
+> > ---- a/toys/other/sysctl.c
+> > -+++ b/toys/other/sysctl.c
+> > -@@ -5,7 +5,7 @@
+> > -  *
+> > -  * No Standard
+> > - =20
+> > --USE_SYSCTL(NEWTOY(sysctl, "^neNqwpaA[!ap][!aq][!aw][+aA]", TOYFLAG_US=
+R|TOYFLAG_BIN))
+> > -+USE_SYSCTL(NEWTOY(sysctl, "^neNqwpaA[!ap][!aq][!aw][+aA]", TOYFLAG_SB=
+IN))
+> > -=20
+> > - config SYSCTL
+> > -   bool "sysctl"
+> > -diff --git a/toys/posix/cut.c b/toys/posix/cut.c
+> > -index 7f10c5e..1ab3ce8 100644
+> > ---- a/toys/posix/cut.c
+> > -+++ b/toys/posix/cut.c
+> > -@@ -5,7 +5,7 @@
+> > -  *
+> > -  * http://pubs.opengroup.org/onlinepubs/9699919799/utilities/cut.html=
+=20
+> > -=20
+> > --USE_CUT(NEWTOY(cut, "b:|c:|f:|d:sn[!cbf]", TOYFLAG_BIN))
+> > -+USE_CUT(NEWTOY(cut, "b:|c:|f:|d:sn[!cbf]", TOYFLAG_USR|TOYFLAG_BIN))
+> > -=20
+> > - config CUT
+> > -   bool "cut"
+> > -diff --git a/toys/posix/df.c b/toys/posix/df.c
+> > -index 141e8e5..5d37b45 100644
+> > ---- a/toys/posix/df.c
+> > -+++ b/toys/posix/df.c
+> > -@@ -4,7 +4,7 @@
+> > -  *
+> > -  * See http://opengroup.org/onlinepubs/9699919799/utilities/df.html
+> > -=20
+> > --USE_DF(NEWTOY(df, "Pkt*a[-Pk]", TOYFLAG_USR|TOYFLAG_SBIN))
+> > -+USE_DF(NEWTOY(df, "Pkt*a[-Pk]", TOYFLAG_BIN))
+> > -=20
+> > - config DF
+> > -   bool "df"
+> > -diff --git a/toys/posix/head.c b/toys/posix/head.c
+> > -index e8517d4..3ac4373 100644
+> > ---- a/toys/posix/head.c
+> > -+++ b/toys/posix/head.c
+> > -@@ -4,7 +4,7 @@
+> > -  *
+> > -  * See http://opengroup.org/onlinepubs/9699919799/utilities/head.html
+> > -=20
+> > --USE_HEAD(NEWTOY(head, "n#<0=3D10", TOYFLAG_BIN))
+> > -+USE_HEAD(NEWTOY(head, "n#<0=3D10", TOYFLAG_USR|TOYFLAG_BIN))
+> > -=20
+> > - config HEAD
+> > -   bool "head"
+> > -diff --git a/toys/posix/id.c b/toys/posix/id.c
+> > -index 353aa04..7ab489e 100644
+> > ---- a/toys/posix/id.c
+> > -+++ b/toys/posix/id.c
+> > -@@ -6,10 +6,10 @@
+> > -  *
+> > -  * See http://opengroup.org/onlinepubs/9699919799/utilities/id.html
+> > -=20
+> > --USE_ID(NEWTOY(id, ">1"USE_ID_SELINUX("Z")"nGgru[!"USE_ID_SELINUX("Z")=
+"Ggu]", TOYFLAG_BIN))
+> > -+USE_ID(NEWTOY(id, ">1"USE_ID_SELINUX("Z")"nGgru[!"USE_ID_SELINUX("Z")=
+"Ggu]", TOYFLAG_USR|TOYFLAG_BIN))
+> > - USE_GROUPS(NEWTOY(groups, NULL, TOYFLAG_USR|TOYFLAG_BIN))
+> > --USE_LOGNAME(NEWTOY(logname, ">0", TOYFLAG_BIN))
+> > --USE_WHOAMI(OLDTOY(whoami, logname, TOYFLAG_BIN))
+> > -+USE_LOGNAME(NEWTOY(logname, ">0", TOYFLAG_USR|TOYFLAG_BIN))
+> > -+USE_WHOAMI(OLDTOY(whoami, logname, TOYFLAG_USR|TOYFLAG_BIN))
+> > -=20
+> > - config ID
+> > -   bool "id"
+> > -diff --git a/toys/posix/mkfifo.c b/toys/posix/mkfifo.c
+> > -index 15fab70..4e0fca3 100644
+> > ---- a/toys/posix/mkfifo.c
+> > -+++ b/toys/posix/mkfifo.c
+> > -@@ -4,7 +4,7 @@
+> > -  *
+> > -  * See http://opengroup.org/onlinepubs/9699919799/utilities/mkfifo.ht=
+ml
+> > -=20
+> > --USE_MKFIFO(NEWTOY(mkfifo, "<1m:", TOYFLAG_BIN))
+> > -+USE_MKFIFO(NEWTOY(mkfifo, "<1m:", TOYFLAG_USR|TOYFLAG_BIN))
+> > -=20
+> > - config MKFIFO
+> > -   bool "mkfifo"
+> > -diff --git a/toys/posix/renice.c b/toys/posix/renice.c
+> > -index 8c20644..489eb13 100644
+> > ---- a/toys/posix/renice.c
+> > -+++ b/toys/posix/renice.c
+> > -@@ -4,7 +4,7 @@
+> > -  *
+> > -  * See http://pubs.opengroup.org/onlinepubs/9699919799/utilities/reni=
+ce.html
+> > -=20
+> > --USE_RENICE(NEWTOY(renice, "<1gpun#|", TOYFLAG_BIN))
+> > -+USE_RENICE(NEWTOY(renice, "<1gpun#|", TOYFLAG_USR|TOYFLAG_BIN))
+> > -=20
+> > - config RENICE
+> > -   bool "renice"
+> > -diff --git a/toys/posix/tail.c b/toys/posix/tail.c
+> > -index e92c044..ba1d311 100644
+> > ---- a/toys/posix/tail.c
+> > -+++ b/toys/posix/tail.c
+> > -@@ -4,7 +4,7 @@
+> > -  *
+> > -  * See http://opengroup.org/onlinepubs/9699919799/utilities/tail.html
+> > -=20
+> > --USE_TAIL(NEWTOY(tail, "fc-n-[-cn]", TOYFLAG_BIN))
+> > -+USE_TAIL(NEWTOY(tail, "fc-n-[-cn]", TOYFLAG_USR|TOYFLAG_BIN))
+> > -=20
+> > - config TAIL
+> > -   bool "tail"
+> > -diff --git a/toys/posix/tee.c b/toys/posix/tee.c
+> > -index 0388510..5574088 100644
+> > ---- a/toys/posix/tee.c
+> > -+++ b/toys/posix/tee.c
+> > -@@ -4,7 +4,7 @@
+> > -  *
+> > -  * See http://opengroup.org/onlinepubs/9699919799/utilities/tee.html
+> > -=20
+> > --USE_TEE(NEWTOY(tee, "ia", TOYFLAG_BIN))
+> > -+USE_TEE(NEWTOY(tee, "ia", TOYFLAG_USR|TOYFLAG_BIN))
+> > -=20
+> > - config TEE
+> > -   bool "tee"
+> > -diff --git a/toys/posix/uniq.c b/toys/posix/uniq.c
+> > -index 3cfdb94..c127cfe 100644
+> > ---- a/toys/posix/uniq.c
+> > -+++ b/toys/posix/uniq.c
+> > -@@ -4,7 +4,7 @@
+> > -  *
+> > -  * See http://opengroup.org/onlinepubs/9699919799/utilities/uniq.html
+> > -=20
+> > --USE_UNIQ(NEWTOY(uniq, "f#s#w#zicdu", TOYFLAG_BIN))
+> > -+USE_UNIQ(NEWTOY(uniq, "f#s#w#zicdu", TOYFLAG_USR|TOYFLAG_BIN))
+> > -=20
+> > - config UNIQ
+> > -   bool "uniq"
+> > -diff --git a/toys/posix/who.c b/toys/posix/who.c
+> > -index 876a562..414cdfc 100644
+> > ---- a/toys/posix/who.c
+> > -+++ b/toys/posix/who.c
+> > -@@ -9,7 +9,7 @@
+> > -  * Posix says to support many options (-abdHlmpqrstTu) but this
+> > -  * isn't aimed at minicomputers with modem pools.
+> > -=20
+> > --USE_WHO(NEWTOY(who, "a", TOYFLAG_BIN))
+> > -+USE_WHO(NEWTOY(who, "a", TOYFLAG_USR|TOYFLAG_BIN))
+> > -=20
+> > - config WHO
+> > -   bool "who"
+> > ---=20
+> > -1.8.1.2
+> > -
+> > diff --git a/meta-oe/recipes-core/toybox/toybox/toybox_build-add-Missin=
+g-CFLAGS.patch b/meta-oe/recipes-core/toybox/toybox/toybox_build-add-Missin=
+g-CFLAGS.patch
+> > new file mode 100644
+> > index 0000000..80d6b2a
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-core/toybox/toybox/toybox_build-add-Missing-CFLAG=
+S.patch
+> > @@ -0,0 +1,28 @@
+> > +From 686492e6b0aa582b42bf95cfc9a31324204d8f79 Mon Sep 17 00:00:00 2001
+> > +From: Alejandro Joya <alejandro.joya.cruz@intel.com>
+> > +Date: Tue, 2 Feb 2016 17:47:50 -0800
+> > +Subject: [PATCH] toybox_build: add Missing CFLAGS
+> > +
+> > +add CFLAGS to multiple builds to forward libraries location in Yocto.
+> > +
+> > +Signed-off-by: Alejandro Joya <alejandro.joya.cruz@intel.com>
+> > +---
+> > + Makefile | 2 +-
+> > + 1 file changed, 1 insertion(+), 1 deletion(-)
+> > +
+> > +diff --git a/Makefile b/Makefile
+> > +index 5422efe..2dca3ae 100644
+> > +--- a/Makefile
+> > ++++ b/Makefile
+> > +@@ -37,7 +37,7 @@ bloatcheck: toybox_old toybox_unstripped
+> > +=20
+> > + generated/instlist: toybox_stuff
+> > + 	NOBUILD=3D1 scripts/make.sh
+> > +-	$(HOSTCC) -I . scripts/install.c -o generated/instlist
+> > ++	$(HOSTCC) -I . $(CFLAGS) scripts/install.c -o generated/instlist
+> > +=20
+> > + install_flat: generated/instlist
+> > + 	scripts/install.sh --symlink --force
+> > +--=20
+> > +1.9.1
+> > +
+> > diff --git a/meta-oe/recipes-core/toybox/toybox_0.6.0.bb b/meta-oe/reci=
+pes-core/toybox/toybox_0.7.0.bb
+> > similarity index 87%
+> > rename from meta-oe/recipes-core/toybox/toybox_0.6.0.bb
+> > rename to meta-oe/recipes-core/toybox/toybox_0.7.0.bb
+> > index da03200..a1fa8a9 100644
+> > --- a/meta-oe/recipes-core/toybox/toybox_0.6.0.bb
+> > +++ b/meta-oe/recipes-core/toybox/toybox_0.7.0.bb
+> > @@ -1,10 +1,11 @@
+> >  SUMMARY =3D "Toybox combines common utilities together into a single e=
+xecutable."
+> >  HOMEPAGE =3D "http://www.landley.net/toybox/"
+> > =20
+> > -SRC_URI =3D "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.=
+gz"
+> > +SRC_URI =3D "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.=
+gz \
+> > +           file://toybox_build-add-Missing-CFLAGS.patch"
+> > =20
+> > -SRC_URI[md5sum] =3D "7f4a6c89e56c48e3350e611f5b36c2cf"
+> > -SRC_URI[sha256sum] =3D "b6e2694d19ac08f1c3416d5b2a02a31d445db2ed98dec8=
+9761430cdff2c9710d"
+> > +SRC_URI[md5sum] =3D "d86c78624b47625c2f0fc64eda599443"
+> > +SRC_URI[sha256sum] =3D "65428816f88ad3fe92b67df86dc05427c8078fe03843b8=
+b9715fdfa6d29c0f97"
+> > =20
+> > =20
+> >  LICENSE =3D "BSD-0-Clause"
+> > @@ -12,9 +13,10 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df0b8b3dd6=
+431bcaa245da0a08bd0d511"
+> > =20
+> >  SECTION =3D "base"
+> > =20
+> > +CFLAGS_prepend =3D "-I ${STAGING_DIR_HOST}${includedir_native}"
+> > +
+> >  do_configure() {
+> >      oe_runmake defconfig
+> > -
+> >      # Disable killall5 as it isn't managed by update-alternatives
+> >      sed -e 's/CONFIG_KILLALL5=3Dy/# CONFIG_KILLALL5 is not set/' -i .c=
+onfig
+> >  }
+> > --=20
+> > 1.9.1
+> >=20
+> > --=20
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >=20
-> diff --git a/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-c=
-ross-compile.patch b/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix=
--for-cross-compile.patch
-> index 4bd7d95..b02edd9 100644
-> --- a/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-co=
-mpile.patch
-> +++ b/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-co=
-mpile.patch
-> @@ -12,20 +12,17 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> =20
->  diff --git a/src/Makefile b/src/Makefile
-> -index 6eac858..ef4eb1d 100644
-> +index 5fc7887..1829d22 100644
->  --- a/src/Makefile
->  +++ b/src/Makefile
-> -@@ -65,8 +65,8 @@ makeguids.o : makeguids.c
-> - makeguids : makeguids.o fakeguid.o
-> - 	$(CC) $(cflags) -o $@ $^ -ldl
-> -=20
-> +@@ -29,8 +29,8 @@ all : deps $(TARGETS)
-> + ./guid-symbols.c : include/efivar/efivar-guids.h
-> + ./guids.bin : include/efivar/efivar-guids.h
-> + ./names.bin : include/efivar/efivar-guids.h
->  -include/efivar/efivar-guids.h : makeguids guids.txt
-> --	./makeguids guids.txt guids.bin names.bin guid-symbols.S $@
-> +-	./makeguids guids.txt guids.bin names.bin \
->  +include/efivar/efivar-guids.h : guids.txt
-> -+	makeguids guids.txt guids.bin names.bin guid-symbols.S $@
-> ++	makeguids guids.txt guids.bin names.bin \
-> + 		guid-symbols.c include/efivar/efivar-guids.h
->  =20
-> - guidlist.o : guids.S include/efivar/efivar-guids.h
-> - 	$(CC) $(cflags) -c -o guidlist.o guids.S
-> ---=20
-> -2.6.0.rc2.10.gf4d9753
-> -
-> + makeguids : CPPFLAGS+=3D-DEFIVAR_BUILD_ENVIRONMENT
-> diff --git a/meta-oe/recipes-extended/efivar/efivar/efivar-drop-options-n=
-ot-supported-by-lower-version-gcc.patch b/meta-oe/recipes-extended/efivar/e=
-fivar/efivar-drop-options-not-supported-by-lower-version-gcc.patch
-> deleted file mode 100644
-> index 7f04b19..0000000
-> --- a/meta-oe/recipes-extended/efivar/efivar/efivar-drop-options-not-supp=
-orted-by-lower-version-gcc.patch
-> +++ /dev/null
-> @@ -1,71 +0,0 @@
-> -gcc options '-Wmaybe-uninitialized' and '-std=3Dgnu11' are not recognize=
-d by gcc
-> -whose version is lower than 4.6, such as on Ubuntu 12.04. Drop them for =
-backward
-> -compatible.
-> -
-> -Upstream-Status: Pending
-> -
-> -Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ----
-> -diff --git a/Make.defaults b/Make.defaults
-> -index cc2baa9..118ae56 100644
-> ---- a/Make.defaults
-> -+++ b/Make.defaults
-> -@@ -10,10 +10,9 @@ CFLAGS	?=3D -O2 -g
-> -=20
-> - ARCH =3D $(shell uname -m)
-> - clang_cflags =3D
-> --gcc_cflags =3D -Wmaybe-uninitialized
-> - cflags	:=3D $(CFLAGS) \
-> - 	-Werror -Wall -Wsign-compare -Wstrict-aliasing \
-> --	-std=3Dgnu11 -fshort-wchar -fPIC \
-> -+	-fshort-wchar -fPIC \
-> - 	-fvisibility=3Dhidden \
-> - 	-D_GNU_SOURCE -I${TOPDIR}/src/include/efivar/ \
-> - 	$(if $(filter $(CC),clang),$(clang_cflags),) \
-> -diff --git a/src/guid.h b/src/guid.h
-> -index 9542ee1..0817991 100644
-> ---- a/src/guid.h
-> -+++ b/src/guid.h
-> -@@ -31,7 +31,8 @@ static inline int
-> - real_isspace(char c)
-> - {
-> - 	char spaces[] =3D " \f\n\r\t\v";
-> --	for (int i =3D 0; spaces[i] !=3D '\0'; i++)
-> -+	int i;
-> -+	for (i =3D 0; spaces[i] !=3D '\0'; i++)
-> - 		if (c =3D=3D spaces[i])
-> - 			return 1;
-> - 	return 0;
-> -@@ -59,7 +60,8 @@ check_sanity(const char *text, size_t len)
-> - static inline int
-> - check_segment_sanity(const char *text, size_t len)
-> - {
-> --	for(unsigned int i =3D 0; i < len; i++) {
-> -+	unsigned int i;
-> -+	for(i =3D 0; i < len; i++) {
-> - 		if (text[i] >=3D '0' && text[i] <=3D '9')
-> - 			continue;
-> - 		/* "| 0x20" is tolower() without having to worry about
-> -diff --git a/src/makeguids.c b/src/makeguids.c
-> -index e9acf15..7e16cb2 100644
-> ---- a/src/makeguids.c
-> -+++ b/src/makeguids.c
-> -@@ -150,7 +150,8 @@ main(int argc, char *argv[])
-> -=20
-> - 	fprintf(header, "#ifndef EFIVAR_GUIDS_H\n#define EFIVAR_GUIDS_H 1\n\n"=
-);
-> -=20
-> --	for (unsigned int i =3D 0; i < line-1; i++) {
-> -+	unsigned int i, j;
-> -+	for (i =3D 0; i < line-1; i++) {
-> - 		if (!strcmp(outbuf[i].symbol, "efi_guid_zero"))
-> - 			fprintf(symout, "\t.globl %s\n"
-> - 					"\t.data\n"
-> -@@ -176,7 +177,7 @@ main(int argc, char *argv[])
-> - 			fprintf(symout, "efi_guid_empty:\n");
-> -=20
-> - 		uint8_t *guid_data =3D (uint8_t *) &outbuf[i].guid;
-> --		for (unsigned int j =3D 0; j < sizeof (efi_guid_t); j++)
-> -+		for (j =3D 0; j < sizeof (efi_guid_t); j++)
-> - 			fprintf(symout,"\t.byte 0x%02x\n", guid_data[j]);
-> -=20
-> - 		fprintf(symout, "%s_end:\n", outbuf[i].symbol);
-> diff --git a/meta-oe/recipes-extended/efivar/efivar_0.21.bb b/meta-oe/rec=
-ipes-extended/efivar/efivar_0.21.bb
-> deleted file mode 100644
-> index f7a4d55..0000000
-> --- a/meta-oe/recipes-extended/efivar/efivar_0.21.bb
-> +++ /dev/null
-> @@ -1,39 +0,0 @@
-> -SUMMARY =3D "Tools to manipulate UEFI variables"
-> -DESCRIPTION =3D "efivar provides a simple command line interface to the =
-UEFI variable facility"
-> -HOMEPAGE =3D "https://github.com/rhinstaller/efivar"
-> -
-> -LICENSE =3D "LGPLv2.1"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6626bb1e20189cfa95f2c508ba286=
-393"
-> -
-> -DEPENDS_class-target =3D "popt efivar-native"
-> -
-> -SRCREV =3D "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
-> -SRC_URI =3D "git://github.com/rhinstaller/efivar.git"
-> -SRC_URI_append_class-target =3D " file://0001-efivar-fix-for-cross-compi=
-le.patch"
-> -SRC_URI_append_class-native =3D " file://efivar-drop-options-not-support=
-ed-by-lower-version-gcc.patch"
-> -
-> -S =3D "${WORKDIR}/git"
-> -
-> -do_install() {
-> -    oe_runmake install DESTDIR=3D${D}
-> -}
-> -
-> -do_compile_class-native() {
-> -    oe_runmake -C src makeguids
-> -}
-> -
-> -do_install_class-native() {
-> -    install -D -m 0755 ${B}/src/makeguids ${D}${bindir}/makeguids
-> -}
-> -
-> -BBCLASSEXTEND =3D "native"
-> -
-> -# See
-> -# http://lists.openembedded.org/pipermail/openembedded-core/2016-Februar=
-y/116564.html
-> -# http://lists.openembedded.org/pipermail/openembedded-core/2016-Februar=
-y/116571.html
-> -# http://lists.openembedded.org/pipermail/openembedded-devel/2016-Februa=
-ry/105802.html
-> -# http://lists.openembedded.org/pipermail/openembedded-devel/2016-Februa=
-ry/105786.html
-> -# but it's still broken:
-> -# http://lists.openembedded.org/pipermail/openembedded-devel/2016-Februa=
-ry/105825.html
-> -# http://lists.openembedded.org/pipermail/openembedded-devel/2016-Februa=
-ry/105830.html
-> -PNBLACKLIST[efivar] ?=3D "BROKEN: linux.c:27:30: fatal error: linux/nvme=
-_ioctl.h: No such file or directory"
-> diff --git a/meta-oe/recipes-extended/efivar/efivar_0.23.bb b/meta-oe/rec=
-ipes-extended/efivar/efivar_0.23.bb
-> new file mode 100644
-> index 0000000..faffb79
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/efivar/efivar_0.23.bb
-> @@ -0,0 +1,36 @@
-> +SUMMARY =3D "Tools to manipulate UEFI variables"
-> +DESCRIPTION =3D "efivar provides a simple command line interface to the =
-UEFI variable facility"
-> +HOMEPAGE =3D "https://github.com/rhinstaller/efivar"
-> +
-> +LICENSE =3D "LGPLv2.1"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6626bb1e20189cfa95f2c508ba286=
-393"
-> +
-> +DEPENDS_class-target =3D "popt efivar-native"
-> +
-> +SRCREV =3D "01abee43d6d6e755f56a4135ab5aa0bfad609ce2"
-> +SRC_URI =3D "git://github.com/rhinstaller/efivar.git"
-> +SRC_URI_append_class-target =3D " file://0001-efivar-fix-for-cross-compi=
-le.patch"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +# Setting CROSS_COMPILE breaks pkgconfig, so just set AR
-> +EXTRA_OEMAKE =3D "AR=3D${TARGET_PREFIX}gcc-ar"
-> +
-> +do_compile_prepend() {
-> +    sed -i -e s:-Werror::g ${S}/gcc.specs
-> +}
-> +
-> +do_compile_class-native() {
-> +    oe_runmake -C src makeguids
-> +}
-> +
-> +do_install() {
-> +    oe_runmake install DESTDIR=3D${D}
-> +}
-> +
-> +do_install_class-native() {
-> +    install -D -m 0755 ${B}/src/makeguids ${D}${bindir}/makeguids
-> +}
-> +
-> +BBCLASSEXTEND =3D "native"
-> +
 > --=20
-> 2.4.3
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---DKU6Jbt7q3WqK7+M
+--bKyqfOwhbdpXa4YI
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlbZjtAACgkQN1Ujt2V2gByD1wCfZ2hvYRlRPeMfYMaczrqJmjOE
-f2kAnjcHTr83M1xLDDZ3dxkrX4mbTM+E
-=IFj7
+iEYEARECAAYFAlbZj2YACgkQN1Ujt2V2gBwXQQCgqadowQcSbhqboGERVWJCtRCg
+QOEAn2Jz3JlctZESgsIJP35rwoPYGQtm
+=03SX
 -----END PGP SIGNATURE-----
 
---DKU6Jbt7q3WqK7+M--
+--bKyqfOwhbdpXa4YI--
