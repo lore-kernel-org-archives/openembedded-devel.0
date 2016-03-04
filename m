@@ -1,45 +1,43 @@
 Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id D979E73182
+Received: from mail-lb0-f180.google.com (mail-lb0-f180.google.com
+	[209.85.217.180])
+	by mail.openembedded.org (Postfix) with ESMTP id A2AE176486
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Mar 2016 14:15:49 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id p65so31024011wmp.0
+	Fri,  4 Mar 2016 14:16:22 +0000 (UTC)
+Received: by mail-lb0-f180.google.com with SMTP id k15so62575285lbg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Mar 2016 06:15:50 -0800 (PST)
+	Fri, 04 Mar 2016 06:16:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ows665yvueSeuLAeHD6v+mIGXMBJ29GcU7MxPjGJkIo=;
-	b=cNfUzmgdjrGbnSifrbZ+XNYAqPz8ymxMsznoNPImEIhoNdS6xu+LPOnksbFzbXCCh7
-	ndUPeRroXp7Cy/S0VftQkmfcaPVFP6C2uLGHMQS14152OkLL/NPhIxNF9+BO2GjVhXna
-	XlMl+T6qEqZaVC/CvNBEu7ulSw1NKhqaN50q4=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc; bh=nL1SG0OgyWaQ0q6slg3T+oYYITjLIGXCCLUqZxbzFZo=;
+	b=Mslzv2JFBL3CeziTvlBi+dVG5xar3mW2wqGqDllQuW1QLhMElCnH35DgPUUhn91pqu
+	FebrufB8rHX3WI3XKQpz5WOEAvSYEi6y2BszTlstba/5Oh76z60adbGfaFy8Pg3v3nNN
+	6thAcu96mXBhWWqogvREJDSl1dRBl8kgvzu7U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=ows665yvueSeuLAeHD6v+mIGXMBJ29GcU7MxPjGJkIo=;
-	b=gWAYWTeyOT+hUt6W6QykZJIEi6ohrEx7dTWmbxrQzwrpvdR4KcVlj4UMChqxbHrOg5
-	yPQTFkQeXddVqCZioH3XUqH9/SyqZ+cTJYX27ajxFXmZs7xd5KtdVDNo1fVR18WZtjuI
-	6NssmnSg0k4vw32uDoKidQeb8bYUuCVTAMTZb1gC/ZAFHjPb3Sgcb9QdVz/slBbZdS+c
-	uRFQJSYWsVP+WblEM7KRooMVZ4pVo/rRLCeXsR9i2IFnxfWPtN0Z9pQ5LRgJ0HJrpnL1
-	DEzg3nUMbly/nT7zrWpxTCu7E0HhbCWTuC/MxH/7Fi1Y9FIqkNsedjmOgBinUE/S76cy
-	9iRA==
-X-Gm-Message-State: AD7BkJLxXDixBbhXAs2QcHMrTw58tcygaXd46TrZY6F8TwlkmYKwASW7TMEXEl0ta3/H5iwH
-X-Received: by 10.194.58.12 with SMTP id m12mr10416603wjq.22.1457100950261;
-	Fri, 04 Mar 2016 06:15:50 -0800 (PST)
-Received: from thinkpad.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174]) by smtp.gmail.com with ESMTPSA id
-	az8sm3565430wjc.17.2016.03.04.06.15.48
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 04 Mar 2016 06:15:48 -0800 (PST)
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc;
+	bh=nL1SG0OgyWaQ0q6slg3T+oYYITjLIGXCCLUqZxbzFZo=;
+	b=l2FTUQVgFeb+ZGbvZl4OhJFSewYKFzL2XvwiihJEQaOheJk5YoZe9FsNzQQL1umbqf
+	aNZjyXgFieaZlwxve6np/ktKCHXIkIKdZLQWazI6dcDJWkawuIx9b+5l0v0tx5D59tK2
+	eee/Nsm8O19vu79/W1F2za+Ihw9a8dHJdnI10dlQv+as0uVBlnkD9pr2nUdtbwdyg9Qr
+	zKgBTjxrDMV1HN2xgX1jJzVVjxnBvRyRO2TwocArBLLiv5c1whzVhg/3F75YPfKbwihj
+	yMn0+qSzGg1VYwuounkInlx9127mC8Aw+L+Am9ZN2YcFJHMK6053xM+SSXTgjFHMOX+8
+	YkdQ==
+X-Gm-Message-State: AD7BkJJ2+UA5dL2waWwrwhUrMlllKI5tGc1uMyJUpg+y2K5S+1PSFt5Ianb2QhJIyqv4EIL/BrWrqOfgDbHv0rVG
+MIME-Version: 1.0
+X-Received: by 10.112.190.4 with SMTP id gm4mr3101993lbc.74.1457100982575;
+	Fri, 04 Mar 2016 06:16:22 -0800 (PST)
+Received: by 10.112.204.200 with HTTP; Fri, 4 Mar 2016 06:16:22 -0800 (PST)
+In-Reply-To: <20160304133409.GB2557@jama>
+References: <1457075695-17045-1-git-send-email-koen.kooi@linaro.org>
+	<20160304133409.GB2557@jama>
+Date: Fri, 4 Mar 2016 15:16:22 +0100
+Message-ID: <CAP0W-RkrAsFnA=FxyK+QUHDWV2UtduFLvykqC+B86gaG9vLowA@mail.gmail.com>
 From: Koen Kooi <koen.kooi@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Mar 2016 15:15:40 +0100
-Message-Id: <1457100940-16775-2-git-send-email-koen.kooi@linaro.org>
-X-Mailer: git-send-email 2.4.3
-In-Reply-To: <1457100940-16775-1-git-send-email-koen.kooi@linaro.org>
-References: <1457100940-16775-1-git-send-email-koen.kooi@linaro.org>
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-oe][PATCH v3 2/2] efibootmgr: update and unblacklist
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2 1/2] efivar: update to 0.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,73 +50,260 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Mar 2016 14:15:51 -0000
+X-List-Received-Date: Fri, 04 Mar 2016 14:16:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Also fix style issues.
+On 4 March 2016 at 14:34, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Fri, Mar 04, 2016 at 08:14:54AM +0100, Koen Kooi wrote:
+>> Upstream removed the use of the nvme headers completely, so no more conflicts. Also drop gcc options patch, ubuntu 12.04 is too old to support in meta-oe/master.
+>
+> This fails to build static version, when no-static-libs.inc is used
+> (e.g. default in Poky).
+>
+> Can you either disable static in popt or change efivar to respect
+> --disable-static (if possible)?
 
-Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
----
- meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb  | 14 +++++++-------
- meta-oe/recipes-extended/efibootmgr/files/ldflags.patch | 17 -----------------
- 2 files changed, 7 insertions(+), 24 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/efibootmgr/files/ldflags.patch
+I've patched out the static build in v3, that should fix this.
 
-diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-index 9b611ce..d80c89f 100644
---- a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-+++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-@@ -10,20 +10,20 @@ DEPENDS = "pciutils zlib efivar"
- 
- COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
- 
--SRC_URI = "https://github.com/rhinstaller/efibootmgr/releases/download/${BP}/${BP}.tar.bz2 \
--           file://ldflags.patch \
-+SRCREV = "eb6e36c9064eae256cd60df24a977e3abd87fd16"
-+SRC_URI = "git://github.com/rhinstaller/efibootmgr.git;protocol=https \
-           "
- 
--SRC_URI[md5sum] = "6647f5cd807bc8484135ba74fcbcc39a"
--SRC_URI[sha256sum] = "a66f5850677e86255d93cb1cead04c3c48a823a2b864c579321f2a07f00256e6"
-+S = "${WORKDIR}/git"
-+
-+
-+inherit pkgconfig
- 
- EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/include `pkg-config --cflags efivar` \
-                  -DEFIBOOTMGR_VERSION=\"$(RELEASE_MAJOR).$(RELEASE_MINOR)\" '"
- 
- do_install () {
--    install -D -p -m0755 src/efibootmgr/efibootmgr ${D}/${sbindir}/efibootmgr
-+    install -D -p -m0755 src/efibootmgr ${D}/${sbindir}/efibootmgr
- }
- 
--inherit pkgconfig
- 
--PNBLACKLIST[efibootmgr] ?= "Depends on blacklisted efivar"
-diff --git a/meta-oe/recipes-extended/efibootmgr/files/ldflags.patch b/meta-oe/recipes-extended/efibootmgr/files/ldflags.patch
-deleted file mode 100644
-index 0d5594a..0000000
---- a/meta-oe/recipes-extended/efibootmgr/files/ldflags.patch
-+++ /dev/null
-@@ -1,17 +0,0 @@
--Upstream-Status: Pending
--
--Import this patch from meta-linaro.
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
--
----- efibootmgr-0.5.4.orig/Makefile
--+++ efibootmgr-0.5.4/Makefile
--@@ -11,6 +11,8 @@
--   CFLAGS = $(EXTRA_CFLAGS) -DEFIBOOTMGR_VERSION=\"$(RELEASE_MAJOR).$(RELEASE_MINOR).$(RELEASE_SUBLEVEL)$(RELEASE_EXTRALEVEL)\" \
-- 	    -Wall -g -D_FILE_OFFSET_BITS=64
-- 
--+  LDFLAGS += -lz
--+
--   MODULES := src
-- 
--   BINDIR := /usr/sbin
+regards,
+
+Koen
+
+
+>
+> 5.3.0/ld: cannot find -lpopt
+> | collect2: error: ld returned 1 exit status
+> | make[1]: *** [efivar-static] Error 1
+> | make[1]: *** Waiting for unfinished jobs....
+>
+>
+>>
+>> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+>> ---
+>>  .../efivar/0001-efivar-fix-for-cross-compile.patch | 21 +++----
+>>  ...ptions-not-supported-by-lower-version-gcc.patch | 71 ----------------------
+>>  meta-oe/recipes-extended/efivar/efivar_0.21.bb     | 39 ------------
+>>  meta-oe/recipes-extended/efivar/efivar_0.23.bb     | 36 +++++++++++
+>>  4 files changed, 45 insertions(+), 122 deletions(-)
+>>  delete mode 100644 meta-oe/recipes-extended/efivar/efivar/efivar-drop-options-not-supported-by-lower-version-gcc.patch
+>>  delete mode 100644 meta-oe/recipes-extended/efivar/efivar_0.21.bb
+>>  create mode 100644 meta-oe/recipes-extended/efivar/efivar_0.23.bb
+>>
+>> diff --git a/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile.patch b/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
+>> index 4bd7d95..b02edd9 100644
+>> --- a/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
+>> +++ b/meta-oe/recipes-extended/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
+>> @@ -12,20 +12,17 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>>  diff --git a/src/Makefile b/src/Makefile
+>> -index 6eac858..ef4eb1d 100644
+>> +index 5fc7887..1829d22 100644
+>>  --- a/src/Makefile
+>>  +++ b/src/Makefile
+>> -@@ -65,8 +65,8 @@ makeguids.o : makeguids.c
+>> - makeguids : makeguids.o fakeguid.o
+>> -     $(CC) $(cflags) -o $@ $^ -ldl
+>> -
+>> +@@ -29,8 +29,8 @@ all : deps $(TARGETS)
+>> + ./guid-symbols.c : include/efivar/efivar-guids.h
+>> + ./guids.bin : include/efivar/efivar-guids.h
+>> + ./names.bin : include/efivar/efivar-guids.h
+>>  -include/efivar/efivar-guids.h : makeguids guids.txt
+>> --    ./makeguids guids.txt guids.bin names.bin guid-symbols.S $@
+>> +-    ./makeguids guids.txt guids.bin names.bin \
+>>  +include/efivar/efivar-guids.h : guids.txt
+>> -+    makeguids guids.txt guids.bin names.bin guid-symbols.S $@
+>> ++    makeguids guids.txt guids.bin names.bin \
+>> +             guid-symbols.c include/efivar/efivar-guids.h
+>>
+>> - guidlist.o : guids.S include/efivar/efivar-guids.h
+>> -     $(CC) $(cflags) -c -o guidlist.o guids.S
+>> ---
+>> -2.6.0.rc2.10.gf4d9753
+>> -
+>> + makeguids : CPPFLAGS+=-DEFIVAR_BUILD_ENVIRONMENT
+>> diff --git a/meta-oe/recipes-extended/efivar/efivar/efivar-drop-options-not-supported-by-lower-version-gcc.patch b/meta-oe/recipes-extended/efivar/efivar/efivar-drop-options-not-supported-by-lower-version-gcc.patch
+>> deleted file mode 100644
+>> index 7f04b19..0000000
+>> --- a/meta-oe/recipes-extended/efivar/efivar/efivar-drop-options-not-supported-by-lower-version-gcc.patch
+>> +++ /dev/null
+>> @@ -1,71 +0,0 @@
+>> -gcc options '-Wmaybe-uninitialized' and '-std=gnu11' are not recognized by gcc
+>> -whose version is lower than 4.6, such as on Ubuntu 12.04. Drop them for backward
+>> -compatible.
+>> -
+>> -Upstream-Status: Pending
+>> -
+>> -Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ----
+>> -diff --git a/Make.defaults b/Make.defaults
+>> -index cc2baa9..118ae56 100644
+>> ---- a/Make.defaults
+>> -+++ b/Make.defaults
+>> -@@ -10,10 +10,9 @@ CFLAGS    ?= -O2 -g
+>> -
+>> - ARCH = $(shell uname -m)
+>> - clang_cflags =
+>> --gcc_cflags = -Wmaybe-uninitialized
+>> - cflags      := $(CFLAGS) \
+>> -     -Werror -Wall -Wsign-compare -Wstrict-aliasing \
+>> --    -std=gnu11 -fshort-wchar -fPIC \
+>> -+    -fshort-wchar -fPIC \
+>> -     -fvisibility=hidden \
+>> -     -D_GNU_SOURCE -I${TOPDIR}/src/include/efivar/ \
+>> -     $(if $(filter $(CC),clang),$(clang_cflags),) \
+>> -diff --git a/src/guid.h b/src/guid.h
+>> -index 9542ee1..0817991 100644
+>> ---- a/src/guid.h
+>> -+++ b/src/guid.h
+>> -@@ -31,7 +31,8 @@ static inline int
+>> - real_isspace(char c)
+>> - {
+>> -     char spaces[] = " \f\n\r\t\v";
+>> --    for (int i = 0; spaces[i] != '\0'; i++)
+>> -+    int i;
+>> -+    for (i = 0; spaces[i] != '\0'; i++)
+>> -             if (c == spaces[i])
+>> -                     return 1;
+>> -     return 0;
+>> -@@ -59,7 +60,8 @@ check_sanity(const char *text, size_t len)
+>> - static inline int
+>> - check_segment_sanity(const char *text, size_t len)
+>> - {
+>> --    for(unsigned int i = 0; i < len; i++) {
+>> -+    unsigned int i;
+>> -+    for(i = 0; i < len; i++) {
+>> -             if (text[i] >= '0' && text[i] <= '9')
+>> -                     continue;
+>> -             /* "| 0x20" is tolower() without having to worry about
+>> -diff --git a/src/makeguids.c b/src/makeguids.c
+>> -index e9acf15..7e16cb2 100644
+>> ---- a/src/makeguids.c
+>> -+++ b/src/makeguids.c
+>> -@@ -150,7 +150,8 @@ main(int argc, char *argv[])
+>> -
+>> -     fprintf(header, "#ifndef EFIVAR_GUIDS_H\n#define EFIVAR_GUIDS_H 1\n\n");
+>> -
+>> --    for (unsigned int i = 0; i < line-1; i++) {
+>> -+    unsigned int i, j;
+>> -+    for (i = 0; i < line-1; i++) {
+>> -             if (!strcmp(outbuf[i].symbol, "efi_guid_zero"))
+>> -                     fprintf(symout, "\t.globl %s\n"
+>> -                                     "\t.data\n"
+>> -@@ -176,7 +177,7 @@ main(int argc, char *argv[])
+>> -                     fprintf(symout, "efi_guid_empty:\n");
+>> -
+>> -             uint8_t *guid_data = (uint8_t *) &outbuf[i].guid;
+>> --            for (unsigned int j = 0; j < sizeof (efi_guid_t); j++)
+>> -+            for (j = 0; j < sizeof (efi_guid_t); j++)
+>> -                     fprintf(symout,"\t.byte 0x%02x\n", guid_data[j]);
+>> -
+>> -             fprintf(symout, "%s_end:\n", outbuf[i].symbol);
+>> diff --git a/meta-oe/recipes-extended/efivar/efivar_0.21.bb b/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+>> deleted file mode 100644
+>> index f7a4d55..0000000
+>> --- a/meta-oe/recipes-extended/efivar/efivar_0.21.bb
+>> +++ /dev/null
+>> @@ -1,39 +0,0 @@
+>> -SUMMARY = "Tools to manipulate UEFI variables"
+>> -DESCRIPTION = "efivar provides a simple command line interface to the UEFI variable facility"
+>> -HOMEPAGE = "https://github.com/rhinstaller/efivar"
+>> -
+>> -LICENSE = "LGPLv2.1"
+>> -LIC_FILES_CHKSUM = "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
+>> -
+>> -DEPENDS_class-target = "popt efivar-native"
+>> -
+>> -SRCREV = "aab6c2a64d90b6e5a63661fb5bd6be8d878b0784"
+>> -SRC_URI = "git://github.com/rhinstaller/efivar.git"
+>> -SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch"
+>> -SRC_URI_append_class-native = " file://efivar-drop-options-not-supported-by-lower-version-gcc.patch"
+>> -
+>> -S = "${WORKDIR}/git"
+>> -
+>> -do_install() {
+>> -    oe_runmake install DESTDIR=${D}
+>> -}
+>> -
+>> -do_compile_class-native() {
+>> -    oe_runmake -C src makeguids
+>> -}
+>> -
+>> -do_install_class-native() {
+>> -    install -D -m 0755 ${B}/src/makeguids ${D}${bindir}/makeguids
+>> -}
+>> -
+>> -BBCLASSEXTEND = "native"
+>> -
+>> -# See
+>> -# http://lists.openembedded.org/pipermail/openembedded-core/2016-February/116564.html
+>> -# http://lists.openembedded.org/pipermail/openembedded-core/2016-February/116571.html
+>> -# http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105802.html
+>> -# http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105786.html
+>> -# but it's still broken:
+>> -# http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105825.html
+>> -# http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105830.html
+>> -PNBLACKLIST[efivar] ?= "BROKEN: linux.c:27:30: fatal error: linux/nvme_ioctl.h: No such file or directory"
+>> diff --git a/meta-oe/recipes-extended/efivar/efivar_0.23.bb b/meta-oe/recipes-extended/efivar/efivar_0.23.bb
+>> new file mode 100644
+>> index 0000000..faffb79
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/efivar/efivar_0.23.bb
+>> @@ -0,0 +1,36 @@
+>> +SUMMARY = "Tools to manipulate UEFI variables"
+>> +DESCRIPTION = "efivar provides a simple command line interface to the UEFI variable facility"
+>> +HOMEPAGE = "https://github.com/rhinstaller/efivar"
+>> +
+>> +LICENSE = "LGPLv2.1"
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
+>> +
+>> +DEPENDS_class-target = "popt efivar-native"
+>> +
+>> +SRCREV = "01abee43d6d6e755f56a4135ab5aa0bfad609ce2"
+>> +SRC_URI = "git://github.com/rhinstaller/efivar.git"
+>> +SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch"
+>> +
+>> +S = "${WORKDIR}/git"
+>> +
+>> +# Setting CROSS_COMPILE breaks pkgconfig, so just set AR
+>> +EXTRA_OEMAKE = "AR=${TARGET_PREFIX}gcc-ar"
+>> +
+>> +do_compile_prepend() {
+>> +    sed -i -e s:-Werror::g ${S}/gcc.specs
+>> +}
+>> +
+>> +do_compile_class-native() {
+>> +    oe_runmake -C src makeguids
+>> +}
+>> +
+>> +do_install() {
+>> +    oe_runmake install DESTDIR=${D}
+>> +}
+>> +
+>> +do_install_class-native() {
+>> +    install -D -m 0755 ${B}/src/makeguids ${D}${bindir}/makeguids
+>> +}
+>> +
+>> +BBCLASSEXTEND = "native"
+>> +
+>> --
+>> 2.4.3
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
+
 -- 
-2.4.3
+Koen Kooi
 
+Builds and Baselines | Release Manager
+Linaro.org | Open source software for ARM SoCs
 
