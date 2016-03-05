@@ -1,37 +1,46 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f47.google.com (mail-qg0-f47.google.com
-	[209.85.192.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 6CD7A65CBB
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
+	[209.85.220.42])
+	by mail.openembedded.org (Postfix) with ESMTP id D7C0D70030
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Mar 2016 13:44:10 +0000 (UTC)
-Received: by mail-qg0-f47.google.com with SMTP id w104so64988772qge.1
+	Sat,  5 Mar 2016 16:55:10 +0000 (UTC)
+Received: by mail-pa0-f42.google.com with SMTP id fy10so52740090pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Mar 2016 05:44:12 -0800 (PST)
+	Sat, 05 Mar 2016 08:55:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=MorGN07hvI3M0hVfrgjqnkGEa8U8Lj5C3vxS/oDAwI0=;
+	b=QwGkKiHqx07I+6OGwdi0evy3ZcvoIISGkQ2xsdOHgyAH9iLywRccx1mASTA4FcPON6
+	P3ZsZPLGuivmh/n/o5SNbc506N4dogRMvY29Uur9B4+Ir0aIf3X7yUwYGs5wgT7hQwcp
+	1UbhuaVy8rS6EsDV/9+D2XEqs8uOMM/nivIikCbwGTEXfPB9rRppQtsx8lVcHsg8WCQM
+	lb5LC3WGsO1xIP+WpRMx8soJqny4gN9XpDgZH+7hqZqJw3N9deN6n19SZyicRdOX33Dt
+	/lJy0jYjbF0AkWDy5XQuq3NOK5qVrpN1WBr3pX1xcSPKx/YxDRV8AX4dF4DKrqgNlcAc
+	cSGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=x+/YYe5vHZDxgKtScq5VsiEVu5Rg6YM7sz7V9lI1Kog=;
-	b=O5WAqViafSFqYI9Kkpj3ahj8KhzGkQ864+HVyxxfRZ1IVrL4pgUPCbauWYTnhX9+QI
-	9BbugsFLgfbGKeC/VNe0tFU++59lwvcl/yptvwRCb2K6bdMChJDObO+Kbv+HVMzp8G36
-	SAQk1kH83ZrkIhGBZBvM418CeuXLb76KZ/KRUj1ouBwcGNlHHAOy2qqzUmAOql240j4e
-	VoHKo4ZzzdMp/dJhtdgE/RBQosL6tYLJ+TJr/7EIeSa8l+tdzuu3J7sfyDRsn6dBlT60
-	ukMbJC8yjsAr7+R3IOJ6v93GeydTKUOC6ofbGKG14g7HlOuMdv5alushMi6KTc8q5EZX
-	DdBw==
-X-Gm-Message-State: AD7BkJIwTiVakCFA3EasZJ1UMN7IJfCAwbq/7TP8uzJGWFu5WFqcdKmvcVxmcxsi64cJEg==
-X-Received: by 10.140.230.207 with SMTP id a198mr17913763qhc.94.1457185451764; 
-	Sat, 05 Mar 2016 05:44:11 -0800 (PST)
-Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	v70sm3889496qge.25.2016.03.05.05.44.11
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=MorGN07hvI3M0hVfrgjqnkGEa8U8Lj5C3vxS/oDAwI0=;
+	b=A+OgDbuNO/5Yvx3Plxw8lMU64QIZcW5HG59xceZRcAG1Fqe2ogbYIDmg1ykfvjd1Wl
+	hmpDejsBitqfHpVDU+dqJo5tCDd3KRLhAl5dVf0X4RcDASR3c/NUBCclbfgvVpKEz25G
+	5EIZt3dWOgU/fhl1lbabTxN7TacmfWN6FqpTxDxF+uAaeFxkua1NO023uo39WIsBhDdR
+	mrfxS8ZhQHd6YQb3iukgmKPqA6nCzfu7KjTC+a5MFVCzBNJCrNpASlD/zblD/88hqb1J
+	b5B+GCfVHBSEouxhMFoJzTZBLOdedvaV1NWn89eaJ08Dh4ZXqspy9ho8RO5MeDKxPms/
+	mZWg==
+X-Gm-Message-State: AD7BkJIvFv5lVKXy2wztXg88UJ7f8atRQSszr4BGXE/XeTj/7VsbI+BrE1wuH3Ub8QcgCA==
+X-Received: by 10.66.190.168 with SMTP id gr8mr21194157pac.23.1457196911095;
+	Sat, 05 Mar 2016 08:55:11 -0800 (PST)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
+	p79sm9126131pfi.61.2016.03.05.08.55.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 05 Mar 2016 05:44:11 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  5 Mar 2016 08:44:00 -0500
-Message-Id: <1457185440-16523-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-multimedia][PATCH] libao: update to 1.2.0
+	Sat, 05 Mar 2016 08:55:09 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com,
+	openembedded-devel@lists.openembedded.org
+Date: Sat,  5 Mar 2016 08:54:57 -0800
+Message-Id: <1457196897-9174-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-python][jethro][fido][PATCH] python-m2crypto: fix SSLv2 symbol issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,42 +53,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Mar 2016 13:44:12 -0000
+X-List-Received-Date: Sat, 05 Mar 2016 16:55:11 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+From: Armin Kuster <akuster@mvista.com>
+
+ERROR: Failed to import the "M2Crypto" module: .../usr/lib/python2.7/site-packages/M2Crypto/__m2crypto.so: undefined symbol: SSLv2_method
+
+disable using SSLv2_method if not supported in openssl. This is now the case
+with the advent of CVE-2016-0800
+
+Signed-off-by: Armin Kuster <akuster@mvista.com>
 ---
- .../recipes-multimedia/libao/{libao_1.1.0.bb => libao_1.2.0.bb}     | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/libao/{libao_1.1.0.bb => libao_1.2.0.bb} (86%)
+ ...y_build_with_SSLv2_when_it_is_not_available.patch | 20 ++++++++++++++++++++
+ .../python/python-m2crypto_0.21.1.bb                 |  4 +++-
+ 2 files changed, 23 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_available.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb b/meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb
-similarity index 86%
-rename from meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb
-rename to meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb
-index 04e8461..3991f02 100644
---- a/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb
-+++ b/meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb
-@@ -8,11 +8,12 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_available.patch b/meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_available.patch
+new file mode 100644
+index 0000000..526c23f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_available.patch
+@@ -0,0 +1,20 @@
++Upstream-Status: Backport
++https://gitlab.com/m2crypto/m2crypto/commit/ac01b38302474920288c1a9eb63fd35fa8d1db5b
++
++Signed-off-by: Armin Kuster <akuster@mvista.com>
++
++Index: M2Crypto-0.21.1/SWIG/_ssl.i
++===================================================================
++--- M2Crypto-0.21.1.orig/SWIG/_ssl.i
+++++ M2Crypto-0.21.1/SWIG/_ssl.i
++@@ -48,8 +48,10 @@ extern const char *SSL_alert_desc_string
++ %rename(ssl_get_alert_desc_v) SSL_alert_desc_string_long;
++ extern const char *SSL_alert_desc_string_long(int);
++ 
+++#ifndef OPENSSL_NO_SSL2
++ %rename(sslv2_method) SSLv2_method;
++ extern SSL_METHOD *SSLv2_method(void);
+++#endif
++ %rename(sslv3_method) SSLv3_method;
++ extern SSL_METHOD *SSLv3_method(void);
++ %rename(sslv23_method) SSLv23_method;
+diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb b/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
+index ff6203f..7dfa8d8 100644
+--- a/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
++++ b/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
+@@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
  
- SRC_URI="http://downloads.xiph.org/releases/ao/${BP}.tar.gz"
--SRC_URI[md5sum] = "2b2508c29bc97e4dc218fa162cf883c8"
--SRC_URI[sha256sum] = "29de5bb9b1726ba890455ef7e562d877df87811febb0d99ee69164b88c171bd4"
-+SRC_URI[md5sum] = "9f5dd20d7e95fd0dd72df5353829f097"
-+SRC_URI[sha256sum] = "03ad231ad1f9d64b52474392d63c31197b0bc7bd416e58b1c10a329a5ed89caf"
+ SRC_URI = "http://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-${PV}.tar.gz \
+            file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch \
+-           file://0001-M2Crypto-Error-fix.patch"
++           file://0001-M2Crypto-Error-fix.patch \
++           file://dont_try_build_with_SSLv2_when_it_is_not_available.patch"
  
- inherit autotools
+ SRC_URI[md5sum] = "f93d8462ff7646397a9f77a2fe602d17"
+ SRC_URI[sha256sum] = "25b94498505c2d800ee465db0cc1aff097b1615adc3ac042a1c85ceca264fc0a"
+@@ -19,6 +20,7 @@ inherit setuptools
  
-+PACKAGES += "${BPN}-ckport"
- PACKAGES_DYNAMIC += "^${BPN}-plugin-.*"
+ SWIG_FEATURES_x86-64 = "-D__x86_64__"
+ SWIG_FEATURES ?= ""
++SWIG_FEATURES += "OPENSSL_NO_SSL2"
+ export SWIG_FEATURES
  
- do_install_append () {
-@@ -30,3 +31,4 @@ PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio'
- PACKAGECONFIG[esound] = "--enable-esd,--disable-esd,esound"
- PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
- PACKAGECONFIG[pulseaudio] = "--enable-pulse,--disable-pulse,pulseaudio"
-+FILES_${BPN}-ckport = "${libdir}/ckport"
+ # Get around a problem with swig, but only if the
 -- 
-1.9.1
+2.3.5
 
 
