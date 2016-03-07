@@ -1,37 +1,51 @@
-Return-Path: <herve.jourdain@neuf.fr>
-Received: from smtp24.services.sfr.fr (smtp24.services.sfr.fr [93.17.128.82])
-	by mail.openembedded.org (Postfix) with ESMTP id AC03F60111
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D22760621
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Mar 2016 10:44:07 +0000 (UTC)
-Received: from filter.sfr.fr (localhost [111.250.196.5])
-	by msfrf2411.sfr.fr (SMTP Server) with ESMTP id DDE3F70000A3
+	Mon,  7 Mar 2016 11:03:22 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id p65so65841982wmp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Mar 2016 11:44:07 +0100 (CET)
-Authentication-Results: sfrmc.priv.atos.fr; dkim=none (no signature);
-	dkim-adsp=none (no policy) header.from=herve.jourdain@neuf.fr
-Received: from nb-hjo (111-250-196-5.dynamic.hinet.net [111.250.196.5])	(using
-	TLSv1 with cipher AES128-SHA (128/128 bits))	(No client certificate
-	requested)
-	by msfrf2411.sfr.fr (SMTP Server) with ESMTP id 2B2D37000085
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Mar 2016 11:44:06 +0100 (CET)
-X-SFR-UUID: 20160307104407176.2B2D37000085@msfrf2411.sfr.fr
-Received: from nbhjo
-	by nb-hjo (PGP Universal service);  Mon, 07 Mar 2016 11:44:06 +0100
-X-PGP-Universal: processed;	by nb-hjo on Mon, 07 Mar 2016 11:44:06 +0100
-From: Herve Jourdain <herve.jourdain@neuf.fr>
+	Mon, 07 Mar 2016 03:03:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=DMO6h6yeXG/gE2IAH6Ebb0nFJ5lg78TUI3VOic4fYIU=;
+	b=bjuzrJTlh8H7s25P5l7tV1KpRJVk4xusQ2ip6/+3vN3n6ALOTFcAbdOXF7DJpALLDE
+	8PJWWqXFLFFBkqNzUBq1fqL1GzruhDEX/b1lhLfxHfBxjUveT2VjYRgQ0eS9ZdwIbH4V
+	BBPYfn35zAaWrLssBgX5zLPrjeAxChej57bnGQh1BMxhNX1OARQKzWEMz/3bwFm7BsAu
+	RkRAMUllg1b5I+PUINFKlHHU7JlwVsg57JVj48OworEfWHfdkvZE8cmAzMxOdUqje+7P
+	iHTTIpAkC6gZN04TII0PmLKHRHT3keByEPzJQZHpJO7ecfg4M57LqxL9w0txoKFPwh34
+	qsVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=DMO6h6yeXG/gE2IAH6Ebb0nFJ5lg78TUI3VOic4fYIU=;
+	b=mgatOcZJNF3BEumTef/sI8Nv4oYoheIsWJ3HduVsIp+BwuEYzvouVQFIc4V3cG1hZV
+	36REgB2wu248Iffyqnzr3x+yNpbrgn+4gwicg/6VP67l7jMgBqbUuDtjCAXQG7YudCJ1
+	8xL+sL9+hfZsp9+/JWrla9CwJNLN8/x81T5xVQY8TgPOCctqkqjfeIO2p5WlWV/ZNWL2
+	yOK1bepuqHtbhNIvlXAxuuedn1DhlgABS1czzQzqQOpefc5PIc1mKlvZ4MhF+mh8Ebfi
+	RyKNp2lgw5fpHvIZAEY+pH9FrFa10NvkqoLXg9zrqc+14BbYBai3r7xJZCLBhXRtXQdA
+	Rmzw==
+X-Gm-Message-State: AD7BkJKCfdTVA36ISGQtlnDJ4HSvYkPrSp9C8vKdUC4/yjruSa7NvscnLCW40BeDCztHSA==
+X-Received: by 10.194.91.233 with SMTP id ch9mr22369098wjb.121.1457348602581; 
+	Mon, 07 Mar 2016 03:03:22 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id h7sm4304205wmf.9.2016.03.07.03.03.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 07 Mar 2016 03:03:21 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 7 Mar 2016 12:05:50 +0100
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160307110550.GB2549@jama>
 References: <001f01d17834$96b03d60$c410b820$@neuf.fr>
-In-Reply-To: <001f01d17834$96b03d60$c410b820$@neuf.fr>
-Date: Mon, 7 Mar 2016 11:44:02 +0100
-Message-ID: <005f01d1785e$45a81f80$d0f85e80$@neuf.fr>
+	<005f01d1785e$45a81f80$d0f85e80$@neuf.fr>
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 15.0
-Thread-Index: AQHHy/2g1zvGoVWgMaMYVpcIR4tVtp9hJGHQ
-X-PGP-Encoding-Format: MIME
-X-PGP-Encoding-Version: 2.0.2
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-qt5][PATCH] Add armv7ve in the supported MACHINES for qtwebengine
+In-Reply-To: <005f01d1785e$45a81f80$d0f85e80$@neuf.fr>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-qt5][PATCH] Add armv7ve in the supported MACHINES for qtwebengine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,63 +58,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Mar 2016 10:44:08 -0000
-X-Groupsio-MsgNum: 60360
-Content-Type: multipart/signed;
-	boundary=PGP_Universal_994F3F9C_BA3778D7_E9978791_4D366223;
-	protocol="application/pgp-signature"; micalg=pgp-sha256
+X-List-Received-Date: Mon, 07 Mar 2016 11:03:24 -0000
+X-Groupsio-MsgNum: 60361
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="hQiwHBbRI9kgIhsi"
+Content-Disposition: inline
 
---PGP_Universal_994F3F9C_BA3778D7_E9978791_4D366223
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+--hQiwHBbRI9kgIhsi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-ARM CortexA7 is now defined as armv7ve.
+On Mon, Mar 07, 2016 at 11:44:02AM +0100, Herve Jourdain wrote:
+> ARM CortexA7 is now defined as armv7ve.
 
- 
+Your e-mail client completely broke the path, please use git send-email.
 
-Signed-off-by: Herve Jourdain <herve.jourdain@neuf.fr
-<mailto:herve.jourdain@neuf.fr> >
+And there is already patch for this:
+http://patchwork.openembedded.org/patch/116967/
+with correct format and much better summary.
 
----
+>=20
+> =20
+>=20
+> Signed-off-by: Herve Jourdain <herve.jourdain@neuf.fr
+> <mailto:herve.jourdain@neuf.fr> >
+>=20
+> ---
+>=20
+> --- a/recipes-qt/qt5/qtwebengine_git.bb
+>=20
+> +++ b/recipes-qt/qt5/qtwebengine_git.bb
+>=20
+> @@ -47,6 +47,7 @@ COMPATIBLE_MACHINE_x86 =3D "(.*)"
+>=20
+> COMPATIBLE_MACHINE_x86-64 =3D "(.*)"
+>=20
+> COMPATIBLE_MACHINE_armv6 =3D "(.*)"
+>=20
+> COMPATIBLE_MACHINE_armv7a =3D "(.*)"
+>=20
+> +COMPATIBLE_MACHINE_armv7ve =3D "(.*)"
+>=20
+> =20
+>=20
+>  inherit qmake5
+>=20
+> inherit gettext
+>=20
 
---- a/recipes-qt/qt5/qtwebengine_git.bb
-
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-
-@@ -47,6 +47,7 @@ COMPATIBLE_MACHINE_x86 = "(.*)"
-
-COMPATIBLE_MACHINE_x86-64 = "(.*)"
-
-COMPATIBLE_MACHINE_armv6 = "(.*)"
-
-COMPATIBLE_MACHINE_armv7a = "(.*)"
-
-+COMPATIBLE_MACHINE_armv7ve = "(.*)"
-
- 
-
- inherit qmake5
-
-inherit gettext
 
 
---PGP_Universal_994F3F9C_BA3778D7_E9978791_4D366223
-Content-Type: application/pgp-signature;
-	x-mac-type=70674453;
-	name=PGP.sig
-Content-Disposition: attachment; filename=PGP.sig
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--hQiwHBbRI9kgIhsi
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: Encryption Desktop 10.3.0 (Build 8741)
+Version: GnuPG v2
 
-iQEVAwUBVt1bdslDDy7t0KnsAQjYGAgAmWT8TyxW2lz5+eMiay27Nx58HAGK1Z5l
-fxlKE6scLHrh2SL1pkeUVPPzY9U7sCNqvNQu7md/EnvL63uSaOQtCpoEDnmM4ndw
-/C5vcN5xXLa6KJOqVpXLoKmzIgGpNBcDVlfwq4RIDpNqcTxPXzY8iGD9tbAgqElH
-0T96+6+ljLCZEe5Uw079cHstIG/i4PYsKbvsgWqW23owwHqZqGamuaU4k20p504u
-lw2z+KJj/Rb2oQCSE+ZRNv3Jv+Z1hG6MWkTxiPqHj/vxNQtaKcRMR3ZASoYgb+ff
-N/HkkH8BcGOuF7wLFuK5IsTHs3r/A0+cFxDPkNt3NeT5u2rXzf82xQ==
-=zy0k
+iEYEARECAAYFAlbdYI0ACgkQN1Ujt2V2gBxvAQCgrpokqAIFUEz3aoz2xRTkxZy5
+qA4An0mEYxro091cQtyOHnGJxBWPs+Fx
+=AGal
 -----END PGP SIGNATURE-----
 
---PGP_Universal_994F3F9C_BA3778D7_E9978791_4D366223--
+--hQiwHBbRI9kgIhsi--
