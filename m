@@ -1,51 +1,53 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 16E2870018
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 86C186FFCC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Mar 2016 12:08:44 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id l68so82821135wml.0
+	Mon,  7 Mar 2016 12:10:57 +0000 (UTC)
+Received: by mail-wm0-f50.google.com with SMTP id l68so105543870wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Mar 2016 04:08:45 -0800 (PST)
+	Mon, 07 Mar 2016 04:10:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=062plEhdfGcVNsb4yGlrmhXmlAw904C0zJo4x0rQDy8=;
-	b=j5ZwwOkGM0WprahEa1qvLhYiM7UGMV1W9WOsCzeb0Hdq4OAEu4eVHTGYfuD2NmgaOj
-	fj0dKCbtQwJRV358ts9OyQukp/eol5rrAcLdHQvwmGQd3QyVmObG6owluA1szT473fBI
-	MWLMqF0ljY4b+pbGwxlWwwsFKgAj+ItNVAdQzabFzne/G1EJP0OroyWsxfOoAU3VLGg3
-	ApPHcDFuABGjYVg7xbG9O4xtAIFQG8OBPYTwCnTiFtHijEfzzJNFfaxZRMlGlgaxp1v6
-	VLpxS6WNnRSOzHVo0PHAJwrrQNbcPoyvHJ0UfqF0CuBoAmlAwpd7ajF/vm2PW8mhFCAq
-	E/Dg==
+	bh=YfzCms5UjrlO8PI6Qdb35uYdul1NCynYHBOLdosVbn8=;
+	b=kMEvsSgXNCKmMnZvH77Ojx+szbq3UhXPy9OWS1Fs9HkW7YGKyISY9lFV0ibShqroiR
+	nmcfh/PETjDZdg5Nzitj+5Bz/vVXSMF1TKoZbsAeuVWpdqtqwe4Y7MfaWzcBLVzNfy7f
+	ykwTI5GsKayLe7+8WUVzmZSBL5lSkNgTOanrxmQQ6bkboz0a5vLEDTZepenmmaXv6Q1h
+	lQEruvUAjRvd0n6H9Aqjwi/9jQIaiy+KQwXv1Wqn9W+HYOLFz1dfuKud3Z53QB0R+bzO
+	d80iMwde+LD9O+RGY05R9/UJ8TvIRM9VHn+mC+O+f6lX0s9InR3HoGRz68qdpGZ/nP8m
+	dB8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=062plEhdfGcVNsb4yGlrmhXmlAw904C0zJo4x0rQDy8=;
-	b=b7Qi+Nl9yX4NfIoxx3oNj+2TuHdBF3l2/Cc7O97DGqNQt+7lSN/vBKG6tMYhXNh0mn
-	cBWM3xmB7be5wxI2JfO4XFZLRmsXsZLzedpbpRDl6q1gwz7BV2gGmjuOckaX5t5VRKNZ
-	MzlFFUp1S8W/CtPhx6mfHAlPCJV0Nb8+eYJ/+DowaOMXsKyxyT+GjnS+l6J/zMdvLrcG
-	h0WaAxjm6JWrzSG79yB+HgG/aHruanLyfQKCbNvpENAtN5Q0XAIrordLN1htdeuDJ+VF
-	eLmSLot9hPOC7LLGenu/ZXwaBZIn+PxBYb8qCNXSBlcmQTqnJdHC7mMSLydyCqyRxjvo
-	4iHg==
-X-Gm-Message-State: AD7BkJJJ3FtjvLWsW0VNtQrmwxyjAo7ooUiOX6HSWO9wOqla+iWVdMh+y53c/kcF11dCQg==
-X-Received: by 10.194.57.16 with SMTP id e16mr22522075wjq.105.1457352524574;
-	Mon, 07 Mar 2016 04:08:44 -0800 (PST)
+	bh=YfzCms5UjrlO8PI6Qdb35uYdul1NCynYHBOLdosVbn8=;
+	b=aimNLwe5sMni0ip1Pj+zfBIPwBw7V0MPoNaUGpPMqL87PMTStd4/zPeXAK33PsSC/t
+	m9zI4aBEbHr8IVdR3luV7fLOBOY4krXE3By0lvJzA46MmZaHj1f7wTk+ZcXVrdWdpVDA
+	m3KMkGv/rFvWD+3Lq18ehNNY9uXieJ1X8a5f42wQbKycDLl8dItOxd6PpmyuPGrVTjQr
+	dLR05hMwpNGpA1pMY60YMlTip4M5LivigI08dlQ3yLeSyxsMEP0tNAoTtQSDLwUdh5wt
+	O8/6jZyrId/7DOTBS57UCR7fbueDJou2s1jNSJUjGbNTEho6kQH8SiFLsf6Kt+FTpvKi
+	s5vg==
+X-Gm-Message-State: AD7BkJI7nSjNSjKRbSwB6KPgyLLIW32J3pwdhnFe45wmWabrjGJqgUlEhSnSpMPN49q6bQ==
+X-Received: by 10.194.90.137 with SMTP id bw9mr22211842wjb.120.1457352657382; 
+	Mon, 07 Mar 2016 04:10:57 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	av3sm17670843wjc.44.2016.03.07.04.08.43
-	for <openembedded-devel@lists.openembedded.org>
+	r62sm13455785wmd.15.2016.03.07.04.10.56
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 07 Mar 2016 04:08:43 -0800 (PST)
+	Mon, 07 Mar 2016 04:10:56 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 7 Mar 2016 13:11:11 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160307121111.GD2549@jama>
-References: <1456818214-5466-1-git-send-email-teemu.holappa@theqtcompany.com>
+Date: Mon, 7 Mar 2016 13:13:24 +0100
+To: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+Message-ID: <20160307121324.GE2549@jama>
+References: <1456995129-777-1-git-send-email-alexandre.belloni@free-electrons.com>
 MIME-Version: 1.0
-In-Reply-To: <1456818214-5466-1-git-send-email-teemu.holappa@theqtcompany.com>
+In-Reply-To: <1456995129-777-1-git-send-email-alexandre.belloni@free-electrons.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-qt5][PATCH] Change dependency from virtual/mesa to drm in the kms packageconfig.
+Cc: Ludovic Desroches <ludovic.desroches@atmel.com>,
+	Nicolas Ferre <nicolas.ferre@atmel.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5][master][jethro][PATCH] qtquick1: fix qtwebkit support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,66 +60,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Mar 2016 12:08:47 -0000
-X-Groupsio-MsgNum: 60363
+X-List-Received-Date: Mon, 07 Mar 2016 12:10:57 -0000
+X-Groupsio-MsgNum: 60364
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="4zI0WCX1RcnW9Hbu"
+	protocol="application/pgp-signature"; boundary="HeFlAV5LIbMFYYuh"
 Content-Disposition: inline
 
---4zI0WCX1RcnW9Hbu
+--HeFlAV5LIbMFYYuh
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 01, 2016 at 09:43:34AM +0200, Teemu Holappa wrote:
-> In some configurations there no provider for virtual/mesa, but only drm l=
-ibaries.
-
-NAK
-
-Missing SOB line and summary doesn't follow
-http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
-
+On Thu, Mar 03, 2016 at 09:52:09AM +0100, Alexandre Belloni wrote:
+> 40b7a93a3c6cf05136c606824c1cea848b75bcb6 ("qtquick1: allow to disable
+> qtwebkit support") allowed to disable qtwebkit but actually disabled it in
+> every cases.
+>=20
+> Use the same mechanism as qttools to implement the feature.
+>=20
+> Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
 > ---
->  recipes-qt/qt5/qtbase_git.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  recipes-qt/qt5/qtquick1_git.bb | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
 >=20
-> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-> index bf56741..1d32a0b 100644
-> --- a/recipes-qt/qt5/qtbase_git.bb
-> +++ b/recipes-qt/qt5/qtbase_git.bb
-> @@ -117,7 +117,7 @@ PACKAGECONFIG[gtkstyle] =3D "-gtkstyle,-no-gtkstyle,g=
-tk+"
->  PACKAGECONFIG[directfb] =3D "-directfb,-no-directfb,directfb"
->  PACKAGECONFIG[linuxfb] =3D "-linuxfb,-no-linuxfb"
->  PACKAGECONFIG[mitshm] =3D "-mitshm,-no-mitshm,mitshm"
-> -PACKAGECONFIG[kms] =3D "-kms,-no-kms,virtual/mesa virtual/egl"
-> +PACKAGECONFIG[kms] =3D "-kms,-no-kms,drm virtual/egl"
->  # needed for qtwebkit
->  PACKAGECONFIG[icu] =3D "-icu,-no-icu,icu"
->  PACKAGECONFIG[udev] =3D "-libudev,-no-libudev,udev"
+> diff --git a/recipes-qt/qt5/qtquick1_git.bb b/recipes-qt/qt5/qtquick1_git=
+=2Ebb
+> index e0a264d4fa2d..cb5e395b9d67 100644
+> --- a/recipes-qt/qt5/qtquick1_git.bb
+> +++ b/recipes-qt/qt5/qtquick1_git.bb
+> @@ -16,11 +16,13 @@ LIC_FILES_CHKSUM =3D " \
+>  DEPENDS +=3D "qtscript qtsvg qtxmlpatterns"
+>  # qttools
+> =20
+> -PACKAGECONFIG ??=3D "webkit"
+> -PACKAGECONFIG[webkit] =3D "CONFIG+=3Denable-webkit,CONFIG-=3Denable-webk=
+it,qtwebkit"
+> +PACKAGECONFIG ??=3D "qtwebkit"
+> +PACKAGECONFIG[qtwebkit] =3D ",,qtwebkit"
+
+Is there reason for renaming the packageconfig option?
+
+Where did you see this issue? Weren't you testing master-next with:
+http://patchwork.openembedded.org/patch/116717/
+without corresponding oe-core change?
+
+> +
+> +EXTRA_QMAKEVARS_PRE +=3D "${@base_contains('PACKAGECONFIG', 'qtwebkit', =
+'', 'CONFIG+=3Dnoqtwebkit', d)}"
+> =20
+>  do_configure_prepend() {
+> -    sed -i 's#^qtHaveModule(webkitwidgets):#enable-webkit:qtHaveModule(w=
+ebkitwidgets):#g' ${S}/src/imports/imports.pro
+> +    sed -i 's#^qtHaveModule(webkitwidgets):#qtHaveModule(webkitwidgets):=
+!contains(CONFIG, noqtwebkit):#g' ${S}/src/imports/imports.pro
+>  }
+> =20
+>  SRCREV =3D "87f2415adf34da08e6cd58f5da6f6a7d0d9cf141"
 > --=20
-> 2.7.2
+> 2.7.0
 >=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---4zI0WCX1RcnW9Hbu
+--HeFlAV5LIbMFYYuh
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlbdb94ACgkQN1Ujt2V2gBzRQgCePHFy7FvJkqJR+gXy0q3fpJQq
-wvAAoKDjxSKK4tcy3FAljtESgFBS4nnX
-=U6qv
+iEYEARECAAYFAlbdcGMACgkQN1Ujt2V2gBx9TACgkVRzDuoJQuz+xxzJddecHjR0
+1qQAoKO8Pn0QzPpobaMd/njW+GAUkYW+
+=KFOg
 -----END PGP SIGNATURE-----
 
---4zI0WCX1RcnW9Hbu--
+--HeFlAV5LIbMFYYuh--
