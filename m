@@ -1,48 +1,28 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 3090373175
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 770B273172
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Mar 2016 02:00:18 +0000 (UTC)
-Received: by mail-pf0-f169.google.com with SMTP id 124so1370241pfg.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Mar 2016 18:00:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=Xb8o+5pMfG5qPWpQoIUtK2No0HqaYToM7nJyFap6HQ0=;
-	b=U1UHvZ44nFlLY0mm9iXp5Hxq1ELI6RUh0qMssBf6T5q3kmsfhV02dtlnof5sLyvxGZ
-	XqWR/yyvyssCijSyzWIIqCrOtaFwVNrdRowf2EVYnFDLOYmOnObFxy6G5xQbdK9/ipqn
-	WGc9cmnmeu2y2MW6o1Rotc7Xo84aR/e/FyEnbRw0UpSNeOasqbXKaznDtMIE8xwRNKKR
-	6eVY3zTkRsTbwzOY/btTceThxKt4l4+owH43tTarIcPeBmm5vpInveuA1pX0ZFIilUPS
-	BsLjEgahh9RaS1yQdraO7+YDv8Wv93T8BVeJTF04gyW2lLZC6lHuUIOonEnMpti4ED4L
-	nYBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=Xb8o+5pMfG5qPWpQoIUtK2No0HqaYToM7nJyFap6HQ0=;
-	b=E4koWOpfMhR4Q1Fqzn2Hk+46Qji4ybLSBzAzhghJm7FRX0FNCnLjzG07XP2tabU3wT
-	p2wh0toPdowPqO/5/jRe3rpMdo+hH8wAkFUcemBjfby1CSXC7PQQklfCzGgdFj56R4+w
-	1O+6n5jviah3yyTG4vysFPmbAa2cseP5Hg/A/dqlrL0RLhxiD9Z6zIhQoXaYpwwIetPN
-	xc4Nd6wK5mOnvEfkJGeoEjk0SIjwLIlJiGMX1w2nLmC0eNVRr17aUQCiX/R4IIAHqE2Y
-	ofUSrkETvEydOBUoq8JfYUH5B1e6TRDzzVKE8DSd+TYrBlVNFPWL6zwPH8cVcgjWvLJY
-	qXdw==
-X-Gm-Message-State: AD7BkJKDxBzHBlOax9IP72qk2CvJLvAFVqNP+IwzgQbvcuxB/J0RlE9rs5FuSshqwUer4Q==
-X-Received: by 10.98.42.207 with SMTP id q198mr38284890pfq.103.1457402418938; 
-	Mon, 07 Mar 2016 18:00:18 -0800 (PST)
-Received: from Pahoa2.mvista.com ([64.2.3.194])
-	by smtp.gmail.com with ESMTPSA id cq4sm425130pad.28.2016.03.07.18.00.17
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 07 Mar 2016 18:00:17 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  7 Mar 2016 18:00:14 -0800
-Message-Id: <1457402414-14879-2-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-In-Reply-To: <1457402414-14879-1-git-send-email-akuster808@gmail.com>
-References: <1457402414-14879-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-python][PATCH] python-m2crypto: fix build issue
+	Tue,  8 Mar 2016 02:58:16 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u282wGmH016947
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 7 Mar 2016 18:58:17 -0800 (PST)
+Received: from [128.224.162.200] (128.224.162.200) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Mon, 7 Mar 2016 18:58:15 -0800
+To: <akuster@mvista.com>
+References: <1457196897-9174-1-git-send-email-akuster808@gmail.com>
+From: Yi Zhao <yi.zhao@windriver.com>
+Message-ID: <56DE3FC4.3070508@windriver.com>
+Date: Tue, 8 Mar 2016 10:58:12 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+In-Reply-To: <1457196897-9174-1-git-send-email-akuster808@gmail.com>
+X-Originating-IP: [128.224.162.200]
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python][jethro][fido][PATCH] python-m2crypto: fix SSLv2 symbol issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,50 +35,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2016 02:00:19 -0000
+X-List-Received-Date: Tue, 08 Mar 2016 02:58:17 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-restore swig file fiddling:
+Hi,
 
-tmp/sysroots/qemux86/usr/include/openssl/opensslconf.h:45: Error: Unable to find 'openssl/opensslconf-64.h'
+I got a build error when applied this patch on jethro branch:
+
+building 'M2Crypto.__m2crypto' extension
+swigging SWIG/_m2crypto.i to SWIG/_m2crypto_wrap.c
+swig -python 
+-I/buildarea/poky/build-m2/tmp/sysroots/qemux86/usr/include/python2.7 
+-I/buildarea/poky/build-m2/tmp/sysroots/qemux86/usr/include -includeall 
+-modern -builtin -outdir build/lib.linux-x86_64-2.7/M2Crypto -o 
+SWIG/_m2crypto_wrap.c SWIG/_m2crypto.i
+swig error : Unrecognized option OPENSSL_NO_SSL2
+Use 'swig -help' for available options.
 error: command 'swig' failed with exit status 1
+ERROR: python setup.py build execution failed.
+ERROR: Function failed: do_compile (log file is located at 
+/buildarea/poky/build-m2/tmp/work/i586-poky-linux/python-m2crypto/0.21.1-r0/temp/log.do_compile.9461)
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../python/python-m2crypto_0.23.0.bb               | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.23.0.bb b/meta-python/recipes-devtools/python/python-m2crypto_0.23.0.bb
-index af8ca09..f6f0e1f 100644
---- a/meta-python/recipes-devtools/python/python-m2crypto_0.23.0.bb
-+++ b/meta-python/recipes-devtools/python/python-m2crypto_0.23.0.bb
-@@ -27,4 +27,26 @@ SWIG_FEATURES_x86-64 = "-D__x86_64__"
- SWIG_FEATURES ?= ""
- export SWIG_FEATURES
- 
-+# Get around a problem with swig, but only if the
-+# multilib header file exists.
-+#
-+do_compile_prepend() {
-+    if [ "${SITEINFO_BITS}" = "64" ];then
-+        bit="64"
-+    else
-+        bit="32"
-+    fi
-+
-+    if [ -e ${STAGING_INCDIR}/openssl/opensslconf-${bit}.h ] ;then
-+        for i in SWIG/_ec.i SWIG/_evp.i; do
-+            sed -i -e "s/opensslconf.*\./opensslconf-${bit}\./" "$i"
-+        done
-+    elif [ -e ${STAGING_INCDIR}/openssl/opensslconf-n${bit}.h ] ;then
-+        for i in SWIG/_ec.i SWIG/_evp.i; do
-+            sed -i -e "s/opensslconf.*\./opensslconf-n${bit}\./" "$i"
-+        done
-+    fi
-+}
-+
-+
- BBCLASSEXTEND = "native"
--- 
-2.3.5
+
+Thanks,
+Yi
+
+
+在 2016年03月06日 00:54, Armin Kuster 写道:
+> From: Armin Kuster <akuster@mvista.com>
+>
+> ERROR: Failed to import the "M2Crypto" module: .../usr/lib/python2.7/site-packages/M2Crypto/__m2crypto.so: undefined symbol: SSLv2_method
+>
+> disable using SSLv2_method if not supported in openssl. This is now the case
+> with the advent of CVE-2016-0800
+>
+> Signed-off-by: Armin Kuster <akuster@mvista.com>
+> ---
+>   ...y_build_with_SSLv2_when_it_is_not_available.patch | 20 ++++++++++++++++++++
+>   .../python/python-m2crypto_0.21.1.bb                 |  4 +++-
+>   2 files changed, 23 insertions(+), 1 deletion(-)
+>   create mode 100644 meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_available.patch
+>
+> diff --git a/meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_available.patch b/meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_available.patch
+> new file mode 100644
+> index 0000000..526c23f
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_available.patch
+> @@ -0,0 +1,20 @@
+> +Upstream-Status: Backport
+> +https://gitlab.com/m2crypto/m2crypto/commit/ac01b38302474920288c1a9eb63fd35fa8d1db5b
+> +
+> +Signed-off-by: Armin Kuster <akuster@mvista.com>
+> +
+> +Index: M2Crypto-0.21.1/SWIG/_ssl.i
+> +===================================================================
+> +--- M2Crypto-0.21.1.orig/SWIG/_ssl.i
+> ++++ M2Crypto-0.21.1/SWIG/_ssl.i
+> +@@ -48,8 +48,10 @@ extern const char *SSL_alert_desc_string
+> + %rename(ssl_get_alert_desc_v) SSL_alert_desc_string_long;
+> + extern const char *SSL_alert_desc_string_long(int);
+> +
+> ++#ifndef OPENSSL_NO_SSL2
+> + %rename(sslv2_method) SSLv2_method;
+> + extern SSL_METHOD *SSLv2_method(void);
+> ++#endif
+> + %rename(sslv3_method) SSLv3_method;
+> + extern SSL_METHOD *SSLv3_method(void);
+> + %rename(sslv23_method) SSLv23_method;
+> diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb b/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
+> index ff6203f..7dfa8d8 100644
+> --- a/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
+> +++ b/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
+> @@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
+>   
+>   SRC_URI = "http://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-${PV}.tar.gz \
+>              file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch \
+> -           file://0001-M2Crypto-Error-fix.patch"
+> +           file://0001-M2Crypto-Error-fix.patch \
+> +           file://dont_try_build_with_SSLv2_when_it_is_not_available.patch"
+>   
+>   SRC_URI[md5sum] = "f93d8462ff7646397a9f77a2fe602d17"
+>   SRC_URI[sha256sum] = "25b94498505c2d800ee465db0cc1aff097b1615adc3ac042a1c85ceca264fc0a"
+> @@ -19,6 +20,7 @@ inherit setuptools
+>   
+>   SWIG_FEATURES_x86-64 = "-D__x86_64__"
+>   SWIG_FEATURES ?= ""
+> +SWIG_FEATURES += "OPENSSL_NO_SSL2"
+>   export SWIG_FEATURES
+>   
+>   # Get around a problem with swig, but only if the
 
 
