@@ -1,24 +1,46 @@
-Return-Path: <Zhixiong.Chi@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5948B6FFEA
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 41DC165CBC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Mar 2016 05:42:58 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u285gwIP014248
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  8 Mar 2016 09:14:05 +0000 (UTC)
+Received: by mail-wm0-f43.google.com with SMTP id n186so121681156wmn.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 7 Mar 2016 21:42:59 -0800 (PST)
-Received: from pek-zchi-d1.corp.ad.wrs.com (128.224.162.233) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.248.2; Mon, 7 Mar 2016 21:42:58 -0800
-From: Zhixiong Chi <Zhixiong.Chi@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 8 Mar 2016 13:43:20 +0800
-Message-ID: <1457415800-21349-1-git-send-email-Zhixiong.Chi@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Tue, 08 Mar 2016 01:14:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc; bh=YDm7KZkEMH6Xs0hGKHiJVPMyEy6fJDgl9qRsLYverIE=;
+	b=MSR1rYA2MV2iwbc+G5d1V3qzPQr4z5Cz7L2/lJupngI8Ew0PWTrSBBp1ywCC4WqoAB
+	XCCzBhcoCTOFY4iGEBtgqCUsMdoMn5hPmDVqEaaKelkT+L82magEls+FFzcc5RqtfZT3
+	/Fg0u0gM5GZW6TNsMxQzYfcbLwuFl8tAfa4sJDo8wCOGOGnqTNmHfPHUX2zA3Paw6oDj
+	G9Zfw0Ml1WPcQ0Y84VtA0/ByzWbU4ukf8vAAZy3Mj+SHIw510Wqt0h0csC7qzjjTX2OG
+	l4DaVVA5cb/VDeRxuMo1gJwPsiScbTPL+dpikxHVa3bum4lucofyrMsYPVQ26Q5B+Kkx
+	pp5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc;
+	bh=YDm7KZkEMH6Xs0hGKHiJVPMyEy6fJDgl9qRsLYverIE=;
+	b=ZfOqM12sK4HS3Etr7+yh/ahZCUYUN3kBHEpcMGgWE0QvZMci2vrYNjFTrVcIeLVCH6
+	uX38xlibgqD1kb5SylY8gv+/FenbWno8wDydUm7TXiT0miX+DvcXA2XYRqHYnPmuyRuB
+	iWjeZYIcwJ2M+jLrKhiSHb29rr3d4wmQuPR8MoeIefEZYlu5sr7xqQJ5TsxvXIj3Qi4J
+	bzvPDtbN75Qf1rdcOWPovUU75EC8Gz0XNTRnqNn5klVvWYfsi29fQ4jdq5rwn+/GVoWy
+	QWn3Lzc9ayGFf2fQnoI1iccCpnDwTBPfan83jz8eTcs2uf8oDQMgqbDdwVZf75q+o7Cm
+	jljg==
+X-Gm-Message-State: AD7BkJKAKXvtSuXMqINKR6xx8AJkE0FswaEAXehiuRbbuBwpQ4uogYWAjoKK3vivjnt7DRb7EbCjO718D66VQg==
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] postgresql: Security Advisory-postgresql-CVE-2016-0766
+X-Received: by 10.28.60.84 with SMTP id j81mr18239204wma.91.1457428446076;
+	Tue, 08 Mar 2016 01:14:06 -0800 (PST)
+Received: by 10.194.31.71 with HTTP; Tue, 8 Mar 2016 01:14:06 -0800 (PST)
+In-Reply-To: <DB5PR02MB117525C57FE240091B542E5190A90@DB5PR02MB1175.eurprd02.prod.outlook.com>
+References: <EC3D8C09-AC4A-40D6-A828-6B6E0CC34678@staylor.ca>
+	<DB5PR02MB117525C57FE240091B542E5190A90@DB5PR02MB1175.eurprd02.prod.outlook.com>
+Date: Tue, 8 Mar 2016 10:14:06 +0100
+Message-ID: <CA+chaQdC7NUAkHpe9VfkZ_-T5ZixoKM4CPeJfdDVux5KVifj3g@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: RIDET Aurelien <aurelien.ridet@preciamolen.fr>
+Subject: Re: [meta-qt5] Commercial License
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,76 +53,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2016 05:43:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 08 Mar 2016 09:14:09 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-add CVE-2016-0766 patch for avoiding attackers to gain privileges
-via unspecified vectors.
-Patch comes from:
-http://git.postgresql.org/gitweb/?p=postgresql.git;a=summary
-commit f4aa3a18a20d51575562520754aa376b3b08b2d0
+There is 5.7 version in jansa/master-5.7 branch.
 
-Signed-off-by: Zhixiong Chi <Zhixiong.Chi@windriver.com>
----
- .../files/postgresql-CVE-2016-0766.patch           | 35 ++++++++++++++++++++++
- meta-oe/recipes-support/postgresql/postgresql.inc  |  1 +
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-oe/recipes-support/postgresql/files/postgresql-CVE-2016-0766.patch
+If you have the recipes ready, you can submit them there.
 
-diff --git a/meta-oe/recipes-support/postgresql/files/postgresql-CVE-2016-0766.patch b/meta-oe/recipes-support/postgresql/files/postgresql-CVE-2016-0766.patch
-new file mode 100644
-index 0000000..df89eb0
---- /dev/null
-+++ b/meta-oe/recipes-support/postgresql/files/postgresql-CVE-2016-0766.patch
-@@ -0,0 +1,35 @@
-+From f4aa3a18a20d51575562520754aa376b3b08b2d0 Mon Sep 17 00:00:00 2001
-+From: Noah Misch <noah@leadboat.com>
-+Date: Fri, 5 Feb 2016 20:22:51 -0500
-+Subject: [PATCH] Force certain "pljava" custom GUCs to be PGC_SUSET.
-+
-+Future PL/Java versions will close CVE-2016-0766 by making these GUCs
-+PGC_SUSET.  This PostgreSQL change independently mitigates that PL/Java
-+vulnerability, helping sites that update PostgreSQL more frequently than
-+PL/Java.  Back-patch to 9.1 (all supported versions).
-+
-+Upstream-Status: Backport
-+
-+Signed-off-by: Noah Misch <noah@leadboat.com>
-+Index: postgresql-9.4.4/src/backend/utils/misc/guc.c
-+===================================================================
-+--- postgresql-9.4.4.orig/src/backend/utils/misc/guc.c	2015-06-10 03:29:38.000000000 +0800
-++++ postgresql-9.4.4/src/backend/utils/misc/guc.c	2016-03-04 15:58:26.459266951 +0800
-+@@ -7072,6 +7072,17 @@
-+ 		!process_shared_preload_libraries_in_progress)
-+ 		elog(FATAL, "cannot create PGC_POSTMASTER variables after startup");
-+ 
-++	/*
-++	 * Before pljava commit 398f3b876ed402bdaec8bc804f29e2be95c75139
-++	 * (2015-12-15), two of that module's PGC_USERSET variables facilitated
-++	 * trivial escalation to superuser privileges.  Restrict the variables to
-++	 * protect sites that have yet to upgrade pljava.
-++	 */
-++	if (context == PGC_USERSET &&
-++		(strcmp(name, "pljava.classpath") == 0 ||
-++		 strcmp(name, "pljava.vmoptions") == 0))
-++		context = PGC_SUSET;
-++
-+ 	gen = (struct config_generic *) guc_malloc(ERROR, sz);
-+ 	memset(gen, 0, sz);
-+ 
-diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index dbc02a0..06e601f 100644
---- a/meta-oe/recipes-support/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -31,6 +31,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
-     file://postgresql-setup \
-     file://postgresql.service \
-     file://0001-Use-pkg-config-for-libxml2-detection.patch \
-+    file://postgresql-CVE-2016-0766.patch \
- "
- 
- LEAD_SONAME = "libpq.so"
--- 
-1.9.1
+On Fri, Feb 12, 2016 at 5:23 PM, Piippo Samuli <
+samuli.piippo@theqtcompany.com> wrote:
 
+> Hi,
+>
+> We have recipes available for Qt Charts, Qt Data Visualization, Qt Virtua=
+l
+> Keyboard and Qt Quick 2D Renderer, all modules that are open sourced unde=
+r
+> GPL3 with Qt 5.7. Currently the recipes are available on the commercial Q=
+t
+> for Device Creation layer, but plan is to contribute these recipes to
+> meta-qt5 once it switches to Qt 5.7.
+>
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:
+> openembedded-devel-bounces@lists.openembedded.org] On Behalf Of S=C3=A9ba=
+stien
+> Taylor
+> Sent: 9. helmikuuta 2016 19:31
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-qt5] Commercial License
+>
+> I am looking to update the qt5 build to build the commercial version (as
+> opposed to the open source) as well as adding the QtCharts and
+> Visualization modules which are part of the commercial release.
+>
+> I was hoping for some feedback as to whether this has already been looked
+> at and opinions on how to best handle toggling the license in the
+> configuration in a way that can be submitted back into meta-qt5.
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
