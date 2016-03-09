@@ -1,50 +1,23 @@
-Return-Path: <sandro.stiller@elfin.de>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EC956E680
+Return-Path: <pascal.bach@siemens.com>
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 3BFC16E680
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Mar 2016 12:21:10 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id l68so175515345wml.0
+	Wed,  9 Mar 2016 12:34:09 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id u29CY6nr013352
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Mar 2016 04:21:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=elfin-de.20150623.gappssmtp.com; s=20150623;
-	h=to:from:subject:message-id:date:user-agent:mime-version
-	:content-transfer-encoding;
-	bh=oscv/T8AbiPl3DHk27cJpN+/gTd7f/p//9qHKnVn1bc=;
-	b=1Xxe3wAS3wYN/1sd+J2O3Dgj1V54jpKJtY8LsxEKwE/yu4J6rGLLkLFLlyPE71YSqy
-	ORAoko7RE4Ao11bnrhQLaXkCgKaMFsX8dkt8CTCdiSlMeMoUbb5BRSJmBdVGKOQbwz4t
-	P3eTn6Vh3d9RkjMwMqyL6yvFBDJzwAncuKwyekcmHahBg9VC+kerPFsjGMBmdd6Vpldz
-	IV/WPi9G7bYaWbcnCPy5EaN4IKHdHtRvD+xWkDgqAf+iX5JugcEyE5A7kw+PIU0PQfhO
-	2wtsvVZLKcsh8g5c5A50yzgxDyh1Z3l9Of6yq2BtW7PvVpKv0fDQ2AgyzitziOcxJvll
-	kDwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
-	:mime-version:content-transfer-encoding;
-	bh=oscv/T8AbiPl3DHk27cJpN+/gTd7f/p//9qHKnVn1bc=;
-	b=jdXkOamAPj2OkuA4v0G1FGIKZvu68A0E7eO8FF0S2L7e5kHADaLfeFYr7gmTy6q7v7
-	uj7SzsABDiubeuW4I8wtmnRRp771KbPFiaauINu1BPxAD1p312q+Vb0ErNO5VrOxIP2N
-	QIpN3wJKnQZIY8SwUOKyVq8RtGsr0PjSckJUb1ANoJUASAguoK6O4fnGAtKLpPXPYH0P
-	3IazGtcsWBlquew7zpL7S5AsqPR1N7gHGf6WdmeX0BuS1mXbvx37qBmrDuR+c317ikxV
-	RzAMKBp8ReUD2VRckF9+S3lGZJzzIK63d9nliij5OHtTVZa8tJWPg0C5zlnw+S1jiV2K
-	GgiA==
-X-Gm-Message-State: AD7BkJIaEysmb8DutR9DqpSsalUckkYwhGuQ4yorY0xpuwzMIdRnAZGjPn5H+blR557vvQ==
-X-Received: by 10.28.9.71 with SMTP id 68mr24837019wmj.33.1457526070737;
-	Wed, 09 Mar 2016 04:21:10 -0800 (PST)
-Received: from [192.168.2.147] (b2b-94-79-174-114.unitymedia.biz.
-	[94.79.174.114]) by smtp.googlemail.com with ESMTPSA id
-	ks5sm7701641wjb.13.2016.03.09.04.21.09
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 Mar 2016 04:21:10 -0800 (PST)
+	Wed, 9 Mar 2016 13:34:06 +0100
+Received: from dev.sbt.siemens.com (md132uzc.ww300.siemens.net
+	[139.22.128.135])
+	by mail2.siemens.de (8.15.2/8.15.2) with SMTP id u29CY5BT004454;
+	Wed, 9 Mar 2016 13:34:06 +0100
+From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-From: Sandro Stiller <sandro.stiller@elfin.de>
-Message-ID: <56E01535.6030509@elfin.de>
-Date: Wed, 9 Mar 2016 13:21:09 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
-MIME-Version: 1.0
-Subject: systemd service not enabled when adding simple recipe to image
+Date: Wed,  9 Mar 2016 13:33:56 +0100
+Message-Id: <1457526838-18460-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-webserver][PATCH v3 1/3] nginx: split parts out of the recipe into nginx.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,78 +30,310 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2016 12:21:12 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Mar 2016 12:34:11 -0000
 
-Hello,
-I have a problem enabling a simple systemd service:
-If I install my package using the .ipk file, everything works fine
-(systemd service ist enabled after install), but if I create an image
-containing this package, the service is disabled.
-It can be enabled by calling "systemctl enable <mytestscript.service>".
-All files of the package are installed correctly (only the systemd
-symlink is missing). I have other packages with working systemd, the
-problem exists only in the simple case with a single shell script.
+nginx has two maintained branches.
+- stable: is the long term maintained branch where only bugfixes occur
+- mainline: is the branch where new features get added
 
-I use Angstrom v2015.06 / Yocto 1.8
+This change is in preparation to support these two branches.
+---
+ meta-webserver/recipes-httpd/nginx/nginx.inc       | 137 +++++++++++++++++++++
+ meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb | 137 +--------------------
+ 2 files changed, 139 insertions(+), 135 deletions(-)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx.inc
 
-Can anybody tell me what I'm doing wrong?
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+new file mode 100644
+index 0000000..53e3235
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -0,0 +1,137 @@
++SUMMARY = "HTTP and reverse proxy server"
++
++DESCRIPTION = "Nginx is a web server and a reverse proxy server for \
++HTTP, SMTP, POP3 and IMAP protocols, with a strong focus on high  \
++concurrency, performance and low memory usage."
++
++HOMEPAGE = "http://nginx.org/"
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0bb58ed0dfd4f5dbece3b52aba79f023"
++SECTION = "net"
++
++DEPENDS = "libpcre gzip openssl"
++
++SRC_URI = " \
++	http://nginx.org/download/nginx-${PV}.tar.gz \
++	file://nginx-cross.patch \
++	file://nginx.conf \
++	file://nginx.init \
++	file://nginx-volatile.conf \
++	file://nginx.service \
++"
++
++inherit update-rc.d useradd
++
++CFLAGS_append = " -fPIE -pie"
++CXXFLAGS_append = " -fPIE -pie"
++
++NGINX_WWWDIR ?= "${localstatedir}/www/localhost"
++NGINX_USER   ?= "www"
++
++EXTRA_OECONF = ""
++DISABLE_STATIC = ""
++
++do_configure () {
++	if [ "${SITEINFO_BITS}" = "64" ]; then
++		PTRSIZE=8
++	else
++		PTRSIZE=4
++	fi
++
++	echo $CFLAGS
++	echo $LDFLAGS
++
++	./configure \
++	--crossbuild=Linux:${TUNE_ARCH} \
++	--with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
++	--with-int=4 \
++	--with-long=${PTRSIZE} \
++	--with-long-long=8 \
++	--with-ptr-size=${PTRSIZE} \
++	--with-sig-atomic-t=${PTRSIZE} \
++	--with-size-t=${PTRSIZE} \
++	--with-off-t=${PTRSIZE} \
++	--with-time-t=${PTRSIZE} \
++	--with-sys-nerr=132 \
++	--conf-path=${sysconfdir}/nginx/nginx.conf \
++	--http-log-path=${localstatedir}/log/nginx/access.log \
++	--error-log-path=${localstatedir}/log/nginx/error.log \
++	--pid-path=/run/nginx/nginx.pid \
++	--prefix=${prefix} \
++	--with-http_ssl_module \
++	--with-http_gzip_static_module \
++	${EXTRA_OECONF}
++}
++
++do_install () {
++	oe_runmake 'DESTDIR=${D}' install
++	rm -fr ${D}${localstatedir}/run ${D}/run
++	if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++		install -d ${D}${sysconfdir}/tmpfiles.d
++		echo "d /run/${BPN} - - - -" \
++		     > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
++	fi
++	install -d ${D}${sysconfdir}/${BPN}
++	ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
++	install -d ${D}${NGINX_WWWDIR}
++	mv ${D}/usr/html ${D}${NGINX_WWWDIR}/
++	chown ${NGINX_USER}:www-data -R ${D}${NGINX_WWWDIR}
++
++	install -d ${D}${sysconfdir}/init.d
++	install -m 0755 ${WORKDIR}/nginx.init ${D}${sysconfdir}/init.d/nginx
++	sed -i 's,/usr/sbin/,${sbindir}/,g' ${D}${sysconfdir}/init.d/nginx
++	sed -i 's,/etc/,${sysconfdir}/,g'  ${D}${sysconfdir}/init.d/nginx
++
++	install -d ${D}${sysconfdir}/nginx
++	install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/nginx.conf
++	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
++	install -d ${D}${sysconfdir}/nginx/sites-enabled
++
++	install -d ${D}${sysconfdir}/default/volatiles
++	install -m 0644 ${WORKDIR}/nginx-volatile.conf ${D}${sysconfdir}/default/volatiles/99_nginx
++	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/default/volatiles/99_nginx
++
++        if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};then
++            install -d ${D}${systemd_unitdir}/system
++            install -m 0644 ${WORKDIR}/nginx.service ${D}${systemd_unitdir}/system/
++            sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
++                    -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
++                    -e 's,@BASEBINDIR@,${base_bindir},g' \
++                    ${D}${systemd_unitdir}/system/nginx.service
++        fi
++}
++
++pkg_postinst_${PN} () {
++	if [ -z "$D" ]; then
++		if type systemd-tmpfiles >/dev/null; then
++			systemd-tmpfiles --create
++		elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
++			${sysconfdir}/init.d/populate-volatile.sh update
++		fi
++	fi
++}
++
++FILES_${PN} += "${localstatedir}/ \
++                ${systemd_unitdir}/system/nginx.service \
++                "
++
++CONFFILES_${PN} = "${sysconfdir}/nginx/nginx.conf \
++		${sysconfdir}/nginx/fastcgi.conf\
++		${sysconfdir}/nginx/fastcgi_params \
++		${sysconfdir}/nginx/koi-utf \
++		${sysconfdir}/nginx/koi-win \
++		${sysconfdir}/nginx/mime.types \
++		${sysconfdir}/nginx/scgi_params \
++		${sysconfdir}/nginx/uwsgi_params \
++		${sysconfdir}/nginx/win-utf \
++"
++
++INITSCRIPT_NAME = "nginx"
++INITSCRIPT_PARAMS = "defaults 92 20"
++
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM_${PN} = " \
++    --system --no-create-home \
++    --home ${NGINX_WWWDIR} \
++    --groups www-data \
++    --user-group ${NGINX_USER}"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb
+index 8b60e53..d76bd9e 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.9.11.bb
+@@ -1,139 +1,6 @@
+-SUMMARY = "HTTP and reverse proxy server"
++require nginx.inc
+ 
+-DESCRIPTION = "Nginx is a web server and a reverse proxy server for \
+-HTTP, SMTP, POP3 and IMAP protocols, with a strong focus on high  \
+-concurrency, performance and low memory usage."
+-
+-HOMEPAGE = "http://nginx.org/"
+-LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0bb58ed0dfd4f5dbece3b52aba79f023"
+-SECTION = "net"
+-
+-DEPENDS = "libpcre gzip openssl"
+-
+-SRC_URI = " \
+-	http://nginx.org/download/nginx-${PV}.tar.gz \
+-	file://nginx-cross.patch \
+-	file://nginx.conf \
+-	file://nginx.init \
+-	file://nginx-volatile.conf \
+-	file://nginx.service \
+-"
+ SRC_URI[md5sum] = "76eb5853a1190e0cfc691aa21c545de3"
+ SRC_URI[sha256sum] = "6a5c72f4afaf57a6db064bba0965d72335f127481c5d4e64ee8714e7b368a51f"
+ 
+-inherit update-rc.d useradd
+-
+-CFLAGS_append = " -fPIE -pie"
+-CXXFLAGS_append = " -fPIE -pie"
+-
+-NGINX_WWWDIR ?= "${localstatedir}/www/localhost"
+-NGINX_USER   ?= "www"
+-
+-EXTRA_OECONF = ""
+-DISABLE_STATIC = ""
+-
+-do_configure () {
+-	if [ "${SITEINFO_BITS}" = "64" ]; then
+-		PTRSIZE=8
+-	else
+-		PTRSIZE=4
+-	fi
+-
+-	echo $CFLAGS
+-	echo $LDFLAGS
+-
+-	./configure \
+-	--crossbuild=Linux:${TUNE_ARCH} \
+-	--with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
+-	--with-int=4 \
+-	--with-long=${PTRSIZE} \
+-	--with-long-long=8 \
+-	--with-ptr-size=${PTRSIZE} \
+-	--with-sig-atomic-t=${PTRSIZE} \
+-	--with-size-t=${PTRSIZE} \
+-	--with-off-t=${PTRSIZE} \
+-	--with-time-t=${PTRSIZE} \
+-	--with-sys-nerr=132 \
+-	--conf-path=${sysconfdir}/nginx/nginx.conf \
+-	--http-log-path=${localstatedir}/log/nginx/access.log \
+-	--error-log-path=${localstatedir}/log/nginx/error.log \
+-	--pid-path=/run/nginx/nginx.pid \
+-	--prefix=${prefix} \
+-	--with-http_ssl_module \
+-	--with-http_gzip_static_module \
+-	${EXTRA_OECONF}
+-}
+-
+-do_install () {
+-	oe_runmake 'DESTDIR=${D}' install
+-	rm -fr ${D}${localstatedir}/run ${D}/run
+-	if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+-		install -d ${D}${sysconfdir}/tmpfiles.d
+-		echo "d /run/${BPN} - - - -" \
+-		     > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+-	fi
+-	install -d ${D}${sysconfdir}/${BPN}
+-	ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
+-	install -d ${D}${NGINX_WWWDIR}
+-	mv ${D}/usr/html ${D}${NGINX_WWWDIR}/
+-	chown ${NGINX_USER}:www-data -R ${D}${NGINX_WWWDIR}
+-
+-	install -d ${D}${sysconfdir}/init.d
+-	install -m 0755 ${WORKDIR}/nginx.init ${D}${sysconfdir}/init.d/nginx
+-	sed -i 's,/usr/sbin/,${sbindir}/,g' ${D}${sysconfdir}/init.d/nginx
+-	sed -i 's,/etc/,${sysconfdir}/,g'  ${D}${sysconfdir}/init.d/nginx
+-
+-	install -d ${D}${sysconfdir}/nginx
+-	install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/nginx.conf
+-	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
+-	install -d ${D}${sysconfdir}/nginx/sites-enabled
+-
+-	install -d ${D}${sysconfdir}/default/volatiles
+-	install -m 0644 ${WORKDIR}/nginx-volatile.conf ${D}${sysconfdir}/default/volatiles/99_nginx
+-	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/default/volatiles/99_nginx
+-
+-        if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};then
+-            install -d ${D}${systemd_unitdir}/system
+-            install -m 0644 ${WORKDIR}/nginx.service ${D}${systemd_unitdir}/system/
+-            sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+-                    -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
+-                    -e 's,@BASEBINDIR@,${base_bindir},g' \
+-                    ${D}${systemd_unitdir}/system/nginx.service
+-        fi
+-}
+-
+-pkg_postinst_${PN} () {
+-	if [ -z "$D" ]; then
+-		if type systemd-tmpfiles >/dev/null; then
+-			systemd-tmpfiles --create
+-		elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+-			${sysconfdir}/init.d/populate-volatile.sh update
+-		fi
+-	fi
+-}
+-
+-FILES_${PN} += "${localstatedir}/ \
+-                ${systemd_unitdir}/system/nginx.service \
+-                "
+-
+-CONFFILES_${PN} = "${sysconfdir}/nginx/nginx.conf \
+-		${sysconfdir}/nginx/fastcgi.conf\
+-		${sysconfdir}/nginx/fastcgi_params \
+-		${sysconfdir}/nginx/koi-utf \
+-		${sysconfdir}/nginx/koi-win \
+-		${sysconfdir}/nginx/mime.types \
+-		${sysconfdir}/nginx/scgi_params \
+-		${sysconfdir}/nginx/uwsgi_params \
+-		${sysconfdir}/nginx/win-utf \
+-"
+-
+-INITSCRIPT_NAME = "nginx"
+-INITSCRIPT_PARAMS = "defaults 92 20"
+-
+-USERADD_PACKAGES = "${PN}"
+-USERADD_PARAM_${PN} = " \
+-    --system --no-create-home \
+-    --home ${NGINX_WWWDIR} \
+-    --groups www-data \
+-    --user-group ${NGINX_USER}"
++DISABLE_STATIC = ""
+\ No newline at end of file
+-- 
+2.1.4
 
-Thank you very much,
-
-Sandro
-
-
-My files:
-###################### mytestscript.bb ########################
-SUMMARY = "systemd test script"
-DESCRIPTION = "This script is a quick demo for a not initialized systemd 
-service."
-SECTION = "console/network"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = 
-"file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
-
-inherit systemd
-
-SRC_URI = "file://mytestscript.service \
-            file://mytestscript.sh \
-           "
-
-do_compile() {
-}
-
-do_install () {
-   install -d ${D}${bindir}
-   install -m 0755 ${WORKDIR}/mytestscript.sh ${D}${bindir}
-   install -d ${D}${systemd_unitdir}/system
-   install -m 0644 ${WORKDIR}/mytestscript.service 
-${D}${systemd_unitdir}/system
-   sed -i -e 's,@BINDIR@,${bindir},g' \
-		${D}${systemd_unitdir}/system/mytestscript.service
-}
-
-NATIVE_SYSTEMD_SUPPORT = "1"
-SYSTEMD_PACKAGES = "${PN}"
-SYSTEMD_SERVICE_${PN} = "mytestscript.service"
-SYSTEMD_AUTO_ENABLE = "enable"
-
-FILES_${PN} += "${systemd_unitdir}/system/mytestscript.service"
-
-###################### files/mytestscript.sh #########################
-#!/bin/sh
-echo "Hello from testscript"
-
-###################### files/mytestscript.service ######################
-[Unit]
-Description=A test script
-After=local-fs.target
-
-[Service]
-Type=oneshot
-ExecStart=@BINDIR@/mytestscript.sh
-
-[Install]
-WantedBy=multi-user.target
 
