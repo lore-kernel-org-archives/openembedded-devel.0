@@ -1,52 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 19B29601B8
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id A9E9C60721
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Mar 2016 19:03:08 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id n186so193213377wmn.1
+	Wed,  9 Mar 2016 19:09:04 +0000 (UTC)
+Received: by mail-wm0-f47.google.com with SMTP id l68so193049100wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Mar 2016 11:03:10 -0800 (PST)
+	Wed, 09 Mar 2016 11:09:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=oiDTBAxWF+JxR92xuNB7U+4Wws8ucAFlV6iiRUgRRvA=;
-	b=KcT7V8s4gKOq24GtHwjCRsWlk1DsVE+u+zknrhFQHIwXEHUKbpyPL2gIL1Ez77LEl2
-	xK5VijXTgY+B3ClRur7mdoLHQTzdAgGBUhTfjn2y/X9CJ04l/8qNRaJscVDYJXWAuyuE
-	AqBuc9QVhWqv5/LR2AjbhU8u11JfK1/lrxeUx+vMqb2770+vEiJqjG8NPDUTV7UXlNYS
-	tKR+WVaNs9VJl/RfCIo60Ct0w67qBKEmi+R69ty9BgiJqBtwX8eTcqpW2twJlgT7b3He
-	SveMQGPuKiGnE9caVfcdFOBzIDDqt3BuC0vhWv7xrmi1Dn/4t8hn9pxOlbRaV1+rNXPd
-	vudA==
+	bh=h3FnRJF3yqn6CvaF4qcweUX2rO4RXvOD9V0lD5m3+6g=;
+	b=NV+6s37a7M1sojIl7dE5VdmnmA6qQDjX074nBmaGRQt20FpMMqHrfji8k5xjUyfUUA
+	ptmK51o3qizl7KUuQlfxLA3/sdtG59bfoBEWsj5BcxoC8uxGue3WMVs2BLP9kmmIZEbR
+	LHb2m8h/nK+50noiHDOB849mZUkmC5y01oyE7I2ayb8r3KnHaN0A0UFQ2WeRyqa03nEC
+	gp+gVggaBTTrfZxITyZbCK1hvyQLvTtaMCmJxl/77ic7LWUg8FcbuuvB2H43VdjWkDHF
+	gB6vwV6yQz7vbLUkLN6jpYUL+trCsNHM+cEhd2dI2jeCmViDWi71+tkrenG+kpJ/UpCY
+	f2SA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=oiDTBAxWF+JxR92xuNB7U+4Wws8ucAFlV6iiRUgRRvA=;
-	b=HBlf2V18TgvYIR5xK+gEf+FH4ECpGur8cwoiVFPLsShR+k8fEXolkj8DZa0VL+y6B4
-	tZm7KQdYsZEg+OXSyuikghnkjlHkocQmm2CPgI3JpGndNMBaRVyqEoDL1rUEQXuHyS96
-	BlALyiEwwn/KqIhjs1k87saKiTxNgAUcy/WBzlqUHLJN6eK1D33ZX0diSOIqg7p8Uicc
-	2+ZWiR0p1R96Nutnp8ZOlfe0DvXZPYMNG1nG05XuGz/NTaYCvkMjNpXYADPm5I7N1Dru
-	r1PPKPe0XZlbcpK3jP34RnWmUYo4IXNG/pDTmhOx45TJw091TqIyRJ/iMT+tVCgZqZl+
-	YUow==
-X-Gm-Message-State: AD7BkJKhTMhcS7owohe/KIOJKlCh7Gj+Q+uqA4aM4syqq9i0OmgJcOvY1ukVUDPfp/7Ffg==
-X-Received: by 10.28.0.148 with SMTP id 142mr698362wma.72.1457550188684;
-	Wed, 09 Mar 2016 11:03:08 -0800 (PST)
+	bh=h3FnRJF3yqn6CvaF4qcweUX2rO4RXvOD9V0lD5m3+6g=;
+	b=Irn9vW+aAVt7awhL1vG2YdVfNgRgITL2HDqA/nRwqSh45FNTq/rtkRIspLoKPKHPmL
+	YztW5ze5IxpReYjus8tQOE1m64gXW0Bq09ZNDfUHhwk6fqf3OAef06SIghcZw8gmAXo4
+	5c2resB4jFgT/vg5SqPAdn49OxAOCWG3u4wwbW1HWF0JxHSiw67C8TjvQe76piVk67Wj
+	SBVv1kLEaI2fkLtW9cae1zG+TttK3R1oOQ1yhNhHqm0MycAsMxbg+1IFoGrtLxNCHt6y
+	UJJdUCiEFj/qdJgEvlrhYEwknmyZQnZT7eT0g9YcabMBkuo9Ak7FMjwYB70ZY643ZC4E
+	FTag==
+X-Gm-Message-State: AD7BkJLQy1bevGCt6tVlvHJj3oxk5Czq1Nj7T8CTRPIhTmxQIlvrnzOUSN0SRzsgmrJfqw==
+X-Received: by 10.28.10.18 with SMTP id 18mr736345wmk.64.1457550544558;
+	Wed, 09 Mar 2016 11:09:04 -0800 (PST)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	ls5sm9200162wjb.33.2016.03.09.11.03.07
-	for <openembedded-devel@lists.openembedded.org>
+	e127sm25262297wma.20.2016.03.09.11.09.03
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 Mar 2016 11:03:07 -0800 (PST)
+	Wed, 09 Mar 2016 11:09:03 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 9 Mar 2016 20:06:00 +0100
+Date: Wed, 9 Mar 2016 20:11:56 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160309190600.GG2542@jama>
-References: <1457509723-25302-1-git-send-email-kai.kang@windriver.com>
-	<1457509723-25302-2-git-send-email-kai.kang@windriver.com>
+Message-ID: <20160309191156.GH2542@jama>
+References: <1457543217-11211-1-git-send-email-akuster808@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1457509723-25302-2-git-send-email-kai.kang@windriver.com>
+In-Reply-To: <1457543217-11211-1-git-send-email-akuster808@gmail.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH][meta-oe] crash: add native package
+Cc: akuster@mvista.com
+Subject: Re: [meta-python][jethro][PATCH][V2] python-m2crypto: fix SSLv2 symbol issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,99 +58,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2016 19:03:10 -0000
-X-Groupsio-MsgNum: 60430
+X-List-Received-Date: Wed, 09 Mar 2016 19:09:05 -0000
+X-Groupsio-MsgNum: 60431
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cfJ13FhsvNR/yOpm"
+	protocol="application/pgp-signature"; boundary="mXDO3udm/xYWQeMQ"
 Content-Disposition: inline
 
---cfJ13FhsvNR/yOpm
+--mXDO3udm/xYWQeMQ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 09, 2016 at 03:48:43PM +0800, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
+On Wed, Mar 09, 2016 at 09:06:57AM -0800, Armin Kuster wrote:
+> From: Armin Kuster <akuster@mvista.com>
 >=20
-> Add crash-native package.
+> missed using "-D"  for OPENSSL_NO_SSL2 swig_features.
+
+fido version:
+http://patchwork.openembedded.org/patch/117291/
+needed -D as well, right?
+
+I've pushed both to fido-next and jethro-next
+
 >=20
-> * append EXTRA_OEMAKE option to find ncurses library
-> * pass right install DESTDIR
+> ERROR: Failed to import the "M2Crypto" module: .../usr/lib/python2.7/site=
+-packages/M2Crypto/__m2crypto.so: undefined symbol: SSLv2_method
 >=20
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> disable using SSLv2_method if not supported in openssl. This is now the c=
+ase
+> with the advent of CVE-2016-0800
+>=20
+> Signed-off-by: Armin Kuster <akuster@mvista.com>
 > ---
->  meta-oe/recipes-kernel/crash/crash_7.1.3.bb | 17 ++++++++++++++---
->  1 file changed, 14 insertions(+), 3 deletions(-)
+>  ...y_build_with_SSLv2_when_it_is_not_available.patch | 20 ++++++++++++++=
+++++++
+>  .../python/python-m2crypto_0.21.1.bb                 |  4 +++-
+>  2 files changed, 23 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-python/recipes-devtools/python/python-m2crypto/d=
+ont_try_build_with_SSLv2_when_it_is_not_available.patch
 >=20
-> diff --git a/meta-oe/recipes-kernel/crash/crash_7.1.3.bb b/meta-oe/recipe=
-s-kernel/crash/crash_7.1.3.bb
-> index f6934f7..e085094 100644
-> --- a/meta-oe/recipes-kernel/crash/crash_7.1.3.bb
-> +++ b/meta-oe/recipes-kernel/crash/crash_7.1.3.bb
-> @@ -32,6 +32,8 @@ SRC_URI[gdb.sha256sum] =3D "8070389a5dcc104eb0be483d582=
-729f98ed4d761ad19cedd3f17b5
-> =20
->  inherit gettext
-> =20
-> +BBCLASSEXTEND =3D "native"
+> diff --git a/meta-python/recipes-devtools/python/python-m2crypto/dont_try=
+_build_with_SSLv2_when_it_is_not_available.patch b/meta-python/recipes-devt=
+ools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_availa=
+ble.patch
+> new file mode 100644
+> index 0000000..526c23f
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_=
+with_SSLv2_when_it_is_not_available.patch
+> @@ -0,0 +1,20 @@
+> +Upstream-Status: Backport
+> +https://gitlab.com/m2crypto/m2crypto/commit/ac01b38302474920288c1a9eb63f=
+d35fa8d1db5b
 > +
->  # crash 7.1.3 and before don't support mips64
->  COMPATIBLE_HOST =3D "^(?!mips64).*"
-> =20
-> @@ -40,6 +42,7 @@ EXTRA_OEMAKE =3D 'RPMPKG=3D"${PV}" \
->                  GDB_HOST=3D"${BUILD_SYS}" \
->                  GDB_MAKE_JOBS=3D"${PARALLEL_MAKE}" \
->                  '
-> +EXTRA_OEMAKE_append_class-native =3D " LDFLAGS=3D'${BUILD_LDFLAGS}'"
-> =20
->  do_configure() {
->      :
-> @@ -65,17 +68,25 @@ do_compile() {
->      oe_runmake ${EXTRA_OEMAKE}
->  }
-> =20
-> -do_install () {
-> +do_install_prepend () {
->      install -d ${D}${bindir}
->      install -d ${D}/${mandir}/man8
->      install -d ${D}${includedir}/crash
-> =20
-> -    oe_runmake DESTDIR=3D${D} install
->      install -m 0644 ${S}/crash.8 ${D}/${mandir}/man8/
->      install -m 0644 ${S}/defs.h ${D}${includedir}/crash
-> -}  =20
-> +}
+> +Signed-off-by: Armin Kuster <akuster@mvista.com>
 > +
-> +do_install_class-target () {
-> +    oe_runmake DESTDIR=3D${D} install
-> +}
-> +
-> +do_install_class-native () {
-> +    oe_runmake DESTDIR=3D${D}${STAGING_DIR_NATIVE} install
-> +}
+> +Index: M2Crypto-0.21.1/SWIG/_ssl.i
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- M2Crypto-0.21.1.orig/SWIG/_ssl.i
+> ++++ M2Crypto-0.21.1/SWIG/_ssl.i
+> +@@ -48,8 +48,10 @@ extern const char *SSL_alert_desc_string
+> + %rename(ssl_get_alert_desc_v) SSL_alert_desc_string_long;
+> + extern const char *SSL_alert_desc_string_long(int);
+> +=20
+> ++#ifndef OPENSSL_NO_SSL2
+> + %rename(sslv2_method) SSLv2_method;
+> + extern SSL_METHOD *SSLv2_method(void);
+> ++#endif
+> + %rename(sslv3_method) SSLv3_method;
+> + extern SSL_METHOD *SSLv3_method(void);
+> + %rename(sslv23_method) SSLv23_method;
+> diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.b=
+b b/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
+> index ff6203f..9daea5e 100644
+> --- a/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
+> +++ b/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
+> @@ -8,7 +8,8 @@ LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3Db0e1f0b7d0ce8a=
+62c18b1287b991800e"
 > =20
->  RDEPENDS_${PN} +=3D "liblzma"
-> +RDEPENDS_${PN}_class-native +=3D "xz-native"
-
-Why is this needed? native builds aren't creating any packages.
-
->  # Causes gcc to get stuck and eat all available memory in qemuarm builds
->  # jenkins  15161  100 12.5 10389596 10321284 ?   R    11:40  28:17 /home=
-/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-=
-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.2/cc1 -quiet -I . -I . -I ./c=
-ommon -I ./config -I ./../include/opcode -I ./../opcodes/.. -I ./../readlin=
-e/.. -I ../bfd -I ./../bfd -I ./../include -I ../libdecnumber -I ./../libde=
-cnumber -I ./gnulib/import -I build-gnulib/import -isysroot /home/jenkins/o=
-e/world/shr-core/tmp-glibc/sysroots/qemuarm -MMD eval.d -MF .deps/eval.Tpo =
--MP -MT eval.o -D LOCALEDIR=3D"/usr/local/share/locale" -D CRASH_MERGE -D H=
-AVE_CONFIG_H -D TUI=3D1 eval.c -quiet -dumpbase eval.c -march=3Darmv5te -mt=
-humb -mthumb-interwork -mtls-dialect=3Dgnu -auxbase-strip eval.o -g -O2 -Wa=
-ll -Wpointer-arith -Wformat-nonliteral -Wno-pointer-sign -Wno-unused -Wunus=
-ed-value -Wunused-function -Wno-switch -Wno-char-subscripts -Wmissing-proto=
-types -Wdeclaration-after-statement -Wempty-body -feliminate-unused-debug-t=
-ypes -o -
+>  SRC_URI =3D "http://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-=
+${PV}.tar.gz \
+>             file://0001-setup.py-link-in-sysroot-not-in-host-directories.=
+patch \
+> -           file://0001-M2Crypto-Error-fix.patch"
+> +           file://0001-M2Crypto-Error-fix.patch \
+> +           file://dont_try_build_with_SSLv2_when_it_is_not_available.pat=
+ch"
+> =20
+>  SRC_URI[md5sum] =3D "f93d8462ff7646397a9f77a2fe602d17"
+>  SRC_URI[sha256sum] =3D "25b94498505c2d800ee465db0cc1aff097b1615adc3ac042=
+a1c85ceca264fc0a"
+> @@ -19,6 +20,7 @@ inherit setuptools
+> =20
+>  SWIG_FEATURES_x86-64 =3D "-D__x86_64__"
+>  SWIG_FEATURES ?=3D ""
+> +SWIG_FEATURES +=3D "-DOPENSSL_NO_SSL2"
+>  export SWIG_FEATURES
+> =20
+>  # Get around a problem with swig, but only if the
 > --=20
-> 2.6.1
+> 2.3.5
 >=20
 > --=20
 > _______________________________________________
@@ -162,16 +170,16 @@ ypes -o -
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---cfJ13FhsvNR/yOpm
+--mXDO3udm/xYWQeMQ
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlbgdBgACgkQN1Ujt2V2gBwyngCfQl4t8R6BZR94uKbEfgOAYnRg
-PQcAniCh045DVZQOljeO+xmrl9RJAOkc
-=9IvX
+iEYEARECAAYFAlbgdXwACgkQN1Ujt2V2gByv/ACgoHIiETNJ3WAvWNVx7HOTsZwI
+H6YAoIRzOJBGMSCNSv0LxDXAUGkQXudU
+=Kg8O
 -----END PGP SIGNATURE-----
 
---cfJ13FhsvNR/yOpm--
+--mXDO3udm/xYWQeMQ--
