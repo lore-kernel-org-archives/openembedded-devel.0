@@ -1,50 +1,53 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 4631B60721
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 6155060721
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Mar 2016 19:12:40 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id l68so193177253wml.0
+	Wed,  9 Mar 2016 19:18:47 +0000 (UTC)
+Received: by mail-pa0-f47.google.com with SMTP id tt10so46996185pab.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Mar 2016 11:12:41 -0800 (PST)
+	Wed, 09 Mar 2016 11:18:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=hlKmJ7YvlbmjJ9fCnyO0AnRPPtlu+poYyOemNKZKyXU=;
-	b=EpmkiO9cJ/KZcwvXi14wAbQ/paImbXpGlRw6ld6qBaXa6U965P3rCAgL4ksc79B8zb
-	lyVYHlZrLX8WUkGnv9yWIXxTd9tEBPpzvHCRDO/fSs4OKOlBQs75vH3p0FyNy3bpF1xf
-	unsv4qHlm0yxUMTBsRI4zhxRZe+bGBoIEQQuOSmEKMycUyyIYs/F8JleDc2/TxQteYRs
-	vdUqeTXYOI/VF4XE5oi37ubtEUTs7pBE2MIVLQTqxEMTy07xERoaovAG1qU6kNIRTPVM
-	pfaUSWg9QRFHNTXnbUPMrK/+wmRQktCHOXDHOXGOmQJozdIBMA+Ft0VFgQV10uGxazUb
-	SUsg==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=L2q6QSGseKS7nlT7F4hFWWlSvNVcPQrURGcPq32m9/k=;
+	b=oJNI0g+94oetA1A5DlWwt+M0kiNh7zEPqy2W6HPMII3ra1mKdz7foZkMOQeB/KtO53
+	K+rIn/qxJl2BNXjPLtYmlHJnE7XCyJhCoWmgdwvl3h3txoGrEpjvp+5VYsf9SSJPEwTx
+	XeaLGUtdC1PhUr4xyhJEBwZZISbn1JPLzY/lB5x3V3APpbuNMoZkYHEEUQaU7oe+1nuR
+	hy5/IOWUOM1tzOlgxxcq5rlW36wIuQWV0p5nU+M751n2TOhBqs/e7grtO22qnqmLLP+6
+	/djE4x2xnMdNOASMOkl61cB8KrMeIsr4G6a0nFCDBkUBzufOtegZ/nvA4EeWJC2M94hy
+	6TTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=hlKmJ7YvlbmjJ9fCnyO0AnRPPtlu+poYyOemNKZKyXU=;
-	b=AUpElXFJhG/lb56S21y4rb3Syf3gon/yhipOaQAkkxdKdFG6sM2jRct5gXOqfBe5Fh
-	D/fcIfdU8KgQEKwa1swy4GmwHSOZo70f70nlEWFq8rdGTxNe/5WafgRg26iphNmH1wn5
-	QU4omRERShmjhtKQCHvGeZT0zjymYBJHYqKZnrRY2kcsGd/6S8L4UrCY4vsnO//A3jyl
-	ICG5u4QldGIouED8PbtcHB+xmlwkr2yFK6SkTOwZjtZcH2F1YMJJDtnROrmBcaDRK9kq
-	oP+YpzDv+xkVASgfyItxjf7Hq6z8gddeOHLiwGJryakAQ+lObi6qbA2fNPWDX/gU7siY
-	tZVA==
-X-Gm-Message-State: AD7BkJKVjDCH3aTSWtt3y/1kpRyo4vBvO/cKkREBRCLb636gvhLxZHhoAjPkWkKyHXYmRg==
-X-Received: by 10.194.92.107 with SMTP id cl11mr42300937wjb.21.1457550760711; 
-	Wed, 09 Mar 2016 11:12:40 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id 192sm51967wmw.0.2016.03.09.11.12.38
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 Mar 2016 11:12:38 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 9 Mar 2016 20:15:32 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160309191532.GI2542@jama>
-References: <1457504433-21548-1-git-send-email-gary@mlbassoc.com>
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=L2q6QSGseKS7nlT7F4hFWWlSvNVcPQrURGcPq32m9/k=;
+	b=iX5rOJeF6vYCZb3Q4iDBGvkwh0O9sdIC07QXnf78VOiL7Gqpdm/lr+aPBTTyucN4Ww
+	yrxd8Kwy4DBdTqBI74WP7uTx729DcgMKCHnSxBd+Z/cQ34FF4WklMzzNx/Vf2mNfWmd2
+	jYZD5BlSiEWVNfCeNvyTCqd0oMR/zpQ0afL1oTYZ50F2m3jp77f2W3X+emX5G0QA1aCH
+	kTzljDsKJcw/1mBVeAUojYuHAFMI8iMRYH3WXgkTdiAOjW8Kqo/WopiLbvwKGHBLlYJh
+	OQDLczWl70kSulr8lQbEPDmEI7QNnOZfbcawPTFPTe+3IlaF6Iww37nOBEFbUMfdy+AL
+	Ilag==
+X-Gm-Message-State: AD7BkJI0vbqUa4oOsIR3cJm8pk1/StpXeSD2xbf6EFHsWjUL+pP+zsNbGYCmJFurL6/YfA==
+X-Received: by 10.66.161.68 with SMTP id xq4mr26858647pab.102.1457551128589;
+	Wed, 09 Mar 2016 11:18:48 -0800 (PST)
+Received: from [10.43.100.29] ([64.2.3.194])
+	by smtp.googlemail.com with ESMTPSA id
+	zu10sm20381pab.31.2016.03.09.11.18.46
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 09 Mar 2016 11:18:47 -0800 (PST)
+To: Martin Jansa <martin.jansa@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1457543217-11211-1-git-send-email-akuster808@gmail.com>
+	<20160309191156.GH2542@jama>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <56E07715.8060801@gmail.com>
+Date: Wed, 9 Mar 2016 11:18:45 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-In-Reply-To: <1457504433-21548-1-git-send-email-gary@mlbassoc.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: Gary Thomas <gary@mlbassoc.com>
-Subject: Re: [meta-oe][PATCH] mpv: Media Player
+In-Reply-To: <20160309191156.GH2542@jama>
+Subject: Re: [meta-python][jethro][PATCH][V2] python-m2crypto: fix SSLv2 symbol issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,122 +60,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2016 19:12:40 -0000
-X-Groupsio-MsgNum: 60432
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="huG+SbfbdD6eblZQ"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 09 Mar 2016 19:18:48 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
---huG+SbfbdD6eblZQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 09, 2016 at 07:20:33AM +0100, Gary Thomas wrote:
-> mpv is a fork of mplayer2 and MPlayer. It shares some features with the f=
-ormer projects while introducing many more.
->=20
-> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
-> ---
->  meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb | 60 ++++++++++++++++++=
-++++++
->  1 file changed, 60 insertions(+)
->  create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
->=20
-> diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb b/meta-oe/r=
-ecipes-multimedia/mplayer/mpv_0.15.0.bb
-> new file mode 100644
-> index 0000000..37e4b02
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
-> @@ -0,0 +1,60 @@
-> +SUMMARY =3D "Open Source multimedia player"
-> +SECTION =3D "multimedia"
-> +HOMEPAGE =3D "http://www.mpv.io/"
-> +DEPENDS =3D "zlib ffmpeg jpeg virtual/libx11 xsp libxv libxscrnsaver"
-> +
-> +# Depends on xsp, libxv, virtual/libx11, libxscrnsaver
-> +REQUIRED_DISTRO_FEATURES =3D "x11"
-> +
-> +LICENSE =3D "GPLv2+"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D91f1cb870c1cc2d31351a4d259544=
-1cb"
-> +
-> +SRC_URI =3D "https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz;nam=
-e=3Dmpv \
-> +           http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=3Dw=
-af \
-> +"
-> +SRC_URI[mpv.md5sum] =3D "9042bd3fbff2bc8ba0b7fadaa4a22101"
-> +SRC_URI[mpv.sha256sum] =3D "7d31217ba8572f364fcea2955733f821374ae6d8c6d8=
-f22f8bc63c44c0400bdc"
-> +SRC_URI[waf.md5sum] =3D "cef4ee82206b1843db082d0b0506bf71"
-> +SRC_URI[waf.sha256sum] =3D "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca=
-343fe091f22fca60c98b"
-> +
-> +EXTRA_OECONF =3D " \
-> +    --prefix=3D${D}/usr \
-why not ${prefix} and does it really need to be prefixed with ${D}
-(unlike mandir bellow)? Ugly waf.
 
-> +    --mandir=3D${mandir} \
-> +    --target=3D${SIMPLE_TARGET_SYS} \
-> +    --disable-gl \
-> +    --disable-libsmbclient \
-> +    --disable-libass \
-> +    --disable-lua \
-> +    --disable-libass-osd \
-> +    --disable-encoding \
-> +    --disable-libbluray \
-> +    --disable-dvdread \
-> +    --disable-dvdnav \
-> +    --disable-cdda \
-> +    --disable-enca \
-> +    --disable-libguess \
-> +    --disable-uchardet \
-> +    --disable-rubberband \
-> +    --disable-lcms2 \
-> +    --disable-vapoursynth \
-> +    --disable-vapoursynth-lazy \
-> +    --enable-libarchive \
-> +"
-> +
-> +do_configure() {
-> +    if [ ! -L ../waf ]; then
-> +        chmod a+x ../waf-1.8.12
-> +	ln -s waf-1.8.12 ../waf
-> +    fi
-> +    ../waf configure ${EXTRA_OECONF}
-> +}
-> +
-> +do_compile () {
-> +    ../waf build
-> +}
-> +
-> +do_install() {
-> +    ../waf install
-> +}
-> +
-> +FILES_${PN} +=3D "/usr/"
+On 03/09/2016 11:11 AM, Martin Jansa wrote:
+> On Wed, Mar 09, 2016 at 09:06:57AM -0800, Armin Kuster wrote:
+>> From: Armin Kuster <akuster@mvista.com>
+>>
+>> missed using "-D"  for OPENSSL_NO_SSL2 swig_features.
+> 
+> fido version:
+> http://patchwork.openembedded.org/patch/117291/
+> needed -D as well, right?
 
-${prefix}?
+yes.
 
-Does it install files in strange directories not covered by standard
-FILES?
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> 
+> I've pushed both to fido-next and jethro-next
 
---huG+SbfbdD6eblZQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+thanks
+-armin
+> 
+>>
+>> ERROR: Failed to import the "M2Crypto" module: .../usr/lib/python2.7/site-packages/M2Crypto/__m2crypto.so: undefined symbol: SSLv2_method
+>>
+>> disable using SSLv2_method if not supported in openssl. This is now the case
+>> with the advent of CVE-2016-0800
+>>
+>> Signed-off-by: Armin Kuster <akuster@mvista.com>
+>> ---
+>>  ...y_build_with_SSLv2_when_it_is_not_available.patch | 20 ++++++++++++++++++++
+>>  .../python/python-m2crypto_0.21.1.bb                 |  4 +++-
+>>  2 files changed, 23 insertions(+), 1 deletion(-)
+>>  create mode 100644 meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_available.patch
+>>
+>> diff --git a/meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_available.patch b/meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_available.patch
+>> new file mode 100644
+>> index 0000000..526c23f
+>> --- /dev/null
+>> +++ b/meta-python/recipes-devtools/python/python-m2crypto/dont_try_build_with_SSLv2_when_it_is_not_available.patch
+>> @@ -0,0 +1,20 @@
+>> +Upstream-Status: Backport
+>> +https://gitlab.com/m2crypto/m2crypto/commit/ac01b38302474920288c1a9eb63fd35fa8d1db5b
+>> +
+>> +Signed-off-by: Armin Kuster <akuster@mvista.com>
+>> +
+>> +Index: M2Crypto-0.21.1/SWIG/_ssl.i
+>> +===================================================================
+>> +--- M2Crypto-0.21.1.orig/SWIG/_ssl.i
+>> ++++ M2Crypto-0.21.1/SWIG/_ssl.i
+>> +@@ -48,8 +48,10 @@ extern const char *SSL_alert_desc_string
+>> + %rename(ssl_get_alert_desc_v) SSL_alert_desc_string_long;
+>> + extern const char *SSL_alert_desc_string_long(int);
+>> + 
+>> ++#ifndef OPENSSL_NO_SSL2
+>> + %rename(sslv2_method) SSLv2_method;
+>> + extern SSL_METHOD *SSLv2_method(void);
+>> ++#endif
+>> + %rename(sslv3_method) SSLv3_method;
+>> + extern SSL_METHOD *SSLv3_method(void);
+>> + %rename(sslv23_method) SSLv23_method;
+>> diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb b/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
+>> index ff6203f..9daea5e 100644
+>> --- a/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
+>> +++ b/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
+>> @@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
+>>  
+>>  SRC_URI = "http://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-${PV}.tar.gz \
+>>             file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch \
+>> -           file://0001-M2Crypto-Error-fix.patch"
+>> +           file://0001-M2Crypto-Error-fix.patch \
+>> +           file://dont_try_build_with_SSLv2_when_it_is_not_available.patch"
+>>  
+>>  SRC_URI[md5sum] = "f93d8462ff7646397a9f77a2fe602d17"
+>>  SRC_URI[sha256sum] = "25b94498505c2d800ee465db0cc1aff097b1615adc3ac042a1c85ceca264fc0a"
+>> @@ -19,6 +20,7 @@ inherit setuptools
+>>  
+>>  SWIG_FEATURES_x86-64 = "-D__x86_64__"
+>>  SWIG_FEATURES ?= ""
+>> +SWIG_FEATURES += "-DOPENSSL_NO_SSL2"
+>>  export SWIG_FEATURES
+>>  
+>>  # Get around a problem with swig, but only if the
+>> -- 
+>> 2.3.5
+>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlbgdlMACgkQN1Ujt2V2gBwuvQCaA5n5PYMxNWLRRxXlrhdN7x9X
-A7gAn3llwakJpRcGja+g4Lib/1m+QvIP
-=3VLy
------END PGP SIGNATURE-----
-
---huG+SbfbdD6eblZQ--
