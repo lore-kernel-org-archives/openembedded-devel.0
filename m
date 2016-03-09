@@ -1,24 +1,24 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B4707002B
+	by mail.openembedded.org (Postfix) with ESMTP id 5DFB26FF23
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Mar 2016 15:10:13 +0000 (UTC)
+	Wed,  9 Mar 2016 15:10:14 +0000 (UTC)
 Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-	by fmsmga104.fm.intel.com with ESMTP; 09 Mar 2016 07:10:14 -0800
+	by fmsmga104.fm.intel.com with ESMTP; 09 Mar 2016 07:10:15 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,311,1455004800"; d="scan'208";a="62869154"
+X-IronPort-AV: E=Sophos;i="5.24,311,1455004800"; d="scan'208";a="62869171"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by fmsmga004.fm.intel.com with ESMTP; 09 Mar 2016 07:10:14 -0800
+	by fmsmga004.fm.intel.com with ESMTP; 09 Mar 2016 07:10:15 -0800
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Mar 2016 17:05:35 +0200
-Message-Id: <daf281c7a39c4afb1b28f231ad7d8b35ec80e0d5.1457535831.git.alexander.kanavin@linux.intel.com>
+Date: Wed,  9 Mar 2016 17:05:36 +0200
+Message-Id: <4d84790d6adcbde09a1a77ab66c90279180c89ce.1457535831.git.alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.7.0
 In-Reply-To: <cover.1457535831.git.alexander.kanavin@linux.intel.com>
 References: <cover.1457535831.git.alexander.kanavin@linux.intel.com>
 In-Reply-To: <cover.1457535831.git.alexander.kanavin@linux.intel.com>
 References: <cover.1457535831.git.alexander.kanavin@linux.intel.com>
-Subject: [PATCH 19/38] networkmanager: fix introspection and vala support
+Subject: [PATCH 20/38] telepathy-glib: fix gobject introspection support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,40 +31,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2016 15:10:13 -0000
+X-List-Received-Date: Wed, 09 Mar 2016 15:10:14 -0000
 
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- .../recipes-connectivity/networkmanager/networkmanager_1.0.10.bb  | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb
-index 34e13cc..831ddf0 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb
-@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
-                     file://docs/api/html/license.html;md5=51d7fb67bde992e58533a8481cee070b \
- "
+diff --git a/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.0.bb b/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.0.bb
+index e6938f1..01c6e37 100644
+--- a/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.0.bb
++++ b/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.0.bb
+@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "ae0002134991217f42e503c43dea7817853afc18863b913744d51ffa02
  
--DEPENDS = "libnl dbus dbus-glib libgudev util-linux libndp libnewt"
-+DEPENDS = "libnl dbus dbus-glib libgudev util-linux libndp libnewt polkit"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=e413d83db6ee8f2c8e6055719096a48e"
  
--inherit gnomebase gettext systemd bluetooth bash-completion
-+inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introspection
+-inherit autotools pkgconfig gettext
++inherit autotools pkgconfig gettext gobject-introspection
  
- SRC_URI = " \
-     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-@@ -35,6 +35,10 @@ EXTRA_OECONF = " \
-     --with-nmtui=yes \
- "
- 
-+do_compile_prepend() {
-+        export GIR_EXTRA_LIBS_PATH="${B}/libnm-util/.libs"
-+}
-+
- PACKAGECONFIG ??= "nss ifupdown netconfig dhclient dnsmasq \
-     ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES','bluetooth','${BLUEZ}','',d)} \
+ FILES_${PN} += "${datadir}/telepathy \
+                 ${datadir}/dbus-1"
 -- 
 2.7.0
 
