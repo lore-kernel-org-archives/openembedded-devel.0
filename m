@@ -1,51 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 79BF8605FE
+Return-Path: <sandro.stiller@elfin.de>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 3EC956E680
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Mar 2016 12:06:41 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id l68so67845039wml.1
+	Wed,  9 Mar 2016 12:21:10 +0000 (UTC)
+Received: by mail-wm0-f49.google.com with SMTP id l68so175515345wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Mar 2016 04:06:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=Tl2EBVnbPRBDWWf39WufnhwwakO+8+QWrHcDh9eo8Hs=;
-	b=F2n7IBhLho7UZm0EwthUMCenDBcl5DRwjh1a0MlmZSfOpttgX+CWm/LB5yuJNUNezc
-	pJNkGUevCLiRicDCJvn8SKztlBGMcG2mjDPAQQ+VtPMK79a5AHWTOjcR91zoCvFQqLsA
-	er9GhT6baNlqyI2Ar9vDUQFMCL9QgQIUXQUnHnrbzfh02p60EHDp4nDGHsR8jBtRG7f7
-	z3eoSZp8o4glsy0TvypjDCcqRJIiLhThI8jT4w8+4Bf6oqWt3qOCTxl3EyAxSteiDJ6f
-	IES3DtaGmuTifgJi5g+dmrwBCkqVMvsY1Yb4c4tJqK2MGpuemTZNGf8wPZHCYYV3ds34
-	+gsw==
+	Wed, 09 Mar 2016 04:21:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=elfin-de.20150623.gappssmtp.com; s=20150623;
+	h=to:from:subject:message-id:date:user-agent:mime-version
+	:content-transfer-encoding;
+	bh=oscv/T8AbiPl3DHk27cJpN+/gTd7f/p//9qHKnVn1bc=;
+	b=1Xxe3wAS3wYN/1sd+J2O3Dgj1V54jpKJtY8LsxEKwE/yu4J6rGLLkLFLlyPE71YSqy
+	ORAoko7RE4Ao11bnrhQLaXkCgKaMFsX8dkt8CTCdiSlMeMoUbb5BRSJmBdVGKOQbwz4t
+	P3eTn6Vh3d9RkjMwMqyL6yvFBDJzwAncuKwyekcmHahBg9VC+kerPFsjGMBmdd6Vpldz
+	IV/WPi9G7bYaWbcnCPy5EaN4IKHdHtRvD+xWkDgqAf+iX5JugcEyE5A7kw+PIU0PQfhO
+	2wtsvVZLKcsh8g5c5A50yzgxDyh1Z3l9Of6yq2BtW7PvVpKv0fDQ2AgyzitziOcxJvll
+	kDwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=Tl2EBVnbPRBDWWf39WufnhwwakO+8+QWrHcDh9eo8Hs=;
-	b=XSC59O3VJSglGOGX06fIGvd73cvHV0/TuEsvvdZ+bz2H4zeE+sGGwCP8O0vug2BS+7
-	zqb7IQ+KQ+vKJkDm20YSO/ujCFw0BSHVRQBQBFP73FPP8V0H2yA61abRuKbLYyyWHi/z
-	A2YkNtOUccIOayOSphrUYy//kx+DIuBKtjmE2LMOmIrSzyHwxff2wWrHOTG2NpPEY2Tl
-	vlntTTnQrHSP/YhAdfcYwUZFjPVzUIdMyfEqj4XQ/ZaOAOEVuTVBSB2KwvFJ4w8vANHf
-	5xyEBhk/sWORaEVzmVdZLmPi+i3CmlV+sXR2gWYNhjrGmdVzvbR8QAab/P7Ctd1zh0ku
-	m1Aw==
-X-Gm-Message-State: AD7BkJLqlZu1NYNqqRvEcdqSsnrQtwoOsTxQraB+c4MiyAaVbzGvxd2beY5O6RAO3iAMiQ==
-X-Received: by 10.28.225.137 with SMTP id y131mr383188wmg.102.1457525202196;
-	Wed, 09 Mar 2016 04:06:42 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id m6sm7600402wje.21.2016.03.09.04.06.41
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 Mar 2016 04:06:41 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 9 Mar 2016 13:09:34 +0100
-To: "Chang, Rebecca Swee Fun" <rebecca.swee.fun.chang@intel.com>
-Message-ID: <20160309120934.GA2542@jama>
-References: <50B33AC5ED75F74F991980326F1C438D191C80FE@PGSMSX103.gar.corp.intel.com>
+	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+	:mime-version:content-transfer-encoding;
+	bh=oscv/T8AbiPl3DHk27cJpN+/gTd7f/p//9qHKnVn1bc=;
+	b=jdXkOamAPj2OkuA4v0G1FGIKZvu68A0E7eO8FF0S2L7e5kHADaLfeFYr7gmTy6q7v7
+	uj7SzsABDiubeuW4I8wtmnRRp771KbPFiaauINu1BPxAD1p312q+Vb0ErNO5VrOxIP2N
+	QIpN3wJKnQZIY8SwUOKyVq8RtGsr0PjSckJUb1ANoJUASAguoK6O4fnGAtKLpPXPYH0P
+	3IazGtcsWBlquew7zpL7S5AsqPR1N7gHGf6WdmeX0BuS1mXbvx37qBmrDuR+c317ikxV
+	RzAMKBp8ReUD2VRckF9+S3lGZJzzIK63d9nliij5OHtTVZa8tJWPg0C5zlnw+S1jiV2K
+	GgiA==
+X-Gm-Message-State: AD7BkJIaEysmb8DutR9DqpSsalUckkYwhGuQ4yorY0xpuwzMIdRnAZGjPn5H+blR557vvQ==
+X-Received: by 10.28.9.71 with SMTP id 68mr24837019wmj.33.1457526070737;
+	Wed, 09 Mar 2016 04:21:10 -0800 (PST)
+Received: from [192.168.2.147] (b2b-94-79-174-114.unitymedia.biz.
+	[94.79.174.114]) by smtp.googlemail.com with ESMTPSA id
+	ks5sm7701641wjb.13.2016.03.09.04.21.09
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 09 Mar 2016 04:21:10 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org
+From: Sandro Stiller <sandro.stiller@elfin.de>
+Message-ID: <56E01535.6030509@elfin.de>
+Date: Wed, 9 Mar 2016 13:21:09 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-In-Reply-To: <50B33AC5ED75F74F991980326F1C438D191C80FE@PGSMSX103.gar.corp.intel.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] [jethro] Additional version supported in stable branch
+Subject: systemd service not enabled when adding simple recipe to image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,57 +57,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2016 12:06:42 -0000
-X-Groupsio-MsgNum: 60384
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="azLHFNyN32YCQGCU"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 09 Mar 2016 12:21:12 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---azLHFNyN32YCQGCU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello,
+I have a problem enabling a simple systemd service:
+If I install my package using the .ipk file, everything works fine
+(systemd service ist enabled after install), but if I create an image
+containing this package, the service is disabled.
+It can be enabled by calling "systemctl enable <mytestscript.service>".
+All files of the package are installed correctly (only the systemd
+symlink is missing). I have other packages with working systemd, the
+problem exists only in the simple case with a single shell script.
 
-On Wed, Mar 09, 2016 at 03:22:47AM +0000, Chang, Rebecca Swee Fun wrote:
-> Dear maintainers,
->=20
-> I would like to collect inputs from all of you whether is it possible to =
-have 2 versions of libvpx supported in Jethro branch.
->=20
-> I have recently submitted libvpx v1.5 upgrade to master branch. I do unde=
-rstand that stable branch is mainly used for security updates/fixes.
-> So this is why I'm proposing to support 2 versions instead of upgrading i=
-n Jethro.
->=20
-> The reason behind is, we are enabling video decode/encode feature to cust=
-omers but our target BSP components are still based on Jethro.
+I use Angstrom v2015.06 / Yocto 1.8
 
-Then backport the newer version on your layer.
+Can anybody tell me what I'm doing wrong?
 
-> Please let me know your concern whether this is feasible. Thank you very =
-much.
+Thank you very much,
 
-We also backport newer versions for various components, we even have
-separate layers for backports from various Yocto releases (so that whole
-layer can be dropped when upgrading to newer release without functional
-changes in backported recipes).
+Sandro
 
-Doing it in upstream layers would cause unnecessary changes to everybody
-else.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+My files:
+###################### mytestscript.bb ########################
+SUMMARY = "systemd test script"
+DESCRIPTION = "This script is a quick demo for a not initialized systemd 
+service."
+SECTION = "console/network"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = 
+"file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
---azLHFNyN32YCQGCU
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+inherit systemd
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+SRC_URI = "file://mytestscript.service \
+            file://mytestscript.sh \
+           "
 
-iEYEARECAAYFAlbgEncACgkQN1Ujt2V2gBzgLACfd58zbbu7aGXIOulRFa+4Pulv
-f70AoIYdmypxFHxfh4kvl7GKEvg8Udmb
-=ui/W
------END PGP SIGNATURE-----
+do_compile() {
+}
 
---azLHFNyN32YCQGCU--
+do_install () {
+   install -d ${D}${bindir}
+   install -m 0755 ${WORKDIR}/mytestscript.sh ${D}${bindir}
+   install -d ${D}${systemd_unitdir}/system
+   install -m 0644 ${WORKDIR}/mytestscript.service 
+${D}${systemd_unitdir}/system
+   sed -i -e 's,@BINDIR@,${bindir},g' \
+		${D}${systemd_unitdir}/system/mytestscript.service
+}
+
+NATIVE_SYSTEMD_SUPPORT = "1"
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE_${PN} = "mytestscript.service"
+SYSTEMD_AUTO_ENABLE = "enable"
+
+FILES_${PN} += "${systemd_unitdir}/system/mytestscript.service"
+
+###################### files/mytestscript.sh #########################
+#!/bin/sh
+echo "Hello from testscript"
+
+###################### files/mytestscript.service ######################
+[Unit]
+Description=A test script
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=@BINDIR@/mytestscript.sh
+
+[Install]
+WantedBy=multi-user.target
+
