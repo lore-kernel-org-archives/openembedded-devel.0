@@ -1,24 +1,24 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 36E0C6FF23
+	by mail.openembedded.org (Postfix) with ESMTP id 423A46FF97
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Mar 2016 15:09:58 +0000 (UTC)
+	Wed,  9 Mar 2016 15:09:59 +0000 (UTC)
 Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-	by fmsmga104.fm.intel.com with ESMTP; 09 Mar 2016 07:09:59 -0800
+	by fmsmga104.fm.intel.com with ESMTP; 09 Mar 2016 07:10:00 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,311,1455004800"; d="scan'208";a="62868859"
+X-IronPort-AV: E=Sophos;i="5.24,311,1455004800"; d="scan'208";a="62868864"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by fmsmga004.fm.intel.com with ESMTP; 09 Mar 2016 07:09:59 -0800
+	by fmsmga004.fm.intel.com with ESMTP; 09 Mar 2016 07:10:00 -0800
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Mar 2016 17:05:21 +0200
-Message-Id: <449d0421eaf9b47d1981a34f68dc70e1e9b08170.1457535831.git.alexander.kanavin@linux.intel.com>
+Date: Wed,  9 Mar 2016 17:05:22 +0200
+Message-Id: <c4889a5303ec51d55abdfb7d0e2f2e81a3b31139.1457535831.git.alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.7.0
 In-Reply-To: <cover.1457535831.git.alexander.kanavin@linux.intel.com>
 References: <cover.1457535831.git.alexander.kanavin@linux.intel.com>
 In-Reply-To: <cover.1457535831.git.alexander.kanavin@linux.intel.com>
 References: <cover.1457535831.git.alexander.kanavin@linux.intel.com>
-Subject: [PATCH 05/38] gnumeric: fix gobject introspection support
+Subject: [PATCH 06/38] libgsf: fix gobject introspection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,41 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2016 15:09:58 -0000
+X-List-Received-Date: Wed, 09 Mar 2016 15:09:59 -0000
 
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- ...n-drop-introspection-macros-replace-them-.patch | 84 ++++++++++++++++++++++
- .../recipes-gnome/gnumeric/gnumeric_1.12.0.bb      |  5 +-
- 2 files changed, 87 insertions(+), 2 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/gnumeric/gnumeric/0001-configure.in-drop-introspection-macros-replace-them-.patch
+ ...c-drop-a-copy-paste-of-introspection.m4-m.patch | 103 +++++++++++++++++++++
+ meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb  |   4 +-
+ 2 files changed, 106 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
 
-diff --git a/meta-gnome/recipes-gnome/gnumeric/gnumeric/0001-configure.in-drop-introspection-macros-replace-them-.patch b/meta-gnome/recipes-gnome/gnumeric/gnumeric/0001-configure.in-drop-introspection-macros-replace-them-.patch
+diff --git a/meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch b/meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
 new file mode 100644
-index 0000000..914d2cc
+index 0000000..bc0090e
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnumeric/gnumeric/0001-configure.in-drop-introspection-macros-replace-them-.patch
-@@ -0,0 +1,84 @@
-+From de5f0a535d6ea1932d2c7de53bd33510c8682ee7 Mon Sep 17 00:00:00 2001
++++ b/meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
+@@ -0,0 +1,103 @@
++From 16d2c2e74350fda5505982fb150e72af7aee7454 Mon Sep 17 00:00:00 2001
 +From: Alexander Kanavin <alex.kanavin@gmail.com>
-+Date: Mon, 22 Feb 2016 16:34:03 +0200
-+Subject: [PATCH] configure.in: drop introspection macros, replace them with a
-+ standard one
++Date: Fri, 19 Feb 2016 16:23:56 +0200
++Subject: [PATCH] configure.ac: drop a copy-paste of introspection.m4 macros
 +
 +Upstream-Status: Pending
 +Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
 +---
-+ configure.in | 57 +--------------------------------------------------------
-+ 1 file changed, 1 insertion(+), 56 deletions(-)
++ configure.ac | 78 +-----------------------------------------------------------
++ 1 file changed, 1 insertion(+), 77 deletions(-)
 +
-+diff --git a/configure.in b/configure.in
-+index 8e1aa37..3086503 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -934,63 +934,8 @@ AC_SUBST(MONO_CFLAGS)
-+ AC_SUBST(MONO_LIBS)
-+ ])
++diff --git a/configure.ac b/configure.ac
++index 54f7663..3038535 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -77,83 +77,7 @@ libgsf_reqs="
++ "
 + 
++ PKG_CHECK_MODULES(LIBGSF, $libgsf_reqs)
 +-# GObject Introspection
 +-GIR_REQ=1.0.0
 +-AC_ARG_ENABLE(introspection,
@@ -95,24 +94,43 @@ index 0000000..914d2cc
 +-[	
 +-    AC_MSG_ERROR([invalid argument passed to --enable-introspection, should be one of @<:@no/auto/yes@:>@])
 +-])
-++GOBJECT_INTROSPECTION_CHECK([1.46.0])
-+ 
++-
 +-AC_MSG_RESULT([$found_introspection])
 +-
-+-INTROSPECTION_SCANNER=
-+-INTROSPECTION_COMPILER=
-+-INTROSPECTION_GENERATE=
-+-INTROSPECTION_GIRDIR=
-+-INTROSPECTION_TYPELIBDIR=
 +-if test "x$found_introspection" = "xyes"; then
++-   dnl You can override INTROSPECTION_GIRDIR and INTROSPECTION_TYPELIBDIR
++-   dnl if you wish.  If you override the latter, you might want to set
++-   dnl GI_TYPELIB_PATH to include the same directory.  For example
++-   dnl
++-   dnl GI_TYPELIB_PATH=$PREFIX/lib64/girepository-1.0
++-   dnl INTROSPECTION_TYPELIBDIR=$GI_TYPELIB_PATH
++-   dnl INTROSPECTION_GIRDIR=$PREFIX/share/gir-1.0
++-   dnl
++-   dnl Note, that unlike binaries produced with libgsf, nothing tells
++-   dnl python where to find libgsf, so you might also need to set
++-   dnl LD_LIBRARY_PATH.
++-
 +-   INTROSPECTION_SCANNER=`$PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0`
 +-   INTROSPECTION_COMPILER=`$PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0`
 +-   INTROSPECTION_GENERATE=`$PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0`
-+-   INTROSPECTION_GIRDIR=`$PKG_CONFIG --variable=girdir gobject-introspection-1.0`
-+-   INTROSPECTION_TYPELIBDIR="$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
++-   if test "x$INTROSPECTION_GIRDIR" = x; then
++-     INTROSPECTION_GIRDIR=`$PKG_CONFIG --variable=girdir gobject-introspection-1.0`
++-   fi
++-   if test "x$INTROSPECTION_TYPELIBDIR" = x; then
++-     INTROSPECTION_TYPELIBDIR="$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
++-   fi
 +-   INTROSPECTION_CFLAGS=`$PKG_CONFIG --cflags gobject-introspection-1.0`
 +-   INTROSPECTION_LIBS=`$PKG_CONFIG --libs gobject-introspection-1.0`
 +-   INTROSPECTION_MAKEFILE=`$PKG_CONFIG --variable=datadir gobject-introspection-1.0`/gobject-introspection-1.0/Makefile.introspection
++-else
++-   INTROSPECTION_SCANNER=
++-   INTROSPECTION_COMPILER=
++-   INTROSPECTION_GENERATE=
++-   INTROSPECTION_GIRDIR=
++-   INTROSPECTION_TYPELIBDIR=
++-   INTROSPECTION_CFLAGS=
++-   INTROSPECTION_LIBS=
++-   INTROSPECTION_MAKEFILE=
 +-fi
 +-AC_SUBST(INTROSPECTION_SCANNER)
 +-AC_SUBST(INTROSPECTION_COMPILER)
@@ -124,29 +142,28 @@ index 0000000..914d2cc
 +-AC_SUBST(INTROSPECTION_MAKEFILE)
 +-
 +-AM_CONDITIONAL(HAVE_INTROSPECTION, test "x$found_introspection" = "xyes")
+++GOBJECT_INTROSPECTION_CHECK([1.46.0])
 + dnl we need to change the install directories for distcheck
 + AC_ARG_WITH([gir-dir],
 + 	AS_HELP_STRING(
 +-- 
 +2.7.0
 +
-diff --git a/meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb b/meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb
-index 71f99ca..3d3118a 100644
---- a/meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb
-+++ b/meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb
-@@ -7,9 +7,10 @@ SUMMARY = "Gnumeric spreadsheet for GNOME"
+diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
+index d7bbd3b..be79ec1 100644
+--- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
++++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
+@@ -7,7 +7,9 @@ SECTION = "libs"
  
- GNOME_COMPRESS_TYPE = "xz"
+ DEPENDS= "libxml2 bzip2 glib-2.0 zlib"
  
--inherit gnome
-+inherit gnome pythonnative gobject-introspection
+-inherit autotools pkgconfig gnome gconf
++inherit autotools pkgconfig gnome gconf gobject-introspection
++
++SRC_URI += "file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch"
  
--SRC_URI += "file://do-not-use-srcdir.patch"
-+SRC_URI += "file://do-not-use-srcdir.patch \
-+            file://0001-configure.in-drop-introspection-macros-replace-them-.patch"
- 
- SRC_URI[archive.md5sum] = "3fd87cca95334b5d8ac922989670fe27"
- SRC_URI[archive.sha256sum] = "037b53d909e5d1454b2afda8c4fb1e7838e260343e36d4e36245f4a5d0e04111"
+ SRC_URI[archive.md5sum] = "3056b94bb3281dbc8311371bfc23cf72"
+ SRC_URI[archive.sha256sum] = "4d8bca33424eb711acdb6a060cb488b132063d699c4fa201db24c2c89c62529c"
 -- 
 2.7.0
 
