@@ -1,47 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 15E6B6FFE2
+Return-Path: <Zhixiong.Chi@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 417876FFE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Mar 2016 19:47:56 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id p65so830833wmp.1
+	Thu, 10 Mar 2016 02:56:36 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u2A2uan5013209
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Mar 2016 11:47:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:mime-version:content-disposition
-	:user-agent; bh=tfMr4HLX4XhhOP10Crygnf+MWZqRdMhX+w4VAko+FUk=;
-	b=IoObrLjfRt02kUjAqEJYYQBJUj1gFPuzFwCjukR+OP1pp7On9iD4/b6CxdTzsFI8nM
-	mb6oAjKbF9eCs7rkXLK0Vye71APYkYai7eCerWtU3OQVzBAKx2bRLAu7M2LTow0gOURL
-	N3pBL8u2fAQWPGOpZZ8vIVMXXggsDzDwToz/S1YuvOjbNmL4ZNX4JWVfVewIaTMPjRFq
-	d8hJvXFMpA76+HwavJ8qUr2jzIUTpRRRONHFCiuv0K1vBc8bZwcv/9+aVeDszEg1UCsK
-	DcUrjcvoBkMnXTIYhJ6VH9MePhIdJOsFSmZx50iQ7kbccj8xzUz8VBf2HUzFTMJAQgU4
-	SDSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:mime-version
-	:content-disposition:user-agent;
-	bh=tfMr4HLX4XhhOP10Crygnf+MWZqRdMhX+w4VAko+FUk=;
-	b=ehueVQpppSq16BfBUezyqEfX63mAogVOBR2PC7gywVG0YTycqUtUBv0oOqnYE5Q/Ui
-	/V7jEUOeagPNXuORoz6VBtiG2Vd9y+3blhNlBaacuh67gwo5oI6ByAOuqWMUEfC6QDVn
-	v0ljmabdoUHPD1hikGlf2Mq48+oz25phgX3yOTYJUejB5pnMLuBATo62JirxnyljAowD
-	xWdA8lLcAKrvh8e642cOnpnHQHq/tYeyf1rtbAMIKPJ4eLeAhKlKFTpmuw9Cx9pqDT7c
-	G729DblQoup/jKI6aWIueNT4Hv2+3XKTzhm+qXsC6XJWOe4CpVZjsQjjlTLTGznHHzJR
-	rm9w==
-X-Gm-Message-State: AD7BkJK4b8yALe0uR7Ty+uNg7ye447eZC2l7ZJfYWydYhuQMBtV7zex+ZF4rskIF+eqstA==
-X-Received: by 10.194.71.135 with SMTP id v7mr37164141wju.135.1457552877141;
-	Wed, 09 Mar 2016 11:47:57 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id gk4sm163712wjd.7.2016.03.09.11.47.56
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 Mar 2016 11:47:56 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 9 Mar 2016 20:50:49 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160309195049.GJ2542@jama>
+	Wed, 9 Mar 2016 18:56:36 -0800 (PST)
+Received: from pek-zchi-d1.corp.ad.wrs.com (128.224.162.233) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 9 Mar 2016 18:56:35 -0800
+From: Zhixiong Chi <Zhixiong.Chi@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 10 Mar 2016 10:57:00 +0800
+Message-ID: <1457578620-23372-1-git-send-email-Zhixiong.Chi@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: akuster@mvista.com
-Subject: python-cryptography failing to build since openssl upgrade
+Subject: [meta-oe][PATCH] postgresql: Security Advisory-postgresql-CVE-2016-0773
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,42 +31,264 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Mar 2016 19:47:59 -0000
-X-Groupsio-MsgNum: 60434
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="wIc/V6YLA2QdyfT4"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Mar 2016 02:56:38 -0000
+Content-Type: text/plain
 
---wIc/V6YLA2QdyfT4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+add CVE-2016-0773 patch for avoiding attackers to cause a denial
+of service (infinite loop or buffer overflow and crash)
+via a large Unicode character range in a regular expression.
+Patch comes from:
+http://git.postgresql.org/gitweb/?p=postgresql.git;a=summary
+commit 3bb3f42f3749d40b8d4de65871e8d828b18d4a45
 
-Do we really need to use that version script for openssl?
+Signed-off-by: Zhixiong Chi <Zhixiong.Chi@windriver.com>
+---
+ .../files/postgresql-CVE-2016-0773.patch           | 222 +++++++++++++++++++++
+ meta-oe/recipes-support/postgresql/postgresql.inc  |   1 +
+ 2 files changed, 223 insertions(+)
+ create mode 100644 meta-oe/recipes-support/postgresql/files/postgresql-CVE-2016-0773.patch
 
-Here is another failure:
-http://errors.yoctoproject.org/Errors/Details/54984/
+diff --git a/meta-oe/recipes-support/postgresql/files/postgresql-CVE-2016-0773.patch b/meta-oe/recipes-support/postgresql/files/postgresql-CVE-2016-0773.patch
+new file mode 100644
+index 0000000..0fc9082
+--- /dev/null
++++ b/meta-oe/recipes-support/postgresql/files/postgresql-CVE-2016-0773.patch
+@@ -0,0 +1,222 @@
++From 3bb3f42f3749d40b8d4de65871e8d828b18d4a45 Mon Sep 17 00:00:00 2001
++From: Tom Lane <tgl@sss.pgh.pa.us>
++Date: Mon, 8 Feb 2016 10:25:40 -0500
++Subject: [PATCH] Fix some regex issues with out-of-range characters and large
++ char ranges.
++
++Previously, our regex code defined CHR_MAX as 0xfffffffe, which is a
++bad choice because it is outside the range of type "celt" (int32).
++Characters approaching that limit could lead to infinite loops in logic
++such as "for (c = a; c <= b; c++)" where c is of type celt but the
++range bounds are chr.  Such loops will work safely only if CHR_MAX+1
++is representable in celt, since c must advance to beyond b before the
++loop will exit.
++
++Fortunately, there seems no reason not to restrict CHR_MAX to 0x7ffffffe.
++It's highly unlikely that Unicode will ever assign codes that high, and
++none of our other backend encodings need characters beyond that either.
++
++In addition to modifying the macro, we have to explicitly enforce character
++range restrictions on the values of \u, \U, and \x escape sequences, else
++the limit is trivially bypassed.
++
++Also, the code for expanding case-independent character ranges in bracket
++expressions had a potential integer overflow in its calculation of the
++number of characters it could generate, which could lead to allocating too
++small a character vector and then overwriting memory.  An attacker with the
++ability to supply arbitrary regex patterns could easily cause transient DOS
++via server crashes, and the possibility for privilege escalation has not
++been ruled out.
++
++Quite aside from the integer-overflow problem, the range expansion code was
++unnecessarily inefficient in that it always produced a result consisting of
++individual characters, abandoning the knowledge that we had a range to
++start with.  If the input range is large, this requires excessive memory.
++Change it so that the original range is reported as-is, and then we add on
++any case-equivalent characters that are outside that range.  With this
++approach, we can bound the number of individual characters allowed without
++sacrificing much.  This patch allows at most 100000 individual characters,
++which I believe to be more than the number of case pairs existing in
++Unicode, so that the restriction will never be hit in practice.
++
++It's still possible for range() to take awhile given a large character code
++range, so also add statement-cancel detection to its loop.  The downstream
++function dovec() also lacked cancel detection, and could take a long time
++given a large output from range().
++
++Per fuzz testing by Greg Stark.  Back-patch to all supported branches.
++
++Security: CVE-2016-0773
++
++Upstream-Status: Backport
++
++Signed-off-by: Tom Lane <tgl@sss.pgh.pa.us>
++Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
++
++Index: postgresql-9.4.5/src/backend/regex/regc_lex.c
++===================================================================
++--- postgresql-9.4.5.orig/src/backend/regex/regc_lex.c	2015-10-06 03:12:06.000000000 +0800
+++++ postgresql-9.4.5/src/backend/regex/regc_lex.c	2016-03-10 10:29:57.045784317 +0800
++@@ -792,13 +792,13 @@
++ 			break;
++ 		case CHR('u'):
++ 			c = lexdigits(v, 16, 4, 4);
++-			if (ISERR())
+++			if (ISERR() || c < CHR_MIN || c > CHR_MAX)
++ 				FAILW(REG_EESCAPE);
++ 			RETV(PLAIN, c);
++ 			break;
++ 		case CHR('U'):
++ 			c = lexdigits(v, 16, 8, 8);
++-			if (ISERR())
+++			if (ISERR() || c < CHR_MIN || c > CHR_MAX)
++ 				FAILW(REG_EESCAPE);
++ 			RETV(PLAIN, c);
++ 			break;
++@@ -816,7 +816,7 @@
++ 		case CHR('x'):
++ 			NOTE(REG_UUNPORT);
++ 			c = lexdigits(v, 16, 1, 255);		/* REs >255 long outside spec */
++-			if (ISERR())
+++			if (ISERR() || c < CHR_MIN || c > CHR_MAX)
++ 				FAILW(REG_EESCAPE);
++ 			RETV(PLAIN, c);
++ 			break;
++@@ -872,6 +872,9 @@
++ 
++ /*
++  * lexdigits - slurp up digits and return chr value
+++ *
+++ * This does not account for overflow; callers should range-check the result
+++ * if maxlen is large enough to make that possible.
++  */
++ static chr						/* chr value; errors signalled via ERR */
++ lexdigits(struct vars * v,
++Index: postgresql-9.4.5/src/backend/regex/regc_locale.c
++===================================================================
++--- postgresql-9.4.5.orig/src/backend/regex/regc_locale.c	2015-10-06 03:12:06.000000000 +0800
+++++ postgresql-9.4.5/src/backend/regex/regc_locale.c	2016-03-10 10:34:28.757781726 +0800
++@@ -408,8 +408,7 @@
++ 	int			nchrs;
++ 	struct cvec *cv;
++ 	celt		c,
++-				lc,
++-				uc;
+++				cc;
++ 
++ 	if (a != b && !before(a, b))
++ 	{
++@@ -427,24 +426,48 @@
++ 
++ 	/*
++ 	 * When case-independent, it's hard to decide when cvec ranges are usable,
++-	 * so for now at least, we won't try.  We allocate enough space for two
++-	 * case variants plus a little extra for the two title case variants.
+++	 * so for now at least, we won't try.  We use a range for the originally
+++	 * specified chrs and then add on any case-equivalents that are outside
+++	 * that range as individual chrs.
+++	 *
+++	 * To ensure sane behavior if someone specifies a very large range, limit
+++	 * the allocation size to 100000 chrs (arbitrary) and check for overrun
+++	 * inside the loop below.
++ 	 */
++ 
++-	nchrs = (b - a + 1) * 2 + 4;
++-
++-	cv = getcvec(v, nchrs, 0);
+++	cv = getcvec(v, nchrs, 1);
++ 	NOERRN();
+++	addrange(cv, a, b);
++ 
++ 	for (c = a; c <= b; c++)
++ 	{
++-		addchr(cv, c);
++-		lc = pg_wc_tolower((chr) c);
++-		if (c != lc)
++-			addchr(cv, lc);
++-		uc = pg_wc_toupper((chr) c);
++-		if (c != uc)
++-			addchr(cv, uc);
+++		cc = pg_wc_tolower((chr) c);
+++		if (cc != c &&
+++			(before(cc, a) || before(b, cc)))
+++		{
+++			if (cv->nchrs >= cv->chrspace)
+++			{
+++				ERR(REG_ETOOBIG);
+++				return NULL;
+++			}
+++			addchr(cv, cc);
+++		}
+++		cc = pg_wc_toupper((chr) c);
+++		if (cc != c &&
+++			(before(cc, a) || before(b, cc)))
+++		{
+++			if (cv->nchrs >= cv->chrspace)
+++			{
+++				ERR(REG_ETOOBIG);
+++				return NULL;
+++			}
+++			addchr(cv, cc);
+++		}
+++		if (CANCEL_REQUESTED(v->re))
+++		{
+++			ERR(REG_CANCEL);
+++			return NULL;
+++		}
++ 	}
++ 
++ 	return cv;
++Index: postgresql-9.4.5/src/backend/regex/regcomp.c
++===================================================================
++--- postgresql-9.4.5.orig/src/backend/regex/regcomp.c	2015-10-06 03:12:06.000000000 +0800
+++++ postgresql-9.4.5/src/backend/regex/regcomp.c	2016-03-10 10:35:25.397781185 +0800
++@@ -1569,6 +1569,7 @@
++ 	{
++ 		ch = *p;
++ 		newarc(v->nfa, PLAIN, subcolor(v->cm, ch), lp, rp);
+++		NOERR();
++ 	}
++ 
++ 	/* and the ranges */
++@@ -1578,6 +1579,7 @@
++ 		to = *(p + 1);
++ 		if (from <= to)
++ 			subrange(v, from, to, lp, rp);
+++		NOERR();
++ 	}
++ }
++ 
++Index: postgresql-9.4.5/src/include/regex/regcustom.h
++===================================================================
++--- postgresql-9.4.5.orig/src/include/regex/regcustom.h	2015-10-06 03:12:06.000000000 +0800
+++++ postgresql-9.4.5/src/include/regex/regcustom.h	2016-03-10 10:37:09.989780188 +0800
++@@ -65,7 +65,8 @@
++ #define DIGITVAL(c) ((c)-'0')	/* turn chr digit into its value */
++ #define CHRBITS 32				/* bits in a chr; must not use sizeof */
++ #define CHR_MIN 0x00000000		/* smallest and largest chr; the value */
++-#define CHR_MAX 0xfffffffe		/* CHR_MAX-CHR_MIN+1 should fit in uchr */
+++#define CHR_MAX 0x7ffffffe		/* CHR_MAX-CHR_MIN+1 must fit in an int, and
+++								 * CHR_MAX+1 must fit in both chr and celt */
++ 
++ /* functions operating on chr */
++ #define iscalnum(x) pg_wc_isalnum(x)
++Index: postgresql-9.4.5/src/test/regress/expected/regex.out
++===================================================================
++--- postgresql-9.4.5.orig/src/test/regress/expected/regex.out	2015-10-06 03:12:06.000000000 +0800
+++++ postgresql-9.4.5/src/test/regress/expected/regex.out	2016-03-10 10:38:28.821779436 +0800
++@@ -222,3 +222,5 @@
++  t
++ (1 row)
++ 
+++select 'a' ~ '\x7fffffff';  -- invalid chr code
+++ERROR:  invalid regular expression: invalid escape \ sequence
++Index: postgresql-9.4.5/src/test/regress/sql/regex.sql
++===================================================================
++--- postgresql-9.4.5.orig/src/test/regress/sql/regex.sql	2015-10-06 03:12:06.000000000 +0800
+++++ postgresql-9.4.5/src/test/regress/sql/regex.sql	2016-03-10 10:38:57.845779159 +0800
++@@ -57,3 +57,4 @@
++ select 'a' ~ '.. ()|\1';
++ select 'a' ~ '()*\1';
++ select 'a' ~ '()+\1';
+++select 'a' ~ '\x7fffffff';  -- invalid chr code
+diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
+index 06e601f..806c638 100644
+--- a/meta-oe/recipes-support/postgresql/postgresql.inc
++++ b/meta-oe/recipes-support/postgresql/postgresql.inc
+@@ -32,6 +32,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
+     file://postgresql.service \
+     file://0001-Use-pkg-config-for-libxml2-detection.patch \
+     file://postgresql-CVE-2016-0766.patch \
++    file://postgresql-CVE-2016-0773.patch \
+ "
+ 
+ LEAD_SONAME = "libpq.so"
+-- 
+1.9.1
 
-in our local builds we use couple prebuild binaries from 3rdparty, which
-now aren't compatible with openssl ABI (possibly because of
-version-script update:
-http://lists.openembedded.org/pipermail/openembedded-core/2016-March/118433=
-=2Ehtml
-)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---wIc/V6YLA2QdyfT4
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlbgfpgACgkQN1Ujt2V2gBw5AACcCzySDP/q0dCd/8YA/Yh9F+hx
-TT8An0fqVEHtN03fufnrOYzh//jGhtUI
-=OhNE
------END PGP SIGNATURE-----
-
---wIc/V6YLA2QdyfT4--
