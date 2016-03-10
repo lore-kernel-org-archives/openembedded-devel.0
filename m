@@ -1,29 +1,32 @@
-Return-Path: <jaap.dejong@nedap.com>
-X-Greylist: delayed 907 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 10 Mar 2016 09:30:27 UTC
-Received: from smtp.nedap.com (smtp4.nedap.com [213.160.213.85])
-	by mail.openembedded.org (Postfix) with ESMTP id A629D601A4
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id A7EC46FFC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2016 09:30:27 +0000 (UTC)
-Received: from NVS0468.nedap.local (10.1.8.59) by NVS0468.nedap.local
-	(10.1.8.59) with Microsoft SMTP Server (TLS) id 15.0.1044.25;
-	Thu, 10 Mar 2016 10:15:18 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by RelayNVS0468.nedap.local
-	(10.1.8.59) with Microsoft SMTP Server id 15.0.1044.25 via Frontend
-	Transport; Thu, 10 Mar 2016 10:15:18 +0100
-X-TM-IMSS-Message-ID: <e3640441002dbd63@nedap.com>
-Received: from [10.2.16.77] ([10.2.16.77]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id e3640441002dbd63 ;
-	Thu, 10 Mar 2016 10:15:21 +0100
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-From: Jaap de Jong <jaap.dejong@nedap.com>
-Message-ID: <56E13B20.8010902@nedap.com>
-Date: Thu, 10 Mar 2016 10:15:12 +0100
+	Thu, 10 Mar 2016 09:37:11 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 3E23368A01C; Thu, 10 Mar 2016 09:37:11 +0000 (GMT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: *
+X-Spam-Status: No, score=1.7 required=5.0 tests=ALL_TRUSTED,BAYES_20,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id E0C6168A019;
+	Thu, 10 Mar 2016 09:37:10 +0000 (GMT)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id 9D5B06740554;
+	Thu, 10 Mar 2016 10:37:10 +0100 (CET)
+To: openembedded-devel@lists.openembedded.org
+References: <56E13B20.8010902@nedap.com>
+From: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <56E14046.8090203@mlbassoc.com>
+Date: Thu, 10 Mar 2016 10:37:10 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
 	Thunderbird/38.5.1
 MIME-Version: 1.0
-Subject: Updating configuration files, how to
+In-Reply-To: <56E13B20.8010902@nedap.com>
+Subject: Re: Updating configuration files, how to
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,24 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2016 09:30:29 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Thu, 10 Mar 2016 09:37:11 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi All,
+On 2016-03-10 10:15, Jaap de Jong wrote:
+> Hi All,
+>
+> I am wondering what the best approach is for creating 'standard' packages with updated configuration files.
+> As an example: I want to have a package with an updated /etc/network/interfaces file to reflect my systems hardware.
+> Should I create a init-ifupdown_1.0.bbappend recipe with the updated file?
+> What other options do I have?
+> What are you guys using for this?
+> And how about the package name in such a case. Append something to its name?
 
-I am wondering what the best approach is for creating 'standard' 
-packages with updated configuration files.
-As an example: I want to have a package with an updated 
-/etc/network/interfaces file to reflect my systems hardware.
-Should I create a init-ifupdown_1.0.bbappend recipe with the updated file?
-What other options do I have?
-What are you guys using for this?
-And how about the package name in such a case. Append something to its name?
+I use a init-ifupdown_1.0.bbappend in my target machine (BSP) layer,
+this way these settings only affect the particular machine(s).
 
-Thanks in advance!
-Jaap
-
-
-
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
