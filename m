@@ -1,51 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id E6EAF73195
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D0A371633
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2016 13:00:00 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id l68so27637384wml.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2016 05:00:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=yCkuKeC11Q4LiKvohcLD1yXrPgowYx+AfPVUVL1rJtk=;
-	b=RpgcZKx/956kh4wOFxBxvGl933SKy6fpS4/hyCE9kB7bRVc8BBBBLieJ01dpU2Ooiy
-	TGvJbArGLT2TN/IQCYPipkrqzV8vOBLsdbxmBUcvzJOC19JtSxCLGsz/sYg288yp12bE
-	og5KsEOpSVv5uG1Zey7wtyrPXtAynaeT9fOTyUQljMB+9TTNauhf8O+w5stxFJyHiGyD
-	JoG1KLLwOeQDaWN1SWaLdNt/wX9N8dFX5uvbL/+jM11I3TI053E5o16jMgRM7jR5lc7X
-	NmTvX6x387GcG+P6INrvzhl7orRl1SOESi+vATq4mBia2Ze768QVL0ZYMhT4WgCw2U4y
-	kfNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=yCkuKeC11Q4LiKvohcLD1yXrPgowYx+AfPVUVL1rJtk=;
-	b=aMeVXHXuuYybtW/BXPJoT6IvL/Byor/uOch/gdQ2FvSSzXsm2Xi/3OJvTuzPUU09Su
-	7BCQFss53nmDlODS1USafVXUY/RqvgNeQCO2KjO1jL9eE5KssHwgJII/QfjG+9mpWGlC
-	OChzzYCLBlaBWv/YQYlwIFvU6ALV1Qo1NyNVY3hf2F7oJaQXTEdvoCiEGlGWZgd42TY2
-	ufjzK6MedoAtKVvunMEXGONpn8KFBn/xX2a7vaJlzjXI8MOzv3CC2DE9PDJRzBUYWv9C
-	gdN1lDaTRPPvHABvWSRvVsWR4x74jok5IEpfUyfY1Dka9q5qjTTjJqwZ+Ul2Vgfe4SHL
-	/yHA==
-X-Gm-Message-State: AD7BkJIInfbxucIw8rjT9bo5hQI+n8HxZLdWVITJLNIjn0crJrRTElvdbI9wIpmo0G83zg==
-X-Received: by 10.28.4.75 with SMTP id 72mr3809702wme.78.1457614800655;
-	Thu, 10 Mar 2016 05:00:00 -0800 (PST)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id ka7sm3483050wjb.8.2016.03.10.04.59.58
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 10 Mar 2016 04:59:58 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 10 Mar 2016 14:02:57 +0100
+	Thu, 10 Mar 2016 13:02:29 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id C0EA668A019; Thu, 10 Mar 2016 13:02:29 +0000 (GMT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: **
+X-Spam-Status: No, score=2.5 required=5.0 tests=ALL_TRUSTED,BAYES_50,
+	DNS_FROM_AHBL_RHSBL,T_FRT_BELOW2 autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id CEF0768A019;
+	Thu, 10 Mar 2016 13:02:23 +0000 (GMT)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id 8AA656740554;
+	Thu, 10 Mar 2016 14:02:23 +0100 (CET)
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160310130257.GE2573@jama>
-References: <56E14145.4040706@mlbassoc.com> <20160310105506.GB2573@jama>
-	<56E16633.4010800@mlbassoc.com>
+References: <1457504433-21548-1-git-send-email-gary@mlbassoc.com>
+	<20160309191532.GI2542@jama> <56E0FB3F.3020004@mlbassoc.com>
+	<20160310073340.GR2542@jama> <56E12501.1070909@mlbassoc.com>
+	<CA+chaQfjDkzXNBzMkRQg2xzqh43Ph-+iLQBPi5Rb+F1-C_1Xqg@mail.gmail.com>
+	<56E12DC6.3000704@mlbassoc.com>
+From: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <56E1705F.70104@mlbassoc.com>
+Date: Thu, 10 Mar 2016 14:02:23 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-In-Reply-To: <56E16633.4010800@mlbassoc.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-webserver] modphp
+In-Reply-To: <56E12DC6.3000704@mlbassoc.com>
+Subject: Re: [meta-oe][PATCH] mpv: Media Player
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,76 +43,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2016 13:00:01 -0000
-X-Groupsio-MsgNum: 60461
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="orO6xySwJI16pVnm"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Mar 2016 13:02:30 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
---orO6xySwJI16pVnm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2016-03-10 09:18, Gary Thomas wrote:
+> On 2016-03-10 08:57, Martin Jansa wrote:
+>> I did and there was still:
+>> FILES_${PN} += "${prefix}"
+>>
+>> that's why I've asked again here.
+>
+> Now I understand why you're asking.  I'll verify that it works correctly
+> without that line, just using the standard packaging.  If so, need I send
+> another patch revision or can you just leave that one line out when you merge?
 
-On Thu, Mar 10, 2016 at 01:18:59PM +0100, Gary Thomas wrote:
-> On 2016-03-10 11:55, Martin Jansa wrote:
-> > On Thu, Mar 10, 2016 at 10:41:25AM +0100, Gary Thomas wrote:
-> >> Anyone know what happened to the recipe for modphp which was
-> >> in meta-oe (maybe before meta-webserver) circa 2013?  I can't
-> >> find a recipe for this anywhere.
-> >
-> > Why not try git log?
->=20
-> Of course!  I don't often search logs for things I don't know where
-> to find though.
->=20
-> An aside - doesn't this change make meta-oe depend on meta-webserver
-> (which doesn't seem like a positive relationship)?
+The answer is yes, it does install to some non-standard paths.  At least as
+the configuration currently stands, it needs
+   FILES_${PN} += "${prefix}/etc ${prefix}/share"
 
-What in meta-oe depends on meta-webserver? I don't see anything.
+>
+>>
+>> On Thu, Mar 10, 2016 at 8:40 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+>>
+>>> On 2016-03-10 08:33, Martin Jansa wrote:
+>>>
+>>>> On Thu, Mar 10, 2016 at 05:42:39AM +0100, Gary Thomas wrote:
+>>>>
+>>>>> On 2016-03-09 20:15, Martin Jansa wrote:
+>>>>>
+>>>>>> On Wed, Mar 09, 2016 at 07:20:33AM +0100, Gary Thomas wrote:
+>>>>>>
+>>>>>>> mpv is a fork of mplayer2 and MPlayer. It shares some features with
+>>>>>>> the former projects while introducing many more.
+>>>>>>>
+>>>>>>> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+>>>>>>> ---
+>>>>>>>     meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb | 60
+>>>>>>> ++++++++++++++++++++++++
+>>>>>>>     1 file changed, 60 insertions(+)
+>>>>>>>     create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+>>>>>>>
+>>>>>>> diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+>>>>>>> b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+>>>>>>> new file mode 100644
+>>>>>>> index 0000000..37e4b02
+>>>>>>> --- /dev/null
+>>>>>>> +++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+>>>>>>> @@ -0,0 +1,60 @@
+>>>>>>> +SUMMARY = "Open Source multimedia player"
+>>>>>>> +SECTION = "multimedia"
+>>>>>>> +HOMEPAGE = "http://www.mpv.io/"
+>>>>>>> +DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv libxscrnsaver"
+>>>>>>> +
+>>>>>>> +# Depends on xsp, libxv, virtual/libx11, libxscrnsaver
+>>>>>>> +REQUIRED_DISTRO_FEATURES = "x11"
+>>>>>>> +
+>>>>>>> +LICENSE = "GPLv2+"
+>>>>>>> +LIC_FILES_CHKSUM =
+>>>>>>> "file://LICENSE;md5=91f1cb870c1cc2d31351a4d2595441cb"
+>>>>>>> +
+>>>>>>> +SRC_URI = "
+>>>>>>> https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz;name=mpv \
+>>>>>>> +
+>>>>>>> http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf \
+>>>>>>> +"
+>>>>>>> +SRC_URI[mpv.md5sum] = "9042bd3fbff2bc8ba0b7fadaa4a22101"
+>>>>>>> +SRC_URI[mpv.sha256sum] =
+>>>>>>> "7d31217ba8572f364fcea2955733f821374ae6d8c6d8f22f8bc63c44c0400bdc"
+>>>>>>> +SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
+>>>>>>> +SRC_URI[waf.sha256sum] =
+>>>>>>> "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
+>>>>>>> +
+>>>>>>> +EXTRA_OECONF = " \
+>>>>>>> +    --prefix=${D}/usr \
+>>>>>>>
+>>>>>> why not ${prefix} and does it really need to be prefixed with ${D}
+>>>>>> (unlike mandir bellow)? Ugly waf.
+>>>>>>
+>>>>>
+>>>> What about ${D}?
+>>>>
+>>>> +    --mandir=${mandir} \
+>>>>>>> +    --target=${SIMPLE_TARGET_SYS} \
+>>>>>>> +    --disable-gl \
+>>>>>>> +    --disable-libsmbclient \
+>>>>>>> +    --disable-libass \
+>>>>>>> +    --disable-lua \
+>>>>>>> +    --disable-libass-osd \
+>>>>>>> +    --disable-encoding \
+>>>>>>> +    --disable-libbluray \
+>>>>>>> +    --disable-dvdread \
+>>>>>>> +    --disable-dvdnav \
+>>>>>>> +    --disable-cdda \
+>>>>>>> +    --disable-enca \
+>>>>>>> +    --disable-libguess \
+>>>>>>> +    --disable-uchardet \
+>>>>>>> +    --disable-rubberband \
+>>>>>>> +    --disable-lcms2 \
+>>>>>>> +    --disable-vapoursynth \
+>>>>>>> +    --disable-vapoursynth-lazy \
+>>>>>>> +    --enable-libarchive \
+>>>>>>> +"
+>>>>>>> +
+>>>>>>> +do_configure() {
+>>>>>>> +    if [ ! -L ../waf ]; then
+>>>>>>> +        chmod a+x ../waf-1.8.12
+>>>>>>> +       ln -s waf-1.8.12 ../waf
+>>>>>>> +    fi
+>>>>>>> +    ../waf configure ${EXTRA_OECONF}
+>>>>>>> +}
+>>>>>>> +
+>>>>>>> +do_compile () {
+>>>>>>> +    ../waf build
+>>>>>>> +}
+>>>>>>> +
+>>>>>>> +do_install() {
+>>>>>>> +    ../waf install
+>>>>>>> +}
+>>>>>>> +
+>>>>>>> +FILES_${PN} += "/usr/"
+>>>>>>>
+>>>>>>
+>>>>>> ${prefix}?
+>>>>>>
+>>>>>> Does it install files in strange directories not covered by standard
+>>>>>> FILES?
+>>>>>>
+>>>>>>
+>>>>> Use of ${prefix} does seem correct, I've updated the recipe.
+>>>>> Patch v2 has been dispatched, including a required update to
+>>>>> the libass package which was necessary to get a fully functional
+>>>>> mpv.
+>>>>>
+>>>>
+>>>> Does it install files in strange directories not covered by standard
+>>>> FILES?
+>>>>
+>>>
+>>> No, but it doesn't seem to have any notion of adjusting the install
+>>> directory except at configure time, hence ${D}${prefix}
+>>>
+>>> Please refer to the new patchset to see how I've changed the recipe.
+>>>
+>
 
-> > commit f81961ff20d669e0f472f45b9922d6f62ee0d330
-> > Author: Paul Eggleton <paul.eggleton@linux.intel.com>
-> > Date:   Mon Jan 5 10:24:53 2015 +0000
-> >
-> >      README: update for modphp merging into php
-> >
-> >      Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> >
-> > commit 06af52095b5be1cb21a7dc9a6a6e05d01f6e7a00
-> > Author: Paul Eggleton <paul.eggleton@linux.intel.com>
-> > Date:   Thu Jan 1 23:34:29 2015 +0000
-> >
-> >      modphp: remove
-> >
-> >      This is now built out of the standard php recipe.
-> >
-> >      Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
->=20
-> --=20
-> ------------------------------------------------------------
-> Gary Thomas                 |  Consulting for the
-> MLB Associates              |    Embedded world
-> ------------------------------------------------------------
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
---orO6xySwJI16pVnm
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlbhcIEACgkQN1Ujt2V2gBz7hwCgsuuYw6KQD0f0JokmQ1cP7QHT
-KwcAnjIcATyqt20gZXKgkGwn/MJm40H7
-=UIiD
------END PGP SIGNATURE-----
-
---orO6xySwJI16pVnm--
