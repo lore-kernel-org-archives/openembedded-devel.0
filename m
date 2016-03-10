@@ -1,35 +1,30 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by mail.openembedded.org (Postfix) with ESMTP id F30656072C
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 709806FF56
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2016 08:18:16 +0000 (UTC)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id 4BF8F68A019; Thu, 10 Mar 2016 08:18:17 +0000 (GMT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	loki.analogue-micro-ltd.com
-X-Spam-Level: **
-X-Spam-Status: No, score=2.5 required=5.0 tests=ALL_TRUSTED,BAYES_50,
-	DNS_FROM_AHBL_RHSBL,T_FRT_BELOW2 autolearn=no version=3.3.2
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id D258368A019;
-	Thu, 10 Mar 2016 08:18:14 +0000 (GMT)
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by zeus.mlbassoc.com (Postfix) with ESMTP id 4B8286740554;
-	Thu, 10 Mar 2016 09:18:14 +0100 (CET)
-To: openembedded-devel@lists.openembedded.org
-References: <1457504433-21548-1-git-send-email-gary@mlbassoc.com>
-	<20160309191532.GI2542@jama> <56E0FB3F.3020004@mlbassoc.com>
-	<20160310073340.GR2542@jama> <56E12501.1070909@mlbassoc.com>
-	<CA+chaQfjDkzXNBzMkRQg2xzqh43Ph-+iLQBPi5Rb+F1-C_1Xqg@mail.gmail.com>
-From: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <56E12DC6.3000704@mlbassoc.com>
-Date: Thu, 10 Mar 2016 09:18:14 +0100
+	Thu, 10 Mar 2016 08:20:14 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u2A8KFaV013074
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Mar 2016 00:20:15 -0800 (PST)
+Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Thu, 10 Mar 2016 00:20:14 -0800
+To: <openembedded-devel@lists.openembedded.org>
+References: <1457509723-25302-1-git-send-email-kai.kang@windriver.com>
+	<1457509723-25302-2-git-send-email-kai.kang@windriver.com>
+	<20160309190600.GG2542@jama>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <56E12E3D.9030604@windriver.com>
+Date: Thu, 10 Mar 2016 16:20:13 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
+	Thunderbird/38.6.0
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQfjDkzXNBzMkRQg2xzqh43Ph-+iLQBPi5Rb+F1-C_1Xqg@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] mpv: Media Player
+In-Reply-To: <20160309190600.GG2542@jama>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH][meta-oe] crash: add native package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,147 +37,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2016 08:18:17 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Mar 2016 08:20:15 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On 2016-03-10 08:57, Martin Jansa wrote:
-> I did and there was still:
-> FILES_${PN} += "${prefix}"
+On 2016=E5=B9=B403=E6=9C=8810=E6=97=A5 03:06, Martin Jansa wrote:
+> On Wed, Mar 09, 2016 at 03:48:43PM +0800, kai.kang@windriver.com wrote:=
+
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> Add crash-native package.
+>>
+>> * append EXTRA_OEMAKE option to find ncurses library
+>> * pass right install DESTDIR
+>>
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ---
+>>   meta-oe/recipes-kernel/crash/crash_7.1.3.bb | 17 ++++++++++++++---
+>>   1 file changed, 14 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-kernel/crash/crash_7.1.3.bb b/meta-oe/rec=
+ipes-kernel/crash/crash_7.1.3.bb
+>> index f6934f7..e085094 100644
+>> --- a/meta-oe/recipes-kernel/crash/crash_7.1.3.bb
+>> +++ b/meta-oe/recipes-kernel/crash/crash_7.1.3.bb
+>> @@ -32,6 +32,8 @@ SRC_URI[gdb.sha256sum] =3D "8070389a5dcc104eb0be483d=
+582729f98ed4d761ad19cedd3f17b5
+>>  =20
+>>   inherit gettext
+>>  =20
+>> +BBCLASSEXTEND =3D "native"
+>> +
+>>   # crash 7.1.3 and before don't support mips64
+>>   COMPATIBLE_HOST =3D "^(?!mips64).*"
+>>  =20
+>> @@ -40,6 +42,7 @@ EXTRA_OEMAKE =3D 'RPMPKG=3D"${PV}" \
+>>                   GDB_HOST=3D"${BUILD_SYS}" \
+>>                   GDB_MAKE_JOBS=3D"${PARALLEL_MAKE}" \
+>>                   '
+>> +EXTRA_OEMAKE_append_class-native =3D " LDFLAGS=3D'${BUILD_LDFLAGS}'"
+>>  =20
+>>   do_configure() {
+>>       :
+>> @@ -65,17 +68,25 @@ do_compile() {
+>>       oe_runmake ${EXTRA_OEMAKE}
+>>   }
+>>  =20
+>> -do_install () {
+>> +do_install_prepend () {
+>>       install -d ${D}${bindir}
+>>       install -d ${D}/${mandir}/man8
+>>       install -d ${D}${includedir}/crash
+>>  =20
+>> -    oe_runmake DESTDIR=3D${D} install
+>>       install -m 0644 ${S}/crash.8 ${D}/${mandir}/man8/
+>>       install -m 0644 ${S}/defs.h ${D}${includedir}/crash
+>> -}
+>> +}
+>> +
+>> +do_install_class-target () {
+>> +    oe_runmake DESTDIR=3D${D} install
+>> +}
+>> +
+>> +do_install_class-native () {
+>> +    oe_runmake DESTDIR=3D${D}${STAGING_DIR_NATIVE} install
+>> +}
+>>  =20
+>>   RDEPENDS_${PN} +=3D "liblzma"
+>> +RDEPENDS_${PN}_class-native +=3D "xz-native"
+> Why is this needed? native builds aren't creating any packages.
+
+My fault. It should be empty for native package.
+
+Thanks. V2 will be sent.
+
+
+--Kai
+
+
 >
-> that's why I've asked again here.
-
-Now I understand why you're asking.  I'll verify that it works correctly
-without that line, just using the standard packaging.  If so, need I send
-another patch revision or can you just leave that one line out when you merge?
-
+>>   # Causes gcc to get stuck and eat all available memory in qemuarm bu=
+ilds
+>>   # jenkins  15161  100 12.5 10389596 10321284 ?   R    11:40  28:17 /=
+home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexe=
+c/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.2/cc1 -quiet -I . -I =
+=2E -I ./common -I ./config -I ./../include/opcode -I ./../opcodes/.. -I =
+=2E/../readline/.. -I ../bfd -I ./../bfd -I ./../include -I ../libdecnumb=
+er -I ./../libdecnumber -I ./gnulib/import -I build-gnulib/import -isysro=
+ot /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm -MMD eval.d=
+ -MF .deps/eval.Tpo -MP -MT eval.o -D LOCALEDIR=3D"/usr/local/share/local=
+e" -D CRASH_MERGE -D HAVE_CONFIG_H -D TUI=3D1 eval.c -quiet -dumpbase eva=
+l.c -march=3Darmv5te -mthumb -mthumb-interwork -mtls-dialect=3Dgnu -auxba=
+se-strip eval.o -g -O2 -Wall -Wpointer-arith -Wformat-nonliteral -Wno-poi=
+nter-sign -Wno-unused -Wunused-value -Wunused-function -Wno-switch -Wno-c=
+har-subscripts -Wmissing-prototypes -Wdeclaration-after-statement -Wempty=
+-body -feliminate-unused-debug-types -o -
+>> --=20
+>> 2.6.1
+>>
+>> --=20
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
-> On Thu, Mar 10, 2016 at 8:40 AM, Gary Thomas <gary@mlbassoc.com> wrote:
 >
->> On 2016-03-10 08:33, Martin Jansa wrote:
->>
->>> On Thu, Mar 10, 2016 at 05:42:39AM +0100, Gary Thomas wrote:
->>>
->>>> On 2016-03-09 20:15, Martin Jansa wrote:
->>>>
->>>>> On Wed, Mar 09, 2016 at 07:20:33AM +0100, Gary Thomas wrote:
->>>>>
->>>>>> mpv is a fork of mplayer2 and MPlayer. It shares some features with
->>>>>> the former projects while introducing many more.
->>>>>>
->>>>>> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
->>>>>> ---
->>>>>>     meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb | 60
->>>>>> ++++++++++++++++++++++++
->>>>>>     1 file changed, 60 insertions(+)
->>>>>>     create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
->>>>>>
->>>>>> diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
->>>>>> b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
->>>>>> new file mode 100644
->>>>>> index 0000000..37e4b02
->>>>>> --- /dev/null
->>>>>> +++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
->>>>>> @@ -0,0 +1,60 @@
->>>>>> +SUMMARY = "Open Source multimedia player"
->>>>>> +SECTION = "multimedia"
->>>>>> +HOMEPAGE = "http://www.mpv.io/"
->>>>>> +DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv libxscrnsaver"
->>>>>> +
->>>>>> +# Depends on xsp, libxv, virtual/libx11, libxscrnsaver
->>>>>> +REQUIRED_DISTRO_FEATURES = "x11"
->>>>>> +
->>>>>> +LICENSE = "GPLv2+"
->>>>>> +LIC_FILES_CHKSUM =
->>>>>> "file://LICENSE;md5=91f1cb870c1cc2d31351a4d2595441cb"
->>>>>> +
->>>>>> +SRC_URI = "
->>>>>> https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz;name=mpv \
->>>>>> +
->>>>>> http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf \
->>>>>> +"
->>>>>> +SRC_URI[mpv.md5sum] = "9042bd3fbff2bc8ba0b7fadaa4a22101"
->>>>>> +SRC_URI[mpv.sha256sum] =
->>>>>> "7d31217ba8572f364fcea2955733f821374ae6d8c6d8f22f8bc63c44c0400bdc"
->>>>>> +SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
->>>>>> +SRC_URI[waf.sha256sum] =
->>>>>> "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
->>>>>> +
->>>>>> +EXTRA_OECONF = " \
->>>>>> +    --prefix=${D}/usr \
->>>>>>
->>>>> why not ${prefix} and does it really need to be prefixed with ${D}
->>>>> (unlike mandir bellow)? Ugly waf.
->>>>>
->>>>
->>> What about ${D}?
->>>
->>> +    --mandir=${mandir} \
->>>>>> +    --target=${SIMPLE_TARGET_SYS} \
->>>>>> +    --disable-gl \
->>>>>> +    --disable-libsmbclient \
->>>>>> +    --disable-libass \
->>>>>> +    --disable-lua \
->>>>>> +    --disable-libass-osd \
->>>>>> +    --disable-encoding \
->>>>>> +    --disable-libbluray \
->>>>>> +    --disable-dvdread \
->>>>>> +    --disable-dvdnav \
->>>>>> +    --disable-cdda \
->>>>>> +    --disable-enca \
->>>>>> +    --disable-libguess \
->>>>>> +    --disable-uchardet \
->>>>>> +    --disable-rubberband \
->>>>>> +    --disable-lcms2 \
->>>>>> +    --disable-vapoursynth \
->>>>>> +    --disable-vapoursynth-lazy \
->>>>>> +    --enable-libarchive \
->>>>>> +"
->>>>>> +
->>>>>> +do_configure() {
->>>>>> +    if [ ! -L ../waf ]; then
->>>>>> +        chmod a+x ../waf-1.8.12
->>>>>> +       ln -s waf-1.8.12 ../waf
->>>>>> +    fi
->>>>>> +    ../waf configure ${EXTRA_OECONF}
->>>>>> +}
->>>>>> +
->>>>>> +do_compile () {
->>>>>> +    ../waf build
->>>>>> +}
->>>>>> +
->>>>>> +do_install() {
->>>>>> +    ../waf install
->>>>>> +}
->>>>>> +
->>>>>> +FILES_${PN} += "/usr/"
->>>>>>
->>>>>
->>>>> ${prefix}?
->>>>>
->>>>> Does it install files in strange directories not covered by standard
->>>>> FILES?
->>>>>
->>>>>
->>>> Use of ${prefix} does seem correct, I've updated the recipe.
->>>> Patch v2 has been dispatched, including a required update to
->>>> the libass package which was necessary to get a fully functional
->>>> mpv.
->>>>
->>>
->>> Does it install files in strange directories not covered by standard
->>> FILES?
->>>
->>
->> No, but it doesn't seem to have any notion of adjusting the install
->> directory except at configure time, hence ${D}${prefix}
->>
->> Please refer to the new patchset to see how I've changed the recipe.
->>
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+
+--=20
+Regards,
+Neil | Kai Kang
+
 
