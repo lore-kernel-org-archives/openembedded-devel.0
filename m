@@ -1,49 +1,55 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
-	[209.85.213.180])
-	by mail.openembedded.org (Postfix) with ESMTP id A36D96E680
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 61D39605FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2016 16:52:04 +0000 (UTC)
-Received: by mail-ig0-f180.google.com with SMTP id vs8so21585512igb.1
+	Thu, 10 Mar 2016 17:05:42 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id l68so5024649wml.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2016 08:52:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=evW0UcQNf9bxZuiak+kN76hGmpOaTiHAThgSNqfSNSU=;
-	b=HU/iYhMxDAkoFJ13yiOgaZ4YrU+ATiF57RqakFtal5dlCjo4/yqwK76ho9LBNay6Eg
-	of6kwq0yzhKAnXdCLYErTbdIRODvRHSrplH5hI6JrUpmzq7cRvdYLSh5qbHXso99ZjPi
-	uLRTe7c1Ok6tETnTpm/y8RPi1Hejf20Egov33JalR9mzejLov9J8eQoRiYqWdlhdoUvx
-	96kjUF6bZx9AQe/+05kkLbgcmqEa9+7ng1cUTna0pmqMkJ+ACPQ6DOU3rJKkB7pLGSgd
-	Gq7/V1CyFSH7F+CCSV9pMTMJ9i26TuvCRNGgrzgqX/Ns27DTHFkKFnIeLQbEkKlqkGpu
-	2Qtw==
+	Thu, 10 Mar 2016 09:05:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=RiI1L3lSdVC4YKzdZ1KILYl6LSLLtWN26A/GibLnsUw=;
+	b=MtPFRZ9to9eIY+NptCPC4jcnzm6TW9UqnG3u/h9IuLq55CdM15XysTcWI/jojNfR4l
+	FZv5vaxJh9/F/+tdg7P7J/YIWIPbsCcIrQ27bJuyBNDMiOVnWwOL7lqKl1U2sKJr6jxV
+	zcd2tf8oeZpnxh4WVcQz8aCQCibIKjbZi+8piUbr7mec/4drvKQvaLnjejhF6f8zuUqd
+	sMBOmea8wI5o+Z7APwAy5t/ngsfHXgAYkuDd5p2ONcKX+7PPLUsiWIHozLUCEemJtqHk
+	kUge42RVUaKnESgUyrBhdOl5H18nTabLS1Uyd3ZCujLcFWUPdNP5UXQIG3oH9yC2HMXO
+	ZvdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=evW0UcQNf9bxZuiak+kN76hGmpOaTiHAThgSNqfSNSU=;
-	b=Wv5EpUGY/fUxs2R4KDGy7vdEcMehmQd8OwcRIoP4LjED4CG7PP167r/bSqidJxqOTT
-	z5IcagWnKJDM8/rTbEBHPW6KuPDejaDpVDuz37jOZA1wH2YPNlq8S9zCNePf4hNgJJxM
-	Sor3oLHqS9XCgptWmGLKdXK13tQ+ddD01EptdA6xP45maDGyBZBInwCoHo2tg8bt8kOF
-	aEFSW1osKlwSs1llEhitKAFnEzScGY059+n889NT2LZHjmwz8GEtL+rGjpUyjSl01pY5
-	YRZqv8VMrtYXNvsXA/JEzCu8e3EYJd4QIqINfbpHl143+BEL+T9LsIXkgONJn8TJE5tt
-	m8+Q==
-X-Gm-Message-State: AD7BkJIDnyjbb34cuvlOrpECY3MqQ3gIP+rTE++PxmExCV9ogGElnn+RmQF8M62JcPS73B3+xwG2HcwYL22nDtjz
-X-Received: by 10.50.43.226 with SMTP id z2mr5073185igl.78.1457628724979; Thu,
-	10 Mar 2016 08:52:04 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.162.70 with HTTP; Thu, 10 Mar 2016 08:51:45 -0800 (PST)
-In-Reply-To: <20160310161330.GJ2573@jama>
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=RiI1L3lSdVC4YKzdZ1KILYl6LSLLtWN26A/GibLnsUw=;
+	b=JNE02M82VnrJ1cPRzdXjXRUz1EudJC93hShBOypzl57JpSYTjp7+HQ/Y8X2mvN1P3y
+	Mw/j2W2kP3Z2gzJ0YdYIWZpYR1/cRmGSpBysMHvlnZDqPDCMtLAFx5mIQVO2RScFAwYI
+	RKMXZcrCeG1zIGrh9iNaRMwDurhQB0NFAHSoRl34q3HaYYt/MJ8BDdWZEGM1hSZDOKPB
+	d/v7eEOQVF6Pe2TVCJZGDFEujsNID6r0acX8++BAAXMprMsqZ8awHYO/PC0OjDhlm9UP
+	4hAXplLvG6+9TX4gUu28+cPorEUdqMKpnLTsUfShqx/tLYa+griTbtffFZiige0y96pG
+	M64g==
+X-Gm-Message-State: AD7BkJJ11GfQzttSXctUWUqd6qno5FFapeh1Z9W7igWSLKXr8qfQM3R+ViZCkLoi5Y/emQ==
+X-Received: by 10.194.63.75 with SMTP id e11mr5027151wjs.79.1457629542599;
+	Thu, 10 Mar 2016 09:05:42 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	hu1sm4407842wjb.36.2016.03.10.09.05.41
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 10 Mar 2016 09:05:41 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 10 Mar 2016 18:08:41 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160310170841.GN2573@jama>
 References: <cover.1457535831.git.alexander.kanavin@linux.intel.com>
 	<41b4e4a82cb652470eebe853bd1b6076cee59301.1457535831.git.alexander.kanavin@linux.intel.com>
 	<20160310142507.GI2573@jama>
 	<CAJTo0LbHXD_C+Nm6bjV=xc6MRtMJ=Ry=_Q4YG-ihyWiWHaQ5UA@mail.gmail.com>
 	<20160310161330.GJ2573@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 10 Mar 2016 16:51:45 +0000
-Message-ID: <CAJTo0LZnsegS80eeExf27=DDytCotMRuYe8ryU7EWfEfWUOr-g@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CAJTo0LZnsegS80eeExf27=DDytCotMRuYe8ryU7EWfEfWUOr-g@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAJTo0LZnsegS80eeExf27=DDytCotMRuYe8ryU7EWfEfWUOr-g@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 Subject: Re: [PATCH 14/38] python-gst: remove the 0.10 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -57,20 +63,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2016 16:52:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 10 Mar 2016 17:05:43 -0000
+X-Groupsio-MsgNum: 60477
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="2+jOUFLb7N+7fooZ"
+Content-Disposition: inline
 
-On 10 March 2016 at 16:13, Martin Jansa <martin.jansa@gmail.com> wrote:
+--2+jOUFLb7N+7fooZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> I still build images for om-gta04
-> http://projects.goldelico.com/p/gta04-main/
-> from time to time, but don't use them in real life anymore (not sure how
-> many other people do) - the same with om-gta02, nokia900. Other
-> meta-smartphone BSPs are used more actively in LuneOS, so no nukes on
-> my meta-smartphone please.
->
+On Thu, Mar 10, 2016 at 04:51:45PM +0000, Burton, Ross wrote:
+> On 10 March 2016 at 16:13, Martin Jansa <martin.jansa@gmail.com> wrote:
+>=20
+> > I still build images for om-gta04
+> > http://projects.goldelico.com/p/gta04-main/
+> > from time to time, but don't use them in real life anymore (not sure how
+> > many other people do) - the same with om-gta02, nokia900. Other
+> > meta-smartphone BSPs are used more actively in LuneOS, so no nukes on
+> > my meta-smartphone please.
+> >
+>=20
+> Presumably Lune uses the BSP but not the software?
 
-Presumably Lune uses the BSP but not the software?
+LuneOS doesn't use frameworkd (which lives in meta-fso), but you wanted
+to nuke meta-smartphone which contains 16 different layers.
 
-Ross
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--2+jOUFLb7N+7fooZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlbhqhgACgkQN1Ujt2V2gBygtACfWeOULaJhf6rSZnkRh3O4UiHc
+RsQAmwZoxa1hQwVrf2ppWoWphV+8Uqk0
+=U4mM
+-----END PGP SIGNATURE-----
+
+--2+jOUFLb7N+7fooZ--
