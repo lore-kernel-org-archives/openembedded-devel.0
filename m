@@ -1,36 +1,33 @@
 Return-Path: <gary@mlbassoc.com>
 Received: from mail.analogue-micro.com (mail.analogue-micro.com
 	[217.144.149.242])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D0A371633
+	by mail.openembedded.org (Postfix) with ESMTP id AB68360111
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2016 13:02:29 +0000 (UTC)
+	Thu, 10 Mar 2016 13:05:50 +0000 (UTC)
 Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id C0EA668A019; Thu, 10 Mar 2016 13:02:29 +0000 (GMT)
+	id 0056E68A01C; Thu, 10 Mar 2016 13:05:50 +0000 (GMT)
 X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
 	loki.analogue-micro-ltd.com
-X-Spam-Level: **
-X-Spam-Status: No, score=2.5 required=5.0 tests=ALL_TRUSTED,BAYES_50,
-	DNS_FROM_AHBL_RHSBL,T_FRT_BELOW2 autolearn=no version=3.3.2
+X-Spam-Level: *
+X-Spam-Status: No, score=1.7 required=5.0 tests=ALL_TRUSTED,BAYES_40,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
 Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id CEF0768A019;
-	Thu, 10 Mar 2016 13:02:23 +0000 (GMT)
+	by mail.analogue-micro.com (Postfix) with ESMTP id 84D0C68A019;
+	Thu, 10 Mar 2016 13:05:46 +0000 (GMT)
 Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by zeus.mlbassoc.com (Postfix) with ESMTP id 8AA656740554;
-	Thu, 10 Mar 2016 14:02:23 +0100 (CET)
+	by zeus.mlbassoc.com (Postfix) with ESMTP id 404A66740554;
+	Thu, 10 Mar 2016 14:05:46 +0100 (CET)
 To: openembedded-devel@lists.openembedded.org
-References: <1457504433-21548-1-git-send-email-gary@mlbassoc.com>
-	<20160309191532.GI2542@jama> <56E0FB3F.3020004@mlbassoc.com>
-	<20160310073340.GR2542@jama> <56E12501.1070909@mlbassoc.com>
-	<CA+chaQfjDkzXNBzMkRQg2xzqh43Ph-+iLQBPi5Rb+F1-C_1Xqg@mail.gmail.com>
-	<56E12DC6.3000704@mlbassoc.com>
+References: <56E14145.4040706@mlbassoc.com> <20160310105506.GB2573@jama>
+	<56E16633.4010800@mlbassoc.com> <20160310130257.GE2573@jama>
 From: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <56E1705F.70104@mlbassoc.com>
-Date: Thu, 10 Mar 2016 14:02:23 +0100
+Message-ID: <56E1712A.9070102@mlbassoc.com>
+Date: Thu, 10 Mar 2016 14:05:46 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
 	Thunderbird/38.5.1
 MIME-Version: 1.0
-In-Reply-To: <56E12DC6.3000704@mlbassoc.com>
-Subject: Re: [meta-oe][PATCH] mpv: Media Player
+In-Reply-To: <20160310130257.GE2573@jama>
+Subject: Re: [meta-webserver] modphp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,151 +40,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2016 13:02:30 -0000
+X-List-Received-Date: Thu, 10 Mar 2016 13:05:50 -0000
 Content-Type: text/plain; charset=windows-1252; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 2016-03-10 09:18, Gary Thomas wrote:
-> On 2016-03-10 08:57, Martin Jansa wrote:
->> I did and there was still:
->> FILES_${PN} += "${prefix}"
+On 2016-03-10 14:02, Martin Jansa wrote:
+> On Thu, Mar 10, 2016 at 01:18:59PM +0100, Gary Thomas wrote:
+>> On 2016-03-10 11:55, Martin Jansa wrote:
+>>> On Thu, Mar 10, 2016 at 10:41:25AM +0100, Gary Thomas wrote:
+>>>> Anyone know what happened to the recipe for modphp which was
+>>>> in meta-oe (maybe before meta-webserver) circa 2013?  I can't
+>>>> find a recipe for this anywhere.
+>>>
+>>> Why not try git log?
 >>
->> that's why I've asked again here.
->
-> Now I understand why you're asking.  I'll verify that it works correctly
-> without that line, just using the standard packaging.  If so, need I send
-> another patch revision or can you just leave that one line out when you merge?
-
-The answer is yes, it does install to some non-standard paths.  At least as
-the configuration currently stands, it needs
-   FILES_${PN} += "${prefix}/etc ${prefix}/share"
-
->
+>> Of course!  I don't often search logs for things I don't know where
+>> to find though.
 >>
->> On Thu, Mar 10, 2016 at 8:40 AM, Gary Thomas <gary@mlbassoc.com> wrote:
->>
->>> On 2016-03-10 08:33, Martin Jansa wrote:
->>>
->>>> On Thu, Mar 10, 2016 at 05:42:39AM +0100, Gary Thomas wrote:
->>>>
->>>>> On 2016-03-09 20:15, Martin Jansa wrote:
->>>>>
->>>>>> On Wed, Mar 09, 2016 at 07:20:33AM +0100, Gary Thomas wrote:
->>>>>>
->>>>>>> mpv is a fork of mplayer2 and MPlayer. It shares some features with
->>>>>>> the former projects while introducing many more.
->>>>>>>
->>>>>>> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
->>>>>>> ---
->>>>>>>     meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb | 60
->>>>>>> ++++++++++++++++++++++++
->>>>>>>     1 file changed, 60 insertions(+)
->>>>>>>     create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
->>>>>>>
->>>>>>> diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
->>>>>>> b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
->>>>>>> new file mode 100644
->>>>>>> index 0000000..37e4b02
->>>>>>> --- /dev/null
->>>>>>> +++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
->>>>>>> @@ -0,0 +1,60 @@
->>>>>>> +SUMMARY = "Open Source multimedia player"
->>>>>>> +SECTION = "multimedia"
->>>>>>> +HOMEPAGE = "http://www.mpv.io/"
->>>>>>> +DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv libxscrnsaver"
->>>>>>> +
->>>>>>> +# Depends on xsp, libxv, virtual/libx11, libxscrnsaver
->>>>>>> +REQUIRED_DISTRO_FEATURES = "x11"
->>>>>>> +
->>>>>>> +LICENSE = "GPLv2+"
->>>>>>> +LIC_FILES_CHKSUM =
->>>>>>> "file://LICENSE;md5=91f1cb870c1cc2d31351a4d2595441cb"
->>>>>>> +
->>>>>>> +SRC_URI = "
->>>>>>> https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz;name=mpv \
->>>>>>> +
->>>>>>> http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf \
->>>>>>> +"
->>>>>>> +SRC_URI[mpv.md5sum] = "9042bd3fbff2bc8ba0b7fadaa4a22101"
->>>>>>> +SRC_URI[mpv.sha256sum] =
->>>>>>> "7d31217ba8572f364fcea2955733f821374ae6d8c6d8f22f8bc63c44c0400bdc"
->>>>>>> +SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
->>>>>>> +SRC_URI[waf.sha256sum] =
->>>>>>> "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
->>>>>>> +
->>>>>>> +EXTRA_OECONF = " \
->>>>>>> +    --prefix=${D}/usr \
->>>>>>>
->>>>>> why not ${prefix} and does it really need to be prefixed with ${D}
->>>>>> (unlike mandir bellow)? Ugly waf.
->>>>>>
->>>>>
->>>> What about ${D}?
->>>>
->>>> +    --mandir=${mandir} \
->>>>>>> +    --target=${SIMPLE_TARGET_SYS} \
->>>>>>> +    --disable-gl \
->>>>>>> +    --disable-libsmbclient \
->>>>>>> +    --disable-libass \
->>>>>>> +    --disable-lua \
->>>>>>> +    --disable-libass-osd \
->>>>>>> +    --disable-encoding \
->>>>>>> +    --disable-libbluray \
->>>>>>> +    --disable-dvdread \
->>>>>>> +    --disable-dvdnav \
->>>>>>> +    --disable-cdda \
->>>>>>> +    --disable-enca \
->>>>>>> +    --disable-libguess \
->>>>>>> +    --disable-uchardet \
->>>>>>> +    --disable-rubberband \
->>>>>>> +    --disable-lcms2 \
->>>>>>> +    --disable-vapoursynth \
->>>>>>> +    --disable-vapoursynth-lazy \
->>>>>>> +    --enable-libarchive \
->>>>>>> +"
->>>>>>> +
->>>>>>> +do_configure() {
->>>>>>> +    if [ ! -L ../waf ]; then
->>>>>>> +        chmod a+x ../waf-1.8.12
->>>>>>> +       ln -s waf-1.8.12 ../waf
->>>>>>> +    fi
->>>>>>> +    ../waf configure ${EXTRA_OECONF}
->>>>>>> +}
->>>>>>> +
->>>>>>> +do_compile () {
->>>>>>> +    ../waf build
->>>>>>> +}
->>>>>>> +
->>>>>>> +do_install() {
->>>>>>> +    ../waf install
->>>>>>> +}
->>>>>>> +
->>>>>>> +FILES_${PN} += "/usr/"
->>>>>>>
->>>>>>
->>>>>> ${prefix}?
->>>>>>
->>>>>> Does it install files in strange directories not covered by standard
->>>>>> FILES?
->>>>>>
->>>>>>
->>>>> Use of ${prefix} does seem correct, I've updated the recipe.
->>>>> Patch v2 has been dispatched, including a required update to
->>>>> the libass package which was necessary to get a fully functional
->>>>> mpv.
->>>>>
->>>>
->>>> Does it install files in strange directories not covered by standard
->>>> FILES?
->>>>
->>>
->>> No, but it doesn't seem to have any notion of adjusting the install
->>> directory except at configure time, hence ${D}${prefix}
->>>
->>> Please refer to the new patchset to see how I've changed the recipe.
->>>
+>> An aside - doesn't this change make meta-oe depend on meta-webserver
+>> (which doesn't seem like a positive relationship)?
 >
+> What in meta-oe depends on meta-webserver? I don't see anything.
 
+Select 'apache2' in the package config for php - that would then require
+recipe(s) from meta-webserver
+
+>
+>>> commit f81961ff20d669e0f472f45b9922d6f62ee0d330
+>>> Author: Paul Eggleton <paul.eggleton@linux.intel.com>
+>>> Date:   Mon Jan 5 10:24:53 2015 +0000
+>>>
+>>>       README: update for modphp merging into php
+>>>
+>>>       Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+>>>
+>>> commit 06af52095b5be1cb21a7dc9a6a6e05d01f6e7a00
+>>> Author: Paul Eggleton <paul.eggleton@linux.intel.com>
+>>> Date:   Thu Jan 1 23:34:29 2015 +0000
+>>>
+>>>       modphp: remove
+>>>
+>>>       This is now built out of the standard php recipe.
+>>>
+>>>       Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 
 -- 
 ------------------------------------------------------------
