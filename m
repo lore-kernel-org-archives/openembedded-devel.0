@@ -1,30 +1,53 @@
-Return-Path: <gthomas@mlbassoc.com>
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by mail.openembedded.org (Postfix) with ESMTP id 608E9731EC
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C49073193
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Mar 2016 16:07:46 +0000 (UTC)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id E7CB868A01C; Thu, 10 Mar 2016 16:07:46 +0000 (GMT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	loki.analogue-micro-ltd.com
-X-Spam-Level: *
-X-Spam-Status: No, score=1.7 required=5.0 tests=ALL_TRUSTED,BAYES_20,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id A0FD368A01B;
-	Thu, 10 Mar 2016 16:07:27 +0000 (GMT)
-Received: by zeus.mlbassoc.com (Postfix, from userid 1000)
-	id 57DBD6740715; Thu, 10 Mar 2016 17:07:27 +0100 (CET)
-From: Gary Thomas <gary@mlbassoc.com>
+	Thu, 10 Mar 2016 16:10:32 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id n205so4726147wmf.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Mar 2016 08:10:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=3zu7ZNdLxr5a3A73ycOm034r8cLXzVUvvEqq4y+Fbyk=;
+	b=fP5uoKxUODEIvK9m74ogA8f6PMTEFymj7DrjQsAU9UhGq3MeSCLQZHzfiEJBvX7uur
+	t3a/8yPOVQYF7RO7EMP5Eydshb48ihI15wwh8Yc9h/fvSDGKILJJ9lsljDkxnlAA9DxA
+	wj2SD3GwheScKjvlbcZX2TJw+53motwo+BiuJwZH9BXZY5xU6fAl9qJPKxgLPs0KH1JN
+	B5f61nbvozrP/rfahn+ebWUQEbSpIwdeqZma/NGYDfnBwqYPVNZly9G/jimH/5Ic/N7y
+	f9DEUiXcLGCNN0eFIXsudobmrXcA7w+MO+GLGbdoeDyloOnbZ8c1MjiscO3V3hwFxTg+
+	RzqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=3zu7ZNdLxr5a3A73ycOm034r8cLXzVUvvEqq4y+Fbyk=;
+	b=OZJPRqyqp4Z6W/fjR5Wv/DiKXTSsSFIz0tvifgi/p+RdoH4wRchLv9sTbbRe58fn+e
+	KnFsZzA/aAdUctciwpCz02mWzuNF0z2EU0CvlCi3c1DnHgl2fRAZ90KWzUvSpyqQzRix
+	BrWUv72ajJ7leONp6xH0YsUGe1oWZzF3guAthYN2VtxitCmY1/f60ij9D1yQVU0Zjmou
+	TqDE1BszWvWPHQN29g0S01oVk5oqozy10Db3Gz/vfVaEbWSHT3iPpKQpiZ7deIccPe7U
+	oI48eyY/0qdLkWEACdT7+TrZMRlx3CMXHJGqVnrUZ+04spmSFIHkKecq+cL5/vRVrEj1
+	9+lg==
+X-Gm-Message-State: AD7BkJJ7uwKMO5xEBr/jxmKv8sdfSF2HpXhfBx9JhQ/k23z1Fu10RQWl+mr2eLrpK/eiDA==
+X-Received: by 10.28.212.85 with SMTP id l82mr4994108wmg.82.1457626233027;
+	Thu, 10 Mar 2016 08:10:33 -0800 (PST)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id 63sm4242413wms.1.2016.03.10.08.10.30
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 10 Mar 2016 08:10:31 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 10 Mar 2016 17:13:30 +0100
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Mar 2016 17:07:22 +0100
-Message-Id: <1457626042-28653-3-git-send-email-gary@mlbassoc.com>
-X-Mailer: git-send-email 2.5.0
-In-Reply-To: <1457626042-28653-1-git-send-email-gary@mlbassoc.com>
-References: <1457626042-28653-1-git-send-email-gary@mlbassoc.com>
-Cc: Gary Thomas <gary@mlbassoc.com>
-Subject: [meta-oe][PATCH v3 2/2] mpv: Media Player
+Message-ID: <20160310161330.GJ2573@jama>
+References: <cover.1457535831.git.alexander.kanavin@linux.intel.com>
+	<41b4e4a82cb652470eebe853bd1b6076cee59301.1457535831.git.alexander.kanavin@linux.intel.com>
+	<20160310142507.GI2573@jama>
+	<CAJTo0LbHXD_C+Nm6bjV=xc6MRtMJ=Ry=_Q4YG-ihyWiWHaQ5UA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAJTo0LbHXD_C+Nm6bjV=xc6MRtMJ=Ry=_Q4YG-ihyWiWHaQ5UA@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [PATCH 14/38] python-gst: remove the 0.10 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,91 +60,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Mar 2016 16:07:46 -0000
+X-List-Received-Date: Thu, 10 Mar 2016 16:10:33 -0000
+X-Groupsio-MsgNum: 60475
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="T4IYkFBVPN84tP7K"
+Content-Disposition: inline
 
-mpv is a fork of mplayer2 and MPlayer. It shares some features with
-the former projects while introducing many more.
+--T4IYkFBVPN84tP7K
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Gary Thomas <gary@mlbassoc.com>
----
- meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb | 67 ++++++++++++++++++++++++
- 1 file changed, 67 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+On Thu, Mar 10, 2016 at 04:02:43PM +0000, Burton, Ross wrote:
+> On 10 March 2016 at 14:25, Martin Jansa <martin.jansa@gmail.com> wrote:
+>=20
+> > This wont make freesmartphone people happly (if there still are some)
+> >
+>=20
+> Is anyone actually using this software?  Obviously one solution here is to
+> move pygobject to meta-gnome or something.  Another would be to nuke
+> meta-smartphone from orbit.
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
-new file mode 100644
-index 0000000..acad319
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
-@@ -0,0 +1,67 @@
-+SUMMARY = "Open Source multimedia player"
-+SECTION = "multimedia"
-+HOMEPAGE = "http://www.mpv.io/"
-+DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
-+           libxscrnsaver libv4l libxinerama \
-+"
-+
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=91f1cb870c1cc2d31351a4d2595441cb"
-+
-+SRC_URI = "https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz;name=mpv \
-+           http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf \
-+"
-+SRC_URI[mpv.md5sum] = "9042bd3fbff2bc8ba0b7fadaa4a22101"
-+SRC_URI[mpv.sha256sum] = "7d31217ba8572f364fcea2955733f821374ae6d8c6d8f22f8bc63c44c0400bdc"
-+SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
-+SRC_URI[waf.sha256sum] = "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
-+
-+inherit pkgconfig
-+
-+# Note: both lua and libass are required to get on-screen-display (controls)
-+PACKAGECONFIG ??= "lua libass"
-+PACKAGECONFIG[lua] = "--enable-lua,--disable-lua,lua luajit"
-+PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
-+PACKAGECONFIG[libarchive] = "--enable-libarchive,--disable-libarchive,libarchive"
-+
-+EXTRA_OECONF = " \
-+    --prefix=${prefix} \
-+    --target=${SIMPLE_TARGET_SYS} \
-+    --confdir=${sysconfdir} \
-+    --datadir=${datadir} \
-+    --disable-manpage-build \
-+    --disable-gl \
-+    --disable-libsmbclient \
-+    --disable-encoding \
-+    --disable-libbluray \
-+    --disable-dvdread \
-+    --disable-dvdnav \
-+    --disable-cdda \
-+    --disable-enca \
-+    --disable-libguess \
-+    --disable-uchardet \
-+    --disable-rubberband \
-+    --disable-lcms2 \
-+    --disable-vapoursynth \
-+    --disable-vapoursynth-lazy \
-+"
-+
-+do_configure() {
-+    if [ ! -L ../waf ]; then
-+        chmod a+x ../waf-1.8.12
-+	ln -s waf-1.8.12 ../waf
-+    fi
-+    ../waf configure ${EXTRA_OECONF}
-+}
-+
-+do_compile () {
-+    ../waf build
-+}
-+
-+do_install() {
-+    ../waf install --destdir=${D}
-+}
-+
-+FILES_${PN} += "${datadir}/icons"
--- 
-2.5.0
+Fortunately this python-gst dependency was only from RRECOMMENDS, I've
+already removed it from RRECOMMENDS.
 
+I still build images for om-gta04
+http://projects.goldelico.com/p/gta04-main/
+=66rom time to time, but don't use them in real life anymore (not sure how
+many other people do) - the same with om-gta02, nokia900. Other
+meta-smartphone BSPs are used more actively in LuneOS, so no nukes on
+my meta-smartphone please.
 
+Thanks,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--T4IYkFBVPN84tP7K
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlbhnSgACgkQN1Ujt2V2gBxAYACdGeZLlrjB4WP0OrZoRtlopR0q
+HssAniFJ2ICwb9g2qRhTte4W1qC1/C4t
+=xxQo
+-----END PGP SIGNATURE-----
+
+--T4IYkFBVPN84tP7K--
