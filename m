@@ -1,48 +1,27 @@
-Return-Path: <bruce.ashfield@gmail.com>
-Received: from mail-vk0-f53.google.com (mail-vk0-f53.google.com
-	[209.85.213.53])
-	by mail.openembedded.org (Postfix) with ESMTP id A6B33731D8;
-	Fri, 11 Mar 2016 16:21:23 +0000 (UTC)
-Received: by mail-vk0-f53.google.com with SMTP id c3so139808302vkb.3;
-	Fri, 11 Mar 2016 08:21:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc; bh=4ovDmWQjlxVOC/kuoGJOxw7tcQIXv311WqtbEHH/Bfs=;
-	b=wQiaB9/vLSFJAfxyzYt5zJx5TX0LnCIbfrf6jE+diY3kDAMUdZnJd284S4pgE1t2UG
-	KT7wDRfvtpN07H4upyYCMOgbS9AK3vBorZGmX3xVeRffNv1UXtI60aRGIIIOIGkrVS+O
-	elB7aLzRVfb3fl8Hl9wZ2Zw5OyUOY8V+YR5hpFdDXyTRfJb5nfu0nTglZa5z56LwN8F5
-	lbIDCaGgPwk2M5n7iAGgg3E/RSlX+Fg/AMg6a9SOM9yzEiZOiMxHtaotB5Ho2wSGbhtY
-	D9x9SLxS0u8DM8hvvhwb9eYKDSFQjGqW3uHwt64bCRwdnHyZ/lr/LL9SyNSoy7Sfdsih
-	Nu2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc;
-	bh=4ovDmWQjlxVOC/kuoGJOxw7tcQIXv311WqtbEHH/Bfs=;
-	b=V+TqArIemcu0IerbHf1+b1idJeRTvzm6WkgJ80Ao6Zro7nsk8hJR+mZsjfEhFv7WGT
-	Yt/1NNmzbKuGB1Yu1RmLZWsAFeNjuDjgUrHDUFiUB1J+3TJSoKJ6Y14YCzeWrmHB/u3R
-	/mnmSIFb8ew+kLi4kXjqT+o7wpDi9nDOv0+wbP8pkHB12X7aNFO/OC4NUIra3jkfHXjd
-	BO0FIj+iczEzcKDOwuL28iudZnpKR3pohci1gY64ytHe+UH6PsHAc1jV1VswJsV3s5LI
-	QqJaBJhWKPQzn9g06FLxMxXrkTooYPwnOqmzzTCFJ/J5mYwn87O8gfFULoX5VtL3Or/z
-	W0Xw==
-X-Gm-Message-State: AD7BkJJKQ19Vl0Ot6RDbyyaw18rF0/lwtoCWWv8215RvIvBwJ2VF9aPFJv99Mh7JymzA5mfRkkM8kYjmZLPoPg==
+Return-Path: <anibal.limon@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 43A9E731F9
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Mar 2016 16:56:13 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by orsmga102.jf.intel.com with ESMTP; 11 Mar 2016 08:56:13 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.24,321,1455004800"; 
+	d="asc'?scan'208";a="762441837"
+Received: from alimonb-mobl1.zpn.intel.com (HELO [10.219.5.54]) ([10.219.5.54])
+	by orsmga003.jf.intel.com with ESMTP; 11 Mar 2016 08:56:12 -0800
+To: Stefan Agner <stefan@agner.ch>
+References: <1d5cc52037d090b4f12b24f85bc361f6@agner.ch>
+From: =?UTF-8?B?QW7DrWJhbCBMaW3Ds24=?= <anibal.limon@linux.intel.com>
+Message-ID: <56E2F8B7.3010606@linux.intel.com>
+Date: Fri, 11 Mar 2016 10:56:23 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.3.0
 MIME-Version: 1.0
-X-Received: by 10.31.6.17 with SMTP id 17mr10782219vkg.75.1457713284624; Fri,
-	11 Mar 2016 08:21:24 -0800 (PST)
-Received: by 10.176.6.42 with HTTP; Fri, 11 Mar 2016 08:21:24 -0800 (PST)
-In-Reply-To: <20160311161353.GA2646@jama>
-References: <20160310115301.GC2573@jama> <56E2E731.1040005@windriver.com>
-	<CADkTA4N43Zi=oLVRe99eEvvPjgYethKFNKH3J90Bss_AzqovVg@mail.gmail.com>
-	<20160311161353.GA2646@jama>
-Date: Fri, 11 Mar 2016 11:21:24 -0500
-Message-ID: <CADkTA4N9fYRt15y36RBUYrQBu=7DAdWdw7iAamMY7s0xvSfLaQ@mail.gmail.com>
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2016-03-09
+In-Reply-To: <1d5cc52037d090b4f12b24f85bc361f6@agner.ch>
+Cc: openembedded-devel@lists.openembedded.org,
+	Marcel Ziswiler <marcel@ziswiler.com>, angstrom-distro-devel@linuxtogo.org
+Subject: Re: license_create_manifest fails on jethro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,122 +34,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2016 16:21:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 11 Mar 2016 16:56:14 -0000
+X-Groupsio-MsgNum: 60494
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="gqjNaLpB9OLBS6hKVeRm3uI167TtqOC1n"
 
-On Fri, Mar 11, 2016 at 11:13 AM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+--gqjNaLpB9OLBS6hKVeRm3uI167TtqOC1n
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-> On Fri, Mar 11, 2016 at 10:52:14AM -0500, Bruce Ashfield wrote:
-> > On Fri, Mar 11, 2016 at 10:41 AM, Mark Hatle <mark.hatle@windriver.com>
-> > wrote:
-> >
-> > > On 3/10/16 5:53 AM, Martin Jansa wrote:
-> > > > Aggressive PNBLACKLISTing continues. But linux-yocto (and modules
-> > > depending on it)
-> > > > are still broken :/.
-> > > >
-> > > > I'll look at cef3 and chromium issue, my recent patch for
-> meta-browser
-> > > > fixed the build for armv7a MACHINEs, so it probably needs to be
-> extended
-> > > > a bit to cover warnings in x86 and then duplicate the same to cef3.
-> > > > This issue is there for so long, slowing down the builds
-> significantly
-> > > > (and causing logs to be much bigger) - I don't use these recipes but
-> I
-> > > > hate the failures even more.
-> > > >
-> > >
-> > > Is see the reported log failure, but I've been building with the
-> oe-core
-> > > and
-> > > poky linux-yocto head of master for the last couple weeks, all arches
-> > > includes
-> > > qemux86.
-> > >
-> >
-> >
-> > I don't know what to say about those failures either. I've been chasing
-> > perf build
-> > races for the past week, and that includes building linux-yocto hundreds
-> of
-> > times,
-> > and I've never seen the uapi headers not be in place like the logs show.
->
-> My guess (and supported by Andrea) is that it's caused by
-> linux-yocto-tiny which is built as part of bitbake world and probably
-> not included in your tests when you build the same linux-yocto.
->
->
-Aha. Thanks, I'm working those problems as well and did reproduce a variant
-when rm_work is enabled. So I do have a thread to tug on for the failure.
+Hi Stefan,
 
-With that, plus your description below, I've got a better chance of seeing
-it.
+Seems that LICENSE_DIRECTORY set is causing this trouble i don't
+understand why? because i expanded LICENSE_DIRECTORY for copy licenses
+but if you revert the commit and works the new code needs to be
+compatible. Could you give me the instructions for reproduce your case?
 
-Cheers,
+For the license warnings is related to the same LICENSE_DIRECTORY thing
+because it wasn't able to collect (copy) the licenses.
 
-Bruce
+	alimon
 
+- Resending... due to a list unsubscription.
 
-> That would also explain why these issues break almost every qemux86 and
-> I haven't seen them for qemuarm, linux-yocto-tiny has:
->   COMPATIBLE_MACHINE = "(qemux86)"
->
-> Try to run
-> "bitbake linux-yocto linux-yocto-tiny" couple times and maybe you'll be
-> able to reproduce it.
->
-> For next runs I've PNBLACKLISTED linux-yocto-tiny and
-> linux-yocto-tiny-kexecboot:
->
-> https://github.com/shr-project/jenkins-jobs/commit/c168b7824c2c68bd5894532fc122929d2d9df9a7
->
-> > The Yocto AB is also not showing it to me.
-> >
-> > Unless I can get access to a broken build, I'm at a loss to actually
-> debug
-> > and
-> > fix it.
-> >
-> > Bruce
-> >
-> >
-> > >
-> > > I don't see the error on my builder.  Is something changing the default
-> > > recipe/kernel configuration triggering the fault?
-> > >
-> > > --Mark
-> > >
-> > > > === qemux86 (2) ===
-> > > >     * /meta-openembedded/meta-python/recipes-devtools/python/
-> > > python-m2crypto_0.23.0.bb, do_compile
-> > > >     * /openembedded-core/meta/recipes-kernel/linux/
-> linux-yocto_4.4.bb,
-> > > do_compile
-> > >
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-core mailing list
-> > > Openembedded-core@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-core
-> > >
-> >
-> >
-> >
-> > --
-> > "Thou shalt not follow the NULL pointer, for chaos and madness await thee
-> > at its end"
->
+On 03/10/2016 09:12 PM, Stefan Agner wrote:
+> Hi Anibal,
+>=20
+> I think the patch a7976cbae3 ("license_class: Reimplemented manifest
+> creation in python") broke =C3=85ngstroms way of deploying license file=
+s.
+> With jethro I get the following error when building the _second_
+> machine:
+>=20
+> ERROR: Error executing a python function in
+> /build/ags/oe-core_V2.6/build/../stuff/meta-toradex/recipes/images/cons=
+ole-trdx-image.bb:
+>=20
+> The stack trace of python calls that resulted in this exception/failure=
+
+> was:
+> File: 'license_create_manifest', lineno: 110, function: <module>
+>      0106:
+>      0107:                        os.link(pkg_license,
+> pkg_rootfs_license)
+>      0108:
+>      0109:
+>  *** 0110:license_create_manifest(d)
+>      0111:
+> File: 'license_create_manifest', lineno: 86, function:
+> license_create_manifest
+>      0082:                pkg_rootfs_license_dir =3D
+> os.path.join(rootfs_license_dir, pkg)
+>      0083:                os.makedirs(pkg_rootfs_license_dir)
+>      0084:                pkg_license_dir =3D
+> os.path.join(d.getVar('LICENSE_DIRECTORY', True),
+>      0085:                                          =20
+> pkg_dic[pkg]["PN"])
+>  *** 0086:                licenses =3D os.listdir(pkg_license_dir)
+>      0087:                for lic in licenses:
+>      0088:                    rootfs_license =3D
+> os.path.join(rootfs_license_dir, lic)
+>      0089:                    pkg_license =3D
+> os.path.join(pkg_license_dir, lic)
+>      0090:                    pkg_rootfs_license =3D
+> os.path.join(pkg_rootfs_license_dir, lic)
+> Exception: OSError: [Errno 2] No such file or directory:
+> '/build/ags/oe-core_V2.6/build/out-glibc/deploy/licenses/colibri_imx7/a=
+lsa-utils'
+>=20
+> ERROR: Function failed: license_create_manifest
+> ERROR: Logfile of failure stored in:
+> /build/ags/oe-core_V2.6/build/out-glibc/work/colibri_imx7-angstrom-linu=
+x-gnueabi/console-trdx-image/V2.6-r0/temp/log.do_rootfs.29351
+> ERROR: Task 7
+> (/build/ags/oe-core_V2.6/build/../stuff/meta-toradex/recipes/images/con=
+sole-trdx-image.bb,
+> do_rootfs) failed with exit code '1'
+>=20
+> It might relate to how =C3=85ngstr=C3=B6m configures the LICENSE_DIRECT=
+ORY
+> variable (by including MACHINE_ARCH, see
+> https://github.com/Angstrom-distribution/meta-angstrom/blob/angstrom-v2=
+015.12-yocto2.0/conf/distro/include/angstrom-core-tweaks.inc):
+> LICENSE_DIRECTORY =3D "${DEPLOY_DIR}/licenses/${MACHINE_ARCH}"
+>=20
+> I am not sure what exactly causes the issue, but after reverting your
+> patch two consecutive builds of different machines succeeded...
+>=20
+> However, I still get a lot of warnings such as:
+> WARNING: The license listed LGPLv2.1 was not in the licenses collected
+> for systemd
+>=20
+> Any ideas?
+>=20
 > --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
+> Stefan
+>=20
 
 
+--gqjNaLpB9OLBS6hKVeRm3uI167TtqOC1n
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
--- 
-"Thou shalt not follow the NULL pointer, for chaos and madness await thee
-at its end"
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
+iQIcBAEBAgAGBQJW4vi6AAoJEGJqcE9h3glge3IQAIclmnsbdu0Y4Bexbt+pNhJn
+FjwewrlRA1bqQBZmO1ZBITEUvo4fkyQgyOO6oGmz5OFxaYS88bQp89hGPFQ9njZR
+MzZyPynJUcpIZD0qQmMll9dhG964pGSzylygpxQqTJxkyZZG5fyj3oGuloEgXRGT
+buNeQDldBAqMrdbbKvmYZgaoU28M4yEEuEKPoEb6pBGD/45ufK3pHc0f62UZSOrI
+YsNATH1o91zu+1f5fMzs0p1d6Z0NNVgvrVr2qm1j1n4tWlSHB+S2GjWNAJvq7rGN
+mREve2QBqJ9X/19QHkBVeT06scTqYVryTTZMRs5YElKf4bkcWb62lgHLMCHrfGXD
+9bQJuGTRXtkR4l1CKjawDLIGl8nKaRoHGf1YOKJYR7e3araQkg9SVnhDNePCF6Qt
+AXQRCP9VD2sVTK89M3UD8iNfcVPTcKnuUGL7SK63dFCEGiaLimWvmeVhRFOH9pfI
+StM4YmErEfzsOV/61OVOm3x/CLIC8VfT5hu9f4l7GYQCHhZvREFEFJszqmYY7G70
+KKnmXd4QTB21B+n06nmpkipf4Iz7N3ltkudv6v5qT33oCXbBBNJCprqR3oSWyCKq
+Jwb+ps3iG23Yk+ZPuhVraUtisP86CmjGkFyQMh6Cx8E/Ho4Opuf8Xyme/4jHlLb3
+6IhuzcPdWG90N2ztYd5U
+=HQJ0
+-----END PGP SIGNATURE-----
+
+--gqjNaLpB9OLBS6hKVeRm3uI167TtqOC1n--
