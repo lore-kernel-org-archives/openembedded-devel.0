@@ -1,27 +1,24 @@
-Return-Path: <stefan@agner.ch>
-X-Greylist: delayed 447 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 11 Mar 2016 03:23:15 UTC
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id 08E6E731F4
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6EC366FFD3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2016 03:23:15 +0000 (UTC)
-Received: from webmail.kmu-office.ch (unknown [178.209.48.103])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id B4D2D5C0310;
-	Fri, 11 Mar 2016 04:15:14 +0100 (CET)
+	Fri, 11 Mar 2016 06:29:48 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u2B6TlY2027202
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 10 Mar 2016 22:29:47 -0800 (PST)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Thu, 10 Mar 2016 22:29:46 -0800
+From: <kai.kang@windriver.com>
+To: <martin.jansa@gmail.com>
+Date: Fri, 11 Mar 2016 14:25:22 +0800
+Message-ID: <1457677523-21895-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.6.1
 MIME-Version: 1.0
-Date: Thu, 10 Mar 2016 19:12:55 -0800
-From: Stefan Agner <stefan@agner.ch>
-To: anibal.limon@linux.intel.com
-Message-ID: <1d5cc52037d090b4f12b24f85bc361f6@agner.ch>
-X-Sender: stefan@agner.ch
-User-Agent: Roundcube Webmail/1.1.3
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1457666114; bh=YSoV4ZYcFb19LGsrUkQsifplSXX23EwL1lApjH8Swjk=;
-	h=MIME-Version:Content-Type:Content-Transfer-Encoding:Date:From:To:Cc:Subject:Message-ID;
-	b=qy5vlXJphAw9UuZ5yj6HP2BHKLvYUZPDP68uOmALTCk9yqg3v/qtLFiVvrBqFG/xGpHsev1IuuN3LrkkdVD2+AFM0/tNzI11aV0rSelN58LyPTF3sT/OMr+BeERo+2epUi/uWo31iV4yVv1nLcQTkOd73oKkgiysYTKd6/jZJBs=
-Cc: openembedded-devel@lists.openembedded.org,
-	Marcel Ziswiler <marcel@ziswiler.com>, angstrom-distro-devel@linuxtogo.org
-Subject: license_create_manifest fails on jethro
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] V2: Add native package for crash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,71 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2016 03:23:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 11 Mar 2016 06:29:48 -0000
+Content-Type: text/plain
 
-Hi Anibal,
+From: Kai Kang <kai.kang@windriver.com>
 
-I think the patch a7976cbae3 ("license_class: Reimplemented manifest
-creation in python") broke Ångstroms way of deploying license files.
-With jethro I get the following error when building the _second_
-machine:
+V2:
+* clean runtime dependency for crash-native
 
-ERROR: Error executing a python function in
-/build/ags/oe-core_V2.6/build/../stuff/meta-toradex/recipes/images/console-trdx-image.bb:
+The following changes since commit a1e135a499998add7575682bf53db5e02e753580:
 
-The stack trace of python calls that resulted in this exception/failure
-was:
-File: 'license_create_manifest', lineno: 110, function: <module>
-     0106:
-     0107:                        os.link(pkg_license,
-pkg_rootfs_license)
-     0108:
-     0109:
- *** 0110:license_create_manifest(d)
-     0111:
-File: 'license_create_manifest', lineno: 86, function:
-license_create_manifest
-     0082:                pkg_rootfs_license_dir =
-os.path.join(rootfs_license_dir, pkg)
-     0083:                os.makedirs(pkg_rootfs_license_dir)
-     0084:                pkg_license_dir =
-os.path.join(d.getVar('LICENSE_DIRECTORY', True),
-     0085:                                           
-pkg_dic[pkg]["PN"])
- *** 0086:                licenses = os.listdir(pkg_license_dir)
-     0087:                for lic in licenses:
-     0088:                    rootfs_license =
-os.path.join(rootfs_license_dir, lic)
-     0089:                    pkg_license =
-os.path.join(pkg_license_dir, lic)
-     0090:                    pkg_rootfs_license =
-os.path.join(pkg_rootfs_license_dir, lic)
-Exception: OSError: [Errno 2] No such file or directory:
-'/build/ags/oe-core_V2.6/build/out-glibc/deploy/licenses/colibri_imx7/alsa-utils'
+  Revert "toybox: upgrade to 0.7.0" (2016-03-07 13:02:19 +0100)
 
-ERROR: Function failed: license_create_manifest
-ERROR: Logfile of failure stored in:
-/build/ags/oe-core_V2.6/build/out-glibc/work/colibri_imx7-angstrom-linux-gnueabi/console-trdx-image/V2.6-r0/temp/log.do_rootfs.29351
-ERROR: Task 7
-(/build/ags/oe-core_V2.6/build/../stuff/meta-toradex/recipes/images/console-trdx-image.bb,
-do_rootfs) failed with exit code '1'
+are available in the git repository at:
 
-It might relate to how Ångström configures the LICENSE_DIRECTORY
-variable (by including MACHINE_ARCH, see
-https://github.com/Angstrom-distribution/meta-angstrom/blob/angstrom-v2015.12-yocto2.0/conf/distro/include/angstrom-core-tweaks.inc):
-LICENSE_DIRECTORY = "${DEPLOY_DIR}/licenses/${MACHINE_ARCH}"
+  git@github.com:parr0tr1ver/meta-openembedded.git crash-native
 
-I am not sure what exactly causes the issue, but after reverting your
-patch two consecutive builds of different machines succeeded...
+for you to fetch changes up to 6b0f5b639b1796a10fdb5b0a50b49aeddf47a489:
 
-However, I still get a lot of warnings such as:
-WARNING: The license listed LGPLv2.1 was not in the licenses collected
-for systemd
+  crash: add native package (2016-03-11 14:17:20 +0800)
 
-Any ideas?
+----------------------------------------------------------------
+Kai Kang (1):
+      crash: add native package
 
---
-Stefan
+ meta-oe/recipes-kernel/crash/crash_7.1.3.bb | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
+
+-- 
+2.6.1
 
