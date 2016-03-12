@@ -1,27 +1,35 @@
-Return-Path: <stefan@agner.ch>
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id F1DC76612D
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 92D646FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Mar 2016 18:45:56 +0000 (UTC)
-Received: from webmail.kmu-office.ch (unknown [178.209.48.103])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id E2FFD5C0DC0;
-	Fri, 11 Mar 2016 19:45:21 +0100 (CET)
+	Sat, 12 Mar 2016 04:52:13 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 2D32768A01A; Sat, 12 Mar 2016 04:52:13 +0000 (GMT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: **
+X-Spam-Status: No, score=2.5 required=5.0 tests=ALL_TRUSTED,BAYES_50,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id E5C7468A019;
+	Sat, 12 Mar 2016 04:52:05 +0000 (GMT)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id 2FFFA674031E;
+	Sat, 12 Mar 2016 05:52:05 +0100 (CET)
+To: Martin Jansa <martin.jansa@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1457626042-28653-1-git-send-email-gary@mlbassoc.com>
+	<1457626042-28653-3-git-send-email-gary@mlbassoc.com>
+	<20160311131752.GA2555@jama>
+From: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <56E3A074.2020509@mlbassoc.com>
+Date: Sat, 12 Mar 2016 05:52:04 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-Date: Fri, 11 Mar 2016 10:43:03 -0800
-From: Stefan Agner <stefan@agner.ch>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <56E2F9C3.2090403@linux.intel.com>
-References: <1d5cc52037d090b4f12b24f85bc361f6@agner.ch>
-	<56E2F8B7.3010606@linux.intel.com> <56E2F9C3.2090403@linux.intel.com>
-Message-ID: <a6318d4129bc2cde6b96b2d4f0c26273@agner.ch>
-X-Sender: stefan@agner.ch
-User-Agent: Roundcube Webmail/1.1.3
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1457721921; bh=ddY2cnheob7rGbSz37K58e3Rs3yg47N7MvHVeQg0AVg=;
-	h=MIME-Version:Content-Type:Content-Transfer-Encoding:Date:From:To:Cc:Subject:In-Reply-To:References:Message-ID;
-	b=J8WYaMTQVx8J/mboJUJHl8uqqPoVGuUbqAKJqz93vSggm28a6hn/Hvus9HpxWpkIiJpHtkHSlqNjix9r9MtITitoXYsHUww2Gd0P0FgMo+RlW7LVYR1wPbn+873RxKf9YUvKlt4aIveBfArPs9v5j0TKDNqHsvO7SOyF9Ke5C1I=
-Cc: Marcel Ziswiler <marcel@ziswiler.com>, angstrom-distro-devel@linuxtogo.org
-Subject: Re: license_create_manifest fails on jethro
+In-Reply-To: <20160311131752.GA2555@jama>
+Subject: Re: [meta-oe][PATCH v3 2/2] mpv: Media Player
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,56 +42,152 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2016 18:45:57 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 12 Mar 2016 04:52:15 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Alimon,
+On 2016-03-11 14:17, Martin Jansa wrote:
+> On Thu, Mar 10, 2016 at 05:07:22PM +0100, Gary Thomas wrote:
+>> mpv is a fork of mplayer2 and MPlayer. It shares some features with
+>> the former projects while introducing many more.
+>>
+>> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+>> ---
+>>   meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb | 67 ++++++++++++++++++++++++
+>>   1 file changed, 67 insertions(+)
+>>   create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+>>
+>> diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+>> new file mode 100644
+>> index 0000000..acad319
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+>> @@ -0,0 +1,67 @@
+>> +SUMMARY = "Open Source multimedia player"
+>> +SECTION = "multimedia"
+>> +HOMEPAGE = "http://www.mpv.io/"
+>> +DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
+>> +           libxscrnsaver libv4l libxinerama \
+>> +"
+>
+> It's failing in world builds
+>
+> ERROR: mpv-0.15.0-r0 do_compile: Function failed: do_compile (log file is located at /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/mpv/0.15.0-r0/temp/log.do_compile.11834)
+> ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/mpv/0.15.0-r0/temp/log.do_compile.11834
+> Log data follows:
+> | DEBUG: Executing shell function do_compile
+> | Waf: Entering directory `/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/mpv/0.15.0-r0/mpv-0.15.0/build'
+> | [  1/195] Compiling version.sh
+> | [  2/195] Compiling TOOLS/osxbundle/mpv.app/Contents/Resources/icon.icns
+> | [  3/195] Compiling video/out/x11_icon.bin
+> | [  4/195] Compiling etc/input.conf
+> | [  5/195] Compiling sub/osd_font.otf
+> | [  6/195] Compiling video/out/opengl/nnedi3_weights.bin
+> | [  7/195] Compiling player/lua/defaults.lua
+> | [  8/195] Compiling player/lua/assdraw.lua
+> | [  9/195] Compiling player/lua/options.lua
+> | [ 10/195] Compiling player/lua/osc.lua
+> | [ 11/195] Compiling player/lua/ytdl_hook.lua
+> | [ 13/195] Processing ebml_types.h: demux/ebml.c demux/demux_mkv.c -> build/ebml_types.h
+> | [ 13/195] Compiling demux/ebml.c
+> | [ 14/195] Compiling DOCS/man/mpv.rst
+> | Traceback (most recent call last):
+> |   File "/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/rst2man.py", line 21, in <module>
+> |     from docutils.core import publish_cmdline, default_description
+> | ImportError: No module named docutils.core
+> |
+> | Waf: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/mpv/0.15.0-r0/mpv-0.15.0/build'
+> | Build failed
+> |  -> task in 'rst2man' failed (exit status 1):
+> | 	{task 139933719149072: rst2man mpv.rst -> mpv.1}
+> | ' /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/rst2man.py ../DOCS/man/mpv.rst DOCS/man/mpv.1 '
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Function failed: do_compile (log file is located at /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/mpv/0.15.0-r0/temp/log.do_compile.11834)
+> NOTE: recipe mpv-0.15.0-r0: task do_compile: Failed
+> ERROR: Task 15304 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb, do_compile) failed with exit code '1'
+>
 
-On 2016-03-11 09:00, Aníbal Limón wrote:
-> Hi Stefan,
-> 
-> I tried to build angstrom v2015.12-yocto2.0 using qemux86-64 and
-> systemd-image following [1] then the next errors appears:
-> 
-> ERROR: Nothing PROVIDES 'virtual/nativesdk-nativesdk-libx11' (but
-> virtual:nativesdk:/home/alimon/repos/angstrom/sources/openembedded-core/meta/recipes-graphics/libsdl/libsdl_1.2.15.bb
-> DEPENDS on or otherwise requires it). Close matches:
->   virtual/nativesdk-libx11
->   virtual/nativesdk-libc
->   virtual/nativesdk-db
-> 
-> ERROR: Required build target 'systemd-image' has no buildable providers.
-> Missing or unbuildable dependency chain was: ['systemd-image',
-> 'nativesdk-packagegroup-sdk-host', 'nativesdk-qemu', 'nativesdk-libsdl',
-> 'virtual/nativesdk-nativesdk-libx11']
+What recipe/package is pulling in rst?  I'll check the config options
+and make sure it builds correctly with/without that package present.
 
-Not sure what is going on, also had this error here with Poky. This
-helped for core-image-minimal:
-DISTRO_FEATURES_remove = "x11"
+>> +
+>> +REQUIRED_DISTRO_FEATURES = "x11"
+>> +
+>> +LICENSE = "GPLv2+"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=91f1cb870c1cc2d31351a4d2595441cb"
+>> +
+>> +SRC_URI = "https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz;name=mpv \
+>> +           http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf \
+>> +"
+>> +SRC_URI[mpv.md5sum] = "9042bd3fbff2bc8ba0b7fadaa4a22101"
+>> +SRC_URI[mpv.sha256sum] = "7d31217ba8572f364fcea2955733f821374ae6d8c6d8f22f8bc63c44c0400bdc"
+>> +SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
+>> +SRC_URI[waf.sha256sum] = "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
+>> +
+>> +inherit pkgconfig
+>> +
+>> +# Note: both lua and libass are required to get on-screen-display (controls)
+>> +PACKAGECONFIG ??= "lua libass"
+>> +PACKAGECONFIG[lua] = "--enable-lua,--disable-lua,lua luajit"
+>> +PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
+>> +PACKAGECONFIG[libarchive] = "--enable-libarchive,--disable-libarchive,libarchive"
+>> +
+>> +EXTRA_OECONF = " \
+>> +    --prefix=${prefix} \
+>> +    --target=${SIMPLE_TARGET_SYS} \
+>
+> Where is this variable set? git grep in oe-core and meta-oe didn't show anything.
+>
+> Did you copy it from mplayer2 recipe?
+>
+> If yes then you forgot to include:
+> export SIMPLE_TARGET_SYS="$(echo ${TARGET_SYS} | sed s:${TARGET_VENDOR}::g)"
 
-To quickly reproduce this, I now setup just the Freescale BSP with Poky:
-http://freescale.github.io/#download
+Thanks for pointing this out.
 
-Along with this config in conf/local.conf (which basically emulates the
-Ångström config):
-LICENSE_DIRECTORY = "${DEPLOY_DIR}/licenses/${MACHINE_ARCH}"
+>
+>> +    --confdir=${sysconfdir} \
+>> +    --datadir=${datadir} \
+>> +    --disable-manpage-build \
+>> +    --disable-gl \
+>> +    --disable-libsmbclient \
+>> +    --disable-encoding \
+>> +    --disable-libbluray \
+>> +    --disable-dvdread \
+>> +    --disable-dvdnav \
+>> +    --disable-cdda \
+>> +    --disable-enca \
+>> +    --disable-libguess \
+>> +    --disable-uchardet \
+>> +    --disable-rubberband \
+>> +    --disable-lcms2 \
+>> +    --disable-vapoursynth \
+>> +    --disable-vapoursynth-lazy \
+>> +"
+>> +
+>> +do_configure() {
+>> +    if [ ! -L ../waf ]; then
+>> +        chmod a+x ../waf-1.8.12
+>> +	ln -s waf-1.8.12 ../waf
+>> +    fi
+>> +    ../waf configure ${EXTRA_OECONF}
+>> +}
+>> +
+>> +do_compile () {
+>> +    ../waf build
+>> +}
+>> +
+>> +do_install() {
+>> +    ../waf install --destdir=${D}
+>> +}
+>> +
+>> +FILES_${PN} += "${datadir}/icons"
+>> --
+>> 2.5.0
 
-And enable copying licenses to the target directory:
-COPY_LIC_MANIFEST = "1"
-COPY_LIC_DIRS = "1"
-
-Then I built this two images:
-
-MACHINE=colibri-vf bitbake core-image-minimal
-MACHINE=colibri-imx6 bitbake core-image-minimal
-
-Note that for instance
-tmp/deploy/licenses/colibri_vf/base-files/
-exits after the first bitbake build, but the second bitbake build tries
-to copy the license from
-tmp/deploy/licenses/colibri_imx6/base-files/
-
---
-Stefan
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
