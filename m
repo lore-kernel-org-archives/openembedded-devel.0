@@ -1,24 +1,26 @@
 Return-Path: <Guojian.Zhou@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A22BA6FEF5
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id AD6956FF91
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Mar 2016 09:19:34 +0000 (UTC)
+	Tue, 15 Mar 2016 09:19:36 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u2F9JZwE009734
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u2F9JapX008370
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Mar 2016 02:19:35 -0700 (PDT)
+	Tue, 15 Mar 2016 02:19:36 -0700 (PDT)
 Received: from pek-lpgtest4.wrs.com (128.224.153.84) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Tue, 15 Mar 2016 02:19:34 -0700
+	14.3.248.2; Tue, 15 Mar 2016 02:19:35 -0700
 From: <guojian.zhou@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 15 Mar 2016 17:19:32 +0800
-Message-ID: <1458033573-20501-1-git-send-email-guojian.zhou@windriver.com>
+Date: Tue, 15 Mar 2016 17:19:33 +0800
+Message-ID: <1458033573-20501-2-git-send-email-guojian.zhou@windriver.com>
 X-Mailer: git-send-email 1.7.12.4
+In-Reply-To: <1458033573-20501-1-git-send-email-guojian.zhou@windriver.com>
+References: <1458033573-20501-1-git-send-email-guojian.zhou@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH] firefox: fix install issue and do_package_qa issues
+Subject: [meta-browser][PATCH] firefox: fix install issue and do_package_qa issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2016 09:19:34 -0000
+X-List-Received-Date: Tue, 15 Mar 2016 09:19:36 -0000
 Content-Type: text/plain
 
 From: Guojian Zhou <guojian.zhou@windriver.com>
