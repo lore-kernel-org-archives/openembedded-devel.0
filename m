@@ -1,47 +1,27 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id EFA6E60125
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 41D456FFED
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Mar 2016 11:42:50 +0000 (UTC)
-Received: by mail-lb0-f178.google.com with SMTP id bc4so18739274lbc.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Mar 2016 04:42:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=KmN9eoqvaX0I21oG9sEsFZKfVAlAL2p6T21aVKiVUqc=;
-	b=ggYdU1HepGTyw9qILaM4fiq+ye3iZ5CM4jAISxUDQFuH3iM+LySi7OPPYPL/jySq3N
-	go/29fG40j/KuIM4keIImo0GWEVlME+OUGpS/LPwd63d9op6w15K8tR2CJX3vbiPXEYj
-	PWa09QNgjdCLfUHoWE0SFGeh/m6XrxDVYrvKC2luDyEyQdesYTvzZLgBtjIOdz/x3j7r
-	Ji2az8bQyLQYd+RPrCkm83l99U/5kk32Gq1bhWaYxnasA77mI5ILHWA8DpcL8ICtO7uc
-	Li+iHLOoCsWIfHq0XJLKcPZLdNFg4OdZbvgAH8Jr414KvjcfIhnuwFQ/7QDYh2AMekoO
-	Vudw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=KmN9eoqvaX0I21oG9sEsFZKfVAlAL2p6T21aVKiVUqc=;
-	b=lfR9cdCIuJkrR0pbQyUl26SMvfGpqRfG/M2nyZsKhslCo2SPT+T5T83R6Eke5/IbyM
-	d2S8EAiICM8EKb5axn6RDxNZgzgwDtGeesY61Hm4QG/oqmFiYHazwIWZ4k6HZaqgSzKj
-	mL3M/0VVajYf2c7a88CGmmqzv2gYTA0BAWjlWJsmldEAggBMtqplWuOfp8nKq9bq8WZl
-	qzZd4bKrsnTQeEAFQC7mx5fWtgx+jszfHbo6C3sjbd6OdJiKKSJC0B5a11LyiAjgd62T
-	YmVzXiVScgwc9ATBqWIpw1ZfEDFKxegtOUMS3UNGtPIlhSQgvMneIWvMQjucIixXTgJI
-	AN+Q==
-X-Gm-Message-State: AD7BkJJGnUGt38Tezm4leslYI0QSpGBVdSgxFCxs0mfylMQt6q8B/m7YgVaUqFsqxxN6oDRBkNQilmpvl2Eg3g==
-X-Received: by 10.112.132.36 with SMTP id or4mr785152lbb.71.1458042170566;
-	Tue, 15 Mar 2016 04:42:50 -0700 (PDT)
+	Tue, 15 Mar 2016 14:13:27 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by orsmga101.jf.intel.com with ESMTP; 15 Mar 2016 07:10:58 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.24,339,1455004800"; d="scan'208";a="764559087"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
+	([10.237.68.161])
+	by orsmga003.jf.intel.com with ESMTP; 15 Mar 2016 07:10:56 -0700
+To: openembedded-devel@lists.openembedded.org
+References: <cover.1457535831.git.alexander.kanavin@linux.intel.com>
+	<41b4e4a82cb652470eebe853bd1b6076cee59301.1457535831.git.alexander.kanavin@linux.intel.com>
+	<20160310142507.GI2573@jama>
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Message-ID: <56E8170C.2010503@linux.intel.com>
+Date: Tue, 15 Mar 2016 16:07:08 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Icedove/38.6.0
 MIME-Version: 1.0
-Received: by 10.114.109.68 with HTTP; Tue, 15 Mar 2016 04:42:30 -0700 (PDT)
-In-Reply-To: <20160315103617.GA2551@jama>
-References: <1457957618-32168-1-git-send-email-ricardo.ribalda@gmail.com>
-	<1457957618-32168-2-git-send-email-ricardo.ribalda@gmail.com>
-	<20160315103617.GA2551@jama>
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Tue, 15 Mar 2016 12:42:30 +0100
-Message-ID: <CAPybu_0ohZW99WQKS3tz61cTpLvXFEu9NaYmnXarYqTH-rOkvQ@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2 2/4] opencv: Remove blacklist
+In-Reply-To: <20160310142507.GI2573@jama>
+Subject: Re: [PATCH 14/38] python-gst: remove the 0.10 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,55 +34,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2016 11:42:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 15 Mar 2016 14:13:29 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-That is really weird. I was pretty sure that I tried it fine on my build.
-
-Let me build it again from scratch.
-
-Sorry!
-
-On Tue, Mar 15, 2016 at 11:36 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Mon, Mar 14, 2016 at 01:13:36PM +0100, Ricardo Ribalda Delgado wrote:
->> Version 3.0 builds fine with ffmpeg v3
+On 03/10/2016 04:25 PM, Martin Jansa wrote:
+> On Wed, Mar 09, 2016 at 05:05:30PM +0200, Alexander Kanavin wrote:
+>> It depends on pygobject 2.x which has been update to 3.x in oe-core
 >
-> No it doesn't, 3.1 might
->
-> http://errors.yoctoproject.org/Errors/Details/55791/
->
->>
->> [ 32%] Building CXX object
->> modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_ffmpeg.cpp.o
->> DEBUG: Shell function do_compile finished
->> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
->> ---
->>  meta-oe/recipes-support/opencv/opencv_3.0.bb | 5 +----
->>  1 file changed, 1 insertion(+), 4 deletions(-)
->>
->> diff --git a/meta-oe/recipes-support/opencv/opencv_3.0.bb b/meta-oe/recipes-support/opencv/opencv_3.0.bb
->> index f6c4ca8fac16..1a34efa7f01f 100644
->> --- a/meta-oe/recipes-support/opencv/opencv_3.0.bb
->> +++ b/meta-oe/recipes-support/opencv/opencv_3.0.bb
->> @@ -130,7 +130,4 @@ do_install_append() {
->>
->>      install -d ${D}${datadir}/OpenCV/samples/bin/
->>      cp -f bin/*-tutorial-* bin/*-example-* ${D}${datadir}/OpenCV/samples/bin/
->> -}
->> -
->> -# http://errors.yoctoproject.org/Errors/Details/40660/
->> -PNBLACKLIST[opencv] ?= "Not compatible with currently used ffmpeg 3"
->> +}
->> \ No newline at end of file
->> --
->> 2.7.0
->>
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> This wont make freesmartphone people happly (if there still are some)
+
+Martin, I seriously think that you should implement a policy and process 
+for deprecating and then removing obsolete and unused recipes from meta-oe.
+
+We should be spending our time on solving issues with current software, 
+not on providing life support to things that qualify as 'retro computing'.
 
 
+Alex
 
--- 
-Ricardo Ribalda
 
