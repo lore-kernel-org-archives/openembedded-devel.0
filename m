@@ -1,24 +1,24 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 598786057B
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 987AB70178
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2016 00:43:20 +0000 (UTC)
+	Wed, 16 Mar 2016 06:33:24 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u2G0hKmt000919
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u2G6XOVL019408
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Mar 2016 17:43:20 -0700
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	Tue, 15 Mar 2016 23:33:24 -0700 (PDT)
+Received: from pek-jhuang0-d1.wrs.com (128.224.162.218) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Tue, 15 Mar 2016 17:43:19 -0700
-From: <rongqing.li@windriver.com>
+	14.3.248.2; Tue, 15 Mar 2016 23:33:23 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 16 Mar 2016 08:38:38 +0800
-Message-ID: <1458088718-28523-1-git-send-email-rongqing.li@windriver.com>
+Date: Wed, 16 Mar 2016 14:31:50 +0800
+Message-ID: <1458109910-14277-1-git-send-email-jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] edac-utils: update the version
+Subject: [meta-oe][PATCH] libsmi: set the SH to the target path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,36 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2016 00:43:23 -0000
+X-List-Received-Date: Wed, 16 Mar 2016 06:33:26 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+From: Jackie Huang <jackie.huang@windriver.com>
 
-The current edac-utils is v0.18, not v0.16 as the declaration in NEWS file:
-  -------------------------------
-  | Version 0.18 (2011-11-09);
-  |- Do not print "No errors to report" with edac-util --quiet
-  |- Add DIMM labels for Intel S2600JF and Supermicro H8QG6
-  -------------------------------
+Set the SH to the target path to avoid host contamination,
+which causes the following issue on some hosts:
+| WARNING: QA Issue: /usr/bin/smicache_libsmi contained in
+  package libsmi requires /usr/bin/sh, but no providers
+  found in its RDEPENDS [file-rdeps]
+| Computing transaction...error: Can't install
+  libsmi-0.4.8-r0.0@corei7_64: no package provides /usr/bin/sh
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-oe/recipes-support/edac-utils/edac-utils_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/edac-utils/edac-utils_git.bb b/meta-oe/recipes-support/edac-utils/edac-utils_git.bb
-index d315324..76d5af4 100644
---- a/meta-oe/recipes-support/edac-utils/edac-utils_git.bb
-+++ b/meta-oe/recipes-support/edac-utils/edac-utils_git.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- DEPENDS = " sysfsutils"
+diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
+index 2b35c59..b049067 100644
+--- a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
++++ b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
+@@ -14,6 +14,8 @@ SRC_URI[sha256sum] = "f21accdadb1bb328ea3f8a13fc34d715baac6e2db66065898346322c72
  
- SRCREV = "f9aa96205f610de39a79ff43c7478b7ef02e3138"
--PV = "0.16+git${SRCPV}"
-+PV = "0.18+git${SRCPV}"
+ inherit autotools
  
- S = "${WORKDIR}/git"
- 
++EXTRA_OECONF = "ac_cv_path_SH=${base_bindir}/sh"
++
+ do_install_append () {
+     install -d ${D}${sysconfdir}
+     install -m 0644 ${WORKDIR}/smi.conf ${D}${sysconfdir}/smi.conf
 -- 
 1.9.1
 
