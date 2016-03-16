@@ -1,48 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F5DE7016E
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 32D9E6E64A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2016 15:44:08 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id p65so78510005wmp.0
+	Wed, 16 Mar 2016 17:41:55 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id l68so200946368wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Mar 2016 08:44:10 -0700 (PDT)
+	Wed, 16 Mar 2016 10:41:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=fmG9pJRAkcDyGFHoOhKC51GMkCcPGCweeZeYSc7B7No=;
-	b=ORANmc1EXWNrxIqs91uTextyaAPLwvNO3ahQXoRjPolvW57xJO/qXMP45WsWQuWPhM
-	FduLA7ilXPXvtcxo/PZQSjQOJQyGI7PY5JQLCsbI4ieacz160kS6kkIFhAVxhboYkUIS
-	ofj7JZf4l+zFnHlPiRK2NJMvoLTNGNTtRMEKzSG/PBadX6KeRYx1Nhvn2VvEU+Q5aebq
-	RGld64vgulfHZZlU6SQB8RuCJO1WRxS2hcSu306+gsaEmNLIMlVhc9HxxQU722nj7ih6
-	+ml63+ANP+VNhU8AGSIstsCtrzakteKQUdPVTb+mFJWKRM9SmsmqtWuLCxd/q15pI/Y4
-	aQIA==
+	h=from:subject:date:message-id:to:mime-version;
+	bh=jFC4LhPNk7Zte7dPFSWK5Sva7PJDa9j5lnWXm7azO3k=;
+	b=c5RTlcmG1TAmmAW1YlwiUpB9o7uwREukLC8Ik2xkKrg2Cf5nrPML3t2sTYoTWwDt6F
+	/oPRoNbQVrUmcjTfAZkIJe2EYckVdzu5Rv3+P8nxTj+QNwL92TgGawtRKa079d/3XX6d
+	BRWuOo+khwZBDeHeQ9EwuzPMM3mPEq8fY3gts54cuu/w3DbFn/bGpsZ4S2qkXPYJixTw
+	XVn7nTlo/p67F+L4Q9xMGBi+n0lZ6lxTLjM3aR+VCpF4UPmmIfATByb0hytd5tuEIFv9
+	ipuSIc+zFdnRPOZKv1/7iYjrpief7NEKUma491Pk3c3bQhkQCNMUjd4Iu7mNT4eEJuWp
+	/SHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=fmG9pJRAkcDyGFHoOhKC51GMkCcPGCweeZeYSc7B7No=;
-	b=gLrbT8DtjOpzWVwmpZYPIFfBwSZe8aJIcsBjOdasZ8uTtRypOZ1fpMZWkN90h4mjrC
-	uXWZHelJqdra6X1GVLLaJkBHoaaKUjnyreQRtNvad2dubZ/trQRtCotbPWUjEaiiuMGG
-	CcJnVb5s38lt4fGp39BN+N2ceVR/qR/lZj+DMygHzq5jN6amsgBRr3NNjSbA1siUszBh
-	vljges8qdTCnIeCHh1Y43MYZyKgEtiOvHiAysu1itAgWvxSMZJv3gs21pZaSc3RxQCsz
-	rd9rnGFCoUCfUzBfnmIbvU+d3fjsv8Hg95y7uG7fpmYTYgqwnHrSLMhp6ewjKs+ymG1y
-	UFIA==
-X-Gm-Message-State: AD7BkJLtoATHYH3VOVIdtGHbTreF7vlKrVS3xivYm4TAZE1aBru0du6uuV6L3h8gFfasWw==
-X-Received: by 10.194.184.171 with SMTP id ev11mr4461618wjc.44.1458143049461; 
-	Wed, 16 Mar 2016 08:44:09 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	w15sm25993998wmd.10.2016.03.16.08.44.08
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 16 Mar 2016 08:44:08 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Mar 2016 16:47:42 +0100
-Message-Id: <1458143262-22936-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.3
-In-Reply-To: <1458143262-22936-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1458143262-22936-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-browser 2/2] cef3: comment out gtests completely
+	h=x-gm-message-state:from:subject:date:message-id:to:mime-version;
+	bh=jFC4LhPNk7Zte7dPFSWK5Sva7PJDa9j5lnWXm7azO3k=;
+	b=d4h7PIrC1rdqsiotqdFRjEVJqksAeUL7LOcWtiVpUU4IYqXtNS6CMWU122k3tLWSA9
+	wCPzndUGQzs0cXOuRBavfKWZn+W6t4S0YnmqrnDqKdXk1ftlrezdWNYxRjJOKvq1uHfR
+	k0xCvz61eBkvqWWYtTw+bleTOiPVnOzyl4Z3sjz/jzlViC4sh1W+VkcuREcftzAVc676
+	vEcV5GZKuZMwdSbVW/HBwR3EG7cutgpjiWIVJt3QsXs/dJvM+7J/xoI7tzyyjpiLBlxy
+	D6DeLPnth25zRq+1g6SpvCSrCv5D9/DShFwEYc/xLmdzNNEdPAph0i4+zemNc3++DgRx
+	gIuQ==
+X-Gm-Message-State: AD7BkJJsuvQPYlyINVal87SBvyrQ2gb6zLOR3+QFLFVr67uvHgyTsEWX3tllebA/FglgvQ==
+X-Received: by 10.194.23.7 with SMTP id i7mr5197374wjf.9.1458150116162;
+	Wed, 16 Mar 2016 10:41:56 -0700 (PDT)
+Received: from walter.muppets.liwing.de (p578b540c.dip0.t-ipconnect.de.
+	[87.139.84.12])
+	by smtp.gmail.com with ESMTPSA id i5sm4025009wjx.15.2016.03.16.10.41.54
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 16 Mar 2016 10:41:55 -0700 (PDT)
+From: Jens Rehsack <rehsack@gmail.com>
+X-Pgp-Agent: GPGMail 2.6b2
+Date: Wed, 16 Mar 2016 18:41:53 +0100
+Message-Id: <FDFA07CC-D6C7-438F-8FE8-345C2A226C26@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
+X-Mailer: Apple Mail (2.3112)
+Subject: [meta-cpan] pushed to master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,98 +54,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Mar 2016 15:44:12 -0000
+X-List-Received-Date: Wed, 16 Mar 2016 17:41:56 -0000
+X-Groupsio-MsgNum: 60531
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_2F5838E6-D8E9-4427-AF57-53A9F325F766";
+	protocol="application/pgp-signature"; micalg=pgp-sha512
 
-* the old fix wasn't enough and it was still failing with warnings
-  about unused variables in gtests
+--Apple-Mail=_2F5838E6-D8E9-4427-AF57-53A9F325F766
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- ...-test.h-disable-warning-unused-definition.patch | 72 +++++++++++++++++++++-
- 1 file changed, 70 insertions(+), 2 deletions(-)
+Hi,
 
-diff --git a/recipes-browser/chromium/cef3/0003-gtest-typed-test.h-disable-warning-unused-definition.patch b/recipes-browser/chromium/cef3/0003-gtest-typed-test.h-disable-warning-unused-definition.patch
-index 97a6116..a53dbc5 100644
---- a/recipes-browser/chromium/cef3/0003-gtest-typed-test.h-disable-warning-unused-definition.patch
-+++ b/recipes-browser/chromium/cef3/0003-gtest-typed-test.h-disable-warning-unused-definition.patch
-@@ -38,6 +38,74 @@ index fe1e83b..5053bbe 100644
- +#pragma GCC diagnostic pop
- +
-  #endif  // GTEST_INCLUDE_GTEST_GTEST_TYPED_TEST_H_
---- 
--1.8.4.5
- 
-+diff -uNr a/base/test/sequenced_task_runner_test_template.h b/base/test/sequenced_task_runner_test_template.h
-+--- a/base/test/sequenced_task_runner_test_template.h	2014-10-28 02:07:09.000000000 -1000
-++++ b/base/test/sequenced_task_runner_test_template.h	2016-03-10 09:38:16.987413000 -1000
-+@@ -23,6 +23,9 @@
-+ #include "base/time/time.h"
-+ #include "testing/gtest/include/gtest/gtest.h"
-+ 
-++#pragma GCC diagnostic push
-++#pragma GCC diagnostic warning "-Wunused"
-++
-+ namespace base {
-+ 
-+ namespace internal {
-+@@ -326,6 +329,7 @@
-+ // whether the implementation supports nested tasks.
-+ //
-+ 
-++/*
-+ REGISTER_TYPED_TEST_CASE_P(SequencedTaskRunnerTest,
-+                            SequentialNonNestable,
-+                            SequentialNestable,
-+@@ -335,6 +339,8 @@
-+                            DelayedTasksSameDelay,
-+                            DelayedTaskAfterLongTask,
-+                            DelayedTaskAfterManyLongTasks);
-++*/
-++#pragma GCC diagnostic pop
-+ 
-+ }  // namespace base
-+ 
-+diff -uNr a/base/test/task_runner_test_template.h b/base/test/task_runner_test_template.h
-+--- a/base/test/task_runner_test_template.h	2014-10-28 02:07:09.000000000 -1000
-++++ b/base/test/task_runner_test_template.h	2016-03-10 09:39:02.051413000 -1000
-+@@ -207,8 +207,10 @@
-+             this->task_tracker_->GetTaskRunCounts());
-+ }
-+ 
-++/*
-+ REGISTER_TYPED_TEST_CASE_P(
-+     TaskRunnerTest, Basic, Delayed, RunsTasksOnCurrentThread);
-++*/
-+ 
-+ }  // namespace base
-+ 
-+diff -uNr a/testing/gtest/include/gtest/gtest-typed-test.h b/testing/gtest/include/gtest/gtest-typed-test.h
-+--- a/testing/gtest/include/gtest/gtest-typed-test.h	2016-03-10 10:25:47.371413000 -1000
-++++ b/testing/gtest/include/gtest/gtest-typed-test.h	2016-03-10 09:35:25.811413000 -1000
-+@@ -34,6 +34,7 @@
-+ 
-+ #pragma GCC diagnostic push
-+ #pragma GCC diagnostic warning "-Wunused"
-++#pragma GCC diagnostic warning "-Wunused-variable"
-+ 
-+ // This header implements typed tests and type-parameterized tests.
-+ 
-+diff -uNr a/testing/gtest/include/gtest/gtest.h b/testing/gtest/include/gtest/gtest.h
-+--- a/testing/gtest/include/gtest/gtest.h	2014-10-27 23:19:20.000000000 -1000
-++++ b/testing/gtest/include/gtest/gtest.h	2016-03-10 09:36:13.607413000 -1000
-+@@ -63,7 +63,11 @@
-+ #include "gtest/gtest-printers.h"
-+ #include "gtest/gtest_prod.h"
-+ #include "gtest/gtest-test-part.h"
-++#pragma GCC diagnostic push
-++#pragma GCC diagnostic warning "-Wunused"
-++#pragma GCC diagnostic warning "-Wunused-variable"
-+ #include "gtest/gtest-typed-test.h"
-++#pragma GCC diagnostic pop
-+ 
-+ // Depending on the platform, different string classes are available.
-+ // On Linux, in addition to ::std::string, Google also makes use of
--- 
-2.7.3
+I pushed following commits to master of meta-cpan =
+(https://github.com/rehsack/meta-cpan)
+
+6b1f323 net-dns-perl: add recipe for Net::DNS
+4d01125 moo-perl: update to 2.001001
+c0049e3 mime-types-perl: update to 2.13
+24f2213 devel-stacktrace-perl: update to 2.01
+9757a34 data-munge-perl: update to 0.096
+939fd5d class-method-modifiers-perl: Update to 2.12
+293c32c capture-tiny-perl: Update to 0.36
+722850b perl-tidy-perl: Update recipe to 20160302
+37f5371 log-any-adapter-daemontools-perl: Add recipe for =
+Log::Any::Adapter::Daemontools 0.101
+a0d6f66 file-touch-perl: Add recipe for File::Touch 0.11
+
+At end of February, those where already pushed:
+
+c7c5266 encode-perl: Update to 2.82
+59cb8a8 regexp-common-perl: Update to 2016020301
+ca63f61 text-csv_xs-perl: Update to 1.22
+eb07ebb yaml-libyaml-perl: Update to 0.62
+95dac2f datetime-format-strptime-perl: Update to 1.64
+caf1cfb crypt-pbkdf2-perl: Update to 0.160410
+d103a68 io-socket-ssl-perl: Update to 2.024
+23771f5 path-class-perl: Update to 0.36
+44a5080 moose-perl: Update to 2.1605
+2466782 scalar-list-utils-perl: Update to 1.43
+74a3c03 params-validate-perl: Update to 1.22
+a01a1dc log-any-perl: Update to 1.040
+89a9485 capture-tiny-perl: Update to 0.34
+f11ac8d dbd-sqlite-perl: Update to 1.50.
+e121472 netaddr-ip-perl: Add recipe for NetAddr::IP 4.078
+
+Cheers
+--
+Jens Rehsack - rehsack@gmail.com
 
 
+--Apple-Mail=_2F5838E6-D8E9-4427-AF57-53A9F325F766
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iQIcBAEBCgAGBQJW6ZriAAoJEESZlq7c5QqdHE0P+wSDQqM6X1GijKhOGfHtljd/
+6ChfzH25svMwkp7ncNyiUutahgtVIh8DQTfZ+5Wxbe1fi0dvuaiYDuZMMQiVCm7w
+GxJxU5o69oz3u8ig1TLVfRjojwKBrPuWMu4VKicp0iSL0t4Pp27riSMPDXwhZIoA
+8rKwc1KHoT6G+ucb2gPhPCRTydWKGMb42ily1r4LuxzRkjCQoK33wN8cxNSK0hoV
+voCZWLxuAOmsqfxxSNDCtaxaJz7Fv8EEO7HE7Y4USBHsZwLk9OTA/kqrQkkkTVT6
+7C6vcE03cOvx/yZDnG/IpNg+vOkpP1U0KH+U0DGYvPeYGUMdFypwmE9CuQx/hOK0
+/rN+T/Yd91dX5BfZRJC871Vjv25cIOaW3OTG80b1BstBO/5KGVIEM+2EwuXZugOa
+dAnSoG7LpI7yFxcjOlG2AZV+06dxppMVqJKw0LogLvPEpMtl6mda1VkBfS/D//6O
+bH5uC1aVr+Z47eKjJzvor5WmH7f2igZhK1aqaDVdhkjG5x1SXPIDi7Uw0a56wF65
+tZYtthHz3VGzzd60Z+NNaciYuLf+RRMzk2CughmiCHHGbWBNMwJa31R25/gZZhDZ
+GNRilnspMSTTxzabOPSemDklwB8ZgxTuIahAM0Djz3Ct01++m3I4UmrjX+KIDLHN
+MsLCp3GGoSSnxFZtUPw3
+=pDuR
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_2F5838E6-D8E9-4427-AF57-53A9F325F766--
