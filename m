@@ -1,50 +1,44 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CBD36FF69
+	by mail.openembedded.org (Postfix) with ESMTP id 6FEF06FEF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2016 21:45:43 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id l124so10450061wmf.1
+	Thu, 17 Mar 2016 21:48:34 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id p65so12582202wmp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2016 14:45:44 -0700 (PDT)
+	Thu, 17 Mar 2016 14:48:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=q+8yL+R7JVbgIiiJSm7SQUSpX4CHtuRpJNr5n8o7JnY=;
-	b=LBDVb2OT5NOULozCSvs7wmP4WuAL5l8epNZpv46oBydZEH0wdBbE3Q+co0uzINxabe
-	SYeawk5EP2v2NAzx+SvjmSc0hghHqoTSthgiwF8R7hNpKKPXi2M1ZCVRgzE4SOuP17Y9
-	1aAP0PmeKz6OhwIhUcyu7QLYcuI5qGa5SOtaAYsURM+QZlcBulgW5Tc3GxTzuRQ1mrIy
-	J+UDVU2JPqGseykeU/MN9S6j7oafDK/Bf9CUiFzX9qfjFg2DwPLuFagUQ/NbioR/1N4R
-	lhGEryeBIIajD752P5X4QD38RSAYT5W+lTDOf0J2LGA5nM+Ogr+1+XvL1icAfuyj7mhp
-	sXZQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=bMQhC1NpZtcynUeVNWVBTHI2CSMkS/eM8lZQQiGypiU=;
+	b=PHLeTW7Nl8NFUGI6O7uNOPp+7J1vT5LEb0AITjvX4R2zGrXZXE9dzH59V55EMlncNE
+	imINEfaDChmqbky76yba2HiRorSNjBJB6IpgQxlGPc7uQMsnhnWzPqt/gUcXxaVmNCkA
+	IS3SZNPRqKpN92xFBRIfZuHjSepk2zkxLsTc99E9sRnhGbrVUhond6W4Cm/kHjZVqiN5
+	D/EQWtH6X89Nv3DGPsNSg7nKp9rT621S64SUPaKd3HZSFdXcgorSBfJlrjjXA0reWgaD
+	IAX8sl8cXLauvoheoYBdD/eo707dHOcOB9X6JtH9yxgI/dRMNbpLRZ+PejwNYLTOmWTx
+	KAfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=q+8yL+R7JVbgIiiJSm7SQUSpX4CHtuRpJNr5n8o7JnY=;
-	b=fP4iZjF6V2F0DP4JSeUdx6vQxgydsOi6P+bPIO3rbKbF8CiItCOKzTk4ivj5BrmfYY
-	FJdCvRu6tRRvPpEcIOvzKTcGPcwgRvSrKSiyhCUvpMsvwUPKdsSVYuzXGSbXF0Zk1cQN
-	Up8pEUZTJsaVnDGaqbLT0LmV+9PB+SOMPuBnzrJFT5lFvAksslkLJzsI6FvI1kJRC18Z
-	0Xps/v+ItQCgKvI+CKMBdIxxubMJA/n64RQZ7HDWnpzi+W8QMI8Ajq86L/jue+xBmVn0
-	mIOlKvlRh8yCNx91g6thuLpYIFQmxX1F0Tf19qEG8qdS0cKHvLYBuVYFzRyjFRZJej6K
-	m9cw==
-X-Gm-Message-State: AD7BkJInN6IV09sjMBtxW8+cELjHV4knNcPJFX9r9inu9EI2LIGYj4mOCo7nZQURlxnfTQ==
-X-Received: by 10.28.136.19 with SMTP id k19mr12465489wmd.11.1458251143755;
-	Thu, 17 Mar 2016 14:45:43 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=bMQhC1NpZtcynUeVNWVBTHI2CSMkS/eM8lZQQiGypiU=;
+	b=L6ou0G7ajhE+9SCnpqAN46KFgdbH5Ve72ZD2lvLa0cjMGNphCeNirckHMjCnntQQD4
+	tH7xcWV8FAEtABxrjOYdWsZFGz/6QAGs58Ne/3m7DjM4Jhz2abHztTk+mPELgQt/6cHn
+	XlkK1qtKQ35EV2sbSwOk/COhmyGHc4FcR4/A7LVwl09dqvJLga3pFKQVBkfGXNaQboFl
+	94Out8w6kZFOAjGb0pGbhQI2s9TZgUWYwJRqMJwZpv7edouyq8IG0NThX7QjKMO4yAQ0
+	eHIN3Yrx4zE1VO8w6Dbus10LCxNUfkzmwmuEZKBSWXWqiwpSlrn6sJCgLrOY/JnMhTRu
+	sqwg==
+X-Gm-Message-State: AD7BkJI9wvQsi/QhFbCZba9guzv1aQ1elK2gQ2HfGJOmg09jgHj0UhQ/tU5586+9jb5gFQ==
+X-Received: by 10.195.12.42 with SMTP id en10mr12254361wjd.13.1458251314909;
+	Thu, 17 Mar 2016 14:48:34 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id 8sm32113661wmk.13.2016.03.17.14.45.42
+	by smtp.gmail.com with ESMTPSA id lz5sm9480944wjb.5.2016.03.17.14.48.33
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 17 Mar 2016 14:45:42 -0700 (PDT)
+	Thu, 17 Mar 2016 14:48:34 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 17 Mar 2016 22:49:27 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160317214927.GK2553@jama>
-References: <20160309195049.GJ2542@jama>
-MIME-Version: 1.0
-In-Reply-To: <20160309195049.GJ2542@jama>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: akuster@mvista.com
-Subject: Re: python-cryptography failing to build since openssl upgrade
+Date: Thu, 17 Mar 2016 22:52:16 +0100
+Message-Id: <1458251536-9218-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.3
+Subject: [PATCH][meta-efl] engrave: blacklist, fails to build now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,46 +51,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2016 21:45:43 -0000
-X-Groupsio-MsgNum: 60556
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ogUXNSQj4OI1q3LQ"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 17 Mar 2016 21:48:34 -0000
 
---ogUXNSQj4OI1q3LQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/efl/engrave_svn.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-On Wed, Mar 09, 2016 at 08:50:49PM +0100, Martin Jansa wrote:
-> Do we really need to use that version script for openssl?
->=20
-> Here is another failure:
-> http://errors.yoctoproject.org/Errors/Details/54984/
->=20
-> in our local builds we use couple prebuild binaries from 3rdparty, which
-> now aren't compatible with openssl ABI (possibly because of
-> version-script update:
-> http://lists.openembedded.org/pipermail/openembedded-core/2016-March/1184=
-33.html
-> )
+diff --git a/meta-efl/recipes-efl/efl/engrave_svn.bb b/meta-efl/recipes-efl/efl/engrave_svn.bb
+index 20da907..f34be98 100644
+--- a/meta-efl/recipes-efl/efl/engrave_svn.bb
++++ b/meta-efl/recipes-efl/efl/engrave_svn.bb
+@@ -9,3 +9,7 @@ SRCREV = "${EFL_SRCREV}"
+ inherit efl autotools-brokensep
+ SRC_URI = "${E_SVN}/OLD;module=${SRCNAME};protocol=http;scmdata=keep"
+ S = "${WORKDIR}/${SRCNAME}"
++
++# engrave.l:5:35: fatal error: libengrave_la-engrave.h: No such file or directory
++# http://errors.yoctoproject.org/Errors/Details/56597/
++PNBLACKLIST[engrave] ?= "BROKEN: fails to build with latest oe-core"
+-- 
+2.7.3
 
-Still failing:
-http://errors.yoctoproject.org/Errors/Details/56595/
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---ogUXNSQj4OI1q3LQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlbrJmYACgkQN1Ujt2V2gBzHGgCcDciCq2jGw5I0a6YywxrLWcwK
-U34AoLmXrkszcxOGob6r5yEbUTY/7xzI
-=6SiR
------END PGP SIGNATURE-----
-
---ogUXNSQj4OI1q3LQ--
