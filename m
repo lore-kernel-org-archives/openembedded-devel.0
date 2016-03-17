@@ -1,54 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 3648D73163
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 7CBD36FF69
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2016 21:44:44 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id l68so12457118wml.1
+	Thu, 17 Mar 2016 21:45:43 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id l124so10450061wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2016 14:44:46 -0700 (PDT)
+	Thu, 17 Mar 2016 14:45:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=PQlxelZbSD2xIGCNTfT6mOz0iLqhYup/iYR4+9uL2o8=;
-	b=fLF0OPNgtjzJCW9zjVMrj0ZLIUR7vUHEAy10x+bqhtNe8evI/V82dYbrpH4JFX2WC7
-	+hVexV6S+tR+mBJjhCM+lUAsTlbIUVgqExk9Y2kY/hJKcKLxjsie1s/HmFFCP9cjyWOW
-	XljYjDfeAWYfLFD4EFJk0+fsZprtD6kKmOmS3R74yfnoq4/SdwJeNG9Ojb3nTuTkCNCZ
-	bROH42BfynqG3rEp1hPMpDwWVXt3A1n1wXmFv5upYaPzE4NszhI1PynWk16a+bVPf+I/
-	iQP35rhrDFUOntj4BmmFH2Y8zqKu8ecMO+i6JAOnoDU3NdwbwurJJOoHuRtNyYQi3F6k
-	SOAA==
+	bh=q+8yL+R7JVbgIiiJSm7SQUSpX4CHtuRpJNr5n8o7JnY=;
+	b=LBDVb2OT5NOULozCSvs7wmP4WuAL5l8epNZpv46oBydZEH0wdBbE3Q+co0uzINxabe
+	SYeawk5EP2v2NAzx+SvjmSc0hghHqoTSthgiwF8R7hNpKKPXi2M1ZCVRgzE4SOuP17Y9
+	1aAP0PmeKz6OhwIhUcyu7QLYcuI5qGa5SOtaAYsURM+QZlcBulgW5Tc3GxTzuRQ1mrIy
+	J+UDVU2JPqGseykeU/MN9S6j7oafDK/Bf9CUiFzX9qfjFg2DwPLuFagUQ/NbioR/1N4R
+	lhGEryeBIIajD752P5X4QD38RSAYT5W+lTDOf0J2LGA5nM+Ogr+1+XvL1icAfuyj7mhp
+	sXZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=PQlxelZbSD2xIGCNTfT6mOz0iLqhYup/iYR4+9uL2o8=;
-	b=Q9iKzD+bRVBxJ1Wqn/NTtfmCcB0vB+fZJRHtIyINLAVtSIvd/i8Bk4fmUqzEmBLQnH
-	OaFkDQjXuaHl3ygztJAq4bGSyA28oogpcwGVuuqyfTbwfcMB9f18tbTYRiPNdaP7hPZj
-	3qlqwtJYDrzDmtWSPnVZtTEaFhPSo3L467v9HQ5sZmNgaWOjzkmgygIwL1L3M1YbUB8H
-	F2pB+dnQsMibphFTMJn8AklG7AeXRHGyNMRuCE0QEe+rZo07t+JcTD5HTeHOQzlwykKa
-	RKNLgFJbCcD6tdAtrO579Gr/AmeNptnSlFz7KmdgDzzILcFVFegx65hhmrNP5ln3Kcv8
-	V4UQ==
-X-Gm-Message-State: AD7BkJIn9npubOvfVecXIQgVtDhfTmd4Fj9SUanx9U7Dpsxn5Xud4URG+GB4YguHOaZwjQ==
-X-Received: by 10.28.228.137 with SMTP id b131mr12748848wmh.16.1458251085337; 
-	Thu, 17 Mar 2016 14:44:45 -0700 (PDT)
+	bh=q+8yL+R7JVbgIiiJSm7SQUSpX4CHtuRpJNr5n8o7JnY=;
+	b=fP4iZjF6V2F0DP4JSeUdx6vQxgydsOi6P+bPIO3rbKbF8CiItCOKzTk4ivj5BrmfYY
+	FJdCvRu6tRRvPpEcIOvzKTcGPcwgRvSrKSiyhCUvpMsvwUPKdsSVYuzXGSbXF0Zk1cQN
+	Up8pEUZTJsaVnDGaqbLT0LmV+9PB+SOMPuBnzrJFT5lFvAksslkLJzsI6FvI1kJRC18Z
+	0Xps/v+ItQCgKvI+CKMBdIxxubMJA/n64RQZ7HDWnpzi+W8QMI8Ajq86L/jue+xBmVn0
+	mIOlKvlRh8yCNx91g6thuLpYIFQmxX1F0Tf19qEG8qdS0cKHvLYBuVYFzRyjFRZJej6K
+	m9cw==
+X-Gm-Message-State: AD7BkJInN6IV09sjMBtxW8+cELjHV4knNcPJFX9r9inu9EI2LIGYj4mOCo7nZQURlxnfTQ==
+X-Received: by 10.28.136.19 with SMTP id k19mr12465489wmd.11.1458251143755;
+	Thu, 17 Mar 2016 14:45:43 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	q139sm9938860wmd.2.2016.03.17.14.44.44
+	by smtp.gmail.com with ESMTPSA id 8sm32113661wmk.13.2016.03.17.14.45.42
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 17 Mar 2016 14:44:44 -0700 (PDT)
+	Thu, 17 Mar 2016 14:45:42 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 17 Mar 2016 22:48:28 +0100
-To: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-Message-ID: <20160317214828.GJ2553@jama>
-References: <614cbca3bdce23c4c67f78eab893a21ef6a50663.1458230028.git.adrian.ratiu@ni.com>
-	<5663cbe1f0256f5eec13f90acd9b2373932dbbc5.1458230028.git.adrian.ratiu@ni.com>
-	<20160317214118.GH2553@jama>
+Date: Thu, 17 Mar 2016 22:49:27 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160317214927.GK2553@jama>
+References: <20160309195049.GJ2542@jama>
 MIME-Version: 1.0
-In-Reply-To: <20160317214118.GH2553@jama>
+In-Reply-To: <20160309195049.GJ2542@jama>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: Haris Okanovic <haris.okanovic@ni.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2 2/2] apache-websocket: Add recipe
+Cc: akuster@mvista.com
+Subject: Re: python-cryptography failing to build since openssl upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,116 +57,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2016 21:44:45 -0000
-X-Groupsio-MsgNum: 60555
+X-List-Received-Date: Thu, 17 Mar 2016 21:45:43 -0000
+X-Groupsio-MsgNum: 60556
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ZG+WKzXzVby2T9Ro"
+	protocol="application/pgp-signature"; boundary="ogUXNSQj4OI1q3LQ"
 Content-Disposition: inline
 
---ZG+WKzXzVby2T9Ro
+--ogUXNSQj4OI1q3LQ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 17, 2016 at 10:41:18PM +0100, Martin Jansa wrote:
-> On Thu, Mar 17, 2016 at 05:54:35PM +0200, Ioan-Adrian Ratiu wrote:
-> > From: Haris Okanovic <haris.okanovic@ni.com>
-> >=20
-> > The apache-websocket module is an Apache 2.x server module that may be
-> > used to process requests using the WebSocket protocol (RFC 6455) by an
-> > Apache 2.x server. The module consists of a plugin architecture for
-> > handling WebSocket messaging.
+On Wed, Mar 09, 2016 at 08:50:49PM +0100, Martin Jansa wrote:
+> Do we really need to use that version script for openssl?
 >=20
-> does v2 fix hits?
+> Here is another failure:
+> http://errors.yoctoproject.org/Errors/Details/54984/
 >=20
-> | checking for libtool... no
-> | configure: error: could not find an installed libtool
-> | NOTE: The following config.log files may provide further information.
-> | NOTE:
-> /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/a=
-pache-websocket/1.1.1-r0/git/config.log
+> in our local builds we use couple prebuild binaries from 3rdparty, which
+> now aren't compatible with openssl ABI (possibly because of
+> version-script update:
+> http://lists.openembedded.org/pipermail/openembedded-core/2016-March/1184=
+33.html
+> )
 
-Whole log:
-http://errors.yoctoproject.org/Errors/Details/56598/
->=20
-> ?
->=20
-> >=20
-> > Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
-> > Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-> > ---
-> >  .../apache-mod/apache-websocket_git.bb             | 32 ++++++++++++++=
-++++++++
-> >  1 file changed, 32 insertions(+)
-> >  create mode 100644 meta-webserver/recipes-httpd/apache-mod/apache-webs=
-ocket_git.bb
-> >=20
-> > diff --git a/meta-webserver/recipes-httpd/apache-mod/apache-websocket_g=
-it.bb b/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
-> > new file mode 100644
-> > index 0000000..2cfc1f3
-> > --- /dev/null
-> > +++ b/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
-> > @@ -0,0 +1,32 @@
-> > +SUMMARY =3D "Websocket module for Apache web server"
-> > +DESCRIPTION =3D "Process requests using the WebSocket protocol (RFC 64=
-55)"
-> > +HOMEPAGE =3D "https://github.com/jchampio/${PN}/"
-> > +SECTION =3D "net"
-> > +LICENSE =3D "Apache-2.0"
-> > +
-> > +inherit autotools-brokensep pkgconfig
-> > +
-> > +DEPENDS =3D "apache2 apache2-native"
-> > +RDEPENDS_${PN} +=3D "apache2"
-> > +
-> > +# Original (github.com/disconnect/apache-websocket) is dead since 2012=
-, the
-> > +# fork contains patches from the modules ML and fixes CVE compliance i=
-ssues
-> > +SRC_URI =3D "git://github.com/jchampio/apache-websocket.git"
-> > +
-> > +SRCREV =3D "f5230d8c520dccf8631da94bf90c23f3c1100dcc"
-> > +
-> > +PV =3D "0.1.1"
-> > +
-> > +S =3D "${WORKDIR}/git"
-> > +
-> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2ee41112a44fe7014dce33e2646=
-8ba93"
-> > +
-> > +EXTRA_OECONF =3D "APACHECTL=3D${STAGING_DIR_TARGET}${sbindir}/apachect=
-l"
-> > +
-> > +do_install() {
-> > +    install -d ${D}${libdir}/apache2/modules/
-> > +    install ${B}/.libs/mod_websocket.so ${D}${libdir}/apache2/modules/
-> > +}
-> > +
-> > +FILES_${PN} +=3D " ${libdir}/apache2/modules/* "
-> > +FILES_${PN}-dbg +=3D " ${libdir}/apache2/modules/.debug/* "
-> > --=20
-> > 2.7.3
-> >=20
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
+Still failing:
+http://errors.yoctoproject.org/Errors/Details/56595/
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---ZG+WKzXzVby2T9Ro
+--ogUXNSQj4OI1q3LQ
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlbrJiwACgkQN1Ujt2V2gBxxUwCfTsGGWHEBKgu0NXzWjidHXRZ4
-v9gAn2xlYhwQOtFBtSMF4ExavcFLbJMn
-=wVat
+iEYEARECAAYFAlbrJmYACgkQN1Ujt2V2gBzHGgCcDciCq2jGw5I0a6YywxrLWcwK
+U34AoLmXrkszcxOGob6r5yEbUTY/7xzI
+=6SiR
 -----END PGP SIGNATURE-----
 
---ZG+WKzXzVby2T9Ro--
+--ogUXNSQj4OI1q3LQ--
