@@ -1,29 +1,32 @@
 Return-Path: <adrian.ratiu@ni.com>
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 7EF7E60116
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 9EE8A60116
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2016 15:55:05 +0000 (UTC)
+	Thu, 17 Mar 2016 15:55:08 +0000 (UTC)
 Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
 	[130.164.19.135])
-	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	u2HFt6ja007689; Thu, 17 Mar 2016 10:55:06 -0500
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u2HFt9Y2014321; Thu, 17 Mar 2016 10:55:09 -0500
 Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
 	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2016031710550634-1505753 ;
-	Thu, 17 Mar 2016 10:55:06 -0500 
+	HF1218) with ESMTP id 2016031710550909-1505765 ;
+	Thu, 17 Mar 2016 10:55:09 -0500 
 From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Mar 2016 17:54:34 +0200
-Message-Id: <614cbca3bdce23c4c67f78eab893a21ef6a50663.1458230028.git.adrian.ratiu@ni.com>
+Date: Thu, 17 Mar 2016 17:54:35 +0200
+Message-Id: <5663cbe1f0256f5eec13f90acd9b2373932dbbc5.1458230028.git.adrian.ratiu@ni.com>
 X-Mailer: git-send-email 2.7.3
+In-Reply-To: <614cbca3bdce23c4c67f78eab893a21ef6a50663.1458230028.git.adrian.ratiu@ni.com>
+References: <614cbca3bdce23c4c67f78eab893a21ef6a50663.1458230028.git.adrian.ratiu@ni.com>
 X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 03/17/2016 10:55:06 AM,
+	8.5.3FP6 HF1218|December 12, 2014) at 03/17/2016 10:55:09 AM,
 	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 03/17/2016 10:55:06 AM,
-	Serialize complete at 03/17/2016 10:55:06 AM
+	HF1218|December 12, 2014) at 03/17/2016 10:55:09 AM,
+	Serialize complete at 03/17/2016 10:55:09 AM
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
 	definitions=2016-03-17_05:, , signatures=0
-Subject: [meta-oe][PATCH v2 1/2] apache2: stage apachectl
+Cc: Haris Okanovic <haris.okanovic@ni.com>
+Subject: [meta-oe][PATCH v2 2/2] apache-websocket: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,27 +41,58 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 17 Mar 2016 15:55:09 -0000
 
-Some apache module recipes like the newly introduced apache-websocket
-also need apachectl at build in the sysroot besides apxs.
+From: Haris Okanovic <haris.okanovic@ni.com>
 
+The apache-websocket module is an Apache 2.x server module that may be
+used to process requests using the WebSocket protocol (RFC 6455) by an
+Apache 2.x server. The module consists of a plugin architecture for
+handling WebSocket messaging.
+
+Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
 Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 ---
- meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../apache-mod/apache-websocket_git.bb             | 32 ++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb
-index 597afe6..53d0564 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb
-@@ -113,6 +113,8 @@ SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
- apache_sysroot_preprocess () {
-     install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-     install -m 755 ${D}${bindir}/apxs ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-+    install -d ${SYSROOT_DESTDIR}${sbindir}/
-+    install -m 755 ${D}${sbindir}/apachectl ${SYSROOT_DESTDIR}${sbindir}/
-     sed -i 's!my $installbuilddir = .*!my $installbuilddir = "${STAGING_DIR_HOST}/${datadir}/${BPN}/build";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
-     sed -i 's!my $libtool = .*!my $libtool = "${STAGING_BINDIR_CROSS}/${TARGET_PREFIX}libtool";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
- 
+diff --git a/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb b/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
+new file mode 100644
+index 0000000..2cfc1f3
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
+@@ -0,0 +1,32 @@
++SUMMARY = "Websocket module for Apache web server"
++DESCRIPTION = "Process requests using the WebSocket protocol (RFC 6455)"
++HOMEPAGE = "https://github.com/jchampio/${PN}/"
++SECTION = "net"
++LICENSE = "Apache-2.0"
++
++inherit autotools-brokensep pkgconfig
++
++DEPENDS = "apache2 apache2-native"
++RDEPENDS_${PN} += "apache2"
++
++# Original (github.com/disconnect/apache-websocket) is dead since 2012, the
++# fork contains patches from the modules ML and fixes CVE compliance issues
++SRC_URI = "git://github.com/jchampio/apache-websocket.git"
++
++SRCREV = "f5230d8c520dccf8631da94bf90c23f3c1100dcc"
++
++PV = "0.1.1"
++
++S = "${WORKDIR}/git"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
++
++EXTRA_OECONF = "APACHECTL=${STAGING_DIR_TARGET}${sbindir}/apachectl"
++
++do_install() {
++    install -d ${D}${libdir}/apache2/modules/
++    install ${B}/.libs/mod_websocket.so ${D}${libdir}/apache2/modules/
++}
++
++FILES_${PN} += " ${libdir}/apache2/modules/* "
++FILES_${PN}-dbg += " ${libdir}/apache2/modules/.debug/* "
 -- 
 2.7.3
 
