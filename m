@@ -1,22 +1,29 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id 042C162133
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 7EF7E60116
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2016 15:17:26 +0000 (UTC)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id u2HFHPfM005234
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Mar 2016 16:17:25 +0100
-Received: from dev.sbt.siemens.com (MD1FZU9C.ww002.siemens.net [139.16.85.179])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id u2HFHOH9029216;
-	Thu, 17 Mar 2016 16:17:24 +0100
-From: Pascal Bach <pascal.bach@siemens.com>
+	Thu, 17 Mar 2016 15:55:05 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u2HFt6ja007689; Thu, 17 Mar 2016 10:55:06 -0500
+Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2016031710550634-1505753 ;
+	Thu, 17 Mar 2016 10:55:06 -0500 
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Mar 2016 16:17:22 +0100
-Message-Id: <1458227842-13989-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] poco: update to 1.7.1
+Date: Thu, 17 Mar 2016 17:54:34 +0200
+Message-Id: <614cbca3bdce23c4c67f78eab893a21ef6a50663.1458230028.git.adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.7.3
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 03/17/2016 10:55:06 AM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 03/17/2016 10:55:06 AM,
+	Serialize complete at 03/17/2016 10:55:06 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-03-17_05:, , signatures=0
+Subject: [meta-oe][PATCH v2 1/2] apache2: stage apachectl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,80 +36,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2016 15:17:27 -0000
+X-List-Received-Date: Thu, 17 Mar 2016 15:55:09 -0000
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+Some apache module recipes like the newly introduced apache-websocket
+also need apachectl at build in the sysroot besides apxs.
+
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 ---
- ...dation-library-version-back-to-SHARED_LIB.patch | 35 ----------------------
- .../poco/{poco_1.6.1.bb => poco_1.7.1.bb}          |  5 ++--
- 2 files changed, 2 insertions(+), 38 deletions(-)
- delete mode 100644 meta-oe/recipes-support/poco/poco-1.6.1/0001-Change-Foundation-library-version-back-to-SHARED_LIB.patch
- rename meta-oe/recipes-support/poco/{poco_1.6.1.bb => poco_1.7.1.bb} (95%)
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/poco/poco-1.6.1/0001-Change-Foundation-library-version-back-to-SHARED_LIB.patch b/meta-oe/recipes-support/poco/poco-1.6.1/0001-Change-Foundation-library-version-back-to-SHARED_LIB.patch
-deleted file mode 100644
-index f65bb15..0000000
---- a/meta-oe/recipes-support/poco/poco-1.6.1/0001-Change-Foundation-library-version-back-to-SHARED_LIB.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From cec5a43151a11d8afbb5dd50caf4e22fb89c6340 Mon Sep 17 00:00:00 2001
--From: Mike Gelfand <mikedld@mikedld.com>
--Date: Sun, 20 Sep 2015 03:08:19 +0300
--Subject: [PATCH] Change Foundation library version back to
-- SHARED_LIBRARY_VERSION
--
--Foundation is the only library using PROJECT_VERSION as library version,
--the change accidentally introduced by commit b69fafb84c. This causes
--difference in library being linked to (libPocoFoundation.31.dylib on Mac)
--and library returned by $<TARGET_FILE:Poco::Foundation> for imported
--target (libPocoFoundation.1.6.1.dylib), causing inconvenience. Also, this
--differs from autoconf-based builds where only "31" (soversion) library is
--being created and not "1.6.1" (project version) one.
--
--Upstream-Status: Backport from 1.6.2
-----
-- Foundation/CMakeLists.txt | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/Foundation/CMakeLists.txt b/Foundation/CMakeLists.txt
--index c1dd25f..25f401c 100644
----- a/Foundation/CMakeLists.txt
--+++ b/Foundation/CMakeLists.txt
--@@ -108,7 +108,7 @@ add_library( "${LIBNAME}" ${LIB_MODE} ${SRCS})
-- add_library( "${POCO_LIBNAME}" ALIAS "${LIBNAME}")
-- set_target_properties( "${LIBNAME}"
--     PROPERTIES
---    VERSION ${PROJECT_VERSION} SOVERSION ${SHARED_LIBRARY_VERSION}
--+    VERSION ${SHARED_LIBRARY_VERSION} SOVERSION ${SHARED_LIBRARY_VERSION}
--     OUTPUT_NAME ${POCO_LIBNAME}
--     DEFINE_SYMBOL Foundation_EXPORTS
--     )
---- 
--2.1.4
--
-diff --git a/meta-oe/recipes-support/poco/poco_1.6.1.bb b/meta-oe/recipes-support/poco/poco_1.7.1.bb
-similarity index 95%
-rename from meta-oe/recipes-support/poco/poco_1.6.1.bb
-rename to meta-oe/recipes-support/poco/poco_1.7.1.bb
-index 9822186..135d2aa 100644
---- a/meta-oe/recipes-support/poco/poco_1.6.1.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.7.1.bb
-@@ -14,12 +14,11 @@ BBCLASSEXTEND = "native"
- 
- SRC_URI = " \
-     https://github.com/pocoproject/poco/archive/poco-${PV}-release.tar.gz \
--    file://0001-Change-Foundation-library-version-back-to-SHARED_LIB.patch \
-     file://run-ptest \
-    "
- 
--SRC_URI[md5sum] = "208872b13d282dfb0f0580fc11df96f3"
--SRC_URI[sha256sum] = "08bc0a9bae4fb793eb694ad5ec7742c179bad48a286ae614682483021043658b"
-+SRC_URI[md5sum] = "a4b755d47303b20a0e2586f281d05a36"
-+SRC_URI[sha256sum] = "6dbbc2018912ad9af6af96f605933ed91354a1e7423e5dbd04d8e9a2b2d15c05"
- 
- S = "${WORKDIR}/poco-poco-${PV}-release"
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb
+index 597afe6..53d0564 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.18.bb
+@@ -113,6 +113,8 @@ SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
+ apache_sysroot_preprocess () {
+     install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+     install -m 755 ${D}${bindir}/apxs ${SYSROOT_DESTDIR}${bindir_crossscripts}/
++    install -d ${SYSROOT_DESTDIR}${sbindir}/
++    install -m 755 ${D}${sbindir}/apachectl ${SYSROOT_DESTDIR}${sbindir}/
+     sed -i 's!my $installbuilddir = .*!my $installbuilddir = "${STAGING_DIR_HOST}/${datadir}/${BPN}/build";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
+     sed -i 's!my $libtool = .*!my $libtool = "${STAGING_BINDIR_CROSS}/${TARGET_PREFIX}libtool";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
  
 -- 
-2.1.4
+2.7.3
 
 
