@@ -1,47 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 25A286067D
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 580956067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2016 08:22:43 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id l124so21532616wmf.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2016 01:22:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc; bh=ClSQhJOTLKd10YYuidPGm0ct7ONA9Trtpa+syRyfPtg=;
-	b=JL662ibbLYgCyXMj6NB77ejwNOM3bWN77uzsEvPZ/EO0dyf6CYzLQPUGUj9oxaRVWX
-	gLEI0WQek6f6im7rnvScqWJ1AwB8YkA9mugNnWaBYMDrM/SKugB7yPN6Zx5WU0LtjT3z
-	HbFdXodbdw4d5dNUHY1zR3U5Z4QCH7lXxSwH+7uZCjMpOKLXA7Kq3mbD1ssIIWxW2Wo1
-	8z8qHD4IvkC7xQ+yt3RdhIPY+GMGn7IQhX1tDWweOtICSeWjbjlA/CVt9WvMTma5MgSv
-	pSEy4DQ+hVc0QKSUVdrI/OicTXuS2t5KaI4ZnoRsHO2GrfAmmIGm+hf7180FTXQRWeJI
-	Hp8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc;
-	bh=ClSQhJOTLKd10YYuidPGm0ct7ONA9Trtpa+syRyfPtg=;
-	b=S1P3y3T5ksqnOy8ThAUoKF3GpWR+/QSQce83YbbeBXCf6JJntrXO/m3i1tGdZQYJMv
-	qtxkbmANqwu7TYJ0nlWp7nsh3bT3i+ZZr6VY1PmF0bpmj/UFI6e6LcfRWvpGs5NpjTR3
-	NZhQ2PRLhZqZVvKBf9WlPQcLkxpyxZTPaA1sWItfefqYlhYqTh1z2o1SVUoyXxGIRqX1
-	Sq+GtzzR4lKmJf4buD6CnKmD4StCmdSino4vNiJmd/OKMD2VMB6DLrbbJzxCqOCe/p4E
-	s0NKg39C6Blr3s0fmen2NWHzH+2lGPHNelEX1l7DvmS/Jc6G6yXvKXbxixtzuGeJOpV7
-	tjZg==
-X-Gm-Message-State: AD7BkJLpNsHdR1rJZ0Kx/oS87cdhVtxdVVpsi5vvDIu/DP0n73WxlKeh12iOThkKXKdT0zE4kDJsy5FF1CoVLQ==
+	Fri, 18 Mar 2016 08:41:26 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u2I8fRqA028158; Fri, 18 Mar 2016 03:41:27 -0500
+Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2016031803412786-1532617 ;
+	Fri, 18 Mar 2016 03:41:27 -0500 
+Date: Fri, 18 Mar 2016 10:40:56 +0200
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20160318104056.4a245741@adi-pc-linux.emea.corp.natinst.com>
+In-Reply-To: <20160317214118.GH2553@jama>
+References: <614cbca3bdce23c4c67f78eab893a21ef6a50663.1458230028.git.adrian.ratiu@ni.com>
+	<5663cbe1f0256f5eec13f90acd9b2373932dbbc5.1458230028.git.adrian.ratiu@ni.com>
+	<20160317214118.GH2553@jama>
+Organization: National Instruments
 MIME-Version: 1.0
-X-Received: by 10.28.176.200 with SMTP id z191mr15619138wme.91.1458289364198; 
-	Fri, 18 Mar 2016 01:22:44 -0700 (PDT)
-Received: by 10.194.102.74 with HTTP; Fri, 18 Mar 2016 01:22:44 -0700 (PDT)
-In-Reply-To: <56EBA6A8.5080404@mlbassoc.com>
-References: <1457626042-28653-1-git-send-email-gary@mlbassoc.com>
-	<1457626042-28653-2-git-send-email-gary@mlbassoc.com>
-	<20160317144440.GC2553@jama> <56EBA6A8.5080404@mlbassoc.com>
-Date: Fri, 18 Mar 2016 09:22:44 +0100
-Message-ID: <CA+chaQeoeV1fWC7KS=UzEqQL4OQcVBCbT=enQQ-T=7gugcaJ4w@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Gary Thomas <gary@mlbassoc.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3 1/2] libass: Update to latest version
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 03/18/2016 03:41:28 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 03/18/2016 03:41:28 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-03-18_05:, , signatures=0
+Cc: Haris Okanovic <haris.okanovic@ni.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v2 2/2] apache-websocket: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,105 +42,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2016 08:22:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 18 Mar 2016 08:41:29 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-See first line:
-http://www.openembedded.org/wiki/Bitbake_World_Status
+Hello
 
-On Fri, Mar 18, 2016 at 7:56 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+On Thu, 17 Mar 2016 22:41:18 +0100
+Martin Jansa <martin.jansa@gmail.com> wrote:
 
-> On 2016-03-17 15:44, Martin Jansa wrote:
->
->> On Thu, Mar 10, 2016 at 05:07:21PM +0100, Gary Thomas wrote:
->>
->>> libass has moved from Google to github.com
->>> Also update to the latest version (libass.so.5)
->>>
->>
->> libass-0.13.2: ELF binary
->>
->> '/tmp/work/i586-oe-linux/libass/0.13.2-r0/packages-split/libass/usr/lib/libass.so.5.3.0'
->> has relocations in .text [textrel]
->>
->>
-> Hmm, this doesn't happen on arm (cortexa9) builds :-(
->
-> Please tell me how you do "world builds" and I'll try to duplicate this
-> and the mpv issues.
->
->
-> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
->>> ---
->>>   meta-oe/recipes-multimedia/libass/libass.inc       | 7 ++-----
->>>   meta-oe/recipes-multimedia/libass/libass_0.10.1.bb | 5 -----
->>>   meta-oe/recipes-multimedia/libass/libass_0.13.2.bb | 4 ++++
->>>   3 files changed, 6 insertions(+), 10 deletions(-)
->>>   delete mode 100644 meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
->>>   create mode 100644 meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
->>>
->>> diff --git a/meta-oe/recipes-multimedia/libass/libass.inc
->>> b/meta-oe/recipes-multimedia/libass/libass.inc
->>> index 328cd14..a394c56 100644
->>> --- a/meta-oe/recipes-multimedia/libass/libass.inc
->>> +++ b/meta-oe/recipes-multimedia/libass/libass.inc
->>> @@ -1,5 +1,5 @@
->>>   DESCRIPTION = "libass is a portable subtitle renderer for the ASS/SSA
->>> (Advanced Substation Alpha/Substation Alpha) subtitle format. It is mostly
->>> compatible with VSFilter."
->>> -HOMEPAGE = "http://code.google.com/p/libass/"
->>> +HOMEPAGE = "http://github.com/libass/libass/"
->>>   SECTION = "libs/multimedia"
->>>
->>>   LICENSE = "ISC"
->>> @@ -7,10 +7,7 @@ LIC_FILES_CHKSUM =
->>> "file://COPYING;md5=8ae98663bac55afe5d989919d296f28a"
->>>
->>>   DEPENDS = "enca fontconfig freetype libpng fribidi"
->>>
->>> -INC_PR = "r1"
->>> -
->>> -SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz
->>> <http://googlecode.com/files/$%7BBP%7D.tar.gz>"
->>> -
->>> +SRC_URI = "
->>> https://github.com/${PN}/${PN}/releases/download/0.13.2/${BP}.tar.gz"
->>>   inherit autotools pkgconfig
->>>
->>>   PACKAGECONFIG ??= ""
->>> diff --git a/meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
->>> b/meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
->>> deleted file mode 100644
->>> index 0b32276..0000000
->>> --- a/meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
->>> +++ /dev/null
->>> @@ -1,5 +0,0 @@
->>> -require ${PN}.inc
->>> -PR = "${INC_PR}.0"
->>> -
->>> -SRC_URI[md5sum] = "6cace482a013a3c4bf3b31a68ac66026"
->>> -SRC_URI[sha256sum] =
->>> "629a7e81fff92dea8d0399b818a41fd1b61e381c67a5961b1eaec2efadb14c6c"
->>> diff --git a/meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
->>> b/meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
->>> new file mode 100644
->>> index 0000000..123c9dd
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
->>> @@ -0,0 +1,4 @@
->>> +require ${PN}.inc
->>> +
->>> +SRC_URI[md5sum] = "b4d82616bb18e8e954b18746a105a3b8"
->>> +SRC_URI[sha256sum] =
->>> "8baccf663553b62977b1c017d18b3879835da0ef79dc4d3b708f2566762f1d5e"
->>> --
->>> 2.5.0
->>>
->>
-> --
-> ------------------------------------------------------------
-> Gary Thomas                 |  Consulting for the
-> MLB Associates              |    Embedded world
-> ------------------------------------------------------------
->
+> On Thu, Mar 17, 2016 at 05:54:35PM +0200, Ioan-Adrian Ratiu wrote:
+> > From: Haris Okanovic <haris.okanovic@ni.com>
+> >=20
+> > The apache-websocket module is an Apache 2.x server module that may be
+> > used to process requests using the WebSocket protocol (RFC 6455) by an
+> > Apache 2.x server. The module consists of a plugin architecture for
+> > handling WebSocket messaging. =20
+>=20
+> does v2 fix hits?
+>=20
+> | checking for libtool... no
+> | configure: error: could not find an installed libtool
+> | NOTE: The following config.log files may provide further information.
+> | NOTE:
+> /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/a=
+pache-websocket/1.1.1-r0/git/config.log
+>=20
+> ?
+
+v2 fixes just the version number for apache-websocket. I'm not seeing that =
+error on my machine:
+
+(...)
+checking for apachectl... /media/adi/ssd/nilrt-master/build/tmp-glibc/sysro=
+ots/x64/usr/sbin/apachectl
+checking for httpd... /media/adi/ssd/nilrt-master/build/tmp-glibc/sysroots/=
+x86=5F64-linux/usr/bin/httpd
+checking for libtool... /usr/bin/libtool
+checking for the httpd modules directory... /usr/lib/apache2/modules
+(...)
+
+Is there some kind of host contamination going on here?
+
+>=20
+> >=20
+> > Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
+> > Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+> > ---
+> >  .../apache-mod/apache-websocket=5Fgit.bb             | 32 ++++++++++++=
+++++++++++
+> >  1 file changed, 32 insertions(+)
+> >  create mode 100644 meta-webserver/recipes-httpd/apache-mod/apache-webs=
+ocket=5Fgit.bb
+> >=20
+> > diff --git a/meta-webserver/recipes-httpd/apache-mod/apache-websocket=
+=5Fgit.bb b/meta-webserver/recipes-httpd/apache-mod/apache-websocket=5Fgit.=
+bb
+> > new file mode 100644
+> > index 0000000..2cfc1f3
+> > --- /dev/null
+> > +++ b/meta-webserver/recipes-httpd/apache-mod/apache-websocket=5Fgit.bb
+> > @@ -0,0 +1,32 @@
+> > +SUMMARY =3D "Websocket module for Apache web server"
+> > +DESCRIPTION =3D "Process requests using the WebSocket protocol (RFC 64=
+55)"
+> > +HOMEPAGE =3D "https://github.com/jchampio/${PN}/"
+> > +SECTION =3D "net"
+> > +LICENSE =3D "Apache-2.0"
+> > +
+> > +inherit autotools-brokensep pkgconfig
+> > +
+> > +DEPENDS =3D "apache2 apache2-native"
+> > +RDEPENDS=5F${PN} +=3D "apache2"
+> > +
+> > +# Original (github.com/disconnect/apache-websocket) is dead since 2012=
+, the
+> > +# fork contains patches from the modules ML and fixes CVE compliance i=
+ssues
+> > +SRC=5FURI =3D "git://github.com/jchampio/apache-websocket.git"
+> > +
+> > +SRCREV =3D "f5230d8c520dccf8631da94bf90c23f3c1100dcc"
+> > +
+> > +PV =3D "0.1.1"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +LIC=5FFILES=5FCHKSUM =3D "file://LICENSE;md5=3D2ee41112a44fe7014dce33e=
+26468ba93"
+> > +
+> > +EXTRA=5FOECONF =3D "APACHECTL=3D${STAGING=5FDIR=5FTARGET}${sbindir}/ap=
+achectl"
+> > +
+> > +do=5Finstall() {
+> > +    install -d ${D}${libdir}/apache2/modules/
+> > +    install ${B}/.libs/mod=5Fwebsocket.so ${D}${libdir}/apache2/module=
+s/
+> > +}
+> > +
+> > +FILES=5F${PN} +=3D " ${libdir}/apache2/modules/* "
+> > +FILES=5F${PN}-dbg +=3D " ${libdir}/apache2/modules/.debug/* "
+> > --=20
+> > 2.7.3
+> >  =20
+>=20
+
 
