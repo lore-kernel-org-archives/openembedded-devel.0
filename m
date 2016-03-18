@@ -1,51 +1,51 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lb0-f175.google.com (mail-lb0-f175.google.com
-	[209.85.217.175])
-	by mail.openembedded.org (Postfix) with ESMTP id BE6FA605FF
+Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
+	[209.85.217.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E608605FF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2016 11:20:20 +0000 (UTC)
-Received: by mail-lb0-f175.google.com with SMTP id qe11so31906410lbc.3
+	Fri, 18 Mar 2016 11:20:21 +0000 (UTC)
+Received: by mail-lb0-f178.google.com with SMTP id k12so86115769lbb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2016 04:20:21 -0700 (PDT)
+	Fri, 18 Mar 2016 04:20:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=zXai0Bp+ZTorpbc3THSEmXieDz1Igzq64GNXHCZmfMg=;
-	b=IGLw7wjdMZcPu6RFKjb6GooPHxi9TjvzcQVJWNILPMp/wrxd9mD6Hp7hsSpxOLALkn
-	mE6iv/9LYDT8u3HCMTEAb+DNoCgWtWlIPXNlTMqB9Uwm2auODe9K2YOHYBZ8uPcV8Wwz
-	wnsBmu566qHE/aG6WjviWuIfmkmEzO/vQEd/KKQUuEh3nNvFXqOBw6RGef/lcrTlTbil
-	hz0pzrgFAdTGr3K6pVh4kbDN0VC3MNThMtzh76FF7b5CrwFPKq3/r+QQ8VET2CoouRyM
-	2csehgTDGXwRsv1Ve+AmSrdR/5UxeWMUs8aSPPI1yn0pSnYTQT62gt7sv3GRprE4bimZ
-	wdYg==
+	bh=1DlRBDBh+rTSdQ6alsKPJmj3Hr81EqX8Txr5IFCKTTA=;
+	b=TQV5Q3XZFx3Hm+P0080hXdkTt+MQz+Fxi/vdTHpXQFKZVCTWr0/kEFnu4kkqbQ8m3J
+	nioWb9CIOMpaGcv2CxkB37Bj1Brq4+RyAJshrUTDbX/2QL2BK39XbwTM4/H4Js9K7OAu
+	un/Cmdem1wXMXocTFIF5m/tVHjwt6wnfyOUI4jqnfgou+DSezjVEZP72I0+iGAetGEsB
+	msfR0AMNY2vEtHK6cka4WxFor9/5E0CAGn0VssMZqFC5zn/81ExyIQMmJXRGF0ba/6h7
+	WHI87Sq6+ZPKQImseIBliJTeXxIrOeU8h10z8F+KmmE4m2sbcPFMsfwHxHTT8otA/Js3
+	0Tjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=zXai0Bp+ZTorpbc3THSEmXieDz1Igzq64GNXHCZmfMg=;
-	b=Mqs3WSSstBpPigla65QKgD+kYSVLWyvdWMX9bx/Q94+QdNbmbF/IXd/cwzj4h7fu8K
-	N5CwTpk3tFFwDZBHRPoyCYc4XaS8sO35tzcVYAiWl6z9aEkM5kEgS44mGz2N8U/TEUJe
-	525AeuwcWxVuAvIVQ4TzJ8BnmFKY2B9bThQ0g2GC9FSyolclC+dqWaPr6BIZlLyCt17Z
-	ZjlOywOwbPcJ/VD5tuev5reQ5k+/Gzzb+W0zYBCbRDrCOADrwK5xJeRbUi4vQBMD54uZ
-	36ivirvKjO8sUGDSNu/nQYNlPi1/4vvWII+nZywAsxJwmNZgBlmd8+2KWurAt2hpJlSx
-	VVqA==
-X-Gm-Message-State: AD7BkJIsFeefYSJxhq7thrugAbDqKK1rdjjWOQHwx2MwfGkD9N0PlgDuVY3hDVsz8WNbKw==
-X-Received: by 10.112.125.9 with SMTP id mm9mr4538073lbb.113.1458300020909;
-	Fri, 18 Mar 2016 04:20:20 -0700 (PDT)
+	bh=1DlRBDBh+rTSdQ6alsKPJmj3Hr81EqX8Txr5IFCKTTA=;
+	b=XmwI817icQdpRXVWS9akXGBgEq2cm2oRByEMcnXF2oGcTM3LeTliwgTQQun7OdKviL
+	9P0dS9uANBPB8ufAL0E59tBDBvkSntbp5Z9Bh7Lc7ISQ0SJ4rF4e1vd/DB0UI3RtVttQ
+	ivN7y7T2LrDb/25kXs2MUhLhiA6u62NIQT46Y6UVzFUhgl1zd7R2Wz0SaFVPATVPUxIb
+	l0cWwAvbiMrtct0YMsmWhDqOspNzYwWvCS5j0RrMViIEA2JZt+pT8BHkSMZ29avhKhzR
+	YmOD/rk+GHgmIPCmFTq3dphpz+IQ2EnQ1R5QGflYWyLxArRIlt+KT5G20IMPS5S7jMMl
+	aOMQ==
+X-Gm-Message-State: AD7BkJLPy1uaF0jHigg3lDWZVYVNSPN3Mmt6J+2wv6h2Ret0vMq6DRAWq47DugkDXd/UZQ==
+X-Received: by 10.112.135.39 with SMTP id pp7mr4492093lbb.43.1458300022083;
+	Fri, 18 Mar 2016 04:20:22 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
 	by smtp.gmail.com with ESMTPSA id
-	pi5sm2107256lbb.41.2016.03.18.04.20.19
+	pi5sm2107256lbb.41.2016.03.18.04.20.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 18 Mar 2016 04:20:19 -0700 (PDT)
+	Fri, 18 Mar 2016 04:20:21 -0700 (PDT)
 From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 To: Martin Jansa <Martin.Jansa@gmail.com>, Andre McCurdy <armccurdy@gmail.com>,
 	Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Mar 2016 12:20:14 +0100
-Message-Id: <1458300015-9666-3-git-send-email-ricardo.ribalda@gmail.com>
+Date: Fri, 18 Mar 2016 12:20:15 +0100
+Message-Id: <1458300015-9666-4-git-send-email-ricardo.ribalda@gmail.com>
 X-Mailer: git-send-email 2.7.0
 In-Reply-To: <1458300015-9666-1-git-send-email-ricardo.ribalda@gmail.com>
 References: <1458300015-9666-1-git-send-email-ricardo.ribalda@gmail.com>
-Subject: [meta-oe][PATCH v3 3/4] opencv: Fix pkg-config file.
+Subject: [meta-oe][PATCH v3 4/4] opencv: Remove blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,68 +58,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2016 11:20:21 -0000
+X-List-Received-Date: Fri, 18 Mar 2016 11:20:23 -0000
 
-Libdir was pointing to the wrong location
+Opencv 3.1 builds fine with ffmpeg.
 
-also fix for QA Issue: opencv.pc failed sanity test (tmpdir) in path
+ricardo@neopili:~/curro/qt5022/oe/openembedded-core/build$ bitbake
+opencv
+Loading cache: 100%
+|############################################################################|
+ETA:  00:00:00
+Loaded 2018 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION        = "1.29.0"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "Debian-testing"
+TARGET_SYS        = "i586-oe-linux"
+MACHINE           = "qemux86"
+DISTRO            = "nodistro"
+DISTRO_VERSION    = "nodistro.0"
+TUNE_FEATURES     = "m32 i586"
+TARGET_FPU        = ""
+meta              = "master:300f858ba07c938427ccd05a3d7220027a03d461"
+meta-oe           = "master:29462f7161b346dbc2ea00830da869a0a1c35fb9"
+
+NOTE: Preparing RunQueue
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+NOTE: Tasks Summary: Attempted 1242 tasks of which 1228 didn't need to
+be rerun and all succeeded.
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 ---
- .../opencv/opencv/fixpkgconfig.patch               | 29 ++++++++++++++++++++++
- meta-oe/recipes-support/opencv/opencv_3.1.bb       |  3 ++-
- 2 files changed, 31 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/opencv/opencv/fixpkgconfig.patch
+ meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/opencv/opencv/fixpkgconfig.patch b/meta-oe/recipes-support/opencv/opencv/fixpkgconfig.patch
-new file mode 100644
-index 000000000000..3aeda7d4439d
---- /dev/null
-+++ b/meta-oe/recipes-support/opencv/opencv/fixpkgconfig.patch
-@@ -0,0 +1,29 @@
-+diff --git a/cmake/OpenCVGenPkgconfig.cmake b/cmake/OpenCVGenPkgconfig.cmake
-+index b8cb8777c06b..75281ee964fd 100644
-+--- a/cmake/OpenCVGenPkgconfig.cmake
-++++ b/cmake/OpenCVGenPkgconfig.cmake
-+@@ -27,7 +27,7 @@ macro(fix_prefix lst isown)
-+       get_filename_component(libdir "${item}" PATH)
-+       get_filename_component(libname "${item}" NAME_WE)
-+       string(REGEX REPLACE "^lib(.*)" "\\1" libname "${libname}")
-+-      list(APPEND _lst "-L${libdir}" "-l${libname}")
-++      list(APPEND _lst "-l${libname}")
-+     else()
-+       list(APPEND _lst "-l${item}")
-+     endif()
-+@@ -66,10 +66,14 @@ ocv_list_unique(_3rdparty)
-+ 
-+ set(OPENCV_PC_LIBS
-+   "-L\${exec_prefix}/${OPENCV_LIB_INSTALL_PATH}"
-++  "-L\${exec_prefix}/${OPENCV_3P_LIB_INSTALL_PATH}"
-+   "${_modules}"
-+ )
-+ if (BUILD_SHARED_LIBS)
-+-  set(OPENCV_PC_LIBS_PRIVATE "${_extra}")
-++  set(OPENCV_PC_LIBS_PRIVATE
-++    "-L\${exec_prefix}/${OPENCV_LIB_INSTALL_PATH}"
-++    "${_extra}"
-++  )
-+ else()
-+   set(OPENCV_PC_LIBS_PRIVATE
-+     "-L\${exec_prefix}/${OPENCV_3P_LIB_INSTALL_PATH}"
 diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-index b8fb6a51376f..6f0c83829809 100644
+index 6f0c83829809..87338cad4a4b 100644
 --- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
 +++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-@@ -16,7 +16,8 @@ SRCREV_opencv = "92387b1ef8fad15196dd5f7fb4931444a68bc93a"
- SRCREV_contrib = "5409d5ad560523c85c6796cc5a009347072d883c"
- SRCREV_FORMAT = "opencv"
- SRC_URI = "git://github.com/Itseez/opencv.git;name=opencv \
--	   git://github.com/Itseez/opencv_contrib.git;destsuffix=contrib;name=contrib"
-+            git://github.com/Itseez/opencv_contrib.git;destsuffix=contrib;name=contrib \
-+            file://fixpkgconfig.patch"
+@@ -133,5 +133,3 @@ do_install_append() {
+     cp -f bin/*-tutorial-* bin/*-example-* ${D}${datadir}/OpenCV/samples/bin/
+ }
  
- PV = "3.1+git${SRCPV}"
- 
+-# http://errors.yoctoproject.org/Errors/Details/40660/
+-PNBLACKLIST[opencv] ?= "Not compatible with currently used ffmpeg 3"
 -- 
 2.7.0
 
