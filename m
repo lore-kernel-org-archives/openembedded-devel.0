@@ -1,29 +1,44 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id E8EA960132
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D20660767
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Mar 2016 18:18:58 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga104.fm.intel.com with ESMTP; 18 Mar 2016 11:18:59 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,356,1455004800"; d="scan'208";a="927197482"
-Received: from linux.intel.com ([10.23.219.25])
-	by fmsmga001.fm.intel.com with ESMTP; 18 Mar 2016 11:18:58 -0700
-Received: by linux.intel.com (Postfix, from userid 48)
-	id 951506A4006; Fri, 18 Mar 2016 12:06:43 -0700 (PDT)
-Received: from 10.252.7.138 (SquirrelMail authenticated user alexander.kanavin)
-	by linux.intel.com with HTTP; Fri, 18 Mar 2016 21:06:43 +0200 (EET)
-Message-ID: <51386.10.252.7.138.1458328003.squirrel@linux.intel.com>
-In-Reply-To: <1458166402-10786-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1458166402-10786-1-git-send-email-schnitzeltony@googlemail.com>
-Date: Fri, 18 Mar 2016 21:06:43 +0200 (EET)
-From: alexander.kanavin@linux.intel.com
+	Fri, 18 Mar 2016 21:18:59 +0000 (UTC)
+Received: by mail-wm0-f47.google.com with SMTP id l124so44954048wmf.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Mar 2016 14:19:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=cFyF+qy8mM6M1c8BnJlYWxiHQAxb84ksYJpjxjXmypY=;
+	b=V+KFNlirShOxJ4Id+/upMRjU04MDf2v+vnzByqUa4M1rFwIPD9p2lpl8T53UjjCsyN
+	E8Inrw/hhIggldSUIpR4dWAZlykQ7ObjMEeGQX9HFKqD/PV2+MqtqRPaCIF3wdUdojIz
+	/ot7+18UNpNHVXSGxV8HOjwToYJ3iMBtguXgdQt5mJwegDb+DjgujUXKhEROY7zS89lr
+	Fl1fGbLeywX80JOibnO2aS/Vhws0pfKeBLEd3tss3HDHwgMVZqWEVRWS5iZZtssT6ZBT
+	SayMgxTRZSNBvPNEqwfC7vQR0/MDpOzOyp6O+r6O/uC41y8UXkei/c1xgphIDwzNo9KS
+	uRCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=cFyF+qy8mM6M1c8BnJlYWxiHQAxb84ksYJpjxjXmypY=;
+	b=GMdxwiqveluA4Wd7v1MjzxRqGpwHBqH4VBkkFHFyhvYWiXnbFwwKLSxHFHYee0Qgk6
+	uhg4j42/TZoelYTRZM0jkrACluRkHn+anyffSLJVnAVePAD1/nGaJ/Xj52lKxexD3m/D
+	Edt6kHhT2zKjJ2v11XjWll0sUil+zQ9uc3ZbSniUhlpc01ebsQpMmv+RTAaUjHTDiPej
+	5x55LnXllOrcaVvdFR7bPPXTzJbyB5aQOZ+WdiMHtga2KBYB4H3f6wdF0cxxmRM4w2of
+	V+9daq3ZI+1dnjxtr4Ned2inwNMbjUMPK1A+fziquqIvf6YXyDoy9vkWPTzyo5fNuk08
+	nDlA==
+X-Gm-Message-State: AD7BkJJbN4Lrc6jGg4Qq4xQdsXTiLqFkw5rk+gfinN9Ph7CR42OAH7orIPZyDlWZE814bQ==
+X-Received: by 10.194.22.97 with SMTP id c1mr18109280wjf.19.1458335939667;
+	Fri, 18 Mar 2016 14:18:59 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id n66sm957486wmg.20.2016.03.18.14.18.58
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 18 Mar 2016 14:18:58 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-User-Agent: SquirrelMail/1.4.8-5.el4.centos.8
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-Subject: Re: [PATCH 1/2] gnome-bluetooth: fix compile
+Date: Fri, 18 Mar 2016 22:22:54 +0100
+Message-Id: <1458336174-9801-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.3
+Subject: [PATCH][meta-efl] packagegroup-x11-illume: lower ETHEME dependency to RRECOMMENDS because default e-wm-theme-default could be empty
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,24 +51,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2016 18:19:01 -0000
-Content-Type: text/plain;charset=iso-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 18 Mar 2016 21:19:01 -0000
 
-> fixes error series starting with
-> | Caught exception: <type 'exceptions.TypeError'> TypeError('expected a
-> string or other character buffer object',)
-> | >
-> /home/superandy/tmp/oe-core-glibc/sysroots/x86_64-linux/usr/lib/python2.7/distutils/sysconfig.py(22)<module>()
-> | -> PREFIX = os.path.normpath(sys.prefix).replace(
-> os.getenv("BUILD_SYS"), os.getenv("HOST_SYS") )
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Both this patch and the second one should be replaced with a patch that
-simply adds
+diff --git a/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb b/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb
+index 63ef0f6..9997828 100644
+--- a/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb
++++ b/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb
+@@ -11,11 +11,14 @@ inherit packagegroup allarch
+ ETHEME ?= "e-wm-theme-default"
+ ECONFIG ?= "e-wm-config-mobile"
+ 
++RRECOMMENDS_${PN} = "\
++    ${ETHEME} \
++"
++
+ RDEPENDS_${PN} = "\
+     packagegroup-core-x11-xserver \
+     packagegroup-core-x11-utils \
+     \
+     e-wm \
+     ${ECONFIG} \
+-    ${ETHEME} \
+ "
+-- 
+2.7.3
 
-inherit gobject-introspection
-
-to the recipe. For some reason I forgot to do that in my g-i fixes patchset.
-
-Alex
 
