@@ -1,42 +1,28 @@
-Return-Path: <ryanelkholy@gmail.com>
-Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id EA881601A5
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id D4A7B6FF76
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2016 19:39:37 +0000 (UTC)
-Received: by mail-io0-f171.google.com with SMTP id 124so69470626iov.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2016 12:39:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to;
-	bh=tyTGMfRlTC15w2T6t046ssJzTIPxcL1liJK0RcbjOWc=;
-	b=z534oiZGznIuSP7evx6OQHXA/4m6AxHfT60lWMaaXIsClnZq88hxYxua3637X8DXQO
-	IruhU+2Mbmlv5bo/JBlmvS1QvtuEk3bdNNGbIDaAU9KO9nnLFwRizTAdcx+Wp6RqPFLS
-	s1HnArncsTwKNSaEuGg5RBns0PNYDs0D/PvDZk+3xbqYkQjJfO1ED3fz/bV+mKVFeomY
-	54bPdZr0J4Y/pCj/JKP/uhAxsP1ziKhSLBUuTMgKRF+OJlZ5q1jpyaKxHqo8vfVgCZ5W
-	cZWNs35KfXmCKrE73stiaXtAmyDHur4QOow9039fGELtxgldzkL5YbVeIOi2YN4ihU9I
-	4PJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to;
-	bh=tyTGMfRlTC15w2T6t046ssJzTIPxcL1liJK0RcbjOWc=;
-	b=HuSNRT1QwtvUAB2UOTHolVDfsCSnm2nlpd6syELEJorxP2nt2OjqKlfIYI5ukjFHMN
-	TB0TJ5JU4AyCSwNeSt86BG+2PkdF7TP1brejOE2lh5RasJsmy5WZ9LY5LR1J3W1wUOAe
-	4D4pIp17F7c8M24KcrovDBTzP+IlQg9OEafmUQckQD41IxlTklpwb6/0hT3flKCjQAr/
-	yMWQQBuGZq24vXbmrfHwbo39gn5TqToj2vj96wtlfG5tF7OdoLX5aJF+9TXKZTqj9uIn
-	0CWHyCH9LIi8A8HpVSRrCt3x5ab1hvEnbmYYJIe6NKTHD2wVYpvahLqVsWsXr5S7HKjH
-	/YIQ==
-X-Gm-Message-State: AD7BkJJKQ3y/AfZSLWhZWYI2QWYHS8ynhEANqLaZ0n2ifiKb+/xvf4/n2K/e/fib86eDEffk75BCzSAtBXAwlQ==
+	Mon, 21 Mar 2016 20:43:10 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by fmsmga104.fm.intel.com with ESMTP; 21 Mar 2016 13:43:11 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.24,373,1455004800"; d="scan'208";a="938638205"
+Received: from ngocthuy-mobl.ccr.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.255.169.222])
+	by orsmga002.jf.intel.com with ESMTP; 21 Mar 2016 13:43:08 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Date: Tue, 22 Mar 2016 09:43 +1300
+Message-ID: <1817823.GWXx3ahntL@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.10 (Linux/4.4.5-300.fc23.x86_64; KDE/4.14.18; x86_64; ;
+	)
+In-Reply-To: <56F008EE.4060600@linux.intel.com>
+References: <1458568492-29611-1-git-send-email-alexander.kanavin@linux.intel.com>
+	<20160321145053.GD2562@jama> <56F008EE.4060600@linux.intel.com>
 MIME-Version: 1.0
-X-Received: by 10.107.63.139 with SMTP id m133mr28023686ioa.157.1458589178369; 
-	Mon, 21 Mar 2016 12:39:38 -0700 (PDT)
-Received: by 10.64.26.227 with HTTP; Mon, 21 Mar 2016 12:39:38 -0700 (PDT)
-Date: Mon, 21 Mar 2016 15:39:38 -0400
-Message-ID: <CAMZfsd642_0FBYdmAhSj-J_U76Xh8vsG_cv9rTM7jQkWRMjhbQ@mail.gmail.com>
-From: "Ryan Elkholy, PhD, PE" <ryanelkholy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-qt5] QtCreator now allowing me to select qmake in SDK
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 2/2] gnome-bluetooth: replace systemd dependency with udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,24 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2016 19:39:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Mar 2016 20:43:12 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hello,
+On Mon, 21 Mar 2016 16:45:02 Alexander Kanavin wrote:
+> On 03/21/2016 04:50 PM, Martin Jansa wrote:
+> >>   inherit gnomebase gtk-icon-cache distro_features_check
+> >>   gobject-introspection> 
+> >
+> > So you can remove distro_features_check inherit as well, right?
+> 
+> Yeah, I guess. Feel free to amend.
 
-I have used bitbake core-image-minimal -c populate_sdk to build an SDK for
-the Minnowboard to be used by QtCreator. After doing so, the SDK was built
-in /opt/poky/2.0.1/sysroots...
+The reviewer is asking you to do that, although perhaps not in so many words. 
+Can you, please?
 
-1. Within /sysroots I have corei7-64-poky-linux and x86_64-pokysdk-linux
-directories. My first question is which directory do I use when pointing to
-my compiler, debugger and QtVersion (qmake) for QtCreator?
+Cheers,
+Paul
 
-2. Secondly, when I try pointing to the qmake in
-/opt/poky/2.0.1/sysroots/corei7-64-poky-linux/usr/bin/qt, QtCreator says
-that the file does not exist. I have tried everything to add it but it just
-wont work. I then thought I had to point to the one in x86_64-pokysdk-linux,
-however there is no qmake there. Any ideas on what the problem may be?
+-- 
 
-Thanks!
+Paul Eggleton
+Intel Open Source Technology Centre
 
