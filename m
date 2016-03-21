@@ -1,48 +1,45 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
-	[209.85.213.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C23770101
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C6666FFD3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2016 13:59:16 +0000 (UTC)
-Received: by mail-vk0-f66.google.com with SMTP id e185so16760932vkb.2
+	Mon, 21 Mar 2016 14:00:09 +0000 (UTC)
+Received: by mail-wm0-f49.google.com with SMTP id l68so152765039wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2016 06:59:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to; 
-	bh=ttUwFaiWZgUNUPU1+cOfNofkyv9s9M0z0dnuOYpSuyE=;
-	b=N3/R6O8gNm0eiFl7XaejnlC/V2D3n3yvQUOv2rNXGSqm2dwdMLuj2jBZypa2HSf7aQ
-	v/xtSTPcY6iTScxVx8ubyMiiDr/mPMgg0HKHDROzcDu0WVt1yD7L0bIzqnk6Qx7LWdmQ
-	JUrnpE1hp+u8kQNRkaEnwjd26obzNiI2Id79LpWM6cR36spbhSf3b+u15USZaUbz3a1E
-	ijqR972PNYtmzu5fHhzrPZBahZZYc6KWh9C3fELxPddmKS/dB7cHMCquyCbl9LobhOdh
-	Dc+uR/E+i65GlcZQBcytfBDEeLFDHf0w93UT6TcPGk0iTvBAQ26JM4TUDfl5pZ4dIYnA
-	Bnxw==
+	Mon, 21 Mar 2016 07:00:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=HBuDA56pTCXOSKl9IV8zBX/vg6AGDnqsH7fR2AKMtpY=;
+	b=HAC2m/kj+ROAxK1mHN7js/znrxT0xbtdNtQk3wO6SOSrr+EEQlshq1d2vrIj6YxbkC
+	eSxU/fiBktG/5+KZxsBQ9xgMe6CsPPNtxVUUlKHXuRIwE6KqwkCwrTc3/FjW+ZrrVNeN
+	GjbC/teatavh0Nd6l58LVMfAw173NalIabHRwcWvldmhhFdR46+88Myn680NYW/Is9sv
+	8wGQSKjfmmOakTLTJ37w3ZBlgnqNM7t9HtDkcLChENWVjvNgRQqXZmx6nAA5jfC4QB4q
+	6r8L8My33ESTxXy7DT8Lr6GpQud3/shmPDil94KvJJrRsKrTMjSJD0njPEMPpTRmNvIe
+	NN/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to;
-	bh=ttUwFaiWZgUNUPU1+cOfNofkyv9s9M0z0dnuOYpSuyE=;
-	b=K1pfwl0YDzrPm0WEvGRp7RhwXhny5AR+8k8erteUmOZs27OXzt85V+dYfW8vij9SMd
-	0wvatbZsb5felpmlglMdJbdCy3ikj8Gat+JSeIfMWD1mWSP/ozWq1oUHYqkbAKXvVcMm
-	LEtA6Qpri49WIIyMjWfTkVG5OJ+YepOP2pozwi29xAe6lNCysSMkMkbhUotIajeqwHTv
-	qYxFR+Ms4CMJC09PwCqA59KmQBOxjkkpc8NIPhCBXfrp4Ze/uzi/9Nd62+8MfFvAHA8U
-	q4Fi+j4gCpkUJoEEfoHTWzwRXFSfr6Qpz/fWHfqRSoDLbVQsaxexMSItWLc/LdCqWcdD
-	JleA==
-X-Gm-Message-State: AD7BkJKrxZI/vaB7BIrbjMNxA1Gq+TMhOEZoFUCzphTuJHSmE7kWzHQr80AIuHb76oebDUmEXKBCKheHEPoI/w==
-MIME-Version: 1.0
-X-Received: by 10.31.129.11 with SMTP id c11mr28082104vkd.52.1458568756319;
-	Mon, 21 Mar 2016 06:59:16 -0700 (PDT)
-Received: by 10.159.35.45 with HTTP; Mon, 21 Mar 2016 06:59:16 -0700 (PDT)
-In-Reply-To: <20160321131020.GC2562@jama>
-References: <1458166402-10786-1-git-send-email-schnitzeltony@googlemail.com>
-	<51386.10.252.7.138.1458328003.squirrel@linux.intel.com>
-	<56EFEC56.3090406@linux.intel.com> <20160321131020.GC2562@jama>
-Date: Mon, 21 Mar 2016 14:59:16 +0100
-Message-ID: <CALbNGRSY6JQCJwVfUko549Tb6FsvqP-dit0hywxKha3=q-M7Cw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/2] gnome-bluetooth: fix compile
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=HBuDA56pTCXOSKl9IV8zBX/vg6AGDnqsH7fR2AKMtpY=;
+	b=ZHF8zi3UKfSNNKjR3bEuVbcNze/eemdshmD61r/3WOAGi1LOz2emmz2LtPvDXFLlNI
+	LkeklB0Dp5EXgPnMGuvpvcGx4Z0/O1e86Eg3vh3fslJLO/1Vixi7wSlqB908Gf8MVXY8
+	vw8ZssMkYwlJf8k2qtRTpzZyGaIIu757oU5WConkWJmMWWwByYIjPmG15UAL0XFypbKx
+	39NkIy4A68GtjfG61Ji/f/jsSOwqYV6wbbncEYifk1yGoK5hVShvap80C/rCG1hoykVJ
+	I8VBSO8O/E96FLYkCvvDmJLYk6e9Tmx57WmfeAPManM2AGp1BdXlz1JJmpSXdfYhDqGO
+	cc1g==
+X-Gm-Message-State: AD7BkJLPjz5CuJjFXVhUY0psYwjQdyj/C9UZDehYopqD4RC2K1IgpSU5QdNxCr1Nq4RJiw==
+X-Received: by 10.28.68.85 with SMTP id r82mr13302814wma.65.1458568809600;
+	Mon, 21 Mar 2016 07:00:09 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	i5sm25494578wjx.15.2016.03.21.07.00.08
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 21 Mar 2016 07:00:08 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 21 Mar 2016 15:04:25 +0100
+Message-Id: <1458569065-14471-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.3
+Subject: [PATCH][meta-oe] gnome-panel: add PACKAGECONFIG for networkmanager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,33 +52,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2016 13:59:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Mar 2016 14:00:09 -0000
 
-On Mon, Mar 21, 2016 at 2:10 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Mon, Mar 21, 2016 at 02:43:02PM +0200, Alexander Kanavin wrote:
->> On 03/18/2016 09:06 PM, alexander.kanavin@linux.intel.com wrote:
->> >> fixes error series starting with
->> >> | Caught exception: <type 'exceptions.TypeError'> TypeError('expected a
->> >> string or other character buffer object',)
->> >> | >
->> >> /home/superandy/tmp/oe-core-glibc/sysroots/x86_64-linux/usr/lib/python2.7/distutils/sysconfig.py(22)<module>()
->> >> | -> PREFIX = os.path.normpath(sys.prefix).replace(
->> >> os.getenv("BUILD_SYS"), os.getenv("HOST_SYS") )
->> >
->> > Both this patch and the second one should be replaced with a patch that
->> > simply adds
->> >
->> > inherit gobject-introspection
->> >
->> > to the recipe. For some reason I forgot to do that in my g-i fixes patchset.
->>
->> Martin, can you drop these patches from master-next please? Just want to
->> make sure they don't make it to the master branch.
->
-> After someone sends the patch with the inherit, then yes.
->
-I don't think I can send something till next week - am drowning on WIP - sorry
+* fixes:
+  WARN: gnome-panel: gnome-panel rdepends on dbus-lib, but it isn't a build dependency?
+* there is general dbus dependency already, always used by libpanel-applet package:
+  gnome-panel.full/temp/log.do_package:DEBUG: libpanel-applet: Dependency libdbus-1.so.3 requires package dbus-lib (used by files: /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/gnome-panel/2.32.1-r7/packages-split/libpanel-applet/usr/lib/libpanel-applet-3.so.0.0.6)
 
-Andreas
+* but when networkmanager is detected, then it's also linked from
+  clock-applet in gnome-panel package:
+  gnome-panel.full/temp/log.do_package:DEBUG: gnome-panel: Dependency libdbus-1.so.3 requires package dbus-lib (used by files: /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/gnome-panel/2.32.1-r7/packages-split/gnome-panel/usr/libexec/clock-applet)
+
+* OE qemux86@ ~/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/gnome-panel/2.32.1-r7/git $ git grep HAVE_NETWORK_MANAGER .
+  applets/clock/clock-location.c:#ifdef HAVE_NETWORK_MANAGER
+  applets/clock/clock-location.c:#ifdef HAVE_NETWORK_MANAGER
+  applets/clock/clock-location.c:#ifdef HAVE_NETWORK_MANAGER
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
+index 23e2de8..9be2ec1 100644
+--- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
+@@ -25,6 +25,9 @@ S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF = "--disable-scrollkeeper --disable-eds --enable-bonobo=no --with-in-process-applets=none"
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[networkmanager] = "--enable-network-manager,--disable-network-manager,networkmanager"
++
+ do_configure_prepend() {
+     gnome-doc-prepare --automake
+     sed -i -e s:help:: ${S}/Makefile.am
+-- 
+2.7.3
+
 
