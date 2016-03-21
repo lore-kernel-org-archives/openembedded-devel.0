@@ -1,21 +1,23 @@
-Return-Path: <jose.bollo@iot.bzh>
-X-Greylist: delayed 362 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 21 Mar 2016 11:05:24 UTC
-Received: from mx1a.lautre.net (mx1a.lautre.net [80.67.160.71])
-	by mail.openembedded.org (Postfix) with ESMTP id 170AC606A8
+Return-Path: <erkka.kaaria@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id DD65071957
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2016 11:05:24 +0000 (UTC)
-Received: from jobol.la-dameblanche.fr (por56-1-78-229-206-229.fbx.proxad.net
-	[78.229.206.229]) (Authenticated sender: jobol@nonadev.net)
-	by mx1a.lautre.net (Postfix) with ESMTPA id 2A81641324;
-	Mon, 21 Mar 2016 11:59:21 +0100 (CET)
-From: jose.bollo@iot.bzh
+	Mon, 21 Mar 2016 11:36:52 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by fmsmga101.fm.intel.com with ESMTP; 21 Mar 2016 04:36:53 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.24,371,1455004800"; d="scan'208";a="915526726"
+Received: from ekaaria-xps-8300.fi.intel.com ([10.237.68.35])
+	by orsmga001.jf.intel.com with ESMTP; 21 Mar 2016 04:36:52 -0700
+From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Mar 2016 11:59:19 +0100
-Message-Id: <1458557959-10500-1-git-send-email-jose.bollo@iot.bzh>
-X-Mailer: git-send-email 2.1.4
+Date: Mon, 21 Mar 2016 13:39:12 +0200
+Message-Id: <1458560352-17973-2-git-send-email-erkka.kaaria@intel.com>
+X-Mailer: git-send-email 2.7.3
+In-Reply-To: <1458560352-17973-1-git-send-email-erkka.kaaria@intel.com>
+References: <1458560352-17973-1-git-send-email-erkka.kaaria@intel.com>
 MIME-Version: 1.0
-Subject: [PATCH] libmicrohttp: update to version 0.9.48
+Subject: [meta-java][PATCH 2/2] Openjdk-8: Fix build flags for adlc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,38 +30,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2016 11:05:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 21 Mar 2016 11:36:53 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: José Bollo <jose.bollo@iot.bzh>
-
-Change-Id: I33a1acf8360d074a3310f9691ac939fe70a99f3e
-Signed-off-by: José Bollo <jose.bollo@iot.bzh>
----
- .../{libmicrohttpd_0.9.34.bb => libmicrohttpd_0.9.48.bb}              | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.34.bb => libmicrohttpd_0.9.48.bb} (86%)
-
-diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
-similarity index 86%
-rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
-index e3c833b..6e7ad26 100644
---- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-+++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
-@@ -6,8 +6,8 @@ SECTION = "net"
- DEPENDS = "libgcrypt gnutls file"
- 
- SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
--SRC_URI[md5sum] = "2947eee13c2c8affb95023a0cb6fda0c"
--SRC_URI[sha256sum] = "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843be421a040be1b25a88"
-+SRC_URI[md5sum] = "9c298c890088a91fe0d7ac3fec9d0097"
-+SRC_URI[sha256sum] = "87667e158f2bf8c691a002e256ffe30885d4121a9ee4143af0320c47cdf8a2a4"
- 
- inherit autotools lib_package
- 
--- 
-2.1.4
+QWRsYyBpcyBhIG5hdGl2ZSB0b29sIHRoYXQgb3BlbmpkayBidWlsZHMgYW5kIHVzZXMgZHVyaW5n
+IGl0cyBidWlsZCBwcm9jZXNzLgpCaXRiYWtlIGhvd2V2ZXIgcGFzc2VzIHRhcmdldCBtYWNoaW5l
+IHNwZWNpZmljIENGTEFHUyBhbmQgQ1hYRkxBR1MgYmVjYXVzZSB3ZQphcmUgY3Jvc3Njb21waWxp
+bmcgb3BlbmpkayBmb3IgdGhlIHRhcmdldCBhcmNoaXRlY3R1cmUuIFRoaXMgY2FuIGNhdXNlIGlz
+c3VlcywKaWYgdGhlc2UgZmxhZ3MgY29udGFpbnMgdmFsdWVzLCB0aGF0IHdvcmsgZm9yIHRoZSBZ
+b2N0byBwcm92aWRlZCBjcm9zc2NvbXBpbGVyCmJ1dCBub3QgZm9yIHRoZSBzeXN0ZW0gY29tcGls
+ZXIuCgpBcyBhbiBleGFtcGxlLCBjb21waWxhdGlvbiB3aWxsIGZhaWwgb24gVWJ1bnR1IDE0LjA0
+IGlmCi1mc3RhY2stcHJvdGVjdG9yLXN0cm9uZyBpcyBzcGVjaWZpZWQgaW4gdGhlIGRpc3RybyBz
+ZWN1cml0eSBmbGFncy4gVWJ1bnR1CjE0LjA0IHNoaXBzIHdpdGggR0NDIDQuOCwgd2hlcmVhcyB0
+aGlzIGZsYWcgaXMgb25seSBzdXBwb3J0ZWQgYnkgR0NDIDQuOSsuCgpTaWduZWQtb2ZmLWJ5OiBF
+cmtrYSBLw6TDpHJpw6QgPGVya2thLmthYXJpYUBpbnRlbC5jb20+Ci0tLQogcmVjaXBlcy1jb3Jl
+L29wZW5qZGsvb3Blbmpkay04XzcyYjA1LmJiICAgICAgICAgICAgfCAgMSArCiAuLi4vb3Blbmpk
+azgtZml4LWFkbGMtZmxhZ3MucGF0Y2ggICAgICAgICAgICAgICAgICB8IDM0ICsrKysrKysrKysr
+KysrKysrKysrKysKIDIgZmlsZXMgY2hhbmdlZCwgMzUgaW5zZXJ0aW9ucygrKQogY3JlYXRlIG1v
+ZGUgMTAwNjQ0IHJlY2lwZXMtY29yZS9vcGVuamRrL3BhdGNoZXMtb3Blbmpkay04L29wZW5qZGs4
+LWZpeC1hZGxjLWZsYWdzLnBhdGNoCgpkaWZmIC0tZ2l0IGEvcmVjaXBlcy1jb3JlL29wZW5qZGsv
+b3Blbmpkay04XzcyYjA1LmJiIGIvcmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpkay04XzcyYjA1
+LmJiCmluZGV4IDFhMDE2MzAuLmZlYWYyMjcgMTAwNjQ0Ci0tLSBhL3JlY2lwZXMtY29yZS9vcGVu
+amRrL29wZW5qZGstOF83MmIwNS5iYgorKysgYi9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuamRr
+LThfNzJiMDUuYmIKQEAgLTEwLDYgKzEwLDcgQEAgUEFUQ0hFU19VUklfYXBwZW5kID0gIlwKICAg
+ICBmaWxlOi8vb3BlbmpkazgtZml4LXNoYXJrLXN0ZGMrKzExLnBhdGNoO2FwcGx5PW5vIFwKICAg
+ICBmaWxlOi8vb3BlbmpkazgtdXNlX2J1aWx0aW5fZnJhbWVfYWRkcmVzc18wX3JhdGhlcl90aGFu
+X3JldHVybmluZ19hZGRyZXNzX29mX2xvY2FsX3ZhcmlhYmxlLnBhdGNoO2FwcGx5PW5vIFwKICAg
+ICBmaWxlOi8vb3BlbmpkazgtZml4LWFzc2VtYmxlci1mbGFnLWhhbmRsaW5nLWluLW1ha2VmaWxl
+LnBhdGNoO2FwcGx5PW5vIFwKKyAgICBmaWxlOi8vb3BlbmpkazgtZml4LWFkbGMtZmxhZ3MucGF0
+Y2g7YXBwbHk9bm8gXAogIgogCiBkb19jb21waWxlX2FwcGVuZCgpIHsKZGlmZiAtLWdpdCBhL3Jl
+Y2lwZXMtY29yZS9vcGVuamRrL3BhdGNoZXMtb3Blbmpkay04L29wZW5qZGs4LWZpeC1hZGxjLWZs
+YWdzLnBhdGNoIGIvcmVjaXBlcy1jb3JlL29wZW5qZGsvcGF0Y2hlcy1vcGVuamRrLTgvb3Blbmpk
+azgtZml4LWFkbGMtZmxhZ3MucGF0Y2gKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAw
+MC4uZmEyNmQwNAotLS0gL2Rldi9udWxsCisrKyBiL3JlY2lwZXMtY29yZS9vcGVuamRrL3BhdGNo
+ZXMtb3Blbmpkay04L29wZW5qZGs4LWZpeC1hZGxjLWZsYWdzLnBhdGNoCkBAIC0wLDAgKzEsMzQg
+QEAKK2FkbGMgaXMgYnVpbHQgdXNpbmcgdGhlIG5hdGl2ZSB0b29sY2hhaW4sIG5vdCB0aGUgY3Jv
+c3Njb21waWxlci4gSXQgaG93ZXZlcgord2FzIGluY29ycmVjdGx5IHVzaW5nIGZsYWdzIG1lYW50
+IGZvciB0aGUgY3Jvc3Njb21waWxlci4KKworU2lnbmVkLW9mZi1ieTogRXJra2EgS8Okw6RyacOk
+IDxlcmtrYS5rYWFyaWFAaW50ZWwuY29tPgorCitVcHN0cmVhbS1TdGF0dXM6IEluYXBwcm9wcmlh
+dGUgW1lvY3RvLXNwZWNpZmljIGZpeGVzXQorCistLS0KKyBob3RzcG90L21ha2UvbGludXgvbWFr
+ZWZpbGVzL2FkbGMubWFrZSB8IDEwICsrKysrKysrKysKKyAxIGZpbGUgY2hhbmdlZCwgMTAgaW5z
+ZXJ0aW9ucygrKQorCitkaWZmIC0tZ2l0IGhvdHNwb3QvbWFrZS9saW51eC9tYWtlZmlsZXMvYWRs
+Yy5tYWtlIGhvdHNwb3QvbWFrZS9saW51eC9tYWtlZmlsZXMvYWRsYy5tYWtlCitpbmRleCA4YTg2
+NjkxLi4yNzg5YzAzIDEwMDY0NAorLS0tIGhvdHNwb3QvbWFrZS9saW51eC9tYWtlZmlsZXMvYWRs
+Yy5tYWtlCisrKysgaG90c3BvdC9tYWtlL2xpbnV4L21ha2VmaWxlcy9hZGxjLm1ha2UKK0BAIC0y
+OCw2ICsyOCwxNiBAQAorCisgaW5jbHVkZSAkKEdBTU1BRElSKS9tYWtlLyQoUGxhdGZvcm1fb3Nf
+ZmFtaWx5KS9tYWtlZmlsZXMvcnVsZXMubWFrZQorCisrIyBZb2N0byBzcGVjaWZpYyBmaXggLSBy
+ZW1vdmUgdGFyZ2V0IG1hY2hpbmUgZmxhZ3MgYW5kIHJlcGxhY2UgdGhlbSB3aXRoCisrIyBidWls
+ZCBtYWNoaW5lIGZsYWdzLCBhcyB0aGlzIHBhcnQgaXMgYnVpbHQgdXNpbmcgdGhlIG5hdGl2ZSB0
+b29sY2hhaW4KKytDWFhGTEFHUzo9JChmaWx0ZXItb3V0ICQoVEFSR0VUX0NYWEZMQUdTKSwkKENY
+WEZMQUdTKSkKKytDRkxBR1M6PSQoZmlsdGVyLW91dCAkKFRBUkdFVF9DRkxBR1MpLCQoQ0ZMQUdT
+KSkKKysKKytDWFhGTEFHUyArPSAkKEJVSUxEX0NYWEZMQUdTKQorK0NGTEFHUyArPSAkKEJVSUxE
+X0NGTEFHUykKKysKKysKKysKKyAjICMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKKworICMgT1VURElSIG11c3Qg
+YmUgdGhlIHNhbWUgYXMgQURfRGlyID0gJChHRU5FUkFURUQpL2FkZmlsZXMgaW4gdG9wLm1ha2U6
+CistLQorMS45LjEKLS0gCjIuNy4zCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KSW50ZWwgRmlubGFuZCBPeQpSZWdp
+c3RlcmVkIEFkZHJlc3M6IFBMIDI4MSwgMDAxODEgSGVsc2lua2kgCkJ1c2luZXNzIElkZW50aXR5
+IENvZGU6IDAzNTc2MDYgLSA0IApEb21pY2lsZWQgaW4gSGVsc2lua2kgCgpUaGlzIGUtbWFpbCBh
+bmQgYW55IGF0dGFjaG1lbnRzIG1heSBjb250YWluIGNvbmZpZGVudGlhbCBtYXRlcmlhbCBmb3IK
+dGhlIHNvbGUgdXNlIG9mIHRoZSBpbnRlbmRlZCByZWNpcGllbnQocykuIEFueSByZXZpZXcgb3Ig
+ZGlzdHJpYnV0aW9uCmJ5IG90aGVycyBpcyBzdHJpY3RseSBwcm9oaWJpdGVkLiBJZiB5b3UgYXJl
+IG5vdCB0aGUgaW50ZW5kZWQKcmVjaXBpZW50LCBwbGVhc2UgY29udGFjdCB0aGUgc2VuZGVyIGFu
+ZCBkZWxldGUgYWxsIGNvcGllcy4K
 
 
