@@ -1,45 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C6666FFD3
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EEBB6012C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2016 14:00:09 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id l68so152765039wml.0
+	Mon, 21 Mar 2016 14:46:36 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id x188so22333382wmg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2016 07:00:10 -0700 (PDT)
+	Mon, 21 Mar 2016 07:46:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=HBuDA56pTCXOSKl9IV8zBX/vg6AGDnqsH7fR2AKMtpY=;
-	b=HAC2m/kj+ROAxK1mHN7js/znrxT0xbtdNtQk3wO6SOSrr+EEQlshq1d2vrIj6YxbkC
-	eSxU/fiBktG/5+KZxsBQ9xgMe6CsPPNtxVUUlKHXuRIwE6KqwkCwrTc3/FjW+ZrrVNeN
-	GjbC/teatavh0Nd6l58LVMfAw173NalIabHRwcWvldmhhFdR46+88Myn680NYW/Is9sv
-	8wGQSKjfmmOakTLTJ37w3ZBlgnqNM7t9HtDkcLChENWVjvNgRQqXZmx6nAA5jfC4QB4q
-	6r8L8My33ESTxXy7DT8Lr6GpQud3/shmPDil94KvJJrRsKrTMjSJD0njPEMPpTRmNvIe
-	NN/w==
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=KnbevDcpsVvyJcoqhr+iG8wM5v13ndCjrZ3B2c7epkw=;
+	b=FSZHmTqfA7kg1sbfU3HAJZPkI4ihVUJLaQRFJaqdKzPcfJB/5tVEh/pWe7hp4CBitW
+	PbM2Bhn5atz0BcTdbezkBJCzB2m6M+97BGvgcqNjOjDC+KuLs/iVW8CJs/H3VLvo8TtL
+	CiwhkXu32Yac0SuYD88QpkIPPOIWVz+JQs1aOY+Jvg+zM+k2m+7iuXnVSevGCCYY/HX+
+	qBakfOUe+/D0IRKU21MWwUDt7cXeIDoURYa8XHLpEpdqqfLfN2d8+RevZEMIZayJsE2T
+	AzaegV2F1ZBEn8rAkFZ+tbI8N9ErOwMtTHqgj1sgmi/fdiXc8lSrRUEisN2iK47SN7QZ
+	nLuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=HBuDA56pTCXOSKl9IV8zBX/vg6AGDnqsH7fR2AKMtpY=;
-	b=ZHF8zi3UKfSNNKjR3bEuVbcNze/eemdshmD61r/3WOAGi1LOz2emmz2LtPvDXFLlNI
-	LkeklB0Dp5EXgPnMGuvpvcGx4Z0/O1e86Eg3vh3fslJLO/1Vixi7wSlqB908Gf8MVXY8
-	vw8ZssMkYwlJf8k2qtRTpzZyGaIIu757oU5WConkWJmMWWwByYIjPmG15UAL0XFypbKx
-	39NkIy4A68GtjfG61Ji/f/jsSOwqYV6wbbncEYifk1yGoK5hVShvap80C/rCG1hoykVJ
-	I8VBSO8O/E96FLYkCvvDmJLYk6e9Tmx57WmfeAPManM2AGp1BdXlz1JJmpSXdfYhDqGO
-	cc1g==
-X-Gm-Message-State: AD7BkJLPjz5CuJjFXVhUY0psYwjQdyj/C9UZDehYopqD4RC2K1IgpSU5QdNxCr1Nq4RJiw==
-X-Received: by 10.28.68.85 with SMTP id r82mr13302814wma.65.1458568809600;
-	Mon, 21 Mar 2016 07:00:09 -0700 (PDT)
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=KnbevDcpsVvyJcoqhr+iG8wM5v13ndCjrZ3B2c7epkw=;
+	b=Lsy9HRDXUrCT9dwwPhyA2o1fkAZJOzFQRan1yB1D7LMvTXPRDoDnYyH6DHlowQp6FB
+	VN3Vg8pXCW4DBXfN88r5YuF4SwaOqZvACoXem9MpqxjaF1H8+s8dNXCDpKo4ym3hwX5X
+	xOYopgOTCiq27Qwo4MvmZ8bA71bZJ2LRQozeJjCyXrwUYPhj9PQcn2qfvFcWxkhdP3qe
+	CFcrQer+PKJ6vI2HZqYU2CY869EdFKS3h5msD4iA2KwRlR6hAd2XcPjuNwlEKfZWdXQE
+	93q1UBhX1b4EJpclK0M22u1RdN+ocaH8IPsXgwsZMuxjBH2lUK/AUYJPKWe7gMn10L81
+	3sKQ==
+X-Gm-Message-State: AD7BkJJQSI5SfRBLaMnrNpXnks3Q9D+O7dphAz8p6qfOQs0LJUvP8bi+BxLHLoxBjlX3iQ==
+X-Received: by 10.28.54.156 with SMTP id y28mr14936464wmh.63.1458571597166;
+	Mon, 21 Mar 2016 07:46:37 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	i5sm25494578wjx.15.2016.03.21.07.00.08
+	by smtp.gmail.com with ESMTPSA id h7sm12773794wmf.9.2016.03.21.07.46.36
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 21 Mar 2016 07:00:08 -0700 (PDT)
+	Mon, 21 Mar 2016 07:46:36 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 21 Mar 2016 15:50:53 +0100
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Mar 2016 15:04:25 +0100
-Message-Id: <1458569065-14471-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.3
-Subject: [PATCH][meta-oe] gnome-panel: add PACKAGECONFIG for networkmanager
+Message-ID: <20160321145053.GD2562@jama>
+References: <1458568492-29611-1-git-send-email-alexander.kanavin@linux.intel.com>
+	<1458568492-29611-2-git-send-email-alexander.kanavin@linux.intel.com>
+MIME-Version: 1.0
+In-Reply-To: <1458568492-29611-2-git-send-email-alexander.kanavin@linux.intel.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [PATCH 2/2] gnome-bluetooth: replace systemd dependency with udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,42 +58,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2016 14:00:09 -0000
+X-List-Received-Date: Mon, 21 Mar 2016 14:46:39 -0000
+X-Groupsio-MsgNum: 60601
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="zS7rBR6csb6tI2e1"
+Content-Disposition: inline
 
-* fixes:
-  WARN: gnome-panel: gnome-panel rdepends on dbus-lib, but it isn't a build dependency?
-* there is general dbus dependency already, always used by libpanel-applet package:
-  gnome-panel.full/temp/log.do_package:DEBUG: libpanel-applet: Dependency libdbus-1.so.3 requires package dbus-lib (used by files: /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/gnome-panel/2.32.1-r7/packages-split/libpanel-applet/usr/lib/libpanel-applet-3.so.0.0.6)
+--zS7rBR6csb6tI2e1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-* but when networkmanager is detected, then it's also linked from
-  clock-applet in gnome-panel package:
-  gnome-panel.full/temp/log.do_package:DEBUG: gnome-panel: Dependency libdbus-1.so.3 requires package dbus-lib (used by files: /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/gnome-panel/2.32.1-r7/packages-split/gnome-panel/usr/libexec/clock-applet)
+On Mon, Mar 21, 2016 at 03:54:52PM +0200, Alexander Kanavin wrote:
+> Now we have an up to date standalone libudev (via eudev),
+> so systemd is no longer required.
+>=20
+> Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+> ---
+>  meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb | 5 +=
+----
+>  1 file changed, 1 insertion(+), 4 deletions(-)
+>=20
+> diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.1=
+8.2.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
+> index b3058e8..984dad5 100644
+> --- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
+> +++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
+> @@ -6,13 +6,10 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Deb723b61539f=
+eef013de476e68b5c50a \
+> =20
+>  SECTION =3D "x11/gnome"
+> =20
+> -# systemd is needed because it has a necessary version of libudev
+> -# Effectively this means that systemd must be in DISTRO_FEATURES
+> -DEPENDS =3D "systemd gtk+3 libnotify libcanberra"
+> +DEPENDS =3D "udev gtk+3 libnotify libcanberra"
+>  DEPENDS +=3D "${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','=
+bluez4',d)}"
+> =20
+>  inherit gnomebase gtk-icon-cache distro_features_check gobject-introspec=
+tion
 
-* OE qemux86@ ~/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/gnome-panel/2.32.1-r7/git $ git grep HAVE_NETWORK_MANAGER .
-  applets/clock/clock-location.c:#ifdef HAVE_NETWORK_MANAGER
-  applets/clock/clock-location.c:#ifdef HAVE_NETWORK_MANAGER
-  applets/clock/clock-location.c:#ifdef HAVE_NETWORK_MANAGER
+So you can remove distro_features_check inherit as well, right?
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+> -REQUIRED_DISTRO_FEATURES =3D "systemd"
+> =20
+>  SRC_URI[archive.md5sum] =3D "75d09c924468ec0c687f9ab3acf7f113"
+>  SRC_URI[archive.sha256sum] =3D "d8df073c331df0f97261869fb77ffcdbf4e3e4ea=
+f460d3c3ed2b16e03d9c5398"
+> --=20
+> 2.7.0
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-index 23e2de8..9be2ec1 100644
---- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-@@ -25,6 +25,9 @@ S = "${WORKDIR}/git"
- 
- EXTRA_OECONF = "--disable-scrollkeeper --disable-eds --enable-bonobo=no --with-in-process-applets=none"
- 
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[networkmanager] = "--enable-network-manager,--disable-network-manager,networkmanager"
-+
- do_configure_prepend() {
-     gnome-doc-prepare --automake
-     sed -i -e s:help:: ${S}/Makefile.am
--- 
-2.7.3
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--zS7rBR6csb6tI2e1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlbwCkwACgkQN1Ujt2V2gBxpcgCgqn0VQOtgXaw9vJV7WzBuoCW6
+zacAn0BJgT14lWAU5R4Yds5ti/7DKr/1
+=6qeG
+-----END PGP SIGNATURE-----
+
+--zS7rBR6csb6tI2e1--
