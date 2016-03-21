@@ -1,46 +1,29 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id C6BCF62135
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 0208C606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2016 10:31:35 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id l68so115869673wml.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2016 03:31:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=2zybOzPEin+zdeS5d5fByzbU/MUsckgOgfLxDYYSZHg=;
-	b=dFwQpti9c74L7H23cjtlKNTCdDCMVaa6YhtYlWZ0UsffczidGg5FvaiFFj97qrmE94
-	7rRq7J7ftyIEXcHOWzjjtdKEuKSmDII9G9mGDNdLYfoUYyhRdWPSNoOY+DstntjNw33E
-	Ec53LajRYQGszrnl2+v1JKAv7DYSYYOQQp9S56D/6VpBPZifPgRzru/XJUSxOtV8ceEN
-	01mydyiXcrQIQOB+WLumsKcUgCYxd5hN++NTN7QaNVNEypBhUV/vl1A6i1SCL0gdpwZG
-	FzDjlP5jxKXI/2z7/mQI4X8bGc85TQuKzoc3DMfuyMtMpX6e/uB7PwYQJrg9b4PW1t0y
-	rG0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2zybOzPEin+zdeS5d5fByzbU/MUsckgOgfLxDYYSZHg=;
-	b=CzEGqg6P4PFFMRHiFvSis2fLV2iw6g162grS13nQ7v4goUI6J2Ro+FOxlFAMVybieA
-	NLz69RXAkJRm4wRyIPhSMD5H+A3CnazYW/i6RUaT3JrmDdDSsn9G7N3wOCI+hFFUog/8
-	30u0EMhBGUc4ktZ6F7HBw8IQXrwt9o++cbxbJieMMlf1lpUof6gaN5eCKBOsyD/yDED5
-	lQVubDdaj6GJAHdYUERGkWvpOePUZ/BhK1TeSGLtGNKVlLXkNeLplZ1xAPeiulQF+aJJ
-	eRZbNB64OAEbEXwOniRMI0CwL9EtQFmHviQSSSWhRLXPPUdjYh+0/RwG56QKMH1CenfY
-	vM0w==
-X-Gm-Message-State: AD7BkJKTHWIcvZKO0CIuHZbMqzMqfa24IBMc9hDJHW0Fql5lKYSUfQ9GJ/5FZ6+ZcA6XRw==
-X-Received: by 10.194.242.202 with SMTP id ws10mr29495383wjc.3.1458556295589; 
-	Mon, 21 Mar 2016 03:31:35 -0700 (PDT)
-Received: from neopili.newtec.com ([81.27.221.125])
-	by smtp.gmail.com with ESMTPSA id
-	j18sm11833780wmd.2.2016.03.21.03.31.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 21 Mar 2016 03:31:34 -0700 (PDT)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: Martin Jansa <Martin.Jansa@gmail.com>, Andre McCurdy <armccurdy@gmail.com>,
-	Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>,
-	openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Mar 2016 11:31:36 +0100
-Message-Id: <1458556296-2809-1-git-send-email-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.7.0
-Subject: [PATCH] opencv: Add missing dependencies
+	Mon, 21 Mar 2016 10:59:11 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u2LAxBH4030062; Mon, 21 Mar 2016 05:59:11 -0500
+Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2016032105591241-24435 ;
+	Mon, 21 Mar 2016 05:59:12 -0500 
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 21 Mar 2016 12:58:37 +0200
+Message-Id: <0519adc696bdd1d936306f40171a8dd9ddf73e74.1458557752.git.adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.7.3
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 03/21/2016 05:59:12 AM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 03/21/2016 05:59:12 AM,
+	Serialize complete at 03/21/2016 05:59:12 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-03-21_05:, , signatures=0
+Subject: [meta-oe][PATCH v3 1/2] ttf-pt-sans: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,38 +36,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2016 10:31:36 -0000
+X-List-Received-Date: Mon, 21 Mar 2016 10:59:14 -0000
 
-opencv-3.1+gitAUTOINC+92387b1ef8: libopencv-videoio rdepends on
-libgphotoport, but it isn't a build dependency, missing libgphoto2 in
-DEPENDS or PACKAGECONFIG? [build-deps]
-opencv-3.1+gitAUTOINC+92387b1ef8: libopencv-videoio rdepends on
-libgphoto2, but it isn't a build dependency, missing libgphoto2 in
-DEPENDS or PACKAGECONFIG? [build-deps]
-opencv-3.1+gitAUTOINC+92387b1ef8: libopencv-dnn rdepends on protobuf,
-but it isn't a build dependency, missing protobuf in DEPENDS or
-PACKAGECONFIG? [build-deps]
+PT Sans is an open source licensed font released in 2010 by ParaType.
+The ParaTypeFFL-1.3 license file has been submitted to OE-core.
 
-Credit-to: Martin Jansa <martin.jansa@gmail.com>
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 ---
- meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-graphics/ttf-fonts/ttf-pt-sans_1.1.bb  | 39 ++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-pt-sans_1.1.bb
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-index 87338cad4a4b..e9e85fe2af0a 100644
---- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-@@ -10,7 +10,7 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
- 
- DEFAULT_PREFERENCE = "-1"
- 
--DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 libwebp"
-+DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 libwebp libgphoto2 protobuf"
- 
- SRCREV_opencv = "92387b1ef8fad15196dd5f7fb4931444a68bc93a"
- SRCREV_contrib = "5409d5ad560523c85c6796cc5a009347072d883c"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-pt-sans_1.1.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-pt-sans_1.1.bb
+new file mode 100644
+index 0000000..ac60a36
+--- /dev/null
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-pt-sans_1.1.bb
+@@ -0,0 +1,39 @@
++SUMMARY = "PT Sans Fonts"
++DESCRIPTION = "The PT Sans TTF font set"
++HOMEPAGE = "http://www.paratype.com/public/"
++
++SECTION = "x11/fonts"
++
++LICENSE = "ParaTypeFFL-1.3"
++LIC_FILES_CHKSUM = "file://../PT%20Free%20Font%20License_eng.txt;md5=d720f3a281ed81c3f4cfc465e11b1d0d"
++
++inherit allarch fontcache
++
++# Downloading from fedora because upstream doesn't version its zip file
++# and causes hash build failures
++SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/paratype-pt-sans-fonts/PTSans.zip/c3f5a0e20a75cf628387510a720924a7/PTSans.zip"
++
++SRC_URI[md5sum] = "c3f5a0e20a75cf628387510a720924a7"
++SRC_URI[sha256sum] = "0164f824e03c32c99e8a225853ec168893a04a09ade132e93a674e85ae033b2e"
++
++do_install () {
++    install -d ${D}${datadir}/fonts/X11/TTF/
++    cd ..
++    for i in *.ttf; do
++        install -m 0644 $i ${D}${prefix}/share/fonts/X11/TTF/${i}
++    done
++}
++
++FILES_${PN} += "${datadir}"
++
++pkg_postinst_${PN} () {
++    set -x
++    for fontdir in `find $D/usr/lib/X11/fonts -type d`; do
++        mkfontdir $fontdir
++        mkfontscale $fontdir
++    done
++    for fontdir in `find $D/usr/share/fonts/X11 -type d`; do
++        mkfontdir $fontdir
++        mkfontscale $fontdir
++    done
++}
 -- 
-2.7.0
+2.7.3
 
 
