@@ -1,21 +1,26 @@
-Return-Path: <erkka.kaaria@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id CF6E670101
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id A71816FF6B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2016 11:36:54 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga103.jf.intel.com with ESMTP; 21 Mar 2016 04:36:46 -0700
+	Mon, 21 Mar 2016 12:46:43 +0000 (UTC)
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+	by fmsmga101.fm.intel.com with ESMTP; 21 Mar 2016 05:46:44 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,371,1455004800"; d="scan'208";a="915526699"
-Received: from ekaaria-xps-8300.fi.intel.com ([10.237.68.35])
-	by orsmga001.jf.intel.com with ESMTP; 21 Mar 2016 04:36:44 -0700
-From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
+X-IronPort-AV: E=Sophos;i="5.24,372,1455004800"; d="scan'208";a="70366987"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
+	([10.237.68.161])
+	by fmsmga004.fm.intel.com with ESMTP; 21 Mar 2016 05:46:45 -0700
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Mar 2016 13:39:11 +0200
-Message-Id: <1458560352-17973-1-git-send-email-erkka.kaaria@intel.com>
-X-Mailer: git-send-email 2.7.3
+References: <1458166402-10786-1-git-send-email-schnitzeltony@googlemail.com>
+	<51386.10.252.7.138.1458328003.squirrel@linux.intel.com>
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Message-ID: <56EFEC56.3090406@linux.intel.com>
+Date: Mon, 21 Mar 2016 14:43:02 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Icedove/38.6.0
 MIME-Version: 1.0
-Subject: [meta-java][PATCH 1/2] Openjdk-8: Fix openjdk build when CXX contains assembler arguments
+In-Reply-To: <51386.10.252.7.138.1458328003.squirrel@linux.intel.com>
+Subject: Re: [PATCH 1/2] gnome-bluetooth: fix compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,63 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2016 11:36:57 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 21 Mar 2016 12:46:45 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-QnVpbGRzIGN1cnJlbnRseSBmYWlsLCBpZiBDWFggYWxzbyBjb250YWlucyBhc3NlbWJsZXIgYXJn
-dW1lbnRzLiBUaGVzZQphcmd1bWVudHMgYXJlIGluIGZvcm0gIi1XYSxhcmdzLGFyZSxoZXJlIi4g
-V2hlbiB0aGlzIHN0cmluZyBpcyB0aGVuIHVzZWQgaW4Kb3BlbmpkayBtYWtlIHByb2Nlc3MsIGl0
-IGlzIGluc2VydGVkIGJlZm9yZSB0aGUgbWFrZSBldmFsdWF0ZXMgaXRzIGFyZ3VtZW50Cmxpc3Rz
-LiBBcyB0aGVzZSBsaXN0cyBhcmUgY29tbWEgc2VwYXJhdGVkLCB0aGUgY29tbWFzIGluIGFzc2Vt
-YmxlciBhcmd1bWVudCBsaXN0CmFyZSBpbnRlcnByZXRlZCBhcyBsaXN0IHNlcGFyYXRvcnMsIHdo
-aWNoIGJyZWFrcyB0aGUgYnVpbGQuCgpUaGlzIGlzIGZpeGVkIGJ5IGFkZGluZyB0aGUgZXh0cmEg
-JyQnLCB3aGljaCBtZWFucyB0aGUgc3RyaW5nIGlzIGluc2VydGVkIGFmdGVyCm1ha2UgZXZhbHVh
-dGVzIHRoZSBsaXN0LgoKU2lnbmVkLW9mZi1ieTogRXJra2EgS8Okw6RyacOkIDxlcmtrYS5rYWFy
-aWFAaW50ZWwuY29tPgotLS0KIHJlY2lwZXMtY29yZS9vcGVuamRrL29wZW5qZGstOF83MmIwNS5i
-YiAgICAgICAgICAgICAgfCAgMSArCiAuLi5kazgtZml4LWFzc2VtYmxlci1mbGFnLWhhbmRsaW5n
-LWluLW1ha2VmaWxlLnBhdGNoIHwgMjAgKysrKysrKysrKysrKysrKysrKysKIDIgZmlsZXMgY2hh
-bmdlZCwgMjEgaW5zZXJ0aW9ucygrKQogY3JlYXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMtY29yZS9v
-cGVuamRrL3BhdGNoZXMtb3Blbmpkay04L29wZW5qZGs4LWZpeC1hc3NlbWJsZXItZmxhZy1oYW5k
-bGluZy1pbi1tYWtlZmlsZS5wYXRjaAoKZGlmZiAtLWdpdCBhL3JlY2lwZXMtY29yZS9vcGVuamRr
-L29wZW5qZGstOF83MmIwNS5iYiBiL3JlY2lwZXMtY29yZS9vcGVuamRrL29wZW5qZGstOF83MmIw
-NS5iYgppbmRleCBlMGE3ODZhLi4xYTAxNjMwIDEwMDY0NAotLS0gYS9yZWNpcGVzLWNvcmUvb3Bl
-bmpkay9vcGVuamRrLThfNzJiMDUuYmIKKysrIGIvcmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpk
-ay04XzcyYjA1LmJiCkBAIC05LDYgKzksNyBAQCBQQVRDSEVTX1VSSV9hcHBlbmQgPSAiXAogICAg
-IGZpbGU6Ly9vcGVuamRrOC1maXgtc2hhcmstYnVpbGQucGF0Y2g7YXBwbHk9bm8gXAogICAgIGZp
-bGU6Ly9vcGVuamRrOC1maXgtc2hhcmstc3RkYysrMTEucGF0Y2g7YXBwbHk9bm8gXAogICAgIGZp
-bGU6Ly9vcGVuamRrOC11c2VfYnVpbHRpbl9mcmFtZV9hZGRyZXNzXzBfcmF0aGVyX3RoYW5fcmV0
-dXJuaW5nX2FkZHJlc3Nfb2ZfbG9jYWxfdmFyaWFibGUucGF0Y2g7YXBwbHk9bm8gXAorICAgIGZp
-bGU6Ly9vcGVuamRrOC1maXgtYXNzZW1ibGVyLWZsYWctaGFuZGxpbmctaW4tbWFrZWZpbGUucGF0
-Y2g7YXBwbHk9bm8gXAogIgogCiBkb19jb21waWxlX2FwcGVuZCgpIHsKZGlmZiAtLWdpdCBhL3Jl
-Y2lwZXMtY29yZS9vcGVuamRrL3BhdGNoZXMtb3Blbmpkay04L29wZW5qZGs4LWZpeC1hc3NlbWJs
-ZXItZmxhZy1oYW5kbGluZy1pbi1tYWtlZmlsZS5wYXRjaCBiL3JlY2lwZXMtY29yZS9vcGVuamRr
-L3BhdGNoZXMtb3Blbmpkay04L29wZW5qZGs4LWZpeC1hc3NlbWJsZXItZmxhZy1oYW5kbGluZy1p
-bi1tYWtlZmlsZS5wYXRjaApuZXcgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAwMDAwMDAwLi41ZTAy
-ZjI4Ci0tLSAvZGV2L251bGwKKysrIGIvcmVjaXBlcy1jb3JlL29wZW5qZGsvcGF0Y2hlcy1vcGVu
-amRrLTgvb3BlbmpkazgtZml4LWFzc2VtYmxlci1mbGFnLWhhbmRsaW5nLWluLW1ha2VmaWxlLnBh
-dGNoCkBAIC0wLDAgKzEsMjAgQEAKK0RlbGF5ICRDWFggaW5zZXJ0aW9uIHVudGlsIGFmdGVyIG1h
-a2UgaGFzIGV2YWx1YXRlZCB0aGUgY29tbWEtc2VwYXJhdGVkIGxpc3QsCithcyBhbnkgY29tbWEg
-c2VwYXJhdGVkIHBhcmFtZXRlcnMgaW4gQ1hYIChzdWNoIGFzIGFzc2VtYmxlciBhcmd1bWVudHMp
-IHdvdWxkCiticmVhayB0aGUgYnVpbGQKKworU2lnbmVkLW9mZi1ieTogRXJra2EgS8Okw6RyacOk
-IDxlcmtrYS5rYWFyaWFAaW50ZWwuY29tPgorCitVcHN0cmVhbS1TdGF0dXM6IFBlbmRpbmcKKwor
-LS0tCistLS0gbWFrZS9jb21tb24vTmF0aXZlQ29tcGlsYXRpb24uZ21rCisrKysgbWFrZS9jb21t
-b24vTmF0aXZlQ29tcGlsYXRpb24uZ21rCitAQCAtMzcyLDcgKzM3Miw3IEBAIGRlZmluZSBTZXR1
-cE5hdGl2ZUNvbXBpbGF0aW9uCisgICAkJChmb3JlYWNoIHAsJCQoJDFfU1JDUyksIFwKKyAgICAg
-ICAkJChldmFsICQkKGNhbGwgYWRkX25hdGl2ZV9zb3VyY2UsJDEsJCRwLCQkKCQxX09CSkVDVF9E
-SVIpLCBcCisgICAgICAgICAgICQkKCQxX0NGTEFHUykgJCQoJDFfRVhUUkFfQ0ZMQUdTKSwkJCgk
-MV9DQyksIFwKKy0gICAgICAgICAgJCQoJDFfQ1hYRkxBR1MpICQkKCQxX0VYVFJBX0NYWEZMQUdT
-KSwkKENYWCksJCQoJDFfQVNGTEFHUykpKSkKKysgICAgICAgICAgJCQoJDFfQ1hYRkxBR1MpICQk
-KCQxX0VYVFJBX0NYWEZMQUdTKSwkJChDWFgpLCQkKCQxX0FTRkxBR1MpKSkpCisKKyAgICMgT24g
-d2luZG93cyB3ZSBuZWVkIHRvIGNyZWF0ZSBhIHJlc291cmNlIGZpbGUKKyAgIGlmZXEgKCQoT1BF
-TkpES19UQVJHRVRfT1MpLCB3aW5kb3dzKQotLSAKMi43LjMKCi0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpJbnRlbCBG
-aW5sYW5kIE95ClJlZ2lzdGVyZWQgQWRkcmVzczogUEwgMjgxLCAwMDE4MSBIZWxzaW5raSAKQnVz
-aW5lc3MgSWRlbnRpdHkgQ29kZTogMDM1NzYwNiAtIDQgCkRvbWljaWxlZCBpbiBIZWxzaW5raSAK
-ClRoaXMgZS1tYWlsIGFuZCBhbnkgYXR0YWNobWVudHMgbWF5IGNvbnRhaW4gY29uZmlkZW50aWFs
-IG1hdGVyaWFsIGZvcgp0aGUgc29sZSB1c2Ugb2YgdGhlIGludGVuZGVkIHJlY2lwaWVudChzKS4g
-QW55IHJldmlldyBvciBkaXN0cmlidXRpb24KYnkgb3RoZXJzIGlzIHN0cmljdGx5IHByb2hpYml0
-ZWQuIElmIHlvdSBhcmUgbm90IHRoZSBpbnRlbmRlZApyZWNpcGllbnQsIHBsZWFzZSBjb250YWN0
-IHRoZSBzZW5kZXIgYW5kIGRlbGV0ZSBhbGwgY29waWVzLgo=
+On 03/18/2016 09:06 PM, alexander.kanavin@linux.intel.com wrote:
+>> fixes error series starting with
+>> | Caught exception: <type 'exceptions.TypeError'> TypeError('expected a
+>> string or other character buffer object',)
+>> | >
+>> /home/superandy/tmp/oe-core-glibc/sysroots/x86_64-linux/usr/lib/python2.7/distutils/sysconfig.py(22)<module>()
+>> | -> PREFIX = os.path.normpath(sys.prefix).replace(
+>> os.getenv("BUILD_SYS"), os.getenv("HOST_SYS") )
+>
+> Both this patch and the second one should be replaced with a patch that
+> simply adds
+>
+> inherit gobject-introspection
+>
+> to the recipe. For some reason I forgot to do that in my g-i fixes patchset.
+
+Martin, can you drop these patches from master-next please? Just want to 
+make sure they don't make it to the master branch.
+
+
+Alex
 
 
