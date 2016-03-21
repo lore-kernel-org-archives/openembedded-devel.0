@@ -1,35 +1,46 @@
-Return-Path: <adrian.ratiu@ni.com>
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mail.openembedded.org (Postfix) with ESMTP id CFE0D6212F
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id C6BCF62135
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2016 10:05:46 +0000 (UTC)
-Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	u2LA5jIO022948; Mon, 21 Mar 2016 05:05:45 -0500
-Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
-	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2016032105054566-20027 ;
-	Mon, 21 Mar 2016 05:05:45 -0500 
-Date: Mon, 21 Mar 2016 12:05:07 +0200
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20160321120507.226accc0@adi-pc-linux.emea.corp.natinst.com>
-In-Reply-To: <20160321095952.GB2562@jama>
-References: <1458313594-11011-1-git-send-email-adrian.ratiu@ni.com>
-	<20160318160431.GC2555@jama>
-	<20160321110104.0d6b67d0@adi-pc-linux.emea.corp.natinst.com>
-	<20160321095727.GA2562@jama> <20160321095952.GB2562@jama>
-Organization: National Instruments
-MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 03/21/2016 05:05:46 AM,
-	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 03/21/2016 05:05:46 AM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2016-03-21_04:, , signatures=0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2] ttf-pt-sans: add recipe
+	Mon, 21 Mar 2016 10:31:35 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id l68so115869673wml.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Mar 2016 03:31:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=2zybOzPEin+zdeS5d5fByzbU/MUsckgOgfLxDYYSZHg=;
+	b=dFwQpti9c74L7H23cjtlKNTCdDCMVaa6YhtYlWZ0UsffczidGg5FvaiFFj97qrmE94
+	7rRq7J7ftyIEXcHOWzjjtdKEuKSmDII9G9mGDNdLYfoUYyhRdWPSNoOY+DstntjNw33E
+	Ec53LajRYQGszrnl2+v1JKAv7DYSYYOQQp9S56D/6VpBPZifPgRzru/XJUSxOtV8ceEN
+	01mydyiXcrQIQOB+WLumsKcUgCYxd5hN++NTN7QaNVNEypBhUV/vl1A6i1SCL0gdpwZG
+	FzDjlP5jxKXI/2z7/mQI4X8bGc85TQuKzoc3DMfuyMtMpX6e/uB7PwYQJrg9b4PW1t0y
+	rG0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=2zybOzPEin+zdeS5d5fByzbU/MUsckgOgfLxDYYSZHg=;
+	b=CzEGqg6P4PFFMRHiFvSis2fLV2iw6g162grS13nQ7v4goUI6J2Ro+FOxlFAMVybieA
+	NLz69RXAkJRm4wRyIPhSMD5H+A3CnazYW/i6RUaT3JrmDdDSsn9G7N3wOCI+hFFUog/8
+	30u0EMhBGUc4ktZ6F7HBw8IQXrwt9o++cbxbJieMMlf1lpUof6gaN5eCKBOsyD/yDED5
+	lQVubDdaj6GJAHdYUERGkWvpOePUZ/BhK1TeSGLtGNKVlLXkNeLplZ1xAPeiulQF+aJJ
+	eRZbNB64OAEbEXwOniRMI0CwL9EtQFmHviQSSSWhRLXPPUdjYh+0/RwG56QKMH1CenfY
+	vM0w==
+X-Gm-Message-State: AD7BkJKTHWIcvZKO0CIuHZbMqzMqfa24IBMc9hDJHW0Fql5lKYSUfQ9GJ/5FZ6+ZcA6XRw==
+X-Received: by 10.194.242.202 with SMTP id ws10mr29495383wjc.3.1458556295589; 
+	Mon, 21 Mar 2016 03:31:35 -0700 (PDT)
+Received: from neopili.newtec.com ([81.27.221.125])
+	by smtp.gmail.com with ESMTPSA id
+	j18sm11833780wmd.2.2016.03.21.03.31.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 21 Mar 2016 03:31:34 -0700 (PDT)
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+To: Martin Jansa <Martin.Jansa@gmail.com>, Andre McCurdy <armccurdy@gmail.com>,
+	Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>,
+	openembedded-devel@lists.openembedded.org
+Date: Mon, 21 Mar 2016 11:31:36 +0100
+Message-Id: <1458556296-2809-1-git-send-email-ricardo.ribalda@gmail.com>
+X-Mailer: git-send-email 2.7.0
+Subject: [PATCH] opencv: Add missing dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,112 +53,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2016 10:05:48 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 21 Mar 2016 10:31:36 -0000
 
-On Mon, 21 Mar 2016 10:59:52 +0100
-Martin Jansa <martin.jansa@gmail.com> wrote:
+opencv-3.1+gitAUTOINC+92387b1ef8: libopencv-videoio rdepends on
+libgphotoport, but it isn't a build dependency, missing libgphoto2 in
+DEPENDS or PACKAGECONFIG? [build-deps]
+opencv-3.1+gitAUTOINC+92387b1ef8: libopencv-videoio rdepends on
+libgphoto2, but it isn't a build dependency, missing libgphoto2 in
+DEPENDS or PACKAGECONFIG? [build-deps]
+opencv-3.1+gitAUTOINC+92387b1ef8: libopencv-dnn rdepends on protobuf,
+but it isn't a build dependency, missing protobuf in DEPENDS or
+PACKAGECONFIG? [build-deps]
 
-> On Mon, Mar 21, 2016 at 10:57:27AM +0100, Martin Jansa wrote:
-> > On Mon, Mar 21, 2016 at 11:01:04AM +0200, Ioan-Adrian Ratiu wrote: =20
-> > > On Fri, 18 Mar 2016 17:04:31 +0100
-> > > Martin Jansa <martin.jansa@gmail.com> wrote:
-> > >  =20
-> > > > On Fri, Mar 18, 2016 at 05:06:34PM +0200, Ioan-Adrian Ratiu wrote: =
-=20
-> > > > > PT Sans is an open source licensed font released in 2010 by ParaT=
-ype.
-> > > > > The ParaTypeFFL-1.3 license file has been submitted to OE-core.
-> > > > >=20
-> > > > > Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-> > > > > ---
-> > > > >  .../recipes-graphics/ttf-fonts/ttf-pt-sans=5F1.1.bb  | 39 ++++++=
-++++++++++++++++
-> > > > >  1 file changed, 39 insertions(+)
-> > > > >  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-pt-san=
-s=5F1.1.bb
-> > > > >=20
-> > > > > diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-pt-sans=5F1.1=
-.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-pt-sans=5F1.1.bb
-> > > > > new file mode 100644
-> > > > > index 0000000..dcfa080
-> > > > > --- /dev/null
-> > > > > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-pt-sans=5F1.1.bb
-> > > > > @@ -0,0 +1,39 @@
-> > > > > +SUMMARY =3D "PT Sans Fonts"
-> > > > > +DESCRIPTION =3D "The PT Sans TTF font set"
-> > > > > +HOMEPAGE =3D "http://www.paratype.com/public/"
-> > > > > +
-> > > > > +SECTION =3D "x11/fonts"
-> > > > > +
-> > > > > +LICENSE =3D "ParaTypeFFL-1.3"
-> > > > > +LIC=5FFILES=5FCHKSUM =3D "file://../PT%20Free%20Font%20License=
-=5Feng.txt;md5=3Dd720f3a281ed81c3f4cfc465e11b1d0d"
-> > > > > +
-> > > > > +inherit fontcache   =20
-> > > >=20
-> > > > Still missing layer.conf additions. =20
-> > >=20
-> > > I am not sure I understand what are these layer.conf additions.
-> > > Do I need to add the recipe to SIGGEN=5FEXCLUDE=5FSAFE=5FRECIPE=5FDEP=
-S? (i doubt it since I'm not using ttf.inc) =20
-> >=20
-> > Yes, fontconfig-utils dependency is added by fontcache.bbclass which
-> > you're using. =20
->=20
-> Ahh now I see that you've dropped allarch inherit in v2.
-> So it will work without SIGGEN=5FEXCLUDE=5FSAFE=5FRECIPE=5FDEPS.
->=20
-> But you can still "optimise" it by returning allarch and adding
-> SIGGEN=5FEXCLUDE=5FSAFE=5FRECIPE=5FDEPS
+Credit-to: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+---
+ meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Yes, I'll do that. Thank you!
-
->=20
-> > > > Use 4 spaces for indentation.
-> > > >  =20
-> > > > > +# Downloading from fedora because upstream doesn't version its z=
-ip file
-> > > > > +# and causes hash build failures
-> > > > > +SRC=5FURI =3D "http://pkgs.fedoraproject.org/repo/pkgs/paratype-=
-pt-sans-fonts/PTSans.zip/c3f5a0e20a75cf628387510a720924a7/PTSans.zip"
-> > > > > +
-> > > > > +SRC=5FURI[md5sum] =3D "c3f5a0e20a75cf628387510a720924a7"
-> > > > > +SRC=5FURI[sha256sum] =3D "0164f824e03c32c99e8a225853ec168893a04a=
-09ade132e93a674e85ae033b2e"
-> > > > > +
-> > > > > +do=5Finstall () {
-> > > > > +	install -d ${D}${datadir}/fonts/X11/TTF/
-> > > > > +	cd ..
-> > > > > +	for i in *.ttf; do
-> > > > > +		install -m 0644 $i ${D}${prefix}/share/fonts/X11/TTF/${i}
-> > > > > +	done
-> > > > > +}
-> > > > > +
-> > > > > +FILES=5F${PN} +=3D "${datadir}"
-> > > > > +
-> > > > > +pkg=5Fpostinst=5F${PN} () {
-> > > > > +        set -x
-> > > > > +        for fontdir in `find $D/usr/lib/X11/fonts -type d`; do
-> > > > > +                mkfontdir $fontdir
-> > > > > +                mkfontscale $fontdir
-> > > > > +        done
-> > > > > +        for fontdir in `find $D/usr/share/fonts/X11 -type d`; do
-> > > > > +                mkfontdir $fontdir
-> > > > > +                mkfontscale $fontdir
-> > > > > +        done
-> > > > > +}
-> > > > > --=20
-> > > > > 2.7.3
-> > > > >    =20
-> > > >  =20
-> > >  =20
-> >=20
-> > --=20
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com =20
->=20
->=20
->=20
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+index 87338cad4a4b..e9e85fe2af0a 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+@@ -10,7 +10,7 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 libwebp"
++DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 libwebp libgphoto2 protobuf"
+ 
+ SRCREV_opencv = "92387b1ef8fad15196dd5f7fb4931444a68bc93a"
+ SRCREV_contrib = "5409d5ad560523c85c6796cc5a009347072d883c"
+-- 
+2.7.0
 
 
