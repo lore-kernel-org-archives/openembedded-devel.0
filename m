@@ -1,31 +1,21 @@
-Return-Path: <adrian.ratiu@ni.com>
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F1AC6FFED
+Return-Path: <jose.bollo@iot.bzh>
+X-Greylist: delayed 362 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 21 Mar 2016 11:05:24 UTC
+Received: from mx1a.lautre.net (mx1a.lautre.net [80.67.160.71])
+	by mail.openembedded.org (Postfix) with ESMTP id 170AC606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Mar 2016 10:59:15 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	u2LAxCpE012179; Mon, 21 Mar 2016 05:59:12 -0500
-Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2016032105591327-24436 ;
-	Mon, 21 Mar 2016 05:59:13 -0500 
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+	Mon, 21 Mar 2016 11:05:24 +0000 (UTC)
+Received: from jobol.la-dameblanche.fr (por56-1-78-229-206-229.fbx.proxad.net
+	[78.229.206.229]) (Authenticated sender: jobol@nonadev.net)
+	by mx1a.lautre.net (Postfix) with ESMTPA id 2A81641324;
+	Mon, 21 Mar 2016 11:59:21 +0100 (CET)
+From: jose.bollo@iot.bzh
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Mar 2016 12:58:38 +0200
-Message-Id: <8b6ab12eddba5752e04feec12b59e98b53a439e5.1458557752.git.adrian.ratiu@ni.com>
-X-Mailer: git-send-email 2.7.3
-In-Reply-To: <0519adc696bdd1d936306f40171a8dd9ddf73e74.1458557752.git.adrian.ratiu@ni.com>
-References: <0519adc696bdd1d936306f40171a8dd9ddf73e74.1458557752.git.adrian.ratiu@ni.com>
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 03/21/2016 05:59:13 AM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 03/21/2016 05:59:13 AM,
-	Serialize complete at 03/21/2016 05:59:13 AM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2016-03-21_05:, , signatures=0
-Subject: [meta-oe][PATCH v3 2/2] meta-oe: layer.conf: Add ttf-pt-sans to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS
+Date: Mon, 21 Mar 2016 11:59:19 +0100
+Message-Id: <1458557959-10500-1-git-send-email-jose.bollo@iot.bzh>
+X-Mailer: git-send-email 2.1.4
+MIME-Version: 1.0
+Subject: [PATCH] libmicrohttp: update to version 0.9.48
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,26 +28,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Mar 2016 10:59:16 -0000
+X-List-Received-Date: Mon, 21 Mar 2016 11:05:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+From: José Bollo <jose.bollo@iot.bzh>
+
+Change-Id: I33a1acf8360d074a3310f9691ac939fe70a99f3e
+Signed-off-by: José Bollo <jose.bollo@iot.bzh>
 ---
- meta-oe/conf/layer.conf | 1 +
- 1 file changed, 1 insertion(+)
+ .../{libmicrohttpd_0.9.34.bb => libmicrohttpd_0.9.48.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.34.bb => libmicrohttpd_0.9.48.bb} (86%)
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index 7237964..87f11f0 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -58,6 +58,7 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-   ttf-hunkyfonts->fontconfig \
-   ttf-inconsolata->fontconfig \
-   ttf-liberation->fontconfig \
-+  ttf-pt-sans->fontconfig \
-   ttf-mplus->fontconfig \
-   ttf-sazanami->fontconfig \
-   ttf-tlwg->fontconfig \
+diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
+similarity index 86%
+rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
+index e3c833b..6e7ad26 100644
+--- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
++++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
+@@ -6,8 +6,8 @@ SECTION = "net"
+ DEPENDS = "libgcrypt gnutls file"
+ 
+ SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "2947eee13c2c8affb95023a0cb6fda0c"
+-SRC_URI[sha256sum] = "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843be421a040be1b25a88"
++SRC_URI[md5sum] = "9c298c890088a91fe0d7ac3fec9d0097"
++SRC_URI[sha256sum] = "87667e158f2bf8c691a002e256ffe30885d4121a9ee4143af0320c47cdf8a2a4"
+ 
+ inherit autotools lib_package
+ 
 -- 
-2.7.3
+2.1.4
 
 
