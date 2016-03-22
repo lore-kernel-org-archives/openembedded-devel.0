@@ -1,29 +1,38 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id ADF8160721
+Return-Path: <matt.schuckmann@planar.com>
+X-Greylist: delayed 592 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 22 Mar 2016 23:24:01 UTC
+Received: from us-smtp-delivery-105.mimecast.com
+	(us-smtp-delivery-105.mimecast.com [216.205.24.105])
+	by mail.openembedded.org (Postfix) with ESMTP id 14D4C60125
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2016 19:58:47 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga101.fm.intel.com with ESMTP; 22 Mar 2016 12:58:47 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,378,1455004800"; d="scan'208";a="916675633"
-Received: from szexingn-mobl4.gar.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.255.129.75])
-	by orsmga001.jf.intel.com with ESMTP; 22 Mar 2016 12:58:44 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: alexander.kanavin@linux.intel.com
-Date: Wed, 23 Mar 2016 08:58:41 +1300
-Message-ID: <9925097.fQpz7FIRvQ@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.10 (Linux/4.4.5-300.fc23.x86_64; KDE/4.14.18; x86_64; ;
-	)
-In-Reply-To: <64951.10.252.26.251.1458663925.squirrel@linux.intel.com>
-References: <1458568492-29611-1-git-send-email-alexander.kanavin@linux.intel.com>
-	<1817823.GWXx3ahntL@peggleto-mobl.ger.corp.intel.com>
-	<64951.10.252.26.251.1458663925.squirrel@linux.intel.com>
+	Tue, 22 Mar 2016 23:24:01 +0000 (UTC)
+Received: from msxbvt03.planar.net (mail.planar.com [199.244.172.52]) (Using
+	TLS) by us-smtp-1.mimecast.com with ESMTP id
+	us-mta-54-7mToFsElRgiQqyyBMuF_iQ-1; Tue, 22 Mar 2016 19:07:02 -0400
+Received: from MSXBEBVT28.planar.net (172.16.10.28) by msxbvt03.planar.net
+	(172.16.10.5) with Microsoft SMTP Server (TLS) id 8.3.406.0;
+	Tue, 22 Mar 2016 16:07:00 -0700
+Received: from MSXBEBVT28.planar.net (172.16.10.28) by MSXBEBVT28.planar.net
+	(172.16.10.28) with Microsoft SMTP Server (TLS) id 15.0.1156.6;
+	Tue, 22 Mar 2016 16:07:00 -0700
+Received: from MSXBEBVT28.planar.net ([::1]) by MSXBEBVT28.planar.net ([::1])
+	with mapi id 15.00.1156.000; Tue, 22 Mar 2016 16:07:00 -0700
+From: Matt Schuckmann <Matt.Schuckmann@planar.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: Specify GCC version for building native applications
+Thread-Index: AQHRhI8GuVa20H2q1EetRTqn/WGtng==
+Date: Tue, 22 Mar 2016 23:06:59 +0000
+Message-ID: <1458688019763.44680@planar.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.15.0.87]
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/2] gnome-bluetooth: replace systemd dependency with udev
+X-MC-Unique: 7mToFsElRgiQqyyBMuF_iQ-1
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Specify GCC version for building native applications
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,31 +45,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2016 19:58:48 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 22 Mar 2016 23:24:03 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset=WINDOWS-1252
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 22 Mar 2016 18:25:25 alexander.kanavin@linux.intel.com wrote:
-> >> > So you can remove distro_features_check inherit as well, right?
-> >> 
-> >> Yeah, I guess. Feel free to amend.
-> > 
-> > The reviewer is asking you to do that, although perhaps not in so many
-> > words.
-> > Can you, please?
-> 
-> I don't believe I should, if the review consists of a single trivial
-> nitpick from the person who also does the actual commits to master. It's
-> less friction and noise for both of us this way.
+My Ubuntu system has GCC 5.x installed but our Fido based OE build has erro=
+rs unless I use GCC 4.9 for building native recipes.
 
-On the other hand, giving more work to our maintainers is not a good strategy 
-if you want them to stay around.
+I can install both gcc 4.9 and gcc 5.0 on my system and use update-alternat=
+ives to switch back and forth when I need to but it would be nice if I coul=
+d just configure bitbake/OE to use gcc 4.9 directly.
 
-Cheers,
-Paul
+So is there a way to tell bitbake/OE what version of GCC on the host to use=
+ to build native applications?
 
--- 
 
-Paul Eggleton
-Intel Open Source Technology Centre
+Thanks,
+
+Matt S.
 
