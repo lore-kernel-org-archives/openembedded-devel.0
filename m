@@ -1,26 +1,29 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id 4F4DD60767
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id ADF8160721
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2016 19:13:32 +0000 (UTC)
-Received: (qmail 22434 invoked by uid 1003); 22 Mar 2016 19:13:32 -0000
-Received: from unknown (HELO ?10.16.32.95?)
-	(philip@opensdr.com@207.114.172.147)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	22 Mar 2016 19:13:32 -0000
-References: <CA+YB3raxynjSZAhGA7VOoyddY1BGkNdFvOWRAmHZwYT2HyGVaA@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-From: Philip Balister <philip@balister.org>
-X-Forwarded-Message-Id: <CA+YB3raxynjSZAhGA7VOoyddY1BGkNdFvOWRAmHZwYT2HyGVaA@mail.gmail.com>
-Message-ID: <56F1995A.7070604@balister.org>
-Date: Tue, 22 Mar 2016 12:13:30 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
+	Tue, 22 Mar 2016 19:58:47 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by fmsmga101.fm.intel.com with ESMTP; 22 Mar 2016 12:58:47 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.24,378,1455004800"; d="scan'208";a="916675633"
+Received: from szexingn-mobl4.gar.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.255.129.75])
+	by orsmga001.jf.intel.com with ESMTP; 22 Mar 2016 12:58:44 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: alexander.kanavin@linux.intel.com
+Date: Wed, 23 Mar 2016 08:58:41 +1300
+Message-ID: <9925097.fQpz7FIRvQ@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.10 (Linux/4.4.5-300.fc23.x86_64; KDE/4.14.18; x86_64; ;
+	)
+In-Reply-To: <64951.10.252.26.251.1458663925.squirrel@linux.intel.com>
+References: <1458568492-29611-1-git-send-email-alexander.kanavin@linux.intel.com>
+	<1817823.GWXx3ahntL@peggleto-mobl.ger.corp.intel.com>
+	<64951.10.252.26.251.1458663925.squirrel@linux.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <CA+YB3raxynjSZAhGA7VOoyddY1BGkNdFvOWRAmHZwYT2HyGVaA@mail.gmail.com>
-Subject: [yocto] REMINDER: REGISTER TODAY - Yocto Project Developer Day US, April 7, 2016 - San Diego
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 2/2] gnome-bluetooth: replace systemd dependency with udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,70 +36,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2016 19:13:34 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 22 Mar 2016 19:58:48 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-FYI, this should be useful for people new to OpenEmbedded, and fun for
-more experienced people.
+On Tue, 22 Mar 2016 18:25:25 alexander.kanavin@linux.intel.com wrote:
+> >> > So you can remove distro_features_check inherit as well, right?
+> >> 
+> >> Yeah, I guess. Feel free to amend.
+> > 
+> > The reviewer is asking you to do that, although perhaps not in so many
+> > words.
+> > Can you, please?
+> 
+> I don't believe I should, if the review consists of a single trivial
+> nitpick from the person who also does the actual commits to master. It's
+> less friction and noise for both of us this way.
 
-Philip
+On the other hand, giving more work to our maintainers is not a good strategy 
+if you want them to stay around.
 
-
--------- Forwarded Message --------
-Subject: [yocto] REMINDER: REGISTER TODAY - Yocto Project Developer Day
-US, April 7, 2016 - San Diego
-Date: Tue, 22 Mar 2016 11:39:58 -0700
-From: Jeff Osier-Mixon <jefro@jefro.net>
-To: Yocto Project <yocto@yoctoproject.org>
-
-Register today and get a jump start on using the Yocto Project tools:
-https://www.regonline.com/Register/Checkin.aspx?EventID=1809027
-
-Check out what our trainers have prepared for the event agenda below.
-
-Introductory Track
-
-·        Introduction to the Yocto Project
-·        Key Concepts
-·        Build System Workflow
-·        Examining Recipes
-·        Standard Recipe Build Steps
-·        Working with Layers
-·        Build and Boot Your Custom Image
-·        Working with Applications
-
-
-Advanced Track
-
-·        Introductions/set up
-·        New workflows: Toaster, CROPS and devtool
-·        Deep dive presentation and demo on CROPS
-·        Deep dive and class exercises on devtool, user/group
-creation, and handout boards demo
-·        Deep dive on Toaster and related topics (e.g. Layer Index, Š)
-·        Poky-tiny
-·        Kernel
-·        Q&A (stump the expert)
-
-
-EVENT DESCRIPTION:
-https://www.yoctoproject.org/yocto-project-developer-day-us-2016-elc
-
-Sincerely,
-
-Yocto Project Advocacy Team
-
-
+Cheers,
+Paul
 
 -- 
-Jeff Osier-Mixon
-Open Source Community Architect, Intel Corporation
--- 
-_______________________________________________
-yocto mailing list
-yocto@yoctoproject.org
-https://lists.yoctoproject.org/listinfo/yocto
 
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
