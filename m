@@ -1,25 +1,30 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 837546E630
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 964A760796
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2016 09:26:38 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga102.jf.intel.com with ESMTP; 22 Mar 2016 02:26:19 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,376,1455004800"; d="scan'208";a="673689764"
-Received: from mbabyjoh-mobl.fi.intel.com (HELO
-	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.71])
-	by FMSMGA003.fm.intel.com with ESMTP; 22 Mar 2016 02:26:18 -0700
-Date: Tue, 22 Mar 2016 11:26:32 +0200
-From: "Maxin B. John" <maxin.john@intel.com>
+	Tue, 22 Mar 2016 09:57:52 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u2M9vqsN016576; Tue, 22 Mar 2016 04:57:52 -0500
+Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2016032204575245-75308 ;
+	Tue, 22 Mar 2016 04:57:52 -0500 
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160322092632.GA9238@mbabyjoh-desk.ger.corp.intel.com>
-References: <1458560352-17973-1-git-send-email-erkka.kaaria@intel.com>
-	<1458560352-17973-2-git-send-email-erkka.kaaria@intel.com>
-MIME-Version: 1.0
-In-Reply-To: <1458560352-17973-2-git-send-email-erkka.kaaria@intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-java][PATCH 2/2] Openjdk-8: Fix build flags for adlc
+Date: Tue, 22 Mar 2016 11:57:16 +0200
+Message-Id: <1458640636-9492-1-git-send-email-adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.7.4
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 03/22/2016 04:57:52 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 03/22/2016 04:57:52 AM,
+	Serialize complete at 03/22/2016 04:57:52 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-03-22_06:, , signatures=0
+Cc: James Minor <james.minor@ni.com>
+Subject: [meta-oe][PATCH] ti-wifi-utils: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,26 +37,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2016 09:26:38 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 22 Mar 2016 09:57:52 -0000
 
-Hi Erkka,
+This recipe is for a TI WiFi calibrator utility [1]. The firmware from
+this project is already shipped inside linux-firmware so we do not
+package it in this recipe.
 
-On Mon, Mar 21, 2016 at 01:39:12PM +0200, Erkka Kääriä wrote:
-> Adlc is a native tool that openjdk builds and uses during its build process.
-> Bitbake however passes target machine specific CFLAGS and CXXFLAGS because we
-> are crosscompiling openjdk for the target architecture. This can cause issues,
-> if these flags contains values, that work for the Yocto provided crosscompiler
-> but not for the system compiler.
-> 
-> As an example, compilation will fail on Ubuntu 14.04 if
-> -fstack-protector-strong is specified in the distro security flags. Ubuntu
-> 14.04 ships with GCC 4.8, whereas this flag is only supported by GCC 4.9+.
+[1] http://linuxwireless.sipsolutions.net/en/users/Drivers/wl12xx/#Calibration
 
-Pushed both these fixes to master-next. Thanks !
+Signed-off-by: James Minor <james.minor@ni.com>
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+---
+ .../ti-wifi-utils/ti-wifi-utils_git.bb             | 24 ++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils_git.bb
 
-Best Regards,
-Maxin
+diff --git a/meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils_git.bb b/meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils_git.bb
+new file mode 100644
+index 0000000..fcae729
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils_git.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "The calibrator and other useful utilities for TI wireless solution based on wl12xx driver"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4725015cb0be7be389cf06deeae3683d"
++
++DEPENDS = "libnl"
++
++PV = "0.1+gitr${SRCPV}"
++
++SRCREV = "b03d9ce6362e6d22d6929f2736409af3b0fd3c88"
++SRC_URI = "git://github.com/TI-OpenLink/ti-utils.git;branch=r5-jb"
++
++S = "${WORKDIR}/git"
++
++EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} \
++                CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}" \
++                CFLAGS="${CFLAGS} -I${STAGING_INCDIR}/libnl3 -DCONFIG_LIBNL20" NLVER=3 \
++                LDFLAGS="${LDFLAGS} ${TOOLCHAIN_OPTIONS}" \
++'
++
++#only install the calibrator utility, firmware is already within linux-firmware
++do_install() {
++    install -d ${D}${bindir}
++    install -m 0755 calibrator ${D}${bindir}/
++}
+-- 
+2.7.4
+
 
