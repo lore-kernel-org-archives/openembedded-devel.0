@@ -1,45 +1,25 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id C3F7465CBF
+Return-Path: <lchristina26@hotmail.com>
+X-Greylist: delayed 301 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 22 Mar 2016 19:02:37 UTC
+Received: from BLU004-OMC3S6.hotmail.com (blu004-omc3s6.hotmail.com
+	[65.55.116.81])
+	by mail.openembedded.org (Postfix) with ESMTP id 81AC760767
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2016 15:46:51 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id l68so169726419wml.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Mar 2016 08:46:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=OuqaNUc1tQuDxnDJAoP9PSzvPxU32fo+AKQpr8yQAro=;
-	b=POCYJBMql0lnnf07nudvXbqVt/o899+yD2dHXdCB0nlOmsyZFjes0dbiNhtN3Vg5md
-	eCGIRMpAfkwBOzsbCLrCOezHBUIwwLnPH+NHheBZGGHu9lGApRN/06v6jzQuA+YP9xSL
-	P+MaZ87UtEBeSiC97Mx3yFq0pCpMUjDbW796LOnOdlfgoB4iGlOzgCAtEk6XUmy6cPjd
-	DafgvECheW73OvPE4icYL4nc6pNM31hHAJbF2WkXzN1BT43KM+pnQYs034Zh/QNo5p6X
-	wo3BFQdv+3EmC2vX4si0TRTZVEfMJMYzuHnxx7dvJNzk0Zx64GK9TVhrmYaUuFSpKgLx
-	XMSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=OuqaNUc1tQuDxnDJAoP9PSzvPxU32fo+AKQpr8yQAro=;
-	b=XI4LuNG3YSiMoADZy1Vh0yHZeNSFYsdkWA4x5hvPwxlLMHcFTHEysRFMymnT7wImaX
-	IgF9eaoGtzzYYs6X+O/YkrQ95ZRo2Ls567W3dz83JMUz3n2Trb5B3TpnbSytHVqN7jQk
-	Xlu6Dpsdlqh4Rf0YqeaS03NTfamacsI9/2jEGnNmL3mT5mlw4S6I5zQcXtz+jk6w+A9t
-	OdPC5difAv8ciEYeFDuJTdlJNtTCVA+E1E1dLXl/5Lhl6a/rfVOkIMIAhxwcGjL+OMKM
-	TPA52Vn9ilghYA92Jhq7Us/pwwv8IHG7ZLns4eSGdf1iyMvpZpRpmozCmKfsZUj+882W
-	4PSQ==
-X-Gm-Message-State: AD7BkJK3NajmUylTVV6i9J2N+QqykM1nvCxAufeV7+TmCE/4E9v7dRMCZ2jXzARiM/cskA==
-X-Received: by 10.194.22.97 with SMTP id c1mr37230221wjf.19.1458661611092;
-	Tue, 22 Mar 2016 08:46:51 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	g3sm30911365wjw.31.2016.03.22.08.46.49
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 22 Mar 2016 08:46:50 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Tue, 22 Mar 2016 19:02:37 +0000 (UTC)
+Received: from BLU436-SMTP132 ([65.55.116.73]) by BLU004-OMC3S6.hotmail.com
+	over TLS secured channel with Microsoft SMTPSVC(7.5.7601.23008);
+	Tue, 22 Mar 2016 11:57:37 -0700
+X-TMN: [8Vl8zflKoWemITR8ziheHhRgkWjEU7Pq]
+X-Originating-Email: [lchristina26@hotmail.com]
+Message-ID: <BLU436-SMTP1320EDBAE60DB653467A962D6800@phx.gbl>
+From: LC Mac <lchristina26@hotmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Mar 2016 16:49:13 +0100
-Message-Id: <1458661753-21040-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.3
-Subject: [PATCH][meta-oe] ltp-ddt: blacklist
+Date: Tue, 22 Mar 2016 12:57:28 -0600
+X-Mailer: git-send-email 1.9.1
+X-OriginalArrivalTime: 22 Mar 2016 18:57:36.0796 (UTC)
+	FILETIME=[B32E85C0:01D1846C]
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] wolfssl: update to version 3.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,25 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Mar 2016 15:46:52 -0000
+X-List-Received-Date: Tue, 22 Mar 2016 19:02:37 -0000
+Content-Type: text/plain
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Update includes new leantls configuration, RSA OAEP padding support,
+Arduino example client, and more.
+
+Signed-off-by: lchristina26 <leah@wolfssl.com>
 ---
- meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_1.0.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../wolfssl/{wolfssl_3.4.0.bb => wolfssl_3.9.0.bb}                    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_3.4.0.bb => wolfssl_3.9.0.bb} (82%)
 
-diff --git a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_1.0.0.bb b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_1.0.0.bb
-index d028e88..62117b1 100644
---- a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_1.0.0.bb
-+++ b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_1.0.0.bb
-@@ -92,3 +92,6 @@ do_install() {
- addtask make_scripts before do_compile
- do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
- do_make_scripts[deptask] = "do_populate_sysroot"
-+
-+# http://errors.yoctoproject.org/Errors/Details/56327/
-+PNBLACKLIST[ltp-ddt] ?= "BROKEN: fails since last autotools.bbclass changes"
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.9.0.bb
+similarity index 82%
+rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb
+rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_3.9.0.bb
+index 591ff32..d086cef 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.9.0.bb
+@@ -14,8 +14,8 @@ RPROVIDES_${PN} = "cyassl"
+ 
+ SRC_URI = "http://www.wolfssl.com/${BP}.zip"
+ 
+-SRC_URI[md5sum] = "ec6ed4c5847454ac928215a46b3e0c33"
+-SRC_URI[sha256sum] = "bc49a142c17b1e52a126417e5d7cbadcb7f18f5c81e446c12e214483395159ea"
++SRC_URI[md5sum] = "f3396726a9befd61443c2cce216e39ba"
++SRC_URI[sha256sum] = "98f50244f7b43f8683bd0cf5c599849d330e75e6cf077e96f14e83bda8b03ca3"
+ 
+ inherit autotools
+ 
 -- 
-2.7.3
+1.9.1
 
 
