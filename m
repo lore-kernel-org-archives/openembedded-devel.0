@@ -1,53 +1,53 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id B7F1360116
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f170.google.com (mail-pf0-f170.google.com
+	[209.85.192.170])
+	by mail.openembedded.org (Postfix) with ESMTP id B8152606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Mar 2016 14:29:51 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id l68so26929406wml.1
+	Wed, 23 Mar 2016 16:21:19 +0000 (UTC)
+Received: by mail-pf0-f170.google.com with SMTP id x3so34386715pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Mar 2016 07:29:52 -0700 (PDT)
+	Wed, 23 Mar 2016 09:21:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=AxsE03X5beJ/l8ZYtEN3eam+RBg0fHBvfPbzqr2Rhv4=;
-	b=nzLG7OjIvJ4qbyf8t1hNNpTmhpDy1yo7WhcQfybWhvSH+P1FRwtqu6HtlN1UCbyg6o
-	fJKKyEnIzhJgo6diAuRawk7ki2CoplCPYlkz5IAgln6dk46j0I49ivFUZT+HMzwbdWPk
-	KqNzm9MiPGgysmd0AUpaUBbI08rtYXW74AJXROS3QiIFu8SYn63bVyBodQBDTGyt2g06
-	YtH4GiyuDLtVjoNOv690KS8dSZ3Iktfypd/hVEJPIA/pg52Sn2d5tqsdfuOxI/9aJ8Cz
-	169JXmaYjAsFxTrldhmZ56PYweXrebd6+A1PxyKdf9wKvvXzCxqDign0fnd2Sl31irYn
-	Ukhg==
+	h=subject:to:references:cc:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding;
+	bh=gotJBJ/jGNHGVv54t/Hoc5hlNxD3n5EQLaVDes7trVo=;
+	b=OkBE4Fq886XtoaRK/JAl0TDL2x3TyLECHfzLweXmE28BOhU3ze/5zxpGC41qPmmIpv
+	bxau//Zj4nERIHOqgzOkYhisYhIbLeeHBYTxzh+CDzUwv4JNAZtFq9OneqZHjRreZ20X
+	O7nPEZkdTeG83FmDioLYjK4B3pYRFber8I3Yj7SpJ0ogWPyDgPJ5p4SyLfZATeZZLExm
+	Sx80MR/NAqiSuxHkp72Oy8yazVAKr+xoick5qHErSk17Enu1jHF0F2IpBSnNxw8ZEBGm
+	qYE2Ro6H6P/JIPiD0HClYIGcimLGD+67H/YW1Y3kMxLh6giKfLNPCy+rIGmq1h8LniRl
+	zc+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=AxsE03X5beJ/l8ZYtEN3eam+RBg0fHBvfPbzqr2Rhv4=;
-	b=KG+v+LZGVTfCGlKWKYjPvebVd0paNYwzti0DR2cuOWQRin3G25I/cpjMe0qRzWCjBT
-	OpE3pgGZ+4MVGEphgZ9Jv3yS2tD3m/NQj7ybMns3bwWefZ9UNUoSjsWfaInadUsXx6ph
-	E3uxFMga6J5YrIpmCaG+bsx21uzB3u4OA67BJ+UgtLnXleyDH3/4mllJb/ocYlfMX59E
-	7sve4/UTmJphpCIlxnQetpO6fGdh+l3rr8GDrBKsFwD8OvyZ22Z7fZFoRHdSDJCEdwTn
-	I8IGcpi19kU1EAjLPdrOv1uB/cradO0PbzOAV0qMv4egk2Xkn5SlUj5qc3rHXabNu0e/
-	NhDA==
-X-Gm-Message-State: AD7BkJIq1T7khW1l9QLzxX8g30blLP7DFTBx2lS/KIut/hKS/i8SYt8o4CjeOPbS1D0z7g==
-X-Received: by 10.194.242.202 with SMTP id ws10mr3837319wjc.3.1458743391796;
-	Wed, 23 Mar 2016 07:29:51 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	u202sm22601567wmd.24.2016.03.23.07.29.50
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Mar 2016 07:29:50 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 23 Mar 2016 15:34:22 +0100
-To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Message-ID: <20160323143422.GC2565@jama>
-References: <1458556296-2809-1-git-send-email-ricardo.ribalda@gmail.com>
-	<20160323101240.GA2565@jama>
-	<CAPybu_1-CCqMjSRC5it6nLL+SWzP7WfJEL6S5dY=Wjn4unon3g@mail.gmail.com>
+	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=gotJBJ/jGNHGVv54t/Hoc5hlNxD3n5EQLaVDes7trVo=;
+	b=mIMgaT9PZ+R24nIZLj8Eg8/6oclzN/XLD4A7utGcFuZT4yFzY5mklSLGUs4Rf4h1DV
+	O+vWIWjp3Aq7qDymg2e6ktjq9CX7H+ZcFMQzCt5AjWNcx2MEBH3XvlWLe5ry7cmOQtfp
+	3rdgRcu+xKIMCb7EvDuQ01QM+/7G73TQ/NgOuzQh392rEPDgyDQ9OsmTC0c3gni6fT8+
+	b8pr2iRij/yxmXM9y3piPr3axEMDbW1yhqKZUJTTBClx6mSLZHIkgx8ZpV8MMKjyBq/h
+	eKrodDvJ+VvCVwBs3rE/sKXZ2nphA8PDH+h4plLGX/izUAkW5bvfyQrWBj/1/2uwYWok
+	KTnw==
+X-Gm-Message-State: AD7BkJI7NRjgSSqKtGGfHSlojWIjS123V1XEierfwrV39k0tzImdb3C0wqr3ImoujAEqGg==
+X-Received: by 10.67.7.1 with SMTP id cy1mr5508489pad.123.1458750080301;
+	Wed, 23 Mar 2016 09:21:20 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1239:4df:d6eb:1e52:fc5f?
+	([2601:202:4000:1239:4df:d6eb:1e52:fc5f])
+	by smtp.googlemail.com with ESMTPSA id
+	yx1sm5264707pac.29.2016.03.23.09.21.18
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 23 Mar 2016 09:21:19 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <20160309195049.GJ2542@jama> <20160317214927.GK2553@jama>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <56F2C274.8070105@gmail.com>
+Date: Wed, 23 Mar 2016 09:21:08 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-In-Reply-To: <CAPybu_1-CCqMjSRC5it6nLL+SWzP7WfJEL6S5dY=Wjn4unon3g@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] opencv: Add missing dependencies
+In-Reply-To: <20160317214927.GK2553@jama>
+Cc: akuster@mvista.com
+Subject: Re: python-cryptography failing to build since openssl upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,58 +60,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2016 14:29:51 -0000
-X-Groupsio-MsgNum: 60624
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ABTtc+pdwF7KHXCz"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 23 Mar 2016 16:21:20 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
---ABTtc+pdwF7KHXCz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 23, 2016 at 02:05:41PM +0100, Ricardo Ribalda Delgado wrote:
-> Hi Martin
->=20
-> On Wed, Mar 23, 2016 at 11:12 AM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
->=20
->=20
-> > Still shows:
-> > WARN: opencv: libopencv-dnn rdepends on protobuf, but it isn't a build
-> > dependency?
-> >
-> > protobuf support in dnn probably depends on something else which is als=
-o autodetected.
->=20
-> if I just clone a clean version of meta-oe and meta-core and do a
-> bitbake opencv i cannot replicate the error.
->=20
-> Any idea of how to replicate it without having to do a bitbake world
-> before bitbake opencv?
 
-Check temp/log.do_package if you see protobuf dependency being added for
-libopencv-dnn package.
+On 03/17/2016 02:49 PM, Martin Jansa wrote:
+> On Wed, Mar 09, 2016 at 08:50:49PM +0100, Martin Jansa wrote:
+>> Do we really need to use that version script for openssl?
+>>
+>> Here is another failure:
+>> http://errors.yoctoproject.org/Errors/Details/54984/
+>>
+>> in our local builds we use couple prebuild binaries from 3rdparty, which
+>> now aren't compatible with openssl ABI (possibly because of
+>> version-script update:
+>> http://lists.openembedded.org/pipermail/openembedded-core/2016-March/118433.html
+>> )
+> 
+> Still failing:
+> http://errors.yoctoproject.org/Errors/Details/56595/
 
-If not then read configure script or sources to see what in
-libopencv-dnn is being autodetected -> then build these autodetected
-dependencies before rebuilding opencv and re-check the log.do_package
-file.
+will look into it today.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+- armin
+> 
+> 
+> 
 
---ABTtc+pdwF7KHXCz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlbyqW0ACgkQN1Ujt2V2gByfFQCfT56+nsEpforYqpLdlHw6gzwB
-gmIAnjlwe7DBZXzbGdbu7xSlgPfUQPvV
-=FEko
------END PGP SIGNATURE-----
-
---ABTtc+pdwF7KHXCz--
