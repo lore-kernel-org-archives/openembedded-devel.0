@@ -1,31 +1,45 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id E96966E64A
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
+	[209.85.220.52])
+	by mail.openembedded.org (Postfix) with ESMTP id B7C446B6EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Mar 2016 21:39:33 +0000 (UTC)
-Received: (qmail 28281 invoked by uid 1003); 23 Mar 2016 21:39:33 -0000
-Received: from unknown (HELO ?10.16.32.95?)
-	(philip@opensdr.com@207.114.172.147)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	23 Mar 2016 21:39:33 -0000
-To: Fred Ollinger <Fred.Ollinger@seescan.com>,
-	Trevor Woerner <twoerner@gmail.com>, akuster808 <akuster808@gmail.com>, 
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>
-References: <56DEF97F.9070306@balister.org> <56F2C618.3050205@gmail.com>
-	<20160323210850.GA5376@linux-yxv0> <1458767514382.89578@seescan.com>
-From: Philip Balister <philip@balister.org>
-Message-ID: <56F30D13.6030909@balister.org>
-Date: Wed, 23 Mar 2016 14:39:31 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
-MIME-Version: 1.0
-In-Reply-To: <1458767514382.89578@seescan.com>
-Subject: Re: [yocto] [OE-core] OEDAM, April 8 in San Diego after ELC
+	Wed, 23 Mar 2016 21:53:05 +0000 (UTC)
+Received: by mail-pa0-f52.google.com with SMTP id tt10so5257375pab.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Mar 2016 14:53:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=edYIm8tRKpgMvNk0oPXcPVkMN9rlw0jChLNL5FoRhRc=;
+	b=UvM9XgC9TQhanYW/Ii4dX+4DrvkCcc81Pq8ZyKJAsKCJ6Ma8XCbrF8akivg/27BCa0
+	AC1sg5mBtl4aCkEgHuZZBg1GxhIzOzmfVr7U4A8jebKqqNotiVCJhkG+GnJjzmV6s//I
+	mGGK1KgmY17bPDeWdgAjxVIT8RMUa8cWe4rlNmYjRMzeOC+mlYhqLsHLVUWf+6c8o1OL
+	bqwQdBkXvWOw5DKJSI0aTEhXPLv6GHD3w5vfi3a7EINvLglbF9S9pZ0GoB9bMmiuPje+
+	nSIAThwvXnVHHR7tRHHBlXgdTQMnC1QlmuKrIYLRQfEvjwpCjkf7kMSog15xsHzr/HtH
+	OcsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=edYIm8tRKpgMvNk0oPXcPVkMN9rlw0jChLNL5FoRhRc=;
+	b=mMOcu9qBpG1OYuNPxzabrRiGjCMDMRzPmb7HP2VdxDitV7UN/KnNYkzvBZz0BEXest
+	YeKjArtN5E81otbck3lS69uJ2zhQiBmgIVyjIDbNeiQrIo5qZVPeWDFqC+WHUGgLya0g
+	FjRpOuRnwcgiBhTB/4XMnRhP/XIxf0r8qgJeiz5J6F1+lTAzm1mTyGWsnHW2aeU1vd4U
+	KKcknprErWbbikcdWKJR5ivWuBo4QHQ99LnqBribcXEHc8JwOXf1bsaANIXPQ3S13/cX
+	eaFgAJggNXT/7hNWrazP1TjvKqKwmi0ZRBgNBNc886D98h3zgW6cHhENGXaaLwcQnx+F
+	vDTA==
+X-Gm-Message-State: AD7BkJImeqo7HunrDBICyogf/JIZeU/4ywXGK+F7t63purwOk/MSc4tM4TievZ6hCqHGHQ==
+X-Received: by 10.66.147.74 with SMTP id ti10mr7638387pab.128.1458769985831;
+	Wed, 23 Mar 2016 14:53:05 -0700 (PDT)
+Received: from Pahoa2.mvista.com ([64.2.3.194])
+	by smtp.gmail.com with ESMTPSA id y7sm6314765pfa.82.2016.03.23.14.53.04
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 23 Mar 2016 14:53:04 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 23 Mar 2016 14:53:03 -0700
+Message-Id: <1458769983-8205-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Cc: Armin Kuster <akuster@mvista.com>
+Subject: [meta-python][PATCH] python-crytograph: fix build issue do to openssl 1.0.1g upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,47 +52,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2016 21:39:34 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Mar 2016 21:53:08 -0000
 
-If you are having trouble with wiki accounts contact me directly and we
-will figure it out.
+From: Armin Kuster <akuster@mvista.com>
 
-Philip
+this fixes
 
-On 03/23/2016 02:11 PM, Fred Ollinger wrote:
-> I'm coming and I'm probably brining another person.
-> 
-> I still have to make the wiki account which failed for some reason before.
-> 
-> Frederick
-> ________________________________________
-> From: yocto-bounces@yoctoproject.org <yocto-bounces@yoctoproject.org> on behalf of Trevor Woerner <twoerner@gmail.com>
-> Sent: Wednesday, March 23, 2016 2:08 PM
-> To: akuster808; openembedded-devel@lists.openembedded.org; openembedded-core; Yocto Project; openembedded-members@lists.openembedded.org
-> Subject: Re: [yocto] [OE-core] [oe] OEDAM, April 8 in San Diego after ELC
-> 
-> On Wed 2016-03-23 @ 09:36:40 AM, akuster808 wrote:
->> There are only 10 people signed up.
->> Is that enough people to justify the expense room or even meet?
-> 
-> I have no idea what the budget might be or what a room might cost. I'll leave
-> it to those who do know to worry about the costs versus the benefits.
-> 
-> In any case I certainly think it's still worth meeting. A smaller, more
-> focused group can sometimes get more done than a larger group. Secondly, it's
-> my experience that more people always show up than sign up.
-> 
-> With a project like this there will always be things to discuss, and sometimes
-> a discussion goes better in person rather than online.
-> 
-> Best regards,
->         Trevor
-> --
-> _______________________________________________
-> yocto mailing list
-> yocto@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/yocto
-> 
+build/temp.linux-x86_64-2.7/_openssl.c:697:6: error: conflicting types for 'BIO_new_mem_buf'
+BIO *BIO_new_mem_buf(void *, int);
+       ^
+In file included from /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/include/openssl/asn1.h:65:0,
+from build/temp.linux-x86_64-2.7/_openssl.c:413:
+
+Signed-off-by: Armin Kuster <akuster@mvista.com>
+---
+ .../build_fix_openssl_1.0.1g.patch                 | 28 ++++++++++++++++++++++
+ .../python/python-cryptography_1.1.bb              |  3 ++-
+ 2 files changed, 30 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-cryptography/build_fix_openssl_1.0.1g.patch
+
+diff --git a/meta-python/recipes-devtools/python/python-cryptography/build_fix_openssl_1.0.1g.patch b/meta-python/recipes-devtools/python/python-cryptography/build_fix_openssl_1.0.1g.patch
+new file mode 100644
+index 0000000..d08994f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-cryptography/build_fix_openssl_1.0.1g.patch
+@@ -0,0 +1,28 @@
++build issue do to openssl 1.0.1g upgrade
++
++BIO *BIO_new_mem_buf(void *, int);
++      ^
++In file included from /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/include/openssl/asn1.h:65:0,
++from build/temp.linux-x86_64-2.7/_openssl.c:413:
++
++
++Upstream-Status: Pending
++
++seems to be a known issue
++https://github.com/pyca/cryptography/issues/2750
++
++Signed-off-by: Armin Kuster <akuster@mvista.com>
++
++Index: src/_cffi_src/openssl/bio.py
++===================================================================
++--- a/src/_cffi_src/openssl/bio.py
+++++ b/src/_cffi_src/openssl/bio.py
++@@ -99,7 +99,7 @@ BIO *BIO_pop(BIO *);
++ BIO *BIO_next(BIO *);
++ BIO *BIO_find_type(BIO *, int);
++ BIO_METHOD *BIO_s_mem(void);
++-BIO *BIO_new_mem_buf(void *, int);
+++BIO *BIO_new_mem_buf(const void *, int);
++ BIO_METHOD *BIO_s_file(void);
++ BIO *BIO_new_file(const char *, const char *);
++ BIO *BIO_new_fp(FILE *, int);
+diff --git a/meta-python/recipes-devtools/python/python-cryptography_1.1.bb b/meta-python/recipes-devtools/python/python-cryptography_1.1.bb
+index ffc8fd9..c501787 100644
+--- a/meta-python/recipes-devtools/python/python-cryptography_1.1.bb
++++ b/meta-python/recipes-devtools/python/python-cryptography_1.1.bb
+@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
+ DEPENDS += " python-cffi-native python-cffi python-enum34 python-six python-pyasn1"
+ SRCNAME = "cryptography"
+ 
+-SRC_URI = "file://run-ptest"
++SRC_URI = "file://run-ptest \
++           file://build_fix_openssl_1.0.1g.patch"
+ 
+ SRC_URI[md5sum] = "dd06da41535184f48f2c8e8b74dd570f"
+ SRC_URI[sha256sum] = "059bc6428b1d0e2317f505698602642f1d8dda5b120ec573a59a430d8cb7a32d"
+-- 
+2.3.5
+
 
