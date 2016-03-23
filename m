@@ -1,46 +1,52 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 04F7260249
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E7B360249
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Mar 2016 18:35:17 +0000 (UTC)
-Received: by mail-io0-f171.google.com with SMTP id 124so56381266iov.3
+	Wed, 23 Mar 2016 18:41:12 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id l68so208139767wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Mar 2016 11:35:18 -0700 (PDT)
+	Wed, 23 Mar 2016 11:41:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=2p08uFrVBvfZcvb2JAgXP8wqyc5mTpxhNTGH0Idxe/w=;
-	b=pePmsYXkUonRbK+MXHUezaXmzHYy89Ypg6Sg0wVBkpIp+vF72MtAMVbc/YrsEcAaJi
-	XnMV0nIrNCrWoFn7CWv8Xi2lVZIRBeHyKryJS3gAz9PHW+cel9h/pq67aF3gZtkPCRZD
-	FLhQ00qE56KX1JmiUQ0SHDzxWSAI3W+ygmSjxc/rtiK1/2J1SDsXW3f14XV5p7TivMMa
-	8vKTd/PNPWFGJzOJYnW2jc0tixhJMoMiPJ/qYjKzeWYm9pIwrqCp4o8oDgajy72Q5jZi
-	vYzhtDTVEK8/9miEU/uRkXJnDGRwUnuQ4nsqo8d9FzhOgtLE0UGSC5jw9zAoXpc8+Bbi
-	DxHA==
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=yhR26BVNMn9f30fIdJ1O+jrMCa49WcBAwqMjZT1OViw=;
+	b=n57HSVgq5jMUJtx1UyVqbKcr6LmGY4Ufd0cUwjPgFTv2n1e6r+ECi+iLwG+dQun9qu
+	/YqkYz9UTgcan9nVDGslU3VM0UQb65n9//xlDiE1mt4O9IdLTFBenuFFVUm1fD4QuuP3
+	CVkFlWcK3T8cwdkedjHHQgJTxNuWYia0y/ZWF+Hs6SopXqxF0HYR6qeBi++a4fwNVfpe
+	QfkhhPhEZ5EUaKiHSDBmwf78p4nhJ6i9c8ww1qdI/ErKGRmwJoshDUvnPwbo4NSSV/Ab
+	Bk2gG/krgAQhEcEo6f++W+Rkm32ENP96kRdJ74Sm5QYyqcPhggdog02FFn+0hzidNf0z
+	yVSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2p08uFrVBvfZcvb2JAgXP8wqyc5mTpxhNTGH0Idxe/w=;
-	b=bkk8bhdDwHl3cvYq8cd+aIN+hcHVR9huUmxAT0LRgVSD1SzfOj8EbAP7+YjZb3lLPM
-	+E7XU6Adq6HY6TCmgTPq8/vvEurLlOpfULE4y3/0uzTxwS5Rt1uk1rEDIVNy9ExG3U6I
-	pQqL6xtFizkHgU4eGs6AP13vMM9IbRUHnK/vu/yOT3sAQcFoH/QbwDGlqCKP1ZEA8JfQ
-	XCxziT79dcdG40q0Z8r7ezTBcPQqU/gJwYfLAHacSX3ALiAzW01vRO7d8IYamy9QwO3F
-	7caDyT4reTicgRWkR9/ZjgEUzTFFrfm7/wAOdmMHnlYz3fSM549RdiTzLp0U/DpG9JGG
-	/uKw==
-X-Gm-Message-State: AD7BkJLN0ltoEMRYhq11BECX/lBokzGAaNPz8N7xxVByPXA1yvbfDiAdG82l4yHq9Sz4eA==
-X-Received: by 10.107.11.213 with SMTP id 82mr5407819iol.152.1458758118230;
-	Wed, 23 Mar 2016 11:35:18 -0700 (PDT)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=yhR26BVNMn9f30fIdJ1O+jrMCa49WcBAwqMjZT1OViw=;
+	b=VPQLz378kmkg8CCEeM4l5QUccoGat6q4xbJoWxrajxOSOPyyOD4A6MhaoZmh8zHiFo
+	cCqTcjNmiwK56VsnVo5/h5l7hcvO9/CIRbh0qOi74++6Hkro51F6icTz0Hl2Lle3OK9K
+	wqOlo5xUKQdshnL9GeMajqVh+DwNswetB/ZiN5W+CWLyckPy+gbF3QabkEU1BL7Bxq+X
+	ywQ5s102Z7Pe0AlyE8BfHQM1I2OQK4l6QMn03UePKpjk2gXPFMMNAGQdnCObShiIC+CG
+	mjpnhPFoe+cBuOdKdTS7fTMH4VlDchHqU/LS3nrBCmmfriR0AELTX+k/OGs/SEug7wGV
+	V4bg==
+X-Gm-Message-State: AD7BkJI3r6w0jlIh+H9CgHAPvPy5g7N6yaDqjlA0m5ifz+VsXldOQIhFjySjQI9sOR/Rdg==
+X-Received: by 10.28.187.212 with SMTP id l203mr5702029wmf.73.1458758472879;
+	Wed, 23 Mar 2016 11:41:12 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	yq10sm1595879igb.8.2016.03.23.11.35.17
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 23 Mar 2016 11:35:17 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
+	u202sm23558822wmd.24.2016.03.23.11.41.11
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 23 Mar 2016 11:41:11 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 23 Mar 2016 19:45:44 +0100
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Mar 2016 11:35:11 -0700
-Message-Id: <1458758111-23333-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] lvm2: make it more explicit that readline support is disabled by default
+Message-ID: <20160323184544.GE2565@jama>
+References: <20160309195049.GJ2542@jama> <20160317214927.GK2553@jama>
+	<56F2C274.8070105@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <56F2C274.8070105@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: akuster@mvista.com
+Subject: Re: python-cryptography failing to build since openssl upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,60 +59,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2016 18:35:18 -0000
+X-List-Received-Date: Wed, 23 Mar 2016 18:41:17 -0000
+X-Groupsio-MsgNum: 60628
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="PPYy/fEw/8QCHSq3"
+Content-Disposition: inline
 
-Any PACKAGECONFIG default assigned with ??= is lost by subsequent
-assignments with +=, therefore lvm2 is currently building with the
-readline PACKAGECONFIG disabled. Make that explicitly clear in the
-recipe. Also minor formatting updates, to align with style guide.
+--PPYy/fEw/8QCHSq3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- meta-oe/recipes-support/lvm2/lvm2.inc | 15 +++++++--------
- 1 file changed, 7 insertions(+), 8 deletions(-)
+On Wed, Mar 23, 2016 at 09:21:08AM -0700, akuster808 wrote:
+>=20
+>=20
+> On 03/17/2016 02:49 PM, Martin Jansa wrote:
+> > On Wed, Mar 09, 2016 at 08:50:49PM +0100, Martin Jansa wrote:
+> >> Do we really need to use that version script for openssl?
+> >>
+> >> Here is another failure:
+> >> http://errors.yoctoproject.org/Errors/Details/54984/
+> >>
+> >> in our local builds we use couple prebuild binaries from 3rdparty, whi=
+ch
+> >> now aren't compatible with openssl ABI (possibly because of
+> >> version-script update:
+> >> http://lists.openembedded.org/pipermail/openembedded-core/2016-March/1=
+18433.html
+> >> )
+> >=20
+> > Still failing:
+> > http://errors.yoctoproject.org/Errors/Details/56595/
+>=20
+> will look into it today.
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index a891950..a8d44da 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -5,7 +5,6 @@ LICENSE = "GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
- 
--S = "${WORKDIR}/LVM2.${PV}"
- SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
-            file://lvm.conf \
-            file://0001-implement-libc-specific-_reopen_stream.patch \
-@@ -14,8 +13,14 @@ SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
-            file://0004-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch \
-            "
- 
--PACKAGECONFIG ??= "readline"
-+S = "${WORKDIR}/LVM2.${PV}"
-+
-+inherit autotools-brokensep pkgconfig systemd
-+
-+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
-+
- PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
-+PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
- 
- # Unset user/group to unbreak install.
- EXTRA_OECONF = "--with-user= \
-@@ -34,12 +39,6 @@ EXTRA_OECONF = "--with-user= \
-                 --with-systemdsystemunitdir=${systemd_system_unitdir} \
- "
- 
--PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
--
--PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
--
--inherit autotools-brokensep pkgconfig systemd
--
- do_install_append() {
-     # Install machine specific configuration file
-     install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
--- 
-1.9.1
+Thanks, I've tried to upgrade it to 1.2.3 (patch is on ML), but that also f=
+ails, just
+with different error:
+http://errors.yoctoproject.org/Errors/Details/57058/
 
+>=20
+> - armin
+> >=20
+> >=20
+> >=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--PPYy/fEw/8QCHSq3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlby5FcACgkQN1Ujt2V2gByGjQCfVToA+D5DzNO5r7FWB1L6SDAU
+HkYAn1s/bcOdA6zOjQkepnx50zmY+WNK
+=C6xV
+-----END PGP SIGNATURE-----
+
+--PPYy/fEw/8QCHSq3--
