@@ -1,52 +1,53 @@
-Return-Path: <sandro.stiller@elfin.de>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 5001C60132
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id B7F1360116
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Mar 2016 14:22:52 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id p65so26612085wmp.0
+	Wed, 23 Mar 2016 14:29:51 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id l68so26929406wml.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Mar 2016 07:22:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=elfin-de.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=5mZjaNxVkHOdsfWF2tQvNCSSQ78e0vm2jctr7zU8mKo=;
-	b=GV3adTdIytP+or7DOhzCbREciudy0Y0tyH+kUYZHFhzGb6YHDTvrUurbbyJYlinAEC
-	1un8ITWYeKS5c34YCoJrFi07IarumS2HB6SsqKDY+JtgkQYpD/GqX7KQRsvsbTGBN3AX
-	gnLuNWPdGsP2bl62vqc+p3ojAJLXYJHm6q7RH5uqfO2P6UkDHDsBT1WDBmrEl0LF8EW1
-	952nkIDY/MclWJmxybjrXMlwO/m9lrzguSXZCAp5UTuq2smuFgy3g4/fn48LL6Lir+WM
-	RCb4rMcG7ndswuSpSMvj18sM9AVx3KPL3EUErwCCKyaGwx+zCvDNHtd/I+kRP80H1dzp
-	lp4A==
+	Wed, 23 Mar 2016 07:29:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=AxsE03X5beJ/l8ZYtEN3eam+RBg0fHBvfPbzqr2Rhv4=;
+	b=nzLG7OjIvJ4qbyf8t1hNNpTmhpDy1yo7WhcQfybWhvSH+P1FRwtqu6HtlN1UCbyg6o
+	fJKKyEnIzhJgo6diAuRawk7ki2CoplCPYlkz5IAgln6dk46j0I49ivFUZT+HMzwbdWPk
+	KqNzm9MiPGgysmd0AUpaUBbI08rtYXW74AJXROS3QiIFu8SYn63bVyBodQBDTGyt2g06
+	YtH4GiyuDLtVjoNOv690KS8dSZ3Iktfypd/hVEJPIA/pg52Sn2d5tqsdfuOxI/9aJ8Cz
+	169JXmaYjAsFxTrldhmZ56PYweXrebd6+A1PxyKdf9wKvvXzCxqDign0fnd2Sl31irYn
+	Ukhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=5mZjaNxVkHOdsfWF2tQvNCSSQ78e0vm2jctr7zU8mKo=;
-	b=Fmasyr8QF4w1rfLMQ17D9slZmqSAi77DAhfv83f69jOyGetYoZkmle0A6dOs0KO741
-	QHl5LC6xo6ypz8KfkdQeuP/ndDDkk2rVrpQWko35kVIpEdrE8acaFdFzOj8k9fhJndIR
-	0iCYdLL7/k7VY3RcVbBqQC37hYFphaydfnCsdzdavs7ef4WeyNX1Jh+LSz7ZqsYLISdF
-	4pwNly2yN8vj3wd7romCw8d3uex7T/g2Pj9arxWUzCShyOsejvogoueqkKQuqMajXINJ
-	f0FBbpwEoLANIk9CgaEXWhvczZgWPfjipaCILC758fQUNLMSakHr4saKkEEcalzgR3CY
-	47gg==
-X-Gm-Message-State: AD7BkJL877nHAO1dxWmzjtZSc0AdSBAXpLRt2BrTRlscPv4fhuhC3L21viUtN1D1YVBe5g==
-X-Received: by 10.28.179.84 with SMTP id c81mr26522730wmf.13.1458742973491;
-	Wed, 23 Mar 2016 07:22:53 -0700 (PDT)
-Received: from [192.168.2.147] (b2b-94-79-174-114.unitymedia.biz.
-	[94.79.174.114]) by smtp.googlemail.com with ESMTPSA id
-	jf6sm2871718wjb.2.2016.03.23.07.22.52
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 23 Mar 2016 07:22:52 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org
-References: <56E01535.6030509@elfin.de>
-From: Sandro Stiller <sandro.stiller@elfin.de>
-Message-ID: <56F2A6BB.7000701@elfin.de>
-Date: Wed, 23 Mar 2016 15:22:51 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=AxsE03X5beJ/l8ZYtEN3eam+RBg0fHBvfPbzqr2Rhv4=;
+	b=KG+v+LZGVTfCGlKWKYjPvebVd0paNYwzti0DR2cuOWQRin3G25I/cpjMe0qRzWCjBT
+	OpE3pgGZ+4MVGEphgZ9Jv3yS2tD3m/NQj7ybMns3bwWefZ9UNUoSjsWfaInadUsXx6ph
+	E3uxFMga6J5YrIpmCaG+bsx21uzB3u4OA67BJ+UgtLnXleyDH3/4mllJb/ocYlfMX59E
+	7sve4/UTmJphpCIlxnQetpO6fGdh+l3rr8GDrBKsFwD8OvyZ22Z7fZFoRHdSDJCEdwTn
+	I8IGcpi19kU1EAjLPdrOv1uB/cradO0PbzOAV0qMv4egk2Xkn5SlUj5qc3rHXabNu0e/
+	NhDA==
+X-Gm-Message-State: AD7BkJIq1T7khW1l9QLzxX8g30blLP7DFTBx2lS/KIut/hKS/i8SYt8o4CjeOPbS1D0z7g==
+X-Received: by 10.194.242.202 with SMTP id ws10mr3837319wjc.3.1458743391796;
+	Wed, 23 Mar 2016 07:29:51 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	u202sm22601567wmd.24.2016.03.23.07.29.50
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 23 Mar 2016 07:29:50 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 23 Mar 2016 15:34:22 +0100
+To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Message-ID: <20160323143422.GC2565@jama>
+References: <1458556296-2809-1-git-send-email-ricardo.ribalda@gmail.com>
+	<20160323101240.GA2565@jama>
+	<CAPybu_1-CCqMjSRC5it6nLL+SWzP7WfJEL6S5dY=Wjn4unon3g@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <56E01535.6030509@elfin.de>
-Subject: Re: systemd service not enabled when adding simple recipe to image
+In-Reply-To: <CAPybu_1-CCqMjSRC5it6nLL+SWzP7WfJEL6S5dY=Wjn4unon3g@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] opencv: Add missing dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,19 +60,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2016 14:22:57 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Mar 2016 14:29:51 -0000
+X-Groupsio-MsgNum: 60624
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ABTtc+pdwF7KHXCz"
+Content-Disposition: inline
 
-If anyone is interested:
+--ABTtc+pdwF7KHXCz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The reason why systemd service works if installed using opkg and fails 
-if I create an image:
+On Wed, Mar 23, 2016 at 02:05:41PM +0100, Ricardo Ribalda Delgado wrote:
+> Hi Martin
+>=20
+> On Wed, Mar 23, 2016 at 11:12 AM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+>=20
+>=20
+> > Still shows:
+> > WARN: opencv: libopencv-dnn rdepends on protobuf, but it isn't a build
+> > dependency?
+> >
+> > protobuf support in dnn probably depends on something else which is als=
+o autodetected.
+>=20
+> if I just clone a clean version of meta-oe and meta-core and do a
+> bitbake opencv i cannot replicate the error.
+>=20
+> Any idea of how to replicate it without having to do a bitbake world
+> before bitbake opencv?
 
-The systemctl executable of OE is a shell script which handles the 
-.service file in a different way.
-I had a blank space behind the "WantedBy" line. The "real" systemctl has 
-no problem with it, but the shell script silently ignores the entry 
-without any error message and the service is not enabled in the image.
+Check temp/log.do_package if you see protobuf dependency being added for
+libopencv-dnn package.
 
+If not then read configure script or sources to see what in
+libopencv-dnn is being autodetected -> then build these autodetected
+dependencies before rebuilding opencv and re-check the log.do_package
+file.
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--ABTtc+pdwF7KHXCz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlbyqW0ACgkQN1Ujt2V2gByfFQCfT56+nsEpforYqpLdlHw6gzwB
+gmIAnjlwe7DBZXzbGdbu7xSlgPfUQPvV
+=FEko
+-----END PGP SIGNATURE-----
+
+--ABTtc+pdwF7KHXCz--
