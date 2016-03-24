@@ -1,53 +1,45 @@
-Return-Path: <rudolf.streif@gmail.com>
-Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
-	[209.85.220.41])
-	by mail.openembedded.org (Postfix) with ESMTP id E81B360110;
-	Thu, 24 Mar 2016 18:36:41 +0000 (UTC)
-Received: by mail-pa0-f41.google.com with SMTP id tt10so28958581pab.3;
-	Thu, 24 Mar 2016 11:36:42 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 141E07709E;
+	Thu, 24 Mar 2016 21:45:27 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id s187so597652wme.2;
+	Thu, 24 Mar 2016 14:45:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:user-agent:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=HTU98DcFcHyWfLS5J7113D72P8MRpKTOQYpsmj5imUg=;
-	b=h8a6zgNN5vbkZ3C/EIVvAOY84smyVi/IXhvE8wmnh3qwwb/YI5ynIbLkqzsPWCI2pp
-	SRHtFhsWvWcWc+PRxmA7U7fGVuIeUPfB9mPZA6wtd2fcE77/FxPcbawX1l528j403sPj
-	6rqahGGoWmj9D//TTfLd0PD2UWejCruUSbKDZBgTls2WX+G7hNU7tvaxfbRYUuokwAIU
-	svAuRjaN0nLDCyMykEyHnULLh6AsXw7hql6wXCS0Iw1Kdj/nSVPusuB1aTls6tEf7ByS
-	RDQuR01Gt6+5U41W5ds68JUg24MabwvXM8VinD2shYJKOiZRGM+cu+1iFlSvpgwlV38H
-	OVNQ==
+	h=from:date:to:subject:message-id:mime-version:content-disposition
+	:user-agent; bh=OD/K/qsEgSaC0T002gdeb9QfYSM6qnl/tpJQpiZKYoI=;
+	b=M+ZIQZn5kj+nlwJZcnksF3nqOBUkTEsS8Nt4qbXMx5jHNRVhAYJXr6PFAN8XCrigfV
+	jRbB0veZszM1VtJvqb+g6/fxAyhLAflqxBICHTeAjbnL3RUMHvMfyes3H1MsMe1tmtQc
+	WBQuaiVTCq4PwzoyA2MhLfH7HGOte6uKrQgm3eir4ufz0S9Z/1CuCORVJ07I1o6Gcu74
+	rWUfXtoFgrnz8F/8sF3aQJlplwWza2DobW9c0cHtZri6hWe6R43PMwkFZ0dtf4cHbzgV
+	a8yPuZUWPNlEHtNNZGy5S5R9Z6r1QAsJXAp/1lzFZLkjBq8Qt6KINBJceKdvoSdC1Wnq
+	Hhcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:user-agent
-	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=HTU98DcFcHyWfLS5J7113D72P8MRpKTOQYpsmj5imUg=;
-	b=MYOcdtW46/fx741imlPX+Q2g5IywE9el5IeMRHL7b1iAcRhmiySXBUYRzdaiLNM1Ev
-	tM3jYyQ9rlWXfXCvLpi7ANwoyKBCREH4FHu7Tc3Lap3bNOHcJj/r+zuUi9my9PF2Mu+z
-	AEljxnCHwWRda4xEw7G+Y664czo79t14c82SUtKxs/tDXROF34BkXvsd+y5kCZWj7TZ7
-	sqw7hZUicZaYH6cimjEGmo4fF/6OIUjzDdL/tTKkkYR4gyeHbRKytFcjEb4rvNxTGNGg
-	FE8+7Ct0cvC9sMKc54ZAB6mp0kp20V9SaVpLFzdBSiEc2uchNZmjx8tuuPUTZOkvnrcn
-	NGYQ==
-X-Gm-Message-State: AD7BkJLs/kDzdgmNq6qjWkDz02EzAFmIHEefjvn5zGbPRXQUrItJxfLeqAuEREW6d5oEQQ==
-X-Received: by 10.66.191.225 with SMTP id hb1mr14851498pac.78.1458844602377;
-	Thu, 24 Mar 2016 11:36:42 -0700 (PDT)
-Received: from rjs-zotac.streifs.net (ip68-7-48-20.sd.sd.cox.net. [68.7.48.20])
-	by smtp.gmail.com with ESMTPSA id
-	qh8sm11674432pac.40.2016.03.24.11.36.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 Mar 2016 11:36:41 -0700 (PDT)
-From: Rudolf J Streif <rudolf.streif@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Mar 2016 11:36:40 -0700
-Message-ID: <1604312.a7pP1GrPCb@rjs-zotac.streifs.net>
-User-Agent: KMail/4.14.10 (Linux/4.4.5-200.fc22.x86_64+debug; KDE/4.14.17;
-	x86_64; ; )
-In-Reply-To: <56F42DA1.4090902@balister.org>
-References: <56DEF97F.9070306@balister.org> <1458767514382.89578@seescan.com>
-	<56F42DA1.4090902@balister.org>
+	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=OD/K/qsEgSaC0T002gdeb9QfYSM6qnl/tpJQpiZKYoI=;
+	b=CFe5MeKk6PF3NJKg9Anhlrx0tX3XSHxClnhBWgVB83k/7MBoAHwqxjnL/5W9V3r9p3
+	T8ZGB6RazEy6zqSVUkHNCAe9T9/SY/OWQsffZZ7D9LhR+zQIyO4/mo5aszAJnnAF2ODv
+	seUEztccYFXYCLYvUNFJAVv14Bj4f6y+3MaSIDsVctVteYIjAcNywYWv0C94XbT1IfN4
+	WZ/+8PMElK4o5hQse9WLWuzqlvSGzIMnwsa6UvpG3TUHjNn5rhqfGi+L8Ao49w32bhb8
+	fIB4lvfPjZVCJMNwdMavjAydbgdF2+HCeQ4XSL5hMZovyYKiDWcDXBt79hQ/ZCWSjNJF
+	OpWg==
+X-Gm-Message-State: AD7BkJKQQefw49jnrVzyofpS8i5T8G1PUzvEQ81xiA+ywmr5Soe1Niq2GL7PQiXx6kr4uA==
+X-Received: by 10.194.227.1 with SMTP id rw1mr11747202wjc.62.1458855928038;
+	Thu, 24 Mar 2016 14:45:28 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id u4sm9170408wjz.4.2016.03.24.14.45.27
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 24 Mar 2016 14:45:27 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 24 Mar 2016 22:50:06 +0100
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20160324215006.GE2518@jama>
 MIME-Version: 1.0
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	openembedded-members@lists.openembedded.org,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] [OE-core] OEDAM, April 8 in San Diego after ELC
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: State of bitbake world, test-dependencies 2016-03-24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,55 +52,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2016 18:36:45 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 24 Mar 2016 21:45:29 -0000
+X-Groupsio-MsgNum: 60659
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="imjhCm/Pyz7Rq5F2"
+Content-Disposition: inline
 
-Since I happen to live in San Diego, I have been asking around for a potential meeting room (unfortunately, I don't have an office with a meeting room myself). I am currently working with the University of San Diego and the Catamaran/Bahia Hotel. Can't promise anything yet.
+--imjhCm/Pyz7Rq5F2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-:rjs
+I've fixed what I could, I've tried to fix samba but after multiple
+attempts it still fails or autodetects pam :/.
 
+This time I did qemuarm and qemux86 testing with the same metadata.
 
-On Thursday, March 24, 2016 11:10:41 AM Philip Balister wrote:
-> We are up to fifteen now and as noted will have some off site attendees
-> and late sign ups.
-> 
-> Philip
-> 
-> On 03/23/2016 02:11 PM, Fred Ollinger wrote:
-> > I'm coming and I'm probably brining another person.
-> > 
-> > I still have to make the wiki account which failed for some reason before.
-> > 
-> > Frederick
-> > ________________________________________
-> > From: yocto-bounces@yoctoproject.org <yocto-bounces@yoctoproject.org> on behalf of Trevor Woerner <twoerner@gmail.com>
-> > Sent: Wednesday, March 23, 2016 2:08 PM
-> > To: akuster808; openembedded-devel@lists.openembedded.org; openembedded-core; Yocto Project; openembedded-members@lists.openembedded.org
-> > Subject: Re: [yocto] [OE-core] [oe] OEDAM, April 8 in San Diego after ELC
-> > 
-> > On Wed 2016-03-23 @ 09:36:40 AM, akuster808 wrote:
-> >> There are only 10 people signed up.
-> >> Is that enough people to justify the expense room or even meet?
-> > 
-> > I have no idea what the budget might be or what a room might cost. I'll leave
-> > it to those who do know to worry about the costs versus the benefits.
-> > 
-> > In any case I certainly think it's still worth meeting. A smaller, more
-> > focused group can sometimes get more done than a larger group. Secondly, it's
-> > my experience that more people always show up than sign up.
-> > 
-> > With a project like this there will always be things to discuss, and sometimes
-> > a discussion goes better in person rather than online.
-> > 
-> > Best regards,
-> >         Trevor
-> > --
-> > _______________________________________________
-> > yocto mailing list
-> > yocto@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/yocto
-> > 
-> 
+Next time I'll let test-dependencies to run over all recipes, because now I
+can run it on separate build server without blocking normal verification
+builds for OE layers.
 
+qemuarm:
+http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependencies.20160324_06=
+1458.log/
+ERROR: 12 issues were found in these recipes:
+chkconfig-alternatives-native core-image-sato-dev core-image-sato-sdk
+dfu-util-native opencv proxy-libintl remake samba
 
+WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
+WARN: opencv: libopencv-dnn rdepends on protobuf, but it isn't a build depe=
+ndency?
+
+qemux86:
+
+Failing recipes
+2_max/failed/chkconfig-alternatives-native.log
+  /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/u=
+pdate-alternatives
+  Matched in manifest-x86_64-opkg-utils-native.populate_sysroot
+2_max/failed/core-image-sato-dev.log
+  ${PN}-dev depending on ${PN} pulls 2 conflicting packages into the image
+     * check_conflicts_for: The following packages conflict with alsa-state:
+     * check_conflicts_for: 	fsoaudiod *=20
+     * opkg_install: Cannot install package alsa-state-dev.
+2_max/failed/core-image-sato-sdk.log
+  the same as core-image-sato-dev.log
+2_max/failed/dfu-util-native.log
+  | /usr/bin/ld: cannot find -lusb-1.0
+  | collect2: error: ld returned 1 exit status
+  I'll check this one (it was working fine when I was upgrading it and fixi=
+ng previous issue)
+2_max/failed/proxy-libintl.log
+  /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/include/li=
+bintl.h
+  Matched in manifest-qemuarm-glibc.populate_sysroot
+2_max/failed/remake.log
+  /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/sysroot-provid=
+ers/make
+  Matched in manifest-qemuarm-make.populate_sysroot
+  manifest-qemuarm-makedevs.populate_sysroot
+  manifest-qemuarm-makedepend.populate_sysroot
+  /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/include/gn=
+umake.h
+  Matched in manifest-qemuarm-make.populate_sysroot
+
+3_min/failed/core-image-sato-dev.log
+  same as in maximal build
+3_min/failed/core-image-sato-sdk.log
+  same as in maximal build
+3_min/failed/dfu-util-native.log
+  same as in maximal build
+3_min/failed/proxy-libintl.log
+  same as in maximal build
+
+Additional issues shown only in qemux86 builds:
+http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependencies.20160324_06=
+1457.log/
+
+ERROR: 24 issues were found in these recipes: chkconfig-alternatives-native=
+ core-image-rt core-image-rt-sdk core-image-sato-dev core-image-sato-sdk df=
+u-util-native jasper perf proxy-libintl remake samba vboxguestdrivers
+
+WARN: jasper: jasper-bin rdepends on libgl-mesa, but it isn't a build depen=
+dency?
+WARN: jasper: jasper-bin rdepends on libglu, but it isn't a build dependenc=
+y?
+WARN: jasper: jasper-bin rdepends on mesa-glut, but it isn't a build depend=
+ency?
+
+2_max/failed/core-image-rt-sdk.log
+  ERROR: Nothing PROVIDES 'linux-yocto-rt' (but /home/jenkins/oe/world/shr-=
+core/openembedded-core/meta/recipes-rt/images/core-image-rt.bb DEPENDS on o=
+r otherwise requires it)
+  ERROR: linux-yocto-rt was skipped: PREFERRED_PROVIDER_virtual/kernel set =
+to linux-yocto, not linux-yocto-rt
+2_max/failed/core-image-rt.log
+  ERROR: Nothing PROVIDES 'linux-yocto-rt' (but /home/jenkins/oe/world/shr-=
+core/openembedded-core/meta/recipes-rt/images/core-image-rt.bb DEPENDS on o=
+r otherwise requires it)
+  ERROR: linux-yocto-rt was skipped: PREFERRED_PROVIDER_virtual/kernel set =
+to linux-yocto, not linux-yocto-rt
+2_max/failed/vboxguestdrivers.log
+  | make[1]: *** No rule to make target `include/config/auto.conf', needed =
+by `scripts'.  Stop.
+  | make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/w=
+ork-shared/qemux86/kernel-build-artifacts'
+
+3_min/failed/core-image-rt-sdk.log
+  Same as in maximal build
+3_min/failed/core-image-rt.log
+  Same as in maximal build
+3_min/failed/perf.log
+  perf-1.0: Package version for package perf went backwards which would bre=
+ak package feeds from (0:None-r9.1 to 0:4.4.3-r9.1) [version-going-backward=
+s]
+  None is interesting, the version is fscked in the maximal build.
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--imjhCm/Pyz7Rq5F2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlb0YQ0ACgkQN1Ujt2V2gBwPOgCdHjvSYsMJNtBcavNlzGzcFP6K
+UlgAmgJxWvQxQYmEx2VjYpmIiMJmq237
+=22iN
+-----END PGP SIGNATURE-----
+
+--imjhCm/Pyz7Rq5F2--
