@@ -1,52 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id D347373173
+	by mail.openembedded.org (Postfix) with ESMTP id 38F19605BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2016 14:15:10 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id p65so12762119wmp.1
+	Thu, 24 Mar 2016 14:17:15 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id l68so12741622wml.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2016 07:15:11 -0700 (PDT)
+	Thu, 24 Mar 2016 07:17:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=KFlDAPT88tGo7rEPP2Iec0FUgDsp4Zmj5E3MISLXJbA=;
-	b=U+0hLP2GCRbVruW+YLa1aBvrS6K+boy7GmRbhqAdhgcAMlY4eqn9z3jB6hG7ajrNgu
-	UggPWUBddqkCg14ptkPy6+EkwdJLoBEZ4UmcRVDjqwj0LkMSeFgdcSjgZgEjylI5+zph
-	hONexOu2gwl/yFctFe5hGd4PrlBoDWFVRAPBNxykm9cD5jRUusYVVQ/10p6b/lwq4IzP
-	4K7tD2IeFjhTWTfJmEnY3LAmC5qqQaZ/udB1BsnrOXkiM3j+DJqNciL4D2ynssanQ4xp
-	OqH0uJxL+3axDJLeE325XlCYgneyO5daP7yKSc3aCQK/oNmGsSPOBiPYC3RNxrsIGn2A
-	1rOg==
+	bh=fY+ZcVzI6CUGUWadhVoIITpg6f2Bt+yc/fB/EGD77cE=;
+	b=VvA0CflVJQh/XNaXmoIGjB/W+zJrc+kPkzZb1Gsck3a/qg0+VW/aEbbOxg+y7bMxGI
+	8H0qY6VSQiVxW6hHlhejjCxRCproOaciR24UiOmG9Qpt0v+eePjtxApRRmFroFCIvW4M
+	DrnhbvqZwVlkoHIGPeIkHm2TI204UzLb8BZSkOQgPgGl/J2dJ1WSNY+IyS0yhumJbBcI
+	ekIneLWAd2rRhhqS33LUv626gUVWbmQSCDiqC+UnCSiNxLYnnfqUgpJO6Gcq7BHqqAdy
+	nj8UuxovwS4p5ZyAaNmYCVn/NO2psDy/dWHYic640QqSdVoEQfZHFY4TcfHClxjmRrtL
+	Qkeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=KFlDAPT88tGo7rEPP2Iec0FUgDsp4Zmj5E3MISLXJbA=;
-	b=SZrspQjm/igXxMNUREGK125+/TWEgJSI+LxjZAG/Emq2+VAgsYB/dixI4O2K/TMZ39
-	nBZhUTFS1b+IMF+SCy/GByRwZrMSvbsIH18O1qj8KT7Si9n4TwiWmJWPFboQKB+ecUqp
-	LZ5KR6vblK3TQYeVvpYU+dmzhSBn1p/HQzYllsLnJ2XSgn7ku9jlbxgdbL6N+o6b6Ge3
-	lJaw0lVFl0NL9mH1GXD3mo1k0hc3EHKYuAGC+NJaXIZql8AU4kzNqzmt/wNnXQjt91ho
-	vqZchD5rRKFx6kcZXqG1BbX4Vsa1aiRu6fRKAd6n+Qkh2PcD/AgWwCEXUBiCxzeWJy6E
-	0oAQ==
-X-Gm-Message-State: AD7BkJJ/mXLQDzZ0Jl1YUC9Li8Yd5aWpAdXqJ+eEsVCsRIMkdF77Pv1IHHIBJde85uBClQ==
-X-Received: by 10.194.118.106 with SMTP id kl10mr11414944wjb.154.1458828910743;
-	Thu, 24 Mar 2016 07:15:10 -0700 (PDT)
+	bh=fY+ZcVzI6CUGUWadhVoIITpg6f2Bt+yc/fB/EGD77cE=;
+	b=EvHLU9QUq5ZkgVmeTmhD06HpXKk5YwBJ3aiPw5/WOSW50hBCyWsCESpFfIRezp90op
+	N0GE7QJfMdHP1/7k3on7Y6WLKQobiWaeRM5sGNbOvtWPjM1VOsaVRgaLTvVpv/2oLzHv
+	2WfupN9mS2TwAEKXhXX6JKeHH11Rd/5b3SaItxh0xN71sCP5aaxLRAWJKzf5yFHapSdT
+	66phwi+Z7a1FPou1SkUUxHy0Fmgyx+dncZ6yapJLgYRh9N0r44aPMjIa/TibvylzYCOd
+	67O0DBIChgAOVEJgBvx2KJ561jxCY62I25oyHfGWCOzjOBjHpOxoEUthufklxumtODu+
+	xUgg==
+X-Gm-Message-State: AD7BkJKVk7HihA67vD86G/1iAT9+6rtk4DaX4ousU2G5cc3QPhsAkLpIGLphvsKtPmcOGg==
+X-Received: by 10.194.185.237 with SMTP id ff13mr10969881wjc.129.1458829036440;
+	Thu, 24 Mar 2016 07:17:16 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	hx10sm7572320wjb.25.2016.03.24.07.15.09
+	w15sm27183966wmd.10.2016.03.24.07.17.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 24 Mar 2016 07:15:09 -0700 (PDT)
+	Thu, 24 Mar 2016 07:17:15 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 24 Mar 2016 15:19:48 +0100
+Date: Thu, 24 Mar 2016 15:21:54 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160324141948.GA2518@jama>
+Message-ID: <20160324142154.GB2518@jama>
 References: <1458318648-6295-1-git-send-email-Martin.Jansa@gmail.com>
-	<1458318648-6295-2-git-send-email-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1458318648-6295-2-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1458318648-6295-1-git-send-email-Martin.Jansa@gmail.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH][meta-oe 2/2] libftdi: Fix cpp-wrapper options
+Subject: Re: [PATCH][meta-oe 1/2] samba: include auth_unix only with pam in PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,73 +58,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2016 14:15:11 -0000
-X-Groupsio-MsgNum: 60654
+X-List-Received-Date: Thu, 24 Mar 2016 14:17:16 -0000
+X-Groupsio-MsgNum: 60655
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="G4iJoqBmSsgzjUCe"
+	protocol="application/pgp-signature"; boundary="b5gNqxB1S1yM7hjW"
 Content-Disposition: inline
 
---G4iJoqBmSsgzjUCe
+--b5gNqxB1S1yM7hjW
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 18, 2016 at 05:30:48PM +0100, Martin Jansa wrote:
-> * fixes following issue found with test-dependencies
->   WARN: libftdi: libftdi rdepends on libgcc, but it isn't a build depende=
-ncy?
->   WARN: libftdi: libftdi rdepends on libstdc++, but it isn't a build depe=
-ndency?
-> * when boost is found it was still building libftdipp1.so.2.2.0
-> * as shown in log.do_package:
->   DEBUG: calculating shlib requirements for libftdi
->   DEBUG: libftdi: Dependency libftdi1.so.2 requires package libftdi (used=
- by files: /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/lib=
-ftdi/1.2-r0/packages-split/libftdi/usr/lib/libftdipp1.so.2.2.0)
->   DEBUG: libftdi: Dependency libusb-1.0.so.0 requires package libusb1 (us=
-ed by files: /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/l=
-ibftdi/1.2-r0/packages-split/libftdi/usr/lib/libftdipp1.so.2.2.0)
->   DEBUG: libftdi: Dependency libstdc++.so.6 requires package libstdc++ (u=
-sed by files: /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/=
-libftdi/1.2-r0/packages-split/libftdi/usr/lib/libftdipp1.so.2.2.0)
->   DEBUG: libftdi: Dependency libgcc_s.so.1 requires package libgcc (used =
-by files: /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/libf=
-tdi/1.2-r0/packages-split/libftdi/usr/lib/libftdipp1.so.2.2.0)
->   DEBUG: libftdi: Dependency libusb-1.0.so.0 requires package libusb1 (us=
-ed by files: /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/l=
-ibftdi/1.2-r0/packages-split/libftdi/usr/lib/libftdi1.so.2.2.0)
->   DEBUG: libftdi: Dependency libc.so.6 requires package glibc (used by fi=
-les: /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/libftdi/1=
-=2E2-r0/packages-split/libftdi/usr/lib/libftdi1.so.2.2.0)
->   DEBUG: Python function package_do_shlibs finished
->=20
+On Fri, Mar 18, 2016 at 05:30:47PM +0100, Martin Jansa wrote:
+> * fixes:
+>   WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
+>   reported by test-dependencies
+> * log.do_package shows:
+>   DEBUG: samba: Dependency libpam.so.0 requires package libpam (used by f=
+iles: /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnuea=
+bi/samba/4.1.12-r0/packages-split/samba/usr/lib/samba/libauth4.so)
+> * source4/auth/ntlm/wscript_build shows pam dependency:
+>   bld.SAMBA_MODULE('auth4_unix',
+>         source=3D'auth_unix.c',
+>         subsystem=3D'auth4',
+>         init_function=3D'auth4_unix_init',
+>         deps=3D'pam PAM_ERRORS LIBTSOCKET'
+>         )
+
+This still isn't enough to get rid of pam autodependency. I've tried to
+patch wscript files a bit to respect pam everywhere, but now it fails to
+build, I'm willing to give-up on this one, I don't even use samba
+anywhere FFS, I should do something more interesting with my limited
+time.
+
+http://git.openembedded.org/meta-openembedded-contrib/commit/?h=3Djansa/mas=
+ter-next-unresolved-review&id=3Db838ec649c8f88e40ac7799bb19421c6f02a54ec
+
 > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 > ---
->  meta-oe/recipes-support/libftdi/libftdi_1.2.bb | 2 +-
+>  meta-networking/recipes-connectivity/samba/samba_4.1.12.bb | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.2.bb b/meta-oe/rec=
-ipes-support/libftdi/libftdi_1.2.bb
-> index eb4d86c..1d15711 100644
-> --- a/meta-oe/recipes-support/libftdi/libftdi_1.2.bb
-> +++ b/meta-oe/recipes-support/libftdi/libftdi_1.2.bb
-> @@ -20,7 +20,7 @@ SRC_URI[sha256sum] =3D "a6ea795c829219015eb372b03008351=
-cee3fb39f684bff3bf8a4620b55
->  S =3D "${WORKDIR}/${BPN}1-${PV}"
+> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb b=
+/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
+> index ff58dae..e9e2724 100644
+> --- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
+> +++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
+> @@ -82,7 +82,7 @@ SRC_URI +=3D "${@bb.utils.contains('PACKAGECONFIG', 'sa=
+sl', '', 'file://21-avoid-s
 > =20
->  PACKAGECONFIG ??=3D ""
-> -PACKAGECONFIG[cpp-wrapper] =3D "-DFTDI_BUILD_CPP=3Don,-DFTDI_BUILD_CPP=
-=3Doff,boost"
-> +PACKAGECONFIG[cpp-wrapper] =3D "-DFTDI_BUILD_CPP=3Don -DFTDIPP=3Don,-DFT=
-DI_BUILD_CPP=3Doff -DFTDIPP=3Dooff,boost"
-
-s/ooff/off/g
-
-already done in master-next branch
-
+>  SAMBA4_IDMAP_MODULES=3D"idmap_ad,idmap_rid,idmap_adex,idmap_hash,idmap_t=
+db2"
+>  SAMBA4_PDB_MODULES=3D"pdb_tdbsam,${@bb.utils.contains('PACKAGECONFIG', '=
+ldap', 'pdb_ldap,', '', d)}pdb_ads,pdb_smbpasswd,pdb_wbc_sam,pdb_samba4"
+> -SAMBA4_AUTH_MODULES=3D"auth_unix,auth_wbc,auth_server,auth_netlogond,aut=
+h_script,auth_samba4"
+> +SAMBA4_AUTH_MODULES=3D"${@bb.utils.contains('PACKAGECONFIG', 'pam', 'aut=
+h_unix,', '', d)}auth_wbc,auth_server,auth_netlogond,auth_script,auth_samba=
+4"
+>  SAMBA4_MODULES=3D"${SAMBA4_IDMAP_MODULES},${SAMBA4_PDB_MODULES},${SAMBA4=
+_AUTH_MODULES}"
 > =20
->  inherit cmake binconfig pkgconfig
-> =20
+>  SAMBA4_LIBS=3D"heimdal,!zlib,!popt,!talloc,!pytalloc,!pytalloc-util,!tev=
+ent,!pytevent,!tdb,!pytdb,!ldb,!pyldb"
 > --=20
 > 2.7.3
 >=20
@@ -133,16 +128,16 @@ already done in master-next branch
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---G4iJoqBmSsgzjUCe
+--b5gNqxB1S1yM7hjW
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlbz94MACgkQN1Ujt2V2gBxAWgCeP1kQ1Q/joKjJqClh8I739V8M
-BKEAn2SwO2QyHpNrGd0ZJCR7nCoSNZ2J
-=6QL5
+iEYEARECAAYFAlbz+AEACgkQN1Ujt2V2gBz/OQCguMl9HI5jnzDDkO5XNbNm1fOZ
+j1cAn3k/UDfDY5kCz2x1TOJ/Id0Hq9N5
+=KJjS
 -----END PGP SIGNATURE-----
 
---G4iJoqBmSsgzjUCe--
+--b5gNqxB1S1yM7hjW--
