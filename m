@@ -1,45 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 141E07709E;
-	Thu, 24 Mar 2016 21:45:27 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id s187so597652wme.2;
-	Thu, 24 Mar 2016 14:45:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:mime-version:content-disposition
-	:user-agent; bh=OD/K/qsEgSaC0T002gdeb9QfYSM6qnl/tpJQpiZKYoI=;
-	b=M+ZIQZn5kj+nlwJZcnksF3nqOBUkTEsS8Nt4qbXMx5jHNRVhAYJXr6PFAN8XCrigfV
-	jRbB0veZszM1VtJvqb+g6/fxAyhLAflqxBICHTeAjbnL3RUMHvMfyes3H1MsMe1tmtQc
-	WBQuaiVTCq4PwzoyA2MhLfH7HGOte6uKrQgm3eir4ufz0S9Z/1CuCORVJ07I1o6Gcu74
-	rWUfXtoFgrnz8F/8sF3aQJlplwWza2DobW9c0cHtZri6hWe6R43PMwkFZ0dtf4cHbzgV
-	a8yPuZUWPNlEHtNNZGy5S5R9Z6r1QAsJXAp/1lzFZLkjBq8Qt6KINBJceKdvoSdC1Wnq
-	Hhcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
-	:content-disposition:user-agent;
-	bh=OD/K/qsEgSaC0T002gdeb9QfYSM6qnl/tpJQpiZKYoI=;
-	b=CFe5MeKk6PF3NJKg9Anhlrx0tX3XSHxClnhBWgVB83k/7MBoAHwqxjnL/5W9V3r9p3
-	T8ZGB6RazEy6zqSVUkHNCAe9T9/SY/OWQsffZZ7D9LhR+zQIyO4/mo5aszAJnnAF2ODv
-	seUEztccYFXYCLYvUNFJAVv14Bj4f6y+3MaSIDsVctVteYIjAcNywYWv0C94XbT1IfN4
-	WZ/+8PMElK4o5hQse9WLWuzqlvSGzIMnwsa6UvpG3TUHjNn5rhqfGi+L8Ao49w32bhb8
-	fIB4lvfPjZVCJMNwdMavjAydbgdF2+HCeQ4XSL5hMZovyYKiDWcDXBt79hQ/ZCWSjNJF
-	OpWg==
-X-Gm-Message-State: AD7BkJKQQefw49jnrVzyofpS8i5T8G1PUzvEQ81xiA+ywmr5Soe1Niq2GL7PQiXx6kr4uA==
-X-Received: by 10.194.227.1 with SMTP id rw1mr11747202wjc.62.1458855928038;
-	Thu, 24 Mar 2016 14:45:28 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id u4sm9170408wjz.4.2016.03.24.14.45.27
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 24 Mar 2016 14:45:27 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 24 Mar 2016 22:50:06 +0100
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20160324215006.GE2518@jama>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: State of bitbake world, test-dependencies 2016-03-24
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id F2F9A6E682
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Mar 2016 23:26:45 +0000 (UTC)
+Received: from seahawk.toradex.int
+	(75-146-58-181-Washington.hfc.comcastbusiness.net [75.146.58.181])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id B39275C152B;
+	Fri, 25 Mar 2016 00:25:49 +0100 (CET)
+From: Stefan Agner <stefan@agner.ch>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 24 Mar 2016 16:26:56 -0700
+Message-Id: <1458862016-19466-1-git-send-email-stefan@agner.ch>
+X-Mailer: git-send-email 1.9.1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1458861951; bh=nY5fssLheCgkNCz3j/hPePw0FixVub2cwRIAMkwf0Jw=;
+	h=From:To:Cc:Subject:Date:Message-Id;
+	b=qS5oPIGA67u0nXLWGXLFm5v7yDhXZ9+2Vs0iEujgdej55EtNWP60BvQ/rEGpuwhQWMJ/SngjjPbtPHEU8qILIvEPXOipYm/P75Bd18eXmFvELMxEV0rHwYsLgHr5oDIQ70oEwXQsvYxOEzYvJYuurIVacVtm5Nd/pLQzz0buLDM=
+Cc: Chong.Lu@windriver.com, marcel@ziswiler.com,
+	Stefan Agner <stefan.agner@toradex.com>
+Subject: [meta-multimedia][jethro][PATCH] gstreamer: fix argument parsing when using Bison 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,135 +31,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2016 21:45:29 -0000
-X-Groupsio-MsgNum: 60659
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="imjhCm/Pyz7Rq5F2"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 24 Mar 2016 23:26:46 -0000
 
---imjhCm/Pyz7Rq5F2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Stefan Agner <stefan.agner@toradex.com>
 
-I've fixed what I could, I've tried to fix samba but after multiple
-attempts it still fails or autodetects pam :/.
+Remove the argument fix patch and add a patch which fixes the
+grammer.y Bison input file. YYLEX_PARAM seems to be no longer
+supported and has been replaced with %parse-param which has
+been introduced already in 2003.
 
-This time I did qemuarm and qemux86 testing with the same metadata.
+This fixes a segmentation fault when launching gst-launch-0.10.
 
-Next time I'll let test-dependencies to run over all recipes, because now I
-can run it on separate build server without blocking normal verification
-builds for OE layers.
+Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
+---
+This is the stack trace of the segmentation fault:
+(gdb) bt 
+#0  priv_gst_parse_yylex (yylval_param=yylval_param@entry=0xbe8a4224, yyscanner=0xc8) at lex.priv_gst_parse_yy.c:1153
+#1  0x4022d712 in priv_gst_parse_yyparse (scanner=<optimized out>, graph=graph@entry=0xbe8a47ec) at grammar.tab.c:1821
+#2  0x4022f18c in priv_gst_parse_launch (
+    str=0x94f28 "filesrc location=/home/root_2p_key60_q90_aac128_44.mp4 ! qtdemuxemux demux.video_00 ! nv_omx_h264dec ! nv_gl_eglimagesink demux.audio_00 ! nv_omx_aacdec ! alsasink device=hw:0,0 ", 
+    error=error@entry=0xbe8a4910, ctx=ctx@entry=0x0, flags=flags@entry=GST_PARSE_FLAG_NONE) at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/parse/grammar.y:927
+#3  0x402277b8 in gst_parse_launch_full (
+    pipeline_description=0x94f28 "filesrc location=/home/root_2p_key60_q90_aac128_44.mp4 ! qtdemuxemux demux.video_00 ! nv_omx_h264dec ! nv_gl_eglimagesink demux.audio_00 ! nv_omx_aacdec ! alsasink device=hw:0,0 ", context=context@entry=0x0, flags=flags@entry=GST_PARSE_FLAG_NONE, error=error@entry=0xbe8a4910) at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/gstparse.c:336
+#4  0x40227968 in gst_parse_launchv_full (argv=argv@entry=0x7ad50, context=context@entry=0x0, flags=flags@entry=GST_PARSE_FLAG_NONE, error=error@entry=0xbe8a4910)
+    at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/gstparse.c:272
+#5  0x402279f2 in gst_parse_launchv (argv=argv@entry=0x7ad50, error=error@entry=0xbe8a4910) at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/gstparse.c:224
+#6  0x0000a6d8 in main (argc=16, argv=0xbe8a4ca4) at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/tools/gst-launch.c:1031
 
-qemuarm:
-http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependencies.20160324_06=
-1458.log/
-ERROR: 12 issues were found in these recipes:
-chkconfig-alternatives-native core-image-sato-dev core-image-sato-sdk
-dfu-util-native opencv proxy-libintl remake samba
+ ...01-parse-make-grammar.y-work-with-Bison-3.patch | 35 ++++++++++++++++++++++
+ ...mer-change-priv_gst_parse_yylex-arguments.patch | 33 --------------------
+ .../gstreamer-0.10/gstreamer_0.10.36.bb            |  2 +-
+ 3 files changed, 36 insertions(+), 34 deletions(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch
+ delete mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
 
-WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
-WARN: opencv: libopencv-dnn rdepends on protobuf, but it isn't a build depe=
-ndency?
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch
+new file mode 100644
+index 0000000..dc2d606
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch
+@@ -0,0 +1,35 @@
++From 60516f4798894f958fc53b470e1283318d0f8706 Mon Sep 17 00:00:00 2001
++From: Kerrick Staley <kerrick@kerrickstaley.com>
++Date: Tue, 20 Aug 2013 23:59:29 -0700
++Subject: [PATCH 1/2] parse: make grammar.y work with Bison 3
++
++YYLEX_PARAM is no longer supported in Bison 3.
++
++https://bugzilla.gnome.org/show_bug.cgi?id=706462
++---
++ gst/parse/grammar.y | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/gst/parse/grammar.y b/gst/parse/grammar.y
++index 24fc87b..7f9dd16 100644
++--- a/gst/parse/grammar.y
+++++ b/gst/parse/grammar.y
++@@ -26,7 +26,6 @@
++  */
++ 
++ #define YYERROR_VERBOSE 1
++-#define YYLEX_PARAM scanner
++ 
++ #define YYENABLE_NLS 0
++ 
++@@ -648,6 +647,7 @@ static int yyerror (void *scanner, graph_t *graph, const char *s);
++ %right '.'
++ %left '!' '='
++ 
+++%lex-param { void *scanner }
++ %parse-param { void *scanner }
++ %parse-param { graph_t *graph }
++ %pure-parser
++-- 
++2.7.2
++
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
+deleted file mode 100644
+index bf93cb2..0000000
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-gstreamer: change priv_gst_parse_yylex arguments
+-
+-Change priv_gst_parse_yylex to fit new bison version, else we will
+-get following error:
+-
+-| grammar.tab.c: In function 'priv_gst_parse_yyparse':
+-| grammar.tab.c:67:25: error: too few arguments to function 'priv_gst_parse_yylex'
+-|  #define yylex           priv_gst_parse_yylex
+-|                          ^
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+----
+- gst/parse/grammar.y | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/gst/parse/grammar.y b/gst/parse/grammar.y
+-index 24fc87b..24fe906 100644
+---- a/gst/parse/grammar.y
+-+++ b/gst/parse/grammar.y
+-@@ -36,7 +36,7 @@
+- 
+- typedef void* yyscan_t;
+- 
+--int priv_gst_parse_yylex (void * yylval_param , yyscan_t yyscanner);
+-+int priv_gst_parse_yylex (yyscan_t yyscanner);
+- int priv_gst_parse_yylex_init (yyscan_t scanner);
+- int priv_gst_parse_yylex_destroy (yyscan_t scanner);
+- struct yy_buffer_state * priv_gst_parse_yy_scan_string (char* , yyscan_t);
+--- 
+-1.9.1
+-
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
+index 5b30603..ad7cf99 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
+@@ -15,7 +15,7 @@ SRC_URI = "http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.bz
+            file://check_fix.patch \
+            file://gst-inspect-check-error.patch \
+            file://0001-baseparse-Fix-self-comparison-always-evaluates-to-tr.patch \
+-           file://gstreamer-change-priv_gst_parse_yylex-arguments.patch \
++           file://0001-parse-make-grammar.y-work-with-Bison-3.patch \
+ "
+ 
+ SRC_URI[md5sum] = "a0cf7d6877f694a1a2ad2b4d1ecb890b"
+-- 
+1.9.1
 
-qemux86:
 
-Failing recipes
-2_max/failed/chkconfig-alternatives-native.log
-  /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/u=
-pdate-alternatives
-  Matched in manifest-x86_64-opkg-utils-native.populate_sysroot
-2_max/failed/core-image-sato-dev.log
-  ${PN}-dev depending on ${PN} pulls 2 conflicting packages into the image
-     * check_conflicts_for: The following packages conflict with alsa-state:
-     * check_conflicts_for: 	fsoaudiod *=20
-     * opkg_install: Cannot install package alsa-state-dev.
-2_max/failed/core-image-sato-sdk.log
-  the same as core-image-sato-dev.log
-2_max/failed/dfu-util-native.log
-  | /usr/bin/ld: cannot find -lusb-1.0
-  | collect2: error: ld returned 1 exit status
-  I'll check this one (it was working fine when I was upgrading it and fixi=
-ng previous issue)
-2_max/failed/proxy-libintl.log
-  /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/include/li=
-bintl.h
-  Matched in manifest-qemuarm-glibc.populate_sysroot
-2_max/failed/remake.log
-  /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/sysroot-provid=
-ers/make
-  Matched in manifest-qemuarm-make.populate_sysroot
-  manifest-qemuarm-makedevs.populate_sysroot
-  manifest-qemuarm-makedepend.populate_sysroot
-  /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/include/gn=
-umake.h
-  Matched in manifest-qemuarm-make.populate_sysroot
-
-3_min/failed/core-image-sato-dev.log
-  same as in maximal build
-3_min/failed/core-image-sato-sdk.log
-  same as in maximal build
-3_min/failed/dfu-util-native.log
-  same as in maximal build
-3_min/failed/proxy-libintl.log
-  same as in maximal build
-
-Additional issues shown only in qemux86 builds:
-http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependencies.20160324_06=
-1457.log/
-
-ERROR: 24 issues were found in these recipes: chkconfig-alternatives-native=
- core-image-rt core-image-rt-sdk core-image-sato-dev core-image-sato-sdk df=
-u-util-native jasper perf proxy-libintl remake samba vboxguestdrivers
-
-WARN: jasper: jasper-bin rdepends on libgl-mesa, but it isn't a build depen=
-dency?
-WARN: jasper: jasper-bin rdepends on libglu, but it isn't a build dependenc=
-y?
-WARN: jasper: jasper-bin rdepends on mesa-glut, but it isn't a build depend=
-ency?
-
-2_max/failed/core-image-rt-sdk.log
-  ERROR: Nothing PROVIDES 'linux-yocto-rt' (but /home/jenkins/oe/world/shr-=
-core/openembedded-core/meta/recipes-rt/images/core-image-rt.bb DEPENDS on o=
-r otherwise requires it)
-  ERROR: linux-yocto-rt was skipped: PREFERRED_PROVIDER_virtual/kernel set =
-to linux-yocto, not linux-yocto-rt
-2_max/failed/core-image-rt.log
-  ERROR: Nothing PROVIDES 'linux-yocto-rt' (but /home/jenkins/oe/world/shr-=
-core/openembedded-core/meta/recipes-rt/images/core-image-rt.bb DEPENDS on o=
-r otherwise requires it)
-  ERROR: linux-yocto-rt was skipped: PREFERRED_PROVIDER_virtual/kernel set =
-to linux-yocto, not linux-yocto-rt
-2_max/failed/vboxguestdrivers.log
-  | make[1]: *** No rule to make target `include/config/auto.conf', needed =
-by `scripts'.  Stop.
-  | make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/w=
-ork-shared/qemux86/kernel-build-artifacts'
-
-3_min/failed/core-image-rt-sdk.log
-  Same as in maximal build
-3_min/failed/core-image-rt.log
-  Same as in maximal build
-3_min/failed/perf.log
-  perf-1.0: Package version for package perf went backwards which would bre=
-ak package feeds from (0:None-r9.1 to 0:4.4.3-r9.1) [version-going-backward=
-s]
-  None is interesting, the version is fscked in the maximal build.
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---imjhCm/Pyz7Rq5F2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlb0YQ0ACgkQN1Ujt2V2gBwPOgCdHjvSYsMJNtBcavNlzGzcFP6K
-UlgAmgJxWvQxQYmEx2VjYpmIiMJmq237
-=22iN
------END PGP SIGNATURE-----
-
---imjhCm/Pyz7Rq5F2--
