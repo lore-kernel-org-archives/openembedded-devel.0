@@ -1,42 +1,46 @@
-Return-Path: <ryanelkholy@gmail.com>
-Received: from mail-io0-f175.google.com (mail-io0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id A3D44605B3
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qg0-f50.google.com (mail-qg0-f50.google.com
+	[209.85.192.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 53BBC6057B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2016 02:49:00 +0000 (UTC)
-Received: by mail-io0-f175.google.com with SMTP id 124so72461881iov.3
+	Thu, 24 Mar 2016 04:22:08 +0000 (UTC)
+Received: by mail-qg0-f50.google.com with SMTP id y89so29634899qge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Mar 2016 19:49:01 -0700 (PDT)
+	Wed, 23 Mar 2016 21:22:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to;
-	bh=AsmRt3a6H8N3B1u5B94alJLnhf2rzO21ob3R8oDxDXM=;
-	b=gu7l9FgmEoq+lssuntxx4aT8fbIVCLhH5CAGW6K0rcVryFj4P1wD15H1mNpyKv7l89
-	T1eFLVjjogZCcXect3lwjlroMqZMfWcVBUeXKYb/d4IxMapjXBWpVYWFDrWN2jM5qOFL
-	Igk/ox0JjJJay2jJtgY8D2DdVg88xrf0mDQwmBMhkPqRcJ37PIcI1BXXePMetrQmvpNn
-	KUPmEaciKTA3B0wEwYWUu3xTBd+TD2qiLlCD0uqz5ZrLTHiDWhmWq0Q5ODvXBy41mAF1
-	5YXv3Z5f1UEgvcwoErB9x354CSrRucz6T9xQ4ZZUGx4PfpGy0mbI/frx4KjvSTi4znmg
-	PDqA==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to; 
+	bh=w0A0rBAM2IIj2Co8KP2ZhAG1UhkoAmuACgMbi7ZsO7k=;
+	b=B2d9kLmPu/f9G9nikYPtbvi2Iamt+GI6MvtoC8Mv+wqabyKrdYgC6hZC2UUzA3umra
+	DI161I3VBNa3UzDJfghEiYCqs7SjVsupq/UZWUJr2rZitjVFDruyOPGzkWGItd04664L
+	S1lxTg5iNE74n4NcuvHigqMI3F0A7O9pfz51nSCtSjC3uAwxZauVOj6peoG6gobLjkAx
+	2KlAzACIGl4gsogLbzLCodkud5lVw5wcO5brxnE4QOI6EViztbyh8Gcr0ig8mzKIK6cS
+	XJ2fzZO6ZGo3DLvcskve+lEvhrYIf8oEOsr78COwOxwlWiDNLNMdilNzMOLIBs7vu6g1
+	F38A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to;
-	bh=AsmRt3a6H8N3B1u5B94alJLnhf2rzO21ob3R8oDxDXM=;
-	b=hrLu6dm1x63KLKWYzjDxkgNRsdCO4J7MNPPGqMw9COvZAxmtLb/BCMROzYe8eJ0Yz3
-	LVRP1MiLTozjojOGS+NReso2fR7lf8D4vWJ0BulwYdsnrtcf/6ZmBng7K6h/+pKGLhL6
-	ZD43LeQfoZ7d9zkKUlnNqfKS0NxCNejBPW7nPmGdBVsVtOUQ3L0fVzXUB0wVDl4izvDt
-	hkjZ+vUYem5fh10ijfK16UyvvtsPT4BruNFjXahi7SDIWeaVTN/Op+WCbBEPENkv3eIG
-	VR9rkJPVMaew26Z601+wwl4I67em8W+Mdl7LBxXb4kOFT8R4C/oePhTL/IhgUcmx0C6D
-	4EuQ==
-X-Gm-Message-State: AD7BkJLYAOIa5O8ygTD77iDiQ1OEcjDMcwzOkPkmzUrLqdUX32JDnrlLN2JzEM6gMdTC9D9yF0Sn6H6EQHk+EA==
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to;
+	bh=w0A0rBAM2IIj2Co8KP2ZhAG1UhkoAmuACgMbi7ZsO7k=;
+	b=VLco8PzgtFEW0EXo4z/ESmLgQsxAo2QNw5XDDGBA8rJYABkTP5rZCv1QQcQWTRXZu/
+	GInEgIHxTDl3kTvKY4QOywkaOo/Ea8xXaSF9kdlIXmA/d+k1GMr/rXUBoPBroZNdFSL3
+	9tmRq8XujaQV+AfU7aQub/og92y7clvvNqw/Zt83ADBEIB5QDtlvEeSE+Bakqy7GZnND
+	qkLpVfAeYagq86IGQjs7j8+DcxZeN9cHaj83pGtUb25MtqsLFTtXxznXK4g+N2Mq7fsc
+	0g/NDUV2tTfVd/fRT3bqGSJIiOYPm1DznpooiPkCXxSCJrdN99xOBQEbpbnTnjB3eYMb
+	VwOg==
+X-Gm-Message-State: AD7BkJK5oJaemRxMKlXMfZ3d4y0psMxkDR4HWHjcQtiKyOMq6pgy2m7CVVl2akiOr0qlcs4MG7wyR5HjUw7GTg==
 MIME-Version: 1.0
-X-Received: by 10.107.6.40 with SMTP id 40mr6781995iog.176.1458787741009; Wed,
-	23 Mar 2016 19:49:01 -0700 (PDT)
-Received: by 10.64.69.138 with HTTP; Wed, 23 Mar 2016 19:49:00 -0700 (PDT)
-Date: Wed, 23 Mar 2016 22:49:00 -0400
-Message-ID: <CAMZfsd6f67zTGSsSfQdVViX69qykeNmKE6gP+u60WAOKGOWodA@mail.gmail.com>
-From: "Ryan Elkholy, PhD, PE" <ryanelkholy@gmail.com>
+X-Received: by 10.140.148.134 with SMTP id 128mr8426530qhu.98.1458793328660;
+	Wed, 23 Mar 2016 21:22:08 -0700 (PDT)
+Received: by 10.55.130.196 with HTTP; Wed, 23 Mar 2016 21:22:08 -0700 (PDT)
+Received: by 10.55.130.196 with HTTP; Wed, 23 Mar 2016 21:22:08 -0700 (PDT)
+In-Reply-To: <CAMZfsd6f67zTGSsSfQdVViX69qykeNmKE6gP+u60WAOKGOWodA@mail.gmail.com>
+References: <CAMZfsd6f67zTGSsSfQdVViX69qykeNmKE6gP+u60WAOKGOWodA@mail.gmail.com>
+Date: Wed, 23 Mar 2016 21:22:08 -0700
+Message-ID: <CAMKF1sqxb2y6KPxNbB5wVSvRjN2vCq5m_TT08TzjGFxvPBAp_A@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-qt5] Unable to Build due to qtbase error
+Subject: Re: [meta-qt5] Unable to Build due to qtbase error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,18 +53,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2016 02:49:00 -0000
+X-List-Received-Date: Thu, 24 Mar 2016 04:22:08 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hello,
+Do you have opengl in distro features
+On Mar 23, 2016 7:49 PM, "Ryan Elkholy, PhD, PE" <ryanelkholy@gmail.com>
+wrote:
 
-I have been trying to build an image using meta-qt5 for quite a while now.
-I am building using the meta-intel layer for an x86-64 architecture. The
-build keeps failing due to qtbase. The error log is here:
-http://pastebin.com/qcRQxTsH
-
-I cannot for the life of me figure out how to fix this error. Any help
-would be greatly appreciated!
-
--Ryan
+> Hello,
+>
+> I have been trying to build an image using meta-qt5 for quite a while now.
+> I am building using the meta-intel layer for an x86-64 architecture. The
+> build keeps failing due to qtbase. The error log is here:
+> http://pastebin.com/qcRQxTsH
+>
+> I cannot for the life of me figure out how to fix this error. Any help
+> would be greatly appreciated!
+>
+> -Ryan
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
