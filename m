@@ -1,49 +1,46 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id E445A60111
+Return-Path: <ryanelkholy@gmail.com>
+Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
+	[209.85.213.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 663816011A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2016 12:22:12 +0000 (UTC)
-Received: by mail-lb0-f178.google.com with SMTP id bc4so28994672lbc.2
+	Thu, 24 Mar 2016 13:01:05 +0000 (UTC)
+Received: by mail-ig0-f182.google.com with SMTP id l20so11576194igf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2016 05:22:13 -0700 (PDT)
+	Thu, 24 Mar 2016 06:01:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=3O6y8fLda6Mhzf4DpfUDqNNRPzcXF+sVF2OujMKq4ys=;
-	b=h8RHTr4H51Cw4QcQM3GFZ+7GKtRwfBS3eBQdLaJFdILmMRqlC4HCWTgM31TV5r3XIo
-	qmKwomWzlRZ6bTOMA3e5rL4sDcUtr6wZU+kj0a0421PSyHJH+A9PHgZS83PCVo1TD/Fa
-	C52KNeLa3wtB+O4vsCO2onANghjZQZFPzwVEECIzgi9L5FpOMn7O9ACHKzGyEDz/VdJ8
-	ZM2LcgHAGIcFgv8exvenSth9uXwE+NKly/kWTTnyiYtTTEgFE6wr+tEihWDYCYexnEl4
-	6u2ZBqfQR+Vjz/Zz5UGS6Nxd3WapFM+Bq1Ex6cSlhKWm8OjVQh8fDRgHTIrcWKZsNXUa
-	EsxQ==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to; 
+	bh=JlXDy0oVbPZ8EPInsGYkpHlpAnnQInT1oXm9/GK324k=;
+	b=GC5h4jP1TJzo0Int4a7mWxKk9Csq+3smw6k9V/IdAL6mRlZXQDcwh8p4ex0vVx6gA3
+	vuf6dTYjU5gYaVZGtAHmL9Gzuxh1dTEuMenFWZDlaNWdBoKjddEkhnj78vWQYjC0e7/A
+	OO0sQq9AvzouB9OaFNR2IyworB9tQI3QtJS/TqYNOUX6Vx2LT/MRl+6zcyBzzpQ3CdFC
+	S8MNuWXhX/RKo8QdA+O9bcbmSN/ASEoatU4ttaS29kHlwg6/2whk2vAUfPhsq744tkwD
+	oy4mC/rXqehYCRbmnGS/BqfuhkhdhuQL8bDKF7XZw5JUnI6gFB86POXdkJf6uLlXYAma
+	L1wQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=3O6y8fLda6Mhzf4DpfUDqNNRPzcXF+sVF2OujMKq4ys=;
-	b=Qo5RVbI42VNSoqzbfarp5HMens/dEzlIvfbxYi49zrHE3kaWbNAyp3tbOykHtgiw9W
-	QgNZ/kG2Xc/qIRWMSSht4FmMxy/u7KVupQDlgubQNgQatezhVjPiI8gtk13kFnKd2hoA
-	kaAvLhLH3n3wTZAThVoalB9Anaz3znC+jax3ywMptJi8z045KUuNF9MxvX5dfyTIvF7b
-	oal/rp6XuTctg2y1vi/cGIWRnkjELpd9IhhlY9/YMkU3BfGhUgJ5FY62KQPXdjze6szX
-	V8JX8f38GU5qsy4SXtaf4b4mdev0m5ZinjTSHSriGEIE+r+VXFWaeXky5cluyXukU3KZ
-	OdaA==
-X-Gm-Message-State: AD7BkJLNbYA6zlKkdTlR2/WMsJ/BZKzDm8MScQjwphWvxn7ZlGta9OxqvrZ4/2sa2ZWRx8wg+eVntsZ9wHe57g==
-X-Received: by 10.112.163.102 with SMTP id yh6mr3212900lbb.4.1458822132506;
-	Thu, 24 Mar 2016 05:22:12 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to;
+	bh=JlXDy0oVbPZ8EPInsGYkpHlpAnnQInT1oXm9/GK324k=;
+	b=bzr4xyaBWl/M38ulsYr4v8M44TM4YD7H4Jq0u7v7cTmOGcr6FyAAN3XM6MDhIArhSZ
+	viFCfod8NsKo3piFmoKZfqJFI31Qis0O2AzqC+KB/j9CVoydck6zOYu63+bKF+ILsKas
+	bl+NwMrfiR8G22tq9u679sglHjis4yKx76vOlD/mGi5S7X1aLdRz4d3s8yDAO9KRQaq/
+	SwA1Mft8+8Es0w2bQKmgoX2a4qudzQ9tJGxsJNcQpvK+DfXnr3ZYvxUbNQ/MD8LEvBzM
+	fGQBDkmjsjvI20+xKNn77v4ewhqt6TyJoM8sYFrdDqros7szuH93zqLb9eMswkrj0u9v
+	DRRA==
+X-Gm-Message-State: AD7BkJKp9DfcDB4hgD1qUHYoBwUSkc9etntGIti13N+7pq8U7A6Fv8E+KBeOM525Ajb1ttsSz9uirPQp3HH8QA==
 MIME-Version: 1.0
-Received: by 10.114.11.40 with HTTP; Thu, 24 Mar 2016 05:21:52 -0700 (PDT)
-In-Reply-To: <CA+chaQeCmuDayR--vozAToONS5ct_eHW6jd+Qytt0FkwS4+Lag@mail.gmail.com>
-References: <1458556296-2809-1-git-send-email-ricardo.ribalda@gmail.com>
-	<20160323101240.GA2565@jama>
-	<CAPybu_1-CCqMjSRC5it6nLL+SWzP7WfJEL6S5dY=Wjn4unon3g@mail.gmail.com>
-	<20160323143422.GC2565@jama>
-	<CA+chaQeCmuDayR--vozAToONS5ct_eHW6jd+Qytt0FkwS4+Lag@mail.gmail.com>
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Thu, 24 Mar 2016 13:21:52 +0100
-Message-ID: <CAPybu_0i2evFqM4W8FVJM9wwsTR-SxZEeCFH7z6L3c2YfcF2QA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] opencv: Add missing dependencies
+X-Received: by 10.50.92.5 with SMTP id ci5mr28621249igb.70.1458824465551; Thu,
+	24 Mar 2016 06:01:05 -0700 (PDT)
+Received: by 10.64.69.138 with HTTP; Thu, 24 Mar 2016 06:01:05 -0700 (PDT)
+In-Reply-To: <CAMKF1sqxb2y6KPxNbB5wVSvRjN2vCq5m_TT08TzjGFxvPBAp_A@mail.gmail.com>
+References: <CAMZfsd6f67zTGSsSfQdVViX69qykeNmKE6gP+u60WAOKGOWodA@mail.gmail.com>
+	<CAMKF1sqxb2y6KPxNbB5wVSvRjN2vCq5m_TT08TzjGFxvPBAp_A@mail.gmail.com>
+Date: Thu, 24 Mar 2016 09:01:05 -0400
+Message-ID: <CAMZfsd4OVdAiwpC9vMD=hJOCyEsoPp5v0+Ad-6xh5psYrirzCQ@mail.gmail.com>
+From: "Ryan Elkholy, PhD, PE" <ryanelkholy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-qt5] Unable to Build due to qtbase error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,64 +53,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2016 12:22:14 -0000
+X-List-Received-Date: Thu, 24 Mar 2016 13:01:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hi Martin
+I am using core-image-base. Isn't opengl already included? I see it as
+below when I use
 
-I will take a look to this next week
+bitbake custom-image-base -e | grep DISTRO_FEATURES
 
+DISTRO_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget
+usbhost wifi xattr nfs zeroconf pci 3g nfc ipv4 ipv6 libc-backtrace
+libc-big-macros libc-bsd libc-cxx-tests libc-catgets libc-charsets
+libc-crypt libc-crypt-ufc libc-db-aliases libc-envz libc-fcvt libc-fmtmsg
+libc-fstab libc-ftraverse libc-getlogin libc-idn libc-inet-anl libc-libm
+libc-locales libc-locale-code libc-memusage libc-nis libc-nsswitch
+libc-rcmd libc-rtld-debug libc-spawn libc-streams libc-sunrpc libc-utmp
+libc-utmpx libc-wordexp libc-posix-clang-wchar libc-posix-regexp
+libc-posix-regexp-glibc libc-posix-wchar-io largefile opengl ptest
+multiarch pulseaudio sysvinit bluez5"
 
-Thanks!!
+If not, how do I add it in local.conf as a distro feature? Please note that
+I did the following: DISTRO_FEATURES_remove = " x11 wayland"
 
-On Wed, Mar 23, 2016 at 9:53 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> It's also downloading something during do_configure which isn't acceptable:
-> http://errors.yoctoproject.org/Errors/Details/57094/
->
-> Everything should go through bitbake fetcher and premirror, so that builds
-> are reproducible (even after upstream sites are gone) or when user
-> explicitly disables network access.
->
-> Regards,
->
-> On Wed, Mar 23, 2016 at 3:34 PM, Martin Jansa <martin.jansa@gmail.com>
+For reference, here is what I have added to local.conf
+
+#BB_NUMBER_THREADS ?= "${@oe.utils.cpu_count()}"
+BB_NUMBER_THREADS = "8"
+#PARALLEL_MAKE ?= "-j ${@oe.utils.cpu_count()}"
+PARALLEL_MAKE = "-j 8"
+
+MACHINE = "valleyisland-64"
+
+SDKMACHINE ?= "x86_64"
+
+EXTRA_IMAGE_FEATURES = "debug-tweaks ssh-server-openssh tools-debug
+tools-sdk dev-pkgs"
+
+LICENSE_FLAGS_WHITELIST = "commercial"
+INHERIT += "rm_work"
+DISTRO_FEATURES_remove = " x11 wayland"
+IMAGE_INSTALL_append = " \
+    dbus \
+    openssh-sftp-server \
+    qtbase \
+    qt3d \
+    qtconnectivity \
+    qtmultimedia \
+    qtserialport \
+    qtwebsockets \
+    qtsvg \
+    cinematicexperience \
+    "
+
+On Thu, Mar 24, 2016 at 12:22 AM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> Do you have opengl in distro features
+> On Mar 23, 2016 7:49 PM, "Ryan Elkholy, PhD, PE" <ryanelkholy@gmail.com>
 > wrote:
->>
->> On Wed, Mar 23, 2016 at 02:05:41PM +0100, Ricardo Ribalda Delgado wrote:
->> > Hi Martin
->> >
->> > On Wed, Mar 23, 2016 at 11:12 AM, Martin Jansa <martin.jansa@gmail.com>
->> > wrote:
->> >
->> >
->> > > Still shows:
->> > > WARN: opencv: libopencv-dnn rdepends on protobuf, but it isn't a build
->> > > dependency?
->> > >
->> > > protobuf support in dnn probably depends on something else which is
->> > > also autodetected.
->> >
->> > if I just clone a clean version of meta-oe and meta-core and do a
->> > bitbake opencv i cannot replicate the error.
->> >
->> > Any idea of how to replicate it without having to do a bitbake world
->> > before bitbake opencv?
->>
->> Check temp/log.do_package if you see protobuf dependency being added for
->> libopencv-dnn package.
->>
->> If not then read configure script or sources to see what in
->> libopencv-dnn is being autodetected -> then build these autodetected
->> dependencies before rebuilding opencv and re-check the log.do_package
->> file.
->>
->> --
->> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 >
+> > Hello,
+> >
+> > I have been trying to build an image using meta-qt5 for quite a while
+> now.
+> > I am building using the meta-intel layer for an x86-64 architecture. The
+> > build keeps failing due to qtbase. The error log is here:
+> > http://pastebin.com/qcRQxTsH
+> >
+> > I cannot for the life of me figure out how to fix this error. Any help
+> > would be greatly appreciated!
+> >
+> > -Ryan
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
-
-
-
--- 
-Ricardo Ribalda
 
