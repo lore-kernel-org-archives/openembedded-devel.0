@@ -1,29 +1,52 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id 7C53B7318D
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2016 18:10:43 +0000 (UTC)
-Received: (qmail 11056 invoked by uid 1003); 24 Mar 2016 18:10:43 -0000
-Received: from unknown (HELO ?10.16.32.95?)
-	(philip@opensdr.com@207.114.172.147)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	24 Mar 2016 18:10:43 -0000
-To: openembedded-members@lists.openembedded.org,
-	Trevor Woerner <twoerner@gmail.com>, akuster808 <akuster808@gmail.com>, 
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Yocto Project <yocto@yoctoproject.org>
-References: <56DEF97F.9070306@balister.org> <56F2C618.3050205@gmail.com>
-	<20160323210850.GA5376@linux-yxv0> <1458767514382.89578@seescan.com>
-From: Philip Balister <philip@balister.org>
-Message-ID: <56F42DA1.4090902@balister.org>
-Date: Thu, 24 Mar 2016 11:10:41 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
+Return-Path: <rudolf.streif@gmail.com>
+Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
+	[209.85.220.41])
+	by mail.openembedded.org (Postfix) with ESMTP id E81B360110;
+	Thu, 24 Mar 2016 18:36:41 +0000 (UTC)
+Received: by mail-pa0-f41.google.com with SMTP id tt10so28958581pab.3;
+	Thu, 24 Mar 2016 11:36:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:user-agent:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=HTU98DcFcHyWfLS5J7113D72P8MRpKTOQYpsmj5imUg=;
+	b=h8a6zgNN5vbkZ3C/EIVvAOY84smyVi/IXhvE8wmnh3qwwb/YI5ynIbLkqzsPWCI2pp
+	SRHtFhsWvWcWc+PRxmA7U7fGVuIeUPfB9mPZA6wtd2fcE77/FxPcbawX1l528j403sPj
+	6rqahGGoWmj9D//TTfLd0PD2UWejCruUSbKDZBgTls2WX+G7hNU7tvaxfbRYUuokwAIU
+	svAuRjaN0nLDCyMykEyHnULLh6AsXw7hql6wXCS0Iw1Kdj/nSVPusuB1aTls6tEf7ByS
+	RDQuR01Gt6+5U41W5ds68JUg24MabwvXM8VinD2shYJKOiZRGM+cu+1iFlSvpgwlV38H
+	OVNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:user-agent
+	:in-reply-to:references:mime-version:content-transfer-encoding;
+	bh=HTU98DcFcHyWfLS5J7113D72P8MRpKTOQYpsmj5imUg=;
+	b=MYOcdtW46/fx741imlPX+Q2g5IywE9el5IeMRHL7b1iAcRhmiySXBUYRzdaiLNM1Ev
+	tM3jYyQ9rlWXfXCvLpi7ANwoyKBCREH4FHu7Tc3Lap3bNOHcJj/r+zuUi9my9PF2Mu+z
+	AEljxnCHwWRda4xEw7G+Y664czo79t14c82SUtKxs/tDXROF34BkXvsd+y5kCZWj7TZ7
+	sqw7hZUicZaYH6cimjEGmo4fF/6OIUjzDdL/tTKkkYR4gyeHbRKytFcjEb4rvNxTGNGg
+	FE8+7Ct0cvC9sMKc54ZAB6mp0kp20V9SaVpLFzdBSiEc2uchNZmjx8tuuPUTZOkvnrcn
+	NGYQ==
+X-Gm-Message-State: AD7BkJLs/kDzdgmNq6qjWkDz02EzAFmIHEefjvn5zGbPRXQUrItJxfLeqAuEREW6d5oEQQ==
+X-Received: by 10.66.191.225 with SMTP id hb1mr14851498pac.78.1458844602377;
+	Thu, 24 Mar 2016 11:36:42 -0700 (PDT)
+Received: from rjs-zotac.streifs.net (ip68-7-48-20.sd.sd.cox.net. [68.7.48.20])
+	by smtp.gmail.com with ESMTPSA id
+	qh8sm11674432pac.40.2016.03.24.11.36.41
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 24 Mar 2016 11:36:41 -0700 (PDT)
+From: Rudolf J Streif <rudolf.streif@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 24 Mar 2016 11:36:40 -0700
+Message-ID: <1604312.a7pP1GrPCb@rjs-zotac.streifs.net>
+User-Agent: KMail/4.14.10 (Linux/4.4.5-200.fc22.x86_64+debug; KDE/4.14.17;
+	x86_64; ; )
+In-Reply-To: <56F42DA1.4090902@balister.org>
+References: <56DEF97F.9070306@balister.org> <1458767514382.89578@seescan.com>
+	<56F42DA1.4090902@balister.org>
 MIME-Version: 1.0
-In-Reply-To: <1458767514382.89578@seescan.com>
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	openembedded-members@lists.openembedded.org,
+	openembedded-core <openembedded-core@lists.openembedded.org>
 Subject: Re: [yocto] [OE-core] OEDAM, April 8 in San Diego after ELC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -37,47 +60,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2016 18:10:46 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 24 Mar 2016 18:36:45 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-We are up to fifteen now and as noted will have some off site attendees
-and late sign ups.
+Since I happen to live in San Diego, I have been asking around for a potential meeting room (unfortunately, I don't have an office with a meeting room myself). I am currently working with the University of San Diego and the Catamaran/Bahia Hotel. Can't promise anything yet.
 
-Philip
+:rjs
 
-On 03/23/2016 02:11 PM, Fred Ollinger wrote:
-> I'm coming and I'm probably brining another person.
+
+On Thursday, March 24, 2016 11:10:41 AM Philip Balister wrote:
+> We are up to fifteen now and as noted will have some off site attendees
+> and late sign ups.
 > 
-> I still have to make the wiki account which failed for some reason before.
+> Philip
 > 
-> Frederick
-> ________________________________________
-> From: yocto-bounces@yoctoproject.org <yocto-bounces@yoctoproject.org> on behalf of Trevor Woerner <twoerner@gmail.com>
-> Sent: Wednesday, March 23, 2016 2:08 PM
-> To: akuster808; openembedded-devel@lists.openembedded.org; openembedded-core; Yocto Project; openembedded-members@lists.openembedded.org
-> Subject: Re: [yocto] [OE-core] [oe] OEDAM, April 8 in San Diego after ELC
+> On 03/23/2016 02:11 PM, Fred Ollinger wrote:
+> > I'm coming and I'm probably brining another person.
+> > 
+> > I still have to make the wiki account which failed for some reason before.
+> > 
+> > Frederick
+> > ________________________________________
+> > From: yocto-bounces@yoctoproject.org <yocto-bounces@yoctoproject.org> on behalf of Trevor Woerner <twoerner@gmail.com>
+> > Sent: Wednesday, March 23, 2016 2:08 PM
+> > To: akuster808; openembedded-devel@lists.openembedded.org; openembedded-core; Yocto Project; openembedded-members@lists.openembedded.org
+> > Subject: Re: [yocto] [OE-core] [oe] OEDAM, April 8 in San Diego after ELC
+> > 
+> > On Wed 2016-03-23 @ 09:36:40 AM, akuster808 wrote:
+> >> There are only 10 people signed up.
+> >> Is that enough people to justify the expense room or even meet?
+> > 
+> > I have no idea what the budget might be or what a room might cost. I'll leave
+> > it to those who do know to worry about the costs versus the benefits.
+> > 
+> > In any case I certainly think it's still worth meeting. A smaller, more
+> > focused group can sometimes get more done than a larger group. Secondly, it's
+> > my experience that more people always show up than sign up.
+> > 
+> > With a project like this there will always be things to discuss, and sometimes
+> > a discussion goes better in person rather than online.
+> > 
+> > Best regards,
+> >         Trevor
+> > --
+> > _______________________________________________
+> > yocto mailing list
+> > yocto@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/yocto
+> > 
 > 
-> On Wed 2016-03-23 @ 09:36:40 AM, akuster808 wrote:
->> There are only 10 people signed up.
->> Is that enough people to justify the expense room or even meet?
-> 
-> I have no idea what the budget might be or what a room might cost. I'll leave
-> it to those who do know to worry about the costs versus the benefits.
-> 
-> In any case I certainly think it's still worth meeting. A smaller, more
-> focused group can sometimes get more done than a larger group. Secondly, it's
-> my experience that more people always show up than sign up.
-> 
-> With a project like this there will always be things to discuss, and sometimes
-> a discussion goes better in person rather than online.
-> 
-> Best regards,
->         Trevor
-> --
-> _______________________________________________
-> yocto mailing list
-> yocto@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/yocto
-> 
+
 
