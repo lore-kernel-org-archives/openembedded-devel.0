@@ -1,24 +1,30 @@
-Return-Path: <Catalin.Enache@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EA7526080F
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 7C53B7318D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2016 17:35:18 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u2OHZIAu004330
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Mar 2016 10:35:18 -0700 (PDT)
-Received: from no3.corp.ad.wrs.com (128.224.124.137) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 24 Mar 2016 10:35:17 -0700
-From: Catalin Enache <catalin.enache@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 24 Mar 2016 19:37:03 +0200
-Message-ID: <1458841023-26902-1-git-send-email-catalin.enache@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Thu, 24 Mar 2016 18:10:43 +0000 (UTC)
+Received: (qmail 11056 invoked by uid 1003); 24 Mar 2016 18:10:43 -0000
+Received: from unknown (HELO ?10.16.32.95?)
+	(philip@opensdr.com@207.114.172.147)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	24 Mar 2016 18:10:43 -0000
+To: openembedded-members@lists.openembedded.org,
+	Trevor Woerner <twoerner@gmail.com>, akuster808 <akuster808@gmail.com>, 
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>
+References: <56DEF97F.9070306@balister.org> <56F2C618.3050205@gmail.com>
+	<20160323210850.GA5376@linux-yxv0> <1458767514382.89578@seescan.com>
+From: Philip Balister <philip@balister.org>
+Message-ID: <56F42DA1.4090902@balister.org>
+Date: Thu, 24 Mar 2016 11:10:41 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.6.0
 MIME-Version: 1.0
-Subject: [PATCH] net-snmp: fix some invalid paths
+In-Reply-To: <1458767514382.89578@seescan.com>
+Subject: Re: [yocto] [OE-core] OEDAM, April 8 in San Diego after ELC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,37 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Mar 2016 17:35:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 24 Mar 2016 18:10:46 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-Because the package is not built in place @srcdir@ is
-an absolute path to the source directory instead of ".".
+We are up to fifteen now and as noted will have some off site attendees
+and late sign ups.
 
-Because of this some target scripts like  net-snmp-create-v3-user
-and net-snmp-config that are using thisvariable in their *.in
-files (NSC_SRCDIR=@srcdir@) contain invalid paths.
+Philip
 
-Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
----
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-index 06f3707..63e0fc7 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-@@ -78,6 +78,10 @@ do_install_append() {
-     install -d ${D}${systemd_unitdir}/system
-     install -m 0644 ${WORKDIR}/snmpd.service ${D}${systemd_unitdir}/system
-     install -m 0644 ${WORKDIR}/snmptrapd.service ${D}${systemd_unitdir}/system
-+    sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
-+        -i ${D}${bindir}/net-snmp-create-v3-user
-+    sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
-+        -i ${D}${bindir}/net-snmp-config
- }
- 
- do_install_ptest() {
--- 
-2.7.4
-
+On 03/23/2016 02:11 PM, Fred Ollinger wrote:
+> I'm coming and I'm probably brining another person.
+> 
+> I still have to make the wiki account which failed for some reason before.
+> 
+> Frederick
+> ________________________________________
+> From: yocto-bounces@yoctoproject.org <yocto-bounces@yoctoproject.org> on behalf of Trevor Woerner <twoerner@gmail.com>
+> Sent: Wednesday, March 23, 2016 2:08 PM
+> To: akuster808; openembedded-devel@lists.openembedded.org; openembedded-core; Yocto Project; openembedded-members@lists.openembedded.org
+> Subject: Re: [yocto] [OE-core] [oe] OEDAM, April 8 in San Diego after ELC
+> 
+> On Wed 2016-03-23 @ 09:36:40 AM, akuster808 wrote:
+>> There are only 10 people signed up.
+>> Is that enough people to justify the expense room or even meet?
+> 
+> I have no idea what the budget might be or what a room might cost. I'll leave
+> it to those who do know to worry about the costs versus the benefits.
+> 
+> In any case I certainly think it's still worth meeting. A smaller, more
+> focused group can sometimes get more done than a larger group. Secondly, it's
+> my experience that more people always show up than sign up.
+> 
+> With a project like this there will always be things to discuss, and sometimes
+> a discussion goes better in person rather than online.
+> 
+> Best regards,
+>         Trevor
+> --
+> _______________________________________________
+> yocto mailing list
+> yocto@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/yocto
+> 
 
