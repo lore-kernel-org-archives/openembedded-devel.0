@@ -1,51 +1,52 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 78F1260290
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 6CC366AC00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Mar 2016 10:30:31 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id l68so21112546wml.0
+	Fri, 25 Mar 2016 10:32:37 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id l68so3296462wml.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Mar 2016 03:30:33 -0700 (PDT)
+	Fri, 25 Mar 2016 03:32:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=8so6QhvscEX0lSMdgDuzYn4x37GiHJGQdeM50OnSdqA=;
-	b=wsN4CPfsYi6kCp8/f1g6GebJuqJuH2lJEjeDoFuPzrg65IQdUILwY0Sea+IW77eL9w
-	i85ZZi80/7Y5ARMVs23u1ZxI+wLSn7tHhJIwpZgk8bSrqtFB4APUYywm6wnAg1qDVpi3
-	3E7zOaWsi6wcVtBodbyALiDLmL/Z66I1d/E2XovfBKwTnZw51KCWBXC9DRspuD3Wy9Fk
-	TrD8J3837+Yu1Q6lo7umFHFYGsRTnTHHE/tK4oMxaJkKG8CMK1TimziH9EZaThsd9wb8
-	JMVSsyo6T9TFqh4jUWGNQihrJeqSI++FAkVxN8/wlOdqm6nrhvYchPF2vCRGMSXsb+5r
-	VQtA==
+	bh=UYqBS9I3xiB2IuZ+Xto/VkpgBPa+Emfg7P4w0+fucR0=;
+	b=NOHTitqiVftAftLOQvVuIeHAHI0uz7PX9O/EvVFMZ2WPeNZt+tFap18Pc4mkBDQqs/
+	qymGw4c9OBOaHlFy9p1bELnk1mRGOvvhDjtvyWdt26ehQnm+bvIxvU4cx2BYCYh1qVwR
+	xOfGbfpgLSGNh92r1YeXUUz+sQoPK2NR/LWyKj+YA0ATI4Aykgor2eLQT+VkeRK1cOWr
+	CeHKgG4zg2e295A1o2bZ8sG48ktsTwNzHbY45xPXwklQ1fOJu4tD+f5RxSwRlQEQzh+U
+	PMPKtsVGPNjXXUyD6x4kDP+WBFqrIx11UF4Z4Z8fHHCM78vRGM/xTskqPh01IuisENHi
+	m23g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=8so6QhvscEX0lSMdgDuzYn4x37GiHJGQdeM50OnSdqA=;
-	b=j4oCMJFvC0ZgwzB6xRk3XQ13TZer3T152g5RYZBq3zrKVyDftS1CoiISxvR238HFUQ
-	bJWq5V3aIfQeQowYEZmq906WZ9DxuCmFkI9sELSL1I0h4RYpw5XiQT9VFvBwixu2IOD4
-	80qrFppcuDf+zJsqq05Ok5xHMQY3YJ0D/7rbK6/S8KzRFtyEn+StCvsZm5DIyq09k8ao
-	h71dmWgTL/H73HHmmcbi/msGpKj9r0EFQUPXdYzuqkxH7sgZasH4RrX9CKu+rMLUxbzS
-	1/LyUz8fF1on/O1cmjS6FgnDPiWzgNIDos/KtlpBbIo9+JEkgiMM7OQDeG0LQ05iL6a3
-	2ImA==
-X-Gm-Message-State: AD7BkJLmH6UThzn7Np40wVYqPgeFfI79FZE7LLnXWtT9blDWDXZ2F9uJ1z660lPByV699w==
-X-Received: by 10.28.109.4 with SMTP id i4mr35885150wmc.44.1458901832224;
-	Fri, 25 Mar 2016 03:30:32 -0700 (PDT)
+	bh=UYqBS9I3xiB2IuZ+Xto/VkpgBPa+Emfg7P4w0+fucR0=;
+	b=Goi6wE0ffSitghpRzNlb8Oa6zLVUwMvi6tZsYb04sAzbeOYUqZeNfjMll51vjDu23h
+	5kHNUmgFgacBTGvGC2rAx+DHCf/RkbO8dntG33pevZ3hIyS3a2mr8gndXeXGqxJilyxs
+	upUB5GcrOXBFmJ+Bq0eeYRk1FgSPcvsEbb4Dcfz2PY4IzNMBARHljPvRxRK6uKeJgEdz
+	v3flESiK+hLR4zrLPB2/+KfpVrUwcJJN5qBRADlodsTOTKNeOZUSANkS/fzNptlHxNRR
+	1oPOhEoNdFShpG4z9jBXv7tUrXMkhT2pBu+WiPfb5/fwvEOFxDh7yBTIRQCjFqTylRY3
+	r/1Q==
+X-Gm-Message-State: AD7BkJJBJ0mCge7eOj882FYLX/YkfmJ0QrYz0XCUMDl4rnzYMsgBWXqOWTj4NaF3Oj67bw==
+X-Received: by 10.194.134.202 with SMTP id pm10mr14152814wjb.111.1458901958431;
+	Fri, 25 Mar 2016 03:32:38 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	ll9sm11339156wjc.29.2016.03.25.03.30.31
-	for <openembedded-devel@lists.openembedded.org>
+	up6sm11379289wjc.6.2016.03.25.03.32.37
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 25 Mar 2016 03:30:31 -0700 (PDT)
+	Fri, 25 Mar 2016 03:32:37 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 25 Mar 2016 11:35:17 +0100
+Date: Fri, 25 Mar 2016 11:37:23 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160325103517.GA2555@jama>
-References: <1458557959-10500-1-git-send-email-jose.bollo@iot.bzh>
+Message-ID: <20160325103723.GB2555@jama>
+References: <1458862016-19466-1-git-send-email-stefan@agner.ch>
 MIME-Version: 1.0
-In-Reply-To: <1458557959-10500-1-git-send-email-jose.bollo@iot.bzh>
+In-Reply-To: <1458862016-19466-1-git-send-email-stefan@agner.ch>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH] libmicrohttp: update to version 0.9.48
+Cc: Chong.Lu@windriver.com, marcel@ziswiler.com,
+	Stefan Agner <stefan.agner@toradex.com>
+Subject: Re: [meta-multimedia][jethro][PATCH] gstreamer: fix argument parsing when using Bison 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,61 +59,187 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Mar 2016 10:30:32 -0000
-X-Groupsio-MsgNum: 60666
+X-List-Received-Date: Fri, 25 Mar 2016 10:32:39 -0000
+X-Groupsio-MsgNum: 60667
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PEIAKu/WMn1b1Hv9"
+	protocol="application/pgp-signature"; boundary="FkmkrVfFsRoUs1wW"
 Content-Disposition: inline
 
---PEIAKu/WMn1b1Hv9
-Content-Type: text/plain; charset=iso-8859-1
+--FkmkrVfFsRoUs1wW
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 21, 2016 at 11:59:19AM +0100, jose.bollo@iot.bzh wrote:
-> From: Jos=E9 Bollo <jose.bollo@iot.bzh>
-
-Unfortunately I've noticed this only after merging it:
-
-ERROR: libmicrohttpd-0.9.48-r0 do_configure: QA Issue: libmicrohttpd:
-configure was passed unrecognised options: --disable-spdy
-[unknown-configure-option]
-
-Please fix soon with follow-up patch or I'll revert this.
-
+On Thu, Mar 24, 2016 at 04:26:56PM -0700, Stefan Agner wrote:
+> From: Stefan Agner <stefan.agner@toradex.com>
 >=20
-> Change-Id: I33a1acf8360d074a3310f9691ac939fe70a99f3e
-> Signed-off-by: Jos=E9 Bollo <jose.bollo@iot.bzh>
+> Remove the argument fix patch and add a patch which fixes the
+> grammer.y Bison input file. YYLEX_PARAM seems to be no longer
+> supported and has been replaced with %parse-param which has
+> been introduced already in 2003.
+>=20
+> This fixes a segmentation fault when launching gst-launch-0.10.
+
+Is this needed in master branch as well?
+
+All changes for released branch should go to master first.
+
+> Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
 > ---
->  .../{libmicrohttpd_0.9.34.bb =3D> libmicrohttpd_0.9.48.bb}              =
-| 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.34.bb =
-=3D> libmicrohttpd_0.9.48.bb} (86%)
+> This is the stack trace of the segmentation fault:
+> (gdb) bt=20
+> #0  priv_gst_parse_yylex (yylval_param=3Dyylval_param@entry=3D0xbe8a4224,=
+ yyscanner=3D0xc8) at lex.priv_gst_parse_yy.c:1153
+> #1  0x4022d712 in priv_gst_parse_yyparse (scanner=3D<optimized out>, grap=
+h=3Dgraph@entry=3D0xbe8a47ec) at grammar.tab.c:1821
+> #2  0x4022f18c in priv_gst_parse_launch (
+>     str=3D0x94f28 "filesrc location=3D/home/root_2p_key60_q90_aac128_44.m=
+p4 ! qtdemuxemux demux.video_00 ! nv_omx_h264dec ! nv_gl_eglimagesink demux=
+=2Eaudio_00 ! nv_omx_aacdec ! alsasink device=3Dhw:0,0 ",=20
+>     error=3Derror@entry=3D0xbe8a4910, ctx=3Dctx@entry=3D0x0, flags=3Dflag=
+s@entry=3DGST_PARSE_FLAG_NONE) at /usr/src/debug/gstreamer/0.10.36-r2/gstre=
+amer-0.10.36/gst/parse/grammar.y:927
+> #3  0x402277b8 in gst_parse_launch_full (
+>     pipeline_description=3D0x94f28 "filesrc location=3D/home/root_2p_key6=
+0_q90_aac128_44.mp4 ! qtdemuxemux demux.video_00 ! nv_omx_h264dec ! nv_gl_e=
+glimagesink demux.audio_00 ! nv_omx_aacdec ! alsasink device=3Dhw:0,0 ", co=
+ntext=3Dcontext@entry=3D0x0, flags=3Dflags@entry=3DGST_PARSE_FLAG_NONE, err=
+or=3Derror@entry=3D0xbe8a4910) at /usr/src/debug/gstreamer/0.10.36-r2/gstre=
+amer-0.10.36/gst/gstparse.c:336
+> #4  0x40227968 in gst_parse_launchv_full (argv=3Dargv@entry=3D0x7ad50, co=
+ntext=3Dcontext@entry=3D0x0, flags=3Dflags@entry=3DGST_PARSE_FLAG_NONE, err=
+or=3Derror@entry=3D0xbe8a4910)
+>     at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/gstparse=
+=2Ec:272
+> #5  0x402279f2 in gst_parse_launchv (argv=3Dargv@entry=3D0x7ad50, error=
+=3Derror@entry=3D0xbe8a4910) at /usr/src/debug/gstreamer/0.10.36-r2/gstream=
+er-0.10.36/gst/gstparse.c:224
+> #6  0x0000a6d8 in main (argc=3D16, argv=3D0xbe8a4ca4) at /usr/src/debug/g=
+streamer/0.10.36-r2/gstreamer-0.10.36/tools/gst-launch.c:1031
 >=20
-> diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.b=
-b b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
-> similarity index 86%
-> rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-> rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
-> index e3c833b..6e7ad26 100644
-> --- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-> +++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
-> @@ -6,8 +6,8 @@ SECTION =3D "net"
->  DEPENDS =3D "libgcrypt gnutls file"
+>  ...01-parse-make-grammar.y-work-with-Bison-3.patch | 35 ++++++++++++++++=
+++++++
+>  ...mer-change-priv_gst_parse_yylex-arguments.patch | 33 ----------------=
+----
+>  .../gstreamer-0.10/gstreamer_0.10.36.bb            |  2 +-
+>  3 files changed, 36 insertions(+), 34 deletions(-)
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+reamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch
+>  delete mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+reamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
+>=20
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-=
+0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch b/meta-multimedia=
+/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-gramma=
+r.y-work-with-Bison-3.patch
+> new file mode 100644
+> index 0000000..dc2d606
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36=
+/0001-parse-make-grammar.y-work-with-Bison-3.patch
+> @@ -0,0 +1,35 @@
+> +From 60516f4798894f958fc53b470e1283318d0f8706 Mon Sep 17 00:00:00 2001
+> +From: Kerrick Staley <kerrick@kerrickstaley.com>
+> +Date: Tue, 20 Aug 2013 23:59:29 -0700
+> +Subject: [PATCH 1/2] parse: make grammar.y work with Bison 3
+> +
+> +YYLEX_PARAM is no longer supported in Bison 3.
+> +
+> +https://bugzilla.gnome.org/show_bug.cgi?id=3D706462
+> +---
+> + gst/parse/grammar.y | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/gst/parse/grammar.y b/gst/parse/grammar.y
+> +index 24fc87b..7f9dd16 100644
+> +--- a/gst/parse/grammar.y
+> ++++ b/gst/parse/grammar.y
+> +@@ -26,7 +26,6 @@
+> +  */
+> +=20
+> + #define YYERROR_VERBOSE 1
+> +-#define YYLEX_PARAM scanner
+> +=20
+> + #define YYENABLE_NLS 0
+> +=20
+> +@@ -648,6 +647,7 @@ static int yyerror (void *scanner, graph_t *graph, c=
+onst char *s);
+> + %right '.'
+> + %left '!' '=3D'
+> +=20
+> ++%lex-param { void *scanner }
+> + %parse-param { void *scanner }
+> + %parse-param { graph_t *graph }
+> + %pure-parser
+> +--=20
+> +2.7.2
+> +
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-=
+0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch b/meta-multim=
+edia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-p=
+riv_gst_parse_yylex-arguments.patch
+> deleted file mode 100644
+> index bf93cb2..0000000
+> --- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36=
+/gstreamer-change-priv_gst_parse_yylex-arguments.patch
+> +++ /dev/null
+> @@ -1,33 +0,0 @@
+> -gstreamer: change priv_gst_parse_yylex arguments
+> -
+> -Change priv_gst_parse_yylex to fit new bison version, else we will
+> -get following error:
+> -
+> -| grammar.tab.c: In function 'priv_gst_parse_yyparse':
+> -| grammar.tab.c:67:25: error: too few arguments to function 'priv_gst_pa=
+rse_yylex'
+> -|  #define yylex           priv_gst_parse_yylex
+> -|                          ^
+> -
+> -Upstream-Status: Pending
+> -
+> -Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+> ----
+> - gst/parse/grammar.y | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -diff --git a/gst/parse/grammar.y b/gst/parse/grammar.y
+> -index 24fc87b..24fe906 100644
+> ---- a/gst/parse/grammar.y
+> -+++ b/gst/parse/grammar.y
+> -@@ -36,7 +36,7 @@
+> -=20
+> - typedef void* yyscan_t;
+> -=20
+> --int priv_gst_parse_yylex (void * yylval_param , yyscan_t yyscanner);
+> -+int priv_gst_parse_yylex (yyscan_t yyscanner);
+> - int priv_gst_parse_yylex_init (yyscan_t scanner);
+> - int priv_gst_parse_yylex_destroy (yyscan_t scanner);
+> - struct yy_buffer_state * priv_gst_parse_yy_scan_string (char* , yyscan_=
+t);
+> ---=20
+> -1.9.1
+> -
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_=
+0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.=
+10.36.bb
+> index 5b30603..ad7cf99 100644
+> --- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36=
+=2Ebb
+> +++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36=
+=2Ebb
+> @@ -15,7 +15,7 @@ SRC_URI =3D "http://gstreamer.freedesktop.org/src/gstre=
+amer/gstreamer-${PV}.tar.bz
+>             file://check_fix.patch \
+>             file://gst-inspect-check-error.patch \
+>             file://0001-baseparse-Fix-self-comparison-always-evaluates-to=
+-tr.patch \
+> -           file://gstreamer-change-priv_gst_parse_yylex-arguments.patch \
+> +           file://0001-parse-make-grammar.y-work-with-Bison-3.patch \
+>  "
 > =20
->  SRC_URI =3D "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
-> -SRC_URI[md5sum] =3D "2947eee13c2c8affb95023a0cb6fda0c"
-> -SRC_URI[sha256sum] =3D "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843be=
-421a040be1b25a88"
-> +SRC_URI[md5sum] =3D "9c298c890088a91fe0d7ac3fec9d0097"
-> +SRC_URI[sha256sum] =3D "87667e158f2bf8c691a002e256ffe30885d4121a9ee4143a=
-f0320c47cdf8a2a4"
-> =20
->  inherit autotools lib_package
-> =20
+>  SRC_URI[md5sum] =3D "a0cf7d6877f694a1a2ad2b4d1ecb890b"
 > --=20
-> 2.1.4
+> 1.9.1
 >=20
 > --=20
 > _______________________________________________
@@ -123,16 +250,16 @@ f0320c47cdf8a2a4"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---PEIAKu/WMn1b1Hv9
+--FkmkrVfFsRoUs1wW
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlb1FGQACgkQN1Ujt2V2gBxzPwCfZvPhirEn7314AjQW1AGTVW9x
-PhQAoKX747JSU8YlqLMdmPqMl7rHL4fU
-=RaxA
+iEYEARECAAYFAlb1FOMACgkQN1Ujt2V2gBwShwCfab30g27Kz/iizjaZdn3ke1g4
+XRUAn2SWTP4mgCMEB8V7Xo9ygE1Tgw8A
+=dpOl
 -----END PGP SIGNATURE-----
 
---PEIAKu/WMn1b1Hv9--
+--FkmkrVfFsRoUs1wW--
