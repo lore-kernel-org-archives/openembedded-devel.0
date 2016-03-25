@@ -1,27 +1,48 @@
-Return-Path: <stefan@agner.ch>
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B82E600B3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Mar 2016 18:19:17 +0000 (UTC)
-Received: from webmail.kmu-office.ch (unknown [178.209.48.103])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id 4A0975C0346;
-	Fri, 25 Mar 2016 19:18:21 +0100 (CET)
+Return-Path: <ryanelkholy@gmail.com>
+Received: from mail-io0-f182.google.com (mail-io0-f182.google.com
+	[209.85.223.182])
+	by mail.openembedded.org (Postfix) with ESMTP id DA1B16FEE0;
+	Fri, 25 Mar 2016 20:32:21 +0000 (UTC)
+Received: by mail-io0-f182.google.com with SMTP id e3so10230465ioa.1;
+	Fri, 25 Mar 2016 13:32:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc; bh=mP9ZmWrK14g7vy9TmiFPol915DmC2gCdpsmzSXOb6/0=;
+	b=p7Bxxa3HOGPhska/mBxe1cqGQSDIG45Ho8RC7ArikFXktWCziTnoBuN22NHG1QAKDd
+	9wwpVB41yTy/HBiUcUNkMfX4kTEJrFh2ueMo0p/y2HG3YY0UoY28zHHLW+SdDgqJxyxF
+	PvnBlkSA41rMNbpe3XVYQsGffkgjOBPpURFJjXPeUNIXcM+Jdy5iEdTzO+ZngAg/1HAC
+	TPfOPHax/LYorUlv9XjjwinPiLFdBnEeX6g0Enx1reb9uf5sEM5O4+LiPkNp+nnprULY
+	HPjT9fTpipbWYMMxULhMAN8A8VJhTsGYD88MPKvJBk3ojH05u8eV6skgAXtInJIUB2pY
+	ebHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc;
+	bh=mP9ZmWrK14g7vy9TmiFPol915DmC2gCdpsmzSXOb6/0=;
+	b=aLWaDcbePyGMVchTnxUbe3Puu6gujHsNvevXXkNPbzEympS3GhyZ1nmQVgqv/iEFOF
+	R7JGDKxDbvYZvPLOcqRVAMCeLhSDLLxI1UWOnxRK+D3d9wo0Hcij8EPzwVRwRmCx271H
+	+42iIF7TgXGe+P73loNB8XYL9CYYN5ofZ8r4WNal22G1BSUGgdqaOhPTyA0r7wLMOU1O
+	h/M55PCP6WWlFSPnuQk6PFk1hwFXboybc0wEvIfKbD9lplbOZjJ54qgvnNZXQEI+uuRr
+	Eoq1tPpo+ZCSoUYOW7JSF3eDGq6E9iDC1zQnZG2GiAEUZGDMWnOHvvUbfe0RlpdLPQI6
+	hcQQ==
+X-Gm-Message-State: AD7BkJKxIFjSOrgGagZjk3NP5bE4gfXJg0l3ZZQaTsw2zgenF7/Vl5xbx25sLFpKezdPF5+br5SqFq22U8t7yA==
 MIME-Version: 1.0
-Date: Fri, 25 Mar 2016 11:16:13 -0700
-From: Stefan Agner <stefan@agner.ch>
+X-Received: by 10.107.6.40 with SMTP id 40mr15666220iog.176.1458937941763;
+	Fri, 25 Mar 2016 13:32:21 -0700 (PDT)
+Received: by 10.64.69.138 with HTTP; Fri, 25 Mar 2016 13:32:21 -0700 (PDT)
+In-Reply-To: <1604312.a7pP1GrPCb@rjs-zotac.streifs.net>
+References: <56DEF97F.9070306@balister.org> <1458767514382.89578@seescan.com>
+	<56F42DA1.4090902@balister.org>
+	<1604312.a7pP1GrPCb@rjs-zotac.streifs.net>
+Date: Fri, 25 Mar 2016 16:32:21 -0400
+Message-ID: <CAMZfsd43wWQTZGp=FWvHATXyvY2YQASaiSAWdeatS=hviPQ4uA@mail.gmail.com>
+From: "Ryan Elkholy, PhD, PE" <ryanelkholy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20160325103723.GB2555@jama>
-References: <1458862016-19466-1-git-send-email-stefan@agner.ch>
-	<20160325103723.GB2555@jama>
-Message-ID: <f652e665e55a2c4b8c28b37918fb4bfb@agner.ch>
-X-Sender: stefan@agner.ch
-User-Agent: Roundcube Webmail/1.1.3
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1458929901; bh=YqcYP8rhXMKAmwxdERS4bFQTVGvlVIH/TPmtv+FhbFg=;
-	h=MIME-Version:Content-Type:Content-Transfer-Encoding:Date:From:To:Cc:Subject:In-Reply-To:References:Message-ID;
-	b=qUFB1NKS4b5z3T5misSeWxDjKvED195Rk9wh9mSkJL3JiawmKhomdUtu5iAzkiGcLDvaAX7tgHaVNtmRM0JV4uwjcGoBD/ERh5SatbCsewLp5JG9n9BigylA42ufY15b544uJ321XDfFXX5YFcL5cEXE/uOEnZp8fKDttzJoKwY=
-Cc: marcel@ziswiler.com, Stefan Agner <stefan.agner@toradex.com>
-Subject: Re: [meta-multimedia][jethro][PATCH] gstreamer: fix argument parsing when using Bison 3
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	openembedded-members@lists.openembedded.org,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [yocto] [OE-core] OEDAM, April 8 in San Diego after ELC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,155 +55,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Mar 2016 18:19:20 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 25 Mar 2016 20:32:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 2016-03-25 03:37, Martin Jansa wrote:
-> On Thu, Mar 24, 2016 at 04:26:56PM -0700, Stefan Agner wrote:
->> From: Stefan Agner <stefan.agner@toradex.com>
->>
->> Remove the argument fix patch and add a patch which fixes the
->> grammer.y Bison input file. YYLEX_PARAM seems to be no longer
->> supported and has been replaced with %parse-param which has
->> been introduced already in 2003.
->>
->> This fixes a segmentation fault when launching gst-launch-0.10.
-> 
-> Is this needed in master branch as well?
+Is this something beneficial for beginners who are getting their feet wet
+in open embedded? Also, where do we register?
 
-Yes.
+On Thu, Mar 24, 2016 at 2:36 PM, Rudolf J Streif <rudolf.streif@gmail.com>
+wrote:
 
-> All changes for released branch should go to master first.
-> 
-
-Sorry, should have added [master] to the subject.
-
---
-Stefan
-
->> Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
->> ---
->> This is the stack trace of the segmentation fault:
->> (gdb) bt
->> #0  priv_gst_parse_yylex (yylval_param=yylval_param@entry=0xbe8a4224, yyscanner=0xc8) at lex.priv_gst_parse_yy.c:1153
->> #1  0x4022d712 in priv_gst_parse_yyparse (scanner=<optimized out>, graph=graph@entry=0xbe8a47ec) at grammar.tab.c:1821
->> #2  0x4022f18c in priv_gst_parse_launch (
->>     str=0x94f28 "filesrc location=/home/root_2p_key60_q90_aac128_44.mp4 ! qtdemuxemux demux.video_00 ! nv_omx_h264dec ! nv_gl_eglimagesink demux.audio_00 ! nv_omx_aacdec ! alsasink device=hw:0,0 ",
->>     error=error@entry=0xbe8a4910, ctx=ctx@entry=0x0, flags=flags@entry=GST_PARSE_FLAG_NONE) at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/parse/grammar.y:927
->> #3  0x402277b8 in gst_parse_launch_full (
->>     pipeline_description=0x94f28 "filesrc location=/home/root_2p_key60_q90_aac128_44.mp4 ! qtdemuxemux demux.video_00 ! nv_omx_h264dec ! nv_gl_eglimagesink demux.audio_00 ! nv_omx_aacdec ! alsasink device=hw:0,0 ", context=context@entry=0x0, flags=flags@entry=GST_PARSE_FLAG_NONE, error=error@entry=0xbe8a4910) at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/gstparse.c:336
->> #4  0x40227968 in gst_parse_launchv_full (argv=argv@entry=0x7ad50, context=context@entry=0x0, flags=flags@entry=GST_PARSE_FLAG_NONE, error=error@entry=0xbe8a4910)
->>     at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/gstparse.c:272
->> #5  0x402279f2 in gst_parse_launchv (argv=argv@entry=0x7ad50, error=error@entry=0xbe8a4910) at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/gstparse.c:224
->> #6  0x0000a6d8 in main (argc=16, argv=0xbe8a4ca4) at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/tools/gst-launch.c:1031
->>
->>  ...01-parse-make-grammar.y-work-with-Bison-3.patch | 35 ++++++++++++++++++++++
->>  ...mer-change-priv_gst_parse_yylex-arguments.patch | 33 --------------------
->>  .../gstreamer-0.10/gstreamer_0.10.36.bb            |  2 +-
->>  3 files changed, 36 insertions(+), 34 deletions(-)
->>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch
->>  delete mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
->>
->> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch
->> new file mode 100644
->> index 0000000..dc2d606
->> --- /dev/null
->> +++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch
->> @@ -0,0 +1,35 @@
->> +From 60516f4798894f958fc53b470e1283318d0f8706 Mon Sep 17 00:00:00 2001
->> +From: Kerrick Staley <kerrick@kerrickstaley.com>
->> +Date: Tue, 20 Aug 2013 23:59:29 -0700
->> +Subject: [PATCH 1/2] parse: make grammar.y work with Bison 3
->> +
->> +YYLEX_PARAM is no longer supported in Bison 3.
->> +
->> +https://bugzilla.gnome.org/show_bug.cgi?id=706462
->> +---
->> + gst/parse/grammar.y | 2 +-
->> + 1 file changed, 1 insertion(+), 1 deletion(-)
->> +
->> +diff --git a/gst/parse/grammar.y b/gst/parse/grammar.y
->> +index 24fc87b..7f9dd16 100644
->> +--- a/gst/parse/grammar.y
->> ++++ b/gst/parse/grammar.y
->> +@@ -26,7 +26,6 @@
->> +  */
->> +
->> + #define YYERROR_VERBOSE 1
->> +-#define YYLEX_PARAM scanner
->> +
->> + #define YYENABLE_NLS 0
->> +
->> +@@ -648,6 +647,7 @@ static int yyerror (void *scanner, graph_t *graph, const char *s);
->> + %right '.'
->> + %left '!' '='
->> +
->> ++%lex-param { void *scanner }
->> + %parse-param { void *scanner }
->> + %parse-param { graph_t *graph }
->> + %pure-parser
->> +--
->> +2.7.2
->> +
->> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
->> deleted file mode 100644
->> index bf93cb2..0000000
->> --- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
->> +++ /dev/null
->> @@ -1,33 +0,0 @@
->> -gstreamer: change priv_gst_parse_yylex arguments
->> -
->> -Change priv_gst_parse_yylex to fit new bison version, else we will
->> -get following error:
->> -
->> -| grammar.tab.c: In function 'priv_gst_parse_yyparse':
->> -| grammar.tab.c:67:25: error: too few arguments to function 'priv_gst_parse_yylex'
->> -|  #define yylex           priv_gst_parse_yylex
->> -|                          ^
->> -
->> -Upstream-Status: Pending
->> -
->> -Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
->> ----
->> - gst/parse/grammar.y | 2 +-
->> - 1 file changed, 1 insertion(+), 1 deletion(-)
->> -
->> -diff --git a/gst/parse/grammar.y b/gst/parse/grammar.y
->> -index 24fc87b..24fe906 100644
->> ---- a/gst/parse/grammar.y
->> -+++ b/gst/parse/grammar.y
->> -@@ -36,7 +36,7 @@
->> -
->> - typedef void* yyscan_t;
->> -
->> --int priv_gst_parse_yylex (void * yylval_param , yyscan_t yyscanner);
->> -+int priv_gst_parse_yylex (yyscan_t yyscanner);
->> - int priv_gst_parse_yylex_init (yyscan_t scanner);
->> - int priv_gst_parse_yylex_destroy (yyscan_t scanner);
->> - struct yy_buffer_state * priv_gst_parse_yy_scan_string (char* , yyscan_t);
->> ---
->> -1.9.1
->> -
->> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
->> index 5b30603..ad7cf99 100644
->> --- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
->> +++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
->> @@ -15,7 +15,7 @@ SRC_URI = "http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.bz
->>             file://check_fix.patch \
->>             file://gst-inspect-check-error.patch \
->>             file://0001-baseparse-Fix-self-comparison-always-evaluates-to-tr.patch \
->> -           file://gstreamer-change-priv_gst_parse_yylex-arguments.patch \
->> +           file://0001-parse-make-grammar.y-work-with-Bison-3.patch \
->>  "
->>
->>  SRC_URI[md5sum] = "a0cf7d6877f694a1a2ad2b4d1ecb890b"
->> --
->> 1.9.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Since I happen to live in San Diego, I have been asking around for a
+> potential meeting room (unfortunately, I don't have an office with a
+> meeting room myself). I am currently working with the University of San
+> Diego and the Catamaran/Bahia Hotel. Can't promise anything yet.
+>
+> :rjs
+>
+>
+> On Thursday, March 24, 2016 11:10:41 AM Philip Balister wrote:
+> > We are up to fifteen now and as noted will have some off site attendees
+> > and late sign ups.
+> >
+> > Philip
+> >
+> > On 03/23/2016 02:11 PM, Fred Ollinger wrote:
+> > > I'm coming and I'm probably brining another person.
+> > >
+> > > I still have to make the wiki account which failed for some reason
+> before.
+> > >
+> > > Frederick
+> > > ________________________________________
+> > > From: yocto-bounces@yoctoproject.org <yocto-bounces@yoctoproject.org>
+> on behalf of Trevor Woerner <twoerner@gmail.com>
+> > > Sent: Wednesday, March 23, 2016 2:08 PM
+> > > To: akuster808; openembedded-devel@lists.openembedded.org;
+> openembedded-core; Yocto Project;
+> openembedded-members@lists.openembedded.org
+> > > Subject: Re: [yocto] [OE-core] [oe] OEDAM, April 8 in San Diego after
+> ELC
+> > >
+> > > On Wed 2016-03-23 @ 09:36:40 AM, akuster808 wrote:
+> > >> There are only 10 people signed up.
+> > >> Is that enough people to justify the expense room or even meet?
+> > >
+> > > I have no idea what the budget might be or what a room might cost.
+> I'll leave
+> > > it to those who do know to worry about the costs versus the benefits.
+> > >
+> > > In any case I certainly think it's still worth meeting. A smaller, more
+> > > focused group can sometimes get more done than a larger group.
+> Secondly, it's
+> > > my experience that more people always show up than sign up.
+> > >
+> > > With a project like this there will always be things to discuss, and
+> sometimes
+> > > a discussion goes better in person rather than online.
+> > >
+> > > Best regards,
+> > >         Trevor
+> > > --
+> > > _______________________________________________
+> > > yocto mailing list
+> > > yocto@yoctoproject.org
+> > > https://lists.yoctoproject.org/listinfo/yocto
+> > >
+> >
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
