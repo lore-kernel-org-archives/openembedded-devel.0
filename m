@@ -1,26 +1,61 @@
-Return-Path: <Guojian.Zhou@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 94219731E0
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-pf0-f180.google.com (mail-pf0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id F18CD6E666
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Mar 2016 01:22:03 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u2P1Lxk2006581
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 24 Mar 2016 18:21:59 -0700 (PDT)
-Received: from pek-lpgtest4.wrs.com (128.224.153.84) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 24 Mar 2016 18:21:59 -0700
-From: <guojian.zhou@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 25 Mar 2016 09:21:54 +0800
-Message-ID: <1458868914-30827-2-git-send-email-guojian.zhou@windriver.com>
-X-Mailer: git-send-email 1.7.12.4
-In-Reply-To: <1458868914-30827-1-git-send-email-guojian.zhou@windriver.com>
-References: <1458868914-30827-1-git-send-email-guojian.zhou@windriver.com>
+	Fri, 25 Mar 2016 10:12:12 +0000 (UTC)
+Received: by mail-pf0-f180.google.com with SMTP id x3so79872157pfb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Mar 2016 03:12:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:cc; bh=4SDdwN+uRN46g4NVo4in+oZlyrslnc/XQQ/hJVAnbMw=;
+	b=Bv0ZEz5he+6AOWxHnWtMK1KTwA6AmThivHWVOrRXpqWs3b73TbT+PR3cFzh2iFGNd+
+	pQnztrTJane0ad44VBLkLn/xqIcO87sJvIKnwGXIcu4nXNM50XSIWorZXtIPGhdU847W
+	rLdUTFnrOohKbMx/v+k84pD6EVsYkmI2KTIkdGztAr5hvnLZh9OK7Dx0wjsTduL+50It
+	TRXkOsLXe5xMr53EX6ZCQKd7BS+Uz1bcqFufNBAN7aHt+lfBQQHnkRQuQt42gd4C9Qlj
+	Vo0/jmg/4AbpYt1CI+ykGPFZrXB7gEbe70Qx1TLm0oz5OsxWthkUX07FdjVCm9/jieI8
+	8Gnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc;
+	bh=4SDdwN+uRN46g4NVo4in+oZlyrslnc/XQQ/hJVAnbMw=;
+	b=C9Hq/2nQqFuhTTv/iB/p+hRIFePHxbXwB8w8tCulUUKT8LmuN1m16UX5UvfnxDNUO8
+	98uzwTEfnPeyio11hVYgHCYg6qRG8cMjX3drWBLkKV7PeWenhAiFKm906RtW2oxWMwD6
+	XMiZinKv1jP4uf+ra+3YCP5wqXQMuGl6c1XhuV/VY0/AivkbiNwRBlTBhZiY7WcsXx7/
+	MSfJrlPC9+MNMkOGd2B61Dg5FKVvsIXC9sZ8KyFnThOS2mleTc+WRtyhOl50g3Gi50G7
+	GYVliHYqlRNbsIFvb37q26q0cv/iKC4m5E85NF/ucA2RH4QtfX57LePXv3QtLNv8S5df
+	2HGw==
+X-Gm-Message-State: AD7BkJL4oAiYlXlj//8CglllKrZR9FypCfZ6dWbcq5TzWPl5o9KLLuDFPqMtJc0hw7LjaQ==
+X-Received: by 10.98.14.2 with SMTP id w2mr19811284pfi.35.1458900732942;
+	Fri, 25 Mar 2016 03:12:12 -0700 (PDT)
+Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com.
+	[209.85.192.177]) by smtp.gmail.com with ESMTPSA id
+	l4sm15444246pfi.73.2016.03.25.03.12.10
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 25 Mar 2016 03:12:11 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-pf0-f177.google.com with SMTP id u190so80080359pfb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Mar 2016 03:12:10 -0700 (PDT)
 MIME-Version: 1.0
-Cc: otavio@ossystems.com.br, eric@eukrea.com
-Subject: [meta-browser][PATCH] firefox: fix install issue and do_package_qa issues
+X-Received: by 10.98.80.10 with SMTP id e10mr19724400pfb.141.1458900730601;
+	Fri, 25 Mar 2016 03:12:10 -0700 (PDT)
+Received: by 10.67.3.163 with HTTP; Fri, 25 Mar 2016 03:12:10 -0700 (PDT)
+In-Reply-To: <1458868914-30827-2-git-send-email-guojian.zhou@windriver.com>
+References: <1458868914-30827-1-git-send-email-guojian.zhou@windriver.com>
+	<1458868914-30827-2-git-send-email-guojian.zhou@windriver.com>
+Date: Fri, 25 Mar 2016 07:12:10 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKr=KKgoj9xFQAfB-2wr60DEL6KMrr5ft9ezQMRJ_3YnKA@mail.gmail.com>
+Message-ID: <CAP9ODKr=KKgoj9xFQAfB-2wr60DEL6KMrr5ft9ezQMRJ_3YnKA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-browser][PATCH] firefox: fix install issue and do_package_qa issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,86 +68,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Mar 2016 01:22:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 25 Mar 2016 10:12:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Guojian Zhou <guojian.zhou@windriver.com>
+On Thu, Mar 24, 2016 at 10:21 PM,  <guojian.zhou@windriver.com> wrote:
+...
+> 2. Add the "--libdir=${libdir}" into the EXTRA_OECONF to make sure these
+> library files could be installed into the /usr/lib64 in the 64 bits OS.
 
-1. Fix the firefox install missing the "usr/lib64/firefox/defaults/pref" directory issue.
+This should be set, as prefix, in firefox/mozconfig.
 
-| make[1]: Leaving directory `tmp/work/core2-64-wrs-linux/firefox/38.6.1esr-r0/mozilla-esr38/firefox-build-dir'
-| install: target
-'tmp/work/core2-64-wrs-linux/firefox/38.6.1esr-r0/image/usr/lib64/firefox/defaults/pref/' is not a directory: No such file or directory
-| WARNING: tmp/work/core2-64-wrs-linux/firefox/38.6.1esr-r0/temp/run.do_install.329:1 exit 1 from
+All the rest looks fine.
 
-2. Add the "--libdir=${libdir}" into the EXTRA_OECONF to make sure these
-library files could be installed into the /usr/lib64 in the 64 bits OS.
-
-WARNING: QA Issue: firefox: Files/directories were installed but not
-shipped in any package:
-  /usr/lib64/firefox
-  /usr/lib64/firefox-devel-38.6/xpcom-config.h
-  /usr/lib64/firefox-devel-38.6/idl
-  /usr/lib64/firefox-devel-38.6/include
-  /usr/lib64/firefox-devel-38.6/bin
-
-3. Fix some do_package_qa warning issue which comes from the commit e045c68c41f65ba3b0b22d06022ea6c53e072ab5
-
-NOTE: recipe firefox-38.6.1esr-r0: task do_package_qa: Started
-ERROR: QA Issue: non -staticdev package contains static .a library:
-firefox-dev path
-'work/core2-64-wrs-linux/firefox/38.6.1esr-r0/packages-split/firefox-dev/usr/lib64/firefox-devel-38.6/sdk/lib/libcrmf.a'
-[staticdev]
-ERROR: QA run found fatal errors. Please consider fixing them.
-ERROR: Function failed: do_package_qa
-ERROR: Logfile of failure stored in:
-tmp/work/core2-64-wrs-linux/firefox/38.6.1esr-r0/temp/log.do_package_qa.90631
-NOTE: recipe firefox-38.6.1esr-r0: task do_package_qa: Failed
-
-Signed-off-by: Guojian Zhou <guojian.zhou@windriver.com>
----
- recipes-mozilla/firefox/firefox_38.6.1esr.bb | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
-
-diff --git a/recipes-mozilla/firefox/firefox_38.6.1esr.bb b/recipes-mozilla/firefox/firefox_38.6.1esr.bb
-index 4e4a7aa..ba04f41 100644
---- a/recipes-mozilla/firefox/firefox_38.6.1esr.bb
-+++ b/recipes-mozilla/firefox/firefox_38.6.1esr.bb
-@@ -59,16 +59,18 @@ MOZ_APP_BASE_VERSION = "38.6"
- inherit mozilla
- 
- EXTRA_OEMAKE += "installdir=${libdir}/${PN}"
-+EXTRA_OECONF += "--libdir=${libdir}"
- 
- ARM_INSTRUCTION_SET = "arm"
- 
- do_install_append() {
-     install -d ${D}${datadir}/applications
-     install -d ${D}${datadir}/pixmaps
-+    install -d ${D}${libdir}/${PN}-${MOZ_APP_BASE_VERSION}/defaults/pref
- 
-     install -m 0644 ${WORKDIR}/mozilla-firefox.desktop ${D}${datadir}/applications/
-     install -m 0644 ${WORKDIR}/mozilla-firefox.png ${D}${datadir}/pixmaps/
--    install -m 0644 ${WORKDIR}/vendor.js ${D}${libdir}/${PN}/defaults/pref/
-+    install -m 0644 ${WORKDIR}/vendor.js ${D}${libdir}/${PN}-${MOZ_APP_BASE_VERSION}/defaults/pref/
- 
-     # Fix ownership of files
-     chown root:root -R ${D}${datadir}
-@@ -78,10 +80,10 @@ do_install_append() {
- FILES_${PN} = "${bindir}/${PN} \
-                ${datadir}/applications/ \
-                ${datadir}/pixmaps/ \
--               ${libdir}/${PN}/* \
-+               ${libdir}/${PN}-${MOZ_APP_BASE_VERSION}/* \
-                ${bindir}/defaults"
--FILES_${PN}-dev += "${datadir}/idl ${bindir}/${PN}-config"
--
-+FILES_${PN}-dev += "${datadir}/idl ${bindir}/${PN}-config ${libdir}/${PN}-devel-*"
-+FILES_${PN}-staticdev += "${libdir}/${PN}-devel-*/sdk/lib/*.a"
- # We don't build XUL as system shared lib, so we can mark all libs as private
- PRIVATE_LIBS = "libmozjs.so \
-                 libxpcom.so \
 -- 
-1.7.12.4
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
