@@ -1,24 +1,26 @@
 Return-Path: <Guojian.Zhou@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2BAFF6FFFB
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 94219731E0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Mar 2016 01:22:01 +0000 (UTC)
+	Fri, 25 Mar 2016 01:22:03 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u2P1LvNX018672
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u2P1Lxk2006581
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 24 Mar 2016 18:21:57 -0700 (PDT)
+	Thu, 24 Mar 2016 18:21:59 -0700 (PDT)
 Received: from pek-lpgtest4.wrs.com (128.224.153.84) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 24 Mar 2016 18:21:56 -0700
+	14.3.248.2; Thu, 24 Mar 2016 18:21:59 -0700
 From: <guojian.zhou@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 25 Mar 2016 09:21:53 +0800
-Message-ID: <1458868914-30827-1-git-send-email-guojian.zhou@windriver.com>
+Date: Fri, 25 Mar 2016 09:21:54 +0800
+Message-ID: <1458868914-30827-2-git-send-email-guojian.zhou@windriver.com>
 X-Mailer: git-send-email 1.7.12.4
+In-Reply-To: <1458868914-30827-1-git-send-email-guojian.zhou@windriver.com>
+References: <1458868914-30827-1-git-send-email-guojian.zhou@windriver.com>
 MIME-Version: 1.0
 Cc: otavio@ossystems.com.br, eric@eukrea.com
-Subject: [PATCH] firefox: fix install issue and do_package_qa issues
+Subject: [meta-browser][PATCH] firefox: fix install issue and do_package_qa issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
