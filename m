@@ -1,42 +1,42 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D5E006067D
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 1696271633
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2016 13:05:14 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id e124so6290715qkc.3
+	Sat, 26 Mar 2016 13:05:15 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id u128so6277262qkh.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2016 06:05:15 -0700 (PDT)
+	Sat, 26 Mar 2016 06:05:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:in-reply-to:references;
-	bh=3f0qq5WRPvcw1V637YvI8m5Bt6085HRxe+R+HSVenBU=;
-	b=kbcTUgV5LJ08CmXSvzAZpl2T4lAkTvEzelP9Q8pOpjdhSBv4vodZsyPK+UJtj30NaD
-	14iYCrVE/fIPY4Ka7OAA6CNUqSXCceoe8usZU+39klU5kJechzYWYxf6nveAZdulxs6F
-	HFlhFEDLneXaHt2Bm6B57IZO5g1GsRY2nk8iuCUa6gdh8NpwvO/NjdO6YC//4XeCviz8
-	WJxMDs8T8gLjO5nsYALTowqHkJyrhGqQkW6hlimyJ95CeGzZEUbzHxkbJNN/BaH1dEuL
-	2RkgQFDVSSPYkri/b6yP5i4G2ddF0FlThqBYTrT1mOSr5LiNHTuGc1BNZVYrNUH1hepp
-	t1Mg==
-X-Gm-Message-State: AD7BkJIlvL58pKVf1qTVlX2gqHvGUWpoClnihjZJ6hT9iYkHMEGb70o6BFp6TIO34WbWzg==
-X-Received: by 10.55.192.14 with SMTP id o14mr3042515qki.31.1458997515549;
-	Sat, 26 Mar 2016 06:05:15 -0700 (PDT)
+	bh=ZLImeRTxjnvkcq1wiiCnodSOcePLa59SRghYT9JWgzw=;
+	b=PdPmrRiSyeqHL24Zg+h6eDsTYFyilDynPoCZacW86wrsfe76qFNPwYlgaQUZyBPdsg
+	S24lWdK7IGigsL/Oq4XSkZDdUWFBA3AmLwGL0HXtCismRTbuy1xNik4ACrHSiod+j5Du
+	7I7ysXS0+ZX5LL49Gu8APWR4YhMytnxPuzp8vQqwMxq/nSN381I9wVuJUvIcfyI9O4UZ
+	AQXB95LrKclU3keHam1yJ0YsGr7HIA8eScWkhvGGUXvEvVtaSKYhzXiNbe/XiWogF9Oi
+	eheyZBOwAjZAn1JmND21OvrRK2Nc3aupG+Kg5U4P6SKGH/gCrThM9DQSyLQpRArCySSU
+	NZ3w==
+X-Gm-Message-State: AD7BkJJZ+WsTXLyAXUQQwtbL4OoiLJOWd8LcRQUdoabqjm0rsZ58g9Wy+s92eBDdw9bDpQ==
+X-Received: by 10.55.221.18 with SMTP id n18mr23331940qki.50.1458997516724;
+	Sat, 26 Mar 2016 06:05:16 -0700 (PDT)
 Received: from build-slave.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168])
-	by smtp.gmail.com with ESMTPSA id x6sm7678649qka.16.2016.03.26.06.05.14
+	by smtp.gmail.com with ESMTPSA id x6sm7678649qka.16.2016.03.26.06.05.16
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 26 Mar 2016 06:05:15 -0700 (PDT)
+	Sat, 26 Mar 2016 06:05:16 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 26 Mar 2016 09:04:31 -0400
-Message-Id: <c2ec94735fd6cd2e453c5888d5621e65dac43a4e.1458997082.git.derek@asterius.io>
+Date: Sat, 26 Mar 2016 09:04:33 -0400
+Message-Id: <bd1e45dd5b69c92d35a5655b26e009874e15a3f2.1458997082.git.derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1458997082.git.derek@asterius.io>
 References: <cover.1458997082.git.derek@asterius.io>
 In-Reply-To: <cover.1458997082.git.derek@asterius.io>
 References: <cover.1458997082.git.derek@asterius.io>
-Subject: [meta-python][PATCH 11/30] python-evdev: update to 0.6.0
+Subject: [meta-python][PATCH 13/30] python-iso8601: update to 0.1.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,32 +53,40 @@ X-List-Received-Date: Sat, 26 Mar 2016 13:05:16 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python-evdev_0.5.0.bb => python-evdev_0.6.0.bb}        | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-evdev_0.5.0.bb => python-evdev_0.6.0.bb} (50%)
+ meta-python/recipes-devtools/python/python-iso8601_0.1.10.bb | 8 --------
+ meta-python/recipes-devtools/python/python-iso8601_0.1.11.bb | 8 ++++++++
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-iso8601_0.1.10.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-iso8601_0.1.11.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-evdev_0.5.0.bb b/meta-python/recipes-devtools/python/python-evdev_0.6.0.bb
-similarity index 50%
-rename from meta-python/recipes-devtools/python/python-evdev_0.5.0.bb
-rename to meta-python/recipes-devtools/python/python-evdev_0.6.0.bb
-index 2435b45..e555552 100644
---- a/meta-python/recipes-devtools/python/python-evdev_0.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python-evdev_0.6.0.bb
-@@ -2,10 +2,11 @@ SUMMARY = "Python evdev lib"
- HOMEPAGE = "https://github.com/gvalkov/python-evdev"
- SECTION = "devel/python"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=2b500cb3c70f576a0a75125beda9491a"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=18debddbb3f52c661a129724a883a8e2"
- 
- SRC_URI = "https://github.com/gvalkov/python-evdev/archive/v${PV}.zip"
--SRC_URI[md5sum] = "30c11ee7bd4a943f8ae586d839b860f2"
--SRC_URI[sha256sum] = "ce6a757e28b56a12a9ad4e86420db4b11918b75ba1cd70f7444e904a7284b6fe"
+diff --git a/meta-python/recipes-devtools/python/python-iso8601_0.1.10.bb b/meta-python/recipes-devtools/python/python-iso8601_0.1.10.bb
+deleted file mode 100644
+index f7e30cf..0000000
+--- a/meta-python/recipes-devtools/python/python-iso8601_0.1.10.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-SUMMARY = "Simple module to parse ISO 8601 dates"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=ffb8415711cf5d3b081b87c3d0aff737"
+-
+-SRC_URI[md5sum] = "23acb1029acfef9c32069c6c851c3a41"
+-SRC_URI[sha256sum] = "e712ff3a18604833f5073e836aad795b21170b19bbef70947c441ed89d0ac0e1"
+-
+-inherit pypi setuptools
+diff --git a/meta-python/recipes-devtools/python/python-iso8601_0.1.11.bb b/meta-python/recipes-devtools/python/python-iso8601_0.1.11.bb
+new file mode 100644
+index 0000000..484cf12
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-iso8601_0.1.11.bb
+@@ -0,0 +1,8 @@
++SUMMARY = "Simple module to parse ISO 8601 dates"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844"
 +
-+SRC_URI[md5sum] = "24e4ffa98e338b535eae44d91d609005"
-+SRC_URI[sha256sum] = "61f6893d80da87a995e5781c74d22a39448b1b32004ffac2f31817017709be04"
- 
- inherit setuptools
++SRC_URI[md5sum] = "b06d11cd14a64096f907086044f0fe38"
++SRC_URI[sha256sum] = "e8fb52f78880ae063336c94eb5b87b181e6a0cc33a6c008511bac9a6e980ef30"
++
++inherit pypi setuptools
 -- 
 1.9.1
 
