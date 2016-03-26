@@ -1,26 +1,26 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id CF6C86FF97
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 687047017C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2016 13:05:21 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id e124so6290985qkc.3
+	Sat, 26 Mar 2016 13:05:22 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id s5so6266700qkd.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 26 Mar 2016 06:05:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:in-reply-to:references;
-	bh=JbJg6Ja7VZoxG3bFsgvPPIK4B7ye8MmhDjvPzUggLRQ=;
-	b=Uo3eYCpiM+vbtVndI423UYhnJ1Ga3AZzmm05rr9PNHZjxKJS2isFx7Uhl6I2NXeoi2
-	TWohCJLb3poe/bOGAR0wl4SUxGjbYUq9R8jt+5lcrC5uRKaaIGglXzgr/gblIrlqbyqA
-	74jUlXSSbmUjGK/e4Z/1oNVhHkl4tYurqM21n87kn7maKEB1XyLJfRg/Aw0KHF9ckoUS
-	LWEPesSuzGn0Hm4p83vL1VIla7IrKZcCHj/uBQsyR5Iub9uG0v9/2lFmBjTCf3S4lVAc
-	MXRkqllQO193JEMSzq3C2qYAjR8CbeMNsybRKbdriWs8nJMwSA/KXagw+6zeKlj5cwIo
-	t9dg==
-X-Gm-Message-State: AD7BkJKPS3tB1vFHYiO8lWfE3cYbNbCmV5uLqM1O0zzHa5h4ZSAS2ku+P3EC1aAiGgGiQQ==
-X-Received: by 10.55.76.134 with SMTP id z128mr23681521qka.90.1458997522662;
-	Sat, 26 Mar 2016 06:05:22 -0700 (PDT)
+	bh=xXT5mcq+J1OuPhs50MqJBXCnDD5pdyfdB5sGaPyY/H0=;
+	b=BrtbcKKwsCnIOk1HazmbT7ZC0ogORHeY5XRNL+Vyayi7XPr2hQKca3ict/RnKkcDyR
+	b0yq+WnLYeqBDH4N2O/8p6tazq/SNSmvL5tVXpdWThxMSSCU7ICS7W2fIFsGE8TkhK9K
+	oqElHT8LRdLYfMnNy+E/n5xXkZS2P9GqegMNtW6NgNU1FAVmZ4UlbNfI5aQQdEk92oUM
+	Bp15Ts+cBb1Df1whzb/jBoyJuRZXW7+zHS8BnZZjYkxakFMAXTkhOf0N0vwOUMM0g5AM
+	rCzCRhpK8ibfcDKQnBlB/6d/5YilLiLOL+QbmsJa0VZFxL53b+PIq1+Netg8Fx08QFIb
+	gMyw==
+X-Gm-Message-State: AD7BkJKfnCsoiekbGvtfWXPKqZU51dQrU3NWGBqgxN2WtCoHogadO2XEEp/qkg/LMBMFXg==
+X-Received: by 10.55.41.205 with SMTP id p74mr24000239qkp.65.1458997523191;
+	Sat, 26 Mar 2016 06:05:23 -0700 (PDT)
 Received: from build-slave.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168])
 	by smtp.gmail.com with ESMTPSA id x6sm7678649qka.16.2016.03.26.06.05.22
@@ -29,14 +29,14 @@ Received: from build-slave.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	Sat, 26 Mar 2016 06:05:22 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 26 Mar 2016 09:04:43 -0400
-Message-Id: <705b5d0b137188a19bb1dcd1f45f01b4a983f39f.1458997082.git.derek@asterius.io>
+Date: Sat, 26 Mar 2016 09:04:44 -0400
+Message-Id: <ec2445068d281e09e7aa912ba2ff3c4edf18c6a1.1458997082.git.derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1458997082.git.derek@asterius.io>
 References: <cover.1458997082.git.derek@asterius.io>
 In-Reply-To: <cover.1458997082.git.derek@asterius.io>
 References: <cover.1458997082.git.derek@asterius.io>
-Subject: [meta-python][PATCH 23/30] python-pymisp: update to 2.3
+Subject: [meta-python][PATCH 24/30] python-pyparsing: update to 2.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,57 +53,28 @@ X-List-Received-Date: Sat, 26 Mar 2016 13:05:22 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pymisp.inc          | 10 +++-------
- .../python/{python-pymisp_2.2.bb => python-pymisp_2.3.bb}      |  2 +-
- .../python/{python3-pymisp_2.2.bb => python3-pymisp_2.3.bb}    |  2 +-
- 3 files changed, 5 insertions(+), 9 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pymisp_2.2.bb => python-pymisp_2.3.bb} (52%)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.2.bb => python3-pymisp_2.3.bb} (50%)
+ .../python/{python-pyparsing_2.0.3.bb => python-pyparsing_2.1.1.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyparsing_2.0.3.bb => python-pyparsing_2.1.1.bb} (60%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pymisp.inc b/meta-python/recipes-devtools/python/python-pymisp.inc
-index ca543f0..9cd0844 100644
---- a/meta-python/recipes-devtools/python/python-pymisp.inc
-+++ b/meta-python/recipes-devtools/python/python-pymisp.inc
-@@ -1,14 +1,10 @@
- DESCRIPTION = "Python API for MISP"
- HOMEPAGE = "https://github.com/MISP/PyMISP"
--SECTION = "devel/python"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
--SRCREV = "a7fc1ceb20d455ccfa2ba7af229048330e22b173"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=c0a3e801b740ef31d1f5ddfe76bca538"
- PR = "r0"
+diff --git a/meta-python/recipes-devtools/python/python-pyparsing_2.0.3.bb b/meta-python/recipes-devtools/python/python-pyparsing_2.1.1.bb
+similarity index 60%
+rename from meta-python/recipes-devtools/python/python-pyparsing_2.0.3.bb
+rename to meta-python/recipes-devtools/python/python-pyparsing_2.1.1.bb
+index 18a3077..9862907 100644
+--- a/meta-python/recipes-devtools/python/python-pyparsing_2.0.3.bb
++++ b/meta-python/recipes-devtools/python/python-pyparsing_2.1.1.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://pyparsing.wikispaces.com/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fb46329938e6bc829b256e37d5c1e31a"
  
--SRC_URI = "git://github.com/MISP/PyMISP.git;branch=master"
--
--SRCNAME = "pymisp"
--S = "${WORKDIR}/git"
-+SRC_URI[md5sum] = "398408388902c108e3b378152b6c1d24"
-+SRC_URI[sha256sum] = "d70e74c528f040f5ff8137337f1758aeb63a5966b58b297f2171f53cb9df033e"
+-SRC_URI[md5sum] = "0a5ec41bb650aed802751a311b5d820d"
+-SRC_URI[sha256sum] = "43d7710fdaa194a3bccf3127d06dec8e2de99a7efe6c47f01d4b748a1d04b192"
++SRC_URI[md5sum] = "2a1d3a63ddc2ec9a3da961d1b7f258b2"
++SRC_URI[sha256sum] = "4bd04badfda39b1e2fd0d77cb78b488c881d88c31734791a0ae902979ae10575"
  
- RDEPENDS_${PN} += " ${PYTHON_PN}-requests"
-diff --git a/meta-python/recipes-devtools/python/python-pymisp_2.2.bb b/meta-python/recipes-devtools/python/python-pymisp_2.3.bb
-similarity index 52%
-rename from meta-python/recipes-devtools/python/python-pymisp_2.2.bb
-rename to meta-python/recipes-devtools/python/python-pymisp_2.3.bb
-index a0b655f..1b1fbe9 100644
---- a/meta-python/recipes-devtools/python/python-pymisp_2.2.bb
-+++ b/meta-python/recipes-devtools/python/python-pymisp_2.3.bb
-@@ -1,2 +1,2 @@
--inherit setuptools
-+inherit pypi setuptools
- require python-pymisp.inc
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.2.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.3.bb
-similarity index 50%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.2.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.3.bb
-index e41acd6..4523d9e 100644
---- a/meta-python/recipes-devtools/python/python3-pymisp_2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymisp_2.3.bb
-@@ -1,2 +1,2 @@
--inherit setuptools3
-+inherit pypi setuptools3
- require python-pymisp.inc
+ PYPI_PACKAGE_EXT = "zip"
+ inherit pypi distutils
 -- 
 1.9.1
 
