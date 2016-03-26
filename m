@@ -1,42 +1,42 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f66.google.com (mail-qg0-f66.google.com
-	[209.85.192.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B9446E630
+Received: from mail-qg0-f68.google.com (mail-qg0-f68.google.com
+	[209.85.192.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 957666FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2016 13:05:12 +0000 (UTC)
-Received: by mail-qg0-f66.google.com with SMTP id y89so8548409qge.0
+	Sat, 26 Mar 2016 13:05:09 +0000 (UTC)
+Received: by mail-qg0-f68.google.com with SMTP id j35so4997386qge.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2016 06:05:13 -0700 (PDT)
+	Sat, 26 Mar 2016 06:05:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:in-reply-to:references;
-	bh=iXg3PLL0kLM9OXMNlxqqhAWkTO8oJUHOK81HDvY94Gw=;
-	b=BI1jyaKAHFuG/BtJfQN0GBGdlWSeJZvQLwkUt8O97kDf3bJ1pMk3z8PmYeh/iOZouG
-	A5yZNwRew6++7JujnXiz2NtpNYPWhZjCJkhnd/4y1s4R9g4PP3UIqhkTITWmwpUjrkAl
-	YK9ilCSL+xIDgqBSZ9VZ4/zUHHjVZZssctqf7iuqe8g3/UfZjFkwjIIYvZ81OjxAsvT7
-	Lyl8EfqPFNzN4js9J/snAHDBYJT1OlDrRnfKKFYUup/SWe19YLL2pZvdE6JOnOv4Av9d
-	YG0nAfXkZNj0z98J4TgeEYBDPZS9DDiTTMF5YhlB+LVxsLdtU6eQX4dR8OC7cmBrV3rh
-	4Ocw==
-X-Gm-Message-State: AD7BkJL0oyRClg3wjb1q7jsKOTBTEopBsfqTrRPqd3vgI9IO2Bu0+OsKTnLVsgkRkMTLYQ==
-X-Received: by 10.140.38.104 with SMTP id s95mr23263463qgs.7.1458997513257;
-	Sat, 26 Mar 2016 06:05:13 -0700 (PDT)
+	bh=tPJS0aZFYMyLmWW/HGaXNf7gNt5RnOAVN8a7ZVOpYyA=;
+	b=NyT+2yIgBx7rdJ2InSHmL2bDEHIB1jr2IVsCJdXOC47U2ZF/E/b3ltw+Ai+bVg/H37
+	bvhI1g6SXtTRfYV8/gJuJpMKfQUTQaVs3oLD8z1D0Y7hsGxWYpek7UIrf7d9LpcCoZXF
+	/wQ2yDVENdfRrLiXchkpKQkgx+d1bXdRbK5ZfoB0QPdf9F6zbIwXwonfB2JNKtT9XANe
+	DbEVpJ6KoPy1/fwArT6nUl/tZE7i78TychtaEuHEOriI+gNyyYVWTDEPm3EoMUfDl/DM
+	wReyF+dndhANK55KBqmM9e7kILonFuwxhIsih3D25VVBqxJYrTuUEBkUrp8/qU+XETVP
+	ArPg==
+X-Gm-Message-State: AD7BkJLgDGzRJ8L1dW2ekvOP5rAdPLFSjvibbkUuCA1/ndlELuRHmU6OniQ/UDFk36WIrA==
+X-Received: by 10.140.96.9 with SMTP id j9mr22240681qge.10.1458997510317;
+	Sat, 26 Mar 2016 06:05:10 -0700 (PDT)
 Received: from build-slave.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168])
-	by smtp.gmail.com with ESMTPSA id x6sm7678649qka.16.2016.03.26.06.05.12
+	by smtp.gmail.com with ESMTPSA id x6sm7678649qka.16.2016.03.26.06.05.09
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 26 Mar 2016 06:05:12 -0700 (PDT)
+	Sat, 26 Mar 2016 06:05:09 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 26 Mar 2016 09:04:27 -0400
-Message-Id: <83e6e837027b9b6a7e3354c56a236595c89fb426.1458997082.git.derek@asterius.io>
+Date: Sat, 26 Mar 2016 09:04:22 -0400
+Message-Id: <4da55176a14e56328fa11d432ecdb62be8332134.1458997082.git.derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1458997082.git.derek@asterius.io>
 References: <cover.1458997082.git.derek@asterius.io>
 In-Reply-To: <cover.1458997082.git.derek@asterius.io>
 References: <cover.1458997082.git.derek@asterius.io>
-Subject: [meta-python][PATCH 07/30] python-whoosh: update to 2.7.3
+Subject: [meta-python][PATCH 02/30] python-lxml: update to 3.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,36 +53,36 @@ X-List-Received-Date: Sat, 26 Mar 2016 13:05:12 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-whoosh.inc                | 5 +++--
- .../python/{python-whoosh_2.7.0.bb => python-whoosh_2.7.3.bb}        | 0
- .../python/{python3-whoosh_2.7.0.bb => python3-whoosh_2.7.3.bb}      | 0
- 3 files changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-whoosh_2.7.0.bb => python-whoosh_2.7.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-whoosh_2.7.0.bb => python3-whoosh_2.7.3.bb} (100%)
+ meta-python/recipes-devtools/python/python-lxml.inc                   | 4 ++--
+ .../python/{python-lxml_3.5.0.bb => python-lxml_3.6.0.bb}             | 0
+ .../python/{python3-lxml_3.5.0.bb => python3-lxml_3.6.0.bb}           | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-lxml_3.5.0.bb => python-lxml_3.6.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-lxml_3.5.0.bb => python3-lxml_3.6.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-whoosh.inc b/meta-python/recipes-devtools/python/python-whoosh.inc
-index 84868f9..b3cde75 100644
---- a/meta-python/recipes-devtools/python/python-whoosh.inc
-+++ b/meta-python/recipes-devtools/python/python-whoosh.inc
-@@ -7,7 +7,8 @@ Whoosh works can be extended or replaced to meet your needs exactly."
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05303186defc6141143629961c7c8a60"
+diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
+index cb9986e..0473417 100644
+--- a/meta-python/recipes-devtools/python/python-lxml.inc
++++ b/meta-python/recipes-devtools/python/python-lxml.inc
+@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b \
  
--SRC_URI[md5sum] = "9a0fc2df9335e1d2e81dd84a2c4c416f"
--SRC_URI[sha256sum] = "cdfc0e1c5173207ac7b312afe78d83fb552cfed30427bf7b3dba8b1d26cea8f7"
-+SRC_URI[md5sum] = "891edeba96cec53604c0cd176284c4cf"
-+SRC_URI[sha256sum] = "aa6db447522e208ae652c6ce063bb23cedec47f5ed630121b3debaa011fcb9c4"
+ DEPENDS += "libxml2 libxslt"
  
- PYPI_PACKAGE = "Whoosh"
-+PYPI_PACKAGE_EXT = "zip"
-diff --git a/meta-python/recipes-devtools/python/python-whoosh_2.7.0.bb b/meta-python/recipes-devtools/python/python-whoosh_2.7.3.bb
+-SRC_URI[md5sum] = "9f0c5f1eb43ff44d5455dab4b4efbe73"
+-SRC_URI[sha256sum] = "349f93e3a4b09cc59418854ab8013d027d246757c51744bf20069bc89016f578"
++SRC_URI[md5sum] = "5957cc384bd6e83934be35c057ec03b6"
++SRC_URI[sha256sum] = "9c74ca28a7f0c30dca8872281b3c47705e21217c8bc63912d95c9e2a7cac6bdf"
+ 
+ DISTUTILS_BUILD_ARGS += " \
+                      --with-xslt-config='pkg-config libxslt' \
+diff --git a/meta-python/recipes-devtools/python/python-lxml_3.5.0.bb b/meta-python/recipes-devtools/python/python-lxml_3.6.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-whoosh_2.7.0.bb
-rename to meta-python/recipes-devtools/python/python-whoosh_2.7.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-whoosh_2.7.0.bb b/meta-python/recipes-devtools/python/python3-whoosh_2.7.3.bb
+rename from meta-python/recipes-devtools/python/python-lxml_3.5.0.bb
+rename to meta-python/recipes-devtools/python/python-lxml_3.6.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-lxml_3.5.0.bb b/meta-python/recipes-devtools/python/python3-lxml_3.6.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-whoosh_2.7.0.bb
-rename to meta-python/recipes-devtools/python/python3-whoosh_2.7.3.bb
+rename from meta-python/recipes-devtools/python/python3-lxml_3.5.0.bb
+rename to meta-python/recipes-devtools/python/python3-lxml_3.6.0.bb
 -- 
 1.9.1
 
