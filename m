@@ -1,42 +1,42 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id B92B16FEFA
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id D5E006067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2016 13:05:15 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id q184so6279992qkb.0
+	Sat, 26 Mar 2016 13:05:14 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id e124so6290715qkc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2016 06:05:16 -0700 (PDT)
+	Sat, 26 Mar 2016 06:05:15 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:in-reply-to:references;
-	bh=u+VuSLeJdPd+hoVy+1es5Ekl+zgxEUgtz6whG8RL4b0=;
-	b=WrZjY8+bYv9nej8U+LObUzXb/S57I0AIAMhNZCFvnt7lv9xOJMZTljmCJEi7fdslBj
-	Xu+KJLTee6oyt/acbAOCQrXdaiidc4dzE6LRBW9jILKZaQOxiAbl3Q0ldMidikuuBGox
-	tbjpUvD3TasbC9SAQq2lO9kdl9w6df4slaSwtqRCEvdxSnQQUZ31UrLjzAyG7icxIQaW
-	pXuTbGWVyzmNagxbJ5MhkO40AvtN+PQ978lYhbmt5JdCuAeN8m4ZVqsTzJ8XvFIX46bY
-	2nKVFLAAqjPvZXKxw4r37AiuCAP9AMnTS34XcQWxLieSKCNV3q5f40I7s/dvxo8w5quB
-	6Qqw==
-X-Gm-Message-State: AD7BkJKZpehfEB0bOtVVkn228HWpFp1JCUe6py1RL2c9w9SkUd4BE3/fbhlrHadVYKP3Mg==
-X-Received: by 10.55.79.134 with SMTP id d128mr23356054qkb.73.1458997516120;
-	Sat, 26 Mar 2016 06:05:16 -0700 (PDT)
+	bh=3f0qq5WRPvcw1V637YvI8m5Bt6085HRxe+R+HSVenBU=;
+	b=kbcTUgV5LJ08CmXSvzAZpl2T4lAkTvEzelP9Q8pOpjdhSBv4vodZsyPK+UJtj30NaD
+	14iYCrVE/fIPY4Ka7OAA6CNUqSXCceoe8usZU+39klU5kJechzYWYxf6nveAZdulxs6F
+	HFlhFEDLneXaHt2Bm6B57IZO5g1GsRY2nk8iuCUa6gdh8NpwvO/NjdO6YC//4XeCviz8
+	WJxMDs8T8gLjO5nsYALTowqHkJyrhGqQkW6hlimyJ95CeGzZEUbzHxkbJNN/BaH1dEuL
+	2RkgQFDVSSPYkri/b6yP5i4G2ddF0FlThqBYTrT1mOSr5LiNHTuGc1BNZVYrNUH1hepp
+	t1Mg==
+X-Gm-Message-State: AD7BkJIlvL58pKVf1qTVlX2gqHvGUWpoClnihjZJ6hT9iYkHMEGb70o6BFp6TIO34WbWzg==
+X-Received: by 10.55.192.14 with SMTP id o14mr3042515qki.31.1458997515549;
+	Sat, 26 Mar 2016 06:05:15 -0700 (PDT)
 Received: from build-slave.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168])
-	by smtp.gmail.com with ESMTPSA id x6sm7678649qka.16.2016.03.26.06.05.15
+	by smtp.gmail.com with ESMTPSA id x6sm7678649qka.16.2016.03.26.06.05.14
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
 	Sat, 26 Mar 2016 06:05:15 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 26 Mar 2016 09:04:32 -0400
-Message-Id: <ae81670f8fb45588fa90daa17970537a7b1191cf.1458997082.git.derek@asterius.io>
+Date: Sat, 26 Mar 2016 09:04:31 -0400
+Message-Id: <c2ec94735fd6cd2e453c5888d5621e65dac43a4e.1458997082.git.derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1458997082.git.derek@asterius.io>
 References: <cover.1458997082.git.derek@asterius.io>
 In-Reply-To: <cover.1458997082.git.derek@asterius.io>
 References: <cover.1458997082.git.derek@asterius.io>
-Subject: [meta-python][PATCH 12/30] python-html5lib: update to 0.9999999
+Subject: [meta-python][PATCH 11/30] python-evdev: update to 0.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,27 +53,32 @@ X-List-Received-Date: Sat, 26 Mar 2016 13:05:16 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python-html5lib_0.999.bb => python-html5lib_0.9999999.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-html5lib_0.999.bb => python-html5lib_0.9999999.bb} (55%)
+ .../python/{python-evdev_0.5.0.bb => python-evdev_0.6.0.bb}        | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-evdev_0.5.0.bb => python-evdev_0.6.0.bb} (50%)
 
-diff --git a/meta-python/recipes-devtools/python/python-html5lib_0.999.bb b/meta-python/recipes-devtools/python/python-html5lib_0.9999999.bb
-similarity index 55%
-rename from meta-python/recipes-devtools/python/python-html5lib_0.999.bb
-rename to meta-python/recipes-devtools/python/python-html5lib_0.9999999.bb
-index 69777e4..bb92e59 100644
---- a/meta-python/recipes-devtools/python/python-html5lib_0.999.bb
-+++ b/meta-python/recipes-devtools/python/python-html5lib_0.9999999.bb
-@@ -2,7 +2,7 @@ SUMMARY = "HTML parser based on the WHATWG HTML specifcation"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1ba5ada9e6fead1fdc32f43c9f10ba7c"
+diff --git a/meta-python/recipes-devtools/python/python-evdev_0.5.0.bb b/meta-python/recipes-devtools/python/python-evdev_0.6.0.bb
+similarity index 50%
+rename from meta-python/recipes-devtools/python/python-evdev_0.5.0.bb
+rename to meta-python/recipes-devtools/python/python-evdev_0.6.0.bb
+index 2435b45..e555552 100644
+--- a/meta-python/recipes-devtools/python/python-evdev_0.5.0.bb
++++ b/meta-python/recipes-devtools/python/python-evdev_0.6.0.bb
+@@ -2,10 +2,11 @@ SUMMARY = "Python evdev lib"
+ HOMEPAGE = "https://github.com/gvalkov/python-evdev"
+ SECTION = "devel/python"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=2b500cb3c70f576a0a75125beda9491a"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=18debddbb3f52c661a129724a883a8e2"
  
--SRC_URI[md5sum] = "acb8ba4d6db5637360a07859192eb7f8"
--SRC_URI[sha256sum] = "c3887f7e2875d7666107fa8bee761ff95b9391acdcc7cd1b5fd57a23b5fbc49e"
-+SRC_URI[md5sum] = "ef43cb05e9e799f25d65d1135838a96f"
-+SRC_URI[sha256sum] = "2612a191a8d5842bfa057e41ba50bbb9dcb722419d2408c78cff4758d0754868"
+ SRC_URI = "https://github.com/gvalkov/python-evdev/archive/v${PV}.zip"
+-SRC_URI[md5sum] = "30c11ee7bd4a943f8ae586d839b860f2"
+-SRC_URI[sha256sum] = "ce6a757e28b56a12a9ad4e86420db4b11918b75ba1cd70f7444e904a7284b6fe"
++
++SRC_URI[md5sum] = "24e4ffa98e338b535eae44d91d609005"
++SRC_URI[sha256sum] = "61f6893d80da87a995e5781c74d22a39448b1b32004ffac2f31817017709be04"
  
- inherit pypi setuptools
+ inherit setuptools
 -- 
 1.9.1
 
