@@ -1,53 +1,37 @@
-Return-Path: <jefro.net@gmail.com>
-Received: from mail-lb0-f195.google.com (mail-lb0-f195.google.com
-	[209.85.217.195])
-	by mail.openembedded.org (Postfix) with ESMTP id B94BB6FF9D;
-	Fri, 25 Mar 2016 20:37:59 +0000 (UTC)
-Received: by mail-lb0-f195.google.com with SMTP id sx8so5783431lbb.3;
-	Fri, 25 Mar 2016 13:38:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=SBiT3sfiSAA4fPsN5w4KdJs9jjbqCTaGJe215W0YQIc=;
-	b=TGJVFTYXc2A2Hwy5ericUlJaBtHxXe4VBeTI2R4hhmpvoWdjR1cDwCk+hN+nC7qJX9
-	uNq1XsroEbRfYcRL7909UVo39sE/2f7Hi4rPASZofVFSlV679TqV9ZczGGbVYy2mLlcs
-	k8HAX3k69n1smNLyd3dJ2eZ4HP72AyO++Lwt+80v2H9StKO36zgYcasAXWqSpR/MNs2w
-	GXwoYlJ4R7KYIeRgnz5WeqC/s0sXvg1spIlTyFCW0/67QSWPhoP2GD2bi/Bws9jFbMUO
-	w04stw3WHgB9u799bQ6na1fnVd+2hiQLkoj8Ga2RWInYB1EmZ2evrLBQQSYpjVAANYG+
-	umBw==
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qg0-f66.google.com (mail-qg0-f66.google.com
+	[209.85.192.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 96E026E630
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Mar 2016 13:05:08 +0000 (UTC)
+Received: by mail-qg0-f66.google.com with SMTP id c67so8514752qgc.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Mar 2016 06:05:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=SBiT3sfiSAA4fPsN5w4KdJs9jjbqCTaGJe215W0YQIc=;
-	b=f+B9xiQFJWkuOEkDb6AoIsyCiZvF9+UNZYOuCtzROvszbGtPaCj/Goya9Rp5aRMvWD
-	VGz4lBZMBezT4Ioy/KwXLtBt5qwdM68zF0fvNuh4QUayXoTTiEDh7OBlXTxtXeofshEX
-	9mp1ki5pQrW3NFXlQC/W2ZT6wT2t4psGdXjNIbKvnW6y2w9xJcdMYdghvZqBkX55GIzU
-	WuXPC/MflbQyCXclf3nppGmRBoYG4bMc5onc1lGmmJ0d9U++XieUqglrBAEjAsdmU8Oc
-	NmLkJ88fkQ49Nq7VopHVYNGWVVHDDvaB8ICTJW2Y2bnJDbMxFINqwyg4Mh547gXzBoX5
-	KlhA==
-X-Gm-Message-State: AD7BkJKfrRj0xS1tjoa1dA+QCsVDMcO6ONhwchWmGQbRQ59shVOkEJaD2mqbpa599D50VhyDhaNrZMwtTA54Rw==
-X-Received: by 10.112.171.33 with SMTP id ar1mr1983383lbc.54.1458938279398;
-	Fri, 25 Mar 2016 13:37:59 -0700 (PDT)
-MIME-Version: 1.0
-Sender: jefro.net@gmail.com
-Received: by 10.112.55.101 with HTTP; Fri, 25 Mar 2016 13:37:39 -0700 (PDT)
-In-Reply-To: <CAMZfsd43wWQTZGp=FWvHATXyvY2YQASaiSAWdeatS=hviPQ4uA@mail.gmail.com>
-References: <56DEF97F.9070306@balister.org> <1458767514382.89578@seescan.com>
-	<56F42DA1.4090902@balister.org>
-	<1604312.a7pP1GrPCb@rjs-zotac.streifs.net>
-	<CAMZfsd43wWQTZGp=FWvHATXyvY2YQASaiSAWdeatS=hviPQ4uA@mail.gmail.com>
-From: Jeff Osier-Mixon <jefro@jefro.net>
-Date: Fri, 25 Mar 2016 13:37:39 -0700
-X-Google-Sender-Auth: _uf6jhS78dBd5TE2Yd4mylNoK_o
-Message-ID: <CA+YB3raXh6g-hNvZaqiVEv=cM0fH3oh=C0_2DbjRqYcoz15ePg@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] [OE-core] OEDAM, April 8 in San Diego after ELC
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=HPAjPgq0uleYeiHsnzXaT1Bl5kGUFAwSfw+uiR+KbQY=;
+	b=YNVNuc+aM6ClwSnBrvGAPmDZcY0q7hOONZXznMXMptuL4iKbDElIoTE8TvmhTN5DkQ
+	W+wvJGFKsR2TEbwykmaZJRWySnT7CcJSDAisw4i5AUd41/EprNu0KeUhS1VBEMLGwmk5
+	kvMFdv+PBx8KRYMGIsVoJ085niEWhgn3drGwfzWhyfcxNKkkMkCdL7TWe+hDzaPFAYdU
+	8SouMbRL4ybAEPra7CPx4mzztgGofkD6J2X8FnD1dw2JiysOiWLq1ow1+3T4cr62144i
+	ucwWRFi5uIVbYc2xhggv2xblVVtJp1PNNhux8rKkhK6UoUl8NasZALJmnIwcRntBVYCh
+	oubQ==
+X-Gm-Message-State: AD7BkJJrzjWnGGpTwYgQcs8fxxyOkI4dR4mJbCMgz9dmcB310Yy1LS+voIFDob3PaXKCmg==
+X-Received: by 10.140.100.246 with SMTP id s109mr23515877qge.35.1458997509161; 
+	Sat, 26 Mar 2016 06:05:09 -0700 (PDT)
+Received: from build-slave.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
+	[73.172.178.168])
+	by smtp.gmail.com with ESMTPSA id x6sm7678649qka.16.2016.03.26.06.05.08
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 26 Mar 2016 06:05:08 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 26 Mar 2016 09:04:20 -0400
+Message-Id: <cover.1458997082.git.derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-python][PATCH 00/30] Updates current python packages to theeir respective latest versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,103 +44,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Mar 2016 20:38:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 26 Mar 2016 13:05:11 -0000
 
-Unfortunately, this OE meeting will be a business meeting followed by
-a gathering for OE developers to help determine the direction of the
-project and figure out who is doing what. It would not be ideal or
-even interesting for beginners. Interested folks can sign up by adding
-their name to the wiki at http://openembedded.org/wiki/OEDAM_2016
+The set of patches brings most of the packages in meta-python up to the current released version.
 
-However, the Yocto Project Developer Day on Thursday of that week is
-specifically designed as training for beginners and also interesting
-presentations and labs for advanced folks.
-https://yoctoproject.org/devday
+The following changes since commit bf8f27af3954ab68e39712516ab515de90b4db27:
 
-I'd be happy to answer any specific questions on either event.
+  gstreamer: fix argument parsing when using Bison 3 (2016-03-25 11:36:42 +0100)
 
-On Fri, Mar 25, 2016 at 1:32 PM, Ryan Elkholy, PhD, PE
-<ryanelkholy@gmail.com> wrote:
-> Is this something beneficial for beginners who are getting their feet wet
-> in open embedded? Also, where do we register?
->
-> On Thu, Mar 24, 2016 at 2:36 PM, Rudolf J Streif <rudolf.streif@gmail.com>
-> wrote:
->
->> Since I happen to live in San Diego, I have been asking around for a
->> potential meeting room (unfortunately, I don't have an office with a
->> meeting room myself). I am currently working with the University of San
->> Diego and the Catamaran/Bahia Hotel. Can't promise anything yet.
->>
->> :rjs
->>
->>
->> On Thursday, March 24, 2016 11:10:41 AM Philip Balister wrote:
->> > We are up to fifteen now and as noted will have some off site attendees
->> > and late sign ups.
->> >
->> > Philip
->> >
->> > On 03/23/2016 02:11 PM, Fred Ollinger wrote:
->> > > I'm coming and I'm probably brining another person.
->> > >
->> > > I still have to make the wiki account which failed for some reason
->> before.
->> > >
->> > > Frederick
->> > > ________________________________________
->> > > From: yocto-bounces@yoctoproject.org <yocto-bounces@yoctoproject.org>
->> on behalf of Trevor Woerner <twoerner@gmail.com>
->> > > Sent: Wednesday, March 23, 2016 2:08 PM
->> > > To: akuster808; openembedded-devel@lists.openembedded.org;
->> openembedded-core; Yocto Project;
->> openembedded-members@lists.openembedded.org
->> > > Subject: Re: [yocto] [OE-core] [oe] OEDAM, April 8 in San Diego after
->> ELC
->> > >
->> > > On Wed 2016-03-23 @ 09:36:40 AM, akuster808 wrote:
->> > >> There are only 10 people signed up.
->> > >> Is that enough people to justify the expense room or even meet?
->> > >
->> > > I have no idea what the budget might be or what a room might cost.
->> I'll leave
->> > > it to those who do know to worry about the costs versus the benefits.
->> > >
->> > > In any case I certainly think it's still worth meeting. A smaller, more
->> > > focused group can sometimes get more done than a larger group.
->> Secondly, it's
->> > > my experience that more people always show up than sign up.
->> > >
->> > > With a project like this there will always be things to discuss, and
->> sometimes
->> > > a discussion goes better in person rather than online.
->> > >
->> > > Best regards,
->> > >         Trevor
->> > > --
->> > > _______________________________________________
->> > > yocto mailing list
->> > > yocto@yoctoproject.org
->> > > https://lists.yoctoproject.org/listinfo/yocto
->> > >
->> >
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+are available in the git repository at:
 
+  git://github.com/derekstraka/meta-openembedded more-python-update
+  https://github.com/derekstraka/meta-openembedded/tree/more-python-update
 
+Derek Straka (30):
+  python-dateutil: update to 2.5.1
+  python-lxml: update to 3.6.0
+  python-cython: update to 0.23.4
+  python-certifi: update to 2016.2.28
+  python-pymongo: update to 3.2.2
+  python-werkzeug: update to 0.11.5
+  python-whoosh: update to 2.7.3
+  python-cffi: update to 1.5.2
+  python-cmd2: update to 0.6.8
+  python-daemonize: update to 2.4.6
+  python-evdev: update to 0.6.0
+  python-html5lib: update to 0.9999999
+  python-iso8601: update to 0.1.11
+  python-jsonpatch: update to 1.13
+  python-monotonic: update to 1.0
+  python-paste: update to 2.0.3
+  python-pep8: update to 1.7.0
+  python-pip: update to 8.1.1
+  python-psutil: update to 4.1.0
+  python-py: update to 1.4.31
+  python-pycparser: update to 2.14
+  python-pyflakes: update to 1.1.0
+  python-pymisp: update to 2.3
+  python-pyparsing: update to 2.1.1
+  python-pytest: update to 2.9.1
+  python-pytz: update to 2016.3
+  python-pyudev: update to 0.19.0
+  python-pyyaml: update to 3.11
+  python-sparts: update to version 0.7.3
+  python-urllib3: update to 1.14
+
+ meta-python/recipes-devtools/python/python-certifi.inc         |  4 ++--
+ ...hon-certifi_2015.11.20.1.bb => python-certifi_2016.2.28.bb} |  0
+ .../python/{python-cffi_1.3.1.bb => python-cffi_1.5.2.bb}      |  4 ++--
+ .../python/{python-cmd2_0.6.7.bb => python-cmd2_0.6.8.bb}      |  4 ++--
+ meta-python/recipes-devtools/python/python-cython.inc          |  4 ++--
+ .../{python-cython_0.23.1.bb => python-cython_0.23.4.bb}       |  0
+ .../{python-daemonize_2.4.2.bb => python-daemonize_2.4.6.bb}   |  4 ++--
+ meta-python/recipes-devtools/python/python-dateutil.inc        |  4 ++--
+ .../{python-dateutil_2.4.2.bb => python-dateutil_2.5.1.bb}     |  0
+ .../python/{python-evdev_0.5.0.bb => python-evdev_0.6.0.bb}    |  7 ++++---
+ .../{python-html5lib_0.999.bb => python-html5lib_0.9999999.bb} |  4 ++--
+ meta-python/recipes-devtools/python/python-iso8601_0.1.10.bb   |  8 --------
+ meta-python/recipes-devtools/python/python-iso8601_0.1.11.bb   |  8 ++++++++
+ .../{python-jsonpatch_1.12.bb => python-jsonpatch_1.13.bb}     |  4 ++--
+ meta-python/recipes-devtools/python/python-lxml.inc            |  4 ++--
+ .../python/{python-lxml_3.5.0.bb => python-lxml_3.6.0.bb}      |  0
+ .../{python-monotonic_0.6.bb => python-monotonic_1.0.bb}       |  4 ++--
+ .../python/{python-paste_2.0.2.bb => python-paste_2.0.3.bb}    |  4 ++--
+ .../python/{python-pep8_1.4.6.bb => python-pep8_1.7.0.bb}      |  6 +++---
+ .../python/{python-pip_7.1.2.bb => python-pip_8.1.1.bb}        |  6 +++---
+ .../python/{python-psutil_2.2.1.bb => python-psutil_4.1.0.bb}  |  4 ++--
+ .../python/{python-py_1.4.26.bb => python-py_1.4.31.bb}        |  4 ++--
+ meta-python/recipes-devtools/python/python-pycparser_2.10.bb   | 10 ----------
+ meta-python/recipes-devtools/python/python-pycparser_2.14.bb   | 10 ++++++++++
+ .../{python-pyflakes_1.0.0.bb => python-pyflakes_1.1.0.bb}     |  6 +++---
+ meta-python/recipes-devtools/python/python-pymisp.inc          | 10 +++-------
+ .../python/{python3-pymisp_2.2.bb => python-pymisp_2.3.bb}     |  2 +-
+ meta-python/recipes-devtools/python/python-pymongo.inc         |  4 ++--
+ .../python/{python-pymongo_3.2.bb => python-pymongo_3.2.2.bb}  |  0
+ .../{python-pyparsing_2.0.3.bb => python-pyparsing_2.1.1.bb}   |  4 ++--
+ meta-python/recipes-devtools/python/python-pytest_2.7.0.bb     | 10 ----------
+ meta-python/recipes-devtools/python/python-pytest_2.9.1.bb     | 10 ++++++++++
+ .../python/{python-pytz_2015.4.bb => python-pytz_2016.3.bb}    |  4 ++--
+ .../{python-pyudev_0.16.1.bb => python-pyudev_0.19.0.bb}       |  4 ++--
+ .../python/{python-pyyaml_3.10.bb => python-pyyaml_3.11.bb}    |  4 ++--
+ .../python/{python-sparts_0.7.2.bb => python-sparts_0.7.3.bb}  |  9 +++------
+ .../{python-urllib3_1.10.1.bb => python-urllib3_1.14.bb}       | 10 +++-------
+ meta-python/recipes-devtools/python/python-werkzeug.inc        |  4 ++--
+ .../{python-werkzeug_0.11.3.bb => python-werkzeug_0.11.5.bb}   |  0
+ meta-python/recipes-devtools/python/python-whoosh.inc          |  5 +++--
+ .../python/{python-whoosh_2.7.0.bb => python-whoosh_2.7.3.bb}  |  0
+ ...n3-certifi_2015.11.20.1.bb => python3-certifi_2016.2.28.bb} |  0
+ .../{python3-cython_0.23.1.bb => python3-cython_0.23.4.bb}     |  0
+ .../{python3-dateutil_2.4.2.bb => python3-dateutil_2.5.1.bb}   |  0
+ .../python/{python3-lxml_3.5.0.bb => python3-lxml_3.6.0.bb}    |  0
+ .../python/{python-pymisp_2.2.bb => python3-pymisp_2.3.bb}     |  2 +-
+ .../{python3-pymongo_3.2.bb => python3-pymongo_3.2.2.bb}       |  0
+ .../{python3-werkzeug_0.11.3.bb => python3-werkzeug_0.11.5.bb} |  0
+ .../{python3-whoosh_2.7.0.bb => python3-whoosh_2.7.3.bb}       |  0
+ 49 files changed, 93 insertions(+), 102 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-certifi_2015.11.20.1.bb => python-certifi_2016.2.28.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-cffi_1.3.1.bb => python-cffi_1.5.2.bb} (63%)
+ rename meta-python/recipes-devtools/python/{python-cmd2_0.6.7.bb => python-cmd2_0.6.8.bb} (66%)
+ rename meta-python/recipes-devtools/python/{python-cython_0.23.1.bb => python-cython_0.23.4.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-daemonize_2.4.2.bb => python-daemonize_2.4.6.bb} (72%)
+ rename meta-python/recipes-devtools/python/{python-dateutil_2.4.2.bb => python-dateutil_2.5.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-evdev_0.5.0.bb => python-evdev_0.6.0.bb} (50%)
+ rename meta-python/recipes-devtools/python/{python-html5lib_0.999.bb => python-html5lib_0.9999999.bb} (55%)
+ delete mode 100644 meta-python/recipes-devtools/python/python-iso8601_0.1.10.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-iso8601_0.1.11.bb
+ rename meta-python/recipes-devtools/python/{python-jsonpatch_1.12.bb => python-jsonpatch_1.13.bb} (67%)
+ rename meta-python/recipes-devtools/python/{python-lxml_3.5.0.bb => python-lxml_3.6.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-monotonic_0.6.bb => python-monotonic_1.0.bb} (64%)
+ rename meta-python/recipes-devtools/python/{python-paste_2.0.2.bb => python-paste_2.0.3.bb} (68%)
+ rename meta-python/recipes-devtools/python/{python-pep8_1.4.6.bb => python-pep8_1.7.0.bb} (50%)
+ rename meta-python/recipes-devtools/python/{python-pip_7.1.2.bb => python-pip_8.1.1.bb} (55%)
+ rename meta-python/recipes-devtools/python/{python-psutil_2.2.1.bb => python-psutil_4.1.0.bb} (63%)
+ rename meta-python/recipes-devtools/python/{python-py_1.4.26.bb => python-py_1.4.31.bb} (58%)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pycparser_2.10.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-pycparser_2.14.bb
+ rename meta-python/recipes-devtools/python/{python-pyflakes_1.0.0.bb => python-pyflakes_1.1.0.bb} (51%)
+ rename meta-python/recipes-devtools/python/{python3-pymisp_2.2.bb => python-pymisp_2.3.bb} (52%)
+ rename meta-python/recipes-devtools/python/{python-pymongo_3.2.bb => python-pymongo_3.2.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-pyparsing_2.0.3.bb => python-pyparsing_2.1.1.bb} (60%)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pytest_2.7.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-pytest_2.9.1.bb
+ rename meta-python/recipes-devtools/python/{python-pytz_2015.4.bb => python-pytz_2016.3.bb} (67%)
+ rename meta-python/recipes-devtools/python/{python-pyudev_0.16.1.bb => python-pyudev_0.19.0.bb} (73%)
+ rename meta-python/recipes-devtools/python/{python-pyyaml_3.10.bb => python-pyyaml_3.11.bb} (78%)
+ rename meta-python/recipes-devtools/python/{python-sparts_0.7.2.bb => python-sparts_0.7.3.bb} (76%)
+ rename meta-python/recipes-devtools/python/{python-urllib3_1.10.1.bb => python-urllib3_1.14.bb} (51%)
+ rename meta-python/recipes-devtools/python/{python-werkzeug_0.11.3.bb => python-werkzeug_0.11.5.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-whoosh_2.7.0.bb => python-whoosh_2.7.3.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-certifi_2015.11.20.1.bb => python3-certifi_2016.2.28.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cython_0.23.1.bb => python3-cython_0.23.4.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-dateutil_2.4.2.bb => python3-dateutil_2.5.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-lxml_3.5.0.bb => python3-lxml_3.6.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-pymisp_2.2.bb => python3-pymisp_2.3.bb} (50%)
+ rename meta-python/recipes-devtools/python/{python3-pymongo_3.2.bb => python3-pymongo_3.2.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-werkzeug_0.11.3.bb => python3-werkzeug_0.11.5.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-whoosh_2.7.0.bb => python3-whoosh_2.7.3.bb} (100%)
 
 -- 
-Jeff Osier-Mixon
-Open Source Community Architect, Intel Corporation
+1.9.1
+
 
