@@ -1,42 +1,42 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id EFE706067D
+Received: from mail-qg0-f65.google.com (mail-qg0-f65.google.com
+	[209.85.192.65])
+	by mail.openembedded.org (Postfix) with ESMTP id D934873198
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Mar 2016 13:05:18 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id e124so6290890qkc.3
+	Sat, 26 Mar 2016 13:05:19 +0000 (UTC)
+Received: by mail-qg0-f65.google.com with SMTP id c67so8515122qgc.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 26 Mar 2016 06:05:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:in-reply-to:references;
-	bh=g17LaaViGQZGtjolwW2iqgE1T1XxqutCMPO1x5onnTE=;
-	b=BJI5a0HvDdYTFILzPsxhIBdC2hhbzDivrBHt65p4psHVqhQWNyM058YnrMjh9byAWR
-	lF/0usLdIBR5O+Kt+jw+v/fRgJgquGH6oGbua3LCw17kSw8aRY2Qx20IRWbtEuStBXpO
-	smfHpuKJw//mgKitOQqzJhjVgQyIcUnInrF5Y/coTbx4Kuma0nJ4cwO3EEL5SRlS0eWJ
-	a9JD//F18HSh2AG/bIGKgaurcDDVak/dy6jzHfvYCOUb1BP/IcMsK0PILSnUa8O09uWY
-	/MQNlCs/p3+o6BuKIhEjveKNdfaZX5gsKO5AYZP6Txv3+tLu0K+2fSKoE76iAVpRrb5k
-	U1sQ==
-X-Gm-Message-State: AD7BkJIaVaCH3DWZ7/QcGDkbWtc2u/QN+A8VaY2Sz+nZQZ7Qs2Xh0JScrx/2IwBwffLu2A==
-X-Received: by 10.55.82.195 with SMTP id g186mr23238451qkb.47.1458997519740;
-	Sat, 26 Mar 2016 06:05:19 -0700 (PDT)
+	bh=bGU4/IxKdgxGbBG0ps7O7lvAP48KPCutN1Q8pJTHRLI=;
+	b=lYgH1bgVcKX5KIRq+szXWiMuDm9cslk5ydYXkl+CcYVeEhQXuXiy2wMOe2NpnUh7EM
+	ZU2iiJXTEILXZ2QN3GdXEVKdVeJiRdpiPPOhXEecAK5Bbw3opaPASDRtLqz33ufsQcdn
+	cUflGsSiDeqj7YyzOC8w45119l52B8GFq4O0n78K2GQEHi1ML8Fy/LtqYCMeHQntQteN
+	Qn8Rqa240vmaHbTKdytzleAMyUu1rfqA5tmQPdY29gccT1Ng/Hdqa+n170EXznbM8wi6
+	hjYPeWp21RVGoTIxwpSgNV9oWyp2k7/7mZZe/CT1Qz4PVzR6jZ6+7SsF81Dtlf1DDj16
+	Vobw==
+X-Gm-Message-State: AD7BkJI64Oy2pS/yEGmcCgToHQLSm3ekXcbYx7SFUIwn8hNiwhyJvoxsM3+nQs0adsczEw==
+X-Received: by 10.140.158.135 with SMTP id e129mr25270662qhe.84.1458997520357; 
+	Sat, 26 Mar 2016 06:05:20 -0700 (PDT)
 Received: from build-slave.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168])
 	by smtp.gmail.com with ESMTPSA id x6sm7678649qka.16.2016.03.26.06.05.19
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 26 Mar 2016 06:05:19 -0700 (PDT)
+	Sat, 26 Mar 2016 06:05:20 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 26 Mar 2016 09:04:38 -0400
-Message-Id: <8b06d21a7bfa15cff5fcb9a33d5b06520730b04f.1458997082.git.derek@asterius.io>
+Date: Sat, 26 Mar 2016 09:04:39 -0400
+Message-Id: <6e83313d79d7d500bd64603035f222f8e923bbba.1458997082.git.derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1458997082.git.derek@asterius.io>
 References: <cover.1458997082.git.derek@asterius.io>
 In-Reply-To: <cover.1458997082.git.derek@asterius.io>
 References: <cover.1458997082.git.derek@asterius.io>
-Subject: [meta-python][PATCH 18/30] python-pip: update to 8.1.1
+Subject: [meta-python][PATCH 19/30] python-psutil: update to 4.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,34 +49,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Mar 2016 13:05:19 -0000
+X-List-Received-Date: Sat, 26 Mar 2016 13:05:20 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python-pip_7.1.2.bb => python-pip_8.1.1.bb}             | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pip_7.1.2.bb => python-pip_8.1.1.bb} (55%)
+ .../python/{python-psutil_2.2.1.bb => python-psutil_4.1.0.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-psutil_2.2.1.bb => python-psutil_4.1.0.bb} (63%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pip_7.1.2.bb b/meta-python/recipes-devtools/python/python-pip_8.1.1.bb
-similarity index 55%
-rename from meta-python/recipes-devtools/python/python-pip_7.1.2.bb
-rename to meta-python/recipes-devtools/python/python-pip_8.1.1.bb
-index 33e5ee2..c0c263b 100644
---- a/meta-python/recipes-devtools/python/python-pip_7.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python-pip_8.1.1.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "PIP is a tool for installing and managing Python packages"
- LICENSE = "MIT & LGPL-2.1"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=45665b53032c02b35e29ddab8e61fa91"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=25fba45109565f87de20bae85bc39452"
+diff --git a/meta-python/recipes-devtools/python/python-psutil_2.2.1.bb b/meta-python/recipes-devtools/python/python-psutil_4.1.0.bb
+similarity index 63%
+rename from meta-python/recipes-devtools/python/python-psutil_2.2.1.bb
+rename to meta-python/recipes-devtools/python/python-psutil_4.1.0.bb
+index 1d643eb..6a210ee 100644
+--- a/meta-python/recipes-devtools/python/python-psutil_2.2.1.bb
++++ b/meta-python/recipes-devtools/python/python-psutil_4.1.0.bb
+@@ -2,8 +2,8 @@ SUMMARY = "A cross-platform process and system utilities module for Python"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0f02e99f7f3c9a7fe8ecfc5d44c2be62"
  
--SRC_URI[md5sum] = "3823d2343d9f3aaab21cf9c917710196"
--SRC_URI[sha256sum] = "ca047986f0528cfa975a14fb9f7f106271d4e0c3fe1ddced6c1db2e7ae57a477"
-+SRC_URI[md5sum] = "6b86f11841e89c8241d689956ba99ed7"
-+SRC_URI[sha256sum] = "3e78d3066aaeb633d185a57afdccf700aa2e660436b4af618bcb6ff0fa511798"
+-SRC_URI[md5sum] = "1a2b58cd9e3a53528bb6148f0c4d5244"
+-SRC_URI[sha256sum] = "a0e9b96f1946975064724e242ac159f3260db24ffa591c3da0a355361a3a337f"
++SRC_URI[md5sum] = "017e1023484ebf436d3514ebeaf2e7e9"
++SRC_URI[sha256sum] = "c6abebec9c8833baaf1c51dd1b0259246d1d50b9b50e9a4aa66f33b1e98b8d17"
  
- inherit pypi setuptools
- 
+ RDEPENDS_${PN} += " \
+     python-subprocess \
 -- 
 1.9.1
 
