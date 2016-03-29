@@ -1,24 +1,59 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9074B65CC2
+Return-Path: <jobol@koumoul.net>
+Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
+	[209.85.213.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A16C865CC3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2016 07:55:23 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u2T7tOl0009178
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 29 Mar 2016 08:03:36 +0000 (UTC)
+Received: by mail-vk0-f65.google.com with SMTP id z68so1042263vkg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2016 00:55:24 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Tue, 29 Mar 2016 00:55:23 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 29 Mar 2016 15:49:44 +0800
-Message-ID: <1459237784-26118-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Tue, 29 Mar 2016 01:03:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
+	h=mime-version:reply-to:sender:in-reply-to:references:date:message-id
+	:subject:from:to:content-transfer-encoding;
+	bh=O26v95Htqq6o6yQtkI2mlr0W6oiqBhJ/hCoUdG0WjsY=;
+	b=GW/aZSwbZwM/7DNGs5a3QB1/E15vxbI9QHlplnQHO97e5tMpa6LYKpvlnYunLnXais
+	QvdM/f+UI5JwDgkYpcRIhpqEt73YzE29y1AGcC+1gcLba9QutLmhLyYHBqpnr/29HsJl
+	TC8nWT/SLSt411o/x+db462txCBxDRxVTVDk0=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=iot-bzh.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:reply-to:sender:in-reply-to:references:date:message-id
+	:subject:from:to:content-transfer-encoding;
+	bh=O26v95Htqq6o6yQtkI2mlr0W6oiqBhJ/hCoUdG0WjsY=;
+	b=TEQTXqT1X67nN29Bak7GYVAJ99cW5zukb1A8fktQXpc31RfW8oCgOPs/pb7afrzIsm
+	skX1oIsSIgnVlAIMILHmN5nLbdxFYXfjXQeDJPgpiFkyV236ggUFsj3CfKIyl19vMq3B
+	RUkIIwsoiChjg1QZoVcQNxRJTWvgGyQ/vtoNggcnf5A6voeMqnTznV9m9iK+QZKgZFX6
+	f4LBqr81rZXqMHonGlg3vSYBFrjGNkElzTNa4VVJfAjsB3yfkvlJbUT1dFAvCshNtvYE
+	+9p3ZKyNxFLWDT2rlZT+asUy39VLXEP7nv9QjYbLQZfbQjZmLh8uiSJUVdxXb2kmDzms
+	LHjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
+	:references:date:message-id:subject:from:to
+	:content-transfer-encoding;
+	bh=O26v95Htqq6o6yQtkI2mlr0W6oiqBhJ/hCoUdG0WjsY=;
+	b=EXsOKcye/nUZ7OSc+x4ScjjODY5ekuhqBnSHNZ73z3C70H+AZ5yx4J5BIYcb3Xgvag
+	ZchVWR7rcDZkH5xIBwKQpzrUSJEiJIcJ1IiVsm2to8IEkKn/wQfi41t+QJMLPWitjdKi
+	wpFOIZ6GZNj76kwbVuz1VYE+TPWD6NNAp/hsz3KGmWkonswMh0h2MiIlXNwLLH6ZGus5
+	a0iOkCPHUuKBfX8jH7R200dF1W3ConBXi4QMQ2/Mw70rTOTJpPyy0lT83d/M+o/N97Up
+	yyCONLyT2Rdsirj7fmjuCllI0eh9hz6g4V1e8VmTOfOoB8NhjNts/PRo609xeXRAvBoA
+	0uWw==
+X-Gm-Message-State: AD7BkJKZidSN85EDpi+zggvtyWNvMGAB4Q9WqlCYbOg57y872r8oSyjsaTz+xgm0sRbSCukdUc70n8M0Qnr/9A==
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] tmon: add recipes
+X-Received: by 10.159.33.172 with SMTP id 41mr459274uac.5.1459238616324; Tue,
+	29 Mar 2016 01:03:36 -0700 (PDT)
+Reply-To: jose.bollo@iot.bzh
+Sender: jobol@koumoul.net
+Received: by 10.159.35.143 with HTTP; Tue, 29 Mar 2016 01:03:36 -0700 (PDT)
+X-Originating-IP: [2a01:e34:ee5c:ee50:d6be:d9ff:fea3:db03]
+In-Reply-To: <20160325103517.GA2555@jama>
+References: <1458557959-10500-1-git-send-email-jose.bollo@iot.bzh>
+	<20160325103517.GA2555@jama>
+Date: Tue, 29 Mar 2016 10:03:36 +0200
+X-Google-Sender-Auth: d6Km0Engz8I-hP8o0pD8rFRFEKQ
+Message-ID: <CA+LDafBz3dKgTOKFx86Me7L4ZceEAPi8tJP-xcz6NROEZ9PFsQ@mail.gmail.com>
+From: =?UTF-8?Q?Jos=C3=A9_Bollo?= <jose.bollo@iot.bzh>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] libmicrohttp: update to version 0.9.48
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,60 +66,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Mar 2016 07:55:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 29 Mar 2016 08:03:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Roy Li <rongqing.li@windriver.com>
+hi Martin, I'm discovering your mail just now.
+I'll resubmit it.
+Regards
+Jos=C3=A9
+Jos=C3=A9 Bollo - Senior Software Engineer
+www.iot.bzh
 
-tmon is a monitoring and testing tool for Linux kernel thermal subsystem
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- meta-oe/recipes-kernel/tmon/tmon.bb | 34 ++++++++++++++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/tmon/tmon.bb
 
-diff --git a/meta-oe/recipes-kernel/tmon/tmon.bb b/meta-oe/recipes-kernel/tmon/tmon.bb
-new file mode 100644
-index 0000000..3bf2b3d
---- /dev/null
-+++ b/meta-oe/recipes-kernel/tmon/tmon.bb
-@@ -0,0 +1,34 @@
-+SUMMARY = "A monitoring and testing tool for Linux kernel thermal subsystem"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-+DEPENDS = "ncurses"
-+
-+inherit kernelsrc kernel-arch
-+
-+do_configure[depends] += "virtual/kernel:do_shared_workdir"
-+do_populate_lic[depends] += "virtual/kernel:do_patch"
-+
-+B = "${WORKDIR}/${BPN}-${PV}"
-+
-+EXTRA_OEMAKE = '\
-+    -C ${S}/tools/thermal/tmon \
-+    CROSS_COMPILE=${TARGET_PREFIX} \
-+    ARCH=${ARCH} \
-+    CC="${CC}" \
-+    AR="${AR}" \
-+'
-+do_compile() {
-+	unset CFLAGS
-+	oe_runmake tmon
-+}
-+
-+do_install() {
-+	unset CFLAGS
-+	oe_runmake INSTALL_ROOT=${D} install
-+}
-+
-+python do_package_prepend() {
-+    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
-+}
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
--- 
-1.9.1
-
+2016-03-25 11:35 GMT+01:00 Martin Jansa <martin.jansa@gmail.com>:
+> On Mon, Mar 21, 2016 at 11:59:19AM +0100, jose.bollo@iot.bzh wrote:
+>> From: Jos=C3=A9 Bollo <jose.bollo@iot.bzh>
+>
+> Unfortunately I've noticed this only after merging it:
+>
+> ERROR: libmicrohttpd-0.9.48-r0 do_configure: QA Issue: libmicrohttpd:
+> configure was passed unrecognised options: --disable-spdy
+> [unknown-configure-option]
+>
+> Please fix soon with follow-up patch or I'll revert this.
+>
+>>
+>> Change-Id: I33a1acf8360d074a3310f9691ac939fe70a99f3e
+>> Signed-off-by: Jos=C3=A9 Bollo <jose.bollo@iot.bzh>
+>> ---
+>>  .../{libmicrohttpd_0.9.34.bb =3D> libmicrohttpd_0.9.48.bb}             =
+ | 4 ++--
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>  rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.34.bb =
+=3D> libmicrohttpd_0.9.48.bb} (86%)
+>>
+>> diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.=
+bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
+>> similarity index 86%
+>> rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.b=
+b
+>> rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
+>> index e3c833b..6e7ad26 100644
+>> --- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+>> +++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
+>> @@ -6,8 +6,8 @@ SECTION =3D "net"
+>>  DEPENDS =3D "libgcrypt gnutls file"
+>>
+>>  SRC_URI =3D "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
+>> -SRC_URI[md5sum] =3D "2947eee13c2c8affb95023a0cb6fda0c"
+>> -SRC_URI[sha256sum] =3D "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843b=
+e421a040be1b25a88"
+>> +SRC_URI[md5sum] =3D "9c298c890088a91fe0d7ac3fec9d0097"
+>> +SRC_URI[sha256sum] =3D "87667e158f2bf8c691a002e256ffe30885d4121a9ee4143=
+af0320c47cdf8a2a4"
+>>
+>>  inherit autotools lib_package
+>>
+>> --
+>> 2.1.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
