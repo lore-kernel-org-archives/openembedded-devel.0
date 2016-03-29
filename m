@@ -1,52 +1,45 @@
-Return-Path: <rudolf.streif@gmail.com>
-Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
-	[209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id C7C8C6612D;
-	Tue, 29 Mar 2016 20:03:35 +0000 (UTC)
-Received: by mail-pa0-f45.google.com with SMTP id fe3so22118049pab.1;
-	Tue, 29 Mar 2016 13:03:36 -0700 (PDT)
+Return-Path: <jefro.net@gmail.com>
+Received: from mail-lb0-f173.google.com (mail-lb0-f173.google.com
+	[209.85.217.173])
+	by mail.openembedded.org (Postfix) with ESMTP id ECFDD60249
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Mar 2016 21:57:23 +0000 (UTC)
+Received: by mail-lb0-f173.google.com with SMTP id vo2so19789976lbb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Mar 2016 14:57:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:user-agent:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=maEqf9Z3MK5hQw2Tju2JFx1MdI8YU2T+vnn7ke9up/U=;
-	b=gtMg094v4grRB44ZmRYlqRDzU+8OneU9bo1jTnEM4kN72OeNfT/7tw7mfao1kuoVOm
-	KrgD9Gm1dGy5QW8YAqZ1HyNGaqhC/p2CcL6ZXNuRNzlLfdnALMlptZaf8QT/jHV3M3X6
-	6QQz1zvbKElKg0u3fLD6auk18owgm9bWQGnGL2p4q4M8VwqKH1/9i0wcHQiwapxJfnoa
-	zwDOlB5NqzHaMo4mF/db7Hmfbw1bDJrPvfYd6czzhNuMHLNUSVcAENGZflOkp16O6GZr
-	8JpDrHcdn5hZ+8vIH8DPupHhB+u+nIC2v0kpThrejC0hv6ge6Q3XmmSZTIbtZBhglS6N
-	zJXg==
+	h=mime-version:sender:from:date:message-id:subject:to:cc;
+	bh=HhD6+1Z0pxWt6VlV96JkaRatzVgEFMv1F91IOvk50aw=;
+	b=ZFJchJH9HAO7AqYLxeBPLggXZlpQgGOr96DTkuSEnx9L2N0V7gyI1KYCU1htahQ8KU
+	H1xa3/ybY+MT6JYCEk2mzOnETlqRklWLhAiCMdaKg45iPsUQN6OpjG8/99ex1TUggAdx
+	p4aw0vhNilcVNVTO2LNOJyiIar/VFhOue4YTAUxsrHPKAMIqozo5x+i5EgfqsvAHcIwX
+	rEY0TfzONKxpO5cbJ+4ZCnA2w3OHKJFoRAB9l4uXkm56VL8s5ijGmiYSZqFZNnNkuQ2P
+	CZeyjMS7zrrgJFPelByto8GRNTZrduxbYvG3W3o2nIrf0syGxbQQ971hSSqzAL3AOAQK
+	lK6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:user-agent
-	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=maEqf9Z3MK5hQw2Tju2JFx1MdI8YU2T+vnn7ke9up/U=;
-	b=FsvZg4X64je+kKwQ3EgqoZsWDBZzsGdSHi6DKh6d5d4Qds9Hb9CjOILijy1QiKNxCh
-	DHyx20ZRyinMdVo9fN9f0f3re1FF/y0KHdPtb+0yNZLNS5LvpHd13lR91FBGEOd739Oc
-	Cj+x/NLa04HbYOJlsgZ05bI+fE6NfXQwJBHi9j14wMI/T4R6QE+uexVI/B3D78ODf3ca
-	sRJmXalmaPbJkEA/bv8NV0XbNokmuvGZeMPXJU0/qs8Pyze9QRGUJggJbNnt0M1/NfTL
-	4MXJbeKTBSPOkRWYqscSeLKVEU+A35f7Pk+7AnMtqxDvB1/Fz7KWlwRs+SC7ZV+VsUU3
-	otbw==
-X-Gm-Message-State: AD7BkJKA6s9hKEaNr6u9jUkADKNLmauS/CcqS54jwwGHQRcpKFHS5zDLB7HaeaPqAElq6A==
-X-Received: by 10.66.55.70 with SMTP id q6mr6280068pap.126.1459281816086;
-	Tue, 29 Mar 2016 13:03:36 -0700 (PDT)
-Received: from rjs-zotac.streifs.net (ip68-7-48-20.sd.sd.cox.net. [68.7.48.20])
-	by smtp.gmail.com with ESMTPSA id ez6sm311279pab.12.2016.03.29.13.03.35
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 29 Mar 2016 13:03:35 -0700 (PDT)
-From: Rudolf J Streif <rudolf.streif@gmail.com>
-To: yocto@yoctoproject.org
-Date: Tue, 29 Mar 2016 13:03:34 -0700
-Message-ID: <5328453.C7Dxv7TdD1@rjs-zotac.streifs.net>
-User-Agent: KMail/4.14.10 (Linux/4.4.5-200.fc22.x86_64+debug; KDE/4.14.17;
-	x86_64; ; )
-In-Reply-To: <56FADE23.8090300@balister.org>
-References: <CA+YB3rY9NKNFJNtTwQQwePfwAm37skk8jtDnBoQEBqxiE-i2Hg@mail.gmail.com>
-	<56FADE23.8090300@balister.org>
+	h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
+	:to:cc;
+	bh=HhD6+1Z0pxWt6VlV96JkaRatzVgEFMv1F91IOvk50aw=;
+	b=BGDlk45OmSgHiItgofJWEqcFjg4sRjDA12//mw0yX7VoAJnZrfLWWnpE1KoC7dELMt
+	HeDSY4j/3v+yqv2kr5Ondq48D4H/h4gJ3HZDI1e6Evt0cubMaHM6yeYqJYj5c1UcBS11
+	WchooyUFHQ9KWe1paMHrqStTlwUrd4/Lt2Gn6emW1ZfW/h3a3MNpHe1uQx+JAhfqWi1a
+	yQOSqQ2w2/qZbOnELdTf4CUitTrGwg6o7PVzZLOfAQH+B4l8P+mIuE+ygSu8NC02kpWu
+	791zuw+wBFhUt95n5LNtA9VVnXZci1uydmcpr/v64u0UzkuP/vfE7U/9M2q/QSpd5Zzy
+	+0Yw==
+X-Gm-Message-State: AD7BkJIsmWi8Zu5s4NkWW6XzIVgAF9MrDJZJT+P3JA8KnA0RVJPaoBWtJLdLft0U/W8K1en/udG6+mq3a4g+6A==
+X-Received: by 10.112.171.33 with SMTP id ar1mr2235406lbc.54.1459288642684;
+	Tue, 29 Mar 2016 14:57:22 -0700 (PDT)
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] Fwd: OEDAM: New Location - Catamaran resort
+Sender: jefro.net@gmail.com
+Received: by 10.112.55.101 with HTTP; Tue, 29 Mar 2016 14:57:03 -0700 (PDT)
+From: Jeff Osier-Mixon <jefro@jefro.net>
+Date: Tue, 29 Mar 2016 14:57:03 -0700
+X-Google-Sender-Auth: A_EnY7FVFFEiW53eGM7d0dpQ9gQ
+Message-ID: <CA+YB3rZ6d4U09V6dtCOELRgQqxDAon9aspXsGvq2XRr09aRYTQ@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: OEDAM: location, time, meals
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,45 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Mar 2016 20:03:36 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 29 Mar 2016 21:57:27 -0000
+Content-Type: text/plain; charset=UTF-8
 
-We need the final headcount by next Monday.
+Hello potential OEDAM attendees
 
-Food, breakfast, lunch and refreshments, will be provided. If you have special dietary needs such as vegetarian, gluten-free etc. please indicate so behind you name. We'll do the best to accommodate them.
+As previously mentioned, OEDAM will take place at the Catamaran Resort
+in San Diego's Pacific Beach neighborhood. Continental breakfast,
+lunch, and coffee will be provided.
 
-Rudi
+I can also arrange transportation to and from the ELC venue for those
+who need it. Carpooling is encouraged. Parking is available on site
+for $5 self parking, $10 valet.
 
-On Tuesday, March 29, 2016 12:57:23 PM Philip Balister wrote:
-> OEDAM moved. Thanks Rudi and Jefro.
-> 
-> Please add your name to the attendee list so Jefro can get the correct
-> amount of food and coffee. He needs the number "soon".
-> 
-> Philip
-> 
-> -------- Forwarded Message --------
-> Subject: OEDAM: New Location - Catamaran resort
-> Date: Mon, 28 Mar 2016 13:36:41 -0700
-> From: Jeff Osier-Mixon <jefro@jefro.net>
-> Reply-To: openembedded-members@lists.openembedded.org
-> To: openembedded-members@lists.openembedded.org
-> <openembedded-members@lists.openembedded.org>
-> 
-> The OpenEmbedded meeting on Friday April 8, which was previously
-> announced, has been moved to the Catamaran Resort & Hotel.
-> Transportation will be provided. The meeting is still 9am-5pm.
-> 
-> 3999 Mission Boulevard
-> San Diego, CA 92109
-> 858-539-8727
-> 
-> Again, OEDAM will be at the Catamaran, NOT at the Marriott. The wiki
-> page and this mailing list will be updated with transportation info.
-> 
-> Thanks to Rudi Streif for finding us a great location!
-> 
-> 
+We plan to start the meeting at 9am, so please plan to be there by
+8:45 or so. I believe coffee and nosh will be available by 8:30.
 
+If you have signed up on the wiki page
+(http://openembedded.org/wiki/OEDAM_2016), thank you for your
+interest! Please let me know *immediately* if you need a vegetarian
+meal. Also let me know if you will require transportation.
+
+If you plan to attend OEDAM and haven't yet signed up, please do so
+immediately if you plan to attend. I need to provide a final headcount
+by end of the week.
+
+thanks
+
+-- 
+Jeff Osier-Mixon
+Open Source Community Architect, Intel Corporation
 
