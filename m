@@ -1,31 +1,28 @@
 Return-Path: <fan.xin@jp.fujitsu.com>
-X-Greylist: delayed 656 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 29 Mar 2016 07:42:29 UTC
 Received: from mgwym03.jp.fujitsu.com (mgwym03.jp.fujitsu.com [211.128.242.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 30AA465CBB
+	by mail.openembedded.org (Postfix) with ESMTP id 19F486E666
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2016 07:42:29 +0000 (UTC)
-Received: from yt-mxq.gw.nic.fujitsu.com (unknown [192.168.229.66]) by
+	Tue, 29 Mar 2016 07:42:43 +0000 (UTC)
+Received: from yt-mxauth.gw.nic.fujitsu.com (unknown [192.168.229.68]) by
 	mgwym03.jp.fujitsu.com with smtp
-	id 4a34_9b52_9355e43c_d757_48b3_ab44_fdf8ea77c4c5;
-	Tue, 29 Mar 2016 16:42:22 +0900
-Received: from g01jpfmpwkw01.exch.g01.fujitsu.local
-	(g01jpfmpwkw01.exch.g01.fujitsu.local [10.0.193.38])
-	by yt-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id 1572AAC00E4
+	id 4a34_646f_455e09fd_a2ed_4394_87ac_b331dc218867;
+	Tue, 29 Mar 2016 16:31:30 +0900
+Received: from g01jpfmpwyt02.exch.g01.fujitsu.local
+	(g01jpfmpwyt02.exch.g01.fujitsu.local [10.128.193.56])
+	by yt-mxauth.gw.nic.fujitsu.com (Postfix) with ESMTP id 2733BAC0698
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2016 16:42:22 +0900 (JST)
-Received: from G01JPEXCHKW18.g01.fujitsu.local
-	(G01JPEXCHKW18.g01.fujitsu.local [10.0.194.57])
-	by g01jpfmpwkw01.exch.g01.fujitsu.local (Postfix) with ESMTP id
-	5BDB26922F5 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2016 16:42:21 +0900 (JST)
+	Tue, 29 Mar 2016 16:31:28 +0900 (JST)
+Received: from g01jpexchyt37.g01.fujitsu.local (unknown [10.128.193.4])
+	by g01jpfmpwyt02.exch.g01.fujitsu.local (Postfix) with ESMTP id
+	778B85842C4 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Mar 2016 16:31:27 +0900 (JST)
 Received: from localhost.localdomain (10.24.19.99) by
-	G01JPEXCHKW18.g01.fujitsu.local (10.0.194.57) with Microsoft SMTP
-	Server id 14.3.266.1; Tue, 29 Mar 2016 16:42:21 +0900
+	g01jpexchyt37.g01.fujitsu.local (10.128.193.67) with Microsoft SMTP
+	Server id 14.3.266.1; Tue, 29 Mar 2016 16:31:26 +0900
 From: Fan Xin <fan.xin@jp.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 29 Mar 2016 16:45:03 +0900
-Message-ID: <1459237503-1379-1-git-send-email-fan.xin@jp.fujitsu.com>
+Date: Tue, 29 Mar 2016 16:34:08 +0900
+Message-ID: <1459236848-1236-1-git-send-email-fan.xin@jp.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-SecurityPolicyCheck-GC: OK by FENCE-Mail
@@ -44,7 +41,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Mar 2016 07:42:32 -0000
+X-List-Received-Date: Tue, 29 Mar 2016 07:42:46 -0000
 Content-Type: text/plain
 
 Fix CVE-2015-7974 and other bugs.
