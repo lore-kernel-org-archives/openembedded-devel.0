@@ -1,34 +1,48 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by mail.openembedded.org (Postfix) with ESMTP id D2A8265CC2
+Return-Path: <Javier.Viguera@digi.com>
+X-Greylist: delayed 389 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 29 Mar 2016 10:05:38 UTC
+Received: from mail1.bemta8.messagelabs.com (mail1.bemta8.messagelabs.com
+	[216.82.243.200])
+	by mail.openembedded.org (Postfix) with ESMTP id 55E7560796
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2016 08:48:56 +0000 (UTC)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id F092668A019; Tue, 29 Mar 2016 09:48:56 +0100 (BST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	loki.analogue-micro-ltd.com
-X-Spam-Level: *
-X-Spam-Status: No, score=1.7 required=5.0 tests=ALL_TRUSTED,BAYES_40,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id E012268A019;
-	Tue, 29 Mar 2016 09:48:51 +0100 (BST)
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by zeus.mlbassoc.com (Postfix) with ESMTP id 9A4F06740714;
-	Tue, 29 Mar 2016 10:48:51 +0200 (CEST)
-To: openembedded-devel@lists.openembedded.org
-References: <1459238795-12674-1-git-send-email-jose.bollo@iot.bzh>
-	<56FA39A7.4030205@mlbassoc.com>
-	<CA+LDafABV55oxnpcwB4i_zbSG63A=HvNNR_Wzxd=pD+ZRxkHaw@mail.gmail.com>
-From: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <56FA4173.7030206@mlbassoc.com>
-Date: Tue, 29 Mar 2016 10:48:51 +0200
+	Tue, 29 Mar 2016 10:05:38 +0000 (UTC)
+Received: from [216.82.242.35] by server-8.bemta-8.messagelabs.com id
+	39/B1-31132-DE15AF65; Tue, 29 Mar 2016 09:59:09 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-4.tower-75.messagelabs.com!1459245548!15549283!1
+X-Originating-IP: [192.109.95.98]
+X-StarScan-Received: 
+X-StarScan-Version: 8.11; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 60272 invoked from network); 29 Mar 2016 09:59:09 -0000
+Received: from unknown (HELO DOR-VMS-XCH01.digi.com) (192.109.95.98)
+	by server-4.tower-75.messagelabs.com with SMTP;
+	29 Mar 2016 09:59:09 -0000
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by DOR-VMS-XCH01.digi.com
+	(10.49.8.98) with Microsoft SMTP Server (TLS) id 14.3.279.2;
+	Tue, 29 Mar 2016 11:59:01 +0200
+Received: from [10.101.2.54] (10.101.2.54) by dor-sms-xch01.digi.com
+	(10.49.8.99) with Microsoft SMTP Server (TLS) id 14.3.279.2;
+	Tue, 29 Mar 2016 11:59:01 +0200
+To: <openembedded-devel@lists.openembedded.org>, Pushpal Sidhu
+	<psidhu@gateworks.com>, <martin.jansa@gmail.com>
+References: <1457543217-11211-1-git-send-email-akuster808@gmail.com>
+	<20160309191156.GH2542@jama> <56E07715.8060801@gmail.com>
+	<CAD1M062aSMPUfMzCKZ2+8uZcV0q77sm3WHwvQexY2x5uO9hV+g@mail.gmail.com>
+	<20160317215442.GL2553@jama>
+From: Javier Viguera <javier.viguera@digi.com>
+Message-ID: <56FA51DF.3070606@digi.com>
+Date: Tue, 29 Mar 2016 11:58:55 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
 	Thunderbird/38.6.0
 MIME-Version: 1.0
-In-Reply-To: <CA+LDafABV55oxnpcwB4i_zbSG63A=HvNNR_Wzxd=pD+ZRxkHaw@mail.gmail.com>
-Subject: Re: [PATCH] libmicrohttp: update to version 0.9.48
+In-Reply-To: <20160317215442.GL2553@jama>
+X-Originating-IP: [10.101.2.54]
+X-KSE-AntiSpam-Interceptor-Info: protection disabled
+X-KSE-AntiSpam-Interceptor-Info: protection disabled
+X-KSE-Antivirus-Interceptor-Info: scan successful
+X-KSE-Antivirus-Info: Clean
+Subject: Re: [meta-python][jethro][PATCH][V2] python-m2crypto: fix SSLv2 symbol issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,123 +55,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Mar 2016 08:48:59 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 29 Mar 2016 10:05:38 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 2016-03-29 10:20, José Bollo wrote:
-> spdy? because it merely disappeared.
-> regards
-> José
-> José Bollo - Senior Software Engineer
-> www.iot.bzh
+On 17/03/16 22:54, Martin Jansa wrote:
 >
-
-Then please improve the comment above this line as it doesn't really
-convey this information very well.
-
+> I'm still seeing multiple issues caused by last openssl upgrade, e.g.
+> ruby, pywbem, crda
 >
-> 2016-03-29 10:15 GMT+02:00 Gary Thomas <gary@mlbassoc.com>:
->> On 2016-03-29 10:06, jose.bollo@iot.bzh wrote:
->>>
->>> From: José Bollo <jose.bollo@iot.bzh>
->>>
->>> Change-Id: I33a1acf8360d074a3310f9691ac939fe70a99f3e
->>> Signed-off-by: José Bollo <jose.bollo@iot.bzh>
->>> ---
->>>    .../libmicrohttpd/libmicrohttpd_0.9.34.bb          | 27
->>> ----------------------
->>>    .../libmicrohttpd/libmicrohttpd_0.9.48.bb          | 27
->>> ++++++++++++++++++++++
->>>    2 files changed, 27 insertions(+), 27 deletions(-)
->>>    delete mode 100644
->>> meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
->>>    create mode 100644
->>> meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
->>>
->>> diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
->>> b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
->>> deleted file mode 100644
->>> index e3c833b..0000000
->>> --- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
->>> +++ /dev/null
->>> @@ -1,27 +0,0 @@
->>> -DESCRIPTION = "A small C library that is supposed to make it easy to run
->>> an HTTP server as part of another application"
->>> -HOMEPAGE = "http://www.gnu.org/software/libmicrohttpd/"
->>> -LICENSE = "LGPL-2.1+"
->>> -LIC_FILES_CHKSUM = "file://COPYING;md5=9331186f4f80db7da0e724bdd6554ee5"
->>> -SECTION = "net"
->>> -DEPENDS = "libgcrypt gnutls file"
->>> -
->>> -SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
->>> -SRC_URI[md5sum] = "2947eee13c2c8affb95023a0cb6fda0c"
->>> -SRC_URI[sha256sum] =
->>> "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843be421a040be1b25a88"
->>> -
->>> -inherit autotools lib_package
->>> -
->>> -# disable spdy, because it depends on openssl
->>> -EXTRA_OECONF += "--disable-static --with-gnutls=${STAGING_LIBDIR}/../
->>> --disable-spdy"
->>> -
->>> -PACKAGECONFIG ?= "curl"
->>> -PACKAGECONFIG_append_class-target = "\
->>> -        ${@base_contains('DISTRO_FEATURES', 'largefile', 'largefile', '',
->>> d)} \
->>> -"
->>> -PACKAGECONFIG[largefile] = "--enable-largefile,--disable-largefile,,"
->>> -PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,"
->>> -
->>> -do_compile_append() {
->>> -       sed -i s:-L${STAGING_LIBDIR}::g libmicrohttpd.pc
->>> -}
->>> -
->>> diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
->>> b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
->>> new file mode 100644
->>> index 0000000..892009e
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.48.bb
->>> @@ -0,0 +1,27 @@
->>> +DESCRIPTION = "A small C library that is supposed to make it easy to run
->>> an HTTP server as part of another application"
->>> +HOMEPAGE = "http://www.gnu.org/software/libmicrohttpd/"
->>> +LICENSE = "LGPL-2.1+"
->>> +LIC_FILES_CHKSUM = "file://COPYING;md5=9331186f4f80db7da0e724bdd6554ee5"
->>> +SECTION = "net"
->>> +DEPENDS = "libgcrypt gnutls file"
->>> +
->>> +SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
->>> +SRC_URI[md5sum] = "9c298c890088a91fe0d7ac3fec9d0097"
->>> +SRC_URI[sha256sum] =
->>> "87667e158f2bf8c691a002e256ffe30885d4121a9ee4143af0320c47cdf8a2a4"
->>> +
->>> +inherit autotools lib_package
->>> +
->>> +# disable spdy, because it depends on openssl
->>> +EXTRA_OECONF += "--disable-static --with-gnutls=${STAGING_LIBDIR}/../"
->>
->>
->> Why not make this a PACKAGECONFIG choice?
->>
->>> +
->>> +PACKAGECONFIG ?= "curl"
->>> +PACKAGECONFIG_append_class-target = "\
->>> +        ${@base_contains('DISTRO_FEATURES', 'largefile', 'largefile', '',
->>> d)} \
->>> +"
->>> +PACKAGECONFIG[largefile] = "--enable-largefile,--disable-largefile,,"
->>> +PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,"
->>> +
->>> +do_compile_append() {
->>> +       sed -i s:-L${STAGING_LIBDIR}::g libmicrohttpd.pc
->>> +}
->>> +
+> Are they all supposed to be fixed by this?
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Well I just did a basic build tests with the three mentioned above 
+(ruby, pywbem and crda) and these are the results:
+
+RUBY
+~~~~
+I don't see any difference with or without the patch, it's building fine 
+even without the patch but the patch does not hurt either.
+
+PYWBEM_0.8.0
+~~~~~~~~~~~~
+Without the patch fails with:
+
+   File 
+"/ssd/dey/jethro/x11/ccimx6sbc/tmp/sysroots/x86_64-linux/usr/lib/python2.7/site-packages/M2Crypto/_m2crypto.py", 
+line 24, in swig_import_helper
+     _mod = imp.load_module('__m2crypto', fp, pathname, description)
+   ImportError: 
+/ssd/dey/jethro/x11/ccimx6sbc/tmp/sysroots/x86_64-linux/usr/lib/python2.7/site-packages/M2Crypto/__m2crypto.so: 
+undefined symbol: SSLv2_method
+
+With the patch PYWBEM builds fine.
+
+CRDA_3.18
+~~~~~~~~~
+Without the patch fails with:
+
+NOTE: make -j 8 MAKEFLAGS= 
+DESTDIR=/ssd/dey/jethro/x11/ccimx6sbc/tmp/work/cortexa9hf-vfp-neon-dey-linux-gnueabi/crda/3.18-r0/image 
+LIBDIR=/usr/lib/crda LDLIBREG=-Wl,-rpath,/usr/lib/crda -lreg all_noverify
+   GEN  keys-gcrypt.c
+   Trusted pubkeys: pubkeys/linville.key.pub.pem 
+pubkeys/sforshee.key.pub.pem
+ERROR: Failed to import the "M2Crypto" module: 
+/ssd/dey/jethro/x11/ccimx6sbc/tmp/sysroots/x86_64-linux/usr/lib/python2.7/site-packages/M2Crypto/__m2crypto.so: 
+undefined symbol: SSLv2_method
+
+With the patch CRDA builds fine.
+
+So I would say that the patch improves the situation. It fixes the build 
+for some packages and does not seem to break anything.
+
+
+I'm also having build failures for CRDA since almost a month now, so I 
+would like to have the 'jethro-next' merged to 'jethro' as well.
+
+
+Thanks,
+
+Javier Viguera
 
