@@ -1,24 +1,37 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8CDA1606A8
+Return-Path: <fan.xin@jp.fujitsu.com>
+X-Greylist: delayed 656 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 29 Mar 2016 07:42:29 UTC
+Received: from mgwym03.jp.fujitsu.com (mgwym03.jp.fujitsu.com [211.128.242.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 30AA465CBB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2016 07:34:38 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u2T7Yax1014096
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Tue, 29 Mar 2016 07:42:29 +0000 (UTC)
+Received: from yt-mxq.gw.nic.fujitsu.com (unknown [192.168.229.66]) by
+	mgwym03.jp.fujitsu.com with smtp
+	id 4a34_9b52_9355e43c_d757_48b3_ab44_fdf8ea77c4c5;
+	Tue, 29 Mar 2016 16:42:22 +0900
+Received: from g01jpfmpwkw01.exch.g01.fujitsu.local
+	(g01jpfmpwkw01.exch.g01.fujitsu.local [10.0.193.38])
+	by yt-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id 1572AAC00E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2016 00:34:36 -0700
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Tue, 29 Mar 2016 00:34:36 -0700
-From: <rongqing.li@windriver.com>
+	Tue, 29 Mar 2016 16:42:22 +0900 (JST)
+Received: from G01JPEXCHKW18.g01.fujitsu.local
+	(G01JPEXCHKW18.g01.fujitsu.local [10.0.194.57])
+	by g01jpfmpwkw01.exch.g01.fujitsu.local (Postfix) with ESMTP id
+	5BDB26922F5 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Mar 2016 16:42:21 +0900 (JST)
+Received: from localhost.localdomain (10.24.19.99) by
+	G01JPEXCHKW18.g01.fujitsu.local (10.0.194.57) with Microsoft SMTP
+	Server id 14.3.266.1; Tue, 29 Mar 2016 16:42:21 +0900
+From: Fan Xin <fan.xin@jp.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 29 Mar 2016 15:28:56 +0800
-Message-ID: <1459236536-15190-1-git-send-email-rongqing.li@windriver.com>
+Date: Tue, 29 Mar 2016 16:45:03 +0900
+Message-ID: <1459237503-1379-1-git-send-email-fan.xin@jp.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] cpupower: add recipes
+X-SecurityPolicyCheck-GC: OK by FENCE-Mail
+X-TM-AS-MML: disable
+Cc: Fan Xin <fan.xin@jp.fujitsu.com>
+Subject: [PATCH] ntp: Upgrade 4.2.8p4 -> 4.2.8p6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,67 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Mar 2016 07:34:38 -0000
+X-List-Received-Date: Tue, 29 Mar 2016 07:42:32 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+Fix CVE-2015-7974 and other bugs.
+http://archive.ntp.org/ntp4/ChangeLog-stable
 
-cpupower is tools to shows and sets processor power related values
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
 ---
- meta-oe/recipes-kernel/cpupower/cpupower.bb | 41 +++++++++++++++++++++++++++++
- 1 file changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/cpupower/cpupower.bb
+ .../recipes-support/ntp/{ntp_4.2.8p4.bb => ntp_4.2.8p6.bb}            | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/ntp/{ntp_4.2.8p4.bb => ntp_4.2.8p6.bb} (97%)
 
-diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
-new file mode 100644
-index 0000000..d53deac
---- /dev/null
-+++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
-@@ -0,0 +1,41 @@
-+SUMMARY = "Shows and sets processor power related values"
-+DESCRIPTION = "cpupower is a collection of tools to examine and tune power \
-+saving related features of your processor."
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-+DEPENDS = "pciutils"
-+
-+inherit kernelsrc kernel-arch
-+
-+do_configure[depends] += "virtual/kernel:do_shared_workdir"
-+do_populate_lic[depends] += "virtual/kernel:do_patch"
-+
-+PROVIDES = "virtual/cpupower"
-+
-+B = "${WORKDIR}/${BPN}-${PV}"
-+
-+EXTRA_OEMAKE = '\
-+    -C ${S}/tools/power/cpupower \
-+    O=${B} \
-+    CROSS=${TARGET_PREFIX} \
-+    ARCH=${ARCH} \
-+    CC="${CC}" \
-+    AR="${AR}" \
-+'
-+do_compile() {
-+	unset CFLAGS
-+	oe_runmake all
-+}
-+
-+do_install() {
-+	unset CFLAGS
-+	oe_runmake DESTDIR=${D} install
-+	chown root:root ${D}/${libdir}/*
-+}
-+
-+python do_package_prepend() {
-+    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
-+}
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+RDEPENDS_${PN} = "bash"
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p6.bb
+similarity index 97%
+rename from meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
+rename to meta-networking/recipes-support/ntp/ntp_4.2.8p6.bb
+index f9f900e..1ecd8c7 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.8p4.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p6.bb
+@@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+            file://ntpd.list \
+ "
+ 
+-SRC_URI[md5sum] = "6af96862b09324a8ef965ca76b759c8b"
+-SRC_URI[sha256sum] = "0d6961572548d2c4af96f58f763e22ac620f5afef717384ddc317a0e365cfdb9"
++SRC_URI[md5sum] = "60049f51e9c8305afe30eb22b711c5c6"
++SRC_URI[sha256sum] = "583d0e1c573ace30a9c6afbea0fc52cae9c8c916dbc15c026e485a0dda4ba048"
+ 
+ inherit autotools update-rc.d useradd systemd pkgconfig
+ 
 -- 
-1.9.1
+1.8.4.2
 
 
