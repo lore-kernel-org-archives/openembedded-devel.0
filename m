@@ -1,51 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 024B66010B
+	by mail.openembedded.org (Postfix) with ESMTP id 4E6E06FF4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Mar 2016 10:08:01 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id i204so11458635wmd.0
+	Wed, 30 Mar 2016 10:09:11 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id 20so13199938wmh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Mar 2016 03:08:02 -0700 (PDT)
+	Wed, 30 Mar 2016 03:09:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=DvbQMoFk7X3XvnTqSAX69AgC8nrTN9KFLHNkQLDQplw=;
-	b=SBIZJGy3GfFzTyvW/cnO/5mcAqS46xqGJ1GajjR7hQsv64nUo8Q1Oncu0R7QGcxaaS
-	iZ5D1pbvDH98/ilBpEjH0gkfSN+dxfYsp2qkx1JIOynqwvalgVMYzTeHOWKGZmfXH52Z
-	w/h1smdDPUytOlo8lJXVXtelonGtKknZOtTgxcNHSKVLroaxorVum/vFW39GvcrFRp2B
-	VqZFbSpkdrg7bkbExRIEHCsXXjP2YWiWKhzj0z8s3LFDxSK/2FGn99BhkerTF7V3c21c
-	VAtaea+6jmixFfuHuXnTduvYB8nOp3HkDCkCxXuM57U2jTepmKME3RChXXg8Tpm4Nc5Q
-	8wmA==
+	bh=W+RjXsJOJfHHPgO1ag9jkuc/9d6L/3dyz3zvTSPJAMY=;
+	b=RfnaClus9I1TGq67u++X8D8vgkfwVlemEh5mPim55RkTXL3257E5G9csSySN6jf5wn
+	oo6P2lIpujB0Q9Ba4naQ4VL1SPBZaf6f9mJwnXIJwPLs2w+vcqw/GLDaNL/GcKeUdvi6
+	wCi4QM6KrCStjpj2mMacXla6LChHf1SukAkDZJ3QRtHCvK/xYDcf2EJzjDPYccsRFMdB
+	3v4qX1UdjxmgmkQJentrbR8yRlQKhzA2zK2QOO3dlzL3RYFcJ1uLFCM5FTBgFVIB2Zsd
+	xqjGbkfCmjNX6ZUymBKXPoKeKHwVDSkYtFC7R/Jd1Zru0UMPctl6awJRopvtwlxKB1Ep
+	LCLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=DvbQMoFk7X3XvnTqSAX69AgC8nrTN9KFLHNkQLDQplw=;
-	b=i31+sZaXuMDiqFKTzDq5zVc7zdx9W9E8r+85MYApBYCrI0F2exuVL0C4cE/sGjsMoy
-	FokEgYuC//gPf2J9+l79/ZsE2rjvao+YdQoDNmVbpotbkB4mmBHAeE13Xn1BEaVcdEwp
-	ZFRl4Lpc/WfuGBi9SESVKN4pI0yxNdcfogCDzkH3nBX3IrfEz9A+knNItxfN7qCcGu9S
-	oDUpSYpyR12uaPjYE3VYeSmNwin8ieU/6HB/kjC8lb6KYeSonJd3KDVNYeiUhTw1p8II
-	bxNu1oSh44/CeBhKcT+Cgjpu8KiWKQtC9Y+A+lPkk/9/W98TVVHXAWE8oNdsYG1o641s
-	xHSQ==
-X-Gm-Message-State: AD7BkJLxQl+tGpTmzk6YzJBQyoZlRb7TUNXjLWSGHgPYCJTIfzfOxa/FNkYQBPLO69U+OA==
-X-Received: by 10.28.136.211 with SMTP id k202mr23700385wmd.93.1459332481998; 
-	Wed, 30 Mar 2016 03:08:01 -0700 (PDT)
+	bh=W+RjXsJOJfHHPgO1ag9jkuc/9d6L/3dyz3zvTSPJAMY=;
+	b=Qch/2ENjaq//YRDvwsuQx4hbg6oJWowcK6BpooacTATqM4b4hz8tWiTzyoQjmM1Ahg
+	fQEIpgJvNPKpc0S4wnV6iYmRayIiPJmurqNDUrpA+mgQzkdhs0ZZ1E6wubJ2JoRZpQkd
+	9XuT3hXsYMxeP7hnw2PTxyJpg4FNmWKkopHhLH3PR2rN5pycrG2JWha1fAM0dq9/K+ac
+	PKIvm4HIB3LJ63Ap5e42ajEk/tnezbmsHUPfzOE0JZdIJ4A7oAtgI1th9hYk02XzTlcA
+	gMNXlOB0YgUXtt0Jw7mq12cf+Dx9IOoVaoNhPNy3FMvUdRnbfugkqnGgWd6CJZfBdEo5
+	Qw9w==
+X-Gm-Message-State: AD7BkJIE64Y4+OA08IyhPLZB3S+e5tCGNFaHlMIXVlnGsdy3T4XtC67xBOrG9aH6+7AGag==
+X-Received: by 10.28.57.132 with SMTP id g126mr6600560wma.74.1459332551600;
+	Wed, 30 Mar 2016 03:09:11 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	m130sm2006173wmf.10.2016.03.30.03.08.00
+	jk1sm1742843wjb.27.2016.03.30.03.09.10
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Mar 2016 03:08:00 -0700 (PDT)
+	Wed, 30 Mar 2016 03:09:10 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 30 Mar 2016 12:08:01 +0200
+Date: Wed, 30 Mar 2016 12:09:11 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160330100801.GB2557@jama>
-References: <1459328887-21295-1-git-send-email-catalin.enache@windriver.com>
+Message-ID: <20160330100911.GC2557@jama>
+References: <1459328901-21333-1-git-send-email-catalin.enache@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1459328887-21295-1-git-send-email-catalin.enache@windriver.com>
+In-Reply-To: <1459328901-21333-1-git-send-email-catalin.enache@windriver.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH] imagemagick: add PACKAGECONFIG for x11
+Subject: Re: [PATCH] net-snmp: fix invalid paths in target net-snmp-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,53 +58,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2016 10:08:02 -0000
-X-Groupsio-MsgNum: 60734
+X-List-Received-Date: Wed, 30 Mar 2016 10:09:11 -0000
+X-Groupsio-MsgNum: 60735
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="mojUlQ0s9EVzWg2t"
+	protocol="application/pgp-signature"; boundary="eHhjakXzOLJAF9wJ"
 Content-Disposition: inline
 
---mojUlQ0s9EVzWg2t
+--eHhjakXzOLJAF9wJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 30, 2016 at 12:08:07PM +0300, Catalin Enache wrote:
-> ImageMagick should X11 delegate libraries if they are available
+On Wed, Mar 30, 2016 at 12:08:21PM +0300, Catalin Enache wrote:
+> Only net-snmp-config used for sysroot should have sysroot
+> specific paths.
 >=20
 > Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
 > ---
->  meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 10 +++++-=
+----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
 >=20
-> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb b/m=
-eta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb
-> index 12604c0..a1be5a6 100644
-> --- a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb
-> +++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb
-> @@ -23,13 +23,14 @@ inherit autotools pkgconfig update-alternatives
->  EXTRA_OECONF =3D "--program-prefix=3D --program-suffix=3D.im6 --without-=
-x --without-perl --disable-openmp --without-xml --disable-opencl"
+> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb=
+ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+> index 63e0fc7..1a50932 100644
+> --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+> @@ -70,11 +70,6 @@ do_install_append() {
+>      install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/snmpd
+>      install -m 644 ${WORKDIR}/snmpd.conf ${D}${sysconfdir}/snmp/
+>      install -m 644 ${WORKDIR}/snmptrapd.conf ${D}${sysconfdir}/snmp/
+> -    sed    -e "s@^prefix=3D.*@prefix=3D${STAGING_DIR_HOST}@g" \
+> -        -e "s@^exec_prefix=3D.*@exec_prefix=3D${STAGING_DIR_HOST}@g" \
+> -        -e "s@^includedir=3D.*@includedir=3D${STAGING_INCDIR}@g" \
+> -        -e "s@^libdir=3D.*@libdir=3D${STAGING_LIBDIR}@g" \
+> -        -i ${D}${bindir}/net-snmp-config
 
-You should remove --without-x from EXTRA_OECONF when adding the
-PACKAGECONFIG for it.
+What about target ${bindir}/net-snmp-config? Isn't it installed in some
+net-snmp-dev package with incorrect paths?
 
-> =20
->  CACHED_CONFIGUREVARS =3D "ac_cv_sys_file_offset_bits=3Dyes"
-> -PACKAGECONFIG ??=3D ""
-> +PACKAGECONFIG ??=3D "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11=
-', '', d)}"
->  PACKAGECONFIG[jp2] =3D "--with-jp2,,jasper"
->  PACKAGECONFIG[lzma] =3D "--with-lzma,--without-lzma,xz"
->  PACKAGECONFIG[openjpeg] =3D "--with-openjp2,--without-openjp2,openjpeg"
->  PACKAGECONFIG[pango] =3D "--with-pango,--without-pango,pango cairo"
->  PACKAGECONFIG[webp] =3D "--with-webp,--without-webp,libwebp"
->  PACKAGECONFIG[wmf] =3D "--with-wmf,--without-wmf,libwmf"
-> +PACKAGECONFIG[x11] =3D "--with-x,--without-x,virtual/libx11 libxext libx=
-t"
-> =20
->  FILES_${PN} +=3D "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.so \
->                  ${libdir}/ImageMagick-${PV}/modules-Q16/*/*.la \
+>      install -d ${D}${systemd_unitdir}/system
+>      install -m 0644 ${WORKDIR}/snmpd.service ${D}${systemd_unitdir}/syst=
+em
+>      install -m 0644 ${WORKDIR}/snmptrapd.service ${D}${systemd_unitdir}/=
+system
+> @@ -109,6 +104,11 @@ net_snmp_sysroot_preprocess () {
+>          install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+>          install -m 755 ${D}${bindir}/net-snmp-config ${SYSROOT_DESTDIR}$=
+{bindir_crossscripts}/
+>          sed -e "s@-I/usr/include@-I${STAGING_INCDIR}@g" \
+> +            -e "s@^prefix=3D.*@prefix=3D${STAGING_DIR_HOST}${prefix}@g" \
+> +            -e "s@^exec_prefix=3D.*@exec_prefix=3D${STAGING_EXECPREFIXDI=
+R}@g" \
+> +            -e "s@^includedir=3D.*@includedir=3D${STAGING_INCDIR}@g" \
+> +            -e "s@^libdir=3D.*@libdir=3D${STAGING_LIBDIR}@g" \
+> +            -e "s@^NSC_SRCDIR=3D.*@NSC_SRCDIR=3D${S}@g" \
+>            -i  ${SYSROOT_DESTDIR}${bindir_crossscripts}/net-snmp-config
+>      fi
+>  }
 > --=20
 > 2.7.4
 >=20
@@ -117,16 +128,16 @@ t"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---mojUlQ0s9EVzWg2t
+--eHhjakXzOLJAF9wJ
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlb7pYAACgkQN1Ujt2V2gBwuoACgmtz53ABZ3yLp/TKDu+oHldyA
-RKAAn0tJhPDBqhjJtDUDQUuwYHJdwCpO
-=ZDcj
+iEYEARECAAYFAlb7pcYACgkQN1Ujt2V2gBxLxgCeODZTCjMPBoFBvNgO1aSvRgh5
+uOkAoKjq/kNDdbqy6iKdDFD6p/X9d/EA
+=mdvw
 -----END PGP SIGNATURE-----
 
---mojUlQ0s9EVzWg2t--
+--eHhjakXzOLJAF9wJ--
