@@ -1,51 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E6E06FF4E
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D0A860667
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Mar 2016 10:09:11 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id 20so13199938wmh.3
+	Wed, 30 Mar 2016 11:48:53 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id 191so86095144wmq.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Mar 2016 03:09:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=W+RjXsJOJfHHPgO1ag9jkuc/9d6L/3dyz3zvTSPJAMY=;
-	b=RfnaClus9I1TGq67u++X8D8vgkfwVlemEh5mPim55RkTXL3257E5G9csSySN6jf5wn
-	oo6P2lIpujB0Q9Ba4naQ4VL1SPBZaf6f9mJwnXIJwPLs2w+vcqw/GLDaNL/GcKeUdvi6
-	wCi4QM6KrCStjpj2mMacXla6LChHf1SukAkDZJ3QRtHCvK/xYDcf2EJzjDPYccsRFMdB
-	3v4qX1UdjxmgmkQJentrbR8yRlQKhzA2zK2QOO3dlzL3RYFcJ1uLFCM5FTBgFVIB2Zsd
-	xqjGbkfCmjNX6ZUymBKXPoKeKHwVDSkYtFC7R/Jd1Zru0UMPctl6awJRopvtwlxKB1Ep
-	LCLQ==
+	Wed, 30 Mar 2016 04:48:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=F/0A08xDSEOjRH0ODjUivaG1crpt6nX5EHooDBDmGVA=;
+	b=anWJL+oR5QB0/1xSKjnA2qmkWqqvDIYVySLwruj6NFG0nRRYmLM9j7jBmZs0r6NrAE
+	Mmu5eBmWW8OA6Ga6m1VXB0e8I34qRkPQbjPuI2vplqjUPZMcFxME+7jNEkCA811zpRbp
+	F9VIWSkPEOpsHndvjcAMoNQQIWekU9NstdlxM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=W+RjXsJOJfHHPgO1ag9jkuc/9d6L/3dyz3zvTSPJAMY=;
-	b=Qch/2ENjaq//YRDvwsuQx4hbg6oJWowcK6BpooacTATqM4b4hz8tWiTzyoQjmM1Ahg
-	fQEIpgJvNPKpc0S4wnV6iYmRayIiPJmurqNDUrpA+mgQzkdhs0ZZ1E6wubJ2JoRZpQkd
-	9XuT3hXsYMxeP7hnw2PTxyJpg4FNmWKkopHhLH3PR2rN5pycrG2JWha1fAM0dq9/K+ac
-	PKIvm4HIB3LJ63Ap5e42ajEk/tnezbmsHUPfzOE0JZdIJ4A7oAtgI1th9hYk02XzTlcA
-	gMNXlOB0YgUXtt0Jw7mq12cf+Dx9IOoVaoNhPNy3FMvUdRnbfugkqnGgWd6CJZfBdEo5
-	Qw9w==
-X-Gm-Message-State: AD7BkJIE64Y4+OA08IyhPLZB3S+e5tCGNFaHlMIXVlnGsdy3T4XtC67xBOrG9aH6+7AGag==
-X-Received: by 10.28.57.132 with SMTP id g126mr6600560wma.74.1459332551600;
-	Wed, 30 Mar 2016 03:09:11 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	jk1sm1742843wjb.27.2016.03.30.03.09.10
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Mar 2016 03:09:10 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 30 Mar 2016 12:09:11 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160330100911.GC2557@jama>
-References: <1459328901-21333-1-git-send-email-catalin.enache@windriver.com>
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=F/0A08xDSEOjRH0ODjUivaG1crpt6nX5EHooDBDmGVA=;
+	b=gS/qZDxtzN1m35JPnaBZnHA98j23gUY3EMGj0qMlJhVc5C5fpwiyy2Al9e+gJ2jGeP
+	5vzvUtH8SPsmB9kukO+6OhZFfdxQbWK2JKzFo0UFgq0HeoOMACQO7plCD1f2cITXVKyC
+	Cm74dBUedvTgV2iETFeRgxl0LfmjiaIfEpfs+13iw1+6kWDOv1aVX3I4SzfgZtTkgAlC
+	eL111z6yKNjkwLQHuGdekW6kCKeautSZKPrRcD1gKukje1wCBNtwhhKvBETFz4aoFzrp
+	ZG2xsa330R8T2ib9T++ioEF+JOwFAHhBTRLAn2trNIslgcy/CdrVVmXBqp8Qeoqm+ADS
+	H7tw==
+X-Gm-Message-State: AD7BkJLF8+KpYAroYAlze+0Daeb/Rx0xkUV+5IDRQdaGga+0OGius5GZvviKw0b7kW5ku5p2IyMxkx01ZoHjOWKG
+X-Received: by 10.194.90.3 with SMTP id bs3mr9028597wjb.105.1459338534202;
+	Wed, 30 Mar 2016 04:48:54 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1459328901-21333-1-git-send-email-catalin.enache@windriver.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH] net-snmp: fix invalid paths in target net-snmp-config
+Received: by 10.194.206.33 with HTTP; Wed, 30 Mar 2016 04:48:34 -0700 (PDT)
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Wed, 30 Mar 2016 13:48:34 +0200
+Message-ID: <CAP71WjzNNeYY2pA5-YxtXFZJ01iPR=dgORMoYfCgWDPAA7_RsA@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: openbox themes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,86 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2016 10:09:11 -0000
-X-Groupsio-MsgNum: 60735
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="eHhjakXzOLJAF9wJ"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 Mar 2016 11:48:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
---eHhjakXzOLJAF9wJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+hi,
 
-On Wed, Mar 30, 2016 at 12:08:21PM +0300, Catalin Enache wrote:
-> Only net-snmp-config used for sysroot should have sysroot
-> specific paths.
->=20
-> Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
-> ---
->  meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 10 +++++-=
-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb=
- b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-> index 63e0fc7..1a50932 100644
-> --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-> @@ -70,11 +70,6 @@ do_install_append() {
->      install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/snmpd
->      install -m 644 ${WORKDIR}/snmpd.conf ${D}${sysconfdir}/snmp/
->      install -m 644 ${WORKDIR}/snmptrapd.conf ${D}${sysconfdir}/snmp/
-> -    sed    -e "s@^prefix=3D.*@prefix=3D${STAGING_DIR_HOST}@g" \
-> -        -e "s@^exec_prefix=3D.*@exec_prefix=3D${STAGING_DIR_HOST}@g" \
-> -        -e "s@^includedir=3D.*@includedir=3D${STAGING_INCDIR}@g" \
-> -        -e "s@^libdir=3D.*@libdir=3D${STAGING_LIBDIR}@g" \
-> -        -i ${D}${bindir}/net-snmp-config
+i am not sure if this is something new or not.. and I believe it used
+to work for me in the past (but I am not 100% sure..).
 
-What about target ${bindir}/net-snmp-config? Isn't it installed in some
-net-snmp-dev package with incorrect paths?
+If I only add openbox in my image, it would fail to start with
+something like this:
 
->      install -d ${D}${systemd_unitdir}/system
->      install -m 0644 ${WORKDIR}/snmpd.service ${D}${systemd_unitdir}/syst=
-em
->      install -m 0644 ${WORKDIR}/snmptrapd.service ${D}${systemd_unitdir}/=
-system
-> @@ -109,6 +104,11 @@ net_snmp_sysroot_preprocess () {
->          install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
->          install -m 755 ${D}${bindir}/net-snmp-config ${SYSROOT_DESTDIR}$=
-{bindir_crossscripts}/
->          sed -e "s@-I/usr/include@-I${STAGING_INCDIR}@g" \
-> +            -e "s@^prefix=3D.*@prefix=3D${STAGING_DIR_HOST}${prefix}@g" \
-> +            -e "s@^exec_prefix=3D.*@exec_prefix=3D${STAGING_EXECPREFIXDI=
-R}@g" \
-> +            -e "s@^includedir=3D.*@includedir=3D${STAGING_INCDIR}@g" \
-> +            -e "s@^libdir=3D.*@libdir=3D${STAGING_LIBDIR}@g" \
-> +            -e "s@^NSC_SRCDIR=3D.*@NSC_SRCDIR=3D${S}@g" \
->            -i  ${SYSROOT_DESTDIR}${bindir_crossscripts}/net-snmp-config
->      fi
->  }
-> --=20
-> 2.7.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+dragonboard-410c:/home/linaro# openbox &
+ObRender-Message: Unable to load the theme 'Clearlooks'
+ObRender-Message: Falling back to the default theme 'Clearlooks'
+ObRender-Message: Unable to load the theme 'Clearlooks'
+Openbox-Message: Unable to load a theme.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+After I add openbox-theme-clearlooks in my image, openbox would start normally.
 
---eHhjakXzOLJAF9wJ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+As I said, I am fairly sure I had tried that before, and I don't
+remember adding a theme myself but it might have come as a dependency
+of some sort..
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Anyways, can someone confirm if openbox is expected to fail when no
+theme is installed? If so, should we gracefully handle this in openbox
+recipe and add a default theme as RDEPENDS?
 
-iEYEARECAAYFAlb7pcYACgkQN1Ujt2V2gBxLxgCeODZTCjMPBoFBvNgO1aSvRgh5
-uOkAoKjq/kNDdbqy6iKdDFD6p/X9d/EA
-=mdvw
------END PGP SIGNATURE-----
+thank!
 
---eHhjakXzOLJAF9wJ--
+nico
+
