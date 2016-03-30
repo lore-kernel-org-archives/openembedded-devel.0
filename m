@@ -1,24 +1,29 @@
-Return-Path: <alejandro.hernandez@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D55B60132
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 481B765CC3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Mar 2016 23:00:24 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga101.fm.intel.com with ESMTP; 29 Mar 2016 16:00:24 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,413,1455004800"; d="scan'208";a="921366230"
-Received: from unknown (HELO [10.219.25.69]) ([10.219.25.69])
-	by orsmga001.jf.intel.com with ESMTP; 29 Mar 2016 16:00:23 -0700
-To: openembedded-devel@lists.openembedded.org
-References: <CA+YB3rZ6d4U09V6dtCOELRgQqxDAon9aspXsGvq2XRr09aRYTQ@mail.gmail.com>
-From: Alejandro Hernandez <alejandro.hernandez@linux.intel.com>
-Message-ID: <56FB0975.7000801@linux.intel.com>
-Date: Tue, 29 Mar 2016 17:02:13 -0600
+	Wed, 30 Mar 2016 01:42:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u2U1gOm1010737
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Mar 2016 18:42:24 -0700
+Received: from [128.224.162.186] (128.224.162.186) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Tue, 29 Mar 2016 18:42:23 -0700
+To: <openembedded-devel@lists.openembedded.org>, "Ashfield, Bruce"
+	<Bruce.Ashfield@windriver.com>
+References: <1459239776-3868-1-git-send-email-rongqing.li@windriver.com>
+	<CADkTA4PJWOcidD42V9vAHBQLu6QDb3fgKkT7LGiav9zRWeX6uA@mail.gmail.com>
+From: Rongqing Li <rongqing.li@windriver.com>
+Message-ID: <56FB2EFD.4080201@windriver.com>
+Date: Wed, 30 Mar 2016 09:42:21 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
+	Thunderbird/38.3.0
 MIME-Version: 1.0
-In-Reply-To: <CA+YB3rZ6d4U09V6dtCOELRgQqxDAon9aspXsGvq2XRr09aRYTQ@mail.gmail.com>
-Subject: Re: OEDAM: location, time, meals
+In-Reply-To: <CADkTA4PJWOcidD42V9vAHBQLu6QDb3fgKkT7LGiav9zRWeX6uA@mail.gmail.com>
+Subject: Re: [PATCH][meta-oe] virt-what: add the recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,44 +36,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Mar 2016 23:00:28 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 30 Mar 2016 01:42:24 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hey Jefro, I just requested an account on openembedded.org to be able to 
-edit the Attendees field, in the mean time; Yes I will attend, and I 
-will require transportation from the ELC venue.
 
-Let me know if anything else is needed.
 
-Thanks!
+On 2016年03月29日 22:22, Bruce Ashfield wrote:
+> On Tue, Mar 29, 2016 at 4:22 AM, <rongqing.li@windriver.com> wrote:
+>
+>> From: Roy Li <rongqing.li@windriver.com>
+>>
+>> virt-what is a a shell script which can be used to detect if the program
+>> is running in a virtual machine.
+>>
+>
+> Did you consider meta-virtualization for this ? not a big concern .. just
+> wondering.
+>
+> Bruce
 
-Alejandro
+it is related virt, I will send it to meta-virtualization.
 
-On 03/29/2016 03:57 PM, Jeff Osier-Mixon wrote:
-> Hello potential OEDAM attendees
+this is needed by tuned, so I add it firstly before add tuned.
+
+
+-Roy
+
 >
-> As previously mentioned, OEDAM will take place at the Catamaran Resort
-> in San Diego's Pacific Beach neighborhood. Continental breakfast,
-> lunch, and coffee will be provided.
 >
-> I can also arrange transportation to and from the ELC venue for those
-> who need it. Carpooling is encouraged. Parking is available on site
-> for $5 self parking, $10 valet.
+>>
+>> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+>> ---
+>>   .../recipes-extended/virt-what/virt-what_1.15.bb   | 36
+>> ++++++++++++++++++++++
+>>   1 file changed, 36 insertions(+)
+>>   create mode 100644 meta-oe/recipes-extended/virt-what/virt-what_1.15.bb
+>>
+>> diff --git a/meta-oe/recipes-extended/virt-what/virt-what_1.15.bb
+>> b/meta-oe/recipes-extended/virt-what/virt-what_1.15.bb
+>> new file mode 100644
+>> index 0000000..7509eee
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/virt-what/virt-what_1.15.bb
+>> @@ -0,0 +1,36 @@
+>> +SUMMARY = "Detect if we are running in a virtual machine"
+>> +DESCRIPTION =" virt-what is a shell script which can be used to detect if
+>> the program \
+>> +is running in a virtual machine. \
+>> +The program prints out a list of "facts" about the virtual machine, \
+>> +derived from heuristics.  One fact is printed per line. \
+>> +If nothing is printed and the script exits with code 0 (no error), \
+>> +then it can mean either that the program is running on bare-metal or \
+>> +the program is running inside a type of virtual machine which we don't \
+>> +know about or can't detect. \
+>> +Current types of virtualization detected: \
+>> + - hyperv       Microsoft Hyper-V \
+>> + - kvm          Linux Kernel Virtual Machine (KVM) \
+>> + - openvz       OpenVZ or Virtuozzo \
+>> + - powervm_lx86 IBM PowerVM Lx86 Linux/x86 emulator \
+>> + - qemu         QEMU (unaccelerated) \
+>> + - uml          User-Mode Linux (UML) \
+>> + - virtage      Hitachi Virtualization Manager (HVM) Virtage LPAR \
+>> + - virtualbox   VirtualBox \
+>> + - virtualpc    Microsoft VirtualPC \
+>> + - vmware       VMware \
+>> + - xen          Xen \
+>> + - xen-dom0     Xen dom0 (privileged domain) \
+>> + - xen-domU     Xen domU (paravirtualized guest domain) \
+>> + - xen-hvm      Xen guest fully virtualized (HVM) \
+>> +"
+>> +
+>> +SECTION = "base"
+>> +LICENSE = "GPLv2"
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>> +
+>> +SRC_URI = "
+>> http://people.redhat.com/~rjones/virt-what/files/${PN}-${PV}.tar.gz"
+>> +
+>> +inherit autotools
+>> +
+>> +SRC_URI[md5sum] = "35d19ca3305e8ae88c1985fbd8388f53"
+>> +SRC_URI[sha256sum] =
+>> "7ab9220d4682eadf9139c6afe62d33ebd273fff69e49054279caba5514937c41"
+>> --
+>> 1.9.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 >
-> We plan to start the meeting at 9am, so please plan to be there by
-> 8:45 or so. I believe coffee and nosh will be available by 8:30.
 >
-> If you have signed up on the wiki page
-> (http://openembedded.org/wiki/OEDAM_2016), thank you for your
-> interest! Please let me know *immediately* if you need a vegetarian
-> meal. Also let me know if you will require transportation.
->
-> If you plan to attend OEDAM and haven't yet signed up, please do so
-> immediately if you plan to attend. I need to provide a final headcount
-> by end of the week.
->
-> thanks
 >
 
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
