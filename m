@@ -1,51 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 6BFD86FF73
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-lf0-f42.google.com (mail-lf0-f42.google.com
+	[209.85.215.42])
+	by mail.openembedded.org (Postfix) with ESMTP id AF22660053
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2016 12:59:30 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id i204so21721642wmd.0
+	Thu, 31 Mar 2016 13:14:00 +0000 (UTC)
+Received: by mail-lf0-f42.google.com with SMTP id p188so32049510lfd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2016 05:59:31 -0700 (PDT)
+	Thu, 31 Mar 2016 06:14:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=dFNj383xip6fK2X16i5T7yMF0VgGGL0aEpf6InOx1qY=;
-	b=BOxWtt/1Z+FcebQuu7jQE/qXp3LCemqSm5/rL0tZR/8NyFXOQn4M5xqXRYX952HLkX
-	CEqKCmotGdKWlMYofz6W+MTYHYtGdvgRMYXy5Qhxbwp7aXTr72ti/TzsTKeg/IGEdltv
-	JUrKvM2/BMXBetw/ar+ik9MEJ4GwBGMG/5ZcVPg5O3Sq4tW7YdxbWLKMo3HiGsmi7C2L
-	ao+7l0laGdC0SukLqo/685UJIgt5eo9wtgjTHKxnTPXII1QfJy/jIljdmAIqkdN0vEeN
-	FiGTlaDGQQiw9FNY5HVJ5buICk91aU4wYfHRXiXvqUrC3AVl4DIwfYVycpw3N9/tBqFK
-	siVw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=3gpogg7qIVmOHlp7Dw87q1FFRRXhesgo+kXPN6FITns=;
+	b=0opPGBDmcgscESg4fVncF13npg3YhGWvMklQDtyassJI9FaPAvpaBTeFmKbzOEFr8Y
+	pMQh+p0V9N6nWec8pE1oR33ZZAoMttCwLty4Vw49N5f0zantgVFWclwsEabYJISVZ3Tk
+	I/G+e3BwUXck5YTmpvrWHgRKnjelJE6tdzMxuqUjxH0IvobWhYE2BKU8Zj0iW0lIR+qb
+	qtZqpi7wNDuPBIk80lFsLxfTaDXiyWIsYduDjqotRDNsuY81D1wcgCXpOwvWGQxYjWvy
+	WBsKQfa/u/Qo+vBjBqnAI3E+B/3DK3esIsAcWpxz9Nyuv7atlnh5HTb9FHDhmg76AOUd
+	wWNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=dFNj383xip6fK2X16i5T7yMF0VgGGL0aEpf6InOx1qY=;
-	b=CUP3yk+GX07kqokTurNXoFP1+6Zi6ab4zLDre4aRi0dXoHrtHbJrlFb0tPKFkV9M1N
-	DXHdoxHmpqD3YwGZWRnVcng7Et6xQJfhrBQMUE2Wfn51f0JO2m1I4bKd+ZfwJ6R7dLAm
-	an7Fp3ut4eUK/4vzHSeADiKd780q43qUa4HoVaf2NTw/cYrqYerU1gxPpR0kNQoujNLq
-	yO89ycd4BRgNjsct5PprhOMNLDLIJOsAvbWLbygQpjMwHqaDTC2+ukMEg4bUzGOgXXkx
-	qx8J/8BkjfpbyF1/ac0Zbe1Z2wGaWgLXGnLhIMNEPI4bb/vtI97h6N5jqOaB3c6VpyVY
-	98Aw==
-X-Gm-Message-State: AD7BkJLODWZ3rjp2bQiDGO+gyH42A7oGURPZgiwtAPG/V4IWJwTpY6U+gPm4IDZ4NJfmHQ==
-X-Received: by 10.194.85.161 with SMTP id i1mr16283164wjz.95.1459429170806;
-	Thu, 31 Mar 2016 05:59:30 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id s9sm21263406wmf.0.2016.03.31.05.59.29
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 31 Mar 2016 05:59:29 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 31 Mar 2016 14:59:37 +0200
-To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Message-ID: <20160331125937.GC2540@jama>
-References: <1459423593-4123-1-git-send-email-ricardo.ribalda@gmail.com>
-	<1459423593-4123-7-git-send-email-ricardo.ribalda@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=3gpogg7qIVmOHlp7Dw87q1FFRRXhesgo+kXPN6FITns=;
+	b=cUKhelS7ZNq/hLDaj1DYdIbwBFJqeGvyVfuXfdwRu2STB6T4CKr2nabMpfDX7azn/F
+	fViLkbNRYAGEgzTwbkPWpVVC0EBbYLNjoeLcBa8jzJOx08K+/0zIMO2sa30lwWRUzaVS
+	aP09TeT6gvyqymOC2M56ntiqKnz6ETKS4gmtcUwK05n7STYHjsDuDEyRFiDUivY7maOa
+	8jBoqz4dZUxmaKYWiP2R1AV7JLJp93A+hag8b0j10d6S0izAe2V5ORDTkxB87izC16w3
+	aRGvfrcYd23m4p7EG19LsKHao1Xf31QuRo0nf6TlJTnlQ0zPn+dtclTduXKYlo5/Nn25
+	wp6Q==
+X-Gm-Message-State: AD7BkJKqn8gub5K+LLY9SE0bkXz6nBZuKqfDJRPohlcV/kmQlFNQ63w2moYvs/6j0AwRuPMGDNzpKRBF9aKbAA==
+X-Received: by 10.25.127.208 with SMTP id a199mr6606974lfd.46.1459430039536;
+	Thu, 31 Mar 2016 06:13:59 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1459423593-4123-7-git-send-email-ricardo.ribalda@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v4 6/7] opencv: Fix build on x86 platform
+Received: by 10.114.11.40 with HTTP; Thu, 31 Mar 2016 06:13:38 -0700 (PDT)
+In-Reply-To: <20160331125851.GB2540@jama>
+References: <1459423593-4123-1-git-send-email-ricardo.ribalda@gmail.com>
+	<1459423593-4123-6-git-send-email-ricardo.ribalda@gmail.com>
+	<20160331125851.GB2540@jama>
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Date: Thu, 31 Mar 2016 15:13:38 +0200
+Message-ID: <CAPybu_0LUWmHUbKN5r3VSkycT9TNT+r1dinJLUTS_Dpdny5UEw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v4 5/7] opencv: Use pre-downloaded ipp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,67 +54,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2016 12:59:31 -0000
-X-Groupsio-MsgNum: 60751
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="lc9FT7cWel8HagAv"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 31 Mar 2016 13:14:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
---lc9FT7cWel8HagAv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Martin
 
-On Thu, Mar 31, 2016 at 01:26:32PM +0200, Ricardo Ribalda Delgado wrote:
-> OpenCV wrongly assumes that the X86 variable would be set on Intel 32
-> bit architectures.
->=20
-> This patch adds the missing definition on those cases.
->=20
-> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-> ---
->  meta-oe/recipes-support/opencv/opencv_3.1.bb | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recip=
-es-support/opencv/opencv_3.1.bb
-> index 84a592799c0a..7f09168784d9 100644
-> --- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
-> +++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-> @@ -41,6 +41,7 @@ EXTRA_OECMAKE =3D "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=3D=
-${STAGING_LIBDIR}/${PYTHON_DI
->                   ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFF=
-IX=3D64", "", d)} \
->                   ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFF=
-IX=3D32", "", d)} \
->  "
-> +EXTRA_OECMAKE_append_x86 +=3D " -DX86=3DON"
+>>  SRCREV_opencv = "92387b1ef8fad15196dd5f7fb4931444a68bc93a"
+>>  SRCREV_contrib = "5409d5ad560523c85c6796cc5a009347072d883c"
+>> +IPP_MD5 = "808b791a6eac9ed78d32a7666804320e"
+>> +SRC_URI[ipp.md5sum] = "${IPP_MD5}"
+>> +SRC_URI[ipp.sha256sum] = "4333833e40afaa22c804169e44f9a63e357e21476b765a5683bcb3760107f0da"
+>> +
+>
+> Why don't you add normal git repo https://github.com/Itseez/opencv_3rdparty
+> in corresponding branch/revision?
 
-Please don't combine _append and +=3D. _append and leading space in value
-(as you already have) is enough.
+Because this mimics better what is done by the configure script, there
+are less things to download, and the unpack of the .tgz is
+automagically done
 
-> =20
->  PACKAGECONFIG ??=3D "eigen jpeg png tiff v4l libv4l gstreamer samples tb=
-b \
->                     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk",=
- "", d)} \
-> --=20
-> 2.8.0.rc3
->=20
+But if you dont like it I can change it.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+--
+Ricardo Ribalda
 
---lc9FT7cWel8HagAv
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlb9HzkACgkQN1Ujt2V2gBx8aQCfZC6jgIhKZKqEFAKjJCLj2HWN
-5LEAoJ1mntJZxMC6NSR4+pCDB1R1jFxs
-=bFSk
------END PGP SIGNATURE-----
-
---lc9FT7cWel8HagAv--
