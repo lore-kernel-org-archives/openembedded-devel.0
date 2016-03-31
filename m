@@ -1,51 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <eduardo@monkey.io>
 Received: from mail-pf0-f182.google.com (mail-pf0-f182.google.com
 	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id C7C706012C
+	by mail.openembedded.org (Postfix) with ESMTP id 5016865CB6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Mar 2016 18:19:57 +0000 (UTC)
-Received: by mail-pf0-f182.google.com with SMTP id 4so48984430pfd.0
+	Thu, 31 Mar 2016 06:43:06 +0000 (UTC)
+Received: by mail-pf0-f182.google.com with SMTP id 4so62358490pfd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Mar 2016 11:19:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
-	bh=szyAqVfRylcmpRYWN0Z88KNUR8VAk5ZyZsHPW9Olz9Y=;
-	b=AfpxVzKt+XYoV0P633VzW3FeuTPPAoIIWJARh/n4aojfil5Naeo0cJLmFbyTs8Cq7l
-	uXEO6XYc+oqVsoiZTLyExULYg0p/siyaeCJj4zEwiIFdbTVxdIN07J+v4HBEkhD7oAZg
-	sfrrQVzC4fmskKhMOn/HBOcc0lmVg3D+a7076ukgam3jmY7ONFC74MI4rTQvUCsjLKEE
-	PGn8uzs/Em6Qs+lk70Z0UlHWzj9ZKQyDH4ooFPaL++2WHI4ptlCw0X+wjmv8vjaOly2J
-	32lCNEaraEnTmriM/ebF3AwnMqwY9ZGRtnP94JAtr8hsYuVQ5/eXjRnVPMHTYGuWPdeO
-	GlmA==
+	Wed, 30 Mar 2016 23:43:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=monkey-io.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=lrd6/+XO12onkBxQ2bAmO+u9l3wdlK3htMO5Zpi9eCk=;
+	b=cwoLcGpRmD2Gdmxaxxz3xpauM9xEn9jFMYNhAKIi7b04SUL+IB1WDNEhBbHNKpV/yg
+	e20jzmlvyZJxID25yghJ3W17W9ylMpj+rAmfJezNDTZMlpjtuF8IDsx8KF6c3cx3HkVg
+	tCJolNWyIyFymLZJvawfe7cCgxpFi6Pqi3OAny63FykT1ZQtp+BkYepqwCHUYwxwQ+RI
+	3uhdIccvVC8Zvhlm3y4ZcW0CNDkRaKp/UgmMH3TUMOOMHt9hCZ14JWRpEykBgCOJlaFR
+	wPrhzuWfMB75S6ZZZ5TohdTqEMklR/knL3ZAkMu8Ie0XbKG8eDroqcnfHovgLSQ5N13r
+	xdkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
-	:message-id:references:to;
-	bh=szyAqVfRylcmpRYWN0Z88KNUR8VAk5ZyZsHPW9Olz9Y=;
-	b=Hd98z0airuYAkfuHa3aclmE7TA4IZilCdfN9bkLU4epKsk+FJefxadDfwak1iudigD
-	AL8wyFTc3GlLEnnC3kZRQTL/WSbPewibemJckeZG4o5NB8J4dP2Y/Q2lemtjL0jXn4cq
-	ADAV4BOiChggMWlYJjW2MAJV0P558CMWZnT3ZHBk0yScZQzUEtlMr31gArZcJ+44ZXJy
-	j+kfMR40z89R3g8ZubTFNf8Q6bNdxa/A4DXU6Y2PPfhc5wduJhfk0Xm7cucT2+2Qbwcr
-	GObUbLwhbX/Sp9cGt5XSWwunfjurkTee7aGoP9Kc5PVIOT2LISxWqwyVVrfTT5cckvPy
-	iSnQ==
-X-Gm-Message-State: AD7BkJLH1znpwJmIaxiIuRbOT3GWywWE7KlZnhBc3cShhqoQoiuL71P+1rSyKR+WfSI8FQ==
-X-Received: by 10.98.17.78 with SMTP id z75mr15640622pfi.40.1459361997924;
-	Wed, 30 Mar 2016 11:19:57 -0700 (PDT)
-Received: from [192.168.0.76] (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	to9sm7547375pab.27.2016.03.30.11.19.56
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 30 Mar 2016 11:19:57 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CAP71WjzNNeYY2pA5-YxtXFZJ01iPR=dgORMoYfCgWDPAA7_RsA@mail.gmail.com>
-Date: Wed, 30 Mar 2016 11:19:52 -0700
-Message-Id: <1BA327FE-7861-41A7-AB53-A5DBB8EF3FEA@gmail.com>
-References: <CAP71WjzNNeYY2pA5-YxtXFZJ01iPR=dgORMoYfCgWDPAA7_RsA@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=lrd6/+XO12onkBxQ2bAmO+u9l3wdlK3htMO5Zpi9eCk=;
+	b=euY84v3add8BcBhIjFBsay/BAU6Z4F9BSmLcR1oGS9W7cmmcq7m4U2vBFXJdhjq/Us
+	eXarvEdxoyBMEYWRstCQzcDzWDJPIR5tvYjfYe48JVjRQj7JSaoRnQGeCPs4US7dX7EU
+	8NEqjDntdG4qINlWRYXRK1ySfD/TLt4hFykkovrhXcjXCB2Yc+TNbFr5pU94gSNor6TZ
+	lbB0bFhsEIfYcDFLNyfR2bhCMwnmnnSSTO5IYCuOS/UtLxVDjV6LwpKBNznEwG5WVLV3
+	JZZRktCP3jT6QTNal7YDAtwYj1fOcQJ8cfJhdjTV5Gvke/UrF+cd+o818gCKRXrtlRLw
+	qhXQ==
+X-Gm-Message-State: AD7BkJIog72Oc2X3cnvvhQXXds3z3q3FYm3JFdUqS9IySQIuBH+SQEwccCoHFjk6XQvOVQ==
+X-Received: by 10.98.75.28 with SMTP id y28mr19507025pfa.126.1459406587658;
+	Wed, 30 Mar 2016 23:43:07 -0700 (PDT)
+Received: from localhost.localdomain ([64.55.107.3])
+	by smtp.gmail.com with ESMTPSA id
+	ul7sm10464167pac.41.2016.03.30.23.43.06
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 30 Mar 2016 23:43:07 -0700 (PDT)
+From: Eduardo Silva <eduardo@monkey.io>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3124)
-Subject: Re: openbox themes
+Date: Thu, 31 Mar 2016 00:42:52 -0600
+Message-Id: <1459406572-8144-1-git-send-email-eduardo@monkey.io>
+X-Mailer: git-send-email 2.5.0
+Subject: [meta-oe][PATCH] fluentbit: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,80 +53,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2016 18:19:58 -0000
-X-Groupsio-MsgNum: 60738
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_210977A0-64CC-4D8A-BD6F-788F054C94B4";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Thu, 31 Mar 2016 06:43:09 -0000
 
---Apple-Mail=_210977A0-64CC-4D8A-BD6F-788F054C94B4
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+Fluent Bit is an open source data collector for Embedded Linux, this
+patch adds the recipe for version 0.7.2.
 
+  Project web site: http://fluentbit.io
+  Documentation   : http://fluentbit.io/documentation/
 
-> On Mar 30, 2016, at 4:48 AM, Nicolas Dechesne =
-<nicolas.dechesne@linaro.org> wrote:
->=20
-> hi,
->=20
-> i am not sure if this is something new or not.. and I believe it used
-> to work for me in the past (but I am not 100% sure..).
->=20
-> If I only add openbox in my image, it would fail to start with
-> something like this:
->=20
-> dragonboard-410c:/home/linaro# openbox &
-> ObRender-Message: Unable to load the theme 'Clearlooks'
-> ObRender-Message: Falling back to the default theme 'Clearlooks'
-> ObRender-Message: Unable to load the theme 'Clearlooks'
-> Openbox-Message: Unable to load a theme.
->=20
-> After I add openbox-theme-clearlooks in my image, openbox would start =
-normally.
->=20
+Signed-off-by: Eduardo Silva <eduardo@monkey.io>
+---
+ meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
 
-Do you have XDG_DATA_DIRS variable set to include /usr/share, try =
-something like
-
-export XDG_DATA_DIRS=3D$XDG_DATA_DIRS:/usr/share
-
-before launching openbox, if that works then may be you should add it to =
-/etc/profile
-via a post processing hook or some such.
-
-> As I said, I am fairly sure I had tried that before, and I don't
-> remember adding a theme myself but it might have come as a dependency
-> of some sort..
->=20
-> Anyways, can someone confirm if openbox is expected to fail when no
-> theme is installed? If so, should we gracefully handle this in openbox
-> recipe and add a default theme as RDEPENDS?
->=20
-> thank!
->=20
-> nico
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
+new file mode 100644
+index 0000000..fd38e84
+--- /dev/null
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Fast data collector for Embedded Linux"
++HOMEPAGE = "http://fluentbit.io"
++BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
++
++SRC_URI = "http://fluentbit.io/releases/0.7/fluent-bit-${PV}.tar.gz"
++SRC_URI[md5sum] = "6df9d676e1d2d782a243e655e144e8ae"
++SRC_URI[sha256sum] = "695b56ce378f56855c9554f88f5d8e4f7b11ba7691284903870f779912af4ebe"
++S = "${WORKDIR}/fluent-bit-${PV}"
++
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
++
++RDEPENDS_${PN} = "zlib"
++
++inherit cmake
+-- 
+2.5.0
 
 
---Apple-Mail=_210977A0-64CC-4D8A-BD6F-788F054C94B4
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlb8GMwACgkQuwUzVZGdMxThJACfavNhGRv9kYANPNE/BNiBdpex
-A8sAn0h++41Nkb44nmi2Nsjssos2Okay
-=wl/X
------END PGP SIGNATURE-----
-
---Apple-Mail=_210977A0-64CC-4D8A-BD6F-788F054C94B4--
