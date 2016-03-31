@@ -1,51 +1,52 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f50.google.com (mail-lf0-f50.google.com
-	[209.85.215.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DFBC6FF73
+Return-Path: <ygl@koumoul.net>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B98D6FF5D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2016 11:26:43 +0000 (UTC)
-Received: by mail-lf0-f50.google.com with SMTP id k79so57226981lfb.2
+	Thu, 31 Mar 2016 11:55:54 +0000 (UTC)
+Received: by mail-wm0-f43.google.com with SMTP id p65so221682990wmp.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2016 04:26:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Kam5N8FtuGKypfG2SWTHlPdLBSX4kSXQMSFi47ILyI4=;
-	b=ja/uyE1Lg97Ua+DBZczL2podabjb0EEa1BDIYtJFCXmB9ltFMjDGDxinpM7OFSai9a
-	yvyYRxIVaNDwUTjnih3Vpdll+imDzo01AdXyACf+RtFA2Bw2U1CiVksQpV6kwRnLDatU
-	1c4fXDmjWPTnIkYkqFeQfPzPHb0Oa+ICgj8Ha74Clc2hjKIQrjfcFHB0W/lSU1uiFB+m
-	6seL5uyqIG30b4GGxNLblwPd1mD6hPhh1gZ1q8Ke7UVkZeO0iGhvVgPvkOKjGPh2P/LP
-	NU8rxhBQ1YF7U76cW9ej5q48g5+ZFf4cQA2fuGVOCARp1tm0XmgrM2jMsSndTfcDD6e6
-	D3kg==
+	Thu, 31 Mar 2016 04:55:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=koumoul.net; s=dkim;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=C11HJLfTP0tuatv+Kxm7kDbJ5zRRu4msxXLvlJKsYLU=;
+	b=iH6eeDDjWvC/jzIbmKA/tM2YOG4TUhMo3X7vItvxDBGQxYfkkfNouRxtylEvS7pWf0
+	2u2nCsV0g/6aQVpepJnDr5x/Z3weazElGgPj/IvxZiwsoKVhnrVBfs6vCq0RRwOq8V7c
+	8GW6GzgFyJSkGjzdu22JETG7giG62nAHKuFyI=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=iot-bzh.20150623.gappssmtp.com; s=20150623;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=C11HJLfTP0tuatv+Kxm7kDbJ5zRRu4msxXLvlJKsYLU=;
+	b=AagimDz9WSoWPtE2UeJ7p+TGVXmD50SuC3JfPOUX4I1F/8Bhpm61kv1NgWxnwgwOgJ
+	YVZwGGPbf3B3/M/vJphrtRZV9JW5GXnzSz4AJ2kaYrcu4+5PGgtAkCp0oSsFgLv5873e
+	LIaD7tArnSZZNHfUJ7/qOWG+XzMTU3+sEoOk0LeJu8It6znEIPqOxy9/zEQuaUeOJRxl
+	3pAYXokjxjurLYZviVDIFlzwRXGfv2Ao7MOqhYsg273GNok2+A9yGAG/+pVmLLPDpX4e
+	Y2jCqb3D/NPRnXosW+UR6u6MpHPj1Zc4AYjRlKjdfVne2T8r8FErh0+e1Gn1Dibk6lHM
+	iWmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=Kam5N8FtuGKypfG2SWTHlPdLBSX4kSXQMSFi47ILyI4=;
-	b=cbxMv/BvPq+5ziFE+3o2YknytGlKRLEdIrBi9OOvDNs76JSHbtgxOydJHjyS3Sh8le
-	xivrPWsxOc3gY9ktNCn5REzajSXckOEVGoVnFFE/fx5JLRGff12Un6Y0IBHvTB2jrbuu
-	QuNLKg8yHlw77OYxAgPNQNFd1Jpye/TP84xNB8BHx/nqrNKptVJD+4ofCb9yHaZh2PXW
-	1tMYrW6yAwYeNfM5MxYCVj/VLwyaMer+rkqqeIdqzs7LpVl7IdEtizTpjlUA9NUE1B7p
-	x55C1cOjQEvqZ3uavkLqWe7qgfjy+j7k/rfDw0+Um/39I6zPDvOpzlSPjI8/4jE2VUWQ
-	eH+A==
-X-Gm-Message-State: AD7BkJIvekZlo8dOJwMcAgcdnCPKc08ptK3zg2F+RvElJFCSXiJ9CJW6qehDNDBIP15/lg==
-X-Received: by 10.25.23.233 with SMTP id 102mr6464890lfx.113.1459423604249;
-	Thu, 31 Mar 2016 04:26:44 -0700 (PDT)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id
-	t17sm1328655lfd.17.2016.03.31.04.26.43
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=C11HJLfTP0tuatv+Kxm7kDbJ5zRRu4msxXLvlJKsYLU=;
+	b=cS2xQ8HNT1DP4UN/YIvkIIue7wrwb/ew8Ts6bdi1iibHl2ayTb0iw1Gl8yI5UPKqV+
+	C7lsjjTKXE0ZUrksLKbDxxzGRM9RYS9rP3nvC0tpbitBYMXAM+vfZZ2Cm3BSBOG7hVNG
+	ri1e/dObjjWhQOgbrT6DJlP5+ASXrwn2K8dynmXq6RdoN89Kv7b9+4MJAwh8enlnWo74
+	t5PY0GyRi9jJ0uTB3X+llSBjVpxGUQ/LsbnUNrTkt69z/4FuqHoOr7hwuaAKsMS5kaVd
+	cJ+X58CyghvXw7cJoGqzgNwv58Eu/dKnfRT+1CVchtLLKzECF8BwaRFXlapmPSGNplMe
+	kLBw==
+X-Gm-Message-State: AD7BkJIYS9Vuo33ncQsz+QHwxDkEuOpMXnMwl6SRkf+RTWHGzR8ZJ80QgNucy7VkfAmmxw==
+X-Received: by 10.28.46.69 with SMTP id u66mr2493981wmu.98.1459425355064;
+	Thu, 31 Mar 2016 04:55:55 -0700 (PDT)
+Received: from eiger.ygl.iot (pat35-3-82-245-140-164.fbx.proxad.net.
+	[82.245.140.164]) by smtp.gmail.com with ESMTPSA id
+	y62sm9183058wmg.12.2016.03.31.04.55.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 31 Mar 2016 04:26:43 -0700 (PDT)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: Martin Jansa <Martin.Jansa@gmail.com>, Andre McCurdy <armccurdy@gmail.com>,
-	Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>,
-	openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Mar 2016 13:26:33 +0200
-Message-Id: <1459423593-4123-8-git-send-email-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.8.0.rc3
-In-Reply-To: <1459423593-4123-1-git-send-email-ricardo.ribalda@gmail.com>
-References: <1459423593-4123-1-git-send-email-ricardo.ribalda@gmail.com>
-Subject: [meta-oe][PATCH v4 7/7] opencv: Remove blacklist
+	Thu, 31 Mar 2016 04:55:54 -0700 (PDT)
+Sender: "Yannick Gicquel [ IoT.bzh ]" <ygl@koumoul.net>
+From: Yannick Gicquel <yannick.gicquel@iot.bzh>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 31 Mar 2016 13:55:46 +0200
+Message-Id: <1459425346-25328-1-git-send-email-yannick.gicquel@iot.bzh>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] p7zip: add native extend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,53 +59,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2016 11:26:44 -0000
+X-List-Received-Date: Thu, 31 Mar 2016 11:55:57 -0000
 
-Opencv 3.1 builds fine with ffmpeg.
+This add a support for native build of 7za, 7z and 7zr binaries.
 
-ricardo@neopili:~/curro/qt5022/oe/openembedded-core/build$ bitbake
-opencv
-Loading cache: 100%
-|############################################################################|
-ETA:  00:00:00
-Loaded 2018 entries from dependency cache.
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration:
-BB_VERSION        = "1.29.0"
-BUILD_SYS         = "x86_64-linux"
-NATIVELSBSTRING   = "Debian-testing"
-TARGET_SYS        = "i586-oe-linux"
-MACHINE           = "qemux86"
-DISTRO            = "nodistro"
-DISTRO_VERSION    = "nodistro.0"
-TUNE_FEATURES     = "m32 i586"
-TARGET_FPU        = ""
-meta              = "master:300f858ba07c938427ccd05a3d7220027a03d461"
-meta-oe           = "master:29462f7161b346dbc2ea00830da869a0a1c35fb9"
-
-NOTE: Preparing RunQueue
-NOTE: Executing SetScene Tasks
-NOTE: Executing RunQueue Tasks
-NOTE: Tasks Summary: Attempted 1242 tasks of which 1228 didn't need to
-be rerun and all succeeded.
-
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Signed-off-by: Yannick Gicquel <yannick.gicquel@iot.bzh>
 ---
- meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 --
- 1 file changed, 2 deletions(-)
+ meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-index 7f09168784d9..a0e7bf948ece 100644
---- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-@@ -142,5 +142,3 @@ do_install_append() {
-     cp -f bin/*-tutorial-* bin/*-example-* ${D}${datadir}/OpenCV/samples/bin/
+diff --git a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
+index be706e1..b89fc42 100644
+--- a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
++++ b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
+@@ -15,3 +15,21 @@ do_install() {
+     install -d ${D}${bindir}
+     install -m 0755 ${S}/bin/* ${D}${bindir}
  }
- 
--# http://errors.yoctoproject.org/Errors/Details/40660/
--PNBLACKLIST[opencv] ?= "Not compatible with currently used ffmpeg 3"
++
++# all3: to build bin/7za, bin/7z (with its plugins), bin/7zr and bin/7zCon.sfx
++EXTRA_OEMAKE_class-native = "all3"
++
++do_install_class-native() {
++    install -d ${D}${bindir}
++    install -d ${D}${bindir}/Codecs
++    install -m 0755 ${S}/bin/7* ${D}${bindir}
++    install -m 0755 ${S}/bin/Codecs/* ${D}${bindir}/Codecs
++
++    # Create a shell script wrapper to execute next to 7z.so
++    mv ${D}${bindir}/7z ${D}${bindir}/7z.bin
++    echo "#! /bin/sh" > ${D}${bindir}/7z
++    echo "exec ${D}${bindir}/7z.bin \"\$@\"" >> ${D}${bindir}/7z
++    chmod 0755 ${D}${bindir}/7z
++}
++
++BBCLASSEXTEND += "native"
 -- 
-2.8.0.rc3
+1.9.1
 
 
