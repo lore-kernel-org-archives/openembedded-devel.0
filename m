@@ -1,26 +1,34 @@
-Return-Path: <ruben.de.smet@rubdos.be>
-X-Greylist: delayed 450 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 01 Apr 2016 19:48:57 UTC
-Received: from mail.glycos.org (mail.glycos.org [178.62.217.237])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D525760AD
+Return-Path: <denis@denix.org>
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B76F7665F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Apr 2016 19:48:57 +0000 (UTC)
-Received: from localhost.localdomain (unknown [84.198.80.84])
-	by mail.glycos.org (Postfix) with ESMTPSA id C683B403D6;
-	Fri,  1 Apr 2016 19:41:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rubdos.be;
-	s=default; t=1459539687;
-	bh=pLryzQx/6pZxSMHPJd3POUZFo+VyNo3fQOjSAL8htLo=;
-	h=From:To:Cc:Subject:Date;
-	b=KOBuTKEPHdKJ2aXVuj73qm+Zx3/YvzXvmaiUeyTiTsi9kK/Ac0OOGyhGPQkwHW1UU
-	YjLrK+rGzyiQDD0S5WatbCkC9J1nllOyNRJ+/9Z7uQCgEdVstXY8vYfF5FraoDIqEI
-	78yvbNlQ6iqrvuv6lk4S86lBau/CcmjYHZaUbkaU=
-From: Ruben De Smet <ruben.de.smet@rubdos.be>
+	Fri,  1 Apr 2016 19:53:58 +0000 (UTC)
+Received: from vz-proxy-l005.mx.aol.com ([64.236.82.148])
+	by vms173017.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O4Z0081A0LJ3ES0@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	01 Apr 2016 14:53:59 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=hkQRW7prCrFMEwk2DGUM9Q==:117
+	a=kj9zAlcOel0A:10 a=kziv93cY1bsA:10	a=stkexhm8AAAA:8 a=gVGD3344AAAA:8
+	a=NEAV23lmAAAA:8 a=Q4-j1AaZAAAA:8	a=pGLkceISAAAA:8
+	a=ycLL-6VzrwhdzTfFz20A:9 a=CjuIK1q_8ugA:10
+Received: by 100.15.86.14 with SMTP id 22e0b69c; Fri, 01 Apr 2016 19:53:59 GMT
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id BD38E161F74; Fri,
+	1 Apr 2016 15:53:41 -0400 (EDT)
+Date: Fri, 01 Apr 2016 15:53:41 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Apr 2016 21:41:23 +0200
-Message-Id: <1459539683-16408-1-git-send-email-ruben.de.smet@rubdos.be>
-X-Mailer: git-send-email 2.8.0
-Subject: [meta-oe][PATCH] Updated linuxptp to 1.6, most recent release.
+Message-id: <20160401195341.GC16135@denix.org>
+References: <1458640636-9492-1-git-send-email-adrian.ratiu@ni.com>
+	<20160401113608.GD2567@jama>
+MIME-version: 1.0
+In-reply-to: <20160401113608.GD2567@jama>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: James Minor <james.minor@ni.com>
+Subject: Re: [meta-oe][PATCH] ti-wifi-utils: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,36 +41,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2016 19:49:00 -0000
+X-List-Received-Date: Fri, 01 Apr 2016 19:54:00 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-No further updates were required, aside from changing the
-checksums and renaming the file.
+On Fri, Apr 01, 2016 at 01:36:08PM +0200, Martin Jansa wrote:
+> On Tue, Mar 22, 2016 at 11:57:16AM +0200, Ioan-Adrian Ratiu wrote:
+> > This recipe is for a TI WiFi calibrator utility [1]. The firmware from
+> > this project is already shipped inside linux-firmware so we do not
+> > package it in this recipe.
+> > 
+> > [1] http://linuxwireless.sipsolutions.net/en/users/Drivers/wl12xx/#Calibration
+> > 
+> > Signed-off-by: James Minor <james.minor@ni.com>
+> > Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+> > ---
+> >  .../ti-wifi-utils/ti-wifi-utils_git.bb             | 24 ++++++++++++++++++++++
+> >  1 file changed, 24 insertions(+)
+> >  create mode 100644 meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils_git.bb
+> > 
+> > diff --git a/meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils_git.bb b/meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils_git.bb
+> > new file mode 100644
+> > index 0000000..fcae729
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils_git.bb
+> > @@ -0,0 +1,24 @@
+> > +SUMMARY = "The calibrator and other useful utilities for TI wireless solution based on wl12xx driver"
+> > +LICENSE = "BSD-3-Clause"
+> > +LIC_FILES_CHKSUM = "file://COPYING;md5=4725015cb0be7be389cf06deeae3683d"
+> > +
+> > +DEPENDS = "libnl"
+> > +
+> > +PV = "0.1+gitr${SRCPV}"
+> > +
+> > +SRCREV = "b03d9ce6362e6d22d6929f2736409af3b0fd3c88"
+> > +SRC_URI = "git://github.com/TI-OpenLink/ti-utils.git;branch=r5-jb"
+> > +
+> > +S = "${WORKDIR}/git"
+> > +
+> > +EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} \
+> > +                CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}" \
 
-Signed-off-by: Ruben De Smet <ruben.de.smet@rubdos.be>
----
- .../linuxptp/{linuxptp_1.4.bb => linuxptp_1.6.bb}                     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/linuxptp/{linuxptp_1.4.bb => linuxptp_1.6.bb} (82%)
+Reinventing the wheel much?
 
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb
-similarity index 82%
-rename from meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
-rename to meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb
-index 4ee0c88..254b855 100644
---- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz \
-            file://build-Allow-CC-and-prefix-to-be-overriden.patch"
- 
--SRC_URI[md5sum] = "a37ad2b2ef7d1ebc4d64a66d3fe55cdf"
--SRC_URI[sha256sum] = "6cfd5291fb7394cc9f25458927874a203971b66b76d1c9d6568e007d0cbd81f2"
-+SRC_URI[md5sum] = "6aa15d83f5a35f1fd076ba9adc4e7285"
-+SRC_URI[sha256sum] = "e7fd16a9f235b059be527bd512e86f0c1d9f2e7c36736e6d6d9727a4427ac14c"
- 
- EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} \
- 		EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_ONESTEP_SYNC ${CFLAGS}'"
--- 
-2.8.0
+http://layers.openembedded.org/layerindex/branch/master/recipes/?q=ti-wifi-utils
+
+
+> This doesn't respect all flags usually available in $CC variable, why
+> haven't you used $CC?
+> 
+> Maybe it's other part of Makefiles which is using CROSS_COMPILE instead
+> of CC, but currently it's failing e.g. for hardfloat builds with
+> typical:
+> 
+> ../SYSROOT/MACHINE/usr/include/gnu/stubs.h:7:29: fatal error: gnu/stubs-soft.h: No such file or directory
+> 
+> because the build doesn't have correct -mfloat-abi parameter
+> 
+> | arm-DISTRO-linux-gnueabi-gcc  --sysroot=/SYSROOTS/MACHINE -O2 -pipe -g -feliminate-unused-debug-types -fdebug-prefix-map=TMPDIRwork/MACHINE-DISTRO-linux-gnueabi/ti-wifi-utils/0.1+gitrAUTOINC+b03d9ce636-r0=/usr/src/debug/ti-wifi-utils/0.1+gitrAUTOINC+b03d9ce636-r0 -fdebug-prefix-map=TMPDIRsysroots/x86_64-linux= -fdebug-prefix-map=/SYSROOTS/MACHINE=  -I/SYSROOTS/MACHINE/usr/include/libnl3 -DCONFIG_LIBNL20   -c -o misc_cmds.o misc_cmds.c
+> 
+> > +                CFLAGS="${CFLAGS} -I${STAGING_INCDIR}/libnl3 -DCONFIG_LIBNL20" NLVER=3 \
+> > +                LDFLAGS="${LDFLAGS} ${TOOLCHAIN_OPTIONS}" \
+> > +'
+> > +
+> > +#only install the calibrator utility, firmware is already within linux-firmware
+> > +do_install() {
+> > +    install -d ${D}${bindir}
+> > +    install -m 0755 calibrator ${D}${bindir}/
+> > +}
+> > -- 
+> > 2.7.4
+> > 
+> 
+> -- 
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
+
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
