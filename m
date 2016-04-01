@@ -1,52 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id DAAAC731D0
+Return-Path: <gary.bisson@boundarydevices.com>
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 562CF731F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Apr 2016 09:39:36 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id p65so3194233wmp.1
+	Fri,  1 Apr 2016 09:47:32 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id p65so15958649wmp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Apr 2016 02:39:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=JOYq1TFKbN7ABmGXTq7IlVKWxGJ568SgZ1lyIcmWAGI=;
-	b=sLfW6QszaCVx/0uUmdaGb3UCbdqdmkRVlbHC0iWMDjzndKY7CwGJlUcy6KbVKkgb+6
-	QH3OkEb2GXbii1Uu5la4lC+/3qilOnCrNeWwav0rlC6TgTtn4cBspePHVdS963HjBaOE
-	V89crWaMnkQq/XPDRwrUPP2tLeZjYqCYiYvB7jZaDz69sVtFkxadKLSRmlWiVL482R+0
-	vNAokK2lIBB/iHr7FP2nx6Uphxq6hjbWSE9TYL9rXm8u/RktuNIPujBQ5nKEcud4Tf3I
-	QC9wWhYo3SHjJIssKD1LKQSMdvyQBRIhcR7TiWTQLFu/ew5+A/ds76G6qP062TNCcUhl
-	CKDw==
+	Fri, 01 Apr 2016 02:47:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=boundarydevices-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=eop5xuY7JAEeaIJz+1f4HdVx16dt6AIBfkzakwD8r4k=;
+	b=xeQTn1pWOdO6yoVMGei+h29wN+WGpSzQZ/0O2hx7JDh6U3WakkvZKaPZ9+zBBIw9n9
+	qurV3TSukDihjKyianwQA3pSfCKoa/Ayj4SzvFJeLnOkAcsfsW4Z53ZxAZAx/7xT9B2W
+	10rr36EzZQBDTR15+qJuWZWj4+jYUvvx1EIKTxPyJtNzj+hPLAsmmBNdxhnk50/f32YB
+	rbZSh0RFyMEICsFfMlZfHz0t+gtrDV8IfmxhX6s4ARGRNZQx04HZXZFlfQ9d1JbrZ+Dd
+	ODsrUUn+4VFCpLhxxI2DkD9A4LQPG3XU64n8271ws83StumrlRhOJ6mMcqbSK5ESzp5w
+	1zwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=JOYq1TFKbN7ABmGXTq7IlVKWxGJ568SgZ1lyIcmWAGI=;
-	b=jYVPtINdUYQTk5Ren5Zw9zAVWR1DGM6JaYK+8tAQSo9+vLrZ7DqYCBXm4g1x0Nmez2
-	kdfq3yaStMxknDuyUBO1tOUqif5VT8CMzQXDoWztL9ThEygO5olnje9ztOVZqMvdHFb0
-	/NPOQc/3fMj9sOch4Pcys84zohxQvjhcGWtdavmbYy/QxVlwtGU/gWZ/4iYX4qfta5yM
-	EaFtQgsSVQGP6+sk/R/uTx1zghalEeGeW2owheIzZOlSGd3nnF15bezUEhK4psdsifqh
-	T3lDId6BuuY1ZPWT0vt0LyDU031FZ6u4J3e9X/7R8U9Ls24zOjzrdnj13kfCUGGZcv/l
-	TiSw==
-X-Gm-Message-State: AD7BkJILMoi6KH8zXJLNR3N65riRyvFL0pDGULQl1ufgu4H+wMDl2cINPxuUbouCGjn74A==
-X-Received: by 10.28.59.87 with SMTP id i84mr2668418wma.61.1459503576890;
-	Fri, 01 Apr 2016 02:39:36 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	t8sm13144002wjy.41.2016.04.01.02.39.35
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 01 Apr 2016 02:39:35 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 1 Apr 2016 11:39:50 +0200
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=eop5xuY7JAEeaIJz+1f4HdVx16dt6AIBfkzakwD8r4k=;
+	b=Hpu12ytv2L7uAU8A8WfKpgSJ8vTA8s8VybQP5l5uEkzaZF8rkNr47d6eHaE7DInn4t
+	tW260Ghaaw3rUnCI5NkvNstTnR6rE0dH9/MwoZ5PGuq47+uPYVYNX3/sYc7USOSE4xq9
+	n/IK25p+wKtyLl02mi9+whqZ90SBW74QmVQlgUD+vtVpeLJupaTAO+1v4ZJMpsKL1idE
+	JRWoyKOKoUmVci827b/3WnU6fQeUT6/80uQmHsYnaZzbNdgVJqs5t863dWfygUNkg3Hm
+	AfhhEQblSp3PZLU8nF2WPv94rqgsCDlQUbjzLYF1OktdyoVqDPGGg/qBBetnQ7UwhFGv
+	C0Ow==
+X-Gm-Message-State: AD7BkJJkTYPKmy/MMFxs/PIXtNd+8LE9OtqtqSg/Qj+G6yswDo3EefkFpcMxT6jUKav2vw==
+X-Received: by 10.28.99.6 with SMTP id x6mr2944338wmb.46.1459504052652;
+	Fri, 01 Apr 2016 02:47:32 -0700 (PDT)
+Received: from t450s.lan (89-92-156-188.hfc.dyn.abo.bbox.fr. [89.92.156.188])
+	by smtp.googlemail.com with ESMTPSA id
+	lz5sm13225506wjb.5.2016.04.01.02.47.32
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 01 Apr 2016 02:47:32 -0700 (PDT)
+From: Gary Bisson <gary.bisson@boundarydevices.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160401093950.GA2567@jama>
-References: <1459497633-32109-1-git-send-email-anujx.mittal@intel.com>
-	<1459497633-32109-3-git-send-email-anujx.mittal@intel.com>
-MIME-Version: 1.0
-In-Reply-To: <1459497633-32109-3-git-send-email-anujx.mittal@intel.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-filesystems][PATCH 2/2] exfat-utils: update to version 1.2.3
+Date: Fri,  1 Apr 2016 11:47:29 +0200
+Message-Id: <1459504049-29180-1-git-send-email-gary.bisson@boundarydevices.com>
+X-Mailer: git-send-email 2.7.0
+Cc: Gary Bisson <gary.bisson@boundarydevices.com>
+Subject: [meta-qt5][PATCH] cinematicexperience: add qtbase-fonts as a runtime dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,95 +53,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2016 09:39:37 -0000
-X-Groupsio-MsgNum: 60768
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="mP3DRpeJDSE+ciuQ"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 01 Apr 2016 09:47:32 -0000
 
---mP3DRpeJDSE+ciuQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Avoids the following errors at runtime:
+QFontDatabase: Cannot find font directory /usr/lib/fonts - \
+is Qt installed correctly?
 
-On Fri, Apr 01, 2016 at 04:00:33PM +0800, Anuj Mittal wrote:
-> *License file checksum has changed
+Signed-off-by: Gary Bisson <gary.bisson@boundarydevices.com>
+---
+ recipes-qt/examples/cinematicexperience_1.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-That's clear from LIC_FILES_CHKSUM, you should stay what changed in the
-file (often only Copyright years or author names), but saying that the
-checksum is different doesn't help.
+diff --git a/recipes-qt/examples/cinematicexperience_1.0.bb b/recipes-qt/examples/cinematicexperience_1.0.bb
+index 116127f..5194b10 100644
+--- a/recipes-qt/examples/cinematicexperience_1.0.bb
++++ b/recipes-qt/examples/cinematicexperience_1.0.bb
+@@ -19,7 +19,7 @@ S = "${WORKDIR}/Qt5_CinematicExperience_rpi_${PV}/"
+ #S = "${WORKDIR}/Qt5_CinematicExperience_${PV}/"
+ 
+ DEPENDS = "qtdeclarative qtgraphicaleffects"
+-RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
++RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins qtbase-fonts"
+ 
+ require recipes-qt/qt5/qt5.inc
+ 
+-- 
+2.7.0
 
-> *Package now uses autotools instead of scons
->=20
-> Signed-off-by: Anuj Mittal <anujx.mittal@intel.com>
-> ---
->  .../{exfat-utils_1.0.1.bb =3D> exfat-utils_1.2.3.bb}       | 16 ++++----=
---------
->  1 file changed, 4 insertions(+), 12 deletions(-)
->  rename meta-filesystems/recipes-utils/exfat-utils/{exfat-utils_1.0.1.bb =
-=3D> exfat-utils_1.2.3.bb} (65%)
->=20
-> diff --git a/meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.0.1=
-=2Ebb b/meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.2.3.bb
-> similarity index 65%
-> rename from meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.0.1.=
-bb
-> rename to meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.2.3.bb
-> index a5a314f..7991aa7 100644
-> --- a/meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.0.1.bb
-> +++ b/meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.2.3.bb
-> @@ -10,20 +10,12 @@ contains \
->  HOMEPAGE =3D "http://code.google.com/p/exfat/"
->  SECTION =3D "universe/otherosfs"
->  LICENSE =3D "GPLv3"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
-504"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
->  SRC_URI =3D "${DEBIAN_MIRROR}/main/e/exfat-utils/exfat-utils_${PV}.orig.=
-tar.gz \
->  "
->  DEPENDS =3D "virtual/libc"
-> =20
-> -inherit scons
-> +inherit pkgconfig autotools
-> =20
-> -SRC_URI[md5sum] =3D "e592130829d0bf61fa5e3cd1c759d329"
-> -SRC_URI[sha256sum] =3D "eeacedca1878065dc3886674ae39cd51149c37bd7d6d7e93=
-25c971a1d1acdab3"
-> -
-> -EXTRA_OESCONS =3D " \
-> -    DESTDIR=3D${D}/${base_sbindir} \
-> -"
-> -
-> -do_install_prepend() {
-> -    install -d ${D}/${base_sbindir}
-> -}
-> +SRC_URI[md5sum] =3D "f4e564450aa8159e26dde2869563d242"
-> +SRC_URI[sha256sum] =3D "80d3b3f21242d60d36a38a4ddb05cb7cc3a7d4eef5793e83=
-14814937b938fcea"
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---mP3DRpeJDSE+ciuQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlb+QeUACgkQN1Ujt2V2gBzV9gCgjSiuDkfxbY+YrLBXDnhzgc9c
-OCAAn3QVvnLjkaMxjDSkxqK3rocme7Mm
-=vbxM
------END PGP SIGNATURE-----
-
---mP3DRpeJDSE+ciuQ--
