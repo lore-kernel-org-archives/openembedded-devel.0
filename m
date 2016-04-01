@@ -1,22 +1,35 @@
 Return-Path: <anujx.mittal@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 3375E731FC
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 84C697423D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Apr 2016 09:53:30 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga103.jf.intel.com with ESMTP; 01 Apr 2016 02:53:31 -0700
+	Fri,  1 Apr 2016 09:54:53 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga102.jf.intel.com with ESMTP; 01 Apr 2016 02:54:53 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,427,1455004800"; d="scan'208";a="923274465"
-Received: from amitta2x-ilbpg1.png.intel.com ([10.88.227.34])
-	by orsmga001.jf.intel.com with ESMTP; 01 Apr 2016 02:53:30 -0700
-From: Anuj Mittal <anujx.mittal@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Apr 2016 17:53:18 +0800
-Message-Id: <1459504398-658-3-git-send-email-anujx.mittal@intel.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1459504398-658-1-git-send-email-anujx.mittal@intel.com>
-References: <1459504398-658-1-git-send-email-anujx.mittal@intel.com>
-Subject: [meta-filesystems][PATCH v2 2/2] exfat-utils: update to version 1.2.3
+X-IronPort-AV: E=Sophos;i="5.24,427,1455004800"; d="scan'208";a="679100771"
+Received: from pgsmsx107.gar.corp.intel.com ([10.221.44.105])
+	by FMSMGA003.fm.intel.com with ESMTP; 01 Apr 2016 02:54:53 -0700
+Received: from pgsmsx101.gar.corp.intel.com ([169.254.1.115]) by
+	PGSMSX107.gar.corp.intel.com ([169.254.7.10]) with mapi id
+	14.03.0248.002; Fri, 1 Apr 2016 17:54:52 +0800
+From: "Mittal, AnujX" <anujx.mittal@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-filesystems][PATCH 2/2] exfat-utils: update to
+	version 1.2.3
+Thread-Index: AQHRi+y0dcCfRWDkQkOvEg4iPGsbNp90VukAgACKC7A=
+Date: Fri, 1 Apr 2016 09:54:52 +0000
+Message-ID: <DFCB2C9E62139C41B3FDE8F2B4659331CE449B@PGSMSX101.gar.corp.intel.com>
+References: <1459497633-32109-1-git-send-email-anujx.mittal@intel.com>
+	<1459497633-32109-3-git-send-email-anujx.mittal@intel.com>
+	<20160401093950.GA2567@jama>
+In-Reply-To: <20160401093950.GA2567@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.30.20.206]
+MIME-Version: 1.0
+Subject: Re: [meta-filesystems][PATCH 2/2] exfat-utils: update to version 1.2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,52 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2016 09:53:30 -0000
+X-List-Received-Date: Fri, 01 Apr 2016 09:54:54 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-*License changed from GPLv3 to GPLv2
-*Package now uses autotools instead of scons
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of M=
+artin
+> Jansa
+> Sent: Friday, April 01, 2016 5:40 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-filesystems][PATCH 2/2] exfat-utils: update to ve=
+rsion 1.2.3
+>=20
+> On Fri, Apr 01, 2016 at 04:00:33PM +0800, Anuj Mittal wrote:
+> > *License file checksum has changed
+>=20
+> That's clear from LIC_FILES_CHKSUM, you should stay what changed in the f=
+ile
+> (often only Copyright years or author names), but saying that the checksu=
+m is
+> different doesn't help.
+>=20
 
-Signed-off-by: Anuj Mittal <anujx.mittal@intel.com>
----
- .../{exfat-utils_1.0.1.bb => exfat-utils_1.2.3.bb}     | 18 +++++-------------
- 1 file changed, 5 insertions(+), 13 deletions(-)
- rename meta-filesystems/recipes-utils/exfat-utils/{exfat-utils_1.0.1.bb => exfat-utils_1.2.3.bb} (64%)
+Right, sorry about that. I have sent a v2 with details.
 
-diff --git a/meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.0.1.bb b/meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.2.3.bb
-similarity index 64%
-rename from meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.0.1.bb
-rename to meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.2.3.bb
-index a5a314f..3019db7 100644
---- a/meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.0.1.bb
-+++ b/meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.2.3.bb
-@@ -9,21 +9,13 @@ contains \
- "
- HOMEPAGE = "http://code.google.com/p/exfat/"
- SECTION = "universe/otherosfs"
--LICENSE = "GPLv3"
--LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- SRC_URI = "${DEBIAN_MIRROR}/main/e/exfat-utils/exfat-utils_${PV}.orig.tar.gz \
- "
- DEPENDS = "virtual/libc"
- 
--inherit scons
-+inherit pkgconfig autotools
- 
--SRC_URI[md5sum] = "e592130829d0bf61fa5e3cd1c759d329"
--SRC_URI[sha256sum] = "eeacedca1878065dc3886674ae39cd51149c37bd7d6d7e9325c971a1d1acdab3"
--
--EXTRA_OESCONS = " \
--    DESTDIR=${D}/${base_sbindir} \
--"
--
--do_install_prepend() {
--    install -d ${D}/${base_sbindir}
--}
-+SRC_URI[md5sum] = "f4e564450aa8159e26dde2869563d242"
-+SRC_URI[sha256sum] = "80d3b3f21242d60d36a38a4ddb05cb7cc3a7d4eef5793e8314814937b938fcea"
--- 
-1.9.1
-
+Thanks,
+Anuj
 
