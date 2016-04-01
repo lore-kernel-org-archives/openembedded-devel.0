@@ -1,24 +1,29 @@
-Return-Path: <Paul.Gortmaker@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B13E60290
+Return-Path: <denis@denix.org>
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F3FE6FF60
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2016 19:38:12 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u2VJcCqs024510
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Mar 2016 12:38:12 -0700 (PDT)
-Received: from co-op.corp.ad.wrs.com (128.224.56.235) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 31 Mar 2016 12:38:12 -0700
-From: Paul Gortmaker <paul.gortmaker@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 31 Mar 2016 15:38:02 -0400
-Message-ID: <1459453082-22086-1-git-send-email-paul.gortmaker@windriver.com>
-X-Mailer: git-send-email 2.7.2
-MIME-Version: 1.0
-Subject: [PATCH] autotools-bootstrap: don't fake submodule to avoid gnulib download
+	Fri,  1 Apr 2016 00:47:48 +0000 (UTC)
+Received: from vz-proxy-l007.mx.aol.com ([64.236.82.151])
+	by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O4X00MNGJJ96020@vms173021.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	31 Mar 2016 19:47:33 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=eaPqxu9IKnv3tbb7QsXVMw==:117
+	a=7OsogOcEt9IA:10 a=sozttTNsAAAA:8	a=Sa2kaFFEjJH7jJ1Niy4A:9
+Received: by 100.15.86.14 with SMTP id 19061741; Fri, 01 Apr 2016 00:47:33 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 1340D161F56;	Thu,
+	31 Mar 2016 20:47:33 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 31 Mar 2016 20:47:22 -0400
+Message-id: <1459471643-7183-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-qt5][PATCH 1/2] qtdeclarative: fix compilation of examples/qquickviewcomparison
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,53 +36,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2016 19:38:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 Apr 2016 00:47:50 -0000
 
-We were creating a .gitmodules on the fly to avoid downloading the
-gnulib via git.  However this is problematic if the pkg had its own
-.gitmodules already -- we'd clobber it and this breaks netcf build:
+From: Denys Dmytriyenko <denys@ti.com>
 
-   ./bootstrap: getting gnulib files...
-   error: pathspec 'gnulib' did not match any file(s) known to git.
+git/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.cpp:180:14: error: 'QCoreApplication' has not been declared
+          if (!QCoreApplication::arguments().contains(QStringLiteral("--no_render_alpha")))
 
-There is a more proper way to do this:  bootstrap supports this:
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ ...omparison-fix-QCoreApplication-has-not-be.patch | 28 ++++++++++++++++++++++
+ recipes-qt/qt5/qtdeclarative_git.bb                |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
 
- --no-git           do not use git to update gnulib.  Requires that
-                    --gnulib-srcdir point to a correct gnulib snapshot
-
-and if we use that, we can use our sysroot copy of gnulib without
-having to fake a .gitmodules submodule file.  This keeps the build
-of netcf happy.
-
-Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
-
-diff --git a/meta-oe/classes/autotools-bootstrap.bbclass b/meta-oe/classes/autotools-bootstrap.bbclass
-index 8d7af1b47222..cae037559aa4 100644
---- a/meta-oe/classes/autotools-bootstrap.bbclass
-+++ b/meta-oe/classes/autotools-bootstrap.bbclass
-@@ -7,18 +7,13 @@ do_configure_prepend() {
-     currdir=`pwd`
-     cd ${S}
+diff --git a/recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch b/recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+new file mode 100644
+index 0000000..1687fbe
+--- /dev/null
++++ b/recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+@@ -0,0 +1,28 @@
++From 1cdd3278a0b1508640d983720782d39eb919caaf Mon Sep 17 00:00:00 2001
++From: Denys Dmytriyenko <denys@ti.com>
++Date: Thu, 31 Mar 2016 19:38:58 -0400
++Subject: [PATCH] qquickviewcomparison: fix QCoreApplication has not been
++ declared error
++
++Upstream-Status: Pending
++
++Signed-off-by: Denys Dmytriyenko <denys@ti.com>
++---
++ examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h b/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
++index 5b86c93..e77514e 100644
++--- a/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
+++++ b/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
++@@ -44,6 +44,7 @@
++ #include <QWidget>
++ #include <QQuickWidget>
++ #include <QQuickView>
+++#include <QCoreApplication>
++ 
++ QT_FORWARD_DECLARE_CLASS(QRadioButton)
++ QT_FORWARD_DECLARE_CLASS(QCheckBox)
++-- 
++2.2.0
++
+diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/qtdeclarative_git.bb
+index 93442fb..9274d00 100644
+--- a/recipes-qt/qt5/qtdeclarative_git.bb
++++ b/recipes-qt/qt5/qtdeclarative_git.bb
+@@ -15,6 +15,7 @@ DEPENDS += "qtbase"
  
--    # avoid bootstrap cloning gnulib on every configure
--    cat >.gitmodules <<EOF
--[submodule "gnulib"]
--	path = gnulib
--	url = git://git.sv.gnu.org/gnulib
--EOF
-+    # avoid bootstrap cloning gnulib on every configure, hence "--no-git".
-     cp -rf ${STAGING_DATADIR}/gnulib ${S}
+ SRC_URI += " \
+     file://0001-qmltestexample-fix-link.patch \
++    file://0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch \
+ "
  
-     # --force to avoid errors on reconfigure e.g if recipes changed we depend on
-     # | bootstrap: running: libtoolize --quiet
-     # | libtoolize:   error: 'libltdl/COPYING.LIB' exists: use '--force' to overwrite
-     # | ...
--    ./bootstrap --force
-+    ./bootstrap --force --no-git --gnulib-srcdir=gnulib
-     cd $currdir
- }
+ EXTRA_OEMAKE += "QMAKE_SYNCQT=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/syncqt"
 -- 
-2.7.2
+2.2.0
 
 
