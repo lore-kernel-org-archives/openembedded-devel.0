@@ -1,41 +1,45 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id E982A71957
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id E0A236FEFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Apr 2016 12:54:15 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id 191so19065729wmq.0
+	Fri,  1 Apr 2016 13:32:06 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id 139so4647720wmn.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Apr 2016 05:54:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=Xql8ek0+biSvsP/W9HeeMA72JARjqp00arKfP2dSSbY=;
-	b=Na34PocmHUB6J6EuBwA4cI0D9bWsznxs4musPl0cz0NBqeQtw9K5QzShGRM3CZQJFv
-	DZOJeDv3dlZZkunZej7E/98aNdEOXh6x61zvDcfgOj6RWbfm8ykJXksJhtqejB11jqpH
-	J90YkH8TcB8aY/OCn4vGc9NLCnmJGUML/en1o=
+	Fri, 01 Apr 2016 06:32:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=g/6l74+/Ll7oOrt3nnyeA/qdOiBB/EPL8j2Lyn2xzSU=;
+	b=hA6NyWi14hccXVI4LzplWXgqKGZ7cfZeUF+1qvvuQNWPc/CG6LbDYjgAc+U6f2WHVi
+	2bVN9oVh5bWgHoLuPbjCfs/SCfdBUCUzEC0Hfokubxyx0YFOc+ThqoKRzrC5bekEsLSg
+	gPa4nS1yQWSwc9VxA3bVt5i7Lu4osi1hLGPv6dXlpB8YThf7phLyscdgLP0BsaUw2GDH
+	EDo74uPecqtUApuOQWmQdj3QhDzAKXRB04Xoe4BlCQbcf1pPaz6bBgTV+sAUxkz4svIe
+	NfQd78nF8kB2C7lnYKhOg0hnYs93jcrRppxu2QGAf+YGc98QnmY8KG6lQKlj1lInH1ma
+	f8hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=Xql8ek0+biSvsP/W9HeeMA72JARjqp00arKfP2dSSbY=;
-	b=it+m9Dh5/f0tU92EC4qc38O3oxxIxM4wNhkOGcY4jyIl6+oyeEClWhoE+2vKbnZJrK
-	M3KUXNc+6C4Ru80cKc91NlOb0ycP2A4h6MeiA+wqkR76TT0kWsHuPKy+Hk8XusDVbDpH
-	09MKu2xxDbx3QWfJzgjMcWLaevHDOiSf+2laEbUCgDxj+oSTNMDAnuCQUPkx2e2pFVlX
-	pHTsrCEcmd0JN3zug6DdaIb6gyelxHT+3tEfCYzzDM3VxGFphPUhTLW9g7jN2GUgpEcP
-	zpaKeHNV+e61LqD/PcGiEcx5CQAKicFeAMsuWU15DvkOj/b9VUyBjUMaFjj1UAFB/aPh
-	wmXA==
-X-Gm-Message-State: AD7BkJKcOudzkf4PGlt9PYb8NQRRht242/eI1BJ8/9astUYEJIeKBrRsCUvQ+dVFMjn8J50uDyF0NjW0qcnk/7u8
-X-Received: by 10.28.227.69 with SMTP id a66mr3661439wmh.57.1459515255946;
-	Fri, 01 Apr 2016 05:54:15 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.194.206.33 with HTTP; Fri, 1 Apr 2016 05:53:56 -0700 (PDT)
-In-Reply-To: <1BA327FE-7861-41A7-AB53-A5DBB8EF3FEA@gmail.com>
-References: <CAP71WjzNNeYY2pA5-YxtXFZJ01iPR=dgORMoYfCgWDPAA7_RsA@mail.gmail.com>
-	<1BA327FE-7861-41A7-AB53-A5DBB8EF3FEA@gmail.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Fri, 1 Apr 2016 14:53:56 +0200
-Message-ID: <CAP71Wjweh17pbzsvA0EA9i4nZe+bWEJYSPZp3yhV90FLyh8L0g@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: openbox themes
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=g/6l74+/Ll7oOrt3nnyeA/qdOiBB/EPL8j2Lyn2xzSU=;
+	b=Qh3NfVVFnarJN5egce8YnUiC6HduLZYvZzXfk9HxN2QatO+VlP2s8I0mHNp479+lrl
+	uf1RYTuhexa6aHtNFx4Ce0oSdfYl5Hu9Dv3ucVvJApgjBCYYKun1nltqAUhCyOL+lRfl
+	FBHNbURw0A3w97JlnXkDVXx7z89Lv9D+JtzIid7bumGW8D/7R78mGqsdtBbV9G4GSXwo
+	jxn8VLT9IwdpdeEeBLf1hyuhzIF+i8PRErTSKp5HKJNbQAv7EKKW2sk7WtPDeOoIttpi
+	QIodVJpOk0w6KRKp9EfXVdDUx2kfxd/2RfnyupY2fjUxEB2UKJ0jc+JoQpQlAmqBaW7A
+	mZ6w==
+X-Gm-Message-State: AD7BkJLljUbYRvYIoKJQyam8qos4sK4AoldtFz/+/82naCs0uQzW4ejoAeh6vj4vRDSx9w==
+X-Received: by 10.28.57.132 with SMTP id g126mr3981411wma.74.1459517526667;
+	Fri, 01 Apr 2016 06:32:06 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	y72sm14588689wmh.21.2016.04.01.06.32.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 01 Apr 2016 06:32:05 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  1 Apr 2016 15:32:19 +0200
+Message-Id: <1459517539-2797-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.7.3
+Subject: [PATCH][meta-multimedia] gst-plugins.inc: inherit gobject-introspection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,21 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2016 12:54:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 01 Apr 2016 13:32:07 -0000
 
-On Wed, Mar 30, 2016 at 8:19 PM, Khem Raj <raj.khem@gmail.com> wrote:
->
-> Do you have XDG_DATA_DIRS variable set to include /usr/share, try something like
->
-> export XDG_DATA_DIRS=$XDG_DATA_DIRS:/usr/share
->
-> before launching openbox, if that works then may be you should add it to /etc/profile
-> via a post processing hook or some such.
+* fixes:
+  gst-plugins-gl-0.10.3: gst-plugins-gl: configure was passed unrecognised options: --disable-introspection [unknown-configure-option]
+  gst-plugins-bad-0.10.23: gst-plugins-bad: configure was passed unrecognised options: --disable-introspection [unknown-configure-option]
+  gst-plugins-good-0.10.31: gst-plugins-good: configure was passed unrecognised options: --disable-introspection [unknown-configure-option]
+  gst-plugins-ugly-0.10.19: gst-plugins-ugly: configure was passed unrecognised options: --disable-introspection [unknown-configure-option]
 
-that doesn't change anything. without any openbox-theme installed , it
-fails to start. I can briefly see the mouse pointer on the screen,
-before it dies.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-nico
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins.inc b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins.inc
+index dec6920..68a70b1 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins.inc
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins.inc
+@@ -4,7 +4,8 @@ BUGTRACKER = "https://bugzilla.gnome.org/enter_bug.cgi?product=Gstreamer"
+ SECTION = "multimedia"
+ DEPENDS = "gstreamer"
+ 
+-inherit autotools pkgconfig
++# gobject-introspection to get --disable-introspection into UNKNOWN_CONFIGURE_WHITELIST
++inherit autotools pkgconfig gobject-introspection
+ 
+ SRC_URI = "http://gstreamer.freedesktop.org/src/${BPN}/${BPN}-${PV}.tar.bz2"
+ 
+-- 
+2.7.3
+
 
