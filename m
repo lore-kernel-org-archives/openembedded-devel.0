@@ -1,34 +1,45 @@
-Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B76F7665F
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id DF05B76C9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Apr 2016 19:53:58 +0000 (UTC)
-Received: from vz-proxy-l005.mx.aol.com ([64.236.82.148])
-	by vms173017.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O4Z0081A0LJ3ES0@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	01 Apr 2016 14:53:59 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=btqxfxui c=1 sm=1 tr=0	a=hkQRW7prCrFMEwk2DGUM9Q==:117
-	a=kj9zAlcOel0A:10 a=kziv93cY1bsA:10	a=stkexhm8AAAA:8 a=gVGD3344AAAA:8
-	a=NEAV23lmAAAA:8 a=Q4-j1AaZAAAA:8	a=pGLkceISAAAA:8
-	a=ycLL-6VzrwhdzTfFz20A:9 a=CjuIK1q_8ugA:10
-Received: by 100.15.86.14 with SMTP id 22e0b69c; Fri, 01 Apr 2016 19:53:59 GMT
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id BD38E161F74; Fri,
-	1 Apr 2016 15:53:41 -0400 (EDT)
-Date: Fri, 01 Apr 2016 15:53:41 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20160401195341.GC16135@denix.org>
-References: <1458640636-9492-1-git-send-email-adrian.ratiu@ni.com>
-	<20160401113608.GD2567@jama>
-MIME-version: 1.0
-In-reply-to: <20160401113608.GD2567@jama>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: James Minor <james.minor@ni.com>
-Subject: Re: [meta-oe][PATCH] ti-wifi-utils: add recipe
+	Fri,  1 Apr 2016 20:35:52 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id i204so1020270wmd.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Apr 2016 13:35:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc; bh=qwHpNC12yaZ74NKL0GORu/4WXBrjAfDh6Xa9PSa0/rI=;
+	b=0C8Rv7bttDdiCzsBzxRKUgXOqB+FuIEGiOBTVfxUkVYhqhiXavaJeXkYl6+vVJYi78
+	E1FPp6oIYwkSHC5MxE5IwiGGP08dOCrIc89qLBXCy8rNKBhl0hlMKhD1Z1kOpRNUBUa6
+	xfqlUoVnIeMEUW3PgU3w5hpbe9l8eHS8J4ofh64WB8YPF/SX5WQecY51LQBite/tkiek
+	mUFQ3luN2Ph+umwLPRhuLd2BIv9uxxEoVNlXbD6sY44nr4DmpBsVsOr4V44N6E/8lrCO
+	pNg3hueVXSISNCx2YWTNGLwLQlSbD7zDmmH3Ot+V9KeJNVHNo9u5D6zQrHC6YRAH63y3
+	6luA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc;
+	bh=qwHpNC12yaZ74NKL0GORu/4WXBrjAfDh6Xa9PSa0/rI=;
+	b=Qaksr6qjRpwEY3uVeHuLf4929U0ICbBEi2oBrcrqN6/lNXLE735aSdm9gtw8zVNH0m
+	OjLs0nx87aUW0QfBj7FIYtXsDlWMQo2tyKMdvJ2205zpTtyuTB56JzV+pnMFxh+GamV5
+	+v3clTORdafCB/IwXEKtqDq926Ok2T26FjH6GinygDEGnL0SgyqvB4CZakAsy2LW9vg2
+	lWdCJOcpJhYW5AH9bvFHmabs+YDLvU+wi0VkEg/AU/uZ9VR7w+liYpEZR0HRy6bnsaRm
+	SO+toKZVwMWLIvDvirmqea29bbrIF58EzHuFSBJgrb3NKH+ec/61feEPcBlPGs9KAnHh
+	ddwg==
+X-Gm-Message-State: AD7BkJL80yId+4XcTcHti7j7b8Y/86z/mQa543xLS/C+Fr5WUkmWIlHjCkthLoOUwgNJRb9iuAyUMW/irQUHvw==
+MIME-Version: 1.0
+X-Received: by 10.28.59.87 with SMTP id i84mr532553wma.61.1459542952704; Fri,
+	01 Apr 2016 13:35:52 -0700 (PDT)
+Received: by 10.194.201.104 with HTTP; Fri, 1 Apr 2016 13:35:52 -0700 (PDT)
+In-Reply-To: <1459433492-9346-2-git-send-email-ricardo.ribalda@gmail.com>
+References: <1459433492-9346-1-git-send-email-ricardo.ribalda@gmail.com>
+	<1459433492-9346-2-git-send-email-ricardo.ribalda@gmail.com>
+Date: Fri, 1 Apr 2016 13:35:52 -0700
+Message-ID: <CAJ86T=Vsw91Wk6QWxSwRtvtp5OmjeHHO1RQmndSE0Om9aw0Tuw@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v6 6/7] opencv: Fix build on x86 platform
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,87 +52,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2016 19:54:00 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 01 Apr 2016 20:35:53 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Fri, Apr 01, 2016 at 01:36:08PM +0200, Martin Jansa wrote:
-> On Tue, Mar 22, 2016 at 11:57:16AM +0200, Ioan-Adrian Ratiu wrote:
-> > This recipe is for a TI WiFi calibrator utility [1]. The firmware from
-> > this project is already shipped inside linux-firmware so we do not
-> > package it in this recipe.
-> > 
-> > [1] http://linuxwireless.sipsolutions.net/en/users/Drivers/wl12xx/#Calibration
-> > 
-> > Signed-off-by: James Minor <james.minor@ni.com>
-> > Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-> > ---
-> >  .../ti-wifi-utils/ti-wifi-utils_git.bb             | 24 ++++++++++++++++++++++
-> >  1 file changed, 24 insertions(+)
-> >  create mode 100644 meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils_git.bb
-> > 
-> > diff --git a/meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils_git.bb b/meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils_git.bb
-> > new file mode 100644
-> > index 0000000..fcae729
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils_git.bb
-> > @@ -0,0 +1,24 @@
-> > +SUMMARY = "The calibrator and other useful utilities for TI wireless solution based on wl12xx driver"
-> > +LICENSE = "BSD-3-Clause"
-> > +LIC_FILES_CHKSUM = "file://COPYING;md5=4725015cb0be7be389cf06deeae3683d"
-> > +
-> > +DEPENDS = "libnl"
-> > +
-> > +PV = "0.1+gitr${SRCPV}"
-> > +
-> > +SRCREV = "b03d9ce6362e6d22d6929f2736409af3b0fd3c88"
-> > +SRC_URI = "git://github.com/TI-OpenLink/ti-utils.git;branch=r5-jb"
-> > +
-> > +S = "${WORKDIR}/git"
-> > +
-> > +EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} \
-> > +                CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}" \
+On Thu, Mar 31, 2016 at 7:11 AM, Ricardo Ribalda Delgado
+<ricardo.ribalda@gmail.com> wrote:
+> OpenCV wrongly assumes that the X86 variable would be set on Intel 32
+> bit architectures.
+>
+> This patch adds the missing definition on those cases.
+>
+> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+> ---
+>  meta-oe/recipes-support/opencv/opencv_3.1.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+> index 63955a862d4a..ecba0216fd45 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+> @@ -45,6 +45,7 @@ EXTRA_OECMAKE = "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DI
+>                   ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
+>                   ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
+>  "
+> +EXTRA_OECMAKE_append_x86 += "-DX86=ON"
 
-Reinventing the wheel much?
+Version 6 seems to have gone back to combining _append with +=
 
-http://layers.openembedded.org/layerindex/branch/master/recipes/?q=ti-wifi-utils
+It should be:
 
+EXTRA_OECMAKE_append_x86 = " -DX86=ON"
 
-> This doesn't respect all flags usually available in $CC variable, why
-> haven't you used $CC?
-> 
-> Maybe it's other part of Makefiles which is using CROSS_COMPILE instead
-> of CC, but currently it's failing e.g. for hardfloat builds with
-> typical:
-> 
-> ../SYSROOT/MACHINE/usr/include/gnu/stubs.h:7:29: fatal error: gnu/stubs-soft.h: No such file or directory
-> 
-> because the build doesn't have correct -mfloat-abi parameter
-> 
-> | arm-DISTRO-linux-gnueabi-gcc  --sysroot=/SYSROOTS/MACHINE -O2 -pipe -g -feliminate-unused-debug-types -fdebug-prefix-map=TMPDIRwork/MACHINE-DISTRO-linux-gnueabi/ti-wifi-utils/0.1+gitrAUTOINC+b03d9ce636-r0=/usr/src/debug/ti-wifi-utils/0.1+gitrAUTOINC+b03d9ce636-r0 -fdebug-prefix-map=TMPDIRsysroots/x86_64-linux= -fdebug-prefix-map=/SYSROOTS/MACHINE=  -I/SYSROOTS/MACHINE/usr/include/libnl3 -DCONFIG_LIBNL20   -c -o misc_cmds.o misc_cmds.c
-> 
-> > +                CFLAGS="${CFLAGS} -I${STAGING_INCDIR}/libnl3 -DCONFIG_LIBNL20" NLVER=3 \
-> > +                LDFLAGS="${LDFLAGS} ${TOOLCHAIN_OPTIONS}" \
-> > +'
-> > +
-> > +#only install the calibrator utility, firmware is already within linux-firmware
-> > +do_install() {
-> > +    install -d ${D}${bindir}
-> > +    install -m 0755 calibrator ${D}${bindir}/
-> > +}
-> > -- 
-> > 2.7.4
-> > 
-> 
-> -- 
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
-
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+>
+>  PACKAGECONFIG ??= "eigen jpeg png tiff v4l libv4l gstreamer samples tbb \
+>                     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
+> --
+> 2.8.0.rc3
+>
 
