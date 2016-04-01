@@ -1,50 +1,45 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f41.google.com (mail-lf0-f41.google.com
-	[209.85.215.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 377C176710
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2530876FE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Apr 2016 21:36:43 +0000 (UTC)
-Received: by mail-lf0-f41.google.com with SMTP id g184so15797970lfb.3
+	Fri,  1 Apr 2016 21:46:34 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id p65so1338360wmp.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Apr 2016 14:36:44 -0700 (PDT)
+	Fri, 01 Apr 2016 14:46:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=A6m8H0Z+kypsMV1YKDsHvn0vsqyDW63Crl+fzCbdFKs=;
-	b=ZXHDXAZa0TnGWSWfSKqtmWpRzKVBBbQWkwqQhlTKZ2+nU1ocSqRTjQWf2ek5ZEJC1O
-	EwvE78cp0tKnTWV0kKwRCyT7wA89Bxrv/PmKOjyIi1JScObw5JqaG0WJoI9D7RE8SC+B
-	q8HKGMx8DL0MT9alhR2OKfmuimfWRj0oIDyP2aPJTYhmvH+yBeoBs6X8RkitHr7NJM2a
-	ouop81IOxynUY2OsdZrRzsdaKVycVQEuSWRIIyC4vwKseot32ozbdXPeg64sB0k9OFYT
-	TQdfOaioT4mM2rYrQHh4Cy510cLBL+YSczAhE7TIAk2yC3kfPDlZlRjOdMDN7dU1XKc0
-	FvAg==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc; bh=VDND/EDnyHXm9co7M2QsrDABOAAnqfiwtwaGwvCDp3Y=;
+	b=JhaZx27CRXuk0tZsSUixQMomEvbTiX8ivIcwYiUI/RRCtzxNL4Sk/Kc1RHcw2KBfZb
+	xH9w5aAFc2JP5hE+AoP9yz2rdZBbIFsByAPyu4t3bjzedld+JV9/s5AWi5pIRDDEyfUX
+	q33wUoRYHwCyZaSOx+ftEhGBFJM6ahlvquDtY4hp4QI/1f9QtJIz3vu4kQpBwdvyr7Js
+	FJzSNSF6vmbcRUQtoMh6MlE/vd6S5ArP4QQKXzGKjsTVPGlbc6STOM58Eabb8n0MnuyV
+	WnyHMza7f8PUMe8O0Zi0sBXZeWxFBnHjMNzHatwL1mzgCPGs9z7TVU3OEFJAXS+cqZK/
+	cRKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=A6m8H0Z+kypsMV1YKDsHvn0vsqyDW63Crl+fzCbdFKs=;
-	b=YNppP67OS92zV0zUAcq/a1LIsXgcUasaqEtYawXDumtN66L9gpnzRqpR1ZmGU49Vdq
-	HP2A7lzTYcREdIVES9m+s9aIu01ZpDNdiHF7oa1VVrAVRKzG0RBL73L0aF314IQksl2o
-	58dhUX885TZGN3amZpflLO5lPr+IzGStfC14q93TDTUi+pyQJb6BCj4O/HtjtmhJALYk
-	55jZ2z/p1RcZzkXBV7vVz/rDHX+kx1zeUr6PdqmUj34QQyYdo++VdnqnAQrBvFlstsLr
-	aco4CefuUVXrAiBa94nHyAzj9Bvs1ZbOCOSrWhVno1p6pMnj3gCNSjn7euWiTs2GXO2Q
-	L61w==
-X-Gm-Message-State: AD7BkJL1XCTGbwqc1swDdOG6asmaH7EW+WFe3gNFSZfk3uqUg6pJyenK8Va/8bTwQYUMsg==
-X-Received: by 10.25.209.73 with SMTP id i70mr563488lfg.0.1459546604274;
-	Fri, 01 Apr 2016 14:36:44 -0700 (PDT)
-Received: from localhost.localdomain (x1-6-74-44-01-e3-62-1a.cpe.webspeed.dk.
-	[80.167.115.215])
-	by smtp.gmail.com with ESMTPSA id i8sm2445759lbj.30.2016.04.01.14.36.42
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 01 Apr 2016 14:36:43 -0700 (PDT)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: Martin Jansa <Martin.Jansa@gmail.com>, Andre McCurdy <armccurdy@gmail.com>,
-	Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>,
-	openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Apr 2016 23:36:30 +0200
-Message-Id: <1459546590-9513-8-git-send-email-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.8.0.rc3
-In-Reply-To: <1459546590-9513-1-git-send-email-ricardo.ribalda@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc;
+	bh=VDND/EDnyHXm9co7M2QsrDABOAAnqfiwtwaGwvCDp3Y=;
+	b=AVaRLHOPACFTtfvslx2kOIxaa5aw3s1HIyICZ7c8804CZzyGEgr5jYVU20iuuXcuH6
+	K0uSBrnF8w23WYp3BV7/DxUA+BzRrieimiNXk/fXL/YOYXWjJw/ccpequPyxpNUxavh2
+	EPMmU497aVxKUsAXjSIPGIuWCc/Xsz9A12IgCkIdFd6li1LX6JoZB7nHMru+jtGCiyHq
+	4rRDJ4N1UAgYTN02AuCQoWN+LGDIoD2lfyUER2fqGCbhjxXSCgo9R1wJAh9Qd0KiDd1A
+	9LKdx5JuBYw9oORieVSBO7mEX0Wy1Jlgp9j7uYcXsehvnbpuLPw/1gNnQZkCc0IEejUV
+	aaRA==
+X-Gm-Message-State: AD7BkJLdesUvLEBKuvwZmXKwWxf2A5mOEokULVRsV2zLYqIjT8mRmfOlaPVr2w1Hen1JeprtpvzxCDM/1Ex+2A==
+MIME-Version: 1.0
+X-Received: by 10.194.63.242 with SMTP id j18mr7823585wjs.114.1459547195067;
+	Fri, 01 Apr 2016 14:46:35 -0700 (PDT)
+Received: by 10.194.201.104 with HTTP; Fri, 1 Apr 2016 14:46:35 -0700 (PDT)
+In-Reply-To: <1459546590-9513-7-git-send-email-ricardo.ribalda@gmail.com>
 References: <1459546590-9513-1-git-send-email-ricardo.ribalda@gmail.com>
-Subject: [meta-oe][PATCH v7 7/7] opencv: Remove blacklist
+	<1459546590-9513-7-git-send-email-ricardo.ribalda@gmail.com>
+Date: Fri, 1 Apr 2016 14:46:35 -0700
+Message-ID: <CAJ86T=Ve72OuEUAof1Tcogn5kqU=W7-_OY7TsTvJcYaVUDvrhA@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v7 6/7] opencv: Fix build on x86 platform
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,53 +52,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2016 21:36:44 -0000
+X-List-Received-Date: Fri, 01 Apr 2016 21:46:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Opencv 3.1 builds fine with ffmpeg.
+On Fri, Apr 1, 2016 at 2:36 PM, Ricardo Ribalda Delgado
+<ricardo.ribalda@gmail.com> wrote:
+> OpenCV wrongly assumes that the X86 variable would be set on Intel 32
+> bit architectures.
+>
+> This patch adds the missing definition on those cases.
+>
+> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+> ---
+>  meta-oe/recipes-support/opencv/opencv_3.1.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+> index 63955a862d4a..b89fbbb214f6 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+> @@ -45,6 +45,7 @@ EXTRA_OECMAKE = "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DI
+>                   ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
+>                   ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
+>  "
+> +EXTRA_OECMAKE_append_x86 = "-DX86=ON"
 
-ricardo@neopili:~/curro/qt5022/oe/openembedded-core/build$ bitbake
-opencv
-Loading cache: 100%
-|############################################################################|
-ETA:  00:00:00
-Loaded 2018 entries from dependency cache.
-NOTE: Resolving any missing task queue dependencies
+That should be:
 
-Build Configuration:
-BB_VERSION        = "1.29.0"
-BUILD_SYS         = "x86_64-linux"
-NATIVELSBSTRING   = "Debian-testing"
-TARGET_SYS        = "i586-oe-linux"
-MACHINE           = "qemux86"
-DISTRO            = "nodistro"
-DISTRO_VERSION    = "nodistro.0"
-TUNE_FEATURES     = "m32 i586"
-TARGET_FPU        = ""
-meta              = "master:300f858ba07c938427ccd05a3d7220027a03d461"
-meta-oe           = "master:29462f7161b346dbc2ea00830da869a0a1c35fb9"
+EXTRA_OECMAKE_append_x86 = " -DX86=ON"
 
-NOTE: Preparing RunQueue
-NOTE: Executing SetScene Tasks
-NOTE: Executing RunQueue Tasks
-NOTE: Tasks Summary: Attempted 1242 tasks of which 1228 didn't need to
-be rerun and all succeeded.
+Note the leading space. See:
 
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
----
- meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 --
- 1 file changed, 2 deletions(-)
+  http://www.yoctoproject.org/docs/2.0/bitbake-user-manual/bitbake-user-manual.html#appending-and-prepending-override-style-syntax
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-index b89fbbb214f6..3501db6d16ab 100644
---- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-@@ -146,5 +146,3 @@ do_install_append() {
-     cp -f bin/*-tutorial-* bin/*-example-* ${D}${datadir}/OpenCV/samples/bin/
- }
- 
--# http://errors.yoctoproject.org/Errors/Details/40660/
--PNBLACKLIST[opencv] ?= "Not compatible with currently used ffmpeg 3"
--- 
-2.8.0.rc3
-
+>
+>  PACKAGECONFIG ??= "eigen jpeg png tiff v4l libv4l gstreamer samples tbb \
+>                     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
+> --
+> 2.8.0.rc3
+>
 
