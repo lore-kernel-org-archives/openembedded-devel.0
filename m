@@ -1,33 +1,22 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 3600 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 01 Apr 2016 01:47:49 UTC
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by mail.openembedded.org (Postfix) with ESMTP id 695586FF25
+Return-Path: <anujx.mittal@intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B7F16FF04
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Apr 2016 01:47:49 +0000 (UTC)
-Received: from vz-proxy-l001.mx.aol.com ([64.236.82.158])
-	by vms173023.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O4X00MSTJJ90P50@vms173023.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	31 Mar 2016 19:47:33 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Nc0brD34 c=1 sm=1 tr=0	a=W8DY27sA+pJ1DslXMfMu3Q==:117
-	a=7OsogOcEt9IA:10 a=sozttTNsAAAA:8	a=kaKi1cb8OKsWBlUEdZQA:9
-Received: by 100.15.86.14 with SMTP id 6d7acc08; Fri, 01 Apr 2016 00:47:33 GMT
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 158AA161F59;	Thu,
-	31 Mar 2016 20:47:33 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	Fri,  1 Apr 2016 08:00:40 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga103.jf.intel.com with ESMTP; 01 Apr 2016 01:00:41 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.24,426,1455004800"; d="scan'208";a="949440130"
+Received: from amitta2x-ilbpg1.png.intel.com ([10.88.227.34])
+	by fmsmga002.fm.intel.com with ESMTP; 01 Apr 2016 01:00:40 -0700
+From: Anuj Mittal <anujx.mittal@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Mar 2016 20:47:23 -0400
-Message-id: <1459471643-7183-2-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-In-reply-to: <1459471643-7183-1-git-send-email-denis@denix.org>
-References: <1459471643-7183-1-git-send-email-denis@denix.org>
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-qt5][PATCH 2/2] qtquickcontrols: fix compilation of examples/texteditor
+Date: Fri,  1 Apr 2016 16:00:32 +0800
+Message-Id: <1459497633-32109-2-git-send-email-anujx.mittal@intel.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1459497633-32109-1-git-send-email-anujx.mittal@intel.com>
+References: <1459497633-32109-1-git-send-email-anujx.mittal@intel.com>
+Subject: [meta-filesystems][PATCH 1/2] fuse-exfat: update to version 1.2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,67 +29,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2016 01:47:50 -0000
+X-List-Received-Date: Fri, 01 Apr 2016 08:00:41 -0000
 
-From: Denys Dmytriyenko <denys@ti.com>
+Package now uses autotools instead of scons.
 
-git/examples/quick/controls/texteditor/src/documenthandler.cpp:136:12: error: invalid use of incomplete type 'class QDebug'
-      qDebug() << "saved to" << localPath;
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Anuj Mittal <anujx.mittal@intel.com>
 ---
- ...fix-invalid-use-of-incomplete-type-class-.patch | 27 ++++++++++++++++++++++
- recipes-qt/qt5/qtquickcontrols_git.bb              |  4 ++++
- 2 files changed, 31 insertions(+)
- create mode 100644 recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch
+ .../{fuse-exfat_1.1.0.bb => fuse-exfat_1.2.3.bb}           | 14 ++++----------
+ 1 file changed, 4 insertions(+), 10 deletions(-)
+ rename meta-filesystems/recipes-filesystems/fuse-exfat/{fuse-exfat_1.1.0.bb => fuse-exfat_1.2.3.bb} (65%)
 
-diff --git a/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch b/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch
-new file mode 100644
-index 0000000..10793e6
---- /dev/null
-+++ b/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch
-@@ -0,0 +1,27 @@
-+From c39a563984693efac577adb137115693634c038f Mon Sep 17 00:00:00 2001
-+From: Denys Dmytriyenko <denys@ti.com>
-+Date: Thu, 31 Mar 2016 19:57:01 -0400
-+Subject: [PATCH] texteditor: fix invalid use of incomplete type 'class QDebug'
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-+---
-+ examples/quick/controls/texteditor/src/documenthandler.cpp | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/examples/quick/controls/texteditor/src/documenthandler.cpp b/examples/quick/controls/texteditor/src/documenthandler.cpp
-+index 2e9987a..c8bf419 100644
-+--- a/examples/quick/controls/texteditor/src/documenthandler.cpp
-++++ b/examples/quick/controls/texteditor/src/documenthandler.cpp
-+@@ -44,6 +44,7 @@
-+ #include <QtGui/QTextCursor>
-+ #include <QtGui/QFontDatabase>
-+ #include <QtCore/QFileInfo>
-++#include <QtCore/QDebug>
-+ 
-+ DocumentHandler::DocumentHandler()
-+     : m_target(0)
-+-- 
-+2.2.0
-+
-diff --git a/recipes-qt/qt5/qtquickcontrols_git.bb b/recipes-qt/qt5/qtquickcontrols_git.bb
-index 1e25d6e..6f0379e 100644
---- a/recipes-qt/qt5/qtquickcontrols_git.bb
-+++ b/recipes-qt/qt5/qtquickcontrols_git.bb
-@@ -13,4 +13,8 @@ DEPENDS += "qtdeclarative"
+diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.1.0.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+similarity index 65%
+rename from meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.1.0.bb
+rename to meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+index 6a83ab2..639e33c 100644
+--- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.1.0.bb
++++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+@@ -12,15 +12,9 @@ SRC_URI = "${DEBIAN_MIRROR}/main/f/fuse-exfat/fuse-exfat_${PV}.orig.tar.gz \
+ DEPENDS = "fuse virtual/libc"
+ RRECOMMENDS_${PN} = "util-linux-mount"
  
- RDEPENDS_${PN}-dev = ""
+-inherit scons
++inherit autotools pkgconfig
  
-+SRC_URI += " \
-+    file://0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch \
-+"
-+
- SRCREV = "93d06fb27d7eae9290db33b6684916a225939f0b"
+-SRC_URI[md5sum] = "b2a23c032661cb1c1da4514e7af33916"
+-SRC_URI[sha256sum] = "198c520e417e955dc5c08687c278e63eefa56719da4452aa4a605be0327f953e"
++SRC_URI[md5sum] = "fca71e6598f79d037a3c7c969cb5710c"
++SRC_URI[sha256sum] = "f2e06eba5a21c621aac1d6da21b12a5a324fdd1e20f9c8acd357dd463c2355d9"
+ 
+-EXTRA_OESCONS = " \
+-    CCFLAGS='${CCFLAGS} -std=c99' DESTDIR=${D}/${base_sbindir} \
+-"
+-
+-do_install_prepend() {
+-    install -d ${D}/${base_sbindir}
+-}
++S = "${WORKDIR}/${PN}-${PV}"
 -- 
-2.2.0
+1.9.1
 
 
