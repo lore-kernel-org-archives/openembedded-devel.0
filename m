@@ -1,54 +1,40 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
-	[209.85.220.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 0686373169
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qg0-f66.google.com (mail-qg0-f66.google.com
+	[209.85.192.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 1AE9175E2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Apr 2016 08:59:01 +0000 (UTC)
-Received: by mail-pa0-f42.google.com with SMTP id zm5so108305285pac.0
+	Sat,  2 Apr 2016 14:45:44 +0000 (UTC)
+Received: by mail-qg0-f66.google.com with SMTP id b32so12778361qgf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Apr 2016 01:59:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
-	bh=efVPLrn5dx936RmIgMyMqM8t8kXqkyvVT41JWEcpMxU=;
-	b=IDNfQvS4ypsGLrO/fvVnyZsJfQiwyh3y7P9Zgl1Z+Y7R3M6WHR+5YTVvqQOzC81Dyl
-	kYaRidTTncoguV4KOa+arhClKZoMDOhe0m+TM/C1Qwz65Mwox9g1AopuVrHAhcbXGn7N
-	m4ShRXgs6q+KbuwHKVl0nVywIldigbJ1ykkE2iTGjEDQdZS/y4tnY2pmyd904MlRNgcL
-	9Q5VE6neZECadAqKvorsGBpIlhCSEd+5L48x2byuj6hnHByMAlS/3Mlq5cQhINPOyC/c
-	H9hJVCiIXi+p64nNTqwvZfh6lQGihe9r9nCo72bNtIhmip5dXLuGp20nfTyoYtWG4w0C
-	xrtg==
+	Sat, 02 Apr 2016 07:45:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
-	:message-id:references:to;
-	bh=efVPLrn5dx936RmIgMyMqM8t8kXqkyvVT41JWEcpMxU=;
-	b=IRDdxw6WY/VLYLyhjJaSres0s5Ev9mVOHECk/b+O82j7cLqQB02/bCvnZ3tqWNtJCM
-	bLRQqamFtaIufzPRYFUN8nsmNlb9p83uFIkH2b6hiQUZMuKGiV4/b7aqUQ1tpK1Tyjrx
-	gQ18gNKFlwLedmsOG7RwENIlNHhPvBPv0OhcbW/nFcpGHBXRIB+bObCLoga7qqKH/zk7
-	GJUNGKbTvwqR4dL6tsAYc9NUMA9vjafMtSuVqWjwRLB+lEyWX4WoLM8Hu2P7XJJKJN6+
-	vDVpG0zUb9AM6WFd5viAoReHN4hEiq3ajFLLNlDsRghDNaCj9pcMtRnVjQkuqEK/9ujk
-	TiOQ==
-X-Gm-Message-State: AD7BkJLcrPAQdEP4ZUSxZHv/jTRpm5HezWcTaKduE5O9Qeb9nZNmx8A52lhd4Tl9jCSCiw==
-X-Received: by 10.66.122.100 with SMTP id lr4mr36049210pab.99.1459587542510;
-	Sat, 02 Apr 2016 01:59:02 -0700 (PDT)
-Received: from ?IPv6:2601:646:8800:5a9a:1156:ef7c:5e3a:2bb9?
-	([2601:646:8800:5a9a:1156:ef7c:5e3a:2bb9])
-	by smtp.gmail.com with ESMTPSA id
-	uw2sm16395868pac.10.2016.04.02.01.59.01
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 02 Apr 2016 01:59:01 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CAP71Wjweh17pbzsvA0EA9i4nZe+bWEJYSPZp3yhV90FLyh8L0g@mail.gmail.com>
-Date: Sat, 2 Apr 2016 01:58:56 -0700
-Message-Id: <D0CD05A6-D086-4851-8826-657800C91CB5@gmail.com>
-References: <CAP71WjzNNeYY2pA5-YxtXFZJ01iPR=dgORMoYfCgWDPAA7_RsA@mail.gmail.com>
-	<1BA327FE-7861-41A7-AB53-A5DBB8EF3FEA@gmail.com>
-	<CAP71Wjweh17pbzsvA0EA9i4nZe+bWEJYSPZp3yhV90FLyh8L0g@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=CKUOMC20MdU30s8Mf3KAEnCbQt5wvo5NmMECzNDkaeU=;
+	b=FXLNIJLwHdWc0Nh5AvbSRdRXBPlnrcrBII4+d5nQU4TC/e1nxlpyhIXuC2wdDPEhQ/
+	CGbf3bIE8q49JbJy+sTwpKYHHJwNd6pbuQQ24cvAdtry+OcQVPDFHGKaTp2MrkPIUhv0
+	daSk6/Ik4ZkJIvCu5z2bMukefzcHtHmtTMtjeTiAt2KIJaspGIF7jUFhV8TXtL41Bqib
+	D0QExiJYx4ZUKd/MWPiJCgAvO9gtCYgQeEMBAAixEuK3LgvQHc9rrxl7ZXOfTKpBy2Ff
+	QKXQeRlbvTNRdS4lqvyKh8rxYNPY6vyDJ3yAW1LDwQ+eVxiR1443II6BsigSVMy/RgTr
+	19hQ==
+X-Gm-Message-State: AD7BkJJaN0e6tjTOZvclu9yjrHJhkvaEyhnBt4hVxrPqLQt/5hCiwnY+yB/1fsdxL5KEMQ==
+X-Received: by 10.140.227.137 with SMTP id x131mr10112710qhb.7.1459608345481; 
+	Sat, 02 Apr 2016 07:45:45 -0700 (PDT)
+Received: from build-slave.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
+	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
+	d188sm8450194qkb.9.2016.04.02.07.45.44
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 02 Apr 2016 07:45:44 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3124)
-Subject: Re: openbox themes
+Date: Sat,  2 Apr 2016 10:45:29 -0400
+Message-Id: <1459608329-26531-3-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1459608329-26531-1-git-send-email-derek@asterius.io>
+References: <1459608329-26531-1-git-send-email-derek@asterius.io>
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-perl][PATCH 3/3] libstrictures-perl: update to 2.000002
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,57 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Apr 2016 08:59:02 -0000
-X-Groupsio-MsgNum: 60801
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_1C1EA907-B09B-476B-BEBD-1F79C7DC8514";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Sat, 02 Apr 2016 14:45:45 -0000
 
---Apple-Mail=_1C1EA907-B09B-476B-BEBD-1F79C7DC8514
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ ...{libstrictures-perl_2.000001.bb => libstrictures-perl_2.000002.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libstrictures/{libstrictures-perl_2.000001.bb => libstrictures-perl_2.000002.bb} (92%)
+
+diff --git a/meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000001.bb b/meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000002.bb
+similarity index 92%
+rename from meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000001.bb
+rename to meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000002.bb
+index c1de4e7..11a6e50 100644
+--- a/meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000001.bb
++++ b/meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000002.bb
+@@ -29,8 +29,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://README;beginline=246;endline=262;md5=43be558cf4f19823cdd6af22135cf5f8"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/strictures-${PV}.tar.gz"
+-SRC_URI[md5sum] = "fb1350b4af50a2f6ba053c1cfd97e920"
+-SRC_URI[sha256sum] = "1e738a8ad63ce8c9b447111c8304ae124a3277c2dc17953b4f647581525e20d3"
++SRC_URI[md5sum] = "fb1fada8260992bc85e126c21ffcc6d5"
++SRC_URI[sha256sum] = "130355dcb3afd8c3c8213c24b924e71deb7e1e1197da8f90c5ae191766aa4100"
+ 
+ S = "${WORKDIR}/strictures-${PV}"
+ 
+-- 
+1.9.1
 
 
-> On Apr 1, 2016, at 5:53 AM, Nicolas Dechesne =
-<nicolas.dechesne@linaro.org> wrote:
->=20
-> On Wed, Mar 30, 2016 at 8:19 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>=20
->> Do you have XDG_DATA_DIRS variable set to include /usr/share, try =
-something like
->>=20
->> export XDG_DATA_DIRS=3D$XDG_DATA_DIRS:/usr/share
->>=20
->> before launching openbox, if that works then may be you should add it =
-to /etc/profile
->> via a post processing hook or some such.
->=20
-> that doesn't change anything. without any openbox-theme installed , it
-> fails to start. I can briefly see the mouse pointer on the screen,
-> before it dies.
-
-Looking at source code it seems it needs the themes to be installed =
-since it configures
-to a fallback theme which is clearlooks in case a theme is not set in =
-config. So
-adding a RDEPENDS_${PN} on the package providing themes seems the right =
-fix here.
-
---Apple-Mail=_1C1EA907-B09B-476B-BEBD-1F79C7DC8514
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlb/idUACgkQuwUzVZGdMxQoawCcDgRZi0BnvmJuaU6kkV9QFTR7
-FkIAnj12cgBXAwsi1rzgRCoMuaLSw4FT
-=zIu2
------END PGP SIGNATURE-----
-
---Apple-Mail=_1C1EA907-B09B-476B-BEBD-1F79C7DC8514--
