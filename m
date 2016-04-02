@@ -1,37 +1,57 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f67.google.com (mail-qg0-f67.google.com
-	[209.85.192.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B16475E2D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lb0-f179.google.com (mail-lb0-f179.google.com
+	[209.85.217.179])
+	by mail.openembedded.org (Postfix) with ESMTP id A7D6F6080F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Apr 2016 14:45:43 +0000 (UTC)
-Received: by mail-qg0-f67.google.com with SMTP id n34so13778932qge.3
+	Sat,  2 Apr 2016 18:17:00 +0000 (UTC)
+Received: by mail-lb0-f179.google.com with SMTP id vo2so104215008lbb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Apr 2016 07:45:44 -0700 (PDT)
+	Sat, 02 Apr 2016 11:17:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=i3p+ZfJ411B9XOTc1lT5KkUx9j4CgWNI2B/DvJZE3yc=;
+	b=jxbq1VdHuDHITDcnY2jpUr9L5PhdjDsDi42mQGe8SpM1X013j8iSdpb4+6iH8/EMgE
+	/syvuj9uxN6QE2vBag+Rzro4WralmoSdsZ9rzVTNV7c5u1UPzKZ5HMz6r7y4ziBAvJLU
+	y8qfwRnxzWAS25gXEPHFXA9p2+fs9yK6UKPh1rPWDPd2BNk+mXSNrtaO2rDenumNZhYm
+	QbwUTQm7a/o2s3Bk0U5tGBLQf6o+j/rZzG5OT5m/7/ylB2JgpqmP+h93rcZAZrsSJ3ra
+	cbpZ/Tj8mCfBmp8IamRhZr2Pba3HBaQ8esqrgehbBWBzl3yvvnJ9VqXw/L0pAH7zENHX
+	T9sA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xepTIVy4JBDK4o9b/sJcpJT197fRlONguN4IYAED198=;
-	b=PQrTfDRJs+wtlfy78d38Xex7AL0kCyyQ/WIT/yb5zc+EBuQxQtvwEhE1A4qKZ7x9/v
-	SWxRVbjo6lD3Aie2Iym+ImurI7FgA1LPtzpHHWT2q06GDijyqGYFlZjOOUiRjZRpopdf
-	6qvCbumIMvjSQ6Gairy5rAS2nUMMIjibBr/7QcAMdlkjMd7E8evdUG/GR08Xazj88gzT
-	zOBB6f5+vHW6YBo9U2BkgR7R+5fgAWgAw9nqlge7GSPrdrt6TwWjGujHl8etdYhZY1Xu
-	zR6n6eEi4UTG3hJ7pYoVu8/WPWCnYxKLRPUUVFw/5CiiJelClHTVo90xDI4tu2VbVb9Y
-	8wCg==
-X-Gm-Message-State: AD7BkJJtJpW13/I8HxDqAh5fA9v+1rHVqnoZi1mSRt8I8kvXWUw5Zui1PMZ8FErMpxfHtg==
-X-Received: by 10.140.152.78 with SMTP id 75mr3867235qhy.22.1459608343799;
-	Sat, 02 Apr 2016 07:45:43 -0700 (PDT)
-Received: from build-slave.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	d188sm8450194qkb.9.2016.04.02.07.45.43
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 02 Apr 2016 07:45:43 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=i3p+ZfJ411B9XOTc1lT5KkUx9j4CgWNI2B/DvJZE3yc=;
+	b=DDemjsu63OxCZu4EcQ01ZlF/SJR+kCSTmV0F843XKf2pbI9uP8otEziEy7Se4ncq4D
+	5FEQVbHvh1nYr5szlEJ//SVwsGsAXTcx6oAh7+AcrKjYzd4peNOfRDhkZWAw0U7ZSlF8
+	IcXqEbTItQreNE/dKTGsYmXY7CMrIzaFgdpb2ZFJQrICc4Mg1OhuxGUGRP5AgLPFKaRp
+	bHkmyj7/ocmgAfS+uUm1oXNHN7Xv4yuyChxqyUVNGYyBeQbBHZlEeySysY5TKNm/s83v
+	GNm0ONEpfsVLn17nDt2VBctXQshRvpYSr55LWWffxVb8dVdpfphvwjdcd10FXV6zq6tJ
+	CH4Q==
+X-Gm-Message-State: AD7BkJJ8WnfkEVQhwhjBb5FVBnnSpMHEW4eIF0gAY1Zg51UhmLMKrdMtGfy5zuZ3pmpYgw==
+X-Received: by 10.28.234.151 with SMTP id g23mr4372745wmi.40.1459621019167;
+	Sat, 02 Apr 2016 11:16:59 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	m6sm19934211wje.21.2016.04.02.11.16.57
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 02 Apr 2016 11:16:57 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 2 Apr 2016 20:17:14 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  2 Apr 2016 10:45:27 -0400
-Message-Id: <1459608329-26531-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-perl][PATCH 1/3] libxml-sax-writer-perl: update to 0.56
+Message-ID: <20160402181714.GG2567@jama>
+References: <1459406572-8144-1-git-send-email-eduardo@monkey.io>
+	<20160401133809.GF2567@jama>
+	<CAEaCVQjmZGJOX332YqUH8eLOAGURiKXS4-f40P6KqNE7FgZ9qQ@mail.gmail.com>
+	<CA+chaQfbTZu=JZO2FaLLCSFZtzHpL3=x3qrA16EAWrB=Yx+Unw@mail.gmail.com>
+	<CAEaCVQjGbaWfr5ZT7-4S1jNStoWUQ3QJyNhZ+-nOYpe2EBvZgA@mail.gmail.com>
+	<CAEaCVQjW0cmMDNyc3LhZQxv+RWfVmx9Bj-qgQx9AH1_+0=sTDA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAEaCVQjW0cmMDNyc3LhZQxv+RWfVmx9Bj-qgQx9AH1_+0=sTDA@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: Re: [meta-oe][PATCH] fluentbit: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,33 +64,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Apr 2016 14:45:45 -0000
+X-List-Received-Date: Sat, 02 Apr 2016 18:17:04 -0000
+X-Groupsio-MsgNum: 60805
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="GdbWtwDHkcXqP16f"
+Content-Disposition: inline
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- ...{libxml-sax-writer-perl_0.54.bb => libxml-sax-writer-perl_0.56.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libxml/{libxml-sax-writer-perl_0.54.bb => libxml-sax-writer-perl_0.56.bb} (86%)
+--GdbWtwDHkcXqP16f
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.56.bb
-similarity index 86%
-rename from meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
-rename to meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.56.bb
-index 914c208..961ceda 100644
---- a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
-+++ b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.56.bb
-@@ -13,8 +13,8 @@ DEPENDS += "libxml-filter-buffertext-perl-native"
- RDEPENDS_${PN} += "libxml-filter-buffertext-perl"
- 
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/P/PE/PERIGRIN/XML-SAX-Writer-${PV}.tar.gz"
--SRC_URI[md5sum] = "383139d76418a82b9800dc4f8b568891"
--SRC_URI[sha256sum] = "a1b4d959aed8f8337523c4cef4b431e56e619c795dc6f99a868548952101cf3d"
-+SRC_URI[md5sum] = "e5fa5e2b2f6867b1aca9b5b43e1ce361"
-+SRC_URI[sha256sum] = "d073f7a25072c8150317b86b99d07031316a15bffab99e63e5afe591c8217d03"
- 
- LIC_FILES_CHKSUM = "file://README;beginline=45;endline=46;md5=d41d8cd98f00b204e9800998ecf8427e"
- 
--- 
-1.9.1
+On Fri, Apr 01, 2016 at 11:20:49AM -0600, Eduardo Silva wrote:
+> on this case should be "RDEPENDS_${PN} =3D "zlib" OK ?
 
+NO
 
+> On Fri, Apr 1, 2016 at 11:01 AM, Eduardo Silva <eduardo@monkey.io> wrote:
+>=20
+> > Oh, sorry I misunderstood. The program requires zlib to run, so it's a
+> > build (headers) and runtime dependency.
+> >
+> > On Fri, Apr 1, 2016 at 10:57 AM, Martin Jansa <martin.jansa@gmail.com>
+> > wrote:
+> >
+> >> Then it's probably build time dependency as the warning says, not runt=
+ime
+> >> dependency like you did.
+> >>
+> >> Read what the component build does, if it checks for zlib in configure
+> >> then
+> >> you really need to add it to DEPENDS not RDEPENDS_${PN}.
+> >>
+> >> On Fri, Apr 1, 2016 at 6:53 PM, Eduardo Silva <eduardo@monkey.io> wrot=
+e:
+> >>
+> >> > > +LIC_FILES_CHKSUM =3D
+> >> > "file://${S}/LICENSE;md5=3D2ee41112a44fe7014dce33e26468ba93"
+> >> >
+> >> > >
+> >> > > LIC_FILES_CHKSUM is relative to ${S}, so LIC_FILES_CHKSUM =3D
+> >> > > "file://LICENSE.. should work fine
+> >> > >
+> >> > >
+> >> > Thanks, I have updated my local copy
+> >> >
+> >> >
+> >> > > > +
+> >> > > > +RDEPENDS_${PN} =3D "zlib"
+> >> > >
+> >> > > If it does link with libz then the runtime dependency should be ad=
+ded
+> >> > > automatically by shlibs code in package.bbclass if it's not the ca=
+se
+> >> > > can you add comment explaining why it needs to be added explicitly?
+> >> > >
+> >> > >
+> >> > I added that because I got a QA warning message:
+> >> >
+> >> > WARNING: QA Issue: fluentbit-dev rdepends on zlib, but it isn't a bu=
+ild
+> >> > dependency? [build-deps]
+> >> > WARNING: QA Issue: fluentbit rdepends on zlib, but it isn't a build
+> >> > dependency? [build-deps]
+> >> >
+> >> > what's your suggestion in this case ?
+> >> >
+> >> > best
+> >> >
+> >> >
+> >> >
+> >> > > > +
+> >> > > > +inherit cmake
+> >> > > > --
+> >> > > > 2.5.0
+> >> > > >
+> >> > > > --
+> >> > > > _______________________________________________
+> >> > > > Openembedded-devel mailing list
+> >> > > > Openembedded-devel@lists.openembedded.org
+> >> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >> > >
+> >> > > --
+> >> > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> >> > >
+> >> > > --
+> >> > > _______________________________________________
+> >> > > Openembedded-devel mailing list
+> >> > > Openembedded-devel@lists.openembedded.org
+> >> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >> > >
+> >> > >
+> >> >
+> >> >
+> >> > --
+> >> > Eduardo Silva
+> >> > Monkey Software
+> >> > --
+> >> > _______________________________________________
+> >> > Openembedded-devel mailing list
+> >> > Openembedded-devel@lists.openembedded.org
+> >> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >> >
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>
+> >
+> >
+> >
+> > --
+> > Eduardo Silva
+> > Monkey Software
+> >
+>=20
+>=20
+>=20
+> --=20
+> Eduardo Silva
+> Monkey Software
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--GdbWtwDHkcXqP16f
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlcADKkACgkQN1Ujt2V2gBxpPQCgsSWxhgLFA7tTGLAZkgm26rhu
+pLMAoKkIdtqPY7EtPwMCfQlqr3213a4h
+=hr38
+-----END PGP SIGNATURE-----
+
+--GdbWtwDHkcXqP16f--
