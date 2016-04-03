@@ -1,57 +1,52 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lb0-f179.google.com (mail-lb0-f179.google.com
-	[209.85.217.179])
-	by mail.openembedded.org (Postfix) with ESMTP id A7D6F6080F
+Received: from mail-lb0-f180.google.com (mail-lb0-f180.google.com
+	[209.85.217.180])
+	by mail.openembedded.org (Postfix) with ESMTP id AD27D770AB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Apr 2016 18:17:00 +0000 (UTC)
-Received: by mail-lb0-f179.google.com with SMTP id vo2so104215008lbb.1
+	Sun,  3 Apr 2016 11:48:24 +0000 (UTC)
+Received: by mail-lb0-f180.google.com with SMTP id qe11so121651191lbc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Apr 2016 11:17:01 -0700 (PDT)
+	Sun, 03 Apr 2016 04:48:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=i3p+ZfJ411B9XOTc1lT5KkUx9j4CgWNI2B/DvJZE3yc=;
-	b=jxbq1VdHuDHITDcnY2jpUr9L5PhdjDsDi42mQGe8SpM1X013j8iSdpb4+6iH8/EMgE
-	/syvuj9uxN6QE2vBag+Rzro4WralmoSdsZ9rzVTNV7c5u1UPzKZ5HMz6r7y4ziBAvJLU
-	y8qfwRnxzWAS25gXEPHFXA9p2+fs9yK6UKPh1rPWDPd2BNk+mXSNrtaO2rDenumNZhYm
-	QbwUTQm7a/o2s3Bk0U5tGBLQf6o+j/rZzG5OT5m/7/ylB2JgpqmP+h93rcZAZrsSJ3ra
-	cbpZ/Tj8mCfBmp8IamRhZr2Pba3HBaQ8esqrgehbBWBzl3yvvnJ9VqXw/L0pAH7zENHX
-	T9sA==
+	bh=zR26ePTJNzSpqaZOSIqIZ8lBiGf0AR0W35CpH6UJqrk=;
+	b=Llmzx5Ey8paTYS+anfhxbZUJMaV/PKr8s8GDnun5m9LtWkPV9f3fTHEd1Y4FD+8JYP
+	QMqyZGXD6fc/VaZ1CnXZnrg83Tk1KE84d2Up25LiRVU/TC7mWkeFk25nlaaog5vYBLDP
+	r97Dxa2BNNbBrHBeu7FgzCKF3Yt2Vl/xNYoKQiIWoHBMoKQGKDFutm9mTYf84xkBlGnQ
+	x5gV0zG+OVZLYopQxNYI0jhCd+h+WpQjABU+m5znNcYmR2AYBzau3MBNyDYnu+aRpwKz
+	FriDEazH94IP9D/sox6XeZbuNeJgykJnafFj8JMQT1Ia/C7WTQSue5MVgJu+Q0NFPhu0
+	HbWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=i3p+ZfJ411B9XOTc1lT5KkUx9j4CgWNI2B/DvJZE3yc=;
-	b=DDemjsu63OxCZu4EcQ01ZlF/SJR+kCSTmV0F843XKf2pbI9uP8otEziEy7Se4ncq4D
-	5FEQVbHvh1nYr5szlEJ//SVwsGsAXTcx6oAh7+AcrKjYzd4peNOfRDhkZWAw0U7ZSlF8
-	IcXqEbTItQreNE/dKTGsYmXY7CMrIzaFgdpb2ZFJQrICc4Mg1OhuxGUGRP5AgLPFKaRp
-	bHkmyj7/ocmgAfS+uUm1oXNHN7Xv4yuyChxqyUVNGYyBeQbBHZlEeySysY5TKNm/s83v
-	GNm0ONEpfsVLn17nDt2VBctXQshRvpYSr55LWWffxVb8dVdpfphvwjdcd10FXV6zq6tJ
-	CH4Q==
-X-Gm-Message-State: AD7BkJJ8WnfkEVQhwhjBb5FVBnnSpMHEW4eIF0gAY1Zg51UhmLMKrdMtGfy5zuZ3pmpYgw==
-X-Received: by 10.28.234.151 with SMTP id g23mr4372745wmi.40.1459621019167;
-	Sat, 02 Apr 2016 11:16:59 -0700 (PDT)
+	bh=zR26ePTJNzSpqaZOSIqIZ8lBiGf0AR0W35CpH6UJqrk=;
+	b=Yh1KOq/t5zK2zTOpnponYOku1WjRqeuaTDjm1MtjIA+LP4rqCyojkj+dQfu+LiQBsf
+	Q86iyaOAf4kgseZNtwkq89l4LM1y/S09ceDhPMW+68sg/P3bKuvzr9Z9U5018QVWM8OL
+	OMRGubeaPKZfBBgHYGTfoLlgReVylSqVwBm5Uw09JZnRZilYINzhbCQkzeFxZz6GzxWD
+	m6QwctzHrYr9riccamK+5ZoxnpD94VZXmqFW83lTx3t3n9p6XupVFXBKRyzoJkQ0EZ4K
+	xkhIF5hDHeysNJWEAnRMtIxRstlhcDXjjX7wOOi/cdJOal/ehgphJ2bQkYru/eX7EV/8
+	Go+A==
+X-Gm-Message-State: AD7BkJJLx0nLMCjFoZb4qXT4Wvvbff3cEVq2L+zaBBa+dvzkxBFc44zIv8hNX+KQdJprSw==
+X-Received: by 10.28.126.210 with SMTP id z201mr7093081wmc.102.1459684103971; 
+	Sun, 03 Apr 2016 04:48:23 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	m6sm19934211wje.21.2016.04.02.11.16.57
-	for <openembedded-devel@lists.openembedded.org>
+	kj9sm23469030wjb.14.2016.04.03.04.48.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 02 Apr 2016 11:16:57 -0700 (PDT)
+	Sun, 03 Apr 2016 04:48:23 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sat, 2 Apr 2016 20:17:14 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160402181714.GG2567@jama>
-References: <1459406572-8144-1-git-send-email-eduardo@monkey.io>
-	<20160401133809.GF2567@jama>
-	<CAEaCVQjmZGJOX332YqUH8eLOAGURiKXS4-f40P6KqNE7FgZ9qQ@mail.gmail.com>
-	<CA+chaQfbTZu=JZO2FaLLCSFZtzHpL3=x3qrA16EAWrB=Yx+Unw@mail.gmail.com>
-	<CAEaCVQjGbaWfr5ZT7-4S1jNStoWUQ3QJyNhZ+-nOYpe2EBvZgA@mail.gmail.com>
-	<CAEaCVQjW0cmMDNyc3LhZQxv+RWfVmx9Bj-qgQx9AH1_+0=sTDA@mail.gmail.com>
+Date: Sun, 3 Apr 2016 13:48:46 +0200
+To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Message-ID: <20160403114846.GA3428@jama>
+References: <1459546590-9513-1-git-send-email-ricardo.ribalda@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CAEaCVQjW0cmMDNyc3LhZQxv+RWfVmx9Bj-qgQx9AH1_+0=sTDA@mail.gmail.com>
+In-Reply-To: <1459546590-9513-1-git-send-email-ricardo.ribalda@gmail.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-oe][PATCH] fluentbit: add new recipe
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v7 0/7] opencv: Update to 3.1 and remove bl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,146 +59,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Apr 2016 18:17:04 -0000
-X-Groupsio-MsgNum: 60805
+X-List-Received-Date: Sun, 03 Apr 2016 11:48:26 -0000
+X-Groupsio-MsgNum: 60806
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="GdbWtwDHkcXqP16f"
+	protocol="application/pgp-signature"; boundary="OXfL5xGRrasGEqWY"
 Content-Disposition: inline
 
---GdbWtwDHkcXqP16f
+--OXfL5xGRrasGEqWY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 01, 2016 at 11:20:49AM -0600, Eduardo Silva wrote:
-> on this case should be "RDEPENDS_${PN} =3D "zlib" OK ?
+On Fri, Apr 01, 2016 at 11:36:23PM +0200, Ricardo Ribalda Delgado wrote:
+> What can I say... Sorry about all the spam :S. This should have
+> never reach v7.
+>=20
+> Hopefully all the dependecies are ok this time.
+> It also predownloads the Intel IPP, using bitbake.
+>=20
+> I have decided to resend the whole patchset because it is now a
+> mess of v7, v6, v5...
 
-NO
+Previous revision failed like this:
+http://errors.yoctoproject.org/Errors/Details/59759/
 
-> On Fri, Apr 1, 2016 at 11:01 AM, Eduardo Silva <eduardo@monkey.io> wrote:
+and latest revision doesn't look to fix this.
+
+Can you double check?
+
 >=20
-> > Oh, sorry I misunderstood. The program requires zlib to run, so it's a
-> > build (headers) and runtime dependency.
-> >
-> > On Fri, Apr 1, 2016 at 10:57 AM, Martin Jansa <martin.jansa@gmail.com>
-> > wrote:
-> >
-> >> Then it's probably build time dependency as the warning says, not runt=
-ime
-> >> dependency like you did.
-> >>
-> >> Read what the component build does, if it checks for zlib in configure
-> >> then
-> >> you really need to add it to DEPENDS not RDEPENDS_${PN}.
-> >>
-> >> On Fri, Apr 1, 2016 at 6:53 PM, Eduardo Silva <eduardo@monkey.io> wrot=
-e:
-> >>
-> >> > > +LIC_FILES_CHKSUM =3D
-> >> > "file://${S}/LICENSE;md5=3D2ee41112a44fe7014dce33e26468ba93"
-> >> >
-> >> > >
-> >> > > LIC_FILES_CHKSUM is relative to ${S}, so LIC_FILES_CHKSUM =3D
-> >> > > "file://LICENSE.. should work fine
-> >> > >
-> >> > >
-> >> > Thanks, I have updated my local copy
-> >> >
-> >> >
-> >> > > > +
-> >> > > > +RDEPENDS_${PN} =3D "zlib"
-> >> > >
-> >> > > If it does link with libz then the runtime dependency should be ad=
-ded
-> >> > > automatically by shlibs code in package.bbclass if it's not the ca=
-se
-> >> > > can you add comment explaining why it needs to be added explicitly?
-> >> > >
-> >> > >
-> >> > I added that because I got a QA warning message:
-> >> >
-> >> > WARNING: QA Issue: fluentbit-dev rdepends on zlib, but it isn't a bu=
-ild
-> >> > dependency? [build-deps]
-> >> > WARNING: QA Issue: fluentbit rdepends on zlib, but it isn't a build
-> >> > dependency? [build-deps]
-> >> >
-> >> > what's your suggestion in this case ?
-> >> >
-> >> > best
-> >> >
-> >> >
-> >> >
-> >> > > > +
-> >> > > > +inherit cmake
-> >> > > > --
-> >> > > > 2.5.0
-> >> > > >
-> >> > > > --
-> >> > > > _______________________________________________
-> >> > > > Openembedded-devel mailing list
-> >> > > > Openembedded-devel@lists.openembedded.org
-> >> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >> > >
-> >> > > --
-> >> > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> >> > >
-> >> > > --
-> >> > > _______________________________________________
-> >> > > Openembedded-devel mailing list
-> >> > > Openembedded-devel@lists.openembedded.org
-> >> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >> > >
-> >> > >
-> >> >
-> >> >
-> >> > --
-> >> > Eduardo Silva
-> >> > Monkey Software
-> >> > --
-> >> > _______________________________________________
-> >> > Openembedded-devel mailing list
-> >> > Openembedded-devel@lists.openembedded.org
-> >> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >> >
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
-> >
-> >
-> >
-> > --
-> > Eduardo Silva
-> > Monkey Software
-> >
+> It is also available on=20
+> https://github.com/ribalda/meta-openembedded/tree/opencv-v7
 >=20
+> Regards
 >=20
+> Ricardo Ribalda Delgado (7):
+>   opencv: Fix use before set error on meta package
+>   opencv: Update to version 3.1
+>   opencv: Fix pkg-config file.
+>   opencv: Add missing dependencies
+>   opencv: Use pre-downloaded ipp
+>   opencv: Fix build on x86 platform
+>   opencv: Remove blacklist
+>=20
+>  ...01-3rdparty-ippicv-Use-pre-downloaded-ipp.patch | 28 ++++++++++++++++=
++++++
+>  .../opencv/opencv/fixpkgconfig.patch               | 29 ++++++++++++++++=
+++++++
+>  .../opencv/{opencv_3.0.bb =3D> opencv_3.1.bb}        | 28 ++++++++++++++=
++------
+>  3 files changed, 77 insertions(+), 8 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-3rdparty-i=
+ppicv-Use-pre-downloaded-ipp.patch
+>  create mode 100644 meta-oe/recipes-support/opencv/opencv/fixpkgconfig.pa=
+tch
+>  rename meta-oe/recipes-support/opencv/{opencv_3.0.bb =3D> opencv_3.1.bb}=
+ (86%)
 >=20
 > --=20
-> Eduardo Silva
-> Monkey Software
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 2.8.0.rc3
+>=20
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---GdbWtwDHkcXqP16f
+--OXfL5xGRrasGEqWY
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlcADKkACgkQN1Ujt2V2gBxpPQCgsSWxhgLFA7tTGLAZkgm26rhu
-pLMAoKkIdtqPY7EtPwMCfQlqr3213a4h
-=hr38
+iEYEARECAAYFAlcBAtoACgkQN1Ujt2V2gBw6+gCfWKpTP3lUJyx9bO3opjpVXdfO
+OcIAn2qVLzTQTQGq2NHh4Nc0rc/XAjei
+=Q8X4
 -----END PGP SIGNATURE-----
 
---GdbWtwDHkcXqP16f--
+--OXfL5xGRrasGEqWY--
