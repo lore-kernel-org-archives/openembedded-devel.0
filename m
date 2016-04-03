@@ -1,52 +1,52 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lb0-f180.google.com (mail-lb0-f180.google.com
-	[209.85.217.180])
-	by mail.openembedded.org (Postfix) with ESMTP id AD27D770AB
+Received: from mail-lf0-f50.google.com (mail-lf0-f50.google.com
+	[209.85.215.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 423B376A51
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Apr 2016 11:48:24 +0000 (UTC)
-Received: by mail-lb0-f180.google.com with SMTP id qe11so121651191lbc.3
+	Sun,  3 Apr 2016 15:44:44 +0000 (UTC)
+Received: by mail-lf0-f50.google.com with SMTP id c126so17044873lfb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Apr 2016 04:48:25 -0700 (PDT)
+	Sun, 03 Apr 2016 08:44:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=zR26ePTJNzSpqaZOSIqIZ8lBiGf0AR0W35CpH6UJqrk=;
-	b=Llmzx5Ey8paTYS+anfhxbZUJMaV/PKr8s8GDnun5m9LtWkPV9f3fTHEd1Y4FD+8JYP
-	QMqyZGXD6fc/VaZ1CnXZnrg83Tk1KE84d2Up25LiRVU/TC7mWkeFk25nlaaog5vYBLDP
-	r97Dxa2BNNbBrHBeu7FgzCKF3Yt2Vl/xNYoKQiIWoHBMoKQGKDFutm9mTYf84xkBlGnQ
-	x5gV0zG+OVZLYopQxNYI0jhCd+h+WpQjABU+m5znNcYmR2AYBzau3MBNyDYnu+aRpwKz
-	FriDEazH94IP9D/sox6XeZbuNeJgykJnafFj8JMQT1Ia/C7WTQSue5MVgJu+Q0NFPhu0
-	HbWw==
+	bh=Guq0wO7GeElbmD8ygkmNlPqZayy75ApYa+cF0YhTIpM=;
+	b=M90BXmIMiiBTU7kL6D0xj3Ex37akWjUj4i8XMVRqrWEuLEO9gJf0kGo0rwEKcZgC3h
+	P7k2Q4ySRicBTDIqbN0s8hDafWS84C6ztFwXzxr9o5friH7nUj93L5V4sjAPCjAu14cr
+	7wSYuoZbfPDGagy0IT66hShQzDs3tJGCvz5jl4OKQ/s+VdBzB3Su80YKihOeRKKJyjZJ
+	iz026eOr27w3ZkcbjeunpM2ATJTJDUwNKnIjDysvoe8MsAWFcSuil4di2UnzoU42cV9o
+	C6/kybVv2ZT0Nu0PwvIrorGU5K6/j06p/j+rDjOHmq5x/sJtI2moJ0r7XGMpShpwp7k4
+	UgwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=zR26ePTJNzSpqaZOSIqIZ8lBiGf0AR0W35CpH6UJqrk=;
-	b=Yh1KOq/t5zK2zTOpnponYOku1WjRqeuaTDjm1MtjIA+LP4rqCyojkj+dQfu+LiQBsf
-	Q86iyaOAf4kgseZNtwkq89l4LM1y/S09ceDhPMW+68sg/P3bKuvzr9Z9U5018QVWM8OL
-	OMRGubeaPKZfBBgHYGTfoLlgReVylSqVwBm5Uw09JZnRZilYINzhbCQkzeFxZz6GzxWD
-	m6QwctzHrYr9riccamK+5ZoxnpD94VZXmqFW83lTx3t3n9p6XupVFXBKRyzoJkQ0EZ4K
-	xkhIF5hDHeysNJWEAnRMtIxRstlhcDXjjX7wOOi/cdJOal/ehgphJ2bQkYru/eX7EV/8
-	Go+A==
-X-Gm-Message-State: AD7BkJJLx0nLMCjFoZb4qXT4Wvvbff3cEVq2L+zaBBa+dvzkxBFc44zIv8hNX+KQdJprSw==
-X-Received: by 10.28.126.210 with SMTP id z201mr7093081wmc.102.1459684103971; 
-	Sun, 03 Apr 2016 04:48:23 -0700 (PDT)
+	bh=Guq0wO7GeElbmD8ygkmNlPqZayy75ApYa+cF0YhTIpM=;
+	b=CR6c5AwtRDXqBIY+4UmoQaU/XuaTWZwDiy+ZxLr3mo1WF2t3pWuZwmKIBqFsvD6i56
+	KwgDhZ7ev85m8QFCiK+inH/C9tbEzCytlRL4zkml6rKB7PG2uyeCXFsqk47Z0Tztveek
+	WyryCWqCgEHvP0vgs53J9L7LyzpY00cBPU0Kb+KqpucNUTztYkzNgiGkB/gCo7vtyyFJ
+	mkXHQtjWRbdn4LVRvdYmKlKdj+2Slmn/z3phP08v9YGryDg/pZISDXhQYjYhjCFt4Hde
+	djuV/4TZphEVETc0H6XYbPPcZjDOoB7iDaBIuCu6pa4tZ5IczD9XiYzii7Y7hRJPja5o
+	mG+A==
+X-Gm-Message-State: AD7BkJJtkmAx+wAAb/aOhurSpSU2psc+w5dWjSl/fGTJOZ0qRIjIWThu0hqVAWW0trwM2A==
+X-Received: by 10.194.122.138 with SMTP id ls10mr13992547wjb.51.1459698283989; 
+	Sun, 03 Apr 2016 08:44:43 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	kj9sm23469030wjb.14.2016.04.03.04.48.23
+	t3sm24381870wjz.11.2016.04.03.08.44.42
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 03 Apr 2016 04:48:23 -0700 (PDT)
+	Sun, 03 Apr 2016 08:44:42 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sun, 3 Apr 2016 13:48:46 +0200
-To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Message-ID: <20160403114846.GA3428@jama>
-References: <1459546590-9513-1-git-send-email-ricardo.ribalda@gmail.com>
+Date: Sun, 3 Apr 2016 17:45:06 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160403154506.GA27687@jama>
+References: <1459453082-22086-1-git-send-email-paul.gortmaker@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1459546590-9513-1-git-send-email-ricardo.ribalda@gmail.com>
+In-Reply-To: <1459453082-22086-1-git-send-email-paul.gortmaker@windriver.com>
 User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v7 0/7] opencv: Update to 3.1 and remove bl
+Subject: Re: [PATCH] autotools-bootstrap: don't fake submodule to avoid gnulib download
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,80 +59,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Apr 2016 11:48:26 -0000
-X-Groupsio-MsgNum: 60806
+X-List-Received-Date: Sun, 03 Apr 2016 15:44:47 -0000
+X-Groupsio-MsgNum: 60807
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="OXfL5xGRrasGEqWY"
+	protocol="application/pgp-signature"; boundary="2oS5YaxWCcQjTEyO"
 Content-Disposition: inline
 
---OXfL5xGRrasGEqWY
+--2oS5YaxWCcQjTEyO
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 01, 2016 at 11:36:23PM +0200, Ricardo Ribalda Delgado wrote:
-> What can I say... Sorry about all the spam :S. This should have
-> never reach v7.
+On Thu, Mar 31, 2016 at 03:38:02PM -0400, Paul Gortmaker wrote:
+> We were creating a .gitmodules on the fly to avoid downloading the
+> gnulib via git.  However this is problematic if the pkg had its own
+> .gitmodules already -- we'd clobber it and this breaks netcf build:
 >=20
-> Hopefully all the dependecies are ok this time.
-> It also predownloads the Intel IPP, using bitbake.
+>    ./bootstrap: getting gnulib files...
+>    error: pathspec 'gnulib' did not match any file(s) known to git.
 >=20
-> I have decided to resend the whole patchset because it is now a
-> mess of v7, v6, v5...
+> There is a more proper way to do this:  bootstrap supports this:
+>=20
+>  --no-git           do not use git to update gnulib.  Requires that
+>                     --gnulib-srcdir point to a correct gnulib snapshot
 
-Previous revision failed like this:
-http://errors.yoctoproject.org/Errors/Details/59759/
-
-and latest revision doesn't look to fix this.
-
-Can you double check?
+This breaks fontforge build:
+http://errors.yoctoproject.org/Errors/Details/59785/
 
 >=20
-> It is also available on=20
-> https://github.com/ribalda/meta-openembedded/tree/opencv-v7
+> and if we use that, we can use our sysroot copy of gnulib without
+> having to fake a .gitmodules submodule file.  This keeps the build
+> of netcf happy.
 >=20
-> Regards
+> Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
 >=20
-> Ricardo Ribalda Delgado (7):
->   opencv: Fix use before set error on meta package
->   opencv: Update to version 3.1
->   opencv: Fix pkg-config file.
->   opencv: Add missing dependencies
->   opencv: Use pre-downloaded ipp
->   opencv: Fix build on x86 platform
->   opencv: Remove blacklist
->=20
->  ...01-3rdparty-ippicv-Use-pre-downloaded-ipp.patch | 28 ++++++++++++++++=
-+++++
->  .../opencv/opencv/fixpkgconfig.patch               | 29 ++++++++++++++++=
-++++++
->  .../opencv/{opencv_3.0.bb =3D> opencv_3.1.bb}        | 28 ++++++++++++++=
-+------
->  3 files changed, 77 insertions(+), 8 deletions(-)
->  create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-3rdparty-i=
-ppicv-Use-pre-downloaded-ipp.patch
->  create mode 100644 meta-oe/recipes-support/opencv/opencv/fixpkgconfig.pa=
-tch
->  rename meta-oe/recipes-support/opencv/{opencv_3.0.bb =3D> opencv_3.1.bb}=
- (86%)
+> diff --git a/meta-oe/classes/autotools-bootstrap.bbclass b/meta-oe/classe=
+s/autotools-bootstrap.bbclass
+> index 8d7af1b47222..cae037559aa4 100644
+> --- a/meta-oe/classes/autotools-bootstrap.bbclass
+> +++ b/meta-oe/classes/autotools-bootstrap.bbclass
+> @@ -7,18 +7,13 @@ do_configure_prepend() {
+>      currdir=3D`pwd`
+>      cd ${S}
+> =20
+> -    # avoid bootstrap cloning gnulib on every configure
+> -    cat >.gitmodules <<EOF
+> -[submodule "gnulib"]
+> -	path =3D gnulib
+> -	url =3D git://git.sv.gnu.org/gnulib
+> -EOF
+> +    # avoid bootstrap cloning gnulib on every configure, hence "--no-git=
+".
+>      cp -rf ${STAGING_DATADIR}/gnulib ${S}
+> =20
+>      # --force to avoid errors on reconfigure e.g if recipes changed we d=
+epend on
+>      # | bootstrap: running: libtoolize --quiet
+>      # | libtoolize:   error: 'libltdl/COPYING.LIB' exists: use '--force'=
+ to overwrite
+>      # | ...
+> -    ./bootstrap --force
+> +    ./bootstrap --force --no-git --gnulib-srcdir=3Dgnulib
+>      cd $currdir
+>  }
+> --=20
+> 2.7.2
 >=20
 > --=20
-> 2.8.0.rc3
->=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---OXfL5xGRrasGEqWY
+--2oS5YaxWCcQjTEyO
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlcBAtoACgkQN1Ujt2V2gBw6+gCfWKpTP3lUJyx9bO3opjpVXdfO
-OcIAn2qVLzTQTQGq2NHh4Nc0rc/XAjei
-=Q8X4
+iEYEARECAAYFAlcBOn8ACgkQN1Ujt2V2gBxYtQCfT9m178XZ3IuyyQsWpfK6tvt5
+tz8Anjn52LKVSDNlqtz9vFRu0VPXO3zo
+=sTnH
 -----END PGP SIGNATURE-----
 
---OXfL5xGRrasGEqWY--
+--2oS5YaxWCcQjTEyO--
