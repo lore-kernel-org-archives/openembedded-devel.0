@@ -1,29 +1,31 @@
 Return-Path: <adrian.ratiu@ni.com>
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A4A676710
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D20576710
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Apr 2016 12:44:11 +0000 (UTC)
+	Mon,  4 Apr 2016 12:44:12 +0000 (UTC)
 Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
 	[130.164.19.135])
-	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	u34CiCkV000451; Mon, 4 Apr 2016 07:44:12 -0500
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u34CiDLn008772; Mon, 4 Apr 2016 07:44:13 -0500
 Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
 	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2016040407441277-523334 ;
-	Mon, 4 Apr 2016 07:44:12 -0500 
+	HF1218) with ESMTP id 2016040407441360-523335 ;
+	Mon, 4 Apr 2016 07:44:13 -0500 
 From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 4 Apr 2016 15:43:45 +0300
-Message-Id: <79b27b412f7fb085cc4525907858cb072b6da7e2.1459773737.git.adrian.ratiu@ni.com>
+Date: Mon, 4 Apr 2016 15:43:46 +0300
+Message-Id: <fe58091e2f0319dc7288a651e409852d173e5438.1459773737.git.adrian.ratiu@ni.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <79b27b412f7fb085cc4525907858cb072b6da7e2.1459773737.git.adrian.ratiu@ni.com>
+References: <79b27b412f7fb085cc4525907858cb072b6da7e2.1459773737.git.adrian.ratiu@ni.com>
 X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 04/04/2016 07:44:12 AM,
+	8.5.3FP6 HF1218|December 12, 2014) at 04/04/2016 07:44:13 AM,
 	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
 	HF1218|December 12, 2014) at 04/04/2016 07:44:13 AM,
 	Serialize complete at 04/04/2016 07:44:13 AM
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
 	definitions=2016-04-04_05:, , signatures=0
-Subject: [meta-oe][PATCH v2 1/2] vpnc: stage vpnc-script
+Subject: [meta-oe][PATCH v2 2/2] openconnect: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,32 +40,39 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 04 Apr 2016 12:44:13 -0000
 
-The vpn connection handling script is used during building openconnect
-so we need to stage it.
+openconnect is a FOSS VPN client designed to work with Cisco AnyConnect
+and Pulse Connect Secure (Juniper SSL).
 
 Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 ---
- meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb | 7 +++++++
- 1 file changed, 7 insertions(+)
+ .../openconnect/openconnect_git.bb                     | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
 
-diff --git a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-index 0670c5e..ccb4494 100644
---- a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-+++ b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-@@ -24,6 +24,13 @@ do_install () {
-     install ${WORKDIR}/default.conf ${D}${sysconfdir}/vpnc/default.conf
- }
- 
-+SYSROOT_PREPROCESS_FUNCS += "vpnc_sysroot_preprocess"
+diff --git a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
+new file mode 100644
+index 0000000..0a8b875
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Open client for Cisco AnyConnect VPN"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=243b725d71bb5df4a1e5920b344b86ad"
 +
-+vpnc_sysroot_preprocess () {
-+    install -d ${SYSROOT_DESTDIR}${sysconfdir}/vpnc
-+    install -m 755 ${D}${sysconfdir}/vpnc/vpnc-script ${SYSROOT_DESTDIR}${sysconfdir}/vpnc
-+}
++DEPENDS = "vpnc libxml2 gnutls"
++RDEPENDS_${PN} = "vpnc"
 +
- CONFFILES_${PN} = "${sysconfdir}/vpnc/default.conf"
- RDEPENDS_${PN} = "perl-module-io-file"
- RRECOMMENDS_${PN} = "kernel-module-tun"
++PV = "7.06"
++
++SRCREV = "35542d52202672b8c12ecc63867432128244013a"
++SRC_URI = "git://git.infradead.org/users/dwmw2/openconnect.git"
++
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++
++EXTRA_OECONF += "--with-vpnc-script=${SYSROOT_DESTDIR}${sysconfdir}/vpnc/vpnc-script \
++                 --disable-static"
 -- 
 2.7.4
 
