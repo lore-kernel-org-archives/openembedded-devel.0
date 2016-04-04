@@ -1,51 +1,33 @@
-Return-Path: <jefro.net@gmail.com>
-Received: from mail-lf0-f52.google.com (mail-lf0-f52.google.com
-	[209.85.215.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 55B42734B8;
-	Mon,  4 Apr 2016 06:19:56 +0000 (UTC)
-Received: by mail-lf0-f52.google.com with SMTP id p188so126235357lfd.0;
-	Sun, 03 Apr 2016 23:19:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=eA0oX6AuGHbb6x0DDLU3cfccpBiKXac6YHe5KDI99GA=;
-	b=BubFkVdVBb2l6AE6PQlGs9JWt0Xizq8NttTfe/+ORdJu6PYFRHxAiLlf3lb8VGhznf
-	nZu/cEeJ+G6LLid4FaZRL2dLfYMMhMoJ0sJnDQ96UE7gvJ/DeX6fqFXxTgR0VxILP3Ov
-	sBgGCGNBWrWKs6vI7LDCJ2zr9xeEhBmq4P5L/lr+7xaa0zFuaZ0t6sPVJeOCACCa3h+g
-	jvOzCqYa47pzVN8G5N/yvF43RhH8jE0VbU4a4JVwZDe6DcjlCfhWMZg9MW27YFYeB5Xj
-	GCorOTtfzS20colmFM/lLoog0fEAmIoVOWEadmwfzMR5dTdt8bALySHrTsw/Rd+fiITs
-	QDhQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=eA0oX6AuGHbb6x0DDLU3cfccpBiKXac6YHe5KDI99GA=;
-	b=iKXEMJUkmFWzLla3B1aqwcyxnHewrIaGiedD/fEVOt51tbihQ8JNr6QVBx8ABcWcKl
-	j35O6vdTo1a99K/emxfKq6ow44NOj0xcL/3i9lxZX9XnkW6kOP7m7gZRS3PY4N9Kyh1b
-	VEzplKTNOsMzdbA0yFpqcRqV0IzwNY8BTgedszPOn7vGHPFc7XtqXz5AmBtDOLbj9zCc
-	2+yXsN3pHESwvEmfXfdKcnB4RWeZJVcqd2glEjHdKj22K4jiAIK0LtGTc1y4Am5SDWFw
-	NNOOqoYhTmaQEPZXS+GL2OmZE72DVvgXsUFbeAQ0cFCtKRfh4NPufzJnEjTpfcme/UFZ
-	VGSg==
-X-Gm-Message-State: AD7BkJKhq2koupkFTTWsB4ncCPles8zw99WSbLjVUGqEDZfXvtNrJBZg3qdMdYdqE7VGUz/ITuG1xX5PPgZ/Ag==
-X-Received: by 10.25.212.6 with SMTP id l6mr4212937lfg.163.1459750795840; Sun,
-	03 Apr 2016 23:19:55 -0700 (PDT)
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 16FF573216
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 Apr 2016 07:07:11 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u3477Bih018882; Mon, 4 Apr 2016 02:07:11 -0500
+Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2016040402071163-512024 ;
+	Mon, 4 Apr 2016 02:07:11 -0500 
+Date: Mon, 4 Apr 2016 10:06:43 +0300
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20160404100643.4d2490e3@adi-pc-linux.emea.corp.natinst.com>
+In-Reply-To: <20160401113608.GD2567@jama>
+References: <1458640636-9492-1-git-send-email-adrian.ratiu@ni.com>
+	<20160401113608.GD2567@jama>
+Organization: National Instruments
 MIME-Version: 1.0
-Sender: jefro.net@gmail.com
-Received: by 10.112.55.101 with HTTP; Sun, 3 Apr 2016 23:19:36 -0700 (PDT)
-In-Reply-To: <5328453.C7Dxv7TdD1@rjs-zotac.streifs.net>
-References: <CA+YB3rY9NKNFJNtTwQQwePfwAm37skk8jtDnBoQEBqxiE-i2Hg@mail.gmail.com>
-	<56FADE23.8090300@balister.org>
-	<5328453.C7Dxv7TdD1@rjs-zotac.streifs.net>
-From: Jeff Osier-Mixon <jefro@jefro.net>
-Date: Sun, 3 Apr 2016 23:19:36 -0700
-X-Google-Sender-Auth: 81TEwc0w6_CesEWnllHdy5w8Ww0
-Message-ID: <CA+YB3rZz4DVbu78rRogyqQw9=LMPWPFFpxQw1DvKNARHh2aLDQ@mail.gmail.com>
-To: Rudolf J Streif <rudolf.streif@gmail.com>
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [yocto] Fwd: OEDAM: New Location - Catamaran resort
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 04/04/2016 02:07:11 AM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 04/04/2016 02:07:11 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-04-04_01:, , signatures=0
+Cc: James Minor <james.minor@ni.com>, openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] ti-wifi-utils: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,62 +40,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Apr 2016 06:19:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 04 Apr 2016 07:07:14 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-At this point, I have had no requestes for vegetarian etc. and only a
-few responses regarding transportation, so I will NOT be ordering a
-bus. If you do need transportation and haven't let me know, please do
-so asap. thanks
+Hello
 
-On Tue, Mar 29, 2016 at 1:03 PM, Rudolf J Streif
-<rudolf.streif@gmail.com> wrote:
-> We need the final headcount by next Monday.
->
-> Food, breakfast, lunch and refreshments, will be provided. If you have special dietary needs such as vegetarian, gluten-free etc. please indicate so behind you name. We'll do the best to accommodate them.
->
-> Rudi
->
-> On Tuesday, March 29, 2016 12:57:23 PM Philip Balister wrote:
->> OEDAM moved. Thanks Rudi and Jefro.
->>
->> Please add your name to the attendee list so Jefro can get the correct
->> amount of food and coffee. He needs the number "soon".
->>
->> Philip
->>
->> -------- Forwarded Message --------
->> Subject: OEDAM: New Location - Catamaran resort
->> Date: Mon, 28 Mar 2016 13:36:41 -0700
->> From: Jeff Osier-Mixon <jefro@jefro.net>
->> Reply-To: openembedded-members@lists.openembedded.org
->> To: openembedded-members@lists.openembedded.org
->> <openembedded-members@lists.openembedded.org>
->>
->> The OpenEmbedded meeting on Friday April 8, which was previously
->> announced, has been moved to the Catamaran Resort & Hotel.
->> Transportation will be provided. The meeting is still 9am-5pm.
->>
->> 3999 Mission Boulevard
->> San Diego, CA 92109
->> 858-539-8727
->>
->> Again, OEDAM will be at the Catamaran, NOT at the Marriott. The wiki
->> page and this mailing list will be updated with transportation info.
->>
->> Thanks to Rudi Streif for finding us a great location!
->>
->>
->
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+On Fri, 1 Apr 2016 13:36:08 +0200
+Martin Jansa <martin.jansa@gmail.com> wrote:
 
+> On Tue, Mar 22, 2016 at 11:57:16AM +0200, Ioan-Adrian Ratiu wrote:
+> > This recipe is for a TI WiFi calibrator utility [1]. The firmware from
+> > this project is already shipped inside linux-firmware so we do not
+> > package it in this recipe.
+> >=20
+> > [1] http://linuxwireless.sipsolutions.net/en/users/Drivers/wl12xx/#Cali=
+bration
+> >=20
+> > Signed-off-by: James Minor <james.minor@ni.com>
+> > Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+> > ---
+> >  .../ti-wifi-utils/ti-wifi-utils=5Fgit.bb             | 24 ++++++++++++=
+++++++++++
+> >  1 file changed, 24 insertions(+)
+> >  create mode 100644 meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-=
+utils=5Fgit.bb
+> >=20
+> > diff --git a/meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils=
+=5Fgit.bb b/meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils=5Fgit.=
+bb
+> > new file mode 100644
+> > index 0000000..fcae729
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-connectivity/ti-wifi-utils/ti-wifi-utils=5Fgit.bb
+> > @@ -0,0 +1,24 @@
+> > +SUMMARY =3D "The calibrator and other useful utilities for TI wireless=
+ solution based on wl12xx driver"
+> > +LICENSE =3D "BSD-3-Clause"
+> > +LIC=5FFILES=5FCHKSUM =3D "file://COPYING;md5=3D4725015cb0be7be389cf06d=
+eeae3683d"
+> > +
+> > +DEPENDS =3D "libnl"
+> > +
+> > +PV =3D "0.1+gitr${SRCPV}"
+> > +
+> > +SRCREV =3D "b03d9ce6362e6d22d6929f2736409af3b0fd3c88"
+> > +SRC=5FURI =3D "git://github.com/TI-OpenLink/ti-utils.git;branch=3Dr5-j=
+b"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +EXTRA=5FOEMAKE =3D 'CROSS=5FCOMPILE=3D${TARGET=5FPREFIX} \
+> > +                CC=3D"${TARGET=5FPREFIX}gcc ${TOOLCHAIN=5FOPTIONS}" \ =
+=20
+>=20
+> This doesn't respect all flags usually available in $CC variable, why
+> haven't you used $CC?
+>=20
+> Maybe it's other part of Makefiles which is using CROSS=5FCOMPILE instead
+> of CC, but currently it's failing e.g. for hardfloat builds with
+> typical:
+>=20
+> ../SYSROOT/MACHINE/usr/include/gnu/stubs.h:7:29: fatal error: gnu/stubs-s=
+oft.h: No such file or directory
+>=20
+> because the build doesn't have correct -mfloat-abi parameter
+>=20
+> | arm-DISTRO-linux-gnueabi-gcc  --sysroot=3D/SYSROOTS/MACHINE -O2 -pipe -=
+g -feliminate-unused-debug-types -fdebug-prefix-map=3DTMPDIRwork/MACHINE-DI=
+STRO-linux-gnueabi/ti-wifi-utils/0.1+gitrAUTOINC+b03d9ce636-r0=3D/usr/src/d=
+ebug/ti-wifi-utils/0.1+gitrAUTOINC+b03d9ce636-r0 -fdebug-prefix-map=3DTMPDI=
+Rsysroots/x86=5F64-linux=3D -fdebug-prefix-map=3D/SYSROOTS/MACHINE=3D  -I/S=
+YSROOTS/MACHINE/usr/include/libnl3 -DCONFIG=5FLIBNL20   -c -o misc=5Fcmds.o=
+ misc=5Fcmds.c
+>=20
 
+Since this is already in master, I'll submit another patch to fix this and =
+use $CC properly.
 
--- 
-Jeff Osier-Mixon
-Open Source Community Architect, Intel Corporation
+Thank you,
+Ionel
+
+> > +                CFLAGS=3D"${CFLAGS} -I${STAGING=5FINCDIR}/libnl3 -DCON=
+FIG=5FLIBNL20" NLVER=3D3 \
+> > +                LDFLAGS=3D"${LDFLAGS} ${TOOLCHAIN=5FOPTIONS}" \
+> > +'
+> > +
+> > +#only install the calibrator utility, firmware is already within linux=
+-firmware
+> > +do=5Finstall() {
+> > +    install -d ${D}${bindir}
+> > +    install -m 0755 calibrator ${D}${bindir}/
+> > +}
+> > --=20
+> > 2.7.4
+> >  =20
+>=20
+
 
