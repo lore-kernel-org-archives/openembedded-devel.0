@@ -1,46 +1,51 @@
-Return-Path: <eduardo@monkey.io>
-Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com
-	[209.85.192.172])
-	by mail.openembedded.org (Postfix) with ESMTP id EB3907326D
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Apr 2016 06:12:58 +0000 (UTC)
-Received: by mail-pf0-f172.google.com with SMTP id n1so32245396pfn.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Apr 2016 23:13:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=monkey-io.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=XZmF0Dv2c0M7Py4tCqOdiJljJl6dUZ1Bs4xtCYUvQW8=;
-	b=ii8bsd0+hqru6SBAkk3XW32tJwI3hIpLV9H/A0qpCIsGbx/oS5rLaWgNakedBeni0B
-	P6eHzyNVayT/cOhxt43s7QGWbvDoq8LRW1eadGilIeiEyuS7d0t9CpTht2G+q2vu1q0R
-	EpcGNACotj4w2fyCUKiXpdYAYh8GKxQCt+5FPjCs2F6kQ557pGEctDTCVRncgzQqIbCm
-	B7iLECAcwuggXm2Bflb82UW9Rn+PoFBj/ERiFi+VJ91R4v9nhc1WooSEzoSbZZ4wIb9+
-	jPEuC5jiOswdR2ywTTngAj643tHFuI91cVfm8P/XEIwEALsZ1ZUlq4e8j/tckp4bACHV
-	nfkA==
+Return-Path: <jefro.net@gmail.com>
+Received: from mail-lf0-f52.google.com (mail-lf0-f52.google.com
+	[209.85.215.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 55B42734B8;
+	Mon,  4 Apr 2016 06:19:56 +0000 (UTC)
+Received: by mail-lf0-f52.google.com with SMTP id p188so126235357lfd.0;
+	Sun, 03 Apr 2016 23:19:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=eA0oX6AuGHbb6x0DDLU3cfccpBiKXac6YHe5KDI99GA=;
+	b=BubFkVdVBb2l6AE6PQlGs9JWt0Xizq8NttTfe/+ORdJu6PYFRHxAiLlf3lb8VGhznf
+	nZu/cEeJ+G6LLid4FaZRL2dLfYMMhMoJ0sJnDQ96UE7gvJ/DeX6fqFXxTgR0VxILP3Ov
+	sBgGCGNBWrWKs6vI7LDCJ2zr9xeEhBmq4P5L/lr+7xaa0zFuaZ0t6sPVJeOCACCa3h+g
+	jvOzCqYa47pzVN8G5N/yvF43RhH8jE0VbU4a4JVwZDe6DcjlCfhWMZg9MW27YFYeB5Xj
+	GCorOTtfzS20colmFM/lLoog0fEAmIoVOWEadmwfzMR5dTdt8bALySHrTsw/Rd+fiITs
+	QDhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=XZmF0Dv2c0M7Py4tCqOdiJljJl6dUZ1Bs4xtCYUvQW8=;
-	b=f+imNQ1xwlt9MkbqVpr9o/jr2Y0VDv/q++vZL+SHWH3iWcQTA5cK5ZS7J5R6aY41Sb
-	i5qYmPi/N9Hw1POi8YD3ZmQQnIA0ck2VBKjTtL0ixywMANmmerYh5gU43N+FtCH853LJ
-	2ehBT9+z0BioOKLNKS0646FhM9hmFSh6GLrag2tZJ7JlysnZ0E5kR/gtlgE0A4NT4Q7L
-	yWrufH+ZwztKLcJsNvjyHLkL5gTIuD0TRmbX2/iVGcdxOd1nPjcsXUi8EtXAfe2yHlPA
-	NlmIZBoJq4uvBuf2LG0VIjvU+CMpN0b/Ped4qX09EjpyiRULD8daaiD5RMFc62E5JHaS
-	EbgQ==
-X-Gm-Message-State: AD7BkJLSQ20EQTtdJeLMCxA1msnF3f7NQYK54modxwFn2EuKE6zoYY2Oa95yP/ncXKq5Bg==
-X-Received: by 10.98.86.28 with SMTP id k28mr18080611pfb.43.1459750379931;
-	Sun, 03 Apr 2016 23:12:59 -0700 (PDT)
-Received: from localhost.localdomain (wsip-70-166-88-215.sd.sd.cox.net.
-	[70.166.88.215]) by smtp.gmail.com with ESMTPSA id
-	i9sm36275794pfi.95.2016.04.03.23.12.59
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 03 Apr 2016 23:12:59 -0700 (PDT)
-From: Eduardo Silva <eduardo@monkey.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Apr 2016 00:12:38 -0600
-Message-Id: <1459750358-12047-1-git-send-email-eduardo@monkey.io>
-X-Mailer: git-send-email 2.5.0
-Subject: [meta-oe][PATCH v2] fluentbit: add new recipe
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to:cc;
+	bh=eA0oX6AuGHbb6x0DDLU3cfccpBiKXac6YHe5KDI99GA=;
+	b=iKXEMJUkmFWzLla3B1aqwcyxnHewrIaGiedD/fEVOt51tbihQ8JNr6QVBx8ABcWcKl
+	j35O6vdTo1a99K/emxfKq6ow44NOj0xcL/3i9lxZX9XnkW6kOP7m7gZRS3PY4N9Kyh1b
+	VEzplKTNOsMzdbA0yFpqcRqV0IzwNY8BTgedszPOn7vGHPFc7XtqXz5AmBtDOLbj9zCc
+	2+yXsN3pHESwvEmfXfdKcnB4RWeZJVcqd2glEjHdKj22K4jiAIK0LtGTc1y4Am5SDWFw
+	NNOOqoYhTmaQEPZXS+GL2OmZE72DVvgXsUFbeAQ0cFCtKRfh4NPufzJnEjTpfcme/UFZ
+	VGSg==
+X-Gm-Message-State: AD7BkJKhq2koupkFTTWsB4ncCPles8zw99WSbLjVUGqEDZfXvtNrJBZg3qdMdYdqE7VGUz/ITuG1xX5PPgZ/Ag==
+X-Received: by 10.25.212.6 with SMTP id l6mr4212937lfg.163.1459750795840; Sun,
+	03 Apr 2016 23:19:55 -0700 (PDT)
+MIME-Version: 1.0
+Sender: jefro.net@gmail.com
+Received: by 10.112.55.101 with HTTP; Sun, 3 Apr 2016 23:19:36 -0700 (PDT)
+In-Reply-To: <5328453.C7Dxv7TdD1@rjs-zotac.streifs.net>
+References: <CA+YB3rY9NKNFJNtTwQQwePfwAm37skk8jtDnBoQEBqxiE-i2Hg@mail.gmail.com>
+	<56FADE23.8090300@balister.org>
+	<5328453.C7Dxv7TdD1@rjs-zotac.streifs.net>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+Date: Sun, 3 Apr 2016 23:19:36 -0700
+X-Google-Sender-Auth: 81TEwc0w6_CesEWnllHdy5w8Ww0
+Message-ID: <CA+YB3rZz4DVbu78rRogyqQw9=LMPWPFFpxQw1DvKNARHh2aLDQ@mail.gmail.com>
+To: Rudolf J Streif <rudolf.streif@gmail.com>
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [yocto] Fwd: OEDAM: New Location - Catamaran resort
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,42 +58,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Apr 2016 06:13:00 -0000
+X-List-Received-Date: Mon, 04 Apr 2016 06:19:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Fluent Bit is an open source data collector for Embedded Linux, this
-patch adds the recipe for version 0.7.2.
+At this point, I have had no requestes for vegetarian etc. and only a
+few responses regarding transportation, so I will NOT be ordering a
+bus. If you do need transportation and haven't let me know, please do
+so asap. thanks
 
-  Project web site: http://fluentbit.io
-  Documentation   : http://fluentbit.io/documentation/
+On Tue, Mar 29, 2016 at 1:03 PM, Rudolf J Streif
+<rudolf.streif@gmail.com> wrote:
+> We need the final headcount by next Monday.
+>
+> Food, breakfast, lunch and refreshments, will be provided. If you have special dietary needs such as vegetarian, gluten-free etc. please indicate so behind you name. We'll do the best to accommodate them.
+>
+> Rudi
+>
+> On Tuesday, March 29, 2016 12:57:23 PM Philip Balister wrote:
+>> OEDAM moved. Thanks Rudi and Jefro.
+>>
+>> Please add your name to the attendee list so Jefro can get the correct
+>> amount of food and coffee. He needs the number "soon".
+>>
+>> Philip
+>>
+>> -------- Forwarded Message --------
+>> Subject: OEDAM: New Location - Catamaran resort
+>> Date: Mon, 28 Mar 2016 13:36:41 -0700
+>> From: Jeff Osier-Mixon <jefro@jefro.net>
+>> Reply-To: openembedded-members@lists.openembedded.org
+>> To: openembedded-members@lists.openembedded.org
+>> <openembedded-members@lists.openembedded.org>
+>>
+>> The OpenEmbedded meeting on Friday April 8, which was previously
+>> announced, has been moved to the Catamaran Resort & Hotel.
+>> Transportation will be provided. The meeting is still 9am-5pm.
+>>
+>> 3999 Mission Boulevard
+>> San Diego, CA 92109
+>> 858-539-8727
+>>
+>> Again, OEDAM will be at the Catamaran, NOT at the Marriott. The wiki
+>> page and this mailing list will be updated with transportation info.
+>>
+>> Thanks to Rudi Streif for finding us a great location!
+>>
+>>
+>
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
-Signed-off-by: Eduardo Silva <eduardo@monkey.io>
----
- meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
-new file mode 100644
-index 0000000..e757ee6
---- /dev/null
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Fast data collector for Embedded Linux"
-+HOMEPAGE = "http://fluentbit.io"
-+BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
-+
-+SRC_URI = "http://fluentbit.io/releases/0.7/fluent-bit-${PV}.tar.gz"
-+SRC_URI[md5sum] = "6df9d676e1d2d782a243e655e144e8ae"
-+SRC_URI[sha256sum] = "695b56ce378f56855c9554f88f5d8e4f7b11ba7691284903870f779912af4ebe"
-+S = "${WORKDIR}/fluent-bit-${PV}"
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
-+
-+DEPENDS = "zlib"
-+
-+inherit cmake
+
 -- 
-2.5.0
-
+Jeff Osier-Mixon
+Open Source Community Architect, Intel Corporation
 
