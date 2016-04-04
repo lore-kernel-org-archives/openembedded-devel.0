@@ -1,46 +1,46 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
-	[209.85.220.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 507A16FFD4
+Return-Path: <eduardo@monkey.io>
+Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com
+	[209.85.192.172])
+	by mail.openembedded.org (Postfix) with ESMTP id EB3907326D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Apr 2016 01:23:54 +0000 (UTC)
-Received: by mail-pa0-f54.google.com with SMTP id zm5so132685596pac.0
+	Mon,  4 Apr 2016 06:12:58 +0000 (UTC)
+Received: by mail-pf0-f172.google.com with SMTP id n1so32245396pfn.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Apr 2016 18:23:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	Sun, 03 Apr 2016 23:13:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=monkey-io.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=tli/AxM6lVaB5tjVx9ikx9ocF3EXgBcBddtoE4sGjfQ=;
-	b=MhXUegI5b1Sx44vkIPwfK/TA1Qk0wFz5HnK/w1pl8HN2kSjTYRpcrE1KMN4NFoK+0h
-	xvrTf4o7cTBl3kCWJpZhUDMXntMrzaEkPE65RvGpBa37tULjZ4iCULkA4sLNs0yRhajj
-	lXd+6kYRzLxMfMHJAv5jonK9B7Iru95JP9FsSx/PGNhRHwvRB4wf2jg6Iy6H1js2MMfc
-	mtR6hddBpeRi+HfA5LNwZCZ8x9FRFSQ2lDBO7oQZ/HuJXDBP8E5n6gjETVZaMN+bJYVn
-	XEHJVZnReQgOtWHMOLWlcY9zdB/3h+mh3W9UOQ7g16+CbziDbJg2kbOxzQ480sd09xz+
-	U36w==
+	bh=XZmF0Dv2c0M7Py4tCqOdiJljJl6dUZ1Bs4xtCYUvQW8=;
+	b=ii8bsd0+hqru6SBAkk3XW32tJwI3hIpLV9H/A0qpCIsGbx/oS5rLaWgNakedBeni0B
+	P6eHzyNVayT/cOhxt43s7QGWbvDoq8LRW1eadGilIeiEyuS7d0t9CpTht2G+q2vu1q0R
+	EpcGNACotj4w2fyCUKiXpdYAYh8GKxQCt+5FPjCs2F6kQ557pGEctDTCVRncgzQqIbCm
+	B7iLECAcwuggXm2Bflb82UW9Rn+PoFBj/ERiFi+VJ91R4v9nhc1WooSEzoSbZZ4wIb9+
+	jPEuC5jiOswdR2ywTTngAj643tHFuI91cVfm8P/XEIwEALsZ1ZUlq4e8j/tckp4bACHV
+	nfkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=tli/AxM6lVaB5tjVx9ikx9ocF3EXgBcBddtoE4sGjfQ=;
-	b=diN2g3GZFF/ZorAf3LQ7xJtr0V/qrBipI+kJ1v57EkqKLIFDotM+q6IdxizUdZF9GG
-	7szEZuQmmrn4Pp3fSZoM8jTo97EfmW/pWPgI+Oinq1SNZb58w8GdCR1rcNRIDNyWe6PA
-	+9KCR9jjFZEQQtfrgkg+Gv98AY4c8N6XykBmkNheJQKCMtX2VWjYK/XtgkYKedamvXJ6
-	5kNF+kSukR8HZm9/8r1ziCDhDnabY11rJy2pQEV32VtKO3IrBtwqsPlBw1kheb6z/dKB
-	nZgo3SZdEs1dgoyaTkhOWQoKwnj+e6F4WnvL4IsoBY98+m3H2oMm7BNGFKSXKodW7/CE
-	H0ww==
-X-Gm-Message-State: AD7BkJJ3I5B04pEnFVLaRWuRy9QShrPst4NPdoR0MDCf/OdOE/Onieq4ybbACp+YXdDJ6A==
-X-Received: by 10.66.90.163 with SMTP id bx3mr49272376pab.59.1459733035599;
-	Sun, 03 Apr 2016 18:23:55 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by smtp.gmail.com with ESMTPSA id
-	w20sm34858501pfi.31.2016.04.03.18.23.54
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 03 Apr 2016 18:23:54 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
+	bh=XZmF0Dv2c0M7Py4tCqOdiJljJl6dUZ1Bs4xtCYUvQW8=;
+	b=f+imNQ1xwlt9MkbqVpr9o/jr2Y0VDv/q++vZL+SHWH3iWcQTA5cK5ZS7J5R6aY41Sb
+	i5qYmPi/N9Hw1POi8YD3ZmQQnIA0ck2VBKjTtL0ixywMANmmerYh5gU43N+FtCH853LJ
+	2ehBT9+z0BioOKLNKS0646FhM9hmFSh6GLrag2tZJ7JlysnZ0E5kR/gtlgE0A4NT4Q7L
+	yWrufH+ZwztKLcJsNvjyHLkL5gTIuD0TRmbX2/iVGcdxOd1nPjcsXUi8EtXAfe2yHlPA
+	NlmIZBoJq4uvBuf2LG0VIjvU+CMpN0b/Ped4qX09EjpyiRULD8daaiD5RMFc62E5JHaS
+	EbgQ==
+X-Gm-Message-State: AD7BkJLSQ20EQTtdJeLMCxA1msnF3f7NQYK54modxwFn2EuKE6zoYY2Oa95yP/ncXKq5Bg==
+X-Received: by 10.98.86.28 with SMTP id k28mr18080611pfb.43.1459750379931;
+	Sun, 03 Apr 2016 23:12:59 -0700 (PDT)
+Received: from localhost.localdomain (wsip-70-166-88-215.sd.sd.cox.net.
+	[70.166.88.215]) by smtp.gmail.com with ESMTPSA id
+	i9sm36275794pfi.95.2016.04.03.23.12.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 03 Apr 2016 23:12:59 -0700 (PDT)
+From: Eduardo Silva <eduardo@monkey.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Apr 2016 11:23:19 +1000
-Message-Id: <1459732999-28196-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] nodejs: update to 4.4.2
+Date: Mon,  4 Apr 2016 00:12:38 -0600
+Message-Id: <1459750358-12047-1-git-send-email-eduardo@monkey.io>
+X-Mailer: git-send-email 2.5.0
+Subject: [meta-oe][PATCH v2] fluentbit: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,33 +53,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Apr 2016 01:23:56 -0000
+X-List-Received-Date: Mon, 04 Apr 2016 06:13:00 -0000
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
+Fluent Bit is an open source data collector for Embedded Linux, this
+patch adds the recipe for version 0.7.2.
+
+  Project web site: http://fluentbit.io
+  Documentation   : http://fluentbit.io/documentation/
+
+Signed-off-by: Eduardo Silva <eduardo@monkey.io>
 ---
- meta-oe/recipes-devtools/nodejs/{nodejs_4.4.1.bb => nodejs_4.4.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_4.4.1.bb => nodejs_4.4.2.bb} (95%)
+ meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.4.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.4.2.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_4.4.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_4.4.2.bb
-index 0d0136e..830677b 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_4.4.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.4.2.bb
-@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
- SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-     file://no-registry.patch \
- "
--SRC_URI[md5sum] = "0ebf5aeb6f88a68546351e9e703f8a47"
--SRC_URI[sha256sum] = "3a37c89a3ac965688f9e6557579993b73eee44195a5fd53fded03a667d3d6a0a"
-+SRC_URI[md5sum] = "3ace056f387d88ccbff44c1792e33d31"
-+SRC_URI[sha256sum] = "49051fd930e36181509dc8fcf584fc01971083b6bf9e14f2bbec49cc9c4224e9"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
+new file mode 100644
+index 0000000..e757ee6
+--- /dev/null
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Fast data collector for Embedded Linux"
++HOMEPAGE = "http://fluentbit.io"
++BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
++
++SRC_URI = "http://fluentbit.io/releases/0.7/fluent-bit-${PV}.tar.gz"
++SRC_URI[md5sum] = "6df9d676e1d2d782a243e655e144e8ae"
++SRC_URI[sha256sum] = "695b56ce378f56855c9554f88f5d8e4f7b11ba7691284903870f779912af4ebe"
++S = "${WORKDIR}/fluent-bit-${PV}"
++
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
++
++DEPENDS = "zlib"
++
++inherit cmake
 -- 
-2.7.4
+2.5.0
 
 
