@@ -1,53 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lf0-f54.google.com (mail-lf0-f54.google.com
-	[209.85.215.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 1212E77059
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
+	[209.85.220.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 507A16FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Apr 2016 15:45:58 +0000 (UTC)
-Received: by mail-lf0-f54.google.com with SMTP id p188so108805106lfd.0
+	Mon,  4 Apr 2016 01:23:54 +0000 (UTC)
+Received: by mail-pa0-f54.google.com with SMTP id zm5so132685596pac.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Apr 2016 08:45:59 -0700 (PDT)
+	Sun, 03 Apr 2016 18:23:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=ZGsmmX4GRlHW1uFI1bdWHBk/Q3lRCzWlIB1hV99++ws=;
-	b=aDrhYRp6pnIalnbbJ7WLsPRQXFmpdCCnggf2EdmXivLcex5E/kiy8n7dPymq30nbJH
-	/1Kb9xyxXDCSO8S+c/dLsFlxfgMmSFf5oJadyPrgx6+UyTtEseJnchUhwJYwWxPzwJsF
-	ev1cN15yuhx7mHjJHBv8Ak6usQqUVqkZxJyppuijvjxb4p6R1gLAy+aq6iwQHZEZjJJb
-	KBRa9kk7Ll0dikpRLG+Rxaj0BWInDHXWC23gFBmFRWYsUdaFBQ3VxXfuqOkTSwRnIpUp
-	V7r8wPUU9O0kqxrNQudR4vuRiw7xVEPvyf97a5cu9HiACHn+F0jkz1wHr63FPPTFxCeC
-	grfw==
+	h=from:to:cc:subject:date:message-id;
+	bh=tli/AxM6lVaB5tjVx9ikx9ocF3EXgBcBddtoE4sGjfQ=;
+	b=MhXUegI5b1Sx44vkIPwfK/TA1Qk0wFz5HnK/w1pl8HN2kSjTYRpcrE1KMN4NFoK+0h
+	xvrTf4o7cTBl3kCWJpZhUDMXntMrzaEkPE65RvGpBa37tULjZ4iCULkA4sLNs0yRhajj
+	lXd+6kYRzLxMfMHJAv5jonK9B7Iru95JP9FsSx/PGNhRHwvRB4wf2jg6Iy6H1js2MMfc
+	mtR6hddBpeRi+HfA5LNwZCZ8x9FRFSQ2lDBO7oQZ/HuJXDBP8E5n6gjETVZaMN+bJYVn
+	XEHJVZnReQgOtWHMOLWlcY9zdB/3h+mh3W9UOQ7g16+CbziDbJg2kbOxzQ480sd09xz+
+	U36w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=ZGsmmX4GRlHW1uFI1bdWHBk/Q3lRCzWlIB1hV99++ws=;
-	b=X6paZxcaJpW42Dqk2xQ+rCa3ICAAArDLVLZN11jZuw8uns9J+xfxFMbHU6qQWa89JW
-	Scx3G9iNQAZAvw3aFggh64Xhjj11ysuPWzO5qU1OQuN8nlJXRuopw4bDrwdVr7pHto0r
-	ahNH/CrxufWrkCwsHw0JTKg4O98YTaymfD8rJFzQJZqOr/en3xUCzOwKiK1wab1/IHvy
-	jiM93TdULVufpkMLJeyQ675MiaYZ8jESRk/NXfG3j483yb8eVoXpTHLXjdfrjBGjkwQX
-	IsgSUmixZMZASUCG64tfP08jQWV+Wjx1P/NFRsih9TQxrUwN1ozLeGOzYJ/ChqpD5jqb
-	XTsA==
-X-Gm-Message-State: AD7BkJKQzLltpTokS53buUvOPZLGMdzoc1GRJbezVzh/K1pvzc8pnKUIaN5WTStPfe8+ww==
-X-Received: by 10.194.21.197 with SMTP id x5mr3454200wje.90.1459698358856;
-	Sun, 03 Apr 2016 08:45:58 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=tli/AxM6lVaB5tjVx9ikx9ocF3EXgBcBddtoE4sGjfQ=;
+	b=diN2g3GZFF/ZorAf3LQ7xJtr0V/qrBipI+kJ1v57EkqKLIFDotM+q6IdxizUdZF9GG
+	7szEZuQmmrn4Pp3fSZoM8jTo97EfmW/pWPgI+Oinq1SNZb58w8GdCR1rcNRIDNyWe6PA
+	+9KCR9jjFZEQQtfrgkg+Gv98AY4c8N6XykBmkNheJQKCMtX2VWjYK/XtgkYKedamvXJ6
+	5kNF+kSukR8HZm9/8r1ziCDhDnabY11rJy2pQEV32VtKO3IrBtwqsPlBw1kheb6z/dKB
+	nZgo3SZdEs1dgoyaTkhOWQoKwnj+e6F4WnvL4IsoBY98+m3H2oMm7BNGFKSXKodW7/CE
+	H0ww==
+X-Gm-Message-State: AD7BkJJ3I5B04pEnFVLaRWuRy9QShrPst4NPdoR0MDCf/OdOE/Onieq4ybbACp+YXdDJ6A==
+X-Received: by 10.66.90.163 with SMTP id bx3mr49272376pab.59.1459733035599;
+	Sun, 03 Apr 2016 18:23:55 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
 	by smtp.gmail.com with ESMTPSA id
-	q139sm9292649wmd.2.2016.04.03.08.45.57
-	for <openembedded-devel@lists.openembedded.org>
+	w20sm34858501pfi.31.2016.04.03.18.23.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 03 Apr 2016 08:45:57 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sun, 3 Apr 2016 17:46:21 +0200
+	Sun, 03 Apr 2016 18:23:54 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160403154621.GB27687@jama>
-References: <cover.1458997082.git.derek@asterius.io>
-	<ec2445068d281e09e7aa912ba2ff3c4edf18c6a1.1458997082.git.derek@asterius.io>
-MIME-Version: 1.0
-In-Reply-To: <ec2445068d281e09e7aa912ba2ff3c4edf18c6a1.1458997082.git.derek@asterius.io>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [meta-python][PATCH 24/30] python-pyparsing: update to 2.1.1
+Date: Mon,  4 Apr 2016 11:23:19 +1000
+Message-Id: <1459732999-28196-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] nodejs: update to 4.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,77 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Apr 2016 15:45:59 -0000
-X-Groupsio-MsgNum: 60808
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="LpQ9ahxlCli8rRTG"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 04 Apr 2016 01:23:56 -0000
 
---LpQ9ahxlCli8rRTG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-devtools/nodejs/{nodejs_4.4.1.bb => nodejs_4.4.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_4.4.1.bb => nodejs_4.4.2.bb} (95%)
 
-On Sat, Mar 26, 2016 at 09:04:44AM -0400, Derek Straka wrote:
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
->  .../python/{python-pyparsing_2.0.3.bb =3D> python-pyparsing_2.1.1.bb}   =
-| 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-pyparsing_2.0.3.bb =
-=3D> python-pyparsing_2.1.1.bb} (60%)
->=20
-> diff --git a/meta-python/recipes-devtools/python/python-pyparsing_2.0.3.b=
-b b/meta-python/recipes-devtools/python/python-pyparsing_2.1.1.bb
-> similarity index 60%
-> rename from meta-python/recipes-devtools/python/python-pyparsing_2.0.3.bb
-> rename to meta-python/recipes-devtools/python/python-pyparsing_2.1.1.bb
-> index 18a3077..9862907 100644
-> --- a/meta-python/recipes-devtools/python/python-pyparsing_2.0.3.bb
-> +++ b/meta-python/recipes-devtools/python/python-pyparsing_2.1.1.bb
-> @@ -3,8 +3,8 @@ HOMEPAGE =3D "http://pyparsing.wikispaces.com/"
->  LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dfb46329938e6bc829b256e37d5c1e=
-31a"
-> =20
-> -SRC_URI[md5sum] =3D "0a5ec41bb650aed802751a311b5d820d"
-> -SRC_URI[sha256sum] =3D "43d7710fdaa194a3bccf3127d06dec8e2de99a7efe6c47f0=
-1d4b748a1d04b192"
-> +SRC_URI[md5sum] =3D "2a1d3a63ddc2ec9a3da961d1b7f258b2"
-> +SRC_URI[sha256sum] =3D "4bd04badfda39b1e2fd0d77cb78b488c881d88c31734791a=
-0ae902979ae10575"
-> =20
->  PYPI_PACKAGE_EXT =3D "zip"
->  inherit pypi distutils
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.4.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.4.2.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_4.4.1.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_4.4.2.bb
+index 0d0136e..830677b 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_4.4.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.4.2.bb
+@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+     file://no-registry.patch \
+ "
+-SRC_URI[md5sum] = "0ebf5aeb6f88a68546351e9e703f8a47"
+-SRC_URI[sha256sum] = "3a37c89a3ac965688f9e6557579993b73eee44195a5fd53fded03a667d3d6a0a"
++SRC_URI[md5sum] = "3ace056f387d88ccbff44c1792e33d31"
++SRC_URI[sha256sum] = "49051fd930e36181509dc8fcf584fc01971083b6bf9e14f2bbec49cc9c4224e9"
+ 
+ S = "${WORKDIR}/node-v${PV}"
+ 
+-- 
+2.7.4
 
-Fails here:
-http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependencies.20160402_13=
-2854.log/3_min/failed/python-pyparsing.log
 
-http://errors.yoctoproject.org:80/Errors/Build/14632/
-
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---LpQ9ahxlCli8rRTG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlcBOswACgkQN1Ujt2V2gBxD6wCbBXaBPX57NG62BML/ysJkiXFk
-A8YAn27QBNzafBiNdtGcKVlmwd9hnYKM
-=/FQt
------END PGP SIGNATURE-----
-
---LpQ9ahxlCli8rRTG--
