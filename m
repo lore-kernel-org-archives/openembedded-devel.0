@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
 Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EA1E605BA
+	by mail.openembedded.org (Postfix) with ESMTP id DC80B7706C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Apr 2016 05:38:57 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id 20so1203985wmh.3
+	Tue,  5 Apr 2016 05:38:58 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id i204so1220640wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 04 Apr 2016 22:38:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=5eoIBSK5YLzcFqGEajpkqNR0oxEOXNAp2IdZtbcxn00=;
-	b=bUl/KLq+bMY+kEkkXI42B/CMjMiwg3GXK95tzKqLHNTDxkwdy920hE8EdX48IKc93C
-	QpDA1HC5zIX4Yj709lWE8e35YrMwTmn/ZmLex9XxSByjtXuek8WyKLd6GT9pT6roPPa8
-	t8BbZoZhy7JSM6BfMWwOzp+4cU3NKs35kjZLakh1PvUi8kloio0XszVSqHBoKSpUYy4g
-	EMhTDS+WJoRucksofUF9FLe0ogXeEksQmR8224qRW8ub+5if7zK5wmQmrLC1XH7g2a6G
-	Ytcd/OIz/Lryny7hAcVfI1dl8mdBbPokqKBZP9av+nqYeXhUycRXL7Ao3nasD4x4Yozj
-	tpfQ==
+	bh=ihT9Kl1XCkrLRley85CfkEVcq4SQyGB0ZiaWd/j8TNk=;
+	b=x5GJMkb6Hz372jLXADA7bew16jzmIZxSiU2cjq1UQ9jdIncZrzvn7pjl+EzW8bT8DC
+	l+HjPbPfmhHWdJKxNnhcfec14UGIK6uib1IJS5D+2oB2P4vn+eOEVOEjxyEMQyfztMXY
+	bizpRF0+QPp5Lj67ZwA2jarfhvipMghw72vZmjmcMtK0efCps6jHYDZsFmO8q+4rPzJX
+	BknmU4avFPOiZp5TFMuWB+ZuqYNc1S/KTKGQCm2z1VYBJN0UUzqOu1456ZHBA2Hcj5yD
+	FrLYO8E+qfDvhIVLKePd3XoOKPt5PoH5yXeGONkJqnD3zashBqeVv14eDazbj8+M6w0K
+	wX3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=5eoIBSK5YLzcFqGEajpkqNR0oxEOXNAp2IdZtbcxn00=;
-	b=JvYlnmUVOpQ1lybP6ZVhXB7pHZxZDofENknL0Mc5NkhfwG7Y6iIHdUDNh6L+gcWQHN
-	mUhnmDThANOuenq4tBq1uhepe+v24vBOVJ9Pw9EvBDksud3JjAum9e/ov9rDfd4i9YfW
-	DZLkN4clda7inii7FhvYhijeSs3u64bpIsT+oKpuG6uewbVZ4rTOCRi+7Ay1o+bTXdjN
-	AwErtYR8hRBI1jm0ZqQg8X02RvU6ltDPiUY+3pwKaWocwHlrNae2F2E0u5adM1W1mv+b
-	V/vw+JyzgxAkMWWBZdrz1AHYqCH1XQnVJy47O89GFg3jxjJgISXxYydDos3v2o7LVymt
-	jkrA==
-X-Gm-Message-State: AD7BkJLwk28SdiGXccplAqFxTolkwXhoy4t2435HdhYLLLmTCPbXJBdNuntytcjdFAB7pQ==
-X-Received: by 10.28.132.212 with SMTP id g203mr15623750wmd.30.1459834738516; 
-	Mon, 04 Apr 2016 22:38:58 -0700 (PDT)
+	bh=ihT9Kl1XCkrLRley85CfkEVcq4SQyGB0ZiaWd/j8TNk=;
+	b=eKJGhUGPBKRWHxmczN70/EIhW1mTqMdtaWWI9OrWKQPUnRoAg2YiA9TiiXhL7KJsxt
+	KmPx7kYLXxuLXgvhAcDvUc5H/fso5i3JmwAk3acFVq+ODWvgYqa7ALqvZjmKS5Qe9kiY
+	kld3oD3KpT1pnUN3QXJ5qW9P82a3yu+M/EWEo463uMW9N7A1QPPWioaS0MoX2m8k9D9i
+	oX8Df40Sm5Jf+f0Qx1ZDWBUEi5LkEOXCrpEXREgR2LOLkN3pf1x+ePtpPWDuGXeSLg3b
+	KY9QAUQjMqEjG/JDJ25Zg/EY8PbxrTlDYVpKy+n2FmZ+6lXmy9FzKOLiuk4yy8hkyBXp
+	ct/A==
+X-Gm-Message-State: AD7BkJIaIQZGCUf+mTM/N/aDUU2ulXWyA4nnT5+ZaJkqOcRlV+6Fb5StQJLcISKJQVU14w==
+X-Received: by 10.28.125.2 with SMTP id y2mr15688555wmc.90.1459834739305;
+	Mon, 04 Apr 2016 22:38:59 -0700 (PDT)
 Received: from localhost.localdomain (p4FDF0B5A.dip0.t-ipconnect.de.
 	[79.223.11.90]) by smtp.googlemail.com with ESMTPSA id
-	gt7sm32641516wjc.1.2016.04.04.22.38.57
+	gt7sm32641516wjc.1.2016.04.04.22.38.58
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Apr 2016 22:38:57 -0700 (PDT)
+	Mon, 04 Apr 2016 22:38:58 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Apr 2016 07:38:10 +0200
-Message-Id: <1459834720-17165-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue,  5 Apr 2016 07:38:11 +0200
+Message-Id: <1459834720-17165-3-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1459834720-17165-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1459834720-17165-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH 01/31] qtbase-native: update sources to 5.6.0
+Subject: [meta-qt5][PATCH 02/31] qtwayland-native: update sources to 5.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,25 +58,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2016 05:38:58 -0000
+X-List-Received-Date: Tue, 05 Apr 2016 05:38:59 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- recipes-qt/qt5/qtbase-native_git.bb | 2 +-
+ recipes-qt/qt5/qtwayland-native_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
-index 057edd4..0dba556 100644
---- a/recipes-qt/qt5/qtbase-native_git.bb
-+++ b/recipes-qt/qt5/qtbase-native_git.bb
-@@ -117,4 +117,4 @@ do_install() {
-     ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
+diff --git a/recipes-qt/qt5/qtwayland-native_git.bb b/recipes-qt/qt5/qtwayland-native_git.bb
+index b164a67..a094419 100644
+--- a/recipes-qt/qt5/qtwayland-native_git.bb
++++ b/recipes-qt/qt5/qtwayland-native_git.bb
+@@ -25,4 +25,4 @@ do_install() {
+     oe_runmake install INSTALL_ROOT=${D}
  }
  
--SRCREV = "41706400f605524a5a9953714aa0cfbf811dba7e"
-+SRCREV = "d0cdc7ad1e2728caf363abf328b2ad81f2ed5a5b"
+-SRCREV = "bebe9beff3e9874498474cec32634cf281ddc453"
++SRCREV = "29b8bd8b1117589341110502fe516bf22c920747"
 -- 
 2.5.5
 
