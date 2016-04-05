@@ -1,51 +1,57 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 70AF0770CD
+Return-Path: <mike.looijmans@topicproducts.com>
+X-Greylist: delayed 3836 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 05 Apr 2016 07:21:53 UTC
+Received: from mx5-08.smtp.antispamcloud.com (mx5-08.smtp.antispamcloud.com
+	[95.211.112.150])
+	by mail.openembedded.org (Postfix) with ESMTP id D14EF6612D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Apr 2016 05:39:20 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id a140so1214162wma.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Apr 2016 22:39:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=g/IFkoGoUYkbtHn+eBt6FbdkqCxWNauVyLzBFQ7DQ34=;
-	b=uEWkrift69SVVx5+EKX6nUdLjoav4cYL+FToM9JWpuMnK0AYiheDjCKNLKZ1ZEgu2U
-	KfB9+TRLgwPY74kX70044aP+JqQ55zSBp9oZ250jiWCDyjHR59CRjHDTHKacYTHZgOvh
-	NGpKFy+p0qSCRcnY50HeY8qLVPWtbZeHX6LmIQvxDLI3sYqDiNHbBu4SMEjdySHl2Qms
-	3l2WHKo6AIOr36coxuZFkZpjqDCQ0pys1SYd96mwGxssICoLvmLWLp08my01u6biIdIe
-	i0MS3piMemCTfLLd76N5cdurG0Hu/QRZDn5KlG46nAypYEH8z4TxA7ZyM+Wh5QyS2Cym
-	Ibsg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=g/IFkoGoUYkbtHn+eBt6FbdkqCxWNauVyLzBFQ7DQ34=;
-	b=bWuZkU0IfgQWk5PgBr2wLulam3QLKZX4pt9USbenil5kI7MUZQ8Ki5sFXZZRbkUMaR
-	EXQTOVdBVylb0ToU0cP4EcT+jUtBTMoajY/gCRKz9XR26P9BUYTTJ2igtqvb30HcheFF
-	fT5Tif2ucxMiM6f36q3bBiXfT+JY5vkIIa9f9ZTef7cJGXRz6DKKaZ+fKJXGZXlXjwrn
-	kMVXoAXjjuyUR5SSPrRvS4pPF0u9Pcuw+zdPDQu9WFwXBZa7svWOdCw3+NRfZcoVviUT
-	8M2sc1z2I/9lfxUcs2b+jHOu26djAMJJr9Hwc3hvWisaJP8uC09wiXL2n0tfp2/YfqA8
-	yvow==
-X-Gm-Message-State: AD7BkJKCMmrYbE/S+ncocVgCV1mcmdpzJTSZsptOKxjT6BATsunpJEg9gk7Q7rnutOz47A==
-X-Received: by 10.194.71.46 with SMTP id r14mr23198501wju.100.1459834761090;
-	Mon, 04 Apr 2016 22:39:21 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF0B5A.dip0.t-ipconnect.de.
-	[79.223.11.90]) by smtp.googlemail.com with ESMTPSA id
-	gt7sm32641516wjc.1.2016.04.04.22.39.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Apr 2016 22:39:20 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Apr 2016 07:38:40 +0200
-Message-Id: <1459834720-17165-32-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
-In-Reply-To: <1459834720-17165-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1459834720-17165-1-git-send-email-schnitzeltony@googlemail.com>
+	Tue,  5 Apr 2016 07:21:53 +0000 (UTC)
+Received: from 100-208.ftth.onsbrabantnet.nl ([88.159.208.100]
+	helo=TOP-EX01.TOPIC.LOCAL)
+	by mx5.antispamcloud.com with esmtps (TLSv1:AES256-SHA:256)
+	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
+	id 1anKJE-0005Vj-U4; Tue, 05 Apr 2016 08:17:55 +0200
+Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
+	(192.168.10.102) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 5 Apr 2016 08:17:51 +0200
+To: <openembedded-devel@lists.openembedded.org>
+References: <1459585331-22707-1-git-send-email-mike.looijmans@topic.nl>
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Organization: TOPIC
+Message-ID: <5703588F.1040406@topic.nl>
+Date: Tue, 5 Apr 2016 08:17:51 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.6.0
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH 31/31] qtquickcontrols2: initial add 5.6.0
+In-Reply-To: <1459585331-22707-1-git-send-email-mike.looijmans@topic.nl>
+X-Originating-IP: [192.168.80.121]
+X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
+X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
+X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
+	NXFr4uarw3m8KyO/e3OFX2RUwx7xEEvBqm3RvM5N1UuDkdL5rJuDWYSHbx/2iEXlZ3vyVN/fF+gz
+	Km9y7Whe8ULQ9t62Rc0ndW15SE/IKFJSR8Pb5cRhi5CFlBWMzDxw9krIeNGT2oSk+gz4DAuusc6y
+	v33zM0busJnLSmcWPVqOBCEQ19U3DzOnXJggVGRE3zIGf4LFXQ5Bt/nD3xJz5faizVYAIvLEFXZ7
+	gGAKs3NkUfWGVYzFnPcDV53YhOQ64y2vB2zkPriLFZJhYijeIOrG82fwxtkmr/gVltfWXMP075/K
+	IiMH7Nv1J1aXtTWxIqPMqwU0hKQ1hiD4XLIl3hFpBYLN3tjDqcigOvSxdRnthmhn8Zn6n0JyRJam
+	4Zxd1zDZJ4yM93fAlnXcMNvM65HAmqfLr2HQ6ht8WQhzIJdr84M1s6SxqpVpyfrUJD9R71PfeNN/
+	qHP3ta1S7C0Uc3j3G+pVQ4n57na55L6Xn0EqG66RVFKOX/yKPNjqauYxqQMi5Q9ps7gkh9aqTuHt
+	APW4T72M7XznVUBvn+ESTotms9+2yFRDy9YeA5u+SOVXiksmZSqGnLHbOxi8Uh+g9RNSShv22wwh
+	EWyJzIkwSFAW0Pw8uiKebvzU++86bmAzdVZ1m/9034SVHZvr2DTXw/EXASfOQg6gRLBIyHFjsWZy
+	mUK4TYbagd5cqVso720r7ULAXMtTA30+hzAnLdltOt7x6PhHgwQxL7hrJSk60SF3F6RYOYr2
+X-Report-Abuse-To: spam@mx99.antispamcloud.com
+X-Filter-Fingerprint: IFrWXGses7OKB5S5G8/dJXhXyDRoOQM5J3kcUr0HrMvJUWjZ8+qhjyB23tbDuyLOYL8Ff78gYsez
+	4Rl08xudmXi4esCQ0R1MchVjt7wblGlvhFgW0MjUMRkF5sMCDfftTXNFDzN17hnrWeZYOJvLq0Ic
+	WjZ+XcEjj/7Pkld0zkmvziDInX9WdMov2kn2yXjdwv61T+KDYyYtREgszdyFwv8IxCB3p/oCKvxr
+	eyISh3JGb7OS5oVgiO+kDxZrVPLz3MmEGC2PrUKqLq5WmHK+Nw==
+X-Originating-IP: 88.159.208.100
+X-SpamExperts-Domain: topic.nl
+X-SpamExperts-Username: 88.159.208.100
+Authentication-Results: antispamcloud.com;
+	auth=pass smtp.auth=88.159.208.100@topic.nl
+X-SpamExperts-Outgoing-Class: ham
+X-SpamExperts-Outgoing-Evidence: SB/global_tokens (0.0033986033797)
+X-Recommended-Action: accept
+Subject: Re: [PATCH] waf-cross-answers: Fix faulty link cross-answers-mipsel.txt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,38 +64,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2016 05:39:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 05 Apr 2016 07:21:54 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- recipes-qt/qt5/qtquickcontrols2_git.bb | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 recipes-qt/qt5/qtquickcontrols2_git.bb
+=EF=BB=BFJust a reminder that currently "waf" is broken and still won't wor=
+k on mipsel=20
+platforms without this bugfix.
 
-diff --git a/recipes-qt/qt5/qtquickcontrols2_git.bb b/recipes-qt/qt5/qtquickcontrols2_git.bb
-new file mode 100644
-index 0000000..41c781e
---- /dev/null
-+++ b/recipes-qt/qt5/qtquickcontrols2_git.bb
-@@ -0,0 +1,15 @@
-+require qt5.inc
-+require qt5-git.inc
-+
-+LICENSE = "GFDL-1.3 & BSD & LGPL-3.0 | GPL-3.0"
-+LIC_FILES_CHKSUM = " \
-+    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
-+    file://LICENSE.LGPLv3;md5=8ba7f2099d17d636d5fcc8303bb17587 \
-+    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
-+"
-+
-+DEPENDS += "qtdeclarative"
-+
-+FILES_${PN}-qmlplugins += "${libdir}/qt5/qml/Qt"
-+
-+SRCREV = "7fc567eda8a187e365f4c29c6e8f08440bf31218"
--- 
-2.5.5
+
+On 02-04-16 10:22, Mike Looijmans wrote:
+> Apparently something was wrong in the patch "waf-cross-answers:
+> Add cross-answers-mipsel.txt". and it created a dead symlink.
+> Solve it by just copying the cross-answers-mips.txt instead of
+> linking it.
+>
+> Fixes: 0898fb01ccea229cb0c64796b62f20a7c596ac0b
+>
+> Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+> ---
+>   .../waf-cross-answers/cross-answers-mipsel.txt     | 40 +++++++++++++++=
+++++++-
+>   1 file changed, 39 insertions(+), 1 deletion(-)
+>   mode change 120000 =3D> 100644 meta-networking/files/waf-cross-answers/=
+cross-answers-mipsel.txt
+>
+> diff --git a/meta-networking/files/waf-cross-answers/cross-answers-mipsel=
+.txt b/meta-networking/files/waf-cross-answers/cross-answers-mipsel.txt
+> deleted file mode 120000
+> index 59b4337..0000000
+> --- a/meta-networking/files/waf-cross-answers/cross-answers-mipsel.txt
+> +++ /dev/null
+> @@ -1 +0,0 @@
+> -cross-answers-mips.txt
+> diff --git a/meta-networking/files/waf-cross-answers/cross-answers-mipsel=
+.txt b/meta-networking/files/waf-cross-answers/cross-answers-mipsel.txt
+> new file mode 100644
+> index 0000000..18bfa02
+> --- /dev/null
+> +++ b/meta-networking/files/waf-cross-answers/cross-answers-mipsel.txt
+> @@ -0,0 +1,39 @@
+> +Checking uname sysname type: "Linux"
+> +Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
+> +Checking simple C program: "hello world"
+> +rpath library support: OK
+> +-Wl,--version-script support: OK
+> +Checking getconf LFS_CFLAGS: NO
+> +Checking correct behavior of strtoll: NO
+> +Checking for working strptime: OK
+> +Checking for C99 vsnprintf: "1"
+> +Checking for HAVE_SHARED_MMAP: OK
+> +Checking for HAVE_MREMAP: OK
+> +Checking for HAVE_SECURE_MKSTEMP: OK
+> +Checking for HAVE_IFACE_GETIFADDRS: NO
+> +Checking for HAVE_IFACE_IFCONF: NO
+> +Checking for HAVE_IFACE_IFREQ: NO
+> +Checking for large file support without additional flags: NO
+> +Checking for -D_FILE_OFFSET_BITS=3D64: OK
+> +Checking for HAVE_INCOHERENT_MMAP: NO
+> +Checking value of NSIG: "128"
+> +Checking value of _NSIG: "128"
+> +Checking value of SIGRTMAX: "127"
+> +Checking value of SIGRTMIN: "34"
+> +Checking whether the WRFILE -keytab is supported: OK
+> +Checking for kernel change notify support: OK
+> +Checking for Linux kernel oplocks: OK
+> +Checking for kernel share modes: OK
+> +Checking whether POSIX capabilities are available: OK
+> +Checking if can we convert from CP850 to UCS-2LE: OK
+> +Checking if can we convert from UTF-8 to UCS-2LE: OK
+> +vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
+> +Checking whether we can use Linux thread-specific credentials: OK
+> +Checking whether fcntl locking is available: OK
+> +Checking for the maximum value of the 'time_t' type: NO
+> +Checking whether the realpath function allows a NULL argument: OK
+> +Checking for ftruncate extend: OK
+> +getcwd takes a NULL argument: OK
+> +Checking for small off_t: NO
+> +Checking whether blkcnt_t is 32 bit: NO
+> +Checking whether blkcnt_t is 64 bit: OK
+>
+
+
+
+Kind regards,
+
+Mike Looijmans
+System Expert
+
+TOPIC Embedded Products
+Eindhovenseweg 32-C, NL-5683 KH Best
+Postbus 440, NL-5680 AK Best
+Telefoon: +31 (0) 499 33 69 79
+E-mail: mike.looijmans@topicproducts.com
+Website: www.topicproducts.com
+
+Please consider the environment before printing this e-mail
+
+
+
+
 
 
