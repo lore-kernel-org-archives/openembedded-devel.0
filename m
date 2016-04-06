@@ -1,54 +1,51 @@
 Return-Path: <eu@felipetonello.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 8728F77011
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id BCFEF76E3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Apr 2016 10:38:30 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id v188so18005919wme.1
+	Wed,  6 Apr 2016 10:41:39 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id l6so58981261wml.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Apr 2016 03:38:31 -0700 (PDT)
+	Wed, 06 Apr 2016 03:41:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=felipetonello-com.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to; bh=qH/eOV3696XBmML9YRDTo2Q1VeJMAzw9j3/2AuY4tZI=;
-	b=1FrorUn5hh9IUC7MYYCBLonex7ha8DgM2CC8rZ3OvM8tHM8Oz6pPhkB01yy87p2on5
-	3ECFPCsy1QXZZeIkJwPd7Ke5ajIl8We2Jv8DCgEXoOkSuDwe74k7QzGwr4vNAJsY81xu
-	VI8dXFIaHV9hQpdiF99rTdX1wAgExZH8vUCycmm49gdaSyzLbwE+2/LIzpktcRHKxstH
-	XSP6OOsO/Dp49+QhBC1K+ReJVSm+CeajA+5P83IZC7sWbUzeWFra35UGoYyLXKKWKdi/
-	FHrVxtVL2EgAgoFq2VsWoWneVY3XpIpI8JSUs6NBFToFnWrDG+B7h128/alBHVvEeqRs
-	N81Q==
+	h=subject:to:references:cc:from:message-id:date:user-agent
+	:mime-version:in-reply-to;
+	bh=7MqVKFB7YdZ9HRefr7YcaSxG7tABlSUdQG/PCUChocs=;
+	b=0WL/Z3lQXV3HrUe+NwvLnv5g6h5r5xHqkYxU3UrMc0mtk+jcTtGV7UgkHQq4DvIewm
+	TyyKkuFC694Ew2+N4CjkBD/7Sz6f6gLO6moL2775jtZoSEYwbf3ANamg3YCbH2AMS3//
+	/O61iNH6ekhTf78QLfbqZ7iGF+c0BAaEcMQ587FmoytfmcHrFRfRMdG6bKwOe113+iQZ
+	5SwmhQXv6OIg8Be1hw9XvkIRoqMaU8NyG4ddb7sUuWZ9B9KgPHAWEP7pXjdGvCu7HEVu
+	2m+HlcV3qTkowqoIFJIKkmSdhrJO/UYqJdfq0Fe8q85NVZml2vhDju+hStVYxMT8JsRq
+	d9Fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
+	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
 	:user-agent:mime-version:in-reply-to;
-	bh=qH/eOV3696XBmML9YRDTo2Q1VeJMAzw9j3/2AuY4tZI=;
-	b=fqyZibsbNFw+G9UqZWjCfRvzWbvuD2IOiKS7rHw6GkiOeTbkJChzw0fdDRGYp32Aah
-	y5f+Sb/WUpajDKNA1zXNijcNzxbxpaO4B4hBptfdpKkZuPKtRXYJLdVDh3nKrhsqhKiv
-	S/jDYNkJNAACSOWjrzJLvuTUZuf/uKShw9NGWHwoOsRlqSz/ADg2ZUuJOkophdRMz9l3
-	SZ4YyNnjsP8e3U94GstFQ5yPWfIMbEdh/RVAZFhbX6j//4oDxJS++0eVKODDNUUQPMf1
-	oHNtU767AmUV98oV+bkaiREJLuBLFGOXHWTJBjFmVsM/bMZUVppPDOXymtYK1UvR/OPU
-	IqEQ==
-X-Gm-Message-State: AD7BkJJjEHfdYY0xkRjFz1idu26pEIl1oZcVSqCJfYrR3IQPPwcYglr6tpTLzZXAxkNAZw==
-X-Received: by 10.28.12.80 with SMTP id 77mr23617051wmm.19.1459939110437;
-	Wed, 06 Apr 2016 03:38:30 -0700 (PDT)
+	bh=7MqVKFB7YdZ9HRefr7YcaSxG7tABlSUdQG/PCUChocs=;
+	b=DNL/lPH88gEQWOAJ1/FY8ozhEnLG3vpsXdqNLDARwPUd79GtF4nVmbkjv6578FCAuv
+	PXEUb4zdMOa+cCS1I9nlayvQNRbx7Aj/uLar6GKdb4jtWe+nn7qRImqg4QF5IOWgVoUE
+	hu2/I0xzTPnLAM/WMYqffX9MkanFx+oHY5UkxJtvGnEp4kZEYwn48NFnOYaZYeWPMpyl
+	AFOD7uNrgTzY3MbQe5rkGZNe4T7jsgO6nH9yZ+EQALg/kuyF8QvdSma+J/glElTzO2gz
+	foZaYttSTNCuYMNmsQ7W0Cm2HkVcpU53Yw/jkXiiK3uMWNemhbkhmou5ltFwtpB40Khs
+	yQDw==
+X-Gm-Message-State: AD7BkJKVMLuEynLhgoHIPgwoVbf5q9z9qE5ytBbCDmUBkZiJLxR7ni2pflMPkp3a3rItig==
+X-Received: by 10.28.170.137 with SMTP id t131mr23485395wme.74.1459939299752; 
+	Wed, 06 Apr 2016 03:41:39 -0700 (PDT)
 Received: from [10.55.10.2] ([81.145.202.106])
-	by smtp.gmail.com with ESMTPSA id
-	d1sm23214259wmh.18.2016.04.06.03.38.29
+	by smtp.gmail.com with ESMTPSA id gk4sm2581082wjd.7.2016.04.06.03.41.38
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 06 Apr 2016 03:38:29 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org, eduardo@monkey.io
-References: <1459406572-8144-1-git-send-email-eduardo@monkey.io>
-	<CAEaCVQjW0cmMDNyc3LhZQxv+RWfVmx9Bj-qgQx9AH1_+0=sTDA@mail.gmail.com>
-	<20160402181714.GG2567@jama>
-	<1898077.8Qsu7883hT@peggleto-mobl.ger.corp.intel.com>
-	<CAEaCVQg1Cj67kVn_AA_g7fTL_mXooCG6v0-W4M0p1X+b694JhQ@mail.gmail.com>
+	Wed, 06 Apr 2016 03:41:38 -0700 (PDT)
+To: Eduardo Silva <eduardo@monkey.io>
+References: <1459750358-12047-1-git-send-email-eduardo@monkey.io>
 From: Felipe Ferreri Tonello <eu@felipetonello.com>
-Message-ID: <5704E7D1.30206@felipetonello.com>
-Date: Wed, 6 Apr 2016 11:41:21 +0100
+Message-ID: <5704E88E.2070402@felipetonello.com>
+Date: Wed, 6 Apr 2016 11:44:30 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
 	Thunderbird/38.7.1
 MIME-Version: 1.0
-In-Reply-To: <CAEaCVQg1Cj67kVn_AA_g7fTL_mXooCG6v0-W4M0p1X+b694JhQ@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] fluentbit: add new recipe
+In-Reply-To: <1459750358-12047-1-git-send-email-eduardo@monkey.io>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v2] fluentbit: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,47 +58,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Apr 2016 10:38:31 -0000
-X-Groupsio-MsgNum: 60858
-Content-Type: multipart/mixed; boundary="------------060304070504080508090207"
+X-List-Received-Date: Wed, 06 Apr 2016 10:41:42 -0000
+X-Groupsio-MsgNum: 60859
+Content-Type: multipart/mixed; boundary="------------010709060409090701090808"
 
---------------060304070504080508090207
+--------------010709060409090701090808
 Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 7bit
 
 Hi Eduardo,
 
-On 04/04/16 21:48, Eduardo Silva wrote:
-> Thanks. Already sent a Patch v2.
-
-Please, avoid top-posting.
-
-> On Apr 4, 2016 1:46 PM, "Paul Eggleton" <paul.eggleton@linux.intel.com>
-> wrote:
+On 04/04/16 07:12, Eduardo Silva wrote:
+> Fluent Bit is an open source data collector for Embedded Linux, this
+> patch adds the recipe for version 0.7.2.
 > 
->> On Sat, 02 Apr 2016 20:17:14 Martin Jansa wrote:
->>> On Fri, Apr 01, 2016 at 11:20:49AM -0600, Eduardo Silva wrote:
->>>> on this case should be "RDEPENDS_${PN} = "zlib" OK ?
->>>
->>> NO
->>
->> It's build-time so you want zlib in DEPENDS. A runtime dependency will get
->> added automatically (since binaries packaged by the recipe will be linking
->> against libz.so).
->>
->> Cheers,
->> Paul
->>
->> --
->>
->> Paul Eggleton
->> Intel Open Source Technology Centre
->>
+>   Project web site: http://fluentbit.io
+>   Documentation   : http://fluentbit.io/documentation/
+> 
+> Signed-off-by: Eduardo Silva <eduardo@monkey.io>
+> ---
+>  meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb | 15 +++++++++++++++
+>  1 file changed, 15 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
+
+If the project package is called fluent-bit, why did you name the recipe
+fluentbit?
+
+> 
+> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
+> new file mode 100644
+> index 0000000..e757ee6
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
+> @@ -0,0 +1,15 @@
+> +SUMMARY = "Fast data collector for Embedded Linux"
+> +HOMEPAGE = "http://fluentbit.io"
+> +BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
+> +
+> +SRC_URI = "http://fluentbit.io/releases/0.7/fluent-bit-${PV}.tar.gz"
+> +SRC_URI[md5sum] = "6df9d676e1d2d782a243e655e144e8ae"
+> +SRC_URI[sha256sum] = "695b56ce378f56855c9554f88f5d8e4f7b11ba7691284903870f779912af4ebe"
+> +S = "${WORKDIR}/fluent-bit-${PV}"
+> +
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
+> +
+> +DEPENDS = "zlib"
+> +
+> +inherit cmake
+> 
 
 -- 
 Felipe
 
---------------060304070504080508090207
+--------------010709060409090701090808
 Content-Type: application/pgp-keys;
  name="0x92698E6A.asc"
 Content-Transfer-Encoding: 7bit
@@ -224,4 +234,4 @@ SkAyCfQaSw==
 =JwBB
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------060304070504080508090207--
+--------------010709060409090701090808--
