@@ -1,49 +1,46 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 6638B75C51
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
+	[209.85.213.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 892036FF60
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Apr 2016 21:46:59 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id r187so5392679pfr.2
+	Wed,  6 Apr 2016 22:04:22 +0000 (UTC)
+Received: by mail-ig0-f175.google.com with SMTP id ui10so54690967igc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Apr 2016 14:47:00 -0700 (PDT)
+	Wed, 06 Apr 2016 15:04:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=bxYi4wE9iP++a0SpFgb4iWqkvqGNxgdXW7RZVK4Zb1A=;
-	b=XSzt8qABm7cPlPd8j9gDi5Js0PuvGLcdc39jLzPflQt5CxkJcdr7iUOrYHPRuvX1CW
-	BzB7L3CRk4mKCohCpE7F5cpTSkaUj8gCT1Tm01H79kwrXPOSLgKM060jYvIS8qWzLbeS
-	J6Tv1Njzbgj349jF0ymUjRC4BcBRGzHWDwne3CNIJbbjUw2a6FwbG805Y1t98fM8cObP
-	Aq4uGzLbn40g0n0KaabvYiuhtzyXFiNk/qA1KiVcjbsObAOvFoaZFQJAvDAv0RUzi0tT
-	bpibcH+YnHNe4hba7EZT3ZzxWdQviMU9arp+8Kx88GbpY6mbc3GGCDWd34Vz+nb72WQj
-	XKeQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=Yz8MXUBuX4GIaC6tFYyvlSHZJorSqHoJLCIMwwZAEN4=;
+	b=dxbf5T4+x2rMFPA+mnjME97OkCadiB5nnGhrqpvi9HDU3JYYJZ06vfLk1ueWxzHXT3
+	cCGbaUukYFkULbwj6pCNphpXQ4cN7O8ycuMEsyXf0EV4m8N/F26KrAc24YQiFGwhrUF7
+	Ch5TSPQiibw7tnHzH9uZ/pyMOkLH+siKAGJnOMdhyOdNFixYSKWG6Kjo6IHY8k9dBpk+
+	DJsLNVaPEs4wwUSTmwh+UKmP6FOLpYM11xIEB35tnht5CstuAFWHgEbKtFrtptTusd3i
+	ebOv0m1faruBV1ufkwU4OEFm5aoSWtTexyI2KXx3skk0OItFb50VXKB/jNTGHITaWC/Q
+	YoMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=bxYi4wE9iP++a0SpFgb4iWqkvqGNxgdXW7RZVK4Zb1A=;
-	b=DMWyzh9Nkn/VOq3Yrd9o5BdbOg+SM2GbAD85lwzQkBqUwfTg3dZpiMOQNCizIDytUN
-	7mYfuUmPnlOdLBdJ7sICijsdjuGG6Afld9On3xkxcht4RBiEqIkrY/a9u1m9ThVWAaIK
-	DXVuL/pvcSIDVLOfKTWFy+la/f51FX2gfdpvI+0dGc8+LpTCEJrfnL3bPIdaWrHGQGU/
-	Y2rjEewgnI5ZHui8uQWF8sXB36bHNqEPcXdSbmEdfSPyQlZ3NaoZgYSjnkb0CLeJsVzU
-	OhxIVUUE89up2B41bnvRruySySvih5OqIeuIUy1xuJHRSiNU5RPZUI5BQnrxip5Agnsd
-	2kHQ==
-X-Gm-Message-State: AD7BkJIZcniW/rcDKmIDkOTPyVOMjn3Dxf9+7IQ418sXfCeyBnYCXk3Z+TGvRpO5ifJU4Q==
-X-Received: by 10.98.17.78 with SMTP id z75mr42274381pfi.40.1459979220454;
-	Wed, 06 Apr 2016 14:47:00 -0700 (PDT)
-Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Yz8MXUBuX4GIaC6tFYyvlSHZJorSqHoJLCIMwwZAEN4=;
+	b=GzxiXbJlL2KMMHPDJ7eNED4UP2yKyG8TulGcHZGL20sxr2EU68IDju5ijU9Uin/Z9t
+	dmDwIVBwdvPASFhgARcjWUmql2B8Yj+KBdvSy9fB4ea8Jye+rThITRiMYH6Irrn5TTr+
+	Pr5fNTYPjYGwug0baFkbxipUE2UQSaG7KFi8Hc9hvByTTX2QqyXqUFWBJPBkHR3AU/kO
+	xL7MYMF+C+OA09KxOZ3Fbo6FcQtak/3oNLIfOdb8M+yhGqYfGfhMOOwwDT/h5KWi4n68
+	XsPpbm2uFu9ZrpjBVdJwVc9S9GJgSkh5ls5hzCr1kou2ive27KrYlcSF+DmjJv9P3EBw
+	N28g==
+X-Gm-Message-State: AD7BkJIy4E64Zt0ePGWpo9boV0YSdgoS2Ogpxpy3RytDJ6ANtb89DNbAx5Ecf41NjSH2Uw==
+X-Received: by 10.50.83.105 with SMTP id p9mr23188442igy.63.1459980257596;
+	Wed, 06 Apr 2016 15:04:17 -0700 (PDT)
+Received: from e6520.cablelabs.com
+	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
 	by smtp.gmail.com with ESMTPSA id
-	l81sm7091069pfj.21.2016.04.06.14.46.58
+	cy7sm2305959igc.17.2016.04.06.15.04.16
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 06 Apr 2016 14:46:59 -0700 (PDT)
-From: Christopher Larson <kergoth@gmail.com>
+	Wed, 06 Apr 2016 15:04:16 -0700 (PDT)
+From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Apr 2016 14:46:52 -0700
-Message-Id: <1459979212-16117-3-git-send-email-kergoth@gmail.com>
-X-Mailer: git-send-email 2.8.0
-In-Reply-To: <1459979212-16117-1-git-send-email-kergoth@gmail.com>
-References: <1459979212-16117-1-git-send-email-kergoth@gmail.com>
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [meta-oe][PATCH 3/3] ctdb: disable the service by default
+Date: Wed,  6 Apr 2016 15:04:10 -0700
+Message-Id: <1459980250-30874-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-webserver][PATCH] fcgi: update SRC_URI to match new path to fcgi-2.4.0.tar.gz archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,35 +53,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Apr 2016 21:46:59 -0000
+X-List-Received-Date: Wed, 06 Apr 2016 22:04:25 -0000
 
-From: Christopher Larson <chris_larson@mentor.com>
-
-The systemd service is disabled by default, as the service will fail to start
-without /etc/ctdb/nodes. If the user supplies this, they can re-enable the
-service.
-
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb b/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-index 232546c..5d75784 100644
---- a/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-+++ b/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-@@ -44,6 +44,10 @@ do_install_append() {
-     rm -r ${D}/${localstatedir}/run
- }
+diff --git a/meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb b/meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb
+index ed718ae..48c5944 100644
+--- a/meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb
++++ b/meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.fastcgi.com"
+ LICENSE = "OML"
+ LIC_FILES_CHKSUM = "file://LICENSE.TERMS;md5=e3aacac3a647af6e7e31f181cda0a06a"
  
-+# The systemd service is disabled by default, as the service will fail to
-+# start without /etc/ctdb/nodes. If the user supplies this, they can re-enable
-+# the service.
-+SYSTEMD_AUTO_ENABLE = "disable"
- SYSTEMD_SERVICE_${PN} = "ctdb.service"
- 
- # onnode is a shell script with bashisms and bash #!
+-SRC_URI = "http://fossies.org/linux/www/${BP}.tar.gz \
++SRC_URI = "http://fossies.org/linux/www/old/${BP}.tar.gz \
+            file://Fix_EOF_not_declared_issue.patch \
+            file://add_foreign_to_AM_INIT_AUTOMAKE.patch \
+ "
 -- 
-2.8.0
+1.9.1
 
 
