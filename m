@@ -1,45 +1,40 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DE4160116
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
+	[209.85.161.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 0272876FFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Apr 2016 01:56:14 +0000 (UTC)
-Received: by mail-io0-f171.google.com with SMTP id q128so77708374iof.3
+	Thu,  7 Apr 2016 02:48:54 +0000 (UTC)
+Received: by mail-yw0-f193.google.com with SMTP id o63so9537738ywe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Apr 2016 18:56:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=O1FhVYr9gYj4aJyd+2Ohhpuplh/Jjfepe2rFeDZ/Bhc=;
-	b=gn/+IkDLpOI+b1j0HPZiU8FqZdiORvI6pYCz2JS+64RDrrOinC7ziSXJenrIr2+hnh
-	6Z4s5rf35/h2vKH2t+rMpFTPlQdcIG3tCoj7WgVzdSqJDSXVOnRb4FvUEOs+jd7O48AV
-	BSC43vEKab//IZY3rSKtyPwfcvBrNJwmFiJl6gppKSmeStGcRjiURvprdXDgpQvWmF9v
-	gl2L3M+u8ffIEQkODCrG8HUbEtwtYjr8/hEOure3hI1ukdHt94ij7F0TW/iOWaRuQRj8
-	gTDyBRnyqXl2R71WcKUQPf2upec+66mxdxHJymMtOOpJ9HMhhBkdJ70r+MCKv5sb1okT
-	4MdQ==
+	Wed, 06 Apr 2016 19:48:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=O1FhVYr9gYj4aJyd+2Ohhpuplh/Jjfepe2rFeDZ/Bhc=;
-	b=R8Jf58lq5OIonvD3AbGpt+nVRZO2irpv/LcOhE2L/OVbTjHzDAE4rF4G4UjxIUo8tK
-	juBS7ufJC3IFI9HIcq5DR51azQRphhxbOhcvExtoGejKBKfKLC7PUFBK+OOZZcwbRaKr
-	OfL7tIogW7OEOjx5W2Pq2eVCwCoR+KO6TRwlAJlDZxKtuD23+Tjb+gElqHH9A+1mjKBW
-	8ZhzmLeQl1cCsGrMKWvficfiBp5EV65J8tvznP1MJDzqGJU15AZn2EjPXsnYSfZrxv9r
-	1Vpe4iWiK+2E5M/mbdG49HNgt1swjJ0a12QIonxlEoVkW3mbos8LuurWfIOjPBosufBo
-	neSg==
-X-Gm-Message-State: AD7BkJKKKTZE8iIVgEuHUD0FdYw0ICLWuf67XuLWGgKJwXtC7sGNGKyzRhxvDYipKkffYA==
-X-Received: by 10.107.3.149 with SMTP id e21mr936235ioi.46.1459994174606;
-	Wed, 06 Apr 2016 18:56:14 -0700 (PDT)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by smtp.gmail.com with ESMTPSA id q9sm2691117igr.7.2016.04.06.18.56.12
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=DJZdTjIp15k9wSJFLKrS3QkKljJ+pAs7EEFiWGgNJ0c=;
+	b=Tb8PJQcD0VpNKj2qv5zghxI0cUsxG04Iv5oVeEDtioBONuaaRlRRu3FkHNvG39TFQk
+	CmYqOy3aze4T4c5qKBBnV+SWNogYhDIpFmbyqcMbQgnXsQ2n6O9044Uf+6uO5zabdiYw
+	u0LbhQ11tkoaxadzYleFSdUlHKI1gJirEPAva/QFOIWf8rnoAt6ksNwurWrl4b1TKbir
+	YNMaaHxRDdvht6KuFbryBFieQ5CoyjhgjU9bhe48zu1KS4RkhvnB1VnLSfX17vEXKUA4
+	u/E16VNYrGW6DwCNp892VYnRprb2brYL1aMQnNjl7FhB6zWY8+SpJOEFdWu8FTfqMrYr
+	J8cg==
+X-Gm-Message-State: AD7BkJIq+53ScMjnpzrBgVuZez/Q5vYutg7oPeUF3Robn9YzZfxl2LdSjiP8KTHafnmnMA==
+X-Received: by 10.37.231.16 with SMTP id e16mr302525ybh.142.1459997335292;
+	Wed, 06 Apr 2016 19:48:55 -0700 (PDT)
+Received: from localhost.localdomain ([12.166.78.2])
+	by smtp.gmail.com with ESMTPSA id
+	d140sm3666112ywb.48.2016.04.06.19.48.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 06 Apr 2016 18:56:13 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
+	Wed, 06 Apr 2016 19:48:54 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Apr 2016 18:56:07 -0700
-Message-Id: <1459994167-31207-1-git-send-email-armccurdy@gmail.com>
+Date: Wed,  6 Apr 2016 22:48:18 -0400
+Message-Id: <1459997302-25271-7-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] libtinyxml2: update 2.2.0 -> 3.0.0
+In-Reply-To: <1459997302-25271-1-git-send-email-derek@asterius.io>
+References: <1459997302-25271-1-git-send-email-derek@asterius.io>
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-perl][PATCH 07/11] libdbi-perl: update to 1.634
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,83 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2016 01:56:14 -0000
+X-List-Received-Date: Thu, 07 Apr 2016 02:48:55 -0000
 
-Also misc recipe cleanup, take license text from tinyxml2.cpp source
-file instead of using the entire readme.md, and build using cmake.
-
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../libtinyxml2/libtinyxml2_3.0.0.bb               | 15 +++++++++
- .../recipes-support/libtinyxml2/libtinyxml2_git.bb | 37 ----------------------
- 2 files changed, 15 insertions(+), 37 deletions(-)
- create mode 100644 meta-oe/recipes-support/libtinyxml2/libtinyxml2_3.0.0.bb
- delete mode 100644 meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb
+ .../libdb/{libdbi-perl_1.628.bb => libdbi-perl_1.634.bb}            | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-perl/recipes-perl/libdb/{libdbi-perl_1.628.bb => libdbi-perl_1.634.bb} (82%)
 
-diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_3.0.0.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_3.0.0.bb
-new file mode 100644
-index 0000000..af0b785
---- /dev/null
-+++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_3.0.0.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "TinyXML-2 is a simple, small, efficient, C++ XML parser that can be easily integrating into other programs"
-+HOMEPAGE = "http://www.grinninglizard.com/tinyxml2/"
-+SECTION = "libs"
-+LICENSE = "Zlib"
-+LIC_FILES_CHKSUM = "file://tinyxml2.cpp;endline=22;md5=c19221dbd8a66ad3090462af4c5de5e7"
-+
-+SRC_URI = "git://github.com/leethomason/tinyxml2.git"
-+
-+SRCREV = "1977a7258cc66fd4da7f1e9da05a4933646a7803"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb
-deleted file mode 100644
-index 6ca6f7c..0000000
---- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb
-+++ /dev/null
-@@ -1,37 +0,0 @@
--SUMMARY = "TinyXML-2 is a simple, small, efficient, C++ XML parser that can be easily integrating into other programs."
--HOMEPAGE = "http://www.grinninglizard.com/tinyxml2/"
--LICENSE = "Zlib"
--LIC_FILES_CHKSUM = "file://readme.md;md5=0033b2f8a25283414b21354670bb1334"
--SECTION = "libs"
--
--SRCREV = "d211bb13512cf4edb408e2c4badbcf4100ce0fd0"
--
--PV = "2.2.0+git${SRCPV}"
--
--SRC_URI = "git://github.com/leethomason/tinyxml2.git"
--
--S = "${WORKDIR}/git"
--
--EXTRA_CXXFLAGS = "-I. -fPIC"
--
--do_compile() {
--    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxml2.o tinyxml2.cpp
--    ${CXX} ${CXXFLAGS} \
--            -shared \
--            -Wl,-soname,libtinyxml2.so.${PV} \
--            -o libtinyxml2.so.${PV} \
--            ${LDFLAGS} \
--            tinyxml2.o
--}
--
--do_install() {
--    install -d ${D}${libdir}
--    install -m 0755 ${S}/libtinyxml2.so.${PV} ${D}${libdir}
--    ln -sf libtinyxml2.so.${PV} ${D}${libdir}/libtinyxml2.so
--
--    install -d ${D}${includedir}
--    install -m 0644 ${S}/tinyxml2.h ${D}${includedir}
--}
--
--BBCLASSEXTEND += "native"
--
+diff --git a/meta-perl/recipes-perl/libdb/libdbi-perl_1.628.bb b/meta-perl/recipes-perl/libdb/libdbi-perl_1.634.bb
+similarity index 82%
+rename from meta-perl/recipes-perl/libdb/libdbi-perl_1.628.bb
+rename to meta-perl/recipes-perl/libdb/libdbi-perl_1.634.bb
+index 38bdf61..0238781 100644
+--- a/meta-perl/recipes-perl/libdb/libdbi-perl_1.628.bb
++++ b/meta-perl/recipes-perl/libdb/libdbi-perl_1.634.bb
+@@ -13,11 +13,11 @@ RDEPENDS_${PN} = " perl-module-carp \
+                    perl-module-dynaloader \
+ "
+ 
+-LIC_FILES_CHKSUM = "file://DBI.pm;beginline=8147;endline=8151;md5=7d9e154a9ca3c093d2422f7c692d5861"
++LIC_FILES_CHKSUM = "file://DBI.pm;beginline=8147;endline=8151;md5=d4e73f2616b2b41334cf2f7d25d827a2"
+ 
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
+-SRC_URI[md5sum] = "4273f8cc6ee3979ce448c7eb3f8a6a5a"
+-SRC_URI[sha256sum] = "46c834f4ba1b28c8d8a2db8095835a67fc69a9585761523aea3a74437a969b52"
++SRC_URI[md5sum] = "4ad15a9c2cc9b68e3fe1f5cadf9cdb30"
++SRC_URI[sha256sum] = "250712f385864818abfba409420d16d9ee61f1cc73ac85159d054a5ee86d1450"
+ 
+ S = "${WORKDIR}/DBI-${PV}"
+ 
 -- 
 1.9.1
 
