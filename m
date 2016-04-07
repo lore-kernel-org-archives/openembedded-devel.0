@@ -1,46 +1,23 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
-	[209.85.213.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 892036FF60
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EDEE36FF60
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Apr 2016 22:04:22 +0000 (UTC)
-Received: by mail-ig0-f175.google.com with SMTP id ui10so54690967igc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Apr 2016 15:04:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=Yz8MXUBuX4GIaC6tFYyvlSHZJorSqHoJLCIMwwZAEN4=;
-	b=dxbf5T4+x2rMFPA+mnjME97OkCadiB5nnGhrqpvi9HDU3JYYJZ06vfLk1ueWxzHXT3
-	cCGbaUukYFkULbwj6pCNphpXQ4cN7O8ycuMEsyXf0EV4m8N/F26KrAc24YQiFGwhrUF7
-	Ch5TSPQiibw7tnHzH9uZ/pyMOkLH+siKAGJnOMdhyOdNFixYSKWG6Kjo6IHY8k9dBpk+
-	DJsLNVaPEs4wwUSTmwh+UKmP6FOLpYM11xIEB35tnht5CstuAFWHgEbKtFrtptTusd3i
-	ebOv0m1faruBV1ufkwU4OEFm5aoSWtTexyI2KXx3skk0OItFb50VXKB/jNTGHITaWC/Q
-	YoMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Yz8MXUBuX4GIaC6tFYyvlSHZJorSqHoJLCIMwwZAEN4=;
-	b=GzxiXbJlL2KMMHPDJ7eNED4UP2yKyG8TulGcHZGL20sxr2EU68IDju5ijU9Uin/Z9t
-	dmDwIVBwdvPASFhgARcjWUmql2B8Yj+KBdvSy9fB4ea8Jye+rThITRiMYH6Irrn5TTr+
-	Pr5fNTYPjYGwug0baFkbxipUE2UQSaG7KFi8Hc9hvByTTX2QqyXqUFWBJPBkHR3AU/kO
-	xL7MYMF+C+OA09KxOZ3Fbo6FcQtak/3oNLIfOdb8M+yhGqYfGfhMOOwwDT/h5KWi4n68
-	XsPpbm2uFu9ZrpjBVdJwVc9S9GJgSkh5ls5hzCr1kou2ive27KrYlcSF+DmjJv9P3EBw
-	N28g==
-X-Gm-Message-State: AD7BkJIy4E64Zt0ePGWpo9boV0YSdgoS2Ogpxpy3RytDJ6ANtb89DNbAx5Ecf41NjSH2Uw==
-X-Received: by 10.50.83.105 with SMTP id p9mr23188442igy.63.1459980257596;
-	Wed, 06 Apr 2016 15:04:17 -0700 (PDT)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by smtp.gmail.com with ESMTPSA id
-	cy7sm2305959igc.17.2016.04.06.15.04.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 06 Apr 2016 15:04:16 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Apr 2016 15:04:10 -0700
-Message-Id: <1459980250-30874-1-git-send-email-armccurdy@gmail.com>
+	Thu,  7 Apr 2016 01:44:24 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u371iNVL025539
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 6 Apr 2016 18:44:23 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
+	Wed, 6 Apr 2016 18:44:23 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 6 Apr 2016 21:44:21 -0400
+Message-ID: <1459993461-208289-1-git-send-email-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-webserver][PATCH] fcgi: update SRC_URI to match new path to fcgi-2.4.0.tar.gz archive
+MIME-Version: 1.0
+Subject: [meta-gnome][PATCH] gnome-themes: fix icon-name-mapping not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,26 +30,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Apr 2016 22:04:25 -0000
+X-List-Received-Date: Thu, 07 Apr 2016 01:44:27 -0000
+Content-Type: text/plain
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+Since libexecdir changed, we need also tweak for gnome-themes.
+...
+commit f35b2e29d9bfa817e64b83df11ebbbfe0f4e8e5c
+Author: Ross Burton <ross.burton@intel.com>
+Date:   Tue Apr 30 20:35:54 2013 +0100
+
+    bitbake: set default libexecdir to $prefix/libexec
+...
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb b/meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb
-index ed718ae..48c5944 100644
---- a/meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb
-+++ b/meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.fastcgi.com"
- LICENSE = "OML"
- LIC_FILES_CHKSUM = "file://LICENSE.TERMS;md5=e3aacac3a647af6e7e31f181cda0a06a"
+diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+index fec29e6..3aa743e 100644
+--- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+@@ -9,7 +9,7 @@ DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intlt
+ RDEPENDS_${PN} = "adwaita-icon-theme"
  
--SRC_URI = "http://fossies.org/linux/www/${BP}.tar.gz \
-+SRC_URI = "http://fossies.org/linux/www/old/${BP}.tar.gz \
-            file://Fix_EOF_not_declared_issue.patch \
-            file://add_foreign_to_AM_INIT_AUTOMAKE.patch \
+ EXTRA_OECONF += "--enable-all-themes \
+-    --with-iconmap=${STAGING_LIBDIR_NATIVE}/icon-naming-utils/icon-name-mapping \
++    --with-iconmap=${STAGING_LIBEXECDIR_NATIVE}/icon-name-mapping \
  "
+ 
+ inherit gnomebase perlnative
+@@ -31,6 +31,3 @@ SRC_URI += "file://iconpath-option.patch \
+ SRC_URI[archive.md5sum] = "41db9e3cb25d35af2675c599e67944d1"
+ SRC_URI[archive.sha256sum] = "8601ee24c2e096593221cbd6ebdb6686042225a03c02a01c0d67c163f9febd1a"
+ GNOME_COMPRESS_TYPE="bz2"
+-
+-# http://errors.yoctoproject.org/Errors/Details/35130/
+-PNBLACKLIST[gnome-themes] ?= "BROKEN: x86_64-linux/usr/lib/icon-naming-utils/icon-name-mapping: No such file or directory"
 -- 
 1.9.1
 
