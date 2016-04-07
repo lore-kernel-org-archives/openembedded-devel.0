@@ -1,23 +1,45 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EDEE36FF60
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DE4160116
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Apr 2016 01:44:24 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u371iNVL025539
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 6 Apr 2016 18:44:23 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 6 Apr 2016 18:44:23 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Apr 2016 21:44:21 -0400
-Message-ID: <1459993461-208289-1-git-send-email-hongxu.jia@windriver.com>
+	Thu,  7 Apr 2016 01:56:14 +0000 (UTC)
+Received: by mail-io0-f171.google.com with SMTP id q128so77708374iof.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Apr 2016 18:56:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=O1FhVYr9gYj4aJyd+2Ohhpuplh/Jjfepe2rFeDZ/Bhc=;
+	b=gn/+IkDLpOI+b1j0HPZiU8FqZdiORvI6pYCz2JS+64RDrrOinC7ziSXJenrIr2+hnh
+	6Z4s5rf35/h2vKH2t+rMpFTPlQdcIG3tCoj7WgVzdSqJDSXVOnRb4FvUEOs+jd7O48AV
+	BSC43vEKab//IZY3rSKtyPwfcvBrNJwmFiJl6gppKSmeStGcRjiURvprdXDgpQvWmF9v
+	gl2L3M+u8ffIEQkODCrG8HUbEtwtYjr8/hEOure3hI1ukdHt94ij7F0TW/iOWaRuQRj8
+	gTDyBRnyqXl2R71WcKUQPf2upec+66mxdxHJymMtOOpJ9HMhhBkdJ70r+MCKv5sb1okT
+	4MdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=O1FhVYr9gYj4aJyd+2Ohhpuplh/Jjfepe2rFeDZ/Bhc=;
+	b=R8Jf58lq5OIonvD3AbGpt+nVRZO2irpv/LcOhE2L/OVbTjHzDAE4rF4G4UjxIUo8tK
+	juBS7ufJC3IFI9HIcq5DR51azQRphhxbOhcvExtoGejKBKfKLC7PUFBK+OOZZcwbRaKr
+	OfL7tIogW7OEOjx5W2Pq2eVCwCoR+KO6TRwlAJlDZxKtuD23+Tjb+gElqHH9A+1mjKBW
+	8ZhzmLeQl1cCsGrMKWvficfiBp5EV65J8tvznP1MJDzqGJU15AZn2EjPXsnYSfZrxv9r
+	1Vpe4iWiK+2E5M/mbdG49HNgt1swjJ0a12QIonxlEoVkW3mbos8LuurWfIOjPBosufBo
+	neSg==
+X-Gm-Message-State: AD7BkJKKKTZE8iIVgEuHUD0FdYw0ICLWuf67XuLWGgKJwXtC7sGNGKyzRhxvDYipKkffYA==
+X-Received: by 10.107.3.149 with SMTP id e21mr936235ioi.46.1459994174606;
+	Wed, 06 Apr 2016 18:56:14 -0700 (PDT)
+Received: from e6520.cablelabs.com
+	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
+	by smtp.gmail.com with ESMTPSA id q9sm2691117igr.7.2016.04.06.18.56.12
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 06 Apr 2016 18:56:13 -0700 (PDT)
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  6 Apr 2016 18:56:07 -0700
+Message-Id: <1459994167-31207-1-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [meta-gnome][PATCH] gnome-themes: fix icon-name-mapping not found
+Subject: [meta-oe][PATCH] libtinyxml2: update 2.2.0 -> 3.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,43 +52,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2016 01:44:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 07 Apr 2016 01:56:14 -0000
 
-Since libexecdir changed, we need also tweak for gnome-themes.
-...
-commit f35b2e29d9bfa817e64b83df11ebbbfe0f4e8e5c
-Author: Ross Burton <ross.burton@intel.com>
-Date:   Tue Apr 30 20:35:54 2013 +0100
+Also misc recipe cleanup, take license text from tinyxml2.cpp source
+file instead of using the entire readme.md, and build using cmake.
 
-    bitbake: set default libexecdir to $prefix/libexec
-...
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ .../libtinyxml2/libtinyxml2_3.0.0.bb               | 15 +++++++++
+ .../recipes-support/libtinyxml2/libtinyxml2_git.bb | 37 ----------------------
+ 2 files changed, 15 insertions(+), 37 deletions(-)
+ create mode 100644 meta-oe/recipes-support/libtinyxml2/libtinyxml2_3.0.0.bb
+ delete mode 100644 meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb
 
-diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-index fec29e6..3aa743e 100644
---- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-@@ -9,7 +9,7 @@ DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intlt
- RDEPENDS_${PN} = "adwaita-icon-theme"
- 
- EXTRA_OECONF += "--enable-all-themes \
--    --with-iconmap=${STAGING_LIBDIR_NATIVE}/icon-naming-utils/icon-name-mapping \
-+    --with-iconmap=${STAGING_LIBEXECDIR_NATIVE}/icon-name-mapping \
- "
- 
- inherit gnomebase perlnative
-@@ -31,6 +31,3 @@ SRC_URI += "file://iconpath-option.patch \
- SRC_URI[archive.md5sum] = "41db9e3cb25d35af2675c599e67944d1"
- SRC_URI[archive.sha256sum] = "8601ee24c2e096593221cbd6ebdb6686042225a03c02a01c0d67c163f9febd1a"
- GNOME_COMPRESS_TYPE="bz2"
+diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_3.0.0.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_3.0.0.bb
+new file mode 100644
+index 0000000..af0b785
+--- /dev/null
++++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_3.0.0.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "TinyXML-2 is a simple, small, efficient, C++ XML parser that can be easily integrating into other programs"
++HOMEPAGE = "http://www.grinninglizard.com/tinyxml2/"
++SECTION = "libs"
++LICENSE = "Zlib"
++LIC_FILES_CHKSUM = "file://tinyxml2.cpp;endline=22;md5=c19221dbd8a66ad3090462af4c5de5e7"
++
++SRC_URI = "git://github.com/leethomason/tinyxml2.git"
++
++SRCREV = "1977a7258cc66fd4da7f1e9da05a4933646a7803"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb
+deleted file mode 100644
+index 6ca6f7c..0000000
+--- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb
++++ /dev/null
+@@ -1,37 +0,0 @@
+-SUMMARY = "TinyXML-2 is a simple, small, efficient, C++ XML parser that can be easily integrating into other programs."
+-HOMEPAGE = "http://www.grinninglizard.com/tinyxml2/"
+-LICENSE = "Zlib"
+-LIC_FILES_CHKSUM = "file://readme.md;md5=0033b2f8a25283414b21354670bb1334"
+-SECTION = "libs"
 -
--# http://errors.yoctoproject.org/Errors/Details/35130/
--PNBLACKLIST[gnome-themes] ?= "BROKEN: x86_64-linux/usr/lib/icon-naming-utils/icon-name-mapping: No such file or directory"
+-SRCREV = "d211bb13512cf4edb408e2c4badbcf4100ce0fd0"
+-
+-PV = "2.2.0+git${SRCPV}"
+-
+-SRC_URI = "git://github.com/leethomason/tinyxml2.git"
+-
+-S = "${WORKDIR}/git"
+-
+-EXTRA_CXXFLAGS = "-I. -fPIC"
+-
+-do_compile() {
+-    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxml2.o tinyxml2.cpp
+-    ${CXX} ${CXXFLAGS} \
+-            -shared \
+-            -Wl,-soname,libtinyxml2.so.${PV} \
+-            -o libtinyxml2.so.${PV} \
+-            ${LDFLAGS} \
+-            tinyxml2.o
+-}
+-
+-do_install() {
+-    install -d ${D}${libdir}
+-    install -m 0755 ${S}/libtinyxml2.so.${PV} ${D}${libdir}
+-    ln -sf libtinyxml2.so.${PV} ${D}${libdir}/libtinyxml2.so
+-
+-    install -d ${D}${includedir}
+-    install -m 0644 ${S}/tinyxml2.h ${D}${includedir}
+-}
+-
+-BBCLASSEXTEND += "native"
+-
 -- 
 1.9.1
 
