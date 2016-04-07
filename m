@@ -1,40 +1,40 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
-	[209.85.161.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 06803731E3
+Received: from mail-yw0-f194.google.com (mail-yw0-f194.google.com
+	[209.85.161.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 149C8760AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Apr 2016 03:49:45 +0000 (UTC)
-Received: by mail-yw0-f193.google.com with SMTP id p65so9633369ywb.3
+	Thu,  7 Apr 2016 07:10:42 +0000 (UTC)
+Received: by mail-yw0-f194.google.com with SMTP id k197so5823303ywe.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Apr 2016 20:49:46 -0700 (PDT)
+	Thu, 07 Apr 2016 00:10:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=cjvUPJNMVFrrrTzloKQdTsMQ99CFTLfQJrgJ71KcbRc=;
-	b=fGpR07/WJkKrXoLdoFzqz+0r0/HiTBptuixkdBuUz7X2Ix2s1r19DuRs62SiKVh4y4
-	ouKzKBQwP3BH5kqPSVpSj1fDZX3ILqyd/CERahGVuo8GSMA1cakLSf+tTtl/wgnHfTHy
-	FxZ1SHY074SGR0FIFD62inZrXn0zT0tgjx9/vR8zxu4Jij8f95wryl90HWwc8Q6hTaoM
-	qdxF2cM+wPkjaenbth5F2HvKxI4YZrv0p4ZoGFGgGE/HZiUoigH3V6tQnI72uViwemXa
-	h0YPfMigPEiTSvTMmZ8mHwqoRbsqSD/v8l3lrgVplPrfG3MX6Bsu9vw9jWaW8YedZBjA
-	Q1Mw==
-X-Gm-Message-State: AD7BkJJF8NW4Or1anlDlbDkNMyfAKG992z7VIHWkojqoibkqFmExQ2lkZzbAkLTL+YMlaA==
-X-Received: by 10.37.50.149 with SMTP id y143mr323557yby.10.1459997334565;
-	Wed, 06 Apr 2016 19:48:54 -0700 (PDT)
+	bh=ow8+hFz+TFdDIU1FRFTlcEhKR2Ech05PnN5Kuxday64=;
+	b=hLwlLU0gqIeS+IL8e/Q8DKKPLE+wZtrBrV+ml0KHFf4RYigYzWGIKubjj7H3eKOOC6
+	JnR2PHHh9MbdWLb4ns81ZAijSZbPQ/tqunefEu9TY6OzjrigTiVtR5eH5hj7cR8AglO8
+	Na3uzQd3zMo1VSgK9pPT+1w0Bt+n1GDtkWWqAHSlhaPtUAZh2QhIDF1fvUQflqrJNN8G
+	3SVXUEtsTNxeTM3ZVKBaJdI+GTNuvVSlqe0ugK/TGP7ygyOgGUz5EVPjSqvwMza6a6/L
+	JkYixm4i+MZ1WFy1VN4sJAtTJCkJlOudh7/hclsHu+zIo5/UXnEJXXn3HDTiruwqIN++
+	yUPA==
+X-Gm-Message-State: AD7BkJJcrivfksjl3uI12UlXIBvUst4tie+nRbedt16RuOKRsDGPt0QcU+bK6zz9rNVeTw==
+X-Received: by 10.37.13.15 with SMTP id 15mr317547ybn.16.1459997332913;
+	Wed, 06 Apr 2016 19:48:52 -0700 (PDT)
 Received: from localhost.localdomain ([12.166.78.2])
 	by smtp.gmail.com with ESMTPSA id
-	d140sm3666112ywb.48.2016.04.06.19.48.53
+	d140sm3666112ywb.48.2016.04.06.19.48.51
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 06 Apr 2016 19:48:54 -0700 (PDT)
+	Wed, 06 Apr 2016 19:48:52 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Apr 2016 22:48:17 -0400
-Message-Id: <1459997302-25271-6-git-send-email-derek@asterius.io>
+Date: Wed,  6 Apr 2016 22:48:15 -0400
+Message-Id: <1459997302-25271-4-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1459997302-25271-1-git-send-email-derek@asterius.io>
 References: <1459997302-25271-1-git-send-email-derek@asterius.io>
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-perl][PATCH 06/11] libdbd-sqlite-perl: update to 1.50
+Subject: [meta-perl][PATCH 04/11] libcrypt-openssl-random-perl: update to 0.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,31 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2016 03:49:50 -0000
+X-List-Received-Date: Thu, 07 Apr 2016 07:10:43 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../libdb/{libdbd-sqlite-perl_1.40.bb => libdbd-sqlite-perl_1.50.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libdb/{libdbd-sqlite-perl_1.40.bb => libdbd-sqlite-perl_1.50.bb} (88%)
+ ...ssl-random-perl_0.04.bb => libcrypt-openssl-random-perl_0.11.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-perl/recipes-perl/libcrypt/{libcrypt-openssl-random-perl_0.04.bb => libcrypt-openssl-random-perl_0.11.bb} (56%)
 
-diff --git a/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb b/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.50.bb
-similarity index 88%
-rename from meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb
-rename to meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.50.bb
-index fad03d8..68bfd66 100644
---- a/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb
-+++ b/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.50.bb
-@@ -22,8 +22,8 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/I/IS/ISHIGAKI/DBD-SQLite-${PV}
-            file://sqlite-perl-test.pl \
- "
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.04.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.11.bb
+similarity index 56%
+rename from meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.04.bb
+rename to meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.11.bb
+index 1f99be0..8456e31 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.04.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.11.bb
+@@ -2,11 +2,11 @@ SUMMARY = "Crypt Openssl Random cpan module"
+ SECTION = "libs"
+ LICENSE = "Artistic-1.0 | GPL-1.0+"
  
--SRC_URI[md5sum] = "b9876882186499583428b14cf5c0e29c"
--SRC_URI[sha256sum] = "21fb65e740b6265512c82232b4ad8f75c19ac84c216830112656274eb8e375fb"
-+SRC_URI[md5sum] = "d56eebfb5f2a14be9413b025e7dca9fe"
-+SRC_URI[sha256sum] = "3ac513ab73944fd7d4b672e1fe885dc522b6369d38f46a68e67e0045bf159ce1"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=089c18d635ae273e1727ec385e64063b"
  
- S = "${WORKDIR}/DBD-SQLite-${PV}"
+ SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-Random-${PV}.tar.gz "
+-SRC_URI[md5sum] = "c56ac5dbdd46122eb9b8da59613b7b0a"
+-SRC_URI[sha256sum] = "acf7eb81023cd1f40d8c60b893096d041513df2be2aefe145cc7ae1a3dcc78c7"
++SRC_URI[md5sum] = "5d71337503e0356ce1ce1481504e5885"
++SRC_URI[sha256sum] = "bb8c81c6a39b9b13a22d818ee9a746242f136f0fadceb6b9776ae615e7524c7a"
+ 
+ S = "${WORKDIR}/Crypt-OpenSSL-Random-${PV}"
  
 -- 
 1.9.1
