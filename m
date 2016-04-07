@@ -1,40 +1,40 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
 	[209.85.161.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 7090476FFA
+	by mail.openembedded.org (Postfix) with ESMTP id 516F66FFE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Apr 2016 02:48:57 +0000 (UTC)
-Received: by mail-yw0-f193.google.com with SMTP id p65so9486492ywb.3
+	Thu,  7 Apr 2016 03:01:06 +0000 (UTC)
+Received: by mail-yw0-f193.google.com with SMTP id p65so9517424ywb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Apr 2016 19:48:58 -0700 (PDT)
+	Wed, 06 Apr 2016 20:01:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=UukjycuFhUKcwwW/tMz5zoUNpniujK3hV7kajEAMui8=;
-	b=VfOUm++kHjZHwIhZhEtZeDQRdRFwt1+ekSQ61v/wNaiFnMm088+zByFzodv3F+mXra
-	wM4UBdZiLQw82mv5pVn49UYLwEjzfISnlrNczxxpXDmUzWEdZBM6JLqWVG3CocE8IC3o
-	5b0KhtMLLBqVvLL/rL3FK6kacyEGluABiYWwo9JYp6cu/1RzQGcfbNxGTGR0RFLz8i2X
-	AtqTgCvASpq3wrG3kAnesKyy0LwgvfQYSZZ/MDHS6KmkROdNU9HD3ui1Lgmxsf+WV7ao
-	e7xa2yTgL7BpAC1SnnXsCHsXBaA2njvBMF5Ci1DzlXdr0OJ8jWzrLYQUhXlQORKTN3C8
-	BV7w==
-X-Gm-Message-State: AD7BkJIRtTHyCjP9KsubXp9Y0tEkZkCrkfrckHiaI8BvRZYup4ENsLi+iJxefp537fa1qw==
-X-Received: by 10.129.132.135 with SMTP id u129mr303335ywf.7.1459997338327;
-	Wed, 06 Apr 2016 19:48:58 -0700 (PDT)
+	bh=NBh8+UcujA9Y0F7ao1ESzGiD4h8c1lmXGTM2Lbz0K6c=;
+	b=daAf90Xo4+8RkcInH4ypDOxU84bwNjhscSb34Zavo+j01uFZwSsTSbMpRMvsmrpgYR
+	NLsw7nF1E4y9B3/ZXhRjhzzONZWa80iu8yGNAQ9GWg6wLvmPKTpY9L7g3pwA5SeOCyAb
+	YFsTWu7gKPCiJAtLpZRSkoDVeeoOptSz/8IDd65GrIdqx3EFb6TLdyopiDRV1pyVYeZm
+	BmTojyUUu+uFNcdSa9AIk5sydBZl9vLyoWuj4Y5BPLyD1wJTdbR5Mzks9UokPYWxeyn5
+	6asumLcdOvk7mEMD9B7GI9qIQYI7xUDLk9SXRcpjyUbpEFTLj2dCo3PC5Zy/fmP7dy8M
+	Y5aA==
+X-Gm-Message-State: AD7BkJIY20pcW2jQhXyM70jDk+MikQ7lTEvNYsbJNi8J7/pi+9KbKnwK7WhMC0FWrwtr7w==
+X-Received: by 10.13.243.5 with SMTP id c5mr308511ywf.40.1459997330652;
+	Wed, 06 Apr 2016 19:48:50 -0700 (PDT)
 Received: from localhost.localdomain ([12.166.78.2])
 	by smtp.gmail.com with ESMTPSA id
-	d140sm3666112ywb.48.2016.04.06.19.48.57
+	d140sm3666112ywb.48.2016.04.06.19.48.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 06 Apr 2016 19:48:57 -0700 (PDT)
+	Wed, 06 Apr 2016 19:48:49 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Apr 2016 22:48:22 -0400
-Message-Id: <1459997302-25271-11-git-send-email-derek@asterius.io>
+Date: Wed,  6 Apr 2016 22:48:13 -0400
+Message-Id: <1459997302-25271-2-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1459997302-25271-1-git-send-email-derek@asterius.io>
 References: <1459997302-25271-1-git-send-email-derek@asterius.io>
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-perl][PATCH 11/11] libhtml-parser-perl: update to 3.72
+Subject: [meta-perl][PATCH 02/11] libcapture-tiny-perl: update to 0.36
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,38 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2016 02:48:57 -0000
+X-List-Received-Date: Thu, 07 Apr 2016 03:01:11 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../{libhtml-parser-perl_3.71.bb => libhtml-parser-perl_3.72.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-perl/recipes-perl/libhtml/{libhtml-parser-perl_3.71.bb => libhtml-parser-perl_3.72.bb} (70%)
+ .../{libcapture-tiny-perl_0.30.bb => libcapture-tiny-perl_0.36.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libcapture/{libcapture-tiny-perl_0.30.bb => libcapture-tiny-perl_0.36.bb} (90%)
 
-diff --git a/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.71.bb b/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.72.bb
-similarity index 70%
-rename from meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.71.bb
-rename to meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.72.bb
-index be0f4b2..9047d9f 100644
---- a/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.71.bb
-+++ b/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.72.bb
-@@ -3,14 +3,14 @@ DESCRIPTION = "This package contains the Parser.pm module with friends."
- SECTION = "libs"
- LICENSE = "Artistic-1.0 | GPL-1.0+"
+diff --git a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.30.bb b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.36.bb
+similarity index 90%
+rename from meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.30.bb
+rename to meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.36.bb
+index 3a3f843..e77dd77 100644
+--- a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.30.bb
++++ b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.36.bb
+@@ -15,8 +15,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37a4918a30ace24395020e5b8c03b83f"
  
--LIC_FILES_CHKSUM = "file://README;md5=6c3dacf9f405c7483870ab5f148770c3"
-+LIC_FILES_CHKSUM = "file://README;md5=b0459e4426b94753b9a9b8a15f1223b8"
+ SRCNAME = "Capture-Tiny"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DAGOLDEN/${SRCNAME}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "7b0fbdbf4199724df1e53fe0b3e2ef4c"
+-SRC_URI[sha256sum] = "a3b4e55278757e77d50df0b1a79f42e6e8354b7d41db806da39bf161bee63aea"
++SRC_URI[md5sum] = "db6444111c30ac01a76a4c118241c7b6"
++SRC_URI[sha256sum] = "ab8742e53ad204a421bc82d5813f3c4c85c76581ea10d910d0aefc161f8cb03d"
  
- DEPENDS += "perl"
- 
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/HTML-Parser-${PV}.tar.gz"
- 
--SRC_URI[md5sum] = "9128a45893097dfa3bf03301b19c5efe"
--SRC_URI[sha256sum] = "be918b3749d3ff93627f72ee4b825683332ecb4c81c67a3a8d72b0435ffbd802"
-+SRC_URI[md5sum] = "eb7505e5f626913350df9dd4a03d54a8"
-+SRC_URI[sha256sum] = "ec28c7e1d9e67c45eca197077f7cdc41ead1bb4c538c7f02a3296a4bb92f608b"
- 
- S = "${WORKDIR}/HTML-Parser-${PV}"
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
  
 -- 
 1.9.1
