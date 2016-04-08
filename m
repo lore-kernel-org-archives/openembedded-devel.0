@@ -1,45 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qg0-f44.google.com (mail-qg0-f44.google.com
-	[209.85.192.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 017017680A
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 99BD8731CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Apr 2016 22:48:22 +0000 (UTC)
-Received: by mail-qg0-f44.google.com with SMTP id f52so76799240qga.3
+	Fri,  8 Apr 2016 02:13:47 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u382DlkQ017769
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Apr 2016 15:48:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ieeFPlFu32gRpsnZDNAowrpysTUrF2rway82NiuV9K8=;
-	b=fwNnhZmYtWbhE0svOEl/tfsJ6WTQo59631W1xrtyldsT+0CKeAumUZRJkRWgpn87pO
-	k8n8CrNJ6H16xyDhYTu1Ah/LIMtFJANd/s0G75rId3qY6A3Isd4392U4BhxOKjo10L80
-	IhguDpga7Nq8S0uI5TO4RLjp2LQIERVgSNahTnT2sIJThIk5UFEPsxiOtyAxHD6CWEWh
-	o3qXWepQcthr4JyIXXUS1fKPPZEwan/geg6FX6BBvQDtxCQexhJrPm8W5Em0hJbqDveS
-	svam7f0PG5cDi6I/Zzf9zTyDepkYtFkoKXJUZ/VbPm3TuRa6xPL+y7iuoQSdu4I1vS56
-	+0yQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=ieeFPlFu32gRpsnZDNAowrpysTUrF2rway82NiuV9K8=;
-	b=CYJQLrl2FYkz0NpsuXs9zpdXWNk6US51qZIpDmFhd15s6KFrhIoqtZF9dqSMcDl6wk
-	rNlV+nzmJtNnHl5nvUSc6nc7euGqzlxzheYNUnXA20nXTUo5ecV5Klzy9ndHEHsvGqiy
-	m0k+RetvppryDKgdW7ZgCVPPJ2bMpQXe9Krd7SjuJM3x0CzeP/0JJMgqmPFXIx7zykiW
-	eR9HYiAJPRq18pGS4K0M023w2QvXOqeeaXj+6nhdHCuuiKHSmjjzqbgxAaZztkMdloVU
-	a04Hg+bRdNQRFJPEHJZ7IGCI/SQa47K4cEEdeV/hfjD7+tWFsK+HZ4IOM6BxwlrF8TsG
-	vRAQ==
-X-Gm-Message-State: AD7BkJLwEh8d2nk2dSr+eZEnTUasA8nt/Q+TCG2F0pkTMJl5XNXbVEKa1tSczO524/lTqJrGnzwd9I8XgYdeCg==
-X-Received: by 10.141.4.69 with SMTP id g66mr7874571qhd.31.1460069303228; Thu,
-	07 Apr 2016 15:48:23 -0700 (PDT)
+	Thu, 7 Apr 2016 19:13:48 -0700
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Thu, 7 Apr 2016 19:13:47 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 8 Apr 2016 10:07:25 +0800
+Message-ID: <1460081245-24356-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received: by 10.55.130.196 with HTTP; Thu, 7 Apr 2016 15:47:53 -0700 (PDT)
-In-Reply-To: <1460061600-28075-1-git-send-email-denis@denix.org>
-References: <1460061600-28075-1-git-send-email-denis@denix.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 7 Apr 2016 15:47:53 -0700
-Message-ID: <CAMKF1spQd9C1GuyB=eLbZNbaqMzntA9sMycfschRBL4zWT6zXA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [PATCH] ne10: use bb.debug for debug messages
+Subject: [PATCH][meta-oe] krb5: add native and nativesdk extend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,47 +31,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Apr 2016 22:48:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 08 Apr 2016 02:13:48 -0000
+Content-Type: text/plain
 
-On Thu, Apr 7, 2016 at 1:40 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> From: Denys Dmytriyenko <denys@ti.com>
->
-> Moreover, the messages are misleading, saying "Building for arch blah",
-> even when this recipe is not being built. It merely checks if the recipe
-> is cmaptible with the currently used architecture.
->
+From: Roy Li <rongqing.li@windriver.com>
 
-LGTM, I have been seeing these notes too.
+add native and nativesdk extend, curl-native/nativesdk need them.
+replace the hardcode /etc with ${sysconfdir}, /var with ${localstatedir}
 
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> ---
->  meta-oe/recipes-support/ne10/ne10_1.2.1.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-> index 4d753a0..de97982 100644
-> --- a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-> +++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-> @@ -20,10 +20,10 @@ COMPATIBLE_MACHINE_armv7a = "(.*)"
->  python () {
->      if any(t.startswith('armv7') for t in d.getVar('TUNE_FEATURES', True).split()):
->          d.setVar('NE10_TARGET_ARCH', 'armv7')
-> -        bb.note('Building Ne10 for armv7')
-> +        bb.debug(2, 'Building Ne10 for armv7')
->      elif any(t.startswith('aarch64') for t in d.getVar('TUNE_FEATURES', True).split()):
->          d.setVar('NE10_TARGET_ARCH', 'aarch64')
-> -        bb.note('Building Ne10 for aarch64')
-> +        bb.debug(2, 'Building Ne10 for aarch64')
->      else:
->          raise bb.parse.SkipPackage("Incompatible with archs other than armv7 and aarch64")
->  }
-> --
-> 2.2.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+index 297cc1b..099e8e9 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+@@ -61,7 +61,7 @@ FILES_${PN}-doc += "${datadir}/examples"
+ FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
+ 
+ # As this recipe doesn't inherit update-rc.d, we need to add this dependency here
+-RDEPENDS_${PN} += "initscripts-functions"
++RDEPENDS_${PN}_class-target += "initscripts-functions"
+ 
+ krb5_do_unpack() {
+     # ${P}-signed.tar contains ${P}.tar.gz.asc and ${P}.tar.gz
+@@ -80,12 +80,12 @@ do_configure() {
+ }
+ 
+ do_install_append() {
+-    mkdir -p ${D}/etc/init.d ${D}/etc/default
+-    install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/etc/init.d
+-    install -m 0644 ${WORKDIR}/etc/default/* ${D}/etc/default
++    mkdir -p ${D}/${sysconfdir}/init.d ${D}/${sysconfdir}/default
++    install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/${sysconfdir}/init.d
++    install -m 0644 ${WORKDIR}/etc/default/* ${D}/${sysconfdir}/default
+ 
+-    rm -rf ${D}/var/run
+-    mkdir -p ${D}/etc/default/volatiles
++    rm -rf ${D}/${localstatedir}/run
++    mkdir -p ${D}/${sysconfdir}/default/volatiles
+     echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
+            > ${D}${sysconfdir}/default/volatiles/87_krb5
+     if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+@@ -105,3 +105,5 @@ pkg_postinst_${PN} () {
+         fi
+     fi
+ }
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+1.9.1
+
 
