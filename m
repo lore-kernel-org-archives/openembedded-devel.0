@@ -1,46 +1,24 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 316A877180
+Return-Path: <ruben.de.smet@rubdos.be>
+Received: from mail.glycos.org (unknown [178.62.217.237])
+	by mail.openembedded.org (Postfix) with ESMTP id C841777173
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Apr 2016 11:16:03 +0000 (UTC)
-Received: by mail-pa0-f51.google.com with SMTP id td3so90159416pab.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Apr 2016 04:16:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=gibMxLZXHkQOvG1Q4EgNUFR80+NuyX23M/hesrwR/5U=;
-	b=EkK8uigtxF724lLveylDEJcv/KmXqzAsa4o6Zn40AqaYUKGH3+2PVvRkWIFyeywgXe
-	UhtRGYAOR3dn8Z86rfS61M3fykkkhFdPJqQobZxh3OZHqC4ltt5DuhU+cNnlvXc4Xti2
-	0ANoBNMTqaK02m7epOcMG7y3KbNJREuCuSMs5gx0sOzuUuC/ng2nhE5r5oteekqWfX/4
-	Js07c5dTyB/le1MD5yhgqBjPYKkWyE4syp0DbvMiE4yUSQVURYleZ6D/p0XbHDxu29Xo
-	QrZ9+bJZsXgb0pQ/iP1A9CCQRZ3OLW2+ZFzhEpDlDFxp68RSmp9aC7KYU5woEA855PZN
-	IKqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=gibMxLZXHkQOvG1Q4EgNUFR80+NuyX23M/hesrwR/5U=;
-	b=W2MQpLox7HopCspFcxIq2xZdVfwD0PvlIv0OCeLdwiQxO18jwKWs2opzD8S/H7Eyeq
-	auAJaoFJ+ldNvf/b8zDSfn6Oav9cQwgzz8/BtbcIUn4enou4helZLVyXkWecqFOxf7w0
-	5aH6SS9jgTzB3Z2CtNpBngDVVHPz3Fs3Vwmv1rGSWqeCjLSAmiog7gwB2QbT1h1tFVhu
-	ZYfQGN7Dp7VQytOrZVMNgn1ZmAtIAvfoyPjv+un3V3m+TM2w5R/5HqzJgYy0rWs3SndP
-	LlR/SMdDCQOZiXHbcWcxma6ULtpXLYFzpzn0hdU30YU1A87gEvH1pq3d0RXdaNwOLQAD
-	Sozw==
-X-Gm-Message-State: AD7BkJJSIopx4gm4Gnjn52mJW7qIAgnDo3zvZpk8CGVmpKBWgbqQyR+hxsrmVGTnVeXyIQ==
-X-Received: by 10.67.2.41 with SMTP id bl9mr19017740pad.39.1460200564110;
-	Sat, 09 Apr 2016 04:16:04 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by smtp.gmail.com with ESMTPSA id
-	19sm24390061pfp.66.2016.04.09.04.16.02
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Apr 2016 04:16:02 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
+	Sat,  9 Apr 2016 14:30:15 +0000 (UTC)
+Received: from localhost.localdomain (unknown [84.198.80.84])
+	by mail.glycos.org (Postfix) with ESMTPSA id 55B4F42326;
+	Sat,  9 Apr 2016 14:30:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rubdos.be;
+	s=default; t=1460212214;
+	bh=pLryzQx/6pZxSMHPJd3POUZFo+VyNo3fQOjSAL8htLo=;
+	h=From:To:Cc:Subject:Date;
+	b=Kuivcg1oclPvPq+wyZdWAMLYceNw5t+FG0eWuTRRjZOzPOfB7fIMZy6twPRnht6b+
+	dQN6XOYPO7eBLnFBSVaP6Uk6VUhPXNhNVE+VEunlo7zohVSJKjk7BkyrOhjElafjAr
+	/8L17hBquXabXtwfHaTMsztxC/aP1Jc5R6DLZ1Wg=
+From: Ruben De Smet <ruben.de.smet@rubdos.be>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Apr 2016 21:15:41 +1000
-Message-Id: <1460200541-14594-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-qt5][PATCH] quazip: update to 0.7.2
+Date: Sat,  9 Apr 2016 16:30:03 +0200
+Message-Id: <1460212203-15909-1-git-send-email-ruben.de.smet@rubdos.be>
+X-Mailer: git-send-email 2.8.0
+Subject: [meta-oe][PATCH] Updated linuxptp to 1.6, most recent release.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,33 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Apr 2016 11:16:04 -0000
+X-List-Received-Date: Sat, 09 Apr 2016 14:30:18 -0000
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
+No further updates were required, aside from changing the
+checksums and renaming the file.
+
+Signed-off-by: Ruben De Smet <ruben.de.smet@rubdos.be>
 ---
- recipes-qt/quazip/{quazip_0.7.1.bb => quazip_0.7.2.bb} | 4 ++--
+ .../linuxptp/{linuxptp_1.4.bb => linuxptp_1.6.bb}                     | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename recipes-qt/quazip/{quazip_0.7.1.bb => quazip_0.7.2.bb} (69%)
+ rename meta-oe/recipes-connectivity/linuxptp/{linuxptp_1.4.bb => linuxptp_1.6.bb} (82%)
 
-diff --git a/recipes-qt/quazip/quazip_0.7.1.bb b/recipes-qt/quazip/quazip_0.7.2.bb
-similarity index 69%
-rename from recipes-qt/quazip/quazip_0.7.1.bb
-rename to recipes-qt/quazip/quazip_0.7.2.bb
-index 4ba4197..6b09cf9 100644
---- a/recipes-qt/quazip/quazip_0.7.1.bb
-+++ b/recipes-qt/quazip/quazip_0.7.2.bb
-@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
- DEPENDS = "qtbase"
+diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb
+similarity index 82%
+rename from meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
+rename to meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb
+index 4ee0c88..254b855 100644
+--- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
++++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz \
+            file://build-Allow-CC-and-prefix-to-be-overriden.patch"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
--SRC_URI[md5sum] = "3b99effb2a9417707d463e6f19cf2629"
--SRC_URI[sha256sum] = "78c984103555c51e6f7ef52e3a2128e2beb9896871b2cc4d4dbd4d64bff132de"
-+SRC_URI[md5sum] = "84163487a4c3470781c93e5f56c4ca43"
-+SRC_URI[sha256sum] = "91d827fbcafd099ae814cc18a8dd3bb709da6b8a27c918ee1c6c03b3f29440f4"
+-SRC_URI[md5sum] = "a37ad2b2ef7d1ebc4d64a66d3fe55cdf"
+-SRC_URI[sha256sum] = "6cfd5291fb7394cc9f25458927874a203971b66b76d1c9d6568e007d0cbd81f2"
++SRC_URI[md5sum] = "6aa15d83f5a35f1fd076ba9adc4e7285"
++SRC_URI[sha256sum] = "e7fd16a9f235b059be527bd512e86f0c1d9f2e7c36736e6d6d9727a4427ac14c"
  
- inherit qmake5
- 
+ EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} \
+ 		EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_ONESTEP_SYNC ${CFLAGS}'"
 -- 
-2.7.4
+2.8.0
 
 
