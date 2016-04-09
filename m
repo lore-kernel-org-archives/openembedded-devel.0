@@ -1,58 +1,46 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
-	[209.85.220.41])
-	by mail.openembedded.org (Postfix) with ESMTP id EAB5C77181
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 316A877180
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Apr 2016 11:07:38 +0000 (UTC)
-Received: by mail-pa0-f41.google.com with SMTP id bx7so73881279pad.3
+	Sat,  9 Apr 2016 11:16:03 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id td3so90159416pab.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Apr 2016 04:07:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to; 
-	bh=gKsUVTVKDPMNdR/+6xnjq8j0e+BlhUtvDB3zJ0nin68=;
-	b=FHKra3trTDP6D/K9DESvFJ4Ruq+Yq3BSjLdhxlpww2hEaXKk9yc9xA2ETjgBBGLY70
-	OJr4YM49sRrdWiHn8xmUs9DSSTyOXC6nrYn1/iY+JWkLILiVfGZxj+pWwO8X5ouqRs81
-	CfcN7rfOLhwlbc9KlBqspkbWPVSh/T+Gso14Y6CqUjBXe6Gd+EyKKw/EisDRN9pgwqRC
-	VZ9hlINsF8D0M/iTEQqKAweRgLYaDSkrPKXOtOZH9a2e8r6USBqi9mIorWlCVfZhXAax
-	3QfHCkxGNkmp0yksE5X9c60tVjwrGgi969KjgSx+CLS/Pk3mu5GIwYvQo8wqBS1lJHDD
-	yTjw==
+	Sat, 09 Apr 2016 04:16:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=gibMxLZXHkQOvG1Q4EgNUFR80+NuyX23M/hesrwR/5U=;
+	b=EkK8uigtxF724lLveylDEJcv/KmXqzAsa4o6Zn40AqaYUKGH3+2PVvRkWIFyeywgXe
+	UhtRGYAOR3dn8Z86rfS61M3fykkkhFdPJqQobZxh3OZHqC4ltt5DuhU+cNnlvXc4Xti2
+	0ANoBNMTqaK02m7epOcMG7y3KbNJREuCuSMs5gx0sOzuUuC/ng2nhE5r5oteekqWfX/4
+	Js07c5dTyB/le1MD5yhgqBjPYKkWyE4syp0DbvMiE4yUSQVURYleZ6D/p0XbHDxu29Xo
+	QrZ9+bJZsXgb0pQ/iP1A9CCQRZ3OLW2+ZFzhEpDlDFxp68RSmp9aC7KYU5woEA855PZN
+	IKqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to;
-	bh=gKsUVTVKDPMNdR/+6xnjq8j0e+BlhUtvDB3zJ0nin68=;
-	b=h3oTgtTQEk1hAbsN1Rf9KISQ5HTIwA74hNyHoMmdRpp8YBfubl1Y38HrXlaXdOy2Rv
-	mDdRcncSGyMo+fRE2/a3h6sXhf2AEb+nmCP6Rdg0BjVxY10Y9CqAsSNsGQqjeSFJXhHB
-	+eObu01M3hhH9o6UY3YbYu4DAocp0+PuAdTQ0rxVHxj5SRcTmksHxJ/FszTjmlYmZyio
-	l3r1i99sUXcv1wVrIQciDvVvKt6cXahewJ4szXbLHifM6BjGQLsVs7Ni3XI9DvvMaWSK
-	QWHusV1ea5fPhgPbQzqC+a3PK4XS1Nv5PzFsZtdd6owA5Zlh92Jjp+qSkVdmJ/3XVD86
-	BA5Q==
-X-Gm-Message-State: AD7BkJIgnuVvkhmAYr71jvBHrKxdNOjQJU80CW5iOPK+Zr6MQ558oLiIDDGnhT7cn9KNwQ==
-X-Received: by 10.66.249.166 with SMTP id yv6mr18909588pac.91.1460200059053;
-	Sat, 09 Apr 2016 04:07:39 -0700 (PDT)
-Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com.
-	[209.85.192.177]) by smtp.gmail.com with ESMTPSA id
-	ch2sm24412141pad.28.2016.04.09.04.07.37
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=gibMxLZXHkQOvG1Q4EgNUFR80+NuyX23M/hesrwR/5U=;
+	b=W2MQpLox7HopCspFcxIq2xZdVfwD0PvlIv0OCeLdwiQxO18jwKWs2opzD8S/H7Eyeq
+	auAJaoFJ+ldNvf/b8zDSfn6Oav9cQwgzz8/BtbcIUn4enou4helZLVyXkWecqFOxf7w0
+	5aH6SS9jgTzB3Z2CtNpBngDVVHPz3Fs3Vwmv1rGSWqeCjLSAmiog7gwB2QbT1h1tFVhu
+	ZYfQGN7Dp7VQytOrZVMNgn1ZmAtIAvfoyPjv+un3V3m+TM2w5R/5HqzJgYy0rWs3SndP
+	LlR/SMdDCQOZiXHbcWcxma6ULtpXLYFzpzn0hdU30YU1A87gEvH1pq3d0RXdaNwOLQAD
+	Sozw==
+X-Gm-Message-State: AD7BkJJSIopx4gm4Gnjn52mJW7qIAgnDo3zvZpk8CGVmpKBWgbqQyR+hxsrmVGTnVeXyIQ==
+X-Received: by 10.67.2.41 with SMTP id bl9mr19017740pad.39.1460200564110;
+	Sat, 09 Apr 2016 04:16:04 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id
+	19sm24390061pfp.66.2016.04.09.04.16.02
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Apr 2016 04:07:37 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-pf0-f177.google.com with SMTP id 184so91892325pff.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Apr 2016 04:07:37 -0700 (PDT)
-MIME-Version: 1.0
-X-Received: by 10.98.74.200 with SMTP id c69mr18927542pfj.129.1460200057114;
-	Sat, 09 Apr 2016 04:07:37 -0700 (PDT)
-Received: by 10.67.3.163 with HTTP; Sat, 9 Apr 2016 04:07:37 -0700 (PDT)
-In-Reply-To: <1459785179-27170-1-git-send-email-eu@felipetonello.com>
-References: <1459785179-27170-1-git-send-email-eu@felipetonello.com>
-Date: Sat, 9 Apr 2016 08:07:37 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKqiMmpjvWikzXauEsfsbnzOQDYVAD2JifWnsFDS4cQ7JA@mail.gmail.com>
-Message-ID: <CAP9ODKqiMmpjvWikzXauEsfsbnzOQDYVAD2JifWnsFDS4cQ7JA@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] protobuf: add protobuf-c recipe
+	Sat, 09 Apr 2016 04:16:02 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  9 Apr 2016 21:15:41 +1000
+Message-Id: <1460200541-14594-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-qt5][PATCH] quazip: update to 0.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,20 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Apr 2016 11:07:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 09 Apr 2016 11:16:04 -0000
 
-On Mon, Apr 4, 2016 at 12:52 PM, Felipe F. Tonello <eu@felipetonello.com> wrote:
-> Initial version of recipe. The main package could be split into two to
-> separate the compiler. This also applies to protobuf recipe.
->
-> Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ recipes-qt/quazip/{quazip_0.7.1.bb => quazip_0.7.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename recipes-qt/quazip/{quazip_0.7.1.bb => quazip_0.7.2.bb} (69%)
 
-So split it; it makes sense to include it splitted.
-
-
+diff --git a/recipes-qt/quazip/quazip_0.7.1.bb b/recipes-qt/quazip/quazip_0.7.2.bb
+similarity index 69%
+rename from recipes-qt/quazip/quazip_0.7.1.bb
+rename to recipes-qt/quazip/quazip_0.7.2.bb
+index 4ba4197..6b09cf9 100644
+--- a/recipes-qt/quazip/quazip_0.7.1.bb
++++ b/recipes-qt/quazip/quazip_0.7.2.bb
+@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
+ DEPENDS = "qtbase"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
+-SRC_URI[md5sum] = "3b99effb2a9417707d463e6f19cf2629"
+-SRC_URI[sha256sum] = "78c984103555c51e6f7ef52e3a2128e2beb9896871b2cc4d4dbd4d64bff132de"
++SRC_URI[md5sum] = "84163487a4c3470781c93e5f56c4ca43"
++SRC_URI[sha256sum] = "91d827fbcafd099ae814cc18a8dd3bb709da6b8a27c918ee1c6c03b3f29440f4"
+ 
+ inherit qmake5
+ 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+2.7.4
+
 
