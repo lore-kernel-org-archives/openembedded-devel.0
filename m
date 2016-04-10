@@ -1,46 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 0262077109;
-	Sun, 10 Apr 2016 06:13:20 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id n3so66099165wmn.0;
-	Sat, 09 Apr 2016 23:13:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:mime-version:content-disposition
-	:user-agent; bh=KMSZFPnd5/X5EayO7QwJx2P5mZG3slzxgU2Htf5iYkA=;
-	b=GvEZQEnwQrDPPsQZr/zUVamqcAnDBXbSgVf9CoXqlwGjI5TTaBXa00xEdTJ+yle2pg
-	D88mDo8iXz+9Ms1KerfgphsqctIjuvr/9yu0PjDnj4pUncjraBUSjzKA+DLG9dkvjYka
-	4/9E7EvRuQ81byngMAZUlJQObCsKA0nC9D0+CZZjoT/4Nyx9p1t+jyNHY7SdjeO0Rbm/
-	RM048TWisUfWJEIdoj/rgmRE9gruJO0QB6hTh/MLkUZOQ16e2qgXu+I3k7+J3uoxpCHy
-	etNpKA25zdKnqpMi2BaMo2f/sfqB7yX0RAcOMxqkcFdX3gjSgQkqo6VLUBwcF7HRixTj
-	ms5Q==
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id D446977143
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Apr 2016 11:34:07 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id x190so21543411vka.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Apr 2016 04:34:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-transfer-encoding;
+	bh=RB4YWT18ImvCb4yiz6VNcRzWKFXP2TFbMu9Yw97dhKQ=;
+	b=w9xNgt9wnkiguzDSTf9f7HHJLcJI15QQuPqbyFPxM9N+CFT6trXO8e79secM1G95u5
+	iFq4fXNWzNXwhECQgRBRq6n6JQp2H7r+ZnXcdr7ed0pSGolVGyQrAvc0A8xRhWfdooOd
+	YFt5dwiK/yYc3wwpoGvdxtt+Ku7iNDKbu6XwPVwE/f8s/dPojTJdu40UXd4V0+PNd3PL
+	fy3pfUCn57mREYeLmOX0J/RPPV5v83xAafgioIlikz0AWW7rZuIw3ygQu2cfvEJ9MyBR
+	oN8fVG7zB73Y2Bao9WjbtDOMcbyzkDzvWbDFNKTL0zJYVOlrEDo1wCB5wMGbxMOwTUEe
+	QSIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
-	:content-disposition:user-agent;
-	bh=KMSZFPnd5/X5EayO7QwJx2P5mZG3slzxgU2Htf5iYkA=;
-	b=k8NN3FBe4VQbrYV5qvyK+JoLok0B2qMlt8Dt4MZ548Edy3ISvOICMene7Uq45TPydZ
-	0n55ZcOOwr4XRv82XHol16FePlCwH9WYx8xltzIY+ZEMvcdZ3cz6js5ic+P53u9TaZHo
-	Tqbgfy/85/u6TZyP7VpbpTcJyDm5tHhMaHFmQ++8L3odQ8BSbSSbp3eMxF/Qz+UljHq5
-	svj/dANiEx5XeUI5FCKsPdeSEYL1ykYV6FAnwT8z+l+jbX/q+2UKzfjPiKW0GqiLP4RD
-	ZGjDE5X4IM93fm/Yq9xlLGKSmN3Vh7aSVltcrOca0pND132RnUcNfQV5FLUpj7ViX/8F
-	MQCA==
-X-Gm-Message-State: AD7BkJLnRM8vA5wy9ahyCJP9OM3Bg4wC+H8uyz0Tumqw5eJOloTO1/CbLcabH+AibuWb1A==
-X-Received: by 10.194.58.169 with SMTP id s9mr17746508wjq.52.1460268800457;
-	Sat, 09 Apr 2016 23:13:20 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	r8sm21273575wjz.34.2016.04.09.23.13.19
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Apr 2016 23:13:19 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sun, 10 Apr 2016 08:14:25 +0200
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20160410061425.GA9652@jama>
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-transfer-encoding;
+	bh=RB4YWT18ImvCb4yiz6VNcRzWKFXP2TFbMu9Yw97dhKQ=;
+	b=HUBOXZC9yTwYGw3z80FSMLLxH0R0Zu9C3e9K6ix8GRC9ViJPi+VUDo9cWZoL5DpFIq
+	nM4gCrC4Cv4p7M5hMEB/tmEDwHiky9GclzlFDMjnENonyVpE51V6gpeZVHI1S3lSGJ8r
+	2UalxYKZFM7Vw9dYv2vf8fvdyBeRc0I1+r6yqHHt3b2kPzKebOhhjjv5RnSD8zOA1ILl
+	ISDG42wRae1SqJMDSqKVEuEoSdYlrjoTOcH5iNUTBtjICpTE9Ka8TiHpYYMzZHzrZ5jb
+	FJ3I7CPBflBwAqtoFL/GYLl9sSYYoTSwpFLE6kFn4/Ap/puDNRfzUyt8/s2uMV3JJNKt
+	7WHw==
+X-Gm-Message-State: AD7BkJJN5tiVsHBC3rIt7GcNkAh6XpqRtUjUuUf0wMCaZ+W28A155DjJ3t7kg1l82qEyze3tTlSs8Hk3/23xWA==
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: State of bitbake world, test-dependencies 2016-04-10
+X-Received: by 10.31.192.78 with SMTP id q75mr8840495vkf.96.1460288047894;
+	Sun, 10 Apr 2016 04:34:07 -0700 (PDT)
+Received: by 10.159.35.65 with HTTP; Sun, 10 Apr 2016 04:34:07 -0700 (PDT)
+In-Reply-To: <1459834720-17165-30-git-send-email-schnitzeltony@googlemail.com>
+References: <1459834720-17165-1-git-send-email-schnitzeltony@googlemail.com>
+	<1459834720-17165-30-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 10 Apr 2016 13:34:07 +0200
+Message-ID: <CALbNGRTae4P7N=4OR2V6=E2_NeFkhoHZyZQyEAnkSO_U90qKaA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH 29/31] qtquick1: update sources to 5.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,148 +55,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Apr 2016 06:13:21 -0000
-X-Groupsio-MsgNum: 60893
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="8t9RHnE3ZwKMSgU+"
-Content-Disposition: inline
-
---8t9RHnE3ZwKMSgU+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 10 Apr 2016 11:34:10 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-This time complete test of all recipes, for both qemux86 and qemuarm.
+On Tue, Apr 5, 2016 at 7:38 AM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> LICENSE.LGPLv3: I checked git repository. To be honest: I have no idea wh=
+at
+> caused checksum change.
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ---
+>  recipes-qt/qt5/qtquick1_git.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes-qt/qt5/qtquick1_git.bb b/recipes-qt/qt5/qtquick1_git=
+.bb
+> index e0a264d..ac13c77 100644
+> --- a/recipes-qt/qt5/qtquick1_git.bb
+> +++ b/recipes-qt/qt5/qtquick1_git.bb
+> @@ -7,7 +7,7 @@ require qt5-git.inc
+>  LICENSE =3D "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Excepti=
+on-1.1 | LGPL-3.0)"
+>  LIC_FILES_CHKSUM =3D " \
+>      file://LICENSE.LGPLv21;md5=3D58a180e1cf84c756c29f782b3a485c29 \
+> -    file://LICENSE.LGPLv3;md5=3Dc4fe8c6de4eef597feec6e90ed62e962 \
+> +    file://LICENSE.LGPLv3;md5=3Db8c75190712063cde04e1f41b6fdad98 \
+>      file://LGPL_EXCEPTION.txt;md5=3D9625233da42f9e0ce9d63651a9d97654 \
+>      file://LICENSE.FDL;md5=3D6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
+>      file://LICENSE.GPLv2;md5=3D05832301944453ec79e40ba3c3cfceec \
+> @@ -23,4 +23,4 @@ do_configure_prepend() {
+>      sed -i 's#^qtHaveModule(webkitwidgets):#enable-webkit:qtHaveModule(w=
+ebkitwidgets):#g' ${S}/src/imports/imports.pro
+>  }
+>
+> -SRCREV =3D "87f2415adf34da08e6cd58f5da6f6a7d0d9cf141"
+> +SRCREV =3D "bf4efac4ed2f3b1ff11fd1361506dec3c2a8726c"
+> --
+> 2.5.5
+>
+This one is not quite correct: It reports 5.6.1. Cmake is pedantic on
+this and therefore does not detect qtquick1 properly. I will send out
+a V2 (as pull request also) after I have made tests.
 
-qemux86:
+Andreas
 
-Found differences:=20
-WARN: jasper: jasper-bin rdepends on libgl-mesa, but it isn't a build depen=
-dency?
-WARN: jasper: jasper-bin rdepends on libglu, but it isn't a build dependenc=
-y?
-WARN: jasper: jasper-bin rdepends on mesa-glut, but it isn't a build depend=
-ency?
-WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
-WARN: libdrm: libdrm-tests rdepends on cunit, but it isn't a build dependen=
-cy?
-WARN: libdrm: libdrm-tests rdepends on libdrm-amdgpu, but it isn't a build =
-dependency?
-WARN: enchant: enchant rdepends on hunspell, but it isn't a build dependenc=
-y?
-Found errors:=20
-ERROR: 50 issues were found in these recipes: chkconfig-alternatives-native=
- core-image-rt core-image-rt-sdk core-image-sato-dev core-image-sato-sdk co=
-re-image-sato-sdk-ptest cpupower cyrus-sasl enchant fontforge gtkmathview j=
-asper libdrm lttng-modules meta-ide-support meta-world-pkgdata nativesdk-ze=
-roc-ice netmap netmap-modules openlmi-networking openlmi-providers openlmi-=
-storage packagegroup-core-tools-profile perf proxy-libintl python-pyparsing=
- samba sblim-sfcb tiptop zeroc-ice
-
-2_max/failed/chkconfig-alternatives-native.log
-2_max/failed/core-image-rt-sdk.log
-2_max/failed/core-image-rt.log
-2_max/failed/core-image-sato-dev.log
-2_max/failed/core-image-sato-sdk-ptest.log
-2_max/failed/core-image-sato-sdk.log
-2_max/failed/cpupower.log
-2_max/failed/cyrus-sasl.log
-2_max/failed/fontforge.log
-2_max/failed/lttng-modules.log
-2_max/failed/meta-world-pkgdata.log
-2_max/failed/nativesdk-zeroc-ice.log
-2_max/failed/netmap-modules.log
-2_max/failed/netmap.log
-2_max/failed/openlmi-networking.log
-2_max/failed/openlmi-providers.log
-2_max/failed/openlmi-storage.log
-2_max/failed/packagegroup-core-tools-profile.log
-2_max/failed/proxy-libintl.log
-2_max/failed/zeroc-ice.log
-
-3_min/failed/core-image-rt-sdk.log
-3_min/failed/core-image-rt.log
-3_min/failed/core-image-sato-dev.log
-3_min/failed/core-image-sato-sdk-ptest.log
-3_min/failed/core-image-sato-sdk.log
-3_min/failed/cyrus-sasl.log
-3_min/failed/fontforge.log
-3_min/failed/gtkmathview.log
-3_min/failed/meta-world-pkgdata.log
-3_min/failed/nativesdk-zeroc-ice.log
-3_min/failed/perf.log
-3_min/failed/proxy-libintl.log
-3_min/failed/python-pyparsing.log
-3_min/failed/sblim-sfcb.log
-3_min/failed/zeroc-ice.log
-
-qemuarm:
-
-Found differences:=20
-WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
-WARN: libdrm: libdrm-tests rdepends on cunit, but it isn't a build dependen=
-cy?
-WARN: libdrm: libdrm-tests rdepends on libdrm-amdgpu, but it isn't a build =
-dependency?
-WARN: enchant: enchant rdepends on hunspell, but it isn't a build dependenc=
-y?
-Found errors:=20
-ERROR: 55 issues were found in these recipes: chkconfig-alternatives-native=
- core-image-minimal-initramfs core-image-rt core-image-rt-sdk core-image-sa=
-to-dev core-image-sato-sdk core-image-sato-sdk-ptest core-image-testmaster-=
-initramfs cyrus-sasl enchant fontforge gtkmathview ipmiutil libdrm meta-wor=
-ld-pkgdata nativesdk-zeroc-ice netmap-modules perf proxy-libintl remake sam=
-ba sblim-sfcb zeroc-ice
-
-2_max/failed/chkconfig-alternatives-native.log
-2_max/failed/core-image-minimal-initramfs.log
-2_max/failed/core-image-rt-sdk.log
-2_max/failed/core-image-rt.log
-2_max/failed/core-image-sato-dev.log
-2_max/failed/core-image-sato-sdk-ptest.log
-2_max/failed/core-image-sato-sdk.log
-2_max/failed/core-image-testmaster-initramfs.log
-2_max/failed/cyrus-sasl.log
-2_max/failed/fontforge.log
-2_max/failed/ipmiutil.log
-2_max/failed/meta-world-pkgdata.log
-2_max/failed/nativesdk-zeroc-ice.log
-2_max/failed/netmap-modules.log
-2_max/failed/proxy-libintl.log
-2_max/failed/remake.log
-2_max/failed/zeroc-ice.log
-
-3_min/failed/core-image-minimal-initramfs.log
-3_min/failed/core-image-rt-sdk.log
-3_min/failed/core-image-rt.log
-3_min/failed/core-image-sato-dev.log
-3_min/failed/core-image-sato-sdk-ptest.log
-3_min/failed/core-image-sato-sdk.log
-3_min/failed/core-image-testmaster-initramfs.log
-3_min/failed/cyrus-sasl.log
-3_min/failed/fontforge.log
-3_min/failed/gtkmathview.log
-3_min/failed/ipmiutil.log
-3_min/failed/meta-world-pkgdata.log
-3_min/failed/nativesdk-zeroc-ice.log
-3_min/failed/perf.log
-3_min/failed/proxy-libintl.log
-3_min/failed/remake.log
-3_min/failed/sblim-sfcb.log
-3_min/failed/zeroc-ice.log
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---8t9RHnE3ZwKMSgU+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlcJ7zQACgkQN1Ujt2V2gBwukgCaA1G3gHSpS8A62kiG21IwG9O3
-0u4An2+rnbrdWPUROjM9MymHU1y+PaSe
-=1FRd
------END PGP SIGNATURE-----
-
---8t9RHnE3ZwKMSgU+--
