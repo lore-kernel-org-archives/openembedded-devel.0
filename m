@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id DE74F771F5
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 91133771F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Apr 2016 19:42:01 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id l6so16767380wml.3
+	Sun, 10 Apr 2016 19:42:02 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id y144so16735822wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 10 Apr 2016 12:42:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=NgugCYVHgG22uo2roVZeGojJ5JzTeSbhPVwzMLSKIiE=;
-	b=uJwxKfn5F4ovUaajl3L5cNuH3WtZBbbJfWtR9Jo6OCF0EbYnDEvVjpGU4tzFhQGtUV
-	WYhl2GRhpGPV0ozqcPqMfDXYwaJigyAFHAbSDbl/RbPuddxOkY+z3rHJAqzwU6795tSx
-	Bo9bPpWufzISxeTFWs4/LKcP12lLC7lQ/FbOYSeG+2Jt5MEhpBnFaOy9CLJPX2J2xOEt
-	lJ/u9S7ahzFJBkP4UBQf0BhuS39cnv3fYKI7XQ47J8bux3ZcZMCjpJ4861BPIA+AF45p
-	YkjI6SRZ4lO4eaAIhKY671M7E4i/A0Z6s7ZjcTUCF3kmmstbVnvBV3w2CKPhA6XTAXyb
-	Aqtw==
+	bh=VS26SplZCOyS1BFfksZAa9w32a0wm50V1QcLizpnNRk=;
+	b=NeMYaZsMZTZwHHliC2gKwuOVf5XGZbICYN0aGU1XasdpGqmNeXVPB/rWOp6OfzaBgU
+	Fz4bxZAtzPIsXaSckS8KOptnpv8o5tpiFMxOCTT3aWdDBbBfFDpE7aDRcfk66FNPJ8Vx
+	OBUZZg7zbas9MhbO260b3RjnEYnOH5sY1Ty5mwEVbLaZA0/WBRYGe1HFVpRUQGfaVw4E
+	5P9+333qwAUhng8eRAK3VeV8ieXaN8jYo0mTcd9ci+lL9krQWqpHLKLZm1dtfP4Huflf
+	DGHy54eO0EcXsVgcxQnsn4gjXXzJzyP4jLkgbvQsVtDrpxvNmSCkK9rS/RtSyWy1oHq5
+	+vaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=NgugCYVHgG22uo2roVZeGojJ5JzTeSbhPVwzMLSKIiE=;
-	b=j4NtDzkAgoLLIJsZ70A3jdsN4Gv6MRrmY2mcwoodL5f+m1vz1VdrxGH8OwKW+GFlHO
-	tv0xXlfMDX7KuvP+Rv6wrVPjBHYBZL3+hUSyFEQw76guFZjq557It13qvCU7CCMV2TS2
-	lD9GcrSJoRAalQt0gKG0ZXmnxI6UFqtEszeXFTL/ymYefHbxT69pcZbZdBJZGyOKFnF7
-	vqchgPr7llzYH8fU558Qgwtkd2Po1tcPp3jrrSTGL5BnDbFcuVGA92W+QV1EVX/dkbrn
-	ikSjpfKoHYmBLhhx8XiJ0RO9i3FdzTJMS2eLod1wWqWUI5eGKxVGVWfkR2OPgA64lxLH
-	NIWA==
-X-Gm-Message-State: AD7BkJK8uWHlhjx0BnSdWoh7Nia5wu/mMXLLQLEbrYUSWROCjwvahO/O4uUrzQg/d2H/eQ==
-X-Received: by 10.28.177.134 with SMTP id a128mr15066134wmf.55.1460317322519; 
-	Sun, 10 Apr 2016 12:42:02 -0700 (PDT)
+	bh=VS26SplZCOyS1BFfksZAa9w32a0wm50V1QcLizpnNRk=;
+	b=Qn2fHg99azqN6kQwCIEyXL0/sbn2lS8N5ATxc5+NiHL5/SvBfvzJYOK0CLAa8sbCR9
+	vW4sZ/Hrwyu76E2kxl6HW/FUYFAeODhwrqj0zRc6rJc1iPP64VAlEObLvy1WqllZoDj9
+	QHluGlrJGKlHTk1UaDAEf3kSjTskw4SZKY0DAQwRFvjWHV/iwVoBh7xLgC+vmGmA+GIy
+	nRH5OdhpfI9Slloqq70Xptl8VgWAr4qrvqxAryfoNAE1JPUDxEJnDzO5wtwXNWrFABIl
+	94PHa3qFjQJSlNCzLy1FvSlHzQo1sUbFsyd1gxMdlbbmlYZ4aswapC/uwrCDslXaPcqa
+	ZWNQ==
+X-Gm-Message-State: AD7BkJLydo3/kOtnhmIwQJKaaZvfju/xVr7b6GwZN02HfTpzAeUt5k8P/EFDE8smX2aMNA==
+X-Received: by 10.194.78.83 with SMTP id z19mr19748820wjw.5.1460317323227;
+	Sun, 10 Apr 2016 12:42:03 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A33F1.dip0.t-ipconnect.de.
 	[91.10.51.241]) by smtp.googlemail.com with ESMTPSA id
-	u79sm13612910wmu.8.2016.04.10.12.42.01
+	u79sm13612910wmu.8.2016.04.10.12.42.02
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 10 Apr 2016 12:42:01 -0700 (PDT)
+	Sun, 10 Apr 2016 12:42:02 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Apr 2016 21:41:19 +0200
-Message-Id: <1460317290-4787-21-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 10 Apr 2016 21:41:20 +0200
+Message-Id: <1460317290-4787-22-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1460317290-4787-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1460317290-4787-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH v2 20/31] qtwayland: update sources to 5.6.0
+Subject: [meta-qt5][PATCH v2 21/31] qtgraphicaleffects: update sources to 5.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,19 +64,19 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- recipes-qt/qt5/qtwayland_git.bb | 2 +-
+ recipes-qt/qt5/qtgraphicaleffects_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-index 78d8a3e..a5e3abe 100644
---- a/recipes-qt/qt5/qtwayland_git.bb
-+++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -36,4 +36,4 @@ SRC_URI += " \
-     file://0001-examples-wayland-include-server-buffer-only-when-bui.patch \
- "
+diff --git a/recipes-qt/qt5/qtgraphicaleffects_git.bb b/recipes-qt/qt5/qtgraphicaleffects_git.bb
+index c35cc80..7d9636c 100644
+--- a/recipes-qt/qt5/qtgraphicaleffects_git.bb
++++ b/recipes-qt/qt5/qtgraphicaleffects_git.bb
+@@ -17,4 +17,4 @@ DEPENDS += "qtdeclarative"
  
--SRCREV = "bebe9beff3e9874498474cec32634cf281ddc453"
-+SRCREV = "29b8bd8b1117589341110502fe516bf22c920747"
+ RDEPENDS_${PN}-dev = ""
+ 
+-SRCREV = "24f3fd69a2e953619c48b4a632262ce8419fee40"
++SRCREV = "4b8e9a348ca379b203c26ff14dd236267dd60646"
 -- 
 2.5.5
 
