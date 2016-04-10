@@ -1,46 +1,46 @@
-Return-Path: <jkrishnanjanappa@mvista.com>
-Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
-	[209.85.220.43])
-	by mail.openembedded.org (Postfix) with ESMTP id CAFE6601B8
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Apr 2016 04:05:37 +0000 (UTC)
-Received: by mail-pa0-f43.google.com with SMTP id ot11so15722786pab.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Apr 2016 21:05:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=hZfATfd/8VdkBfeIFS32PRr6Kq1NNeetaPR1WPq+U3g=;
-	b=t7DT+GvH+tTq9YET11MwF/D1+V3m/BetgSdTFZQeV5UfAD1TCsTtfxKreCE0SH2f0N
-	ooDhZOdDg9CRDq7Cxer4uLIrugLxKNKHYgQ063WlbPss+5/03UNJb1xJehj7dJjqxX25
-	HJv0mCj0WNcFLp2YgfFf0QpaL8D/7xdLKN76tTfAPs9HW8vlX4HMq0ofOB9mDkp9zg1n
-	dEAqHRutj8XCcLSLLI2C87mp6U1HzoOyq8UOtOsSA2SmyeHxFDfP4AEJQSA/B9xcrvNG
-	dy5+1Z9gY1TlfyB1wAFqH+wTDgD4nFUUt4XXidGvJVNrQfpY/NZpOIT2gogsX+U/gZ/O
-	YWwg==
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 0262077109;
+	Sun, 10 Apr 2016 06:13:20 +0000 (UTC)
+Received: by mail-wm0-f51.google.com with SMTP id n3so66099165wmn.0;
+	Sat, 09 Apr 2016 23:13:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:mime-version:content-disposition
+	:user-agent; bh=KMSZFPnd5/X5EayO7QwJx2P5mZG3slzxgU2Htf5iYkA=;
+	b=GvEZQEnwQrDPPsQZr/zUVamqcAnDBXbSgVf9CoXqlwGjI5TTaBXa00xEdTJ+yle2pg
+	D88mDo8iXz+9Ms1KerfgphsqctIjuvr/9yu0PjDnj4pUncjraBUSjzKA+DLG9dkvjYka
+	4/9E7EvRuQ81byngMAZUlJQObCsKA0nC9D0+CZZjoT/4Nyx9p1t+jyNHY7SdjeO0Rbm/
+	RM048TWisUfWJEIdoj/rgmRE9gruJO0QB6hTh/MLkUZOQ16e2qgXu+I3k7+J3uoxpCHy
+	etNpKA25zdKnqpMi2BaMo2f/sfqB7yX0RAcOMxqkcFdX3gjSgQkqo6VLUBwcF7HRixTj
+	ms5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=hZfATfd/8VdkBfeIFS32PRr6Kq1NNeetaPR1WPq+U3g=;
-	b=NW8MoX+dSIogptxJUBTYX4A7jXCrtaZo9Dc2Womq5U5/nYjetfvLUOvTJLXzN2YghF
-	wVvGz8b7qJx3cRk9sxudempcNvYtgNQoXgfnN9fI37Uqf53e8E0J7AQqusS0TBrXDSrW
-	sq6xLxMgrK/kZiIScVvUuNBBhPZms5E6JQYjqgQWRzLo7hpXHyaV8dVy+7u/GsEjHgfQ
-	0Q4hKPFPhtATBhT8nqbYyxVv42GNABmJPCYjDwnpecjivHfA2Viw9XHa9WGkhvlzVAXx
-	Oa9CZ6Uv4eC3BVYC9bmqV/JsFQl6f63sa4gD++Dt/7JyLqai8ZALrVk00KYP+H+faoiP
-	/W3w==
-X-Gm-Message-State: AOPr4FV5rbCz++J7Y4vhCr5DxboP9mdKj3xEzDm1gopYILMHgmDgv36U6ojynraUNw8oSw69
-X-Received: by 10.66.149.36 with SMTP id tx4mr8833324pab.64.1460261138255;
-	Sat, 09 Apr 2016 21:05:38 -0700 (PDT)
-Received: from ubuntu64.mvista.com ([111.93.218.67])
+	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=KMSZFPnd5/X5EayO7QwJx2P5mZG3slzxgU2Htf5iYkA=;
+	b=k8NN3FBe4VQbrYV5qvyK+JoLok0B2qMlt8Dt4MZ548Edy3ISvOICMene7Uq45TPydZ
+	0n55ZcOOwr4XRv82XHol16FePlCwH9WYx8xltzIY+ZEMvcdZ3cz6js5ic+P53u9TaZHo
+	Tqbgfy/85/u6TZyP7VpbpTcJyDm5tHhMaHFmQ++8L3odQ8BSbSSbp3eMxF/Qz+UljHq5
+	svj/dANiEx5XeUI5FCKsPdeSEYL1ykYV6FAnwT8z+l+jbX/q+2UKzfjPiKW0GqiLP4RD
+	ZGjDE5X4IM93fm/Yq9xlLGKSmN3Vh7aSVltcrOca0pND132RnUcNfQV5FLUpj7ViX/8F
+	MQCA==
+X-Gm-Message-State: AD7BkJLnRM8vA5wy9ahyCJP9OM3Bg4wC+H8uyz0Tumqw5eJOloTO1/CbLcabH+AibuWb1A==
+X-Received: by 10.194.58.169 with SMTP id s9mr17746508wjq.52.1460268800457;
+	Sat, 09 Apr 2016 23:13:20 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	lq10sm27783214pab.36.2016.04.09.21.05.35
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 09 Apr 2016 21:05:36 -0700 (PDT)
-From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Apr 2016 09:35:27 +0530
-Message-Id: <1460261127-23518-1-git-send-email-jkrishnanjanappa@mvista.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] iscsitarget: resolve build error with linux kernel 4.3 and above
+	r8sm21273575wjz.34.2016.04.09.23.13.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 09 Apr 2016 23:13:19 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sun, 10 Apr 2016 08:14:25 +0200
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20160410061425.GA9652@jama>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Subject: State of bitbake world, test-dependencies 2016-04-10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,165 +53,148 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Apr 2016 04:05:37 -0000
+X-List-Received-Date: Sun, 10 Apr 2016 06:13:21 -0000
+X-Groupsio-MsgNum: 60893
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="8t9RHnE3ZwKMSgU+"
+Content-Disposition: inline
 
-1. test_bit was used to return true boolean value, if
-   BIO_UPTODATE bit of bio->bi_flags is set. But the same
-   job can be done by checking bio->bi_error, implemented in
-   linux kernel 4.3 and above. If bio->bi_error is set, then
-   it denotes error.
+--8t9RHnE3ZwKMSgU+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Ref: https://github.com/torvalds/linux/commit/4246a0b63bd8f56a1469b12eafeb875b1041a451
+This time complete test of all recipes, for both qemux86 and qemuarm.
 
-It solves below build error:
--- snip --
-iscsitarget-1.4.20.3+svn502/kernel/block-io.c:40:19: error: 'BIO_UPTODATE' undeclared (first use in this function)
-   error = test_bit(BIO_UPTODATE, &bio->bi_flags) ? error : -EIO;
--- CUT --
+qemux86:
 
-2. bio can always be filled to a maximum value of BIO_MAX_PAGES,
-   so no need to check for min value for linux kernel 4.3 and above.
+Found differences:=20
+WARN: jasper: jasper-bin rdepends on libgl-mesa, but it isn't a build depen=
+dency?
+WARN: jasper: jasper-bin rdepends on libglu, but it isn't a build dependenc=
+y?
+WARN: jasper: jasper-bin rdepends on mesa-glut, but it isn't a build depend=
+ency?
+WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
+WARN: libdrm: libdrm-tests rdepends on cunit, but it isn't a build dependen=
+cy?
+WARN: libdrm: libdrm-tests rdepends on libdrm-amdgpu, but it isn't a build =
+dependency?
+WARN: enchant: enchant rdepends on hunspell, but it isn't a build dependenc=
+y?
+Found errors:=20
+ERROR: 50 issues were found in these recipes: chkconfig-alternatives-native=
+ core-image-rt core-image-rt-sdk core-image-sato-dev core-image-sato-sdk co=
+re-image-sato-sdk-ptest cpupower cyrus-sasl enchant fontforge gtkmathview j=
+asper libdrm lttng-modules meta-ide-support meta-world-pkgdata nativesdk-ze=
+roc-ice netmap netmap-modules openlmi-networking openlmi-providers openlmi-=
+storage packagegroup-core-tools-profile perf proxy-libintl python-pyparsing=
+ samba sblim-sfcb tiptop zeroc-ice
 
-Ref: https://github.com/torvalds/linux/commit/b54ffb73cadcdcff9cc1ae0e11f502407e3e2e4c
+2_max/failed/chkconfig-alternatives-native.log
+2_max/failed/core-image-rt-sdk.log
+2_max/failed/core-image-rt.log
+2_max/failed/core-image-sato-dev.log
+2_max/failed/core-image-sato-sdk-ptest.log
+2_max/failed/core-image-sato-sdk.log
+2_max/failed/cpupower.log
+2_max/failed/cyrus-sasl.log
+2_max/failed/fontforge.log
+2_max/failed/lttng-modules.log
+2_max/failed/meta-world-pkgdata.log
+2_max/failed/nativesdk-zeroc-ice.log
+2_max/failed/netmap-modules.log
+2_max/failed/netmap.log
+2_max/failed/openlmi-networking.log
+2_max/failed/openlmi-providers.log
+2_max/failed/openlmi-storage.log
+2_max/failed/packagegroup-core-tools-profile.log
+2_max/failed/proxy-libintl.log
+2_max/failed/zeroc-ice.log
 
-It solves below build error:
--- snip --
-iscsitarget-1.4.20.3+svn502/kernel/block-io.c:80:15: error: implicit declaration of function 'bio_get_nr_vecs' [-Werror=implicit-function-declaration]
-    max_pages = bio_get_nr_vecs(bio_data->bdev);
--- CUT --
+3_min/failed/core-image-rt-sdk.log
+3_min/failed/core-image-rt.log
+3_min/failed/core-image-sato-dev.log
+3_min/failed/core-image-sato-sdk-ptest.log
+3_min/failed/core-image-sato-sdk.log
+3_min/failed/cyrus-sasl.log
+3_min/failed/fontforge.log
+3_min/failed/gtkmathview.log
+3_min/failed/meta-world-pkgdata.log
+3_min/failed/nativesdk-zeroc-ice.log
+3_min/failed/perf.log
+3_min/failed/proxy-libintl.log
+3_min/failed/python-pyparsing.log
+3_min/failed/sblim-sfcb.log
+3_min/failed/zeroc-ice.log
 
-3. Remove unwanted explicit setting of CFLAGS and CC flags. Setting them in
-   oe_runmake command, will override CFLAGS mentioned in iscsitarget Makefile
-   and resulting in a below error:
+qemuarm:
 
--- snip --
- In file included from iscsid.c:38:0:
- iscsid.h:38:19: fatal error: iet_u.h: No such file or directory
- compilation terminated.
- In file included from conn.c:15:0:
- iscsid.h:38:19: fatal error: iet_u.h: No such file or directory
- compilation terminated.
--- CUT --
+Found differences:=20
+WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
+WARN: libdrm: libdrm-tests rdepends on cunit, but it isn't a build dependen=
+cy?
+WARN: libdrm: libdrm-tests rdepends on libdrm-amdgpu, but it isn't a build =
+dependency?
+WARN: enchant: enchant rdepends on hunspell, but it isn't a build dependenc=
+y?
+Found errors:=20
+ERROR: 55 issues were found in these recipes: chkconfig-alternatives-native=
+ core-image-minimal-initramfs core-image-rt core-image-rt-sdk core-image-sa=
+to-dev core-image-sato-sdk core-image-sato-sdk-ptest core-image-testmaster-=
+initramfs cyrus-sasl enchant fontforge gtkmathview ipmiutil libdrm meta-wor=
+ld-pkgdata nativesdk-zeroc-ice netmap-modules perf proxy-libintl remake sam=
+ba sblim-sfcb zeroc-ice
 
-Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
----
- ...pdated_bio_struct_of_linux_v4.3_and_above.patch | 75 ++++++++++++++++++++++
- .../iscsitarget/iscsitarget_1.4.20.3+svn502.bb     |  8 +--
- 2 files changed, 78 insertions(+), 5 deletions(-)
- create mode 100644 meta-networking/recipes-extended/iscsitarget/files/build_with_updated_bio_struct_of_linux_v4.3_and_above.patch
+2_max/failed/chkconfig-alternatives-native.log
+2_max/failed/core-image-minimal-initramfs.log
+2_max/failed/core-image-rt-sdk.log
+2_max/failed/core-image-rt.log
+2_max/failed/core-image-sato-dev.log
+2_max/failed/core-image-sato-sdk-ptest.log
+2_max/failed/core-image-sato-sdk.log
+2_max/failed/core-image-testmaster-initramfs.log
+2_max/failed/cyrus-sasl.log
+2_max/failed/fontforge.log
+2_max/failed/ipmiutil.log
+2_max/failed/meta-world-pkgdata.log
+2_max/failed/nativesdk-zeroc-ice.log
+2_max/failed/netmap-modules.log
+2_max/failed/proxy-libintl.log
+2_max/failed/remake.log
+2_max/failed/zeroc-ice.log
 
-diff --git a/meta-networking/recipes-extended/iscsitarget/files/build_with_updated_bio_struct_of_linux_v4.3_and_above.patch b/meta-networking/recipes-extended/iscsitarget/files/build_with_updated_bio_struct_of_linux_v4.3_and_above.patch
-new file mode 100644
-index 0000000..0e8b792
---- /dev/null
-+++ b/meta-networking/recipes-extended/iscsitarget/files/build_with_updated_bio_struct_of_linux_v4.3_and_above.patch
-@@ -0,0 +1,75 @@
-+1. test_bit was used to return true boolean value, if
-+   BIO_UPTODATE bit of bio->bi_flags is set. But the same
-+   job can be done by checking bio->bi_error, implemented in
-+   linux kernel 4.3 and above. If bio->bi_error is set, then 
-+   it denotes error.
-+
-+Ref: https://github.com/torvalds/linux/commit/4246a0b63bd8f56a1469b12eafeb875b1041a451
-+
-+It solves below build error:
-+-- snip --
-+iscsitarget-1.4.20.3+svn502/kernel/block-io.c:40:19: error: 'BIO_UPTODATE' undeclared (first use in this function)
-+   error = test_bit(BIO_UPTODATE, &bio->bi_flags) ? error : -EIO;
-+-- CUT --
-+
-+2. bio can always be filled to a maximum value of BIO_MAX_PAGES, 
-+   so no need to check for min value for linux kernel 4.3 and above.
-+
-+Ref: https://github.com/torvalds/linux/commit/b54ffb73cadcdcff9cc1ae0e11f502407e3e2e4c
-+
-+It solves below build error:
-+-- snip --
-+iscsitarget-1.4.20.3+svn502/kernel/block-io.c:80:15: error: implicit declaration of function 'bio_get_nr_vecs' [-Werror=implicit-function-declaration]
-+    max_pages = bio_get_nr_vecs(bio_data->bdev);
-+-- CUT --
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
-+
-+diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c iscsitarget-1.4.20.3+svn502/kernel/block-io.c
-+--- iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c	2016-04-01 09:07:12.891810059 +0530
-++++ iscsitarget-1.4.20.3+svn502/kernel/block-io.c	2016-04-01 09:15:59.076469313 +0530
-+@@ -33,7 +33,11 @@ static void blockio_bio_endio(struct bio
-+ {
-+ 	struct tio_work *tio_work = bio->bi_private;
-+ 
-++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
-++	error = bio->bi_error ? -EIO : error;
-++#else
-+ 	error = test_bit(BIO_UPTODATE, &bio->bi_flags) ? error : -EIO;
-++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0) */	
-+ 
-+ 	if (error)
-+ 		atomic_set(&tio_work->error, error);
-+@@ -61,6 +65,10 @@ blockio_make_request(struct iet_volume *
-+ 	u32 size = tio->size;
-+ 	u32 tio_index = 0;
-+ 
-++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
-++	int err = 0;
-++	loff_t ppos = tio->offset;	
-++#else	
-+ 	int max_pages = 1;
-+ 	int err = 0;
-+ 
-+@@ -69,6 +77,7 @@ blockio_make_request(struct iet_volume *
-+ 	/* Calculate max_pages for bio_alloc (memory saver) */
-+ 	if (bdev_q)
-+ 		max_pages = bio_get_nr_vecs(bio_data->bdev);
-++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0) */
-+ 
-+ 	tio_work = kzalloc(sizeof (*tio_work), GFP_KERNEL);
-+ 	if (!tio_work)
-+@@ -80,7 +89,11 @@ blockio_make_request(struct iet_volume *
-+ 
-+ 	/* Main processing loop, allocate and fill all bios */
-+ 	while (size && tio_index < tio->pg_cnt) {
-++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
-++		bio = bio_alloc(GFP_KERNEL, BIO_MAX_PAGES);
-++#else    		
-+ 		bio = bio_alloc(GFP_KERNEL, min(max_pages, BIO_MAX_PAGES));
-++#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0) */		
-+ 		if (!bio) {
-+ 			err = -ENOMEM;
-+ 			goto out;
-diff --git a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
-index 6a2b135..4c5eed6 100644
---- a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
-+++ b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
-@@ -8,13 +8,12 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6e233eda45c807aa29aeaa6d94bc48a2"
- DEPENDS = "openssl virtual/kernel"
- 
--PNBLACKLIST[iscsitarget] ?= "BROKEN: kernel/block-io.c:36:19: error: 'BIO_UPTODATE' undeclared (first use in this function)"
--
- SRC_URI = "http://ftp.heanet.ie/mirrors/ubuntu/pool/universe/i/${BPN}/${BPN}_${PV}.orig.tar.gz \
-            file://use-kernel-makefile-to-get-kernel-version.patch \
-            file://fix-errors-observed-with-linux-3.19-and-greater.patch \
-            file://access-sk_v6_daddr-iff-IPV6-defined.patch \
--	  "
-+           file://build_with_updated_bio_struct_of_linux_v4.3_and_above.patch"
-+
- SRC_URI[md5sum] = "ef9bc823bbabd3c772208c00d5f2d089"
- SRC_URI[sha256sum] = "d3196ccb78a43266dce28587bfe30d8ab4db7566d7bce96057dfbb84100babb5"
- 
-@@ -27,8 +26,7 @@ do_configure[noexec] = "1"
- do_make_scripts[depends] += "virtual/kernel:do_shared_workdir"
- 
- do_compile() {
--    oe_runmake KSRC=${STAGING_KERNEL_DIR} CFLAGS='${CFLAGS}' LDFLAGS='' \
--    CC="${CC}" V=1
-+    oe_runmake KSRC=${STAGING_KERNEL_DIR} LDFLAGS='' V=1
- }
- 
- do_install() {
--- 
-1.9.1
+3_min/failed/core-image-minimal-initramfs.log
+3_min/failed/core-image-rt-sdk.log
+3_min/failed/core-image-rt.log
+3_min/failed/core-image-sato-dev.log
+3_min/failed/core-image-sato-sdk-ptest.log
+3_min/failed/core-image-sato-sdk.log
+3_min/failed/core-image-testmaster-initramfs.log
+3_min/failed/cyrus-sasl.log
+3_min/failed/fontforge.log
+3_min/failed/gtkmathview.log
+3_min/failed/ipmiutil.log
+3_min/failed/meta-world-pkgdata.log
+3_min/failed/nativesdk-zeroc-ice.log
+3_min/failed/perf.log
+3_min/failed/proxy-libintl.log
+3_min/failed/remake.log
+3_min/failed/sblim-sfcb.log
+3_min/failed/zeroc-ice.log
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--8t9RHnE3ZwKMSgU+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlcJ7zQACgkQN1Ujt2V2gBwukgCaA1G3gHSpS8A62kiG21IwG9O3
+0u4An2+rnbrdWPUROjM9MymHU1y+PaSe
+=1FRd
+-----END PGP SIGNATURE-----
+
+--8t9RHnE3ZwKMSgU+--
