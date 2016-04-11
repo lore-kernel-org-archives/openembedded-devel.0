@@ -1,34 +1,55 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 3622 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 11 Apr 2016 19:11:30 UTC
-Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
-	[206.46.173.15])
-	by mail.openembedded.org (Postfix) with ESMTP id 032336FFC8
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-pf0-f180.google.com (mail-pf0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id CB8A76010B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2016 19:11:30 +0000 (UTC)
-Received: from vz-proxy-l004.mx.aol.com ([64.236.82.152])
-	by vms173015.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O5H00CGZEIKAM50@vms173015.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	11 Apr 2016 13:11:08 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WpDWSorv c=1 sm=1 tr=0	a=a3t/a0oOYlYu/nGe1mf8ZA==:117
-	a=kj9zAlcOel0A:10 a=kziv93cY1bsA:10	a=Q4-j1AaZAAAA:8
-	a=NGrVYnIGI5pdS84U7hEA:9 a=CjuIK1q_8ugA:10
-Received: by 100.15.86.14 with SMTP id 585b2b27; Mon, 11 Apr 2016 18:11:08 GMT
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 15199161F91; Mon,
-	11 Apr 2016 14:11:08 -0400 (EDT)
-Date: Mon, 11 Apr 2016 14:11:08 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-Message-id: <20160411181108.GR16135@denix.org>
-References: <e3io1npq0c1rbqicen5r2dcf.1460055017573@email.android.com>
-MIME-version: 1.0
-In-reply-to: <e3io1npq0c1rbqicen5r2dcf.1460055017573@email.android.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: James Minor <james.minor@ni.com>, openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] ti-wifi-utils: add recipe
+	Mon, 11 Apr 2016 19:36:11 +0000 (UTC)
+Received: by mail-pf0-f180.google.com with SMTP id n1so129738169pfn.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Apr 2016 12:36:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:date:message-id:subject:to;
+	bh=7ERFpT5dm83cZoXmHELiWOE2XsfeNcDcMh18kUTSli8=;
+	b=Rv/BoL55po7RITfKkQlvb5Xb/CPmk/L0x8SEBbDyjbQ7+nHS5u52nUYfnwPPgKgWr7
+	V+fH8E+d5iUky2fwW/ZfGbWnk3dFWj8eiutvecz3ZH5spF3ZgNE+p0ONFHPmJ+HVfo9B
+	FzoZTRiqgdflqv/4lm1W+970B/eHzOg4FKi7wVfhFOs0Sm2aMulp4rPYXBOb3JLqRQHc
+	K0EIJWYQMGNVabj/rlaFFXWcEy4r7q8JF4a9x+zrNsCotZAJ94rfTNjq3osX0LzyyIdq
+	jNucCNl4dcxbSdBE7pDby7RQ19/Z++46N+LwJy5UaIMB6YpGAQJoSBqz055z3ufJVQOI
+	/WRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:date:message-id:subject:to;
+	bh=7ERFpT5dm83cZoXmHELiWOE2XsfeNcDcMh18kUTSli8=;
+	b=dhK4yPTJy3moaL0upyaoA/rBU9OMjqscvgOMbPotGUkSCHb+7fYZZdYAeovKDe65QR
+	YHSY37ZaNXnJ4eEzY/WjwFGcElHvj0gRpMpVDLybLTzVz6K5oP2aWobN2VkCa49gZKFe
+	IV2FApk+NWTT9XfYvACYGE7xtuF3/a3shqbQvpTEHfjimPY5ZU16OxFPzcVu1C1P61gC
+	VNIXeIMU1qJc+En03IWqxIp9ckV6RQ6C1EacNsOLczIjoBi985igNNPtwdZAj3EQSW5j
+	L6IQlkZ943RtcdvHJyhsatAoRM6EZxaGGLwKmx4ilpt/WG10MRH7o0JWPpY4u7KYeotE
+	6FLw==
+X-Gm-Message-State: AD7BkJLW2Q+QY7/wXPXifkvlTMhs1sgr/pPP6O+owTgTn8XxalbhaZyihP+gW/Mru4AohA==
+X-Received: by 10.98.66.155 with SMTP id h27mr34998170pfd.91.1460403372771;
+	Mon, 11 Apr 2016 12:36:12 -0700 (PDT)
+Received: from mail-pf0-f171.google.com (mail-pf0-f171.google.com.
+	[209.85.192.171]) by smtp.gmail.com with ESMTPSA id
+	u2sm38017957pfi.26.2016.04.11.12.36.11
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 11 Apr 2016 12:36:11 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-pf0-f171.google.com with SMTP id e128so129585463pfe.3;
+	Mon, 11 Apr 2016 12:36:11 -0700 (PDT)
+MIME-Version: 1.0
+X-Received: by 10.98.67.139 with SMTP id l11mr35082228pfi.112.1460403370677;
+	Mon, 11 Apr 2016 12:36:10 -0700 (PDT)
+Received: by 10.67.3.163 with HTTP; Mon, 11 Apr 2016 12:36:10 -0700 (PDT)
+Date: Mon, 11 Apr 2016 16:36:10 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKrY-j+KEjRnggfRwpXXZyCWngNZ7xMkL5=Z5QV0b9R+uQ@mail.gmail.com>
+Message-ID: <CAP9ODKrY-j+KEjRnggfRwpXXZyCWngNZ7xMkL5=Z5QV0b9R+uQ@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: [ANN] Yocto Explorer: command line tool to ease the manipulation of files inside Yocto Project based systems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,20 +62,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Apr 2016 19:11:31 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 11 Apr 2016 19:36:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Resending again, since my previous reply got truncated when sending to the 
-list:
+[ DISCLAIMER: I am posting this here as many people may find it
+useful, I would like to apologize in advance for any inconvenience ]
 
-On Thu, Apr 07, 2016 at 11:50:10AM -0700, Denys Dmytriyenko wrote:
-> > http://layers.openembedded.org/layerindex/branch/master/recipes/?q=ti-wifi-utils
-> >
-> > Yes, it is a duplicate. How about keeping the recipe in meta-oe to make
-> > it usable without adding arago distributions layers?
-> 
-> Well, it is currently NOT in the distribution layer, but rather in the
-> application layer... But I guess I'm fine submitting the latest version to
-> meta-oe, once I'm back from ELC.
+ye[1] is a command line tool to ease the manipulation of files under
+the directory structure adopted by O.S. Systems (using repo tool) to
+organize projects that use the Yocto Project. ye provides means to
+quickly locate files and directories into projects' directory tree,
+and act on them.
+
+1. http://code.ossystems.com.br/gitweb?p=apps/ye.git;a=summary
+    http://code.ossystems.com.br/p/apps/ye.git
+
+I won't paste the full documentation about the tool as it would flood
+people not intending to use it, however there is a fairly complete
+documentation in our doc[2] server.
+
+2. http://doc.ossystems.com.br/ye.html
+
+Thanks in advance,
+
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
