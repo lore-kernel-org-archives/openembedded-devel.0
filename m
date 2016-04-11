@@ -1,26 +1,24 @@
 Return-Path: <Guojian.Zhou@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 93D1760249
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id AD55B6FFA4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2016 09:02:04 +0000 (UTC)
+	Mon, 11 Apr 2016 09:02:00 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u3B91xTG003822
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Mon, 11 Apr 2016 02:02:00 -0700
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u3B91ugD020974
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 11 Apr 2016 02:01:57 -0700 (PDT)
 Received: from pek-lpgtest4.wrs.com (128.224.153.84) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Mon, 11 Apr 2016 02:01:59 -0700
+	14.3.248.2; Mon, 11 Apr 2016 02:01:56 -0700
 From: <guojian.zhou@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 11 Apr 2016 17:01:54 +0800
-Message-ID: <1460365314-28326-2-git-send-email-guojian.zhou@windriver.com>
+Date: Mon, 11 Apr 2016 17:01:53 +0800
+Message-ID: <1460365314-28326-1-git-send-email-guojian.zhou@windriver.com>
 X-Mailer: git-send-email 1.7.12.4
-In-Reply-To: <1460365314-28326-1-git-send-email-guojian.zhou@windriver.com>
-References: <1460365314-28326-1-git-send-email-guojian.zhou@windriver.com>
 MIME-Version: 1.0
 Cc: otavio@ossystems.com.br, eric@eukrea.com
-Subject: [meta-browser][PATCH v2] firefox: fix install issue and do_package_qa issues
+Subject: [PATCH] firefox: fix install issue and do_package_qa issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -111,6 +109,6 @@ index 90af5a0..951109d 100644
  PRIVATE_LIBS = "libmozjs.so \
                  libxpcom.so \
 -- 
-1.7.12.4
+2.7.4
 
 
