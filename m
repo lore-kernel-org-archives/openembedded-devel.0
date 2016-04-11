@@ -1,33 +1,26 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by mail.openembedded.org (Postfix) with ESMTP id E3D12607A5
+Return-Path: <Guojian.Zhou@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 93D1760249
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2016 08:59:27 +0000 (UTC)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id 1AAF068A019; Mon, 11 Apr 2016 09:59:25 +0100 (BST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	loki.analogue-micro-ltd.com
-X-Spam-Level: **
-X-Spam-Status: No, score=2.5 required=5.0 tests=ALL_TRUSTED,BAYES_50,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id 9F13F68A019;
-	Mon, 11 Apr 2016 09:59:23 +0100 (BST)
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by zeus.mlbassoc.com (Postfix) with ESMTP id 46B976740102;
-	Mon, 11 Apr 2016 10:59:23 +0200 (CEST)
-To: openembedded-devel@lists.openembedded.org
-References: <20160127145110.GH2574@jama>
-	<1460363642-2233-1-git-send-email-daicy.fnst@cn.fujitsu.com>
-From: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <570B676B.1080905@mlbassoc.com>
-Date: Mon, 11 Apr 2016 10:59:23 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
+	Mon, 11 Apr 2016 09:02:04 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u3B91xTG003822
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Mon, 11 Apr 2016 02:02:00 -0700
+Received: from pek-lpgtest4.wrs.com (128.224.153.84) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Mon, 11 Apr 2016 02:01:59 -0700
+From: <guojian.zhou@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 11 Apr 2016 17:01:54 +0800
+Message-ID: <1460365314-28326-2-git-send-email-guojian.zhou@windriver.com>
+X-Mailer: git-send-email 1.7.12.4
+In-Reply-To: <1460365314-28326-1-git-send-email-guojian.zhou@windriver.com>
+References: <1460365314-28326-1-git-send-email-guojian.zhou@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1460363642-2233-1-git-send-email-daicy.fnst@cn.fujitsu.com>
-Subject: Re: [meta-oe][PATCH] hwdata: add new recipe
+Cc: otavio@ossystems.com.br, eric@eukrea.com
+Subject: [meta-browser][PATCH v2] firefox: fix install issue and do_package_qa issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,109 +33,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Apr 2016 08:59:29 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 11 Apr 2016 09:02:04 -0000
+Content-Type: text/plain
 
-On 2016-04-11 10:34, Dai Caiyun wrote:
-> Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
-> ---
->   meta-oe/recipes-support/hwdata/hwdata_0.284.bb | 67 ++++++++++++++++++++++++++
->   1 file changed, 67 insertions(+)
->   create mode 100644 meta-oe/recipes-support/hwdata/hwdata_0.284.bb
->
-> diff --git a/meta-oe/recipes-support/hwdata/hwdata_0.284.bb b/meta-oe/recipes-support/hwdata/hwdata_0.284.bb
-> new file mode 100644
-> index 0000000..91013b6
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/hwdata/hwdata_0.284.bb
-> @@ -0,0 +1,67 @@
-> +DESCRIPTION = "Hardware identification and configuration data"
-> +HOMEPAGE = "http://git.fedorahosted.org/git/hwdata.git"
-> +SECTION = "System/Base"
-> +
-> +LICENSE = "GPL-2.0+"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
-> +SRC_URI = "https://git.fedorahosted.org/cgit/hwdata.git/snapshot/${PN}-${PV}.tar.gz"
-> +
-> +SRC_URI[md5sum] = "30ba61f058d2c2295fd6b3ab575eb5ce"
-> +SRC_URI[sha256sum] = "bf08c8e6200467669ffc5919141f7a47cc70756c97b819427e60b6c1a0cdcfa6"
-> +
-> +inherit autotools-brokensep
-> +
-> +#PROVIDES by hwdata
-> +#the PROVIDES rules is ignore "pciutils-ids"
-> +
-> +PROVIDES += "pciutils-ids"
-> +
-> +#PROVIDES by hwdata-ivi
-> +PROVIDES += "hwdata-ivi"
-> +
-> +do_prep() {
-> +    cd ${S}
-> +    chmod -Rf a+rX,u+w,g-w,o-w ${S}
+From: Guojian Zhou <guojian.zhou@windriver.com>
 
-What's the point of changing permissions like this?
+1. Fix the firefox install missing the "usr/lib64/firefox/defaults/pref" directory issue.
 
-> +}
-> +
-> +do_patch_append() {
-> +    bb.build.exec_func('do_prep',d)
-> +}
-> +
-> +do_compile() {
-> +    cd ${S}
-> +    LANG=C
-> +    export LANG
-> +    unset DISPLAY
-> +    LD_AS_NEEDED=1; export LD_AS_NEEDED ;
-> +    autotools_do_configure
+| make[1]: Leaving directory `tmp/work/core2-64-wrs-linux/firefox/38.6.1esr-r0/mozilla-esr38/firefox-build-dir'
+| install: target
+'tmp/work/core2-64-wrs-linux/firefox/38.6.1esr-r0/image/usr/lib64/firefox/defaults/pref/' is not a directory: No such file or directory
+| WARNING: tmp/work/core2-64-wrs-linux/firefox/38.6.1esr-r0/temp/run.do_install.329:1 exit 1 from
 
-Why isn't this done in do_configure()?
+2. Add the "--libdir=${libdir}" into the mozconfig to make sure these
+library files could be installed into the /usr/lib64 in the 64 bits OS.
 
-> +}
-> +
-> +do_install() {
-> +    export RPM_BUILD_ROOT=${D}
+WARNING: QA Issue: firefox: Files/directories were installed but not
+shipped in any package:
+  /usr/lib64/firefox
+  /usr/lib64/firefox-devel-38.6/xpcom-config.h
+  /usr/lib64/firefox-devel-38.6/idl
+  /usr/lib64/firefox-devel-38.6/include
+  /usr/lib64/firefox-devel-38.6/bin
 
-What's the point of setting RPM_BUILD_ROOT?  That seems like Fedora creep...
+3. Fix some do_package_qa warning issue which comes from the commit e045c68c41f65ba3b0b22d06022ea6c53e072ab5
 
-> +    cd ${S}
-> +    LANG=C
-> +    export LANG
-> +    unset DISPLAY
-> +    rm -rf ${D}
-> +    mkdir -p ${D}
-> +
-> +    oe_runmake \
-> +        DESTDIR=${D} \
-> +        INSTALL_ROOT=${D} \
-> +        BINDIR=${prefix}/bin \
-> +        install
+NOTE: recipe firefox-38.6.1esr-r0: task do_package_qa: Started
+ERROR: QA Issue: non -staticdev package contains static .a library:
+firefox-dev path
+'work/core2-64-wrs-linux/firefox/38.6.1esr-r0/packages-split/firefox-dev/usr/lib64/firefox-devel-38.6/sdk/lib/libcrmf.a'
+[staticdev]
+ERROR: QA run found fatal errors. Please consider fixing them.
+ERROR: Function failed: do_package_qa
+ERROR: Logfile of failure stored in:
+tmp/work/core2-64-wrs-linux/firefox/38.6.1esr-r0/temp/log.do_package_qa.90631
+NOTE: recipe firefox-38.6.1esr-r0: task do_package_qa: Failed
 
-The lines below are incorrectly indented
-> +        rm -f ${D}${infodir}/dir
-> +        find ${D} -regex ".*\.la$" | xargs rm -f --
-> +        find ${D} -regex ".*\.a$" | xargs rm -f --
-> +        mkdir -p ${D}${sysconfdir}/modprobe.d
-> +        mv ${D}${prefix}/lib/modprobe.d/dist-blacklist.conf \
-> +        ${D}${sysconfdir}/modprobe.d/blacklist.conf
-> +        rm -rf ${D}${prefix}/lib
-> +        install -m644 blacklist.conf ${D}/${sysconfdir}/modprobe.d
-... until here
+Signed-off-by: Guojian Zhou <guojian.zhou@windriver.com>
+---
+ recipes-mozilla/firefox/firefox/mozconfig    | 1 +
+ recipes-mozilla/firefox/firefox_38.6.1esr.bb | 5 +++--
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-> +}
-> +
-> +RDEPENDS_${PN}-ivi += "hwdata"
-> +INSANE_SKIP_${PN}-ivi += "build-deps"
-> +
-> +PACKAGES = "${PN} ${PN}-dbg ${PN}-doc ${PN}-locale ${PN}-ivi"
->
-
-
+diff --git a/recipes-mozilla/firefox/firefox/mozconfig b/recipes-mozilla/firefox/firefox/mozconfig
+index a343cff..5ab877e 100644
+--- a/recipes-mozilla/firefox/firefox/mozconfig
++++ b/recipes-mozilla/firefox/firefox/mozconfig
+@@ -2,6 +2,7 @@
+ 
+ ac_add_options --target=${TARGET_SYS}
+ ac_add_options --prefix=${prefix}
++ac_add_options --libdir=${libdir}
+ 
+ ac_add_options --enable-application=browser
+ ac_add_options --enable-official-branding
+diff --git a/recipes-mozilla/firefox/firefox_38.6.1esr.bb b/recipes-mozilla/firefox/firefox_38.6.1esr.bb
+index 90af5a0..951109d 100644
+--- a/recipes-mozilla/firefox/firefox_38.6.1esr.bb
++++ b/recipes-mozilla/firefox/firefox_38.6.1esr.bb
+@@ -66,6 +66,7 @@ ARM_INSTRUCTION_SET = "arm"
+ do_install_append() {
+     install -d ${D}${datadir}/applications
+     install -d ${D}${datadir}/pixmaps
++    install -d ${D}${libdir}/${PN}/defaults/pref
+ 
+     install -m 0644 ${WORKDIR}/mozilla-firefox.desktop ${D}${datadir}/applications/
+     install -m 0644 ${WORKDIR}/mozilla-firefox.png ${D}${datadir}/pixmaps/
+@@ -81,8 +82,8 @@ FILES_${PN} = "${bindir}/${PN} \
+                ${datadir}/pixmaps/ \
+                ${libdir}/${PN}/* \
+                ${bindir}/defaults"
+-FILES_${PN}-dev += "${datadir}/idl ${bindir}/${PN}-config"
+-
++FILES_${PN}-dev += "${datadir}/idl ${bindir}/${PN}-config ${libdir}/${PN}-devel-*"
++FILES_${PN}-staticdev += "${libdir}/${PN}-devel-*/sdk/lib/*.a"
+ # We don't build XUL as system shared lib, so we can mark all libs as private
+ PRIVATE_LIBS = "libmozjs.so \
+                 libxpcom.so \
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.7.12.4
+
 
