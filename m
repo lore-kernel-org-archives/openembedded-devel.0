@@ -1,46 +1,24 @@
-Return-Path: <ka6sox@gmail.com>
-Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
-	[209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C14477112
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BBAD731C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Apr 2016 20:46:08 +0000 (UTC)
-Received: by mail-vk0-f41.google.com with SMTP id k1so190483115vkb.0
+	Mon, 11 Apr 2016 06:46:24 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u3B6kPN8031980
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Apr 2016 13:46:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to; 
-	bh=xCTj4PvkY5Defy3BzUpFsfaP1a1oA3PxyjzvQ6FKPek=;
-	b=QMMlU+ZkpnLI6TNH4mPNsEZq3oYvaNPWiYtXGVqgMThQM+k+qdmty1gKBa7D4RtURT
-	O+rOVwgD1oCNqmPlaCar4UL7y/zLhzX9H1d9lG5PA4Q5TL9vG8BJTtxd/pPlsC2ZbCgu
-	5GtS8xyqAMA80cC+f7mzGiRNnFX9boFh2mxurbKMPTvbZHW5jqvcKoHdcbalxyD7dZSj
-	4xqMvwTAaSIghwWPSjeTKEx7JMo+EVW4H/ucQdJl4eVEGCfLq17zImqsQI1efDbngUd9
-	2xUrhIwKaEE45rDnxyC4rmk7O61iESZuKws3iB/hX0LWfHM9vQBC5yENGzDxvQEtWPGQ
-	sJyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to;
-	bh=xCTj4PvkY5Defy3BzUpFsfaP1a1oA3PxyjzvQ6FKPek=;
-	b=GuyvACZhjb40h1mHgxpY9UPiW3ifLmmRCZoKi0HgGOcyupyKSio3KdCly4BUGcjRid
-	T9VL+MNcKtA6pI62owq841JTdugS+Uc9QoAqPlXGFKM/ro20zG5nR1ntdY0AR+SfwBmy
-	O7tleLhBPDiyBgfKcMc8I31jsA1nJ48d+eYEDI4YXh+3oivkgNLxf1PjEO0ywZUH4WBo
-	SghJ7HgKvxsKjWVoFw8hYOkwIBajYWQeQTkV0SyN4HjnZ1NspD3HqpkWZ62f7iH8MGbn
-	cvnDXuqfC/SRrks4x7Je2ZPQ86+rleUQJvTuOgIdVkvyY+8DqHyCdgqFAI10qD/zq4xh
-	7GwQ==
-X-Gm-Message-State: AD7BkJJIi9aGeBan9liOrEBJCJFlptGTfgIlLjKdGPi45TZCjrJjNPeQ8SamRdXMkZ8BNYrbX3q8FCBCPUVLKw==
+	Sun, 10 Apr 2016 23:46:25 -0700
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Sun, 10 Apr 2016 23:46:24 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 11 Apr 2016 14:39:46 +0800
+Message-ID: <1460356786-15153-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.6.1
 MIME-Version: 1.0
-X-Received: by 10.176.3.104 with SMTP id 95mr10031824uat.0.1460321169013; Sun,
-	10 Apr 2016 13:46:09 -0700 (PDT)
-Received: by 10.103.13.6 with HTTP; Sun, 10 Apr 2016 13:46:08 -0700 (PDT)
-In-Reply-To: <570A8618.6000906@balister.org>
-References: <20160410061425.GA9652@jama>
-	<570A8618.6000906@balister.org>
-Date: Sun, 10 Apr 2016 13:46:08 -0700
-Message-ID: <CAHQecY5K9+YDfSZgZt5WU-ywYhjZmDw=1Acwp=7VDu4giX--UQ@mail.gmail.com>
-From: Tom King <ka6sox@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: State of bitbake world, test-dependencies 2016-04-10
+Subject: [meta-java][PATCH] icedtea7-native: backport patch of jaxb to fix NullPointerException
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,146 +31,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Apr 2016 20:46:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 11 Apr 2016 06:46:25 -0000
+Content-Type: text/plain
 
-http://logs.nslu2-linux.org/buildlogs/oe/world/
+From: Kai Kang <kai.kang@windriver.com>
 
-On Sun, Apr 10, 2016 at 9:58 AM, Philip Balister <philip@balister.org>
-wrote:
+Backport patch of jaxb from
 
-> Where are the log files?
->
-> Philip
->
-> On 04/10/2016 02:14 AM, Martin Jansa wrote:
-> > This time complete test of all recipes, for both qemux86 and qemuarm.
-> >
-> > qemux86:
-> >
-> > Found differences:
-> > WARN: jasper: jasper-bin rdepends on libgl-mesa, but it isn't a build
-> dependency?
-> > WARN: jasper: jasper-bin rdepends on libglu, but it isn't a build
-> dependency?
-> > WARN: jasper: jasper-bin rdepends on mesa-glut, but it isn't a build
-> dependency?
-> > WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
-> > WARN: libdrm: libdrm-tests rdepends on cunit, but it isn't a build
-> dependency?
-> > WARN: libdrm: libdrm-tests rdepends on libdrm-amdgpu, but it isn't a
-> build dependency?
-> > WARN: enchant: enchant rdepends on hunspell, but it isn't a build
-> dependency?
-> > Found errors:
-> > ERROR: 50 issues were found in these recipes:
-> chkconfig-alternatives-native core-image-rt core-image-rt-sdk
-> core-image-sato-dev core-image-sato-sdk core-image-sato-sdk-ptest cpupower
-> cyrus-sasl enchant fontforge gtkmathview jasper libdrm lttng-modules
-> meta-ide-support meta-world-pkgdata nativesdk-zeroc-ice netmap
-> netmap-modules openlmi-networking openlmi-providers openlmi-storage
-> packagegroup-core-tools-profile perf proxy-libintl python-pyparsing samba
-> sblim-sfcb tiptop zeroc-ice
-> >
-> > 2_max/failed/chkconfig-alternatives-native.log
-> > 2_max/failed/core-image-rt-sdk.log
-> > 2_max/failed/core-image-rt.log
-> > 2_max/failed/core-image-sato-dev.log
-> > 2_max/failed/core-image-sato-sdk-ptest.log
-> > 2_max/failed/core-image-sato-sdk.log
-> > 2_max/failed/cpupower.log
-> > 2_max/failed/cyrus-sasl.log
-> > 2_max/failed/fontforge.log
-> > 2_max/failed/lttng-modules.log
-> > 2_max/failed/meta-world-pkgdata.log
-> > 2_max/failed/nativesdk-zeroc-ice.log
-> > 2_max/failed/netmap-modules.log
-> > 2_max/failed/netmap.log
-> > 2_max/failed/openlmi-networking.log
-> > 2_max/failed/openlmi-providers.log
-> > 2_max/failed/openlmi-storage.log
-> > 2_max/failed/packagegroup-core-tools-profile.log
-> > 2_max/failed/proxy-libintl.log
-> > 2_max/failed/zeroc-ice.log
-> >
-> > 3_min/failed/core-image-rt-sdk.log
-> > 3_min/failed/core-image-rt.log
-> > 3_min/failed/core-image-sato-dev.log
-> > 3_min/failed/core-image-sato-sdk-ptest.log
-> > 3_min/failed/core-image-sato-sdk.log
-> > 3_min/failed/cyrus-sasl.log
-> > 3_min/failed/fontforge.log
-> > 3_min/failed/gtkmathview.log
-> > 3_min/failed/meta-world-pkgdata.log
-> > 3_min/failed/nativesdk-zeroc-ice.log
-> > 3_min/failed/perf.log
-> > 3_min/failed/proxy-libintl.log
-> > 3_min/failed/python-pyparsing.log
-> > 3_min/failed/sblim-sfcb.log
-> > 3_min/failed/zeroc-ice.log
-> >
-> > qemuarm:
-> >
-> > Found differences:
-> > WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
-> > WARN: libdrm: libdrm-tests rdepends on cunit, but it isn't a build
-> dependency?
-> > WARN: libdrm: libdrm-tests rdepends on libdrm-amdgpu, but it isn't a
-> build dependency?
-> > WARN: enchant: enchant rdepends on hunspell, but it isn't a build
-> dependency?
-> > Found errors:
-> > ERROR: 55 issues were found in these recipes:
-> chkconfig-alternatives-native core-image-minimal-initramfs core-image-rt
-> core-image-rt-sdk core-image-sato-dev core-image-sato-sdk
-> core-image-sato-sdk-ptest core-image-testmaster-initramfs cyrus-sasl
-> enchant fontforge gtkmathview ipmiutil libdrm meta-world-pkgdata
-> nativesdk-zeroc-ice netmap-modules perf proxy-libintl remake samba
-> sblim-sfcb zeroc-ice
-> >
-> > 2_max/failed/chkconfig-alternatives-native.log
-> > 2_max/failed/core-image-minimal-initramfs.log
-> > 2_max/failed/core-image-rt-sdk.log
-> > 2_max/failed/core-image-rt.log
-> > 2_max/failed/core-image-sato-dev.log
-> > 2_max/failed/core-image-sato-sdk-ptest.log
-> > 2_max/failed/core-image-sato-sdk.log
-> > 2_max/failed/core-image-testmaster-initramfs.log
-> > 2_max/failed/cyrus-sasl.log
-> > 2_max/failed/fontforge.log
-> > 2_max/failed/ipmiutil.log
-> > 2_max/failed/meta-world-pkgdata.log
-> > 2_max/failed/nativesdk-zeroc-ice.log
-> > 2_max/failed/netmap-modules.log
-> > 2_max/failed/proxy-libintl.log
-> > 2_max/failed/remake.log
-> > 2_max/failed/zeroc-ice.log
-> >
-> > 3_min/failed/core-image-minimal-initramfs.log
-> > 3_min/failed/core-image-rt-sdk.log
-> > 3_min/failed/core-image-rt.log
-> > 3_min/failed/core-image-sato-dev.log
-> > 3_min/failed/core-image-sato-sdk-ptest.log
-> > 3_min/failed/core-image-sato-sdk.log
-> > 3_min/failed/core-image-testmaster-initramfs.log
-> > 3_min/failed/cyrus-sasl.log
-> > 3_min/failed/fontforge.log
-> > 3_min/failed/gtkmathview.log
-> > 3_min/failed/ipmiutil.log
-> > 3_min/failed/meta-world-pkgdata.log
-> > 3_min/failed/nativesdk-zeroc-ice.log
-> > 3_min/failed/perf.log
-> > 3_min/failed/proxy-libintl.log
-> > 3_min/failed/remake.log
-> > 3_min/failed/sblim-sfcb.log
-> > 3_min/failed/zeroc-ice.log
-> >
-> >
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+https://java.net/projects/jaxb/sources/v2/revision/1864898
+
+to fix NullPointerException.
+
+See https://java.net/jira/browse/JAXB-860 as well.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ recipes-core/icedtea/icedtea7-native.inc            |  3 +++
+ .../jaxws_fix_NullPointerException.patch            | 21 +++++++++++++++++++++
+ 2 files changed, 24 insertions(+)
+ create mode 100644 recipes-core/icedtea/openjdk-7-03b147/jaxws_fix_NullPointerException.patch
+
+diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
+index cb6b5d3..0ffe5d5 100644
+--- a/recipes-core/icedtea/icedtea7-native.inc
++++ b/recipes-core/icedtea/icedtea7-native.inc
+@@ -33,6 +33,7 @@ SRC_URI = " \
+   ${ICEDTEA_PATCHES} \
+   ${OPENJDK_PATCHES} \
+   file://allow-headless-build.patch;striplevel=0 \
++  file://jaxws_fix_NullPointerException.patch;apply=no \
+   "
+ 
+ S = "${WORKDIR}/${ICEDTEA}"
+@@ -154,6 +155,8 @@ do_configure_append() {
+ 	done
+ 	${POST_CONFIGURE_CLEAN_X11}
+ 	oe_runmake patch-boot
++
++	patch -p1 < ${WORKDIR}/jaxws_fix_NullPointerException.patch
+ }
+ 
+ EXTRA_OEMAKE = ' \
+diff --git a/recipes-core/icedtea/openjdk-7-03b147/jaxws_fix_NullPointerException.patch b/recipes-core/icedtea/openjdk-7-03b147/jaxws_fix_NullPointerException.patch
+new file mode 100644
+index 0000000..ba47036
+--- /dev/null
++++ b/recipes-core/icedtea/openjdk-7-03b147/jaxws_fix_NullPointerException.patch
+@@ -0,0 +1,21 @@
++Upstream-Status: Backport [https://java.net/projects/jaxb/sources/v2/revision/1864898]
++
++Backport patch of jaxb to fix NullPointerException issue.
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++diff --git a/openjdk/jaxws/sources/jaxws_src/src/com/sun/xml/internal/bind/v2/runtime/ClassBeanInfoImpl.java b/openjdk/jaxws/sources/jaxws_src/src/com/sun/xml/internal/bind/v2/runtime/ClassBeanInfoImpl.java
++index dc88d45..cc4f6e9 100644
++--- a/openjdk/jaxws/sources/jaxws_src/src/com/sun/xml/internal/bind/v2/runtime/ClassBeanInfoImpl.java
+++++ b/openjdk/jaxws/sources/jaxws_src/src/com/sun/xml/internal/bind/v2/runtime/ClassBeanInfoImpl.java
++@@ -187,7 +187,9 @@ public final class ClassBeanInfoImpl<BeanT> extends JaxBeanInfo<BeanT> implement
++     private void checkOverrideProperties(Property p) {
++         ClassBeanInfoImpl bi = this;
++         while ((bi = bi.superClazz) != null) {
++-            for (Property superProperty : bi.properties) {
+++            Property[] props = bi.properties;
+++            if (props == null) break;
+++            for (Property superProperty : props) {
++                 if (superProperty == null) break;
++                 String spName = superProperty.getFieldName();
++                 if ((spName != null) && (spName.equals(p.getFieldName()))) {
+-- 
+2.6.1
+
 
