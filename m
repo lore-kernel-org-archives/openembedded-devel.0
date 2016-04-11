@@ -1,54 +1,32 @@
-Return-Path: <samuli.piippo@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D27260053
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 901177316D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2016 12:54:31 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id l6so21050462wml.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2016 05:54:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=WmqqFWcnQ7fceJl7zsyXI7WGsm/G/fRIRhvT2E6GOTo=;
-	b=kJZuKbekn3PW2cFeSd/ssdr17K1Z9RNBrT9OsOGiG1bovqxaIwknDdhEz6xZeDDVQy
-	VTut9KPsD4Y0LLjfFT6HAc1G7RIek718d1fErnawIH4UQQjLp5JzFPVotUYNNkWttLXo
-	JL5hrBT9ak2jwI2YyfLjthZ/bNHVErpnn+fE3snbi50Q2sczt5ii55DN7Xmri6tlZpW2
-	DWSUwD2VCcgISMXe54r6tX376loimjVgXhqQr/r6p1BXdA/5dkLYRYxGqHQ6ZmqU0zbb
-	dO6J2mUr2ffwdrf/oJZx8Ztv5ZcaQaONXum3UDAgoOvvg6UegeoyJYS4DBdvU5EkOyhB
-	FxVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=WmqqFWcnQ7fceJl7zsyXI7WGsm/G/fRIRhvT2E6GOTo=;
-	b=erE7GBlsf+erHUujiP3IS24olHYaBDJBlrQ/GIdKWR2tw2LyhMPdvzC9rYJGXi7Yb4
-	Jz4MMf7N1I24o7/4CpqptqvohAcktheqbEc/u6E3Lg7U5v2itQATo+iFROyBzQoZhd2N
-	iwAzKKXCWl7OOXy+2xA7HLQMefO/HhrYFKlkNf1xQnpN7Bpp/CpzvRfr2+f8HmeIbstI
-	XZb8Ddeqik3Y1f/+WmUrXbwW0XinI9WY/71pbMF2yET0VWvlLUWwbsjLy1yjhPDcY8W1
-	x9kibOD2IS1H1Ar1q8yKpeiEOOmt/Inu4mgkKqV3yrS3HLXH+KbGK/eIbGt+7ixlnXSv
-	f5fQ==
-X-Gm-Message-State: AD7BkJJFekEA+vkK2zBWEHXBoEPG8Fbfb6FqFpcC08t9tpliKqNtWs7OR2e5zOss5tMQxQ==
-X-Received: by 10.28.35.82 with SMTP id j79mr18533565wmj.78.1460379270110;
-	Mon, 11 Apr 2016 05:54:30 -0700 (PDT)
-Received: from [10.9.5.47] ([91.217.248.11])
-	by smtp.googlemail.com with ESMTPSA id
-	gg7sm27778501wjd.10.2016.04.11.05.54.28
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 11 Apr 2016 05:54:29 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org
-References: <1460317290-4787-1-git-send-email-schnitzeltony@googlemail.com>
-	<1460317290-4787-32-git-send-email-schnitzeltony@googlemail.com>
-	<570B3E08.1070908@theqtcompany.com>
-	<CALbNGRQfDnvkO4UT69fF9nPRQzf9L3Z2xZ7LkhCgGX+kDgk4uw@mail.gmail.com>
-From: Samuli Piippo <samuli.piippo@gmail.com>
-Message-ID: <570B9EA0.1010206@gmail.com>
-Date: Mon, 11 Apr 2016 15:54:56 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
+	Mon, 11 Apr 2016 13:42:48 +0000 (UTC)
+Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
+	by relay1.mentorg.com with esmtp 
+	id 1apc75-0002af-HP from Joe_MacDonald@mentor.com ;
+	Mon, 11 Apr 2016 06:42:47 -0700
+Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
+	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 11 Apr 2016 06:42:47 -0700
+Received: by burninator (Postfix, from userid 1000)	id 2768A58044A; Mon, 11
+	Apr 2016 09:42:46 -0400 (EDT)
+Date: Mon, 11 Apr 2016 09:42:46 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Mike Looijmans <mike.looijmans@topic.nl>
+Message-ID: <20160411134245.GD5884@mentor.com>
+References: <1459585331-22707-1-git-send-email-mike.looijmans@topic.nl>
+	<5703588F.1040406@topic.nl> <20160406171431.GB5060@mentor.com>
+	<570BA7BB.5090504@topic.nl>
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRQfDnvkO4UT69fF9nPRQzf9L3Z2xZ7LkhCgGX+kDgk4uw@mail.gmail.com>
-Subject: Re: [meta-qt5][PATCH v2 31/31] qtquickcontrols2: initial add 5.6.0
+In-Reply-To: <570BA7BB.5090504@topic.nl>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] waf-cross-answers: Fix faulty link cross-answers-mipsel.txt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,67 +39,187 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Apr 2016 12:54:31 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 11 Apr 2016 13:42:49 -0000
+X-Groupsio-MsgNum: 60943
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="1sNVjLsmu1MXqwQ/"
+Content-Disposition: inline
 
-On 11.04.2016 14:09, Andreas Müller wrote:
-> On Mon, Apr 11, 2016 at 8:02 AM, Samuli Piippo
-> <samuli.piippo@theqtcompany.com> wrote:
->> On 10.04.2016 22:41, Andreas Müller wrote:
->>>
->>> Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
->>> ---
->>>    recipes-qt/qt5/qtquickcontrols2_git.bb | 15 +++++++++++++++
->>>    1 file changed, 15 insertions(+)
->>>    create mode 100644 recipes-qt/qt5/qtquickcontrols2_git.bb
->>>
->>> diff --git a/recipes-qt/qt5/qtquickcontrols2_git.bb
->>> b/recipes-qt/qt5/qtquickcontrols2_git.bb
->>> new file mode 100644
->>> index 0000000..41c781e
->>> --- /dev/null
->>> +++ b/recipes-qt/qt5/qtquickcontrols2_git.bb
->>> @@ -0,0 +1,15 @@
->>> +require qt5.inc
->>> +require qt5-git.inc
->>> +
->>> +LICENSE = "GFDL-1.3 & BSD & LGPL-3.0 | GPL-3.0"
->>> +LIC_FILES_CHKSUM = " \
->>> +    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
->>> +    file://LICENSE.LGPLv3;md5=8ba7f2099d17d636d5fcc8303bb17587 \
->>> +    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
->>> +"
->>> +
->>> +DEPENDS += "qtdeclarative"
->>> +
->>> +FILES_${PN}-qmlplugins += "${libdir}/qt5/qml/Qt"
->>
->>
->> all /designer/ files should go the ${PN}-designer package, since they are
->> not needed in the target.
->> Should be added by including one more level of subfolders in qt5.inc
->>
->>> +
->>> +SRCREV = "7fc567eda8a187e365f4c29c6e8f08440bf31218"
->>>
->> --
-> I checked the image of qtquickcontrols2 for files matching your
-> comment but can't find any. What files do you mean?
->
-> Andreas
->
+--1sNVjLsmu1MXqwQ/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Without the FILES_${PN}-qmlplugins addition, bitbake throws error:
+[Re: [PATCH] waf-cross-answers: Fix faulty link cross-answers-mipsel.txt] O=
+n 16.04.11 (Mon 15:33) Mike Looijmans wrote:
 
-ERROR: QA Issue: qtquickcontrols2: Files/directories were installed but 
-not shipped in any package:
-   /usr/lib/qml/Qt/labs/controls/designer/qtlabscontrols.metainfo
+> On 06-04-16 19:14, Joe MacDonald wrote:
+> >Hi Mike,
+> >
+> >[Re: [PATCH] waf-cross-answers: Fix faulty link cross-answers-mipsel.txt=
+] On 16.04.05 (Tue 08:17) Mike Looijmans wrote:
+> >
+> >>Just a reminder that currently "waf" is broken and still won't work on
+> >>mipsel platforms without this bugfix.
+> >
+> >I merged this for you and pushed it a few minutes ago.  I don't have any
+> >MIPS hardware to test this on but I'm trusting that since you're
+> >reporting it's a build failure that validating for the Edgerouter is a
+> >valid test case.  Is that true?
+>=20
+> Don't know that particular box,
 
-This should go to ${PN}-qmldesigner package, as well as all the other 
-files from /usr/lib/qml/Qt/labs/controls/designer/* that are now in 
-${PN}-qmlplugins
-See FILES_${PN}-qmldesigner in qt5.inc
+It's the only MIPS machine I could find in meta-yocto-bsp.  I don't know
+anything about it either.
 
--samuli
+> but if it failed to build (because it's mipsel and reports a missing
+> file) before this patch, then yes, that's okay as a test.
 
+Okay, let me know if something still seems busted and we'll try to turn
+it around quickly for you.
+
+-J.
+
+>=20
+> M.
+>=20
+>=20
+> >
+> >>
+> >>
+> >>On 02-04-16 10:22, Mike Looijmans wrote:
+> >>>Apparently something was wrong in the patch "waf-cross-answers:
+> >>>Add cross-answers-mipsel.txt". and it created a dead symlink.
+> >>>Solve it by just copying the cross-answers-mips.txt instead of
+> >>>linking it.
+> >>>
+> >>>Fixes: 0898fb01ccea229cb0c64796b62f20a7c596ac0b
+> >>>
+> >>>Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+> >>>---
+> >>>  .../waf-cross-answers/cross-answers-mipsel.txt     | 40 ++++++++++++=
++++++++++-
+> >>>  1 file changed, 39 insertions(+), 1 deletion(-)
+> >>>  mode change 120000 =3D> 100644 meta-networking/files/waf-cross-answe=
+rs/cross-answers-mipsel.txt
+> >>>
+> >>>diff --git a/meta-networking/files/waf-cross-answers/cross-answers-mip=
+sel.txt b/meta-networking/files/waf-cross-answers/cross-answers-mipsel.txt
+> >>>deleted file mode 120000
+> >>>index 59b4337..0000000
+> >>>--- a/meta-networking/files/waf-cross-answers/cross-answers-mipsel.txt
+> >>>+++ /dev/null
+> >>>@@ -1 +0,0 @@
+> >>>-cross-answers-mips.txt
+> >>>diff --git a/meta-networking/files/waf-cross-answers/cross-answers-mip=
+sel.txt b/meta-networking/files/waf-cross-answers/cross-answers-mipsel.txt
+> >>>new file mode 100644
+> >>>index 0000000..18bfa02
+> >>>--- /dev/null
+> >>>+++ b/meta-networking/files/waf-cross-answers/cross-answers-mipsel.txt
+> >>>@@ -0,0 +1,39 @@
+> >>>+Checking uname sysname type: "Linux"
+> >>>+Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
+> >>>+Checking simple C program: "hello world"
+> >>>+rpath library support: OK
+> >>>+-Wl,--version-script support: OK
+> >>>+Checking getconf LFS_CFLAGS: NO
+> >>>+Checking correct behavior of strtoll: NO
+> >>>+Checking for working strptime: OK
+> >>>+Checking for C99 vsnprintf: "1"
+> >>>+Checking for HAVE_SHARED_MMAP: OK
+> >>>+Checking for HAVE_MREMAP: OK
+> >>>+Checking for HAVE_SECURE_MKSTEMP: OK
+> >>>+Checking for HAVE_IFACE_GETIFADDRS: NO
+> >>>+Checking for HAVE_IFACE_IFCONF: NO
+> >>>+Checking for HAVE_IFACE_IFREQ: NO
+> >>>+Checking for large file support without additional flags: NO
+> >>>+Checking for -D_FILE_OFFSET_BITS=3D64: OK
+> >>>+Checking for HAVE_INCOHERENT_MMAP: NO
+> >>>+Checking value of NSIG: "128"
+> >>>+Checking value of _NSIG: "128"
+> >>>+Checking value of SIGRTMAX: "127"
+> >>>+Checking value of SIGRTMIN: "34"
+> >>>+Checking whether the WRFILE -keytab is supported: OK
+> >>>+Checking for kernel change notify support: OK
+> >>>+Checking for Linux kernel oplocks: OK
+> >>>+Checking for kernel share modes: OK
+> >>>+Checking whether POSIX capabilities are available: OK
+> >>>+Checking if can we convert from CP850 to UCS-2LE: OK
+> >>>+Checking if can we convert from UTF-8 to UCS-2LE: OK
+> >>>+vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
+> >>>+Checking whether we can use Linux thread-specific credentials: OK
+> >>>+Checking whether fcntl locking is available: OK
+> >>>+Checking for the maximum value of the 'time_t' type: NO
+> >>>+Checking whether the realpath function allows a NULL argument: OK
+> >>>+Checking for ftruncate extend: OK
+> >>>+getcwd takes a NULL argument: OK
+> >>>+Checking for small off_t: NO
+> >>>+Checking whether blkcnt_t is 32 bit: NO
+> >>>+Checking whether blkcnt_t is 64 bit: OK
+> >>>
+> >>
+> >>
+> >>
+> >>Kind regards,
+> >>
+> >>Mike Looijmans
+> >>System Expert
+> >>
+> >>TOPIC Embedded Products
+> >>Eindhovenseweg 32-C, NL-5683 KH Best
+> >>Postbus 440, NL-5680 AK Best
+> >>Telefoon: +31 (0) 499 33 69 79
+> >>E-mail: mike.looijmans@topicproducts.com
+> >>Website: www.topicproducts.com
+> >>
+> >>Please consider the environment before printing this e-mail
+> >>
+> >>
+> >>
+> >>
+> >>
+> >
+>=20
+>=20
+>=20
+> Kind regards,
+>=20
+> Mike Looijmans
+> System Expert
+>=20
+> TOPIC Embedded Products
+> Eindhovenseweg 32-C, NL-5683 KH Best
+> Postbus 440, NL-5680 AK Best
+> Telefoon: +31 (0) 499 33 69 79
+> E-mail: mike.looijmans@topicproducts.com
+> Website: www.topicproducts.com
+>=20
+> Please consider the environment before printing this e-mail
+>=20
+>=20
+>=20
+>=20
+>=20
+
+--=20
+-Joe MacDonald.
+:wq
+
+--1sNVjLsmu1MXqwQ/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJXC6nVAAoJEEn8ffcsOfaWSrYIAItKIGEOsS1hqdoxb8EkMwSJ
+z2W1LsSQb5K+nTBUuZMn9vp5bMI7PpupdjtEP0Kw/6ebA+FxHMP/QPcHJozahffP
+vL8M8h53QUtr/rW3T2dmD2+szoRtzun6BVVODrz5eygBO5X5oNTVGfDuTMsBgTe2
+W5GBfoIWn2oBe7P3cCIgMyHj+hYKYSqAjtztwqQYuDsM8qxu0RpZEH2gO2s6jyoy
+e9n14juw/nXwnbppg8SSeeI6ZxeUx+z0yg6Z8tbaVRes62sozfpO9iWybOOoBmze
+EyG+wwsA1bPAcPcHeGk5NR0MkgdusQtm7LeizkeweTAiHEU685yLi2xFKkZsZOQ=
+=TsOu
+-----END PGP SIGNATURE-----
+
+--1sNVjLsmu1MXqwQ/--
