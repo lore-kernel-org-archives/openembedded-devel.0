@@ -1,24 +1,49 @@
-Return-Path: <Guojian.Zhou@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id AD55B6FFA4
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
+	[209.85.213.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 9BA9C601D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2016 09:02:00 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u3B91ugD020974
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 11 Apr 2016 02:01:57 -0700 (PDT)
-Received: from pek-lpgtest4.wrs.com (128.224.153.84) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Mon, 11 Apr 2016 02:01:56 -0700
-From: <guojian.zhou@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 11 Apr 2016 17:01:53 +0800
-Message-ID: <1460365314-28326-1-git-send-email-guojian.zhou@windriver.com>
-X-Mailer: git-send-email 1.7.12.4
+	Mon, 11 Apr 2016 11:09:23 +0000 (UTC)
+Received: by mail-vk0-f65.google.com with SMTP id a6so13832946vkh.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Apr 2016 04:09:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-transfer-encoding;
+	bh=w8nbtEaVPCHXuHvN1kLhyn8/SB4WvnZaY3eqI1OP66U=;
+	b=vdiv048DmCY/dVg82V9OaI6uwAkjFxd9Sv16DdvOtQy9UV+F56gFK2BLXRqpG2e1z4
+	Q4JAhxDzvEuHrSuvFZTqlx/fzTyHEs8IA6XBvGH1GeMFRl+mwbtZoWWEuCClyPlf1JYI
+	fUG9DWOaTJmlDvdtmRd1oOCEJM1FeC4nAF0DKUwu6Wa7VxlRgnxhfyZ492vax40I4Owm
+	b160e/LkekRHEw89/d0YZ6DUKORyL0VXMIv163xU0SVf3vPo2orP3o/hNGosa1qkc4CM
+	ZEYXjJCem273kKRUPJVStpwWRZee4Df0mMZSClV5itgw4RltBvtKk8BGck5BW0s40A9f
+	NSkg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-transfer-encoding;
+	bh=w8nbtEaVPCHXuHvN1kLhyn8/SB4WvnZaY3eqI1OP66U=;
+	b=Wz7W8emghhlc/uUEM7JDiNKdZgodPVQ3I7B+raJKOJCbl6o8f+bzOwJucM1GDlDCPU
+	beaJgUxWV1QOdRk/esRwC0RN4H3ZE6MlFyrRVYB9aU/18xAJQlAup7Oe81qvplnWA2MX
+	0JpuyQaryNhHldy+P6HmZ5EXqC8owaONJQTJ6OJtlWS+3wUsXxjT3U3Cex5TK3WG3hn3
+	sLGzCctqYi9Hs9L2JvpvEbvqjVKeCXFHT2mUAFMsBc545WMXZ8keln3kegmoo84SItD5
+	zbFyr4LZFbKvTw9rA19Kt9x6zaxlkjJyi5fGhia689HboQa3FagPjFdn/pALRkOELRhG
+	l3qg==
+X-Gm-Message-State: AD7BkJIl9uRrHIBhGX/pbAYbh60Vqr2Xmk3VQIEsnBkVQ2tTN81L+XgGevwopmilUkcY7a1OW1SKR6kprCS+6w==
 MIME-Version: 1.0
-Cc: otavio@ossystems.com.br, eric@eukrea.com
-Subject: [PATCH] firefox: fix install issue and do_package_qa issues
+X-Received: by 10.159.34.71 with SMTP id 65mr11100452uad.103.1460372963858;
+	Mon, 11 Apr 2016 04:09:23 -0700 (PDT)
+Received: by 10.159.35.65 with HTTP; Mon, 11 Apr 2016 04:09:23 -0700 (PDT)
+In-Reply-To: <570B3E08.1070908@theqtcompany.com>
+References: <1460317290-4787-1-git-send-email-schnitzeltony@googlemail.com>
+	<1460317290-4787-32-git-send-email-schnitzeltony@googlemail.com>
+	<570B3E08.1070908@theqtcompany.com>
+Date: Mon, 11 Apr 2016 13:09:23 +0200
+Message-ID: <CALbNGRQfDnvkO4UT69fF9nPRQzf9L3Z2xZ7LkhCgGX+kDgk4uw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH v2 31/31] qtquickcontrols2: initial add 5.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,84 +56,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Apr 2016 09:02:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 11 Apr 2016 11:09:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Guojian Zhou <guojian.zhou@windriver.com>
+On Mon, Apr 11, 2016 at 8:02 AM, Samuli Piippo
+<samuli.piippo@theqtcompany.com> wrote:
+> On 10.04.2016 22:41, Andreas M=C3=BCller wrote:
+>>
+>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>> ---
+>>   recipes-qt/qt5/qtquickcontrols2_git.bb | 15 +++++++++++++++
+>>   1 file changed, 15 insertions(+)
+>>   create mode 100644 recipes-qt/qt5/qtquickcontrols2_git.bb
+>>
+>> diff --git a/recipes-qt/qt5/qtquickcontrols2_git.bb
+>> b/recipes-qt/qt5/qtquickcontrols2_git.bb
+>> new file mode 100644
+>> index 0000000..41c781e
+>> --- /dev/null
+>> +++ b/recipes-qt/qt5/qtquickcontrols2_git.bb
+>> @@ -0,0 +1,15 @@
+>> +require qt5.inc
+>> +require qt5-git.inc
+>> +
+>> +LICENSE =3D "GFDL-1.3 & BSD & LGPL-3.0 | GPL-3.0"
+>> +LIC_FILES_CHKSUM =3D " \
+>> +    file://LICENSE.FDL;md5=3D6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
+>> +    file://LICENSE.LGPLv3;md5=3D8ba7f2099d17d636d5fcc8303bb17587 \
+>> +    file://LICENSE.GPLv3;md5=3D40f9bf30e783ddc201497165dfb32afb \
+>> +"
+>> +
+>> +DEPENDS +=3D "qtdeclarative"
+>> +
+>> +FILES_${PN}-qmlplugins +=3D "${libdir}/qt5/qml/Qt"
+>
+>
+> all /designer/ files should go the ${PN}-designer package, since they are
+> not needed in the target.
+> Should be added by including one more level of subfolders in qt5.inc
+>
+>> +
+>> +SRCREV =3D "7fc567eda8a187e365f4c29c6e8f08440bf31218"
+>>
+> --
+I checked the image of qtquickcontrols2 for files matching your
+comment but can't find any. What files do you mean?
 
-1. Fix the firefox install missing the "usr/lib64/firefox/defaults/pref" directory issue.
-
-| make[1]: Leaving directory `tmp/work/core2-64-wrs-linux/firefox/38.6.1esr-r0/mozilla-esr38/firefox-build-dir'
-| install: target
-'tmp/work/core2-64-wrs-linux/firefox/38.6.1esr-r0/image/usr/lib64/firefox/defaults/pref/' is not a directory: No such file or directory
-| WARNING: tmp/work/core2-64-wrs-linux/firefox/38.6.1esr-r0/temp/run.do_install.329:1 exit 1 from
-
-2. Add the "--libdir=${libdir}" into the mozconfig to make sure these
-library files could be installed into the /usr/lib64 in the 64 bits OS.
-
-WARNING: QA Issue: firefox: Files/directories were installed but not
-shipped in any package:
-  /usr/lib64/firefox
-  /usr/lib64/firefox-devel-38.6/xpcom-config.h
-  /usr/lib64/firefox-devel-38.6/idl
-  /usr/lib64/firefox-devel-38.6/include
-  /usr/lib64/firefox-devel-38.6/bin
-
-3. Fix some do_package_qa warning issue which comes from the commit e045c68c41f65ba3b0b22d06022ea6c53e072ab5
-
-NOTE: recipe firefox-38.6.1esr-r0: task do_package_qa: Started
-ERROR: QA Issue: non -staticdev package contains static .a library:
-firefox-dev path
-'work/core2-64-wrs-linux/firefox/38.6.1esr-r0/packages-split/firefox-dev/usr/lib64/firefox-devel-38.6/sdk/lib/libcrmf.a'
-[staticdev]
-ERROR: QA run found fatal errors. Please consider fixing them.
-ERROR: Function failed: do_package_qa
-ERROR: Logfile of failure stored in:
-tmp/work/core2-64-wrs-linux/firefox/38.6.1esr-r0/temp/log.do_package_qa.90631
-NOTE: recipe firefox-38.6.1esr-r0: task do_package_qa: Failed
-
-Signed-off-by: Guojian Zhou <guojian.zhou@windriver.com>
----
- recipes-mozilla/firefox/firefox/mozconfig    | 1 +
- recipes-mozilla/firefox/firefox_38.6.1esr.bb | 5 +++--
- 2 files changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-mozilla/firefox/firefox/mozconfig b/recipes-mozilla/firefox/firefox/mozconfig
-index a343cff..5ab877e 100644
---- a/recipes-mozilla/firefox/firefox/mozconfig
-+++ b/recipes-mozilla/firefox/firefox/mozconfig
-@@ -2,6 +2,7 @@
- 
- ac_add_options --target=${TARGET_SYS}
- ac_add_options --prefix=${prefix}
-+ac_add_options --libdir=${libdir}
- 
- ac_add_options --enable-application=browser
- ac_add_options --enable-official-branding
-diff --git a/recipes-mozilla/firefox/firefox_38.6.1esr.bb b/recipes-mozilla/firefox/firefox_38.6.1esr.bb
-index 90af5a0..951109d 100644
---- a/recipes-mozilla/firefox/firefox_38.6.1esr.bb
-+++ b/recipes-mozilla/firefox/firefox_38.6.1esr.bb
-@@ -66,6 +66,7 @@ ARM_INSTRUCTION_SET = "arm"
- do_install_append() {
-     install -d ${D}${datadir}/applications
-     install -d ${D}${datadir}/pixmaps
-+    install -d ${D}${libdir}/${PN}/defaults/pref
- 
-     install -m 0644 ${WORKDIR}/mozilla-firefox.desktop ${D}${datadir}/applications/
-     install -m 0644 ${WORKDIR}/mozilla-firefox.png ${D}${datadir}/pixmaps/
-@@ -81,8 +82,8 @@ FILES_${PN} = "${bindir}/${PN} \
-                ${datadir}/pixmaps/ \
-                ${libdir}/${PN}/* \
-                ${bindir}/defaults"
--FILES_${PN}-dev += "${datadir}/idl ${bindir}/${PN}-config"
--
-+FILES_${PN}-dev += "${datadir}/idl ${bindir}/${PN}-config ${libdir}/${PN}-devel-*"
-+FILES_${PN}-staticdev += "${libdir}/${PN}-devel-*/sdk/lib/*.a"
- # We don't build XUL as system shared lib, so we can mark all libs as private
- PRIVATE_LIBS = "libmozjs.so \
-                 libxpcom.so \
--- 
-2.7.4
-
+Andreas
 
