@@ -1,30 +1,33 @@
-Return-Path: <pascal.bach@siemens.com>
-X-Greylist: delayed 582 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 12 Apr 2016 06:47:50 UTC
-Received: from gecko.sbs.de (gecko.sbs.de [194.138.37.40])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C3EA6FFED
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D9D66E688
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Apr 2016 06:47:49 +0000 (UTC)
-Received: from mail2.sbs.de (mail2.sbs.de [192.129.41.66])
-	by gecko.sbs.de (8.15.2/8.15.2) with ESMTPS id u3C6c3EV028910
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Apr 2016 08:38:03 +0200
-Received: from [139.16.79.206] (MD1FZU9C.ww002.siemens.net [139.16.79.206])
-	by mail2.sbs.de (8.15.2/8.15.2) with ESMTPS id u3C6c34w011373
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Apr 2016 08:38:03 +0200
-To: openembedded-devel@lists.openembedded.org
-References: <1460419857-8128-1-git-send-email-derek@asterius.io>
-From: Pascal Bach <pascal.bach@siemens.com>
-Message-ID: <570C97CB.2000202@siemens.com>
-Date: Tue, 12 Apr 2016 08:38:03 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101
-	Thunderbird/38.7.2
+	Tue, 12 Apr 2016 07:35:26 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u3C7ZMWm032157; Tue, 12 Apr 2016 02:35:22 -0500
+Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2016041202351509-819060 ;
+	Tue, 12 Apr 2016 02:35:15 -0500 
+Date: Tue, 12 Apr 2016 10:34:54 +0300
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: Denys Dmytriyenko <denis@denix.org>
+Message-ID: <20160412103454.55f6d8f2@adi-pc-linux.emea.corp.natinst.com>
+In-Reply-To: <20160411181108.GR16135@denix.org>
+References: <e3io1npq0c1rbqicen5r2dcf.1460055017573@email.android.com>
+	<20160411181108.GR16135@denix.org>
+Organization: National Instruments
 MIME-Version: 1.0
-In-Reply-To: <1460419857-8128-1-git-send-email-derek@asterius.io>
-Subject: Re: [meta-webserver][PATCH] nginx: update to 1.9.14
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 04/12/2016 02:35:15 AM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 04/12/2016 02:35:15 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-04-12_03:, , signatures=0
+Cc: James Minor <james.minor@ni.com>, openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] ti-wifi-utils: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,22 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Apr 2016 06:47:51 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Apr 2016 07:35:27 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
+On Mon, 11 Apr 2016 14:11:08 -0400
+Denys Dmytriyenko <denis@denix.org> wrote:
 
+> Resending again, since my previous reply got truncated when sending to th=
+e=20
+> list:
+>=20
+> On Thu, Apr 07, 2016 at 11:50:10AM -0700, Denys Dmytriyenko wrote:
+> > > http://layers.openembedded.org/layerindex/branch/master/recipes/?q=3D=
+ti-wifi-utils
+> > >
+> > > Yes, it is a duplicate. How about keeping the recipe in meta-oe to ma=
+ke
+> > > it usable without adding arago distributions layers? =20
+> >=20
+> > Well, it is currently NOT in the distribution layer, but rather in the
+> > application layer... But I guess I'm fine submitting the latest version=
+ to
+> > meta-oe, once I'm back from ELC. =20
 
-On 12.04.2016 02:10, Derek Straka wrote:
-> --- a/meta-webserver/recipes-httpd/nginx/nginx_1.9.12.bb
-> +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.9.14.bb
-> @@ -2,11 +2,11 @@ require nginx.inc
->  
->  # 1.9.x is the current mainline branches containing all new features
->  # 1.8.x branch is the current stable branch, the recommended default
-> -DEFAULT_PREFERENCE = "-1"
-> +#DEFAULT_PREFERENCE = "-1"
->  
-This effectively reverts making 1.8 the default version used. Is this intended?
-Pascal
+That would be really awesome. Thank you!
+
+Adrian
 
