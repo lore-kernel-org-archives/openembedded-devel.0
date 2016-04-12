@@ -1,48 +1,40 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f177.google.com (mail-qk0-f177.google.com
-	[209.85.220.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DCD86FF9B
+Return-Path: <Adrian.Dudau@enea.com>
+X-Greylist: delayed 343 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 12 Apr 2016 15:05:01 UTC
+Received: from smtp-out10.electric.net (smtp-out10.electric.net
+	[185.38.180.32])
+	by mail.openembedded.org (Postfix) with ESMTP id C854F60107
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Apr 2016 10:56:45 +0000 (UTC)
-Received: by mail-qk0-f177.google.com with SMTP id o6so4360183qkc.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Apr 2016 03:56:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:from:date:to:subject:user-agent;
-	bh=08FmV+h08/9a3LtBWhLwPqpiq3dSD9KiJfx8SJbZ8uU=;
-	b=D6+/AWkaTxHYtkKY88VNfuSngiIutOI3+o3142dLZlYrMsghkOd4RMeMX0YpIei7VZ
-	C0yt+2qWKs8EBRI3ZwksVRvgdi2IDPpXlzfpYq5g+ov1Qt3D6JG0b0PuwjIN7MIVZ4H/
-	D3sj459JNqWthtwIRbEDQg62nFFF2+JXcS8qm3hgI3z1SXqtROA5pUie0IsL3lJzT5yx
-	zWlwG20F7VwxIMo765o+yd6Zbo1rywRQmUf3tQJenKPIg3sAJUS87LvZ3aehIxE4PjvK
-	u1vI4JfTVqeia7Y7+Zh+fXllP7wYdSYrSv/XzN0Os+chvuNG41Zvu0Qw4kDg6X7wDaHO
-	MwXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:from:date:to:subject:user-agent;
-	bh=08FmV+h08/9a3LtBWhLwPqpiq3dSD9KiJfx8SJbZ8uU=;
-	b=G2cgB6xZBRLqkq6olBDKye0wHkPkSrYXh+42mSmufNqI1wb75bMQEEKRPh3HU+swve
-	oB5EEKct5bcsibla7JUHdDZ5yCmgSVog2PDpla6Ta2kvtDpsXMj19gLIs4LrkJM9VL6S
-	BBB67YXq1n6ulKAspMA8Sj/ErC7tBtdZGwpeKfjSXhhuvak/wsdqPG7VtBPTZsCpGY/m
-	oINf/PGYHosRzjD9oQB+5OG7o+tygmE0odcmw7fqzpDuwSn1xQv+in4DlAVw9nQs3hD7
-	ekY6DQLqKGgi9xn2qfNFBVSE7MoFxK6kk0kVTSdA/bg+R1ZukA1ItPiQIo90e8qPO9S/
-	voNQ==
-X-Gm-Message-State: AOPr4FWq+VzvN+NADf/GNWRpRQkObtLXn7rjv6vI6TgqesSHCOHvAK+1HFFHTh595jYIQA==
-X-Received: by 10.55.221.8 with SMTP id n8mr2388767qki.50.1460458605259;
-	Tue, 12 Apr 2016 03:56:45 -0700 (PDT)
-Received: from localhost ([187.23.154.250])
-	by smtp.gmail.com with ESMTPSA id 130sm6868942qki.6.2016.04.12.03.56.42
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Apr 2016 03:56:43 -0700 (PDT)
-Message-ID: <570cd46b.8808370a.6f892.ffffcb20@mx.google.com>
-Received: by localhost (sSMTP sendmail emulation);
-	Tue, 12 Apr 2016 07:56:39 -0300
-From: "Otavio Salvador" <otavio.salvador@gmail.com>
-Date: Tue, 12 Apr 2016 07:56:39 -0300
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-User-Agent: mail v14.8.8
-Subject: Updates to meta-browser (master) in 2016-04-12
+	Tue, 12 Apr 2016 15:05:01 +0000 (UTC)
+Received: from 1apzmf-00059L-TP by out10a.electric.net with emc1-ok (Exim 4.85)
+	(envelope-from <Adrian.Dudau@enea.com>) id 1apzmf-0005DX-V6
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Apr 2016 07:59:17 -0700
+Received: by emcmailer; Tue, 12 Apr 2016 07:59:17 -0700
+Received: from [192.36.1.72] (helo=mx-3.enea.com)
+	by out10a.electric.net with smtp (Exim 4.85)
+	(envelope-from <Adrian.Dudau@enea.com>) id 1apzmf-00059L-TP
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Apr 2016 07:59:17 -0700
+Received: from sestovs32.enea.se (172.21.3.146) by smtp.enea.com
+	(172.21.1.208) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 12 Apr 2016 16:59:16 +0200
+Received: by sestovs32.enea.se (Postfix, from userid 4451)	id D83DA2413BD;
+	Tue, 12 Apr 2016 16:59:16 +0200 (CEST)
+From: Adrian Dudau <adrian.dudau@enea.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 12 Apr 2016 16:59:16 +0200
+Message-ID: <1460473156-25279-1-git-send-email-adrian.dudau@enea.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Received-SPF: None (SESTOEX08.enea.se: adrian.dudau@enea.com does not
+	designate permitted sender hosts)
+X-Outbound-IP: 192.36.1.72
+X-Env-From: Adrian.Dudau@enea.com
+X-PolicySMART: 6030817
+X-Virus-Status: Scanned by VirusSMART (c)
+X-Virus-Status: Scanned by VirusSMART (s)
+Subject: [meta-oe][PATCH] Revert "umip: blacklist"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,25 +47,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Apr 2016 10:56:45 -0000
+X-List-Received-Date: Tue, 12 Apr 2016 15:05:05 -0000
+Content-Type: text/plain
 
-Hello,
+This reverts commit d82b0d8f638d1e1c7d9175605eadabfb99a6d345.
 
-I pushed following updates:
+The SRC_URI is up again, no need to blacklist the recipe anymore.
 
-commit a67a3461a135668dba573183f0f62fcd5dfb3121 (HEAD -> pending, origin/master, origin/HEAD)
-Author: Ian Coolidge <ian@boundarydevices.com>
-Date:   Mon Apr 11 18:00:00 2016 -0700
+Signed-off-by: Adrian Dudau <adrian.dudau@enea.com>
+---
+ meta-oe/recipes-connectivity/umip/umip_1.0.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-    firefox: Fix QA Issue: non debug package contains .debug directory
-    
-    Signed-off-by: Ian Coolidge <ian@boundarydevices.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+diff --git a/meta-oe/recipes-connectivity/umip/umip_1.0.bb b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
+index 41e5340..76901ab 100644
+--- a/meta-oe/recipes-connectivity/umip/umip_1.0.bb
++++ b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
+@@ -16,5 +16,3 @@ S = "${WORKDIR}/git"
+ EXTRA_OE_CONF = "--enable-vt"
+ 
+ inherit autotools-brokensep
+-
+-PNBLACKLIST[umip] ?= "BROKEN: SRC_URI seems to be down and build from premirror fails to find gram.h, see http://errors.yoctoproject.org/Errors/Details/56158/"
+-- 
+1.9.1
 
-Regards,
-
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
