@@ -1,48 +1,36 @@
-Return-Path: <ian@boundarydevices.com>
-Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 545236014F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Apr 2016 00:59:42 +0000 (UTC)
-Received: by mail-pf0-f169.google.com with SMTP id c20so2540993pfc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Apr 2016 17:59:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=boundarydevices-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=tOPbYoc3YsXv03B2SPStlVrRIBJe4JCGxKxuOeYYjKU=;
-	b=my+44Lie5KvdgAKCvd7EfdTaie/V8Pytl1JF3kHqddu5bWHQ+7kMwHc1AYElgfS7Ng
-	2DyUAKjDxV6T84d0GT0Y9d6BeyeUNIZ+zPW9NPn/qsGxgQUTo9IVL92pzbMeany38EqG
-	RRjQAHdnhMBfZjXOTHBXJcf9r7jNHvRs3AbLQLjEGQSJ7uMG1vOMyOMDMiJogZ0+9ZBP
-	8T9k6i9VK0x1lon8pc2wAv0yJoM0oHkBDzfT8RBtneDziX2RKOzeLlSibyLwV5CUGLJA
-	uYGYtO8y5yydNywfGbI+HPz83C2EWAUSCYRPQuQccxOPHvEqufPhbK0NYJRheuzYIdbw
-	LwMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=tOPbYoc3YsXv03B2SPStlVrRIBJe4JCGxKxuOeYYjKU=;
-	b=hw/64VA5M8BoPm/U3hAfSb/xFslQ6XKQf/1G5q47qCFMmgREwwwuby8OF2G8lvuOw3
-	snshxFXJtOdpcMrEPAawHhe72ra/MYx4cUjBrNM/Hn+HygCrMnimRwNRfHBgkeNfl97r
-	wzw5kfhg6TP2gG65utM8hXIRM6vkH7lITVoEKrGoPyQ1LGKzCba2f6HMG+YuHpBvlHow
-	Au0Mh3jNwGqBBt+yd06N/gxt3L+tm3qa3jgOBB6yb5V3uCS4pE+l9F5CS/39NNigdEo+
-	g7wWXJiAyVPM/1G0x4NGdSsAymLepmJ+1eJCiR/f6hj/mZ/GivKh3yDHWym6nOnDf2+p
-	wETw==
-X-Gm-Message-State: AOPr4FUCuWR4kOANuC9TvBJoQl3/LOdZQqaqf0p6lHpPvFtVcAtajWqpBGz/w715p5LiRQ==
-X-Received: by 10.98.32.218 with SMTP id m87mr663972pfj.48.1460422782651;
-	Mon, 11 Apr 2016 17:59:42 -0700 (PDT)
-Received: from ian-desktop.attlocal.net
-	(104-53-140-179.lightspeed.irvnca.sbcglobal.net. [104.53.140.179])
-	by smtp.gmail.com with ESMTPSA id
-	o69sm38733859pfi.14.2016.04.11.17.59.41
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 11 Apr 2016 17:59:42 -0700 (PDT)
-From: Ian Coolidge <ian@boundarydevices.com>
+Return-Path: <denis@denix.org>
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 77DAB65C8A;
+	Tue, 12 Apr 2016 01:35:43 +0000 (UTC)
+Received: from vz-proxy-l004.mx.aol.com ([64.236.82.151])
+	by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014))
+	with ESMTPA id <0O5H00LNYZ3KHB80@vms173021.mailsrvcs.net>; Mon,
+	11 Apr 2016 20:35:44 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=eaPqxu9IKnv3tbb7QsXVMw==:117
+	a=kj9zAlcOel0A:10 a=kziv93cY1bsA:10	a=-mrfw2CMAAAA:8
+	a=mceCEf46Nrun9V_qJigA:9 a=CjuIK1q_8ugA:10	a=W5iB_Oznu4wA:10
+Received: by 100.15.86.14 with SMTP id 1420722f; Tue, 12 Apr 2016 01:35:44 GMT
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id B72D3161F97; Mon,
+	11 Apr 2016 21:35:43 -0400 (EDT)
+Date: Mon, 11 Apr 2016 21:35:43 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Apr 2016 18:00:00 -0700
-Message-Id: <1460422800-14784-1-git-send-email-ian@boundarydevices.com>
-X-Mailer: git-send-email 1.9.1
-Cc: otavio@ossystems.com.br, eric@eukrea.com
-Subject: [meta-browser][PATCH] firefox: Fix QA Issue: non debug package contains .debug directory
+Message-id: <20160412013543.GV16135@denix.org>
+References: <56DEF97F.9070306@balister.org> <1458767514382.89578@seescan.com>
+	<56F30D13.6030909@balister.org>
+	<2408177.Nm4BLto1dd@rjs-zotac.streifs.net>
+MIME-version: 1.0
+In-reply-to: <2408177.Nm4BLto1dd@rjs-zotac.streifs.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [yocto] [OE-core] OEDAM, April 8 in San Diego after ELC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,26 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Apr 2016 00:59:43 -0000
+X-List-Received-Date: Tue, 12 Apr 2016 01:35:46 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Signed-off-by: Ian Coolidge <ian@boundarydevices.com>
----
- recipes-mozilla/firefox/firefox_38.6.1esr.bb | 1 +
- 1 file changed, 1 insertion(+)
+On Mon, Apr 11, 2016 at 03:35:21PM -0700, Rudolf J Streif wrote:
+> Hello Everyone:
+> 
+> If you attended OEDAM last Friday in San Diego, I very much hope that you enjoyed being here.
+> 
+> The Catamaran Hotel, where we held the meeting, would very much appreciate your feedback:
+> 
+> www.catamaranresort.com/trip
+> 
+> I hope you all had a safe trip back home,
 
-diff --git a/recipes-mozilla/firefox/firefox_38.6.1esr.bb b/recipes-mozilla/firefox/firefox_38.6.1esr.bb
-index 951109d..f2e9726 100644
---- a/recipes-mozilla/firefox/firefox_38.6.1esr.bb
-+++ b/recipes-mozilla/firefox/firefox_38.6.1esr.bb
-@@ -84,6 +84,7 @@ FILES_${PN} = "${bindir}/${PN} \
-                ${bindir}/defaults"
- FILES_${PN}-dev += "${datadir}/idl ${bindir}/${PN}-config ${libdir}/${PN}-devel-*"
- FILES_${PN}-staticdev += "${libdir}/${PN}-devel-*/sdk/lib/*.a"
-+FILES_${PN}-dbg += "${libdir}/${PN}/*/*/.debug/* ${libdir}/${PN}/*/.debug/* ${libdir}/${PN}-devel-*/sdk/lib/.debug/*"
- # We don't build XUL as system shared lib, so we can mark all libs as private
- PRIVATE_LIBS = "libmozjs.so \
-                 libxpcom.so \
+And huge thanks to Rudi and Jefro for their help in organizing the event!
+
 -- 
-1.9.1
-
+Denys
 
