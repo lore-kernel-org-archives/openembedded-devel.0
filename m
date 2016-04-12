@@ -1,51 +1,33 @@
-Return-Path: <ankur.tyagi85@gmail.com>
-Received: from mail-ob0-f173.google.com (mail-ob0-f173.google.com
-	[209.85.214.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 87FE6601F6;
-	Tue, 12 Apr 2016 03:26:14 +0000 (UTC)
-Received: by mail-ob0-f173.google.com with SMTP id bg3so3574479obb.1;
-	Mon, 11 Apr 2016 20:26:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=5Y/7pbE6IowKb7Woo57++Iwf2A6MuJQgc+mMb6zFVRg=;
-	b=dJBkLp15oF3Zgva/nKsDDssDl/SdiTczr0fwIdbZjkLjGtW+MN/IdFZ7r5lv0UkUOa
-	71BEfbEtn9PS2xRLdA3vpcFDJah5YNX9ezuctX/W/Ef6LXLs2qxRu/6vBt5QxU0dhyfd
-	9WAXI1EHxuyF/Q+OzA2AZraEuI7EaunzWeYkhr0UaG4uG6/2M33RmF0e51nxrqq6UiQ1
-	fyyAM/cJMSjCJFTa9r8pCnsaOe9G0FfWTwPBBizMvUC2LaJlbKrV0a0Te32i9t/ReYW4
-	Q689wS5VQMBXJTGGJkx914xjYbbQuuEagju488mzUuQQuNTT2ljXzAmLs+bUcc5qoL5R
-	pGmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=5Y/7pbE6IowKb7Woo57++Iwf2A6MuJQgc+mMb6zFVRg=;
-	b=j0p4pB07wd/ROMS/6pzq10RtP0/A8BrQ+5+7oK4LmTyzvtwWAJSJAF+7I5cBKrJYwK
-	n/APhtBzrBcsP/gyIiN2IiQ7dpedYH3w87QitamriJiKUo2NJrfEDKNvzBV8ChXyjwVd
-	Raz9GSERYoD6jW13O1REFe25c562DqCqqqeKzMouUdssRyZ8V13Biu2/s82gV+fPXvXG
-	28LaX3y17ZCxVszLScjIMTtlaKVvnyTj5XMjMllH5g6kDgJ6MzZsCQvlwXyjVNMZcD7L
-	IUW1kWAEYr0LY1cENftEUqnlegb41jR5dwAhqwENrSj8e8RChwNh2d6DWIf7HGPhJFMM
-	03vg==
-X-Gm-Message-State: AOPr4FWVm8LsEGI5S2fOilrqA+Sbh6udNUlhikj5/X5+8raJeL0g6vo34nm/P03vpwbnGlsSydhZz1KHExdgnA==
-X-Received: by 10.182.255.197 with SMTP id as5mr421911obd.86.1460431574834;
-	Mon, 11 Apr 2016 20:26:14 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.202.227.131 with HTTP; Mon, 11 Apr 2016 20:25:55 -0700 (PDT)
-In-Reply-To: <CAHQecY4PBZ-PHi6SefradTq5o2PXKo0wbo-jid80hMc0bfkYgA@mail.gmail.com>
-References: <56DEF97F.9070306@balister.org> <1458767514382.89578@seescan.com>
-	<56F30D13.6030909@balister.org>
-	<2408177.Nm4BLto1dd@rjs-zotac.streifs.net>
-	<20160412013543.GV16135@denix.org> <570C52DB.6060901@balister.org>
-	<CAHQecY4PBZ-PHi6SefradTq5o2PXKo0wbo-jid80hMc0bfkYgA@mail.gmail.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Tue, 12 Apr 2016 15:25:55 +1200
-Message-ID: <CADySD0E3cJ93=QnDjdiXGQZFcKDp6kyzV1a+4A3v4VsegxZmog@mail.gmail.com>
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 3603 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 12 Apr 2016 06:09:13 UTC
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 79C7360116
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Apr 2016 06:09:13 +0000 (UTC)
+Received: from vz-proxy-l002.mx.aol.com ([64.236.82.148])
+	by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O5I004IN8ZASD10@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	12 Apr 2016 00:09:11 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=hkQRW7prCrFMEwk2DGUM9Q==:117
+	a=kj9zAlcOel0A:10 a=kziv93cY1bsA:10	a=sozttTNsAAAA:8 a=Q4-j1AaZAAAA:8
+	a=1Ln_RdB_eNBN4QAGrqoA:9	a=CjuIK1q_8ugA:10
+Received: by 100.15.86.14 with SMTP id 61a01f3b; Tue, 12 Apr 2016 05:09:10 GMT
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2C4FD161F98; Tue,
+	12 Apr 2016 01:09:10 -0400 (EDT)
+Date: Tue, 12 Apr 2016 01:09:10 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Yocto Project <yocto@yoctoproject.org>
-Subject: Re: [OE-core] [yocto] OEDAM, April 8 in San Diego after ELC
+Message-id: <20160412050910.GW16135@denix.org>
+References: <1460410351-25968-1-git-send-email-j-stiffler@ti.com>
+MIME-version: 1.0
+In-reply-to: <1460410351-25968-1-git-send-email-j-stiffler@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-oe][PATCH] llvm: correct fix for the multilib libdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,60 +40,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Apr 2016 03:26:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 12 Apr 2016 06:09:13 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi,
+On Mon, Apr 11, 2016 at 05:32:30PM -0400, Jacob Stiffler wrote:
+> * If llvm.inc is used for native and nativesdk class packages, the
+>   resulting llvm-config is broken since "${base_libdir}" is prefixed
+>   with the full patch to sysroot
+> * Replace "/lib" with "/${baselib}" instead of "${base_libdir}" as
+>   "${base_libdir}" is the full path and "${baselib}" is the name of
+>   the multilib directory.
+> 
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 
-Is there any information/material posted online for people who weren't able
-to attend because of geographical barriers ?
+Acked-by: Denys Dmytriyenko <denys@ti.com>
+Tested-by: Denys Dmytriyenko <denys@ti.com>
 
-regards
-Ankur
 
-On Tue, Apr 12, 2016 at 1:48 PM, Tom King <ka6sox@gmail.com> wrote:
-
-> do we have meeting minutes posted someplace?
->
-> thanks
->
-> tom
->
-> On Mon, Apr 11, 2016 at 6:43 PM, Philip Balister <philip@balister.org>
-> wrote:
->
-> > On 04/11/2016 09:35 PM, Denys Dmytriyenko wrote:
-> > > On Mon, Apr 11, 2016 at 03:35:21PM -0700, Rudolf J Streif wrote:
-> > >> Hello Everyone:
-> > >>
-> > >> If you attended OEDAM last Friday in San Diego, I very much hope that
-> > you enjoyed being here.
-> > >>
-> > >> The Catamaran Hotel, where we held the meeting, would very much
-> > appreciate your feedback:
-> > >>
-> > >> www.catamaranresort.com/trip
-> > >>
-> > >> I hope you all had a safe trip back home,
-> > >
-> > > And huge thanks to Rudi and Jefro for their help in organizing the
-> event!
-> > >
-> >
-> > And an even bigger thanks to everyone that came to the meeting. You are
-> > the people that make OpenEmbedded great!
-> >
-> > Philip
-> > --
-> > _______________________________________________
-> > Openembedded-core mailing list
-> > Openembedded-core@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-core
-> >
-> --
+> ---
+>  meta-oe/recipes-core/llvm/llvm.inc | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-core/llvm/llvm.inc
+> index 31b2db4..02d4617 100644
+> --- a/meta-oe/recipes-core/llvm/llvm.inc
+> +++ b/meta-oe/recipes-core/llvm/llvm.inc
+> @@ -61,7 +61,7 @@ do_configure_prepend() {
+>      sed -ri "s#/(bin|include|lib)(/?\")#/\1/${LLVM_DIR}\2#g" ${S}/tools/llvm-config/llvm-config.cpp
+>  
+>      # Fix the hardcoded libdir in llvm-config
+> -    sed -i 's:/lib\>:${base_libdir}:g' ${S}/tools/llvm-config/llvm-config.cpp
+> +    sed -i 's:/lib\>:/${baselib}:g' ${S}/tools/llvm-config/llvm-config.cpp
+>  
+>      # Fails to build unless using separate directory from source
+>      mkdir -p ${LLVM_BUILD_DIR}
+> @@ -72,7 +72,7 @@ do_compile() {
+>      cd ${LLVM_BUILD_DIR}
+>  
+>      # Fix libdir for multilib
+> -    sed -i 's:(PROJ_prefix)/lib:(PROJ_prefix)${base_libdir}:g' Makefile.config
+> +    sed -i 's:(PROJ_prefix)/lib:(PROJ_prefix)/${baselib}:g' Makefile.config
+>  
+>      oe_runmake \
+>          AR="${BUILD_AR}" \
+> -- 
+> 1.9.1
+> 
+> -- 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
