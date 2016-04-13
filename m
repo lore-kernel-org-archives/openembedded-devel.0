@@ -1,43 +1,50 @@
-Return-Path: <Adrian.Dudau@enea.com>
-Received: from smtp-out10.electric.net (smtp-out10.electric.net
-	[185.38.180.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 668DF60232
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id E291C71951
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Apr 2016 11:00:55 +0000 (UTC)
-Received: from 1aqIXW-0001yT-UD by out10a.electric.net with emc1-ok (Exim 4.85)
-	(envelope-from <Adrian.Dudau@enea.com>) id 1aqIXW-0001ym-Va
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Apr 2016 04:00:54 -0700
-Received: by emcmailer; Wed, 13 Apr 2016 04:00:54 -0700
-Received: from [192.36.1.72] (helo=mx-3.enea.com)
-	by out10a.electric.net with smtp (Exim 4.85)
-	(envelope-from <Adrian.Dudau@enea.com>) id 1aqIXW-0001yT-UD
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Apr 2016 04:00:54 -0700
-Received: from SESTOEX09.enea.se ([fe80::94d8:372f:210c:b4da]) by
-	SESTOEX08.enea.se ([fe80::1c3:4003:dc47:23c0%11]) with mapi id
-	14.03.0294.000; Wed, 13 Apr 2016 13:00:54 +0200
-From: Adrian Dudau <Adrian.Dudau@enea.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] Revert "umip: blacklist"
-Thread-Index: AQHRlMzL+fh/8TN80kW0klylzJwkq5+GdYmAgAEm1IA=
-Date: Wed, 13 Apr 2016 11:00:54 +0000
-Message-ID: <1460545253.3257.14.camel@sestows129.enea.se>
-References: <1460473156-25279-1-git-send-email-adrian.dudau@enea.com>
-	<20160412172539.GE2564@jama>
-In-Reply-To: <20160412172539.GE2564@jama>
-Accept-Language: en-US, sv-SE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.141.157]
-MIME-Version: 1.0
-X-Outbound-IP: 192.36.1.72
-X-Env-From: Adrian.Dudau@enea.com
-X-PolicySMART: 6030817
-X-Virus-Status: Scanned by VirusSMART (c)
-X-Virus-Status: Scanned by VirusSMART (s)
-Subject: Re: [meta-oe][PATCH] Revert "umip: blacklist"
+	Wed, 13 Apr 2016 11:05:27 +0000 (UTC)
+Received: by mail-wm0-f43.google.com with SMTP id a140so94632707wma.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Apr 2016 04:05:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
+	bh=X744QEmWSdJSbh3RUIM4c9WHv/vrK/YTg6/REQBl9ao=;
+	b=GvBkHzz42FvzTWqV+yIjfV4AVdQaO6fVPifbl3mvSDOv2R5WI4SS9OombmG00P1rQ3
+	ntTu/NOaiqwj3QZU8Mu4MEHX1bjRb6XO+n4UQLjdS5amxOYr1Zmp6toy5qgRdZJWAeQS
+	fFomhne3BuO6g6SVdHVsglZZTyat+o3HjBtHzbS7dw2EAGjVbkkmoiczNi7sIntQy6BV
+	GonmQBA8yPxcKM3N8RJvKrZhMKCAhPA3hP59eqQw0C+Ukhj98wPOJfRBR+Oqje8vOrc2
+	9zyNHAnWjytzLBDPMA1t2kMSQwqe4IPYIGTVKxZZHXh+qoFaT6bGS6zeItV78tDHr/0E
+	0GxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
+	:message-id:references:to;
+	bh=X744QEmWSdJSbh3RUIM4c9WHv/vrK/YTg6/REQBl9ao=;
+	b=EH+7UYo5KLt7cTrtz/6ZWNjT1FRrxp++QINQLi+TMIO/WnyNldHwCMs30iE+8+7zdT
+	flqWK/Jbiu4jFSJi+5UHJen8u4tnrlkxjhbSI0Yus3zLDbysPOOO97tAsfEEMj8q26OC
+	KHS8QXok3czrc+YqTg9SPmhgfPxstAzVSZhitsLCabMcJ71SxuPFFWxmuTc135NzH76R
+	l015oL4KHyS0MAFMHm84w4sI7AnT86waM8bSnm4nR896Ke7FufLxO6/IQwYPDpwmfge8
+	Wyor3yooL1kQENJp5ISRm2q38AhQQfyjXZhFMabVFHOfwu02m0oqmYWl6PqgyrKbf4Is
+	8FJg==
+X-Gm-Message-State: AOPr4FViwNmU0wX4BKIzAJqHG6RQlr+gbnZPVatDppVfk0UrCfg1RdlK92xxxGaLlPJ0pg==
+X-Received: by 10.28.228.68 with SMTP id b65mr9653176wmh.47.1460545528264;
+	Wed, 13 Apr 2016 04:05:28 -0700 (PDT)
+Received: from walter.muppets.liwing.de (p578b540c.dip0.t-ipconnect.de.
+	[87.139.84.12]) by smtp.gmail.com with ESMTPSA id
+	b135sm27667340wmb.10.2016.04.13.04.05.27
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 13 Apr 2016 04:05:27 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Jens Rehsack <rehsack@gmail.com>
+In-Reply-To: <CAFkk2KTGfZ9RDNTdTQmfAB+G3KnNGBqDivM2NVgrG4idV-KgHA@mail.gmail.com>
+Date: Wed, 13 Apr 2016 13:05:25 +0200
+Message-Id: <22F07C44-43D4-469A-A201-7596A5F45ABB@gmail.com>
+References: <CAFkk2KTGfZ9RDNTdTQmfAB+G3KnNGBqDivM2NVgrG4idV-KgHA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.3124)
+Subject: Re: Build failures due to libtdb racing with libbsd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,40 +57,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Apr 2016 11:00:57 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <D3916EA69410864B8FE01E78F0B5013B@local>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 13 Apr 2016 11:05:29 -0000
+X-Groupsio-MsgNum: 60981
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_7EC6CECE-A7AD-4178-9011-018503B12AB2";
+	protocol="application/pgp-signature"; micalg=pgp-sha512
 
-T24gdGlzLCAyMDE2LTA0LTEyIGF0IDE5OjI1ICswMjAwLCBNYXJ0aW4gSmFuc2Egd3JvdGU6DQo+
-IE9uIFR1ZSwgQXByIDEyLCAyMDE2IGF0IDA0OjU5OjE2UE0gKzAyMDAsIEFkcmlhbiBEdWRhdSB3
-cm90ZToNCj4gPiBUaGlzIHJldmVydHMgY29tbWl0IGQ4MmIwZDhmNjM4ZDFlMWM3ZDkxNzU2MDVl
-YWRhYmZiOTlhNmQzNDUuDQo+ID4gDQo+ID4gVGhlIFNSQ19VUkkgaXMgdXAgYWdhaW4sIG5vIG5l
-ZWQgdG8gYmxhY2tsaXN0IHRoZSByZWNpcGUgYW55bW9yZS4NCj4gDQo+IFdoYXQgYWJvdXQgdGhl
-IHNlY29uZCBwYXJ0IHdpdGggZ3JhbS5oLCB0aGF0J3Mgbm90IHJlbGF0ZWQgdG8gU1JDX1VSSS4N
-Cg0KVGhhdCBpc3N1ZSBkaWRuJ3QgcmVwcm9kdWNlIGZvciBtZS4gDQoNCkhvd2V2ZXIsIG5vdyB0
-aGF0IHlvdSBtZW50aW9uZWQgaXQsIEkgcmVtZW1iZXJlZCBoYXZpbmcgc2VlbiB0aGF0IGlzc3Vl
-DQpiZWZvcmUgYW5kIGR1ZyBhIGxpdHRsZSBkZWVwZXIuIFRoZSBpc3N1ZSBzZWVtcyB0byBhcHBl
-YXIgcmFuZG9tbHkgaW4NCnNvbWUgY2lyY3Vtc3RhbmNlcyBvZiBhIHBhcmFsbGVsIGJ1aWxkIHdo
-ZXJlIHRoZSBzY2FuLmwgaXMgcGFyc2VkIGJlZm9yZQ0KZ3JhbS5oIGlzIGdlbmVyYXRlZC4gRGlz
-YWJsaW5nIHBhcmFsbGVsIGJ1aWxkIGZvciB0aGUgcmVjaXBlIHNob3VsZCBmaXgNCnRoZSBpc3N1
-ZS4gSSB3aWxsIHNlbmQgYSBwYXRjaCBzaG9ydGx5Lg0KDQo+IA0KPiA+IFNpZ25lZC1vZmYtYnk6
-IEFkcmlhbiBEdWRhdSA8YWRyaWFuLmR1ZGF1QGVuZWEuY29tPg0KPiA+IC0tLQ0KPiA+ICBtZXRh
-LW9lL3JlY2lwZXMtY29ubmVjdGl2aXR5L3VtaXAvdW1pcF8xLjAuYmIgfCAyIC0tDQo+ID4gIDEg
-ZmlsZSBjaGFuZ2VkLCAyIGRlbGV0aW9ucygtKQ0KPiA+IA0KPiA+IGRpZmYgLS1naXQgYS9tZXRh
-LW9lL3JlY2lwZXMtY29ubmVjdGl2aXR5L3VtaXAvdW1pcF8xLjAuYmIgYi9tZXRhLW9lL3JlY2lw
-ZXMtY29ubmVjdGl2aXR5L3VtaXAvdW1pcF8xLjAuYmINCj4gPiBpbmRleCA0MWU1MzQwLi43Njkw
-MWFiIDEwMDY0NA0KPiA+IC0tLSBhL21ldGEtb2UvcmVjaXBlcy1jb25uZWN0aXZpdHkvdW1pcC91
-bWlwXzEuMC5iYg0KPiA+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1jb25uZWN0aXZpdHkvdW1pcC91
-bWlwXzEuMC5iYg0KPiA+IEBAIC0xNiw1ICsxNiwzIEBAIFMgPSAiJHtXT1JLRElSfS9naXQiDQo+
-ID4gIEVYVFJBX09FX0NPTkYgPSAiLS1lbmFibGUtdnQiDQo+ID4gIA0KPiA+ICBpbmhlcml0IGF1
-dG90b29scy1icm9rZW5zZXANCj4gPiAtDQo+ID4gLVBOQkxBQ0tMSVNUW3VtaXBdID89ICJCUk9L
-RU46IFNSQ19VUkkgc2VlbXMgdG8gYmUgZG93biBhbmQgYnVpbGQgZnJvbSBwcmVtaXJyb3IgZmFp
-bHMgdG8gZmluZCBncmFtLmgsIHNlZSBodHRwOi8vZXJyb3JzLnlvY3RvcHJvamVjdC5vcmcvRXJy
-b3JzL0RldGFpbHMvNTYxNTgvIg0KPiA+IC0tIA0KPiA+IDEuOS4xDQo+ID4gDQo+ID4gLS0gDQo+
-ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBP
-cGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxp
-c3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCg0KDQo=
+--Apple-Mail=_7EC6CECE-A7AD-4178-9011-018503B12AB2
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset=us-ascii
 
+
+> Am 13.04.2016 um 11:41 schrieb Ulf Magnusson <ulfalizer@gmail.com>:
+> 
+> Hello,
+> 
+> I get libtdb build failures like the following. The failing file
+> varies between runs.
+> 
+> ERROR: oe_runmake failed
+> ERROR: Function failed: do_compile
+> Log data follows:
+> | DEBUG: Executing shell function do_compile
+> | NOTE: make -j 16 -e MAKEFLAGS=
+> | WAF_MAKE=1 PATH=buildtools/bin:../../buildtools/bin:$PATH waf build
+> | Checking project rules ...
+> | Project rules pass
+> | [  1/100] Generating tdb.vscript
+> | [  2/100] Compiling lib/replace/replace.c
+> | [  3/100] Compiling lib/replace/cwrap.c
+> | [  4/100] Generating PKGCONFIG_tdb.pc
+> | [  5/100] Compiling lib/replace/replace.c
+> | [  6/100] Compiling lib/replace/test/testsuite.c
+> | [  7/100] Compiling lib/replace/test/strptime.c
+> | [  8/100] Compiling lib/replace/test/os2_delete.c
+> | [  9/100] Compiling lib/replace/test/getifaddrs.c
+> | [ 10/100] Compiling common/check.c
+> | [ 11/100] Compiling common/error.c
+> | [ 12/100] Compiling common/tdb.c
+> | [ 13/100] Compiling common/traverse.c
+> | [ 14/100] Compiling common/freelistcheck.c
+> | [ 15/100] Compiling common/lock.c
+> | [ 16/100] Compiling common/dump.c
+> | [ 17/100] Compiling common/freelist.c
+> | [ 18/100] Compiling common/io.c
+> | [ 19/100] Compiling common/open.c
+> | [ 20/100] Compiling common/transaction.c
+> | [ 21/100] Compiling common/hash.c
+> | [ 22/100] Compiling common/summary.c
+> | [ 23/100] Compiling common/rescue.c
+> | [ 24/100] Compiling common/mutex.c
+> | [ 25/100] Compiling tools/tdbtorture.c
+> | In file included from ../tools/tdbtorture.c:5:0:
+> | ../lib/replace/replace.h:151:24: fatal error: bsd/string.h: No such
+> file or directory
+> |  #include <bsd/string.h>
+> |                         ^
+> | compilation terminated.
+> | Build failed:  -> task failed (err #1):
+> |     {task: cc tdbtorture.c -> tdbtorture_5.o}
+> | make: *** [all] Error 1
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: oe_runmake failed
+> | ERROR: Function failed: do_compile
+> NOTE: recipe libtdb-1.3.0-r0: task do_compile: Failed
+> 
+> The problem seems to be a race with building libbsd (and unlucky
+> timing in my build). Adding libbsd to DEPENDS fixes the problem.
+> 
+> For some added context, libtdb uses a nonstandard ./configure from the
+> Samba project based on a configuration utility called Waf that I'm a
+> complete noob on. Perhaps there is some way to disable libbsd support
+> instead.
+
+It is not reasonable to disable libbsd support. When disabled, samba4 will
+statically link own copies of the missing functions - better rely on
+maintained stuff ...
+
+I completely lost any track which samba patch has been applied and which
+is missing. IIRC, I send some patches after analyzing requirement of
+each of those dependencies and kept hard dependency of libbsd.
+
+Cheers
+--
+Jens Rehsack - rehsack@gmail.com
+
+
+--Apple-Mail=_7EC6CECE-A7AD-4178-9011-018503B12AB2
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iQIcBAEBCgAGBQJXDif2AAoJEESZlq7c5QqdrIwP/0DbsMlJLtbBRCdSrtjSF3ZN
+Gx5c6usrFtPR8gB+XH26iBkZrY3CMr+tRAUGufc//B3ArnwFytSTA8QMSnMWZxda
+amTd1w4mTjN4EnrMoDaclYWwY5eZe43yfTtpwmI97qYkQ2mKSlNFCFCGyWpL+r/A
+TXugPIDL3nUbNxUqUDEs+Jooao2NqU90aXObkpOI9B9Hew7HBMvkdyCD/I5EXzwW
+5dJP0FQTfuDdBVuL2fM8jxwR05jD04d93zlCzNMAMDFPlrSwUTtR32URm36npF7T
+tr0d52Bih/TBsXNsfypF0DFegVRoU3MILpHWt+GHwGMnob7Xmk5W9fYMOCXj8ZIE
+kM78M+C42lgnxfmf5h+Uxpia9Q+e6MJEpvIuSsuY66dIe05kCxf3zL1WcVhkm4CJ
+GJHLIn53jIjbMOsyF+CmDf2CFxlmxD6GgfvGC9SgtmUfXMFrlYIpt7nIksyvjezC
+ZK93wXwxUpd1c0LIpU8nV8wLRUAYPTEY4LMvtHdZmNaiUeGmXU9Ks+wmfLiHHoWa
+VJz7MEC7+oQBDbRtSqF28Wg1OrE8+2jxeyf4SFpdurl7KdmLYROWzvC2wvoBYLdM
+EWVi+cWjFojnxt59BlKOSakaLUtTS1j9dQ5nf4YEL8n2lSttMtzsFleUCvpHyx51
+hlnM1LJXDAgrvf3NhLsC
+=tyz5
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_7EC6CECE-A7AD-4178-9011-018503B12AB2--
