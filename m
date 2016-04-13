@@ -1,26 +1,22 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 25BD97318F
+Return-Path: <pascal.bach@siemens.com>
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id D185B73169
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Apr 2016 13:23:14 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	u3DDNEt7010717; Wed, 13 Apr 2016 14:23:14 +0100
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id x52xbrFakiqm; Wed, 13 Apr 2016 14:23:14 +0100 (BST)
-Received: from hex ([192.168.3.34]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	u3DDNAKa010712
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
-	Wed, 13 Apr 2016 14:23:11 +0100
-Message-ID: <1460553790.9308.89.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 Apr 2016 14:23:10 +0100
-X-Mailer: Evolution 3.16.5-1ubuntu3.1 
-Mime-Version: 1.0
-Subject: [PATCH] cyrus-sasl: Drop unneeded group addition
+	Wed, 13 Apr 2016 15:01:19 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id u3DF1H1u005006
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Apr 2016 17:01:17 +0200
+Received: from dev.sbt.siemens.com ([139.22.132.96])
+	by mail3.siemens.de (8.15.2/8.15.2) with SMTP id u3DF1Gj0009674;
+	Wed, 13 Apr 2016 17:01:16 +0200
+From: Pascal Bach <pascal.bach@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 13 Apr 2016 17:00:54 +0200
+Message-Id: <1460559654-28301-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH] libmodbus: add support for the libmodbus development release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,32 +29,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Apr 2016 13:23:16 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Apr 2016 15:01:21 -0000
 
-The mail group is provided by base-passwd so would always be present. Therefore
-drop the uneeded group addition from this recipe.
+libmodbus has two release streams:
+- stable: which currently is 3.0.x and does only receive fixes
+- development: 3.1.x which receives new features and according to upstream is also very stable
 
-This works around the recent user cleanup code improvements which meant
-this started causing failures for people.
+Some users require access to the newer features.
+So a recipe for the development branch but leave the stable branch the default.
+This is similar to what is done for the nginx recipe which also has two release streams.
 
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb | 1 -
- 1 file changed, 1 deletion(-)
+ meta-oe/recipes-extended/libmodbus/libmodbus.inc      | 13 +++++++++++++
+ meta-oe/recipes-extended/libmodbus/libmodbus_3.0.6.bb | 14 +-------------
+ meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb |  7 +++++++
+ 3 files changed, 21 insertions(+), 13 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus.inc
+ create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb
 
-diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
-index 33468a1..5da3d96 100644
---- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
-+++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
-@@ -72,7 +72,6 @@ do_install_append() {
- }
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus.inc b/meta-oe/recipes-extended/libmodbus/libmodbus.inc
+new file mode 100644
+index 0000000..a01659a
+--- /dev/null
++++ b/meta-oe/recipes-extended/libmodbus/libmodbus.inc
+@@ -0,0 +1,13 @@
++SUMMARY = "A Modbus library"
++DESCRIPTION = "libmodbus is a C library designed to provide a fast and robust \
++implementation of the Modbus protocol. It runs on Linux, Mac OS X, FreeBSD, \
++QNX and Windows."
++HOMEPAGE = "http://www.libmodbus.org/"
++SECTION = "libs"
++
++LICENSE = "LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
++
++SRC_URI = "http://libmodbus.org/releases/${BP}.tar.gz"
++
++inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.6.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.6.bb
+index c5e6ae8..b4d32fb 100644
+--- a/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.6.bb
++++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.0.6.bb
+@@ -1,16 +1,4 @@
+-SUMMARY = "A Modbus library"
+-DESCRIPTION = "libmodbus is a C library designed to provide a fast and robust \
+-implementation of the Modbus protocol. It runs on Linux, Mac OS X, FreeBSD, \
+-QNX and Windows."
+-HOMEPAGE = "http://www.libmodbus.org/"
+-SECTION = "libs"
+-
+-LICENSE = "LGPLv2.1+"
+-LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
+-
+-SRC_URI = "http://libmodbus.org/site_media/build/${BP}.tar.gz"
+-
+-inherit autotools pkgconfig
++require libmodbus.inc
  
- USERADD_PACKAGES = "${PN}-bin"
--GROUPADD_PARAM_${PN}-bin = "--system mail"
- USERADD_PARAM_${PN}-bin = "--system --home=/var/spool/mail -g mail cyrus"
- 
- SYSTEMD_PACKAGES = "${PN}"
+ SRC_URI[md5sum] = "c80f88b6ca19cabc4ceffc195ca07771"
+ SRC_URI[sha256sum] = "046d63f10f755e2160dc56ef681e5f5ad3862a57c1955fd82e0ce036b69471b6"
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb
+new file mode 100644
+index 0000000..6fcfc3a
+--- /dev/null
++++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb
+@@ -0,0 +1,7 @@
++require libmodbus.inc
++
++# Use the stable branch by default
++DEFAULT_PREFERENCE = "-1"
++
++SRC_URI[md5sum] = "dd4262f87ed835c4d1e560f8321a222c"
++SRC_URI[sha256sum] = "661e14f9dc904f3f1b034464ddaa5fd4b8472f8f5d1ea10a1148af85591b7ee9"
+-- 
+2.1.4
 
 
