@@ -1,58 +1,45 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
-	[209.85.220.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B2FF65C5C
+Return-Path: <fathi.boudra@linaro.org>
+Received: from mail-lf0-f46.google.com (mail-lf0-f46.google.com
+	[209.85.215.46])
+	by mail.openembedded.org (Postfix) with ESMTP id E2A1F73192
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Apr 2016 14:31:26 +0000 (UTC)
-Received: by mail-pa0-f52.google.com with SMTP id ot11so45451387pab.1
+	Thu, 14 Apr 2016 14:37:37 +0000 (UTC)
+Received: by mail-lf0-f46.google.com with SMTP id j11so111075425lfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Apr 2016 07:31:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to; 
-	bh=t5VJVfgx9jySPI/dPUM6tRULitAbZhfNZaLmdf5NFLA=;
-	b=nMAC9oRP7nVXaeaP5e2GU59kAf6hZg3Rx7Dfa8iWoFiZVD8uyH3xRwDRRG3Id60xzB
-	tCkU2T15iWFc7cpZNu4q8bx72JUEmYsVN0lejTCXTdE5lw//SUxo4od8Xrkmu9nz6NXi
-	xqcA1s0vrya7wEcGkHYNaqgCITXWCE05m5YE2Z1GaYruWSxlh/qcruhpTQ05uHVafzos
-	z5dPIm2NiGYQ79pr8RAK/JxRXAxHyTBrcQvrPp0FME454TXZtZTuNYnyDjTKAWxxdJjV
-	db9nJXai74JqlpC+cVEcH+34vyTNETVE5qQ+Ll73BK+evzlZx0gGBkA40YPbH6wXfRoI
-	lQ9g==
+	Thu, 14 Apr 2016 07:37:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=HX8FKS5AsE6hkvEWCoTQAbWQObqb07VwvMlS0jqW+to=;
+	b=k2qFJbTcs0uFFlVo9fVMLSHIf7GpiOzZv1nePt9f7SzBMsHViLtwFR3BKC5NYQ0WdY
+	qFOtrUxR/JX2RUR1e9DNRSK93/Lh8s4S7eDlGMx0rmeDDVDv4VOiemA0CEGWxldIe4VD
+	wX9M/OFhMIB+jnGhJzzYmd7Rz9qFfY2uUIUL8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to;
-	bh=t5VJVfgx9jySPI/dPUM6tRULitAbZhfNZaLmdf5NFLA=;
-	b=LEo8BXJsDSYQe57tU2Pk58LdHZE/fdDLsCZOpRQKi+ERO4oaicKbdEe3+4DzTlEBBx
-	sVq91+g5uPAn37qpjztK6yGQvpicgbwC0z414AYD6+y2EJqJtJmmMqz991b1yECmolzU
-	IZP4heKiDpSaIrdHRqz3hAEszhxwu9UIRyz2fKy+JdDOzRKGe9J7KXJ1A10AOX5IvU8T
-	TPSFGnbF+gvDGujnKk/TeeKPHo2HGeO4eyNRuovuM1DWd663zS+R0lIETg8cN8xSDcql
-	y7i87smd5hZvloEWEd+SmpwyiDZ/rZLjwGsDaXOrpWsLsnsVBW9MiEAchmuxxFbGx7BU
-	8ETQ==
-X-Gm-Message-State: AOPr4FVQhFbHTgSRpQJXev+f3n3sR0icXMGku8CHtbHCMKKMKUWCZxBzXwzppBE4e937gA==
-X-Received: by 10.66.146.196 with SMTP id te4mr21610619pab.125.1460644287009; 
-	Thu, 14 Apr 2016 07:31:27 -0700 (PDT)
-Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com.
-	[209.85.192.169]) by smtp.gmail.com with ESMTPSA id
-	136sm15516295pfz.44.2016.04.14.07.31.25
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 14 Apr 2016 07:31:25 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-pf0-f169.google.com with SMTP id 184so46745842pff.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Apr 2016 07:31:25 -0700 (PDT)
-MIME-Version: 1.0
-X-Received: by 10.98.67.139 with SMTP id l11mr21570315pfi.112.1460644285056;
-	Thu, 14 Apr 2016 07:31:25 -0700 (PDT)
-Received: by 10.67.3.163 with HTTP; Thu, 14 Apr 2016 07:31:24 -0700 (PDT)
-In-Reply-To: <1460638043-29679-1-git-send-email-fabio.berton@ossystems.com.br>
-References: <1460638043-29679-1-git-send-email-fabio.berton@ossystems.com.br>
-Date: Thu, 14 Apr 2016 11:31:24 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKrG8mUby6rFbtH50uERdm5a5yeHtgnz37edABt0Kf+FpA@mail.gmail.com>
-Message-ID: <CAP9ODKrG8mUby6rFbtH50uERdm5a5yeHtgnz37edABt0Kf+FpA@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] lldpd: Update to version 0.9.2
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=HX8FKS5AsE6hkvEWCoTQAbWQObqb07VwvMlS0jqW+to=;
+	b=fFeUKm4WdMJQjIl+1DJATKCf5bKaJNwYvt/ABZFwBjU9t4Zfdg4rsanrDMCywGEMWA
+	CLCd+dnf4OPpgdH0RHkW3gz/PRG+OTXuznQ9RwH+pO/ZiDYeisL5r9LR7YwVw9EwjmTu
+	hFy7vC+QshdBYddWDe1v/desSJ1AKMNZszeShaVACYyqIyoN5cnM+T1XvDpntqZwk3+u
+	1PhQ2/ZN0cdn7XYUoTCP+7tatPo4on7czmx/THWBlFFmeOTS1SMJW70ywYDZInYFjnA+
+	eAyTzD90mVAamEB5GO8xbyqexLBe/g6k+fMNQcL1xmeNsIKHt5Lw5CzalfCKu2ZF/lSn
+	HV+w==
+X-Gm-Message-State: AOPr4FWIc2w51FvvFuIxOr6uHKOuUTkvsvU6l5xRc4RGex9WDaU5QWX88QFmnpACXLzWkPFS
+X-Received: by 10.112.87.169 with SMTP id az9mr6818982lbb.49.1460644657085;
+	Thu, 14 Apr 2016 07:37:37 -0700 (PDT)
+Received: from localhost.localdomain (a91-156-68-16.elisa-laajakaista.fi.
+	[91.156.68.16]) by smtp.gmail.com with ESMTPSA id
+	e141sm7168371lfe.18.2016.04.14.07.37.35
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 14 Apr 2016 07:37:36 -0700 (PDT)
+From: Fathi Boudra <fathi.boudra@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 14 Apr 2016 17:37:27 +0300
+Message-Id: <1460644647-28383-1-git-send-email-fathi.boudra@linaro.org>
+X-Mailer: git-send-email 2.8.1
+Cc: Brendan Le Foll <brendan.le.foll@intel.com>,
+	Kevron Rees <kevron.m.rees@intel.com>,
+	Thomas Ingleby <thomas.c.ingleby@intel.com>
+Subject: [PATCH][meta-intel-iot-middleware] mraa: update to 0.10.1 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,54 +52,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Apr 2016 14:31:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Apr 2016 14:37:38 -0000
 
-On Thu, Apr 14, 2016 at 9:47 AM, Fabio Berton
-<fabio.berton@ossystems.com.br> wrote:
-> This new release has following changes since version 0.9.0:
->
-> lldpd (0.9.2)
->
->     - Ability to add/remove/replace custom TLV from lldpcli.
->     - LLDP-MED capabilities are displayed differently in lldpcli.
->     - Limit the maximum depth (5) when trying to apply a VLAN.
->     - Change JSON output format when using json-c to match Jansson
->     - output.
->     - Integration tests for the major parts of lldpd, including use of
->     - address and leak sanitizer.
+* update SRC_URI to 0.10.1 revision
+* update license file checksum: same license (MIT), only year update
 
-       I think the extra - is wrong. It is a continuation of previous line.
+Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+---
+ recipes-devtools/mraa/mraa.inc                          | 2 +-
+ recipes-devtools/mraa/{mraa_0.9.0.bb => mraa_0.10.1.bb} | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename recipes-devtools/mraa/{mraa_0.9.0.bb => mraa_0.10.1.bb} (62%)
 
->     - Fix:
->     - LLDP-MED POE TLV are now displayed in lldpcli.
->     - Ignore lower link when it is in another namespace.
->     - Fix various problems with interfaces being enslaved.
->     - Fix a memory leak when modifying port-related settings.
->
-> lldpd (0.9.1)
->
->     - Rework packaging for OS X to make it work with El Capitan. To
->     - simplify a bit, it is not possible anymore to build fat
->     - binaries. Latest version of OS X supporting 32bit was 10.6.
-
-        Here too.
-
->     - Fix:
->     - By default, when using port alias as description, use port name
->     - as port ID.
-
-      And here.
-
->     - Miscellaneous fixes with netlink cache.
->     - Ensure large netlink messages can be received.
->
-> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-
-Please rework the commit log and post a new patchset revision.
-
+diff --git a/recipes-devtools/mraa/mraa.inc b/recipes-devtools/mraa/mraa.inc
+index 7a3dbfd..24e3cd1 100644
+--- a/recipes-devtools/mraa/mraa.inc
++++ b/recipes-devtools/mraa/mraa.inc
+@@ -3,7 +3,7 @@ SECTION = "libs"
+ AUTHOR = "Brendan Le Foll, Tom Ingleby"
+ 
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=e8db6501ed294e65418a933925d12058"
++LIC_FILES_CHKSUM = "file://COPYING;md5=66493d54e65bfc12c7983ff2e884f37f"
+ 
+ S = "${WORKDIR}/git"
+ 
+diff --git a/recipes-devtools/mraa/mraa_0.9.0.bb b/recipes-devtools/mraa/mraa_0.10.1.bb
+similarity index 62%
+rename from recipes-devtools/mraa/mraa_0.9.0.bb
+rename to recipes-devtools/mraa/mraa_0.10.1.bb
+index a2c02b9..1baef7a 100644
+--- a/recipes-devtools/mraa/mraa_0.9.0.bb
++++ b/recipes-devtools/mraa/mraa_0.10.1.bb
+@@ -1,3 +1,3 @@
+ require mraa.inc
+ 
+-SRC_URI = "git://github.com/intel-iot-devkit/mraa.git;protocol=git;rev=d430b5c2b5b282e40bc705a28158b3d682d722f5"
++SRC_URI = "git://github.com/intel-iot-devkit/mraa.git;protocol=git;rev=a9429204e38416e04edbc1a6b5fe6ba49379493d"
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+2.8.1
+
 
