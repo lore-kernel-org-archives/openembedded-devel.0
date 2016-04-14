@@ -1,46 +1,58 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qg0-f65.google.com (mail-qg0-f65.google.com
-	[209.85.192.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 4901360111
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
+	[209.85.220.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B2FF65C5C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Apr 2016 12:47:49 +0000 (UTC)
-Received: by mail-qg0-f65.google.com with SMTP id f105so7347152qge.3
+	Thu, 14 Apr 2016 14:31:26 +0000 (UTC)
+Received: by mail-pa0-f52.google.com with SMTP id ot11so45451387pab.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Apr 2016 05:47:50 -0700 (PDT)
+	Thu, 14 Apr 2016 07:31:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:organization;
-	bh=irjcaF1EwpMHQbNUMFt6PmRZpcIKdQEDQHT4Wbe/0XQ=;
-	b=FyQbKNgAe/0Gsj+payFE4pEq0fwT5UCF6V5K6G/C6R0q5fOyOKpP1zmD0Lf1vmVVT+
-	GRndzIsjhhQFX/f9/Uq8Fu0Y/jLCh3YbQHmOn/qOWrkd9TkFudqeMt9x7MIXGJ1svhqX
-	shG6LFibprlfsucBP5QkWZUkfd17SK4aiknKVj3Yayw1eU8KMkfukIyMsfIZWskOa4PC
-	/xY3Ji10+TMQ8pNLupo3NmfY1JYrZScijh33RR859/dzmV8xkZ8Pe3luBxNpP46B2Sip
-	Lwd789Np09i2GOxFXFFdlpmUwQYQzOLhyDFTVq3w1dpgZtAdVVRzdmk8qvrm+eSnHDk9
-	gnQA==
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to; 
+	bh=t5VJVfgx9jySPI/dPUM6tRULitAbZhfNZaLmdf5NFLA=;
+	b=nMAC9oRP7nVXaeaP5e2GU59kAf6hZg3Rx7Dfa8iWoFiZVD8uyH3xRwDRRG3Id60xzB
+	tCkU2T15iWFc7cpZNu4q8bx72JUEmYsVN0lejTCXTdE5lw//SUxo4od8Xrkmu9nz6NXi
+	xqcA1s0vrya7wEcGkHYNaqgCITXWCE05m5YE2Z1GaYruWSxlh/qcruhpTQ05uHVafzos
+	z5dPIm2NiGYQ79pr8RAK/JxRXAxHyTBrcQvrPp0FME454TXZtZTuNYnyDjTKAWxxdJjV
+	db9nJXai74JqlpC+cVEcH+34vyTNETVE5qQ+Ll73BK+evzlZx0gGBkA40YPbH6wXfRoI
+	lQ9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
-	bh=irjcaF1EwpMHQbNUMFt6PmRZpcIKdQEDQHT4Wbe/0XQ=;
-	b=bGLw9rmM2SRibaCW9d8XhPoI+WMyhjmtxlvLR3IYlKwmQ7sUeL4sh2gn4A4/nKJDLT
-	J2EOgJ2KFByOZnJiLyxqTTjL1C7YGWBvm8uHml0uXCXOOGR1X9lduBSCeOfkwOL2Lqii
-	K8E7v5QzL6Pb5wrhv94kb9JUU8+byLHw6BOfUypPeOqDchufgdTSMpK0PqFEaOyvWotH
-	riuk3dt5TNeJsDrn+X8sKf/S2nHvqg4BWBzkVp68dpeYBSATyfDEySFa7k2Fdk/OZwvB
-	DvpKI3IVC2VbuY8+gt4/25aYtUV307ck4KtTOvgYy2DUK4RrBPXbpN6l1t0AUCCj7+lZ
-	AvmA==
-X-Gm-Message-State: AOPr4FUTdwIxyHoyMlRHZosM9Wce3f+WgheNf8/PgpamO7hs5su3E8hxiWre/gnvbHh58A==
-X-Received: by 10.140.100.225 with SMTP id s88mr17322084qge.76.1460638070212; 
-	Thu, 14 Apr 2016 05:47:50 -0700 (PDT)
-Received: from monster.lab.ossystems.com.br ([187.23.154.250])
-	by smtp.gmail.com with ESMTPSA id j8sm347055qhj.11.2016.04.14.05.47.47
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 14 Apr 2016 05:47:49 -0700 (PDT)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Apr 2016 09:47:23 -0300
-Message-Id: <1460638043-29679-1-git-send-email-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-Organization: O.S. Systems Software LTDA.
-Subject: [meta-networking][PATCH] lldpd: Update to version 0.9.2
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to;
+	bh=t5VJVfgx9jySPI/dPUM6tRULitAbZhfNZaLmdf5NFLA=;
+	b=LEo8BXJsDSYQe57tU2Pk58LdHZE/fdDLsCZOpRQKi+ERO4oaicKbdEe3+4DzTlEBBx
+	sVq91+g5uPAn37qpjztK6yGQvpicgbwC0z414AYD6+y2EJqJtJmmMqz991b1yECmolzU
+	IZP4heKiDpSaIrdHRqz3hAEszhxwu9UIRyz2fKy+JdDOzRKGe9J7KXJ1A10AOX5IvU8T
+	TPSFGnbF+gvDGujnKk/TeeKPHo2HGeO4eyNRuovuM1DWd663zS+R0lIETg8cN8xSDcql
+	y7i87smd5hZvloEWEd+SmpwyiDZ/rZLjwGsDaXOrpWsLsnsVBW9MiEAchmuxxFbGx7BU
+	8ETQ==
+X-Gm-Message-State: AOPr4FVQhFbHTgSRpQJXev+f3n3sR0icXMGku8CHtbHCMKKMKUWCZxBzXwzppBE4e937gA==
+X-Received: by 10.66.146.196 with SMTP id te4mr21610619pab.125.1460644287009; 
+	Thu, 14 Apr 2016 07:31:27 -0700 (PDT)
+Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com.
+	[209.85.192.169]) by smtp.gmail.com with ESMTPSA id
+	136sm15516295pfz.44.2016.04.14.07.31.25
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 14 Apr 2016 07:31:25 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-pf0-f169.google.com with SMTP id 184so46745842pff.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Apr 2016 07:31:25 -0700 (PDT)
+MIME-Version: 1.0
+X-Received: by 10.98.67.139 with SMTP id l11mr21570315pfi.112.1460644285056;
+	Thu, 14 Apr 2016 07:31:25 -0700 (PDT)
+Received: by 10.67.3.163 with HTTP; Thu, 14 Apr 2016 07:31:24 -0700 (PDT)
+In-Reply-To: <1460638043-29679-1-git-send-email-fabio.berton@ossystems.com.br>
+References: <1460638043-29679-1-git-send-email-fabio.berton@ossystems.com.br>
+Date: Thu, 14 Apr 2016 11:31:24 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKrG8mUby6rFbtH50uERdm5a5yeHtgnz37edABt0Kf+FpA@mail.gmail.com>
+Message-ID: <CAP9ODKrG8mUby6rFbtH50uERdm5a5yeHtgnz37edABt0Kf+FpA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] lldpd: Update to version 0.9.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,61 +65,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Apr 2016 12:47:50 -0000
+X-List-Received-Date: Thu, 14 Apr 2016 14:31:27 -0000
+Content-Type: text/plain; charset=UTF-8
 
-This new release has following changes since version 0.9.0:
+On Thu, Apr 14, 2016 at 9:47 AM, Fabio Berton
+<fabio.berton@ossystems.com.br> wrote:
+> This new release has following changes since version 0.9.0:
+>
+> lldpd (0.9.2)
+>
+>     - Ability to add/remove/replace custom TLV from lldpcli.
+>     - LLDP-MED capabilities are displayed differently in lldpcli.
+>     - Limit the maximum depth (5) when trying to apply a VLAN.
+>     - Change JSON output format when using json-c to match Jansson
+>     - output.
+>     - Integration tests for the major parts of lldpd, including use of
+>     - address and leak sanitizer.
 
-lldpd (0.9.2)
+       I think the extra - is wrong. It is a continuation of previous line.
 
-    - Ability to add/remove/replace custom TLV from lldpcli.
-    - LLDP-MED capabilities are displayed differently in lldpcli.
-    - Limit the maximum depth (5) when trying to apply a VLAN.
-    - Change JSON output format when using json-c to match Jansson
-    - output.
-    - Integration tests for the major parts of lldpd, including use of
-    - address and leak sanitizer.
-    - Fix:
-    - LLDP-MED POE TLV are now displayed in lldpcli.
-    - Ignore lower link when it is in another namespace.
-    - Fix various problems with interfaces being enslaved.
-    - Fix a memory leak when modifying port-related settings.
+>     - Fix:
+>     - LLDP-MED POE TLV are now displayed in lldpcli.
+>     - Ignore lower link when it is in another namespace.
+>     - Fix various problems with interfaces being enslaved.
+>     - Fix a memory leak when modifying port-related settings.
+>
+> lldpd (0.9.1)
+>
+>     - Rework packaging for OS X to make it work with El Capitan. To
+>     - simplify a bit, it is not possible anymore to build fat
+>     - binaries. Latest version of OS X supporting 32bit was 10.6.
 
-lldpd (0.9.1)
+        Here too.
 
-    - Rework packaging for OS X to make it work with El Capitan. To
-    - simplify a bit, it is not possible anymore to build fat
-    - binaries. Latest version of OS X supporting 32bit was 10.6.
-    - Fix:
-    - By default, when using port alias as description, use port name
-    - as port ID.
-    - Miscellaneous fixes with netlink cache.
-    - Ensure large netlink messages can be received.
+>     - Fix:
+>     - By default, when using port alias as description, use port name
+>     - as port ID.
 
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
----
- .../recipes-daemons/lldpd/{lldpd_0.9.0.bb => lldpd_0.9.2.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-daemons/lldpd/{lldpd_0.9.0.bb => lldpd_0.9.2.bb} (94%)
+      And here.
 
-diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_0.9.0.bb b/meta-networking/recipes-daemons/lldpd/lldpd_0.9.2.bb
-similarity index 94%
-rename from meta-networking/recipes-daemons/lldpd/lldpd_0.9.0.bb
-rename to meta-networking/recipes-daemons/lldpd/lldpd_0.9.2.bb
-index c590fae..77ed09f 100644
---- a/meta-networking/recipes-daemons/lldpd/lldpd_0.9.0.bb
-+++ b/meta-networking/recipes-daemons/lldpd/lldpd_0.9.2.bb
-@@ -11,8 +11,8 @@ SRC_URI = "\
-     file://lldpd.default \
-     "
- 
--SRC_URI[md5sum] = "ed0226129b0c90b3a45c273fe1aba8de"
--SRC_URI[sha256sum] = "300e4a590f7bf21c79d5ff94c2d6a69d0b2c34dbc21e17281496462a04ca80bc"
-+SRC_URI[md5sum] = "b809887bc927fb558fd5dd64b6c0a494"
-+SRC_URI[sha256sum] = "6054f29d41faf32186a22331853a299c87f4419b4332df4a564f76a139305a32"
- 
- inherit autotools update-rc.d useradd systemd pkgconfig bash-completion
- 
+>     - Miscellaneous fixes with netlink cache.
+>     - Ensure large netlink messages can be received.
+>
+> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+
+Please rework the commit log and post a new patchset revision.
+
 -- 
-2.1.4
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
