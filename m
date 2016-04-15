@@ -1,46 +1,39 @@
-Return-Path: <sujith.h@gmail.com>
-Received: from mail-qg0-f54.google.com (mail-qg0-f54.google.com
-	[209.85.192.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 209D373175
+Return-Path: <johannes.pointner@br-automation.com>
+Received: from mail2.br-automation.com (mail2.br-automation.com
+	[213.33.116.61])
+	by mail.openembedded.org (Postfix) with ESMTP id 878F86FFA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Apr 2016 07:50:25 +0000 (UTC)
-Received: by mail-qg0-f54.google.com with SMTP id j35so76837416qge.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Apr 2016 00:50:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ZDZiLrc3sp9vqeD1Q348gbheSbsmWbZ7I5NjSeF69GQ=;
-	b=iZM13ANk6wG3ZqiW0OyyFJYiJP5g1qPkfr4w7T/R9XC1mpqbKq/3h5FGeDtM5Lt13t
-	08aNpWRXQKbzwzKvk+cPV5dV4jLewPnJ5vSSu8lF7iDfQ/fINo5SxnEYuDbYV7fS+nVc
-	hODOvAv09NEj0sNIIXow2x5cwCbIFQNaDQdxg0nYm6JYu12S/eUqfWShUSi8a4hQxZkl
-	JHbuLzlqCHMOaRTTNq1A25rtM+5jD1bC6kwUq3tAS5X2nKDNUlVC4gvXo9TZoZLH9sQb
-	NN57whcaV+Knh91uibO5a0Pnc69C7dO6TVmnzitUs2urp5IYNGsS+Ybexn24JjIHoP40
-	3QSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=ZDZiLrc3sp9vqeD1Q348gbheSbsmWbZ7I5NjSeF69GQ=;
-	b=hCslbyHTVFcE1px7M2+VQNFbPFaKk+lFEo/UkENledNcW3gbYwY5xvKTSEYElQizzd
-	7SouhJrChNPAFuT7B3FLo6fpYV6JFMoNp7s7H7ViyA8l5zMNb5uhe32eyuO6ILPdvgvu
-	3YrQJpdiLsn5IMnw//j98nnDbbJUX3/5M44P6z+5ff14BahTBY+9RnPgmzBpOWYLxB0B
-	fWN34Uj5SkGMCgVTLqEujhvtU/YVUagQ3WPnWeAsACX1JKKNLfYNIpWpp9T2lAow/fIP
-	Yrw+mf/95FsPF+8angIcro3FAzYgwyTY1kmB4EMHGnyFq+z5JAYGFySEjyfrhH2Kkrm+
-	3hJg==
-X-Gm-Message-State: AOPr4FV/E2tkMbuYMpvoyDsIewzlHTEf5iKoysNxtfCSJQix2/5g+JMr3jQyrcMI6o2HyT2IAhzs2dQt7REsWA==
-X-Received: by 10.140.227.82 with SMTP id x79mr24739872qhb.101.1460706626111; 
-	Fri, 15 Apr 2016 00:50:26 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.89.178 with HTTP; Fri, 15 Apr 2016 00:50:06 -0700 (PDT)
-In-Reply-To: <CADyYWLkKaW0fFjentEq7h9AgojtHyLRFRnmCd7heA+bTBX515w@mail.gmail.com>
-References: <CADyYWLkKaW0fFjentEq7h9AgojtHyLRFRnmCd7heA+bTBX515w@mail.gmail.com>
-From: sujith h <sujith.h@gmail.com>
-Date: Fri, 15 Apr 2016 13:20:06 +0530
-Message-ID: <CADyYWLkNEyw9VGJk9Euufd-F7wEk6+sS-OK-iERv4k9sm8aa-g@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [yocto][meta-qt5] How to increase depth of qemuarm from bootargs?
+	Fri, 15 Apr 2016 09:23:58 +0000 (UTC)
+X-AuditID: c0a80110-5afff70000000f12-24-5710b32e00c4
+Received: from brsmtp01.br-automation.com (Unknown_Domain [192.168.1.60])
+	by  () with SMTP id 62.40.03858.E23B0175;
+	Fri, 15 Apr 2016 11:23:59 +0200 (CEST)
+From: Johannes Pointner <johannes.pointner@br-automation.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 15 Apr 2016 11:23:42 +0200
+Message-Id: <1460712222-17193-1-git-send-email-johannes.pointner@br-automation.com>
+X-Mailer: git-send-email 2.8.0
+X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Release
+	9.0.1FP5|November 22, 2015) at 15/04/2016 11:24:14,
+	Serialize by Router on BRSMTPINTERN2/InternSMTP(Release
+	9.0.1FP5|November 22, 2015) at 15/04/2016 11:24:19,
+	Serialize complete at 15/04/2016 11:24:19,
+	Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release
+	9.0.1FP5|November 22, 2015) at 15.04.2016 11:23:56,
+	Serialize by Router on BRSMTP01/Eggelsberg/AT/B&R(Release
+	9.0.1FP5|November 22, 2015) at 15.04.2016 11:23:56,
+	Serialize complete at 15.04.2016 11:23:56
+X-TNEFEvaluated: 1
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrDJMWRmVeSWpSXmKPExsVyYAWjja7+ZoFwg2dfhSwuHl7K7MDocW7j
+	CsYAxigum5TUnMyy1CJ9uwSujJZp2xgLfvBWTL85h7WBcQpPFyMnh4SAicTqj5NZuhi5OIQE
+	5jBKrPm2lgkkwSZgK3FkwlcWEFtEQFfi44e5jCA2s4C1xPvlC1i7GDk4hAWiJE7PNQMJswio
+	Slzc384MYvMKBEtsWd3EBjFfTmLd5O/sIPMlBDaySMy6/Y4ZIiEkcXrxWeYJjNwLGBlWMYrn
+	JmbmGOklFekmlpbk5yaWZObn6SXn525ihPhRYAfj7jfahxgFOBiVeHiXLxAIF2JNLCuuzD3E
+	KMHBrCTC+3A9UIg3JbGyKrUoP76oNCe1+BCjNAeLkjhvQwlQSiA9sSQ1OzW1ILUIJsvEwSnV
+	wBjdJRRze+Fzkannt0h8tmCf9LTqzXO9k4WGgrO7vnf/5+CXED3OV+L4U3+jvEf//3C1M6I3
+	f71Q2Kx7TNnl6i9FFoPNG65bHi68uuPynFavy+VFEm2He3ouVNd3TvAWW/dtBmu9mI6zbn6h
+	u0nxyfeVkZ/kDX3mz4/4c3wSe6DNr42qXf/mXlRiKc5INNRiLipOBAB/uRvq3wEAAA==
+Subject: [meta-networking][PATCH] samba: add volatile file to support readonly rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,57 +46,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Apr 2016 07:50:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 15 Apr 2016 09:24:00 -0000
 
----------- Forwarded message ----------
-From: sujith h <sujith.h@gmail.com>
-Date: Thu, Apr 14, 2016 at 2:53 PM
-Subject: [yocto][meta-qt5] How to increase depth of qemuarm from bootargs?
-To: "yocto@yoctoproject.org" <yocto@yoctoproject.org>
-Cc: Noor_Ahsan@mentor.com
+This patch adds a volatile file for samba which was removed by the
+update from 3.6.25 to 4.1.12. This file is necessary to build a image
+that uses the read-only-rootfs feature.
 
+Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
+---
+ .../recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba         | 3 +++
+ meta-networking/recipes-connectivity/samba/samba_4.1.12.bb             | 1 +
+ 2 files changed, 4 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba
 
-Hi all,
+diff --git a/meta-networking/recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba b/meta-networking/recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba
+new file mode 100644
+index 0000000..4bdfa7d
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba
+@@ -0,0 +1,3 @@
++# <type> <owner> <group> <mode> <path> <linksource>
++d root root 0755 /var/log/samba none
++d root root 0755 /var/run/samba none
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
+index ff58dae..a0ede00 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
+@@ -146,6 +146,7 @@ do_install_append() {
+     install -d ${D}${sysconfdir}/samba
+     echo "127.0.0.1 localhost" > ${D}${sysconfdir}/samba/lmhosts
+     install -m644 packaging/LSB/smb.conf ${D}${sysconfdir}/samba/smb.conf
++    install -D -m 644 ${WORKDIR}/volatiles.03_samba ${D}${sysconfdir}/default/volatiles/03_samba
+ 
+     install -d ${D}${sysconfdir}/sysconfig/
+     install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/sysconfig/samba
+-- 
+2.8.0
 
-I am trying to build Qt5 from meta-qt5 ( master branch ) with poky( machine
-is qemuarm). The qtbase is built successfully and is installed into
-core-image-sato. When I run : runqemu qemuarm
-I can see the matchbox window launched successfully.The qtbase is having
-gles2 enabled in the PACKAGECONFIG and gl is removed from PACKAGECONFIG. In
-mesa I have enabled gallium. I do see a problem when I try to run qtbase
-opengl examples.The gui gets displayed. But the image(s) associated with it
-never displays. For example lets say there is an example known as cube.
-When I try to run cube ( with -platform xcb), I could see a black screen.
-The cube image never comes. So my query is if it's possible to increase the
-depth ( default used is 16 for qemuarm ) to 24 through bootargs? If so a
-helping hand would be great. Let me know if more information is required
-regarding my setup. I have poky + meta-qt5 + meta-oe + meta-ruby layers in
-bblayers.conf.
-
-Thanks,
-Sujith H
-
---=20
-=E0=B4=B8=E0=B5=81=E0=B4=9C=E0=B4=BF=E0=B4=A4=E0=B5=8D =E0=B4=B9=E0=B4=B0=
-=E0=B4=BF=E0=B4=A6=E0=B4=BE=E0=B4=B8=E0=B4=A8=E0=B5=8D
-Bangalore
-<Project>Contributor to KDE project
-<Project>Contributor to Yocto project
-http://fci.wikia.com/wiki/Anti-DRM-Campaign
-<Blog> http://sujithh.info
-C-x C-c
-
-
-
---=20
-=E0=B4=B8=E0=B5=81=E0=B4=9C=E0=B4=BF=E0=B4=A4=E0=B5=8D =E0=B4=B9=E0=B4=B0=
-=E0=B4=BF=E0=B4=A6=E0=B4=BE=E0=B4=B8=E0=B4=A8=E0=B5=8D
-Bangalore
-<Project>Contributor to KDE project
-<Project>Contributor to Yocto project
-http://fci.wikia.com/wiki/Anti-DRM-Campaign
-<Blog> http://sujithh.info
-C-x C-c
 
