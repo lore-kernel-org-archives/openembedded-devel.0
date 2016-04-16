@@ -1,46 +1,49 @@
 Return-Path: <kergoth@gmail.com>
-Received: from mail-pa0-f68.google.com (mail-pa0-f68.google.com
-	[209.85.220.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 5696F60667
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id DA5D26FEF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Apr 2016 02:40:45 +0000 (UTC)
-Received: by mail-pa0-f68.google.com with SMTP id zy2so11164514pac.2
+	Sat, 16 Apr 2016 02:40:47 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id r187so11625400pfr.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Apr 2016 19:40:46 -0700 (PDT)
+	Fri, 15 Apr 2016 19:40:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=ZmEKZwsrBuAvpzFS/fXXfsbQJOE9Cly6jJtr7jJIgzI=;
-	b=WSOf7jlg1oT045MFcBnY6IKVWjVb0QaHjofV2oKYyoDL0T2+/VCpqtfnnzjmdaLlx+
-	ubZqSR6zuzgZAGP2RP0WBR0fPA/c6x2glz2cB8DqAv9NXsrno7w626KmbTUnsKzZyayO
-	A4WpxLvnZDjakA7V7ZBx4hxECef6swx+aNJPQszaQzXwrT7iJEHc6bVeSctPYhaCpxbV
-	rIJagNlD2idlMqorPstSnv3mUWkhwONwSjAtUOrQ5AGDtrykuikklrHYgNuTJtBDfAoe
-	QpV6KumdZu4x9/xWr9uMuAHOljx3eywlUbjqoOwT///g5J7XIfVfaJA6JrIC5ECL9R2N
-	mseg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=hkfZ86Ol9r49AifThiIOb7pjMRSaf5oDbR6SPkFBR9M=;
+	b=tLKNXRXXyRpiOb9i2wUGzMSyLh8uaGVIJe7o1+Q3Ig8LI7H/ZJDs0LPzvjWeNd0iZj
+	c7ACCLg5pRVSwVUR/o3Wiiy1a5As3V2bpkqzUE9nla3K42AIUF0YiYhMJwspdOqVVmkK
+	FsffAeECCBcOHEBgaLsi2o0SmLsSYlO2m/cJLWYmHfOoEHT6h9qyskr9IX3Lgmil0vZe
+	BVjojNbUCnPDitSEAe4iCVN1pBwY6cCVNfV4GQX0TPfzJYxaeD9BJ5oemxz/MZf+SUh4
+	yJl02Rp3WEcz3SRJXgv2Okctn+S9GuRljNe39dVYDxiia+n+M4P5V4azDd3kmXxbYsVo
+	SCsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ZmEKZwsrBuAvpzFS/fXXfsbQJOE9Cly6jJtr7jJIgzI=;
-	b=fgGPlP6VZ8xi9SB8apAbtaF4sEfXQpbJJa2PCz7WlJlBXp7feoW53lbO+S2h10jur/
-	IIHTgud00fQTPlco7KDdnWFEI4XTvjnGEN4AuH8SU+l3x6OoKeBnBtx1tijw4xoz+3UW
-	fVgEzxocteunyE6jEDfEl2/ozjnsPXrpJFj7CDMTsUxWdB6zNhAW9fD1x63pGJc0/T+2
-	rB2VyGgyhbNlcVNjf56wDLwXbqQHRQvWR5wBuDOr1FT4tdJOV70xKOEnD/dMh+FhWxnW
-	M+nRG2zjJkCWxRFpcztSVsE1I3tVL8g/kaFWfJRYAUdmOUW+b3gkokohNAcEtLtBltTa
-	x4Lw==
-X-Gm-Message-State: AOPr4FVL4fbkEHuoQR0cZRomVklrEMmsoZKL4BqfANM3xQNMUR/BDDoTn2a4XxdJwEQG3Q==
-X-Received: by 10.66.63.98 with SMTP id f2mr34259382pas.123.1460774446249;
-	Fri, 15 Apr 2016 19:40:46 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=hkfZ86Ol9r49AifThiIOb7pjMRSaf5oDbR6SPkFBR9M=;
+	b=jF5biSLTxRZp0gAiMsC3qmTjRybnQVbOpeM5pmA1EhxABGHbYAQQnTlMGXwGvuVTAY
+	ctAgtniASA+MiZTobBZ56ivulgMnsdJDhrCkAyWVrKtGNimC9trDnpRFmu+iJGYy9n0E
+	e+HW9eh6eEshnboVeQHFsMJTDRM7OBWMteA8NBJGT5x9D5ZiwPJUL62K7wq6R7uFCYnt
+	0mGtD44Iwybolqy90pEYyu5toUO7IMnwiIoP0xhtTBDgG0TfHvTLJHbbe0JI+5oa9MX1
+	+xg0Gji2QsX3q6sLSrMfUYY0FC3LFRIjOLq5fpHD5KnkOk75JYSgryw537gPU5oSJ6O+
+	72Lg==
+X-Gm-Message-State: AOPr4FW0xvMrA33TjtbJ48n8xgc3axJu1+Zn8i0HkYiVOUlToaKJxpOFQlmDnrguqF7h/A==
+X-Received: by 10.98.19.151 with SMTP id 23mr33934077pft.31.1460774448218;
+	Fri, 15 Apr 2016 19:40:48 -0700 (PDT)
 Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
 	by smtp.gmail.com with ESMTPSA id
-	h2sm67546842pfd.91.2016.04.15.19.40.43
+	h2sm67546842pfd.91.2016.04.15.19.40.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 15 Apr 2016 19:40:43 -0700 (PDT)
+	Fri, 15 Apr 2016 19:40:46 -0700 (PDT)
 From: Christopher Larson <kergoth@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Apr 2016 19:40:39 -0700
-Message-Id: <1460774441-27282-1-git-send-email-kergoth@gmail.com>
+Date: Fri, 15 Apr 2016 19:40:40 -0700
+Message-Id: <1460774441-27282-2-git-send-email-kergoth@gmail.com>
 X-Mailer: git-send-email 2.8.0
+In-Reply-To: <1460774441-27282-1-git-send-email-kergoth@gmail.com>
+References: <1460774441-27282-1-git-send-email-kergoth@gmail.com>
 Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [meta-networking][PATCH 1/3] ctdb: drop duplicated DESCRIPTION
+Subject: [meta-networking][PATCH 2/3] ctdb: rdepend on procps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,26 +60,27 @@ X-List-Received-Date: Sat, 16 Apr 2016 02:40:47 -0000
 
 From: Christopher Larson <chris_larson@mentor.com>
 
+ctdbd_wrapper requires pgrep.
+
 Signed-off-by: Christopher Larson <chris_larson@mentor.com>
 ---
- meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb | 4 ----
- 1 file changed, 4 deletions(-)
+ meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb b/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-index d4c0f86..66c966d 100644
+index 66c966d..232546c 100644
 --- a/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
 +++ b/meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb
-@@ -2,10 +2,6 @@ DESCRIPTION = "CTDB is a cluster implementation of the TDB database \
- used by Samba and other projects to store temporary data. If an \
- application is already using TDB for temporary data it is very easy \
- to convert that application to be cluster aware and use CTDB instead."
--DESCRIPTION = "CTDB is a cluster implementation of the TDB database \
--used by Samba and other projects to store temporary data. If an \
--application is already using TDB for temporary data it is very easy \
--to convert that application to be cluster aware and use CTDB instead."
- HOMEPAGE = "https://ctdb.samba.org/"
- LICENSE = "GPL-2.0+ & LGPL-3.0+ & GPL-3.0+"
+@@ -28,6 +28,9 @@ PARALLEL_MAKE = ""
  
+ DEPENDS += "popt libtevent libtalloc libldb"
+ 
++# ctdbd_wrapper requires pgrep, hence procps
++RDEPENDS_${PN} += "procps"
++
+ do_configure() {
+     oe_runconf
+ }
 -- 
 2.8.0
 
