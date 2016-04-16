@@ -1,30 +1,47 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by mail.openembedded.org (Postfix) with ESMTP id C9CB5602D9
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com
+	[209.85.192.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 962F460118
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Apr 2016 06:29:20 +0000 (UTC)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id B172D68A01A; Sat, 16 Apr 2016 07:29:19 +0100 (BST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	loki.analogue-micro-ltd.com
-X-Spam-Level: *
-X-Spam-Status: No, score=1.7 required=5.0 tests=ALL_TRUSTED,BAYES_40,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id 0BE7D68A019;
-	Sat, 16 Apr 2016 07:29:18 +0100 (BST)
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by zeus.mlbassoc.com (Postfix) with ESMTP id 71E226740435;
-	Sat, 16 Apr 2016 08:29:18 +0200 (CEST)
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <5711DBBC.1070207@mlbassoc.com>
-Date: Sat, 16 Apr 2016 08:29:16 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
-MIME-Version: 1.0
-Subject: [meta-browser] chromium issues
+	Sat, 16 Apr 2016 17:00:04 +0000 (UTC)
+Received: by mail-pf0-f169.google.com with SMTP id c20so66602414pfc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Apr 2016 10:00:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=idbNTXpKxk903o8koMDECSzlSG1Ql3+AaHpJrm3aykI=;
+	b=se3XapJTVQ6qzIokYhj9RS5YVTj+UlEhnnO2ihJ+KjrrzhK87i5mN4yAy+gsKM4QXa
+	7zo56/NSsJDJcmwrdoUiIe92PFdLZJCgvMzSpxpgJXz8MpE6LHhnL3eHFzVfFc5Dem+F
+	E5McLgas3C504s5Wg1IOD1/Uk410xFpq31Z2N4Uq+btWtqNB8er31gHcCtjY338g5Pa0
+	w0cc8KAGSt844S0UsELNbjsxgbBO2jmkCigU7TMTwrIOlgyW2wCQPl8GMY3F+vvdAHpr
+	BFHdkxEKW6jReLptaakkXoV7F1X1u95NVv7bsPINGnLXWm9bxGEl5Is+6wEDNpAnktWa
+	FowA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=idbNTXpKxk903o8koMDECSzlSG1Ql3+AaHpJrm3aykI=;
+	b=Whnx4cGn2//0VosuCj72NZ9gQqgh5AC4BdwBy16eQjUqGRdnYDMZZSAK7okLvPxwgn
+	rEFdgD15qaB9mDwy7R8gs37jA4HNTpAYn6ZSfbDkKlFskdjRxWqzvkX/M1j3MgXzssZ1
+	OGfa9YVw8e3bZfibeXB+wQLoxXbZBfilM+FDqvqWuoHMQewOnjd6k97vJqVGDWx2qzsA
+	ukBiO+Pv9JqRGCel1ydH8F3i+LJ/58sTuaKN4rhGEl2l7SaLvlm5NG1BxsGCXcHaTDWE
+	CpGP0EIACws9TBWV/yFM70j12ahL1Lw3+dsNbDbcIse0O0Y6tYnbI0EVAv24OqIXZUUu
+	+PrQ==
+X-Gm-Message-State: AOPr4FVz4fdDebbfz+8miRpVgEMpg0gnsyhWy5Glv8/P00gPeJXXEZ6MmyC8ZqceL5QIew==
+X-Received: by 10.98.16.198 with SMTP id 67mr38060159pfq.21.1460826005467;
+	Sat, 16 Apr 2016 10:00:05 -0700 (PDT)
+Received: from akuster-ThinkPad-X240.hsd1.ca.comcast.net
+	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
+	by smtp.gmail.com with ESMTPSA id
+	bu17sm72860039pac.25.2016.04.16.10.00.03
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 16 Apr 2016 10:00:04 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 16 Apr 2016 10:00:01 -0700
+Message-Id: <1460826001-6268-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] udisk2: fix build issue with missing depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,26 +54,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Apr 2016 06:29:22 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 16 Apr 2016 17:00:06 -0000
 
-I'm having some issues with chromium on my i.MX6Q target. Using Poky/Yocto
-meta              = "master:20a0121b558b32179220e394a66cb90dc6ff3879"
-meta-browser      = "master:a67a3461a135668dba573183f0f62fcd5dfb3121"
-meta-fsl-arm      = "master:682b957545172a79cfb19108a9d0b61209f8671e"
-meta-fsl-arm-extra = "master:39eb21c4c24a0be6d8277b566ebd52b657fbc2bb"
+ checking for sys/acl.h... no
+| configure: error: *** ACL headers not found.
+| NOTE: The following config.log files may provide further information.
 
-* When chromium starts, I get a message:
-     "Google API keys are missing.  Some functionality of chromium will be disabled"
-   This seems to only be related to speech - should I worry about it?
+add acl to DEPENDS
 
-* Accessing any page via https yields an SSL error.  How do I fix it?
-   Note: firefox built from same layer on this target works fine.
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-support/udisks/udisks2_2.1.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb b/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
+index d273948..72db886 100644
+--- a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
++++ b/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
+@@ -2,7 +2,7 @@ SUMMARY = "udisks provides dbus interfaces for disks and storage devices"
+ LICENSE = "GPLv2+ & LGPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=dd79f6dbbffdbc8e86b086a8f0c0ef43"
+ 
+-DEPENDS = "libatasmart polkit libgudev dbus-glib glib-2.0 intltool-native gnome-common-native"
++DEPENDS = "acl libatasmart polkit libgudev dbus-glib glib-2.0 intltool-native gnome-common-native"
+ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+ 
+ RDEPENDS_${PN} = "acl"
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.9.1
+
 
