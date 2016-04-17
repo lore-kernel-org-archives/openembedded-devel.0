@@ -1,51 +1,45 @@
-Return-Path: <mats.dev.list@gmail.com>
-Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
-	[209.85.215.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 66D2265CBC
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 1675C606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Apr 2016 21:53:44 +0000 (UTC)
-Received: by mail-lf0-f68.google.com with SMTP id p64so21324444lfg.0
+	Sun, 17 Apr 2016 22:28:43 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id y144so20052439wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Apr 2016 14:53:45 -0700 (PDT)
+	Sun, 17 Apr 2016 15:28:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:references:cc:to:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding;
-	bh=SiTdDh/BdZE+ESCOxBFH4HKVFu4PzeAmPenUgbU6gKM=;
-	b=pyA/E2hfeOSfIeru6t6JDJgcw3+XZXdGat3YAsgiBfp/pOMfIig08oEY3IXsHy3Lxo
-	EOT+yUm54/cBSALtEU04PRHcFgcTrLOUC4HSYTUpH1o7AoJtMcnQ7212Cmf4xMVaK9KA
-	k2wGW3d8w46HkTHTR1wPLtC8yKJekGcIkru4I2EeHOWWLn/+x1rwn7Xns1vWkkYtjsA0
-	qQUOBp+CYMd6tLbMV9pK88c0QqAAcjqtJVRjiPjoAerzwaogxJ1YGZlmAvBbxYU0Zfht
-	fwkl1eTkE9IX9VOiemMGP/+Y8e6ODTg2UMwgK/Mb/VnY7yiybT6dSwz4dYtDEl4rj67A
-	+YoA==
+	h=from:to:cc:subject:date:message-id;
+	bh=WLAFmptexq6TlGCL5Vs2ghy8M/iRMFlSCe4lJjaRSqU=;
+	b=WefM+/LzMEjZq6wA9Y/LtdfmYYA3836yORj79rVcJPB6SZrPHDqQQ3t7anNbpOParD
+	7Ei/Qm05HJUfH8+NOVKjDqNS6A2MMe/g9Utcx0aCh1tpxwQa4t6Vjfr4zfHsufeNm1OF
+	hOeOsLkytGgbU8lqkKDR1/WWRWkChDrT+bOoSlDZI807Tt+jFCX7bZLSpef5NoIAxcZi
+	rgT0SY44BkMHV4iiIl1cNcu58gAxzXk0xQ2z+EZQGCgoSFDlSHiFw6ciChx8Xbo7URRx
+	Fnm5J7ZREMjWfecfOxxHviajRuaBrJNhMxKV2HQnazrT3taMCObrIQu2MJzaYwaKUpiz
+	4scA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:references:cc:to:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=SiTdDh/BdZE+ESCOxBFH4HKVFu4PzeAmPenUgbU6gKM=;
-	b=GYozqU97/PzHT7kL0QIpryCWEo8LrMeqUt+bm6voLuTZuAC5qbIhRqwd3eDhCwZ6JI
-	bnM6Du9igDfi/5/qgj26/a9TunL0Q77lG/dlQVl80eR0XwFRfArKkdXsbrEbfsvuu0fX
-	4Ri4rKgfGiWBYtpHRtI2q67OnCaQYZWd84AvxbDC9t67W5BhFauqGRsTKTdnZUALmfLn
-	O2BE6PMTxVi/ho3iKfrujzIR47Xq0sj1pVYG+S0kBU5HYu8cksJRVqAEML/ttGXe0IlK
-	uw7VnCv5woBeeqVw4wnaopquFlqGu4LyCCZqlaz51v3fxXrCHNqU0oczV1temE6v+KXR
-	pFgQ==
-X-Gm-Message-State: AOPr4FXPPlINN2godlHxK9U0vlE+GWjrkKM25Xk4YXo/5HVSioI5JRGJzqEq9C7GlH22uw==
-X-Received: by 10.25.205.146 with SMTP id d140mr12535494lfg.109.1460843624025; 
-	Sat, 16 Apr 2016 14:53:44 -0700 (PDT)
-Received: from [192.168.1.205] ([195.84.96.49])
-	by smtp.gmail.com with ESMTPSA id k71sm972522lfi.43.2016.04.16.14.53.42
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=WLAFmptexq6TlGCL5Vs2ghy8M/iRMFlSCe4lJjaRSqU=;
+	b=WltN5zGDFyVvlxpxDPACGQ/pSiSgLPao5u67o2RBCF+m2yWUEpmZW0jg3ncKtOEV8G
+	kw7IWj00lXDWhP0DL0WJwGoFHmexLl8EoQt/TlKLxYpGvGfNMjDLN79ktBLr+Rq1sAYD
+	+iqneYLe3a7a1Gv6gP6tPIsY75V5dU3fTplS0dAqM8aB4+USjSuV2s3QzxPENxUePxRF
+	s/4KYZqC7AByd3ZO8EygGrJWNqDYsSLOV/taAHhxP7op8SWNcKnZfYifLonnSbMMtq1q
+	0w5uvymmiFsEd2jZXV3DSmVwz8o5J3Umm39VXjdZ6CtNtBBvvZLdPTikO9rfqan/VrC+
+	2vQA==
+X-Gm-Message-State: AOPr4FVg4tGfakLAtmnn3WumX5zY4c+FGENpzcqz5odBJqRaHAlTcfM/iA70W7TpzrkKmQ==
+X-Received: by 10.28.54.208 with SMTP id y77mr14484522wmh.17.1460932123968;
+	Sun, 17 Apr 2016 15:28:43 -0700 (PDT)
+Received: from ThinkPad-T520.homenet.telecomitalia.it
+	(host122-91-dynamic.45-79-r.retail.telecomitalia.it. [79.45.91.122])
+	by smtp.gmail.com with ESMTPSA id
+	j71sm23466248wmj.21.2016.04.17.15.28.42
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 16 Apr 2016 14:53:43 -0700 (PDT)
-References: <5712922E.2040102@gmail.com> <5712AC1A.3060901@gmail.com>
+	Sun, 17 Apr 2016 15:28:43 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Mats Karrman <mats.dev.list@gmail.com>
-Message-ID: <5712B461.1090001@gmail.com>
-Date: Sat, 16 Apr 2016 23:53:37 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
-MIME-Version: 1.0
-In-Reply-To: <5712AC1A.3060901@gmail.com>
-Cc: akuster@mvista.com
-Subject: Re: [meta-python] python-m2crypto: fix SSLv2 symbol issue
+Date: Mon, 18 Apr 2016 00:28:20 +0200
+Message-Id: <1460932100-11873-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-handheld] Pull Request 2016-04-18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,51 +52,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Apr 2016 21:53:46 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 17 Apr 2016 22:28:44 -0000
 
-Hi!
+The following changes since commit 526de214f4f88b41c41adc74da30637757acbee7:
 
-I haven't been on the list for a while so I'm sorry if the following is 
-obsolete.
-I found a thread in the archive from early march with the same subject.
-I just run in to this problem and found it's not enough to
+  linux-handheld: initial commit of v. 4.4 for PXA and SA1100 devices (2016-01-19 22:50:27 +0100)
 
-SWIG_FEATURES += "-DOPENSSL_NO_SSL2"
+are available in the git repository at:
 
-but I also must do
+  https://github.com/LinuxPDA/meta-handheld master
 
-SWIG_FEATURES_x86-64 += "-DOPENSSL_NO_SSL2"
+for you to fetch changes up to 6e6542bd551df995f6e1b205becd1324632c0bbd:
 
-In my case, since the crda_3.18 build seems to be depending on the 
-python-m2crypto-native.
+  zaurus.inc: mention linux-kexecboot in the notes for the installer (2016-04-17 22:51:56 +0200)
 
-My setup:
+----------------------------------------------------------------
+Andrea Adami (10):
+      linux-gcw0-kexecboot: fix INITRAMFS_TASK matching oe-core changes
+      zaurusd: fix build using autotools-brokensep
+      linux-handheld_4.4: update to 4.4.6
+      linux-gcw0-kexecboot: skip do_shared_workdir
+      linux-gcw0-kexecboot: parametrize the 'require' using ${PV}
+      linux-handheld_4.4: update defconfigs for spitz/akita
+      linux-handheld_4.4: upate to 4.4.7
+      linux-kexecboot_4.4: Initial commit for Zaurus devices
+      zaurus-installer: switch to linux-kexecboot
+      zaurus.inc: mention linux-kexecboot in the notes for the installer
 
-Build Configuration:
-BB_VERSION        = "1.28.0"
-BUILD_SYS         = "x86_64-linux"
-NATIVELSBSTRING   = "LinuxMint-2"
-TARGET_SYS        = "arm-poky-linux-gnueabi"
-MACHINE           = "rabbit"
-DISTRO            = "poky"
-DISTRO_VERSION    = "2.0.1"
-TUNE_FEATURES     = "arm armv7a vfp thumb neon callconvention-hard 
-cortexa9"
-TARGET_FPU        = "vfp-neon"
-meta
-meta-yocto        = "jethro:1a52eceaa5df89914b6a711defdcf0046e74c7f6"
-meta-oe
-meta-networking
-meta-python       = "jethro:c305ac5d2f5285d5eec8952a4ca7f3b4f89aed96"
-meta-fsl-arm      = "jethro:8d22b44716fa624ff87383c36d222d9e28d0b267"
-meta-fsl-arm-extra = "jethro:2fdd1f7729c11900126f6c73346b8ea89448e927"
-meta-local        = "master:fd5bc78e9be96322c724f0353904c2d561156fc8"
+ conf/machine/include/zaurus.inc                    |   4 +-
+ recipes-bsp/zaurus-utils/zaurus-installer.bb       |   4 +-
+ recipes-bsp/zaurusd/zaurusd_git.bb                 |   2 +-
+ recipes-kernel/linux/linux-gcw0-kexecboot_4.0.bb   |   5 +-
+ .../linux/linux-handheld-4.4/akita/defconfig       |   5 +-
+ .../linux/linux-handheld-4.4/spitz/defconfig       |   4 +-
+ recipes-kernel/linux/linux-handheld_4.4.bb         |   6 +-
+ .../linux/linux-kexecboot-4.4/akita/defconfig      | 135 +++++++++++++++++
+ .../linux/linux-kexecboot-4.4/c7x0/defconfig       | 134 +++++++++++++++++
+ .../linux/linux-kexecboot-4.4/collie/defconfig     | 163 +++++++++++++++++++++
+ .../linux/linux-kexecboot-4.4/poodle/defconfig     | 139 ++++++++++++++++++
+ .../linux/linux-kexecboot-4.4/spitz/3200-mtd.patch |  13 ++
+ .../linux/linux-kexecboot-4.4/spitz/defconfig      | 134 +++++++++++++++++
+ .../linux/linux-kexecboot-4.4/tosa/defconfig       | 136 +++++++++++++++++
+ recipes-kernel/linux/linux-kexecboot_4.4.bb        |  42 ++++++
+ 15 files changed, 916 insertions(+), 10 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/akita/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/c7x0/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/collie/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/poodle/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/spitz/3200-mtd.patch
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/spitz/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/tosa/defconfig
+ create mode 100644 recipes-kernel/linux/linux-kexecboot_4.4.bb
 
-BR,
-Mats
-
-
+-- 
+1.9.1
 
 
