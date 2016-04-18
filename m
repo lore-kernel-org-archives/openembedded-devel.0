@@ -1,51 +1,51 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
-	[209.85.223.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 82F6B6E667
+Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
+	[209.85.223.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8727B6E666
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2016 20:59:58 +0000 (UTC)
-Received: by mail-io0-f196.google.com with SMTP id z133so24770994iod.1
+	Mon, 18 Apr 2016 20:59:59 +0000 (UTC)
+Received: by mail-io0-f194.google.com with SMTP id g185so25019206ioa.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2016 13:59:59 -0700 (PDT)
+	Mon, 18 Apr 2016 14:00:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=deserted-net.20150623.gappssmtp.com; s=20150623;
 	h=sender:from:to:subject:date:message-id:in-reply-to:references;
-	bh=S2Q7uMOrcHLxrbph28EZ9a5v1zQ7Bhs+koAiqQjLkS0=;
-	b=CvXAe0CkGIC5lISfs3y7nl78iXMZvqJxIeXGMyPh9+XywKhy723Ov9OSFUcRM0Vsft
-	2ngu4k8R1QAeMyWuF6T/gC1rEVgKrhrzABKw98Hyol5AFjmFMcPHs3qLbSfnBs07XgEn
-	WScW0Nm+PXqckiV+VbiK0T/E9iHJ+aODd7/zSi95FdHzNNBNlCat/R75DiZ3KIiO2Y2O
-	PCYZVdkyxk8aDJfn5zDNLQ6SPY/myMgUHO3oWXq+XPUHyAy4tQMAyBbtZhCau1WdnGA5
-	q2lUwZ2ZJe0aO6nzmPftrup3fD904whUekOERJhd76H0kGQ/B80fjmGKpkr2D3wD7MGu
-	Grdw==
+	bh=dO9P5W1qZBYgmUjM13fGgWvmyNIk0GgcGoqkdbv2/Y8=;
+	b=x9KQHiugiWrnbD0CgXXiQira66wzX20ZmCBov4Q29zYgFbV3qX+H97aLJXv1RdnT7a
+	JT68Gvpxdxa27+JCNrV13yKr3VBRA8SkV5ooXrkMyH1p/LUnv28zLsl4znRAedqLr1Gl
+	PmNm/NytRzllkLoUbTlgL+apg1TDo7hknG6Vl6BfLuj5ctjCsod1X51jZeS7yXXdAwts
+	VtTJmLl1//W2V0WXgW3L1vr74PeSIufjp2qSYD0QZ51Ap2kij1Lwb0QWdC+vsmM0DNlJ
+	2nVBzy4ea/jRMyWiMXJ+p3ibzAescL8nSPm6n9ZpQgWc43ROubVttH+ql9FL8EnWAxjE
+	ZN4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:sender:from:to:subject:date:message-id
 	:in-reply-to:references;
-	bh=S2Q7uMOrcHLxrbph28EZ9a5v1zQ7Bhs+koAiqQjLkS0=;
-	b=ayc7SUDYlvnYYXZiZeVOc1K+EHibkAEDQ/rE/ZCCSIaLjH+NP9Hq4k3NKleklfBEou
-	HyiHh2omxYokylIUtjzVOlC9ij8Z4mqCrj21oamdyDP7ywuA7qsTQegWI36Svjofc09d
-	BGRbmssCkuCptvghb09OwF9635aH9NmXPwt0QAsPeXhnnpenx8WQyYc5jbXOjsSv0fd1
-	RWHt+w6nfdDvD8cO5MvSHfCGrAYCq+vy1WdALdyY83Nb75w3id83s013TMJKxdtdG0+O
-	Xxnt+2tT/QVmjgXFUhsyUJKESnIdY/X0/nb7uRZUy+w3s+fEkuCMWWw4/gvWYrSED+6a
-	gi5Q==
-X-Gm-Message-State: AOPr4FVF3Ho1blEvA0zsFA4B7kzH7KIipPV2BXGMBobUOyS8MTBFK3SNeVy/v/oFqWJixg==
-X-Received: by 10.107.29.132 with SMTP id d126mr39070841iod.14.1461013198853; 
-	Mon, 18 Apr 2016 13:59:58 -0700 (PDT)
+	bh=dO9P5W1qZBYgmUjM13fGgWvmyNIk0GgcGoqkdbv2/Y8=;
+	b=jwe4Y6MEp+u4bK2iP45gJ3XdCURI/2bpfc4Q58clxTIF0xpYgKPP7wIn9wLDqCKtYO
+	8dubTao1zDPUV/Ln5J0WxpqFakVeTM3CMRRICSSRoydmkctZJ69+1Om+qeFuXl62hiL5
+	EayCyY6VRTtMoXTSj6UleuE1FrCOZ6Uc7JMO0T33lqGMnf2nzHwgujwljd3ejifeWHA0
+	gCzSpHC9nSSCVFAfVg/mOTqpercl2ECm4at2ttmsC4dmhDB2mhTrFcy3BhBNKq7qj1UW
+	C8/FY4IaCzObUbwdP+hIfToakJ6T30yTNwt0X4u9F5hEB1nkiyZFdQVNDgnKPD0oWxah
+	WATw==
+X-Gm-Message-State: AOPr4FV8KM1v6/jqQMpFPUfC/mkmV7r4hnZnh+bavS+vXdHSDu6BRTMBSeetf3d0v3bC5w==
+X-Received: by 10.107.150.8 with SMTP id y8mr37155652iod.66.1461013199933;
+	Mon, 18 Apr 2016 13:59:59 -0700 (PDT)
 Received: from mir.deserted.net ([23.233.31.74])
 	by smtp.gmail.com with ESMTPSA id
-	207sm22442437iou.33.2016.04.18.13.59.57
+	207sm22442437iou.33.2016.04.18.13.59.58
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 18 Apr 2016 13:59:57 -0700 (PDT)
+	Mon, 18 Apr 2016 13:59:59 -0700 (PDT)
 Sender: Joe MacDonald <joe@deserted.net>
 From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Apr 2016 17:00:51 -0400
-Message-Id: <1461013253-2350-4-git-send-email-joe_macdonald@mentor.com>
+Date: Mon, 18 Apr 2016 17:00:52 -0400
+Message-Id: <1461013253-2350-5-git-send-email-joe_macdonald@mentor.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1461013253-2350-1-git-send-email-joe_macdonald@mentor.com>
 References: <1461013253-2350-1-git-send-email-joe_macdonald@mentor.com>
-Subject: [meta-networking][PATCH 3/5] libtevent: Update to latest stable
+Subject: [meta-networking][PATCH 4/5] libldb: Update to latest stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,31 +58,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2016 20:59:58 -0000
+X-List-Received-Date: Mon, 18 Apr 2016 20:59:59 -0000
 
-The update of Samba requires a newer version of libtevent, so update it.
+The update of Samba requires a newer version of libldb, so update it.
 
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 ---
- .../libtevent/{libtevent_0.9.25.bb => libtevent_0.9.28.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/libtevent/{libtevent_0.9.25.bb => libtevent_0.9.28.bb} (88%)
+ ...not-import-target-module-while-cross-compile.patch | 19 ++++++++++---------
+ .../libldb/{libldb_1.1.21.bb => libldb_1.1.26.bb}     |  4 ++--
+ 2 files changed, 12 insertions(+), 11 deletions(-)
+ rename meta-networking/recipes-support/libldb/{libldb_1.1.21.bb => libldb_1.1.26.bb} (92%)
 
-diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.9.25.bb b/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
-similarity index 88%
-rename from meta-networking/recipes-support/libtevent/libtevent_0.9.25.bb
-rename to meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
-index aa61ea6..d0ad748 100644
---- a/meta-networking/recipes-support/libtevent/libtevent_0.9.25.bb
-+++ b/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
-@@ -9,8 +9,8 @@ RDEPENDS_python-tevent = "python"
- SRC_URI = "http://samba.org/ftp/tevent/tevent-${PV}.tar.gz"
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b"
+diff --git a/meta-networking/recipes-support/libldb/libldb/do-not-import-target-module-while-cross-compile.patch b/meta-networking/recipes-support/libldb/libldb/do-not-import-target-module-while-cross-compile.patch
+index 2425a55..fdd312c 100755
+--- a/meta-networking/recipes-support/libldb/libldb/do-not-import-target-module-while-cross-compile.patch
++++ b/meta-networking/recipes-support/libldb/libldb/do-not-import-target-module-while-cross-compile.patch
+@@ -3,18 +3,19 @@ we just check whether does the module exist.
  
--SRC_URI[md5sum] = "8d01a2076cb8cd30cab40393d27043df"
--SRC_URI[sha256sum] = "fedeb0d55a11b3593b562ec09b32e44bd67619ed10e5fa10d1868adb1649c669"
-+SRC_URI[md5sum] = "945845817918f5cfbe0202d80a7db118"
-+SRC_URI[sha256sum] = "04d953379025b1560af5c4ffcce58a3ee84db7aaa09c9f1e3eff5b2945a13529"
+ Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+ 
+---- ldb-1.1.17.orig/buildtools/wafsamba/samba_bundled.py	2015-07-16 16:42:12.265127110 +0800
+-+++ ldb-1.1.17/buildtools/wafsamba/samba_bundled.py	2015-07-16 16:45:25.717119550 +0800
+-@@ -1,7 +1,7 @@
+- # functions to support bundled libraries
++Index: ldb-1.1.26/buildtools/wafsamba/samba_bundled.py
++===================================================================
++--- ldb-1.1.26.orig/buildtools/wafsamba/samba_bundled.py
+++++ ldb-1.1.26/buildtools/wafsamba/samba_bundled.py
++@@ -2,6 +2,7 @@
+  
++ import sys
++ import Build, Options, Logs
+++import imp, os
+  from Configure import conf
+--import sys, Logs
+-+import sys, Logs, imp
+- from samba_utils import *
++ from samba_utils import TO_LIST
+  
+- def PRIVATE_NAME(bld, name, private_extension, private_library):
+-@@ -218,17 +218,32 @@ def CHECK_BUNDLED_SYSTEM_PYTHON(conf, li
++@@ -230,17 +231,32 @@ def CHECK_BUNDLED_SYSTEM_PYTHON(conf, li
+      # versions
+      minversion = minimum_library_version(conf, libname, minversion)
+  
+diff --git a/meta-networking/recipes-support/libldb/libldb_1.1.21.bb b/meta-networking/recipes-support/libldb/libldb_1.1.26.bb
+similarity index 92%
+rename from meta-networking/recipes-support/libldb/libldb_1.1.21.bb
+rename to meta-networking/recipes-support/libldb/libldb_1.1.26.bb
+index bdad87d..5458d47 100644
+--- a/meta-networking/recipes-support/libldb/libldb_1.1.21.bb
++++ b/meta-networking/recipes-support/libldb/libldb_1.1.26.bb
+@@ -17,8 +17,8 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=b
+                     file://${COREBASE}/meta/files/common-licenses/LGPL-2.1;md5=1a6d268fd218675ffea8be556788b780 \
+                     file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
+ 
+-SRC_URI[md5sum] = "94ba09c7452fff68df3481686c56677e"
+-SRC_URI[sha256sum] = "267bbb7f278068eaf0de27adffda2e691a070a93c5c15ee27c828e87b4c7dbf1"
++SRC_URI[md5sum] = "31780b702b638ad32aa5d9853d257839"
++SRC_URI[sha256sum] = "8843c7a72b980d9413ba6c494c039bccd10c524b37fda2917afb147745d8b2e6"
  
  inherit waf-samba
  
