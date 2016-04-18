@@ -1,51 +1,51 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-io0-f193.google.com (mail-io0-f193.google.com
-	[209.85.223.193])
-	by mail.openembedded.org (Postfix) with ESMTP id DEE206E666
+Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
+	[209.85.223.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 82F6B6E667
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2016 20:59:55 +0000 (UTC)
-Received: by mail-io0-f193.google.com with SMTP id s2so24945986iod.3
+	Mon, 18 Apr 2016 20:59:58 +0000 (UTC)
+Received: by mail-io0-f196.google.com with SMTP id z133so24770994iod.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2016 13:59:56 -0700 (PDT)
+	Mon, 18 Apr 2016 13:59:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=deserted-net.20150623.gappssmtp.com; s=20150623;
 	h=sender:from:to:subject:date:message-id:in-reply-to:references;
-	bh=79DfDRBrtAG2YU7UEKhIfe/cqqylGM8R6Da4Q4qDOEo=;
-	b=RM51w8LOw22JZwIeUpCkEtr3O8GVZlzRNftqgY1KIZzR1OOPcHK2a1ZYCRfJLjghW/
-	jKNXTND+dxjM27D27iSEu0yb+VBAXiF54do8DqjS7d0ZpokZEw+wrklRpO170+hkHY5b
-	OLvy4hIYbXWdcoiSSqzRm8m203N5YHl+N4IICn5z4bLD8E+ZEk1Lf0dMszj8fcsgBqD7
-	xc1sLChDM7IhP3zLqLXNgR44ybArPOIE7z4aFpXyiy2njLtsBGbbET0ZAdAzXviezzRc
-	FNz+lOVRHup0YFxwcqbqCgGnlCDQuMPw1JAaRb84pNM2vNNyIrOF/NvOeQsaFd0FdjxA
-	KgWA==
+	bh=S2Q7uMOrcHLxrbph28EZ9a5v1zQ7Bhs+koAiqQjLkS0=;
+	b=CvXAe0CkGIC5lISfs3y7nl78iXMZvqJxIeXGMyPh9+XywKhy723Ov9OSFUcRM0Vsft
+	2ngu4k8R1QAeMyWuF6T/gC1rEVgKrhrzABKw98Hyol5AFjmFMcPHs3qLbSfnBs07XgEn
+	WScW0Nm+PXqckiV+VbiK0T/E9iHJ+aODd7/zSi95FdHzNNBNlCat/R75DiZ3KIiO2Y2O
+	PCYZVdkyxk8aDJfn5zDNLQ6SPY/myMgUHO3oWXq+XPUHyAy4tQMAyBbtZhCau1WdnGA5
+	q2lUwZ2ZJe0aO6nzmPftrup3fD904whUekOERJhd76H0kGQ/B80fjmGKpkr2D3wD7MGu
+	Grdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:sender:from:to:subject:date:message-id
 	:in-reply-to:references;
-	bh=79DfDRBrtAG2YU7UEKhIfe/cqqylGM8R6Da4Q4qDOEo=;
-	b=PTlHW+0BO1eulRp2yct4aL75d4YlYryvNa6F/2Z3Rnn6KKSQo9mFJTqipgnF7Gox1M
-	mt93YcvdWza4+CX2WSyEeOBmDZkJq/nl8pTnSX+jKG46/QqblEZTIkyomUWBRlxU+lGZ
-	pd+/k6g1DhwzJULNLiUft/WdRMTBZMUsIpD683nCz2x+5dCjsIh7pPdWtVlBQfLpOkB0
-	VfiULpp6iSLrPCCCJG6Zpqz1IvLzM1amTw3M2iRmYHxs5lv3QUwRlfAPdK/ij91NVfR9
-	zAxTGZ56xC2jqQ1lhjF2SW0p0doJvn5SVO8YGvAFoN6mIaaU8Si1dzwejbRum6sZ0cff
-	mLDw==
-X-Gm-Message-State: AOPr4FXSr+c/GrwRUjhApWD0bZBZAyIia1OZrI/cH1DVSIWVSkebFt/oZGwfMSbYLN48+g==
-X-Received: by 10.107.19.42 with SMTP id b42mr37765977ioj.75.1461013196626;
-	Mon, 18 Apr 2016 13:59:56 -0700 (PDT)
+	bh=S2Q7uMOrcHLxrbph28EZ9a5v1zQ7Bhs+koAiqQjLkS0=;
+	b=ayc7SUDYlvnYYXZiZeVOc1K+EHibkAEDQ/rE/ZCCSIaLjH+NP9Hq4k3NKleklfBEou
+	HyiHh2omxYokylIUtjzVOlC9ij8Z4mqCrj21oamdyDP7ywuA7qsTQegWI36Svjofc09d
+	BGRbmssCkuCptvghb09OwF9635aH9NmXPwt0QAsPeXhnnpenx8WQyYc5jbXOjsSv0fd1
+	RWHt+w6nfdDvD8cO5MvSHfCGrAYCq+vy1WdALdyY83Nb75w3id83s013TMJKxdtdG0+O
+	Xxnt+2tT/QVmjgXFUhsyUJKESnIdY/X0/nb7uRZUy+w3s+fEkuCMWWw4/gvWYrSED+6a
+	gi5Q==
+X-Gm-Message-State: AOPr4FVF3Ho1blEvA0zsFA4B7kzH7KIipPV2BXGMBobUOyS8MTBFK3SNeVy/v/oFqWJixg==
+X-Received: by 10.107.29.132 with SMTP id d126mr39070841iod.14.1461013198853; 
+	Mon, 18 Apr 2016 13:59:58 -0700 (PDT)
 Received: from mir.deserted.net ([23.233.31.74])
 	by smtp.gmail.com with ESMTPSA id
-	207sm22442437iou.33.2016.04.18.13.59.55
+	207sm22442437iou.33.2016.04.18.13.59.57
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 18 Apr 2016 13:59:55 -0700 (PDT)
+	Mon, 18 Apr 2016 13:59:57 -0700 (PDT)
 Sender: Joe MacDonald <joe@deserted.net>
 From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Apr 2016 17:00:49 -0400
-Message-Id: <1461013253-2350-2-git-send-email-joe_macdonald@mentor.com>
+Date: Mon, 18 Apr 2016 17:00:51 -0400
+Message-Id: <1461013253-2350-4-git-send-email-joe_macdonald@mentor.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1461013253-2350-1-git-send-email-joe_macdonald@mentor.com>
 References: <1461013253-2350-1-git-send-email-joe_macdonald@mentor.com>
-Subject: [meta-networking][PATCH 1/5] libtalloc: Update to latest stable
+Subject: [meta-networking][PATCH 3/5] libtevent: Update to latest stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,30 +60,29 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 18 Apr 2016 20:59:58 -0000
 
-The update of Samba requires a newer version of libtalloc, so update it.
+The update of Samba requires a newer version of libtevent, so update it.
 
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 ---
- .../libtalloc/{libtalloc_2.1.3.bb => libtalloc_2.1.6.bb}             | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/libtalloc/{libtalloc_2.1.3.bb => libtalloc_2.1.6.bb} (91%)
+ .../libtevent/{libtevent_0.9.25.bb => libtevent_0.9.28.bb}            | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/libtevent/{libtevent_0.9.25.bb => libtevent_0.9.28.bb} (88%)
 
-diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.3.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.6.bb
-similarity index 91%
-rename from meta-networking/recipes-support/libtalloc/libtalloc_2.1.3.bb
-rename to meta-networking/recipes-support/libtalloc/libtalloc_2.1.6.bb
-index 8209264..8937311 100644
---- a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.3.bb
-+++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.6.bb
-@@ -9,8 +9,9 @@ SRC_URI = "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz"
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
-                     file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
+diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.9.25.bb b/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
+similarity index 88%
+rename from meta-networking/recipes-support/libtevent/libtevent_0.9.25.bb
+rename to meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
+index aa61ea6..d0ad748 100644
+--- a/meta-networking/recipes-support/libtevent/libtevent_0.9.25.bb
++++ b/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
+@@ -9,8 +9,8 @@ RDEPENDS_python-tevent = "python"
+ SRC_URI = "http://samba.org/ftp/tevent/tevent-${PV}.tar.gz"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b"
  
--SRC_URI[md5sum] = "3e285de2228ae67ff0a0f5cec658f627"
--SRC_URI[sha256sum] = "7aa5f75b22d4ef9c737b25515f2a2837ddc13014ff4ac6e58dd9e311f41f2cb0"
-+SRC_URI[md5sum] = "707010c6ede5821fd34397f5d9ec6ab8"
-+SRC_URI[sha256sum] = "3b8e1a50bacb359d99942e0dd9941cef779ae4b5eb20f138873bd8270cb1d47b"
-+
+-SRC_URI[md5sum] = "8d01a2076cb8cd30cab40393d27043df"
+-SRC_URI[sha256sum] = "fedeb0d55a11b3593b562ec09b32e44bd67619ed10e5fa10d1868adb1649c669"
++SRC_URI[md5sum] = "945845817918f5cfbe0202d80a7db118"
++SRC_URI[sha256sum] = "04d953379025b1560af5c4ffcce58a3ee84db7aaa09c9f1e3eff5b2945a13529"
  
  inherit waf-samba
  
