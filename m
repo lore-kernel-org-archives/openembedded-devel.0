@@ -1,49 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f170.google.com (mail-pf0-f170.google.com
-	[209.85.192.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E41760616
+Received: from mail-pf0-f173.google.com (mail-pf0-f173.google.com
+	[209.85.192.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 9872A600B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2016 18:27:16 +0000 (UTC)
-Received: by mail-pf0-f170.google.com with SMTP id 184so83734798pff.0
+	Mon, 18 Apr 2016 18:56:07 +0000 (UTC)
+Received: by mail-pf0-f173.google.com with SMTP id 184so83954887pff.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2016 11:27:17 -0700 (PDT)
+	Mon, 18 Apr 2016 11:56:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=ALgJNMCEF0cAeR8NLKpdeflGNZMbvwe9IdLgvB2Se2Q=;
-	b=XvisC9fZOKQudRytPnow+TU9JiKej9ocnL0Pg5gByjA1VLpX7J49W4cC1RxzF6uxS3
-	OD/IBXIgAngMxClTfvX9B68cXb/BDNGgde09/92j0HWCMpIzVGeEWrrBszZHhj4x7DIb
-	pYr7kDrQSsJ+2xeGCybdhZ0hyfcglFsgpibb71O3PESXkBqX+ei+hINCZnY+W7urs01u
-	MI6EJW8rJFfWmIpKO4Fv1l1m677vfze0JSuF4jxUXNdPoIfp7F8zmwupGm0x0uo3CG5a
-	/2jyMADq6gaPqnZ+Ep3tJY8dfuyhgrHGghraxht3u45pZpUxoKbwkGJjVBRnLBQCiVtY
-	Qmqw==
+	h=to:from:subject:message-id:date:user-agent:mime-version
+	:content-transfer-encoding;
+	bh=0AJfFS0L2kR7n9awfWaf168TOoZfDPySqJscuEL1yHE=;
+	b=YqAIWrEbMs95cUCzJzES4MA4nZs1sPdnSLfyByF53uENFFUXsz9VLlUvz6tL7pR4kV
+	Nee6+HzQu0u6heNZMlIsl6U+KgWv/r7OPD3ohlMshR+HKy/KlxBrKesNQUUlA2CmEXDa
+	pUmF8mcmWlK8suXzCMwo5dSRkrr5kIrpyHr2gXkb+4FUsrL2vjZipwGwscN8Chs07g29
+	ueAaQ7U0Afn++U3B1qMLBMi1b/5tPWQRLORCkjYzWn+8Lorvakrlf+qWkvjK/r4AtV0m
+	lmJQONHFN0hIe4jNNuCbskpTDojz052xObvyqdFY8Mt9yp0Eh9vJHTXD146ha7GDW21y
+	+plQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=ALgJNMCEF0cAeR8NLKpdeflGNZMbvwe9IdLgvB2Se2Q=;
-	b=DpM2o93JNfnoNOTC2BlSbkZIilONJHQVTkOYe1oaUBygM3xqRqIot6DqD3ErYGxxBC
-	fHU3baKpaWgNqcRLFSLtvG92r+p+swRuIpbLMyew2lMb6ngxo+RlXTd0UlwTzhQHlReA
-	UcCbdosJkU4Njff3+2E2yLCOwvVi0M25ZrQ7LZmQCpNoPUzM82NxLFPIKN45FTWHFmnD
-	mn2ySUtdpKXcpIcGXGWjKQ+3hPi60B8UXmR+yNzgjxL6iKOL4o3CbLSIrL+Mo/A7DtL5
-	eIOkU0y6ZokS00eihp4Safk3RKN3vUDXvqETmX74JSkccfeMdOw10qZtQw0LhuCNFGt9
-	YYYg==
-X-Gm-Message-State: AOPr4FVzEPnmLVt5MAxNwx7PfewgILDEkDqdMsJj+Xy6Ma7xVhKYGpYHbxP5hy96XUb/Cg==
-X-Received: by 10.98.65.203 with SMTP id g72mr52081902pfd.138.1461004037170;
-	Mon, 18 Apr 2016 11:27:17 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	s63sm29542442pfb.71.2016.04.18.11.27.15
+	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+	:mime-version:content-transfer-encoding;
+	bh=0AJfFS0L2kR7n9awfWaf168TOoZfDPySqJscuEL1yHE=;
+	b=id+lrBJBSVbiyus+CTAOJFSrdq442Ac9noBi6WLNxYHoqP8LBFq5l2Z/hlTPQwsfsq
+	Q5ADkxpYrthkWx+ZoLeGJunKjYdYhNef270sZLA6rQ2naYT1Jds+nctJRYqyjfPm7GFf
+	n28RYCMx8kGWnh5li4B+oW85X6zByAxRG4oc/1XERfPjwp0Gxn3lXsG7kaEqTDzYL9UR
+	o4JZtcyFDBJjbBMHkXkTnXZCgNHkQ+D/UpFeP/vgahy1F8O8G0WmEOpI+qhokKzwA8Qg
+	VBVij1KrvWt/QfEM4mv/vqTV6i8cyduOkUvOb38KC3xHDNnsOaoREmuBvP0rXPRQga02
+	AnIw==
+X-Gm-Message-State: AOPr4FVlD6/cRRP5Zr/oMsI/+2nInDbanhdTfAxOXld5j8ss6NDpjjOKTCfH3I/t7Hd8Zg==
+X-Received: by 10.98.8.219 with SMTP id 88mr51663159pfi.51.1461005768734;
+	Mon, 18 Apr 2016 11:56:08 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1239:f54b:b8cc:b5b1:49c1?
+	([2601:202:4000:1239:f54b:b8cc:b5b1:49c1])
+	by smtp.googlemail.com with ESMTPSA id
+	x184sm8657961pfb.53.2016.04.18.11.56.07
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 18 Apr 2016 11:27:16 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Apr 2016 11:26:59 -0700
-Message-Id: <1461004019-20893-2-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-In-Reply-To: <1461004019-20893-1-git-send-email-akuster808@gmail.com>
-References: <1461004019-20893-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 2/2] flite: fix license issue.
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 18 Apr 2016 11:56:07 -0700 (PDT)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <57152DC6.3040100@gmail.com>
+Date: Mon, 18 Apr 2016 11:56:06 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+Subject: patch requests for meta-openembedded jethro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,57 +58,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2016 18:27:17 -0000
+X-List-Received-Date: Mon, 18 Apr 2016 18:56:09 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-copy license from http://www.speech.cs.cmu.edu/flite/ and include text
+I am staging patches for another jethro update
 
-WARNING: flite-alsa: No generic license file exists for: flite in any provider
+https://github.com/akuster/meta-openembedded/tree/akuster/jethro-next
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-oe/licenses/flite | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
- create mode 100644 meta-oe/licenses/flite
+c305ac5d2f5285d5eec8952a4ca7f3b4f89aed96..5e36615e77df2111c680d1f828b99e00bde7f1e6
 
-diff --git a/meta-oe/licenses/flite b/meta-oe/licenses/flite
-new file mode 100644
-index 0000000..51e67fd
---- /dev/null
-+++ b/meta-oe/licenses/flite
-@@ -0,0 +1,32 @@
-+/*************************************************************************/
-+/*                                                                       */
-+/*                  Language Technologies Institute                      */
-+/*                     Carnegie Mellon University                        */
-+/*                      Copyright (c) 1999-2009                          */
-+/*                        All Rights Reserved.                           */
-+/*                                                                       */
-+/*  Permission is hereby granted, free of charge, to use and distribute  */
-+/*  this software and its documentation without restriction, including   */
-+/*  without limitation the rights to use, copy, modify, merge, publish,  */
-+/*  distribute, sublicense, and/or sell copies of this work, and to      */
-+/*  permit persons to whom this work is furnished to do so, subject to   */
-+/*  the following conditions:                                            */
-+/*   1. The code must retain the above copyright notice, this list of    */
-+/*      conditions and the following disclaimer.                         */
-+/*   2. Any modifications must be clearly marked as such.                */
-+/*   3. Original authors' names are not deleted.                         */
-+/*   4. The authors' names are not used to endorse or promote products   */
-+/*      derived from this software without specific prior written        */
-+/*      permission.                                                      */
-+/*                                                                       */
-+/*  CARNEGIE MELLON UNIVERSITY AND THE CONTRIBUTORS TO THIS WORK         */
-+/*  DISCLAIM ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING      */
-+/*  ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN NO EVENT   */
-+/*  SHALL CARNEGIE MELLON UNIVERSITY NOR THE CONTRIBUTORS BE LIABLE      */
-+/*  FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    */
-+/*  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN   */
-+/*  AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,          */
-+/*  ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF       */
-+/*  THIS SOFTWARE.                                                       */
-+/*                                                                       */
-+/*************************************************************************/
--- 
-2.3.5
 
+If you sent a patch for jethro and you don't see in in the branch above,
+please let me know.
+
+regards,
+Armin
 
