@@ -1,50 +1,49 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qg0-f66.google.com (mail-qg0-f66.google.com
-	[209.85.192.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FD8960721
+Return-Path: <asselsm@gmail.com>
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id B34A060796
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2016 19:07:59 +0000 (UTC)
-Received: by mail-qg0-f66.google.com with SMTP id m8so6268026qgd.1
+	Mon, 18 Apr 2016 19:26:17 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id x190so24136306vka.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2016 12:08:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=E+AYYQdaoEYFA2DRBSjAjcOfs7OvVTjio+a/2f1I2CA=;
-	b=ldljLTD2r0llJ0UXll4aX+LHW4OjExCJ+ZfLSCldujnQ9BmFCCo38oojaHPewl+pIU
-	8dUrykBaHwFAFNvhN4wP6r3l90f+GiUoBP7Mtby6XYlYX85lDjlDgMtfLtfMGxboVHZK
-	ScYOvPPFxafFv6QTDGo5sKEzBxW9Hp0Aijc2HbzE3tJxmOxQngasb8NE0/yrUNI6q+oZ
-	AkP9FhpWaqkSO7O4LQyG7B5jmzPpZohMGMxq2g+BcBwbfrHOE81gXvHfYxYRPAIRyIqW
-	ycZMLTfgSzE3E/RXqYeGANgiOw66a/cxBTio/n8/XhDuDwWozANB50XMJ2hrdkzCRLWM
-	+nfw==
+	Mon, 18 Apr 2016 12:26:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:reply-to:sender:in-reply-to:references:date:message-id
+	:subject:from:to;
+	bh=dlZiVFFyE/wG59O4DXl/P8pnEDQbivdOYZ0/cK88kc0=;
+	b=Jl/og/mvdIoKwnXCVHUD4dj37+Q24rQsLufAzkNlDNE1tFN71FLpVV4r5rhIo+oPJA
+	zO36fYxP6uszqUcyvTl/2Skm7Wen/3FRdEGZQHb5ArreYTb1yxTwXuBop/WyV2hLhGir
+	eXYSai8kV/wsauMvtUiR8oHNLURCYsLxzaAzu7p0BBMF3bBRgdScRVxPWcl8ZDjbu7Ze
+	Yos4HTSafs4ZvMAM83HiypLdabEP3M3rfSqmYWLgqn9tZcLdPYjIlPcm02m4VZDcYblu
+	QwkAXBwpbYcJ7EvesHNko0LKXVjgNDusziiqFXei7fhCGuWM5qtSH91zsD6GR15OrDx/
+	LCqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:organization;
-	bh=E+AYYQdaoEYFA2DRBSjAjcOfs7OvVTjio+a/2f1I2CA=;
-	b=Zr19nqv1Sh5dyYzpZfyw/JQ+xr72GMlX6ISnqMeRpJU135v759MLrv67pDVa8jXg1L
-	uJ9O1ySEYqMVO84QJh8l7jJcfXLmOxdnr0sy9eim+aiOHVgYulMJabUQ8vHIIaNK7TeJ
-	jBQlN7Fr8qFXa/9cZ9xke4x3xCB7Ttxge/bM1fuyfCwem2KSQrinSzMXYVLmO1z+d80w
-	kP7ATzrZGLRhkI02CDRqDzm0AJQBIwlszc5yL+5ewhMuk67mIJJ+y9QmIUSiMLL7KKWf
-	KbE8FKXKZsGtUc5FC99POmj+AYtsN0uH0xq+K18VDhse4qP37xO/qoixsHU9fR0KLEYc
-	zWNg==
-X-Gm-Message-State: AOPr4FUrwJ0cpnfQDWpyEcJnwtVhUg2YmzuerUXb7skJnm0aPXqFj6AhPoBX3ExDBKWu3Q==
-X-Received: by 10.140.172.6 with SMTP id s6mr47448288qhs.57.1461006480395;
-	Mon, 18 Apr 2016 12:08:00 -0700 (PDT)
-Received: from monster.lab.ossystems.com.br ([187.23.154.250])
-	by smtp.gmail.com with ESMTPSA id
-	e14sm27047101qhc.17.2016.04.18.12.07.58
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 18 Apr 2016 12:07:59 -0700 (PDT)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
+	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
+	:references:date:message-id:subject:from:to;
+	bh=dlZiVFFyE/wG59O4DXl/P8pnEDQbivdOYZ0/cK88kc0=;
+	b=WK3QlcpSJZ6ajU5JgHjAAGBm616xVckpl4BF1R/9OnfT2ACmn8hATTKzxQke60wdPS
+	3e9rt6Hk3Te9smSq2c6aviy7BfTUMZIg8911yjrWB69YncnyOPfOk/kUjhRAB6STo16R
+	EcJrJVVTwyanDoVasZ85xOJZZlAJfLHa2Qk4+PNUA9stpc+Xl0Qz+GTQlHW73uXjSC0Q
+	JndbcK4F/dRFlq6qZGiSxBPAeURgcLVpeRUJPxPk52nNelgUDsMR1I/p89rX5HkfTyiT
+	nJ1R7yt/gLeA/gb0GnP7ogpMnZJH3OaEPQ8ZmP2NzeQ5IlDIxp7cDHphAjaGCQXKEnwG
+	azOA==
+X-Gm-Message-State: AOPr4FUbXhIsQ5jcBcxozHDs3Ka1h41Fs6+OOkTqQhw22UQVYpeSgKgMNu+eyj7L9IEGfxpJA/a4Hez/26ydoQ==
+MIME-Version: 1.0
+X-Received: by 10.176.6.102 with SMTP id f93mr17343187uaf.59.1461007578468;
+	Mon, 18 Apr 2016 12:26:18 -0700 (PDT)
+Reply-To: mark.asselstine@windriver.com
+Sender: asselsm@gmail.com
+Received: by 10.176.65.229 with HTTP; Mon, 18 Apr 2016 12:26:18 -0700 (PDT)
+In-Reply-To: <20160406130115.GB8709@ad.chargestorm.se>
+References: <0527D863-997F-476E-B6EE-FEA9BDD96B0F@gmail.com>
+	<20160406130115.GB8709@ad.chargestorm.se>
+Date: Mon, 18 Apr 2016 15:26:18 -0400
+X-Google-Sender-Auth: 9bU75vvvLcs0MwOt4qeWQ4JouqA
+Message-ID: <CAPuovELwVYMqV4EpRSC6+m0Mo-j4JTQ1mCkrO5mci+kJn9N3fA@mail.gmail.com>
+From: Mark Asselstine <mark.asselstine@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Apr 2016 16:07:19 -0300
-Message-Id: <1461006439-16137-3-git-send-email-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1461006439-16137-1-git-send-email-fabio.berton@ossystems.com.br>
-References: <1461006439-16137-1-git-send-email-fabio.berton@ossystems.com.br>
-Organization: O.S. Systems Software LTDA.
-Subject: [meta-python][PATCH 3/3] python-visitor: Add recipe for version 0.1.2
+Subject: Re: [meta-networking][PATCH] dnsmasq: steal resolvconf support from Ubuntu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,31 +56,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2016 19:08:00 -0000
+X-List-Received-Date: Mon, 18 Apr 2016 19:26:20 -0000
+Content-Type: text/plain; charset=UTF-8
 
-A tiny pythonic visitor implementation.
+On Wed, Apr 6, 2016 at 9:01 AM, Anders Darander <anders@chargestorm.se> wrote:
+> Hm, unfortunately I didn't notice before this went in.
+>
+> * Jens Rehsack <rehsack@gmail.com> [160228 13:35]:
+>
+>> Add support for resolvconf integration as done in Ubuntu. This implies
+>> updates of start-scripts, resolvconf plugin (on nameserver update ...),
+>> populate-volatiles control file for saved nameserver list.
+>
+>> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+>> ---
+>
+> snip...
+>
+>> diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq.service b/meta-networking/recipes-support/dnsmasq/files/dnsmasq.service
+>> index 549e15e..c3637e1 100644
+>> --- a/meta-networking/recipes-support/dnsmasq/files/dnsmasq.service
+>> +++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq.service
+>> @@ -5,8 +5,11 @@ After=network.target
+>>  [Service]
+>>  Type=forking
+>>  PIDFile=/run/dnsmasq.pid
+>> -ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid
+>> -ExecReload=/bin/kill -HUP $(/bin/cat /run/dnsmasq.pid)
+>> +ExecStartPre=/usr/sbin/dnsmasq --test
+>> +ExecStart=/etc/init.d/dnsmasq systemd-exec
+>> +ExecStartPost=/etc/init.d/dnsmasq systemd-start-resolvconf
+>
+> This breaks on systemd-only distros. On those, the init scripts gets
+> removed during installation.
+>
+> When patching out that removal, I'm also seeing that dnsmasq dies after
+> a few minuts.
+>
+>
+> Cheers,
+> Anders
 
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
----
- meta-python/recipes-devtools/python/python-visitor_0.1.2.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-visitor_0.1.2.bb
+This was obviously not tested with systemd. '/usr/sbin/dnsmasq' simply
+doesn't exist and as Anders points out the init scripts are not
+included in systemd builds. Would be great to see a fix for this. I
+plan and sending something to at least get us back to working dnsmasq
+with systemd builds.
 
-diff --git a/meta-python/recipes-devtools/python/python-visitor_0.1.2.bb b/meta-python/recipes-devtools/python/python-visitor_0.1.2.bb
-new file mode 100644
-index 0000000..f53091e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-visitor_0.1.2.bb
-@@ -0,0 +1,8 @@
-+SUMMARY = "A tiny pythonic visitor implementation."
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
-+
-+SRC_URI[md5sum] = "e9471b44e5d426b0adf5d27694598be0"
-+SRC_URI[sha256sum] = "d9444ffca56a46a920719460d4952f8c88f8fef97f1ea7d2b1f7c50f675022bd"
-+
-+inherit pypi setuptools
--- 
-2.1.4
+Mark
 
+>
+>> +ExecStopPre=/etc/init.d/dnsmasq systemd-stop-resolvconf
+>> +ExecReload=/bin/kill -HUP $MAINPID
+>
+>>  [Install]
+>>  WantedBy=multi-user.target
+>
+> --
+> Anders Darander, Senior System Architect
+> ChargeStorm AB / eStorm AB
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
