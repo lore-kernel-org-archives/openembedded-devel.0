@@ -1,45 +1,48 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 1675C606BF
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Apr 2016 22:28:43 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id y144so20052439wmd.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Apr 2016 15:28:44 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 476C760667;
+	Mon, 18 Apr 2016 05:15:09 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id er2so46487418pad.3;
+	Sun, 17 Apr 2016 22:15:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=WLAFmptexq6TlGCL5Vs2ghy8M/iRMFlSCe4lJjaRSqU=;
-	b=WefM+/LzMEjZq6wA9Y/LtdfmYYA3836yORj79rVcJPB6SZrPHDqQQ3t7anNbpOParD
-	7Ei/Qm05HJUfH8+NOVKjDqNS6A2MMe/g9Utcx0aCh1tpxwQa4t6Vjfr4zfHsufeNm1OF
-	hOeOsLkytGgbU8lqkKDR1/WWRWkChDrT+bOoSlDZI807Tt+jFCX7bZLSpef5NoIAxcZi
-	rgT0SY44BkMHV4iiIl1cNcu58gAxzXk0xQ2z+EZQGCgoSFDlSHiFw6ciChx8Xbo7URRx
-	Fnm5J7ZREMjWfecfOxxHviajRuaBrJNhMxKV2HQnazrT3taMCObrIQu2MJzaYwaKUpiz
-	4scA==
+	h=from:subject:date:message-id:to:mime-version;
+	bh=crAoWIkStZYz2CGbrCQkmprkIjS5bqLwlJ/vzLe3qTM=;
+	b=dWHVUt2RpLV6RxhYFYHRszDYr1cOhzPvjDSsyyGLNuJuWepnxcQWwI8wYlJ96CDUpj
+	5YSXoq1b8sNq+BhS8tiGdlF/0NELXJBWSjtXn1Sb9uXyiGV5QXeMJOEp5SC5yFp8inqC
+	2X3fAu0jXlMLQtaG4/LXq5W0OVTUAyRsrxfVdjTIitR5F4UxNHAgFtakgtVaklgdUYqe
+	Sr5qxYXXNz7Q9FKb17BKMgb5dZTHuzfotQwJb7DENe1GT8KiBWm2bqrDMjoN+d/Sgh15
+	c0Qzw8/82pFxODgR459w1Qrr95x4ox1vqVWEcfSjULAgVNovvzUk5WARPpwQFTlLjpMm
+	srIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=WLAFmptexq6TlGCL5Vs2ghy8M/iRMFlSCe4lJjaRSqU=;
-	b=WltN5zGDFyVvlxpxDPACGQ/pSiSgLPao5u67o2RBCF+m2yWUEpmZW0jg3ncKtOEV8G
-	kw7IWj00lXDWhP0DL0WJwGoFHmexLl8EoQt/TlKLxYpGvGfNMjDLN79ktBLr+Rq1sAYD
-	+iqneYLe3a7a1Gv6gP6tPIsY75V5dU3fTplS0dAqM8aB4+USjSuV2s3QzxPENxUePxRF
-	s/4KYZqC7AByd3ZO8EygGrJWNqDYsSLOV/taAHhxP7op8SWNcKnZfYifLonnSbMMtq1q
-	0w5uvymmiFsEd2jZXV3DSmVwz8o5J3Umm39VXjdZ6CtNtBBvvZLdPTikO9rfqan/VrC+
-	2vQA==
-X-Gm-Message-State: AOPr4FVg4tGfakLAtmnn3WumX5zY4c+FGENpzcqz5odBJqRaHAlTcfM/iA70W7TpzrkKmQ==
-X-Received: by 10.28.54.208 with SMTP id y77mr14484522wmh.17.1460932123968;
-	Sun, 17 Apr 2016 15:28:43 -0700 (PDT)
-Received: from ThinkPad-T520.homenet.telecomitalia.it
-	(host122-91-dynamic.45-79-r.retail.telecomitalia.it. [79.45.91.122])
+	h=x-gm-message-state:from:subject:date:message-id:to:mime-version;
+	bh=crAoWIkStZYz2CGbrCQkmprkIjS5bqLwlJ/vzLe3qTM=;
+	b=AKuE1FwVaVe8O4YpzSoERke7VX0YP9uCUGMH8TgkFX6HiBsLMWmljt3ib9ppzWu/Ai
+	0K/+BNrXCay5XaH1945I0gBntyCMJUS/KT96LjsX8alJTj5neSTmfwV0lP8+jhC6LI9b
+	pZK5gNXpsIk9zUCnuv8SlCfzEEzGwpj2UhDhRSTBT1DrSjc+zMkGwfxZKjud65lKmVYt
+	eMsT4FZMr1jAbRG7Il5aqzD0mViCSypF80SlHVy/kNtFZ8ZQU/7xiHrSHWpwo0OYN4Xu
+	kW/CnzHvY28ChROQeRzWy9i1+bmyLUO/QlcEMbNrAIrFbueshlY5euMCeEEfrFT1mis8
+	30sA==
+X-Gm-Message-State: AOPr4FUzYOULMmHV+t4pPiLfG0+q1BDcmhSOz85lqUWAmxU+47aXHvza9ko/r4ZCft/Vag==
+X-Received: by 10.66.62.232 with SMTP id b8mr46803647pas.104.1460956510485;
+	Sun, 17 Apr 2016 22:15:10 -0700 (PDT)
+Received: from ?IPv6:2601:646:8800:5a9a:bcd4:460b:c427:512f?
+	([2601:646:8800:5a9a:bcd4:460b:c427:512f])
 	by smtp.gmail.com with ESMTPSA id
-	j71sm23466248wmj.21.2016.04.17.15.28.42
+	y27sm80126857pfi.11.2016.04.17.22.15.08
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 17 Apr 2016 15:28:43 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Apr 2016 00:28:20 +0200
-Message-Id: <1460932100-11873-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-handheld] Pull Request 2016-04-18
+	Sun, 17 Apr 2016 22:15:09 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Pgp-Agent: GPGMail 2.6b2
+Date: Sun, 17 Apr 2016 22:15:03 -0700
+Message-Id: <B1D22563-F31B-4EF1-90D6-16EB391134D5@gmail.com>
+To: OE Core mailing list <openembedded-core@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Mailer: Apple Mail (2.3124)
+Subject: [RFT] GCC 6 Recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,59 +55,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Apr 2016 22:28:44 -0000
+X-List-Received-Date: Mon, 18 Apr 2016 05:15:10 -0000
+X-Groupsio-MsgNum: 61022
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_D380721D-F5EE-491D-A6B6-0C25DCA60A6B";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-The following changes since commit 526de214f4f88b41c41adc74da30637757acbee7:
+--Apple-Mail=_D380721D-F5EE-491D-A6B6-0C25DCA60A6B
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
-  linux-handheld: initial commit of v. 4.4 for PXA and SA1100 devices (2016-01-19 22:50:27 +0100)
+Hello all,
 
-are available in the git repository at:
-
-  https://github.com/LinuxPDA/meta-handheld master
-
-for you to fetch changes up to 6e6542bd551df995f6e1b205becd1324632c0bbd:
-
-  zaurus.inc: mention linux-kexecboot in the notes for the installer (2016-04-17 22:51:56 +0200)
-
-----------------------------------------------------------------
-Andrea Adami (10):
-      linux-gcw0-kexecboot: fix INITRAMFS_TASK matching oe-core changes
-      zaurusd: fix build using autotools-brokensep
-      linux-handheld_4.4: update to 4.4.6
-      linux-gcw0-kexecboot: skip do_shared_workdir
-      linux-gcw0-kexecboot: parametrize the 'require' using ${PV}
-      linux-handheld_4.4: update defconfigs for spitz/akita
-      linux-handheld_4.4: upate to 4.4.7
-      linux-kexecboot_4.4: Initial commit for Zaurus devices
-      zaurus-installer: switch to linux-kexecboot
-      zaurus.inc: mention linux-kexecboot in the notes for the installer
-
- conf/machine/include/zaurus.inc                    |   4 +-
- recipes-bsp/zaurus-utils/zaurus-installer.bb       |   4 +-
- recipes-bsp/zaurusd/zaurusd_git.bb                 |   2 +-
- recipes-kernel/linux/linux-gcw0-kexecboot_4.0.bb   |   5 +-
- .../linux/linux-handheld-4.4/akita/defconfig       |   5 +-
- .../linux/linux-handheld-4.4/spitz/defconfig       |   4 +-
- recipes-kernel/linux/linux-handheld_4.4.bb         |   6 +-
- .../linux/linux-kexecboot-4.4/akita/defconfig      | 135 +++++++++++++++++
- .../linux/linux-kexecboot-4.4/c7x0/defconfig       | 134 +++++++++++++++++
- .../linux/linux-kexecboot-4.4/collie/defconfig     | 163 +++++++++++++++++++++
- .../linux/linux-kexecboot-4.4/poodle/defconfig     | 139 ++++++++++++++++++
- .../linux/linux-kexecboot-4.4/spitz/3200-mtd.patch |  13 ++
- .../linux/linux-kexecboot-4.4/spitz/defconfig      | 134 +++++++++++++++++
- .../linux/linux-kexecboot-4.4/tosa/defconfig       | 136 +++++++++++++++++
- recipes-kernel/linux/linux-kexecboot_4.4.bb        |  42 ++++++
- 15 files changed, 916 insertions(+), 10 deletions(-)
- create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/akita/defconfig
- create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/c7x0/defconfig
- create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/collie/defconfig
- create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/poodle/defconfig
- create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/spitz/3200-mtd.patch
- create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/spitz/defconfig
- create mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/tosa/defconfig
- create mode 100644 recipes-kernel/linux/linux-kexecboot_4.4.bb
-
--- 
-1.9.1
+I have put together a potential gcc6 upgrade recipe set, and pushed the =
+branch to tree here
 
 
+http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/gcc-6
+
+and also at github fork of mine.
+
+https://github.com/kraj/openembedded-core/tree/kraj/master
+
+You need to set
+
+GCCVERSION =3D =E2=80=9C6.%=E2=80=9D
+
+in local.conf to enable it.
+
+
+There are few recipes in OE-Core which still don=E2=80=99t compile e.g.
+
+see
+
+http://errors.yoctoproject.org/Errors/Build/14782/
+
+any help in fixing them or otherwise fixing other layers is appreciated.
+
+gcc6 is a major release for some info see
+
+https://gcc.gnu.org/gcc-6/changes.html
+
+and porting guide
+
+https://gcc.gnu.org/gcc-6/porting_to.html
+
+
+Thanks
+
+-Khem
+
+--Apple-Mail=_D380721D-F5EE-491D-A6B6-0C25DCA60A6B
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlcUbVwACgkQuwUzVZGdMxRPTACfUVB+XNWT+8+tZYfq38MBc5DQ
+d8YAoI475gdTOoaX/3suuYdeaqvgf83D
+=eSJK
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_D380721D-F5EE-491D-A6B6-0C25DCA60A6B--
