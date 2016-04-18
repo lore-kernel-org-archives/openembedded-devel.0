@@ -1,58 +1,46 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-pf0-f174.google.com (mail-pf0-f174.google.com
-	[209.85.192.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 3AD1660088
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qg0-f47.google.com (mail-qg0-f47.google.com
+	[209.85.192.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 4848160119
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2016 14:11:46 +0000 (UTC)
-Received: by mail-pf0-f174.google.com with SMTP id n1so81406918pfn.2
+	Mon, 18 Apr 2016 17:45:05 +0000 (UTC)
+Received: by mail-qg0-f47.google.com with SMTP id f105so121238812qge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2016 07:11:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to; 
-	bh=s31fzM2EmCncfUpd1+uwkFp4SYHcSSNO3vVW0j/YzWw=;
-	b=mYpQqsbsq6MLaTUA8J2Fj0ISAiqu13vGGp7fPnoYeKMuXJnQz37W5csoXLFKoDAGBu
-	f//aL6o113fYo25Tk9zTF0DIvhmySO7hDwIv7DZWRGzpyOYiLhmyf3FI6JuYxpxm1yuM
-	+CoOTgGkNDGRNyy8InRQh/mfMXr6MYRisgsLWDYQnFRL/U4GefdF4kXL9H9Lr6/dhZxI
-	CVE42sjDMlIgaoyqs+Gvam2Nix5ME1mzCFVJCruypLqlDVB8Nl3Og/Hb8j1UmUk2u7qI
-	LVdcMyebx/01PFRyF57kHY8CrFtJnFKSekoTE+1W0mRy9qsr3tdaKCAlXO6H5PgC73iM
-	Yojg==
+	Mon, 18 Apr 2016 10:45:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to; 
+	bh=zagbtqzRkSta5Y4ldGsDamtPIeUPVc1mUval+ks2GuY=;
+	b=k5lN5g4lwAa5jnc0kFp0YD5yU2xPnXFTfBctTPSYglyNHJN9rEcIqUpvqIAaQe5P6k
+	3VNt/zdE0TDYBzLhE/qHTp56g9DrG8p9bY9GdBOQOPGXPk8vdblroLu7KX8nXhh3Z2LB
+	7j4aATuwW1hpUTdyA8bZJqkRJBl+lNGdvCYPczjWTgSkPVEmKZsAjDZVTN5WGxourJAV
+	vOuLskY/L1sioAtFFRFNo7Vuk4WlOga37M3zS/s93v67gxDXAcLdtTFrLoSv8xI5UyHY
+	XGONUxXBtfEREj94UXGmCbIJ/TEP7Eu1V5CfRuDbMxDzB1Qdvz86A01hhbtQCTClAkTR
+	LMhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to;
-	bh=s31fzM2EmCncfUpd1+uwkFp4SYHcSSNO3vVW0j/YzWw=;
-	b=gTFxSsaZyOX4YhfSDKUX1OhNpas5Ebt2n4BGQpXdhAGBsMb34At7GEoyUbpIZ97ayr
-	unQQRwcAq7ATTjpkYRs+cgj5Oo6XNJ4Rut8t8DbQFtwcP5A/MuPAqacbOaN2X0XpgOb/
-	dLA069Pv3hw5weqcL+XM6XpEvei70pSPr+nWBP/UDMx0YMU8AAQ4dmbdslW1dJ/SKNo5
-	BcXCMHxPhYp2AoiIuIqqeDqphioe81BkLZdU46ZEffsg64iwbaMftJi8/LUNmI/D8ZDk
-	klsGfJhvSz4IIi5pD9tGA8Og8Fh72Z3sUQzp/v7xQG3coi5yWE6vjwRdSQaENoSB4njM
-	9UTA==
-X-Gm-Message-State: AOPr4FWpKSMgQXs/Dkc1IwkxLW8A6opaMNvSwJZ7nWjte/3NmcDWbXa1vU0Eswvn4AM+8w==
-X-Received: by 10.98.10.136 with SMTP id 8mr50539950pfk.67.1460988706877;
-	Mon, 18 Apr 2016 07:11:46 -0700 (PDT)
-Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com.
-	[209.85.220.48]) by smtp.gmail.com with ESMTPSA id
-	i7sm40097448pfc.47.2016.04.18.07.11.45
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 18 Apr 2016 07:11:45 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-pa0-f48.google.com with SMTP id er2so50846373pad.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Apr 2016 07:11:45 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to;
+	bh=zagbtqzRkSta5Y4ldGsDamtPIeUPVc1mUval+ks2GuY=;
+	b=iB4NAPCo9RNEGsK88sW+BB7xkNPZ0HmnTBuPtaFVAxDWzFYagBowsmHit5qa71i4TJ
+	XBWuqemqti4ckbIis6mBpWyBBbU2M4t3tYQGdJJhRdO9L+/ES73wXFUqKkvovewFnCJp
+	/HeEhK3ZQ/DzoAW150DW0+SuNRrQeMQ3IXSN62U7vMybyL/7qmhMQ5oIoWXuJwnV6IGc
+	49ax6cGyEoHdrkrZZL/y3jIE5Lg9PXK7aKi6jrAk+c10vR+8IEua081EBfpgGvOTje/t
+	8b5FftFYpQrtfxic+KFzw3J4wAPV47oKlUlFHsHOkER27UAtOtClhslDMmqMyHtABa2z
+	fl1w==
+X-Gm-Message-State: AOPr4FXEHg+2yi47mrGU5LE14gqc9MJikYsOxEQkxTTbqsY39z2Httfs984/BpwGYtw+5XZMdwo/nO3vF0RNBA==
 MIME-Version: 1.0
-X-Received: by 10.66.65.169 with SMTP id y9mr50151829pas.102.1460988704766;
-	Mon, 18 Apr 2016 07:11:44 -0700 (PDT)
-Received: by 10.66.231.37 with HTTP; Mon, 18 Apr 2016 07:11:44 -0700 (PDT)
-In-Reply-To: <1460553790.9308.89.camel@linuxfoundation.org>
-References: <1460553790.9308.89.camel@linuxfoundation.org>
-Date: Mon, 18 Apr 2016 11:11:44 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKodsRi75eqk0oh_8=-JLR7UDdpBuJ50=i7unNMedg0QAg@mail.gmail.com>
-Message-ID: <CAP9ODKodsRi75eqk0oh_8=-JLR7UDdpBuJ50=i7unNMedg0QAg@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] cyrus-sasl: Drop unneeded group addition
+X-Received: by 10.140.41.203 with SMTP id z69mr10064226qgz.57.1461001506490;
+	Mon, 18 Apr 2016 10:45:06 -0700 (PDT)
+Received: by 10.55.130.196 with HTTP; Mon, 18 Apr 2016 10:45:06 -0700 (PDT)
+Received: by 10.55.130.196 with HTTP; Mon, 18 Apr 2016 10:45:06 -0700 (PDT)
+In-Reply-To: <5714AF66.9050000@mlbassoc.com>
+References: <5714AF66.9050000@mlbassoc.com>
+Date: Mon, 18 Apr 2016 10:45:06 -0700
+Message-ID: <CAMKF1srGttCf=iOg7Kfz10FnEfrqjGXXV93x2AC8NT9bhwyXQg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: x11nvc: useless rpath?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,24 +53,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2016 14:11:47 -0000
+X-List-Received-Date: Mon, 18 Apr 2016 17:45:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Apr 13, 2016 at 10:23 AM, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
-> The mail group is provided by base-passwd so would always be present. Therefore
-> drop the uneeded group addition from this recipe.
->
-> This works around the recent user cleanup code improvements which meant
-> this started causing failures for people.
->
-> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+You can use patchelf to remove it in do install append. Ideal fix is.to
+correct the linker arguments
+On Apr 18, 2016 2:57 AM, "Gary Thomas" <gary@mlbassoc.com> wrote:
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
-Tested-by: Otavio Salvador <otavio@ossystems.com.br>
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> I'm getting this error (used to be a warning only):
+>   ERROR: x11vnc-0.9.13-r0 do_package_qa: QA Issue: x11vnc:
+> work/cortexa8hf-neon-poky-linux-gnueabi/x11vnc/0.9.13-r0/packages-split/x11vnc/usr/bin/x11vnc
+> contains probably-redundant RPATH /usr/lib [useless-rpaths]
+>
+> How does one go about fixing it?
+>
+> --
+> ------------------------------------------------------------
+> Gary Thomas                 |  Consulting for the
+> MLB Associates              |    Embedded world
+> ------------------------------------------------------------
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
