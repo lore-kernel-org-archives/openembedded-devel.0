@@ -1,51 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id D6CDD60107
+Return-Path: <joe@deserted.net>
+Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
+	[209.85.223.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C9CB60119
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2016 15:12:03 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id v188so166421998wme.1
+	Tue, 19 Apr 2016 15:36:08 +0000 (UTC)
+Received: by mail-io0-f194.google.com with SMTP id s2so3116437iod.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2016 08:12:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=2gV/4fgZoJLXbbHNkazXT6iWerEyI7HSUIbSOXK5S/c=;
-	b=q1cP0PBdAvaXdldAUWdjEUvf6VKNzmR7Er2w53AzbAi5Dmh24X/M7mJAzFj7hicm29
-	NdXdMKvySUvnJO46VHgPZfzGRWcq+VMQHCAPVc6vgyzgD202c3H3UG7evjhBDbbU5M2B
-	fPl1hivxfvPlLSMjjjFDQ9Dk4n/NEPwgW9n0j24G1jyyM9N5zr3cKYLZwGnrNTh7Tnxj
-	cNBO8t6IPGk6jC3agjaPO8Q0m8ZfbJn6rM8NdD/VGIIXxBSndL16jDBBtNe6eNa3+fOa
-	o5FdH3fWyszVnTiVXJ/rv6dadQQb8taO2qcPuiyEBNLNMQmRwsCcRj71UsQ60JoA3yLy
-	j57w==
+	Tue, 19 Apr 2016 08:36:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=deserted-net.20150623.gappssmtp.com; s=20150623;
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=6QJYeYh9kxrQT4XCrzQUEOI7cwLnSfGDlSNHQ6NuAQw=;
+	b=HRJYjTxvnHEXIRH/CyTojtDKs21nzAFnls4vAAJ6Q9JUxLzLDEbtribB+SNOBswFQV
+	Ct9iQLl0bM+Si/G9VucjqG3ALnscvSCUR/+RBMHufOuADbRDMASuMxI84Z6BNnn178y4
+	nJaawGO/R56BvY4kDkbHC6RGwlF2zBZZBxxt/+o8NWBuKzPLq+xkTQhluVP31hxNd0x0
+	9fEhYW6i1S0pbjVm+ELhe2HK+ycUnd9+na2WcsuCFC7IO4U+f2kAbpmXWdQ+ke57PxsZ
+	YvkZJecdW3zmEtSaQBjyWiKBmSmLIVbIBYq5YX4HzDvZSh1RZteQ2QwRe5E8pwtKdZ4/
+	lWrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=2gV/4fgZoJLXbbHNkazXT6iWerEyI7HSUIbSOXK5S/c=;
-	b=VH24/P6ajZm1YTAJhTs8i6WxyxUH3QvvVI0+WRuKa6rVTPbuw+sYOcK221N3nte9Fn
-	AOcX3qLIlZu3EhyNeFCt10c5wrOt/AXA/ezQS0xBY1Kg7S4CRj+RQfYp1uWjBu17qyrJ
-	rqSxQmhGNJJiTsWvIflhlpAXICShkml9ep/7M+pk8fBbXtNBW/fATGYMLySCB05RqrIW
-	jmZBgx8R1hbJx9eTSObrUabOMegwL6yyAs313oPNR3pikh0XB8Q/+nk7qWuqMgDoTx1g
-	7eAnrMusKtwhrA7pFR78J/xR/g+Lzs+ZuBfOLneA2sW8/iisUME8hcXOsv3IjdC17tlR
-	9qug==
-X-Gm-Message-State: AOPr4FV55CFVd6+ZZzb9Gd2Lmr84C4ojeppkGDi/CWfj7b6RQBwU4PcKquXhAR6K8Dtj/g==
-X-Received: by 10.194.84.100 with SMTP id x4mr4230223wjy.169.1461078723062;
-	Tue, 19 Apr 2016 08:12:03 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	g78sm4798152wme.21.2016.04.19.08.12.01
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 19 Apr 2016 08:12:01 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 19 Apr 2016 17:13:54 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160419151354.GE2562@jama>
-References: <1461077564-25584-1-git-send-email-christophe.priouzeau@st.com>
-MIME-Version: 1.0
-In-Reply-To: <1461077564-25584-1-git-send-email-christophe.priouzeau@st.com>
-User-Agent: Mutt/1.6.0 (2016-04-01)
-Cc: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-Subject: Re: [meta-webserver][PATCH v2] netdata: add new recipe
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+	:in-reply-to:references;
+	bh=6QJYeYh9kxrQT4XCrzQUEOI7cwLnSfGDlSNHQ6NuAQw=;
+	b=gZZP8jBTWScl2PbrBzwk1CoPKDCXWf2I6ZpWrIKhZz+LJ1lnaEdyygRmkuoIQpHO0c
+	FohLfi039PcNI+hFEhBSYBDuBH4OXoG8holChg58+INwzibWd1XZGanDfeYAP8mhv18b
+	A760/4BSo2BPKg9+lu4Am0r6JXyyq3Ri6OnJuNLPzNsjlZWq/AOqN1tXrRU3uvCSReRR
+	CubBcGrbbtI7wNG6Dq1GtAmhQdtdZ4DmLOblRXoPRVk2xQvvimzYFI5/Ab1oVMiqSG3o
+	75/c+U7g7cncEa7ApISm/Jz1kQc+0bS6BzCfKl3diNAN7vwxcbLWiy+zs7zWRMb94mFp
+	eVWQ==
+X-Gm-Message-State: AOPr4FVWtK64c8CJ7cMuWfyVRm9w410ttKEhoJjPRGwVK/JT0xoLGOrro0bBWUCZLE88pg==
+X-Received: by 10.107.59.75 with SMTP id i72mr4153712ioa.108.1461080169151;
+	Tue, 19 Apr 2016 08:36:09 -0700 (PDT)
+Received: from mir.deserted.net ([23.233.31.74])
+	by smtp.gmail.com with ESMTPSA id q198sm380376iod.6.2016.04.19.08.36.07
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 19 Apr 2016 08:36:08 -0700 (PDT)
+Sender: Joe MacDonald <joe@deserted.net>
+From: Joe MacDonald <joe_macdonald@mentor.com>
+To: mark.asselstine@windriver.com
+Date: Tue, 19 Apr 2016 11:37:09 -0400
+Message-Id: <1461080229-23859-1-git-send-email-joe_macdonald@mentor.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <20160419142059.GB5970@mentor.com>
+References: <20160419142059.GB5970@mentor.com>
+Cc: anders@chargestorm.se, openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH v3] dnsmasq: get systemd only working again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,145 +57,153 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2016 15:12:08 -0000
-X-Groupsio-MsgNum: 61055
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="maH1Gajj2nflutpK"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 19 Apr 2016 15:36:12 -0000
 
---maH1Gajj2nflutpK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Mark Asselstine <mark.asselstine@windriver.com>
 
-On Tue, Apr 19, 2016 at 04:52:44PM +0200, Christophe PRIOUZEAU wrote:
-> Netdata are a performance monitoring tools for Linux systems, application=
-s.
-> Netdata interface are available via http on port 19999:
->  http://<ip address>:19999
->=20
-> Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
-> ---
->  .../netdata/0001-Correct-Timeout-issue.patch       |   35 +
->  .../recipes-webadmin/netdata/netdata/netdata.conf  | 5083 ++++++++++++++=
-++++++
->  .../netdata/netdata/netdata.service                |   13 +
->  .../recipes-webadmin/netdata/netdata_git.bb        |   46 +
->  4 files changed, 5177 insertions(+)
->  create mode 100644 meta-webserver/recipes-webadmin/netdata/netdata/0001-=
-Correct-Timeout-issue.patch
->  create mode 100644 meta-webserver/recipes-webadmin/netdata/netdata/netda=
-ta.conf
->  create mode 100644 meta-webserver/recipes-webadmin/netdata/netdata/netda=
-ta.service
->  create mode 100644 meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-=2E..
-> diff --git a/meta-webserver/recipes-webadmin/netdata/netdata/netdata.serv=
-ice b/meta-webserver/recipes-webadmin/netdata/netdata/netdata.service
-> new file mode 100644
-> index 0000000..bd696b6
-> --- /dev/null
-> +++ b/meta-webserver/recipes-webadmin/netdata/netdata/netdata.service
-> @@ -0,0 +1,13 @@
-> +[Unit]
-> +Description=3DNetdata, Real-time performance monitoring
-> +RequiresMountsFor=3D/var
-> +
-> +[Service]
-> +User=3Droot
-> +ExecStartPre=3D/bin/mkdir -p /var/log/netdata
-> +ExecStartPre=3D/bin/chown -R nobody.netdata /usr/share/netdata/web
-> +ExecStartPre=3D/bin/chown -R nobody.netdata /var/cache/netdata
-> +ExecStart=3D/usr/sbin/netdata -nd
-> +
-> +[Install]
-> +WantedBy=3Dmulti-user.target
-> diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb b/met=
-a-webserver/recipes-webadmin/netdata/netdata_git.bb
-> new file mode 100644
-> index 0000000..b4161af
-> --- /dev/null
-> +++ b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-> @@ -0,0 +1,46 @@
-> +HOMEPAGE =3D "https://github.com/firehol/netdata/"
-> +SUMMARY =3D "Real-time performance monitoring"
-> +LICENSE =3D "GPLv3"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3D747afe070ea9d6c2be0a313536=
-09a35b"
-> +
-> +SRC_URI =3D "git://github.com/firehol/netdata.git;protocol=3Dhttps"
-> +SRCREV =3D "36c1304e37094174ea51001903058e65053107ca"
-> +
-> +# patch to disable timeout because timeout are not available with actual=
- version
-> +# of core-utils
-> +SRC_URI +=3D "file://0001-Correct-Timeout-issue.patch"
-> +
-> +# default netdata.conf for netdata configuration
-> +SRC_URI +=3D "file://netdata.conf"
-> +
-> +# file for providing systemd service support
-> +SRC_URI +=3D "file://netdata.service"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit pkgconfig autotools useradd systemd
-> +
-> +#systemd
-> +SYSTEMD_PACKAGES =3D "${PN}"
-> +SYSTEMD_SERVICE_${PN} =3D "netdata.service"
-> +SYSTEMD_AUTO_ENABLE_${PN} =3D "enable"
-> +
-> +#User specific
-> +USERADD_PACKAGES =3D "${PN}"
-> +GROUPADD_PARAM_${PN} =3D "--system netdata"
-> +
-> +do_install_append() {
-> +    #set S UID for plugins
-> +    chmod 4755 ${D}/usr/lib/netdata/netdata/plugins.d/apps.plugin
-> +
-> +    # Install systemd unit files
-> +    install -d ${D}${systemd_unitdir}/system
-> +    install -m 0644 ${WORKDIR}/netdata.service ${D}${systemd_unitdir}/sy=
-stem
+The changes made in commit 2497cf2960537152427c99629b2af412787eb6c2
+[dnsmasq: steal resolvconf support from Ubuntu] broke systemd only
+dnsmasq runtime. No sysvinit scripts are included in systemd only
+builds (and should not be) and the dnsmasq executable has not moved to
+/usr/sbin.
 
-You should respect systemd in DISTRO_FEATURES when installing the
-service file (you can use:
-if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-)
+Reverting to the previous version of the systemd service file. If
+folks want the local dnsmasq instance to be queried before going to
+an external DNS they should add 'nameserver 127.0.0.1' to
+/etc/resolv.conf. Or submit a change which will work with systemd.
 
-Also use the variables for paths in .service file (if netdata build
-respects them) as suggested in previous reply.
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+---
 
-> +
-> +    # Install default netdata.conf
-> +    install -d ${D}/etc/netdata
-> +    install -m 0644 ${WORKDIR}/netdata.conf ${D}/etc/netdata/
-> +}
-> +
-> +FILES_${PN}-dbg +=3D "/usr/lib/netdata/netdata/plugins.d/.debug"
-> +RDEPENDS_${PN} =3D "bash"
-> --
-> 1.9.1
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+The previous one should've been v2, so I've named this one v3 explicitly.
+After reading more of the systemd documentation I think this approach in
+the service file is the current best option available.  It would certainly
+be cleaner to store the pidfile name in an environment variable but it
+turns out on further inspection that if you pass a varaible to PIDFile,
+you get errors (that you only see when the service is stopped, not while
+it is running) indicating essentially that it is falling back to the
+"guess the MAINPID value" behaviour.  So this seems to be the way we're
+supposed to do this type of thing now.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-J.
 
---maH1Gajj2nflutpK
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+ .../recipes-support/dnsmasq/dnsmasq.inc            |  9 ++--
+ .../dnsmasq/files/dnsmasq-resolvconf-helper        | 62 ++++++++++++++++++++++
+ .../recipes-support/dnsmasq/files/dnsmasq.service  |  9 ++--
+ 3 files changed, 72 insertions(+), 8 deletions(-)
+ create mode 100644 meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf-helper
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+index 622e630..df58e5c 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+@@ -60,11 +60,12 @@ do_install () {
+         install -m 644 dbus/dnsmasq.conf ${D}${sysconfdir}/dbus-1/system.d/
+     fi
+     if [ "${@base_contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
+-	install -d ${D}${sysconfdir}/resolvconf/update.d/
+-	install -m 0755 ${WORKDIR}/dnsmasq.resolvconf ${D}${sysconfdir}/resolvconf/update.d/dnsmasq
++        install -d ${D}${sysconfdir}/resolvconf/update.d/
++        install -m 0755 ${WORKDIR}/dnsmasq.resolvconf ${D}${sysconfdir}/resolvconf/update.d/dnsmasq
+ 
+-	install -d ${D}${sysconfdir}/default/volatiles
+-	install -m 0644 ${WORKDIR}/99_dnsmasq ${D}${sysconfdir}/default/volatiles
++        install -d ${D}${sysconfdir}/default/volatiles
++        install -m 0644 ${WORKDIR}/99_dnsmasq ${D}${sysconfdir}/default/volatiles
++        install -m 0755 ${WORKDIR}/dnsmasq-resolvconf-helper ${D}${bindir}
+     fi
+ }
+ 
+diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf-helper b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf-helper
+new file mode 100644
+index 0000000..db54d46
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf-helper
+@@ -0,0 +1,62 @@
++#!/bin/bash
++#
++# Borrowing heavily from the dnsmasq initscript's version of support for
++# resolvconf, intended for use in systemd-only configurations.
++#
++PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
++DAEMON=/usr/sbin/dnsmasq
++NAME=dnsmasq
++
++# Most configuration options in /etc/default/dnsmasq are deprecated
++# but still honoured.
++if [ -r /etc/default/$NAME ]; then
++   . /etc/default/$NAME
++fi
++
++start_resolvconf()
++{
++   # If interface "lo" is explicitly disabled in /etc/default/dnsmasq
++   # Then dnsmasq won't be providing local DNS, so don't add it to
++   # the resolvconf server set.
++   for interface in $DNSMASQ_EXCEPT
++   do
++      [ $interface = lo ] && return
++   done
++
++   if [ -x /sbin/resolvconf ] ; then
++      echo "nameserver 127.0.0.1" |
++      /sbin/resolvconf -a lo.$NAME
++   fi
++   return 0
++}
++
++stop_resolvconf()
++{
++   if [ -x /sbin/resolvconf ] ; then
++      /sbin/resolvconf -d lo.$NAME
++   fi
++   return 0
++}
++
++case "$1" in
++   start)
++      start_resolvconf
++      exit 0
++      ;;
++   stop)
++      stop_resolvconf
++      exit 0
++      ;;
++   restart)
++      stop_resolvconf
++      start_resolvconf
++      exit 0
++      ;;
++   *)
++      echo "Usage: /etc/init.d/$NAME {start|stop|restart}" >&2
++      exit 3
++      ;;
++esac
++
++exit 0
++
+diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq.service b/meta-networking/recipes-support/dnsmasq/files/dnsmasq.service
+index c3637e1..68b175c 100644
+--- a/meta-networking/recipes-support/dnsmasq/files/dnsmasq.service
++++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq.service
+@@ -5,10 +5,11 @@ After=network.target
+ [Service]
+ Type=forking
+ PIDFile=/run/dnsmasq.pid
+-ExecStartPre=/usr/sbin/dnsmasq --test
+-ExecStart=/etc/init.d/dnsmasq systemd-exec
+-ExecStartPost=/etc/init.d/dnsmasq systemd-start-resolvconf
+-ExecStopPre=/etc/init.d/dnsmasq systemd-stop-resolvconf
++ExecStartPre=/usr/bin/dnsmasq --test
++ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid
++ExecStartPost=/usr/bin/dnsmasq-resolvconf-helper start
++ExecStopPre=/usr/bin/dnsmasq-resolvconf-helper stop
++ExecStop=/bin/kill $MAINPID
+ ExecReload=/bin/kill -HUP $MAINPID
+ 
+ [Install]
+-- 
+1.9.1
 
-iEYEARECAAYFAlcWSzIACgkQN1Ujt2V2gBybwQCgkdQaqwJ0581cTJl69m/ldVrm
-a2MAn2K63Rabe3ih7PGApG5+llQiHAt8
-=VmLS
------END PGP SIGNATURE-----
 
---maH1Gajj2nflutpK--
