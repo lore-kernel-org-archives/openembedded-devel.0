@@ -1,46 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
-	[209.85.192.45])
-	by mail.openembedded.org (Postfix) with ESMTP id AD638606BF;
-	Tue, 19 Apr 2016 01:13:33 +0000 (UTC)
-Received: by mail-qg0-f45.google.com with SMTP id f74so755651qge.2;
-	Mon, 18 Apr 2016 18:13:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=BjxfplMYMX1Wpt+PI6p/tHqR8ULt6IDaGpx5OavR+W4=;
-	b=YldSRw6FVgQQ3/JbzZu13cHDcG7FZ39RvttMkKtP90swIBGytb9sHSgxW4bi0JfYKk
-	MEsUEfIGjwaJXm1+kVzzqUiQ4QqB7ojm+JVgrkRJlCKf6KFynSWGe9BCD5+ZiREJl9Ny
-	b/m+geKzdg5Cd2es9Z/Z9nXknX+ciVGUkl2dnmjJVaRGXqKyrDjJJnKuCRSk8Z+Nt3Yv
-	g9+2o/WTQWHwngztD2cCu/R1EgQrxpIxD9KNKAmmNfiNnQq/fhp8VyOEk2q4y9pXgHBo
-	sZx2R0pCzaokPeX9DwtErz+Qvi4+zbeNifc0TcOH/71RO3LJqDYudd8CNWGST5G9mVEY
-	HJfA==
+Return-Path: <joe@deserted.net>
+Received: from mail-io0-f195.google.com (mail-io0-f195.google.com
+	[209.85.223.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F3C8606A8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Apr 2016 03:29:07 +0000 (UTC)
+Received: by mail-io0-f195.google.com with SMTP id u185so826175iod.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Apr 2016 20:29:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=deserted-net.20150623.gappssmtp.com; s=20150623;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=A5ZwfG9PyRdvhGDAzNPMMSC4V240QaIz552yWrLVhOA=;
+	b=HcQ1vQ3iAf/7u9KBf7oNf3MsGmqi7s7ZjPKUJvFxmLMwfNyEpheOiPulllCGP39AyU
+	j3zAHxQ4o+HQfiGuUiyAB0sAsfEKctTRprGj+Y27gtAeZoatz5rudzvTD6j1JXvbEGpX
+	Wzf7wKsPjQ+OVxIfyb14GVJJeo2hKtHkOlf3naLgKPUrY9QpmwhtVCKzRAgbdCnvu5vl
+	Jq+Ae4hciLOth32aDkd4cAytOeWYo3pl1GqtVXgJ83XlYdQwPWLSjKdtC/7WK7+szYW8
+	HTWl8a6sBnJuYg3D84kxfWK/yDiZ9EV25pkv2d0mpGJNVJ6504Ud63CzqAQbWi19NMJc
+	oBiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=BjxfplMYMX1Wpt+PI6p/tHqR8ULt6IDaGpx5OavR+W4=;
-	b=KQHAAUWF+4s/d3pgEBqVjLYLa9QwxAagid5GmHiUO+l2+kqwZC7E4pAzSqLO7hLCxS
-	KBL56EPSxozr1rlUy5mCsT6/4HnA/BSAbYuNPGIVdIax9PtASg/M2rdX0dPns7v4n3wC
-	XXkEQGj8mX7DnaKG6UZGEVC+d9MhOOQg6epI13QLJ8bkTUmAyTiXOEikru3nzI2SaDjZ
-	g3eBjsYFZezjKzVJFUVYm+EDboCxt/AquodlBUmE8nRSDPA0QVUwMuNYZ8YweJ7ePm1B
-	Kfcm+UIWxpkdJvK7asjeK40wZJZ+Mp6Fb0S4JKTzu6ra7xCjzYWoAKkq1bmeyxu75ZQc
-	zkAw==
-X-Gm-Message-State: AOPr4FX1J1jsNW3Lgr+tJG0nO6qvWBa4aiFAd8XUxdL90tECLdW5xhfufqfsT5doWD55F3mfBDRdr8Kd0ws3TA==
-X-Received: by 10.140.41.203 with SMTP id z69mr185870qgz.57.1461028414418;
-	Mon, 18 Apr 2016 18:13:34 -0700 (PDT)
-MIME-Version: 1.0
-References: <B1D22563-F31B-4EF1-90D6-16EB391134D5@gmail.com>
-	<CACS+7ZSpWgziO+GF++25dM7kgP4SZ_GDV+-DcEMQ_YUGyEEnfQ@mail.gmail.com>
-In-Reply-To: <CACS+7ZSpWgziO+GF++25dM7kgP4SZ_GDV+-DcEMQ_YUGyEEnfQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 19 Apr 2016 01:13:24 +0000
-Message-ID: <CAMKF1spQn114r9dCAk9z7c3hw-NJp3pVoVP+f3gao2mhLTBHYg@mail.gmail.com>
-To: Dan McGregor <danismostlikely@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	OE Core mailing list <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] GCC 6 Recipes
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=A5ZwfG9PyRdvhGDAzNPMMSC4V240QaIz552yWrLVhOA=;
+	b=MRbe70zC5VGebOjvkYRQI0Rbj72KIITPP/L+Vpgmn4BDPjbJ4SEadbG4KtgvioTxPW
+	e3Y9jblN9wiufwRtBLQI4jbBCJrzwH1kL7XLdMRqnLDo/bbBtJjfx/3kkd91aGtVUucp
+	bzbtC3uUsL+BKVxY8PUx19wSuFdShDUeBtYkJOtqKgUrHO8EA6Y1MQ3Kbu779nfdUI1W
+	8YNTbLkoLi5zc6aIGbHPe8Gjq0LAUFnDIN5UcyPAVDhb6oYD+utoYxKUxCym9SMh71SR
+	up8VPo5aH2DZkzNbZ/ridrEnH+YDABhONj8rMasdHAIs4Tl/4cNLV9kw8UXKCZvbdx2a
+	XaIg==
+X-Gm-Message-State: AOPr4FXHN4zCJERamoHBQlgLhqdWgyo+LLHBUEnM44UjUwbePXhiV06q064qZAorGQiYQw==
+X-Received: by 10.107.159.137 with SMTP id i131mr1062923ioe.29.1461036547704; 
+	Mon, 18 Apr 2016 20:29:07 -0700 (PDT)
+Received: from mir.deserted.net ([23.233.31.74])
+	by smtp.gmail.com with ESMTPSA id
+	s71sm14680340ioe.34.2016.04.18.20.29.06
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 18 Apr 2016 20:29:06 -0700 (PDT)
+Sender: Joe MacDonald <joe@deserted.net>
+From: Joe MacDonald <joe_macdonald@mentor.com>
+To: mark.asselstine@windriver.com
+Date: Mon, 18 Apr 2016 23:30:07 -0400
+Message-Id: <1461036607-24650-1-git-send-email-joe_macdonald@mentor.com>
+X-Mailer: git-send-email 1.9.1
+Cc: anders@chargestorm.se, openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] dnsmasq: get systemd only working again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,76 +55,159 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2016 01:13:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Apr 2016 03:29:10 -0000
 
-On Mon, Apr 18, 2016 at 12:48 PM Dan McGregor <danismostlikely@gmail.com>
-wrote:
+From: Mark Asselstine <mark.asselstine@windriver.com>
 
-> On 17 April 2016 at 23:15, Khem Raj <raj.khem@gmail.com> wrote:
-> > Hello all,
-> >
-> > I have put together a potential gcc6 upgrade recipe set, and pushed the
-> branch to tree here
-> >
-> >
-> > http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/gcc=
--6
-> >
-> > and also at github fork of mine.
-> >
-> > https://github.com/kraj/openembedded-core/tree/kraj/master
-> >
-> > You need to set
-> >
-> > GCCVERSION =3D =E2=80=9C6.%=E2=80=9D
-> >
-> > in local.conf to enable it.
-> >
-> >
-> > There are few recipes in OE-Core which still don=E2=80=99t compile e.g.
-> >
-> > see
-> >
-> > http://errors.yoctoproject.org/Errors/Build/14782/
-> >
-> > any help in fixing them or otherwise fixing other layers is appreciated=
-.
-> >
-> > gcc6 is a major release for some info see
-> >
-> > https://gcc.gnu.org/gcc-6/changes.html
-> >
-> > and porting guide
-> >
-> > https://gcc.gnu.org/gcc-6/porting_to.html
-> >
-> >
->
-> I haven't built an image with gcc6 as the compiler yet, but I did
-> check out your branch to try building with gcc 6 as the host compiler
-> (Fedora 24). I needed a few more fixes, available at
-> http://git.openembedded.org/openembedded-core-contrib/log/?h=3Ddankm/gcc-=
-6.
-> I fixed lzop, pkgconfig, and disabled werror on binutils.
-> core-image-minimal appears to be well on its way to building.
->
->
-I had fixed lzop locally meanwhile. I cherry-picked the pkgconfig and
-binutils fixes into my branch
+The changes made in commit 2497cf2960537152427c99629b2af412787eb6c2
+[dnsmasq: steal resolvconf support from Ubuntu] broke systemd only
+dnsmasq runtime. No sysvinit scripts are included in systemd only
+builds (and should not be) and the dnsmasq executable has not moved to
+/usr/sbin.
 
+Reverting to the previous version of the systemd service file. If
+folks want the local dnsmasq instance to be queried before going to
+an external DNS they should add 'nameserver 127.0.0.1' to
+/etc/resolv.conf. Or submit a change which will work with systemd.
 
->
-> > Thanks
-> >
-> > -Khem
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-core mailing list
-> > Openembedded-core@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-core
-> >
->
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+---
+
+Mark,
+
+Thanks for the patch.  In the interests of not causing any more hassle
+than I already have, I'm proposing this as an alternative to what you sent
+earlier today.  This hopefully preserves the resolvconf/start-stop
+functionality while not relying on any sysvinit-ness.  What do you think
+about this as a middle-ground?
+
+Anders,
+
+I trust that nothing Mark and I are discussing here changes the issue you
+noted about dnsmasq just falling over after a few minutes.  I propose we
+dig into that separately, since it looks like a different problem probably
+related to the uprev.  If it turns out that once we merge something to
+support systemd-only builds that resolves the 'dnsmasq vandalizes itself'
+issue, even better.
+
+-J.
+
+ .../recipes-support/dnsmasq/dnsmasq.inc            |  9 ++--
+ .../dnsmasq/files/dnsmasq-resolvconf-helper        | 62 ++++++++++++++++++++++
+ .../recipes-support/dnsmasq/files/dnsmasq.service  |  9 ++--
+ 3 files changed, 72 insertions(+), 8 deletions(-)
+ create mode 100644 meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf-helper
+
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+index 622e630..df58e5c 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+@@ -60,11 +60,12 @@ do_install () {
+         install -m 644 dbus/dnsmasq.conf ${D}${sysconfdir}/dbus-1/system.d/
+     fi
+     if [ "${@base_contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
+-	install -d ${D}${sysconfdir}/resolvconf/update.d/
+-	install -m 0755 ${WORKDIR}/dnsmasq.resolvconf ${D}${sysconfdir}/resolvconf/update.d/dnsmasq
++        install -d ${D}${sysconfdir}/resolvconf/update.d/
++        install -m 0755 ${WORKDIR}/dnsmasq.resolvconf ${D}${sysconfdir}/resolvconf/update.d/dnsmasq
+ 
+-	install -d ${D}${sysconfdir}/default/volatiles
+-	install -m 0644 ${WORKDIR}/99_dnsmasq ${D}${sysconfdir}/default/volatiles
++        install -d ${D}${sysconfdir}/default/volatiles
++        install -m 0644 ${WORKDIR}/99_dnsmasq ${D}${sysconfdir}/default/volatiles
++        install -m 0755 ${WORKDIR}/dnsmasq-resolvconf-helper ${D}${bindir}
+     fi
+ }
+ 
+diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf-helper b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf-helper
+new file mode 100644
+index 0000000..db54d46
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf-helper
+@@ -0,0 +1,62 @@
++#!/bin/bash
++#
++# Borrowing heavily from the dnsmasq initscript's version of support for
++# resolvconf, intended for use in systemd-only configurations.
++#
++PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
++DAEMON=/usr/sbin/dnsmasq
++NAME=dnsmasq
++
++# Most configuration options in /etc/default/dnsmasq are deprecated
++# but still honoured.
++if [ -r /etc/default/$NAME ]; then
++   . /etc/default/$NAME
++fi
++
++start_resolvconf()
++{
++   # If interface "lo" is explicitly disabled in /etc/default/dnsmasq
++   # Then dnsmasq won't be providing local DNS, so don't add it to
++   # the resolvconf server set.
++   for interface in $DNSMASQ_EXCEPT
++   do
++      [ $interface = lo ] && return
++   done
++
++   if [ -x /sbin/resolvconf ] ; then
++      echo "nameserver 127.0.0.1" |
++      /sbin/resolvconf -a lo.$NAME
++   fi
++   return 0
++}
++
++stop_resolvconf()
++{
++   if [ -x /sbin/resolvconf ] ; then
++      /sbin/resolvconf -d lo.$NAME
++   fi
++   return 0
++}
++
++case "$1" in
++   start)
++      start_resolvconf
++      exit 0
++      ;;
++   stop)
++      stop_resolvconf
++      exit 0
++      ;;
++   restart)
++      stop_resolvconf
++      start_resolvconf
++      exit 0
++      ;;
++   *)
++      echo "Usage: /etc/init.d/$NAME {start|stop|restart}" >&2
++      exit 3
++      ;;
++esac
++
++exit 0
++
+diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq.service b/meta-networking/recipes-support/dnsmasq/files/dnsmasq.service
+index c3637e1..5824b62 100644
+--- a/meta-networking/recipes-support/dnsmasq/files/dnsmasq.service
++++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq.service
+@@ -5,10 +5,10 @@ After=network.target
+ [Service]
+ Type=forking
+ PIDFile=/run/dnsmasq.pid
+-ExecStartPre=/usr/sbin/dnsmasq --test
+-ExecStart=/etc/init.d/dnsmasq systemd-exec
+-ExecStartPost=/etc/init.d/dnsmasq systemd-start-resolvconf
+-ExecStopPre=/etc/init.d/dnsmasq systemd-stop-resolvconf
++ExecStartPre=/usr/bin/dnsmasq --test
++ExecStart=/usr/bin/dnsmasq -x $MAINPID
++ExecStartPost=/usr/bin/dnsmasq-resolvconf-helper start
++ExecStop=/usr/bin/dnsmasq-resolvconf-helper stop
+ ExecReload=/bin/kill -HUP $MAINPID
+ 
+ [Install]
+-- 
+1.9.1
+
 
