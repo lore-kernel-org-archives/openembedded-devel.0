@@ -1,42 +1,46 @@
-Return-Path: <ryanelkholy@gmail.com>
-Received: from mail-io0-f173.google.com (mail-io0-f173.google.com
-	[209.85.223.173])
-	by mail.openembedded.org (Postfix) with ESMTP id E4C5360616
+Return-Path: <bruce.ashfield@gmail.com>
+Received: from mail-oi0-f41.google.com (mail-oi0-f41.google.com
+	[209.85.218.41])
+	by mail.openembedded.org (Postfix) with ESMTP id CF1426B6EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2016 16:26:00 +0000 (UTC)
-Received: by mail-io0-f173.google.com with SMTP id g185so24200098ioa.2
+	Tue, 19 Apr 2016 19:46:09 +0000 (UTC)
+Received: by mail-oi0-f41.google.com with SMTP id x201so19904583oif.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2016 09:26:01 -0700 (PDT)
+	Tue, 19 Apr 2016 12:46:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to;
-	bh=qZtw/0Fopum/7r84/BUjl6FwfQ4gsJWIJwXNYgN9QI4=;
-	b=dsfmzj6QIpT6uEYA1MVIdiXsG6eOXHIVw06iwmMrVN4LXsBzE9q/xlEcjjMiQhvnZC
-	yRCB8/vqL5y7co9HfnR1cZ5bjTvQ3YSN42nUKyvlvMc9QPD8O5lfvF+fxDqUvB9nJ72/
-	tKnzvNjSyYeVmRwLoYDBaJVvBrJUV6VRL2jh/eKfcjH9rQ4/V1GBD/M0uNeEtLWgTq2w
-	JZQpFg4zEXUULdaVsXLH59PvmNza0IWZ0JImS0PT6qMmXJotQKkSg0CsrmddSvS4tSb4
-	0VWNbwBk3BfWPiRfAQswM3jCp+dIFpeTwqQfYLdaT0iQUUsopjtAYW/l1qmFHr7lCdjw
-	GbPg==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to; 
+	bh=OAtc/sZ/iIs7RTqiK+HesukccCcTtCXAKM9ffw/ZTso=;
+	b=TgTqVc/SU+5III8k3jGp+c2qJkL0DZjfDfWahkNJ4BFRGqtC4+fZQgNPrvgp5N6eNc
+	XxMJtmSxIB10V/UYxxzNjdLQGU8sqzgS1amPu3XjoVOZYV49bsq6xJEVb+Y9VBwVidKv
+	Eo7e0wDsBNAE2i6s/YTHILuyi52NIvm0D5HdLF7jgxQEEh2U1fekLVaOsAo97mesyoIz
+	hcubRbsRe+CHBfbib+jxuiQLEnZgUvlFjG3b23vkxMJkUU9QJ6mcFakYN7RpSRpR/y4H
+	tY0u7I4otXdd2cNcxr1Pkf4xvyTIRnAGCzmRbz2fT9hJ1S1Ev5iictpJxiq+693szu6i
+	rFhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to;
-	bh=qZtw/0Fopum/7r84/BUjl6FwfQ4gsJWIJwXNYgN9QI4=;
-	b=QsAlrBxc2kcxJ/2WlFixW4M/gWfdz9+0L9hjIUh9gx71YmghN9+HV9d46Q90fxq2Qs
-	sBEvkzoGqwMTpBA2A+n4/bAzN2CwgEaeVaY2IP/TJeXllrHCIPPNFYaGBBuG0hzyXQ08
-	RqPiiZR3RtCTRCwgnusm9mWfs6l78sNyRvHAzektvbIlnNLQ5tzzqwcy5M/IS7w7gkxh
-	tjXGyESL6Mgk90tsLtpFNYbwxSpF+C6M/b6wP/TJU0qdf3BZRBHzjYujvesn7BwsEll+
-	Bh9hFzFdwqMjVASWk7gi3qrenL4PaYffXwvRPJrhKlo9mefyrVGy6tgJcZbeiOymXFF4
-	WpoA==
-X-Gm-Message-State: AOPr4FUCKyy78ZSr51I4XB1ZTsaC6yN9n4fH7HGm1exno5chaqETEGvWjQwoxXRPclg3jPZb/RFlQuHV56q2+w==
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to;
+	bh=OAtc/sZ/iIs7RTqiK+HesukccCcTtCXAKM9ffw/ZTso=;
+	b=lIbEgLLWRg2RNguIGmeIgqBInV9NqPCmf7n6/kYz7QbRz8YYToxoFSMjiZShjBjF+/
+	CefkM4kjo8lAAvYW25bjHB2g5FuCC32X1RH694mNazU37MWSVweOBCQbnxd5U5QJROvm
+	JSFV7+WEI23U+ob9BqtG8LbBrp8qRWRlucUEMqMe8gK72eKV1VIwDJ3gKaGFrRQJJnbX
+	buO2tL5AvM1OdRyAro17EPTQ9aSOg7htuzbDEsLcjEVip2trroaKv+C0KECu7/hZrJBy
+	+VyVNsCdtuw/igaFmgldXZbS3ccZN3fKWKswk5nWbXblSn7N60hfoLn6o+ZgbdZ99QVY
+	R4iQ==
+X-Gm-Message-State: AOPr4FVExRvtzdf6tPlkkCVNCVmCQNiOku8a6dwz0UQz3zI5E0II1VCR+J/DizD+DpRAHbrQWJ1Vv+ia9aKizQ==
 MIME-Version: 1.0
-X-Received: by 10.107.159.137 with SMTP id i131mr4388850ioe.29.1461083161058; 
-	Tue, 19 Apr 2016 09:26:01 -0700 (PDT)
-Received: by 10.64.78.105 with HTTP; Tue, 19 Apr 2016 09:26:01 -0700 (PDT)
-Date: Tue, 19 Apr 2016 12:26:01 -0400
-Message-ID: <CAMZfsd5MAhEiAw7YsMuS0bv1AMKh3ZTONV0tW5E+U83UvQN4nQ@mail.gmail.com>
-From: "Ryan Elkholy, PhD, PE" <ryanelkholy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+X-Received: by 10.202.90.3 with SMTP id o3mr2033018oib.96.1461095169607; Tue,
+	19 Apr 2016 12:46:09 -0700 (PDT)
+Received: by 10.157.5.101 with HTTP; Tue, 19 Apr 2016 12:46:09 -0700 (PDT)
+In-Reply-To: <1461080418-9229-2-git-send-email-eu@felipetonello.com>
+References: <1461080418-9229-1-git-send-email-eu@felipetonello.com>
+	<1461080418-9229-2-git-send-email-eu@felipetonello.com>
+Date: Tue, 19 Apr 2016 15:46:09 -0400
+Message-ID: <CADkTA4Pi3dG1G4DZ+rNEfwVnMJZxDNBfXtXv_fMKprkgBmRquQ@mail.gmail.com>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-qt5] Qt SDK seems to be broken
+Subject: Re: [PATCH 1/2] protobuf: add protobuf-c recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,66 +53,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2016 16:26:01 -0000
+X-List-Received-Date: Tue, 19 Apr 2016 19:46:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hello,
+On Tue, Apr 19, 2016 at 11:40 AM, Felipe F. Tonello <eu@felipetonello.com>
+wrote:
 
-I have created the Qt SDK after including the meta-qt5 layer. Once the SDK
-was created I installed QtCreator after including the environment setup
-script at the top of the qtcreator.sh file. After I run qtcreator.sh and
-QtCreator opens, I noticed that the Build and Run settings were not
-automatically detected. I further realised that I saw the following error
-under "General Messages" upon startup:
+> Initial version of recipe. The main package could be split into two to
+> separate the compiler. This also applies to protobuf recipe.
+>
+>
+More precisely, this is the initial version outside of meta-virtualization
+which enea added
+in 2012 :) It was added as a dependency for criu (hence why it was put in
+meta-virt).
 
-"QML module does not contain information about components contained in
-plugins.
+If we move it to meta-oe, we at least owe that other implementation a
+reference in the commit.
 
-Module path: /home/ryan/Qt/5.6/gcc_64/qml/Qt/labs/controls/material
-See "Using QML Modules with Plugins" in the documentation.
+Did you check the version we have there for deltas ? There are differences
+in the recipe, and
+it would be good to know if you've looked and determined they aren't
+necessary.
 
-Automatic type dump of QML module failed.
-Errors:
-"/home/ryan/Qt/SDK/sysroots/corei7-64-custom_distro-linux/usr/bin/qt5/qmlplugindump"
-failed to start: No such file or directory
-Arguments: -nonrelocatable Qt.labs.controls.material 1.0
-/home/ryan/Qt/5.6/gcc_64/qml
-"
+Cheers,
 
-It says it cannot find qmlplugindump, but I clearly see it in the path.
+Bruce
 
-Regardless, I went along and I manually chose the compiler/debugger/version
-using the SDK and made a kit for my target. After doing so I made a sample
-app that required the following:
 
-Qt += quick qml
+> Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
+> ---
+>  .../recipes-devtools/protobuf/protobuf-c_1.2.1.bb  | 26
+> ++++++++++++++++++++++
+>  1 file changed, 26 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c_1.2.1.bb
+>
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.2.1.bb
+> b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.2.1.bb
+> new file mode 100644
+> index 000000000000..88cdb0bccd8e
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.2.1.bb
+> @@ -0,0 +1,26 @@
+> +SUMMARY = "Protocol Buffers - structured data serialisation mechanism"
+> +DESCRIPTION = "This is protobuf-c, a C implementation of the Google
+> Protocol Buffers data \
+> +serialization format. It includes libprotobuf-c, a pure C library that \
+> +implements protobuf encoding and decoding, and protoc-c, a code generator
+> that \
+> +converts Protocol Buffer .proto files to C descriptor code, based on the \
+> +original protoc. protobuf-c formerly included an RPC implementation; that
+> code \
+> +has been split out into the protobuf-c-rpc project."
+> +HOMEPAGE = "https://github.com/protobuf-c/protobuf-c"
+> +SECTION = "console/tools"
+> +LICENSE = "BSD-2-Clause"
+> +
+> +DEPENDS = "protobuf-native protobuf"
+> +
+> +PACKAGE_BEFORE_PN = "${PN}-compiler"
+> +
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=235c3195a3968524dc1524b4ebea0c0e"
+> +SRC_URI = "https://github.com/protobuf-c/protobuf-c/archive/v${PV}.tar.gz
+> "
+> +
+> +SRC_URI[md5sum] = "b884aeba4283309445a8e3b6e7322dd6"
+> +SRC_URI[sha256sum] =
+> "2d708fb3c024b9e6e86df141faff802194f5db90a4b79e6d4aa6bd61dd983dd6"
+> +
+> +inherit autotools pkgconfig
+> +
+> +FILES_${PN}-compiler = "${bindir}"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> --
+> 2.8.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
-After trying to build I got the following compiler errors:
 
-"
-Makefile:659: warning: overriding commands for target `install_target'
-Makefile:650: warning: ignoring old commands for target `install_target'
-Makefile:663: warning: overriding commands for target `uninstall_target'
-Makefile:654: warning: ignoring old commands for target `uninstall_target'
-g++  -o testapp main.o qrc_qml.o   -lQt5Quick -lQt5Gui -lQt5Qml
--lQt5Network -lQt5Core -lGLESv2 -lpthread
-/usr/bin/ld: cannot find -lQt5Quick
-/usr/bin/ld: cannot find -lQt5Qml
-collect2: error: ld returned 1 exit status
-make: *** [testapp] Error 1
-09:11:02: The process "/usr/bin/make" exited with code 2.
-Error while building/deploying project testapp (kit: Minnowboard Qt 5.6.0
-GCC 64bit)
-When executing step "Make"
-09:11:02: Elapsed time: 00:00.
-"
 
-Specifically, it cannot find Qt5Quick and Qt5Qml libraries, which again I
-clearly see in the SDK library path. I have been trying many things to fix
-this and I have even manually added the library paths, but nothing seems to
-work. Does anyone have any idea for a fix?
-
-Thanks ahead of time!
-
--Ryan
+-- 
+"Thou shalt not follow the NULL pointer, for chaos and madness await thee
+at its end"
 
