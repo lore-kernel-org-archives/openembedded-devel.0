@@ -1,48 +1,54 @@
 Return-Path: <eu@felipetonello.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 9BC386FFED
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id F01C46FF56
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2016 15:37:16 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id u206so36437512wme.1
+	Tue, 19 Apr 2016 15:39:05 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id n3so36725890wmn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Apr 2016 08:37:17 -0700 (PDT)
+	Tue, 19 Apr 2016 08:39:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=felipetonello-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=tvhheYraGuQ9uagk/DxfPvE6P/ZodI4RvwooEcugPXo=;
-	b=KyqCxg/SKDJ2pz0uCENv38ZqhicGCfTLXiZKeRx75MTvCiQvQz7vqYrKTyjlVQMcaQ
-	aCYwWKUROFFB9baAEZQxdrhIO23J2LyPcznd0Zd0VjmNrkUr8+gyXQROI0Xgu+aWj6iQ
-	qjOLl5zcclk8G1rf066EO9ywhqSYMPqbT/fPmQAh+l6oNH7sg37gPV1OHXpYdVlgHzIe
-	bDmZTTFq/sw35QzhPTIY4dFOWSOV+H9kMdu8zNcHBb3K7Br3xEuwUEisVmICO4S6YZna
-	9G9sR3tt1O0Lu5nRyeOqlSJantP8UXr8XNBC2BGhefjLeRp8LiakWH1sbImdMK1xS3uO
-	vtyA==
+	h=subject:to:references:cc:from:message-id:date:user-agent
+	:mime-version:in-reply-to;
+	bh=IvsD32T9dHqArPegRdOYfuMgPrELMY2VDCArrcnPoHE=;
+	b=Z45nyAHURKkx/4VceBbb/df8Ru2DtJHLxsJWnD0SCV17vmaBDHwizFbTwyIwOnmib2
+	ZkGMwp3fT0akGg7WkvvwtA1DhruXWSEbNWELGQ9jOt42u9/f9r9FVe6Lid9qkP81Q1q3
+	9pasfCh5Jzqj0d61PLp4GR+bAwiQrzpvynVfmFIsfFI9Du1NZN1w+zZNkzEn866oDqV8
+	13tIIuB1O1jxYGUpqcOwxljk+te2dNGVm7r3TP3etgyXu0aekgEYwig+/1RNJm4+2ypn
+	Oq1c+AdzLdDjfZLAj8G0lROiR4J04F68nms1yJWm2nq1NUhOccHhe6Yy0zP/VdXKd3aa
+	eCzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=tvhheYraGuQ9uagk/DxfPvE6P/ZodI4RvwooEcugPXo=;
-	b=FcEJc3xBn8yPvyYc3NBv6H+V249IULLZxOx9dYsfluiKWjfgkBwh/cgSLsBPSyUnEA
-	5tuVguX9FJA/HqoW4ZY5laAzTJDWHfj4ZA2V4JnWKaPOUcO4fyH3CUjGke0kRPBeqWoY
-	LyTyZ5J4bDfRLX/LJpasFwF5KKFkyOKB+TLLDzg1CnE8fgAWrH9mJTuxwYzzU8rd6lB8
-	Za2hSmTUh2KjR07Hbn3tW8c4Vxo1555+39WbRwv3RY1eSVqya6vqNEcxs4S79U+PTPSD
-	lA+T50gdcdTm+UZUVlCPdQyJoVZma0tKmfJi581Q+fU3rzf1MlLaYmQF0kl+92ZfppYX
-	exOA==
-X-Gm-Message-State: AOPr4FVx6QUPUgNMJB6XvgFDr8oH6eqXWk+963acwfqNmugtTrKIJJC4pmAO8oWiw8qzBg==
-X-Received: by 10.28.15.74 with SMTP id 71mr4431474wmp.34.1461080236925;
-	Tue, 19 Apr 2016 08:37:16 -0700 (PDT)
-Received: from felipe-arch.localdomain ([81.145.202.106])
-	by smtp.gmail.com with ESMTPSA id v64sm4952474wmv.1.2016.04.19.08.37.15
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 19 Apr 2016 08:37:16 -0700 (PDT)
-From: "Felipe F. Tonello" <eu@felipetonello.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Apr 2016 16:40:18 +0100
-Message-Id: <1461080418-9229-3-git-send-email-eu@felipetonello.com>
-X-Mailer: git-send-email 2.8.0
-In-Reply-To: <1461080418-9229-1-git-send-email-eu@felipetonello.com>
-References: <1461080418-9229-1-git-send-email-eu@felipetonello.com>
-Subject: [PATCH 2/2] protobuf: Split package to main and compiler packages
+	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
+	:user-agent:mime-version:in-reply-to;
+	bh=IvsD32T9dHqArPegRdOYfuMgPrELMY2VDCArrcnPoHE=;
+	b=JQgriWYEnuNJT0UpsX7jbJkL+zgQP15u2F8h9BdwiVViKl49Nve5ovWVL5Qp+wRfE6
+	7wS2Z/BHPm7KxoUHRRbznCCVywhOlgdqv9cX+IzHa94IaokvmPXmK8+bUC1RMqGepOMb
+	olX07fGJc+QvoYrHI9cjvObY2aZ+TFEMUnGL/h6wzKpeBAsVI1CJjiB4RLGbqNAQuMGO
+	vFdy+Bgnq3znQT7f7Iy7noB9xxldO/T+IlTY49lQQiunWGc/0JPCGSb92s0liwRm6U4n
+	jE5xObJbUrVs43dIIr6GTP0o4PQUIVPNeYaqMgPWrK7nHJcEMzYuT7Cvcqst9zDyEtwB
+	0T0w==
+X-Gm-Message-State: AOPr4FW17MzW0G7tuzngZPZgqWe9Lrwx9yck8Nxn9oRAra37CT4+TkB3iyMhpK328RuuYw==
+X-Received: by 10.28.152.133 with SMTP id a127mr4242441wme.60.1461080346146;
+	Tue, 19 Apr 2016 08:39:06 -0700 (PDT)
+Received: from [10.55.10.2] ([81.145.202.106])
+	by smtp.gmail.com with ESMTPSA id wr2sm825407wjc.49.2016.04.19.08.39.03
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 19 Apr 2016 08:39:05 -0700 (PDT)
+To: Eduardo Silva <eduardo@monkey.io>
+References: <1459750358-12047-1-git-send-email-eduardo@monkey.io>
+	<5704E88E.2070402@felipetonello.com>
+	<CAEaCVQjOC2sp3MWAntW4LU6mdDyb-T-CxJCBuXw1ivz3tiaHhA@mail.gmail.com>
+	<CAEaCVQgOCvFJzTBmDjYqVPSnvxOf43hX6b5bGRcX4Lmo6H1YJA@mail.gmail.com>
+From: Felipe Ferreri Tonello <eu@felipetonello.com>
+Message-ID: <571651D4.9070102@felipetonello.com>
+Date: Tue, 19 Apr 2016 16:42:12 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.7.2
+MIME-Version: 1.0
+In-Reply-To: <CAEaCVQgOCvFJzTBmDjYqVPSnvxOf43hX6b5bGRcX4Lmo6H1YJA@mail.gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] fluentbit: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,37 +61,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2016 15:37:17 -0000
+X-List-Received-Date: Tue, 19 Apr 2016 15:39:07 -0000
+X-Groupsio-MsgNum: 61060
+Content-Type: multipart/mixed; boundary="------------070200060101080003000700"
 
-Protobuf has two main features, a compiler and a library. Run-time
-applications only need the libraries to run.
+--------------070200060101080003000700
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
----
- meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+Hi Eduardo,
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
-index 049f9d4e8f18..f52f22aca3e8 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
-@@ -8,6 +8,8 @@ LICENSE = "BSD-3-Clause"
- 
- DEPENDS = "zlib"
- 
-+PACKAGE_BEFORE_PN = "${PN}-compiler"
-+
- LIC_FILES_CHKSUM = "file://LICENSE;md5=af6809583bfde9a31595a58bb4a24514"
- 
- SRCREV = "bba83652e1be610bdb7ee1566ad18346d98b843c"
-@@ -22,4 +24,6 @@ inherit autotools
- 
- S = "${WORKDIR}/git"
- 
-+FILES_${PN}-compiler = "${bindir}"
-+
- BBCLASSEXTEND = "native nativesdk"
--- 
-2.8.0
+On 15/04/16 15:12, Eduardo Silva wrote:
+> is the patch OK ?
 
+It looks fine by me.
 
+Felipe
+
+--------------070200060101080003000700
+Content-Type: application/pgp-keys;
+ name="0x92698E6A.asc"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="0x92698E6A.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v2
+
+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
+SkAyCfQaSw==
+=JwBB
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------070200060101080003000700--
