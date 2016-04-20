@@ -1,49 +1,64 @@
-Return-Path: <bruce.ashfield@gmail.com>
-Received: from mail-oi0-f45.google.com (mail-oi0-f45.google.com
-	[209.85.218.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BA0A6FFE8
+Return-Path: <samuli.piippo@qt.io>
+X-Greylist: delayed 5456 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 20 Apr 2016 15:21:38 UTC
+Received: from emea01-db3-obe.outbound.protection.outlook.com
+	(mail-db3on0124.outbound.protection.outlook.com [157.55.234.124])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A16665CC3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2016 14:32:57 +0000 (UTC)
-Received: by mail-oi0-f45.google.com with SMTP id x201so41889284oif.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2016 07:32:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to; 
-	bh=ZjtLrV6P1Mx/LzlBJOpuKL6OA1EFjF8742+hZN9tLl8=;
-	b=x7cD7yR1o5aTAw5cA3D9XcmpO1gJ085ZsrvO4epQvkfwfAHHiFz7FZkC4faCGjVmro
-	8kMdq4y3vIOfK8SJgUkPKV00qXs8IpvEqcazuFATnnrusvg65GjCJUuO2KVwdKpeZ0RD
-	uMnVXIAXMQcghG0DyTtmzJ/oCkiTCoTS0PW3idb5R/3DiBRVjthH5F2B1ntCo7uZ7FZL
-	mZ2Ci6f/Gvnbc/SHK8dq501r2ctEzZ82Z0QQNt4zwdWj26mBB7VM9+onnEHACayIxyLp
-	0RpdTGzrOXDfwJvaPoJjTEq2ODN+oRSb1i2UMZNbuMFhedZUNuSQsK1WWzBH1odtxPPn
-	IKXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to;
-	bh=ZjtLrV6P1Mx/LzlBJOpuKL6OA1EFjF8742+hZN9tLl8=;
-	b=V3Y1E7qd1VPFGu2C94y4KNRseJSexhWe5EjWFhaheSLIEQIEcgDMiB6sE5PabpABS2
-	QqkYfD8KLd60Z8+v9Mrbsn81xrqokQVetQwiU4ByrM228A6EKad986kvSYKi38yHvZmk
-	NCk7E2DdjUNGEHgiaMyo5XceRe5O75GhsRaOAWFDOOV6KM1oedlU1vYERs+d7UKR/ElU
-	5vghVQPfjbITMH6zSvsd+XSfNgLt/PqTXOyhJwTBZVmlcIpheJNV9lWmgyGN3sH/UvyU
-	JBd2F9lIXRwBLnxODlpK4omxXT3xBTKi/h1a3Z5mjEvhsD7GsHyW84A4IgFvqpJsVRXf
-	m/9g==
-X-Gm-Message-State: AOPr4FVJLFqXQ/XTNteN1hpYEfcdpXsBNJt4jBeI/575dnZnHwrd+a0jXPkFcD/ebAevaWfNVw+kltrahzRocQ==
+	Wed, 20 Apr 2016 15:21:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=qtcompany.onmicrosoft.com; s=selector1-qt-io;
+	h=From:To:Date:Subject:Message-ID:Content-Type:MIME-Version;
+	bh=744FDfl72qyoN9xO608HphA1ddAucuMcWhQIvUwxg6I=;
+	b=MYcFhpMVUQyDOgTQY606IT8TVrCkq5sU+zDfRA/L5KXbG8a51UUKJjQhCTpL1pmszcx3iwoTm1yDtVUzvtAhWu77qc/5ljB9AJ7IyVM6x4jClcntPokjwaQ39yQbL1lQ5RvnVJMgc011di0V+AnrDRIoGXjO/ow0kKPNccKWLCk=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+	header.d=none; lists.openembedded.org;
+	dmarc=none action=none header.from=qt.io;
+Received: from piippo.it.local (91.217.248.11) by
+	AM2PR02MB0562.eurprd02.prod.outlook.com (2a01:111:e400:840b::18) with
+	Microsoft SMTP Server (TLS) id 15.1.453.26;
+	Wed, 20 Apr 2016 13:50:42 +0000
+From: Samuli Piippo <samuli.piippo@qt.io>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 20 Apr 2016 16:51:02 +0300
+Message-ID: <1461160262-4752-1-git-send-email-samuli.piippo@qt.io>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Received: by 10.157.54.54 with SMTP id w51mr3585637otb.186.1461162778344;
-	Wed, 20 Apr 2016 07:32:58 -0700 (PDT)
-Received: by 10.157.32.135 with HTTP; Wed, 20 Apr 2016 07:32:58 -0700 (PDT)
-In-Reply-To: <57173E84.90703@felipetonello.com>
-References: <1461080418-9229-1-git-send-email-eu@felipetonello.com>
-	<1461080418-9229-2-git-send-email-eu@felipetonello.com>
-	<CADkTA4Pi3dG1G4DZ+rNEfwVnMJZxDNBfXtXv_fMKprkgBmRquQ@mail.gmail.com>
-	<CADkTA4OyR2b_yCXFQ_NFzfEck_v3NvXGF4gUJLPGKcjvuHCFHA@mail.gmail.com>
-	<57173E84.90703@felipetonello.com>
-Date: Wed, 20 Apr 2016 10:32:58 -0400
-Message-ID: <CADkTA4NT_bLfG6wUTFpxN+4veyL6iwdk8VZgRQu5AF_5QsKuHQ@mail.gmail.com>
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH 1/2] protobuf: add protobuf-c recipe
+X-Originating-IP: [91.217.248.11]
+X-ClientProxiedBy: AM3PR08CA0038.eurprd08.prod.outlook.com
+	(2a01:111:e400:8840::48) To AM2PR02MB0562.eurprd02.prod.outlook.com
+	(2a01:111:e400:840b::18)
+X-MS-Office365-Filtering-Correlation-Id: 7fa8e143-1448-49a9-9b06-08d36922c3b9
+X-Microsoft-Exchange-Diagnostics: 1; AM2PR02MB0562;
+	2:wuIPOzFYB3i96Z0q/EgvJI9LO6lu+fQnpHnAo2vJL78xLhcmhnDRnxlFNuYe9NiGlYOMkA6VX7BJ/BVpWoX5DLmqs0LWfi52uPbRZtqBOGV8gsNWQcyF1aWcLfO8lh2kf4jRBgZC9HLhi0uMK2D3o6Am1h6OLtgDkBRoAT76S7USdXdnFnv9HRcuP62SVXty;
+	3:VBw4E+ZZMQTeFMm5KHBU1SerBuQOkrCPbz+T8/UnXo4vL5cMXHlDh2z3iPc1+TjEyCJHONtfK3zkO+QssiV9CvH6HUK1fraqxZhqMrsAdaxxhegrddAJoQJ++qVX6Epb
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:AM2PR02MB0562;
+X-Microsoft-Exchange-Diagnostics: 1; AM2PR02MB0562;
+	25:MIm2I0mIaC9MweWrCpQhXuDCGkc1a/4rwqkfhusPTuYjLICXrhljbkpV9hb1rVZp2+Qum6hrWh5ou3DmEQwmx2nNx6O4qwb5KcvogAnpTGdzoU2PLVRUDIrKHKYdhupIGpYvmAidiNpq3t0bCUglt3zi0qoJaPvGLzsMjzkqagaWOcgw5kGpFbGJ2VYYDcUny8uOpitZ9t/juKYa34Z1nuT+XbT95wta+g8Se6CncGYUtQr4O2v7NDtQahHyya69T1OXJn5vtTe+Ug8vJGal9fYj85tpXOqXnnoOp8h3/0XlciAhPgwumI7cyFb9E3QIVSNMZkQ8mERgeYK7mH0t4x7UEYBgmSYhr6cGDe2EA1eb65BNFxjwIPMYjp/xzYrj6LNqzm/WuQGO8jYVRUiRhLbyTD4sRlSAckzVG/sx2d7LlUYBopM14GwvXK8P5tjXdXZxH+lPMefrJqCrIzB9zn/wuu1dMatLKnQ9qupEkheKMD3fp6D39l3Z9Cv2aVkaPJDsqaESN8VapmWmw7jk9pgZzAx9/03BxdL3MsrCYPvRhHBnxkobILFRkSI1DkPpEgyX7h9mP4/h2aUhZFfXETvdG4ZXdknuzoiLVew328OrekigobbetxvIo343L+rYNf2aIjhHqY2jhRUdT981Xw==
+X-Microsoft-Antispam-PRVS: <AM2PR02MB056219AC0F328CADA237149BE96D0@AM2PR02MB0562.eurprd02.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(9101521026)(6040130)(601004)(2401047)(8121501046)(5005006)(3002001)(10201501046)(6041046)(6043046);
+	SRVR:AM2PR02MB0562; BCL:0; PCL:0; RULEID:; SRVR:AM2PR02MB0562; 
+X-Microsoft-Exchange-Diagnostics: 1; AM2PR02MB0562;
+	4:j9BBS/MlgNrzLcf75taJSM2WHa2jb98rsMHoKWiey7ZFbgYvjXrA8ZkEBrFRTMM8cVPBo3p5OAJQW9JSJ7iMzYBMD7/xJBEB/+3eaoR7VQRuq1i4Y3IEOWxZ5d2BPhNAuTDqdmShKgf8PKgGCvy+upsXixf8m610u85QcrmWYoSPB7W+PzCKmzG9/LU3o8xPCM83l13DVIWigTnheJtHVRCFsAbOA29z52bcVuOiQt1JHNmj0Zm5uLPtO+bRx7pfrdIHYc6UGlw7LMRh+RzmxViiyWcBRKu5xgFTuMdOWez9oU7Q/DvsYHxf51s2JOBMou4UtDFz4YK9csXmpIKCV6G7MHMxyBYNeZZPGDEeyPEhTNeB9SZCMAotEc+J7QcNMy9a/mJ3bX8yqZX0gG0JqZgULkwWsSbPzMSMI7P4+fhrL349b/YlCmOuE7hdpBb/
+X-Forefront-PRVS: 0918748D70
+X-Forefront-Antispam-Report: SFV:NSPM;
+	SFS:(10019020)(4630300001)(6009001)(189998001)(110136002)(107886002)(50986999)(48376002)(74482002)(5003940100001)(50466002)(81166005)(2906002)(36756003)(5008740100001)(33646002)(19580405001)(19580395003)(42186005)(86362001)(1096002)(450100001)(3846002)(50226001)(2351001)(92566002)(6116002)(66066001)(5004730100002)(586003)(229853001)(47776003)(7099028);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:AM2PR02MB0562; H:piippo.it.local;
+	FPR:; SPF:None; MLV:sfv; LANG:en; 
+X-Microsoft-Exchange-Diagnostics: 1; AM2PR02MB0562;
+	23:068iOrt3TZegAJGZobG+kg/bYnCl9bVwJ4CWWOImbJVvfVe/dDY/zMH4nLICA6MUeNAIezwOSfFVnaCICJwkKITUULtXgsILznqIZC0G+P1GuNMiTTnPz697phchEE1bTaQdOyhC/2aPAQbJwuA1Yd6poVD74Sdtxkav+rLMHLMm3+7VQb7z/Jd7BpDUCXeKnnXeAnb3LQwnEWOqnXDQa9fXS1KVrFWPlLy0YxgCeuGQbICXohqghBVLT24eYjejJG9w1pi0iGRa8ZltPC26L8938X83vMK+8aNjSSd3+IrHo2annf+WKFqzli6ka7+Ts0fWDbrL1tBMqB5BjM+AWuCirLy92rWF/zHJlS+SZQsWjwa6NGBurqhU2HD8svmeB/f7NX6LBJQx1PXF4+KidzJDwoHP9wrpwXHJZERid07/0lHxkeRSDRT9fMtjpscph75idPXC195eSZNTiqifu7Z+dwHg+hvtDVm71OpBdwnGwXZAZMa/xHOqIO61InilfE1AIweeWRssf6fTLgcMfmvRLj0u5TTgsslfiYSus2+kfPCnxHWCpSAa4jqQk+5xtRgP+m07nn4ZaXmLC2SLbpE8Vhnhgw++6kn4PN1zoppFiGeiEGwou95Mhnzy4Itd+C1E3kldJp8a/H3mKLnK4bOFxsA2HuH/3GWjI6hGddmSgRg1x+95JGf+VQxTaPpQk5iA8Cy8TETgOIK+eF+aEFOcnf3xxbzF1fPueZRoWk+n3S10POoRFICkQMmPxV+cTRcF2mTmHYNOTMSkDlOGklPE1vI+r8tN6o2FtB6o1CxchGtEzTQ95swaWTJd4WKqlN6Pm48QDiS0kX63rBRZu55ow4wzG45fCCEylOmAwesONHHM6+qiH+12za2qd0Sb
+X-Microsoft-Exchange-Diagnostics: 1; AM2PR02MB0562;
+	5:QkIBnAyx7Sjgm+YNCrD6DVSn4iMlWf1oxuSyHJgyYz3zBgj+rBzNnwiDGTEd/a0pdIEH+urnpiDXPPeXZOLfMhm8rgHmmQhVZsn5FwAuyPrNHUrwP7aEnYvtIjl8ky+4OTbj/NSnrPMl93CWBSa6Sg==;
+	24:ALibIt/lj46qZh0ftxivFBk+V6RE8r5SqESnW8NyeBu8IU4iQ56BOxdVeHY1iQNG5bXcHzaCw9d5WmpEVPmA/F3eaOSSB2s1Zjmsc/l3yLY=
+SpamDiagnosticOutput: 1:23
+SpamDiagnosticMetadata: NSPM
+X-OriginatorOrg: qt.io
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2016 13:50:42.1647 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM2PR02MB0562
+Subject: [meta-qt5][PATCH] qt5: Allow disabling SHA validation for branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,161 +71,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2016 14:32:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 20 Apr 2016 15:21:42 -0000
+Content-Type: text/plain
 
-On Wed, Apr 20, 2016 at 4:32 AM, Felipe Ferreri Tonello <
-eu@felipetonello.com> wrote:
+Qt releases are done from a release branch (5.x.x), which is later merged
+back to a stable branch (5.x) and then removed. When a recipe is updated
+to use the released SHA from the release branch, it will eventually break
+when the release branch is removed. This happens because bitbake tries to
+validate that given SHA is found from the given branch. Add additional
+variable that can be used to disable the SHA check when branch is known
+to be later removed, but SHA remains valid.
 
-> Hi Bruce,
->
-> On 19/04/16 20:55, Bruce Ashfield wrote:
-> > On Tue, Apr 19, 2016 at 3:46 PM, Bruce Ashfield <
-> bruce.ashfield@gmail.com>
-> > wrote:
-> >
-> >>
-> >>
-> >> On Tue, Apr 19, 2016 at 11:40 AM, Felipe F. Tonello <
-> eu@felipetonello.com>
-> >> wrote:
-> >>
-> >>> Initial version of recipe. The main package could be split into two to
-> >>> separate the compiler. This also applies to protobuf recipe.
-> >>>
-> >>>
-> >> More precisely, this is the initial version outside of
-> meta-virtualization
-> >> which enea added
-> >> in 2012 :) It was added as a dependency for criu (hence why it was put
-> in
-> >> meta-virt).
-> >>
-> >> If we move it to meta-oe, we at least owe that other implementation a
-> >> reference in the commit.
-> >>
-> >>
-> > s/if/when/.
-> >
-> > I'm happy to purge all the protobuf* recipes from meta-virt, since they
-> > were only there as
-> > support mechanisms (and I wasn't involved in their original merge).
-> >
-> > But if you can take a look at what's in the meta-virt recipe, I'll do
-> some
-> > runtime testing with your
-> > variant here, and drop the meta-virt ones when I can confirm criu works.
-> >
->
-> Regular protobuf recipe is already part of meta-oe. That's why I added
-> this one there too.
->
+Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
+---
+ recipes-qt/qt5/qt5-git.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Sure. That's obvious from the layer index, as is the existence of the one
-in meta-virt.
-
-Credit, where credit is due. It's not my work, so I'm not asking for any
-credit,
-but simply duplicating something that already exists without a nod to the
-older one
-isn't ideal.
-
-All I was asking was that if you could a link to the meta-virt one in the
-commit header
-so that someone not familiar with the layer index can see the two options
-.. and
-at the same time I was wondering if you'd seen the meta-virt one and did
-this one
-differently for technical reasons. That makes it easier for me to drop
-recipes as they
-get cloned around to new (and better) locations.
-
-Bruce
-
-
-> > Cheers,
-> >
-> > Bruce
-> >
-> >
-> >> Did you check the version we have there for deltas ? There are
-> differences
-> >> in the recipe, and
-> >> it would be good to know if you've looked and determined they aren't
-> >> necessary.
-> >>
-> >> Cheers,
-> >>
-> >> Bruce
-> >>
-> >>
-> >>> Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
-> >>> ---
-> >>>  .../recipes-devtools/protobuf/protobuf-c_1.2.1.bb  | 26
-> >>> ++++++++++++++++++++++
-> >>>  1 file changed, 26 insertions(+)
-> >>>  create mode 100644 meta-oe/recipes-devtools/protobuf/
-> protobuf-c_1.2.1.bb
-> >>>
-> >>> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.2.1.bb
-> >>> b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.2.1.bb
-> >>> new file mode 100644
-> >>> index 000000000000..88cdb0bccd8e
-> >>> --- /dev/null
-> >>> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.2.1.bb
-> >>> @@ -0,0 +1,26 @@
-> >>> +SUMMARY = "Protocol Buffers - structured data serialisation mechanism"
-> >>> +DESCRIPTION = "This is protobuf-c, a C implementation of the Google
-> >>> Protocol Buffers data \
-> >>> +serialization format. It includes libprotobuf-c, a pure C library
-> that \
-> >>> +implements protobuf encoding and decoding, and protoc-c, a code
-> >>> generator that \
-> >>> +converts Protocol Buffer .proto files to C descriptor code, based on
-> the
-> >>> \
-> >>> +original protoc. protobuf-c formerly included an RPC implementation;
-> >>> that code \
-> >>> +has been split out into the protobuf-c-rpc project."
-> >>> +HOMEPAGE = "https://github.com/protobuf-c/protobuf-c"
-> >>> +SECTION = "console/tools"
-> >>> +LICENSE = "BSD-2-Clause"
-> >>> +
-> >>> +DEPENDS = "protobuf-native protobuf"
-> >>> +
-> >>> +PACKAGE_BEFORE_PN = "${PN}-compiler"
-> >>> +
-> >>> +LIC_FILES_CHKSUM =
-> "file://LICENSE;md5=235c3195a3968524dc1524b4ebea0c0e"
-> >>> +SRC_URI = "
-> >>> https://github.com/protobuf-c/protobuf-c/archive/v${PV}.tar.gz"
-> >>> +
-> >>> +SRC_URI[md5sum] = "b884aeba4283309445a8e3b6e7322dd6"
-> >>> +SRC_URI[sha256sum] =
-> >>> "2d708fb3c024b9e6e86df141faff802194f5db90a4b79e6d4aa6bd61dd983dd6"
-> >>> +
-> >>> +inherit autotools pkgconfig
-> >>> +
-> >>> +FILES_${PN}-compiler = "${bindir}"
-> >>> +
-> >>> +BBCLASSEXTEND = "native nativesdk"
-> >>> --
-> >>> 2.8.0
-> >>>
-> >>> --
->
-> Felipe
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
-
-
+diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
+index 8a6d93e..1805551 100644
+--- a/recipes-qt/qt5/qt5-git.inc
++++ b/recipes-qt/qt5/qt5-git.inc
+@@ -3,10 +3,11 @@
+ 
+ QT_MODULE ?= "${BPN}"
+ QT_MODULE_BRANCH ?= "5.6"
++QT_MODULE_NOBRANCH ?= "0"
+ 
+ # each module needs to define valid SRCREV
+ SRC_URI = " \
+-    ${QT_GIT}/${QT_MODULE}.git;name=${QT_MODULE};branch=${QT_MODULE_BRANCH};protocol=${QT_GIT_PROTOCOL} \
++    ${QT_GIT}/${QT_MODULE}.git;name=${QT_MODULE};nobranch=${QT_MODULE_NOBRANCH};branch=${QT_MODULE_BRANCH};protocol=${QT_GIT_PROTOCOL} \
+ "
+ 
+ S = "${WORKDIR}/git"
 -- 
-"Thou shalt not follow the NULL pointer, for chaos and madness await thee
-at its end"
+1.9.1
+
 
