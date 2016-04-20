@@ -1,38 +1,33 @@
-Return-Path: <Adrian.Dudau@enea.com>
-Received: from smtp-out10.electric.net (smtp-out10.electric.net
-	[185.38.180.34])
-	by mail.openembedded.org (Postfix) with ESMTP id 1087F60125
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 06C6D612E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2016 11:43:53 +0000 (UTC)
-Received: from 1asqXw-0003q4-V2 by out10a.electric.net with emc1-ok (Exim 4.87)
-	(envelope-from <Adrian.Dudau@enea.com>) id 1asqXw-0003qV-VV
+	Wed, 20 Apr 2016 13:06:15 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
+	by relay1.mentorg.com with esmtp 
+	id 1asrpf-0005pT-HR from Joe_MacDonald@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2016 04:43:52 -0700
-Received: by emcmailer; Wed, 20 Apr 2016 04:43:52 -0700
-Received: from [192.36.1.72] (helo=mx-3.enea.com)
-	by out10a.electric.net with esmtps (TLSv1:AES128-SHA:128) (Exim 4.87)
-	(envelope-from <Adrian.Dudau@enea.com>) id 1asqXw-0003q4-V2
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Apr 2016 04:43:52 -0700
-Received: from sestofb11.enea.se (172.21.3.146) by smtp.enea.com
-	(172.21.1.208) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 20 Apr 2016 13:43:52 +0200
-Received: by sestofb11.enea.se (Postfix, from userid 4451)	id 2D4AB2413C1;
-	Wed, 20 Apr 2016 13:43:52 +0200 (CEST)
-From: Adrian Dudau <adrian.dudau@enea.com>
+	Wed, 20 Apr 2016 06:06:15 -0700
+Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
+	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 20 Apr 2016 06:06:14 -0700
+Received: by burninator (Postfix, from userid 1000)	id A4F34580595; Wed, 20
+	Apr 2016 09:06:13 -0400 (EDT)
+Date: Wed, 20 Apr 2016 09:06:13 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 20 Apr 2016 13:43:52 +0200
-Message-ID: <1461152632-35663-1-git-send-email-adrian.dudau@enea.com>
-X-Mailer: git-send-email 1.9.1
+Message-ID: <20160420130613.GA5528@mentor.com>
+References: <1461013253-2350-1-git-send-email-joe_macdonald@mentor.com>
+	<1461013253-2350-6-git-send-email-joe_macdonald@mentor.com>
+	<20160419091558.GA2562@jama> <20160419130107.GA5970@mentor.com>
+	<20160420092756.GC2561@jama>
 MIME-Version: 1.0
-Received-SPF: None (SESTOEX08.enea.se: adrian.dudau@enea.com does not
-	designate permitted sender hosts)
-X-Outbound-IP: 192.36.1.72
-X-Env-From: Adrian.Dudau@enea.com
-X-PolicySMART: 6030817
-X-Virus-Status: Scanned by VirusSMART (c)
-X-Virus-Status: Scanned by VirusSMART (s)
-Subject: [meta-oe][PATCH] umip: Unblacklist recipe and disable parallel make
+In-Reply-To: <20160420092756.GC2561@jama>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-networking][PATCH 5/5] samba: Update to latest stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,34 +40,293 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2016 11:43:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 20 Apr 2016 13:06:18 -0000
+X-Groupsio-MsgNum: 61081
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="mP3DRpeJDSE+ciuQ"
+Content-Disposition: inline
 
-The SRC_URI is up again, no need to blacklist the recipe anymore.
+--mP3DRpeJDSE+ciuQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The following error could ocurr in a race condition:
-scan.l:38:18: fatal error: gram.h: No such file or directory
-http://errors.yoctoproject.org/Errors/Details/56158/
+[Re: [oe] [meta-networking][PATCH 5/5] samba: Update to latest stable] On 1=
+6.04.20 (Wed 11:27) Martin Jansa wrote:
 
-That is, the scan.l file was parsed before the gram.h file was
-generated. To avoid this, we clear the PARALLEL_MAKE variable.
+> On Tue, Apr 19, 2016 at 09:01:25AM -0400, Joe MacDonald wrote:
+> > [Re: [oe] [meta-networking][PATCH 5/5] samba: Update to latest stable] =
+On 16.04.19 (Tue 11:15) Martin Jansa wrote:
+> >=20
+> > > On Mon, Apr 18, 2016 at 05:00:53PM -0400, Joe MacDonald wrote:
+> > > > The previous version of Samba had many critical security updates th=
+at
+> > > > would've required significant backporting effort.  Update to the la=
+test
+> > > > stable release instead.
+> > >=20
+> > > Does it fix floating dependency on libpam as well?
+> >=20
+> > It does not, unfortunately.  After an embarrassingly long time with this
+> > I thought it would be best to carry it this far, integrate the
+> > outstanding patches against it, then tackle the libpam dependency issue.
+> > Since I know you've sunk a lot of time into this recently I know you
+> > know all too well what a tangle the samba build and dependency checking
+> > system can be.
+>=20
+> Agreed that it can be resolved in follow-up patch.
+>=20
+> > It at least meets the criteria of "better than I found it", I think.
+>=20
+> Partially agree, but first please fix this one found in last world build:
 
-Signed-off-by: Adrian Dudau <adrian.dudau@enea.com>
----
- meta-oe/recipes-connectivity/umip/umip_1.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Got it, I've fixed that in my tree by removing the --without-pam_smbpass
+option from line 46 of the samba recipe.  In the interests of not
+sending out yet another giant patch with one tiny change in it to the
+list, here's my current merge queue:
 
-diff --git a/meta-oe/recipes-connectivity/umip/umip_1.0.bb b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-index 41e5340..e80c1b1 100644
---- a/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-+++ b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-@@ -17,4 +17,4 @@ EXTRA_OE_CONF = "--enable-vt"
- 
- inherit autotools-brokensep
- 
--PNBLACKLIST[umip] ?= "BROKEN: SRC_URI seems to be down and build from premirror fails to find gram.h, see http://errors.yoctoproject.org/Errors/Details/56158/"
-+PARALLEL_MAKE = ""
--- 
-1.9.1
+The following changes since commit ab62c7437ff28d045ecff3f82621990ff94662e6:
+
+  cyrus-sasl: Drop unneeded group addition (2016-04-19 09:31:39 -0400)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib joeythesaint/meta-ne=
+tworking-next
+
+for you to fetch changes up to 5182767a3a84491394a54708d5e06d31d59b7c1e:
+
+  vpnc: stage vpnc-script (2016-04-20 08:55:44 -0400)
+
+----------------------------------------------------------------
+Armin Kuster (1):
+      c-ares: Add package to networking
+
+Christopher Larson (3):
+      ctdb: disable the service by default
+      ctdb: rdepend on procps
+      ctdb: drop duplicated DESCRIPTION
+
+Fabio Berton (1):
+      lldpd: Update to version 0.9.2
+
+Ioan-Adrian Ratiu (2):
+      openconnect: add recipe
+      vpnc: stage vpnc-script
+
+Jagadeesh Krishnanjanappa (1):
+      iscsitarget: resolve build error with linux kernel 4.3 and above
+
+Joe MacDonald (5):
+      samba: Update to latest stable
+      libldb: Update to latest stable
+      libtevent: Update to latest stable
+      libtdb: Update to latest stable
+      libtalloc: Update to latest stable
+
+Johannes Pointner (1):
+      samba: add volatile file to support readonly rootfs
+
+Mark Asselstine (1):
+      dnsmasq: get systemd only working again
+
+ .../openconnect/openconnect_git.bb                 |    18 +
+ ...1-waf-sanitize-and-fix-added-cross-answer.patch |    60 -
+ ...-Adds-a-new-mode-to-samba-cross-compiling.patch |   112 -
+ ...-readability-of-cross-answers-generated-b.patch |    66 -
+ ...wafsamba-CHECK_SIZEOF-cross-compile-frien.patch |    72 -
+ .../0005-build-unify-and-fix-endian-tests.patch    |   169 -
+ ...sing-of-cross-answers-file-in-case-answer.patch |    36 -
+ .../samba-4.1.12/01-fix-force-user-sec-ads.patch   |  1448 -
+ .../samba/samba-4.1.12/02-fix-ipv6-join.patch      |   266 -
+ .../samba-4.1.12/03-net-ads-kerberos-pac.patch     |   962 -
+ .../samba/samba-4.1.12/04-ipv6-workaround.patch    |   211 -
+ .../05-fix-gecos-field-with-samlogon.patch         | 29894 ---------------=
+----
+ .../06-fix-nmbd-systemd-status-update.patch        |    97 -
+ .../07-fix-idmap-ad-getgroups-without-gid.patch    |    42 -
+ .../08-fix-idmap-ad-sfu-with-trusted-domains.patch |    44 -
+ .../09-fix-smbclient-echo-cmd-segfault.patch       |    35 -
+ ...improve-service-principal-guessing-in-net.patch |   180 -
+ ...x-overwriting-of-spns-during-net-ads-join.patch |   329 -
+ ...ted-spns-from-AD-during-keytab-generation.patch |   159 -
+ .../samba/samba-4.1.12/13-fix-aes-enctype.patch    |   988 -
+ .../samba/samba-4.1.12/14-fix-dnsupdate.patch      |    51 -
+ .../15-fix-netbios-name-truncation.patch           |   154 -
+ .../16-do-not-check-xsltproc-manpages.patch        |    52 -
+ .../samba-4.1.12/17-execute-prog-by-qemu.patch     |    22 -
+ .../18-avoid-get-config-by-native-ncurses.patch    |    22 -
+ ...systemd-daemon-is-contained-by-libsystemd.patch |    42 -
+ .../samba-4.1.12/21-avoid-sasl-unless-wanted.patch |    10 -
+ .../00-fix-typos-in-man-pages.patch                |     0
+ ...006-avoid-using-colon-in-the-checking-msg.patch |     0
+ .../16-do-not-check-xsltproc-manpages.patch        |    43 +
+ ...-import-target-module-while-cross-compile.patch |    19 +-
+ .../21-add-config-option-without-valgrind.patch    |     0
+ .../samba/samba-4.4.2/volatiles.03_samba           |     3 +
+ .../samba/{samba_4.1.12.bb =3D> samba_4.4.2.bb}      |    82 +-
+ .../recipes-connectivity/vpnc/vpnc_0.5.3.bb        |     7 +
+ .../lldpd/{lldpd_0.9.0.bb =3D> lldpd_0.9.2.bb}       |     4 +-
+ ...pdated_bio_struct_of_linux_v4.3_and_above.patch |    75 +
+ .../iscsitarget/iscsitarget_1.4.20.3+svn502.bb     |     8 +-
+ .../recipes-support/c-ares/c-ares_1.11.0.bb        |    13 +
+ meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |    11 +-
+ .../recipes-support/dnsmasq/files/dnsmasq.service  |     7 +-
+ ...-import-target-module-while-cross-compile.patch |    19 +-
+ .../libldb/{libldb_1.1.21.bb =3D> libldb_1.1.26.bb}  |     4 +-
+ .../{libtalloc_2.1.3.bb =3D> libtalloc_2.1.6.bb}     |     5 +-
+ .../libtdb/{libtdb_1.3.7.bb =3D> libtdb_1.3.8.bb}    |     4 +-
+ .../{libtevent_0.9.25.bb =3D> libtevent_0.9.28.bb}   |     4 +-
+ 46 files changed, 231 insertions(+), 35618 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/openconnect/openco=
+nnect_git.bb
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/0001-waf-sanitize-and-fix-added-cross-answer.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/0002-Adds-a-new-mode-to-samba-cross-compiling.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/0003-waf-improve-readability-of-cross-answers-generated-b.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/0004-build-make-wafsamba-CHECK_SIZEOF-cross-compile-frien.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/0005-build-unify-and-fix-endian-tests.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/0007-waf-Fix-parsing-of-cross-answers-file-in-case-answer.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/01-fix-force-user-sec-ads.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/02-fix-ipv6-join.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/03-net-ads-kerberos-pac.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/04-ipv6-workaround.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/05-fix-gecos-field-with-samlogon.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/06-fix-nmbd-systemd-status-update.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/07-fix-idmap-ad-getgroups-without-gid.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/08-fix-idmap-ad-sfu-with-trusted-domains.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/09-fix-smbclient-echo-cmd-segfault.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/10-improve-service-principal-guessing-in-net.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/11-fix-overwriting-of-spns-during-net-ads-join.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/12-add-precreated-spns-from-AD-during-keytab-generation.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/13-fix-aes-enctype.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/14-fix-dnsupdate.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/15-fix-netbios-name-truncation.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/16-do-not-check-xsltproc-manpages.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/17-execute-prog-by-qemu.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/18-avoid-get-config-by-native-ncurses.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/19-systemd-daemon-is-contained-by-libsystemd.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12=
+/21-avoid-sasl-unless-wanted.patch
+ rename meta-networking/recipes-connectivity/samba/{samba-4.1.12 =3D> samba=
+-4.4.2}/00-fix-typos-in-man-pages.patch (100%)
+ rename meta-networking/recipes-connectivity/samba/{samba-4.1.12 =3D> samba=
+-4.4.2}/0006-avoid-using-colon-in-the-checking-msg.patch (100%)
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba-4.4.2/=
+16-do-not-check-xsltproc-manpages.patch
+ rename meta-networking/recipes-connectivity/samba/{samba-4.1.12 =3D> samba=
+-4.4.2}/20-do-not-import-target-module-while-cross-compile.patch (79%)
+ mode change 100755 =3D> 100644
+ rename meta-networking/recipes-connectivity/samba/{samba-4.1.12 =3D> samba=
+-4.4.2}/21-add-config-option-without-valgrind.patch (100%)
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba-4.4.2/=
+volatiles.03_samba
+ rename meta-networking/recipes-connectivity/samba/{samba_4.1.12.bb =3D> sa=
+mba_4.4.2.bb} (82%)
+ rename meta-networking/recipes-daemons/lldpd/{lldpd_0.9.0.bb =3D> lldpd_0.=
+9.2.bb} (94%)
+ create mode 100644 meta-networking/recipes-extended/iscsitarget/files/buil=
+d_with_updated_bio_struct_of_linux_v4.3_and_above.patch
+ create mode 100644 meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
+ rename meta-networking/recipes-support/libldb/{libldb_1.1.21.bb =3D> libld=
+b_1.1.26.bb} (92%)
+ rename meta-networking/recipes-support/libtalloc/{libtalloc_2.1.3.bb =3D> =
+libtalloc_2.1.6.bb} (91%)
+ rename meta-networking/recipes-support/libtdb/{libtdb_1.3.7.bb =3D> libtdb=
+_1.3.8.bb} (87%)
+ rename meta-networking/recipes-support/libtevent/{libtevent_0.9.25.bb =3D>=
+ libtevent_0.9.28.bb} (88%)
+
+Still trying to test this queue out before merging upstream, but it
+might happen today if all goes well.
+
+-J.
+
+>=20
+> ERROR: samba-4.4.2-r0 do_configure: Function failed: do_configure (log fi=
+le is located at /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-=
+linux-gnueabi/samba/4.4.2-r0/temp/log.do_configure.1777)
+> ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-=
+glibc/work/armv5te-oe-linux-gnueabi/samba/4.4.2-r0/temp/log.do_configure.17=
+77
+> Log data follows:
+> | DEBUG: Executing python function sysroot_cleansstate
+> | DEBUG: Python function sysroot_cleansstate finished
+> | DEBUG: Executing shell function do_configure
+> | waf [command] [options]
+> |=20
+> | Main commands (example: ./waf build -j4)
+> |   build       : build all targets
+> |   clean       : removes the build files
+> |   configure   : configures the project
+> |   ctags       : build 'tags' file using ctags
+> |   dist        : makes a tarball for distribution
+> |   distcheck   : test that distribution tarball builds and installs
+> |   distclean   : removes the build directory
+> |   etags       : build TAGS file using etags
+> |   install     : installs the build files
+> |   pep8        : run pep8 validator
+> |   pydoctor    : build python apidocs
+> |   reconfigure : reconfigure if config scripts have changed
+> |   test        : Run the test suite (see test options below)
+> |   testonly    : run tests without doing a build first
+> |   uninstall   : removes the installed files
+> |   wafdocs     : build wafsamba apidocs
+> |   wildcard_cmd: called on a unknown command
+> |=20
+> | waf: error: no such option: --without-pam_smbpass
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Function failed: do_configure (log file is located at /home/jenk=
+ins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/samba/4.4.2-r=
+0/temp/log.do_configure.1777)
+> NOTE: recipe samba-4.4.2-r0: task do_configure: Failed
+> ERROR: Task 20263 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta=
+-networking/recipes-connectivity/samba/samba_4.4.2.bb, do_configure) failed=
+ with exit code '1'
 
 
+--=20
+-Joe MacDonald.
+:wq
+
+--mP3DRpeJDSE+ciuQ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJXF36+AAoJEEn8ffcsOfaWIgkIAJZ1zklKsOQH6dwN8opio97N
+d3rZXZnA0Sw7uCHVPVMjBIOOwRzYAPoPRg5D+fqzNH0cqWQIDv/WC4uwaiaSaZfb
+L6OUpghROuK3V4Ew70KMgSklEE2PYhHdFUWMhpZ6CqQ9hzsTComU2MagYqsr50Ae
++f1bGgEs74YOp9wYby980X5Rlbi7ZofPJd/evFhKluG5qL3DHlUVIseIyu9g8jMR
+FWdC0RGUhMjOxMWMgXV1BpEaLbN+FN/0ccyBAHiIpxd3hLbZ9We1FdaBXqQOkki3
+/RYE7F7KN0+WdGSeuo3I/NZScMvdKqAfnfsQO/9pmaKm+PNfIaTRPJJjPvz6LDM=
+=cto9
+-----END PGP SIGNATURE-----
+
+--mP3DRpeJDSE+ciuQ--
