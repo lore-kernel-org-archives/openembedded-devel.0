@@ -1,45 +1,53 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id E6EE56FEF5
+	by mail.openembedded.org (Postfix) with ESMTP id 566A7607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2016 08:58:20 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id e201so42146147wme.0
+	Wed, 20 Apr 2016 09:22:05 +0000 (UTC)
+Received: by mail-wm0-f51.google.com with SMTP id e201so42907631wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2016 01:58:21 -0700 (PDT)
+	Wed, 20 Apr 2016 02:22:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=xUH/dnDYKqRA5pa/ifcONqkgV69HKHy8mWEgfCfTp+Y=;
-	b=leAhKKh7Qv8R9/2PNaMCo+bNz9vGxBYXWJ4R4OhzBLIvYYElzOJnkHcSSlGvvA8g78
-	UjbHW7xIMnat8mLOKJPj7i6MapPZmMj3MyGpABoFiXAR1qGWK/RhzMiFrluOmFjWXjiz
-	da3lYbiL+lB7JvHS0Mx/sGfka3KcEjGS04kI6i7MnAtD+Q/grH9apnpaqDediHCrHCmT
-	JFxTNV7rcg3XLRLL11BXPMyfMXmK+EEFp6gghzNHw4fDFSVMrrqUSYZDkGW7rY19XdtH
-	HrTG2OYAPc346LEwLfxK7U7kxfnNNqCOg6SdISqKoPg1u0fuPxRJ+dc/P+h+E9M4ve9N
-	0MwA==
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=5XFGXbKCFOil02EB1eTPkRkobbPWY/4mVjNXyIRnWdw=;
+	b=d0NB1xHNuJbAqc7TBn0uedCJxflfSq3JEbmR1v19+VgancZ9BU3amAhB1wOymfJebC
+	GhhVS26rQBSk1jU8dgkhunvXpY6jRvSG3kkbZ8OvtxIli/jbhMCHw9VAHZWwY7/AG2L8
+	w6J4TMqaDtInHGbVnk3KxXGkTsF6QmoBtATicD1tlWKV9dz6mDJXguw7qIpHRHtNj4H1
+	qJ2fzkx6LXRat5ogycPL4XQTUM2VOGMB9g5K7595IzhkESCRv8OZGZ28mM6TjWI0C3mi
+	F+UlNTMXGhVbdHl7TLyKiRRW761oBmo41OaDhFaqerca31qi/vlK0jOm+VnUu8d10m2r
+	mSJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xUH/dnDYKqRA5pa/ifcONqkgV69HKHy8mWEgfCfTp+Y=;
-	b=LSHQrUQNJM1P7eNZFugibluIpuyu5KX63zxzCbdX8Usi/Mf80RO4Qvk72JaeRL0D7Q
-	oMFsx1YiT8gPgJihLxlE49hex32FH093m+6+zmO3pjFV+y2obCsDewZEXN7WtAtC5R4x
-	y5vizFL8aPSZ7KPXEB/89jjtQsxGQYO2ijG6if+J8RfzKkBzHAdYj9VlQHcnPIlgskUX
-	eG/2xDrzJXdvXoezXWJqRtX/U3o/Enoa3OjTENilkwpN5vSwxt8oR/2VH4cZiZWftKQj
-	oWI07OuBO8Z+DgW9jcKjZdYZS1U1n77MYd98xxq7BoxN1k5PrSvFjacudbyMIiH/ir+9
-	g36g==
-X-Gm-Message-State: AOPr4FW70IEbv/iZiS20w1F9I32H0PSPCKn/oyzSgMoXTUlas6njOmg2LuuXZitynw2Zgg==
-X-Received: by 10.28.210.73 with SMTP id j70mr8597169wmg.48.1461142700693;
-	Wed, 20 Apr 2016 01:58:20 -0700 (PDT)
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=5XFGXbKCFOil02EB1eTPkRkobbPWY/4mVjNXyIRnWdw=;
+	b=hdBfhod6YNxtcMj+zddEMcHYV5Hh8Goj2uZhvOLeGJDd5h0nb9d9ER7sQejazBdynY
+	41BM+X7M0nx+pvmCmWLnWhEKchs3m7GN6Rs0bso9NxzF3NtSe1DSISjarjBdoAuonzGS
+	O59wrqcSaCYQRp5SjADH2LfnwJA+5uSh9znxOq7k3ET2x9QlLD2wMcVO/14irTt3NYMz
+	1yTdNKJ1cp9vDJysJcwIDdL6lCK2SDVLmu7BUskKYc7GcpZl3tqXxEQmgdXTcco3ai2M
+	KOC+/6lgOKnV+MqV1KBfUvgSwabLlTY6H/8bslXo6Yrb2cBxU3gUCEyQghrwuV3vS64e
+	XduQ==
+X-Gm-Message-State: AOPr4FV0KRie/Y69RrAlKi3M67Cju3cwM+EF5Q6IEATpZ5szUO4yIqjepo4pETghRoAdlQ==
+X-Received: by 10.28.127.80 with SMTP id a77mr8502579wmd.84.1461144126045;
+	Wed, 20 Apr 2016 02:22:06 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	kq9sm4448676wjc.26.2016.04.20.01.58.19
+	by smtp.gmail.com with ESMTPSA id o1sm4583222wjm.11.2016.04.20.02.22.04
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 20 Apr 2016 01:58:19 -0700 (PDT)
+	Wed, 20 Apr 2016 02:22:04 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 20 Apr 2016 11:24:04 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Apr 2016 11:00:17 +0200
-Message-Id: <1461142817-3929-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.8.1
-Subject: [PATCH][meta-qt5] recipes: use new PACKAGECONFIG_CONFARGS instead of EXTRA_OECONF
+Message-ID: <20160420092404.GA2561@jama>
+References: <1460317290-4787-1-git-send-email-schnitzeltony@googlemail.com>
+	<1460317290-4787-2-git-send-email-schnitzeltony@googlemail.com>
+	<20160412102200.GD2564@jama>
+	<CALbNGRQHekxMgsVgQnT8ACK7pKiSTGJ1KRmNLyvH7rsZ=9Zz8w@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRQHekxMgsVgQnT8ACK7pKiSTGJ1KRmNLyvH7rsZ=9Zz8w@mail.gmail.com>
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Subject: Re: [meta-qt5][PATCH v2 01/31] qtbase-native: update sources to 5.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,162 +60,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2016 08:58:22 -0000
+X-List-Received-Date: Wed, 20 Apr 2016 09:22:06 -0000
+X-Groupsio-MsgNum: 61071
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="AhhlLboLdkugWU4S"
+Content-Disposition: inline
 
-* this fixes builds for DISTROs which include no-static-libraries.inc
-* this change depends on oe-core change:
-  http://patchwork.openembedded.org/patch/116719/
-  which was merged in this form:
-  http://patchwork.openembedded.org/patch/120513/
-  to Yocto 2.1, if you want to use latest meta-qt5 with older oe-core
-  you need to append EXTRA_OECONF to PACKAGECONFIG_CONFARGS
+--AhhlLboLdkugWU4S
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-qt/qt5/nativesdk-qtbase_git.bb | 4 ++--
- recipes-qt/qt5/qt3d_git.bb             | 2 +-
- recipes-qt/qt5/qtbase-native_git.bb    | 6 +++---
- recipes-qt/qt5/qtbase_git.bb           | 2 +-
- recipes-qt/qt5/qtconnectivity_git.bb   | 2 +-
- recipes-qt/qt5/qtsystems_git.bb        | 2 +-
- recipes-qt/qt5/qtwebengine_git.bb      | 4 ++--
- recipes-qt/qt5/qtwebkit_git.bb         | 2 +-
- 8 files changed, 12 insertions(+), 12 deletions(-)
+On Tue, Apr 12, 2016 at 12:56:02PM +0200, Andreas M=FCller wrote:
+> On Tue, Apr 12, 2016 at 12:22 PM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+> > On Sun, Apr 10, 2016 at 09:41:00PM +0200, Andreas M=FCller wrote:
+> >> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> >
+> > How did you pick these SRCREVs?
+> If tag for 5.6.0 available: I picked versions tagged.
+> If tag not available I chose revision right before 5.6.1 (as qtqick1)
+> out of 5.6 tree.
+> >
+> > OE @ ~/projects/qt-project/qtbase $ git log --oneline 41706400f605524a5=
+a9953714aa0cfbf811dba7e..d0cdc7ad1e2728caf363abf328b2ad81f2ed5a5b
+> > d0cdc7a DirectFB: Fix build in C++98 mode
+> > 3bcc3037 fix non-git non-prefix shadow builds
+> > ae2d11d Add changelog for 5.6.0
+> > 38944d6 Fix syncqt.pl not respecting #pragma qt_no_master_include in fi=
+les with Windows line endings
+> > 469e293 Fix crash when a standard bus isn't available
+> > bcdcde0 Doc: Simple CSS style: Convert font-sizes from px to pt
+> > 719623a Fix builds without session management.
+> > e7bf0ed Add option to disable "session management by closing windows".
+> >
+> >
+> > It's actually missing some changes which were included in previous SRCR=
+EV, I usually use latest in e.g. 5.6 branch
+> > even when it sets the version for next release (e.g. 5.6.1).
+> I was not aware of that. So we'll have to wait for 5.6.1 (whenever it
+> appears) if we want released versions without going backwards.
+>=20
+> As already noted in V2 description: Version mix 5.6.0/5.6.1 causes
+> cmake trouble and as heavy user of cmake in meta-qt5-extra I would
+> like to avoid...
 
-diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-index 35d922e..0bdfde5 100644
---- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-+++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-@@ -82,7 +82,7 @@ QT_CONFIG_FLAGS += " \
-     -no-pch \
-     -no-rpath \
-     -pkg-config \
--    ${EXTRA_OECONF} \
-+    ${PACKAGECONFIG_CONFARGS} \
- "
- 
- # qtbase is exception, as these are used as install path for sysroots
-@@ -201,7 +201,7 @@ do_configure() {
-         -xplatform linux-oe-g++ \
-         ${QT_CONFIG_FLAGS}
- 
--    bin/qmake ${OE_QMAKE_DEBUG_OUTPUT} ${S} -o Makefile || die "Configuring qt with qmake failed. EXTRA_OECONF was ${EXTRA_OECONF}"
-+    bin/qmake ${OE_QMAKE_DEBUG_OUTPUT} ${S} -o Makefile || die "Configuring qt with qmake failed. PACKAGECONFIG_CONFARGS was ${PACKAGECONFIG_CONFARGS}"
- }
- 
- do_install() {
-diff --git a/recipes-qt/qt5/qt3d_git.bb b/recipes-qt/qt5/qt3d_git.bb
-index a19422b..af8fe4d 100644
---- a/recipes-qt/qt5/qt3d_git.bb
-+++ b/recipes-qt/qt5/qt3d_git.bb
-@@ -20,7 +20,7 @@ PACKAGECONFIG_class-native ??= "tools-only"
- PACKAGECONFIG_class-nativesdk ??= "tools-only"
- PACKAGECONFIG[tools-only] = "CONFIG+=tools-only"
- 
--EXTRA_QMAKEVARS_PRE += "${EXTRA_OECONF}"
-+EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
- 
- FILES_${PN}-qmlplugins += " \
-     ${OE_QMAKE_PATH_QML}/*/*/*.bez \
-diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
-index 057edd4..9f3b015 100644
---- a/recipes-qt/qt5/qtbase-native_git.bb
-+++ b/recipes-qt/qt5/qtbase-native_git.bb
-@@ -40,7 +40,7 @@ do_generate_qt_config_file() {
-     :
- }
- 
--EXTRA_OECONF = " \
-+PACKAGECONFIG_CONFARGS = " \
-     -prefix ${prefix} \
-     -sysroot ${STAGING_DIR_NATIVE} \
-     -no-gcc-sysroot \
-@@ -90,8 +90,8 @@ export OE_QMAKE_AR
- export OE_QMAKE_STRIP
- 
- do_configure_prepend() {
--    MAKEFLAGS="${PARALLEL_MAKE}" ${S}/configure -opensource -confirm-license ${EXTRA_OECONF} || die "Configuring qt failed. EXTRA_OECONF was ${EXTRA_OECONF}"
--    bin/qmake ${OE_QMAKE_DEBUG_OUTPUT} ${S} -o Makefile || die "Configuring qt with qmake failed. EXTRA_OECONF was ${EXTRA_OECONF}"
-+    MAKEFLAGS="${PARALLEL_MAKE}" ${S}/configure -opensource -confirm-license ${PACKAGECONFIG_CONFARGS} || die "Configuring qt failed. PACKAGECONFIG_CONFARGS was ${PACKAGECONFIG_CONFARGS}"
-+    bin/qmake ${OE_QMAKE_DEBUG_OUTPUT} ${S} -o Makefile || die "Configuring qt with qmake failed. PACKAGECONFIG_CONFARGS was ${PACKAGECONFIG_CONFARGS}"
- }
- 
- do_install() {
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index bf56741..98f6378 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -135,7 +135,7 @@ QT_CONFIG_FLAGS += " \
-     -no-pch \
-     -no-rpath \
-     -pkg-config \
--    ${EXTRA_OECONF} \
-+    ${PACKAGECONFIG_CONFARGS} \
- "
- 
- do_generate_qt_config_file_append() {
-diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconnectivity_git.bb
-index cf6d3c5..17bd169 100644
---- a/recipes-qt/qt5/qtconnectivity_git.bb
-+++ b/recipes-qt/qt5/qtconnectivity_git.bb
-@@ -18,7 +18,7 @@ inherit bluetooth
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)}"
- PACKAGECONFIG[bluez] = "CONFIG+=OE_BLUEZ_ENABLED,,${BLUEZ}"
- 
--EXTRA_QMAKEVARS_PRE += "${EXTRA_OECONF}"
-+EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
- 
- do_configure_prepend() {
-     # disable bluez test if it isn't enabled by PACKAGECONFIG
-diff --git a/recipes-qt/qt5/qtsystems_git.bb b/recipes-qt/qt5/qtsystems_git.bb
-index 868e051..656895e 100644
---- a/recipes-qt/qt5/qtsystems_git.bb
-+++ b/recipes-qt/qt5/qtsystems_git.bb
-@@ -16,7 +16,7 @@ inherit bluetooth
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)}"
- PACKAGECONFIG[bluez] = "CONFIG+=OE_BLUEZ_ENABLED,,${BLUEZ}"
- 
--EXTRA_QMAKEVARS_PRE += "${EXTRA_OECONF}"
-+EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
- 
- do_configure_prepend() {
-     # disable bluez test if it isn't enabled by PACKAGECONFIG
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index 8f5276f..c045174 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -40,7 +40,7 @@ PACKAGECONFIG[libxslt] = "WEBENGINE_CONFIG+=use_system_libxslt,,libxslt"
- PACKAGECONFIG[speex] = "WEBENGINE_CONFIG+=use_system_speex,,speex"
- PACKAGECONFIG[vpx] = "WEBENGINE_CONFIG+=use_system_vpx,,libvpx"
- 
--EXTRA_QMAKEVARS_PRE += "${EXTRA_OECONF}"
-+EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
- 
- COMPATIBLE_MACHINE = "(-)"
- COMPATIBLE_MACHINE_x86 = "(.*)"
-@@ -75,7 +75,7 @@ do_configure() {
-     export CC_host="gcc"
-     export CXX_host="g++"
-     export QMAKE_MAKE_ARGS="${EXTRA_OEMAKE}"
--    export QMAKE_CACHE_EVAL="${EXTRA_OECONF}"
-+    export QMAKE_CACHE_EVAL="${PACKAGECONFIG_CONFARGS}"
- 
-     # Disable autodetection from sysroot:
-     sed -i 's/packagesExist([^)]*vpx[^)]*):/false:/g; s/config_srtp:/false:/g; s/config_snappy:/false:/g; s/packagesExist(nss):/false:/g; s/packagesExist(minizip, zlib):/false:/g; s/packagesExist(libwebp,libwebpdemux):/false:/g; s/packagesExist(libxml-2.0,libxslt):/false:/g; s/^ *packagesExist($$package):/false:/g' ${S}/tools/qmake/mkspecs/features/configure.prf
-diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
-index 04cefad..4e61cca 100644
---- a/recipes-qt/qt5/qtwebkit_git.bb
-+++ b/recipes-qt/qt5/qtwebkit_git.bb
-@@ -35,7 +35,7 @@ PACKAGECONFIG[qtwebchannel] = "OE_QTWEBCHANNEL_ENABLED,,qtwebchannel"
- PACKAGECONFIG[libwebp] = "OE_LIBWEBP_ENABLED,,libwebp"
- 
- do_configure_prepend() {
--    export QMAKE_CACHE_EVAL="CONFIG+=${EXTRA_OECONF}"
-+    export QMAKE_CACHE_EVAL="CONFIG+=${PACKAGECONFIG_CONFARGS}"
-     # disable gstreamer-1.0 test if it isn't enabled by PACKAGECONFIG
-     sed -e 's/\s\(packagesExist(".*\<gstreamer-1.0\>.*")\)/ OE_GSTREAMER_ENABLED:\1/' -i ${S}/Tools/qmake/mkspecs/features/features.prf
-     # disable gstreamer-0.10 test if it isn't enabled by PACKAGECONFIG
--- 
-2.8.1
+This revision also has issues building examples, my build failed with:
 
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/q=
+tbase/5.6.0+gitAUTOINC+d0cdc7ad1e-r0/git/examples/widgets/mainwindows/appli=
+cation/mainwindow.cpp: In constructor 'MainWindow::MainWindow()':
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/q=
+tbase/5.6.0+gitAUTOINC+d0cdc7ad1e-r0/git/examples/widgets/mainwindows/appli=
+cation/mainwindow.cpp:62:5: error: 'setFallbackSessionManagementEnabled' is=
+ not a member of 'QGuiApplication'
+|      QGuiApplication::setFallbackSessionManagementEnabled(false);
+|      ^
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/q=
+tbase/5.6.0+gitAUTOINC+d0cdc7ad1e-r0/git/examples/widgets/mainwindows/appli=
+cation/mainwindow.cpp:63:20: error: 'commitDataRequest' is not a member of =
+'QGuiApplication'
+|      connect(qApp, &QGuiApplication::commitDataRequest,
+|                     ^
 
+Which most likely was fixed with:
+> > 719623a Fix builds without session management.
+which is missing in this older SRCREV
+
+To move forward I've squashed your SRCREV changes to single commit and now =
+I'm preparing another
+change which will bump SRCREVs to latest in 5.6 branches. This way people w=
+ho care more about exact
+5.6.0 version can use meta-qt5 revision with just your change, other people=
+ can follow latest 5.6
+and get also the examples build fixed from upstream.
+
+Regards,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--AhhlLboLdkugWU4S
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlcXSrMACgkQN1Ujt2V2gBznKwCggSwFnVa+GPYHJEDemDiXySTv
+j2QAn3xAflUVKtjEkjoq14b0NEu1Oem6
+=TDeb
+-----END PGP SIGNATURE-----
+
+--AhhlLboLdkugWU4S--
