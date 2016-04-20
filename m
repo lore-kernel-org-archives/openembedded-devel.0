@@ -1,49 +1,47 @@
-Return-Path: <danismostlikely@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id CF13760119
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lf0-f49.google.com (mail-lf0-f49.google.com
+	[209.85.215.49])
+	by mail.openembedded.org (Postfix) with ESMTP id D099B6011B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2016 20:09:57 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id d184so5300606pfc.1
+	Wed, 20 Apr 2016 20:44:04 +0000 (UTC)
+Received: by mail-lf0-f49.google.com with SMTP id e190so48491717lfe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2016 13:09:58 -0700 (PDT)
+	Wed, 20 Apr 2016 13:44:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=DQs7wA3aeigrRqEHLFTTXD0bTMD+XZYdK5Zbw9H8/MA=;
-	b=t1CCsWLtWzYSSvGxaD+676DGcu85TVhskrIl57l4s2Tn0hwqE4T1DtqHMNLnPOtxDw
-	BbXiZ955mO/SRcRvoT/zsxEWQqiiPnFBdX2VgAl+JPfuwsSiSgHSB0ybigE1uLOzbE3D
-	TcWqTTKYQ1fiQgPvzyzwo8Vmx6GWneByg3cG3d07KnI9FObZUX3BMPRJASGPoX0TG/bZ
-	90P53gS/EMD1QVgamb1R8+q3UjWbg/OpgQbcUylBKFm6UUjCo+q4jaLQcvYFXAJhIMuE
-	9FJ5eGfHdkW/85FbWFNZTI0GHYXv2ziMBSusFcknVryhTzDIzlw7+WAIBGNKJXEK0Wpc
-	pesA==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc; bh=oK/Ax8ZWSEMhtXY0x5YyW+gK5lTxE2KrgZLrXOuVahg=;
+	b=URo91BNFa5PyCDPxQ1NKPfvgdfsE2sfx+P7jDpVV8f6kOLJBUbeYlixriKCsjE3zk5
+	85P7azZ1dHthfvpgCoR0l0/pCQL6aFzml0U8cJONGLRD9Gt9i6JwZt7p20Hi7Qby1geT
+	JSn4Ul1ogpBAUCNqt4bv/NK9W3lw7IpBQP7CvrpE+PdeR+pUlwWbyyyukbjyMWYUjzJu
+	iTD27qlFrr6wj1uFZ1MtV8tkkaJ6Qw4k3VRI7W1EmoluSFBO1asqIAfJNZ0GuxxZtHol
+	s17fmlYSN+fYddIsKpXN15CEyzN8MT42Ov+u9g9J0oHG6oJ7GHpWLjPJxlK+bJM2kWEC
+	q/6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=DQs7wA3aeigrRqEHLFTTXD0bTMD+XZYdK5Zbw9H8/MA=;
-	b=ENB7u+lYultLAgI+EmeF2yq+cWuvtKBX14IHZ6YOSlveHWwqTbgdJhkgG7YMsUulnb
-	0GzlfGg17ShYksNWYq7HOSEXXr/kAwi9ByuJnhUtfI7lWQvGKfYa9F+nvh6r/5YchlSE
-	VST+KHX1oX59KiXfGh6IWf5w9iiEL8Uhul2h432mTw9Kmv5XNl24PMrWjXpCBGkyyYwY
-	aBEkUkc5Q1lB/nHycEIZTLeue5m7/RQ0MR/1yHtHDZxoVaH0K7ZpSp4WoV+R2pmlgQdQ
-	gegb9NmNOGWOH9nBoKy5bJZOuVad/CX+zRtUTa/xJki38SK2E0LNsYhUXpzQO1L8HjTX
-	dKtA==
-X-Gm-Message-State: AOPr4FWs8IRrigsnkT4CjplduxR8dpZSYYoEfIyuK6QqdxlLzXydcteITWuUrv2NcwCvoA==
-X-Received: by 10.98.24.78 with SMTP id 75mr15084305pfy.52.1461182997987;
-	Wed, 20 Apr 2016 13:09:57 -0700 (PDT)
-Received: from mediabox.local (71-17-245-40.sktn.hsdb.sasknet.sk.ca.
-	[71.17.245.40]) by smtp.gmail.com with ESMTPSA id
-	127sm35400283pfe.72.2016.04.20.13.09.57
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 20 Apr 2016 13:09:57 -0700 (PDT)
-From: Dan McGregor <danismostlikely@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Apr 2016 14:09:53 -0600
-Message-Id: <1461182993-22950-2-git-send-email-danismostlikely@gmail.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <1461182993-22950-1-git-send-email-danismostlikely@gmail.com>
-References: <1461182993-22950-1-git-send-email-danismostlikely@gmail.com>
-Subject: [meta-java][PATCH 2/2] openjdk-8: use private libs
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc;
+	bh=oK/Ax8ZWSEMhtXY0x5YyW+gK5lTxE2KrgZLrXOuVahg=;
+	b=TAL1buuhN2QqDa3hKEah6bAPSeyhXJGEdI9gTcX2sgw2cutNbJfwbgZAgdM7xXdHtM
+	H3wF8om/HAgLoCCDbwMbpakuTb4OkUIcwX5Kz/gWQMOEVqu5n3Ck3DnVVi4htNq1V2oC
+	pX9vjsyC6/ue7AoYiYmWajSAtn4Fz633BsdH51x636QYapZLRGl3+PWNmlS3DoNZ3L2f
+	ojgt6Vw5NRiM+z/UnKCyftf25CM91pCbYKWQiygigxD5Neng5rr9jgP+4Z8VyO50d1K8
+	HElOk3lYTONz5RgtBC56XGuU7PNviZy9UYXpf4uQpcOnKzIpO1p5yK0AP80j+lt9DxWx
+	KciA==
+X-Gm-Message-State: AOPr4FXMpviBq3F7v2kAJmlmquiYAkPazvGAjLxuB+f7ma0DRG+OlaWrbsgSvQTAYgqKyhE7vTXuuS5X+GJ9NA==
+MIME-Version: 1.0
+X-Received: by 10.25.32.65 with SMTP id g62mr4630024lfg.138.1461185044279;
+	Wed, 20 Apr 2016 13:44:04 -0700 (PDT)
+Received: by 10.112.180.229 with HTTP; Wed, 20 Apr 2016 13:44:04 -0700 (PDT)
+In-Reply-To: <20160420182528.GM16135@denix.org>
+References: <1460061600-28075-1-git-send-email-denis@denix.org>
+	<20160420182528.GM16135@denix.org>
+Date: Wed, 20 Apr 2016 22:44:04 +0200
+Message-ID: <CA+chaQfEgVEExME523XvcqQBc53U3WVuFO48s6ArMkpmt8kW8g@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [PATCH] ne10: use bb.debug for debug messages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,40 +54,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2016 20:09:59 -0000
+X-List-Received-Date: Wed, 20 Apr 2016 20:44:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Daniel McGregor <daniel.mcgregor@vecima.com>
+When everything is at least once tested in my jenkins builds and I've time
+to go through the list of pending changes.
 
-Prevent a non-deterministic run time dependency between openjdk-8
-and openjre-8. Without PRIVATE_LIBS, if openjre is built before
-openjdk, openjdk might RDEPEND on openjre.
+I was away from computers almost whole previous week, so there is longer
+delay now.
 
-Signed-off-by: Daniel McGregor <daniel.mcgregor@vecima.com>
----
- recipes-core/openjdk/openjdk-8-cross.inc | 9 +++++++++
- 1 file changed, 9 insertions(+)
+On Wed, Apr 20, 2016 at 8:25 PM, Denys Dmytriyenko <denis@denix.org> wrote:
 
-diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/openjdk/openjdk-8-cross.inc
-index c68ac42..3189764 100644
---- a/recipes-core/openjdk/openjdk-8-cross.inc
-+++ b/recipes-core/openjdk/openjdk-8-cross.inc
-@@ -6,6 +6,15 @@ DEPENDS = "\
-     jpeg libpng krb5 libffi fontconfig freetype \
- "
- 
-+PRIVATE_LIBS = "\
-+    libattach.so libawt_headless.so libawt.so libawt_xawt.so libdt_socket.so \
-+    libfontmanager.so libhprof.so libinstrument.so libj2gss.so libj2pcsc.so \
-+    libj2pkcs11.so libjaas_unix.so libjava_crw_demo.so libjava.so libjawt.so \
-+    libjdwp.so libjli.so libjpeg.so libjsdt.so libjsig.so libjvm.so liblcms.so \
-+    libmanagement.so libmlib_image.so libnet.so libnio.so libnpt.so libsaproc.so \
-+    libsctp.so libsplashscreen.so libsunec.so libunpack.so libverify.so libzip.so \
-+"
-+
- PACKAGECONFIG ??= "repack"
- PACKAGECONFIG[x11] = "--with-x,,libx11 xproto libxt libxext libxrender"
- PACKAGECONFIG[cups] = "--with-cups,,cups"
--- 
-2.8.1
-
+> Ping. Also in master-next for over a week - how often does it get merged to
+> master?
+>
+>
+> On Thu, Apr 07, 2016 at 04:40:00PM -0400, Denys Dmytriyenko wrote:
+> > From: Denys Dmytriyenko <denys@ti.com>
+> >
+> > Moreover, the messages are misleading, saying "Building for arch blah",
+> > even when this recipe is not being built. It merely checks if the recipe
+> > is cmaptible with the currently used architecture.
+> >
+> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > ---
+> >  meta-oe/recipes-support/ne10/ne10_1.2.1.bb | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+> b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+> > index 4d753a0..de97982 100644
+> > --- a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+> > +++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+> > @@ -20,10 +20,10 @@ COMPATIBLE_MACHINE_armv7a = "(.*)"
+> >  python () {
+> >      if any(t.startswith('armv7') for t in d.getVar('TUNE_FEATURES',
+> True).split()):
+> >          d.setVar('NE10_TARGET_ARCH', 'armv7')
+> > -        bb.note('Building Ne10 for armv7')
+> > +        bb.debug(2, 'Building Ne10 for armv7')
+> >      elif any(t.startswith('aarch64') for t in d.getVar('TUNE_FEATURES',
+> True).split()):
+> >          d.setVar('NE10_TARGET_ARCH', 'aarch64')
+> > -        bb.note('Building Ne10 for aarch64')
+> > +        bb.debug(2, 'Building Ne10 for aarch64')
+> >      else:
+> >          raise bb.parse.SkipPackage("Incompatible with archs other than
+> armv7 and aarch64")
+> >  }
+> > --
+> > 2.2.0
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
