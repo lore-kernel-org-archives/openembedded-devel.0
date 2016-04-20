@@ -1,53 +1,53 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 566A7607A4
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A52D70022
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2016 09:22:05 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id e201so42907631wme.0
+	Wed, 20 Apr 2016 09:23:23 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id n3so71086372wmn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2016 02:22:06 -0700 (PDT)
+	Wed, 20 Apr 2016 02:23:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=5XFGXbKCFOil02EB1eTPkRkobbPWY/4mVjNXyIRnWdw=;
-	b=d0NB1xHNuJbAqc7TBn0uedCJxflfSq3JEbmR1v19+VgancZ9BU3amAhB1wOymfJebC
-	GhhVS26rQBSk1jU8dgkhunvXpY6jRvSG3kkbZ8OvtxIli/jbhMCHw9VAHZWwY7/AG2L8
-	w6J4TMqaDtInHGbVnk3KxXGkTsF6QmoBtATicD1tlWKV9dz6mDJXguw7qIpHRHtNj4H1
-	qJ2fzkx6LXRat5ogycPL4XQTUM2VOGMB9g5K7595IzhkESCRv8OZGZ28mM6TjWI0C3mi
-	F+UlNTMXGhVbdHl7TLyKiRRW761oBmo41OaDhFaqerca31qi/vlK0jOm+VnUu8d10m2r
-	mSJw==
+	bh=BGHiN/BAMLf5q2k6zHrWgynrUsIYW8WqWvgyEEz4W2Y=;
+	b=prYTIlYZA/8T/AptW4xpYr6SsAf0v7NXZL8kX9OxwMMM0GkkOABx5dZzfIae0NUVjE
+	DNzSTLBPHxv9KwQ0/ZUZE89QWoHQ/YwQ//irYDW2u1/T50tosrcfoBZomLtbZGfb64Su
+	O3Le0g8CPREDEEKpjPSX4yNO5aPBzYkXTHgQYwXI4a5g3GrMiQfWiDwO8TTExnxnR60z
+	fS5i8YSjRYN2eSL5dzu69sNZUAOlVsZxqLA1sgRLxitCJAhttzzRcOS8SEBNtX9dZn1T
+	AHwyo6beal+7SWWTd0OAevzvv7xE8L0DkXU330SbwLfuEimpNzJWDHLMJUISSaoqk+YX
+	Z6/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=5XFGXbKCFOil02EB1eTPkRkobbPWY/4mVjNXyIRnWdw=;
-	b=hdBfhod6YNxtcMj+zddEMcHYV5Hh8Goj2uZhvOLeGJDd5h0nb9d9ER7sQejazBdynY
-	41BM+X7M0nx+pvmCmWLnWhEKchs3m7GN6Rs0bso9NxzF3NtSe1DSISjarjBdoAuonzGS
-	O59wrqcSaCYQRp5SjADH2LfnwJA+5uSh9znxOq7k3ET2x9QlLD2wMcVO/14irTt3NYMz
-	1yTdNKJ1cp9vDJysJcwIDdL6lCK2SDVLmu7BUskKYc7GcpZl3tqXxEQmgdXTcco3ai2M
-	KOC+/6lgOKnV+MqV1KBfUvgSwabLlTY6H/8bslXo6Yrb2cBxU3gUCEyQghrwuV3vS64e
-	XduQ==
-X-Gm-Message-State: AOPr4FV0KRie/Y69RrAlKi3M67Cju3cwM+EF5Q6IEATpZ5szUO4yIqjepo4pETghRoAdlQ==
-X-Received: by 10.28.127.80 with SMTP id a77mr8502579wmd.84.1461144126045;
-	Wed, 20 Apr 2016 02:22:06 -0700 (PDT)
+	bh=BGHiN/BAMLf5q2k6zHrWgynrUsIYW8WqWvgyEEz4W2Y=;
+	b=ktEWp9ttmPshFgvBhK46aUkz3tiJk7+MU9GWH5z62bfhkqmN1uEmCL3BxALBRfJ05D
+	wBRzXQzHrgaCtqWPrcw23uJrjBajQAItbV5ZIPeVadfPlFG6AETHaqIopg7Z46xseEl2
+	/S/FEO158b4TSEySfGIW3H5VQFideSpHQrrHOcg1wbp0Zi1OqJiitN9Qw3gKOxIISEEs
+	W6Gj2VsDldfuIY0y+fwa9weu+9nIels5OcPAmRoHTOMWCTyYILorcaMkTlujsOFQa/xH
+	POk8Xt95QVzmyxiXXbW3ufsxqf6N2iFkjmaZ3xUN1eq7f8Ya/yq2ym6eX1duLhoEw+v/
+	+QOA==
+X-Gm-Message-State: AOPr4FUv7IxmGqo0/mh6GNL6UfxbqdE/nsZAeAW/EeyTIgTwwjRFiCeoMTrTKxkr8hEg4A==
+X-Received: by 10.28.128.88 with SMTP id b85mr30814661wmd.46.1461144204518;
+	Wed, 20 Apr 2016 02:23:24 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id o1sm4583222wjm.11.2016.04.20.02.22.04
-	for <openembedded-devel@lists.openembedded.org>
+	by smtp.gmail.com with ESMTPSA id
+	h124sm8602263wmf.7.2016.04.20.02.23.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 20 Apr 2016 02:22:04 -0700 (PDT)
+	Wed, 20 Apr 2016 02:23:23 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 20 Apr 2016 11:24:04 +0200
+Date: Wed, 20 Apr 2016 11:25:23 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160420092404.GA2561@jama>
-References: <1460317290-4787-1-git-send-email-schnitzeltony@googlemail.com>
-	<1460317290-4787-2-git-send-email-schnitzeltony@googlemail.com>
-	<20160412102200.GD2564@jama>
-	<CALbNGRQHekxMgsVgQnT8ACK7pKiSTGJ1KRmNLyvH7rsZ=9Zz8w@mail.gmail.com>
+Message-ID: <20160420092523.GB2561@jama>
+References: <1459750358-12047-1-git-send-email-eduardo@monkey.io>
+	<5704E88E.2070402@felipetonello.com>
+	<CAEaCVQjOC2sp3MWAntW4LU6mdDyb-T-CxJCBuXw1ivz3tiaHhA@mail.gmail.com>
+	<CAEaCVQgOCvFJzTBmDjYqVPSnvxOf43hX6b5bGRcX4Lmo6H1YJA@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRQHekxMgsVgQnT8ACK7pKiSTGJ1KRmNLyvH7rsZ=9Zz8w@mail.gmail.com>
+In-Reply-To: <CAEaCVQgOCvFJzTBmDjYqVPSnvxOf43hX6b5bGRcX4Lmo6H1YJA@mail.gmail.com>
 User-Agent: Mutt/1.6.0 (2016-04-01)
-Subject: Re: [meta-qt5][PATCH v2 01/31] qtbase-native: update sources to 5.6.0
+Subject: Re: [meta-oe][PATCH v2] fluentbit: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,95 +60,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2016 09:22:06 -0000
-X-Groupsio-MsgNum: 61071
+X-List-Received-Date: Wed, 20 Apr 2016 09:23:24 -0000
+X-Groupsio-MsgNum: 61072
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="AhhlLboLdkugWU4S"
+	protocol="application/pgp-signature"; boundary="2B/JsCI69OhZNC5r"
 Content-Disposition: inline
 
---AhhlLboLdkugWU4S
-Content-Type: text/plain; charset=iso-8859-1
+--2B/JsCI69OhZNC5r
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 12, 2016 at 12:56:02PM +0200, Andreas M=FCller wrote:
-> On Tue, Apr 12, 2016 at 12:22 PM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
-> > On Sun, Apr 10, 2016 at 09:41:00PM +0200, Andreas M=FCller wrote:
-> >> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> >
-> > How did you pick these SRCREVs?
-> If tag for 5.6.0 available: I picked versions tagged.
-> If tag not available I chose revision right before 5.6.1 (as qtqick1)
-> out of 5.6 tree.
-> >
-> > OE @ ~/projects/qt-project/qtbase $ git log --oneline 41706400f605524a5=
-a9953714aa0cfbf811dba7e..d0cdc7ad1e2728caf363abf328b2ad81f2ed5a5b
-> > d0cdc7a DirectFB: Fix build in C++98 mode
-> > 3bcc3037 fix non-git non-prefix shadow builds
-> > ae2d11d Add changelog for 5.6.0
-> > 38944d6 Fix syncqt.pl not respecting #pragma qt_no_master_include in fi=
-les with Windows line endings
-> > 469e293 Fix crash when a standard bus isn't available
-> > bcdcde0 Doc: Simple CSS style: Convert font-sizes from px to pt
-> > 719623a Fix builds without session management.
-> > e7bf0ed Add option to disable "session management by closing windows".
-> >
-> >
-> > It's actually missing some changes which were included in previous SRCR=
-EV, I usually use latest in e.g. 5.6 branch
-> > even when it sets the version for next release (e.g. 5.6.1).
-> I was not aware of that. So we'll have to wait for 5.6.1 (whenever it
-> appears) if we want released versions without going backwards.
+On Fri, Apr 15, 2016 at 08:12:54AM -0600, Eduardo Silva wrote:
+> is the patch OK ?
+
+No, fails here:
+
+NOTE: recipe fluentbit-0.7.2-r0: task do_package_qa: Started
+ERROR: fluentbit-0.7.2-r0 do_package_qa: QA Issue: -dev package contains no=
+n-symlink .so: fluentbit-dev path 'work/armv5te-oe-linux-gnueabi/fluentbit/=
+0.7.2-r0/packages-split/fluentbit-dev/usr/lib/libfluent-bit.so' [dev-elf]
+ERROR: fluentbit-0.7.2-r0 do_package_qa: QA run found fatal errors. Please =
+consider fixing them.
+ERROR: fluentbit-0.7.2-r0 do_package_qa: Function failed: do_package_qa
+ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-gl=
+ibc/work/armv5te-oe-linux-gnueabi/fluentbit/0.7.2-r0/temp/log.do_package_qa=
+=2E28998
+NOTE: recipe fluentbit-0.7.2-r0: task do_package_qa: Failed
+ERROR: Task 11612 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-o=
+e/recipes-extended/fluentbit/fluentbit_0.7.2.bb, do_package_qa) failed with=
+ exit code '1'
+
+> On Wed, Apr 6, 2016 at 10:38 AM, Eduardo Silva <eduardo@monkey.io> wrote:
 >=20
-> As already noted in V2 description: Version mix 5.6.0/5.6.1 causes
-> cmake trouble and as heavy user of cmake in meta-qt5-extra I would
-> like to avoid...
+> >
+> >
+> > On Wed, Apr 6, 2016 at 4:44 AM, Felipe Ferreri Tonello <
+> > eu@felipetonello.com> wrote:
+> >
+> >> Hi Eduardo,
+> >>
+> >> On 04/04/16 07:12, Eduardo Silva wrote:
+> >> > Fluent Bit is an open source data collector for Embedded Linux, this
+> >> > patch adds the recipe for version 0.7.2.
+> >> >
+> >> >   Project web site: http://fluentbit.io
+> >> >   Documentation   : http://fluentbit.io/documentation/
+> >> >
+> >> > Signed-off-by: Eduardo Silva <eduardo@monkey.io>
+> >> > ---
+> >> >  meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb | 15
+> >> +++++++++++++++
+> >> >  1 file changed, 15 insertions(+)
+> >> >  create mode 100644 meta-oe/recipes-extended/fluentbit/
+> >> fluentbit_0.7.2.bb
+> >>
+> >> If the project package is called fluent-bit, why did you name the reci=
+pe
+> >> fluentbit?
+> >>
+> >
+> > just to follow the convention of RPM and DEB packages.
+> >
+> > regards,
+> >
+>=20
+>=20
+>=20
+> --=20
+> Eduardo Silva
+> Monkey Software
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-This revision also has issues building examples, my build failed with:
-
-| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/q=
-tbase/5.6.0+gitAUTOINC+d0cdc7ad1e-r0/git/examples/widgets/mainwindows/appli=
-cation/mainwindow.cpp: In constructor 'MainWindow::MainWindow()':
-| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/q=
-tbase/5.6.0+gitAUTOINC+d0cdc7ad1e-r0/git/examples/widgets/mainwindows/appli=
-cation/mainwindow.cpp:62:5: error: 'setFallbackSessionManagementEnabled' is=
- not a member of 'QGuiApplication'
-|      QGuiApplication::setFallbackSessionManagementEnabled(false);
-|      ^
-| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/q=
-tbase/5.6.0+gitAUTOINC+d0cdc7ad1e-r0/git/examples/widgets/mainwindows/appli=
-cation/mainwindow.cpp:63:20: error: 'commitDataRequest' is not a member of =
-'QGuiApplication'
-|      connect(qApp, &QGuiApplication::commitDataRequest,
-|                     ^
-
-Which most likely was fixed with:
-> > 719623a Fix builds without session management.
-which is missing in this older SRCREV
-
-To move forward I've squashed your SRCREV changes to single commit and now =
-I'm preparing another
-change which will bump SRCREVs to latest in 5.6 branches. This way people w=
-ho care more about exact
-5.6.0 version can use meta-qt5 revision with just your change, other people=
- can follow latest 5.6
-and get also the examples build fixed from upstream.
-
-Regards,
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---AhhlLboLdkugWU4S
+--2B/JsCI69OhZNC5r
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlcXSrMACgkQN1Ujt2V2gBznKwCggSwFnVa+GPYHJEDemDiXySTv
-j2QAn3xAflUVKtjEkjoq14b0NEu1Oem6
-=TDeb
+iEYEARECAAYFAlcXSwIACgkQN1Ujt2V2gBxBKgCeJIayWZzx3q54lMnFvnDdJU55
+VsAAn0RJ/gfCGEK+k3Jpf0TnzdjyPH53
+=7NWw
 -----END PGP SIGNATURE-----
 
---AhhlLboLdkugWU4S--
+--2B/JsCI69OhZNC5r--
