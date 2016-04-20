@@ -1,34 +1,34 @@
 Return-Path: <denis@denix.org>
-X-Greylist: delayed 3604 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 20 Apr 2016 19:23:29 UTC
-Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
-	[206.46.173.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A92F62133
+X-Greylist: delayed 3601 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 20 Apr 2016 19:25:50 UTC
+Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
+	[206.46.173.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B5586FF9B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Apr 2016 19:23:29 +0000 (UTC)
-Received: from vz-proxy-l005.mx.aol.com ([64.236.82.152])
-	by vms173011.mailsrvcs.net
+	Wed, 20 Apr 2016 19:25:50 +0000 (UTC)
+Received: from vz-proxy-l002.mx.aol.com ([64.236.82.148])
+	by vms173009.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O5Y00JNN32OTAA0@vms173011.mailsrvcs.net> for
+	2014)) with ESMTPA id <0O5Y002QH36H7I60@vms173009.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Wed,
-	20 Apr 2016 13:23:12 -0500 (CDT)
+	20 Apr 2016 13:25:35 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=WpDWSorv c=1 sm=1 tr=0	a=a3t/a0oOYlYu/nGe1mf8ZA==:117
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=hkQRW7prCrFMEwk2DGUM9Q==:117
 	a=kj9zAlcOel0A:10 a=kziv93cY1bsA:10	a=sozttTNsAAAA:8 a=Q4-j1AaZAAAA:8
-	a=6oOP8dcQzyAVWIcBl4sA:9	a=CjuIK1q_8ugA:10
-Received: by 100.15.86.14 with SMTP id 3893e836; Wed, 20 Apr 2016 18:23:12 GMT
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B8C90161FB3; Wed,
-	20 Apr 2016 14:23:11 -0400 (EDT)
-Date: Wed, 20 Apr 2016 14:23:11 -0400
+	a=PhUC6Grt_3BwEfrPmt8A:9	a=CjuIK1q_8ugA:10
+Received: by 100.15.86.14 with SMTP id 73d91673; Wed, 20 Apr 2016 18:25:35 GMT
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id DD312161FB3; Wed,
+	20 Apr 2016 14:25:28 -0400 (EDT)
+Date: Wed, 20 Apr 2016 14:25:28 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20160420182311.GL16135@denix.org>
-References: <1460410351-25968-1-git-send-email-j-stiffler@ti.com>
-	<20160412050910.GW16135@denix.org>
+Message-id: <20160420182528.GM16135@denix.org>
+References: <1460061600-28075-1-git-send-email-denis@denix.org>
 MIME-version: 1.0
-In-reply-to: <20160412050910.GW16135@denix.org>
+In-reply-to: <1460061600-28075-1-git-send-email-denis@denix.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [meta-oe][PATCH] llvm: correct fix for the multilib libdir
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [PATCH] ne10: use bb.debug for debug messages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,62 +41,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2016 19:23:30 -0000
+X-List-Received-Date: Wed, 20 Apr 2016 19:25:50 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-Ping? I see it in master-next, what's an ETA on merging it to master?
+Ping. Also in master-next for over a week - how often does it get merged to 
+master?
 
 
-On Tue, Apr 12, 2016 at 01:09:10AM -0400, Denys Dmytriyenko wrote:
-> On Mon, Apr 11, 2016 at 05:32:30PM -0400, Jacob Stiffler wrote:
-> > * If llvm.inc is used for native and nativesdk class packages, the
-> >   resulting llvm-config is broken since "${base_libdir}" is prefixed
-> >   with the full patch to sysroot
-> > * Replace "/lib" with "/${baselib}" instead of "${base_libdir}" as
-> >   "${base_libdir}" is the full path and "${baselib}" is the name of
-> >   the multilib directory.
-> > 
-> > Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+On Thu, Apr 07, 2016 at 04:40:00PM -0400, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@ti.com>
 > 
-> Acked-by: Denys Dmytriyenko <denys@ti.com>
-> Tested-by: Denys Dmytriyenko <denys@ti.com>
+> Moreover, the messages are misleading, saying "Building for arch blah",
+> even when this recipe is not being built. It merely checks if the recipe
+> is cmaptible with the currently used architecture.
 > 
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+>  meta-oe/recipes-support/ne10/ne10_1.2.1.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 > 
-> > ---
-> >  meta-oe/recipes-core/llvm/llvm.inc | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-core/llvm/llvm.inc
-> > index 31b2db4..02d4617 100644
-> > --- a/meta-oe/recipes-core/llvm/llvm.inc
-> > +++ b/meta-oe/recipes-core/llvm/llvm.inc
-> > @@ -61,7 +61,7 @@ do_configure_prepend() {
-> >      sed -ri "s#/(bin|include|lib)(/?\")#/\1/${LLVM_DIR}\2#g" ${S}/tools/llvm-config/llvm-config.cpp
-> >  
-> >      # Fix the hardcoded libdir in llvm-config
-> > -    sed -i 's:/lib\>:${base_libdir}:g' ${S}/tools/llvm-config/llvm-config.cpp
-> > +    sed -i 's:/lib\>:/${baselib}:g' ${S}/tools/llvm-config/llvm-config.cpp
-> >  
-> >      # Fails to build unless using separate directory from source
-> >      mkdir -p ${LLVM_BUILD_DIR}
-> > @@ -72,7 +72,7 @@ do_compile() {
-> >      cd ${LLVM_BUILD_DIR}
-> >  
-> >      # Fix libdir for multilib
-> > -    sed -i 's:(PROJ_prefix)/lib:(PROJ_prefix)${base_libdir}:g' Makefile.config
-> > +    sed -i 's:(PROJ_prefix)/lib:(PROJ_prefix)/${baselib}:g' Makefile.config
-> >  
-> >      oe_runmake \
-> >          AR="${BUILD_AR}" \
-> > -- 
-> > 1.9.1
-> > 
-> > -- 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+> index 4d753a0..de97982 100644
+> --- a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+> +++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+> @@ -20,10 +20,10 @@ COMPATIBLE_MACHINE_armv7a = "(.*)"
+>  python () {
+>      if any(t.startswith('armv7') for t in d.getVar('TUNE_FEATURES', True).split()):
+>          d.setVar('NE10_TARGET_ARCH', 'armv7')
+> -        bb.note('Building Ne10 for armv7')
+> +        bb.debug(2, 'Building Ne10 for armv7')
+>      elif any(t.startswith('aarch64') for t in d.getVar('TUNE_FEATURES', True).split()):
+>          d.setVar('NE10_TARGET_ARCH', 'aarch64')
+> -        bb.note('Building Ne10 for aarch64')
+> +        bb.debug(2, 'Building Ne10 for aarch64')
+>      else:
+>          raise bb.parse.SkipPackage("Incompatible with archs other than armv7 and aarch64")
+>  }
+> -- 
+> 2.2.0
+> 
 > -- 
 > _______________________________________________
 > Openembedded-devel mailing list
