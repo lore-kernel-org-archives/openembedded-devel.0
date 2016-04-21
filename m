@@ -1,42 +1,65 @@
-Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id BC58465CC3
+Return-Path: <anders@chargestorm.se>
+Received: from mail-lf0-f54.google.com (mail-lf0-f54.google.com
+	[209.85.215.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 465AC65CB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Apr 2016 13:12:07 +0000 (UTC)
-Received: by mail-wm0-f50.google.com with SMTP id u206so131887796wme.1
+	Thu, 21 Apr 2016 13:39:45 +0000 (UTC)
+Received: by mail-lf0-f54.google.com with SMTP id e190so60888364lfe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Apr 2016 06:12:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=BrMFGrPgH2OHws1CS5xevkOn3QvovZhkjC0Qx0I5MBs=;
-	b=djb/p0xCZbrwHq/DkTHBAp1FHwBXekhzq8c478P7ZIbNd/nQEwPOKnblSi3i+ytrDN
-	1rz5m1qgzkEkttFkWwrzsPnDSt+DBCLnD36yIVKLHq9/CIWdYzWu/VH6tKPNkMrv7kSh
-	jp+9J5GGBWEFL+RIctoDPB0e5mzWP5aZaC4qo=
+	Thu, 21 Apr 2016 06:39:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
+	h=date:from:to:cc:subject:message-id:mail-followup-to:references
+	:mime-version:content-disposition:in-reply-to:organization
+	:user-agent; bh=4dpF3pmDyneljibctg51TQKgw0bpM+ktMOrRTFioEfk=;
+	b=QrZHFq2XEroxdOhVJRmoonXOTt7FgIgUdcqRH8ZLYE5NZAnR/ExGi2saC6g707UnBN
+	Mlc4R4h0PgQOUGLiVF50fD80DW/eD/y1JvxOzhNLC4PB1B+qhqX4/vIUFl2PDU36xjJl
+	k10iPh6jLPgjuwv0isu0a04IK/orY2iLqnj89jCpYtSHXWGmWyS3ZVlvnPYAJdwXMTLB
+	6wCErW9t5x3PyFeBoXgxfMKP0sJZj31ZqB25rCoFV9T/C2fLo2FfGR4wTmc1rk/JHLmT
+	EVZLAy2pmgq7YuUfprkevaKBSxCz6dbEfu/IYaORI0LrR4DArq5Bor243Nbm3FBwhD/M
+	lJxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=BrMFGrPgH2OHws1CS5xevkOn3QvovZhkjC0Qx0I5MBs=;
-	b=JtyxO5s7JeFQjWNt7WEPxQR2lDm3LJUVK1O2tPUSzczIJfMRbYgjG1etJVKiMDjQ1U
-	nOFlxFhOu36Blj/+JdYChTjv/GinTMciSjwUBZgFNVe5LT1JKLRu6lOYqQj2A+30/q5K
-	NaLs79DDlieVdPElFS9XgGZypcAZW+QTcIwDPZ+vjWQeBr8TGnRZqrT9QnCV19aE02QG
-	DGqbYg/jz8oS4xhqVFvVeHEq1PtBJQ8YN/z5k+CbU6alWI44NJD6gXMlrIZjtTAE9TsP
-	AMckoO1sJ2HyRa7DwNGUMZNQF4/Ca/bC9T6Ym2G+OzzKfuKaFD4ntF8OkQ9C4Iwtkh1I
-	WICg==
-X-Gm-Message-State: AOPr4FUdVf7KZZMLO8VudDTwj80sWj+1B0PFln5T8/W04aQwCw891kZeJ9j5WRb7V8iQkQwJ
-X-Received: by 10.194.175.36 with SMTP id bx4mr2388986wjc.35.1461244327732;
-	Thu, 21 Apr 2016 06:12:07 -0700 (PDT)
-Received: from thinkpad.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174]) by smtp.gmail.com with ESMTPSA id
-	jp2sm2819008wjc.16.2016.04.21.06.12.06
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 21 Apr 2016 06:12:06 -0700 (PDT)
-From: Koen Kooi <koen.kooi@linaro.org>
+	h=x-gm-message-state:date:from:to:cc:subject:message-id
+	:mail-followup-to:references:mime-version:content-disposition
+	:in-reply-to:organization:user-agent;
+	bh=4dpF3pmDyneljibctg51TQKgw0bpM+ktMOrRTFioEfk=;
+	b=IU7Ua8q/Jp9OA+ZvIywl5+ti8I1xGANRX8ZTfpYfOjbVnONF5VZpj0hx5PAdJakNB/
+	Lvszh49Fr27YNu1rRgZKk/64woWKJ32kWAbEdKH0gY8PGa4b3CpGwJ+oC68V+7LAvghS
+	z3IhnQVdizKyFQe5SYB4UpMKghO22FNCPa/rB0kCEaEtCwqqNhQw/3lJ/JZML6Ak8qSO
+	VS784bW8YsXQ0KbGlExCK9OhIb1zIN3xkHjA8yY2y8GkcsCenOh1fuIsDdNrzEsCdILZ
+	QcGT/74Ju0yMJuvv5wsHvx3TgVAwEhodakDJAfApOs35jMFGQrR3QolV0EaeBs2LqwdY
+	g38w==
+X-Gm-Message-State: AOPr4FXK2qrYGKqtGW/JEA+RKG7yD25HModRd34F9U6EnXezDAiLwZDxSx2mrEM3qvZWYA==
+X-Received: by 10.25.151.75 with SMTP id z72mr6451685lfd.30.1461245985312;
+	Thu, 21 Apr 2016 06:39:45 -0700 (PDT)
+Received: from ad.chargestorm.se (213-64-218-130-no126.business.telia.com.
+	[213.64.218.130]) by smtp.gmail.com with ESMTPSA id
+	m141sm566310lfb.12.2016.04.21.06.39.44
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 21 Apr 2016 06:39:44 -0700 (PDT)
+Date: Thu, 21 Apr 2016 15:39:42 +0200
+From: Anders Darander <anders@chargestorm.se>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Apr 2016 15:12:00 +0200
-Message-Id: <1461244320-4304-1-git-send-email-koen.kooi@linaro.org>
-X-Mailer: git-send-email 2.4.3
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-oe][PATCH] mozjs: fix armeb builds
+Message-ID: <20160421133942.GD8320@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org,
+	mark.asselstine@windriver.com, rehsack@gmail.com
+References: <20160419142059.GB5970@mentor.com>
+	<1461080229-23859-1-git-send-email-joe_macdonald@mentor.com>
+	<20160420082429.GB3520@ad.chargestorm.se>
+	<20160420082917.GC3520@ad.chargestorm.se>
+	<20160420185624.GB5528@mentor.com>
+	<20160420190915.GC5528@mentor.com>
+MIME-Version: 1.0
+In-Reply-To: <20160420190915.GC5528@mentor.com>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: mark.asselstine@windriver.com
+Subject: Re: [meta-networking][PATCH v3] dnsmasq: get systemd only working again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,62 +72,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Apr 2016 13:12:09 -0000
+X-List-Received-Date: Thu, 21 Apr 2016 13:39:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-The mozjs builds fails on armeb, so add a define to make it work.
+* Joe MacDonald <Joe_MacDonald@mentor.com> [160420 21:09]:
 
-Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
----
- ...0001-add-support-for-big-endian-32bit-ARM.patch | 26 ++++++++++++++++++++++
- meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     |  1 +
- 2 files changed, 27 insertions(+)
- create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0001-add-support-for-big-endian-32bit-ARM.patch
+> [Re: [oe] [meta-networking][PATCH v3] dnsmasq: get systemd only working again] On 16.04.20 (Wed 14:56) Joe MacDonald wrote:
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-add-support-for-big-endian-32bit-ARM.patch b/meta-oe/recipes-extended/mozjs/mozjs/0001-add-support-for-big-endian-32bit-ARM.patch
-new file mode 100644
-index 0000000..7b7038f
---- /dev/null
-+++ b/meta-oe/recipes-extended/mozjs/mozjs/0001-add-support-for-big-endian-32bit-ARM.patch
-@@ -0,0 +1,26 @@
-+From 07830cbc409f8e998fa839275470031fc83d6eb6 Mon Sep 17 00:00:00 2001
-+From: Koen Kooi <koen.kooi@linaro.org>
-+Date: Thu, 21 Apr 2016 14:10:54 +0200
-+Subject: [PATCH] add support for big endian 32bit ARM
-+
-+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
-+---
-+ mfbt/double-conversion/utils.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/mfbt/double-conversion/utils.h b/mfbt/double-conversion/utils.h
-+index fe26dab..78a19cb 100644
-+--- a/mfbt/double-conversion/utils.h
-++++ b/mfbt/double-conversion/utils.h
-+@@ -58,7 +58,7 @@
-+     defined(__mips__) || defined(__powerpc__) || \
-+     defined(__sparc__) || defined(__sparc) || defined(__s390__) || \
-+     defined(__SH4__) || defined(__alpha__) || \
-+-    defined(__aarch64__) || \
-++    defined(__aarch64__) || defined(__ARMEB__) || \
-+     defined(_MIPS_ARCH_MIPS32R2)
-+ #define DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS 1
-+ #elif defined(_M_IX86) || defined(__i386__) || defined(__i386)
-+-- 
-+2.4.3
-+
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-index be4b50b..cab6dd5 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-@@ -14,6 +14,7 @@ SRC_URI = " \
-     file://fix-the-compile-error-of-powerpc64.patch;patchdir=../../ \
-     file://fix_milestone_compile_issue.patch \
-     file://0010-fix-cross-compilation-on-i586-targets.patch;patchdir=../../ \
-+    file://0001-add-support-for-big-endian-32bit-ARM.patch;patchdir=../../ \
-   "
- 
- SRC_URI[md5sum] = "20b6f8f1140ef6e47daa3b16965c9202"
+> > Wow this one is kind of thorny, huh?
+
+> > How about the attached patch?  I hope it strikes the right balance
+> > between not duplicating too much and not making things too complex to
+> > maintain later on.
+
+> Or, rather, this one.  :-)
+
+This one works fine for my use-case! ;-)
+
+Thus,
+
+Acked-by: Anders Darander <anders@chargestorm.se>
+
+Cheers,
+Anders
+
 -- 
-2.4.3
-
+Anders Darander, Senior System Architect
+ChargeStorm AB / eStorm AB
 
