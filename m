@@ -1,49 +1,37 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
-	[209.85.215.68])
-	by mail.openembedded.org (Postfix) with ESMTP id EB6E6605BA
+Return-Path: <krzysztof.m.sywula@intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 707F270022
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Apr 2016 19:09:55 +0000 (UTC)
-Received: by mail-lf0-f68.google.com with SMTP id p64so8416491lfg.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Apr 2016 12:09:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc; bh=0YN+yQhhzPk1LCXlCuxcUOuelUmnVD0KLPzL1bQKZzo=;
-	b=memEbSuZRVAAB5uylms1kMyenEEjZpl+5H9Fd2FZh2yYF8KFVNdcn7nTNt4opWf3+F
-	ot6w3t6odMIomMK8GVxMKaUwqTB2uvVS2ReVpxiEliQ/drqqkTd7xURpe8zbfYhfRgho
-	BiInHNCjZL8MMYr7H66WmqisKloPPLPQhRWjJQNdbxVd8PmLDz6JAbbp/0JccoRFqPJs
-	z+PckY1olTPC118Jnq79et1Y/Mzm8qoGBORVa8msHilodjFEa3IQj2r2WGb/fCbaSn6V
-	A3AdzI+I09y5Rvi2HHUqP+9j/Z21BedeiSRd8WqSEaVv+iLL1lJlG+7aT9iJ8fgGGyzO
-	9o9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:date
-	:message-id:subject:from:to:cc;
-	bh=0YN+yQhhzPk1LCXlCuxcUOuelUmnVD0KLPzL1bQKZzo=;
-	b=RkkJqiDFkAiBxaWq0pnXY1BtaYYLK2qRjFypsI7JgIPO7/ekMTNS4O1u21lsI+wN6i
-	QtCOPCiPhpVWsN36br8/m9tinma0h7djL0GcxKc63DJS1+dOucFnueCdtRTiHwruXjMH
-	EVkckHryOoMfGHl/1HztKIMpwTTIHzrxFRYkRKyg6TEoFO+vft8+SjiP3xjaDT8V8y9r
-	ZOHAdKuz//KKZec/bM9aZnTCN+v4HtNMiigDu6iY/DWbJU+5y9rKMKmXszbPZTS8Cd8j
-	PHHX/DCAq2fn19Y6+SdJcxi/ZCf32+fwBoMacoa7o84otu49kB0G9t90uW8xsAutXXL8
-	r3cQ==
-X-Gm-Message-State: AOPr4FVDJ7oanRRy9ynFpxDJYG/5OH30NVrMyRNY6R/j7J4CAOcC1XO3+J1XAm6NE/sr/3FjQP5o6iIaGUTEng==
+	Fri, 22 Apr 2016 01:00:59 +0000 (UTC)
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+	by orsmga103.jf.intel.com with ESMTP; 21 Apr 2016 18:01:00 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.24,515,1455004800"; d="scan'208";a="89688203"
+Received: from fmsmsx105.amr.corp.intel.com ([10.18.124.203])
+	by fmsmga004.fm.intel.com with ESMTP; 21 Apr 2016 18:00:59 -0700
+Received: from fmsmsx117.amr.corp.intel.com (10.18.116.17) by
+	FMSMSX105.amr.corp.intel.com (10.18.124.203) with Microsoft SMTP Server
+	(TLS) id 14.3.248.2; Thu, 21 Apr 2016 18:00:58 -0700
+Received: from fmsmsx116.amr.corp.intel.com ([169.254.2.62]) by
+	fmsmsx117.amr.corp.intel.com ([169.254.3.77]) with mapi id
+	14.03.0248.002; Thu, 21 Apr 2016 18:00:57 -0700
+From: "Sywula, Krzysztof M" <krzysztof.m.sywula@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] udisks2: add acl to DEPENDS
+Thread-Index: AQHRm3tjWnRIDzB4cESb3hFZ7PYeKJ+U6G0AgABFXLA=
+Date: Fri, 22 Apr 2016 01:00:57 +0000
+Message-ID: <6741EAAB26B57F4995668065CB62D86B507EE3A8@fmsmsx116.amr.corp.intel.com>
+References: <1461208189-2377-1-git-send-email-krzysztof.m.sywula@intel.com>
+	<5718DB14.7060405@gmail.com>
+In-Reply-To: <5718DB14.7060405@gmail.com>
+Accept-Language: en-GB, pl-PL, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.200.108]
 MIME-Version: 1.0
-X-Received: by 10.25.208.80 with SMTP id h77mr7375035lfg.11.1461265795689;
-	Thu, 21 Apr 2016 12:09:55 -0700 (PDT)
-Sender: cliff.brake@gmail.com
-Received: by 10.112.181.105 with HTTP; Thu, 21 Apr 2016 12:09:55 -0700 (PDT)
-In-Reply-To: <CAP9ODKocX2ZV8SgatTYx6RhYfzngn_g6U7_Fq+jQHcHz7pYVgg@mail.gmail.com>
-References: <CAOd_LFyF5A_Xp5SGVM7cQXU=w3zhPeWsWVohb2V9VDVxMLwoTA@mail.gmail.com>
-	<CAP9ODKrgiJvzB5NaH6GD2Sv8nt9nKAy=1kHzYXULQDLA9hd0_Q@mail.gmail.com>
-	<CAP9ODKocX2ZV8SgatTYx6RhYfzngn_g6U7_Fq+jQHcHz7pYVgg@mail.gmail.com>
-Date: Thu, 21 Apr 2016 15:09:55 -0400
-X-Google-Sender-Auth: DtsWGbC9Uxhv623IhJCunQ0P0lg
-Message-ID: <CAOd_LFx1kY4d6Gt=obRY3qf3gRD_SYbmrY+-Pw-yinbA85cE8w@mail.gmail.com>
-From: Cliff Brake <cbrake@bec-systems.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: anyone using docker for OE builds?
+Cc: "koen@dominion.thruhere.net" <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH] udisks2: add acl to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,20 +44,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Apr 2016 19:09:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 22 Apr 2016 01:01:00 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Thanks for all the information.
+Alright, didn't see that one.=20
 
-After a week or so experimenting with Docker, I've come up with a
-solution I like:
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
+d-devel-bounces@lists.openembedded.org] On Behalf Of akuster808
+Sent: Thursday, April 21, 2016 6:52 AM
+To: openembedded-devel@lists.openembedded.org
+Cc: koen@dominion.thruhere.net
+Subject: Re: [oe] [meta-oe][PATCH] udisks2: add acl to DEPENDS
 
-https://hub.docker.com/r/cbrake/oe-build/
 
-Also wrote about it here:
 
-http://bec-systems.com/site/1281/using-docker-for-oeyocto-builds
+On 04/20/2016 08:09 PM, Krzysztof Sywula wrote:
+> fixes:
+> | configure: error: *** ACL headers not found.
 
-Thanks,
-Cliff
+a version of this is in master-next
+
+http://cgit.openembedded.org/meta-openembedded/commit/?h=3Dmaster-next&id=
+=3Ddff23fc84bb116e3b31aca0c8a7731507fb6ba37
+
+- armin
+
+> ---
+>  meta-oe/recipes-support/udisks/udisks2_2.1.5.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb b/meta-oe/re=
+cipes-support/udisks/udisks2_2.1.5.bb
+> index d273948..1e00f71 100644
+> --- a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
+> +++ b/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
+> @@ -2,7 +2,7 @@ SUMMARY =3D "udisks provides dbus interfaces for disks an=
+d storage devices"
+>  LICENSE =3D "GPLv2+ & LGPLv2+"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Ddd79f6dbbffdbc8e86b086a8f0c0e=
+f43"
+> =20
+> -DEPENDS =3D "libatasmart polkit libgudev dbus-glib glib-2.0 intltool-nat=
+ive gnome-common-native"
+> +DEPENDS =3D "libatasmart polkit libgudev dbus-glib glib-2.0 intltool-nat=
+ive gnome-common-native acl"
+>  DEPENDS +=3D "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', =
+'', d)}"
+> =20
+>  RDEPENDS_${PN} =3D "acl"
+>=20
+--=20
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
