@@ -1,37 +1,43 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f54.google.com (mail-qg0-f54.google.com
-	[209.85.192.54])
-	by mail.openembedded.org (Postfix) with ESMTP id DF8216011C
+Return-Path: <ryanelkholy@gmail.com>
+Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 512CC6011C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 18:46:10 +0000 (UTC)
-Received: by mail-qg0-f54.google.com with SMTP id c6so64375819qga.1
+	Fri, 22 Apr 2016 18:46:50 +0000 (UTC)
+Received: by mail-ig0-f172.google.com with SMTP id bi2so21155044igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 11:46:11 -0700 (PDT)
+	Fri, 22 Apr 2016 11:46:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:cc;
+	bh=aLDUVqSfU0bNo80xlq4po9/tHLFzj2k8Lf5HRljNdgM=;
+	b=ZeYw/O5vQdq7eygPGAcxC/VAO70hsf+c/2CfYT7vHlMr1iqPczW7I1i9u/roEd3yhM
+	VLXeWKcMrNn0ep/JsSeEAW3Ocsr6TZy4rshInzyWjPi0JOQBqtEaKd+6uwL7FRG2KD9V
+	/E94bUbBw+/DEu9hYR7BPbLI3uRW5vDQ/tJhQIXM7+JONhX+rBJkoiV1A9GmthRltLP+
+	tCb/CR6gv9C6WwEN0u7ZRMf73FA5pUBErd7lXM6QWsnAbrpVpQh+LZwKUS1Z59xxBA7A
+	wqew3sPuHOuYOdJiCz2vCadjfBsyRxxOtU+uGW5kGkDT9aO7kCIRPBWthYGaL7lqEhBN
+	CBVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=FSQG3Qm+RLILhtWtias/3RZb/8sXrIr0U5mpYYcfCo0=;
-	b=TpVBNZrzT+b/40qbP8yFKbUjVB+SA6Ux1AxobhQ+iLpoPRJ6p6zUnjPAxwtVR6NP3s
-	oqQK5dTwopKP6rtGqXzlTCpUN0ktLFJsjaEvswygWfOqeJGUUtAMkQSM4poomQkRmmHS
-	CGMxre9reA/9RX5tSU1E+lKHlUc71161/iVQv3hZ7cyoqudJnzx856JRpLKIh1jrvwz3
-	w64Wxs23wv/AFqP2/iDEEP5jTYZGzbJXwmIBrk0A1qjDJ2Wb/BHxF/T6WfToBRaevyUr
-	JxZplKsmWVbxuybIE7WnWTxdgKYvPH2mTo87wRxIbKWBsxnqh0+4KR0AG4eLkCHA3gMs
-	hXzg==
-X-Gm-Message-State: AOPr4FU+Yl3ZN0ZoiYmFXDBHJfFAFyEbWmS/zfsBOjpKz03rr4qSUtA1NX5mQg5YGOLEWg==
-X-Received: by 10.140.93.67 with SMTP id c61mr6683191qge.101.1461350771229;
-	Fri, 22 Apr 2016 11:46:11 -0700 (PDT)
-Received: from lnx-desktop.star.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	p101sm2888522qge.13.2016.04.22.11.46.10
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Apr 2016 11:46:10 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Apr 2016 14:45:59 -0400
-Message-Id: <1461350759-939-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-oe][PATCH] concurrencykit: update to version 0.5.1
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to:cc;
+	bh=aLDUVqSfU0bNo80xlq4po9/tHLFzj2k8Lf5HRljNdgM=;
+	b=c4Dt/hxPtlAyc3t9ZLjezjgdjW9Rr/Wjpp2p55RrM3SzR/+Rzgtsz5jo8Xij/jWEgW
+	dnPL6NEjoE/2ESE/pAOamxpL9HKlM6yacoXSMNEizCRkoIru59DIMiWzvAcL9YJDWoLF
+	9Kk2Qh5xN8G2/GiZgJZeC8h3in1Nj/2BzLwH9i/F+uMzUAt4IB8uC8pf0V1n5PU3qGCc
+	QptBJr86yEM+CrxT2x8yey4BVyen/Cr9QOHS3PaIuovmf+xKSDuhip89UC2I+fllzGH7
+	CmRGWCW1lirFkOJLipc+WngeTZByt6zXE9BzDCHsuuGfvjpyTVsqFeMf9yTywTOx8bXE
+	4nLQ==
+X-Gm-Message-State: AOPr4FXHa8asc+TBweD7ljP1z4WRz2GeZf54pNK/K6YjDulH2DSFDS2L517zyqCAKEUL2Pcc1D9V3emT/dZoeg==
+MIME-Version: 1.0
+X-Received: by 10.50.78.73 with SMTP id z9mr3943050igw.42.1461350811357; Fri,
+	22 Apr 2016 11:46:51 -0700 (PDT)
+Received: by 10.64.78.105 with HTTP; Fri, 22 Apr 2016 11:46:51 -0700 (PDT)
+Date: Fri, 22 Apr 2016 14:46:51 -0400
+Message-ID: <CAMZfsd4zjgsco_JCiPF3YZ=taz0gO-JS6OR6eErrmnEBCSuk8w@mail.gmail.com>
+From: "Ryan Elkholy, PhD, PE" <ryanelkholy@gmail.com>
+To: sgw@linux.intel.com
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-intel] libva dependency on x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,66 +50,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2016 18:46:11 -0000
+X-List-Received-Date: Fri, 22 Apr 2016 18:46:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../concurrencykit/concurrencykit/cross.patch            | 16 +---------------
- .../concurrencykit/concurrencykit_git.bb                 |  6 +++---
- 2 files changed, 4 insertions(+), 18 deletions(-)
+Regarding meta-intel, I would like to know if what I found is a bug or if I
+am misunderstanding it. I see that in libva there is this dependency:
+RDEPENDS_${PN}-egl =+ "${PN}-x11"
 
-diff --git a/meta-oe/recipes-devtools/concurrencykit/concurrencykit/cross.patch b/meta-oe/recipes-devtools/concurrencykit/concurrencykit/cross.patch
-index 38504fe..d3bfab7 100644
---- a/meta-oe/recipes-devtools/concurrencykit/concurrencykit/cross.patch
-+++ b/meta-oe/recipes-devtools/concurrencykit/concurrencykit/cross.patch
-@@ -2,20 +2,6 @@ Index: git/configure
- ===================================================================
- --- git.orig/configure	2012-11-19 21:07:51.917429465 -0800
- +++ git/configure	2012-11-19 21:13:19.337437278 -0800
--@@ -275,8 +275,11 @@
-- assert "$SYSTEM" "$SYSTEM" "unsupported"
-- 
-- CORES=${CORES:-${DCORES}}
---printf "Detecting machine architecture..."
---PLATFORM=`uname -m 2> /dev/null`
--+if test -z "$PLATFORM"; then
--+	printf "Detecting machine architecture..."
--+	PLATFORM=`uname -m 2> /dev/null`
--+fi
--+
-- case $PLATFORM in
-- 	"macppc"|"Power Macintosh"|"powerpc")
-- 		MM="${MM:-"CK_MD_RMO"}"
- @@ -439,14 +442,18 @@
-  	GZIP_SUFFIX=".gz"
-  fi
-@@ -40,7 +26,7 @@ Index: git/configure
-  #include <stdio.h>
-  int main(void) {
-  #if defined(__GNUC__) && (__GNUC__ >= 4)
--@@ -460,16 +467,16 @@
-+@@ -569,16 +576,16 @@
-  #endif
-  }
-  EOF
-diff --git a/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb b/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
-index b4ac9c9..51243c2 100644
---- a/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
-+++ b/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
-@@ -7,9 +7,9 @@ LICENSE = "BSD & Apache-2.0"
- HOMEPAGE = "http://concurrencykit.org"
- SECTION = "base"
- 
--PV = "0.4.3+git${SRCPV}"
--SRCREV = "900d203aa9e41288545368ea40da0bee89f7907f"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=f12611e65e064515ce264249b2bdea98"
-+PV = "0.5.1+git${SRCPV}"
-+SRCREV = "f97d3da5c375ac2fc5a9173cdd36cb828915a2e1"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a0b24c1a8f9ad516a297d055b0294231"
- SRC_URI = "git://github.com/concurrencykit/ck.git;protocol=https \
-            file://cross.patch \
- "
--- 
-1.9.1
+Does this mean that even if x11 is not used there is still an x11 dependecy
+on libva-egl?
 
+The reason I ask is because I cannot build my non x11 package because it
+says libva depends on libva-x11
+
+Thanks ahead of time!
 
