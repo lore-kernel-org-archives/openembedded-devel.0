@@ -1,44 +1,37 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 64D12606D0
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qg0-f54.google.com (mail-qg0-f54.google.com
+	[209.85.192.54])
+	by mail.openembedded.org (Postfix) with ESMTP id DF8216011C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 18:15:04 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id e201so26748010wme.0
+	Fri, 22 Apr 2016 18:46:10 +0000 (UTC)
+Received: by mail-qg0-f54.google.com with SMTP id c6so64375819qga.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 11:15:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=jqIewGUtjTvWMtcmvuXIrg/ynjiCAlRDRnR6h8UWoMU=;
-	b=hqlLNrbxanEL7r2vYoMrQdbde9IefO02mmr40erVrJnxAnBpXZsJ4Xe7m50Cbm0djb
-	FvGg+yNWCETZz+VjCdJ+Y+skdeEi0QoOjgwEU9oCAE7lnH55GvupQJzLdlR0cTtvM33+
-	P47e43auHSbqPb4z386+YjsOSDKhcuUIEBLKI=
+	Fri, 22 Apr 2016 11:46:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=jqIewGUtjTvWMtcmvuXIrg/ynjiCAlRDRnR6h8UWoMU=;
-	b=OoYqibKXqGwRRpC6URmQpY0ul9huozGpA2BJ0Hy20I6rP5nSGv1c8kp/E4BFQHtkU2
-	XTdA/nRIJMShYb37+U8ktF5HNycUytp9+cwo9roVTsOegKZWupgR7rz+l+LSV8189LHU
-	Uw4eKgsyOQ9JnFQx06Qb3EAPkWASdlWX7g8Dw7xj1uYW/7LxEiw0HREIGOhf2AuotL1+
-	5zGy191SbWaV7lYY/T0Oq25u43SOebJFCnkTNPQKLHeRnai3sPEGWM/MaFFGPTTwpX6f
-	h5adKvcvOG6j0vqrGbmtUvgyLdXDV4QaaZIjxS5iumyclCsH/t6Kih7iazvWSgqIe0XV
-	Z0/Q==
-X-Gm-Message-State: AOPr4FW3GPbm2dkqoWWojKjgAxYj7zuir4UtKwXzHw0mehZf7iXbVjqpYokMrrqGASV8jzwDGWZo6RaA/gRSaNSq
-X-Received: by 10.194.114.228 with SMTP id jj4mr21767703wjb.121.1461348905024; 
-	Fri, 22 Apr 2016 11:15:05 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.194.64.196 with HTTP; Fri, 22 Apr 2016 11:14:45 -0700 (PDT)
-In-Reply-To: <CAOd_LFx1kY4d6Gt=obRY3qf3gRD_SYbmrY+-Pw-yinbA85cE8w@mail.gmail.com>
-References: <CAOd_LFyF5A_Xp5SGVM7cQXU=w3zhPeWsWVohb2V9VDVxMLwoTA@mail.gmail.com>
-	<CAP9ODKrgiJvzB5NaH6GD2Sv8nt9nKAy=1kHzYXULQDLA9hd0_Q@mail.gmail.com>
-	<CAP9ODKocX2ZV8SgatTYx6RhYfzngn_g6U7_Fq+jQHcHz7pYVgg@mail.gmail.com>
-	<CAOd_LFx1kY4d6Gt=obRY3qf3gRD_SYbmrY+-Pw-yinbA85cE8w@mail.gmail.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Fri, 22 Apr 2016 20:14:45 +0200
-Message-ID: <CAP71Wjwp=NnRSsRj9=o6s4yTfMH+3LxhAOyDW_4pWjuor4XcyQ@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: anyone using docker for OE builds?
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=FSQG3Qm+RLILhtWtias/3RZb/8sXrIr0U5mpYYcfCo0=;
+	b=TpVBNZrzT+b/40qbP8yFKbUjVB+SA6Ux1AxobhQ+iLpoPRJ6p6zUnjPAxwtVR6NP3s
+	oqQK5dTwopKP6rtGqXzlTCpUN0ktLFJsjaEvswygWfOqeJGUUtAMkQSM4poomQkRmmHS
+	CGMxre9reA/9RX5tSU1E+lKHlUc71161/iVQv3hZ7cyoqudJnzx856JRpLKIh1jrvwz3
+	w64Wxs23wv/AFqP2/iDEEP5jTYZGzbJXwmIBrk0A1qjDJ2Wb/BHxF/T6WfToBRaevyUr
+	JxZplKsmWVbxuybIE7WnWTxdgKYvPH2mTo87wRxIbKWBsxnqh0+4KR0AG4eLkCHA3gMs
+	hXzg==
+X-Gm-Message-State: AOPr4FU+Yl3ZN0ZoiYmFXDBHJfFAFyEbWmS/zfsBOjpKz03rr4qSUtA1NX5mQg5YGOLEWg==
+X-Received: by 10.140.93.67 with SMTP id c61mr6683191qge.101.1461350771229;
+	Fri, 22 Apr 2016 11:46:11 -0700 (PDT)
+Received: from lnx-desktop.star.lab (c-73-172-178-168.hsd1.md.comcast.net.
+	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
+	p101sm2888522qge.13.2016.04.22.11.46.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 22 Apr 2016 11:46:10 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 22 Apr 2016 14:45:59 -0400
+Message-Id: <1461350759-939-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-oe][PATCH] concurrencykit: update to version 0.5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,26 +44,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2016 18:15:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 22 Apr 2016 18:46:11 -0000
 
-On Thu, Apr 21, 2016 at 9:09 PM, Cliff Brake <cbrake@bec-systems.com> wrote:
-> Thanks for all the information.
->
-> After a week or so experimenting with Docker, I've come up with a
-> solution I like:
->
-> https://hub.docker.com/r/cbrake/oe-build/
->
-> Also wrote about it here:
->
-> http://bec-systems.com/site/1281/using-docker-for-oeyocto-builds
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../concurrencykit/concurrencykit/cross.patch            | 16 +---------------
+ .../concurrencykit/concurrencykit_git.bb                 |  6 +++---
+ 2 files changed, 4 insertions(+), 18 deletions(-)
 
-thanks for the write up.. that got me into finally looking at it ;-)
+diff --git a/meta-oe/recipes-devtools/concurrencykit/concurrencykit/cross.patch b/meta-oe/recipes-devtools/concurrencykit/concurrencykit/cross.patch
+index 38504fe..d3bfab7 100644
+--- a/meta-oe/recipes-devtools/concurrencykit/concurrencykit/cross.patch
++++ b/meta-oe/recipes-devtools/concurrencykit/concurrencykit/cross.patch
+@@ -2,20 +2,6 @@ Index: git/configure
+ ===================================================================
+ --- git.orig/configure	2012-11-19 21:07:51.917429465 -0800
+ +++ git/configure	2012-11-19 21:13:19.337437278 -0800
+-@@ -275,8 +275,11 @@
+- assert "$SYSTEM" "$SYSTEM" "unsupported"
+- 
+- CORES=${CORES:-${DCORES}}
+--printf "Detecting machine architecture..."
+--PLATFORM=`uname -m 2> /dev/null`
+-+if test -z "$PLATFORM"; then
+-+	printf "Detecting machine architecture..."
+-+	PLATFORM=`uname -m 2> /dev/null`
+-+fi
+-+
+- case $PLATFORM in
+- 	"macppc"|"Power Macintosh"|"powerpc")
+- 		MM="${MM:-"CK_MD_RMO"}"
+ @@ -439,14 +442,18 @@
+  	GZIP_SUFFIX=".gz"
+  fi
+@@ -40,7 +26,7 @@ Index: git/configure
+  #include <stdio.h>
+  int main(void) {
+  #if defined(__GNUC__) && (__GNUC__ >= 4)
+-@@ -460,16 +467,16 @@
++@@ -569,16 +576,16 @@
+  #endif
+  }
+  EOF
+diff --git a/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb b/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
+index b4ac9c9..51243c2 100644
+--- a/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
++++ b/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
+@@ -7,9 +7,9 @@ LICENSE = "BSD & Apache-2.0"
+ HOMEPAGE = "http://concurrencykit.org"
+ SECTION = "base"
+ 
+-PV = "0.4.3+git${SRCPV}"
+-SRCREV = "900d203aa9e41288545368ea40da0bee89f7907f"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=f12611e65e064515ce264249b2bdea98"
++PV = "0.5.1+git${SRCPV}"
++SRCREV = "f97d3da5c375ac2fc5a9173cdd36cb828915a2e1"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=a0b24c1a8f9ad516a297d055b0294231"
+ SRC_URI = "git://github.com/concurrencykit/ck.git;protocol=https \
+            file://cross.patch \
+ "
+-- 
+1.9.1
 
-is there a (nice) solution in case my host UID/GID isn't 1000/1000? I
-definitely need to mount volumes for the persistent data , but i need
-to be able to read/write these volumes from containers and host, so
-ideally i would like my containers to inherit UID/GID from an existing
-user on the host.
 
