@@ -1,37 +1,33 @@
-Return-Path: <krzysztof.m.sywula@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 707F270022
+Return-Path: <denis@denix.org>
+Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
+	[206.46.173.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D6EA671633
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 01:00:59 +0000 (UTC)
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-	by orsmga103.jf.intel.com with ESMTP; 21 Apr 2016 18:01:00 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,515,1455004800"; d="scan'208";a="89688203"
-Received: from fmsmsx105.amr.corp.intel.com ([10.18.124.203])
-	by fmsmga004.fm.intel.com with ESMTP; 21 Apr 2016 18:00:59 -0700
-Received: from fmsmsx117.amr.corp.intel.com (10.18.116.17) by
-	FMSMSX105.amr.corp.intel.com (10.18.124.203) with Microsoft SMTP Server
-	(TLS) id 14.3.248.2; Thu, 21 Apr 2016 18:00:58 -0700
-Received: from fmsmsx116.amr.corp.intel.com ([169.254.2.62]) by
-	fmsmsx117.amr.corp.intel.com ([169.254.3.77]) with mapi id
-	14.03.0248.002; Thu, 21 Apr 2016 18:00:57 -0700
-From: "Sywula, Krzysztof M" <krzysztof.m.sywula@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] udisks2: add acl to DEPENDS
-Thread-Index: AQHRm3tjWnRIDzB4cESb3hFZ7PYeKJ+U6G0AgABFXLA=
-Date: Fri, 22 Apr 2016 01:00:57 +0000
-Message-ID: <6741EAAB26B57F4995668065CB62D86B507EE3A8@fmsmsx116.amr.corp.intel.com>
-References: <1461208189-2377-1-git-send-email-krzysztof.m.sywula@intel.com>
-	<5718DB14.7060405@gmail.com>
-In-Reply-To: <5718DB14.7060405@gmail.com>
-Accept-Language: en-GB, pl-PL, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.200.108]
-MIME-Version: 1.0
-Cc: "koen@dominion.thruhere.net" <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH] udisks2: add acl to DEPENDS
+	Fri, 22 Apr 2016 01:04:20 +0000 (UTC)
+Received: from vz-proxy-l002.mx.aol.com ([64.236.82.148])
+	by vms173011.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O6000CJ4GAYEW30@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	21 Apr 2016 20:04:20 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=hkQRW7prCrFMEwk2DGUM9Q==:117
+	a=kj9zAlcOel0A:10 a=kziv93cY1bsA:10	a=0gcC27t9AAAA:8 a=sozttTNsAAAA:8
+	a=Q4-j1AaZAAAA:8 a=moxdNLDgXe7PjqMsPKYA:9	a=CjuIK1q_8ugA:10
+Received: by 100.15.86.14 with SMTP id 7db6dab9; Fri, 22 Apr 2016 01:04:20 GMT
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 1D65B161FC7; Thu,
+	21 Apr 2016 21:04:10 -0400 (EDT)
+Date: Thu, 21 Apr 2016 21:04:10 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20160422010410.GS16135@denix.org>
+References: <1460061600-28075-1-git-send-email-denis@denix.org>
+	<20160420182528.GM16135@denix.org>
+	<CA+chaQfEgVEExME523XvcqQBc53U3WVuFO48s6ArMkpmt8kW8g@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CA+chaQfEgVEExME523XvcqQBc53U3WVuFO48s6ArMkpmt8kW8g@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH] ne10: use bb.debug for debug messages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,61 +40,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2016 01:01:00 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 22 Apr 2016 01:04:21 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Alright, didn't see that one.=20
+On Wed, Apr 20, 2016 at 10:44:04PM +0200, Martin Jansa wrote:
+> When everything is at least once tested in my jenkins builds and I've time
+> to go through the list of pending changes.
+> 
+> I was away from computers almost whole previous week, so there is longer
+> delay now.
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of akuster808
-Sent: Thursday, April 21, 2016 6:52 AM
-To: openembedded-devel@lists.openembedded.org
-Cc: koen@dominion.thruhere.net
-Subject: Re: [oe] [meta-oe][PATCH] udisks2: add acl to DEPENDS
+Thanks, no problem and congrats!
 
 
-
-On 04/20/2016 08:09 PM, Krzysztof Sywula wrote:
-> fixes:
-> | configure: error: *** ACL headers not found.
-
-a version of this is in master-next
-
-http://cgit.openembedded.org/meta-openembedded/commit/?h=3Dmaster-next&id=
-=3Ddff23fc84bb116e3b31aca0c8a7731507fb6ba37
-
-- armin
-
-> ---
->  meta-oe/recipes-support/udisks/udisks2_2.1.5.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb b/meta-oe/re=
-cipes-support/udisks/udisks2_2.1.5.bb
-> index d273948..1e00f71 100644
-> --- a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
-> +++ b/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
-> @@ -2,7 +2,7 @@ SUMMARY =3D "udisks provides dbus interfaces for disks an=
-d storage devices"
->  LICENSE =3D "GPLv2+ & LGPLv2+"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Ddd79f6dbbffdbc8e86b086a8f0c0e=
-f43"
-> =20
-> -DEPENDS =3D "libatasmart polkit libgudev dbus-glib glib-2.0 intltool-nat=
-ive gnome-common-native"
-> +DEPENDS =3D "libatasmart polkit libgudev dbus-glib glib-2.0 intltool-nat=
-ive gnome-common-native acl"
->  DEPENDS +=3D "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', =
-'', d)}"
-> =20
->  RDEPENDS_${PN} =3D "acl"
->=20
---=20
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> On Wed, Apr 20, 2016 at 8:25 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> 
+> > Ping. Also in master-next for over a week - how often does it get merged to
+> > master?
+> >
+> >
+> > On Thu, Apr 07, 2016 at 04:40:00PM -0400, Denys Dmytriyenko wrote:
+> > > From: Denys Dmytriyenko <denys@ti.com>
+> > >
+> > > Moreover, the messages are misleading, saying "Building for arch blah",
+> > > even when this recipe is not being built. It merely checks if the recipe
+> > > is cmaptible with the currently used architecture.
+> > >
+> > > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > > ---
+> > >  meta-oe/recipes-support/ne10/ne10_1.2.1.bb | 4 ++--
+> > >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > >
+> > > diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+> > b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+> > > index 4d753a0..de97982 100644
+> > > --- a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+> > > +++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+> > > @@ -20,10 +20,10 @@ COMPATIBLE_MACHINE_armv7a = "(.*)"
+> > >  python () {
+> > >      if any(t.startswith('armv7') for t in d.getVar('TUNE_FEATURES',
+> > True).split()):
+> > >          d.setVar('NE10_TARGET_ARCH', 'armv7')
+> > > -        bb.note('Building Ne10 for armv7')
+> > > +        bb.debug(2, 'Building Ne10 for armv7')
+> > >      elif any(t.startswith('aarch64') for t in d.getVar('TUNE_FEATURES',
+> > True).split()):
+> > >          d.setVar('NE10_TARGET_ARCH', 'aarch64')
+> > > -        bb.note('Building Ne10 for aarch64')
+> > > +        bb.debug(2, 'Building Ne10 for aarch64')
+> > >      else:
+> > >          raise bb.parse.SkipPackage("Incompatible with archs other than
+> > armv7 and aarch64")
+> > >  }
+> > > --
+> > > 2.2.0
+> > >
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
