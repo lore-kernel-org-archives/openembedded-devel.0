@@ -1,37 +1,51 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
-	[209.85.192.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 3123965CBB
+Return-Path: <twoerner@gmail.com>
+Received: from mail-ig0-f193.google.com (mail-ig0-f193.google.com
+	[209.85.213.193])
+	by mail.openembedded.org (Postfix) with ESMTP id B78C373169
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 17:00:09 +0000 (UTC)
-Received: by mail-qg0-f45.google.com with SMTP id f74so55885581qge.2
+	Fri, 22 Apr 2016 17:23:30 +0000 (UTC)
+Received: by mail-ig0-f193.google.com with SMTP id qu10so3049928igc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 10:00:10 -0700 (PDT)
+	Fri, 22 Apr 2016 10:23:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=IXSYD/NaRmALDrshzXh1PWsNglJ7mErpHY46W5GWJVM=;
+	b=F+wUP4VcnJ2nV/o2C6ttntANT4fsqMc4tCJhpazRglTF+lXLCCXQc0411TUOl+GAyi
+	7wXAU+HZEJlay7Uz/CafDHeITs/hROXoD89jMBbmiko3owQ0ZscLtXQeswRbJnIkA0jM
+	C5I/25kx0WZCQbORBHUtEhSV3H4nmca6e1rdrLF3KXSPrA+7EewHXz89Q1Z+P6gIYWvM
+	YE6DQcDGLw+TleTvt3I81d3Eq0+VNqsL8HnJMt4AZzSUpvWl2uGphj2/lzDkSOa5igrD
+	iMz8/Q3wLer8UDq4OUvQoRMrMT7DlHK7Bf+ojI1tVkCOwmg497DXvJljUNjChGqxo0FG
+	+A+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=b7TN153SgNU9lAdxdcYTX8Ms6PJ0iVr5CHXA5N0ChZ0=;
-	b=IlHU51K2zsInN2LVWNlcaBX7YN7vxLXE3r6D1w9+KdVvq0JW/QJlHLGADSCU4gCsCk
-	IaUmJy80+YDH1WjtRT5vgC058pkq6YPoRVW7IKtWc2Xqxl+rPHp7zhz1eKmY3oBpSJGx
-	eMII3LHYF3qLQD1v+zsW37bB/vMfaPySSEg3CsPBxPFBo14UDjVMHvJCveBnnbKOeN0E
-	4ryaVnwCyqvMur1OldCj9ySfmpkcSUg26Q5UMMLVAtHYkM9XBalZN02+rLpqsqldg55W
-	csY6aSlRflzEKY981Jx+zyJgz9w9hcazaNsBqLe/Y91f6ndsul3PVQ9ok+pZXh5ozsKH
-	fenA==
-X-Gm-Message-State: AOPr4FVAKBcN8UA+NNJFG8aANoGK/SN7BMpz21P6nEkgGVK9tOYYwLUqqKpvHAl9XP3nxw==
-X-Received: by 10.140.97.202 with SMTP id m68mr22175951qge.102.1461344410020; 
-	Fri, 22 Apr 2016 10:00:10 -0700 (PDT)
-Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	r136sm2618874qke.46.2016.04.22.10.00.09
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Apr 2016 10:00:09 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Apr 2016 12:59:42 -0400
-Message-Id: <1461344382-7379-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python-parted: update to version 3.10.7
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=IXSYD/NaRmALDrshzXh1PWsNglJ7mErpHY46W5GWJVM=;
+	b=TN9j5MnRJ4oKLd4eunqMYStOpVIDF8d2sM2BPTp+MFvoKuh4fFdJPjrWarzFkEmPnU
+	xtud3z5RsMgEQsAyYvPB86rmeVXsQPbZd4qS7nVTm9p4MTtU1q/nTki9lKOjsk3tXMz7
+	IbhJS/FO5+iAa0Y6yu1hqw0g7zo42r7gVbAG274SL0m8bMY8NtTqlpVHbvL4swiZGJUJ
+	5jeXwkP+2/S7KmOFnkAkH7+XcbgBeEf/C7aFGkB9bmB6LhHVyKJadsIY+1GxhPMtSksc
+	67s6soD2yzB8+4SoDoER8HVcd16WELlTJC6/vxnS5CkEH+GR40mX4hdlyNAaj5Not8Fa
+	SWww==
+X-Gm-Message-State: AOPr4FU8caj0ZvyjondlcTWA2UGjUBDdx4169VLbDgvzErF3m18ICVRy3a9lCoNijaubPQ==
+X-Received: by 10.50.155.69 with SMTP id vu5mr5778177igb.59.1461345811428;
+	Fri, 22 Apr 2016 10:23:31 -0700 (PDT)
+Received: from linux-yxv0 (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	by smtp.gmail.com with ESMTPSA id
+	v67sm4424918ioe.42.2016.04.22.10.23.30
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 22 Apr 2016 10:23:30 -0700 (PDT)
+Date: Fri, 22 Apr 2016 13:23:27 -0400
+From: Trevor Woerner <twoerner@gmail.com>
+To: "S. Lockwood-Childs" <sjl@vctlabs.com>, gary@mlbassoc.com,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20160422172327.GA32568@linux-yxv0>
+References: <20160418183719.GA7939@vctlabs.com>
+MIME-Version: 1.0
+In-Reply-To: <20160418183719.GA7939@vctlabs.com>
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Subject: Re: [meta-browsser] chromium issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,35 +58,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2016 17:00:10 -0000
+X-List-Received-Date: Fri, 22 Apr 2016 17:23:32 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../{python-pyparted_3.10.5.bb => python-pyparted_3.10.7.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-extended/python-pyparted/{python-pyparted_3.10.5.bb => python-pyparted_3.10.7.bb} (91%)
+On Mon 2016-04-18 @ 11:37:19 AM, S. Lockwood-Childs wrote:
+> If you just plan on using chromium as a normal browser without such
+> bells and whistles, don't worry about the keys and get rid of the
+> warning by setting them as blank when you start up chromium
+> 
+> export GOOGLE_API_KEY=" "
+> export GOOGLE_DEFAULT_CLIENT_ID=" "
+> export GOOGLE_DEFAULT_CLIENT_SECRET=" "
 
-diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.5.bb b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb
-similarity index 91%
-rename from meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.5.bb
-rename to meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb
-index d5b8f9a..712c4b9 100644
---- a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.5.bb
-+++ b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb
-@@ -10,10 +10,10 @@ LIC_FILES_CHKSUM = "\
- "
- DEPENDS += "parted python-re"
- 
--PV = "3.10.5+git${SRCPV}"
-+PV = "3.10.7+git${SRCPV}"
- 
- # upstream only publishes releases in github archives which are discouraged
--SRCREV = "75bba5a5c8b65b21979d69421f661f7708304191"
-+SRCREV = "69c4a478e43d3eff6ae3a0116fa38da06776d5f5"
- SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https \
-            file://0001-fix-version-float-check.patch \
- "
--- 
-1.9.1
-
+Yes, that works. Or you could use the 'disable-api-keys-info-bar'
+packageconfig option too.
 
