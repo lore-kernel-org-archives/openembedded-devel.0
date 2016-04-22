@@ -1,37 +1,44 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f42.google.com (mail-qg0-f42.google.com
-	[209.85.192.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 5CBD7612E5
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 64D12606D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 18:12:15 +0000 (UTC)
-Received: by mail-qg0-f42.google.com with SMTP id c6so63999693qga.1
+	Fri, 22 Apr 2016 18:15:04 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id e201so26748010wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 11:12:16 -0700 (PDT)
+	Fri, 22 Apr 2016 11:15:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=jqIewGUtjTvWMtcmvuXIrg/ynjiCAlRDRnR6h8UWoMU=;
+	b=hqlLNrbxanEL7r2vYoMrQdbde9IefO02mmr40erVrJnxAnBpXZsJ4Xe7m50Cbm0djb
+	FvGg+yNWCETZz+VjCdJ+Y+skdeEi0QoOjgwEU9oCAE7lnH55GvupQJzLdlR0cTtvM33+
+	P47e43auHSbqPb4z386+YjsOSDKhcuUIEBLKI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=K9lTJGd4J5j1+QXGMPkvKXHeNVX4cqA1F1VLCU+zrAk=;
-	b=UNrpzgzPCMDfJuMwuww0oTJL2E+p/F4B0tx6uOBTyjPmgUXot3wkzRQrILFtJV5cxT
-	hzRBofE2n+0dWk0Z0rYxjdlpRhVQVDmQZsm8I6CiYOKozyFMvH8YPDYOoiHkvgQY28Th
-	plioctt2QqSPFSPljU0OtyDmt+lO6dwkZJPoN8zV3qU7zUOxC2EbkUWLfMhzwH7NnXkc
-	MgFteNfBKXKYdToo6MJqSMOMrdnT9+qLTkCT+VK93MUJnzhemRQWsknjs45zE1LEj/mQ
-	lmY/a3QHnfHSLRuJdq10HU77utKh7ubwvhDuRlvhuAe5i6GdHwvF4KLu6gZVJMNl+Qtp
-	bVZA==
-X-Gm-Message-State: AOPr4FUuVY0BZra4WmOQ1p2XdDRUku200N+05ywi7Bo7Bc2eL6ZXeCF1KbVErxn/tTCg0w==
-X-Received: by 10.141.41.130 with SMTP id s124mr24161011qhe.69.1461348736469; 
-	Fri, 22 Apr 2016 11:12:16 -0700 (PDT)
-Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168])
-	by smtp.gmail.com with ESMTPSA id e63sm256680qge.45.2016.04.22.11.12.15
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Apr 2016 11:12:16 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Apr 2016 14:12:05 -0400
-Message-Id: <1461348725-16440-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-oe][PATCH] bootchart: update to 1.17
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=jqIewGUtjTvWMtcmvuXIrg/ynjiCAlRDRnR6h8UWoMU=;
+	b=OoYqibKXqGwRRpC6URmQpY0ul9huozGpA2BJ0Hy20I6rP5nSGv1c8kp/E4BFQHtkU2
+	XTdA/nRIJMShYb37+U8ktF5HNycUytp9+cwo9roVTsOegKZWupgR7rz+l+LSV8189LHU
+	Uw4eKgsyOQ9JnFQx06Qb3EAPkWASdlWX7g8Dw7xj1uYW/7LxEiw0HREIGOhf2AuotL1+
+	5zGy191SbWaV7lYY/T0Oq25u43SOebJFCnkTNPQKLHeRnai3sPEGWM/MaFFGPTTwpX6f
+	h5adKvcvOG6j0vqrGbmtUvgyLdXDV4QaaZIjxS5iumyclCsH/t6Kih7iazvWSgqIe0XV
+	Z0/Q==
+X-Gm-Message-State: AOPr4FW3GPbm2dkqoWWojKjgAxYj7zuir4UtKwXzHw0mehZf7iXbVjqpYokMrrqGASV8jzwDGWZo6RaA/gRSaNSq
+X-Received: by 10.194.114.228 with SMTP id jj4mr21767703wjb.121.1461348905024; 
+	Fri, 22 Apr 2016 11:15:05 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.194.64.196 with HTTP; Fri, 22 Apr 2016 11:14:45 -0700 (PDT)
+In-Reply-To: <CAOd_LFx1kY4d6Gt=obRY3qf3gRD_SYbmrY+-Pw-yinbA85cE8w@mail.gmail.com>
+References: <CAOd_LFyF5A_Xp5SGVM7cQXU=w3zhPeWsWVohb2V9VDVxMLwoTA@mail.gmail.com>
+	<CAP9ODKrgiJvzB5NaH6GD2Sv8nt9nKAy=1kHzYXULQDLA9hd0_Q@mail.gmail.com>
+	<CAP9ODKocX2ZV8SgatTYx6RhYfzngn_g6U7_Fq+jQHcHz7pYVgg@mail.gmail.com>
+	<CAOd_LFx1kY4d6Gt=obRY3qf3gRD_SYbmrY+-Pw-yinbA85cE8w@mail.gmail.com>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Fri, 22 Apr 2016 20:14:45 +0200
+Message-ID: <CAP71Wjwp=NnRSsRj9=o6s4yTfMH+3LxhAOyDW_4pWjuor4XcyQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: anyone using docker for OE builds?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,38 +51,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2016 18:12:17 -0000
+X-List-Received-Date: Fri, 22 Apr 2016 18:15:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-oe/recipes-devtools/bootchart/bootchart_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On Thu, Apr 21, 2016 at 9:09 PM, Cliff Brake <cbrake@bec-systems.com> wrote:
+> Thanks for all the information.
+>
+> After a week or so experimenting with Docker, I've come up with a
+> solution I like:
+>
+> https://hub.docker.com/r/cbrake/oe-build/
+>
+> Also wrote about it here:
+>
+> http://bec-systems.com/site/1281/using-docker-for-oeyocto-builds
 
-diff --git a/meta-oe/recipes-devtools/bootchart/bootchart_git.bb b/meta-oe/recipes-devtools/bootchart/bootchart_git.bb
-index a8b8184..2b75eaa 100644
---- a/meta-oe/recipes-devtools/bootchart/bootchart_git.bb
-+++ b/meta-oe/recipes-devtools/bootchart/bootchart_git.bb
-@@ -4,16 +4,16 @@ HOMEPAGE = "http://meego.gitorious.org/meego-developer-tools/bootchart"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fcb02dc552a041dee27e4b85c7396067"
- 
--PV = "1.16"
-+PV = "1.17"
- PR = "r1"
- PE = "1"
- 
--SRC_URI = "git://gitorious.org/meego-developer-tools/bootchart.git \
-+SRC_URI = "git://gitorious.org/meego-developer-tools/bootchart.git;protocol=https \
-            file://0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch \
-            file://0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch \
- "
- 
--SRCREV = "872fb107028e377eef3c0c7c8a6e0f7c32b8ebb8"
-+SRCREV = "a2c7561d4060a9f075339bda89e793c76f2ff6dd"
- 
- S = "${WORKDIR}/git"
- 
--- 
-1.9.1
+thanks for the write up.. that got me into finally looking at it ;-)
 
+is there a (nice) solution in case my host UID/GID isn't 1000/1000? I
+definitely need to mount volumes for the persistent data , but i need
+to be able to read/write these volumes from containers and host, so
+ideally i would like my containers to inherit UID/GID from an existing
+user on the host.
 
