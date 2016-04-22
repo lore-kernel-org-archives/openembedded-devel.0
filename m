@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f41.google.com (mail-qg0-f41.google.com
-	[209.85.192.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 4642E6E667
+Received: from mail-qg0-f42.google.com (mail-qg0-f42.google.com
+	[209.85.192.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 5CBD7612E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 17:51:40 +0000 (UTC)
-Received: by mail-qg0-f41.google.com with SMTP id c6so63766395qga.1
+	Fri, 22 Apr 2016 18:12:15 +0000 (UTC)
+Received: by mail-qg0-f42.google.com with SMTP id c6so63999693qga.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 10:51:41 -0700 (PDT)
+	Fri, 22 Apr 2016 11:12:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=y5oaLQx3OColhsfq1GUc3BSAreq9Dncvkub9EAqkBW4=;
-	b=L3T5+tK/O7WelYdfrmUqDmz5G/8HoKzEdpizlCX20gX0vbXsRhX5qHh7eFs2bqS8UO
-	azhCc6n4OdXNKPjcj2eNaNnZrAcxuHZ+p36zbIweWuH30RnhK08+wFbpmPrpPyIwBRSf
-	1unBKH3zwH/fZGag9s+qAOoC+luMoGakX8Z2sB6w/Tze/yW+ASqhFHElCfPSCUlTZUPB
-	f9hFw7z53UeZygcCZypUNIfnLGmssPXqrN4vsoubcr0JJlR20RZ/NElF9d/p43pHaANA
-	skRhyheESpxiRwuM5pXoWRJrtsyNXStmSFbibT489h6wrLEDeB8YK6NIzN0GvNo37ZZY
-	CgKw==
-X-Gm-Message-State: AOPr4FV0eCmGWqtevpcx7dk4XmFV3oYkkUv7d2NgmhCOYk6kMU6IqOOuQLUW98/dwSdW+Q==
-X-Received: by 10.141.1.138 with SMTP id c132mr23019459qhd.7.1461347501154;
-	Fri, 22 Apr 2016 10:51:41 -0700 (PDT)
+	bh=K9lTJGd4J5j1+QXGMPkvKXHeNVX4cqA1F1VLCU+zrAk=;
+	b=UNrpzgzPCMDfJuMwuww0oTJL2E+p/F4B0tx6uOBTyjPmgUXot3wkzRQrILFtJV5cxT
+	hzRBofE2n+0dWk0Z0rYxjdlpRhVQVDmQZsm8I6CiYOKozyFMvH8YPDYOoiHkvgQY28Th
+	plioctt2QqSPFSPljU0OtyDmt+lO6dwkZJPoN8zV3qU7zUOxC2EbkUWLfMhzwH7NnXkc
+	MgFteNfBKXKYdToo6MJqSMOMrdnT9+qLTkCT+VK93MUJnzhemRQWsknjs45zE1LEj/mQ
+	lmY/a3QHnfHSLRuJdq10HU77utKh7ubwvhDuRlvhuAe5i6GdHwvF4KLu6gZVJMNl+Qtp
+	bVZA==
+X-Gm-Message-State: AOPr4FUuVY0BZra4WmOQ1p2XdDRUku200N+05ywi7Bo7Bc2eL6ZXeCF1KbVErxn/tTCg0w==
+X-Received: by 10.141.41.130 with SMTP id s124mr24161011qhe.69.1461348736469; 
+	Fri, 22 Apr 2016 11:12:16 -0700 (PDT)
 Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	201sm2807342qhu.34.2016.04.22.10.51.40
+	[73.172.178.168])
+	by smtp.gmail.com with ESMTPSA id e63sm256680qge.45.2016.04.22.11.12.15
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Apr 2016 10:51:40 -0700 (PDT)
+	Fri, 22 Apr 2016 11:12:16 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Apr 2016 13:51:30 -0400
-Message-Id: <1461347490-13320-1-git-send-email-derek@asterius.io>
+Date: Fri, 22 Apr 2016 14:12:05 -0400
+Message-Id: <1461348725-16440-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-oe][PATCH] libgee: update to the latest stable version (0.18.0)
+Subject: [meta-oe][PATCH] bootchart: update to 1.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,29 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2016 17:51:41 -0000
+X-List-Received-Date: Fri, 22 Apr 2016 18:12:17 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/libgee/{libgee_0.16.1.bb => libgee_0.18.0.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/libgee/{libgee_0.16.1.bb => libgee_0.18.0.bb} (83%)
+ meta-oe/recipes-devtools/bootchart/bootchart_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.16.1.bb b/meta-oe/recipes-devtools/libgee/libgee_0.18.0.bb
-similarity index 83%
-rename from meta-oe/recipes-devtools/libgee/libgee_0.16.1.bb
-rename to meta-oe/recipes-devtools/libgee/libgee_0.18.0.bb
-index bf9705c..3fa9d9f 100644
---- a/meta-oe/recipes-devtools/libgee/libgee_0.16.1.bb
-+++ b/meta-oe/recipes-devtools/libgee/libgee_0.18.0.bb
-@@ -20,5 +20,5 @@ do_configure_prepend() {
+diff --git a/meta-oe/recipes-devtools/bootchart/bootchart_git.bb b/meta-oe/recipes-devtools/bootchart/bootchart_git.bb
+index a8b8184..2b75eaa 100644
+--- a/meta-oe/recipes-devtools/bootchart/bootchart_git.bb
++++ b/meta-oe/recipes-devtools/bootchart/bootchart_git.bb
+@@ -4,16 +4,16 @@ HOMEPAGE = "http://meego.gitorious.org/meego-developer-tools/bootchart"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fcb02dc552a041dee27e4b85c7396067"
  
- SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
- SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libgee/${SHRT_VER}/${BP}.tar.xz"
--SRC_URI[md5sum] = "d30cf203784431b0fdc3216b1acd999c"
--SRC_URI[sha256sum] = "d95f8ea8e78f843c71b1958fa2fb445e4a325e4821ec23d0d5108d8170e564a5"
-+SRC_URI[md5sum] = "29ea6125e653d7e60b49a9a9544abc96"
-+SRC_URI[sha256sum] = "4ad99ef937d071b4883c061df40bfe233f7649d50c354cf81235f180b4244399"
+-PV = "1.16"
++PV = "1.17"
+ PR = "r1"
+ PE = "1"
+ 
+-SRC_URI = "git://gitorious.org/meego-developer-tools/bootchart.git \
++SRC_URI = "git://gitorious.org/meego-developer-tools/bootchart.git;protocol=https \
+            file://0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch \
+            file://0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch \
+ "
+ 
+-SRCREV = "872fb107028e377eef3c0c7c8a6e0f7c32b8ebb8"
++SRCREV = "a2c7561d4060a9f075339bda89e793c76f2ff6dd"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 1.9.1
 
