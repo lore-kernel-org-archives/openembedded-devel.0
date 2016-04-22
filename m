@@ -1,45 +1,48 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id BD4BB731C8
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B69D731CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 19:49:04 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id n3so41997508wmn.0
+	Fri, 22 Apr 2016 19:49:05 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id n3so41997964wmn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 12:49:05 -0700 (PDT)
+	Fri, 22 Apr 2016 12:49:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id;
-	bh=JeSpu9z+9ye04BAB1Y2CPd85lstulcEm9UeQ4sWbGl0=;
-	b=qU02Mv2tiCFKNOPmAy+pSx2V/Oq2JZaimLTKOAAlrOMJa1aguFDhEB9EiLo8Sp13QO
-	PwJYLWNJ7ZHVx2twsMFg9/urc/DSBaG4CbjdBWncE6k+OvMnHHPcXT/nRVtDifKtSx7j
-	WnImGtqWdl2IgXwLPmjiv9xICyBySMWtrRKNQaUw/W9B62RTKPIctnOUN2zUrhed1qI1
-	uXu8Q4YYHeXiUEUJmjfsuFiVYpLkyh173e5NM0fNWb10HxXe1GaIYezZhe0Wi/v+wY1y
-	mV9eHQVFy654hGkW3F0VOhRkgJoA4f0/xZo9ZyU4z8EOHhHQ2RcIIJnVHD0Jb+VK5lpN
-	ffOA==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=C+wEIIhq5+db9vZQv9SuCQPSw0T+AUFG+ena1f0oRa0=;
+	b=ylqxA/V+So8YSzy+4DVhk2oa6hzjzag6khenAG8ZvDaSmq5+f9OdXH1j36XRzh8WE1
+	s8M6F+YTSv1q8UPu7GAHE1qrqomnlCcEp54iC6B5YzZvuPMIdX77nGKuJH+Zr1YpqmES
+	BorEBeniZkYhyDuRmdtUAv6Vrys3l888EURj1jKuVFs+ewI1RBIiiLM0+yK5hCCGWm3y
+	YJ02Gx6sOkRG/VzZQ50ElAKdCCAClarN1s/bTGJTUC/ZBWszUuzahG0/guCtGI3njPHN
+	8ZYSmy2nOeV/3GjvuyscK5AcsfT4vZ7GyC3a0dTTxn1n/8kGbTQvokHBWhZ+LjkeZgB/
+	5SQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=JeSpu9z+9ye04BAB1Y2CPd85lstulcEm9UeQ4sWbGl0=;
-	b=lkNZwW96mts4s5xLVTm1+XrV2cgmO07FrOKVJYR+DCw2ZGbu+ADruIWlXFZvoXzEry
-	pyNRxWe688RAEZtWwi1JFsxul41dCNK0aFAGa4EZDq1ZKZCAFRAMwWWylcjRNmjhymHk
-	n80zCZaT65razog2DpLLEMcm7kBG/QaYemtEoWPG8JFZE/2O42xc93X6VcqtNtrAGhs3
-	p4hVu5pOwhCz1VZJvhdZm09wNL/4n8xSYkHxfrMTlBjxZN45zfKuOJb+OK/wqLnaPe4Z
-	avK1W18SDDFep4rOoEJxdbPH7HLkGsheE7fp/+fQzQPRbgdXl6OWYIrc2fc7NV1xs4JS
-	Y2Aw==
-X-Gm-Message-State: AOPr4FWIRayOCTV+HkFxtlS3LdnyhqP5FAubm4Gy/I0rFgk75FtidnP/Vd6u6BDHfj340tkd
-X-Received: by 10.28.149.205 with SMTP id x196mr5805509wmd.67.1461354544027;
-	Fri, 22 Apr 2016 12:49:04 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=C+wEIIhq5+db9vZQv9SuCQPSw0T+AUFG+ena1f0oRa0=;
+	b=HKf/5Uf/Sn4t0PVLDuOv+A7wtEf/iJh804/5zNIZjcTIeChaCh1mxJS7qN/gmFsHN0
+	gLiN4ZEQMGxGFZVVNg9TRPpWWvEahLxhkKGgTHeIxkceoVvcuhpaUWGOqEBuG4Fye6pr
+	1gYIJfYO35nYchSQWkl9aSrAgHgVOQSuahGjJ424dthcftcbr9smR+or1kXf7Ih3fi0J
+	0zi6J0+M5ozytWj0bR8vWheZ94ZXyNbukZbcEbBLmzx8ago/Rxl1d2ikoiVTPUF5Xcqj
+	NH9JIbT9LdIqg+lO7INMBQqPok4XYe45uiFmK4dCD9E1QYoaEGjNc0qrTjThOqVg1PBL
+	hvjQ==
+X-Gm-Message-State: AOPr4FVc3jCIlEmYZpKW6sRHv66A48tq5Tv0EQC+WEkFsCclDVgKXRdAG7kl5dRlq34fNyF+
+X-Received: by 10.194.118.5 with SMTP id ki5mr21525323wjb.138.1461354545523;
+	Fri, 22 Apr 2016 12:49:05 -0700 (PDT)
 Received: from flashheart.burtonini.com (home.burtonini.com. [81.2.106.35])
-	by smtp.gmail.com with ESMTPSA id t4sm4875842wmf.8.2016.04.22.12.49.02
+	by smtp.gmail.com with ESMTPSA id t4sm4875842wmf.8.2016.04.22.12.49.04
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Apr 2016 12:49:03 -0700 (PDT)
+	Fri, 22 Apr 2016 12:49:04 -0700 (PDT)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Apr 2016 20:48:49 +0100
-Message-Id: <1461354536-23240-1-git-send-email-ross.burton@intel.com>
+Date: Fri, 22 Apr 2016 20:48:50 +0100
+Message-Id: <1461354536-23240-2-git-send-email-ross.burton@intel.com>
 X-Mailer: git-send-email 2.8.0.rc3
-Subject: [PATCH 1/8] meta-oe: use bb.utils.contains() instead of base_contains()
+In-Reply-To: <1461354536-23240-1-git-send-email-ross.burton@intel.com>
+References: <1461354536-23240-1-git-send-email-ross.burton@intel.com>
+Subject: [PATCH 2/8] meta-networking: use bb.utils.contains() instead of base_contains()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,879 +62,543 @@ replace all instances with bb.utils.contains().
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- .../recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb |  2 +-
- meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |  2 +-
- meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb   |  2 +-
- meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb       |  2 +-
- meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb    |  2 +-
- meta-oe/recipes-connectivity/zabbix/zabbix_2.4.7.bb    |  2 +-
- .../recipes-core/packagegroups/packagegroup-basic.bb   | 10 +++++-----
- .../recipes-core/packagegroups/packagegroup-boot.bb    |  2 +-
- meta-oe/recipes-devtools/ltrace/ltrace_git.bb          |  2 +-
- meta-oe/recipes-extended/corosync/corosync_2.3.5.bb    |  2 +-
- meta-oe/recipes-extended/dlm/dlm_4.0.2.bb              |  2 +-
- .../konkretcmpi/konkretcmpi-native_0.9.2.bb            |  2 +-
- meta-oe/recipes-extended/lcdproc/lcdproc_0.5.6.bb      |  2 +-
- .../openlmi/openlmi-providers_0.6.0.bb                 |  2 +-
- meta-oe/recipes-extended/openwsman/openwsman_2.6.2.bb  |  4 ++--
- meta-oe/recipes-extended/polkit/polkit_0.113.bb        |  6 +++---
- meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb       |  4 ++--
- meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb      |  6 +++---
- .../recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb    |  6 +++---
- .../smartmontools/smartmontools_6.4.bb                 |  4 ++--
- meta-oe/recipes-graphics/fbida/fbida_2.10.bb           | 14 +++++++-------
- meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb           |  2 +-
- meta-oe/recipes-graphics/lxdm/lxdm_0.5.3.bb            | 18 +++++++++---------
- meta-oe/recipes-graphics/slim/slim_1.3.2.bb            |  4 ++--
- .../terminus-font/terminus-font_4.38.bb                |  8 ++++----
- .../xserver-nodm-init/xserver-nodm-init_2.0.bb         |  2 +-
- meta-oe/recipes-kernel/ktap/ktap.inc                   |  4 ++--
- meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb     |  2 +-
- meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb |  2 +-
- meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb           |  4 ++--
- meta-oe/recipes-support/emacs/emacs.inc                |  4 ++--
- meta-oe/recipes-support/espeak/espeak_1.37.bb          |  2 +-
- meta-oe/recipes-support/fftw/fftwf_3.3.4.bb            |  2 +-
- meta-oe/recipes-support/gradm/gradm_3.1.bb             |  4 ++--
- .../recipes-support/libcanberra/libcanberra_0.30.bb    |  6 +++---
- meta-oe/recipes-support/libee/libee.inc                |  2 +-
- .../libmicrohttpd/libmicrohttpd_0.9.34.bb              |  2 +-
- meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb  |  2 +-
- meta-oe/recipes-support/lvm2/lvm2.inc                  |  4 ++--
- meta-oe/recipes-support/openct/openct_0.6.20.bb        |  4 ++--
- meta-oe/recipes-support/openwbem/openwbem_3.2.3.bb     |  4 ++--
- meta-oe/recipes-support/postgresql/postgresql.inc      |  2 +-
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc        |  6 +++---
- meta-oe/recipes-support/udisks/udisks2_2.1.5.bb        |  2 +-
- meta-oe/recipes-support/udisks/udisks_1.0.5.bb         |  2 +-
- meta-oe/recipes-support/vim/vim_7.4.769.bb             |  4 ++--
- 46 files changed, 89 insertions(+), 89 deletions(-)
+ .../recipes-connectivity/inetutils/inetutils_1.9.4.bb      |  4 ++--
+ meta-networking/recipes-connectivity/samba/samba_4.4.2.bb  |  6 +++---
+ meta-networking/recipes-daemons/autofs/autofs_5.1.1.bb     |  2 +-
+ .../recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb        |  6 +++---
+ meta-networking/recipes-daemons/dnrd/dnrd_2.20.3.bb        |  4 ++--
+ meta-networking/recipes-daemons/postfix/postfix.inc        | 12 ++++++------
+ meta-networking/recipes-daemons/squid/squid_3.5.7.bb       |  8 ++++----
+ meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb     | 14 +++++++-------
+ .../recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb           |  6 +++---
+ .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb           |  2 +-
+ meta-networking/recipes-protocols/openflow/openflow.inc    |  2 +-
+ meta-networking/recipes-protocols/quagga/quagga.inc        | 12 ++++++------
+ meta-networking/recipes-support/dnsmasq/dnsmasq.inc        | 14 +++++++-------
+ meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb  |  4 ++--
+ meta-networking/recipes-support/fping/fping_3.5.bb         |  2 +-
+ .../recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb       |  2 +-
+ .../recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb    |  2 +-
+ meta-networking/recipes-support/netcf/netcf_git.bb         |  2 +-
+ meta-networking/recipes-support/netperf/netperf_2.6.0.bb   |  4 ++--
+ meta-networking/recipes-support/nis/ypbind-mt_1.38.bb      |  2 +-
+ meta-networking/recipes-support/nis/ypbind-mt_2.2.bb       |  2 +-
+ meta-networking/recipes-support/openvpn/openvpn_2.3.8.bb   |  6 +++---
+ .../recipes-support/strongswan/strongswan_5.3.2.bb         |  4 ++--
+ meta-networking/recipes-support/stunnel/stunnel_5.28.bb    |  2 +-
+ 24 files changed, 62 insertions(+), 62 deletions(-)
 
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index b7cc416..015d446 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -37,7 +37,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+index 68487ea..58e760b 100644
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+@@ -28,8 +28,8 @@ SRC_URI[sha256sum] = "be8f75eff936b8e41b112462db51adf689715658a1b09e0d6b05d11ec9
  
- #The CUSTOM_LDSCRIPTS doesn't work with the gold linker
- do_configure() {
--    if [ "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', 'ld-is-gold', '', d)}" = "ld-is-gold" ] ; then
-+    if [ "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'ld-is-gold', '', d)}" = "ld-is-gold" ] ; then
-       sed -i 's/CUSTOM_LDSCRIPTS = yes/CUSTOM_LDSCRIPTS = no/'  Makefile
-     fi
+ inherit autotools gettext update-alternatives texinfo
  
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-index 24cd0b0..5459bf9 100644
---- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-@@ -46,7 +46,7 @@ do_install () {
+-SRC_URI += "${@base_contains('DISTRO_FEATURES', 'ipv6', '', 'file://fix-disable-ipv6.patch', d)}"
+-noipv6="${@base_contains('DISTRO_FEATURES', 'ipv6', '', '--disable-ipv6 gl_cv_socket_ipv6=no', d)}"
++SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '', 'file://fix-disable-ipv6.patch', d)}"
++noipv6="${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '', '--disable-ipv6 gl_cv_socket_ipv6=no', d)}"
  
-     echo "d root root 0755 ${localstatedir}/run/${BPN} none" \
-            > ${D}${sysconfdir}/default/volatiles/99_lmbench
--    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-         install -d ${D}${sysconfdir}/tmpfiles.d
-         echo "d /run/${BPN} - - - -" \
-               > ${D}${sysconfdir}/tmpfiles.d/lmbench.conf
-diff --git a/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
-index acae868..cfd794d 100644
---- a/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
-+++ b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
-@@ -8,7 +8,7 @@ SRC_URI = "http://www.gnokii.org/download/gnokii/gnokii-${PV}.tar.bz2"
- DEPENDS = "glib-2.0"
- X11DEPENDS = " libxpm gtk+"
+ PACKAGECONFIG ??= "ftp uucpd \
+                    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
+index 9358ca5..188dcf3 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
+@@ -32,10 +32,10 @@ DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libld
+ SYSVINITTYPE_linuxstdbase = "lsb"
+ SYSVINITTYPE = "sysv"
  
--PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
- PACKAGECONFIG[bluez4] = "--enable-bluetooth,--disable-bluetooth,bluez4"
- PACKAGECONFIG[libical] = "--enable-libical,--disable-libical,libical"
- PACKAGECONFIG[pcsc-lite] = "--enable-libpcsclite,--disable-libpcsclite,pcsc-lite"
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-index 34c2969..1165b11 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-@@ -85,7 +85,7 @@ do_install_append() {
-     mkdir -p ${D}/${sysconfdir}/default/volatiles
-     echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
-            > ${D}${sysconfdir}/default/volatiles/87_krb5
--    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-         install -d ${D}${sysconfdir}/tmpfiles.d
-         echo "d /run/krb5kdc - - - -" \
-               > ${D}${sysconfdir}/tmpfiles.d/krb5.conf
-diff --git a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
-index 857895b..b5df8e0 100644
---- a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
-+++ b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
-@@ -39,7 +39,7 @@ inherit autotools pkgconfig lib_package
- EXTRA_OECONF += "--disable-rpath"
- 
- PACKAGECONFIG ?= "\
--    ${@base_contains('DISTRO_FEATURES', 'largefile$', 'largefile', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'largefile$', 'largefile', '', d)} \
- "
- PACKAGECONFIG[doxygen] = "--enable-doxygen,--disable-doxygen"
- PACKAGECONFIG[largefile] = "--enable-largefile,--disable-largefile"
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_2.4.7.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_2.4.7.bb
-index e55c377..c2c4eae 100644
---- a/meta-oe/recipes-connectivity/zabbix/zabbix_2.4.7.bb
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix_2.4.7.bb
-@@ -60,7 +60,7 @@ do_configure_prepend() {
- }
- 
- do_install_append() {
--    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}${systemd_unitdir}/system
- 	install -m 0644 ${WORKDIR}/zabbix-agent.service ${D}${systemd_unitdir}/system/
-         sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/zabbix-agent.service
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-index 4f2992c..21dd1de 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-@@ -42,12 +42,12 @@ RDEPENDS_${PN} = "\
- #
- RRECOMMENDS_${PN} = "\
-     ${MACHINE_EXTRA_RRECOMMENDS} \
--    ${@base_contains("MACHINE_FEATURES", "usbhost", "usbutils", "", d)} \
--    ${@base_contains("MACHINE_FEATURES", "alsa", "alsa-utils-alsamixer", "", d)} \
--    ${@base_contains("MACHINE_FEATURES", "usbgadget", "kernel-module-g-ether kernel-module-g-serial kernel-module-g-mass-storage", "", d)} \
-+    ${@bb.utils.contains("MACHINE_FEATURES", "usbhost", "usbutils", "", d)} \
-+    ${@bb.utils.contains("MACHINE_FEATURES", "alsa", "alsa-utils-alsamixer", "", d)} \
-+    ${@bb.utils.contains("MACHINE_FEATURES", "usbgadget", "kernel-module-g-ether kernel-module-g-serial kernel-module-g-mass-storage", "", d)} \
-     \
--    ${@base_contains("DISTRO_FEATURES", "bluetooth", "${BLUEZ}", "", d)} \
--    ${@base_contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant", "", d)} \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "bluetooth", "${BLUEZ}", "", d)} \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant", "", d)} \
-     \
-     tzdata \
-     \
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb b/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
-index f50443d..a542ae4 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
-@@ -24,7 +24,7 @@ RDEPENDS_${PN} = "\
-     base-passwd \
-     busybox \
-     netbase \
--    ${@base_contains("MACHINE_FEATURES", "keyboard", "keymaps", "", d)} \
-+    ${@bb.utils.contains("MACHINE_FEATURES", "keyboard", "keymaps", "", d)} \
-     ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
+-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
++PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
+                    ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SYSVINITTYPE}', '', d)} \
+-                   ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+-                   ${@base_contains('DISTRO_FEATURES', 'zeroconf', 'zeroconf', '', d)} \
++                   ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
++                   ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'zeroconf', '', d)} \
+                    acl cups ldap \
  "
  
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-index d8d037e..bc4e271 100644
---- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-@@ -24,7 +24,7 @@ S = "${WORKDIR}/git"
- 
- inherit autotools
- 
--PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
-+PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
- PACKAGECONFIG[unwind] = "--with-libunwind,--without-libunwind,libunwind"
- PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,libselinux"
- 
-diff --git a/meta-oe/recipes-extended/corosync/corosync_2.3.5.bb b/meta-oe/recipes-extended/corosync/corosync_2.3.5.bb
-index 08c0893..508277e 100644
---- a/meta-oe/recipes-extended/corosync/corosync_2.3.5.bb
-+++ b/meta-oe/recipes-extended/corosync/corosync_2.3.5.bb
-@@ -41,7 +41,7 @@ do_install_append() {
-     install -m 0644 ${S}/init/corosync.in ${D}${sysconfdir}/init.d/corosync
-     install -m 0644 ${S}/init/corosync-notifyd.in ${D}${sysconfdir}/init.d/corosync-notifyd
- 
--    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}${systemd_unitdir}/system
-         install -m 0644 ${S}/init/corosync.service.in ${D}${systemd_unitdir}/system/corosync.service
-         install -m 0644 ${S}/init/corosync-notifyd.service.in ${D}${systemd_unitdir}/system/corosync-notifyd.service
-diff --git a/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
-index 560630c..ff37305 100644
---- a/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
-+++ b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
-@@ -37,7 +37,7 @@ do_install_append (){
-     install -m 0644 ${S}/init/dlm.init ${D}${sysconfdir}/init.d/dlm
- 
-     # install systemd unit files
--    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}${systemd_unitdir}/system
-         install -m 0644 ${S}/init/dlm.service ${D}${systemd_unitdir}/system
-     fi
-diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
-index 2582a77..9b2ace9 100644
---- a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
-+++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
-@@ -16,7 +16,7 @@ SRCREV = "460e6421c16a8216d29ccd1b7490f814dab8b769"
- S = "${WORKDIR}/git"
- 
- inherit native cmake
--LDFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
-+LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
- 
- EXTRA_OECMAKE = "-DWITH_PYTHON=ON \
-                  ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
-diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc_0.5.6.bb b/meta-oe/recipes-extended/lcdproc/lcdproc_0.5.6.bb
-index 4761ef7..f57e9df 100644
---- a/meta-oe/recipes-extended/lcdproc/lcdproc_0.5.6.bb
-+++ b/meta-oe/recipes-extended/lcdproc/lcdproc_0.5.6.bb
-@@ -7,7 +7,7 @@ PACKAGECONFIG ?= ""
- PACKAGECONFIG[g15] = ",,libg15 g15daemon libg15render,"
- PACKAGECONFIG[hid] = "--enable-libhid,--disable-libhid,libhid"
- 
--LCD_DRIVERS_append = "${@base_contains('PACKAGECONFIG', 'g15', '', ',!g15', d)}"
-+LCD_DRIVERS_append = "${@bb.utils.contains('PACKAGECONFIG', 'g15', '', ',!g15', d)}"
- 
- do_install_append () {
-     # binaries
-diff --git a/meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb b/meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb
-index f74fb77..6048888 100644
---- a/meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb
-+++ b/meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb
-@@ -17,7 +17,7 @@ SRC_URI[md5sum] = "5904f23cf494946237cfbbdbe644a3cd"
- SRC_URI[sha256sum] = "e2b2fbeaec45a83905d0da3b87da83904d9cd94c1b86312f844587b3fff11f56"
- 
- inherit cmake
--LDFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
-+LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
- EXTRA_OECMAKE = " \
-                  -DWITH-DEVASSISTANT=OFF \
-                  -DWITH-JOURNALD=OFF \
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.6.2.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.6.2.bb
-index bdb7ced..52b271c 100644
---- a/meta-oe/recipes-extended/openwsman/openwsman_2.6.2.bb
-+++ b/meta-oe/recipes-extended/openwsman/openwsman_2.6.2.bb
-@@ -29,7 +29,7 @@ inherit systemd cmake pkgconfig pythonnative perlnative
- SYSTEMD_SERVICE_${PN} = "openwsmand.service"
- SYSTEMD_AUTO_ENABLE = "disable"
- 
--LDFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', " -fuse-ld=bfd ", '', d)}"
-+LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', " -fuse-ld=bfd ", '', d)}"
- 
- EXTRA_OECMAKE = "-DBUILD_BINDINGS=NO \
-                  -DBUILD_LIBCIM=NO \
-@@ -50,7 +50,7 @@ do_install_append() {
-     install -m 755 ${B}/etc/init/openwsmand.sh ${D}/${sysconfdir}/init.d/openwsmand
-     ln -sf ${sysconfdir}/init.d/openwsmand ${D}/${sbindir}/rcopenwsmand
-     chmod 755 ${D}/${sysconfdir}/openwsman/owsmangencert.sh
--    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}/${systemd_unitdir}/system
-         install -m 644 ${WORKDIR}/openwsmand.service ${D}/${systemd_unitdir}/system
- 
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.113.bb b/meta-oe/recipes-extended/polkit/polkit_0.113.bb
-index aab4f54..fdd198a 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.113.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.113.bb
-@@ -9,8 +9,8 @@ DEPENDS = "expat glib-2.0 intltool-native mozjs"
- 
- inherit autotools gtk-doc pkgconfig useradd systemd gobject-introspection
- 
--PACKAGECONFIG = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
--                 ${@base_contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
-+PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
-+                 ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
- 
- PACKAGECONFIG[pam] = "--with-authfw=pam,--with-authfw=shadow,libpam,libpam"
- PACKAGECONFIG[systemd] = "--enable-libsystemd-login=yes --with-systemdsystemunitdir=${systemd_unitdir}/system/,--enable-libsystemd-login=no --with-systemdsystemunitdir=,systemd"
-@@ -20,7 +20,7 @@ PACKAGECONFIG[consolekit] = ",,,consolekit"
- PAM_SRC_URI = "file://polkit-1_pam.patch"
- SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
-            file://0001-make-netgroup-support-configurable.patch \
--           ${@base_contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
-+           ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
- "
- SRC_URI[md5sum] = "4b77776c9e4f897dcfe03b2c34198edf"
- SRC_URI[sha256sum] = "e1c095093c654951f78f8618d427faf91cf62abdefed98de40ff65eca6413c81"
-diff --git a/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb b/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
-index 8cc4aaa..a112168 100644
---- a/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
-+++ b/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
-@@ -38,13 +38,13 @@ do_install() {
-     install -m 644 rarpd.8 ${D}${mandir}/man8/rarpd.8
-     install -m 644 ${WORKDIR}/ethers.sample ${D}${sysconfdir}/ethers
- 
--    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}${systemd_unitdir}/system
-         install -m 0644 ${WORKDIR}/rarpd.service ${D}${systemd_unitdir}/system/
-     fi
- }
- 
--inherit ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','',d)}
-+inherit ${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','',d)}
- 
- SYSTEMD_PACKAGES = "${PN}"
- SYSTEMD_SERVICE_${PN} = "rarpd.service"
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb
-index 0f6b6cf..c1d923c 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb
-@@ -41,9 +41,9 @@ EXTRA_OECONF += "--enable-cached-man-pages"
- PACKAGECONFIG ??= " \
-     zlib rsyslogd rsyslogrt klog inet regexp uuid libgcrypt \
-     imdiag gnutls imfile \
--    ${@base_contains('DISTRO_FEATURES', 'snmp', 'snmp', '', d)} \
--    ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
--    ${@base_contains('DISTRO_FEATURES', 'ptest', 'testbench ${VALGRIND}', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'snmp', 'snmp', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'testbench ${VALGRIND}', '', d)} \
- "
- 
- # default yes in configure
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-index efd4295..ed5382e 100644
---- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-@@ -25,13 +25,13 @@ SRC_URI[md5sum] = "28021cdabc73690a94f4f9d57254ce30"
- SRC_URI[sha256sum] = "634a67b2f7ac3b386a79160eb44413d618e33e4e7fc74ae68b0240484af149dd"
- 
- inherit autotools
--inherit ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','', d)}
-+inherit ${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','', d)}
- 
- SYSTEMD_PACKAGES = "${PN}"
- SYSTEMD_SERVICE_${PN} = "sblim-sfcb.service"
- SYSTEMD_AUTO_ENABLE = "enable"
- 
--LDFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
-+LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
- 
- EXTRA_OECONF = '--enable-debug \
-                 --enable-ssl \
-@@ -50,7 +50,7 @@ do_install() {
- 
-     oe_runmake DESTDIR=${D} install
- 
--    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}${systemd_unitdir}/system
-         install -m 0644 ${WORKDIR}/sfcb.service ${D}${systemd_unitdir}/system/sblim-sfcb.service
-     fi
-diff --git a/meta-oe/recipes-extended/smartmontools/smartmontools_6.4.bb b/meta-oe/recipes-extended/smartmontools/smartmontools_6.4.bb
-index 4e51876..86e6d9e 100644
---- a/meta-oe/recipes-extended/smartmontools/smartmontools_6.4.bb
-+++ b/meta-oe/recipes-extended/smartmontools/smartmontools_6.4.bb
-@@ -18,8 +18,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/smartmontools/smartmontools-${PV}.tar.gz \
-            file://smartd.service \
-           "
- 
--PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'libcap-ng', 'libcap-ng', '', d)} \
--                   ${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'libcap-ng', 'libcap-ng', '', d)} \
-+                   ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
-                   "
- PACKAGECONFIG[libcap-ng] = "--with-libcap-ng=yes,--with-libcap-ng=no,libcap-ng"
- PACKAGECONFIG[selinux] = "--with-selinux=yes,--with-selinux=no,libselinux"
-diff --git a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-index 8a4c083..8d3da69 100644
---- a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-+++ b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-@@ -31,25 +31,25 @@ do_compile() {
- 
-     # Be sure to respect preferences (force to "no")
-     # Also avoid issues when ${BUILD_ARCH} == ${HOST_ARCH}
--    if [ -z "${@base_contains('PACKAGECONFIG', 'curl', 'curl', '', d)}" ]; then
-+    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'curl', 'curl', '', d)}" ]; then
-         sed -i -e '/^HAVE_LIBCURL/s/:=.*$/:= no/' ${S}/GNUmakefile
-     fi
--    if [ -z "${@base_contains('PACKAGECONFIG', 'gif', 'gif', '', d)}" ]; then
-+    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'gif', 'gif', '', d)}" ]; then
-         sed -i -e '/^HAVE_LIBGIF/s/:=.*$/:= no/' ${S}/GNUmakefile
-     fi
--    if [ -z "${@base_contains('PACKAGECONFIG', 'png', 'png', '', d)}" ]; then
-+    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'png', 'png', '', d)}" ]; then
-         sed -i -e '/^HAVE_LIBPNG/s/:=.*$/:= no/' ${S}/GNUmakefile
-     fi
--    if [ -z "${@base_contains('PACKAGECONFIG', 'tiff', 'tiff', '', d)}" ]; then
-+    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'tiff', 'tiff', '', d)}" ]; then
-         sed -i -e '/^HAVE_LIBTIFF/s/:=.*$/:= no/' ${S}/GNUmakefile
-     fi
--    if [ -z "${@base_contains('PACKAGECONFIG', 'motif', 'motif', '', d)}" ]; then
-+    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'motif', 'motif', '', d)}" ]; then
-         sed -i -e '/^HAVE_MOTIF/s/:=.*$/:= no/' ${S}/GNUmakefile
-     fi
--    if [ -z "${@base_contains('PACKAGECONFIG', 'webp', 'webp', '', d)}" ]; then
-+    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'webp', 'webp', '', d)}" ]; then
-         sed -i -e '/^HAVE_LIBWEBP/s/:=.*$/:= no/' ${S}/GNUmakefile
-     fi
--    if [ -z "${@base_contains('PACKAGECONFIG', 'lirc', 'lirc', '', d)}" ]; then
-+    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'lirc', 'lirc', '', d)}" ]; then
-         sed -i -e '/^HAVE_LIBLIRC/s/:=.*$/:= no/' ${S}/GNUmakefile
-     fi
- 
-diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-index a647911..29ed4d9 100644
---- a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-+++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-@@ -5,7 +5,7 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- DEPENDS = "babl gdk-pixbuf-native libart-lgpl gtk+ jpeg libpng libexif tiff lcms gegl poppler jasper bzip2 libgudev"
--DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', d)}"
-+DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', d)}"
- 
- inherit gnome gtk-doc
- 
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_0.5.3.bb b/meta-oe/recipes-graphics/lxdm/lxdm_0.5.3.bb
-index 2277092..407129d 100644
---- a/meta-oe/recipes-graphics/lxdm/lxdm_0.5.3.bb
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm_0.5.3.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- SRC_URI = " \
-     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}%20${PV}/${BPN}-${PV}.tar.xz \
-     file://lxdm.conf \
--    ${@base_contains('DISTRO_FEATURES', 'pam', 'file://lxdm-pam file://lxdm-pam-debug', '', d)} \
--    ${@base_contains("DISTRO_TYPE", "debug", "", "file://0001-lxdm.conf.in-blacklist-root-for-release-images.patch",d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'file://lxdm-pam file://lxdm-pam-debug', '', d)} \
-+    ${@bb.utils.contains("DISTRO_TYPE", "debug", "", "file://0001-lxdm.conf.in-blacklist-root-for-release-images.patch",d)} \
-     file://0002-let-autotools-create-lxdm.conf.patch \
- "
- SRC_URI[md5sum] = "061caae432634e6db38bbdc84bc6ffa0"
-@@ -15,10 +15,10 @@ SRC_URI[sha256sum] = "4891efee81c72a400cc6703e40aa76f3f3853833d048b72ec805da0f93
- PE = "1"
- 
- DEPENDS = "virtual/libintl intltool-native cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango iso-codes"
--DEPENDS += "${@base_contains("DISTRO_FEATURES", "systemd", "", "consolekit", d)}"
-+DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "systemd", "", "consolekit", d)}"
- 
- # combine oe-core way with angstrom DISTRO_TYPE
--DISTRO_TYPE ?= "${@base_contains("IMAGE_FEATURES", "debug-tweaks", "debug", "",d)}"
-+DISTRO_TYPE ?= "${@bb.utils.contains("IMAGE_FEATURES", "debug-tweaks", "debug", "",d)}"
- 
- inherit autotools pkgconfig gettext systemd distro_features_check
- # depends on virtual/libx11
-@@ -27,8 +27,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
- CFLAGS_append = " -fno-builtin-fork -fno-builtin-memset -fno-builtin-strstr "
- 
- EXTRA_OECONF += "--enable-gtk3=no --enable-password=yes --with-x -with-xconn=xcb \
--    ${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/ --disable-consolekit', '--without-systemdsystemunitdir', d)} \
--    ${@base_contains('DISTRO_FEATURES', 'pam', '--with-pam', '--without-pam', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/ --disable-consolekit', '--without-systemdsystemunitdir', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '--with-pam', '--without-pam', d)} \
- "
- 
- do_configure_prepend() {
-@@ -48,11 +48,11 @@ do_compile_append() {
- do_install_append() {
-     install -d ${D}${localstatedir}/lib/lxdm
-     install -m 644 ${WORKDIR}/lxdm.conf ${D}${localstatedir}/lib/lxdm
--    if ${@base_contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
-         # ArchLinux version of pam config has the following advantages:
-         # * simple setup of passwordless login
-         # * in XFCE powerdown/restart enabled in logoff dialog
--        install -m 644 ${WORKDIR}/${@base_contains("DISTRO_TYPE", "debug", "lxdm-pam-debug", "lxdm-pam",d)} ${D}${sysconfdir}/pam.d/lxdm
-+        install -m 644 ${WORKDIR}/${@bb.utils.contains("DISTRO_TYPE", "debug", "lxdm-pam-debug", "lxdm-pam",d)} ${D}${sysconfdir}/pam.d/lxdm
-     fi
- }
- 
-@@ -70,7 +70,7 @@ done
- sed -i "s:last_langs=.*$:last_langs=$langs:g" $D${localstatedir}/lib/lxdm/lxdm.conf
- }
- 
--RDEPENDS_${PN} = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-loginuid', '', d)} setxkbmap bash librsvg-gtk"
-+RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam-plugin-loginuid', '', d)} setxkbmap bash librsvg-gtk"
- 
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
-diff --git a/meta-oe/recipes-graphics/slim/slim_1.3.2.bb b/meta-oe/recipes-graphics/slim/slim_1.3.2.bb
-index 1ae8dbb..71359e0 100644
---- a/meta-oe/recipes-graphics/slim/slim_1.3.2.bb
-+++ b/meta-oe/recipes-graphics/slim/slim_1.3.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- 
- PR = "r1"
- 
--DEPENDS = "virtual/libx11 libxmu libpng jpeg freetype sessreg ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
-+DEPENDS = "virtual/libx11 libxmu libpng jpeg freetype sessreg ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- 
- SRC_URI = " \
-     http://download.berlios.de/${BPN}/${BP}.tar.gz \
-@@ -28,7 +28,7 @@ SRC_URI[sha256sum] = "f1560125005f253b9b88220598fed7a9575ef405716862c6ca3fcc72db
- 
- 
- EXTRA_OEMAKE += " \
--    USE_PAM=${@base_contains('DISTRO_FEATURES', 'pam', '1', '0', d)} \
-+    USE_PAM=${@bb.utils.contains('DISTRO_FEATURES', 'pam', '1', '0', d)} \
-     PREFIX=${prefix} \
-     CFGDIR=${sysconfdir} \
-     MANDIR=${mandir} \
-diff --git a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb
-index 337cde4..e5bea97 100644
---- a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb
-+++ b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb
-@@ -16,11 +16,11 @@ SRC_URI[sha256sum] = "f6f4876a4dabe6a37c270c20bb9e141e38fb50e0bba200e1b9d0470e5e
- 
- inherit allarch fontcache
- 
--PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-+PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
- PACKAGECONFIG[x11] = ""
- 
- # Don't use font cache mecanism for console packages
--FONT_PACKAGES = "${@base_contains('PACKAGECONFIG', 'x11', '${PN}-pcf', '', d)}"
-+FONT_PACKAGES = "${@bb.utils.contains('PACKAGECONFIG', 'x11', '${PN}-pcf', '', d)}"
- 
- # Hand made configure script. Don't need oe_runconf
- do_configure() {
-@@ -32,11 +32,11 @@ do_configure() {
- }
- 
- do_compile() {
--    oe_runmake DESTDIR=${D} psf txt ${@base_contains('PACKAGECONFIG', 'x11', 'pcf', '', d)}
-+    oe_runmake DESTDIR=${D} psf txt ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'pcf', '', d)}
- }
- 
- do_install() {
--    oe_runmake DESTDIR=${D} install-psf install-acm ${@base_contains('PACKAGECONFIG', 'x11', 'install-pcf', '', d)}
-+    oe_runmake DESTDIR=${D} install-psf install-acm ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'install-pcf', '', d)}
- }
- 
- PACKAGES += "${PN}-consolefonts ${PN}-consoletrans ${PN}-pcf"
-diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-index b29d075..95a07d1 100644
---- a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-+++ b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-@@ -24,7 +24,7 @@ do_install() {
- 
-     install -d ${D}${sysconfdir}/default
- 
--    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}${systemd_unitdir}/system
-         install xserver-nodm.conf ${D}${sysconfdir}/default/xserver-nodm
-         install -m 0644 ${WORKDIR}/xserver-nodm.service ${D}${systemd_unitdir}/system
-diff --git a/meta-oe/recipes-kernel/ktap/ktap.inc b/meta-oe/recipes-kernel/ktap/ktap.inc
-index e2e498f..c214a02 100644
---- a/meta-oe/recipes-kernel/ktap/ktap.inc
-+++ b/meta-oe/recipes-kernel/ktap/ktap.inc
-@@ -21,6 +21,6 @@ PACKAGECONFIG[libelf] = ",,elfutils"
- PACKAGECONFIG ?= "libelf"
- 
- EXTRA_OEMAKE = " \
--    ${@base_contains('PACKAGECONFIG', 'libelf', '', 'NO_LIBELF=1', d)} \
--    ${@base_contains('PACKAGECONFIG', 'ffi', 'FFI=1', '', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'libelf', '', 'NO_LIBELF=1', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'ffi', 'FFI=1', '', d)} \
- "
-diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-index 191d4b9..145497a 100644
---- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-@@ -14,7 +14,7 @@ RCONFLICTS_${PN} = "mplayer"
- REQUIRED_DISTRO_FEATURES = "x11"
- 
- # because it depends on libpostproc/libav which has commercial flag
--LICENSE_FLAGS = "${@base_contains('PACKAGECONFIG', 'postproc', 'commercial', '', d)}"
-+LICENSE_FLAGS = "${@bb.utils.contains('PACKAGECONFIG', 'postproc', 'commercial', '', d)}"
- 
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb
-index a5c802c..75a42a2 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
- PROVIDES = "libv4l media-ctl"
- 
- DEPENDS = "jpeg \
--           ${@base_contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
-+           ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
- 
- inherit autotools gettext pkgconfig
- 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-index a300595..aef9b13 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-@@ -30,12 +30,12 @@ inherit scons update-rc.d python-dir pythonnative systemd bluetooth
- INITSCRIPT_NAME = "gpsd"
- INITSCRIPT_PARAMS = "defaults 35"
- 
--SYSTEMD_OESCONS = "${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false',d)}"
-+SYSTEMD_OESCONS = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false',d)}"
- 
- export STAGING_INCDIR
- export STAGING_LIBDIR
- 
--PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)}"
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)}"
- PACKAGECONFIG[bluez] = "bluez='true',bluez='false',${BLUEZ}"
- PACKAGECONFIG[qt] = "qt='yes',qt='no',qt4-x11-free"
- EXTRA_OESCONS = " \
-diff --git a/meta-oe/recipes-support/emacs/emacs.inc b/meta-oe/recipes-support/emacs/emacs.inc
-index e706b18..ffb5c50 100644
---- a/meta-oe/recipes-support/emacs/emacs.inc
-+++ b/meta-oe/recipes-support/emacs/emacs.inc
-@@ -18,7 +18,7 @@ X11DEPENDS = " \
- 
- EXTRA_OECONF =  "--without-sound --with-crt-dir=${STAGING_LIBDIR} "
- 
--PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
- PACKAGECONFIG[x11] = "--with-x-toolkit=gtk,--without-x --without-dbus,${X11DEPENDS}"
- 
- 
-@@ -86,7 +86,7 @@ do_compile_prepend() {
-     ${STAGING_DIR_TARGET}/${base_libdir}/libgcc_s.so.* \
-     ${STAGING_DIR_TARGET}/${base_libdir}/libpthread* $treedir/${base_libdir}/
- 
--    if [ ! -z "${@base_contains('PACKAGECONFIG', 'x11', 'x11', '', d)}" ] ; then
-+    if [ ! -z "${@bb.utils.contains('PACKAGECONFIG', 'x11', 'x11', '', d)}" ] ; then
-         echo "X11 build enabled"
-         # copy only as much stuff as we need
-         # before: 5.5G   ../../qemu-treedir/
-diff --git a/meta-oe/recipes-support/espeak/espeak_1.37.bb b/meta-oe/recipes-support/espeak/espeak_1.37.bb
-index cf05d26..273fe34 100644
---- a/meta-oe/recipes-support/espeak/espeak_1.37.bb
-+++ b/meta-oe/recipes-support/espeak/espeak_1.37.bb
-@@ -1,7 +1,7 @@
- require espeak.inc
- inherit siteinfo
- 
--EXTRA_PHONEMES = '${@base_contains("SITEINFO_ENDIANNESS", "be",  "espeak-data (= ${PV})", "", d)}'
-+EXTRA_PHONEMES = '${@bb.utils.contains("SITEINFO_ENDIANNESS", "be",  "espeak-data (= ${PV})", "", d)}'
- RDEPENDS_${PN} = "portaudio-v19 ${EXTRA_PHONEMES}"
- 
- SRC_URI[md5sum] = "5c7b292d0537232868b4ac1317d76c02"
-diff --git a/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb b/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
-index 7a4fbac..4a65986 100644
---- a/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
-+++ b/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
-@@ -4,7 +4,7 @@ require fftw.inc
- EXCLUDE_FROM_WORLD = "1"
- 
- EXTRA_OECONF += "--enable-single \
--    ${@base_contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)} \
-+    ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)} \
- "
- 
- SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
-diff --git a/meta-oe/recipes-support/gradm/gradm_3.1.bb b/meta-oe/recipes-support/gradm/gradm_3.1.bb
-index fe36fba..252b19d 100644
---- a/meta-oe/recipes-support/gradm/gradm_3.1.bb
-+++ b/meta-oe/recipes-support/gradm/gradm_3.1.bb
-@@ -9,7 +9,7 @@ HOMEPAGE = "http://grsecurity.net/index.php"
- SECTION = "admin"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4641e94ec96f98fabc56ff9cc48be14b"
--DEPENDS = "flex-native bison-native ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
-+DEPENDS = "flex-native bison-native ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- 
- SRC_URI = "http://grsecurity.net/stable/${BP}-201507191652.tar.gz \
-            file://0001-Makefile-remove-strip.patch"
-@@ -26,7 +26,7 @@ do_compile() {
-                'LLEX=${STAGING_BINDIR_NATIVE}/lex'      \
-                'FLEX=${STAGING_BINDIR_NATIVE}/flex'     \
-                'BISON=${STAGING_BINDIR_NATIVE}/bison'   \
--               ${@base_contains('DISTRO_FEATURES', 'pam', ' ', 'nopam', d)}
-+               ${@bb.utils.contains('DISTRO_FEATURES', 'pam', ' ', 'nopam', d)}
- }
- 
- do_install() {
-diff --git a/meta-oe/recipes-support/libcanberra/libcanberra_0.30.bb b/meta-oe/recipes-support/libcanberra/libcanberra_0.30.bb
-index 26638c3..f473775 100644
---- a/meta-oe/recipes-support/libcanberra/libcanberra_0.30.bb
-+++ b/meta-oe/recipes-support/libcanberra/libcanberra_0.30.bb
-@@ -22,9 +22,9 @@ EXTRA_OECONF = "\
-     --disable-lynx \
- "
- 
--PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','alsa','alsa','',d)} \
--                   ${@base_contains('DISTRO_FEATURES','pulseaudio','pulseaudio','',d)} \
--                   ${@base_contains('DISTRO_FEATURES','x11','gtk gtk3','',d)} \
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','alsa','alsa','',d)} \
-+                   ${@bb.utils.contains('DISTRO_FEATURES','pulseaudio','pulseaudio','',d)} \
-+                   ${@bb.utils.contains('DISTRO_FEATURES','x11','gtk gtk3','',d)} \
- "
- PACKAGECONFIG[alsa] = "--enable-alsa, --disable-alsa, alsa-lib"
- PACKAGECONFIG[pulseaudio] = "--enable-pulse, --disable-pulse, pulseaudio"
-diff --git a/meta-oe/recipes-support/libee/libee.inc b/meta-oe/recipes-support/libee/libee.inc
-index 5b552ca..256fa05 100644
---- a/meta-oe/recipes-support/libee/libee.inc
-+++ b/meta-oe/recipes-support/libee/libee.inc
-@@ -18,7 +18,7 @@ inherit autotools ptest pkgconfig
- 
- DEPENDS += "libestr"
- 
--PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'ptest', 'testbench', '', d)}"
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'testbench', '', d)}"
- 
- PACKAGECONFIG[debug] = "--enable-debug,--disable-debug,,"
- PACKAGECONFIG[testbench] = "--enable-testbench,--disable-testbench,,"
-diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-index e3c833b..a4a0f38 100644
---- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-+++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-@@ -16,7 +16,7 @@ EXTRA_OECONF += "--disable-static --with-gnutls=${STAGING_LIBDIR}/../ --disable-
- 
- PACKAGECONFIG ?= "curl"
- PACKAGECONFIG_append_class-target = "\
--        ${@base_contains('DISTRO_FEATURES', 'largefile', 'largefile', '', d)} \
-+        ${@bb.utils.contains('DISTRO_FEATURES', 'largefile', 'largefile', '', d)} \
- "
- PACKAGECONFIG[largefile] = "--enable-largefile,--disable-largefile,,"
- PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,"
-diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-index 62ea131..857a57b 100644
---- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-+++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-@@ -55,7 +55,7 @@ do_install() {
-     install -m 0755 ${WORKDIR}/sensord.init ${D}${sysconfdir}/init.d/sensord
- 
-     # Insall sensord service script
--    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}${systemd_unitdir}/system
-         install -m 0644 ${S}/prog/init/*.service ${D}${systemd_unitdir}/system
-     fi
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index a8d44da..3a5e1c4 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -17,7 +17,7 @@ S = "${WORKDIR}/LVM2.${PV}"
- 
- inherit autotools-brokensep pkgconfig systemd
- 
--PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
- 
- PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
- PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
-@@ -43,7 +43,7 @@ do_install_append() {
-     # Install machine specific configuration file
-     install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
-     sed -i -e 's:@libdir@:${libdir}:g' ${D}${sysconfdir}/lvm/lvm.conf
--    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         oe_runmake 'DESTDIR=${D}' install install_systemd_units
-         sed -i -e 's:/usr/bin/true:${base_bindir}/true:g' ${D}${systemd_system_unitdir}/blk-availability.service
-     else
-diff --git a/meta-oe/recipes-support/openct/openct_0.6.20.bb b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-index 3197845..bf1ff57 100644
---- a/meta-oe/recipes-support/openct/openct_0.6.20.bb
-+++ b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-@@ -24,7 +24,7 @@ SRC_URI[sha256sum] = "6cd3e2933d29eb1f875c838ee58b8071fd61f0ec8ed5922a86c01c805d
- LICENSE = "LGPLv2+"
- LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
- 
--inherit ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','', d)}
-+inherit ${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','', d)}
- SYSTEMD_SERVICE_${PN} += "openct.service "
- SYSTEMD_AUTO_ENABLE = "enable"
- 
-@@ -73,7 +73,7 @@ do_install () {
-     install -Dpm 755 ${WORKDIR}/openct.init ${D}/etc/init.d/openct
-     install -Dpm 644 ${WORKDIR}/openct.sysconfig ${D}/etc/sysconfig/openct
- 
--    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}/${systemd_unitdir}/system
-         install -m 644 ${WORKDIR}/openct.service ${D}/${systemd_unitdir}/system
-     fi
-diff --git a/meta-oe/recipes-support/openwbem/openwbem_3.2.3.bb b/meta-oe/recipes-support/openwbem/openwbem_3.2.3.bb
-index 1b18632..ed8ef26 100644
---- a/meta-oe/recipes-support/openwbem/openwbem_3.2.3.bb
-+++ b/meta-oe/recipes-support/openwbem/openwbem_3.2.3.bb
-@@ -64,7 +64,7 @@ do_install() {
-     
-     # fix up hardcoded paths
-     sed -i -e 's,/usr/sbin/,${sbindir}/,' ${WORKDIR}/owcimomd.service
--    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -d ${D}/${systemd_unitdir}/system
-         install -m 644 ${WORKDIR}/owcimomd.service ${D}/${systemd_unitdir}/system
-         install -m 755 ${WORKDIR}/checkserverkey ${D}${sysconfdir}/openwbem/
-@@ -93,7 +93,7 @@ do_install() {
-     touch ${D}/var/lib/openwbem/{classassociation,instances,instassociation,namespaces,schema}.{dat,ndx,lock}
- }
- 
--inherit ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','', d)}
-+inherit ${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','', d)}
- SYSTEMD_SERVICE_${PN} = "owcimomd.service"
- SYSTEMD_AUTO_ENABLE = "disable"
- FILES_${PN} += " \
-diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index 806c638..288a2d1 100644
---- a/meta-oe/recipes-support/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -55,7 +55,7 @@ pkg_postinst_${PN} () {
-     fi
- }
- 
--enable_pam = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
-+enable_pam = "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
- PACKAGECONFIG ??= "${enable_pam} openssl python uuid libxml tcl nls libxml perl"
+diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.1.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.1.bb
+index 0f4c247..3b52ed4 100644
+--- a/meta-networking/recipes-daemons/autofs/autofs_5.1.1.bb
++++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.1.bb
+@@ -36,7 +36,7 @@ CFLAGS += "${LDFLAGS}"
+ 
+ PACKAGECONFIG[systemd] = "--with-systemd=${systemd_unitdir}/system,--without-systemd,systemd"
+ 
+-PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
++PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+ 
+ EXTRA_OEMAKE = "DONTSTRIP=1"
+ EXTRA_OECONF += "--disable-mount-locking \
+diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+index 5da3d96..5046818 100644
+--- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
++++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+@@ -24,8 +24,8 @@ EXTRA_OECONF += "--with-dblib=berkeley \
+                  andrew_cv_runpath_switch=none"
+ 
+ PACKAGECONFIG ??= "ntlm \
+-        ${@base_contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
+-        ${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
++        ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
++        ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
+         "
+ PACKAGECONFIG[gssapi] = "--enable-gssapi=yes,--enable-gssapi=no,krb5,"
  PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
- PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,"
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index ed41f01..382dc5e 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -41,8 +41,8 @@ CONFIG_TLS = "--enable-thread-tls"
- CONFIG_TLS_arm = "${@base_conditional( "DEBUG_BUILD", "1", " --disable-thread-tls", " --enable-thread-tls", d )}"
- 
- PACKAGECONFIG ??= "openssl \
--    ${@base_contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
--    ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
- "
- PACKAGECONFIG[openssl] = "--enable-ssl,--disable-ssl,openssl,"
- PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,,"
-@@ -57,7 +57,7 @@ PACKAGECONFIG[tcp-wrapper] = "--enable-tcp-wrapper,--disable-tcp-wrapper,tcp-wra
- PACKAGECONFIG[geoip] = "--enable-geoip,--disable-geoip,geoip,"
- 
- do_configure_prepend() {
--    eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
-+    eval "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
+@@ -54,7 +54,7 @@ do_compile_prepend () {
  }
  
  do_install_append() {
-diff --git a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb b/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
-index 72db886..f365cfa 100644
---- a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
-+++ b/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
-@@ -3,7 +3,7 @@ LICENSE = "GPLv2+ & LGPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=dd79f6dbbffdbc8e86b086a8f0c0ef43"
+-    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+         install -d ${D}${systemd_unitdir}/system
+         install -m 0644 ${WORKDIR}/saslauthd.service ${D}${systemd_unitdir}/system
  
- DEPENDS = "acl libatasmart polkit libgudev dbus-glib glib-2.0 intltool-native gnome-common-native"
--DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
-+DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+diff --git a/meta-networking/recipes-daemons/dnrd/dnrd_2.20.3.bb b/meta-networking/recipes-daemons/dnrd/dnrd_2.20.3.bb
+index 8769e52..b5851a9 100644
+--- a/meta-networking/recipes-daemons/dnrd/dnrd_2.20.3.bb
++++ b/meta-networking/recipes-daemons/dnrd/dnrd_2.20.3.bb
+@@ -22,7 +22,7 @@ SYSTEMD_SERVICE_${PN} = "dnrd.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
  
- RDEPENDS_${PN} = "acl"
+ inherit autotools
+-inherit ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','', d)}
++inherit ${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','', d)}
  
-diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-index 8ddc20d..eec6933 100644
---- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-+++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=73d83aebe7e4b62346afde80e0e94273"
- DEPENDS = "libatasmart sg3-utils polkit libgudev dbus-glib glib-2.0 intltool-native lvm2"
- # optional dependencies: device-mapper parted
+ do_install() {
+     oe_runmake install DESTDIR=${D} INSTALL="install -p"
+@@ -34,7 +34,7 @@ do_install() {
+     install -p -m 0644 ${WORKDIR}/dnrd.conf.sample ${D}${sysconfdir}/dnrd/dnrd.conf
+     install -p -m 0755 ${WORKDIR}/dnrd.init ${D}${sysconfdir}/init.d/dnrd
  
--DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
-+DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+-    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+         install -d -m 0755 ${D}${systemd_unitdir}/system
+         install -m 644 ${WORKDIR}/dnrd.service ${D}${systemd_unitdir}/system
+     fi
+diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
+index 17dbf76..228a815 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix.inc
++++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+@@ -7,8 +7,8 @@ has a definite Sendmail-ish flavor, but the inside is completely different."
+ HOMEPAGE= "http://www.postfix.org"
+ SECTION = "mail"
+ DEPENDS = "virtual/db libpcre openssl postfix-native \
+-    ${@base_contains('DISTRO_FEATURES', 'ldap', 'openldap', '', d)} \
+-    ${@base_contains('DISTRO_FEATURES', 'sasl', 'cyrus-sasl', '', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', 'openldap', '', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'sasl', 'cyrus-sasl', '', d)} \
+ "
+ DEPENDS_class-native = "virtual/db-native openssl-native libpcre-native"
  
- SRC_URI = " \
-     http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
-diff --git a/meta-oe/recipes-support/vim/vim_7.4.769.bb b/meta-oe/recipes-support/vim/vim_7.4.769.bb
-index c257d90..08e5027 100644
---- a/meta-oe/recipes-support/vim/vim_7.4.769.bb
-+++ b/meta-oe/recipes-support/vim/vim_7.4.769.bb
-@@ -32,8 +32,8 @@ do_configure () {
+@@ -52,9 +52,9 @@ export SYSLIBS = "${LDFLAGS}"
  
- #Available PACKAGECONFIG options are gtkgui, acl, x11, tiny
+ # ldap support
+ export CCARGS-ldap  = "\
+-    ${@base_contains('DISTRO_FEATURES', 'ldap', '-DHAS_LDAP', '', d)}"
++    ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', '-DHAS_LDAP', '', d)}"
+ export AUXLIBS-ldap = "\
+-    ${@base_contains('DISTRO_FEATURES', 'ldap', '-lldap -llber', '', d)}"
++    ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', '-lldap -llber', '', d)}"
+ 
+ # no native openldap
+ export CCARGS-ldap_class-native = ""
+@@ -63,9 +63,9 @@ export AUXLIBS-ldap_class-native = ""
+ # SASL support -DUSE_LDAP_SASL -DUSE_SASL_AUTH
+ # current openldap didn't enable SASL
+ export CCARGS-sasl  = "\
+-    ${@base_contains('DISTRO_FEATURES', 'sasl', '-DUSE_SASL_AUTH -DUSE_CYRUS_SASL -I=/usr/include/sasl', '', d)}"
++    ${@bb.utils.contains('DISTRO_FEATURES', 'sasl', '-DUSE_SASL_AUTH -DUSE_CYRUS_SASL -I=/usr/include/sasl', '', d)}"
+ export AUXLIBS-sasl = "\
+-    ${@base_contains('DISTRO_FEATURES', 'sasl', '-lsasl2', '', d)}"
++    ${@bb.utils.contains('DISTRO_FEATURES', 'sasl', '-lsasl2', '', d)}"
+ export CCARGS-sasl_class-native = ""
+ export AUXLIBS-sasl_class-native = ""
+ 
+diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
+index a94fed7..c3eabcd 100644
+--- a/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
++++ b/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
+@@ -34,15 +34,15 @@ inherit autotools useradd ptest
+ USERADD_PACKAGES = "${PN}"
+ USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --shell /bin/false --user-group squid"
+ 
+-PACKAGECONFIG ??= "${@base_contains('TARGET_ARCH', 'powerpc', 'noatomics', '', d)} \
+-                   ${@base_contains('TARGET_ARCH', 'mips', 'noatomics', '', d)} \
++PACKAGECONFIG ??= "${@bb.utils.contains('TARGET_ARCH', 'powerpc', 'noatomics', '', d)} \
++                   ${@bb.utils.contains('TARGET_ARCH', 'mips', 'noatomics', '', d)} \
+                   "
+ PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
+ PACKAGECONFIG[noatomics] = "squid_cv_gnu_atomics=no,squid_cv_gnu_atomics=yes,,"
+ 
+ BASIC_AUTH = "DB SASL LDAP NIS"
+-DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+-BASIC_AUTH += "${@base_contains('DISTRO_FEATURES', 'pam', 'PAM', '', d)}"
++DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
++BASIC_AUTH += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'PAM', '', d)}"
+ 
+ EXTRA_OECONF += "--with-default-user=squid --enable-auth-basic='${BASIC_AUTH}'"
+ export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
+diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
+index 4ee881d..6c8ba91 100644
+--- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
++++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
+@@ -29,13 +29,13 @@ SRC_URI[sha256sum] = "9d4d2bf6e6e2884852ba4e69e157a2cecd68c5a7635d66a3a8cf8d898c
+ 
+ PACKAGECONFIG ??= "tcp-wrappers"
+ PACKAGECONFIG[tcp-wrappers] = ",,tcp-wrappers"
+-SRC_URI +="${@base_contains('PACKAGECONFIG', 'tcp-wrappers', 'file://vsftpd-tcp_wrappers-support.patch', '', d)}"
++SRC_URI +="${@bb.utils.contains('PACKAGECONFIG', 'tcp-wrappers', 'file://vsftpd-tcp_wrappers-support.patch', '', d)}"
+ 
+-DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+-RDEPENDS_${PN} += "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-listfile', '', d)}"
+-PAMLIB = "${@base_contains('DISTRO_FEATURES', 'pam', '-L${STAGING_BASELIBDIR} -lpam', '', d)}"
+-NOPAM_SRC ="${@base_contains('PACKAGECONFIG', 'tcp-wrappers', 'file://nopam-with-tcp_wrappers.patch', 'file://nopam.patch', d)}"
+-SRC_URI += "${@base_contains('DISTRO_FEATURES', 'pam', '', '${NOPAM_SRC}', d)}"
++DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
++RDEPENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam-plugin-listfile', '', d)}"
++PAMLIB = "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '-L${STAGING_BASELIBDIR} -lpam', '', d)}"
++NOPAM_SRC ="${@bb.utils.contains('PACKAGECONFIG', 'tcp-wrappers', 'file://nopam-with-tcp_wrappers.patch', 'file://nopam.patch', d)}"
++SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '', '${NOPAM_SRC}', d)}"
+ 
+ inherit update-rc.d useradd systemd
+ 
+@@ -75,7 +75,7 @@ do_install() {
+         sed -i "s:/lib/security:${base_libdir}/security:" ${D}${sysconfdir}/pam.d/vsftpd
+         sed -i "s:ftpusers:vsftpd.ftpusers:" ${D}${sysconfdir}/pam.d/vsftpd
+     fi
+-    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+         install -d ${D}${sysconfdir}/tmpfiles.d
+         echo "d /var/run/vsftpd/empty 0755 root root -" \
+         > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
+index e29369c..66bb4cc 100644
+--- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
+@@ -26,7 +26,7 @@ SRC_URI[patch15.sha256sum] = "2bc071c438e8b0ed42a0bd2db2d8b681b27a1e9b1798694d98
+ PAM_SRC_URI = "file://rexec.pam \
+ 	file://rlogin.pam \
+ 	file://rsh.pam"
+-SRC_URI += "${@base_contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)}"
++SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)}"
+ 
+ inherit pkgconfig
+ 
+@@ -41,7 +41,7 @@ do_configure () {
+     ./configure --prefix=${prefix} --exec-prefix=${exec_prefix}
+     echo "INSTALLROOT=${D}" > MCONFIG
+ 
+-    if [ "${@base_contains('PACKAGECONFIG', 'pam', 'pam', '', d)}" != "" ]; then
++    if [ "${@bb.utils.contains('PACKAGECONFIG', 'pam', 'pam', '', d)}" != "" ]; then
+         echo "USE_PAM=1" >> MCONFIG
+     fi
+ 
+@@ -63,7 +63,7 @@ do_install () {
+     'BINDIR=${bindir}' 'SBINDIR=${sbindir}' \
+     'MANDIR=${mandir}' install
+ 
+-    if [ "${@base_contains('PACKAGECONFIG', 'pam', 'pam', '', d)}" != "" ]; then
++    if [ "${@bb.utils.contains('PACKAGECONFIG', 'pam', 'pam', '', d)}" != "" ]; then
+         install -d ${D}${sysconfdir}/pam.d
+         install -m 0644 debian/hosts.equiv ${D}/${sysconfdir}
+         install -m 0644 ${WORKDIR}/rexec.pam ${D}/${sysconfdir}/pam.d/rexec
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+index 1a50932..ca8a6ba 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+@@ -143,7 +143,7 @@ INITSCRIPT_PACKAGES = "${PN}-server"
+ INITSCRIPT_NAME_${PN}-server = "snmpd"
+ INITSCRIPT_PARAMS_${PN}-server = "start 90 2 3 4 5 . stop 60 0 1 6 ."
+ 
+-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemd', '--without-systemd', d)}"
++EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemd', '--without-systemd', d)}"
+ 
+ SYSTEMD_PACKAGES = "${PN}-server-snmpd \
+                     ${PN}-server-snmptrapd"
+diff --git a/meta-networking/recipes-protocols/openflow/openflow.inc b/meta-networking/recipes-protocols/openflow/openflow.inc
+index 5f465ce..d309ae1 100644
+--- a/meta-networking/recipes-protocols/openflow/openflow.inc
++++ b/meta-networking/recipes-protocols/openflow/openflow.inc
+@@ -20,7 +20,7 @@ PACKAGECONFIG[openssl] = "--enable-ssl,--disable-ssl, openssl, libssl"
+ 
+ EXTRA_OECONF += " \
+                  KARCH=${TARGET_ARCH} \
+-                 ${@base_contains('PACKAGECONFIG', 'openssl', 'SSL_LIBS="-lssl -lcrypto"', '', d)} \
++                 ${@bb.utils.contains('PACKAGECONFIG', 'openssl', 'SSL_LIBS="-lssl -lcrypto"', '', d)} \
+                 "
+ 
+ S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+index de78e26..4244fdf 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga.inc
++++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+@@ -9,8 +9,8 @@ HOMEPAGE = "http://www.nongnu.org/quagga/"
+ SECTION = "net"
+ LICENSE = "GPL-2.0 & LGPL-2.0"
+ DEPENDS = "readline ncurses perl-native"
+-DEPENDS += "${@base_contains('DISTRO_FEATURES', 'snmp', 'net-snmp', '', d)}"
+-SNMP_CONF="${@base_contains('DISTRO_FEATURES', 'snmp', '--enable-snmp', '', d)}"
++DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'snmp', 'net-snmp', '', d)}"
++SNMP_CONF="${@bb.utils.contains('DISTRO_FEATURES', 'snmp', '--enable-snmp', '', d)}"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=81bcece21748c91ba9992349a91ec11d \
+                     file://COPYING.LIB;md5=01ef24401ded36cd8e5d18bfe947240c"
+@@ -41,7 +41,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz; \
+            file://zebra.service \
+ "
+ 
+-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
++PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+ PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
+ PACKAGECONFIG[pam] = "--with-libpam, --without-libpam, libpam"
+ 
+@@ -62,7 +62,7 @@ EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
+                 --enable-exampledir=${docdir}/quagga/examples/ \
+                 --enable-vtysh \
+                 --enable-isisd \
+-                ${@base_contains('DISTRO_FEATURES', 'sysvinit', '--enable-watchquagga', '--disable-watchquagga', d)} \
++                ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '--enable-watchquagga', '--disable-watchquagga', d)} \
+                 --enable-ospf-te \
+                 --enable-opaque-lsa \
+                 --enable-ospfclient=yes \
+@@ -125,7 +125,7 @@ do_install () {
+         fi
+     done
+ 
+-    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+         install -d ${D}${sysconfdir}/tmpfiles.d
+         echo "d /var/run/quagga 0755 quagga quagga -" \
+         > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+@@ -162,7 +162,7 @@ pkg_postinst_${PN} () {
+ # Split into a main package and separate per-protocol packages
+ PACKAGE_BEFORE_PN = "${PN}-ospfd ${PN}-ospf6d ${PN}-babeld ${PN}-bgpd \
+                      ${PN}-ripd ${PN}-ripngd ${PN}-isisd \
+-                     ${PN}-ospfclient ${@base_contains('DISTRO_FEATURES', 'sysvinit', '${PN}-watchquagga', '', d)}"
++                     ${PN}-ospfclient ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${PN}-watchquagga', '', d)}"
+ 
+ RDEPENDS_${PN} += "${PN}-babeld ${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-ripd ${PN}-ripngd"
+ 
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+index cc7f9e3..793c106 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+@@ -26,10 +26,10 @@ PACKAGECONFIG[conntrack] = ",,libnetfilter-conntrack"
+ PACKAGECONFIG[lua] = ",,lua"
+ PACKAGECONFIG[resolvconf] = ",,,resolvconf"
+ EXTRA_OEMAKE = "\
+-    'COPTS=${@base_contains('PACKAGECONFIG', 'dbus', '-DHAVE_DBUS', '', d)} \
+-           ${@base_contains('PACKAGECONFIG', 'idn', '-DHAVE_IDN', '', d)} \
+-           ${@base_contains('PACKAGECONFIG', 'conntrack', '-DHAVE_CONNTRACK', '', d)} \
+-           ${@base_contains('PACKAGECONFIG', 'lua', '-DHAVE_LUASCRIPT', '', d)}' \
++    'COPTS=${@bb.utils.contains('PACKAGECONFIG', 'dbus', '-DHAVE_DBUS', '', d)} \
++           ${@bb.utils.contains('PACKAGECONFIG', 'idn', '-DHAVE_IDN', '', d)} \
++           ${@bb.utils.contains('PACKAGECONFIG', 'conntrack', '-DHAVE_CONNTRACK', '', d)} \
++           ${@bb.utils.contains('PACKAGECONFIG', 'lua', '-DHAVE_LUASCRIPT', '', d)}' \
+     'CFLAGS=${CFLAGS}' \
+     'LDFLAGS=${LDFLAGS}' \
+ "
+@@ -53,7 +53,7 @@ do_install () {
+ 
+     install -d ${D}${systemd_unitdir}/system
+ 
+-    if [ "${@base_contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
++    if [ "${@bb.utils.contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
+         install -m 0644 ${WORKDIR}/dnsmasq-resolvconf.service ${D}${systemd_unitdir}/system/dnsmasq.service
+     else
+         install -m 0644 ${WORKDIR}/dnsmasq-noresolvconf.service ${D}${systemd_unitdir}/system/dnsmasq.service
+@@ -61,11 +61,11 @@ do_install () {
+ 
+     install -m 0755 ${S}/contrib/wrt/dhcp_release ${D}${bindir}
+ 
+-    if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" != "" ]; then
++    if [ "${@bb.utils.contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" != "" ]; then
+         install -d ${D}${sysconfdir}/dbus-1/system.d
+         install -m 644 dbus/dnsmasq.conf ${D}${sysconfdir}/dbus-1/system.d/
+     fi
+-    if [ "${@base_contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
++    if [ "${@bb.utils.contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
+         install -d ${D}${sysconfdir}/resolvconf/update.d/
+         install -m 0755 ${WORKDIR}/dnsmasq.resolvconf ${D}${sysconfdir}/resolvconf/update.d/dnsmasq
+ 
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb
+index bdfd5a2..718f0b5 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.21.bb
+@@ -17,8 +17,8 @@ DEPENDS = "openssl xz zlib bzip2 libcap icu"
+ inherit autotools pkgconfig systemd useradd
+ 
+ PACKAGECONFIG ??= " \
+-                   ${@base_contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
+-                   ${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
++                   ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
++                   ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
+                   "
+ 
+ PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
+diff --git a/meta-networking/recipes-support/fping/fping_3.5.bb b/meta-networking/recipes-support/fping/fping_3.5.bb
+index b6b17b7..2f5f2b6 100644
+--- a/meta-networking/recipes-support/fping/fping_3.5.bb
++++ b/meta-networking/recipes-support/fping/fping_3.5.bb
+@@ -21,5 +21,5 @@ inherit autotools
+ 
+ EXTRA_OECONF = "--enable-ipv4"
+ 
+-PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
++PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
+ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+index d9f1212..4466974 100644
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
++++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+@@ -61,7 +61,7 @@ EXTRA_OECONF = "--with-kernel-headers=${STAGING_INCDIR} \
+                 --enable-dpd \
+                 --enable-natt=yes \
+                 --sysconfdir=${sysconfdir}/racoon \
+-                ${@base_contains('DISTRO_FEATURES', 'ipv6', '--enable-ipv6=yes', '', d)}"
++                ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '--enable-ipv6=yes', '', d)}"
+ 
+ # See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=530527
+ CFLAGS += "-fno-strict-aliasing"
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+index d3e6a5d..f69e71c 100644
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+@@ -21,7 +21,7 @@ SRC_URI[sha256sum] = "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae
+ #| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.0/ld: error: symbol sctp_connectx has undefined version
+ #| collect2: error: ld returned 1 exit status
+ #| make[4]: *** [libsctp.la] Error 1
+-PNBLACKLIST[lksctp-tools] ?= "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', "BROKEN: fails to link against sctp_connectx symbol", '', d)}"
++PNBLACKLIST[lksctp-tools] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "BROKEN: fails to link against sctp_connectx symbol", '', d)}"
+ 
+ S = "${WORKDIR}/${BP}"
+ 
+diff --git a/meta-networking/recipes-support/netcf/netcf_git.bb b/meta-networking/recipes-support/netcf/netcf_git.bb
+index 26c738b..1bc6bae 100644
+--- a/meta-networking/recipes-support/netcf/netcf_git.bb
++++ b/meta-networking/recipes-support/netcf/netcf_git.bb
+@@ -24,7 +24,7 @@ PACKAGECONFIG ??= "${@bb.utils.contains("DISTRO_FEATURES", "systemd", "systemd",
+ PACKAGECONFIG[systemd] = "--with-sysinit=systemd,--with-sysinit=initscripts,"
+ 
+ do_install_append() {
+-    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        if [ -d "${D}${libdir}/systemd/system" ]; then
+            mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+diff --git a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
+index 760bab0..650fdae 100644
+--- a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
++++ b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
+@@ -24,7 +24,7 @@ CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
+ 
+ # set the "_FILE_OFFSET_BITS" preprocessor symbol to 64 to support files
+ # larger than 2GB
+-CFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'largefile', \
++CFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', \
+     ' -D_FILE_OFFSET_BITS=64', '', d)}"
+ 
  PACKAGECONFIG ??= ""
--PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'acl', 'acl', '', d)}"
--PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
-+PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)}"
-+PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
+@@ -60,7 +60,7 @@ do_install() {
+     install -m 0644 ${S}/doc/netperf_old.ps ${D}${docdir}/netperf
+ }
  
- PACKAGECONFIG[gtkgui] = "--enable-gtk2-test --enable-gui=gtk2,--enable-gui=no,gtk+,"
- PACKAGECONFIG[acl] = "--enable-acl,--disable-acl,acl,"
+-RRECOMMENDS_${PN} += "${@base_contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
++RRECOMMENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
+ 
+ INITSCRIPT_NAME="netperf"
+ INITSCRIPT_PARAMS="defaults"
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+index d113b82..9fc6406 100644
+--- a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
++++ b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+@@ -19,7 +19,7 @@ This is the final IPv4-only version of ypbind-mt. \
+ HOMEPAGE = "http://www.linux-nis.org/nis/ypbind-mt/index.html"
+ DEPENDS = " \
+            yp-tools \
+-           ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
++           ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+           "
+ RDEPENDS_${PN} += "yp-tools"
+ 
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+index cee5880..82544e7 100644
+--- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
++++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+@@ -15,7 +15,7 @@ of known secure NIS server (/etc/yp.conf) Binds to \
+ the server which answered as first. \
+ "
+ HOMEPAGE = "http://www.linux-nis.org/nis/ypbind-mt/index.html"
+-DEPENDS = "yp-tools ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
++DEPENDS = "yp-tools ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+ PROVIDES += "ypbind"
+ 
+ PNBLACKLIST[ypbind-mt] ?= "BROKEN: Depends on broken yp-tools"
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.8.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.8.bb
+index f010906..de2348e 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.3.8.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.8.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://openvpn.sourceforge.net"
+ SECTION = "net"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5aac200199fde47501876cba7263cb0c"
+-DEPENDS = "lzo openssl iproute2 ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
++DEPENDS = "lzo openssl iproute2 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+ 
+ inherit autotools systemd
+ 
+@@ -22,7 +22,7 @@ CFLAGS += "-fno-inline"
+ 
+ # I want openvpn to be able to read password from file (hrw)
+ EXTRA_OECONF += "--enable-password-save --enable-iproute2"
+-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'pam', '', '--disable-plugin-auth-pam', d)}"
++EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '', '--disable-plugin-auth-pam', d)}"
+ 
+ # Explicitly specify IPROUTE to bypass the configure-time check for /sbin/ip on the host.
+ EXTRA_OECONF += "IPROUTE=/sbin/ip"
+@@ -38,7 +38,7 @@ do_install_append() {
+     install -dm 755 ${D}${sysconfdir}/openvpn/sample/sample-keys
+     install -m 644 ${S}/sample/sample-keys/* ${D}${sysconfdir}/openvpn/sample/sample-keys
+ 
+-    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+         install -d ${D}/${systemd_unitdir}/system
+         install -m 644 ${WORKDIR}/openvpn@.service ${D}/${systemd_unitdir}/system
+         install -m 644 ${WORKDIR}/openvpn@.service ${D}/${systemd_unitdir}/system/openvpn@loopback-server.service
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.3.2.bb b/meta-networking/recipes-support/strongswan/strongswan_5.3.2.bb
+index 7ec1a8e..9dc4878 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.3.2.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.3.2.bb
+@@ -20,11 +20,11 @@ EXTRA_OECONF = " \
+         --without-lib-prefix \
+ "
+ 
+-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
++EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+ 
+ 
+ PACKAGECONFIG ??= "charon curl gmp openssl stroke sqlite3 \
+-        ${@base_contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
++        ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
+ "
+ PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,"
+ PACKAGECONFIG[charon] = "--enable-charon,--disable-charon,"
+diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.28.bb b/meta-networking/recipes-support/stunnel/stunnel_5.28.bb
+index 0a8bcd8..61be932 100644
+--- a/meta-networking/recipes-support/stunnel/stunnel_5.28.bb
++++ b/meta-networking/recipes-support/stunnel/stunnel_5.28.bb
+@@ -16,5 +16,5 @@ inherit autotools
+ 
+ EXTRA_OECONF += "--with-ssl='${STAGING_EXECPREFIXDIR}' --disable-fips"
+ 
+-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','',d)}"
++PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+ PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 -- 
 2.8.0.rc3
 
