@@ -1,48 +1,43 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 993A1731C8
+Return-Path: <ryanelkholy@gmail.com>
+Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
+	[209.85.213.175])
+	by mail.openembedded.org (Postfix) with ESMTP id E11C960745
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 19:49:10 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id v188so32765080wme.1
+	Sat, 23 Apr 2016 01:07:46 +0000 (UTC)
+Received: by mail-ig0-f175.google.com with SMTP id m9so27172905ige.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 12:49:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=Ob1KZZBMLETgmWFYhjZNNwgLv7DYJSEjY0vI3Y1Y/eM=;
-	b=d5mdr83fQiSmAcJATSs3yIJLivufL7AOibY1WpTqstD2t83tyPQLhe4twyR+hS486j
-	FwuG5KyVHi+skZMbYbGNrgLHWvilRxDnwXTjtvbNS8Do+6ZtBcYjDiNMEupEiO3H/dsP
-	IIpYbOHWlahZ5koEM81z5pUiFUh08i+Wakfzgb+Ax/9D+hj7MbI7EvrqHMTjHoslEkSG
-	YkK+E/C9S2vmue5ncvvputswoYmA2eEYgjxHnoCGiSEnnzsPVTF7RPdhidFT2Orf9u+i
-	PaF5H6bypxk6swmzVzFk/oXdsmhrvhVPMnRSdBFO5yqzK5Quw5mYsKyc+iQatY+U4ner
-	Ka9Q==
+	Fri, 22 Apr 2016 18:07:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:cc;
+	bh=6VnzMzpSQFfArYAPCtWgEGhZ+5p6aV326pn1gNSmbpU=;
+	b=GsS/KsPJUFGro6rxUgJ/zp224C0vXEQvqPt4Q/PskOnDi0X7u0127F9RG+uSGIfGTc
+	QPydmDK685ZarrALNzI/P0x8f5NgsCt5OXztCG+tpIfPTxvgRJQ9kAMazrzLvNX+A3zr
+	f+RxLg3advNa4MoIjClsmyghos/5CzD81KwiFBLtoglmAKFbo5Kuv/jx4YXK59an79ig
+	0nARIW5aroacqyMx3/rmO0JSFW3Hs1mUJf80NrKaGHT7/99/JdunZg3I9xTls4XVIEK3
+	E7+LVq9dwBkOVQ5ZO4YncC11KwuhTno9356nEefJ8hWA+p2voHOzcbHOKKW/fDt4i8Mg
+	M8sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=Ob1KZZBMLETgmWFYhjZNNwgLv7DYJSEjY0vI3Y1Y/eM=;
-	b=H3zdCnb+Hul2P0WSt5+RQ9IdefNah3FD59t9C2kfv87heC3d593CSg3nMVdqqP+0Dd
-	O7Yr/p76Km/ZPcAPVaYfJMpTQ6eQ1lYnh8cbSxesBazd9th3MUOr42Bo5krWg9XDHWaS
-	15TvPL7m7I2RQqJ4B14dJADVBAp4VDdIZkoVLdbWeRvWTVMBx5UCvTR9hY26PLV/n7qe
-	5flspSeF2yCBhwfW3rAz9a8h47YQCdiX8ewZGFW5fODxdlqusgTBEjyYCiDSDGeGZno7
-	QjK2CZoO8rzZyqQwdeDLSEEbsEVjpWOYbP0SRgUULAED7arGXc7ebAvjR/wbjYjjbSm2
-	GaVA==
-X-Gm-Message-State: AOPr4FWtQMNmqjQWQM6QsciDG6xtH1Cn/aEc54FW3UJAp7h6QYbCUaGe1rc6cqbCpbfcs78T
-X-Received: by 10.28.228.68 with SMTP id b65mr5479319wmh.47.1461354551197;
-	Fri, 22 Apr 2016 12:49:11 -0700 (PDT)
-Received: from flashheart.burtonini.com (home.burtonini.com. [81.2.106.35])
-	by smtp.gmail.com with ESMTPSA id t4sm4875842wmf.8.2016.04.22.12.49.10
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Apr 2016 12:49:10 -0700 (PDT)
-From: Ross Burton <ross.burton@intel.com>
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to:cc;
+	bh=6VnzMzpSQFfArYAPCtWgEGhZ+5p6aV326pn1gNSmbpU=;
+	b=OPawAEQkDvB8QVamnqcTJvWetNVdWpkOmd0XvEFMm9rYVpzln1eX233lEQ3J8PG582
+	uxBPpmgkXKYNQXOm6I2zMbV+cZwAMFpzt3vpE5S+v0kSdKGLGM40nU+rXnwPO3Y7SK8y
+	iiQSqDqkuUDKudg+p6lO1bZgQcwXsdC28SIyl1Y9gg3auezpQpARd19WLiXq9IQuqIvn
+	tif+6pYBL/avkWMSH0/rkBabia2lCJUUzvzZF1bcK2h4W5a9Zl1yYlUv5riED73UF0WG
+	rPTiv4l24ECoxsvoWNkjAXwmTrQsrj1cXadXee7hw8wOaocklXIAhxrUNyB3Pyx3G4yw
+	0VXw==
+X-Gm-Message-State: AOPr4FVDy7t/UmsYgBtgeK4z021KJclkhx9CMd4HQUoM9eTdbDdZ7ktafmxubBWlvXkDiUCFAzw264s00W6WNQ==
+MIME-Version: 1.0
+X-Received: by 10.50.29.51 with SMTP id g19mr210385igh.42.1461373666994; Fri,
+	22 Apr 2016 18:07:46 -0700 (PDT)
+Received: by 10.64.78.105 with HTTP; Fri, 22 Apr 2016 18:07:46 -0700 (PDT)
+Date: Fri, 22 Apr 2016 21:07:46 -0400
+Message-ID: <CAMZfsd6f7-s4pVyiNPs2sVmi+EC6yMyjCJeYTPobm0f6ffE2_w@mail.gmail.com>
+From: "Ryan Elkholy, PhD, PE" <ryanelkholy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Apr 2016 20:48:56 +0100
-Message-Id: <1461354536-23240-8-git-send-email-ross.burton@intel.com>
-X-Mailer: git-send-email 2.8.0.rc3
-In-Reply-To: <1461354536-23240-1-git-send-email-ross.burton@intel.com>
-References: <1461354536-23240-1-git-send-email-ross.burton@intel.com>
-Subject: [PATCH 8/8] meta-initramfs: use bb.utils.contains() instead of base_contains()
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Yocto Project <yocto@yoctoproject.org>
+Subject: [meta-qt5] EGL Error : Could not create the egl surface: error = 0x300b
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,30 +50,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2016 19:49:11 -0000
+X-List-Received-Date: Sat, 23 Apr 2016 01:07:47 -0000
+Content-Type: text/plain; charset=UTF-8
 
-base_contains() is a compatibility wrapper and may warn in the future, so
-replace all instances with bb.utils.contains().
+Hello,
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
----
- meta-initramfs/recipes-devtools/dracut/dracut_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I am am trying to make a build that includes meta-qt5 without x11 or
+wayland on the Minnowboard Turbot (x86-64). I was successful in building my
+image but the problem occurred when testing my basic qt app on the image.
+When trying to run the app I get the following error:
 
-diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-index 5a8c6e8..c978263 100644
---- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-+++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-@@ -27,7 +27,7 @@ EXTRA_OECONF = "--prefix=${prefix} \
-                "
- 
- # RDEPEND on systemd optionally
--PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
- PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,,,systemd"
- 
- EXTRA_OEMAKE += 'libdir=${prefix}/lib'
--- 
-2.8.0.rc3
+EGL Error : Could not create the egl surface: error = 0x300
 
+I have been trying to find a solution for this for weeks with no luck. I am
+able tu run my application when including x11, but I am trying to avoid it.
+Does anyone know any solution for this? Any insight will be helpful because
+I have been stumped for weeks. If nobody knows of a solution is it possible
+to dig deeper into this error and see what is causing it? If so, how?
+
+Thanks
 
