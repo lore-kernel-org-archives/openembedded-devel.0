@@ -1,50 +1,45 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id BE6B8731D9
+Return-Path: <ryanelkholy@gmail.com>
+Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
+	[209.85.223.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 916BC6FFD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Apr 2016 01:22:43 +0000 (UTC)
-Received: by mail-pa0-f49.google.com with SMTP id zm5so44492452pac.0
+	Sat, 23 Apr 2016 14:36:14 +0000 (UTC)
+Received: by mail-io0-f181.google.com with SMTP id 2so145710814ioy.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Apr 2016 18:22:44 -0700 (PDT)
+	Sat, 23 Apr 2016 07:36:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
-	:to; bh=KiYZH0t+SfiZmUAcbM+1D556/p4DCgU6WfLNvbZfkCc=;
-	b=Qd8nphFLrYRYrOM5WrFLJsDr/Anf7ZyQ+YEp4SXQJkqhsH5ytdix6iIq2iqd1xATE/
-	4c7i1Sugnp+ogS+4gzPN0cufuW2+74Tw5DZGCCD6Ggt9YfNht0kkYK/HrEpPCNGXgLJV
-	8UbUKlpJ/H32FYtfm1ww2jPtSdIJuXgeTTqgppwr7w01JetykGw6qQIfCyboc4PKJP98
-	mkSOopHVxr/7F7yf0rA0x08RZRv5bXLPrD6nVhymOlTm/Sv/2pi0w86KG1nUMholuhmf
-	VyG9V0EHWdoz0W6Kjn9cR2fEFWXsYLKL3x5qDtFKXLqZ9TrQhg6AEfdM8GmK3F5BoJTY
-	5bHQ==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc; bh=SKBpcJMY3a7fJPGDXbTwDkxhfXYiKqAoBAxledb9Mj4=;
+	b=JlFjiBN+pscO7a30bBl8CPEQluBg+/HG2mLRWy2Tzvm191MgMDNqj6pXYAgOg853Ch
+	eUNoa3T2c8tc9jlCcXBLfnH18lBAJX1HoC0IkGtr8lTrFh21juqOI1ilNeeZhD7pIjQP
+	OxuPjzrYTz4T+qKxQsZAyTKkh6ZrdRcYyRii0tnWd/+RExjfCFjz+XHL8tREETb8+Qhr
+	RbyP9uMnXslx5iUjr33O33SrtrrMe7sD31U5Dn2LejbT1ewBn00euTuYr+zlIWwpNXvK
+	IEmOphdJQA6UcrX/44i4/B8D9Wwg7Ag+0ClSBUil9nDgOudTmczT6dR05xM9/9lkFiCH
+	+wYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=KiYZH0t+SfiZmUAcbM+1D556/p4DCgU6WfLNvbZfkCc=;
-	b=ZorxcPAX0Hl3DK9pfjbyl7iKXswHwsHzcgEZ9GlUAk5TX+qrjskYdv6PeHd27ynJBd
-	KoxVuTIDb0pJQKBjKjmcu3HiOkSG2YZ+GKH58JIRdZ1Dr8gI/Y+2PlX5h0M346KYlUFY
-	I2AUoNbuSY/NIpxU4V3t0HUn3vgMMWM4vvEe2qfucvnfaFVxUpUYhEWitG1vrDiwuz2l
-	lAfPt8bSwmCzC2j3ArijUNxYmGU025GvFNmu69uT8VAprCFcsA4+Q6rtIF8Ry5VgZyFB
-	g7LAC/qhmQwxjq/FJbKtl4a2s8tUX0vkNF6dgDCs6+/0qUSF4RBPYTKAeVcbRUZS0aOO
-	I8Yg==
-X-Gm-Message-State: AOPr4FUIshFC4DX1A8XySZoJs5HXmw2C4IXZfoUfW11CwLFwgIlXqd1OT5mfLaLEanl+8w==
-X-Received: by 10.66.67.11 with SMTP id j11mr32904082pat.45.1461374563949;
-	Fri, 22 Apr 2016 18:22:43 -0700 (PDT)
-Received: from ?IPv6:2601:646:8800:5a9a:a061:e2e8:8aca:7170?
-	([2601:646:8800:5a9a:a061:e2e8:8aca:7170])
-	by smtp.gmail.com with ESMTPSA id
-	m184sm11026248pfb.22.2016.04.22.18.22.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 22 Apr 2016 18:22:41 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CAMZfsd6f7-s4pVyiNPs2sVmi+EC6yMyjCJeYTPobm0f6ffE2_w@mail.gmail.com>
-Date: Fri, 22 Apr 2016 18:22:37 -0700
-Message-Id: <AF020D52-486E-40B4-BE5D-5F4CAB2E9130@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc;
+	bh=SKBpcJMY3a7fJPGDXbTwDkxhfXYiKqAoBAxledb9Mj4=;
+	b=fpOkPYebnPUBHFEpAgxbvygY8keqD6v7wgra8C0QhD1EAQ8KUcvmhnmXdzLpP7DM9p
+	akcalCKi9MagdtQeFns/uofLBI9xdBKaiqjKbRK1w53sdi0UtTOzrJwh18g9OIj8iJvv
+	7a6HKQwqgAYEGMN4BWkBccRjPPZmYslKbX7ablTdhp9s13ySMkRBUIfOUjJ3wyIv1bSY
+	B5yXSw/5skwylgF/HmueJhLiSiTIs4xAmfURSl0buaGd4CUAld4KDWbpk2SIYprjabJr
+	CVvsKYrJ7Bhpi1QvrJ17Joxo/1vVlG/DnWiggC70LbLG/y0QMRQsOg0PcPnwdK4NnRMV
+	4rRA==
+X-Gm-Message-State: AOPr4FU2xNo7zxH4fEDztrn4hNiAlJTbvZ3NqgGkvXfaz0FzK8l4svmG9v7hp4UONJo2L1aw5cswaeIWPQlbYA==
+MIME-Version: 1.0
+X-Received: by 10.107.36.198 with SMTP id k189mr10619707iok.176.1461422174932; 
+	Sat, 23 Apr 2016 07:36:14 -0700 (PDT)
+Received: by 10.64.78.105 with HTTP; Sat, 23 Apr 2016 07:36:14 -0700 (PDT)
+In-Reply-To: <AF020D52-486E-40B4-BE5D-5F4CAB2E9130@gmail.com>
 References: <CAMZfsd6f7-s4pVyiNPs2sVmi+EC6yMyjCJeYTPobm0f6ffE2_w@mail.gmail.com>
+	<AF020D52-486E-40B4-BE5D-5F4CAB2E9130@gmail.com>
+Date: Sat, 23 Apr 2016 10:36:14 -0400
+Message-ID: <CAMZfsd57OovKqm6fV3oR85s2yTVy_5fy4qGX6nft4-ffFHcEaQ@mail.gmail.com>
+From: "Ryan Elkholy, PhD, PE" <ryanelkholy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3124)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: Yocto Project <yocto@yoctoproject.org>
 Subject: Re: [meta-qt5] EGL Error : Could not create the egl surface: error = 0x300b
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -59,67 +54,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Apr 2016 01:22:43 -0000
-X-Groupsio-MsgNum: 61136
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_58A7AEB8-D5E1-43A3-B787-471AB0926DF7";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-
---Apple-Mail=_58A7AEB8-D5E1-43A3-B787-471AB0926DF7
+X-List-Received-Date: Sat, 23 Apr 2016 14:36:16 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+
+Yes, I do have directfb in DISTRO_FEATURES. The following is in my
+local.conf:
+
+http://pastebin.com/8vmN0r7Z
+
+Furthermore, to even get this to build I had to alter the libva recipe
+because it caused conflicts. Even though I was excluding x11 it would still
+try to build libva-x11 due to the following RDEPENDS for egl in
+libva_1.5.0_bb:
+
+RDEPENDS_${PN}-egl =3D+ "${PN}-x11"
+
+I changed this to
+
+RDEPENDS_${PN}-egl =3D+ "${PN}"
+
+in order for it to build. I know I probably should definitely not be doing
+this, but it is for the purpose of testing.
+
+All of this gets pulled in due to my images inclusion of hardware codecs
+for hardware acceleration:
+
+IMAGE_FEATURES +=3D "splash package-management ssh-server-openssh hwcodecs"
+
+where hwcodecs is defined by the Intel BSP as the following:
+
+MACHINE_HWCODECS ?=3D "va-intel gstreamer-vaapi-1.0"
+
+So in the end, I can get the app to run without error by including x11
+which allows me to fully include the Intel hardware acceleration, but I do
+not want x11. I feel like there is the aforementioned dependency that
+should not exist, but I am not in the position to know how to work around
+this. As I said, if I alter the dependency of libva-egl on libva-x11 it
+will build, but I get the EGL surface error.
+
+Any insight is greatly appreciated.
 
 
-> On Apr 22, 2016, at 6:07 PM, Ryan Elkholy, PhD, PE =
-<ryanelkholy@gmail.com> wrote:
->=20
-> Hello,
->=20
-> I am am trying to make a build that includes meta-qt5 without x11 or
-> wayland on the Minnowboard Turbot (x86-64). I was successful in =
-building my
-> image but the problem occurred when testing my basic qt app on the =
-image.
-> When trying to run the app I get the following error:
->=20
-> EGL Error : Could not create the egl surface: error =3D 0x300
 
+On Fri, Apr 22, 2016 at 9:22 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-Do you have =E2=80=98directfb=E2=80=99 in DISTRO_FEATURES
->=20
-> I have been trying to find a solution for this for weeks with no luck. =
-I am
-> able tu run my application when including x11, but I am trying to =
-avoid it.
-> Does anyone know any solution for this? Any insight will be helpful =
-because
-> I have been stumped for weeks. If nobody knows of a solution is it =
-possible
-> to dig deeper into this error and see what is causing it? If so, how?
->=20
-> Thanks
+>
+> > On Apr 22, 2016, at 6:07 PM, Ryan Elkholy, PhD, PE <
+> ryanelkholy@gmail.com> wrote:
+> >
+> > Hello,
+> >
+> > I am am trying to make a build that includes meta-qt5 without x11 or
+> > wayland on the Minnowboard Turbot (x86-64). I was successful in buildin=
+g
+> my
+> > image but the problem occurred when testing my basic qt app on the imag=
+e.
+> > When trying to run the app I get the following error:
+> >
+> > EGL Error : Could not create the egl surface: error =3D 0x300
+>
+>
+> Do you have =E2=80=98directfb=E2=80=99 in DISTRO_FEATURES
+> >
+> > I have been trying to find a solution for this for weeks with no luck. =
+I
+> am
+> > able tu run my application when including x11, but I am trying to avoid
+> it.
+> > Does anyone know any solution for this? Any insight will be helpful
+> because
+> > I have been stumped for weeks. If nobody knows of a solution is it
+> possible
+> > to dig deeper into this error and see what is causing it? If so, how?
+> >
+> > Thanks
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
-
---Apple-Mail=_58A7AEB8-D5E1-43A3-B787-471AB0926DF7
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlcazmAACgkQuwUzVZGdMxR1zgCeIYqdNX9neh7jLhxeV9I0wyOH
-NFMAnAtMWhl2G4msVO1w+vP9peAfI/77
-=dTZ9
------END PGP SIGNATURE-----
-
---Apple-Mail=_58A7AEB8-D5E1-43A3-B787-471AB0926DF7--
