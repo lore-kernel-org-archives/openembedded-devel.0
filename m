@@ -1,47 +1,51 @@
-Return-Path: <ryanelkholy@gmail.com>
-Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 916BC6FFD7
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 04B22607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Apr 2016 14:36:14 +0000 (UTC)
-Received: by mail-io0-f181.google.com with SMTP id 2so145710814ioy.1
+	Sun, 24 Apr 2016 14:18:29 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id w143so14841724wmw.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Apr 2016 07:36:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc; bh=SKBpcJMY3a7fJPGDXbTwDkxhfXYiKqAoBAxledb9Mj4=;
-	b=JlFjiBN+pscO7a30bBl8CPEQluBg+/HG2mLRWy2Tzvm191MgMDNqj6pXYAgOg853Ch
-	eUNoa3T2c8tc9jlCcXBLfnH18lBAJX1HoC0IkGtr8lTrFh21juqOI1ilNeeZhD7pIjQP
-	OxuPjzrYTz4T+qKxQsZAyTKkh6ZrdRcYyRii0tnWd/+RExjfCFjz+XHL8tREETb8+Qhr
-	RbyP9uMnXslx5iUjr33O33SrtrrMe7sD31U5Dn2LejbT1ewBn00euTuYr+zlIWwpNXvK
-	IEmOphdJQA6UcrX/44i4/B8D9Wwg7Ag+0ClSBUil9nDgOudTmczT6dR05xM9/9lkFiCH
-	+wYQ==
+	Sun, 24 Apr 2016 07:18:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding;
+	bh=qAYXHlbcenB6hGDra/8M+lnGBaJ/jo9OtfsHxiEJ/wU=;
+	b=rzkkg2Ex6agdya37dXK/H8N5LKBc5+asl2QdyVtCGH00GjDPxUsjgRuUzb9e8u7OoV
+	rXlNuAQNork9E4WbS6mtpbG4RkgSCYSAKGNM20GzoLYth26ff9cm4rYh4MNgjAvVKXj1
+	QuROi/JgZIOWm7eeqoePUc41LhKw7ZAualGlkUqdKWT+vnciW63NGGt4QGaZNzeyl/Pf
+	EofP04cd3th01lLvbUSyr4k9pHTKu2Iev1PXqgkk41RBMistA2WbWHlLf2bPVoebLpPT
+	QGdm4aGoZPFa9ZeHhzOlwDgEiU6rt6rKgGOMIpwgf/vWfjm+X67BGGe5bnAT7z1Gk3TW
+	DoGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc;
-	bh=SKBpcJMY3a7fJPGDXbTwDkxhfXYiKqAoBAxledb9Mj4=;
-	b=fpOkPYebnPUBHFEpAgxbvygY8keqD6v7wgra8C0QhD1EAQ8KUcvmhnmXdzLpP7DM9p
-	akcalCKi9MagdtQeFns/uofLBI9xdBKaiqjKbRK1w53sdi0UtTOzrJwh18g9OIj8iJvv
-	7a6HKQwqgAYEGMN4BWkBccRjPPZmYslKbX7ablTdhp9s13ySMkRBUIfOUjJ3wyIv1bSY
-	B5yXSw/5skwylgF/HmueJhLiSiTIs4xAmfURSl0buaGd4CUAld4KDWbpk2SIYprjabJr
-	CVvsKYrJ7Bhpi1QvrJ17Joxo/1vVlG/DnWiggC70LbLG/y0QMRQsOg0PcPnwdK4NnRMV
-	4rRA==
-X-Gm-Message-State: AOPr4FU2xNo7zxH4fEDztrn4hNiAlJTbvZ3NqgGkvXfaz0FzK8l4svmG9v7hp4UONJo2L1aw5cswaeIWPQlbYA==
-MIME-Version: 1.0
-X-Received: by 10.107.36.198 with SMTP id k189mr10619707iok.176.1461422174932; 
-	Sat, 23 Apr 2016 07:36:14 -0700 (PDT)
-Received: by 10.64.78.105 with HTTP; Sat, 23 Apr 2016 07:36:14 -0700 (PDT)
-In-Reply-To: <AF020D52-486E-40B4-BE5D-5F4CAB2E9130@gmail.com>
-References: <CAMZfsd6f7-s4pVyiNPs2sVmi+EC6yMyjCJeYTPobm0f6ffE2_w@mail.gmail.com>
-	<AF020D52-486E-40B4-BE5D-5F4CAB2E9130@gmail.com>
-Date: Sat, 23 Apr 2016 10:36:14 -0400
-Message-ID: <CAMZfsd57OovKqm6fV3oR85s2yTVy_5fy4qGX6nft4-ffFHcEaQ@mail.gmail.com>
-From: "Ryan Elkholy, PhD, PE" <ryanelkholy@gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=qAYXHlbcenB6hGDra/8M+lnGBaJ/jo9OtfsHxiEJ/wU=;
+	b=fq8uN9AcV5bOqIEdUWsTWI3WP8XS9Y6ZiraXZt2pDFGKKzW1JF364fi/7FUf3uRdes
+	OXjt6T/yzZQplAmvP9nmEcZspu8zCfntaV/Qt04A+DhZ1szFcXghub9w6If/NQ954QqU
+	l2ONylE4pUi8qPI9UBiP4M6H+QfR4a7/SQ2o8borMEcKgJG+0FiDjYXBv3J82rbK4yuX
+	HiQ/IRG2XBjA0mgNExQ4X+jS6RmJFXvPh8z0AZJ0mRUZBBJW5z90Tp1AG+adk/p6vjbr
+	7bf+LaJhEIF69WDUrCd0Sj4RyP6yPzMM28dyEA//TiEGtgUWpILTOvmcmNEmqe1PfswE
+	RLJQ==
+X-Gm-Message-State: AOPr4FXP6GgDrI2oum6PyEPO5Thb9d/waoqrygd2PHAg0/yBPnLsDI+N521l7k7/ve+U0A==
+X-Received: by 10.28.125.8 with SMTP id y8mr7196577wmc.87.1461507509716;
+	Sun, 24 Apr 2016 07:18:29 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A19FB.dip0.t-ipconnect.de.
+	[91.10.25.251]) by smtp.googlemail.com with ESMTPSA id
+	gt7sm18710562wjc.1.2016.04.24.07.18.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 24 Apr 2016 07:18:29 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Yocto Project <yocto@yoctoproject.org>
-Subject: Re: [meta-qt5] EGL Error : Could not create the egl surface: error = 0x300b
+Date: Sun, 24 Apr 2016 16:18:16 +0200
+Message-Id: <1461507496-31242-3-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.5
+In-Reply-To: <1461507496-31242-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1461507496-31242-1-git-send-email-schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+Subject: [PATCH 3/3] xfce4-weather-plugin: update to 0.8.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,94 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Apr 2016 14:36:16 -0000
+X-List-Received-Date: Sun, 24 Apr 2016 14:18:30 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Yes, I do have directfb in DISTRO_FEATURES. The following is in my
-local.conf:
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../{xfce4-weather-plugin_0.8.6.bb => xfce4-weather-plugin_0.8.7.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/weather/{xfce4-weather-plugin_0.8.6.bb => xfce4-weather-plugin_0.8.7.bb} (72%)
 
-http://pastebin.com/8vmN0r7Z
+diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.6.bb b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.7.bb
+similarity index 72%
+rename from meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.6.bb
+rename to meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.7.bb
+index 56531a3..3519f4a 100644
+--- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.6.bb
++++ b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.7.bb
+@@ -7,7 +7,7 @@ inherit xfce-panel-plugin
+ 
+ DEPENDS += "libsoup-2.4 dbus-glib upower"
+ 
+-SRC_URI[md5sum] = "955581375d4860d10e52b5bc8935feff"
+-SRC_URI[sha256sum] = "927c3b2c699208d63b2baf469b74c8c0dfcb98006ca9f80d75e7aec62658e6fa"
++SRC_URI[md5sum] = "ecab0eaad870e460da4597e76f43e6e6"
++SRC_URI[sha256sum] = "071e71106868c7d90c936256d837ca834d0ca6f54daea59a9b5fc11b318e65b0"
+ 
+ FILES_${PN} += "${datadir}/xfce4/weather"
+-- 
+2.5.5
 
-Furthermore, to even get this to build I had to alter the libva recipe
-because it caused conflicts. Even though I was excluding x11 it would still
-try to build libva-x11 due to the following RDEPENDS for egl in
-libva_1.5.0_bb:
-
-RDEPENDS_${PN}-egl =3D+ "${PN}-x11"
-
-I changed this to
-
-RDEPENDS_${PN}-egl =3D+ "${PN}"
-
-in order for it to build. I know I probably should definitely not be doing
-this, but it is for the purpose of testing.
-
-All of this gets pulled in due to my images inclusion of hardware codecs
-for hardware acceleration:
-
-IMAGE_FEATURES +=3D "splash package-management ssh-server-openssh hwcodecs"
-
-where hwcodecs is defined by the Intel BSP as the following:
-
-MACHINE_HWCODECS ?=3D "va-intel gstreamer-vaapi-1.0"
-
-So in the end, I can get the app to run without error by including x11
-which allows me to fully include the Intel hardware acceleration, but I do
-not want x11. I feel like there is the aforementioned dependency that
-should not exist, but I am not in the position to know how to work around
-this. As I said, if I alter the dependency of libva-egl on libva-x11 it
-will build, but I get the EGL surface error.
-
-Any insight is greatly appreciated.
-
-
-
-On Fri, Apr 22, 2016 at 9:22 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
->
-> > On Apr 22, 2016, at 6:07 PM, Ryan Elkholy, PhD, PE <
-> ryanelkholy@gmail.com> wrote:
-> >
-> > Hello,
-> >
-> > I am am trying to make a build that includes meta-qt5 without x11 or
-> > wayland on the Minnowboard Turbot (x86-64). I was successful in buildin=
-g
-> my
-> > image but the problem occurred when testing my basic qt app on the imag=
-e.
-> > When trying to run the app I get the following error:
-> >
-> > EGL Error : Could not create the egl surface: error =3D 0x300
->
->
-> Do you have =E2=80=98directfb=E2=80=99 in DISTRO_FEATURES
-> >
-> > I have been trying to find a solution for this for weeks with no luck. =
-I
-> am
-> > able tu run my application when including x11, but I am trying to avoid
-> it.
-> > Does anyone know any solution for this? Any insight will be helpful
-> because
-> > I have been stumped for weeks. If nobody knows of a solution is it
-> possible
-> > to dig deeper into this error and see what is causing it? If so, how?
-> >
-> > Thanks
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
 
