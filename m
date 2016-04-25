@@ -1,33 +1,46 @@
-Return-Path: <contact@jgueytat.fr>
-Received: from slow1-d.mail.gandi.net (slow1-d.mail.gandi.net [217.70.178.86])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B6526E681
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id EDA676E681
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2016 16:06:05 +0000 (UTC)
-Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net
-	[217.70.183.197])
-	by slow1-d.mail.gandi.net (Postfix) with ESMTP id 082B847BCC0
+	Mon, 25 Apr 2016 16:12:35 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id e190so17989589pfe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2016 18:05:28 +0200 (CEST)
-Received: from mfilter49-d.gandi.net (mfilter49-d.gandi.net [217.70.178.180])
-	by relay5-d.mail.gandi.net (Postfix) with ESMTP id 27FE041C0C7;
-	Mon, 25 Apr 2016 18:05:24 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mfilter49-d.gandi.net
-Received: from relay5-d.mail.gandi.net ([IPv6:::ffff:217.70.183.197])
-	by mfilter49-d.gandi.net (mfilter49-d.gandi.net [::ffff:10.0.15.180])
-	(amavisd-new, port 10024)
-	with ESMTP id Y6Xespb8z6TF; Mon, 25 Apr 2016 18:05:21 +0200 (CEST)
-X-Originating-IP: 92.245.156.62
-Received: from Happy.febio.local (unknown [92.245.156.62])
-	(Authenticated sender: contact@jgueytat.fr)
-	by relay5-d.mail.gandi.net (Postfix) with ESMTPSA id 8338341C0A5;
-	Mon, 25 Apr 2016 18:05:21 +0200 (CEST)
-From: Julien Gueytat <contact@jgueytat.fr>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Apr 2016 18:05:20 +0200
-Message-Id: <1461600320-20104-1-git-send-email-contact@jgueytat.fr>
-X-Mailer: git-send-email 1.9.1
-Cc: j.madieu@expemb.com
-Subject: [meta-qt5][PATCH] Use completely PKG_CONFIG which set the variables: - $libdir_raw - $incdir_raw - $libs - $cflags There is no need to have anything in the .pro files then.
+	Mon, 25 Apr 2016 09:12:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=RBuaphgda+884opZHCRjzoSHb+J//W+PkNJoO6WQ/oQ=;
+	b=c1izxRB2OX7H2K47+9nb2+Vb6FAMqdoFCpzUogMTZ5sEL/BLF8Akwit2LnjvwVXESo
+	ToZ1K3qZmw2Gb2J9X7eXw2q02BLdZIks5oA5f9LalCefUffl75y5kAEM+QFfYJe7qv1V
+	+dcYsehNOWYVJQJ9M8ZwjulnOoMhG406Y91snt8EaNp0y/VXRTmkBL16YAFylwZR/BqQ
+	P7817wv4L846XIpHmqbF5BQufkYf27surUCyjo+jc5YGYpCDvilx1x9sc1xIvxLM1TjH
+	HVAMkfj4/oF96KlDWMwGo1l7uFAnMN6bPhzotC9+koS/M0GFy85WdALiS8a3LecQFiWT
+	Up1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=RBuaphgda+884opZHCRjzoSHb+J//W+PkNJoO6WQ/oQ=;
+	b=Acls4vCuI9T3rhQfEgaA13EKg3vYIvLsGuJtrB2Q6lA2n+oVMwywNwKKmxOP6cfyC8
+	mVk5mkSOfUX9HwcF+VuUco8QdmZzuWhnx9hMjcM/grwQHRWehCHNccnln9o9DVBPbhNm
+	6gvzO8Sxs918J7ANB3tIdA8U2e0toannJ85jJFOwhEMb/wcsXFMin69es+nRB5VNlNAK
+	0X4rBo116WjS1fKoH6wwsAIL3INsfIGZOmhLtISWfnW9zTniIyZWaqlnIkQXkjklUjss
+	NavcigINStZ3V9YsYuqQr75HCfLvbYf4dk9wxPr85WlrAO1bA4ojI1pHCqJ2DtsK3XM0
+	0vRw==
+X-Gm-Message-State: AOPr4FX8USv6KfZu0vlNbA0Guu1+/BPbzaRu3Zkf6rn4WrNrV2mfDOymG88DhIryyR/5ug==
+X-Received: by 10.98.93.138 with SMTP id n10mr49913561pfj.43.1461600755851;
+	Mon, 25 Apr 2016 09:12:35 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
+	x126sm29818419pfx.95.2016.04.25.09.12.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 25 Apr 2016 09:12:34 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	joe_macdonald@mentor.com
+Date: Mon, 25 Apr 2016 09:12:29 -0700
+Message-Id: <1461600749-19432-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-networking][PATCH] samba: fix QA warnings.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,107 +53,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2016 16:06:07 -0000
+X-List-Received-Date: Mon, 25 Apr 2016 16:12:36 -0000
 
-Please note that the variables used directly through mkspecs set the end variables
-while pkgconfig set $libdir_raw - $incdir_raw - $libs - $cflags.
+WARNING: samba-4.4.2-r0 do_package_qa: QA Issue: samba rdepends on libaio, but it isn't a build dependency, missing libaio in DEPENDS or PACKAGECONFIG? [build-deps]
+WARNING: samba-4.4.2-r0 do_package_qa: QA Issue: samba rdepends on lttng-ust, but it isn't a build dependency, missing lttng-ust in DEPENDS or PACKAGECONFIG? [build-deps]
 
-The previous code was trying to set the variable like QMAKE_LIBS_EGL
-through pkgconfig but it was not working.
-
-Use compileTestWithPkgconfig for the EGL test and the EGLFS RaspberryPi test.
-
-The package config file from EGL already triggers bcm_host as a dependency.
-
-The master branch of meta-raspberrypi does the proper job.
-
-The way *.pro files and pkg_config needs changes.
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- config.tests/qpa/egl/egl.pro               |  8 --------
- config.tests/qpa/eglfs-brcm/eglfs-brcm.pro |  9 ---------
- config.tests/unix/opengles2/opengles2.pro  |  7 -------
- configure                                  | 12 ++----------
- 4 files changed, 2 insertions(+), 34 deletions(-)
+ meta-networking/recipes-connectivity/samba/samba_4.4.2.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/config.tests/qpa/egl/egl.pro b/config.tests/qpa/egl/egl.pro
-index f04d053..c1889c5 100644
---- a/config.tests/qpa/egl/egl.pro
-+++ b/config.tests/qpa/egl/egl.pro
-@@ -1,10 +1,2 @@
- SOURCES = egl.cpp
--
--for(p, QMAKE_LIBDIR_EGL) {
--    exists($$p):LIBS += -L$$p
--}
--
--!isEmpty(QMAKE_INCDIR_EGL): INCLUDEPATH += $$QMAKE_INCDIR_EGL
--!isEmpty(QMAKE_LIBS_EGL): LIBS += $$QMAKE_LIBS_EGL
--
- CONFIG -= qt
-diff --git a/config.tests/qpa/eglfs-brcm/eglfs-brcm.pro b/config.tests/qpa/eglfs-brcm/eglfs-brcm.pro
-index ce16a3a..164cdb4 100644
---- a/config.tests/qpa/eglfs-brcm/eglfs-brcm.pro
-+++ b/config.tests/qpa/eglfs-brcm/eglfs-brcm.pro
-@@ -1,11 +1,2 @@
- SOURCES = eglfs-brcm.cpp
--
- CONFIG -= qt
--
--INCLUDEPATH += $$QMAKE_INCDIR_EGL
--
--for(p, QMAKE_LIBDIR_EGL) {
--    exists($$p):LIBS += -L$$p
--}
--
--LIBS += -lEGL -lGLESv2 -lbcm_host
-diff --git a/config.tests/unix/opengles2/opengles2.pro b/config.tests/unix/opengles2/opengles2.pro
-index c4d7689..899ad99 100644
---- a/config.tests/unix/opengles2/opengles2.pro
-+++ b/config.tests/unix/opengles2/opengles2.pro
-@@ -1,12 +1,5 @@
- SOURCES = opengles2.cpp
--INCLUDEPATH += $$QMAKE_INCDIR_OPENGL_ES2
--
--for(p, QMAKE_LIBDIR_OPENGL_ES2) {
--    exists($$p):LIBS += -L$$p
--}
--
- CONFIG -= qt
--LIBS += $$QMAKE_LIBS_OPENGL_ES2
- mac {
-     DEFINES += BUILD_ON_MAC
- }
-diff --git a/configure b/configure
-index c696e7e..6d0567b 100755
---- a/configure
-+++ b/configure
-@@ -5796,15 +5796,7 @@ if [ "$CFG_EGL" != "no" ]; then
-         exit 101
-     fi
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
+index 9358ca5..8ba2aeb 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
+@@ -27,7 +27,7 @@ inherit systemd waf-samba cpan-base perlnative
+ # remove default added RDEPENDS on perl
+ RDEPENDS_${PN}_remove = "perl"
  
--    if [ -n "$PKG_CONFIG" ] && $PKG_CONFIG --exists egl 2>/dev/null; then
--        QMAKE_INCDIR_EGL=`$PKG_CONFIG --cflags-only-I egl 2>/dev/null | sed -e 's,^-I,,g' -e 's, -I, ,g'`
--        QMAKE_LIBS_EGL=`$PKG_CONFIG --libs egl 2>/dev/null`
--        QMAKE_CFLAGS_EGL=`$PKG_CONFIG --cflags egl 2>/dev/null`
--        QMakeVar set QMAKE_INCDIR_EGL "$QMAKE_INCDIR_EGL"
--        QMakeVar set QMAKE_LIBS_EGL "$QMAKE_LIBS_EGL"
--        QMakeVar set QMAKE_CFLAGS_EGL "`echo " $QMAKE_CFLAGS_EGL " | sed -e 's, -I[^ ]* , ,g;s,^ ,,;s, $,,'`"
--    fi       # detect EGL support
--    if compileTest qpa/egl "EGL" $QMAKE_CFLAGS_EGL $QMAKE_LIBS_EGL; then
-+    if compileTestWithPkgConfig egl qpa/egl "EGL" EGL; then
-         CFG_EGL=yes
-         if compileTest qpa/egl-x11 "EGL-X11" $QMAKE_CFLAGS_EGL $QMAKE_LIBS_EGL; then
-             CFG_EGL_X=yes
-@@ -5827,7 +5819,7 @@ if [ "$CFG_EGLFS" != "no" ]; then
-     if [ "$XPLATFORM_QNX" = "no" ] && [ "$CFG_OPENGL" != "no" ]; then
-         CFG_EGLFS="$CFG_EGL"
-         # Detect eglfs backends.
--        if compileTest qpa/eglfs-brcm "eglfs-brcm"; then
-+        if compileTestWithPkgConfig egl qpa/eglfs-brcm "eglfs-brcm" EGLFS_BRCM; then
-             CFG_EGLFS_BRCM=yes
-         else
-             CFG_EGLFS_BRCM=no
+-DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb krb5 ctdb libbsd"
++DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb krb5 ctdb libbsd libaio"
+ 
+ SYSVINITTYPE_linuxstdbase = "lsb"
+ SYSVINITTYPE = "sysv"
+@@ -54,6 +54,7 @@ PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd"
+ PACKAGECONFIG[dmapi] = "--with-dmapi,--without-dmapi,dmapi"
+ PACKAGECONFIG[zeroconf] = "--enable-avahi,--disable-avahi,avahi"
+ PACKAGECONFIG[valgrind] = ",--without-valgrind,valgrind,"
++PACKAGECONFIG[lttng] = "--with-lttng, --without-lttng,lttng-ust"
+ 
+ SAMBA4_IDMAP_MODULES="idmap_ad,idmap_rid,idmap_adex,idmap_hash,idmap_tdb2"
+ SAMBA4_PDB_MODULES="pdb_tdbsam,${@bb.utils.contains('PACKAGECONFIG', 'ldap', 'pdb_ldap,', '', d)}pdb_ads,pdb_smbpasswd,pdb_wbc_sam,pdb_samba4"
 -- 
-1.9.1
+2.3.5
 
 
