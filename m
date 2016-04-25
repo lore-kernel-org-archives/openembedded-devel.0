@@ -1,33 +1,47 @@
-Return-Path: <daicy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 96EF071633
+Return-Path: <ross.burton@intel.com>
+Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
+	[209.85.213.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F1C360125
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2016 09:35:27 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; 
-   d="scan'208";a="5924299"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Apr 2016 17:35:18 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id CFB58408D262
+	Mon, 25 Apr 2016 12:18:22 +0000 (UTC)
+Received: by mail-ig0-f180.google.com with SMTP id bi2so63623300igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2016 17:35:14 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.27) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Mon, 25 Apr 2016 17:35:14 +0800
-From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 25 Apr 2016 02:35:12 -0700
-Message-ID: <1461576912-2943-1-git-send-email-daicy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <570B676B.1080905@mlbassoc.com>
-References: <570B676B.1080905@mlbassoc.com>
+	Mon, 25 Apr 2016 05:18:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=Yzj0rl7myPw5yzQI6tLRW5ph3CqoNeOPaCQuDXLn9Ao=;
+	b=lUkDE9lvXfLE0qnhbj5oqKAY1fEje+f8/bgT3r2vZlV8vSu8FuNsQ5VCeTCPfmUw64
+	3yDpgID4sYGRHHJPEeW8YDkgGsSm9ja5XVDgmf4Q0of6Bpwy8hb9YxWdxkbHh3xJvuWd
+	my0EwZ+p/v20dpesY9JRHDpcv3sxd21ut3RedJgs2r04McuSElFW0umqMJgzWtdn8JZ0
+	IrxG0ZoD7BUH/JTtScX79fJKurMXqi2wppFejOlQ86cDf0XvAIrT7T5TP6nYFZntjotG
+	nEfJH9IWWu6v1lDDwHD8cxpUVeQyd7wYC9h717RKH1+aBHRgQpicu1uhJwT2/+5oHEGT
+	lWlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=Yzj0rl7myPw5yzQI6tLRW5ph3CqoNeOPaCQuDXLn9Ao=;
+	b=RQCebs0h3kxgBIiGMq/EvhBfgjiq0Dg49EPiT+ZGuW5Lqv0GJizPFPXHPyTQDKZVHC
+	Q9mk4gtbsC3NkEhKh2s68qbsPkb4g3s8zMz3mMDRLgv16aQHVRy1TRvAfpCVXou6EYcm
+	kY9jS0n9p7eyD7G5T2qrLsxQ+o4cml49IW9PQiPewr07wYXZMcja1S5JWWjnJH5Bo047
+	yp3RbtwExlzwrB68hmriSwAfG6h00UyAHxH1hmSFU4shFQjjXwPffDr4iVODfzC+SrsF
+	7i6D1lSviLNT8fMuYH265yyXUkNMsKICbOXiiv5x4+xByfPfM7YXrS6C5UPHXCSXRTm+
+	RAug==
+X-Gm-Message-State: AOPr4FXAo6V0El8EbT/F0j2ISLUKWix2puqzuFSF4gTIvG8tz5E0BvT1yLbpaJ24T5aHHNbfjWwhidUHXZiBmzp7
+X-Received: by 10.50.150.1 with SMTP id ue1mr11753092igb.52.1461586702808;
+	Mon, 25 Apr 2016 05:18:22 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.27]
-X-yoursite-MailScanner-ID: CFB58408D262.ADEC7
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH v2] hwdata: add new recipe
+Received: by 10.107.9.106 with HTTP; Mon, 25 Apr 2016 05:18:03 -0700 (PDT)
+In-Reply-To: <1461576912-2943-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+References: <570B676B.1080905@mlbassoc.com>
+	<1461576912-2943-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 25 Apr 2016 13:18:03 +0100
+Message-ID: <CAJTo0LYJ=9m9z4-4pE6dD2mRZNGVzGte5ktCYEWP4Bw58qAd6w@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH v2] hwdata: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,46 +54,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2016 09:35:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 25 Apr 2016 12:18:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-support/hwdata/hwdata_0.288.bb | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-support/hwdata/hwdata_0.288.bb
+On 25 April 2016 at 10:35, Dai Caiyun <daicy.fnst@cn.fujitsu.com> wrote:
 
-diff --git a/meta-oe/recipes-support/hwdata/hwdata_0.288.bb b/meta-oe/recipes-support/hwdata/hwdata_0.288.bb
-new file mode 100644
-index 0000000..bac6618
---- /dev/null
-+++ b/meta-oe/recipes-support/hwdata/hwdata_0.288.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "Hardware identification and configuration data"
-+HOMEPAGE = "http://git.fedorahosted.org/git/hwdata.git"
-+SECTION = "System/Base"
-+
-+LICENSE = "GPL-2.0+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
-+
-+SRC_URI = "https://git.fedorahosted.org/cgit/${BPN}.git/snapshot/${BP}.tar.gz"
-+
-+SRC_URI[md5sum] = "f3fa1c5edb66ce5b376d95e772b2d303"
-+SRC_URI[sha256sum] = "56fc26275b102e538fcfcf9c1093a09f476a1ea8d4e0c733d3c578442923693d"
-+
-+do_compile() {
-+}
-+
-+do_install() {
-+    install -m 0744 -d ${D}${sysconfdir}/modprobe.d
-+    install -m 0644 -p ${S}/blacklist.conf ${D}/${sysconfdir}/modprobe.d
-+    install -m 0744 -d ${D}${datadir}/${PN}
-+    install -m 0644 -p ${S}/*.ids ${D}${datadir}/${PN}
-+    install -m 0644 -p ${S}/oui.txt ${D}${datadir}/${PN}
-+}
--- 
-1.9.1
+> +do_compile() {
+> +}
+> +
+> +do_install() {
+> +    install -m 0744 -d ${D}${sysconfdir}/modprobe.d
+> +    install -m 0644 -p ${S}/blacklist.conf ${D}/${sysconfdir}/modprobe.d
+> +    install -m 0744 -d ${D}${datadir}/${PN}
+> +    install -m 0644 -p ${S}/*.ids ${D}${datadir}/${PN}
+> +    install -m 0644 -p ${S}/oui.txt ${D}${datadir}/${PN}
+> +}
+>
 
+So upstream ships a hand-coded configure script that writes a Makefile.inc
+that the hand-crafted (but sane) Makefile then reads.  I'd do this:
 
+do_configure() {
+  ${S}/configure --datadir=${datadir} --libdir=${libdir}
+}
 
+do_install() {
+  oe_runmake install DESTDIR=${D}
+}
+
+This is untested, but should work and use the makefile that upstream
+provides, instead of replicating the install logic.
+
+Ross
 
