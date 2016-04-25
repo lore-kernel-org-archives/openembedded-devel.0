@@ -1,55 +1,48 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f179.google.com (mail-pf0-f179.google.com
-	[209.85.192.179])
-	by mail.openembedded.org (Postfix) with ESMTP id F3DE970031
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lf0-f43.google.com (mail-lf0-f43.google.com
+	[209.85.215.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 392386E666
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2016 18:24:54 +0000 (UTC)
-Received: by mail-pf0-f179.google.com with SMTP id y69so49941833pfb.1
+	Mon, 25 Apr 2016 21:24:42 +0000 (UTC)
+Received: by mail-lf0-f43.google.com with SMTP id c126so126445030lfb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2016 11:24:55 -0700 (PDT)
+	Mon, 25 Apr 2016 14:24:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=BtOofBdh+4OZR0UNwJhsU1C0j3m6Mv6VipDnRcc/x1s=;
-	b=MgGaeWiLPJwMx+LL+qTi8OLIVyX/rToGL8LKbYVoa25Ny7ed/5odS8aVELIB5ILQQT
-	n1KmuTEstnMwJsPIvpaoEIO6H6Yl8kNGebE2+zNaNTZzicN7YozgQC6i7r4+gVgC4Idp
-	4qjeo2jUK/5KJBMfQnKcdGd+UAiWpDDyrpN8IjT8Kg3S0d7chxQom/HD4a3eDF9MhVRU
-	g2p78VFfMiSG+3tcV21iEN0E0/sLNsYXEOW4G45X3BqHwARWikU+bBm+Mz8kTQPU2BDb
-	AK2/fXVm5FNwKjQ2ZRNNbnb0tVYQ0LTP+/+WcToi6aU48iybyih8ziKrPby2GXIctdO8
-	xlHg==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc; bh=DBlAc38lKW579onn5RiCFGxqiCD5D5Hd258gbMQcQVc=;
+	b=nnJG9A8Y4/80RpdSoWttNSvRFC18LtfKOfHTC/LSzSQBp3ql2JY7I6NYmvnJfcpkFu
+	+cpOmm6YEGKK7gfKNquv6QUyFvIfzE5o/y6JbBFH5PPPTp98z70WLOt1CVC0lcG60lzm
+	Q/wWu/v1FYc0ODRFmmrgey7KWVr1qNyIaLxzTnilgG7tDw/NhSKTUkkKWOogBt5XzHMo
+	RxKpyRdPbePbmBvjdwH+Ew0kJ38nh6/O80q2hx5g0BPJQdtt2QbbU8DKvZ9nKhQ0jNrd
+	VFPtrKC0xUryLKboQ8hNIM6aG4tXAbr1ITkNTvvmHQR+bG1Xv0PWRMAI6S95OS3/J+C8
+	5QNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=BtOofBdh+4OZR0UNwJhsU1C0j3m6Mv6VipDnRcc/x1s=;
-	b=gSbSEOTthQPcPbZk/GcDnSSBAO2h6AIW6KyD5ObY4mRo2d9wqi5WR4RY7vb0TN+uan
-	sKpvLmqOSG6qe1BVnhBhcAJourYgW9DBsd3HLpnqsadAWEM88B5gijr9jVEVQAd2tX95
-	bh6eAy4ZAHW3ZZ2pAdbHy0BDMKBYJJdFC2isUMqgsLJ4yQh0KhLghwXCDtQzHAOiM5mR
-	7mXo6L3R9W2CN0r5OyXdCQ+LY8ZZWdJImjdpKuZ0tZRWTvVflLxjejcqeYYeMkQS6unT
-	1XEwzzz85Oc9Osl7x5MnTLIdsmS60sROx5Mu5KE6b0PcymjrbhZOIrit+iwIzYBBnEJC
-	VaCA==
-X-Gm-Message-State: AOPr4FXvEhDe1x9Xpk/NKm1jHouLS/ImNTmwimrBT32AfjrtAEo6oh3xkKFwmbE2yQpHKg==
-X-Received: by 10.98.22.193 with SMTP id 184mr44881088pfw.116.1461608695496;
-	Mon, 25 Apr 2016 11:24:55 -0700 (PDT)
-Received: from ?IPv6:2601:202:4000:1239:606d:9ea8:d7b2:ab08?
-	([2601:202:4000:1239:606d:9ea8:d7b2:ab08])
-	by smtp.googlemail.com with ESMTPSA id
-	u63sm6662181pfu.18.2016.04.25.11.24.53
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 25 Apr 2016 11:24:54 -0700 (PDT)
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Martin Jansa <martin.jansa@gmail.com>
-References: <CAAPZna3rXuTpEx1F=jzqUMRyCkD+xh6S_d+QR++XALMh6bBLZA@mail.gmail.com>
-	<CAP9ODKrfCC+Nyr9EHd931gnoVsyngZ1hvBfBwT4izx4TiOf-Zg@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <571E60F1.2020804@gmail.com>
-Date: Mon, 25 Apr 2016 11:24:49 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc;
+	bh=DBlAc38lKW579onn5RiCFGxqiCD5D5Hd258gbMQcQVc=;
+	b=c1imhE/NuunKVUm74KQpib49mtgn5mSy1hQ+Us07K8kkMP0WmiuJ9ywnn0BtbQjCYQ
+	uyvYY2bhqRzhH3k5OISboJwaZCEbygIiLc9y42qpZ1Jz85MFu1cimsNYTlUbauJQaiRv
+	VAz7JtAbfJdTXZZPGSLVizE9hkaLUIonFUKR6A//EPnhPETWq5TAk/HAjvtx06kEjTdA
+	U7Km+UrPtKaosm1U7kpinxgfh7tUWJAk7L9HsoPQsGQZY1tKFdFpzkSfXzkpwt3ehpAB
+	EncvXy5L6YdnkjhVop0dbzB9mXrt+pE91AtyQtm7dz8O+1OU2YNBCKzryC76iuLK95uk
+	IkaA==
+X-Gm-Message-State: AOPr4FUMvjTg8y9QpnCs7c0l4NZXTULzBSSGVJAT68ZvsGfts04EDGxJtqgfuxcEMZSjXtAAz0SXPF3u+UVi9A==
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKrfCC+Nyr9EHd931gnoVsyngZ1hvBfBwT4izx4TiOf-Zg@mail.gmail.com>
-Subject: Re: [meta-python][krogoth] Backport python recipes
+X-Received: by 10.25.153.69 with SMTP id b66mr2242407lfe.138.1461619482435;
+	Mon, 25 Apr 2016 14:24:42 -0700 (PDT)
+Received: by 10.112.180.229 with HTTP; Mon, 25 Apr 2016 14:24:42 -0700 (PDT)
+In-Reply-To: <20160425180750.GW16135@denix.org>
+References: <1459471643-7183-1-git-send-email-denis@denix.org>
+	<20160420182710.GN16135@denix.org>
+	<20160425180750.GW16135@denix.org>
+Date: Mon, 25 Apr 2016 23:24:42 +0200
+Message-ID: <CA+chaQeA63zpMf02NYbDrxZgXdSbx2=T3=nZGmxk4h8XxOx+Xg@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [meta-qt5][PATCH 1/2] qtdeclarative: fix compilation of examples/qquickviewcomparison
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,43 +55,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2016 18:24:56 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 Apr 2016 21:24:43 -0000
+Content-Type: text/plain; charset=UTF-8
 
+I was testing if this is still needed with latest 5.6 currently in
+jansa/master. Or if I can just drop this again when upgrading to newer
+revisions.
 
+Did you see this issue only with 5.6 revisions currently in master or with
+5.6 revisions sent by Andreas which are now in master-next and where even
+qtbase examples fail to build in default setup as reported in separate
+e-mail?
+http://lists.openembedded.org/pipermail/openembedded-devel/2016-April/107077.html
 
-On 04/25/2016 11:06 AM, Otavio Salvador wrote:
-> Armin,
-> 
-> On Mon, Apr 25, 2016 at 10:45 AM, Fabio Berton
-> <fabio.berton@ossystems.com.br> wrote:
->> Hi all,
->>
->> Recently I sent some python recipes for review and last week were merged to
->> master. Could these recipes be backported for krogoth? I tested all them in
->> krogoth branch.
->>
->> Recipes are listed bellow:
->>
->> python-bcrypt:              cb95c5edaa977c8361628dab04b95192c423fc1a
->> python-blinker:             5a7f267941689eff28b4b0721752708bad4747b6
->> python-flask-bcrypt:        00d5837fd39af7ffae262282f56a0cb42a1c3b89
->> python-flask-bootstrap:     962e2ab371844f5119df2b8ab4a4231f6f7f9f3d
->> python-flask-navigation:    381d498441bd66bdae2d8da1ddcaadee1ff6de73
->> python-flask-sqlalchemy:    3e4ecdd6fe6709f394d92e86ccbc228ae5a43663
->> python-flask-wtf:           4be70064670c34d1b67224672b7caed7b4ed7b04
->> python-pam:                 49b35175d5018dc626a17a9a0662d97e812aab7c
->> python-wtforms:             9676ebb7d14090126f667671d525ce3f3ee89279
->> python-dominate:            5a20e8799eb1c1dd38ec9fee15fd90b88b38bba4
->> python-netaddr:             d3767d923d5044604633be3a3ba8bb4564f51b04
->> python-visitor:             834392bfada652260f6d5924278dd5839d095941
-> 
-> Please check above. To be honest, I think all in meta-oe master could
-> go to krogoth but you are the one to decide on this.
-> 
-its on my list to check.
+On Mon, Apr 25, 2016 at 8:07 PM, Denys Dmytriyenko <denis@denix.org> wrote:
 
-regards,
-- armin
+> Martin,
+>
+> Any comments?
+>
+>
+> On Wed, Apr 20, 2016 at 02:27:10PM -0400, Denys Dmytriyenko wrote:
+> > Ping. These 2 have been sitting in master-next as well for quite some
+> time.
+> > Any updates?
+> >
+> >
+> > On Thu, Mar 31, 2016 at 08:47:22PM -0400, Denys Dmytriyenko wrote:
+> > > From: Denys Dmytriyenko <denys@ti.com>
+> > >
+> > >
+> git/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.cpp:180:14:
+> error: 'QCoreApplication' has not been declared
+> > >           if
+> (!QCoreApplication::arguments().contains(QStringLiteral("--no_render_alpha")))
+> > >
+> > > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > > ---
+> > >  ...omparison-fix-QCoreApplication-has-not-be.patch | 28
+> ++++++++++++++++++++++
+> > >  recipes-qt/qt5/qtdeclarative_git.bb                |  1 +
+> > >  2 files changed, 29 insertions(+)
+> > >  create mode 100644
+> recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+> > >
+> > > diff --git
+> a/recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+> b/recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+> > > new file mode 100644
+> > > index 0000000..1687fbe
+> > > --- /dev/null
+> > > +++
+> b/recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+> > > @@ -0,0 +1,28 @@
+> > > +From 1cdd3278a0b1508640d983720782d39eb919caaf Mon Sep 17 00:00:00 2001
+> > > +From: Denys Dmytriyenko <denys@ti.com>
+> > > +Date: Thu, 31 Mar 2016 19:38:58 -0400
+> > > +Subject: [PATCH] qquickviewcomparison: fix QCoreApplication has not
+> been
+> > > + declared error
+> > > +
+> > > +Upstream-Status: Pending
+> > > +
+> > > +Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > > +---
+> > > + examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h | 1 +
+> > > + 1 file changed, 1 insertion(+)
+> > > +
+> > > +diff --git
+> a/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
+> b/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
+> > > +index 5b86c93..e77514e 100644
+> > > +--- a/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
+> > > ++++ b/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
+> > > +@@ -44,6 +44,7 @@
+> > > + #include <QWidget>
+> > > + #include <QQuickWidget>
+> > > + #include <QQuickView>
+> > > ++#include <QCoreApplication>
+> > > +
+> > > + QT_FORWARD_DECLARE_CLASS(QRadioButton)
+> > > + QT_FORWARD_DECLARE_CLASS(QCheckBox)
+> > > +--
+> > > +2.2.0
+> > > +
+> > > diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/
+> qtdeclarative_git.bb
+> > > index 93442fb..9274d00 100644
+> > > --- a/recipes-qt/qt5/qtdeclarative_git.bb
+> > > +++ b/recipes-qt/qt5/qtdeclarative_git.bb
+> > > @@ -15,6 +15,7 @@ DEPENDS += "qtbase"
+> > >
+> > >  SRC_URI += " \
+> > >      file://0001-qmltestexample-fix-link.patch \
+> > > +
+> file://0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch \
+> > >  "
+> > >
+> > >  EXTRA_OEMAKE +=
+> "QMAKE_SYNCQT=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/syncqt"
+> > > --
+> > > 2.2.0
+> > >
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
