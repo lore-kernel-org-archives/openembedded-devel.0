@@ -1,50 +1,50 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
-	[209.85.220.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 5967760123
+Received: from mail-pf0-f182.google.com (mail-pf0-f182.google.com
+	[209.85.192.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A53760123
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2016 14:38:41 +0000 (UTC)
-Received: by mail-pa0-f66.google.com with SMTP id zy2so18315267pac.2
+	Mon, 25 Apr 2016 14:43:30 +0000 (UTC)
+Received: by mail-pf0-f182.google.com with SMTP id y69so47622716pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Apr 2016 07:38:42 -0700 (PDT)
+	Mon, 25 Apr 2016 07:43:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=subject:to:references:cc:from:message-id:date:user-agent
 	:mime-version:in-reply-to:content-transfer-encoding;
 	bh=Tt01EkNgKYghzJLd3QgAXyFJzQ2qU3pYvm3w4jt9JKk=;
-	b=w13Yvi0/w1E42+PiHONc4kzMiMDWXlBiiFgyxo4FA/qk43fbGS6/olvgbgG6oLH9Jv
-	C5GBxfrx9KG3QcjS3S+VTR4AELtoKBbpCJKofVL45Ss/cp9x/eQHJePrT3q+a0ibd7ZD
-	/BHrlJ0kk68ntEbU68Qd86YqiWwxP+ssB416FdMMGtIKIrhDB+4+e1vd88G4xviPJwSX
-	S8M5WSyNA1SBHgDcQqNeYo6RVtQ+zINHmrFcPEs3lBUlaUrZEtEfSym3vnLkWSzarKlO
-	uTteRFvMK/bvyWPFlVIUCZ4Y/+/91bPvsy5LGOwF5kSDvZNWDrnB+uM0bpsrpZ88fBD2
-	d2hw==
+	b=MZPvJtIKvh4i7pyJEv6O+klCWmb0OLaLSdyMRbh5a8/l53jift1Pio7+lEHhHCjdTv
+	UH3fEqI1HuwIpR58t4fSd75wvYR3vk8ltCL3VUwsKkoFa56vmT7Ne8RbCVtYpPszvn+G
+	UjXVOHcZx5kmRtuL1Wnu9FzwMe5CPSxnOfuJMiCiecuuN2NPqvOM9CYJYDas3Oq9AYj4
+	+AJLyVosBukqxMuqDXU7PzxkhPPMoB4WXPoH+d0zZ38wtizeqo6cc0I2l/Jr7Fn2lbTl
+	iN5tSJfuDbJFLy5f5SdO0ytOdVO75Mx+AHGEh4rwWdWLjKFI8tfE7jVi+0WIZ1QGXwCy
+	JOBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
 	bh=Tt01EkNgKYghzJLd3QgAXyFJzQ2qU3pYvm3w4jt9JKk=;
-	b=laNRqPCjxQcEQMJ54cyEIc2i4/s9NA8Y+Wh31HFl/a/hTO9BtNxtkuE97yy8B7JOW0
-	/K+XzAqj1Ln0ss/SzzP0IlE/QWwpmWz/R8ZG+f3Wth8qyxYKSdHkS38C5EAXNLqqtb67
-	khRz09In+SP2cOFXHYqU4lRODynujyneM5y06lh2MxI+fbolC0UkZJy/GptBryeSvNX+
-	qP9nBzDEgkumLx9pZDF/+CSZS8KlGiLInwVvgoSsDosumDkvRAfqW6uAhJ4OWtuIAhmR
-	TT/elCWXdAHJyGdPcGTXJrrjwyrQunDHPRehs5H9dGYZ38fkGIg1wSUCSFWWYvpovF+r
-	XXbw==
-X-Gm-Message-State: AOPr4FVVPhMSFjif3mqYy4jiKknlDh8gRHdagG48DT8n5uScn7zH4B1XZO1UkeaBhNa/DQ==
-X-Received: by 10.66.1.99 with SMTP id 3mr48122348pal.26.1461595122537;
-	Mon, 25 Apr 2016 07:38:42 -0700 (PDT)
+	b=ZLuqp+PfGFEUe0oxjjaL7hevBB9AMvBfTJhxyUgrvOmT15zXfs6F45Pn7FwXSA0yP6
+	aum6H0hjPHwGRAH6TyE2BrvL4tzJn6C+CR0f+Cmk5y11b50m8BEeuNl7mLzhe447wvgg
+	ApA28fp47tGYMUINodkkAE5eQmNdRIfrGadWuBzJ6dpR6BWZ2BT0NL4gbLdrm1EP/fVd
+	xeM1FkXGMk6rs8hx6p3x6Q4fUXN5BvYD31vjcpRNHyEyBIIz7exuG8plBmO+tqYvaKNn
+	ylJRet0LMq2c1gidwqkMLdnAnBMwYXdZLpxrifq6JJudlD1CpbxGA4ltHl+S0Q4Sm46c
+	g0Gg==
+X-Gm-Message-State: AOPr4FXQSQF/bPLJrLgYr58CcWAOEQtd6egtu6EYOKLNcR1VUcaX+HUiNsUHnINryiYybQ==
+X-Received: by 10.98.16.198 with SMTP id 67mr49238732pfq.21.1461595411762;
+	Mon, 25 Apr 2016 07:43:31 -0700 (PDT)
 Received: from ?IPv6:2601:202:4000:1239:606d:9ea8:d7b2:ab08?
 	([2601:202:4000:1239:606d:9ea8:d7b2:ab08])
 	by smtp.googlemail.com with ESMTPSA id
-	b19sm20377005pfj.41.2016.04.25.07.38.40
+	uw2sm30644557pac.10.2016.04.25.07.43.29
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 25 Apr 2016 07:38:41 -0700 (PDT)
+	Mon, 25 Apr 2016 07:43:30 -0700 (PDT)
 To: Joe MacDonald <Joe_MacDonald@mentor.com>,
 	George McCollister <george.mccollister@gmail.com>
 References: <1461013253-2350-1-git-send-email-joe_macdonald@mentor.com>
 	<CAFSKS=OrhdjemW+1t1uMpGUbcnP0s5JX59Z4mvv_hqPpwBXG_w@mail.gmail.com>
 	<20160425140147.GB5188@mentor.com>
 From: akuster808 <akuster808@gmail.com>
-Message-ID: <571E2BEC.7030905@gmail.com>
-Date: Mon, 25 Apr 2016 07:38:36 -0700
+Message-ID: <571E2D0D.1030209@gmail.com>
+Date: Mon, 25 Apr 2016 07:43:25 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
 	Thunderbird/38.5.1
 MIME-Version: 1.0
@@ -63,7 +63,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2016 14:38:43 -0000
+X-List-Received-Date: Mon, 25 Apr 2016 14:43:31 -0000
 Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 7bit
 
