@@ -1,35 +1,57 @@
-Return-Path: <denis@denix.org>
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A20770022
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f179.google.com (mail-pf0-f179.google.com
+	[209.85.192.179])
+	by mail.openembedded.org (Postfix) with ESMTP id A7245601A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2016 15:30:26 +0000 (UTC)
-Received: from vz-proxy-l003.mx.aol.com ([64.236.82.155])
-	by vms173019.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O6800D9TZ2QEX70@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	26 Apr 2016 10:30:26 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=i+tV1o3iWEoTTvx3QNPGxA==:117
-	a=kj9zAlcOel0A:10 a=kziv93cY1bsA:10	a=0gcC27t9AAAA:8 a=Q4-j1AaZAAAA:8
-	a=sozttTNsAAAA:8 a=ox_5BdOvowhNDC-RjuMA:9	a=CjuIK1q_8ugA:10
-	a=GxMFnAFjGssA:10
-Received: by 100.15.86.14 with SMTP id 33809c08; Tue, 26 Apr 2016 15:30:26 GMT
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id CBB72161FC7; Tue,
-	26 Apr 2016 11:30:25 -0400 (EDT)
-Date: Tue, 26 Apr 2016 11:30:25 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20160426153025.GH31113@denix.org>
+	Tue, 26 Apr 2016 16:38:43 +0000 (UTC)
+Received: by mail-pf0-f179.google.com with SMTP id 206so8904637pfu.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Apr 2016 09:38:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
+	bh=HWiEP7K42f4C+FRsDx/5qgjIzZ9FRNDYpIzwFqMqBnI=;
+	b=RxO4/TWxdrJ2SLtLJy8iLlAMAB7rS8DGWbBv6EX4BwVUTMteKL+z5nClHLnOImVX9x
+	fjwdo5SIF00BTEAmPp9f3LiaYAx8UyxO5g4u83HtMAp0nurTJSR9MZn7rK4borfqB/9S
+	dlkR9naIGZG3D+6TkgL79rYEqJ5N5ii/PpL7OXW06VrjPeIqluEXMdTPFVsJoSo26wtd
+	GBanzbdfSE9uLM2mlXJJjuH2m7OiRbZyfJcM8eR2FgmeUd2zGbd936BdQrl5ZhuM/mov
+	QgM8nGAeumVi/NrtNPeJSeCwFNO+h8w3WuZKYwAdCgzg4xA7T1l5QMS1J2ALDgot+17Y
+	HlPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
+	:message-id:references:to;
+	bh=HWiEP7K42f4C+FRsDx/5qgjIzZ9FRNDYpIzwFqMqBnI=;
+	b=Rh0WpWdxr57J2LAP9qvz0K0KWuIo9A9EKggTCd1ByfkbPOf38xJINSLoAugd7pRjQR
+	BbAJbUnmhjy4Z2bMRjBCe/YL0CxeHKgvApNqcPP+zTG7IZubXrkPAvcrRZzETSNtwx4K
+	9/LSCgXqHNZ1XUEEexl0f138SSctQ4HVCPuPlJna7zVugObQjWQ50/Jz9DQs2vlOoRgr
+	MgNzaNv1koFmthFP9Ymu33fw49Cjc1Iw1Zlft0n7gsmsksVe8Hbz+wWHnR5W2Uy8QL8K
+	/supTVstl6JMt4T3+QEQU9k3+VbpkypE22enpV/3vLCAiY87VkB+IUHApEFUzE6tYndn
+	O5Qw==
+X-Gm-Message-State: AOPr4FUbR3HbZwxjflbfoIGZ9KB9irSEzYY+q1oYJGk/t0qdMVeBt3GAnK9GnZCgaW7FIQ==
+X-Received: by 10.98.42.211 with SMTP id q202mr4920597pfq.13.1461688724163;
+	Tue, 26 Apr 2016 09:38:44 -0700 (PDT)
+Received: from ?IPv6:2601:646:8800:5a9a:b93e:176b:d03b:ac8e?
+	([2601:646:8800:5a9a:b93e:176b:d03b:ac8e])
+	by smtp.gmail.com with ESMTPSA id
+	w125sm6480579pfb.16.2016.04.26.09.38.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 26 Apr 2016 09:38:43 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <20160426153025.GH31113@denix.org>
+Date: Tue, 26 Apr 2016 09:38:42 -0700
+Message-Id: <139887C4-F77D-4838-A13A-877DDDF999CC@gmail.com>
 References: <1459471643-7183-1-git-send-email-denis@denix.org>
-	<20160420182710.GN16135@denix.org> <20160425180750.GW16135@denix.org>
+	<20160420182710.GN16135@denix.org>
+	<20160425180750.GW16135@denix.org>
 	<CA+chaQeA63zpMf02NYbDrxZgXdSbx2=T3=nZGmxk4h8XxOx+Xg@mail.gmail.com>
 	<20160425214326.GA31113@denix.org>
 	<CA+chaQduVd3gEmHO1D9YSzid0F6Lm-Mrv+Yh2rW0a=f5fQWKFQ@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CA+chaQduVd3gEmHO1D9YSzid0F6Lm-Mrv+Yh2rW0a=f5fQWKFQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20160426153025.GH31113@denix.org>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.3124)
 Subject: Re: [meta-qt5][PATCH 1/2] qtdeclarative: fix compilation of examples/qquickviewcomparison
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -43,182 +65,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2016 15:30:29 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 26 Apr 2016 16:38:44 -0000
+X-Groupsio-MsgNum: 61180
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_81B89480-2BB9-4296-9220-2EB78B24180C";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-On Tue, Apr 26, 2016 at 08:37:19AM +0200, Martin Jansa wrote:
-> The strange part is that examples built fine here with current master
-> (5.5.99/5.6-beta)
-> without your patches.
-
-That is strange. Can it be toolchain-related? I'm using Linaro gcc-5.3, but I 
-would expect OE-built gcc-5.3 to be as strict and fail similarly on those 
-undeclared or incomplete classes...
+--Apple-Mail=_81B89480-2BB9-4296-9220-2EB78B24180C
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
 
-> On Mon, Apr 25, 2016 at 11:43 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> 
-> > On Mon, Apr 25, 2016 at 11:24:42PM +0200, Martin Jansa wrote:
-> > > I was testing if this is still needed with latest 5.6 currently in
-> > > jansa/master. Or if I can just drop this again when upgrading to newer
-> > > revisions.
-> > >
-> > > Did you see this issue only with 5.6 revisions currently in master or
-> > with
-> > > 5.6 revisions sent by Andreas which are now in master-next and where even
-> > > qtbase examples fail to build in default setup as reported in separate
-> > > e-mail?
-> > >
-> > http://lists.openembedded.org/pipermail/openembedded-devel/2016-April/107077.html
-> >
-> > Sorry, I haven't had a chance to try master-next yet. Those patches are
-> > needed
-> > for 5.5.99/5.6-beta from current master.
-> >
-> > If you merge 5.6 into master any time soon, I would definitely prefer for
-> > examples to work there. BTW, I can't believe examples are so broken in Qt,
-> > even in the official 5.6 release, based on your other email... So, if you
-> > want
-> > master/krogoth to be 5.6 release, we'd have to backport example fixes from
-> > post-5.6 revs, which I would be glad to help with...
-> >
-> > --
-> > Denys
-> >
-> >
-> > > On Mon, Apr 25, 2016 at 8:07 PM, Denys Dmytriyenko <denis@denix.org>
-> > wrote:
-> > >
-> > > > Martin,
-> > > >
-> > > > Any comments?
-> > > >
-> > > >
-> > > > On Wed, Apr 20, 2016 at 02:27:10PM -0400, Denys Dmytriyenko wrote:
-> > > > > Ping. These 2 have been sitting in master-next as well for quite some
-> > > > time.
-> > > > > Any updates?
-> > > > >
-> > > > >
-> > > > > On Thu, Mar 31, 2016 at 08:47:22PM -0400, Denys Dmytriyenko wrote:
-> > > > > > From: Denys Dmytriyenko <denys@ti.com>
-> > > > > >
-> > > > > >
-> > > >
-> > git/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.cpp:180:14:
-> > > > error: 'QCoreApplication' has not been declared
-> > > > > >           if
-> > > >
-> > (!QCoreApplication::arguments().contains(QStringLiteral("--no_render_alpha")))
-> > > > > >
-> > > > > > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > > > > > ---
-> > > > > >  ...omparison-fix-QCoreApplication-has-not-be.patch | 28
-> > > > ++++++++++++++++++++++
-> > > > > >  recipes-qt/qt5/qtdeclarative_git.bb                |  1 +
-> > > > > >  2 files changed, 29 insertions(+)
-> > > > > >  create mode 100644
-> > > >
-> > recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
-> > > > > >
-> > > > > > diff --git
-> > > >
-> > a/recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
-> > > >
-> > b/recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
-> > > > > > new file mode 100644
-> > > > > > index 0000000..1687fbe
-> > > > > > --- /dev/null
-> > > > > > +++
-> > > >
-> > b/recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
-> > > > > > @@ -0,0 +1,28 @@
-> > > > > > +From 1cdd3278a0b1508640d983720782d39eb919caaf Mon Sep 17 00:00:00
-> > 2001
-> > > > > > +From: Denys Dmytriyenko <denys@ti.com>
-> > > > > > +Date: Thu, 31 Mar 2016 19:38:58 -0400
-> > > > > > +Subject: [PATCH] qquickviewcomparison: fix QCoreApplication has
-> > not
-> > > > been
-> > > > > > + declared error
-> > > > > > +
-> > > > > > +Upstream-Status: Pending
-> > > > > > +
-> > > > > > +Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > > > > > +---
-> > > > > > + examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h |
-> > 1 +
-> > > > > > + 1 file changed, 1 insertion(+)
-> > > > > > +
-> > > > > > +diff --git
-> > > > a/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
-> > > > b/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
-> > > > > > +index 5b86c93..e77514e 100644
-> > > > > > +---
-> > a/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
-> > > > > > ++++
-> > b/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
-> > > > > > +@@ -44,6 +44,7 @@
-> > > > > > + #include <QWidget>
-> > > > > > + #include <QQuickWidget>
-> > > > > > + #include <QQuickView>
-> > > > > > ++#include <QCoreApplication>
-> > > > > > +
-> > > > > > + QT_FORWARD_DECLARE_CLASS(QRadioButton)
-> > > > > > + QT_FORWARD_DECLARE_CLASS(QCheckBox)
-> > > > > > +--
-> > > > > > +2.2.0
-> > > > > > +
-> > > > > > diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/
-> > > > qtdeclarative_git.bb
-> > > > > > index 93442fb..9274d00 100644
-> > > > > > --- a/recipes-qt/qt5/qtdeclarative_git.bb
-> > > > > > +++ b/recipes-qt/qt5/qtdeclarative_git.bb
-> > > > > > @@ -15,6 +15,7 @@ DEPENDS += "qtbase"
-> > > > > >
-> > > > > >  SRC_URI += " \
-> > > > > >      file://0001-qmltestexample-fix-link.patch \
-> > > > > > +
-> > > > file://0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
-> > \
-> > > > > >  "
-> > > > > >
-> > > > > >  EXTRA_OEMAKE +=
-> > > > "QMAKE_SYNCQT=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/syncqt"
-> > > > > > --
-> > > > > > 2.2.0
-> > > > > >
-> > > > > > --
-> > > > > > _______________________________________________
-> > > > > > Openembedded-devel mailing list
-> > > > > > Openembedded-devel@lists.openembedded.org
-> > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > > > > --
-> > > > > _______________________________________________
-> > > > > Openembedded-devel mailing list
-> > > > > Openembedded-devel@lists.openembedded.org
-> > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > > > --
-> > > > _______________________________________________
-> > > > Openembedded-devel mailing list
-> > > > Openembedded-devel@lists.openembedded.org
-> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> On Apr 26, 2016, at 8:30 AM, Denys Dmytriyenko <denis@denix.org> =
+wrote:
+>=20
+> On Tue, Apr 26, 2016 at 08:37:19AM +0200, Martin Jansa wrote:
+>> The strange part is that examples built fine here with current master
+>> (5.5.99/5.6-beta)
+>> without your patches.
+>=20
+> That is strange. Can it be toolchain-related? I'm using Linaro =
+gcc-5.3, but I
+> would expect OE-built gcc-5.3 to be as strict and fail similarly on =
+those
+> undeclared or incomplete classes=E2=80=A6
 
+can both of you paste the <gcc> -E -dM output of this file in question ?
+
+
+
+--Apple-Mail=_81B89480-2BB9-4296-9220-2EB78B24180C
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlcfmZIACgkQuwUzVZGdMxSaQgCbBoicbYx2kgTlJDqG5KMzLCNU
+QwsAn1pshBvIzuO7Y7e0R3oRz1PC+ygu
+=az7F
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_81B89480-2BB9-4296-9220-2EB78B24180C--
