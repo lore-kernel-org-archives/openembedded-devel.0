@@ -1,33 +1,24 @@
-Return-Path: <daicy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A73D372DC4
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id E4A796FF93
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2016 08:43:43 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; 
-   d="scan'208";a="5964646"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Apr 2016 16:43:42 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 84D4742AC842
+	Tue, 26 Apr 2016 09:01:24 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u3Q91P9M018231
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2016 16:43:42 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.27) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Tue, 26 Apr 2016 16:43:42 +0800
-From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+	Tue, 26 Apr 2016 02:01:25 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Tue, 26 Apr 2016 02:01:24 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 26 Apr 2016 01:43:38 -0700
-Message-ID: <1461660218-2313-1-git-send-email-daicy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <CAJTo0LYJ=9m9z4-4pE6dD2mRZNGVzGte5ktCYEWP4Bw58qAd6w@mail.gmail.com>
-References: <CAJTo0LYJ=9m9z4-4pE6dD2mRZNGVzGte5ktCYEWP4Bw58qAd6w@mail.gmail.com>
+Date: Tue, 26 Apr 2016 16:54:14 +0800
+Message-ID: <1461660854-31802-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.27]
-X-yoursite-MailScanner-ID: 84D4742AC842.AAF7D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH v3] hwdata: add new recipe
+Subject: [meta-networking][PATCH] snort: fix paths in pkgconfig files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,45 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2016 08:43:52 -0000
+X-List-Received-Date: Tue, 26 Apr 2016 09:01:25 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+Fix paths in pkgconfig files and remove snort from blacklist.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-oe/recipes-support/hwdata/hwdata_0.288.bb | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-support/hwdata/hwdata_0.288.bb
+ meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/hwdata/hwdata_0.288.bb b/meta-oe/recipes-support/hwdata/hwdata_0.288.bb
-new file mode 100644
-index 0000000..67199e9
---- /dev/null
-+++ b/meta-oe/recipes-support/hwdata/hwdata_0.288.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "Hardware identification and configuration data"
-+HOMEPAGE = "http://git.fedorahosted.org/git/hwdata.git"
-+SECTION = "System/Base"
+diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
+index 7d946af..69180c8 100644
+--- a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
++++ b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
+@@ -56,6 +56,8 @@ do_install_append() {
+     install -m 755 ${WORKDIR}/snort.init ${D}${sysconfdir}/init.d/snort
+     mkdir -p ${D}${localstatedir}/log/snort
+     install -d ${D}/var/log/snort
 +
-+LICENSE = "GPL-2.0+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
-+SRC_URI = "https://git.fedorahosted.org/cgit/${BPN}.git/snapshot/${BP}.tar.gz"
-+
-+SRC_URI[md5sum] = "f3fa1c5edb66ce5b376d95e772b2d303"
-+SRC_URI[sha256sum] = "56fc26275b102e538fcfcf9c1093a09f476a1ea8d4e0c733d3c578442923693d"
-+
-+do_configure() {
-+    ${S}/configure --datadir=${datadir} --libdir=${libdir}
-+}
-+
-+do_install() {
-+    oe_runmake install DESTDIR=${D}
-+}
-+
-+FILES_${PN} = "${libdir}/* \
-+               ${datadir}/* "
++    sed -i 's/-fdebug-prefix-map[^ ]*//g; s#${STAGING_DIR_TARGET}##g' ${D}${libdir}/pkgconfig/*.pc
+ }
+ 
+ FILES_${PN} += " \
+@@ -84,6 +86,3 @@ FILES_${PN}-dev += " \
+     ${libdir}/snort_dynamicrules/*.so \
+     ${prefix}/src/snort_dynamicsrc \
+ "
+-
+-# http://errors.yoctoproject.org/Errors/Details/35137/
+-PNBLACKLIST[snort] ?= "BROKEN: QA Issue: snort_preproc.pc, snort_output.pc, snort.pc"
 -- 
-1.9.1
-
-
+2.8.1
 
 
