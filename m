@@ -1,54 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f182.google.com (mail-pf0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A51E60119
+Return-Path: <ross.burton@intel.com>
+Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
+	[209.85.213.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B26D60119
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2016 21:33:39 +0000 (UTC)
-Received: by mail-pf0-f182.google.com with SMTP id y69so11808273pfb.1
+	Tue, 26 Apr 2016 21:37:03 +0000 (UTC)
+Received: by mail-ig0-f170.google.com with SMTP id u10so55251036igr.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2016 14:33:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
-	:to; bh=4iXsAlB5pHc6NYe+isShJz0l3alKVO1ppxTVsqKu8BY=;
-	b=NTmqKBh6Gchsk0Ekv3HcnQ9CASiaM2J2IHusXtVY7gm8mUNpjyeYMiGIht32W47VtX
-	fus6E9ES2b2CV8+OZzC+vtmdJ5SUhdCKxNUdp1+RNRAYUlYOEjkb5d+/0aKLrIsg3DOY
-	q6QYC2T3Lw6ntipon3pMkvMmzpVgQOtAXhnP5tav+kHGhmVLEJUYpMeO1Ja3wpWulC4D
-	JtkxnitwS2vw/bYsTjO3+1C73Ck2V4qOZzj8gyUzj48UZqmkSEUwDZAJztOTtQ7LTsbj
-	DjvnwOJ8SF35riQG5/S9tHgyfxLyIrByMk2Olj2pkvfyqrP9bOHqAki3zWdPUzJRgq11
-	xx1g==
+	Tue, 26 Apr 2016 14:37:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=ccTFHbMuU7w7gYei/fuTd1Erl9x9EGz7VxIaOcYpBxQ=;
+	b=xH7aZcf8jZrAtHe+QKa33+TO70VV0WS9XF2PbDJIfQqBVRcuWDvptNcjxghfQO9d47
+	+AYpt0LNQEYpWrkroQL2NFkoFJZxNF+5yrNnBVz3s/Yvg6z8DGo8hTAlhIGjcsvKKxrt
+	sqqmlUSRxbxN9G2Ihlv167FpwHQC0kNsalBlZ1KEHzQYnXYUaVAZ1ZOG2FzblouykyWT
+	nq40z+hfVHTxSr3rhZAXGbhfWnRI+nDlrM3cr3sWmOdYHrR02JREhbOcYDIVM0D21gn5
+	guO2dyKIXKOwWEL/YiCHYvzWWoyAHET2EnTPXUXtDxlnmThWunz8d5GBd6WBRQg+A4Pi
+	x3Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=4iXsAlB5pHc6NYe+isShJz0l3alKVO1ppxTVsqKu8BY=;
-	b=L6Wd56rIhURqz6ZCphzg74SN0xMnH8YdzuVaORHOTtRUwGZVz5dNe00mKILR84/BAs
-	9ceVlZ+VOUrR6/4Lk5xQrbv1F2/m0dzwv6rtsIh2x3oKaATMuN0y//SptkKEai06cyZe
-	GvuJRaiX9pZvq7rpPlaVYfQgRKP9bDuoLTxdnflteV9Ur7RZokFTVTR1OdrHjVqV9jpx
-	+sYCPqO/uSrjFq19pCDEMKFoJ1eYEQ6fS360FEpX96abjz2hFss4o0KppxsuUBGAbhNn
-	BmQoRYNWk5PLARs3I7XK2dqEcXUhVKpxOtQk7mnQFHuBf+dP2PGrvPRNiefaUPhtdjei
-	gfqA==
-X-Gm-Message-State: AOPr4FWNYY6QA/JjSoVaVGbFBp/JfieOqkCgBgujlgohiC1dj/+TreXIZIRtNDDa3Er13A==
-X-Received: by 10.98.80.206 with SMTP id g75mr6794666pfj.127.1461706420052;
-	Tue, 26 Apr 2016 14:33:40 -0700 (PDT)
-Received: from ?IPv6:2601:647:4c01:b37d:5aa:718:3ff4:4256?
-	([2601:647:4c01:b37d:5aa:718:3ff4:4256])
-	by smtp.gmail.com with ESMTPSA id p26sm578767pfi.84.2016.04.26.14.33.39
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 26 Apr 2016 14:33:39 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <3674906.352tKuzgEq@peggleto-mobl.ger.corp.intel.com>
-Date: Tue, 26 Apr 2016 14:33:35 -0700
-Message-Id: <D0CC99E0-9C5B-4951-95DA-3E2D8B58B037@gmail.com>
-References: <CAJTo0LYJ=9m9z4-4pE6dD2mRZNGVzGte5ktCYEWP4Bw58qAd6w@mail.gmail.com>
-	<1461660218-2313-1-git-send-email-daicy.fnst@cn.fujitsu.com>
-	<CEC3C9D8-666A-4041-91D5-5BBD1ECECC1B@gmail.com>
-	<3674906.352tKuzgEq@peggleto-mobl.ger.corp.intel.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Mailer: Apple Mail (2.3124)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v3] hwdata: add new recipe
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=ccTFHbMuU7w7gYei/fuTd1Erl9x9EGz7VxIaOcYpBxQ=;
+	b=jY4f2XOJBQsmPuzrSY92Pi0lV3sCgkyeGfO2isxPT36kSnnwcNDJoBaUch1E2UWgdq
+	qjUj+jcKLtgk+6tbHWQIOLXFAfQawE39hv2irEOYItoaLHenswf/42l8u+Z8rn1pZG9c
+	fWMf3/baQOlePvl6evC56tav4otE2W2HiPyOiNOYn2diWQHEAS5BcFjr4JtPo1iEz/W3
+	id8HWtej5Il5uddee9Rgy2wM/9VVWenl7Ij9H6WEM8uzuvHKurbBTLT0qzCEzSfMyqMA
+	Ec3Vk40RpEcELzSAw9PMsC1uD1VygCkWMqjw9pBmvjQm7HY5vtO8gBkcMjxz4H4v+m3X
+	JCpg==
+X-Gm-Message-State: AOPr4FVd81uYu6Rxzt0LK8PhBvnMOoWRsuEpSwYKJs62lbM0YhJhgWztPpx8agNIlTh+IsRAPjppxnRH10g6nftG
+X-Received: by 10.50.233.40 with SMTP id tt8mr22721517igc.78.1461706624288;
+	Tue, 26 Apr 2016 14:37:04 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.9.106 with HTTP; Tue, 26 Apr 2016 14:36:44 -0700 (PDT)
+In-Reply-To: <1461697722-20378-1-git-send-email-mark.asselstine@windriver.com>
+References: <1461697722-20378-1-git-send-email-mark.asselstine@windriver.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 26 Apr 2016 22:36:44 +0100
+Message-ID: <CAJTo0LYyrrO+5277fe2q3wZ8Z_JEsxU=0OqyXu5b7CK9hsh_GQ@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH] mozjs: fix configure host contamination
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,90 +54,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2016 21:33:42 -0000
-X-Groupsio-MsgNum: 61192
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_73E2A345-70DA-4A43-B31E-A91AF25712E2";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 26 Apr 2016 21:37:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
---Apple-Mail=_73E2A345-70DA-4A43-B31E-A91AF25712E2
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-
-> On Apr 26, 2016, at 2:20 PM, Paul Eggleton =
-<paul.eggleton@linux.intel.com> wrote:
->=20
-> On Tue, 26 Apr 2016 09:50:54 Khem Raj wrote:
->>> On Apr 26, 2016, at 1:43 AM, Dai Caiyun <daicy.fnst@cn.fujitsu.com> =
+On 26 April 2016 at 20:08, Mark Asselstine <mark.asselstine@windriver.com>
 wrote:
->>>=20
->>> Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
->>> ---
->>> meta-oe/recipes-support/hwdata/hwdata_0.288.bb | 21 =
-+++++++++++++++++++++
->>> 1 file changed, 21 insertions(+)
->>> create mode 100644 meta-oe/recipes-support/hwdata/hwdata_0.288.bb
->>>=20
->>> diff --git a/meta-oe/recipes-support/hwdata/hwdata_0.288.bb
->>> b/meta-oe/recipes-support/hwdata/hwdata_0.288.bb new file mode =
-100644
->>> index 0000000..67199e9
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-support/hwdata/hwdata_0.288.bb
->>> @@ -0,0 +1,21 @@
->>> +DESCRIPTION =3D "Hardware identification and configuration data"
->>> +HOMEPAGE =3D "http://git.fedorahosted.org/git/hwdata.git"
->>> +SECTION =3D "System/Base"
->>> +
->>> +LICENSE =3D "GPL-2.0+"
->>> +LIC_FILES_CHKSUM =3D =
-"file://LICENSE;md5=3D1556547711e8246992b999edd9445a57"
->>> +SRC_URI =3D
->>> "https://git.fedorahosted.org/cgit/${BPN}.git/snapshot/${BP}.tar.gz" =
-+
->>> +SRC_URI[md5sum] =3D "f3fa1c5edb66ce5b376d95e772b2d303"
->>> +SRC_URI[sha256sum] =3D
->>> "56fc26275b102e538fcfcf9c1093a09f476a1ea8d4e0c733d3c578442923693d" +
->>> +do_configure() {
->>> +    ${S}/configure --datadir=3D${datadir} --libdir=3D${libdir}
->>> +}
->>=20
->> is it using autotools ? if so then inherit autotools might be a good =
-options
->> and remove the do_ functions here.
->=20
-> We established earlier in the thread that it's not using autotools:
->=20
->  https://git.fedorahosted.org/cgit/hwdata.git/tree/configure
 
-ah thanks
+> | Traceback (most recent call last):
+> |   File "./config.status", line 9, in <module>
+> |     from ConfigStatus import config_status
+> |   File
+> "/build/bitbake_build/tmp/work/corei7-64-wrs-linux/mozjs/17.0.0-r0/mozjs17.0.0/js/src/build/ConfigStatus.py",
+> line 11, in <module>
+> |     import sys, re, os, posixpath, ntpath
+> |   File "/usr/lib/python2.7/ntpath.py", line 15, in <module>
+> |     from genericpath import _unicode
+> | ImportError: cannot import name _unicode
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Function failed: do_configure (log file is located at
+> /build//bitbake_build/tmp/work/corei7-64-wrs-linux/mozjs/17.0.0-r0/temp/do_configure/log.do_configure.1056
+>
 
->=20
-> Cheers,
-> Paul
->=20
-> --
->=20
-> Paul Eggleton
-> Intel Open Source Technology Centre
+I'm not sure using pythonnative is the right fix here.  Executing python
+using the host python should just work, so why does importing ntpath fail
+using your host python?
 
+What happens if you run the host python in a terminal and do "import
+ntpath"? Does your host's python have a crippled class library or is broken
+in some way?
 
---Apple-Mail=_73E2A345-70DA-4A43-B31E-A91AF25712E2
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
+Ross
 
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlcf3rMACgkQuwUzVZGdMxRvRwCgk+v2GKwIYzHUethp8bZZgxUC
-m+oAninKz9pIEv8cfadMFpvdt/lFrXwX
-=a0/b
------END PGP SIGNATURE-----
-
---Apple-Mail=_73E2A345-70DA-4A43-B31E-A91AF25712E2--
