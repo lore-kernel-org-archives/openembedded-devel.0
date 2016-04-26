@@ -1,53 +1,24 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com
-	[209.85.192.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 649B370149
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B4F260761
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2016 18:28:10 +0000 (UTC)
-Received: by mail-pf0-f172.google.com with SMTP id c189so9997704pfb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2016 11:28:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=9KenOizVoq+VDPFXPHwaTJBSdk4fpSlZi2Nj7g8MqeQ=;
-	b=VRQKucd8XbHJoyQngne1t6nWSs/IWCNaRAypslwwvU7Lw4ioO7DopvU0io6scZMg+9
-	OLlKNQBVe29he6rbr32wM3WsPwT0xKHznv4LyIFVdV7jFmOnKnVuwElFUD2v6NjmSPw7
-	BmaunUGwjIPSh8hNbg3rPJPcwCmI9elxsNcoHzLqgDp+zl2d3Zty07sgGZJO7H42uYRP
-	eedbW32ISotYyT+1P2MUqunL/379gjS77BMRQRbgZSdFr9nTsL/V7B37y/ei0OZdjhYt
-	4ChRCUZSxpl85oKaBI3yzq4zZQQmrB9viyGN1pkDT8X8dmkr0X47OcqmgaLk9GFUDzk7
-	FRBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=9KenOizVoq+VDPFXPHwaTJBSdk4fpSlZi2Nj7g8MqeQ=;
-	b=K8sQAhQhl2dK4nIVMoP1ypEmOWbB3whfFpSh1xUhFZEVRx/FPal6UQJ5vo34hSv9up
-	xqqoaOVxBXUIz+z07sVo9PFvc2aF9JSGBwoAAtHOi/GZHreBmd5Lh/Zo/+6y3E28gz30
-	2qicnKZCd66/9XFGs6ogYE6g95akIXvOyfbpHTyfnqtncCP0ur29v72MSMhf49WYG81P
-	WPengE9B6gN4uC1ge6BaWonIFhwc3NhRFBBYW0erYQY1AeNN57en4L03AMG1wEf7XVw0
-	KcFse3F6w9mdmkK54veAdIwVZ8TaTDN9fm8Cj0ojkB/NETQRqdD6BKYrVhKSpd07wweq
-	w20w==
-X-Gm-Message-State: AOPr4FVBN6JiDzzbQwZ6pmrcyOPP6icNDIGr2BKFE48nlJ1yJafvuQy62GFOK/U8jm5urQ==
-X-Received: by 10.98.73.142 with SMTP id r14mr5777127pfi.140.1461695290802;
-	Tue, 26 Apr 2016 11:28:10 -0700 (PDT)
-Received: from [10.43.100.29] ([64.2.3.194])
-	by smtp.googlemail.com with ESMTPSA id
-	v1sm148355pfv.92.2016.04.26.11.28.09
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 26 Apr 2016 11:28:09 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org
-References: <1461600749-19432-1-git-send-email-akuster808@gmail.com>
-	<20160426142643.GC2559@jama>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <571FB333.8010203@gmail.com>
-Date: Tue, 26 Apr 2016 11:28:03 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
+	Tue, 26 Apr 2016 19:08:46 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u3QJ8hVJ020129
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Tue, 26 Apr 2016 12:08:44 -0700
+Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Tue, 26 Apr 2016 12:08:43 -0700
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 26 Apr 2016 15:08:42 -0400
+Message-ID: <1461697722-20378-1-git-send-email-mark.asselstine@windriver.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-In-Reply-To: <20160426142643.GC2559@jama>
-Subject: Re: [meta-networking][PATCH] samba: fix QA warnings.
+Cc: koen@dominion.thruhere.net
+Subject: [meta-oe][PATCH] mozjs: fix configure host contamination
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,78 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2016 18:28:15 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 26 Apr 2016 19:08:51 -0000
+Content-Type: text/plain
 
+When building mozjs the following error was observed
 
+| Traceback (most recent call last):
+|   File "./config.status", line 9, in <module>
+|     from ConfigStatus import config_status
+|   File "/build/bitbake_build/tmp/work/corei7-64-wrs-linux/mozjs/17.0.0-r0/mozjs17.0.0/js/src/build/ConfigStatus.py", line 11, in <module>
+|     import sys, re, os, posixpath, ntpath
+|   File "/usr/lib/python2.7/ntpath.py", line 15, in <module>
+|     from genericpath import _unicode
+| ImportError: cannot import name _unicode
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_configure (log file is located at /build//bitbake_build/tmp/work/corei7-64-wrs-linux/mozjs/17.0.0-r0/temp/do_configure/log.do_configure.1056
 
-On 04/26/2016 07:26 AM, Martin Jansa wrote:
-> On Mon, Apr 25, 2016 at 09:12:29AM -0700, Armin Kuster wrote:
->> WARNING: samba-4.4.2-r0 do_package_qa: QA Issue: samba rdepends on libaio, but it isn't a build dependency, missing libaio in DEPENDS or PACKAGECONFIG? [build-deps]
->> WARNING: samba-4.4.2-r0 do_package_qa: QA Issue: samba rdepends on lttng-ust, but it isn't a build dependency, missing lttng-ust in DEPENDS or PACKAGECONFIG? [build-deps]
->>
-> 
-> We used to have PACKAGECONFIG for aio, maybe it's worth trying to fix it
-> instead of adding libaio directly to DEPENDS?
+Note the host paths found in the error msg. Further this issue can be
+explored using the host python, which will not error when attempting
+the above import, and the python in the sysroot, which will fail when
+we attempt the import.
 
-correct. that option is no longer available. Removed in 4.4.0
+By inheriting pythonnative we ensure the proper paths are set to avoid
+this host contamination.
 
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+---
+ meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+index be4b50b..1dc99ab 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+@@ -21,7 +21,7 @@ SRC_URI[sha256sum] = "321e964fe9386785d3bf80870640f2fa1c683e32fe988eeb201b04471c
+ 
+ S = "${WORKDIR}/${BPN}${PV}/js/src"
+ 
+-inherit autotools pkgconfig perlnative
++inherit autotools pkgconfig perlnative pythonnative
+ 
+ DEPENDS += "nspr zlib"
+ 
+-- 
+2.1.4
 
-> 
-> Also there is still:
-> WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
-
-I think Joe is looking into this. He has some fixes not yet published.
-> 
-> and also new:
-> WARN: samba: samba rdepends on libarchive, but it isn't a build dependency?
-
-that is new to me too. Not sure if Joe has that addressed. I can resend
-patch to deal with this.
-
-thanks,
-Armin
-
-
-> 
-> 
->> Signed-off-by: Armin Kuster <akuster808@gmail.com>
->> ---
->>  meta-networking/recipes-connectivity/samba/samba_4.4.2.bb | 3 ++-
->>  1 file changed, 2 insertions(+), 1 deletion(-)
->>
->> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
->> index 9358ca5..8ba2aeb 100644
->> --- a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
->> +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
->> @@ -27,7 +27,7 @@ inherit systemd waf-samba cpan-base perlnative
->>  # remove default added RDEPENDS on perl
->>  RDEPENDS_${PN}_remove = "perl"
->>  
->> -DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb krb5 ctdb libbsd"
->> +DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb krb5 ctdb libbsd libaio"
->>  
->>  SYSVINITTYPE_linuxstdbase = "lsb"
->>  SYSVINITTYPE = "sysv"
->> @@ -54,6 +54,7 @@ PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd"
->>  PACKAGECONFIG[dmapi] = "--with-dmapi,--without-dmapi,dmapi"
->>  PACKAGECONFIG[zeroconf] = "--enable-avahi,--disable-avahi,avahi"
->>  PACKAGECONFIG[valgrind] = ",--without-valgrind,valgrind,"
->> +PACKAGECONFIG[lttng] = "--with-lttng, --without-lttng,lttng-ust"
->>  
->>  SAMBA4_IDMAP_MODULES="idmap_ad,idmap_rid,idmap_adex,idmap_hash,idmap_tdb2"
->>  SAMBA4_PDB_MODULES="pdb_tdbsam,${@bb.utils.contains('PACKAGECONFIG', 'ldap', 'pdb_ldap,', '', d)}pdb_ads,pdb_smbpasswd,pdb_wbc_sam,pdb_samba4"
->> -- 
->> 2.3.5
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
-> 
-> 
 
