@@ -1,50 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id DBF7460745
+Return-Path: <denis@denix.org>
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A20770022
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2016 14:26:26 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id e201so4879281wme.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2016 07:26:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=NNjlkUCiiYvGgLTGNvTsNdk5ByA/OeJ1pxKSrzg1188=;
-	b=ukuRh882yk64YsS9NipTFW2wwBzYyus3zzFBYRygq8a7fSyrs0x5K8MxXBgur0JUGL
-	wpryRq0NNF1AFKIdzqNB4j0+LxblFHEK3puTUWVgOaDQItDg1yIWW1YQsODx3FS6IRrd
-	2DXXxbrNyBPqBh8EKy6L4UwUDT7yGP+eqmErApSyEt2JZcb6Rl36JSoA/7WTEr7xHPHu
-	hpytKcRA/CT/3oIwyoxnDBlMNTxV7tpNEtNy4isjJuxK996JgPEqn+aIb7WkZ5LICcwL
-	jH/SVb+qcU/yN58IlFyRIuULZVV5MvChI82GmHC3FovhQe7fx0zGZM14WyavYyb6pqEE
-	Al4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=NNjlkUCiiYvGgLTGNvTsNdk5ByA/OeJ1pxKSrzg1188=;
-	b=RZoqrfD7sfwv8o7WZOB7w7aYgg1gG7dRd5NVBUK2D+8fzv1RbGREv30fPs9U/K5wIE
-	YtuzztsKywcBMrLlan+uEsWhQ/RBhWGh1dYCrdC1PGZ7+dpFSFJnLwW5QvxkWcTGU3fa
-	l/5hE1s5NazjLeIak8d/jQE4tTN0gmmzT6ODFQzxgGmR6VwU7sqh5yWRwCqZ9gMyuVBz
-	2L62hIWiFIu/K1Yupv1PW0RLE8gN5QFrBrzUwDgJCJpckDyJ+PK5YFprtWA1EzcXaErA
-	yRCMqaP4vTTKSDPTSd7aMTtO7odcqZUH/YVawbwsEL1A5HIUG4qEOu09NX3QqXkuTXla
-	BP6Q==
-X-Gm-Message-State: AOPr4FU0gvXVt73t2h/ZBYP2eqHskyuha4KYb/w38pVrSnHzYLpKekkF3sDIL96O499OTw==
-X-Received: by 10.28.103.2 with SMTP id b2mr19249350wmc.66.1461680786984;
-	Tue, 26 Apr 2016 07:26:26 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	ki9sm29276964wjb.37.2016.04.26.07.26.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 26 Apr 2016 07:26:25 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 26 Apr 2016 16:26:43 +0200
+	Tue, 26 Apr 2016 15:30:26 +0000 (UTC)
+Received: from vz-proxy-l003.mx.aol.com ([64.236.82.155])
+	by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O6800D9TZ2QEX70@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	26 Apr 2016 10:30:26 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=i+tV1o3iWEoTTvx3QNPGxA==:117
+	a=kj9zAlcOel0A:10 a=kziv93cY1bsA:10	a=0gcC27t9AAAA:8 a=Q4-j1AaZAAAA:8
+	a=sozttTNsAAAA:8 a=ox_5BdOvowhNDC-RjuMA:9	a=CjuIK1q_8ugA:10
+	a=GxMFnAFjGssA:10
+Received: by 100.15.86.14 with SMTP id 33809c08; Tue, 26 Apr 2016 15:30:26 GMT
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id CBB72161FC7; Tue,
+	26 Apr 2016 11:30:25 -0400 (EDT)
+Date: Tue, 26 Apr 2016 11:30:25 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160426142643.GC2559@jama>
-References: <1461600749-19432-1-git-send-email-akuster808@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1461600749-19432-1-git-send-email-akuster808@gmail.com>
-User-Agent: Mutt/1.6.0 (2016-04-01)
-Subject: Re: [meta-networking][PATCH] samba: fix QA warnings.
+Message-id: <20160426153025.GH31113@denix.org>
+References: <1459471643-7183-1-git-send-email-denis@denix.org>
+	<20160420182710.GN16135@denix.org> <20160425180750.GW16135@denix.org>
+	<CA+chaQeA63zpMf02NYbDrxZgXdSbx2=T3=nZGmxk4h8XxOx+Xg@mail.gmail.com>
+	<20160425214326.GA31113@denix.org>
+	<CA+chaQduVd3gEmHO1D9YSzid0F6Lm-Mrv+Yh2rW0a=f5fQWKFQ@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CA+chaQduVd3gEmHO1D9YSzid0F6Lm-Mrv+Yh2rW0a=f5fQWKFQ@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-qt5][PATCH 1/2] qtdeclarative: fix compilation of examples/qquickviewcomparison
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,90 +43,182 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2016 14:26:27 -0000
-X-Groupsio-MsgNum: 61178
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/e2eDi0V/xtL+Mc8"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 26 Apr 2016 15:30:29 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
---/e2eDi0V/xtL+Mc8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, Apr 26, 2016 at 08:37:19AM +0200, Martin Jansa wrote:
+> The strange part is that examples built fine here with current master
+> (5.5.99/5.6-beta)
+> without your patches.
 
-On Mon, Apr 25, 2016 at 09:12:29AM -0700, Armin Kuster wrote:
-> WARNING: samba-4.4.2-r0 do_package_qa: QA Issue: samba rdepends on libaio=
-, but it isn't a build dependency, missing libaio in DEPENDS or PACKAGECONF=
-IG? [build-deps]
-> WARNING: samba-4.4.2-r0 do_package_qa: QA Issue: samba rdepends on lttng-=
-ust, but it isn't a build dependency, missing lttng-ust in DEPENDS or PACKA=
-GECONFIG? [build-deps]
->=20
-
-We used to have PACKAGECONFIG for aio, maybe it's worth trying to fix it
-instead of adding libaio directly to DEPENDS?
-
-Also there is still:
-WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
-
-and also new:
-WARN: samba: samba rdepends on libarchive, but it isn't a build dependency?
+That is strange. Can it be toolchain-related? I'm using Linaro gcc-5.3, but I 
+would expect OE-built gcc-5.3 to be as strict and fail similarly on those 
+undeclared or incomplete classes...
 
 
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  meta-networking/recipes-connectivity/samba/samba_4.4.2.bb | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->=20
-> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb b/=
-meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
-> index 9358ca5..8ba2aeb 100644
-> --- a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
-> +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
-> @@ -27,7 +27,7 @@ inherit systemd waf-samba cpan-base perlnative
->  # remove default added RDEPENDS on perl
->  RDEPENDS_${PN}_remove =3D "perl"
-> =20
-> -DEPENDS +=3D "readline virtual/libiconv zlib popt libtalloc libtdb libte=
-vent libldb krb5 ctdb libbsd"
-> +DEPENDS +=3D "readline virtual/libiconv zlib popt libtalloc libtdb libte=
-vent libldb krb5 ctdb libbsd libaio"
-> =20
->  SYSVINITTYPE_linuxstdbase =3D "lsb"
->  SYSVINITTYPE =3D "sysv"
-> @@ -54,6 +54,7 @@ PACKAGECONFIG[systemd] =3D "--with-systemd,--without-sy=
-stemd,systemd"
->  PACKAGECONFIG[dmapi] =3D "--with-dmapi,--without-dmapi,dmapi"
->  PACKAGECONFIG[zeroconf] =3D "--enable-avahi,--disable-avahi,avahi"
->  PACKAGECONFIG[valgrind] =3D ",--without-valgrind,valgrind,"
-> +PACKAGECONFIG[lttng] =3D "--with-lttng, --without-lttng,lttng-ust"
-> =20
->  SAMBA4_IDMAP_MODULES=3D"idmap_ad,idmap_rid,idmap_adex,idmap_hash,idmap_t=
-db2"
->  SAMBA4_PDB_MODULES=3D"pdb_tdbsam,${@bb.utils.contains('PACKAGECONFIG', '=
-ldap', 'pdb_ldap,', '', d)}pdb_ads,pdb_smbpasswd,pdb_wbc_sam,pdb_samba4"
-> --=20
-> 2.3.5
->=20
-> --=20
+> On Mon, Apr 25, 2016 at 11:43 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> 
+> > On Mon, Apr 25, 2016 at 11:24:42PM +0200, Martin Jansa wrote:
+> > > I was testing if this is still needed with latest 5.6 currently in
+> > > jansa/master. Or if I can just drop this again when upgrading to newer
+> > > revisions.
+> > >
+> > > Did you see this issue only with 5.6 revisions currently in master or
+> > with
+> > > 5.6 revisions sent by Andreas which are now in master-next and where even
+> > > qtbase examples fail to build in default setup as reported in separate
+> > > e-mail?
+> > >
+> > http://lists.openembedded.org/pipermail/openembedded-devel/2016-April/107077.html
+> >
+> > Sorry, I haven't had a chance to try master-next yet. Those patches are
+> > needed
+> > for 5.5.99/5.6-beta from current master.
+> >
+> > If you merge 5.6 into master any time soon, I would definitely prefer for
+> > examples to work there. BTW, I can't believe examples are so broken in Qt,
+> > even in the official 5.6 release, based on your other email... So, if you
+> > want
+> > master/krogoth to be 5.6 release, we'd have to backport example fixes from
+> > post-5.6 revs, which I would be glad to help with...
+> >
+> > --
+> > Denys
+> >
+> >
+> > > On Mon, Apr 25, 2016 at 8:07 PM, Denys Dmytriyenko <denis@denix.org>
+> > wrote:
+> > >
+> > > > Martin,
+> > > >
+> > > > Any comments?
+> > > >
+> > > >
+> > > > On Wed, Apr 20, 2016 at 02:27:10PM -0400, Denys Dmytriyenko wrote:
+> > > > > Ping. These 2 have been sitting in master-next as well for quite some
+> > > > time.
+> > > > > Any updates?
+> > > > >
+> > > > >
+> > > > > On Thu, Mar 31, 2016 at 08:47:22PM -0400, Denys Dmytriyenko wrote:
+> > > > > > From: Denys Dmytriyenko <denys@ti.com>
+> > > > > >
+> > > > > >
+> > > >
+> > git/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.cpp:180:14:
+> > > > error: 'QCoreApplication' has not been declared
+> > > > > >           if
+> > > >
+> > (!QCoreApplication::arguments().contains(QStringLiteral("--no_render_alpha")))
+> > > > > >
+> > > > > > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > > > > > ---
+> > > > > >  ...omparison-fix-QCoreApplication-has-not-be.patch | 28
+> > > > ++++++++++++++++++++++
+> > > > > >  recipes-qt/qt5/qtdeclarative_git.bb                |  1 +
+> > > > > >  2 files changed, 29 insertions(+)
+> > > > > >  create mode 100644
+> > > >
+> > recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+> > > > > >
+> > > > > > diff --git
+> > > >
+> > a/recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+> > > >
+> > b/recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+> > > > > > new file mode 100644
+> > > > > > index 0000000..1687fbe
+> > > > > > --- /dev/null
+> > > > > > +++
+> > > >
+> > b/recipes-qt/qt5/qtdeclarative/0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+> > > > > > @@ -0,0 +1,28 @@
+> > > > > > +From 1cdd3278a0b1508640d983720782d39eb919caaf Mon Sep 17 00:00:00
+> > 2001
+> > > > > > +From: Denys Dmytriyenko <denys@ti.com>
+> > > > > > +Date: Thu, 31 Mar 2016 19:38:58 -0400
+> > > > > > +Subject: [PATCH] qquickviewcomparison: fix QCoreApplication has
+> > not
+> > > > been
+> > > > > > + declared error
+> > > > > > +
+> > > > > > +Upstream-Status: Pending
+> > > > > > +
+> > > > > > +Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > > > > > +---
+> > > > > > + examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h |
+> > 1 +
+> > > > > > + 1 file changed, 1 insertion(+)
+> > > > > > +
+> > > > > > +diff --git
+> > > > a/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
+> > > > b/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
+> > > > > > +index 5b86c93..e77514e 100644
+> > > > > > +---
+> > a/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
+> > > > > > ++++
+> > b/examples/quick/quickwidgets/qquickviewcomparison/mainwindow.h
+> > > > > > +@@ -44,6 +44,7 @@
+> > > > > > + #include <QWidget>
+> > > > > > + #include <QQuickWidget>
+> > > > > > + #include <QQuickView>
+> > > > > > ++#include <QCoreApplication>
+> > > > > > +
+> > > > > > + QT_FORWARD_DECLARE_CLASS(QRadioButton)
+> > > > > > + QT_FORWARD_DECLARE_CLASS(QCheckBox)
+> > > > > > +--
+> > > > > > +2.2.0
+> > > > > > +
+> > > > > > diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/
+> > > > qtdeclarative_git.bb
+> > > > > > index 93442fb..9274d00 100644
+> > > > > > --- a/recipes-qt/qt5/qtdeclarative_git.bb
+> > > > > > +++ b/recipes-qt/qt5/qtdeclarative_git.bb
+> > > > > > @@ -15,6 +15,7 @@ DEPENDS += "qtbase"
+> > > > > >
+> > > > > >  SRC_URI += " \
+> > > > > >      file://0001-qmltestexample-fix-link.patch \
+> > > > > > +
+> > > > file://0001-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+> > \
+> > > > > >  "
+> > > > > >
+> > > > > >  EXTRA_OEMAKE +=
+> > > > "QMAKE_SYNCQT=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/syncqt"
+> > > > > > --
+> > > > > > 2.2.0
+> > > > > >
+> > > > > > --
+> > > > > > _______________________________________________
+> > > > > > Openembedded-devel mailing list
+> > > > > > Openembedded-devel@lists.openembedded.org
+> > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > > > > --
+> > > > > _______________________________________________
+> > > > > Openembedded-devel mailing list
+> > > > > Openembedded-devel@lists.openembedded.org
+> > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > > > --
+> > > > _______________________________________________
+> > > > Openembedded-devel mailing list
+> > > > Openembedded-devel@lists.openembedded.org
+> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > > >
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> -- 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---/e2eDi0V/xtL+Mc8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlcfee4ACgkQN1Ujt2V2gBwTgwCfd72u0USCF8oNlSO3DCTHy05L
-HbAAn325veL7gT5U5j+i/CYtn3TxQgza
-=/uzf
------END PGP SIGNATURE-----
-
---/e2eDi0V/xtL+Mc8--
