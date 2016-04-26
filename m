@@ -1,58 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f179.google.com (mail-pf0-f179.google.com
-	[209.85.192.179])
-	by mail.openembedded.org (Postfix) with ESMTP id A7245601A4
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 914B4607A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2016 16:38:43 +0000 (UTC)
-Received: by mail-pf0-f179.google.com with SMTP id 206so8904637pfu.0
+	Tue, 26 Apr 2016 16:51:06 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id zm5so9489106pac.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Apr 2016 09:38:44 -0700 (PDT)
+	Tue, 26 Apr 2016 09:51:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
-	bh=HWiEP7K42f4C+FRsDx/5qgjIzZ9FRNDYpIzwFqMqBnI=;
-	b=RxO4/TWxdrJ2SLtLJy8iLlAMAB7rS8DGWbBv6EX4BwVUTMteKL+z5nClHLnOImVX9x
-	fjwdo5SIF00BTEAmPp9f3LiaYAx8UyxO5g4u83HtMAp0nurTJSR9MZn7rK4borfqB/9S
-	dlkR9naIGZG3D+6TkgL79rYEqJ5N5ii/PpL7OXW06VrjPeIqluEXMdTPFVsJoSo26wtd
-	GBanzbdfSE9uLM2mlXJJjuH2m7OiRbZyfJcM8eR2FgmeUd2zGbd936BdQrl5ZhuM/mov
-	QgM8nGAeumVi/NrtNPeJSeCwFNO+h8w3WuZKYwAdCgzg4xA7T1l5QMS1J2ALDgot+17Y
-	HlPA==
+	bh=nqO1/V5fAel+dIsn/2ZYhBT/b+53i3orik5PBtGgbnw=;
+	b=WbQfPnzyxLuo2zDwWPaBrhDXM0Mm2+Osq3FWu5uNqZ5jjc7rD4okGhGUioq02ywJHR
+	1xctL+fH9ZallGdVJdFQ/PhlKmjO2aRY83ruMrlEk+hGoJgBH9xXhGVvY/q1dB8hFYTz
+	U+XiQ1ljUV9RVLDk19nlFIn/tDi2kZGZKjRhfbn20lca3dQ2kqQadB2y1SBk5TFY02k5
+	bkQhzxBHWWEQlArJRAbp+Xn2PBvIoVS6Lp2HIi3la4iS0K1Tkt5kIwu9ShydcHoBcTrU
+	v2QnB4Dy/rQqs5h1B+fT54/SbwLXDm6fPX7YnuJxqF8UAwtc7zZ1rEeJbpaz6W7lbnm7
+	1bQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
 	:message-id:references:to;
-	bh=HWiEP7K42f4C+FRsDx/5qgjIzZ9FRNDYpIzwFqMqBnI=;
-	b=Rh0WpWdxr57J2LAP9qvz0K0KWuIo9A9EKggTCd1ByfkbPOf38xJINSLoAugd7pRjQR
-	BbAJbUnmhjy4Z2bMRjBCe/YL0CxeHKgvApNqcPP+zTG7IZubXrkPAvcrRZzETSNtwx4K
-	9/LSCgXqHNZ1XUEEexl0f138SSctQ4HVCPuPlJna7zVugObQjWQ50/Jz9DQs2vlOoRgr
-	MgNzaNv1koFmthFP9Ymu33fw49Cjc1Iw1Zlft0n7gsmsksVe8Hbz+wWHnR5W2Uy8QL8K
-	/supTVstl6JMt4T3+QEQU9k3+VbpkypE22enpV/3vLCAiY87VkB+IUHApEFUzE6tYndn
-	O5Qw==
-X-Gm-Message-State: AOPr4FUbR3HbZwxjflbfoIGZ9KB9irSEzYY+q1oYJGk/t0qdMVeBt3GAnK9GnZCgaW7FIQ==
-X-Received: by 10.98.42.211 with SMTP id q202mr4920597pfq.13.1461688724163;
-	Tue, 26 Apr 2016 09:38:44 -0700 (PDT)
+	bh=nqO1/V5fAel+dIsn/2ZYhBT/b+53i3orik5PBtGgbnw=;
+	b=S1TBjTeqzUUg+8l6aW/liAcJKhaqy+Yc/wqfDIevu/7nYt1r4SKc/gJ3ntpV4BaOU8
+	DD/VfLPIu1v+1ybh6uToS7lb/7dXmoqeZ4fl8iGEZYYWiUXr8o/7R/27NDAIf5mKHxeg
+	cle72KRtd7nL28YhUPWYNumsUbuWdK8qlwxK4a/Y07RlwlYxs5bldu8XpHhD55hfbfbh
+	DfzRiF/Jq0sun1ZOnstZnBHPrd/dLsteHJNv1sQOKDbLG5DyLfdGKVheGwHOQqvj/p4/
+	OlN9LQda4FWmsOAvIPN9J/X2m1kgLPvT3Vo5JzOh0MpnhA917WCh0L1JU/T2l6FpcDKy
+	J1VQ==
+X-Gm-Message-State: AOPr4FXMdkKeJCgInj5BFSEoBERtxsgJcrzn/g34MQe/tzABZms4EGUuy0RXkf4k5SGSGw==
+X-Received: by 10.66.149.194 with SMTP id uc2mr5110518pab.116.1461689462898;
+	Tue, 26 Apr 2016 09:51:02 -0700 (PDT)
 Received: from ?IPv6:2601:646:8800:5a9a:b93e:176b:d03b:ac8e?
 	([2601:646:8800:5a9a:b93e:176b:d03b:ac8e])
 	by smtp.gmail.com with ESMTPSA id
-	w125sm6480579pfb.16.2016.04.26.09.38.43
+	e87sm38305452pfb.76.2016.04.26.09.51.02
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 26 Apr 2016 09:38:43 -0700 (PDT)
+	Tue, 26 Apr 2016 09:51:02 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
 X-Pgp-Agent: GPGMail 2.6b2
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20160426153025.GH31113@denix.org>
-Date: Tue, 26 Apr 2016 09:38:42 -0700
-Message-Id: <139887C4-F77D-4838-A13A-877DDDF999CC@gmail.com>
-References: <1459471643-7183-1-git-send-email-denis@denix.org>
-	<20160420182710.GN16135@denix.org>
-	<20160425180750.GW16135@denix.org>
-	<CA+chaQeA63zpMf02NYbDrxZgXdSbx2=T3=nZGmxk4h8XxOx+Xg@mail.gmail.com>
-	<20160425214326.GA31113@denix.org>
-	<CA+chaQduVd3gEmHO1D9YSzid0F6Lm-Mrv+Yh2rW0a=f5fQWKFQ@mail.gmail.com>
-	<20160426153025.GH31113@denix.org>
+In-Reply-To: <1461660218-2313-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+Date: Tue, 26 Apr 2016 09:50:54 -0700
+Message-Id: <CEC3C9D8-666A-4041-91D5-5BBD1ECECC1B@gmail.com>
+References: <CAJTo0LYJ=9m9z4-4pE6dD2mRZNGVzGte5ktCYEWP4Bw58qAd6w@mail.gmail.com>
+	<1461660218-2313-1-git-send-email-daicy.fnst@cn.fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 X-Mailer: Apple Mail (2.3124)
-Subject: Re: [meta-qt5][PATCH 1/2] qtdeclarative: fix compilation of examples/qquickviewcomparison
+Subject: Re: [meta-oe][PATCH v3] hwdata: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,37 +60,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2016 16:38:44 -0000
-X-Groupsio-MsgNum: 61180
+X-List-Received-Date: Tue, 26 Apr 2016 16:51:08 -0000
+X-Groupsio-MsgNum: 61181
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_81B89480-2BB9-4296-9220-2EB78B24180C";
+	boundary="Apple-Mail=_A011A68A-8020-4FEE-8DCA-0F19F5CC0593";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_81B89480-2BB9-4296-9220-2EB78B24180C
+--Apple-Mail=_A011A68A-8020-4FEE-8DCA-0F19F5CC0593
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
-	charset=utf-8
+	charset=us-ascii
 
 
-> On Apr 26, 2016, at 8:30 AM, Denys Dmytriyenko <denis@denix.org> =
+> On Apr 26, 2016, at 1:43 AM, Dai Caiyun <daicy.fnst@cn.fujitsu.com> =
 wrote:
 >=20
-> On Tue, Apr 26, 2016 at 08:37:19AM +0200, Martin Jansa wrote:
->> The strange part is that examples built fine here with current master
->> (5.5.99/5.6-beta)
->> without your patches.
+> Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+> ---
+> meta-oe/recipes-support/hwdata/hwdata_0.288.bb | 21 =
++++++++++++++++++++++
+> 1 file changed, 21 insertions(+)
+> create mode 100644 meta-oe/recipes-support/hwdata/hwdata_0.288.bb
 >=20
-> That is strange. Can it be toolchain-related? I'm using Linaro =
-gcc-5.3, but I
-> would expect OE-built gcc-5.3 to be as strict and fail similarly on =
-those
-> undeclared or incomplete classes=E2=80=A6
+> diff --git a/meta-oe/recipes-support/hwdata/hwdata_0.288.bb =
+b/meta-oe/recipes-support/hwdata/hwdata_0.288.bb
+> new file mode 100644
+> index 0000000..67199e9
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/hwdata/hwdata_0.288.bb
+> @@ -0,0 +1,21 @@
+> +DESCRIPTION =3D "Hardware identification and configuration data"
+> +HOMEPAGE =3D "http://git.fedorahosted.org/git/hwdata.git"
+> +SECTION =3D "System/Base"
+> +
+> +LICENSE =3D "GPL-2.0+"
+> +LIC_FILES_CHKSUM =3D =
+"file://LICENSE;md5=3D1556547711e8246992b999edd9445a57"
+> +SRC_URI =3D =
+"https://git.fedorahosted.org/cgit/${BPN}.git/snapshot/${BP}.tar.gz"
+> +
+> +SRC_URI[md5sum] =3D "f3fa1c5edb66ce5b376d95e772b2d303"
+> +SRC_URI[sha256sum] =3D =
+"56fc26275b102e538fcfcf9c1093a09f476a1ea8d4e0c733d3c578442923693d"
+> +
+> +do_configure() {
+> +    ${S}/configure --datadir=3D${datadir} --libdir=3D${libdir}
+> +}
 
-can both of you paste the <gcc> -E -dM output of this file in question ?
+is it using autotools ? if so then inherit autotools might be a good =
+options
+and remove the do_ functions here.
+
+> +
+> +do_install() {
+> +    oe_runmake install DESTDIR=3D${D}
+> +}
+> +
+> +FILES_${PN} =3D "${libdir}/* \
+> +               ${datadir}/* "
+> --
+> 1.9.1
+>=20
+>=20
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
-
---Apple-Mail=_81B89480-2BB9-4296-9220-2EB78B24180C
+--Apple-Mail=_A011A68A-8020-4FEE-8DCA-0F19F5CC0593
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -106,9 +141,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlcfmZIACgkQuwUzVZGdMxSaQgCbBoicbYx2kgTlJDqG5KMzLCNU
-QwsAn1pshBvIzuO7Y7e0R3oRz1PC+ygu
-=az7F
+iEYEARECAAYFAlcfnHUACgkQuwUzVZGdMxT9OQCfYyQ+0pvBRKRdHS9fpaODZX6/
+uCUAn0m6TnSX1ILl+RVn93li0DPrBC6a
+=GikG
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_81B89480-2BB9-4296-9220-2EB78B24180C--
+--Apple-Mail=_A011A68A-8020-4FEE-8DCA-0F19F5CC0593--
