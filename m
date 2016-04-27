@@ -1,53 +1,51 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
-	[209.85.213.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 654E962137
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 771586FFF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2016 08:53:28 +0000 (UTC)
-Received: by mail-ig0-f175.google.com with SMTP id g8so39091840igr.0
+	Wed, 27 Apr 2016 09:40:04 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id r12so11182129wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2016 01:53:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=lwfa8BJL5SYaBWticY86LwIaK5uEYAXoozuNZGY7ZJE=;
-	b=uU4bykzP8wjB05IQjqoOZDhe/+ujSOsOBMWftGzHTTbfO6ABjPwArAXHPknb8tQqQn
-	H0/QK8CB3AZqeE6bRLHvke4llZK6p+8YCHSnyhiP39L8ez+l45QgiRBXKDXIR4sycg5J
-	naojKFyn0Op4D5+9H66EBg5jVly4Nwwj94b/AJM6pl6QcTVTcqiGltdl4jDR5ggNgTOF
-	yfcAryPoBACLJIw/sPlXDkWGA0uBN9VwYUk+TYtuEQpiSZK8jeAzB1l60nRcjg8zpaBZ
-	Uo7HLk3aFZ8u+YNL9Nub0lHkiBy7rWWeu2aZj93/7DrrmbWh2P56yiTAo/GgoeU419KP
-	7Bew==
+	Wed, 27 Apr 2016 02:40:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=WfOOf8C2ecbP/2iAbJN0+0V4Ahc6YV0wqE2stInXIBQ=;
+	b=ba5shwb8a7oYUxbvZNoc0esS8LCLFNQbSEY+PNvHZctNvlAQPmpp6AnoibQaMaPbmQ
+	v5I9RbGEer9gAtYhMIOkS42BrebYx8bPTNDoDLt75TOUoit1u+Wdi/IRj1rhDa132DFK
+	RvC/6Y8UJSk+AqzL/DfR3Y4JzKlgkG+9SPX+f8u+45eZPaUziKdkNE+q7n0P7dQdqGKW
+	8gJIrHUee9Ram+CQ0fjuTXER4jDpHH8DTwvjRQ9hEMw8jakL2q7ZLhi6vUefYqfeIyU0
+	2HI5OGw9VOtK6lCOgGgD7mbNrQCZLm051ZeBoLjl/ZpDTv30key31sjMsF59jKz1NvlN
+	6kMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=lwfa8BJL5SYaBWticY86LwIaK5uEYAXoozuNZGY7ZJE=;
-	b=NcR0I8nGIdnlwvl9xQt/+n9WQhGkSNWvZ6m9IRmFMizGzc9alQFI4bTcbJZfc68txJ
-	SaX/fYZtNTO94kYlH+mIwbMw+TnT6MWi352H4uRYmz63vdH05EVApS3KyJuNrXcgW3J4
-	p4XZflZcsCTvoknoczUPi/O+tXMZ8lGNrOeb6NmNSP//rxpd2AJMix49rRuRVHQ7YqDD
-	YW9YiuWBvktRZDJP+9nB73JobFvJ4RLrlVPVkqPdmewsqAyrjgPuOVDOqKLwJuGPgu+d
-	09XHQE9ew/BoiISfyaGf5l2rYEZOTJnHqkb3gGxv/uAwDv4gmylrgHuh6Osnwd4zZ1A0
-	u1Fw==
-X-Gm-Message-State: AOPr4FUyJ8AtAowqOqrsUKM7IsPSVJTSYOOdJAwpfLYm1GMyW8aEHT81FiwRgSBeW2P/iQ8Eq6XIjbo5ixbH2OhB
-X-Received: by 10.50.150.1 with SMTP id ue1mr24101938igb.52.1461747209154;
-	Wed, 27 Apr 2016 01:53:29 -0700 (PDT)
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=WfOOf8C2ecbP/2iAbJN0+0V4Ahc6YV0wqE2stInXIBQ=;
+	b=RHApEsLNZuQ6XKm8VynJFsmlDOEufmJ0dboCRFAGGeOMF96LsM31kT4R6sR+VCPaKH
+	Q6UirjjH2YDA3bjLIqEdg4D5tp3g4Rr78OBeV+5iQb+ikL/cHVXVihaXI8E8CiykF9uD
+	GC6XrKJBrKytIiF9d+FyKisi8SUDdRAx5skCL9JzM7wyDXRMlYf16mnPa2tlABnHCVyb
+	o9X0WtZ03pvTs9ynNIcber3tsHBZIcS58l7Jcgye+MFWIqNxZ5U3yl5FjODD3ZIxxE9F
+	VKpL+lXLAwgCqZnzwJPaWthRRm05A/YMgpfSJwPPHaIkYg70z/7oDQpHDB2lfb5Icy2s
+	c1tg==
+X-Gm-Message-State: AOPr4FVmPlQJBHXBtE9oOKrN7+ABDy45CPeR0lhKfOh1wGkSgWO8RAMYeZv9apXTeUvLTQ==
+X-Received: by 10.28.30.78 with SMTP id e75mr24676666wme.88.1461750004714;
+	Wed, 27 Apr 2016 02:40:04 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	jo6sm3037438wjb.48.2016.04.27.02.40.03
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 27 Apr 2016 02:40:03 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 27 Apr 2016 11:40:34 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160427094034.GG2559@jama>
+References: <1461689867-22284-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-Received: by 10.107.9.106 with HTTP; Wed, 27 Apr 2016 01:53:09 -0700 (PDT)
-In-Reply-To: <CAJTo0Lb25x1H44nGn05d6qBVLDpyiaZ3XW40fdrAWcP_D+qYwg@mail.gmail.com>
-References: <B1D22563-F31B-4EF1-90D6-16EB391134D5@gmail.com>
-	<CACS+7ZSpWgziO+GF++25dM7kgP4SZ_GDV+-DcEMQ_YUGyEEnfQ@mail.gmail.com>
-	<CAMKF1spQn114r9dCAk9z7c3hw-NJp3pVoVP+f3gao2mhLTBHYg@mail.gmail.com>
-	<CAMKF1spwimpQwSE38B5jWmyZXwMKy6znMEF9p-NmTM4mGGr+4g@mail.gmail.com>
-	<CAJTo0Lb25x1H44nGn05d6qBVLDpyiaZ3XW40fdrAWcP_D+qYwg@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 27 Apr 2016 09:53:09 +0100
-Message-ID: <CAJTo0LZZ3Hs_yrm5ceik4j8Orv-UQ9T72Wu=R_PCRKw4Y9-WCw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	OE Core mailing list <openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] [OE-core] [RFT] GCC 6 Recipes
+In-Reply-To: <1461689867-22284-1-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Subject: Re: [meta-oe][PATCH] iksemel: Disable gnutls and whitelist it again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,33 +58,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2016 08:53:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 27 Apr 2016 09:40:06 -0000
+X-Groupsio-MsgNum: 61203
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="t4apE7yKrX2dGgJC"
+Content-Disposition: inline
 
-Finally made errors.yp do the right thing:
-http://errors.yoctoproject.org/Errors/Latest/?filter=91ef7bf5ad13304827e2ef06738f7fc28ed650f6&type=commit
-is a list of all the failures.
+--t4apE7yKrX2dGgJC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Ross
+On Tue, Apr 26, 2016 at 09:57:47AM -0700, Khem Raj wrote:
+> Change-Id: I67a5edc0e16d5b5f5cbf204f2b2713f1a0c17afb
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-support/iksemel/iksemel_1.4.bb | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-support/iksemel/iksemel_1.4.bb b/meta-oe/rec=
+ipes-support/iksemel/iksemel_1.4.bb
+> index f1276f9..ae26d4b 100644
+> --- a/meta-oe/recipes-support/iksemel/iksemel_1.4.bb
+> +++ b/meta-oe/recipes-support/iksemel/iksemel_1.4.bb
+> @@ -4,16 +4,14 @@ HOMEPAGE =3D "http://iksemel.googlecode.com"
+>  SECTION =3D "libs"
+>  LICENSE =3D "LGPLv2.1"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd8045f3b8f929c1cb29a1e3fd737b=
+499"
+> -DEPENDS =3D "gnutls"
+> =20
+>  PR =3D "r1"
+> =20
+> -# http://errors.yoctoproject.org/Errors/Details/25825/
+> -PNBLACKLIST[iksemel] ?=3D "Not compatible with gnutls version 3.4 curren=
+tly in oe-core"
+> -
+>  SRC_URI =3D "http://iksemel.googlecode.com/files/${BP}.tar.gz;name=3Darc=
+hive \
+>             file://r25.diff"
+>  SRC_URI[archive.md5sum] =3D "532e77181694f87ad5eb59435d11c1ca"
+>  SRC_URI[archive.sha256sum] =3D "458c1b8fb3349076a6cecf26c29db1d561315d84=
+e16bfcfba419f327f502e244"
+> =20
+>  inherit autotools pkgconfig
+> +
+> +EXTRA_OECONF +=3D "--disable-gnutls"
 
-On 27 April 2016 at 09:02, Burton, Ross <ross.burton@intel.com> wrote:
+Are you using different iksemel version?
 
->
-> On 21 April 2016 at 04:06, Khem Raj <raj.khem@gmail.com> wrote:
->
->> I have updated
->>
->> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-6
->>
->> With few more patches added now. Most of packages in OE-Core are
->> building fine except linux-yocto on mips and ppc
->>
->
-> I threw this at the autobuilder.  Lots of c++ failures on various
-> architectures.
->
-> https://autobuilder.yoctoproject.org/main/tgrid, the row for SHA 91ef.
->
-> Ross
->
+ERROR: iksemel-1.4-r1 do_configure: QA Issue: iksemel: configure was passed=
+ unrecognised options: --disable-gnutls [unknown-configure-option]
+ERROR: iksemel-1.4-r1 do_configure: Fatal QA errors found, failing task.
+ERROR: iksemel-1.4-r1 do_configure: Function failed: do_qa_configure
 
+> --=20
+> 2.7.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--t4apE7yKrX2dGgJC
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlcgiNsACgkQN1Ujt2V2gBzNLQCeKK12aHkBoov2JSNBy3g5azsW
+5wUAoKowcwKLZ22fJNWVEefWJiH4nj6y
+=d4gW
+-----END PGP SIGNATURE-----
+
+--t4apE7yKrX2dGgJC--
