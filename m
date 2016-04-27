@@ -1,46 +1,25 @@
-Return-Path: <sujith.h@gmail.com>
-Received: from mail-pa0-f65.google.com (mail-pa0-f65.google.com
-	[209.85.220.65])
-	by mail.openembedded.org (Postfix) with ESMTP id D187260721
+Return-Path: <bruno.bottazzini@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 88098605FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2016 13:35:06 +0000 (UTC)
-Received: by mail-pa0-f65.google.com with SMTP id vv3so5616511pab.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2016 06:35:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=AQT+vxUYN6PQv1/6KskDd9blhhUllpej+wjKg5ldBIQ=;
-	b=jc8j+faf1JqZfyM598b/oClauR/3FPBsSbU5lYLidzDx6/hse0xBX6npLT9iHL+Ak0
-	b0dHa2nrMypJxFMm4K3tkbKYs0NNKAhwPrgNOfjBjuWJ77b5w28mvXPhaC0HxRTj3pNI
-	Eg4EsI0ROPdJXhoO1XZBdSs/mTWnF2EGtj8whbLa2UyRCGn3TQyy/5qGhbgA7w1/KNe+
-	QHWtW8qPO6wGJuew0Zz/XFHJc9Dl5Qz7VMgUMUi4gPVlyBMzfJmlkUkzwJwwPnyxOcLo
-	DICIbh9csndV2Lfoo7IR2hMWA3CtEUtyf5UL6fQla4Y51WEIma3j7mU/OJjbRzOQvtUG
-	D76A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=AQT+vxUYN6PQv1/6KskDd9blhhUllpej+wjKg5ldBIQ=;
-	b=CX2JytXKweEZunv4JQa/Gkjo+SVPBAN5R1KwwtPD4rPCsRSu2ncyxt7cxoAqLv7rTF
-	igvZ52SngMZISfOaOouVAUx4T52Pm40vlX7Cu0J3pHkqqh2oVrGBHFgFhaL+KUDYfo1h
-	k30dUJcZxYdm7veBIty8nOintFZuV+S5ulXqjv2S27kNLBHNwcInRKopc4OZQrq4r6u3
-	xIS2wM0zJim9rc/0VT8h4zIO8pbS2QRl2mpzV2BQFsh8wphzd9+QEg0W80A+z97pCjue
-	EM9MDOEbIZFa4RwswP8+78U+cy8eIWKhG6s32LcZ0SAPMnagyvtgyPUyjalw1SGXGeA7
-	UAPQ==
-X-Gm-Message-State: AOPr4FWs1zFJ6r0vDAR9zGBKLGRUm3r0KOUAm0BhZwqSlkTMjtpbdVNm0XNurci9Q7nDHw==
-X-Received: by 10.66.6.98 with SMTP id z2mr11812758paz.95.1461764107209;
-	Wed, 27 Apr 2016 06:35:07 -0700 (PDT)
-Received: from kdekidd0.inp-wifi.mentorg.com ([139.181.35.34])
-	by smtp.gmail.com with ESMTPSA id h1sm6729480pfh.49.2016.04.27.06.35.04
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 27 Apr 2016 06:35:06 -0700 (PDT)
-From: Sujith Haridasan <sujith.h@gmail.com>
-X-Google-Original-From: Sujith Haridasan <Sujith_Haridasan@mentor.com>
+	Wed, 27 Apr 2016 13:52:39 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by orsmga101.jf.intel.com with ESMTP; 27 Apr 2016 06:52:11 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.24,541,1455004800"; d="scan'208";a="954042596"
+Received: from bottazzini-thinkpad-t430.bz.intel.com (HELO [10.218.98.161])
+	([10.218.98.161])
+	by fmsmga001.fm.intel.com with ESMTP; 27 Apr 2016 06:52:11 -0700
+Message-ID: <1461765122.3159.8.camel@bottazzini-ThinkPad-T430>
+From: "Bottazzini, Bruno" <bruno.bottazzini@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Apr 2016 19:04:53 +0530
-Message-Id: <1461764093-12263-1-git-send-email-Sujith_Haridasan@mentor.com>
-X-Mailer: git-send-email 1.9.1
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [meta-oe][PATCH] fbida: use separate builddir
+Date: Wed, 27 Apr 2016 10:52:02 -0300
+In-Reply-To: <20160427075206.GE2559@jama>
+References: <1461602537-19434-1-git-send-email-bruno.bottazzini@intel.com>
+	<20160427075206.GE2559@jama>
+X-Mailer: Evolution 3.10.4-0ubuntu2 
+Mime-Version: 1.0
+Subject: Re: [meta-oe] libmicrohttpd: update to 0.9.49
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,42 +32,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2016 13:35:08 -0000
+X-List-Received-Date: Wed, 27 Apr 2016 13:52:42 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-From: Christopher Larson <chris_larson@mentor.com>
+Hi Martin,
 
-Separate builddir from the sourcedir.
+I haven't received this error when compiling libmicrohttpd in the
+version 0.9.49.
 
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
-Signed-off-by: Sujith H <sujith.h@gmail.com>
----
- meta-oe/recipes-graphics/fbida/fbida_2.10.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+Did you get this error? 
 
-diff --git a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-index 8a4c083..7d5dc89 100644
---- a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-+++ b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-@@ -14,7 +14,9 @@ SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz"
- SRC_URI[md5sum] = "09460b964b58c2e39b665498eca29018"
- SRC_URI[sha256sum] = "7a5a3aac61b40a6a2bbf716d270a46e2f8e8d5c97e314e927d41398a4d0b6cb6"
- 
--EXTRA_OEMAKE = "STRIP="
-+B = "${WORKDIR}/build"
-+
-+EXTRA_OEMAKE = "STRIP= 'srcdir=${S}' -f ${S}/GNUmakefile"
- 
- PACKAGECONFIG ??= "gif png curl"
- PACKAGECONFIG[curl] = ",,curl"
-@@ -26,6 +28,7 @@ PACKAGECONFIG[webp] = ",,libwebp"
- PACKAGECONFIG[lirc] = ",,lirc"
- 
- do_compile() {
-+    sed -i -e 's# fbgs# \$(srcdir)/fbgs#; s#-Ijpeg#-I\$(srcdir)/jpeg#; s# jpeg/# \$(srcdir)/jpeg/#' ${S}/GNUmakefile
-     sed -i -e 's:/sbin/ldconfig:echo x:' ${S}/mk/Autoconf.mk
-     sed -i -e 's: cpp: ${TARGET_PREFIX}cpp -I${STAGING_INCDIR}:' ${S}/GNUmakefile
- 
--- 
-1.9.1
+Best Regards,
+
+On Wed, 2016-04-27 at 09:52 +0200, Martin Jansa wrote:
+> On Mon, Apr 25, 2016 at 01:42:17PM -0300, Bruno Bottazzini wrote:
+> > Signed-off-by: Bruno Bottazzini <bruno.bottazzini@intel.com>
+> > ---
+> >  .../{libmicrohttpd_0.9.34.bb => libmicrohttpd_0.9.49.bb}            | 6 +++---
+> >  1 file changed, 3 insertions(+), 3 deletions(-)
+> >  rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.34.bb => libmicrohttpd_0.9.49.bb} (82%)
+> > 
+> > diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.49.bb
+> > similarity index 82%
+> > rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+> > rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.49.bb
+> > index e3c833b..7b29065 100644
+> > --- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+> > +++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.49.bb
+> > @@ -6,10 +6,10 @@ SECTION = "net"
+> >  DEPENDS = "libgcrypt gnutls file"
+> >  
+> >  SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
+> > -SRC_URI[md5sum] = "2947eee13c2c8affb95023a0cb6fda0c"
+> > -SRC_URI[sha256sum] = "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843be421a040be1b25a88"
+> > +SRC_URI[md5sum] = "3209aa2ac6199b874a6325342b86edbc"
+> > +SRC_URI[sha256sum] = "9407d8252548ab97ace3276e0032f073820073c0599d43baff832902a8dab11c"
+> >  
+> > -inherit autotools lib_package
+> > +inherit autotools lib_package pkgconfig
+> 
+> I've reported this in 0.9.48 upgrade:
+> http://lists.openembedded.org/pipermail/openembedded-devel/2016-March/106672.html
+> 
+> libmicrohttpd-0.9.49: libmicrohttpd: configure was passed unrecognised
+> options: --disable-spdy [unknown-configure-option]
+> 
+> This time I'll make sure to hold this patch until it's resolved.
+> 
+> >  # disable spdy, because it depends on openssl
+> >  EXTRA_OECONF += "--disable-static --with-gnutls=${STAGING_LIBDIR}/../ --disable-spdy"
+> > -- 
+> > 2.7.1
+> > 
+> > -- 
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+
 
 
