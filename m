@@ -1,49 +1,29 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
-	[209.85.213.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BD2B62135
+Return-Path: <contact@jgueytat.fr>
+Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net
+	[217.70.183.198])
+	by mail.openembedded.org (Postfix) with ESMTP id 0790660107
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2016 17:34:26 +0000 (UTC)
-Received: by mail-ig0-f179.google.com with SMTP id g8so51635013igr.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2016 10:34:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=vSvGNfKijC5GmNHzuTfZLiD1B+gUbSbZB2ckn+sxbQw=;
-	b=FG2XdM/ZQM8Q7LwMHZO2Z81ApoNZYZk0ZQc8l8rtOrnGyx3+ABobC0cGs+JYx+yH4N
-	mS4BGveehGu6P84OhKgjPUltXwTMDfNFO0XBPdAuXChPxFdOTbwHHuW8i4BHjiFy7d5N
-	TYG7QQJr7WmUKJp3TtFQO7YkGokedwc+0baxhpLXH3SyuhMHnrUww96Fxt60zMXfOe3c
-	H91QOtpi6C2/YACKO2Pvkca3bwXSTHXpkOfIwGgZit1VfU56Tffa7rf0yHwyg3VYVqd4
-	k7zMn3lYPyn+1R2h+/65jyFDkSWHlg4tUjG9jZ6OqYfUGQtEkCGFncX6Z3PFy9MWaxaR
-	XUuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=vSvGNfKijC5GmNHzuTfZLiD1B+gUbSbZB2ckn+sxbQw=;
-	b=mnJ/dZ6YsN+2QVcYlgpP6ur8/w2qpWLyf2SWRoT+muA0hihxhZctHc4AfmFdsbE4Di
-	hGGIiJouFjYDFvmwiVfflgHM5JUbi89FTnAgb8ZjbY2iuSdIWHzFQJ/xIIs/160I2gvJ
-	mPjvc8ESbzFOWErD5KzzETLoMIstilGU9S6N/oO2jEwjXrVFvyarITd8/4jacHKI1He6
-	wLsTQc/Q4AbVsVw8NXbynM6UGYfn6CmRpOR9LGOZect6rbTOoUNXmyFdyD0yqBU8WM1W
-	s+Z6Yy18OCG1pK/PP1Q/0WlSe+F+pwgssDSkt9zsTbKus7KNaD0oNwYZBolHt0lubpuD
-	DLGw==
-X-Gm-Message-State: AOPr4FV60RTy0bl9hymtcS9GoFgrmVPV8w6AKdQEGCIdlGmC29uTX5zqGtBQRCeMEZi9kdy1RODZMhHaVjtZ7HGF
-X-Received: by 10.50.62.20 with SMTP id u20mr11979830igr.52.1461778466808;
-	Wed, 27 Apr 2016 10:34:26 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.9.106 with HTTP; Wed, 27 Apr 2016 10:34:07 -0700 (PDT)
-In-Reply-To: <CAPuovELikTayU6Q6xCSgR8tMHKjEyDE_zvCrcH_XUg68bJGr+Q@mail.gmail.com>
-References: <1461697722-20378-1-git-send-email-mark.asselstine@windriver.com>
-	<CAJTo0LYyrrO+5277fe2q3wZ8Z_JEsxU=0OqyXu5b7CK9hsh_GQ@mail.gmail.com>
-	<CAPuovELikTayU6Q6xCSgR8tMHKjEyDE_zvCrcH_XUg68bJGr+Q@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 27 Apr 2016 18:34:07 +0100
-Message-ID: <CAJTo0LYVVLJ1XqQKgVtf7FCw+GkzAdJX+MB6_wB6Ffo-w0u+pg@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH] mozjs: fix configure host contamination
+	Wed, 27 Apr 2016 17:45:47 +0000 (UTC)
+Received: from mfilter13-d.gandi.net (mfilter13-d.gandi.net [217.70.178.141])
+	by relay6-d.mail.gandi.net (Postfix) with ESMTP id 4432FFB8C1;
+	Wed, 27 Apr 2016 19:45:47 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mfilter13-d.gandi.net
+Received: from relay6-d.mail.gandi.net ([IPv6:::ffff:217.70.183.198])
+	by mfilter13-d.gandi.net (mfilter13-d.gandi.net [::ffff:10.0.15.180])
+	(amavisd-new, port 10024)
+	with ESMTP id A9lJpAMOHgov; Wed, 27 Apr 2016 19:45:45 +0200 (CEST)
+X-Originating-IP: 92.245.156.62
+Received: from Happy.febio.local (unknown [92.245.156.62])
+	(Authenticated sender: contact@jgueytat.fr)
+	by relay6-d.mail.gandi.net (Postfix) with ESMTPSA id 3AAFCFB8BF;
+	Wed, 27 Apr 2016 19:45:44 +0200 (CEST)
+From: Julien Gueytat <contact@jgueytat.fr>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 27 Apr 2016 19:45:44 +0200
+Message-Id: <1461779144-2274-1-git-send-email-contact@jgueytat.fr>
+X-Mailer: git-send-email 1.9.1
+Cc: j.madieu@expemb.com
+Subject: [meta-qt5][PATCH] Reorder EGL libraries from pkgconfig and defaults:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,22 +36,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2016 17:34:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 27 Apr 2016 17:45:48 -0000
 
-On 27 April 2016 at 16:15, Mark Asselstine <mark.asselstine@windriver.com>
-wrote:
+https://bugreports.qt.io/browse/QTBUG-50838
+https://bugreports.qt.io/browse/QTBUG-52739
 
-> > I'm not sure using pythonnative is the right fix here.  Executing python
-> > using the host python should just work, so why does importing ntpath fail
-> > using your host python?
->
-> Correct. Host python should and does work but configure is executing
-> sysroot python and using host libraries.
->
+The modification is the less intrusive possible. It only swaps LIBS and QMAKE_LIBS_EGL.
+The reason behind that was that for the RaspberryPi:
+ *  -lEGL -GLESv2 can link
+ *  -lGLESv2 -lEGL can't
 
-How is it finding and executing the sysroot python without inheriting
-pythonnative?
+Adding -lEGL -lGLESv2 and then -lEGL gives -lGLESv2 -lEGL ... the libraries swaped.
 
-Ross
+Signed-off-by: Julien Gueytat <contact@jgueytat.fr>
+---
+ ...EGL-libraries-from-pkgconfig-and-defaults.patch | 98 ++++++++++++++++++++++
+ recipes-qt/qt5/qtbase_git.bb                       |  1 +
+ 2 files changed, 99 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtbase/0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
+
+diff --git a/recipes-qt/qt5/qtbase/0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch b/recipes-qt/qt5/qtbase/0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
+new file mode 100644
+index 0000000..3c0b9e6
+--- /dev/null
++++ b/recipes-qt/qt5/qtbase/0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
+@@ -0,0 +1,98 @@
++From d623d2c2ed49c4dc57fb0dde1faab20976dfc3dc Mon Sep 17 00:00:00 2001
++From: Julien Gueytat <contact@jgueytat.fr>
++Date: Wed, 27 Apr 2016 19:24:39 +0200
++Subject: [PATCH] Reorder EGL libraries from pkgconfig and defaults:
++
++https://bugreports.qt.io/browse/QTBUG-50838
++https://bugreports.qt.io/browse/QTBUG-52739
++
++The modification is the less intrusive possible. It only swaps LIBS and QMAKE_LIBS_EGL.
++The reason behind that was that for the RaspberryPi:
++ *  -lEGL -GLESv2 can link
++ *  -lGLESv2 -lEGL can't
++
++Adding -lEGL -lGLESv2 and then -lEGL gives -lGLESv2 -lEGL ... the libraries swaped.
++
++Signed-off-by: Julien Gueytat <contact@jgueytat.fr>
++---
++ config.tests/qpa/egl/egl.pro               |  5 ++++-
++ config.tests/qpa/eglfs-brcm/eglfs-brcm.pro | 12 +++++++-----
++ configure                                  | 16 ++++++++++++++--
++ 3 files changed, 25 insertions(+), 8 deletions(-)
++
++diff --git a/config.tests/qpa/egl/egl.pro b/config.tests/qpa/egl/egl.pro
++index b5396da..828b674 100644
++--- a/config.tests/qpa/egl/egl.pro
+++++ b/config.tests/qpa/egl/egl.pro
++@@ -5,6 +5,9 @@ for(p, QMAKE_LIBDIR_EGL) {
++ }
++ 
++ !isEmpty(QMAKE_INCDIR_EGL): INCLUDEPATH += $$QMAKE_INCDIR_EGL
++-!isEmpty(QMAKE_LIBS_EGL): LIBS += $$QMAKE_LIBS_EGL
+++
+++BACKUP_LIBS = $$LIBS
+++!isEmpty(QMAKE_LIBS_EGL): LIBS = $$QMAKE_LIBS_EGL
+++LIBS += $$BACKUP_LIBS
++ 
++ CONFIG -= qt
++diff --git a/config.tests/qpa/eglfs-brcm/eglfs-brcm.pro b/config.tests/qpa/eglfs-brcm/eglfs-brcm.pro
++index d8b1c3e..06f7241 100644
++--- a/config.tests/qpa/eglfs-brcm/eglfs-brcm.pro
+++++ b/config.tests/qpa/eglfs-brcm/eglfs-brcm.pro
++@@ -1,11 +1,13 @@
++ SOURCES = eglfs-brcm.cpp
++ 
++-CONFIG -= qt
++-
++-INCLUDEPATH += $$QMAKE_INCDIR_EGL
++-
++ for(p, QMAKE_LIBDIR_EGL) {
++     LIBS += -L$$p
++ }
++ 
++-LIBS += -lEGL -lGLESv2 -lbcm_host
+++INCLUDEPATH += $$QMAKE_INCDIR_EGL
+++
+++BACKUP_LIBS = $$LIBS
+++LIBS = -lEGL -lGLESv2 -lbcm_host
+++LIBS += $$BACKUP_LIBS
+++
+++CONFIG -= qt
++diff --git a/configure b/configure
++index 2e99d39..072838b 100755
++--- a/configure
+++++ b/configure
++@@ -5803,7 +5803,9 @@ if [ "$CFG_EGL" != "no" ]; then
++         QMakeVar set QMAKE_INCDIR_EGL "$QMAKE_INCDIR_EGL"
++         QMakeVar set QMAKE_LIBS_EGL "$QMAKE_LIBS_EGL"
++         QMakeVar set QMAKE_CFLAGS_EGL "`echo " $QMAKE_CFLAGS_EGL " | sed -e 's, -I[^ ]* , ,g;s,^ ,,;s, $,,'`"
++-    fi       # detect EGL support
+++    fi
+++    
+++    # detect EGL support
++     if compileTest qpa/egl "EGL" $QMAKE_CFLAGS_EGL $QMAKE_LIBS_EGL; then
++         CFG_EGL=yes
++         if compileTest qpa/egl-x11 "EGL-X11" $QMAKE_CFLAGS_EGL $QMAKE_LIBS_EGL; then
++@@ -5826,8 +5828,18 @@ fi
++ if [ "$CFG_EGLFS" != "no" ]; then
++     if [ "$XPLATFORM_QNX" = "no" ] && [ "$CFG_OPENGL" != "no" ]; then
++         CFG_EGLFS="$CFG_EGL"
+++
+++        if [ -n "$PKG_CONFIG" ] && $PKG_CONFIG --exists egl 2>/dev/null; then
+++            QMAKE_INCDIR_EGL=`$PKG_CONFIG --cflags-only-I egl 2>/dev/null | sed -e 's,^-I,,g' -e 's, -I, ,g'`
+++            QMAKE_LIBS_EGL=`$PKG_CONFIG --libs egl 2>/dev/null`
+++            QMAKE_CFLAGS_EGL=`$PKG_CONFIG --cflags egl 2>/dev/null`
+++            QMakeVar set QMAKE_INCDIR_EGL "$QMAKE_INCDIR_EGL"
+++            QMakeVar set QMAKE_LIBS_EGL "$QMAKE_LIBS_EGL"
+++            QMakeVar set QMAKE_CFLAGS_EGL "`echo " $QMAKE_CFLAGS_EGL " | sed -e 's, -I[^ ]* , ,g;s,^ ,,;s, $,,'`"
+++        fi
+++
++         # Detect eglfs backends.
++-        if compileTest qpa/eglfs-brcm "eglfs-brcm"; then
+++        if compileTest qpa/eglfs-brcm "eglfs-brcm" $QMAKE_CFLAGS_EGL $QMAKE_LIBS_EGL; then
++             CFG_EGLFS_BRCM=yes
++         else
++             CFG_EGLFS_BRCM=no
++-- 
++1.9.1
++
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 09f8ebd..ac8c1b8 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -20,6 +20,7 @@ SRC_URI += "\
+     file://0006-QOpenGLPaintDevice-sub-area-support.patch \
+     file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch \
+     file://0008-configure-paths-for-target-qmake-properly.patch \
++    file://0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch \
+ "
+ 
+ DEPENDS += "qtbase-native"
+-- 
+1.9.1
+
 
