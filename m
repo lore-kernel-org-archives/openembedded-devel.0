@@ -1,50 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 80345731F4
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id E3DF5731F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2016 07:49:44 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id w143so10262887wmw.3
+	Wed, 27 Apr 2016 07:51:36 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id r12so10367894wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2016 00:49:45 -0700 (PDT)
+	Wed, 27 Apr 2016 00:51:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=SGbaAQfsQPjfkFtB+dL9+P0U0oeTBGqceGW72mAQVxk=;
-	b=gqwMaY4mFooJhnKznctY1SBxRDT31w5dG0ok6h7Eg5065c4Wlz1IbG8x8I99XZKAVA
-	Q+v1AEnlIznimvLXibDtfNu4ilBOEU2lS57ulJMK1LNrNLoPp5IDOfy4hqo+hR2Pn/Sy
-	4d7mvfqV7vzpIBH0ZSAMrnsCHh4v4DoeQhqDdx+W2Gy55QP+IFI6K/bDLT8UDdiEVpzF
-	4QqWUUIbuvQ7aT1LJLUlMsxyPC+iPc2F95uu8bMpPV62H7lFwxanJCSPfWvmcdylVPkO
-	O3riQ+gCnPcmDzQwDucKLOE+tEEDX/wgM9l4NxyfFl/sjZKio48K6jdsnQxc8twytGda
-	6yAA==
+	bh=2L48TNBMqe6LXQwZzEmB7K/Enq03at3u8n/2vHPMT/8=;
+	b=C0nJF9j4w4ZaxABX2iXmnWnIgSq/bP+5BHB95Gmz6S8DDpYsxuV0pOAharpAjYuJfl
+	GSS6UFC6cp2ikZ52NOqFdFO6E6SGquvgr12WivqXE6TNd242alncRipVI1znugXkiReK
+	PI2BmfObbIsN08Ry7ESBc4/b4WNqxzl49KkSQdkMLCLio1gRSLFZyZSD4AQHzEXwv6KG
+	9BNZaZOezTyZqi5Gtcq7IHxgbwxwxLGLWVye01IIYGVEpav+IE56RPigpsiNoHJqmguc
+	TylKrX0PA//LhYNk6qBQLlGEKCtprk5X3Sf6Bu36L4cJzqQF+hopq0Mkkai/2WfDy/O+
+	pVng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=SGbaAQfsQPjfkFtB+dL9+P0U0oeTBGqceGW72mAQVxk=;
-	b=X8QfxF5SqlfG2BpAhUNcK0F6yieTm2WA93kbNJsVpNq8YbqdHuSE4TQEuCxY+hgy3B
-	Cx8QUKbjHRnUiE/ZdXFIQD/34fpPrF6tZZItgssgfIUDwBkad0LTj857grXmt0zFDx55
-	T3UaJG4N83FveYqiOic0E8lLo3IB0jOli2z1OEkDy4avOtoXtJtJdTef/YopG46xpPqy
-	6FXvOeWImi93Vj/e3Z0bys0D0jTupocp3WFL+0NH33EaSjuA7Mx1KDExE7eRXCpOrx5e
-	Tk2JOCfH0xjnPmfFhUngefHZQ7I9OTs4teAiq9hr0M8qHlNWtFGMRytb9ufjG9TvTwPv
-	YJDA==
-X-Gm-Message-State: AOPr4FVN/t//DkQggaiaTs9yHXFAABYQTmMfzbw3jr4FR3MF3C8B8q0EhDPKKke9JR4jeQ==
-X-Received: by 10.194.235.39 with SMTP id uj7mr7358349wjc.78.1461743384409;
-	Wed, 27 Apr 2016 00:49:44 -0700 (PDT)
+	bh=2L48TNBMqe6LXQwZzEmB7K/Enq03at3u8n/2vHPMT/8=;
+	b=OWpEnOwJE2a+mN4kPK2APXbuSgCg2G6+9Gx1mG0y8zbFivOEJurHevYXrXr3NZweVJ
+	DOKnCFnIxgNn80x4K6FGULI1nC629f7JjHgsvpnO+/024yTluDwUp1psZnJGWTPn4BsH
+	ahWAE3fxLz5KfHGJg2XKnzOhbjZgYZiL74IvXzXsdb9J0KUTRCEpfbcc1mKXW+Rb/7xg
+	2nKgIQBIg9WWbllsSCX+c6ifSk38UqZQk11Y4E0C3l18087Ymu29nnwEl/iRiSyVlCra
+	KqoO/HxkGRz11YzOXqg4dUr9T1fHAIBi6f9Ta50aqmV8iy8fAW5TpB4zjZRfJqF3XMZ1
+	UHhw==
+X-Gm-Message-State: AOPr4FVuAH5qF7v8WgVhIMTw9EAR3/AJhoprhxAOILVDYWeYlJhFzTROSyca4k/wFGUIlQ==
+X-Received: by 10.28.26.78 with SMTP id a75mr17455505wma.59.1461743497515;
+	Wed, 27 Apr 2016 00:51:37 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id r8sm7045111wme.14.2016.04.27.00.49.43
+	by smtp.gmail.com with ESMTPSA id
+	e16sm18934570wmc.3.2016.04.27.00.51.35
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 27 Apr 2016 00:49:43 -0700 (PDT)
+	Wed, 27 Apr 2016 00:51:35 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 27 Apr 2016 09:50:14 +0200
+Date: Wed, 27 Apr 2016 09:52:06 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160427075014.GD2559@jama>
-References: <1461660854-31802-1-git-send-email-Qi.Chen@windriver.com>
+Message-ID: <20160427075206.GE2559@jama>
+References: <1461602537-19434-1-git-send-email-bruno.bottazzini@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <1461660854-31802-1-git-send-email-Qi.Chen@windriver.com>
+In-Reply-To: <1461602537-19434-1-git-send-email-bruno.bottazzini@intel.com>
 User-Agent: Mutt/1.6.0 (2016-04-01)
-Subject: Re: [meta-networking][PATCH] snort: fix paths in pkgconfig files
+Subject: Re: [meta-oe] libmicrohttpd: update to 0.9.49
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,57 +58,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2016 07:49:44 -0000
-X-Groupsio-MsgNum: 61197
+X-List-Received-Date: Wed, 27 Apr 2016 07:51:37 -0000
+X-Groupsio-MsgNum: 61198
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="at6+YcpfzWZg/htY"
+	protocol="application/pgp-signature"; boundary="pY3vCvL1qV+PayAL"
 Content-Disposition: inline
 
---at6+YcpfzWZg/htY
+--pY3vCvL1qV+PayAL
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 26, 2016 at 04:54:14PM +0800, Chen Qi wrote:
-> Fix paths in pkgconfig files and remove snort from blacklist.
-
-There is also undeclared dependency as shown by QA warning:
-snort-2.9.7.5: snort rdepends on liblzma, but it isn't a build dependency, =
-missing xz in DEPENDS or PACKAGECONFIG? [build-deps]
-
-Please fix that before unblacklisting.
-
->=20
-> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+On Mon, Apr 25, 2016 at 01:42:17PM -0300, Bruno Bottazzini wrote:
+> Signed-off-by: Bruno Bottazzini <bruno.bottazzini@intel.com>
 > ---
->  meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
+>  .../{libmicrohttpd_0.9.34.bb =3D> libmicrohttpd_0.9.49.bb}            | =
+6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.34.bb =
+=3D> libmicrohttpd_0.9.49.bb} (82%)
 >=20
-> diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb =
-b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
-> index 7d946af..69180c8 100644
-> --- a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
-> +++ b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
-> @@ -56,6 +56,8 @@ do_install_append() {
->      install -m 755 ${WORKDIR}/snort.init ${D}${sysconfdir}/init.d/snort
->      mkdir -p ${D}${localstatedir}/log/snort
->      install -d ${D}/var/log/snort
-> +
-> +    sed -i 's/-fdebug-prefix-map[^ ]*//g; s#${STAGING_DIR_TARGET}##g' ${=
-D}${libdir}/pkgconfig/*.pc
->  }
+> diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.b=
+b b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.49.bb
+> similarity index 82%
+> rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+> rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.49.bb
+> index e3c833b..7b29065 100644
+> --- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+> +++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.49.bb
+> @@ -6,10 +6,10 @@ SECTION =3D "net"
+>  DEPENDS =3D "libgcrypt gnutls file"
 > =20
->  FILES_${PN} +=3D " \
-> @@ -84,6 +86,3 @@ FILES_${PN}-dev +=3D " \
->      ${libdir}/snort_dynamicrules/*.so \
->      ${prefix}/src/snort_dynamicsrc \
->  "
-> -
-> -# http://errors.yoctoproject.org/Errors/Details/35137/
-> -PNBLACKLIST[snort] ?=3D "BROKEN: QA Issue: snort_preproc.pc, snort_outpu=
-t.pc, snort.pc"
+>  SRC_URI =3D "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
+> -SRC_URI[md5sum] =3D "2947eee13c2c8affb95023a0cb6fda0c"
+> -SRC_URI[sha256sum] =3D "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843be=
+421a040be1b25a88"
+> +SRC_URI[md5sum] =3D "3209aa2ac6199b874a6325342b86edbc"
+> +SRC_URI[sha256sum] =3D "9407d8252548ab97ace3276e0032f073820073c0599d43ba=
+ff832902a8dab11c"
+> =20
+> -inherit autotools lib_package
+> +inherit autotools lib_package pkgconfig
+
+I've reported this in 0.9.48 upgrade:
+http://lists.openembedded.org/pipermail/openembedded-devel/2016-March/10667=
+2.html
+
+libmicrohttpd-0.9.49: libmicrohttpd: configure was passed unrecognised
+options: --disable-spdy [unknown-configure-option]
+
+This time I'll make sure to hold this patch until it's resolved.
+
+>  # disable spdy, because it depends on openssl
+>  EXTRA_OECONF +=3D "--disable-static --with-gnutls=3D${STAGING_LIBDIR}/..=
+/ --disable-spdy"
 > --=20
-> 2.8.1
+> 2.7.1
 >=20
 > --=20
 > _______________________________________________
@@ -118,16 +124,16 @@ t.pc, snort.pc"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---at6+YcpfzWZg/htY
+--pY3vCvL1qV+PayAL
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlcgbzUACgkQN1Ujt2V2gByx4wCgqUwx1W5W+IQRLhmG7f+pyqjQ
-5YwAnjuL8P7YCaC+gJMGeZQ8LZTT5HT8
-=IohK
+iEYEARECAAYFAlcgb6UACgkQN1Ujt2V2gBzZYgCffu8gVPsRxHce4wIzPvz2Uoiu
+WicAniW17mtz5bHi6kQaEQJNrQQyVrVD
+=/gZm
 -----END PGP SIGNATURE-----
 
---at6+YcpfzWZg/htY--
+--pY3vCvL1qV+PayAL--
