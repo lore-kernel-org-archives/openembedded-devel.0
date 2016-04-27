@@ -1,52 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E6AFC731EA
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 80345731F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2016 07:48:13 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id n129so957346wmn.1
+	Wed, 27 Apr 2016 07:49:44 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id w143so10262887wmw.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Apr 2016 00:48:14 -0700 (PDT)
+	Wed, 27 Apr 2016 00:49:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=t75NQRtxz+GhciDauXSK/Wfd0PCw9rK1nOSnXF57vv8=;
-	b=0IVDh0YDhbIwyyZqRx8vzYdvXW83VmQsZxyrM7VAq6joZVdvDiwk1Oi7hIRM3ef+p0
-	nLg49/odcm/0ZyZGCs5gvfbNP5fhAITbtKiuIwpJksOcXnVH1a43FZj56V+7IBTs+Yiv
-	YsOcIjEdzisOt9sJlbh4GzfkwKjNTdjxw4GluIyylEL/JQwlywnybSgwaTcUs9Zn6GFQ
-	vYAMV87EFsl1U3QRjTcLWE62Y84489b1fV+h2QrWk+wUe8rTCdBoDyaDfLGX4rB9VXbj
-	58pu9UaL5eT7KRIAMg1BjtkXVJvE07Lsop9QJmRdEUGN5q3wtrwmOY8e/5SCInfGpX2r
-	x2LQ==
+	bh=SGbaAQfsQPjfkFtB+dL9+P0U0oeTBGqceGW72mAQVxk=;
+	b=gqwMaY4mFooJhnKznctY1SBxRDT31w5dG0ok6h7Eg5065c4Wlz1IbG8x8I99XZKAVA
+	Q+v1AEnlIznimvLXibDtfNu4ilBOEU2lS57ulJMK1LNrNLoPp5IDOfy4hqo+hR2Pn/Sy
+	4d7mvfqV7vzpIBH0ZSAMrnsCHh4v4DoeQhqDdx+W2Gy55QP+IFI6K/bDLT8UDdiEVpzF
+	4QqWUUIbuvQ7aT1LJLUlMsxyPC+iPc2F95uu8bMpPV62H7lFwxanJCSPfWvmcdylVPkO
+	O3riQ+gCnPcmDzQwDucKLOE+tEEDX/wgM9l4NxyfFl/sjZKio48K6jdsnQxc8twytGda
+	6yAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=t75NQRtxz+GhciDauXSK/Wfd0PCw9rK1nOSnXF57vv8=;
-	b=b49q/5rXgweOQ/FwUqYSZHKBbzJ3qVFvwFnvzn7mwP5NsxdXJEujPYAfi2xDZttQ92
-	Qty0P0wgBsVBQ9bF1qbv47PA2cBr09NCFBRawQk8wBBjCJU7b+0EDG0xd4lWv7BGxJ9r
-	tgssh/90GXGnUkIMlBKHn/yW6CSxX+uoF28uydUksNflRSfoDNz4sC616/AH+/zsZj8C
-	j4A0dmnK4UtWzWMX9sQgz8mpVkcED/XDWxN5KhDpScCTKd+5N6yUB4UY4LdtV0zbcHZE
-	1+5g3zEUR6Xr+ZUJCdZ66mN5o9mkSS6YyjjtF+udmPNTEj8/NC7CQmOieNTKSB2ccV0o
-	ZNaQ==
-X-Gm-Message-State: AOPr4FUIrNlAjhsM/jAQtGOESbxqtg/nxWULhNWMB8fTj3WJSZLIQvUty0gQM9DXwgzuRg==
-X-Received: by 10.28.171.8 with SMTP id u8mr7770034wme.97.1461743293590;
-	Wed, 27 Apr 2016 00:48:13 -0700 (PDT)
+	bh=SGbaAQfsQPjfkFtB+dL9+P0U0oeTBGqceGW72mAQVxk=;
+	b=X8QfxF5SqlfG2BpAhUNcK0F6yieTm2WA93kbNJsVpNq8YbqdHuSE4TQEuCxY+hgy3B
+	Cx8QUKbjHRnUiE/ZdXFIQD/34fpPrF6tZZItgssgfIUDwBkad0LTj857grXmt0zFDx55
+	T3UaJG4N83FveYqiOic0E8lLo3IB0jOli2z1OEkDy4avOtoXtJtJdTef/YopG46xpPqy
+	6FXvOeWImi93Vj/e3Z0bys0D0jTupocp3WFL+0NH33EaSjuA7Mx1KDExE7eRXCpOrx5e
+	Tk2JOCfH0xjnPmfFhUngefHZQ7I9OTs4teAiq9hr0M8qHlNWtFGMRytb9ufjG9TvTwPv
+	YJDA==
+X-Gm-Message-State: AOPr4FVN/t//DkQggaiaTs9yHXFAABYQTmMfzbw3jr4FR3MF3C8B8q0EhDPKKke9JR4jeQ==
+X-Received: by 10.194.235.39 with SMTP id uj7mr7358349wjc.78.1461743384409;
+	Wed, 27 Apr 2016 00:49:44 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	v143sm27787074wmv.4.2016.04.27.00.48.03
+	by smtp.gmail.com with ESMTPSA id r8sm7045111wme.14.2016.04.27.00.49.43
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 27 Apr 2016 00:48:03 -0700 (PDT)
+	Wed, 27 Apr 2016 00:49:43 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 27 Apr 2016 09:48:11 +0200
+Date: Wed, 27 Apr 2016 09:50:14 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160427074811.GC2559@jama>
-References: <1461351842-8783-1-git-send-email-derek@asterius.io>
-	<20160427074500.GA2559@jama>
+Message-ID: <20160427075014.GD2559@jama>
+References: <1461660854-31802-1-git-send-email-Qi.Chen@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <20160427074500.GA2559@jama>
+In-Reply-To: <1461660854-31802-1-git-send-email-Qi.Chen@windriver.com>
 User-Agent: Mutt/1.6.0 (2016-04-01)
-Cc: Derek Straka <derek@asterius.io>
-Subject: Re: [meta-oe][PATCH] fribidi: update to version 0.19.7
+Subject: Re: [meta-networking][PATCH] snort: fix paths in pkgconfig files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,155 +57,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2016 07:48:14 -0000
-X-Groupsio-MsgNum: 61196
+X-List-Received-Date: Wed, 27 Apr 2016 07:49:44 -0000
+X-Groupsio-MsgNum: 61197
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="bKyqfOwhbdpXa4YI"
+	protocol="application/pgp-signature"; boundary="at6+YcpfzWZg/htY"
 Content-Disposition: inline
 
---bKyqfOwhbdpXa4YI
+--at6+YcpfzWZg/htY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 27, 2016 at 09:45:00AM +0200, Martin Jansa wrote:
-> On Fri, Apr 22, 2016 at 03:04:02PM -0400, Derek Straka wrote:
-> > Signed-off-by: Derek Straka <derek@asterius.io>
-> > ---
-> >  meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb | 17 -----------=
-------
-> >  meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb | 17 +++++++++++=
-++++++
-> >  2 files changed, 17 insertions(+), 17 deletions(-)
-> >  delete mode 100644 meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.=
-bb
-> >  create mode 100644 meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.=
-bb
-> >=20
-> > diff --git a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb b/me=
-ta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb
-> > deleted file mode 100644
-> > index cb4bc24..0000000
-> > --- a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb
-> > +++ /dev/null
-> > @@ -1,17 +0,0 @@
-> > -SUMMARY =3D "Fribidi library for bidirectional text"
-> > -SECTION =3D "libs"
-> > -PR =3D "r1"
-> > -LICENSE =3D "LGPLv2.1"
-> > -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7fbc338309ac38fefcd64b04bb9=
-03e34"
-> > -BBCLASSEXTEND =3D "native"
-> > -
-> > -PROVIDES =3D "libfribidi"
-> > -
-> > -inherit autotools lib_package pkgconfig
-> > -
-> > -CFLAGS_append =3D "  -DPAGE_SIZE=3D4096 "
-> > -
-> > -SRC_URI =3D "http://fribidi.org/download/fribidi-${PV}.tar.gz"
-> > -
-> > -SRC_URI[md5sum] =3D "626db17d2d99b43615ad9d12500f568a"
-> > -SRC_URI[sha256sum] =3D "49cf91586e48b52fe25872ff66c1da0dff0daac2593f9f=
-300e2af12f44f64177"
-> > diff --git a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb b/me=
-ta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
-> > new file mode 100644
-> > index 0000000..02b8764
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
-> > @@ -0,0 +1,17 @@
-> > +SUMMARY =3D "Fribidi library for bidirectional text"
-> > +SECTION =3D "libs"
-> > +PR =3D "r1"
->=20
-> You can drop PR when upgrading PV.
->=20
-> Probably this change caused fbreader to fail:
-> | Compiling ZLTextParagraphBuilder.o ...In file included from /home/jenki=
-ns/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/include/fribidi/fribidi=
-=2Eh:35:0,
-> |                  from ZLTextParagraphBuilder.h:26,
-> |                  from ZLTextParagraphBuilder.cpp:30:
-> | /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/include/=
-fribidi/fribidi-common.h:61:20: fatal error: glib.h: No such file or direct=
-ory
-> | compilation terminated.
-> | make[2]: *** [ZLTextParagraphBuilder.o] Error 1
-> | make[2]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/w=
-ork/armv5te-oe-linux-gnueabi/fbreader/0.12.10-r1/fbreader-0.12.10/zlibrary/=
-text/src/area'
-> | make[1]: *** [.objects] Error 1
-> | make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/w=
-ork/armv5te-oe-linux-gnueabi/fbreader/0.12.10-r1/fbreader-0.12.10/zlibrary/=
-text'
-> | make: *** [all] Error 1
-> | ERROR: oe_runmake failed
-> | ERROR: Function failed: do_compile (log file is located at /home/jenkin=
-s/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/fbreader/0.12.1=
-0-r1/temp/log.do_compile.29262)
-> NOTE: recipe fbreader-0.12.10-r1: task do_compile: Failed
->=20
-> Can you check if fribidi should depend on glib-2.0 now? And also please s=
-end v2 with -M (adjust the -M parameter to detect rename if you used -M bef=
-ore).
+On Tue, Apr 26, 2016 at 04:54:14PM +0800, Chen Qi wrote:
+> Fix paths in pkgconfig files and remove snort from blacklist.
 
-There is also undeclared dependency on libpcre as shown by QA warnings:
+There is also undeclared dependency as shown by QA warning:
+snort-2.9.7.5: snort rdepends on liblzma, but it isn't a build dependency, =
+missing xz in DEPENDS or PACKAGECONFIG? [build-deps]
 
-fribidi-0.19.7: fribidi-bin rdepends on glib-2.0, but it isn't a build
-dependency, missing glib-2.0 in DEPENDS or PACKAGECONFIG? [build-deps]
-fribidi-0.19.7: fribidi rdepends on libpcre, but it isn't a build
-dependency, missing libpcre in DEPENDS or PACKAGECONFIG? [build-deps]
-fribidi-0.19.7: fribidi rdepends on glib-2.0, but it isn't a build
-dependency, missing glib-2.0 in DEPENDS or PACKAGECONFIG? [build-deps]
+Please fix that before unblacklisting.
 
 >=20
-> Also add short summary explaining what was changed in COPYING change when=
- you're changing its checksum.
+> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> ---
+>  meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
 >=20
-> > +LICENSE =3D "LGPLv2.1"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da916467b91076e631dd8edb7424=
-769c7"
-> > +BBCLASSEXTEND =3D "native"
-> > +
-> > +PROVIDES =3D "libfribidi"
-> > +
-> > +inherit autotools lib_package pkgconfig
-> > +
-> > +CFLAGS_append =3D "  -DPAGE_SIZE=3D4096 "
-> > +
-> > +SRC_URI =3D "http://fribidi.org/download/fribidi-${PV}.tar.bz2"
-> > +
-> > +SRC_URI[md5sum] =3D "6c7e7cfdd39c908f7ac619351c1c5c23"
-> > +SRC_URI[sha256sum] =3D "08222a6212bbc2276a2d55c3bf370109ae4a35b689acbc=
-66571ad2a670595a8e"
-> > --=20
-> > 1.9.1
-> >=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb =
+b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
+> index 7d946af..69180c8 100644
+> --- a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
+> +++ b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
+> @@ -56,6 +56,8 @@ do_install_append() {
+>      install -m 755 ${WORKDIR}/snort.init ${D}${sysconfdir}/init.d/snort
+>      mkdir -p ${D}${localstatedir}/log/snort
+>      install -d ${D}/var/log/snort
+> +
+> +    sed -i 's/-fdebug-prefix-map[^ ]*//g; s#${STAGING_DIR_TARGET}##g' ${=
+D}${libdir}/pkgconfig/*.pc
+>  }
+> =20
+>  FILES_${PN} +=3D " \
+> @@ -84,6 +86,3 @@ FILES_${PN}-dev +=3D " \
+>      ${libdir}/snort_dynamicrules/*.so \
+>      ${prefix}/src/snort_dynamicsrc \
+>  "
+> -
+> -# http://errors.yoctoproject.org/Errors/Details/35137/
+> -PNBLACKLIST[snort] ?=3D "BROKEN: QA Issue: snort_preproc.pc, snort_outpu=
+t.pc, snort.pc"
+> --=20
+> 2.8.1
 >=20
 > --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---bKyqfOwhbdpXa4YI
+--at6+YcpfzWZg/htY
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlcgbrsACgkQN1Ujt2V2gByjGQCfQHv9VhrlpgHx3E7FGueFf1Gk
-QYcAoI1/Vl8bLUaBE9sRCXr9pC8EU0fO
-=PBVA
+iEYEARECAAYFAlcgbzUACgkQN1Ujt2V2gByx4wCgqUwx1W5W+IQRLhmG7f+pyqjQ
+5YwAnjuL8P7YCaC+gJMGeZQ8LZTT5HT8
+=IohK
 -----END PGP SIGNATURE-----
 
---bKyqfOwhbdpXa4YI--
+--at6+YcpfzWZg/htY--
