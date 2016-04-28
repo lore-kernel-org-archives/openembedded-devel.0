@@ -1,46 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f173.google.com (mail-qk0-f173.google.com
-	[209.85.220.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 003CF76294
+Return-Path: <prvs=919dac7a6=Richard.Leitner@skidata.com>
+X-Greylist: delayed 599 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 28 Apr 2016 14:09:13 UTC
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 2959E76DE1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Apr 2016 14:07:44 +0000 (UTC)
-Received: by mail-qk0-f173.google.com with SMTP id n63so32210884qkf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Apr 2016 07:07:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=KTv/hNHQbn8ivLdicxQYCJyKvwxs8Td+6K64kbS1ito=;
-	b=ouW/ShSTsb7leSY3v2JhP/nEGlLiV6/2EiUYMUSyEsXeUkr7Oa1d+5yBsYFvRvb8EB
-	zxsGb3JAsw1sq6WHMTWt0s4Nyoo/b/J1HsV3Hi8N9fPwMuw/HVLAfrRxrqhZOgl3RRyv
-	vrYQYhyxgnuGgKNZgV0Bi4XHoagzkcpFT8PFKyGVRRojShAjwI38pf377lIKc6i0nXaB
-	dbsM0usxLq1A5/LPdMuC8YGukCp1KfzHQWquetdihwYm4HTpwlhHeLeBLx56pBER1di5
-	YKnZXj5S/WArRqXiusbqb+kGpANPVQRTAw2GDcu25GnA7NJW5cGQ08AyAedwozPs2Q5U
-	OrKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=KTv/hNHQbn8ivLdicxQYCJyKvwxs8Td+6K64kbS1ito=;
-	b=fcyjzT2BYmZ7aIvTgJBZ+fNDR81NpXae94bcFovWWui/TiUrs4wLxKk8X3IyUXYffd
-	ogUexlj3ObGqI+TEIEPpx9+NtStUj1iV/ERnMNNefTNthFxTXLhQEAOk0YEdXDjRFBQe
-	HugNXTrfh8RK2ej4gEoXDrB7Mx1Wsay2es4xJFTL/vUlNupUrQWxWzeX0Sz8F8BUaSP2
-	0FHu+fSrQqw8MRYwuXQ7g6HBfvvH2+vQKIuzF4AkkmkNOing2jVUt9kRtMD5ADH08uE5
-	terpUsuUmtA2FvgZ+frorK2FKz+n1rDqMtXgGN6nLiKHJh3OImmbf6aWXf5rmSQ1t/W0
-	vZ9Q==
-X-Gm-Message-State: AOPr4FXMtZzgTz6IGHA5xyR8N4baN2OUhBfnNk79Pa3eBLXzh2AoNMVchx6y+g/sj3ekXPCiLvESadC3lWZbjg==
-X-Received: by 10.55.200.137 with SMTP id t9mr15263626qkl.41.1461852465047;
-	Thu, 28 Apr 2016 07:07:45 -0700 (PDT)
+	Thu, 28 Apr 2016 14:09:13 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: A2DOAQDMFSJX/0oKEKxehQ63YIIPAQ2BdoYPAoFfFAEBAQEBAQGBAQuEQQEBAQMBIw8BRRELDQsCAgUWCwICCQMCAQIBNRAGDQgCF4gHsiORFQEBCCB8hSWES4c9glYFmBCBVZV8F4VAjzAeAQGCeIE3h1N/AQEB
+X-IPAS-Result: A2DOAQDMFSJX/0oKEKxehQ63YIIPAQ2BdoYPAoFfFAEBAQEBAQGBAQuEQQEBAQMBIw8BRRELDQsCAgUWCwICCQMCAQIBNRAGDQgCF4gHsiORFQEBCCB8hSWES4c9glYFmBCBVZV8F4VAjzAeAQGCeIE3h1N/AQEB
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <1461846639-9563-1-git-send-email-richard.leitner@skidata.com>
+	<1461847944.3302.20.camel@linux.intel.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Message-ID: <57221751.8030803@skidata.com>
+Date: Thu, 28 Apr 2016 15:59:45 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Icedove/38.7.0
 MIME-Version: 1.0
-Received: by 10.55.130.196 with HTTP; Thu, 28 Apr 2016 07:07:15 -0700 (PDT)
-In-Reply-To: <5721F2E8.6080306@pseudoterminal.org>
-References: <B1D22563-F31B-4EF1-90D6-16EB391134D5@gmail.com>
-	<5721F2E8.6080306@pseudoterminal.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 28 Apr 2016 07:07:15 -0700
-Message-ID: <CAMKF1srrSNia6vEp4qO=NiFWtchcytnSRu3-nOg0W6CG9CTPcQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [RFT] GCC 6 Recipes
+In-Reply-To: <1461847944.3302.20.camel@linux.intel.com>
+X-Originating-IP: [172.16.60.30]
+X-ClientProxiedBy: sdex1srv.skidata.net (172.16.10.92) To sdex1srv.skidata.net
+	(172.16.10.92)
+Subject: Re: [meta-networking][PATCH][jethro] samba: fix smbd and nmbd paths in sysv initscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,82 +35,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Apr 2016 14:07:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 28 Apr 2016 14:09:16 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On Thu, Apr 28, 2016 at 4:24 AM, Carlos Rafael Giani
-<dv@pseudoterminal.org> wrote:
-> Something that concerns me is a note from
-> https://gcc.gnu.org/gcc-6/changes.html :
->
-> "Value range propagation now assumes that the this pointer of C++ member
-> functions is non-null. This eliminates common null pointer checks but als=
-o
-> breaks some non-conforming code-bases (such as Qt-5, Chromium, KDevelop).=
- As
-> a temporary work-around -fno-delete-null-pointer-checks can be used. Wron=
-g
-> code can be identified by using -fsanitize=3Dundefined."
->
-> Sounds like this has potential to break a significant number of packages.
+On 04/28/2016 02:52 PM, Joshua G Lock wrote:
+> On Thu, 2016-04-28 at 14:30 +0200, Richard Leitner wrote:
+>> For the jethro branch.
+> 
+> Any idea whether this change is required in the master branch?
 
-Thanks for bringing it up.
-it could but then these need/will be fixed in due course. I would not
-recommend changing  OE wide
-compiler defaults for few apps. The relevant fix can be applied per
-recipe if needed
+Yes. The Samba 4.4.2 recipe is also using the script from
+packaging/LSB/samba.sh, which is the same as in 4.1.12.
 
->
->
-> On 04/18/2016 07:15 AM, Khem Raj wrote:
->>
->> Hello all,
->>
->> I have put together a potential gcc6 upgrade recipe set, and pushed the
->> branch to tree here
->>
->>
->> http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/gcc-=
-6
->>
->> and also at github fork of mine.
->>
->> https://github.com/kraj/openembedded-core/tree/kraj/master
->>
->> You need to set
->>
->> GCCVERSION =3D =E2=80=9C6.%=E2=80=9D
->>
->> in local.conf to enable it.
->>
->>
->> There are few recipes in OE-Core which still don=E2=80=99t compile e.g.
->>
->> see
->>
->> http://errors.yoctoproject.org/Errors/Build/14782/
->>
->> any help in fixing them or otherwise fixing other layers is appreciated.
->>
->> gcc6 is a major release for some info see
->>
->> https://gcc.gnu.org/gcc-6/changes.html
->>
->> and porting guide
->>
->> https://gcc.gnu.org/gcc-6/porting_to.html
->>
->>
->> Thanks
->>
->> -Khem
->>
->>
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+>> The sysv initscript provided by samba assumes smbd and nmbd are
+>> installed in /opt/samba/bin/. In our case both binaries are installed
+>> to
+>> /usr/sbin/ by default. Therefore fix these paths.
+> 
+> Rather than hard-code these in a patch, which is equally broken for
+> people who don't use the default sbindir, it would make more sense to
+> sed ${sbindir} into the init file in a do_install_append ().
+
+Ok, you're right, that is definitely a better solution.
+I'll prepare a patch for master and jethro.
+
+regards,
+Richard
 
