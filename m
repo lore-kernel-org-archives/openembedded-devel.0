@@ -1,24 +1,24 @@
 Return-Path: <maxin.john@intel.com>
 Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B058605FF
+	by mail.openembedded.org (Postfix) with ESMTP id F1C48731CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Apr 2016 11:35:51 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga101.jf.intel.com with ESMTP; 28 Apr 2016 04:35:52 -0700
+	Thu, 28 Apr 2016 11:43:01 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga101.jf.intel.com with ESMTP; 28 Apr 2016 04:43:02 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,546,1455004800"; d="scan'208";a="693687063"
+X-IronPort-AV: E=Sophos;i="5.24,546,1455004800"; d="scan'208";a="968344124"
 Received: from mbabyjoh-desk.fi.intel.com (HELO
 	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.71])
-	by FMSMGA003.fm.intel.com with ESMTP; 28 Apr 2016 04:35:51 -0700
-Date: Thu, 28 Apr 2016 14:35:51 +0300
+	by fmsmga002.fm.intel.com with ESMTP; 28 Apr 2016 04:43:01 -0700
+Date: Thu, 28 Apr 2016 14:43:02 +0300
 From: "Maxin B. John" <maxin.john@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160428113551.GA28788@mbabyjoh-desk.ger.corp.intel.com>
-References: <1461317774-19137-1-git-send-email-jackie.huang@windriver.com>
+Message-ID: <20160428114301.GB28788@mbabyjoh-desk.ger.corp.intel.com>
+References: <1461322108-20584-1-git-send-email-erkka.kaaria@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <1461317774-19137-1-git-send-email-jackie.huang@windriver.com>
+In-Reply-To: <1461322108-20584-1-git-send-email-erkka.kaaria@intel.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-java][PATCH] icedtea7-native: skip the already-stripped test
+Subject: Re: [meta-java][PATCH 1/3] java-bootstrapping: Do not rely on hardcoded paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,42 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Apr 2016 11:35:52 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 28 Apr 2016 11:43:02 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+
+Hi Erkka,
+
+Have a couple of comments about this patch-set:
+
+1. Upstream-Status is missing
+2. cacao build fails after applying this patch. 
+
+On Fri, Apr 22, 2016 at 01:48:26PM +0300, Erkka Kääriä wrote:
+> Various paths to files are hardcoded in either helper scripts or the
+> resulting binaries (like path to Java class libraries). While this works
+> well when using the files on the build machine, things start breaking
+> down when the sstate gets shared between multiple workers in CI, as
+> the paths between workers can differ.
+> 
+> Instead of using these hardcoded paths, form the paths at runtime and pass them as parameters when required.
+> 
+<snip>
 
 
-On Fri, Apr 22, 2016 at 05:36:14PM +0800, jackie.huang@windriver.com wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
-> 
-> libfreetype.so.6 is copied from STAGING_LIBDIR and
-> binaries/libraries in sysroot are already stripped
-> since the following commit in oe-core:
-> "30f3774 staging: Strip files in sysroot"
-> 
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  recipes-core/icedtea/icedtea7-native.inc | 4 ++++
->  1 file changed, 4 insertions(+)
-> 
-> diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-> index 0ffe5d5..2dad84d 100644
-> --- a/recipes-core/icedtea/icedtea7-native.inc
-> +++ b/recipes-core/icedtea/icedtea7-native.inc
-> @@ -43,6 +43,10 @@ B = "${S}/build"
->  export ALT_FREETYPE_HEADERS_PATH = "${STAGING_INCDIR}/freetype2"
->  export ALT_FREETYPE_LIB_PATH = "${STAGING_LIBDIR}"
->  
-> +# libfreetype.so.6 is copied from STAGING_LIBDIR
-> +# which is already stripped.
-> +INSANE_SKIP_${PN} = "already-stripped"
-> +
->  # OpenJDK supports parallel compilation but uses a plain number for this.
->  # In OE we have PARALLEL_MAKE which is the actual option passed to make,
->  # e.g. "-j 4".
-> --
+> -do_install_append () {
+> -    rm ${D}/${bindir}/java
+> -}
+> -
+> -do_install_append_class-native () {
+> -    ln -sf cacao ${D}/${bindir}/java
+> -}
 
-Pushed, Thanks!
+# bitbake cacao 
+...
+NOTE: Executing RunQueue Tasks
+ERROR: cacao-1.6.1-r0 do_package: QA Issue: cacao: Files/directories were installed but not shipped in any package:
+  /usr/bin/java
+  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+  cacao: 1 installed and not shipped files. [installed-vs-shipped]
+  ERROR: cacao-1.6.1-r0 do_package: Fatal QA errors found, failing task.
+  ERROR: cacao-1.6.1-r0 do_package: Function failed: do_package
+
+Please fix it.
 
 Best Regards,
 Maxin
