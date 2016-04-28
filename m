@@ -1,55 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qg0-f41.google.com (mail-qg0-f41.google.com
-	[209.85.192.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 768847570D;
-	Thu, 28 Apr 2016 14:02:02 +0000 (UTC)
-Received: by mail-qg0-f41.google.com with SMTP id f74so30024730qge.2;
-	Thu, 28 Apr 2016 07:02:04 -0700 (PDT)
+Received: from mail-qk0-f173.google.com (mail-qk0-f173.google.com
+	[209.85.220.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 003CF76294
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Apr 2016 14:07:44 +0000 (UTC)
+Received: by mail-qk0-f173.google.com with SMTP id n63so32210884qkf.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Apr 2016 07:07:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=NOc/ovovQ68oobsYxjm/XzQsTVpH1WXbLsDgDlMpbms=;
-	b=buSz0b7HVYqlleickTOLx5qakbm0jHzMDVFx5jSE7pKSGh+Kn5V1IRca3/AB4hTojI
-	pM3tcA++pNKW6x9G+b/wsH3WEBmXDw3a9R6Ss3YDSlNl8TKHQvfeQnZNIrkQr0/Pl55q
-	3nTsFXYdmckA1uNrCEpOETRibUEo4bQ+zCS+iO9+qSBZUItv6E/ogcoXO2JAk/NGlPBR
-	1Vwpo2e9WCC/OQxEjprB5TrS53cWOzEHH7PHyKkwjAGgsAx3o3eM3AR464Z9Y2GtYMn2
-	Mxko+O0oYsvJk/CyKvtTYE4Inlmstv6IXveLsTa37x4brjStwhKh/TpEMujl5NBuwNRJ
-	A8xg==
+	:content-transfer-encoding;
+	bh=KTv/hNHQbn8ivLdicxQYCJyKvwxs8Td+6K64kbS1ito=;
+	b=ouW/ShSTsb7leSY3v2JhP/nEGlLiV6/2EiUYMUSyEsXeUkr7Oa1d+5yBsYFvRvb8EB
+	zxsGb3JAsw1sq6WHMTWt0s4Nyoo/b/J1HsV3Hi8N9fPwMuw/HVLAfrRxrqhZOgl3RRyv
+	vrYQYhyxgnuGgKNZgV0Bi4XHoagzkcpFT8PFKyGVRRojShAjwI38pf377lIKc6i0nXaB
+	dbsM0usxLq1A5/LPdMuC8YGukCp1KfzHQWquetdihwYm4HTpwlhHeLeBLx56pBER1di5
+	YKnZXj5S/WArRqXiusbqb+kGpANPVQRTAw2GDcu25GnA7NJW5cGQ08AyAedwozPs2Q5U
+	OrKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=NOc/ovovQ68oobsYxjm/XzQsTVpH1WXbLsDgDlMpbms=;
-	b=a3ul706mRSeDt+cQaO1dSjg01HInmNDl7hROrjLcmy/AQWqWbMoBo3PXRS9QcfofaC
-	u1GgbBxXHC5C+Z9Sz5WjmRcDsotpq/BGZ0lZ/503MChp5E0Cqvyu+t8aPMENUNyxtPoF
-	NEqhSeDtEHHNUNQWAB2+E9wAMcJVlx0xtdfIKAU3Tg/tBcateXcBMOOakdwze1rue7Ki
-	RlRIrcHZ+GHizFz5YAlbud4M2bV9r9CVgkHRErRqEZHuheswQSg8nXHx0Gj1YVTrk5iL
-	0kRvBznTv6Sf2n9qF7qaOCz65NcbJ0frUdxW16LeV1IbEjyiAxCIx9Cu+H/1YgNZSBu3
-	0s+Q==
-X-Gm-Message-State: AOPr4FW7+mXB73HatRBbd12VB5JtKsYaUwE7zcbxk5eAWKdKuE0IFju/hPAQzANDlcXBw2Q6M12aOd+WIAEc1g==
-X-Received: by 10.140.92.175 with SMTP id b44mr13599508qge.104.1461852123614; 
-	Thu, 28 Apr 2016 07:02:03 -0700 (PDT)
+	:message-id:subject:to:content-transfer-encoding;
+	bh=KTv/hNHQbn8ivLdicxQYCJyKvwxs8Td+6K64kbS1ito=;
+	b=fcyjzT2BYmZ7aIvTgJBZ+fNDR81NpXae94bcFovWWui/TiUrs4wLxKk8X3IyUXYffd
+	ogUexlj3ObGqI+TEIEPpx9+NtStUj1iV/ERnMNNefTNthFxTXLhQEAOk0YEdXDjRFBQe
+	HugNXTrfh8RK2ej4gEoXDrB7Mx1Wsay2es4xJFTL/vUlNupUrQWxWzeX0Sz8F8BUaSP2
+	0FHu+fSrQqw8MRYwuXQ7g6HBfvvH2+vQKIuzF4AkkmkNOing2jVUt9kRtMD5ADH08uE5
+	terpUsuUmtA2FvgZ+frorK2FKz+n1rDqMtXgGN6nLiKHJh3OImmbf6aWXf5rmSQ1t/W0
+	vZ9Q==
+X-Gm-Message-State: AOPr4FXMtZzgTz6IGHA5xyR8N4baN2OUhBfnNk79Pa3eBLXzh2AoNMVchx6y+g/sj3ekXPCiLvESadC3lWZbjg==
+X-Received: by 10.55.200.137 with SMTP id t9mr15263626qkl.41.1461852465047;
+	Thu, 28 Apr 2016 07:07:45 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.55.130.196 with HTTP; Thu, 28 Apr 2016 07:01:34 -0700 (PDT)
-In-Reply-To: <20160428121437.GJ19598@bill-the-cat>
+Received: by 10.55.130.196 with HTTP; Thu, 28 Apr 2016 07:07:15 -0700 (PDT)
+In-Reply-To: <5721F2E8.6080306@pseudoterminal.org>
 References: <B1D22563-F31B-4EF1-90D6-16EB391134D5@gmail.com>
-	<CACS+7ZSpWgziO+GF++25dM7kgP4SZ_GDV+-DcEMQ_YUGyEEnfQ@mail.gmail.com>
-	<CAMKF1spQn114r9dCAk9z7c3hw-NJp3pVoVP+f3gao2mhLTBHYg@mail.gmail.com>
-	<CAMKF1spwimpQwSE38B5jWmyZXwMKy6znMEF9p-NmTM4mGGr+4g@mail.gmail.com>
-	<CAJTo0Lb25x1H44nGn05d6qBVLDpyiaZ3XW40fdrAWcP_D+qYwg@mail.gmail.com>
-	<CAJTo0LZZ3Hs_yrm5ceik4j8Orv-UQ9T72Wu=R_PCRKw4Y9-WCw@mail.gmail.com>
-	<CAMKF1sozR3_Mhy5PKSaKCo7S2yHrtLzTNrUURFhN38gV0AbkYQ@mail.gmail.com>
-	<20160427221005.GA19598@bill-the-cat>
-	<403123E7-85F1-4CBF-9D6C-E6377B89D5EA@gmail.com>
-	<20160428121437.GJ19598@bill-the-cat>
+	<5721F2E8.6080306@pseudoterminal.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 28 Apr 2016 07:01:34 -0700
-Message-ID: <CAMKF1spK=tkagRSRCyWzipHt8v1atfuhZahQOQ8UZ0FiCs+UsQ@mail.gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	OE Core mailing list <openembedded-core@lists.openembedded.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] [yocto] [RFT] GCC 6 Recipes
+Date: Thu, 28 Apr 2016 07:07:15 -0700
+Message-ID: <CAMKF1srrSNia6vEp4qO=NiFWtchcytnSRu3-nOg0W6CG9CTPcQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [RFT] GCC 6 Recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,70 +53,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Apr 2016 14:02:04 -0000
+X-List-Received-Date: Thu, 28 Apr 2016 14:07:45 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 28, 2016 at 5:14 AM, Tom Rini <trini@konsulko.com> wrote:
-> On Thu, Apr 28, 2016 at 12:08:46AM -0700, Khem Raj wrote:
+On Thu, Apr 28, 2016 at 4:24 AM, Carlos Rafael Giani
+<dv@pseudoterminal.org> wrote:
+> Something that concerns me is a note from
+> https://gcc.gnu.org/gcc-6/changes.html :
+>
+> "Value range propagation now assumes that the this pointer of C++ member
+> functions is non-null. This eliminates common null pointer checks but als=
+o
+> breaks some non-conforming code-bases (such as Qt-5, Chromium, KDevelop).=
+ As
+> a temporary work-around -fno-delete-null-pointer-checks can be used. Wron=
+g
+> code can be identified by using -fsanitize=3Dundefined."
+>
+> Sounds like this has potential to break a significant number of packages.
+
+Thanks for bringing it up.
+it could but then these need/will be fixed in due course. I would not
+recommend changing  OE wide
+compiler defaults for few apps. The relevant fix can be applied per
+recipe if needed
+
+>
+>
+> On 04/18/2016 07:15 AM, Khem Raj wrote:
 >>
->> > On Apr 27, 2016, at 3:10 PM, Tom Rini <trini@konsulko.com> wrote:
->> >
->> > On Wed, Apr 27, 2016 at 10:53:52AM -0700, Khem Raj wrote:
->> >> thanks I think most of them come to these categories. So any help in
->> >> fixing them is welcome.
->> >>
->> >> 1. kernel older than 4.4, backport needed fixed into these branches o=
-r
->> >> move to newer kernels.
->> >> 2. uboot dont have gcc6 compiler header files, backport the needed fi=
-xes
->> >
->> > 9b2c282b348dfe966bbba967dc7a45ce817cce50 from mainline.
->> >
->> >> 2. meta-qt4 needs to use gnu++98
->> >> 3. gcc6 providing its own stdlib.h in libstdc++
->> >> 4. gcc6 swtiching to gnu++14 for C++ as default.
->> >> 5. GPLv2-only versions of recipes are simply old will need fixing
->> >>
->> >> I will take a stab at fixing the nativesdk recipes which is mostly du=
-e
->> >> to stdlib.h issue.
->> >
->> > Please do, I'd like to see some SDKs so I can get more U-Boot testing
->> > done with gcc-6 :)
->> >
+>> Hello all,
 >>
->> I have pushed couple of more fixes which should now fix the nativesdk is=
-sues and SDKs should be building
+>> I have put together a potential gcc6 upgrade recipe set, and pushed the
+>> branch to tree here
 >>
->> Tree is here. Let me know how it goes.
 >>
 >> http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/gcc-=
 6
 >>
->> and also to github
+>> and also at github fork of mine.
 >>
 >> https://github.com/kraj/openembedded-core/tree/kraj/master
->
-> debian/jessie, nodistro, MACHINE=3Dqemux86. bitbake busybox:
-> | make[1]: Leaving directory
-> '/home2/trini/oe-gcc-6/openembedded-core/build/tmp-glibc/work/x86_64-linu=
-x/gcc-cross-initial-i586/6.0.0-r0/gcc-6.0.0/build.x86_64-linux.i586-oe-linu=
-x/gcc'
-> | cp: cannot create regular file
-> '/home2/trini/oe-gcc-6/openembedded-core/build/tmp-glibc/work/x86_64-linu=
-x/gcc-cross-initial-i586/6.0.0-r0/image/home2/trini/oe-gcc-6/openembedded-c=
-ore/build/tmp-glibc/sysroots/x86_64-linux/usr/lib/i586-oe-linux.gcc-cross-i=
-nitial-i586/gcc/i586-oe-linux/6.0.1/include/limits.h':
-> No such file or directory
->
-> Doing MACHINE=3Dqemux86-64 provides a similar error.  Thanks!
-
-I forgot to rename recipes to 6.1 after I did the gcc rebase since 6.1
-released yesterday. Anyway done now. please retry.
-
+>>
+>> You need to set
+>>
+>> GCCVERSION =3D =E2=80=9C6.%=E2=80=9D
+>>
+>> in local.conf to enable it.
+>>
+>>
+>> There are few recipes in OE-Core which still don=E2=80=99t compile e.g.
+>>
+>> see
+>>
+>> http://errors.yoctoproject.org/Errors/Build/14782/
+>>
+>> any help in fixing them or otherwise fixing other layers is appreciated.
+>>
+>> gcc6 is a major release for some info see
+>>
+>> https://gcc.gnu.org/gcc-6/changes.html
+>>
+>> and porting guide
+>>
+>> https://gcc.gnu.org/gcc-6/porting_to.html
+>>
+>>
+>> Thanks
+>>
+>> -Khem
+>>
+>>
 >
 > --
-> Tom
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
