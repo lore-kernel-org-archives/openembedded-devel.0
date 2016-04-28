@@ -1,45 +1,23 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id A166873192
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 3DBC865CC2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Apr 2016 08:49:40 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id n129so11517013wmn.1
+	Thu, 28 Apr 2016 11:24:24 +0000 (UTC)
+Received: from [10.1.14.248] (vpn.streamunlimited.com [91.114.0.140])
+	by ptmx.org (Postfix) with ESMTPSA id 65D9338D46
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Apr 2016 01:49:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=OdG+Hqyvyfp7OkRaIiu6WfSOk1del/cgY99RyCePbpY=;
-	b=F5D9SgiY/ldhAJmRCb5tQxFD6sK6+sgWU7Yaz5zDE4yiM4V70CmFAAUht9E4oXFgdY
-	QISRyF8dmt3L/nc14ULtDGVafN1q1y6qzUkSK+JPBlzf5Eckn3DH69kpW4iJ/3HLqolr
-	HDaaICiYe12R/fAMHXMlcRon+Cn3c3I7cGrfB6PWuuTna6uX+XgMiYre6Fb2CjDmZIEv
-	Y3lzb6oa6ozGCkAXgMHWESDf26rZ/IZ3odHWLBoMgQTUE6/dTj3nxcOJWrYMCjIpozqY
-	+VYtcUf8rWFl3/K2JvtFB1UiZSgQ7Czci022WxJCMZhTvG2o5TwXPS6VMzsONTCbznIH
-	PRLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=OdG+Hqyvyfp7OkRaIiu6WfSOk1del/cgY99RyCePbpY=;
-	b=hlJyLI+oFjfeQY+nT/smOy58eiFhOmcabUICHXkYbvneKQU17nYTXM1me6E56MzHcn
-	P/Z7oLuGhiavr+9J1GDkF1A3UXP+6M902GFxPMy5KPclJyA4wdymYltjcQZ0Q074Ed1n
-	CbIsE55yCXVaerkRf8VqO75IN3bU8VE6B5+CQiBvyJi5X09yyOIReYNkXpQLLrPHnIMt
-	LbkUTCqu32QlJOhOF3wRKDvMyhY8k2qB95lRcgdb+Bwf6itiuhtjkr1BUqk7Iu8kFn4D
-	Te2dEIvjwpbp3Q7aOmyiRekIYzPuyNCjBNvGvelN78E58+IRhm/g/Uh3g1uc0iKAOdzc
-	A1Pg==
-X-Gm-Message-State: AOPr4FVWN8kMIqqYI02FsYdrkM211UbnK1GgKH3Qiz5wDoBrsmyfINuBJsYNSxks2aljsw==
-X-Received: by 10.28.111.14 with SMTP id k14mr12126216wmc.32.1461833380598;
-	Thu, 28 Apr 2016 01:49:40 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	l124sm12796546wmf.11.2016.04.28.01.49.39
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 28 Apr 2016 01:49:39 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Thu, 28 Apr 2016 13:24:23 +0200 (CEST)
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Apr 2016 10:50:22 +0200
-Message-Id: <1461833422-5248-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.8.1
-Subject: [PATCH][meta-oe] sblim-sfcb: add missing dependency on unzip-native
+References: <B1D22563-F31B-4EF1-90D6-16EB391134D5@gmail.com>
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+Message-ID: <5721F2E8.6080306@pseudoterminal.org>
+Date: Thu, 28 Apr 2016 13:24:24 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.6.0
+MIME-Version: 1.0
+In-Reply-To: <B1D22563-F31B-4EF1-90D6-16EB391134D5@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [RFT] GCC 6 Recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,39 +30,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Apr 2016 08:49:40 -0000
+X-List-Received-Date: Thu, 28 Apr 2016 11:24:26 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 8bit
 
-* otherwise configure fails with:
-  | checking whether to build shared libraries... yes
-  | checking whether to build static libraries... no
-  | checking for unzip... no
-  | configure: error: Could not find unzip
-  | NOTE: The following config.log files may provide further information.
-  | NOTE: /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/sblim-sfcb/1.4.9-r0/build/config.log
-  | ERROR: configure failed
-  | ERROR: Function failed: do_configure (log file is located at /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/sblim-sfcb/1.4.9-r0/temp/log.do_configure.9838)
-  NOTE: recipe sblim-sfcb-1.4.9-r0: task do_configure: Failed
-  ERROR: Task 5 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb, do_configure) failed with exit code '1'
+Something that concerns me is a note from 
+https://gcc.gnu.org/gcc-6/changes.html :
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+"Value range propagation now assumes that the this pointer of C++ member 
+functions is non-null. This eliminates common null pointer checks but 
+also breaks some non-conforming code-bases (such as Qt-5, Chromium, 
+KDevelop). As a temporary work-around -fno-delete-null-pointer-checks 
+can be used. Wrong code can be identified by using -fsanitize=undefined."
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-index ed5382e..41626d1 100644
---- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-@@ -9,7 +9,7 @@ HOMEPAGE = "http://www.sblim.org"
- SECTION = "Applications/System"
- LICENSE = "EPL-1.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f300afd598546add034364cd0a533261"
--DEPENDS = "curl libpam openssl sblim-sfc-common"
-+DEPENDS = "curl libpam openssl sblim-sfc-common unzip-native"
- 
- SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
-            file://sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch \
--- 
-2.8.1
+Sounds like this has potential to break a significant number of packages.
+
+On 04/18/2016 07:15 AM, Khem Raj wrote:
+> Hello all,
+>
+> I have put together a potential gcc6 upgrade recipe set, and pushed the branch to tree here
+>
+>
+> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-6
+>
+> and also at github fork of mine.
+>
+> https://github.com/kraj/openembedded-core/tree/kraj/master
+>
+> You need to set
+>
+> GCCVERSION = “6.%”
+>
+> in local.conf to enable it.
+>
+>
+> There are few recipes in OE-Core which still don’t compile e.g.
+>
+> see
+>
+> http://errors.yoctoproject.org/Errors/Build/14782/
+>
+> any help in fixing them or otherwise fixing other layers is appreciated.
+>
+> gcc6 is a major release for some info see
+>
+> https://gcc.gnu.org/gcc-6/changes.html
+>
+> and porting guide
+>
+> https://gcc.gnu.org/gcc-6/porting_to.html
+>
+>
+> Thanks
+>
+> -Khem
+>
+>
 
 
