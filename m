@@ -1,55 +1,50 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f67.google.com (mail-pa0-f67.google.com
-	[209.85.220.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D22A607F8
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id BCD5B700EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Apr 2016 20:21:47 +0000 (UTC)
-Received: by mail-pa0-f67.google.com with SMTP id yl2so10300485pac.1
+	Thu, 28 Apr 2016 21:01:16 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id r187so12241268pfr.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Apr 2016 13:21:48 -0700 (PDT)
+	Thu, 28 Apr 2016 14:01:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=JEzyZ9NgrSnRECySDIK/i+umv920rUI8VdcjJLagNjE=;
-	b=iZIjuRvS0Bhh0Z9qM+JP/KWy/j6rZ2PVXfOnmrFES5hUk6tHaF24G4/On9mEeTeC+5
-	GudMqE1GZGzKgqtysAG7rwYQGCG9++bc3fPxAOct0OAhdSzhOaoBJIcATOGPQk3TK+28
-	iGkSzgS5mogwKAHaCAWJ8xwwoA5yJaOb6xeCwaqDn0cWoAxObcxfMGoW9BNR6q9Ujh7t
-	c1Q8re0N64CnxGxAnLEnlCD34acb1Iu7HyhtNJHLPZQd6ZFTgkqTHC/aVFyd0RhcyHIe
-	Xnq4Es1WMy+NNFRSkdZmEMqKAaXuCEBMDid3/ulJocvmIE5a8DvRYLAIaMLMPMTIeCYL
-	mL0g==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=KHcTZf8nOT4TLxeQy9hlOxVpT3IrQrqEU0sVpOlXyJ8=;
+	b=r9zXw9BtfhimnjamXrEPI+xYn9rX3cyqz8IoWdYrV92Hcky+aKT4WV5rhEJ+Sa8AWc
+	Jwn7MjyniEk0PLotN4hhHw+Mhd5D0qkicMy4afWNEDTDgpc77V6ZaUDVndJWR4NOMXCx
+	yA9geBqtJts7Cr910o9aVTnDds9JxeQMwiLklSNQ66s8ls4RM5Pxc7824ZKQLOokDTRW
+	4p7Vc+gOB3AwW8XOF9JPSGnjHNAZLeGhiLZnjhJ336Qp7IlCQUjqvPobW3/IOpKfOKR7
+	C5aFPd774IFU7Xspk8PY0L8JqWmODMOsJhInpcWJXlfRFFjDkeemgyAZV1f9P0D2jUS9
+	KvRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=JEzyZ9NgrSnRECySDIK/i+umv920rUI8VdcjJLagNjE=;
-	b=lGWMxX6n40fNjY1/2UspDINS6LJBUZBaRDQw51p3twdonisGNSo5SrrNC3BZ5M2fYX
-	v672cSda3LYt3xPBUlw3aVJSgO+fpP/Ivq431tSH7dxaIUx3TiJwfiSkt1K4wa7UcORX
-	RGMYp5e4uHbzSTDqWlIqqNHBLqTlcUNykHnLTmHSb4k6Y0yIg3AAixYh9SpkBOaVcbJt
-	AZ/dv5EvrbH4GV3bZUJHDAS0mboIfrn/RR2WZi0etoWU6icVuAJhtzknxwU9QLf9NQv0
-	JzKedqZeTute/tSFQpkCEme2Bljk45Beuw1r/C/+PetCmjppIo+Ol81h+Fs9GMym760c
-	GZyg==
-X-Gm-Message-State: AOPr4FWsybLieiXtbLZrK+8TSrpyYTJBHkglxC+88CpIMTSKFSx/oe1BsMXMpadwxnsaEA==
-X-Received: by 10.66.55.101 with SMTP id r5mr23526331pap.146.1461874907812;
-	Thu, 28 Apr 2016 13:21:47 -0700 (PDT)
-Received: from Akusters-laptop.local (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by smtp.googlemail.com with ESMTPSA id
-	x184sm17280350pfb.53.2016.04.28.13.21.46
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 28 Apr 2016 13:21:46 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org
-References: <1458862016-19466-1-git-send-email-stefan@agner.ch>
-	<20160325103723.GB2555@jama>
-	<f652e665e55a2c4b8c28b37918fb4bfb@agner.ch>
-	<29fc282dcd1db1832d1e5ef9da5e67f4@agner.ch>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <572270D8.10208@gmail.com>
-Date: Thu, 28 Apr 2016 13:21:44 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:38.0)
-	Gecko/20100101 Thunderbird/38.7.2
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=KHcTZf8nOT4TLxeQy9hlOxVpT3IrQrqEU0sVpOlXyJ8=;
+	b=mU2uJhUPRMrVy8PRfSxiobyMIENX36eLcekMr2x/dXb2XbjSSpXB8tu4Vp4IkKFo8M
+	fs2pciW9Vn+uR5pAxILMOjfWSr8Z4ZEbYcgvZZZLPmP/KVgch5Ss7EMN43kBF/zZysxZ
+	moI9kEeftNP4P1a2NRVOGAx0LObWkvuxOL5h9THWU9UaHD4+be4PiKqx9m0TQ9YR8uVs
+	s5dVYShe2mtQmwKEVptu4oZD0e9zjP2XquVzb40rHVcA+SPzpxRO5fvlPCZeUdT6c5G0
+	t7UNiuq2RNwm7N8y7D2MIjJQaz4MTV3CkY5jBQG3+2iQi1rTHRDgMNps7Wqr+UGCMYsE
+	G8uA==
+X-Gm-Message-State: AOPr4FUsPgqV/dWPBDm4+nRbWEycRcW2L/4CTpqSym0cK3zgPTEUpeENOdeA0/ovjb7PdA==
+X-Received: by 10.98.78.199 with SMTP id c190mr23510399pfb.7.1461877277033;
+	Thu, 28 Apr 2016 14:01:17 -0700 (PDT)
+Received: from bigIsland.hsd1.ca.comcast.net
+	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
+	by smtp.gmail.com with ESMTPSA id
+	t62sm17418431pfa.38.2016.04.28.14.01.15
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 28 Apr 2016 14:01:15 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com,
+	openembedded-devel@lists.openembedded.org
+Date: Thu, 28 Apr 2016 14:00:26 -0700
+Message-Id: <cover.1461874725.git.akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <29fc282dcd1db1832d1e5ef9da5e67f4@agner.ch>
-Subject: Re: [meta-multimedia][jethro][PATCH] gstreamer: fix argument parsing when using Bison 3
+Subject: [PATCH 00/36] Jethro-next pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,165 +57,175 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Apr 2016 20:21:50 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Apr 2016 21:01:17 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 4/28/16 11:27 AM, Stefan Agner wrote:
-> On 2016-03-25 11:16, Stefan Agner wrote:
->> On 2016-03-25 03:37, Martin Jansa wrote:
->>> On Thu, Mar 24, 2016 at 04:26:56PM -0700, Stefan Agner wrote:
->>>> From: Stefan Agner <stefan.agner@toradex.com>
->>>>
->>>> Remove the argument fix patch and add a patch which fixes the
->>>> grammer.y Bison input file. YYLEX_PARAM seems to be no longer
->>>> supported and has been replaced with %parse-param which has
->>>> been introduced already in 2003.
->>>>
->>>> This fixes a segmentation fault when launching gst-launch-0.10.
->>> Is this needed in master branch as well?
->> Yes.
->>
->>> All changes for released branch should go to master first.
->>>
->> Sorry, should have added [master] to the subject.
->
-> This has made it to the master branch in between but has (not yet?) been
-> applied to jethro. Any chance to get it into jethro too?
+Please consider these changes for jethro-next
 
-merged to staging
+The following changes since commit c305ac5d2f5285d5eec8952a4ca7f3b4f89aed96:
 
-thanks,
-Armin
->
-> http://git.openembedded.org/meta-openembedded/commit/?id=6132a35f8cf3906acef4ba54b7d8819a82e05be0
->
-> --
-> Stefan
->
->>>> Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
->>>> ---
->>>> This is the stack trace of the segmentation fault:
->>>> (gdb) bt
->>>> #0  priv_gst_parse_yylex (yylval_param=yylval_param@entry=0xbe8a4224, yyscanner=0xc8) at lex.priv_gst_parse_yy.c:1153
->>>> #1  0x4022d712 in priv_gst_parse_yyparse (scanner=<optimized out>, graph=graph@entry=0xbe8a47ec) at grammar.tab.c:1821
->>>> #2  0x4022f18c in priv_gst_parse_launch (
->>>>     str=0x94f28 "filesrc location=/home/root_2p_key60_q90_aac128_44.mp4 ! qtdemuxemux demux.video_00 ! nv_omx_h264dec ! nv_gl_eglimagesink demux.audio_00 ! nv_omx_aacdec ! alsasink device=hw:0,0 ",
->>>>     error=error@entry=0xbe8a4910, ctx=ctx@entry=0x0, flags=flags@entry=GST_PARSE_FLAG_NONE) at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/parse/grammar.y:927
->>>> #3  0x402277b8 in gst_parse_launch_full (
->>>>     pipeline_description=0x94f28 "filesrc location=/home/root_2p_key60_q90_aac128_44.mp4 ! qtdemuxemux demux.video_00 ! nv_omx_h264dec ! nv_gl_eglimagesink demux.audio_00 ! nv_omx_aacdec ! alsasink device=hw:0,0 ", context=context@entry=0x0, flags=flags@entry=GST_PARSE_FLAG_NONE, error=error@entry=0xbe8a4910) at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/gstparse.c:336
->>>> #4  0x40227968 in gst_parse_launchv_full (argv=argv@entry=0x7ad50, context=context@entry=0x0, flags=flags@entry=GST_PARSE_FLAG_NONE, error=error@entry=0xbe8a4910)
->>>>     at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/gstparse.c:272
->>>> #5  0x402279f2 in gst_parse_launchv (argv=argv@entry=0x7ad50, error=error@entry=0xbe8a4910) at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/gst/gstparse.c:224
->>>> #6  0x0000a6d8 in main (argc=16, argv=0xbe8a4ca4) at /usr/src/debug/gstreamer/0.10.36-r2/gstreamer-0.10.36/tools/gst-launch.c:1031
->>>>
->>>>  ...01-parse-make-grammar.y-work-with-Bison-3.patch | 35 ++++++++++++++++++++++
->>>>  ...mer-change-priv_gst_parse_yylex-arguments.patch | 33 --------------------
->>>>  .../gstreamer-0.10/gstreamer_0.10.36.bb            |  2 +-
->>>>  3 files changed, 36 insertions(+), 34 deletions(-)
->>>>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch
->>>>  delete mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
->>>>
->>>> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch
->>>> new file mode 100644
->>>> index 0000000..dc2d606
->>>> --- /dev/null
->>>> +++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch
->>>> @@ -0,0 +1,35 @@
->>>> +From 60516f4798894f958fc53b470e1283318d0f8706 Mon Sep 17 00:00:00 2001
->>>> +From: Kerrick Staley <kerrick@kerrickstaley.com>
->>>> +Date: Tue, 20 Aug 2013 23:59:29 -0700
->>>> +Subject: [PATCH 1/2] parse: make grammar.y work with Bison 3
->>>> +
->>>> +YYLEX_PARAM is no longer supported in Bison 3.
->>>> +
->>>> +https://bugzilla.gnome.org/show_bug.cgi?id=706462
->>>> +---
->>>> + gst/parse/grammar.y | 2 +-
->>>> + 1 file changed, 1 insertion(+), 1 deletion(-)
->>>> +
->>>> +diff --git a/gst/parse/grammar.y b/gst/parse/grammar.y
->>>> +index 24fc87b..7f9dd16 100644
->>>> +--- a/gst/parse/grammar.y
->>>> ++++ b/gst/parse/grammar.y
->>>> +@@ -26,7 +26,6 @@
->>>> +  */
->>>> +
->>>> + #define YYERROR_VERBOSE 1
->>>> +-#define YYLEX_PARAM scanner
->>>> +
->>>> + #define YYENABLE_NLS 0
->>>> +
->>>> +@@ -648,6 +647,7 @@ static int yyerror (void *scanner, graph_t *graph, const char *s);
->>>> + %right '.'
->>>> + %left '!' '='
->>>> +
->>>> ++%lex-param { void *scanner }
->>>> + %parse-param { void *scanner }
->>>> + %parse-param { graph_t *graph }
->>>> + %pure-parser
->>>> +--
->>>> +2.7.2
->>>> +
->>>> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
->>>> deleted file mode 100644
->>>> index bf93cb2..0000000
->>>> --- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
->>>> +++ /dev/null
->>>> @@ -1,33 +0,0 @@
->>>> -gstreamer: change priv_gst_parse_yylex arguments
->>>> -
->>>> -Change priv_gst_parse_yylex to fit new bison version, else we will
->>>> -get following error:
->>>> -
->>>> -| grammar.tab.c: In function 'priv_gst_parse_yyparse':
->>>> -| grammar.tab.c:67:25: error: too few arguments to function 'priv_gst_parse_yylex'
->>>> -|  #define yylex           priv_gst_parse_yylex
->>>> -|                          ^
->>>> -
->>>> -Upstream-Status: Pending
->>>> -
->>>> -Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
->>>> ----
->>>> - gst/parse/grammar.y | 2 +-
->>>> - 1 file changed, 1 insertion(+), 1 deletion(-)
->>>> -
->>>> -diff --git a/gst/parse/grammar.y b/gst/parse/grammar.y
->>>> -index 24fc87b..24fe906 100644
->>>> ---- a/gst/parse/grammar.y
->>>> -+++ b/gst/parse/grammar.y
->>>> -@@ -36,7 +36,7 @@
->>>> -
->>>> - typedef void* yyscan_t;
->>>> -
->>>> --int priv_gst_parse_yylex (void * yylval_param , yyscan_t yyscanner);
->>>> -+int priv_gst_parse_yylex (yyscan_t yyscanner);
->>>> - int priv_gst_parse_yylex_init (yyscan_t scanner);
->>>> - int priv_gst_parse_yylex_destroy (yyscan_t scanner);
->>>> - struct yy_buffer_state * priv_gst_parse_yy_scan_string (char* , yyscan_t);
->>>> ---
->>>> -1.9.1
->>>> -
->>>> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
->>>> index 5b30603..ad7cf99 100644
->>>> --- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
->>>> +++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
->>>> @@ -15,7 +15,7 @@ SRC_URI = "http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.bz
->>>>             file://check_fix.patch \
->>>>             file://gst-inspect-check-error.patch \
->>>>             file://0001-baseparse-Fix-self-comparison-always-evaluates-to-tr.patch \
->>>> -           file://gstreamer-change-priv_gst_parse_yylex-arguments.patch \
->>>> +           file://0001-parse-make-grammar.y-work-with-Bison-3.patch \
->>>>  "
->>>>
->>>>  SRC_URI[md5sum] = "a0cf7d6877f694a1a2ad2b4d1ecb890b"
->>>> --
->>>> 1.9.1
->>>>
->>>> --
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+  python-m2crypto: fix SSLv2 symbol issue (2016-03-09 20:10:13 +0100)
+
+are available in the git repository at:
+
+  git://github.com/akuster/meta-openembedded akuster/jethro-next
+  https://github.com/akuster/meta-openembedded/tree/akuster/jethro-next
+
+Alexander Kanavin (1):
+  tracker: fix packaging issues
+
+Andre McCurdy (1):
+  gst-plugins-base: add perl runtime dependency to gst-plugins-base-apps
+
+André Draszik (1):
+  rsnapshot: use ${bindir} as rsync location
+
+Armin Kuster (3):
+  udisk2: fix build issue with missing depends
+  xcursorgen: fix License issue
+  flite: fix license issue.
+
+Belal, Awais (1):
+  mplayer2: fix building with gcc 5.x
+
+Catalin Enache (2):
+  net-snmp: fix invalid paths in target net-snmp-config
+  net-snmp: fix some invalid paths
+
+Christopher Larson (1):
+  ctdb: rdep on bash
+
+Jackie Huang (1):
+  libsmi: set the SH to the target path
+
+Koen Kooi (1):
+  mozjs: fix armeb builds
+
+Li xin (2):
+  mozjs_17.0.0.bb: Fix do_srpm error
+  mariadb: Fix rootfs creation errors
+
+Mark Asselstine (1):
+  mozjs: fix configure host contamination
+
+Martin Jansa (4):
+  recipes: Replace "cp -a" with "cp -R --no-dereference
+    --preserve=mode,links"
+  efl-native: add dependency on openssl
+  luajit: depend on luajit-native to provide host lua
+  libftdi: Fix cpp-wrapper options
+
+Mingli Yu (2):
+  netkit-telnet: Add to generate telnetlogin.
+  netkit-rsh: add two patches and some fixes.
+
+Philip Balister (1):
+  log4cpp: Fix build system path in pkgconfig file QA failure.
+
+Rafaël Carré (5):
+  vlc: make x11 DISTRO_FEATURE optional (enabled by default)
+  vlc: make sdl optional (enabled by default)
+  vlc: Fix typo introduced in 0f2b3139521570ad494a72399f8a9dae76e69b16
+  net-snmp: apply patch for cross-compilation
+  net-snmp: apply patch for cross-compilation
+
+Richard Purdie (1):
+  xmlstarlet: Disable PARALLEL_MAKE
+
+Richard Tollerton (1):
+  openldap: control ipv6 support via DISTRO_FEATURES
+
+Roy Li (2):
+  lldpd: configure the systemd unit file dir
+  net-snmp: fix the replacement in net-snmp-config
+
+Stefan Agner (1):
+  gstreamer: fix argument parsing when using Bison 3
+
+Stephano Cetola (1):
+  fix missing packageconfig for samba with sysvinit
+
+Stephen Arnold (1):
+  net-snmp: fix cross-compile breakage, add libnl pkgconfig option
+
+Zhixiong Chi (2):
+  postgresql: Security Advisory-postgresql-CVE-2016-0766
+  krb5-CVE-2016-3119.patch
+
+ meta-efl/recipes-devtools/python/python-edbus.inc  |   2 +-
+ meta-efl/recipes-efl/efl/efl.inc                   |   2 +-
+ .../recipes-support/tracker/tracker_0.14.2.bb      |   2 +-
+ .../recipes-mkv/libebml/libebml_1.3.0.bb           |   2 +-
+ .../recipes-mkv/libmatroska/libmatroska_1.4.1.bb   |   2 +-
+ .../gstreamer-0.10/gst-plugins-base_0.10.36.bb     |   3 +
+ ...01-parse-make-grammar.y-work-with-Bison-3.patch |  35 ++++++
+ ...mer-change-priv_gst_parse_yylex-arguments.patch |  33 -----
+ .../gstreamer-0.10/gstreamer_0.10.36.bb            |   2 +-
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc     |  13 +-
+ .../recipes-connectivity/samba/samba_4.1.12.bb     |   1 +
+ .../recipes-daemons/lldpd/lldpd_0.7.17.bb          |   5 +-
+ .../netkit-rsh/netkit-rsh/fix-host-variable.patch  |  27 ++++
+ .../netkit-rsh/netkit-rsh-0.17-rexec-ipv6.patch    |  30 +++++
+ .../recipes-netkit/netkit-rsh/netkit-rsh/rexec.pam |  10 ++
+ .../netkit-rsh/netkit-rsh/rexec.xinetd.netkit      |   2 +-
+ .../netkit-rsh/netkit-rsh/rlogin.pam               |  12 ++
+ .../netkit-rsh/netkit-rsh/rlogin.xinetd.netkit     |   2 +-
+ .../recipes-netkit/netkit-rsh/netkit-rsh/rsh.pam   |  10 ++
+ .../netkit-rsh/netkit-rsh/rsh.xinetd.netkit        |   2 +-
+ .../recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   |  25 ++--
+ .../netkit-telnet/netkit-telnet_0.17.bb            |   3 +
+ ....patch => 0001-config_os_libs2-Error-Fix.patch} |   2 +-
+ .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb   |  30 +++--
+ .../cim-schema/cim-schema-docs_2.40.0.bb           |   2 +-
+ .../cim-schema/cim-schema-exper_2.39.0.bb          |   2 +-
+ .../cim-schema/cim-schema-final_2.40.0.bb          |   2 +-
+ meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |   2 +
+ meta-oe/licenses/ManishSingh                       |  19 +++
+ meta-oe/licenses/flite                             |  32 +++++
+ meta-oe/recipes-benchmark/fio/fio_2.2.6.bb         |   2 +-
+ .../krb5/krb5/krb5-CVE-2016-3119.patch             |  36 ++++++
+ meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb   |   1 +
+ meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb    |   3 +
+ ...0001-add-support-for-big-endian-32bit-ARM.patch |  26 ++++
+ meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     |  15 +--
+ .../recipes-extended/tipcutils/tipcutils_2.0.6.bb  |   2 +-
+ meta-oe/recipes-multimedia/live555/live555.inc     |  10 +-
+ ...artially-port-libtheora-glue-code-to-Theo.patch | 136 +++++++++++++++++++++
+ meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb |   4 +-
+ meta-oe/recipes-navigation/orrery/orrery_2.7.bb    |   2 +-
+ meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb |   4 +-
+ meta-oe/recipes-support/libftdi/libftdi_1.2.bb     |   2 +-
+ meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb     |   2 +
+ meta-oe/recipes-support/log4cpp/files/fix-pc.patch |  20 +++
+ meta-oe/recipes-support/log4cpp/log4cpp_1.1.1.bb   |   8 +-
+ meta-oe/recipes-support/mysql/mariadb.inc          |   5 +-
+ .../recipes-support/openldap/openldap_2.4.42.bb    |   2 +
+ .../files/postgresql-CVE-2016-0766.patch           |  35 ++++++
+ meta-oe/recipes-support/postgresql/postgresql.inc  |   1 +
+ .../rsnapshot/configure-fix-cmd_rsync.patch        |   2 +-
+ meta-oe/recipes-support/tbb/tbb_4.1.bb             |   2 +-
+ meta-oe/recipes-support/udisks/udisks2_2.1.5.bb    |   2 +-
+ .../recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb |   7 ++
+ .../recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb   |   2 +-
+ 55 files changed, 544 insertions(+), 103 deletions(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch
+ delete mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
+ create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/fix-host-variable.patch
+ create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/netkit-rsh-0.17-rexec-ipv6.patch
+ create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rexec.pam
+ create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rlogin.pam
+ create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rsh.pam
+ rename meta-networking/recipes-protocols/net-snmp/net-snmp/{0002-config_os_headers-Error-Fix.patch => 0001-config_os_libs2-Error-Fix.patch} (96%)
+ create mode 100644 meta-oe/licenses/ManishSingh
+ create mode 100644 meta-oe/licenses/flite
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/krb5-CVE-2016-3119.patch
+ create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0001-add-support-for-big-endian-32bit-ARM.patch
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer2/0001-demux_ogg-partially-port-libtheora-glue-code-to-Theo.patch
+ create mode 100644 meta-oe/recipes-support/log4cpp/files/fix-pc.patch
+ create mode 100644 meta-oe/recipes-support/postgresql/files/postgresql-CVE-2016-0766.patch
+
+-- 
+1.9.1
 
 
