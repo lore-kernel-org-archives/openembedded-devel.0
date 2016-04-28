@@ -1,16 +1,45 @@
-Return-Path: <mark.hatle@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BB14E70016;
-	Thu, 28 Apr 2016 15:19:11 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u3SFJ50E023162
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Thu, 28 Apr 2016 08:19:06 -0700
-Received: from soho-mhatle-m.local (172.25.36.226) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Thu, 28 Apr 2016 08:19:05 -0700
-To: Khem Raj <raj.khem@gmail.com>
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com
+	[209.85.192.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 78B6F76A51;
+	Thu, 28 Apr 2016 15:29:35 +0000 (UTC)
+Received: by mail-pf0-f172.google.com with SMTP id c189so35158472pfb.3;
+	Thu, 28 Apr 2016 08:29:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
+	:to; bh=Si73L8jxKSngTfPBfCjkOevGU5HaTlaBSCFVwpR8NbA=;
+	b=UJ+NNBHwydg2X8p6XkCk3qv2FxmOISSRfPHj8Lljr+T2gsl70sFFd7GSNTgWdN6+eY
+	RroWslQp3+zWjZqzV4IsJPQJhHr8RCFWUe71CyA/Ad5XxqS9QyLw9MaLwKS1PP6J3kzS
+	LgSwDq3PefZSYsm1AzugYCB6C0Z+F29C/eEAUrVW0wGyer0Q7Ndv3S6wMmKNGeOcRerb
+	DakvpI3urqvJps+Knmze7zP6xmVLofGQnz5tynzb/II3pnuEnm638oaiTlsePWntLZ6n
+	Vwbjh9YxpM4IJFECmPo3zcPSR4Vxca39HTEnq9/0YXWRpyTAUVm4856MF/rta9jS/QqC
+	2iSA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=Si73L8jxKSngTfPBfCjkOevGU5HaTlaBSCFVwpR8NbA=;
+	b=CAcvBu64h+5L073wPrg0G2qhu2oDtf81eyUBK64IRge7n4e8r+F7ip1/e1nGGax3Ry
+	xS4Nset7zvW3p+HT0deSVI21t4sQdqULPIkYvvLCB1Jeifr186yIQBzq1C83WUwBRcDe
+	SCqytz4JdnEUdhC6tMGD3lA+A5up7F3c2iEJaTLlaGEAWhICzyb7qs5lFRoTbhxkrP+W
+	zkATtj5PU1nvti/kGPcFVTD/VA8r1y7xYXbV0Q7tKhdQiJjgFZqmkQLHeLeHOLI+tRwq
+	nu6AWRDc4GSnqhkoGrtHsrvtiL0h94p8MDnCRMTVaB3EtPgUZEn8gioxa9dJvZnpKLX7
+	9Caw==
+X-Gm-Message-State: AOPr4FXJGVVoRMyaXdA0rPlSGwhBpNCTvTo9i4Z+0n/IHQcFpXXTF2SRA9onWsDVv6QU1Q==
+X-Received: by 10.98.80.150 with SMTP id g22mr21404098pfj.132.1461857375916;
+	Thu, 28 Apr 2016 08:29:35 -0700 (PDT)
+Received: from ?IPv6:2601:646:8800:5a9a:7c73:e571:eae0:530b?
+	([2601:646:8800:5a9a:7c73:e571:eae0:530b])
+	by smtp.gmail.com with ESMTPSA id
+	x64sm15952038pfx.95.2016.04.28.08.29.34
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 28 Apr 2016 08:29:35 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <748495f9-7383-ce65-a41b-7343aa1c6004@windriver.com>
+Date: Thu, 28 Apr 2016 08:29:30 -0700
+Message-Id: <2D704C56-775E-4E1A-BFBD-0C14455EFE1A@gmail.com>
 References: <B1D22563-F31B-4EF1-90D6-16EB391134D5@gmail.com>
 	<CACS+7ZSpWgziO+GF++25dM7kgP4SZ_GDV+-DcEMQ_YUGyEEnfQ@mail.gmail.com>
 	<CAMKF1spQn114r9dCAk9z7c3hw-NJp3pVoVP+f3gao2mhLTBHYg@mail.gmail.com>
@@ -20,14 +49,9 @@ References: <B1D22563-F31B-4EF1-90D6-16EB391134D5@gmail.com>
 	<CAMKF1sozR3_Mhy5PKSaKCo7S2yHrtLzTNrUURFhN38gV0AbkYQ@mail.gmail.com>
 	<246f9c39-736b-7ed6-b69a-69d8c4369236@windriver.com>
 	<B59F2ADC-CB7F-44CF-9AD7-AD779FC2EEC9@gmail.com>
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-Message-ID: <748495f9-7383-ce65-a41b-7343aa1c6004@windriver.com>
-Date: Thu, 28 Apr 2016 10:19:04 -0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:45.0)
-	Gecko/20100101 Thunderbird/45.0
-MIME-Version: 1.0
-In-Reply-To: <B59F2ADC-CB7F-44CF-9AD7-AD779FC2EEC9@gmail.com>
+	<748495f9-7383-ce65-a41b-7343aa1c6004@windriver.com>
+To: Mark Hatle <mark.hatle@windriver.com>
+X-Mailer: Apple Mail (2.3124)
 Cc: Yocto Project <yocto@yoctoproject.org>,
 	OE Core mailing list <openembedded-core@lists.openembedded.org>,
 	openembeded-devel <openembedded-devel@lists.openembedded.org>
@@ -44,37 +68,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Apr 2016 15:19:13 -0000
-Content-Type: text/plain; charset="windows-1252"
+X-List-Received-Date: Thu, 28 Apr 2016 15:29:35 -0000
+X-Groupsio-MsgNum: 61241
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_BDF74206-D697-4F7D-B23D-82FBB4BB27F7";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_BDF74206-D697-4F7D-B23D-82FBB4BB27F7
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=windows-1252
+
+
+> On Apr 28, 2016, at 8:19 AM, Mark Hatle <mark.hatle@windriver.com> =
+wrote:
+>=20
+> On 4/28/16 2:10 AM, Khem Raj wrote:
+>>=20
+>>> On Apr 27, 2016, at 11:06 AM, Mark Hatle <mark.hatle@windriver.com> =
+wrote:
+>>>=20
+>>> On 4/27/16 12:53 PM, Khem Raj wrote:
+>>>> thanks I think most of them come to these categories. So any help =
+in
+>>>> fixing them is welcome.
+>>>>=20
+>>>> 1. kernel older than 4.4, backport needed fixed into these branches =
+or
+>>>> move to newer kernels.
+>>>> 2. uboot dont have gcc6 compiler header files, backport the needed =
+fixes
+>>>> 2. meta-qt4 needs to use gnu++98
+>>>> 3. gcc6 providing its own stdlib.h in libstdc++
+>>>> 4. gcc6 swtiching to gnu++14 for C++ as default.
+>>>> 5. GPLv2-only versions of recipes are simply old will need fixing
+>>>=20
+>>> =46rom a -very- brief look, I suspect each of these fixes will be =
+fairly simple.
+>>> So as we move into the next oe-core phase, we should be able get =
+through this
+>>> pretty quickly.
+>>=20
+>> I think yes, they are trivial, except the GPL-2.0 packages which =
+might need patching
+>>=20
+>=20
+> Ha, actually that was what I was referring to.  The couple I looked at =
+seemed to
+> be trivial.. :)
+
+yes they are just the fact that compiler has gone stricter compliance =
+with standards compared
+to when code was written. In worst case we might downgrade -std for =
+these recipe but that
+may not be enough in some cases
+>=20
+> If someone doesn't get to it first, I expect some of my guys will in =
+about a month.
+>=20
+
+OK cool. I think we should make it merge worthy and get it early into =
+master and fix the fallouts
+
+
+> --Mark
+
+
+--Apple-Mail=_BDF74206-D697-4F7D-B23D-82FBB4BB27F7
 Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
-On 4/28/16 2:10 AM, Khem Raj wrote:
-> 
->> On Apr 27, 2016, at 11:06 AM, Mark Hatle <mark.hatle@windriver.com> wrote:
->>
->> On 4/27/16 12:53 PM, Khem Raj wrote:
->>> thanks I think most of them come to these categories. So any help in
->>> fixing them is welcome.
->>>
->>> 1. kernel older than 4.4, backport needed fixed into these branches or
->>> move to newer kernels.
->>> 2. uboot dont have gcc6 compiler header files, backport the needed fixes
->>> 2. meta-qt4 needs to use gnu++98
->>> 3. gcc6 providing its own stdlib.h in libstdc++
->>> 4. gcc6 swtiching to gnu++14 for C++ as default.
->>> 5. GPLv2-only versions of recipes are simply old will need fixing
->>
->> From a -very- brief look, I suspect each of these fixes will be fairly simple.
->> So as we move into the next oe-core phase, we should be able get through this
->> pretty quickly.
-> 
-> I think yes, they are trivial, except the GPL-2.0 packages which might need patching
-> 
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
 
-Ha, actually that was what I was referring to.  The couple I looked at seemed to
-be trivial.. :)
+iEYEARECAAYFAlciLF0ACgkQuwUzVZGdMxTTWgCff6MZthKDGvmigvquBtFre8x/
+oIcAnjzUq+24lF/U1rpSosh0G2O9b6Zo
+=/FwU
+-----END PGP SIGNATURE-----
 
-If someone doesn't get to it first, I expect some of my guys will in about a month.
-
---Mark
-
+--Apple-Mail=_BDF74206-D697-4F7D-B23D-82FBB4BB27F7--
