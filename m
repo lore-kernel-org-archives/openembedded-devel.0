@@ -1,28 +1,37 @@
-Return-Path: <prvs=919dac7a6=Richard.Leitner@skidata.com>
-X-Greylist: delayed 599 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 28 Apr 2016 14:09:13 UTC
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 2959E76DE1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Apr 2016 14:09:13 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A2DOAQDMFSJX/0oKEKxehQ63YIIPAQ2BdoYPAoFfFAEBAQEBAQGBAQuEQQEBAQMBIw8BRRELDQsCAgUWCwICCQMCAQIBNRAGDQgCF4gHsiORFQEBCCB8hSWES4c9glYFmBCBVZV8F4VAjzAeAQGCeIE3h1N/AQEB
-X-IPAS-Result: A2DOAQDMFSJX/0oKEKxehQ63YIIPAQ2BdoYPAoFfFAEBAQEBAQGBAQuEQQEBAQMBIw8BRRELDQsCAgUWCwICCQMCAQIBNRAGDQgCF4gHsiORFQEBCCB8hSWES4c9glYFmBCBVZV8F4VAjzAeAQGCeIE3h1N/AQEB
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <1461846639-9563-1-git-send-email-richard.leitner@skidata.com>
-	<1461847944.3302.20.camel@linux.intel.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <57221751.8030803@skidata.com>
-Date: Thu, 28 Apr 2016 15:59:45 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Icedove/38.7.0
+Return-Path: <mark.hatle@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BB14E70016;
+	Thu, 28 Apr 2016 15:19:11 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u3SFJ50E023162
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Thu, 28 Apr 2016 08:19:06 -0700
+Received: from soho-mhatle-m.local (172.25.36.226) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Thu, 28 Apr 2016 08:19:05 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <B1D22563-F31B-4EF1-90D6-16EB391134D5@gmail.com>
+	<CACS+7ZSpWgziO+GF++25dM7kgP4SZ_GDV+-DcEMQ_YUGyEEnfQ@mail.gmail.com>
+	<CAMKF1spQn114r9dCAk9z7c3hw-NJp3pVoVP+f3gao2mhLTBHYg@mail.gmail.com>
+	<CAMKF1spwimpQwSE38B5jWmyZXwMKy6znMEF9p-NmTM4mGGr+4g@mail.gmail.com>
+	<CAJTo0Lb25x1H44nGn05d6qBVLDpyiaZ3XW40fdrAWcP_D+qYwg@mail.gmail.com>
+	<CAJTo0LZZ3Hs_yrm5ceik4j8Orv-UQ9T72Wu=R_PCRKw4Y9-WCw@mail.gmail.com>
+	<CAMKF1sozR3_Mhy5PKSaKCo7S2yHrtLzTNrUURFhN38gV0AbkYQ@mail.gmail.com>
+	<246f9c39-736b-7ed6-b69a-69d8c4369236@windriver.com>
+	<B59F2ADC-CB7F-44CF-9AD7-AD779FC2EEC9@gmail.com>
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+Message-ID: <748495f9-7383-ce65-a41b-7343aa1c6004@windriver.com>
+Date: Thu, 28 Apr 2016 10:19:04 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:45.0)
+	Gecko/20100101 Thunderbird/45.0
 MIME-Version: 1.0
-In-Reply-To: <1461847944.3302.20.camel@linux.intel.com>
-X-Originating-IP: [172.16.60.30]
-X-ClientProxiedBy: sdex1srv.skidata.net (172.16.10.92) To sdex1srv.skidata.net
-	(172.16.10.92)
-Subject: Re: [meta-networking][PATCH][jethro] samba: fix smbd and nmbd paths in sysv initscript
+In-Reply-To: <B59F2ADC-CB7F-44CF-9AD7-AD779FC2EEC9@gmail.com>
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	OE Core mailing list <openembedded-core@lists.openembedded.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] [yocto] [RFT] GCC 6 Recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,32 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Apr 2016 14:09:16 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 28 Apr 2016 15:19:13 -0000
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: 7bit
 
-On 04/28/2016 02:52 PM, Joshua G Lock wrote:
-> On Thu, 2016-04-28 at 14:30 +0200, Richard Leitner wrote:
->> For the jethro branch.
+On 4/28/16 2:10 AM, Khem Raj wrote:
 > 
-> Any idea whether this change is required in the master branch?
-
-Yes. The Samba 4.4.2 recipe is also using the script from
-packaging/LSB/samba.sh, which is the same as in 4.1.12.
-
+>> On Apr 27, 2016, at 11:06 AM, Mark Hatle <mark.hatle@windriver.com> wrote:
+>>
+>> On 4/27/16 12:53 PM, Khem Raj wrote:
+>>> thanks I think most of them come to these categories. So any help in
+>>> fixing them is welcome.
+>>>
+>>> 1. kernel older than 4.4, backport needed fixed into these branches or
+>>> move to newer kernels.
+>>> 2. uboot dont have gcc6 compiler header files, backport the needed fixes
+>>> 2. meta-qt4 needs to use gnu++98
+>>> 3. gcc6 providing its own stdlib.h in libstdc++
+>>> 4. gcc6 swtiching to gnu++14 for C++ as default.
+>>> 5. GPLv2-only versions of recipes are simply old will need fixing
+>>
+>> From a -very- brief look, I suspect each of these fixes will be fairly simple.
+>> So as we move into the next oe-core phase, we should be able get through this
+>> pretty quickly.
 > 
->> The sysv initscript provided by samba assumes smbd and nmbd are
->> installed in /opt/samba/bin/. In our case both binaries are installed
->> to
->> /usr/sbin/ by default. Therefore fix these paths.
+> I think yes, they are trivial, except the GPL-2.0 packages which might need patching
 > 
-> Rather than hard-code these in a patch, which is equally broken for
-> people who don't use the default sbindir, it would make more sense to
-> sed ${sbindir} into the init file in a do_install_append ().
 
-Ok, you're right, that is definitely a better solution.
-I'll prepare a patch for master and jethro.
+Ha, actually that was what I was referring to.  The couple I looked at seemed to
+be trivial.. :)
 
-regards,
-Richard
+If someone doesn't get to it first, I expect some of my guys will in about a month.
+
+--Mark
 
