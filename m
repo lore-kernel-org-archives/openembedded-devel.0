@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f173.google.com (mail-qk0-f173.google.com
-	[209.85.220.173])
-	by mail.openembedded.org (Postfix) with ESMTP id D521D76312
+Received: from mail-qg0-f52.google.com (mail-qg0-f52.google.com
+	[209.85.192.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C3ED6FF9D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2016 18:45:38 +0000 (UTC)
-Received: by mail-qk0-f173.google.com with SMTP id q76so44123124qke.2
+	Fri, 29 Apr 2016 19:49:20 +0000 (UTC)
+Received: by mail-qg0-f52.google.com with SMTP id f74so47195649qge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2016 11:45:39 -0700 (PDT)
+	Fri, 29 Apr 2016 12:49:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2Q74tAqVablY+xajRzFTpxYk1Pi1Ptm1pjNRfOgCyQ4=;
-	b=F6t+IiL2vnwXOA/R3G/Ykj31PKnqTR5Yd1nqHHgbnkJPCZhFisfUaNq6sUHiuuSR0z
-	KP4JjGQ/ch5DtcK2zCs7LqCOqc9X6/OOaXndQEoO0WrHhIdu+lYlKwB1q8Vc0eEUQ40L
-	X4nXM0H1u4hb05mogMsiJEbwxHRTUq0jDJElDxs7mhF2YbwpEu5LRAqm36ctqqY5JfJB
-	jc4gECxzWqw/Czz6/PwZ0MOgnCpBZmG+IO0w78S+023/PTcacEs0GqKMQaPVGI9n6Une
-	aRnFh2qATh0Ub9Me6Xp2rlE9aP3K8f28v2Y10M3yjk1O6Z2KQH5HgvhxpuArf21woRiv
-	fq4g==
-X-Gm-Message-State: AOPr4FU/IJEoY/yQpxyXsusfztrSSyem/5Vk2bVpnsCh8PmyhlR3sgA1kLJk/gEkofufEA==
-X-Received: by 10.55.167.132 with SMTP id q126mr20959055qke.110.1461955539157; 
-	Fri, 29 Apr 2016 11:45:39 -0700 (PDT)
-Received: from lnx-desktop.star.lab (c-73-172-178-168.hsd1.md.comcast.net.
+	bh=HhLuAlUTG3rm1+y12qShuLsgnfgQDdEOdkkbVw5YC/k=;
+	b=lB0fFfLo25GdijU6ds7Zt/n+btJLo2Cm5bvPJj8VSdre4toNkfXhHZ7OBBRuokTKsR
+	axWVtZZGwog0hOnBoortTLwiHvAhpgBMmf+dEfbajeklgPlmH0I3riXhIK3Q/RB6Th9s
+	g9YRng8lfX5onnocNjeF4yldCxsWz0FcFFBR5TET0QV/BZ7YBpV+KH/3/cDtMJXrr2pG
+	BM68gOKEzv2zTINyesZPNzHoZ2BvMO9YvyukdvzE6lxEuytuVHjhF2S9oCru5P3OsKcx
+	fnftwnhK94rGziL1/7iQMlAo2Ix7Tr6lCrK9PDkkiHokud9egNfVjV+DyJmcS/FockJH
+	uEDw==
+X-Gm-Message-State: AOPr4FVtjTPGfG28eBfEwKteRNv9DXJhAQxWkRwv2NeNumsAFsiHN0lic6+oDX0pZ/FpAw==
+X-Received: by 10.140.229.69 with SMTP id z66mr21461600qhb.48.1461959361239;
+	Fri, 29 Apr 2016 12:49:21 -0700 (PDT)
+Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	g11sm4834880qhg.22.2016.04.29.11.45.38
+	v30sm4904109qge.41.2016.04.29.12.49.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 29 Apr 2016 11:45:38 -0700 (PDT)
+	Fri, 29 Apr 2016 12:49:20 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Apr 2016 14:45:29 -0400
-Message-Id: <1461955529-4169-1-git-send-email-derek@asterius.io>
+Date: Fri, 29 Apr 2016 15:49:13 -0400
+Message-Id: <1461959353-32423-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-oe][PATCH] iperf3: update to version 3.1.2 plus bug fixes
+Subject: [meta-oe][PATCH] tinymembench: update to version 0.4.0 plus bux fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,38 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2016 18:45:39 -0000
+X-List-Received-Date: Fri, 29 Apr 2016 19:49:22 -0000
 
-license md5 updated for copyright date modifications
+Removed ARM_INSTRUCTION_SET since it builds on qemuarm and qemuarm64 without issues
+Also tested the build on qemuppc and qemux86-64
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-benchmark/iperf3/iperf3_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb | 12 ++----------
+ 1 file changed, 2 insertions(+), 10 deletions(-)
 
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
-index 4a0f28e..bcf6537 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
-@@ -9,15 +9,15 @@ SECTION = "console/network"
- BUGTRACKER = "https://github.com/esnet/iperf/issues"
- AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=062ab1bc33fae1926387ac1274cb0873"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3434c5a9a53c78c7739f0bc9e5adda"
+diff --git a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+index 9898a70..a675bda 100644
+--- a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
++++ b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+@@ -6,9 +6,9 @@ HOMEPAGE = "https://github.com/ssvb/tinymembench/wiki"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://main.c;endline=22;md5=879b9bbb60851454885b5fa47eb6b345"
  
- SRC_URI = "\
-     git://github.com/esnet/iperf.git \
-     file://automake-foreign.patch \
- "
+-PV = "0.3.9+git${SRCPV}"
++PV = "0.4.0+git${SRCPV}"
  
--PV = "3.1+gitr${SRCPV}"
--SRCREV = "e396134952a01199326665d1df7c51ae9e62e945"
-+PV = "3.1.2+gitr${SRCPV}"
-+SRCREV = "4fbdab392caf6fcd77c538b6712b721a56ff31b8"
+-SRCREV = "95e68477588d41187b2d2e52ecf6be0e7eb06b8d"
++SRCREV = "2c789849709d837b4bd114c11ed2d9bdc65afbc6"
+ SRC_URI = "git://github.com/ssvb/tinymembench.git"
  
  S = "${WORKDIR}/git"
- 
+@@ -17,11 +17,3 @@ do_install() {
+     install -d ${D}${bindir}
+     install -m755 tinymembench ${D}${bindir}/
+ }
+-
+-# Fails to build with thumb-1 (qemuarm)
+-#| {standard input}: Assembler messages:
+-#| {standard input}:66: Error: instruction not supported in Thumb16 mode -- `subs r1,r1,#16'
+-#| {standard input}:69: Error: instruction not supported in Thumb16 mode -- `subs r1,r1,#16'
+-#| {standard input}:82: Error: selected processor does not support Thumb mode `mla r3,r4,r3,r5'
+-#| {standard input}:82: Error: unshifted register required -- `and r8,r7,r3,lsr#16'
+-ARM_INSTRUCTION_SET = "arm"
 -- 
 1.9.1
 
