@@ -1,24 +1,48 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 7408B76988
+Return-Path: <sujith.h@gmail.com>
+Received: from mail-pf0-f181.google.com (mail-pf0-f181.google.com
+	[209.85.192.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 8CF8B700FD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2016 10:22:37 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by orsmga101.jf.intel.com with ESMTP; 29 Apr 2016 03:22:14 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,551,1455004800"; d="scan'208";a="969070109"
-Received: from mbabyjoh-desk.fi.intel.com (HELO
-	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.71])
-	by fmsmga002.fm.intel.com with ESMTP; 29 Apr 2016 03:22:13 -0700
-Date: Fri, 29 Apr 2016 13:22:16 +0300
-From: "Maxin B. John" <maxin.john@intel.com>
+	Fri, 29 Apr 2016 12:39:08 +0000 (UTC)
+Received: by mail-pf0-f181.google.com with SMTP id y69so47507829pfb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Apr 2016 05:39:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=6KybHuxoZAEhsMaB1pZZGuf9bXtI7ZVCFlVdU7ot7+c=;
+	b=S1DfmF1SuCqUGsmEZLqSun+4/nAsMmFu0pJZqlq2GEzUxJXElHT5dU8KKtIdSmBCuT
+	KEXcjTZBJt1dfkf1YdIM9FQ5PAiyc1tFOG8hBao4MeSIawmjr/ZN7iw2xKplIJ0Zl9WX
+	+plqLu8KEEujuHbr/cQxwW7qiu9ZA6t0QKJLkh23iFwX/ac3yR67tdvknr1+KDcf6LCs
+	BL2wI78iAryAPH4lpPKQbp3y3pSclPMQ+DJ/2AAGsib4DXWf7y/B4w1vdlxQeonUuYsE
+	AqlH53QdkWXnNgCHFVWWVtSbRrEtHnQa8VNWxF/FDtL4tLHN4PkaAoELC8GTFY8wvORi
+	J9pA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=6KybHuxoZAEhsMaB1pZZGuf9bXtI7ZVCFlVdU7ot7+c=;
+	b=Mib/HCGAozD0JtX1Lt6oGD8hJiA5YoMy6rehldcDLud9cmqfa0NTH/3QC7spTr5QBF
+	EGmvYebe8cImCfXAgnbCSmbGxoU2jldV2wgz5qoBMMfYJCBRP1txuo8FJXhBGwJ/jv3h
+	8N4Ix8pja8iboMw1PFIgV5quCEHXRRp5ffL9xN+OU0f/9/6yQn1aOAr8mKdCM1vufBYL
+	vvyQUd5xnPCFBcoXTOFbIWXDtncyDtLPBVIZOKVNOuPD3/chgCp2n97s9mRcdycL93ml
+	InGDolEDr+MHjQylEmqXaLz9AckVwr4eO+3VOOOoCH7HpK0TMzqpx4uDJcrop0ifpZBB
+	2c8w==
+X-Gm-Message-State: AOPr4FU3YMU2YgdD8eZlqg81pEeJyg/BsVkUkQJVIDn3V1w0sn1q7fU0dcxj8IQYBerhKg==
+X-Received: by 10.98.93.5 with SMTP id r5mr28326149pfb.15.1461933547707;
+	Fri, 29 Apr 2016 05:39:07 -0700 (PDT)
+Received: from kdekidd0.inp-wifi.mentorg.com ([139.181.35.34])
+	by smtp.gmail.com with ESMTPSA id
+	127sm23176454pfe.72.2016.04.29.05.39.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 29 Apr 2016 05:39:06 -0700 (PDT)
+From: Sujith Haridasan <sujith.h@gmail.com>
+X-Google-Original-From: Sujith Haridasan <Sujith_Haridasan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160429102215.GA2857@mbabyjoh-desk.ger.corp.intel.com>
-References: <1461912501-602-1-git-send-email-erkka.kaaria@intel.com>
-MIME-Version: 1.0
-In-Reply-To: <1461912501-602-1-git-send-email-erkka.kaaria@intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-java][PATCH v2 1/3] java-bootstrapping: Do not rely on hardcoded paths
+Date: Fri, 29 Apr 2016 18:08:55 +0530
+Message-Id: <1461933535-5152-1-git-send-email-Sujith_Haridasan@mentor.com>
+X-Mailer: git-send-email 1.9.1
+Cc: Sujith Haridasan <Sujith_Haridasan@mentor.com>,
+	Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-multimedia][PATCH] sox: dep on ffmpeg, not libav
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,36 +55,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2016 10:22:38 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 29 Apr 2016 12:39:09 -0000
 
-Hi,
+From: Christopher Larson <chris_larson@mentor.com>
 
-On Fri, Apr 29, 2016 at 09:48:19AM +0300, Erkka K‰‰ri‰ wrote:
-> Various paths to files are hardcoded in either helper scripts or the
-> resulting binaries (like path to Java class libraries). While this works
-> well when using the files on the build machine, things start breaking
-> down when the sstate gets shared between multiple workers in CI, as
-> the paths between workers can differ.
-> 
-> Instead of using these hardcoded paths, form the paths at runtime and pass them as parameters when required.
-> 
-> Signed-off-by: Erkka K‰‰ri‰ <erkka.kaaria@intel.com>
-> ---
->  ...cacao-1.6.1-do-not-rely-on-absolute-paths.patch | 41 ++++++++++++++++++++++
->  recipes-core/cacao/cacao-initial-native_0.98.bb    |  1 +
->  recipes-core/cacao/cacao_1.6.1.bb                  | 21 ++++-------
->  ...cacao-0.9.8-do-not-rely-on-absolute-paths.patch | 33 +++++++++++++++++
->  recipes-core/ecj/ecj-bootstrap-native.bb           |  8 ++++-
->  recipes-core/ecj/ecj-initial-native.bb             |  9 ++++-
->  6 files changed, 96 insertions(+), 17 deletions(-)
->  create mode 100644 recipes-core/cacao/cacao-1.6.1/cacao-1.6.1-do-not-rely-on-absolute-paths.patch
->  create mode 100644 recipes-core/cacao/files/cacao-0.9.8-do-not-rely-on-absolute-paths.patch
+The libav recipe no longer exists, in favor of ffmpeg.
 
-Pushed to master. Thank you!
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Sujith Haridasan <Sujith_Haridasan@mentor.com>
+---
+ meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Best Regards,
-Maxin
+diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
+index 3c688bd..4b73aa3 100644
+--- a/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
++++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
+@@ -4,7 +4,7 @@ and can apply different effects and filters to the audio data."
+ HOMEPAGE = "http://sox.sourceforge.net"
+ SECTION = "audio"
+ 
+-DEPENDS = "libpng libav libsndfile1 libvorbis"
++DEPENDS = "libpng ffmpeg libsndfile1 libvorbis"
+ 
+ PR = "r2"
+ 
+-- 
+1.9.1
+
 
