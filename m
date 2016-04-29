@@ -1,40 +1,52 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
-	[209.85.192.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 2DE7373166
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
+	[209.85.220.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E6FF77101
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2016 21:43:48 +0000 (UTC)
-Received: by mail-qg0-f45.google.com with SMTP id 90so32695226qgz.1
+	Fri, 29 Apr 2016 21:57:22 +0000 (UTC)
+Received: by mail-pa0-f52.google.com with SMTP id r5so51311483pag.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2016 14:43:49 -0700 (PDT)
+	Fri, 29 Apr 2016 14:57:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
+	:to; bh=4iBFSbrNnbcyLlgCnVDWbNTzF8KZrCzlK7XY1NY2iG0=;
+	b=rrxrVUEfFK74xbOiPCgJR0QZeXheZm5bwIDd4y6l8vQZCc00Vg4tpl8nJ39Hwj0Lcn
+	6g6ik0Xi5IFHNs9z2txRoyEFethVDnjXJwlYsUmWG7YRmcVPZeFu4yMaouLWMWIomNbj
+	NkJggyyLBIdf+2YAYaH554NwORr+poLqtzMHduKZp3BNoCjCBlKgGAyEW2yB7d217t15
+	BGFfUNgknKgAPjSQVM7tCT1D1nOFDbN0gNPpx58+9I/MkzS17XXTd7V7XEdCUprJmMBy
+	rzQAvkbTQXGYZavre3M2+UFY4/2x4M4HYlTR5onl0lGMyCJRHDPiI+9T2MUAV6NeD/Vj
+	GpVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=7BijSSouzTgsb7km7nddYTABAQ1EzDrQUY5UAUq58k4=;
-	b=UcwzD93G4NgUGiXNaM5M6+1FS+iC/vfyUNn1rh+kMkSMmXDFpIdldzUt4VHrVZEcU+
-	C/nsKbOptMmIlj8+lFtEUbSOKWrqaL1T1LMP77cNTC1/HFfuvMWLES86VwQe5r5UHKI5
-	OL+3opYrDMr9+I8rY4USXqxFuYSWcdioEpDruyJsh9oT0xNxXIwHxNotktziuYvHnQHU
-	97ldTn6D6Ul98XJr6keO8/JqJu9qaKQNa9mHOOpGSBXVvvhQaSQTQJ5rLbJP+vFNW6Xd
-	IK/yjCZolxr78SCQLM4prQYuhuaKDPVCCmWD6zBb8UpBew6RtOEAsdl6SbSEuvSbK64V
-	FDLg==
-X-Gm-Message-State: AOPr4FVulvlAlQWC2Yp/bgwxeXrE27A0hBAPt6wNo9Jjw2L3cj7Ysx2JBQopAIxo45TStw==
-X-Received: by 10.140.255.2 with SMTP id a2mr22128688qhd.100.1461966229474;
-	Fri, 29 Apr 2016 14:43:49 -0700 (PDT)
-Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	h75sm5054689qge.30.2016.04.29.14.43.48
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 29 Apr 2016 14:43:48 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=4iBFSbrNnbcyLlgCnVDWbNTzF8KZrCzlK7XY1NY2iG0=;
+	b=e+mJ170e//UUxOl1bdKHX7q+9+lFJVsRBFI3YdMx0HX4q6BXlh5Cy9nepM5BJFrErp
+	rbRdHdb1D80QjW0wmzDh01EZnumV3lbtj+27nieSdtyXjVPWway8uGId/a/1ftTFeZDp
+	Q77BEW6gRYebBSpyump6eekrJ5fiGJiH7Lec+/DIhi/Fmn41dFIp1IqwdyWIgekUajDK
+	N36vJHphoUsWWR36zvcyYC3dej5FU/TNv4X7S/BerpAHkv5nHPajBWp6cv0QjGmxsgFY
+	KUhVI8RQFuusYLCOOXS079byhDrS2ve1y+SPwkBo9akmCA0N0CETbDBYpmputxE8s/DF
+	o+6A==
+X-Gm-Message-State: AOPr4FV4X4QXQKS6bWgixtzaQx+UDKIwGmopYNIYXYUwJllx6PhTDLinhxw7GzAD478u6g==
+X-Received: by 10.66.21.102 with SMTP id u6mr29182488pae.118.1461967042628;
+	Fri, 29 Apr 2016 14:57:22 -0700 (PDT)
+Received: from ?IPv6:2601:646:8800:5a9a:9475:a54c:5e22:a356?
+	([2601:646:8800:5a9a:9475:a54c:5e22:a356])
+	by smtp.gmail.com with ESMTPSA id
+	t8sm26179100paw.16.2016.04.29.14.57.20
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 29 Apr 2016 14:57:21 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Pgp-Agent: GPGMail 2.6b2
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1461959353-32423-1-git-send-email-derek@asterius.io>
+Date: Fri, 29 Apr 2016 14:57:16 -0700
+Message-Id: <36A687F7-36B8-453A-B13D-CF4E8C335CB9@gmail.com>
+References: <1461959353-32423-1-git-send-email-derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Apr 2016 17:43:39 -0400
-Message-Id: <1461966219-12963-2-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1461966219-12963-1-git-send-email-derek@asterius.io>
-References: <1461966219-12963-1-git-send-email-derek@asterius.io>
+X-Mailer: Apple Mail (2.3124)
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-webserver][PATCH 2/2] nginx: update to version 1.9.15
+Subject: Re: [meta-oe][PATCH] tinymembench: update to version 0.4.0 plus bux fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,273 +59,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2016 21:43:49 -0000
+X-List-Received-Date: Fri, 29 Apr 2016 21:57:22 -0000
+X-Groupsio-MsgNum: 61272
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_E7BF425C-CA06-4F4C-8948-CD51D5D134F9";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-Remove a now redundant nginx-cross patch with stable moving to 1.10.X
-Remove a duplicate DISABLE_STATIC
-
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../nginx/nginx-1.9.14/nginx-cross.patch           | 211 ---------------------
- meta-webserver/recipes-httpd/nginx/nginx_1.9.14.bb |  12 --
- meta-webserver/recipes-httpd/nginx/nginx_1.9.15.bb |  10 +
- 3 files changed, 10 insertions(+), 223 deletions(-)
- delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.9.14/nginx-cross.patch
- delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.9.14.bb
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.9.15.bb
-
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.9.14/nginx-cross.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.9.14/nginx-cross.patch
-deleted file mode 100644
-index 5e96644..0000000
---- a/meta-webserver/recipes-httpd/nginx/nginx-1.9.14/nginx-cross.patch
-+++ /dev/null
-@@ -1,211 +0,0 @@
--We do not have capability to run binaries when cross compiling
--
--Upstream-Status: Pending
--
--
--diff -uraN nginx-1.0.11.orig/auto/feature nginx-1.0.11/auto/feature
----- nginx-1.0.11.orig/auto/feature	2011-05-11 06:50:19.000000000 -0500
--+++ nginx-1.0.11/auto/feature	2011-12-27 13:56:42.323370040 -0600
--@@ -49,12 +49,20 @@
-- 
-- if [ -x $NGX_AUTOTEST ]; then
-- 
--+    if [ ".$NGX_CROSS_COMPILE" = ".yes" ]; then
--+        NGX_AUTOTEST_EXEC="true"
--+	NGX_FOUND_MSG=" (not tested, cross compiling)"
--+    else
--+        NGX_AUTOTEST_EXEC="$NGX_AUTOTEST"
--+	NGX_FOUND_MSG=""
--+    fi
--+
--     case "$ngx_feature_run" in
-- 
--         yes)
--             # /bin/sh is used to intercept "Killed" or "Abort trap" messages
---            if /bin/sh -c $NGX_AUTOTEST >> $NGX_AUTOCONF_ERR 2>&1; then
---                echo " found"
--+            if /bin/sh -c $NGX_AUTOTEST_EXEC >> $NGX_AUTOCONF_ERR 2>&1; then
--+                echo " found$NGX_FOUND_MSG"
--                 ngx_found=yes
-- 
--                 if test -n "$ngx_feature_name"; then
--@@ -68,17 +75,27 @@
-- 
--         value)
--             # /bin/sh is used to intercept "Killed" or "Abort trap" messages
---            if /bin/sh -c $NGX_AUTOTEST >> $NGX_AUTOCONF_ERR 2>&1; then
---                echo " found"
--+            if /bin/sh -c $NGX_AUTOTEST_EXEC >> $NGX_AUTOCONF_ERR 2>&1; then
--+                echo " found$NGX_FOUND_MSG"
--                 ngx_found=yes
-- 
---                cat << END >> $NGX_AUTO_CONFIG_H
--+                if [ ".$NGX_CROSS_COMPILE" = ".yes" ]; then
--+                    cat << END >> $NGX_AUTO_CONFIG_H
-- 
-- #ifndef $ngx_feature_name
---#define $ngx_feature_name  `$NGX_AUTOTEST`
--+#define $ngx_feature_name  $(eval "echo \$NGX_WITH_${ngx_feature_name}")
-- #endif
-- 
-- END
--+		else
--+                    cat << END >> $NGX_AUTO_CONFIG_H
--+
--+#ifndef $ngx_feature_name
--+#define $ngx_feature_name  `$NGX_AUTOTEST_EXEC`
--+#endif
--+
--+END
--+                fi
--             else
--                 echo " found but is not working"
--             fi
--@@ -86,7 +105,7 @@
-- 
--         bug)
--             # /bin/sh is used to intercept "Killed" or "Abort trap" messages
---            if /bin/sh -c $NGX_AUTOTEST >> $NGX_AUTOCONF_ERR 2>&1; then
--+            if /bin/sh -c $NGX_AUTOTEST_EXEC >> $NGX_AUTOCONF_ERR 2>&1; then
--                 echo " not found"
-- 
--             else
--diff -uraN nginx-1.0.11.orig/auto/options nginx-1.0.11/auto/options
----- nginx-1.0.11.orig/auto/options	2011-12-14 07:34:16.000000000 -0600
--+++ nginx-1.0.11/auto/options	2011-12-27 13:56:42.323370040 -0600
--@@ -353,6 +353,18 @@
--         --test-build-epoll)              NGX_TEST_BUILD_EPOLL=YES   ;;
--         --test-build-solaris-sendfilev)  NGX_TEST_BUILD_SOLARIS_SENDFILEV=YES ;;
-- 
--+        # cross compile support
--+        --with-int=*)                    NGX_WITH_INT="$value"          ;;
--+        --with-long=*)                   NGX_WITH_LONG="$value"         ;;
--+        --with-long-long=*)              NGX_WITH_LONG_LONG="$value"    ;;
--+        --with-ptr-size=*)               NGX_WITH_PTR_SIZE="$value"     ;;
--+        --with-sig-atomic-t=*)           NGX_WITH_SIG_ATOMIC_T="$value" ;;
--+        --with-size-t=*)                 NGX_WITH_SIZE_T="$value"       ;;
--+        --with-off-t=*)                  NGX_WITH_OFF_T="$value"        ;;
--+        --with-time-t=*)                 NGX_WITH_TIME_T="$value"       ;;
--+        --with-sys-nerr=*)               NGX_WITH_NGX_SYS_NERR="$value" ;;
--+        --with-endian=*)                 NGX_WITH_ENDIAN="$value"       ;;
--+
--         *)
--             echo "$0: error: invalid option \"$option\""
--             exit 1
--@@ -533,6 +445,17 @@
-- 
--   --with-debug                       enable debug logging
-- 
--+  --with-int=VALUE                   force int size
--+  --with-long=VALUE                  force long size
--+  --with-long-long=VALUE             force long long size
--+  --with-ptr-size=VALUE              force pointer size
--+  --with-sig-atomic-t=VALUE          force sig_atomic_t size
--+  --with-size-t=VALUE                force size_t size
--+  --with-off-t=VALUE                 force off_t size
--+  --with-time-t=VALUE                force time_t size
--+  --with-sys-nerr=VALUE              force sys_nerr value
--+  --with-endian=VALUE                force system endianess
--+
-- END
-- 
--     exit 1
--@@ -554,6 +577,8 @@
-- 
-- if [ ".$NGX_PLATFORM" = ".win32" ]; then
--     NGX_WINE=$WINE
--+elif [ ! -z "$NGX_PLATFORM" ]; then
--+    NGX_CROSS_COMPILE="yes"
-- fi
-- 
-- 
--diff -uraN nginx-1.0.11.orig/auto/types/sizeof nginx-1.0.11/auto/types/sizeof
----- nginx-1.0.11.orig/auto/types/sizeof	2006-06-28 11:00:26.000000000 -0500
--+++ nginx-1.0.11/auto/types/sizeof	2011-12-27 13:56:42.323370040 -0600
--@@ -12,9 +12,12 @@
-- 
-- END
-- 
---ngx_size=
--+ngx_size=$(eval "echo \$NGX_WITH_${ngx_param}")
-- 
---cat << END > $NGX_AUTOTEST.c
--+if [ ".$ngx_size" != "." ]; then
--+    echo " $ngx_size bytes"
--+else
--+    cat << END > $NGX_AUTOTEST.c
-- 
-- #include <sys/types.h>
-- #include <sys/time.h>
--@@ -33,15 +36,16 @@
-- END
-- 
-- 
---ngx_test="$CC $CC_TEST_FLAGS $CC_AUX_FLAGS \
---          -o $NGX_AUTOTEST $NGX_AUTOTEST.c $NGX_LD_OPT $ngx_feature_libs"
--+    ngx_test="$CC $CC_TEST_FLAGS $CC_AUX_FLAGS \
--+              -o $NGX_AUTOTEST $NGX_AUTOTEST.c $NGX_LD_OPT $ngx_feature_libs"
-- 
---eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&1"
--+    eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&1"
-- 
-- 
---if [ -x $NGX_AUTOTEST ]; then
---    ngx_size=`$NGX_AUTOTEST`
---    echo " $ngx_size bytes"
--+    if [ -x $NGX_AUTOTEST ]; then
--+        ngx_size=`$NGX_AUTOTEST`
--+        echo " $ngx_size bytes"
--+    fi
-- fi
-- 
-- 
--diff -uraN nginx-1.0.11.orig/auto/unix nginx-1.0.11/auto/unix
----- nginx-1.0.11.orig/auto/unix	2011-12-14 07:34:16.000000000 -0600
--+++ nginx-1.0.11/auto/unix	2011-12-27 13:56:42.327370060 -0600
--@@ -393,13 +393,13 @@
-- 
-- # C types
-- 
---ngx_type="int"; . auto/types/sizeof
--+ngx_type="int"; ngx_param="INT"; . auto/types/sizeof
-- 
---ngx_type="long"; . auto/types/sizeof
--+ngx_type="long"; ngx_param="LONG"; . auto/types/sizeof
-- 
---ngx_type="long long"; . auto/types/sizeof
--+ngx_type="long long"; ngx_param="LONG_LONG"; . auto/types/sizeof
-- 
---ngx_type="void *"; . auto/types/sizeof; ngx_ptr_size=$ngx_size
--+ngx_type="void *"; ngx_param="PTR_SIZE"; . auto/types/sizeof; ngx_ptr_size=$ngx_size
-- ngx_param=NGX_PTR_SIZE; ngx_value=$ngx_size; . auto/types/value
-- 
-- 
--@@ -416,7 +416,7 @@
-- 
-- ngx_type="uint64_t"; ngx_types="u_int64_t"; . auto/types/typedef
-- 
---ngx_type="sig_atomic_t"; ngx_types="int"; . auto/types/typedef
--+ngx_type="sig_atomic_t"; ngx_param="SIG_ATOMIC_T"; ngx_types="int"; . auto/types/typedef
-- . auto/types/sizeof
-- ngx_param=NGX_SIG_ATOMIC_T_SIZE; ngx_value=$ngx_size; . auto/types/value
-- 
--@@ -432,15 +432,15 @@
-- 
-- . auto/endianess
-- 
---ngx_type="size_t"; . auto/types/sizeof
--+ngx_type="size_t"; ngx_param="SIZE_T"; . auto/types/sizeof
-- ngx_param=NGX_MAX_SIZE_T_VALUE; ngx_value=$ngx_max_value; . auto/types/value
-- ngx_param=NGX_SIZE_T_LEN; ngx_value=$ngx_max_len; . auto/types/value
-- 
---ngx_type="off_t"; . auto/types/sizeof
--+ngx_type="off_t"; ngx_param="OFF_T"; . auto/types/sizeof
-- ngx_param=NGX_MAX_OFF_T_VALUE; ngx_value=$ngx_max_value; . auto/types/value
-- ngx_param=NGX_OFF_T_LEN; ngx_value=$ngx_max_len; . auto/types/value
-- 
---ngx_type="time_t"; . auto/types/sizeof
--+ngx_type="time_t"; ngx_param="TIME_T"; . auto/types/sizeof
-- ngx_param=NGX_TIME_T_SIZE; ngx_value=$ngx_size; . auto/types/value
-- ngx_param=NGX_TIME_T_LEN; ngx_value=$ngx_max_len; . auto/types/value
-- 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.9.14.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.9.14.bb
-deleted file mode 100644
-index 585c52c..0000000
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.9.14.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require nginx.inc
--
--# 1.9.x is the current mainline branches containing all new features
--# 1.8.x branch is the current stable branch, the recommended default
--DEFAULT_PREFERENCE = "-1"
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=0bb58ed0dfd4f5dbece3b52aba79f023"
--
--SRC_URI[md5sum] = "a25818039f34b5d54b017d44c76321c4"
--SRC_URI[sha256sum] = "2b4893076d28e6b4384bba8c4fdebfca6de6f8f68ec48a1ca94b9b855ff457d2"
--
--DISABLE_STATIC = ""
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.9.15.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.9.15.bb
-new file mode 100644
-index 0000000..abbec53
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.9.15.bb
-@@ -0,0 +1,10 @@
-+require nginx.inc
-+
-+# 1.10.x branch is the current stable branch, the recommended default
-+# 1.9.x is the current mainline branches containing all new features
-+DEFAULT_PREFERENCE = "-1"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=0bb58ed0dfd4f5dbece3b52aba79f023"
-+
-+SRC_URI[md5sum] = "13cd38e9da3789035750dd45882c4a26"
-+SRC_URI[sha256sum] = "cc89b277cc03f403c0b746d60aa5943cdecf59ae48278f8cb7e2df0cbdb6dac3"
--- 
-1.9.1
+--Apple-Mail=_E7BF425C-CA06-4F4C-8948-CD51D5D134F9
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
 
+> On Apr 29, 2016, at 12:49 PM, Derek Straka <derek@asterius.io> wrote:
+>=20
+> Removed ARM_INSTRUCTION_SET since it builds on qemuarm and qemuarm64 =
+without issues
+> Also tested the build on qemuppc and qemux86-64
+
+
+For test, you need to set ARM_INSTRUCTION_SET =3D =E2=80=9Cthumb=E2=80=9D =
+in this recipe and see if that works for qemuarm
+if that does then it can be removed.
+
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+> meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb | 12 =
+++----------
+> 1 file changed, 2 insertions(+), 10 deletions(-)
+>=20
+> diff --git =
+a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb =
+b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+> index 9898a70..a675bda 100644
+> --- a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+> +++ b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+> @@ -6,9 +6,9 @@ HOMEPAGE =3D =
+"https://github.com/ssvb/tinymembench/wiki"
+> LICENSE =3D "MIT"
+> LIC_FILES_CHKSUM =3D =
+"file://main.c;endline=3D22;md5=3D879b9bbb60851454885b5fa47eb6b345"
+>=20
+> -PV =3D "0.3.9+git${SRCPV}"
+> +PV =3D "0.4.0+git${SRCPV}"
+>=20
+> -SRCREV =3D "95e68477588d41187b2d2e52ecf6be0e7eb06b8d"
+> +SRCREV =3D "2c789849709d837b4bd114c11ed2d9bdc65afbc6"
+> SRC_URI =3D "git://github.com/ssvb/tinymembench.git"
+>=20
+> S =3D "${WORKDIR}/git"
+> @@ -17,11 +17,3 @@ do_install() {
+>     install -d ${D}${bindir}
+>     install -m755 tinymembench ${D}${bindir}/
+> }
+> -
+> -# Fails to build with thumb-1 (qemuarm)
+> -#| {standard input}: Assembler messages:
+> -#| {standard input}:66: Error: instruction not supported in Thumb16 =
+mode -- `subs r1,r1,#16'
+> -#| {standard input}:69: Error: instruction not supported in Thumb16 =
+mode -- `subs r1,r1,#16'
+> -#| {standard input}:82: Error: selected processor does not support =
+Thumb mode `mla r3,r4,r3,r5'
+> -#| {standard input}:82: Error: unshifted register required -- `and =
+r8,r7,r3,lsr#16'
+> -ARM_INSTRUCTION_SET =3D "arm"
+> --
+> 1.9.1
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+--Apple-Mail=_E7BF425C-CA06-4F4C-8948-CD51D5D134F9
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlcj2MAACgkQuwUzVZGdMxSGbwCeJecbDAUIZD1Phed8kgHFnZuv
+GFwAn22oKps+pGHaSBfyZVT9eme9VMsA
+=t/cg
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_E7BF425C-CA06-4F4C-8948-CD51D5D134F9--
