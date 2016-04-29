@@ -1,37 +1,50 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qg0-f47.google.com (mail-qg0-f47.google.com
-	[209.85.192.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 8173D700F0
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 22427700F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2016 16:06:17 +0000 (UTC)
-Received: by mail-qg0-f47.google.com with SMTP id 90so28827072qgz.1
+	Fri, 29 Apr 2016 16:12:06 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id g17so44176602wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2016 09:06:18 -0700 (PDT)
+	Fri, 29 Apr 2016 09:12:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=ZXDVYi5znn9fgGLhjzw5aHI/Xv0QealKWyw1o59irzY=;
+	b=brfJ7qiG+g44MHdpE6/4D13qW753LG60gbzX7tQSYa2IhX+AN6OkjXYtM1cs/JAZU7
+	kMsHXwjVulCBWKFrPTmGWtIkf+ymKGd9/kZtB2YM1U/lIsiR9eRTh6PUH+JU3YhjJWyM
+	CMNIYFSZ39iddFlJY16u+Wsd3R9Yla9BmCw8U0f36YFJYcByjklkR3I1i62MBCZd8ilq
+	iVrkdMY/HSm8dNLsFcpGxJp/HKkImgFEcP9E50a0yPcprRq6+freQL/StMy+WnsZAwTD
+	vOaIji2PqhWIVGaC9CEZIlSwMdYLzLb+CyA76vLVJgY8IF1Dl+85m+HKr6+HDc4PZVwu
+	YghA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=fkkGGXHGT0Toamo+CK9VHeVqRoEwBHPQAetpeiqVCzI=;
-	b=JqVjSOH0fn/3CkNhEb4Fd4ZURwkrQSf/VpyyFoT+0QgbSkiyOqhgrSg+14Po5sPaSh
-	uSSwtYKgfPV/Q2Tz3HM7oFPJQw3K8rHoCFpm8TUsI9K7GaX0/YNw52K85eIO1b/+OUso
-	rLlfNp2tXLzjbAk/TFyT1LvOXJUVagzDLKcgHj+nMU3rluwqHqKIw8/7PyyCKBHuYVQp
-	YcPAO5AlLCM+O200KWdWBIZ3WD4MCjZ0T92JTs1xyjXVHpfoFX9D9KRHkOnbn8esMGxG
-	7402oDCUm7tIprmspc+jfXQ5mzI/ZwmQ9CofiJ3R2EZ2aSWX/ZOXnZiubAUk7vITkYjw
-	1abg==
-X-Gm-Message-State: AOPr4FXnCU9flTKVGaWtj7fDD+0idB8ZlS/Zt9Hn11a/fH/FFS+bZiY1Hb3dWn4wSY2t3w==
-X-Received: by 10.140.36.231 with SMTP id p94mr19595677qgp.79.1461945977779;
-	Fri, 29 Apr 2016 09:06:17 -0700 (PDT)
-Received: from lnx-desktop.star.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168])
-	by smtp.gmail.com with ESMTPSA id 23sm4671350qkd.8.2016.04.29.09.06.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 29 Apr 2016 09:06:17 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=ZXDVYi5znn9fgGLhjzw5aHI/Xv0QealKWyw1o59irzY=;
+	b=ZbJqnzarUGpM0CZ60qVAxDPA376m4jROvA67S7TJfB+1LR3Au5gE0uTNnGmWmnXYjT
+	F7Dj9t0lpXPCmeC+3CGjZoPM64sY6LEPSm8ggFwAxAEljq7SmH75BaMypGmq6iSHnaZN
+	VJAlNKeO5oanERM0tv3d+nNGio+JKtTmZaeotV4TXTAHWYIt+m1UvMDxR4B7tCkVkoCh
+	l5GnPUjH1McZV1BRdjoGodI9pr3f7XUN6t81N7KkRyEd5VYY1ro8iZxTqgqBuMdavr8E
+	1AcFPNc+IEwfnw2L6jv/CXO9g0jUXYBPidr+nvrki23Whf3qJOAM03HZ4+7JWQHAX6ez
+	plXg==
+X-Gm-Message-State: AOPr4FVpmyw2VfnwIhM7kBAU2iOgcd99SMwHaYzkOC1y8vynST1ubFRDnGKNCnvOCpYUow==
+X-Received: by 10.194.62.110 with SMTP id x14mr25608322wjr.68.1461946327222;
+	Fri, 29 Apr 2016 09:12:07 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id w3sm15490882wjt.0.2016.04.29.09.12.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 29 Apr 2016 09:12:05 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 29 Apr 2016 18:12:57 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Apr 2016 12:05:52 -0400
-Message-Id: <1461945952-10232-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
+Message-ID: <20160429161257.GC2561@jama>
+References: <1461945952-10232-1-git-send-email-derek@asterius.io>
+MIME-Version: 1.0
+In-Reply-To: <1461945952-10232-1-git-send-email-derek@asterius.io>
+User-Agent: Mutt/1.6.0 (2016-04-01)
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-oe][PATCH] giflib: update to version 5.1.4
+Subject: Re: [meta-oe][PATCH] giflib: update to version 5.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,46 +57,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2016 16:06:17 -0000
+X-List-Received-Date: Fri, 29 Apr 2016 16:12:09 -0000
+X-Groupsio-MsgNum: 61262
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="gMR3gsNFwZpnI/Ts"
+Content-Disposition: inline
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../recipes-devtools/giflib/{giflib_4.1.6.bb => giflib_5.1.4.bb}  | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-devtools/giflib/{giflib_4.1.6.bb => giflib_5.1.4.bb} (67%)
+--gMR3gsNFwZpnI/Ts
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
-similarity index 67%
-rename from meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
-rename to meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
-index e59d0e5..855a603 100644
---- a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
-+++ b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
-@@ -2,14 +2,12 @@ SUMMARY = "shared library for GIF images"
- SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
--PR = "r3"
-+PR = "r0"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
- 
- inherit autotools
- 
--EXTRA_OECONF = "--disable-x11"
--
- PACKAGES += "${PN}-utils"
- FILES_${PN} = "${libdir}/libgif.so.*"
- FILES_${PN}-utils = "${bindir}"
-@@ -18,5 +16,5 @@ BBCLASSEXTEND = "native"
- 
- RDEPENDS_${PN}-utils = "perl"
- 
--SRC_URI[md5sum] = "7125644155ae6ad33dbc9fc15a14735f"
--SRC_URI[sha256sum] = "e1c1ced9c5bc8f93ef0faf0a8c7717abf784d10a7b270d2285e8e1f3b93f2bed"
-+SRC_URI[md5sum] = "2c171ced93c0e83bb09e6ccad8e3ba2b"
-+SRC_URI[sha256sum] = "df27ec3ff24671f80b29e6ab1c4971059c14ac3db95406884fc26574631ba8d5"
--- 
-1.9.1
+On Fri, Apr 29, 2016 at 12:05:52PM -0400, Derek Straka wrote:
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  .../recipes-devtools/giflib/{giflib_4.1.6.bb =3D> giflib_5.1.4.bb}  | 8 =
++++-----
+>  1 file changed, 3 insertions(+), 5 deletions(-)
+>  rename meta-oe/recipes-devtools/giflib/{giflib_4.1.6.bb =3D> giflib_5.1.=
+4.bb} (67%)
+>=20
+> diff --git a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb b/meta-oe/re=
+cipes-devtools/giflib/giflib_5.1.4.bb
+> similarity index 67%
+> rename from meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+> rename to meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+> index e59d0e5..855a603 100644
+> --- a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+> +++ b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+> @@ -2,14 +2,12 @@ SUMMARY =3D "shared library for GIF images"
+>  SECTION =3D "libs"
+>  LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dae11c61b04b2917be39b11f78d715=
+19a"
+> -PR =3D "r3"
+> +PR =3D "r0"
 
+Please drop PR completely.
+> =20
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
+> =20
+>  inherit autotools
+> =20
+> -EXTRA_OECONF =3D "--disable-x11"
 
+Doesn't it autodetect x11 dependencies now?
+
+> -
+>  PACKAGES +=3D "${PN}-utils"
+>  FILES_${PN} =3D "${libdir}/libgif.so.*"
+>  FILES_${PN}-utils =3D "${bindir}"
+> @@ -18,5 +16,5 @@ BBCLASSEXTEND =3D "native"
+> =20
+>  RDEPENDS_${PN}-utils =3D "perl"
+> =20
+> -SRC_URI[md5sum] =3D "7125644155ae6ad33dbc9fc15a14735f"
+> -SRC_URI[sha256sum] =3D "e1c1ced9c5bc8f93ef0faf0a8c7717abf784d10a7b270d22=
+85e8e1f3b93f2bed"
+> +SRC_URI[md5sum] =3D "2c171ced93c0e83bb09e6ccad8e3ba2b"
+> +SRC_URI[sha256sum] =3D "df27ec3ff24671f80b29e6ab1c4971059c14ac3db9540688=
+4fc26574631ba8d5"
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--gMR3gsNFwZpnI/Ts
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlcjiAgACgkQN1Ujt2V2gBzv3ACgu01q1AjZz2LdVjyt2D3LmATW
+1XUAnilOGkJgk71zc4nW/DDLa3JDVRyj
+=nl9b
+-----END PGP SIGNATURE-----
+
+--gMR3gsNFwZpnI/Ts--
