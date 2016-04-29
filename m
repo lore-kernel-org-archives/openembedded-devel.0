@@ -1,23 +1,21 @@
-Return-Path: <erkka.kaaria@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DB8376E3F
+Return-Path: <prvs=920c251a5=Richard.Leitner@skidata.com>
+Received: from mail2.skidata.com (mail2.skidata.com [80.120.57.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 6AA3E7704E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2016 06:44:58 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by orsmga101.jf.intel.com with ESMTP; 28 Apr 2016 23:44:59 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,550,1455004800"; d="scan'208";a="968967213"
-Received: from ekaaria-xps-8300.fi.intel.com ([10.237.68.35])
-	by fmsmga002.fm.intel.com with ESMTP; 28 Apr 2016 23:44:58 -0700
-From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Apr 2016 09:48:21 +0300
-Message-Id: <1461912501-602-3-git-send-email-erkka.kaaria@intel.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1461912501-602-1-git-send-email-erkka.kaaria@intel.com>
-References: <1461912501-602-1-git-send-email-erkka.kaaria@intel.com>
+	Fri, 29 Apr 2016 06:54:55 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: A2CpBAC3AyNX/0oKEKxehAt9BrdVhBMahXWBeAEBAQEBAYENhRMBLSiBFg4Fv3cBi2ABAQgghiGIcmKFCgWNVIo9gVWEJ4gdgWVOhxyFQIYkiQyET2oBhmh/AQEB
+X-IPAS-Result: A2CpBAC3AyNX/0oKEKxehAt9BrdVhBMahXWBeAEBAQEBAYENhRMBLSiBFg4Fv3cBi2ABAQgghiGIcmKFCgWNVIo9gVWEJ4gdgWVOhxyFQIYkiQyET2oBhmh/AQEB
+From: Richard Leitner <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 29 Apr 2016 08:55:21 +0200
+Message-ID: <1461912921-12837-1-git-send-email-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-Subject: [meta-java][PATCH v2 3/3] openjre-8_72b05.bb: Add missing patches
+X-Originating-IP: [172.16.60.30]
+X-ClientProxiedBy: sdex1srv.skidata.net (172.16.10.92) To sdex1srv.skidata.net
+	(172.16.10.92)
+Subject: [meta-networking][PATCH] samba: fix paths in sysv initscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,33 +28,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2016 06:44:58 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 29 Apr 2016 06:54:58 -0000
+Content-Type: text/plain
 
-VHdvIHBhdGNoZXMgd2VyZSBvbmx5IGFwcGxpZWQgdG8gb3Blbmpkay04LiBBcHBseSB0aGVzZSB0
-byBqcmUgYXMgd2VsbAoKU2lnbmVkLW9mZi1ieTogRXJra2EgS8Okw6RyacOkIDxlcmtrYS5rYWFy
-aWFAaW50ZWwuY29tPgotLS0KIHJlY2lwZXMtY29yZS9vcGVuamRrL29wZW5qcmUtOF83MmIwNS5i
-YiB8IDIgKysKIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9y
-ZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuanJlLThfNzJiMDUuYmIgYi9yZWNpcGVzLWNvcmUvb3Bl
-bmpkay9vcGVuanJlLThfNzJiMDUuYmIKaW5kZXggM2EzNDg0OC4uNTViMmFjNSAxMDA2NDQKLS0t
-IGEvcmVjaXBlcy1jb3JlL29wZW5qZGsvb3BlbmpyZS04XzcyYjA1LmJiCisrKyBiL3JlY2lwZXMt
-Y29yZS9vcGVuamRrL29wZW5qcmUtOF83MmIwNS5iYgpAQCAtOSw2ICs5LDggQEAgUEFUQ0hFU19V
-UklfYXBwZW5kID0gIlwKICAgICBmaWxlOi8vb3BlbmpkazgtZml4LXNoYXJrLWJ1aWxkLnBhdGNo
-O2FwcGx5PW5vIFwKICAgICBmaWxlOi8vb3BlbmpkazgtZml4LXNoYXJrLXN0ZGMrKzExLnBhdGNo
-O2FwcGx5PW5vIFwKICAgICBmaWxlOi8vb3BlbmpkazgtdXNlX2J1aWx0aW5fZnJhbWVfYWRkcmVz
-c18wX3JhdGhlcl90aGFuX3JldHVybmluZ19hZGRyZXNzX29mX2xvY2FsX3ZhcmlhYmxlLnBhdGNo
-O2FwcGx5PW5vIFwKKyAgICBmaWxlOi8vb3BlbmpkazgtZml4LWFzc2VtYmxlci1mbGFnLWhhbmRs
-aW5nLWluLW1ha2VmaWxlLnBhdGNoO2FwcGx5PW5vIFwKKyAgICBmaWxlOi8vb3BlbmpkazgtZml4
-LWFkbGMtZmxhZ3MucGF0Y2g7YXBwbHk9bm8gXAogICAgIGZpbGU6Ly9vcGVuamRrOC1zaWxlbmNl
-LWRfZm9ydGlmeV9zb3VyY2Utd2FybmluZy5wYXRjaDthcHBseT1ubyBcCiAiCiAKLS0gCjIuNy40
-CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0KSW50ZWwgRmlubGFuZCBPeQpSZWdpc3RlcmVkIEFkZHJlc3M6IFBMIDI4
-MSwgMDAxODEgSGVsc2lua2kgCkJ1c2luZXNzIElkZW50aXR5IENvZGU6IDAzNTc2MDYgLSA0IApE
-b21pY2lsZWQgaW4gSGVsc2lua2kgCgpUaGlzIGUtbWFpbCBhbmQgYW55IGF0dGFjaG1lbnRzIG1h
-eSBjb250YWluIGNvbmZpZGVudGlhbCBtYXRlcmlhbCBmb3IKdGhlIHNvbGUgdXNlIG9mIHRoZSBp
-bnRlbmRlZCByZWNpcGllbnQocykuIEFueSByZXZpZXcgb3IgZGlzdHJpYnV0aW9uCmJ5IG90aGVy
-cyBpcyBzdHJpY3RseSBwcm9oaWJpdGVkLiBJZiB5b3UgYXJlIG5vdCB0aGUgaW50ZW5kZWQKcmVj
-aXBpZW50LCBwbGVhc2UgY29udGFjdCB0aGUgc2VuZGVyIGFuZCBkZWxldGUgYWxsIGNvcGllcy4K
+The sysv initscript provided by samba assumes smbd and nmbd are
+installed in /opt/samba/bin/. In our case both binaries are installed to
+/usr/sbin/ by default. Therefore fix these paths.
+
+Furthermore fix the log and config directory as well as the name of the
+initscript in its usage text.
+
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+---
+ meta-networking/recipes-connectivity/samba/samba_4.4.2.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
+index 9358ca5..5b5ed58 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
+@@ -103,6 +103,11 @@ do_install_append() {
+     elif ${@bb.utils.contains('PACKAGECONFIG', 'sysv', 'true', 'false', d)}; then
+         install -d ${D}${sysconfdir}/init.d
+         install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba.sh
++        sed -e 's,/opt/samba/bin,${sbindir},g' \
++            -e 's,/opt/samba/smb.conf,${sysconfdir}/samba/smb.conf,g' \
++            -e 's,/opt/samba/log,${localstatedir}/log/samba,g' \
++            -e 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba.sh,g' \
++            -i ${D}${sysconfdir}/init.d/samba.sh
+         update-rc.d -r ${D} samba.sh start 20 3 5 .
+         update-rc.d -r ${D} samba.sh start 20 0 1 6 .
+     fi
+-- 
+2.1.4
 
 
