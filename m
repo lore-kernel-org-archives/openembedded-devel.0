@@ -1,50 +1,39 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id BCD5B700EB
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id C82C17391A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Apr 2016 21:01:16 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id r187so12241268pfr.2
+	Fri, 29 Apr 2016 01:18:40 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; 
+   d="scan'208";a="6085909"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 29 Apr 2016 09:18:31 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 7602A408D299
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Apr 2016 14:01:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=KHcTZf8nOT4TLxeQy9hlOxVpT3IrQrqEU0sVpOlXyJ8=;
-	b=r9zXw9BtfhimnjamXrEPI+xYn9rX3cyqz8IoWdYrV92Hcky+aKT4WV5rhEJ+Sa8AWc
-	Jwn7MjyniEk0PLotN4hhHw+Mhd5D0qkicMy4afWNEDTDgpc77V6ZaUDVndJWR4NOMXCx
-	yA9geBqtJts7Cr910o9aVTnDds9JxeQMwiLklSNQ66s8ls4RM5Pxc7824ZKQLOokDTRW
-	4p7Vc+gOB3AwW8XOF9JPSGnjHNAZLeGhiLZnjhJ336Qp7IlCQUjqvPobW3/IOpKfOKR7
-	C5aFPd774IFU7Xspk8PY0L8JqWmODMOsJhInpcWJXlfRFFjDkeemgyAZV1f9P0D2jUS9
-	KvRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=KHcTZf8nOT4TLxeQy9hlOxVpT3IrQrqEU0sVpOlXyJ8=;
-	b=mU2uJhUPRMrVy8PRfSxiobyMIENX36eLcekMr2x/dXb2XbjSSpXB8tu4Vp4IkKFo8M
-	fs2pciW9Vn+uR5pAxILMOjfWSr8Z4ZEbYcgvZZZLPmP/KVgch5Ss7EMN43kBF/zZysxZ
-	moI9kEeftNP4P1a2NRVOGAx0LObWkvuxOL5h9THWU9UaHD4+be4PiKqx9m0TQ9YR8uVs
-	s5dVYShe2mtQmwKEVptu4oZD0e9zjP2XquVzb40rHVcA+SPzpxRO5fvlPCZeUdT6c5G0
-	t7UNiuq2RNwm7N8y7D2MIjJQaz4MTV3CkY5jBQG3+2iQi1rTHRDgMNps7Wqr+UGCMYsE
-	G8uA==
-X-Gm-Message-State: AOPr4FUsPgqV/dWPBDm4+nRbWEycRcW2L/4CTpqSym0cK3zgPTEUpeENOdeA0/ovjb7PdA==
-X-Received: by 10.98.78.199 with SMTP id c190mr23510399pfb.7.1461877277033;
-	Thu, 28 Apr 2016 14:01:17 -0700 (PDT)
-Received: from bigIsland.hsd1.ca.comcast.net
-	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
-	by smtp.gmail.com with ESMTPSA id
-	t62sm17418431pfa.38.2016.04.28.14.01.15
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 28 Apr 2016 14:01:15 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster@mvista.com,
-	openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Apr 2016 14:00:26 -0700
-Message-Id: <cover.1461874725.git.akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
+	Fri, 29 Apr 2016 09:18:27 +0800 (CST)
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
+	14.03.0279.002; Fri, 29 Apr 2016 09:18:27 +0800
+From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] ltrace: Error Fix for ARM
+Thread-Index: AQHRoF+5kRg+xKPc7Eu2TBkw2i1xZp+gKJwg
+Date: Fri, 29 Apr 2016 01:18:26 +0000
+Message-ID: <A8FC939F80655644A89BB21CCD3741E80140987B04@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1460682409-1786-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	<20160427083526.GF2559@jama>
+In-Reply-To: <20160427083526.GF2559@jama>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
 MIME-Version: 1.0
-Subject: [PATCH 00/36] Jethro-next pull request
+X-yoursite-MailScanner-ID: 7602A408D299.A8508
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: lixin.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: Re: [meta-oe][PATCH] ltrace: Error Fix for ARM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,175 +46,226 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Apr 2016 21:01:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 29 Apr 2016 01:18:42 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="iso-2022-jp"
+Content-Transfer-Encoding: quoted-printable
 
-Please consider these changes for jethro-next
 
-The following changes since commit c305ac5d2f5285d5eec8952a4ca7f3b4f89aed96:
 
-  python-m2crypto: fix SSLv2 symbol issue (2016-03-09 20:10:13 +0100)
+>-----Original Message-----
+>From: openembedded-devel-bounces@lists.openembedded.org
+>[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+>Martin Jansa
+>Sent: Wednesday, April 27, 2016 4:35 PM
+>To: openembedded-devel@lists.openembedded.org
+>Subject: Re: [oe] [meta-oe][PATCH] ltrace: Error Fix for ARM
+>
+>On Fri, Apr 15, 2016 at 04:06:49AM +0300, Li Xin wrote:
+>> 1) The error is as following:
+>>      root # ltrace ls
+>>      __libc_start_main(0xb6fbc018, 1, 0xbed8fdc4,
+>0xb6fd0b88PTRACE_SINGLESTEP: Input/output error
+>>      2747 couldn't continue when handling __libc_start_main (0xb6fbbde0)=
+ at
+>0xb6fbbde0
+>>    The master branch fix it.
+>>
+>> 2) remove unused patch:
+>>      --0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
+>>      --ltrace-0.7.2-unused-typedef.patch
+>
+>Now I'm seeing this failure:
+>
+>| ../../../../git/sysdeps/linux-gnu/arm/fetch.c: In function 'arch_elf_ini=
+t':
+>| ../../../../git/sysdeps/linux-gnu/arm/fetch.c:101:8: error: 'data' may b=
+e used
+>uninitialized in this function [-Werror=3Dmaybe-uninitialized]
+>|     if (elf_read_next_uleb128(data, &offset, &tag) < 0
+>|         ^
+>| cc1: all warnings being treated as errors
+>| make[4]: *** [fetch.lo] Error 1
+>| make[4]: *** Waiting for unfinished jobs....
+>| make[4]: Leaving directory
+>`.../ltrace/1_7.3+gitAUTOINC+01b10e191e-r0/build/sysdeps/linux-gnu/arm'
+>
+>Possibly caused by using -Os, can you retest with -Os?
 
-are available in the git repository at:
+OK, And can you tell me how to test with -Os?
 
-  git://github.com/akuster/meta-openembedded akuster/jethro-next
-  https://github.com/akuster/meta-openembedded/tree/akuster/jethro-next
+Regards & Thanks.
 
-Alexander Kanavin (1):
-  tracker: fix packaging issues
 
-Andre McCurdy (1):
-  gst-plugins-base: add perl runtime dependency to gst-plugins-base-apps
+>
+>> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+>> ---
+>>  ...-ltrace-fix-gcc-5-logical-not-parentheses.patch | 38 ---------------=
+--
+>>  .../ltrace/ltrace-0.7.2-unused-typedef.patch       | 49 ---------------=
+-------
+>>  meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |  6 +--
+>>  3 files changed, 2 insertions(+), 91 deletions(-)  delete mode 100644
+>> meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-n
+>> ot-parentheses.patch  delete mode 100644
+>> meta-oe/recipes-devtools/ltrace/ltrace/ltrace-0.7.2-unused-typedef.pat
+>> ch
+>>
+>> diff --git
+>> a/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical
+>> -not-parentheses.patch
+>> b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical
+>> -not-parentheses.patch
+>> deleted file mode 100644
+>> index 681c43d..0000000
+>> ---
+>> a/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical
+>> -not-parentheses.patch
+>> +++ /dev/null
+>> @@ -1,38 +0,0 @@
+>> -From 876fe5680d77800426f8c4c5680a235732d722e6 Mon Sep 17 00:00:00
+>> 2001
+>> -From: Kai Kang <kai.kang@windriver.com>
+>> -Date: Mon, 24 Aug 2015 17:37:54 +0800
+>> -Subject: [PATCH] ltrace: fix gcc 5 logical not parentheses
+>> -
+>> -Upstream-Status: Pending
+>> -
+>> -Build ltrace with gcc 5.2, it fails with:
+>> -
+>> -error: logical not is only applied to the left hand side of
+>> comparison -[-Werror=3Dlogical-not-parentheses]
+>> -   if (!need_data(data, offset, SIZE / 8) < 0)  \
+>> -                                             ^
+>> -
+>> -Function need_data just return 0 on success and -1 if fail. So it is
+>> ok -to just test if (need_data(data, offset, SIZE / 8) < 0).
+>> -
+>> -Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ----
+>> - ltrace-elf.c | 2 +-
+>> - 1 file changed, 1 insertion(+), 1 deletion(-)
+>> -
+>> -diff --git a/ltrace-elf.c b/ltrace-elf.c -index c571d2a..7fe830f
+>> 100644
+>> ---- a/ltrace-elf.c
+>> -+++ b/ltrace-elf.c
+>> -@@ -218,7 +218,7 @@ need_data(Elf_Data *data, GElf_Xword offset,
+>GElf_Xword size)
+>> - 	int								\
+>> - 	NAME(Elf_Data *data, GElf_Xword offset, uint##SIZE##_t *retp)	\
+>> - 	{								\
+>> --		if (!need_data(data, offset, SIZE / 8) < 0)		\
+>> -+		if (need_data(data, offset, SIZE / 8) < 0)		\
+>> - 			return -1;					\
+>> - 									\
+>> - 		if (data->d_buf =3D=3D NULL) /* NODATA section */ {		\
+>> ---
+>> -1.9.1
+>> -
+>> diff --git
+>> a/meta-oe/recipes-devtools/ltrace/ltrace/ltrace-0.7.2-unused-typedef.p
+>> atch
+>> b/meta-oe/recipes-devtools/ltrace/ltrace/ltrace-0.7.2-unused-typedef.p
+>> atch
+>> deleted file mode 100644
+>> index 8f3c0ec..0000000
+>> ---
+>> a/meta-oe/recipes-devtools/ltrace/ltrace/ltrace-0.7.2-unused-typedef.p
+>> atch
+>> +++ /dev/null
+>> @@ -1,49 +0,0 @@
+>> -diff --git a/value.c b/value.c
+>> -index d18db17..b98298e 100644
+>> ---- a/value.c
+>> -+++ b/value.c
+>> -@@ -1,6 +1,6 @@
+>> - /*
+>> -  * This file is part of ltrace.
+>> -- * Copyright (C) 2011,2012 Petr Machata, Red Hat Inc.
+>> -+ * Copyright (C) 2011,2012,2013 Petr Machata, Red Hat Inc.
+>> -  *
+>> -  * This program is free software; you can redistribute it and/or
+>> -  * modify it under the terms of the GNU General Public License as
+>> -@@ -282,9 +282,9 @@ value_init_deref(struct value *ret_val, struct value
+>*valp)
+>> - 	if (value_extract_word(valp, &l, NULL) < 0)
+>> - 		return -1;
+>> -
+>> --	/* We need "long" to be long enough to hold platform
+>> -+	/* We need "long" to be long enough to hold target
+>> - 	 * pointers.  */
+>> --	typedef char assert__long_enough_long[-(sizeof(l) < sizeof(void *))];
+>> -+	assert(sizeof(l) >=3D sizeof(arch_addr_t));
+>> -
+>> - 	value_common_init(ret_val, valp->inferior, valp,
+>> - 			  valp->type->u.ptr_info.info, 0);
+>> -diff --git a/lens_default.c b/lens_default.c -index ed3d0e1..5d00814
+>> 100644
+>> ---- a/lens_default.c
+>> -+++ b/lens_default.c
+>> -@@ -1,6 +1,6 @@
+>> - /*
+>> -  * This file is part of ltrace.
+>> -- * Copyright (C) 2011,2012 Petr Machata, Red Hat Inc.
+>> -+ * Copyright (C) 2011,2012,2013 Petr Machata, Red Hat Inc.
+>> -  * Copyright (C) 1998,2004,2007,2008,2009 Juan Cespedes
+>> -  * Copyright (C) 2006 Ian Wienand
+>> -  * Copyright (C) 2006 Steve Fink
+>> -@@ -342,9 +342,9 @@ format_array(FILE *stream, struct value *value, str=
+uct
+>value_dict *arguments,
+>> - 	     struct expr_node *length, size_t maxlen, int before,
+>> - 	     const char *open, const char *close, const char *delim)
+>> - {
+>> --	/* We need "long" to be long enough to cover the whole address
+>> --	 * space.  */
+>> --	typedef char assert__long_enough_long[-(sizeof(long) < sizeof(void *)=
+)];
+>> -+	/* We need "long" to be long enough to cover the whole target
+>> -+	 * address space.  */
+>> -+	assert(sizeof(long) >=3D sizeof(arch_addr_t));
+>> - 	long l;
+>> - 	if (expr_eval_word(length, value, arguments, &l) < 0)
+>> - 		return -1;
+>> diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+>> b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+>> index d8d037e..850e8e3 100644
+>> --- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+>> +++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+>> @@ -11,14 +11,12 @@ LIC_FILES_CHKSUM =3D
+>"file://COPYING;md5=3Deb723b61539feef013de476e68b5c50a"
+>>
+>>  PE =3D "1"
+>>  PV =3D "7.3+git${SRCPV}"
+>> -SRCREV =3D "37ecc41b58be3dbdd79592a76e331b5b371e4f81"
+>> +SRCREV =3D "01b10e191e99d8cb147e5a2b7da8196e0ec6fb94"
+>>
+>>  DEPENDS =3D "elfutils"
+>>  RDEPENDS_${PN} =3D "elfutils"
+>> -SRC_URI =3D
+>"git://anonscm.debian.org/collab-maint/ltrace.git;branch=3Dltrace-0.7 \
+>> -           file://ltrace-0.7.2-unused-typedef.patch \
+>> +SRC_URI =3D
+>> +"git://anonscm.debian.org/collab-maint/ltrace.git;branch=3Dmaster \
+>>             file://configure-allow-to-disable-selinux-support.patch \
+>> -           file://0001-ltrace-fix-gcc-5-logical-not-parentheses.patch \
+>>            "
+>>  S =3D "${WORKDIR}/git"
+>>
+>> --
+>> 1.8.4.2
+>>
+>>
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>--
+>Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-André Draszik (1):
-  rsnapshot: use ${bindir} as rsync location
-
-Armin Kuster (3):
-  udisk2: fix build issue with missing depends
-  xcursorgen: fix License issue
-  flite: fix license issue.
-
-Belal, Awais (1):
-  mplayer2: fix building with gcc 5.x
-
-Catalin Enache (2):
-  net-snmp: fix invalid paths in target net-snmp-config
-  net-snmp: fix some invalid paths
-
-Christopher Larson (1):
-  ctdb: rdep on bash
-
-Jackie Huang (1):
-  libsmi: set the SH to the target path
-
-Koen Kooi (1):
-  mozjs: fix armeb builds
-
-Li xin (2):
-  mozjs_17.0.0.bb: Fix do_srpm error
-  mariadb: Fix rootfs creation errors
-
-Mark Asselstine (1):
-  mozjs: fix configure host contamination
-
-Martin Jansa (4):
-  recipes: Replace "cp -a" with "cp -R --no-dereference
-    --preserve=mode,links"
-  efl-native: add dependency on openssl
-  luajit: depend on luajit-native to provide host lua
-  libftdi: Fix cpp-wrapper options
-
-Mingli Yu (2):
-  netkit-telnet: Add to generate telnetlogin.
-  netkit-rsh: add two patches and some fixes.
-
-Philip Balister (1):
-  log4cpp: Fix build system path in pkgconfig file QA failure.
-
-Rafaël Carré (5):
-  vlc: make x11 DISTRO_FEATURE optional (enabled by default)
-  vlc: make sdl optional (enabled by default)
-  vlc: Fix typo introduced in 0f2b3139521570ad494a72399f8a9dae76e69b16
-  net-snmp: apply patch for cross-compilation
-  net-snmp: apply patch for cross-compilation
-
-Richard Purdie (1):
-  xmlstarlet: Disable PARALLEL_MAKE
-
-Richard Tollerton (1):
-  openldap: control ipv6 support via DISTRO_FEATURES
-
-Roy Li (2):
-  lldpd: configure the systemd unit file dir
-  net-snmp: fix the replacement in net-snmp-config
-
-Stefan Agner (1):
-  gstreamer: fix argument parsing when using Bison 3
-
-Stephano Cetola (1):
-  fix missing packageconfig for samba with sysvinit
-
-Stephen Arnold (1):
-  net-snmp: fix cross-compile breakage, add libnl pkgconfig option
-
-Zhixiong Chi (2):
-  postgresql: Security Advisory-postgresql-CVE-2016-0766
-  krb5-CVE-2016-3119.patch
-
- meta-efl/recipes-devtools/python/python-edbus.inc  |   2 +-
- meta-efl/recipes-efl/efl/efl.inc                   |   2 +-
- .../recipes-support/tracker/tracker_0.14.2.bb      |   2 +-
- .../recipes-mkv/libebml/libebml_1.3.0.bb           |   2 +-
- .../recipes-mkv/libmatroska/libmatroska_1.4.1.bb   |   2 +-
- .../gstreamer-0.10/gst-plugins-base_0.10.36.bb     |   3 +
- ...01-parse-make-grammar.y-work-with-Bison-3.patch |  35 ++++++
- ...mer-change-priv_gst_parse_yylex-arguments.patch |  33 -----
- .../gstreamer-0.10/gstreamer_0.10.36.bb            |   2 +-
- meta-multimedia/recipes-multimedia/vlc/vlc.inc     |  13 +-
- .../recipes-connectivity/samba/samba_4.1.12.bb     |   1 +
- .../recipes-daemons/lldpd/lldpd_0.7.17.bb          |   5 +-
- .../netkit-rsh/netkit-rsh/fix-host-variable.patch  |  27 ++++
- .../netkit-rsh/netkit-rsh-0.17-rexec-ipv6.patch    |  30 +++++
- .../recipes-netkit/netkit-rsh/netkit-rsh/rexec.pam |  10 ++
- .../netkit-rsh/netkit-rsh/rexec.xinetd.netkit      |   2 +-
- .../netkit-rsh/netkit-rsh/rlogin.pam               |  12 ++
- .../netkit-rsh/netkit-rsh/rlogin.xinetd.netkit     |   2 +-
- .../recipes-netkit/netkit-rsh/netkit-rsh/rsh.pam   |  10 ++
- .../netkit-rsh/netkit-rsh/rsh.xinetd.netkit        |   2 +-
- .../recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   |  25 ++--
- .../netkit-telnet/netkit-telnet_0.17.bb            |   3 +
- ....patch => 0001-config_os_libs2-Error-Fix.patch} |   2 +-
- .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb   |  30 +++--
- .../cim-schema/cim-schema-docs_2.40.0.bb           |   2 +-
- .../cim-schema/cim-schema-exper_2.39.0.bb          |   2 +-
- .../cim-schema/cim-schema-final_2.40.0.bb          |   2 +-
- meta-networking/recipes-support/ctdb/ctdb_2.5.1.bb |   2 +
- meta-oe/licenses/ManishSingh                       |  19 +++
- meta-oe/licenses/flite                             |  32 +++++
- meta-oe/recipes-benchmark/fio/fio_2.2.6.bb         |   2 +-
- .../krb5/krb5/krb5-CVE-2016-3119.patch             |  36 ++++++
- meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb   |   1 +
- meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb    |   3 +
- ...0001-add-support-for-big-endian-32bit-ARM.patch |  26 ++++
- meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     |  15 +--
- .../recipes-extended/tipcutils/tipcutils_2.0.6.bb  |   2 +-
- meta-oe/recipes-multimedia/live555/live555.inc     |  10 +-
- ...artially-port-libtheora-glue-code-to-Theo.patch | 136 +++++++++++++++++++++
- meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb |   4 +-
- meta-oe/recipes-navigation/orrery/orrery_2.7.bb    |   2 +-
- meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb |   4 +-
- meta-oe/recipes-support/libftdi/libftdi_1.2.bb     |   2 +-
- meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb     |   2 +
- meta-oe/recipes-support/log4cpp/files/fix-pc.patch |  20 +++
- meta-oe/recipes-support/log4cpp/log4cpp_1.1.1.bb   |   8 +-
- meta-oe/recipes-support/mysql/mariadb.inc          |   5 +-
- .../recipes-support/openldap/openldap_2.4.42.bb    |   2 +
- .../files/postgresql-CVE-2016-0766.patch           |  35 ++++++
- meta-oe/recipes-support/postgresql/postgresql.inc  |   1 +
- .../rsnapshot/configure-fix-cmd_rsync.patch        |   2 +-
- meta-oe/recipes-support/tbb/tbb_4.1.bb             |   2 +-
- meta-oe/recipes-support/udisks/udisks2_2.1.5.bb    |   2 +-
- .../recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb |   7 ++
- .../recipes-php/phpmyadmin/phpmyadmin_4.5.0.2.bb   |   2 +-
- 55 files changed, 544 insertions(+), 103 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0001-parse-make-grammar.y-work-with-Bison-3.patch
- delete mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
- create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/fix-host-variable.patch
- create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/netkit-rsh-0.17-rexec-ipv6.patch
- create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rexec.pam
- create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rlogin.pam
- create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rsh.pam
- rename meta-networking/recipes-protocols/net-snmp/net-snmp/{0002-config_os_headers-Error-Fix.patch => 0001-config_os_libs2-Error-Fix.patch} (96%)
- create mode 100644 meta-oe/licenses/ManishSingh
- create mode 100644 meta-oe/licenses/flite
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/krb5-CVE-2016-3119.patch
- create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0001-add-support-for-big-endian-32bit-ARM.patch
- create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer2/0001-demux_ogg-partially-port-libtheora-glue-code-to-Theo.patch
- create mode 100644 meta-oe/recipes-support/log4cpp/files/fix-pc.patch
- create mode 100644 meta-oe/recipes-support/postgresql/files/postgresql-CVE-2016-0766.patch
-
--- 
-1.9.1
 
 
