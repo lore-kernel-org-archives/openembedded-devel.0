@@ -1,29 +1,37 @@
-Return-Path: <adrian.ratiu@ni.com>
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B24C77070
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
+	[209.85.220.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 91D97731D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2016 12:39:37 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	u3TCdUhK029582; Fri, 29 Apr 2016 07:39:36 -0500
-Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
-	HF1218) with ESMTP id 2016042907385952-473226 ;
-	Fri, 29 Apr 2016 07:38:59 -0500 
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+	Fri, 29 Apr 2016 15:21:25 +0000 (UTC)
+Received: by mail-qk0-f176.google.com with SMTP id r184so46735229qkc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Apr 2016 08:21:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=qPZ6q4TvaFXsSw0hkozjwYM7XKDVXopiSu6jcTnXw5U=;
+	b=ad2aAPquJhircxw0hzWeNa69MgP546495UpyiQus5cYjNFoL3p5riWf6yZIkWMpC1V
+	IoT7WeddLKh5EzvchU/ozuBJwGYflcNJKk6Wiout9nxhoiILapXGoKr/wbdXvvLCjdnk
+	JuSz2m1m7UMXpqM/FnGTH9eXZHgGVM03XPcVeu1cThcMU0fA5MFgi8kJyrfd4azAcRwj
+	gAa5sSsYIJsJgIeL+Aj4+BhbGnAHjPOaseampDpGwBKFPLz7TORs9XUYIf2Ebo2RBUuq
+	KG375+DFOJW7t1J6JMpMTQnFPqRKutnbhVh6v5rj+qFT5st6Bz5N5v991/vzuWEb41jX
+	vz0w==
+X-Gm-Message-State: AOPr4FWmXt0BCxhlwW6VAg12zwjeBWqDVfDtOyyO4ovhjiQYMmdESe23WOG29P52Fk/vXg==
+X-Received: by 10.55.170.134 with SMTP id t128mr20345486qke.19.1461943285489; 
+	Fri, 29 Apr 2016 08:21:25 -0700 (PDT)
+Received: from lnx-desktop.star.lab (c-73-172-178-168.hsd1.md.comcast.net.
+	[73.172.178.168])
+	by smtp.gmail.com with ESMTPSA id v65sm4577126qhc.6.2016.04.29.08.21.24
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 29 Apr 2016 08:21:25 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Apr 2016 15:38:50 +0300
-Message-Id: <1461933530-18167-1-git-send-email-adrian.ratiu@ni.com>
-X-Mailer: git-send-email 2.8.0
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6 HF1218|December 12, 2014) at 04/29/2016 07:38:59 AM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
-	HF1218|December 12, 2014) at 04/29/2016 07:39:05 AM,
-	Serialize complete at 04/29/2016 07:39:05 AM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2016-04-29_08:, , signatures=0
-Subject: [meta-oe][PATCH] syslog-ng.inc: fix prerm script & class includes
+Date: Fri, 29 Apr 2016 11:20:48 -0400
+Message-Id: <1461943248-919-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-oe][PATCHv2] fribidi: update to version 0.19.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,51 +44,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2016 12:39:38 -0000
+X-List-Received-Date: Fri, 29 Apr 2016 15:21:25 -0000
 
-The order of class includes is very important because it's the order in
-which classes are evaluated. Both update-rc.d and update-alternatives
-write to the prerm script, so the class order decides the script code
-ordering. As they are now, prerm is:
+ * license copyright entities were updated
 
- #!/bin/sh
-        update-alternatives --remove  syslog-init /etc/init.d/syslog.syslog-ng
-if [ -z "$D" ]; then
-        /etc/init.d/syslog stop
-fi
-
-This causes errors because when syslog-ng is the only alternative it is
-removed and then the script tries to stop it (No such file or directory)
-but even if there are other alternatives, the script tries to stop
-something other than syslog-ng which was removed.
-
-By reversing the include order, prerm gets generated correctly and it
-tries to stop syslog-ng before removing it:
-
-if [ -z "$D" ]; then
-        /etc/init.d/syslog stop
-fi
-update-alternatives --remove  syslog-init /etc/init.d/syslog.syslog-ng
-
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb | 17 -----------------
+ meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb | 17 +++++++++++++++++
+ 2 files changed, 17 insertions(+), 17 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb
+ create mode 100644 meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index 382dc5e..4e0f697 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -22,7 +22,7 @@ SRC_URI = "http://www.balabit.com/downloads/files/syslog-ng/sources/${PV}/source
-            file://configure.ac-add-option-enable-thread-tls-to-manage-.patch \
- "
- 
--inherit autotools systemd pkgconfig update-rc.d update-alternatives
-+inherit autotools systemd pkgconfig update-alternatives update-rc.d
- 
- EXTRA_OECONF = " \
-     --enable-dynamic-linking \
+diff --git a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb b/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb
+deleted file mode 100644
+index cb4bc24..0000000
+--- a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb
++++ /dev/null
+@@ -1,17 +0,0 @@
+-SUMMARY = "Fribidi library for bidirectional text"
+-SECTION = "libs"
+-PR = "r1"
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
+-BBCLASSEXTEND = "native"
+-
+-PROVIDES = "libfribidi"
+-
+-inherit autotools lib_package pkgconfig
+-
+-CFLAGS_append = "  -DPAGE_SIZE=4096 "
+-
+-SRC_URI = "http://fribidi.org/download/fribidi-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "626db17d2d99b43615ad9d12500f568a"
+-SRC_URI[sha256sum] = "49cf91586e48b52fe25872ff66c1da0dff0daac2593f9f300e2af12f44f64177"
+diff --git a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb b/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
+new file mode 100644
+index 0000000..f8e7aa0
+--- /dev/null
++++ b/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Fribidi library for bidirectional text"
++SECTION = "libs"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
++BBCLASSEXTEND = "native"
++
++PROVIDES = "libfribidi"
++DEPENDS = "glib-2.0 libpcre"
++
++inherit autotools lib_package pkgconfig
++
++CFLAGS_append = "  -DPAGE_SIZE=4096 "
++
++SRC_URI = "http://fribidi.org/download/fribidi-${PV}.tar.bz2"
++
++SRC_URI[md5sum] = "6c7e7cfdd39c908f7ac619351c1c5c23"
++SRC_URI[sha256sum] = "08222a6212bbc2276a2d55c3bf370109ae4a35b689acbc66571ad2a670595a8e"
 -- 
-2.8.0
+1.9.1
 
 
