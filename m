@@ -1,48 +1,38 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-X-Greylist: delayed 717 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 29 Apr 2016 22:23:18 UTC
-Received: from mail4.static.mgsend.net (mail4.static.mgsend.net
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id AC0FE73218
+Return-Path: <denis@denix.org>
+Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
+	[206.46.173.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 16AB076486
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2016 22:23:18 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1461968599; h=Content-Type: To: From: Subject: Message-ID:
-	Date: References: In-Reply-To: MIME-Version: Sender;
-	bh=OL0B5cJTilFrfSGjD0R0FGdpmmpUo+V0I0+OPN8NyMk=;
-	b=TmUqEgyID1nkvITV2H4Mf9YNe06VK0dB9Bj6zxwHz4eW+WFFozNf+1pXK5FjGlEM6XCwQOJh
-	jlI/TC3GLysSj/FZKyo9hTXdfAJzzFprssP+chkZ4wijRua+hzWn3iAgnQI7KbEiFz0IltZY
-	MHcrgok1+Y/FZFiVbZQmsv6WeHA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
-	q=dns; h=Sender: MIME-Version: In-Reply-To: References: Date:
-	Message-ID: Subject: From: To: Content-Type;
-	b=sU/MEyXLdIeSeIDfhW316fIory+LWpjr+Ecyud4ptGMyMAkof6Rg0+xm6kkQtA+QeqYDur
-	xXWznv5F9SrVvS8vEVqQvI0KOaAK9nvrC9UL1D/YgHb1zJn1ts38TM8NexVjptogtN+MupK4
-	xnQGXLYY370wl0loNf7jn2/8VpOKQ=
-Sender: derek@asterius.io
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Received: from mail-ig0-f169.google.com (mail-ig0-f169.google.com
-	[209.85.213.169])
-	by mxa.mailgun.org with ESMTP id 5723dbf5.7fa78cdaccb0-in6;
-	Fri, 29 Apr 2016 22:11:01 -0000 (UTC)
-Received: by mail-ig0-f169.google.com with SMTP id s8so31776711ign.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Apr 2016 15:11:01 -0700 (PDT)
-X-Gm-Message-State: AOPr4FVG+qVv+vlQofqW4RGMY3mhRwOlBGYsWmsNJGy3owuGpCOuebloPMp/V/rBBeDr1JRiQEgWZeQrVHOOjQ==
-MIME-Version: 1.0
-X-Received: by 10.50.160.41 with SMTP id xh9mr7082487igb.64.1461967861058;
-	Fri, 29 Apr 2016 15:11:01 -0700 (PDT)
-Received: by 10.107.180.73 with HTTP; Fri, 29 Apr 2016 15:11:01 -0700 (PDT)
-In-Reply-To: <36A687F7-36B8-453A-B13D-CF4E8C335CB9@gmail.com>
-References: <1461959353-32423-1-git-send-email-derek@asterius.io>
-	<36A687F7-36B8-453A-B13D-CF4E8C335CB9@gmail.com>
-Date: Fri, 29 Apr 2016 18:11:01 -0400
-X-Gmail-Original-Message-ID: <CADNbA1oQNj0NfZvWJAvq9pU2PZye8ZE76WDHxXgN3q0C2y8KEw@mail.gmail.com>
-Message-ID: <CADNbA1oQNj0NfZvWJAvq9pU2PZye8ZE76WDHxXgN3q0C2y8KEw@mail.gmail.com>
-From: Derek Straka <derek@asterius.io>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] tinymembench: update to version 0.4.0 plus bux fixes
+	Sat, 30 Apr 2016 00:21:53 +0000 (UTC)
+Received: from vz-proxy-l003.mx.aol.com ([64.236.82.155])
+	by vms173009.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O6F00FBI7O3HI90@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	29 Apr 2016 19:21:39 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=J+9Xl1TS c=1 sm=1 tr=0	a=i+tV1o3iWEoTTvx3QNPGxA==:117
+	a=IkcTkHD0fZMA:10 a=kziv93cY1bsA:10	a=0gcC27t9AAAA:8
+	a=I0zbT7l-m5epgaa-JAYA:9 a=QEXdDO2ut3YA:10
+Received: by 100.15.86.14 with SMTP id 374ed435; Sat, 30 Apr 2016 00:21:39 GMT
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id B05E6161FD1; Fri,
+	29 Apr 2016 20:21:38 -0400 (EDT)
+Date: Fri, 29 Apr 2016 20:21:38 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20160430002138.GB17066@denix.org>
+References: <1459471643-7183-1-git-send-email-denis@denix.org>
+	<20160420182710.GN16135@denix.org> <20160425180750.GW16135@denix.org>
+	<CA+chaQeA63zpMf02NYbDrxZgXdSbx2=T3=nZGmxk4h8XxOx+Xg@mail.gmail.com>
+	<20160425214326.GA31113@denix.org>
+	<CA+chaQduVd3gEmHO1D9YSzid0F6Lm-Mrv+Yh2rW0a=f5fQWKFQ@mail.gmail.com>
+	<20160426153025.GH31113@denix.org>
+	<139887C4-F77D-4838-A13A-877DDDF999CC@gmail.com>
+	<20160426180758.GE2559@jama>
+MIME-version: 1.0
+In-reply-to: <20160426180758.GE2559@jama>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-qt5][PATCH 1/2] qtdeclarative: fix compilation of examples/qquickviewcomparison
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,78 +45,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2016 22:23:19 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 30 Apr 2016 00:21:56 -0000
+Content-type: text/plain; charset=utf-8
+Content-disposition: inline
+Content-transfer-encoding: quoted-printable
 
-Ah.  That makes more sense why ARM_INSTRUCTION_SET is there.  It still
-fails to build with thumb, so I reverted that portion of the patch.  Thanks=
-!
+On Tue, Apr 26, 2016 at 08:07:58PM +0200, Martin Jansa wrote:
+> On Tue, Apr 26, 2016 at 09:38:42AM -0700, Khem Raj wrote:
+> >=20
+> > > On Apr 26, 2016, at 8:30 AM, Denys Dmytriyenko <denis@denix.org> wrot=
+e:
+> > >=20
+> > > On Tue, Apr 26, 2016 at 08:37:19AM +0200, Martin Jansa wrote:
+> > >> The strange part is that examples built fine here with current master
+> > >> (5.5.99/5.6-beta)
+> > >> without your patches.
+> > >=20
+> > > That is strange. Can it be toolchain-related? I'm using Linaro gcc-5.=
+3, but I
+> > > would expect OE-built gcc-5.3 to be as strict and fail similarly on t=
+hose
+> > > undeclared or incomplete classes=E2=80=A6
+> >=20
+> > can both of you paste the <gcc> -E -dM output of this file in question ?
+> >=20
+> >=20
+>=20
+> i586-oe-linux-g++  -m32 -march=3Di586 --sysroot=3D/OE/build/oe-core/tmp-g=
+libc/sysroots/qemux86 -c -pipe -O2 -pipe -g -feliminate-unused-debug-types =
+-fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtdecla=
+rative/5.5.99+5.6.0-rc+gitAUTOINC+0fab5761d5-r0=3D/usr/src/debug/qtdeclarat=
+ive/5.5.99+5.6.0-rc+gitAUTOINC+0fab5761d5-r0 -fdebug-prefix-map=3D/OE/build=
+/oe-core/tmp-glibc/sysroots/x86_64-linux=3D -fdebug-prefix-map=3D/OE/build/=
+oe-core/tmp-glibc/sysroots/qemux86=3D  -fvisibility-inlines-hidden -O2 -std=
+=3Dgnu++0x -fno-exceptions -Wall -W -D_REENTRANT -fPIC -DQT_NO_MTDEV -DQT_N=
+O_TSLIB -DQT_NO_LIBINPUT -DQT_NO_EXCEPTIONS -D_LARGEFILE64_SOURCE -D_LARGEF=
+ILE_SOURCE -DQT_NO_DEBUG -DQT_QUICKWIDGETS_LIB -DQT_QUICK_LIB -DQT_QML_LIB =
+-DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I/OE/build/oe=
+-core/tmp-glibc/work/i586-oe-linux/qtdeclarative/5.5.99+5.6.0-rc+gitAUTOINC=
++0fab5761d5-r0/git/examples/quick/quickwidgets/qquickviewcomparison -I. -I.=
+=2E/../../../include -I../../../../include/QtQuickWidgets -I../../../.
+> ./include/QtQuick -I../../../../include/QtQml -isystem /OE/build/oe-core/=
+tmp-glibc/sysroots/qemux86/usr/include/qt5 -isystem /OE/build/oe-core/tmp-g=
+libc/sysroots/qemux86/usr/include/qt5/QtWidgets -isystem /OE/build/oe-core/=
+tmp-glibc/sysroots/qemux86/usr/include/qt5/QtGui -isystem /OE/build/oe-core=
+/tmp-glibc/sysroots/qemux86/usr/include/qt5/QtNetwork -isystem /OE/build/oe=
+-core/tmp-glibc/sysroots/qemux86/usr/include/qt5/QtCore -I.moc -isystem /OE=
+/build/oe-core/tmp-glibc/sysroots/qemux86/usr/include/libdrm -I/OE/build/oe=
+-core/tmp-glibc/sysroots/qemux86/usr/lib/qt5/mkspecs/linux-oe-g++ -o .obj/m=
+ainwindow.o /OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtdeclarative/5.=
+5.99+5.6.0-rc+gitAUTOINC+0fab5761d5-r0/git/examples/quick/quickwidgets/qqui=
+ckviewcomparison/mainwindow.cpp
+>=20
+> and mainwindow.E is attached
 
-On Fri, Apr 29, 2016 at 5:57 PM, Khem Raj <raj.khem@gmail.com> wrote:
+Sorry for the delay.
+Can you please provide more detailed instructions in order to get this outp=
+ut?
 
->
-> > On Apr 29, 2016, at 12:49 PM, Derek Straka <derek@asterius.io> wrote:
-> >
-> > Removed ARM_INSTRUCTION_SET since it builds on qemuarm and qemuarm64
-> without issues
-> > Also tested the build on qemuppc and qemux86-64
->
->
-> For test, you need to set ARM_INSTRUCTION_SET =3D =E2=80=9Cthumb=E2=80=9D=
- in this recipe and
-> see if that works for qemuarm
-> if that does then it can be removed.
->
-> > Signed-off-by: Derek Straka <derek@asterius.io>
-> > ---
-> > meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb | 12
-> ++----------
-> > 1 file changed, 2 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
-> b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
-> > index 9898a70..a675bda 100644
-> > --- a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
-> > +++ b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
-> > @@ -6,9 +6,9 @@ HOMEPAGE =3D "https://github.com/ssvb/tinymembench/wiki=
-"
-> > LICENSE =3D "MIT"
-> > LIC_FILES_CHKSUM =3D
-> "file://main.c;endline=3D22;md5=3D879b9bbb60851454885b5fa47eb6b345"
-> >
-> > -PV =3D "0.3.9+git${SRCPV}"
-> > +PV =3D "0.4.0+git${SRCPV}"
-> >
-> > -SRCREV =3D "95e68477588d41187b2d2e52ecf6be0e7eb06b8d"
-> > +SRCREV =3D "2c789849709d837b4bd114c11ed2d9bdc65afbc6"
-> > SRC_URI =3D "git://github.com/ssvb/tinymembench.git"
-> >
-> > S =3D "${WORKDIR}/git"
-> > @@ -17,11 +17,3 @@ do_install() {
-> >     install -d ${D}${bindir}
-> >     install -m755 tinymembench ${D}${bindir}/
-> > }
-> > -
-> > -# Fails to build with thumb-1 (qemuarm)
-> > -#| {standard input}: Assembler messages:
-> > -#| {standard input}:66: Error: instruction not supported in Thumb16
-> mode -- `subs r1,r1,#16'
-> > -#| {standard input}:69: Error: instruction not supported in Thumb16
-> mode -- `subs r1,r1,#16'
-> > -#| {standard input}:82: Error: selected processor does not support
-> Thumb mode `mla r3,r4,r3,r5'
-> > -#| {standard input}:82: Error: unshifted register required -- `and
-> r8,r7,r3,lsr#16'
-> > -ARM_INSTRUCTION_SET =3D "arm"
-> > --
-> > 1.9.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+--=20
+Denys
 
