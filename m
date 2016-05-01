@@ -1,20 +1,46 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id E191C607A4
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 9309B734B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 May 2016 08:50:37 +0000 (UTC)
-Received: from localhost.localdomain (62-178-118-86.cable.dynamic.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 148BC3907D
+	Sun,  1 May 2016 12:24:30 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id r12so13305100wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 May 2016 10:50:37 +0200 (CEST)
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
+	Sun, 01 May 2016 05:24:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=LAKhkHwtkWAOgAUf164h7cg0qRMNpQguh1PIGwELtj0=;
+	b=IX0hUzIpRMI7HZuIM1mHBXe5MGaV3vLq+dczDVIyD466R9EUyjoo9C4mqKRfEDyaWR
+	h+6ZTVxNKbLcR7IpT6X907eN61oVWTYncs/tNISFBRaDr5ltew7AjX4gE5FlrTy7/X8d
+	hQsDnDi54qyYKWMxVKyL3nuYRBllwfwf8pamcpm9a5yPly0nUhznVBY30GttrYTY6Vcb
+	Q3ZbFILrGIGPDeGAtTb0h+GgnTQ3j9SGvO3WtpsRPdio0zANWxXYx0XhpuOGtmVsTmQX
+	9t70INdaUaqcNQNGUOBRI6rW19mj80IUNIuHvR46Pg4TVJAv4hGrJPFYXU/tVJBSlPwO
+	/Wcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=LAKhkHwtkWAOgAUf164h7cg0qRMNpQguh1PIGwELtj0=;
+	b=LAfXOi2u8HeSn0hbBE0B/iRoOXXWfiJIf/gN+SkJy6NlM0L8clgImROB99/k+567rb
+	4bB5xDV6ln7sujFtOFrq1wLHxmJBuI8+oSDM6XIzJkC83YxmyXaV/oErR3gswcPWbSRn
+	clU0HCN4DA88T94qIDTHcxXcpxZOoAKt9zZ10hLSv4Gt+9tSyp3IJ8JTHp/I8tnb8ndp
+	wV+nd9+EFTI5AASPPPvEfIaGCnvLFXgOrmUtb9tJoWTqmlcODVQEqhgIeNkTWKmehjWG
+	yq85NzCNLU/L4VlolwvFoBK5E1QQ54gMRlqEIvaT+9cgJFKJfexEFZ2aiN8jmHZDTBRC
+	HYVQ==
+X-Gm-Message-State: AOPr4FXEWiV9/BkAgB4cKwNhVi1RarkDS0BxCShbWLCPBJ3/qFXp2ffRO/KA1OTyHIYtlg==
+X-Received: by 10.28.144.11 with SMTP id s11mr13341100wmd.72.1462105470233;
+	Sun, 01 May 2016 05:24:30 -0700 (PDT)
+Received: from dev-jessie.betafive.co.uk
+	(cpc11-shep11-2-0-cust130.8-3.cable.virginm.net. [86.27.96.131])
+	by smtp.gmail.com with ESMTPSA id
+	r123sm13111271wmg.20.2016.05.01.05.24.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 01 May 2016 05:24:29 -0700 (PDT)
+Sender: Paul Barker <paul.betafive@gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  1 May 2016 10:50:26 +0200
-Message-Id: <1462092626-26478-3-git-send-email-dv@pseudoterminal.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1462092626-26478-1-git-send-email-dv@pseudoterminal.org>
-References: <1462092626-26478-1-git-send-email-dv@pseudoterminal.org>
-Subject: [meta-browser][PATCH 3/3] chromium: Upgrade to version 48.0.2548.0
+Date: Sun,  1 May 2016 13:24:55 +0100
+Message-Id: <1462105495-21996-1-git-send-email-paul@paulbarker.me.uk>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH] vim: Upgrade to v7.4.1689
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,803 +53,235 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 May 2016 08:50:38 -0000
+X-List-Received-Date: Sun, 01 May 2016 12:24:34 -0000
 
-Not upgrading to M49 or M50 in this commit since this is currently the
-latest version that is supported by ozone-wayland
+v7.4.1689 is currently used in Debian Testing and Arch Linux.
 
-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+The tags file used as an index to vim's documentation is not correctly created
+when cross compiling in v7.4.1689. Patch 7.4.1733 is backported to fix this
+issue.
+
+Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
 ---
- ...Add-Linux-to-impl-side-painting-whitelist.patch | 39 -----------
- .../0003-disable-uninitialized-warning.patch       | 19 ------
- .../0005-Remove-X-libraries-from-GYP-files.patch   | 77 ----------------------
- .../chromium/chromium-40/0010-systemd-218.patch    | 39 -----------
- .../fix-build-error-with-GCC-in-Debug-mode.patch   | 32 ---------
- ...accelerated-Canvas-support-from-blacklist.patch | 20 ++++--
- ...0001-bignum.cc-disable-warning-from-gcc-5.patch |  4 +-
- .../0002-Disable-API-keys-info-bar.patch}          |  2 +-
- ...-image_util.cc-disable-warning-from-gcc-5.patch |  0
- ...-Remove-hard-coded-values-for-CC-and-CXX.patch} |  8 +--
- ...y-i18n_process_css_test.html-file-to-avoi.patch | 26 ++++++++
- ...erride-root-filesystem-access-restriction.patch | 30 +++++++++
- .../0006-Remove-GBM-support-from-wayland.gyp.patch | 66 +++++++++++++++++++
- ...for-glib-related-build-error-with-ozone-w.patch | 31 +++++++++
- .../0008-Fix-GCC-uninitialized-warning.patch       | 26 ++++++++
- ...9-Fix-build-errors-with-GCC-in-Debug-mode.patch | 46 +++++++++++++
- .../add_missing_stat_h_include.patch               |  4 +-
- recipes-browser/chromium/chromium_40.0.2214.91.bb  | 45 -------------
- recipes-browser/chromium/chromium_48.0.2548.0.bb   | 42 ++++++++++++
- 19 files changed, 289 insertions(+), 267 deletions(-)
- delete mode 100644 recipes-browser/chromium/chromium/chromium-40/0002-Add-Linux-to-impl-side-painting-whitelist.patch
- delete mode 100644 recipes-browser/chromium/chromium/chromium-40/0003-disable-uninitialized-warning.patch
- delete mode 100644 recipes-browser/chromium/chromium/chromium-40/0005-Remove-X-libraries-from-GYP-files.patch
- delete mode 100644 recipes-browser/chromium/chromium/chromium-40/0010-systemd-218.patch
- delete mode 100644 recipes-browser/chromium/chromium/chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch
- rename recipes-browser/chromium/chromium/{chromium-40 => chromium-48}/0001-Remove-accelerated-Canvas-support-from-blacklist.patch (71%)
- rename recipes-browser/chromium/chromium/{chromium-40 => chromium-48}/0001-bignum.cc-disable-warning-from-gcc-5.patch (98%)
- rename recipes-browser/chromium/chromium/{chromium-40/0003-Disable-API-keys-info-bar.patch => chromium-48/0002-Disable-API-keys-info-bar.patch} (95%)
- rename recipes-browser/chromium/chromium/{chromium-40 => chromium-48}/0002-image_util.cc-disable-warning-from-gcc-5.patch (100%)
- rename recipes-browser/chromium/chromium/{chromium-40/0004-Remove-hard-coded-values-for-CC-and-CXX.patch => chromium-48/0003-Remove-hard-coded-values-for-CC-and-CXX.patch} (86%)
- create mode 100644 recipes-browser/chromium/chromium/chromium-48/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch
- create mode 100644 recipes-browser/chromium/chromium/chromium-48/0005-Override-root-filesystem-access-restriction.patch
- create mode 100644 recipes-browser/chromium/chromium/chromium-48/0006-Remove-GBM-support-from-wayland.gyp.patch
- create mode 100644 recipes-browser/chromium/chromium/chromium-48/0007-Workaround-for-glib-related-build-error-with-ozone-w.patch
- create mode 100644 recipes-browser/chromium/chromium/chromium-48/0008-Fix-GCC-uninitialized-warning.patch
- create mode 100644 recipes-browser/chromium/chromium/chromium-48/0009-Fix-build-errors-with-GCC-in-Debug-mode.patch
- rename recipes-browser/chromium/chromium/{chromium-40 => chromium-48}/add_missing_stat_h_include.patch (90%)
- delete mode 100644 recipes-browser/chromium/chromium_40.0.2214.91.bb
- create mode 100644 recipes-browser/chromium/chromium_48.0.2548.0.bb
+ .../vim/files/0001-patch-7.4.1733.patch            | 169 +++++++++++++++++++++
+ .../{vim-tiny_7.4.769.bb => vim-tiny_7.4.1689.bb}  |   0
+ .../vim/{vim_7.4.769.bb => vim_7.4.1689.bb}        |   6 +-
+ 3 files changed, 173 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/vim/files/0001-patch-7.4.1733.patch
+ rename meta-oe/recipes-support/vim/{vim-tiny_7.4.769.bb => vim-tiny_7.4.1689.bb} (100%)
+ rename meta-oe/recipes-support/vim/{vim_7.4.769.bb => vim_7.4.1689.bb} (93%)
 
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0002-Add-Linux-to-impl-side-painting-whitelist.patch b/recipes-browser/chromium/chromium/chromium-40/0002-Add-Linux-to-impl-side-painting-whitelist.patch
-deleted file mode 100644
-index b5916ca..0000000
---- a/recipes-browser/chromium/chromium/chromium-40/0002-Add-Linux-to-impl-side-painting-whitelist.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From 61cbd67e88f5e99185d7df1a05f842c58e691495 Mon Sep 17 00:00:00 2001
--From: Carlos Rafael Giani <dv@pseudoterminal.org>
--Date: Sun, 21 Dec 2014 01:01:04 +0100
--Subject: [PATCH] Add Linux to impl side painting whitelist
--
--Upstream-Status: Inappropriate [enable feature]
--
--Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-----
-- gpu/config/software_rendering_list_json.cc | 7 ++++++-
-- 1 file changed, 6 insertions(+), 1 deletion(-)
--
--diff --git a/gpu/config/software_rendering_list_json.cc b/gpu/config/software_rendering_list_json.cc
--index ccf1460..8630d75 100644
----- a/gpu/config/software_rendering_list_json.cc
--+++ b/gpu/config/software_rendering_list_json.cc
--@@ -1088,13 +1088,18 @@ LONG_STRING_CONST(
--     },
--     {
--       "id": 99,
---      "description": "GPU rasterization is blacklisted on non-Android",
--+      "description": "GPU rasterization is blacklisted on non-Android and non-Linux (Yocto patch)",
--       "cr_bugs": [362779],
--       "exceptions": [
--         {
--           "os": {
--             "type": "android"
--           }
--+        },
--+        {
--+          "os": {
--+            "type": "linux"
--+          }
--         }
--       ],
--       "features": [
---- 
--1.9.1
--
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0003-disable-uninitialized-warning.patch b/recipes-browser/chromium/chromium/chromium-40/0003-disable-uninitialized-warning.patch
-deleted file mode 100644
-index 232dbf4..0000000
---- a/recipes-browser/chromium/chromium/chromium-40/0003-disable-uninitialized-warning.patch
-+++ /dev/null
-@@ -1,19 +0,0 @@
--../../third_party/WebKit/Source/core/inspector/InspectorTimelineAgent.cpp: In static member function 'static void WTF::HashTableBucketInitializer<false>::initialize(Value&) [with Traits = WTF::HashMapValueTraits<WTF::HashTraits<int>, WTF::HashTraits<blink::TimelineThreadState> >; Value = WTF::KeyValuePair<int, blink::TimelineThreadState>]':
--../../third_party/WebKit/Source/core/inspector/InspectorTimelineAgent.cpp:234:8: error: '<anonymous>.blink::TimelineThreadState::inKnownLayerTask' is used uninitialized in this function [-Werror=uninitialized]
-- struct TimelineThreadState {
--        ^
--
----- a/third_party/WebKit/Source/core/inspector/InspectorTimelineAgent.cpp	2016-03-10 08:14:18.771413000 -1000
--+++ b/third_party/WebKit/Source/core/inspector/InspectorTimelineAgent.cpp	2016-03-10 08:15:58.179413000 -1000
--@@ -231,7 +231,11 @@
--     Vector<Entry> m_stack;
-- };
-- 
--+#pragma GCC diagnostic push
--+#pragma GCC diagnostic warning "-Wuninitialized"
-- struct TimelineThreadState {
--+#pragma GCC diagnostic pop
--+
--     ALLOW_ONLY_INLINE_ALLOCATION();
-- public:
--     TimelineThreadState() { }
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0005-Remove-X-libraries-from-GYP-files.patch b/recipes-browser/chromium/chromium/chromium-40/0005-Remove-X-libraries-from-GYP-files.patch
-deleted file mode 100644
-index 632590a..0000000
---- a/recipes-browser/chromium/chromium/chromium-40/0005-Remove-X-libraries-from-GYP-files.patch
-+++ /dev/null
-@@ -1,77 +0,0 @@
--From 23e33854a1c5cddc56acd9abdbda14757b809c7d Mon Sep 17 00:00:00 2001
--From: Carlos Rafael Giani <dv@pseudoterminal.org>
--Date: Sun, 12 Oct 2014 18:08:37 +0200
--Subject: [PATCH] Remove X libraries from GYP files
--
--Some X libraries are linked even when ozone-wayland is used, causing
--linker errors if no X libraries are around
--
--Upstream-Status: Pending
--
--Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-----
-- third_party/libjingle/source/talk/libjingle.gyp                 | 2 --
-- third_party/libjingle/source/talk/libjingle_examples.gyp        | 4 ----
-- third_party/webrtc/base/base.gyp                                | 4 ----
-- third_party/webrtc/modules/desktop_capture/desktop_capture.gypi | 2 +-
-- 4 files changed, 1 insertion(+), 11 deletions(-)
--
--diff --git a/third_party/libjingle/source/talk/libjingle.gyp b/third_party/libjingle/source/talk/libjingle.gyp
--index 90d1f41..22655dc 100755
----- a/third_party/libjingle/source/talk/libjingle.gyp
--+++ b/third_party/libjingle/source/talk/libjingle.gyp
--@@ -455,8 +455,6 @@
--           ],
--           'libraries': [
--             '-lrt',
---            '-lXext',
---            '-lX11',
--           ],
--         }],
--         ['OS=="win"', {
--diff --git a/third_party/libjingle/source/talk/libjingle_examples.gyp b/third_party/libjingle/source/talk/libjingle_examples.gyp
--index f7ce53b..204bc1e 100755
----- a/third_party/libjingle/source/talk/libjingle_examples.gyp
--+++ b/third_party/libjingle/source/talk/libjingle_examples.gyp
--@@ -207,10 +207,6 @@
--                 'libraries': [
--                   '<!@(pkg-config --libs-only-l glib-2.0 gobject-2.0'
--                       ' gthread-2.0 gtk+-2.0)',
---                  '-lX11',
---                  '-lXcomposite',
---                  '-lXext',
---                  '-lXrender',
--                 ],
--               },
--             }],  # OS=="linux"
--diff --git a/third_party/webrtc/base/base.gyp b/third_party/webrtc/base/base.gyp
--index 2fd64ba..ccab4e9 100644
----- a/third_party/webrtc/base/base.gyp
--+++ b/third_party/webrtc/base/base.gyp
--@@ -593,10 +593,6 @@
--             'libraries': [
--               '-ldl',
--               '-lrt',
---              '-lXext',
---              '-lX11',
---              '-lXcomposite',
---              '-lXrender',
--             ],
--           },
--         }, {
--diff --git a/third_party/webrtc/modules/desktop_capture/desktop_capture.gypi b/third_party/webrtc/modules/desktop_capture/desktop_capture.gypi
--index 1b702f2..93ede57 100644
----- a/third_party/webrtc/modules/desktop_capture/desktop_capture.gypi
--+++ b/third_party/webrtc/modules/desktop_capture/desktop_capture.gypi
--@@ -97,7 +97,7 @@
--             'desktop_capture_differ_sse2',
--           ],
--         }],
---        ['use_x11 == 1', {
--+        ['use_x11 == 1 and <(ozone_platform_wayland) != 1', {
--           'link_settings': {
--             'libraries': [
--               '-lX11',
---- 
--1.9.1
--
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0010-systemd-218.patch b/recipes-browser/chromium/chromium/chromium-40/0010-systemd-218.patch
-deleted file mode 100644
-index 3aec8d0..0000000
---- a/recipes-browser/chromium/chromium/chromium-40/0010-systemd-218.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--Remove use of udev_set_log_priority API its gone in systemd >= 218
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--Index: chromium-40.0.2214.91/ui/events/ozone/device/udev/device_manager_udev.cc
--===================================================================
----- chromium-40.0.2214.91.orig/ui/events/ozone/device/udev/device_manager_udev.cc
--+++ chromium-40.0.2214.91/ui/events/ozone/device/udev/device_manager_udev.cc
--@@ -33,29 +33,9 @@ enum {
--   SYS_LOG_DEBUG = 7,
-- };
-- 
---// Log handler for messages generated from libudev.
---void UdevLog(struct udev* udev,
---             int priority,
---             const char* file,
---             int line,
---             const char* fn,
---             const char* format,
---             va_list args) {
---  if (priority <= SYS_LOG_ERR)
---    LOG(ERROR) << "libudev: " << fn << ": " << base::StringPrintV(format, args);
---  else if (priority <= SYS_LOG_INFO)
---    VLOG(1) << "libudev: " << fn << ": " << base::StringPrintV(format, args);
---  else  // SYS_LOG_DEBUG
---    VLOG(2) << "libudev: " << fn << ": " << base::StringPrintV(format, args);
---}
---
-- // Create libudev context.
-- device::ScopedUdevPtr UdevCreate() {
--   struct udev* udev = udev_new();
---  if (udev) {
---    udev_set_log_fn(udev, UdevLog);
---    udev_set_log_priority(udev, SYS_LOG_DEBUG);
---  }
--   return device::ScopedUdevPtr(udev);
-- }
-- 
-diff --git a/recipes-browser/chromium/chromium/chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch b/recipes-browser/chromium/chromium/chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch
-deleted file mode 100644
-index c05598a..0000000
---- a/recipes-browser/chromium/chromium/chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From bfe80ed5227fccf8ab13df714702fc77e5e3d657 Mon Sep 17 00:00:00 2001
--From: Carlos Alberto Lopez Perez <clopez@igalia.com>
--Date: Thu, 27 Aug 2015 09:54:06 +0200
--Subject: [PATCH] Fix build error with GCC in Debug mode:
--
--  http://code.google.com/p/chromium/issues/detail?id=525428
-----
-- components/invalidation/invalidator_storage.cc | 7 +++++++
-- 1 file changed, 7 insertions(+)
--
--diff --git a/components/invalidation/invalidator_storage.cc b/components/invalidation/invalidator_storage.cc
--index 13ba4b1..3d567c1 100644
----- a/components/invalidation/invalidator_storage.cc
--+++ b/components/invalidation/invalidator_storage.cc
--@@ -2,7 +2,14 @@
-- // Use of this source code is governed by a BSD-style license that can be
-- // found in the LICENSE file.
-- 
--+#if !defined(NDEBUG)
--+#pragma GCC diagnostic push
--+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
--+#endif // !defined(NDEBUG)
-- #include "components/invalidation/invalidator_storage.h"
--+#if !defined(NDEBUG)
--+#pragma GCC diagnostic pop
--+#endif // !defined(NDEBUG)
-- 
-- #include <string>
-- #include <utility>
---- 
--2.1.4
--
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0001-Remove-accelerated-Canvas-support-from-blacklist.patch b/recipes-browser/chromium/chromium/chromium-48/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
-similarity index 71%
-rename from recipes-browser/chromium/chromium/chromium-40/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
-rename to recipes-browser/chromium/chromium/chromium-48/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
-index e2c1a5c..2d7bf84 100644
---- a/recipes-browser/chromium/chromium/chromium-40/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
-+++ b/recipes-browser/chromium/chromium/chromium-48/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
-@@ -1,6 +1,6 @@
--From 821d9fde2302f68f7cb7f0b211f4f78220c97180 Mon Sep 17 00:00:00 2001
-+From be6f1d02f3f784594642929dff289dae33014d56 Mon Sep 17 00:00:00 2001
- From: Carlos Rafael Giani <dv@pseudoterminal.org>
--Date: Sun, 12 Oct 2014 17:54:18 +0200
-+Date: Sun, 3 Apr 2016 17:46:59 +0200
- Subject: [PATCH] Remove accelerated Canvas support from blacklist
- 
- Together with the --gpu-no-context-lost command line switch, this patch is
-@@ -14,14 +14,14 @@ http://lists.whatwg.org/htdig.cgi/whatwg-whatwg.org/2012-September/206450.html
- 
- Upstream-Status: Inappropiate [see link above]
- ---
-- gpu/config/software_rendering_list_json.cc | 10 ----------
-- 1 file changed, 10 deletions(-)
-+ gpu/config/software_rendering_list_json.cc | 16 ----------------
-+ 1 file changed, 16 deletions(-)
- 
- diff --git a/gpu/config/software_rendering_list_json.cc b/gpu/config/software_rendering_list_json.cc
--index b9f5e3a..ccf1460 100644
-+index 484467d..c3b5855 100644
- --- a/gpu/config/software_rendering_list_json.cc
- +++ b/gpu/config/software_rendering_list_json.cc
--@@ -240,16 +240,6 @@ const char kSoftwareRenderingListJson[] = LONG_STRING_CONST(
-+@@ -240,22 +240,6 @@ const char kSoftwareRenderingListJson[] = LONG_STRING_CONST(
-        ]
-      },
-      {
-@@ -30,6 +30,12 @@ index b9f5e3a..ccf1460 100644
- -      "os": {
- -        "type": "linux"
- -      },
-+-      "exceptions": [
-+-        {
-+-          "gl_vendor": "Vivante Corporation", 
-+-          "gl_renderer": "Vivante GC1000"
-+-        }
-+-      ],
- -      "features": [
- -        "accelerated_2d_canvas"
- -      ]
-@@ -39,5 +45,5 @@ index b9f5e3a..ccf1460 100644
-        "description": "ATI/AMD cards with older drivers in Linux are crash-prone",
-        "cr_bugs": [95934, 94973, 136240, 357314],
- -- 
--1.9.1
-+2.5.0
- 
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-disable-warning-from-gcc-5.patch b/recipes-browser/chromium/chromium/chromium-48/0001-bignum.cc-disable-warning-from-gcc-5.patch
-similarity index 98%
-rename from recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-disable-warning-from-gcc-5.patch
-rename to recipes-browser/chromium/chromium/chromium-48/0001-bignum.cc-disable-warning-from-gcc-5.patch
-index 86691a5..67f9800 100644
---- a/recipes-browser/chromium/chromium/chromium-40/0001-bignum.cc-disable-warning-from-gcc-5.patch
-+++ b/recipes-browser/chromium/chromium/chromium-48/0001-bignum.cc-disable-warning-from-gcc-5.patch
-@@ -34,7 +34,7 @@ index a000b46..6c6d336 100644
-          // 2^64 = 18446744073709551616 > 10^19
-          const int kMaxUint64DecimalDigits = 19;
-          Zero();
--@@ -699,7 +699,10 @@
-+@@ -696,7 +696,10 @@
-      }
- 
- 
-@@ -45,7 +45,7 @@ index a000b46..6c6d336 100644
-          if (exponent_ > other.exponent_) {
-              // If "X" represents a "hidden" digit (by the exponent) then we are in the
-              // following case (a == this, b == other):
--@@ -715,7 +715,10 @@
-+@@ -709,7 +709,10 @@
-              for (int i = used_digits_ - 1; i >= 0; --i) {
-                  bigits_[i + zero_digits] = bigits_[i];
-              }
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0003-Disable-API-keys-info-bar.patch b/recipes-browser/chromium/chromium/chromium-48/0002-Disable-API-keys-info-bar.patch
-similarity index 95%
-rename from recipes-browser/chromium/chromium/chromium-40/0003-Disable-API-keys-info-bar.patch
-rename to recipes-browser/chromium/chromium/chromium-48/0002-Disable-API-keys-info-bar.patch
-index f36fc24..56a5b28 100644
---- a/recipes-browser/chromium/chromium/chromium-40/0003-Disable-API-keys-info-bar.patch
-+++ b/recipes-browser/chromium/chromium/chromium-48/0002-Disable-API-keys-info-bar.patch
-@@ -22,7 +22,7 @@ index edea11a..4aef68f 100644
-      return;
-  
- +#if 0
--   infobar_service->AddInfoBar(ConfirmInfoBarDelegate::CreateInfoBar(
-+   infobar_service->AddInfoBar(infobar_service->CreateConfirmInfoBar(
-        scoped_ptr<ConfirmInfoBarDelegate>(new GoogleApiKeysInfoBarDelegate())));
- +#endif
-  }
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch b/recipes-browser/chromium/chromium/chromium-48/0002-image_util.cc-disable-warning-from-gcc-5.patch
+diff --git a/meta-oe/recipes-support/vim/files/0001-patch-7.4.1733.patch b/meta-oe/recipes-support/vim/files/0001-patch-7.4.1733.patch
+new file mode 100644
+index 0000000..98cf629
+--- /dev/null
++++ b/meta-oe/recipes-support/vim/files/0001-patch-7.4.1733.patch
+@@ -0,0 +1,169 @@
++From ff1f017e5ab049557896655535e7d79663f89262 Mon Sep 17 00:00:00 2001
++From: Bram Moolenaar <Bram@vim.org>
++Date: Thu, 14 Apr 2016 16:46:02 +0200
++Subject: [PATCH] patch 7.4.1733
++
++Problem:    "make install" doesn't know about cross-compiling. (Christian
++            Neukirchen)
++Solution:   Add CROSS_COMPILING. (closes #740)
++
++Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
++Upstream-status: Backport
++---
++ src/Makefile       | 19 +++++++++++++++----
++ src/auto/configure |  4 ++++
++ src/config.mk.in   |  1 +
++ src/configure.in   |  3 +++
++ src/version.c      |  2 ++
++ 5 files changed, 25 insertions(+), 4 deletions(-)
++
++diff --git a/src/Makefile b/src/Makefile
++index cf9636d..195cbd5 100644
++--- a/src/Makefile
+++++ b/src/Makefile
++@@ -1998,23 +1998,25 @@ test1 \
++ 	test70 test71 test72 test73 test74 test75 test76 test77 test78 test79 \
++ 	test80 test81 test82 test83 test84 test85 test86 test87 test88 test89 \
++ 	test90 test91 test92 test93 test94 test95 test97 test98 test99 \
++-	test100 test101 test102 test103 test104 test105 test107 test108:
+++	test100 test101 test102 test103 test104 test107 test108:
++ 	cd testdir; rm -f $@.out; $(MAKE) -f Makefile $@.out VIMPROG=../$(VIMTARGET) $(GUI_TESTARG) SCRIPTSOURCE=../$(SCRIPTSOURCE)
++ 
++ # Run individual NEW style test, assuming that Vim was already compiled.
++ test_arglist \
++ 	test_assert \
++ 	test_assign \
+++	test_autocmd \
++ 	test_backspace_opt \
++ 	test_cdo \
++ 	test_channel \
++ 	test_cursor_func \
++ 	test_delete \
++ 	test_ex_undo \
++-	test_expr \
++ 	test_expand \
+++	test_expr \
++ 	test_feedkeys \
++ 	test_file_perm \
+++	test_fnamemodify \
++ 	test_glob2regpat \
++ 	test_hardcopy \
++ 	test_help_tagjump \
++@@ -2024,17 +2026,22 @@ test_arglist \
++ 	test_json \
++ 	test_langmap \
++ 	test_lispwords \
+++	test_matchstrpos \
++ 	test_menu \
++ 	test_packadd \
++ 	test_partial \
++ 	test_perl \
++ 	test_quickfix \
+++	test_regexp_latin \
+++	test_regexp_utf8 \
++ 	test_reltime \
++ 	test_searchpos \
++ 	test_set \
++ 	test_sort \
+++	test_statusline \
++ 	test_syn_attr \
++ 	test_syntax \
+++	test_tabline \
++ 	test_timers \
++ 	test_undolevels \
++ 	test_unlet \
++@@ -2042,6 +2049,8 @@ test_arglist \
++ 	test_viml \
++ 	test_visual \
++ 	test_window_id \
+++	test_alot_latin \
+++	test_alot_utf8 \
++ 	test_alot:
++ 	cd testdir; rm -f $@.res test.log messages; $(MAKE) -f Makefile $@.res VIMPROG=../$(VIMTARGET) $(GUI_TESTARG) SCRIPTSOURCE=../$(SCRIPTSOURCE)
++ 	@if test -f testdir/test.log; then \
++@@ -2126,9 +2135,11 @@ installrtbase: $(HELPSOURCE)/vim.1 $(DEST_VIM) $(DEST_RT) \
++ # Generate the help tags with ":helptags" to handle all languages.
++ # Move the distributed tags file aside and restore it, to avoid it being
++ # different from the repository.
++-	cd $(HELPSOURCE); if test -f tags; then mv -f tags tags.dist; fi
+++	cd $(HELPSOURCE); if test -z "$(CROSS_COMPILING)" -a -f tags; then \
+++		mv -f tags tags.dist; fi
++ 	@echo generating help tags
++-	-@cd $(HELPSOURCE); $(MAKE) VIMEXE=$(DEST_BIN)/$(VIMTARGET) vimtags
+++	-@cd $(HELPSOURCE); if test -z "$(CROSS_COMPILING)"; then \
+++		$(MAKE) VIMEXE=$(DEST_BIN)/$(VIMTARGET) vimtags; fi
++ 	cd $(HELPSOURCE); \
++ 		files=`ls *.txt tags`; \
++ 		files="$$files `ls *.??x tags-?? 2>/dev/null || true`"; \
++diff --git a/src/auto/configure b/src/auto/configure
++index a708230..91b075d 100755
++--- a/src/auto/configure
+++++ b/src/auto/configure
++@@ -721,6 +721,7 @@ OS_EXTRA_OBJ
++ OS_EXTRA_SRC
++ XCODE_SELECT
++ CPP_MM
+++CROSS_COMPILING
++ STRIP
++ AWK
++ FGREP
++@@ -4113,11 +4114,14 @@ else
++ $as_echo "no" >&6; }
++ fi
++ 
+++CROSS_COMPILING=
++ if test "$cross_compiling" = yes; then
++   { $as_echo "$as_me:${as_lineno-$LINENO}: result: cannot compile a simple program; if not cross compiling check CC and CFLAGS" >&5
++ $as_echo "cannot compile a simple program; if not cross compiling check CC and CFLAGS" >&6; }
+++  CROSS_COMPILING=1
++ fi
++ 
+++
++ test "$GCC" = yes && CPP_MM=M;
++ 
++ if test -f ./toolcheck; then
++diff --git a/src/config.mk.in b/src/config.mk.in
++index 7c0726c..1002d7c 100644
++--- a/src/config.mk.in
+++++ b/src/config.mk.in
++@@ -104,6 +104,7 @@ AWK		= @AWK@
++ STRIP		= @STRIP@
++ 
++ EXEEXT		= @EXEEXT@
+++CROSS_COMPILING = @CROSS_COMPILING@
++ 
++ COMPILEDBY	= @compiledby@
++ 
++diff --git a/src/configure.in b/src/configure.in
++index f29b62c..0a8c95b 100644
++--- a/src/configure.in
+++++ b/src/configure.in
++@@ -88,9 +88,12 @@ fi
++ 
++ dnl If configure thinks we are cross compiling, there might be something
++ dnl wrong with the CC or CFLAGS settings, give a useful warning message
+++CROSS_COMPILING=
++ if test "$cross_compiling" = yes; then
++   AC_MSG_RESULT([cannot compile a simple program; if not cross compiling check CC and CFLAGS])
+++  CROSS_COMPILING=1
++ fi
+++AC_SUBST(CROSS_COMPILING)
++ 
++ dnl gcc-cpp has the wonderful -MM option to produce nicer dependencies.
++ dnl But gcc 3.1 changed the meaning!  See near the end.
++diff --git a/src/version.c b/src/version.c
++index 8d32e2a..f0630ea 100644
++--- a/src/version.c
+++++ b/src/version.c
++@@ -749,6 +749,8 @@ static char *(features[]) =
++ static int included_patches[] =
++ {   /* Add new patch number below this line */
++ /**/
+++    1733,
+++/**/
++     1689,
++ /**/
++     1688,
++-- 
++2.1.4
++
+diff --git a/meta-oe/recipes-support/vim/vim-tiny_7.4.769.bb b/meta-oe/recipes-support/vim/vim-tiny_7.4.1689.bb
 similarity index 100%
-rename from recipes-browser/chromium/chromium/chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch
-rename to recipes-browser/chromium/chromium/chromium-48/0002-image_util.cc-disable-warning-from-gcc-5.patch
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0004-Remove-hard-coded-values-for-CC-and-CXX.patch b/recipes-browser/chromium/chromium/chromium-48/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
-similarity index 86%
-rename from recipes-browser/chromium/chromium/chromium-40/0004-Remove-hard-coded-values-for-CC-and-CXX.patch
-rename to recipes-browser/chromium/chromium/chromium-48/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
-index 402a674..7bc8d14 100644
---- a/recipes-browser/chromium/chromium/chromium-40/0004-Remove-hard-coded-values-for-CC-and-CXX.patch
-+++ b/recipes-browser/chromium/chromium/chromium-48/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
-@@ -21,13 +21,13 @@ diff --git a/build/common.gypi b/build/common.gypi
- index 7ec5ae2..11e8d1d 100644
- --- a/build/common.gypi
- +++ b/build/common.gypi
--@@ -5808,16 +5808,6 @@
-+@@ -6047,16 +6047,6 @@
-          ['CXX.host', '<(host_cxx)'],
-        ],
-      }],
- -    ['OS=="linux" and target_arch=="arm" and host_arch!="arm" and chromeos==0 and clang==0', {
---      # Set default ARM cross compiling on linux.  These can be overridden
---      # using CC/CXX/etc environment variables.
-+-      # Set default ARM cross tools on linux.  These can be overridden
-+-      # using CC,CXX,CC.host and CXX.host environment variables.
- -      'make_global_settings': [
- -        ['CC', '<!(which arm-linux-gnueabihf-gcc)'],
- -        ['CXX', '<!(which arm-linux-gnueabihf-g++)'],
-@@ -35,9 +35,9 @@ index 7ec5ae2..11e8d1d 100644
- -        ['CXX.host', '<(host_cxx)'],
- -      ],
- -    }],
-- 
-      # TODO(yyanagisawa): supports GENERATOR==make
-      #  make generator doesn't support CC_wrapper without CC
-+     #  in make_global_settings yet.
- -- 
- 1.9.1
+rename from meta-oe/recipes-support/vim/vim-tiny_7.4.769.bb
+rename to meta-oe/recipes-support/vim/vim-tiny_7.4.1689.bb
+diff --git a/meta-oe/recipes-support/vim/vim_7.4.769.bb b/meta-oe/recipes-support/vim/vim_7.4.1689.bb
+similarity index 93%
+rename from meta-oe/recipes-support/vim/vim_7.4.769.bb
+rename to meta-oe/recipes-support/vim/vim_7.4.1689.bb
+index 08e5027..5e6282b 100644
+--- a/meta-oe/recipes-support/vim/vim_7.4.769.bb
++++ b/meta-oe/recipes-support/vim/vim_7.4.1689.bb
+@@ -9,8 +9,9 @@ LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=c74ec0ada9a68354f9461e8
+ SRC_URI = "git://github.com/vim/vim.git \
+            file://disable_acl_header_check.patch;patchdir=.. \
+            file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
++           file://0001-patch-7.4.1733.patch;patchdir=.. \
+ "
+-SRCREV = "2693ca21cee8a729d74682fd86a4818f2b050228"
++SRCREV = "758535a1df4c5e86b45dddf12db2a54dea28ca40"
  
-diff --git a/recipes-browser/chromium/chromium/chromium-48/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch b/recipes-browser/chromium/chromium/chromium-48/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch
-new file mode 100644
-index 0000000..24bec71
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-48/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch
-@@ -0,0 +1,26 @@
-+From 5158da97132db1a43c95f4c0ad65b4ac2629c4da Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <dv@pseudoterminal.org>
-+Date: Sat, 23 Apr 2016 14:05:04 +0200
-+Subject: [PATCH] Create empty i18n_process_css_test.html file to avoid build
-+ failure
-+
-+According to https://groups.google.com/a/chromium.org/forum/#!topic/chromium-packagers/9JX1N2nf4PU
-+creating an empty i18n_process_css_test.html is a valid workaround for the
-+following build error:
-+
-+"Exception: Failed to open test/data/webui/i18n_process_css_test.html while trying to flatten test/data/webui/i18n_process_css_test.html. (No such file or directory)"
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-+---
-+ chrome/test/data/webui/i18n_process_css_test.html | 0
-+ 1 file changed, 0 insertions(+), 0 deletions(-)
-+ create mode 100644 chrome/test/data/webui/i18n_process_css_test.html
-+
-+diff --git a/chrome/test/data/webui/i18n_process_css_test.html b/chrome/test/data/webui/i18n_process_css_test.html
-+new file mode 100644
-+index 0000000..e69de29
-+-- 
-+2.5.0
-+
-diff --git a/recipes-browser/chromium/chromium/chromium-48/0005-Override-root-filesystem-access-restriction.patch b/recipes-browser/chromium/chromium/chromium-48/0005-Override-root-filesystem-access-restriction.patch
-new file mode 100644
-index 0000000..ceb6c6c
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-48/0005-Override-root-filesystem-access-restriction.patch
-@@ -0,0 +1,30 @@
-+From ef3aaa58be440c1845e60432a498501088da07fe Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <dv@pseudoterminal.org>
-+Date: Thu, 28 Apr 2016 09:29:59 +0200
-+Subject: [PATCH] Override root filesystem access restriction
-+
-+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-+---
-+ sandbox/linux/suid/client/setuid_sandbox_client.cc | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/sandbox/linux/suid/client/setuid_sandbox_client.cc b/sandbox/linux/suid/client/setuid_sandbox_client.cc
-+index 12ef7f9..b59908a 100644
-+--- a/sandbox/linux/suid/client/setuid_sandbox_client.cc
-++++ b/sandbox/linux/suid/client/setuid_sandbox_client.cc
-+@@ -21,8 +21,12 @@
-+ namespace {
-+ 
-+ bool IsFileSystemAccessDenied() {
-++#if 0
-+   base::ScopedFD root_dir(HANDLE_EINTR(open("/", O_RDONLY)));
-+   return !root_dir.is_valid();
-++#else
-++  return true;
-++#endif
-+ }
-+ 
-+ int GetHelperApi(base::Environment* env) {
-+-- 
-+2.5.0
-+
-diff --git a/recipes-browser/chromium/chromium/chromium-48/0006-Remove-GBM-support-from-wayland.gyp.patch b/recipes-browser/chromium/chromium/chromium-48/0006-Remove-GBM-support-from-wayland.gyp.patch
-new file mode 100644
-index 0000000..63cc1ee
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-48/0006-Remove-GBM-support-from-wayland.gyp.patch
-@@ -0,0 +1,66 @@
-+From 77384aa0d93ed6d5f91ada40971f6825e1b9dd69 Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <dv@pseudoterminal.org>
-+Date: Thu, 28 Apr 2016 22:02:39 +0200
-+Subject: [PATCH] Remove GBM support from wayland.gyp
-+
-+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-+---
-+ ozone/wayland/wayland.gyp | 20 --------------------
-+ 1 file changed, 20 deletions(-)
-+
-+diff --git a/wayland/wayland.gyp b/wayland/wayland.gyp
-+index ff2e210..32f13bc 100644
-+--- a/ozone/wayland/wayland.gyp
-++++ b/ozone/wayland/wayland.gyp
-+@@ -5,10 +5,6 @@
-+ 
-+ {
-+   'variables': {
-+-    'variables': {
-+-      'enable_drm_support%': 0,
-+-    },
-+-    'enable_drm_support%': '<(enable_drm_support)',
-+     'conditions': [
-+       ['sysroot!=""', {
-+         'pkg-config': '../../build/linux/pkg-config-wrapper "<(sysroot)" "<(target_arch)"',
-+@@ -42,17 +38,14 @@
-+       'direct_dependent_settings': {
-+         'cflags': [
-+           '<!@(<(pkg-config) --cflags <(wayland_packages))',
-+-          '<!@(<(pkg-config) --cflags gbm)',
-+         ],
-+       },
-+       'link_settings': {
-+         'ldflags': [
-+           '<!@(<(pkg-config) --libs-only-L --libs-only-other <(wayland_packages))',
-+-          '<!@(<(pkg-config) --libs-only-L --libs-only-other gbm)',
-+         ],
-+         'libraries': [
-+           '<!@(<(pkg-config) --libs-only-l <(wayland_packages))',
-+-          '<!@(<(pkg-config) --libs-only-l gbm)',
-+         ],
-+       },
-+       'dependencies': [
-+@@ -65,19 +58,6 @@
-+         '../..',
-+         '<(DEPTH)/third_party/khronos',
-+       ],
-+-      'conditions': [
-+-        ['<(enable_drm_support)==1', {
-+-          'defines': [
-+-          'ENABLE_DRM_SUPPORT',
-+-          ],
-+-          'sources': [
-+-            'egl/wayland_pixmap.cc',
-+-            'egl/wayland_pixmap.h',
-+-            'protocol/wayland-drm-protocol.cc',
-+-            'protocol/wayland-drm-protocol.h',
-+-          ],
-+-        }],
-+-      ],
-+       'sources': [
-+         'data_device.cc',
-+         'data_device.h',
-+-- 
-+2.5.0
-+
-diff --git a/recipes-browser/chromium/chromium/chromium-48/0007-Workaround-for-glib-related-build-error-with-ozone-w.patch b/recipes-browser/chromium/chromium/chromium-48/0007-Workaround-for-glib-related-build-error-with-ozone-w.patch
-new file mode 100644
-index 0000000..baa8dd2
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-48/0007-Workaround-for-glib-related-build-error-with-ozone-w.patch
-@@ -0,0 +1,31 @@
-+From 36a6b35b5eb2874a85b5bc1caf111213c0bee04b Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <dv@pseudoterminal.org>
-+Date: Fri, 29 Apr 2016 08:52:12 +0200
-+Subject: [PATCH] Workaround for glib-related build error with ozone-wayland
-+
-+This fixes the following compilation error:
-+
-+../../third_party/libsecret/secret.h:18:18: fatal error: glib.h: No such file or directory
-+
-+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-+---
-+ chrome/chrome_browser.gypi | 3 +++
-+ 1 file changed, 3 insertions(+)
-+
-+diff --git a/chrome/chrome_browser.gypi b/chrome/chrome_browser.gypi
-+index d964fec..daccacb 100644
-+--- a/chrome/chrome_browser.gypi
-++++ b/chrome/chrome_browser.gypi
-+@@ -3543,6 +3543,9 @@
-+           ],
-+         }],
-+         ['OS=="linux" and chromeos!=1', {
-++          'dependencies': [
-++            '../build/linux/system.gyp:glib',
-++          ],
-+           'sources': [ '<@(chrome_browser_libsecret_sources)' ],
-+           'defines': [
-+             'USE_LIBSECRET',
-+-- 
-+2.5.0
-+
-diff --git a/recipes-browser/chromium/chromium/chromium-48/0008-Fix-GCC-uninitialized-warning.patch b/recipes-browser/chromium/chromium/chromium-48/0008-Fix-GCC-uninitialized-warning.patch
-new file mode 100644
-index 0000000..3bf6d96
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-48/0008-Fix-GCC-uninitialized-warning.patch
-@@ -0,0 +1,26 @@
-+From 12d7fb643188ea5033aaf70ffe64b4c58eefc5eb Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <dv@pseudoterminal.org>
-+Date: Fri, 29 Apr 2016 14:02:44 +0200
-+Subject: [PATCH] Fix GCC uninitialized warning
-+
-+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-+---
-+ third_party/ots/src/name.cc | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/third_party/ots/src/name.cc b/third_party/ots/src/name.cc
-+index a0dd1ea..070ddae 100644
-+--- a/third_party/ots/src/name.cc
-++++ b/third_party/ots/src/name.cc
-+@@ -79,7 +79,7 @@ bool ots_name_parse(Font *font, const uint8_t* data, size_t length) {
-+   const char* string_base = reinterpret_cast<const char*>(data) +
-+       string_offset;
-+ 
-+-  NameRecord prev_record;
-++  NameRecord prev_record(0, 0, 0, 0);
-+   bool sort_required = false;
-+ 
-+   // Read all the names, discarding any with invalid IDs,
-+-- 
-+2.5.0
-+
-diff --git a/recipes-browser/chromium/chromium/chromium-48/0009-Fix-build-errors-with-GCC-in-Debug-mode.patch b/recipes-browser/chromium/chromium/chromium-48/0009-Fix-build-errors-with-GCC-in-Debug-mode.patch
-new file mode 100644
-index 0000000..f5f7889
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-48/0009-Fix-build-errors-with-GCC-in-Debug-mode.patch
-@@ -0,0 +1,46 @@
-+From 2d7143090fdfd82950be352078daa5019279d81f Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <dv@pseudoterminal.org>
-+Date: Fri, 29 Apr 2016 17:14:15 +0200
-+Subject: [PATCH] Fix build errors with GCC in Debug mode
-+
-+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-+---
-+ third_party/WebKit/Source/wtf/dtoa/utils.h                         | 7 +++++++
-+ .../cacheinvalidation/src/google/cacheinvalidation/include/types.h | 2 +-
-+ 2 files changed, 8 insertions(+), 1 deletion(-)
-+
-+diff --git a/third_party/WebKit/Source/wtf/dtoa/utils.h b/third_party/WebKit/Source/wtf/dtoa/utils.h
-+index 0a61c01..7738e9a 100644
-+--- a/third_party/WebKit/Source/wtf/dtoa/utils.h
-++++ b/third_party/WebKit/Source/wtf/dtoa/utils.h
-+@@ -165,7 +165,14 @@ namespace double_conversion {
-+ 
-+         // Access individual vector elements - checks bounds in debug mode.
-+         T& operator[](int index) const {
-++#if !defined(NDEBUG)
-++#pragma GCC diagnostic push
-++#pragma GCC diagnostic ignored "-Wstrict-overflow"
-++#endif // !defined(NDEBUG)
-+             ASSERT(0 <= index && index < length_);
-++#if !defined(NDEBUG)
-++#pragma GCC diagnostic pop
-++#endif // !defined(NDEBUG)
-+             return start_[index];
-+         }
-+ 
-+diff --git a/third_party/cacheinvalidation/src/google/cacheinvalidation/include/types.h b/third_party/cacheinvalidation/src/google/cacheinvalidation/include/types.h
-+index 4e3be27..835e956 100644
-+--- a/third_party/cacheinvalidation/src/google/cacheinvalidation/include/types.h
-++++ b/third_party/cacheinvalidation/src/google/cacheinvalidation/include/types.h
-+@@ -172,7 +172,7 @@ class ErrorInfo {
-+  */
-+ class ObjectId {
-+  public:
-+-  ObjectId() : is_initialized_(false) {}
-++  ObjectId() : is_initialized_(false), source_(0) {}
-+ 
-+   /* Creates an object id for the given source and name (the name is copied). */
-+   ObjectId(int source, const string& name)
-+-- 
-+2.5.0
-+
-diff --git a/recipes-browser/chromium/chromium/chromium-40/add_missing_stat_h_include.patch b/recipes-browser/chromium/chromium/chromium-48/add_missing_stat_h_include.patch
-similarity index 90%
-rename from recipes-browser/chromium/chromium/chromium-40/add_missing_stat_h_include.patch
-rename to recipes-browser/chromium/chromium/chromium-48/add_missing_stat_h_include.patch
-index 90e7827..4620db2 100644
---- a/recipes-browser/chromium/chromium/chromium-40/add_missing_stat_h_include.patch
-+++ b/recipes-browser/chromium/chromium/chromium-48/add_missing_stat_h_include.patch
-@@ -27,8 +27,8 @@ Tested with ARCH armv7.
- Signed-off-by: Max Krummenacher <max.oss.09 at gmail.com>
- Upstream-Status: Pending
+ S = "${WORKDIR}/git/src"
  
----- chromium-40.0.2214.91/components/storage_monitor/storage_monitor_linux.cc~	2015-01-21 21:28:16.000000000 +0100
--+++ chromium-40.0.2214.91/components/storage_monitor/storage_monitor_linux.cc	2015-10-27 13:21:08.405655894 +0100
-+--- a/components/storage_monitor/storage_monitor_linux.cc~	2015-01-21 21:28:16.000000000 +0100
-++++ b/components/storage_monitor/storage_monitor_linux.cc	2015-10-27 13:21:08.405655894 +0100
- @@ -8,6 +8,7 @@
-  
-  #include <mntent.h>
-diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-deleted file mode 100644
-index 3966548..0000000
---- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
-+++ /dev/null
-@@ -1,45 +0,0 @@
--include chromium-browser.inc
--
--SRC_URI += "\
--        file://unistd-2.patch \
--        file://chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch \
--        file://chromium-40/add_missing_stat_h_include.patch \
--        file://chromium-40/0001-bignum.cc-disable-warning-from-gcc-5.patch \
--        file://chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch \
--        file://chromium-40/0003-disable-uninitialized-warning.patch \
--        file://chromium-40/0004-Remove-hard-coded-values-for-CC-and-CXX.patch \
--        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://chromium-40/0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
--        ${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', 'file://chromium-40/0002-Add-Linux-to-impl-side-painting-whitelist.patch', '', d)} \
--        ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://chromium-40/0003-Disable-API-keys-info-bar.patch', '', d)} \
--"
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=537e0b52077bf0a616d0a0c8a79bc9d5"
--SRC_URI[md5sum] = "1f5093bd7e435fdebad070e74bfb3438"
--SRC_URI[sha256sum] = "f72fda9ff1ea256ab911610ee532eadf8303137d431f2481d01d3d60e5e64149"
--
--OZONE_WAYLAND_GIT_BRANCH = "Milestone-ThanksGiving"
--OZONE_WAYLAND_GIT_SRCREV = "5d7baa9bc3b8c88e9b7e476e3d6bc8cd44a887fe"
--
--OZONE_WAYLAND_EXTRA_PATCHES = " \
--        file://chromium-40/0005-Remove-X-libraries-from-GYP-files.patch \
--        file://chromium-40/0010-systemd-218.patch \
--"
--# using 00*.patch to skip the WebRTC patches in ozone-wayland ThanksGiving milestone.
--# The WebRTC patches remove X11 libraries from the linker flags, which is
--# already done by another patch (see above). Furthermore, to be able to use
--# these patches, it is necessary to update the git repository in third_party/webrtc,
--# which would further complicate this recipe.
--OZONE_WAYLAND_PATCH_FILE_GLOB = "00*.patch"
--
--# Component build is broken in ozone-wayland for Chromium 40,
--# and is not planned to work again before version 41
--python() {
--    if (d.getVar('CHROMIUM_ENABLE_WAYLAND', True) == '1'):
--        if bb.utils.contains('PACKAGECONFIG', 'component-build', True, False, d):
--            bb.fatal("Chromium 40 Wayland version cannot be built in component-mode")
--}
--
--CHROMIUM_X11_DEPENDS = "xextproto gtk+ libxi libxss"
--CHROMIUM_X11_GYP_DEFINES = ""
--CHROMIUM_WAYLAND_DEPENDS = "wayland libxkbcommon"
--CHROMIUM_WAYLAND_GYP_DEFINES = "use_ash=1 use_aura=1 chromeos=0 use_ozone=1"
-diff --git a/recipes-browser/chromium/chromium_48.0.2548.0.bb b/recipes-browser/chromium/chromium_48.0.2548.0.bb
-new file mode 100644
-index 0000000..1a574a4
---- /dev/null
-+++ b/recipes-browser/chromium/chromium_48.0.2548.0.bb
-@@ -0,0 +1,42 @@
-+include chromium-browser.inc
-+
-+SRC_URI += "\
-+        file://chromium-48/add_missing_stat_h_include.patch \
-+        file://chromium-48/0001-bignum.cc-disable-warning-from-gcc-5.patch \
-+        file://chromium-48/0002-image_util.cc-disable-warning-from-gcc-5.patch \
-+        file://chromium-48/0003-Remove-hard-coded-values-for-CC-and-CXX.patch \
-+        file://chromium-48/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch \
-+        file://chromium-48/0005-Override-root-filesystem-access-restriction.patch \
-+        file://chromium-48/0008-Fix-GCC-uninitialized-warning.patch \
-+        file://chromium-48/0009-Fix-build-errors-with-GCC-in-Debug-mode.patch \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://chromium-48/0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://chromium-48/0002-Disable-API-keys-info-bar.patch', '', d)} \
-+"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=0fca02217a5d49a14dfe2d11837bb34d"
-+SRC_URI[md5sum] = "0534981cc21efcd11e64b67b85854420"
-+SRC_URI[sha256sum] = "4ca4e2adb340b3fb4d502266ad7d6bda45fa3519906dbf63cce11a63f680dbc8"
-+
-+EXTRA_OEGYP += " \
-+	-Dv8_use_external_startup_data=0 \
-+"
-+
-+OZONE_WAYLAND_GIT_BRANCH = "Milestone-SouthSister"
-+OZONE_WAYLAND_GIT_SRCREV = "c605505044af3345a276abbd7c29fd53db1dea40"
-+
-+OZONE_WAYLAND_EXTRA_PATCHES = " \
-+	file://chromium-48/0006-Remove-GBM-support-from-wayland.gyp.patch \
-+	file://chromium-48/0007-Workaround-for-glib-related-build-error-with-ozone-w.patch \
-+"
-+
-+# Component build is unsupported in ozone-wayland for Chromium 48
-+python() {
-+    if (d.getVar('CHROMIUM_ENABLE_WAYLAND', True) == '1'):
-+        if bb.utils.contains('PACKAGECONFIG', 'component-build', True, False, d):
-+            bb.fatal("Chromium 48 Wayland version cannot be built in component-mode")
-+}
-+
-+CHROMIUM_X11_DEPENDS = "xextproto gtk+ libxi libxss"
-+CHROMIUM_X11_GYP_DEFINES = ""
-+CHROMIUM_WAYLAND_DEPENDS = "wayland libxkbcommon"
-+CHROMIUM_WAYLAND_GYP_DEFINES = "use_ash=1 use_aura=1 chromeos=0 use_ozone=1 use_xkbcommon=1"
+@@ -62,10 +63,11 @@ EXTRA_OECONF = " \
+ do_install() {
+     autotools_do_install
+ 
+-    # Work around rpm picking up csh or awk or perl as a dep
++    # Work around file-rdeps picking up csh, awk, perl or python as a dep
+     chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/vim132
+     chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/mve.awk
+     chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.pl
++    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.py
+ 
+     # Install example vimrc from runtime files
+     install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/vimrc
 -- 
-2.7.4
+2.1.4
 
 
